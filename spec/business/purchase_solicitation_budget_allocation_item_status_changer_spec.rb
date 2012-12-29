@@ -7,12 +7,13 @@ describe PurchaseSolicitationBudgetAllocationItemStatusChanger do
   context 'when has only new_ids' do
     subject do
       PurchaseSolicitationBudgetAllocationItemStatusChanger.new(
-        :new_item_ids => [1, 2, 3]
+        :new_item_ids => [1, 2, 3],
+        :purchase_solicitation_item_group_id => 1
       )
     end
 
     it 'should update status to grouped' do
-      item_repository.should_receive(:group!).with([1, 2, 3])
+      item_repository.should_receive(:group!).with([1, 2, 3], 1)
 
       subject.change(item_repository)
     end
@@ -22,12 +23,13 @@ describe PurchaseSolicitationBudgetAllocationItemStatusChanger do
     subject do
       PurchaseSolicitationBudgetAllocationItemStatusChanger.new(
         :new_item_ids => [1, 2, 3],
-        :old_item_ids => [1, 2, 3, 4]
+        :old_item_ids => [1, 2, 3, 4],
+        :purchase_solicitation_item_group_id => 1
       )
     end
 
     it 'should update status to grouped and to pending' do
-      item_repository.should_receive(:group!).with([1, 2, 3])
+      item_repository.should_receive(:group!).with([1, 2, 3], 1)
       item_repository.should_receive(:pending!).with([4])
 
       subject.should_receive(:removed_item_ids).and_return([4])

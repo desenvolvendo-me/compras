@@ -15,10 +15,11 @@ class PurchaseSolicitationBudgetAllocationItemStatusChanger
     @old_item_ids = options.fetch(:old_item_ids, [])
     @new_purchase_solicitation = options.fetch(:new_purchase_solicitation, nil)
     @old_purchase_solicitation = options.fetch(:old_purchase_solicitation, nil)
+    @purchase_solicitation_item_group_id = options.fetch(:purchase_solicitation_item_group_id, nil)
   end
 
   def change(item_repository = PurchaseSolicitationBudgetAllocationItem)
-    item_repository.group!(new_item_ids) if new_item_ids.any?
+    item_repository.group!(new_item_ids, purchase_solicitation_item_group_id) if new_item_ids.any?
 
     item_repository.pending!(removed_item_ids) if old_item_ids.any?
 
@@ -30,7 +31,7 @@ class PurchaseSolicitationBudgetAllocationItemStatusChanger
   private
 
   attr_reader :new_item_ids, :old_item_ids, :new_purchase_solicitation,
-              :old_purchase_solicitation
+              :old_purchase_solicitation, :purchase_solicitation_item_group_id
 
   def removed_item_ids
     old_item_ids - new_item_ids

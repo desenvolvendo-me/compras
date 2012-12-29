@@ -9,6 +9,7 @@ class PurchaseSolicitationBudgetAllocationItem < Compras::Model
   has_enumeration_for :fulfiller_type
 
   belongs_to :purchase_solicitation_budget_allocation
+  belongs_to :purchase_solicitation_item_group
   belongs_to :material
   belongs_to :fulfiller, :polymorphic => true
 
@@ -21,15 +22,17 @@ class PurchaseSolicitationBudgetAllocationItem < Compras::Model
   validates :material, :quantity, :unit_price, :status, :presence => true
   validate :validate_material_characteristic, :if => :services?
 
-  def self.group!(ids)
+  def self.group!(ids, purchase_solicitation_item_group_id)
     where { id.in(ids) }.update_all(
-      :status => PurchaseSolicitationBudgetAllocationItemStatus::GROUPED
+      :status => PurchaseSolicitationBudgetAllocationItemStatus::GROUPED,
+      :purchase_solicitation_item_group_id => purchase_solicitation_item_group_id
     )
   end
 
   def self.pending!(ids)
     where { id.in(ids) }.update_all(
-      :status => PurchaseSolicitationBudgetAllocationItemStatus::PENDING
+      :status => PurchaseSolicitationBudgetAllocationItemStatus::PENDING,
+      :purchase_solicitation_item_group_id => nil
     )
   end
 

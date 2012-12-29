@@ -45,6 +45,7 @@ feature "PurchaseSolicitationItemGroups" do
 
     within_tab 'Dotações orçamentarias' do
       expect(page).to have_select 'Status', :selected => 'Agrupado'
+      expect(page).to have_field 'Agrupamento', :with => 'Agrupamento de antivirus'
     end
 
     navigate 'Processos de Compra > Agrupamentos de Itens de Solicitações de Compra'
@@ -65,6 +66,7 @@ feature "PurchaseSolicitationItemGroups" do
 
     within_tab 'Dotações orçamentarias' do
       expect(page).to have_select 'Status', :selected => 'Pendente'
+      expect(page).to have_field 'Agrupamento', :with => ''
     end
   end
 

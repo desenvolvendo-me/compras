@@ -81,6 +81,7 @@ feature 'PurchaseSolicitationAnnul' do
       within '.purchase-solicitation-budget-allocation:first' do
         within '.item:first' do
           expect(page).to have_select 'Status', :with => 'Pendente'
+          expect(page).to have_field 'Agrupamento', :with => ''
         end
       end
     end
