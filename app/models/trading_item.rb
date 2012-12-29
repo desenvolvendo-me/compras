@@ -97,6 +97,22 @@ class TradingItem < Compras::Model
     trading_item_bids.at_stage_of_round_of_bids.any?
   end
 
+  def rounds_uniq_at_stage_of_round_of_bids_ordered
+    trading_item_bids.at_stage_of_round_of_bids.reorder(:round).uniq.select(:round)
+  end
+
+  def bids_at_stage_of_round_of_bids_by_round_ordered_by_amount(round)
+    trading_item_bids.at_round(round).at_stage_of_round_of_bids.reorder('amount DESC')
+  end
+
+  def bids_at_stage_of_round_of_bids_ordered_by_amount
+    trading_item_bids.at_stage_of_proposals.reorder('amount DESC')
+  end
+
+  def bids_at_stage_of_negotiation_ordered_by_amount
+    trading_item_bids.at_stage_of_negotiation.reorder('amount DESC')
+  end
+
   private
 
   def bidders_selected_for_negociation

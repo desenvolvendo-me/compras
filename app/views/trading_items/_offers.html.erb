@@ -12,7 +12,7 @@
   </thead>
 
   <tbody>
-    <% resource.trading_item_bids.at_stage_of_proposals.reorder('amount DESC').each do |bid| %>
+    <% resource.bids_at_stage_of_round_of_bids_ordered_by_amount.each do |bid| %>
       <tr>
         <td class="g-1-2"><%= bid.bidder %></td>
         <td class="g-1-10"><%= bid.decorator.amount %></td>
@@ -25,11 +25,11 @@
 </table>
 
 <div class="round-of-bids">
-  <% resource.trading_item_bids.at_stage_of_round_of_bids.reorder(:round).uniq.select(:round).each do |round| %>
+  <% resource.rounds_uniq_at_stage_of_round_of_bids_ordered.each do |round| %>
     <h3><%= "#{round.round}º Rodada de lances" %></h3>
     <table class="records">
       <tbody>
-        <% resource.trading_item_bids.at_round(round.round).at_stage_of_round_of_bids.reorder('amount DESC').each do |bid| %>
+        <% resource.bids_at_stage_of_round_of_bids_by_round_ordered_by_amount(round.round).each do |bid| %>
           <tr>
             <td class="g-1-2"><%= bid.bidder %></td>
             <td class="g-1-10"><%= bid.decorator.amount %></td>
@@ -46,7 +46,7 @@
 <h3>Negociação</h3>
 <table class="records table-negotiations">
   <tbody>
-    <% resource.trading_item_bids.at_stage_of_negotiation.reorder('amount DESC').each do |bid| %>
+    <% resource.bids_at_stage_of_negotiation_ordered_by_amount.each do |bid| %>
       <tr>
         <td class="g-1-2"><%= bid.bidder %></td>
         <td class="g-1-10"><%= bid.decorator.amount %></td>
