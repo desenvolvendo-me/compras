@@ -96,7 +96,7 @@ GEM
     coderay (1.0.8)
     cpf_validator (0.2.0)
       activemodel (>= 3.0)
-    database_cleaner (0.8.0)
+    database_cleaner (0.9.1)
     devise (2.1.2)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -304,7 +304,7 @@ DEPENDENCIES
   carrierwave (= 0.6.2)
   cnpj_validator (= 0.3.1)
   cpf_validator (= 0.2.0)
-  database_cleaner (= 0.8.0)
+  database_cleaner (= 0.9.1)
   decore!
   devise (= 2.1.2)
   enumerate_it (= 0.7.17)
