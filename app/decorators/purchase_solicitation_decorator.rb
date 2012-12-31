@@ -24,4 +24,8 @@ class PurchaseSolicitationDecorator
   def is_annulled_message
     t('purchase_solicitation.messages.is_annulled') if annulled?
   end
+
+  def not_persisted_message
+    t('purchase_solicitation.messages.not_persisted') unless persisted?
+  end
 end

@@ -69,4 +69,24 @@ describe PurchaseSolicitationDecorator do
       expect(subject.is_annulled_message).to be_nil
     end
   end
+
+  context '#not_persisted_message' do
+    it 'when is not persisted' do
+      I18n.backend.store_translations 'pt-BR', :purchase_solicitation => {
+          :messages => {
+            :not_persisted => 'salve a solicitação primeiro'
+        }
+      }
+
+      component.stub(:persisted? => false)
+
+      expect(subject.not_persisted_message).to eq 'salve a solicitação primeiro'
+    end
+
+    it 'when is not annulled' do
+      component.stub(:persisted? => true)
+
+      expect(subject.not_persisted_message).to be_nil
+    end
+  end
 end
