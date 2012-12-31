@@ -50,6 +50,20 @@ feature "PurchaseSolicitationLiberations" do
 
     click_link 'Liberações'
 
+    within_records do
+      expect(page).to have_content 'Sequência'
+      expect(page).to have_content 'Responsável'
+      expect(page).to have_content 'Data'
+      expect(page).to have_content 'Status de atendimento'
+
+      within 'tbody tr' do
+        expect(page).to have_content '1'
+        expect(page).to have_content 'Wenderson Malheiros'
+        expect(page).to have_content I18n.l(Date.current)
+        expect(page).to have_content 'Liberada'
+      end
+    end
+
     expect(page).to_not have_link 'Criar Liberação de Solicitação de Compra'
 
     within_records do
