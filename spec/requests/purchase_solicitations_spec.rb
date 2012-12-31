@@ -71,10 +71,6 @@ feature "PurchaseSolicitations" do
 
     expect(page).to have_notice 'Solicitação de Compra criada com sucesso.'
 
-    within_records do
-      page.find('a').click
-    end
-
     within_tab 'Principal' do
       expect(page).to have_field 'Código', :with => '1'
       expect(page).to have_field 'Ano', :with => '2012'
@@ -168,10 +164,6 @@ feature "PurchaseSolicitations" do
     click_button 'Salvar'
 
     expect(page).to have_notice 'Solicitação de Compra editada com sucesso.'
-
-    within_records do
-      page.find('a').click
-    end
 
     within_tab 'Principal' do
       expect(page).to have_field 'Código', :with => '1'
@@ -364,10 +356,6 @@ feature "PurchaseSolicitations" do
     click_button 'Salvar'
 
     expect(page).to have_notice 'Solicitação de Compra criada com sucesso.'
-
-    within_records do
-      click_link '2/2012'
-    end
 
     within_tab 'Principal' do
       expect(page).to have_field 'Código', :with => '2'

@@ -18,12 +18,16 @@ class PurchaseSolicitationsController < CrudController
     object = build_resource
     object.service_status = PurchaseSolicitationServiceStatus::PENDING
 
-    super
+    create! do |success, failure|
+      success.html { redirect_to edit_resource_path }
+    end
   end
 
   def update
     raise Exceptions::Unauthorized unless resource.editable?
 
-    super
+    update! do |success, failure|
+      success.html { redirect_to edit_resource_path }
+    end
   end
 end

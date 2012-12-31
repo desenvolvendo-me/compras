@@ -59,5 +59,13 @@ describe PurchaseSolicitationsController do
 
       expect(assigns(:purchase_solicitation).accounting_year).to eq 2013
     end
+
+    it 'should redirect to edit' do
+      purchase_solicitation = PurchaseSolicitation.make!(:reparo)
+
+      put :update, :id => purchase_solicitation.id
+
+      expect(response).to redirect_to(edit_purchase_solicitation_path(purchase_solicitation))
+    end
   end
 end
