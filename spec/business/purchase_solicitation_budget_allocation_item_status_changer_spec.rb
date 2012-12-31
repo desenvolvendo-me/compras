@@ -81,4 +81,34 @@ describe PurchaseSolicitationBudgetAllocationItemStatusChanger do
       subject.change(item_repository)
     end
   end
+
+  context 'when have a purchase solicitation item group' do
+    subject do
+      PurchaseSolicitationBudgetAllocationItemStatusChanger.new(
+        :new_purchase_solicitation_item_group => purchase_solicitation_item_group)
+    end
+
+    let(:purchase_solicitation_item_group) { double(:purchase_solicitation_item_group) }
+
+    it 'should mark all pending items as attended' do
+      purchase_solicitation_item_group.should_receive(:attend_items!)
+
+      subject.change(item_repository)
+    end
+  end
+
+  context 'when have an old purchase solicitation item group' do
+    subject do
+      PurchaseSolicitationBudgetAllocationItemStatusChanger.new(
+        :old_purchase_solicitation_item_group => purchase_solicitation_item_group)
+    end
+
+    let(:purchase_solicitation_item_group) { double(:purchase_solicitation_item_group) }
+
+    it 'should mark all attended items as pending' do
+      purchase_solicitation_item_group.should_receive(:rollback_attended_items!)
+
+      subject.change(item_repository)
+    end
+  end
 end

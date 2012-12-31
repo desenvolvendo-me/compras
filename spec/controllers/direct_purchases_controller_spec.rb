@@ -180,4 +180,22 @@ describe DirectPurchasesController do
       end
     end
   end
+
+  context 'when has a supply authorization' do
+    let :supply_authorization do
+      SupplyAuthorization.make!(:nohup)
+    end
+
+    it 'should generate a supply authorization' do
+      SupplyAuthorizationGenerator.any_instance.should_receive(:generate!).
+        and_return(supply_authorization)
+
+      PurchaseSolicitationBudgetAllocationItemStatusChanger.any_instance.
+        should_receive(:change)
+
+      put :update, :id => supply_authorization.direct_purchase_id,
+        :commit => 'Gerar autorização de fornecimento',
+        :direct_purchase => { }
+    end
+  end
 end

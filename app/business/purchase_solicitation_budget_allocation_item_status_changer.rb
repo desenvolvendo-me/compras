@@ -16,6 +16,8 @@ class PurchaseSolicitationBudgetAllocationItemStatusChanger
     @new_purchase_solicitation = options.fetch(:new_purchase_solicitation, nil)
     @old_purchase_solicitation = options.fetch(:old_purchase_solicitation, nil)
     @purchase_solicitation_item_group_id = options.fetch(:purchase_solicitation_item_group_id, nil)
+    @new_purchase_solicitation_item_group = options.fetch(:new_purchase_solicitation_item_group, nil)
+    @old_purchase_solicitation_item_group = options.fetch(:old_purchase_solicitation_item_group, nil)
   end
 
   def change(item_repository = PurchaseSolicitationBudgetAllocationItem)
@@ -26,12 +28,17 @@ class PurchaseSolicitationBudgetAllocationItemStatusChanger
     new_purchase_solicitation.attend_items! if new_purchase_solicitation
 
     old_purchase_solicitation.rollback_attended_items! if old_purchase_solicitation
+
+    new_purchase_solicitation_item_group.attend_items! if new_purchase_solicitation_item_group
+
+    old_purchase_solicitation_item_group.rollback_attended_items! if old_purchase_solicitation_item_group
   end
 
   private
 
   attr_reader :new_item_ids, :old_item_ids, :new_purchase_solicitation,
-              :old_purchase_solicitation, :purchase_solicitation_item_group_id
+              :old_purchase_solicitation, :purchase_solicitation_item_group_id,
+              :new_purchase_solicitation_item_group, :old_purchase_solicitation_item_group
 
   def removed_item_ids
     old_item_ids - new_item_ids

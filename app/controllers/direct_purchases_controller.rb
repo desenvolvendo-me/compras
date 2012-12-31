@@ -23,6 +23,10 @@ class DirectPurchasesController < CrudController
     if params[:commit] == 'Gerar autorização de fornecimento'
       supply_authorization = SupplyAuthorizationGenerator.new(resource).generate!
 
+      PurchaseSolicitationBudgetAllocationItemStatusChanger.new(
+        :new_purchase_solicitation => new_purchase_solicitation,
+        :new_purchase_solicitation_item_group => resource.purchase_solicitation_item_group).change
+
       redirect_to supply_authorization
       return
 

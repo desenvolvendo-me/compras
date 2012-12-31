@@ -253,4 +253,32 @@ describe PurchaseSolicitationItemGroup do
       end
     end
   end
+
+  describe '#attend_items!' do
+    it "should change status of items to 'attended'" do
+      item1 = double(:item1)
+      item2 = double(:item2)
+
+      subject.stub(:purchase_solicitation_items).and_return([item1, item2])
+
+      item1.should_receive(:attend!)
+      item2.should_receive(:attend!)
+
+      subject.attend_items!
+    end
+  end
+
+  describe '#rollback_attended_items!' do
+    it "should change status of items to 'pending'" do
+      item1 = double(:item1)
+      item2 = double(:item2)
+
+      subject.stub(:purchase_solicitation_items).and_return([item1, item2])
+
+      item1.should_receive(:pending!)
+      item2.should_receive(:pending!)
+
+      subject.rollback_attended_items!
+    end
+  end
 end

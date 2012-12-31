@@ -88,6 +88,14 @@ class PurchaseSolicitationItemGroup < Compras::Model
     purchase_solicitations.each(&:buy!)
   end
 
+  def attend_items!
+    purchase_solicitation_items.each(&:attend!)
+  end
+
+  def rollback_attended_items!
+    purchase_solicitation_items.each(&:pending!)
+  end
+
   private
 
   def purchase_solicitation_status

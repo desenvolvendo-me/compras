@@ -1376,6 +1376,20 @@ feature "DirectPurchases" do
     )
     Prefecture.make!(:belo_horizonte)
 
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    within_records do
+      click_link purchase_solicitation.code_and_year
+    end
+
+    within_tab 'Principal' do
+      expect(page).to have_select 'Status de atendimento', :selected => 'Liberada'
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      expect(page).to have_select 'Status', :selected => 'Pendente'
+    end
+
     navigate 'Processos de Compra > Compra Direta'
 
     within_records do
@@ -1416,6 +1430,10 @@ feature "DirectPurchases" do
 
     within_tab 'Principal' do
       expect(page).to have_select 'Status de atendimento', :selected => 'Atendida'
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      expect(page).to have_select 'Status', :selected => 'Atendido'
     end
   end
 
@@ -1650,6 +1668,23 @@ feature "DirectPurchases" do
     DirectPurchase.make!(:compra,
                          :purchase_solicitation_item_group => item_group)
 
+
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    item_group.purchase_solicitations.each do |purchase_solicitation|
+      within_records do
+        click_link purchase_solicitation.code_and_year
+      end
+
+      within_tab 'Principal' do
+        expect(page).to have_select 'Status de atendimento', :selected => 'Liberada'
+      end
+
+      within_tab 'Dotações orçamentarias' do
+        expect(page).to have_select 'Status', :selected => 'Agrupado'
+      end
+    end
+
     navigate 'Processos de Compra > Compra Direta'
 
     click_link '1/2012'
@@ -1663,6 +1698,18 @@ feature "DirectPurchases" do
     click_link 'Agrupamento de antivirus'
 
     expect(page).to have_select "Situação", :selected => 'Atendido'
+
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    item_group.purchase_solicitations.each do |purchase_solicitation|
+      within_records do
+        click_link purchase_solicitation.code_and_year
+      end
+
+      within_tab 'Dotações orçamentarias' do
+        expect(page).to have_select 'Status', :selected => 'Atendido'
+      end
+    end
   end
 
   scenario 'clear budget allocations on clear purchase solicitation item group' do
