@@ -180,6 +180,7 @@ LicitationProcess.blueprint(:apuracao_por_itens) do
   contract_expiration { 3 }
   observations { "observacoes" }
   document_types { [DocumentType.make!(:fiscal)] }
+  disqualify_by_documentation_problem { false }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM }
   bidders { [Bidder.make!(:licitante_com_proposta_1),

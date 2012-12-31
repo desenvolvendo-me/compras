@@ -19,6 +19,9 @@ feature "LicitationProcessRatifications" do
     expect(page).to have_field 'Data da homologação', :with => ""
     expect(page).to have_field 'Data da adjudicação', :with => ""
 
+    click_button 'Apurar'
+    click_link 'voltar'
+
     navigate 'Processo Administrativo/Licitatório > Homologações e Adjudicações de Processos Licitatórios'
 
     click_link 'Criar Homologação e Adjudicação de Processo Licitatório'
@@ -133,6 +136,15 @@ feature "LicitationProcessRatifications" do
   scenario 'cleaning items' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
     BidderProposal.make!(:proposta_licitante_1, :bidder => Bidder.make!(:licitante))
+
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_button 'Apurar'
+    click_link 'voltar'
 
     navigate 'Processo Administrativo/Licitatório > Homologações e Adjudicações de Processos Licitatórios'
 

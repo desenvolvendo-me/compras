@@ -144,7 +144,7 @@ AdministrativeProcess.blueprint(:apuracao_por_itens) do
   responsible { Employee.make!(:sobrinho) }
   status { AdministrativeProcessStatus::RELEASED }
   item { 'Item 1' }
-  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_2_itens)] }
   administrative_process_liberation { AdministrativeProcessLiberation.make!(:liberacao, :administrative_process => object) }
 end
 

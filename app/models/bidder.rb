@@ -19,6 +19,7 @@ class Bidder < Compras::Model
   has_many :licitation_process_classifications, :dependent => :destroy
   has_many :licitation_process_classifications_by_classifiable, :as => :classifiable, :dependent => :destroy, :class_name => 'LicitationProcessClassification'
   has_many :trading_item_bids, :dependent => :restrict
+  has_many :licitation_process_ratifications, :dependent => :restrict
 
   delegate :document_type_ids, :process_date, :ratification?,
            :to => :licitation_process, :prefix => true, :allow_nil => true
@@ -93,6 +94,16 @@ class Bidder < Compras::Model
         (classification.bidder.status.not_eq(Status::INACTIVE) |
          classification.bidder.status.eq(nil))
       end
+  end
+
+  def self.won_calculation
+    joins { licitation_process_classifications }.
+    where { licitation_process_classifications.situation.eq(SituationOfProposal::WON) }
+  end
+
+  def self.without_ratification
+    joins { licitation_process_ratifications.outer }.
+    where { licitation_process_ratifications.id.eq(nil) }
   end
 
   def self.with_no_proposal_for_trading_item(trading_item_id)

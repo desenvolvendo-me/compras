@@ -1,5 +1,6 @@
 # encoding: utf-8
 require 'model_helper'
+require 'lib/signable'
 require 'app/models/bidder'
 require 'app/models/bidder_proposal'
 require 'app/models/bidder_document'
@@ -7,6 +8,7 @@ require 'app/models/licitation_process'
 require 'app/models/creditor'
 require 'app/models/accredited_representative'
 require 'app/models/licitation_process_classification'
+require 'app/models/licitation_process_ratification'
 require 'app/models/trading_item_bid'
 
 describe Bidder do
@@ -26,6 +28,7 @@ describe Bidder do
   it { should have_many(:licitation_process_classifications).dependent(:destroy) }
   it { should have_many(:licitation_process_classifications_by_classifiable).dependent(:destroy) }
   it { should have_many(:trading_item_bids).dependent(:restrict) }
+  it { should have_many(:licitation_process_ratifications).dependent(:restrict) }
 
   it { should validate_presence_of :creditor }
 

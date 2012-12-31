@@ -515,22 +515,47 @@ feature "LicitationProcesses" do
 
     expect(page).to have_content 'Apuração: Menor preço total por item'
 
-    expect(page).to have_content 'Gabriel Sobrinho'
-
-    within '.classification-1-0' do
-      expect(page).to have_content 'Antivirus'
-      expect(page).to have_content '9,00'
-      expect(page).to have_content '18,00'
-      expect(page).to have_content 'Ganhou'
-    end
-
     expect(page).to have_content 'Wenderson Malheiros'
 
-    within '.classification-2-0' do
-      expect(page).to have_content 'Antivirus'
-      expect(page).to have_content '10,00'
-      expect(page).to have_content '20,00'
-      expect(page).to have_content 'Perdeu'
+    within 'table:nth-child(1)' do
+      within 'tbody tr:nth-child(1)' do
+        expect(page).to have_content 'Arame comum'
+        expect(page).to have_content 'UN'
+        expect(page).to have_content '1'
+        expect(page).to have_content '9,00'
+        expect(page).to have_content 'Ganhou'
+      end
+
+      within 'tbody tr:nth-child(2)' do
+        expect(page).to have_content 'Antivirus'
+        expect(page).to have_content 'UN'
+        expect(page).to have_content '2'
+        expect(page).to have_content '10,00'
+        expect(page).to have_content '20,00'
+        expect(page).to have_content 'Perdeu'
+      end
+    end
+
+    expect(page).to have_content 'Gabriel Sobrinho'
+
+    within 'table:nth-child(2)' do
+      within 'tbody tr:nth-child(1)' do
+        expect(page).to have_content 'Antivirus'
+        expect(page).to have_content 'UN'
+        expect(page).to have_content '2'
+        expect(page).to have_content '9,00'
+        expect(page).to have_content '18,00'
+        expect(page).to have_content 'Ganhou'
+      end
+
+      within 'tbody tr:nth-child(2)' do
+        expect(page).to have_content 'Arame comum'
+        expect(page).to have_content 'UN'
+        expect(page).to have_content '1'
+        expect(page).to have_content '10,00'
+        expect(page).to have_content '10,00'
+        expect(page).to have_content 'Perdeu'
+      end
     end
 
     click_link 'voltar'
