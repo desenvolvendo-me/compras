@@ -25,7 +25,7 @@ class BidderProposal < Compras::Model
 
   def self.by_item_order_by_unit_price(item_id)
     where { administrative_process_budget_allocation_item_id.eq(item_id) & unit_price.not_eq(nil)}.
-    order {  unit_price }
+    reorder {  unit_price }
   end
 
   def self.any_without_unit_price?(lot = nil)
