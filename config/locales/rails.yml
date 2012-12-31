@@ -307,6 +307,9 @@ pt-BR:
       cannot_be_edited: "não pode ser editado"
       cannot_open_link_without_an_object: "não pode abrir o link sem um objeto"
       cannot_be_changed_when_the_licitation_process_has_a_ratification: "não pode ser alterado quando o processo licitatório (%{licitation_process}) vinculado estiver homologado"
+      must_be_greater_than_or_equals_to_start_date: "deve ser maior ou igual a data inicial"
+      taken_for_signature: "já está contida em outra assinatura"
+      date_range_taken_for_signature: "intervalo de data já está contida em outra assinatura"
 
   activerecord:
     errors:

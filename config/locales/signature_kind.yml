@@ -1,0 +1,7 @@
+pt-BR:
+  enumerations:
+    signature_kind:
+      manager: "Gestor"
+      accountant: "Contador"
+      internal_control: "Controle Interno"
+      delegation: "Ordenador de Despesa por Delegação"

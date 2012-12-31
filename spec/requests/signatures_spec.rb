@@ -16,6 +16,9 @@ feature "Signatures" do
 
     fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
     fill_modal 'Cargo', :with => 'Gerente'
+    select 'Gestor', :from => 'Tipo'
+    fill_in 'Data inicial', :with => '01/01/2012'
+    fill_in 'Data final', :with => '31/12/2012'
 
     click_button 'Salvar'
 
@@ -25,6 +28,9 @@ feature "Signatures" do
 
     expect(page).to have_field 'Pessoa', :with => 'Gabriel Sobrinho'
     expect(page).to have_field 'Cargo', :with => 'Gerente'
+    expect(page).to have_select 'Tipo', :selected => 'Gestor'
+    expect(page).to have_field 'Data inicial', :with => '01/01/2012'
+    expect(page).to have_field 'Data final', :with => '31/12/2012'
   end
 
   scenario 'update an existent signature' do
@@ -38,6 +44,9 @@ feature "Signatures" do
 
     fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
     fill_modal 'Cargo', :with => 'Supervisor'
+    select 'Contador', :from => 'Tipo'
+    fill_in 'Data inicial', :with => '31/01/2012'
+    fill_in 'Data final', :with => '31/01/2013'
 
     click_button 'Salvar'
 
@@ -47,6 +56,26 @@ feature "Signatures" do
 
     expect(page).to have_field 'Pessoa', :with => 'Wenderson Malheiros'
     expect(page).to have_field 'Cargo', :with => 'Supervisor'
+    expect(page).to have_select 'Tipo', :selected => 'Contador'
+    expect(page).to have_field 'Data inicial', :with => '31/01/2012'
+    expect(page).to have_field 'Data final', :with => '31/01/2013'
+  end
+
+  scenario 'show error when already from other date range' do
+    Signature.make!(:gerente_sobrinho)
+
+    navigate 'Geral > Parâmetros > Assinaturas > Assinaturas'
+
+    click_link 'Criar Assinatura'
+
+    select 'Gestor', :from => 'Tipo'
+    fill_in 'Data inicial', :with => '01/11/2011'
+    fill_in 'Data final', :with => '01/01/2013'
+
+    click_button 'Salvar'
+
+    expect(page).to have_content 'Foram encontrados os seguintes erros no formulário: '
+    expect(page).to have_content 'intervalo de data já está contida em outra assinatura'
   end
 
   scenario 'destroy an existent signature' do

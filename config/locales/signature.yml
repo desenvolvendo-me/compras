@@ -9,3 +9,6 @@ pt-BR:
       signature:
         person: "Pessoa"
         position: "Cargo"
+        kind: "Tipo"
+        start_date: "Data inicial"
+        end_date: "Data final"
