@@ -82,6 +82,6 @@ class Contract < Compras::Model
   end
 
   def allow_termination?
-    !contract_termination.present?
+    contract_termination.blank?
   end
 end
