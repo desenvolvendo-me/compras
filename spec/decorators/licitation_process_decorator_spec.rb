@@ -168,7 +168,7 @@ describe LicitationProcessDecorator do
       component.stub(:licitation_process_publications).and_return(publications)
       component.stub(:licitation_process_ratifications).and_return(ratifications)
       publications.stub(:current_updatable?).and_return(true)
-      ratifications.stub(:empty?).and_return(false)
+      ratifications.stub(:any?).and_return(true)
 
 
       expect(subject.not_updatable_message).to eq 'homologado'
@@ -179,8 +179,8 @@ describe LicitationProcessDecorator do
       component.stub(:licitation_process_publications).and_return(publications)
       component.stub(:licitation_process_ratifications).and_return(ratifications)
       publications.stub(:current_updatable?).and_return(true)
-      publications.stub(:empty?).and_return(false)
-      ratifications.stub(:empty?).and_return(true)
+      publications.stub(:any?).and_return(true)
+      ratifications.stub(:any?).and_return(false)
 
 
       expect(subject.not_updatable_message).to eq 'publicado'

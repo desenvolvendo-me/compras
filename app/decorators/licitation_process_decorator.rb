@@ -55,9 +55,9 @@ class LicitationProcessDecorator
 
     if !licitation_process_publications.current_updatable?
       t('licitation_process.messages.no_one_publication_with_valid_type', :publication_of => current_publication_of)
-    elsif !licitation_process_ratifications.empty?
+    elsif licitation_process_ratifications.any?
       t('licitation_process.messages.has_already_a_ratification')
-    elsif !licitation_process_publications.empty?
+    elsif licitation_process_publications.any?
       t('licitation_process.messages.has_already_a_publications')
     end
   end
