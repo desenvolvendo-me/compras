@@ -431,4 +431,16 @@ describe Bidder do
       expect(subject.disabled_at).to eq reference_date
     end
   end
+
+  describe '#descroy_all_classifications' do
+    let(:classifications) { double(:licitation_process_classifications) }
+
+    it 'should call destroy_all classifications' do
+      subject.stub(:licitation_process_classifications).and_return(classifications)
+
+      classifications.should_receive(:destroy_all)
+
+      subject.destroy_all_classifications
+    end
+  end
 end

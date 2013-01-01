@@ -18,7 +18,7 @@ class LicitationProcess < Compras::Model
   has_enumeration_for :legal_advice, :with => LicitationProcessLegalAdvice
   has_enumeration_for :modality, :with => AbreviatedProcessModality, :create_helpers => true
   has_enumeration_for :pledge_type
-  has_enumeration_for :type_of_calculation, :with => LicitationProcessTypeOfCalculation
+  has_enumeration_for :type_of_calculation, :with => LicitationProcessTypeOfCalculation, :create_helpers => true
   has_enumeration_for :expiration_unit, :with => PeriodUnit
   has_enumeration_for :period_unit, :with => PeriodUnit
   has_enumeration_for :status, :with => LicitationProcessStatus, :create_helpers => true
@@ -43,6 +43,8 @@ class LicitationProcess < Compras::Model
   has_many :reserve_funds, :dependent => :restrict
   has_many :price_registrations, :dependent => :restrict
   has_many :licitation_process_ratifications, :dependent => :restrict, :order => :id
+  has_many :classifications, :through => :bidders, :class_name => 'LicitationProcessClassification',
+           :source => :licitation_process_classifications
 
   has_one :trading, :dependent => :restrict
 
@@ -166,11 +168,11 @@ class LicitationProcess < Compras::Model
   end
 
   def all_licitation_process_classifications
-    bidders.classifications.order(:bidder_id, :classification)
+    classifications.for_active_bidders.order(:bidder_id, :classification)
   end
 
   def destroy_all_licitation_process_classifications
-    bidders.destroy_all_classifications
+    bidders.each(&:destroy_all_classifications)
   end
 
   def lots_with_items

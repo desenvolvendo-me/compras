@@ -6,7 +6,8 @@ class LicitationProcessClassificationSituationGenerator
 
   delegate :bidders, :all_licitation_process_classifications,
            :administrative_process_presence_trading?, :lots_with_items, :items,
-           :consider_law_of_proposals,
+           :consider_law_of_proposals, :lowest_total_price_by_item?,
+           :lowest_price_by_lot?, :lowest_global_price?, :classifications,
            :to => :licitation_process, :allow_nil => true
 
   def initialize(licitation_process)
@@ -14,40 +15,64 @@ class LicitationProcessClassificationSituationGenerator
   end
 
   def generate!
-    generate_situation!
+    all_licitation_process_classifications.disqualified.each(&:lose!)
 
-    change_proposal_situation_by_bidder!
+    generate_situation_by_bidder
 
-    change_proposal_situation_by_lot!
+    generate_situation_by_item
 
-    change_proposal_situation_by_item!
+    generate_situation_by_lot
   end
 
-  protected
+  private
 
-  def set_lost_to_all_classifications_disqualified
-    all_licitation_process_classifications.disqualified.each do |c|
-      c.lose!
+  def generate_situation_by_bidder
+    return unless lowest_global_price?
+
+    valid_classifications = all_licitation_process_classifications.reject(&:disqualified?).sort_by(&:classification)
+
+    classificate(valid_classifications)
+
+    change_proposal_situation_by_bidder!
+  end
+
+  def generate_situation_by_lot
+    return unless lowest_price_by_lot?
+
+    lots_with_items.each do |lot|
+      valid_classifications = lot.licitation_process_classifications.for_active_bidders.reject(&:disqualified?).sort_by(&:classification)
+
+      classificate(valid_classifications)
     end
+
+    change_proposal_situation_by_lot!
+  end
+
+  def generate_situation_by_item
+    return unless lowest_total_price_by_item?
+
+    items.each do |item|
+      valid_classifications = classifications.for_active_bidders.for_item(item.id).reject(&:disqualified?).sort_by(&:classification)
+
+      classificate(valid_classifications)
+    end
+
+    change_proposal_situation_by_item!
   end
 
   def is_benefited_classification?(classification_a, classification_b)
     classification_a.benefited == classification_b.benefited || !consider_law_of_proposals
   end
 
-  def generate_situation!
-    set_lost_to_all_classifications_disqualified
+  def classificate(valid_classifications)
+    classification_a = valid_classifications.first
 
-    classifications = all_licitation_process_classifications.reject(&:disqualified?).
-                                                             sort_by(&:classification)
-    classification_a = classifications.first
-
-    if classifications.size == 1
+    if valid_classifications.size == 1
       classification_a.win!
       return
     end
 
-    classifications.reject { |c| c == classification_a }.each do |classification_b|
+    valid_classifications.reject { |c| c == classification_a }.each do |classification_b|
       classificator = LicitationProcessClassificator.new(
         classification_a,
         classification_b,

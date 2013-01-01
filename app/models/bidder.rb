@@ -65,10 +65,6 @@ class Bidder < Compras::Model
   orderize :id
   filterize
 
-  def self.destroy_all_classifications
-    classifications.destroy_all
-  end
-
   def self.with_negociation_proposal_for(trading_item_id)
     enabled.
     joins { trading_item_bids }.
@@ -85,15 +81,6 @@ class Bidder < Compras::Model
       trading_item_bids.stage.eq(TradingItemBidStage::ROUND_OF_BIDS) &
       trading_item_bids.amount.lteq(value)
     }
-  end
-
-  def self.classifications
-    LicitationProcessClassification.joins { bidder }.readonly(false).
-      where do |classification|
-        classification.bidder_id.in(pluck(:id)) &
-        (classification.bidder.status.not_eq(Status::INACTIVE) |
-         classification.bidder.status.eq(nil))
-      end
   end
 
   def self.won_calculation
@@ -162,6 +149,10 @@ class Bidder < Compras::Model
       trading_item_bids.trading_item_id.eq(trading_item_id) &
       trading_item_bids.stage.eq(stage)
     }
+  end
+
+  def destroy_all_classifications
+    licitation_process_classifications.destroy_all
   end
 
   def proposals_by_lot(lot)

@@ -239,4 +239,32 @@ describe LicitationProcessDecorator do
       expect(subject.ratification_date).to eq '27/12/2012'
     end
   end
+
+  describe '#all_licitation_process_classifications_groupped' do
+    let(:bidder1) { double(:bidder1)}
+    let(:bidder2) { double(:bidder2)}
+
+    let :classification1 do
+      double(:clalssification1, :bidder => bidder1, :classifiable_id => 2)
+    end
+
+    let :classification2 do
+      double(:clalssification2, :bidder => bidder1, :classifiable_id => 1)
+    end
+
+    let :classification3 do
+      double(:clalssification3, :bidder => bidder2, :classifiable_id => 1)
+    end
+
+    let :classification4 do
+      double(:clalssification4, :bidder => bidder2, :classifiable_id => 2)
+    end
+
+    it 'should group all classifications by bidder and order classifications by items' do
+      component.should_receive(:all_licitation_process_classifications).
+                and_return([classification1, classification2, classification3, classification4])
+
+      expect(subject.all_licitation_process_classifications_groupped).to eq bidder1 => [classification2, classification1], bidder2 => [classification3, classification4]
+    end
+  end
 end

@@ -3,7 +3,6 @@ require 'active_support/core_ext/module/delegation'
 require 'app/business/licitation_process_classification_bidders_verifier'
 
 describe LicitationProcessClassificationBiddersVerifier do
-
   let :licitation_process do
     double('LicitationProcess',
       :id => 1,
@@ -17,12 +16,8 @@ describe LicitationProcessClassificationBiddersVerifier do
     double('Bidder', :id => 11, :benefited => false, :status => :enabled)
   end
 
-  let :bidders do
-    [bidder]
-  end
-
-  let :verifier do
-    LicitationProcessClassificationBiddersVerifier.new(licitation_process)
+  subject do
+    described_class.new(licitation_process)
   end
 
   context 'disable bidders by documentation problem' do
@@ -31,33 +26,35 @@ describe LicitationProcessClassificationBiddersVerifier do
       licitation_process.stub(:disqualify_by_documentation_problem => true)
     end
 
-    it 'does nothing if no bidders are disqualified because of documentation problems' do
+    it 'activate bidder when it does not have problem with documentation' do
       licitation_process.stub(:disqualify_by_documentation_problem => false)
       bidder.stub(:has_documentation_problem? => false)
+      subject.stub(:validate_bidder_by_maximum_value?).and_return(true)
 
-      bidder.should_not_receive(:inactivate!)
-      bidder.should_not_receive(:activate!)
+      bidder.should_receive(:activate!)
 
-      verifier.verify!
+      subject.verify!
     end
 
     context 'bidder is not benefited by law of proposals' do
       it 'inactivates the bidder if it has documentation problems' do
         bidder.stub(:benefited_by_law_of_proposals? => false,
                     :has_documentation_problem? => true)
+        subject.stub(:validate_bidder_by_maximum_value?).and_return(true)
 
         bidder.should_receive(:inactivate!)
 
-        verifier.verify!
+        subject.verify!
       end
     end
 
     it 'activates the bidder if documents are OK' do
       bidder.stub(:has_documentation_problem? => false)
+      subject.stub(:validate_bidder_by_maximum_value?).and_return(true)
 
-      bidder.should_receive(:activate!).and_return(true)
+      bidder.should_receive(:activate!)
 
-      verifier.verify!
+      subject.verify!
     end
   end
 
@@ -69,16 +66,22 @@ describe LicitationProcessClassificationBiddersVerifier do
 
     it 'should disable bidder' do
       bidder.stub(:has_proposals_unit_price_greater_than_budget_allocation_item_unit_price? => true)
+      subject.stub(:validate_bidder_by_maximum_value?).and_return(true)
 
-      bidder.should_receive(:inactivate!).and_return(true)
+      bidder.should_receive(:activate!)
+      bidder.should_receive(:inactivate!)
 
-      verifier.verify!
+      subject.verify!
     end
 
-    it 'should do nothing' do
+    it 'should activate bidder' do
       bidder.stub(:has_proposals_unit_price_greater_than_budget_allocation_item_unit_price? => false)
 
-      verifier.verify!
+      subject.stub(:validate_bidder_by_maximum_value?).and_return(true)
+
+      bidder.should_receive(:activate!)
+
+      subject.verify!
     end
   end
 end

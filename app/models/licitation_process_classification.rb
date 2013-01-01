@@ -16,6 +16,16 @@ class LicitationProcessClassification < Compras::Model
 
   scope :disqualified, where { classification.eq(-1) }
 
+  def self.for_active_bidders
+    joins { bidder }.
+    where { bidder.status.not_eq(Status::INACTIVE) | bidder.status.eq(nil) }
+  end
+
+  def self.for_item(item_id)
+    joins { classifiable(AdministrativeProcessBudgetAllocationItem) }.
+    where { classifiable.id.eq(item_id)}
+  end
+
   def disqualified?
     classification == -1
   end

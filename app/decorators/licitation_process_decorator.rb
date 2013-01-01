@@ -29,7 +29,9 @@ class LicitationProcessDecorator
   end
 
   def all_licitation_process_classifications_groupped
-    all_licitation_process_classifications.group_by(&:bidder)
+    all_licitation_process_classifications.group_by(&:bidder).each do |bidder, classifications|
+      classifications.sort_by!(&:classifiable_id)
+    end
   end
 
   def edit_path

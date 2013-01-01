@@ -435,34 +435,38 @@ feature "LicitationProcesses" do
 
     expect(page).to have_content 'Wenderson Malheiros'
 
-    within '.classification-1-0-0' do
-      expect(page).to have_content 'Arame comum'
-      expect(page).to have_content '0,00'
-      expect(page).to have_content '0,00'
-      expect(page).to have_content 'Perdeu'
-    end
+    within 'table.records:nth-of-type(1)' do
+      within 'tbody tr:nth-child(1)' do
+        expect(page).to have_content 'Antivirus'
+        expect(page).to have_content '10,00'
+        expect(page).to have_content '20,00'
+        expect(page).to have_content 'Perdeu'
+      end
 
-    within '.classification-1-1-0' do
-      expect(page).to have_content 'Antivirus'
-      expect(page).to have_content '10,00'
-      expect(page).to have_content '20,00'
-      expect(page).to have_content 'Perdeu'
+      within 'tbody tr:nth-child(2)' do
+        expect(page).to have_content 'Arame comum'
+        expect(page).to have_content '1'
+        expect(page).to have_content '9,00'
+        expect(page).to have_content 'Ganhou'
+      end
     end
 
     expect(page).to have_content 'Gabriel Sobrinho'
 
-    within '.classification-2-0-0' do
-      expect(page).to have_content 'Arame comum'
-      expect(page).to have_content '0,00'
-      expect(page).to have_content '0,00'
-      expect(page).to have_content 'Perdeu'
-    end
+    within 'table.records:nth-of-type(2)' do
+      within 'tbody tr:nth-child(1)' do
+        expect(page).to have_content 'Antivirus'
+        expect(page).to have_content '9,00'
+        expect(page).to have_content '18,00'
+        expect(page).to have_content 'Ganhou'
+      end
 
-    within '.classification-2-1-0' do
-      expect(page).to have_content 'Antivirus'
-      expect(page).to have_content '9,00'
-      expect(page).to have_content '18,00'
-      expect(page).to have_content 'Ganhou'
+      within 'tbody tr:nth-child(2)' do
+        expect(page).to have_content 'Arame comum'
+        expect(page).to have_content '1'
+        expect(page).to have_content '10,00'
+        expect(page).to have_content 'Perdeu'
+      end
     end
 
     click_link 'voltar'
@@ -478,8 +482,8 @@ feature "LicitationProcesses" do
       end
 
       within_tab 'Lote 2' do
-        expect(page).to have_select 'Situação', :selected => 'Indefinido'
-        expect(page).to have_field 'Classificação', :with => ''
+        expect(page).to have_select 'Situação', :selected => 'Ganhou'
+        expect(page).to have_field 'Classificação', :with => '1'
       end
     end
 
@@ -494,8 +498,8 @@ feature "LicitationProcesses" do
       end
 
       within_tab 'Lote 2' do
-        expect(page).to have_select 'Situação', :selected => 'Indefinido'
-        expect(page).to have_field 'Classificação', :with => ''
+        expect(page).to have_select 'Situação', :selected => 'Perdeu'
+        expect(page).to have_field 'Classificação', :with => '2'
       end
     end
   end
@@ -517,16 +521,8 @@ feature "LicitationProcesses" do
 
     expect(page).to have_content 'Wenderson Malheiros'
 
-    within 'table:nth-child(1)' do
+    within 'table.records:nth-of-type(1)' do
       within 'tbody tr:nth-child(1)' do
-        expect(page).to have_content 'Arame comum'
-        expect(page).to have_content 'UN'
-        expect(page).to have_content '1'
-        expect(page).to have_content '9,00'
-        expect(page).to have_content 'Ganhou'
-      end
-
-      within 'tbody tr:nth-child(2)' do
         expect(page).to have_content 'Antivirus'
         expect(page).to have_content 'UN'
         expect(page).to have_content '2'
@@ -534,11 +530,19 @@ feature "LicitationProcesses" do
         expect(page).to have_content '20,00'
         expect(page).to have_content 'Perdeu'
       end
+
+      within 'tbody tr:nth-child(2)' do
+        expect(page).to have_content 'Arame comum'
+        expect(page).to have_content 'UN'
+        expect(page).to have_content '1'
+        expect(page).to have_content '9,00'
+        expect(page).to have_content 'Ganhou'
+      end
     end
 
     expect(page).to have_content 'Gabriel Sobrinho'
 
-    within 'table:nth-child(2)' do
+    within 'table.records:nth-of-type(2)' do
       within 'tbody tr:nth-child(1)' do
         expect(page).to have_content 'Antivirus'
         expect(page).to have_content 'UN'
