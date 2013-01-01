@@ -36,12 +36,12 @@ feature TradingItem do
       ])
 
     TradingItemBid.create!(
-        :round => 0,
-        :trading_item_id => item.id,
-        :bidder_id => trading.bidders.first.id,
-        :amount => 120.0,
-        :stage => TradingItemBidStage::PROPOSALS,
-        :status => TradingItemBidStatus::WITH_PROPOSAL)
+      :round => 0,
+      :trading_item_id => item.id,
+      :bidder_id => trading.bidders.first.id,
+      :amount => 120.0,
+      :stage => TradingItemBidStage::PROPOSALS,
+      :status => TradingItemBidStatus::WITH_PROPOSAL)
 
     navigate "Processo Administrativo/Licitatório > Pregão Presencial"
 
