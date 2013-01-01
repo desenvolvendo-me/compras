@@ -6,8 +6,10 @@ class LicitationProcessClassification < Compras::Model
   belongs_to :bidder
   belongs_to :classifiable, :polymorphic => true
 
-  delegate :description, :reference_unit, :quantity, :to => :classifiable, :allow_nil => true
-  delegate :administrative_process_budget_allocation_items, :items, :to => :classifiable, :allow_nil => true
+  delegate :description, :reference_unit, :quantity,
+           :to => :classifiable, :allow_nil => true
+  delegate :administrative_process_budget_allocation_items, :items,
+           :to => :classifiable, :allow_nil => true
   delegate :benefited, :proposals, :will_submit_new_proposal_when_draw,
            :to => :bidder, :allow_nil => true
 
