@@ -244,6 +244,22 @@ feature "LicitationProcessRatifications" do
     end
   end
 
+  scenario "Bidder's modal should not have button new" do
+    LicitationProcess.make!(:processo_licitatorio)
+
+    navigate 'Processo Administrativo/Licitatório > Homologações e Adjudicações de Processos Licitatórios'
+
+    click_link 'Criar Homologação e Adjudicação de Processo Licitatório'
+
+    fill_modal 'Processo licitatório', :with => '2012', :field => 'Ano'
+
+    within_modal 'Participante vencedor' do
+      click_button 'Pesquisar'
+
+      expect(page).to_not have_link 'Novo'
+    end
+  end
+
   def bidder_checkbok_html_name(number)
     "licitation_process_ratification[licitation_process_ratification_items_attributes][#{number}][ratificated]"
   end
