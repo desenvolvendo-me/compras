@@ -60,15 +60,6 @@ describe LicitationProcessesController do
       expect(assigns(:licitation_process).status).to eq LicitationProcessStatus::WAITING_FOR_OPEN
     end
 
-    it 'should assign the process' do
-      LicitationProcess.any_instance.stub(:administrative_process).and_return(administrative_process)
-      LicitationProcess.any_instance.stub(:next_process).and_return(2)
-
-      post :create, :licitation_process => { :administrative_process_id => administrative_process.id }
-
-      expect(assigns(:licitation_process).process).to eq 2
-    end
-
     it 'should assign the licitation number' do
       LicitationProcess.any_instance.stub(:administrative_process).and_return(administrative_process)
       LicitationProcess.any_instance.stub(:licitation_number).and_return(2)

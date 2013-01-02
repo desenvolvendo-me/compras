@@ -352,55 +352,6 @@ feature "LicitationProcesses" do
     end
   end
 
-  scenario 'creating another licitation with the same year to test process number and licitation number' do
-    last_licitation_process = LicitationProcess.make!(:processo_licitatorio)
-    AdministrativeProcess.make!(:compra_com_itens_2)
-    Indexer.make!(:xpto)
-
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
-
-    within_records do
-      click_link '1/2013'
-    end
-
-    click_link 'Novo processo licitatório'
-
-    within_tab 'Principal' do
-      expect(page).to have_disabled_field 'Processo'
-
-      fill_in 'Ano', :with => '2013'
-      fill_in 'Data do processo', :with => '21/04/2013'
-      select 'Global', :from => 'Tipo de empenho'
-      select 'Menor preço total por item', :from => 'Tipo da apuração'
-      fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
-      fill_in 'Validade da proposta', :with => '5 dias'
-      select 'dia/dias', :from => 'Período da validade da proposta'
-      fill_modal 'Índice de reajuste', :with => 'XPTO'
-      fill_in 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
-      fill_in 'Hora da entrega', :with => '15:00'
-      fill_in 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow)
-      fill_in 'Hora da abertura', :with => '15:00'
-      fill_in 'Prazo de entrega', :with => '1'
-      select 'ano/anos', :from => 'Período do prazo de entrega'
-      fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
-      fill_in 'Valor da caução', :with => '50,00'
-      select 'Favorável', :from => 'Parecer jurídico'
-      fill_in 'Data do parecer', :with => '30/03/2012'
-      fill_in 'Data do contrato', :with => '31/03/2012'
-      fill_in 'Validade do contrato (meses)', :with => '5'
-      fill_in 'Observações gerais', :with => 'observacoes'
-    end
-
-    click_button 'Salvar'
-
-    expect(page).to have_notice 'Processo Licitatório criado com sucesso.'
-
-    within_tab 'Principal' do
-      expect(page).to have_field 'Processo', :with => last_licitation_process.process.succ.to_s
-      expect(page).to have_field 'Número da licitação', :with => last_licitation_process.licitation_number.succ.to_s
-    end
-  end
-
   scenario 'budget allocation with total of items diferent than value should not be saved' do
     LicitationProcess.make!(:processo_licitatorio)
 

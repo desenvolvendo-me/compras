@@ -58,7 +58,6 @@ class LicitationProcessesController < CrudController
   def create_resource(object)
     BidderStatusChanger.new(object).change
 
-    object.process = object.next_process
     object.licitation_number = object.next_licitation_number
     object.status = LicitationProcessStatus::WAITING_FOR_OPEN
 

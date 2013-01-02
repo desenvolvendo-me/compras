@@ -176,18 +176,6 @@ describe LicitationProcess do
     end
   end
 
-  describe '#next_process' do
-    context 'when the process of last licitation process is 4' do
-      before do
-        subject.stub(:last_process_of_self_year).and_return(4)
-      end
-
-      it 'should be 5' do
-        expect(subject.next_process).to eq 5
-      end
-    end
-  end
-
   describe '#next_licitation_number' do
     context 'when the licitation_number of last licitation process is 4' do
       before do

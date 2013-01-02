@@ -1,7 +1,6 @@
 # encoding: utf-8
 LicitationProcess.blueprint(:processo_licitatorio) do
   year { 2012 }
-  process { 1 }
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
   administrative_process { AdministrativeProcess.make!(:compra_com_itens) }
@@ -36,7 +35,6 @@ end
 LicitationProcess.blueprint(:processo_licitatorio_computador) do
   year { 2013 }
   process_date { Date.new(2013, 3, 20) }
-  process { 1 }
   licitation_number { 1 }
   administrative_process { AdministrativeProcess.make!(:compra_com_itens_2) }
   pledge_type { PledgeType::ESTIMATED }
@@ -66,7 +64,6 @@ end
 
 LicitationProcess.blueprint(:processo_licitatorio_fornecedores) do
   year { 2012 }
-  process { 1 }
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
   administrative_process { AdministrativeProcess.make!(:compra_com_itens_menor_preco) }
@@ -96,7 +93,6 @@ end
 
 LicitationProcess.blueprint(:processo_licitatorio_publicacao_cancelada) do
   year { 2012 }
-  process { 1 }
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
   administrative_process { AdministrativeProcess.make!(:compra_com_itens) }
@@ -126,7 +122,6 @@ end
 LicitationProcess.blueprint(:processo_licitatorio_canetas) do
   year { 2013 }
   process_date { Date.new(2013, 3, 20) }
-  process { 1 }
   licitation_number { 1 }
   administrative_process { AdministrativeProcess.make!(:compra_com_itens_3) }
   pledge_type { PledgeType::ESTIMATED }
@@ -157,7 +152,6 @@ end
 
 LicitationProcess.blueprint(:apuracao_por_itens) do
   year { 2012 }
-  process { 1 }
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
   administrative_process { AdministrativeProcess.make!(:apuracao_por_itens) }
@@ -189,7 +183,6 @@ end
 
 LicitationProcess.blueprint(:apuracao_por_lote) do
   year { 2012 }
-  process { 1 }
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
   administrative_process { AdministrativeProcess.make!(:apuracao_por_lote) }
@@ -220,7 +213,6 @@ end
 
 LicitationProcess.blueprint(:valor_maximo_ultrapassado) do
   year { 2012 }
-  process { 1 }
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
   administrative_process { AdministrativeProcess.make!(:apuracao_por_lote) }
@@ -251,7 +243,6 @@ end
 
 LicitationProcess.blueprint(:maior_lance_por_lote) do
   year { 2012 }
-  process { 1 }
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
   administrative_process { AdministrativeProcess.make!(:maior_lance_por_lote) }
@@ -282,7 +273,6 @@ end
 
 LicitationProcess.blueprint(:apuracao_global) do
   year { 2012 }
-  process { 1 }
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
   administrative_process { AdministrativeProcess.make!(:apuracao_global) }
@@ -313,7 +303,6 @@ end
 
 LicitationProcess.blueprint(:apuracao_global_empatou) do
   year { 2012 }
-  process { 1 }
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
   administrative_process { AdministrativeProcess.make!(:apuracao_global) }
@@ -344,7 +333,6 @@ end
 
 LicitationProcess.blueprint(:apuracao_global_sem_documentos) do
   year { 2012 }
-  process { 1 }
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
   administrative_process { AdministrativeProcess.make!(:apuracao_global) }
@@ -375,7 +363,6 @@ end
 
 LicitationProcess.blueprint(:apuracao_global_small_company) do
   year { 2012 }
-  process { 1 }
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
   administrative_process { AdministrativeProcess.make!(:apuracao_global) }
@@ -406,7 +393,6 @@ end
 
 LicitationProcess.blueprint(:apuracao_global_small_company_without_new_proposal) do
   year { 2012 }
-  process { 1 }
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
   administrative_process { AdministrativeProcess.make!(:apuracao_global) }
@@ -437,7 +423,6 @@ end
 
 LicitationProcess.blueprint(:apuracao_global_small_company_2) do
   year { 2012 }
-  process { 1 }
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
   administrative_process { AdministrativeProcess.make!(:apuracao_global) }
@@ -468,7 +453,6 @@ end
 
 LicitationProcess.blueprint(:processo_licitatorio_nao_atualizavel) do
   year { 2012 }
-  process { 1 }
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
   administrative_process { AdministrativeProcess.make!(:compra_com_itens) }
@@ -499,7 +483,6 @@ end
 LicitationProcess.blueprint(:processo_licitatorio_canetas_sem_lote) do
   year { 2013 }
   process_date { Date.new(2013, 3, 20) }
-  process { 1 }
   licitation_number { 1 }
   administrative_process { AdministrativeProcess.make!(:compra_com_itens_3) }
   pledge_type { PledgeType::ESTIMATED }
@@ -528,7 +511,6 @@ end
 
 LicitationProcess.blueprint(:apuracao_melhor_tecnica_e_preco) do
   year { 2012 }
-  process { 1 }
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
   administrative_process { AdministrativeProcess.make!(:apuracao_melhor_tecnica_e_preco) }
@@ -559,7 +541,6 @@ end
 
 LicitationProcess.blueprint(:pregao_presencial) do
   year { 2012 }
-  process { 1 }
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
   administrative_process { AdministrativeProcess.make!(:pregao_presencial) }

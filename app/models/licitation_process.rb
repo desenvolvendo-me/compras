@@ -11,6 +11,8 @@ class LicitationProcess < Compras::Model
                   :disqualify_by_documentation_problem, :disqualify_by_maximum_value,
                   :consider_law_of_proposals, :price_registration, :status
 
+  auto_increment :process, :by => :year
+
   attr_readonly :process, :year, :licitation_number
 
   attr_modal :process, :year, :process_date, :licitation_number, :administrative_process_id
@@ -138,10 +140,6 @@ class LicitationProcess < Compras::Model
     update_column :status, status
   end
 
-  def next_process
-    last_process_of_self_year.succ
-  end
-
   def next_licitation_number
     last_licitation_number_of_self_year_and_modality.succ
   end
@@ -229,10 +227,6 @@ class LicitationProcess < Compras::Model
     end
 
     errors.add(:administrative_process, :already_have_a_licitation_process)
-  end
-
-  def last_process_of_self_year
-    self.class.where { self.year.eq(year) }.maximum(:process).to_i
   end
 
   def last_licitation_number_of_self_year_and_modality
