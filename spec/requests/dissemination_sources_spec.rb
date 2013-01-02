@@ -9,56 +9,56 @@ feature "DisseminationSources" do
   scenario 'create a new dissemination_source' do
     CommunicationSource.make!(:jornal_municipal)
 
-    navigate 'Comum > Legislação > Fontes de Divulgação'
+    navigate 'Comum > Legislação > Meios de Divulgação'
 
-    click_link 'Criar Fonte de Divulgação'
+    click_link 'Criar Meio de Divulgação'
 
     fill_in 'Descrição', :with => 'Jornal Oficial do Município'
-    fill_modal 'Fonte de comunicação', :with => 'Jornal de Circulação Municipal', :field => 'Descrição'
+    fill_modal 'Tipo do meio de divulgação', :with => 'Jornal de Circulação Municipal', :field => 'Descrição'
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Fonte de Divulgação criada com sucesso.'
+    expect(page).to have_notice 'Meio de Divulgação criada com sucesso.'
 
     click_link 'Jornal Oficial do Município'
 
     expect(page).to have_field 'Descrição', :with => 'Jornal Oficial do Município'
-    expect(page).to have_field 'Fonte de comunicação', :with => 'Jornal de Circulação Municipal'
+    expect(page).to have_field 'Tipo do meio de divulgação', :with => 'Jornal de Circulação Municipal'
   end
 
   scenario 'update an existent dissemination_source' do
     DisseminationSource.make!(:jornal_municipal)
     CommunicationSource.make!(:jornal_estadual)
 
-    navigate 'Comum > Legislação > Fontes de Divulgação'
+    navigate 'Comum > Legislação > Meios de Divulgação'
 
     click_link 'Jornal Oficial do Município'
 
     fill_in 'Descrição', :with => 'Jornal Não Oficial do Município'
 
-    fill_modal 'Fonte de comunicação', :with => 'Jornal de Circulação Estadual', :field => 'Descrição'
+    fill_modal 'Tipo do meio de divulgação', :with => 'Jornal de Circulação Estadual', :field => 'Descrição'
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Fonte de Divulgação editada com sucesso.'
+    expect(page).to have_notice 'Meio de Divulgação editada com sucesso.'
 
     click_link 'Jornal Não Oficial do Município'
 
     expect(page).to have_field 'Descrição', :with => 'Jornal Não Oficial do Município'
 
-    expect(page).to have_field 'Fonte de comunicação', :with => 'Jornal de Circulação Estadual'
+    expect(page).to have_field 'Tipo do meio de divulgação', :with => 'Jornal de Circulação Estadual'
   end
 
   scenario 'destroy an existent dissemination_source' do
     DisseminationSource.make!(:jornal_municipal)
 
-    navigate 'Comum > Legislação > Fontes de Divulgação'
+    navigate 'Comum > Legislação > Meios de Divulgação'
 
     click_link 'Jornal Oficial do Município'
 
     click_link 'Apagar'
 
-    expect(page).to have_notice 'Fonte de Divulgação apagada com sucesso.'
+    expect(page).to have_notice 'Meio de Divulgação apagada com sucesso.'
 
     expect(page).to_not have_content 'Jornal Oficial do Município'
     expect(page).to_not have_content 'Jornal de Circulação Municipal'
@@ -67,25 +67,25 @@ feature "DisseminationSources" do
   scenario 'cannot destroy an existent dissemination_source with regulatory_act relationship' do
     RegulatoryAct.make!(:sopa)
 
-    navigate 'Comum > Legislação > Fontes de Divulgação'
+    navigate 'Comum > Legislação > Meios de Divulgação'
 
     click_link 'Jornal Oficial do Bairro'
 
     click_link 'Apagar'
 
-    expect(page).to_not have_notice 'Fonte de Divulgação apagada com sucesso.'
+    expect(page).to_not have_notice 'Meio de Divulgação apagada com sucesso.'
 
-    expect(page).to have_alert 'Fonte de Divulgação não pode ser apagada.'
+    expect(page).to have_alert 'Meio de Divulgação não pode ser apagada.'
   end
 
   scenario 'index with columns at the index' do
     DisseminationSource.make!(:jornal_municipal)
 
-    navigate 'Comum > Legislação > Fontes de Divulgação'
+    navigate 'Comum > Legislação > Meios de Divulgação'
 
     within_records do
       expect(page).to have_content 'Descrição'
-      expect(page).to have_content 'Fonte de comunicação'
+      expect(page).to have_content 'Tipo do meio de divulgação'
 
       within 'tbody tr' do
         expect(page).to have_content 'Jornal Oficial do Município'

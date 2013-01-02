@@ -2,10 +2,10 @@ pt-BR:
   activerecord:
     models:
       dissemination_source:
-        one: "Fonte de Divulgação"
-        other: "Fontes de Divulgação"
+        one: "Meio de Divulgação"
+        other: "Meios de Divulgação"
 
     attributes:
       dissemination_source:
         description: "Descrição"
-        communication_source: "Fonte de comunicação"
+        communication_source: "Tipo do meio de divulgação"

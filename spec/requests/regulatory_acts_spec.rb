@@ -31,8 +31,8 @@ feature "RegulatoryActs" do
       fill_in 'Valor autorizado da dívida', :with => '7.000,00'
     end
 
-    within_tab 'Fontes de divulgação' do
-      fill_modal 'Fonte de divulgação', :with => 'Jornal Oficial do Município', :field => 'Descrição'
+    within_tab 'Meios de divulgação' do
+      fill_modal 'Meio de divulgação', :with => 'Jornal Oficial do Município', :field => 'Descrição'
     end
 
     click_button 'Salvar'
@@ -59,7 +59,7 @@ feature "RegulatoryActs" do
       expect(page).to have_field 'Valor autorizado da dívida', :with => '7.000,00'
     end
 
-    within_tab 'Fontes de divulgação' do
+    within_tab 'Meios de divulgação' do
       expect(page).to have_content 'Jornal Oficial do Município'
     end
   end
@@ -93,8 +93,8 @@ feature "RegulatoryActs" do
       fill_in 'Valor autorizado da dívida', :with => '17.000,00'
     end
 
-    within_tab 'Fontes de divulgação' do
-      fill_modal 'Fonte de divulgação', :with => 'Jornal Oficial do Bairro', :field => 'Descrição'
+    within_tab 'Meios de divulgação' do
+      fill_modal 'Meio de divulgação', :with => 'Jornal Oficial do Bairro', :field => 'Descrição'
     end
 
     click_button 'Salvar'
@@ -121,7 +121,7 @@ feature "RegulatoryActs" do
       expect(page).to have_field 'Valor autorizado da dívida', :with => '17.000,00'
     end
 
-    within_tab 'Fontes de divulgação' do
+    within_tab 'Meios de divulgação' do
       expect(page).to have_content 'Jornal Oficial do Bairro'
     end
   end
@@ -147,7 +147,7 @@ feature "RegulatoryActs" do
 
     click_link 'Lei'
 
-    within_tab 'Fontes de divulgação' do
+    within_tab 'Meios de divulgação' do
       click_button 'Remover'
     end
 
@@ -157,7 +157,7 @@ feature "RegulatoryActs" do
 
     click_link 'Lei'
 
-    within_tab 'Fontes de divulgação' do
+    within_tab 'Meios de divulgação' do
       expect(page).to_not have_content 'Jornal Oficial do Bairro'
     end
   end

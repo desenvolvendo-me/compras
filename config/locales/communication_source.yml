@@ -2,8 +2,8 @@ pt-BR:
   activerecord:
     models:
       communication_source:
-        one: "Fonte de Comunicação"
-        other: "Fontes de Comunicação"
+        one: "Tipo do Meio de Divulgação"
+        other: "Tipos do Meio de Divulgação"
 
     attributes:
       communication_source:
