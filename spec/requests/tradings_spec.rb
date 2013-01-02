@@ -277,7 +277,7 @@ feature "Tradings" do
     expect(page).to have_content "Editar 1/2012"
   end
 
-  scenario "trading session with negociation and closing stage" do
+  scenario "trading session with negotiation and closing stage" do
     TradingConfiguration.make!(:pregao)
     trading_item = TradingItem.make!(:item_pregao_presencial,
       :minimum_reduction_value => 2.0)
