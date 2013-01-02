@@ -337,6 +337,8 @@ feature "Tradings" do
     choose "Declinou"
     click_button "Salvar"
 
+    expect(page).to have_link 'Desfazer última oferta'
+
     within_records do
       within("tbody tr:nth-child(1)") do
         expect(page).to have_content "Wenderson Malheiros"
@@ -382,6 +384,27 @@ feature "Tradings" do
 
     fill_in "Valor da proposta", :with => "91,50"
     click_button "Salvar"
+
+    expect(page).to_not have_link 'Desfazer última oferta'
+    expect(page).to have_link 'Desfazer última negociação'
+
+    click_link 'Desfazer última negociação'
+
+    expect(page).to have_link 'Desfazer última oferta'
+    expect(page).to_not have_link 'Desfazer última negociação'
+
+    click_link "Iniciar Negociação"
+
+    expect(page).to have_content 'Negociação'
+    expect(page).to have_disabled_field "Etapa"
+    expect(page).to have_field "Etapa", :with => "Negociação"
+    expect(page).to have_field "Licitante", :with => "Nohup"
+    expect(page).to have_field "Menor preço", :with => "92,00"
+    expect(page).to have_field "Valor limite", :with => "91,99"
+
+    fill_in "Valor da proposta", :with => "91,50"
+
+    click_button 'Salvar'
 
     within_records do
       within("tbody tr:nth-child(1)") do

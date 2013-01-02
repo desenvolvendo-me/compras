@@ -22,3 +22,5 @@ pt-BR:
       must_have_reduction: "O item não possui redução mínima cadastrada."
       must_be_open: "O item já foi encerrado"
       there_is_an_pending_item: "Encerre o item (%{trading_item}) antes de iniciar outro"
+      cannot_undo_last_offer_when_trading_items_is_closed: "Não pode desfazer última oferta quando o item do pregão está fechado"
+      cannot_undo_last_negotiation_when_trading_items_is_closed: "Não pode desfazer última negociação quando o item do pregão está fechado"

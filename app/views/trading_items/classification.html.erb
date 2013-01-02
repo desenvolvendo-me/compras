@@ -89,5 +89,11 @@
     <%= link_to "Iniciar Negociação", new_trading_item_bid_negotiation_path(:trading_item_id => resource.id), :class => "button primary" %>
   <% end %>
 
-  <%= link_to 'Desfazer última oferta', trading_item_bid_round_of_bid_path(resource.last_bid, :trading_item_id => resource.id), :method => 'delete',:class => 'button' %>
+  <% if resource.decorator.any_bid_at_negotiation? %>
+    <%= link_to 'Desfazer última negociação', trading_item_bid_negotiation_path(resource.last_bid, :trading_item_id => resource.id),
+        :method => 'delete',:class => 'button', 'data-disabled' => resource.decorator.cannot_undo_last_negotiation_message %>
+  <% else %>
+    <%= link_to 'Desfazer última oferta', trading_item_bid_round_of_bid_path(resource.last_bid, :trading_item_id => resource.id),
+        :method => 'delete', :class => 'button', 'data-disabled' => resource.decorator.cannot_undo_last_offer_message %>
+  <% end %>
 </div>

@@ -117,6 +117,33 @@ describe TradingItemBidNegotiationsController do
         expect(assigns(:trading_item_bid).round).to eq 0
       end
     end
+
+    describe 'DELETE #destroy' do
+      let(:negotiation) do
+        TradingItemBid.create!(
+          :round => 0,
+          :trading_item_id => trading_item.id,
+          :bidder_id => bidder1.id,
+          :amount => 84.0,
+          :stage => TradingItemBidStage::NEGOTIATION,
+          :status => TradingItemBidStatus::WITH_PROPOSAL)
+      end
+
+      it 'should destroy' do
+        delete :destroy, :id => negotiation.id, :trading_item_id => trading_item.id
+
+        expect(response).to redirect_to(classification_trading_item_path(trading_item))
+      end
+
+      it 'should returns 404 when item is closed' do
+        trading_item.close!
+
+        delete :destroy, :id => negotiation.id, :trading_item_id => trading_item.id
+
+        expect(response.code).to eq '404'
+        expect(response.body).to match(/A página que você procura não existe/)
+      end
+    end
   end
 
   context 'at another stage' do
@@ -138,6 +165,22 @@ describe TradingItemBidNegotiationsController do
 
         expect(response.code).to eq '404'
         expect(response.body).to match /A página que você procura não existe/
+      end
+    end
+
+    describe 'DELETE #destroy' do
+      let(:bid) do
+        TradingItemBid.create!(
+          :round => 0,
+          :trading_item_id => trading_item.id,
+          :bidder_id => trading.bidders.first.id,
+          :amount => 100.0,
+          :stage => TradingItemBidStage::PROPOSALS,
+          :status => TradingItemBidStatus::WITH_PROPOSAL)
+      end
+
+      it 'should return 404' do
+        expect { delete :destroy, :id => bid.id, :trading_item_id => trading_item.id }.to raise_exception ActiveRecord::RecordNotFound
       end
     end
   end

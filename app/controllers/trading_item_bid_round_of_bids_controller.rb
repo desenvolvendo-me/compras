@@ -74,7 +74,7 @@ class TradingItemBidRoundOfBidsController < CrudController
 
     bid = TradingItemBid.find(params[:id], :conditions => { :stage => TradingItemBidStage::ROUND_OF_BIDS })
 
-    unless bid == @parent.last_bid
+    if bid != @parent.last_bid || @parent.closed?
       render 'public/404', :formats => [:html], :status => 404, :layout => false
     end
   end

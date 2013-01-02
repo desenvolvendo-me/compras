@@ -2,9 +2,10 @@ class TradingItemBidNegotiationsController < CrudController
   defaults :resource_class => TradingItemBid, :instance_name => 'trading_item_bid',
            :collection_name => "trading_item_bids"
 
-  actions :new, :create
+  actions :new, :create, :destroy
 
   before_filter :deny_when_on_another_stage, :only => [:new, :create]
+  before_filter :block_destroy_when_not_last, :only => [:destroy]
 
   def new
     object = build_resource
@@ -19,6 +20,10 @@ class TradingItemBidNegotiationsController < CrudController
 
   def create
     create! { @parent.decorator.current_stage_path }
+  end
+
+  def destroy
+    destroy!(:notice => '') { classification_trading_item_path(@parent) }
   end
 
   protected
@@ -57,5 +62,15 @@ class TradingItemBidNegotiationsController < CrudController
     return if TradingItemBidStageCalculator.new(@parent).stage_of_negotiation?
 
     render 'public/404', :formats => [:html], :status => 404, :layout => false
+  end
+
+  def block_destroy_when_not_last
+    get_parent
+
+    bid = TradingItemBid.find(params[:id], :conditions => { :stage => TradingItemBidStage::NEGOTIATION })
+
+    if bid != @parent.last_bid || @parent.closed?
+      render 'public/404', :formats => [:html], :status => 404, :layout => false
+    end
   end
 end

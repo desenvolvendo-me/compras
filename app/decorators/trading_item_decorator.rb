@@ -39,6 +39,22 @@ class TradingItemDecorator
     index.succ - component.bidders.disabled.count
   end
 
+  def any_bid_at_negotiation?
+    trading_item_bids.at_stage_of_negotiation.any?
+  end
+
+  def cannot_undo_last_offer_message
+    if closed?
+      t('trading_item.messages.cannot_undo_last_offer_when_trading_items_is_closed')
+    end
+  end
+
+  def cannot_undo_last_negotiation_message
+    if closed?
+      t('trading_item.messages.cannot_undo_last_negotiation_when_trading_items_is_closed')
+    end
+  end
+
   private
 
   def negotiation_or_classification_path(stage_calculator)

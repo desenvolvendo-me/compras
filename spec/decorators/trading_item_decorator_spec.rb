@@ -281,4 +281,86 @@ describe TradingItemDecorator do
       end
     end
   end
+
+  describe '#any_bid_at_negotiation?' do
+    let(:trading_item_bids) { double(:bids) }
+
+    context 'when there is any bid at round of negotiation' do
+      before do
+        trading_item_bids.stub(:at_stage_of_negotiation).and_return(['bid'])
+        subject.stub(:trading_item_bids).and_return(trading_item_bids)
+      end
+
+      it 'should be true' do
+        expect(subject.any_bid_at_negotiation?).to be_true
+      end
+    end
+
+    context 'when there is no one bid at round of negotiation' do
+      before do
+        trading_item_bids.stub(:at_stage_of_negotiation).and_return([])
+        subject.stub(:trading_item_bids).and_return(trading_item_bids)
+      end
+
+      it 'should be false' do
+        expect(subject.any_bid_at_negotiation?).to be_false
+      end
+    end
+  end
+
+  describe '#cannot_undo_last_offer_message' do
+    context  'when item is closed' do
+      before do
+        component.stub(:closed?).and_return(true)
+
+        I18n.backend.store_translations 'pt-BR', :trading_item => {
+            :messages => {
+              :cannot_undo_last_offer_when_trading_items_is_closed => 'não pode desfazer'
+            }
+          }
+      end
+
+      it 'should return message' do
+        expect(subject.cannot_undo_last_offer_message).to eq 'não pode desfazer'
+      end
+    end
+
+    context 'when item is not closed' do
+      before do
+        component.stub(:closed?).and_return(false)
+      end
+
+      it 'should retuns nil' do
+        expect(subject.cannot_undo_last_offer_message).to be_nil
+      end
+    end
+  end
+
+  describe '#cannot_undo_last_negotiation_message' do
+    context  'when item is closed' do
+      before do
+        component.stub(:closed?).and_return(true)
+
+        I18n.backend.store_translations 'pt-BR', :trading_item => {
+            :messages => {
+              :cannot_undo_last_negotiation_when_trading_items_is_closed => 'não pode desfazer'
+            }
+          }
+      end
+
+      it 'should return message' do
+        expect(subject.cannot_undo_last_negotiation_message).to eq 'não pode desfazer'
+      end
+    end
+
+    context 'when item is not closed' do
+      before do
+        component.stub(:closed?).and_return(false)
+      end
+
+      it 'should retuns nil' do
+        expect(subject.cannot_undo_last_negotiation_message).to be_nil
+      end
+    end
+  end
 end
