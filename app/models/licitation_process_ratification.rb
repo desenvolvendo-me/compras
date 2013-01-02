@@ -13,6 +13,8 @@ class LicitationProcessRatification < Compras::Model
   has_many :licitation_process_ratification_items, :dependent => :destroy
   has_many :bidder_proposals, :through => :licitation_process_ratification_items
 
+  has_one :administrative_process, :through => :licitation_process
+
   accepts_nested_attributes_for :licitation_process_ratification_items, :allow_destroy => true
 
   delegate :process, :administrative_process_licitation_modality,

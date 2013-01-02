@@ -30,6 +30,7 @@ describe LicitationProcessRatificationsController do
 
       LicitationProcessRatification.any_instance.should_receive(:save).and_return(true)
       LicitationProcess.any_instance.should_receive(:update_status).with(LicitationProcessStatus::APPROVED)
+      AdministrativeProcess.any_instance.should_receive(:update_status).with(AdministrativeProcessStatus::APPROVED)
 
       post :create, :licitation_process_ratification => {
         :licitation_process_id => licitation_process.id }

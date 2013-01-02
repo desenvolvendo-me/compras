@@ -14,6 +14,7 @@ describe LicitationProcessRatification do
 
   it { should have_many(:licitation_process_ratification_items).dependent(:destroy) }
   it { should have_many(:bidder_proposals) }
+  it { should have_one(:administrative_process).through(:licitation_process) }
 
   it { should validate_presence_of :licitation_process }
   it { should validate_presence_of :ratification_date }

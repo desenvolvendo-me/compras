@@ -71,6 +71,14 @@ feature "LicitationProcessRatifications" do
 
     expect(page).to have_field 'Data da homologação', :with => "#{I18n.l(Date.current)}"
     expect(page).to have_field 'Data da adjudicação', :with => "#{I18n.l(Date.current)}"
+
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+     expect(page).to have_select 'Status do processo administrativo', :selected => "Homologado/Encerrado"
   end
 
   scenario 'updating a ratification' do
