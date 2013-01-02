@@ -16,607 +16,6 @@ feature "LicitationProcesses" do
     sign_in
   end
 
-  scenario 'generate calculation and disable a bidder by maximum value' do
-    licitation_process = LicitationProcess.make!(:valor_maximo_ultrapassado, :disqualify_by_maximum_value => true)
-    LicitationProcessLot.make!(:lote, :licitation_process => licitation_process,
-                               :administrative_process_budget_allocation_items => [licitation_process.items.first])
-
-    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
-
-    within_records do
-      page.find('a').click
-    end
-
-    expect(page).to_not have_button 'Relatório'
-
-    click_button 'Apurar'
-
-    expect(page).to have_content 'Processo Licitatório 1/2012'
-
-    expect(page).to have_content 'Apuração: Menor preço por lote'
-
-    expect(page).to have_content 'Nohup'
-
-    within '.classification-1-0-0' do
-      expect(page).to have_content 'Antivirus'
-      expect(page).to have_content '9,10'
-      expect(page).to have_content '18,20'
-      expect(page).to have_content 'Ganhou'
-    end
-
-    expect(page).to_not have_content 'IBM'
-  end
-
-  scenario 'generate calculation with equalized result' do
-    licitation_process = LicitationProcess.make!(:apuracao_global_empatou)
-
-    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
-
-    within_records do
-      page.find('a').click
-    end
-
-    expect(page).to_not have_button 'Relatório'
-
-    click_button 'Apurar'
-
-    expect(page).to have_content 'Processo Licitatório 1/2012'
-
-    expect(page).to have_content 'Apuração: Menor preço global'
-
-    expect(page).to have_content 'Gabriel Sobrinho'
-
-    within '.classification-1-0' do
-      expect(page).to have_content 'Antivirus'
-      expect(page).to have_content '10,00'
-      expect(page).to have_content '20,00'
-      expect(page).to have_content 'Empatou'
-    end
-
-    expect(page).to have_content 'Wenderson Malheiros'
-
-    within '.classification-2-0' do
-      expect(page).to have_content 'Antivirus'
-      expect(page).to have_content '10,00'
-      expect(page).to have_content '20,00'
-      expect(page).to have_content 'Empatou'
-    end
-  end
-
-  scenario 'generate calculation with companies without documents and considering law of proposals' do
-    licitation_process = LicitationProcess.make!(:apuracao_global_sem_documentos, :consider_law_of_proposals => true,
-                                                 :disqualify_by_documentation_problem => true)
-
-    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
-
-    within_records do
-      page.find('a').click
-    end
-
-    expect(page).to_not have_button 'Relatório'
-
-    click_button 'Apurar'
-
-    expect(page).to have_content 'Processo Licitatório 1/2012'
-
-    expect(page).to have_content 'Apuração: Menor preço global'
-
-    expect(page).to have_content 'Nohup'
-
-    within '.classification-2-0' do
-      expect(page).to have_content 'Antivirus'
-      expect(page).to have_content '9,10'
-      expect(page).to have_content '18,20'
-      expect(page).to have_content 'Ganhou'
-    end
-
-    expect(page).to_not have_content 'IBM'
-  end
-
-  scenario 'generate calculation with companies without documents' do
-    licitation_process = LicitationProcess.make!(:apuracao_global_sem_documentos, :consider_law_of_proposals => false,
-                                                 :disqualify_by_documentation_problem => true)
-
-    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
-
-    within_records do
-      page.find('a').click
-    end
-
-    expect(page).to_not have_button 'Relatório'
-
-    click_button 'Apurar'
-
-    expect(page).to have_content 'Processo Licitatório 1/2012'
-
-    expect(page).to have_content 'Apuração: Menor preço global'
-
-    expect(page).to_not have_content 'Nohup'
-
-    expect(page).to_not have_content 'IBM'
-  end
-
-  scenario 'generate calculation between a small company and a big company without consider law of proposals' do
-    licitation_process = LicitationProcess.make!(:apuracao_global_small_company, :consider_law_of_proposals => false)
-
-    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
-
-    within_records do
-      page.find('a').click
-    end
-
-    expect(page).to_not have_button 'Relatório'
-
-    click_button 'Apurar'
-
-    expect(page).to have_content 'Processo Licitatório 1/2012'
-
-    expect(page).to have_content 'Apuração: Menor preço global'
-
-    expect(page).to have_content 'Nohup'
-
-    within '.classification-2-0' do
-      expect(page).to have_content 'Antivirus'
-      expect(page).to have_content '9,10'
-      expect(page).to have_content '18,20'
-      expect(page).to have_content 'Perdeu'
-    end
-
-    expect(page).to have_content 'IBM'
-
-    within '.classification-1-0' do
-      expect(page).to have_content 'Antivirus'
-      expect(page).to have_content '9,00'
-      expect(page).to have_content '18,00'
-      expect(page).to have_content 'Ganhou'
-    end
-  end
-
-  scenario 'generate calculation between a small company and a big company and consider law of proposals' do
-    licitation_process = LicitationProcess.make!(:apuracao_global_small_company_2, :consider_law_of_proposals => true)
-
-    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
-
-    within_records do
-      page.find('a').click
-    end
-
-    expect(page).to_not have_button 'Relatório'
-
-    click_button 'Apurar'
-
-    expect(page).to have_content 'Processo Licitatório 1/2012'
-
-    expect(page).to have_content 'Apuração: Menor preço global'
-
-    expect(page).to have_content 'Nohup'
-
-    within '.classification-1-0' do
-      expect(page).to have_content 'Antivirus'
-      expect(page).to have_content '9,00'
-      expect(page).to have_content '18,00'
-      expect(page).to have_content 'Ganhou'
-    end
-
-    expect(page).to have_content 'IBM'
-
-    within '.classification-2-0' do
-      expect(page).to have_content 'Antivirus'
-      expect(page).to have_content '9,10'
-      expect(page).to have_content '18,20'
-      expect(page).to have_content 'Perdeu'
-    end
-  end
-
-  scenario 'generate calculation between a small company and a big company and consider law of proposals and make a new proposal' do
-    licitation_process = LicitationProcess.make!(:apuracao_global_small_company, :consider_law_of_proposals => true)
-
-    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
-
-    within_records do
-      page.find('a').click
-    end
-
-    expect(page).to_not have_button 'Relatório'
-
-    click_button 'Apurar'
-
-    expect(page).to have_content 'Processo Licitatório 1/2012'
-
-    expect(page).to have_content 'Apuração: Menor preço global'
-
-    expect(page).to have_content 'Nohup'
-
-    within '.classification-2-0' do
-      expect(page).to have_content 'Antivirus'
-      expect(page).to have_content '9,10'
-      expect(page).to have_content '18,20'
-      expect(page).to have_content 'Empatou'
-    end
-
-    expect(page).to have_content 'IBM'
-
-    within '.classification-1-0' do
-      expect(page).to have_content 'Antivirus'
-      expect(page).to have_content '9,00'
-      expect(page).to have_content '18,00'
-      expect(page).to have_content 'Empatou'
-    end
-
-    click_link 'voltar'
-
-    click_link 'Licitantes'
-
-    click_link 'Nohup'
-
-    within_tab 'Propostas' do
-      fill_in 'Preço unitário', :with => '8,99'
-    end
-
-    click_button 'Salvar'
-
-    expect(page).to have_notice 'Licitante editado com sucesso.'
-
-    click_link 'Voltar ao processo licitatório'
-
-    click_button 'Apurar'
-
-    expect(page).to have_content 'Processo Licitatório 1/2012'
-
-    expect(page).to have_content 'Apuração: Menor preço global'
-
-    expect(page).to have_content 'Nohup'
-
-    within '.classification-1-0' do
-      expect(page).to have_content 'Antivirus'
-      expect(page).to have_content '8,99'
-      expect(page).to have_content '17,98'
-      expect(page).to have_content 'Ganhou'
-    end
-
-    expect(page).to have_content 'IBM'
-
-    within '.classification-2-0' do
-      expect(page).to have_content 'Antivirus'
-      expect(page).to have_content '9,00'
-      expect(page).to have_content '18,00'
-      expect(page).to have_content 'Perdeu'
-    end
-  end
-
-  scenario 'generate calculation between a small company and a big company and dont make a new proposal' do
-    licitation_process = LicitationProcess.make!(:apuracao_global_small_company, :consider_law_of_proposals => true)
-
-    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
-
-    within_records do
-      page.find('a').click
-    end
-
-    expect(page).to_not have_button 'Relatório'
-
-    click_button 'Apurar'
-
-    expect(page).to have_content 'Processo Licitatório 1/2012'
-
-    expect(page).to have_content 'Apuração: Menor preço global'
-
-    expect(page).to have_content 'Nohup'
-
-    within '.classification-2-0' do
-      expect(page).to have_content 'Antivirus'
-      expect(page).to have_content '9,10'
-      expect(page).to have_content '18,20'
-      expect(page).to have_content 'Empatou'
-    end
-
-    expect(page).to have_content 'IBM'
-
-    within '.classification-1-0' do
-      expect(page).to have_content 'Antivirus'
-      expect(page).to have_content '9,00'
-      expect(page).to have_content '18,00'
-      expect(page).to have_content 'Empatou'
-    end
-
-    click_link 'voltar'
-
-    click_link 'Licitantes'
-
-    click_link 'Nohup'
-
-    uncheck 'Apresentará nova proposta em caso de empate'
-
-    click_button 'Salvar'
-
-    expect(page).to have_notice 'Licitante editado com sucesso.'
-
-    click_link 'Voltar ao processo licitatório'
-
-    click_button 'Apurar'
-
-    expect(page).to have_content 'Processo Licitatório 1/2012'
-
-    expect(page).to have_content 'Apuração: Menor preço global'
-
-    expect(page).to have_content 'Nohup'
-
-    within '.classification-1-0' do
-      expect(page).to have_content 'Antivirus'
-      expect(page).to have_content '9,00'
-      expect(page).to have_content '18,00'
-      expect(page).to have_content 'Ganhou'
-    end
-
-    expect(page).to have_content 'IBM'
-
-    within '.classification-2-0' do
-      expect(page).to have_content 'Antivirus'
-      expect(page).to have_content '9,10'
-      expect(page).to have_content '18,20'
-      expect(page).to have_content 'Perdeu'
-    end
-  end
-
-  scenario 'generate calculation when type of calculation is global' do
-    licitation_process = LicitationProcess.make!(:apuracao_global)
-
-    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
-
-    within_records do
-      page.find('a').click
-    end
-
-    expect(page).to_not have_button 'Relatório'
-
-    click_button 'Apurar'
-
-    expect(page).to have_content 'Processo Licitatório 1/2012'
-
-    expect(page).to have_content 'Apuração: Menor preço global'
-
-    expect(page).to have_content 'Gabriel Sobrinho'
-
-    within '.classification-1-0' do
-      expect(page).to have_content 'Antivirus'
-      expect(page).to have_content '9,00'
-      expect(page).to have_content '18,00'
-      expect(page).to have_content 'Ganhou'
-    end
-
-    expect(page).to have_content 'Wenderson Malheiros'
-
-    within '.classification-2-0' do
-      expect(page).to have_content 'Antivirus'
-      expect(page).to have_content '10,00'
-      expect(page).to have_content '20,00'
-      expect(page).to have_content 'Perdeu'
-    end
-
-    click_link 'voltar'
-
-    click_link 'Licitantes'
-
-    click_link 'Wenderson Malheiros'
-
-    within_tab 'Propostas' do
-      expect(page).to have_select 'Situação', :selected => 'Perdeu'
-      expect(page).to have_field 'Classificação', :with => '2'
-    end
-
-    click_link 'Voltar'
-
-    click_link 'Gabriel Sobrinho'
-
-    within_tab 'Propostas' do
-      expect(page).to have_select 'Situação', :selected => 'Ganhou'
-      expect(page).to have_field 'Classificação', :with => '1'
-    end
-  end
-
-  scenario 'generate calculation when type of calculation is by lot' do
-    licitation_process = LicitationProcess.make!(:apuracao_por_lote)
-    LicitationProcessLot.make!(:lote, :licitation_process => licitation_process,
-                               :administrative_process_budget_allocation_items => [licitation_process.items.first])
-    LicitationProcessLot.make!(:lote_antivirus, :licitation_process => licitation_process,
-                               :administrative_process_budget_allocation_items => [licitation_process.items.second])
-
-    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
-
-    within_records do
-      page.find('a').click
-    end
-
-    click_button 'Apurar'
-
-    expect(page).to have_content 'Processo Licitatório 1/2012'
-
-    expect(page).to have_content 'Apuração: Menor preço por lote'
-
-    expect(page).to have_content 'Wenderson Malheiros'
-
-    within 'table.records:nth-of-type(1)' do
-      within 'tbody tr:nth-child(1)' do
-        expect(page).to have_content 'Antivirus'
-        expect(page).to have_content '10,00'
-        expect(page).to have_content '20,00'
-        expect(page).to have_content 'Perdeu'
-      end
-
-      within 'tbody tr:nth-child(2)' do
-        expect(page).to have_content 'Arame comum'
-        expect(page).to have_content '1'
-        expect(page).to have_content '9,00'
-        expect(page).to have_content 'Ganhou'
-      end
-    end
-
-    expect(page).to have_content 'Gabriel Sobrinho'
-
-    within 'table.records:nth-of-type(2)' do
-      within 'tbody tr:nth-child(1)' do
-        expect(page).to have_content 'Antivirus'
-        expect(page).to have_content '9,00'
-        expect(page).to have_content '18,00'
-        expect(page).to have_content 'Ganhou'
-      end
-
-      within 'tbody tr:nth-child(2)' do
-        expect(page).to have_content 'Arame comum'
-        expect(page).to have_content '1'
-        expect(page).to have_content '10,00'
-        expect(page).to have_content 'Perdeu'
-      end
-    end
-
-    click_link 'voltar'
-
-    click_link 'Licitantes'
-
-    click_link 'Wenderson Malheiros'
-
-    within_tab 'Propostas' do
-      within_tab 'Lote 1' do
-        expect(page).to have_select 'Situação', :selected => 'Perdeu'
-        expect(page).to have_field 'Classificação', :with => '2'
-      end
-
-      within_tab 'Lote 2' do
-        expect(page).to have_select 'Situação', :selected => 'Ganhou'
-        expect(page).to have_field 'Classificação', :with => '1'
-      end
-    end
-
-    click_link 'Voltar'
-
-    click_link 'Gabriel Sobrinho'
-
-    within_tab 'Propostas' do
-      within_tab 'Lote 1' do
-        expect(page).to have_select 'Situação', :selected => 'Ganhou'
-        expect(page).to have_field 'Classificação', :with => '1'
-      end
-
-      within_tab 'Lote 2' do
-        expect(page).to have_select 'Situação', :selected => 'Perdeu'
-        expect(page).to have_field 'Classificação', :with => '2'
-      end
-    end
-  end
-
-  scenario 'generate calculation when type of calculation is by item' do
-    licitation_process = LicitationProcess.make!(:apuracao_por_itens)
-
-    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
-
-    within_records do
-      page.find('a').click
-    end
-
-    click_button 'Apurar'
-
-    expect(page).to have_content 'Processo Licitatório 1/2012'
-
-    expect(page).to have_content 'Apuração: Menor preço total por item'
-
-    expect(page).to have_content 'Wenderson Malheiros'
-
-    within 'table.records:nth-of-type(1)' do
-      within 'tbody tr:nth-child(1)' do
-        expect(page).to have_content 'Antivirus'
-        expect(page).to have_content 'UN'
-        expect(page).to have_content '2'
-        expect(page).to have_content '10,00'
-        expect(page).to have_content '20,00'
-        expect(page).to have_content 'Perdeu'
-      end
-
-      within 'tbody tr:nth-child(2)' do
-        expect(page).to have_content 'Arame comum'
-        expect(page).to have_content 'UN'
-        expect(page).to have_content '1'
-        expect(page).to have_content '9,00'
-        expect(page).to have_content 'Ganhou'
-      end
-    end
-
-    expect(page).to have_content 'Gabriel Sobrinho'
-
-    within 'table.records:nth-of-type(2)' do
-      within 'tbody tr:nth-child(1)' do
-        expect(page).to have_content 'Antivirus'
-        expect(page).to have_content 'UN'
-        expect(page).to have_content '2'
-        expect(page).to have_content '9,00'
-        expect(page).to have_content '18,00'
-        expect(page).to have_content 'Ganhou'
-      end
-
-      within 'tbody tr:nth-child(2)' do
-        expect(page).to have_content 'Arame comum'
-        expect(page).to have_content 'UN'
-        expect(page).to have_content '1'
-        expect(page).to have_content '10,00'
-        expect(page).to have_content '10,00'
-        expect(page).to have_content 'Perdeu'
-      end
-    end
-
-    click_link 'voltar'
-
-    click_link 'Relatório'
-
-    expect(page).to have_content 'Processo Licitatório 1/2012'
-
-    click_link 'voltar'
-
-    click_link 'Licitantes'
-
-    click_link 'Wenderson Malheiros'
-
-    within_tab 'Propostas' do
-      expect(page).to have_select 'Situação', :selected => 'Perdeu'
-      expect(page).to have_field 'Classificação', :with => '2'
-    end
-
-    click_link 'Voltar'
-
-    click_link 'Gabriel Sobrinho'
-
-    within_tab 'Propostas' do
-      expect(page).to have_select 'Situação', :selected => 'Ganhou'
-      expect(page).to have_field 'Classificação', :with => '1'
-    end
-  end
-
-  scenario 'button Administrative Process should take user to the administrative process view' do
-    LicitationProcess.make!(:processo_licitatorio)
-
-    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
-    within_records do
-      page.find('a').click
-    end
-    click_link 'Processo Administrativo'
-
-    within_tab 'Principal' do
-      expect(page).to have_field 'Processo', :with => '1'
-      expect(page).to have_field 'Ano', :with => '2012'
-      expect(page).to have_field 'Número do protocolo', :with => '00088/2012'
-    end
-  end
-
-  scenario "button Back to Listings should take user to licitation_process#index" do
-    licitation_process = LicitationProcess.make!(:processo_licitatorio)
-
-    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
-    within_records do
-      page.find('a').click
-    end
-    click_link 'Voltar à listagem'
-
-    expect(page).to have_link '1/2012'
-  end
-
   scenario 'create a new licitation_process' do
     administrative_process = AdministrativeProcess.make!(:compra_de_cadeiras)
     budget_allocation = administrative_process.administrative_process_budget_allocations.first.budget_allocation
@@ -1378,7 +777,7 @@ feature "LicitationProcesses" do
   end
 
   scenario 'index with columns at the index' do
-    LicitationProcess.make!(:processo_licitatorio)
+    LicitationProcess.make!(:processo_licitatorio, :status => LicitationProcessStatus::IN_PROGRESS)
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
@@ -1388,13 +787,616 @@ feature "LicitationProcesses" do
       expect(page).to have_content 'Modalidade'
       expect(page).to have_content 'Tipo de objeto'
       expect(page).to have_content 'Data da abertura dos envelopes'
+      expect(page).to have_content 'Status'
 
       within 'tbody tr' do
         expect(page).to have_content '1/2012'
         expect(page).to have_content 'Privada'
         expect(page).to have_content 'Compras e serviços'
         expect(page).to have_content I18n.l Date.tomorrow
+        expect(page).to have_content 'Em andamento'
       end
     end
+  end
+
+  scenario 'generate calculation and disable a bidder by maximum value' do
+    licitation_process = LicitationProcess.make!(:valor_maximo_ultrapassado, :disqualify_by_maximum_value => true)
+    LicitationProcessLot.make!(:lote, :licitation_process => licitation_process,
+                               :administrative_process_budget_allocation_items => [licitation_process.items.first])
+
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    within_records do
+      page.find('a').click
+    end
+
+    expect(page).to_not have_button 'Relatório'
+
+    click_button 'Apurar'
+
+    expect(page).to have_content 'Processo Licitatório 1/2012'
+
+    expect(page).to have_content 'Apuração: Menor preço por lote'
+
+    expect(page).to have_content 'Nohup'
+
+    within '.classification-1-0-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '9,10'
+      expect(page).to have_content '18,20'
+      expect(page).to have_content 'Ganhou'
+    end
+
+    expect(page).to_not have_content 'IBM'
+  end
+
+  scenario 'generate calculation with equalized result' do
+    licitation_process = LicitationProcess.make!(:apuracao_global_empatou)
+
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    within_records do
+      page.find('a').click
+    end
+
+    expect(page).to_not have_button 'Relatório'
+
+    click_button 'Apurar'
+
+    expect(page).to have_content 'Processo Licitatório 1/2012'
+
+    expect(page).to have_content 'Apuração: Menor preço global'
+
+    expect(page).to have_content 'Gabriel Sobrinho'
+
+    within '.classification-1-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '10,00'
+      expect(page).to have_content '20,00'
+      expect(page).to have_content 'Empatou'
+    end
+
+    expect(page).to have_content 'Wenderson Malheiros'
+
+    within '.classification-2-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '10,00'
+      expect(page).to have_content '20,00'
+      expect(page).to have_content 'Empatou'
+    end
+  end
+
+  scenario 'generate calculation with companies without documents and considering law of proposals' do
+    licitation_process = LicitationProcess.make!(:apuracao_global_sem_documentos, :consider_law_of_proposals => true,
+                                                 :disqualify_by_documentation_problem => true)
+
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    within_records do
+      page.find('a').click
+    end
+
+    expect(page).to_not have_button 'Relatório'
+
+    click_button 'Apurar'
+
+    expect(page).to have_content 'Processo Licitatório 1/2012'
+
+    expect(page).to have_content 'Apuração: Menor preço global'
+
+    expect(page).to have_content 'Nohup'
+
+    within '.classification-2-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '9,10'
+      expect(page).to have_content '18,20'
+      expect(page).to have_content 'Ganhou'
+    end
+
+    expect(page).to_not have_content 'IBM'
+  end
+
+  scenario 'generate calculation with companies without documents' do
+    licitation_process = LicitationProcess.make!(:apuracao_global_sem_documentos, :consider_law_of_proposals => false,
+                                                 :disqualify_by_documentation_problem => true)
+
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    within_records do
+      page.find('a').click
+    end
+
+    expect(page).to_not have_button 'Relatório'
+
+    click_button 'Apurar'
+
+    expect(page).to have_content 'Processo Licitatório 1/2012'
+
+    expect(page).to have_content 'Apuração: Menor preço global'
+
+    expect(page).to_not have_content 'Nohup'
+
+    expect(page).to_not have_content 'IBM'
+  end
+
+  scenario 'generate calculation between a small company and a big company without consider law of proposals' do
+    licitation_process = LicitationProcess.make!(:apuracao_global_small_company, :consider_law_of_proposals => false)
+
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    within_records do
+      page.find('a').click
+    end
+
+    expect(page).to_not have_button 'Relatório'
+
+    click_button 'Apurar'
+
+    expect(page).to have_content 'Processo Licitatório 1/2012'
+
+    expect(page).to have_content 'Apuração: Menor preço global'
+
+    expect(page).to have_content 'Nohup'
+
+    within '.classification-2-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '9,10'
+      expect(page).to have_content '18,20'
+      expect(page).to have_content 'Perdeu'
+    end
+
+    expect(page).to have_content 'IBM'
+
+    within '.classification-1-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '9,00'
+      expect(page).to have_content '18,00'
+      expect(page).to have_content 'Ganhou'
+    end
+  end
+
+  scenario 'generate calculation between a small company and a big company and consider law of proposals' do
+    licitation_process = LicitationProcess.make!(:apuracao_global_small_company_2, :consider_law_of_proposals => true)
+
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    within_records do
+      page.find('a').click
+    end
+
+    expect(page).to_not have_button 'Relatório'
+
+    click_button 'Apurar'
+
+    expect(page).to have_content 'Processo Licitatório 1/2012'
+
+    expect(page).to have_content 'Apuração: Menor preço global'
+
+    expect(page).to have_content 'Nohup'
+
+    within '.classification-1-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '9,00'
+      expect(page).to have_content '18,00'
+      expect(page).to have_content 'Ganhou'
+    end
+
+    expect(page).to have_content 'IBM'
+
+    within '.classification-2-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '9,10'
+      expect(page).to have_content '18,20'
+      expect(page).to have_content 'Perdeu'
+    end
+  end
+
+  scenario 'generate calculation between a small company and a big company and consider law of proposals and make a new proposal' do
+    licitation_process = LicitationProcess.make!(:apuracao_global_small_company, :consider_law_of_proposals => true)
+
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    within_records do
+      page.find('a').click
+    end
+
+    expect(page).to_not have_button 'Relatório'
+
+    click_button 'Apurar'
+
+    expect(page).to have_content 'Processo Licitatório 1/2012'
+
+    expect(page).to have_content 'Apuração: Menor preço global'
+
+    expect(page).to have_content 'Nohup'
+
+    within '.classification-2-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '9,10'
+      expect(page).to have_content '18,20'
+      expect(page).to have_content 'Empatou'
+    end
+
+    expect(page).to have_content 'IBM'
+
+    within '.classification-1-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '9,00'
+      expect(page).to have_content '18,00'
+      expect(page).to have_content 'Empatou'
+    end
+
+    click_link 'voltar'
+
+    click_link 'Licitantes'
+
+    click_link 'Nohup'
+
+    within_tab 'Propostas' do
+      fill_in 'Preço unitário', :with => '8,99'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Licitante editado com sucesso.'
+
+    click_link 'Voltar ao processo licitatório'
+
+    click_button 'Apurar'
+
+    expect(page).to have_content 'Processo Licitatório 1/2012'
+
+    expect(page).to have_content 'Apuração: Menor preço global'
+
+    expect(page).to have_content 'Nohup'
+
+    within '.classification-1-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '8,99'
+      expect(page).to have_content '17,98'
+      expect(page).to have_content 'Ganhou'
+    end
+
+    expect(page).to have_content 'IBM'
+
+    within '.classification-2-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '9,00'
+      expect(page).to have_content '18,00'
+      expect(page).to have_content 'Perdeu'
+    end
+  end
+
+  scenario 'generate calculation between a small company and a big company and dont make a new proposal' do
+    licitation_process = LicitationProcess.make!(:apuracao_global_small_company, :consider_law_of_proposals => true)
+
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    within_records do
+      page.find('a').click
+    end
+
+    expect(page).to_not have_button 'Relatório'
+
+    click_button 'Apurar'
+
+    expect(page).to have_content 'Processo Licitatório 1/2012'
+
+    expect(page).to have_content 'Apuração: Menor preço global'
+
+    expect(page).to have_content 'Nohup'
+
+    within '.classification-2-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '9,10'
+      expect(page).to have_content '18,20'
+      expect(page).to have_content 'Empatou'
+    end
+
+    expect(page).to have_content 'IBM'
+
+    within '.classification-1-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '9,00'
+      expect(page).to have_content '18,00'
+      expect(page).to have_content 'Empatou'
+    end
+
+    click_link 'voltar'
+
+    click_link 'Licitantes'
+
+    click_link 'Nohup'
+
+    uncheck 'Apresentará nova proposta em caso de empate'
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Licitante editado com sucesso.'
+
+    click_link 'Voltar ao processo licitatório'
+
+    click_button 'Apurar'
+
+    expect(page).to have_content 'Processo Licitatório 1/2012'
+
+    expect(page).to have_content 'Apuração: Menor preço global'
+
+    expect(page).to have_content 'Nohup'
+
+    within '.classification-1-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '9,00'
+      expect(page).to have_content '18,00'
+      expect(page).to have_content 'Ganhou'
+    end
+
+    expect(page).to have_content 'IBM'
+
+    within '.classification-2-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '9,10'
+      expect(page).to have_content '18,20'
+      expect(page).to have_content 'Perdeu'
+    end
+  end
+
+  scenario 'generate calculation when type of calculation is global' do
+    licitation_process = LicitationProcess.make!(:apuracao_global)
+
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    within_records do
+      page.find('a').click
+    end
+
+    expect(page).to_not have_button 'Relatório'
+
+    click_button 'Apurar'
+
+    expect(page).to have_content 'Processo Licitatório 1/2012'
+
+    expect(page).to have_content 'Apuração: Menor preço global'
+
+    expect(page).to have_content 'Gabriel Sobrinho'
+
+    within '.classification-1-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '9,00'
+      expect(page).to have_content '18,00'
+      expect(page).to have_content 'Ganhou'
+    end
+
+    expect(page).to have_content 'Wenderson Malheiros'
+
+    within '.classification-2-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '10,00'
+      expect(page).to have_content '20,00'
+      expect(page).to have_content 'Perdeu'
+    end
+
+    click_link 'voltar'
+
+    click_link 'Licitantes'
+
+    click_link 'Wenderson Malheiros'
+
+    within_tab 'Propostas' do
+      expect(page).to have_select 'Situação', :selected => 'Perdeu'
+      expect(page).to have_field 'Classificação', :with => '2'
+    end
+
+    click_link 'Voltar'
+
+    click_link 'Gabriel Sobrinho'
+
+    within_tab 'Propostas' do
+      expect(page).to have_select 'Situação', :selected => 'Ganhou'
+      expect(page).to have_field 'Classificação', :with => '1'
+    end
+  end
+
+  scenario 'generate calculation when type of calculation is by lot' do
+    licitation_process = LicitationProcess.make!(:apuracao_por_lote)
+    LicitationProcessLot.make!(:lote, :licitation_process => licitation_process,
+                               :administrative_process_budget_allocation_items => [licitation_process.items.first])
+    LicitationProcessLot.make!(:lote_antivirus, :licitation_process => licitation_process,
+                               :administrative_process_budget_allocation_items => [licitation_process.items.second])
+
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_button 'Apurar'
+
+    expect(page).to have_content 'Processo Licitatório 1/2012'
+
+    expect(page).to have_content 'Apuração: Menor preço por lote'
+
+    expect(page).to have_content 'Wenderson Malheiros'
+
+    within 'table.records:nth-of-type(1)' do
+      within 'tbody tr:nth-child(1)' do
+        expect(page).to have_content 'Antivirus'
+        expect(page).to have_content '10,00'
+        expect(page).to have_content '20,00'
+        expect(page).to have_content 'Perdeu'
+      end
+
+      within 'tbody tr:nth-child(2)' do
+        expect(page).to have_content 'Arame comum'
+        expect(page).to have_content '1'
+        expect(page).to have_content '9,00'
+        expect(page).to have_content 'Ganhou'
+      end
+    end
+
+    expect(page).to have_content 'Gabriel Sobrinho'
+
+    within 'table.records:nth-of-type(2)' do
+      within 'tbody tr:nth-child(1)' do
+        expect(page).to have_content 'Antivirus'
+        expect(page).to have_content '9,00'
+        expect(page).to have_content '18,00'
+        expect(page).to have_content 'Ganhou'
+      end
+
+      within 'tbody tr:nth-child(2)' do
+        expect(page).to have_content 'Arame comum'
+        expect(page).to have_content '1'
+        expect(page).to have_content '10,00'
+        expect(page).to have_content 'Perdeu'
+      end
+    end
+
+    click_link 'voltar'
+
+    click_link 'Licitantes'
+
+    click_link 'Wenderson Malheiros'
+
+    within_tab 'Propostas' do
+      within_tab 'Lote 1' do
+        expect(page).to have_select 'Situação', :selected => 'Perdeu'
+        expect(page).to have_field 'Classificação', :with => '2'
+      end
+
+      within_tab 'Lote 2' do
+        expect(page).to have_select 'Situação', :selected => 'Ganhou'
+        expect(page).to have_field 'Classificação', :with => '1'
+      end
+    end
+
+    click_link 'Voltar'
+
+    click_link 'Gabriel Sobrinho'
+
+    within_tab 'Propostas' do
+      within_tab 'Lote 1' do
+        expect(page).to have_select 'Situação', :selected => 'Ganhou'
+        expect(page).to have_field 'Classificação', :with => '1'
+      end
+
+      within_tab 'Lote 2' do
+        expect(page).to have_select 'Situação', :selected => 'Perdeu'
+        expect(page).to have_field 'Classificação', :with => '2'
+      end
+    end
+  end
+
+  scenario 'generate calculation when type of calculation is by item' do
+    licitation_process = LicitationProcess.make!(:apuracao_por_itens)
+
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_button 'Apurar'
+
+    expect(page).to have_content 'Processo Licitatório 1/2012'
+
+    expect(page).to have_content 'Apuração: Menor preço total por item'
+
+    expect(page).to have_content 'Wenderson Malheiros'
+
+    within 'table.records:nth-of-type(1)' do
+      within 'tbody tr:nth-child(1)' do
+        expect(page).to have_content 'Antivirus'
+        expect(page).to have_content 'UN'
+        expect(page).to have_content '2'
+        expect(page).to have_content '10,00'
+        expect(page).to have_content '20,00'
+        expect(page).to have_content 'Perdeu'
+      end
+
+      within 'tbody tr:nth-child(2)' do
+        expect(page).to have_content 'Arame comum'
+        expect(page).to have_content 'UN'
+        expect(page).to have_content '1'
+        expect(page).to have_content '9,00'
+        expect(page).to have_content 'Ganhou'
+      end
+    end
+
+    expect(page).to have_content 'Gabriel Sobrinho'
+
+    within 'table.records:nth-of-type(2)' do
+      within 'tbody tr:nth-child(1)' do
+        expect(page).to have_content 'Antivirus'
+        expect(page).to have_content 'UN'
+        expect(page).to have_content '2'
+        expect(page).to have_content '9,00'
+        expect(page).to have_content '18,00'
+        expect(page).to have_content 'Ganhou'
+      end
+
+      within 'tbody tr:nth-child(2)' do
+        expect(page).to have_content 'Arame comum'
+        expect(page).to have_content 'UN'
+        expect(page).to have_content '1'
+        expect(page).to have_content '10,00'
+        expect(page).to have_content '10,00'
+        expect(page).to have_content 'Perdeu'
+      end
+    end
+
+    click_link 'voltar'
+
+    click_link 'Relatório'
+
+    expect(page).to have_content 'Processo Licitatório 1/2012'
+
+    click_link 'voltar'
+
+    click_link 'Licitantes'
+
+    click_link 'Wenderson Malheiros'
+
+    within_tab 'Propostas' do
+      expect(page).to have_select 'Situação', :selected => 'Perdeu'
+      expect(page).to have_field 'Classificação', :with => '2'
+    end
+
+    click_link 'Voltar'
+
+    click_link 'Gabriel Sobrinho'
+
+    within_tab 'Propostas' do
+      expect(page).to have_select 'Situação', :selected => 'Ganhou'
+      expect(page).to have_field 'Classificação', :with => '1'
+    end
+  end
+
+  scenario 'button Administrative Process should take user to the administrative process view' do
+    LicitationProcess.make!(:processo_licitatorio)
+
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+    within_records do
+      page.find('a').click
+    end
+    click_link 'Processo Administrativo'
+
+    within_tab 'Principal' do
+      expect(page).to have_field 'Processo', :with => '1'
+      expect(page).to have_field 'Ano', :with => '2012'
+      expect(page).to have_field 'Número do protocolo', :with => '00088/2012'
+    end
+  end
+
+  scenario "button Back to Listings should take user to licitation_process#index" do
+    licitation_process = LicitationProcess.make!(:processo_licitatorio)
+
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+    within_records do
+      page.find('a').click
+    end
+    click_link 'Voltar à listagem'
+
+    expect(page).to have_link '1/2012'
   end
 end

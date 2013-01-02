@@ -221,6 +221,7 @@ describe LicitationProcessDecorator do
       expect(described_class.header_attributes).to include :administrative_process_licitation_modality
       expect(described_class.header_attributes).to include :administrative_process_object_type_humanize
       expect(described_class.header_attributes).to include :envelope_opening_date
+      expect(described_class.header_attributes).to include :status
     end
   end
 
