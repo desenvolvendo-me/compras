@@ -293,48 +293,61 @@ feature "Tradings" do
 
     # Proposal stage
     fill_in "Valor da proposta", :with => "100,00"
+
     click_button "Salvar"
 
     fill_in "Valor da proposta", :with => "101,00"
+
     click_button "Salvar"
 
     fill_in "Valor da proposta", :with => "102,00"
+
     click_button "Salvar"
 
     fill_in "Valor da proposta", :with => "103,00"
+
     click_button "Salvar"
 
     click_link "Registrar lances"
 
     # Bidding stage
     fill_in "Valor da proposta", :with => "98,00"
+
     click_button "Salvar"
 
     fill_in "Valor da proposta", :with => "96,00"
+
     click_button "Salvar"
 
     fill_in "Valor da proposta", :with => "94,00"
+
     click_button "Salvar"
 
     fill_in "Valor da proposta", :with => "92,00"
+
     click_button "Salvar"
 
     expect(page).to have_field "Menor preço", :with => "92,00"
     expect(page).to have_field "Valor limite", :with => "90,00"
 
     choose "Declinou"
+
     click_button "Salvar"
 
     fill_in "Valor da proposta", :with => "0,00"
+
     click_button "Salvar"
 
     choose "Declinou"
+
     click_button "Salvar"
 
     fill_in "Valor da proposta", :with => "50,00"
+
     click_button "Salvar"
 
     choose "Declinou"
+
     click_button "Salvar"
 
     expect(page).to have_link 'Desfazer última oferta'
@@ -383,6 +396,7 @@ feature "Tradings" do
     expect(page).to have_field "Valor limite", :with => "91,99"
 
     fill_in "Valor da proposta", :with => "91,50"
+
     click_button "Salvar"
 
     expect(page).to_not have_link 'Desfazer última oferta'
