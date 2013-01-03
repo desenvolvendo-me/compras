@@ -1,0 +1,46 @@
+<% if resource.bidders_by_lowest_proposal_at_stage_of_round_of_bids.any? %>
+  <h3>Item: <%= resource %></h3>
+  <table class="records table-proposals">
+    <thead>
+      <tr>
+        <th class="g-1-2">Empresa</th>
+        <th class="g-1-10">Valor</th>
+        <th class="g-1-10">Classificação</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% resource.bidders_by_lowest_proposal_at_stage_of_round_of_bids.each_with_index do |bidder, index| %>
+        <tr>
+          <td class="g-1-2"><%= bidder %></td>
+          <td class="g-1-10"><%= bidder.decorator.last_amount_valid_for_trading_item_at_stage_of_round_of_bids(resource) %></td>
+          <td class="g-1-10"><%= numeric_position(index.succ) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<% if resource.bidders_benefited_by_lowest_proposal_at_stage_of_round_of_bids.any? %>
+  <h3>DIREITO DE PREFERÊNCIA</h3>
+
+  <table class="records table-negotiation">
+    <thead>
+      <tr>
+        <th class="g-1-2">Empresa</th>
+        <th class="g-1-10">Valor</th>
+        <th class="g-1-10">Classificação</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% resource.bidders_benefited_by_lowest_proposal_at_stage_of_round_of_bids.each_with_index do |bidder, index| %>
+        <tr>
+          <td class="g-1-2"><%= bidder %></td>
+          <td class="g-1-10"><%= bidder.decorator.last_amount_valid_for_trading_item_at_stage_of_round_of_bids(resource) %></td>
+          <td class="g-1-10"><%= numeric_position(index.succ) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

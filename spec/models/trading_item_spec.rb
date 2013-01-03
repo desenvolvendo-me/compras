@@ -97,6 +97,110 @@ describe TradingItem do
     end
   end
 
+  describe '#enabled_bidders_by_lowest_proposal' do
+    it 'should return bidders ordered by lowest proposal by bidder' do
+      bidder1 = double(:bidder1)
+      bidder2 = double(:bidder2)
+      bidder3 = double(:bidder3)
+      bidders = double(:bidders)
+      bidders_with_proposals = double([bidder1, bidder2, bidder3])
+      bidders_with_proposals.stub(:enabled).and_return([bidder1, bidder3])
+
+      subject.stub(:bidders_with_proposals).and_return(bidders_with_proposals)
+
+      bidder1.should_receive(:lower_trading_item_bid_amount).
+              at_least(1).times.with(subject).and_return(90)
+
+      bidder2.should_receive(:lower_trading_item_bid_amount).
+              at_least(0).times
+
+      bidder3.should_receive(:lower_trading_item_bid_amount).
+              at_least(1).times.with(subject).and_return(100)
+
+      expect(subject.enabled_bidders_by_lowest_proposal).to eq [bidder1, bidder3]
+    end
+  end
+
+  describe '#bidders_by_lowest_proposal_at_stage_of_round_of_bids' do
+    it 'should return bidders ordered by lowest proposal by bidder' do
+      bidder1 = double(:bidder1)
+      bidder2 = double(:bidder2)
+      bidder3 = double(:bidder3)
+      bidders = double(:bidders)
+
+      subject.stub(:id).and_return(1)
+      subject.stub(:bidders).and_return(bidders)
+
+      bidder1.should_receive(:lower_trading_item_bid_amount_at_stage_of_round_of_bids).
+              at_least(1).times.with(subject).and_return(90)
+
+      bidder2.should_receive(:lower_trading_item_bid_amount_at_stage_of_round_of_bids).
+              at_least(1).times.with(subject).and_return(80)
+
+      bidder3.should_receive(:lower_trading_item_bid_amount_at_stage_of_round_of_bids).
+              at_least(1).times.with(subject).and_return(100)
+
+      bidders.should_receive(:with_proposal_for_trading_item_at_stage_of_round_of_bids).
+              with(1).and_return([bidder1, bidder2, bidder3])
+
+      expect(subject.bidders_by_lowest_proposal_at_stage_of_round_of_bids).to eq [bidder2, bidder1, bidder3]
+    end
+  end
+
+  describe '#bidders_benefited_by_lowest_proposal_at_stage_of_round_of_bids' do
+    it 'should return bidders ordered by lowest proposal by bidder' do
+      bidder1 = double(:bidder1)
+      bidder2 = double(:bidder2)
+      bidder3 = double(:bidder3)
+      bidders = double(:bidders)
+      benefited = double([bidder1, bidder2])
+
+      subject.stub(:id).and_return(1)
+      subject.stub(:bidders).and_return(bidders)
+
+      bidder1.should_receive(:lower_trading_item_bid_amount_at_stage_of_round_of_bids).
+              at_least(1).times.with(subject).and_return(90)
+
+      bidder2.should_receive(:lower_trading_item_bid_amount_at_stage_of_round_of_bids).
+              at_least(1).times.with(subject).and_return(80)
+
+      bidder3.should_receive(:lower_trading_item_bid_amount_at_stage_of_round_of_bids).exactly(0).times
+
+      bidders.should_receive(:benefited).and_return(benefited) 
+
+      benefited.should_receive(:with_proposal_for_trading_item_at_stage_of_round_of_bids).
+              with(1).and_return([bidder1, bidder2])
+
+      expect(subject.bidders_benefited_by_lowest_proposal_at_stage_of_round_of_bids).to eq [bidder2, bidder1]
+    end
+  end
+
+  describe '#bidders_by_lowest_proposal_at_stage_of_negotiation' do
+    it 'should return bidders ordered by lowest proposal by bidder' do
+      bidder1 = double(:bidder1)
+      bidder2 = double(:bidder2)
+      bidder3 = double(:bidder3)
+      bidders = double(:bidders)
+
+      subject.stub(:id).and_return(1)
+      subject.stub(:bidders).and_return(bidders)
+
+      bidder1.should_receive(:lower_trading_item_bid_amount_at_stage_of_negotiation).
+              at_least(1).times.with(subject).and_return(90)
+
+      bidder2.should_receive(:lower_trading_item_bid_amount_at_stage_of_negotiation).
+              at_least(1).times.with(subject).and_return(80)
+
+      bidder3.should_receive(:lower_trading_item_bid_amount_at_stage_of_negotiation).
+              at_least(1).times.with(subject).and_return(100)
+
+      bidders.should_receive(:with_proposal_for_trading_item_at_stage_of_negotiation).
+              with(1).and_return([bidder1, bidder2, bidder3])
+
+      expect(subject.bidders_by_lowest_proposal_at_stage_of_negotiation).to eq [bidder2, bidder1, bidder3]
+    end
+  end
+
   describe '#lowest_proposal_amount' do
     it 'should return the lowest bid proposal for the item' do
       bidder1 = double(:bidder1)

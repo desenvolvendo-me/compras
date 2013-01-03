@@ -82,6 +82,50 @@ describe BidderDecorator do
     end
   end
 
+  describe "#last_amount_valid_for_trading_item_at_stage_of_negotiation" do
+    context 'when do not have last_amount_valid_for_trading_item_at_stage_of_negotiation' do
+      before do
+        component.stub(:last_amount_valid_for_trading_item_at_stage_of_negotiation).and_return(0)
+      end
+
+      it 'should applies precision to zero' do
+        expect(subject.last_amount_valid_for_trading_item_at_stage_of_negotiation).to eq '0,00'
+      end
+    end
+
+    context 'when have last_amount_valid_for_trading_item_at_stage_of_negotiation' do
+      before do
+        component.stub(:last_amount_valid_for_trading_item_at_stage_of_negotiation).and_return(5000.0)
+      end
+
+      it 'should applies precision' do
+        expect(subject.last_amount_valid_for_trading_item_at_stage_of_negotiation).to eq '5.000,00'
+      end
+    end
+  end
+
+  describe "#last_amount_valid_for_trading_item_at_stage_of_round_of_bids" do
+    context 'when do not have last_amount_valid_for_trading_item_at_stage_of_round_of_bids' do
+      before do
+        component.stub(:last_amount_valid_for_trading_item_at_stage_of_round_of_bids).and_return(0)
+      end
+
+      it 'should applies precision to zero' do
+        expect(subject.last_amount_valid_for_trading_item_at_stage_of_round_of_bids).to eq '0,00'
+      end
+    end
+
+    context 'when have last_amount_valid_for_trading_item_at_stage_of_round_of_bids' do
+      before do
+        component.stub(:last_amount_valid_for_trading_item_at_stage_of_round_of_bids).and_return(5000.0)
+      end
+
+      it 'should applies precision' do
+        expect(subject.last_amount_valid_for_trading_item_at_stage_of_round_of_bids).to eq '5.000,00'
+      end
+    end
+  end
+
   context '#proposal_total_value' do
     context 'when do not have proposal_total_value' do
       before do

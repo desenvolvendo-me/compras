@@ -60,3 +60,13 @@ pt-BR:
       selecionadas a formular lances de forma sequencial, a partir do autor da
       proposta de maior preço e os demais em ordem decrescente de valor. A
       sequencia de ofertas de lances ocorreu da seguinte forma:"
+      classification_message: "Declarada encerrada a etapa de lances, as ofertas
+      foram classificadas em ordem crescente de valor, assegurada as licitantes
+      microempresas e empresas de pequeno porte o exercício do direito de
+      preferência, respeitada a ordem de classificação, na seguinte conformidade:"
+      accept_negociation_message: "Negociada a redução da menor oferta, o Pregoeiro
+      considerou que o preço obtido abaixo especificado, é ACEITÁVEL por ser
+      compatível com os preços praticados pelo mercado, conforme apurado no
+      processo de licitação."
+      decline_negociation_message: "Negociada a redução da menor oferta, o Pregoeiro
+      considerou que o preço obtido abaixo especificado, é INACEITÁVEL."

@@ -46,6 +46,14 @@ class BidderDecorator
     number_with_precision super if super
   end
 
+  def last_amount_valid_for_trading_item_at_stage_of_round_of_bids(*)
+    number_with_precision super if super
+  end
+
+  def last_amount_valid_for_trading_item_at_stage_of_negotiation(*)
+    number_with_precision super if super
+  end
+
   def benefited_by_law_of_proposals_class(trading_item)
     if component.benefited_by_law_of_proposals? && valid_benefited_percent?(trading_item)
       'benefited'

@@ -45,6 +45,24 @@ class TradingItem < Compras::Model
     end
   end
 
+  def bidders_by_lowest_proposal_at_stage_of_round_of_bids
+    bidders_with_proposals_at_stage_of_round_of_bids.sort do |a,b|
+      a.lower_trading_item_bid_amount_at_stage_of_round_of_bids(self) <=> b.lower_trading_item_bid_amount_at_stage_of_round_of_bids(self)
+    end
+  end
+
+  def bidders_benefited_by_lowest_proposal_at_stage_of_round_of_bids
+    bidders_benefited_with_proposals_at_stage_of_round_of_bids.sort do |a,b|
+      a.lower_trading_item_bid_amount_at_stage_of_round_of_bids(self) <=> b.lower_trading_item_bid_amount_at_stage_of_round_of_bids(self)
+    end
+  end
+
+  def bidders_by_lowest_proposal_at_stage_of_negotiation
+    bidders_with_proposals_at_stage_of_negotiaton.sort do |a,b|
+      a.lower_trading_item_bid_amount_at_stage_of_negotiation(self) <=> b.lower_trading_item_bid_amount_at_stage_of_negotiation(self)
+    end
+  end
+
   def lowest_proposal_amount
     return unless bidder_with_lowest_proposal.present?
 
@@ -137,6 +155,18 @@ class TradingItem < Compras::Model
 
   def bidders_with_proposals
     bidders.with_proposal_for_trading_item(id)
+  end
+
+  def bidders_with_proposals_at_stage_of_round_of_bids
+    bidders.with_proposal_for_trading_item_at_stage_of_round_of_bids(id)
+  end
+
+  def bidders_benefited_with_proposals_at_stage_of_round_of_bids
+    bidders.benefited.with_proposal_for_trading_item_at_stage_of_round_of_bids(id)
+  end
+
+  def bidders_with_proposals_at_stage_of_negotiaton
+    bidders.with_proposal_for_trading_item_at_stage_of_negotiation(id)
   end
 
   def bidder_with_lowest_proposal

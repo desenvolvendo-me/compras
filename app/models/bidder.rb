@@ -65,6 +65,11 @@ class Bidder < Compras::Model
   orderize :id
   filterize
 
+  def self.benefited
+    joins { creditor.creditable(Person).personable(Company).company_size.extended_company_size }.
+      where { 'compras_extended_company_sizes.benefited = true' }
+  end
+
   def self.with_negociation_proposal_for(trading_item_id)
     enabled.
     joins { trading_item_bids }.
@@ -105,6 +110,24 @@ class Bidder < Compras::Model
     joins { trading_item_bids }.
     where {
       trading_item_bids.status.eq(TradingItemBidStatus::WITH_PROPOSAL) &
+      trading_item_bids.trading_item_id.eq(trading_item_id)
+    }.uniq
+  end
+
+  def self.with_proposal_for_trading_item_at_stage_of_round_of_bids(trading_item_id)
+    joins { trading_item_bids }.
+    where {
+      trading_item_bids.status.eq(TradingItemBidStatus::WITH_PROPOSAL) &
+      trading_item_bids.stage.eq(TradingItemBidStage::ROUND_OF_BIDS) &
+      trading_item_bids.trading_item_id.eq(trading_item_id)
+    }.uniq
+  end
+
+  def self.with_proposal_for_trading_item_at_stage_of_negotiation(trading_item_id)
+    joins { trading_item_bids }.
+    where {
+      trading_item_bids.status.eq(TradingItemBidStatus::WITH_PROPOSAL) &
+      trading_item_bids.stage.eq(TradingItemBidStage::NEGOTIATION) &
       trading_item_bids.trading_item_id.eq(trading_item_id)
     }.uniq
   end
@@ -252,6 +275,14 @@ class Bidder < Compras::Model
     lower_trading_item_bid_at_stage_of_proposals(trading_item).try(:amount) || BigDecimal(0)
   end
 
+  def lower_trading_item_bid_amount_at_stage_of_round_of_bids(trading_item)
+    lower_trading_item_bid_at_stage_of_round_of_bids(trading_item).try(:amount) || BigDecimal(0)
+  end
+
+  def lower_trading_item_bid_amount_at_stage_of_negotiation(trading_item)
+    lower_trading_item_bid_at_stage_of_negotiation(trading_item).try(:amount) || BigDecimal(0)
+  end
+
   def trading_item_classification_percent(trading_item)
     return unless lower_trading_item_bid(trading_item)
 
@@ -271,10 +302,30 @@ class Bidder < Compras::Model
     trading_item_bids.for_trading_item(trading_item.id).with_proposal.last
   end
 
+  def last_amount_valid_for_trading_item(item)
+    trading_item_bids.for_trading_item(item.id).last_valid_proposal.amount
+  end
+
+  def last_amount_valid_for_trading_item_at_stage_of_round_of_bids(item)
+    trading_item_bids.at_stage_of_round_of_bids.for_trading_item(item.id).last_valid_proposal.try(:amount) || BigDecimal(0)
+  end
+
+  def last_amount_valid_for_trading_item_at_stage_of_negotiation(item)
+    trading_item_bids.at_stage_of_negotiation.for_trading_item(item.id).last_valid_proposal.try(:amount) || BigDecimal(0)
+  end
+
   protected
 
   def lower_trading_item_bid_at_stage_of_proposals(trading_item)
     trading_item_bids.at_stage_of_proposals.for_trading_item(trading_item.id).with_proposal.last
+  end
+
+  def lower_trading_item_bid_at_stage_of_round_of_bids(trading_item)
+    trading_item_bids.at_stage_of_round_of_bids.for_trading_item(trading_item.id).with_proposal.last
+  end
+
+  def lower_trading_item_bid_at_stage_of_negotiation(trading_item)
+    trading_item_bids.at_stage_of_negotiation.for_trading_item(trading_item.id).with_proposal.last
   end
 
   def block_licitation_process_with_ratification

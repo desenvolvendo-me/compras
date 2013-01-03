@@ -166,6 +166,86 @@ describe Bidder do
     end
   end
 
+  describe '.with_proposal_for_trading_item_at_stage_of_round_of_bids' do
+    it 'should return only bidders with proposal at stage of round of bids for a specific trading item' do
+      trading_item_with_proposal = TradingItem.make!(:item_pregao_presencial)
+      trading_item_without_proposal = TradingItem.make!(:item_pregao_presencial, :order => 2)
+
+      trading = Trading.make!(:pregao_presencial,
+        :trading_items => [trading_item_with_proposal,trading_item_without_proposal])
+
+      bidder1 = trading.bidders.first
+      bidder2 = trading.bidders.second
+      bidder3 = trading.bidders.last
+
+      TradingItemBid.create!(
+        :round => 1,
+        :trading_item_id => trading_item_with_proposal.id,
+        :bidder_id => bidder1.id,
+        :amount => 100.0,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      TradingItemBid.create!(
+        :round => 0,
+        :trading_item_id => trading_item_with_proposal.id,
+        :bidder_id => bidder2.id,
+        :amount => 90.0,
+        :stage => TradingItemBidStage::PROPOSALS,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      TradingItemBid.create!(
+        :round => 1,
+        :trading_item_id => trading_item_with_proposal.id,
+        :bidder_id => bidder3.id,
+        :amount => 80.0,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      expect(described_class.with_proposal_for_trading_item_at_stage_of_round_of_bids(trading_item_with_proposal.id)).to eq [bidder1, bidder3]
+    end
+  end
+
+  describe '.with_proposal_for_trading_item_at_stage_of_negotiation' do
+    it 'should return only bidders with proposal at stage of negotiation for a specific trading item' do
+      trading_item_with_proposal = TradingItem.make!(:item_pregao_presencial)
+      trading_item_without_proposal = TradingItem.make!(:item_pregao_presencial, :order => 2)
+
+      trading = Trading.make!(:pregao_presencial,
+        :trading_items => [trading_item_with_proposal,trading_item_without_proposal])
+
+      bidder1 = trading.bidders.first
+      bidder2 = trading.bidders.second
+      bidder3 = trading.bidders.last
+
+      TradingItemBid.create!(
+        :round => 1,
+        :trading_item_id => trading_item_with_proposal.id,
+        :bidder_id => bidder1.id,
+        :amount => 100.0,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      TradingItemBid.create!(
+        :round => 0,
+        :trading_item_id => trading_item_with_proposal.id,
+        :bidder_id => bidder2.id,
+        :amount => 90.0,
+        :stage => TradingItemBidStage::NEGOTIATION,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      TradingItemBid.create!(
+        :round => 1,
+        :trading_item_id => trading_item_with_proposal.id,
+        :bidder_id => bidder3.id,
+        :amount => 80.0,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      expect(described_class.with_proposal_for_trading_item_at_stage_of_negotiation(trading_item_with_proposal.id)).to eq [bidder2]
+    end
+  end
+
   describe '.at_trading_item_stage' do
     before do
       licitation_process = LicitationProcess.make!(
@@ -340,6 +420,87 @@ describe Bidder do
         :status => TradingItemBidStatus::WITH_PROPOSAL)
 
       expect(bidder1.lower_trading_item_bid_amount_at_stage_of_proposals(trading_item)).to eq 80.0
+    end
+  end
+
+  describe '#lower_trading_item_bid_amount_at_stage_of_round_of_bids' do
+    it 'should return zero when bidder there is no proposal for item' do
+      trading = Trading.make!(:pregao_presencial)
+      trading_item = trading.trading_items.first
+      bidder = trading.bidders.first
+
+      expect(bidder.lower_trading_item_bid_amount_at_stage_of_proposals(trading_item)).to eq 0
+    end
+
+    it 'should return the amount of lowest proposal of bidder for item' do
+      trading = Trading.make!(:pregao_presencial)
+      trading_item = trading.trading_items.first
+
+      bidder = trading.bidders.first
+
+      TradingItemBid.create!(
+        :round => 0,
+        :trading_item_id => trading_item.id,
+        :bidder_id => bidder.id,
+        :amount => 100.0,
+        :stage => TradingItemBidStage::PROPOSALS,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      expect(bidder.lower_trading_item_bid_amount_at_stage_of_proposals(trading_item)).to eq 100.0
+    end
+  end
+
+  describe '#lower_trading_item_bid_amount_at_stage_of_negotiation' do
+    it 'should return zero when bidder there is no proposal for item' do
+      trading = Trading.make!(:pregao_presencial)
+      trading_item = trading.trading_items.first
+      bidder = trading.bidders.first
+
+      expect(bidder.lower_trading_item_bid_amount_at_stage_of_negotiation(trading_item)).to eq 0
+    end
+
+    it 'should return the amount of lowest proposal of bidder for item' do
+      trading = Trading.make!(:pregao_presencial)
+      trading_item = trading.trading_items.first
+
+      bidder = trading.bidders.first
+
+      TradingItemBid.create!(
+        :round => 0,
+        :trading_item_id => trading_item.id,
+        :bidder_id => bidder.id,
+        :amount => 100.0,
+        :stage => TradingItemBidStage::PROPOSALS,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      TradingItemBid.create!(
+        :round => 1,
+        :trading_item_id => trading_item.id,
+        :bidder_id => bidder.id,
+        :amount => 90.0,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      TradingItemBid.create!(
+        :round => 0,
+        :trading_item_id => trading_item.id,
+        :bidder_id => bidder.id,
+        :amount => 80.0,
+        :stage => TradingItemBidStage::NEGOTIATION,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      expect(bidder.lower_trading_item_bid_amount_at_stage_of_negotiation(trading_item)).to eq 80.0
+    end
+  end
+
+  describe '.benefited' do
+    it 'should return only bidders benefited' do
+      licitante = Bidder.make!(:licitante)
+      licitante_sobrinho = Bidder.make!(:licitante_sobrinho)
+      licitante_com_proposta_3 = Bidder.make!(:licitante_com_proposta_3)
+      me_pregao = Bidder.make(:me_pregao)
+
+      expect(Bidder.benefited).to eq [licitante_com_proposta_3]
     end
   end
 end

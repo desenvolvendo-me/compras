@@ -17,6 +17,14 @@ module TradingsHelper
     t('trading.messages.trading_registry')
   end
 
+  def classification_message
+    t('trading.messages.classification_message')
+  end
+
+  def accept_negociation_message
+    t('trading.messages.accept_negociation_message')
+  end
+
   private
   def created_at_to_date
     return unless resource.persisted?

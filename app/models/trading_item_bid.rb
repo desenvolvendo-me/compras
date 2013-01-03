@@ -56,6 +56,10 @@ class TradingItemBid < Compras::Model
     where { status.not_eq(TradingItemBidStatus::WITH_PROPOSAL) }.order { :id }
   end
 
+  def self.last_valid_proposal
+    with_valid_proposal.order('amount DESC').last
+  end
+
   def update_status(new_status)
     update_column(:status, new_status)
   end

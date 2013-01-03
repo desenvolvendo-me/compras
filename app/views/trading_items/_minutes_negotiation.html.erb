@@ -1,0 +1,21 @@
+<% if resource.bidders_by_lowest_proposal_at_stage_of_negotiation.any? %>
+  <table class="records table-negotiation">
+    <thead>
+      <tr>
+        <th class="g-1-2">Empresa</th>
+        <th class="g-1-10">Valor</th>
+        <th class="g-1-10">Classificação</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% resource.bidders_by_lowest_proposal_at_stage_of_negotiation.each_with_index do |bidder, index| %>
+        <tr>
+          <td class="g-1-2"><%= bidder %></td>
+          <td class="g-1-10"><%= bidder.decorator.last_amount_valid_for_trading_item_at_stage_of_negotiation(resource) %></td>
+          <td class="g-1-10"><%= numeric_position(index.succ) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
