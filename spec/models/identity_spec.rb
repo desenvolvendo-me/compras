@@ -12,9 +12,6 @@ describe Identity do
   it { should belong_to :state }
 
   it { should validate_presence_of :number }
-  it { should validate_presence_of :issuer }
-  it { should validate_presence_of :state }
-  it { should validate_presence_of :issue }
 
   it { should_not allow_value(Date.current).for(:issue) }
   it { should allow_value(Date.yesterday).for(:issue) }

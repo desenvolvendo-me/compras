@@ -54,7 +54,7 @@
       <%= p.association :identity, :collection => p.object.identity ? p.object.identity.localized : p.object.build_identity do |i| %>
         <div class="yui3-g">
           <div class="yui3-u-1-3">
-            <%= i.input :number %>
+            <%= i.input :number, :required => false %>
           </div>
 
           <div class="yui3-u-1-3">
