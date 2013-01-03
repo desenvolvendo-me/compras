@@ -305,7 +305,7 @@ class LicitationProcess < Compras::Model
   end
 
   def validate_updates
-    if attributes_changed.any?
+    if changed_attributes.any?
       errors.add(:base, :cannot_be_edited)
     end
   end

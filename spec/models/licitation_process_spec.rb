@@ -161,7 +161,7 @@ describe LicitationProcess do
 
   it "validate attribute changes if not updatable" do
     subject.stub(:updatable? => false,
-                 :attributes_changed => [double])
+                 :changed_attributes => [double])
 
     subject.valid?
 
