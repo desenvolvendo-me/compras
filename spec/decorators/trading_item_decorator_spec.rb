@@ -232,7 +232,6 @@ describe TradingItemDecorator do
         trading_item_bids = double(:trading_item_bids, :negotiation => [])
 
         component.stub(:trading_item_bids).and_return(trading_item_bids)
-        component.stub(:valid_negotiation_proposals).and_return([])
 
         routes.should_receive(:classification_trading_item_path).
           with(component).
@@ -245,7 +244,7 @@ describe TradingItemDecorator do
         trading_item_bids = double(:trading_item_bids, :negotiation => ['negotiation'])
 
         component.stub(:trading_item_bids).and_return(trading_item_bids)
-        component.stub(:valid_negotiation_proposals).and_return([])
+        component.stub(:valid_bidder_for_negotiation?).and_return(true)
 
         routes.should_receive(:new_trading_item_bid_negotiation_path).
           with(:trading_item_id => 1).
@@ -256,19 +255,6 @@ describe TradingItemDecorator do
 
       it 'should returns the classification if have no one negotiation but have a valid negotiation' do
         trading_item_bids = double(:trading_item_bids, :negotiation => [])
-
-        component.stub(:trading_item_bids).and_return(trading_item_bids)
-        component.stub(:valid_negotiation_proposals).and_return(['negotiation'])
-
-        routes.should_receive(:classification_trading_item_path).
-          with(component).
-          and_return('classification_trading_item_path')
-
-        expect(subject.current_stage_path(:stage_calculator => stage_calculator)).to eq 'classification_trading_item_path'
-      end
-
-      it 'should returns the classification if have one negotiation but have no valid negotiation' do
-        trading_item_bids = double(:trading_item_bids, :negotiation => ['negotiation'])
 
         component.stub(:trading_item_bids).and_return(trading_item_bids)
         component.stub(:valid_negotiation_proposals).and_return(['negotiation'])

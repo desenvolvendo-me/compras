@@ -115,6 +115,10 @@ class TradingItem < Compras::Model
     trading_item_bids.at_stage_of_round_of_bids.any?
   end
 
+  def valid_bidder_for_negotiation?
+    bidders_selected_for_negociation.any? && !valid_proposal_for_negotiation?
+  end
+
   def rounds_uniq_at_stage_of_round_of_bids_ordered
     trading_item_bids.at_stage_of_round_of_bids.reorder(:round).uniq.select(:round)
   end
@@ -175,6 +179,10 @@ class TradingItem < Compras::Model
 
   def lowest_bid_with_proposal
     trading_item_bids.with_valid_proposal.reorder { amount }.first
+  end
+
+  def valid_proposal_for_negotiation?
+    trading_item_bids.at_stage_of_negotiation.with_proposal.any?
   end
 
   def require_at_least_one_minimum_reduction

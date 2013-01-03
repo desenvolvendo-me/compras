@@ -335,4 +335,27 @@ describe TradingItem do
       expect(subject.started?).to be_false
     end
   end
+
+  describe 'valid_bidder_for_negotiation?' do
+    it 'should be true if there is no one valid proposal for negotiation' do
+      subject.stub(:bidders_selected_for_negociation).and_return(['bidder'])
+      subject.stub(:valid_proposal_for_negotiation?).and_return(false)
+
+      expect(subject.valid_bidder_for_negotiation?).to be_true
+    end
+
+    it 'should be false if there is not valid proposal for negotiation' do
+      subject.stub(:bidders_selected_for_negociation).and_return([])
+      subject.stub(:valid_proposal_for_negotiation?).and_return(true)
+
+      expect(subject.valid_bidder_for_negotiation?).to be_false
+    end
+
+    it 'should be false if there is a valid proposal for negotiation and have bidder for negotiation' do
+      subject.stub(:bidders_selected_for_negociation).and_return(['bidder'])
+      subject.stub(:valid_proposal_for_negotiation?).and_return(true)
+
+      expect(subject.valid_bidder_for_negotiation?).to be_false
+    end
+  end
 end

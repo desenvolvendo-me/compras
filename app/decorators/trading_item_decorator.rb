@@ -59,7 +59,7 @@ class TradingItemDecorator
 
   def negotiation_or_classification_path(stage_calculator)
     if stage_calculator.stage_of_negotiation?
-      if trading_item_bids.negotiation.empty? || valid_negotiation_proposals.any?
+      if trading_item_bids.negotiation.empty? || !valid_bidder_for_negotiation?
         routes.classification_trading_item_path(component)
       else
         routes.new_trading_item_bid_negotiation_path(:trading_item_id => component.id)

@@ -819,6 +819,200 @@ feature "TradingItemBids" do
     expect(page).to have_content 'Classificação das Ofertas'
   end
 
+  scenario 'negotiation should redirect to the next bidder if the there is no valid bid' do
+    licitation_process = LicitationProcess.make!(:pregao_presencial,
+        :bidders => [Bidder.make!(:licitante_com_proposta_3), Bidder.make!(:licitante), Bidder.make!(:me_pregao)])
+    trading = Trading.make!(:pregao_presencial,:licitation_process => licitation_process)
+
+    make_stage_of_proposals :trading => trading
+
+    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+
+    click_link '1/2012'
+
+    click_button 'Salvar e ir para Itens/Ofertas'
+
+    click_link 'Fazer oferta'
+
+    expect(page).to have_content 'Propostas'
+
+    click_link 'Registrar lances'
+
+    fill_in 'Valor da proposta', :with => '99,00'
+
+    click_button 'Salvar'
+
+    expect(page).to have_content 'Oferta criada com sucesso'
+
+    fill_in 'Valor da proposta', :with => '98,00'
+
+    click_button 'Salvar'
+
+    expect(page).to have_content 'Oferta criada com sucesso'
+
+    fill_in 'Valor da proposta', :with => '97,00'
+
+    click_button 'Salvar'
+
+    expect(page).to have_content 'Oferta criada com sucesso'
+
+    choose 'Sem proposta'
+
+    click_button 'Salvar'
+
+    expect(page).to have_content 'Oferta criada com sucesso'
+
+    fill_in 'Valor da proposta', :with => '96,00'
+
+    click_button 'Salvar'
+
+    expect(page).to have_content 'Oferta criada com sucesso'
+
+    choose 'Sem proposta'
+
+    click_button 'Salvar'
+
+    expect(page).to have_content 'Oferta criada com sucesso'
+
+    expect(page).to have_content 'Classificação das Ofertas'
+
+    click_link 'Iniciar Negociação'
+
+    expect(page).to have_content 'Negociação'
+    expect(page).to have_field 'Licitante', :with => 'Nohup'
+
+    choose 'Declinou'
+
+    click_button 'Salvar'
+
+    expect(page).to have_content 'Oferta criada com sucesso'
+    expect(page).to have_content 'Negociação'
+    expect(page).to have_field 'Licitante', :with => 'Nobe'
+
+    fill_in 'Valor da proposta', :with => '95,00'
+
+    click_button 'Salvar'
+
+    expect(page).to have_content 'Oferta criada com sucesso'
+    expect(page).to have_content 'Classificação das Ofertas'
+    expect(page).to have_link 'Encerramento do item'
+    expect(page).to_not have_link 'Iniciar Negociação'
+
+    within '.records tbody tr:nth-child(1)' do
+      expect(page.find('.bidder-name')).to have_content 'Nobe'
+      expect(page.find('.bidder-amount')).to have_content '95,00'
+      expect(page.find('.bidder-percent')).to have_content '0,00'
+      expect(page.find('.bidder-position')).to have_content '1º lugar'
+    end
+
+    within '.records tbody tr:nth-child(2)' do
+      expect(page.find('.bidder-name')).to have_content 'Wenderson Malheiros'
+      expect(page.find('.bidder-amount')).to have_content '96,00'
+      expect(page.find('.bidder-percent')).to have_content '1,05'
+      expect(page.find('.bidder-position')).to have_content '2º lugar'
+    end
+
+    within '.records tbody tr:nth-child(3)' do
+      expect(page.find('.bidder-name')).to have_content 'Nohup'
+      expect(page.find('.bidder-amount')).to have_content '97,00'
+      expect(page.find('.bidder-percent')).to have_content '2,11'
+      expect(page.find('.bidder-position')).to have_content '3º lugar'
+    end
+  end
+
+  scenario 'negotiation should redirect to the classification at first valid bid at negotiation' do
+    licitation_process = LicitationProcess.make!(:pregao_presencial,
+        :bidders => [Bidder.make!(:licitante_com_proposta_3), Bidder.make!(:licitante), Bidder.make!(:me_pregao)])
+    trading = Trading.make!(:pregao_presencial,:licitation_process => licitation_process)
+
+    make_stage_of_proposals :trading => trading
+
+    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+
+    click_link '1/2012'
+
+    click_button 'Salvar e ir para Itens/Ofertas'
+
+    click_link 'Fazer oferta'
+
+    expect(page).to have_content 'Propostas'
+
+    click_link 'Registrar lances'
+
+    fill_in 'Valor da proposta', :with => '99,00'
+
+    click_button 'Salvar'
+
+    expect(page).to have_content 'Oferta criada com sucesso'
+
+    fill_in 'Valor da proposta', :with => '98,00'
+
+    click_button 'Salvar'
+
+    expect(page).to have_content 'Oferta criada com sucesso'
+
+    fill_in 'Valor da proposta', :with => '97,00'
+
+    click_button 'Salvar'
+
+    expect(page).to have_content 'Oferta criada com sucesso'
+
+    choose 'Sem proposta'
+
+    click_button 'Salvar'
+
+    expect(page).to have_content 'Oferta criada com sucesso'
+
+    fill_in 'Valor da proposta', :with => '96,00'
+
+    click_button 'Salvar'
+
+    expect(page).to have_content 'Oferta criada com sucesso'
+
+    choose 'Sem proposta'
+
+    click_button 'Salvar'
+
+    expect(page).to have_content 'Oferta criada com sucesso'
+
+    expect(page).to have_content 'Classificação das Ofertas'
+
+    click_link 'Iniciar Negociação'
+
+    expect(page).to have_content 'Negociação'
+    expect(page).to have_field 'Licitante', :with => 'Nohup'
+
+    fill_in 'Valor da proposta', :with => '95,00'
+
+    click_button 'Salvar'
+
+    expect(page).to have_content 'Oferta criada com sucesso'
+    expect(page).to have_content 'Classificação das Ofertas'
+    expect(page).to have_link 'Encerramento do item'
+    expect(page).to_not have_link 'Iniciar Negociação'
+
+    within '.records tbody tr:nth-child(1)' do
+      expect(page.find('.bidder-name')).to have_content 'Nohup'
+      expect(page.find('.bidder-amount')).to have_content '95,00'
+      expect(page.find('.bidder-percent')).to have_content '0,00'
+      expect(page.find('.bidder-position')).to have_content '1º lugar'
+    end
+
+    within '.records tbody tr:nth-child(2)' do
+      expect(page.find('.bidder-name')).to have_content 'Wenderson Malheiros'
+      expect(page.find('.bidder-amount')).to have_content '96,00'
+      expect(page.find('.bidder-percent')).to have_content '1,05'
+      expect(page.find('.bidder-position')).to have_content '2º lugar'
+    end
+
+    within '.records tbody tr:nth-child(3)' do
+      expect(page.find('.bidder-name')).to have_content 'Nobe'
+      expect(page.find('.bidder-amount')).to have_content '98,00'
+      expect(page.find('.bidder-percent')).to have_content '3,16'
+      expect(page.find('.bidder-position')).to have_content '3º lugar'
+    end
+  end
+
   def make_stage_of_proposals(options = {})
     TradingConfiguration.make!(:pregao)
     trading = options.fetch(:trading) { Trading.make!(:pregao_presencial)}
