@@ -1464,4 +1464,21 @@ feature "AdministrativeProcesses" do
       end
     end
   end
+
+  scenario 'should not return duplicated data of purchase solicitation' do
+     purchase_solicitation = PurchaseSolicitation.make!(:reparo,
+                                                         :service_status => PurchaseSolicitationServiceStatus::LIBERATED,
+                                                         :purchase_solicitation_budget_allocations => [
+                                                           PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria_office_2_itens_liberados)])
+
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+
+    click_link 'Criar Processo Administrativo'
+
+    within_modal 'Solicitação de compra' do
+      click_button 'Pesquisar'
+
+      expect(page).to have_css 'table.records tbody tr', :count => 1
+    end
+  end
 end

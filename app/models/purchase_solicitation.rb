@@ -65,7 +65,7 @@ class PurchaseSolicitation < Compras::Model
   scope :can_be_grouped, with_pending_items.where { service_status.in [
     PurchaseSolicitationServiceStatus::LIBERATED,
     PurchaseSolicitationServiceStatus::PARTIALLY_FULFILLED ]
-  }
+  }.uniq
 
   def self.by_material(material_ids)
     joins { items }.
