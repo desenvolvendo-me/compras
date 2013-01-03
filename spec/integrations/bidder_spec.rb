@@ -202,7 +202,7 @@ describe Bidder do
         :stage => TradingItemBidStage::ROUND_OF_BIDS,
         :status => TradingItemBidStatus::WITH_PROPOSAL)
 
-      expect(described_class.with_proposal_for_trading_item_at_stage_of_round_of_bids(trading_item_with_proposal.id)).to eq [bidder1, bidder3]
+      expect(described_class.with_proposal_for_trading_item_at_stage_of_round_of_bids(trading_item_with_proposal.id)).to include(bidder1, bidder3)
     end
   end
 
