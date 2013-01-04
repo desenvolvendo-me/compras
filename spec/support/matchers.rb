@@ -34,9 +34,12 @@ module Matchers
     end
   end
 
-  matcher :have_disabled_field do |field|
+  matcher :have_disabled_field do |field, options|
     match do |page|
-      page.find_field(field)[:disabled].should eq 'disabled'
+      field = page.find_field(field)
+
+      expect(field.value).to eq options[:with] if options && options[:with]
+      expect(field[:disabled]).to eq 'disabled'
     end
 
     failure_message_for_should do |page|
