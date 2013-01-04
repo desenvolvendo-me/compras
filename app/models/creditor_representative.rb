@@ -4,5 +4,6 @@ class CreditorRepresentative < Compras::Model
   belongs_to :creditor
   belongs_to :representative_person, :class_name => 'Person'
 
-  delegate :name, :identity_document, :to => :representative_person, :allow_nil => true
+  delegate :name, :identity_document, :to_s,
+           :to => :representative_person, :allow_nil => true
 end
