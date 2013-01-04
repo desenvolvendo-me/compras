@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <%= csrf_meta_tag %>
 
-    <title>Sistema de Compras e Licitações</title>
+    <title>iCompras</title>
 
     <%= stylesheet_link_tag 'application' %>
   </head>
@@ -14,7 +14,7 @@
     <div id="container">
 
       <div id="header">
-        <h1><%= link_to 'Sistema de Compras e Licitações', root_path %></h1>
+        <h1><%= link_to image_tag('logo.png'), root_path %></h1>
 
         <div id="menu">
           &nbsp;
@@ -23,7 +23,7 @@
 
       <% if message_about_environment? %>
         <div id="environment">
-          <h2>Você está acessando o ambiente de <span><%= t Rails.env %></span> do Sistema Tributário.</h2>
+          <h2>Você está acessando o ambiente de <span><%= t Rails.env %></span> do iCompras.</h2>
           <p>As informações geradas nesse ambiente não terão validade.</p>
         </div>
       <% end %>

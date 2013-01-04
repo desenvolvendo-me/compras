@@ -9,3 +9,7 @@
  *= require compras/error_base
  *= require compras/simple_form
  */
+
+#container #header img {
+  margin: 15px 0 0 15px;
+}
