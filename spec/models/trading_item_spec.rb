@@ -166,7 +166,7 @@ describe TradingItem do
 
       bidder3.should_receive(:lower_trading_item_bid_amount_at_stage_of_round_of_bids).exactly(0).times
 
-      bidders.should_receive(:benefited).and_return(benefited) 
+      bidders.should_receive(:benefited).and_return(benefited)
 
       benefited.should_receive(:with_proposal_for_trading_item_at_stage_of_round_of_bids).
               with(1).and_return([bidder1, bidder2])
@@ -238,16 +238,47 @@ describe TradingItem do
       subject.stub(:bidder_with_lowest_proposal => winner)
     end
 
-    it "returns true if there are no bidders for negotiation" do
-      subject.stub(:bidders_selected_for_negociation => [])
+    context 'when not closed' do
+      before do
+        subject.stub(:closed? => false)
+      end
 
-      expect(subject.allow_closing?).to be_true
+      it "returns true if there are no bidders for negotiation" do
+        subject.stub(:bidders_selected_for_negociation => [])
+
+        expect(subject.allow_closing?).to be_true
+      end
+
+      it "returns true if the winning bidder is benefited" do
+        winner.stub(:benefited => true)
+
+        expect(subject.allow_closing?).to be_true
+      end
+
+      it 'returns false when there are bidders for negotiation and the winner is not benefited' do
+        subject.stub(:bidders_selected_for_negociation => ['bidder'])
+        winner.stub(:benefited => false)
+
+        expect(subject.allow_closing?).to be_false
+      end
     end
 
-    it "returns true if the winning bidder is benefited" do
-      winner.stub(:benefited => true)
+    context 'when closed' do
+      before do
+        subject.stub(:closed? => true)
+      end
 
-      expect(subject.allow_closing?).to be_true
+      it "returns true if there are no bidders for negotiation" do
+        subject.stub(:bidders_selected_for_negociation => [])
+
+        expect(subject.allow_closing?).to be_false
+      end
+
+      it "returns true if the winning bidder is benefited" do
+        winner.stub(:benefited => true)
+
+        expect(subject.allow_closing?).to be_false
+      end
     end
   end
 

@@ -349,4 +349,41 @@ describe TradingItemDecorator do
       end
     end
   end
+
+  describe '#cannot_close_trading_item_message' do
+    context 'when not allow closing' do
+      before do
+        component.stub(:allow_closing? => false)
+
+        I18n.backend.store_translations 'pt-BR', :trading_item => {
+            :messages => {
+              :must_be_open => 'encerrado',
+              :cannot_be_closed => 'não pode ser fechado'
+            }
+          }
+      end
+
+      it 'should return message when closed' do
+        component.stub(:closed?).and_return(true)
+
+        expect(subject.cannot_close_trading_item_message).to eq 'encerrado'
+      end
+
+      it 'should return message when not closed' do
+        component.stub(:closed?).and_return(false)
+
+        expect(subject.cannot_close_trading_item_message).to eq 'não pode ser fechado'
+      end
+    end
+
+    context 'when allow closing' do
+      before do
+        component.stub(:allow_closing? => true)
+      end
+
+      it 'should returns nil' do
+        expect(subject.cannot_close_trading_item_message).to eq nil
+      end
+    end
+  end
 end

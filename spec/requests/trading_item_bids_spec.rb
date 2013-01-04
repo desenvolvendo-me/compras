@@ -977,6 +977,9 @@ feature "TradingItemBids" do
 
     expect(page).to have_content 'Classificação das Ofertas'
 
+    expect(page).to have_disabled_element "Encerramento do item",
+        :reason => "Não pode ser encerrado enquanto não houver pelo menos um licitantes beneficiados com proposta na negociação"
+
     click_link 'Iniciar Negociação'
 
     expect(page).to have_content 'Negociação'

@@ -51,6 +51,12 @@ class TradingItemDecorator
     end
   end
 
+  def cannot_close_trading_item_message
+    return if allow_closing?
+
+    must_be_open || t('trading_item.messages.cannot_be_closed')
+  end
+
   private
 
   def negotiation_or_classification_path(stage_calculator)
