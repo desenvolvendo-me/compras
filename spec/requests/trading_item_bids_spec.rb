@@ -154,6 +154,7 @@ feature "TradingItemBids" do
     expect(page).to have_field 'Valor da proposta', :with => '0,00'
     expect(page).to have_disabled_field 'Menor preço'
     expect(page).to have_field 'Menor preço', :with => '100,00'
+    expect(page).to have_disabled_field 'Licitante com menor preço', :with => 'Gabriel Sobrinho'
     expect(page).to have_disabled_field 'Valor limite'
     expect(page).to have_field 'Valor limite', :with => '99,99'
 
@@ -175,6 +176,7 @@ feature "TradingItemBids" do
     expect(page).to have_field 'Valor da proposta', :with => '0,00'
     expect(page).to have_disabled_field 'Menor preço'
     expect(page).to have_field 'Menor preço', :with => '99,00'
+    expect(page).to have_disabled_field 'Licitante com menor preço', :with => 'Nobe'
     expect(page).to have_disabled_field 'Valor limite'
     expect(page).to have_field 'Valor limite', :with => '98,99'
 
@@ -196,6 +198,7 @@ feature "TradingItemBids" do
     expect(page).to have_field 'Valor da proposta', :with => '0,00'
     expect(page).to have_disabled_field 'Menor preço'
     expect(page).to have_field 'Menor preço', :with => '80,00'
+    expect(page).to have_disabled_field 'Licitante com menor preço', :with => 'Gabriel Sobrinho'
     expect(page).to have_disabled_field 'Valor limite'
     expect(page).to have_field 'Valor limite', :with => '79,99'
 
@@ -217,6 +220,7 @@ feature "TradingItemBids" do
     expect(page).to have_field 'Valor da proposta', :with => '0,00'
     expect(page).to have_disabled_field 'Menor preço'
     expect(page).to have_field 'Menor preço', :with => '79,00'
+    expect(page).to have_disabled_field 'Licitante com menor preço', :with => 'Nobe'
     expect(page).to have_disabled_field 'Valor limite'
     expect(page).to have_field 'Valor limite', :with => '78,99'
 
@@ -238,6 +242,7 @@ feature "TradingItemBids" do
     expect(page).to have_field 'Valor da proposta', :with => '0,00'
     expect(page).to have_disabled_field 'Menor preço'
     expect(page).to have_field 'Menor preço', :with => '78,00'
+    expect(page).to have_disabled_field 'Licitante com menor preço', :with => 'Gabriel Sobrinho'
     expect(page).to have_disabled_field 'Valor limite'
     expect(page).to have_field 'Valor limite', :with => '77,99'
 

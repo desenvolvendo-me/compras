@@ -33,6 +33,10 @@ class TradingItem < Compras::Model
     lowest_bid_with_proposal.try(:amount) || BigDecimal(0)
   end
 
+  def lowest_proposal_bidder
+    lowest_bid_with_proposal.try(:bidder) || ''
+  end
+
   def enabled_bidders_by_lowest_proposal
     bidders_with_proposals.enabled.sort do |a,b|
       a.lower_trading_item_bid_amount(self) <=> b.lower_trading_item_bid_amount(self)

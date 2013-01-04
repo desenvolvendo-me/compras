@@ -17,7 +17,7 @@ class TradingItemBid < Compras::Model
            :licitation_process_id,
            :to => :trading_item, :allow_nil => true
 
-  delegate :lowest_proposal_value,
+  delegate :lowest_proposal_value, :lowest_proposal_bidder,
            :to => :trading_item, :allow_nil => true, :prefix => true
 
   validates :round, :trading_item, :bidder, :status, :presence => true

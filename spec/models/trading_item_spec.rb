@@ -71,6 +71,34 @@ describe TradingItem do
     end
   end
 
+  describe '#lowest_proposal_bidder' do
+    it 'should return the last bid proposal bidder for the item' do
+      first_bid = double(:first_bid, :bidder => 'foo')
+      second_bid = double(:second_bid, :bidder => 'bar')
+      third_bid = double(:third_bid, :bidder => 'baz')
+
+      trading_item_bids = double(:trading_item_bids, :with_proposal => [first_bid, second_bid, third_bid])
+      trading_item_bids.should_receive(:with_valid_proposal).and_return(trading_item_bids)
+      trading_item_bids.should_receive(:reorder).and_return(trading_item_bids)
+      trading_item_bids.should_receive(:first).and_return(third_bid)
+
+      subject.should_receive(:trading_item_bids).and_return(trading_item_bids)
+
+      expect(subject.lowest_proposal_bidder).to eq 'baz'
+    end
+
+    it 'should return nil when there is no proposal for the item' do
+      trading_item_bids = double(:trading_item_bids)
+
+      trading_item_bids.should_receive(:with_valid_proposal).and_return(trading_item_bids)
+      trading_item_bids.should_receive(:reorder).and_return([])
+
+      subject.should_receive(:trading_item_bids).and_return(trading_item_bids)
+
+      expect(subject.lowest_proposal_bidder).to eq ''
+    end
+  end
+
   describe '#bidders_by_lowest_proposal' do
     it 'should return bidders ordered by lowest proposal by bidder' do
       bidder1 = double(:bidder1)

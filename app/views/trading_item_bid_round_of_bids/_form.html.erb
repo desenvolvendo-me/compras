@@ -28,6 +28,10 @@
   </div>
 
   <div class="yui3-u-1-4">
+    <%= f.input :trading_item_lowest_proposal_bidder, :disabled => true %>
+  </div>
+
+  <div class="yui3-u-1-4">
     <%= f.input :minimum_limit, :disabled => true, :input_html => { :class => 'decimal', :value => f.object.decorator.minimum_limit } %>
   </div>
 </div>
