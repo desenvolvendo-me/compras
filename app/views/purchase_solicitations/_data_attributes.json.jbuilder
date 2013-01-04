@@ -13,6 +13,7 @@ builder resource, json do
     json.budget_allocation_id budget_allocation.budget_allocation_id
     json.expense_nature       budget_allocation.budget_allocation.expense_nature.to_s
     json.amount               budget_allocation.budget_allocation.amount.to_f
+    json.total_items_value    budget_allocation.total_items_value.to_f
 
     json.items budget_allocation.items do |json, item|
       json.id                    item.id

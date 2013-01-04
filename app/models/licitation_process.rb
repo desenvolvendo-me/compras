@@ -49,6 +49,7 @@ class LicitationProcess < Compras::Model
            :source => :licitation_process_classifications
 
   has_one :trading, :dependent => :restrict
+  has_one :purchase_solicitation, :through => :administrative_process
 
   accepts_nested_attributes_for :administrative_process, :allow_destroy => true
 

@@ -189,4 +189,9 @@
       $('form.licitation_process :input').not('[data-disabled]').attr('disabled', true);
     });
   <% end %>
+
+  <% if resource.purchase_solicitation.present? %>
+    $("#budget_allocations :input").attr("disabled", "disabled");
+    $("#budget_allocations :input[type='button']").hide();
+  <% end %>
 </script>

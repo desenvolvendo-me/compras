@@ -66,10 +66,10 @@
 
     if (purchaseSolicitationItemGroupId) {
       disablePurchaseSolicitation();
-      disableBudgetAllocations();
+      disableBudgetAllocations(false);
     } else if (purchaseSolicitationId) {
       disablePurchaseSolicitationItemGroup();
-      disableBudgetAllocations();
+      disableBudgetAllocations(true);
     }
   })();
 
@@ -83,7 +83,7 @@
         });
       });
 
-      disableBudgetAllocations();
+      disableBudgetAllocations(false);
       disablePurchaseSolicitation();
     } else {
       enableBudgetAllocations();
@@ -101,7 +101,7 @@
         renderBudgetAllocation(budget_allocation);
       });
 
-      disableBudgetAllocations();
+      disableBudgetAllocations(true);
       disablePurchaseSolicitationItemGroup();
       fulfillResponsible(purchase_solicitation.responsible);
     } else {
@@ -129,7 +129,7 @@
 
     $("#administrative-process-budget-allocation").append(
       $("#administrative-process-budget-allocation-template").mustache(budgetAllocationBinds)
-      ).trigger("nestedForm:afterAdd");
+    ).trigger("nestedForm:afterAdd");
 
     fillBudgetAllocation(budgetAllocationUUID, budget_allocation);
   }
@@ -140,10 +140,15 @@
     $(prefixNameUuid + "_budget_allocation").val(budget_allocation.description);
     $(prefixNameUuid + "_budget_allocation_id").val(budget_allocation.budget_allocation_id);
     $(prefixNameUuid + "_budget_allocation_amount").val(numberWithDelimiter(budget_allocation.amount));
+    $(prefixNameUuid + "_value").val(numberWithDelimiter(budget_allocation.total_items_value));
   }
 
-  function disableBudgetAllocations() {
-    $("#budget-allocations .modal").attr("disabled", "disabled");
+  function disableBudgetAllocations(disableAll) {
+    if(disableAll) {
+      $("#budget-allocations :input").attr("disabled", "disabled");
+    } else {
+      $("#budget-allocations .modal").attr("disabled", "disabled");
+    }
     $("#budget-allocations .add-administrative-process-budget-allocation").hide();
     $("#budget-allocations .remove-administrative-process-budget-allocation").hide();
   }
