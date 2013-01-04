@@ -20,6 +20,8 @@ module Matchers
 
       url_before_click = current_url
 
+      page.execute_script %{ $(".ui-tooltip.ui-widget.ui-corner-all.ui-widget-content").remove() }
+
       element.click
 
       expect(current_url).to eq(url_before_click)
