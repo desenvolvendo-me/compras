@@ -35,10 +35,6 @@ class TradingItemDecorator
     must_have_minimum_reduction || must_be_open || must_have_only_one_item_started
   end
 
-  def bidder_position(index)
-    index.succ - component.bidders.disabled.count
-  end
-
   def any_bid_at_negotiation?
     trading_item_bids.at_stage_of_negotiation.any?
   end

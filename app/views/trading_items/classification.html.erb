@@ -13,7 +13,7 @@
   </thead>
 
   <tbody>
-    <% resource.bidders_by_lowest_proposal.each_with_index do |bidder, index| %>
+    <% resource.enabled_bidders_by_lowest_proposal.each_with_index do |bidder, index| %>
       <tr id="<%= dom_id bidder %>" class="<%= bidder.decorator.benefited_by_law_of_proposals_class(resource) %>">
         <td class="bidder-name g-1-2">
           <%= bidder %>
@@ -32,18 +32,44 @@
         </td>
 
         <td class="bidder-position">
-          <%= numeric_position(resource.decorator.bidder_position(index)) unless bidder.disabled %>
+          <%= numeric_position(index.succ) unless bidder.disabled %>
         </td>
 
         <td>
-          <% if bidder.disabled? %>
-            Inabilitado
-          <% elsif resource.can_be_disabled?(bidder) %>
+          <% if resource.can_be_disabled?(bidder) %>
             <%= link_to "Inabilitar", new_disabled_bidder_path(:bidder_id => bidder.id, :trading_item_id => resource.id),
               :class => "button primary" %>
           <% else %>
             &nbsp;
           <% end %>
+        </td>
+      </tr>
+    <% end %>
+
+    <% resource.disabled_bidders_by_lowest_proposal.each_with_index do |bidder, index| %>
+      <tr id="<%= dom_id bidder %>" class="<%= bidder.decorator.benefited_by_law_of_proposals_class(resource) %>">
+        <td class="bidder-name g-1-2">
+          <%= bidder %>
+        </td>
+
+        <td class="bidder-benefited g-1-6">
+          <%= bidder.decorator.benefited %>
+        </td>
+
+        <td class="bidder-amount g-1-6">
+          <%= bidder.decorator.lower_trading_item_bid_amount(resource) %>
+        </td>
+
+        <td class="bidder-percent g-1-10">
+          <%= bidder.decorator.trading_item_classification_percent(resource) %>
+        </td>
+
+        <td class="bidder-position">
+          <%= numeric_position(index.succ) unless bidder.disabled %>
+        </td>
+
+        <td>
+            Inabilitado
         </td>
       </tr>
     <% end %>

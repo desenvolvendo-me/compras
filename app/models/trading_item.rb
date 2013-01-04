@@ -39,6 +39,12 @@ class TradingItem < Compras::Model
     end
   end
 
+  def disabled_bidders_by_lowest_proposal
+    bidders_with_proposals.disabled.sort do |a,b|
+      a.lower_trading_item_bid_amount(self) <=> b.lower_trading_item_bid_amount(self)
+    end
+  end
+
   def bidders_by_lowest_proposal
     bidders_with_proposals.sort do |a,b|
       a.lower_trading_item_bid_amount(self) <=> b.lower_trading_item_bid_amount(self)
