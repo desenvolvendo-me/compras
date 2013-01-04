@@ -1,3 +1,4 @@
+# encoding: utf-8
 class TradingItemBidNegotiationsController < CrudController
   defaults :resource_class => TradingItemBid, :instance_name => 'trading_item_bid',
            :collection_name => "trading_item_bids"
@@ -30,6 +31,10 @@ class TradingItemBidNegotiationsController < CrudController
 
   def main_controller_name
     'tradings'
+  end
+
+  def interpolation_options
+    { :resource_name => 'Negociação' }
   end
 
   def create_resource(object)

@@ -296,25 +296,25 @@ feature "Tradings" do
 
     click_button "Salvar"
 
-    expect(page).to have_content 'Oferta criada com sucesso'
+    expect(page).to have_content 'Proposta criada com sucesso'
 
     fill_in "Valor da proposta", :with => "101,00"
 
     click_button "Salvar"
 
-    expect(page).to have_content 'Oferta criada com sucesso'
+    expect(page).to have_content 'Proposta criada com sucesso'
 
     fill_in "Valor da proposta", :with => "102,00"
 
     click_button "Salvar"
 
-    expect(page).to have_content 'Oferta criada com sucesso'
+    expect(page).to have_content 'Proposta criada com sucesso'
 
     fill_in "Valor da proposta", :with => "103,00"
 
     click_button "Salvar"
 
-    expect(page).to have_content 'Oferta criada com sucesso'
+    expect(page).to have_content 'Proposta criada com sucesso'
 
     click_link "Registrar lances"
 
@@ -425,7 +425,7 @@ feature "Tradings" do
 
     click_button "Salvar"
 
-    expect(page).to have_content 'Oferta criada com sucesso'
+    expect(page).to have_content 'Negociação criada com sucesso'
 
     expect(page).to_not have_link 'Desfazer última oferta'
     expect(page).to have_link 'Desfazer última negociação'

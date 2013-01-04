@@ -32,6 +32,10 @@ class TradingItemBidProposalsController < CrudController
     'tradings'
   end
 
+  def interpolation_options
+    { :resource_name => 'Proposta' }
+  end
+
   def create_resource(object)
     object.transaction do
       object.stage  = TradingItemBidStage::PROPOSALS

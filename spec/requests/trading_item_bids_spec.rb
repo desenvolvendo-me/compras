@@ -41,7 +41,7 @@ feature "TradingItemBids" do
 
     click_button "Salvar"
 
-    expect(page).to have_notice "Oferta criada com sucesso"
+    expect(page).to have_notice "Proposta criada com sucesso"
   end
 
   scenario "Placing an proposal to an item and showing the proposal report after make all proposals" do
@@ -75,7 +75,7 @@ feature "TradingItemBids" do
 
     click_button "Salvar"
 
-    expect(page).to have_notice "Oferta criada com sucesso"
+    expect(page).to have_notice "Proposta criada com sucesso"
 
     expect(page).to have_checked_field 'Com proposta'
     expect(page).to_not have_checked_field 'Sem proposta'
@@ -94,7 +94,7 @@ feature "TradingItemBids" do
 
     click_button "Salvar"
 
-    expect(page).to have_notice "Oferta criada com sucesso"
+    expect(page).to have_notice "Proposta criada com sucesso"
 
     expect(page).to have_checked_field 'Com proposta'
     expect(page).to_not have_checked_field 'Sem proposta'
@@ -112,6 +112,8 @@ feature "TradingItemBids" do
     fill_in "Valor da proposta", :with => "101,00"
 
     click_button "Salvar"
+
+    expect(page).to have_notice "Proposta criada com sucesso"
 
     expect(page).to have_content 'Propostas'
 
@@ -159,6 +161,7 @@ feature "TradingItemBids" do
 
     click_button "Salvar"
 
+    expect(page).to have_notice "Oferta criada com sucesso"
     expect(page).to have_checked_field 'Com proposta'
     expect(page).to_not have_checked_field 'Sem proposta'
     expect(page).to_not have_checked_field 'Desclassificado'
@@ -179,6 +182,7 @@ feature "TradingItemBids" do
 
     click_button "Salvar"
 
+    expect(page).to have_notice "Oferta criada com sucesso"
     expect(page).to have_checked_field 'Com proposta'
     expect(page).to_not have_checked_field 'Sem proposta'
     expect(page).to_not have_checked_field 'Desclassificado'
@@ -199,6 +203,7 @@ feature "TradingItemBids" do
 
     click_button "Salvar"
 
+    expect(page).to have_notice "Oferta criada com sucesso"
     expect(page).to have_checked_field 'Com proposta'
     expect(page).to_not have_checked_field 'Sem proposta'
     expect(page).to_not have_checked_field 'Desclassificado'
@@ -219,6 +224,7 @@ feature "TradingItemBids" do
 
     click_button "Salvar"
 
+    expect(page).to have_notice "Oferta criada com sucesso"
     expect(page).to have_checked_field 'Com proposta'
     expect(page).to_not have_checked_field 'Sem proposta'
     expect(page).to_not have_checked_field 'Desclassificado'
@@ -675,7 +681,7 @@ feature "TradingItemBids" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Oferta editada com sucesso.'
+    expect(page).to have_notice 'Proposta editada com sucesso.'
 
     within 'tbody tr:nth-child(1)' do
       expect(page).to have_content 'Gabriel Sobrinho'
@@ -885,7 +891,7 @@ feature "TradingItemBids" do
 
     click_button 'Salvar'
 
-    expect(page).to have_content 'Oferta criada com sucesso'
+    expect(page).to have_content 'Negociação criada com sucesso'
     expect(page).to have_content 'Negociação'
     expect(page).to have_field 'Licitante', :with => 'Nobe'
 
@@ -893,7 +899,7 @@ feature "TradingItemBids" do
 
     click_button 'Salvar'
 
-    expect(page).to have_content 'Oferta criada com sucesso'
+    expect(page).to have_content 'Negociação criada com sucesso'
     expect(page).to have_content 'Classificação das Ofertas'
     expect(page).to have_link 'Encerramento do item'
     expect(page).to_not have_link 'Iniciar Negociação'
@@ -989,7 +995,7 @@ feature "TradingItemBids" do
 
     click_button 'Salvar'
 
-    expect(page).to have_content 'Oferta criada com sucesso'
+    expect(page).to have_content 'Negociação criada com sucesso'
     expect(page).to have_content 'Classificação das Ofertas'
     expect(page).to have_link 'Encerramento do item'
     expect(page).to_not have_link 'Iniciar Negociação'
