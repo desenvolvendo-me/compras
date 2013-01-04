@@ -298,7 +298,7 @@ feature "TradingItemBids" do
     expect(page).to have_field "Número da rodada", :with => "1"
     expect(page).to have_disabled_field "Número da rodada"
 
-    expect(page).to have_field "Licitante", :with => "Wenderson Malheiros"
+    expect(page).to have_field "Licitante", :with => "Nobe"
     expect(page).to have_disabled_field "Licitante"
     expect(page).to have_field 'Valor da proposta', :with => '0,00'
     expect(page).to have_disabled_field 'Menor preço'
@@ -335,7 +335,7 @@ feature "TradingItemBids" do
     expect(page).to have_field "Número da rodada", :with => "1"
     expect(page).to have_disabled_field "Número da rodada"
 
-    expect(page).to have_field "Licitante", :with => "Wenderson Malheiros"
+    expect(page).to have_field "Licitante", :with => "Nobe"
     expect(page).to have_disabled_field "Licitante"
     expect(page).to have_field 'Menor preço', :with => '100,00'
     expect(page).to have_field 'Valor limite', :with => '99,99'
@@ -351,7 +351,7 @@ feature "TradingItemBids" do
     expect(page).to have_field "Número da rodada", :with => "1"
     expect(page).to have_disabled_field "Número da rodada"
 
-    expect(page).to have_field "Licitante", :with => "Nobe"
+    expect(page).to have_field "Licitante", :with => "Wenderson Malheiros"
     expect(page).to have_disabled_field "Licitante"
 
     fill_in "Valor da proposta", :with => "90,00"
@@ -551,14 +551,14 @@ feature "TradingItemBids" do
     expect(page).to_not have_checked_field 'Apenas beneficiados'
 
     within '.records tbody tr:nth-child(1)' do
-      expect(page.find('.bidder-name')).to have_content 'Nobe'
+      expect(page.find('.bidder-name')).to have_content 'Wenderson Malheiros'
       expect(page.find('.bidder-amount')).to have_content '90,00'
       expect(page.find('.bidder-percent')).to have_content '0,00'
       expect(page.find('.bidder-position')).to have_content '1º lugar'
     end
 
     within '.records tbody tr:nth-child(2)' do
-      expect(page.find('.bidder-name')).to have_content 'Wenderson Malheiros'
+      expect(page.find('.bidder-name')).to have_content 'Nobe'
       expect(page.find('.bidder-amount')).to have_content '99,00'
       expect(page.find('.bidder-percent')).to have_content '10,00'
       expect(page.find('.bidder-position')).to have_content '2º lugar'
@@ -766,7 +766,7 @@ feature "TradingItemBids" do
 
     click_link 'Registrar lances'
 
-    expect(page).to have_field 'Licitante', :with => 'Wenderson Malheiros'
+    expect(page).to have_field 'Licitante', :with => 'Nobe'
     expect(page).to have_field 'Menor preço', :with => '100,00'
     expect(page).to have_field 'Valor limite', :with => '99,99'
 
@@ -776,7 +776,7 @@ feature "TradingItemBids" do
 
     click_button 'Salvar'
 
-    expect(page).to have_field 'Licitante', :with => 'Nobe'
+    expect(page).to have_field 'Licitante', :with => 'Wenderson Malheiros'
     expect(page).to have_field 'Menor preço', :with => '80,00'
     expect(page).to have_field 'Valor limite', :with => '79,99'
 
@@ -784,7 +784,7 @@ feature "TradingItemBids" do
 
     click_link 'Registrar lances'
 
-    expect(page).to have_field 'Licitante', :with => 'Wenderson Malheiros'
+    expect(page).to have_field 'Licitante', :with => 'Nobe'
     expect(page).to have_field 'Menor preço', :with => '100,00'
     expect(page).to have_field 'Valor limite', :with => '99,99'
 
@@ -794,7 +794,7 @@ feature "TradingItemBids" do
 
     click_button 'Salvar'
 
-    expect(page).to have_field 'Licitante', :with => 'Nobe'
+    expect(page).to have_field 'Licitante', :with => 'Wenderson Malheiros'
     choose 'Sem proposta'
 
     click_button 'Salvar'
@@ -1007,8 +1007,8 @@ feature "TradingItemBids" do
 
     within '.records tbody tr:nth-child(3)' do
       expect(page.find('.bidder-name')).to have_content 'Nobe'
-      expect(page.find('.bidder-amount')).to have_content '98,00'
-      expect(page.find('.bidder-percent')).to have_content '3,16'
+      expect(page.find('.bidder-amount')).to have_content '99,00'
+      expect(page.find('.bidder-percent')).to have_content '4,21'
       expect(page.find('.bidder-position')).to have_content '3º lugar'
     end
   end

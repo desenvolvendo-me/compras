@@ -52,7 +52,7 @@ describe TradingItemBidRoundOfBidsController do
         expect(assigns(:trading_item_bid).trading_item).to eq trading_item
         expect(assigns(:trading_item_bid).amount).to eq 0
         expect(assigns(:trading_item_bid).round).to eq 1
-        expect(assigns(:trading_item_bid).bidder).to eq bidder2
+        expect(assigns(:trading_item_bid).bidder).to eq bidder3
         expect(assigns(:trading_item_bid).status).to eq TradingItemBidStatus::WITH_PROPOSAL
         expect(assigns(:trading_item_bid).stage).to eq TradingItemBidStage::ROUND_OF_BIDS
       end

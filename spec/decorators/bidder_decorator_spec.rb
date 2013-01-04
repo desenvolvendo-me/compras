@@ -268,4 +268,22 @@ describe BidderDecorator do
       expect(subject.cant_save_or_destroy_message).to eq 'ratification'
     end
   end
+
+  describe '#cant_save_or_destroy_message' do
+    before do
+      I18n.backend.store_translations 'pt-BR', :true =>'sim', :false => 'não'
+    end
+
+    it 'when bidders are not benefited' do
+      component.stub(:benefited => false)
+
+      expect(subject.benefited).to eq 'não'
+    end
+
+    it 'when bidders are benefited' do
+      component.stub(:benefited => true)
+
+      expect(subject.benefited).to eq 'sim'
+    end
+  end
 end

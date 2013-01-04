@@ -280,7 +280,7 @@ feature "Tradings" do
   scenario "trading session with negotiation and closing stage" do
     TradingConfiguration.make!(:pregao)
     trading_item = TradingItem.make!(:item_pregao_presencial,
-      :minimum_reduction_value => 2.0)
+      :minimum_reduction_value => 1.0)
     trading_item2 = TradingItem.make!(:segundo_item_pregao_presencial)
     trading = Trading.make!(:pregao_presencial, :trading_items => [trading_item, trading_item2])
     trading.licitation_process.bidders << Bidder.make!(:licitante_com_proposta_3)
@@ -296,17 +296,25 @@ feature "Tradings" do
 
     click_button "Salvar"
 
+    expect(page).to have_content 'Oferta criada com sucesso'
+
     fill_in "Valor da proposta", :with => "101,00"
 
     click_button "Salvar"
+
+    expect(page).to have_content 'Oferta criada com sucesso'
 
     fill_in "Valor da proposta", :with => "102,00"
 
     click_button "Salvar"
 
+    expect(page).to have_content 'Oferta criada com sucesso'
+
     fill_in "Valor da proposta", :with => "103,00"
 
     click_button "Salvar"
+
+    expect(page).to have_content 'Oferta criada com sucesso'
 
     click_link "Registrar lances"
 
@@ -315,62 +323,80 @@ feature "Tradings" do
 
     click_button "Salvar"
 
+    expect(page).to have_content 'Oferta criada com sucesso'
+
+    fill_in "Valor da proposta", :with => "97,00"
+
+    click_button "Salvar"
+
+    expect(page).to have_content 'Oferta criada com sucesso'
+
     fill_in "Valor da proposta", :with => "96,00"
 
     click_button "Salvar"
+
+    expect(page).to have_content 'Oferta criada com sucesso'
+
+    fill_in "Valor da proposta", :with => "95,00"
+
+    click_button "Salvar"
+
+    expect(page).to have_content 'Oferta criada com sucesso'
+
+    expect(page).to have_field "Menor preço", :with => "95,00"
+    expect(page).to have_field "Valor limite", :with => "94,00"
+
+    choose "Declinou"
+
+    click_button "Salvar"
+
+    expect(page).to have_content 'Oferta criada com sucesso'
+
+    choose "Declinou"
+
+    click_button "Salvar"
+
+    expect(page).to have_content 'Oferta criada com sucesso'
 
     fill_in "Valor da proposta", :with => "94,00"
 
     click_button "Salvar"
 
-    fill_in "Valor da proposta", :with => "92,00"
-
-    click_button "Salvar"
-
-    expect(page).to have_field "Menor preço", :with => "92,00"
-    expect(page).to have_field "Valor limite", :with => "90,00"
-
-    choose "Declinou"
-
-    click_button "Salvar"
-
-    fill_in "Valor da proposta", :with => "0,00"
-
-    click_button "Salvar"
-
-    choose "Declinou"
-
-    click_button "Salvar"
+    expect(page).to have_content 'Oferta criada com sucesso'
 
     fill_in "Valor da proposta", :with => "50,00"
 
     click_button "Salvar"
 
+    expect(page).to have_content 'Oferta criada com sucesso'
+
     choose "Declinou"
 
     click_button "Salvar"
+
+    expect(page).to have_content 'Oferta criada com sucesso'
 
     expect(page).to have_link 'Desfazer última oferta'
 
     within_records do
       within("tbody tr:nth-child(1)") do
-        expect(page).to have_content "Wenderson Malheiros"
+        expect(page).to have_content "Gabriel Sobrinho"
         expect(page).to have_content "1º lugar"
         expect(page).to have_link "Inabilitar"
       end
 
       within("tbody tr:nth-child(2)") do
-        expect(page).to have_content "Gabriel Sobrinho"
+        expect(page).to have_content "Wenderson Malheiros"
         expect(page).to have_content "2º lugar"
       end
 
       within("tbody tr:nth-child(3)") do
-        expect(page).to have_content "Nohup"
+        expect(page).to have_content "Nobe"
         expect(page).to have_content "3º lugar"
       end
 
       within("tbody tr:nth-child(4)") do
-        expect(page).to have_content "Nobe"
+        expect(page).to have_content "Nohup"
         expect(page).to have_content "4º lugar"
       end
     end
@@ -391,13 +417,15 @@ feature "Tradings" do
     expect(page).to have_content 'Negociação'
     expect(page).to have_disabled_field "Etapa"
     expect(page).to have_field "Etapa", :with => "Negociação"
-    expect(page).to have_field "Licitante", :with => "Nohup"
-    expect(page).to have_field "Menor preço", :with => "92,00"
-    expect(page).to have_field "Valor limite", :with => "91,99"
+    expect(page).to have_field "Licitante", :with => "Nobe"
+    expect(page).to have_field "Menor preço", :with => "94,00"
+    expect(page).to have_field "Valor limite", :with => "93,99"
 
-    fill_in "Valor da proposta", :with => "91,50"
+    fill_in "Valor da proposta", :with => "93,99"
 
     click_button "Salvar"
+
+    expect(page).to have_content 'Oferta criada com sucesso'
 
     expect(page).to_not have_link 'Desfazer última oferta'
     expect(page).to have_link 'Desfazer última negociação'
@@ -412,33 +440,33 @@ feature "Tradings" do
     expect(page).to have_content 'Negociação'
     expect(page).to have_disabled_field "Etapa"
     expect(page).to have_field "Etapa", :with => "Negociação"
-    expect(page).to have_field "Licitante", :with => "Nohup"
-    expect(page).to have_field "Menor preço", :with => "92,00"
-    expect(page).to have_field "Valor limite", :with => "91,99"
+    expect(page).to have_field "Licitante", :with => "Nobe"
+    expect(page).to have_field "Menor preço", :with => "94,00"
+    expect(page).to have_field "Valor limite", :with => "93,99"
 
-    fill_in "Valor da proposta", :with => "91,50"
+    fill_in "Valor da proposta", :with => "93,99"
 
     click_button 'Salvar'
 
     within_records do
       within("tbody tr:nth-child(1)") do
-        expect(page).to have_content "Wenderson Malheiros"
+        expect(page).to have_content "Gabriel Sobrinho"
         expect(page).to have_content "Inabilitado"
       end
 
       within("tbody tr:nth-child(2)") do
-        expect(page).to have_content "Nohup"
+        expect(page).to have_content "Nobe"
         expect(page).to have_content "1º lugar"
         expect(page).not_to have_link "Inabilitar"
       end
 
       within("tbody tr:nth-child(3)") do
-        expect(page).to have_content "Gabriel Sobrinho"
+        expect(page).to have_content "Wenderson Malheiros"
         expect(page).to have_content "2º lugar"
       end
 
       within("tbody tr:nth-child(4)") do
-        expect(page).to have_content "Nobe"
+        expect(page).to have_content "Nohup"
         expect(page).to have_content "3º lugar"
       end
     end
@@ -488,29 +516,29 @@ feature "Tradings" do
 
     within '.round-of-bids table:nth-of-type(1)' do
       within "tr:nth-child(1)" do
-        expect(page).to have_content "Wenderson Malheiros"
+        expect(page).to have_content "Nohup"
         expect(page).to have_content "98,00"
-        expect(page).to have_content "6,52"
+        expect(page).to have_content "3,16"
         expect(page).to have_content "Com proposta"
       end
 
       within "tr:nth-child(2)" do
         expect(page).to have_content "Nobe"
-        expect(page).to have_content "96,00"
-        expect(page).to have_content "4,35"
+        expect(page).to have_content "97,00"
+        expect(page).to have_content "2,11"
         expect(page).to have_content "Com proposta"
       end
 
       within "tr:nth-child(3)" do
-        expect(page).to have_content "Nohup"
-        expect(page).to have_content "94,00"
-        expect(page).to have_content "2,17"
+        expect(page).to have_content "Wenderson Malheiros"
+        expect(page).to have_content "96,00"
+        expect(page).to have_content "1,05"
         expect(page).to have_content "Com proposta"
       end
 
       within "tr:nth-child(4)" do
         expect(page).to have_content "Gabriel Sobrinho"
-        expect(page).to have_content "92,00"
+        expect(page).to have_content "95,00"
         expect(page).to have_content "0,00"
         expect(page).to have_content "Com proposta"
       end
@@ -518,38 +546,47 @@ feature "Tradings" do
 
     within '.round-of-bids table:nth-of-type(2)' do
       within "tr:nth-child(1)" do
-        expect(page).to have_content "Nobe"
-        expect(page).to have_content "96,00"
-        expect(page).to have_content "4,35"
+        expect(page).to have_content "Nohup"
+        expect(page).to have_content "98,00"
+        expect(page).to have_content "3,16"
         expect(page).to have_content "Declinou"
       end
 
       within "tr:nth-child(2)" do
-        expect(page).to have_content "Nohup"
-        expect(page).to have_content "94,00"
-        expect(page).to have_content "2,17"
+        expect(page).to have_content "Nobe"
+        expect(page).to have_content "97,00"
+        expect(page).to have_content "2,11"
         expect(page).to have_content "Declinou"
       end
 
       within "tr:nth-child(3)" do
-        expect(page).to have_content "Gabriel Sobrinho"
-        expect(page).to have_content "92,00"
-        expect(page).to have_content "0,00"
-        expect(page).to have_content "Declinou"
+        expect(page).to have_content "Wenderson Malheiros"
+        expect(page).to have_content "94,00"
+        expect(page).to have_content "88,00"
+        expect(page).to have_content "Com proposta"
       end
 
       within "tr:nth-child(4)" do
-        expect(page).to have_content "Wenderson Malheiros"
+        expect(page).to have_content "Gabriel Sobrinho"
         expect(page).to have_content "50,00"
         expect(page).to have_content "0,00"
         expect(page).to have_content "Com proposta"
       end
     end
 
+    within '.round-of-bids table:nth-of-type(3)' do
+      within "tr:nth-child(1)" do
+        expect(page).to have_content "Wenderson Malheiros"
+        expect(page).to have_content "94,00"
+        expect(page).to have_content "88,00"
+        expect(page).to have_content "Declinou"
+      end
+    end
+
     within '.table-negotiations' do
       within "tbody tr:nth-child(1)" do
-        expect(page).to have_content "Nohup"
-        expect(page).to have_content "91,50"
+        expect(page).to have_content "Nobe"
+        expect(page).to have_content "93,99"
         expect(page).to have_content "0,00"
         expect(page).to have_content "Com proposta"
       end
@@ -561,7 +598,7 @@ feature "Tradings" do
       click_link "Fazer oferta"
     end
 
-    expect(page).to have_field "Licitante", :with => "Gabriel Sobrinho"
+    expect(page).to have_field "Licitante", :with => "Wenderson Malheiros"
     fill_in "Valor da proposta", :with => "500,00"
     click_button "Salvar"
 
@@ -573,11 +610,11 @@ feature "Tradings" do
     fill_in "Valor da proposta", :with => "505,00"
     click_button "Salvar"
 
-    expect(page).not_to have_content "Wenderson Malheiros"
+    expect(page).not_to have_content "Gabriel Sobrinho"
 
     within_records do
       within("tbody tr:nth-child(1)") do
-        expect(page).to have_content "Gabriel Sobrinho"
+        expect(page).to have_content "Wenderson Malheiros"
         expect(page).to have_content "500,00"
         expect(page).to have_content "0,00"
         expect(page).to have_content "Selecionado"

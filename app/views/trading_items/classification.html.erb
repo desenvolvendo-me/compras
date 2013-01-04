@@ -4,6 +4,7 @@
   <thead>
     <tr>
       <th class="g-1-2">Licitante</th>
+      <th class="g-1-6">EPP/ME</th>
       <th class="g-1-6">Valor</th>
       <th class="g-1-10">%</th>
       <th>Classificação</th>
@@ -16,6 +17,10 @@
       <tr id="<%= dom_id bidder %>" class="<%= bidder.decorator.benefited_by_law_of_proposals_class(resource) %>">
         <td class="bidder-name g-1-2">
           <%= bidder %>
+        </td>
+
+        <td class="bidder-benefited g-1-6">
+          <%= bidder.decorator.benefited %>
         </td>
 
         <td class="bidder-amount g-1-6">

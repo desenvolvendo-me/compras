@@ -85,7 +85,7 @@ class TradingItemBid < Compras::Model
   private
 
   def minimum_value_on_negotiation
-    trading_item_lowest_proposal_value - 0.01
+    trading_item_lowest_proposal_value - BigDecimal("0.01")
   end
 
   def validate_amount_on_negotiation?

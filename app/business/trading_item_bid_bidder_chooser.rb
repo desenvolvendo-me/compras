@@ -9,7 +9,7 @@ class TradingItemBidBidderChooser
     if current_round == 0
       bidders_available_for_current_round.first
     else
-      bidders_available_ordered_for_current_round_by_value.rotate.first
+      bidders_available_ordered_for_current_round_by_value.last
     end
   end
 

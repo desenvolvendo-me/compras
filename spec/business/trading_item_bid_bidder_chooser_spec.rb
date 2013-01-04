@@ -72,7 +72,7 @@ describe TradingItemBidBidderChooser do
           bidder2.should_receive(:lower_trading_item_bid_amount).at_least(1).times.and_return(200)
           bidder3.should_receive(:lower_trading_item_bid_amount).at_least(1).times.and_return(300)
 
-          expect(subject.choose).to eq bidder2
+          expect(subject.choose).to eq bidder3
         end
 
         it 'should choose next bidder when proposals have one bidder' do
@@ -97,13 +97,13 @@ describe TradingItemBidBidderChooser do
           trading_item_bidders.stub(:with_proposal_for_round).with(1).and_return(bidders)
         end
 
-        it 'should choose second bidder when proposals have no one yet' do
+        it 'should choose last bidder ordered when proposals have no one yet' do
           trading_item_bidders.stub(:at_bid_round).with(2).and_return([])
           bidder1.should_receive(:lower_trading_item_bid_amount).at_least(1).times.and_return(100)
           bidder2.should_receive(:lower_trading_item_bid_amount).at_least(1).times.and_return(200)
           bidder3.should_receive(:lower_trading_item_bid_amount).at_least(1).times.and_return(300)
 
-          expect(subject.choose).to eq bidder2
+          expect(subject.choose).to eq bidder3
         end
 
         it 'should choose next bidder when proposals have one bidder' do

@@ -70,6 +70,14 @@ class BidderDecorator
     end
   end
 
+  def benefited
+    if component.benefited
+      t('true')
+    else
+      t('false')
+    end
+  end
+
   private
 
   def valid_benefited_percent?(trading_item, percent = 5.0)
