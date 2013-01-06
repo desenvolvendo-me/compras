@@ -1,4 +1,6 @@
 <div class="buttons">
-  <%= f.button :submit, :onclick => "return confirm('Confirma a proposta no valor de R$ '+ document.getElementById('trading_item_bid_amount').value + ' para o licitante ' + document.getElementById('trading_item_bid_bidder').value +  '?' )" %>
+  <%= f.button :submit, :onclick => "return confirm(confirmationMessage())" %>
   <%= link_to t(:back), back_link_path, :class => 'button' %>
 </div>
+
+<%= javascript_include_tag 'trading_item_bid' %>
