@@ -1,5 +1,5 @@
 <div class="buttons">
-  <%= f.button :submit, :onclick => "return confirm('Confirma a oferta no valor de '+ document.getElementById('trading_item_bid_amount').value + ' para o licitante ' + document.getElementById('trading_item_bid_bidder').value +  '?' )" %>
+  <%= f.button :submit, :onclick => "return confirm('Confirma a oferta no valor de R$ '+ document.getElementById('trading_item_bid_amount').value + ' para o licitante ' + document.getElementById('trading_item_bid_bidder').value +  '?' )" %>
   <%= link_to('Desfazer última oferta', destroy_last_bid_path(@parent), :method => 'delete',:class => 'button') if f.object.decorator.show_undo_button? %>
   <%= link_to t(:back), trading_items_path(:trading_id => @parent.trading_id), :class => 'button' %>
 </div>
