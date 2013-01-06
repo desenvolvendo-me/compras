@@ -1,8 +1,8 @@
 class AdministrativeProcessBudgetAllocationCloner
   def initialize(options = {})
-    @administrative_process     = options.fetch(:administrative_process, nil)
-    @new_purchase_solicitation  = options.fetch(:new_purchase_solicitation, nil)
-    @old_purchase_solicitation  = options.fetch(:old_purchase_solicitation, nil)
+    @administrative_process     = options[:administrative_process]
+    @new_purchase_solicitation  = options[:new_purchase_solicitation]
+    @old_purchase_solicitation  = options[:old_purchase_solicitation]
   end
 
   def self.clone(*params)
