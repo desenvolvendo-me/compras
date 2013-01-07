@@ -1,5 +1,6 @@
 <%= f.input :trading_item, :as => :hidden %>
 <%= f.input :trading_item_id, :as => :hidden %>
+<%= f.input :stage, :as => :string, :disabled => true, :input_html => { :value => f.object.stage_humanize }, :as => :hidden %>
 
 <%= f.input :trading_item, :disabled => true %>
 

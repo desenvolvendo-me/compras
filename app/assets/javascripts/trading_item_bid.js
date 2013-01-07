@@ -8,7 +8,7 @@ function confirmationMessage(){
     case "declined":
       return 'Confirma que o licitante ' + bidderName +  ' declinou ?';
     case "with_proposal":
-      return 'Confirma a ' + stageName() + ' no valor de R$ '+ bidAmount + ' para o licitante ' + bidderName + '?';
+      return 'Confirma a ' + stageName() + ' no valor de R$ ' + bidAmount + ' para o licitante ' + bidderName + '?';
     case "disqualified":
       return 'Confirma que o licitante ' + bidderName +  ' foi desclassificado ?';
     case "without_proposal":
