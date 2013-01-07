@@ -1,7 +1,7 @@
 module MenuHelper
   # Load the menu from a defined YAML file
   def render_menu(options = {})
-    filename = options[:path] || 'config/menu.yml'
+    filename = options[:path] || Rails.root.join('config/menu.yml')
 
     menu = YAML::load_file(filename)['menu']
 
