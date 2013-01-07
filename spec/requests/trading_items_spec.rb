@@ -123,4 +123,52 @@ feature TradingItem do
 
     expect(page).to have_readonly_field 'Redução mínima admissível entre os lances em %'
   end
+
+  scenario 'show all bidders at proposal_report' do
+    TradingConfiguration.make!(:pregao)
+    Trading.make!(:pregao_presencial)
+
+    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+
+    click_link "1/2012"
+    click_button "Salvar e ir para Itens/Ofertas"
+    click_link "Fazer oferta"
+
+    # Proposal stage
+    fill_in "Valor da proposta", :with => "100,00"
+
+    click_button "Salvar"
+
+    expect(page).to have_content 'Proposta criada com sucesso'
+
+    fill_in "Valor da proposta", :with => "200,00"
+
+    click_button "Salvar"
+
+    expect(page).to have_content 'Proposta criada com sucesso'
+
+    choose 'Sem proposta'
+
+    click_button "Salvar"
+
+    expect(page).to have_content 'Proposta criada com sucesso'
+
+    within_records do
+      within 'tbody tr:nth-child(1)' do
+        expect(page).to have_content 'Gabriel Sobrinho'
+        expect(page).to have_content '100,00'
+        expect(page).to have_content '0,00'
+        expect(page).to have_content 'Selecionado'
+        expect(page).to have_link 'Corrigir proposta'
+      end
+
+      within 'tbody tr:nth-child(2)' do
+        expect(page).to have_content 'Wenderson Malheiros'
+        expect(page).to have_content '200,00'
+        expect(page).to have_content '100,00'
+        expect(page).to have_content 'Não selecionado'
+        expect(page).to have_link 'Corrigir proposta'
+      end
+    end
+  end
 end

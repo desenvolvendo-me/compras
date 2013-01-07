@@ -35,6 +35,30 @@
         </td>
       </tr>
     <% end %>
+
+    <% resource.bidders.with_no_proposal_for_trading_item(resource.id).each do |bidder| %>
+      <tr id="<%= dom_id bidder %>">
+        <td class="bidder-name">
+          <%= bidder %>
+        </td>
+
+        <td class="bidder-amount">
+          0,00
+        </td>
+
+        <td class="bidder-percent">
+          0,00
+        </td>
+
+        <td class="bidder-position">
+          <%= bidder.decorator.last_status(resource) %>
+        </td>
+
+        <td class="right">
+          <%= link_to 'Corrigir proposta', edit_trading_item_bid_proposal(bidder), :class => 'button primary' %>
+        </td>
+      </tr>
+    <% end %>
   </tbody>
 </table>
 

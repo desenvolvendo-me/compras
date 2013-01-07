@@ -444,4 +444,25 @@ describe Bidder do
       subject.destroy_all_classifications
     end
   end
+
+  describe '#last_bid' do
+    let(:trading_item_bids) { double(:trading_item_bids) }
+    let(:trading_item) { double(:trading_item, :id => 6) }
+
+    before do
+      subject.stub(:trading_item_bids => trading_item_bids)
+    end
+
+    it 'should return nil when there are no bids for item' do
+      trading_item_bids.should_receive(:for_trading_item).with(6).and_return([])
+
+      expect(subject.last_bid(trading_item)).to be_nil
+    end
+
+    it 'should return last bid when there are bids for item' do
+      trading_item_bids.should_receive(:for_trading_item).with(6).and_return(['first', 'last'])
+
+      expect(subject.last_bid(trading_item)).to eq 'last'
+    end
+  end
 end

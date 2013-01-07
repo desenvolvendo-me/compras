@@ -314,6 +314,10 @@ class Bidder < Compras::Model
     trading_item_bids.at_stage_of_negotiation.for_trading_item(item.id).last_valid_proposal.try(:amount) || BigDecimal(0)
   end
 
+  def last_bid(item)
+    trading_item_bids.for_trading_item(item.id).last
+  end
+
   protected
 
   def lower_trading_item_bid_at_stage_of_proposals(trading_item)

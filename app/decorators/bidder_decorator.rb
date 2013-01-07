@@ -78,6 +78,12 @@ class BidderDecorator
     end
   end
 
+  def last_status(trading_item)
+    return unless last_bid(trading_item).present?
+
+    last_bid(trading_item).status_humanize
+  end
+
   private
 
   def valid_benefited_percent?(trading_item, percent = 5.0)

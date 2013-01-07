@@ -12,7 +12,7 @@ describe TradingItemsHelper do
     let(:trading_item_bid) { double(:trading_item_bid, :id => 15, :to_param => '15') }
 
     it 'should returns the path to edit the proposal of that bidder' do
-      bidder.stub(:lower_trading_item_bid).and_return(trading_item_bid)
+      bidder.stub(:last_bid).and_return(trading_item_bid)
 
       expect(helper.edit_trading_item_bid_proposal(bidder)).to eq '/trading_item_bid_proposals/15/edit?trading_item_id=1'
     end

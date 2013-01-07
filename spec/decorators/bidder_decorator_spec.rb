@@ -286,4 +286,21 @@ describe BidderDecorator do
       expect(subject.benefited).to eq 'sim'
     end
   end
+
+  describe '#last_status' do
+    let(:item) { double(:item, :id => 3) }
+
+    it 'should returns nil when there is no bid' do
+      component.should_receive(:last_bid).with(item).and_return(nil)
+
+      expect(subject.last_status(item)).to be_nil
+    end
+
+    it 'should returns status humanized when there is bid' do
+      bid = double(:bid, :status_humanize => "Desclassificado")
+      component.should_receive(:last_bid).twice.with(item).and_return(bid)
+
+      expect(subject.last_status(item)).to eq 'Desclassificado'
+    end
+  end
 end
