@@ -68,6 +68,29 @@ feature "PurchaseSolicitationItemGroups" do
       expect(page).to have_select 'Status', :selected => 'Pendente'
       expect(page).to have_field 'Agrupamento', :with => ''
     end
+
+    navigate 'Processos de Compra > Agrupamentos de Itens de Solicitações de Compra'
+
+    within_records do
+      page.find('a').click
+    end
+
+    fill_modal 'Solicitações de compra', :with => '2012', :field => 'Ano'
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Agrupamento de Item de Solicitação de Compra editado com sucesso.'
+
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      expect(page).to have_select 'Status', :selected => 'Agrupado'
+      expect(page).to have_field 'Agrupamento', :with => 'Agrupamento de antivirus'
+    end
   end
 
   scenario 'update an existent purchase_solicitation_item_group' do

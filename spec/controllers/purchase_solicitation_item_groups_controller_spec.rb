@@ -25,8 +25,15 @@ describe PurchaseSolicitationItemGroupsController do
 
     it 'should update an item group when editable' do
       purchase_solicitation_item_group = PurchaseSolicitationItemGroup.make!(:antivirus)
+      status_changer_instance = PurchaseSolicitationBudgetAllocationItemStatusChanger.new
 
-      PurchaseSolicitationBudgetAllocationItemStatusChanger.any_instance.should_receive(:change)
+      PurchaseSolicitationBudgetAllocationItemStatusChanger.should_receive(:new).with(
+        :new_item_ids => purchase_solicitation_item_group.purchase_solicitation_item_ids,
+        :old_item_ids => purchase_solicitation_item_group.purchase_solicitation_item_ids,
+        :purchase_solicitation_item_group_id => purchase_solicitation_item_group.id).
+        and_return(status_changer_instance)
+
+        status_changer_instance.should_receive(:change)
 
       put :update, :id => purchase_solicitation_item_group.id
     end

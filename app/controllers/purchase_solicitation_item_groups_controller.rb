@@ -41,7 +41,8 @@ class PurchaseSolicitationItemGroupsController < CrudController
 
       PurchaseSolicitationBudgetAllocationItemStatusChanger.new(
         :new_item_ids => object.purchase_solicitation_item_ids,
-        :old_item_ids => old_purchase_solicitation_ids
+        :old_item_ids => old_purchase_solicitation_ids,
+        :purchase_solicitation_item_group_id => object.id
       ).change
     end
   end
