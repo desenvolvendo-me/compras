@@ -56,6 +56,7 @@ describe AdministrativeProcessesController do
         any_instance.should_receive(:fulfill)
 
       AdministrativeProcessBudgetAllocationCloner.should_receive(:clone)
+      AdministrativeProcessItemGroupCloner.should_receive(:clone)
 
       post :create, :administrative_process => {
         :purchase_solicitation_item_group_id => item_group.id }
@@ -146,6 +147,7 @@ describe AdministrativeProcessesController do
         with(:new_item_group => item_group, :old_item_group => administrative_process.purchase_solicitation_item_group).
         and_return(item_group_process)
 
+      AdministrativeProcessItemGroupCloner.should_receive(:clone)
       AdministrativeProcessBudgetAllocationCloner.should_receive(:clone)
 
       item_group_process.should_receive(:update_status)

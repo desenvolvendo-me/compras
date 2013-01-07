@@ -268,4 +268,34 @@ describe LicitationProcessDecorator do
       expect(subject.all_licitation_process_classifications_groupped).to eq bidder1 => [classification2, classification1], bidder2 => [classification3, classification4]
     end
   end
+
+  describe '#disable_budget_allocations?' do
+    it 'should be false when have no purchase_solicitation and item_group' do
+      component.stub(:purchase_solicitation => nil)
+      component.stub(:purchase_solicitation_item_group => nil)
+
+      expect(subject.disable_budget_allocations?).to be_false
+    end
+
+    it 'should be true when have purchase_solicitation' do
+      component.stub(:purchase_solicitation => 'purchase_solicitation')
+      component.stub(:purchase_solicitation_item_group => nil)
+
+      expect(subject.disable_budget_allocations?).to be_true
+    end
+
+    it 'should be true when have item_group' do
+      component.stub(:purchase_solicitation => nil)
+      component.stub(:purchase_solicitation_item_group => 'item_group')
+
+      expect(subject.disable_budget_allocations?).to be_true
+    end
+
+    it 'should be true when have item_group and purchase_solicitation' do
+      component.stub(:purchase_solicitation => 'purchase_solicitation')
+      component.stub(:purchase_solicitation_item_group => 'item_group')
+
+      expect(subject.disable_budget_allocations?).to be_true
+    end
+  end
 end

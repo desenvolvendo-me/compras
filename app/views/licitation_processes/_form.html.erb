@@ -190,7 +190,7 @@
     });
   <% end %>
 
-  <% if resource.purchase_solicitation.present? %>
+  <% if resource.decorator.disable_budget_allocations? %>
     $("#budget_allocations :input").attr("disabled", "disabled");
     $("#budget_allocations :input[type='button']").hide();
   <% end %>

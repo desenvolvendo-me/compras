@@ -66,10 +66,10 @@
 
     if (purchaseSolicitationItemGroupId) {
       disablePurchaseSolicitation();
-      disableBudgetAllocations(false);
+      disableBudgetAllocations();
     } else if (purchaseSolicitationId) {
       disablePurchaseSolicitationItemGroup();
-      disableBudgetAllocations(true);
+      disableBudgetAllocations();
     }
   })();
 
@@ -83,7 +83,7 @@
         });
       });
 
-      disableBudgetAllocations(false);
+      disableBudgetAllocations();
       disablePurchaseSolicitation();
     } else {
       enableBudgetAllocations();
@@ -101,7 +101,7 @@
         renderBudgetAllocation(budget_allocation);
       });
 
-      disableBudgetAllocations(true);
+      disableBudgetAllocations();
       disablePurchaseSolicitationItemGroup();
       fulfillResponsible(purchase_solicitation.responsible);
     } else {
@@ -143,12 +143,8 @@
     $(prefixNameUuid + "_value").val(numberWithDelimiter(budget_allocation.total_items_value));
   }
 
-  function disableBudgetAllocations(disableAll) {
-    if(disableAll) {
-      $("#budget-allocations :input").attr("disabled", "disabled");
-    } else {
-      $("#budget-allocations .modal").attr("disabled", "disabled");
-    }
+  function disableBudgetAllocations() {
+    $("#budget-allocations :input").attr("disabled", "disabled");
     $("#budget-allocations .add-administrative-process-budget-allocation").hide();
     $("#budget-allocations .remove-administrative-process-budget-allocation").hide();
   }
@@ -169,12 +165,14 @@
     var total = 0,
         value;
 
-    $.each($('.allocation-value:visible'), function() {
-      value = $(this).attr('value');
+    $('.allocation-value:visible').each(function() {
+      value = $(this).val();
+
       if (value) {
         total += parsePtBrFloat(value);
       }
     });
+
     $('#administrative_process_total_allocations_value').val(numberWithDelimiter(total));
   }
 

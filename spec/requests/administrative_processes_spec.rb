@@ -122,13 +122,11 @@ feature "AdministrativeProcesses" do
 
       expect(page).to have_disabled_field 'Dotação orçamentaria'
       expect(page).to have_disabled_field 'Saldo da dotação'
+      expect(page).to have_disabled_field 'Valor previsto'
 
       expect(page).to have_field 'Dotação orçamentaria', :with => '1 - Alocação'
       expect(page).to have_field 'Saldo da dotação', :with => '500,00'
-
-      fill_in 'Valor previsto', :with => '20,00'
-
-      expect(page).to have_field 'Valor total', :with => '20,00'
+      expect(page).to have_field 'Valor previsto', :with => '19.800,00'
     end
 
     click_button 'Salvar'
@@ -160,13 +158,54 @@ feature "AdministrativeProcesses" do
 
       expect(page).to have_disabled_field 'Dotação orçamentaria'
       expect(page).to have_disabled_field 'Saldo da dotação'
+      expect(page).to have_disabled_field 'Valor previsto'
 
       expect(page).to have_field 'Dotação orçamentaria', :with => '1 - Alocação'
       expect(page).to have_field 'Saldo da dotação', :with => '500,00'
+      expect(page).to have_field 'Valor previsto', :with => '19.800,00'
+      expect(page).to have_field 'Valor total', :with => '19.800,00'
+    end
 
-      expect(page).to have_field 'Valor previsto', :with => '20,00'
+    click_link 'Liberar'
 
-      expect(page).to have_field 'Valor total', :with => '20,00'
+    click_button 'Salvar'
+
+    click_link 'Novo processo licitatório'
+
+    within_tab 'Dotações orçamentarias' do
+      expect(page).to have_field 'Dotação orçamentaria', :with => '1 - Alocação'
+      expect(page).to have_disabled_field 'Dotação orçamentaria'
+
+      expect(page).to have_field 'Saldo da dotação', :with => '500,00'
+      expect(page).to have_disabled_field 'Saldo da dotação'
+
+      expect(page).to have_field 'Valor previsto', :with => '19.800,00'
+      expect(page).to have_disabled_field 'Valor previsto'
+
+      expect(page).to have_field 'Valor total dos itens', :with => '19.800,00'
+      expect(page).to have_disabled_field 'Valor total dos itens'
+
+      expect(page).to_not have_button 'Adicionar item'
+
+      expect(page).to have_field 'Item', :with => '1'
+      expect(page).to have_disabled_field 'Item'
+
+      expect(page).to have_field 'Material', :with => '02.02.00001 - Arame farpado'
+      expect(page).to have_disabled_field 'Material'
+
+      expect(page).to have_field 'Unidade', :with => 'UN'
+      expect(page).to have_disabled_field 'Unidade'
+
+      expect(page).to have_field 'Quantidade', :with => '99'
+      expect(page).to have_disabled_field 'Quantidade'
+
+      expect(page).to have_field 'Valor unitário máximo', :with => '200,00'
+      expect(page).to have_disabled_field 'Valor unitário máximo'
+
+      expect(page).to have_field 'Valor total', :with => '19.800,00'
+      expect(page).to have_disabled_field 'Valor total'
+
+      expect(page).to_not have_button 'Remover item'
     end
 
     navigate 'Processos de Compra > Agrupamentos de Itens de Solicitações de Compra'

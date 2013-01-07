@@ -50,6 +50,8 @@ class AdministrativeProcessesController < CrudController
         if params[:administrative_process]
           AdministrativeProcessBudgetAllocationCloner.clone(
             :administrative_process => object, :new_purchase_solicitation => new_purchase_solicitation)
+          AdministrativeProcessItemGroupCloner.clone(object,
+            :new_item_group => new_item_group)
           PurchaseSolicitationItemGroupProcess.new(:new_item_group => new_item_group).update_status
           PurchaseSolicitationProcess.update_solicitations_status(new_purchase_solicitation)
         end
@@ -71,6 +73,9 @@ class AdministrativeProcessesController < CrudController
           :administrative_process => object,
           :new_purchase_solicitation => new_purchase_solicitation,
           :old_purchase_solicitation => old_purchase_solicitation)
+        AdministrativeProcessItemGroupCloner.clone(object,
+          :new_item_group => new_item_group,
+          :old_item_group => old_item_group)
         PurchaseSolicitationItemGroupProcess.new(
           :new_item_group => new_item_group, :old_item_group => old_item_group).update_status
         PurchaseSolicitationProcess.update_solicitations_status(new_purchase_solicitation, old_purchase_solicitation)

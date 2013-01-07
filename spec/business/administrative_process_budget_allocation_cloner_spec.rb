@@ -112,6 +112,67 @@ describe AdministrativeProcessBudgetAllocationCloner do
           subject.clone!
         end
       end
+
+      context 'with material' do
+        let(:material) { double(:material, :id => 34) }
+        let(:items) { double(:items) }
+
+        let(:budget_allocation) do
+          double(:budget_allocation ,:budget_allocation_id => 1,
+                 :total_items_value => 100, :items => items)
+        end
+
+        subject do
+          described_class.new(:administrative_process => administrative_process,
+                              :new_purchase_solicitation => purchase_solicitation,
+                              :material => material)
+        end
+
+        it 'should copy the budget_allocations only with specific material from purchase_solicitation to administrative_process' do
+          adm_budget_allocations.should_receive(:destroy_all)
+          adm_budget_allocations.should_receive(:build).and_return(adm_budget_allocation)
+          adm_items.should_receive(:build).and_return(adm_item)
+          items.should_receive(:by_material).with(34).and_return([pur_item])
+
+          adm_budget_allocation.should_receive(:transaction).and_yield
+          adm_budget_allocation.should_receive(:budget_allocation_id=).with(1)
+          adm_budget_allocation.should_receive(:value=).with(100)
+          adm_budget_allocation.should_receive(:save!)
+
+          adm_item.should_receive(:material_id=).with(4)
+          adm_item.should_receive(:quantity=).with(10)
+          adm_item.should_receive(:unit_price=).with(50.5)
+          adm_item.should_receive(:save!)
+
+          subject.clone!
+        end
+      end
+
+      context 'without clear_old_data' do
+        subject do
+          described_class.new(:administrative_process => administrative_process,
+                              :new_purchase_solicitation => purchase_solicitation,
+                              :clear_old_data => false)
+        end
+
+        it 'should copy the budget_allocations from purchase_solicitation to administrative_process without clear old data' do
+          adm_budget_allocations.should_not_receive(:destroy_all)
+          adm_budget_allocations.should_receive(:build).and_return(adm_budget_allocation)
+          adm_items.should_receive(:build).and_return(adm_item)
+
+          adm_budget_allocation.should_receive(:transaction).and_yield
+          adm_budget_allocation.should_receive(:budget_allocation_id=).with(1)
+          adm_budget_allocation.should_receive(:value=).with(100)
+          adm_budget_allocation.should_receive(:save!)
+
+          adm_item.should_receive(:material_id=).with(4)
+          adm_item.should_receive(:quantity=).with(10)
+          adm_item.should_receive(:unit_price=).with(50.5)
+          adm_item.should_receive(:save!)
+
+          subject.clone!
+        end
+      end
     end
   end
 end

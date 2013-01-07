@@ -55,6 +55,7 @@ describe LicitationProcess do
 
   it { should have_one(:trading).dependent(:restrict) }
   it { should have_one(:purchase_solicitation) }
+  it { should have_one(:purchase_solicitation_item_group) }
 
   it { should delegate(:summarized_object).to(:administrative_process).prefix(true) }
 
