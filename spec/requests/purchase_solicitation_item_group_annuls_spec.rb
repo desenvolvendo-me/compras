@@ -38,7 +38,24 @@ feature 'PurchaseSolicitationAnnul' do
   end
 
   scenario 'annul an existent purchase_solicitation_item_group' do
-    PurchaseSolicitationItemGroup.make!(:reparo_2013)
+    item_group = PurchaseSolicitationItemGroup.make!(:reparo_2013)
+
+    item = PurchaseSolicitationBudgetAllocationItem.last
+    item.purchase_solicitation_item_group = item_group
+    item.save
+
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    click_link '1/2013'
+
+    within_tab 'Dotações orçamentarias' do
+      within '.purchase-solicitation-budget-allocation:first' do
+        within '.item:first' do
+          expect(page).to have_select 'Status', :selected => 'Agrupado'
+          expect(page).to have_field 'Agrupamento', :with => 'Agrupamento de reparo 2013'
+        end
+      end
+    end
 
     navigate 'Processos de Compra > Agrupamentos de Itens de Solicitações de Compra'
 
@@ -80,7 +97,7 @@ feature 'PurchaseSolicitationAnnul' do
     within_tab 'Dotações orçamentarias' do
       within '.purchase-solicitation-budget-allocation:first' do
         within '.item:first' do
-          expect(page).to have_select 'Status', :with => 'Pendente'
+          expect(page).to have_select 'Status', :selected => 'Pendente'
           expect(page).to have_field 'Agrupamento', :with => ''
         end
       end
