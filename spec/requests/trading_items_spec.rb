@@ -169,6 +169,14 @@ feature TradingItem do
         expect(page).to have_content 'Não selecionado'
         expect(page).to have_link 'Corrigir proposta'
       end
+
+      within 'tbody tr:nth-child(3)' do
+        expect(page).to have_content 'Nobe'
+        expect(page).to have_content '0,00'
+        expect(page).to have_content '0,00'
+        expect(page).to have_content 'Sem proposta'
+        expect(page).to have_link 'Corrigir proposta'
+      end
     end
   end
 end
