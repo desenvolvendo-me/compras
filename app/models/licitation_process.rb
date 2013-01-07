@@ -208,6 +208,10 @@ class LicitationProcess < Compras::Model
     first_ratification.ratification_date
   end
 
+  def trading?
+    trading.present?
+  end
+
   protected
 
   def set_modality

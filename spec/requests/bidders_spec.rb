@@ -925,4 +925,34 @@ feature "Bidders" do
       expect(page).to have_disabled_field 'Preço total'
     end
   end
+
+  scenario 'when licitation process has a trading bidder proposals should be disabled' do
+    Trading.make!(:pregao_presencial)
+
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+
+    within_records do
+      click_link  '1/2012'
+    end
+
+    click_link 'Editar processo licitatório'
+
+    click_link 'Licitantes'
+
+    within_records do
+      click_link 'Gabriel Sobrinho'
+    end
+
+    within_tab 'Propostas' do
+      expect(page).to have_disabled_field 'Preço total dos itens'
+      expect(page).to have_disabled_field 'Material'
+      expect(page).to have_disabled_field 'Marca'
+      expect(page).to have_disabled_field 'Situação'
+      expect(page).to have_disabled_field 'Classificação'
+      expect(page).to have_disabled_field 'Unidade'
+      expect(page).to have_disabled_field 'Quantidade'
+      expect(page).to have_disabled_field 'Preço unitário'
+      expect(page).to have_disabled_field 'Preço total'
+    end
+  end
 end

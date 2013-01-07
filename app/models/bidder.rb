@@ -21,7 +21,7 @@ class Bidder < Compras::Model
   has_many :trading_item_bids, :dependent => :restrict
   has_many :licitation_process_ratifications, :dependent => :restrict
 
-  delegate :document_type_ids, :process_date, :ratification?,
+  delegate :document_type_ids, :process_date, :ratification?, :trading?,
            :to => :licitation_process, :prefix => true, :allow_nil => true
   delegate :administrative_process, :envelope_opening?, :items, :allow_bidders?,
            :consider_law_of_proposals, :licitation_process_lots,

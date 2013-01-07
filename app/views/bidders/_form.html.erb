@@ -155,4 +155,8 @@
     $("input").attr("disabled", "disabled")
     $("select").attr("disabled", "disabled")
   <% end %>
+
+  <% if f.object.licitation_process_trading? %>
+    $("#proposal :input").attr("disabled", "disabled");
+  <% end %>
 </script>

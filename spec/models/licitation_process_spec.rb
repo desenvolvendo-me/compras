@@ -571,4 +571,20 @@ describe LicitationProcess do
       expect(subject.adjudication_date).to be_nil
     end
   end
+
+  describe '#trading?' do
+    context 'when trading is not present' do
+      it { expect(subject.trading?).to be_false }
+    end
+
+    context 'when trading is present' do
+      let(:trading) { double(:trading) }
+
+      before do
+        subject.stub(:trading => trading)
+      end
+
+      it { expect(subject.trading?).to be_true }
+    end
+  end
 end
