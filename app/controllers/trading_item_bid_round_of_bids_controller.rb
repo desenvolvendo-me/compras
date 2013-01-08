@@ -64,7 +64,7 @@ class TradingItemBidRoundOfBidsController < CrudController
   def block_when_not_on_stage_of_round_of_bids
     get_parent
 
-    unless TradingItemBidStageCalculator.new(@parent).stage_of_round_of_bids?
+    unless allow_new?
       raise ActiveRecord::RecordNotFound
     end
   end
@@ -77,5 +77,9 @@ class TradingItemBidRoundOfBidsController < CrudController
     if bid != @parent.last_bid || @parent.closed?
       raise ActiveRecord::RecordNotFound
     end
+  end
+
+  def allow_new?
+    @parent.with_proposal_for_round_of_proposals? && TradingItemBidStageCalculator.new(@parent).stage_of_round_of_bids?
   end
 end

@@ -386,4 +386,29 @@ describe TradingItemDecorator do
       end
     end
   end
+
+  describe '#not_allow_offer_message' do
+    context 'when have valid proposals at round of proposals' do
+      before do
+        component.stub(:with_proposal_for_round_of_proposals? => true)
+      end
+
+      it { expect(subject.not_allow_offer_message).to be_nil }
+    end
+
+    context 'when have no proposal valid at round of proposals' do
+      before do
+        component.stub(:with_proposal_for_round_of_proposals? => false)
+
+        I18n.backend.store_translations 'pt-BR', :trading_item => {
+            :messages => {
+              :must_be_open => 'encerrado',
+              :not_allow_offer => 'não pode ter oferta'
+            }
+          }
+      end
+
+      it { expect(subject.not_allow_offer_message).to eq 'não pode ter oferta' }
+    end
+  end
 end

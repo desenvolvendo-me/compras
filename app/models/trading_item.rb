@@ -125,6 +125,10 @@ class TradingItem < Compras::Model
     trading_item_bids.at_stage_of_round_of_bids.any?
   end
 
+  def with_proposal_for_round_of_proposals?
+    trading_item_bids.at_stage_of_proposals.with_proposal.any?
+  end
+
   def valid_bidder_for_negotiation?
     bidders_selected_for_negociation.any? && !valid_proposal_for_negotiation?
   end

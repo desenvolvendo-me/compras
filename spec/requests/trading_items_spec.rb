@@ -179,4 +179,35 @@ feature TradingItem do
       end
     end
   end
+
+  scenario 'not allow to go to the round of bids without proposal valid' do
+    TradingConfiguration.make!(:pregao)
+    Trading.make!(:pregao_presencial)
+
+    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+
+    click_link "1/2012"
+    click_button "Salvar e ir para Itens/Ofertas"
+    click_link "Fazer oferta"
+
+    # Proposal stage
+    choose 'Sem proposta'
+
+    click_button "Salvar"
+
+    expect(page).to have_content 'Proposta criada com sucesso'
+
+    choose 'Sem proposta'
+
+    click_button "Salvar"
+
+    expect(page).to have_content 'Proposta criada com sucesso'
+
+    choose 'Sem proposta'
+
+    click_button "Salvar"
+
+    expect(page).to have_content 'Proposta criada com sucesso'
+    expect(page).to have_disabled_element 'Registrar lances', :reason => 'Não é permitido registrar ofertas enquanto não houver licitante com proposta'
+  end
 end

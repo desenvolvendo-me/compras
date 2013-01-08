@@ -145,4 +145,59 @@ describe TradingItemBidRoundOfBidsController do
       end
     end
   end
+
+  context 'when have no valid proposals for round of proposals' do
+    let(:trading) { Trading.make!(:pregao_presencial) }
+    let(:trading_item) { trading.trading_items.first }
+    let(:bidder1) { trading.bidders.first }
+    let(:bidder2) { trading.bidders.second }
+    let(:bidder3) { trading.bidders.last }
+
+    before do
+      TradingItemBid.create!(
+        :round => 0,
+        :trading_item_id => trading_item.id,
+        :bidder_id => bidder1.id,
+        :amount => 100.0,
+        :stage => TradingItemBidStage::PROPOSALS,
+        :status => TradingItemBidStatus::WITHOUT_PROPOSAL)
+
+      TradingItemBid.create!(
+        :round => 0,
+        :trading_item_id => trading_item.id,
+        :bidder_id => bidder2.id,
+        :amount => 101.0,
+        :stage => TradingItemBidStage::PROPOSALS,
+        :status => TradingItemBidStatus::WITHOUT_PROPOSAL)
+
+      TradingItemBid.create!(
+        :round => 0,
+        :trading_item_id => trading_item.id,
+        :bidder_id => bidder3.id,
+        :amount => 102.0,
+        :stage => TradingItemBidStage::PROPOSALS,
+        :status => TradingItemBidStatus::WITHOUT_PROPOSAL)
+
+      # This is a workaround, because the before create callback is not
+      # storing the right value using machinist.
+      trading.percentage_limit_to_participate_in_bids = 10.0
+      trading.save!
+    end
+
+    describe 'GET #new' do
+      it 'should return 404' do
+        expect {
+          get :new, :trading_item_id => trading_item.id
+        }.to raise_exception ActiveRecord::RecordNotFound
+      end
+    end
+
+    describe 'POST #create' do
+      it 'should return 404' do
+        expect {
+          post :create, :trading_item_id => trading_item.id
+        }.to raise_exception ActiveRecord::RecordNotFound
+      end
+    end
+  end
 end

@@ -57,6 +57,12 @@ class TradingItemDecorator
     must_be_open || t('trading_item.messages.cannot_be_closed')
   end
 
+  def not_allow_offer_message
+    return if with_proposal_for_round_of_proposals?
+
+    t('trading_item.messages.not_allow_offer')
+  end
+
   private
 
   def negotiation_or_classification_path(stage_calculator)

@@ -417,4 +417,32 @@ describe TradingItem do
       expect(subject.valid_bidder_for_negotiation?).to be_false
     end
   end
+
+  describe '#with_proposal_for_round_of_proposals?' do
+    let(:at_stage_of_proposals) { double(:at_stage_of_proposals) }
+
+    let(:trading_item_bids) do
+      double(:trading_item_bids, :at_stage_of_proposals => at_stage_of_proposals)
+    end
+
+    before do
+      subject.stub(:trading_item_bids => trading_item_bids)
+    end
+
+    context 'with proposals' do
+      before do
+        at_stage_of_proposals.should_receive(:with_proposal).and_return(['proposal'])
+      end
+
+      it { expect(subject.with_proposal_for_round_of_proposals?).to be_true }
+    end
+
+    context 'without proposals' do
+      before do
+        at_stage_of_proposals.should_receive(:with_proposal).and_return([])
+      end
+
+      it { expect(subject.with_proposal_for_round_of_proposals?).to be_false }
+    end
+  end
 end
