@@ -64,9 +64,9 @@ class TradingItemBidNegotiationsController < CrudController
   def deny_when_on_another_stage
     get_parent
 
-    return if TradingItemBidStageCalculator.new(@parent).stage_of_negotiation?
-
-    render 'public/404', :formats => [:html], :status => 404, :layout => false
+    unless TradingItemBidStageCalculator.new(@parent).stage_of_negotiation?
+      raise ActiveRecord::RecordNotFound
+    end
   end
 
   def block_destroy_when_not_last
@@ -75,7 +75,7 @@ class TradingItemBidNegotiationsController < CrudController
     bid = TradingItemBid.find(params[:id], :conditions => { :stage => TradingItemBidStage::NEGOTIATION })
 
     if bid != @parent.last_bid || @parent.closed?
-      render 'public/404', :formats => [:html], :status => 404, :layout => false
+      raise ActiveRecord::RecordNotFound
     end
   end
 end

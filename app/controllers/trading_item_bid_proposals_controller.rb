@@ -63,16 +63,16 @@ class TradingItemBidProposalsController < CrudController
   def deny_when_on_another_stage
     get_parent
 
-    return if TradingItemBidStageCalculator.new(@parent).stage_of_proposals?
-
-    render 'public/404', :formats => [:html], :status => 404, :layout => false
+    unless TradingItemBidStageCalculator.new(@parent).stage_of_proposals?
+      raise ActiveRecord::RecordNotFound
+    end
   end
 
   def deny_when_cannot_edit
     get_parent
 
-    return if TradingItemBidStageCalculator.new(@parent).show_proposal_report?
-
-    render 'public/404', :formats => [:html], :status => 404, :layout => false
+    unless TradingItemBidStageCalculator.new(@parent).show_proposal_report?
+      raise ActiveRecord::RecordNotFound
+    end
   end
 end

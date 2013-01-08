@@ -117,10 +117,9 @@ describe TradingItemBidRoundOfBidsController do
             :stage => TradingItemBidStage::ROUND_OF_BIDS,
             :status => TradingItemBidStatus::WITH_PROPOSAL)
 
-          delete :destroy, :id => bid.id, :trading_item_id => trading_item.id
-
-          expect(response.code).to eq "404"
-          expect(response.body).to match /A página que você procura não existe/
+          expect {
+            delete :destroy, :id => bid.id, :trading_item_id => trading_item.id
+          }.to raise_exception ActiveRecord::RecordNotFound
         end
       end
     end
@@ -132,19 +131,17 @@ describe TradingItemBidRoundOfBidsController do
 
     describe 'GET #new' do
       it 'should return 404' do
-        get :new, :trading_item_id => trading_item.id
-
-        expect(response.code).to eq '404'
-        expect(response.body).to match /A página que você procura não existe/
+        expect {
+          get :new, :trading_item_id => trading_item.id
+        }.to raise_exception ActiveRecord::RecordNotFound
       end
     end
 
     describe 'POST #create' do
       it 'should return 404' do
-        post :create, :trading_item_id => trading_item.id
-
-        expect(response.code).to eq '404'
-        expect(response.body).to match /A página que você procura não existe/
+        expect {
+          post :create, :trading_item_id => trading_item.id
+        }.to raise_exception ActiveRecord::RecordNotFound
       end
     end
   end

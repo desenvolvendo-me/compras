@@ -64,9 +64,9 @@ class TradingItemBidRoundOfBidsController < CrudController
   def block_when_not_on_stage_of_round_of_bids
     get_parent
 
-    return if TradingItemBidStageCalculator.new(@parent).stage_of_round_of_bids?
-
-    render 'public/404', :formats => [:html], :status => 404, :layout => false
+    unless TradingItemBidStageCalculator.new(@parent).stage_of_round_of_bids?
+      raise ActiveRecord::RecordNotFound
+    end
   end
 
   def block_destroy_when_not_last
@@ -75,7 +75,7 @@ class TradingItemBidRoundOfBidsController < CrudController
     bid = TradingItemBid.find(params[:id], :conditions => { :stage => TradingItemBidStage::ROUND_OF_BIDS })
 
     if bid != @parent.last_bid || @parent.closed?
-      render 'public/404', :formats => [:html], :status => 404, :layout => false
+      raise ActiveRecord::RecordNotFound
     end
   end
 end

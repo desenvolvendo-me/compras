@@ -68,14 +68,12 @@ describe TradingItemBidProposalsController do
         :stage => TradingItemBidStage::PROPOSALS,
         :status => TradingItemBidStatus::WITH_PROPOSAL)
 
-      post :create, :trading_id => trading.id,
-           :trading_item_bid => {
-             :trading_item_id => trading_item.id,
-             :status => TradingItemBidStatus::WITHOUT_PROPOSAL
-           }
-
-      expect(response.code).to eq '404'
-      expect(response.body).to match /A página que você procura não existe/
+      expect {
+        post :create, :trading_id => trading.id,
+             :trading_item_bid => {
+               :trading_item_id => trading_item.id,
+               :status => TradingItemBidStatus::WITHOUT_PROPOSAL }
+      }.to raise_exception ActiveRecord::RecordNotFound
     end
 
     it 'should redirect to proposal_report after create the last proposal' do
@@ -182,19 +180,17 @@ describe TradingItemBidProposalsController do
 
     describe 'GET #edit' do
       it 'should render 404 when is not showing the proposal_report' do
-        get :edit, :id => 1, :trading_item_id => trading_item.id
-
-        expect(response.code).to eq '404'
-        expect(response.body).to match /A página que você procura não existe/
+        expect {
+          get :edit, :id => 1, :trading_item_id => trading_item.id
+        }.to raise_exception ActiveRecord::RecordNotFound
       end
     end
 
     describe 'PUT #update' do
       it 'should render 404 when is not showing the proposal_report' do
-        put :update, :id => 1, :trading_item_id => trading_item.id
-
-        expect(response.code).to eq '404'
-        expect(response.body).to match /A página que você procura não existe/
+        expect {
+          put :update, :id => 1, :trading_item_id => trading_item.id
+        }.to raise_exception ActiveRecord::RecordNotFound
       end
     end
   end
