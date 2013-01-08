@@ -193,6 +193,8 @@ describe DirectPurchasesController do
       PurchaseSolicitationBudgetAllocationItemStatusChanger.any_instance.
         should_receive(:change)
 
+      PurchaseSolicitationStatusChanger.should_receive(:change)
+
       put :update, :id => supply_authorization.direct_purchase_id,
         :commit => 'Gerar autorização de fornecimento',
         :direct_purchase => { }

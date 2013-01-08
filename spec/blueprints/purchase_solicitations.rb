@@ -7,7 +7,7 @@ PurchaseSolicitation.blueprint(:reparo) do
   delivery_location { DeliveryLocation.make!(:education) }
   kind { "goods" }
   general_observations { "Reparos nas instalações superiores" }
-  service_status { "pending" }
+  service_status { PurchaseSolicitationServiceStatus::PENDING }
   liberation_date { Date.new(2012, 1, 31) }
   liberator { Employee.make!(:sobrinho) }
   service_observations { "Pronto" }
@@ -26,7 +26,7 @@ PurchaseSolicitation.blueprint(:reparo_2013) do
   delivery_location { DeliveryLocation.make!(:education) }
   kind { "goods" }
   general_observations { "Reparos nas instalações superiores" }
-  service_status { "liberated" }
+  service_status { PurchaseSolicitationServiceStatus::LIBERATED }
   liberation_date { Date.new(2013, 1, 31) }
   liberator { Employee.make!(:sobrinho) }
   service_observations { "Pronto" }
@@ -45,7 +45,7 @@ PurchaseSolicitation.blueprint(:reparo_desenvolvimento) do
   delivery_location { DeliveryLocation.make!(:health) }
   kind { "goods" }
   general_observations { "Reparos nas instalações superiores" }
-  service_status { "pending" }
+  service_status { PurchaseSolicitationServiceStatus::PENDING }
   liberation_date { Date.new(2012, 1, 31) }
   liberator { Employee.make!(:sobrinho) }
   service_observations { "Pronto" }
@@ -84,7 +84,7 @@ PurchaseSolicitation.blueprint(:reparo_office) do
   delivery_location { DeliveryLocation.make!(:education) }
   kind { "goods" }
   general_observations { "Reparos nas instalações superiores" }
-  service_status { "pending" }
+  service_status { PurchaseSolicitationServiceStatus::PENDING }
   liberation_date { Date.new(2012, 1, 31) }
   liberator { Employee.make!(:sobrinho) }
   service_observations { "Pronto" }

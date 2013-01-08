@@ -2,10 +2,10 @@
 require 'model_helper'
 require 'lib/annullable'
 require 'lib/signable'
-require 'app/models/budget_allocation'
-require 'app/models/purchase_solicitation'
 require 'app/models/purchase_solicitation_budget_allocation'
 require 'app/models/purchase_solicitation_budget_allocation_item'
+require 'app/models/budget_allocation'
+require 'app/models/purchase_solicitation'
 require 'app/models/purchase_solicitation_liberation'
 require 'app/models/resource_annul'
 require 'app/models/purchase_solicitation_item_group_material_purchase_solicitation'
@@ -58,24 +58,69 @@ describe PurchaseSolicitation do
     it { should allow_value('2012').for(:accounting_year) }
   end
 
-  describe '#annul!' do
-    it 'should updates the service status to annulled' do
-      subject.should_receive(:update_column).with(:service_status, PurchaseSolicitationServiceStatus::ANNULLED)
+  describe "updating columns" do
+    describe '#annul!' do
+      it 'should updates the service status to annulled' do
+        subject.should_receive(:update_column).with(:service_status, PurchaseSolicitationServiceStatus::ANNULLED)
 
-      subject.annul!
-    end
-  end
-
-  describe '#change_status!' do
-    let :liberation do
-      double :liberation
+        subject.annul!
+      end
     end
 
-    it 'should updates the service status to annulled' do
-      subject.stub(:liberation).and_return(liberation)
-      subject.should_receive(:update_column).with(:service_status, 'liberated')
+    describe '#change_status!' do
+      let :liberation do
+        double :liberation
+      end
 
-      subject.change_status!('liberated')
+      it 'should updates the service status to annulled' do
+        subject.stub(:liberation).and_return(liberation)
+        subject.should_receive(:update_column).with(:service_status, 'liberated')
+
+        subject.change_status!('liberated')
+      end
+    end
+
+    describe '#liberate!' do
+      it 'should change service_status to liberated' do
+        subject.should_receive(:update_column).with(:service_status, 'liberated')
+
+        subject.liberate!
+      end
+    end
+
+    describe '#attend!' do
+      it 'should change service_status to attended' do
+        subject.should_receive(:update_column).with(:service_status, 'attended')
+
+        subject.attend!
+      end
+    end
+
+    describe '#buy!' do
+      it "should update the service_status to 'in_purchase_process'" do
+        subject.should_receive(:update_column).
+          with(:service_status, PurchaseSolicitationServiceStatus::IN_PURCHASE_PROCESS)
+
+        subject.buy!
+      end
+    end
+
+    describe '#pending!' do
+      it "should update the service_status to 'in_purchase_process'" do
+        subject.should_receive(:update_column).
+          with(:service_status, PurchaseSolicitationServiceStatus::PENDING)
+
+        subject.pending!
+      end
+    end
+
+    describe '#partially_fulfilled!' do
+      it "should update the service_status to 'in_purchase_process'" do
+        subject.should_receive(:update_column).
+          with(:service_status, PurchaseSolicitationServiceStatus::PARTIALLY_FULFILLED)
+
+        subject.partially_fulfilled!
+      end
     end
   end
 
@@ -142,21 +187,7 @@ describe PurchaseSolicitation do
     end
   end
 
-  describe '#liberate!' do
-    it 'should change service_status to liberated' do
-      subject.should_receive(:update_column).with(:service_status, 'liberated')
 
-      subject.liberate!
-    end
-  end
-
-  describe '#attend!' do
-    it 'should change service_status to attended' do
-      subject.should_receive(:update_column).with(:service_status, 'attended')
-
-      subject.attend!
-    end
-  end
 
   describe '#attend_items!' do
     it "should change status of all pending items to 'attended'" do
@@ -193,15 +224,6 @@ describe PurchaseSolicitation do
       subject.stub(:items).and_return(items)
 
       subject.rollback_attended_items!
-    end
-  end
-
-  describe '#buy!' do
-    it "should update the service_status to 'in_purchase_process'" do
-      subject.should_receive(:update_column).
-        with(:service_status, PurchaseSolicitationServiceStatus::IN_PURCHASE_PROCESS)
-
-      subject.buy!
     end
   end
 end

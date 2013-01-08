@@ -27,6 +27,8 @@ class DirectPurchasesController < CrudController
         :new_purchase_solicitation => new_purchase_solicitation,
         :new_purchase_solicitation_item_group => resource.purchase_solicitation_item_group).change
 
+      PurchaseSolicitationStatusChanger.change(resource.purchase_solicitation_item_group)
+
       redirect_to supply_authorization
       return
 

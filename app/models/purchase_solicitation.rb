@@ -128,6 +128,14 @@ class PurchaseSolicitation < Compras::Model
     update_column :service_status, PurchaseSolicitationServiceStatus::IN_PURCHASE_PROCESS
   end
 
+  def pending!
+    update_column :service_status, PurchaseSolicitationServiceStatus::PENDING
+  end
+
+  def partially_fulfilled!
+    update_column :service_status, PurchaseSolicitationServiceStatus::PARTIALLY_FULFILLED
+  end
+
   def attend_items!
     items.with_status(PurchaseSolicitationBudgetAllocationItemStatus::PENDING).each(&:attend!)
   end

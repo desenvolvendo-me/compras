@@ -1706,6 +1706,10 @@ feature "DirectPurchases" do
         click_link purchase_solicitation.code_and_year
       end
 
+      within_tab 'Principal' do
+        expect(page).to have_select 'Status de atendimento', :selected => 'Atendida'
+      end
+
       within_tab 'Dotações orçamentarias' do
         expect(page).to have_select 'Status', :selected => 'Atendido'
       end

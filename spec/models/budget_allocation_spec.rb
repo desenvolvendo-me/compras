@@ -1,8 +1,9 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/budget_allocation'
-require 'app/models/purchase_solicitation'
 require 'app/models/purchase_solicitation_budget_allocation'
+require 'app/models/purchase_solicitation_budget_allocation_item'
+require 'app/models/purchase_solicitation'
 require 'app/models/reserve_fund'
 require 'app/models/pledge'
 require 'app/models/direct_purchase_budget_allocation'

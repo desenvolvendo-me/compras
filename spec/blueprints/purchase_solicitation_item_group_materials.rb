@@ -77,7 +77,7 @@ PurchaseSolicitationItemGroupMaterial.blueprint(:reparo_office) do
     PurchaseSolicitation.make(:reparo_office,
       :service_status => PurchaseSolicitationServiceStatus::LIBERATED,
       :purchase_solicitation_budget_allocations => [
-        PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria_office,
+        PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria_office_2_itens_liberados,
           :items => [
             PurchaseSolicitationBudgetAllocationItem.make!(:office,
               :status => PurchaseSolicitationBudgetAllocationItemStatus::GROUPED)

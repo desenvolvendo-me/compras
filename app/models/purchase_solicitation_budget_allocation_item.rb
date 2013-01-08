@@ -24,6 +24,8 @@ class PurchaseSolicitationBudgetAllocationItem < Compras::Model
 
   scope :pending, where { status.eq(PurchaseSolicitationBudgetAllocationItemStatus::PENDING) }
 
+  scope :attended, where { status.eq(PurchaseSolicitationBudgetAllocationItemStatus::ATTENDED) }
+
   def self.group!(ids, purchase_solicitation_item_group_id)
     where { id.in(ids) }.update_all(
       :status => PurchaseSolicitationBudgetAllocationItemStatus::GROUPED,

@@ -588,4 +588,195 @@ feature "PurchaseSolicitations" do
       end
     end
   end
+
+  scenario "verify status of purchase solicitations items, first partially
+            attended and after attended" do
+
+    PurchaseSolicitation.make!(:reparo_office,
+                               :service_status => PurchaseSolicitationServiceStatus::LIBERATED,
+                               :purchase_solicitation_budget_allocations => [
+                                 PurchaseSolicitationBudgetAllocation.make(:alocacao_primaria_office_2_itens_liberados)])
+
+    #### Create a purchase solicitation item group with one material only
+    navigate 'Processos de Compra > Agrupamentos de Itens de Solicitações de Compra'
+
+    click_link 'Criar Agrupamento de Item de Solicitação de Compra'
+
+    fill_in 'Descrição', :with => 'Agrupamento de arame farpado'
+
+    expect(page).to have_disabled_field "Situação"
+
+    click_button 'Adicionar Material'
+
+    fill_modal 'Material', :with => 'Arame farpado', :field => 'Descrição'
+    fill_modal 'Solicitações de compra', :with => '2012', :field => 'Ano'
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Agrupamento de Item de Solicitação de Compra criado com sucesso.'
+
+    ### Create a direct purchase with item group
+    LegalReference.make!(:referencia)
+    Creditor.make!(:wenderson_sa)
+    BudgetStructure.make!(:secretaria_de_educacao)
+    LicitationObject.make!(:ponte)
+    DeliveryLocation.make!(:education)
+    Employee.make!(:sobrinho)
+    PaymentMethod.make!(:dinheiro)
+    ModalityLimit.make!(:modalidade_de_compra_ponte, :without_bidding => "40000,00")
+    PriceRegistration.make!(:registro_de_precos)
+
+    navigate 'Processos de Compra > Compra Direta'
+
+    click_link 'Gerar Compra Direta'
+
+    within_tab 'Principal' do
+      fill_in 'Ano', :with => '2012'
+      fill_in 'Data da compra', :with => '19/03/2012'
+      fill_modal 'Referência legal', :with => 'Referencia legal', :field => 'Descrição'
+      select 'Material ou serviços', :from => 'Modalidade'
+      select 'Global', :from => 'Tipo do empenho'
+
+      within_modal 'Agrupamento de solicitações de compra' do
+        click_button 'Pesquisar'
+
+        click_record 'Agrupamento de arame farpado'
+      end
+
+      fill_modal 'Fornecedor', :with => 'Wenderson Malheiros'
+
+      fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
+      fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
+      fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
+      fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
+      fill_in 'Prazo de entrega', :with => '1'
+      select 'ano/anos',  :from => 'Período do prazo de entrega'
+      fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
+      fill_in 'Coleta de preços', :with => '99'
+      fill_modal 'Registro de preços', :with => 'Aquisição de combustíveis', :field => 'Objeto'
+      fill_in 'Observações gerais', :with => 'obs'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Compra Direta criada com sucesso.'
+
+    ### Create a supply authorization of direct purchase with item group
+    navigate 'Processos de Compra > Compra Direta'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_button 'Gerar autorização de fornecimento'
+
+    click_link 'voltar'
+
+    ### Verify status, should be partially attended
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Principal' do
+      expect(page).to have_select 'Status de atendimento', :selected => 'Parcialmente atendido'
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      within 'div.item' do
+        expect(page).to have_select 'Status', :selected => 'Pendente'
+      end
+
+      within 'div.item:last' do
+        expect(page).to have_select 'Status', :selected => 'Atendido'
+      end
+    end
+
+    #### Create a purchase solicitation item group with last material liberated
+    navigate 'Processos de Compra > Agrupamentos de Itens de Solicitações de Compra'
+
+    click_link 'Criar Agrupamento de Item de Solicitação de Compra'
+
+    fill_in 'Descrição', :with => 'Agrupamento de office'
+
+    expect(page).to have_disabled_field "Situação"
+
+    click_button 'Adicionar Material'
+
+    fill_modal 'Material', :with => 'Office', :field => 'Descrição'
+    fill_modal 'Solicitações de compra', :with => '2012', :field => 'Ano'
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Agrupamento de Item de Solicitação de Compra criado com sucesso.'
+
+    ### Create a direct purchase with item group
+    navigate 'Processos de Compra > Compra Direta'
+
+    click_link 'Gerar Compra Direta'
+
+    within_tab 'Principal' do
+      fill_in 'Ano', :with => '2012'
+      fill_in 'Data da compra', :with => '19/03/2012'
+      fill_modal 'Referência legal', :with => 'Referencia legal', :field => 'Descrição'
+      select 'Material ou serviços', :from => 'Modalidade'
+      select 'Global', :from => 'Tipo do empenho'
+
+      within_modal 'Agrupamento de solicitações de compra' do
+        click_button 'Pesquisar'
+
+        click_record 'Agrupamento de office'
+      end
+
+      fill_modal 'Fornecedor', :with => 'Wenderson Malheiros'
+
+      fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
+      fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
+      fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
+      fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
+      fill_in 'Prazo de entrega', :with => '1'
+      select 'ano/anos',  :from => 'Período do prazo de entrega'
+      fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
+      fill_in 'Coleta de preços', :with => '99'
+      fill_modal 'Registro de preços', :with => 'Aquisição de combustíveis', :field => 'Objeto'
+      fill_in 'Observações gerais', :with => 'obs'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Compra Direta criada com sucesso.'
+
+    ### Create a supply authorization of direct purchase with item group
+    navigate 'Processos de Compra > Compra Direta'
+
+    within_records do
+      click_link '2/2012'
+    end
+
+    click_button 'Gerar autorização de fornecimento'
+
+    click_link 'voltar'
+
+    ### Verify status, should be attended
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Principal' do
+      expect(page).to have_select 'Status de atendimento', :selected => 'Atendida'
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      within 'div.item' do
+        expect(page).to have_select 'Status', :selected => 'Atendido'
+      end
+
+      within 'div.item:last' do
+        expect(page).to have_select 'Status', :selected => 'Atendido'
+      end
+    end
+  end
 end
