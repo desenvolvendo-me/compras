@@ -58,9 +58,7 @@ class PurchaseSolicitation < Compras::Model
 
   scope :except_ids, lambda { |ids| where { id.not_in(ids) } }
 
-  scope :with_pending_items, lambda {
-    joins { items }.where { items.status.eq(PurchaseSolicitationBudgetAllocationItemStatus::PENDING) }
-  }
+  scope :with_pending_items, joins { items }.merge(PurchaseSolicitationBudgetAllocationItem.pending)
 
   scope :can_be_grouped, with_pending_items.where { service_status.in [
     PurchaseSolicitationServiceStatus::LIBERATED,

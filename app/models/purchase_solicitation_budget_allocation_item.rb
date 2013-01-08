@@ -22,6 +22,8 @@ class PurchaseSolicitationBudgetAllocationItem < Compras::Model
   validates :material, :quantity, :unit_price, :status, :presence => true
   validate :validate_material_characteristic, :if => :services?
 
+  scope :pending, where { status.eq(PurchaseSolicitationBudgetAllocationItemStatus::PENDING) }
+
   def self.group!(ids, purchase_solicitation_item_group_id)
     where { id.in(ids) }.update_all(
       :status => PurchaseSolicitationBudgetAllocationItemStatus::GROUPED,

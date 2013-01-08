@@ -46,4 +46,22 @@ describe PurchaseSolicitation do
       expect(purchase_solicitation.service_status).to eq PurchaseSolicitationServiceStatus::PENDING
     end
   end
+
+  describe ".with_pending_items" do
+    context "with one item pending and one item grouped " do
+    end
+
+    it "should return items pending" do
+      purchase_solicitation = PurchaseSolicitation.make!(:reparo)
+      budget_allocation = purchase_solicitation.purchase_solicitation_budget_allocations.first
+      item_not_pending = PurchaseSolicitationBudgetAllocationItem.make(:arame_farpado,
+                                                                       :status => PurchaseSolicitationBudgetAllocationItemStatus::GROUPED)
+      budget_allocation.items << item_not_pending
+
+      item_pending = purchase_solicitation.items.first
+
+      expect(purchase_solicitation.items).to include(item_pending, item_not_pending)
+      expect(PurchaseSolicitation.with_pending_items.first.items).to include(item_pending)
+    end
+  end
 end
