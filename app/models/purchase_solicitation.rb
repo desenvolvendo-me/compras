@@ -86,10 +86,6 @@ class PurchaseSolicitation < Compras::Model
     purchase_solicitation_budget_allocations.collect(&:total_items_value).sum
   end
 
-  def annul!
-    update_column :service_status, PurchaseSolicitationServiceStatus::ANNULLED
-  end
-
   def change_status!(status)
     update_column :service_status, status
   end
@@ -116,6 +112,10 @@ class PurchaseSolicitation < Compras::Model
     items.each(&:clear_fulfiller_and_status)
   end
 
+  def annul!
+    update_column :service_status, PurchaseSolicitationServiceStatus::ANNULLED
+  end
+
   def liberate!
     update_column :service_status, PurchaseSolicitationServiceStatus::LIBERATED
   end
@@ -124,16 +124,16 @@ class PurchaseSolicitation < Compras::Model
     update_column :service_status, PurchaseSolicitationServiceStatus::ATTENDED
   end
 
+  def buy!
+    update_column :service_status, PurchaseSolicitationServiceStatus::IN_PURCHASE_PROCESS
+  end
+
   def attend_items!
     items.with_status(PurchaseSolicitationBudgetAllocationItemStatus::PENDING).each(&:attend!)
   end
 
   def rollback_attended_items!
     items.with_status(PurchaseSolicitationBudgetAllocationItemStatus::ATTENDED).each(&:pending!)
-  end
-
-  def buy!
-    update_column :service_status, PurchaseSolicitationServiceStatus::IN_PURCHASE_PROCESS
   end
 
   protected
