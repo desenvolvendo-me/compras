@@ -5,7 +5,7 @@ class PurchaseSolicitationItemGroupMaterial < Compras::Model
   belongs_to :purchase_solicitation_item_group
   belongs_to :material
 
-  has_many :purchase_solicitation_item_group_material_purchase_solicitations, :dependent => :destroy
+  has_many :purchase_solicitation_item_group_material_purchase_solicitations, :dependent => :destroy, :inverse_of => :purchase_solicitation_item_group_material
   has_many :purchase_solicitations, :through => :purchase_solicitation_item_group_material_purchase_solicitations
   has_many :purchase_solicitation_items, :through => :purchase_solicitations,
            :source => :items, :conditions => Proc.new { { :material_id => material_id } }

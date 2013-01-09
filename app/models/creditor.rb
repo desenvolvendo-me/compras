@@ -22,7 +22,7 @@ class Creditor < Compras::Model
   has_many :banks, :through => :accounts, :source => :agency
   has_many :cnaes, :through => :creditor_secondary_cnaes
   has_many :creditor_balances, :inverse_of => :creditor, :dependent => :destroy
-  has_many :creditor_materials, :dependent => :destroy
+  has_many :creditor_materials, :dependent => :destroy, :inverse_of => :creditor
   has_many :creditor_secondary_cnaes, :dependent => :destroy
   has_many :direct_purchases, :dependent => :restrict
   has_many :document_types, :through => :documents
