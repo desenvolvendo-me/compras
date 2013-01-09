@@ -402,7 +402,6 @@ describe TradingItemDecorator do
 
         I18n.backend.store_translations 'pt-BR', :trading_item => {
             :messages => {
-              :must_be_open => 'encerrado',
               :not_allow_offer => 'não pode ter oferta'
             }
           }
