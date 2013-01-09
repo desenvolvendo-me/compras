@@ -210,4 +210,58 @@ feature TradingItem do
     expect(page).to have_content 'Proposta criada com sucesso'
     expect(page).to have_disabled_element 'Registrar lances', :reason => 'Não é permitido registrar ofertas enquanto não houver licitante com proposta'
   end
+
+  scenario 'show bidders disqualified at proposal_report' do
+    TradingConfiguration.make!(:pregao)
+    trading = Trading.make!(:pregao_presencial)
+
+    bidder = trading.bidders.second
+
+    BidderDisqualification.create!(:bidder_id => bidder.id, :reason => "Inabilitado")
+
+    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+
+    click_link "1/2012"
+    click_button "Salvar e ir para Itens/Ofertas"
+    click_link "Fazer oferta"
+
+    # Proposal stage
+    fill_in "Valor da proposta", :with => "100,00"
+
+    click_button "Salvar"
+
+    expect(page).to have_content 'Proposta criada com sucesso'
+
+    fill_in "Valor da proposta", :with => "100,00"
+
+    click_button "Salvar"
+
+    expect(page).to have_content 'Proposta criada com sucesso'
+    expect(page).to have_content 'Propostas'
+
+    within_records do
+      within 'tbody tr:nth-child(1)' do
+        expect(page).to have_content 'Gabriel Sobrinho'
+        expect(page).to have_content '100,00'
+        expect(page).to have_content '0,00'
+        expect(page).to have_content 'Selecionado'
+        expect(page).to have_link 'Corrigir proposta'
+      end
+
+      within 'tbody tr:nth-child(2)' do
+        expect(page).to have_content 'Nobe'
+        expect(page).to have_content '100,00'
+        expect(page).to have_content '0,00'
+        expect(page).to have_content 'Selecionado'
+        expect(page).to have_link 'Corrigir proposta'
+      end
+
+      within 'tbody tr:nth-child(3)' do
+        expect(page).to have_content 'Wenderson Malheiros'
+        expect(page).to have_content '0,00'
+        expect(page).to have_content 'Inabilitado'
+        expect(page).to_not have_link 'Corrigir proposta'
+      end
+    end
+  end
 end

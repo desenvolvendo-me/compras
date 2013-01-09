@@ -59,6 +59,26 @@
         </td>
       </tr>
     <% end %>
+
+    <% resource.bidders.disabled.each do |bidder| %>
+      <tr id="<%= dom_id bidder %>">
+        <td class="bidder-name">
+          <%= bidder %>
+        </td>
+
+        <td class="bidder-amount">
+          0,00
+        </td>
+
+        <td class="bidder-percent">
+          0,00
+        </td>
+
+        <td class="bidder-position">
+          Inabilitado
+        </td>
+      </tr>
+    <% end %>
   </tbody>
 </table>
 
