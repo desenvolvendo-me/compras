@@ -21,6 +21,8 @@ class Bidder < Compras::Model
   has_many :trading_item_bids, :dependent => :restrict
   has_many :licitation_process_ratifications, :dependent => :restrict
 
+  has_one :disqualification, :dependent => :destroy, :class_name => 'BidderDisqualification'
+
   delegate :document_type_ids, :process_date, :ratification?, :trading?,
            :to => :licitation_process, :prefix => true, :allow_nil => true
   delegate :administrative_process, :envelope_opening?, :items, :allow_bidders?,
@@ -151,11 +153,12 @@ class Bidder < Compras::Model
   end
 
   def self.enabled
-    where { disabled.eq(false) }
+    joins { disqualification.outer }.
+    where { disqualification.id.eq(nil) }
   end
 
   def self.disabled
-    where { disabled.eq(true) }
+    joins { disqualification }
   end
 
   def self.at_bid_round(round, trading_item_id)
@@ -293,11 +296,6 @@ class Bidder < Compras::Model
     end
   end
 
-  def disable!(reference_date = Date.current)
-    update_attribute :disabled, true
-    update_attribute :disabled_at, reference_date
-  end
-
   def lower_trading_item_bid(trading_item)
     trading_item_bids.for_trading_item(trading_item.id).with_proposal.last
   end
@@ -316,6 +314,10 @@ class Bidder < Compras::Model
 
   def last_bid(item)
     trading_item_bids.for_trading_item(item.id).last
+  end
+
+  def disabled
+    disqualification.present?
   end
 
   protected

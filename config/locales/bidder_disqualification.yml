@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      bidder_disqualification:
+        one: Inabilitação de Licitante
+        other: Inabilitações de Licitantes
+
+    attributes:
+      bidder_disqualification:
+        bidder: "Licitante"
+        created_at: "Data"
+        reason: "Motivo"

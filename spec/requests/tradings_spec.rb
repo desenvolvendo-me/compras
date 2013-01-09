@@ -403,6 +403,12 @@ feature "Tradings" do
 
     click_link "Inabilitar"
 
+    fill_in 'Motivo', :with => 'Problemas com a documentação'
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Inabilitação de Licitante criada com sucesso.'
+
     within("#preference-right") do
       expect(page).to have_content "Nohup"
       expect(page).to have_content "Nobe"
@@ -468,7 +474,7 @@ feature "Tradings" do
 
     within("tbody tr:nth-child(4)") do
       expect(page).to have_content "Gabriel Sobrinho"
-      expect(page).to have_content "Inabilitado"
+      expect(page).to have_link "Inabilitação"
     end
 
     expect(page).not_to have_link "Iniciar Negociação"

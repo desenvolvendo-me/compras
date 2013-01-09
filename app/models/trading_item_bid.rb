@@ -49,7 +49,8 @@ class TradingItemBid < Compras::Model
   end
 
   def self.enabled
-    joins { bidder }.where { bidder.disabled.eq(false) }
+    joins { bidder.disqualification.outer }.
+    where { bidder.disqualification.id.eq(nil) }
   end
 
   def self.with_no_proposal

@@ -292,8 +292,6 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :disabled_bidders, :only => [:new]
-
   resources :districts do
     collection do
       get :modal
@@ -445,6 +443,8 @@ Compras::Application.routes.draw do
       get :modal
     end
   end
+
+  resources :bidder_disqualifications, :except => [:index, :filter, :modal]
 
   resources :licitation_process_lots do
     collection do

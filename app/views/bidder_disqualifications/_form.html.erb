@@ -1,0 +1,18 @@
+<%= hidden_field_tag :trading_item_id, @trading_item.id %>
+
+<div class="yui3-g">
+  <div class="yui3-u-2-3">
+    <%= f.input :bidder, :disabled => true %>
+  </div>
+
+  <div class="yui3-u-1-6">
+    <%= f.input :created_at, :as => :date, :disabled => true, :input_html => { :value => f.object.decorator.created_at } %>
+  </div>
+</div>
+
+<%= f.input :reason, :as => :text %>
+
+<script>
+  $("#bidder_disqualification_bidder").attr("disabled", "disabled")
+                                      .requiredField(false);
+</script>

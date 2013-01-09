@@ -10,11 +10,11 @@ require 'app/models/accredited_representative'
 require 'app/models/licitation_process_classification'
 require 'app/models/licitation_process_ratification'
 require 'app/models/trading_item_bid'
+require 'app/models/bidder_disqualification'
 
 describe Bidder do
   describe 'default values' do
     it { expect(subject.invited).to be false }
-    it { expect(subject.disabled).to be false }
     it { expect(subject.will_submit_new_proposal_when_draw).to be true }
   end
 
@@ -29,6 +29,8 @@ describe Bidder do
   it { should have_many(:licitation_process_classifications_by_classifiable).dependent(:destroy) }
   it { should have_many(:trading_item_bids).dependent(:restrict) }
   it { should have_many(:licitation_process_ratifications).dependent(:restrict) }
+
+  it { should have_one(:disqualification).dependent(:destroy) }
 
   it { should validate_presence_of :creditor }
 
@@ -417,22 +419,6 @@ describe Bidder do
     end
   end
 
-  describe "#disable!" do
-    let(:reference_date) { Date.new(2012, 1, 1) }
-
-    before do
-      subject.disable!(reference_date)
-    end
-
-    it "changes the disabled attribute to true" do
-      expect(subject).to be_disabled
-    end
-
-    it "sets the disabled_at attribute with the current date" do
-      expect(subject.disabled_at).to eq reference_date
-    end
-  end
-
   describe '#descroy_all_classifications' do
     let(:classifications) { double(:licitation_process_classifications) }
 
@@ -463,6 +449,20 @@ describe Bidder do
       trading_item_bids.should_receive(:for_trading_item).with(6).and_return(['first', 'last'])
 
       expect(subject.last_bid(trading_item)).to eq 'last'
+    end
+  end
+
+  describe '#disabled' do
+    context 'when it has not a disqualication' do
+      it { expect(subject.disabled).to be_false }
+    end
+
+    context 'when it has a disqualification' do
+      before do
+        subject.stub(:disqualification => 'disqualification')
+      end
+
+      it { expect(subject.disabled).to be_true }
     end
   end
 end

@@ -36,6 +36,9 @@ pt-BR:
     bank_accounts:
       <<: *female
 
+    bidder_disqualifications:
+      <<: *female
+
     branch_classifications:
       <<: *female
 
