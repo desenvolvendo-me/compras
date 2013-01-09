@@ -20,6 +20,7 @@ class PurchaseSolicitationBudgetAllocationItem < Compras::Model
            :allow_nil => true
 
   validates :material, :quantity, :unit_price, :status, :presence => true
+  validates :material_id, :uniqueness => { :scope => :purchase_solicitation_budget_allocation_id }, :allow_nil => true
   validate :validate_material_characteristic, :if => :services?
 
   scope :pending, where { status.eq(PurchaseSolicitationBudgetAllocationItemStatus::PENDING) }

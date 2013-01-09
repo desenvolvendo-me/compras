@@ -299,8 +299,8 @@ feature "PurchaseSolicitationItemGroups" do
   end
 
   scenario 'a purchase solicitation with a status other than "Liberated" may not compose a group' do
-    item_1 = PurchaseSolicitationBudgetAllocationItem.make!(:item, :quantity => 10)
-    item_2 = PurchaseSolicitationBudgetAllocationItem.make!(:item, :quantity => 20)
+    item_1 = PurchaseSolicitationBudgetAllocationItem.make(:item, :quantity => 10)
+    item_2 = PurchaseSolicitationBudgetAllocationItem.make(:item, :quantity => 20)
 
     allocation_1 = PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria,
                                                             :items => [item_1])
