@@ -31,7 +31,7 @@ class PurchaseSolicitationStatusChanger
   end
 
   def partially_fulfilled!
-    return unless any_item_attended?
+    return unless items_partially_attended?
 
     purchase_solicitation.partially_fulfilled!
   end
@@ -40,7 +40,7 @@ class PurchaseSolicitationStatusChanger
     purchase_solicitation.items.attended.any? && purchase_solicitation.items.attended.count == items_count
   end
 
-  def any_item_attended?
+  def items_partially_attended?
     purchase_solicitation.items.attended.any? && purchase_solicitation.items.attended.count != items_count
   end
 
