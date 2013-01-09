@@ -1564,4 +1564,22 @@ feature "AdministrativeProcesses" do
       expect(page).to have_css 'table.records tbody tr', :count => 1
     end
   end
+
+  scenario 'should show only item group pending' do
+    PurchaseSolicitationItemGroup.make!(:antivirus)
+    PurchaseSolicitationItemGroup.make!(:reparo_2013,
+      :status => PurchaseSolicitationItemGroupStatus::FULFILLED)
+    PurchaseSolicitationItemGroup.make!(:antivirus_desenvolvimento,
+      :status => PurchaseSolicitationItemGroupStatus::ANNULLED)
+
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+
+    click_link 'Criar Processo Administrativo'
+
+    within_modal 'Agrupamento de solicitações de compra' do
+      click_button 'Pesquisar'
+
+      expect(page).to have_css 'table.records tbody tr', :count => 1
+    end
+  end
 end
