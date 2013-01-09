@@ -644,6 +644,37 @@ feature "Tradings" do
         expect(page).to have_content "Inabilitado"
       end
     end
+
+    click_link 'Voltar'
+
+    within '.records tr:last' do
+      click_link 'Ver histórico'
+    end
+
+    expect(page).to have_content "Item: 01.01.00001 - Antivirus"
+
+    within '.table-proposals' do
+      within "tbody tr:nth-child(1)" do
+        expect(page).to have_content "Nobe"
+        expect(page).to have_content "510,00"
+        expect(page).to have_content "2,00"
+        expect(page).to have_content "Selecionado"
+      end
+
+      within "tbody tr:nth-child(2)" do
+        expect(page).to have_content "Nohup"
+        expect(page).to have_content "505,00"
+        expect(page).to have_content "1,00"
+        expect(page).to have_content "Selecionado"
+      end
+
+      within "tbody tr:nth-child(3)" do
+        expect(page).to have_content "Wenderson Malheiros"
+        expect(page).to have_content "500,00"
+        expect(page).to have_content "0,00"
+        expect(page).to have_content "Selecionado"
+      end
+    end
   end
 
   scenario 'columns for index with att_header' do

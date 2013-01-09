@@ -61,6 +61,25 @@ class TradingItemBid < Compras::Model
     with_valid_proposal.order('amount DESC').last
   end
 
+  def self.bids_by_bidder_and_item(bidder_id, trading_item_id)
+    where { |bid|
+     bid.bidder_id.eq(bidder_id) &
+     bid.trading_item_id.eq(trading_item_id)
+    }.with_proposal
+  end
+
+  def self.lowest_proposal_by_item_and_round(trading_item_id, bid_round)
+    where { |bid| bid.trading_item_id.eq(trading_item_id) }.at_round(bid_round).minimum(:amount)
+  end
+
+  def self.lowest_proposal_by_item_at_stage_of_negotiation(trading_item_id)
+    where { |bid| bid.trading_item_id.eq(trading_item_id) }.at_stage_of_negotiation.minimum(:amount)
+  end
+
+  def self.lowest_proposal_by_item_at_stage_of_proposals(trading_item_id)
+    where { |bid| bid.trading_item_id.eq(trading_item_id) }.at_stage_of_proposals.minimum(:amount)
+  end
+
   def update_status(new_status)
     update_column(:status, new_status)
   end

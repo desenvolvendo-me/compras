@@ -1,6 +1,7 @@
 class TradingItemBidPercentCalculator
-  def initialize(bid)
+  def initialize(bid, bid_repository = TradingItemBid)
     @bid = bid
+    @bid_repository = bid_repository
   end
 
   def calculate!
@@ -13,42 +14,29 @@ class TradingItemBidPercentCalculator
 
   private
 
-  attr_reader :bid
+  attr_reader :bid, :bid_repository
 
   def lowest_proposal
     if bid.proposals?
-      lowest_proposal_by_item_and_round_at_stage_of_proposals
+      bid_repository.lowest_proposal_by_item_at_stage_of_proposals(trading_item_id)
     elsif bid.round_of_bids?
-      lowest_proposal_by_item_and_round
+      bid_repository.lowest_proposal_by_item_and_round(trading_item_id, bid_round)
     elsif bid.negotiation?
-      lowest_proposal_by_item_and_round_at_stage_of_negotiation
+      bid_repository.lowest_proposal_by_item_at_stage_of_negotiation(trading_item_id)
+    else
+      raise "TradingItemBidPercentCalculator error: stage of bid #{bid} is not include in (proposals, round_of_bids, negotiation)"
     end
   end
 
   def bid_round
-    bid.with_proposal? ? bid.round : bids_by_bidder_and_item.maximum(:round)
-  end
-
-  def bids_by_bidder_and_item
-    TradingItemBid.where { |item_bid|
-     item_bid.bidder_id.eq(bid.bidder_id) &
-     item_bid.trading_item_id.eq(trading_item_id)
-    }.with_proposal
-  end
-
-  def lowest_proposal_by_item_and_round
-    TradingItemBid.where { trading_item_id.eq(trading_item_id) }.at_round(bid_round).minimum(:amount)
-  end
-
-  def lowest_proposal_by_item_and_round_at_stage_of_negotiation
-    TradingItemBid.where { trading_item_id.eq(trading_item_id) }.at_stage_of_negotiation.minimum(:amount)
-  end
-
-  def lowest_proposal_by_item_and_round_at_stage_of_proposals
-    TradingItemBid.where { trading_item_id.eq(trading_item_id) }.at_stage_of_proposals.minimum(:amount)
+    bid.with_proposal? ? bid.round : bid_repository.bids_by_bidder_and_item(bidder_id, trading_item_id).maximum(:round)
   end
 
   def trading_item_id
     bid.trading_item_id
+  end
+
+  def bidder_id
+    bid.bidder_id
   end
 end
