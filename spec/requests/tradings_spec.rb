@@ -616,8 +616,6 @@ feature "Tradings" do
     fill_in "Valor da proposta", :with => "505,00"
     click_button "Salvar"
 
-    expect(page).not_to have_content "Gabriel Sobrinho"
-
     within_records do
       within("tbody tr:nth-child(1)") do
         expect(page).to have_content "Wenderson Malheiros"
@@ -638,6 +636,12 @@ feature "Tradings" do
         expect(page).to have_content "510,00"
         expect(page).to have_content "2,00"
         expect(page).to have_content "Selecionado"
+      end
+
+      within("tbody tr:nth-child(4)") do
+        expect(page).to have_content "Gabriel Sobrinho"
+        expect(page).to have_content "0,00"
+        expect(page).to have_content "Inabilitado"
       end
     end
   end
