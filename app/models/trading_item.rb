@@ -29,6 +29,8 @@ class TradingItem < Compras::Model
 
   orderize :order
 
+  default_scope { order(:id) }
+
   def lowest_proposal_value
     lowest_bid_with_proposal.try(:amount) || BigDecimal(0)
   end
