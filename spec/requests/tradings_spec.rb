@@ -605,16 +605,28 @@ feature "Tradings" do
     end
 
     expect(page).to have_field "Licitante", :with => "Wenderson Malheiros"
+
     fill_in "Valor da proposta", :with => "500,00"
+
     click_button "Salvar"
+
+    expect(page).to have_content 'Proposta criada com sucesso'
 
     expect(page).to have_field "Licitante", :with => "Nobe"
+
     fill_in "Valor da proposta", :with => "510,00"
+
     click_button "Salvar"
 
+    expect(page).to have_content 'Proposta criada com sucesso'
+
     expect(page).to have_field "Licitante", :with => "Nohup"
+
     fill_in "Valor da proposta", :with => "505,00"
+
     click_button "Salvar"
+
+    expect(page).to have_content 'Proposta criada com sucesso'
 
     within_records do
       within("tbody tr:nth-child(1)") do

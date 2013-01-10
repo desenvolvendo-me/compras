@@ -12,7 +12,7 @@
   </thead>
 
   <tbody>
-    <% resource.bidders_by_lowest_proposal.each_with_index do |bidder, index| %>
+    <% resource.enabled_bidders_by_lowest_proposal.each_with_index do |bidder, index| %>
       <tr id="<%= dom_id bidder %>" class="<%= bidder.decorator.benefited_by_law_of_proposals_class(resource) %>">
         <td class="bidder-name">
           <%= bidder %>
