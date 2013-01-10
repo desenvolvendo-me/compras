@@ -291,7 +291,7 @@ pt-BR:
       agreement_participants_granting_should_be_equals_total: "a soma do valor dos participantes concedentes deve ser igual a R$ %{total}"
       should_be_blank_if_item_group_is_present: "deve estar em branco se houver um Agrupamento de solicitações de compra selecionado"
       cannot_generate_direct_purchase: "não pode gerar compras diretas com a situação atual"
-      cannot_have_purchase_solicitation_not_liberated_or_partially_fulfilled: "a solicitação de compras (%{purchase_solicitation}) não está liberada ou parcialmente preenchida."
+      cannot_have_purchase_solicitation_not_liberated_or_partially_fulfilled: "a solicitação de compras (%{purchase_solicitation}) não está liberada ou parcialmente atendida."
       should_have_liberated_or_partially_fulfilled_status: "deve estar com situação Liberada para ser agrupada"
       should_be_of_trading_type: "deve ser do tipo Pregão presencial"
       must_have_one_auctioneer: "deve ter ao menos um pregoeiro"
