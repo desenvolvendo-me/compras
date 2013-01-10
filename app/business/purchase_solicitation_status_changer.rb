@@ -1,8 +1,6 @@
 class PurchaseSolicitationStatusChanger
-  attr_accessor :purchase_solicitation
-
-  def initialize(item_group)
-    @item_group = item_group
+  def initialize(purchase_solicitation)
+    @purchase_solicitation = purchase_solicitation
   end
 
   def self.change(*params)
@@ -10,19 +8,15 @@ class PurchaseSolicitationStatusChanger
   end
 
   def change!
-    return unless item_group
+    return unless purchase_solicitation
 
-    item_group.purchase_solicitations.each do |purchase_solicitation|
-      @purchase_solicitation = purchase_solicitation
-
-      attend!
-      partially_fulfilled!
-    end
+    attend!
+    partially_fulfilled!
   end
 
   private
 
-  attr_reader :item_group
+  attr_reader :purchase_solicitation
 
   def attend!
     return unless all_items_attended?

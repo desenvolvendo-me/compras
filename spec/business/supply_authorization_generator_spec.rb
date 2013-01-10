@@ -4,7 +4,7 @@ require 'app/business/supply_authorization_generator'
 
 describe SupplyAuthorizationGenerator do
   subject do
-    described_class.new(direct_purchase_object, supply_authorization_repository)
+    described_class.new(direct_purchase_object, supply_authorization_repository, item_group_status_changer)
   end
 
   let :direct_purchase_object do
@@ -14,17 +14,16 @@ describe SupplyAuthorizationGenerator do
            :fulfill_item_group => nil)
   end
 
-  let :supply_authorization_repository do
-    double(:supply_authorization_repository)
-  end
+  let(:supply_authorization_repository) { double(:supply_authorization_repository) }
 
-  let :supply_authorization_object do
-    double(:supply_authorization_object)
-  end
+  let(:item_group_status_changer) { double(:item_group_status_changer) }
 
-  let :purchase_solicitation do
-    double(:purchase_solicitation)
-  end
+  let(:supply_authorization_object) { double(:supply_authorization_object) }
+
+  let(:purchase_solicitation) { double(:purchase_solicitation) }
+
+  let(:purchase_solicitation_item_group) { double(:purchase_solicitation_item_group) }
+
 
   it 'should return supply_authorization if already have' do
     direct_purchase_object.stub(:supply_authorization).and_return(supply_authorization_object)
@@ -35,26 +34,26 @@ describe SupplyAuthorizationGenerator do
   context "when the supply authorization is not yet generated" do 
     before do
       direct_purchase_object.stub(:authorized?).and_return(false)
-      purchase_solicitation.stub(:present? => false)
+      purchase_solicitation.stub(:blank? => true)
+      purchase_solicitation_item_group.stub(:blank? => true)
       direct_purchase_object.stub(:purchase_solicitation => purchase_solicitation)
+      direct_purchase_object.stub(:purchase_solicitation_item_group => purchase_solicitation_item_group)
       supply_authorization_repository.stub(:create! => supply_authorization_object)
     end
 
     it 'should generate supply_authorization' do
-      purchase_solicitation.should_receive(:present?).and_return(true)
+      purchase_solicitation.should_receive(:blank?).and_return(false)
+      purchase_solicitation_item_group.should_receive(:blank?).and_return(false)
 
       purchase_solicitation.should_receive(:attend!)
+      item_group_status_changer.should_receive(:change).with(purchase_solicitation_item_group)
       expect(subject.generate!).to eq supply_authorization_object
     end
 
-    it 'should generate supply_authorization withou purchase_solicitation' do
+    it 'should generate supply_authorization without purchase_solicitation' do
       purchase_solicitation.should_not_receive(:attend!)
+      item_group_status_changer.should_not_receive(:change).with(purchase_solicitation_item_group)
       expect(subject.generate!).to eq supply_authorization_object
-    end
-
-    it 'changes the status of the direct purchase item group to fulfilled' do
-      direct_purchase_object.should_receive(:fulfill_item_group)
-      subject.generate!
     end
   end
 

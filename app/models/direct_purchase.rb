@@ -102,12 +102,6 @@ class DirectPurchase < Compras::Model
       sum(&:total_items_value)
   end
 
-  def fulfill_item_group
-    return unless purchase_solicitation_item_group.present?
-
-    purchase_solicitation_item_group.fulfill!
-  end
-
   def remove_purchase_solicitation!
     update_column(:purchase_solicitation_id, nil)
   end
