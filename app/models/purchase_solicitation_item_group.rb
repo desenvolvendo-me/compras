@@ -103,7 +103,7 @@ class PurchaseSolicitationItemGroup < Compras::Model
 
     purchase_solicitations.each do |purchase_solicitation|
       unless purchase_solicitation.can_be_grouped?
-        errors.add(:purchase_solicitations, :cannot_have_purchase_solicitation_not_liberated_pending_or_partially_fulfilled, :purchase_solicitation => purchase_solicitation)
+        errors.add(:purchase_solicitations, :cannot_have_purchase_solicitation_not_liberated_or_partially_fulfilled, :purchase_solicitation => purchase_solicitation)
       end
     end
   end

@@ -20,7 +20,7 @@ describe PurchaseSolicitationItemGroup do
 
       subject.valid?
 
-      expect(subject.errors[:purchase_solicitations]).to include "a solicitação de compras (1/2013 1 - Secretaria de Educação - RESP: Gabriel Sobrinho) não está liberada, pendente ou parcialmente preenchida."
+      expect(subject.errors[:purchase_solicitations]).to include "a solicitação de compras (1/2013 1 - Secretaria de Educação - RESP: Gabriel Sobrinho) não está liberada ou parcialmente preenchida."
     end
 
     it "should allow group pending purchase solicitation" do
@@ -28,7 +28,7 @@ describe PurchaseSolicitationItemGroup do
 
       subject.valid?
 
-      expect(subject.errors[:purchase_solicitations]).to include "a solicitação de compras (1/2013 1 - Secretaria de Educação - RESP: Gabriel Sobrinho) não está liberada, pendente ou parcialmente preenchida."
+      expect(subject.errors[:purchase_solicitations]).to include "a solicitação de compras (1/2013 1 - Secretaria de Educação - RESP: Gabriel Sobrinho) não está liberada ou parcialmente preenchida."
     end
 
     it "should allow group liberated purchase solicitation" do
@@ -36,7 +36,7 @@ describe PurchaseSolicitationItemGroup do
 
       subject.valid?
 
-      expect(subject.errors[:purchase_solicitations]).to_not include "a solicitação de compras (1/2013 1 - Secretaria de Educação - RESP: Gabriel Sobrinho) não está liberada, pendente ou parcialmente preenchida."
+      expect(subject.errors[:purchase_solicitations]).to_not include "a solicitação de compras (1/2013 1 - Secretaria de Educação - RESP: Gabriel Sobrinho) não está liberada ou parcialmente preenchida."
     end
 
     it "should allow group partially fulfilled purchase solicitation" do
@@ -44,7 +44,7 @@ describe PurchaseSolicitationItemGroup do
 
       subject.valid?
 
-      expect(subject.errors[:purchase_solicitations]).to_not include "a solicitação de compras (1/2013 1 - Secretaria de Educação - RESP: Gabriel Sobrinho) não está liberada, pendente ou parcialmente preenchida."
+      expect(subject.errors[:purchase_solicitations]).to_not include "a solicitação de compras (1/2013 1 - Secretaria de Educação - RESP: Gabriel Sobrinho) não está liberada ou parcialmente preenchida."
     end
   end
 end
