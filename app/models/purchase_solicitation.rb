@@ -42,6 +42,7 @@ class PurchaseSolicitation < Compras::Model
   validates :purchase_solicitation_budget_allocations, :no_duplication => :budget_allocation_id
   validate :must_have_at_least_one_budget_allocation
   validate :validate_budget_structure_and_materials
+  validate :uniqueness_material_for_budget_allocation_at_creation, :on => :create
 
   orderize :request_date
   filterize
@@ -170,5 +171,23 @@ class PurchaseSolicitation < Compras::Model
         end
       end
     end
+  end
+
+  def uniqueness_material_for_budget_allocation_at_creation
+    error = false
+
+    purchase_solicitation_budget_allocations.each do |budget_allocation|
+      materials = []
+      budget_allocation.items.each do |item|
+        if materials.include?(item.material_id)
+          item.errors.add(:material, :taken)
+          error = true
+        else
+          materials << item.material_id
+        end
+      end
+    end
+
+    errors.add(:base, :cannot_have_duplicated_materials) if error
   end
 end

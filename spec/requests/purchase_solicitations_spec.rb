@@ -779,4 +779,64 @@ feature "PurchaseSolicitations" do
       end
     end
   end
+
+  scenario 'should not allow duplicated materials' do
+    BudgetStructure.make!(:secretaria_de_educacao)
+    Employee.make!(:sobrinho)
+    ExpenseNature.make!(:vencimento_e_salarios)
+    DeliveryLocation.make!(:education)
+    budget_allocation = BudgetAllocation.make!(:alocacao)
+    Material.make!(:antivirus)
+
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    click_link 'Criar Solicitação de Compra'
+
+    within_tab 'Principal' do
+      fill_in 'Ano', :with => '2012'
+      fill_in 'Data da solicitação', :with => '01/02/2012'
+      fill_modal 'Estrutura orçamentaria solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
+      fill_modal 'Responsável pela solicitação', :with => '958473', :field => 'Matrícula'
+      fill_in 'Justificativa da solicitação', :with => 'Novas cadeiras'
+      fill_modal 'Local para entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
+      select 'Bens', :from => 'Tipo de solicitação'
+      fill_in 'Observações gerais', :with => 'Muitas cadeiras estão quebrando no escritório'
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      click_button "Adicionar Dotação"
+
+      within '.purchase-solicitation-budget-allocation:last' do
+        fill_modal 'Dotação', :with => '1', :field => 'Código'
+        fill_modal 'Natureza da despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
+      end
+
+      click_button 'Adicionar Item'
+
+      fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
+      fill_in 'Marca/Referência', :with => 'Norton'
+      fill_in 'Quantidade', :with => '3,50'
+      fill_in 'Valor unitário', :with => '200,00'
+
+      click_button 'Adicionar Item'
+
+      within '#allocations .item:last' do
+        fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
+        fill_in 'Marca/Referência', :with => 'Norton'
+        fill_in 'Quantidade', :with => '2,0'
+        fill_in 'Valor unitário', :with => '300,00'
+      end
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to_not have_notice 'Solicitação de Compra criada com sucesso.'
+    expect(page).to have_content 'não pode ter materiais duplicados para a mesma dotação'
+
+    within_tab 'Dotações orçamentarias' do
+      within '#allocations .item:last' do
+        expect(page).to have_content 'já está em uso'
+      end
+    end
+  end
 end
