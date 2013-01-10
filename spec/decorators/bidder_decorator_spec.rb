@@ -303,4 +303,33 @@ describe BidderDecorator do
       expect(subject.last_status(item)).to eq 'Desclassificado'
     end
   end
+
+  describe '#status_for_negotiation' do
+    let(:trading_item) { double(:trading_item) }
+    let(:bid) { double(:bid) }
+
+    context 'when there are no bid at round of bids' do
+      before do
+        bid.stub(:negotiation? => false)
+      end
+
+      it 'should retuns À negociar' do
+        component.should_receive(:last_bid).with(trading_item).and_return(bid)
+
+        expect(subject.status_for_negotiation(trading_item)).to eq 'À negociar'
+      end
+    end
+
+    context 'when there are bid at round of bids' do
+      before do
+        bid.stub(:negotiation? => true, :status_humanize => 'Declinou')
+      end
+
+      it 'should retuns À negociar' do
+        component.should_receive(:last_bid).twice.with(trading_item).and_return(bid)
+
+        expect(subject.status_for_negotiation(trading_item)).to eq 'Declinou'
+      end
+    end
+  end
 end

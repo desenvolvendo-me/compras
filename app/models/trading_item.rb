@@ -89,8 +89,8 @@ class TradingItem < Compras::Model
     (lowest_proposal_amount_at_stage_of_proposals * percentage_limit_to_participate_in_bids / 100) + lowest_proposal_amount_at_stage_of_proposals
   end
 
-  def bidders_for_negociation_by_lowest_proposal
-    bidders_selected_for_negociation.sort do |a,b|
+  def bidders_for_negociation_by_lowest_proposal(ignore_with_proposal = false)
+    bidders_selected_for_negociation(ignore_with_proposal).sort do |a,b|
       a.lower_trading_item_bid_amount(self) <=> b.lower_trading_item_bid_amount(self)
     end
   end
@@ -153,12 +153,20 @@ class TradingItem < Compras::Model
 
   private
 
-  def bidders_selected_for_negociation
-    bidders_eligible_for_negociation.select { |bidder| bidder.benefited }
+  def bidders_selected_for_negociation(ignore_with_proposal = false)
+    bidders_eligible_for_negociation(ignore_with_proposal).select { |bidder| bidder.benefited }
   end
 
-  def bidders_eligible_for_negociation
-    bidders_with_proposals.enabled.eligible_for_negociation_stage(bid_limit_for_negociation_stage) - bidders.with_negociation_proposal_for(id)
+  def bidders_eligible_for_negociation(ignore_with_proposal = false)
+    if ignore_with_proposal
+      bidders_with_proposal_eligible_for_negotiation
+    else
+      bidders_with_proposal_eligible_for_negotiation - bidders.with_negociation_proposal_for(id)
+    end
+  end
+
+  def bidders_with_proposal_eligible_for_negotiation
+    bidders_with_proposals.enabled.eligible_for_negociation_stage(bid_limit_for_negociation_stage)
   end
 
   def bid_limit_for_negociation_stage

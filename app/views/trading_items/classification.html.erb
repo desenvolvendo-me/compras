@@ -3,9 +3,9 @@
 <table class="records">
   <thead>
     <tr>
-      <th class="g-1-2">Licitante</th>
-      <th class="g-1-6">EPP/ME</th>
-      <th class="g-1-6">Valor</th>
+      <th class="g-2-5">Licitante</th>
+      <th class="g-1-8">EPP/ME</th>
+      <th class="g-1-8">Valor</th>
       <th class="g-1-10">%</th>
       <th>Classificação</th>
       <th>Situação</th>
@@ -15,15 +15,15 @@
   <tbody>
     <% resource.enabled_bidders_by_lowest_proposal.each_with_index do |bidder, index| %>
       <tr id="<%= dom_id bidder %>" class="<%= bidder.decorator.benefited_by_law_of_proposals_class(resource) %>">
-        <td class="bidder-name g-1-2">
+        <td class="bidder-name g-2-5">
           <%= bidder %>
         </td>
 
-        <td class="bidder-benefited g-1-6">
+        <td class="bidder-benefited g-1-8">
           <%= bidder.decorator.benefited %>
         </td>
 
-        <td class="bidder-amount g-1-6">
+        <td class="bidder-amount g-1-8">
           <%= bidder.decorator.lower_trading_item_bid_amount(resource) %>
         </td>
 
@@ -48,7 +48,7 @@
 
     <% resource.disabled_bidders_by_lowest_proposal.each_with_index do |bidder, index| %>
       <tr id="<%= dom_id bidder %>" class="<%= bidder.decorator.benefited_by_law_of_proposals_class(resource) %>">
-        <td class="bidder-name g-1-2">
+        <td class="bidder-name g-2-5">
           <%= bidder %>
         </td>
 
@@ -82,17 +82,18 @@
 <table class="records" id="preference-right">
   <thead>
     <tr>
-      <th class="g-1-2">Licitante</th>
+      <th class="g-2-5">Licitante</th>
       <th class="g-1-6">Valor</th>
       <th class="g-1-10">%</th>
-      <th>Ordem de Seleção ME-EPP</th>
+      <th>Classificação</th>
+      <th>Status</th>
     </tr>
   </thead>
 
   <tbody>
-    <% resource.bidders_for_negociation_by_lowest_proposal.each_with_index do |bidder, index| %>
+    <% resource.bidders_for_negociation_by_lowest_proposal(true).each_with_index do |bidder, index| %>
       <tr id="<%= dom_id bidder %>" class="<%= bidder.decorator.benefited_by_law_of_proposals_class(resource) %>">
-        <td class="bidder-name g-1-2">
+        <td class="bidder-name g-2-5">
           <%= bidder %>
         </td>
 
@@ -107,6 +108,8 @@
         <td class="bidder-position">
           <%= numeric_position(index.succ) %>
         </td>
+
+        <td><%= bidder.decorator.status_for_negotiation(resource) %></td>
       </tr>
     <% end %>
   </tbody>

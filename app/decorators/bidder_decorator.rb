@@ -1,3 +1,4 @@
+# encoding: utf-8
 class BidderDecorator
   include Decore
   include Decore::Proxy
@@ -82,6 +83,14 @@ class BidderDecorator
     return unless last_bid(trading_item).present?
 
     last_bid(trading_item).status_humanize
+  end
+
+  def status_for_negotiation(trading_item)
+    if last_bid(trading_item).negotiation?
+      last_bid(trading_item).status_humanize
+    else
+      'À negociar'
+    end
   end
 
   private

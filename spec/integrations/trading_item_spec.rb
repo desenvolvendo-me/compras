@@ -78,4 +78,95 @@ describe TradingItem do
       end
     end
   end
+
+  describe '#bidders_for_negociation_by_lowest_proposal' do
+    let(:trading) { Trading.make!(:pregao_presencial) }
+    let(:bidder1) { trading.bidders.first }
+    let(:bidder2) { trading.bidders.second }
+    let(:bidder3) { trading.bidders.last }
+
+    subject { trading.trading_items.first }
+
+    before do
+      TradingItemBid.create!(
+        :round => 1,
+        :bidder_id => bidder1.id,
+        :trading_item_id => subject.id,
+        :amount => 1000.0,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      TradingItemBid.create!(
+        :round => 1,
+        :bidder_id => bidder2.id,
+        :trading_item_id => subject.id,
+        :amount => 999.6,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      TradingItemBid.create!(
+        :round => 1,
+        :bidder_id => bidder1.id,
+        :trading_item_id => subject.id,
+        :amount => 998.0,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      TradingItemBid.create!(
+        :round => 2,
+        :bidder_id => bidder1.id,
+        :trading_item_id => subject.id,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
+        :status => TradingItemBidStatus::WITHOUT_PROPOSAL)
+
+      TradingItemBid.create!(
+        :round => 2,
+        :bidder_id => bidder2.id,
+        :trading_item_id => subject.id,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
+        :amount => 997.0,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      TradingItemBid.create!(
+        :round => 2,
+        :bidder_id => bidder3.id,
+        :trading_item_id => subject.id,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
+        :status => TradingItemBidStatus::WITHOUT_PROPOSAL)
+    end
+
+    context 'when not ignoring bids with proposal' do
+      it 'should returns all bidders for negotiation when it does not have a negotiation' do
+        expect(subject.bidders_for_negociation_by_lowest_proposal).to include(bidder1)
+      end
+
+      it 'should not show bidders that already have negotiation' do
+        TradingItemBid.create!(
+          :round => 0,
+          :bidder_id => bidder1.id,
+          :trading_item_id => subject.id,
+          :stage => TradingItemBidStage::NEGOTIATION,
+          :status => TradingItemBidStatus::WITHOUT_PROPOSAL)
+
+        expect(subject.bidders_for_negociation_by_lowest_proposal).to eq []
+      end
+    end
+
+    context 'when ignoring bids with proposal' do
+      it 'should returns all bidders for negotiation when it does not have a negotiation' do
+        expect(subject.bidders_for_negociation_by_lowest_proposal(true)).to include(bidder1)
+      end
+
+      it 'should show bidders that already have negotiation too' do
+        TradingItemBid.create!(
+          :round => 0,
+          :bidder_id => bidder1.id,
+          :trading_item_id => subject.id,
+          :stage => TradingItemBidStage::NEGOTIATION,
+          :status => TradingItemBidStatus::WITHOUT_PROPOSAL)
+
+        expect(subject.bidders_for_negociation_by_lowest_proposal(true)).to include(bidder1)
+      end
+    end
+  end
 end

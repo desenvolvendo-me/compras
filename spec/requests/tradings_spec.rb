@@ -410,10 +410,24 @@ feature "Tradings" do
     expect(page).to have_notice 'Inabilitação de Licitante criada com sucesso.'
 
     within("#preference-right") do
-      expect(page).to have_content "Nohup"
-      expect(page).to have_content "Nobe"
       expect(page).not_to have_content "Wenderson Malheiros"
       expect(page).not_to have_content "Gabriel Sobrinho"
+
+      within 'tbody tr:nth-child(1)' do
+        expect(page).to have_content "Nobe"
+        expect(page).to have_content "97,00"
+        expect(page).to have_content "3,19"
+        expect(page).to have_content "1º lugar"
+        expect(page).to have_content "À negociar"
+      end
+
+      within 'tbody tr:nth-child(2)' do
+        expect(page).to have_content "Nohup"
+        expect(page).to have_content "98,00"
+        expect(page).to have_content "4,26"
+        expect(page).to have_content "2º lugar"
+        expect(page).to have_content "À negociar"
+      end
     end
 
     click_link "Iniciar Negociação"
@@ -470,11 +484,29 @@ feature "Tradings" do
         expect(page).to have_content "Nohup"
         expect(page).to have_content "3º lugar"
       end
+
+      within("tbody tr:nth-child(4)") do
+        expect(page).to have_content "Gabriel Sobrinho"
+        expect(page).to have_link "Inabilitação"
+      end
     end
 
-    within("tbody tr:nth-child(4)") do
-      expect(page).to have_content "Gabriel Sobrinho"
-      expect(page).to have_link "Inabilitação"
+    within("#preference-right") do
+      within 'tbody tr:nth-child(1)' do
+        expect(page).to have_content "Nobe"
+        expect(page).to have_content "93,99"
+        expect(page).to have_content "0,00"
+        expect(page).to have_content "1º lugar"
+        expect(page).to have_content "Com proposta"
+      end
+
+      within 'tbody tr:nth-child(2)' do
+        expect(page).to have_content "Nohup"
+        expect(page).to have_content "98,00"
+        expect(page).to have_content "4,27"
+        expect(page).to have_content "2º lugar"
+        expect(page).to have_content "À negociar"
+      end
     end
 
     expect(page).not_to have_link "Iniciar Negociação"
