@@ -238,6 +238,7 @@ feature TradingItem do
 
     expect(page).to have_content 'Proposta criada com sucesso'
     expect(page).to have_content 'Propostas'
+    expect(page.current_url).to match(/#title/)
 
     within_records do
       within 'tbody tr:nth-child(1)' do

@@ -1,4 +1,4 @@
-<h2>Propostas</h2>
+<h2 id="title">Propostas</h2>
 
 <table class="records">
   <thead>
@@ -87,3 +87,9 @@
       'data-disabled' => resource.decorator.not_allow_offer_message, :class => 'button primary' %>
   <%= link_to t('back'), trading_items_path(:trading_id => resource.trading_id), :class => 'button' %>
 </div>
+
+<script>
+  (function(){
+    window.location.hash="title"
+  })();
+</script>
