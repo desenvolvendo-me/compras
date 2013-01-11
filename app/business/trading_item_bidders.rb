@@ -4,12 +4,12 @@ class TradingItemBidders
     @bidders = bidders
   end
 
-  def with_proposal_for_proposal_stage_with_amount_lower_than_limit
-    bidders.with_proposal_for_proposal_stage_with_amount_lower_than_limit(trading_item)
+  def selected_for_trading_item
+    bidders.selected_for_trading_item(trading_item)
   end
 
-  def with_proposal_for_proposal_stage_with_amount_lower_than_limit_size
-    with_proposal_for_proposal_stage_with_amount_lower_than_limit.size
+  def selected_for_trading_item_size
+    selected_for_trading_item.size
   end
 
   def with_proposal_for_round(round)

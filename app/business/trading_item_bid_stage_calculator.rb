@@ -35,6 +35,6 @@ class TradingItemBidStageCalculator
   def only_one_bidder_left_at_round_of_bids?
     return false unless trading_item_bids.at_stage_of_round_of_bids.any?
 
-    trading_item_bids.at_stage_of_round_of_bids.with_no_proposal.count == trading_item_bidders.with_proposal_for_proposal_stage_with_amount_lower_than_limit_size - 1
+    trading_item_bids.at_stage_of_round_of_bids.with_no_proposal.count == trading_item_bidders.selected_for_trading_item_size - 1
   end
 end

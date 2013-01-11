@@ -63,7 +63,7 @@ describe TradingItemBidBidderChooser do
       context 'when round is equal to 1' do
         before do
           subject.stub(:current_round).and_return(1)
-          trading_item_bidders.should_receive(:with_proposal_for_proposal_stage_with_amount_lower_than_limit).and_return(bidders)
+          trading_item_bidders.should_receive(:selected_for_trading_item).and_return(bidders)
         end
 
         it 'should choose second bidder when proposals have no one yet' do

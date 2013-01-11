@@ -142,7 +142,7 @@ class Bidder < Compras::Model
     }
   end
 
-  def self.with_proposal_for_proposal_stage_with_amount_lower_than_limit(item)
+  def self.selected_for_trading_item(item)
     joins { trading_item_bids }.
     where {
       trading_item_bids.status.eq(TradingItemBidStatus::WITH_PROPOSAL) &

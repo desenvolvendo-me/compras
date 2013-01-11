@@ -9,18 +9,18 @@ describe TradingItemBidders do
   let(:trading_item) { double(:trading_item, :id => -1) }
   let(:bidders) { double(:bidders) }
 
-  it '#with_proposal_for_proposal_stage_with_amount_lower_than_limit' do
-    bidders.should_receive(:with_proposal_for_proposal_stage_with_amount_lower_than_limit).with(trading_item)
+  it '#selected_for_trading_item' do
+    bidders.should_receive(:selected_for_trading_item).with(trading_item)
 
-    subject.with_proposal_for_proposal_stage_with_amount_lower_than_limit
+    subject.selected_for_trading_item
   end
 
-  it '#with_proposal_for_proposal_stage_with_amount_lower_than_limit_size' do
-    with_proposal_for_proposal_stage_with_amount_lower_than_limit = double(:with_proposal_for_proposal_stage_with_amount_lower_than_limit)
-    subject.stub(:with_proposal_for_proposal_stage_with_amount_lower_than_limit).and_return(with_proposal_for_proposal_stage_with_amount_lower_than_limit)
-    with_proposal_for_proposal_stage_with_amount_lower_than_limit.should_receive(:size).at_least(1).times
+  it '#selected_for_trading_item_size' do
+    selected_for_trading_item = double(:selected_for_trading_item)
+    subject.stub(:selected_for_trading_item).and_return(selected_for_trading_item)
+    selected_for_trading_item.should_receive(:size).at_least(1).times
 
-    subject.with_proposal_for_proposal_stage_with_amount_lower_than_limit_size
+    subject.selected_for_trading_item_size
   end
 
   it '#with_proposal_for_round' do

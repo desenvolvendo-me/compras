@@ -41,7 +41,7 @@ class TradingItemBidBidderChooser
 
   def bidders_available
     if current_round == 1
-      trading_item_bidders.with_proposal_for_proposal_stage_with_amount_lower_than_limit
+      trading_item_bidders.selected_for_trading_item
     elsif current_round > 1
       trading_item_bidders.with_proposal_for_round(current_round.pred)
     else

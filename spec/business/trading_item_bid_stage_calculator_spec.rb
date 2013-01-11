@@ -73,7 +73,7 @@ describe TradingItemBidStageCalculator do
 
       subject.should_receive(:all_bidders_have_proposal_for_proposals_stage?).
               at_least(1).times.and_return(true)
-      trading_item_bidders.should_receive(:with_proposal_for_proposal_stage_with_amount_lower_than_limit_size).
+      trading_item_bidders.should_receive(:selected_for_trading_item_size).
               at_least(1).times.and_return(2)
 
 
@@ -103,7 +103,7 @@ describe TradingItemBidStageCalculator do
 
       subject.should_receive(:all_bidders_have_proposal_for_proposals_stage?).
               at_least(1).times.and_return(true)
-      trading_item_bidders.should_receive(:with_proposal_for_proposal_stage_with_amount_lower_than_limit_size).
+      trading_item_bidders.should_receive(:selected_for_trading_item_size).
               at_least(1).times.and_return(2)
 
 
@@ -124,7 +124,7 @@ describe TradingItemBidStageCalculator do
 
       subject.should_receive(:all_bidders_have_proposal_for_proposals_stage?).
               at_least(1).times.and_return(true)
-      trading_item_bidders.should_receive(:with_proposal_for_proposal_stage_with_amount_lower_than_limit_size).
+      trading_item_bidders.should_receive(:selected_for_trading_item_size).
               at_least(1).times.and_return(2)
 
 

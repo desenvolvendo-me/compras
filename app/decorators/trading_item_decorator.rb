@@ -116,10 +116,10 @@ class TradingItemDecorator
   end
 
   def bidder_selected?(bidder)
-    bidders_with_proposal_for_proposal_stage_with_amount_lower_than_limit.include? bidder
+    selected_for_trading_item.include? bidder
   end
 
-  def bidders_with_proposal_for_proposal_stage_with_amount_lower_than_limit
-    component.bidders.with_proposal_for_proposal_stage_with_amount_lower_than_limit(component)
+  def selected_for_trading_item
+    component.bidders.selected_for_trading_item(component)
   end
 end

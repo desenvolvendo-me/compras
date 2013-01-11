@@ -62,7 +62,7 @@ describe Bidder do
     end
   end
 
-  describe '.with_proposal_for_proposal_stage_with_amount_lower_than_limit' do
+  describe '.selected_for_trading_item' do
     it 'should return only bidder with proposal lower than limit' do
       sobrinho = Bidder.make!(:licitante_sobrinho)
       wenderson = Bidder.make!(:licitante)
@@ -94,7 +94,7 @@ describe Bidder do
         :status => TradingItemBidStatus::WITH_PROPOSAL,
         :stage => TradingItemBidStage::PROPOSALS)
 
-      expect(Bidder.with_proposal_for_proposal_stage_with_amount_lower_than_limit(trading_item)).to eq [sobrinho]
+      expect(Bidder.selected_for_trading_item(trading_item)).to eq [sobrinho]
     end
   end
 

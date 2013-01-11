@@ -82,7 +82,7 @@ class TradingItem < Compras::Model
   end
 
   def selected_bidders_at_proposals
-    bidders.with_proposal_for_proposal_stage_with_amount_lower_than_limit(self)
+    bidders.selected_for_trading_item(self)
   end
 
   def value_limit_to_participate_in_bids

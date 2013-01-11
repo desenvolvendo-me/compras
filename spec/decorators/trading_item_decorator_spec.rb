@@ -62,7 +62,7 @@ describe TradingItemDecorator do
       }
 
       component.should_receive(:bidders).and_return(bidders)
-      bidders.should_receive(:with_proposal_for_proposal_stage_with_amount_lower_than_limit).with(component).and_return([bidder_one])
+      bidders.should_receive(:selected_for_trading_item).with(component).and_return([bidder_one])
       component.stub(:bidder_selected?).with(bidder_two).and_return(false)
 
       expect(subject.situation_for_next_stage(bidder_two)).to eq 'Não selecionado'
@@ -76,7 +76,7 @@ describe TradingItemDecorator do
       }
 
       component.should_receive(:bidders).and_return(bidders)
-      bidders.should_receive(:with_proposal_for_proposal_stage_with_amount_lower_than_limit).with(component).and_return([bidder_one])
+      bidders.should_receive(:selected_for_trading_item).with(component).and_return([bidder_one])
       component.stub(:bidder_selected?).with(bidder_one).and_return(true)
 
       expect(subject.situation_for_next_stage(bidder_one)).to eq 'Selecionado'

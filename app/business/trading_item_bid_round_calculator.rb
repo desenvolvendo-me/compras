@@ -32,7 +32,7 @@ class TradingItemBidRoundCalculator
     return true if last_bid.nil?
 
     if last_bid_round > 0
-      trading_item_bidders.with_proposal_for_proposal_stage_with_amount_lower_than_limit.count == count_bidders_with_bids
+      trading_item_bidders.selected_for_trading_item.count == count_bidders_with_bids
     else
       selected_bidders_at_proposals.count == count_bidders_with_bids
     end
