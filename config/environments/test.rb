@@ -29,7 +29,7 @@ Compras::Application.configure do
   # ActionMailer::Base.deliveries array.
   config.action_mailer.delivery_method = :test
 
-  # Prevents mailer from trying to send mails to the real world 
+  # Prevents mailer from trying to send mails to the real world
   # in test mode.
   config.action_mailer.perform_deliveries = true
 
