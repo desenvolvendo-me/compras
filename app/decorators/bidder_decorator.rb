@@ -47,6 +47,12 @@ class BidderDecorator
     number_with_precision super if super
   end
 
+  def trading_item_proposal_percent(*)
+    return if component.disabled
+
+    number_with_precision super if super
+  end
+
   def last_amount_valid_for_trading_item_at_stage_of_round_of_bids(*)
     number_with_precision super if super
   end

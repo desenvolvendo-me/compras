@@ -13,7 +13,7 @@
   </thead>
 
   <tbody>
-    <% resource.enabled_bidders_by_lowest_proposal.each_with_index do |bidder, index| %>
+    <% resource.enabled_bidders_by_lowest_proposal(:filter => :selected).each_with_index do |bidder, index| %>
       <tr id="<%= dom_id bidder %>" class="<%= bidder.decorator.benefited_by_law_of_proposals_class(resource) %>">
         <td class="bidder-name g-2-5">
           <%= bidder %>
@@ -115,6 +115,43 @@
   </tbody>
 </table>
 
+<h2>Licitantes Não Selecionados Para a Fase de Ofertas</h2>
+
+<table class="records" id="bidders-not-selected">
+  <thead>
+    <tr>
+      <th class="g-2-5">Licitante</th>
+      <th class="g-1-6">Valor</th>
+      <th class="g-1-10">%</th>
+      <th>Classificação</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+
+  <body>
+    <% resource.enabled_bidders_by_lowest_proposal(:filter => :not_selected).each_with_index do |bidder, index| %>
+      <tr id="<%= dom_id bidder %>" class="<%= bidder.decorator.benefited_by_law_of_proposals_class(resource) %>">
+        <td class="bidder-name g-2-5">
+          <%= bidder %>
+        </td>
+
+        <td class="bidder-amount g-1-6">
+          <%= bidder.decorator.lower_trading_item_bid_amount(resource) %>
+        </td>
+
+        <td class="bidder-percent g-1-10">
+          <%= bidder.decorator.trading_item_proposal_percent(resource) %>
+        </td>
+
+        <td class="bidder-position">
+          <%= numeric_position(index.succ) %>
+        </td>
+
+        <td><%= bidder.decorator.status_for_negotiation(resource) %></td>
+      </tr>
+    <% end %>
+  </body>
+</table>
 
 <div class="buttons right">
   <%= link_to "Encerramento do item", close_trading_item_path(:id => resource.id),

@@ -256,25 +256,39 @@ feature "TradingItemBids" do
 
     expect(page).to_not have_checked_field 'Apenas beneficiados'
 
-    within '.records tbody tr:nth-child(1)' do
-      expect(page.find('.bidder-name')).to have_content 'Gabriel Sobrinho'
-      expect(page.find('.bidder-amount')).to have_content '78,00'
-      expect(page.find('.bidder-percent')).to have_content '0,00'
-      expect(page.find('.bidder-position')).to have_content '1º lugar'
+    within 'table.records:nth-of-type(1)' do
+      within 'tbody tr:nth-child(1)' do
+        expect(page.find('.bidder-name')).to have_content 'Gabriel Sobrinho'
+        expect(page.find('.bidder-amount')).to have_content '78,00'
+        expect(page.find('.bidder-percent')).to have_content '0,00'
+        expect(page.find('.bidder-position')).to have_content '1º lugar'
+      end
+
+      within 'tbody tr:nth-child(2)' do
+        expect(page.find('.bidder-name')).to have_content 'Nobe'
+        expect(page.find('.bidder-amount')).to have_content '79,00'
+        expect(page.find('.bidder-percent')).to have_content '1,28'
+        expect(page.find('.bidder-position')).to have_content '2º lugar'
+      end
     end
 
-    within '.records tbody tr:nth-child(2)' do
-      expect(page.find('.bidder-name')).to have_content 'Nobe'
-      expect(page.find('.bidder-amount')).to have_content '79,00'
-      expect(page.find('.bidder-percent')).to have_content '1,28'
-      expect(page.find('.bidder-position')).to have_content '2º lugar'
+    within 'table.records:nth-of-type(2)' do
+      within 'tbody tr:nth-child(1)' do
+        expect(page.find('.bidder-name')).to have_content 'Nobe'
+        expect(page.find('.bidder-amount')).to have_content '79,00'
+        expect(page.find('.bidder-percent')).to have_content '1,28'
+        expect(page.find('.bidder-position')).to have_content '1º lugar'
+      end
     end
 
-    within '.records tbody tr:nth-child(3)' do
-      expect(page.find('.bidder-name')).to have_content 'Wenderson Malheiros'
-      expect(page.find('.bidder-amount')).to have_content '140,00'
-      expect(page.find('.bidder-percent')).to have_content '79,49'
-      expect(page.find('.bidder-position')).to have_content '3º lugar'
+    within 'table.records:nth-of-type(3)' do
+      within 'tbody tr:nth-child(1)' do
+        expect(page.find('.bidder-name')).to have_content 'Wenderson Malheiros'
+        expect(page.find('.bidder-amount')).to have_content '140,00'
+        expect(page.find('.bidder-percent')).to have_content '40,00'
+        expect(page.find('.bidder-position')).to have_content '1º lugar'
+        expect(page).to have_content 'À negociar'
+      end
     end
   end
 

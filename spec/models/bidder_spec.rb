@@ -419,6 +419,36 @@ describe Bidder do
     end
   end
 
+  describe '#trading_item_proposal_percent' do
+    it 'should return nil when there are no proposal for the item' do
+      trading_item = double(:trading_item)
+
+      subject.should_receive(:lower_trading_item_bid_at_stage_of_proposals).with(trading_item).and_return(nil)
+
+      expect(subject.trading_item_proposal_percent(trading_item)).to be_nil
+    end
+
+    it 'should return zero for the first place of the classification' do
+      trading_item = double(:trading_item, :lowest_proposal_at_stage_of_proposals_amount => 100.0)
+      lower_trading_item_bid_at_stage_of_proposals = double(:lower_trading_item_bid_at_stage_of_proposals, :amount => 100.0)
+
+      subject.should_receive(:lower_trading_item_bid_at_stage_of_proposals).
+              at_least(1).times.with(trading_item).and_return(lower_trading_item_bid_at_stage_of_proposals)
+
+      expect(subject.trading_item_proposal_percent(trading_item)).to eq 0
+    end
+
+    it 'should calculate de percentual based on the first place of the classification' do
+      trading_item = double(:trading_item, :lowest_proposal_at_stage_of_proposals_amount => 100.0)
+      lower_trading_item_bid_at_stage_of_proposals = double(:lower_trading_item_bid_at_stage_of_proposals, :amount => 120.0)
+
+      subject.should_receive(:lower_trading_item_bid_at_stage_of_proposals).
+              at_least(1).times.with(trading_item).and_return(lower_trading_item_bid_at_stage_of_proposals)
+
+      expect(subject.trading_item_proposal_percent(trading_item)).to eq 20.0
+    end
+  end
+
   describe '#descroy_all_classifications' do
     let(:classifications) { double(:licitation_process_classifications) }
 
@@ -484,4 +514,23 @@ describe Bidder do
     end
   end
 
+  describe '#selected_for_trading_item?' do
+    let(:item) { double(:item) }
+
+    context 'when bidder is selected at proposals of trading_item' do
+      before do
+        item.stub(:selected_bidders_at_proposals => [subject])
+      end
+
+      it { expect(subject.selected_for_trading_item?(item)).to be_true }
+    end
+
+    context 'when bidder is not selected at proposals of trading_item' do
+      before do
+        item.stub(:selected_bidders_at_proposals => ['bidder2'])
+      end
+
+      it { expect(subject.selected_for_trading_item?(item)).to be_false }
+    end
+  end
 end

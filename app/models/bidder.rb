@@ -152,6 +152,16 @@ class Bidder < Compras::Model
     }
   end
 
+  def self.not_selected_for_trading_item(item)
+    joins { trading_item_bids }.
+    where {
+      trading_item_bids.status.eq(TradingItemBidStatus::WITH_PROPOSAL) &
+      trading_item_bids.stage.eq(TradingItemBidStage::PROPOSALS) &
+      trading_item_bids.amount.gt(item.value_limit_to_participate_in_bids) &
+      trading_item_bids.trading_item_id.eq(item.id)
+    }
+  end
+
   def self.enabled
     joins { disqualification.outer }.
     where { disqualification.id.eq(nil) }
@@ -296,6 +306,16 @@ class Bidder < Compras::Model
     end
   end
 
+  def trading_item_proposal_percent(trading_item)
+    return unless lower_trading_item_bid_at_stage_of_proposals(trading_item)
+
+    if trading_item.lowest_proposal_at_stage_of_proposals_amount == lower_trading_item_bid_at_stage_of_proposals_amount(trading_item)
+      BigDecimal(0)
+    else
+      classification_percent(trading_item.lowest_proposal_at_stage_of_proposals_amount, lower_trading_item_bid_at_stage_of_proposals_amount(trading_item))
+    end
+  end
+
   def lower_trading_item_bid(trading_item)
     trading_item_bids.for_trading_item(trading_item.id).with_proposal.last
   end
@@ -324,7 +344,15 @@ class Bidder < Compras::Model
     (trading_item.bidder_with_lowest_proposal == self) && !benefited
   end
 
+  def selected_for_trading_item?(trading_item)
+    trading_item.selected_bidders_at_proposals.include?(self)
+  end
+
   protected
+
+  def lower_trading_item_bid_at_stage_of_proposals_amount(trading_item)
+    lower_trading_item_bid_at_stage_of_proposals(trading_item).try(:amount) || BigDecimal(0)
+  end
 
   def lower_trading_item_bid_at_stage_of_proposals(trading_item)
     trading_item_bids.at_stage_of_proposals.for_trading_item(trading_item.id).with_proposal.last

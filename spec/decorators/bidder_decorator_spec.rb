@@ -207,6 +207,25 @@ describe BidderDecorator do
         expect(subject.trading_item_classification_percent(trading_item)).to be_nil
       end
     end
+
+    describe '#trading_item_proposal_percent' do
+      it 'should return a number with precision' do
+        trading_item = double(:trading_item)
+
+        component.should_receive(:trading_item_proposal_percent).
+          at_least(1).times.with(trading_item).and_return(123456.78)
+
+        expect(subject.trading_item_proposal_percent(trading_item)).to eq '123.456,78'
+      end
+
+      it 'should be nil' do
+        trading_item = double(:trading_item)
+
+        component.stub(:trading_item_proposal_percent).and_return(nil)
+
+        expect(subject.trading_item_proposal_percent(trading_item)).to be_nil
+      end
+    end
   end
 
   describe '#benefited_by_law_of_proposals_class' do

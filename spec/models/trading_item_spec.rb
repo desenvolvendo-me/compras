@@ -129,26 +129,67 @@ describe TradingItem do
   end
 
   describe '#enabled_bidders_by_lowest_proposal' do
-    it 'should return bidders ordered by lowest proposal by bidder' do
-      bidder1 = double(:bidder1)
-      bidder2 = double(:bidder2)
-      bidder3 = double(:bidder3)
-      bidders = double(:bidders)
-      bidders_with_proposals = double([bidder1, bidder2, bidder3])
-      bidders_with_proposals.stub(:enabled).and_return([bidder1, bidder3])
+    let(:bidder1) { double(:bidder1) }
+    let(:bidder2) { double(:bidder2) }
+    let(:bidder3) { double(:bidder3) }
+    let(:bidders_with_proposals) { double(:bidders_with_proposals) }
 
-      subject.stub(:bidders_with_proposals).and_return(bidders_with_proposals)
+    context 'with all bidders' do
+      it 'should return bidders ordered by lowest proposal by bidder' do
+        bidders_with_proposals.stub(:enabled).and_return([bidder1, bidder3])
 
-      bidder1.should_receive(:lower_trading_item_bid_amount).
-              at_least(1).times.with(subject).and_return(90)
+        subject.stub(:bidders_with_proposals).and_return(bidders_with_proposals)
 
-      bidder2.should_receive(:lower_trading_item_bid_amount).
-              at_least(0).times
+        bidder1.should_receive(:lower_trading_item_bid_amount).
+                at_least(1).times.with(subject).and_return(90)
 
-      bidder3.should_receive(:lower_trading_item_bid_amount).
-              at_least(1).times.with(subject).and_return(100)
+        bidder2.should_not_receive(:lower_trading_item_bid_amount)
 
-      expect(subject.enabled_bidders_by_lowest_proposal).to eq [bidder1, bidder3]
+        bidder3.should_receive(:lower_trading_item_bid_amount).
+                at_least(1).times.with(subject).and_return(100)
+
+        expect(subject.enabled_bidders_by_lowest_proposal).to eq [bidder1, bidder3]
+      end
+    end
+
+    context 'with selected bidders' do
+      let(:enabled) { double(:enabled, :selected_for_trading_item => [bidder1, bidder2]) }
+
+      it 'should return bidders ordered by lowest proposal by bidder' do
+        bidders_with_proposals.stub(:enabled => enabled)
+
+        subject.stub(:bidders_with_proposals).and_return(bidders_with_proposals)
+
+        bidder1.should_receive(:lower_trading_item_bid_amount).
+                at_least(1).times.with(subject).and_return(90)
+
+        bidder2.should_receive(:lower_trading_item_bid_amount).
+                at_least(1).times.with(subject).and_return(100)
+
+        bidder3.should_not_receive(:lower_trading_item_bid_amount)
+
+        expect(subject.enabled_bidders_by_lowest_proposal(:filter => :selected)).to eq [bidder1, bidder2]
+      end
+    end
+
+    context 'with no selected bidders' do
+      let(:enabled) { double(:enabled, :not_selected_for_trading_item => [bidder2, bidder3]) }
+
+      it 'should return bidders ordered by lowest proposal by bidder' do
+        bidders_with_proposals.stub(:enabled => enabled)
+
+        subject.stub(:bidders_with_proposals).and_return(bidders_with_proposals)
+
+        bidder2.should_receive(:lower_trading_item_bid_amount).
+                at_least(1).times.with(subject).and_return(90)
+
+        bidder3.should_receive(:lower_trading_item_bid_amount).
+                at_least(1).times.with(subject).and_return(100)
+
+        bidder1.should_not_receive(:lower_trading_item_bid_amount)
+
+        expect(subject.enabled_bidders_by_lowest_proposal(:filter => :not_selected)).to eq [bidder2, bidder3]
+      end
     end
   end
 
@@ -443,6 +484,29 @@ describe TradingItem do
       it 'should retuns the first bidder with lowest proposal' do
         expect(subject.bidder_with_lowest_proposal).to eq 'bidder1'
       end
+    end
+  end
+
+  describe '#lowest_proposal_at_stage_of_proposals_amount' do
+    let(:enabled) { double(:enabled) }
+    let(:trading_item_bids) { double(:trading_item_bids, :enabled => enabled) }
+
+    before do
+      subject.stub(:trading_item_bids => trading_item_bids)
+    end
+
+    it 'should returns the lowest proposal' do
+      enabled.should_receive(:lowest_proposal_by_item_at_stage_of_proposals).
+              with(subject).and_return(50)
+
+      expect(subject.lowest_proposal_at_stage_of_proposals_amount).to eq 50
+    end
+
+    it 'should returns 0 when there is no the lowest proposal' do
+      enabled.should_receive(:lowest_proposal_by_item_at_stage_of_proposals).
+              with(subject).and_return(nil)
+
+      expect(subject.lowest_proposal_at_stage_of_proposals_amount).to eq 0
     end
   end
 end

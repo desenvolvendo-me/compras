@@ -39,8 +39,16 @@ class TradingItem < Compras::Model
     lowest_bid_with_proposal.try(:bidder) || ''
   end
 
-  def enabled_bidders_by_lowest_proposal
-    bidders_with_proposals.enabled.sort do |a,b|
+  def enabled_bidders_by_lowest_proposal(options = {})
+    initial_scope = bidders_with_proposals.enabled
+
+    if :selected == options[:filter]
+      initial_scope = initial_scope.selected_for_trading_item(self)
+    elsif :not_selected == options[:filter]
+      initial_scope = initial_scope.not_selected_for_trading_item(self)
+    end
+
+    initial_scope.sort do |a,b|
       a.lower_trading_item_bid_amount(self) <=> b.lower_trading_item_bid_amount(self)
     end
   end
@@ -79,6 +87,10 @@ class TradingItem < Compras::Model
     return unless bidder_with_lowest_proposal.present?
 
     bidder_with_lowest_proposal.lower_trading_item_bid_amount(self)
+  end
+
+  def lowest_proposal_at_stage_of_proposals_amount
+    trading_item_bids.enabled.lowest_proposal_by_item_at_stage_of_proposals(self) || BigDecimal(0)
   end
 
   def selected_bidders_at_proposals
