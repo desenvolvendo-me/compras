@@ -36,7 +36,7 @@
         </td>
 
         <td>
-          <% if resource.can_be_disabled?(bidder) %>
+          <% if bidder.can_be_disabled?(resource) %>
             <%= link_to "Inabilitar", new_bidder_disqualification_path(:bidder_id => bidder.id, :trading_item_id => resource.id),
               :class => "button primary" %>
           <% else %>

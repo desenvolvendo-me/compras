@@ -55,6 +55,6 @@ class BidderDisqualificationsController < CrudController
   end
 
   def bidder_valid?
-    @trading_item.bidders.include?(bidder) && @trading_item.can_be_disabled?(bidder)
+    @trading_item.bidders.include?(bidder) && bidder.can_be_disabled?(@trading_item)
   end
 end

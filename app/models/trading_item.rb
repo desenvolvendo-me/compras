@@ -115,10 +115,6 @@ class TradingItem < Compras::Model
     trading_item_bids.negotiation.with_proposal
   end
 
-  def can_be_disabled?(bidder)
-    (bidder_with_lowest_proposal == bidder) && !bidder.benefited
-  end
-
   def last_bid
     trading_item_bids.last
   end
@@ -149,6 +145,10 @@ class TradingItem < Compras::Model
 
   def bids_at_stage_of_negotiation_ordered_by_amount
     trading_item_bids.at_stage_of_negotiation.reorder('amount DESC')
+  end
+
+  def bidder_with_lowest_proposal
+    enabled_bidders_by_lowest_proposal.first
   end
 
   private
@@ -195,10 +195,6 @@ class TradingItem < Compras::Model
 
   def bidders_with_proposals_at_stage_of_negotiaton
     bidders.with_proposal_for_trading_item_at_stage_of_negotiation(id)
-  end
-
-  def bidder_with_lowest_proposal
-    enabled_bidders_by_lowest_proposal.first
   end
 
   def lowest_bid_with_proposal

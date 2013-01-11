@@ -320,6 +320,10 @@ class Bidder < Compras::Model
     disqualification.present?
   end
 
+  def can_be_disabled?(trading_item)
+    (trading_item.bidder_with_lowest_proposal == self) && !benefited
+  end
+
   protected
 
   def lower_trading_item_bid_at_stage_of_proposals(trading_item)

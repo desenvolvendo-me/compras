@@ -3,6 +3,9 @@ require 'app/models/administrative_process_budget_allocation_item'
 require 'app/models/trading'
 require 'app/models/trading_item'
 require 'app/models/trading_item_bid'
+require 'app/models/licitation_process'
+require 'app/models/bidder'
+require 'app/models/bidder_disqualification'
 
 describe TradingItem do
   it { should belong_to :trading }
@@ -332,25 +335,6 @@ describe TradingItem do
     end
   end
 
-  describe "#can_be_disabled?" do
-
-    let(:bidder) { double(:benefited => false) }
-
-    before do
-      subject.stub(:bidder_with_lowest_proposal => bidder)
-    end
-
-    it "returns true if bidder has lowest bid" do
-      expect(subject.can_be_disabled?(bidder)).to be_true
-    end
-
-    it "returns false if bidder is benefited" do
-      bidder.stub(:benefited => true)
-
-      expect(subject.can_be_disabled?(bidder)).to be_false
-    end
-  end
-
   describe 'last_bid' do
     it 'should return the last trading_item_bid' do
       subject.stub(:trading_item_bids).and_return(['bid1', 'bid2'])
@@ -443,6 +427,22 @@ describe TradingItem do
       end
 
       it { expect(subject.with_proposal_for_round_of_proposals?).to be_false }
+    end
+  end
+
+  describe '#bidder_with_lowest_proposal' do
+    context 'when there are no bidder with lowest proposal' do
+      it { expect(subject.bidder_with_lowest_proposal).to be_nil }
+    end
+
+    context 'when there are bidder with lowest proposal' do
+      before do
+        subject.stub(:enabled_bidders_by_lowest_proposal => ['bidder1', 'bidder2'])
+      end
+
+      it 'should retuns the first bidder with lowest proposal' do
+        expect(subject.bidder_with_lowest_proposal).to eq 'bidder1'
+      end
     end
   end
 end
