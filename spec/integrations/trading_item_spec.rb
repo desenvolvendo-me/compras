@@ -135,7 +135,7 @@ describe TradingItem do
         :status => TradingItemBidStatus::WITHOUT_PROPOSAL)
     end
 
-    context 'when not ignoring bids with proposal' do
+    context 'without_all_proposals' do
       it 'should returns all bidders for negotiation when it does not have a negotiation' do
         expect(subject.bidders_for_negociation_by_lowest_proposal).to include(bidder1)
       end
@@ -152,7 +152,7 @@ describe TradingItem do
       end
     end
 
-    context 'when ignoring bids with proposal' do
+    context 'with_all_proposals' do
       it 'should returns all bidders for negotiation when it does not have a negotiation' do
         expect(subject.bidders_for_negociation_by_lowest_proposal(true)).to include(bidder1)
       end
