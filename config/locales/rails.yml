@@ -310,7 +310,6 @@ pt-BR:
       must_be_greater_than_or_equals_to_start_date: "deve ser maior ou igual a data inicial"
       taken_for_signature: "já está contida em outra assinatura"
       date_range_taken_for_signature: "intervalo de data já está contida em outra assinatura"
-      cannot_have_duplicated_materials: "não pode ter materiais duplicados para a mesma dotação"
 
   activerecord:
     errors:

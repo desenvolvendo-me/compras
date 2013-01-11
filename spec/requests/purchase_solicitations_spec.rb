@@ -831,7 +831,6 @@ feature "PurchaseSolicitations" do
     click_button 'Salvar'
 
     expect(page).to_not have_notice 'Solicitação de Compra criada com sucesso.'
-    expect(page).to have_content 'não pode ter materiais duplicados para a mesma dotação'
 
     within_tab 'Dotações orçamentarias' do
       within '#allocations .item:last' do

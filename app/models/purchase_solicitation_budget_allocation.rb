@@ -13,6 +13,7 @@ class PurchaseSolicitationBudgetAllocation < Compras::Model
   delegate :annulled?, :services?, :to => :purchase_solicitation, :allow_nil => true
 
   validates :budget_allocation, :presence => true
+  validates :items, :no_duplication => :material_id
 
   validate :must_have_at_least_one_item
 
