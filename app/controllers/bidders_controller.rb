@@ -34,7 +34,9 @@ class BiddersController < CrudController
   end
 
   def begin_of_association_chain
-    parent
+    if parent_id
+      parent
+    end
   end
 
   protected
