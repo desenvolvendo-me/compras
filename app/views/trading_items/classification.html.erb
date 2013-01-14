@@ -159,7 +159,7 @@
 
   <% unless resource.allow_closing? %>
     <%= link_to "Iniciar Negociação", new_trading_item_bid_negotiation_path(:trading_item_id => resource.id),
-        'data-disabled' => resource.decotaror.cannot_start_negotiation_message, :class => "button primary" %>
+        'data-disabled' => resource.decorator.cannot_start_negotiation_message, :class => "button primary" %>
   <% end %>
 
   <% if resource.decorator.any_bid_at_negotiation? %>
