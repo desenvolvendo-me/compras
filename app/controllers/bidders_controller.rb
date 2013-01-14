@@ -3,6 +3,7 @@ class BiddersController < CrudController
   has_scope :without_ratification, :type => :boolean
 
   before_filter :block_not_allow_bidders, :only => [ :new, :create, :update, :destroy ]
+  before_filter :block_changes_when_have_ratifications, :only => [:create, :update, :destroy]
 
   def new
     object = build_resource
@@ -33,15 +34,31 @@ class BiddersController < CrudController
   end
 
   def begin_of_association_chain
-    if params[:licitation_process_id]
-      @parent = LicitationProcess.find(params[:licitation_process_id])
-    end
+    parent
   end
 
   protected
 
   def main_controller_name
     'administrative_processes'
+  end
+
+  def parent
+    @parent ||= parent_from_params_or_bidder
+  end
+
+  def parent_id
+    return unless params[:licitation_process_id] || params[:bidder]
+
+    params[:licitation_process_id] || params[:bidder][:licitation_process_id]
+  end
+
+  def parent_from_params_or_bidder
+    if parent_id
+      LicitationProcess.find(parent_id)
+    else
+      Bidder.find(params[:id]).licitation_process
+    end
   end
 
   def create_resource(object)
@@ -61,14 +78,6 @@ class BiddersController < CrudController
   end
 
   def block_not_allow_bidders
-    if params[:licitation_process_id]
-      parent = LicitationProcess.find(params[:licitation_process_id])
-    elsif params[:bidder]
-      parent = LicitationProcess.find(params[:bidder][:licitation_process_id])
-    else
-      parent = Bidder.find(params[:id]).licitation_process
-    end
-
     raise Exceptions::Unauthorized unless parent.allow_bidders?
   end
 
@@ -76,5 +85,11 @@ class BiddersController < CrudController
     return if licitation_process.in_progress?
 
     licitation_process.update_status(LicitationProcessStatus::IN_PROGRESS)
+  end
+
+  def block_changes_when_have_ratifications
+    return unless parent.ratification?
+
+    raise ActiveRecord::RecordNotFound
   end
 end

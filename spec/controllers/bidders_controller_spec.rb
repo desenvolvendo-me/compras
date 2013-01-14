@@ -112,4 +112,37 @@ describe BiddersController do
       expect(response.body).to match /Você não tem acesso a essa página/
     end
   end
+
+  context 'with ratification' do
+    let :ratification do
+      LicitationProcessRatification.make!(:processo_licitatorio_computador)
+    end
+
+    let(:licitation_process) { ratification.licitation_process }
+    let(:bidder) { licitation_process.bidders.first }
+
+    describe 'POST #create' do
+      it 'should raise exception' do
+        expect {
+          post :create, :licitation_process_id => licitation_process.id
+        }.to raise_exception ActiveRecord::RecordNotFound
+      end
+    end
+
+    describe 'PUT #update' do
+      it 'should raise exception' do
+        expect {
+          put :update, :id => bidder.id
+        }.to raise_exception ActiveRecord::RecordNotFound
+      end
+    end
+
+    describe 'DELETE #destroy' do
+      it 'should raise exception' do
+        expect {
+          delete :destroy, :id => bidder.id
+        }.to raise_exception ActiveRecord::RecordNotFound
+      end
+    end
+  end
 end
