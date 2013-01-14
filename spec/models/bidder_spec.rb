@@ -118,9 +118,11 @@ describe Bidder do
     end
   end
 
-    let(:licitation_process) { double(:licitation_process,
-      :administrative_process => nil, :allow_bidders? => true, :to_s => '1/2012') }
   context 'valitation licitation_process_ratification' do
+    let(:licitation_process) do
+      double(:licitation_process, :administrative_process => nil,
+             :allow_bidders? => true, :to_s => '1/2012')
+    end
 
     it 'should not allow save when licitation_process has ratification' do
       subject.stub(:licitation_process).and_return(licitation_process)
