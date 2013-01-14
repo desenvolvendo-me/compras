@@ -141,6 +141,10 @@ class TradingItem < Compras::Model
     bidders_selected_for_negociation.any? && !valid_proposal_for_negotiation?
   end
 
+  def allow_negotiation?
+    bidders_selected_for_negociation.any?
+  end
+
   def rounds_uniq_at_stage_of_round_of_bids_ordered
     trading_item_bids.at_stage_of_round_of_bids.reorder(:round).uniq.select(:round)
   end

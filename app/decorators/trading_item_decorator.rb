@@ -57,6 +57,12 @@ class TradingItemDecorator
     must_be_open || t('trading_item.messages.cannot_be_closed')
   end
 
+  def cannot_start_negotiation_message
+    return if allow_negotiation?
+
+    t('trading_item.messages.cannot_start_negotiation')
+  end
+
   def not_allow_offer_message
     return if with_proposal_for_round_of_proposals?
 

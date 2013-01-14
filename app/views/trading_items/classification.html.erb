@@ -158,7 +158,8 @@
       'data-disabled' => resource.decorator.cannot_close_trading_item_message, :class => "button primary" %>
 
   <% unless resource.allow_closing? %>
-    <%= link_to "Iniciar Negociação", new_trading_item_bid_negotiation_path(:trading_item_id => resource.id), :class => "button primary" %>
+    <%= link_to "Iniciar Negociação", new_trading_item_bid_negotiation_path(:trading_item_id => resource.id),
+        'data-disabled' => resource.decotaror.cannot_start_negotiation_message, :class => "button primary" %>
   <% end %>
 
   <% if resource.decorator.any_bid_at_negotiation? %>

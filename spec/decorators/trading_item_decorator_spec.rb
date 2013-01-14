@@ -410,4 +410,30 @@ describe TradingItemDecorator do
       it { expect(subject.not_allow_offer_message).to eq 'não pode ter oferta' }
     end
   end
+
+  describe '#cannot_start_negotiation_message' do
+    context 'when allow_negotiation' do
+      before do
+        component.stub(:allow_negotiation? => true)
+      end
+
+      it { expect(subject.cannot_start_negotiation_message).to be_nil }
+    end
+
+    context 'when not allow_negotiation' do
+      before do
+        component.stub(:allow_negotiation? => false)
+
+        I18n.backend.store_translations 'pt-BR', :trading_item => {
+            :messages => {
+              :cannot_start_negotiation => 'não pode negociar',
+            }
+          }
+      end
+
+      it 'should return the message' do
+        expect(subject.cannot_start_negotiation_message).to eq 'não pode negociar'
+      end
+    end
+  end
 end

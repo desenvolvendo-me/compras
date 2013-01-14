@@ -505,4 +505,22 @@ describe TradingItem do
       expect(subject.lowest_proposal_at_stage_of_proposals_amount).to eq 0
     end
   end
+
+  describe '#allow_negotiation?' do
+    context 'when there are not bidders for negotiation' do
+      before do
+        subject.stub(:bidders_selected_for_negociation => [])
+      end
+
+      it { expect(subject.allow_negotiation?).to be_false }
+    end
+
+    context 'when there are bidders for negotiation' do
+      before do
+        subject.stub(:bidders_selected_for_negociation => ['bidder'])
+      end
+
+      it { expect(subject.allow_negotiation?).to be_true }
+    end
+  end
 end
