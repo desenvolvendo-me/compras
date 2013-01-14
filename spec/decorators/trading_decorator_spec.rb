@@ -30,7 +30,7 @@ describe TradingDecorator do
     end
 
     it 'should have created_at' do
-      expect(described_class.header_attributes).to include :created_at
+      expect(described_class.header_attributes).to include :created_at_date
     end
 
     it 'should have licitation_process' do
@@ -50,11 +50,11 @@ describe TradingDecorator do
     end
   end
 
-  describe '#created_at' do
+  describe '#created_at_date' do
     it 'should return date time converted to date' do
       component.stub(:created_at).and_return(DateTime.new(2012, 12, 21, 21, 21))
 
-      expect(subject.created_at).to eq Date.new(2012, 12, 21)
+      expect(subject.created_at_date).to eq Date.new(2012, 12, 21)
     end
   end
 end

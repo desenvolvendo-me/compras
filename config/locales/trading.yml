@@ -14,7 +14,7 @@ pt-BR:
         licitating_unit: "Unidade licitante"
         administrative_process_summarized_object: "Objeto resumido"
         year: "Ano"
-        created_at: "Data"
+        created_at_date: "Data"
         preamble: "Preâmbulo"
         closing_of_accreditation: "Fechamento do credenciamento"
         trading_registry: "Registro do pregão"

@@ -3,14 +3,14 @@ class TradingDecorator
   include Decore::Proxy
   include Decore::Header
 
-  attr_header :created_at, :licitation_process, :licitating_unit,
+  attr_header :created_at_date, :licitation_process, :licitating_unit,
               :administrative_process_summarized_object
 
   def licitation_process_id
     super || -1
   end
 
-  def created_at
-    super.to_date
+  def created_at_date
+    created_at.to_date
   end
 end
