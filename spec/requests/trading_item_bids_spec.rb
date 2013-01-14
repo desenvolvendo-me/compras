@@ -504,7 +504,7 @@ feature "TradingItemBids" do
     expect(page).to have_disabled_field 'Motivo da desclassificação'
   end
 
-  scenario 'disqualify a bib' do
+  scenario 'disqualify a bid' do
     trading = Trading.make!(:pregao_presencial)
 
     make_stage_of_proposals :trading => trading
