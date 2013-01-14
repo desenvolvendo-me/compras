@@ -514,6 +514,24 @@ feature "Tradings" do
 
     click_link "Encerramento do item"
 
+    click_link 'Voltar'
+
+    expect(page).to have_title 'Itens do Pregão Presencial 1/2012'
+
+    click_link "Fazer oferta"
+
+    expect(page).to have_title 'Classificação das Ofertas'
+
+    click_link "Encerramento do item"
+
+    expect(page).to have_title 'Criar Encerramento do Item do Pregão'
+
+    select 'Vencedor', :from => 'Situação'
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Encerramento do Item do Pregão criado com sucesso'
+
     within("tbody tr:nth-child(1)") do
       expect(page).to have_disabled_element "Fazer oferta", :reason => "O item já foi encerrado"
     end

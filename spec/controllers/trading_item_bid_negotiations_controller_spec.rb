@@ -134,14 +134,6 @@ describe TradingItemBidNegotiationsController do
 
         expect(response).to redirect_to(classification_trading_item_path(trading_item))
       end
-
-      it 'should returns 404 when item is closed' do
-        trading_item.close!
-
-        expect {
-          delete :destroy, :id => negotiation.id, :trading_item_id => trading_item.id
-        }.to raise_exception ActiveRecord::RecordNotFound
-      end
     end
   end
 

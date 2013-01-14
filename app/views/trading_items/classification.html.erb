@@ -1,4 +1,4 @@
-<h2>Classificação das Ofertas</h2>
+<h2 id="title">Classificação das Ofertas</h2>
 
 <table class="records">
   <thead>
@@ -154,7 +154,7 @@
 </table>
 
 <div class="buttons right">
-  <%= link_to "Encerramento do item", close_trading_item_path(:id => resource.id),
+  <%= link_to "Encerramento do item", new_trading_item_closing_path(:trading_item_id => resource.id),
       'data-disabled' => resource.decorator.cannot_close_trading_item_message, :class => "button primary" %>
 
   <% unless resource.allow_closing? %>

@@ -6,6 +6,7 @@ require 'app/models/trading_item_bid'
 require 'app/models/licitation_process'
 require 'app/models/bidder'
 require 'app/models/bidder_disqualification'
+require 'app/models/trading_item_closing'
 
 describe TradingItem do
   it { should belong_to :trading }
@@ -13,6 +14,8 @@ describe TradingItem do
 
   it { should have_many(:trading_item_bids).dependent(:destroy) }
   it { should have_many(:bidders).through(:trading).order(:id) }
+
+  it { should have_one(:closing).dependent(:destroy) }
 
   it { should delegate(:material).to(:administrative_process_budget_allocation_item).allowing_nil(true) }
   it { should delegate(:material_id).to(:administrative_process_budget_allocation_item).allowing_nil(true) }
@@ -354,25 +357,18 @@ describe TradingItem do
     end
   end
 
-  describe "#close!" do
-    it "fills the closing date" do
-      closing_date = Date.current
-
-      subject.close!(closing_date)
-
-      expect(subject.closing_date).to eq closing_date
-    end
-  end
-
   describe "closed?" do
-    it "returns true if there is a closing date" do
-      subject.closing_date = Date.current
+    context 'when there is a closing' do
+      before do
+        subject.stub(:closing => 'closing')
+      end
 
-      expect(subject).to be_closed
+      it { expect(subject).to be_closed }
     end
 
-    it "returns false otherwise" do
-      expect(subject).not_to be_closed
+    context 'when there is not closing' do
+
+      it { expect(subject).not_to be_closed }
     end
   end
 

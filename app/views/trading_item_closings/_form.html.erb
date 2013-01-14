@@ -1,0 +1,17 @@
+<%= hidden_field_tag :trading_item_id, @trading_item.id %>
+
+<div class="yui3-g">
+  <div class="yui3-u-3-5">
+    <%= f.input :trading_item %>
+  </div>
+
+  <div class="yui3-u-2-5">
+    <%= f.input :status %>
+  </div>
+</div>
+
+<%= f.input :reason, :as => :text %>
+
+<script>
+  $("#trading_item_closing_trading_item").attr("disabled", "disabled");
+</script>

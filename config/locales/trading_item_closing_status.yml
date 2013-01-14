@@ -1,0 +1,7 @@
+pt-BR:
+  enumerations:
+    trading_item_closing_status:
+      winner: "Vencedor"
+      repealed: "Revogado/Anulado"
+      failed: "Fracassado"
+      abandoned: "Deserto"

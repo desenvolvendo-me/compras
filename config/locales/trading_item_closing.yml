@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      trading_item_closing:
+        one: "Encerramento do Item do Pregão"
+        other: "Encerramentos dos Itens do Pregão"
+
+    attributes:
+      trading_item_closing:
+        trading_item: "Item do pregão"
+        status: "Situação"
+        reason: "Motivo"

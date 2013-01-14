@@ -11,6 +11,8 @@ class TradingItem < Compras::Model
   has_many :trading_item_bids, :dependent => :destroy, :order => :id
   has_many :bidders, :through => :trading, :order => :id
 
+  has_one :closing, :dependent => :destroy, :class_name => 'TradingItemClosing'
+
   validates :minimum_reduction_percent, :numericality => { :equal_to  => 0.0 },
             :if => :minimum_reduction_value?, :on => :update
   validates :minimum_reduction_value, :numericality => { :equal_to  => 0.0 },
@@ -111,12 +113,8 @@ class TradingItem < Compras::Model
     (bidder_with_lowest_proposal.benefited || bidders_selected_for_negociation.empty?) && !closed?
   end
 
-  def close!(reference_date=Date.current)
-    update_attribute(:closing_date, reference_date)
-  end
-
   def closed?
-    closing_date?
+    closing.present?
   end
 
   def started?
