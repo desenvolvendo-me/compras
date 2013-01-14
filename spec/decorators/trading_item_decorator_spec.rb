@@ -358,6 +358,7 @@ describe TradingItemDecorator do
         I18n.backend.store_translations 'pt-BR', :trading_item => {
             :messages => {
               :must_be_open => 'encerrado',
+              :must_be_started => 'não iniciado',
               :cannot_be_closed => 'não pode ser fechado'
             }
           }
@@ -365,14 +366,22 @@ describe TradingItemDecorator do
 
       it 'should return message when closed' do
         component.stub(:closed?).and_return(true)
+        component.stub(:started?).and_return(true)
 
         expect(subject.cannot_close_trading_item_message).to eq 'encerrado'
       end
 
       it 'should return message when not closed' do
         component.stub(:closed?).and_return(false)
+        component.stub(:started?).and_return(true)
 
         expect(subject.cannot_close_trading_item_message).to eq 'não pode ser fechado'
+      end
+
+      it 'should return message when not started' do
+        component.stub(:started?).and_return(false)
+
+        expect(subject.cannot_close_trading_item_message).to eq 'não iniciado'
       end
     end
 

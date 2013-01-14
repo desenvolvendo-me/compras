@@ -110,7 +110,7 @@ class TradingItem < Compras::Model
   end
 
   def allow_closing?
-    (bidder_with_lowest_proposal.benefited || bidders_selected_for_negociation.empty?) && !closed?
+    started? && !closed? && (bidder_with_lowest_proposal.benefited || bidders_selected_for_negociation.empty?)
   end
 
   def closed?

@@ -315,7 +315,7 @@ describe TradingItem do
 
     context 'when not closed' do
       before do
-        subject.stub(:closed? => false)
+        subject.stub(:closed? => false, :started? => true)
       end
 
       it "returns true if there are no bidders for negotiation" do
@@ -338,22 +338,20 @@ describe TradingItem do
       end
     end
 
+    context 'when not closed and not started' do
+      before do
+        subject.stub(:closed? => false, :started? => false)
+      end
+
+      it { expect(subject.allow_closing?).to be_false }
+    end
+
     context 'when closed' do
       before do
         subject.stub(:closed? => true)
       end
 
-      it "returns true if there are no bidders for negotiation" do
-        subject.stub(:bidders_selected_for_negociation => [])
-
-        expect(subject.allow_closing?).to be_false
-      end
-
-      it "returns true if the winning bidder is benefited" do
-        winner.stub(:benefited => true)
-
-        expect(subject.allow_closing?).to be_false
-      end
+      it { expect(subject.allow_closing?).to be_false }
     end
   end
 
