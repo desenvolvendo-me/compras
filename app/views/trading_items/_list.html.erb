@@ -14,7 +14,7 @@
           <%= link_to "Ver histórico", offers_trading_item_path(resource), :class => "button primary" %>
 
           <%= link_to "Encerramento do item", new_trading_item_closing_path(:trading_item_id => resource.id),
-              'data-disabled' => resource.decorator.cannot_close_trading_item_message, :class => "button primary" %>
+              :class => "button primary" %>
         </td>
       </tr>
     <% end %>

@@ -306,7 +306,7 @@ describe TradingItem do
     end
   end
 
-  describe "#allow_closing?" do
+  describe "#allow_winner?" do
     let(:winner) { double(:benefited => false) }
 
     before do
@@ -321,20 +321,20 @@ describe TradingItem do
       it "returns true if there are no bidders for negotiation" do
         subject.stub(:bidders_selected_for_negociation => [])
 
-        expect(subject.allow_closing?).to be_true
+        expect(subject.allow_winner?).to be_true
       end
 
       it "returns true if the winning bidder is benefited" do
         winner.stub(:benefited => true)
 
-        expect(subject.allow_closing?).to be_true
+        expect(subject.allow_winner?).to be_true
       end
 
       it 'returns false when there are bidders for negotiation and the winner is not benefited' do
         subject.stub(:bidders_selected_for_negociation => ['bidder'])
         winner.stub(:benefited => false)
 
-        expect(subject.allow_closing?).to be_false
+        expect(subject.allow_winner?).to be_false
       end
     end
 
@@ -343,7 +343,7 @@ describe TradingItem do
         subject.stub(:closed? => false, :started? => false)
       end
 
-      it { expect(subject.allow_closing?).to be_false }
+      it { expect(subject.allow_winner?).to be_false }
     end
 
     context 'when closed' do
@@ -351,7 +351,7 @@ describe TradingItem do
         subject.stub(:closed? => true)
       end
 
-      it { expect(subject.allow_closing?).to be_false }
+      it { expect(subject.allow_winner?).to be_false }
     end
   end
 

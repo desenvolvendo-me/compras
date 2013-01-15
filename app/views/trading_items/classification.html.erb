@@ -155,9 +155,9 @@
 
 <div class="buttons right">
   <%= link_to "Encerramento do item", new_trading_item_closing_path(:trading_item_id => resource.id),
-      'data-disabled' => resource.decorator.cannot_close_trading_item_message, :class => "button primary" %>
+      :class => "button primary" %>
 
-  <% unless resource.allow_closing? %>
+  <% unless resource.allow_winner? %>
     <%= link_to "Iniciar Negociação", new_trading_item_bid_negotiation_path(:trading_item_id => resource.id),
         'data-disabled' => resource.decorator.cannot_start_negotiation_message, :class => "button primary" %>
   <% end %>

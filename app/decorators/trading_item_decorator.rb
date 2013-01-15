@@ -51,12 +51,6 @@ class TradingItemDecorator
     end
   end
 
-  def cannot_close_trading_item_message
-    return if allow_closing?
-
-    must_be_started || must_be_open || t('trading_item.messages.cannot_be_closed')
-  end
-
   def cannot_start_negotiation_message
     return if allow_negotiation?
 
@@ -107,12 +101,6 @@ class TradingItemDecorator
     return unless closed?
 
     t('trading_item.messages.must_be_open')
-  end
-
-  def must_be_started
-    return if started?
-
-    t('trading_item.messages.must_be_started')
   end
 
   def must_have_only_one_item_started

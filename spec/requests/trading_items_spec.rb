@@ -57,8 +57,6 @@ feature TradingItem do
     within 'table.records tbody tr:nth-child(2)' do
       expect(page).to have_disabled_element 'Fazer oferta',
                                             :reason => 'Encerre o item (01.01.00001 - Antivirus) antes de iniciar outro'
-      expect(page).to have_disabled_element 'Encerramento do item',
-                                            :reason => 'O item não foi iniciado'
     end
   end
 
@@ -309,8 +307,7 @@ feature TradingItem do
     expect(page).to have_notice 'Encerramento do Item do Pregão criado com sucesso'
 
     within 'table.records tbody tr:nth-child(1)' do
-      expect(page).to have_disabled_element 'Encerramento do item',
-                                            :reason => 'O item já foi encerrado'
+      expect(page).to have_link 'Encerramento do item'
     end
   end
 end
