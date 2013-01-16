@@ -1,7 +1,5 @@
 class GovernmentAction < Compras::Model
-  attr_accessible :descriptor_id, :description, :status
-
-  has_enumeration_for :status, :create_helpers => true
+  attr_accessible :descriptor_id, :description
 
   belongs_to :descriptor
 
