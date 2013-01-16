@@ -165,7 +165,7 @@ describe Bidder do
   describe '.with_proposal_for_trading_item' do
     it 'should return only bidders with proposal for a specific trading item' do
       trading_item_with_proposal = TradingItem.make!(:item_pregao_presencial)
-      trading_item_without_proposal = TradingItem.make!(:item_pregao_presencial, :order => 2)
+      trading_item_without_proposal = TradingItem.make!(:item_pregao_presencial, :minimum_reduction_value => 0.02)
 
       trading = Trading.make!(:pregao_presencial,
         :trading_items => [trading_item_with_proposal,trading_item_without_proposal])
@@ -205,7 +205,7 @@ describe Bidder do
   describe '.with_proposal_for_trading_item_at_stage_of_round_of_bids' do
     it 'should return only bidders with proposal at stage of round of bids for a specific trading item' do
       trading_item_with_proposal = TradingItem.make!(:item_pregao_presencial)
-      trading_item_without_proposal = TradingItem.make!(:item_pregao_presencial, :order => 2)
+      trading_item_without_proposal = TradingItem.make!(:item_pregao_presencial, :minimum_reduction_value => 0.02)
 
       trading = Trading.make!(:pregao_presencial,
         :trading_items => [trading_item_with_proposal,trading_item_without_proposal])
@@ -245,7 +245,7 @@ describe Bidder do
   describe '.with_proposal_for_trading_item_at_stage_of_negotiation' do
     it 'should return only bidders with proposal at stage of negotiation for a specific trading item' do
       trading_item_with_proposal = TradingItem.make!(:item_pregao_presencial)
-      trading_item_without_proposal = TradingItem.make!(:item_pregao_presencial, :order => 2)
+      trading_item_without_proposal = TradingItem.make!(:item_pregao_presencial, :minimum_reduction_value => 0.02)
 
       trading = Trading.make!(:pregao_presencial,
         :trading_items => [trading_item_with_proposal,trading_item_without_proposal])

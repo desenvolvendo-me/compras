@@ -55,7 +55,7 @@ describe TradingItemBid do
   describe '.for_trading_item' do
     it 'should returns bids of and trading item' do
       trading_item_with_proposal = TradingItem.make!(:item_pregao_presencial)
-      trading_item_without_proposal = TradingItem.make!(:item_pregao_presencial, :order => 2)
+      trading_item_without_proposal = TradingItem.make!(:item_pregao_presencial, :minimum_reduction_value => 0.02)
 
       trading = Trading.make!(:pregao_presencial,
         :trading_items => [trading_item_with_proposal,trading_item_without_proposal])
