@@ -5,7 +5,7 @@ class TradingItemBid < Compras::Model
   has_enumeration_for :stage, :with => TradingItemBidStage,
                       :create_helpers => true, :create_scopes => true
   has_enumeration_for :status, :with => TradingItemBidStatus,
-                      :create_helpers => true
+                      :create_helpers => true, :create_scopes => true
 
   belongs_to :trading_item
   belongs_to :bidder
@@ -40,10 +40,6 @@ class TradingItemBid < Compras::Model
   scope :at_stage_of_negotiation, lambda { where { stage.eq(TradingItemBidStage::NEGOTIATION)} }
   scope :at_round, lambda { |round_number| where { round.eq(round_number) } }
   scope :for_trading_item, lambda { |item_id| where { trading_item_id.eq(item_id) } }
-
-  def self.with_proposal
-    where { status.eq(TradingItemBidStatus::WITH_PROPOSAL) }.order { :id }
-  end
 
   def self.enabled
     joins { bidder.disqualification.outer }.
