@@ -751,7 +751,7 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :trading_item_closings, :except => [:index, :destroy]
+  resources :trading_item_closings, :except => [:index, :destroy, :update]
 
   resources :trading_item_bid_negotiations, :only => [:new, :create, :destroy]
   resources :trading_item_bid_proposals, :only => [:new, :create, :edit, :update]

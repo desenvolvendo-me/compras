@@ -14,4 +14,8 @@
 
 <script>
   $("#trading_item_closing_trading_item").attr("disabled", "disabled");
+
+  <% if f.object.persisted? %>
+    $("form :input").attr("disabled", "disabled");
+  <% end %>
 </script>

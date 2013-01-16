@@ -13,6 +13,14 @@ class TradingItemDecorator
     number_with_precision super if super
   end
 
+  def trading_item_closing_path
+    if closed?
+      routes.edit_trading_item_closing_path(closing)
+    else
+      routes.new_trading_item_closing_path(:trading_item_id => id)
+    end
+  end
+
   def current_stage_path(options={})
     stage_calculator = options.fetch(:stage_calculator) {
       TradingItemBidStageCalculator.new(component)

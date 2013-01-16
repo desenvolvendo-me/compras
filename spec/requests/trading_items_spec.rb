@@ -307,8 +307,21 @@ feature TradingItem do
     expect(page).to have_notice 'Encerramento do Item do Pregão criado com sucesso'
 
     within 'table.records tbody tr:nth-child(1)' do
-      expect(page).to have_link 'Encerramento do item'
+       click_link 'Encerramento do item'
     end
+
+    expect(page).to have_title 'Encerramento do Item do Pregão 1/2012'
+    expect(page).to have_disabled_field 'Item do pregão', :with => '01.01.00001 - Antivirus'
+    expect(page).to have_disabled_field 'Motivo', :with => 'Os licitantes fracassaram'
+    expect(page).to have_disabled_field 'Situação'
+    expect(page).to have_select 'Situação', :selected => 'Fracassado'
+
+    expect(page).to_not have_link 'Apagar'
+    expect(page).to_not have_button 'Salvar'
+
+    click_link 'Voltar'
+
+    expect(page).to have_title 'Itens do Pregão Presencial 1/2012'
   end
 
   scenario 'activate proposals at classification' do

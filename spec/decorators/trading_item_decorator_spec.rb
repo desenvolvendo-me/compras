@@ -423,4 +423,34 @@ describe TradingItemDecorator do
       it { expect(subject.cannot_activate_proposals_message).to eq 'não pode ativar' }
     end
   end
+
+  describe '#trading_item_closing_path' do
+    context 'when closed' do
+      let(:closing) { double(:closing, :to_param => "3")}
+
+      before do
+        component.stub(:closed? => true)
+      end
+
+      it 'should returns path to edit the trading_item_closing' do
+        component.stub(:closing => closing)
+        routes.should_receive(:edit_trading_item_closing_path).with(closing).and_return('rota')
+
+        expect(subject.trading_item_closing_path).to eq 'rota'
+      end
+    end
+
+    context 'when closed' do
+      before do
+        component.stub(:closed? => false)
+      end
+
+      it 'should returns path to edit the trading_item_closing' do
+        component.stub(:id => 5)
+        routes.should_receive(:new_trading_item_closing_path).with(:trading_item_id => 5).and_return('rota')
+
+        expect(subject.trading_item_closing_path).to eq 'rota'
+      end
+    end
+  end
 end
