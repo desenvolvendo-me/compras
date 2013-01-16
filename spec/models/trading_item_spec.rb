@@ -47,7 +47,7 @@ describe TradingItem do
     end
   end
 
-  describe '#last_proposal' do
+  describe '#lowest_proposal_value' do
     context 'with proposals_activated_at nil' do
       it 'should return the last bid proposal value for the item' do
         first_bid = double(:first_bid, :amount => 50.0)
