@@ -106,7 +106,7 @@ describe TradingItem do
 
       TradingItemBid.create!(
         :round => 1,
-        :bidder_id => bidder1.id,
+        :bidder_id => bidder3.id,
         :trading_item_id => subject.id,
         :amount => 998.0,
         :stage => TradingItemBidStage::ROUND_OF_BIDS,
