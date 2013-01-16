@@ -50,7 +50,7 @@ module Compras
       value ||= template.translate('.destroy', :cascade => true, :resource => object)
 
       options[:class]            = "#{options[:class].join(" ")} negative".strip
-      options[:href]           ||= template.resource_url
+      options[:href]           ||= template.resource_path
       options[:method]         ||= :delete
       options[:data]           ||= {}
       options[:data][:confirm] ||= template.translate('.are_you_sure', :cascade => true, :resource => object)
@@ -65,7 +65,7 @@ module Compras
       value ||= template.translate('.back', :cascade => true)
 
       options[:class]   = "#{options[:class].join(" ")} secondary".strip
-      options[:href]  ||= template.smart_collection_url
+      options[:href]  ||= template.smart_collection_path
       options[:id]    ||= "#{object_name}_back"
 
       template.link_to value, options.delete(:href), options
@@ -77,7 +77,7 @@ module Compras
       value ||= template.translate('.print', :cascade => true)
 
       options[:class]   = "#{options[:class].join(" ")} primary".strip
-      options[:href]  ||= template.resource_url
+      options[:href]  ||= template.resource_path
       options[:id]    ||= "#{object_name}_print"
 
       template.link_to value, options.delete(:href), options

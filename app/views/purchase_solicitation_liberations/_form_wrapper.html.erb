@@ -1,4 +1,4 @@
-<%= simple_form_for resource.localized, :url => collection_url, :remote => request.xhr? do |f| %>
+<%= simple_form_for resource.localized, :url => collection_path, :remote => request.xhr? do |f| %>
   <%= render 'form', :f => f %>
   <%= render 'form_buttons', :f => f %>
 <% end %>

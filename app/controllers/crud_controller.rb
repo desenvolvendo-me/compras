@@ -48,6 +48,29 @@ class CrudController < ApplicationController
 
   protected
 
+  def smart_resource_path
+    path = nil
+    if respond_to? :show
+      path = resource_path rescue nil
+    end
+    path ||= smart_collection_path
+  end
+
+  helper_method :smart_resource_path
+
+  def smart_collection_path
+    path = nil
+    if respond_to? :index
+      path ||= collection_path rescue nil
+    end
+    if respond_to? :parent
+      path ||= parent_path rescue nil
+    end
+    path ||= root_path rescue nil
+  end
+
+  helper_method :smart_collection_path
+
   # Build resource using I18n::Alchemy
   def build_resource
     get_resource_ivar || set_resource_ivar(effectively_build_resource)

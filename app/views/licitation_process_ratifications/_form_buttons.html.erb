@@ -1,5 +1,5 @@
 <div class="buttons">
   <%= f.button :submit %>
-  <%= link_to 'Imprimir termo', resource_url(resource), :class => 'button neutral' if f.object.persisted? %>
+  <%= link_to 'Imprimir termo', resource_path(resource), :class => 'button neutral' if f.object.persisted? %>
   <%= f.button :back %>
 </div>

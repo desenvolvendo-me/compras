@@ -21,7 +21,7 @@ class LicitationProcessDecorator
     localize(super, :format => :hour) if super
   end
 
-  def parent_url(parent)
+  def parent_path(parent)
     if parent
       routes.edit_administrative_process_path(parent)
     else

@@ -22,8 +22,8 @@ module ApplicationHelper
     I18n.t "number.placing", :count => value
   end
 
-  def smart_report_url
-    url_for :controller => controller_name, :action => :show, :id => 'report'
+  def smart_report_path
+    url_for :controller => controller_name, :action => :show, :id => 'report', :only_path => true
   end
 
   # Apply I18n::Alchemy on a collection of active record objects.

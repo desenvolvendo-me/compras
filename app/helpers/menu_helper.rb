@@ -43,12 +43,12 @@ module MenuHelper
     I18n.t "menu.#{name}"
   end
 
-  def resolve_url(name)
+  def resolve_path(name)
     send("#{name}_path")
   end
 
   def render_link(name, url = nil)
-    url = url || resolve_url(name)
+    url = url || resolve_path(name)
     name = localize_menu(name)
 
     link_to(name, url)
