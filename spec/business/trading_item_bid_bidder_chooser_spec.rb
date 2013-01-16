@@ -35,7 +35,7 @@ describe TradingItemBidBidderChooser do
           end
 
           it "should always return the first bidder available for negotiation" do
-            trading_item.stub(:bidders_for_negociation_by_lowest_proposal => bidders)
+            trading_item.stub(:bidders_for_negotiation_by_lowest_proposal => bidders)
             expect(subject.choose).to eq bidder1
           end
         end

@@ -74,7 +74,7 @@ describe TradingItemBidRoundCalculator do
       expect(subject.calculate).to eq 3
     end
 
-    it "always return 0 during the negociation stage" do
+    it "always return 0 during the negotiation stage" do
       expect(subject.calculate(TradingItemBidStage::NEGOTIATION)).to eq 0
     end
   end

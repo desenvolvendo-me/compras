@@ -64,9 +64,9 @@ pt-BR:
       foram classificadas em ordem crescente de valor, assegurada as licitantes
       microempresas e empresas de pequeno porte o exercício do direito de
       preferência, respeitada a ordem de classificação, na seguinte conformidade:"
-      accept_negociation_message: "Negociada a redução da menor oferta, o Pregoeiro
+      accept_negotiation_message: "Negociada a redução da menor oferta, o Pregoeiro
       considerou que o preço obtido abaixo especificado, é ACEITÁVEL por ser
       compatível com os preços praticados pelo mercado, conforme apurado no
       processo de licitação."
-      decline_negociation_message: "Negociada a redução da menor oferta, o Pregoeiro
+      decline_negotiation_message: "Negociada a redução da menor oferta, o Pregoeiro
       considerou que o preço obtido abaixo especificado, é INACEITÁVEL."

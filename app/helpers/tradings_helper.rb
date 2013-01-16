@@ -21,8 +21,8 @@ module TradingsHelper
     t('trading.messages.classification_message')
   end
 
-  def accept_negociation_message
-    t('trading.messages.accept_negociation_message')
+  def accept_negotiation_message
+    t('trading.messages.accept_negotiation_message')
   end
 
   private

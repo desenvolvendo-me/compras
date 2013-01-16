@@ -25,7 +25,7 @@ class TradingItemBidBidderChooser
 
   def bidders_available_for_current_round
     if current_stage == TradingItemBidStage::NEGOTIATION
-      trading_item.bidders_for_negociation_by_lowest_proposal
+      trading_item.bidders_for_negotiation_by_lowest_proposal
     else
       bidders_available - trading_item_bidders.at_bid_round(current_round)
     end

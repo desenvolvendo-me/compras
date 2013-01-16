@@ -103,14 +103,14 @@ class TradingItem < Compras::Model
     (lowest_proposal_amount_at_stage_of_proposals * percentage_limit_to_participate_in_bids / 100) + lowest_proposal_amount_at_stage_of_proposals
   end
 
-  def bidders_for_negociation_by_lowest_proposal(with_all_proposals = false)
-    bidders_selected_for_negociation(with_all_proposals).sort do |a,b|
+  def bidders_for_negotiation_by_lowest_proposal(with_all_proposals = false)
+    bidders_selected_for_negotiation(with_all_proposals).sort do |a,b|
       a.lower_trading_item_bid_amount(self) <=> b.lower_trading_item_bid_amount(self)
     end
   end
 
   def allow_winner?
-    started? && !closed? && (bidder_with_lowest_proposal.benefited || bidders_selected_for_negociation.empty?)
+    started? && !closed? && (bidder_with_lowest_proposal.benefited || bidders_selected_for_negotiation.empty?)
   end
 
   def closed?
@@ -138,11 +138,11 @@ class TradingItem < Compras::Model
   end
 
   def valid_bidder_for_negotiation?
-    bidders_selected_for_negociation.any? && !valid_proposal_for_negotiation?
+    bidders_selected_for_negotiation.any? && !valid_proposal_for_negotiation?
   end
 
   def allow_negotiation?
-    bidders_selected_for_negociation.any?
+    bidders_selected_for_negotiation.any?
   end
 
   def rounds_uniq_at_stage_of_round_of_bids_ordered
@@ -167,23 +167,23 @@ class TradingItem < Compras::Model
 
   private
 
-  def bidders_selected_for_negociation(with_all_proposals = false)
-    bidders_eligible_for_negociation(with_all_proposals).select { |bidder| bidder.benefited }
+  def bidders_selected_for_negotiation(with_all_proposals = false)
+    bidders_eligible_for_negotiation(with_all_proposals).select { |bidder| bidder.benefited }
   end
 
-  def bidders_eligible_for_negociation(with_all_proposals = false)
+  def bidders_eligible_for_negotiation(with_all_proposals = false)
     if with_all_proposals
       bidders_with_proposal_eligible_for_negotiation
     else
-      bidders_with_proposal_eligible_for_negotiation - bidders.with_negociation_proposal_for(id)
+      bidders_with_proposal_eligible_for_negotiation - bidders.with_negotiation_proposal_for(id)
     end
   end
 
   def bidders_with_proposal_eligible_for_negotiation
-    bidders_with_proposals.enabled.eligible_for_negociation_stage(bid_limit_for_negociation_stage)
+    bidders_with_proposals.enabled.eligible_for_negotiation_stage(bid_limit_for_negotiation_stage)
   end
 
-  def bid_limit_for_negociation_stage
+  def bid_limit_for_negotiation_stage
     lowest_proposal_amount_with_valid_proposal * BigDecimal("1.05")
   end
 

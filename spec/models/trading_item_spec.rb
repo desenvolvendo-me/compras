@@ -319,7 +319,7 @@ describe TradingItem do
       end
 
       it "returns true if there are no bidders for negotiation" do
-        subject.stub(:bidders_selected_for_negociation => [])
+        subject.stub(:bidders_selected_for_negotiation => [])
 
         expect(subject.allow_winner?).to be_true
       end
@@ -331,7 +331,7 @@ describe TradingItem do
       end
 
       it 'returns false when there are bidders for negotiation and the winner is not benefited' do
-        subject.stub(:bidders_selected_for_negociation => ['bidder'])
+        subject.stub(:bidders_selected_for_negotiation => ['bidder'])
         winner.stub(:benefited => false)
 
         expect(subject.allow_winner?).to be_false
@@ -416,21 +416,21 @@ describe TradingItem do
 
   describe 'valid_bidder_for_negotiation?' do
     it 'should be true if there is no one valid proposal for negotiation' do
-      subject.stub(:bidders_selected_for_negociation).and_return(['bidder'])
+      subject.stub(:bidders_selected_for_negotiation).and_return(['bidder'])
       subject.stub(:valid_proposal_for_negotiation?).and_return(false)
 
       expect(subject.valid_bidder_for_negotiation?).to be_true
     end
 
     it 'should be false if there is not valid proposal for negotiation' do
-      subject.stub(:bidders_selected_for_negociation).and_return([])
+      subject.stub(:bidders_selected_for_negotiation).and_return([])
       subject.stub(:valid_proposal_for_negotiation?).and_return(true)
 
       expect(subject.valid_bidder_for_negotiation?).to be_false
     end
 
     it 'should be false if there is a valid proposal for negotiation and have bidder for negotiation' do
-      subject.stub(:bidders_selected_for_negociation).and_return(['bidder'])
+      subject.stub(:bidders_selected_for_negotiation).and_return(['bidder'])
       subject.stub(:valid_proposal_for_negotiation?).and_return(true)
 
       expect(subject.valid_bidder_for_negotiation?).to be_false
@@ -507,7 +507,7 @@ describe TradingItem do
   describe '#allow_negotiation?' do
     context 'when there are not bidders for negotiation' do
       before do
-        subject.stub(:bidders_selected_for_negociation => [])
+        subject.stub(:bidders_selected_for_negotiation => [])
       end
 
       it { expect(subject.allow_negotiation?).to be_false }
@@ -515,7 +515,7 @@ describe TradingItem do
 
     context 'when there are bidders for negotiation' do
       before do
-        subject.stub(:bidders_selected_for_negociation => ['bidder'])
+        subject.stub(:bidders_selected_for_negotiation => ['bidder'])
       end
 
       it { expect(subject.allow_negotiation?).to be_true }

@@ -72,7 +72,7 @@ class Bidder < Compras::Model
       where { 'compras_extended_company_sizes.benefited = true' }
   end
 
-  def self.with_negociation_proposal_for(trading_item_id)
+  def self.with_negotiation_proposal_for(trading_item_id)
     enabled.
     joins { trading_item_bids }.
     where {
@@ -81,7 +81,7 @@ class Bidder < Compras::Model
     }
   end
 
-  def self.eligible_for_negociation_stage(value)
+  def self.eligible_for_negotiation_stage(value)
     joins { trading_item_bids }.
     where {
       trading_item_bids.status.eq(TradingItemBidStatus::WITH_PROPOSAL) &

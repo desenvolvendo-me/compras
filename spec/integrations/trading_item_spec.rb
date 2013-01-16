@@ -79,7 +79,7 @@ describe TradingItem do
     end
   end
 
-  describe '#bidders_for_negociation_by_lowest_proposal' do
+  describe '#bidders_for_negotiation_by_lowest_proposal' do
     let(:trading) { Trading.make!(:pregao_presencial) }
     let(:bidder1) { trading.bidders.first }
     let(:bidder2) { trading.bidders.second }
@@ -137,7 +137,7 @@ describe TradingItem do
 
     context 'without_all_proposals' do
       it 'should returns all bidders for negotiation when it does not have a negotiation' do
-        expect(subject.bidders_for_negociation_by_lowest_proposal).to include(bidder1)
+        expect(subject.bidders_for_negotiation_by_lowest_proposal).to include(bidder1)
       end
 
       it 'should not show bidders that already have negotiation' do
@@ -148,13 +148,13 @@ describe TradingItem do
           :stage => TradingItemBidStage::NEGOTIATION,
           :status => TradingItemBidStatus::WITHOUT_PROPOSAL)
 
-        expect(subject.bidders_for_negociation_by_lowest_proposal).to eq []
+        expect(subject.bidders_for_negotiation_by_lowest_proposal).to eq []
       end
     end
 
     context 'with_all_proposals' do
       it 'should returns all bidders for negotiation when it does not have a negotiation' do
-        expect(subject.bidders_for_negociation_by_lowest_proposal(true)).to include(bidder1)
+        expect(subject.bidders_for_negotiation_by_lowest_proposal(true)).to include(bidder1)
       end
 
       it 'should show bidders that already have negotiation too' do
@@ -165,7 +165,7 @@ describe TradingItem do
           :stage => TradingItemBidStage::NEGOTIATION,
           :status => TradingItemBidStatus::WITHOUT_PROPOSAL)
 
-        expect(subject.bidders_for_negociation_by_lowest_proposal(true)).to include(bidder1)
+        expect(subject.bidders_for_negotiation_by_lowest_proposal(true)).to include(bidder1)
       end
     end
   end

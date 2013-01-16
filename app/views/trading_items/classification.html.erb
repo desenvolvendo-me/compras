@@ -91,7 +91,7 @@
   </thead>
 
   <tbody>
-    <% resource.bidders_for_negociation_by_lowest_proposal(true).each_with_index do |bidder, index| %>
+    <% resource.bidders_for_negotiation_by_lowest_proposal(true).each_with_index do |bidder, index| %>
       <tr id="<%= dom_id bidder %>" class="<%= bidder.decorator.benefited_by_law_of_proposals_class(resource) %>">
         <td class="bidder-name g-2-5">
           <%= bidder %>
