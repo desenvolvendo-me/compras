@@ -743,6 +743,7 @@ Compras::Application.routes.draw do
       get :classification
       get :offers
       get :proposal_report
+      get :activate_proposals
     end
 
     collection do

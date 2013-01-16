@@ -135,37 +135,81 @@ describe TradingItem do
         :status => TradingItemBidStatus::WITHOUT_PROPOSAL)
     end
 
-    context 'without_all_proposals' do
-      it 'should returns all bidders for negotiation when it does not have a negotiation' do
-        expect(subject.bidders_for_negotiation_by_lowest_proposal).to include(bidder1)
+    context 'with proposals_activated_at nil' do
+      context 'without_all_proposals' do
+        it 'should returns all bidders for negotiation when it does not have a negotiation' do
+          expect(subject.bidders_for_negotiation_by_lowest_proposal).to include(bidder1)
+        end
+
+        it 'should not show bidders that already have negotiation' do
+          TradingItemBid.create!(
+            :round => 0,
+            :bidder_id => bidder1.id,
+            :trading_item_id => subject.id,
+            :stage => TradingItemBidStage::NEGOTIATION,
+            :status => TradingItemBidStatus::WITHOUT_PROPOSAL)
+
+          expect(subject.bidders_for_negotiation_by_lowest_proposal).to eq []
+        end
       end
 
-      it 'should not show bidders that already have negotiation' do
-        TradingItemBid.create!(
-          :round => 0,
-          :bidder_id => bidder1.id,
-          :trading_item_id => subject.id,
-          :stage => TradingItemBidStage::NEGOTIATION,
-          :status => TradingItemBidStatus::WITHOUT_PROPOSAL)
+      context 'with_all_proposals' do
+        it 'should returns all bidders for negotiation when it does not have a negotiation' do
+          expect(subject.bidders_for_negotiation_by_lowest_proposal(true)).to include(bidder1)
+        end
 
-        expect(subject.bidders_for_negotiation_by_lowest_proposal).to eq []
+        it 'should show bidders that already have negotiation too' do
+          TradingItemBid.create!(
+            :round => 0,
+            :bidder_id => bidder1.id,
+            :trading_item_id => subject.id,
+            :stage => TradingItemBidStage::NEGOTIATION,
+            :status => TradingItemBidStatus::WITHOUT_PROPOSAL)
+
+          expect(subject.bidders_for_negotiation_by_lowest_proposal(true)).to include(bidder1)
+        end
       end
     end
 
-    context 'with_all_proposals' do
-      it 'should returns all bidders for negotiation when it does not have a negotiation' do
-        expect(subject.bidders_for_negotiation_by_lowest_proposal(true)).to include(bidder1)
+    context 'with proposals_activated_at not nil' do
+      before do
+        subject.update_column(:proposals_activated_at, DateTime.current)
+
+        BidderDisqualification.create!(:bidder_id => bidder1.id, :reason => 'inabilitado')
       end
 
-      it 'should show bidders that already have negotiation too' do
-        TradingItemBid.create!(
-          :round => 0,
-          :bidder_id => bidder1.id,
-          :trading_item_id => subject.id,
-          :stage => TradingItemBidStage::NEGOTIATION,
-          :status => TradingItemBidStatus::WITHOUT_PROPOSAL)
+      context 'without_all_proposals' do
+        it 'should returns all bidders for negotiation when it does not have a negotiation' do
+          expect(subject.bidders_for_negotiation_by_lowest_proposal).to include(bidder2)
+        end
 
-        expect(subject.bidders_for_negotiation_by_lowest_proposal(true)).to include(bidder1)
+        it 'should not show bidders that already have negotiation' do
+          TradingItemBid.create!(
+            :round => 0,
+            :bidder_id => bidder2.id,
+            :trading_item_id => subject.id,
+            :stage => TradingItemBidStage::NEGOTIATION,
+            :status => TradingItemBidStatus::WITHOUT_PROPOSAL)
+
+          expect(subject.bidders_for_negotiation_by_lowest_proposal).to eq [bidder3]
+        end
+      end
+
+      context 'with_all_proposals' do
+        it 'should returns all bidders for negotiation when it does not have a negotiation' do
+          expect(subject.bidders_for_negotiation_by_lowest_proposal(true)).to include(bidder2)
+        end
+
+        it 'should show bidders that already have negotiation too' do
+          TradingItemBid.create!(
+            :round => 0,
+            :bidder_id => bidder2.id,
+            :trading_item_id => subject.id,
+            :stage => TradingItemBidStage::NEGOTIATION,
+            :status => TradingItemBidStatus::WITHOUT_PROPOSAL)
+
+          expect(subject.bidders_for_negotiation_by_lowest_proposal(true)).to include(bidder2)
+        end
       end
     end
   end

@@ -154,6 +154,9 @@
 </table>
 
 <div class="buttons right">
+  <%= link_to "Ativar propostas", activate_proposals_trading_item_path(resource),
+      'data-disabled' => resource.decorator.cannot_activate_proposals_message, :class => "button primary" %>
+
   <%= link_to "Encerramento do item", new_trading_item_closing_path(:trading_item_id => resource.id),
       :class => "button primary" %>
 

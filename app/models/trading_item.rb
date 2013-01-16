@@ -163,10 +163,32 @@ class TradingItem < Compras::Model
     enabled_bidders_by_lowest_proposal.first
   end
 
+  def activate_proposals!
+    return false unless activate_proposals_allowed?
+
+    update_column(:proposals_activated_at, DateTime.current)
+  end
+
+  def proposals_activated?
+    proposals_activated_at.present?
+  end
+
+  def activate_proposals_allowed?
+    bidders_enabled_not_selected.any? && !proposals_activated? && no_enabled_bidders_by_lowest_proposal_selected?
+  end
+
+  def bidders_enabled_not_selected
+    bidders.enabled.not_selected_for_trading_item(self)
+  end
+
   private
 
+  def no_enabled_bidders_by_lowest_proposal_selected?
+    enabled_bidders_by_lowest_proposal(:filter => :selected).empty?
+  end
+
   def bidders_selected_for_negotiation(with_all_proposals = false)
-    bidders_eligible_for_negotiation(with_all_proposals).select { |bidder| bidder.benefited }
+    bidders_eligible_for_negotiation(with_all_proposals).select { |bidder| proposals_activated? || bidder.benefited }
   end
 
   def bidders_eligible_for_negotiation(with_all_proposals = false)
@@ -190,7 +212,11 @@ class TradingItem < Compras::Model
   end
 
   def lowest_proposal_amount_with_valid_proposal
-    trading_item_bids.with_valid_proposal.minimum(:amount)
+    if proposals_activated?
+      trading_item_bids.with_proposal.minimum(:amount)
+    else
+      trading_item_bids.with_valid_proposal.minimum(:amount)
+    end
   end
 
   def bidders_with_proposals
@@ -210,7 +236,11 @@ class TradingItem < Compras::Model
   end
 
   def lowest_bid_with_proposal
-    trading_item_bids.with_valid_proposal.reorder { amount }.first
+    if proposals_activated?
+      trading_item_bids.with_proposal.reorder { amount }.first
+    else
+      trading_item_bids.with_valid_proposal.reorder { amount }.first
+    end
   end
 
   def valid_proposal_for_negotiation?

@@ -1,0 +1,97 @@
+<h2 id="title">Classificação das Propostas Ativadas</h2>
+
+<table class="records" id="bidders-not-selected">
+  <thead>
+    <tr>
+      <th class="g-2-5">Licitante</th>
+      <th class="g-1-6">Valor</th>
+      <th class="g-1-10">%</th>
+      <th>Classificação</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+
+  <body>
+    <% resource.enabled_bidders_by_lowest_proposal(:filter => :not_selected).each_with_index do |bidder, index| %>
+      <tr id="<%= dom_id bidder %>" class="<%= bidder.decorator.benefited_by_law_of_proposals_class(resource) %>">
+        <td class="bidder-name g-2-5">
+          <%= bidder %>
+        </td>
+
+        <td class="bidder-amount g-1-6">
+          <%= bidder.decorator.lower_trading_item_bid_amount(resource) %>
+        </td>
+
+        <td class="bidder-percent g-1-10">
+          <%= bidder.decorator.trading_item_proposal_percent(resource) %>
+        </td>
+
+        <td class="bidder-position">
+          <%= numeric_position(index.succ) %>
+        </td>
+
+        <td><%= bidder.decorator.status_for_negotiation(resource) %></td>
+      </tr>
+    <% end %>
+  </body>
+</table>
+
+<h2>Licitantes Inabilitados</h2>
+
+<table class="records">
+  <thead>
+    <tr>
+      <th class="g-2-5">Licitante</th>
+      <th class="g-1-8">EPP/ME</th>
+      <th class="g-1-8">Valor</th>
+      <th class="g-1-10">%</th>
+      <th>Classificação</th>
+      <th>Situação</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% resource.disabled_bidders_by_lowest_proposal.each_with_index do |bidder, index| %>
+      <tr id="<%= dom_id bidder %>" class="<%= bidder.decorator.benefited_by_law_of_proposals_class(resource) %>">
+        <td class="bidder-name g-2-5">
+          <%= bidder %>
+        </td>
+
+        <td class="bidder-benefited g-1-6">
+          <%= bidder.decorator.benefited %>
+        </td>
+
+        <td class="bidder-amount g-1-6">
+          <%= bidder.decorator.lower_trading_item_bid_amount(resource) %>
+        </td>
+
+        <td class="bidder-percent g-1-10">
+          <%= bidder.decorator.trading_item_classification_percent(resource) %>
+        </td>
+
+        <td class="bidder-position">
+          <%= numeric_position(index.succ) unless bidder.disabled %>
+        </td>
+
+        <td>
+          Inabilitado
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="buttons right">
+  <%= link_to "Encerramento do item", new_trading_item_closing_path(:trading_item_id => resource.id),
+      :class => "button primary" %>
+
+  <%= link_to "Iniciar Negociação", new_trading_item_bid_negotiation_path(:trading_item_id => resource.id),
+      'data-disabled' => resource.decorator.cannot_start_negotiation_message, :class => "button primary" %>
+
+  <% if resource.decorator.any_bid_at_negotiation? %>
+    <%= link_to 'Desfazer última negociação', trading_item_bid_negotiation_path(resource.last_bid, :trading_item_id => resource.id),
+        :method => 'delete', :class => 'button', 'data-disabled' => resource.decorator.cannot_undo_last_negotiation_message %>
+  <% end %>
+
+  <%= link_to 'Voltar', trading_items_path(:trading_id => resource.trading_id), :class => 'button' %>
+</div>

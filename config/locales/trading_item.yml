@@ -26,3 +26,4 @@ pt-BR:
       cannot_undo_last_negotiation_when_trading_items_is_closed: "Não pode desfazer última negociação quando o item do pregão está fechado"
       not_allow_offer: "Não é permitido registrar ofertas enquanto não houver licitante com proposta"
       cannot_start_negotiation: "Não há mais licitantes para negociar"
+      cannot_activate_proposals: "Não há propostas para serem ativadas"

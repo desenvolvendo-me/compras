@@ -1,9 +1,23 @@
 class TradingItemsController < CrudController
   actions :all, :except => [:new, :create, :destroy]
-  custom_actions :resource => [:classification, :offers, :proposal_report]
+  custom_actions :resource => [:offers, :proposal_report]
 
   def update
     update!{ trading_items_path(:trading_id => @parent.id) }
+  end
+
+  def activate_proposals
+    resource.transaction do
+      resource.activate_proposals!
+    end
+
+    redirect_to classification_trading_item_path(resource)
+  end
+
+  def classification
+    if resource.proposals_activated?
+      render 'classification_for_activated_proposals'
+    end
   end
 
   protected

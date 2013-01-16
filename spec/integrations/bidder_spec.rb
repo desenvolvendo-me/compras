@@ -539,4 +539,90 @@ describe Bidder do
       expect(Bidder.benefited).to eq [licitante_com_proposta_3]
     end
   end
+
+  describe '.eligible_for_negotiation_stage' do
+    let(:trading) { Trading.make!(:pregao_presencial) }
+    let(:trading_item) { trading.trading_items.first }
+    let(:bidder1) { trading.bidders.first }
+    let(:bidder2) { trading.bidders.second }
+    let(:bidder3) { trading.bidders.last }
+
+    before do
+      TradingItemBid.create!(
+        :round => 0,
+        :bidder_id => bidder1.id,
+        :trading_item_id => trading_item.id,
+        :amount => 100.0,
+        :stage => TradingItemBidStage::PROPOSALS,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      # bidder not selected due to too high value
+      TradingItemBid.create!(
+        :round => 0,
+        :bidder_id => bidder2.id,
+        :trading_item_id => trading_item.id,
+        :amount => 1000.0,
+        :stage => TradingItemBidStage::PROPOSALS,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      TradingItemBid.create!(
+        :round => 0,
+        :bidder_id => bidder3.id,
+        :trading_item_id => trading_item.id,
+        :amount => 100.0,
+        :stage => TradingItemBidStage::PROPOSALS,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      TradingItemBid.create!(
+        :round => 1,
+        :bidder_id => bidder1.id,
+        :trading_item_id => trading_item.id,
+        :amount => 97.0,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      TradingItemBid.create!(
+        :round => 1,
+        :bidder_id => bidder3.id,
+        :trading_item_id => trading_item.id,
+        :amount => 95.0,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      TradingItemBid.create!(
+        :round => 2,
+        :bidder_id => bidder1.id,
+        :trading_item_id => trading_item.id,
+        :amount => 94.0,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      TradingItemBid.create!(
+        :round => 2,
+        :bidder_id => bidder3.id,
+        :trading_item_id => trading_item.id,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
+        :status => TradingItemBidStatus::WITHOUT_PROPOSAL)
+
+      BidderDisqualification.create!(:bidder_id => bidder1.id, :reason => 'inabilitado')
+    end
+
+    context 'when trading_item does not activated proposals' do
+      it "should returns the bids with proposals for the round of bids with the amout lower than value" do
+        expect(described_class.eligible_for_negotiation_stage(95)).to include(bidder3)
+        expect(described_class.eligible_for_negotiation_stage(95)).to_not include(bidder1, bidder2)
+      end
+    end
+
+    context 'when trading_item does activated proposals' do
+      before do
+        trading_item.update_column(:proposals_activated_at, DateTime.current)
+      end
+
+      it "should returns the bids with proposals for the round of bids with the amout lower than value" do
+        expect(described_class.eligible_for_negotiation_stage(95)).to include(bidder2, bidder3)
+        expect(described_class.eligible_for_negotiation_stage(95)).to_not include(bidder1)
+      end
+    end
+  end
 end

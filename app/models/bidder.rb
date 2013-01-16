@@ -82,12 +82,18 @@ class Bidder < Compras::Model
   end
 
   def self.eligible_for_negotiation_stage(value)
-    joins { trading_item_bids }.
+    enabled.
+    joins { trading_item_bids.trading_item }.
     where {
-      trading_item_bids.status.eq(TradingItemBidStatus::WITH_PROPOSAL) &
-      trading_item_bids.stage.eq(TradingItemBidStage::ROUND_OF_BIDS) &
-      trading_item_bids.amount.lteq(value)
-    }
+      (trading_item_bids.status.eq(TradingItemBidStatus::WITH_PROPOSAL) &
+       trading_item_bids.stage.eq(TradingItemBidStage::ROUND_OF_BIDS) &
+       trading_item_bids.amount.lteq(value)) |
+
+      (trading_item_bids.status.eq(TradingItemBidStatus::WITH_PROPOSAL) &
+       trading_item_bids.stage.eq(TradingItemBidStage::PROPOSALS) &
+       trading_item_bids.amount.gt(value) &
+       trading_item_bids.trading_item.proposals_activated_at.not_eq(nil))
+    }.uniq
   end
 
   def self.won_calculation

@@ -48,58 +48,126 @@ describe TradingItem do
   end
 
   describe '#last_proposal' do
-    it 'should return the last bid proposal value for the item' do
-      first_bid = double(:first_bid, :amount => 50.0)
-      second_bid = double(:second_bid, :amount => 40.0)
-      third_bid = double(:third_bid, :amount => 30.0)
+    context 'with proposals_activated_at nil' do
+      it 'should return the last bid proposal value for the item' do
+        first_bid = double(:first_bid, :amount => 50.0)
+        second_bid = double(:second_bid, :amount => 40.0)
+        third_bid = double(:third_bid, :amount => 30.0)
 
-      trading_item_bids = double(:trading_item_bids, :with_proposal => [first_bid, second_bid, third_bid])
-      trading_item_bids.should_receive(:with_valid_proposal).and_return(trading_item_bids)
-      trading_item_bids.should_receive(:reorder).and_return(trading_item_bids)
-      trading_item_bids.should_receive(:first).and_return(third_bid)
+        trading_item_bids = double(:trading_item_bids, :with_proposal => [first_bid, second_bid, third_bid])
+        trading_item_bids.should_receive(:with_valid_proposal).and_return(trading_item_bids)
+        trading_item_bids.should_receive(:reorder).and_return(trading_item_bids)
+        trading_item_bids.should_receive(:first).and_return(third_bid)
 
-      subject.should_receive(:trading_item_bids).and_return(trading_item_bids)
+        subject.should_receive(:trading_item_bids).and_return(trading_item_bids)
 
-      expect(subject.lowest_proposal_value).to eq 30.0
+        expect(subject.lowest_proposal_value).to eq 30.0
+      end
+
+      it 'should return zero when there is no proposal for the item' do
+        trading_item_bids = double(:trading_item_bids)
+
+        trading_item_bids.should_receive(:with_valid_proposal).and_return(trading_item_bids)
+        trading_item_bids.should_receive(:reorder).and_return([])
+
+        subject.should_receive(:trading_item_bids).and_return(trading_item_bids)
+
+        expect(subject.lowest_proposal_value).to eq 0
+      end
     end
 
-    it 'should return zero when there is no proposal for the item' do
-      trading_item_bids = double(:trading_item_bids)
+    context 'with proposals_activated_at not nil' do
+      before do
+        subject.stub(:proposals_activated_at => DateTime.current)
+      end
 
-      trading_item_bids.should_receive(:with_valid_proposal).and_return(trading_item_bids)
-      trading_item_bids.should_receive(:reorder).and_return([])
+      it 'should return the last bid proposal value for the item' do
+        first_bid = double(:first_bid, :amount => 50.0)
+        second_bid = double(:second_bid, :amount => 40.0)
+        third_bid = double(:third_bid, :amount => 30.0)
 
-      subject.should_receive(:trading_item_bids).and_return(trading_item_bids)
+        trading_item_bids = double(:trading_item_bids, :with_proposal => [first_bid, second_bid, third_bid])
+        trading_item_bids.should_receive(:with_proposal).and_return(trading_item_bids)
+        trading_item_bids.should_receive(:reorder).and_return(trading_item_bids)
+        trading_item_bids.should_receive(:first).and_return(third_bid)
 
-      expect(subject.lowest_proposal_value).to eq 0
+        subject.should_receive(:trading_item_bids).and_return(trading_item_bids)
+
+        expect(subject.lowest_proposal_value).to eq 30.0
+      end
+
+      it 'should return zero when there is no proposal for the item' do
+        trading_item_bids = double(:trading_item_bids)
+
+        trading_item_bids.should_receive(:with_proposal).and_return(trading_item_bids)
+        trading_item_bids.should_receive(:reorder).and_return([])
+
+        subject.should_receive(:trading_item_bids).and_return(trading_item_bids)
+
+        expect(subject.lowest_proposal_value).to eq 0
+      end
     end
   end
 
   describe '#lowest_proposal_bidder' do
-    it 'should return the last bid proposal bidder for the item' do
-      first_bid = double(:first_bid, :bidder => 'foo')
-      second_bid = double(:second_bid, :bidder => 'bar')
-      third_bid = double(:third_bid, :bidder => 'baz')
+    context 'with proposals_activated_at nil' do
+      it 'should return the last bid proposal bidder for the item' do
+        first_bid = double(:first_bid, :bidder => 'foo')
+        second_bid = double(:second_bid, :bidder => 'bar')
+        third_bid = double(:third_bid, :bidder => 'baz')
 
-      trading_item_bids = double(:trading_item_bids, :with_proposal => [first_bid, second_bid, third_bid])
-      trading_item_bids.should_receive(:with_valid_proposal).and_return(trading_item_bids)
-      trading_item_bids.should_receive(:reorder).and_return(trading_item_bids)
-      trading_item_bids.should_receive(:first).and_return(third_bid)
+        trading_item_bids = double(:trading_item_bids, :with_proposal => [first_bid, second_bid, third_bid])
+        trading_item_bids.should_receive(:with_valid_proposal).and_return(trading_item_bids)
+        trading_item_bids.should_receive(:reorder).and_return(trading_item_bids)
+        trading_item_bids.should_receive(:first).and_return(third_bid)
 
-      subject.should_receive(:trading_item_bids).and_return(trading_item_bids)
+        subject.should_receive(:trading_item_bids).and_return(trading_item_bids)
 
-      expect(subject.lowest_proposal_bidder).to eq 'baz'
+        expect(subject.lowest_proposal_bidder).to eq 'baz'
+      end
+
+      it 'should return nil when there is no proposal for the item' do
+        trading_item_bids = double(:trading_item_bids)
+
+        trading_item_bids.should_receive(:with_valid_proposal).and_return(trading_item_bids)
+        trading_item_bids.should_receive(:reorder).and_return([])
+
+        subject.should_receive(:trading_item_bids).and_return(trading_item_bids)
+
+        expect(subject.lowest_proposal_bidder).to eq ''
+      end
     end
 
-    it 'should return nil when there is no proposal for the item' do
-      trading_item_bids = double(:trading_item_bids)
+    context 'with proposals_activated_at not nil' do
+      before do
+        subject.stub(:proposals_activated_at => DateTime.current)
+      end
 
-      trading_item_bids.should_receive(:with_valid_proposal).and_return(trading_item_bids)
-      trading_item_bids.should_receive(:reorder).and_return([])
+      it 'should return the last bid proposal bidder for the item' do
+        first_bid = double(:first_bid, :bidder => 'foo')
+        second_bid = double(:second_bid, :bidder => 'bar')
+        third_bid = double(:third_bid, :bidder => 'baz')
 
-      subject.should_receive(:trading_item_bids).and_return(trading_item_bids)
+        trading_item_bids = double(:trading_item_bids, :with_proposal => [first_bid, second_bid, third_bid])
+        trading_item_bids.should_receive(:with_proposal).and_return(trading_item_bids)
+        trading_item_bids.should_receive(:reorder).and_return(trading_item_bids)
+        trading_item_bids.should_receive(:first).and_return(third_bid)
 
-      expect(subject.lowest_proposal_bidder).to eq ''
+        subject.should_receive(:trading_item_bids).and_return(trading_item_bids)
+
+        expect(subject.lowest_proposal_bidder).to eq 'baz'
+      end
+
+      it 'should return nil when there is no proposal for the item' do
+        trading_item_bids = double(:trading_item_bids)
+
+        trading_item_bids.should_receive(:with_proposal).and_return(trading_item_bids)
+        trading_item_bids.should_receive(:reorder).and_return([])
+
+        subject.should_receive(:trading_item_bids).and_return(trading_item_bids)
+
+        expect(subject.lowest_proposal_bidder).to eq ''
+      end
     end
   end
 
@@ -517,6 +585,94 @@ describe TradingItem do
       end
 
       it { expect(subject.allow_negotiation?).to be_true }
+    end
+  end
+
+  describe '#activate_proposals_allowed?' do
+    context 'when have no proposals not selected' do
+      before do
+        subject.stub(:bidders_enabled_not_selected => [])
+      end
+
+      it { expect(subject.activate_proposals_allowed?).to be_false }
+    end
+
+    context 'when have proposals not selected' do
+      before do
+        subject.stub(:bidders_enabled_not_selected => ['proposal'])
+      end
+
+      context 'when already has proposals activated' do
+        before do
+          subject.stub(:proposals_activated? => true)
+        end
+
+        it { expect(subject.activate_proposals_allowed?).to be_false }
+      end
+
+      context 'when has no proposals activated' do
+        before do
+          subject.stub(:proposals_activated? => false)
+          subject.should_receive(:enabled_bidders_by_lowest_proposal).with(:filter => :selected).and_return(['bidder'])
+        end
+
+        it { expect(subject.activate_proposals_allowed?).to be_false }
+      end
+
+      context 'when has no_enabled_bidders_by_lowest_proposal_selected' do
+        it 'should be true if proposals are not activated' do
+          subject.should_receive(:enabled_bidders_by_lowest_proposal).with(:filter => :selected).and_return([])
+          subject.stub(:proposals_activated? => false)
+
+          expect(subject.activate_proposals_allowed?).to be_true
+        end
+
+        it 'should be false if proposals are not activated' do
+          subject.stub(:proposals_activated? => true)
+
+          expect(subject.activate_proposals_allowed?).to be_false
+        end
+      end
+    end
+  end
+
+  describe '#proposals_activated?' do
+    context 'when proposals_activated_at is nil' do
+      it { expect(subject.proposals_activated?).to be_false }
+    end
+
+    context 'when proposals_activated_at is not nil' do
+      before do
+        subject.stub(:proposals_activated_at => DateTime.current)
+      end
+
+      it { expect(subject.proposals_activated?).to be_true }
+    end
+  end
+
+  describe '#activate_proposals!' do
+    context 'when activate proposals is not allowed' do
+      before do
+        subject.stub(:activate_proposals_allowed? => false)
+
+        it "should do nothing and returns false" do
+          subject.should_not_receive(:update_column)
+
+          expect(subject.activate_proposals!).to be_false
+        end
+      end
+    end
+
+    context 'when activate proposals is allowed' do
+      before do
+        subject.stub(:activate_proposals_allowed? => true)
+
+        it "should update proposals_activated_at to current DateTime and return true" do
+          subject.should_receive(:update_column).with(:proposals_activated_at, DateTime.current).and_return(true)
+
+          expect(subject.activate_proposals!).to be_true
+        end
+      end
     end
   end
 end

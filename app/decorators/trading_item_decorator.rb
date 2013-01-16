@@ -63,6 +63,12 @@ class TradingItemDecorator
     t('trading_item.messages.not_allow_offer')
   end
 
+  def cannot_activate_proposals_message
+    return if activate_proposals_allowed?
+
+    t('trading_item.messages.cannot_activate_proposals')
+  end
+
   private
 
   def negotiation_or_classification_path(stage_calculator)

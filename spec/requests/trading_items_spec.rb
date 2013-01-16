@@ -310,4 +310,174 @@ feature TradingItem do
       expect(page).to have_link 'Encerramento do item'
     end
   end
+
+  scenario 'activate proposals at classification' do
+    TradingConfiguration.make!(:pregao)
+
+    licitation_process = LicitationProcess.make!(:pregao_presencial,
+      :bidders => [
+        # Bidders not beneficiated
+        Bidder.make!(:licitante), # Wenderson
+        Bidder.make!(:licitante_sobrinho), # Sobrinho
+        Bidder.make!(:licitante_com_proposta_4)]) # IBM
+
+    Trading.make!(:pregao_presencial, :licitation_process => licitation_process)
+
+    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+
+    click_link "1/2012"
+    click_button "Salvar e ir para Itens/Ofertas"
+    click_link "Fazer oferta"
+
+    # Proposal stage
+    fill_in "Valor da proposta", :with => "1000,00"
+
+    click_button "Salvar"
+
+    expect(page).to have_content 'Proposta criada com sucesso'
+
+    fill_in "Valor da proposta", :with => "100,00"
+
+    click_button "Salvar"
+
+    expect(page).to have_content 'Proposta criada com sucesso'
+
+    fill_in "Valor da proposta", :with => "102,00"
+
+    click_button "Salvar"
+
+    expect(page).to have_content 'Proposta criada com sucesso'
+
+    within_records do
+      within 'tbody tr:nth-child(3)' do
+        expect(page).to have_content 'Wenderson Malheiros'
+        expect(page).to have_content 'Não selecionado'
+      end
+    end
+
+    click_link 'Registrar lances'
+
+    # Round of bids
+    fill_in "Valor da proposta", :with => "99,00"
+
+    click_button "Salvar"
+
+    expect(page).to have_content 'Oferta criada com sucesso'
+
+    fill_in "Valor da proposta", :with => "98,00"
+
+    click_button "Salvar"
+
+    expect(page).to have_content 'Oferta criada com sucesso'
+
+    fill_in "Valor da proposta", :with => "97,00"
+
+    click_button "Salvar"
+
+    expect(page).to have_content 'Oferta criada com sucesso'
+
+    choose 'Declinou'
+
+    click_button "Salvar"
+
+    expect(page).to have_content 'Oferta criada com sucesso'
+
+    expect(page).to have_disabled_element 'Ativar propostas',
+                                          :reason => 'Não há propostas para serem ativadas'
+
+    # Bidders not selected
+    within 'table.records:nth-of-type(3)' do
+      expect(page).to have_content 'Wenderson Malheiros'
+      expect(page).to have_content 'À negociar'
+    end
+
+    within 'table.records:nth-of-type(1)' do
+      click_link 'Inabilitar'
+    end
+
+    fill_in 'Motivo', :with => 'Problemas com a documentação'
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Inabilitação de Licitante criada com sucesso'
+
+    expect(page).to have_disabled_element 'Ativar propostas',
+                                          :reason => 'Não há propostas para serem ativadas'
+
+    within 'table.records:nth-of-type(1)' do
+      click_link 'Inabilitar'
+    end
+
+    fill_in 'Motivo', :with => 'Faltando documentação'
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Inabilitação de Licitante criada com sucesso'
+
+    click_link 'Ativar propostas'
+
+    expect(page).to have_title 'Classificação das Propostas Ativadas'
+
+    # Proposals activated
+    within 'table.records:nth-of-type(1)' do
+      expect(page).to have_content 'Wenderson Malheiros'
+      expect(page).to have_content '1.000,00'
+      expect(page).to have_content '0,00'
+      expect(page).to have_content '1º lugar'
+      expect(page).to have_content 'À negociar'
+    end
+
+    # Bidders disqualified
+    within 'table.records:nth-of-type(2)' do
+      within 'tbody tr:nth-child(1)' do
+        expect(page).to have_content 'IBM'
+        expect(page).to have_content 'Inabilitado'
+      end
+
+      within 'tbody tr:nth-child(2)' do
+        expect(page).to have_content 'Gabriel Sobrinho'
+        expect(page).to have_content 'Inabilitado'
+      end
+    end
+
+    expect(page).to have_link 'Encerramento do item'
+    expect(page).to have_link 'Iniciar Negociação'
+
+    click_link 'Voltar'
+
+    expect(page).to have_title 'Itens do Pregão Presencial 1/2012'
+
+    click_link 'Fazer oferta'
+
+    expect(page).to have_title 'Classificação das Propostas Ativadas'
+
+    click_link 'Iniciar Negociação'
+
+    expect(page).to have_disabled_field 'Etapa', :with => 'Negociação'
+    expect(page).to have_disabled_field 'Item do pregão', :with => '01.01.00001 - Antivirus'
+    expect(page).to have_disabled_field 'Licitante', :with => 'Wenderson Malheiros'
+    expect(page).to have_disabled_field 'Menor preço', :with => '97,00'
+    expect(page).to have_disabled_field 'Valor limite', :with => '96,99'
+
+    fill_in 'Valor da proposta', :with => '96,00'
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Negociação criada com sucesso'
+    expect(page).to have_title 'Classificação das Propostas Ativadas'
+    expect(page).to have_link 'Desfazer última negociação'
+    expect(page).to have_link 'Encerramento do item'
+
+    expect(page).to have_disabled_element 'Iniciar Negociação',
+                                          :reason => 'Não há mais licitantes para negociar'
+
+    # Proposals activated
+    within 'table.records:nth-of-type(1)' do
+      expect(page).to have_content 'Wenderson Malheiros'
+      expect(page).to have_content '96,00'
+      expect(page).to have_content '0,00'
+      expect(page).to have_content '1º lugar'
+      expect(page).to have_content 'Com proposta'
+    end
+  end
 end

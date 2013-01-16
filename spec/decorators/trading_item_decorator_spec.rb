@@ -399,4 +399,28 @@ describe TradingItemDecorator do
       end
     end
   end
+
+  describe '#cannot_activate_proposals_message' do
+    context 'when activate_proposals is allowed' do
+      before do
+        component.stub(:activate_proposals_allowed? => true)
+      end
+
+      it { expect(subject.cannot_activate_proposals_message).to be_nil }
+    end
+
+    context 'when activate_proposals is not allowed' do
+      before do
+        component.stub(:activate_proposals_allowed? => false)
+
+        I18n.backend.store_translations 'pt-BR', :trading_item => {
+            :messages => {
+              :cannot_activate_proposals => 'não pode ativar'
+            }
+          }
+      end
+
+      it { expect(subject.cannot_activate_proposals_message).to eq 'não pode ativar' }
+    end
+  end
 end
