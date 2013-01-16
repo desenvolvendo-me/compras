@@ -10,6 +10,8 @@ describe PurchaseSolicitationBudgetAllocationItem do
   it { should belong_to :material }
   it { should belong_to :fulfiller }
 
+  it { should have_one :purchase_solicitation }
+
   it { should validate_presence_of :material }
   it { should validate_presence_of :quantity }
   it { should validate_presence_of :unit_price }
@@ -86,19 +88,19 @@ describe PurchaseSolicitationBudgetAllocationItem do
     end
   end
 
-  describe '#attend!' do
-    it 'should update status to attended' do
-      subject.should_receive(:update_column).with(:status, 'attended')
-
-      subject.attend!
-    end
-  end
-
   describe '#pending!' do
     it "should update status to 'pending'" do
       subject.should_receive(:update_column).with(:status, 'pending')
 
       subject.pending!
+    end
+  end
+
+  describe '#partially_fulfilled!' do
+    it "should update status to 'partially_fulfilled'" do
+      subject.should_receive(:update_column).with(:status, 'partially_fulfilled')
+
+      subject.partially_fulfilled!
     end
   end
 end

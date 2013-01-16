@@ -1096,9 +1096,7 @@ feature "DirectPurchases" do
   end
 
   scenario 'fill budget allocations from purchase solicitation item group' do
-    PurchaseSolicitation.make!(:reparo, {
-      :service_status => PurchaseSolicitationServiceStatus::LIBERATED
-    })
+    PurchaseSolicitation.make!(:reparo_liberado)
     LegalReference.make!(:referencia)
     Creditor.make!(:wenderson_sa)
     BudgetStructure.make!(:secretaria_de_educacao)
@@ -1240,7 +1238,7 @@ feature "DirectPurchases" do
   end
 
   scenario 'when a purchase solicitation is selected, fill in budget structure automatically' do
-    PurchaseSolicitation.make!(:reparo, :service_status => 'liberated')
+    PurchaseSolicitation.make!(:reparo_liberado)
     LegalReference.make!(:referencia)
     Creditor.make!(:wenderson_sa)
     BudgetStructure.make!(:secretaria_de_educacao)
@@ -1282,7 +1280,7 @@ feature "DirectPurchases" do
   end
 
   scenario 'fulfill the responsible and delivery_location only when they are not fulfilled' do
-    PurchaseSolicitation.make!(:reparo, :service_status => 'liberated')
+    PurchaseSolicitation.make!(:reparo_liberado)
     Employee.make!(:wenderson)
     DeliveryLocation.make!(:health)
 
@@ -1348,10 +1346,7 @@ feature "DirectPurchases" do
   end
 
   scenario 'allows choosing a PurchaseSolicitation with a "liberated" status' do
-    purchase_solicitation = PurchaseSolicitation.make!(
-      :reparo,
-      :service_status => PurchaseSolicitationServiceStatus::LIBERATED
-    )
+    purchase_solicitation = PurchaseSolicitation.make!(:reparo_liberado)
 
     navigate 'Processos de Compra > Compra Direta'
 
@@ -1367,8 +1362,7 @@ feature "DirectPurchases" do
   end
 
   scenario 'generate supply authorization when direct_purchase has purchase_solicitation' do
-    purchase_solicitation = PurchaseSolicitation.make!(:reparo,
-      :service_status => PurchaseSolicitationServiceStatus::LIBERATED)
+    purchase_solicitation = PurchaseSolicitation.make!(:reparo_liberado)
 
     DirectPurchase.make!(
       :compra_nao_autorizada,
@@ -1438,13 +1432,11 @@ feature "DirectPurchases" do
   end
 
   scenario "changing the status of a purchase solicitation" do
-    PurchaseSolicitation.make!(:reparo,
-      :service_status => PurchaseSolicitationServiceStatus::LIBERATED)
+    PurchaseSolicitation.make!(:reparo_liberado)
 
-    PurchaseSolicitation.make!(:reparo,
+    PurchaseSolicitation.make!(:reparo_liberado,
       :accounting_year => 2013,
       :responsible => Employee.make!(:wenderson),
-      :service_status => PurchaseSolicitationServiceStatus::LIBERATED,
       :purchase_solicitation_budget_allocations => [
         PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria_office)])
 
@@ -1485,8 +1477,7 @@ feature "DirectPurchases" do
 
     click_link '1/2012'
 
-    expect(page).to have_select "Status de atendimento", :selected => 'Em processo de compra'
-
+    expect(page).to have_select "Status de atendimento", :selected => 'Parcialmente atendido'
 
     navigate 'Processos de Compra > Compra Direta'
 
@@ -1504,13 +1495,13 @@ feature "DirectPurchases" do
 
     click_link '1/2012'
 
-    expect(page).to have_select "Status de atendimento", :selected => 'Pendente'
+    expect(page).to have_select "Status de atendimento", :selected => 'Liberada'
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
     click_link '1/2013'
 
-    expect(page).to have_select "Status de atendimento", :selected => 'Em processo de compra'
+    expect(page).to have_select "Status de atendimento", :selected => 'Parcialmente atendido'
   end
 
   scenario 'calculate total value of items when update' do
@@ -1665,6 +1656,10 @@ feature "DirectPurchases" do
   scenario "fulfilling item groups when a supply authorization is created" do
     item_group = PurchaseSolicitationItemGroup.make!(:antivirus,
                                                      :status => 'in_purchase_process')
+    item_group.purchase_solicitation_items.each do |item|
+      item.update_column :purchase_solicitation_item_group_id, item_group.id
+    end
+
     DirectPurchase.make!(:compra,
                          :purchase_solicitation_item_group => item_group)
 
@@ -1706,12 +1701,12 @@ feature "DirectPurchases" do
         click_link purchase_solicitation.code_and_year
       end
 
-      within_tab 'Principal' do
-        expect(page).to have_select 'Status de atendimento', :selected => 'Atendida'
-      end
-
       within_tab 'Dotações orçamentarias' do
         expect(page).to have_select 'Status', :selected => 'Atendido'
+      end
+
+      within_tab 'Principal' do
+        expect(page).to have_select 'Status de atendimento', :selected => 'Atendida'
       end
     end
   end
@@ -1747,10 +1742,7 @@ feature "DirectPurchases" do
   scenario 'clear budget allocations on clear purchase solicitation' do
     DirectPurchase.make!(
       :compra,
-      :purchase_solicitation => PurchaseSolicitation.make!(
-        :reparo,
-        :service_status => PurchaseSolicitationServiceStatus::LIBERATED
-      )
+      :purchase_solicitation => PurchaseSolicitation.make!(:reparo_liberado)
     )
 
     navigate 'Processos de Compra > Compra Direta'
@@ -1842,15 +1834,13 @@ feature "DirectPurchases" do
 
   scenario 'clear old budget_allocations on change purchase_solicitation' do
     PurchaseSolicitation.make!(:reparo_office,
-      :service_status => PurchaseSolicitationServiceStatus::LIBERATED
+      :service_status => PurchaseSolicitationServiceStatus::LIBERATED,
+      :purchase_solicitation_liberations => [PurchaseSolicitationLiberation.make(:reparo)]
     )
 
     DirectPurchase.make!(
       :compra,
-      :purchase_solicitation => PurchaseSolicitation.make!(
-        :reparo,
-        :service_status => PurchaseSolicitationServiceStatus::LIBERATED
-      )
+      :purchase_solicitation => PurchaseSolicitation.make!(:reparo_liberado)
     )
 
     navigate 'Processos de Compra > Compra Direta'
@@ -1907,8 +1897,7 @@ feature "DirectPurchases" do
   end
 
   scenario 'replicate budget allocations from item group when a purchase solicitation has two items' do
-    purchase_solicitation = PurchaseSolicitation.make!(:reparo,
-      :service_status => PurchaseSolicitationServiceStatus::LIBERATED,
+    purchase_solicitation = PurchaseSolicitation.make!(:reparo_liberado,
       :purchase_solicitation_budget_allocations => [
         PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria,
           :items => [
@@ -2049,23 +2038,41 @@ feature "DirectPurchases" do
           :status => PurchaseSolicitationBudgetAllocationItemStatus::GROUPED)
       ])
 
-    purchase_solicitation = PurchaseSolicitation.make!(:reparo,
-      :service_status => PurchaseSolicitationServiceStatus::LIBERATED,
+    purchase_solicitation = PurchaseSolicitation.make!(:reparo_liberado,
       :purchase_solicitation_budget_allocations => [budget_allocation])
 
     item_group_material = PurchaseSolicitationItemGroupMaterial.make(
       :reparo_office,
       :purchase_solicitations => [purchase_solicitation])
 
-    PurchaseSolicitationItemGroup.make!(:office,
+    item_group = PurchaseSolicitationItemGroup.make!(:office,
       :purchase_solicitation_item_group_materials => [item_group_material])
 
-    PurchaseSolicitation.make!(:reparo,
+    item_group.purchase_solicitation_items.each do |item|
+      item.update_column :purchase_solicitation_item_group_id, item_group.id
+    end
+
+    PurchaseSolicitation.make!(:reparo_liberado,
       :accounting_year => 2013,
       :responsible => Employee.make!(:wenderson),
-      :service_status => PurchaseSolicitationServiceStatus::LIBERATED,
       :purchase_solicitation_budget_allocations => [
         PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria_office)])
+
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    within_records do
+      click_link '1/2012'
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      within '.item:nth-child(1)' do
+        expect(page).to have_select 'Status', :selected => 'Pendente'
+      end
+
+      within '.item:nth-child(2)' do
+        expect(page).to have_select 'Status', :selected => 'Agrupado'
+      end
+    end
 
     navigate 'Processos de Compra > Compra Direta'
 
@@ -2116,7 +2123,7 @@ feature "DirectPurchases" do
 
     within_tab 'Dotações orçamentarias' do
       within '.item:nth-child(1)' do
-        expect(page).to have_select 'Status', :selected => 'Atendido'
+        expect(page).to have_select 'Status', :selected => 'Parcialmente atendido'
       end
 
       within '.item:nth-child(2)' do
@@ -2164,7 +2171,14 @@ feature "DirectPurchases" do
 
     within_tab 'Dotações orçamentarias' do
       within '.item:nth-child(1)' do
-        expect(page).to have_select 'Status', :selected => 'Atendido'
+        expect(page).to have_select 'Status', :selected => 'Parcialmente atendido'
+      end
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      within '.item:nth-child(1)' do
+        expect(page).to have_select 'Status', :selected => 'Parcialmente atendido'
+        expect(page).to have_field 'Atendido por', :with => 'Compra direta 1/2012'
       end
     end
   end

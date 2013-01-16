@@ -37,18 +37,18 @@
     <div class="yui3-u-1-6">
       <%= f.input :estimated_total_price, :input_html => { :class => 'item-price', 'data-decimal' => true, :value => f.object.decorator.estimated_total_price }, :disabled => true %>
     </div>
-
-    <div class="yui3-u-1-8">
-      <%= f.input :status, :disabled => true %>
-    </div>
   </div>
 
   <div class="yui3-g">
-    <div class="yui3-u-1-2">
+    <div class="yui3-u-1-5">
+      <%= f.input :status, :disabled => true %>
+    </div>
+
+    <div class="yui3-u-1-3">
       <%= f.input :fulfiller, :as => :string, :disabled => true, :input_html => { :value => f.object.decorator.fulfiller } %>
     </div>
 
-    <div class="yui3-u-1-2">
+    <div class="yui3-u-1-3">
       <%= f.input :purchase_solicitation_item_group, :disabled => true  %>
     </div>
   </div>

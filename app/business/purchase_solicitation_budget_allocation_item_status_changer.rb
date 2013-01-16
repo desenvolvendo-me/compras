@@ -18,29 +18,83 @@ class PurchaseSolicitationBudgetAllocationItemStatusChanger
     @purchase_solicitation_item_group_id = options.fetch(:purchase_solicitation_item_group_id, nil)
     @new_purchase_solicitation_item_group = options.fetch(:new_purchase_solicitation_item_group, nil)
     @old_purchase_solicitation_item_group = options.fetch(:old_purchase_solicitation_item_group, nil)
+    @direct_purchase = options.fetch(:direct_purchase, nil)
+    @administrative_process = options.fetch(:administrative_process, nil)
   end
 
   def change(item_repository = PurchaseSolicitationBudgetAllocationItem)
-    item_repository.group!(new_item_ids, purchase_solicitation_item_group_id) if new_item_ids.any?
+    item_repository.group_by_ids!(new_item_ids, purchase_solicitation_item_group_id) if new_item_ids.any?
 
-    item_repository.pending!(removed_item_ids) if old_item_ids.any?
+    item_repository.pending_by_ids!(removed_item_ids) if old_item_ids.any?
 
-    new_purchase_solicitation.attend_items! if new_purchase_solicitation
+    pending_items_by_fulfiller(item_repository, direct_purchase) if old_purchase_solicitation
+    pending_items_by_fulfiller(item_repository, administrative_process) if old_purchase_solicitation
 
-    old_purchase_solicitation.rollback_attended_items! if old_purchase_solicitation
+    if new_purchase_solicitation
+      if attend_items?(new_purchase_solicitation)
+        attend_items_by_direct_purchase
+        attend_items_by_administrative_process
+      else
+        partially_fulfilled_items_by_direct_purchase
+        partially_fulfilled_items_by_administrative_process
+      end
+    end
 
-    new_purchase_solicitation_item_group.attend_items! if new_purchase_solicitation_item_group
+    if new_purchase_solicitation_item_group
+      if attend_items?(new_purchase_solicitation_item_group)
+        item_repository.by_item_group(new_purchase_solicitation_item_group).attend!
+      else
+        item_repository.by_item_group(new_purchase_solicitation_item_group).partially_fulfilled!
+      end
+    end
 
-    old_purchase_solicitation_item_group.rollback_attended_items! if old_purchase_solicitation_item_group
+    item_repository.by_item_group(old_purchase_solicitation_item_group).pending! if old_purchase_solicitation_item_group
   end
 
   private
 
   attr_reader :new_item_ids, :old_item_ids, :new_purchase_solicitation,
               :old_purchase_solicitation, :purchase_solicitation_item_group_id,
-              :new_purchase_solicitation_item_group, :old_purchase_solicitation_item_group
+              :new_purchase_solicitation_item_group, :old_purchase_solicitation_item_group,
+              :direct_purchase, :administrative_process
 
   def removed_item_ids
     old_item_ids - new_item_ids
+  end
+
+  def attend_items?(object)
+    return unless object
+
+    object.direct_purchase_authorized?
+  end
+
+  def attend_items_by_direct_purchase
+    return unless new_purchase_solicitation.direct_purchase
+
+    new_purchase_solicitation.direct_purchase.attend_purchase_solicitation_items
+  end
+
+  def attend_items_by_administrative_process
+    return unless new_purchase_solicitation.administrative_process
+
+    new_purchase_solicitation.administrative_process.attend_purchase_solicitation_items
+  end
+
+  def pending_items_by_fulfiller(item_repository, object)
+    return unless object
+
+    item_repository.by_fulfiller(object.id, object.class.name).pending!
+  end
+
+  def partially_fulfilled_items_by_direct_purchase
+    return unless direct_purchase
+
+    direct_purchase.partially_fulfilled_purchase_solicitation_items
+  end
+
+  def partially_fulfilled_items_by_administrative_process
+    return unless administrative_process
+
+    administrative_process.partially_fulfilled_purchase_solicitation_items
   end
 end

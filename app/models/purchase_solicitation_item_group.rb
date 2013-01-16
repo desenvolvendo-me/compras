@@ -13,8 +13,8 @@ class PurchaseSolicitationItemGroup < Compras::Model
 
   has_many :purchase_solicitation_item_group_materials, :dependent => :destroy
   has_many :purchase_solicitations, :through => :purchase_solicitation_item_group_materials, :uniq => true
-  has_many :direct_purchases, :dependent => :restrict
-  has_many :administrative_processes, :dependent => :restrict
+  has_one :direct_purchase, :dependent => :restrict
+  has_one :administrative_process, :dependent => :restrict
   has_one :annul, :class_name => 'ResourceAnnul', :as => :annullable, :dependent => :destroy
 
   validates :description, :presence => true
@@ -22,6 +22,8 @@ class PurchaseSolicitationItemGroup < Compras::Model
   validate :purchase_solicitation_status
 
   accepts_nested_attributes_for :purchase_solicitation_item_group_materials, :allow_destroy => true
+
+  delegate :authorized?, :to => :direct_purchase, :prefix => true, :allow_nil => true
 
   orderize :id
 
@@ -55,7 +57,7 @@ class PurchaseSolicitationItemGroup < Compras::Model
   end
 
   def editable?
-    administrative_processes.empty? && direct_purchases.empty?
+    !(administrative_process || direct_purchase)
   end
 
   def annullable?
@@ -80,16 +82,12 @@ class PurchaseSolicitationItemGroup < Compras::Model
     change_status!(PurchaseSolicitationItemGroupStatus::FULFILLED)
   end
 
-  def liberate_purchase_solicitations!
-    purchase_solicitations.each(&:liberate!)
-  end
-
-  def buy_purchase_solicitations!
-    purchase_solicitations.each(&:buy!)
-  end
-
   def attend_items!
     purchase_solicitation_items.each(&:attend!)
+  end
+
+  def partially_fulfilled_items!
+    purchase_solicitation_items.each(&:partially_fulfilled!)
   end
 
   def rollback_attended_items!

@@ -63,7 +63,7 @@ describe AdministrativeProcessAnnulment do
                            and_return(item_group_annulment_creator_instance)
 
       budget_allocation_fulfiller.should_receive(:new).
-                                  with(item_group).
+                                  with(:purchase_solicitation_item_group => item_group).
                                   and_return(fulfiller_instance)
 
       fulfiller_instance.should_receive(:fulfill)

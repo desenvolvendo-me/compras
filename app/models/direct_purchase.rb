@@ -31,6 +31,12 @@ class DirectPurchase < Compras::Model
 
   has_many :direct_purchase_budget_allocations, :dependent => :destroy, :order => :id
   has_many :items, :through => :direct_purchase_budget_allocations, :class_name => :DirectPurchaseBudgetAllocationItem
+  has_many :materials, :through => :items
+  has_many :purchase_solicitation_items,
+           :class_name => 'PurchaseSolicitationBudgetAllocationItem',
+           :finder_sql => Proc.new { purchase_solicitation_items_finder_sql },
+           :inverse_of => :fulfiller
+
   has_many :purchase_solicitation_budget_allocation_items, :as => :fulfiller
   has_one :supply_authorization, :dependent => :restrict
   has_one :annul, :class_name => 'ResourceAnnul', :as => :annullable, :dependent => :destroy
@@ -114,6 +120,22 @@ class DirectPurchase < Compras::Model
     end
   end
 
+  def fulfill_purchase_solicitation_items(process)
+    purchase_solicitation_items.each do |item|
+      item.fulfill(process)
+    end
+  end
+
+  def partially_fulfilled_purchase_solicitation_items
+    purchase_solicitation_items.each do |item|
+      item.partially_fulfilled!
+    end
+  end
+
+  def attend_purchase_solicitation_items
+    purchase_solicitation_items.attend!
+  end
+
   protected
 
   def must_have_at_least_budget_allocation
@@ -162,5 +184,25 @@ class DirectPurchase < Compras::Model
 
   def budget_structure_optional?
     purchase_solicitation_item_group.present?
+  end
+
+  def material_ids_or_zero
+    return 0 if material_ids.size == 0
+
+    material_ids.join(',')
+  end
+
+  def purchase_solicitation_items_finder_sql
+    %Q{
+        SELECT "compras_purchase_solicitation_budget_allocation_items".* FROM "compras_direct_purchases"
+          INNER JOIN "compras_purchase_solicitations" ON
+            "compras_purchase_solicitations"."id" = "compras_direct_purchases"."purchase_solicitation_id"
+          INNER JOIN "compras_purchase_solicitation_budget_allocations" ON
+            "compras_purchase_solicitation_budget_allocations"."purchase_solicitation_id" = "compras_purchase_solicitations"."id"
+          INNER JOIN "compras_purchase_solicitation_budget_allocation_items" ON
+            "compras_purchase_solicitation_budget_allocation_items"."purchase_solicitation_budget_allocation_id" = "compras_purchase_solicitation_budget_allocations"."id"
+          WHERE (("compras_direct_purchases"."id" = #{id} AND
+            "compras_purchase_solicitation_budget_allocation_items"."material_id" IN (#{material_ids_or_zero})))
+      }
   end
 end

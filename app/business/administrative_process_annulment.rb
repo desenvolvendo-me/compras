@@ -24,7 +24,7 @@ class AdministrativeProcessAnnulment
   def clear_budget_allocation_item_fulfiller
     return unless purchase_solicitation_item_group.present?
 
-    budget_allocation_fulfiller.new(purchase_solicitation_item_group).fulfill
+    budget_allocation_fulfiller.new(:purchase_solicitation_item_group => purchase_solicitation_item_group).fulfill
   end
 
   def annul_item_group

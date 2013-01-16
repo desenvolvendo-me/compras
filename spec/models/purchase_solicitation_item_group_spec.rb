@@ -11,8 +11,8 @@ require 'app/models/resource_annul'
 describe PurchaseSolicitationItemGroup do
   it { should have_many(:purchase_solicitation_item_group_materials).dependent(:destroy) }
   it { should have_many(:purchase_solicitations).through(:purchase_solicitation_item_group_materials) }
-  it { should have_many(:direct_purchases).dependent(:restrict) }
-  it { should have_many(:administrative_processes).dependent(:restrict) }
+  it { should have_one(:direct_purchase).dependent(:restrict) }
+  it { should have_one(:administrative_process).dependent(:restrict) }
   it { should have_one(:annul).dependent(:destroy) }
 
   it { should validate_presence_of(:description) }
@@ -52,79 +52,58 @@ describe PurchaseSolicitationItemGroup do
   end
 
   context 'editable' do
-    let :direct_purchases do
-      [
-        double(:direct_purchase1),
-        double(:direct_purchase2)
-      ]
-    end
+    let(:direct_purchase) { double(:direct_purchase) }
 
-    let :administrative_processes do
-      [
-        double(:administrative_process1),
-        double(:administrative_process2)
-      ]
-    end
+    let(:administrative_process) { double(:administrative_process) }
 
-    it 'should not be editable if has direct_purchases' do
-      subject.stub(:direct_purchases).and_return(direct_purchases)
+    it 'should not be editable if has direct_purchase' do
+      subject.stub(:direct_purchase).and_return(direct_purchase)
 
       expect(subject).not_to be_editable
     end
 
-    it 'should not be editable if has administrative_processes' do
-      subject.stub(:administrative_processes).and_return(administrative_processes)
+    it 'should not be editable if has administrative_process' do
+      subject.stub(:administrative_process).and_return(administrative_process)
 
       expect(subject).not_to be_editable
     end
 
-    it 'should not be editable if has administrative_processes and direct_purchases' do
-      subject.stub(:administrative_processes).and_return(administrative_processes)
-      subject.stub(:direct_purchases).and_return(direct_purchases)
+    it 'should not be editable if has administrative_process and direct_purchase' do
+      subject.stub(:administrative_process).and_return(administrative_process)
+      subject.stub(:direct_purchase).and_return(direct_purchase)
 
       expect(subject).not_to be_editable
     end
 
-    it 'should be editable if does not have administrative_process neither direct_purchases' do
+    it 'should be editable if does not have administrative_process neither direct_purchase' do
       expect(subject).to be_editable
     end
   end
 
   context 'annullable' do
-    let :direct_purchases do
-      [
-        double(:direct_purchase1),
-        double(:direct_purchase2)
-      ]
-    end
+    let(:direct_purchase) { double(:direct_purchase1) }
+    let(:administrative_process) { double(:administrative_process) }
 
-    let :administrative_processes do
-      [
-        double(:administrative_process1),
-        double(:administrative_process2)
-      ]
-    end
-
-    it 'should not be annullable if has direct_purchases' do
-      subject.stub(:direct_purchases).and_return(direct_purchases)
+    it 'should not be annullable if has direct_purchase' do
+      subject.stub(:direct_purchase).and_return(direct_purchase)
 
       expect(subject).not_to be_annullable
     end
 
-    it 'should not be annullable if has administrative_processes' do
-      subject.stub(:administrative_processes).and_return(administrative_processes)
+    it 'should not be annullable if has administrative_process' do
+      subject.stub(:administrative_process).and_return(administrative_process)
 
       expect(subject).not_to be_annullable
     end
 
-    it 'should not be annullable if has administrative_processes and direct_purchases' do
-      subject.stub(:administrative_processes).and_return(administrative_processes)
-      subject.stub(:direct_purchases).and_return(direct_purchases)
+    it 'should not be annullable if has administrative_process and direct_purchase' do
+      subject.stub(:administrative_process).and_return(administrative_process)
+      subject.stub(:direct_purchase).and_return(direct_purchase)
 
       expect(subject).not_to be_annullable
     end
 
-    it 'should be annullable if does not have administrative_process neither direct_purchases' do
+    it 'should be annullable if does not have administrative_process neither direct_purchase' do
       expect(subject).to be_annullable
     end
   end
@@ -227,33 +206,6 @@ describe PurchaseSolicitationItemGroup do
     end
   end
 
-  context 'with purchase solicitations' do
-    let(:purchase1) { double(:purchase1) }
-    let(:purchase2) { double(:purchase2) }
-
-    describe '#liberate_purchase_solicitations!' do
-      it "should the status_service for all purchase_solicitations to 'liberated'" do
-        subject.stub(:purchase_solicitations).and_return([purchase1, purchase2])
-
-        purchase1.should_receive(:liberate!)
-        purchase2.should_receive(:liberate!)
-
-        subject.liberate_purchase_solicitations!
-      end
-    end
-
-     describe '#buy_purchase_solicitations!' do
-      it "should the status_service for all purchase_solicitations to 'in_purchase_process'" do
-        subject.stub(:purchase_solicitations).and_return([purchase1, purchase2])
-
-        purchase1.should_receive(:buy!)
-        purchase2.should_receive(:buy!)
-
-        subject.buy_purchase_solicitations!
-      end
-    end
-  end
-
   context 'when have two items' do
     before { subject.stub(:purchase_solicitation_items).and_return([item1, item2]) }
 
@@ -275,6 +227,15 @@ describe PurchaseSolicitationItemGroup do
         item2.should_receive(:pending!)
 
         subject.rollback_attended_items!
+      end
+    end
+
+    describe '#partially_fulfilled_items' do
+      it 'should pending item' do
+        item1.should_receive(:partially_fulfilled!)
+        item2.should_receive(:partially_fulfilled!)
+
+        subject.partially_fulfilled_items!
       end
     end
   end

@@ -1,7 +1,8 @@
 class PurchaseSolicitationItemGroupProcess
-  def initialize(options = {})
+  def initialize(options = {}, purchase_solicitation_status_changer = PurchaseSolicitationStatusChanger)
     @new_item_group = options.fetch(:new_item_group, nil)
     @old_item_group = options.fetch(:old_item_group, nil)
+    @purchase_solicitation_status_changer = purchase_solicitation_status_changer
   end
 
   def update_status
@@ -14,20 +15,24 @@ class PurchaseSolicitationItemGroupProcess
 
   private
 
-  attr_reader :new_item_group, :old_item_group
+  attr_reader :new_item_group, :old_item_group, :purchase_solicitation_status_changer
 
   def update_new_item_group_status
     return if new_item_group.nil?
 
     new_item_group.change_status!(PurchaseSolicitationItemGroupStatus::IN_PURCHASE_PROCESS)
-    new_item_group.buy_purchase_solicitations!
+    new_item_group.purchase_solicitations.each do |purchase_solicitation|
+      purchase_solicitation_status_changer.change(purchase_solicitation)
+    end
   end
 
   def update_old_item_group_status
     return if old_item_group.nil?
 
     old_item_group.change_status!(PurchaseSolicitationItemGroupStatus::PENDING)
-    old_item_group.liberate_purchase_solicitations!
+    old_item_group.purchase_solicitations.each do |purchase_solicitation|
+      purchase_solicitation_status_changer.change(purchase_solicitation)
+    end
   end
 
   def validate_pending_status

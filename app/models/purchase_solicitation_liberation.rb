@@ -3,7 +3,8 @@ class PurchaseSolicitationLiberation < Compras::Model
   attr_accessible :date, :justification, :responsible_id,
                   :purchase_solicitation_id, :service_status
 
-  has_enumeration_for :service_status, :with => PurchaseSolicitationServiceStatus
+  has_enumeration_for :service_status, :with => PurchaseSolicitationServiceStatus,
+                      :create_helpers => true
 
   belongs_to :responsible, :class_name => 'Employee', :foreign_key => :responsible_id
   belongs_to :purchase_solicitation

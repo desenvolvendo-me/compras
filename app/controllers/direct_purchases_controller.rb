@@ -21,10 +21,6 @@ class DirectPurchasesController < CrudController
 
   def update
     if params[:commit] == 'Gerar autorização de fornecimento'
-      PurchaseSolicitationBudgetAllocationItemStatusChanger.new(
-        :new_purchase_solicitation => new_purchase_solicitation,
-        :new_purchase_solicitation_item_group => resource.purchase_solicitation_item_group).change
-
       supply_authorization = SupplyAuthorizationGenerator.new(resource).generate!
 
       redirect_to supply_authorization
@@ -47,14 +43,18 @@ class DirectPurchasesController < CrudController
   def create_resource(object)
     object.transaction do
       if super
+        PurchaseSolicitationBudgetAllocationItemFulfiller.new({
+          :purchase_solicitation_item_group => object.purchase_solicitation_item_group,
+          :direct_purchase => object
+        }, object).fulfill
+
         if params[:direct_purchase]
-          PurchaseSolicitationProcess.update_solicitations_status(new_purchase_solicitation)
           PurchaseSolicitationItemGroupProcess.new(:new_item_group => new_item_group).update_status
           PurchaseSolicitationBudgetAllocationItemStatusChanger.new(
-            :new_purchase_solicitation => new_purchase_solicitation).change
+            :new_purchase_solicitation => new_purchase_solicitation,
+            :direct_purchase => object).change
+          PurchaseSolicitationStatusChanger.change(new_purchase_solicitation)
         end
-
-        PurchaseSolicitationBudgetAllocationItemFulfiller.new(object.purchase_solicitation_item_group, object).fulfill
       end
     end
   end
@@ -67,15 +67,17 @@ class DirectPurchasesController < CrudController
       DirectPurchaseBudgetAllocationCleaner.clear_old_records(object, new_purchase_solicitation, new_item_group)
 
       if super
-        PurchaseSolicitationProcess.update_solicitations_status(new_purchase_solicitation, old_purchase_solicitation)
         PurchaseSolicitationItemGroupProcess.new(
           :new_item_group => new_item_group, :old_item_group => old_item_group).update_status
           PurchaseSolicitationBudgetAllocationItemStatusChanger.new(
             :new_purchase_solicitation => new_purchase_solicitation,
-            :old_purchase_solicitation => old_purchase_solicitation).change
+            :old_purchase_solicitation => old_purchase_solicitation,
+            :direct_purchase => object).change
+          PurchaseSolicitationStatusChanger.change(new_purchase_solicitation)
+          PurchaseSolicitationStatusChanger.change(old_purchase_solicitation)
 
-        PurchaseSolicitationBudgetAllocationItemFulfiller.new(old_item_group).fulfill
-        PurchaseSolicitationBudgetAllocationItemFulfiller.new(new_item_group, object).fulfill
+        PurchaseSolicitationBudgetAllocationItemFulfiller.new({:purchase_solicitation_item_group => old_item_group, :direct_purchase => object}).fulfill
+        PurchaseSolicitationBudgetAllocationItemFulfiller.new({:purchase_solicitation_item_group => new_item_group, :direct_purchase => object}, object).fulfill
       end
     end
   end

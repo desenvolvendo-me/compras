@@ -390,8 +390,7 @@ feature "PurchaseSolicitations" do
   end
 
   scenario 'should not show edit button when is not editable' do
-    PurchaseSolicitation.make!(:reparo,
-                               :service_status => PurchaseSolicitationServiceStatus::LIBERATED)
+    PurchaseSolicitation.make!(:reparo_liberado)
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
@@ -594,6 +593,7 @@ feature "PurchaseSolicitations" do
 
     PurchaseSolicitation.make!(:reparo_office,
                                :service_status => PurchaseSolicitationServiceStatus::LIBERATED,
+                               :purchase_solicitation_liberations => [PurchaseSolicitationLiberation.make(:reparo)],
                                :purchase_solicitation_budget_allocations => [
                                  PurchaseSolicitationBudgetAllocation.make(:alocacao_primaria_office_2_itens_liberados)])
 

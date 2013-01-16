@@ -68,12 +68,42 @@ describe AdministrativeProcessesController do
       AdministrativeProcess.any_instance.should_receive(:transaction).and_yield
       AdministrativeProcess.any_instance.should_receive(:save).and_return(true)
 
-      PurchaseSolicitationProcess.
-        should_receive(:update_solicitations_status).
+      PurchaseSolicitationStatusChanger.
+        should_receive(:change).
         with(purchase_solicitation)
 
       post :create, :administrative_process => {
-        :purchase_solicitation_id => purchase_solicitation.id }
+           :purchase_solicitation_id => purchase_solicitation.id }
+    end
+
+    it 'should change budget allocation items status with purchase solicitation' do
+      purchase_solicitation = PurchaseSolicitation.make!(:reparo)
+
+      AdministrativeProcess.any_instance.should_receive(:transaction).and_yield
+      AdministrativeProcess.any_instance.should_receive(:save).and_return(true)
+
+      item_status_changer = double(:item_status_changer)
+      item_status_changer.should_receive(:change).once
+
+      PurchaseSolicitationBudgetAllocationItemStatusChanger.
+        should_receive(:new).
+        and_return(item_status_changer)
+
+      post :create, :administrative_process => {
+           :purchase_solicitation_id => purchase_solicitation.id }
+    end
+
+    it 'should change status purchase solicitation' do
+      purchase_solicitation = PurchaseSolicitation.make!(:reparo)
+
+      AdministrativeProcess.any_instance.should_receive(:transaction).and_yield
+      AdministrativeProcess.any_instance.should_receive(:save).and_return(true)
+
+      PurchaseSolicitationStatusChanger.
+        should_receive(:change).with(purchase_solicitation)
+
+      post :create, :administrative_process => {
+           :purchase_solicitation_id => purchase_solicitation.id }
     end
   end
 
@@ -131,12 +161,12 @@ describe AdministrativeProcessesController do
 
       PurchaseSolicitationBudgetAllocationItemFulfiller.
         should_receive(:new).
-        with(nil).
+        with(:purchase_solicitation_item_group => nil).
         and_return(fulfiller_instance)
 
       PurchaseSolicitationBudgetAllocationItemFulfiller.
         should_receive(:new).
-        with(item_group, administrative_process).
+        with({:purchase_solicitation_item_group => item_group}, administrative_process).
         and_return(fulfiller_instance)
 
       AdministrativeProcessBudgetAllocationCleaner.any_instance.
@@ -160,9 +190,69 @@ describe AdministrativeProcessesController do
       administrative_process = AdministrativeProcess.make!(:compra_aguardando)
       purchase_solicitation = PurchaseSolicitation.make!(:reparo)
 
-      PurchaseSolicitationProcess.
-        should_receive(:update_solicitations_status).
-        with(purchase_solicitation, administrative_process.purchase_solicitation)
+      PurchaseSolicitationStatusChanger.
+        should_receive(:change).
+        with(purchase_solicitation)
+
+      PurchaseSolicitationStatusChanger.
+        should_receive(:change).
+        with(administrative_process.purchase_solicitation)
+
+      put :update, :id => administrative_process.id, :administrative_process => {
+        :purchase_solicitation_id => purchase_solicitation.id }
+    end
+
+    it 'should change budget allocation items status with purchase solicitation' do
+      administrative_process = AdministrativeProcess.make!(:compra_aguardando)
+      purchase_solicitation = PurchaseSolicitation.make!(:reparo)
+
+      item_status_changer = double(:item_status_changer)
+      item_status_changer.should_receive(:change).once
+
+      PurchaseSolicitationBudgetAllocationItemStatusChanger.
+        should_receive(:new).with(
+          :new_purchase_solicitation => purchase_solicitation,
+          :old_purchase_solicitation => nil,
+          :new_purchase_solicitation_item_group => nil,
+          :old_purchase_solicitation_item_group => nil,
+          :administrative_process => administrative_process).
+        and_return(item_status_changer)
+
+      put :update, :id => administrative_process.id, :administrative_process => {
+        :purchase_solicitation_id => purchase_solicitation.id }
+
+    end
+
+    it 'should change budget allocation items status with item group' do
+      administrative_process = AdministrativeProcess.make!(:compra_aguardando)
+      item_group = PurchaseSolicitationItemGroup.make!(:antivirus)
+
+      item_status_changer = double(:item_status_changer)
+      item_status_changer.should_receive(:change).once
+
+      PurchaseSolicitationBudgetAllocationItemStatusChanger.
+        should_receive(:new).with(
+          :new_purchase_solicitation => nil,
+          :old_purchase_solicitation => nil,
+          :new_purchase_solicitation_item_group => item_group,
+          :old_purchase_solicitation_item_group => nil,
+          :administrative_process => administrative_process).
+        and_return(item_status_changer)
+
+      put :update, :id => administrative_process.id, :administrative_process => {
+        :purchase_solicitation_item_group_id => item_group.id }
+    end
+
+    it 'should change status purchase solicitation' do
+      administrative_process = AdministrativeProcess.make!(:compra_aguardando)
+      purchase_solicitation = PurchaseSolicitation.make!(:reparo)
+
+      PurchaseSolicitationStatusChanger.
+        should_receive(:change).with(purchase_solicitation)
+
+      PurchaseSolicitationStatusChanger.
+        should_receive(:change).with(nil)
+
 
       put :update, :id => administrative_process.id, :administrative_process => {
         :purchase_solicitation_id => purchase_solicitation.id }

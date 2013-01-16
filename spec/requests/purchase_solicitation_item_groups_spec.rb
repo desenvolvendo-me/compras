@@ -7,8 +7,7 @@ feature "PurchaseSolicitationItemGroups" do
   end
 
   scenario 'create a new purchase_solicitation_item_group' do
-    PurchaseSolicitation.make!(:reparo,
-                               :service_status => PurchaseSolicitationServiceStatus::LIBERATED)
+    PurchaseSolicitation.make!(:reparo_liberado)
 
     navigate 'Processos de Compra > Agrupamentos de Itens de Solicitações de Compra'
 
@@ -276,10 +275,10 @@ feature "PurchaseSolicitationItemGroups" do
   end
 
   scenario 'disable fields and hiden buttons when not editable' do
-    PurchaseSolicitationItemGroup.make!(:antivirus,
-                                        :administrative_processes => [
-                                          AdministrativeProcess.make!(:compra_de_cadeiras)
-                                        ])
+    PurchaseSolicitationItemGroup.make!(
+      :antivirus,
+      :administrative_process => AdministrativeProcess.make!(:compra_de_cadeiras)
+    )
 
     navigate 'Processos de Compra > Agrupamentos de Itens de Solicitações de Compra'
 
@@ -306,8 +305,7 @@ feature "PurchaseSolicitationItemGroups" do
                                                             :items => [item_1])
     allocation_2 = PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria_2013,
                                                             :items => [item_2])
-    PurchaseSolicitation.make!(:reparo,
-                               :service_status => PurchaseSolicitationServiceStatus::LIBERATED,
+    PurchaseSolicitation.make!(:reparo_liberado,
                                :purchase_solicitation_budget_allocations => [allocation_1])
     PurchaseSolicitation.make!(:reparo_desenvolvimento,
                                :service_status => PurchaseSolicitationServiceStatus::PENDING,
@@ -338,14 +336,14 @@ feature "PurchaseSolicitationItemGroups" do
                                                          :status => 'grouped')
     grouped_allocation = PurchaseSolicitationBudgetAllocation.make(:alocacao_primaria,
                                                                    :items => [item])
-    PurchaseSolicitation.make!(:reparo,
-                               :service_status => PurchaseSolicitationServiceStatus::LIBERATED,
+    PurchaseSolicitation.make!(:reparo_liberado,
                                :purchase_solicitation_budget_allocations => [grouped_allocation])
 
     ungrouped_allocation = PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria)
     PurchaseSolicitation.make!(:reparo_2013,
                                :budget_structure => BudgetStructure.make!(:secretaria_de_desenvolvimento),
                                :service_status => PurchaseSolicitationServiceStatus::LIBERATED,
+                               :purchase_solicitation_liberations => [PurchaseSolicitationLiberation.make(:reparo)],
                                :purchase_solicitation_budget_allocations => [ungrouped_allocation])
 
     navigate 'Processos de Compra > Agrupamentos de Itens de Solicitações de Compra'

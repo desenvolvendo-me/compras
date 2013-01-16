@@ -56,7 +56,7 @@ describe PurchaseSolicitationLiberationsController do
   end
 
   it 'GET #new with purchase solicitation liberated' do
-    purchase_solicitation = PurchaseSolicitation.make!(:reparo, :service_status => 'liberated')
+    purchase_solicitation = PurchaseSolicitation.make!(:reparo_liberado)
 
     get :new, :purchase_solicitation_id => purchase_solicitation.id
 

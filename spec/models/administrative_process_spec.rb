@@ -9,6 +9,7 @@ require 'app/models/administrative_process_budget_allocation_item'
 require 'app/models/budget_allocation'
 require 'app/models/administrative_process_liberation'
 require 'app/models/purchase_solicitation_item_group'
+require 'app/models/purchase_solicitation_budget_allocation_item'
 require 'app/business/judgment_form_licitation_kind_by_object_type'
 
 describe AdministrativeProcess do
@@ -28,6 +29,9 @@ describe AdministrativeProcess do
   it { should have_one(:administrative_process_liberation).dependent(:destroy) }
   it { should have_many(:administrative_process_budget_allocations).dependent(:destroy) }
   it { should have_many(:items).through(:administrative_process_budget_allocations) }
+  it { should have_many(:materials).through(:items) }
+  it { should have_many(:purchase_solicitation_budget_allocation_items) }
+  it { should have_many(:purchase_solicitation_items) }
 
   it { should delegate(:modality_type).to(:licitation_modality).allowing_nil(true) }
   it { should delegate(:presence_trading?).to(:licitation_modality).allowing_nil(true) }
@@ -182,6 +186,49 @@ describe AdministrativeProcess do
   it "should not allow licitation process when object type is not construction_and_engineering_services neither purchase_and_services" do
     subject.stub(:object_type => AdministrativeProcessObjectType::CALL_NOTICE)
     expect(subject).not_to be_allow_licitation_process
+  end
+
+  describe 'attend_purchase_solicitation_items' do
+    it 'should attend items' do
+      subject.purchase_solicitation_items.should_receive(:attend!)
+
+      subject.attend_purchase_solicitation_items
+    end
+  end
+
+  describe 'fulfill_purchase_solicitation_items' do
+    before do
+      subject.should_receive(:purchase_solicitation_items).
+              and_return([item, item2])
+    end
+
+    let(:process)  { double(:process) }
+    let(:item)  { double(:item) }
+    let(:item2) { double(:item2) }
+
+    it 'should fulfill items' do
+      item.should_receive(:fulfill).with(process)
+      item2.should_receive(:fulfill).with(process)
+
+      subject.fulfill_purchase_solicitation_items(process)
+    end
+  end
+
+  describe 'partially_fulfilled_purchase_solicitation_items' do
+    before do
+      subject.should_receive(:purchase_solicitation_items).
+              and_return([item, item2])
+    end
+
+    let(:item)  { double(:item) }
+    let(:item2) { double(:item2) }
+
+    it 'should fulfill items' do
+      item.should_receive(:partially_fulfilled!)
+      item2.should_receive(:partially_fulfilled!)
+
+      subject.partially_fulfilled_purchase_solicitation_items
+    end
   end
 
   context 'with purchase_solicitation_item_group' do

@@ -38,8 +38,7 @@ feature 'PurchaseSolicitationAnnul' do
   end
 
   scenario 'annul button should be disabled when there is a direct_purchase related' do
-    purchase_solicitation = PurchaseSolicitation.make!(:reparo,
-        :service_status => PurchaseSolicitationServiceStatus::LIBERATED)
+    purchase_solicitation = PurchaseSolicitation.make!(:reparo_liberado)
     DirectPurchase.make!(:compra,
         :purchase_solicitation => purchase_solicitation)
 

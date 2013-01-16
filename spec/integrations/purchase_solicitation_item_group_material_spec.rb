@@ -12,8 +12,7 @@ describe PurchaseSolicitationItemGroupMaterial do
 
     let :purchase_solicitation do
       PurchaseSolicitation.make(
-        :reparo,
-        :service_status => PurchaseSolicitationServiceStatus::LIBERATED,
+        :reparo_liberado,
         :purchase_solicitation_budget_allocations => [
           allocation_with_same_material,
           allocation_with_diferente_material

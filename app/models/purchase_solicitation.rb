@@ -24,7 +24,7 @@ class PurchaseSolicitation < Compras::Model
   has_many :items, :through => :purchase_solicitation_budget_allocations
   has_many :budget_allocations, :through => :purchase_solicitation_budget_allocations,
            :dependent => :restrict
-  has_many :purchase_solicitation_liberations, :dependent => :destroy, :order => :sequence
+  has_many :purchase_solicitation_liberations, :dependent => :destroy, :order => :sequence, :inverse_of => :purchase_solicitation
   has_many :purchase_solicitation_item_group_material_purchase_solicitations,
            :dependent => :destroy
   has_one  :annul, :class_name => 'ResourceAnnul', :as => :annullable, :dependent => :destroy
@@ -35,6 +35,7 @@ class PurchaseSolicitation < Compras::Model
 
   delegate :amount, :description, :id, :to => :budget_allocation,
            :prefix => true, :allow_nil => true
+  delegate :authorized?, :to => :direct_purchase, :prefix => true, :allow_nil => true
 
   validates :request_date, :responsible, :delivery_location, :presence => true
   validates :accounting_year, :kind, :delivery_location, :presence => true
@@ -42,6 +43,7 @@ class PurchaseSolicitation < Compras::Model
   validates :purchase_solicitation_budget_allocations, :no_duplication => :budget_allocation_id
   validate :must_have_at_least_one_budget_allocation
   validate :validate_budget_structure_and_materials
+  validate :validate_liberated_status
 
   orderize :request_date
   filterize
@@ -68,6 +70,24 @@ class PurchaseSolicitation < Compras::Model
   def self.by_material(material_ids)
     joins { items }.
       where { |purchase| purchase.items.material_id.in(material_ids) }
+  end
+
+  def direct_purchase_by_item_group
+    PurchaseSolicitation.joins {
+      purchase_solicitation_item_group_material_purchase_solicitations.
+      purchase_solicitation_item_group_material.
+      purchase_solicitation_item_group.
+      direct_purchase
+    }.where { |purchase| purchase.id.eq(self.id) }
+  end
+
+  def administrative_process_by_item_group
+    PurchaseSolicitation.joins {
+      purchase_solicitation_item_group_material_purchase_solicitations.
+      purchase_solicitation_item_group_material.
+      purchase_solicitation_item_group.
+      administrative_process
+    }.where { |purchase| purchase.id.eq(self.id) }
   end
 
   def to_s
@@ -137,11 +157,25 @@ class PurchaseSolicitation < Compras::Model
   end
 
   def attend_items!
-    items.with_status(PurchaseSolicitationBudgetAllocationItemStatus::PENDING).each(&:attend!)
+    items.attend!
   end
 
-  def rollback_attended_items!
-    items.with_status(PurchaseSolicitationBudgetAllocationItemStatus::ATTENDED).each(&:pending!)
+  def partially_fulfilled_items!
+    items.partially_fulfilled!
+  end
+
+  def pending_items!
+    items.pending!
+  end
+
+  def active_purchase_solicitation_liberation
+    purchase_solicitation_liberations.last
+  end
+
+  def active_purchase_solicitation_liberation_liberated?
+    return false unless active_purchase_solicitation_liberation
+
+    active_purchase_solicitation_liberation.liberated?
   end
 
   protected
@@ -169,6 +203,12 @@ class PurchaseSolicitation < Compras::Model
           errors.add(:base, :invalid)
         end
       end
+    end
+  end
+
+  def validate_liberated_status
+    if !active_purchase_solicitation_liberation_liberated? && self.liberated?
+      errors.add(:service_status, :not_yet_liberated)
     end
   end
 end

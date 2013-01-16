@@ -223,7 +223,7 @@ feature "AdministrativeProcesses" do
     end
 
     within_tab 'Principal' do
-      expect(page).to have_select 'Status de atendimento', :selected => 'Em processo de compra'
+      expect(page).to have_select 'Status de atendimento', :selected => 'Parcialmente atendido'
     end
   end
 
@@ -1156,9 +1156,15 @@ feature "AdministrativeProcesses" do
     end
   end
 
-  scenario "changing the purchase_solicitation_item_group should change purchase solicitation status" do
-    PurchaseSolicitationItemGroup.make!(:antivirus)
-    PurchaseSolicitationItemGroup.make!(:office)
+  scenario "changing the purchase_solicitation_item_group should change purchase solicitation and items status" do
+    item_group = PurchaseSolicitationItemGroup.make!(:antivirus)
+    item_group.purchase_solicitation_items.each do |item|
+      item.update_column :purchase_solicitation_item_group_id, item_group.id
+    end
+    item_group = PurchaseSolicitationItemGroup.make!(:office)
+    item_group.purchase_solicitation_items.each do |item|
+      item.update_column :purchase_solicitation_item_group_id, item_group.id
+    end
     AdministrativeProcess.make!(:compra_aguardando)
 
     navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
@@ -1190,7 +1196,17 @@ feature "AdministrativeProcesses" do
     end
 
     within_tab 'Principal' do
-      expect(page).to have_select 'Status de atendimento', :selected => 'Em processo de compra'
+      expect(page).to have_select 'Status de atendimento', :selected => 'Parcialmente atendido'
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      within '.purchase-solicitation-budget-allocation' do
+        within '.item' do
+          expect(page).to have_select 'Status', :selected => 'Parcialmente atendido'
+          expect(page).to have_field 'Agrupamento', :with => 'Agrupamento de antivirus'
+          expect(page).to have_field 'Atendido por', :with => 'Processo administrativo 1/2012'
+        end
+      end
     end
 
     navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
@@ -1222,7 +1238,17 @@ feature "AdministrativeProcesses" do
     end
 
     within_tab 'Principal' do
-      expect(page).to have_select 'Status de atendimento', :selected => 'Liberada'
+      #expect(page).to have_select 'Status de atendimento', :selected => 'Liberada'
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      within '.purchase-solicitation-budget-allocation:first' do
+        within '.item' do
+          expect(page).to have_select 'Status', :selected => 'Pendente'
+          expect(page).to have_field 'Agrupamento', :with => ''
+          expect(page).to have_field 'Atendido por', :with => ''
+        end
+      end
     end
 
     click_link 'Voltar'
@@ -1232,13 +1258,22 @@ feature "AdministrativeProcesses" do
     end
 
     within_tab 'Principal' do
-      expect(page).to have_select 'Status de atendimento', :selected => 'Em processo de compra'
+      expect(page).to have_select 'Status de atendimento', :selected => 'Parcialmente atendido'
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      within '.purchase-solicitation-budget-allocation' do
+        within '.item' do
+          expect(page).to have_select 'Status', :selected => 'Parcialmente atendido'
+          #expect(page).to have_field 'Agrupamento', :with => 'Agrupamento de antivirus'
+          expect(page).to have_field 'Atendido por', :with => 'Processo administrativo 1/2012'
+        end
+      end
     end
   end
 
   scenario 'clear budget allocations when purchase_solicititation is removed' do
-    PurchaseSolicitation.make!(:reparo,
-      :service_status => PurchaseSolicitationServiceStatus::LIBERATED)
+    PurchaseSolicitation.make!(:reparo_liberado)
     BudgetStructure.make!(:secretaria_de_educacao)
     JudgmentForm.make!(:por_item_com_melhor_tecnica)
     Employee.make!(:sobrinho)
@@ -1322,13 +1357,22 @@ feature "AdministrativeProcesses" do
     end
 
     within_tab 'Principal' do
-      expect(page).to have_select 'Status de atendimento', :selected => 'Pendente'
+      expect(page).to have_select 'Status de atendimento', :selected => 'Liberada'
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      within '.purchase-solicitation-budget-allocation' do
+        within '.item' do
+          expect(page).to have_select 'Status', :selected => 'Pendente'
+          #expect(page).to have_field 'Agrupamento', :with => 'Agrupamento de antivirus'
+          expect(page).to have_field 'Atendido por', :with => ''
+        end
+      end
     end
   end
 
   scenario 'budget allocations should be fulfilled automatically when fulfill purchase_solicitation' do
-    PurchaseSolicitation.make!(:reparo,
-      :service_status => PurchaseSolicitationServiceStatus::LIBERATED)
+    PurchaseSolicitation.make!(:reparo_liberado)
     BudgetStructure.make!(:secretaria_de_educacao)
     JudgmentForm.make!(:por_item_com_melhor_tecnica)
     Employee.make!(:sobrinho)
@@ -1467,14 +1511,20 @@ feature "AdministrativeProcesses" do
       click_link '1/2012'
     end
 
+    within_tab 'Dotações orçamentarias' do
+      within '.item:nth-child(1)' do
+        expect(page).to have_select 'Status', :selected => 'Parcialmente atendido'
+        expect(page).to have_field 'Atendido por', :with => 'Processo administrativo 1/2012'
+      end
+    end
+
     within_tab 'Principal' do
-      expect(page).to have_select 'Status de atendimento', :selected => 'Em processo de compra'
+      expect(page).to have_select 'Status de atendimento', :selected => 'Parcialmente atendido'
     end
   end
 
   scenario 'when clear purchase_solicitation should enable item_group' do
-    PurchaseSolicitation.make!(:reparo,
-      :service_status => PurchaseSolicitationServiceStatus::LIBERATED)
+    PurchaseSolicitation.make!(:reparo_liberado)
     PurchaseSolicitationItemGroup.make!(:antivirus)
 
     navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
@@ -1503,8 +1553,7 @@ feature "AdministrativeProcesses" do
   end
 
   scenario 'cannot overwrite reponsible when select a purchase_solicitation' do
-    PurchaseSolicitation.make!(:reparo,
-      :service_status => PurchaseSolicitationServiceStatus::LIBERATED)
+    PurchaseSolicitation.make!(:reparo_liberado)
     PurchaseSolicitationItemGroup.make!(:antivirus)
     Employee.make!(:wenderson)
 
@@ -1549,10 +1598,9 @@ feature "AdministrativeProcesses" do
   end
 
   scenario 'should not return duplicated data of purchase solicitation' do
-     purchase_solicitation = PurchaseSolicitation.make!(:reparo,
-                                                         :service_status => PurchaseSolicitationServiceStatus::LIBERATED,
-                                                         :purchase_solicitation_budget_allocations => [
-                                                           PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria_office_2_itens_liberados)])
+     purchase_solicitation = PurchaseSolicitation.make!(:reparo_liberado,
+                                                        :purchase_solicitation_budget_allocations => [
+                                                          PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria_office_2_itens_liberados)])
 
     navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 

@@ -56,6 +56,25 @@ describe PurchaseSolicitation do
 
     it { should_not allow_value('a2012').for(:accounting_year) }
     it { should allow_value('2012').for(:accounting_year) }
+
+    describe 'validate_liberated_status' do
+      it 'should validate_liberated_status be false when have a liberation' do
+        subject.stub(:active_purchase_solicitation_liberation_liberated?).and_return(false)
+        subject.stub(:liberated?).and_return(true)
+
+        subject.valid?
+
+        expect(subject.errors[:service_status]).to include('ainda não foi liberada')
+      end
+
+      it 'should validate_liberated_status be true when have a liberation' do
+        subject.stub(:active_purchase_solicitation_liberation_liberated?).and_return(true)
+
+        subject.valid?
+
+        expect(subject.errors[:service_status]).not_to include 'ainda não foi liberada"'
+      end
+    end
   end
 
   describe "updating columns" do
@@ -187,43 +206,79 @@ describe PurchaseSolicitation do
     end
   end
 
-
-
   describe '#attend_items!' do
-    it "should change status of all pending items to 'attended'" do
-      item1 = double(:item1)
-      item2 = double(:item2)
-      items = double(:items)
+    let(:items) { double(:items) }
 
-      items.should_receive(:with_status).
-        with(PurchaseSolicitationBudgetAllocationItemStatus::PENDING).
-        and_return([item1, item2])
-
-      item1.should_receive(:attend!)
-      item2.should_receive(:attend!)
-
+    it "should change status of all items to 'attended'" do
       subject.stub(:items).and_return(items)
+      items.should_receive(:attend!)
 
       subject.attend_items!
     end
   end
 
-  describe '#rollback_attend_items!' do
-    it "should change status of all pending items to 'attended'" do
-      item1 = double(:item1)
-      item2 = double(:item2)
-      items = double(:items)
+  describe '#partially_fulfilled_items!' do
+    let(:items) { double(:items) }
 
-      items.should_receive(:with_status).
-        with(PurchaseSolicitationBudgetAllocationItemStatus::ATTENDED).
-        and_return([item1, item2])
-
-      item1.should_receive(:pending!)
-      item2.should_receive(:pending!)
-
+    it "should change status of all items to 'attended'" do
       subject.stub(:items).and_return(items)
+      items.should_receive(:partially_fulfilled!)
 
-      subject.rollback_attended_items!
+      subject.partially_fulfilled_items!
+    end
+  end
+
+  context '#active_purchase_solicitation_liberation' do
+    before do
+      subject.stub(:purchase_solicitation_liberations).
+              and_return(purchase_solicitation_liberations)
+    end
+
+    let(:purchase_solicitation_liberations) { double(:purchase_solicitation_liberations) }
+
+    it 'should return last purchase_solicitation_liberation' do
+      purchase_solicitation_liberations.should_receive(:last)
+
+      subject.active_purchase_solicitation_liberation
+    end
+
+    describe 'active_purchase_solicitation_liberation_liberated' do
+      before do
+        purchase_solicitation_liberations.should_receive(:last).
+                                          at_least(1).times.and_return(active)
+      end
+
+      let(:active) { double(:active) }
+
+      it 'should be false when active_purchase_solicitation_liberation is not liberated' do
+        active.stub(:liberated?).and_return(false)
+
+        expect(subject.active_purchase_solicitation_liberation_liberated?).to be_false
+      end
+
+      it 'should be true when active_purchase_solicitation_liberation is liberated' do
+        active.stub(:liberated?).and_return(true)
+
+        expect(subject.active_purchase_solicitation_liberation_liberated?).to be_true
+      end
+
+      describe '#validate_liberated_status' do
+        before do
+          active.stub(:liberated?).and_return(false)
+        end
+
+        it 'should to be error on service status when service status is liberated' do
+          subject.stub(:service_status => 'liberated')
+          subject.valid?
+          expect(subject.errors[:service_status]).to include 'ainda não foi liberada'
+        end
+
+        it 'should not to be error on service status when service status is pending' do
+          subject.stub(:service_status => 'pending')
+          subject.valid?
+          expect(subject.errors[:service_status]).not_to include 'ainda não foi liberada'
+        end
+      end
     end
   end
 end

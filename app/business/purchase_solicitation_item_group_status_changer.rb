@@ -1,7 +1,8 @@
 class PurchaseSolicitationItemGroupStatusChanger
-  def initialize(item_group, purchase_solicitation_status_changer = PurchaseSolicitationStatusChanger)
-    @item_group = item_group
+  def initialize(item_group, purchase_solicitation_status_changer = PurchaseSolicitationStatusChanger, item_group_repository = PurchaseSolicitationItemGroup)
     @purchase_solicitation_status_changer = purchase_solicitation_status_changer
+    @item_group_repository = item_group_repository
+    @item_group = find_item_group(item_group)
   end
 
   def self.change(*params)
@@ -20,5 +21,11 @@ class PurchaseSolicitationItemGroupStatusChanger
 
   private
 
-  attr_reader :item_group, :purchase_solicitation_status_changer
+  attr_reader :item_group, :purchase_solicitation_status_changer, :item_group_repository
+
+  def find_item_group(item_group)
+    return unless item_group
+
+    item_group_repository.find(item_group.id)
+  end
 end

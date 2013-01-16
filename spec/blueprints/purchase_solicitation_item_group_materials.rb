@@ -2,8 +2,8 @@ PurchaseSolicitationItemGroupMaterial.blueprint(:reparo) do
   purchase_solicitation_item_group { nil }
   material { Material.make!(:antivirus) }
   purchase_solicitations { [
-    PurchaseSolicitation.make(:reparo,
-      :service_status => PurchaseSolicitationServiceStatus::LIBERATED,
+    PurchaseSolicitation.make(:reparo_liberado,
+      :purchase_solicitation_liberations => [PurchaseSolicitationLiberation.make(:reparo)],
       :purchase_solicitation_budget_allocations => [
         PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria,
           :items => [
@@ -22,6 +22,7 @@ PurchaseSolicitationItemGroupMaterial.blueprint(:reparo_2013) do
   purchase_solicitations { [
     PurchaseSolicitation.make(:reparo_2013,
       :service_status => PurchaseSolicitationServiceStatus::LIBERATED,
+      :purchase_solicitation_liberations => [PurchaseSolicitationLiberation.make(:reparo)],
       :purchase_solicitation_budget_allocations => [
         PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria_2013,
           :items => [
@@ -38,8 +39,7 @@ PurchaseSolicitationItemGroupMaterial.blueprint(:reparo_arame_farpado) do
   purchase_solicitation_item_group { nil }
   material { Material.make!(:arame_farpado) }
   purchase_solicitations { [
-    PurchaseSolicitation.make(:reparo,
-      :service_status => PurchaseSolicitationServiceStatus::LIBERATED,
+    PurchaseSolicitation.make(:reparo_liberado,
       :purchase_solicitation_budget_allocations => [
         PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria,
           :items => [
@@ -58,6 +58,7 @@ PurchaseSolicitationItemGroupMaterial.blueprint(:reparo_desenvolvimento) do
   purchase_solicitations { [
     PurchaseSolicitation.make(:reparo_desenvolvimento,
       :service_status => PurchaseSolicitationServiceStatus::LIBERATED,
+      :purchase_solicitation_liberations => [PurchaseSolicitationLiberation.make(:reparo)],
       :purchase_solicitation_budget_allocations => [
         PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria,
           :items => [
@@ -76,6 +77,7 @@ PurchaseSolicitationItemGroupMaterial.blueprint(:reparo_office) do
   purchase_solicitations { [
     PurchaseSolicitation.make(:reparo_office,
       :service_status => PurchaseSolicitationServiceStatus::LIBERATED,
+      :purchase_solicitation_liberations => [PurchaseSolicitationLiberation.make(:reparo)],
       :purchase_solicitation_budget_allocations => [
         PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria_office_2_itens_liberados,
           :items => [

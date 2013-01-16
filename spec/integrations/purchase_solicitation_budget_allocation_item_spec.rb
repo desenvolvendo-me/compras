@@ -7,31 +7,33 @@ describe PurchaseSolicitationBudgetAllocationItem do
     it { should validate_uniqueness_of(:material_id).scoped_to(:purchase_solicitation_budget_allocation_id) }
   end
 
-  describe '.with_status' do
-    let(:item_pending) do
-      PurchaseSolicitationBudgetAllocationItem.make!(:item,
-        :status => PurchaseSolicitationBudgetAllocationItemStatus::PENDING)
+  describe '.group_by_ids' do
+    it 'should group items by ids' do
+      PurchaseSolicitationBudgetAllocationItem.make!(:office)
+
+      item_group = PurchaseSolicitationItemGroup.make!(:antivirus)
+
+      PurchaseSolicitationBudgetAllocationItem.group_by_ids!(1, item_group.id)
+
+      item = PurchaseSolicitationBudgetAllocationItem.find(1)
+
+      expect(item.status).to eq 'grouped'
+      expect(item.purchase_solicitation_item_group_id).to eq item_group.id 
     end
+  end
 
-    let(:item_grouped) do
-      PurchaseSolicitationBudgetAllocationItem.make!(:arame_farpado,
-        :status => PurchaseSolicitationBudgetAllocationItemStatus::GROUPED)
-    end
+  describe '.pending_by_ids' do
+    it 'should pending items by ids' do
+      PurchaseSolicitationBudgetAllocationItem.make!(:office, :status => 'grouped')
 
-    let(:item_attended) do
-      PurchaseSolicitationBudgetAllocationItem.make!(:office,
-        :status => PurchaseSolicitationBudgetAllocationItemStatus::ATTENDED)
-    end
+      item_group = PurchaseSolicitationItemGroup.make!(:antivirus)
 
-    it 'should filter only records with specified status' do
-      expect(described_class.with_status(
-        PurchaseSolicitationBudgetAllocationItemStatus::PENDING)).to eq [item_pending]
+      PurchaseSolicitationBudgetAllocationItem.pending_by_ids!(1)
 
-      expect(described_class.with_status(
-        PurchaseSolicitationBudgetAllocationItemStatus::GROUPED)).to eq [item_grouped]
+      item = PurchaseSolicitationBudgetAllocationItem.find(1)
 
-      expect(described_class.with_status(
-        PurchaseSolicitationBudgetAllocationItemStatus::ATTENDED)).to eq [item_attended]
+      expect(item.status).to eq 'pending'
+      expect(item.purchase_solicitation_item_group_id).to be_nil
     end
   end
 end

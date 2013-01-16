@@ -33,6 +33,8 @@ describe DirectPurchase do
   it { should belong_to :price_registration }
 
   it { should have_many(:items).through(:direct_purchase_budget_allocations) }
+  it { should have_many(:materials).through(:items) }
+  it { should have_many(:purchase_solicitation_items) }
   it { should have_many(:direct_purchase_budget_allocations).dependent(:destroy).order(:id) }
   it { should have_many(:purchase_solicitation_budget_allocation_items) }
 
@@ -278,6 +280,44 @@ describe DirectPurchase do
       subject.stub(:annulled?).and_return(true)
 
       expect(subject.status).to eq DirectPurchaseStatus::ANNULLED
+    end
+  end
+
+  context 'with two items on purchase_solicitation_items' do
+    before do
+      subject.should_receive(:purchase_solicitation_items).at_least(1).times.
+              and_return([item, item2])
+    end
+
+    let(:item)  { double(:item) }
+    let(:item2) { double(:item2) }
+
+    describe 'fulfill_purchase_solicitation_items' do
+      let(:process)  { double(:process) }
+
+      it 'should fulfill items' do
+        item.should_receive(:fulfill).with(process)
+        item2.should_receive(:fulfill).with(process)
+
+        subject.fulfill_purchase_solicitation_items(process)
+      end
+    end
+
+    describe 'partially_fulfilled_purchase_solicitation_items' do
+      it 'should fulfill items' do
+        item.should_receive(:partially_fulfilled!)
+        item2.should_receive(:partially_fulfilled!)
+
+        subject.partially_fulfilled_purchase_solicitation_items
+      end
+    end
+
+    describe 'attend_purchase_solicitation_items' do
+      it 'should attend purchase solicitation items' do
+        subject.purchase_solicitation_items.should_receive(:attend!)
+
+        subject.attend_purchase_solicitation_items
+      end
     end
   end
 end

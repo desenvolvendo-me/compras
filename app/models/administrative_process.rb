@@ -22,10 +22,16 @@ class AdministrativeProcess < Compras::Model
   belongs_to :licitation_modality
   belongs_to :purchase_solicitation
 
-  has_one :licitation_process, :dependent => :restrict
-  has_one :administrative_process_liberation, :dependent => :destroy
+  has_one  :licitation_process, :dependent => :restrict
+  has_one  :administrative_process_liberation, :dependent => :destroy
   has_many :administrative_process_budget_allocations, :dependent => :destroy, :order => :id
   has_many :items, :through => :administrative_process_budget_allocations, :order => :id
+  has_many :materials, :through => :items
+  has_many :purchase_solicitation_budget_allocation_items, :as => :fulfiller
+  has_many :purchase_solicitation_items,
+           :class_name => 'PurchaseSolicitationBudgetAllocationItem',
+           :finder_sql => Proc.new { purchase_solicitation_items_finder_sql },
+           :inverse_of => :fulfiller
 
   accepts_nested_attributes_for :administrative_process_budget_allocations, :allow_destroy => true
 
@@ -81,6 +87,22 @@ class AdministrativeProcess < Compras::Model
     AdministrativeProcessModality.available_for_licitation_process_classification?(modality)
   end
 
+  def attend_purchase_solicitation_items
+    purchase_solicitation_items.attend!
+  end
+
+  def fulfill_purchase_solicitation_items(process)
+    purchase_solicitation_items.each do |item|
+      item.fulfill(process)
+    end
+  end
+
+  def partially_fulfilled_purchase_solicitation_items
+    purchase_solicitation_items.each do |item|
+      item.partially_fulfilled!
+    end
+  end
+
   private
 
   def has_either_purchase_solicitation_or_item_group
@@ -121,5 +143,25 @@ class AdministrativeProcess < Compras::Model
     unless verificator.valid_licitation_kind?(object_type, judgment_form_licitation_kind)
       errors.add(:judgment_form, :invalid_licitation_kind_of_judgment_form_for_object_type, :object_type => object_type_humanize)
     end
+  end
+
+  def material_ids_or_zero
+    return 0 if material_ids.size == 0
+
+    material_ids.join(',')
+  end
+
+  def purchase_solicitation_items_finder_sql
+    %Q{
+      SELECT "compras_purchase_solicitation_budget_allocation_items".* FROM "compras_administrative_processes"
+        INNER JOIN "compras_purchase_solicitations" ON
+          "compras_purchase_solicitations"."id" = "compras_administrative_processes"."purchase_solicitation_id"
+        INNER JOIN "compras_purchase_solicitation_budget_allocations" ON
+          "compras_purchase_solicitation_budget_allocations"."purchase_solicitation_id" = "compras_purchase_solicitations"."id"
+        INNER JOIN "compras_purchase_solicitation_budget_allocation_items" ON
+          "compras_purchase_solicitation_budget_allocation_items"."purchase_solicitation_budget_allocation_id" = "compras_purchase_solicitation_budget_allocations"."id"
+        WHERE (("compras_administrative_processes"."id" = #{id} AND
+          "compras_purchase_solicitation_budget_allocation_items"."material_id" IN (#{material_ids_or_zero})))
+    }
   end
 end

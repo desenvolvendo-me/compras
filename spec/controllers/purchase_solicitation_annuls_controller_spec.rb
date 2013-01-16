@@ -8,8 +8,7 @@ describe PurchaseSolicitationAnnulsController do
 
   describe 'GET #new' do
     it 'should render new when it is not related to direct purchase' do
-      purchase_solicitation = PurchaseSolicitation.make!(:reparo,
-        :service_status => PurchaseSolicitationServiceStatus::LIBERATED)
+      purchase_solicitation = PurchaseSolicitation.make!(:reparo_liberado)
 
       get :new, :annullable_id => purchase_solicitation.id
 
@@ -17,8 +16,7 @@ describe PurchaseSolicitationAnnulsController do
     end
 
     it 'should raise exception when is related with a direct_purchase' do
-      purchase_solicitation = PurchaseSolicitation.make!(:reparo,
-        :service_status => PurchaseSolicitationServiceStatus::LIBERATED)
+      purchase_solicitation = PurchaseSolicitation.make!(:reparo_liberado)
       DirectPurchase.make!(:compra,
         :purchase_solicitation => purchase_solicitation)
 
@@ -31,8 +29,7 @@ describe PurchaseSolicitationAnnulsController do
 
   describe 'POST #create' do
     it 'should render create when it is not related to direct purchase' do
-      purchase_solicitation = PurchaseSolicitation.make!(:reparo,
-        :service_status => PurchaseSolicitationServiceStatus::LIBERATED)
+      purchase_solicitation = PurchaseSolicitation.make!(:reparo_liberado)
 
       post :create, :annullable_id => purchase_solicitation.id
 
@@ -40,8 +37,7 @@ describe PurchaseSolicitationAnnulsController do
     end
 
     it 'should raise exception when is related with a direct_purchase' do
-      purchase_solicitation = PurchaseSolicitation.make!(:reparo,
-        :service_status => PurchaseSolicitationServiceStatus::LIBERATED)
+      purchase_solicitation = PurchaseSolicitation.make!(:reparo_liberado)
       DirectPurchase.make!(:compra,
         :purchase_solicitation => purchase_solicitation)
 

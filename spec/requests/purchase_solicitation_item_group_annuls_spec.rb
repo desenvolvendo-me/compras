@@ -105,10 +105,10 @@ feature 'PurchaseSolicitationAnnul' do
   end
 
   scenario 'disable annul button if not annullable' do
-    PurchaseSolicitationItemGroup.make!(:antivirus,
-                                        :administrative_processes => [
-                                          AdministrativeProcess.make!(:compra_de_cadeiras)
-                                        ])
+    PurchaseSolicitationItemGroup.make!(
+      :antivirus,
+      :administrative_process => AdministrativeProcess.make!(:compra_de_cadeiras)
+    )
 
     navigate 'Processos de Compra > Agrupamentos de Itens de Solicitações de Compra'
 
