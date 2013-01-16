@@ -29,7 +29,9 @@ describe ApplicationController do
     customer = double('customer')
     customer.should_receive(:using_connection)
 
-    Customer.should_receive(:find_by_domain!).with('test.host').and_return(customer)
+    request.env['X-Customer'] = 'ipatinga-mg'
+
+    Customer.should_receive(:find_by_domain!).with('ipatinga-mg').and_return(customer)
 
     get :index
   end

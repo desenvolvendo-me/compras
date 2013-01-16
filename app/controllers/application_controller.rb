@@ -48,7 +48,7 @@ class ApplicationController < ActionController::Base
   end
 
   def handle_customer(&block)
-    customer = Customer.find_by_domain!(request.host)
+    customer = Customer.find_by_domain!(request.headers['X-Customer'])
     customer.using_connection(&block)
   end
 
