@@ -389,7 +389,7 @@ describe TradingItemDecorator do
 
         I18n.backend.store_translations 'pt-BR', :trading_item => {
             :messages => {
-              :cannot_start_negotiation => 'não pode negociar',
+              :cannot_start_negotiation => 'não pode negociar'
             }
           }
       end
