@@ -1,9 +1,7 @@
 class TradingItem < Compras::Model
   attr_accessible :detailed_description, :minimum_reduction_percent,
-                  :minimum_reduction_value, :order, :trading_id,
+                  :minimum_reduction_value, :trading_id,
                   :administrative_process_budget_allocation_item_id
-
-  auto_increment :order, :by => :trading_id
 
   belongs_to :trading
   belongs_to :administrative_process_budget_allocation_item
@@ -29,7 +27,7 @@ class TradingItem < Compras::Model
   delegate :licitation_process_id, :percentage_limit_to_participate_in_bids,
            :to => :trading
 
-  orderize :order
+  orderize :id
 
   default_scope { order(:id) }
 

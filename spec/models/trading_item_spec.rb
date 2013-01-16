@@ -24,8 +24,6 @@ describe TradingItem do
   it { should delegate(:unit_price).to(:administrative_process_budget_allocation_item).allowing_nil(true) }
   it { should delegate(:licitation_process_id).to(:trading) }
 
-  it { should auto_increment(:order).by(:trading_id) }
-
   it "has a default value of 0 to minimum_reduction_percent" do
     expect(TradingItem.new.minimum_reduction_percent).to eq 0.0
   end

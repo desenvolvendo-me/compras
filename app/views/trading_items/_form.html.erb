@@ -3,15 +3,7 @@
   <%= f.input :administrative_process_budget_allocation_item_id, :as => 'hidden' %>
   <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
 
-  <div class="yui3-g">
-    <div class="yui3-u-1-8">
-      <%= f.input :order, :input_html => { :readonly => 'readonly' }%>
-    </div>
-
-    <div class="yui3-u-7-8">
-      <%= f.input :material, :disabled => true %>
-    </div>
-  </div>
+  <%= f.input :material, :disabled => true %>
 
   <div class="yui3-g">
     <div class="yui3-u-1-8">
