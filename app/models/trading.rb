@@ -4,7 +4,6 @@ class Trading < Compras::Model
                   :licitation_commission_id, :preamble, :closing_of_accreditation,
                   :trading_registry
 
-
   auto_increment :code, :by => :year
 
   belongs_to :entity
