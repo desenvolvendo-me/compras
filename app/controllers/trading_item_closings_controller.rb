@@ -2,7 +2,7 @@ class TradingItemClosingsController < CrudController
   actions :all, :except => [:index, :filter, :modal, :destroy]
 
   before_filter :trading_item
-  before_filter :not_allow_create_an_already_closed_trading_item, :on => [:new, :create]
+  before_filter :not_allow_create_an_already_closed_trading_item, :only => [:new, :create]
 
   def new
     object = build_resource
