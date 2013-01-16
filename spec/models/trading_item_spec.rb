@@ -50,12 +50,12 @@ describe TradingItem do
   describe '#lowest_proposal_value' do
     context 'with proposals_activated_at nil' do
       it 'should return the last bid proposal value for the item' do
-        first_bid = double(:first_bid, :amount => 50.0)
+        first_bid  = double(:first_bid, :amount => 50.0)
         second_bid = double(:second_bid, :amount => 40.0)
-        third_bid = double(:third_bid, :amount => 30.0)
-
+        third_bid  = double(:third_bid, :amount => 30.0)
         trading_item_bids = double(:trading_item_bids, :with_proposal => [first_bid, second_bid, third_bid])
-        trading_item_bids.should_receive(:with_valid_proposal).and_return(trading_item_bids)
+        enabled    = double(:enabled, :with_proposal => trading_item_bids)
+        trading_item_bids.should_receive(:enabled).and_return(enabled)
         trading_item_bids.should_receive(:reorder).and_return(trading_item_bids)
         trading_item_bids.should_receive(:first).and_return(third_bid)
 
@@ -66,8 +66,9 @@ describe TradingItem do
 
       it 'should return zero when there is no proposal for the item' do
         trading_item_bids = double(:trading_item_bids)
+        enabled           = double(:enabled, :with_proposal => trading_item_bids)
 
-        trading_item_bids.should_receive(:with_valid_proposal).and_return(trading_item_bids)
+        trading_item_bids.should_receive(:enabled).and_return(enabled)
         trading_item_bids.should_receive(:reorder).and_return([])
 
         subject.should_receive(:trading_item_bids).and_return(trading_item_bids)
@@ -117,7 +118,8 @@ describe TradingItem do
         third_bid = double(:third_bid, :bidder => 'baz')
 
         trading_item_bids = double(:trading_item_bids, :with_proposal => [first_bid, second_bid, third_bid])
-        trading_item_bids.should_receive(:with_valid_proposal).and_return(trading_item_bids)
+        enabled    = double(:enabled, :with_proposal => trading_item_bids)
+        trading_item_bids.should_receive(:enabled).and_return(enabled)
         trading_item_bids.should_receive(:reorder).and_return(trading_item_bids)
         trading_item_bids.should_receive(:first).and_return(third_bid)
 
@@ -128,8 +130,9 @@ describe TradingItem do
 
       it 'should return nil when there is no proposal for the item' do
         trading_item_bids = double(:trading_item_bids)
+        enabled           = double(:enabled, :with_proposal => trading_item_bids)
 
-        trading_item_bids.should_receive(:with_valid_proposal).and_return(trading_item_bids)
+        trading_item_bids.should_receive(:enabled).and_return(enabled)
         trading_item_bids.should_receive(:reorder).and_return([])
 
         subject.should_receive(:trading_item_bids).and_return(trading_item_bids)

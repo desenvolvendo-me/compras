@@ -44,10 +44,6 @@ class TradingItemBid < Compras::Model
     where { status.eq(TradingItemBidStatus::WITH_PROPOSAL) }.order { :id }
   end
 
-  def self.with_valid_proposal
-    enabled.with_proposal
-  end
-
   def self.enabled
     joins { bidder.disqualification.outer }.
     where { bidder.disqualification.id.eq(nil) }
@@ -58,7 +54,7 @@ class TradingItemBid < Compras::Model
   end
 
   def self.last_valid_proposal
-    with_valid_proposal.order('amount DESC').last
+    enabled.with_proposal.order('amount DESC').last
   end
 
   def self.bids_by_bidder_and_item(bidder_id, trading_item_id)

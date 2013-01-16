@@ -215,7 +215,7 @@ class TradingItem < Compras::Model
     if proposals_activated?
       trading_item_bids.with_proposal.minimum(:amount)
     else
-      trading_item_bids.with_valid_proposal.minimum(:amount)
+      trading_item_bids.enabled.with_proposal.minimum(:amount)
     end
   end
 
@@ -239,7 +239,7 @@ class TradingItem < Compras::Model
     if proposals_activated?
       trading_item_bids.with_proposal.reorder { amount }.first
     else
-      trading_item_bids.with_valid_proposal.reorder { amount }.first
+      trading_item_bids.enabled.with_proposal.reorder { amount }.first
     end
   end
 
