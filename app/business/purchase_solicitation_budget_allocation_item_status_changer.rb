@@ -13,13 +13,13 @@ class PurchaseSolicitationBudgetAllocationItemStatusChanger
   def initialize(options = {})
     @new_item_ids = options.fetch(:new_item_ids, [])
     @old_item_ids = options.fetch(:old_item_ids, [])
-    @new_purchase_solicitation = options.fetch(:new_purchase_solicitation, nil)
-    @old_purchase_solicitation = options.fetch(:old_purchase_solicitation, nil)
-    @purchase_solicitation_item_group_id = options.fetch(:purchase_solicitation_item_group_id, nil)
-    @new_purchase_solicitation_item_group = options.fetch(:new_purchase_solicitation_item_group, nil)
-    @old_purchase_solicitation_item_group = options.fetch(:old_purchase_solicitation_item_group, nil)
-    @direct_purchase = options.fetch(:direct_purchase, nil)
-    @administrative_process = options.fetch(:administrative_process, nil)
+    @new_purchase_solicitation = options[:new_purchase_solicitation]
+    @old_purchase_solicitation = options[:old_purchase_solicitation]
+    @purchase_solicitation_item_group_id = options[:purchase_solicitation_item_group_id]
+    @new_purchase_solicitation_item_group = options[:new_purchase_solicitation_item_group]
+    @old_purchase_solicitation_item_group = options[:old_purchase_solicitation_item_group]
+    @direct_purchase = options[:direct_purchase]
+    @administrative_process = options[:administrative_process]
   end
 
   def change(item_repository = PurchaseSolicitationBudgetAllocationItem)

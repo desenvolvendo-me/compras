@@ -1,7 +1,7 @@
 class PurchaseSolicitationItemGroupProcess
   def initialize(options = {}, purchase_solicitation_status_changer = PurchaseSolicitationStatusChanger)
-    @new_item_group = options.fetch(:new_item_group, nil)
-    @old_item_group = options.fetch(:old_item_group, nil)
+    @new_item_group = options[:new_item_group]
+    @old_item_group = options[:old_item_group]
     @purchase_solicitation_status_changer = purchase_solicitation_status_changer
   end
 
