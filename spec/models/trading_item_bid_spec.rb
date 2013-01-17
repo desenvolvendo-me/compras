@@ -22,6 +22,35 @@ describe TradingItemBid do
   it { should delegate(:lowest_proposal_value).to(:trading_item).prefix(true) }
 
   describe "validations" do
+    context 'when bidder is disabled' do
+      let(:bidder) { double(:bidder, :disabled => true) }
+
+      before do
+        subject.stub(:bidder => bidder)
+      end
+
+      it 'cannot be destroyed' do
+        subject.destroy
+
+        expect(subject.errors[:base]).to include('não é válido')
+      end
+    end
+
+    context 'when bidder is not disabled' do
+      let(:bidder) { double(:bidder, :disabled => false) }
+
+      before do
+        subject.stub(:bidder => bidder)
+      end
+
+      it 'cannot be destroyed' do
+        subject.destroy
+
+        expect(subject.errors[:base]).to_not include('não é válido')
+      end
+    end
+
+
     context 'when on round of bids' do
       before do
         subject.stub(:stage).and_return(TradingItemBidStage::ROUND_OF_BIDS)

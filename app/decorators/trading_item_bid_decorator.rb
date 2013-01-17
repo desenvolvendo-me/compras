@@ -13,8 +13,7 @@ class TradingItemBidDecorator
   end
 
   def show_undo_button?
-    trading_item.proposals_for_round_of_bids?
-
+    trading_item.proposals_for_round_of_bids? && !bidder.disabled
   end
 
   def percent_by_item_and_round

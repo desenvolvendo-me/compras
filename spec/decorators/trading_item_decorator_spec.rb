@@ -295,15 +295,18 @@ describe TradingItemDecorator do
   end
 
   describe '#cannot_undo_last_offer_message' do
+    before do
+      I18n.backend.store_translations 'pt-BR', :trading_item => {
+        :messages => {
+          :cannot_undo_last_offer_when_trading_items_is_closed => 'não pode desfazer',
+          :cannot_undo_a_bid_of_disabled_bidder => 'desabilitado'
+        }
+      }
+    end
+
     context  'when item is closed' do
       before do
         component.stub(:closed?).and_return(true)
-
-        I18n.backend.store_translations 'pt-BR', :trading_item => {
-            :messages => {
-              :cannot_undo_last_offer_when_trading_items_is_closed => 'não pode desfazer'
-            }
-          }
       end
 
       it 'should return message' do
@@ -312,26 +315,49 @@ describe TradingItemDecorator do
     end
 
     context 'when item is not closed' do
+      let(:bidder) { double(:bidder, :disabled => false)}
+      let(:last_bid) { double(:last_bid, :bidder => bidder)}
+
       before do
         component.stub(:closed?).and_return(false)
       end
 
-      it 'should retuns nil' do
-        expect(subject.cannot_undo_last_offer_message).to be_nil
+      context 'when the bidder of last offer is enabled' do
+        before do
+          component.stub(:last_bid => last_bid)
+        end
+
+        it 'should retuns nil' do
+          expect(subject.cannot_undo_last_offer_message).to be_nil
+        end
+      end
+
+      context 'when the bidder of last offer is disabled' do
+        before do
+          bidder.stub(:disabled => true)
+          component.stub(:last_bid => last_bid)
+        end
+
+        it 'should retuns nil' do
+          expect(subject.cannot_undo_last_offer_message).to eq 'desabilitado'
+        end
       end
     end
   end
 
   describe '#cannot_undo_last_negotiation_message' do
+    before do
+      I18n.backend.store_translations 'pt-BR', :trading_item => {
+        :messages => {
+          :cannot_undo_last_negotiation_when_trading_items_is_closed => 'não pode desfazer',
+          :cannot_undo_a_bid_of_disabled_bidder => 'desabilitado'
+        }
+      }
+    end
+
     context  'when item is closed' do
       before do
         component.stub(:closed?).and_return(true)
-
-        I18n.backend.store_translations 'pt-BR', :trading_item => {
-            :messages => {
-              :cannot_undo_last_negotiation_when_trading_items_is_closed => 'não pode desfazer'
-            }
-          }
       end
 
       it 'should return message' do
@@ -340,12 +366,32 @@ describe TradingItemDecorator do
     end
 
     context 'when item is not closed' do
+      let(:bidder) { double(:bidder, :disabled => false)}
+      let(:last_bid) { double(:last_bid, :bidder => bidder)}
+
       before do
         component.stub(:closed?).and_return(false)
       end
 
-      it 'should retuns nil' do
-        expect(subject.cannot_undo_last_negotiation_message).to be_nil
+      context 'when the bidder of last offer is enabled' do
+        before do
+          component.stub(:last_bid => last_bid)
+        end
+
+        it 'should retuns nil' do
+          expect(subject.cannot_undo_last_negotiation_message).to be_nil
+        end
+      end
+
+      context 'when the bidder of last offer is disabled' do
+        before do
+          bidder.stub(:disabled => true)
+          component.stub(:last_bid => last_bid)
+        end
+
+        it 'should retuns nil' do
+          expect(subject.cannot_undo_last_negotiation_message).to eq 'desabilitado'
+        end
       end
     end
   end

@@ -1,5 +1,5 @@
 class TradingItemBidBidderChooser
-  def initialize(trading_item, current_stage = nil, trading_item_bidders = TradingItemBidders.new(trading_item, trading_item.bidders) )
+  def initialize(trading_item, current_stage = nil, trading_item_bidders = TradingItemBidders.new(trading_item, trading_item.bidders.enabled) )
     @trading_item = trading_item
     @trading_item_bidders = trading_item_bidders
     @current_stage = current_stage

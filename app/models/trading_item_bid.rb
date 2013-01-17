@@ -33,6 +33,7 @@ class TradingItemBid < Compras::Model
   validate  :amount_limit_on_negotiation, :if => :validate_amount_on_negotiation?
 
   before_create :amount_when_without_proposal
+  before_destroy :bidder_enabled
 
   scope :at_stage_of_proposals, lambda { where { stage.eq(TradingItemBidStage::PROPOSALS)} }
   scope :at_stage_of_round_of_bids, lambda { where { stage.eq(TradingItemBidStage::ROUND_OF_BIDS)} }
@@ -176,5 +177,13 @@ class TradingItemBid < Compras::Model
     return if self.with_proposal?
 
     self.amount = last_valid_amount_by_bidder_and_item_and_round
+  end
+
+  def bidder_enabled
+    return unless bidder.disabled
+
+    errors.add(:base, :invalid)
+
+    false
   end
 end

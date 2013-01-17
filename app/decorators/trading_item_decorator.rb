@@ -1,3 +1,4 @@
+# encoding: utf-8
 class TradingItemDecorator
   include Decore
   include Decore::Proxy
@@ -50,12 +51,18 @@ class TradingItemDecorator
   def cannot_undo_last_offer_message
     if closed?
       t('trading_item.messages.cannot_undo_last_offer_when_trading_items_is_closed')
+    elsif bidder_disabled_for_last_bid?
+      t('trading_item.messages.cannot_undo_a_bid_of_disabled_bidder',
+        :stage => 'oferta', :bidder => bidder_for_last_bid)
     end
   end
 
   def cannot_undo_last_negotiation_message
     if closed?
       t('trading_item.messages.cannot_undo_last_negotiation_when_trading_items_is_closed')
+    elsif bidder_disabled_for_last_bid?
+      t('trading_item.messages.cannot_undo_a_bid_of_disabled_bidder',
+        :stage => 'negociação', :bidder => bidder_for_last_bid)
     end
   end
 
@@ -135,5 +142,15 @@ class TradingItemDecorator
 
   def selected_for_trading_item
     component.bidders.selected_for_trading_item(component)
+  end
+
+  def bidder_disabled_for_last_bid?
+    return unless last_bid
+
+    last_bid.bidder.disabled
+  end
+
+  def bidder_for_last_bid
+    last_bid.bidder
   end
 end

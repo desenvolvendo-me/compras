@@ -27,3 +27,4 @@ pt-BR:
       not_allow_offer: "Não é permitido registrar ofertas enquanto não houver licitante com proposta"
       cannot_start_negotiation: "Não há mais licitantes para negociar"
       cannot_activate_proposals: "Não há propostas para serem ativadas"
+      cannot_undo_a_bid_of_disabled_bidder: "Não pode desfazer %{stage} de licitante inabilitado (%{bidder})"
