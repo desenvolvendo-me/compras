@@ -14,7 +14,10 @@ describe PurchaseSolicitationItemGroupProcess do
   describe '#update_status' do
     context 'with new_item_group' do
       subject do
-        described_class.new({:new_item_group => new_item_group}, purchase_solicitation_status_changer)
+        described_class.new(
+          :new_item_group => new_item_group,
+          :purchase_solicitation_status_changer => purchase_solicitation_status_changer
+        )
       end
 
       it "updates the item group status to 'in_purchase_process'" do
@@ -41,7 +44,9 @@ describe PurchaseSolicitationItemGroupProcess do
 
     context 'with old_item_group' do
       subject do
-        described_class.new({:old_item_group => old_item_group}, purchase_solicitation_status_changer)
+        described_class.new(
+          :old_item_group => old_item_group,
+          :purchase_solicitation_status_changer => purchase_solicitation_status_changer)
       end
 
       it "should update status of item group to 'pending'" do
@@ -62,8 +67,9 @@ describe PurchaseSolicitationItemGroupProcess do
     context 'with different new_item_group and old_item_group' do
       subject do
         described_class.new(
-          { :new_item_group => new_item_group, :old_item_group => old_item_group },
-          purchase_solicitation_status_changer
+          :new_item_group => new_item_group,
+          :old_item_group => old_item_group,
+          :purchase_solicitation_status_changer => purchase_solicitation_status_changer
         )
       end
 
@@ -84,8 +90,9 @@ describe PurchaseSolicitationItemGroupProcess do
     context 'when old and new solicitation are the same' do
       subject do
         described_class.new(
-          { :new_item_group => new_item_group, :old_item_group => new_item_group },
-          purchase_solicitation_status_changer
+          :new_item_group => new_item_group,
+          :old_item_group => new_item_group,
+          :purchase_solicitation_status_changer => purchase_solicitation_status_changer
         )
       end
 

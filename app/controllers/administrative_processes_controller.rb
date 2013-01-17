@@ -86,7 +86,8 @@ class AdministrativeProcessesController < CrudController
           :new_item_group => new_item_group,
           :old_item_group => old_item_group)
         PurchaseSolicitationItemGroupProcess.new(
-          :new_item_group => new_item_group, :old_item_group => old_item_group
+          :new_item_group => new_item_group,
+          :old_item_group => old_item_group
         ).update_status
         PurchaseSolicitationBudgetAllocationItemFulfiller.new(
           :purchase_solicitation_item_group => old_item_group
