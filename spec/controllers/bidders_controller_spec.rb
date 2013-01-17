@@ -49,9 +49,13 @@ describe BiddersController do
 
     it "should update the licitation_process status to 'in_progress'" do
       licitation_process = LicitationProcess.make!(:processo_licitatorio_fornecedores)
+      status_changer = double(:status_changer)
 
       Bidder.any_instance.should_receive(:save).and_return(true)
-      LicitationProcess.any_instance.should_receive(:update_status).with(LicitationProcessStatus::IN_PROGRESS)
+      status_changer.should_receive(:in_progress!)
+      LicitationProcessStatusChanger.should_receive(:new).
+                                     with(licitation_process).
+                                     and_return(status_changer)
 
       post :create, :licitation_process_id => licitation_process.id
     end

@@ -68,7 +68,7 @@ class BiddersController < CrudController
 
     object.transaction do
       if super
-        update_licitation_process_status(object.licitation_process)
+        LicitationProcessStatusChanger.new(object.licitation_process).in_progress!
       end
     end
   end
@@ -81,12 +81,6 @@ class BiddersController < CrudController
 
   def block_not_allow_bidders
     raise Exceptions::Unauthorized unless parent.allow_bidders?
-  end
-
-  def update_licitation_process_status(licitation_process)
-    return if licitation_process.in_progress?
-
-    licitation_process.update_status(LicitationProcessStatus::IN_PROGRESS)
   end
 
   def block_changes_when_have_ratifications
