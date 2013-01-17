@@ -1,4 +1,7 @@
-require 'spec_helper'
+require 'unit_helper'
+require 'enumerate_it'
+require 'app/enumerations/licitation_process_status'
+require 'app/business/licitation_process_status_changer'
 
 describe LicitationProcessStatusChanger do
   let(:licitation_process) { double(:licitation_process) }
