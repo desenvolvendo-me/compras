@@ -293,13 +293,22 @@ describe DirectPurchase do
     let(:item2) { double(:item2) }
 
     describe 'fulfill_purchase_solicitation_items' do
-      let(:process)  { double(:process) }
 
       it 'should fulfill items' do
-        item.should_receive(:fulfill).with(process)
-        item2.should_receive(:fulfill).with(process)
+        item.should_receive(:fulfill).with(subject)
+        item2.should_receive(:fulfill).with(subject)
 
-        subject.fulfill_purchase_solicitation_items(process)
+        subject.fulfill_purchase_solicitation_items
+      end
+    end
+
+    describe 'remove_fulfill_purchase_solicitation_items' do
+
+      it 'should fulfill items' do
+        item.should_receive(:fulfill).with(nil)
+        item2.should_receive(:fulfill).with(nil)
+
+        subject.remove_fulfill_purchase_solicitation_items
       end
     end
 

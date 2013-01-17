@@ -21,13 +21,13 @@ describe PurchaseSolicitationBudgetAllocationItemFulfiller do
     context 'when have a process' do
       subject do
         described_class.new(
-          { :purchase_solicitation_item_group => item_group },
-          process
+          :purchase_solicitation_item_group => item_group,
+          :add_fulfill => true
         )
       end
 
       it 'should fulfill_items_from_item_group with process' do
-        item_group.should_receive(:fulfill_items).with(process)
+        item_group.should_receive(:fulfill_items)
 
         subject.fulfill
       end
@@ -40,7 +40,7 @@ describe PurchaseSolicitationBudgetAllocationItemFulfiller do
     end
 
     it 'should remove fulfill_items_from_item_group when has not a process' do
-      direct_purchase.should_receive(:fulfill_purchase_solicitation_items).with(nil)
+      direct_purchase.should_receive(:remove_fulfill_purchase_solicitation_items)
 
       subject.fulfill
     end
@@ -48,13 +48,13 @@ describe PurchaseSolicitationBudgetAllocationItemFulfiller do
     context 'when have a process' do
       subject do
         described_class.new(
-          { :direct_purchase => direct_purchase },
-          process
+          :direct_purchase => direct_purchase,
+          :add_fulfill => true
         )
       end
 
       it 'should fulfill_items_from_item_group with process' do
-      direct_purchase.should_receive(:fulfill_purchase_solicitation_items).with(process)
+        direct_purchase.should_receive(:fulfill_purchase_solicitation_items)
 
         subject.fulfill
       end
@@ -67,7 +67,7 @@ describe PurchaseSolicitationBudgetAllocationItemFulfiller do
     end
 
     it 'should remove fulfill_items_from_item_group when has not a process' do
-      administrative_process.should_receive(:fulfill_purchase_solicitation_items).with(nil)
+      administrative_process.should_receive(:remove_fulfill_purchase_solicitation_items)
 
       subject.fulfill
     end
@@ -75,13 +75,13 @@ describe PurchaseSolicitationBudgetAllocationItemFulfiller do
     context 'when have a process' do
       subject do
         described_class.new(
-          { :administrative_process => administrative_process },
-          process
+          :administrative_process => administrative_process,
+          :add_fulfill => true
         )
       end
 
       it 'should fulfill_items_from_item_group with process' do
-        administrative_process.should_receive(:fulfill_purchase_solicitation_items).with(process)
+        administrative_process.should_receive(:fulfill_purchase_solicitation_items)
 
         subject.fulfill
       end

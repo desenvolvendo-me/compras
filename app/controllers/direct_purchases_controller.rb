@@ -43,10 +43,10 @@ class DirectPurchasesController < CrudController
   def create_resource(object)
     object.transaction do
       if super
-        PurchaseSolicitationBudgetAllocationItemFulfiller.new({
+        PurchaseSolicitationBudgetAllocationItemFulfiller.new(
           :purchase_solicitation_item_group => object.purchase_solicitation_item_group,
-          :direct_purchase => object
-        }, object).fulfill
+          :direct_purchase => object,
+          :add_fulfill => true).fulfill
 
         if params[:direct_purchase]
           PurchaseSolicitationItemGroupProcess.new(:new_item_group => new_item_group).update_status
@@ -76,8 +76,13 @@ class DirectPurchasesController < CrudController
           PurchaseSolicitationStatusChanger.change(new_purchase_solicitation)
           PurchaseSolicitationStatusChanger.change(old_purchase_solicitation)
 
-        PurchaseSolicitationBudgetAllocationItemFulfiller.new({:purchase_solicitation_item_group => old_item_group, :direct_purchase => object}).fulfill
-        PurchaseSolicitationBudgetAllocationItemFulfiller.new({:purchase_solicitation_item_group => new_item_group, :direct_purchase => object}, object).fulfill
+        PurchaseSolicitationBudgetAllocationItemFulfiller.new(
+          :purchase_solicitation_item_group => old_item_group,
+          :direct_purchase => object).fulfill
+        PurchaseSolicitationBudgetAllocationItemFulfiller.new(
+          :purchase_solicitation_item_group => new_item_group,
+          :direct_purchase => object,
+          :add_fulfill => true).fulfill
       end
     end
   end

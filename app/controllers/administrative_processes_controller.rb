@@ -54,10 +54,10 @@ class AdministrativeProcessesController < CrudController
             :new_item_group => new_item_group)
         end
 
-        PurchaseSolicitationBudgetAllocationItemFulfiller.new({
+        PurchaseSolicitationBudgetAllocationItemFulfiller.new(
           :purchase_solicitation_item_group => object.purchase_solicitation_item_group,
-          :administrative_process => object
-        }, object).fulfill
+          :administrative_process => object,
+          :add_fulfill => true).fulfill
 
         PurchaseSolicitationBudgetAllocationItemStatusChanger.new(
           :new_purchase_solicitation => new_purchase_solicitation,
@@ -92,7 +92,9 @@ class AdministrativeProcessesController < CrudController
           :purchase_solicitation_item_group => old_item_group
         ).fulfill
         PurchaseSolicitationBudgetAllocationItemFulfiller.new(
-          { :purchase_solicitation_item_group => new_item_group }, object
+          :purchase_solicitation_item_group => new_item_group,
+          :administrative_process => object,
+          :add_fulfill => true
         ).fulfill
 
         PurchaseSolicitationBudgetAllocationItemStatusChanger.new(

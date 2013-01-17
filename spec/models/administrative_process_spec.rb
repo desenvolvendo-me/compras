@@ -202,15 +202,31 @@ describe AdministrativeProcess do
               and_return([item, item2])
     end
 
-    let(:process)  { double(:process) }
     let(:item)  { double(:item) }
     let(:item2) { double(:item2) }
 
     it 'should fulfill items' do
-      item.should_receive(:fulfill).with(process)
-      item2.should_receive(:fulfill).with(process)
+      item.should_receive(:fulfill).with(subject)
+      item2.should_receive(:fulfill).with(subject)
 
-      subject.fulfill_purchase_solicitation_items(process)
+      subject.fulfill_purchase_solicitation_items
+    end
+  end
+
+  describe 'remove_fulfill_purchase_solicitation_items' do
+    before do
+      subject.should_receive(:purchase_solicitation_items).
+              and_return([item, item2])
+    end
+
+    let(:item)  { double(:item) }
+    let(:item2) { double(:item2) }
+
+    it 'should fulfill items' do
+      item.should_receive(:fulfill).with(nil)
+      item2.should_receive(:fulfill).with(nil)
+
+      subject.remove_fulfill_purchase_solicitation_items
     end
   end
 

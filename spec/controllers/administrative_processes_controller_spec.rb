@@ -166,7 +166,9 @@ describe AdministrativeProcessesController do
 
       PurchaseSolicitationBudgetAllocationItemFulfiller.
         should_receive(:new).
-        with({:purchase_solicitation_item_group => item_group}, administrative_process).
+        with(:purchase_solicitation_item_group => item_group,
+             :administrative_process => administrative_process,
+             :add_fulfill => true).
         and_return(fulfiller_instance)
 
       AdministrativeProcessBudgetAllocationCleaner.any_instance.
@@ -199,7 +201,7 @@ describe AdministrativeProcessesController do
         with(administrative_process.purchase_solicitation)
 
       put :update, :id => administrative_process.id, :administrative_process => {
-        :purchase_solicitation_id => purchase_solicitation.id }
+          :purchase_solicitation_id => purchase_solicitation.id }
     end
 
     it 'should change budget allocation items status with purchase solicitation' do
@@ -252,7 +254,6 @@ describe AdministrativeProcessesController do
 
       PurchaseSolicitationStatusChanger.
         should_receive(:change).with(nil)
-
 
       put :update, :id => administrative_process.id, :administrative_process => {
         :purchase_solicitation_id => purchase_solicitation.id }

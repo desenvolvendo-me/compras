@@ -91,9 +91,15 @@ class AdministrativeProcess < Compras::Model
     purchase_solicitation_items.attend!
   end
 
-  def fulfill_purchase_solicitation_items(process)
+  def fulfill_purchase_solicitation_items
     purchase_solicitation_items.each do |item|
-      item.fulfill(process)
+      item.fulfill(self)
+    end
+  end
+
+  def remove_fulfill_purchase_solicitation_items
+    purchase_solicitation_items.each do |item|
+      item.fulfill(nil)
     end
   end
 
