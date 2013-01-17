@@ -20,7 +20,8 @@ class SupplyAuthorizationGenerator
 
   private
 
-  attr_reader :direct_purchase_object, :supply_authorization_repository, :item_repository, :item_group_status_changer
+  attr_reader :direct_purchase_object, :supply_authorization_repository,
+              :item_repository, :item_group_status_changer
 
   delegate :purchase_solicitation, :purchase_solicitation_item_group,
            :to => :direct_purchase_object, :allow_nil => true
