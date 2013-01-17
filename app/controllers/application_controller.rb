@@ -64,11 +64,7 @@ class ApplicationController < ActionController::Base
     if request.xhr?
       render :nothing => true, :status => :unauthorized
     else
-      if Rails.env.test?
-        redirect_to '/401.html'
-      else
-        redirect_to '/compras/401.html'
-      end
+      render :file => "public/401", :layout => nil, :status => 401
     end
   end
 end
