@@ -23,12 +23,12 @@ class PurchaseSolicitationBudgetAllocationItemStatusChanger
   end
 
   def change(item_repository = PurchaseSolicitationBudgetAllocationItem)
-    item_repository.group_by_ids!(new_item_ids, purchase_solicitation_item_group_id) if new_item_ids.any?
 
-    item_repository.pending_by_ids!(removed_item_ids) if old_item_ids.any?
+    group_items_by_ids(item_repository)
+    pending_items_by_ids(item_repository)
 
-    pending_items_by_fulfiller(item_repository, direct_purchase) if old_purchase_solicitation
-    pending_items_by_fulfiller(item_repository, administrative_process) if old_purchase_solicitation
+    pending_items_by_fulfiller(item_repository, direct_purchase)
+    pending_items_by_fulfiller(item_repository, administrative_process)
 
     if new_purchase_solicitation
       if attend_items?(new_purchase_solicitation)
@@ -58,6 +58,18 @@ class PurchaseSolicitationBudgetAllocationItemStatusChanger
               :new_purchase_solicitation_item_group, :old_purchase_solicitation_item_group,
               :direct_purchase, :administrative_process
 
+  def group_items_by_ids
+    return unless new_item_ids.any?
+
+    item_repository.group_by_ids!(new_item_ids, purchase_solicitation_item_group_id)
+  end
+
+  def pending_items_by_ids
+    return unless old_item_ids.any?
+
+    item_repository.pending_by_ids!(removed_item_ids)
+  end
+
   def removed_item_ids
     old_item_ids - new_item_ids
   end
@@ -81,7 +93,7 @@ class PurchaseSolicitationBudgetAllocationItemStatusChanger
   end
 
   def pending_items_by_fulfiller(item_repository, object)
-    return unless object
+    return unless object && old_purchase_solicitation
 
     item_repository.by_fulfiller(object.id, object.class.name).pending!
   end
