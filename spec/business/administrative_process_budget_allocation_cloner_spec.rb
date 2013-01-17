@@ -1,4 +1,5 @@
-require 'spec_helper'
+require 'unit_helper'
+require 'app/business/administrative_process_budget_allocation_cloner'
 
 describe AdministrativeProcessBudgetAllocationCloner do
   subject do

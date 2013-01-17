@@ -1,4 +1,5 @@
-require 'spec_helper'
+require 'unit_helper'
+require 'app/business/administrative_process_item_group_cloner'
 
 describe AdministrativeProcessItemGroupCloner do
   let(:budget_allocation_cloner) { double(:budget_allocation_cloner) }
