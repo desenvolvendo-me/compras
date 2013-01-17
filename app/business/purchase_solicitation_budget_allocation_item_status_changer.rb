@@ -20,15 +20,15 @@ class PurchaseSolicitationBudgetAllocationItemStatusChanger
     @old_purchase_solicitation_item_group = options[:old_purchase_solicitation_item_group]
     @direct_purchase = options[:direct_purchase]
     @administrative_process = options[:administrative_process]
+    @item_repository = options[:item_repository] || PurchaseSolicitationBudgetAllocationItem
   end
 
-  def change(item_repository = PurchaseSolicitationBudgetAllocationItem)
+  def change
+    group_items_by_ids
+    pending_items_by_ids
 
-    group_items_by_ids(item_repository)
-    pending_items_by_ids(item_repository)
-
-    pending_items_by_fulfiller(item_repository, direct_purchase)
-    pending_items_by_fulfiller(item_repository, administrative_process)
+    pending_items_by_fulfiller(direct_purchase)
+    pending_items_by_fulfiller(administrative_process)
 
     if new_purchase_solicitation
       if attend_items?(new_purchase_solicitation)
@@ -56,7 +56,7 @@ class PurchaseSolicitationBudgetAllocationItemStatusChanger
   attr_reader :new_item_ids, :old_item_ids, :new_purchase_solicitation,
               :old_purchase_solicitation, :purchase_solicitation_item_group_id,
               :new_purchase_solicitation_item_group, :old_purchase_solicitation_item_group,
-              :direct_purchase, :administrative_process
+              :direct_purchase, :administrative_process, :item_repository
 
   def group_items_by_ids
     return unless new_item_ids.any?
@@ -92,7 +92,7 @@ class PurchaseSolicitationBudgetAllocationItemStatusChanger
     new_purchase_solicitation.administrative_process.attend_purchase_solicitation_items
   end
 
-  def pending_items_by_fulfiller(item_repository, object)
+  def pending_items_by_fulfiller(object)
     return unless object && old_purchase_solicitation
 
     item_repository.by_fulfiller(object.id, object.class.name).pending!
