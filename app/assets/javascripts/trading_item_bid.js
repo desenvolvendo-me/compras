@@ -1,3 +1,7 @@
+$('#trading_item_bid_submit').click(function() {
+  return confirm(confirmationMessage());
+});
+
 function confirmationMessage(){
   var statusChecked = $('input[name="trading_item_bid[status]"]:checked').val();
   var bidderName = $('#trading_item_bid_bidder').val();
