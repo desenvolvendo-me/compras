@@ -27,6 +27,7 @@ class PurchaseSolicitation < Compras::Model
   has_many :purchase_solicitation_liberations, :dependent => :destroy, :order => :sequence, :inverse_of => :purchase_solicitation
   has_many :purchase_solicitation_item_group_material_purchase_solicitations,
            :dependent => :destroy
+
   has_one  :annul, :class_name => 'ResourceAnnul', :as => :annullable, :dependent => :destroy
   has_one  :direct_purchase
   has_one  :administrative_process
