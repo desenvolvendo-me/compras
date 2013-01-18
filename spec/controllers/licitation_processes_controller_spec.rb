@@ -75,7 +75,7 @@ describe LicitationProcessesController do
       LicitationProcess.any_instance.stub(:administrative_process).and_return(administrative_process)
       LicitationProcess.any_instance.stub(:licitation_number).and_return(2)
 
-      post :create, :licitation_process => { :administrative_process_id => administrative_process.id, :delivery_location_id => delivery_location.id }
+      post :create, :licitation_process => { :administrative_process_id => administrative_process.id }
 
       expect(assigns(:licitation_process).licitation_number).to eq 2
     end
