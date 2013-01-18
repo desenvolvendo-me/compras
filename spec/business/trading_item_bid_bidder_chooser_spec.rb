@@ -9,7 +9,8 @@ require 'app/business/trading_item_bid_bidder_chooser'
 
 describe TradingItemBidBidderChooser do
   subject do
-    described_class.new(trading_item, current_stage, trading_item_bidders)
+    described_class.new(trading_item, :current_stage => current_stage,
+                        :trading_item_bidders => trading_item_bidders)
   end
 
   let(:trading_item) { double(:trading_item) }

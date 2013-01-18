@@ -11,7 +11,7 @@ class TradingItemBidProposalsController < CrudController
     object.trading_item = @parent
     object.stage  = TradingItemBidStage::PROPOSALS
     object.status = TradingItemBidStatus::WITH_PROPOSAL
-    object.bidder = TradingItemBidBidderChooser.new(@parent, object.stage).choose
+    object.bidder = TradingItemBidBidderChooser.new(@parent, :current_stage => object.stage).choose
     object.amount = 0
 
     super
@@ -39,7 +39,7 @@ class TradingItemBidProposalsController < CrudController
     object.transaction do
       object.stage  = TradingItemBidStage::PROPOSALS
       object.round  = 0
-      object.bidder = TradingItemBidBidderChooser.new(@parent, object.stage).choose
+      object.bidder = TradingItemBidBidderChooser.new(@parent, :current_stage => object.stage).choose
 
       super
     end

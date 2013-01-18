@@ -1,8 +1,8 @@
 class TradingItemBidBidderChooser
-  def initialize(trading_item, current_stage = nil, trading_item_bidders = TradingItemBidders.new(trading_item, trading_item.bidders.enabled) )
+  def initialize(trading_item, options = {})
     @trading_item = trading_item
-    @trading_item_bidders = trading_item_bidders
-    @current_stage = current_stage
+    @trading_item_bidders = options.fetch(:trading_item_bidders) { TradingItemBidders.new(trading_item, trading_item.bidders.enabled) }
+    @current_stage = options[:current_stage]
   end
 
   def choose

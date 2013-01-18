@@ -12,7 +12,7 @@ class TradingItemBidNegotiationsController < CrudController
     object = build_resource
     object.trading_item = @parent
     object.stage  = TradingItemBidStage::NEGOTIATION
-    object.bidder = TradingItemBidBidderChooser.new(@parent, object.stage).choose
+    object.bidder = TradingItemBidBidderChooser.new(@parent, :current_stage => object.stage).choose
     object.status = TradingItemBidStatus::WITH_PROPOSAL
     object.amount = 0
 
@@ -40,7 +40,7 @@ class TradingItemBidNegotiationsController < CrudController
   def create_resource(object)
     object.transaction do
       object.stage  = TradingItemBidStage::NEGOTIATION
-      object.bidder = TradingItemBidBidderChooser.new(@parent, object.stage).choose
+      object.bidder = TradingItemBidBidderChooser.new(@parent, :current_stage => object.stage).choose
       object.round  = 0
 
       super
