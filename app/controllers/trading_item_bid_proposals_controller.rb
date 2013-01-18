@@ -5,7 +5,6 @@ class TradingItemBidProposalsController < CrudController
   actions :new, :create, :edit, :update
 
   before_filter :deny_when_on_another_stage, :only => [:new, :create]
-  before_filter :deny_when_cannot_edit, :only => [:edit, :update]
 
   def new
     object = build_resource
@@ -64,14 +63,6 @@ class TradingItemBidProposalsController < CrudController
     get_parent
 
     unless TradingItemBidStageCalculator.new(@parent).stage_of_proposals?
-      raise ActiveRecord::RecordNotFound
-    end
-  end
-
-  def deny_when_cannot_edit
-    get_parent
-
-    unless TradingItemBidStageCalculator.new(@parent).show_proposal_report?
       raise ActiveRecord::RecordNotFound
     end
   end

@@ -20,10 +20,6 @@ class TradingItemBidStageCalculator
     !stage_of_proposals? && !stage_of_negotiation?
   end
 
-  def show_proposal_report?
-    stage_of_round_of_bids? && trading_item_bids.at_stage_of_round_of_bids.empty?
-  end
-
   private
 
   attr_reader :trading_item, :trading_item_bidders
