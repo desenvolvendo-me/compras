@@ -31,6 +31,7 @@ class PurchaseSolicitation < Compras::Model
   has_one  :annul, :class_name => 'ResourceAnnul', :as => :annullable, :dependent => :destroy
   has_one  :direct_purchase
   has_one  :administrative_process
+  has_one  :licitation_process, :through => :administrative_process
 
   accepts_nested_attributes_for :purchase_solicitation_budget_allocations, :allow_destroy => true
 

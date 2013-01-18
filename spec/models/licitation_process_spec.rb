@@ -23,6 +23,7 @@ require 'app/models/reserve_fund'
 require 'app/models/indexer'
 require 'app/models/price_registration'
 require 'app/models/trading'
+require 'app/models/delivery_location'
 
 describe LicitationProcess do
   it 'should return process/year as to_s' do
@@ -36,6 +37,7 @@ describe LicitationProcess do
   it { should belong_to :payment_method }
   it { should belong_to :readjustment_index }
   it { should belong_to :judgment_form }
+  it { should belong_to :delivery_location }
 
   it { should have_and_belong_to_many(:document_types) }
   it { should have_many(:licitation_notices).dependent(:destroy) }
@@ -58,6 +60,7 @@ describe LicitationProcess do
   it { should have_one(:purchase_solicitation_item_group) }
 
   it { should delegate(:summarized_object).to(:administrative_process).prefix(true) }
+  it { should delegate(:delivery_location).to(:purchase_solicitation).prefix(true) }
 
   it { should validate_presence_of :year }
   it { should validate_presence_of :process_date }

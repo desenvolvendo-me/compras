@@ -7,7 +7,7 @@ class LicitationProcess < Compras::Model
                   :envelope_opening_time, :document_type_ids, :type_of_calculation,
                   :pledge_type, :administrative_process_attributes,
                   :period, :period_unit, :expiration, :expiration_unit,
-                  :judgment_form_id,
+                  :judgment_form_id, :delivery_location_id,
                   :disqualify_by_documentation_problem, :disqualify_by_maximum_value,
                   :consider_law_of_proposals, :price_registration, :status
 
@@ -30,6 +30,7 @@ class LicitationProcess < Compras::Model
   belongs_to :payment_method
   belongs_to :readjustment_index, :class_name => 'Indexer'
   belongs_to :judgment_form
+  belongs_to :delivery_location
 
   has_and_belongs_to_many :document_types, :join_table => :compras_document_types_compras_licitation_processes
 
@@ -62,6 +63,8 @@ class LicitationProcess < Compras::Model
   delegate :administrative_process_budget_allocations, :items,
            :is_available_for_licitation_process_classification?,
            :to => :administrative_process, :allow_nil => true
+  delegate :delivery_location, :to => :purchase_solicitation, :allow_nil => true,
+           :prefix => true
 
   validates :process_date, :administrative_process, :capability, :period,
             :period_unit, :expiration, :expiration_unit, :payment_method,

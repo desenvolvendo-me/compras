@@ -30,4 +30,14 @@ class PurchaseSolicitationsController < CrudController
       success.html { redirect_to edit_resource_path }
     end
   end
+
+  protected
+
+  def update_resource(object, attributes)
+    object.transaction do
+      if super
+        DeliveryLocationChanger.change(object.licitation_process, object.delivery_location)
+      end
+    end
+  end
 end

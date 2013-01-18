@@ -32,6 +32,7 @@ describe PurchaseSolicitation do
   it { should have_one(:annul).dependent(:destroy) }
   it { should have_one(:direct_purchase) }
   it { should have_one(:administrative_process) }
+  it { should have_one(:licitation_process).through(:administrative_process) }
   it { should belong_to :responsible }
   it { should belong_to :delivery_location }
   it { should belong_to :liberator }

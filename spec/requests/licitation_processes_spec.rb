@@ -12,7 +12,9 @@ feature "LicitationProcesses" do
                   'capabilities',
                   'document_types',
                   'materials',
-                  'licitation_process_publications']
+                  'licitation_process_publications',
+                  'purchase_solicitations',
+                  'delivery_locations']
     sign_in
   end
 
@@ -1349,5 +1351,117 @@ feature "LicitationProcesses" do
     click_link 'Voltar à listagem'
 
     expect(page).to have_link '1/2012'
+  end
+
+  scenario 'fill delivery_location automatically when has a purchase_solicitation' do
+    AdministrativeProcess.make!(:compra_com_itens,
+      :purchase_solicitation => PurchaseSolicitation.make!(:reparo_liberado))
+    Capability.make!(:reforma)
+    PaymentMethod.make!(:dinheiro)
+    DocumentType.make!(:fiscal)
+    BudgetAllocation.make!(:alocacao)
+    Material.make!(:antivirus)
+    Indexer.make!(:xpto)
+    DeliveryLocation.make!(:health)
+
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    within_records do
+      click_link '1/2012'
+    end
+
+    expect(page).to have_field 'Local para entrega', :with => 'Secretaria da Educação'
+
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+
+    within_records do
+      click_link '1/2012'
+    end
+
+    click_link 'Novo processo licitatório'
+
+    within_tab 'Principal' do
+      expect(page).to have_field 'Local de entrega', :with => 'Secretaria da Educação'
+      fill_in 'Ano', :with => '2012'
+      fill_in 'Data do processo', :with => '21/03/2012'
+      select 'Global', :from => 'Tipo de empenho'
+      check 'Registro de preço'
+      select 'Menor preço total por item', :from => 'Tipo da apuração'
+      fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
+      fill_in 'Validade da proposta', :with => '5'
+      select 'dia/dias', :from => 'Período da validade da proposta'
+      fill_modal 'Índice de reajuste', :with => 'XPTO'
+      fill_in 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
+      fill_in 'Hora da entrega', :with => '14:00'
+      fill_in 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow)
+      fill_in 'Hora da abertura', :with => '14:00'
+      fill_in 'Prazo de entrega', :with => '1'
+      select 'ano/anos', :from => 'Período do prazo de entrega'
+      fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
+      fill_in 'Valor da caução', :with => '50,00'
+      select 'Favorável', :from => 'Parecer jurídico'
+      fill_in 'Data do parecer', :with => '30/03/2012'
+      fill_in 'Data do contrato', :with => '31/03/2012'
+      fill_in 'Validade do contrato (meses)', :with => '5'
+      fill_in 'Observações gerais', :with => 'observacoes'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Processo Licitatório criado com sucesso.'
+
+    expect(page).to have_notice 'Processo Licitatório criado com sucesso.'
+
+    within_tab 'Principal' do
+      expect(page).to have_field 'Local de entrega', :with => 'Secretaria da Educação'
+
+      fill_modal 'Local de entrega', :with => 'Secretaria da Saúde', :field => "Descrição"
+    end
+
+    expect(page).to have_notice 'Processo Licitatório criado com sucesso.'
+
+    within_tab 'Principal' do
+      expect(page).to have_field 'Local de entrega', :with => 'Secretaria da Saúde'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Processo Licitatório editado com sucesso.'
+
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    within_records do
+      click_link '1/2012'
+    end
+
+    expect(page).to have_field 'Local para entrega', :with => 'Secretaria da Saúde'
+
+     navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+
+    within_records do
+      click_link '1/2012'
+    end
+
+    click_link 'Editar processo licitatório'
+
+    within_tab 'Principal' do
+      clear_modal 'Local de entrega'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Processo Licitatório editado com sucesso.'
+
+    within_tab 'Principal' do
+      expect(page).to have_field 'Local de entrega', :with => ''
+    end
+
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    within_records do
+      click_link '1/2012'
+    end
+
+    expect(page).to have_field 'Local para entrega', :with => 'Secretaria da Saúde'
   end
 end

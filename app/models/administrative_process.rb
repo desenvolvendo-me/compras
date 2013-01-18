@@ -24,6 +24,7 @@ class AdministrativeProcess < Compras::Model
 
   has_one  :licitation_process, :dependent => :restrict
   has_one  :administrative_process_liberation, :dependent => :destroy
+  has_one  :delivery_location, :through => :purchase_solicitation
   has_many :administrative_process_budget_allocations, :dependent => :destroy, :order => :id
   has_many :items, :through => :administrative_process_budget_allocations, :order => :id
   has_many :materials, :through => :items

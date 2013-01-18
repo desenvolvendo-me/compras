@@ -17,6 +17,7 @@ class LicitationProcessesController < CrudController
     object.modality = @administrative_process.modality
     object.judgment_form = @administrative_process.judgment_form
     object.status = LicitationProcessStatus::WAITING_FOR_OPEN
+    object.delivery_location = @administrative_process.delivery_location
 
     super
   end
@@ -56,21 +57,30 @@ class LicitationProcessesController < CrudController
   end
 
   def create_resource(object)
-    BidderStatusChanger.new(object).change
+    object.transaction do
+      BidderStatusChanger.new(object).change
 
-    object.licitation_number = object.next_licitation_number
-    object.status = LicitationProcessStatus::WAITING_FOR_OPEN
+      object.licitation_number = object.next_licitation_number
+      object.status = LicitationProcessStatus::WAITING_FOR_OPEN
 
-    super
+      if super
+        DeliveryLocationChanger.change(object.purchase_solicitation, object.delivery_location)
+      end
+    end
   end
 
   def update_resource(object, attributes)
     return unless object.updatable?
-    object.localized.assign_attributes(*attributes)
 
-    BidderStatusChanger.new(object).change
+    object.transaction do
+      object.localized.assign_attributes(*attributes)
 
-    object.save
+      BidderStatusChanger.new(object).change
+
+      if object.save
+        DeliveryLocationChanger.change(object.purchase_solicitation, object.delivery_location)
+      end
+    end
   end
 
   def block_administrative_process_not_allowed

@@ -26,14 +26,25 @@ describe LicitationProcessesController do
   end
 
   context "with administrative process" do
-    let :administrative_process do
-      AdministrativeProcess.make!(:compra_de_cadeiras)
+    let :purchase_solicitation do
+      PurchaseSolicitation.make!(:reparo)
+    end
+
+    let(:administrative_process) do
+      AdministrativeProcess.make!(:compra_com_itens,
+        :purchase_solicitation => purchase_solicitation)
     end
 
     it 'uses current year as default value for year' do
       get :new, :administrative_process_id => administrative_process.id
 
       expect(assigns(:licitation_process).year).to eq Date.current.year
+    end
+
+    it 'uses delivery location from purchase_solicitation year as default value for delivery location' do
+      get :new, :administrative_process_id => administrative_process.id
+
+      expect(assigns(:licitation_process).delivery_location).to eq purchase_solicitation.delivery_location
     end
 
     it 'uses current year as default value for judgment form' do
@@ -64,16 +75,40 @@ describe LicitationProcessesController do
       LicitationProcess.any_instance.stub(:administrative_process).and_return(administrative_process)
       LicitationProcess.any_instance.stub(:licitation_number).and_return(2)
 
-      post :create, :licitation_process => { :administrative_process_id => administrative_process.id }
+      post :create, :licitation_process => { :administrative_process_id => administrative_process.id, :delivery_location_id => delivery_location.id }
 
       expect(assigns(:licitation_process).licitation_number).to eq 2
+    end
+
+    it 'should update delivery_location of purchase_solicitation' do
+      delivery_location = DeliveryLocation.make!(:education)
+
+      LicitationProcess.any_instance.should_receive(:transaction).and_yield
+      LicitationProcess.any_instance.should_receive(:save).and_return(true)
+      LicitationProcess.any_instance.should_receive(:to_param).and_return("1")
+
+      DeliveryLocationChanger.should_receive(:change).
+                              with(purchase_solicitation, delivery_location)
+
+      post :create, :licitation_process => { :administrative_process_id => administrative_process.id, :delivery_location_id => delivery_location.id }
     end
   end
 
   describe 'PUT #update' do
     context "with licitation_process" do
+      let :purchase_solicitation do
+        PurchaseSolicitation.make!(:reparo)
+      end
+
+      let(:administrative_process) do
+        AdministrativeProcess.make!(:compra_com_itens,
+          :purchase_solicitation => purchase_solicitation)
+      end
+
       let :licitation_process do
-        LicitationProcess.make!(:processo_licitatorio)
+        LicitationProcess.make!(:processo_licitatorio,
+          :administrative_process => administrative_process,
+          :delivery_location => purchase_solicitation.delivery_location)
       end
 
       let :licitation_process_classifications do
@@ -95,6 +130,9 @@ describe LicitationProcessesController do
 
       it 'should update any field when has not publication or when publication allow update licitation process' do
         LicitationProcess.any_instance.stub(:updatable?).and_return(true)
+
+        DeliveryLocationChanger.should_receive(:change).
+                                with(purchase_solicitation, licitation_process.delivery_location)
 
         put :update, :id => licitation_process.id, :licitation_process => { :observations => "Descrição do objeto" }
 

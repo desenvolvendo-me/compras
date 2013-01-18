@@ -27,6 +27,7 @@ describe AdministrativeProcess do
 
   it { should have_one(:licitation_process).dependent(:restrict) }
   it { should have_one(:administrative_process_liberation).dependent(:destroy) }
+  it { should have_one(:delivery_location).through(:purchase_solicitation) }
   it { should have_many(:administrative_process_budget_allocations).dependent(:destroy) }
   it { should have_many(:items).through(:administrative_process_budget_allocations) }
   it { should have_many(:materials).through(:items) }

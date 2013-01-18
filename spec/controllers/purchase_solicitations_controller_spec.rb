@@ -67,5 +67,17 @@ describe PurchaseSolicitationsController do
 
       expect(response).to redirect_to(edit_purchase_solicitation_path(purchase_solicitation))
     end
+
+    it 'should update licitation_proecess delivery_location' do
+      purchase_solicitation  = PurchaseSolicitation.make!(:reparo)
+      administrative_process = AdministrativeProcess.make!(:compra_com_itens,
+                                                           :purchase_solicitation => purchase_solicitation)
+      licitation_process    = LicitationProcess.make!(:processo_licitatorio,
+                                                       :administrative_process => administrative_process)
+
+      DeliveryLocationChanger.should_receive(:change).with(licitation_process, purchase_solicitation.delivery_location)
+
+      put :update, :id => purchase_solicitation.id
+    end
   end
 end
