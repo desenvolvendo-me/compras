@@ -54,6 +54,7 @@ end
 
 group :development, :test do
   gem 'rspec-rails', '2.12.0'
+  gem 'pry', '0.9.10'
 end
 
 group :test do
@@ -63,8 +64,4 @@ group :test do
   gem 'capybara', '1.1.2'
   gem 'database_cleaner', '0.9.1'
   gem 'poltergeist', '0.7.0'
-end
-
-group :test, :development do
-  gem 'pry', '0.9.10'
 end
