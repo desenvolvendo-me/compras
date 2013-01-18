@@ -147,7 +147,7 @@ class TradingItemDecorator
   def bidder_disabled_for_last_bid?
     return unless last_bid
 
-    last_bid.bidder.disabled
+    bidder_for_last_bid.disabled
   end
 
   def bidder_for_last_bid
