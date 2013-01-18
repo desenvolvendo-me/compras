@@ -71,12 +71,6 @@ describe LicitationProcessesController do
   end
 
   describe 'PUT #update' do
-    let :licitation_process do
-      double(:licitation_process,
-             :id => 1
-      )
-    end
-
     context "with licitation_process" do
       let :licitation_process do
         LicitationProcess.make!(:processo_licitatorio)
