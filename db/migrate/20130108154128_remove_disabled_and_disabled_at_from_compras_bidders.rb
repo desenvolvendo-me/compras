@@ -1,4 +1,7 @@
 class RemoveDisabledAndDisabledAtFromComprasBidders < ActiveRecord::Migration
+  class Bidder < Compras::Model;end
+  class BidderDisqualification < Compras::Model;end
+
   def change
     Bidder.where(:disabled => true).find_each do |bidder|
       BidderDisqualification.create!(
