@@ -1,7 +1,7 @@
 # encoding: UTF-8
 
-class CreditorUserCreatorMailer < ActionMailer::Base
-  def price_collection_invite(user, price_collection)
+class PriceCollectionMailer < ActionMailer::Base
+  def invite_new_creditor(user, price_collection)
     @user = user
     @price_collection = price_collection
 

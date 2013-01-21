@@ -1,7 +1,7 @@
 # encoding: utf-8
 require "spec_helper"
 
-describe CreditorUserCreatorMailer do
+describe PriceCollectionMailer do
   let :user do
     stub_model(User, :id => 1, :email => 'gabriel.sobrinho@gmail.com', :confirmation_token => 'xyz123').tap do |user|
       user.stub(:name => 'Gabriel Sobrinho')
@@ -12,9 +12,9 @@ describe CreditorUserCreatorMailer do
     double(:to_s => '1/2012')
   end
 
-  describe '#price_collection_invite' do
+  describe '#price_collection_invite_new_creditor' do
     let :mail do
-      CreditorUserCreatorMailer.price_collection_invite(user, price_collection)
+      described_class.invite_new_creditor(user, price_collection)
     end
 
     it 'should render subject' do

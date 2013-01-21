@@ -1,6 +1,8 @@
 #encoding: utf-8
 require 'unit_helper'
-require './app/business/creditor_user_creator'
+require 'enumerate_it'
+require 'app/enumerations/authenticable_type'
+require 'app/business/creditor_user_creator'
 
 describe CreditorUserCreator do
   let :price_collection do
@@ -46,7 +48,10 @@ describe CreditorUserCreator do
     double('Creditor User Creator Mailer')
   end
 
-  subject{ described_class.new(price_collection, 'Creditor', user_repository, mailer) }
+  subject do
+    described_class.new(price_collection, :user_repository => user_repository,
+                        :mailer => mailer)
+  end
 
   context 'none of the users exists' do
     before do
@@ -56,9 +61,13 @@ describe CreditorUserCreator do
 
     it 'generates a user for each creditor in price_collection' do
       mailer.as_null_object
+      creditor_1_info.merge!(:authenticable_id => 1,
+                             :authenticable_type => AuthenticableType::CREDITOR)
+      creditor_2_info.merge!(:authenticable_id => 2,
+                             :authenticable_type => AuthenticableType::CREDITOR)
 
-      user_repository.should_receive(:create!).with(creditor_1_info.merge(:authenticable_id => 1, :authenticable_type => 'Creditor'))
-      user_repository.should_receive(:create!).with(creditor_2_info.merge(:authenticable_id => 2, :authenticable_type => 'Creditor'))
+      user_repository.should_receive(:create!).with(creditor_1_info)
+      user_repository.should_receive(:create!).with(creditor_2_info)
 
       subject.generate
     end
@@ -66,8 +75,12 @@ describe CreditorUserCreator do
     it 'sends an email for each generated user' do
       user_repository.stub(:create!).and_return(user_1, user_2)
 
-      mailer.should_receive(:price_collection_invite).with(user_1, price_collection).and_return(stub(:deliver => true))
-      mailer.should_receive(:price_collection_invite).with(user_2, price_collection).and_return(stub(:deliver => true))
+      mailer.should_receive(:invite_new_creditor).
+             with(user_1, price_collection).
+             and_return(stub(:deliver => true))
+      mailer.should_receive(:invite_new_creditor).
+             with(user_2, price_collection).
+             and_return(stub(:deliver => true))
 
       subject.generate
     end
@@ -82,17 +95,28 @@ describe CreditorUserCreator do
     it 'generates a user for each creditor in price_collection' do
       mailer.as_null_object
 
-      user_repository.should_not_receive(:create!).with(creditor_1_info.merge(:authenticable_id => 1, :authenticable_type => 'Creditor'))
-      user_repository.should_receive(:create!).with(creditor_2_info.merge(:authenticable_id => 2, :authenticable_type => 'Creditor'))
+      creditor_1_info.merge!(:authenticable_id => 1,
+                             :authenticable_type => AuthenticableType::CREDITOR)
+      creditor_2_info.merge!(:authenticable_id => 2,
+                             :authenticable_type => AuthenticableType::CREDITOR)
+
+      user_repository.should_not_receive(:create!).with(creditor_1_info)
+      user_repository.should_receive(:create!).with(creditor_2_info)
 
       subject.generate
     end
 
     it 'sends an email for generated user only' do
-      user_repository.stub(:create!).with(creditor_2_info.merge(:authenticable_id => 2, :authenticable_type => 'Creditor')).and_return(user_2)
+      creditor_2_info.merge!(:authenticable_id => 2,
+                             :authenticable_type => AuthenticableType::CREDITOR)
 
-      mailer.should_not_receive(:price_collection_invite).with(user_1, price_collection)
-      mailer.should_receive(:price_collection_invite).with(user_2, price_collection).and_return(stub(:deliver => true))
+      user_repository.stub(:create!).with(creditor_2_info).and_return(user_2)
+
+      mailer.should_not_receive(:invite_new_creditor).
+             with(user_1, price_collection)
+
+      mailer.should_receive(:invite_new_creditor).
+             with(user_2, price_collection).and_return(stub(:deliver => true))
 
       subject.generate
     end
