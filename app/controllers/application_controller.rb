@@ -16,6 +16,10 @@ class ApplicationController < ActionController::Base
     Prefecture.last
   end
 
+  def current_customer
+    @current_customer ||= Customer.find_by_domain!(request.headers['X-Customer'] || request.host)
+  end
+
   def root_url
     "#{request.protocol}#{request.host_with_port}"
   end
@@ -48,8 +52,7 @@ class ApplicationController < ActionController::Base
   end
 
   def handle_customer(&block)
-    customer = Customer.find_by_domain!(request.headers['X-Customer'])
-    customer.using_connection(&block)
+    current_customer.using_connection(&block)
   end
 
   def handle_customer?
