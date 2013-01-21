@@ -25,5 +25,4 @@ module AdministrativeProcessesHelper
       link_to('Liberação', edit_administrative_process_liberation_path(resource.administrative_process_liberation), :class => 'button secondary')
     end
   end
-
 end
