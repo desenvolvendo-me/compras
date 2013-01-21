@@ -22,6 +22,7 @@ pt-BR:
         expiration: "Vencimento"
         creditors: "Fornecedor"
         type_of_calculation: "Tipo de apuração"
+        code_and_year: 'Código/Ano'
 
   price_collection:
     messages:
