@@ -63,7 +63,7 @@ describe Decore::Header do
     end
 
     describe '.header_link_attributes' do
-      it 'should be empty' do
+      it 'should return the first attribute' do
         expect(HeaderWithoutOptionsDecorator.header_link_attributes).to eq Set[:name]
       end
     end
