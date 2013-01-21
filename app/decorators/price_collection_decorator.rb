@@ -6,7 +6,7 @@ class PriceCollectionDecorator
   include ActionView::Helpers::NumberHelper
   include ActionView::Helpers::TranslationHelper
 
-  attr_header :status
+  attr_header :code_and_year, :status
 
   def all_price_collection_classifications_groupped
     all_price_collection_classifications.group_by(&:price_collection_proposal)

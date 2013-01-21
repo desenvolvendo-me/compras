@@ -10,6 +10,7 @@ describe PriceCollectionDecorator do
 
     it 'should have budget_structure, creditor and status' do
       expect(described_class.header_attributes).to include :status
+      expect(described_class.header_attributes).to include :code_and_year
     end
   end
 

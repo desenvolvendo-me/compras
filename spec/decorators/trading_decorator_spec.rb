@@ -29,6 +29,10 @@ describe TradingDecorator do
       expect(described_class.headers?).to be_true
     end
 
+    it 'should have code_and_year' do
+      expect(described_class.header_attributes).to include :code_and_year
+    end
+
     it 'should have created_at' do
       expect(described_class.header_attributes).to include :created_at_date
     end

@@ -373,7 +373,7 @@ feature "PurchaseSolicitationItemGroups" do
     navigate 'Processos de Compra > Agrupamentos de Itens de Solicitações de Compra'
 
     within_records do
-      expect(page).to have_content 'Agrupamento de Item de Solicitação de Compra'
+      expect(page).to have_content 'Descrição'
       expect(page).to have_content 'Situação'
 
       within 'tbody tr:nth-child(1)' do

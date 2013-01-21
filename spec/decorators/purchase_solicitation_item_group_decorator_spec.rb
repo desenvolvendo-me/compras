@@ -123,4 +123,15 @@ describe PurchaseSolicitationItemGroupDecorator do
       expect(subject.not_annullable_message).to be_nil
     end
   end
+
+  context 'with attr_header' do
+    it 'should have headers' do
+      expect(described_class.headers?).to be_true
+    end
+
+    it 'should have budget_structure, creditor and status' do
+      expect(described_class.header_attributes).to include :description
+      expect(described_class.header_attributes).to include :status
+    end
+  end
 end

@@ -4,7 +4,7 @@ class PurchaseSolicitationItemGroupDecorator
   include Decore::Header
   include ActionView::Helpers::TranslationHelper
 
-  attr_header :status
+  attr_header :description, :status
 
   def allow_submit_button?
     !annulled? && editable?
