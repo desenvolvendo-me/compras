@@ -924,7 +924,7 @@ feature "PriceCollections" do
     navigate 'Processos de Compra > Coletas de Preços'
 
     within_records do
-      expect(page).to have_content 'Coleta de Preços'
+      expect(page).to have_content 'Código/Ano'
       expect(page).to have_content 'Status'
 
       within 'tbody tr' do

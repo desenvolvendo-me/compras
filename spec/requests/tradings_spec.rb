@@ -746,7 +746,7 @@ feature "Tradings" do
 
     within_records do
       within 'thead tr:nth-child(1)' do
-        expect(page).to have_content 'Pregão Presencial'
+        expect(page).to have_content 'Código/Ano'
         expect(page).to have_content 'Data'
         expect(page).to have_content 'Processo licitatório'
         expect(page).to have_content 'Unidade licitante'

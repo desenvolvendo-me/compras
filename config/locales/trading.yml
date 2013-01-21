@@ -18,6 +18,7 @@ pt-BR:
         preamble: "Preâmbulo"
         closing_of_accreditation: "Fechamento do credenciamento"
         trading_registry: "Registro do pregão"
+        code_and_year: "Código/Ano"
 
   trading:
     messages:

@@ -36,10 +36,6 @@ describe Decore::Header do
       expect(HeaderDecorator.respond_to?(:headers?)).to be_true
     end
 
-    it 'should respond_to to_s?' do
-      expect(HeaderDecorator.respond_to?(:to_s?)).to be_true
-    end
-
     it 'should respond_to link?' do
       expect(HeaderDecorator.respond_to?(:link?)).to be_true
     end
@@ -51,19 +47,7 @@ describe Decore::Header do
     it 'should respond_to header_link_attributes?' do
       expect(HeaderDecorator.respond_to?(:header_link_attributes)).to be_true
     end
-
-    it 'should not allow to_s false without link option' do
-      expect {
-        class InvalidDecorator
-          include Decore
-          include Proxy
-          include Header
-
-          attr_header :name, :year, :height, :to_s => false
-        end
-        }.to raise_exception(ArgumentError)
-      end
-    end
+  end
 
   context 'without options' do
     describe '.header_attributes' do
@@ -80,13 +64,13 @@ describe Decore::Header do
 
     describe '.header_link_attributes' do
       it 'should be empty' do
-        expect(HeaderWithoutOptionsDecorator.header_link_attributes).to eq []
+        expect(HeaderWithoutOptionsDecorator.header_link_attributes).to eq Set[:name]
       end
     end
 
     describe '.link?' do
-      it 'be false when the field is not a link' do
-        expect(HeaderWithoutOptionsDecorator.link?(:name)).to be_false
+      it 'be true when the field is not a link and dont have to_s' do
+        expect(HeaderWithoutOptionsDecorator.link?(:name)).to be_true
       end
     end
   end
@@ -101,14 +85,6 @@ describe Decore::Header do
     describe '.link?' do
       it 'be false when the field is not a link' do
         expect(HeaderWithLinkDecorator.link?(:name)).to be_true
-      end
-    end
-  end
-
-  context 'without to_s' do
-    describe '.to_s?' do
-      it 'should have name into header_link_attributes' do
-        expect(HeaderWithoutToSDecorator.to_s?).to be_false
       end
     end
   end
