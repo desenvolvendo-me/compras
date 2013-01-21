@@ -3,5 +3,5 @@ class CnaeDecorator
   include Decore::Proxy
   include Decore::Header
 
-  attr_header :name, :code, :risk_degree, :to_s => false, :link => :name
+  attr_header :name, :code, :risk_degree
 end

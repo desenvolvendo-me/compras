@@ -6,8 +6,7 @@ class AdministrativeProcessDecorator
   include ActionView::Helpers::NumberHelper
   include ActionView::Helpers::TranslationHelper
 
-  attr_header :code_and_year, :date, :object_type, :summarized_object, :status,
-              :to_s => false, :link => :code_and_year
+  attr_header :code_and_year, :date, :object_type, :summarized_object, :status
 
   def value_estimated
     number_to_currency super if super

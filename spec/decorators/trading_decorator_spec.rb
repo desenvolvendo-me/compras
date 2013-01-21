@@ -44,10 +44,6 @@ describe TradingDecorator do
     it 'should have administrative_process_summarized_object' do
       expect(described_class.header_attributes).to include :administrative_process_summarized_object
     end
-
-    it 'should show to_s as edit' do
-      expect(described_class.to_s?).to be_true
-    end
   end
 
   describe '#created_at_date' do

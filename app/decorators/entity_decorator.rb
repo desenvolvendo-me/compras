@@ -3,5 +3,5 @@ class EntityDecorator
   include Decore::Proxy
   include Decore::Header
 
-  attr_header :name, :to_s => false, :link => :name
+  attr_header :name
 end

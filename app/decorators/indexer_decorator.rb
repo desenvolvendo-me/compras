@@ -3,7 +3,7 @@ class IndexerDecorator
   include Decore::Proxy
   include Decore::Header
 
-  attr_header :name, :currency, :to_s => false, :link => :name
+  attr_header :name, :currency
 
   def summary
     currency

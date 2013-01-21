@@ -3,7 +3,7 @@ class SignatureConfigurationDecorator
   include Decore::Proxy
   include Decore::Header
 
-  attr_header :report, :to_s => false, :link => :report
+  attr_header :report
 
   def availables(signature_report = ::SignatureReport)
     if component.report

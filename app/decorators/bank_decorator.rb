@@ -3,5 +3,5 @@ class BankDecorator
   include Decore::Proxy
   include Decore::Header
 
-  attr_header :name, :code, :acronym, :to_s => false, :link => :name
+  attr_header :name, :code, :acronym
 end

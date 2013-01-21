@@ -3,5 +3,5 @@ class RegularizationOrAdministrativeSanctionReasonDecorator
   include Decore::Proxy
   include Decore::Header
 
-  attr_header :description, :reason_type, :to_s => false, :link => :description
+  attr_header :description, :reason_type
 end

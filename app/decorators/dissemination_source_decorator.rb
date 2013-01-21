@@ -3,5 +3,5 @@ class DisseminationSourceDecorator
   include Decore::Proxy
   include Decore::Header
 
-  attr_header :description, :communication_source, :to_s => false, :link => :description
+  attr_header :description, :communication_source
 end

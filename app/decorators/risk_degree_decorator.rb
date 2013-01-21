@@ -3,5 +3,5 @@ class RiskDegreeDecorator
   include Decore::Proxy
   include Decore::Header
 
-  attr_header :name, :level, :to_s => false, :link => :name
+  attr_header :name, :level
 end

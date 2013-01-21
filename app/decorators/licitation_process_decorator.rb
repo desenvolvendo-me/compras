@@ -10,8 +10,7 @@ class LicitationProcessDecorator
   attr_header :code_and_year, :administrative_process_code_and_year,
               :administrative_process_licitation_modality,
               :administrative_process_object_type_humanize,
-              :envelope_opening_date, :status,
-              :to_s => false, :link => :code_and_year
+              :envelope_opening_date, :status
 
   def envelope_delivery_time
     localize(super, :format => :hour) if super

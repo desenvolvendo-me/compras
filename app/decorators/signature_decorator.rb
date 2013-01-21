@@ -3,7 +3,7 @@ class SignatureDecorator
   include Decore::Proxy
   include Decore::Header
 
-  attr_header :person, :position, :to_s => false, :link => :person
+  attr_header :person, :position
 
   def summary
     position.to_s

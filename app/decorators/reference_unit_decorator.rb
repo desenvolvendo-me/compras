@@ -3,7 +3,7 @@ class ReferenceUnitDecorator
   include Decore::Proxy
   include Decore::Header
 
-  attr_header :name, :acronym, :to_s => false, :link => :name
+  attr_header :name, :acronym
 
   def summary
     component.name

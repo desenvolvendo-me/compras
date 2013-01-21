@@ -3,5 +3,5 @@ class BankAccountDecorator
   include Decore::Proxy
   include Decore::Header
 
-  attr_header :account_number, :bank, :agency, :status, :to_s => false, :link => :account_number
+  attr_header :account_number, :bank, :agency, :status
 end
