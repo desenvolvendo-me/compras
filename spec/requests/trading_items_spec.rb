@@ -398,6 +398,8 @@ feature TradingItem do
     expect(page).to have_disabled_element 'Ativar propostas',
                                           :reason => 'Não há propostas para serem ativadas'
 
+    expect(page.current_url).to match(/#title/)
+
     # Bidders not selected
     within 'table.records:nth-of-type(3)' do
       expect(page).to have_content 'Wenderson Malheiros'
@@ -430,6 +432,8 @@ feature TradingItem do
     click_link 'Ativar propostas'
 
     expect(page).to have_title 'Classificação das Propostas Ativadas'
+
+    expect(page.current_url).to match(/#title/)
 
     # Proposals activated
     within 'table.records:nth-of-type(1)' do
