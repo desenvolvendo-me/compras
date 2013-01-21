@@ -8,7 +8,7 @@ describe ApplicationController do
   end
 
   it 'should not handle customer connection on test environment' do
-    Rails.should_receive(:env).and_return(ActiveSupport::StringInquirer.new('test'))
+    Rails.stub(:env).and_return(ActiveSupport::StringInquirer.new('test'))
 
     Customer.should_receive(:find_by_domain!).never
 
@@ -16,15 +16,28 @@ describe ApplicationController do
   end
 
   it 'should not handle customer connection on development environment' do
-    Rails.should_receive(:env).and_return(ActiveSupport::StringInquirer.new('development'))
+    Rails.stub(:env).and_return(ActiveSupport::StringInquirer.new('development'))
 
     Customer.should_receive(:find_by_domain!).never
 
     get :index
   end
 
+  it 'should handle customer connection on training environment' do
+    Rails.stub(:env).and_return(ActiveSupport::StringInquirer.new('training'))
+
+    customer = double('customer')
+    customer.should_receive(:using_connection)
+
+    request.env['X-Customer'] = 'ipatinga-mg'
+
+    Customer.should_receive(:find_by_domain!).with('ipatinga-mg').and_return(customer)
+
+    get :index
+  end
+
   it 'should handle customer connection on production environment' do
-    Rails.should_receive(:env).and_return(ActiveSupport::StringInquirer.new('production'))
+    Rails.stub(:env).and_return(ActiveSupport::StringInquirer.new('production'))
 
     customer = double('customer')
     customer.should_receive(:using_connection)

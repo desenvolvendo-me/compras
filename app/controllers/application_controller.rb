@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   layout :layout_by_user
 
-  around_filter :handle_customer, :if => :production?
+  around_filter :handle_customer, :if => :handle_customer?
   before_filter :handle_action_mailer
   before_filter :authenticate_user!
 
@@ -52,8 +52,8 @@ class ApplicationController < ActionController::Base
     customer.using_connection(&block)
   end
 
-  def production?
-    Rails.env.production?
+  def handle_customer?
+    Rails.env.production? || Rails.env.training?
   end
 
   def handle_action_mailer

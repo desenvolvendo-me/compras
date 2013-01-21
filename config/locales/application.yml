@@ -5,3 +5,4 @@ pt-BR:
   test: "teste"
   development: "desenvolvimento"
   staging: "homologação"
+  training: "treino"

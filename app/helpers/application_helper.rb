@@ -69,7 +69,7 @@ module ApplicationHelper
   end
 
   def message_about_environment?
-    Rails.env.test? || Rails.env.development? || Rails.env.staging?
+    Rails.env.test? || Rails.env.development? || Rails.env.staging? || Rails.env.training?
   end
 
   def builder(resource, json)

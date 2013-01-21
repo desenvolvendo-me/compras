@@ -9,6 +9,12 @@ describe ApplicationHelper do
       expect(helper.message_about_environment?).to be_false
     end
 
+    it 'should be true on training' do
+      Rails.stub(:env).and_return(ActiveSupport::StringInquirer.new('training'))
+
+      expect(helper.message_about_environment?).to be_true
+    end
+
     it 'should be true on staging' do
       Rails.stub(:env).and_return(ActiveSupport::StringInquirer.new('staging'))
 
