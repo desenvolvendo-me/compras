@@ -1,0 +1,14 @@
+<p><%= @user.name %>,</p>
+
+<p>
+  Você foi convidado a participar da coleta de preço da
+  <%= @prefecture %>.
+</p>
+
+<p>
+  Para acessar nosso sistema e participar
+  <%= link_to 'clique aqui',
+       edit_price_collection_proposal_url(
+         @price_collection.decorator.proposal_for_creditor(@creditor),
+         :host => @customer.domain) %>
+</p>

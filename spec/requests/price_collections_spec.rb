@@ -347,6 +347,7 @@ feature "PriceCollections" do
   scenario 'removing an item and adding another one' do
     PriceCollection.make!(:coleta_de_precos)
     Material.make!(:arame_farpado)
+    Customer.make!(:cliente)
 
     navigate 'Processos de Compra > Coletas de Preços'
 
@@ -389,6 +390,7 @@ feature "PriceCollections" do
 
   scenario 'removing a lot' do
     PriceCollection.make!(:coleta_de_precos)
+    Customer.make!(:cliente)
 
     navigate 'Processos de Compra > Coletas de Preços'
 

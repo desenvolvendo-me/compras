@@ -48,8 +48,12 @@ describe CreditorUserCreator do
     double('Creditor User Creator Mailer')
   end
 
+  let(:context) do
+    double(:context, :current_prefecture => 'Prefeitura', :current_customer => 'Customer')
+  end
+
   subject do
-    described_class.new(price_collection, :user_repository => user_repository,
+    described_class.new(price_collection, context, :user_repository => user_repository,
                         :mailer => mailer)
   end
 
@@ -89,6 +93,7 @@ describe CreditorUserCreator do
   context 'the creditor_1 has a user' do
     before do
       creditor_1.stub(:user?).and_return true
+      creditor_1.stub(:user).and_return(user_1)
       creditor_2.stub(:user?).and_return false
     end
 
@@ -106,14 +111,14 @@ describe CreditorUserCreator do
       subject.generate
     end
 
-    it 'sends an email for generated user only' do
+    it 'send a email for users already registrated' do
       creditor_2_info.merge!(:authenticable_id => 2,
                              :authenticable_type => AuthenticableType::CREDITOR)
 
       user_repository.stub(:create!).with(creditor_2_info).and_return(user_2)
 
-      mailer.should_not_receive(:invite_new_creditor).
-             with(user_1, price_collection)
+      mailer.should_receive(:invite_registered_creditor).
+             with(creditor_1, price_collection, 'Prefeitura', 'Customer').and_return(stub(:deliver => true))
 
       mailer.should_receive(:invite_new_creditor).
              with(user_2, price_collection).and_return(stub(:deliver => true))
