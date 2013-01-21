@@ -1,8 +1,15 @@
 class PriceCollectionProposalDecorator
   include Decore
   include Decore::Proxy
+  include Decore::Header
   include ActionView::Helpers::NumberHelper
   include ActionView::Helpers::TranslationHelper
+
+  attr_header :code_and_year, :creditor, :price_collection_date, :status
+
+  def code_and_year
+    "#{price_collection_code}/#{price_collection_year}"
+  end
 
   def price_collection_date
     localize(super) if super

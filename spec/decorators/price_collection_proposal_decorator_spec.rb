@@ -72,4 +72,13 @@ describe PriceCollectionProposalDecorator do
       expect(subject.only_creditor_is_authorized_message(user)).to be_nil
     end
   end
+
+  describe '#code_and_year' do
+    it 'should return price_collection_code and price_collection_year' do
+      component.stub(:price_collection_code => 10)
+      component.stub(:price_collection_year => 2013)
+
+      expect(subject.code_and_year).to eq '10/2013'
+    end
+  end
 end

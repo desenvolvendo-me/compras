@@ -35,7 +35,7 @@ feature "PriceCollectionProposals" do
 
       click_link 'Propostas'
 
-      expect(page).to have_link '1/2012 - Wenderson Malheiros'
+      expect(page).to have_link '1/2012'
     end
 
     scenario 'should not have a button to delete a proposal' do
@@ -47,7 +47,7 @@ feature "PriceCollectionProposals" do
 
       click_link 'Propostas'
 
-      click_link '1/2012 - Wenderson Malheiros'
+      click_link '1/2012'
 
       expect(page).to have_content 'Proposta do Fornecedor Wenderson Malheiros para a Coleta de Preço 1/2012'
 
@@ -63,7 +63,7 @@ feature "PriceCollectionProposals" do
 
       click_link 'Propostas'
 
-      click_link '1/2012 - Wenderson Malheiros'
+      click_link '1/2012'
 
       expect(page).to have_disabled_field 'Valor total'
       expect(page).to have_disabled_field 'Valor total do lote'
@@ -75,6 +75,23 @@ feature "PriceCollectionProposals" do
       click_link 'Voltar'
 
       expect(page).to have_content 'Editar 1/2012'
+    end
+
+    scenario 'show columns at the index' do
+      PriceCollection.make!(:coleta_de_precos)
+
+      navigate 'Processos de Compra > Coletas de Preços'
+
+      click_link '1/2012'
+
+      click_link 'Propostas'
+
+      within_records do
+        expect(page).to have_content '1/2012'
+        expect(page).to have_content 'Wenderson Malheiros'
+        expect(page).to have_content "#{I18n.l(Date.current)}"
+        expect(page).to have_content 'Ativo'
+      end
     end
   end
 
@@ -95,8 +112,8 @@ feature "PriceCollectionProposals" do
       click_link 'Propostas'
 
       expect(page).to have_content 'Coletas de Preço'
-      expect(page).to_not have_content '1/2012 - Wenderson Malheiros'
-      expect(page).to have_content '1/2012 - Gabriel Sobrinho'
+      expect(page).to_not have_content 'Wenderson Malheiros'
+      expect(page).to have_content 'Gabriel Sobrinho'
     end
 
     scenario 'I can see the information about the price collection' do
@@ -106,7 +123,7 @@ feature "PriceCollectionProposals" do
 
       click_link 'Propostas'
 
-      click_link '1/2012 - Gabriel Sobrinho'
+      click_link '1/2012'
 
       expect(page).to have_content 'Proposta do Fornecedor Gabriel Sobrinho para a Coleta de Preço 1/2012'
 
@@ -141,7 +158,7 @@ feature "PriceCollectionProposals" do
 
       click_link 'Propostas'
 
-      click_link '1/2012 - Gabriel Sobrinho'
+      click_link '1/2012'
 
       fill_in 'Valor unitário', :with => '50,00'
 
@@ -154,7 +171,7 @@ feature "PriceCollectionProposals" do
 
       expect(page).to have_notice 'Proposta Para Coleta de Preços editada com sucesso.'
 
-      click_link '1/2012 - Gabriel Sobrinho'
+      click_link '1/2012'
 
       expect(page).to have_field 'Valor unitário', :with => '50,00'
       expect(page).to have_field 'Valor total', :with => '500,00'

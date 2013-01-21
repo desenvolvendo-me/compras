@@ -15,7 +15,7 @@ feature 'PriceCollectionProposalAnnul' do
 
     click_link 'Propostas'
 
-    click_link '1/2012 - Wenderson Malheiros'
+    click_link '1/2012'
 
     click_link 'Anular'
 
@@ -38,7 +38,7 @@ feature 'PriceCollectionProposalAnnul' do
 
     click_link 'Propostas'
 
-    click_link '1/2012 - Wenderson Malheiros'
+    click_link '1/2012'
 
     click_link 'Anular'
 

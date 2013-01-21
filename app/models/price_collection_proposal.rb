@@ -10,7 +10,7 @@ class PriceCollectionProposal < Compras::Model
 
   has_enumeration_for :status, :with => PriceCollectionStatus, :create_helpers => true
 
-  delegate :date, :full_period, :to => :price_collection, :allow_nil => true, :prefix => true
+  delegate :date, :full_period, :code, :year, :to => :price_collection, :allow_nil => true, :prefix => true
   delegate :price_collection_lots, :to => :price_collection, :allow_nil => true
   delegate :name, :email, :login, :user_attributes, :user_attributes=, :user, :to => :creditor, :allow_nil => true
 

@@ -16,6 +16,9 @@ describe PriceCollectionProposal do
 
   it { should validate_presence_of :creditor }
 
+  it { should delegate(:code).to(:price_collection).prefix(true).allowing_nil(true) }
+  it { should delegate(:year).to(:price_collection).prefix(true).allowing_nil(true) }
+
   it 'should return price_colletion and creditor as to_s method' do
     subject.stub(:price_collection).and_return('Price Collection 1')
     subject.stub(:creditor).and_return('creditor 1')

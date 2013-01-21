@@ -172,7 +172,7 @@ feature "PriceCollections" do
 
     click_link 'Propostas'
 
-    click_link '1/2012 - Wenderson Malheiros'
+    click_link '1/2012'
 
     expect(page).to have_disabled_field 'Status'
     expect(page).to have_select 'Status', :selected => 'Ativo'
