@@ -56,7 +56,7 @@ end
 require 'enumerate_it'
 
 class ActiveRecord::Base
-  include EnumerateIt
+  extend EnumerateIt
 end
 
 Dir['app/enumerations/*.rb'].each do |file|

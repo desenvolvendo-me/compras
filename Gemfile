@@ -11,9 +11,9 @@ gem 'pg', '0.14.1'
 
 gem 'activerecord-connections', '0.0.3'
 
-gem 'inscriptio_cursualis', '0.2.0'
-gem 'persona', '0.1.1'
-gem 'unico', '2.0.1'
+gem 'inscriptio_cursualis', '0.3.0'
+gem 'persona', '0.2.0'
+gem 'unico', '3.0.0'
 gem 'unico-assets', '1.2.3'
 gem 'devise', '2.1.2'
 gem 'cancan', :git => 'git://github.com/ryanb/cancan.git', :branch => '2.0'
@@ -41,7 +41,7 @@ gem 'jbuilder', '0.4.0'
 gem 'foreigner', '1.2.1'
 gem 'i18n_alchemy', :git => 'git://github.com/carlosantoniodasilva/i18n_alchemy.git'
 
-gem 'enumerate_it', '0.7.17'
+gem 'enumerate_it', '1.0.1'
 gem 'decore', :git => 'git://github.com/nohupbrasil/decore.git'
 
 group :assets do
