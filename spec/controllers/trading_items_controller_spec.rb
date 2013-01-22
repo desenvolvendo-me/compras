@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'spec_helper'
 
 describe TradingItemsController do
@@ -82,6 +83,63 @@ describe TradingItemsController do
       controller.should_receive(:authorize!).with(:read, 'tradings')
 
       get :proposal_report, :id => item.id
+    end
+
+    it 'should raise unauthorized when not at stage of proposal_report' do
+      trading = Trading.make!(:pregao_presencial)
+      item = trading.trading_items.first
+
+      controller.stub(:authenticate_user!)
+      controller.stub(:authorize_resource!)
+
+      get :proposal_report, :id => item.id
+
+      expect(response.code).to eq '401'
+      expect(response.body).to match(/Você não tem acesso a essa página/)
+    end
+
+    context 'on proposal_report' do
+      let(:trading) { Trading.make!(:pregao_presencial) }
+      let(:item) { trading.trading_items.first }
+      let(:bidder1) { trading.bidders.first }
+      let(:bidder2) { trading.bidders.second }
+      let(:bidder3) { trading.bidders.last }
+
+      before do
+        controller.stub(:authenticate_user!)
+        controller.stub(:authorize_resource!)
+
+        TradingItemBid.create!(
+          :round => 0,
+          :trading_item_id => item.id,
+          :bidder_id => bidder1.id,
+          :amount => 100.0,
+          :stage => TradingItemBidStage::PROPOSALS,
+          :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+        TradingItemBid.create!(
+          :round => 0,
+          :trading_item_id => item.id,
+          :bidder_id => bidder2.id,
+          :amount => 101.0,
+          :stage => TradingItemBidStage::PROPOSALS,
+          :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+        TradingItemBid.create!(
+          :round => 0,
+          :trading_item_id => item.id,
+          :bidder_id => bidder3.id,
+          :amount => 102.0,
+          :stage => TradingItemBidStage::PROPOSALS,
+          :status => TradingItemBidStatus::WITH_PROPOSAL)
+      end
+
+      it 'should raise unauthorized when not at stage of proposal_report' do
+        get :proposal_report, :id => item.id
+
+        expect(response.code).to eq '200'
+        expect(response).to render_template 'proposal_report'
+      end
     end
   end
 

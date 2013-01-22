@@ -2,8 +2,10 @@ class TradingItemsController < CrudController
   actions :all, :except => [:new, :create, :destroy]
   custom_actions :resource => [:offers, :proposal_report]
 
+  before_filter :block_proposal_report_when_have_an_offer, :only => :proposal_report
+
   def update
-    update!{ trading_items_path(:trading_id => @parent.id) }
+    update!{ trading_items_path(:trading_id => parent.id) }
   end
 
   def activate_proposals
@@ -36,14 +38,20 @@ class TradingItemsController < CrudController
   end
 
   def begin_of_association_chain
-    @parent = parent
+    parent
   end
 
   def parent
-    if params[:trading_id]
+    @parent ||= if params[:trading_id]
       Trading.find(params[:trading_id])
     elsif params[:id]
       TradingItem.find(params[:id]).trading
     end
+  end
+
+  def block_proposal_report_when_have_an_offer
+    return if TradingItemBidStageCalculator.new(resource).stage_of_proposal_report?
+
+    raise Exceptions::Unauthorized
   end
 end
