@@ -20,7 +20,7 @@ class PurchaseSolicitationBudgetAllocationItemStatusChanger
     @old_purchase_solicitation_item_group = options[:old_purchase_solicitation_item_group]
     @direct_purchase = options[:direct_purchase]
     @administrative_process = options[:administrative_process]
-    @item_repository = options[:item_repository] || PurchaseSolicitationBudgetAllocationItem
+    @item_repository = options.fetch(:item_repository) { PurchaseSolicitationBudgetAllocationItem }
   end
 
   def change
