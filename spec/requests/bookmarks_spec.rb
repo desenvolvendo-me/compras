@@ -101,4 +101,18 @@ feature 'Bookmarks' do
 
     expect(page).to have_link 'Adicionar Cadastros'
   end
+
+  scenario 'show all links after create for all possible' do
+    sign_in
+
+    click_link 'Adicionar Cadastros'
+
+    page.execute_script(%{
+      $("#bookmark_link_ids option").each(function(){ $(this).attr("selected", true) })
+    })
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Favoritos criado com sucesso.'
+  end
 end
