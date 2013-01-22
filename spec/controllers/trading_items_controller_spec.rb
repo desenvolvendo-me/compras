@@ -52,25 +52,124 @@ describe TradingItemsController do
 
         get :classification, :id => item.id
 
-        expect(response).to render_template 'classification'
+        expect(response.code).to eq '401'
+        expect(response.body).to match(/Você não tem acesso a essa página/)
       end
     end
 
-    context 'with proposals activated' do
-      let(:trading_item) { double(:trading_item, :proposals_activated? => true) }
+    context 'at classification' do
+      let(:bidder1) { Bidder.make!(:licitante) }
+      let(:bidder2) { Bidder.make!(:licitante_sobrinho) }
+      let(:bidder3) { Bidder.make!(:licitante_com_proposta_4) }
+
+      let :licitation_process do
+        LicitationProcess.make!(:pregao_presencial,
+          :bidders => [bidder1, bidder2, bidder3])
+      end
+
+      let :trading do
+        Trading.make!(:pregao_presencial, :licitation_process => licitation_process)
+      end
+
+      let(:trading_item) { trading.trading_items.first }
 
       before do
         controller.stub(:authenticate_user!)
         controller.stub(:authorize_resource!)
+
+        TradingConfiguration.make!(:pregao)
+
+        TradingItemBid.create!(
+          :round => 0,
+          :trading_item_id => trading_item.id,
+          :bidder_id => bidder1.id,
+          :amount => 100.0,
+          :stage => TradingItemBidStage::PROPOSALS,
+          :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+        TradingItemBid.create!(
+          :round => 0,
+          :trading_item_id => trading_item.id,
+          :bidder_id => bidder2.id,
+          :amount => 101.0,
+          :stage => TradingItemBidStage::PROPOSALS,
+          :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+        TradingItemBid.create!(
+          :round => 0,
+          :trading_item_id => trading_item.id,
+          :bidder_id => bidder3.id,
+          :amount => 102.0,
+          :stage => TradingItemBidStage::PROPOSALS,
+          :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+        TradingItemBid.create!(
+          :round => 1,
+          :trading_item_id => trading_item.id,
+          :bidder_id => bidder1.id,
+          :amount => 90.0,
+          :stage => TradingItemBidStage::ROUND_OF_BIDS,
+          :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+        TradingItemBid.create!(
+          :round => 1,
+          :trading_item_id => trading_item.id,
+          :bidder_id => bidder2.id,
+          :amount => 88.0,
+          :stage => TradingItemBidStage::ROUND_OF_BIDS,
+          :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+        TradingItemBid.create!(
+          :round => 1,
+          :trading_item_id => trading_item.id,
+          :bidder_id => bidder3.id,
+          :amount => 87.0,
+          :stage => TradingItemBidStage::ROUND_OF_BIDS,
+          :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+        TradingItemBid.create!(
+          :round => 2,
+          :trading_item_id => trading_item.id,
+          :bidder_id => bidder1.id,
+          :amount => 85.0,
+          :stage => TradingItemBidStage::ROUND_OF_BIDS,
+          :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+        TradingItemBid.create!(
+          :round => 2,
+          :trading_item_id => trading_item.id,
+          :bidder_id => bidder2.id,
+          :stage => TradingItemBidStage::ROUND_OF_BIDS,
+          :status => TradingItemBidStatus::WITHOUT_PROPOSAL)
+
+        TradingItemBid.create!(
+          :round => 2,
+          :trading_item_id => trading_item.id,
+          :bidder_id => bidder3.id,
+          :stage => TradingItemBidStage::ROUND_OF_BIDS,
+          :status => TradingItemBidStatus::WITHOUT_PROPOSAL)
       end
 
-      it 'should render classification_for_activated_proposals' do
-        controller.stub(:resource => trading_item)
+      context 'with proposals activated' do
+        before do
+          trading_item.update_column(:proposals_activated_at, Date.current)
+        end
 
-        get :classification, :id => 4
+        it 'should render classification_for_activated_proposals' do
+          get :classification, :id => trading_item.id
 
-        expect(response).to render_template 'classification_for_activated_proposals'
+          expect(response).to render_template 'classification_for_activated_proposals'
+        end
       end
+
+      context 'with proposals not activated' do
+        it 'should render classification_for_activated_proposals' do
+          get :classification, :id => trading_item.id
+
+          expect(response).to render_template 'classification'
+        end
+      end
+
     end
   end
 

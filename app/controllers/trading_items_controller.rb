@@ -3,6 +3,7 @@ class TradingItemsController < CrudController
   custom_actions :resource => [:offers, :proposal_report]
 
   before_filter :block_proposal_report_when_have_an_offer, :only => :proposal_report
+  before_filter :block_classification, :only => :classification
 
   def update
     update!{ trading_items_path(:trading_id => parent.id) }
@@ -51,6 +52,12 @@ class TradingItemsController < CrudController
 
   def block_proposal_report_when_have_an_offer
     return if TradingItemBidStageCalculator.new(resource).stage_of_proposal_report?
+
+    raise Exceptions::Unauthorized
+  end
+
+  def block_classification
+    return if TradingItemBidStageCalculator.new(resource).stage_of_classification?
 
     raise Exceptions::Unauthorized
   end
