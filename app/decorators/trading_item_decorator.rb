@@ -87,22 +87,18 @@ class TradingItemDecorator
   private
 
   def negotiation_or_classification_path(stage_calculator)
-    if stage_calculator.stage_of_negotiation?
-      if trading_item_bids.negotiation.empty? || !valid_bidder_for_negotiation?
-        routes.classification_trading_item_path(component)
-      else
-        routes.new_trading_item_bid_negotiation_path(:trading_item_id => component.id)
-      end
+    if stage_calculator.stage_of_classification?
+      routes.classification_trading_item_path(component)
+    elsif stage_calculator.stage_of_negotiation?
+      routes.new_trading_item_bid_negotiation_path(:trading_item_id => component.id)
     end
   end
 
   def round_of_bids_or_proposal_report_path(stage_calculator)
-    if stage_calculator.stage_of_round_of_bids?
-      if trading_item_bids.at_stage_of_round_of_bids.empty?
-        routes.proposal_report_trading_item_path(component)
-      else
-        routes.new_trading_item_bid_round_of_bid_path(:trading_item_id => component.id)
-      end
+    if stage_calculator.stage_of_proposal_report?
+      routes.proposal_report_trading_item_path(component)
+    elsif stage_calculator.stage_of_round_of_bids?
+      routes.new_trading_item_bid_round_of_bid_path(:trading_item_id => component.id)
     end
   end
 

@@ -34,6 +34,12 @@ describe TradingItemBidStageCalculator do
 
       subject.selected_bidders_at_proposals
     end
+
+    it 'delegates valid_bidder_for_negotiation? to trading_item' do
+      trading_item.should_receive(:valid_bidder_for_negotiation?)
+
+      subject.valid_bidder_for_negotiation?
+    end
   end
 
   describe '#stage_of_proposals?' do
@@ -150,6 +156,90 @@ describe TradingItemBidStageCalculator do
       expect(subject).to_not be_stage_of_proposals
       expect(subject).to_not be_stage_of_negotiation
       expect(subject).to be_stage_of_round_of_bids
+    end
+  end
+
+  describe '#stage_of_proposal_report?' do
+    context 'when on round_of_bids' do
+      let(:trading_item_bids) { double(:trading_item_bids) }
+
+      before do
+        subject.stub(:stage_of_round_of_bids? => true)
+        subject.stub(:trading_item_bids => trading_item_bids)
+      end
+
+      context 'when there is no bids at round_of_bids' do
+        before do
+          trading_item_bids.stub(:at_stage_of_round_of_bids => [])
+        end
+
+        it { expect(subject).to be_stage_of_proposal_report }
+      end
+
+      context 'when there is bids at round_of_bids' do
+        before do
+          trading_item_bids.stub(:at_stage_of_round_of_bids => ['bidder'])
+        end
+
+        it { expect(subject).to_not be_stage_of_proposal_report }
+      end
+    end
+
+    context 'when not at round_of_bids' do
+      before do
+        subject.stub(:stage_of_round_of_bids? => false)
+      end
+
+      it { expect(subject).to_not be_stage_of_proposal_report }
+    end
+  end
+
+  describe '#stage_of_classification?' do
+    context 'when on negotiation' do
+      let(:trading_item_bids) { double(:trading_item_bidders) }
+
+      before do
+        subject.stub(:stage_of_negotiation? => true)
+        subject.stub(:trading_item_bids => trading_item_bids)
+      end
+
+      context 'when there is no bid at negotiation' do
+        before do
+          trading_item_bids.stub(:negotiation => [])
+        end
+
+        it { expect(subject).to be_stage_of_classification }
+      end
+
+      context 'when there is bid at negotiation' do
+        before do
+          trading_item_bids.stub(:negotiation => ['negotiations'])
+        end
+
+        context 'when there is a valid bidder for negotiation' do
+          before do
+            subject.stub(:valid_bidder_for_negotiation? => true)
+          end
+
+          it { expect(subject).to_not be_stage_of_classification }
+        end
+
+        context 'when there is no valid bidder for negotiation' do
+          before do
+            subject.stub(:valid_bidder_for_negotiation? => false)
+          end
+
+          it { expect(subject).to be_stage_of_classification }
+        end
+      end
+    end
+
+    context 'when on negotiation' do
+      before do
+        subject.stub(:stage_of_negotiation? => false)
+      end
+
+      it { expect(subject).to_not be_stage_of_classification }
     end
   end
 end

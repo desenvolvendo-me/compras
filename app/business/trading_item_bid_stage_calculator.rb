@@ -1,6 +1,7 @@
 class TradingItemBidStageCalculator
   delegate :trading_item_bids, :bidders, :lowest_proposal_amount,
            :selected_bidders_at_proposals, :value_limit_to_participate_in_bids,
+           :valid_bidder_for_negotiation?,
            :to => :trading_item
 
   def initialize(trading_item, trading_item_bidders = TradingItemBidders.new(trading_item, trading_item.bidders))
@@ -18,6 +19,14 @@ class TradingItemBidStageCalculator
 
   def stage_of_round_of_bids?
     !stage_of_proposals? && !stage_of_negotiation?
+  end
+
+  def stage_of_proposal_report?
+    stage_of_round_of_bids? && trading_item_bids.at_stage_of_round_of_bids.empty?
+  end
+
+  def stage_of_classification?
+    stage_of_negotiation? && (trading_item_bids.negotiation.empty? || !valid_bidder_for_negotiation?)
   end
 
   private
