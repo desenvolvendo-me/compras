@@ -3,6 +3,7 @@ require 'model_helper'
 require 'app/models/trading_item'
 require 'app/models/trading'
 require 'app/models/trading_configuration'
+require 'app/models/trading_closing'
 
 describe Trading do
 
@@ -16,6 +17,7 @@ describe Trading do
   it { should belong_to :licitating_unit }
 
   it { should have_many(:trading_items).dependent(:destroy) }
+  it { should have_many(:closings).dependent(:destroy) }
   it { should have_many(:bidders).through(:licitation_process) }
 
   it { should validate_presence_of :licitation_process }
@@ -118,6 +120,45 @@ describe Trading do
       subject.run_callbacks(:create)
 
       expect(subject.percentage_limit_to_participate_in_bids).to eq 8.8
+    end
+  end
+
+  describe '#current_closing' do
+    let(:first_closing) { double(:first_closing) }
+    let(:last_closing) { double(:last_closing) }
+
+    it 'should return the last closing' do
+      subject.stub(:closings => [first_closing, last_closing])
+      expect(subject.current_closing).to eq last_closing
+    end
+
+    it 'should return nil when there is no closing' do
+      subject.stub(:closings => [])
+      expect(subject.current_closing).to eq nil
+    end
+  end
+
+  describe '#allowing_closing?' do
+    let(:trading_items) { double(:trading_items) }
+
+    before do
+      subject.stub(:trading_items => trading_items)
+    end
+
+    context 'when all trading_items are closed' do
+      before do
+        trading_items.stub(:not_closed => [])
+      end
+
+      it { expect(subject).to be_allow_closing }
+    end
+
+    context 'when not all trading_items are closed' do
+      before do
+        trading_items.stub(:not_closed => ['not_closed'])
+      end
+
+      it { expect(subject).to_not be_allow_closing }
     end
   end
 end

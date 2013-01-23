@@ -26,10 +26,16 @@ class TradingItem < Compras::Model
            :allow_nil => true
   delegate :licitation_process_id, :percentage_limit_to_participate_in_bids,
            :to => :trading
+  delegate :allow_closing?, :to => :trading, :prefix => true
 
   orderize :id
 
   default_scope { order(:id) }
+
+  def self.not_closed
+    joins { closing.outer }.
+    where { closing.id.eq(nil) }
+  end
 
   def lowest_proposal_value
     lowest_bid_with_proposal.try(:amount) || BigDecimal(0)

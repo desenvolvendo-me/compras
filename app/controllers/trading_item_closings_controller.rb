@@ -13,7 +13,7 @@ class TradingItemClosingsController < CrudController
 
   def create
     create! do |success, failure|
-      success.html { redirect_to trading_items_path(:trading_id => @trading_item.trading_id) }
+      success.html { redirect_to resource.decorator.after_create_path }
     end
   end
 

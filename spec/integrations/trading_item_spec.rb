@@ -213,4 +213,24 @@ describe TradingItem do
       end
     end
   end
+
+  describe '.not_closed' do
+    let :closed_item do
+      TradingItem.make!(:item_pregao_presencial)
+    end
+
+    let :not_closed_item do
+      TradingItem.make!(:segundo_item_pregao_presencial)
+    end
+
+    before do
+      TradingItemClosing.create!(
+        :trading_item_id => closed_item.id,
+        :status => TradingItemClosingStatus::ABANDONED)
+    end
+
+    it 'should returns the items not closed' do
+      expect(described_class.not_closed).to eq [not_closed_item]
+    end
+  end
 end

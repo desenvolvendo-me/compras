@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      trading_closing:
+        one: "Encerramento do Pregão Presencial"
+        other: "Encerramentos do Pregão Presencial"
+
+    attributes:
+      trading_closing:
+        trading: "Pregão presencial"
+        status: "Status"
+        observation: "Observação"

@@ -1,0 +1,13 @@
+<div class="actions">
+  <ul>
+    <% if create? %>
+      <li>
+        <%= create_link(:trading_id => @parent.id) %>
+      </li>
+    <% end %>
+
+    <li>
+      <%= link_to 'Voltar ao Pregão Presencial', edit_trading_path(@parent) %>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,10 @@
+pt-BR:
+  enumerations:
+    trading_closing_status:
+      suspended: "Suspenso"
+      closed_with_resource: "Concluído com recurso"
+      closed_without_resource: "Concluído sem recurso"
+      repealed: "Revogado/Anulado"
+      failed: "Fracassado"
+      abandoned: "Deserto"
+      reopened: "Reativado"

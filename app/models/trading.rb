@@ -14,6 +14,7 @@ class Trading < Compras::Model
 
   has_many :trading_items, :dependent => :destroy
   has_many :bidders, :through => :licitation_process
+  has_many :closings, :dependent => :destroy, :class_name => 'TradingClosing'
 
   accepts_nested_attributes_for :trading_items
 
@@ -43,6 +44,14 @@ class Trading < Compras::Model
 
   def code_and_year
     "#{code}/#{year}"
+  end
+
+  def current_closing
+    closings.last
+  end
+
+  def allow_closing?
+    trading_items.not_closed.empty?
   end
 
   private

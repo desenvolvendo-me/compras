@@ -1,0 +1,19 @@
+<%= hidden_field_tag :trading_id, @parent.id %>
+
+<div class="yui3-g">
+  <div class="yui3-u-2-3">
+    <%= f.input :trading %>
+  </div>
+
+  <div class="yui3-u-1-3">
+    <%= f.input :status %>
+  </div>
+</div>
+
+<%= f.input :observation %>
+
+<script>
+  (function() {
+    $("#trading_closing_trading").attr("disabled", "disabled");
+  })();
+</script>
