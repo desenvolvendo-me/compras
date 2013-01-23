@@ -7,8 +7,5 @@
 
 <p>
   Para acessar nosso sistema e participar
-  <%= link_to 'clique aqui',
-       edit_price_collection_proposal_url(
-         @price_collection.decorator.proposal_for_creditor(@creditor),
-         :host => @customer.domain) %>
+  <%= link_to 'clique aqui', full_path(edit_price_collection_proposal_path(@price_collection.decorator.proposal_for_creditor(@creditor)), :domain => @customer.domain) %>
 </p>

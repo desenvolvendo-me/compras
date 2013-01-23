@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   rescue_from CanCan::Unauthorized, :with => :unauthorized
   rescue_from Exceptions::Unauthorized, :with => :unauthorized
 
-  helper_method :current_prefecture, :root_url
+  helper_method :current_prefecture, :root_url, :current_customer
 
   def current_prefecture
     Prefecture.last

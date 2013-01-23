@@ -58,7 +58,7 @@ describe PriceCollectionMailer do
     end
 
     it 'should render user confirmation link' do
-      mail.body.encoded.should include('http://example.com/price_collection_proposals/1/edit')
+      mail.body.encoded.should include('https://example.com/compras/price_collection_proposals/1/edit')
     end
   end
 end

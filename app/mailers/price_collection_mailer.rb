@@ -1,6 +1,8 @@
 # encoding: UTF-8
 
 class PriceCollectionMailer < ActionMailer::Base
+  helper ApplicationHelper
+
   def invite_new_creditor(user, price_collection)
     @user = user
     @price_collection = price_collection
