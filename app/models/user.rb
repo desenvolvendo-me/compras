@@ -23,7 +23,7 @@ class User < Compras::Model
   validates :profile, :presence => true, :unless => :administrator_or_creditor?
   validates :login, :uniqueness => true, :format => /\A[a-z0-9.]+\z/i, :allow_blank => true
 
-  before_create :skip_confirmation
+  before_create :skip_confirmation!, :if => :administrator?
 
   filterize
   orderize
@@ -49,11 +49,5 @@ class User < Compras::Model
 
   def send_on_create_confirmation_instructions
     super unless creditor?
-  end
-
-  def skip_confirmation
-    if administrator?
-      self.skip_confirmation!
-    end
   end
 end
