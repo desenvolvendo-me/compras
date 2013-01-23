@@ -122,4 +122,34 @@ describe User do
       expect(subject).not_to be_administrator_or_creditor
     end
   end
+
+  describe '#skip_confirmation' do
+    before { subject.stub(:send_on_create_confirmation_instructions).and_return(nil) }
+
+    let(:now) { double(:now, :utc => 'utc') }
+
+    context 'when is an administrator' do
+      before do
+        Time.stub(:now).and_return(now)
+
+        subject.stub(:administrator?).and_return(true)
+      end
+
+      it 'should be confirmed' do
+        subject.should_receive(:confirmed_at=).with(now.utc)
+
+        subject.run_callbacks(:create)
+      end
+    end
+
+    context 'when is not an administrator' do
+      before { subject.stub(:administrator?).and_return(false) }
+
+      it 'should be not confirmed' do
+        subject.should_not_receive(:confirmed_at=)
+
+        subject.run_callbacks(:create)
+      end
+    end
+  end
 end
