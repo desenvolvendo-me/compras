@@ -1,4 +1,6 @@
 Compras::Application.routes.draw do
+  root :to => 'bookmarks#show'
+
   get 'agreements/modal', :as => :modal_agreements
 
   get 'agreement_kinds/modal', :as => :modal_agreement_kinds
@@ -37,14 +39,6 @@ Compras::Application.routes.draw do
   devise_for :users, :controllers => { :confirmations => 'confirmations' }
 
   devise_scope :user do
-    authenticated do
-      root :to => 'bookmarks#show'
-    end
-
-    unauthenticated do
-      root :to => 'devise/sessions#new'
-    end
-
     put '/confirm' => 'confirmations#confirm'
   end
 
