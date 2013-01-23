@@ -48,8 +48,8 @@ group :assets do
   gem 'uglifier', '1.2.1'
 end
 
-group :production, :staging do
-  gem 'sentry-raven', :git => 'git://github.com/coderanger/raven-ruby.git', :require => 'raven'
+group :production, :training, :staging do
+  gem 'sentry-raven', '0.4.0'
 end
 
 group :development, :test do
