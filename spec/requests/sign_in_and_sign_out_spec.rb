@@ -40,6 +40,6 @@ feature "SignInAndSignOut" do
 
     click_link 'Sair'
 
-    expect(page).to have_notice 'Logout efetuado com sucesso.'
+    expect(page).to have_alert 'Por favor, efetue seu login.'
   end
 end
