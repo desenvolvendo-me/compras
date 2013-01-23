@@ -6,6 +6,9 @@ class User < Compras::Model
 
   devise :database_authenticatable, :recoverable, :validatable, :confirmable
 
+  has_enumeration_for :authenticable_type, :with => AuthenticableType,
+                      :create_helpers => true, :create_scopes => true
+
   belongs_to :profile
   belongs_to :authenticable, :polymorphic => true
 
@@ -19,8 +22,6 @@ class User < Compras::Model
   validates :authenticable_id, :uniqueness => { :scope => :authenticable_type }, :allow_blank => true
   validates :profile, :presence => true, :unless => :administrator_or_creditor?
   validates :login, :uniqueness => true, :format => /\A[a-z0-9.]+\z/i, :allow_blank => true
-
-  has_enumeration_for :authenticable_type, :with => AuthenticableType, :create_helpers => true, :create_scopes => true
 
   filterize
   orderize
