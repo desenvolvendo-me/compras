@@ -93,9 +93,9 @@ module ApplicationHelper
 
   def full_path(relative_path, options = {})
     domain  = options.fetch(:domain) { current_customer.domain }
-    root_path = options.fetch(:root_path, 'compras')
+    sub_path = options.fetch(:sub_path, 'compras')
     protocol  = options.fetch(:protocol, 'https')
 
-    "#{protocol}://#{domain}/#{root_path}#{relative_path}"
+    "#{protocol}://#{domain}/#{sub_path}#{relative_path}"
   end
 end
