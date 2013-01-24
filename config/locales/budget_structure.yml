@@ -2,19 +2,19 @@ pt-BR:
   activerecord:
     models:
       budget_structure:
-        one: "Estrutura Orçamentaria"
-        other: "Estruturas Orçamentarias"
+        one: "Estrutura Orçamentária"
+        other: "Estruturas Orçamentárias"
 
     attributes:
       budget_structure:
         acronym: "Sigla"
         administration_type: "Tipo de administração"
-        budget_structure: "Estrutura orçamentaria"
-        budget_structure_configuration: "Configuração de estrutura orçamentaria"
+        budget_structure: "Estrutura orçamentária"
+        budget_structure_configuration: "Configuração de estrutura orçamentária"
         budget_structure_level: "Nível"
         code: "Código"
         description: "Descrição"
         kind: "Tipo"
-        parent: "Estrutura orçamentaria superior"
+        parent: "Estrutura orçamentária superior"
         performance_field: "Área de atuação"
         tce_code: "Código do TCE"

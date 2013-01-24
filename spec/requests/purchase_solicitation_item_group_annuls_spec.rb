@@ -48,7 +48,7 @@ feature 'PurchaseSolicitationAnnul' do
 
     click_link '1/2013'
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       within '.purchase-solicitation-budget-allocation:first' do
         within '.item:first' do
           expect(page).to have_select 'Status', :selected => 'Agrupado'
@@ -94,7 +94,7 @@ feature 'PurchaseSolicitationAnnul' do
 
     click_link '1/2013'
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       within '.purchase-solicitation-budget-allocation:first' do
         within '.item:first' do
           expect(page).to have_select 'Status', :selected => 'Pendente'

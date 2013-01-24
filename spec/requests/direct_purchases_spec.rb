@@ -51,7 +51,7 @@ feature "DirectPurchases" do
     within_tab 'Dotações' do
       click_button 'Adicionar Dotação'
 
-      fill_modal 'Dotação orçamentaria', :with => '1', :field => 'Código'
+      fill_modal 'Dotação orçamentária', :with => '1', :field => 'Código'
 
       # getting data from modal
       expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
@@ -98,7 +98,7 @@ feature "DirectPurchases" do
     end
 
     within_tab 'Dotações' do
-      expect(page).to have_field 'Dotação orçamentaria', :with => budget_allocation.to_s
+      expect(page).to have_field 'Dotação orçamentária', :with => budget_allocation.to_s
       expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
       expect(page).to have_field 'Saldo da dotação', :with => '500,00'
 
@@ -170,8 +170,8 @@ feature "DirectPurchases" do
       expect(page).to have_field 'Valor total dos itens', :with => '19.800,00'
       expect(page).to have_readonly_field 'Valor total dos itens'
 
-      expect(page).to have_field 'Dotação orçamentaria', :with => '1 - Alocação'
-      expect(page).to have_disabled_field 'Dotação orçamentaria'
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
+      expect(page).to have_disabled_field 'Dotação orçamentária'
 
       expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
       expect(page).to have_readonly_field 'Compl. do elemento'
@@ -238,8 +238,8 @@ feature "DirectPurchases" do
       expect(page).to have_field 'Valor total dos itens', :with => '19.800,00'
       expect(page).to have_disabled_field 'Valor total dos itens'
 
-      expect(page).to have_field 'Dotação orçamentaria', :with => '1 - Alocação'
-      expect(page).to have_disabled_field 'Dotação orçamentaria'
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
+      expect(page).to have_disabled_field 'Dotação orçamentária'
 
       expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
       expect(page).to have_disabled_field 'Compl. do elemento'
@@ -295,7 +295,7 @@ feature "DirectPurchases" do
 
       expect(page).to have_field 'Valor total dos itens', :with => '19.800,00'
 
-      expect(page).to have_field 'Dotação orçamentaria', :with => '1 - Alocação'
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
       expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
       expect(page).to have_field 'Saldo da dotação', :with => '500,00'
     end
@@ -309,7 +309,7 @@ feature "DirectPurchases" do
 
       expect(page).to have_field 'Valor total dos itens', :with => '0,00'
 
-      expect(page).to_not have_field 'Dotação orçamentaria', :with => '1 - Alocação'
+      expect(page).to_not have_field 'Dotação orçamentária', :with => '1 - Alocação'
       expect(page).to_not have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
       expect(page).to_not have_field 'Saldo da dotação', :with => '500,00'
     end
@@ -343,7 +343,7 @@ feature "DirectPurchases" do
       page.find('a').click
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       within '.purchase-solicitation-budget-allocation:first' do
         within '.item:first' do
           expect(page).to have_field 'Atendido por', :with => 'Compra direta 1/2012'
@@ -371,7 +371,7 @@ feature "DirectPurchases" do
       page.find('a').click
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       within '.purchase-solicitation-budget-allocation:first' do
         within '.item:first' do
           expect(page).to have_field 'Atendido por', :with => ''
@@ -392,7 +392,7 @@ feature "DirectPurchases" do
     within_tab 'Dotações' do
       click_button 'Adicionar Dotação'
 
-      fill_modal 'Dotação orçamentaria', :with => '1', :field => 'Código'
+      fill_modal 'Dotação orçamentária', :with => '1', :field => 'Código'
 
       expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
       expect(page).to have_field 'Saldo da dotação', :with => '500,00'
@@ -427,8 +427,8 @@ feature "DirectPurchases" do
       expect(page).to_not have_field 'Quantidade', :with => '3,50'
       expect(page).to_not have_field 'Valor total', :with => '700,00'
 
-      expect(page).to have_field 'Dotação orçamentaria', :with => '1 - Alocação'
-      expect(page).to have_disabled_field 'Dotação orçamentaria'
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
+      expect(page).to have_disabled_field 'Dotação orçamentária'
 
       expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
       expect(page).to have_disabled_field 'Compl. do elemento'
@@ -854,7 +854,7 @@ feature "DirectPurchases" do
 
       click_button 'Adicionar Dotação'
 
-      fill_modal 'Dotação orçamentaria', :with => '1', :field => 'Código'
+      fill_modal 'Dotação orçamentária', :with => '1', :field => 'Código'
     end
 
     click_button 'Salvar'
@@ -1019,7 +1019,7 @@ feature "DirectPurchases" do
       page.find('a').click
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       expect(page).to have_field 'Atendido por', :with => 'Compra direta 1/2012'
     end
   end
@@ -1135,8 +1135,8 @@ feature "DirectPurchases" do
       expect(page).to have_field 'Valor total dos itens', :with => '600,00'
       expect(page).to have_readonly_field 'Valor total dos itens'
 
-      expect(page).to have_field 'Dotação orçamentaria', :with => '1 - Alocação'
-      expect(page).to have_disabled_field 'Dotação orçamentaria'
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
+      expect(page).to have_disabled_field 'Dotação orçamentária'
 
       expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
       expect(page).to have_readonly_field 'Compl. do elemento'
@@ -1200,8 +1200,8 @@ feature "DirectPurchases" do
       expect(page).to have_field 'Valor total dos itens', :with => '600,00'
       expect(page).to have_disabled_field 'Valor total dos itens'
 
-      expect(page).to have_field 'Dotação orçamentaria', :with => '1 - Alocação'
-      expect(page).to have_disabled_field 'Dotação orçamentaria'
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
+      expect(page).to have_disabled_field 'Dotação orçamentária'
 
       expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
       expect(page).to have_disabled_field 'Compl. do elemento'
@@ -1380,7 +1380,7 @@ feature "DirectPurchases" do
       expect(page).to have_select 'Status de atendimento', :selected => 'Liberada'
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       expect(page).to have_select 'Status', :selected => 'Pendente'
     end
 
@@ -1426,7 +1426,7 @@ feature "DirectPurchases" do
       expect(page).to have_select 'Status de atendimento', :selected => 'Atendida'
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       expect(page).to have_select 'Status', :selected => 'Atendido'
     end
   end
@@ -1675,7 +1675,7 @@ feature "DirectPurchases" do
         expect(page).to have_select 'Status de atendimento', :selected => 'Liberada'
       end
 
-      within_tab 'Dotações orçamentarias' do
+      within_tab 'Dotações orçamentárias' do
         expect(page).to have_select 'Status', :selected => 'Agrupado'
       end
     end
@@ -1701,7 +1701,7 @@ feature "DirectPurchases" do
         click_link purchase_solicitation.code_and_year
       end
 
-      within_tab 'Dotações orçamentarias' do
+      within_tab 'Dotações orçamentárias' do
         expect(page).to have_select 'Status', :selected => 'Atendido'
       end
 
@@ -1784,7 +1784,7 @@ feature "DirectPurchases" do
       expect(page).to have_field 'Valor total dos itens', :with => '600,00'
 
       within '.direct-purchase-budget-allocation:first' do
-        expect(page).to have_field 'Dotação orçamentaria', :with => '1 - Alocação'
+        expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
         expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
         expect(page).to have_field 'Saldo da dotação', :with => '500,00'
 
@@ -1815,7 +1815,7 @@ feature "DirectPurchases" do
       expect(page).to have_field 'Valor total dos itens', :with => '600,00'
 
       within '.direct-purchase-budget-allocation:first' do
-        expect(page).to have_field 'Dotação orçamentaria', :with => '1 - Alocação extra'
+        expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação extra'
         expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
         expect(page).to have_field 'Saldo da dotação', :with => '200,00'
 
@@ -1851,7 +1851,7 @@ feature "DirectPurchases" do
       expect(page).to have_field 'Valor total dos itens', :with => '600,00'
 
       within '.direct-purchase-budget-allocation:first' do
-        expect(page).to have_field 'Dotação orçamentaria', :with => '1 - Alocação'
+        expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
         expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
         expect(page).to have_field 'Saldo da dotação', :with => '500,00'
 
@@ -1879,7 +1879,7 @@ feature "DirectPurchases" do
       expect(page).to have_field 'Valor total dos itens', :with => '600,00'
 
       within '.direct-purchase-budget-allocation:first' do
-        expect(page).to have_field 'Dotação orçamentaria', :with => '1 - Alocação extra'
+        expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação extra'
         expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
         expect(page).to have_field 'Saldo da dotação', :with => '200,00'
 
@@ -1960,7 +1960,7 @@ feature "DirectPurchases" do
       expect(page).to have_field 'Valor total dos itens', :with => '600,00'
 
       within '.direct-purchase-budget-allocation:first' do
-        expect(page).to have_field 'Dotação orçamentaria', :with => '1 - Alocação'
+        expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
         expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
         expect(page).to have_field 'Saldo da dotação', :with => '500,00'
 
@@ -2064,7 +2064,7 @@ feature "DirectPurchases" do
       click_link '1/2012'
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       within '.item:nth-child(1)' do
         expect(page).to have_select 'Status', :selected => 'Pendente'
       end
@@ -2121,7 +2121,7 @@ feature "DirectPurchases" do
       click_link '1/2012'
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       within '.item:nth-child(1)' do
         expect(page).to have_select 'Status', :selected => 'Parcialmente atendido'
       end
@@ -2153,7 +2153,7 @@ feature "DirectPurchases" do
       click_link '1/2012'
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       within '.item:nth-child(1)' do
         expect(page).to have_select 'Status', :selected => 'Pendente'
       end
@@ -2169,13 +2169,13 @@ feature "DirectPurchases" do
       click_link '1/2013'
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       within '.item:nth-child(1)' do
         expect(page).to have_select 'Status', :selected => 'Parcialmente atendido'
       end
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       within '.item:nth-child(1)' do
         expect(page).to have_select 'Status', :selected => 'Parcialmente atendido'
         expect(page).to have_field 'Atendido por', :with => 'Compra direta 1/2012'

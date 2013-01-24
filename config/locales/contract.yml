@@ -29,8 +29,8 @@ pt-BR:
         cancellation_reason: 'Motivo do cancelamento'
         licitation_process: 'Processo licitatório'
         direct_purchase: 'Compra direta'
-        budget_structure: 'Unidade orçamentaria gestora responsável'
-        budget_structure_responsible: 'Responsável pela unidade orçamentaria gestora'
+        budget_structure: 'Unidade orçamentária gestora responsável'
+        budget_structure_responsible: 'Responsável pela unidade orçamentária gestora'
         lawyer: 'Advogado responsável pela gestão do contrato'
         lawyer_code: 'O.A.B. do advogado responsável'
         description: "Observações gerais"

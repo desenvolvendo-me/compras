@@ -99,14 +99,14 @@ feature "Contracts" do
     select 'Fiança bancária', :from => 'Garantias do contrato'
     select 'Sim', :from => 'Subcontratação'
 
-    fill_modal 'Unidade orçamentaria gestora responsável', :with => 'Secretaria de Educação', :field => 'Descrição'
+    fill_modal 'Unidade orçamentária gestora responsável', :with => 'Secretaria de Educação', :field => 'Descrição'
 
     within_modal 'Advogado responsável pela gestão do contrato' do
       click_button 'Pesquisar'
       click_record 'Wenderson Malheiros'
     end
 
-    within_modal 'Responsável pela unidade orçamentaria gestora' do
+    within_modal 'Responsável pela unidade orçamentária gestora' do
       click_button 'Pesquisar'
       click_record 'Wenderson Malheiros'
     end
@@ -137,8 +137,8 @@ feature "Contracts" do
     expect(page).to have_select 'Garantias do contrato', :selected => 'Fiança bancária'
     expect(page).to have_select 'Subcontratação', :selected => 'Sim'
     expect(page).to have_field 'Modalidade', :with => 'Privada'
-    expect(page).to have_field 'Unidade orçamentaria gestora responsável', :with => '1 - Secretaria de Educação'
-    expect(page).to have_field 'Responsável pela unidade orçamentaria gestora', :with => 'Wenderson Malheiros'
+    expect(page).to have_field 'Unidade orçamentária gestora responsável', :with => '1 - Secretaria de Educação'
+    expect(page).to have_field 'Responsável pela unidade orçamentária gestora', :with => 'Wenderson Malheiros'
     expect(page).to have_field 'Advogado responsável pela gestão do contrato', :with => 'Wenderson Malheiros'
     expect(page).to have_field 'O.A.B. do advogado responsável', :with => '5678'
 

@@ -12,9 +12,9 @@ feature "BudgetStructureConfigurations" do
     Entity.make!(:detran)
     RegulatoryAct.make!(:sopa)
 
-    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Configurações de Estrutura Orçamentaria'
+    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Configurações de Estrutura Orçamentária'
 
-    click_link 'Criar Configuração de Estrutura Orçamentaria'
+    click_link 'Criar Configuração de Estrutura Orçamentária'
 
     fill_in 'Descrição', :with => 'Nome da Configuração'
     fill_modal 'Entidade', :with => 'Detran'
@@ -28,7 +28,7 @@ feature "BudgetStructureConfigurations" do
     end
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Configuração de Estrutura Orçamentaria criada com sucesso.'
+    expect(page).to have_notice 'Configuração de Estrutura Orçamentária criada com sucesso.'
 
     click_link 'Nome da Configuração'
 
@@ -47,9 +47,9 @@ feature "BudgetStructureConfigurations" do
   scenario 'calculate mask with javascript' do
     pending "this test will be removed when there is integration with the accounting system"
 
-    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Configurações de Estrutura Orçamentaria'
+    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Configurações de Estrutura Orçamentária'
 
-    click_link 'Criar Configuração de Estrutura Orçamentaria'
+    click_link 'Criar Configuração de Estrutura Orçamentária'
 
     click_button 'Adicionar Estrutura'
 
@@ -81,7 +81,7 @@ feature "BudgetStructureConfigurations" do
 
     BudgetStructureConfiguration.make!(:detran_sopa)
 
-    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Configurações de Estrutura Orçamentaria'
+    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Configurações de Estrutura Orçamentária'
 
     click_link 'Configuração do Detran'
 
@@ -89,7 +89,7 @@ feature "BudgetStructureConfigurations" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Configuração de Estrutura Orçamentaria editada com sucesso.'
+    expect(page).to have_notice 'Configuração de Estrutura Orçamentária editada com sucesso.'
 
     click_link 'Outro Nome da Configuração'
 
@@ -103,13 +103,13 @@ feature "BudgetStructureConfigurations" do
 
     BudgetStructureConfiguration.make!(:detran_sopa)
 
-    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Configurações de Estrutura Orçamentaria'
+    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Configurações de Estrutura Orçamentária'
 
     click_link 'Configuração do Detran'
 
     click_link 'Apagar'
 
-    expect(page).to have_notice 'Configuração de Estrutura Orçamentaria apagada com sucesso.'
+    expect(page).to have_notice 'Configuração de Estrutura Orçamentária apagada com sucesso.'
 
     expect(page).to_not have_content 'Detran'
     expect(page).to_not have_content '1234'
@@ -119,9 +119,9 @@ feature "BudgetStructureConfigurations" do
   scenario 'create with error does not clear filled structures' do
     pending "this test will be removed when there is integration with the accounting system"
 
-    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Configurações de Estrutura Orçamentaria'
+    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Configurações de Estrutura Orçamentária'
 
-    click_link 'Criar Configuração de Estrutura Orçamentaria'
+    click_link 'Criar Configuração de Estrutura Orçamentária'
 
     click_button 'Adicionar Estrutura'
 
@@ -151,7 +151,7 @@ feature "BudgetStructureConfigurations" do
 
     click_button 'Salvar'
 
-    expect(page).to_not have_notice 'Configuração de Estrutura Orçamentaria criada com sucesso.'
+    expect(page).to_not have_notice 'Configuração de Estrutura Orçamentária criada com sucesso.'
 
     within 'div.nested-budget-structure-level:nth-child(1)' do
       expect(page).to have_field 'Nível', :with => '1'

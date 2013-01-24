@@ -17,15 +17,15 @@ feature "BudgetAllocations" do
     ExpenseNature.make!(:vencimento_e_salarios)
     Capability.make!(:reforma)
 
-    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentária > Dotações Orçamentárias'
 
-    click_link 'Criar Dotação Orçamentaria'
+    click_link 'Criar Dotação Orçamentária'
 
     within_tab 'Principal' do
       expect(page).to have_disabled_field 'Código'
 
       fill_modal 'Descritor', :with => '2012', :field => 'Ano do exercício'
-      fill_modal 'Estrutura orçamentaria', :with => 'Secretaria de Educação', :field => 'Descrição'
+      fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Função', :with => 'Administração', :field => 'Descrição'
       fill_modal 'Subfunção', :with => 'Administração Geral', :field => 'Descrição'
       fill_modal 'Programa do governo', :with => 'Habitação', :field => 'Descrição'
@@ -45,7 +45,7 @@ feature "BudgetAllocations" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Dotação Orçamentaria criada com sucesso.'
+    expect(page).to have_notice 'Dotação Orçamentária criada com sucesso.'
 
     click_link '1 - Alocação'
 
@@ -53,7 +53,7 @@ feature "BudgetAllocations" do
       expect(page).to have_field 'Descritor', :with => '2012 - Detran'
       expect(page).to have_disabled_field 'Código'
       expect(page).to have_field 'Código', :with => '1'
-      expect(page).to have_field 'Estrutura orçamentaria', :with => '1 - Secretaria de Educação'
+      expect(page).to have_field 'Estrutura orçamentária', :with => '1 - Secretaria de Educação'
       expect(page).to have_field 'Função', :with => '04 - Administração'
       expect(page).to have_field 'Subfunção', :with => '01 - Administração Geral'
       expect(page).to have_field 'Programa do governo', :with => 'Habitação'
@@ -82,15 +82,15 @@ feature "BudgetAllocations" do
 
     BudgetAllocation.make!(:reparo_2011)
 
-    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentária > Dotações Orçamentárias'
 
-    click_link 'Criar Dotação Orçamentaria'
+    click_link 'Criar Dotação Orçamentária'
 
     within_tab 'Principal' do
       expect(page).to have_disabled_field 'Código'
 
       fill_modal 'Descritor', :with => '2011', :field => 'Ano do exercício'
-      fill_modal 'Estrutura orçamentaria', :with => 'Secretaria de Educação', :field => 'Descrição'
+      fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Função', :with => 'Execução', :field => 'Descrição'
       fill_modal 'Subfunção', :with => 'Supervisor', :field => 'Descrição'
       fill_modal 'Programa do governo', :with => 'Educação', :field => 'Descrição'
@@ -110,7 +110,7 @@ feature "BudgetAllocations" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Dotação Orçamentaria criada com sucesso.'
+    expect(page).to have_notice 'Dotação Orçamentária criada com sucesso.'
 
     click_link '1 - Alocação para o ano de 2011'
 
@@ -118,7 +118,7 @@ feature "BudgetAllocations" do
       expect(page).to have_field 'Descritor', :with => '2011 - Secretaria de Educação'
       expect(page).to have_disabled_field 'Código'
       expect(page).to have_field 'Código', :with => '2'
-      expect(page).to have_field 'Estrutura orçamentaria', :with => '1 - Secretaria de Educação'
+      expect(page).to have_field 'Estrutura orçamentária', :with => '1 - Secretaria de Educação'
       expect(page).to have_field 'Função', :with => '05 - Execução'
       expect(page).to have_field 'Subfunção', :with => '02 - Supervisor'
       expect(page).to have_field 'Programa do governo', :with => 'Educação'
@@ -148,15 +148,15 @@ feature "BudgetAllocations" do
     Descriptor.make!(:detran_2012)
     BudgetAllocation.make!(:reparo_2011)
 
-    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentária > Dotações Orçamentárias'
 
-    click_link 'Criar Dotação Orçamentaria'
+    click_link 'Criar Dotação Orçamentária'
 
     within_tab 'Principal' do
       expect(page).to have_disabled_field 'Código'
 
       fill_modal 'Descritor', :with => '2012', :field => 'Ano do exercício'
-      fill_modal 'Estrutura orçamentaria', :with => 'Secretaria de Educação', :field => 'Descrição'
+      fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Função', :with => 'Execução', :field => 'Descrição'
       fill_modal 'Subfunção', :with => 'Supervisor', :field => 'Descrição'
       fill_modal 'Programa do governo', :with => 'Educação', :field => 'Descrição'
@@ -176,7 +176,7 @@ feature "BudgetAllocations" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Dotação Orçamentaria criada com sucesso.'
+    expect(page).to have_notice 'Dotação Orçamentária criada com sucesso.'
 
     click_link '1 - Alocação para o ano de 2012'
 
@@ -184,7 +184,7 @@ feature "BudgetAllocations" do
       expect(page).to have_field 'Descritor', :with => '2012 - Detran'
       expect(page).to have_disabled_field 'Código'
       expect(page).to have_field 'Código', :with => '1'
-      expect(page).to have_field 'Estrutura orçamentaria', :with => '1 - Secretaria de Educação'
+      expect(page).to have_field 'Estrutura orçamentária', :with => '1 - Secretaria de Educação'
       expect(page).to have_field 'Função', :with => '05 - Execução'
       expect(page).to have_field 'Subfunção', :with => '02 - Supervisor'
       expect(page).to have_field 'Programa do governo', :with => 'Educação'
@@ -211,9 +211,9 @@ feature "BudgetAllocations" do
   scenario 'should apply month value based on kind and value' do
     pending "this test will be removed when there is integration with the accounting system"
 
-    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentária > Dotações Orçamentárias'
 
-    click_link 'Criar Dotação Orçamentaria'
+    click_link 'Criar Dotação Orçamentária'
 
     within_tab 'Programação' do
       expect(page).to have_disabled_field 'Valor'
@@ -243,14 +243,14 @@ feature "BudgetAllocations" do
     ExpenseNature.make!(:compra_de_material)
     Capability.make!(:construcao)
 
-    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentária > Dotações Orçamentárias'
 
     within_records do
       page.find('a').click
     end
 
     within_tab 'Principal' do
-      fill_modal 'Estrutura orçamentaria', :with => 'Secretaria de Desenvolvimento', :field => 'Descrição'
+      fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Desenvolvimento', :field => 'Descrição'
       fill_modal 'Função', :with => 'Administração', :field => 'Descrição'
       fill_modal 'Subfunção', :with => 'Gerente Geral', :field => 'Descrição'
       fill_modal 'Programa do governo', :with => 'Educação', :field => 'Descrição'
@@ -272,7 +272,7 @@ feature "BudgetAllocations" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Dotação Orçamentaria editada com sucesso.'
+    expect(page).to have_notice 'Dotação Orçamentária editada com sucesso.'
 
     within_records do
       page.find('a').click
@@ -280,7 +280,7 @@ feature "BudgetAllocations" do
 
     within_tab 'Principal' do
       expect(page).to have_disabled_field 'Descritor'
-      expect(page).to have_field 'Estrutura orçamentaria', :with => '1.29 - Secretaria de Desenvolvimento'
+      expect(page).to have_field 'Estrutura orçamentária', :with => '1.29 - Secretaria de Desenvolvimento'
       expect(page).to have_field 'Função', :with => '04 - Administração'
       expect(page).to have_field 'Subfunção', :with => '02 - Gerente Geral'
       expect(page).to have_field 'Programa do governo', :with => 'Educação'
@@ -310,9 +310,9 @@ feature "BudgetAllocations" do
 
     Subfunction.make!(:geral)
 
-    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentária > Dotações Orçamentárias'
 
-    click_link 'Criar Dotação Orçamentaria'
+    click_link 'Criar Dotação Orçamentária'
 
     within_tab 'Principal' do
       expect(page).to have_disabled_field 'Subfunção'
@@ -333,7 +333,7 @@ feature "BudgetAllocations" do
 
     BudgetAllocation.make!(:alocacao)
 
-    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentária > Dotações Orçamentárias'
 
     within_records do
       page.find('a').click
@@ -349,7 +349,7 @@ feature "BudgetAllocations" do
 
     BudgetAllocation.make!(:alocacao)
 
-    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentária > Dotações Orçamentárias'
 
     within_records do
       page.find('a').click
@@ -372,9 +372,9 @@ feature "BudgetAllocations" do
     Subfunction.make!(:geral)
     Function.make!(:execucao)
 
-    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentária > Dotações Orçamentárias'
 
-    click_link 'Criar Dotação Orçamentaria'
+    click_link 'Criar Dotação Orçamentária'
 
     within_tab 'Principal' do
       fill_modal 'Função', :with => 'Administração', :field => 'Descrição'
@@ -391,7 +391,7 @@ feature "BudgetAllocations" do
 
     BudgetAllocation.make!(:alocacao_extra)
 
-    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentária > Dotações Orçamentárias'
 
     within_records do
       page.find('a').click
@@ -399,7 +399,7 @@ feature "BudgetAllocations" do
 
     click_link "Apagar"
 
-    expect(page).to have_notice 'Dotação Orçamentaria apagada com sucesso.'
+    expect(page).to have_notice 'Dotação Orçamentária apagada com sucesso.'
 
     expect(page).to_not have_content 'Alocação extra'
   end
@@ -410,11 +410,11 @@ feature "BudgetAllocations" do
     BudgetAllocation.make!(:alocacao)
     BudgetAllocation.make!(:reparo_2011)
 
-    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentária > Dotações Orçamentárias'
 
-    click_link 'Filtrar Dotações Orçamentarias'
+    click_link 'Filtrar Dotações Orçamentárias'
 
-    fill_modal 'Estrutura orçamentaria', :with => 'Secretaria de Desenvolvimento', :field => 'Descrição'
+    fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Desenvolvimento', :field => 'Descrição'
 
     click_button 'Pesquisar'
 
@@ -428,9 +428,9 @@ feature "BudgetAllocations" do
     BudgetAllocation.make!(:alocacao)
     BudgetAllocation.make!(:reparo_2011)
 
-    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentária > Dotações Orçamentárias'
 
-    click_link 'Filtrar Dotações Orçamentarias'
+    click_link 'Filtrar Dotações Orçamentárias'
 
     fill_modal 'Descritor', :with => '2012', :field => 'Ano do exercício'
 
@@ -446,9 +446,9 @@ feature "BudgetAllocations" do
     BudgetAllocation.make!(:alocacao)
     BudgetAllocation.make!(:reparo_2011)
 
-    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentária > Dotações Orçamentárias'
 
-    click_link 'Filtrar Dotações Orçamentarias'
+    click_link 'Filtrar Dotações Orçamentárias'
 
     fill_modal 'Subfunção', :with => 'Supervisor', :field => 'Descrição'
 
@@ -464,9 +464,9 @@ feature "BudgetAllocations" do
     BudgetAllocation.make!(:alocacao)
     BudgetAllocation.make!(:reparo_2011)
 
-    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentária > Dotações Orçamentárias'
 
-    click_link 'Filtrar Dotações Orçamentarias'
+    click_link 'Filtrar Dotações Orçamentárias'
 
     fill_modal 'Programa do governo', :with => 'Educação', :field => 'Descrição'
 
@@ -482,9 +482,9 @@ feature "BudgetAllocations" do
     BudgetAllocation.make!(:alocacao)
     BudgetAllocation.make!(:reparo_2011)
 
-    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentária > Dotações Orçamentárias'
 
-    click_link 'Filtrar Dotações Orçamentarias'
+    click_link 'Filtrar Dotações Orçamentárias'
 
     fill_modal 'Ação do governo', :with => 'Ação Nacional', :field => 'Descrição'
 
@@ -500,9 +500,9 @@ feature "BudgetAllocations" do
     BudgetAllocation.make!(:alocacao)
     BudgetAllocation.make!(:reparo_2011)
 
-    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentária > Dotações Orçamentárias'
 
-    click_link 'Filtrar Dotações Orçamentarias'
+    click_link 'Filtrar Dotações Orçamentárias'
 
     fill_modal 'Natureza da despesa', :with => 'Compra de Material', :field => 'Descrição'
 
@@ -518,9 +518,9 @@ feature "BudgetAllocations" do
     BudgetAllocation.make!(:alocacao)
     BudgetAllocation.make!(:reparo_2011)
 
-    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentária > Dotações Orçamentárias'
 
-    click_link 'Filtrar Dotações Orçamentarias'
+    click_link 'Filtrar Dotações Orçamentárias'
 
     fill_modal 'Função', :with => 'Execução', :field => 'Descrição'
 

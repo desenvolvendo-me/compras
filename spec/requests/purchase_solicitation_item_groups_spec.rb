@@ -42,7 +42,7 @@ feature "PurchaseSolicitationItemGroups" do
       page.find('a').click
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       expect(page).to have_select 'Status', :selected => 'Agrupado'
       expect(page).to have_field 'Agrupamento', :with => 'Agrupamento de antivirus'
     end
@@ -63,7 +63,7 @@ feature "PurchaseSolicitationItemGroups" do
       page.find('a').click
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       expect(page).to have_select 'Status', :selected => 'Pendente'
       expect(page).to have_field 'Agrupamento', :with => ''
     end
@@ -86,7 +86,7 @@ feature "PurchaseSolicitationItemGroups" do
       page.find('a').click
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       expect(page).to have_select 'Status', :selected => 'Agrupado'
       expect(page).to have_field 'Agrupamento', :with => 'Agrupamento de antivirus'
     end

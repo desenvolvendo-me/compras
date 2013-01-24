@@ -197,7 +197,7 @@ feature 'DirectPurchaseAnnuls' do
       expect(page).to have_select 'Status de atendimento', :selected => 'Liberada'
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       within '.purchase-solicitation-budget-allocation:first' do
         within '.item:first' do
           expect(page).to have_select 'Status', :selected => 'Pendente'
@@ -261,7 +261,7 @@ feature 'DirectPurchaseAnnuls' do
       expect(page).to have_select 'Status de atendimento', :selected => 'Liberada'
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       within '.purchase-solicitation-budget-allocation:first' do
         within '.item:first' do
           expect(page).to have_select 'Status', :selected => 'Pendente'

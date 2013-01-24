@@ -46,10 +46,10 @@ feature "AdministrativeProcesses" do
       select 'Aguardando', :from => 'Status do processo administrativo'
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       click_button 'Adicionar Dotação'
 
-      fill_modal 'Dotação orçamentaria', :with => '1', :field => 'Código'
+      fill_modal 'Dotação orçamentária', :with => '1', :field => 'Código'
       fill_in 'Valor previsto', :with => '20,00'
     end
 
@@ -77,8 +77,8 @@ feature "AdministrativeProcesses" do
       expect(page).to have_select 'Status do processo administrativo', :selected => 'Aguardando'
     end
 
-    within_tab 'Dotações orçamentarias' do
-      expect(page).to have_field 'Dotação orçamentaria', :with => budget_allocation.to_s
+    within_tab 'Dotações orçamentárias' do
+      expect(page).to have_field 'Dotação orçamentária', :with => budget_allocation.to_s
       expect(page).to have_field 'Saldo da dotação', :with => '500,00'
       expect(page).to have_field 'Valor previsto', :with => '20,00'
 
@@ -116,15 +116,15 @@ feature "AdministrativeProcesses" do
       select 'Aguardando', :from => 'Status do processo administrativo'
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       expect(page).to_not have_button 'Adicionar Dotação'
       expect(page).to_not have_button 'Remover Dotação'
 
-      expect(page).to have_disabled_field 'Dotação orçamentaria'
+      expect(page).to have_disabled_field 'Dotação orçamentária'
       expect(page).to have_disabled_field 'Saldo da dotação'
       expect(page).to have_disabled_field 'Valor previsto'
 
-      expect(page).to have_field 'Dotação orçamentaria', :with => '1 - Alocação'
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
       expect(page).to have_field 'Saldo da dotação', :with => '500,00'
       expect(page).to have_field 'Valor previsto', :with => '19.800,00'
     end
@@ -152,15 +152,15 @@ feature "AdministrativeProcesses" do
       expect(page).to have_select 'Status do processo administrativo', :selected => 'Aguardando'
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       expect(page).to_not have_button 'Adicionar Dotação'
       expect(page).to_not have_button 'Remover Dotação'
 
-      expect(page).to have_disabled_field 'Dotação orçamentaria'
+      expect(page).to have_disabled_field 'Dotação orçamentária'
       expect(page).to have_disabled_field 'Saldo da dotação'
       expect(page).to have_disabled_field 'Valor previsto'
 
-      expect(page).to have_field 'Dotação orçamentaria', :with => '1 - Alocação'
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
       expect(page).to have_field 'Saldo da dotação', :with => '500,00'
       expect(page).to have_field 'Valor previsto', :with => '19.800,00'
       expect(page).to have_field 'Valor total', :with => '19.800,00'
@@ -172,9 +172,9 @@ feature "AdministrativeProcesses" do
 
     click_link 'Novo processo licitatório'
 
-    within_tab 'Dotações orçamentarias' do
-      expect(page).to have_field 'Dotação orçamentaria', :with => '1 - Alocação'
-      expect(page).to have_disabled_field 'Dotação orçamentaria'
+    within_tab 'Dotações orçamentárias' do
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
+      expect(page).to have_disabled_field 'Dotação orçamentária'
 
       expect(page).to have_field 'Saldo da dotação', :with => '500,00'
       expect(page).to have_disabled_field 'Saldo da dotação'
@@ -249,7 +249,7 @@ feature "AdministrativeProcesses" do
       expect(page).to have_disabled_field 'Solicitação de compra'
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       fill_in 'Valor previsto', :with => '500,00'
     end
 
@@ -265,10 +265,10 @@ feature "AdministrativeProcesses" do
       clear_modal 'Agrupamento de solicitações de compra'
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       expect(page).to have_button 'Adicionar Dotação'
 
-      expect(page).to_not have_field 'Dotação orçamentaria', :with => '1 - Alocação'
+      expect(page).to_not have_field 'Dotação orçamentária', :with => '1 - Alocação'
       expect(page).to_not have_field 'Saldo da dotação', :with => '500,00'
     end
 
@@ -293,10 +293,10 @@ feature "AdministrativeProcesses" do
 
     click_link 'Criar Processo Administrativo'
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       click_button 'Adicionar Dotação'
 
-      fill_modal 'Dotação orçamentaria', :with => '1', :field => 'Código'
+      fill_modal 'Dotação orçamentária', :with => '1', :field => 'Código'
       fill_in 'Valor previsto', :with => '20,00'
     end
 
@@ -308,11 +308,11 @@ feature "AdministrativeProcesses" do
       end
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       expect(page).to_not have_button 'Adicionar Dotação'
       expect(page).to_not have_button 'Remover Dotação'
 
-      expect(page).to_not have_field 'Dotação orçamentaria', :with => ''
+      expect(page).to_not have_field 'Dotação orçamentária', :with => ''
       expect(page).to have_field 'Saldo da dotação', :with => '500,00'
       expect(page).to_not have_field 'Valor previsto', :with => '20,00'
 
@@ -342,8 +342,8 @@ feature "AdministrativeProcesses" do
       expect(page).to have_disabled_field 'Status do processo administrativo'
     end
 
-    within_tab 'Dotações orçamentarias' do
-      expect(page).to have_disabled_field 'Dotação orçamentaria'
+    within_tab 'Dotações orçamentárias' do
+      expect(page).to have_disabled_field 'Dotação orçamentária'
       expect(page).to have_disabled_field 'Saldo da dotação'
       expect(page).to have_disabled_field 'Valor previsto'
 
@@ -390,7 +390,7 @@ feature "AdministrativeProcesses" do
 
     click_link 'Criar Processo Administrativo'
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       click_button 'Adicionar Dotação'
 
       fill_in 'Valor previsto', :with => '20,00'
@@ -446,7 +446,7 @@ feature "AdministrativeProcesses" do
       select 'Aguardando', :from => 'Status do processo administrativo'
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       fill_in 'Valor previsto', :with => '30,00'
     end
 
@@ -473,7 +473,7 @@ feature "AdministrativeProcesses" do
       expect(page).to have_select 'Status do processo administrativo', :selected => 'Aguardando'
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       expect(page).to have_field 'Saldo da dotação', :with => '500,00'
       expect(page).to have_field 'Valor previsto', :with => '30,00'
     end
@@ -645,7 +645,7 @@ feature "AdministrativeProcesses" do
       end
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       fill_in 'Valor previsto', :with => '20,00'
     end
 
@@ -667,7 +667,7 @@ feature "AdministrativeProcesses" do
       page.find('a').click
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       expect(page).to have_field 'Atendido por', :with => 'Processo administrativo 1/2012'
     end
 
@@ -687,7 +687,7 @@ feature "AdministrativeProcesses" do
       page.find('a').click
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       expect(page).to have_field 'Atendido por', :with => ''
     end
 
@@ -897,8 +897,8 @@ feature "AdministrativeProcesses" do
       end
     end
 
-    within_tab 'Dotações orçamentarias' do
-      expect(page).to have_field 'Dotação orçamentaria', :with => '1 - Alocação'
+    within_tab 'Dotações orçamentárias' do
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
       expect(page).to have_field 'Saldo da dotação', :with => '500,00'
 
       within '.nested-administrative-process-budget-allocation:first' do
@@ -926,9 +926,9 @@ feature "AdministrativeProcesses" do
       page.find('a').click
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       expect(page).to have_field 'Valor total', :with => '0,00'
-      expect(page).to_not have_field 'Dotação orçamentaria', :with => '1 - Alocação'
+      expect(page).to_not have_field 'Dotação orçamentária', :with => '1 - Alocação'
       expect(page).to_not have_field 'Saldo da dotação', :with => '500,00'
     end
   end
@@ -951,7 +951,7 @@ feature "AdministrativeProcesses" do
       end
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       within '.nested-administrative-process-budget-allocation:first' do
         fill_in 'Valor previsto', :with => '10,00'
       end
@@ -967,7 +967,7 @@ feature "AdministrativeProcesses" do
       page.find('a').click
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       within '.purchase-solicitation-budget-allocation:first' do
         within '.item:first' do
           expect(page).to have_field 'Atendido por', :with => 'Processo administrativo 1/2012'
@@ -995,7 +995,7 @@ feature "AdministrativeProcesses" do
       page.find('a').click
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       within '.purchase-solicitation-budget-allocation:first' do
         within '.item:first' do
           expect(page).to have_field 'Atendido por', :with => ''
@@ -1034,7 +1034,7 @@ feature "AdministrativeProcesses" do
       select 'Aguardando', :from => 'Status do processo administrativo'
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       fill_in 'Valor previsto', :with => '20,00'
     end
 
@@ -1048,7 +1048,7 @@ feature "AdministrativeProcesses" do
       page.find('a').click
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       expect(page).to have_field 'Atendido por', :with => 'Processo administrativo 1/2012'
     end
   end
@@ -1095,7 +1095,7 @@ feature "AdministrativeProcesses" do
       end
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       fill_in 'Valor previsto', :with => '20,00'
     end
 
@@ -1109,7 +1109,7 @@ feature "AdministrativeProcesses" do
       click_link '1/2012'
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       expect(page).to have_field 'Atendido por', :with => 'Processo administrativo 1/2012'
     end
 
@@ -1127,7 +1127,7 @@ feature "AdministrativeProcesses" do
       end
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       fill_in 'Valor previsto', :with => '50,00'
     end
 
@@ -1141,7 +1141,7 @@ feature "AdministrativeProcesses" do
       click_link '1/2012'
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       expect(page).to have_field 'Atendido por', :with => ''
     end
 
@@ -1151,7 +1151,7 @@ feature "AdministrativeProcesses" do
       click_link '2/2012'
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       expect(page).to have_field 'Atendido por', :with => 'Processo administrativo 1/2012'
     end
   end
@@ -1181,7 +1181,7 @@ feature "AdministrativeProcesses" do
       end
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       fill_in 'Valor previsto', :with => '20,00'
     end
 
@@ -1199,7 +1199,7 @@ feature "AdministrativeProcesses" do
       expect(page).to have_select 'Status de atendimento', :selected => 'Parcialmente atendido'
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       within '.purchase-solicitation-budget-allocation' do
         within '.item' do
           expect(page).to have_select 'Status', :selected => 'Parcialmente atendido'
@@ -1223,7 +1223,7 @@ feature "AdministrativeProcesses" do
       end
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       fill_in 'Valor previsto', :with => '50,00'
     end
 
@@ -1241,7 +1241,7 @@ feature "AdministrativeProcesses" do
       #expect(page).to have_select 'Status de atendimento', :selected => 'Liberada'
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       within '.purchase-solicitation-budget-allocation:first' do
         within '.item' do
           expect(page).to have_select 'Status', :selected => 'Pendente'
@@ -1261,7 +1261,7 @@ feature "AdministrativeProcesses" do
       expect(page).to have_select 'Status de atendimento', :selected => 'Parcialmente atendido'
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       within '.purchase-solicitation-budget-allocation' do
         within '.item' do
           expect(page).to have_select 'Status', :selected => 'Parcialmente atendido'
@@ -1314,10 +1314,10 @@ feature "AdministrativeProcesses" do
       select 'Aguardando', :from => 'Status do processo administrativo'
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       expect(page).to_not have_button 'Adicionar Dotação'
-      expect(page).to have_field 'Dotação orçamentaria', :with => '1 - Alocação'
-      expect(page).to have_disabled_field 'Dotação orçamentaria'
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
+      expect(page).to have_disabled_field 'Dotação orçamentária'
 
       expect(page).to have_field 'Saldo da dotação', :with => '500,00'
       expect(page).to have_disabled_field 'Saldo da dotação'
@@ -1337,9 +1337,9 @@ feature "AdministrativeProcesses" do
       clear_modal 'Solicitação de compra'
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       expect(page).to have_button 'Adicionar Dotação'
-      expect(page).to_not have_field 'Dotação orçamentaria', :with => '1 - Alocação'
+      expect(page).to_not have_field 'Dotação orçamentária', :with => '1 - Alocação'
 
       expect(page).to_not have_field 'Saldo da dotação', :with => '500,00'
 
@@ -1360,7 +1360,7 @@ feature "AdministrativeProcesses" do
       expect(page).to have_select 'Status de atendimento', :selected => 'Liberada'
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       within '.purchase-solicitation-budget-allocation' do
         within '.item' do
           expect(page).to have_select 'Status', :selected => 'Pendente'
@@ -1413,10 +1413,10 @@ feature "AdministrativeProcesses" do
       select 'Aguardando', :from => 'Status do processo administrativo'
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       expect(page).to_not have_button 'Adicionar Dotação'
-      expect(page).to have_field 'Dotação orçamentaria', :with => '1 - Alocação'
-      expect(page).to have_disabled_field 'Dotação orçamentaria'
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
+      expect(page).to have_disabled_field 'Dotação orçamentária'
 
       expect(page).to have_field 'Saldo da dotação', :with => '500,00'
       expect(page).to have_disabled_field 'Saldo da dotação'
@@ -1450,10 +1450,10 @@ feature "AdministrativeProcesses" do
       expect(page).to have_select 'Status do processo administrativo', :selected => 'Aguardando'
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       expect(page).to_not have_button 'Adicionar Dotação'
-      expect(page).to have_field 'Dotação orçamentaria', :with => '1 - Alocação'
-      expect(page).to have_disabled_field 'Dotação orçamentaria'
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
+      expect(page).to have_disabled_field 'Dotação orçamentária'
 
       expect(page).to have_field 'Saldo da dotação', :with => '500,00'
       expect(page).to have_disabled_field 'Saldo da dotação'
@@ -1469,9 +1469,9 @@ feature "AdministrativeProcesses" do
 
     click_link 'Novo processo licitatório'
 
-    within_tab 'Dotações orçamentarias' do
-      expect(page).to have_field 'Dotação orçamentaria', :with => '1 - Alocação'
-      expect(page).to have_disabled_field 'Dotação orçamentaria'
+    within_tab 'Dotações orçamentárias' do
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
+      expect(page).to have_disabled_field 'Dotação orçamentária'
 
       expect(page).to have_field 'Saldo da dotação', :with => '500,00'
       expect(page).to have_disabled_field 'Saldo da dotação'
@@ -1511,7 +1511,7 @@ feature "AdministrativeProcesses" do
       click_link '1/2012'
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       within '.item:nth-child(1)' do
         expect(page).to have_select 'Status', :selected => 'Parcialmente atendido'
         expect(page).to have_field 'Atendido por', :with => 'Processo administrativo 1/2012'

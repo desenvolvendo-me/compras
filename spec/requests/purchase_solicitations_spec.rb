@@ -32,7 +32,7 @@ feature "PurchaseSolicitations" do
 
       fill_in 'Ano', :with => '2012'
       fill_in 'Data da solicitação', :with => '01/02/2012'
-      fill_modal 'Estrutura orçamentaria solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
+      fill_modal 'Estrutura orçamentária solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Responsável pela solicitação', :with => '958473', :field => 'Matrícula'
       fill_in 'Justificativa da solicitação', :with => 'Novas cadeiras'
       fill_modal 'Local para entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
@@ -40,7 +40,7 @@ feature "PurchaseSolicitations" do
       fill_in 'Observações gerais', :with => 'Muitas cadeiras estão quebrando no escritório'
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       click_button "Adicionar Dotação"
 
       within '.purchase-solicitation-budget-allocation:last' do
@@ -76,7 +76,7 @@ feature "PurchaseSolicitations" do
       expect(page).to have_field 'Ano', :with => '2012'
       expect(page).to have_field 'Data da solicitação', :with => '01/02/2012'
       expect(page).to have_field 'Responsável pela solicitação', :with => 'Gabriel Sobrinho'
-      expect(page).to have_field 'Estrutura orçamentaria solicitante', :with => '1 - Secretaria de Educação'
+      expect(page).to have_field 'Estrutura orçamentária solicitante', :with => '1 - Secretaria de Educação'
       expect(page).to have_field 'Justificativa da solicitação', :with => 'Novas cadeiras'
       expect(page).to have_field 'Local para entrega', :selected => 'Secretaria da Educação'
       expect(page).to have_select 'Tipo de solicitação', :selected => 'Bens'
@@ -86,7 +86,7 @@ feature "PurchaseSolicitations" do
       expect(page).to have_select 'Status de atendimento', :selected => 'Pendente'
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       expect(page).to have_field "Dotação", :with => budget_allocation.to_s
       expect(page).to have_field 'Natureza da despesa', :with => '3.0.10.01.12 - Vencimentos e Salários'
 
@@ -124,14 +124,14 @@ feature "PurchaseSolicitations" do
     within_tab 'Principal' do
       fill_in 'Data da solicitação', :with => '01/02/2013'
       fill_modal 'Responsável pela solicitação', :with => '12903412', :field => 'Matrícula'
-      fill_modal 'Estrutura orçamentaria solicitante', :with => 'Secretaria de Desenvolvimento', :field => 'Descrição'
+      fill_modal 'Estrutura orçamentária solicitante', :with => 'Secretaria de Desenvolvimento', :field => 'Descrição'
       fill_in 'Justificativa da solicitação', :with => 'Novas mesas'
       fill_modal 'Local para entrega', :with => 'Secretaria da Saúde', :field => "Descrição"
       select 'Produtos', :from => 'Tipo de solicitação'
       fill_in 'Observações gerais', :with => 'Muitas mesas estão quebrando no escritório'
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       click_button "Remover Dotação"
 
       click_button "Adicionar Dotação"
@@ -170,14 +170,14 @@ feature "PurchaseSolicitations" do
       expect(page).to have_disabled_field 'Ano', :with => '2012'
       expect(page).to have_field 'Data da solicitação', :with => '01/02/2013'
       expect(page).to have_field 'Responsável pela solicitação', :with => 'Wenderson Malheiros'
-      expect(page).to have_field 'Estrutura orçamentaria solicitante', :with => '1.29 - Secretaria de Desenvolvimento'
+      expect(page).to have_field 'Estrutura orçamentária solicitante', :with => '1.29 - Secretaria de Desenvolvimento'
       expect(page).to have_field 'Justificativa da solicitação', :with => 'Novas mesas'
       expect(page).to have_field 'Local para entrega', :with => 'Secretaria da Saúde'
       expect(page).to have_select 'Tipo de solicitação', :selected => 'Produtos'
       expect(page).to have_field 'Observações gerais', :with => 'Muitas mesas estão quebrando no escritório'
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       expect(page).to have_field "Dotação", :with => budget_allocation.to_s
       expect(page).to have_field 'Natureza da despesa', :with => '3.0.10.01.11 - Compra de Material'
 
@@ -201,7 +201,7 @@ feature "PurchaseSolicitations" do
 
     click_button 'Salvar'
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       expect(page).to have_content 'é necessário cadastrar pelo menos uma dotação'
 
       click_button 'Adicionar Dotação'
@@ -209,7 +209,7 @@ feature "PurchaseSolicitations" do
 
     click_button 'Salvar'
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       expect(page).to have_content 'é necessário cadastrar pelo menos um item'
     end
   end
@@ -223,7 +223,7 @@ feature "PurchaseSolicitations" do
       page.find('a').click
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       expect(page).to have_field 'Item'
 
       click_button 'Remover Item'
@@ -231,7 +231,7 @@ feature "PurchaseSolicitations" do
 
     click_button 'Salvar'
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       expect(page).to_not have_field 'Item'
       expect(page).to have_content 'é necessário cadastrar pelo menos um item'
 
@@ -242,7 +242,7 @@ feature "PurchaseSolicitations" do
 
     click_button 'Salvar'
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       expect(page).to_not have_field 'Dotação'
       expect(page).to have_content 'é necessário cadastrar pelo menos uma dotação'
     end
@@ -253,7 +253,7 @@ feature "PurchaseSolicitations" do
 
     click_link 'Criar Solicitação de Compra'
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       expect(page).to have_disabled_field 'Valor total dos itens'
 
       click_button 'Adicionar Dotação'
@@ -326,7 +326,7 @@ feature "PurchaseSolicitations" do
     within_tab 'Principal' do
       fill_in 'Ano', :with => '2012'
       fill_in 'Data da solicitação', :with => '01/02/2012'
-      fill_modal 'Estrutura orçamentaria solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
+      fill_modal 'Estrutura orçamentária solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Responsável pela solicitação', :with => '958473', :field => 'Matrícula'
       fill_in 'Justificativa da solicitação', :with => 'Novas cadeiras'
       fill_modal 'Local para entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
@@ -334,7 +334,7 @@ feature "PurchaseSolicitations" do
       fill_in 'Observações gerais', :with => 'Muitas cadeiras estão quebrando no escritório'
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       click_button "Adicionar Dotação"
 
       within '.purchase-solicitation-budget-allocation:last' do
@@ -362,7 +362,7 @@ feature "PurchaseSolicitations" do
       expect(page).to have_field 'Ano', :with => '2012'
       expect(page).to have_field 'Data da solicitação', :with => '01/02/2012'
       expect(page).to have_field 'Responsável pela solicitação', :with => 'Gabriel Sobrinho'
-      expect(page).to have_field 'Estrutura orçamentaria solicitante', :with => '1 - Secretaria de Educação'
+      expect(page).to have_field 'Estrutura orçamentária solicitante', :with => '1 - Secretaria de Educação'
       expect(page).to have_field 'Justificativa da solicitação', :with => 'Novas cadeiras'
       expect(page).to have_field 'Local para entrega', :selected => 'Secretaria da Educação'
       expect(page).to have_select 'Tipo de solicitação', :selected => 'Bens'
@@ -372,7 +372,7 @@ feature "PurchaseSolicitations" do
       expect(page).to have_select 'Status de atendimento', :selected => 'Pendente'
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       expect(page).to have_field "Dotação", :with => budget_allocation.to_s
       expect(page).to have_field 'Natureza da despesa', :with => '3.0.10.01.12 - Vencimentos e Salários'
 
@@ -428,7 +428,7 @@ feature "PurchaseSolicitations" do
     within_tab 'Principal' do
       fill_in 'Ano', :with => '2012'
       fill_in 'Data da solicitação', :with => '01/02/2012'
-      fill_modal 'Estrutura orçamentaria solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
+      fill_modal 'Estrutura orçamentária solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Responsável pela solicitação', :with => '958473', :field => 'Matrícula'
       fill_in 'Justificativa da solicitação', :with => 'Novas cadeiras'
       fill_modal 'Local para entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
@@ -436,7 +436,7 @@ feature "PurchaseSolicitations" do
       fill_in 'Observações gerais', :with => 'Muitas cadeiras estão quebrando no escritório'
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       click_button "Adicionar Dotação"
 
       within '.purchase-solicitation-budget-allocation:last' do
@@ -457,8 +457,8 @@ feature "PurchaseSolicitations" do
 
     expect(page).to_not have_notice 'Solicitação de Compra criada com sucesso.'
 
-    within_tab 'Dotações orçamentarias' do
-      expect(page).to have_content "já existe uma solicitação de compra pendente com esta estrutura orçamentaria solicitante e material"
+    within_tab 'Dotações orçamentárias' do
+      expect(page).to have_content "já existe uma solicitação de compra pendente com esta estrutura orçamentária solicitante e material"
     end
   end
 
@@ -473,7 +473,7 @@ feature "PurchaseSolicitations" do
       click_link purchase_solicitation.code_and_year
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
     end
 
@@ -481,8 +481,8 @@ feature "PurchaseSolicitations" do
 
     expect(page).to_not have_notice 'Solicitação de Compra criada com sucesso.'
 
-    within_tab 'Dotações orçamentarias' do
-      expect(page).to have_content "já existe uma solicitação de compra pendente com esta estrutura orçamentaria solicitante e material"
+    within_tab 'Dotações orçamentárias' do
+      expect(page).to have_content "já existe uma solicitação de compra pendente com esta estrutura orçamentária solicitante e material"
     end
   end
 
@@ -519,7 +519,7 @@ feature "PurchaseSolicitations" do
 
     within_records do
       expect(page).to have_content 'Código/Ano'
-      expect(page).to have_content 'Estrutura orçamentaria solicitante'
+      expect(page).to have_content 'Estrutura orçamentária solicitante'
       expect(page).to have_content 'Responsável pela solicitação'
       expect(page).to have_content 'Status de atendimento'
 
@@ -546,7 +546,7 @@ feature "PurchaseSolicitations" do
 
     select "Serviços", :on => "Tipo de solicitação"
 
-    within_tab "Dotações orçamentarias" do
+    within_tab "Dotações orçamentárias" do
       click_button "Adicionar Dotação"
 
       within '.purchase-solicitation-budget-allocation:last' do
@@ -574,7 +574,7 @@ feature "PurchaseSolicitations" do
       click_link "1/2012"
     end
 
-    within_tab "Dotações orçamentarias" do
+    within_tab "Dotações orçamentárias" do
       clear_modal "Serviço"
 
       within_modal "Serviço" do
@@ -683,7 +683,7 @@ feature "PurchaseSolicitations" do
       expect(page).to have_select 'Status de atendimento', :selected => 'Parcialmente atendido'
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       within 'div.item' do
         expect(page).to have_select 'Status', :selected => 'Pendente'
       end
@@ -769,7 +769,7 @@ feature "PurchaseSolicitations" do
       expect(page).to have_select 'Status de atendimento', :selected => 'Atendida'
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       within 'div.item' do
         expect(page).to have_select 'Status', :selected => 'Atendido'
       end
@@ -795,7 +795,7 @@ feature "PurchaseSolicitations" do
     within_tab 'Principal' do
       fill_in 'Ano', :with => '2012'
       fill_in 'Data da solicitação', :with => '01/02/2012'
-      fill_modal 'Estrutura orçamentaria solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
+      fill_modal 'Estrutura orçamentária solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Responsável pela solicitação', :with => '958473', :field => 'Matrícula'
       fill_in 'Justificativa da solicitação', :with => 'Novas cadeiras'
       fill_modal 'Local para entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
@@ -803,7 +803,7 @@ feature "PurchaseSolicitations" do
       fill_in 'Observações gerais', :with => 'Muitas cadeiras estão quebrando no escritório'
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       click_button "Adicionar Dotação"
 
       within '.purchase-solicitation-budget-allocation:last' do
@@ -832,7 +832,7 @@ feature "PurchaseSolicitations" do
 
     expect(page).to_not have_notice 'Solicitação de Compra criada com sucesso.'
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       within '#allocations .item:last' do
         expect(page).to have_content 'já está em uso'
       end

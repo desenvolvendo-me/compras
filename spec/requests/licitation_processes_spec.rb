@@ -94,7 +94,7 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Dotações' do
-      expect(page).to have_field 'Dotação orçamentaria', :with => budget_allocation.to_s
+      expect(page).to have_field 'Dotação orçamentária', :with => budget_allocation.to_s
       expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
       expect(page).to have_field 'Saldo da dotação', :with => '500,00'
       expect(page).to have_field 'Valor previsto', :with => '20,00'
@@ -172,7 +172,7 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Dotações' do
-      expect(page).to have_field 'Dotação orçamentaria', :with => budget_allocation.to_s
+      expect(page).to have_field 'Dotação orçamentária', :with => budget_allocation.to_s
       expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
       expect(page).to have_field 'Saldo da dotação', :with => '500,00'
       expect(page).to have_field 'Valor previsto', :with => '20,00'
@@ -334,7 +334,7 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Dotações' do
-      expect(page).to have_field 'Dotação orçamentaria', :with => budget_allocation.to_s
+      expect(page).to have_field 'Dotação orçamentária', :with => budget_allocation.to_s
       expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
       expect(page).to have_field 'Saldo da dotação', :with => '500,00'
       expect(page).to have_field 'Valor previsto', :with => '20,00'
@@ -495,7 +495,7 @@ feature "LicitationProcesses" do
     click_link 'Documentos'
     expect(page).to have_disabled_element 'Remover', :reason => 'a última publicação é do tipo (Cancelamento). Não pode ser alterado'
 
-    click_link 'Dotações orçamentarias'
+    click_link 'Dotações orçamentárias'
     expect(page).to have_disabled_element 'Adicionar Item', :reason => 'a última publicação é do tipo (Cancelamento). Não pode ser alterado'
     expect(page).to have_disabled_element 'Remover Item', :reason => 'a última publicação é do tipo (Cancelamento). Não pode ser alterado'
   end

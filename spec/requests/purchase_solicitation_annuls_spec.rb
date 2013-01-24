@@ -78,7 +78,7 @@ feature 'PurchaseSolicitationAnnul' do
     within_tab 'Principal' do
       expect(page).to have_disabled_field 'Ano'
       expect(page).to have_disabled_field 'Data da solicitação'
-      expect(page).to have_disabled_field 'Estrutura orçamentaria solicitante'
+      expect(page).to have_disabled_field 'Estrutura orçamentária solicitante'
       expect(page).to have_disabled_field 'Responsável pela solicitação'
       expect(page).to have_disabled_field 'Justificativa da solicitação'
       expect(page).to have_disabled_field 'Local para entrega'
@@ -91,7 +91,7 @@ feature 'PurchaseSolicitationAnnul' do
       expect(page).to have_disabled_field 'Justificativa para não atendimento'
     end
 
-    within_tab 'Dotações orçamentarias' do
+    within_tab 'Dotações orçamentárias' do
       expect(page).to have_disabled_field 'Valor total dos itens'
 
       expect(page).to have_disabled_field 'Dotação'

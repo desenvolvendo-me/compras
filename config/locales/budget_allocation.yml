@@ -2,14 +2,14 @@ pt-BR:
   activerecord:
     models:
       budget_allocation:
-        one: "Dotação Orçamentaria"
-        other: "Dotações Orçamentarias"
+        one: "Dotação Orçamentária"
+        other: "Dotações Orçamentárias"
 
     attributes:
       budget_allocation:
         alienation_appeal: "Recurso alienação"
         amount: "Valor"
-        budget_structure: "Estrutura orçamentaria"
+        budget_structure: "Estrutura orçamentária"
         capability: "Recurso"
         code: "Código"
         date: "Data"

@@ -14,23 +14,23 @@ feature "BudgetStructure" do
     Address.make!(:general)
     Employee.make!(:sobrinho)
 
-    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentárias'
 
-    click_link 'Criar Estrutura Orçamentaria'
+    click_link 'Criar Estrutura Orçamentária'
 
     within_tab 'Informações' do
-      fill_modal 'Configuração de estrutura orçamentaria', :with => 'Configuração do Detran', :field => 'Descrição'
+      fill_modal 'Configuração de estrutura orçamentária', :with => 'Configuração do Detran', :field => 'Descrição'
       select 'Sintético', :from => 'Tipo'
 
       within_modal 'Nível' do
-        expect(page).to have_field 'Configuração de estrutura orçamentaria', :with => 'Configuração do Detran'
-        expect(page).to have_disabled_field 'Configuração de estrutura orçamentaria'
+        expect(page).to have_field 'Configuração de estrutura orçamentária', :with => 'Configuração do Detran'
+        expect(page).to have_disabled_field 'Configuração de estrutura orçamentária'
         click_button 'Pesquisar'
         click_record 'Orgão'
       end
 
       fill_in 'Código', :with => '1'
-      expect(page).to have_field 'Estrutura orçamentaria', :with => '1'
+      expect(page).to have_field 'Estrutura orçamentária', :with => '1'
       fill_in 'Código do TCE', :with => '051'
       fill_in 'Descrição', :with => 'Secretaria de Educação'
       fill_in 'Sigla', :with => 'SEMUEDU'
@@ -54,16 +54,16 @@ feature "BudgetStructure" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Estrutura Orçamentaria criada com sucesso.'
+    expect(page).to have_notice 'Estrutura Orçamentária criada com sucesso.'
 
     click_link 'Secretaria de Educação'
 
     within_tab 'Informações' do
-      expect(page).to have_field 'Configuração de estrutura orçamentaria', :with => 'Configuração do Detran'
+      expect(page).to have_field 'Configuração de estrutura orçamentária', :with => 'Configuração do Detran'
       expect(page).to have_select 'Tipo', :selected => 'Sintético'
       expect(page).to have_field 'Nível', :with => '1 - Orgão'
       expect(page).to have_field 'Código', :with => '1'
-      expect(page).to have_field 'Estrutura orçamentaria', :with => '1'
+      expect(page).to have_field 'Estrutura orçamentária', :with => '1'
       expect(page).to have_field 'Código do TCE', :with => '051'
       expect(page).to have_field 'Descrição', :with => 'Secretaria de Educação'
       expect(page).to have_field 'Sigla', :with => 'SEMUEDU'
@@ -95,20 +95,20 @@ feature "BudgetStructure" do
     Employee.make!(:wenderson)
     RegulatoryAct.make!(:emenda)
 
-    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentárias'
 
     click_link 'Secretaria de Educação'
 
     within_tab 'Informações' do
-      fill_modal 'Configuração de estrutura orçamentaria', :with => 'Configuração do Detran', :field => 'Descrição'
+      fill_modal 'Configuração de estrutura orçamentária', :with => 'Configuração do Detran', :field => 'Descrição'
       within_modal 'Nível' do
-        expect(page).to have_field 'Configuração de estrutura orçamentaria', :with => 'Configuração do Detran'
-        expect(page).to have_disabled_field 'Configuração de estrutura orçamentaria'
+        expect(page).to have_field 'Configuração de estrutura orçamentária', :with => 'Configuração do Detran'
+        expect(page).to have_disabled_field 'Configuração de estrutura orçamentária'
         click_button 'Pesquisar'
         click_record 'Orgão'
       end
       fill_in 'Código', :with => '2'
-      expect(page).to have_field 'Estrutura orçamentaria', :with => '2'
+      expect(page).to have_field 'Estrutura orçamentária', :with => '2'
       fill_in 'Código do TCE', :with => '081'
       fill_in 'Descrição', :with => 'Secretaria de Transporte'
       fill_in 'Sigla', :with => 'SEMUTRA'
@@ -131,16 +131,16 @@ feature "BudgetStructure" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Estrutura Orçamentaria editada com sucesso.'
+    expect(page).to have_notice 'Estrutura Orçamentária editada com sucesso.'
 
     click_link 'Secretaria de Transporte'
 
     within_tab 'Informações' do
-      expect(page).to have_field 'Configuração de estrutura orçamentaria', :with => 'Configuração do Detran'
+      expect(page).to have_field 'Configuração de estrutura orçamentária', :with => 'Configuração do Detran'
       expect(page).to have_select 'Tipo', :selected => 'Sintético'
       expect(page).to have_field 'Nível', :with => '1 - Orgão'
       expect(page).to have_field 'Código', :with => '2'
-      expect(page).to have_field 'Estrutura orçamentaria', :with => '2'
+      expect(page).to have_field 'Estrutura orçamentária', :with => '2'
       expect(page).to have_field 'Código do TCE', :with => '081'
       expect(page).to have_field 'Descrição', :with => 'Secretaria de Transporte'
       expect(page).to have_field 'Sigla', :with => 'SEMUTRA'
@@ -170,14 +170,14 @@ feature "BudgetStructure" do
 
     BudgetStructure.make!(:secretaria_de_desenvolvimento)
 
-    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentárias'
 
     click_link 'Secretaria de Desenvolvimento'
 
     within_tab 'Informações' do
       fill_in 'Código', :with => '12'
 
-      expect(page).to have_field 'Estrutura orçamentaria', :with => '1.12'
+      expect(page).to have_field 'Estrutura orçamentária', :with => '1.12'
     end
   end
 
@@ -186,7 +186,7 @@ feature "BudgetStructure" do
 
     BudgetStructure.make!(:secretaria_de_desenvolvimento_level_3 )
 
-    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentárias'
 
     click_link 'Secretaria de Educação'
 
@@ -209,23 +209,23 @@ feature "BudgetStructure" do
     Address.make!(:general)
     Employee.make!(:sobrinho)
 
-    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentárias'
 
-    click_link 'Criar Estrutura Orçamentaria'
+    click_link 'Criar Estrutura Orçamentária'
 
     within_tab 'Informações' do
-      fill_modal 'Configuração de estrutura orçamentaria', :with => 'Configuração do Detran', :field => 'Descrição'
+      fill_modal 'Configuração de estrutura orçamentária', :with => 'Configuração do Detran', :field => 'Descrição'
       select 'Sintético', :from => 'Tipo'
 
       within_modal 'Nível' do
-        expect(page).to have_field 'Configuração de estrutura orçamentaria', :with => 'Configuração do Detran'
-        expect(page).to have_disabled_field 'Configuração de estrutura orçamentaria'
+        expect(page).to have_field 'Configuração de estrutura orçamentária', :with => 'Configuração do Detran'
+        expect(page).to have_disabled_field 'Configuração de estrutura orçamentária'
         click_button 'Pesquisar'
         click_record 'Orgão'
       end
 
       fill_in 'Código', :with => '1'
-      expect(page).to have_field 'Estrutura orçamentaria', :with => '1'
+      expect(page).to have_field 'Estrutura orçamentária', :with => '1'
       fill_in 'Código do TCE', :with => '051'
       fill_in 'Descrição', :with => 'Secretaria de Educação'
       fill_in 'Sigla', :with => 'SEMUEDU'
@@ -250,7 +250,7 @@ feature "BudgetStructure" do
 
     click_button 'Salvar'
 
-    expect(page).to have_content 'já existe um código para este nível desta configuração Estrutura orçamentaria Código do TCE'
+    expect(page).to have_content 'já existe um código para este nível desta configuração Estrutura orçamentária Código do TCE'
   end
 
   scenario 'validating modal of level' do
@@ -259,12 +259,12 @@ feature "BudgetStructure" do
     BudgetStructure.make!(:secretaria_de_educacao)
     BudgetStructureConfiguration.make!(:secretaria_de_educacao)
 
-    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentárias'
 
     click_link 'Secretaria de Educação'
 
     within_tab 'Informações' do
-      fill_modal 'Configuração de estrutura orçamentaria', :with => 'Configuração do Detran', :field => 'Descrição'
+      fill_modal 'Configuração de estrutura orçamentária', :with => 'Configuração do Detran', :field => 'Descrição'
       within_modal 'Nível' do
          click_button 'Pesquisar'
 
@@ -282,24 +282,24 @@ feature "BudgetStructure" do
     BudgetStructure.make!(:secretaria_de_educacao)
     BudgetStructure.make!(:secretaria_de_desenvolvimento)
 
-    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentárias'
 
-    click_link 'Criar Estrutura Orçamentaria'
+    click_link 'Criar Estrutura Orçamentária'
 
     within_tab 'Informações' do
-      fill_modal 'Configuração de estrutura orçamentaria', :with => 'Configuração do Detran', :field => 'Descrição'
+      fill_modal 'Configuração de estrutura orçamentária', :with => 'Configuração do Detran', :field => 'Descrição'
       select 'Sintético', :from => 'Tipo'
 
       within_modal 'Nível' do
-        expect(page).to have_field 'Configuração de estrutura orçamentaria', :with => 'Configuração do Detran'
-        expect(page).to have_disabled_field 'Configuração de estrutura orçamentaria'
+        expect(page).to have_field 'Configuração de estrutura orçamentária', :with => 'Configuração do Detran'
+        expect(page).to have_disabled_field 'Configuração de estrutura orçamentária'
         click_button 'Pesquisar'
         click_record 'Unidade'
       end
 
-      within_modal 'Estrutura orçamentaria superior' do
-        expect(page).to have_field 'Configuração de estrutura orçamentaria', :with => 'Configuração do Detran'
-        expect(page).to have_disabled_field 'Configuração de estrutura orçamentaria'
+      within_modal 'Estrutura orçamentária superior' do
+        expect(page).to have_field 'Configuração de estrutura orçamentária', :with => 'Configuração do Detran'
+        expect(page).to have_disabled_field 'Configuração de estrutura orçamentária'
         expect(page).to have_field 'Nível', :with => '1 - Orgão'
         expect(page).to have_disabled_field 'Nível'
 
@@ -316,13 +316,13 @@ feature "BudgetStructure" do
 
     BudgetStructure.make!(:secretaria_de_educacao)
 
-    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentárias'
 
     click_link 'Secretaria de Educação'
 
     click_link 'Apagar'
 
-    expect(page).to have_notice 'Estrutura Orçamentaria apagada com sucesso.'
+    expect(page).to have_notice 'Estrutura Orçamentária apagada com sucesso.'
 
     expect(page).to_not have_content 'Secretaria de Educação'
     expect(page).to_not have_content 'Configuração do Detran'
@@ -336,9 +336,9 @@ feature "BudgetStructure" do
   scenario 'should allow one responsible by time when new form' do
     pending "this test will be removed when there is integration with the accounting system"
 
-    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentárias'
 
-    click_link 'Criar Estrutura Orçamentaria'
+    click_link 'Criar Estrutura Orçamentária'
 
     within_tab 'Responsáveis' do
       click_button 'Adicionar Responsável'
@@ -362,7 +362,7 @@ feature "BudgetStructure" do
 
     BudgetStructure.make!(:secretaria_de_educacao)
 
-    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentárias'
 
     click_link 'Secretaria de Educação'
 
@@ -380,7 +380,7 @@ feature "BudgetStructure" do
 
     BudgetStructure.make!(:secretaria_de_educacao)
 
-    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentárias'
 
     click_link 'Secretaria de Educação'
 
@@ -404,7 +404,7 @@ feature "BudgetStructure" do
     BudgetStructure.make!(:secretaria_de_educacao)
     Employee.make!(:wenderson)
 
-    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentárias'
 
     click_link 'Secretaria de Educação'
 
@@ -418,7 +418,7 @@ feature "BudgetStructure" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Estrutura Orçamentaria editada com sucesso.'
+    expect(page).to have_notice 'Estrutura Orçamentária editada com sucesso.'
 
     click_link 'Secretaria de Educação'
 
@@ -435,7 +435,7 @@ feature "BudgetStructure" do
     BudgetStructure.make!(:secretaria_de_educacao_com_dois_responsaveis)
     Employee.make!(:joao_da_silva)
 
-    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentárias'
 
     click_link 'Secretaria de Educação com dois responsaveis'
 
@@ -449,7 +449,7 @@ feature "BudgetStructure" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Estrutura Orçamentaria editada com sucesso.'
+    expect(page).to have_notice 'Estrutura Orçamentária editada com sucesso.'
 
     click_link 'Secretaria de Educação com dois responsaveis'
 
@@ -474,7 +474,7 @@ feature "BudgetStructure" do
     BudgetStructure.make!(:secretaria_de_educacao)
     Employee.make!(:wenderson)
 
-    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentárias'
 
     click_link 'Secretaria de Educação'
 
@@ -501,7 +501,7 @@ feature "BudgetStructure" do
 
     BudgetStructure.make!(:secretaria_de_educacao)
 
-    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentárias'
 
     click_link 'Secretaria de Educação'
 
@@ -511,7 +511,7 @@ feature "BudgetStructure" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Estrutura Orçamentaria editada com sucesso.'
+    expect(page).to have_notice 'Estrutura Orçamentária editada com sucesso.'
 
     click_link 'Secretaria de Educação'
 

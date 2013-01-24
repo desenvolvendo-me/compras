@@ -26,7 +26,7 @@ feature "RegulatoryActs" do
     end
 
     within_tab "Complementar" do
-      fill_in 'Porcentagem de lei orçamentaria', :with => '5,00'
+      fill_in 'Porcentagem de lei orçamentária', :with => '5,00'
       fill_in 'Porcentagem de antecipação da receita', :with => '3,00'
       fill_in 'Valor autorizado da dívida', :with => '7.000,00'
     end
@@ -54,7 +54,7 @@ feature "RegulatoryActs" do
     end
 
     within_tab 'Complementar' do
-      expect(page).to have_field 'Porcentagem de lei orçamentaria', :with => '5,00'
+      expect(page).to have_field 'Porcentagem de lei orçamentária', :with => '5,00'
       expect(page).to have_field 'Porcentagem de antecipação da receita', :with => '3,00'
       expect(page).to have_field 'Valor autorizado da dívida', :with => '7.000,00'
     end
@@ -88,7 +88,7 @@ feature "RegulatoryActs" do
     end
 
     within_tab 'Complementar' do
-      fill_in 'Porcentagem de lei orçamentaria', :with => '15,00'
+      fill_in 'Porcentagem de lei orçamentária', :with => '15,00'
       fill_in 'Porcentagem de antecipação da receita', :with => '13,00'
       fill_in 'Valor autorizado da dívida', :with => '17.000,00'
     end
@@ -116,7 +116,7 @@ feature "RegulatoryActs" do
     end
 
     within_tab 'Complementar' do
-      expect(page).to have_field 'Porcentagem de lei orçamentaria', :with => '15,00'
+      expect(page).to have_field 'Porcentagem de lei orçamentária', :with => '15,00'
       expect(page).to have_field 'Porcentagem de antecipação da receita', :with => '13,00'
       expect(page).to have_field 'Valor autorizado da dívida', :with => '17.000,00'
     end

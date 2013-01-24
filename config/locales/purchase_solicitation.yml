@@ -9,10 +9,10 @@ pt-BR:
       purchase_solicitation:
         accounting_year: "Ano"
         request_date: "Data da solicitação"
-        budget_structure: "Estrutura orçamentaria solicitante"
+        budget_structure: "Estrutura orçamentária solicitante"
         responsible: "Responsável pela solicitação"
         justification: "Justificativa da solicitação"
-        budget_allocation: "Dotação orçamentaria"
+        budget_allocation: "Dotação orçamentária"
         budget_allocation_amount: "Saldo da dotação"
         delivery_location: "Local para entrega"
         kind: "Tipo de solicitação"
