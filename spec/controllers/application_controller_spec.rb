@@ -55,10 +55,6 @@ describe ApplicationController do
     subject.current_prefecture
   end
 
-  it 'should return root_url' do
-    expect(subject.root_url).to eq 'http://test.host'
-  end
-
   describe '#render_to_pdf' do
     it 'should render_partial to pdf' do
       subject.should_receive(:render_to_string).
