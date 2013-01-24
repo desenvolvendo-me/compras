@@ -20,6 +20,7 @@ class Bidder < Compras::Model
   has_many :licitation_process_classifications_by_classifiable, :as => :classifiable, :dependent => :destroy, :class_name => 'LicitationProcessClassification'
   has_many :trading_item_bids, :dependent => :restrict
   has_many :licitation_process_ratifications, :dependent => :restrict
+  has_many :trading_item_closings, :dependent => :restrict
 
   has_one :disqualification, :dependent => :destroy, :class_name => 'BidderDisqualification'
 

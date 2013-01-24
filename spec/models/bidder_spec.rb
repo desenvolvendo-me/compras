@@ -11,6 +11,7 @@ require 'app/models/licitation_process_classification'
 require 'app/models/licitation_process_ratification'
 require 'app/models/trading_item_bid'
 require 'app/models/bidder_disqualification'
+require 'app/models/trading_item_closing'
 
 describe Bidder do
   describe 'default values' do
@@ -29,6 +30,7 @@ describe Bidder do
   it { should have_many(:licitation_process_classifications_by_classifiable).dependent(:destroy) }
   it { should have_many(:trading_item_bids).dependent(:restrict) }
   it { should have_many(:licitation_process_ratifications).dependent(:restrict) }
+  it { should have_many(:trading_item_closings).dependent(:restrict) }
 
   it { should have_one(:disqualification).dependent(:destroy) }
 

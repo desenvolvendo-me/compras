@@ -6,7 +6,8 @@ class TradingItemClosingsController < CrudController
 
   def new
     object = build_resource
-    object.trading_item_id = @trading_item.id
+    object.trading_item_id = trading_item.id
+    object.bidder = trading_item.bidder_with_lowest_proposal
 
     super
   end
@@ -23,6 +24,14 @@ class TradingItemClosingsController < CrudController
     'tradings'
   end
 
+  def create_resource(object)
+    object.transaction do
+      object.bidder = trading_item.bidder_with_lowest_proposal
+
+      super
+    end
+  end
+
   def trading_item
     @trading_item ||= if params[:id]
       resource.trading_item
@@ -36,7 +45,7 @@ class TradingItemClosingsController < CrudController
   end
 
   def not_allow_create_an_already_closed_trading_item
-    return unless @trading_item.closed?
+    return unless trading_item.closed?
 
     raise ActiveRecord::RecordNotFound
   end

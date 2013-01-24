@@ -11,6 +11,12 @@ describe TradingItemClosingsController do
       double(:trading_item, :id => 10, :trading_id => 5, :closed? => false)
     end
 
+    let(:bidder) { Bidder.make!(:licitante) }
+
+    before do
+      trading_item.stub(:bidder_with_lowest_proposal => bidder)
+    end
+
     describe 'GET #new' do
       it 'should assigns trading_item' do
         TradingItem.should_receive(:find).with("10").and_return(trading_item)
@@ -18,6 +24,14 @@ describe TradingItemClosingsController do
         get :new, :trading_item_id => 10
 
         expect(assigns(:trading_item_closing).trading_item_id).to eq 10
+      end
+
+      it 'should assigns bidder' do
+        TradingItem.should_receive(:find).with("10").and_return(trading_item)
+
+        get :new, :trading_item_id => 10
+
+        expect(assigns(:trading_item_closing).bidder).to eq bidder
       end
     end
 

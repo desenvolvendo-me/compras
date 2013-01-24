@@ -15,14 +15,33 @@ feature TradingItemClosing do
     trading = Trading.make!(:pregao_presencial,
       :trading_items => [
         item,
-        TradingItem.make!(:segundo_item_pregao_presencial)
-      ])
+        TradingItem.make!(:segundo_item_pregao_presencial)])
+
+    bidder1 = trading.bidders.first
+    bidder2 = trading.bidders.second
+    bidder3 = trading.bidders.last
 
     TradingItemBid.create!(
       :round => 0,
       :trading_item_id => item.id,
-      :bidder_id => trading.bidders.first.id,
+      :bidder_id => bidder1.id,
       :amount => 120.0,
+      :stage => TradingItemBidStage::PROPOSALS,
+      :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+    TradingItemBid.create!(
+      :round => 0,
+      :trading_item_id => item.id,
+      :bidder_id => bidder2.id,
+      :amount => 119.0,
+      :stage => TradingItemBidStage::PROPOSALS,
+      :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+    TradingItemBid.create!(
+      :round => 0,
+      :trading_item_id => item.id,
+      :bidder_id => bidder3.id,
+      :amount => 121.0,
       :stage => TradingItemBidStage::PROPOSALS,
       :status => TradingItemBidStatus::WITH_PROPOSAL)
 
@@ -35,6 +54,9 @@ feature TradingItemClosing do
     within 'table.records tbody tr:nth-child(1)' do
       click_link 'Encerramento do item'
     end
+
+    expect(page).to have_disabled_field 'Item do pregão', :with => '01.01.00001 - Antivirus'
+    expect(page).to have_disabled_field 'Licitante com a melhor proposta', :with => "Wenderson Malheiros"
 
     select 'Fracassado', :from => 'Situação *'
 
@@ -99,5 +121,34 @@ feature TradingItemClosing do
     expect(page).to have_title 'Criar Encerramento do Pregão Presencial'
 
     expect(page).to have_disabled_field 'Pregão', :with => '1/2012'
+  end
+
+  scenario "closing an item with status winner without a bidder" do
+    TradingConfiguration.make!(:pregao)
+    item = TradingItem.make!(:item_pregao_presencial)
+    trading = Trading.make!(:pregao_presencial,
+      :trading_items => [
+        item,
+        TradingItem.make!(:segundo_item_pregao_presencial)])
+
+    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+
+    click_link "1/2012"
+
+    click_button "Salvar e ir para Itens/Ofertas"
+
+    within 'table.records tbody tr:nth-child(1)' do
+      click_link 'Encerramento do item'
+    end
+
+    expect(page).to have_disabled_field 'Licitante com a melhor proposta', :with => ""
+
+    select 'Vencedor', :from => 'Situação'
+
+    click_button 'Salvar'
+
+    expect(page).to_not have_notice 'Encerramento do Item do Pregão criado com sucesso'
+
+    expect(page).to have_content 'não tem um licitante vencedor'
   end
 end

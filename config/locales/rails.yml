@@ -312,6 +312,7 @@ pt-BR:
       date_range_taken_for_signature: "intervalo de data já está contida em outra assinatura"
       trading_item_has_not_a_winner: "o item do pregão não possui um vencedor"
       not_yet_liberated: "ainda não foi liberada"
+      must_have_a_winner_bidder: "não tem um licitante vencedor"
 
   activerecord:
     errors:
