@@ -45,19 +45,17 @@ class Creditor < Compras::Model
   has_one :user, :as => :authenticable
 
   delegate :personable_type, :cnpj, :state_registration, :responsible,
-           :identity_document, :company?, :to => :person, :allow_nil => true
-  delegate :identity_document, :to => :responsible, :prefix => true, :allow_nil => true
-  delegate :phone, :fax, :benefited, :to => :person, :allow_nil => true
-  delegate :name, :to => :creditable, :allow_nil => true
-  delegate :address, :city, :zip_code, :to => :person, :allow_nil => true
-  delegate :neighborhood, :state, :country, :zip_code, :to => :address, :allow_nil => true
+           :identity_document, :company?, :phone, :fax, :benefited, :address,
+           :city, :zip_code, :company_size, :choose_simple, :legal_nature,
+           :commercial_registration_number, :commercial_registration_date,
+           :to => :person, :allow_nil => true
   delegate :email, :to => :person, :allow_nil => true, :prefix => true
+  delegate :identity_document, :to => :responsible, :prefix => true, :allow_nil => true
+  delegate :name, :to => :creditable, :allow_nil => true
+  delegate :neighborhood, :state, :country, :zip_code, :to => :address, :allow_nil => true
   delegate :bank_id, :to => :accounts, :allow_nil => true
   delegate :materials_class, :materials_group, :to => :materials, :allow_nil => true
   delegate :login, :email, :to => :user, :allow_nil => true
-  delegate :company_size, :choose_simple, :legal_nature,
-           :commercial_registration_number, :commercial_registration_date,
-           :to => :person, :allow_nil => true
   delegate :code, :to => :main_cnae, :prefix => true, :allow_nil => true
 
   accepts_nested_attributes_for :accounts, :allow_destroy => true
