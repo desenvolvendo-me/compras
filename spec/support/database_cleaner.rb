@@ -1,15 +1,15 @@
 RSpec.configure do |config|
-  config.before do
-    DatabaseCleaner.strategy = if example.metadata[:type] == :request
-                                 :truncation
-                               else
-                                 :transaction
-                               end
+  config.around do |example|
+    if example.metadata[:type] == :request || example.metadata[:type] == :turnip
+      example.run
 
-    DatabaseCleaner.start
-  end
+      ActiveRecord::Base.connection.execute("TRUNCATE #{ActiveRecord::Base.connection.tables.join(',')} RESTART IDENTITY CASCADE")
+    else
+      ActiveRecord::Base.transaction do
+        example.run
 
-  config.after do
-    DatabaseCleaner.clean
+        raise ActiveRecord::Rollback
+      end
+    end
   end
 end
