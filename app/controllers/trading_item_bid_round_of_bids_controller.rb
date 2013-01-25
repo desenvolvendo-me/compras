@@ -20,15 +20,15 @@ class TradingItemBidRoundOfBidsController < CrudController
   end
 
   def create
-    create! { @parent.decorator.current_stage_path }
+    create! { @parent.decorator.current_stage_path(self) }
   end
 
   def update
-    update! { @parent.decorator.current_stage_path }
+    update! { @parent.decorator.current_stage_path(self) }
   end
 
   def destroy
-    destroy!(:notice => '') { @parent.decorator.current_stage_path }
+    destroy!(:notice => '') { @parent.decorator.current_stage_path(self) }
   end
 
   protected

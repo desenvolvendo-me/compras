@@ -2,7 +2,6 @@
 class TradingItemDecorator
   include Decore
   include Decore::Proxy
-  include Decore::Routes
   include ActionView::Helpers::NumberHelper
   include ActionView::Helpers::TranslationHelper
 
@@ -14,14 +13,14 @@ class TradingItemDecorator
     number_with_precision super if super
   end
 
-  def current_stage_path(options={})
+  def current_stage_path(routes, options={})
     stage_calculator = options.fetch(:stage_calculator) {
       TradingItemBidStageCalculator.new(component)
     }
 
-    stage_of_proposals_path(stage_calculator) ||
-    round_of_bids_or_proposal_report_path(stage_calculator) ||
-    negotiation_or_classification_path(stage_calculator)
+    stage_of_proposals_path(routes, stage_calculator) ||
+    round_of_bids_or_proposal_report_path(routes, stage_calculator) ||
+    negotiation_or_classification_path(routes, stage_calculator)
   end
 
   def situation_for_next_stage(bidder)
@@ -78,7 +77,7 @@ class TradingItemDecorator
 
   private
 
-  def negotiation_or_classification_path(stage_calculator)
+  def negotiation_or_classification_path(routes, stage_calculator)
     if stage_calculator.stage_of_classification?
       routes.classification_trading_item_path(component)
     elsif stage_calculator.stage_of_negotiation?
@@ -86,7 +85,7 @@ class TradingItemDecorator
     end
   end
 
-  def round_of_bids_or_proposal_report_path(stage_calculator)
+  def round_of_bids_or_proposal_report_path(routes, stage_calculator)
     if stage_calculator.stage_of_proposal_report?
       routes.proposal_report_trading_item_path(component)
     elsif stage_calculator.stage_of_round_of_bids?
@@ -94,7 +93,7 @@ class TradingItemDecorator
     end
   end
 
-  def stage_of_proposals_path(stage_calculator)
+  def stage_of_proposals_path(routes, stage_calculator)
     if stage_calculator.stage_of_proposals?
       routes.new_trading_item_bid_proposal_path(:trading_item_id => component.id)
     end

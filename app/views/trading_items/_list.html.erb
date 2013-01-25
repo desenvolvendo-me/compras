@@ -7,7 +7,7 @@
         </td>
 
         <td class="right">
-          <%= link_to "Fazer oferta", resource.decorator.current_stage_path,
+          <%= link_to "Fazer oferta", resource.decorator.current_stage_path(controller),
               :class => "button primary",
               'data-disabled' => resource.decorator.allows_offer_placing %>
 

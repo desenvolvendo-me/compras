@@ -172,6 +172,7 @@ describe TradingItemDecorator do
 
   describe '#current_stage_path' do
     let(:stage_calculator) { double(:stage_calculator) }
+    let(:routes) { double(:routes) }
 
     before do
       component.stub(:id).and_return(1)
@@ -186,7 +187,7 @@ describe TradingItemDecorator do
         routes.should_receive(:new_trading_item_bid_proposal_path).
           with(:trading_item_id=>1).and_return('new_proposal_path')
 
-        expect(subject.current_stage_path(:stage_calculator => stage_calculator)).to eq 'new_proposal_path'
+        expect(subject.current_stage_path(routes, :stage_calculator => stage_calculator)).to eq 'new_proposal_path'
       end
     end
 
@@ -203,7 +204,7 @@ describe TradingItemDecorator do
           with(component).
           and_return('proposal_report_trading_item_path')
 
-        expect(subject.current_stage_path(:stage_calculator => stage_calculator)).to eq 'proposal_report_trading_item_path'
+        expect(subject.current_stage_path(routes, :stage_calculator => stage_calculator)).to eq 'proposal_report_trading_item_path'
       end
 
       it 'should return the path to the new bid when on round of bids but not in propsal_report' do
@@ -213,11 +214,13 @@ describe TradingItemDecorator do
           with(:trading_item_id => 1).
           and_return('new_trading_item_bid_path')
 
-        expect(subject.current_stage_path(:stage_calculator => stage_calculator)).to eq 'new_trading_item_bid_path'
+        expect(subject.current_stage_path(routes, :stage_calculator => stage_calculator)).to eq 'new_trading_item_bid_path'
       end
     end
 
     context 'when on stage of negotiation' do
+      let(:routes) { double(:routes) }
+
       before do
         stage_calculator.stub(:stage_of_proposals?).and_return(false)
         stage_calculator.stub(:stage_of_proposal_report?).and_return(false)
@@ -232,7 +235,7 @@ describe TradingItemDecorator do
           with(component).
           and_return('classification_trading_item_path')
 
-        expect(subject.current_stage_path(:stage_calculator => stage_calculator)).to eq 'classification_trading_item_path'
+        expect(subject.current_stage_path(routes, :stage_calculator => stage_calculator)).to eq 'classification_trading_item_path'
       end
 
       it 'should returns the new negotiation when is at stage of negotiation but is not classification' do
@@ -242,7 +245,7 @@ describe TradingItemDecorator do
           with(:trading_item_id => 1).
           and_return('new_negotiation_path')
 
-        expect(subject.current_stage_path(:stage_calculator => stage_calculator)).to eq 'new_negotiation_path'
+        expect(subject.current_stage_path(routes, :stage_calculator => stage_calculator)).to eq 'new_negotiation_path'
       end
     end
   end

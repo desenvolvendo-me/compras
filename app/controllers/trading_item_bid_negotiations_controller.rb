@@ -20,7 +20,7 @@ class TradingItemBidNegotiationsController < CrudController
   end
 
   def create
-    create! { @parent.decorator.current_stage_path }
+    create! { @parent.decorator.current_stage_path(self) }
   end
 
   def destroy
