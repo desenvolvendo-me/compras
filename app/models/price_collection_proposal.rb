@@ -32,10 +32,6 @@ class PriceCollectionProposal < Compras::Model
     end
   end
 
-  def self.for_creditor(creditor_id)
-    where { |proposal| proposal.creditor_id.eq(creditor_id) }.first
-  end
-
   def build_user
     return user if user.present?
 

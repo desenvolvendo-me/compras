@@ -72,7 +72,7 @@ describe PriceCollectionDecorator do
     it 'should return the link to edit the proposal for creditor' do
       component.stub(:price_collection_proposals => price_collection_proposals)
 
-      price_collection_proposals.should_receive(:for_creditor).with(10).and_return(proposal)
+      price_collection_proposals.should_receive(:find_by_creditor_id).with(10).and_return(proposal)
 
       expect(subject.proposal_for_creditor(creditor)).to eq proposal
     end

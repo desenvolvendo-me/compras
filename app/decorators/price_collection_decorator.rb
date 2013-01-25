@@ -13,7 +13,7 @@ class PriceCollectionDecorator
   end
 
   def proposal_for_creditor(creditor)
-    price_collection_proposals.for_creditor(creditor.id)
+    price_collection_proposals.find_by_creditor_id(creditor.id)
   end
 
   def is_annulled_message
