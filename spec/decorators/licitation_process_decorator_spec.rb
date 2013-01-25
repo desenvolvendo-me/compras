@@ -52,6 +52,7 @@ describe LicitationProcessDecorator do
   end
 
   describe "edit_path" do
+    let(:routes) { double(:routes) }
 
     before do
       routes.stub(:edit_licitation_process_path).with(component).and_return('licitation_process_link')
@@ -68,20 +69,20 @@ describe LicitationProcessDecorator do
         routes.stub(:edit_trading_path).with(trading).and_return('trading_link')
         component.stub(:trading => trading)
 
-        expect(subject.edit_path).to eq 'trading_link'
+        expect(subject.edit_path(routes)).to eq 'trading_link'
       end
 
       it "returns the licitation process path if there is no associated trading" do
         component.stub(:trading => nil)
 
-        expect(subject.edit_path).to eq 'licitation_process_link'
+        expect(subject.edit_path(routes)).to eq 'licitation_process_link'
       end
     end
 
     it "returns the licitation process type otherwise" do
       component.stub(:presence_trading? => false)
 
-      expect(subject.edit_path).to eq 'licitation_process_link'
+      expect(subject.edit_path(routes)).to eq 'licitation_process_link'
     end
   end
 

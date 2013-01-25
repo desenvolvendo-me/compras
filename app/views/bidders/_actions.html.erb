@@ -1,7 +1,7 @@
 <div class="actions">
   <ul>
     <li>
-      <%= link_to @parent.decorator.edit_link, @parent.decorator.edit_path %>
+      <%= link_to @parent.decorator.edit_link, @parent.decorator.edit_path(controller) %>
     </li>
     <% if @parent.allow_bidders? %>
       <li>

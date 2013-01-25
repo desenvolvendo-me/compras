@@ -3,7 +3,6 @@ class LicitationProcessDecorator
   include Decore
   include Decore::Proxy
   include Decore::Header
-  include Decore::Routes
   include ActionView::Helpers::NumberHelper
   include ActionView::Helpers::TranslationHelper
 
@@ -26,7 +25,7 @@ class LicitationProcessDecorator
     end
   end
 
-  def edit_path
+  def edit_path(routes)
     if component.presence_trading? && component.trading.present?
       routes.edit_trading_path(component.trading)
     else
