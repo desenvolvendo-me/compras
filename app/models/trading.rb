@@ -14,7 +14,7 @@ class Trading < Compras::Model
 
   has_many :trading_items, :dependent => :destroy
   has_many :bidders, :through => :licitation_process
-  has_many :closings, :dependent => :destroy, :class_name => 'TradingClosing'
+  has_many :closings, :dependent => :destroy, :class_name => 'TradingClosing', :order => "id DESC"
 
   accepts_nested_attributes_for :trading_items
 
@@ -47,7 +47,7 @@ class Trading < Compras::Model
   end
 
   def current_closing
-    closings.last
+    closings.first
   end
 
   def allow_closing?
