@@ -66,7 +66,7 @@ class ApplicationController < ActionController::Base
     if request.xhr?
       render :nothing => true, :status => :unauthorized
     else
-      render :file => "public/401", :layout => nil, :status => 401
+      render :file => Rails.root.join('public/401.html'), :layout => nil, :status => 401
     end
   end
 end
