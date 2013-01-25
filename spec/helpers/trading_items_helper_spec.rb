@@ -17,4 +17,29 @@ describe TradingItemsHelper do
       expect(helper.edit_trading_item_bid_proposal(bidder)).to eq '/trading_item_bid_proposals/15/edit?trading_item_id=1'
     end
   end
+
+  describe '#trading_item_closing_path' do
+    context 'when closed' do
+      let(:closing) { double(:closing, :to_param => "3")}
+
+      before do
+        resource.stub(:closed? => true)
+        resource.stub(:closing => closing)
+      end
+
+      it 'should returns path to edit the trading_item_closing' do
+        expect(helper.trading_item_closing_path).to eq '/trading_item_closings/3/edit'
+      end
+    end
+
+    context 'when closed' do
+      before do
+        resource.stub(:closed? => false)
+      end
+
+      it 'should returns path to edit the trading_item_closing' do
+        expect(helper.trading_item_closing_path).to eq '/trading_item_closings/new?trading_item_id=1'
+      end
+    end
+  end
 end

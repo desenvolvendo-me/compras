@@ -13,7 +13,7 @@
 
           <%= link_to "Ver histórico", offers_trading_item_path(resource), :class => "button primary" %>
 
-          <%= link_to "Encerramento do item", resource.decorator.trading_item_closing_path,
+          <%= link_to "Encerramento do item", trading_item_closing_path(resource),
               :class => "button primary" %>
         </td>
       </tr>
