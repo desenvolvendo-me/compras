@@ -10,3 +10,4 @@ pt-BR:
         trading: "Pregão presencial"
         status: "Status"
         observation: "Observação"
+        created_at_date: "Data"

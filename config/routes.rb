@@ -733,7 +733,7 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :trading_closings
+  resources :trading_closings, :only => [:new, :create]
 
   resources :trading_items, :except => [:new, :create, :destroy] do
     member do

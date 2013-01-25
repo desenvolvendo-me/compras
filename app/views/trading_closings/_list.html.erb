@@ -1,0 +1,19 @@
+<table class="records">
+  <thead>
+    <tr>
+      <th><%= TradingClosing.human_attribute_name :created_at_date %></th>
+      <th><%= TradingClosing.human_attribute_name :status %></th>
+      <th><%= TradingClosing.human_attribute_name :observation %></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% collection.each do |resource| %>
+      <tr id="<%= dom_id resource %>">
+        <td><%= resource.decorator.created_at_date %></td>
+        <td><%= resource.status_humanize %></td>
+        <td><%= resource.observation %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

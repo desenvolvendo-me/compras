@@ -1,7 +1,5 @@
 class TradingClosingsController < CrudController
-  defaults :collection_name => :closings
-
-  actions :all, :except => [:modal, :filter]
+  actions :new, :create
 
   before_filter :parent
 
@@ -15,19 +13,7 @@ class TradingClosingsController < CrudController
 
   def create
     create! do |success, failure|
-      success.html { redirect_to trading_closings_path(:trading_id => parent.id) }
-    end
-  end
-
-  def update
-    update! do |success, failure|
-      success.html { redirect_to trading_closings_path(:trading_id => parent.id) }
-    end
-  end
-
-  def destroy
-    destroy! do |success, failure|
-      success.html { redirect_to trading_closings_path(:trading_id => parent.id) }
+      success.html { redirect_to trading_item_procedures_path }
     end
   end
 
@@ -35,10 +21,6 @@ class TradingClosingsController < CrudController
 
   def main_controller_name
     'tradings'
-  end
-
-  def begin_of_association_chain
-    parent
   end
 
   def parent
@@ -57,5 +39,9 @@ class TradingClosingsController < CrudController
     elsif parent_id
       Trading.find(parent_id)
     end
+  end
+
+  def trading_item_procedures_path
+    edit_trading_path(parent, :anchor => :procedures)
   end
 end

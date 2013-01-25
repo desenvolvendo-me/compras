@@ -127,8 +127,8 @@ describe Trading do
     let(:first_closing) { double(:first_closing) }
     let(:last_closing) { double(:last_closing) }
 
-    it 'should return the last closing' do
-      subject.stub(:closings => [first_closing, last_closing])
+    it 'should return the last closing ordering desc' do
+      subject.stub(:closings => [last_closing, first_closing])
       expect(subject.current_closing).to eq last_closing
     end
 

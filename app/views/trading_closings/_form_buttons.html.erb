@@ -1,5 +1,4 @@
 <div class="buttons">
   <%= f.button :submit %>
-  <%= f.button :back, :href => trading_closings_path(:trading_id => @parent.id) %>
-  <%= f.button :destroy if f.object.persisted? %>
+  <%= f.button :back, :href => edit_trading_path(@parent, :anchor => :procedures) %>
 </div>
