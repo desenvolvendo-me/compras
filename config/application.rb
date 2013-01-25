@@ -74,5 +74,17 @@ module Compras
 
     # Include way to get a PDF view of any page on your site by appending .pdf to the URL.
     # config.middleware.use 'PDFKit::Middleware', :print_media_type => true
+
+    # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
+    config.assets.precompile += [
+      # staylesheet files
+      'devise.css',
+      'report.css',
+      'compras/report.css',
+      'compras/table_size.css',
+
+      # javascript files
+      'trading_item_bid.js',
+    ]
   end
 end
