@@ -20,14 +20,6 @@ class LicitationProcessDecorator
     localize(super, :format => :hour) if super
   end
 
-  def parent_path(parent)
-    if parent
-      routes.edit_administrative_process_path(parent)
-    else
-      routes.licitation_processes_path
-    end
-  end
-
   def all_licitation_process_classifications_groupped
     all_licitation_process_classifications.group_by(&:bidder).each do |bidder, classifications|
       classifications.sort_by!(&:classifiable_id)

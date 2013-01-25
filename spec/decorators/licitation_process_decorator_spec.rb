@@ -51,32 +51,6 @@ describe LicitationProcessDecorator do
     end
   end
 
-  context '#parent_path' do
-    context 'when have parent' do
-      before do
-        routes.stub(:edit_administrative_process_path).with(parent).and_return('link')
-      end
-
-      let :parent do
-        double('AdministrativeProcess', :id => 1)
-      end
-
-      it 'should return a url to administrative process when has parent' do
-        expect(subject.parent_path(parent)).to eq 'link'
-      end
-    end
-
-    context 'when do not have parent' do
-      before do
-        routes.stub(:licitation_processes_path).and_return('link')
-      end
-
-      it 'should return a url to licitation processes when has not parent' do
-        expect(subject.parent_path(nil)).to eq 'link'
-      end
-    end
-  end
-
   describe "edit_path" do
 
     before do
