@@ -14,7 +14,7 @@ class TradingItemClosingsController < CrudController
 
   def create
     create! do |success, failure|
-      success.html { redirect_to resource.decorator.after_create_path }
+      success.html { redirect_to after_create_path }
     end
   end
 
@@ -48,5 +48,13 @@ class TradingItemClosingsController < CrudController
     return unless trading_item.closed?
 
     raise ActiveRecord::RecordNotFound
+  end
+
+  def after_create_path
+    if trading_item.trading_allow_closing?
+      new_trading_closing_path(:trading_id => trading_item.trading_id)
+    else
+      trading_items_path(:trading_id => trading_item.trading_id)
+    end
   end
 end

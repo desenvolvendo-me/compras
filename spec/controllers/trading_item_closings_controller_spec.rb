@@ -43,26 +43,34 @@ describe TradingItemClosingsController do
         trading_item_closing.stub(:decorator => trading_item_closing_decorator)
       end
 
-      it 'should redirect to index of trading_items' do
-        TradingItem.should_receive(:find).with("10").and_return(trading_item)
-        TradingItemClosing.any_instance.should_receive(:save).and_return(true)
-        controller.stub(:resource => trading_item_closing)
-        trading_item_closing_decorator.should_receive(:after_create_path).and_return(trading_items_path(:trading_id => 5))
+      context 'when trading not allow closing' do
+        before do
+          trading_item.stub(:trading_allow_closing? => false)
+        end
 
-        post :create, :trading_item_id => 10
+        it 'should redirect to index of trading_items' do
+          TradingItem.should_receive(:find).with("10").and_return(trading_item)
+          TradingItemClosing.any_instance.should_receive(:save).and_return(true)
 
-        expect(response).to redirect_to(trading_items_path(:trading_id => 5))
+          post :create, :trading_item_id => 10
+
+          expect(response).to redirect_to(trading_items_path(:trading_id => 5))
+        end
       end
 
-      it 'should redirect to new trading_closing' do
-        TradingItem.should_receive(:find).with("10").and_return(trading_item)
-        TradingItemClosing.any_instance.should_receive(:save).and_return(true)
-        controller.stub(:resource => trading_item_closing)
-        trading_item_closing_decorator.should_receive(:after_create_path).and_return(new_trading_closing_path(:trading_id => 5))
+      context 'when trading allow closing' do
+        before do
+          trading_item.stub(:trading_allow_closing? => true)
+        end
 
-        post :create, :trading_item_id => 10
+        it 'should redirect to new trading_closing' do
+          TradingItem.should_receive(:find).with("10").and_return(trading_item)
+          TradingItemClosing.any_instance.should_receive(:save).and_return(true)
 
-        expect(response).to redirect_to(new_trading_closing_path(:trading_id => 5))
+          post :create, :trading_item_id => 10
+
+          expect(response).to redirect_to(new_trading_closing_path(:trading_id => 5))
+        end
       end
     end
   end
