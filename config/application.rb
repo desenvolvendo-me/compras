@@ -77,7 +77,7 @@ module Compras
 
     # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
     config.assets.precompile += [
-      # staylesheet files
+      # stylesheet files
       'devise.css',
       'report.css',
       'compras/report.css',
