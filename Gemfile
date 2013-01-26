@@ -42,7 +42,7 @@ gem 'foreigner', '1.2.1'
 gem 'i18n_alchemy', :git => 'git://github.com/carlosantoniodasilva/i18n_alchemy.git'
 
 gem 'enumerate_it', '1.0.1'
-gem 'decore', :git => 'git://github.com/nohupbrasil/decore.git'
+gem 'decore', :git => 'git://github.com/sobrinho/decore.git'
 
 group :assets do
   gem 'uglifier', '1.2.1'

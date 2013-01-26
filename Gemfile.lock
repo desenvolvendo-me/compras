@@ -13,18 +13,18 @@ GIT
     pdfkit (0.5.2)
 
 GIT
-  remote: git://github.com/nohupbrasil/decore.git
-  revision: a5bb876702ff010f5ade1edc9222540d4b9059bb
-  specs:
-    decore (0.1.0)
-      activesupport (~> 3.2.0)
-
-GIT
   remote: git://github.com/ryanb/cancan.git
   revision: ccd24ab30fdd0b48ac0ad71080445f5366788208
   branch: 2.0
   specs:
     cancan (2.0.0.alpha)
+
+GIT
+  remote: git://github.com/sobrinho/decore.git
+  revision: a5bb876702ff010f5ade1edc9222540d4b9059bb
+  specs:
+    decore (0.1.0)
+      activesupport (~> 3.2.0)
 
 GEM
   remote: http://rubygems.org/
