@@ -89,4 +89,12 @@ describe PurchaseSolicitationDecorator do
       expect(subject.not_persisted_message).to be_nil
     end
   end
+
+  describe '#code_and_year' do
+    it "should return code_and_year" do
+      component.stub(:code => 1, :accounting_year => 2013)
+
+      expect(subject.code_and_year).to eq '1/2013'
+    end
+  end
 end

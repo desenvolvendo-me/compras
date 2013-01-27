@@ -1419,7 +1419,7 @@ feature "DirectPurchases" do
     navigate 'Processos de Compra > Solicitações de Compra'
 
     within_records do
-      click_link purchase_solicitation.code_and_year
+      click_link purchase_solicitation.decorator.code_and_year
     end
 
     within_tab 'Principal' do
@@ -1698,7 +1698,7 @@ feature "DirectPurchases" do
 
     item_group.purchase_solicitations.each do |purchase_solicitation|
       within_records do
-        click_link purchase_solicitation.code_and_year
+        click_link purchase_solicitation.decorator.code_and_year
       end
 
       within_tab 'Dotações orçamentárias' do

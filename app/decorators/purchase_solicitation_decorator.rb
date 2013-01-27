@@ -28,4 +28,8 @@ class PurchaseSolicitationDecorator
   def not_persisted_message
     t('purchase_solicitation.messages.not_persisted') unless persisted?
   end
+
+  def code_and_year
+    "#{code}/#{accounting_year}"
+  end
 end
