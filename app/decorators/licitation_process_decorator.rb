@@ -71,6 +71,14 @@ class LicitationProcessDecorator
     purchase_solicitation.present? || purchase_solicitation_item_group.present?
   end
 
+  def code_and_year
+    "#{process}/#{year}"
+  end
+
+  def administrative_process_code_and_year
+    administrative_process.decorator.code_and_year
+  end
+
   private
 
   def current_publication_of

@@ -273,4 +273,23 @@ describe LicitationProcessDecorator do
       expect(subject.disable_budget_allocations?).to be_true
     end
   end
+
+  describe "#code_and_year" do
+    before { component.stub(:process => 1, :year => 2012) }
+
+    it "should return code/year" do
+      expect(subject.code_and_year).to eq "1/2012"
+    end
+  end
+
+  describe '#administrative_process_code_and_year' do
+    it 'should return administrative_process code_and_year' do
+      decorator = double(:decorator, :code_and_year => '1/2013')
+      administrative_process = double(:administrative_process, :decorator => decorator)
+
+      component.stub(:administrative_process => administrative_process)
+
+      expect(subject.administrative_process_code_and_year).to eq '1/2013'
+    end
+  end
 end

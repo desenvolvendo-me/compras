@@ -29,4 +29,8 @@ class AdministrativeProcessDecorator
 
     not_released_message
   end
+
+  def code_and_year
+    "#{process}/#{year}"
+  end
 end

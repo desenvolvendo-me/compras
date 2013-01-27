@@ -174,14 +174,6 @@ describe LicitationProcess do
     expect(subject.errors[:base]).to include "não pode ser editado"
   end
 
-  describe "#code_and_year" do
-    before { subject.stub(:process => 1, :year => 2012) }
-
-    it "should return code/year" do
-      expect(subject.code_and_year).to eq "1/2012"
-    end
-  end
-
   describe '#next_licitation_number' do
     context 'when the licitation_number of last licitation process is 4' do
       before do

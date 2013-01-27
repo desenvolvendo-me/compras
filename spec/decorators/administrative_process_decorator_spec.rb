@@ -146,4 +146,12 @@ describe AdministrativeProcessDecorator do
       expect(described_class.header_attributes).to include :summarized_object
     end
   end
+
+  describe "#code_and_year" do
+    before { component.stub(:process => 1, :year => 2012) }
+
+    it "should return code/year" do
+      expect(subject.code_and_year).to eq "1/2012"
+    end
+  end
 end
