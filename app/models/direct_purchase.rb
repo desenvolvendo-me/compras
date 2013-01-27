@@ -73,10 +73,6 @@ class DirectPurchase < Compras::Model
   filterize
 
   def to_s
-    code_and_year
-  end
-
-  def code_and_year
     "#{code}/#{year}"
   end
 

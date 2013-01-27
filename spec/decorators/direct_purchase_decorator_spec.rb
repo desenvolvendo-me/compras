@@ -44,4 +44,12 @@ describe DirectPurchaseDecorator do
       expect(subject.is_annulled_message).to be_nil
     end
   end
+
+  describe '#code_and_year' do
+    before { component.stub(:code => 1, :year => 2012) }
+
+    it "return code/year to #code_and_year " do
+      expect(subject.code_and_year).to eq "1/2012"
+    end
+  end
 end

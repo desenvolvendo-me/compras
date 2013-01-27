@@ -12,4 +12,8 @@ class DirectPurchaseDecorator
   def is_annulled_message
     t('direct_purchase.messages.is_annulled') if annulled?
   end
+
+  def code_and_year
+    "#{code}/#{year}"
+  end
 end
