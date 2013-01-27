@@ -64,16 +64,9 @@ describe PriceCollection do
   end
 
   it "should return code_and_year as to_s method" do
-    subject.stub(:code_and_year).and_return('5/2012')
+    subject.stub(:code => 5, :year => 2012)
 
     expect(subject.to_s).to eq '5/2012'
-  end
-
-  it "should return code_and_year" do
-    subject.code = 5
-    subject.year = 2012
-
-    expect(subject.code_and_year).to eq '5/2012'
   end
 
   it 'should return the winner proposal' do

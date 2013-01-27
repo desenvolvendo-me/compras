@@ -23,4 +23,8 @@ class PriceCollectionDecorator
   def proposals_not_allowed_message
     t('price_collection.messages.proposals_not_allowed') if creditors.empty?
   end
+
+  def code_and_year
+    "#{code}/#{year}"
+  end
 end

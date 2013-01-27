@@ -77,4 +77,12 @@ describe PriceCollectionDecorator do
       expect(subject.proposal_for_creditor(creditor)).to eq proposal
     end
   end
+
+  describe '#code_and_year' do
+    it "should return code_and_year" do
+      component.stub(:code => 5, :year => 2012)
+
+      expect(subject.code_and_year).to eq '5/2012'
+    end
+  end
 end
