@@ -747,7 +747,7 @@ feature "Bidders" do
 
     bidder = licitation_process.bidders.last
 
-    expect(page).to have_content "Editar Licitante(#{bidder}) do Processo Licitatório 1/2013"
+    expect(page).to have_content "Editar Licitante (#{bidder}) do Processo Licitatório 1/2013"
   end
 
   scenario "new should have title Novo Licitante do Processo Licitatório 1/2013" do
