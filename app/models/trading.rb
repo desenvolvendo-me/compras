@@ -1,8 +1,7 @@
 class Trading < Compras::Model
-  attr_accessible :code, :entity_id, :licitating_unit_id,
+  attr_accessible :code, :entity_id, :licitating_unit_id, :trading_registry,
                   :year, :licitation_process_id, :trading_items_attributes,
-                  :licitation_commission_id, :preamble, :closing_of_accreditation,
-                  :trading_registry
+                  :licitation_commission_id, :preamble, :closing_of_accreditation
 
   auto_increment :code, :by => :year
 
