@@ -13,7 +13,7 @@ pt-BR:
         amount: "Valor da proposta"
         disqualification_reason: "Motivo da desclassificação"
         trading_item_lowest_proposal_value: "Menor preço"
-        trading_item_lowest_proposal_bidder: "Licitante com menor preço"
+        trading_item_bidder_with_lowest_proposal: "Licitante com menor preço"
         minimum_limit: "Valor limite"
         stage: "Etapa"
 
