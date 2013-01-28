@@ -7,7 +7,7 @@ class TradingItem < Compras::Model
   belongs_to :trading
 
   has_many :bidders, :through => :trading, :order => :id
-  has_many :trading_item_bids, :dependent => :destroy, :order => :id
+  has_many :bids, :class_name => 'TradingItemBid', :dependent => :destroy, :order => :id
 
   has_one :closing, :dependent => :destroy, :class_name => 'TradingItemClosing'
 
@@ -96,7 +96,7 @@ class TradingItem < Compras::Model
   end
 
   def lowest_proposal_at_stage_of_proposals_amount
-    trading_item_bids.enabled.lowest_proposal_by_item_at_stage_of_proposals(self) || BigDecimal(0)
+    bids.enabled.lowest_proposal_by_item_at_stage_of_proposals(self) || BigDecimal(0)
   end
 
   def selected_bidders_at_proposals
@@ -122,23 +122,23 @@ class TradingItem < Compras::Model
   end
 
   def started?
-    trading_item_bids.any?
+    bids.any?
   end
 
   def valid_negotiation_proposals
-    trading_item_bids.negotiation.with_proposal
+    bids.negotiation.with_proposal
   end
 
   def last_bid
-    trading_item_bids.last
+    bids.last
   end
 
   def proposals_for_round_of_bids?
-    trading_item_bids.at_stage_of_round_of_bids.any?
+    bids.at_stage_of_round_of_bids.any?
   end
 
   def with_proposal_for_round_of_proposals?
-    trading_item_bids.at_stage_of_proposals.with_proposal.any?
+    bids.at_stage_of_proposals.with_proposal.any?
   end
 
   def valid_bidder_for_negotiation?
@@ -150,19 +150,19 @@ class TradingItem < Compras::Model
   end
 
   def rounds_uniq_at_stage_of_round_of_bids_ordered
-    trading_item_bids.at_stage_of_round_of_bids.reorder(:round).uniq.select(:round)
+    bids.at_stage_of_round_of_bids.reorder(:round).uniq.select(:round)
   end
 
   def bids_at_stage_of_round_of_bids_by_round_ordered_by_amount(round)
-    trading_item_bids.at_round(round).at_stage_of_round_of_bids.reorder('amount DESC')
+    bids.at_round(round).at_stage_of_round_of_bids.reorder('amount DESC')
   end
 
   def bids_at_stage_of_round_of_bids_ordered_by_amount
-    trading_item_bids.at_stage_of_proposals.reorder('amount DESC')
+    bids.at_stage_of_proposals.reorder('amount DESC')
   end
 
   def bids_at_stage_of_negotiation_ordered_by_amount
-    trading_item_bids.at_stage_of_negotiation.reorder('amount DESC')
+    bids.at_stage_of_negotiation.reorder('amount DESC')
   end
 
   def bidder_with_lowest_proposal
@@ -214,14 +214,14 @@ class TradingItem < Compras::Model
   end
 
   def lowest_proposal_amount_at_stage_of_proposals
-    trading_item_bids.with_proposal.at_stage_of_proposals.minimum(:amount)
+    bids.with_proposal.at_stage_of_proposals.minimum(:amount)
   end
 
   def lowest_proposal_amount_with_valid_proposal
     if proposals_activated?
-      trading_item_bids.with_proposal.minimum(:amount)
+      bids.with_proposal.minimum(:amount)
     else
-      trading_item_bids.enabled.with_proposal.minimum(:amount)
+      bids.enabled.with_proposal.minimum(:amount)
     end
   end
 
@@ -243,14 +243,14 @@ class TradingItem < Compras::Model
 
   def lowest_bid_with_proposal
     if proposals_activated?
-      trading_item_bids.with_proposal.reorder { amount }.first
+      bids.with_proposal.reorder { amount }.first
     else
-      trading_item_bids.enabled.with_proposal.reorder { amount }.first
+      bids.enabled.with_proposal.reorder { amount }.first
     end
   end
 
   def valid_proposal_for_negotiation?
-    trading_item_bids.at_stage_of_negotiation.with_proposal.any?
+    bids.at_stage_of_negotiation.with_proposal.any?
   end
 
   def require_at_least_one_minimum_reduction

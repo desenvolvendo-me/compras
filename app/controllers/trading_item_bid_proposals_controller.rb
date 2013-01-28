@@ -1,6 +1,6 @@
 class TradingItemBidProposalsController < CrudController
   defaults :resource_class => TradingItemBid, :instance_name => 'trading_item_bid',
-           :collection_name => "trading_item_bids"
+           :collection_name => "bids"
 
   actions :new, :create, :edit, :update
 

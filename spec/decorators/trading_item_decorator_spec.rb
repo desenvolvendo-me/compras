@@ -251,12 +251,12 @@ describe TradingItemDecorator do
   end
 
   describe '#any_bid_at_negotiation?' do
-    let(:trading_item_bids) { double(:bids) }
+    let(:bids) { double(:bids) }
 
     context 'when there is any bid at round of negotiation' do
       before do
-        trading_item_bids.stub(:at_stage_of_negotiation).and_return(['bid'])
-        subject.stub(:trading_item_bids).and_return(trading_item_bids)
+        bids.stub(:at_stage_of_negotiation).and_return(['bid'])
+        subject.stub(:bids).and_return(bids)
       end
 
       it 'should be true' do
@@ -266,8 +266,8 @@ describe TradingItemDecorator do
 
     context 'when there is no one bid at round of negotiation' do
       before do
-        trading_item_bids.stub(:at_stage_of_negotiation).and_return([])
-        subject.stub(:trading_item_bids).and_return(trading_item_bids)
+        bids.stub(:at_stage_of_negotiation).and_return([])
+        subject.stub(:bids).and_return(bids)
       end
 
       it 'should be false' do

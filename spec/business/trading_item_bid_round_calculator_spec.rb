@@ -15,9 +15,9 @@ describe TradingItemBidRoundCalculator do
 
   describe 'delegates' do
     it 'delegates trading_item_bids to trading_item' do
-      trading_item.should_receive(:trading_item_bids)
+      trading_item.should_receive(:bids)
 
-      subject.trading_item_bids
+      subject.bids
     end
 
     it 'delegates selected_bidders_at_proposals to trading_item' do

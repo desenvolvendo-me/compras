@@ -1,5 +1,5 @@
 class TradingItemBidRoundCalculator
-  delegate :trading_item_bids, :selected_bidders_at_proposals,
+  delegate :bids, :selected_bidders_at_proposals,
            :value_limit_to_participate_in_bids,
            :to => :trading_item
 
@@ -39,7 +39,7 @@ class TradingItemBidRoundCalculator
   end
 
   def trading_item_bids_for_stage_of_round_of_bids
-    trading_item_bids.at_stage_of_round_of_bids
+    bids.at_stage_of_round_of_bids
   end
 
   def next_last_bid_round?

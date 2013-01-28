@@ -12,7 +12,7 @@ describe TradingItem do
   it { should belong_to :trading }
   it { should belong_to :administrative_process_budget_allocation_item }
 
-  it { should have_many(:trading_item_bids).dependent(:destroy) }
+  it { should have_many(:bids).dependent(:destroy) }
   it { should have_many(:bidders).through(:trading).order(:id) }
 
   it { should have_one(:closing).dependent(:destroy) }
@@ -54,25 +54,25 @@ describe TradingItem do
         first_bid  = double(:first_bid, :amount => 50.0)
         second_bid = double(:second_bid, :amount => 40.0)
         third_bid  = double(:third_bid, :amount => 30.0)
-        trading_item_bids = double(:trading_item_bids, :with_proposal => [first_bid, second_bid, third_bid])
-        enabled    = double(:enabled, :with_proposal => trading_item_bids)
-        trading_item_bids.should_receive(:enabled).and_return(enabled)
-        trading_item_bids.should_receive(:reorder).and_return(trading_item_bids)
-        trading_item_bids.should_receive(:first).and_return(third_bid)
+        bids = double(:bids, :with_proposal => [first_bid, second_bid, third_bid])
+        enabled    = double(:enabled, :with_proposal => bids)
+        bids.should_receive(:enabled).and_return(enabled)
+        bids.should_receive(:reorder).and_return(bids)
+        bids.should_receive(:first).and_return(third_bid)
 
-        subject.should_receive(:trading_item_bids).and_return(trading_item_bids)
+        subject.should_receive(:bids).and_return(bids)
 
         expect(subject.lowest_proposal_value).to eq 30.0
       end
 
       it 'should return zero when there is no proposal for the item' do
-        trading_item_bids = double(:trading_item_bids)
-        enabled           = double(:enabled, :with_proposal => trading_item_bids)
+        bids = double(:bids)
+        enabled           = double(:enabled, :with_proposal => bids)
 
-        trading_item_bids.should_receive(:enabled).and_return(enabled)
-        trading_item_bids.should_receive(:reorder).and_return([])
+        bids.should_receive(:enabled).and_return(enabled)
+        bids.should_receive(:reorder).and_return([])
 
-        subject.should_receive(:trading_item_bids).and_return(trading_item_bids)
+        subject.should_receive(:bids).and_return(bids)
 
         expect(subject.lowest_proposal_value).to eq 0
       end
@@ -88,23 +88,23 @@ describe TradingItem do
         second_bid = double(:second_bid, :amount => 40.0)
         third_bid = double(:third_bid, :amount => 30.0)
 
-        trading_item_bids = double(:trading_item_bids, :with_proposal => [first_bid, second_bid, third_bid])
-        trading_item_bids.should_receive(:with_proposal).and_return(trading_item_bids)
-        trading_item_bids.should_receive(:reorder).and_return(trading_item_bids)
-        trading_item_bids.should_receive(:first).and_return(third_bid)
+        bids = double(:bids, :with_proposal => [first_bid, second_bid, third_bid])
+        bids.should_receive(:with_proposal).and_return(bids)
+        bids.should_receive(:reorder).and_return(bids)
+        bids.should_receive(:first).and_return(third_bid)
 
-        subject.should_receive(:trading_item_bids).and_return(trading_item_bids)
+        subject.should_receive(:bids).and_return(bids)
 
         expect(subject.lowest_proposal_value).to eq 30.0
       end
 
       it 'should return zero when there is no proposal for the item' do
-        trading_item_bids = double(:trading_item_bids)
+        bids = double(:bids)
 
-        trading_item_bids.should_receive(:with_proposal).and_return(trading_item_bids)
-        trading_item_bids.should_receive(:reorder).and_return([])
+        bids.should_receive(:with_proposal).and_return(bids)
+        bids.should_receive(:reorder).and_return([])
 
-        subject.should_receive(:trading_item_bids).and_return(trading_item_bids)
+        subject.should_receive(:bids).and_return(bids)
 
         expect(subject.lowest_proposal_value).to eq 0
       end
@@ -118,25 +118,25 @@ describe TradingItem do
         second_bid = double(:second_bid, :bidder => 'bar')
         third_bid = double(:third_bid, :bidder => 'baz')
 
-        trading_item_bids = double(:trading_item_bids, :with_proposal => [first_bid, second_bid, third_bid])
-        enabled    = double(:enabled, :with_proposal => trading_item_bids)
-        trading_item_bids.should_receive(:enabled).and_return(enabled)
-        trading_item_bids.should_receive(:reorder).and_return(trading_item_bids)
-        trading_item_bids.should_receive(:first).and_return(third_bid)
+        bids = double(:bids, :with_proposal => [first_bid, second_bid, third_bid])
+        enabled    = double(:enabled, :with_proposal => bids)
+        bids.should_receive(:enabled).and_return(enabled)
+        bids.should_receive(:reorder).and_return(bids)
+        bids.should_receive(:first).and_return(third_bid)
 
-        subject.should_receive(:trading_item_bids).and_return(trading_item_bids)
+        subject.should_receive(:bids).and_return(bids)
 
         expect(subject.lowest_proposal_bidder).to eq 'baz'
       end
 
       it 'should return nil when there is no proposal for the item' do
-        trading_item_bids = double(:trading_item_bids)
-        enabled           = double(:enabled, :with_proposal => trading_item_bids)
+        bids = double(:bids)
+        enabled           = double(:enabled, :with_proposal => bids)
 
-        trading_item_bids.should_receive(:enabled).and_return(enabled)
-        trading_item_bids.should_receive(:reorder).and_return([])
+        bids.should_receive(:enabled).and_return(enabled)
+        bids.should_receive(:reorder).and_return([])
 
-        subject.should_receive(:trading_item_bids).and_return(trading_item_bids)
+        subject.should_receive(:bids).and_return(bids)
 
         expect(subject.lowest_proposal_bidder).to eq ''
       end
@@ -152,23 +152,23 @@ describe TradingItem do
         second_bid = double(:second_bid, :bidder => 'bar')
         third_bid = double(:third_bid, :bidder => 'baz')
 
-        trading_item_bids = double(:trading_item_bids, :with_proposal => [first_bid, second_bid, third_bid])
-        trading_item_bids.should_receive(:with_proposal).and_return(trading_item_bids)
-        trading_item_bids.should_receive(:reorder).and_return(trading_item_bids)
-        trading_item_bids.should_receive(:first).and_return(third_bid)
+        bids = double(:bids, :with_proposal => [first_bid, second_bid, third_bid])
+        bids.should_receive(:with_proposal).and_return(bids)
+        bids.should_receive(:reorder).and_return(bids)
+        bids.should_receive(:first).and_return(third_bid)
 
-        subject.should_receive(:trading_item_bids).and_return(trading_item_bids)
+        subject.should_receive(:bids).and_return(bids)
 
         expect(subject.lowest_proposal_bidder).to eq 'baz'
       end
 
       it 'should return nil when there is no proposal for the item' do
-        trading_item_bids = double(:trading_item_bids)
+        bids = double(:bids)
 
-        trading_item_bids.should_receive(:with_proposal).and_return(trading_item_bids)
-        trading_item_bids.should_receive(:reorder).and_return([])
+        bids.should_receive(:with_proposal).and_return(bids)
+        bids.should_receive(:reorder).and_return([])
 
-        subject.should_receive(:trading_item_bids).and_return(trading_item_bids)
+        subject.should_receive(:bids).and_return(bids)
 
         expect(subject.lowest_proposal_bidder).to eq ''
       end
@@ -442,12 +442,12 @@ describe TradingItem do
 
   describe 'last_bid' do
     it 'should return the last trading_item_bid' do
-      subject.stub(:trading_item_bids).and_return(['bid1', 'bid2'])
+      subject.stub(:bids).and_return(['bid1', 'bid2'])
 
       expect(subject.last_bid).to eq 'bid2'
     end
 
-    it 'should return nil when there is no trading_item_bids' do
+    it 'should return nil when there is no bids' do
       expect(subject.last_bid).to eq nil
     end
   end
@@ -456,7 +456,7 @@ describe TradingItem do
     it 'should return true when there are proposals at round of bid' do
       bids = double(:bids, :at_stage_of_round_of_bids => ['proposal'])
 
-      subject.stub(:trading_item_bids).and_return(bids)
+      subject.stub(:bids).and_return(bids)
 
       expect(subject.proposals_for_round_of_bids?).to be_true
     end
@@ -464,7 +464,7 @@ describe TradingItem do
     it 'should return false when there are no proposals at round of bid' do
       bids = double(:bids, :at_stage_of_round_of_bids => [])
 
-      subject.stub(:trading_item_bids).and_return(bids)
+      subject.stub(:bids).and_return(bids)
 
       expect(subject.proposals_for_round_of_bids?).to be_false
     end
@@ -472,13 +472,13 @@ describe TradingItem do
 
   describe '#started?' do
     it 'should be true when have bids' do
-      subject.stub(:trading_item_bids).and_return(['bid'])
+      subject.stub(:bids).and_return(['bid'])
 
       expect(subject.started?).to be_true
     end
 
     it 'should be false when have not bids' do
-      subject.stub(:trading_item_bids).and_return([])
+      subject.stub(:bids).and_return([])
 
       expect(subject.started?).to be_false
     end
@@ -510,12 +510,12 @@ describe TradingItem do
   describe '#with_proposal_for_round_of_proposals?' do
     let(:at_stage_of_proposals) { double(:at_stage_of_proposals) }
 
-    let(:trading_item_bids) do
-      double(:trading_item_bids, :at_stage_of_proposals => at_stage_of_proposals)
+    let(:bids) do
+      double(:bids, :at_stage_of_proposals => at_stage_of_proposals)
     end
 
     before do
-      subject.stub(:trading_item_bids => trading_item_bids)
+      subject.stub(:bids => bids)
     end
 
     context 'with proposals' do
@@ -553,10 +553,10 @@ describe TradingItem do
 
   describe '#lowest_proposal_at_stage_of_proposals_amount' do
     let(:enabled) { double(:enabled) }
-    let(:trading_item_bids) { double(:trading_item_bids, :enabled => enabled) }
+    let(:bids) { double(:bids, :enabled => enabled) }
 
     before do
-      subject.stub(:trading_item_bids => trading_item_bids)
+      subject.stub(:bids => bids)
     end
 
     it 'should returns the lowest proposal' do

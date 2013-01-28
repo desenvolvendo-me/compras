@@ -1,5 +1,5 @@
 class TradingItemBidStageCalculator
-  delegate :trading_item_bids, :bidders, :lowest_proposal_amount,
+  delegate :bids, :bidders, :lowest_proposal_amount,
            :selected_bidders_at_proposals, :value_limit_to_participate_in_bids,
            :valid_bidder_for_negotiation?,
            :to => :trading_item
@@ -10,7 +10,7 @@ class TradingItemBidStageCalculator
   end
 
   def stage_of_proposals?
-    trading_item_bids.empty? || !all_bidders_have_proposal_for_proposals_stage?
+    bids.empty? || !all_bidders_have_proposal_for_proposals_stage?
   end
 
   def stage_of_negotiation?
@@ -22,11 +22,11 @@ class TradingItemBidStageCalculator
   end
 
   def stage_of_proposal_report?
-    stage_of_round_of_bids? && trading_item_bids.at_stage_of_round_of_bids.empty?
+    stage_of_round_of_bids? && bids.at_stage_of_round_of_bids.empty?
   end
 
   def stage_of_classification?
-    stage_of_negotiation? && (trading_item_bids.negotiation.empty? || !valid_bidder_for_negotiation?)
+    stage_of_negotiation? && (bids.negotiation.empty? || !valid_bidder_for_negotiation?)
   end
 
   private
@@ -34,12 +34,12 @@ class TradingItemBidStageCalculator
   attr_reader :trading_item, :trading_item_bidders
 
   def all_bidders_have_proposal_for_proposals_stage?
-    trading_item_bids.at_stage_of_proposals.count >= bidders.enabled.count
+    bids.at_stage_of_proposals.count >= bidders.enabled.count
   end
 
   def only_one_bidder_left_at_round_of_bids?
-    return false unless trading_item_bids.at_stage_of_round_of_bids.any?
+    return false unless bids.at_stage_of_round_of_bids.any?
 
-    trading_item_bids.at_stage_of_round_of_bids.with_no_proposal.count == trading_item_bidders.selected_for_trading_item_size - 1
+    bids.at_stage_of_round_of_bids.with_no_proposal.count == trading_item_bidders.selected_for_trading_item_size - 1
   end
 end

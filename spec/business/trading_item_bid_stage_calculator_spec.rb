@@ -12,9 +12,9 @@ describe TradingItemBidStageCalculator do
 
   context 'delegates' do
     it 'delegates trading_item_bids to trading_item' do
-      trading_item.should_receive(:trading_item_bids)
+      trading_item.should_receive(:bids)
 
-      subject.trading_item_bids
+      subject.bids
     end
 
     it 'delegates bidder to trading_item' do
@@ -44,7 +44,7 @@ describe TradingItemBidStageCalculator do
 
   describe '#stage_of_proposals?' do
     it 'should be true when there are no bids' do
-      subject.stub(:trading_item_bids).and_return([])
+      subject.stub(:bids).and_return([])
 
       expect(subject).to be_stage_of_proposals
       expect(subject).to_not be_stage_of_negotiation
@@ -52,11 +52,11 @@ describe TradingItemBidStageCalculator do
     end
 
     it 'should be on stage of proposals when there are bids but not all bidders give a positions about the bid' do
-      trading_item_bids = double(:trading_item_bid, :empty? => false,
+      bids = double(:trading_item_bid, :empty? => false,
                                  :at_stage_of_proposals => ['bid1', 'bid2'])
       bidders = double(:bidders, :enabled => ['bidder1', 'bidder2', 'bidder3'])
 
-      subject.stub(:trading_item_bids).and_return(trading_item_bids)
+      subject.stub(:bids).and_return(bids)
       subject.stub(:bidders).and_return(bidders)
 
       expect(subject).to be_stage_of_proposals
@@ -70,12 +70,12 @@ describe TradingItemBidStageCalculator do
       at_stage_of_round_of_bids = double(:at_stage_of_round_of_bids,
         :with_no_proposal => ['bidder1'], :any? => true)
 
-      trading_item_bids = double(:trading_item_bids, :empty? => false,
+      bids = double(:bids, :empty? => false,
         :at_stage_of_round_of_bids => at_stage_of_round_of_bids)
 
 
       subject.stub(:lowest_proposal_amount).and_return(10)
-      subject.stub(:trading_item_bids).and_return(trading_item_bids)
+      subject.stub(:bids).and_return(bids)
 
       subject.should_receive(:all_bidders_have_proposal_for_proposals_stage?).
               at_least(1).times.and_return(true)
@@ -101,11 +101,11 @@ describe TradingItemBidStageCalculator do
       at_stage_of_round_of_bids = double(:at_stage_of_round_of_bids,
         :with_no_proposal => ['bidder1', 'bidder2'], :any? => true)
 
-      trading_item_bids = double(:trading_item_bids, :empty? => false,
+      bids = double(:bids, :empty? => false,
         :at_stage_of_round_of_bids => at_stage_of_round_of_bids)
 
       subject.stub(:lowest_proposal_amount).and_return(10)
-      subject.stub(:trading_item_bids).and_return(trading_item_bids)
+      subject.stub(:bids).and_return(bids)
 
       subject.should_receive(:all_bidders_have_proposal_for_proposals_stage?).
               at_least(1).times.and_return(true)
@@ -122,11 +122,11 @@ describe TradingItemBidStageCalculator do
       at_stage_of_round_of_bids = double(:at_stage_of_round_of_bids,
         :with_no_proposal => ['bidder1'], :any? => true)
 
-      trading_item_bids = double(:trading_item_bids, :empty? => false,
+      bids = double(:bids, :empty? => false,
         :at_stage_of_round_of_bids => at_stage_of_round_of_bids)
 
       subject.stub(:lowest_proposal_amount).and_return(nil)
-      subject.stub(:trading_item_bids).and_return(trading_item_bids)
+      subject.stub(:bids).and_return(bids)
 
       subject.should_receive(:all_bidders_have_proposal_for_proposals_stage?).
               at_least(1).times.and_return(true)
@@ -143,11 +143,11 @@ describe TradingItemBidStageCalculator do
       at_stage_of_round_of_bids = double(:at_stage_of_round_of_bids,
         :with_no_proposal => [], :any? => false)
 
-      trading_item_bids = double(:trading_item_bids, :empty? => false,
+      bids = double(:bids, :empty? => false,
         :at_stage_of_round_of_bids => at_stage_of_round_of_bids)
 
       subject.stub(:lowest_proposal_amount).and_return(nil)
-      subject.stub(:trading_item_bids).and_return(trading_item_bids)
+      subject.stub(:bids).and_return(bids)
 
       subject.should_receive(:all_bidders_have_proposal_for_proposals_stage?).
               at_least(1).times.and_return(true)
@@ -161,16 +161,16 @@ describe TradingItemBidStageCalculator do
 
   describe '#stage_of_proposal_report?' do
     context 'when on round_of_bids' do
-      let(:trading_item_bids) { double(:trading_item_bids) }
+      let(:bids) { double(:bids) }
 
       before do
         subject.stub(:stage_of_round_of_bids? => true)
-        subject.stub(:trading_item_bids => trading_item_bids)
+        subject.stub(:bids => bids)
       end
 
       context 'when there is no bids at round_of_bids' do
         before do
-          trading_item_bids.stub(:at_stage_of_round_of_bids => [])
+          bids.stub(:at_stage_of_round_of_bids => [])
         end
 
         it { expect(subject).to be_stage_of_proposal_report }
@@ -178,7 +178,7 @@ describe TradingItemBidStageCalculator do
 
       context 'when there is bids at round_of_bids' do
         before do
-          trading_item_bids.stub(:at_stage_of_round_of_bids => ['bidder'])
+          bids.stub(:at_stage_of_round_of_bids => ['bidder'])
         end
 
         it { expect(subject).to_not be_stage_of_proposal_report }
@@ -196,16 +196,16 @@ describe TradingItemBidStageCalculator do
 
   describe '#stage_of_classification?' do
     context 'when on negotiation' do
-      let(:trading_item_bids) { double(:trading_item_bidders) }
+      let(:bids) { double(:trading_item_bids) }
 
       before do
         subject.stub(:stage_of_negotiation? => true)
-        subject.stub(:trading_item_bids => trading_item_bids)
+        subject.stub(:bids => bids)
       end
 
       context 'when there is no bid at negotiation' do
         before do
-          trading_item_bids.stub(:negotiation => [])
+          bids.stub(:negotiation => [])
         end
 
         it { expect(subject).to be_stage_of_classification }
@@ -213,7 +213,7 @@ describe TradingItemBidStageCalculator do
 
       context 'when there is bid at negotiation' do
         before do
-          trading_item_bids.stub(:negotiation => ['negotiations'])
+          bids.stub(:negotiation => ['negotiations'])
         end
 
         context 'when there is a valid bidder for negotiation' do

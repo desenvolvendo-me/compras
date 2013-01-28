@@ -36,7 +36,7 @@ class TradingItemDecorator
   end
 
   def any_bid_at_negotiation?
-    trading_item_bids.at_stage_of_negotiation.any?
+    bids.at_stage_of_negotiation.any?
   end
 
   def cannot_undo_last_offer_message
