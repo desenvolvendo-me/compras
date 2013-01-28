@@ -85,7 +85,7 @@ describe TradingItem do
     let(:bidder2) { trading.bidders.second }
     let(:bidder3) { trading.bidders.last }
 
-    subject { trading.trading_items.first }
+    subject { trading.items.first }
 
     before do
       TradingItemBid.create!(

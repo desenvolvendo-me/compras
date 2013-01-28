@@ -10,7 +10,7 @@ describe TradingItemsController do
 
     it 'should redirect to trading item list when edited' do
       trading = Trading.make!(:pregao_presencial)
-      item = trading.trading_items.first
+      item = trading.items.first
 
       put :update, :id => item.id,
                    :trading_item => item.attributes.except('proposals_activated_at')
@@ -45,7 +45,7 @@ describe TradingItemsController do
     context 'with no proposals activated' do
       it 'should check permission for read' do
         trading = Trading.make!(:pregao_presencial)
-        item = trading.trading_items.first
+        item = trading.items.first
 
         controller.stub(:authenticate_user!)
         controller.should_receive(:authorize!).with(:read, 'tradings')
@@ -71,7 +71,7 @@ describe TradingItemsController do
         Trading.make!(:pregao_presencial, :licitation_process => licitation_process)
       end
 
-      let(:trading_item) { trading.trading_items.first }
+      let(:trading_item) { trading.items.first }
 
       before do
         controller.stub(:authenticate_user!)
@@ -176,7 +176,7 @@ describe TradingItemsController do
   describe 'GET #proposal_report' do
     it 'should check permission for read' do
       trading = Trading.make!(:pregao_presencial)
-      item = trading.trading_items.first
+      item = trading.items.first
 
       controller.stub(:authenticate_user!)
       controller.should_receive(:authorize!).with(:read, 'tradings')
@@ -186,7 +186,7 @@ describe TradingItemsController do
 
     it 'should raise unauthorized when not at stage of proposal_report' do
       trading = Trading.make!(:pregao_presencial)
-      item = trading.trading_items.first
+      item = trading.items.first
 
       controller.stub(:authenticate_user!)
       controller.stub(:authorize_resource!)
@@ -199,7 +199,7 @@ describe TradingItemsController do
 
     context 'on proposal_report' do
       let(:trading) { Trading.make!(:pregao_presencial) }
-      let(:item) { trading.trading_items.first }
+      let(:item) { trading.items.first }
       let(:bidder1) { trading.bidders.first }
       let(:bidder2) { trading.bidders.second }
       let(:bidder3) { trading.bidders.last }
@@ -245,7 +245,7 @@ describe TradingItemsController do
   describe 'GET #offers' do
     it 'should check permission for read' do
       trading = Trading.make!(:pregao_presencial)
-      item = trading.trading_items.first
+      item = trading.items.first
 
       controller.stub(:authenticate_user!)
       controller.should_receive(:authorize!).with(:read, 'tradings')

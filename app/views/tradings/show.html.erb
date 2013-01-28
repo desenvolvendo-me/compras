@@ -32,20 +32,20 @@
 <h3 class="center">REGISTRO DO PREGÃO</h3>
 <p><%= resource.trading_registry %></p>
 
-<% resource.trading_items.each do |item| %>
+<% resource.items.each do |item| %>
   <%= render 'trading_items/offers', :resource => item %>
 <% end %>
 
 <h3 class="center">CLASSIFICAÇÃO</h3>
 <p><%= classification_message %></p>
 
-<% resource.trading_items.each do |item| %>
+<% resource.items.each do |item| %>
   <%= render 'trading_items/minutes_classification', :resource => item %>
 <% end %>
 
 <h3 class="center">NEGOCIAÇÃO</h3>
 <p><%= accept_negotiation_message %></p>
 
-<% resource.trading_items.each do |item| %>
+<% resource.items.each do |item| %>
   <%= render 'trading_items/minutes_negotiation', :resource => item %>
 <% end %>

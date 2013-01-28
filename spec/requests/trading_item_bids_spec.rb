@@ -601,7 +601,7 @@ feature "TradingItemBids" do
     trading_item = TradingItem.make!(:item_pregao_presencial,
       :minimum_reduction_value => 0, :minimum_reduction_percent => 10.0)
 
-    trading = Trading.make!(:pregao_presencial, :trading_items => [trading_item])
+    trading = Trading.make!(:pregao_presencial, :items => [trading_item])
 
     make_stage_of_proposals :trading => trading
 
@@ -636,7 +636,7 @@ feature "TradingItemBids" do
     trading_item = TradingItem.make!(:item_pregao_presencial,
       :minimum_reduction_value => 0, :minimum_reduction_percent => 10.0)
 
-    trading = Trading.make!(:pregao_presencial, :trading_items => [trading_item])
+    trading = Trading.make!(:pregao_presencial, :items => [trading_item])
 
     make_stage_of_proposals :trading => trading
 
@@ -671,7 +671,7 @@ feature "TradingItemBids" do
     trading_item = TradingItem.make!(:item_pregao_presencial,
       :minimum_reduction_value => 0, :minimum_reduction_percent => 10.0)
 
-    trading = Trading.make!(:pregao_presencial, :trading_items => [trading_item])
+    trading = Trading.make!(:pregao_presencial, :items => [trading_item])
 
     make_stage_of_proposals :trading => trading
 
@@ -712,7 +712,7 @@ feature "TradingItemBids" do
     trading_item = TradingItem.make!(:item_pregao_presencial,
       :minimum_reduction_value => 0, :minimum_reduction_percent => 10.0)
 
-    trading = Trading.make!(:pregao_presencial, :trading_items => [trading_item])
+    trading = Trading.make!(:pregao_presencial, :items => [trading_item])
 
     make_stage_of_proposals :trading => trading
 
@@ -1043,7 +1043,7 @@ feature "TradingItemBids" do
     trading = options.fetch(:trading) { Trading.make!(:pregao_presencial)}
     trading.percentage_limit_to_participate_in_bids = TradingConfiguration.percentage_limit_to_participate_in_bids
     trading.save!
-    trading_item = options.fetch(:trading_item) { trading.trading_items.first }
+    trading_item = options.fetch(:trading_item) { trading.items.first }
     bidders = options.fetch(:bidders) { trading_item.bidders }
 
     bidders.each do |bidder|

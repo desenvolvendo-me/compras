@@ -2,7 +2,7 @@ Trading.blueprint(:pregao_presencial) do
   year { 2012 }
   code { 1 }
   licitation_process { LicitationProcess.make!(:pregao_presencial) }
-  trading_items {
+  items {
     [TradingItem.make!(:item_pregao_presencial)]
   }
   licitation_commission { LicitationCommission.make!(:comissao_pregao_presencial) }

@@ -1,4 +1,6 @@
 class TradingItemsController < CrudController
+  defaults :collection_name => :items
+
   actions :all, :except => [:new, :create, :destroy]
   custom_actions :resource => [:offers, :proposal_report]
 

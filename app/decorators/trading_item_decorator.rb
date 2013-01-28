@@ -112,7 +112,7 @@ class TradingItemDecorator
   end
 
   def must_have_only_one_item_started
-    trading.trading_items.each do |item|
+    trading.items.each do |item|
       if item.started? && !item.closed?
         if component != item
           return t('trading_item.messages.there_is_an_pending_item', :trading_item => item)

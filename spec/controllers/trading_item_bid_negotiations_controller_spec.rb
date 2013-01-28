@@ -9,7 +9,7 @@ describe TradingItemBidNegotiationsController do
 
   context 'at stage of negotiation' do
     let(:trading) { Trading.make!(:pregao_presencial) }
-    let(:trading_item) { trading.trading_items.first }
+    let(:trading_item) { trading.items.first }
     let(:bidder1) { trading.bidders.first }
     let(:bidder2) { trading.bidders.second }
     let(:bidder3) { trading.bidders.last }
@@ -139,7 +139,7 @@ describe TradingItemBidNegotiationsController do
 
   context 'at another stage' do
     let(:trading) { Trading.make!(:pregao_presencial) }
-    let(:trading_item) { trading.trading_items.first }
+    let(:trading_item) { trading.items.first }
 
     describe 'GET #new' do
       it 'should return 404' do

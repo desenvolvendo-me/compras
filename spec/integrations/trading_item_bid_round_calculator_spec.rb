@@ -17,7 +17,7 @@ describe TradingItemBidRoundCalculator do
 
         Trading.make!(
           :pregao_presencial,
-          :trading_items => [trading_item],
+          :items => [trading_item],
           :licitation_process => licitation_process)
 
         TradingItemBid.create!(

@@ -13,7 +13,7 @@ feature TradingItemClosing do
     TradingConfiguration.make!(:pregao)
     item = TradingItem.make!(:item_pregao_presencial)
     trading = Trading.make!(:pregao_presencial,
-      :trading_items => [
+      :items => [
         item,
         TradingItem.make!(:segundo_item_pregao_presencial)])
 
@@ -88,7 +88,7 @@ feature TradingItemClosing do
     TradingConfiguration.make!(:pregao)
     item = TradingItem.make!(:item_pregao_presencial)
     trading = Trading.make!(:pregao_presencial,
-      :trading_items => [
+      :items => [
         item
       ])
 
@@ -127,7 +127,7 @@ feature TradingItemClosing do
     TradingConfiguration.make!(:pregao)
     item = TradingItem.make!(:item_pregao_presencial)
     trading = Trading.make!(:pregao_presencial,
-      :trading_items => [
+      :items => [
         item,
         TradingItem.make!(:segundo_item_pregao_presencial)])
 

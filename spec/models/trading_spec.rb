@@ -16,7 +16,7 @@ describe Trading do
   it { should belong_to :licitation_process }
   it { should belong_to :licitating_unit }
 
-  it { should have_many(:trading_items).dependent(:destroy) }
+  it { should have_many(:items).dependent(:destroy) }
   it { should have_many(:closings).dependent(:destroy) }
   it { should have_many(:bidders).through(:licitation_process) }
 
@@ -139,23 +139,23 @@ describe Trading do
   end
 
   describe '#allowing_closing?' do
-    let(:trading_items) { double(:trading_items) }
+    let(:items) { double(:items) }
 
     before do
-      subject.stub(:trading_items => trading_items)
+      subject.stub(:items => items)
     end
 
-    context 'when all trading_items are closed' do
+    context 'when all items are closed' do
       before do
-        trading_items.stub(:not_closed => [])
+        items.stub(:not_closed => [])
       end
 
       it { expect(subject).to be_allow_closing }
     end
 
-    context 'when not all trading_items are closed' do
+    context 'when not all items are closed' do
       before do
-        trading_items.stub(:not_closed => ['not_closed'])
+        items.stub(:not_closed => ['not_closed'])
       end
 
       it { expect(subject).to_not be_allow_closing }

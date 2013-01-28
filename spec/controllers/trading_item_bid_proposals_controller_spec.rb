@@ -23,7 +23,7 @@ describe TradingItemBidProposalsController do
   describe 'POST #create' do
     it 'create and bid without proposal' do
       trading = Trading.make!(:pregao_presencial)
-      trading_item = trading.trading_items.first
+      trading_item = trading.items.first
 
       post :create, :trading_id => trading.id,
            :trading_item_bid => {
@@ -38,7 +38,7 @@ describe TradingItemBidProposalsController do
 
     it 'should render 404 when all bidder have proposals' do
       trading = Trading.make!(:pregao_presencial)
-      trading_item = trading.trading_items.first
+      trading_item = trading.items.first
 
       bidder1 = trading.bidders.first
       bidder2 = trading.bidders.second
@@ -78,7 +78,7 @@ describe TradingItemBidProposalsController do
 
     it 'should redirect to proposal_report after create the last proposal' do
       trading = Trading.make!(:pregao_presencial)
-      trading_item = trading.trading_items.first
+      trading_item = trading.items.first
 
       bidder1 = trading.bidders.first
       bidder2 = trading.bidders.second
@@ -112,7 +112,7 @@ describe TradingItemBidProposalsController do
 
     it 'should redirect to new trading item bid after create when is on stage of round of bids' do
       trading = Trading.make!(:pregao_presencial)
-      trading_item = trading.trading_items.first
+      trading_item = trading.items.first
 
       bidder1 = trading.bidders.first
       bidder2 = trading.bidders.second
@@ -139,7 +139,7 @@ describe TradingItemBidProposalsController do
 
   context 'when at stage of round of bids' do
     let(:trading) { Trading.make!(:pregao_presencial) }
-    let(:trading_item) { trading.trading_items.first }
+    let(:trading_item) { trading.items.first }
     let(:bidder1) { trading.bidders.first }
     let(:bidder2) { trading.bidders.second }
     let(:bidder3) { trading.bidders.third }
@@ -197,7 +197,7 @@ describe TradingItemBidProposalsController do
 
   context 'when showing the proposal report' do
     let(:trading) { Trading.make!(:pregao_presencial) }
-    let(:trading_item) { trading.trading_items.first }
+    let(:trading_item) { trading.items.first }
     let(:bidder1) { trading.bidders.first }
     let(:bidder2) { trading.bidders.second }
     let(:bidder3) { trading.bidders.third }

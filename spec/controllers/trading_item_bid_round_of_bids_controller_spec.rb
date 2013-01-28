@@ -9,7 +9,7 @@ describe TradingItemBidRoundOfBidsController do
 
   context 'at stage of round_of_bids' do
     let(:trading) { Trading.make!(:pregao_presencial) }
-    let(:trading_item) { trading.trading_items.first }
+    let(:trading_item) { trading.items.first }
     let(:bidder1) { trading.bidders.first }
     let(:bidder2) { trading.bidders.second }
     let(:bidder3) { trading.bidders.last }
@@ -127,7 +127,7 @@ describe TradingItemBidRoundOfBidsController do
 
   context 'when not at stage of round of bids' do
     let(:trading) { Trading.make!(:pregao_presencial) }
-    let(:trading_item) { trading.trading_items.first }
+    let(:trading_item) { trading.items.first }
 
     describe 'GET #new' do
       it 'should return 404' do
@@ -148,7 +148,7 @@ describe TradingItemBidRoundOfBidsController do
 
   context 'when have no valid proposals for round of proposals' do
     let(:trading) { Trading.make!(:pregao_presencial) }
-    let(:trading_item) { trading.trading_items.first }
+    let(:trading_item) { trading.items.first }
     let(:bidder1) { trading.bidders.first }
     let(:bidder2) { trading.bidders.second }
     let(:bidder3) { trading.bidders.last }

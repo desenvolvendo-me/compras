@@ -192,7 +192,7 @@ feature BidderDisqualification do
 
   def make_trading_item_at_classification
     trading = Trading.make!(:pregao_presencial)
-    trading_item = trading.trading_items.first
+    trading_item = trading.items.first
     bidder1 = trading.bidders.first
     bidder2 = trading.bidders.second
     bidder3 = trading.bidders.last

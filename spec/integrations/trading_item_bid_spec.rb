@@ -4,7 +4,7 @@ require 'spec_helper'
 describe TradingItemBid do
   context 'at round_of_bids with 3 rounds' do
     let(:trading) { trading = Trading.make!(:pregao_presencial) }
-    let(:trading_item) { trading.trading_items.first }
+    let(:trading_item) { trading.items.first }
     let(:bidder) { trading.bidders.first }
 
     let :bid_with_proposal do
@@ -58,7 +58,7 @@ describe TradingItemBid do
       trading_item_without_proposal = TradingItem.make!(:item_pregao_presencial, :minimum_reduction_value => 0.02)
 
       trading = Trading.make!(:pregao_presencial,
-        :trading_items => [trading_item_with_proposal,trading_item_without_proposal])
+        :items => [trading_item_with_proposal,trading_item_without_proposal])
 
       bidder1 = trading.bidders.first
       bidder2 = trading.bidders.second
@@ -98,7 +98,7 @@ describe TradingItemBid do
     it 'should returns bids at stage of proposals' do
       trading = Trading.make!(:pregao_presencial)
 
-      trading_item = trading.trading_items.first
+      trading_item = trading.items.first
       bidder = trading.bidders.first
 
       bid_with_proposal = TradingItemBid.create!(
@@ -134,7 +134,7 @@ describe TradingItemBid do
     it 'should returns bids at stage of proposals' do
       trading = Trading.make!(:pregao_presencial)
 
-      trading_item = trading.trading_items.first
+      trading_item = trading.items.first
       bidder = trading.bidders.first
 
       bid_with_proposal = TradingItemBid.create!(
@@ -170,7 +170,7 @@ describe TradingItemBid do
     it 'should returns bids at stage of negotiation' do
       trading = Trading.make!(:pregao_presencial)
 
-      trading_item = trading.trading_items.first
+      trading_item = trading.items.first
       bidder = trading.bidders.first
 
       bid_with_proposal = TradingItemBid.create!(
@@ -206,7 +206,7 @@ describe TradingItemBid do
     it 'should returns bids at stage of negotiation' do
       trading = Trading.make!(:pregao_presencial)
 
-      trading_item = trading.trading_items.first
+      trading_item = trading.items.first
       bidder = trading.bidders.first
 
       bid_with_proposal = TradingItemBid.create!(
@@ -242,7 +242,7 @@ describe TradingItemBid do
     it 'should returns bids with proposal by bidder and item' do
       trading = Trading.make!(:pregao_presencial)
 
-      trading_item = trading.trading_items.first
+      trading_item = trading.items.first
       bidder = trading.bidders.first
 
       bid_with_proposal = TradingItemBid.create!(
@@ -278,7 +278,7 @@ describe TradingItemBid do
     before do
       trading = Trading.make!(:pregao_presencial)
 
-      trading_item = trading.trading_items.first
+      trading_item = trading.items.first
       first_bidder = trading.bidders.first
       second_bidder = trading.bidders.second
 
@@ -383,7 +383,7 @@ describe TradingItemBid do
 
       Trading.make!(
         :pregao_presencial,
-        :trading_items => [trading_item],
+        :items => [trading_item],
         :licitation_process => licitation_process
       )
 

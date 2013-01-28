@@ -1,6 +1,6 @@
 class Trading < Compras::Model
   attr_accessible :code, :entity_id, :licitating_unit_id, :trading_registry,
-                  :year, :licitation_process_id, :trading_items_attributes,
+                  :year, :licitation_process_id, :items_attributes,
                   :licitation_commission_id, :preamble, :closing_of_accreditation
 
   auto_increment :code, :by => :year
@@ -11,11 +11,11 @@ class Trading < Compras::Model
   belongs_to :licitating_unit, :class_name => "Entity",
                                :foreign_key => "licitating_unit_id"
 
-  has_many :trading_items, :dependent => :destroy
+  has_many :items, :dependent => :destroy, :class_name => 'TradingItem'
   has_many :bidders, :through => :licitation_process
   has_many :closings, :dependent => :destroy, :class_name => 'TradingClosing', :order => "id DESC"
 
-  accepts_nested_attributes_for :trading_items
+  accepts_nested_attributes_for :items
 
   validates :licitation_process, :year, :presence => true
   validates :licitation_process_id, :uniqueness => true
@@ -50,7 +50,7 @@ class Trading < Compras::Model
   end
 
   def allow_closing?
-    trading_items.not_closed.empty?
+    items.not_closed.empty?
   end
 
   private

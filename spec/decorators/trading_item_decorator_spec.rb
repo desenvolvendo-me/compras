@@ -85,7 +85,7 @@ describe TradingItemDecorator do
 
   describe "#allows_offer_placing" do
     let(:trading_item) { double(:trading_item, :started? => true, :closed? => true) }
-    let(:trading) { double(:trading, :trading_items => [trading_item, component]) }
+    let(:trading) { double(:trading, :items => [trading_item, component]) }
 
     before do
       component.stub(:minimum_reduction_value => 0.0,

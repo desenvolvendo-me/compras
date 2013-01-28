@@ -282,7 +282,7 @@ feature "Tradings" do
     trading_item = TradingItem.make!(:item_pregao_presencial,
       :minimum_reduction_value => 1.0)
     trading_item2 = TradingItem.make!(:segundo_item_pregao_presencial)
-    trading = Trading.make!(:pregao_presencial, :trading_items => [trading_item, trading_item2])
+    trading = Trading.make!(:pregao_presencial, :items => [trading_item, trading_item2])
     trading.licitation_process.bidders << Bidder.make!(:licitante_com_proposta_3)
 
     navigate "Processo Administrativo/Licitatório > Pregão Presencial"

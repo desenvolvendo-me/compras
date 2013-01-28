@@ -21,7 +21,7 @@ describe Bidder do
 
       Trading.make!(
         :pregao_presencial,
-        :trading_items => [trading_item],
+        :items => [trading_item],
         :licitation_process => licitation_process)
 
       TradingItemBid.create!(
@@ -55,7 +55,7 @@ describe Bidder do
 
       Trading.make!(
         :pregao_presencial,
-        :trading_items => [trading_item],
+        :items => [trading_item],
         :licitation_process => licitation_process)
 
       expect(described_class.with_proposal_for_trading_item_round(1)).to eq []
@@ -75,7 +75,7 @@ describe Bidder do
 
       Trading.make!(
         :pregao_presencial,
-        :trading_items => [trading_item],
+        :items => [trading_item],
         :licitation_process => licitation_process)
 
       TradingItemBid.create!(
@@ -111,7 +111,7 @@ describe Bidder do
 
       Trading.make!(
         :pregao_presencial,
-        :trading_items => [trading_item],
+        :items => [trading_item],
         :licitation_process => licitation_process)
 
       TradingItemBid.create!(
@@ -147,7 +147,7 @@ describe Bidder do
 
       Trading.make!(
         :pregao_presencial,
-        :trading_items => [trading_item],
+        :items => [trading_item],
         :licitation_process => licitation_process)
 
       TradingItemBid.create!(
@@ -168,7 +168,7 @@ describe Bidder do
       trading_item_without_proposal = TradingItem.make!(:item_pregao_presencial, :minimum_reduction_value => 0.02)
 
       trading = Trading.make!(:pregao_presencial,
-        :trading_items => [trading_item_with_proposal,trading_item_without_proposal])
+        :items => [trading_item_with_proposal,trading_item_without_proposal])
 
       bidder1 = trading.bidders.first
       bidder2 = trading.bidders.second
@@ -208,7 +208,7 @@ describe Bidder do
       trading_item_without_proposal = TradingItem.make!(:item_pregao_presencial, :minimum_reduction_value => 0.02)
 
       trading = Trading.make!(:pregao_presencial,
-        :trading_items => [trading_item_with_proposal,trading_item_without_proposal])
+        :items => [trading_item_with_proposal,trading_item_without_proposal])
 
       bidder1 = trading.bidders.first
       bidder2 = trading.bidders.second
@@ -248,7 +248,7 @@ describe Bidder do
       trading_item_without_proposal = TradingItem.make!(:item_pregao_presencial, :minimum_reduction_value => 0.02)
 
       trading = Trading.make!(:pregao_presencial,
-        :trading_items => [trading_item_with_proposal,trading_item_without_proposal])
+        :items => [trading_item_with_proposal,trading_item_without_proposal])
 
       bidder1 = trading.bidders.first
       bidder2 = trading.bidders.second
@@ -289,7 +289,7 @@ describe Bidder do
         :bidders => [sobrinho, wenderson, nohup])
 
       trading = Trading.make!(:pregao_presencial,
-        :trading_items =>[trading_item],
+        :items =>[trading_item],
         :licitation_process => licitation_process
       )
 
@@ -339,7 +339,7 @@ describe Bidder do
   describe '#lower_trading_item_bid_amount' do
     it 'should return zero when bidder there is no proposal for item' do
       trading = Trading.make!(:pregao_presencial)
-      trading_item = trading.trading_items.first
+      trading_item = trading.items.first
       bidder = trading.bidders.first
 
       expect(bidder.lower_trading_item_bid_amount(trading_item)).to eq 0
@@ -347,7 +347,7 @@ describe Bidder do
 
     it 'should return the amount of lowest proposal of bidder for item' do
       trading = Trading.make!(:pregao_presencial)
-      trading_item = trading.trading_items.first
+      trading_item = trading.items.first
 
       bidder1 = trading.bidders.first
       bidder2 = trading.bidders.second
@@ -390,7 +390,7 @@ describe Bidder do
 
     it 'should return zero when bidder have no bid status with_proposal' do
       trading = Trading.make!(:pregao_presencial)
-      trading_item = trading.trading_items.first
+      trading_item = trading.items.first
 
       bidder = trading.bidders.first
 
@@ -409,7 +409,7 @@ describe Bidder do
   describe '#lower_trading_item_bid_amount_at_stage_of_proposals' do
     it 'should return zero when bidder there is no proposal for item' do
       trading = Trading.make!(:pregao_presencial)
-      trading_item = trading.trading_items.first
+      trading_item = trading.items.first
       bidder = trading.bidders.first
 
       expect(bidder.lower_trading_item_bid_amount_at_stage_of_proposals(trading_item)).to eq 0
@@ -417,7 +417,7 @@ describe Bidder do
 
     it 'should return the amount of lowest proposal of bidder for item' do
       trading = Trading.make!(:pregao_presencial)
-      trading_item = trading.trading_items.first
+      trading_item = trading.items.first
 
       bidder1 = trading.bidders.first
       bidder2 = trading.bidders.second
@@ -462,7 +462,7 @@ describe Bidder do
   describe '#lower_trading_item_bid_amount_at_stage_of_round_of_bids' do
     it 'should return zero when bidder there is no proposal for item' do
       trading = Trading.make!(:pregao_presencial)
-      trading_item = trading.trading_items.first
+      trading_item = trading.items.first
       bidder = trading.bidders.first
 
       expect(bidder.lower_trading_item_bid_amount_at_stage_of_proposals(trading_item)).to eq 0
@@ -470,7 +470,7 @@ describe Bidder do
 
     it 'should return the amount of lowest proposal of bidder for item' do
       trading = Trading.make!(:pregao_presencial)
-      trading_item = trading.trading_items.first
+      trading_item = trading.items.first
 
       bidder = trading.bidders.first
 
@@ -489,7 +489,7 @@ describe Bidder do
   describe '#lower_trading_item_bid_amount_at_stage_of_negotiation' do
     it 'should return zero when bidder there is no proposal for item' do
       trading = Trading.make!(:pregao_presencial)
-      trading_item = trading.trading_items.first
+      trading_item = trading.items.first
       bidder = trading.bidders.first
 
       expect(bidder.lower_trading_item_bid_amount_at_stage_of_negotiation(trading_item)).to eq 0
@@ -497,7 +497,7 @@ describe Bidder do
 
     it 'should return the amount of lowest proposal of bidder for item' do
       trading = Trading.make!(:pregao_presencial)
-      trading_item = trading.trading_items.first
+      trading_item = trading.items.first
 
       bidder = trading.bidders.first
 
@@ -542,7 +542,7 @@ describe Bidder do
 
   describe '.eligible_for_negotiation_stage' do
     let(:trading) { Trading.make!(:pregao_presencial) }
-    let(:trading_item) { trading.trading_items.first }
+    let(:trading_item) { trading.items.first }
     let(:bidder1) { trading.bidders.first }
     let(:bidder2) { trading.bidders.second }
     let(:bidder3) { trading.bidders.last }
