@@ -3,11 +3,11 @@ class TradingItem < Compras::Model
                   :minimum_reduction_value, :trading_id,
                   :administrative_process_budget_allocation_item_id
 
-  belongs_to :trading
   belongs_to :administrative_process_budget_allocation_item
+  belongs_to :trading
 
-  has_many :trading_item_bids, :dependent => :destroy, :order => :id
   has_many :bidders, :through => :trading, :order => :id
+  has_many :trading_item_bids, :dependent => :destroy, :order => :id
 
   has_one :closing, :dependent => :destroy, :class_name => 'TradingItemClosing'
 
