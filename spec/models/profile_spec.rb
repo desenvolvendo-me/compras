@@ -1,4 +1,5 @@
 require 'model_helper'
+require 'action_view'
 require 'app/models/profile'
 require 'app/models/role'
 require 'app/models/user'

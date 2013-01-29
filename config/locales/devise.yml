@@ -8,6 +8,7 @@ pt-BR:
       unauthenticated: "Por favor, efetue seu login."
       invalid: "Login ou senha inválidos."
       already_authenticated: "Você já está autenticado."
+      not_found_in_database: 'Email ou senha inválido.'
 
     sessions:
       signed_in: "Login efetuado com sucesso."
