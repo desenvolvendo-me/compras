@@ -3,11 +3,12 @@ require 'app/business/trading_item_bidders'
 
 describe TradingItemBidders do
   subject do
-    described_class.new(trading_item, bidders)
+    described_class.new(trading_item, bidders, :bidder_repository => bidder_repository)
   end
 
   let(:trading_item) { double(:trading_item, :id => -1) }
   let(:bidders) { double(:bidders) }
+  let(:bidder_repository) { double(:bidder_repository) }
 
   it '#selected_for_trading_item' do
     bidders.should_receive(:selected_for_trading_item).with(trading_item)

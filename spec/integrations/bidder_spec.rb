@@ -625,4 +625,81 @@ describe Bidder do
       end
     end
   end
+
+  describe '.ordered_by_trading_item_bid_amount' do
+    let(:trading) { Trading.make!(:pregao_presencial) }
+    let(:trading_item) { trading.items.first }
+    let(:bidder1) { trading.bidders.first }
+    let(:bidder2) { trading.bidders.second }
+    let(:bidder3) { trading.bidders.last }
+
+    before do
+      TradingItemBid.create!(
+        :round => 0,
+        :bidder_id => bidder1.id,
+        :trading_item_id => trading_item.id,
+        :amount => 100.0,
+        :stage => TradingItemBidStage::PROPOSALS,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      TradingItemBid.create!(
+        :round => 0,
+        :bidder_id => bidder2.id,
+        :trading_item_id => trading_item.id,
+        :amount => 100.0,
+        :stage => TradingItemBidStage::PROPOSALS,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      TradingItemBid.create!(
+        :round => 0,
+        :bidder_id => bidder3.id,
+        :trading_item_id => trading_item.id,
+        :amount => 100.0,
+        :stage => TradingItemBidStage::PROPOSALS,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      TradingItemBid.create!(
+        :round => 1,
+        :bidder_id => bidder1.id,
+        :trading_item_id => trading_item.id,
+        :amount => 97.0,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      TradingItemBid.create!(
+        :round => 1,
+        :bidder_id => bidder2.id,
+        :trading_item_id => trading_item.id,
+        :amount => 95.0,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      TradingItemBid.create!(
+        :round => 1,
+        :bidder_id => bidder3.id,
+        :trading_item_id => trading_item.id,
+        :amount => 94.0,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      TradingItemBid.create!(
+        :round => 2,
+        :bidder_id => bidder1.id,
+        :trading_item_id => trading_item.id,
+        :amount => 93.0,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      TradingItemBid.create!(
+        :round => 2,
+        :bidder_id => bidder2.id,
+        :trading_item_id => trading_item.id,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
+        :status => TradingItemBidStatus::WITHOUT_PROPOSAL)
+    end
+
+    it 'should return bidders ordered by amount' do
+      expect(described_class.ordered_by_trading_item_bid_amount(trading_item.id)).to eq [bidder1, bidder3, bidder2]
+    end
+  end
 end

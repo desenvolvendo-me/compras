@@ -192,6 +192,14 @@ class Bidder < Compras::Model
     }
   end
 
+  def self.ordered_by_trading_item_bid_amount(trading_item_id)
+    joins { trading_item_bids.outer }.
+    where { |bidder| bidder.trading_item_bids.trading_item_id.eq(trading_item_id) }.
+    group { id }.
+    reorder { [min(trading_item_bids.amount), id] }.
+    select('compras_bidders.*, min(compras_trading_item_bids.amount)')
+  end
+
   def destroy_all_classifications
     licitation_process_classifications.destroy_all
   end

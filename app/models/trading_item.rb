@@ -50,39 +50,27 @@ class TradingItem < Compras::Model
       initial_scope = initial_scope.not_selected_for_trading_item(self)
     end
 
-    initial_scope.sort do |a,b|
-      a.lower_trading_item_bid_amount(self) <=> b.lower_trading_item_bid_amount(self)
-    end
+    TradingItemBidders.new(self, initial_scope).bidders_ordered_by_amount
   end
 
   def disabled_bidders_by_lowest_proposal
-    bidders_with_proposals.disabled.sort do |a,b|
-      a.lower_trading_item_bid_amount(self) <=> b.lower_trading_item_bid_amount(self)
-    end
+    bidders_with_proposals.disabled.ordered_by_trading_item_bid_amount(id)
   end
 
   def bidders_by_lowest_proposal
-    bidders_with_proposals.sort do |a,b|
-      a.lower_trading_item_bid_amount(self) <=> b.lower_trading_item_bid_amount(self)
-    end
+    bidders_with_proposals.ordered_by_trading_item_bid_amount(id)
   end
 
   def bidders_by_lowest_proposal_at_stage_of_round_of_bids
-    bidders_with_proposals_at_stage_of_round_of_bids.sort do |a,b|
-      a.lower_trading_item_bid_amount_at_stage_of_round_of_bids(self) <=> b.lower_trading_item_bid_amount_at_stage_of_round_of_bids(self)
-    end
+    bidders_with_proposals_at_stage_of_round_of_bids.ordered_by_trading_item_bid_amount(id)
   end
 
   def bidders_benefited_by_lowest_proposal_at_stage_of_round_of_bids
-    bidders_benefited_with_proposals_at_stage_of_round_of_bids.sort do |a,b|
-      a.lower_trading_item_bid_amount_at_stage_of_round_of_bids(self) <=> b.lower_trading_item_bid_amount_at_stage_of_round_of_bids(self)
-    end
+    bidders_benefited_with_proposals_at_stage_of_round_of_bids.ordered_by_trading_item_bid_amount(id)
   end
 
   def bidders_by_lowest_proposal_at_stage_of_negotiation
-    bidders_with_proposals_at_stage_of_negotiaton.sort do |a,b|
-      a.lower_trading_item_bid_amount_at_stage_of_negotiation(self) <=> b.lower_trading_item_bid_amount_at_stage_of_negotiation(self)
-    end
+    bidders_with_proposals_at_stage_of_negotiaton.ordered_by_trading_item_bid_amount(id)
   end
 
   def lowest_proposal_amount
@@ -104,9 +92,9 @@ class TradingItem < Compras::Model
   end
 
   def bidders_for_negotiation_by_lowest_proposal(with_all_proposals = false)
-    bidders_selected_for_negotiation(with_all_proposals).sort do |a,b|
-      a.lower_trading_item_bid_amount(self) <=> b.lower_trading_item_bid_amount(self)
-    end
+    initial_scope = bidders_selected_for_negotiation(with_all_proposals)
+
+    TradingItemBidders.new(self, initial_scope).bidders_ordered_by_amount
   end
 
   def allow_winner?
@@ -186,11 +174,11 @@ class TradingItem < Compras::Model
   private
 
   def no_enabled_bidders_by_lowest_proposal_selected?
-    enabled_bidders_by_lowest_proposal(:filter => :selected).empty?
+    enabled_bidders_by_lowest_proposal(:filter => :selected).to_a.empty?
   end
 
   def bidders_selected_for_negotiation(with_all_proposals = false)
-    bidders_eligible_for_negotiation(with_all_proposals).select { |bidder| proposals_activated? || bidder.benefited }
+    bidders_eligible_for_negotiation(with_all_proposals).to_a.select { |bidder| proposals_activated? || bidder.benefited }
   end
 
   def bidders_eligible_for_negotiation(with_all_proposals = false)
