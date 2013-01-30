@@ -14,7 +14,6 @@ describe PurchaseSolicitationBudgetAllocationItem do
 
   it { should validate_presence_of :material }
   it { should validate_presence_of :quantity }
-  it { should validate_presence_of :unit_price }
   it { should validate_presence_of :status }
 
   it "should validate material_characteristic if purchase of services" do

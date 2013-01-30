@@ -21,7 +21,7 @@ class AdministrativeProcessBudgetAllocationItem < Compras::Model
   delegate :type_of_calculation,
            :to => :administrative_process_budget_allocation, :allow_nil => true
 
-  validates :material, :quantity, :unit_price, :presence => true
+  validates :material, :quantity, :presence => true
 
   orderize :id
   filterize

@@ -8,7 +8,6 @@ require 'app/models/bidder_proposal'
 describe AdministrativeProcessBudgetAllocationItem do
   it { should validate_presence_of :material }
   it { should validate_presence_of :quantity }
-  it { should validate_presence_of :unit_price }
 
   it { should belong_to :administrative_process_budget_allocation }
   it { should belong_to :material }

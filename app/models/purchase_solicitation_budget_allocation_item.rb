@@ -21,7 +21,7 @@ class PurchaseSolicitationBudgetAllocationItem < Compras::Model
            :to => :purchase_solicitation_budget_allocation,
            :allow_nil => true
 
-  validates :material, :quantity, :unit_price, :status, :presence => true
+  validates :material, :quantity, :status, :presence => true
   validates :material_id, :uniqueness => { :scope => :purchase_solicitation_budget_allocation_id }, :allow_nil => true
   validate :validate_material_characteristic, :if => :services?
 
