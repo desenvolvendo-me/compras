@@ -160,12 +160,10 @@ class Bidder < Compras::Model
   end
 
   def self.not_selected_for_trading_item(item)
-    joins { trading_item_bids }.
+    bidders_selected = selected_for_trading_item(item)
+
     where {
-      trading_item_bids.status.eq(TradingItemBidStatus::WITH_PROPOSAL) &
-      trading_item_bids.stage.eq(TradingItemBidStage::PROPOSALS) &
-      trading_item_bids.amount.gt(item.value_limit_to_participate_in_bids) &
-      trading_item_bids.trading_item_id.eq(item.id)
+      id.not_in(bidders_selected.select { id })
     }
   end
 
