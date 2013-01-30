@@ -1,6 +1,5 @@
 class TradingItemBidRoundCalculator
   delegate :bids, :selected_bidders_at_proposals,
-           :value_limit_to_participate_in_bids,
            :to => :trading_item
 
   def initialize(trading_item, stage_calculator = TradingItemBidStageCalculator, trading_item_bidders = TradingItemBidders.new(trading_item, trading_item.bidders))

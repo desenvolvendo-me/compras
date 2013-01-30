@@ -1,6 +1,6 @@
 class TradingItemBidStageCalculator
   delegate :bids, :bidders, :lowest_proposal_amount,
-           :selected_bidders_at_proposals, :value_limit_to_participate_in_bids,
+           :selected_bidders_at_proposals,
            :valid_bidder_for_negotiation?,
            :to => :trading_item
 
