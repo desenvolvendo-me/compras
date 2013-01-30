@@ -81,15 +81,23 @@
 <script>
   var materials_group_id = $('#material_materials_group_id').val();
 
-  $("#material_material_characteristic").change(function() {
-    if (this.value == 'material') {
-      $("#material_service_or_contract_type").attr('disabled', true);
-      $("#material_material_type").attr('disabled', false);
-    } else if (this.value == 'service') {
-      $("#material_material_type").attr('disabled', true);
-      $("#material_service_or_contract_type").attr('disabled', false);
+  $("#material_material_characteristic").change(changeFieldsByCharacteristic);
+
+  function changeFieldsByCharacteristic() {
+    characteristicValue = $("#material_material_characteristic").val();
+
+    if (characteristicValue == 'material') {
+      $("#material_service_or_contract_type").attr('disabled', true)
+                                             .requiredField(false);
+      $("#material_material_type").attr('disabled', false)
+                                  .requiredField(true);
+    } else if (characteristicValue == 'service') {
+      $("#material_material_type").attr('disabled', true)
+                                  .requiredField(false);
+      $("#material_service_or_contract_type").attr('disabled', false)
+                                             .requiredField(true);
     }
-  });
+  };
 
   $('#material_materials_group_id').change(function() {
     if (this.value) {
@@ -124,4 +132,8 @@
       $('#material_materials_class_id').val('');
     }
   }
+
+  (function(){
+    changeFieldsByCharacteristic();
+  })();
 </script>
