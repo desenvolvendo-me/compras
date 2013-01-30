@@ -58,4 +58,28 @@ describe TradingItemBidDecorator do
       expect(subject.amount).to eq '1.234,56'
     end
   end
+
+  context 'when DateTime is 5 Jan 2013 15:53:12' do
+    before { component.stub(:created_at => DateTime.new(2013, 1, 25, 15, 53, 12)) }
+
+    describe '#created_at_second' do
+      before do
+        I18n.backend.store_translations 'pt-BR', :time => {
+          :formats => {
+            :second => "%H:%M:%S"
+          }
+        }
+      end
+
+      it 'should return created_at as second format' do
+        expect(subject.created_at_second).to eq '15:53:12'
+      end
+    end
+
+    describe '#created_at_to_date' do
+      it 'should return created_at as second format' do
+        expect(subject.created_at_to_date).to eq '25/01/2013'
+      end
+    end
+  end
 end

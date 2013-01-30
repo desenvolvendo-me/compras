@@ -26,6 +26,10 @@ class TradingItemBidDecorator
     I18n.l component.created_at, :format => :second
   end
 
+  def created_at_to_date
+    I18n.l component.created_at.to_date
+  end
+
   def amount
     number_with_precision super if super
   end

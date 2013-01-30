@@ -3,9 +3,10 @@
 <table class="records table-proposals">
   <thead>
     <tr>
-      <th class="g-1-2">Empresa</th>
+      <th class="g-1-3">Empresa</th>
       <th class="g-1-10">Valor</th>
       <th class="g-1-10">%</th>
+      <th class="g-1-10">data</th>
       <th class="g-1-10">hora</th>
       <th>situação</th>
     </tr>
@@ -14,9 +15,10 @@
   <tbody>
     <% resource.bids_at_stage_of_round_of_bids_ordered_by_amount.each do |bid| %>
       <tr>
-        <td class="g-1-2"><%= bid.bidder %></td>
+        <td class="g-1-3"><%= bid.bidder %></td>
         <td class="g-1-10"><%= bid.decorator.amount %></td>
         <td class="g-1-10"><%= bid.decorator.percent_by_item_and_round %></td>
+        <td class="g-1-10"><%= bid.decorator.created_at_to_date %></td>
         <td class="g-1-10"><%= bid.decorator.created_at_second %></td>
         <td><%= resource.decorator.situation_for_next_stage(bid.bidder) %></td>
       </tr>
@@ -31,9 +33,10 @@
       <tbody>
         <% resource.bids_at_stage_of_round_of_bids_by_round_ordered_by_amount(round.round).each do |bid| %>
           <tr>
-            <td class="g-1-2"><%= bid.bidder %></td>
+            <td class="g-1-3"><%= bid.bidder %></td>
             <td class="g-1-10"><%= bid.decorator.amount %></td>
             <td class="g-1-10"><%= bid.decorator.percent_by_item_and_round %></td>
+            <td class="g-1-10"><%= bid.decorator.created_at_to_date %></td>
             <td class="g-1-10"><%= bid.decorator.created_at_second %></td>
             <td><%= bid.status_humanize %></td>
           </tr>
@@ -48,9 +51,10 @@
   <tbody>
     <% resource.bids_at_stage_of_negotiation_ordered_by_amount.each do |bid| %>
       <tr>
-        <td class="g-1-2"><%= bid.bidder %></td>
+        <td class="g-1-3"><%= bid.bidder %></td>
         <td class="g-1-10"><%= bid.decorator.amount %></td>
         <td class="g-1-10"><%= bid.decorator.percent_by_item_and_round %></td>
+        <td class="g-1-10"><%= bid.decorator.created_at_to_date %></td>
         <td class="g-1-10"><%= bid.decorator.created_at_second %></td>
         <td><%= bid.status_humanize %></td>
       </tr>
