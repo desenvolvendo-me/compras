@@ -37,11 +37,4 @@ describe TradingItemBidders do
 
     subject.at_bid_round(round)
   end
-
-  it '#for_stage_of_round_of_bids' do
-    round_of_bids = double(round_of_bids)
-    bidders.should_receive(:at_trading_item_stage).with(trading_item, round_of_bids)
-
-    subject.for_stage_of_round_of_bids(round_of_bids)
-  end
 end

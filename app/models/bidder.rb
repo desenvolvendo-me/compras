@@ -184,11 +184,11 @@ class Bidder < Compras::Model
     }
   end
 
-  def self.at_trading_item_stage(trading_item, stage)
+  def self.at_round_of_bids(trading_item)
     joins { trading_item_bids }.
     where {
       trading_item_bids.trading_item_id.eq(trading_item_id) &
-      trading_item_bids.stage.eq(stage)
+      trading_item_bids.stage.eq(TradingItemBidStage::ROUND_OF_BIDS)
     }
   end
 

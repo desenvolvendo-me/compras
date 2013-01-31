@@ -1,11 +1,10 @@
 class TradingItemBidRoundCalculator
-  delegate :bids, :selected_bidders_at_proposals,
+  delegate :bids, :selected_bidders_at_proposals, :bidders,
            :to => :trading_item
 
-  def initialize(trading_item, stage_calculator = TradingItemBidStageCalculator, trading_item_bidders = TradingItemBidders.new(trading_item, trading_item.bidders))
+  def initialize(trading_item, options = {})
     @trading_item = trading_item
-    @stage_calculator = stage_calculator
-    @trading_item_bidders = trading_item_bidders
+    @stage_calculator = options.fetch(:stage_calculator) { TradingItemBidStageCalculator }
   end
 
   def calculate(stage = nil)
@@ -17,14 +16,14 @@ class TradingItemBidRoundCalculator
 
   private
 
-  attr_reader :trading_item, :stage_calculator, :trading_item_bidders
+  attr_reader :trading_item, :stage_calculator
 
   def count_bids_with_proposal_for_last_round
     trading_item_bids_for_stage_of_round_of_bids.at_round(last_bid_round).with_proposal.count
   end
 
   def count_bidders_with_bids
-    count_bids_with_proposal_for_last_round + trading_item_bidders.for_stage_of_round_of_bids.with_no_proposal_for_trading_item(trading_item.id).count
+    count_bids_with_proposal_for_last_round + bidders.at_round_of_bids(trading_item).with_no_proposal_for_trading_item(trading_item.id).count
   end
 
   def all_bidders_have_bid_for_last_round?

@@ -282,7 +282,7 @@ describe Bidder do
     end
   end
 
-  describe '.at_trading_item_stage' do
+  describe '.at_round_of_bids' do
     before do
       licitation_process = LicitationProcess.make!(
         :pregao_presencial,
@@ -323,16 +323,9 @@ describe Bidder do
     let(:wenderson) { Bidder.make!(:licitante) }
     let(:nohup) { Bidder.make!(:licitante_com_proposta_3) }
 
-    it 'should return only bidders for the stage of proposals of the trading item' do
-      expect(described_class.at_trading_item_stage(trading_item.id, TradingItemBidStage::PROPOSALS)).to eq [sobrinho]
-    end
 
     it 'should return only bidders for the stage of round_of_bids of the trading item' do
-      expect(described_class.at_trading_item_stage(trading_item.id, TradingItemBidStage::ROUND_OF_BIDS)).to eq [wenderson]
-    end
-
-    it 'should return only bidders for the stage of negotiation of the trading item' do
-      expect(described_class.at_trading_item_stage(trading_item.id, TradingItemBidStage::NEGOTIATION)).to eq [nohup]
+      expect(described_class.at_round_of_bids(trading_item.id)).to eq [wenderson]
     end
   end
 
