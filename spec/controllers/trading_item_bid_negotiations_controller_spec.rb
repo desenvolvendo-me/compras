@@ -97,7 +97,7 @@ describe TradingItemBidNegotiationsController do
 
         expect(assigns(:trading_item_bid).trading_item).to eq trading_item
         expect(assigns(:trading_item_bid).amount).to eq 0
-        expect(assigns(:trading_item_bid).bidder).to eq bidder1
+        expect(assigns(:trading_item_bid).bidder).to eq bidder3
         expect(assigns(:trading_item_bid).status).to eq TradingItemBidStatus::WITH_PROPOSAL
         expect(assigns(:trading_item_bid).stage).to eq TradingItemBidStage::NEGOTIATION
       end
@@ -113,7 +113,7 @@ describe TradingItemBidNegotiationsController do
 
         expect(assigns(:trading_item_bid).status).to eq TradingItemBidStatus::WITHOUT_PROPOSAL
         expect(assigns(:trading_item_bid).stage).to eq TradingItemBidStage::NEGOTIATION
-        expect(assigns(:trading_item_bid).bidder).to eq bidder1
+        expect(assigns(:trading_item_bid).bidder).to eq bidder3
         expect(assigns(:trading_item_bid).round).to eq 0
       end
     end

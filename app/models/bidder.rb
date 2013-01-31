@@ -68,6 +68,8 @@ class Bidder < Compras::Model
   orderize :id
   filterize
 
+  scope :exclude_ids, lambda { |ids|  where { id.not_in(ids) } }
+
   def self.benefited
     joins { creditor.creditable(Person).personable(Company).company_size.extended_company_size }.
       where { 'compras_extended_company_sizes.benefited = true' }
@@ -149,21 +151,13 @@ class Bidder < Compras::Model
     }
   end
 
-  def self.selected_for_trading_item(item)
+  def self.under_limit_value(trading_item_id, limit_value)
     joins { trading_item_bids }.
     where {
       trading_item_bids.status.eq(TradingItemBidStatus::WITH_PROPOSAL) &
       trading_item_bids.stage.eq(TradingItemBidStage::PROPOSALS) &
-      trading_item_bids.amount.lteq(item.value_limit_to_participate_in_bids) &
-      trading_item_bids.trading_item_id.eq(item.id)
-    }
-  end
-
-  def self.not_selected_for_trading_item(item)
-    bidders_selected = selected_for_trading_item(item)
-
-    where {
-      id.not_in(bidders_selected.select { id })
+      trading_item_bids.amount.lteq(limit_value) &
+      trading_item_bids.trading_item_id.eq(trading_item_id)
     }
   end
 

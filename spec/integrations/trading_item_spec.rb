@@ -81,9 +81,9 @@ describe TradingItem do
 
   describe '#bidders_for_negotiation_by_lowest_proposal' do
     let(:trading) { Trading.make!(:pregao_presencial) }
-    let(:bidder1) { trading.bidders.first }
-    let(:bidder2) { trading.bidders.second }
-    let(:bidder3) { trading.bidders.last }
+    let(:bidder1) { trading.bidders.first } # not benefited
+    let(:bidder2) { trading.bidders.second } # not benefited
+    let(:bidder3) { trading.bidders.last } # benefited
 
     subject { trading.items.first }
 
@@ -138,13 +138,13 @@ describe TradingItem do
     context 'with proposals_activated_at nil' do
       context 'without_all_proposals' do
         it 'should returns all bidders for negotiation when it does not have a negotiation' do
-          expect(subject.bidders_for_negotiation_by_lowest_proposal).to include(bidder1)
+          expect(subject.bidders_for_negotiation_by_lowest_proposal).to eq [bidder3]
         end
 
         it 'should not show bidders that already have negotiation' do
           TradingItemBid.create!(
             :round => 0,
-            :bidder_id => bidder1.id,
+            :bidder_id => bidder3.id,
             :trading_item_id => subject.id,
             :stage => TradingItemBidStage::NEGOTIATION,
             :status => TradingItemBidStatus::WITHOUT_PROPOSAL)
@@ -155,18 +155,18 @@ describe TradingItem do
 
       context 'with_all_proposals' do
         it 'should returns all bidders for negotiation when it does not have a negotiation' do
-          expect(subject.bidders_for_negotiation_by_lowest_proposal(true)).to include(bidder1)
+          expect(subject.bidders_for_negotiation_by_lowest_proposal(true)).to eq [bidder3]
         end
 
         it 'should show bidders that already have negotiation too' do
           TradingItemBid.create!(
             :round => 0,
-            :bidder_id => bidder1.id,
+            :bidder_id => bidder3.id,
             :trading_item_id => subject.id,
             :stage => TradingItemBidStage::NEGOTIATION,
             :status => TradingItemBidStatus::WITHOUT_PROPOSAL)
 
-          expect(subject.bidders_for_negotiation_by_lowest_proposal(true)).to include(bidder1)
+          expect(subject.bidders_for_negotiation_by_lowest_proposal(true)).to eq [bidder3]
         end
       end
     end
@@ -180,7 +180,7 @@ describe TradingItem do
 
       context 'without_all_proposals' do
         it 'should returns all bidders for negotiation when it does not have a negotiation' do
-          expect(subject.bidders_for_negotiation_by_lowest_proposal).to include(bidder2)
+          expect(subject.bidders_for_negotiation_by_lowest_proposal).to eq [bidder2, bidder3]
         end
 
         it 'should not show bidders that already have negotiation' do
@@ -197,7 +197,7 @@ describe TradingItem do
 
       context 'with_all_proposals' do
         it 'should returns all bidders for negotiation when it does not have a negotiation' do
-          expect(subject.bidders_for_negotiation_by_lowest_proposal(true)).to include(bidder2)
+          expect(subject.bidders_for_negotiation_by_lowest_proposal(true)).to eq [bidder2, bidder3]
         end
 
         it 'should show bidders that already have negotiation too' do
@@ -208,7 +208,7 @@ describe TradingItem do
             :stage => TradingItemBidStage::NEGOTIATION,
             :status => TradingItemBidStatus::WITHOUT_PROPOSAL)
 
-          expect(subject.bidders_for_negotiation_by_lowest_proposal(true)).to include(bidder2)
+          expect(subject.bidders_for_negotiation_by_lowest_proposal(true)).to eq [bidder2, bidder3]
         end
       end
     end
@@ -235,10 +235,20 @@ describe TradingItem do
   end
 
   describe '#enabled_bidders_by_lowest_proposal' do
-    let(:trading) { Trading.make!(:pregao_presencial) }
-    let(:bidder1) { trading.bidders.first }
-    let(:bidder2) { trading.bidders.second }
-    let(:bidder3) { trading.bidders.last }
+    let(:bidder1) { Bidder.make!(:licitante) }
+    let(:bidder2) { Bidder.make!(:licitante_sobrinho) }
+    let(:bidder3) { Bidder.make!(:licitante_com_proposta_3) }
+    let(:bidder4) { Bidder.make!(:me_pregao) }
+    let(:bidder5) { Bidder.make!(:licitante_com_proposta_4) }
+
+    let(:licitation_process) do
+      LicitationProcess.make!(:pregao_presencial,
+        :bidders => [bidder1, bidder2, bidder3, bidder4, bidder5])
+    end
+
+    let(:trading) do
+      Trading.make!(:pregao_presencial, :licitation_process => licitation_process)
+    end
 
     subject do
       trading.items.first
@@ -271,8 +281,32 @@ describe TradingItem do
         :status => TradingItemBidStatus::WITH_PROPOSAL)
 
       TradingItemBid.create!(
+        :round => 0,
+        :bidder_id => bidder4.id,
+        :trading_item_id => subject.id,
+        :amount => 99.5,
+        :stage => TradingItemBidStage::PROPOSALS,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      TradingItemBid.create!(
+        :round => 0,
+        :bidder_id => bidder5.id,
+        :trading_item_id => subject.id,
+        :amount => 99.0,
+        :stage => TradingItemBidStage::PROPOSALS,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      TradingItemBid.create!(
         :round => 1,
         :bidder_id => bidder1.id,
+        :trading_item_id => subject.id,
+        :amount => 98.0,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      TradingItemBid.create!(
+        :round => 1,
+        :bidder_id => bidder3.id,
         :trading_item_id => subject.id,
         :amount => 97.0,
         :stage => TradingItemBidStage::ROUND_OF_BIDS,
@@ -280,7 +314,15 @@ describe TradingItem do
 
       TradingItemBid.create!(
         :round => 1,
-        :bidder_id => bidder3.id,
+        :bidder_id => bidder4.id,
+        :trading_item_id => subject.id,
+        :amount => 96.0,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      TradingItemBid.create!(
+        :round => 1,
+        :bidder_id => bidder5.id,
         :trading_item_id => subject.id,
         :amount => 95.0,
         :stage => TradingItemBidStage::ROUND_OF_BIDS,
@@ -301,18 +343,32 @@ describe TradingItem do
         :stage => TradingItemBidStage::ROUND_OF_BIDS,
         :status => TradingItemBidStatus::WITHOUT_PROPOSAL)
 
+      TradingItemBid.create!(
+        :round => 2,
+        :bidder_id => bidder4.id,
+        :trading_item_id => subject.id,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
+        :status => TradingItemBidStatus::WITHOUT_PROPOSAL)
+
+      TradingItemBid.create!(
+        :round => 2,
+        :bidder_id => bidder5.id,
+        :trading_item_id => subject.id,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
+        :status => TradingItemBidStatus::WITHOUT_PROPOSAL)
+
       BidderDisqualification.create!(:bidder_id => bidder1.id, :reason => 'inabilitado')
     end
 
     context 'without filter' do
       it 'should fitler bidders with proposal, enabled and order them by amount' do
-        expect(subject.enabled_bidders_by_lowest_proposal).to eq [bidder3, bidder2]
+        expect(subject.enabled_bidders_by_lowest_proposal).to eq [bidder5, bidder4, bidder3, bidder2]
       end
     end
 
     context 'with selected' do
       it 'should fitler bidders with proposal, enabled and order them by amount' do
-        expect(subject.enabled_bidders_by_lowest_proposal(:filter => :selected)).to eq [bidder3]
+        expect(subject.enabled_bidders_by_lowest_proposal(:filter => :selected)).to eq [bidder5, bidder4, bidder3]
       end
     end
 

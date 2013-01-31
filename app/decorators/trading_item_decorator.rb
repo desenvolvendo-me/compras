@@ -23,8 +23,8 @@ class TradingItemDecorator
     negotiation_or_classification_path(routes, stage_calculator)
   end
 
-  def situation_for_next_stage(bidder)
-    if bidder_selected?(bidder)
+  def situation_for_next_stage(bidder, bidder_selector = TradingItemBidderSelector)
+    if bidder_selected?(bidder, bidder_selector)
       t('trading_item.messages.selected')
     else
       t('trading_item.messages.not_selected')
@@ -123,12 +123,12 @@ class TradingItemDecorator
     nil
   end
 
-  def bidder_selected?(bidder)
-    selected_for_trading_item.include? bidder
+  def bidder_selected?(bidder, bidder_selector)
+    bidders_selected(bidder_selector).include? bidder
   end
 
-  def selected_for_trading_item
-    component.bidders.selected_for_trading_item(component)
+  def bidders_selected(bidder_selector)
+    bidder_selector.selected(component)
   end
 
   def bidder_disabled_for_last_bid?

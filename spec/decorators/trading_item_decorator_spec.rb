@@ -53,6 +53,7 @@ describe TradingItemDecorator do
     let(:bidder_one) { double(:bidder_one) }
     let(:bidder_two) { double(:bidder_two) }
     let(:bidders) { [bidder_one, bidder_two] }
+    let(:bidder_selector) { double(:bidder_selector) }
 
     it 'when the proposal is greater than the limit' do
       I18n.backend.store_translations 'pt-BR', :trading_item => {
@@ -61,11 +62,11 @@ describe TradingItemDecorator do
         }
       }
 
-      component.should_receive(:bidders).and_return(bidders)
-      bidders.should_receive(:selected_for_trading_item).with(component).and_return([bidder_one])
       component.stub(:bidder_selected?).with(bidder_two).and_return(false)
+      bidder_selector.should_receive(:selected).with(component).and_return([bidder_one])
 
-      expect(subject.situation_for_next_stage(bidder_two)).to eq 'Não selecionado'
+
+      expect(subject.situation_for_next_stage(bidder_two, bidder_selector)).to eq 'Não selecionado'
     end
 
     it 'when the proposal is greater than the limit' do
@@ -75,11 +76,10 @@ describe TradingItemDecorator do
         }
       }
 
-      component.should_receive(:bidders).and_return(bidders)
-      bidders.should_receive(:selected_for_trading_item).with(component).and_return([bidder_one])
       component.stub(:bidder_selected?).with(bidder_one).and_return(true)
+      bidder_selector.should_receive(:selected).with(component).and_return([bidder_one])
 
-      expect(subject.situation_for_next_stage(bidder_one)).to eq 'Selecionado'
+      expect(subject.situation_for_next_stage(bidder_one, bidder_selector)).to eq 'Selecionado'
     end
   end
 

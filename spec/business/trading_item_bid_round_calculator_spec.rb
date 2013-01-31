@@ -6,11 +6,14 @@ require 'app/enumerations/trading_item_bid_stage'
 
 describe TradingItemBidRoundCalculator do
   subject do
-    described_class.new(trading_item, :stage_calculator => stage_calculator)
+    described_class.new(trading_item,
+                        :stage_calculator => stage_calculator,
+                        :bidder_selector => bidder_selector)
   end
 
   let(:trading_item) { double(:trading_item) }
   let(:stage_calculator) { double(:stage_calculator) }
+  let(:bidder_selector) { double(:bidder_selector) }
 
   describe 'delegates' do
     it 'delegates trading_item_bids to trading_item' do

@@ -3,6 +3,7 @@ class TradingItemBidBidderChooser
     @trading_item = trading_item
     @trading_item_bidders = options.fetch(:trading_item_bidders) { TradingItemBidders.new(trading_item, trading_item.bidders.enabled) }
     @current_stage = options[:current_stage]
+    @trading_item_bidder_selector = options.fetch(:bidder_selector) { TradingItemBidderSelector }
   end
 
   def choose
@@ -15,7 +16,8 @@ class TradingItemBidBidderChooser
 
   private
 
-  attr_reader :trading_item, :trading_item_bidders, :current_stage
+  attr_reader :trading_item, :trading_item_bidders, :trading_item_bidder_selector,
+              :current_stage
 
   def bidders_available_ordered_for_current_round_by_value
     bidders_available_for_current_round.sort do |a,b|
@@ -41,7 +43,7 @@ class TradingItemBidBidderChooser
 
   def bidders_available
     if current_round == 1
-      trading_item_bidders.selected_for_trading_item
+      trading_item_bidder_selector.selected(trading_item)
     elsif current_round > 1
       trading_item_bidders.with_proposal_for_round(current_round.pred)
     else

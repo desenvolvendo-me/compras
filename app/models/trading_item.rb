@@ -42,13 +42,15 @@ class TradingItem < Compras::Model
   end
 
   def enabled_bidders_by_lowest_proposal(options = {})
-    initial_scope = bidders_with_proposals.enabled
+    initial_scope = bidders
 
     if :selected == options[:filter]
-      initial_scope = initial_scope.selected_for_trading_item(self)
+      initial_scope = TradingItemBidderSelector.selected(self)
     elsif :not_selected == options[:filter]
-      initial_scope = initial_scope.not_selected_for_trading_item(self)
+      initial_scope = TradingItemBidderSelector.not_selected(self)
     end
+
+    initial_scope = initial_scope.enabled.with_proposal_for_trading_item(id)
 
     TradingItemBidders.new(self, initial_scope).bidders_ordered_by_amount
   end
@@ -81,14 +83,6 @@ class TradingItem < Compras::Model
 
   def lowest_proposal_at_stage_of_proposals_amount
     bids.enabled.lowest_proposal_by_item_at_stage_of_proposals(self) || BigDecimal(0)
-  end
-
-  def selected_bidders_at_proposals
-    bidders.selected_for_trading_item(self)
-  end
-
-  def value_limit_to_participate_in_bids
-    (lowest_proposal_amount_at_stage_of_proposals * percentage_limit_to_participate_in_bids / 100) + lowest_proposal_amount_at_stage_of_proposals
   end
 
   def bidders_for_negotiation_by_lowest_proposal(with_all_proposals = false)
@@ -168,7 +162,7 @@ class TradingItem < Compras::Model
   end
 
   def bidders_enabled_not_selected
-    bidders.enabled.not_selected_for_trading_item(self)
+    TradingItemBidderSelector.not_selected(self).enabled
   end
 
   private
@@ -195,10 +189,6 @@ class TradingItem < Compras::Model
 
   def bid_limit_for_negotiation_stage
     lowest_proposal_amount_with_valid_proposal * BigDecimal("1.05")
-  end
-
-  def lowest_proposal_amount_at_stage_of_proposals
-    bids.with_proposal.at_stage_of_proposals.minimum(:amount)
   end
 
   def lowest_proposal_amount_with_valid_proposal

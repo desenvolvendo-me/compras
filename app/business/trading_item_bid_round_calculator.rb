@@ -5,6 +5,7 @@ class TradingItemBidRoundCalculator
   def initialize(trading_item, options = {})
     @trading_item = trading_item
     @stage_calculator = options.fetch(:stage_calculator) { TradingItemBidStageCalculator }
+    @bidder_selector  = options.fetch(:bidder_selector) { TradingItemBidderSelector }
   end
 
   def calculate(stage = nil)
@@ -16,7 +17,7 @@ class TradingItemBidRoundCalculator
 
   private
 
-  attr_reader :trading_item, :stage_calculator
+  attr_reader :trading_item, :stage_calculator, :bidder_selector
 
   def count_bids_with_proposal_for_last_round
     trading_item_bids_for_stage_of_round_of_bids.at_round(last_bid_round).with_proposal.count
@@ -29,11 +30,7 @@ class TradingItemBidRoundCalculator
   def all_bidders_have_bid_for_last_round?
     return true if last_bid.nil?
 
-    if last_bid_round > 0
-      trading_item_bidders.selected_for_trading_item.count == count_bidders_with_bids
-    else
-      selected_bidders_at_proposals.count == count_bidders_with_bids
-    end
+    bidder_selector.selected(@trading_item).count == count_bidders_with_bids
   end
 
   def trading_item_bids_for_stage_of_round_of_bids

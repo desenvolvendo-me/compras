@@ -10,12 +10,14 @@ require 'app/business/trading_item_bid_bidder_chooser'
 describe TradingItemBidBidderChooser do
   subject do
     described_class.new(trading_item, :current_stage => current_stage,
-                        :trading_item_bidders => trading_item_bidders)
+                        :trading_item_bidders => trading_item_bidders,
+                        :bidder_selector => bidder_selector)
   end
 
   let(:trading_item) { double(:trading_item) }
   let(:trading_item_bidders) { double(:trading_item_bidders) }
   let(:current_stage) { double(:stage) }
+  let(:bidder_selector) { double(:bidder_selector) }
 
   describe '#choose' do
     context 'when I have 3 bidders' do
@@ -64,7 +66,7 @@ describe TradingItemBidBidderChooser do
       context 'when round is equal to 1' do
         before do
           subject.stub(:current_round).and_return(1)
-          trading_item_bidders.should_receive(:selected_for_trading_item).and_return(bidders)
+          bidder_selector.should_receive(:selected).with(trading_item).and_return(bidders)
         end
 
         it 'should choose second bidder when proposals have no one yet' do

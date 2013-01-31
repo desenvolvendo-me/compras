@@ -10,20 +10,6 @@ describe TradingItemBidders do
   let(:bidders) { double(:bidders) }
   let(:bidder_repository) { double(:bidder_repository) }
 
-  it '#selected_for_trading_item' do
-    bidders.should_receive(:selected_for_trading_item).with(trading_item)
-
-    subject.selected_for_trading_item
-  end
-
-  it '#selected_for_trading_item_size' do
-    selected_for_trading_item = double(:selected_for_trading_item)
-    subject.stub(:selected_for_trading_item).and_return(selected_for_trading_item)
-    selected_for_trading_item.should_receive(:size).at_least(1).times
-
-    subject.selected_for_trading_item_size
-  end
-
   it '#with_proposal_for_round' do
     round = double(round)
     bidders.should_receive(:with_proposal_for_trading_item_round).with(round)

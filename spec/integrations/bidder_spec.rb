@@ -62,78 +62,6 @@ describe Bidder do
     end
   end
 
-  describe '.selected_for_trading_item' do
-    it 'should return only bidder with proposal lower than limit' do
-      sobrinho = Bidder.make!(:licitante_sobrinho)
-      wenderson = Bidder.make!(:licitante)
-
-      licitation_process = LicitationProcess.make!(
-        :pregao_presencial,
-        :bidders => [sobrinho, wenderson])
-
-      trading_item = TradingItem.make!(:item_pregao_presencial)
-
-      Trading.make!(
-        :pregao_presencial,
-        :items => [trading_item],
-        :licitation_process => licitation_process)
-
-      TradingItemBid.create!(
-        :round => 0,
-        :trading_item_id => trading_item.id,
-        :bidder_id => sobrinho.id,
-        :amount => 100.0,
-        :status => TradingItemBidStatus::WITH_PROPOSAL,
-        :stage => TradingItemBidStage::PROPOSALS)
-
-      TradingItemBid.create!(
-        :round => 0,
-        :trading_item_id => trading_item.id,
-        :bidder_id => wenderson.id,
-        :amount => 120.0,
-        :status => TradingItemBidStatus::WITH_PROPOSAL,
-        :stage => TradingItemBidStage::PROPOSALS)
-
-      expect(Bidder.selected_for_trading_item(trading_item)).to eq [sobrinho]
-    end
-  end
-
-  describe '.not_selected_for_trading_item' do
-    it 'should return only bidder with proposal lower than limit' do
-      sobrinho = Bidder.make!(:licitante_sobrinho)
-      wenderson = Bidder.make!(:licitante)
-
-      licitation_process = LicitationProcess.make!(
-        :pregao_presencial,
-        :bidders => [sobrinho, wenderson])
-
-      trading_item = TradingItem.make!(:item_pregao_presencial)
-
-      Trading.make!(
-        :pregao_presencial,
-        :items => [trading_item],
-        :licitation_process => licitation_process)
-
-      TradingItemBid.create!(
-        :round => 0,
-        :trading_item_id => trading_item.id,
-        :bidder_id => sobrinho.id,
-        :amount => 100.0,
-        :status => TradingItemBidStatus::WITH_PROPOSAL,
-        :stage => TradingItemBidStage::PROPOSALS)
-
-      TradingItemBid.create!(
-        :round => 0,
-        :trading_item_id => trading_item.id,
-        :bidder_id => wenderson.id,
-        :amount => 120.0,
-        :status => TradingItemBidStatus::WITH_PROPOSAL,
-        :stage => TradingItemBidStage::PROPOSALS)
-
-      expect(Bidder.not_selected_for_trading_item(trading_item)).to eq [wenderson]
-    end
-  end
-
   describe '.at_bid_round' do
     it 'should return only bidders for that specific round' do
       sobrinho = Bidder.make!(:licitante_sobrinho)
@@ -693,6 +621,64 @@ describe Bidder do
 
     it 'should return bidders ordered by amount' do
       expect(described_class.ordered_by_trading_item_bid_amount(trading_item.id)).to eq [bidder1, bidder3, bidder2]
+    end
+  end
+
+  describe '.exclude_ids' do
+    let(:trading) { Trading.make!(:pregao_presencial) }
+    let(:trading_item) { trading.items.first }
+    let(:bidder1) { trading.bidders.first }
+    let(:bidder2) { trading.bidders.second }
+    let(:bidder3) { trading.bidders.last }
+
+    it 'should exclude bidders with given ids' do
+      expect(described_class.exclude_ids([bidder1.id, bidder2.id])).to eq [bidder3]
+    end
+  end
+
+  describe '.under_limit_value' do
+    let(:trading) { Trading.make!(:pregao_presencial) }
+    let(:trading_item) { trading.items.first }
+    let(:bidder1) { trading.bidders.first }
+    let(:bidder2) { trading.bidders.second }
+    let(:bidder3) { trading.bidders.last }
+
+    before do
+      TradingItemBid.create!(
+        :round => 0,
+        :bidder_id => bidder1.id,
+        :trading_item_id => trading_item.id,
+        :amount => 100.0,
+        :stage => TradingItemBidStage::PROPOSALS,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      TradingItemBid.create!(
+        :round => 0,
+        :bidder_id => bidder2.id,
+        :trading_item_id => trading_item.id,
+        :amount => 110.0,
+        :stage => TradingItemBidStage::PROPOSALS,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      TradingItemBid.create!(
+        :round => 0,
+        :bidder_id => bidder3.id,
+        :trading_item_id => trading_item.id,
+        :stage => TradingItemBidStage::PROPOSALS,
+        :status => TradingItemBidStatus::WITHOUT_PROPOSAL)
+    end
+
+    it 'should return none bidders under 99.9' do
+      expect(described_class.under_limit_value(trading_item.id, 99.0)).to eq []
+    end
+
+    it 'should return one bidder under 100.0' do
+      expect(described_class.under_limit_value(trading_item.id, 100.0)).to eq [bidder1]
+    end
+
+    it 'should return two bidders under 110.0' do
+      expect(described_class.under_limit_value(trading_item.id, 110.0)).to include(bidder1, bidder2)
+      expect(described_class.under_limit_value(trading_item.id, 110.0)).to_not include(bidder3)
     end
   end
 end

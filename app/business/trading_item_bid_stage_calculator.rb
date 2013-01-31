@@ -4,9 +4,9 @@ class TradingItemBidStageCalculator
            :valid_bidder_for_negotiation?,
            :to => :trading_item
 
-  def initialize(trading_item, trading_item_bidders = TradingItemBidders.new(trading_item, trading_item.bidders))
+  def initialize(trading_item, options = {})
     @trading_item = trading_item
-    @trading_item_bidders = trading_item_bidders
+    @bidder_selector = options.fetch(:bidder_selector) { TradingItemBidderSelector }
   end
 
   def stage_of_proposals?
@@ -31,7 +31,7 @@ class TradingItemBidStageCalculator
 
   private
 
-  attr_reader :trading_item, :trading_item_bidders
+  attr_reader :trading_item, :bidder_selector
 
   def all_bidders_have_proposal_for_proposals_stage?
     bids.at_stage_of_proposals.count >= bidders.enabled.count
@@ -40,6 +40,6 @@ class TradingItemBidStageCalculator
   def only_one_bidder_left_at_round_of_bids?
     return false unless bids.at_stage_of_round_of_bids.any?
 
-    bids.at_stage_of_round_of_bids.with_no_proposal.count == trading_item_bidders.selected_for_trading_item_size - 1
+    bids.at_stage_of_round_of_bids.with_no_proposal.count == bidder_selector.selected(trading_item).count - 1
   end
 end

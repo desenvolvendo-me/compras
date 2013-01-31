@@ -5,14 +5,6 @@ class TradingItemBidders
     @bidder_repository = options.fetch(:bidder_repository) { Bidder }
   end
 
-  def selected_for_trading_item
-    bidders.selected_for_trading_item(trading_item)
-  end
-
-  def selected_for_trading_item_size
-    selected_for_trading_item.size
-  end
-
   def with_proposal_for_round(round)
     bidders.with_proposal_for_trading_item_round(round)
   end

@@ -4,11 +4,11 @@ require 'app/business/trading_item_bid_stage_calculator'
 
 describe TradingItemBidStageCalculator do
   subject do
-    described_class.new(trading_item, trading_item_bidders)
+    described_class.new(trading_item, :bidder_selector => bidder_selector)
   end
 
   let(:trading_item) { double(:trading_item) }
-  let(:trading_item_bidders) { double(:trading_item_bidders) }
+  let(:bidder_selector) { double(:bidder_selector) }
 
   context 'delegates' do
     it 'delegates trading_item_bids to trading_item' do
@@ -79,8 +79,8 @@ describe TradingItemBidStageCalculator do
 
       subject.should_receive(:all_bidders_have_proposal_for_proposals_stage?).
               at_least(1).times.and_return(true)
-      trading_item_bidders.should_receive(:selected_for_trading_item_size).
-              at_least(1).times.and_return(2)
+      bidder_selector.should_receive(:selected).with(trading_item).
+              at_least(1).times.and_return(['bidder1', 'bidder2'])
 
 
       expect(subject).to_not be_stage_of_proposals
@@ -109,8 +109,8 @@ describe TradingItemBidStageCalculator do
 
       subject.should_receive(:all_bidders_have_proposal_for_proposals_stage?).
               at_least(1).times.and_return(true)
-      trading_item_bidders.should_receive(:selected_for_trading_item_size).
-              at_least(1).times.and_return(2)
+      bidder_selector.should_receive(:selected).with(trading_item).
+              at_least(1).times.and_return(['bidder1', 'bidder2'])
 
 
       expect(subject).to_not be_stage_of_proposals
@@ -130,8 +130,8 @@ describe TradingItemBidStageCalculator do
 
       subject.should_receive(:all_bidders_have_proposal_for_proposals_stage?).
               at_least(1).times.and_return(true)
-      trading_item_bidders.should_receive(:selected_for_trading_item_size).
-              at_least(1).times.and_return(2)
+      bidder_selector.should_receive(:selected).with(trading_item).
+              at_least(1).times.and_return(['bidder1', 'bidder2'])
 
 
       expect(subject).to_not be_stage_of_proposals

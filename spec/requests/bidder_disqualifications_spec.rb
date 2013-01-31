@@ -47,11 +47,18 @@ feature BidderDisqualification do
 
     within 'table.records:nth-of-type(1)' do
       within 'tbody tr:nth-child(1)' do
-        expect(page).to have_content 'Gabriel Sobrinho'
-        expect(page).to have_content 'Não'
+        expect(page).to have_content 'Nobe'
+        expect(page).to have_content 'Sim'
         expect(page).to have_content '96,00'
         expect(page).to have_content '0,00'
-        expect(page).to have_link 'Inabilitar'
+        expect(page).to_not have_link 'Inabilitar'
+      end
+
+      within 'tbody tr:nth-child(2)' do
+        expect(page).to have_content 'Gabriel Sobrinho'
+        expect(page).to have_content 'Não'
+        expect(page).to have_content '98,00'
+        expect(page).to have_content '2,08'
       end
 
       within 'tbody tr:nth-child(3)' do
@@ -153,14 +160,24 @@ feature BidderDisqualification do
 
     within 'table.records:nth-of-type(1)' do
       within 'tbody tr:nth-child(1)' do
-        expect(page).to have_content 'Gabriel Sobrinho'
-        expect(page).to have_content 'Não'
+        expect(page).to have_content 'Nobe'
+        expect(page).to have_content 'Sim'
         expect(page).to have_content '96,00'
         expect(page).to have_content '0,00'
-        expect(page).to have_link 'Inabilitar'
+        expect(page).to_not have_link 'Inabilitar'
+      end
+
+      within 'tbody tr:nth-child(2)' do
+        expect(page).to have_content 'Gabriel Sobrinho'
+        expect(page).to have_content 'Não'
+        expect(page).to have_content '98,00'
+        expect(page).to have_content '2,08'
       end
 
       within 'tbody tr:nth-child(3)' do
+        expect(page).to have_content 'Wenderson Malheiros'
+        expect(page).to have_content 'Não'
+
         click_link 'Inabilitação'
       end
     end
@@ -181,11 +198,17 @@ feature BidderDisqualification do
       end
 
       within 'tbody tr:nth-child(2)' do
-        expect(page).to have_content 'Gabriel Sobrinho'
-        expect(page).to have_content 'Não'
+        expect(page).to have_content 'Nobe'
+        expect(page).to have_content 'Sim'
         expect(page).to have_content '96,00'
         expect(page).to have_content '1,05'
-        expect(page).to_not have_link 'Inabilitar'
+      end
+
+      within 'tbody tr:nth-child(3)' do
+        expect(page).to have_content 'Gabriel Sobrinho'
+        expect(page).to have_content 'Não'
+        expect(page).to have_content '98,00'
+        expect(page).to have_content '3,16'
       end
     end
   end

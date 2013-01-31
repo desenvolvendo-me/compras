@@ -131,7 +131,16 @@ feature TradingItem do
 
   scenario 'show all bidders at proposal_report' do
     TradingConfiguration.make!(:pregao)
-    Trading.make!(:pregao_presencial)
+
+    bidder1 = Bidder.make!(:licitante)
+    bidder2 = Bidder.make!(:licitante_sobrinho)
+    bidder3 = Bidder.make!(:licitante_com_proposta_3)
+    bidder4 = Bidder.make!(:me_pregao)
+
+    licitation_process = LicitationProcess.make!(:pregao_presencial,
+      :bidders => [bidder1, bidder2, bidder3, bidder4])
+
+    Trading.make!(:pregao_presencial, :licitation_process => licitation_process)
 
     navigate "Processo Administrativo/Licitatório > Pregão Presencial"
 
@@ -146,7 +155,13 @@ feature TradingItem do
 
     expect(page).to have_content 'Proposta criada com sucesso'
 
-    fill_in "Valor da proposta", :with => "200,00"
+    fill_in "Valor da proposta", :with => "110,00"
+
+    click_button "Salvar"
+
+    expect(page).to have_content 'Proposta criada com sucesso'
+
+    fill_in "Valor da proposta", :with => "100,00"
 
     click_button "Salvar"
 
@@ -160,7 +175,7 @@ feature TradingItem do
 
     within_records do
       within 'tbody tr:nth-child(1)' do
-        expect(page).to have_content 'Gabriel Sobrinho'
+        expect(page).to have_content 'Wenderson Malheiros'
         expect(page).to have_content '100,00'
         expect(page).to have_content '0,00'
         expect(page).to have_content 'Selecionado'
@@ -168,14 +183,22 @@ feature TradingItem do
       end
 
       within 'tbody tr:nth-child(2)' do
-        expect(page).to have_content 'Wenderson Malheiros'
-        expect(page).to have_content '200,00'
+        expect(page).to have_content 'Nohup'
         expect(page).to have_content '100,00'
-        expect(page).to have_content 'Não selecionado'
+        expect(page).to have_content '0,00'
+        expect(page).to have_content 'Selecionado'
         expect(page).to have_link 'Corrigir proposta'
       end
 
       within 'tbody tr:nth-child(3)' do
+        expect(page).to have_content 'Gabriel Sobrinho'
+        expect(page).to have_content '110,00'
+        expect(page).to have_content '10,00'
+        expect(page).to have_content 'Selecionado'
+        expect(page).to have_link 'Corrigir proposta'
+      end
+
+      within 'tbody tr:nth-child(4)' do
         expect(page).to have_content 'Nobe'
         expect(page).to have_content '0,00'
         expect(page).to have_content '0,00'
@@ -276,6 +299,8 @@ feature TradingItem do
 
     licitation_process = LicitationProcess.make!(:pregao_presencial,
       :bidders => [
+        Bidder.make!(:licitante_com_proposta_3), # Nohup
+
         # Bidders not beneficiated
         Bidder.make!(:licitante), # Wenderson
         Bidder.make!(:licitante_sobrinho), # Sobrinho
@@ -308,9 +333,15 @@ feature TradingItem do
 
     expect(page).to have_content 'Proposta criada com sucesso'
 
+    fill_in "Valor da proposta", :with => "101,00"
+
+    click_button "Salvar"
+
+    expect(page).to have_content 'Proposta criada com sucesso'
+
     within_records do
-      within 'tbody tr:nth-child(3)' do
-        expect(page).to have_content 'Wenderson Malheiros'
+      within 'tbody tr:nth-child(4)' do
+        expect(page).to have_content 'Nohup'
         expect(page).to have_content 'Não selecionado'
       end
     end
@@ -342,6 +373,12 @@ feature TradingItem do
 
     expect(page).to have_content 'Oferta criada com sucesso'
 
+    choose 'Declinou'
+
+    click_button "Salvar"
+
+    expect(page).to have_content 'Oferta criada com sucesso'
+
     expect(page).to have_disabled_element 'Ativar propostas',
                                           :reason => 'Não há propostas para serem ativadas'
 
@@ -349,7 +386,7 @@ feature TradingItem do
 
     # Bidders not selected
     within 'table.records:nth-of-type(3)' do
-      expect(page).to have_content 'Wenderson Malheiros'
+      expect(page).to have_content 'Nohup'
       expect(page).to have_content 'À negociar'
     end
 
@@ -376,6 +413,16 @@ feature TradingItem do
 
     expect(page).to have_notice 'Inabilitação de Licitante criada com sucesso'
 
+    within 'table.records:nth-of-type(1)' do
+      click_link 'Inabilitar'
+    end
+
+    fill_in 'Motivo', :with => 'Faltando documentação'
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Inabilitação de Licitante criada com sucesso'
+
     click_link 'Ativar propostas'
 
     expect(page).to have_title 'Classificação das Propostas Ativadas'
@@ -384,7 +431,7 @@ feature TradingItem do
 
     # Proposals activated
     within 'table.records:nth-of-type(1)' do
-      expect(page).to have_content 'Wenderson Malheiros'
+      expect(page).to have_content 'Nohup'
       expect(page).to have_content '1.000,00'
       expect(page).to have_content '0,00'
       expect(page).to have_content '1º lugar'
@@ -394,11 +441,16 @@ feature TradingItem do
     # Bidders disqualified
     within 'table.records:nth-of-type(2)' do
       within 'tbody tr:nth-child(1)' do
-        expect(page).to have_content 'IBM'
+        expect(page).to have_content 'Wenderson Malheiros'
         expect(page).to have_content 'Inabilitado'
       end
 
       within 'tbody tr:nth-child(2)' do
+        expect(page).to have_content 'IBM'
+        expect(page).to have_content 'Inabilitado'
+      end
+
+      within 'tbody tr:nth-child(3)' do
         expect(page).to have_content 'Gabriel Sobrinho'
         expect(page).to have_content 'Inabilitado'
       end
@@ -419,7 +471,7 @@ feature TradingItem do
 
     expect(page).to have_disabled_field 'Etapa', :with => 'Negociação'
     expect(page).to have_disabled_field 'Item do pregão', :with => '01.01.00001 - Antivirus'
-    expect(page).to have_disabled_field 'Licitante', :with => 'Wenderson Malheiros'
+    expect(page).to have_disabled_field 'Licitante', :with => 'Nohup'
     expect(page).to have_disabled_field 'Menor preço', :with => '97,00'
     expect(page).to have_disabled_field 'Valor limite', :with => '96,99'
 
@@ -437,7 +489,7 @@ feature TradingItem do
 
     # Proposals activated
     within 'table.records:nth-of-type(1)' do
-      expect(page).to have_content 'Wenderson Malheiros'
+      expect(page).to have_content 'Nohup'
       expect(page).to have_content '96,00'
       expect(page).to have_content '0,00'
       expect(page).to have_content '1º lugar'
@@ -450,6 +502,8 @@ feature TradingItem do
 
     licitation_process = LicitationProcess.make!(:pregao_presencial,
       :bidders => [
+        Bidder.make!(:licitante_com_proposta_3), # Nohup
+
         # Bidders not beneficiated
         Bidder.make!(:licitante), # Wenderson
         Bidder.make!(:licitante_sobrinho), # Sobrinho
@@ -482,9 +536,15 @@ feature TradingItem do
 
     expect(page).to have_content 'Proposta criada com sucesso'
 
+    fill_in "Valor da proposta", :with => "101,00"
+
+    click_button "Salvar"
+
+    expect(page).to have_content 'Proposta criada com sucesso'
+
     within_records do
-      within 'tbody tr:nth-child(3)' do
-        expect(page).to have_content 'Wenderson Malheiros'
+      within 'tbody tr:nth-child(4)' do
+        expect(page).to have_content 'Nohup'
         expect(page).to have_content 'Não selecionado'
       end
     end
@@ -516,12 +576,18 @@ feature TradingItem do
 
     expect(page).to have_content 'Oferta criada com sucesso'
 
+    choose 'Declinou'
+
+    click_button "Salvar"
+
+    expect(page).to have_content 'Oferta criada com sucesso'
+
     expect(page).to have_disabled_element 'Ativar propostas',
                                           :reason => 'Não há propostas para serem ativadas'
 
     # Bidders not selected
     within 'table.records:nth-of-type(3)' do
-      expect(page).to have_content 'Wenderson Malheiros'
+      expect(page).to have_content 'Nohup'
       expect(page).to have_content 'À negociar'
     end
 
@@ -548,7 +614,173 @@ feature TradingItem do
 
     expect(page).to have_notice 'Inabilitação de Licitante criada com sucesso'
 
+    within 'table.records:nth-of-type(1)' do
+      click_link 'Inabilitar'
+    end
+
+    fill_in 'Motivo', :with => 'Faltando documentação'
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Inabilitação de Licitante criada com sucesso'
+
     expect(page).to have_disabled_element 'Desfazer última oferta',
-                                          :reason => 'Não pode desfazer oferta de licitante inabilitado (Gabriel Sobrinho)'
+                                          :reason => 'Não pode desfazer oferta de licitante inabilitado (IBM)'
+  end
+
+  scenario 'with 2 bidders with proposals less than 10%' do
+    bidder1 = Bidder.make!(:licitante)
+    bidder2 = Bidder.make!(:licitante_sobrinho)
+    bidder3 = Bidder.make!(:licitante_com_proposta_3)
+    bidder4 = Bidder.make!(:me_pregao)
+    bidder5 = Bidder.make!(:licitante_com_proposta_4)
+
+    licitation_process = LicitationProcess.make!(:pregao_presencial,
+      :bidders => [bidder1, bidder2, bidder3, bidder4, bidder5])
+
+    TradingConfiguration.make!(:pregao)
+    Trading.make!(:pregao_presencial, :licitation_process => licitation_process)
+
+    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+
+    click_link "1/2012"
+    click_button "Salvar e ir para Itens/Ofertas"
+    click_link "Fazer oferta"
+
+    # Proposal stage
+    fill_in "Valor da proposta", :with => "1000,00"
+
+    click_button "Salvar"
+
+    expect(page).to have_content 'Proposta criada com sucesso'
+
+    fill_in "Valor da proposta", :with => "110,50"
+
+    click_button "Salvar"
+
+    expect(page).to have_content 'Proposta criada com sucesso'
+
+    fill_in "Valor da proposta", :with => "100,00"
+
+    click_button "Salvar"
+
+    expect(page).to have_content 'Proposta criada com sucesso'
+
+    fill_in "Valor da proposta", :with => "102,00"
+
+    click_button "Salvar"
+
+    expect(page).to have_content 'Proposta criada com sucesso'
+
+    fill_in "Valor da proposta", :with => "101,00"
+
+    click_button "Salvar"
+
+    expect(page).to have_content 'Proposta criada com sucesso'
+
+    within_records do
+      within 'tbody tr:nth-child(1)' do
+        expect(page).to have_content 'Nohup'
+        expect(page).to have_content 'Selecionado'
+      end
+
+      within 'tbody tr:nth-child(2)' do
+        expect(page).to have_content 'IBM'
+        expect(page).to have_content 'Selecionado'
+      end
+
+      within 'tbody tr:nth-child(3)' do
+        expect(page).to have_content 'Nobe'
+        expect(page).to have_content 'Selecionado'
+      end
+
+      within 'tbody tr:nth-child(4)' do
+        expect(page).to have_content 'Gabriel Sobrinho'
+        expect(page).to have_content 'Não selecionado'
+      end
+
+      within 'tbody tr:nth-child(5)' do
+        expect(page).to have_content 'Wenderson Malheiros'
+        expect(page).to have_content 'Não selecionado'
+      end
+    end
+  end
+
+  scenario 'with 2 bidders with proposals less than 10% and 2 with the same value' do
+    bidder1 = Bidder.make!(:licitante)
+    bidder2 = Bidder.make!(:licitante_sobrinho)
+    bidder3 = Bidder.make!(:licitante_com_proposta_3)
+    bidder4 = Bidder.make!(:me_pregao)
+    bidder5 = Bidder.make!(:licitante_com_proposta_4)
+
+    licitation_process = LicitationProcess.make!(:pregao_presencial,
+      :bidders => [bidder1, bidder2, bidder3, bidder4, bidder5])
+
+    TradingConfiguration.make!(:pregao)
+    Trading.make!(:pregao_presencial, :licitation_process => licitation_process)
+
+    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+
+    click_link "1/2012"
+    click_button "Salvar e ir para Itens/Ofertas"
+    click_link "Fazer oferta"
+
+    # Proposal stage
+    fill_in "Valor da proposta", :with => "1000,00"
+
+    click_button "Salvar"
+
+    expect(page).to have_content 'Proposta criada com sucesso'
+
+    fill_in "Valor da proposta", :with => "110,50"
+
+    click_button "Salvar"
+
+    expect(page).to have_content 'Proposta criada com sucesso'
+
+    fill_in "Valor da proposta", :with => "110,50"
+
+    click_button "Salvar"
+
+    expect(page).to have_content 'Proposta criada com sucesso'
+
+    fill_in "Valor da proposta", :with => "102,00"
+
+    click_button "Salvar"
+
+    expect(page).to have_content 'Proposta criada com sucesso'
+
+    fill_in "Valor da proposta", :with => "101,00"
+
+    click_button "Salvar"
+
+    expect(page).to have_content 'Proposta criada com sucesso'
+
+    within_records do
+      within 'tbody tr:nth-child(1)' do
+        expect(page).to have_content 'IBM'
+        expect(page).to have_content 'Selecionado'
+      end
+
+      within 'tbody tr:nth-child(2)' do
+        expect(page).to have_content 'Nobe'
+        expect(page).to have_content 'Selecionado'
+      end
+
+      within 'tbody tr:nth-child(3)' do
+        expect(page).to have_content 'Gabriel Sobrinho'
+        expect(page).to have_content 'Selecionado'
+      end
+
+      within 'tbody tr:nth-child(4)' do
+        expect(page).to have_content 'Nohup'
+        expect(page).to have_content 'Selecionado'
+      end
+
+      within 'tbody tr:nth-child(5)' do
+        expect(page).to have_content 'Wenderson Malheiros'
+        expect(page).to have_content 'Não selecionado'
+      end
+    end
   end
 end

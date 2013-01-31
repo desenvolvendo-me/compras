@@ -224,15 +224,6 @@ describe TradingItem do
     end
   end
 
-  describe '#value_limit_to_participate_in_bids' do
-    it 'should calculate the limit to participate in bids' do
-      subject.should_receive(:lowest_proposal_amount_at_stage_of_proposals).exactly(2).times.and_return(100)
-      subject.should_receive(:percentage_limit_to_participate_in_bids).and_return(10.0)
-
-      expect(subject.value_limit_to_participate_in_bids).to eq 110
-    end
-  end
-
   describe "#allow_winner?" do
     let(:winner) { double(:benefited => false) }
 
