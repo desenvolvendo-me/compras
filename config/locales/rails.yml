@@ -313,6 +313,7 @@ pt-BR:
       trading_item_has_not_a_winner: "o item do pregão não possui um vencedor"
       not_yet_liberated: "ainda não foi liberada"
       must_have_a_winner_bidder: "não tem um licitante vencedor"
+      already_in_use_for_this_licitation_kind: "já possui uma forma de julgamento com esse tipo de julgamento e tipo de licitação"
 
   activerecord:
     errors:

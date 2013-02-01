@@ -35,4 +35,21 @@ feature "JudgmentForms" do
     expect(page).to have_select 'Tipo de julgamento', :selected => 'Por item'
     expect(page).to have_select 'Tipo de licitação', :selected => 'Melhor técnica'
   end
+
+  scenario 'not allow two kinds with same licitation_kind' do
+    JudgmentForm.make!(:por_item_com_melhor_tecnica)
+    JudgmentForm.make!(:por_lote_com_melhor_tecnica)
+
+    navigate 'Processo Administrativo/Licitatório > Auxiliar > Formas de Julgamento das Licitações'
+
+    click_link 'Por Item com Melhor Técnica'
+
+    select 'Por lote', :from => 'Tipo de julgamento'
+
+    click_button 'Salvar'
+
+    expect(page).to_not have_notice 'Forma de Julgamento de Licitação editada com sucesso.'
+
+    expect(page).to have_content 'já possui uma forma de julgamento com esse tipo de julgamento e tipo de licitação'
+  end
 end
