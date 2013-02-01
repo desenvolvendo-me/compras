@@ -7,6 +7,7 @@ Prefecture.blueprint(:belo_horizonte) do
   email { "belo_horizonte@belohorizonte.com.br" }
   mayor_name { "Márcio Lacerda" }
   address { Address.make!(:apto, :addressable => object) }
+  setting { Setting.make!(:parametros_prefeitura, :prefecture => object) }
 end
 
 Prefecture.blueprint(:porto_alegre) do
@@ -17,4 +18,5 @@ Prefecture.blueprint(:porto_alegre) do
   email { "porto_alegre@portoalegre.com.br" }
   mayor_name { "João da Silva" }
   address { Address.make!(:house, :addressable => object) }
+  setting { Setting.make!(:parametros_prefeitura, :prefecture => object) }
 end

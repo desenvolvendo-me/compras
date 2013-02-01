@@ -1,0 +1,3 @@
+<%= f.association :setting, :collection => f.object.setting || Setting.new do |s| %>
+  <%= render "settings/processes", :f => s %>
+<% end %>

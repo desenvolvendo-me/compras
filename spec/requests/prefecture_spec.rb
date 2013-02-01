@@ -27,6 +27,10 @@ feature "Prefecture" do
       fill_in 'CEP', :with => '33400-500'
     end
 
+    within_tab 'Processos' do
+      check 'Permitir inserir processos passados?'
+    end
+
     click_button 'Salvar'
 
     expect(page).to have_notice 'Prefeitura criada com sucesso.'
@@ -45,6 +49,10 @@ feature "Prefecture" do
       expect(page).to have_field 'Logradouro', :with => 'Rua Bento Gonçalves'
       expect(page).to have_field 'Bairro', :with => 'Portugal'
       expect(page).to have_field 'CEP', :with => '33400-500'
+    end
+
+    within_tab 'Processos' do
+      expect(page).to have_checked_field 'Permitir inserir processos passados?'
     end
   end
 
@@ -72,6 +80,10 @@ feature "Prefecture" do
       fill_in 'CEP', :with => '33400-500'
     end
 
+    within_tab 'Processos' do
+      check 'Permitir inserir processos passados?'
+    end
+
     click_button 'Salvar'
 
     expect(page).to have_notice 'Prefeitura editada com sucesso.'
@@ -94,6 +106,22 @@ feature "Prefecture" do
       expect(page).to have_field 'Logradouro', :with => 'Rua Bento Gonçalves'
       expect(page).to have_field 'Bairro', :with => 'Portugal'
       expect(page).to have_field 'CEP', :with => '33400-500'
+    end
+
+    within_tab 'Processos' do
+      expect(page).to have_checked_field 'Permitir inserir processos passados?'
+    end
+
+    within_tab 'Processos' do
+      uncheck 'Permitir inserir processos passados?'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Prefeitura editada com sucesso.'
+
+    within_tab 'Processos' do
+      expect(page).to_not have_checked_field 'Permitir inserir processos passados?'
     end
   end
 end

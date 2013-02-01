@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      setting:
+        one: "Configuração Geral"
+        other: "Configurações Gerais"
+
+    attributes:
+      setting:
+        allow_insert_past_processes: "Permitir inserir processos passados?"
