@@ -1,0 +1,27 @@
+<%= f.input :name %>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-4">
+    <%= f.input :cnpj %>
+  </div>
+
+  <div class="yui3-u-1-6">
+    <%= f.input :phone %>
+  </div>
+
+  <div class="yui3-u-1-6">
+    <%= f.input :fax %>
+  </div>
+</div>
+
+<%= f.input :email %>
+<%= f.input :mayor_name %>
+<%= f.input :image %>
+
+<% if f.object.image? %>
+  <p>
+    <%= image_tag f.object.image.url, :width => 100, :height => 100 %>
+  </p>
+
+   <%= f.input :remove_image, :as => :boolean %>
+<% end %>
