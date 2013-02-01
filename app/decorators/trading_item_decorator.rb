@@ -72,7 +72,11 @@ class TradingItemDecorator
   def cannot_activate_proposals_message
     return if activate_proposals_allowed?
 
-    t('trading_item.messages.cannot_activate_proposals')
+    if bidders_enabled_not_selected.empty?
+      t('trading_item.messages.without_proposals_not_selected')
+    else
+      t('trading_item.messages.there_is_bidders_enabled')
+    end
   end
 
   private

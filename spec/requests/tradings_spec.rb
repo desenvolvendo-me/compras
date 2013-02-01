@@ -409,6 +409,10 @@ feature "Tradings" do
 
     expect(page).to have_notice 'Inabilitação de Licitante criada com sucesso.'
 
+    expect(page).to have_disabled_element 'Ativar propostas',
+                                          :reason => 'Não há propostas para serem ativadas'
+
+
     within("#preference-right") do
       expect(page).not_to have_content "Wenderson Malheiros"
       expect(page).not_to have_content "Gabriel Sobrinho"

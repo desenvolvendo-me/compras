@@ -429,6 +429,15 @@ describe TradingItemDecorator do
   end
 
   describe '#cannot_activate_proposals_message' do
+    before do
+      I18n.backend.store_translations 'pt-BR', :trading_item => {
+        :messages => {
+          :there_is_bidders_enabled => 'não habilitado',
+          :without_proposals_not_selected => 'sem propostas não selecionadas'
+        }
+      }
+    end
+
     context 'when activate_proposals is allowed' do
       before do
         component.stub(:activate_proposals_allowed? => true)
@@ -440,15 +449,23 @@ describe TradingItemDecorator do
     context 'when activate_proposals is not allowed' do
       before do
         component.stub(:activate_proposals_allowed? => false)
-
-        I18n.backend.store_translations 'pt-BR', :trading_item => {
-            :messages => {
-              :cannot_activate_proposals => 'não pode ativar'
-            }
-          }
       end
 
-      it { expect(subject.cannot_activate_proposals_message).to eq 'não pode ativar' }
+      context 'when activate_proposals is not bidders_enabled_Vnot_selected is empty' do
+        before do
+          component.stub(:bidders_enabled_not_selected => [])
+        end
+
+        it { expect(subject.cannot_activate_proposals_message).to eq 'sem propostas não selecionadas' }
+      end
+
+      context 'when not all bidders are disabled' do
+        before do
+          component.stub(:bidders_enabled_not_selected => ['not_selected'])
+        end
+
+        it { expect(subject.cannot_activate_proposals_message).to eq 'não habilitado' }
+      end
     end
   end
 end

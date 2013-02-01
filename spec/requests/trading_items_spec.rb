@@ -380,7 +380,7 @@ feature TradingItem do
     expect(page).to have_content 'Oferta criada com sucesso'
 
     expect(page).to have_disabled_element 'Ativar propostas',
-                                          :reason => 'Não há propostas para serem ativadas'
+                                          :reason => 'Não é permitido ativar propostas enquanto houver licitantes habilitados e com ofertas'
 
     expect(page.current_url).to match(/#title/)
 
@@ -401,7 +401,7 @@ feature TradingItem do
     expect(page).to have_notice 'Inabilitação de Licitante criada com sucesso'
 
     expect(page).to have_disabled_element 'Ativar propostas',
-                                          :reason => 'Não há propostas para serem ativadas'
+                                          :reason => 'Não é permitido ativar propostas enquanto houver licitantes habilitados e com ofertas'
 
     within 'table.records:nth-of-type(1)' do
       click_link 'Inabilitar'
@@ -583,7 +583,7 @@ feature TradingItem do
     expect(page).to have_content 'Oferta criada com sucesso'
 
     expect(page).to have_disabled_element 'Ativar propostas',
-                                          :reason => 'Não há propostas para serem ativadas'
+                                          :reason => 'Não é permitido ativar propostas enquanto houver licitantes habilitados e com ofertas'
 
     # Bidders not selected
     within 'table.records:nth-of-type(3)' do
@@ -602,7 +602,7 @@ feature TradingItem do
     expect(page).to have_notice 'Inabilitação de Licitante criada com sucesso'
 
     expect(page).to have_disabled_element 'Ativar propostas',
-                                          :reason => 'Não há propostas para serem ativadas'
+                                          :reason => 'Não é permitido ativar propostas enquanto houver licitantes habilitados e com ofertas'
 
     within 'table.records:nth-of-type(1)' do
       click_link 'Inabilitar'
