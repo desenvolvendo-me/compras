@@ -56,6 +56,6 @@ class TradingItemBidderSelector
   end
 
   def proposals_amount_ordered
-    bids.with_proposal.at_stage_of_proposals.group { amount }.reorder { amount }.select { amount }
+    bids.with_proposal.at_stage_of_proposals.reorder { amount }
   end
 end

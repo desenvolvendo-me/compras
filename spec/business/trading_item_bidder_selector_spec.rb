@@ -43,8 +43,6 @@ describe TradingItemBidderSelector do
       context 'when have less than 3 bidders selected by limit_value' do
         let(:with_proposal) { double(:with_proposal) }
         let(:at_stage_of_proposals) { double(:at_stage_of_proposals) }
-        let(:group) { double(:group) }
-        let(:reorder) { double(:reorder) }
         let(:bid1) { double(:bid1, :amount => 100) }
         let(:bid2) { double(:bid2, :amount => 101) }
         let(:bid3) { double(:bid3, :amount => 102) }
@@ -58,9 +56,7 @@ describe TradingItemBidderSelector do
         it 'should get bidders with lowest values' do
           bids.should_receive(:with_proposal).and_return(with_proposal)
           with_proposal.should_receive(:at_stage_of_proposals).and_return(at_stage_of_proposals)
-          at_stage_of_proposals.should_receive(:group).and_return(group)
-          group.should_receive(:reorder).and_return(reorder)
-          reorder.should_receive(:select).and_return([bid1, bid2, bid3, bid4])
+          at_stage_of_proposals.should_receive(:reorder).and_return([bid1, bid2, bid3, bid4])
           bidders.should_receive(:under_limit_value).with(12, 102).and_return(['bidder1', 'bidder2', 'bidder3', 'bidder4'])
 
           expect(subject.bidders_selected).to eq ['bidder1', 'bidder2', 'bidder3', 'bidder4']

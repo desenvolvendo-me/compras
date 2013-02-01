@@ -783,4 +783,87 @@ feature TradingItem do
       end
     end
   end
+
+  scenario 'with first 2 bidders with proposals less than 10%' do
+    bidder1 = Bidder.make!(:licitante)
+    bidder2 = Bidder.make!(:licitante_sobrinho)
+    bidder3 = Bidder.make!(:licitante_com_proposta_3)
+    bidder4 = Bidder.make!(:me_pregao)
+    bidder5 = Bidder.make!(:licitante_com_proposta_4)
+
+    licitation_process = LicitationProcess.make!(:pregao_presencial,
+      :bidders => [bidder1, bidder2, bidder3, bidder4, bidder5])
+
+    TradingConfiguration.make!(:pregao)
+    Trading.make!(:pregao_presencial, :licitation_process => licitation_process)
+
+    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+
+    click_link "1/2012"
+    click_button "Salvar e ir para Itens/Ofertas"
+    click_link "Fazer oferta"
+
+    # Proposal stage
+    fill_in "Valor da proposta", :with => "100,00"
+
+    click_button "Salvar"
+
+    expect(page).to have_content 'Proposta criada com sucesso'
+
+    fill_in "Valor da proposta", :with => "100,00"
+
+    click_button "Salvar"
+
+    expect(page).to have_content 'Proposta criada com sucesso'
+
+    fill_in "Valor da proposta", :with => "110,50"
+
+    click_button "Salvar"
+
+    expect(page).to have_content 'Proposta criada com sucesso'
+
+    fill_in "Valor da proposta", :with => "112,00"
+
+    click_button "Salvar"
+
+    expect(page).to have_content 'Proposta criada com sucesso'
+
+    fill_in "Valor da proposta", :with => "111,00"
+
+    click_button "Salvar"
+
+    expect(page).to have_content 'Proposta criada com sucesso'
+
+    within_records do
+      within 'tbody tr:nth-child(1)' do
+        expect(page).to have_content 'Wenderson Malheiros'
+        expect(page).to have_content '100,00'
+        expect(page).to have_content 'Selecionado'
+      end
+
+      within 'tbody tr:nth-child(2)' do
+        expect(page).to have_content 'Gabriel Sobrinho'
+        expect(page).to have_content '100,00'
+        expect(page).to have_content 'Selecionado'
+      end
+
+      within 'tbody tr:nth-child(3)' do
+        expect(page).to have_content 'Nohup'
+        expect(page).to have_content '110,50'
+        expect(page).to have_content 'Selecionado'
+      end
+
+      within 'tbody tr:nth-child(4)' do
+        expect(page).to have_content 'IBM'
+        expect(page).to have_content '111,00'
+        expect(page).to have_content 'Não selecionado'
+      end
+
+      within 'tbody tr:nth-child(5)' do
+        expect(page).to have_content 'Nobe'
+        expect(page).to have_content '112,00'
+        expect(page).to have_content 'Não selecionado'
+      end
+    end
+  end
 end
