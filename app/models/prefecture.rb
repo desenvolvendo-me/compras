@@ -7,6 +7,8 @@ class Prefecture < Unico::Prefecture
 
   accepts_nested_attributes_for :setting
 
+  delegate :allow_insert_past_processes, :to => :setting, :allow_nil => true
+
   filterize
   orderize
 end

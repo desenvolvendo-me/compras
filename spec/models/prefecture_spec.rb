@@ -6,4 +6,6 @@ require 'app/models/setting'
 
 describe Prefecture do
   it { should have_one(:setting).dependent(:destroy) }
+
+  it { should delegate(:allow_insert_past_processes).to(:setting).allowing_nil(true) }
 end

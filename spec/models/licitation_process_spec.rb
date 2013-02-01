@@ -24,8 +24,18 @@ require 'app/models/indexer'
 require 'app/models/price_registration'
 require 'app/models/trading'
 require 'app/models/delivery_location'
+require 'app/uploaders/image_uploader'
+require 'app/models/unico/prefecture'
+require 'app/models/prefecture'
 
 describe LicitationProcess do
+  let(:current_prefecture) { double(:current_prefecture) }
+
+  before do
+    subject.stub(:current_prefecture => current_prefecture)
+    current_prefecture.stub(:allow_insert_past_processes => true)
+  end
+
   it 'should return process/year as to_s' do
     subject.process = '1'
     subject.year = '2012'
@@ -96,14 +106,33 @@ describe LicitationProcess do
     it { should_not allow_value("44:11").for(:envelope_opening_time) }
   end
 
-  context 'validate envelope_delivery_date related with today' do
-    it { should allow_value(Date.current).for(:envelope_delivery_date) }
+  context 'when prefecture allow_insert_past_processes is true' do
+    context 'validate envelope_delivery_date related with today' do
+      it { should allow_value(Date.current).for(:envelope_delivery_date) }
 
-    it { should allow_value(Date.tomorrow).for(:envelope_delivery_date) }
+      it { should allow_value(Date.tomorrow).for(:envelope_delivery_date) }
 
-    it 'should not allow envelope_delivery_date before today' do
-      expect(subject).not_to allow_value(Date.yesterday).for(:envelope_delivery_date).
-                                                    with_message("deve ser igual ou posterior a data atual (#{I18n.l(Date.current)})")
+      it 'should allow envelope_delivery_date before today' do
+        expect(subject).to allow_value(Date.yesterday).for(:envelope_delivery_date)
+      end
+    end
+  end
+
+  context 'when prefecture allow_insert_past_processes is false' do
+    before do
+      subject.stub(:current_prefecture => current_prefecture)
+      current_prefecture.stub(:allow_insert_past_processes => false)
+    end
+
+    context 'validate envelope_delivery_date related with today' do
+      it { should allow_value(Date.current).for(:envelope_delivery_date) }
+
+      it { should allow_value(Date.tomorrow).for(:envelope_delivery_date) }
+
+      it 'should not allow envelope_delivery_date before today' do
+        expect(subject).not_to allow_value(Date.yesterday).for(:envelope_delivery_date).
+                                                      with_message("deve ser igual ou posterior a data atual (#{I18n.l(Date.current)})")
+      end
     end
   end
 

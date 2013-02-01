@@ -89,7 +89,8 @@ class LicitationProcess < Compras::Model
         :on_or_after => :today,
         :on_or_after_message => :should_be_on_or_after_today,
         :type => :date,
-        :on => :create
+        :on => :create,
+        :unless => :allow_insert_past_processes?
       }
     allowing_blank.validates :envelope_opening_date,
       :timeliness => {
@@ -317,5 +318,15 @@ class LicitationProcess < Compras::Model
 
   def first_ratification
     licitation_process_ratifications.first
+  end
+
+  def current_prefecture
+    Prefecture.last
+  end
+
+  def allow_insert_past_processes?
+    return unless current_prefecture
+
+    current_prefecture.allow_insert_past_processes
   end
 end
