@@ -13,3 +13,35 @@
 #container #header img {
   margin: 15px 0 0 15px;
 }
+
+#content {
+  background: #F9F9F9;
+}
+
+.nested-container {
+  margin-bottom: 20px;
+}
+
+.nested-container .add-link-container {
+  text-align: right;
+  margin-bottom: 0.5em;
+}
+
+.nested-container h3 {
+  font-size: 170%;
+  margin: 0;
+}
+
+.nested-container .fields {
+  background: #FFF;
+  border: solid 1px #e8eaee;
+}
+
+.nested-container .fields .nested {
+  padding: 1.5em;
+}
+
+.nested-container p.button-container {
+  padding: 0;
+  margin: 0;
+}
