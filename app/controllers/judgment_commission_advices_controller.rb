@@ -1,7 +1,7 @@
 class JudgmentCommissionAdvicesController < CrudController
   def new
     object = build_resource
-    object.licitation_process = LicitationProcess.find(params[:licitation_process_id])
+    object.licitation_process = LicitationProcess.find(parent_id)
     object.year = Date.current.year
 
     super
@@ -20,12 +20,16 @@ class JudgmentCommissionAdvicesController < CrudController
   end
 
   def begin_of_association_chain
-    if params[:licitation_process_id]
-      @parent = LicitationProcess.find(params[:licitation_process_id])
+    if parent_id
+      @parent = LicitationProcess.find(parent_id)
     end
   end
 
   protected
+
+  def parent_id
+    params[:licitation_process_id]
+  end
 
   def main_controller_name
     'licitation_processes'

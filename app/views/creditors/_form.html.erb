@@ -1,9 +1,15 @@
-<%= f.input :creditable_type, :as => :radio_buttons, :disabled => f.object.persisted? %>
+<%= f.input :creditable_type, :as => :radio_buttons, :collection => CreditableType.to_a, :disabled => f.object.persisted? %>
 
 <%= f.input :personable_type, :as => :hidden %>
 
 <div class="input modal required">
-  <%= f.input :creditable, :as => :modal, :disabled => f.object.persisted?, :modal_url => modal_special_entries_path, :wrapper => false %>
+  <%= f.input(
+    :creditable, :hidden_field => :creditable_id,
+    :as => :modal,
+    :disabled => f.object.persisted?,
+    :modal_url => modal_special_entries_path,
+    :wrapper => false
+  ) %>
   <%= link_to_modal_info :href => f.object.creditable %>
 </div>
 

@@ -1,0 +1,30 @@
+<%
+  singular = association.to_s.singularize
+  modal_options ||= nil
+%>
+<div id='<%= association %>'>
+  <div class="modal-finder" >
+    <%= f.input singular, :as => :modal , :modal_url => send("modal_#{association}_path", modal_options), :hidden_field => false %>
+  </div>
+
+  <table class="records">
+    <thead>
+      <tr>
+        <th><%= f.object.class.human_attribute_name singular %></th>
+        <th/>
+      </tr>
+    </thead>
+    <tbody class="<%= f.sanitized_object_name %>_<%= singular %>_records">
+      <input type="hidden" name="<%= f.sanitized_object_name %>[<%= singular %>_ids][]">
+      <% f.object.send(association).each do |item| %>
+        <%= render 'crud/item', :id => item.id, :name => item.to_s, :f => f, :singular => singular %>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= mustache "#{f.sanitized_object_name}_#{singular}_template" do %>
+    <%= f.association association, :collection => f.object.send(association).build do |item| %>
+      <%= render "crud/item", :f => f, :id => '{{id}}', :name => '{{value}}', :singular => singular %>
+    <% end %>
+  <% end %>
+</div>

@@ -1,7 +1,7 @@
 class OccurrenceContractualHistoricsController < CrudController
   def new
     object = build_resource
-    object.contract = Contract.find(params[:contract_id])
+    object.contract = Contract.find(parent_id)
 
     super
   end
@@ -19,12 +19,16 @@ class OccurrenceContractualHistoricsController < CrudController
   end
 
   def begin_of_association_chain
-    if params[:contract_id]
-      @parent = Contract.find(params[:contract_id])
+    if parent_id
+      @parent = Contract.find(parent_id)
     end
   end
 
   protected
+
+  def parent_id
+    params[:contract_id]
+  end
 
   def main_controller_name
     'contracts'

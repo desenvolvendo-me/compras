@@ -1,0 +1,28 @@
+<%
+  association_name = f.object.class.reflect_on_association(association).klass.model_name
+  template_folder = association_name.tableize
+%>
+
+<div class="nested-container">
+  <h3>
+    <%= association_name.human(:count => :many) %>
+  </h3>
+
+  <% if include_add_button %>
+    <p class='add-link-container'>
+      <%= link_to "Adicionar  #{association_name.human}", "#", :class => "add-#{association}" %>
+    </p>
+  <% end %>
+
+  <div id="<%= association %>" class='fields' data-nested-form="<%= association %>" data-append-item="<%= append %>" data-inline="<%= inline %>">
+    <%= f.association association, :collection => localized(f.object.send(association)) do |a| %>
+      <%= render "#{template_folder}/form", :f => a %>
+    <% end %>
+  </div>
+
+  <%= mustache "#{association}-template" do %>
+    <%= f.association :"#{association}_attributes", :collection => f.object.send(association).build.localized, :index => "{{uuid-#{association}}}" do |a| %>
+      <%= render "#{template_folder}/form", :f => a %>
+    <% end %>
+  <% end %>
+</div>

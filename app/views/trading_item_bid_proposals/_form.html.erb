@@ -6,7 +6,7 @@
 
 <%= f.input :bidder, :disabled => true %>
 
-<%= f.input :status, :as => :radio_buttons, :item_wrapper_class => 'inline' %>
+<%= f.input :status, :as => :radio_buttons, :item_wrapper_class => 'inline', :collection => TradingItemBidStatus.to_a %>
 
 <div class="yui3-g">
   <div class="yui3-u-1-4">
