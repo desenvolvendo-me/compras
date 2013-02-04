@@ -177,7 +177,7 @@ class Bidder < Compras::Model
     }
   end
 
-  def self.at_round_of_bids(trading_item)
+  def self.at_round_of_bids(trading_item_id)
     joins { trading_item_bids }.
     where {
       trading_item_bids.trading_item_id.eq(trading_item_id) &

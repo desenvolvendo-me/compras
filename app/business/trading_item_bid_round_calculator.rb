@@ -24,7 +24,7 @@ class TradingItemBidRoundCalculator
   end
 
   def count_bidders_with_bids
-    count_bids_with_proposal_for_last_round + bidders.at_round_of_bids(trading_item).with_no_proposal_for_trading_item(trading_item.id).count
+    count_bids_with_proposal_for_last_round + bidders.at_round_of_bids(trading_item.id).with_no_proposal_for_trading_item(trading_item.id).count
   end
 
   def all_bidders_have_bid_for_last_round?
