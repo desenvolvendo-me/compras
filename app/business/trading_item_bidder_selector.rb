@@ -43,11 +43,11 @@ class TradingItemBidderSelector
   end
 
   def bidders_selected_by_limit_value
-    bidders.under_limit_value(trading_item.id, limit_value_to_be_selected)
+    bidders.at_proposals(trading_item.id).under_limit_value(trading_item.id, limit_value_to_be_selected)
   end
 
   def bidders_selected_at_playoffs
-    bidders.under_limit_value(trading_item.id, limit_value_for_playoffs)
+    bidders.at_proposals(trading_item.id).under_limit_value(trading_item.id, limit_value_for_playoffs)
   end
 
   # The higest proposal between the first three

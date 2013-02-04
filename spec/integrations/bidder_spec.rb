@@ -648,7 +648,7 @@ describe Bidder do
         :round => 0,
         :bidder_id => bidder1.id,
         :trading_item_id => trading_item.id,
-        :amount => 100.0,
+        :amount => 105.0,
         :stage => TradingItemBidStage::PROPOSALS,
         :status => TradingItemBidStatus::WITH_PROPOSAL)
 
@@ -666,6 +666,14 @@ describe Bidder do
         :trading_item_id => trading_item.id,
         :stage => TradingItemBidStage::PROPOSALS,
         :status => TradingItemBidStatus::WITHOUT_PROPOSAL)
+
+      TradingItemBid.create!(
+        :round => 1,
+        :bidder_id => bidder1.id,
+        :trading_item_id => trading_item.id,
+        :amount => 100.0,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
     end
 
     it 'should return none bidders under 99.9' do

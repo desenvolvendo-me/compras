@@ -40,14 +40,15 @@ describe TradingItemBidderSelector do
     end
 
     describe '#bidders_selected' do
+      let(:with_proposal) { double(:with_proposal) }
+      let(:at_stage_of_proposals) { double(:at_stage_of_proposals) }
+      let(:at_proposals) { double(:at_proposals) }
+
       context 'when have less than 3 bidders selected by limit_value' do
-        let(:with_proposal) { double(:with_proposal) }
-        let(:at_stage_of_proposals) { double(:at_stage_of_proposals) }
         let(:bid1) { double(:bid1, :amount => 100) }
         let(:bid2) { double(:bid2, :amount => 101) }
         let(:bid3) { double(:bid3, :amount => 102) }
         let(:bid4) { double(:bid4, :amount => 103) }
-
 
         before do
           subject.stub(:bidders_selected_by_limit_value => ['bidder1'])
@@ -57,15 +58,14 @@ describe TradingItemBidderSelector do
           bids.should_receive(:with_proposal).and_return(with_proposal)
           with_proposal.should_receive(:at_stage_of_proposals).and_return(at_stage_of_proposals)
           at_stage_of_proposals.should_receive(:reorder).and_return([bid1, bid2, bid3, bid4])
-          bidders.should_receive(:under_limit_value).with(12, 102).and_return(['bidder1', 'bidder2', 'bidder3', 'bidder4'])
+          bidders.should_receive(:at_proposals).and_return(at_proposals)
+          at_proposals.should_receive(:under_limit_value).with(12, 102).and_return(['bidder1', 'bidder2', 'bidder3', 'bidder4'])
 
           expect(subject.bidders_selected).to eq ['bidder1', 'bidder2', 'bidder3', 'bidder4']
         end
       end
 
       context 'when have more than 2 bidders selected by limit_value' do
-        let(:with_proposal) { double(:with_proposal) }
-        let(:at_stage_of_proposals) { double(:at_stage_of_proposals) }
 
         it 'should get bidders with lowest values' do
           bids.should_receive(:with_proposal).
@@ -75,8 +75,10 @@ describe TradingItemBidderSelector do
                         at_least(1).times.and_return(at_stage_of_proposals)
           at_stage_of_proposals.should_receive(:minimum).
                                 at_least(1).times.with(:amount).and_return(100)
-          bidders.should_receive(:under_limit_value).
-                  at_least(1).times.with(12, 110.0).and_return(['bidder1', 'bidder2', 'bidder3'])
+
+          bidders.should_receive(:at_proposals).at_least(1).times.and_return(at_proposals)
+          at_proposals.should_receive(:under_limit_value).
+                       at_least(1).times.with(12, 110.0).and_return(['bidder1', 'bidder2', 'bidder3'])
 
           expect(subject.bidders_selected).to eq ['bidder1', 'bidder2', 'bidder3']
         end

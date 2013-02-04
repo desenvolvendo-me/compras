@@ -155,7 +155,6 @@ class Bidder < Compras::Model
     joins { trading_item_bids }.
     where {
       trading_item_bids.status.eq(TradingItemBidStatus::WITH_PROPOSAL) &
-      trading_item_bids.stage.eq(TradingItemBidStage::PROPOSALS) &
       trading_item_bids.amount.lteq(limit_value) &
       trading_item_bids.trading_item_id.eq(trading_item_id)
     }
@@ -183,6 +182,14 @@ class Bidder < Compras::Model
     where {
       trading_item_bids.trading_item_id.eq(trading_item_id) &
       trading_item_bids.stage.eq(TradingItemBidStage::ROUND_OF_BIDS)
+    }
+  end
+
+  def self.at_proposals(trading_item_id)
+    joins { trading_item_bids }.
+    where {
+      trading_item_bids.trading_item_id.eq(trading_item_id) &
+      trading_item_bids.stage.eq(TradingItemBidStage::PROPOSALS)
     }
   end
 
