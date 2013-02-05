@@ -72,7 +72,7 @@ class Bidder < Compras::Model
 
   def self.benefited
     joins { creditor.creditable(Person).personable(Company).company_size.extended_company_size }.
-      where { 'compras_extended_company_sizes.benefited = true' }
+    where { 'compras_extended_company_sizes.benefited = true' }
   end
 
   def self.with_negotiation_proposal_for(trading_item_id)
