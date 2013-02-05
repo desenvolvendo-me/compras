@@ -4,11 +4,14 @@ require 'app/business/trading_item_bid_stage_calculator'
 
 describe TradingItemBidStageCalculator do
   subject do
-    described_class.new(trading_item, :bidder_selector => bidder_selector)
+    described_class.new(trading_item,
+                        :bidder_selector => bidder_selector,
+                        :bidder_negotiation_selector => bidder_negotiation_selector)
   end
 
   let(:trading_item) { double(:trading_item) }
   let(:bidder_selector) { double(:bidder_selector) }
+  let(:bidder_negotiation_selector) { double(:bidder_negotiation_selector) }
 
   context 'delegates' do
     it 'delegates trading_item_bids to trading_item' do
@@ -33,12 +36,6 @@ describe TradingItemBidStageCalculator do
       trading_item.should_receive(:selected_bidders_at_proposals)
 
       subject.selected_bidders_at_proposals
-    end
-
-    it 'delegates valid_bidder_for_negotiation? to trading_item' do
-      trading_item.should_receive(:valid_bidder_for_negotiation?)
-
-      subject.valid_bidder_for_negotiation?
     end
   end
 

@@ -405,7 +405,7 @@ describe TradingItemDecorator do
   describe '#cannot_start_negotiation_message' do
     context 'when allow_negotiation' do
       before do
-        component.stub(:allow_negotiation? => true)
+        subject.stub(:allow_negotiation? => true)
       end
 
       it { expect(subject.cannot_start_negotiation_message).to be_nil }
@@ -413,7 +413,7 @@ describe TradingItemDecorator do
 
     context 'when not allow_negotiation' do
       before do
-        component.stub(:allow_negotiation? => false)
+        subject.stub(:allow_negotiation? => false)
 
         I18n.backend.store_translations 'pt-BR', :trading_item => {
             :messages => {

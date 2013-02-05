@@ -38,6 +38,7 @@ class TradingItemBid < Compras::Model
   scope :at_stage_of_proposals, lambda { where { stage.eq(TradingItemBidStage::PROPOSALS)} }
   scope :at_stage_of_round_of_bids, lambda { where { stage.eq(TradingItemBidStage::ROUND_OF_BIDS)} }
   scope :at_stage_of_negotiation, lambda { where { stage.eq(TradingItemBidStage::NEGOTIATION)} }
+  scope :exclude_negotiation, lambda { where { stage.not_eq(TradingItemBidStage::NEGOTIATION)} }
   scope :at_round, lambda { |round_number| where { round.eq(round_number) } }
   scope :for_trading_item, lambda { |item_id| where { trading_item_id.eq(item_id) } }
 

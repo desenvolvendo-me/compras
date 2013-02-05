@@ -71,10 +71,6 @@ class TradingItem < Compras::Model
     bidders_benefited_with_proposals_at_stage_of_round_of_bids.ordered_by_trading_item_bid_amount(id)
   end
 
-  def bidders_by_lowest_proposal_at_stage_of_negotiation
-    bidders_with_proposals_at_stage_of_negotiaton.ordered_by_trading_item_bid_amount(id)
-  end
-
   def lowest_proposal_amount
     return unless bidder_with_lowest_proposal.present?
 
@@ -85,14 +81,8 @@ class TradingItem < Compras::Model
     bids.enabled.lowest_proposal_by_item_at_stage_of_proposals(self) || BigDecimal(0)
   end
 
-  def bidders_for_negotiation_by_lowest_proposal(with_all_proposals = false)
-    initial_scope = bidders_selected_for_negotiation(with_all_proposals)
-
-    TradingItemBidders.new(self, initial_scope).bidders_ordered_by_amount
-  end
-
   def allow_winner?
-    started? && !closed? && (bidder_with_lowest_proposal.benefited || bidders_selected_for_negotiation.empty?)
+    started? && !closed? && (bidder_with_lowest_proposal.benefited || bidders_negotiation_selector.bidders_selected.empty?)
   end
 
   def closed?
@@ -117,14 +107,6 @@ class TradingItem < Compras::Model
 
   def with_proposal_for_round_of_proposals?
     bids.at_stage_of_proposals.with_proposal.any?
-  end
-
-  def valid_bidder_for_negotiation?
-    bidders_selected_for_negotiation.any? && !valid_proposal_for_negotiation?
-  end
-
-  def allow_negotiation?
-    bidders_selected_for_negotiation.any?
   end
 
   def rounds_uniq_at_stage_of_round_of_bids_ordered
@@ -171,34 +153,6 @@ class TradingItem < Compras::Model
     enabled_bidders_by_lowest_proposal(:filter => :selected).to_a.empty?
   end
 
-  def bidders_selected_for_negotiation(with_all_proposals = false)
-    bidders_eligible_for_negotiation(with_all_proposals).to_a.select { |bidder| proposals_activated? || bidder.benefited }
-  end
-
-  def bidders_eligible_for_negotiation(with_all_proposals = false)
-    if with_all_proposals
-      bidders_with_proposal_eligible_for_negotiation
-    else
-      bidders_with_proposal_eligible_for_negotiation - bidders.with_negotiation_proposal_for(id)
-    end
-  end
-
-  def bidders_with_proposal_eligible_for_negotiation
-    bidders_with_proposals.enabled.eligible_for_negotiation_stage(bid_limit_for_negotiation_stage)
-  end
-
-  def bid_limit_for_negotiation_stage
-    lowest_proposal_amount_with_valid_proposal * BigDecimal("1.05")
-  end
-
-  def lowest_proposal_amount_with_valid_proposal
-    if proposals_activated?
-      bids.with_proposal.minimum(:amount)
-    else
-      bids.enabled.with_proposal.minimum(:amount)
-    end
-  end
-
   def bidders_with_proposals
     bidders.with_proposal_for_trading_item(id)
   end
@@ -232,5 +186,9 @@ class TradingItem < Compras::Model
 
     errors.add(:minimum_reduction_percent, :presence_at_least_one)
     errors.add(:minimum_reduction_value, :presence_at_least_one)
+  end
+
+  def bidders_negotiation_selector
+    TradingItemBidderNegotiationSelector.new(self)
   end
 end

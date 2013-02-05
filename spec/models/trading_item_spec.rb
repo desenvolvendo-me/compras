@@ -181,28 +181,6 @@ describe TradingItem do
     end
   end
 
-  describe '#bidders_by_lowest_proposal_at_stage_of_negotiation' do
-    let(:bidders) { double(:bidders) }
-    let(:with_proposal_for_trading_item_at_stage_of_negotiation) { double(:with_proposal_for_trading_item_at_stage_of_negotiation) }
-
-    before do
-      subject.stub(:id => 5)
-      subject.stub(:bidders => bidders)
-    end
-
-    it 'should return bidders ordered by lowest proposal by bidder' do
-      bidders.
-        should_receive(:with_proposal_for_trading_item_at_stage_of_negotiation).
-        with(5).
-        and_return(with_proposal_for_trading_item_at_stage_of_negotiation)
-
-      with_proposal_for_trading_item_at_stage_of_negotiation.
-        should_receive(:ordered_by_trading_item_bid_amount).with(5)
-
-      subject.bidders_by_lowest_proposal_at_stage_of_negotiation
-    end
-  end
-
   describe '#lowest_proposal_amount' do
     it 'should return the lowest bid proposal for the item' do
       bidder1 = double(:bidder1)
@@ -226,6 +204,7 @@ describe TradingItem do
 
   describe "#allow_winner?" do
     let(:winner) { double(:benefited => false) }
+    let(:bidders_negotiation_selector) { double(:bidders_negotiation_selector) }
 
     before do
       subject.stub(:bidder_with_lowest_proposal => winner)
@@ -234,10 +213,11 @@ describe TradingItem do
     context 'when not closed' do
       before do
         subject.stub(:closed? => false, :started? => true)
+        subject.stub(:bidders_negotiation_selector => bidders_negotiation_selector)
       end
 
       it "returns true if there are no bidders for negotiation" do
-        subject.stub(:bidders_selected_for_negotiation => [])
+        bidders_negotiation_selector.should_receive(:bidders_selected).and_return([])
 
         expect(subject.allow_winner?).to be_true
       end
@@ -249,7 +229,7 @@ describe TradingItem do
       end
 
       it 'returns false when there are bidders for negotiation and the winner is not benefited' do
-        subject.stub(:bidders_selected_for_negotiation => ['bidder'])
+        bidders_negotiation_selector.should_receive(:bidders_selected).and_return(['bidder'])
         winner.stub(:benefited => false)
 
         expect(subject.allow_winner?).to be_false
@@ -332,29 +312,6 @@ describe TradingItem do
     end
   end
 
-  describe '#valid_bidder_for_negotiation?' do
-    it 'should be true if there is no one valid proposal for negotiation' do
-      subject.stub(:bidders_selected_for_negotiation).and_return(['bidder'])
-      subject.stub(:valid_proposal_for_negotiation?).and_return(false)
-
-      expect(subject.valid_bidder_for_negotiation?).to be_true
-    end
-
-    it 'should be false if there is not valid proposal for negotiation' do
-      subject.stub(:bidders_selected_for_negotiation).and_return([])
-      subject.stub(:valid_proposal_for_negotiation?).and_return(true)
-
-      expect(subject.valid_bidder_for_negotiation?).to be_false
-    end
-
-    it 'should be false if there is a valid proposal for negotiation and have bidder for negotiation' do
-      subject.stub(:bidders_selected_for_negotiation).and_return(['bidder'])
-      subject.stub(:valid_proposal_for_negotiation?).and_return(true)
-
-      expect(subject.valid_bidder_for_negotiation?).to be_false
-    end
-  end
-
   describe '#with_proposal_for_round_of_proposals?' do
     let(:at_stage_of_proposals) { double(:at_stage_of_proposals) }
 
@@ -422,24 +379,6 @@ describe TradingItem do
               with(subject).and_return(nil)
 
       expect(subject.lowest_proposal_at_stage_of_proposals_amount).to eq 0
-    end
-  end
-
-  describe '#allow_negotiation?' do
-    context 'when there are not bidders for negotiation' do
-      before do
-        subject.stub(:bidders_selected_for_negotiation => [])
-      end
-
-      it { expect(subject.allow_negotiation?).to be_false }
-    end
-
-    context 'when there are bidders for negotiation' do
-      before do
-        subject.stub(:bidders_selected_for_negotiation => ['bidder'])
-      end
-
-      it { expect(subject.allow_negotiation?).to be_true }
     end
   end
 

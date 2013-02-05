@@ -1,12 +1,12 @@
 class TradingItemBidStageCalculator
   delegate :bids, :bidders, :lowest_proposal_amount,
            :selected_bidders_at_proposals,
-           :valid_bidder_for_negotiation?,
            :to => :trading_item
 
   def initialize(trading_item, options = {})
     @trading_item = trading_item
     @bidder_selector = options.fetch(:bidder_selector) { TradingItemBidderSelector }
+    @bidder_negotiation_selector = options.fetch(:bidder_negotiation_selector) { TradingItemBidderNegotiationSelector.new(trading_item) }
   end
 
   def stage_of_proposals?
@@ -31,7 +31,7 @@ class TradingItemBidStageCalculator
 
   private
 
-  attr_reader :trading_item, :bidder_selector
+  attr_reader :trading_item, :bidder_selector, :bidder_negotiation_selector
 
   def all_bidders_have_proposal_for_proposals_stage?
     bids.at_stage_of_proposals.count >= bidders.enabled.count
@@ -41,5 +41,9 @@ class TradingItemBidStageCalculator
     return false unless bids.at_stage_of_round_of_bids.any?
 
     bids.at_stage_of_round_of_bids.with_no_proposal.count == bidder_selector.selected(trading_item).count - 1
+  end
+
+  def valid_bidder_for_negotiation?
+    bidder_negotiation_selector.remaining_bidders.any?
   end
 end

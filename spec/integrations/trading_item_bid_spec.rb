@@ -410,4 +410,40 @@ describe TradingItemBid do
       expect(bid.last_valid_amount_by_bidder_and_item_and_round).to eq 100.00
     end
   end
+
+  describe '.exclude_negotiation' do
+    it 'should return all bids except those at stage of negotiation' do
+      trading = Trading.make!(:pregao_presencial)
+
+      trading_item = trading.items.first
+      bidder = trading.bidders.first
+
+      bid_proposals = TradingItemBid.create!(
+        :round => 0,
+        :trading_item_id => trading_item.id,
+        :bidder_id => bidder.id,
+        :amount => 100.0,
+        :stage => TradingItemBidStage::PROPOSALS,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      bid_round_of_bids = TradingItemBid.create!(
+        :round => 1,
+        :trading_item_id => trading_item.id,
+        :bidder_id => bidder.id,
+        :amount => 90.0,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      bid_negotiation = TradingItemBid.create!(
+        :round => 0,
+        :trading_item_id => trading_item.id,
+        :bidder_id => bidder.id,
+        :amount => 80.0,
+        :stage => TradingItemBidStage::NEGOTIATION,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      expect(described_class.exclude_negotiation).to include(bid_round_of_bids, bid_proposals)
+      expect(described_class.exclude_negotiation).to_not include(bid_negotiation)
+    end
+  end
 end

@@ -144,4 +144,8 @@ class TradingItemDecorator
   def bidder_for_last_bid
     last_bid.bidder
   end
+
+  def allow_negotiation?
+    TradingItemBidderNegotiationSelector.new(component).remaining_bidders.any?
+  end
 end
