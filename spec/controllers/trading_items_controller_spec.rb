@@ -52,6 +52,21 @@ describe TradingItemsController do
 
         get :classification, :id => item.id
 
+        expect(response.code).to eq '200'
+        expect(response.body).to_not match(/Você não tem acesso a essa página/)
+      end
+
+      it 'should return no permission when try to access classification of a closed trading_item' do
+        trading = Trading.make!(:pregao_presencial)
+        item = trading.items.first
+
+        TradingItemClosing.create!(:trading_item_id => item.id, :status =>TradingItemClosingStatus::FAILED)
+
+        controller.stub(:authenticate_user!)
+        controller.stub(:authorize_resource!)
+
+        get :classification, :id => item.id
+
         expect(response.code).to eq '401'
         expect(response.body).to match(/Você não tem acesso a essa página/)
       end

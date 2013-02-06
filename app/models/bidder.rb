@@ -355,7 +355,7 @@ class Bidder < Compras::Model
   end
 
   def can_be_disabled?(trading_item)
-    (trading_item.bidder_with_lowest_proposal == self) && !benefited
+    (trading_item.bidder_with_lowest_proposal == self) && !benefited && negotiation_for(trading_item.id).empty?
   end
 
   def selected_for_trading_item?(trading_item)
@@ -363,6 +363,10 @@ class Bidder < Compras::Model
   end
 
   protected
+
+  def negotiation_for(trading_item_id)
+    trading_item_bids.at_stage_of_negotiation.for_trading_item(trading_item_id)
+  end
 
   def lower_trading_item_bid_at_stage_of_proposals_amount(trading_item)
     lower_trading_item_bid_at_stage_of_proposals(trading_item).try(:amount) || BigDecimal(0)

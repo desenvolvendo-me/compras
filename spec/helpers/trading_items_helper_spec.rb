@@ -42,4 +42,58 @@ describe TradingItemsHelper do
       end
     end
   end
+
+  describe '#negotiation_link' do
+    let(:decorator) { double(:decorator) }
+    let(:bidder) { double(:bidder, :id => 10) }
+
+    before do
+      resource.stub(:decorator => decorator)
+    end
+
+    context 'when bidder is the current for negotiation' do
+      before do
+        decorator.stub(:current_bidder_for_negotiation? => true)
+      end
+
+      it 'should return the link to new negotiation' do
+        helper.should_receive(:link_to).
+               with('Negociar', '/trading_item_bid_negotiations/new?bidder_id=10&trading_item_id=1', :class => "button primary").
+               and_return('link')
+
+        expect(helper.negotiation_link(bidder)).to eq 'link'
+      end
+    end
+
+    context 'when bidder is not the current for negotiation' do
+      before do
+        decorator.stub(:current_bidder_for_negotiation? => false)
+      end
+
+      context 'when bidder is the bidder of last negotiation' do
+        let(:last_negotiation) { double(:last_negotiation, :to_param => "5") }
+
+        before do
+          decorator.stub(:last_bidder_for_negotiation? => true)
+          decorator.stub(:last_negotiation => last_negotiation)
+        end
+
+        it 'should return the link to redo the negotiation' do
+          helper.should_receive(:link_to).
+                 with('Refazer neg.', '/trading_item_bid_negotiations/5', :method => 'delete', :class => 'button').
+                 and_return('link')
+
+          expect(helper.negotiation_link(bidder)).to eq 'link'
+        end
+      end
+
+      context 'when bidder is not the bidder of last negotiation' do
+        before do
+          decorator.stub(:last_bidder_for_negotiation? => false)
+        end
+
+        it { expect(helper.negotiation_link(bidder)).to be_nil }
+      end
+    end
+  end
 end

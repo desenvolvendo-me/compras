@@ -59,7 +59,7 @@ class TradingItemsController < CrudController
   end
 
   def block_classification
-    return if TradingItemBidStageCalculator.new(resource).stage_of_classification?
+    return unless resource.closed?
 
     raise Exceptions::Unauthorized
   end

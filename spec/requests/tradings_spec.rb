@@ -412,18 +412,9 @@ feature "Tradings" do
     expect(page).to have_disabled_element 'Ativar propostas',
                                           :reason => 'Não há propostas para serem ativadas'
 
-
     within("#preference-right") do
       expect(page).not_to have_content "Wenderson Malheiros"
       expect(page).not_to have_content "Gabriel Sobrinho"
-
-      within 'tbody tr:nth-child(1)' do
-        expect(page).to have_content "Nobe"
-        expect(page).to have_content "97,00"
-        expect(page).to have_content "3,19"
-        expect(page).to have_content "1º lugar"
-        expect(page).to have_content "À negociar"
-      end
 
       within 'tbody tr:nth-child(2)' do
         expect(page).to have_content "Nohup"
@@ -431,14 +422,22 @@ feature "Tradings" do
         expect(page).to have_content "4,26"
         expect(page).to have_content "2º lugar"
         expect(page).to have_content "À negociar"
+        expect(page).to_not have_link "Negociar"
+      end
+
+      within 'tbody tr:nth-child(1)' do
+        expect(page).to have_content "Nobe"
+        expect(page).to have_content "97,00"
+        expect(page).to have_content "3,19"
+        expect(page).to have_content "1º lugar"
+        expect(page).to have_content "À negociar"
+        click_link "Negociar"
       end
     end
 
-    click_link "Iniciar Negociação"
-
     expect(page.current_url).to match(/#title/)
 
-    expect(page).to have_content 'Negociação'
+    expect(page).to have_title 'Negociação'
     expect(page).to have_disabled_field "Etapa"
     expect(page).to have_field "Etapa", :with => "Negociação"
     expect(page).to have_field "Licitante", :with => "Nobe"
@@ -449,28 +448,36 @@ feature "Tradings" do
 
     click_button "Salvar"
 
-    expect(page).to have_content 'Negociação criada com sucesso'
+    expect(page).to have_notice 'Negociação criada com sucesso'
 
-    expect(page).to_not have_link 'Desfazer última oferta'
-    expect(page).to have_link 'Desfazer última negociação'
+    within("#preference-right") do
+      within 'tbody tr:nth-child(2)' do
+        expect(page).to have_content "Nohup"
+        expect(page).to_not have_link "Negociar"
+      end
 
-    click_link 'Desfazer última negociação'
+      within 'tbody tr:nth-child(1)' do
+        expect(page).to have_content "Nobe"
+        expect(page).to have_content "93,99"
+        expect(page).to have_content "0,00"
+        expect(page).to have_content "1º lugar"
+        expect(page).to have_content "Com proposta"
+        click_link "Refazer neg."
+      end
+    end
 
-    expect(page).to have_link 'Desfazer última oferta'
-    expect(page).to_not have_link 'Desfazer última negociação'
-
-    click_link "Iniciar Negociação"
-
-    expect(page).to have_content 'Negociação'
+    expect(page).to have_title 'Negociação'
     expect(page).to have_disabled_field "Etapa"
     expect(page).to have_field "Etapa", :with => "Negociação"
-    expect(page).to have_field "Licitante", :with => "Nobe"
+    expect(page).to have_disabled_field "Licitante", :with => "Nobe"
     expect(page).to have_field "Menor preço", :with => "94,00"
     expect(page).to have_field "Valor limite", :with => "93,99"
 
     fill_in "Valor da proposta", :with => "93,99"
 
     click_button 'Salvar'
+
+    expect(page).to have_notice 'Negociação criada com sucesso'
 
     within_records do
       within("tbody tr:nth-child(1)") do
@@ -502,6 +509,7 @@ feature "Tradings" do
         expect(page).to have_content "0,00"
         expect(page).to have_content "1º lugar"
         expect(page).to have_content "Com proposta"
+        expect(page).to have_link "Refazer neg."
       end
 
       within 'tbody tr:nth-child(2)' do
@@ -510,10 +518,10 @@ feature "Tradings" do
         expect(page).to have_content "4,27"
         expect(page).to have_content "2º lugar"
         expect(page).to have_content "À negociar"
+        expect(page).to_not have_link "Negociar"
       end
     end
 
-    expect(page).not_to have_link "Iniciar Negociação"
     expect(page).to have_link "Encerramento do item"
 
     click_link "Encerramento do item"

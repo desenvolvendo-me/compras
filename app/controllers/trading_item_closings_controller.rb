@@ -7,7 +7,7 @@ class TradingItemClosingsController < CrudController
   def new
     object = build_resource
     object.trading_item_id = trading_item.id
-    object.bidder = trading_item.bidder_with_lowest_proposal
+    object.bidder = TradingItemWinner.winner(trading_item)
 
     super
   end
@@ -26,7 +26,7 @@ class TradingItemClosingsController < CrudController
 
   def create_resource(object)
     object.transaction do
-      object.bidder = trading_item.bidder_with_lowest_proposal
+      object.bidder = TradingItemWinner.winner(trading_item)
 
       super
     end

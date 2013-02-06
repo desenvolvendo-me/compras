@@ -81,8 +81,8 @@ class TradingItem < Compras::Model
     bids.enabled.lowest_proposal_by_item_at_stage_of_proposals(self) || BigDecimal(0)
   end
 
-  def allow_winner?
-    started? && !closed? && (bidder_with_lowest_proposal.benefited || bidders_negotiation_selector.bidders_selected.empty?)
+  def allow_winner?(trading_item_winner = TradingItemWinner)
+    started? && !closed? && trading_item_winner.winner(self)
   end
 
   def closed?

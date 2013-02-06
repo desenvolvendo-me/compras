@@ -20,7 +20,7 @@ class TradingItemDecorator
 
     stage_of_proposals_path(routes, stage_calculator) ||
     round_of_bids_or_proposal_report_path(routes, stage_calculator) ||
-    negotiation_or_classification_path(routes, stage_calculator)
+    routes.classification_trading_item_path(component)
   end
 
   def situation_for_next_stage(bidder, bidder_selector = TradingItemBidderSelector)
@@ -79,15 +79,21 @@ class TradingItemDecorator
     end
   end
 
-  private
-
-  def negotiation_or_classification_path(routes, stage_calculator)
-    if stage_calculator.stage_of_classification?
-      routes.classification_trading_item_path(component)
-    elsif stage_calculator.stage_of_negotiation?
-      routes.new_trading_item_bid_negotiation_path(:trading_item_id => component.id)
-    end
+  def current_bidder_for_negotiation?(bidder)
+    bidder == remaining_bidders_for_negotiation.first
   end
+
+  def last_negotiation
+    bids.at_stage_of_negotiation.last
+  end
+
+  def last_bidder_for_negotiation?(bidder)
+    return unless last_negotiation
+
+    last_negotiation.bidder == bidder
+  end
+
+  private
 
   def round_of_bids_or_proposal_report_path(routes, stage_calculator)
     if stage_calculator.stage_of_proposal_report?
@@ -146,6 +152,10 @@ class TradingItemDecorator
   end
 
   def allow_negotiation?
-    TradingItemBidderNegotiationSelector.new(component).remaining_bidders.any?
+    remaining_bidders_for_negotiation.any?
+  end
+
+  def remaining_bidders_for_negotiation
+    TradingItemBidderNegotiationSelector.new(component).remaining_bidders
   end
 end

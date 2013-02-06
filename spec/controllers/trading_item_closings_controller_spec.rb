@@ -14,7 +14,7 @@ describe TradingItemClosingsController do
     let(:bidder) { Bidder.make!(:licitante) }
 
     before do
-      trading_item.stub(:bidder_with_lowest_proposal => bidder)
+      TradingItemWinner.should_receive(:winner).with(trading_item).and_return(bidder)
     end
 
     describe 'GET #new' do

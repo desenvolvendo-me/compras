@@ -56,7 +56,7 @@ feature TradingItemClosing do
     end
 
     expect(page).to have_disabled_field 'Item do pregão', :with => '01.01.00001 - Antivirus'
-    expect(page).to have_disabled_field 'Licitante com a melhor proposta', :with => "Wenderson Malheiros"
+    expect(page).to have_disabled_field 'Licitante com a melhor proposta', :with => ""
 
     select 'Fracassado', :from => 'Situação *'
 
@@ -150,5 +150,136 @@ feature TradingItemClosing do
     expect(page).to_not have_notice 'Encerramento do Item do Pregão criado com sucesso'
 
     expect(page).to have_content 'não tem um licitante vencedor'
+  end
+
+  scenario 'negotiation of the winner not benefited' do
+    TradingConfiguration.make!(:pregao)
+    Trading.make!(:pregao_presencial)
+
+    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+
+    click_link '1/2012'
+
+    click_button 'Salvar e ir para Itens/Ofertas'
+
+    click_link 'Fazer oferta'
+
+    expect(page).to have_title "Criar Proposta"
+
+    fill_in "Valor da proposta", :with => "100,00"
+
+    click_button "Salvar"
+
+    expect(page).to have_notice "Proposta criada com sucesso"
+
+    fill_in "Valor da proposta", :with => "100,00"
+
+    click_button "Salvar"
+
+    expect(page).to have_notice "Proposta criada com sucesso"
+
+    fill_in "Valor da proposta", :with => "100,00"
+
+    click_button "Salvar"
+
+    expect(page).to have_notice "Proposta criada com sucesso"
+
+    expect(page).to have_title 'Propostas'
+
+    click_link 'Registrar lances'
+
+    choose 'Sem proposta'
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Oferta criada com sucesso'
+
+    fill_in 'Valor da proposta', :with => '90,00'
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Oferta criada com sucesso'
+
+    choose 'Sem proposta'
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Oferta criada com sucesso'
+
+    expect(page).to have_title 'Classificação das Ofertas'
+
+    within 'table.records:nth-of-type(1)' do
+      within 'tbody tr:nth-child(3)' do
+        expect(page).to have_content 'Nobe'
+        expect(page).to have_content 'Sim'
+        expect(page).to have_content '100,00'
+        expect(page).to have_content '11,11'
+        expect(page).to_not have_link 'Negociar'
+      end
+
+      within 'tbody tr:nth-child(2)' do
+        expect(page).to have_content 'Gabriel Sobrinho'
+        expect(page).to have_content 'Não'
+        expect(page).to have_content '100,00'
+        expect(page).to have_content '11,11'
+        expect(page).to_not have_link 'Negociar'
+      end
+
+      within 'tbody tr:nth-child(1)' do
+        expect(page).to have_content 'Wenderson Malheiros'
+        expect(page).to have_content 'Não'
+        expect(page).to have_content '90,00'
+        expect(page).to have_content '0,00'
+        expect(page).to have_link 'Inabilitar'
+
+        click_link 'Negociar'
+      end
+    end
+
+    expect(page).to have_title 'Negociação'
+    expect(page).to have_field 'Licitante', :with => 'Wenderson Malheiros'
+
+    fill_in 'Valor da proposta', :with => '80,00'
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Negociação criada com sucesso'
+
+    within 'table.records:nth-of-type(1)' do
+      within 'tbody tr:nth-child(1)' do
+        expect(page).to have_content 'Wenderson Malheiros'
+        expect(page).to have_content 'Não'
+        expect(page).to have_content '80,00'
+        expect(page).to have_content '0,00'
+        expect(page).to have_link 'Refazer neg.'
+        expect(page).to_not have_link 'Inabilitar'
+      end
+
+      within 'tbody tr:nth-child(2)' do
+        expect(page).to have_content 'Gabriel Sobrinho'
+        expect(page).to have_content 'Não'
+        expect(page).to have_content '100,00'
+        expect(page).to have_content '25,00'
+        expect(page).to_not have_link 'Negociar'
+      end
+
+      within 'tbody tr:nth-child(3)' do
+        expect(page).to have_content 'Nobe'
+        expect(page).to have_content 'Sim'
+        expect(page).to have_content '100,00'
+        expect(page).to have_content '25,00'
+        expect(page).to_not have_link 'Negociar'
+      end
+    end
+
+    click_link 'Encerramento do item'
+
+    expect(page).to have_title 'Criar Encerramento do Item do Pregão'
+    expect(page).to have_disabled_field 'Licitante com a melhor proposta', :with => 'Wenderson Malheiros'
+    select 'Vencedor', :from => 'Situação'
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Encerramento do Item do Pregão criado com sucesso'
   end
 end

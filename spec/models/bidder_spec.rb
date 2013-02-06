@@ -501,18 +501,34 @@ describe Bidder do
   end
 
   describe "#can_be_disabled?" do
+    let(:at_stage_of_negotiation) { double(:at_stage_of_negotiation) }
+    let(:trading_item_bids) { double(:trading_item_bids)}
     let(:trading_item) do
-      double(:trading_item,:bidder_with_lowest_proposal => subject)
+      double(:trading_item, :id => 5, :bidder_with_lowest_proposal => subject)
+    end
+
+    before do
+      subject.stub(:trading_item_bids => trading_item_bids)
     end
 
     it "returns true if bidder has lowest bid" do
       subject.stub(:benefited => false)
+      trading_item_bids.should_receive(:at_stage_of_negotiation).and_return(at_stage_of_negotiation)
+      at_stage_of_negotiation.should_receive(:for_trading_item).with(5).and_return([])
 
       expect(subject.can_be_disabled?(trading_item)).to be_true
     end
 
     it "returns false if bidder is benefited" do
       subject.stub(:benefited => true)
+
+      expect(subject.can_be_disabled?(trading_item)).to be_false
+    end
+
+    it "returns false if has negotiation" do
+      subject.stub(:benefited => false)
+      trading_item_bids.should_receive(:at_stage_of_negotiation).and_return(at_stage_of_negotiation)
+      at_stage_of_negotiation.should_receive(:for_trading_item).with(5).and_return(['negotiation'])
 
       expect(subject.can_be_disabled?(trading_item)).to be_false
     end

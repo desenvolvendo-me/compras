@@ -5,14 +5,13 @@ class TradingItemBidNegotiationsController < CrudController
 
   actions :new, :create, :destroy
 
-  before_filter :deny_when_on_another_stage, :only => [:new, :create]
-  before_filter :block_destroy_when_not_last, :only => [:destroy]
+  before_filter :deny_when_on_another_stage, :block_not_allowed_bidder, :only => [:new, :create]
 
   def new
     object = build_resource
-    object.trading_item = @parent
+    object.trading_item = parent
     object.stage  = TradingItemBidStage::NEGOTIATION
-    object.bidder = TradingItemBidBidderChooser.new(@parent, :current_stage => object.stage).choose
+    object.bidder = bidder
     object.status = TradingItemBidStatus::WITH_PROPOSAL
     object.amount = 0
 
@@ -20,11 +19,11 @@ class TradingItemBidNegotiationsController < CrudController
   end
 
   def create
-    create! { @parent.decorator.current_stage_path(self) }
+    create! { classification_trading_item_path(parent) }
   end
 
   def destroy
-    destroy!(:notice => '') { classification_trading_item_path(@parent) }
+    destroy!(:notice => '') { new_trading_item_bid_negotiation_path(:trading_item_id => parent.id, :bidder_id => bidder.id) }
   end
 
   protected
@@ -40,7 +39,7 @@ class TradingItemBidNegotiationsController < CrudController
   def create_resource(object)
     object.transaction do
       object.stage  = TradingItemBidStage::NEGOTIATION
-      object.bidder = TradingItemBidBidderChooser.new(@parent, :current_stage => object.stage).choose
+      object.bidder = bidder
       object.round  = 0
 
       super
@@ -48,34 +47,50 @@ class TradingItemBidNegotiationsController < CrudController
   end
 
   def begin_of_association_chain
-    @parent = get_parent
+    parent
   end
 
-  def get_parent
-    if parent_id
-      @parent = TradingItem.find(parent_id)
+  def parent
+    @parent ||= if parent_id
+      TradingItem.find(parent_id)
+    else
+      TradingItemBid.find(params[:id]).trading_item
     end
   end
 
   def parent_id
+    return unless params[:trading_item_id] || params[:trading_item_bid]
+
     params[:trading_item_id] || params[:trading_item_bid][:trading_item_id]
   end
 
-  def deny_when_on_another_stage
-    get_parent
+  def bidder_id
+    return unless params[:bidder_id] || params[:trading_item_bid]
 
-    unless TradingItemBidStageCalculator.new(@parent).stage_of_negotiation?
+    params[:bidder_id] || params[:trading_item_bid][:bidder_id]
+  end
+
+  def bidder
+    @bidder ||= if bidder_id
+      Bidder.find(bidder_id)
+    else
+      resource.bidder
+    end
+  end
+
+  def deny_when_on_another_stage
+    unless TradingItemBidStageCalculator.new(parent).stage_of_negotiation?
       raise ActiveRecord::RecordNotFound
     end
   end
 
-  def block_destroy_when_not_last
-    get_parent
+  def block_not_allowed_bidder
+    return if valid_bidder == bidder
 
-    bid = TradingItemBid.find(params[:id], :conditions => { :stage => TradingItemBidStage::NEGOTIATION })
+    raise ActiveRecord::RecordNotFound
+  end
 
-    if bid != @parent.last_bid || @parent.closed?
-      raise ActiveRecord::RecordNotFound
-    end
+  def valid_bidder
+    TradingItemBidderNegotiationSelector.new(parent).remaining_bidders.first
   end
 end

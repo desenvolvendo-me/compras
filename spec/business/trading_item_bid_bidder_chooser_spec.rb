@@ -11,15 +11,13 @@ describe TradingItemBidBidderChooser do
   subject do
     described_class.new(trading_item, :current_stage => current_stage,
                         :trading_item_bidders => trading_item_bidders,
-                        :bidder_selector => bidder_selector,
-                        :bidder_negotiation_selector => bidder_negotiation_selector)
+                        :bidder_selector => bidder_selector)
   end
 
   let(:trading_item) { double(:trading_item) }
   let(:trading_item_bidders) { double(:trading_item_bidders) }
   let(:current_stage) { double(:stage) }
   let(:bidder_selector) { double(:bidder_selector) }
-  let(:bidder_negotiation_selector) { double(:bidder_negotiation_selector) }
 
   describe '#choose' do
     context 'when I have 3 bidders' do
@@ -34,16 +32,6 @@ describe TradingItemBidBidderChooser do
           trading_item.stub_chain(:bidders, :enabled).and_return(bidders)
         end
 
-        context 'in negotiation stage' do
-          before do
-            subject.stub(:current_stage => TradingItemBidStage::NEGOTIATION)
-          end
-
-          it "should always return the first bidder available for negotiation" do
-            bidder_negotiation_selector.stub(:remaining_bidders => bidders)
-            expect(subject.choose).to eq bidder1
-          end
-        end
         context 'in other stages' do
           it 'should choose first bidder when proposals have no one yet' do
             trading_item_bidders.stub(:at_bid_round).with(0).and_return([])

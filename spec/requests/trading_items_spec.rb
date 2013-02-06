@@ -457,7 +457,6 @@ feature TradingItem do
     end
 
     expect(page).to have_link 'Encerramento do item'
-    expect(page).to have_link 'Iniciar Negociação'
 
     click_link 'Voltar'
 
@@ -467,7 +466,11 @@ feature TradingItem do
 
     expect(page).to have_title 'Classificação das Propostas Ativadas'
 
-    click_link 'Iniciar Negociação'
+    within 'table.records:nth-of-type(1)' do
+      expect(page).to have_content 'Nohup'
+
+      click_link 'Negociar'
+    end
 
     expect(page).to have_disabled_field 'Etapa', :with => 'Negociação'
     expect(page).to have_disabled_field 'Item do pregão', :with => '01.01.00001 - Antivirus'
@@ -481,11 +484,7 @@ feature TradingItem do
 
     expect(page).to have_notice 'Negociação criada com sucesso'
     expect(page).to have_title 'Classificação das Propostas Ativadas'
-    expect(page).to have_link 'Desfazer última negociação'
     expect(page).to have_link 'Encerramento do item'
-
-    expect(page).to have_disabled_element 'Iniciar Negociação',
-                                          :reason => 'Não há mais licitantes para negociar'
 
     # Proposals activated
     within 'table.records:nth-of-type(1)' do
@@ -494,6 +493,8 @@ feature TradingItem do
       expect(page).to have_content '0,00'
       expect(page).to have_content '1º lugar'
       expect(page).to have_content 'Com proposta'
+
+      expect(page).to have_link 'Refazer neg.'
     end
   end
 

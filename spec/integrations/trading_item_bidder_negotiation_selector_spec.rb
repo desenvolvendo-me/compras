@@ -181,14 +181,14 @@ describe TradingItemBidderNegotiationSelector do
 
         context 'without negotiation' do
           describe '#bidders_selected' do
-            it 'should returns all bidders not selected' do
-              expect(subject.bidders_selected).to eq [bidder_benefited1, bidder_benefited2]
+            it 'should returns all bidders not selected and the bidder with best proposal' do
+              expect(subject.bidders_selected).to eq [bidder_benefited1, bidder_benefited2, bidder2]
             end
           end
 
           describe '#remaining_bidders' do
             it 'should return the not selected bidder' do
-              expect(subject.remaining_bidders).to eq [bidder_benefited1, bidder_benefited2]
+              expect(subject.remaining_bidders).to eq [bidder_benefited1, bidder_benefited2, bidder2]
             end
           end
         end
@@ -229,13 +229,13 @@ describe TradingItemBidderNegotiationSelector do
 
           describe '#bidders_selected' do
             it 'should returns all bidders not selected' do
-              expect(subject.bidders_selected).to eq [bidder_benefited1, bidder_benefited2]
+              expect(subject.bidders_selected).to eq [bidder_benefited1, bidder_benefited2, bidder2]
             end
           end
 
           describe '#remaining_bidders' do
             it 'should return the not selected bidder' do
-              expect(subject.remaining_bidders).to eq [bidder_benefited2]
+              expect(subject.remaining_bidders).to eq [bidder_benefited2, bidder2]
             end
           end
         end
@@ -255,13 +255,13 @@ describe TradingItemBidderNegotiationSelector do
         describe 'without negotiation' do
           describe '#bidders_selected' do
             it 'should returns all bidders not selected' do
-              expect(subject.bidders_selected).to eq []
+              expect(subject.bidders_selected).to eq [bidder2]
             end
           end
 
           describe '#remaining_bidders' do
             it 'should return the not selected bidder' do
-              expect(subject.remaining_bidders).to eq []
+              expect(subject.remaining_bidders).to eq [bidder2]
             end
           end
         end

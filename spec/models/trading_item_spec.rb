@@ -204,7 +204,7 @@ describe TradingItem do
 
   describe "#allow_winner?" do
     let(:winner) { double(:benefited => false) }
-    let(:bidders_negotiation_selector) { double(:bidders_negotiation_selector) }
+    let(:trading_item_winner) { double(:trading_item_winner) }
 
     before do
       subject.stub(:bidder_with_lowest_proposal => winner)
@@ -213,26 +213,19 @@ describe TradingItem do
     context 'when not closed' do
       before do
         subject.stub(:closed? => false, :started? => true)
-        subject.stub(:bidders_negotiation_selector => bidders_negotiation_selector)
       end
 
-      it "returns true if there are no bidders for negotiation" do
-        bidders_negotiation_selector.should_receive(:bidders_selected).and_return([])
+      it "returns true if there ia a winner" do
+        trading_item_winner.should_receive(:winner).with(subject).and_return('winner')
 
-        expect(subject.allow_winner?).to be_true
+        expect(subject.allow_winner?(trading_item_winner)).to be_true
       end
 
-      it "returns true if the winning bidder is benefited" do
-        winner.stub(:benefited => true)
-
-        expect(subject.allow_winner?).to be_true
-      end
-
-      it 'returns false when there are bidders for negotiation and the winner is not benefited' do
-        bidders_negotiation_selector.should_receive(:bidders_selected).and_return(['bidder'])
+      it 'returns false when there is no winner' do
+        trading_item_winner.should_receive(:winner).with(subject).and_return(nil)
         winner.stub(:benefited => false)
 
-        expect(subject.allow_winner?).to be_false
+        expect(subject.allow_winner?(trading_item_winner)).to be_false
       end
     end
 
@@ -241,7 +234,7 @@ describe TradingItem do
         subject.stub(:closed? => false, :started? => false)
       end
 
-      it { expect(subject.allow_winner?).to be_false }
+      it { expect(subject.allow_winner?(trading_item_winner)).to be_false }
     end
 
     context 'when closed' do
@@ -249,7 +242,7 @@ describe TradingItem do
         subject.stub(:closed? => true)
       end
 
-      it { expect(subject.allow_winner?).to be_false }
+      it { expect(subject.allow_winner?(trading_item_winner)).to be_false }
     end
   end
 

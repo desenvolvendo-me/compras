@@ -229,23 +229,11 @@ describe TradingItemDecorator do
       end
 
       it 'should returns the classification when is at stage of classification' do
-        stage_calculator.stub(:stage_of_classification?).and_return(true)
-
         routes.should_receive(:classification_trading_item_path).
           with(component).
           and_return('classification_trading_item_path')
 
         expect(subject.current_stage_path(routes, :stage_calculator => stage_calculator)).to eq 'classification_trading_item_path'
-      end
-
-      it 'should returns the new negotiation when is at stage of negotiation but is not classification' do
-        stage_calculator.stub(:stage_of_classification?).and_return(false)
-
-        routes.should_receive(:new_trading_item_bid_negotiation_path).
-          with(:trading_item_id => 1).
-          and_return('new_negotiation_path')
-
-        expect(subject.current_stage_path(routes, :stage_calculator => stage_calculator)).to eq 'new_negotiation_path'
       end
     end
   end
@@ -465,6 +453,86 @@ describe TradingItemDecorator do
         end
 
         it { expect(subject.cannot_activate_proposals_message).to eq 'não habilitado' }
+      end
+    end
+  end
+
+  describe '#current_bidder_for_negotiation?' do
+    let(:bidder) { double(:bidder) }
+
+    context 'when bidder is the first that remains for negotiation' do
+      before do
+        subject.stub(:remaining_bidders_for_negotiation => [bidder])
+      end
+
+      it { expect(subject.current_bidder_for_negotiation?(bidder)).to be_true }
+    end
+
+    context 'when bidder is not the first that remains for negotiation' do
+      let(:other_bidder) { double(:other_bidder) }
+
+      before do
+        subject.stub(:remaining_bidders_for_negotiation => [other_bidder])
+      end
+
+      it { expect(subject.current_bidder_for_negotiation?(bidder)).to be_false }
+    end
+  end
+
+  describe '#last_negotiation' do
+    let(:bids) { double(:bids) }
+
+    before do
+      component.stub(:bids => bids)
+    end
+
+    context 'when have a negotiation' do
+      before do
+        bids.stub(:at_stage_of_negotiation => ['negotiation'])
+      end
+
+      it 'should return the last nefotiation' do
+        expect(subject.last_negotiation).to eq 'negotiation'
+      end
+    end
+
+    context 'when does not have a negotiation' do
+      before do
+        bids.stub(:at_stage_of_negotiation => [])
+      end
+
+      it 'should return nil' do
+        expect(subject.last_negotiation).to be_nil
+      end
+    end
+  end
+
+  describe '#last_bidder_for_negotiation?' do
+    let(:bidder) { double(:bidder) }
+
+    context 'when does not have a negotiation' do
+      before do
+        subject.stub(:last_negotiation => nil)
+      end
+
+      it { expect(subject.last_bidder_for_negotiation?(bidder)).to be_nil }
+    end
+
+    context 'when have a negotiation' do
+      let(:negotiation) { double(:negotiation, :bidder => bidder) }
+
+      before do
+        subject.stub(:last_negotiation => negotiation)
+      end
+
+      context 'when the bidder is the same that have last negotiation' do
+        it { expect(subject.last_bidder_for_negotiation?(bidder)).to be_true }
+      end
+
+      context 'when the bidder is not the same that have last negotiation' do
+        let(:other_bidder) { double(:other_bidder) }
+
+        it { expect(subject.last_bidder_for_negotiation?(other_bidder)).to be_false }
       end
     end
   end

@@ -93,7 +93,7 @@ describe TradingItemBidNegotiationsController do
 
     describe 'GET new' do
       it 'assigns the parent trading item to the bid' do
-        get :new, :trading_item_id => trading_item.id
+        get :new, :trading_item_id => trading_item.id, :bidder_id => bidder3.id
 
         expect(assigns(:trading_item_bid).trading_item).to eq trading_item
         expect(assigns(:trading_item_bid).amount).to eq 0
@@ -108,6 +108,7 @@ describe TradingItemBidNegotiationsController do
         post :create, :trading_id => trading.id,
            :trading_item_bid => {
              :trading_item_id => trading_item.id,
+             :bidder_id => bidder3.id,
              :status => TradingItemBidStatus::WITHOUT_PROPOSAL
            }
 
@@ -130,9 +131,9 @@ describe TradingItemBidNegotiationsController do
       end
 
       it 'should destroy' do
-        delete :destroy, :id => negotiation.id, :trading_item_id => trading_item.id
+        delete :destroy, :id => negotiation.id
 
-        expect(response).to redirect_to(classification_trading_item_path(trading_item))
+        expect(response).to redirect_to(new_trading_item_bid_negotiation_path(:trading_item_id => trading_item, :bidder_id => bidder1.id))
       end
     end
   end
@@ -154,22 +155,6 @@ describe TradingItemBidNegotiationsController do
         expect {
           post :create, :trading_item_id => trading_item.id
         }.to raise_exception ActiveRecord::RecordNotFound
-      end
-    end
-
-    describe 'DELETE #destroy' do
-      let(:bid) do
-        TradingItemBid.create!(
-          :round => 0,
-          :trading_item_id => trading_item.id,
-          :bidder_id => trading.bidders.first.id,
-          :amount => 100.0,
-          :stage => TradingItemBidStage::PROPOSALS,
-          :status => TradingItemBidStatus::WITH_PROPOSAL)
-      end
-
-      it 'should return 404' do
-        expect { delete :destroy, :id => bid.id, :trading_item_id => trading_item.id }.to raise_exception ActiveRecord::RecordNotFound
       end
     end
   end

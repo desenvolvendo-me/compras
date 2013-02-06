@@ -1,6 +1,7 @@
 class TradingItemBidderNegotiationSelector
-  def initialize(trading_item)
+  def initialize(trading_item, options = {})
     @trading_item = trading_item
+    @preemptive_right = options.fetch(:preemptive_right) { TradingItemPreemptiveRight }
   end
 
   # Returns all bidders allowed to negotiate. It does not care if bidder already
@@ -9,7 +10,11 @@ class TradingItemBidderNegotiationSelector
     if trading_item.proposals_activated?
       trading_item.enabled_bidders_by_lowest_proposal(:filter => :not_selected)
     else
-      bidders_benefited
+      if bidder_with_lowest_proposal_benefited? || bidder_with_lowest_proposal.blank?
+        benefited_bidders
+      else
+        benefited_bidders << bidder_with_lowest_proposal
+      end
     end
   end
 
@@ -35,28 +40,11 @@ class TradingItemBidderNegotiationSelector
     trading_item.bids
   end
 
-  def limit_value
-    lowest_proposal_amount_with_valid_proposal * BigDecimal("1.05")
-  end
-
-  def lowest_proposal_amount_with_valid_proposal
-    if trading_item.proposals_activated?
-      bids.with_proposal.exclude_negotiation.minimum(:amount)
-    else
-      bids.enabled.exclude_negotiation.with_proposal.minimum(:amount)
-    end
-  end
-
   def bidders_with_negotiation_ids
-    bidders.with_negotiation_proposal_for(trading_item.id).select(:id).map(&:id)
-  end
-
-  def bidders_benefited
     bidders.
-      enabled.
-      benefited.
-      under_limit_value(trading_item, limit_value).
-      ordered_by_trading_item_bid_amount(trading_item)
+      with_negotiation_proposal_for(trading_item.id).
+      select(:id).
+      map(&:id)
   end
 
   def bidders_ordered_by_offers
@@ -65,5 +53,19 @@ class TradingItemBidderNegotiationSelector
 
   def allow_negotiation?
     bids.with_proposal.at_stage_of_negotiation.empty?
+  end
+
+  def bidder_with_lowest_proposal
+    trading_item.enabled_bidders_by_lowest_proposal(:filter => :selected).first
+  end
+
+  def bidder_with_lowest_proposal_benefited?
+    return unless bidder_with_lowest_proposal
+
+    bidder_with_lowest_proposal.benefited
+  end
+
+  def benefited_bidders
+    TradingItemPreemptiveRight.bidders(trading_item)
   end
 end
