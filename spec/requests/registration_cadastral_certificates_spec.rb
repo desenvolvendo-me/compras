@@ -34,7 +34,7 @@ feature "RegistrationCadastralCertificates" do
       expect(page).to have_content 'Comércio varejista de mercadorias em geral'
       expect(page).to have_content 'Rua Girassol, 9874 - São Francisco'
       expect(page).to have_content 'Curitiba'
-      expect(page).to have_content 'Parana'
+      expect(page).to have_content 'Paraná'
       expect(page).to have_content 'Brasil'
       expect(page).to have_content '33400-500'
       expect(page).to have_content '(11) 7070-9999'

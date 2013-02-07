@@ -1,3 +1,4 @@
+# encoding: utf-8
 State.blueprint(:mg) do
   acronym { 'MG' }
   name    { 'Minas Gerais' }
@@ -12,6 +13,6 @@ end
 
 State.blueprint(:pr) do
   acronym { 'PR' }
-  name    { 'Parana' }
+  name    { 'Paraná' }
   country { Country.make!(:brasil) }
 end

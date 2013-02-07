@@ -28,7 +28,7 @@ feature "DeliveryLocations" do
 
     fill_in 'CEP', :with => '88900-000'
 
-    expect(page).to have_field "Estado", :with => 'Parana'
+    expect(page).to have_field "Estado", :with => 'Paraná'
 
     click_button 'Salvar'
 
@@ -47,7 +47,7 @@ feature "DeliveryLocations" do
     expect(page).to have_field 'Loteamento', :with => 'Solar da Serra'
     expect(page).to have_field "Cidade", :with => 'Curitiba'
     expect(page).to have_field 'CEP', :with => '88900-000'
-    expect(page).to have_field "Estado", :with => 'Parana'
+    expect(page).to have_field "Estado", :with => 'Paraná'
   end
 
   scenario 'update an existent delivery_location' do
@@ -72,7 +72,7 @@ feature "DeliveryLocations" do
 
     fill_in 'CEP', :with => '88900-000'
 
-    expect(page).to have_field "Estado", :with => 'Parana'
+    expect(page).to have_field "Estado", :with => 'Paraná'
 
     click_button 'Salvar'
 
@@ -91,7 +91,7 @@ feature "DeliveryLocations" do
     expect(page).to have_field 'Loteamento', :with => 'Solar da Serra'
     expect(page).to have_field "Cidade", :with => 'Curitiba'
     expect(page).to have_field 'CEP', :with => '88900-000'
-    expect(page).to have_field "Estado", :with => 'Parana'
+    expect(page).to have_field "Estado", :with => 'Paraná'
   end
 
   scenario 'destroy an existent delivery_location' do

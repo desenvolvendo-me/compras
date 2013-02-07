@@ -75,7 +75,7 @@ feature "Cities" do
 
       within 'tbody tr' do
         expect(page).to have_content 'Maringa'
-        expect(page).to have_content 'Parana'
+        expect(page).to have_content 'Paraná'
         expect(page).to have_content '12'
       end
     end
