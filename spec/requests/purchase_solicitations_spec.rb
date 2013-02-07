@@ -109,7 +109,7 @@ feature "PurchaseSolicitations" do
     Employee.make!(:wenderson)
     ExpenseNature.make!(:compra_de_material)
     DeliveryLocation.make!(:health)
-    budget_allocation = BudgetAllocation.make!(:alocacao_extra)
+    budget_allocation = BudgetAllocation.make!(:reparo_2011)
     Material.make!(:arame_farpado)
 
     navigate 'Processos de Compra > Solicitações de Compra'
@@ -137,9 +137,8 @@ feature "PurchaseSolicitations" do
       click_button "Adicionar Dotação"
 
       within_modal 'Dotação' do
-        fill_modal 'Descritor', :with => '2011', :field => 'Ano do exercício'
         click_button 'Pesquisar'
-        click_record '2011 - Detran'
+        click_record '2011 - Secretaria de Educação'
       end
 
       fill_modal 'Natureza da despesa', :with => 'Compra de Material', :field => 'Descrição'

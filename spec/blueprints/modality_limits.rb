@@ -1,7 +1,4 @@
 ModalityLimit.blueprint(:modalidade_de_compra) do
-  validity_beginning { Date.current }
-  ordinance_number { "0001" }
-  published_date { Date.current }
   without_bidding { "10000,00" }
   invitation_letter { "200,00" }
   taken_price { "300,00" }
@@ -13,9 +10,6 @@ ModalityLimit.blueprint(:modalidade_de_compra) do
 end
 
 ModalityLimit.blueprint(:modalidade_de_compra_ponte) do
-  validity_beginning { Date.current }
-  ordinance_number { "0001" }
-  published_date { Date.current }
   without_bidding { "20000,00" }
   invitation_letter { "200,00" }
   taken_price { "300,00" }
