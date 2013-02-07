@@ -10,6 +10,7 @@ gem 'puma', '1.6.3', :require => false
 gem 'pg', '0.14.1'
 
 gem 'activerecord-connections', '0.0.3'
+gem 'activerecord-postgres-hstore', '0.6.0'
 
 gem 'inscriptio_cursualis', '0.3.0'
 gem 'persona', '0.2.1'

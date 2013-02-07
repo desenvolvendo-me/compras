@@ -14,6 +14,13 @@ Compras::Application.routes.draw do
     end
   end
 
+  resources :customizations do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :holidays do
     collection do
       get :filter

@@ -1,4 +1,7 @@
 class Creditor < Compras::Model
+  include CustomData
+  reload_custom_data
+
   attr_accessible :creditable_type, :creditable_id, :contract_start_date,
                   :occupation_classification_id, :main_cnae_id, :cnae_ids,
                   :municipal_public_administration, :autonomous,
@@ -73,6 +76,7 @@ class Creditor < Compras::Model
   validates :documents, :no_duplication => :document_type_id
   validate :person_in_representatives
   validate :secondary_cnae_in_main_cnae
+  validate :validate_custom_data
 
   before_save :clean_fields_when_is_no_autonomous
 

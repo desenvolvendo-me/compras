@@ -10,6 +10,10 @@ module ApplicationHelper
     super(object, *(args << options), &block)
   end
 
+  def find_input_for(value, setting, options = {})
+    Compras::Inputs::FindInput.new(value, setting, options).find
+  end
+
   def simple_menu(&block)
     SimpleMenu.new(self, &block).render
   end
@@ -24,6 +28,16 @@ module ApplicationHelper
 
   def smart_report_path
     url_for :controller => controller_name, :action => :show, :id => 'report', :only_path => true
+  end
+
+  def custom_fields(form)
+    inputs = ''
+
+    resource.class.custom_data.each do |custom_data|
+      inputs += form.input custom_data.normalized_data, find_input_for( form.object.send(custom_data.normalized_data), custom_data )
+    end
+
+    inputs.html_safe
   end
 
   # Apply I18n::Alchemy on a collection of active record objects.

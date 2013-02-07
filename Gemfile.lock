@@ -54,6 +54,9 @@ GEM
     activerecord-connections (0.0.3)
       activerecord (>= 3.0)
       activesupport (>= 3.0)
+    activerecord-postgres-hstore (0.6.0)
+      rails
+      rake
     activeresource (3.2.11)
       activemodel (= 3.2.11)
       activesupport (= 3.2.11)
@@ -293,6 +296,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-connections (= 0.0.3)
+  activerecord-postgres-hstore (= 0.6.0)
   awesome_nested_set (= 2.1.3)
   cancan!
   capybara (= 1.1.2)

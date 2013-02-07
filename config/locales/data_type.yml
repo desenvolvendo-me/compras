@@ -1,0 +1,9 @@
+pt-BR:
+  enumerations:
+    data_type:
+      string: "Texto simples"
+      text: "Texto múltiplas linhas"
+      date: "Data"
+      decimal: "Decimal"
+      integer: "Número inteiro"
+      boolean: "Check"

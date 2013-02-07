@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      customization_data:
+        one: "Dado da Customização"
+        other: "Dados das Customizações"
+
+    attributes:
+      customization_data:
+        customization: "Customização"
+        data: "Dado"
+        data_type: "Tipo do dado"
+        required: "Obrigatório"

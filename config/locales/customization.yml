@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      customization:
+        one: "Customização"
+        other: "Customizações"
+
+    attributes:
+      customization:
+        model: "Tabela"
+        state: "Estado"

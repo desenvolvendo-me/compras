@@ -3,6 +3,7 @@ menu:
     - parameters:
       - prefecture
       - entities
+      - customizations
 
       - addresses:
         - states
