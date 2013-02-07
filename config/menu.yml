@@ -73,7 +73,6 @@ menu:
 
   - administrative_and_licitation_processes:
     - auxiliary:
-      - modality_limits
       - licitation_commissions
       - trading_configuration
       - judgment_forms
