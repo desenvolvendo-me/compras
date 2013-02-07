@@ -64,9 +64,28 @@
     calcItemOrder();
     setMaterialLabel();
     setMaterialModalUrl();
+    setBudgetAllocationModalUrl();
+  });
+
+  $('#purchase_solicitation_budget_structure_id').on("change", function(event, budget_structure) {
+    setBudgetAllocationModalUrl();
   });
 
   calcItemOrder();
+
+  function setBudgetAllocationModalUrl() {
+    var url = "<%= modal_budget_allocations_path %>",
+    budget_structure_id = $("#purchase_solicitation_budget_structure_id").val(),
+    params = {
+      budget_structure_id: budget_structure_id
+    }
+
+    if (budget_structure_id) {
+      url += "?" + jQuery.param(params);
+    }
+
+    $(".budget-allocation").data('modal-url', url);
+  }
 
   function setMaterialModalUrl(){
     var url = "<%= modal_materials_path %>?",

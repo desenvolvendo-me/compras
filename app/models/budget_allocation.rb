@@ -59,6 +59,12 @@ class BudgetAllocation < Compras::Model
     query
   end
 
+  def self.budget_structure_id(budget_structure_id)
+    where { |budget_allocation|
+      budget_allocation.budget_structure_id.eq(budget_structure_id)
+    }
+  end
+
   def reserved_value
     reserve_funds.collect(&:value).sum
   end

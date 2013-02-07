@@ -838,4 +838,41 @@ feature "PurchaseSolicitations" do
       end
     end
   end
+
+  scenario 'fill automatically budget structure from budget allocation' do
+    BudgetStructure.make!(:secretaria_de_educacao)
+    budget_allocation = BudgetAllocation.make!(:alocacao)
+
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    click_link 'Criar Solicitação de Compra'
+
+    within_tab 'Principal' do
+      fill_modal 'Estrutura orçamentária solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      click_button "Adicionar Dotação"
+
+      within '.purchase-solicitation-budget-allocation:last' do
+        within_modal 'Dotação' do
+          expect(page).to have_field 'Estrutura orçamentária', :with => '1 - Secretaria de Educação'
+
+          click_link 'Voltar'
+        end
+      end
+    end
+
+    within_tab 'Principal' do
+      clear_modal 'Estrutura orçamentária solicitante'
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      within '.purchase-solicitation-budget-allocation:last' do
+        within_modal 'Dotação' do
+          expect(page).to have_field 'Estrutura orçamentária', :with => ''
+        end
+      end
+    end
+  end
 end
