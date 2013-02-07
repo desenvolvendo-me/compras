@@ -56,4 +56,9 @@
       $(".minimum_reduction_percent").removeAttr("readonly");
     }
   });
+
+  <% if resource.block_minimum_reduction? %>
+    $("#trading_item_minimum_reduction_percent").attr("disabled", "disabled");
+    $("#trading_item_minimum_reduction_value").attr("disabled", "disabled");
+  <% end %>
 </script>

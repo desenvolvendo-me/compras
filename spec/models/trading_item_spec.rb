@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'model_helper'
 require 'app/models/administrative_process_budget_allocation_item'
 require 'app/models/trading'
@@ -458,6 +459,113 @@ describe TradingItem do
           subject.should_receive(:update_column).with(:proposals_activated_at, DateTime.current).and_return(true)
 
           expect(subject.activate_proposals!).to be_true
+        end
+      end
+    end
+  end
+
+  describe '#block_minimum_reduction?' do
+    context 'when closed' do
+      before do
+        subject.stub(:closed? => true)
+      end
+
+      it { expect(subject.block_minimum_reduction?).to be_true }
+    end
+
+    context 'when started' do
+      before do
+        subject.stub(:started? => true)
+      end
+
+      it { expect(subject.block_minimum_reduction?).to be_true }
+    end
+
+    context 'when not started neither closed' do
+      before do
+        subject.stub(:started? => false)
+        subject.stub(:closed? => false)
+      end
+
+      it { expect(subject.block_minimum_reduction?).to be_false }
+    end
+  end
+
+  describe 'validate minimum_reductions' do
+    context 'when block_minimum_reduction' do
+      before do
+        subject.stub(:block_minimum_reduction? => true)
+      end
+
+      context 'when changed minimum_reduction_value' do
+        it 'should not be valid' do
+          subject.stub(:changed_attributes => { :minimum_reduction_value => 10.1 })
+          subject.stub(:validation_context).and_return(:update)
+
+          subject.valid?
+
+          expect(subject.errors[:minimum_reduction_value]).to include("não pode ser alterado quando o item já estiver em andamento ou fechado")
+        end
+      end
+
+      context 'when changed minimum_reduction_percent' do
+        it 'should not be valid' do
+          subject.stub(:changed_attributes => { :minimum_reduction_percent => 10.1 })
+          subject.stub(:validation_context).and_return(:update)
+
+          subject.valid?
+
+          expect(subject.errors[:minimum_reduction_percent]).to include("não pode ser alterado quando o item já estiver em andamento ou fechado")
+        end
+      end
+
+      context 'when no one minimum_reduction is changed' do
+        it 'should be valid' do
+          subject.stub(:validation_context).and_return(:update)
+
+          subject.valid?
+
+          expect(subject.errors[:minimum_reduction_value]).to_not include("não pode ser alterado quando o item já estiver em andamento ou fechado")
+          expect(subject.errors[:minimum_reduction_percent]).to_not include("não pode ser alterado quando o item já estiver em andamento ou fechado")
+        end
+      end
+    end
+
+    context 'when not block_minimum_reduction' do
+      before do
+        subject.stub(:block_minimum_reduction? => false)
+      end
+
+      context 'when changed minimum_reduction_value' do
+        it 'should be valid' do
+          subject.stub(:changed_attributes => { :minimum_reduction_value => 10.1 })
+          subject.stub(:validation_context).and_return(:update)
+
+          subject.valid?
+
+          expect(subject.errors[:minimum_reduction_value]).to_not include("não pode ser alterado quando o item já estiver em andamento ou fechado")
+        end
+      end
+
+      context 'when changed minimum_reduction_percent' do
+        it 'should be valid' do
+          subject.stub(:changed_attributes => { :minimum_reduction_percent => 10.1 })
+          subject.stub(:validation_context).and_return(:update)
+
+          subject.valid?
+
+          expect(subject.errors[:minimum_reduction_percent]).to_not include("não pode ser alterado quando o item já estiver em andamento ou fechado")
+        end
+      end
+
+      context 'when no one minimum_reduction is changed' do
+        it 'should be valid' do
+          subject.stub(:validation_context).and_return(:update)
+
+          subject.valid?
+
+          expect(subject.errors[:minimum_reduction_value]).to_not include("não pode ser alterado quando o item já estiver em andamento ou fechado")
+          expect(subject.errors[:minimum_reduction_percent]).to_not include("não pode ser alterado quando o item já estiver em andamento ou fechado")
         end
       end
     end

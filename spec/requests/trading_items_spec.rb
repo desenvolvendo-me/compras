@@ -867,4 +867,49 @@ feature TradingItem do
       end
     end
   end
+
+  scenario 'cannot change minimum reductions when started' do
+    TradingConfiguration.make!(:pregao)
+    Trading.make!(:pregao_presencial)
+
+    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+
+    click_link "1/2012"
+    click_button "Salvar e ir para Itens/Ofertas"
+    click_link "Fazer oferta"
+
+    # Proposal stage
+    fill_in "Valor da proposta", :with => "100,00"
+
+    click_button "Salvar"
+
+    expect(page).to have_content 'Proposta criada com sucesso'
+
+    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+
+    click_link "1/2012"
+    click_button "Salvar e ir para Itens/Ofertas"
+    click_link 'Antivirus'
+
+    expect(page).to have_disabled_field 'Redução mínima admissível entre os lances em %'
+    expect(page).to have_disabled_field 'Redução mínima admissível entre os lances em valor'
+  end
+
+  scenario 'cannot change minimum reductions when closed' do
+    TradingConfiguration.make!(:pregao)
+    trading_item = Trading.make!(:pregao_presencial)
+
+    TradingItemClosing.create!(:trading_item_id => trading_item.id,
+                               :status => TradingItemClosingStatus::FAILED)
+
+    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+
+    click_link "1/2012"
+    click_button "Salvar e ir para Itens/Ofertas"
+
+    click_link 'Antivirus'
+
+    expect(page).to have_disabled_field 'Redução mínima admissível entre os lances em %'
+    expect(page).to have_disabled_field 'Redução mínima admissível entre os lances em valor'
+  end
 end

@@ -19,6 +19,7 @@ class TradingItem < Compras::Model
             :on => :update
 
   validate :require_at_least_one_minimum_reduction, :on => :update
+  validate :minimum_reduction_when_blocked, :on => :update
 
   delegate :material, :material_id, :reference_unit,
            :quantity, :unit_price, :to_s,
@@ -147,7 +148,21 @@ class TradingItem < Compras::Model
     TradingItemBidderSelector.not_selected(self).enabled
   end
 
+  def block_minimum_reduction?
+    closed? || started?
+  end
+
   private
+
+  def minimum_reduction_when_blocked
+    return unless block_minimum_reduction?
+
+    if attribute_changed?(:minimum_reduction_value)
+      errors.add(:minimum_reduction_value, :cannot_be_changed_when_closed_or_started)
+    elsif attribute_changed?(:minimum_reduction_percent)
+      errors.add(:minimum_reduction_percent, :cannot_be_changed_when_closed_or_started)
+    end
+  end
 
   def no_enabled_bidders_by_lowest_proposal_selected?
     enabled_bidders_by_lowest_proposal(:filter => :selected).to_a.empty?
