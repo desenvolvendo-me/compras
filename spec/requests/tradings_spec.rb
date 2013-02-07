@@ -274,7 +274,7 @@ feature "Tradings" do
 
     click_link 'Voltar ao pregão presencial'
 
-    expect(page).to have_content "Editar 1/2012"
+    expect(page).to have_content "Editar Pregão Presencial"
   end
 
   scenario "trading session with negotiation and closing stage" do

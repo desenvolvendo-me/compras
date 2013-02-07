@@ -67,7 +67,7 @@ feature 'ContractTerminations' do
 
     click_link 'Voltar'
 
-    expect(page).to have_content 'Editar 001'
+    expect(page).to have_title 'Editar Contrato'
   end
 
   scenario 'editing a contract termination' do

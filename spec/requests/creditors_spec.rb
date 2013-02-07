@@ -531,7 +531,7 @@ feature "Creditors" do
 
     click_link 'Voltar ao credor'
 
-    expect(page).to have_content 'Editar Nohup'
+    expect(page).to have_title 'Editar Credor'
   end
 
   scenario 'create a CRC for a creditor' do

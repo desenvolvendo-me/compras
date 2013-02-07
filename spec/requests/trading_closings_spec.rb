@@ -23,7 +23,7 @@ feature TradingClosing do
 
     click_link 'Voltar'
 
-    expect(page).to have_title 'Editar 1/2012'
+    expect(page).to have_title 'Editar Pregão Presencial'
 
     expect(page).to be_on_tab 'Trâmites'
 
@@ -43,7 +43,7 @@ feature TradingClosing do
 
     expect(page).to have_notice 'Encerramento do Pregão Presencial criado com sucesso.'
 
-    expect(page).to have_title 'Editar 1/2012'
+    expect(page).to have_title 'Editar Pregão Presencial'
 
     expect(page).to be_on_tab 'Trâmites'
 

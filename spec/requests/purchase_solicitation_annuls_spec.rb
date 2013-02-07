@@ -72,7 +72,7 @@ feature 'PurchaseSolicitationAnnul' do
 
     expect(page).to have_content 'Anulação de Recurso criada com sucesso.'
 
-    expect(page).to have_content "Editar #{solicitation}"
+    expect(page).to have_title "Editar Solicitação de Compra"
     expect(page).to have_select 'Status de atendimento', :selected => 'Anulada'
 
     within_tab 'Principal' do

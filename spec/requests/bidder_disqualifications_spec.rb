@@ -105,7 +105,7 @@ feature BidderDisqualification do
       end
     end
 
-    expect(page).to have_content 'Editar Wenderson Malheiros'
+    expect(page).to have_title 'Editar Inabilitação de Licitante'
     expect(page).to have_disabled_field 'Licitante', :with => 'Wenderson Malheiros'
     expect(page).to have_disabled_field 'Data', :with => "#{I18n.l(Date.current)}"
     expect(page).to have_field 'Motivo', :with => "Documentação irregular"
@@ -122,7 +122,7 @@ feature BidderDisqualification do
       end
     end
 
-    expect(page).to have_content 'Editar Wenderson Malheiros'
+    expect(page).to have_title 'Editar Inabilitação de Licitante'
     expect(page).to have_disabled_field 'Licitante', :with => 'Wenderson Malheiros'
     expect(page).to have_disabled_field 'Data', :with => "#{I18n.l(Date.current)}"
     expect(page).to have_field 'Motivo', :with => "Documentação irregular do licitante"
@@ -182,7 +182,7 @@ feature BidderDisqualification do
       end
     end
 
-    expect(page).to have_content 'Editar Wenderson Malheiros'
+    expect(page).to have_title 'Editar Inabilitação de Licitante'
 
     click_link 'Apagar'
 

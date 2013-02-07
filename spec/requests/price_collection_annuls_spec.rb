@@ -20,7 +20,7 @@ feature 'PriceCollectionAnnuls' do
 
     click_link 'Voltar'
 
-    expect(page).to have_content 'Editar 1/2012'
+    expect(page).to have_title 'Editar Coleta de Preços'
   end
 
   scenario 'creating a price collection annul' do

@@ -23,7 +23,7 @@ feature TradingItem do
 
     click_link "Voltar ao pregão presencial"
 
-    expect(page).to have_content 'Editar 1/2012'
+    expect(page).to have_title 'Editar Pregão Presencial'
   end
 
   scenario "listing trading items with one item started" do
