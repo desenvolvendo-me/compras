@@ -6,7 +6,7 @@
           <%= link_to resource, edit_trading_item_path(resource, :trading_id => @parent.id) %>
         </td>
 
-        <td class="right">
+        <td class="right g-1-2">
           <%= link_to "Fazer oferta", resource.decorator.current_stage_path(controller),
               :class => "button primary",
               'data-disabled' => resource.decorator.allows_offer_placing %>
