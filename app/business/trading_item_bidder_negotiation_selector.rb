@@ -11,9 +11,9 @@ class TradingItemBidderNegotiationSelector
       trading_item.enabled_bidders_by_lowest_proposal(:filter => :not_selected)
     else
       if bidder_with_lowest_proposal_benefited? || bidder_with_lowest_proposal.blank?
-        benefited_bidders
+        bidders_with_preemptive_right
       else
-        benefited_bidders << bidder_with_lowest_proposal
+        bidders_with_preemptive_right << bidder_with_lowest_proposal
       end
     end
   end
@@ -65,7 +65,7 @@ class TradingItemBidderNegotiationSelector
     bidder_with_lowest_proposal.benefited
   end
 
-  def benefited_bidders
+  def bidders_with_preemptive_right
     TradingItemPreemptiveRight.bidders(trading_item)
   end
 end
