@@ -19,8 +19,8 @@ feature 'Bookmarks' do
     expect(page).to have_content 'Adicione os cadastros que você utiliza com frequência para a lista de favoritos.'
     expect(page).to have_content 'Sempre que você acessar o sistema, eles estarão disponíveis aqui para facilitar o seu trabalho.'
 
-    expect(page).to have_link 'Cidades'
-    expect(page).to have_link 'Países'
+    expect(page).to have_link 'Usuários'
+    expect(page).to have_link 'Perfis'
   end
 
   scenario 'creates bookmarks' do
@@ -28,19 +28,19 @@ feature 'Bookmarks' do
 
     click_link 'Adicionar Cadastros'
 
-    select 'Cidades', :from => 'Cadastros'
-    select 'Países', :from => 'Cadastros'
+    select 'Usuários', :from => 'Cadastros'
+    select 'Perfis', :from => 'Cadastros'
 
     click_button 'Salvar'
 
     expect(page).to have_content 'Favoritos criado com sucesso.'
 
-    expect(page).to have_link 'Cidades'
-    expect(page).to have_link 'Países'
+    expect(page).to have_link 'Usuários'
+    expect(page).to have_link 'Perfis'
 
     click_link 'Editar'
 
-    expect(page).to have_select 'Cadastros', :value => ['Cidades', 'Países']
+    expect(page).to have_select 'Cadastros', :value => ['Usuários', 'Perfis']
   end
 
   scenario 'updates bookmarks' do
@@ -50,19 +50,19 @@ feature 'Bookmarks' do
 
     click_link 'Editar'
 
-    unselect 'Cidades', :from => 'Cadastros'
-    select 'Países', :from => 'Cadastros'
+    unselect 'Usuários', :from => 'Cadastros'
+    select 'Perfis', :from => 'Cadastros'
 
     click_button 'Salvar'
 
     expect(page).to have_content 'Favoritos editado com sucesso.'
 
-    expect(page).to_not have_link 'Cidades'
-    expect(page).to have_link 'Países'
+    expect(page).to_not have_link 'Usuários'
+    expect(page).to have_link 'Perfis'
 
     click_link 'Editar'
 
-    expect(page).to have_select 'Cadastros', :value => ['Cidades']
+    expect(page).to have_select 'Cadastros', :value => ['Usuários']
   end
 
   scenario 'remove all bookmarks and redirect to empty page' do
@@ -72,8 +72,8 @@ feature 'Bookmarks' do
 
     click_link 'Editar'
 
-    unselect 'Cidades', :from => 'Cadastros'
-    unselect 'Países', :from => 'Cadastros'
+    unselect 'Usuários', :from => 'Cadastros'
+    unselect 'Perfis', :from => 'Cadastros'
 
     click_button 'Salvar'
 

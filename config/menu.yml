@@ -6,11 +6,8 @@ menu:
       - customizations
 
       - addresses:
-        - states
         - districts
         - neighborhoods
-        - cities
-        - countries
         - streets
         - street_types
         - land_subdivisions

@@ -227,12 +227,7 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :cities do
-    collection do
-      get :modal
-      get :filter
-    end
-  end
+  get 'cities/modal', :as => :modal_cities
 
   resources :cnaes do
     collection do
@@ -255,12 +250,7 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :countries do
-    collection do
-      get :modal
-      get :filter
-    end
-  end
+  get 'countries/modal', :as => :modal_coutries
 
   resources :currencies do
     collection do
@@ -676,12 +666,7 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :states do
-    collection do
-      get :modal
-      get :filter
-    end
-  end
+  get 'states/modal', :as => :modal_states
 
   resources :street_types do
     collection do

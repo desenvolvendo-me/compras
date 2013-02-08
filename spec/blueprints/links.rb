@@ -1,7 +1,7 @@
-Link.blueprint(:cities) do
-  controller_name { "cities" }
+Link.blueprint(:users) do
+  controller_name { "users" }
 end
 
-Link.blueprint(:countries) do
-  controller_name { "countries" }
+Link.blueprint(:profiles) do
+  controller_name { "profiles" }
 end
