@@ -1,3 +1,3 @@
 class JudgmentFormsController < CrudController
-  actions :all, :except => [:new, :create, :destroy]
+  actions :filter, :modal, :index, :update
 end

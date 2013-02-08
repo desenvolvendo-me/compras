@@ -333,7 +333,7 @@ Compras::Application.routes.draw do
 
   get "individuals/modal", :as => :modal_individuals
 
-  resources :judgment_forms, :except => [:new, :create, :destroy] do
+  resources :judgment_forms, :only => [:filter, :modal, :index, :update] do
     collection do
       get :filter
       get :modal

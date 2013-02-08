@@ -13,6 +13,12 @@ describe JudgmentFormsController do
     end
   end
 
+  describe 'GET #edit' do
+    it 'should not allow new' do
+      expect { get :edit }.to raise_exception(ActionController::RoutingError)
+    end
+  end
+
   describe 'POST #create' do
     it 'should not allow creation' do
       expect { post :create }.to raise_exception(ActionController::RoutingError)

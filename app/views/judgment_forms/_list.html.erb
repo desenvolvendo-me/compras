@@ -1,0 +1,49 @@
+<table class="records">
+  <thead>
+    <tr>
+      <th><%= singular %></th>
+      <th>Habilitar?</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% collection.each do |resource| %>
+      <tr>
+        <td>
+          <p><%= resource %></p>
+
+          <% if resource.decorated? && resource.decorator.respond_to?(:summary) %>
+            <p><%= resource.decorator.summary %></p>
+          <% end %>
+        </td>
+
+        <td>
+          <%= check_box_tag "judgment_form_#{resource.id}", "#{resource.enabled}",
+                            resource.enabled, :class => "judgment_form_enable",
+                            "data-url" => judgment_form_path(resource) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<script>
+  $(".judgment_form_enable").on("change", function() {
+    var data = "0";
+
+    if ($(this).is(":checked")) {
+      data = "1";
+    }
+
+    $.ajax({
+      url: $(this).data("url"),
+      type: "PUT",
+      dataType: 'json',
+      data: {
+        judgment_form: {
+          enabled: data
+        }
+      }
+    });
+  });
+</script>

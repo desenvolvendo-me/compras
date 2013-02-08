@@ -12,44 +12,32 @@ feature "JudgmentForms" do
     expect(page).to_not have_link 'Criar Forma de Julgamento de Licitação'
   end
 
-  scenario 'update an existent judgment_form' do
-    JudgmentForm.make!(:global_com_menor_preco)
+  scenario 'enable and disable judgment_forms through ajax' do
+    judgment1 = JudgmentForm.make!(:global_com_menor_preco)
+    judgment2 = JudgmentForm.make!(:por_item_com_melhor_tecnica)
+    judgment3 = JudgmentForm.make!(:por_lote_com_melhor_tecnica)
 
     navigate 'Processo Administrativo/Licitatório > Auxiliar > Formas de Julgamento das Licitações'
 
-    click_link 'Forma Global com Menor Preço'
-
-    expect(page).to_not have_link 'Apagar'
-
-    fill_in 'Descrição', :with => 'Por item com melhor técnica'
-    select 'Por item', :from => 'Tipo de julgamento'
-    select 'Melhor técnica', :from => 'Tipo de licitação'
-
-    click_button 'Salvar'
-
-    expect(page).to have_notice 'Forma de Julgamento de Licitação editada com sucesso.'
-
-    click_link 'Por item com melhor técnica'
-
-    expect(page).to have_field 'Descrição', :with => 'Por item com melhor técnica'
-    expect(page).to have_select 'Tipo de julgamento', :selected => 'Por item'
-    expect(page).to have_select 'Tipo de licitação', :selected => 'Melhor técnica'
-  end
-
-  scenario 'not allow two kinds with same licitation_kind' do
-    JudgmentForm.make!(:por_item_com_melhor_tecnica)
-    JudgmentForm.make!(:por_lote_com_melhor_tecnica)
+    within_records do
+      uncheck "judgment_form_#{judgment1.id}"
+      uncheck "judgment_form_#{judgment2.id}"
+    end
 
     navigate 'Processo Administrativo/Licitatório > Auxiliar > Formas de Julgamento das Licitações'
 
-    click_link 'Por Item com Melhor Técnica'
+    within_records do
+      expect(page).to_not have_checked_field "judgment_form_#{judgment1.id}"
+      expect(page).to_not have_checked_field "judgment_form_#{judgment2.id}"
+      expect(page).to have_checked_field "judgment_form_#{judgment3.id}"
 
-    select 'Por lote', :from => 'Tipo de julgamento'
+      check "judgment_form_#{judgment2.id}"
+    end
 
-    click_button 'Salvar'
-
-    expect(page).to_not have_notice 'Forma de Julgamento de Licitação editada com sucesso.'
-
-    expect(page).to have_content 'já possui uma forma de julgamento com esse tipo de julgamento e tipo de licitação'
+    within_records do
+      expect(page).to_not have_checked_field "judgment_form_#{judgment1.id}"
+      expect(page).to have_checked_field "judgment_form_#{judgment2.id}"
+      expect(page).to have_checked_field "judgment_form_#{judgment3.id}"
+    end
   end
 end

@@ -1,5 +1,5 @@
 class JudgmentForm < Compras::Model
-  attr_accessible :description, :kind, :licitation_kind
+  attr_accessible :enabled
 
   has_enumeration_for :kind, :with => JudgmentFormKind
   has_enumeration_for :licitation_kind, :with => LicitationKind, :create_helpers => true
