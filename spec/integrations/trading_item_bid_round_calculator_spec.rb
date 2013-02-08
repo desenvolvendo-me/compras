@@ -4,21 +4,25 @@ describe TradingItemBidRoundCalculator do
   describe '#calculate' do
     subject { described_class.new(trading_item) }
 
-    let(:trading_item) { TradingItem.make!(:item_pregao_presencial) }
+    let(:licitation_process) do
+      LicitationProcess.make!(
+        :pregao_presencial,
+        :bidders => [sobrinho, wenderson, nohup])
+    end
+
+    let(:trading) do
+      Trading.make!(
+        :pregao_presencial,
+        :licitation_process => licitation_process)
+    end
+
+    let(:trading_item) { trading.items.first }
     let(:sobrinho) { Bidder.make!(:licitante_sobrinho) }
     let(:wenderson) { Bidder.make!(:licitante) }
     let(:nohup) { Bidder.make!(:licitante_com_proposta_3) }
 
     context 'at stage of round of bidders' do
       before do
-        licitation_process = LicitationProcess.make!(
-          :pregao_presencial,
-          :bidders => [sobrinho, wenderson, nohup])
-
-        Trading.make!(
-          :pregao_presencial,
-          :items => [trading_item],
-          :licitation_process => licitation_process)
 
         TradingItemBid.create!(
           :round => 0,
