@@ -32,7 +32,10 @@
 
 <div class="yui3-g">
   <div class="yui3-u-1-3">
-    <%= f.input :judgment_form %>
+    <%= f.input :judgment_form_id, :as => :select,
+                :collection => f.object.decorator.judgment_forms_available,
+                :selected => f.object.judgment_form_id,
+                :prompt => '' %>
   </div>
 
   <div class="yui3-u-1-3">

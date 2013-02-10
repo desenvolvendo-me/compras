@@ -1,3 +1,3 @@
 class JudgmentFormsController < CrudController
-  actions :filter, :modal, :index, :update
+  actions :filter, :index, :update
 end

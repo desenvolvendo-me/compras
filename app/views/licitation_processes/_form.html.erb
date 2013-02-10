@@ -174,8 +174,16 @@
                            '<%= f.object.administrative_process_object_type %>',
                            '<%= f.object.administrative_process_modality %>');
 
-  $('#licitation_process_judgment_form_id').change(function (e, record) {
-    filterTypesOfCalculation(record.kind, '<%= f.object.administrative_process_object_type %>', '<%= f.object.administrative_process_modality %>');
+  $('#licitation_process_judgment_form_id').change(function() {
+    var options = _(<%= f.object.decorator.judgment_forms_available.to_json.html_safe %>),
+        currentJudgmentFormId = $(this).val();
+
+    options.each(function(judgmentForm) {
+      if (judgmentForm.id == currentJudgmentFormId){
+        filterTypesOfCalculation(judgmentForm.kind, '<%= f.object.administrative_process_object_type %>', '<%= f.object.administrative_process_modality %>');
+        return;
+      }
+    });
   });
 
   $("#licitation_process_type_of_calculation").val("<%= f.object.type_of_calculation %>");

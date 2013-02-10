@@ -11,6 +11,14 @@ class LicitationProcessDecorator
               :administrative_process_object_type_humanize,
               :envelope_opening_date, :status
 
+  def judgment_forms_available(judgment_form_repository = JudgmentForm)
+    if judgment_form
+      Set.new(judgment_form_repository.enabled << judgment_form).sort_by(&:to_s)
+    else
+      judgment_form_repository.enabled
+    end
+  end
+
   def envelope_delivery_time
     localize(super, :format => :hour) if super
   end

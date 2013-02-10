@@ -62,7 +62,7 @@ feature "LicitationProcesses" do
       # testing delegated fields of administrative process (filled by javascript)
       expect(page).to have_field 'Modalidade', :with => 'Pública'
       expect(page).to have_field 'Tipo de objeto', :with => 'Compras e serviços'
-      expect(page).to have_field 'Forma de julgamento', :with => 'Por Item com Melhor Técnica'
+      expect(page).to have_select 'Forma de julgamento', :selected => 'Por Item com Melhor Técnica'
       expect(page).to have_field 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
       expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
       expect(page).to have_field 'Inciso', :with => 'Item 1'
@@ -135,7 +135,7 @@ feature "LicitationProcesses" do
       # testing delegated fields of administrative process
       expect(page).to have_field 'Modalidade', :with => 'Pública'
       expect(page).to have_field 'Tipo de objeto', :with => 'Compras e serviços'
-      expect(page).to have_field 'Forma de julgamento', :with => 'Por Item com Melhor Técnica'
+      expect(page).to have_select 'Forma de julgamento', :selected => 'Por Item com Melhor Técnica'
       expect(page).to have_field 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
       expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
       expect(page).to have_field 'Inciso', :with => 'Item 1'
@@ -217,10 +217,10 @@ feature "LicitationProcesses" do
     expect(page).to_not have_link 'Publicações'
 
     within_tab 'Principal' do
-      fill_modal 'Forma de julgamento', :with => 'Por Lote com Melhor Técnica', :field => 'Descrição'
+      select 'Por Lote com Melhor Técnica', :from => 'Forma de julgamento'
       select 'Menor preço por lote', :from => 'Tipo da apuração'
 
-      fill_modal 'Forma de julgamento', :with => 'Por Item com Menor Preço', :field => 'Descrição'
+      select 'Por Item com Menor Preço', :from => 'Forma de julgamento'
       select 'Menor preço total por item', :from => 'Tipo da apuração'
     end
   end
