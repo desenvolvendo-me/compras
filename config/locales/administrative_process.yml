@@ -14,7 +14,7 @@ pt-BR:
         licitation_modality: "Modalidade"
         item: "Inciso"
         object_type: "Tipo de objeto"
-        judgment_form: "Forma de julgamento"
+        judgment_form_id: "Forma de julgamento"
         summarized_object: "Objeto resumido do processo licitatório"
         description: "Objeto do processo licitatório"
         responsible: "Responsável"

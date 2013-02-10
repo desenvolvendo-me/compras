@@ -8,6 +8,14 @@ class AdministrativeProcessDecorator
 
   attr_header :code_and_year, :date, :object_type, :summarized_object, :status
 
+  def judgment_forms_available(judgment_form_repository = JudgmentForm)
+    if judgment_form
+      Set.new(judgment_form_repository.enabled << judgment_form).sort_by(&:to_s)
+    else
+      judgment_form_repository.enabled
+    end
+  end
+
   def value_estimated
     number_to_currency super if super
   end

@@ -35,7 +35,7 @@ JudgmentForm.blueprint(:por_lote_com_tecnica_e_preco) do
 end
 
 JudgmentForm.blueprint(:global_com_melhor_lance_ou_oferta) do
-  description { 'Por Lote com Técnica e Preço' }
+  description { 'Global com Melhor Lance ou Oferta' }
   kind { JudgmentFormKind::GLOBAL }
   licitation_kind { LicitationKind::BEST_AUCTION_OR_OFFER }
   enabled { true }

@@ -34,6 +34,7 @@
       var objectType = $(this).val();
       if (objectType) {
         filterModalities(objectType);
+        filterJudgmentForm();
         enableModalities();
       } else {
         disableModalities();
@@ -51,6 +52,31 @@
       $('.modal-modality').data('modal-url', url);
     }
 
+    function filterJudgmentForm() {
+      var licitationKindGroups = <%= JudgmentFormLicitationKindByObjectType.new.licitation_kind_groups.to_json.html_safe %>,
+          options = _(<%= f.object.decorator.judgment_forms_available.to_json.html_safe %>),
+          value = $("#administrative_process_object_type").val(),
+          valid_groups = _(licitationKindGroups[value]);
+
+      if (!valid_groups.isUndefined()) {
+        $("#administrative_process_judgment_form_id").html("");
+
+        options.each(function(judgment_form) {
+          valid_groups.each(function(valid_licitation_kind) {
+            if (judgment_form.licitation_kind == valid_licitation_kind) {
+              $("#administrative_process_judgment_form_id").append(function() {
+                return $("<option>").text(judgment_form.description).val(judgment_form.id);
+              });
+            }
+          });
+        });
+
+        <% if f.object.judgment_form %>
+          $("#administrative_process_judgment_form_id option").filter('[value="<%= f.object.judgment_form_id %>"]').attr("selected", "selected");
+        <% end %>
+      }
+    }
+
     function disableModalities() {
       $('.modal-modality').attr("disabled", "disabled");
     }
@@ -58,6 +84,8 @@
     function enableModalities() {
       $('.modal-modality').removeAttr("disabled");
     }
+
+    filterJudgmentForm();
   });
 
   (function () {
@@ -192,14 +220,6 @@
     }
   });
 
-  function filterJudgmentFormLicitationObject() {
-    var licitationObject = $("#administrative_process_object_type").val(),
-        modalUrl = "<%= modal_judgment_forms_path %>?licitation_object=";
-
-    $("#administrative_process_judgment_form").attr("data-modal-url",
-                                                    modalUrl + licitationObject);
-  }
-
   function disablePurchaseSolicitation() {
     $("#administrative_process_purchase_solicitation").attr("disabled", "disabled");
   }
@@ -215,10 +235,4 @@
   function enablePurchaseSolicitationItemGroup() {
     $("#administrative_process_purchase_solicitation_item_group").removeAttr("disabled");
   }
-
-  $("#administrative_process_object_type").change(function() {
-    filterJudgmentFormLicitationObject();
-  });
-
-  filterJudgmentFormLicitationObject();
 </script>

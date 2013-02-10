@@ -29,7 +29,7 @@
 <%= f.input :purchase_solicitation, :modal_url => modal_purchase_solicitations_path(:can_be_grouped => true) %>
 <%= f.input :purchase_solicitation_item_group, :modal_url => modal_purchase_solicitation_item_groups_path(:not_annulled => true, :pending => true) %>
 <%= f.input :licitation_modality, :input_html => { :class => 'modal-modality' } %>
-<%= f.input :judgment_form %>
+<%= f.input :judgment_form_id, :as => :select, :collection => [] %>
 <%= f.input :summarized_object %>
 <%= f.input :description %>
 <%= f.input :responsible %>

@@ -39,7 +39,7 @@ feature "AdministrativeProcesses" do
 
       select 'Compras e serviços', :from => 'Tipo de objeto'
       fill_modal 'Modalidade', :with => 'Pregão presencial', :field => 'Modalidade'
-      fill_modal 'Forma de julgamento', :with => 'Por Item com Melhor Técnica', :field => 'Descrição'
+      select 'Por Item com Melhor Técnica', :from => 'Forma de julgamento'
       fill_in 'Objeto resumido do processo licitatório', :with => 'Objeto resumido'
       fill_in 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
@@ -70,7 +70,7 @@ feature "AdministrativeProcesses" do
       expect(page).to have_field 'Número do protocolo', :with => '00099/2012'
       expect(page).to have_select 'Tipo de objeto', :selected => 'Compras e serviços'
       expect(page).to have_field 'Modalidade', :with => 'Pregão presencial'
-      expect(page).to have_field 'Forma de julgamento', :with => 'Por Item com Melhor Técnica'
+      expect(page).to have_select 'Forma de julgamento', :selected => 'Por Item com Melhor Técnica'
       expect(page).to have_field 'Objeto resumido do processo licitatório', :with => 'Objeto resumido'
       expect(page).to have_field 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
       expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
@@ -110,7 +110,7 @@ feature "AdministrativeProcesses" do
       end
 
       fill_modal 'Modalidade', :with => 'Pregão presencial', :field => 'Modalidade'
-      fill_modal 'Forma de julgamento', :with => 'Por Item com Melhor Técnica', :field => 'Descrição'
+      select 'Por Item com Melhor Técnica', :from => 'Forma de julgamento'
       fill_in 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
       select 'Aguardando', :from => 'Status do processo administrativo'
@@ -146,7 +146,7 @@ feature "AdministrativeProcesses" do
       expect(page).to have_field 'Número do protocolo', :with => '00099/2012'
       expect(page).to have_select 'Tipo de objeto', :selected => 'Compras e serviços'
       expect(page).to have_field 'Modalidade', :with => 'Pregão presencial'
-      expect(page).to have_field 'Forma de julgamento', :with => 'Por Item com Melhor Técnica'
+      expect(page).to have_select 'Forma de julgamento', :selected => 'Por Item com Melhor Técnica'
       expect(page).to have_field 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
       expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
       expect(page).to have_select 'Status do processo administrativo', :selected => 'Aguardando'
@@ -440,7 +440,7 @@ feature "AdministrativeProcesses" do
 
       select 'Compras e serviços', :from => 'Tipo de objeto'
       fill_modal 'Modalidade', :with => 'Pregão presencial', :field => 'Modalidade'
-      fill_modal 'Forma de julgamento', :with => 'Por Lote com Melhor Técnica', :field => 'Descrição'
+      select 'Por Lote com Melhor Técnica', :from => 'Forma de julgamento'
       fill_in 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras 2'
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
       select 'Aguardando', :from => 'Status do processo administrativo'
@@ -467,7 +467,7 @@ feature "AdministrativeProcesses" do
       expect(page).to have_field 'Número do protocolo', :with => '00099/2012'
       expect(page).to have_select 'Tipo de objeto', :selected => 'Compras e serviços'
       expect(page).to have_field 'Modalidade', :selected => 'Pregão presencial'
-      expect(page).to have_field 'Forma de julgamento', :with => 'Por Lote com Melhor Técnica'
+      expect(page).to have_select 'Forma de julgamento', :selected => 'Por Lote com Melhor Técnica'
       expect(page).to have_field 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras 2'
       expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
       expect(page).to have_select 'Status do processo administrativo', :selected => 'Aguardando'
@@ -775,6 +775,12 @@ feature "AdministrativeProcesses" do
   end
 
   scenario 'when select disposals_of_assets as object_type should show only best_auction_or_offer' do
+    JudgmentForm.make!(:global_com_menor_preco) # LOWEST_PRICE
+    JudgmentForm.make!(:por_item_com_melhor_tecnica) # BEST_TECHNIQUE
+    JudgmentForm.make!(:por_lote_com_tecnica_e_preco) # TECHNICAL_AND_PRICE
+    JudgmentForm.make!(:global_com_melhor_lance_ou_oferta) # BEST_AUCTION_OR_OFFER
+    JudgmentForm.make!(:por_item_com_menor_preco) # LOWEST_PRICE
+
     navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
     click_link 'Criar Processo Administrativo'
@@ -782,15 +788,18 @@ feature "AdministrativeProcesses" do
     within_tab 'Principal' do
       select 'Alienação de bens', :from => 'Tipo de objeto'
 
-      within_modal 'Forma de julgamento' do
-        expect(page).to have_select('Tipo de licitação',
-                                :selected => 'Melhor lance ou oferta',
-                                :options => ['Melhor lance ou oferta'])
-      end
+      expect(page).to have_select('Forma de julgamento',
+                                  :options => ['Global com Melhor Lance ou Oferta'])
     end
   end
 
   scenario 'when select concessions_and_permits as object_type should show only best_auction_or_offer' do
+    JudgmentForm.make!(:global_com_menor_preco) # LOWEST_PRICE
+    JudgmentForm.make!(:por_item_com_melhor_tecnica) # BEST_TECHNIQUE
+    JudgmentForm.make!(:por_lote_com_tecnica_e_preco) # TECHNICAL_AND_PRICE
+    JudgmentForm.make!(:global_com_melhor_lance_ou_oferta) # BEST_AUCTION_OR_OFFER
+    JudgmentForm.make!(:por_item_com_menor_preco) # LOWEST_PRICE
+
     navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
     click_link 'Criar Processo Administrativo'
@@ -798,15 +807,18 @@ feature "AdministrativeProcesses" do
     within_tab 'Principal' do
       select 'Concessões e permissões', :from => 'Tipo de objeto'
 
-      within_modal 'Forma de julgamento' do
-        expect(page).to have_select('Tipo de licitação',
-                                :selected => 'Melhor lance ou oferta',
-                                :options => ['Melhor lance ou oferta'])
-      end
+      expect(page).to have_select('Forma de julgamento',
+                                  :options => ['Global com Melhor Lance ou Oferta'])
     end
   end
 
   scenario 'when select call_notice as object_type should show only best_technique' do
+    JudgmentForm.make!(:global_com_menor_preco) # LOWEST_PRICE
+    JudgmentForm.make!(:por_item_com_melhor_tecnica) # BEST_TECHNIQUE
+    JudgmentForm.make!(:por_lote_com_tecnica_e_preco) # TECHNICAL_AND_PRICE
+    JudgmentForm.make!(:global_com_melhor_lance_ou_oferta) # BEST_AUCTION_OR_OFFER
+    JudgmentForm.make!(:por_item_com_menor_preco) # LOWEST_PRICE
+
     navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
     click_link 'Criar Processo Administrativo'
@@ -814,15 +826,18 @@ feature "AdministrativeProcesses" do
     within_tab 'Principal' do
       select 'Edital de chamamento/credenciamento', :from => 'Tipo de objeto'
 
-      within_modal 'Forma de julgamento' do
-        expect(page).to have_select('Tipo de licitação',
-                                :selected => 'Melhor técnica',
-                                :options => ['Melhor técnica'])
-      end
+      expect(page).to have_select('Forma de julgamento',
+                                  :options => ['Por Item com Melhor Técnica'])
     end
   end
 
   scenario 'when select construction_and_engineering_services as object_type should show only lowest_price and best_technique' do
+    JudgmentForm.make!(:global_com_menor_preco) # LOWEST_PRICE
+    JudgmentForm.make!(:por_item_com_melhor_tecnica) # BEST_TECHNIQUE
+    JudgmentForm.make!(:por_lote_com_tecnica_e_preco) # TECHNICAL_AND_PRICE
+    JudgmentForm.make!(:global_com_melhor_lance_ou_oferta) # BEST_AUCTION_OR_OFFER
+    JudgmentForm.make!(:por_item_com_menor_preco) # LOWEST_PRICE
+
     navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
     click_link 'Criar Processo Administrativo'
@@ -830,15 +845,18 @@ feature "AdministrativeProcesses" do
     within_tab 'Principal' do
       select 'Obras e serviços de engenharia', :from => 'Tipo de objeto'
 
-      within_modal 'Forma de julgamento' do
-        expect(page).to have_select('Tipo de licitação',
-                                :selected => 'Melhor técnica',
-                                :options => ['Melhor técnica', 'Menor preço'])
-      end
+      expect(page).to have_select('Forma de julgamento',
+                                  :options => ['Por Item com Melhor Técnica', 'Por Item com Menor Preço'])
     end
   end
 
   scenario 'when select purchase_and_services as object_type should show only lowest_price and best_technique' do
+    JudgmentForm.make!(:global_com_menor_preco) # LOWEST_PRICE
+    JudgmentForm.make!(:por_item_com_melhor_tecnica) # BEST_TECHNIQUE
+    JudgmentForm.make!(:por_lote_com_tecnica_e_preco) # TECHNICAL_AND_PRICE
+    JudgmentForm.make!(:global_com_melhor_lance_ou_oferta) # BEST_AUCTION_OR_OFFER
+    JudgmentForm.make!(:por_item_com_menor_preco) # LOWEST_PRICE
+
     navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
     click_link 'Criar Processo Administrativo'
@@ -846,15 +864,18 @@ feature "AdministrativeProcesses" do
     within_tab 'Principal' do
       select 'Compras e serviços', :from => 'Tipo de objeto'
 
-      within_modal 'Forma de julgamento' do
-        expect(page).to have_select('Tipo de licitação',
-                                :selected => 'Melhor técnica',
-                                :options => ['Melhor técnica', 'Menor preço'])
-      end
+      expect(page).to have_select('Forma de julgamento',
+                                  :options => ['Por Item com Melhor Técnica', 'Por Item com Menor Preço'])
     end
   end
 
   scenario 'when clear object_type should not filter licitation_kind in judgment_form modal' do
+    JudgmentForm.make!(:global_com_menor_preco) # LOWEST_PRICE
+    JudgmentForm.make!(:por_item_com_melhor_tecnica) # BEST_TECHNIQUE
+    JudgmentForm.make!(:por_lote_com_tecnica_e_preco) # TECHNICAL_AND_PRICE
+    JudgmentForm.make!(:global_com_melhor_lance_ou_oferta) # BEST_AUCTION_OR_OFFER
+    JudgmentForm.make!(:por_item_com_menor_preco) # LOWEST_PRICE
+
     navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
     click_link 'Criar Processo Administrativo'
@@ -864,18 +885,7 @@ feature "AdministrativeProcesses" do
 
       select '', :from => 'Tipo de objeto'
 
-      within_modal 'Forma de julgamento' do
-        expect(page).to have_select('Tipo de licitação',
-                                :selected => '',
-                                :options => [
-                                  'Maior desconto sobre o item',
-                                  'Maior desconto sobre o lote',
-                                  'Melhor lance ou oferta',
-                                  'Melhor técnica',
-                                  'Menor preço',
-                                  'Técnica e preço'
-                                ])
-      end
+      expect(page).to have_select('Forma de julgamento', :options => [])
     end
   end
 
@@ -1028,7 +1038,7 @@ feature "AdministrativeProcesses" do
       end
 
       fill_modal 'Modalidade', :with => 'Pregão presencial', :field => 'Modalidade'
-      fill_modal 'Forma de julgamento', :with => 'Por Item com Melhor Técnica', :field => 'Descrição'
+      select 'Por Item com Melhor Técnica', :from => 'Forma de julgamento'
       fill_in 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
       select 'Aguardando', :from => 'Status do processo administrativo'
@@ -1307,7 +1317,7 @@ feature "AdministrativeProcesses" do
 
       select 'Compras e serviços', :from => 'Tipo de objeto'
       fill_modal 'Modalidade', :with => 'Pregão presencial', :field => 'Modalidade'
-      fill_modal 'Forma de julgamento', :with => 'Por Item com Melhor Técnica', :field => 'Descrição'
+      select 'Por Item com Melhor Técnica', :from =>'Forma de julgamento'
       fill_in 'Objeto resumido do processo licitatório', :with => 'Objeto resumido'
       fill_in 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
@@ -1407,7 +1417,7 @@ feature "AdministrativeProcesses" do
 
       select 'Compras e serviços', :from => 'Tipo de objeto'
       fill_modal 'Modalidade', :with => 'Pregão presencial', :field => 'Modalidade'
-      fill_modal 'Forma de julgamento', :with => 'Por Item com Melhor Técnica', :field => 'Descrição'
+      select 'Por Item com Melhor Técnica', :from => 'Forma de julgamento'
       fill_in 'Objeto resumido do processo licitatório', :with => 'Objeto resumido'
       fill_in 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
       select 'Aguardando', :from => 'Status do processo administrativo'
@@ -1443,7 +1453,7 @@ feature "AdministrativeProcesses" do
       expect(page).to have_select 'Tipo de objeto', :selected => 'Compras e serviços'
       expect(page).to have_field 'Solicitação de compra', :with => '1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
       expect(page).to have_field 'Modalidade', :with => 'Pregão presencial'
-      expect(page).to have_field 'Forma de julgamento', :with => 'Por Item com Melhor Técnica'
+      expect(page).to have_select 'Forma de julgamento', :selected => 'Por Item com Melhor Técnica'
       expect(page).to have_field 'Objeto resumido do processo licitatório', :with => 'Objeto resumido'
       expect(page).to have_field 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
       expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'

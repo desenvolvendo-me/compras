@@ -154,4 +154,47 @@ describe AdministrativeProcessDecorator do
       expect(subject.code_and_year).to eq "1/2012"
     end
   end
+
+  describe '#judgment_forms_available' do
+    let(:judgment_form) { double(:judgment_form, :to_s => 'judgment_form') }
+    let(:judgment_form_repository) { double(:judgment_form_repository) }
+
+    context 'when there is a judgment_form selected' do
+      before do
+        component.stub(:judgment_form => judgment_form)
+      end
+
+      context 'when judgment_form selected is disabled' do
+        before do
+          judgment_form.stub(:enabled => false)
+        end
+
+        it 'should return all available and the selected' do
+          judgment_form_repository.stub(:enabled => ['available1', 'available2'])
+
+          expect(subject.judgment_forms_available(judgment_form_repository)).to eq ['available1', 'available2', judgment_form]
+        end
+      end
+
+      context 'when judgment_form selected is enabled' do
+        before do
+          judgment_form.stub(:enabled => true)
+        end
+
+        it 'should return all available' do
+          judgment_form_repository.stub(:enabled => ['available1', 'available2', judgment_form])
+
+          expect(subject.judgment_forms_available(judgment_form_repository)).to eq ['available1', 'available2', judgment_form]
+        end
+      end
+
+      context 'when there is no judgment_form' do
+        it 'should return all available' do
+          judgment_form_repository.stub(:enabled => ['available1', 'available2', judgment_form])
+
+          expect(subject.judgment_forms_available(judgment_form_repository)).to eq ['available1', 'available2', judgment_form]
+        end
+      end
+    end
+  end
 end

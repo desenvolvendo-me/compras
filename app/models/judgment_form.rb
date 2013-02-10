@@ -11,6 +11,8 @@ class JudgmentForm < Compras::Model
   validates :description, :uniqueness => { :allow_blank => true }
   validates :kind, :uniqueness => { :scope => :licitation_kind, :message => :already_in_use_for_this_licitation_kind, :allow_blank => true }
 
+  scope :enabled, lambda { where { enabled.eq(true) } }
+
   orderize :description
   filterize
 
