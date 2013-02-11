@@ -1,5 +1,9 @@
 # encoding: utf-8
 module LicitationProcessesHelper
+  def edit_title
+    "Editar Processo Licitatório #{resource} do Processo Administrativo #{resource.administrative_process}"
+  end
+
   def classification_link
     return unless resource.persisted?
 
