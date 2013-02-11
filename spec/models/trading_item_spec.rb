@@ -499,7 +499,7 @@ describe TradingItem do
 
       context 'when changed minimum_reduction_value' do
         it 'should not be valid' do
-          subject.stub(:changed_attributes => { :minimum_reduction_value => 10.1 })
+          subject.stub(:changed_attributes => { 'minimum_reduction_value' => 10.1 })
           subject.stub(:validation_context).and_return(:update)
 
           subject.valid?
@@ -510,7 +510,7 @@ describe TradingItem do
 
       context 'when changed minimum_reduction_percent' do
         it 'should not be valid' do
-          subject.stub(:changed_attributes => { :minimum_reduction_percent => 10.1 })
+          subject.stub(:changed_attributes => { 'minimum_reduction_percent' => 10.1 })
           subject.stub(:validation_context).and_return(:update)
 
           subject.valid?

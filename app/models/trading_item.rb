@@ -157,9 +157,9 @@ class TradingItem < Compras::Model
   def minimum_reduction_when_blocked
     return unless block_minimum_reduction?
 
-    if attribute_changed?(:minimum_reduction_value)
+    if minimum_reduction_value_changed?
       errors.add(:minimum_reduction_value, :cannot_be_changed_when_closed_or_started)
-    elsif attribute_changed?(:minimum_reduction_percent)
+    elsif minimum_reduction_percent_changed?
       errors.add(:minimum_reduction_percent, :cannot_be_changed_when_closed_or_started)
     end
   end
