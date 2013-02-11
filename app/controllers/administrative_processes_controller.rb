@@ -27,13 +27,6 @@ class AdministrativeProcessesController < CrudController
     end
   end
 
-  def create
-    object = build_resource
-    object.status = AdministrativeProcessStatus::WAITING
-
-    super
-  end
-
   def show
     if resource.released?
       render :layout => 'report'
@@ -46,6 +39,8 @@ class AdministrativeProcessesController < CrudController
 
   def create_resource(object)
     object.transaction do
+      object.status = AdministrativeProcessStatus::WAITING
+
       if super
         if params[:administrative_process]
           AdministrativeProcessBudgetAllocationCloner.clone(
