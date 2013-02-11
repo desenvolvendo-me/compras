@@ -10,6 +10,7 @@ feature "JudgmentForms" do
     navigate 'Processo Administrativo/Licitatório > Auxiliar > Formas de Julgamento das Licitações'
 
     expect(page).to_not have_link 'Criar Forma de Julgamento de Licitação'
+    expect(page).to_not have_link 'Filtrar Formas de Julgamento de Licitação'
   end
 
   scenario 'enable and disable judgment_forms through ajax' do
