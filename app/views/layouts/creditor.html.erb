@@ -45,20 +45,19 @@
             </li>
           </ul>
         </div>
-
       </div>
 
-        <div id="flash">
-          <%= render 'layouts/flash' %>
+      <div id="flash">
+        <%= render 'layouts/flash' %>
+      </div>
+
+      <div id="content">
+        <div class="banner">
+          <%= prefecture_image %>
         </div>
 
-        <div id="content">
-          <div class="banner">
-            <%= prefecture_image %>
-          </div>
-
-          <%= yield %>
-        </div>
+        <%= yield %>
+      </div>
     </div>
   </body>
 </html>
