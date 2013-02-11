@@ -1410,8 +1410,6 @@ feature "LicitationProcesses" do
 
     expect(page).to have_notice 'Processo Licitatório criado com sucesso.'
 
-    expect(page).to have_notice 'Processo Licitatório criado com sucesso.'
-
     within_tab 'Principal' do
       expect(page).to have_field 'Local de entrega', :with => 'Secretaria da Educação'
 
