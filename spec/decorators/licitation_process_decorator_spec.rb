@@ -335,4 +335,12 @@ describe LicitationProcessDecorator do
       end
     end
   end
+
+  describe '#subtitle' do
+    it 'should returns the subtitle based at code and year' do
+      subject.stub(:code_and_year => '1/2013')
+
+      expect(subject.subtitle).to eq '1/2013'
+    end
+  end
 end

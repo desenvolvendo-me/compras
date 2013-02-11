@@ -243,7 +243,8 @@ feature "LicitationProcesses" do
 
     click_link 'Editar processo licitatório'
 
-    expect(page).to have_content "Editar Processo Licitatório 1/2012 do Processo Administrativo 1/2012"
+    expect(page).to have_title "Editar Processo Licitatório 1/2012 do Processo Administrativo 1/2012"
+    expect(page).to have_subtitle "1/2012"
 
     expect(page).to have_link 'Publicações'
 

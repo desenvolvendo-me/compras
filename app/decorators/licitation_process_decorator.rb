@@ -87,6 +87,10 @@ class LicitationProcessDecorator
     administrative_process.decorator.code_and_year
   end
 
+  def subtitle
+    code_and_year
+  end
+
   private
 
   def current_publication_of

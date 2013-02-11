@@ -41,4 +41,8 @@ class AdministrativeProcessDecorator
   def code_and_year
     "#{process}/#{year}"
   end
+
+  def subtitle
+    code_and_year
+  end
 end

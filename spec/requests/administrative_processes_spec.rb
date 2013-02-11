@@ -730,6 +730,7 @@ feature "AdministrativeProcesses" do
     end
 
     expect(page).to have_link 'Editar processo licitatório'
+    expect(page).to have_subtitle '1/2012'
   end
 
   scenario "should not have a release and annull button at new" do

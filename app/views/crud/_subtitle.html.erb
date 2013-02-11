@@ -1,0 +1,5 @@
+<% if resource.decorated? && resource.decorator.respond_to?(:subtitle) %>
+  <div id="subtitle">
+    <%= resource.decorator.subtitle %>
+  </div>
+<% end %>

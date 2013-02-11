@@ -470,6 +470,8 @@ feature "DirectPurchases" do
       page.find('a').click
     end
 
+    expect(page).to have_subtitle '1/2012'
+
     within_tab 'Principal' do
       expect(page).to have_disabled_field 'Compra'
       fill_in 'Data da compra', :with => '19/03/2012'

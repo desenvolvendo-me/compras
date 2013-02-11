@@ -149,6 +149,20 @@ module Matchers
     failure_message_for_should_not do |page|
       "expected #{page.text.inspect} to not have title #{field.inspect}"
     end
+  end
+
+  matcher :have_subtitle do |value|
+    match do |page|
+      expect(page).to have_css("#subtitle", :text => value)
+    end
+
+    failure_message_for_should do |page|
+      "expected #{page.text.inspect} to have subtitle #{value.inspect}"
+    end
+
+    failure_message_for_should_not do |page|
+      "expected #{page.text.inspect} to not have subtitle #{field.inspect}"
+    end
 
   end
 end
