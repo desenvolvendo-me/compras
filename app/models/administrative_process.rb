@@ -5,7 +5,7 @@ class AdministrativeProcess < Compras::Model
                   :date, :year, :protocol, :object_type, :status, :description,
                   :judgment_form_id, :purchase_solicitation_item_group_id,
                   :administrative_process_budget_allocations_attributes,
-                  :licitation_modality_id, :summarized_object
+                  :licitation_modality_id, :summarized_object, :new_modality
 
   attr_readonly :process, :year
 
@@ -15,6 +15,7 @@ class AdministrativeProcess < Compras::Model
                       :create_helpers => true
   has_enumeration_for :status, :with => AdministrativeProcessStatus,
                       :create_helpers => true, :create_scopes => true
+  has_enumeration_for :new_modality, :with => Modality
 
   belongs_to :responsible, :class_name => 'Employee'
   belongs_to :judgment_form

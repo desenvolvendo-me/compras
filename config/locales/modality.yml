@@ -1,0 +1,9 @@
+pt-BR:
+  enumerations:
+    modality:
+      concurrence: 'Concorrência'
+      taken_price: 'Tomada de Preço'
+      invitation:  'Convite'
+      competition: 'Concurso'
+      auction:     'Leilão'
+      trading:     'Pregão'

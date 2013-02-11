@@ -32,6 +32,7 @@ feature "AdministrativeProcesses" do
       fill_in 'Data do processo', :with => '07/03/2012'
       fill_in 'Número do protocolo', :with => '00099/2012'
       select 'Compras e serviços', :from => 'Tipo de objeto'
+      select 'Pregão', :from => 'Nova modalidade'
       fill_modal 'Modalidade', :with => 'Pregão presencial', :field => 'Modalidade'
 
       select 'Alienação de bens', :from => 'Tipo de objeto'
@@ -69,6 +70,7 @@ feature "AdministrativeProcesses" do
       expect(page).to have_field 'Data do processo', :with => '07/03/2012'
       expect(page).to have_field 'Número do protocolo', :with => '00099/2012'
       expect(page).to have_select 'Tipo de objeto', :selected => 'Compras e serviços'
+      expect(page).to have_select 'Nova modalidade', :selected => 'Pregão'
       expect(page).to have_field 'Modalidade', :with => 'Pregão presencial'
       expect(page).to have_select 'Forma de julgamento', :selected => 'Por Item com Melhor Técnica'
       expect(page).to have_field 'Objeto resumido do processo licitatório', :with => 'Objeto resumido'

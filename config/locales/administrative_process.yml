@@ -12,6 +12,7 @@ pt-BR:
         date: "Data do processo"
         protocol: "Número do protocolo"
         licitation_modality: "Modalidade"
+        new_modality: "Nova modalidade"
         item: "Inciso"
         object_type: "Tipo de objeto"
         judgment_form_id: "Forma de julgamento"
