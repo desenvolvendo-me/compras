@@ -41,10 +41,6 @@ class BiddersController < CrudController
 
   protected
 
-  def main_controller_name
-    'administrative_processes'
-  end
-
   def parent
     @parent ||= parent_from_params_or_bidder
   end

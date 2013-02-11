@@ -24,11 +24,6 @@ class PurchaseSolicitationLiberationsController < CrudController
 
   protected
 
-  def main_controller_name
-    'purchase_solicitations'
-  end
-
-
   def create_resource(object)
     object.transaction do
       return unless super

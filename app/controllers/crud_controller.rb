@@ -98,7 +98,7 @@ class CrudController < ApplicationController
   end
 
   def main_controller_name
-    controller_name
+    MainControllerGetter.new(controller_name).name
   end
 
   def authorize_resource!

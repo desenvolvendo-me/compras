@@ -33,10 +33,6 @@ class TradingItemBidRoundOfBidsController < CrudController
 
   protected
 
-  def main_controller_name
-    'tradings'
-  end
-
   def create_resource(object)
     object.transaction do
       object.stage  = TradingItemBidStage::ROUND_OF_BIDS

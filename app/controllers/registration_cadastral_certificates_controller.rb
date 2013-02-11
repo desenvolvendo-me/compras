@@ -27,10 +27,4 @@ class RegistrationCadastralCertificatesController < CrudController
       @parent = Creditor.find(params[:creditor_id])
     end
   end
-
-  protected
-
-  def main_controller_name
-    'creditors'
-  end
 end

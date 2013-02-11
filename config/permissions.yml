@@ -1,0 +1,19 @@
+permissions:
+  delegations:
+    bidders: administrative_processes
+    bidder_disqualifications: tradings
+    contract_terminations: contracts
+    judgment_commission_advices: licitation_processes
+    licitation_processes: administrative_processes
+    licitation_process_lots: administrative_processes
+    licitation_process_publications: administrative_processes
+    occurrence_contractual_historics: contracts
+    price_collection_proposals: price_collections
+    purchase_solicitation_liberations: purchase_solicitations
+    registration_cadastral_certificates: creditors
+    trading_closings: tradings
+    trading_items: tradings
+    trading_item_bid_negotiations: tradings
+    trading_item_bid_proposals: tradings
+    trading_item_bid_round_of_bids: tradings
+    trading_item_closings: tradings

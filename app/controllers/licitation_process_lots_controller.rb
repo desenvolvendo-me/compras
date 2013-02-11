@@ -28,10 +28,6 @@ class LicitationProcessLotsController < CrudController
 
   protected
 
-  def main_controller_name
-    'administrative_processes'
-  end
-
   def updatable?
     if params[:licitation_process_id]
       parent = LicitationProcess.find(params[:licitation_process_id])

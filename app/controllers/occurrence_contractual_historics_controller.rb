@@ -29,8 +29,4 @@ class OccurrenceContractualHistoricsController < CrudController
   def parent_id
     params[:contract_id]
   end
-
-  def main_controller_name
-    'contracts'
-  end
 end

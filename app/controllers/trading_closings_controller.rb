@@ -19,10 +19,6 @@ class TradingClosingsController < CrudController
 
   private
 
-  def main_controller_name
-    'tradings'
-  end
-
   def parent
     @parent ||= parent_from_params_or_resource
   end

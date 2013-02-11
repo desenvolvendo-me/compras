@@ -23,10 +23,6 @@ class ContractTerminationsController < CrudController
 
   protected
 
-  def main_controller_name
-    'contracts'
-  end
-
   def create_resource(object)
     object.year = Date.current.year
 

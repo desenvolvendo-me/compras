@@ -20,10 +20,6 @@ class TradingItemClosingsController < CrudController
 
   protected
 
-  def main_controller_name
-    'tradings'
-  end
-
   def create_resource(object)
     object.transaction do
       object.bidder = TradingItemWinner.winner(trading_item)

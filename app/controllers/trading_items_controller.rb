@@ -27,10 +27,6 @@ class TradingItemsController < CrudController
 
   protected
 
-  def main_controller_name
-    'tradings'
-  end
-
   def authorize_resource!
 
     if action_name == 'classification' || action_name == 'proposal_report' || action_name == 'offers'

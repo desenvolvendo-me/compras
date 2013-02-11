@@ -32,10 +32,6 @@ class BidderDisqualificationsController < CrudController
 
   protected
 
-  def main_controller_name
-    'tradings'
-  end
-
   def trading_item
     @trading_item = TradingItem.find(params[:trading_item_id])
   end

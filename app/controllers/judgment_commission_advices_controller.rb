@@ -30,8 +30,4 @@ class JudgmentCommissionAdvicesController < CrudController
   def parent_id
     params[:licitation_process_id]
   end
-
-  def main_controller_name
-    'licitation_processes'
-  end
 end

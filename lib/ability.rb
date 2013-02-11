@@ -3,7 +3,7 @@ class Ability
 
   def initialize(user = nil)
     alias_action :read, :create, :update, :to => :modify
-    alias_action :filter, :modal, :to => :read
+    alias_action :edit, :filter, :modal, :to => :read
 
     return unless user
 

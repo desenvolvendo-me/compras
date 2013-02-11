@@ -4,7 +4,7 @@ class PriceCollectionProposalsController < CrudController
   protected
 
   def main_controller_name
-    current_user && current_user.creditor? ? super : 'price_collections'
+    current_user && current_user.creditor? ? 'price_collection_proposals' : super
   end
 
   def begin_of_association_chain

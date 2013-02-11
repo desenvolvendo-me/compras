@@ -27,10 +27,6 @@ class TradingItemBidProposalsController < CrudController
 
   protected
 
-  def main_controller_name
-    'tradings'
-  end
-
   def interpolation_options
     { :resource_name => 'Proposta' }
   end
