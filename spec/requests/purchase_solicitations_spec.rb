@@ -855,7 +855,7 @@ feature "PurchaseSolicitations" do
 
       within '.purchase-solicitation-budget-allocation:last' do
         within_modal 'Dotação' do
-          expect(page).to have_field 'Estrutura orçamentária', :with => '1 - Secretaria de Educação'
+          expect(page).to have_disabled_field 'Estrutura orçamentária', :with => '1 - Secretaria de Educação'
 
           click_link 'Voltar'
         end

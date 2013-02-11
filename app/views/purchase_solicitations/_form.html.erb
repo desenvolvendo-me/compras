@@ -77,6 +77,7 @@
     var url = "<%= modal_budget_allocations_path %>",
     budget_structure_id = $("#purchase_solicitation_budget_structure_id").val(),
     params = {
+      locked_fields: ['budget_structure'],
       budget_structure_id: budget_structure_id
     }
 

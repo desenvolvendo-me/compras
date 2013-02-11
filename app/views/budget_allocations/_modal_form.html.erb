@@ -1,6 +1,6 @@
 <%= f.input :code %>
 <%= f.input :descriptor %>
-<%= f.input :budget_structure %>
+<%= f.input :budget_structure, :disabled => params[:locked_fields].try(:include?, 'budget_structure') %>
 <%= f.input :function, :as => :modal, :hidden_field => :function_id %>
 <%= f.input :subfunction %>
 <%= f.input :government_program %>
