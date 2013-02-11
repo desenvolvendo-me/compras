@@ -748,7 +748,7 @@ feature "TradingItemBids" do
       end
     end
 
-    expect(page).to have_title 'Editar Oferta'
+    expect(page).to have_title 'Editar Proposta'
 
     fill_in 'Valor da proposta', :with => '80,00'
 

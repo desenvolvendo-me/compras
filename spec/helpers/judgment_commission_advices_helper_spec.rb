@@ -11,4 +11,15 @@ describe JudgmentCommissionAdvicesHelper do
       expect(helper.edit_title).to eq 'Editar Parecer da Comissão Julgadora Gabriel Sobrinho do Processo Licitatório 1/2013'
     end
   end
+
+  describe '#new_title' do
+    let(:resource) { double(:resource, :licitation_process => '1/2013') }
+
+    it 'should return the title for new' do
+      helper.stub(:singular => 'Parecer da Comissão Julgadora')
+      helper.stub(:resource => resource)
+
+      expect(helper.new_title).to eq 'Criar Parecer da Comissão Julgadora para o Processo Licitatório 1/2013'
+    end
+  end
 end

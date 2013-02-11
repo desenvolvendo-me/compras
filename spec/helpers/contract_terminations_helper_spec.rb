@@ -11,4 +11,14 @@ describe ContractTerminationsHelper do
       expect(helper.edit_title).to eq 'Editar Rescisão 10 do Contrato 1/2013'
     end
   end
+
+  describe '#new_title' do
+    let(:resource) { double(:resource, :contract=> '1/2013') }
+
+    it 'should return the title for new' do
+      helper.stub(:resource => resource)
+
+      expect(helper.new_title).to eq 'Criar nova Rescisão Contratual para Contrato 1/2013'
+    end
+  end
 end

@@ -11,4 +11,15 @@ describe LicitationProcessLotsHelper do
       expect(helper.edit_title).to eq 'Editar 2/2013 do Processo Licitatório 1/2013'
     end
   end
+
+  describe '#new_title' do
+    let(:resource) { double(:resource, :licitation_process => '1/2013') }
+
+    it 'should return the title for new' do
+      helper.stub(:singular => 'Lote')
+      helper.stub(:resource => resource)
+
+      expect(helper.new_title).to eq 'Criar Lote no Processo Licitatório 1/2013'
+    end
+  end
 end

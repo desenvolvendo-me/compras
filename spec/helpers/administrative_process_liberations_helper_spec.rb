@@ -11,4 +11,14 @@ describe AdministrativeProcessLiberationsHelper do
       expect(helper.edit_title).to eq 'Liberação do Processo Administrativo 1/2013'
     end
   end
+
+  describe '#new_title' do
+    let(:resource) { double(:resource, :administrative_process => '1/2013') }
+
+    it 'should return the title for new' do
+      helper.stub(:resource => resource)
+
+      expect(helper.new_title).to eq 'Liberar Processo Administrativo 1/2013'
+    end
+  end
 end
