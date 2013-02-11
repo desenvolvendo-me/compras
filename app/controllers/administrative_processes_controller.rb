@@ -37,6 +37,10 @@ class AdministrativeProcessesController < CrudController
 
   protected
 
+  def interpolation_options
+    { :resource_name => "#{resource_class.model_name.human} #{resource.process}/#{resource.year}" }
+  end
+
   def create_resource(object)
     object.transaction do
       object.status = AdministrativeProcessStatus::WAITING

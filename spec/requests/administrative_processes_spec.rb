@@ -55,7 +55,7 @@ feature "AdministrativeProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo Administrativo criado com sucesso.'
+    expect(page).to have_notice 'Processo Administrativo 1/2012 criado com sucesso.'
 
     within_records do
       page.find('a').click
@@ -131,7 +131,7 @@ feature "AdministrativeProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo Administrativo criado com sucesso.'
+    expect(page).to have_notice 'Processo Administrativo 1/2012 criado com sucesso.'
 
     within_records do
       page.find('a').click
@@ -255,7 +255,7 @@ feature "AdministrativeProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo Administrativo editado com sucesso.'
+    expect(page).to have_notice 'Processo Administrativo 1/2012 editado com sucesso.'
 
     within_records do
       page.find('a').click
@@ -274,7 +274,7 @@ feature "AdministrativeProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo Administrativo editado com sucesso.'
+    expect(page).to have_notice 'Processo Administrativo 1/2012 editado com sucesso.'
 
     navigate 'Processos de Compra > Agrupamentos de Itens de Solicitações de Compra'
 
@@ -452,7 +452,7 @@ feature "AdministrativeProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo Administrativo editado com sucesso.'
+    expect(page).to have_notice 'Processo Administrativo 1/2012 editado com sucesso.'
 
     within_records do
       page.find('a').click
@@ -651,7 +651,7 @@ feature "AdministrativeProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo Administrativo editado com sucesso.'
+    expect(page).to have_notice 'Processo Administrativo 1/2012 editado com sucesso.'
 
     navigate 'Processos de Compra > Agrupamentos de Itens de Solicitações de Compra'
 
@@ -918,7 +918,7 @@ feature "AdministrativeProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo Administrativo editado com sucesso.'
+    expect(page).to have_notice 'Processo Administrativo 1/2012 editado com sucesso.'
 
     within_records do
       page.find('a').click
@@ -930,7 +930,7 @@ feature "AdministrativeProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo Administrativo editado com sucesso.'
+    expect(page).to have_notice 'Processo Administrativo 1/2012 editado com sucesso.'
 
     within_records do
       page.find('a').click
@@ -969,7 +969,7 @@ feature "AdministrativeProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo Administrativo editado com sucesso.'
+    expect(page).to have_notice 'Processo Administrativo 1/2012 editado com sucesso.'
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
@@ -997,7 +997,7 @@ feature "AdministrativeProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo Administrativo editado com sucesso.'
+    expect(page).to have_notice 'Processo Administrativo 1/2012 editado com sucesso.'
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
@@ -1050,7 +1050,7 @@ feature "AdministrativeProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo Administrativo criado com sucesso.'
+    expect(page).to have_notice 'Processo Administrativo 1/2012 criado com sucesso.'
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
@@ -1111,7 +1111,7 @@ feature "AdministrativeProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo Administrativo editado com sucesso.'
+    expect(page).to have_notice 'Processo Administrativo 1/2012 editado com sucesso.'
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
@@ -1143,7 +1143,7 @@ feature "AdministrativeProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo Administrativo editado com sucesso.'
+    expect(page).to have_notice 'Processo Administrativo 1/2012 editado com sucesso.'
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
@@ -1197,7 +1197,7 @@ feature "AdministrativeProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo Administrativo editado com sucesso.'
+    expect(page).to have_notice 'Processo Administrativo 1/2012 editado com sucesso.'
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
@@ -1239,7 +1239,7 @@ feature "AdministrativeProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo Administrativo editado com sucesso.'
+    expect(page).to have_notice 'Processo Administrativo 1/2012 editado com sucesso.'
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
@@ -1337,7 +1337,7 @@ feature "AdministrativeProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo Administrativo criado com sucesso.'
+    expect(page).to have_notice 'Processo Administrativo 1/2012 criado com sucesso.'
 
     within_records do
       page.find('a').click
@@ -1358,7 +1358,7 @@ feature "AdministrativeProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo Administrativo editado com sucesso.'
+    expect(page).to have_notice 'Processo Administrativo 1/2012 editado com sucesso.'
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
@@ -1437,7 +1437,7 @@ feature "AdministrativeProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo Administrativo criado com sucesso.'
+    expect(page).to have_notice 'Processo Administrativo 1/2012 criado com sucesso.'
 
     within_records do
       page.find('a').click

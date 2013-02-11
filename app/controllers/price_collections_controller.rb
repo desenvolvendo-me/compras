@@ -31,6 +31,10 @@ class PriceCollectionsController < CrudController
 
   protected
 
+  def interpolation_options
+    { :resource_name => "#{resource_class.model_name.human} #{resource.code}/#{resource.year}" }
+  end
+
   def create_resource(object)
     object.status = Status::ACTIVE
 

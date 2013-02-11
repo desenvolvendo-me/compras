@@ -120,7 +120,7 @@ feature "LicitationProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo Licitatório criado com sucesso.'
+    expect(page).to have_notice 'Processo Licitatório 1/2012 criado com sucesso.'
 
     within_tab 'Principal' do
       expect(page).to have_disabled_field 'Processo'
@@ -300,7 +300,7 @@ feature "LicitationProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo Licitatório editado com sucesso.'
+    expect(page).to have_notice 'Processo Licitatório 1/2012 editado com sucesso.'
 
     within_tab 'Principal' do
       expect(page).to have_field 'Data do processo', :with => '21/03/2013'
@@ -451,7 +451,7 @@ feature "LicitationProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo Licitatório editado com sucesso.'
+    expect(page).to have_notice 'Processo Licitatório 1/2013 editado com sucesso.'
 
     click_link 'Licitantes'
 
@@ -1408,7 +1408,7 @@ feature "LicitationProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo Licitatório criado com sucesso.'
+    expect(page).to have_notice 'Processo Licitatório 1/2012 criado com sucesso.'
 
     within_tab 'Principal' do
       expect(page).to have_field 'Local de entrega', :with => 'Secretaria da Educação'
@@ -1416,7 +1416,7 @@ feature "LicitationProcesses" do
       fill_modal 'Local de entrega', :with => 'Secretaria da Saúde', :field => "Descrição"
     end
 
-    expect(page).to have_notice 'Processo Licitatório criado com sucesso.'
+    expect(page).to have_notice 'Processo Licitatório 1/2012 criado com sucesso.'
 
     within_tab 'Principal' do
       expect(page).to have_field 'Local de entrega', :with => 'Secretaria da Saúde'
@@ -1424,7 +1424,7 @@ feature "LicitationProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo Licitatório editado com sucesso.'
+    expect(page).to have_notice 'Processo Licitatório 1/2012 editado com sucesso.'
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
@@ -1448,7 +1448,7 @@ feature "LicitationProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo Licitatório editado com sucesso.'
+    expect(page).to have_notice 'Processo Licitatório 1/2012 editado com sucesso.'
 
     within_tab 'Principal' do
       expect(page).to have_field 'Local de entrega', :with => ''

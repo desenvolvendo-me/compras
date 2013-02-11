@@ -61,7 +61,7 @@ feature "PriceCollections" do
 
     click_button 'Salvar'
 
-    expect(page).to_not have_content 'Coleta de Preços criada com sucesso'
+    expect(page).to_not have_content 'Coleta de Preços 1/2012 criada com sucesso'
 
     within_tab 'Fornecedores' do
       expect(page).to have_content 'não pode ficar em branco'
@@ -128,7 +128,7 @@ feature "PriceCollections" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Coleta de Preços criada com sucesso.'
+    expect(page).to have_notice 'Coleta de Preços 1/2012 criada com sucesso.'
 
     within_records do
       page.find('a').click
@@ -234,7 +234,7 @@ feature "PriceCollections" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Coleta de Preços editada com sucesso.'
+    expect(page).to have_notice 'Coleta de Preços 1/2012 editada com sucesso.'
 
     within_records do
       page.find('a').click
@@ -371,7 +371,7 @@ feature "PriceCollections" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Coleta de Preços editada com sucesso.'
+    expect(page).to have_notice 'Coleta de Preços 1/2012 editada com sucesso.'
 
     within_records do
       page.find('a').click
@@ -954,7 +954,7 @@ feature "PriceCollections" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Coleta de Preços editada com sucesso.'
+    expect(page).to have_notice 'Coleta de Preços 1/2012 editada com sucesso.'
 
     within_records do
       page.find('a').click

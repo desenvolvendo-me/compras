@@ -61,8 +61,13 @@ describe PriceCollectionsController do
 
   context 'PUT #update' do
     let :price_collection do
-      double('PriceCollection', :id => 1, :all_price_collection_classifications => price_collection_classifications,
-             :type_of_calculation => PriceCollectionTypeOfCalculation::LOWEST_GLOBAL_PRICE, :annulled? => false)
+      double('PriceCollection',
+             :id => 1,
+             :code => 3,
+             :year => 2013,
+             :all_price_collection_classifications => price_collection_classifications,
+             :type_of_calculation => PriceCollectionTypeOfCalculation::LOWEST_GLOBAL_PRICE,
+             :annulled? => false)
     end
 
     let :price_collection_classifications do
