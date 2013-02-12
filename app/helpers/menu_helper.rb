@@ -57,13 +57,17 @@ module MenuHelper
   end
 
   def can_show?(node)
-    if node.is_a?(Hash)
-      node.map { |_, value| can_show?(value) }.include?(true)
-    elsif node.is_a?(Array)
-      node.map { |value| can_show?(value) }.include?(true)
-    else
-      can?(:read, MainControllerGetter.new(node).name)
-    end
+    return true if current_user.administrator?
+
+    @menu ||= {}
+
+    @menu[node] ||= if node.is_a?(Hash)
+                      node.map { |_, value| can_show?(value) }.include?(true)
+                    elsif node.is_a?(Array)
+                      node.map { |value| can_show?(value) }.include?(true)
+                    else
+                      can?(:read, MainControllerGetter.new(node).name)
+                    end
   end
 
   def localize_menu(name)
