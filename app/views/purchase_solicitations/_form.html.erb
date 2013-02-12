@@ -75,13 +75,13 @@
 
   function setBudgetAllocationModalUrl() {
     var url = "<%= modal_budget_allocations_path %>",
-    budget_structure_id = $("#purchase_solicitation_budget_structure_id").val(),
+    budgetStructureId = $("#purchase_solicitation_budget_structure_id").val(),
     params = {
       locked_fields: ['budget_structure'],
-      budget_structure_id: budget_structure_id
+      budget_structure_id: budgetStructureId
     }
 
-    if (budget_structure_id) {
+    if (budgetStructureId) {
       url += "?" + jQuery.param(params);
     }
 
