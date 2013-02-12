@@ -56,16 +56,16 @@
       var licitationKindGroups = <%= JudgmentFormLicitationKindByObjectType.new.licitation_kind_groups.to_json.html_safe %>,
           options = _(<%= f.object.decorator.judgment_forms_available.to_json.html_safe %>),
           value = $("#administrative_process_object_type").val(),
-          valid_groups = _(licitationKindGroups[value]);
+          validGroups = _(licitationKindGroups[value]);
 
-      if (!valid_groups.isUndefined()) {
+      if (!validGroups.isUndefined()) {
         $("#administrative_process_judgment_form_id").html("");
 
-        options.each(function(judgment_form) {
-          valid_groups.each(function(valid_licitation_kind) {
-            if (judgment_form.licitation_kind == valid_licitation_kind) {
+        options.each(function(judgmentForm) {
+          validGroups.each(function(validLicitationKind) {
+            if (judgmentForm.licitation_kind == validLicitationKind) {
               $("#administrative_process_judgment_form_id").append(function() {
-                return $("<option>").text(judgment_form.description).val(judgment_form.id);
+                return $("<option>").text(judgmentForm.description).val(judgmentForm.id);
               });
             }
           });
