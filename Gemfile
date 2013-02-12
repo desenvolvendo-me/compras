@@ -59,9 +59,9 @@ group :development, :test do
 end
 
 group :test do
-  gem 'shoulda-matchers', '1.4.2'
+  gem 'capybara', '1.1.2'
   gem 'machinist', '2.0'
   gem 'machinist-caching', '0.0.1'
-  gem 'capybara', '1.1.2'
   gem 'poltergeist', '0.7.0'
+  gem 'shoulda-matchers', '1.4.2'
 end
