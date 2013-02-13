@@ -31,9 +31,15 @@ class PriceRegistration < Compras::Model
   delegate :type_of_calculation, :to => :licitation_process
 
   validates :licitation_process, :year, :presence => true
-  validates :date, :validaty_date, :timeliness => { :type => :date },
+  validates :date, :timeliness => { :type => :date },
     :allow_blank => true
   validates :year, :mask => '9999', :allow_blank => true
+  validates :validaty_date,
+    :timeliness => {
+      :on_or_before => :validaty_date_limit,
+      :type => :date,
+      :on_or_before_message => :should_be_before_a_year
+    }, :allow_blank => true
 
   auto_increment :number, :by => :year
 
@@ -42,5 +48,11 @@ class PriceRegistration < Compras::Model
 
   def to_s
     "#{number}/#{year}"
+  end
+
+  private
+
+  def validaty_date_limit
+    date + 1.year
   end
 end

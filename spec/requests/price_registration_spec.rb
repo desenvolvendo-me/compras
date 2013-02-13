@@ -24,6 +24,9 @@ feature "PriceRegistration" do
     within_tab 'Principal' do
       fill_in 'Ano', :with => '2012'
       fill_in 'Data', :with => '05/04/2012'
+
+      expect(page).to have_field 'Data da validade', :with => '05/04/2013'
+
       fill_in 'Data da validade', :with => '05/04/2013'
       select 'Ativo', :from => 'Situação'
       fill_modal 'Processo licitatório', :with => '2012', :field => 'Ano'

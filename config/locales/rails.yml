@@ -315,6 +315,7 @@ pt-BR:
       must_have_a_winner_bidder: "não tem um licitante vencedor"
       already_in_use_for_this_licitation_kind: "já possui uma forma de julgamento com esse tipo de julgamento e tipo de licitação"
       cannot_be_changed_when_closed_or_started: "não pode ser alterado quando o item já estiver em andamento ou fechado"
+      should_be_before_a_year: "não poderá ser superior a um ano de acordo com Decreto Nº 2.743, de 21 de agosto de 1998"
 
   activerecord:
     errors:

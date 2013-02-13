@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'model_helper'
 require 'app/models/direct_purchase'
 require 'app/models/price_registration'
@@ -29,4 +30,39 @@ describe PriceRegistration do
   it { should_not allow_value('2a12').for(:year) }
 
   it { should auto_increment(:number).by(:year) }
+
+  describe 'validate validaty_date' do
+    context 'when before a year of date' do
+      it 'should allow' do
+        subject.stub(:date => Date.today)
+        subject.stub(:validaty_date => Date.tomorrow)
+
+        subject.valid?
+
+        expect(subject.errors[:validaty_date]).to_not include("não poderá ser superior a um ano de acordo com Decreto Nº 2.743, de 21 de agosto de 1998")
+      end
+    end
+
+    context 'when equals one year after date' do
+      it 'should allow' do
+        subject.stub(:date => Date.today)
+        subject.stub(:validaty_date => Date.today + 1.year)
+
+        subject.valid?
+
+        expect(subject.errors[:validaty_date]).to_not include("não poderá ser superior a um ano de acordo com Decreto Nº 2.743, de 21 de agosto de 1998")
+      end
+    end
+
+    context 'when greater than one year after date' do
+      it 'should allow' do
+        subject.stub(:date => Date.today)
+        subject.stub(:validaty_date => Date.tomorrow + 1.year)
+
+        subject.valid?
+
+        expect(subject.errors[:validaty_date]).to include("não poderá ser superior a um ano de acordo com Decreto Nº 2.743, de 21 de agosto de 1998")
+      end
+    end
+  end
 end

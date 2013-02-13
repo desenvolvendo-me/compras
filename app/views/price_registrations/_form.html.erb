@@ -35,6 +35,21 @@
     $(this).closest('.price-registration-budget-structure').find('.budget-structure-modal').removeClass('budget-structure-modal');
   });
 
+  $('#price_registration_date').on('change', function(){
+    var date = $(this).val(),
+        format = 'DD/MM/YYYY',
+        currentValidatyDate = $('#price_registration_validaty_date').val(),
+        oneYearLater = '';
+
+    if (currentValidatyDate == "") {
+      if (date) {
+        oneYearLater = moment(date, format).add('years', 1);
+      }
+
+      $("#price_registration_validaty_date").val(oneYearLater.format(format));
+    }
+  });
+
   function filterModalUrl(modal){
     var selectedBudgetStructures = [];
 
