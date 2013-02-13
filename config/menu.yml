@@ -36,6 +36,7 @@ menu:
         - materials
       - indexers
       - currencies
+      - holidays
 
     - people:
       - people

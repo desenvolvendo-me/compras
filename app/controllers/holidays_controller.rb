@@ -1,0 +1,2 @@
+class HolidaysController < CrudController
+end

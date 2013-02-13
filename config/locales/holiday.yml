@@ -13,3 +13,7 @@ pt-BR:
         day: "Dia"
         recurrent: "Esse feriado é recorrente?"
         date: "Data"
+
+  errors:
+    messages:
+      invalid_day_for_informed_month: "O mês informado não possui este dia"
