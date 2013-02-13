@@ -1,2 +1,0 @@
-class EconomicRegistrationsController < CrudController
-end
