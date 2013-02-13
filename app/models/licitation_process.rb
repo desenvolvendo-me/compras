@@ -18,7 +18,6 @@ class LicitationProcess < Compras::Model
   attr_modal :process, :year, :process_date, :licitation_number, :administrative_process_id
 
   has_enumeration_for :legal_advice, :with => LicitationProcessLegalAdvice
-  has_enumeration_for :modality, :with => AbreviatedProcessModality, :create_helpers => true
   has_enumeration_for :pledge_type
   has_enumeration_for :type_of_calculation, :with => LicitationProcessTypeOfCalculation, :create_helpers => true
   has_enumeration_for :expiration_unit, :with => PeriodUnit
@@ -55,13 +54,12 @@ class LicitationProcess < Compras::Model
 
   accepts_nested_attributes_for :administrative_process, :allow_destroy => true
 
-  delegate :modality, :licitation_modality, :object_type_humanize, :presence_trading?,
+  delegate :modality, :modality_humanize, :object_type_humanize, :trading?,
            :released?, :judgment_form, :description, :responsible,
            :item, :licitation_process, :date, :object_type, :judgment_form_kind,
            :summarized_object,
            :to => :administrative_process, :allow_nil => true, :prefix => true
   delegate :administrative_process_budget_allocations, :items,
-           :is_available_for_licitation_process_classification?,
            :to => :administrative_process, :allow_nil => true
   delegate :delivery_location, :to => :purchase_solicitation, :allow_nil => true,
            :prefix => true
@@ -108,8 +106,6 @@ class LicitationProcess < Compras::Model
       }
   end
 
-  before_save :set_modality
-
   before_update :assign_bidders_documents
 
   orderize :id
@@ -117,16 +113,14 @@ class LicitationProcess < Compras::Model
 
   scope :with_price_registrations, where { price_registration.eq true }
 
-  scope :by_modality_type, lambda { |modality_type|
-    joins { administrative_process.licitation_modality }.where {
-      administrative_process.licitation_modality.modality_type.eq(modality_type)
-    }
+  scope :trading, lambda {
+    joins { administrative_process }.merge(AdministrativeProcess.trading)
   }
 
-  def self.without_trading(except_id)
+  scope :without_trading, lambda { |except_id|
     joins { trading.outer }.
-      where { |licitation| licitation.trading.id.eq(nil) | licitation.id.eq(except_id) }
-  end
+    where { |licitation| licitation.trading.id.eq(nil) | licitation.id.eq(except_id) }
+  }
 
   def self.published_edital
     joins { licitation_process_publications }.where {
@@ -182,7 +176,7 @@ class LicitationProcess < Compras::Model
   end
 
   def has_bidders_and_is_available_for_classification
-    !bidders.empty? && is_available_for_licitation_process_classification?
+    !bidders.empty? && available_for_licitation_process_classification?
   end
 
   def winning_bid
@@ -209,14 +203,14 @@ class LicitationProcess < Compras::Model
     first_ratification.ratification_date
   end
 
-  def trading?
+  def has_trading?
     trading.present?
   end
 
   protected
 
-  def set_modality
-    self.modality = administrative_process.modality
+  def available_for_licitation_process_classification?
+    Modality.available_for_licitation_process_classification.include?(administrative_process_modality)
   end
 
   def validate_administrative_process_status
@@ -236,8 +230,12 @@ class LicitationProcess < Compras::Model
   end
 
   def last_licitation_number_of_self_year_and_modality
-    self.class.where { self.year.eq(year) & self.modality.eq(modality) }.
-               maximum(:licitation_number).to_i
+    self.class.
+    joins { administrative_process }.
+    where { |licitation_process|
+      licitation_process.year.eq(year) & licitation_process.administrative_process.modality.eq(administrative_process.modality)
+    }.
+    maximum(:licitation_number).to_i
   end
 
   def total_of_administrative_process_budget_allocations_items_must_be_less_or_equal_to_value(numeric_parser = ::I18n::Alchemy::NumericParser)

@@ -29,7 +29,7 @@
     }
 
     $('form.administrative_process').on('change', '.object-type-select', function() {
-      $('.modal-modality').val('');
+      $('#administrative_process_modality').html('');
 
       var objectType = $(this).val();
       if (objectType) {
@@ -42,14 +42,25 @@
     });
 
     function filterModalities(objectType) {
-      var params = {
-        by_object_type: objectType,
-        locked_fields: ["object_type"]
-      };
+      var modalitiesByObjectType = <%= Modality.by_object_type.to_json.html_safe %>,
+          validGroup = _(modalitiesByObjectType[objectType]),
+          currentModality = "<%= f.object.modality %>";
 
-      var url = "<%= modal_licitation_modalities_path %>?" + $.param(params);
+      $("#administrative_process_modality").append(function() {
+        return $("<option>").text('').val('');
+      });
 
-      $('.modal-modality').data('modal-url', url);
+      if (!validGroup.isUndefined() && !validGroup.isEmpty()){
+        validGroup.each(function(modality) {
+          $("#administrative_process_modality").append(function() {
+            if (modality[1] == "<%= f.object.modality %>") {
+              return $("<option>").text(modality[0]).val(modality[1]).attr('selected', 'selected');
+            } else {
+              return $("<option>").text(modality[0]).val(modality[1]);
+            }
+          });
+        });
+      }
     }
 
     function filterJudgmentForm() {
@@ -78,11 +89,11 @@
     }
 
     function disableModalities() {
-      $('.modal-modality').attr("disabled", "disabled");
+      $('#administrative_process_modality').attr("disabled", "disabled");
     }
 
     function enableModalities() {
-      $('.modal-modality').removeAttr("disabled");
+      $('#administrative_process_modality').removeAttr("disabled");
     }
 
     filterJudgmentForm();

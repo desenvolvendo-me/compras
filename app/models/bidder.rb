@@ -24,12 +24,12 @@ class Bidder < Compras::Model
 
   has_one :disqualification, :dependent => :destroy, :class_name => 'BidderDisqualification'
 
-  delegate :document_type_ids, :process_date, :ratification?, :trading?,
+  delegate :document_type_ids, :process_date, :ratification?, :has_trading?,
            :to => :licitation_process, :prefix => true, :allow_nil => true
   delegate :administrative_process, :envelope_opening?, :items, :allow_bidders?,
            :consider_law_of_proposals, :licitation_process_lots,
            :to => :licitation_process, :allow_nil => true
-  delegate :invited?, :to => :administrative_process, :prefix => true
+  delegate :invitation?, :to => :administrative_process, :prefix => true
   delegate :administrative_process_budget_allocation_items, :to => :licitation_process_lots
   delegate :material, :to => :administrative_process_budget_allocation_items
   delegate :benefited, :to => :creditor, :allow_nil => true

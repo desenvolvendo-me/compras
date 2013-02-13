@@ -4,6 +4,7 @@ class LicitationProcessesController < CrudController
   has_scope :with_price_registrations, :type => :boolean
   has_scope :by_modality_type
   has_scope :without_trading
+  has_scope :trading, :type => :boolean
   has_scope :published_edital, :type => :boolean
 
   before_filter :block_administrative_process_not_allowed, :only => [:new, :create]
@@ -14,7 +15,6 @@ class LicitationProcessesController < CrudController
     object.year = Date.current.year
     object.process_date = Date.current
     object.administrative_process = @administrative_process
-    object.modality = @administrative_process.modality
     object.judgment_form = @administrative_process.judgment_form
     object.status = LicitationProcessStatus::WAITING_FOR_OPEN
     object.delivery_location = @administrative_process.delivery_location

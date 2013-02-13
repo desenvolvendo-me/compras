@@ -136,7 +136,7 @@ describe Contract do
       let(:modality) { double(:modality) }
 
       let :licitation_process do
-        double('LicitationProcess', :administrative_process_licitation_modality => modality)
+        double('LicitationProcess', :administrative_process_modality_humanize => modality)
       end
 
       before do

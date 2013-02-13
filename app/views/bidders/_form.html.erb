@@ -32,7 +32,7 @@
 
 <%= f.input :will_submit_new_proposal_when_draw %>
 
-<% if f.object.administrative_process_invited? %>
+<% if f.object.administrative_process_invitation? %>
   <%= f.input :invited %>
 
   <div class="yui3-g">
@@ -156,7 +156,7 @@
     $("select").attr("disabled", "disabled")
   <% end %>
 
-  <% if f.object.licitation_process_trading? %>
+  <% if f.object.licitation_process_has_trading? %>
     $("#proposal :input").attr("disabled", "disabled");
   <% end %>
 </script>

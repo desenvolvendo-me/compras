@@ -57,11 +57,11 @@ describe LicitationProcessRatification do
     it 'should delegate administrative_process_modality_humanize to licitation_process' do
       subject.stub(:licitation_process).and_return(nil)
 
-      expect(subject.licitation_process_administrative_process_licitation_modality).to be_nil
+      expect(subject.licitation_process_administrative_process_modality_humanize).to be_nil
 
-      subject.stub(:licitation_process).and_return(double(:administrative_process_licitation_modality => 'Modalidade'))
+      subject.stub(:licitation_process).and_return(double(:administrative_process_modality_humanize => 'Modalidade'))
 
-      expect(subject.licitation_process_administrative_process_licitation_modality).to eq 'Modalidade'
+      expect(subject.licitation_process_administrative_process_modality_humanize).to eq 'Modalidade'
     end
 
     it 'should delegate administrative_process_description to licitation_process' do

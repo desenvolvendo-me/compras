@@ -44,7 +44,7 @@ describe Bidder do
     it { should delegate(:document_type_ids).to(:licitation_process).prefix(true) }
     it { should delegate(:process_date).to(:licitation_process).prefix(true) }
     it { should delegate(:ratification?).to(:licitation_process).prefix(true) }
-    it { should delegate(:trading?).to(:licitation_process).prefix(true) }
+    it { should delegate(:has_trading?).to(:licitation_process).prefix(true) }
 
     it { should delegate(:administrative_process).to(:licitation_process).allowing_nil(true) }
     it { should delegate(:envelope_opening?).to(:licitation_process).allowing_nil(true) }

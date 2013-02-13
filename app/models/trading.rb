@@ -58,7 +58,7 @@ class Trading < Compras::Model
   def modality_type
     return unless licitation_process.present?
 
-    unless licitation_process.presence_trading?
+    unless licitation_process.administrative_process_trading?
       errors.add(:licitation_process, :should_be_of_trading_type)
     end
   end

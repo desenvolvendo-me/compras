@@ -22,7 +22,7 @@
 
 <div class="yui3-g">
   <div class="yui3-u-1-2">
-    <%= f.input :administrative_process_licitation_modality, :disabled => true %>
+    <%= f.input :administrative_process_modality_humanize, :disabled => true %>
   </div>
 
   <div class="yui3-u-1-2">
@@ -82,10 +82,6 @@
 
   <div class="yui3-u-1-8">
     <%= f.input :year, :disabled => true, :input_html => { :id => nil } %>
-  </div>
-
-  <div class="yui3-u-1-4">
-    <%= f.input :modality, :disabled => true, :as => :string, :input_html => { :value => f.object.modality_humanize } %>
   </div>
 </div>
 

@@ -22,7 +22,6 @@ describe AdministrativeProcess do
   it { should belong_to :responsible }
   it { should belong_to :judgment_form }
   it { should belong_to :purchase_solicitation_item_group }
-  it { should belong_to :licitation_modality }
   it { should belong_to :purchase_solicitation }
 
   it { should have_one(:licitation_process).dependent(:restrict) }
@@ -34,9 +33,6 @@ describe AdministrativeProcess do
   it { should have_many(:purchase_solicitation_budget_allocation_items) }
   it { should have_many(:purchase_solicitation_items) }
 
-  it { should delegate(:modality_type).to(:licitation_modality).allowing_nil(true) }
-  it { should delegate(:presence_trading?).to(:licitation_modality).allowing_nil(true) }
-
   it { should validate_duplication_of(:budget_allocation_id).on(:administrative_process_budget_allocations) }
 
   it { should validate_presence_of :year }
@@ -46,7 +42,7 @@ describe AdministrativeProcess do
   it { should validate_presence_of :judgment_form }
   it { should validate_presence_of :responsible }
   it { should validate_presence_of :status }
-  it { should validate_presence_of :licitation_modality }
+  it { should validate_presence_of :modality }
 
   it { should allow_value('2012').for(:year) }
   it { should_not allow_value('212').for(:year) }
@@ -54,15 +50,28 @@ describe AdministrativeProcess do
 
   it { should have_db_index([:process, :year]).unique(true) }
 
-  it "should validate the modality depending on object_type" do
-    object_type = AdministrativeProcessObjectType::CALL_NOTICE
-    modality = double(:modality, :object_type => object_type)
-    subject.object_type = object_type
-    subject.stub(:licitation_modality => modality)
+  describe 'validate the modality depending on object_type' do
+    context 'when the modality is not on modalities available for the type of object' do
+      it "should raise error" do
+        subject.stub(:object_type => AdministrativeProcessObjectType::CALL_NOTICE)
+        subject.stub(:modality => Modality::TAKEN_PRICE)
 
-    subject.valid?
+        subject.valid?
 
-    expect(subject.errors[:modality]).to be_empty
+        expect(subject.errors[:modality]).to include('não está incluído na lista')
+      end
+    end
+
+    context 'when the modality is on modalities available for the type of object' do
+      it "should not raise error" do
+        subject.stub(:object_type => AdministrativeProcessObjectType::PURCHASE_AND_SERVICES)
+        subject.stub(:modality => Modality::TAKEN_PRICE)
+
+        subject.valid?
+
+        expect(subject.errors[:modality]).to be_empty
+      end
+    end
   end
 
   context 'with judgment_form' do
@@ -105,16 +114,6 @@ describe AdministrativeProcess do
     expect(subject.administrative_process_budget_allocations).to be_empty
 
     expect(subject.total_allocations_value).to eq 0
-  end
-
-  it 'should be invite when modality is INVITATION_FOR_CONSTRUCTIONS_ENGINEERING_SERVICES' do
-    subject.stub(:licitation_modality => double(:invitation_letter? => true))
-    expect(subject).to be_invited
-  end
-
-  it 'should not be invite when modality is not (INVITATION_FOR_CONSTRUCTIONS_ENGINEERING_SERVICES, INVITATION_FOR_PURCHASES_AND_SERVICES)' do
-    subject.stub(:licitation_modality => double(:invitation_letter? => false))
-    expect(subject).not_to be_invited
   end
 
   context 'signatures' do

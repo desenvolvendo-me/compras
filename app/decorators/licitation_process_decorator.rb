@@ -7,7 +7,7 @@ class LicitationProcessDecorator
   include ActionView::Helpers::TranslationHelper
 
   attr_header :code_and_year, :administrative_process_code_and_year,
-              :administrative_process_licitation_modality,
+              :administrative_process_modality_humanize,
               :administrative_process_object_type_humanize,
               :envelope_opening_date, :status
 
@@ -34,7 +34,7 @@ class LicitationProcessDecorator
   end
 
   def edit_path(routes)
-    if component.presence_trading? && component.trading.present?
+    if component.administrative_process_trading? && component.trading.present?
       routes.edit_trading_path(component.trading)
     else
       routes.edit_licitation_process_path(component)
@@ -42,7 +42,7 @@ class LicitationProcessDecorator
   end
 
   def edit_link
-    if component.presence_trading? && component.trading.present?
+    if component.administrative_process_trading? && component.trading.present?
       'Voltar ao pregão presencial'
     else
       'Voltar ao processo licitatório'

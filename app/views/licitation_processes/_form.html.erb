@@ -35,17 +35,6 @@
 </div>
 
 <script>
-  function abreviatedProcessModality(modality) {
-    var abreviations = <%= AbreviatedProcessModality.to_a.to_json.html_safe %>,
-        index;
-
-    for (index in abreviations) {
-      if (abreviations[index][1] == modality) {
-        return abreviations[index][0];
-      }
-    }
-  }
-
   function cleanExistingAdministrativeProcessBudgetAllocations() {
     $(".licitation-process-budget-allocation").remove()
   }

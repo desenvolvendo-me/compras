@@ -1,6 +1,10 @@
 # encoding: utf-8
 require 'model_helper'
 require 'lib/signable'
+require 'app/uploaders/image_uploader'
+require 'app/models/unico/prefecture'
+require 'app/models/prefecture'
+require 'lib/custom_data'
 require 'app/models/licitation_process'
 require 'app/models/administrative_process'
 require 'app/models/capability'
@@ -25,8 +29,6 @@ require 'app/models/price_registration'
 require 'app/models/trading'
 require 'app/models/delivery_location'
 require 'app/uploaders/image_uploader'
-require 'app/models/unico/prefecture'
-require 'app/models/prefecture'
 
 describe LicitationProcess do
   let(:current_prefecture) { double(:current_prefecture) }
@@ -285,64 +287,76 @@ describe LicitationProcess do
     expect(subject.errors[:type_of_calculation]).not_to include 'não permitido para este tipo de objeto (Menor preço total por item)'
   end
 
-  it 'should not allow lowest_total_price_by_item as type_of_calculation when modality is presence_trading' do
-    subject.stub(:administrative_process_modality).and_return('presence_trading')
-    subject.stub(:type_of_calculation).and_return('lowest_total_price_by_item')
+  describe 'validate type_of_calculation by modality' do
+    it 'should not allow lowest_total_price_by_item as type_of_calculation when modality is trading' do
+      subject.stub(:administrative_process_modality => Modality::TRADING)
+      subject.stub(:type_of_calculation => LicitationProcessTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM)
 
-    LicitationProcessTypesOfCalculationByModality.any_instance.should_receive(:correct_type_of_calculation?).
-                                                  with('presence_trading', 'lowest_total_price_by_item').and_return(false)
+      LicitationProcessTypesOfCalculationByModality.
+        any_instance.should_receive(:correct_type_of_calculation?).
+        with(Modality::TRADING, LicitationProcessTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM).
+        and_return(false)
 
-    subject.valid?
+      subject.valid?
 
-    expect(subject.errors[:type_of_calculation]).to include 'não permitido para esta modalidade (Menor preço total por item)'
-  end
+      expect(subject.errors[:type_of_calculation]).to include 'não permitido para esta modalidade (Menor preço total por item)'
+    end
 
-  it 'should allow lowest_total_price_by_item as type_of_calculation when modality is presence_trading' do
-    subject.stub(:administrative_process_modality).and_return('presence_trading')
-    subject.stub(:type_of_calculation).and_return('sort_participants_by_item')
+    it 'should allow lowest_total_price_by_item as type_of_calculation when modality is trading' do
+      subject.stub(:administrative_process_modality => Modality::TRADING)
+      subject.stub(:type_of_calculation => LicitationProcessTypeOfCalculation::SORT_PARTICIPANTS_BY_ITEM)
 
-    LicitationProcessTypesOfCalculationByModality.any_instance.should_receive(:correct_type_of_calculation?).
-                                                  with('presence_trading', 'sort_participants_by_item').and_return(true)
+      LicitationProcessTypesOfCalculationByModality.
+        any_instance.should_receive(:correct_type_of_calculation?).
+        with(Modality::TRADING, LicitationProcessTypeOfCalculation::SORT_PARTICIPANTS_BY_ITEM).
+        and_return(true)
 
-    subject.valid?
+      subject.valid?
 
-    expect(subject.errors[:type_of_calculation]).to_not include 'não permitido para esta modalidade'
-  end
+      expect(subject.errors[:type_of_calculation]).to_not include 'não permitido para esta modalidade'
+    end
 
-  it 'should allow lowest_global_price as type_of_calculation when modality is auction' do
-    subject.stub(:administrative_process_modality).and_return('auction')
-    subject.stub(:type_of_calculation).and_return('lowest_global_price')
+    it 'should allow lowest_global_price as type_of_calculation when modality is auction' do
+      subject.stub(:administrative_process_modality => Modality::AUCTION)
+      subject.stub(:type_of_calculation => LicitationProcessTypeOfCalculation::LOWEST_GLOBAL_PRICE)
 
-    LicitationProcessTypesOfCalculationByModality.any_instance.should_receive(:correct_type_of_calculation?).
-                                                  with('auction', 'lowest_global_price').and_return(true)
+      LicitationProcessTypesOfCalculationByModality.
+        any_instance.should_receive(:correct_type_of_calculation?).
+        with(Modality::AUCTION, LicitationProcessTypeOfCalculation::LOWEST_GLOBAL_PRICE).
+        and_return(true)
 
-    subject.valid?
+      subject.valid?
 
-    expect(subject.errors[:type_of_calculation]).to_not include 'não permitido para esta modalidade'
-  end
+      expect(subject.errors[:type_of_calculation]).to_not include 'não permitido para esta modalidade'
+    end
 
-  it 'should allow lowest_global_price as type_of_calculation when modality is auction' do
-    subject.stub(:administrative_process_modality).and_return('auction')
-    subject.stub(:type_of_calculation).and_return('lowest_price_by_lot')
+    it 'should allow lowest_global_price as type_of_calculation when modality is auction' do
+      subject.stub(:administrative_process_modality => Modality::AUCTION)
+      subject.stub(:type_of_calculation => LicitationProcessTypeOfCalculation::LOWEST_PRICE_BY_LOT)
 
-    LicitationProcessTypesOfCalculationByModality.any_instance.should_receive(:correct_type_of_calculation?).
-                                                  with('auction', 'lowest_price_by_lot').and_return(true)
+      LicitationProcessTypesOfCalculationByModality.
+        any_instance.should_receive(:correct_type_of_calculation?).
+        with(Modality::AUCTION, LicitationProcessTypeOfCalculation::LOWEST_PRICE_BY_LOT).
+        and_return(true)
 
-    subject.valid?
+      subject.valid?
 
-    expect(subject.errors[:type_of_calculation]).to_not include 'não permitido para esta modalidade'
-  end
+      expect(subject.errors[:type_of_calculation]).to_not include 'não permitido para esta modalidade'
+    end
 
-  it 'should not allow lowest_total_price_by_item as type_of_calculation when modality is auction' do
-    subject.stub(:administrative_process_modality).and_return('auction')
-    subject.stub(:type_of_calculation).and_return('lowest_total_price_by_item')
+    it 'should not allow lowest_total_price_by_item as type_of_calculation when modality is auction' do
+      subject.stub(:administrative_process_modality => Modality::AUCTION)
+      subject.stub(:type_of_calculation => LicitationProcessTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM)
 
-    LicitationProcessTypesOfCalculationByModality.any_instance.should_receive(:correct_type_of_calculation?).
-                                                  with('auction', 'lowest_total_price_by_item').and_return(false)
+      LicitationProcessTypesOfCalculationByModality.
+        any_instance.should_receive(:correct_type_of_calculation?).
+        with(Modality::AUCTION, LicitationProcessTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM).
+        and_return(false)
 
-    subject.valid?
+      subject.valid?
 
-    expect(subject.errors[:type_of_calculation]).to include 'não permitido para esta modalidade (Menor preço total por item)'
+      expect(subject.errors[:type_of_calculation]).to include 'não permitido para esta modalidade (Menor preço total por item)'
+    end
   end
 
   it "should have filled lots" do
@@ -451,21 +465,21 @@ describe LicitationProcess do
   context 'has bidders and is available for classification' do
     it 'should return true' do
       subject.stub(:bidders => [double])
-      subject.stub(:is_available_for_licitation_process_classification? => true)
+      subject.stub(:available_for_licitation_process_classification? => true)
 
       expect(subject.has_bidders_and_is_available_for_classification).to be true
     end
 
     it 'should return false' do
       subject.stub(:bidders => [])
-      subject.stub(:is_available_for_licitation_process_classification? => true)
+      subject.stub(:available_for_licitation_process_classification? => true)
 
       expect(subject.has_bidders_and_is_available_for_classification).to be false
     end
 
     it 'should return false' do
       subject.stub(:bidders => [double])
-      subject.stub(:is_available_for_licitation_process_classification? => false)
+      subject.stub(:available_for_licitation_process_classification? => false)
 
       expect(subject.has_bidders_and_is_available_for_classification).to be false
     end
@@ -597,9 +611,9 @@ describe LicitationProcess do
     end
   end
 
-  describe '#trading?' do
+  describe '#has_trading?' do
     context 'when trading is not present' do
-      it { expect(subject.trading?).to be_false }
+      it { expect(subject.has_trading?).to be_false }
     end
 
     context 'when trading is present' do
@@ -609,7 +623,7 @@ describe LicitationProcess do
         subject.stub(:trading => trading)
       end
 
-      it { expect(subject.trading?).to be_true }
+      it { expect(subject.has_trading?).to be_true }
     end
   end
 end

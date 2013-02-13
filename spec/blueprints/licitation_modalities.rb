@@ -5,7 +5,7 @@ LicitationModality.blueprint(:publica) do
   initial_value { "500.00" }
   final_value { "700.00" }
   object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
-  modality_type { AbreviatedProcessModality::COMPETITION_FOR_PURCHASES_AND_SERVICES }
+  modality_type { AdministrativeProcessModality::COMPETITION_FOR_PURCHASES_AND_SERVICES }
 end
 
 LicitationModality.blueprint(:privada) do
@@ -14,7 +14,7 @@ LicitationModality.blueprint(:privada) do
   initial_value { "500.00" }
   final_value { "800.00" }
   object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
-  modality_type { AbreviatedProcessModality::COMPETITION_FOR_PURCHASES_AND_SERVICES }
+  modality_type { AdministrativeProcessModality::COMPETITION_FOR_PURCHASES_AND_SERVICES }
 end
 
 LicitationModality.blueprint(:pregao_presencial) do
@@ -23,5 +23,5 @@ LicitationModality.blueprint(:pregao_presencial) do
   initial_value { "600.00" }
   final_value { "900.00" }
   object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
-  modality_type { AbreviatedProcessModality::PRESENCE_TRADING }
+  modality_type { AdministrativeProcessModality::PRESENCE_TRADING }
 end

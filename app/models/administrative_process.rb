@@ -5,7 +5,7 @@ class AdministrativeProcess < Compras::Model
                   :date, :year, :protocol, :object_type, :status, :description,
                   :judgment_form_id, :purchase_solicitation_item_group_id,
                   :administrative_process_budget_allocations_attributes,
-                  :licitation_modality_id, :summarized_object, :new_modality
+                  :summarized_object, :modality
 
   attr_readonly :process, :year
 
@@ -15,12 +15,11 @@ class AdministrativeProcess < Compras::Model
                       :create_helpers => true
   has_enumeration_for :status, :with => AdministrativeProcessStatus,
                       :create_helpers => true, :create_scopes => true
-  has_enumeration_for :new_modality, :with => Modality
+  has_enumeration_for :modality, :create_helpers => true, :create_scopes => true
 
   belongs_to :responsible, :class_name => 'Employee'
   belongs_to :judgment_form
   belongs_to :purchase_solicitation_item_group
-  belongs_to :licitation_modality
   belongs_to :purchase_solicitation
 
   has_one  :licitation_process, :dependent => :restrict
@@ -41,11 +40,9 @@ class AdministrativeProcess < Compras::Model
            :to => :judgment_form, :allow_nil => true, :prefix => true
 
   delegate :type_of_calculation, :to => :licitation_process, :allow_nil => true
-  delegate :modality_type, :presence_trading?,
-           :to => :licitation_modality, :allow_nil => true
 
   validates :year, :date, :object_type, :responsible, :status, :description,
-            :judgment_form, :licitation_modality, :presence => true
+            :judgment_form, :modality, :presence => true
   validates :year, :mask => '9999', :allow_blank => true
   validates :administrative_process_budget_allocations, :no_duplication => :budget_allocation_id
 
@@ -63,14 +60,8 @@ class AdministrativeProcess < Compras::Model
     "#{process}/#{year}"
   end
 
-  alias_method :modality, :modality_type
-
   def total_allocations_value
     administrative_process_budget_allocations.sum(:value)
-  end
-
-  def invited?
-    licitation_modality.invitation_letter?
   end
 
   def update_status(new_status)
@@ -79,10 +70,6 @@ class AdministrativeProcess < Compras::Model
 
   def allow_licitation_process?
     purchase_and_services? || construction_and_engineering_services?
-  end
-
-  def is_available_for_licitation_process_classification?
-    AdministrativeProcessModality.available_for_licitation_process_classification?(modality)
   end
 
   def attend_purchase_solicitation_items
@@ -126,10 +113,10 @@ class AdministrativeProcess < Compras::Model
   end
 
   def validate_object_type_should_equal_modality_object_type
-    return unless object_type.present? && licitation_modality.present?
+    return unless object_type.present? && modality.present?
 
-    unless licitation_modality.object_type == object_type
-      errors.add(:licitation_modality, :inclusion)
+    unless Modality.available_for_object_type(object_type).include?(modality)
+      errors.add(:modality, :inclusion)
     end
   end
 
