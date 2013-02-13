@@ -1,10 +1,6 @@
 # encoding: utf-8
 require 'model_helper'
 require 'lib/signable'
-require 'lib/custom_data'
-require 'app/uploaders/image_uploader'
-require 'app/models/unico/prefecture'
-require 'app/models/prefecture'
 require 'app/models/bidder'
 require 'app/models/bidder_proposal'
 require 'app/models/bidder_document'

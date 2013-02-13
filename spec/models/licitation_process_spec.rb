@@ -1,10 +1,6 @@
 # encoding: utf-8
 require 'model_helper'
 require 'lib/signable'
-require 'app/uploaders/image_uploader'
-require 'app/models/unico/prefecture'
-require 'app/models/prefecture'
-require 'lib/custom_data'
 require 'app/models/licitation_process'
 require 'app/models/administrative_process'
 require 'app/models/capability'
@@ -28,7 +24,6 @@ require 'app/models/indexer'
 require 'app/models/price_registration'
 require 'app/models/trading'
 require 'app/models/delivery_location'
-require 'app/uploaders/image_uploader'
 
 describe LicitationProcess do
   let(:current_prefecture) { double(:current_prefecture) }

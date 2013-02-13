@@ -110,6 +110,12 @@ $:.append Unico::Engine.config.root
 require 'persona/engine'
 require 'persona/model'
 
+# Custom Data
+require 'app/uploaders/image_uploader'
+require 'app/models/unico/prefecture'
+require 'app/models/prefecture'
+require 'lib/custom_data'
+
 $:.append Persona::Engine.config.root
 
 Dir["#{Persona::Engine.config.root}/app/enumerations/*.rb"].each do |file|
