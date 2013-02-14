@@ -16,7 +16,9 @@ module Matchers
       element = page.first(:xpath, %(.//*[text()="#{value}"] | .//*[@value="#{value}"]))
       element.trigger(:mouseover)
 
-      expect(page.document).to have_content options[:reason]
+      page.ignoring_scopes do
+        expect(page.document).to have_content options[:reason]
+      end
 
       url_before_click = current_url
 
