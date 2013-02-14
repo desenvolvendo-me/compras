@@ -1,19 +1,17 @@
-<div class='creditor-main'>
-  <div class="individual-field">
-    <%= f.input :occupation_classification %>
+<div class="individual-field">
+  <%= f.input :occupation_classification %>
 
-    <div class='yui3-g'>
-      <div class='yui3-u-1-2'>
-        <%= f.input :municipal_public_administration %>
-      </div>
+  <div class='yui3-g'>
+    <div class='yui3-u-1-2'>
+      <%= f.input :municipal_public_administration %>
+    </div>
 
-      <div class='yui3-u-1-2'>
-        <%= f.input :autonomous %>
-      </div>
+    <div class='yui3-u-1-2'>
+      <%= f.input :autonomous %>
     </div>
   </div>
 
-  <div class='yui3-g individual-field'>
+  <div class='yui3-g'>
     <div class='yui3-u-1-2'>
       <%= f.input :social_identification_number %>
     </div>
@@ -22,27 +20,28 @@
       <%= f.input :contract_start_date %>
     </div>
   </div>
+</div>
 
-  <div class="company-field">
-    <%= f.input :company_size, :disabled => true %>
 
-    <%= f.input :choose_simple, :as => :boolean, :disabled => true %>
+<div class="company-field">
+  <%= f.input :company_size, :disabled => true %>
 
-    <%= f.input :legal_nature, :disabled => true %>
+  <%= f.input :choose_simple, :as => :boolean, :disabled => true %>
 
-    <div class='yui3-g'>
-      <div class='yui3-u-1-2'>
-        <%= f.input :commercial_registration_number, :disabled => true %>
-      </div>
+  <%= f.input :legal_nature, :disabled => true %>
 
-      <div class='yui3-u-1-2'>
-        <%= f.input :commercial_registration_date, :disabled => true, :input_html => { :value => f.object.decorator.commercial_registration_date } %>
-      </div>
+  <div class='yui3-g'>
+    <div class='yui3-u-1-2'>
+      <%= f.input :commercial_registration_number, :disabled => true %>
+    </div>
+
+    <div class='yui3-u-1-2'>
+      <%= f.input :commercial_registration_date, :disabled => true, :input_html => { :value => f.object.decorator.commercial_registration_date } %>
     </div>
   </div>
-
-  <%= custom_fields f %>
 </div>
+
+<%= custom_fields f %>
 
 <script>
   function toggleEnabledDisabledFieldsForAutonomous() {

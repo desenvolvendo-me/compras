@@ -2,7 +2,7 @@
 
 <%= f.input :personable_type, :as => :hidden %>
 
-<div class="input modal required">
+<div class="input modal required creditor-creditable">
   <%= f.input(
     :creditable, :hidden_field => :creditable_id,
     :as => :modal,
@@ -10,12 +10,13 @@
     :modal_url => modal_special_entries_path,
     :wrapper => false
   ) %>
+
   <%= link_to_modal_info :href => f.object.creditable %>
 </div>
 
 <div id="creditor-tabs" class="tabs">
   <ul>
-    <li id="tab-creditor-main" class="individual-field company-field">
+    <li id="tab-creditor-main" class="<%= "individual-field company-field" if Creditor.custom_data.blank?%>">
       <a href="#creditor-main">Principal</a>
     </li>
 
@@ -86,6 +87,12 @@
     $('#creditor_creditable_id').val('');
     $('#creditor_creditable').val('');
 
+    configureCreditableInput();
+  });
+
+  configureCreditableInput();
+
+  function configureCreditableInput() {
     var url = "<%= modal_people_path %>",
         label = 'Pessoa física ou jurídica',
         value = $('[name="creditor[creditable_type]"]:checked').val();
@@ -97,7 +104,7 @@
 
     $('#creditor_creditable').data('modal-url', url);
     $('label[for=creditor_creditable]').html(label);
-  });
+  };
 
   $('#creditor_creditable_id').change(function (event, people) {
     if (people && people.personable_type) {

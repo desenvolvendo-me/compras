@@ -57,11 +57,24 @@ feature "Creditors" do
 
     choose 'Pessoa física ou jurídica'
 
-    expect(page).to have_field 'creditor_creditable', :with => ''
+    expect(page).to have_field 'Pessoa física ou jurídica', :with => ''
 
     choose 'Inscrição especial'
 
     expect(page).to have_field 'Inscrição especial', :with => ''
+  end
+
+  scenario 'show main tab to special entry when have custom data' do
+    prefecture = Prefecture.make!(:belo_horizonte)
+    Customization.make!(:campo_string, :state => prefecture.state)
+
+    navigate 'Comum > Pessoas > Credores'
+
+    click_link 'Criar Credor'
+
+    within_tab 'Principal' do
+      fill_in 'Nome de um campo', :with => 'Foo'
+    end
   end
 
   scenario 'create a new creditor when people is special entry' do
@@ -74,7 +87,9 @@ feature "Creditors" do
 
     click_link 'Criar Credor'
 
-    fill_modal 'creditor_creditable', :with => 'Tal'
+    within 'div.creditor-creditable' do
+      fill_modal 'Inscrição especial', :with => 'Tal'
+    end
 
     within_tab 'Contas Bancárias' do
       click_button 'Adicionar Conta Bancária'
@@ -175,7 +190,9 @@ feature "Creditors" do
 
     choose 'Pessoa física ou jurídica'
 
-    fill_modal 'creditor_creditable', :with => 'Nohup'
+    within 'div.creditor-creditable' do
+      fill_modal 'Pessoa física ou jurídica', :with => 'Nohup'
+    end
 
     click_link 'Mais informações'
 
@@ -201,7 +218,9 @@ feature "Creditors" do
 
     choose 'Pessoa física ou jurídica'
 
-    fill_modal 'creditor_creditable', :with => 'Ibrama'
+    within 'div.creditor-creditable' do
+      fill_modal 'Pessoa física ou jurídica', :with => 'Ibrama'
+    end
 
     within_tab 'Principal' do
       expect(page).to have_disabled_field 'Porte da empresa'
@@ -310,7 +329,7 @@ feature "Creditors" do
 
     click_link 'Ibrama'
 
-    expect(page).to have_field 'creditor_creditable', :with => 'Ibrama'
+    expect(page).to have_field 'Pessoa física ou jurídica', :with => 'Ibrama'
 
     within_tab 'Principal' do
       expect(page).to have_disabled_field 'Porte da empresa'
@@ -389,7 +408,9 @@ feature "Creditors" do
 
     choose 'Pessoa física ou jurídica'
 
-    fill_modal 'creditor_creditable', :with => 'Gabriel Sobrinho'
+    within 'div.creditor-creditable' do
+      fill_modal 'Pessoa física ou jurídica', :with => 'Gabriel Sobrinho'
+    end
 
     within_tab 'Principal' do
       fill_modal 'CBO', :with => 'MEMBROS DAS FORÇAS ARMADAS'
@@ -452,7 +473,7 @@ feature "Creditors" do
 
     click_link 'Gabriel Sobrinho'
 
-    expect(page).to have_field 'creditor_creditable', :with => 'Gabriel Sobrinho'
+    expect(page).to have_field 'Pessoa física ou jurídica', :with => 'Gabriel Sobrinho'
 
     within_tab 'Principal' do
       expect(page).to have_field 'CBO', :with => '01 - MEMBROS DAS FORÇAS ARMADAS'
@@ -762,7 +783,9 @@ feature "Creditors" do
 
     click_link 'Mateus Lorandi'
 
-    expect(page).to have_field 'creditor_creditable', :with => 'Mateus Lorandi'
+    within 'div.creditor-creditable' do
+      expect(page).to have_field 'Pessoa física ou jurídica', :with => 'Mateus Lorandi'
+    end
 
     within_tab 'Contas Bancárias' do
       expect(page).to_not have_field 'Banco', :with => 'Itaú'
@@ -942,7 +965,7 @@ feature "Creditors" do
 
     click_link 'Nohup'
 
-    expect(page).to have_field 'creditor_creditable', :with => 'Nohup'
+    expect(page).to have_field 'Pessoa física ou jurídica', :with => 'Nohup'
 
     within_tab 'Principal' do
       expect(page).to have_disabled_field 'Porte da empresa'
@@ -1107,7 +1130,7 @@ feature "Creditors" do
 
     click_link 'Gabriel Sobrinho'
 
-    expect(page).to have_field 'creditor_creditable', :with => 'Gabriel Sobrinho'
+    expect(page).to have_field 'Pessoa física ou jurídica', :with => 'Gabriel Sobrinho'
 
     within_tab 'Principal' do
       expect(page).to have_field 'CBO', :with => '214 - Engenheiro'
@@ -1187,7 +1210,7 @@ feature "Creditors" do
 
     click_link 'Mateus Lorandi'
 
-    expect(page).to have_disabled_field 'creditor_creditable'
+    expect(page).to have_disabled_field 'Pessoa física ou jurídica'
 
     click_button 'Salvar'
 
@@ -1222,7 +1245,9 @@ feature "Creditors" do
 
     choose 'Pessoa física ou jurídica'
 
-    fill_modal 'creditor_creditable', :with => 'Gabriel Sobrinho'
+    within 'div.creditor-creditable' do
+      fill_modal 'Pessoa física ou jurídica', :with => 'Gabriel Sobrinho'
+    end
 
     within "#creditor-tabs" do
        expect(page).to have_link "Principal"
@@ -1245,7 +1270,9 @@ feature "Creditors" do
 
     choose 'Pessoa física ou jurídica'
 
-    fill_modal 'creditor_creditable', :with => 'Nohup'
+    within 'div.creditor-creditable' do
+      fill_modal 'Pessoa física ou jurídica', :with => 'Nohup'
+    end
 
     within "#creditor-tabs" do
        expect(page).to have_link "Principal"
