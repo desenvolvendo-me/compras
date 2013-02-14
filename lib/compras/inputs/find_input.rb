@@ -14,10 +14,7 @@ module Compras
       def find
         @options[:label]      = @setting.data
         @options[:required]   = @setting.required
-        @options[:as]         = :text     if @setting.text?
-        @options[:as]         = :boolean  if @setting.boolean?
-        @options[:as]         = :date     if @setting.date?
-        @options[:as]         = :integer  if @setting.integer?
+        @options[:as]         = @setting.data_type.to_sym
         @options[:input_html] = { 'data-custom-data-id' => @setting.id }
   
         if @setting.decimal?
