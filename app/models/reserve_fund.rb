@@ -1,13 +1,13 @@
 class ReserveFund < Compras::Model
-  attr_modal :date, :licitation_modality_id, :creditor_id, :status,
+  attr_modal :date, :modality, :creditor_id, :status,
              :descriptor_id, :budget_allocation_id
 
   has_enumeration_for :status, :with => ReserveFundStatus, :create_helpers => true
+  has_enumeration_for :modality
 
   belongs_to :licitation_process
   belongs_to :descriptor
   belongs_to :budget_allocation
-  belongs_to :licitation_modality
   belongs_to :creditor
 
   delegate :real_amount, :amount, :function, :subfunction, :government_program, :government_action, :budget_structure,

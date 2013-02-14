@@ -12,7 +12,7 @@ pt-BR:
         budget_allocation_amount: "Saldo orçamentário"
         budget_allocation_reserved_value: "Valor reservado"
         value: "Valor"
-        licitation_modality: "Modalidade"
+        modality: "Modalidade"
         creditor: "Favorecido"
         date: "Data"
         reason: "Motivo"

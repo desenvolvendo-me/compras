@@ -8,7 +8,7 @@ Pledge.blueprint(:empenho_em_quinze_dias) do
   value { 9.99 }
   material_kind { MaterialKind::PUBLIC }
   contract { Contract.make!(:primeiro_contrato) }
-  licitation_modality { LicitationModality.make!(:publica) }
+  modality { Modality::COMPETITION }
   licitation_process { LicitationProcess.make!(:processo_licitatorio) }
   description { 'Descricao' }
   founded_debt_contract { Contract.make!(:contrato_detran) }
@@ -25,7 +25,7 @@ Pledge.blueprint(:founded_debt) do
   budget_allocation { BudgetAllocation.make!(:alocacao) }
   value { 9.99 }
   material_kind { MaterialKind::PUBLIC }
-  licitation_modality { LicitationModality.make!(:publica) }
+  modality { Modality::COMPETITION }
   licitation_process { LicitationProcess.make!(:processo_licitatorio) }
   description { 'Descricao' }
   founded_debt_contract { Contract.make!(:primeiro_contrato) }

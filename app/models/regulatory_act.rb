@@ -15,7 +15,6 @@ class RegulatoryAct < Compras::Model
   has_many :expense_natures, :dependent => :restrict
   has_many :budget_structure_configurations, :dependent => :restrict
   has_many :budget_structure_responsibles, :dependent => :restrict
-  has_many :licitation_modalities, :dependent => :restrict
   has_many :licitation_commissions, :dependent => :restrict
 
   validates :regulatory_act_type, :creation_date, :publication_date, :content,

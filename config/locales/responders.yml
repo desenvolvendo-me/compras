@@ -126,9 +126,6 @@ pt-BR:
     licitation_commissions:
       <<: *female
 
-    licitation_modalities:
-      <<: *female
-
     licitation_process_appeals:
       <<: *female
 

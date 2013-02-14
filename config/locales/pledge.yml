@@ -28,7 +28,7 @@ pt-BR:
         budget_allocation_budget_structure: "Estrutura orçamentária"
         budget_allocation_expense_nature: "Natureza da despesa"
         pledge_historic: "Histórico"
-        licitation_modality: "Modalidade"
+        modality: "Modalidade"
         licitation_process: "Processo licitatório"
         licitation_process_licitation_number: "Número da licitação"
         contract: "Contrato"

@@ -4,7 +4,6 @@ require 'app/models/regulatory_act'
 require 'app/models/expense_nature'
 require 'app/models/budget_structure_configuration'
 require 'app/models/budget_structure_responsible'
-require 'app/models/licitation_modality'
 
 describe RegulatoryAct do
   it 'should return act_number as to_s method' do
@@ -19,7 +18,6 @@ describe RegulatoryAct do
   it { should have_many(:expense_natures).dependent(:restrict) }
   it { should have_many(:budget_structure_configurations).dependent(:restrict) }
   it { should have_many(:budget_structure_responsibles).dependent(:restrict) }
-  it { should have_many(:licitation_modalities).dependent(:restrict) }
 
   it { should have_and_belong_to_many :dissemination_sources}
   it { should validate_presence_of :act_number }

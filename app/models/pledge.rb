@@ -2,6 +2,8 @@ class Pledge < Compras::Model
   attr_modal :code, :descriptor_id, :emission_date, :management_unit_id,
              :budget_allocation_id, :creditor_id
 
+  has_enumeration_for :modality
+
   belongs_to :descriptor
   belongs_to :creditor
   belongs_to :reserve_fund
@@ -11,7 +13,6 @@ class Pledge < Compras::Model
   belongs_to :pledge_historic
   belongs_to :contract
   belongs_to :founded_debt_contract, :class_name => 'Contract'
-  belongs_to :licitation_modality
   belongs_to :licitation_process
   belongs_to :expense_nature
 
