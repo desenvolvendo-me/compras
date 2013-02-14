@@ -44,12 +44,8 @@
 
         <div id="menu">
           <ul>
-            <% if current_user.administrator? %>
+            <% cache "menu-by-profile-id-#{current_user.profile_id}-and-customer-id-#{current_customer.id}" do %>
               <%= render_menu %>
-            <% else %>
-              <% cache "menu-by-profile-id-#{current_user.profile_id}" do %>
-                <%= render_menu %>
-              <% end %>
             <% end %>
           </ul>
         </div>

@@ -22,7 +22,7 @@ class ProfilesController < CrudController
   private
 
   def clear_menu
-    expire_fragment("menu-by-profile-id-#{current_user.profile_id}")
+    expire_fragment("menu-by-profile-id-#{current_user.profile_id}-and-customer-id-#{current_customer.id}")
   end
 
   def use_cache?
