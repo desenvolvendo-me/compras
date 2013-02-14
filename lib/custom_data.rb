@@ -16,6 +16,8 @@ module CustomData
           self.custom_data = (custom_data || {}).merge(key => value)
         end
       end
+
+      serialize :custom_data, ActiveRecord::Coders::Hstore
     end
 
     def custom_attributes

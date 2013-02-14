@@ -111,10 +111,12 @@ require 'persona/engine'
 require 'persona/model'
 
 # Custom Data
+require 'lib/custom_data'
 require 'app/uploaders/image_uploader'
 require 'app/models/unico/prefecture'
 require 'app/models/prefecture'
-require 'lib/custom_data'
+
+require 'activerecord-postgres-hstore'
 
 $:.append Persona::Engine.config.root
 

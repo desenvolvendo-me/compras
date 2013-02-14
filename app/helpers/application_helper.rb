@@ -33,7 +33,7 @@ module ApplicationHelper
   def custom_fields(form)
     inputs = ''
 
-    resource.class.custom_data.each do |custom_data|
+    form.object.class.custom_data.each do |custom_data|
       inputs += form.input custom_data.normalized_data, find_input_for( form.object.send(custom_data.normalized_data), custom_data )
     end
 
