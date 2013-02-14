@@ -80,10 +80,22 @@ describe LicitationProcess do
   it { should validate_presence_of :payment_method }
   it { should validate_presence_of :envelope_delivery_date }
   it { should validate_presence_of :envelope_delivery_time }
-  it { should validate_presence_of :envelope_opening_date }
-  it { should validate_presence_of :envelope_opening_time }
   it { should validate_presence_of :pledge_type }
   it { should validate_presence_of :type_of_calculation }
+
+  it { should_not validate_presence_of :envelope_opening_date }
+  it { should_not validate_presence_of :envelope_opening_time }
+
+  context "when updating a record" do
+    before do
+      subject.stub(:validation_context).and_return(:update)
+    end
+
+    it { should validate_presence_of :envelope_opening_date }
+    it { should validate_presence_of :envelope_opening_time }
+    it { should allow_value("11:11").for(:envelope_opening_time) }
+    it { should_not allow_value("44:11").for(:envelope_opening_time) }
+  end
 
   describe 'default values' do
     it { expect(subject.consider_law_of_proposals).to be false }
@@ -93,14 +105,8 @@ describe LicitationProcess do
   end
 
   context 'new_envelope_opening_date is not equal to new_envelope_delivery_date' do
-    before do
-      subject.stub(:new_envelope_opening_date_equal_new_envelope_delivery_date?).and_return(false)
-    end
-
     it { should allow_value("11:11").for(:envelope_delivery_time) }
     it { should_not allow_value("44:11").for(:envelope_delivery_time) }
-    it { should allow_value("11:11").for(:envelope_opening_time) }
-    it { should_not allow_value("44:11").for(:envelope_opening_time) }
   end
 
   context 'when prefecture allow_insert_past_processes is true' do

@@ -54,6 +54,8 @@ feature "LicitationProcesses" do
       expect(page).to have_disabled_field 'Data da homologação'
       expect(page).to have_disabled_field 'Data da adjudicação'
       expect(page).to have_disabled_field 'Processo administrativo'
+      expect(page).to have_disabled_field 'Data da abertura dos envelopes'
+      expect(page).to have_disabled_field 'Hora da abertura'
 
       fill_in 'Ano', :with => '2012'
       fill_in 'Data do processo', :with => '21/03/2012'
@@ -75,8 +77,6 @@ feature "LicitationProcesses" do
       fill_modal 'Índice de reajuste', :with => 'XPTO'
       fill_in 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
       fill_in 'Hora da entrega', :with => '14:00'
-      fill_in 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow)
-      fill_in 'Hora da abertura', :with => '14:00'
       fill_in 'Prazo de entrega', :with => '1'
       select 'ano/anos', :from => 'Período do prazo de entrega'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
@@ -130,6 +130,8 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Data do processo', :with => '21/03/2012'
       expect(page).to have_field 'Processo administrativo', :with => '1/2012'
       expect(page).to have_select 'Tipo de empenho', :selected => 'Global'
+      expect(page).to_not have_disabled_field 'Data da abertura dos envelopes'
+      expect(page).to_not have_disabled_field 'Hora da abertura'
 
       # testing delegated fields of administrative process
       expect(page).to have_field 'Modalidade', :with => 'Concorrência'
@@ -147,8 +149,8 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Índice de reajuste', :with => 'XPTO'
       expect(page).to have_field 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
       expect(page).to have_field 'Hora da entrega', :with => '14:00'
-      expect(page).to have_field 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow)
-      expect(page).to have_field 'Hora da abertura', :with => '14:00'
+      expect(page).to have_field 'Data da abertura dos envelopes', :with => ''
+      expect(page).to have_field 'Hora da abertura', :with => ''
       expect(page).to have_field 'Prazo de entrega', :with => '1'
       expect(page).to have_select 'Período do prazo de entrega', :selected => 'ano/anos'
       expect(page).to have_field 'Forma de pagamento', :with => 'Dinheiro'
@@ -1391,8 +1393,6 @@ feature "LicitationProcesses" do
       fill_modal 'Índice de reajuste', :with => 'XPTO'
       fill_in 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
       fill_in 'Hora da entrega', :with => '14:00'
-      fill_in 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow)
-      fill_in 'Hora da abertura', :with => '14:00'
       fill_in 'Prazo de entrega', :with => '1'
       select 'ano/anos', :from => 'Período do prazo de entrega'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
@@ -1418,6 +1418,8 @@ feature "LicitationProcesses" do
 
     within_tab 'Principal' do
       expect(page).to have_field 'Local de entrega', :with => 'Secretaria da Saúde'
+      fill_in 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow)
+      fill_in 'Hora da abertura', :with => '14:00'
     end
 
     click_button 'Salvar'
