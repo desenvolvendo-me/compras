@@ -32,7 +32,6 @@ menu:
         - bank_accounts
       - materials:
         - materials_classes
-        - materials_groups
         - materials
       - indexers
       - currencies

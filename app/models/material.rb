@@ -25,9 +25,7 @@ class Material < Compras::Model
   has_many :purchase_solicitation_item_group_materials, :dependent => :destroy
   has_many :purchase_solicitation_budget_allocations, :through => :purchase_solicitation_budget_allocation_items, :dependent => :restrict
 
-  delegate :materials_group, :materials_group_id, :to => :materials_class, :allow_nil => true
-
-  validates :materials_group, :materials_class, :reference_unit, :presence => true
+  validates :materials_class, :reference_unit, :presence => true
   validates :material_characteristic, :presence => true
   validates :code, :description, :presence => true, :uniqueness => { :allow_blank => true }
   validates :material_type, :presence => true, :if => :material?

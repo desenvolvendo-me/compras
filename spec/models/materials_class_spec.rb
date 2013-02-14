@@ -4,7 +4,6 @@ require 'app/models/materials_class'
 require 'app/models/material'
 
 describe MaterialsClass do
-  it { should belong_to :materials_group }
   it { should have_many(:materials).dependent(:restrict) }
 
   it { should validate_presence_of :class_number }

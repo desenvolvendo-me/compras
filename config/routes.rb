@@ -463,13 +463,6 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :materials_groups do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
   resources :moviment_types do
     collection do
       get :modal

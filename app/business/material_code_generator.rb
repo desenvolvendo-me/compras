@@ -1,7 +1,7 @@
 class MaterialCodeGenerator
   attr_accessor :material_object, :material_repository
 
-  delegate :materials_class_id_changed?, :materials_class_id?, :materials_group, :materials_class, :to => :material_object
+  delegate :materials_class_id_changed?, :materials_class_id?, :materials_class, :to => :material_object
 
   def initialize(material_object, material_repository = Material)
     self.material_object = material_object
@@ -17,12 +17,12 @@ class MaterialCodeGenerator
   protected
 
   def material_code
-    [materials_group.group_number, materials_class.class_number, next_code].join('.')
+    [materials_class.class_number, next_code].join('.')
   end
 
   def next_code
     code = if previous_material
-             previous_material.code.gsub("#{materials_group.group_number}.#{materials_class.class_number}.", '').to_i + 1
+             previous_material.code.gsub("#{materials_class.class_number}.", '').to_i + 1
            else
              1
            end

@@ -34,7 +34,6 @@ class Creditor < Compras::Model
   has_many :licitation_processes, :through => :bidders, :dependent => :restrict
   has_many :materials, :through => :creditor_materials
   has_many :materials_classes, :through => :materials
-  has_many :materials_groups, :through => :materials_classes
   has_many :pledges, :dependent => :restrict
   has_many :precatories, :dependent => :restrict
   has_many :price_collection_proposals, :dependent => :restrict, :order => :id
@@ -57,7 +56,7 @@ class Creditor < Compras::Model
   delegate :name, :to => :creditable, :allow_nil => true
   delegate :neighborhood, :state, :country, :zip_code, :to => :address, :allow_nil => true
   delegate :bank_id, :to => :accounts, :allow_nil => true
-  delegate :materials_class, :materials_group, :to => :materials, :allow_nil => true
+  delegate :materials_class, :to => :materials, :allow_nil => true
   delegate :login, :email, :to => :user, :allow_nil => true
   delegate :code, :to => :main_cnae, :prefix => true, :allow_nil => true
 

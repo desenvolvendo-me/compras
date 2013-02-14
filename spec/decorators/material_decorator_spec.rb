@@ -11,7 +11,6 @@ describe MaterialDecorator do
     it 'should have description, code, material_group and material_class' do
       expect(described_class.header_attributes).to include :description
       expect(described_class.header_attributes).to include :code
-      expect(described_class.header_attributes).to include :materials_group
       expect(described_class.header_attributes).to include :materials_class
     end
   end

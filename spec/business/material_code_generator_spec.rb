@@ -7,17 +7,12 @@ describe MaterialCodeGenerator do
 
   let :material_object do
     double('Material',
-      :materials_group => materials_group,
       :materials_class => materials_class
     )
   end
 
   let :material_repository do
-    double('Material', :last_by_materials_class_and_group => double('Material', :code => '01.02.00001'))
-  end
-
-  let :materials_group do
-    double('MaterialsGroup', :group_number => "01", :id => 1)
+    double('Material', :last_by_materials_class_and_group => double('Material', :code => '02.00001'))
   end
 
   let :materials_class do
@@ -30,7 +25,7 @@ describe MaterialCodeGenerator do
     end
 
     it "should generate a new code" do
-      material_object.should_receive(:code=).with("01.02.00002")
+      material_object.should_receive(:code=).with("02.00002")
 
       MaterialCodeGenerator.new(material_object, material_repository).generate!
     end

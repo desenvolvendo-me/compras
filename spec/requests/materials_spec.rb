@@ -16,7 +16,6 @@ feature "Materials" do
     expect(page).to have_disabled_field 'Tipo de material'
     expect(page).to have_disabled_field 'Tipo de serviço'
 
-    fill_modal 'Grupo', :with => 'Informática', :field => 'Descrição'
     fill_modal 'Classe', :with => 'Software', :field => 'Descrição'
     fill_in 'Descrição', :with => 'Caixa'
     fill_in 'Descrição detalhada', :with => 'Uma caixa'
@@ -43,7 +42,6 @@ feature "Materials" do
 
     click_link 'Caixa'
 
-    expect(page).to have_field 'Grupo', :with => '01 - Informática'
     expect(page).to have_field 'Classe', :with => '01 - Software'
     expect(page).to have_field 'Descrição', :with => 'Caixa'
     expect(page).to have_field 'Descrição detalhada', :with => 'Uma caixa'
@@ -66,7 +64,6 @@ feature "Materials" do
 
     click_link 'Criar Material'
 
-    fill_modal 'Grupo', :with => 'Informática', :field => 'Descrição'
     fill_modal 'Classe', :with => 'Software', :field => 'Descrição'
     fill_in 'Descrição', :with => 'Caixa'
     fill_in 'Descrição detalhada', :with => 'Outra descrição'
@@ -85,7 +82,7 @@ feature "Materials" do
 
     expect(page).to have_notice 'Material criado com sucesso.'
 
-    expect(page).to have_content '01.01.00001'
+    expect(page).to have_content '01.00001'
   end
 
   scenario 'update an existent material' do
@@ -99,7 +96,6 @@ feature "Materials" do
     # end
 
     ReferenceUnit.make!(:metro)
-    MaterialsGroup.make!(:ferro_aco)
     MaterialsClass.make!(:arames)
     ExpenseNature.make!(:compra_de_material)
 
@@ -107,7 +103,6 @@ feature "Materials" do
 
     click_link 'Antivirus'
 
-    fill_modal 'Grupo', :with => 'Ferro e Aço', :field => 'Descrição'
     fill_modal 'Classe', :with => 'Arames', :field => 'Descrição'
     fill_in 'Descrição', :with => 'Parafuso'
     fill_in 'Descrição detalhada', :with => 'de rosca'
@@ -132,9 +127,8 @@ feature "Materials" do
 
     click_link 'Parafuso'
 
-    expect(page).to have_field 'Grupo', :with => '02 - Ferro e Aço'
     expect(page).to have_field 'Classe', :with => '02 - Arames'
-    expect(page).to have_field 'Código', :with => '02.02.00003'
+    expect(page).to have_field 'Código', :with => '02.00003'
     expect(page).to have_field 'Descrição', :with => 'Parafuso'
     expect(page).to have_field 'Descrição detalhada', :with => 'de rosca'
     expect(page).to have_field 'Estoque mínimo', :with => '20'
@@ -207,24 +201,6 @@ feature "Materials" do
     expect(page).to have_select 'Tipo de material', :selected => ''
   end
 
-  it 'should show selected group on class modal' do
-    make_dependencies!
-
-    navigate 'Comum > Cadastrais > Materiais > Materiais'
-
-    click_link 'Criar Material'
-
-    expect(page).to have_disabled_field 'Classe'
-
-    fill_modal 'Grupo', :with => 'Informática', :field => 'Descrição'
-
-    expect(page).to_not have_disabled_field 'Classe'
-
-    fill_modal 'Classe', :with => 'Software', :field => 'Descrição' do
-      expect(page).to have_field 'filter_materials_group', :with => '01 - Informática'
-    end
-  end
-
   it 'should not have the class disabled when editing material' do
     make_dependencies!
 
@@ -235,40 +211,6 @@ feature "Materials" do
     click_link 'Antivirus'
 
     expect(page).to_not have_disabled_field 'Classe'
-  end
-
-  it 'should disable and empty the class when the group is removed' do
-    make_dependencies!
-
-    navigate 'Comum > Cadastrais > Materiais > Materiais'
-
-    click_link 'Criar Material'
-
-    fill_modal 'Grupo', :with => 'Informática', :field => 'Descrição'
-
-    fill_modal 'Classe', :with => 'Software', :field => 'Descrição'
-
-    clear_modal 'Grupo'
-
-    expect(page).to have_disabled_field 'Classe'
-    expect(page).to have_field 'Classe', :with => ''
-  end
-
-  it 'should empty the class when the group are changed' do
-    MaterialsGroup.make!(:ferro_aco)
-    make_dependencies!
-
-    navigate 'Comum > Cadastrais > Materiais > Materiais'
-
-    click_link 'Criar Material'
-
-    fill_modal 'Grupo', :with => 'Informática', :field => 'Descrição'
-
-    fill_modal 'Classe', :with => 'Software', :field => 'Descrição'
-
-    fill_modal 'Grupo', :with => 'Ferro e Aço', :field => 'Descrição'
-
-    expect(page).to have_field 'Classe', :with => ''
   end
 
   it 'should not have the expense economic classification disabled when editing material' do
@@ -299,20 +241,17 @@ feature "Materials" do
     within_records do
       expect(page).to have_content 'Descrição'
       expect(page).to have_content 'Código'
-      expect(page).to have_content 'Grupo'
       expect(page).to have_content 'Classe'
 
       within 'tbody tr' do
         expect(page).to have_content 'Antivirus'
-        expect(page).to have_content '01.01.00001'
-        expect(page).to have_content 'Informática'
+        expect(page).to have_content '01.00001'
         expect(page).to have_content 'Software'
       end
     end
   end
 
   def make_dependencies!
-    MaterialsGroup.make!(:informatica)
     MaterialsClass.make!(:software)
     ReferenceUnit.make!(:unidade)
     ServiceOrContractType.make!(:trainees)

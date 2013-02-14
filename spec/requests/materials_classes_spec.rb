@@ -7,13 +7,10 @@ feature "MaterialsClasses" do
   end
 
   scenario 'create a new materials_class' do
-    MaterialsGroup.make!(:informatica)
-
     navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
 
     click_link 'Criar Classe de Materiais'
 
-    fill_modal 'Grupo', :with => '01', :field => 'Código'
     fill_in 'Código', :with => '01'
     fill_in 'Descrição', :with => 'Materiais de Escritório'
     fill_in 'Detalhamento', :with => 'materiais para escritório'
@@ -24,7 +21,6 @@ feature "MaterialsClasses" do
 
     click_link 'Materiais de Escritório'
 
-    expect(page).to have_field 'Grupo', :with => '01 - Informática'
     expect(page).to have_field 'Código', :with => '01'
     expect(page).to have_field 'Descrição', :with => 'Materiais de Escritório'
     expect(page).to have_field 'Detalhamento', :with => 'materiais para escritório'
@@ -32,13 +28,11 @@ feature "MaterialsClasses" do
 
   scenario 'update an existent materials_class' do
     MaterialsClass.make!(:software)
-    MaterialsGroup.make!(:comp_eletricos_eletronicos)
 
     navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
 
     click_link 'Software'
 
-    fill_modal 'Grupo', :with => '03', :field => 'Código'
     fill_in 'Código', :with => '02'
     fill_in 'Descrição', :with => 'Lampada'
     fill_in 'Detalhamento', :with => 'descricao'
@@ -49,7 +43,6 @@ feature "MaterialsClasses" do
 
     click_link 'Lampada'
 
-    expect(page).to have_field 'Grupo', :with => '03 - Componentes elétricos e eletrônicos'
     expect(page).to have_field 'Código', :with => '02'
     expect(page).to have_field 'Descrição', :with => 'Lampada'
     expect(page).to have_field 'Detalhamento', :with => 'descricao'
@@ -79,12 +72,10 @@ feature "MaterialsClasses" do
     within_records do
       expect(page).to have_content 'Descrição'
       expect(page).to have_content 'Código'
-      expect(page).to have_content 'Grupo'
 
       within 'tbody tr' do
         expect(page).to have_content 'Software'
         expect(page).to have_content '01'
-        expect(page).to have_content 'Informática'
       end
     end
   end

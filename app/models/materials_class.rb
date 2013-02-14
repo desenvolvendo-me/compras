@@ -1,14 +1,12 @@
 class MaterialsClass < Compras::Model
-  attr_accessible :materials_group_id, :class_number, :description, :details
+  attr_accessible :class_number, :description, :details
 
-  attr_modal :materials_group_id, :class_number, :description
-
-  belongs_to :materials_group
+  attr_modal :class_number, :description
 
   has_many :materials, :dependent => :restrict
 
-  validates :materials_group, :description, :class_number, :presence => true
-  validates :class_number, :description, :uniqueness => { :scope => :materials_group_id, :allow_blank => true }
+  validates :description, :class_number, :presence => true
+  validates :class_number, :description, :uniqueness => { :allow_blank => true }
   validates :class_number, :numericality => true, :mask => "99", :allow_blank => true
 
   orderize :description
