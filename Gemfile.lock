@@ -89,6 +89,7 @@ GEM
     coderay (1.0.8)
     cpf_validator (0.2.0)
       activemodel (>= 3.0)
+    dalli (2.6.2)
     devise (2.2.3)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -303,6 +304,7 @@ DEPENDENCIES
   carrierwave (= 0.6.2)
   cnpj_validator (= 0.3.1)
   cpf_validator (= 0.2.0)
+  dalli (= 2.6.2)
   decore!
   devise (= 2.2.3)
   enumerate_it (= 1.0.1)

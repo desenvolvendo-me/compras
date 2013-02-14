@@ -51,6 +51,7 @@ end
 
 group :production, :training, :staging do
   gem 'sentry-raven', '0.4.0'
+  gem 'dalli', '2.6.2'
 end
 
 group :development, :test do
