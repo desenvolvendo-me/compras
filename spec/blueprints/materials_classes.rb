@@ -1,7 +1,7 @@
 # encoding: utf-8
 MaterialsClass.blueprint(:software) do
   class_number { "01" }
-  mask { "99.99.99.999.999" }
+  mask { "99" }
   description { "Software" }
   details { "Softwares de computador" }
 end

@@ -6,8 +6,7 @@ class MaterialsClass < Compras::Model
   has_many :materials, :dependent => :restrict
 
   validates :description, :class_number, :mask, :presence => true
-  validates :class_number, :description, :uniqueness => { :allow_blank => true }
-  validates :class_number, :numericality => true, :mask => "99", :allow_blank => true
+  validates :class_number, :uniqueness => { :scope => :description, :allow_blank => true }
 
   orderize :description
   filterize
