@@ -75,6 +75,31 @@ module Helpers
     end
   end
 
+  def fill_with_autocomplete(locator, options)
+    within_autocomplete(locator, options) do
+      within '.ui-menu-item' do
+        page.find("a", :text => options.fetch(:with)).click
+      end
+    end
+  end
+
+  def within_autocomplete(locator, options)
+    expect(page).to have_field locator
+
+    field = page.find_field locator
+    # Focus to enable the autocomplete
+    page.execute_script %{ $('##{field[:id]}').focus() }
+    # queries the source to get the efective records
+    page.execute_script %{ $('##{field[:id]}').autocomplete("search", "#{options.fetch(:with)}") }
+    # gets the widget and append to the view, since the plugin does not hide the menu anymore
+    page.execute_script %{ $('##{field[:id]}').autocomplete("widget").show().appendTo( $('##{field[:id]}').parent() ) }
+    expect(page).to have_css '.ui-autocomplete'
+
+    within '.ui-autocomplete' do
+      yield
+    end
+  end
+
   def within_links
     within '.links' do
       yield
