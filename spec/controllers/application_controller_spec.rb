@@ -10,7 +10,7 @@ describe ApplicationController do
   it 'should not handle customer connection on test environment' do
     Rails.stub(:env).and_return(ActiveSupport::StringInquirer.new('test'))
 
-    Customer.should_receive(:find_by_domain!).never
+    CustomerFinder.should_receive(:current).never
 
     get :index
   end
@@ -18,7 +18,7 @@ describe ApplicationController do
   it 'should not handle customer connection on development environment' do
     Rails.stub(:env).and_return(ActiveSupport::StringInquirer.new('development'))
 
-    Customer.should_receive(:find_by_domain!).never
+    CustomerFinder.should_receive(:current).never
 
     get :index
   end
@@ -31,7 +31,7 @@ describe ApplicationController do
 
     request.env['X-Customer'] = 'ipatinga-mg'
 
-    Customer.should_receive(:find_by_domain!).with('ipatinga-mg').and_return(customer)
+    CustomerFinder.should_receive(:current).with('ipatinga-mg').and_return(customer)
 
     get :index
   end
@@ -44,7 +44,7 @@ describe ApplicationController do
 
     request.env['X-Customer'] = 'ipatinga-mg'
 
-    Customer.should_receive(:find_by_domain!).with('ipatinga-mg').and_return(customer)
+    CustomerFinder.should_receive(:current).with('ipatinga-mg').and_return(customer)
 
     get :index
   end

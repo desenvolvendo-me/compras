@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_customer
-    @current_customer ||= Customer.find_by_domain!(request.headers['X-Customer'] || request.host)
+    @current_customer ||= CustomerFinder.current(request.headers['X-Customer'])
   end
 
   def render_to_pdf(partial_name, options = {})
