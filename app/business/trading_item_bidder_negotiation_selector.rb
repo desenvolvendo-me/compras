@@ -60,7 +60,7 @@ class TradingItemBidderNegotiationSelector
   end
 
   def bidder_with_lowest_proposal_benefited?
-    return unless bidder_with_lowest_proposal
+    return false unless bidder_with_lowest_proposal
 
     bidder_with_lowest_proposal.benefited
   end
