@@ -12,6 +12,7 @@ feature "MaterialsClasses" do
     click_link 'Criar Classe de Materiais'
 
     fill_in 'Código', :with => '01'
+    fill_in 'Máscara', :with => '99.99.99.999.999'
     fill_in 'Descrição', :with => 'Materiais de Escritório'
     fill_in 'Detalhamento', :with => 'materiais para escritório'
 
@@ -22,6 +23,7 @@ feature "MaterialsClasses" do
     click_link 'Materiais de Escritório'
 
     expect(page).to have_field 'Código', :with => '01'
+    expect(page).to have_field 'Máscara', :with => '99.99.99.999.999'
     expect(page).to have_field 'Descrição', :with => 'Materiais de Escritório'
     expect(page).to have_field 'Detalhamento', :with => 'materiais para escritório'
   end
@@ -34,6 +36,7 @@ feature "MaterialsClasses" do
     click_link 'Software'
 
     fill_in 'Código', :with => '02'
+    fill_in 'Máscara', :with => '99.99.99.999.9999'
     fill_in 'Descrição', :with => 'Lampada'
     fill_in 'Detalhamento', :with => 'descricao'
 
@@ -44,6 +47,7 @@ feature "MaterialsClasses" do
     click_link 'Lampada'
 
     expect(page).to have_field 'Código', :with => '02'
+    expect(page).to have_field 'Máscara', :with => '99.99.99.999.9999'
     expect(page).to have_field 'Descrição', :with => 'Lampada'
     expect(page).to have_field 'Detalhamento', :with => 'descricao'
   end
@@ -60,6 +64,7 @@ feature "MaterialsClasses" do
     expect(page).to have_notice 'Classe de Materiais apagada com sucesso.'
 
     expect(page).to_not have_content '01 - Informática'
+    expect(page).to_not have_content '99.99.99.999.999'
     expect(page).to_not have_content 'Software'
     expect(page).to_not have_content 'Softwares de computador'
   end
@@ -71,11 +76,13 @@ feature "MaterialsClasses" do
 
     within_records do
       expect(page).to have_content 'Descrição'
+      expect(page).to have_content 'Máscara'
       expect(page).to have_content 'Código'
 
       within 'tbody tr' do
         expect(page).to have_content 'Software'
         expect(page).to have_content '01'
+        expect(page).to have_content '99.99.99.999.999'
       end
     end
   end

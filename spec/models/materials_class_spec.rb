@@ -14,6 +14,8 @@ describe MaterialsClass do
   it { should_not allow_value('123').for(:class_number) }
   it { should allow_value('01').for(:class_number) }
 
+  it { should validate_presence_of :mask }
+
   it 'should return class_number and description as to_s method' do
     subject.class_number = '01'
     subject.description = 'Hortifrutigranjeiros'

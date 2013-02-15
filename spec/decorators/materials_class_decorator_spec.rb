@@ -8,9 +8,10 @@ describe MaterialsClassDecorator do
       expect(described_class.headers?).to be_true
     end
 
-    it 'should have description and class_number' do
+    it 'should have description, class_number and mask' do
       expect(described_class.header_attributes).to include :description
       expect(described_class.header_attributes).to include :class_number
+      expect(described_class.header_attributes).to include :mask
     end
   end
 end

@@ -10,3 +10,4 @@ pt-BR:
         class_number: "Código"
         description: "Descrição"
         details: "Detalhamento"
+        mask: "Máscara"
