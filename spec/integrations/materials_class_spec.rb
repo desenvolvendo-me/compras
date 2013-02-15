@@ -5,7 +5,6 @@ describe MaterialsClass do
   context 'uniqueness validations' do
     before { MaterialsClass.make!(:software) }
 
-    it { should validate_uniqueness_of(:class_number) }
-    it { should validate_uniqueness_of(:description) }
+    it { should validate_uniqueness_of(:class_number).scoped_to(:description) }
   end
 end
