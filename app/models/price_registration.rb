@@ -37,6 +37,7 @@ class PriceRegistration < Compras::Model
   validates :validaty_date,
     :timeliness => {
       :on_or_before => :validaty_date_limit,
+      :after => :date,
       :type => :date,
       :on_or_before_message => :should_be_before_a_year
     }, :allow_blank => true

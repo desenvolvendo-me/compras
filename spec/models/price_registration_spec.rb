@@ -64,5 +64,27 @@ describe PriceRegistration do
         expect(subject.errors[:validaty_date]).to include("não poderá ser superior a um ano de acordo com Decreto Nº 2.743, de 21 de agosto de 1998")
       end
     end
+
+    context 'when equals date' do
+      it 'should allow' do
+        subject.stub(:date => Date.today)
+        subject.stub(:validaty_date => Date.today)
+
+        subject.valid?
+
+        expect(subject.errors[:validaty_date]).to include("deve ser depois de #{I18n.l(Date.today)}")
+      end
+    end
+
+    context 'when before date' do
+      it 'should allow' do
+        subject.stub(:date => Date.today)
+        subject.stub(:validaty_date => Date.yesterday)
+
+        subject.valid?
+
+        expect(subject.errors[:validaty_date]).to include("deve ser depois de #{I18n.l(Date.today)}")
+      end
+    end
   end
 end
