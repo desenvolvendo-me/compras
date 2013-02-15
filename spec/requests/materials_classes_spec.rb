@@ -7,12 +7,22 @@ feature "MaterialsClasses" do
   end
 
   scenario 'create a new materials_class' do
+    MaterialsClass.make!(:software)
+    MaterialsClass.make!(:arames)
+
     navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
 
     click_link 'Criar Classe de Materiais'
 
-    fill_in 'Código', :with => '01'
-    fill_in 'Máscara', :with => '99'
+    fill_with_autocomplete 'Classe superior', :with => 'Soft'
+
+    expect(page).to have_field 'Classe superior', :with => '01 - Software'
+
+    within '.number-prepend' do
+      expect(page).to have_content '01.'
+    end
+
+    fill_in 'Código', :with => '22'
     fill_in 'Descrição', :with => 'Materiais de Escritório'
     fill_in 'Detalhamento', :with => 'materiais para escritório'
 
@@ -22,23 +32,35 @@ feature "MaterialsClasses" do
 
     click_link 'Materiais de Escritório'
 
-    expect(page).to have_field 'Código', :with => '01'
-    expect(page).to have_field 'Máscara', :with => '99'
+    within '.number-prepend' do
+      expect(page).to have_content '01.'
+    end
+
+    expect(page).to have_field 'Classe superior', :with => '01 - Software'
+    expect(page).to have_field 'Código', :with => '22'
     expect(page).to have_field 'Descrição', :with => 'Materiais de Escritório'
     expect(page).to have_field 'Detalhamento', :with => 'materiais para escritório'
   end
 
   scenario 'update an existent materials_class' do
     MaterialsClass.make!(:software)
+    MaterialsClass.make!(:arames)
 
     navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
 
     click_link 'Software'
 
-    fill_in 'Código', :with => '02'
-    fill_in 'Máscara', :with => '99'
+    fill_with_autocomplete 'Classe superior', :with => 'Arames'
+
+    expect(page).to have_field 'Classe superior', :with => '02.44.65.430 - Arames'
+
+    within '.number-prepend' do
+      expect(page).to have_content '02.44.65.430.'
+    end
+
+    fill_in 'Código', :with => '234'
     fill_in 'Descrição', :with => 'Lampada'
-    fill_in 'Detalhamento', :with => 'descricao'
+    fill_in 'Detalhamento', :with => 'Lampadas para escritório'
 
     click_button 'Salvar'
 
@@ -46,10 +68,14 @@ feature "MaterialsClasses" do
 
     click_link 'Lampada'
 
-    expect(page).to have_field 'Código', :with => '02'
-    expect(page).to have_field 'Máscara', :with => '99'
+    within '.number-prepend' do
+      expect(page).to have_content '02.44.65.430.'
+    end
+
+    expect(page).to have_field 'Classe superior', :with => '02.44.65.430 - Arames'
+    expect(page).to have_field 'Código', :with => '234'
     expect(page).to have_field 'Descrição', :with => 'Lampada'
-    expect(page).to have_field 'Detalhamento', :with => 'descricao'
+    expect(page).to have_field 'Detalhamento', :with => 'Lampadas para escritório'
   end
 
   scenario 'destroy an existent materials_class' do
@@ -63,10 +89,8 @@ feature "MaterialsClasses" do
 
     expect(page).to have_notice 'Classe de Materiais apagada com sucesso.'
 
-    expect(page).to_not have_content '01 - Informática'
-    expect(page).to_not have_content '99'
     expect(page).to_not have_content 'Software'
-    expect(page).to_not have_content 'Softwares de computador'
+    expect(page).to_not have_content '010000000000'
   end
 
   scenario 'index with columns at the index' do
@@ -76,14 +100,55 @@ feature "MaterialsClasses" do
 
     within_records do
       expect(page).to have_content 'Descrição'
-      expect(page).to have_content 'Máscara'
       expect(page).to have_content 'Código'
+      expect(page).to have_content 'Máscara'
 
       within 'tbody tr' do
         expect(page).to have_content 'Software'
-        expect(page).to have_content '01'
-        expect(page).to have_content '99'
+        expect(page).to have_content '010000000000'
+        expect(page).to have_content '99.99.99.999.999'
       end
+    end
+  end
+
+  scenario 'use the autocomplete to fill parent class by description or class_number' do
+    MaterialsClass.make!(:software)
+    MaterialsClass.make!(:arames)
+
+    navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
+
+    click_link 'Criar Classe de Materiais'
+
+    fill_with_autocomplete 'Classe superior', :with => 'Soft'
+
+    expect(page).to have_field 'Classe superior', :with => '01 - Software'
+
+    within '.number-prepend' do
+      expect(page).to have_content '01.'
+    end
+
+    fill_with_autocomplete 'Classe superior', :with => 'Arames'
+
+    expect(page).to have_field 'Classe superior', :with => '02.44.65.430 - Arames'
+
+    within '.number-prepend' do
+      expect(page).to have_content '02.44.65.430.'
+    end
+
+    fill_with_autocomplete 'Classe superior', :with => '01'
+
+    expect(page).to have_field 'Classe superior', :with => '01 - Software'
+
+    within '.number-prepend' do
+      expect(page).to have_content '01.'
+    end
+
+    fill_with_autocomplete 'Classe superior', :with => '02'
+
+    expect(page).to have_field 'Classe superior', :with => '02.44.65.430 - Arames'
+
+    within '.number-prepend' do
+      expect(page).to have_content '02.44.65.430.'
     end
   end
 end

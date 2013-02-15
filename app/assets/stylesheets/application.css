@@ -9,6 +9,7 @@
  *= require compras/error_base
  *= require compras/simple_form
  *= require simple_form.auto_complete_input
+ *= require bootstrap_prepend
  */
 
 #container #header img {

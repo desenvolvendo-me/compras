@@ -1,11 +1,45 @@
+<%= f.input :mask, :as => :hidden %>
+
 <div class="yui3-g">
   <div class="yui3-u-1-3">
-    <%= f.input :class_number %>
+    <%= f.input :parent_class_number, :as => :auto_complete, :source_path => materials_classes_path, :hidden_field => 'parent_number' %>
   </div>
-  <div class="yui3-u-2-3">
-    <%= f.input :mask %>
+
+  <div class="yui3-u-1-3">
+    <%= f.input :number, :input_html => { :class => 'span2' }, :wrapper_html => { :class => 'input-prepend number-prepend' }  %>
   </div>
 </div>
 
 <%= f.input :description %>
 <%= f.input :details %>
+
+<script>
+  $('#materials_class_parent_class_number').on('change', function(event, material_class){
+    $("#prepended-input").remove();
+
+    if (material_class) {
+      $("#materials_class_mask").val(material_class.mask);
+      $("#materials_class_number").attr("data-mask", material_class.child_mask);
+      $("#materials_class_number").before(function() {
+        return $("<span>").text(material_class.parent_class_number_masked).addClass('add-on').attr("id", "prepended-input");
+      });
+
+    } else {
+      $("#materials_class_mask").val('');
+      $("#materials_class_number").removeAttr("data-mask");
+    }
+  });
+
+  (function() {
+    <% if f.object.persisted? %>
+      $("#materials_class_parent_number").val('<%= resource.decorator.persisted_parent_mask_and_class_number[0] %>');
+      $("#materials_class_number").val('<%= resource.decorator.persisted_parent_mask_and_class_number[1] %>');
+      $("#materials_class_number").attr("data-mask", "<%= resource.decorator.child_mask %>");
+      $("#materials_class_parent_class_number").val("<%= resource.decorator.persisted_masked_to_s %>");
+
+      $("#materials_class_number").before(function() {
+        return $("<span>").text('<%= resource.decorator.persisted_parent_mask_and_class_number[0] %>').addClass('add-on').attr("id", "prepended-input");
+      });
+    <% end %>
+  })();
+</script>

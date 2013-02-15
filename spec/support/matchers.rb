@@ -165,7 +165,6 @@ module Matchers
     failure_message_for_should_not do |page|
       "expected #{page.text.inspect} to not have subtitle #{field.inspect}"
     end
-
   end
 end
 

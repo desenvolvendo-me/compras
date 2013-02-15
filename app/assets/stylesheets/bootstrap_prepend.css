@@ -1,0 +1,29 @@
+.input-prepend .add-on {
+  -webkit-border-radius: 4px 0 0 4px;
+  -moz-border-radius: 4px 0 0 4px;
+  border-radius: 4px 0 0 4px;
+  margin-right: -1px;
+  vertical-align: top;
+  display: inline-block;
+  width: auto;
+  height: 28px;
+  min-width: 16px;
+  padding: 4px 5px;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 28px;
+  text-align: center;
+  text-shadow: 0 1px 0 #FFF;
+  background-color: #EEE;
+  border: 1px solid #CCC;
+}
+
+.input-prepend input.span2 {
+  width: 156px;
+  position: relative;
+  margin-bottom: 0;
+  vertical-align: top;
+  font-size: 14px;
+  float: none;
+  margin-left: 0;
+}
