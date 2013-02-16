@@ -1,0 +1,5 @@
+<div class="buttons">
+  <%= f.button :submit if f.object.editable? %>
+  <%= f.button :back %>
+  <%= f.button :destroy if f.object.persisted? && f.object.editable? %>
+</div>

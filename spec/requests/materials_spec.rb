@@ -42,7 +42,7 @@ feature "Materials" do
 
     click_link 'Caixa'
 
-    expect(page).to have_field 'Classe', :with => '010000000000 - Software'
+    expect(page).to have_field 'Classe', :with => '013200000000 - Software'
     expect(page).to have_field 'Descrição', :with => 'Caixa'
     expect(page).to have_field 'Descrição detalhada', :with => 'Uma caixa'
     expect(page).to have_field 'Estoque mínimo', :with => '10'
@@ -82,7 +82,7 @@ feature "Materials" do
 
     expect(page).to have_notice 'Material criado com sucesso.'
 
-    expect(page).to have_content '010000000000.00001'
+    expect(page).to have_content '013200000000.00001'
   end
 
   scenario 'update an existent material' do

@@ -41,5 +41,9 @@
         return $("<span>").text('<%= resource.decorator.persisted_parent_mask_and_class_number[0] %>').addClass('add-on').attr("id", "prepended-input");
       });
     <% end %>
+
+    <% unless f.object.editable? %>
+      $("form :input").attr('disabled', true);
+    <% end %>
   })();
 </script>

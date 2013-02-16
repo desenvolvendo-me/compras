@@ -16,36 +16,26 @@ describe MaterialsClassDecorator do
   end
 
   describe '#parent_class_number_masked' do
-    it 'should returns an empty string when there is no mask' do
-      subject.stub(:mask => nil)
-
-      expect(subject.parent_class_number_masked).to eq ''
-    end
-
     it 'should returns an empty string when there is no class_number' do
-      subject.stub(:mask => '99.99.99.999.999')
-      subject.stub(:class_number => nil)
+      component.stub(:masked_class_number => '')
 
       expect(subject.parent_class_number_masked).to eq ''
     end
 
     it 'should returns the parent number with the mask applied' do
-      subject.stub(:mask => '99.99.99.999.999')
-      subject.stub(:class_number => '302500000000')
+      component.stub(:masked_class_number => '30.25.00.000.000')
 
       expect(subject.parent_class_number_masked).to eq '30.25.'
     end
 
     it 'should returns the parent number with the mask applied when at last level' do
-      subject.stub(:mask => '99.99.99.999.999')
-      subject.stub(:class_number => '302533111000')
+      component.stub(:masked_class_number => '30.25.33.111.000')
 
       expect(subject.parent_class_number_masked).to eq '30.25.33.111.'
     end
 
     it 'should returns the whole number when all levels are filled' do
-      subject.stub(:mask => '99.99.99.999.999')
-      subject.stub(:class_number => '302533111222')
+      component.stub(:masked_class_number => '30.25.33.111.222')
 
       expect(subject.parent_class_number_masked).to eq '30.25.33.111.222'
     end
@@ -53,39 +43,26 @@ describe MaterialsClassDecorator do
 
   describe '#persisted_parent_mask_and_class_number' do
     it 'should return an array with the parent_class_number_masked and the class_number' do
-      subject.stub(:mask => '99.99.99.999.999')
-      subject.stub(:class_number => '302533000000')
+      component.stub(:masked_class_number => '30.25.33.000.000')
 
       expect(subject.persisted_parent_mask_and_class_number).to eq ['30.25.', '33']
     end
 
     it 'should return an array with the parent_class_number_masked and the class_number when at last level' do
-      subject.stub(:mask => '99.99.99.999.999')
-      subject.stub(:class_number => '302533111000')
+      component.stub(:masked_class_number => '30.25.33.111.000')
 
       expect(subject.persisted_parent_mask_and_class_number).to eq ['30.25.33.', '111']
     end
 
     it 'should return an array with the parent_class_number_masked and the class_number when all levels are filled' do
-      subject.stub(:mask => '99.99.99.999.999')
-      subject.stub(:class_number => '302533111222')
+      component.stub(:masked_class_number => '30.25.33.111.222')
 
       expect(subject.persisted_parent_mask_and_class_number).to eq ['30.25.33.111.', '222']
     end
 
-    context 'when mask is nil' do
+    context 'when masked_class_number is nil' do
       it 'should return an array with empty strings' do
-        subject.stub(:mask => nil)
-        subject.stub(:class_number => '302533000000')
-
-        expect(subject.persisted_parent_mask_and_class_number).to eq ['', '']
-      end
-    end
-
-    context 'when mask is nil' do
-      it 'should return an array with empty strings' do
-        subject.stub(:mask => '99.99.99.999.999')
-        subject.stub(:class_number => nil)
+      component.stub(:masked_class_number => '')
 
         expect(subject.persisted_parent_mask_and_class_number).to eq ['', '']
       end
@@ -138,6 +115,7 @@ describe MaterialsClassDecorator do
       it 'should return the mask of child' do
         subject.stub(:mask => '99.99.99.999.999')
         subject.stub(:class_number => '302500000000')
+        component.stub(:masked_class_number => '30.25.00.000.000')
 
         expect(subject.child_mask).to eq '99'
       end
@@ -145,6 +123,7 @@ describe MaterialsClassDecorator do
       it 'should return the mask of child' do
         subject.stub(:mask => '99.99.99.999.999')
         subject.stub(:class_number => '302534000000')
+        component.stub(:masked_class_number => '30.25.43.000.000')
 
         expect(subject.child_mask).to eq '999'
       end
@@ -152,6 +131,7 @@ describe MaterialsClassDecorator do
       it 'should return the mask of child when last number' do
         subject.stub(:mask => '99.99.99.999.999')
         subject.stub(:class_number => '302534111000')
+        component.stub(:masked_class_number => '30.25.43.111.000')
 
         expect(subject.child_mask).to eq '999'
       end
@@ -159,6 +139,7 @@ describe MaterialsClassDecorator do
       it 'should return an empty string of child when no child' do
         subject.stub(:mask => '99.99.99.999.999')
         subject.stub(:class_number => '302534111222')
+        component.stub(:masked_class_number => '30.25.43.111.222')
 
         expect(subject.child_mask).to eq ''
       end

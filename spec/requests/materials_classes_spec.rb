@@ -14,12 +14,12 @@ feature "MaterialsClasses" do
 
     click_link 'Criar Classe de Materiais'
 
-    fill_with_autocomplete 'Classe superior', :with => 'Soft'
+    fill_with_autocomplete 'Classe superior', :with => 'Software'
 
-    expect(page).to have_field 'Classe superior', :with => '01 - Software'
+    expect(page).to have_field 'Classe superior', :with => '01.32 - Software'
 
     within '.number-prepend' do
-      expect(page).to have_content '01.'
+      expect(page).to have_content '01.32.'
     end
 
     fill_in 'Código', :with => '22'
@@ -33,22 +33,22 @@ feature "MaterialsClasses" do
     click_link 'Materiais de Escritório'
 
     within '.number-prepend' do
-      expect(page).to have_content '01.'
+      expect(page).to have_content '01.32.'
     end
 
-    expect(page).to have_field 'Classe superior', :with => '01 - Software'
+    expect(page).to have_field 'Classe superior', :with => '01.32 - Software'
     expect(page).to have_field 'Código', :with => '22'
     expect(page).to have_field 'Descrição', :with => 'Materiais de Escritório'
     expect(page).to have_field 'Detalhamento', :with => 'materiais para escritório'
   end
 
   scenario 'update an existent materials_class' do
-    MaterialsClass.make!(:software)
+    MaterialsClass.make!(:comp_eletricos)
     MaterialsClass.make!(:arames)
 
     navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
 
-    click_link 'Software'
+    click_link 'Componentes elétricos'
 
     fill_with_autocomplete 'Classe superior', :with => 'Arames'
 
@@ -79,18 +79,18 @@ feature "MaterialsClasses" do
   end
 
   scenario 'destroy an existent materials_class' do
-    MaterialsClass.make!(:software)
+    MaterialsClass.make!(:comp_eletricos)
 
     navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
 
-    click_link 'Software'
+    click_link 'Componentes elétricos'
 
     click_link 'Apagar'
 
     expect(page).to have_notice 'Classe de Materiais apagada com sucesso.'
 
-    expect(page).to_not have_content 'Software'
-    expect(page).to_not have_content '010000000000'
+    expect(page).to_not have_content 'Componentes elétricos'
+    expect(page).to_not have_content '03053300000000'
   end
 
   scenario 'index with columns at the index' do
@@ -105,7 +105,7 @@ feature "MaterialsClasses" do
 
       within 'tbody tr' do
         expect(page).to have_content 'Software'
-        expect(page).to have_content '010000000000'
+        expect(page).to have_content '013200000000'
         expect(page).to have_content '99.99.99.999.999'
       end
     end
@@ -121,10 +121,10 @@ feature "MaterialsClasses" do
 
     fill_with_autocomplete 'Classe superior', :with => 'Soft'
 
-    expect(page).to have_field 'Classe superior', :with => '01 - Software'
+    expect(page).to have_field 'Classe superior', :with => '01.32 - Software'
 
     within '.number-prepend' do
-      expect(page).to have_content '01.'
+      expect(page).to have_content '01.32.'
     end
 
     fill_with_autocomplete 'Classe superior', :with => 'Arames'
@@ -137,10 +137,10 @@ feature "MaterialsClasses" do
 
     fill_with_autocomplete 'Classe superior', :with => '01'
 
-    expect(page).to have_field 'Classe superior', :with => '01 - Software'
+    expect(page).to have_field 'Classe superior', :with => '01.32 - Software'
 
     within '.number-prepend' do
-      expect(page).to have_content '01.'
+      expect(page).to have_content '01.32'
     end
 
     fill_with_autocomplete 'Classe superior', :with => '02'
@@ -150,5 +150,29 @@ feature "MaterialsClasses" do
     within '.number-prepend' do
       expect(page).to have_content '02.44.65.430.'
     end
+  end
+
+  scenario 'cannot edit when level is lower or equals to 2' do
+    MaterialsClass.make!(:software)
+    MaterialsClass.make!(:software,
+      :class_number => '010000000000',
+      :description => 'Teste'
+    )
+
+    navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
+
+    click_link 'Software'
+
+    within '.number-prepend' do
+      expect(page).to have_content '01.'
+    end
+
+    expect(page).to_not have_button 'Salvar'
+    expect(page).to_not have_link 'Apagar'
+
+    expect(page).to have_disabled_field 'Classe superior', :with => '01 - Teste'
+    expect(page).to have_disabled_field 'Código', :with => '32'
+    expect(page).to have_disabled_field 'Descrição', :with => 'Software'
+    expect(page).to have_disabled_field 'Detalhamento', :with => 'Softwares de computador'
   end
 end

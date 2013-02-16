@@ -22,7 +22,7 @@ class MaterialsClassDecorator
     parent_masked = ""
     m = ""
 
-    masked_number.each_char do |c|
+    masked_class_number.each_char do |c|
       if c == '.'
         if m.to_i == 0
           return parent_masked
@@ -95,7 +95,7 @@ class MaterialsClassDecorator
     size = 0
     m = ""
 
-    masked_number.each_char do |c|
+    masked_class_number.each_char do |c|
       if c == '.'
         if m.to_i == 0 && size == 0
           return m.size
@@ -113,23 +113,5 @@ class MaterialsClassDecorator
     else
       0
     end
-  end
-
-  def masked_number
-    return '' unless mask && class_number
-
-    index = 0
-    result = ""
-
-    mask.each_char do |c|
-      if c == '.'
-        result += c
-      else
-        result += class_number[index]
-        index += 1
-      end
-    end
-
-    result
   end
 end
