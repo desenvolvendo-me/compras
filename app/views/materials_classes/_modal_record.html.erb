@@ -1,0 +1,5 @@
+<tr data-resource="<%= render :partial => "data_attributes", :formats => [:json], :locals => { :resource => record } %>">
+  <% [:masked_class_number, :description].each do |attribute| %>
+    <td><%= formatted_attribute record, attribute %></td>
+  <% end %>
+</tr>

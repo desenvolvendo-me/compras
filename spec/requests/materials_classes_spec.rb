@@ -173,4 +173,19 @@ feature "MaterialsClasses" do
     expect(page).to have_disabled_field 'Descrição', :with => 'Software'
     expect(page).to have_disabled_field 'Detalhamento', :with => 'Softwares de computador'
   end
+
+  scenario 'filter and modal can search class_number with dot' do
+    MaterialsClass.make!(:software)
+
+    navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
+
+    click_link 'Filtrar Classes de Materiais'
+
+    fill_in 'Código', :with => '013.20'
+
+    click_button 'Pesquisar'
+
+    expect(page).to have_content "Software"
+    expect(page).to have_content "01.32.00.000.000"
+  end
 end
