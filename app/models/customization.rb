@@ -1,4 +1,4 @@
-class Customization < Compras::Model
+class Customization < Financeiro::Model
   attr_accessible :model, :state_id, :data_attributes
 
   belongs_to :state

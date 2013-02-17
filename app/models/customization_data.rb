@@ -1,4 +1,4 @@
-class CustomizationData < Compras::Model
+class CustomizationData < Financeiro::Model
   attr_accessible :customization, :data, :data_type, :required
 
   belongs_to :customization

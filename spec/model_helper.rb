@@ -104,6 +104,9 @@ require 'unico/model'
 # Compras Model
 require 'compras'
 
+# Financeiro Model
+require 'financeiro'
+
 $:.append Unico::Engine.config.root
 
 # Persona
