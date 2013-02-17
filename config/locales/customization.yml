@@ -8,4 +8,4 @@ pt-BR:
     attributes:
       customization:
         model: "Tabela"
-        state: "Estado"
+        state_id: "Estado"

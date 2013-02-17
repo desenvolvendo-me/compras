@@ -16,7 +16,7 @@ feature "Customizations" do
     click_link 'Criar Customização'
 
     select 'Credor', :from => 'Tabela'
-    fill_modal 'Estado', :with => 'Paraná'
+    select 'Paraná', :from => 'Estado'
 
     click_link 'Adicionar Dado da Customização'
 
@@ -33,7 +33,7 @@ feature "Customizations" do
     end
 
     expect(page).to have_select 'Tabela', :selected => 'Credor'
-    expect(page).to have_field 'Estado', :with => 'Paraná'
+    expect(page).to have_select 'Estado', :selected => 'Paraná'
 
     expect(page).to have_field 'Dado', :with => 'Objeto social do credor'
     expect(page).to have_select 'Tipo do dado', :selected => 'Texto simples'

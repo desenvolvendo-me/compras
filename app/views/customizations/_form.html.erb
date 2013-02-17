@@ -2,7 +2,7 @@
 
 <div class="yui-3-g">
   <div class="yui3-u-1-5">
-    <%= f.input :state %>
+    <%= f.input :state_id, :as => :select, :collection => State.all.to_a %>
   </div>
 </div>
 
