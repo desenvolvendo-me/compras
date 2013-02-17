@@ -76,6 +76,8 @@ class MaterialsClassDecorator
   end
 
   def class_number_persisted
+    return masked_class_number[0, 2] if class_number_level == 1
+
     return '' unless last_dot_index
 
     end_position = -1

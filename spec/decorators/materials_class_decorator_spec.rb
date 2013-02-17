@@ -41,27 +41,33 @@ describe MaterialsClassDecorator do
   end
 
   describe '#persisted_parent_mask_and_class_number' do
+    it 'should return an array with the parent_class_number_masked and the class_number when at first level' do
+      component.stub(:masked_class_number => '30.00.00.000.000', :class_number_level => 1)
+
+      expect(subject.persisted_parent_mask_and_class_number).to eq ['', '30']
+    end
+
     it 'should return an array with the parent_class_number_masked and the class_number' do
-      component.stub(:masked_class_number => '30.25.33.000.000')
+      component.stub(:masked_class_number => '30.25.33.000.000', :class_number_level => 3)
 
       expect(subject.persisted_parent_mask_and_class_number).to eq ['30.25.', '33']
     end
 
     it 'should return an array with the parent_class_number_masked and the class_number when at last level' do
-      component.stub(:masked_class_number => '30.25.33.111.000')
+      component.stub(:masked_class_number => '30.25.33.111.000', :class_number_level => 4)
 
       expect(subject.persisted_parent_mask_and_class_number).to eq ['30.25.33.', '111']
     end
 
     it 'should return an array with the parent_class_number_masked and the class_number when all levels are filled' do
-      component.stub(:masked_class_number => '30.25.33.111.222')
+      component.stub(:masked_class_number => '30.25.33.111.222', :class_number_level => 5)
 
       expect(subject.persisted_parent_mask_and_class_number).to eq ['30.25.33.111.', '222']
     end
 
     context 'when masked_class_number is nil' do
       it 'should return an array with empty strings' do
-      component.stub(:masked_class_number => '')
+      component.stub(:masked_class_number => '', :class_number_level => 0)
 
         expect(subject.persisted_parent_mask_and_class_number).to eq ['', '']
       end

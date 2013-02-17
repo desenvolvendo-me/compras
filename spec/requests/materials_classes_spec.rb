@@ -188,4 +188,15 @@ feature "MaterialsClasses" do
     expect(page).to have_content "Software"
     expect(page).to have_content "01.32.00.000.000"
   end
+
+  scenario 'update an existent materials_class' do
+    MaterialsClass.make!(:software, :class_number => '120000000000')
+
+    navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
+
+    click_link 'Software'
+
+    expect(page).to have_field 'Classe superior', :with => ''
+    expect(page).to have_field 'Código', :with => '12'
+  end
 end
