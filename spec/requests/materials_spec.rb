@@ -42,7 +42,7 @@ feature "Materials" do
 
     click_link 'Caixa'
 
-    expect(page).to have_field 'Classe', :with => '013200000000 - Software'
+    expect(page).to have_field 'Classe', :with => '01.32.00.000.000 - Software'
     expect(page).to have_field 'Descrição', :with => 'Caixa'
     expect(page).to have_field 'Descrição detalhada', :with => 'Uma caixa'
     expect(page).to have_field 'Estoque mínimo', :with => '10'
@@ -127,7 +127,7 @@ feature "Materials" do
 
     click_link 'Parafuso'
 
-    expect(page).to have_field 'Classe', :with => '024465430000 - Arames'
+    expect(page).to have_field 'Classe', :with => '02.44.65.430.000 - Arames'
     expect(page).to have_field 'Código', :with => '024465430000.00003'
     expect(page).to have_field 'Descrição', :with => 'Parafuso'
     expect(page).to have_field 'Descrição detalhada', :with => 'de rosca'

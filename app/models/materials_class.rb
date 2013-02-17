@@ -23,7 +23,7 @@ class MaterialsClass < Compras::Model
   }
 
   def to_s
-    "#{class_number} - #{description}"
+    "#{masked_class_number} - #{description}"
   end
 
   def editable?
