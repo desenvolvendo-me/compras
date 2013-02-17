@@ -101,12 +101,10 @@ feature "MaterialsClasses" do
     within_records do
       expect(page).to have_content 'Descrição'
       expect(page).to have_content 'Código'
-      expect(page).to have_content 'Máscara'
 
       within 'tbody tr' do
         expect(page).to have_content 'Software'
-        expect(page).to have_content '013200000000'
-        expect(page).to have_content '99.99.99.999.999'
+        expect(page).to have_content '01.32.00.000.000'
       end
     end
   end

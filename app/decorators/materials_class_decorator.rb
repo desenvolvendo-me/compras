@@ -3,7 +3,7 @@ class MaterialsClassDecorator
   include Decore::Proxy
   include Decore::Header
 
-  attr_header :description, :class_number, :mask
+  attr_header :description, :masked_class_number
 
   def masked_to_s
     "#{parent_class_number_masked.slice(0..-2)} - #{description}"
