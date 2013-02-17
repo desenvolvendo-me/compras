@@ -17,7 +17,7 @@ class MaterialCodeGenerator
   protected
 
   def material_code
-    [materials_class.class_number, next_code].join('.')
+    [materials_class.masked_class_number, next_code].join('.')
   end
 
   def next_code
