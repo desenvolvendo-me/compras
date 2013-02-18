@@ -10,6 +10,7 @@ builder resource, json do
   json.administrative_process_description       resource.administrative_process_description
   json.administrative_process                   resource.administrative_process.to_s
   json.summarized_object                        resource.administrative_process_summarized_object
+  json.execution_type_humanize                  resource.execution_type_humanize
 
   json.items resource.items do |json, item|
     json.id                   item.id

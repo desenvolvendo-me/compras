@@ -37,3 +37,4 @@ pt-BR:
         kind: "Tipo"
         contract_file: 'Contrato'
         modality_humanize: 'Modalidade'
+        execution_type_humanize: "Forma de execução"

@@ -164,6 +164,24 @@ describe Contract do
     end
   end
 
+  describe "#execution_type_humanize" do
+    context "given a licitation process" do
+      let(:licitation_process) { double("LicitationProcess", :execution_type_humanize => "Tarefa")}
+
+      it "returns the licitation process humanized execution type" do
+        subject.stub(:licitation_process).and_return licitation_process
+        expect(subject.execution_type_humanize).to eq 'Tarefa'
+      end
+    end
+
+    context "without a licitation process" do
+      it "returns nil" do
+        subject.stub(:licitation_process).and_return nil
+        expect(subject.execution_type_humanize).to eql nil
+      end
+    end
+  end
+
   context 'pledges list and pledges sum' do
     let :pledge_1 do
       double('Pledge', :id => 1)

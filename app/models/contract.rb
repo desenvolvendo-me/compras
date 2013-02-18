@@ -61,6 +61,10 @@ class Contract < Compras::Model
     licitation_process.try(:administrative_process_modality_humanize) || direct_purchase.try(:modality_humanize)
   end
 
+  def execution_type_humanize
+    licitation_process.try(:execution_type_humanize)
+  end
+
   def self.next_sequential(year)
     self.where { self.year.eq year }.size + 1
   end

@@ -90,15 +90,21 @@
 </div>
 
 <div class='yui3-g'>
-  <div class='yui3-u-1-3'>
+  <div class='yui3-u-1-2'>
     <%= f.input :licitation_process %>
   </div>
 
-  <div class='yui3-u-1-3'>
+  <div class='yui3-u-1-2'>
+    <%= f.input :execution_type_humanize, :disabled => true %>
+  </div>
+</div>
+
+<div class='yui3-g'>
+  <div class='yui3-u-1-2'>
     <%= f.input :direct_purchase %>
   </div>
 
-  <div class='yui3-u-1-3'>
+  <div class='yui3-u-1-2'>
     <%= f.input :modality_humanize, :disabled => true %>
   </div>
 </div>
@@ -119,6 +125,12 @@
 <%= f.input :description %>
 
 <script>
+  var clearModalityExecutionType = function() {
+    $('#contract_modality_humanize').val('');
+    $('#contract_execution_type').val('');
+    $('#contract_execution_type_humanize').val('');
+  };
+
   $('#contract_kind').change(function (e) {
     $('#contract_parent').attr('disabled', $(this).val() != '<%= ContractKind::AMENDMENT %>');
   });
@@ -129,6 +141,9 @@
     if (licitationProcess) {
       $('#contract_content').val(licitationProcess.administrative_process_description);
       $('#contract_modality_humanize').val(licitationProcess.administrative_process_modality_humanize);
+      $('#contract_execution_type_humanize').val(licitationProcess.execution_type_humanize);
+    } else {
+      clearModalityExecutionType();
     }
   });
 
@@ -137,6 +152,8 @@
 
     if (directPurchase) {
       $('#contract_modality_humanize').val(directPurchase.modality_humanize);
+    } else {
+      clearModalityExecutionType();
     }
   });
 
