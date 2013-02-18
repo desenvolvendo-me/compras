@@ -47,6 +47,7 @@ pt-BR:
         code_and_year: "Código/Ano"
         administrative_process_code_and_year: "Processo administrativo"
         delivery_location: "Local de entrega"
+        execution_type: "Forma de execução"
 
   licitation_process:
     messages:

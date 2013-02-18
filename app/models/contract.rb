@@ -1,6 +1,6 @@
 class Contract < Compras::Model
   attr_accessible :year, :contract_number, :sequential_number, :publication_date, :lawyer_code, :contract_file
-  attr_accessible :signature_date, :end_date, :description, :kind, :content, :execution_type, :contract_guarantees
+  attr_accessible :signature_date, :end_date, :description, :kind, :content, :contract_guarantees
   attr_accessible :contract_value, :guarantee_value, :contract_validity, :subcontracting, :cancellation_date, :cancellation_reason
   attr_accessible :dissemination_source_id, :creditor_id, :service_or_contract_type_id, :licitation_process_id
   attr_accessible :direct_purchase_id, :budget_structure_id, :budget_structure_responsible_id, :lawyer_id, :parent_id
@@ -12,7 +12,6 @@ class Contract < Compras::Model
   mount_uploader :contract_file, DocumentUploader
 
   has_enumeration_for :kind, :with => ContractKind, :create_helpers => true
-  has_enumeration_for :execution_type
   has_enumeration_for :contract_guarantees
 
   belongs_to :dissemination_source
@@ -33,9 +32,11 @@ class Contract < Compras::Model
 
   accepts_nested_attributes_for :delivery_schedules, :allow_destroy => true
 
+  delegate :execution_type, :to => :licitation_process, :allow_nil => true
+
   validates :year, :mask => "9999", :allow_blank => true
   validates :sequential_number, :year, :contract_number, :publication_date, :presence => true
-  validates :dissemination_source, :content, :creditor, :execution_type, :service_or_contract_type, :presence => true
+  validates :dissemination_source, :content, :creditor, :service_or_contract_type, :presence => true
   validates :contract_guarantees, :contract_value, :contract_validity, :signature_date, :presence => true
   validates :end_date, :budget_structure, :budget_structure_responsible, :kind, :presence => true
   validates :parent, :presence => true, :if => :amendment?

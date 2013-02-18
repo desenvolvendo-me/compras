@@ -42,6 +42,8 @@ describe Contract do
 
   it { should have_many(:pledges).dependent(:restrict) }
 
+  it { should delegate(:execution_type).to(:licitation_process) }
+
   it { should validate_presence_of :sequential_number }
   it { should validate_presence_of :year }
   it { should validate_presence_of :contract_number }
@@ -49,7 +51,6 @@ describe Contract do
   it { should validate_presence_of :dissemination_source }
   it { should validate_presence_of :content }
   it { should validate_presence_of :creditor }
-  it { should validate_presence_of :execution_type }
   it { should validate_presence_of :contract_guarantees }
   it { should validate_presence_of :contract_value }
   it { should validate_presence_of :contract_validity }

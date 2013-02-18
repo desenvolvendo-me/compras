@@ -30,6 +30,7 @@ LicitationProcess.blueprint(:processo_licitatorio) do
   disqualify_by_documentation_problem { true }
   disqualify_by_maximum_value { true }
   consider_law_of_proposals { false }
+  execution_type { ExecutionType::INTEGRAL }
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_computador) do
@@ -60,6 +61,7 @@ LicitationProcess.blueprint(:processo_licitatorio_computador) do
                                                                         :licitation_process => object)] }
   bidders { [Bidder.make!(:licitante)] }
   type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM }
+  execution_type { ExecutionType::INTEGRAL }
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_fornecedores) do
@@ -89,6 +91,7 @@ LicitationProcess.blueprint(:processo_licitatorio_fornecedores) do
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   bidders { [Bidder.make!(:licitante), Bidder.make!(:licitante_sobrinho)] }
   type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_GLOBAL_PRICE }
+  execution_type { ExecutionType::INTEGRAL }
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_publicacao_cancelada) do
@@ -117,6 +120,7 @@ LicitationProcess.blueprint(:processo_licitatorio_publicacao_cancelada) do
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao_de_cancelamento)] }
   type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM }
+  execution_type { ExecutionType::INTEGRAL }
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_canetas) do
@@ -148,6 +152,7 @@ LicitationProcess.blueprint(:processo_licitatorio_canetas) do
   bidders { [Bidder.make!(:licitante)] }
   type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM }
   licitation_process_lots { [LicitationProcessLot.make(:lote_antivirus, :licitation_process => object)] }
+  execution_type { ExecutionType::INTEGRAL }
 end
 
 LicitationProcess.blueprint(:apuracao_por_itens) do
@@ -177,6 +182,7 @@ LicitationProcess.blueprint(:apuracao_por_itens) do
   disqualify_by_documentation_problem { false }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM }
+  execution_type { ExecutionType::INTEGRAL }
   bidders { [Bidder.make!(:licitante_com_proposta_1),
              Bidder.make!(:licitante_com_proposta_2)] }
 end
@@ -207,6 +213,7 @@ LicitationProcess.blueprint(:apuracao_por_lote) do
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_PRICE_BY_LOT }
+  execution_type { ExecutionType::INTEGRAL }
   bidders { [Bidder.make!(:licitante_com_proposta_1),
              Bidder.make!(:licitante_com_proposta_2)] }
 end
@@ -236,6 +243,7 @@ LicitationProcess.blueprint(:valor_maximo_ultrapassado) do
   observations { "observacoes" }
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
+  execution_type { ExecutionType::INTEGRAL }
   type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_PRICE_BY_LOT }
   bidders { [Bidder.make!(:licitante_com_proposta_3),
              Bidder.make!(:licitante_com_proposta_7)] }
@@ -267,6 +275,7 @@ LicitationProcess.blueprint(:maior_lance_por_lote) do
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   type_of_calculation { LicitationProcessTypeOfCalculation::HIGHEST_BIDDER_BY_LOT}
+  execution_type { ExecutionType::INTEGRAL }
   bidders { [Bidder.make!(:licitante_com_proposta_1),
              Bidder.make!(:licitante_com_proposta_2)] }
 end
@@ -297,6 +306,7 @@ LicitationProcess.blueprint(:apuracao_global) do
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_GLOBAL_PRICE }
+  execution_type { ExecutionType::INTEGRAL }
   bidders { [Bidder.make!(:licitante_com_proposta_1),
              Bidder.make!(:licitante_com_proposta_2)] }
 end
@@ -327,6 +337,7 @@ LicitationProcess.blueprint(:apuracao_global_empatou) do
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_GLOBAL_PRICE }
+  execution_type { ExecutionType::INTEGRAL }
   bidders { [Bidder.make!(:licitante_com_proposta_5),
              Bidder.make!(:licitante_com_proposta_6)] }
 end
@@ -357,6 +368,7 @@ LicitationProcess.blueprint(:apuracao_global_sem_documentos) do
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_GLOBAL_PRICE }
+  execution_type { ExecutionType::INTEGRAL }
   bidders { [Bidder.make!(:licitante_com_proposta_3, :documents => []),
              Bidder.make!(:licitante_com_proposta_4, :documents => [])] }
 end
@@ -387,6 +399,7 @@ LicitationProcess.blueprint(:apuracao_global_small_company) do
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_GLOBAL_PRICE }
+  execution_type { ExecutionType::INTEGRAL }
   bidders { [Bidder.make!(:licitante_com_proposta_3),
              Bidder.make!(:licitante_com_proposta_4)] }
 end
@@ -417,6 +430,7 @@ LicitationProcess.blueprint(:apuracao_global_small_company_without_new_proposal)
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_GLOBAL_PRICE }
+  execution_type { ExecutionType::INTEGRAL }
   bidders { [Bidder.make!(:licitante_com_proposta_3, :will_submit_new_proposal_when_draw => false),
              Bidder.make!(:licitante_com_proposta_4)] }
 end
@@ -447,6 +461,7 @@ LicitationProcess.blueprint(:apuracao_global_small_company_2) do
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_GLOBAL_PRICE }
+  execution_type { ExecutionType::INTEGRAL }
   bidders { [Bidder.make!(:licitante_com_proposta_8),
              Bidder.make!(:licitante_com_proposta_9)] }
 end
@@ -478,6 +493,7 @@ LicitationProcess.blueprint(:processo_licitatorio_nao_atualizavel) do
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao_nao_atualizavel)] }
   type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM }
   licitation_process_lots { [LicitationProcessLot.make(:lote_antivirus, :licitation_process => object)] }
+  execution_type { ExecutionType::INTEGRAL }
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_canetas_sem_lote) do
@@ -507,6 +523,7 @@ LicitationProcess.blueprint(:processo_licitatorio_canetas_sem_lote) do
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   bidders { [Bidder.make!(:licitante)] }
   type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM }
+  execution_type { ExecutionType::INTEGRAL }
 end
 
 LicitationProcess.blueprint(:apuracao_melhor_tecnica_e_preco) do
@@ -535,6 +552,7 @@ LicitationProcess.blueprint(:apuracao_melhor_tecnica_e_preco) do
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM }
+  execution_type { ExecutionType::INTEGRAL }
   bidders { [Bidder.make!(:licitante_com_proposta_1),
              Bidder.make!(:licitante_com_proposta_2)] }
 end
@@ -564,6 +582,7 @@ LicitationProcess.blueprint(:pregao_presencial) do
   observations { "observacoes" }
   consider_law_of_proposals { true }
   document_types { [DocumentType.make!(:fiscal)] }
+  execution_type { ExecutionType::INTEGRAL }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao,
                                                                         :licitation_process => object)] }
   type_of_calculation { LicitationProcessTypeOfCalculation::SORT_PARTICIPANTS_BY_ITEM }

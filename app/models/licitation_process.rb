@@ -7,7 +7,7 @@ class LicitationProcess < Compras::Model
                   :envelope_opening_time, :document_type_ids, :type_of_calculation,
                   :pledge_type, :administrative_process_attributes,
                   :period, :period_unit, :expiration, :expiration_unit,
-                  :judgment_form_id, :delivery_location_id,
+                  :judgment_form_id, :delivery_location_id, :execution_type,
                   :disqualify_by_documentation_problem, :disqualify_by_maximum_value,
                   :consider_law_of_proposals, :price_registration, :status
 
@@ -23,6 +23,7 @@ class LicitationProcess < Compras::Model
   has_enumeration_for :expiration_unit, :with => PeriodUnit
   has_enumeration_for :period_unit, :with => PeriodUnit
   has_enumeration_for :status, :with => LicitationProcessStatus, :create_helpers => true
+  has_enumeration_for :execution_type
 
   belongs_to :administrative_process
   belongs_to :capability
@@ -67,7 +68,7 @@ class LicitationProcess < Compras::Model
   validates :process_date, :administrative_process, :capability, :period,
             :period_unit, :expiration, :expiration_unit, :payment_method,
             :envelope_delivery_time, :year, :envelope_delivery_date,
-            :pledge_type, :type_of_calculation, :presence => true
+            :pledge_type, :type_of_calculation, :execution_type, :presence => true
   validates :envelope_opening_date, :envelope_opening_time, :presence => true, :on => :update
   validate :total_of_administrative_process_budget_allocations_items_must_be_less_or_equal_to_value
   validate :administrative_process_must_not_belong_to_another_licitation_process

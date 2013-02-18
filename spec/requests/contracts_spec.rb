@@ -95,7 +95,6 @@ feature "Contracts" do
     fill_in 'Valor do contrato', :with => '1.000,00'
     fill_in 'Validade do contrato', :with => '12'
 
-    select 'Empreitada integral', :from => 'Forma de execução'
     select 'Fiança bancária', :from => 'Garantias do contrato'
     select 'Sim', :from => 'Subcontratação'
 
@@ -133,7 +132,6 @@ feature "Contracts" do
     expect(page).to have_field 'Validade do contrato', :with => '12'
     expect(page).to have_field 'Fornecedor', :with => 'Gabriel Sobrinho'
 
-    expect(page).to have_select 'Forma de execução', :selected => 'Empreitada integral'
     expect(page).to have_select 'Garantias do contrato', :selected => 'Fiança bancária'
     expect(page).to have_select 'Subcontratação', :selected => 'Sim'
     expect(page).to have_field 'Modalidade', :with => 'Convite'

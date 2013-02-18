@@ -71,6 +71,7 @@ feature "LicitationProcesses" do
 
       check 'Registro de preço'
       select 'Menor preço total por item', :from => 'Tipo da apuração'
+      select 'Empreitada integral', :from => 'Forma de execução'
       fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
       fill_in 'Validade da proposta', :with => '5'
       select 'dia/dias', :from => 'Período da validade da proposta'
@@ -143,6 +144,7 @@ feature "LicitationProcesses" do
 
       expect(page).to have_checked_field 'Registro de preço'
       expect(page).to have_select 'Tipo da apuração', :selected => 'Menor preço total por item'
+      expect(page).to have_select 'Forma de execução', :selected => 'Empreitada integral'
       expect(page).to have_field 'Fonte de recurso', :with => 'Reforma e Ampliação'
       expect(page).to have_field 'Validade da proposta', :with => '5'
       expect(page).to have_select 'Período da validade da proposta', :selected => 'dia/dias'
@@ -222,6 +224,7 @@ feature "LicitationProcesses" do
 
       select 'Por Item com Menor Preço', :from => 'Forma de julgamento'
       select 'Menor preço total por item', :from => 'Tipo da apuração'
+      select 'Empreitada integral', :from => 'Forma de execução'
     end
   end
 
@@ -252,6 +255,7 @@ feature "LicitationProcesses" do
       fill_in 'Data do processo', :with => '21/03/2013'
       select 'Estimativo', :from => 'Tipo de empenho'
       select 'Menor preço total por item', :from => 'Tipo da apuração'
+      select 'Empreitada integral', :from => 'Forma de execução'
       fill_modal 'Fonte de recurso', :with => 'Construção', :field => 'Descrição'
       fill_in 'Validade da proposta', :with => '10'
       select 'dia/dias', :from => 'Período da validade da proposta'
@@ -308,6 +312,7 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Processo administrativo', :with => '1/2012'
       expect(page).to have_select 'Tipo de empenho', :selected => 'Estimativo'
       expect(page).to have_select 'Tipo da apuração', :selected => 'Menor preço total por item'
+      expect(page).to have_select 'Forma de execução', :selected => 'Empreitada integral'
       expect(page).to have_field 'Fonte de recurso', :with => 'Construção'
       expect(page).to have_field 'Validade da proposta', :with => '10'
       expect(page).to have_select 'Período da validade da proposta', :selected => 'dia/dias'
@@ -515,7 +520,7 @@ feature "LicitationProcesses" do
     expect(page).to_not have_link 'Lotes de itens'
   end
 
-  scenario "should brings some filled fields when creating a new licitatoin process" do
+  scenario "should brings some filled fields when creating a new licitation process" do
     AdministrativeProcess.make!(:compra_de_cadeiras)
 
     navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
@@ -576,6 +581,7 @@ feature "LicitationProcesses" do
       select 'Global', :from => 'Tipo de empenho'
 
       select 'Menor preço total por item', :from => 'Tipo da apuração'
+      select 'Empreitada integral', :from => 'Forma de execução'
       fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
       fill_in 'Validade da proposta', :with => '5'
       select 'dia/dias', :from => 'Período da validade da proposta'
@@ -1387,6 +1393,7 @@ feature "LicitationProcesses" do
       select 'Global', :from => 'Tipo de empenho'
       check 'Registro de preço'
       select 'Menor preço total por item', :from => 'Tipo da apuração'
+      select 'Empreitada integral', :from => 'Forma de execução'
       fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
       fill_in 'Validade da proposta', :with => '5'
       select 'dia/dias', :from => 'Período da validade da proposta'

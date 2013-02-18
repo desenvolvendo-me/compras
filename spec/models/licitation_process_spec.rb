@@ -82,6 +82,7 @@ describe LicitationProcess do
   it { should validate_presence_of :envelope_delivery_time }
   it { should validate_presence_of :pledge_type }
   it { should validate_presence_of :type_of_calculation }
+  it { should validate_presence_of :execution_type }
 
   it { should_not validate_presence_of :envelope_opening_date }
   it { should_not validate_presence_of :envelope_opening_time }
