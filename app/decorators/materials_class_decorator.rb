@@ -76,7 +76,7 @@ class MaterialsClassDecorator
   end
 
   def class_number_persisted
-    return masked_class_number[0, 2] if class_number_level == 1
+    return masked_class_number[0, first_dot_index] if class_number_level == 1
 
     return '' unless last_dot_index
 
@@ -88,6 +88,10 @@ class MaterialsClassDecorator
 
   def last_dot_index
     parent_class_number_masked.rindex('.', -2)
+  end
+
+  def first_dot_index
+    parent_class_number_masked.index('.')
   end
 
   def child_mask_size

@@ -189,7 +189,7 @@ feature "MaterialsClasses" do
     expect(page).to have_content "01.32.00.000.000"
   end
 
-  scenario 'update an existent materials_class' do
+  scenario 'update an existent materials_class when at first level' do
     MaterialsClass.make!(:software, :class_number => '120000000000')
 
     navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
