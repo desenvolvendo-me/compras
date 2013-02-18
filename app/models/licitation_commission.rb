@@ -1,5 +1,8 @@
 # encoding: utf-8
 class LicitationCommission < Compras::Model
+  include CustomData
+  reload_custom_data
+
   attr_accessible :commission_type, :nomination_date, :expiration_date,
                   :exoneration_date, :description, :regulatory_act_id,
                   :licitation_commission_responsibles_attributes,
@@ -33,6 +36,7 @@ class LicitationCommission < Compras::Model
   validates :licitation_commission_responsibles, :licitation_commission_members, :no_duplication => :individual_id
   validate :must_have_one_member_with_role_president, :unless => :trading?
   validate :must_have_auctioneer, :must_have_support_team, :if => :trading?
+  validate :validate_custom_data
 
   orderize :id
   filterize

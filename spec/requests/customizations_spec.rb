@@ -81,6 +81,50 @@ feature "Customizations" do
     end
   end
 
+  scenario 'customization for licitation_commission' do
+    Prefecture.make!(:belo_horizonte)
+    State.make!(:pr)
+    LicitationCommission.make!(:comissao)
+
+    navigate 'Geral > Parâmetros > Customizações'
+
+    click_link 'Criar Customização'
+
+    select 'Comissão de Licitação', :from => 'Tabela'
+    select 'Paraná', :from => 'Estado'
+
+    click_link 'Adicionar Dado da Customização'
+
+    fill_in 'Dado', :with => 'Campo novo'
+
+    select 'Texto simples', :from => 'Tipo do dado'
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Customização criado com sucesso.'
+
+
+    navigate 'Processo Administrativo/Licitatório > Auxiliar > Comissões de Licitação'
+
+    within_records do
+      click_link 'descricao da comissao - Tipo: Permanente - Data de Nomeação: 20/03/2012'
+    end
+
+    within_tab 'Principal' do
+      fill_in 'Campo novo', :with => 'Conteúdo do campo novo'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Comissão de Licitação editada com sucesso.'
+
+    within_records do
+      click_link 'descricao da comissao - Tipo: Permanente - Data de Nomeação: 20/03/2012'
+    end
+
+    expect(page).to have_field 'Campo novo', :with => 'Conteúdo do campo novo'
+  end
+
   scenario 'destroy an existent customization' do
     Prefecture.make! :belo_horizonte
     Customization.make! :campo_string
