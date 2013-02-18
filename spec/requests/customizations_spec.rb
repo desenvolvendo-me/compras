@@ -18,11 +18,21 @@ feature "Customizations" do
     select 'Credor', :from => 'Tabela'
     select 'Paraná', :from => 'Estado'
 
+    # Add a simple string field
     click_link 'Adicionar Dado da Customização'
 
     fill_in 'Dado', :with => 'Objeto social do credor'
 
     select 'Texto simples', :from => 'Tipo do dado'
+
+    # Add a select field
+    click_link 'Adicionar Dado da Customização'
+
+    fill_in 'Dado', :with => 'Lista de opções'
+
+    select 'Lista de opções', :from => 'Tipo do dado'
+
+    fill_in 'Opções', :with => 'Opção 1, Opção 2, Opção 3'
 
     click_button 'Salvar'
 
@@ -38,12 +48,17 @@ feature "Customizations" do
     expect(page).to have_field 'Dado', :with => 'Objeto social do credor'
     expect(page).to have_select 'Tipo do dado', :selected => 'Texto simples'
 
+    expect(page).to have_field 'Dado', :with => 'Lista de opções'
+    expect(page).to have_select 'Tipo do dado', :selected => 'Lista de opções'
+    expect(page).to have_field 'Opções', :with => 'Opção 1, Opção 2, Opção 3'
+
     navigate 'Comum > Pessoas > Credores'
 
     click_link 'Nohup'
 
     within_tab 'Principal' do
       fill_in 'Objeto social do credor', :with => 'Conteúdo do objeto social do credor'
+      select 'Opção 1', :on => 'Lista de opções'
     end
 
     click_button 'Salvar'
@@ -53,6 +68,7 @@ feature "Customizations" do
     click_link 'Nohup'
 
     expect(page).to have_field 'Objeto social do credor', :with => 'Conteúdo do objeto social do credor'
+    expect(page).to have_select 'Lista de opções', :with => 'Opção 1'
 
     # update an existent customization'
 

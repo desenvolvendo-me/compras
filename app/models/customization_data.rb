@@ -1,15 +1,25 @@
 class CustomizationData < Financeiro::Model
-  attr_accessible :customization, :data, :data_type, :required
+  attr_accessible :customization, :data, :data_type, :required, :options
 
   belongs_to :customization
 
   has_enumeration_for :data_type, :create_helpers => true
+
+  validates :options, :presence => true, :if => :select?
+
+  serialize :options
 
   after_save   :reload
   after_update :change_name_data
 
   def normalized_data
     data.parameterize("_")
+  end
+
+  def options=(options)
+    return unless options.present?
+
+    write_attribute(:options, options.split(',').map(&:strip))
   end
 
   private

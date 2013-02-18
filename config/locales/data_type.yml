@@ -7,3 +7,4 @@ pt-BR:
       decimal: "Decimal"
       integer: "Número inteiro"
       boolean: "Check"
+      select: "Lista de opções"

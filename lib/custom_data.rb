@@ -74,7 +74,7 @@ module CustomData
   end
 
   def string_presence_validator(item)
-    return unless item.string? || item.text?
+    return unless item.string? || item.text? || item.select?
 
     if custom_data[item.normalized_data].empty?
       errors.add(item.normalized_data.to_sym, :blank)

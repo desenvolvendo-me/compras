@@ -7,3 +7,26 @@
 </div>
 
 <%= f.input :data %>
+
+<script>
+  $(function() {
+    $("form").delegate('.data-type-option', 'change', function(evt) {
+      var dataType = $(this).val();
+
+      if (dataType === "<%= DataType::SELECT %>") {
+        $(this).closest(".nested-data").find(".options-field").closest("div").show();
+        $(this).closest(".nested-data").find(".options-field").requiredField(true);
+      } else {
+        $(this).closest(".nested-data").find(".options-field").closest("div").hide();
+        $(this).closest(".nested-data").find(".options-field").requiredField(false);
+      }
+    });
+
+    $("#data").on('nestedForm:afterAdd', function(evt) {
+      $(this).find(".options-field:first").closest("div").hide();
+      $(this).find(".options-field:first").requiredField(false);
+    });
+
+    $('.data-type-option').change();
+  });
+</script>
