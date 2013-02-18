@@ -103,7 +103,7 @@ feature "Users" do
       expect(page).to_not have_link 'Gabriel Sobrinho'
       expect(page).to_not have_link 'sobrinhosa'
 
-      expect(page).to have_css 'a', :count => 1
+      expect(page).to have_css 'a', :count => 2
     end
   end
 
