@@ -3,5 +3,5 @@ class UserDecorator
   include Decore::Proxy
   include Decore::Header
 
-  attr_header :authenticable, :login
+  attr_header :authenticable, :login, :link => [:authenticable, :login]
 end
