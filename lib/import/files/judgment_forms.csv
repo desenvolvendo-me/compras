@@ -5,3 +5,4 @@ Menor Preço - Por Item;item;lowest_price
 Melhor Técnica;item;best_technique
 Técnica e Preço;item;technical_and_price
 Maior Lance ou Oferta;item;best_auction_or_offer
+Maior Desconto Sobre Tabela;item;higher_discount_on_table

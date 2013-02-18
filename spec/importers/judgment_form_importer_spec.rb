@@ -30,6 +30,7 @@ describe JudgmentFormImporter do
     licitation_kind.stub(:value_for).with('BEST_TECHNIQUE').and_return('best_technique')
     licitation_kind.stub(:value_for).with('TECHNICAL_AND_PRICE').and_return('technical_and_price')
     licitation_kind.stub(:value_for).with('BEST_AUCTION_OR_OFFER').and_return('best_auction_or_offer')
+    licitation_kind.stub(:value_for).with('HIGHER_DISCOUNT_ON_TABLE').and_return('higher_discount_on_table')
   end
 
   it 'import' do
@@ -39,6 +40,7 @@ describe JudgmentFormImporter do
     null_repository.should_receive(:create!).with('description' => 'Melhor Técnica', 'kind' => 'item', 'licitation_kind' => 'best_technique')
     null_repository.should_receive(:create!).with('description' => 'Técnica e Preço', 'kind' => 'item', 'licitation_kind' => 'technical_and_price')
     null_repository.should_receive(:create!).with('description' => 'Maior Lance ou Oferta', 'kind' => 'item', 'licitation_kind' => 'best_auction_or_offer')
+    null_repository.should_receive(:create!).with('description' => 'Maior Desconto Sobre Tabela', 'kind' => 'item', 'licitation_kind' => 'higher_discount_on_table')
 
     subject.import!
   end
