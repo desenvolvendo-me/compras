@@ -141,6 +141,50 @@ feature "Customizations" do
     expect(page).to have_field 'Campo novo', :with => 'Conteúdo do campo novo'
   end
 
+  scenario 'customization for regulatory_act_type' do
+    Prefecture.make!(:belo_horizonte)
+    State.make!(:pr)
+    RegulatoryActType.make!(:lei)
+
+    navigate 'Geral > Parâmetros > Customizações'
+
+    click_link 'Criar Customização'
+
+    select 'Tipo de Ato Regulamentador', :from => 'Tabela'
+    select 'Paraná', :from => 'Estado'
+
+    click_link 'Adicionar Dado da Customização'
+
+    fill_in 'Dado', :with => 'Lista de opções'
+
+    select 'Lista de opções', :from => 'Tipo do dado'
+
+    fill_in 'Opções', :with => 'Opção 1, Opção 2, Opção 3'
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Customização criado com sucesso.'
+
+    navigate 'Comum > Legislação > Ato Regulamentador > Tipos de Ato Regulamentador'
+
+    within_records do
+      click_link 'Lei'
+    end
+
+    select 'Opção 2', :on => 'Lista de opções'
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Tipo de Ato Regulamentador editado com sucesso.'
+
+    within_records do
+        click_link 'Lei'
+    end
+
+    expect(page).to have_select 'Lista de opções', :selected => 'Opção 2'
+  end
+
+
   scenario 'destroy an existent customization' do
     Prefecture.make! :belo_horizonte
     Customization.make! :campo_string
