@@ -1,9 +1,9 @@
 class Material < Compras::Model
-  attr_accessible :materials_class_id, :code, :description, :material_type
-  attr_accessible :detailed_description, :minimum_stock_balance
-  attr_accessible :reference_unit_id, :manufacturer, :perishable, :storable
-  attr_accessible :service_or_contract_type_id, :expense_nature_id
-  attr_accessible :combustible, :material_characteristic
+  attr_accessible :materials_class_id, :code, :material_type, :manufacturer,
+                  :detailed_description, :minimum_stock_balance, :combustible,
+                  :reference_unit_id, :material_characteristic, :perishable,
+                  :service_or_contract_type_id, :expense_nature_id, :description,
+                  :storable
 
   attr_modal :description, :material_characteristic
 
