@@ -2,8 +2,8 @@ pt-BR:
   activerecord:
     models:
       prefecture:
-        one: "Prefeitura"
-        other: "Prefeituras"
+        one: "Organização"
+        other: "Organizações"
 
     attributes:
       prefecture:
@@ -12,6 +12,6 @@ pt-BR:
         phone: "Telefone"
         fax: "Fax"
         email: "E-mail"
-        mayor_name: "Prefeito"
+        mayor_name: "Responsável"
         image: "Logotipo"
         remove_image: "Apagar logotipo"
