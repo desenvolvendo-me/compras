@@ -2,6 +2,7 @@
 require 'model_helper'
 require 'app/models/persona/person'
 require 'app/models/person'
+require 'app/models/employee'
 require 'app/models/inscriptio_cursualis/address'
 require 'app/models/address'
 require 'app/models/persona/individual'
@@ -18,6 +19,8 @@ describe Individual do
     subject.person.name = 'Gabriel Sobrinho'
     expect(subject.person.name).to eq subject.to_s
   end
+
+  it { should have_one :employee }
 
   it { should have_many(:licitation_commission_responsibles).dependent(:restrict) }
   it { should have_many(:licitation_commission_members).dependent(:restrict) }

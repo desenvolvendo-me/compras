@@ -1,7 +1,7 @@
 class Employee < Compras::Model
-  attr_accessible :person_id, :position_id, :registration
+  attr_accessible :individual_id, :position_id, :registration
 
-  belongs_to :person
+  belongs_to :individual
   belongs_to :position
 
   has_one :user, :as => :authenticable
@@ -14,12 +14,12 @@ class Employee < Compras::Model
   has_many :price_collections, :dependent => :restrict
   has_many :price_registrations, :foreign_key => :responsible_id, :dependent => :restrict
 
-  delegate :to_s, :name, :to => :person
+  delegate :to_s, :name, :to => :individual
 
-  validates :person_id, :registration, :uniqueness => { :allow_blank => true }
-  validates :person, :registration, :position, :presence => true
+  validates :individual_id, :registration, :uniqueness => { :allow_blank => true }
+  validates :individual, :registration, :position, :presence => true
 
   filterize
 
-  scope :ordered, joins { person }.order { person.name }
+  scope :ordered, joins { individual }.order { individual.id }
 end

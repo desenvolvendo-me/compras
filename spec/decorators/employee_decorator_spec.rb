@@ -8,8 +8,8 @@ describe EmployeeDecorator do
       expect(described_class.headers?).to be_true
     end
 
-    it 'should have person, position, registration' do
-      expect(described_class.header_attributes).to include :person, :position, :registration
+    it 'should have individual, position, registration' do
+      expect(described_class.header_attributes).to include :individual, :position, :registration
     end
   end
 end

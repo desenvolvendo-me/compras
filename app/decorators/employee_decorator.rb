@@ -3,5 +3,5 @@ class EmployeeDecorator
   include Decore::Proxy
   include Decore::Header
 
-  attr_header :person, :position, :registration
+  attr_header :individual, :position, :registration
 end

@@ -7,6 +7,6 @@ pt-BR:
 
     attributes:
       employee:
-        person: "Pessoa"
+        individual: "Pessoa"
         position: "Cargo"
         registration: "Matrícula"

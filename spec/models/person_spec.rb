@@ -50,7 +50,6 @@ describe Person do
     end
   end
 
-  it { should have_one :employee }
   it { should have_one(:creditor).dependent(:restrict) }
 
   it { should have_many(:licitation_process_impugnments).dependent(:restrict) }

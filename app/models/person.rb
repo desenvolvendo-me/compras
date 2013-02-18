@@ -7,7 +7,6 @@ class Person < Persona::Person
   has_many :accredited_representatives, :dependent => :restrict
   has_many :bidders, :through => :accredited_representatives
 
-  has_one :employee
   has_one :creditor, :as => :creditable, :dependent => :restrict
 
   delegate :city, :zip_code, :to => :address
