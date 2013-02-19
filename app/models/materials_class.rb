@@ -12,6 +12,7 @@ class MaterialsClass < Compras::Model
   validates :class_number, :uniqueness => { :allow_blank => true }
 
   before_validation :create_class_number
+  before_save :fill_masked_number
 
   orderize :description
   filterize
@@ -68,6 +69,23 @@ class MaterialsClass < Compras::Model
   end
 
   private
+
+  def fill_masked_number
+    self.masked_number = ""
+
+    if mask && class_number
+      index = 0
+
+      mask.each_char do |c|
+        if c == '.'
+          self.masked_number += c
+        else
+          self.masked_number += class_number[index]
+          index += 1
+        end
+      end
+    end
+  end
 
   def create_class_number
     return unless parent_number && number

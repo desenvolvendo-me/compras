@@ -53,6 +53,55 @@ describe MaterialsClass do
     end
   end
 
+  describe 'fill masked_number on save' do
+    it 'should fills the masked_number with middle level' do
+      subject.class_number = '123560000'
+      subject.mask = '9.99.999.999'
+
+      subject.run_callbacks(:save)
+
+      expect(subject.masked_number).to eq '1.23.560.000'
+    end
+
+    it 'should fills the masked_number with first level' do
+      subject.class_number = '100000000'
+      subject.mask = '9.99.999.999'
+
+      subject.run_callbacks(:save)
+
+      expect(subject.masked_number).to eq '1.00.000.000'
+    end
+
+    it 'should fills the masked_number with last level' do
+      subject.class_number = '123456123'
+      subject.mask = '9.99.999.999'
+
+      subject.run_callbacks(:save)
+
+      expect(subject.masked_number).to eq '1.23.456.123'
+    end
+
+    context 'without mask' do
+      it 'should be empty' do
+        subject.class_number = '123456123'
+
+        subject.run_callbacks(:save)
+
+        expect(subject.masked_number).to eq ''
+      end
+    end
+
+    context 'without class_number' do
+      it 'should be empty' do
+        subject.mask = '9.99.999.999'
+
+        subject.run_callbacks(:save)
+
+        expect(subject.masked_number).to eq ''
+      end
+    end
+  end
+
   describe '#masked_class_number' do
     context 'without mask' do
       it 'should returns an ampty string' do
