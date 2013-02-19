@@ -1,8 +1,13 @@
+#encoding: utf-8
 class CustomizationDataDecorator
   include Decore
   include Decore::Proxy
 
   def options
-    super.join(', ') if super
+    return unless super
+
+    super.map do |option|
+      option.is_a?(Array) ? option.first : option
+    end.join(', ')
   end
 end

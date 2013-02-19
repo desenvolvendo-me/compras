@@ -1,6 +1,7 @@
 require 'model_helper'
 require 'app/models/customization_data'
 require 'app/models/customization'
+require 'app/business/options_parser'
 
 describe CustomizationData do
   it { belong_to :customization }
@@ -23,8 +24,11 @@ describe CustomizationData do
 
   describe "#options=" do
     it 'receives a string and splits it into an array' do
-      subject.options = "foo, bar,baz "
-      expect(subject.options).to eq %w(foo bar baz)
+      OptionsParser.any_instance.should_receive(:parse).and_return(["option"])
+
+      subject.options = "option"
+
+      expect(subject.options).to eq ["option"]
     end
   end
 end

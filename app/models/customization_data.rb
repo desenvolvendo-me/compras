@@ -19,10 +19,14 @@ class CustomizationData < Financeiro::Model
   def options=(options)
     return unless options.present?
 
-    write_attribute(:options, options.split(',').map(&:strip))
+    write_attribute(:options, parse_options(options))
   end
 
   private
+
+  def parse_options(options)
+    OptionsParser.new(options).parse
+  end
 
   def reload
     class_constantized.reload_custom_data

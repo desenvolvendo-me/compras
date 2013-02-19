@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'decorator_helper'
 require 'app/decorators/customization_data_decorator'
 
@@ -13,6 +14,12 @@ describe CustomizationDataDecorator do
       component.stub(:options => nil)
 
       expect(subject.options).to eq nil
+    end
+
+    it "returns only the values for key/value pairs" do
+      component.stub(:options => [ ["1 - Foo", "1"], ["2 - Bar", "2"] ])
+
+      expect(subject.options).to eq "1 - Foo, 2 - Bar"
     end
   end
 end
