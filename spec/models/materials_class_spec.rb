@@ -121,25 +121,17 @@ describe MaterialsClass do
         subject.stub(:new_record? => false)
       end
 
-      context 'when class_number_level greater than 2' do
+      context 'when is not imported' do
         before do
-          subject.stub(:class_number_level => 3)
+          subject.imported = false
         end
 
         it { expect(subject).to be_editable }
       end
 
-      context 'when class_number_level lower than 2' do
+      context 'when is imported' do
         before do
-          subject.stub(:class_number_level => 1)
-        end
-
-        it { expect(subject).to_not be_editable }
-      end
-
-      context 'when class_number_level equals 2' do
-        before do
-          subject.stub(:class_number_level => 2)
+          subject.imported = true
         end
 
         it { expect(subject).to_not be_editable }

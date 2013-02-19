@@ -40,7 +40,7 @@ class MaterialsClass < Compras::Model
   end
 
   def editable?
-    new_record? || class_number_level > 2
+    new_record? || !imported
   end
 
   def children
