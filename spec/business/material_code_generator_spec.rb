@@ -16,7 +16,7 @@ describe MaterialCodeGenerator do
   end
 
   let :materials_class do
-    double('MaterialsClass', :class_number => "02", :masked_class_number => "02", :id => 1)
+    double('MaterialsClass', :class_number => "02", :masked_number => "02", :id => 1)
   end
 
   context "when the materials class is changed and is present" do

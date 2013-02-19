@@ -8,11 +8,11 @@ class MaterialsClass < Compras::Model
 
   has_many :materials, :dependent => :restrict
 
-  validates :description, :class_number, :presence => true
+  validates :description, :masked_number, :presence => true
   validates :class_number, :uniqueness => { :allow_blank => true }
 
-  before_validation :create_class_number
-  before_save :fill_masked_number
+  before_validation :create_masked_number
+  before_save :fill_class_number
 
   orderize :description
   filterize
@@ -24,77 +24,72 @@ class MaterialsClass < Compras::Model
   }
 
   def to_s
-    "#{masked_class_number} - #{description}"
+    "#{masked_number} - #{description}"
+  end
+
+  def parent
+    self.class.find_by_class_number(parent_class_number)
   end
 
   def editable?
     new_record? || class_number_level > 2
   end
 
+  def children
+    return [] if class_number_level == levels
+
+    self.class.where { |materials_class|
+      materials_class.class_number.like("#{raw_class_number}%") &
+      materials_class.id.not_eq(id)
+    }
+  end
+
   def class_number_level
-    masked_class_number_temp = masked_class_number
-    current_level = levels
-
-    while x = masked_class_number_temp.rindex('.') do
-      if masked_class_number_temp.slice!(x..-1).to_f == 0
-        current_level -= 1
-      end
-    end
-
-    current_level
+   splitted_masked_number_filled.size
   end
 
   def levels
-    return 1 unless mask
-
-    mask.count('.') + 1
-  end
-
-  def masked_class_number
-    return '' unless mask && class_number
-
-    index = 0
-    result = ""
-
-    mask.each_char do |c|
-      if c == '.'
-        result += c
-      else
-        result += class_number[index]
-        index += 1
-      end
-    end
-
-    result
+    mask.split('.').size
   end
 
   private
 
-  def fill_masked_number
-    self.masked_number = ""
+  def parent_class_number
+    return '' if splitted_masked_number_filled.empty?
 
-    if mask && class_number
-      index = 0
-
-      mask.each_char do |c|
-        if c == '.'
-          self.masked_number += c
-        else
-          self.masked_number += class_number[index]
-          index += 1
-        end
-      end
-    end
+    splitted_masked_number_filled[0,class_number_level-1].join.ljust(mask_size, '0')
   end
 
-  def create_class_number
+  def splitted_masked_number
+    return [] unless masked_number.present?
+
+    masked_number.split('.')
+  end
+
+  def splitted_masked_number_filled
+    splitted_masked_number.select { |level| level.to_i > 0 }
+  end
+
+  def fill_class_number
+    return unless masked_number.present?
+
+    self.class_number = masked_number.gsub('.', '')
+  end
+
+  def raw_class_number
+    splitted_masked_number_filled.join
+  end
+
+  def create_masked_number
     return unless parent_number && number
 
-    self.class_number = full_number.gsub('.', '').ljust(mask_size, '0')
-  end
+    self.masked_number = [parent_number, number].join('.')
 
-  def full_number
-    parent_number + number
+    mask.split('.').each_with_index do |level, index|
+      unless splitted_masked_number[index]
+        self.masked_number += '.' + '0' * level.size
+      end
+    end
   end
 
   def mask_size

@@ -6,147 +6,60 @@ require 'app/models/material'
 describe MaterialsClass do
   it { should have_many(:materials).dependent(:restrict) }
 
-  it { should validate_presence_of :class_number }
+  it { should validate_presence_of :masked_number }
   it { should validate_presence_of :description }
 
   it 'should return class_number and description as to_s method' do
-    subject.class_number = '013200000000'
-    subject.mask = '99.99.99.999.999'
+    subject.masked_number = '30.52.10.000.000'
     subject.description = 'Hortifrutigranjeiros'
 
-    expect(subject.to_s).to eq '01.32.00.000.000 - Hortifrutigranjeiros'
+    expect(subject.to_s).to eq '30.52.10.000.000 - Hortifrutigranjeiros'
   end
 
-  describe '#create_class_number' do
+  describe 'create the masked number on validate' do
     context 'when have parent_number and number' do
-      it 'should make class_number using full_number and mask_size' do
-        subject.class_number = '111111000'
-        subject.parent_number = '1234'
-        subject.number = '56'
+      it 'should make mask_number using full_number and mask_size' do
+        subject.masked_number = '1.11.111.000'
+        subject.parent_number = '1.23'
+        subject.number = '456'
         subject.mask = '9.99.999.000'
         subject.valid?
 
-        expect(subject.class_number).to eq '123456000'
+        expect(subject.masked_number).to eq '1.23.456.000'
       end
     end
 
     context 'without parent_number' do
-      it 'should use class_number value' do
-        subject.class_number = '111111000'
-        subject.number = '56'
+      it 'should use mask_number value' do
+        subject.masked_number = '1.11.111.000'
+        subject.number = '456'
         subject.mask = '9.99.999.000'
         subject.valid?
 
-        expect(subject.class_number).to eq '111111000'
+        expect(subject.masked_number).to eq '1.11.111.000'
       end
     end
 
     context 'without number' do
       it 'should use class_number value' do
-        subject.class_number = '111111000'
-        subject.parent_number = '1234'
+        subject.masked_number = '1.11.111.000'
+        subject.parent_number = '1.23'
         subject.mask = '9.99.999.000'
         subject.valid?
 
-        expect(subject.class_number).to eq '111111000'
+        expect(subject.masked_number).to eq '1.11.111.000'
       end
     end
   end
 
-  describe 'fill masked_number on save' do
-    it 'should fills the masked_number with middle level' do
-      subject.class_number = '123560000'
-      subject.mask = '9.99.999.999'
+  describe 'fill class_number on save' do
+    it 'should fills the class_number removing dots from masked_number' do
+      subject.mask = '9.99.999.000'
+      subject.masked_number = '1.23.560.000'
 
       subject.run_callbacks(:save)
 
-      expect(subject.masked_number).to eq '1.23.560.000'
-    end
-
-    it 'should fills the masked_number with first level' do
-      subject.class_number = '100000000'
-      subject.mask = '9.99.999.999'
-
-      subject.run_callbacks(:save)
-
-      expect(subject.masked_number).to eq '1.00.000.000'
-    end
-
-    it 'should fills the masked_number with last level' do
-      subject.class_number = '123456123'
-      subject.mask = '9.99.999.999'
-
-      subject.run_callbacks(:save)
-
-      expect(subject.masked_number).to eq '1.23.456.123'
-    end
-
-    context 'without mask' do
-      it 'should be empty' do
-        subject.class_number = '123456123'
-
-        subject.run_callbacks(:save)
-
-        expect(subject.masked_number).to eq ''
-      end
-    end
-
-    context 'without class_number' do
-      it 'should be empty' do
-        subject.mask = '9.99.999.999'
-
-        subject.run_callbacks(:save)
-
-        expect(subject.masked_number).to eq ''
-      end
-    end
-  end
-
-  describe '#masked_class_number' do
-    context 'without mask' do
-      it 'should returns an ampty string' do
-        expect(subject.masked_class_number).to eq ''
-      end
-    end
-
-    context 'without class_number' do
-      before do
-        subject.stub(:mask => '99.99.999.999')
-      end
-
-      it 'should returns an ampty string' do
-        expect(subject.masked_class_number).to eq ''
-      end
-    end
-
-    context 'with mask and class_number' do
-      before do
-        subject.stub(:mask => '99.99.999.999')
-      end
-
-      it 'should apply the mask to class_number for the first level' do
-        subject.class_number = '1100000000'
-
-        expect(subject.masked_class_number).to eq '11.00.000.000'
-      end
-
-      it 'should apply the mask to class_number for the second level' do
-        subject.class_number = '1134000000'
-
-        expect(subject.masked_class_number).to eq '11.34.000.000'
-      end
-
-      it 'should apply the mask to class_number for the third level' do
-        subject.class_number = '1134111000'
-
-        expect(subject.masked_class_number).to eq '11.34.111.000'
-      end
-
-      it 'should apply the mask to class_number for the last level' do
-        subject.class_number = '1134111222'
-
-        expect(subject.masked_class_number).to eq '11.34.111.222'
-      end
+      expect(subject.class_number).to eq '123560000'
     end
   end
 
@@ -176,19 +89,19 @@ describe MaterialsClass do
     end
 
     it 'should returns 1 when the only filled level is the first' do
-      subject.class_number = '1000000'
+      subject.masked_number = '10.00.000'
 
       expect(subject.class_number_level).to eq 1
     end
 
     it 'should returns 2 when filled until second level' do
-      subject.class_number = '1053000'
+      subject.masked_number = '10.53.000'
 
       expect(subject.class_number_level).to eq 2
     end
 
     it 'should returns 2 when filled until third and last level' do
-      subject.class_number = '1053111'
+      subject.masked_number = '10.53.111'
 
       expect(subject.class_number_level).to eq 3
     end

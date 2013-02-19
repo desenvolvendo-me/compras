@@ -9,7 +9,7 @@ pt-BR:
       materials_class:
         number: "Código"
         class_number: "Código"
-        masked_class_number: "Código"
+        masked_number: "Código"
         parent_class_number: "Classe superior"
         description: "Descrição"
         details: "Detalhamento"

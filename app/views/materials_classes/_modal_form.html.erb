@@ -1,9 +1,9 @@
 <%= f.input :class_number, :as => :hidden %>
-<%= f.input :masked_class_number %>
+<%= f.input :masked_number %>
 <%= f.input :description %>
 
 <script>
-  $("#filter_masked_class_number").change(function() {
+  $("#filter_masked_number").change(function() {
     $("#filter_class_number").val($(this).val().replace('.', ''));
   });
 </script>

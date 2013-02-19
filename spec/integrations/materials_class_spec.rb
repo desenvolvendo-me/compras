@@ -35,4 +35,41 @@ describe MaterialsClass do
       expect(MaterialsClass.term('Doftw')).to_not include(software)
     end
   end
+
+  describe '#parent' do
+    subject do
+      MaterialsClass.make!(:software,
+                           :masked_number => "01.32.15.000.000",
+                           :description => 'Antivirus')
+    end
+
+    it 'should return the parent based on masked_number hierarchy' do
+      parent = MaterialsClass.make!(:software)
+
+      expect(subject.parent).to eq parent
+    end
+
+    it 'should return nil when has no parent' do
+      expect(subject.parent).to be_nil
+    end
+  end
+
+  describe '#children' do
+    subject do
+      MaterialsClass.make!(:software)
+    end
+
+    it 'should return all children based on masked_number' do
+      child1 = MaterialsClass.make!(:software,
+                :masked_number => "01.32.15.000.000", :description => 'Antivirus')
+
+      child2 = MaterialsClass.make!(:software,
+                :masked_number => "01.32.16.000.000", :description => 'Sistemas Operacionais')
+
+      not_child = MaterialsClass.make!(:arames)
+
+      expect(subject.children).to include(child1, child2)
+      expect(subject.children).to_not include(not_child)
+    end
+  end
 end

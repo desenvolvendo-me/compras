@@ -153,7 +153,7 @@ feature "MaterialsClasses" do
   scenario 'cannot edit when level is lower or equals to 2' do
     MaterialsClass.make!(:software)
     MaterialsClass.make!(:software,
-      :class_number => '010000000000',
+      :masked_number => '01.00.00.000.000',
       :description => 'Teste'
     )
 
@@ -190,7 +190,7 @@ feature "MaterialsClasses" do
   end
 
   scenario 'update an existent materials_class when at first level' do
-    MaterialsClass.make!(:software, :class_number => '120000000000')
+    MaterialsClass.make!(:software, :masked_number => '12.00.00.000.000')
 
     navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
 
