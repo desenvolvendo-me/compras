@@ -1,5 +1,6 @@
 class Customization < Financeiro::Model
   attr_accessible :model, :state_id, :data_attributes
+  attr_modal :state_id, :model
 
   belongs_to :state
 
