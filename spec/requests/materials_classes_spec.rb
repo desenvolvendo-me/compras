@@ -150,11 +150,12 @@ feature "MaterialsClasses" do
     end
   end
 
-  scenario 'cannot edit when level is lower or equals to 2' do
-    MaterialsClass.make!(:software)
+  scenario 'cannot edit when material class is imported' do
+    MaterialsClass.make!(:software, :imported => true)
     MaterialsClass.make!(:software,
       :masked_number => '01.00.00.000.000',
       :description => 'Teste'
+      :imported => true
     )
 
     navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
