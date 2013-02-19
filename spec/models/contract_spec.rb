@@ -42,7 +42,7 @@ describe Contract do
 
   it { should have_many(:pledges).dependent(:restrict) }
 
-  it { should delegate(:execution_type).to(:licitation_process) }
+  it { should delegate(:execution_type_humanize).to(:licitation_process) }
 
   it { should validate_presence_of :sequential_number }
   it { should validate_presence_of :year }
@@ -160,24 +160,6 @@ describe Contract do
 
       it 'should return the direct purchase modality' do
         expect(subject.modality_humanize).to eq 'xxto'
-      end
-    end
-  end
-
-  describe "#execution_type_humanize" do
-    context "given a licitation process" do
-      let(:licitation_process) { double("LicitationProcess", :execution_type_humanize => "Tarefa")}
-
-      it "returns the licitation process humanized execution type" do
-        subject.stub(:licitation_process).and_return licitation_process
-        expect(subject.execution_type_humanize).to eq 'Tarefa'
-      end
-    end
-
-    context "without a licitation process" do
-      it "returns nil" do
-        subject.stub(:licitation_process).and_return nil
-        expect(subject.execution_type_humanize).to eql nil
       end
     end
   end
