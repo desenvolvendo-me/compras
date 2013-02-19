@@ -17,7 +17,7 @@ module CrudHelper
   end
 
   def paginate
-    will_paginate collection if collection.respond_to?(:total_pages)
+    super collection if collection.respond_to?(:total_pages)
   end
 
   # Get modal attributes and intersect with +params[:attributes]+ if exists

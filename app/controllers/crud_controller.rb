@@ -7,7 +7,7 @@ class CrudController < ApplicationController
 
   has_scope :filter, :type => :hash
   has_scope :page, :default => 1, :only => [:index, :modal], :unless => :disable_pagination?
-  has_scope :per_page, :default => 10, :only => [:index, :modal], :unless => :disable_pagination?
+  has_scope :per, :default => 10, :only => [:index, :modal], :unless => :disable_pagination?
 
   custom_actions :collection => [:filter, :modal]
 

@@ -6,3 +6,7 @@ pt-BR:
   development: "desenvolvimento"
   staging: "homologação"
   training: "treino"
+
+  views:
+    pagination:
+      truncate: "..."
