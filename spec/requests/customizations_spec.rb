@@ -1,4 +1,5 @@
 # encoding: utf-8
+# https://semaphoreapp.com/projects/288/branches/831/builds/1281
 require 'spec_helper'
 
 feature "Customizations" do
@@ -39,7 +40,7 @@ feature "Customizations" do
     expect(page).to have_notice 'Customização criado com sucesso.'
 
     within_records do
-      click_link 'Paraná - Credor'
+      click_link 'Paraná'
     end
 
     expect(page).to have_select 'Tabela', :selected => 'Credor'
@@ -74,7 +75,7 @@ feature "Customizations" do
 
     navigate 'Geral > Parâmetros > Customizações'
 
-    click_link 'Paraná - Credor'
+    click_link 'Paraná'
 
     fill_in 'Dado', :with => 'Número do Registro CVM'
 
@@ -82,7 +83,7 @@ feature "Customizations" do
 
     expect(page).to have_notice 'Customização editado com sucesso.'
 
-    click_link 'Paraná - Credor'
+    click_link 'Paraná'
 
     expect(page).to have_select 'Tipo do dado', :selected => 'Texto simples'
 
@@ -123,7 +124,7 @@ feature "Customizations" do
     navigate 'Processo Administrativo/Licitatório > Auxiliar > Comissões de Licitação'
 
     within_records do
-      click_link 'descricao da comissao - Tipo: Permanente - Data de Nomeação: 20/03/2012'
+      click_link 'descricao da comissao'
     end
 
     within_tab 'Principal' do
@@ -135,7 +136,7 @@ feature "Customizations" do
     expect(page).to have_notice 'Comissão de Licitação editada com sucesso.'
 
     within_records do
-      click_link 'descricao da comissao - Tipo: Permanente - Data de Nomeação: 20/03/2012'
+      click_link 'descricao da comissao'
     end
 
     expect(page).to have_field 'Campo novo', :with => 'Conteúdo do campo novo'
@@ -191,7 +192,7 @@ feature "Customizations" do
 
     navigate 'Geral > Parâmetros > Customizações'
 
-    click_link 'Minas Gerais - Credor'
+    click_link 'Minas Gerais'
 
     click_link 'Apagar'
 
