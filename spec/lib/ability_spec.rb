@@ -1,8 +1,7 @@
-require 'unit_helper'
+require 'spec_helper'
 require 'cancan/ability'
 require 'cancan/rule'
 require 'cancan/matchers'
-require 'lib/ability'
 
 # cancan dependency
 require 'active_support/core_ext/object/blank'
@@ -35,6 +34,14 @@ describe Ability do
 
     expect(ability).to be_able_to :filter, :something
     expect(ability).to be_able_to :modal, :something
+  end
+
+  it 'alias modal and modal_info to search' do
+    ability = Ability.new
+    ability.can(:search, :something)
+
+    expect(ability).to be_able_to :modal, :something
+    expect(ability).to be_able_to :modal_info, :something
   end
 
   it 'should be able to access accounts and bookmarks' do
@@ -81,5 +88,12 @@ describe Ability do
       expect(subject).to be_able_to :read, :price_collection_proposals
       expect(subject).to be_able_to :update, :price_collection_proposals
     end
+  end
+
+  it 'should be able to search through the role dependencies' do
+    role.stub(:controller => 'creditors')
+    ability = Ability.new(user)
+
+    expect(ability).to be_able_to :search, 'materials'
   end
 end

@@ -1,0 +1,14 @@
+creditors:
+  - cnaes
+  - materials
+  - representatives
+bidders:
+  - people
+licitation_process_lots:
+  - administrative_process_budget_allocation_items
+regulatory_acts:
+  - dissemination_sources
+licitation_processes:
+  - document_types
+licitation_objects:
+  - materials

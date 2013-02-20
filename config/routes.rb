@@ -12,6 +12,7 @@ Compras::Application.routes.draw do
       get :filter
       get :modal
     end
+    get 'modal_info', :on => :member
   end
 
   resources :customizations do
@@ -65,6 +66,7 @@ Compras::Application.routes.draw do
       get :filter
       get :modal
     end
+    get 'modal_info', :on => :member
   end
 
   resources :administration_types do
@@ -114,6 +116,7 @@ Compras::Application.routes.draw do
       get :filter
       get :modal
     end
+    get 'modal_info', :on => :member
   end
 
   resources :branch_activities do
@@ -141,6 +144,7 @@ Compras::Application.routes.draw do
       get :filter
       get :modal
     end
+    get 'modal_info', :on => :member
   end
 
   resources :budget_revenues do
@@ -171,6 +175,7 @@ Compras::Application.routes.draw do
       get :filter
       get :modal
     end
+    get 'modal_info', :on => :member
   end
 
   resources :capability_allocation_details do
@@ -490,6 +495,7 @@ Compras::Application.routes.draw do
       get :modal
       get :filter
     end
+    get 'modal_info', :on => :member
   end
 
   resources :occurrence_contractual_historics do
@@ -555,6 +561,7 @@ Compras::Application.routes.draw do
       get :filter
       get :modal
     end
+    get 'modal_info', :on => :member
   end
 
   resources :purchase_solicitation_annuls, :only => [:new, :create, :edit, :update]
@@ -566,6 +573,7 @@ Compras::Application.routes.draw do
       get :filter
       get :modal
     end
+    get 'modal_info', :on => :member
   end
 
   resources :purchase_solicitation_liberations, :only => [:index, :new, :create, :edit] do

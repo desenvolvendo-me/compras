@@ -9,7 +9,7 @@ class CrudController < ApplicationController
   has_scope :page, :default => 1, :only => [:index, :modal], :unless => :disable_pagination?
   has_scope :per, :default => 10, :only => [:index, :modal], :unless => :disable_pagination?
 
-  custom_actions :collection => [:filter, :modal]
+  custom_actions :collection => [:filter, :modal], :member => :modal_info
 
   helper_method :main_controller_name
 
@@ -44,6 +44,10 @@ class CrudController < ApplicationController
     build_resource
 
     render :layout => false
+  end
+
+  def modal_info
+    show!
   end
 
   protected

@@ -60,7 +60,7 @@ module CrudHelper
     options[:data_disabled_message] ||= I18n.translate('errors.messages.cannot_open_link_without_an_object')
 
     content_tag(:p, :class => :modal_info) do
-      link_to options[:label], options.fetch(:href, "#"),
+      link_to options[:label], modal_info_link(options[:href]),
            'data-disabled' => options[:data_disabled] ? options[:data_disabled_message] : nil,
            'data-disabled-message' => options[:data_disabled_message]
     end
@@ -115,5 +115,9 @@ module CrudHelper
         block.call
       end
     end
+  end
+
+  def modal_info_link(resource)
+    resource ? send("modal_info_#{resource.class.to_s.underscore}_path", resource) : "#"
   end
 end
