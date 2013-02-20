@@ -71,7 +71,7 @@ class Bidder < Compras::Model
   scope :exclude_ids, lambda { |ids|  where { id.not_in(ids) } }
 
   def self.benefited
-    joins { creditor.creditable(Person).personable(Company).company_size.extended_company_size }.
+    joins { creditor.person.personable(Company).company_size.extended_company_size }.
     where { 'compras_extended_company_sizes.benefited = true' }
   end
 

@@ -184,7 +184,7 @@ feature "PriceCollections" do
     Employee.make!(:wenderson)
     PaymentMethod.make!(:cheque)
     Material.make!(:arame_farpado)
-    Creditor.make!(:sobrinho_sa, :creditable => Person.make!(:sobrinho_without_email, :name => 'José Gomes'))
+    Creditor.make!(:sobrinho_sa, :person => Person.make!(:sobrinho_without_email, :name => 'José Gomes'))
 
     navigate 'Processos de Compra > Coletas de Preços'
 
