@@ -1,5 +1,8 @@
 <div class="buttons">
-  <%= f.button :submit %>
+  <%= f.button :submit if can?(:modify, main_controller_name) %>
   <%= f.button :back, :href => classification_trading_item_path(@trading_item) %>
-  <%= f.button :destroy, :href => bidder_disqualification_path(resource, :trading_item_id => @trading_item.id) if f.object.persisted? %>
+
+  <% if f.object.persisted? && can?(:destroy, main_controller_name) %>
+    <%= f.button :destroy, :href => bidder_disqualification_path(resource, :trading_item_id => @trading_item.id) %>
+  <% end %>
 </div>

@@ -1,4 +1,4 @@
 <div class="buttons">
-  <%= f.button :submit %>
+  <%= f.button :submit if can?(:modify, main_controller_name) %>
   <%= f.button :back, :href => trading_items_path(:trading_id => @parent.id) %>
 </div>

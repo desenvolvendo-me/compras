@@ -1,5 +1,8 @@
 <div class="buttons">
-  <%= f.button :submit, 'data-disabled' => f.object.decorator.is_annulled_message %>
+  <% if can?(:modify, main_controller_name) %>
+    <%= f.button :submit, 'data-disabled' => f.object.decorator.is_annulled_message %>
+  <% end %>
+
   <%= annul_link %>
 
   <% if f.object.persisted? %>

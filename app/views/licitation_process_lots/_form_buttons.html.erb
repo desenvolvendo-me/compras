@@ -1,5 +1,11 @@
 <div class="buttons">
-  <%= f.button :submit, 'data-disabled' => f.object.decorator.licitation_process_not_updatable_message %>
+  <% if can?(:modify, main_controller_name) %>
+    <%= f.button :submit, 'data-disabled' => f.object.decorator.licitation_process_not_updatable_message %>
+  <% end %>
+
   <%= f.button :back, :href => licitation_process_lots_path(:licitation_process_id => f.object.licitation_process_id) %>
-  <%= f.button :destroy, 'data-disabled' => f.object.decorator.licitation_process_not_updatable_message if f.object.persisted? %>
+
+  <% if f.object.persisted? && can?(:destroy, main_controller_name) %>
+    <%= f.button :destroy, 'data-disabled' => f.object.decorator.licitation_process_not_updatable_message %>
+  <% end %>
 </div>

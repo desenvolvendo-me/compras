@@ -1,4 +1,7 @@
 <div class="buttons">
-  <%= f.button :submit unless f.object.persisted? %>
+  <% if can?(:modify, main_controller_name) && f.object.new_record? %>
+    <%= f.button :submit %>
+  <% end %>
+
   <%= f.button :back, :href => trading_items_path(:trading_id => @trading_item.trading_id) %>
 </div>

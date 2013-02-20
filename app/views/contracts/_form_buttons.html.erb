@@ -1,7 +1,11 @@
 <div class="buttons">
   <%= link_to 'Rescisão', contract_termination_path, :class => 'button primary' if f.object.persisted? %>
   <%= link_to 'Ocorrências Contratuais', occurrence_contractual_historics_path(:contract_id => f.object.id), :class => 'button primary' if f.object.persisted? %>
-  <%= f.button :submit %>
+
+  <%= f.button :submit if can?(:modify, main_controller_name) %>
   <%= f.button :back %>
-  <%= f.button :destroy if f.object.persisted? %>
+
+  <% if f.object.persisted? && can?(:destroy, main_controller_name) %>
+    <%= f.button :destroy %>
+  <% end %>
 </div>

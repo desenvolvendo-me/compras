@@ -1,5 +1,8 @@
 <div class="buttons">
-  <%= f.button :submit %>
+  <%= f.button :submit if can?(:modify, main_controller_name) %>
   <%= f.button :back %>
-  <%= f.button :destroy if f.object.persisted? %>
+
+  <% if f.object.persisted? && can?(:destroy, main_controller_name) %>
+    <%= f.button :destroy %>
+  <% end %>
 </div>

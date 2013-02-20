@@ -1,5 +1,11 @@
 <div class="buttons">
-  <%= f.button :submit, 'data-disabled' => resource.decorator.cant_save_or_destroy_message %>
+  <% if can?(:modify, main_controller_name) %>
+    <%= f.button :submit, 'data-disabled' => resource.decorator.cant_save_or_destroy_message %>
+  <% end %>
+
   <%= f.button :back, :href => bidders_path(:licitation_process_id => resource.licitation_process_id) %>
-  <%= f.button :destroy, 'data-disabled' => resource.decorator.cant_save_or_destroy_message if f.object.persisted? %>
+
+  <% if f.object.persisted? && can?(:destroy, main_controller_name) %>
+    <%= f.button :destroy, 'data-disabled' => resource.decorator.cant_save_or_destroy_message %>
+  <% end %>
 </div>

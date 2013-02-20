@@ -1,4 +1,7 @@
 <div class="buttons">
-  <%= f.button :submit if f.object.new_record? %>
+  <% if can?(:modify, main_controller_name) && f.object.new_record? %>
+    <%= f.button :submit %>
+  <% end %>
+
   <%= f.button :back, :href => edit_price_collection_path(f.object.price_collection) %>
 </div>

@@ -1,8 +1,8 @@
 <div class="buttons">
-  <%= f.button :submit %>
+  <%= f.button :submit if can?(:modify, main_controller_name) %>
 
   <% if f.object.persisted? %>
-    <%= f.button :destroy %>
+    <%= f.button :destroy if can?(:destroy, main_controller_name)%>
     <%= link_to "Imprimir certificado de registro cadastral", resource_path, :class => 'clear button neutral' %>
   <% end %>
 

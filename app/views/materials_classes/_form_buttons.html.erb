@@ -1,5 +1,11 @@
 <div class="buttons">
-  <%= f.button :submit if f.object.editable? %>
+  <% if can?(:modify, main_controller_name) && f.object.editable? %>
+    <%= f.button :submit %>
+  <% end %>
+
   <%= f.button :back %>
-  <%= f.button :destroy if f.object.persisted? && f.object.editable? %>
+
+  <% if f.object.persisted? && can?(:destroy, main_controller_name) && f.object.editable? %>
+    <%= f.button :destroy %>
+  <% end %>
 </div>

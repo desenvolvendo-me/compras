@@ -1,5 +1,5 @@
 <div class="buttons">
-  <%= f.button :submit %>
+  <%= f.button :submit if can?(:modify, main_controller_name) %>
   <%= link_to t(:back), classification_trading_item_path(@parent), :class => 'button' %>
 </div>
 

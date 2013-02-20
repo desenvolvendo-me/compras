@@ -15,7 +15,7 @@
 
 <%= paginate %>
 
-<% if create? %>
+<% if create? && can?(:modify, main_controller_name) %>
   <p class="actions buttons">
     <%= link_to "Novo", new_resource_path(resource), :class => 'clear button primary', :target => '_blank' %>
   </p>

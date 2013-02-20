@@ -1,11 +1,14 @@
 <div class="buttons">
     <% if f.object.persisted? %>
-      <%= f.button :destroy %>
+      <%= f.button :destroy if can?(:destroy, main_controller_name) %>
       <%= link_to('Licitantes', bidders_path(:licitation_process_id => resource.licitation_process.id), :class => "button primary") %>
       <%= link_to('ATA', trading_path(resource), :class => "button primary") %>
     <% end %>
 
-    <%= submit_tag "Salvar e ir para Itens/Ofertas", :class => "button primary" %>
-    <%= f.button :submit %>
+    <% if can?(:modify, main_controller_name) %>
+      <%= submit_tag "Salvar e ir para Itens/Ofertas", :class => "button primary" %>
+      <%= f.button :submit %>
+    <% end %>
+
     <%= f.button :back %>
 </div>

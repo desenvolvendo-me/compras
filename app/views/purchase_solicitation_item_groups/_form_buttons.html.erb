@@ -1,5 +1,9 @@
 <div class="buttons">
   <%= annul_link(:data_disabled => f.object.decorator.not_annullable_message) %>
-  <%= f.button :submit, 'data-disabled' => f.object.decorator.not_allow_submit_message %>
+
+  <% if can?(:modify, main_controller_name) %>
+    <%= f.button :submit, 'data-disabled' => f.object.decorator.not_allow_submit_message %>
+  <% end %>
+
   <%= f.button :back %>
 </div>
