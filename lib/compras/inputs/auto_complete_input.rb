@@ -28,6 +28,7 @@ module Compras
           options['data-auto-complete']     = true
           options['data-source']          ||= source_path
           options['data-hidden-field-id'] ||= hidden_field_id if hidden_field_id
+          options['data-hidden-field-value-attribute'] ||= hidden_field_value_attribute
         end
       end
 
@@ -56,6 +57,10 @@ module Compras
 
       def hidden_field_id
         [sanitized_object_name, index, hidden_field_name].compact.join('_') if hidden_field_name
+      end
+
+      def hidden_field_value_attribute
+        'id'
       end
 
       def index

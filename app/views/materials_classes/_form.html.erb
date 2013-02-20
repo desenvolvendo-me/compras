@@ -2,7 +2,10 @@
 
 <div class="yui3-g">
   <div class="yui3-u-2-3">
-    <%= f.input :parent_class_number, :as => :auto_complete, :source_path => materials_classes_path, :hidden_field => 'parent_number' %>
+    <%= f.input :parent_class_number, :as => :auto_complete,
+                :source_path => materials_classes_path,
+                :hidden_field => 'parent_number',
+                :input_html => { 'data-hidden-field-value-attribute' => 'filled_mask' } %>
   </div>
 
   <div class="yui3-u-1-3">
@@ -21,10 +24,9 @@
       $("#materials_class_mask").val(material_class.mask);
       $("#materials_class_number").attr("data-mask", material_class.child_mask);
       $("#materials_class_number").before(function() {
-        var text = material_class.id + '.';
+        var text = material_class.filled_mask + '.';
         return $("<span>").text(text).addClass('add-on').attr("id", "prepended-input");
       });
-
     } else {
       $("#materials_class_mask").val('');
       $("#materials_class_number").removeAttr("data-mask");

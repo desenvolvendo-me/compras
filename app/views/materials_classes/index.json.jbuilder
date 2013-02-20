@@ -4,4 +4,5 @@ json.array!(collection) do |json, obj|
   json.label      obj.decorator.masked_to_s
   json.mask       obj.mask
   json.child_mask obj.decorator.child_mask
+  json.filled_mask obj.decorator.filled_masked_number
 end
