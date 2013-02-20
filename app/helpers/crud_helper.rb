@@ -108,4 +108,12 @@ module CrudHelper
       'list'
     end
   end
+
+  def grouped_fields_tag(title, &block)
+    field_set_tag title, :class => 'group' do
+      content_tag :div, :class => 'wrapper' do
+        block.call
+      end
+    end
+  end
 end

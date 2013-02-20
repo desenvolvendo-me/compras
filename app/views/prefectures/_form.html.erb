@@ -1,27 +1,11 @@
-<div class="tabs">
-  <ul>
-    <li>
-      <a href="#prefecture">Organização</a>
-    </li>
+<%= grouped_fields_tag "Dados gerais" do %>
+  <%= render 'main', :f => f %>
+<% end %>
 
-    <li>
-      <a href="#address">Endereço</a>
-    </li>
+<%= grouped_fields_tag "Endereço" do %>
+  <%= render 'address', :f => f %>
+<% end %>
 
-    <li>
-      <a href="#processes">Processos</a>
-    </li>
-  </ul>
-
-  <div id="prefecture">
-    <%= render 'main', :f => f %>
-  </div>
-
-  <div id="address">
-    <%= render 'address', :f => f %>
-  </div>
-
-  <div id="processes">
-    <%= render 'processes', :f => f %>
-  </div>
-</div>
+<%= grouped_fields_tag "Processos" do %>
+<%= render 'processes', :f => f %>
+<% end %>

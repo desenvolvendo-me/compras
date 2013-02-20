@@ -20,26 +20,27 @@
   background: #F9F9F9;
 }
 
-.nested-container {
-  margin-bottom: 20px;
+.nested-container, .simple_form fieldset.group .wrapper {
+  margin-bottom: 1.5em;
 }
 
 .nested-container .add-link-container {
   text-align: right;
-  margin-bottom: 0.5em;
+  margin: 0 0 0.5em 0;
+  font-weight: bold;
 }
 
-.nested-container h3 {
+.nested-container h3, .simple_form fieldset.group legend {
   font-size: 170%;
   margin: 0;
 }
 
-.nested-container .fields {
+.nested-container .fields, .simple_form fieldset.group .wrapper {
   background: #FFF;
   border: solid 1px #e8eaee;
 }
 
-.nested-container .fields .nested {
+.nested-container .fields .nested, .simple_form fieldset.group .wrapper {
   padding: 1.5em;
 }
 

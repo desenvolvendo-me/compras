@@ -12,21 +12,19 @@ feature "Addresses" do
 
     navigate 'Geral > Parâmetros > Organização'
 
-    within_tab 'Endereço' do
-      expect(page).to have_disabled_field "Bairro"
+    expect(page).to have_disabled_field "Bairro"
 
-      fill_modal 'Logradouro', :with => 'Amazonas'
+    fill_modal 'Logradouro', :with => 'Amazonas'
 
-      within_modal 'Bairro' do
-        click_button 'Pesquisar'
+    within_modal 'Bairro' do
+      click_button 'Pesquisar'
 
-        # 'Amazonas' is located in 'Portugal'
-        # 'Girassol' is located in 'Centro' and 'São Francisco'
-        expect(page).to have_content 'Portugal'
-        expect(page).to_not have_content 'Girassol'
+      # 'Amazonas' is located in 'Portugal'
+      # 'Girassol' is located in 'Centro' and 'São Francisco'
+      expect(page).to have_content 'Portugal'
+      expect(page).to_not have_content 'Girassol'
 
-        click_record 'Portugal'
-      end
+      click_record 'Portugal'
     end
   end
 
@@ -36,14 +34,12 @@ feature "Addresses" do
 
     navigate 'Geral > Parâmetros > Organização'
 
-    within_tab 'Endereço' do
-      expect(page).to have_disabled_field "Bairro"
+    expect(page).to have_disabled_field "Bairro"
 
-      fill_modal 'Logradouro', :with => 'Amazonas'
-      fill_modal 'Bairro', :with => 'Portugal'
+    fill_modal 'Logradouro', :with => 'Amazonas'
+    fill_modal 'Bairro', :with => 'Portugal'
 
-      expect(page).to have_field 'Cidade', :with => 'Porto Alegre'
-      expect(page).to have_field 'Estado', :with => 'Rio Grande do Sul'
-    end
+    expect(page).to have_field 'Cidade', :with => 'Porto Alegre'
+    expect(page).to have_field 'Estado', :with => 'Rio Grande do Sul'
   end
 end
