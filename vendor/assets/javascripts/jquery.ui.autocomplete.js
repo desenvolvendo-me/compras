@@ -1,4 +1,4 @@
-/*! jQuery UI - v1.10.0 - 2013-01-22
+/*! jQuery UI - v1.10.1 - 2013-02-20
 * http://jqueryui.com
 * Includes: jquery.ui.core.js, jquery.ui.widget.js, jquery.ui.position.js, jquery.ui.autocomplete.js, jquery.ui.menu.js
 * Copyright (c) 2013 jQuery Foundation and other contributors Licensed MIT */
@@ -17,7 +17,7 @@ if ( $.ui.version ) {
 }
 
 $.extend( $.ui, {
-	version: "1.10.0",
+	version: "1.10.1",
 
 	keyCode: {
 		BACKSPACE: 8,
@@ -838,15 +838,15 @@ var cachedScrollbarWidth,
 	round = Math.round,
 	rhorizontal = /left|center|right/,
 	rvertical = /top|center|bottom/,
-	roffset = /[\+\-]\d+%?/,
+	roffset = /[\+\-]\d+(\.[\d]+)?%?/,
 	rposition = /^\w+/,
 	rpercent = /%$/,
 	_position = $.fn.position;
 
 function getOffsets( offsets, width, height ) {
 	return [
-		parseInt( offsets[ 0 ], 10 ) * ( rpercent.test( offsets[ 0 ] ) ? width / 100 : 1 ),
-		parseInt( offsets[ 1 ], 10 ) * ( rpercent.test( offsets[ 1 ] ) ? height / 100 : 1 )
+		parseFloat( offsets[ 0 ] ) * ( rpercent.test( offsets[ 0 ] ) ? width / 100 : 1 ),
+		parseFloat( offsets[ 1 ] ) * ( rpercent.test( offsets[ 1 ] ) ? height / 100 : 1 )
 	];
 }
 
@@ -1321,7 +1321,7 @@ $.ui.position = {
 var requestIndex = 0;
 
 $.widget( "ui.autocomplete", {
-	version: "1.10.0",
+	version: "1.10.1",
 	defaultElement: "<input>",
 	options: {
 		appendTo: null,
@@ -1355,10 +1355,21 @@ $.widget( "ui.autocomplete", {
 		// so we use the suppressKeyPressRepeat flag to avoid handling keypress
 		// events when we know the keydown event was used to modify the
 		// search term. #7799
-		var suppressKeyPress, suppressKeyPressRepeat, suppressInput;
+		var suppressKeyPress, suppressKeyPressRepeat, suppressInput,
+			nodeName = this.element[0].nodeName.toLowerCase(),
+			isTextarea = nodeName === "textarea",
+			isInput = nodeName === "input";
 
-		this.isMultiLine = this._isMultiLine();
-		this.valueMethod = this.element[ this.element.is( "input,textarea" ) ? "val" : "text" ];
+		this.isMultiLine =
+			// Textareas are always multi-line
+			isTextarea ? true :
+			// Inputs are always single-line, even if inside a contentEditable element
+			// IE also treats inputs as contentEditable
+			isInput ? false :
+			// All other element types are determined by whether or not they're contentEditable
+			this.element.prop( "isContentEditable" );
+
+		this.valueMethod = this.element[ isTextarea || isInput ? "val" : "text" ];
 		this.isNewMenu = true;
 
 		this.element
@@ -1482,7 +1493,7 @@ $.widget( "ui.autocomplete", {
 
 		this._initSource();
 		this.menu = $( "<ul>" )
-			.addClass( "ui-autocomplete" )
+			.addClass( "ui-autocomplete ui-front" )
 			.appendTo( this._appendTo() )
 			.menu({
 				// custom key handling for now
@@ -1490,7 +1501,6 @@ $.widget( "ui.autocomplete", {
 				// disable ARIA support, the live region takes care of that
 				role: null
 			})
-			.zIndex( this.element.zIndex() + 1 )
 			.hide()
 			.data( "ui-menu" );
 
@@ -1642,20 +1652,6 @@ $.widget( "ui.autocomplete", {
 		return element;
 	},
 
-	_isMultiLine: function() {
-		// Textareas are always multi-line
-		if ( this.element.is( "textarea" ) ) {
-			return true;
-		}
-		// Inputs are always single-line, even if inside a contentEditable element
-		// IE also treats inputs as contentEditable
-		if ( this.element.is( "input" ) ) {
-			return false;
-		}
-		// All other element types are determined by whether or not they're contentEditable
-		return this.element.prop( "isContentEditable" );
-	},
-
 	_initSource: function() {
 		var array, url,
 			that = this;
@@ -1793,9 +1789,7 @@ $.widget( "ui.autocomplete", {
 	},
 
 	_suggest: function( items ) {
-		var ul = this.menu.element
-			.empty()
-			.zIndex( this.element.zIndex() + 1 );
+		var ul = this.menu.element.empty();
 		this._renderMenu( ul, items );
 		this.menu.refresh();
 
@@ -1916,7 +1910,7 @@ $.widget( "ui.autocomplete", $.ui.autocomplete, {
 (function( $, undefined ) {
 
 $.widget( "ui.menu", {
-	version: "1.10.0",
+	version: "1.10.1",
 	defaultElement: "<ul>",
 	delay: 300,
 	options: {
@@ -2223,7 +2217,7 @@ $.widget( "ui.menu", {
 		menus.children( ":not(.ui-menu-item)" ).each(function() {
 			var item = $( this );
 			// hyphen, em dash, en dash
-			if ( !/[^\-—–\s]/.test( item.text() ) ) {
+			if ( !/[^\-\u2014\u2013\s]/.test( item.text() ) ) {
 				item.addClass( "ui-widget-content ui-menu-divider" );
 			}
 		});
