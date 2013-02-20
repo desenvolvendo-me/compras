@@ -1,4 +1,6 @@
-<%= f.input :materials_class %>
+<%= f.input :autocomplete_materials_class, :as => :auto_complete,
+            :source_path => materials_classes_path(:without_children => true),
+            :hidden_field => :materials_class_id %>
 
 <% if f.object.persisted? %>
   <div class="yui3-g">

@@ -92,4 +92,24 @@ describe Material do
 
     expect(subject.errors[:base]).to_not include "Este registro não pôde ser apagado pois há outros cadastros que dependem dele"
   end
+
+  describe '#autocomplete_materials_class' do
+    context 'when has a materials_class' do
+      let(:materials_class) { double(:materials_class, :to_s => '123 - Software') }
+
+      before do
+        subject.stub(:materials_class => materials_class)
+      end
+
+      it 'should returns the materials_class to_s' do
+        expect(subject.autocomplete_materials_class).to eq '123 - Software'
+      end
+    end
+
+    context 'when does not have a materials_class' do
+      it 'should returns the materials_class to_s' do
+        expect(subject.autocomplete_materials_class).to eq ''
+      end
+    end
+  end
 end

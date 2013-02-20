@@ -72,4 +72,37 @@ describe MaterialsClass do
       expect(subject.children).to_not include(not_child)
     end
   end
+
+  describe 'update has_children on save' do
+    subject do
+      MaterialsClass.make!(:software)
+    end
+
+    it 'should change the parent has_children when save or remove children' do
+      expect(subject.has_children).to be_false
+
+      child = MaterialsClass.make!(:software,
+        :masked_number => "01.32.15.000.000", :description => 'Antivirus')
+
+      subject.reload # Need this, else is getting the cached subject.
+
+      expect(subject.has_children).to be_true
+
+      child.destroy
+
+      subject.reload # Need this, else is getting the cached subject.
+
+      expect(subject.has_children).to be_false
+    end
+  end
+
+  describe '.without_children' do
+    it 'should return only material classes without children' do
+      parent = MaterialsClass.make!(:software)
+      child = MaterialsClass.make!(:software,
+        :masked_number => "01.32.15.000.000", :description => 'Antivirus')
+
+      expect(described_class.without_children).to eq [child]
+    end
+  end
 end

@@ -13,6 +13,8 @@ class MaterialsClass < Compras::Model
 
   before_validation :create_masked_number
   before_save :fill_class_number
+  after_save :update_parent_children
+  after_destroy :update_parent_children
 
   orderize :description
   filterize
@@ -21,6 +23,10 @@ class MaterialsClass < Compras::Model
     where {
       (class_number.like("#{q.gsub('.','')}%") | description.like("#{q}%")) &
       (class_number.like("%000") )}
+  }
+
+  scope :without_children, lambda {
+    where { has_children.eq(false) }
   }
 
   def to_s
@@ -52,7 +58,19 @@ class MaterialsClass < Compras::Model
     mask.split('.').size
   end
 
+  def update_has_children
+    update_column(:has_children, children.any?)
+  end
+
   private
+
+  def update_parent_children
+    if parent.present?
+      parent.update_has_children
+    end
+
+    nil
+  end
 
   def parent_class_number
     return '' if splitted_masked_number_filled.empty?

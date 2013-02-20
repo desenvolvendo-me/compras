@@ -8,6 +8,7 @@ pt-BR:
     attributes:
       material:
         materials_class: "Classe"
+        autocomplete_materials_class: 'Classe'
         code: "Código"
         description: "Descrição"
         detailed_description: "Descrição detalhada"

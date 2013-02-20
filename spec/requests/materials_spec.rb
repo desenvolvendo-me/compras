@@ -16,7 +16,7 @@ feature "Materials" do
     expect(page).to have_disabled_field 'Tipo de material'
     expect(page).to have_disabled_field 'Tipo de serviço'
 
-    fill_modal 'Classe', :with => 'Software', :field => 'Descrição'
+    fill_with_autocomplete 'Classe', :with => 'Software'
     fill_in 'Descrição', :with => 'Caixa'
     fill_in 'Descrição detalhada', :with => 'Uma caixa'
     fill_in 'Estoque mínimo', :with => '10'
@@ -64,7 +64,7 @@ feature "Materials" do
 
     click_link 'Criar Material'
 
-    fill_modal 'Classe', :with => 'Software', :field => 'Descrição'
+    fill_with_autocomplete 'Classe', :with => 'Software'
     fill_in 'Descrição', :with => 'Caixa'
     fill_in 'Descrição detalhada', :with => 'Outra descrição'
     fill_in 'Estoque mínimo', :with => '10'
@@ -103,7 +103,7 @@ feature "Materials" do
 
     click_link 'Antivirus'
 
-    fill_modal 'Classe', :with => 'Arames', :field => 'Descrição'
+    fill_with_autocomplete 'Classe', :with => 'Arame'
     fill_in 'Descrição', :with => 'Parafuso'
     fill_in 'Descrição detalhada', :with => 'de rosca'
     fill_in 'Estoque mínimo', :with => '20'
@@ -248,6 +248,22 @@ feature "Materials" do
         expect(page).to have_content '01.00001'
         expect(page).to have_content 'Software'
       end
+    end
+  end
+
+  scenario 'does not show material classes with child' do
+    make_dependencies!
+
+    MaterialsClass.make!(:software,
+      :masked_number => "01.32.15.000.000", :description => 'Antivirus')
+
+    navigate 'Comum > Cadastrais > Materiais > Materiais'
+
+    click_link 'Criar Material'
+
+    within_autocomplete 'Classe', :with => '01' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to_not have_content 'Software'
     end
   end
 

@@ -3,7 +3,9 @@ class Material < Compras::Model
                   :detailed_description, :minimum_stock_balance, :combustible,
                   :reference_unit_id, :material_characteristic, :perishable,
                   :service_or_contract_type_id, :expense_nature_id, :description,
-                  :storable
+                  :storable, :autocomplete_materials_class
+
+  attr_writer :autocomplete_materials_class
 
   attr_modal :description, :material_characteristic
 
@@ -53,10 +55,6 @@ class Material < Compras::Model
     where { material_characteristic.eq characteristic }
   end
 
-  def to_s
-    "#{code} - #{description}"
-  end
-
   def self.by_pending_purchase_solicitation_budget_structure_id(budget_structure_id)
     joins { purchase_solicitation_budget_allocation_items }.
     joins { purchase_solicitation_budget_allocations.purchase_solicitation }.
@@ -72,6 +70,16 @@ class Material < Compras::Model
     where do
       purchase_solicitation_budget_allocations.purchase_solicitation_id.not_eq(purchase_solicitation_id)
     end
+  end
+
+  def to_s
+    "#{code} - #{description}"
+  end
+
+  def autocomplete_materials_class
+    return '' unless materials_class.present?
+
+    materials_class.to_s
   end
 
   protected
