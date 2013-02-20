@@ -146,4 +146,38 @@ describe MaterialsClass do
       end
     end
   end
+
+  describe 'validate parent with material' do
+    let(:parent) { double(:parent) }
+
+    context 'with parent' do
+      before do
+        subject.stub(:parent => parent)
+      end
+
+      it 'should be valid when parent has no materials' do
+        parent.stub(:materials => [])
+
+        subject.valid?
+
+        expect(subject.errors[:parent_class_number]).to_not include("classe com materiais associados não podem ser base para outras classes")
+      end
+
+      it 'should not be valid when parent has materials' do
+        parent.stub(:materials => ['material'])
+
+        subject.valid?
+
+        expect(subject.errors[:parent_class_number]).to include("classe com materiais associados não podem ser base para outras classes")
+      end
+    end
+
+    context 'without parent' do
+      it 'should be valid when parent has no materials' do
+        subject.valid?
+
+        expect(subject.errors[:parent_class_number]).to_not include("classe com materiais associados não podem ser base para outras classes")
+      end
+    end
+  end
 end

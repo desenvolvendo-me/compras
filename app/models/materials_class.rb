@@ -10,6 +10,7 @@ class MaterialsClass < Compras::Model
 
   validates :description, :masked_number, :presence => true
   validates :class_number, :uniqueness => { :allow_blank => true }
+  validate  :not_allow_creation_when_parent_has_materials, :on => :create
 
   before_validation :create_masked_number
   before_save :fill_class_number
@@ -63,6 +64,12 @@ class MaterialsClass < Compras::Model
   end
 
   private
+
+  def not_allow_creation_when_parent_has_materials
+    return unless parent.present? && parent.materials.any?
+
+    errors.add(:parent_class_number, :materials_class_with_material_cannot_has_children)
+  end
 
   def update_parent_children
     if parent.present?
