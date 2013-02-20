@@ -180,4 +180,52 @@ describe MaterialsClass do
       end
     end
   end
+
+  describe 'validate when edit masked_number' do
+    context 'when has materials' do
+      before do
+        subject.stub(:materials => ['material'])
+      end
+
+      it 'should have errors when masked_number changed' do
+        subject.stub(:changed_attributes => { 'masked_number' => '10.1.11.222.000' })
+        subject.stub(:validation_context).and_return(:update)
+
+        subject.valid?
+
+        expect(subject.errors[:number]).to include('não pode ser alterado quando houver materiais vinculados à classe')
+      end
+
+      it 'should not have errors when masked_number does not changed' do
+        subject.stub(:validation_context).and_return(:update)
+
+        subject.valid?
+
+        expect(subject.errors[:number]).to_not include('não pode ser alterado quando houver materiais vinculados à classe')
+      end
+    end
+
+    context 'when does not have materials' do
+      before do
+        subject.stub(:materials => [])
+      end
+
+      it 'should not have errors when masked_number changed' do
+        subject.stub(:changed_attributes => { 'masked_number' => '10.1.11.222.000' })
+        subject.stub(:validation_context).and_return(:update)
+
+        subject.valid?
+
+        expect(subject.errors[:number]).to_not include('não pode ser alterado quando houver materiais vinculados à classe')
+      end
+
+      it 'should not have errors when masked_number does not changed' do
+        subject.stub(:validation_context).and_return(:update)
+
+        subject.valid?
+
+        expect(subject.errors[:number]).to_not include('não pode ser alterado quando houver materiais vinculados à classe')
+      end
+    end
+  end
 end

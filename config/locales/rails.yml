@@ -318,6 +318,7 @@ pt-BR:
       should_be_before_a_year: "não poderá ser superior a um ano de acordo com Decreto Nº 2.743, de 21 de agosto de 1998"
       uniqueness_of_model_scoped_by_state_id: "já existe para a Estado selecionado"
       materials_class_with_material_cannot_has_children: "classe com materiais associados não podem ser base para outras classes"
+      cannot_be_changed_when_has_materials: "não pode ser alterado quando houver materiais vinculados à classe"
 
   activerecord:
     errors:
