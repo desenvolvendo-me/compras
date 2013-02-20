@@ -1,6 +1,6 @@
 class MaterialsClass < Compras::Model
   attr_accessible :description, :details, :parent_class_number, :number,
-                  :parent_number, :mask, :class_number, :imported
+                  :parent_number, :mask, :masked_number, :imported
 
   attr_accessor :parent_class_number, :number, :parent_number
 
