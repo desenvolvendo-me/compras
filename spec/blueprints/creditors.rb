@@ -4,18 +4,7 @@ Creditor.blueprint(:sobrinho) do
   creditor_balances { [ CreditorBalance.make!(:balanco_2012, :creditor => object) ] }
   municipal_public_administration { false }
   occupation_classification { OccupationClassification.make!(:armed_forces) }
-  creditable { Person.make!(:sobrinho) }
-  regularization_or_administrative_sanctions { [ RegularizationOrAdministrativeSanction.make!(:sancao_administrativa, :creditor => object) ] }
-  social_identification_number { "123456" }
-end
-
-Creditor.blueprint(:special) do
-  accounts { [ CreditorBankAccount.make!(:conta_2, :creditor => object) ] }
-  autonomous { false }
-  creditor_balances { [ CreditorBalance.make!(:balanco_2012, :creditor => object) ] }
-  municipal_public_administration { false }
-  occupation_classification { OccupationClassification.make!(:armed_forces) }
-  creditable { SpecialEntry.make!(:example) }
+  person { Person.make!(:sobrinho) }
   regularization_or_administrative_sanctions { [ RegularizationOrAdministrativeSanction.make!(:sancao_administrativa, :creditor => object) ] }
   social_identification_number { "123456" }
 end
@@ -26,7 +15,7 @@ Creditor.blueprint(:sobrinho_sa) do
   creditor_balances { [ CreditorBalance.make!(:balanco_2012, :creditor => object) ] }
   municipal_public_administration { false }
   occupation_classification { OccupationClassification.make!(:armed_forces) }
-  creditable { Person.make!(:sobrinho) }
+  person { Person.make!(:sobrinho) }
   regularization_or_administrative_sanctions { [ RegularizationOrAdministrativeSanction.make!(:sancao_administrativa, :creditor => object) ] }
   social_identification_number { "123456" }
 end
@@ -37,7 +26,7 @@ Creditor.blueprint(:sobrinho_sa_without_email) do
   creditor_balances { [ CreditorBalance.make!(:balanco_2012, :creditor => object) ] }
   municipal_public_administration { false }
   occupation_classification { OccupationClassification.make!(:armed_forces) }
-  creditable { Person.make!(:sobrinho_without_email) }
+  person { Person.make!(:sobrinho_without_email) }
   regularization_or_administrative_sanctions { [ RegularizationOrAdministrativeSanction.make!(:sancao_administrativa, :creditor => object) ] }
   social_identification_number { "123456" }
 end
@@ -48,7 +37,7 @@ Creditor.blueprint(:wenderson_sa) do
   creditor_balances { [ CreditorBalance.make!(:balanco_2012, :creditor => object) ] }
   municipal_public_administration { false }
   occupation_classification { OccupationClassification.make!(:armed_forces) }
-  creditable { Person.make!(:wenderson) }
+  person { Person.make!(:wenderson) }
   regularization_or_administrative_sanctions { [ RegularizationOrAdministrativeSanction.make!(:sancao_administrativa, :creditor => object) ] }
   social_identification_number { "123456789" }
 end
@@ -59,7 +48,7 @@ Creditor.blueprint(:wenderson_sa_with_user) do
   creditor_balances { [ CreditorBalance.make!(:balanco_2012, :creditor => object) ] }
   municipal_public_administration { false }
   occupation_classification { OccupationClassification.make!(:armed_forces) }
-  creditable { Person.make!(:wenderson) }
+  person { Person.make!(:wenderson) }
   regularization_or_administrative_sanctions { [ RegularizationOrAdministrativeSanction.make!(:sancao_administrativa, :creditor => object) ] }
   social_identification_number { "123456789" }
   user { User.make!(:wenderson) }
@@ -72,7 +61,7 @@ Creditor.blueprint(:nohup) do
   documents { [ CreditorDocument.make!(:documento) ] }
   main_cnae { Cnae.make!(:varejo) }
   materials { [ Material.make!(:antivirus), Material.make!(:arame_comum) ] }
-  creditable { Person.make!(:nohup) }
+  person { Person.make!(:nohup) }
   registration_cadastral_certificates { [ RegistrationCadastralCertificate.make!(:crc, :creditor => object) ]}
   regularization_or_administrative_sanctions { [ RegularizationOrAdministrativeSanction.make!(:sancao_administrativa, :creditor => object) ] }
   representatives { [ CreditorRepresentative.make!(:representante_sobrinho) ] }
@@ -85,7 +74,7 @@ Creditor.blueprint(:nobe) do
   documents { [ CreditorDocument.make!(:documento) ] }
   main_cnae { Cnae.make!(:varejo) }
   materials { [ Material.make!(:antivirus), Material.make!(:arame_comum) ] }
-  creditable { Person.make!(:nobe) }
+  person { Person.make!(:nobe) }
   registration_cadastral_certificates { [ RegistrationCadastralCertificate.make!(:crc, :creditor => object) ]}
   regularization_or_administrative_sanctions { [ RegularizationOrAdministrativeSanction.make!(:sancao_administrativa, :creditor => object) ] }
   representatives { [ CreditorRepresentative.make!(:representante_sobrinho) ] }
@@ -98,7 +87,7 @@ Creditor.blueprint(:ibm) do
   documents { [ CreditorDocument.make!(:documento) ] }
   main_cnae { Cnae.make!(:varejo) }
   materials { [ Material.make!(:antivirus), Material.make!(:arame_comum) ] }
-  creditable { Person.make!(:ibm) }
+  person { Person.make!(:ibm) }
   registration_cadastral_certificates { [ RegistrationCadastralCertificate.make!(:crc, :creditor => object) ]}
   regularization_or_administrative_sanctions { [ RegularizationOrAdministrativeSanction.make!(:sancao_administrativa, :creditor => object) ] }
   representatives { [ CreditorRepresentative.make!(:representante_sobrinho) ] }
@@ -107,6 +96,6 @@ end
 Creditor.blueprint(:mateus) do
   accounts { [ CreditorBankAccount.make!(:conta, :creditor => object, :number => 56789) ] }
   creditor_balances { [ CreditorBalance.make!(:balanco_2012, :creditor => object) ] }
-  creditable { Person.make!(:mateus) }
+  person { Person.make!(:mateus) }
   regularization_or_administrative_sanctions { [ RegularizationOrAdministrativeSanction.make!(:sancao_administrativa, :creditor => object) ] }
 end

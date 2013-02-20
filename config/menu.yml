@@ -40,7 +40,6 @@ menu:
     - people:
       - people
       - creditors
-      - special_entries
       - auxiliary:
         - regularization_or_administrative_sanction_reasons
         - company_sizes

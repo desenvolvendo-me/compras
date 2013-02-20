@@ -1,22 +1,6 @@
-<%= f.input :creditable_type, :as => :radio_buttons, :collection => CreditableType.to_a, :disabled => f.object.persisted? %>
-
-<%= f.input :personable_type, :as => :hidden %>
-
-<div class="input modal required creditor-creditable">
-  <%= f.input(
-    :creditable, :hidden_field => :creditable_id,
-    :as => :modal,
-    :disabled => f.object.persisted?,
-    :modal_url => modal_special_entries_path,
-    :wrapper => false
-  ) %>
-
-  <%= link_to_modal_info :href => f.object.creditable %>
-</div>
-
 <div id="creditor-tabs" class="tabs">
   <ul>
-    <li id="tab-creditor-main" class="<%= "individual-field company-field" if Creditor.custom_data.blank? %>">
+    <li id="tab-creditor-main">
       <a href="#creditor-main">Principal</a>
     </li>
 
@@ -83,56 +67,18 @@
 </div>
 
 <script>
-  $('input:radio[name="creditor[creditable_type]"]').click(function () {
-    $('#creditor_creditable_id').val('');
-    $('#creditor_creditable').val('');
-
-    configureCreditableInput();
-  });
-
-  configureCreditableInput();
-
-  function configureCreditableInput() {
-    var url = "<%= modal_people_path %>",
-        label = 'Pessoa física ou jurídica',
-        value = $('[name="creditor[creditable_type]"]:checked').val();
-
-    if (value == 'SpecialEntry') {
-      url = "<%= modal_special_entries_path %>";
-      label = 'Inscrição especial';
-    }
-
-    $('#creditor_creditable').data('modal-url', url);
-    $('label[for=creditor_creditable]').html(label);
-  };
-
-  $('#creditor_creditable_id').change(function (event, people) {
-    if (people && people.personable_type) {
-      $('#creditor_personable_type').val(people.personable_type);
-    } else {
-      $('#creditor_personable_type').val('');
-    }
-  });
-
-  function selectFirstTabVisible() {
-    $('#creditor-tabs').tabs({ selected: $('#creditor-tabs > ul > :not(li:hidden)').first().index() });
-  };
-
   function showCommonTabs() {
     $('.individual-field, .company-field').hide();
-    selectFirstTabVisible();
   };
 
   function showOnlyIndividualFields(){
     $('.company-field').hide();
     $('.individual-field').show();
-    selectFirstTabVisible();
   };
 
   function showOnlyCompanyFields(){
     $('.individual-field').hide();
     $('.company-field').show();
-    selectFirstTabVisible();
   };
 
   function hideFields(){
@@ -148,15 +94,24 @@
     }
   };
 
-  $("#creditor_creditable_id").change( function(event, person) {
-    hideFields();
-    if (person && person.isCompany) {
-      $('#creditor_company_size').val(person.companySize);
-      $('#creditor_choose_simple').attr('checked', person.chooseSimple);
-      $('#creditor_legal_nature').val(person.legalNature);
-      $('#creditor_commercial_registration_number').val(person.commercialRegistrationNumber);
-      $('#creditor_commercial_registration_date').val(person.commercialRegistrationDate);
+  $("#creditor_person_id").change( function(event, person) {
+    if (person) {
+      $(this).parent().parent().find('.modal_info a').attr('href', person.modal_info_url);
+
+      $('#creditor_personable_type').val(person.personable_type);
+
+      if (person.isCompany) {
+        $('#creditor_company_size').val(person.companySize);
+        $('#creditor_choose_simple').attr('checked', person.chooseSimple);
+        $('#creditor_legal_nature').val(person.legalNature);
+        $('#creditor_commercial_registration_number').val(person.commercialRegistrationNumber);
+        $('#creditor_commercial_registration_date').val(person.commercialRegistrationDate);
+      }
+    } else {
+      $('#creditor_personable_type').val('');
     }
+
+    hideFields();
   });
 
   $('form.creditor').on('change', '.wrapper-creditor-account-bank input:hidden', function() {

@@ -2,7 +2,7 @@ class Creditor < Compras::Model
   include CustomData
   reload_custom_data
 
-  attr_accessible :creditable_type, :creditable_id, :contract_start_date,
+  attr_accessible :person_id, :contract_start_date,
                   :occupation_classification_id, :main_cnae_id, :cnae_ids,
                   :municipal_public_administration, :autonomous,
                   :social_identification_number, :documents_attributes,
@@ -14,11 +14,9 @@ class Creditor < Compras::Model
 
   attr_modal :name, :cpf, :cnpj
 
-  has_enumeration_for :creditable_type, :create_helpers => true
-
   belongs_to :main_cnae, :class_name => 'Cnae'
   belongs_to :occupation_classification
-  belongs_to :creditable, :polymorphic => true
+  belongs_to :person
 
   has_many :accounts, :class_name => 'CreditorBankAccount', :inverse_of => :creditor, :dependent => :destroy
   has_many :agencies, :through => :accounts
@@ -53,7 +51,7 @@ class Creditor < Compras::Model
            :to => :person, :allow_nil => true
   delegate :email, :to => :person, :allow_nil => true, :prefix => true
   delegate :identity_document, :to => :responsible, :prefix => true, :allow_nil => true
-  delegate :name, :to => :creditable, :allow_nil => true
+  delegate :name, :to => :person, :allow_nil => true
   delegate :neighborhood, :state, :country, :zip_code, :to => :address, :allow_nil => true
   delegate :bank_id, :to => :accounts, :allow_nil => true
   delegate :materials_class, :to => :materials, :allow_nil => true
@@ -67,8 +65,7 @@ class Creditor < Compras::Model
   accepts_nested_attributes_for :representatives, :allow_destroy => true
   accepts_nested_attributes_for :user
 
-  validates :creditable, :presence => true
-  validates :creditable_id, :uniqueness => { :scope => :creditable_type }, :allow_blank => true
+  validates :person, :presence => true
   validates :contract_start_date, :timeliness => { :type => :date }, :allow_blank => true
   validates :contract_start_date, :social_identification_number, :presence => true, :if => :autonomous?
   validates :main_cnae, :presence => true, :if => :company?
@@ -84,22 +81,16 @@ class Creditor < Compras::Model
 
   def self.filter(params)
     query = scoped
-    query = query.joins { creditable(Person).outer.personable(Company).outer }
-    query = query.joins { creditable(Person).outer.personable(Individual).outer }
-    query = query.joins { creditable(SpecialEntry).outer }
-    query = query.where { creditable(Person).name.matches("#{params[:name]}%") |
-                          creditable(SpecialEntry).name.matches("#{params[:name]}%") } if params[:name].present?
-    query = query.where { creditable(Person).personable(Individual).cpf.eq(params[:cpf]) } if params[:cpf].present?
-    query = query.where { creditable(Person).personable(Company).cnpj.eq(params[:cnpj]) } if params[:cnpj].present?
+    query = query.joins { person.outer.personable(Company).outer }
+    query = query.joins { person.outer.personable(Individual).outer }
+    query = query.where { person.name.matches("#{params[:name]}%") } if params[:name].present?
+    query = query.where { person.personable(Individual).cpf.eq(params[:cpf]) } if params[:cpf].present?
+    query = query.where { person.personable(Company).cnpj.eq(params[:cnpj]) } if params[:cnpj].present?
     query
   end
 
   def to_s
-    creditable.to_s
-  end
-
-  def person
-    creditable if person?
+    person.to_s
   end
 
   def selected_cnaes

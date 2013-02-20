@@ -6,9 +6,9 @@ feature "Creditors" do
     sign_in
   end
 
-  scenario 'creditor filter by person or special entry' do
+  scenario 'creditor filter by person' do
     Creditor.make!(:nohup)
-    Creditor.make!(:special)
+    Creditor.make!(:wenderson_sa)
 
     navigate 'Comum > Pessoas > Credores'
 
@@ -17,13 +17,13 @@ feature "Creditors" do
     click_button 'Pesquisar'
 
     expect(page).to have_link 'Nohup'
-    expect(page).to_not have_link 'Tal'
+    expect(page).to_not have_link 'Wenderson'
 
     click_link 'Filtrar Credores'
-    fill_in 'Nome', :with => 'Tal'
+    fill_in 'Nome', :with => 'Wenderson'
     click_button 'Pesquisar'
 
-    expect(page).to have_link 'Tal'
+    expect(page).to have_link 'Wenderson'
     expect(page).to_not have_link 'Nohup'
   end
 
@@ -48,22 +48,6 @@ feature "Creditors" do
     expect(page).to_not have_link 'Gabriel Sobrinho'
   end
 
-  scenario 'switch type of creditor between special entry and person' do
-    navigate 'Comum > Pessoas > Credores'
-
-    click_link 'Criar Credor'
-
-    expect(page).to have_field 'Inscrição especial', :with => ''
-
-    choose 'Pessoa física ou jurídica'
-
-    expect(page).to have_field 'Pessoa física ou jurídica', :with => ''
-
-    choose 'Inscrição especial'
-
-    expect(page).to have_field 'Inscrição especial', :with => ''
-  end
-
   scenario 'show main tab to special entry when have custom data' do
     prefecture = Prefecture.make!(:belo_horizonte)
     Customization.make!(:campo_string, :state => prefecture.state)
@@ -77,110 +61,6 @@ feature "Creditors" do
     end
   end
 
-  scenario 'create a new creditor when people is special entry' do
-    SpecialEntry.make!(:example)
-    Agency.make!(:itau)
-    Material.make!(:arame_farpado)
-    RegularizationOrAdministrativeSanctionReason.make!(:sancao_administrativa)
-
-    navigate 'Comum > Pessoas > Credores'
-
-    click_link 'Criar Credor'
-
-    within 'div.creditor-creditable' do
-      fill_modal 'Inscrição especial', :with => 'Tal'
-    end
-
-    within_tab 'Contas Bancárias' do
-      click_button 'Adicionar Conta Bancária'
-
-      fill_modal 'Banco', :with => 'Itaú'
-
-      within_modal 'Agência' do
-        expect(page).to have_disabled_field 'Banco'
-        expect(page).to have_field 'Banco', :with => 'Itaú'
-
-        fill_in 'Nome', :with => 'Agência Itaú'
-        click_button 'Pesquisar'
-
-        click_record 'Agência Itaú'
-      end
-
-      select 'Ativo', :from => 'Status'
-      select 'Conta corrente', :from => 'Tipo da conta'
-      fill_in 'Número da conta', :with => '12345'
-      fill_in 'Dígito da conta', :with => 'x'
-    end
-
-    within_tab 'Balanço' do
-      click_button 'Adicionar Balanço'
-
-      fill_in 'Exercício', :with => '2012'
-      fill_in 'Ativo circulante', :with => '10,00'
-      fill_in 'Realizável em longo prazo', :with => '20,00'
-      fill_in 'Passivo circulante', :with => '30,00'
-      fill_in 'Patrimônio líquido', :with => '40,00'
-      fill_in 'Exigível em longo prazo', :with => '50,00'
-      fill_in 'Liquidez geral', :with => '60,00'
-      fill_in 'Liquidez corrente', :with => '70,00'
-      fill_in 'Capital circulante líquido', :with => '80,00'
-    end
-
-    within_tab 'Materiais' do
-      fill_modal 'Materiais', :with => 'Arame farpado', :field => 'Descrição'
-    end
-
-    within_tab 'Sanções Administrativas / Regularizações' do
-      click_button 'Adicionar Sanção Administrativa / Regularização'
-
-      fill_modal 'Motivo', :with => 'Advertência por desistência parcial da proposta devidamente justificada', :field => 'Descrição'
-      fill_in 'Suspenso até', :with => '05/04/2012'
-      fill_in 'Data da ocorrência', :with => '05/05/2012'
-    end
-
-    click_button 'Salvar'
-
-    expect(page).to have_notice 'Credor criado com sucesso.'
-
-    click_link 'Tal'
-
-    expect(page).to have_field 'Inscrição especial', :with => 'Tal'
-    expect(page).to_not have_field 'Porte da empresa'
-
-    within_tab 'Contas Bancárias' do
-      expect(page).to have_field 'Banco', :with => 'Itaú'
-      expect(page).to have_field 'Agência', :with => 'Agência Itaú'
-      expect(page).to have_select 'Status', :selected => 'Ativo'
-      expect(page).to have_select 'Tipo da conta', :selected => 'Conta corrente'
-      expect(page).to have_field 'Número da conta', :with => '12345'
-      expect(page).to have_field 'Dígito da conta', :with => 'x'
-    end
-
-    within_tab 'Materiais' do
-      expect(page).to have_content '02.02.00001'
-      expect(page).to have_content 'Arame farpado'
-    end
-
-    within_tab 'Balanço' do
-      expect(page).to have_field 'Exercício', :with => '2012'
-      expect(page).to have_field 'Ativo circulante', :with => '10,00'
-      expect(page).to have_field 'Realizável em longo prazo', :with => '20,00'
-      expect(page).to have_field 'Passivo circulante', :with => '30,00'
-      expect(page).to have_field 'Patrimônio líquido', :with => '40,00'
-      expect(page).to have_field 'Exigível em longo prazo', :with => '50,00'
-      expect(page).to have_field 'Liquidez geral', :with => '60,00'
-      expect(page).to have_field 'Liquidez corrente', :with => '70,00'
-      expect(page).to have_field 'Capital circulante líquido', :with => '80,00'
-    end
-
-    within_tab 'Sanções Administrativas / Regularizações' do
-      expect(page).to have_field 'Motivo', :with => 'Advertência por desistência parcial da proposta devidamente justificada'
-      expect(page).to have_field 'Tipo', :with => 'Sanção administrativa'
-      expect(page).to have_field 'Suspenso até', :with => '05/04/2012'
-      expect(page).to have_field 'Data da ocorrência', :with => '05/05/2012'
-    end
-  end
-
   scenario 'viewing more data from the selected person' do
     Person.make!(:nohup)
 
@@ -188,13 +68,11 @@ feature "Creditors" do
 
     click_link 'Criar Credor'
 
-    choose 'Pessoa física ou jurídica'
-
-    within 'div.creditor-creditable' do
+    within_tab 'Principal' do
       fill_modal 'Pessoa física ou jurídica', :with => 'Nohup'
-    end
 
-    click_link 'Mais informações'
+      click_link 'Mais informações'
+    end
 
     expect(page).to have_content 'Nohup'
     expect(page).to have_content 'Sócios'
@@ -216,13 +94,9 @@ feature "Creditors" do
 
     click_link 'Criar Credor'
 
-    choose 'Pessoa física ou jurídica'
-
-    within 'div.creditor-creditable' do
-      fill_modal 'Pessoa física ou jurídica', :with => 'Ibrama'
-    end
-
     within_tab 'Principal' do
+      fill_modal 'Pessoa física ou jurídica', :with => 'Ibrama'
+
       expect(page).to have_disabled_field 'Porte da empresa'
       expect(page).to have_field 'Porte da empresa', :with => 'Microempresa'
       expect(page).to have_disabled_field 'Optante pelo simples'
@@ -406,13 +280,8 @@ feature "Creditors" do
 
     click_link 'Criar Credor'
 
-    choose 'Pessoa física ou jurídica'
-
-    within 'div.creditor-creditable' do
-      fill_modal 'Pessoa física ou jurídica', :with => 'Gabriel Sobrinho'
-    end
-
     within_tab 'Principal' do
+      fill_modal 'Pessoa física ou jurídica', :with => 'Gabriel Sobrinho'
       fill_modal 'CBO', :with => 'MEMBROS DAS FORÇAS ARMADAS'
       check 'Admnistração pública municipal'
       check 'Autônomo'
@@ -709,121 +578,6 @@ feature "Creditors" do
     click_link 'Gabriel Sobrinho'
 
     expect(page).to have_disabled_element 'CRC', :reason => 'não disponível para pessoa física'
-  end
-
-  scenario 'update a creditor when people is special entry' do
-    Creditor.make!(:mateus)
-    Agency.make!(:santander)
-    Material.make!(:arame_farpado)
-    RegularizationOrAdministrativeSanctionReason.make!(:regularizacao)
-
-    navigate 'Comum > Pessoas > Credores'
-
-    click_link 'Mateus Lorandi'
-
-    within_tab 'Contas Bancárias' do
-      click_button 'Remover Conta Bancária'
-      click_button 'Adicionar Conta Bancária'
-
-      fill_modal 'Banco', :with => 'Santander'
-
-      within_modal 'Agência' do
-        expect(page).to have_disabled_field 'Banco'
-        expect(page).to have_field 'Banco', :with => 'Santander'
-
-        fill_in 'Nome', :with => 'Agência Santander'
-        click_button 'Pesquisar'
-
-        click_record 'Agência Santander'
-      end
-
-      select 'Ativo', :from => 'Status'
-      select 'Conta corrente', :from => 'Tipo da conta'
-      fill_in 'Número da conta', :with => '98765'
-      fill_in 'Dígito da conta', :with => '4'
-    end
-
-    within_tab 'Materiais' do
-      fill_modal 'Materiais', :with => 'Arame farpado', :field => 'Descrição'
-    end
-
-    within_tab 'Balanço' do
-      click_button 'Remover Balanço'
-      click_button 'Adicionar Balanço'
-
-      fill_in 'Exercício', :with => '2012'
-      fill_in 'Ativo circulante', :with => '10,00'
-      fill_in 'Realizável em longo prazo', :with => '20,00'
-      fill_in 'Passivo circulante', :with => '30,00'
-      fill_in 'Patrimônio líquido', :with => '40,00'
-      fill_in 'Exigível em longo prazo', :with => '50,00'
-      fill_in 'Liquidez geral', :with => '60,00'
-      fill_in 'Liquidez corrente', :with => '70,00'
-      fill_in 'Capital circulante líquido', :with => '80,00'
-    end
-
-    within_tab 'Sanções Administrativas / Regularizações' do
-      expect(page).to have_field 'Motivo', :with => 'Advertência por desistência parcial da proposta devidamente justificada'
-      expect(page).to have_field 'Tipo', :with => 'Sanção administrativa'
-      expect(page).to have_field 'Suspenso até', :with => '05/04/2012'
-      expect(page).to have_field 'Data da ocorrência', :with => '04/01/2012'
-
-      click_button 'Remover Sanção Administrativa / Regularização'
-
-      click_button 'Adicionar Sanção Administrativa / Regularização'
-
-      fill_modal 'Motivo', :with => 'Ativação do registro cadastral', :field => 'Descrição'
-      fill_in 'Suspenso até', :with => '05/04/2011'
-      fill_in 'Data da ocorrência', :with => '05/05/2011'
-    end
-
-    click_button 'Salvar'
-
-    expect(page).to have_notice 'Credor editado com sucesso.'
-
-    click_link 'Mateus Lorandi'
-
-    within 'div.creditor-creditable' do
-      expect(page).to have_field 'Pessoa física ou jurídica', :with => 'Mateus Lorandi'
-    end
-
-    within_tab 'Contas Bancárias' do
-      expect(page).to_not have_field 'Banco', :with => 'Itaú'
-      expect(page).to_not have_field 'Agência', :with => 'Agência Itaú'
-
-      expect(page).to have_field 'Banco', :with => 'Santander'
-      expect(page).to have_field 'Agência', :with => 'Agência Santander'
-      expect(page).to have_select 'Status', :selected => 'Ativo'
-      expect(page).to have_select 'Tipo da conta', :selected => 'Conta corrente'
-      expect(page).to have_field 'Número da conta', :with => '98765'
-      expect(page).to have_field 'Dígito da conta', :with => '4'
-    end
-
-    within_tab 'Materiais' do
-      expect(page).to have_content '02.02.00001'
-      expect(page).to have_content 'Arame farpado'
-    end
-
-    within_tab 'Balanço' do
-      expect(page).to have_field 'Exercício', :with => '2012'
-      expect(page).to have_field 'Ativo circulante', :with => '10,00'
-      expect(page).to have_field 'Realizável em longo prazo', :with => '20,00'
-      expect(page).to have_field 'Passivo circulante', :with => '30,00'
-      expect(page).to have_field 'Patrimônio líquido', :with => '40,00'
-      expect(page).to have_field 'Exigível em longo prazo', :with => '50,00'
-      expect(page).to have_field 'Liquidez geral', :with => '60,00'
-      expect(page).to have_field 'Liquidez corrente', :with => '70,00'
-      expect(page).to have_field 'Capital circulante líquido', :with => '80,00'
-    end
-
-    within_tab 'Sanções Administrativas / Regularizações' do
-      expect(page).to_not have_content 'Advertência por desistência parcial da proposta devidamente justificada'
-
-      expect(page).to have_field 'Motivo', :with => 'Ativação do registro cadastral'
-      expect(page).to have_field 'Tipo', :with => 'Regularização'
-      expect(page).to have_field 'Suspenso até', :with => '05/04/2011'
-      expect(page).to have_field 'Data da ocorrência', :with => '05/05/2011'
-    end
   end
 
   scenario 'update a creditor when people is a company' do
@@ -1225,7 +979,7 @@ feature "Creditors" do
     click_link 'Criar Credor'
 
     within "#creditor-tabs" do
-       expect(page).to_not have_link "Principal"
+       expect(page).to have_link "Principal"
        expect(page).to_not have_link "CNAEs"
        expect(page).to_not have_link "Documentos"
        expect(page).to have_link "Materiais"
@@ -1243,13 +997,9 @@ feature "Creditors" do
 
     click_link 'Criar Credor'
 
-    choose 'Pessoa física ou jurídica'
-
-    within 'div.creditor-creditable' do
-      fill_modal 'Pessoa física ou jurídica', :with => 'Gabriel Sobrinho'
-    end
-
     within "#creditor-tabs" do
+      fill_modal 'Pessoa física ou jurídica', :with => 'Gabriel Sobrinho'
+
        expect(page).to have_link "Principal"
        expect(page).to_not have_link "CNAEs"
        expect(page).to_not have_link "Documentos"
@@ -1268,13 +1018,9 @@ feature "Creditors" do
 
     click_link 'Criar Credor'
 
-    choose 'Pessoa física ou jurídica'
-
-    within 'div.creditor-creditable' do
-      fill_modal 'Pessoa física ou jurídica', :with => 'Nohup'
-    end
-
     within "#creditor-tabs" do
+      fill_modal 'Pessoa física ou jurídica', :with => 'Nohup'
+
        expect(page).to have_link "Principal"
        expect(page).to have_link "CNAEs"
        expect(page).to have_link "Documentos"

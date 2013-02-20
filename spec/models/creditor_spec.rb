@@ -29,7 +29,7 @@ describe Creditor do
     end
   end
 
-  it { should belong_to :creditable }
+  it { should belong_to :person }
   it { should belong_to :occupation_classification }
   it { should belong_to :main_cnae }
   it { should have_many :creditor_secondary_cnaes }
@@ -49,10 +49,12 @@ describe Creditor do
   it { should have_many(:licitation_processes).dependent(:restrict).through(:bidders) }
   it { should validate_duplication_of(:document_type_id).on(:documents) }
 
-  it { should validate_presence_of :creditable }
+  it { should validate_presence_of :person }
   it { should_not validate_presence_of :main_cnae }
   it { should_not validate_presence_of :contract_start_date }
   it { should_not validate_presence_of :social_identification_number }
+
+  it { should delegate(:name).to(:person).allowing_nil(true) }
 
   context 'when is company' do
     before do
@@ -180,24 +182,6 @@ describe Creditor do
       subject.valid?
 
       expect(subject.errors.messages[:representatives]).to be_nil
-    end
-  end
-
-  describe 'person' do
-    let :person do
-      double
-    end
-
-    it 'should return person' do
-      subject.stub(:creditable => person, :person? => true)
-
-      expect(subject.person).to eq person
-    end
-
-    it 'should return nil' do
-      subject.stub(:creditable => double, :person? => false)
-
-      expect(subject.person).to be nil
     end
   end
 end

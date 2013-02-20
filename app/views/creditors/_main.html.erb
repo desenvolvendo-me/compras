@@ -1,3 +1,10 @@
+<div class="input modal required">
+  <%= f.input :person, :disabled => f.object.persisted? %>
+  <%= link_to_modal_info :href => f.object.person %>
+</div>
+
+<%= f.input :personable_type, :as => :hidden %>
+
 <div class="individual-field">
   <%= f.input :occupation_classification %>
 

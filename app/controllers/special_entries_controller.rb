@@ -1,2 +1,0 @@
-class SpecialEntriesController < CrudController
-end
