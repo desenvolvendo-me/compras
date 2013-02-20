@@ -4,7 +4,8 @@ class User < Compras::Model
 
   attr_modal :email
 
-  devise :database_authenticatable, :recoverable, :validatable, :confirmable
+  devise :database_authenticatable, :recoverable, :validatable, :confirmable,
+         :timeoutable
 
   has_enumeration_for :authenticable_type, :with => AuthenticableType,
                       :create_helpers => true, :create_scopes => true

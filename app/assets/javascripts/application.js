@@ -4,6 +4,7 @@
 //= require compras/simple_form.numeric_input
 //= require compras/currency_manipulation
 //= require compras/modal_info_link_disabler
+//= require compras/session_timeout
 //= require jquery.ui.autocomplete
 //= require simple_form.auto_complete_input.js
 
@@ -24,7 +25,7 @@ $(".modal-finder .modal input.modal").live("change", function(event, record) {
   var defaults = {
     index: _.uniqueId('fresh-'),
     uuid: _.uniqueId('fresh-')
-  }
+  };
 
   var options = $.extend({}, defaults, record);
 

@@ -499,6 +499,8 @@ Compras::Application.routes.draw do
     end
   end
 
+  get '/ping' => 'ping#ping'
+
   get "modal/pledge_categories", :as => "modal_pledge_categories"
 
   get "modal/pledge_historics", :as => "modal_pledge_historics"

@@ -1,0 +1,10 @@
+// Handle session timeout
+function checkSession () {
+  $.ajax("<%= ENV['RAILS_RELATIVE_URL_ROOT'] %>/ping").fail(function (jqXHR) {
+    if (jqXHR.status === 401) {
+      window.location = "<%= ENV['RAILS_RELATIVE_URL_ROOT'] %>/users/sign_in";
+    }
+  });
+}
+
+setInterval(checkSession, 1000 * 60 * 5);

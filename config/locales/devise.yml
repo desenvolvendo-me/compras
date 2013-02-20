@@ -9,6 +9,7 @@ pt-BR:
       invalid: "Login ou senha inválidos."
       already_authenticated: "Você já está autenticado."
       not_found_in_database: 'Email ou senha inválido.'
+      timeout: "Sua sessão expirou. Por favor, efetue seu login novamente."
 
     sessions:
       signed_in: "Login efetuado com sucesso."
