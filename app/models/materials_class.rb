@@ -36,7 +36,7 @@ class MaterialsClass < Compras::Model
   end
 
   def parent
-    self.class.find_by_class_number(parent_class_number)
+    self.class.find_by_class_number(raw_parent_class_number)
   end
 
   def editable?
@@ -88,7 +88,7 @@ class MaterialsClass < Compras::Model
     nil
   end
 
-  def parent_class_number
+  def raw_parent_class_number
     return '' if splitted_masked_number_filled.empty?
 
     splitted_masked_number_filled[0,class_number_level-1].join.ljust(mask_size, '0')

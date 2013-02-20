@@ -36,16 +36,14 @@
   });
 
   (function() {
-    <% if f.object.persisted? %>
-      $("#materials_class_parent_number").val('<%= resource.decorator.persisted_parent_masked_number %>');
-      $("#materials_class_number").val('<%= resource.decorator.last_level_class_number %>');
-      $("#materials_class_number").attr("data-mask", "<%= resource.decorator.child_mask %>");
-      $("#materials_class_parent_class_number").val("<%= resource.decorator.persisted_masked_to_s %>");
+    $("#materials_class_parent_number").val('<%= resource.decorator.persisted_parent_masked_number %>');
+    $("#materials_class_number").val('<%= resource.decorator.last_level_class_number %>');
+    $("#materials_class_number").attr("data-mask", "<%= resource.decorator.child_mask %>");
+    $("#materials_class_parent_class_number").val("<%= resource.decorator.persisted_masked_to_s %>");
 
-      $("#materials_class_number").before(function() {
-        return $("<span>").text('<%= resource.decorator.persisted_parent_masked_number(true) %>').addClass('add-on').attr("id", "prepended-input");
-      });
-    <% end %>
+    $("#materials_class_number").before(function() {
+      return $("<span>").text('<%= resource.decorator.persisted_parent_masked_number(true) %>').addClass('add-on').attr("id", "prepended-input");
+    });
 
     <% unless f.object.editable? %>
       $("form :input").attr('disabled', true);

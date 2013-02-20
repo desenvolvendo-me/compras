@@ -199,4 +199,52 @@ feature "MaterialsClasses" do
     expect(page).to have_field 'Classe superior', :with => ''
     expect(page).to have_field 'Código', :with => '12'
   end
+
+  scenario 'should keep data when form has errors' do
+    MaterialsClass.make!(:software)
+
+    navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
+
+    click_link 'Criar Classe de Materiais'
+
+    fill_with_autocomplete 'Classe superior', :with => 'Software'
+
+    expect(page).to have_field 'Classe superior', :with => '01.32 - Software'
+
+    within '.number-prepend' do
+      expect(page).to have_content '01.32.'
+    end
+
+    fill_in 'Código', :with => '22'
+    fill_in 'Detalhamento', :with => 'materiais para escritório'
+
+    click_button 'Salvar'
+
+    expect(page).to_not have_notice 'Classe de Materiais criada com sucesso.'
+
+    within '.number-prepend' do
+      expect(page).to have_content '01.32.'
+    end
+
+    expect(page).to have_field 'Classe superior', :with => '01.32 - Software'
+    expect(page).to have_field 'Código', :with => '22'
+    expect(page).to have_field 'Detalhamento', :with => 'materiais para escritório'
+
+    fill_in 'Descrição', :with => 'Materiais de Escritório'
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Classe de Materiais criada com sucesso.'
+
+    click_link 'Materiais de Escritório'
+
+    within '.number-prepend' do
+      expect(page).to have_content '01.32.'
+    end
+
+    expect(page).to have_field 'Classe superior', :with => '01.32 - Software'
+    expect(page).to have_field 'Código', :with => '22'
+    expect(page).to have_field 'Descrição', :with => 'Materiais de Escritório'
+    expect(page).to have_field 'Detalhamento', :with => 'materiais para escritório'
+  end
 end
