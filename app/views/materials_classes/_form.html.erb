@@ -18,18 +18,20 @@
 
 <script>
   $('#materials_class_parent_class_number').on('change', function(event, material_class){
-    $("#prepended-input").remove();
+    if (event.originalEvent === undefined) {
+      $("#prepended-input").remove();
 
-    if (material_class) {
-      $("#materials_class_mask").val(material_class.mask);
-      $("#materials_class_number").attr("data-mask", material_class.child_mask);
-      $("#materials_class_number").before(function() {
-        var text = material_class.filled_mask + '.';
-        return $("<span>").text(text).addClass('add-on').attr("id", "prepended-input");
-      });
-    } else {
-      $("#materials_class_mask").val('');
-      $("#materials_class_number").removeAttr("data-mask");
+      if (material_class) {
+        $("#materials_class_mask").val(material_class.mask);
+        $("#materials_class_number").attr("data-mask", material_class.child_mask);
+        $("#materials_class_number").before(function() {
+          var text = material_class.filled_mask + '.';
+          return $("<span>").text(text).addClass('add-on').attr("id", "prepended-input");
+        });
+      } else {
+        $("#materials_class_mask").val('');
+        $("#materials_class_number").removeAttr("data-mask");
+      }
     }
   });
 
