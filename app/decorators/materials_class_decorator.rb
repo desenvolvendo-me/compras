@@ -3,7 +3,7 @@ class MaterialsClassDecorator
   include Decore::Proxy
   include Decore::Header
 
-  attr_header :description, :masked_number
+  attr_header :description, :filled_masked_number_without_end_dot
 
   def masked_to_s
     "#{filled_masked_number} - #{description}"

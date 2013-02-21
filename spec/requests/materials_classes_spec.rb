@@ -104,7 +104,7 @@ feature "MaterialsClasses" do
 
       within 'tbody tr' do
         expect(page).to have_content 'Software'
-        expect(page).to have_content '01.32.00.000.000'
+        expect(page).to have_content '01.32'
       end
     end
   end
@@ -186,8 +186,10 @@ feature "MaterialsClasses" do
 
     click_button 'Pesquisar'
 
-    expect(page).to have_content "Software"
-    expect(page).to have_content "01.32.00.000.000"
+    within_records do
+      expect(page).to have_content "Software"
+      expect(page).to have_content "01.32"
+    end
   end
 
   scenario 'update an existent materials_class when at first level' do

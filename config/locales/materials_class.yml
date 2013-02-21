@@ -10,6 +10,7 @@ pt-BR:
         number: "Código"
         class_number: "Código"
         masked_number: "Código"
+        filled_masked_number_without_end_dot: "Código"
         parent_class_number: "Classe superior"
         description: "Descrição"
         details: "Detalhamento"
