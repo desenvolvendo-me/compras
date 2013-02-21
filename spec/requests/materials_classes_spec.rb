@@ -154,7 +154,7 @@ feature "MaterialsClasses" do
     MaterialsClass.make!(:software, :imported => true)
     MaterialsClass.make!(:software,
       :masked_number => '01.00.00.000.000',
-      :description => 'Teste'
+      :description => 'Teste',
       :imported => true
     )
 
