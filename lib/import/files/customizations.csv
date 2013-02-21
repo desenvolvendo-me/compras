@@ -1,0 +1,6 @@
+model;state;data;data_type;required;options
+"licitation_commission";"MG";"Classificação TCE/MG";"select";"false";"00 - Nenhum, 01 - Portaria, 02 - Decreto"
+"creditor";"MG";"Objeto social do credor";"string";"false";
+"creditor";"MG";"Número do Registro CVM";"string";"false";
+"creditor";"MG";"Data do registro CVM";"date";"false";
+"creditor";"MG";"Número do Registro no Cartório de Registro, títulos e documentos";"string";"false";
