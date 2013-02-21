@@ -248,4 +248,28 @@ feature "MaterialsClasses" do
     expect(page).to have_field 'Descrição', :with => 'Materiais de Escritório'
     expect(page).to have_field 'Detalhamento', :with => 'materiais para escritório'
   end
+
+
+  scenario 'modal form at filter should have an autocomplete for class_number' do
+    MaterialsClass.make!(:software)
+    MaterialsClass.make!(:arames)
+
+    navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
+
+    within_records do
+      expect(page).to have_content 'Software'
+      expect(page).to have_content 'Arame'
+    end
+
+    click_link 'Filtrar Classes de Materiais'
+
+    fill_with_autocomplete 'Código', :with => 'Software'
+
+    click_button 'Pesquisar'
+
+    within_records do
+      expect(page).to have_content 'Software'
+      expect(page).to_not have_content 'Arame'
+    end
+  end
 end

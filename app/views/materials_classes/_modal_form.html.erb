@@ -1,9 +1,7 @@
-<%= f.input :class_number, :as => :hidden %>
-<%= f.input :masked_number %>
+<%= f.input :parent_class_number,
+            :as => :auto_complete,
+            :source_path => materials_classes_path,
+            :hidden_field => 'class_number',
+            :label => 'Código',
+            :input_html => { 'data-hidden-field-value-attribute' => 'class_number' } %>
 <%= f.input :description %>
-
-<script>
-  $("#filter_masked_number").change(function() {
-    $("#filter_class_number").val($(this).val().replace('.', ''));
-  });
-</script>
