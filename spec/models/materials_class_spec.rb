@@ -8,6 +8,7 @@ describe MaterialsClass do
 
   it { should validate_presence_of :masked_number }
   it { should validate_presence_of :description }
+  it { should validate_numericality_of :number }
 
   it 'should return class_number and description as to_s method' do
     subject.masked_number = '30.52.10.000.000'
