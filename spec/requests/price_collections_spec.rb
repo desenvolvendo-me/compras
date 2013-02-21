@@ -192,6 +192,8 @@ feature "PriceCollections" do
       page.find('a').click
     end
 
+    expect(page).to have_subtitle '1/2012'
+
     within_tab 'Principal' do
       fill_in 'Data', :with => I18n.l(Date.current + 10.days)
       fill_modal 'Local de entrega', :with => 'Secretaria da Saúde', :field => 'Descrição'

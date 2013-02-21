@@ -32,4 +32,8 @@ class PurchaseSolicitationDecorator
   def code_and_year
     "#{code}/#{accounting_year}"
   end
+
+  def subtitle
+    code_and_year
+  end
 end

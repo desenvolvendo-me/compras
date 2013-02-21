@@ -118,6 +118,8 @@ feature "PurchaseSolicitations" do
       page.find('a').click
     end
 
+    expect(page).to have_subtitle '1/2012'
+
     expect(page).to_not have_link 'Apagar'
     expect(page).to have_disabled_field 'Ano'
 

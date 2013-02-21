@@ -27,4 +27,8 @@ class PriceCollectionDecorator
   def code_and_year
     "#{code}/#{year}"
   end
+
+  def subtitle
+    code_and_year
+  end
 end
