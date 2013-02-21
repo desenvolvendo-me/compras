@@ -69,7 +69,7 @@ feature "PurchaseSolicitations" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Solicitação de Compra criada com sucesso.'
+    expect(page).to have_notice 'Solicitação de Compra 1/2012 criada com sucesso.'
 
     within_tab 'Principal' do
       expect(page).to have_field 'Código', :with => '1'
@@ -162,7 +162,7 @@ feature "PurchaseSolicitations" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Solicitação de Compra editada com sucesso.'
+    expect(page).to have_notice 'Solicitação de Compra 1/2012 editada com sucesso.'
 
     within_tab 'Principal' do
       expect(page).to have_field 'Código', :with => '1'
@@ -354,7 +354,7 @@ feature "PurchaseSolicitations" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Solicitação de Compra criada com sucesso.'
+    expect(page).to have_notice 'Solicitação de Compra 2/2012 criada com sucesso.'
 
     within_tab 'Principal' do
       expect(page).to have_field 'Código', :with => '2'
@@ -454,7 +454,7 @@ feature "PurchaseSolicitations" do
 
     click_button 'Salvar'
 
-    expect(page).to_not have_notice 'Solicitação de Compra criada com sucesso.'
+    expect(page).to_not have_notice 'Solicitação de Compra 1/2012 criada com sucesso.'
 
     within_tab 'Dotações orçamentárias' do
       expect(page).to have_content "já existe uma solicitação de compra pendente com esta estrutura orçamentária solicitante e material"
@@ -478,7 +478,7 @@ feature "PurchaseSolicitations" do
 
     click_button 'Salvar'
 
-    expect(page).to_not have_notice 'Solicitação de Compra criada com sucesso.'
+    expect(page).to_not have_notice 'Solicitação de Compra 1/2012 criada com sucesso.'
 
     within_tab 'Dotações orçamentárias' do
       expect(page).to have_content "já existe uma solicitação de compra pendente com esta estrutura orçamentária solicitante e material"
@@ -658,7 +658,7 @@ feature "PurchaseSolicitations" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Compra Direta criada com sucesso.'
+    expect(page).to have_notice 'Compra Direta 1/2012 criada com sucesso.'
 
     ### Create a supply authorization of direct purchase with item group
     navigate 'Processos de Compra > Compra Direta'
@@ -744,7 +744,7 @@ feature "PurchaseSolicitations" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Compra Direta criada com sucesso.'
+    expect(page).to have_notice 'Compra Direta 2/2012 criada com sucesso.'
 
     ### Create a supply authorization of direct purchase with item group
     navigate 'Processos de Compra > Compra Direta'
@@ -829,7 +829,7 @@ feature "PurchaseSolicitations" do
 
     click_button 'Salvar'
 
-    expect(page).to_not have_notice 'Solicitação de Compra criada com sucesso.'
+    expect(page).to_not have_notice 'Solicitação de Compra 1/2012 criada com sucesso.'
 
     within_tab 'Dotações orçamentárias' do
       within '#allocations .item:last' do

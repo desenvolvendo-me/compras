@@ -81,7 +81,7 @@ feature "PriceRegistration" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Registro de Preço criado com sucesso.'
+    expect(page).to have_notice 'Registro de Preço 1/2012 criado com sucesso.'
 
     click_link '1/2012'
 
@@ -173,7 +173,7 @@ feature "PriceRegistration" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Registro de Preço editado com sucesso.'
+    expect(page).to have_notice 'Registro de Preço 1/2012 editado com sucesso.'
 
     click_link '1/2012'
 
@@ -219,11 +219,13 @@ feature "PriceRegistration" do
 
     click_link 'Apagar'
 
-    expect(page).to have_notice 'Registro de Preço apagado com sucesso.'
+    expect(page).to have_notice 'Registro de Preço 1/2012 apagado com sucesso.'
 
-    expect(page).to_not have_content '1'
-    expect(page).to_not have_content '05/04/2012'
-    expect(page).to_not have_content 'Aquisição de combustíveis'
+    within_records do
+      expect(page).to_not have_content '1'
+      expect(page).to_not have_content '05/04/2012'
+      expect(page).to_not have_content 'Aquisição de combustíveis'
+    end
   end
 
   scenario 'licitation process modal should list only records with price_registrations' do

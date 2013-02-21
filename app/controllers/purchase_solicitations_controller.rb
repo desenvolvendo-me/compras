@@ -33,6 +33,10 @@ class PurchaseSolicitationsController < CrudController
 
   protected
 
+  def interpolation_options
+    { :resource_name => "#{resource_class.model_name.human} #{resource.code}/#{resource.accounting_year}" }
+  end
+
   def update_resource(object, attributes)
     object.transaction do
       if super

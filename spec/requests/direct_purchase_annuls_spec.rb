@@ -149,7 +149,7 @@ feature 'DirectPurchaseAnnuls' do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Compra Direta editada com sucesso.'
+    expect(page).to have_notice 'Compra Direta 1/2012 editada com sucesso.'
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
