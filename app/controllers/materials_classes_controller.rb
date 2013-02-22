@@ -4,6 +4,13 @@ class MaterialsClassesController < CrudController
 
   before_filter :block_when_not_editable, :only => [:update, :destroy]
 
+  def new
+    object = build_resource
+    object.mask = '99.99.99.999.999'
+
+    super
+  end
+
   private
 
   def block_when_not_editable
