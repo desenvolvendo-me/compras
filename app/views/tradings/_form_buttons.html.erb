@@ -2,7 +2,7 @@
     <% if f.object.persisted? %>
       <%= f.button :destroy if can?(:destroy, main_controller_name) %>
       <%= link_to('Licitantes', bidders_path(:licitation_process_id => resource.licitation_process.id), :class => "button primary") %>
-      <%= link_to('ATA', trading_path(resource), :class => "button primary") %>
+      <%= link_to('ATA do Julgamento', trading_path(resource), :class => "button primary") %>
     <% end %>
 
     <% if can?(:modify, main_controller_name) %>
