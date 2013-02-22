@@ -31,7 +31,7 @@
         });
       } else {
         $("#materials_class_mask").val('');
-        $("#materials_class_number").removeAttr("data-mask");
+        $("#materials_class_number").removeData("mask");
       }
     }
   });
@@ -39,7 +39,7 @@
   (function() {
     $("#materials_class_parent_number").val('<%= resource.decorator.persisted_parent_masked_number %>');
     $("#materials_class_number").val('<%= resource.decorator.last_level_class_number %>');
-    $("#materials_class_number").attr("data-mask", "<%= resource.decorator.child_mask %>");
+    $("#materials_class_number").data("mask", "<%= resource.decorator.child_mask %>");
     $("#materials_class_parent_class_number").val("<%= resource.decorator.persisted_masked_to_s %>");
 
     $("#materials_class_number").before(function() {
