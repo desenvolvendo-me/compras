@@ -251,7 +251,6 @@ feature "MaterialsClasses" do
     expect(page).to have_field 'Detalhamento', :with => 'materiais para escritório'
   end
 
-
   scenario 'modal form at filter should have an autocomplete for class_number' do
     MaterialsClass.make!(:software)
     MaterialsClass.make!(:arames)
