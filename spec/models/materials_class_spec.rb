@@ -41,6 +41,17 @@ describe MaterialsClass do
       end
     end
 
+    context 'when is a first level class' do
+      it 'should have only the number' do
+        subject.parent_number = ''
+        subject.number = '10'
+        subject.mask = '99.99.99.999.999'
+        subject.valid?
+
+        expect(subject.masked_number).to eq '10.00.00.000.000'
+      end
+    end
+
     context 'without number' do
       it 'should use class_number value' do
         subject.masked_number = '1.11.111.000'

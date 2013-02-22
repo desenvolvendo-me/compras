@@ -118,7 +118,11 @@ class MaterialsClass < Compras::Model
   def create_masked_number
     return unless parent_number && number
 
-    self.masked_number = [parent_number, number].join('.')
+    if parent_number.present?
+      self.masked_number = [parent_number, number].join('.')
+    else
+      self.masked_number = number
+    end
 
     mask.split('.').each_with_index do |level, index|
       unless splitted_masked_number[index]
