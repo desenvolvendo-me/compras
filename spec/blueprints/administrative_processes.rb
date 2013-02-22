@@ -300,3 +300,35 @@ AdministrativeProcess.blueprint(:pregao_presencial) do
   administrative_process_liberation { AdministrativeProcessLiberation.make!(:liberacao, :administrative_process => object) }
   summarized_object { "Descrição resumida do objeto" }
 end
+
+AdministrativeProcess.blueprint(:contrucao_de_predio) do
+  process { 1 }
+  year { 2013 }
+  date { Date.new(2012, 3, 7) }
+  protocol { '00099/2012' }
+  object_type { AdministrativeProcessObjectType::CONSTRUCTION_AND_ENGINEERING_SERVICES }
+  modality { Modality::COMPETITION }
+  judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
+  description { 'Licitação para contrução de prédio' }
+  responsible { Employee.make!(:sobrinho) }
+  status { AdministrativeProcessStatus::RELEASED }
+  item { 'Item 2' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao)] }
+  administrative_process_liberation { AdministrativeProcessLiberation.make!(:liberacao, :administrative_process => object) }
+end
+
+AdministrativeProcess.blueprint(:contrucao_de_predio_tomada_preco) do
+  process { 1 }
+  year { 2013 }
+  date { Date.new(2012, 3, 7) }
+  protocol { '00099/2012' }
+  object_type { AdministrativeProcessObjectType::CONSTRUCTION_AND_ENGINEERING_SERVICES }
+  modality { Modality::TAKEN_PRICE }
+  judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
+  description { 'Licitação para contrução de prédio' }
+  responsible { Employee.make!(:sobrinho) }
+  status { AdministrativeProcessStatus::RELEASED }
+  item { 'Item 2' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao)] }
+  administrative_process_liberation { AdministrativeProcessLiberation.make!(:liberacao, :administrative_process => object) }
+end

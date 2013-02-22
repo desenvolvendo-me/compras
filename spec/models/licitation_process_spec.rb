@@ -19,6 +19,7 @@ require 'app/models/licitation_process_lot'
 require 'app/business/licitation_process_types_of_calculation_by_judgment_form_kind'
 require 'app/business/licitation_process_types_of_calculation_by_object_type'
 require 'app/business/licitation_process_types_of_calculation_by_modality'
+require 'app/business/licitation_process_envelope_opening_date'
 require 'app/models/reserve_fund'
 require 'app/models/indexer'
 require 'app/models/price_registration'
@@ -68,6 +69,7 @@ describe LicitationProcess do
 
   it { should delegate(:summarized_object).to(:administrative_process).prefix(true) }
   it { should delegate(:delivery_location).to(:purchase_solicitation).prefix(true) }
+  it { should delegate(:licitation_kind).to(:judgment_form).prefix(true).allowing_nil(true) }
 
   it { should validate_presence_of :year }
   it { should validate_presence_of :process_date }
@@ -92,10 +94,26 @@ describe LicitationProcess do
       subject.stub(:validation_context).and_return(:update)
     end
 
-    it { should validate_presence_of :envelope_opening_date }
-    it { should validate_presence_of :envelope_opening_time }
-    it { should allow_value("11:11").for(:envelope_opening_time) }
-    it { should_not allow_value("44:11").for(:envelope_opening_time) }
+    context "model validations" do
+      before do
+        subject.stub(:validate_envelope_opening_date).and_return true
+      end
+
+      it { should validate_presence_of :envelope_opening_date }
+      it { should validate_presence_of :envelope_opening_time }
+      it { should allow_value("11:11").for(:envelope_opening_time) }
+      it { should_not allow_value("44:11").for(:envelope_opening_time) }
+    end
+
+
+    describe "#validate_envelope_opening_date" do
+      it "validates the envelope opening date with the validation poro" do
+        licitation_validation = double :licitation_process_envelope_opening_date
+        LicitationProcessEnvelopeOpeningDate.should_receive(:new).with(subject).and_return licitation_validation
+        licitation_validation.should_receive :valid?
+        subject.send(:validate_envelope_opening_date)
+      end
+    end
   end
 
   describe 'default values' do
@@ -603,7 +621,7 @@ describe LicitationProcess do
     it 'should returns the ratification_date from first ratification' do
       subject.stub(:licitation_process_ratifications).and_return([ratification, 'ratification2'])
 
-      expect(subject.adjudication_date).to eq  Date.today
+      expect(subject.adjudication_date).to eq Date.today
     end
 
     it 'should returns nil when there is no ratification' do
@@ -626,6 +644,18 @@ describe LicitationProcess do
       end
 
       it { expect(subject.has_trading?).to be_true }
+    end
+  end
+
+  describe "#last_publication_date" do
+    let(:licitation_process_publications) do
+      [double(:licitation_process_publications, :publication_date => Date.today),
+       double(:licitation_process_publications, :publication_date => Date.tomorrow)]
+    end
+
+    it "returns the publication date from the last publication" do
+      subject.stub(:licitation_process_publications).and_return licitation_process_publications
+      expect(subject.last_publication_date).to eql Date.tomorrow
     end
   end
 end

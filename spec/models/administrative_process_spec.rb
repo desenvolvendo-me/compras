@@ -175,6 +175,11 @@ describe AdministrativeProcess do
     expect(subject).to be_allow_licitation_process
   end
 
+  it "should allow licitation process when object type is disposals_of_assets" do
+    subject.stub(:object_type => AdministrativeProcessObjectType::DISPOSALS_OF_ASSETS)
+    expect(subject).to be_allow_licitation_process
+  end
+
   it "should not allow licitation process when object type is not construction_and_engineering_services neither purchase_and_services" do
     subject.stub(:object_type => AdministrativeProcessObjectType::CALL_NOTICE)
     expect(subject).not_to be_allow_licitation_process

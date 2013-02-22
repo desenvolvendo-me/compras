@@ -588,3 +588,138 @@ LicitationProcess.blueprint(:pregao_presencial) do
   type_of_calculation { LicitationProcessTypeOfCalculation::SORT_PARTICIPANTS_BY_ITEM }
   bidders { [Bidder.make!(:licitante_sobrinho), Bidder.make!(:licitante), Bidder.make!(:me_pregao)] }
 end
+
+LicitationProcess.blueprint(:processo_licitatorio_concurso) do
+  year { 2012 }
+  process_date { Date.new(2012, 3, 19) }
+  licitation_number { 1 }
+  administrative_process { AdministrativeProcess.make!(:contrucao_de_predio) }
+  pledge_type { PledgeType::GLOBAL }
+  capability { Capability.make!(:reforma) }
+  expiration { 10 }
+  expiration_unit { PeriodUnit::DAY }
+  readjustment_index { Indexer.make!(:xpto) }
+  envelope_delivery_date { I18n.l(Date.current) }
+  envelope_delivery_time { "14:00" }
+  envelope_opening_date { I18n.l(Date.tomorrow) }
+  envelope_opening_time { "14:00" }
+  period { 1 }
+  period_unit { PeriodUnit::YEAR }
+  payment_method { PaymentMethod.make!(:dinheiro) }
+  caution_value { 9.99 }
+  legal_advice { LicitationProcessLegalAdvice::FAVORABLE }
+  legal_advice_date { Date.new(2012, 3, 19) }
+  contract_date { Date.new(2012, 3, 19) }
+  contract_expiration { 3 }
+  observations { "observacoes" }
+  document_types { [DocumentType.make!(:fiscal)] }
+  licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
+  price_registration { true }
+  type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM }
+  disqualify_by_documentation_problem { true }
+  disqualify_by_maximum_value { true }
+  consider_law_of_proposals { false }
+  execution_type { ExecutionType::INTEGRAL }
+end
+
+LicitationProcess.blueprint(:processo_licitatorio_concorrencia) do
+  year { 2012 }
+  process_date { Date.new(2012, 3, 19) }
+  licitation_number { 1 }
+  administrative_process { AdministrativeProcess.make!(:compra_de_computadores) }
+  pledge_type { PledgeType::GLOBAL }
+  capability { Capability.make!(:reforma) }
+  expiration { 10 }
+  expiration_unit { PeriodUnit::DAY }
+  readjustment_index { Indexer.make!(:xpto) }
+  envelope_delivery_date { I18n.l(Date.current) }
+  envelope_delivery_time { "14:00" }
+  envelope_opening_date { I18n.l(Date.tomorrow) }
+  envelope_opening_time { "14:00" }
+  period { 1 }
+  period_unit { PeriodUnit::YEAR }
+  payment_method { PaymentMethod.make!(:dinheiro) }
+  caution_value { 9.99 }
+  legal_advice { LicitationProcessLegalAdvice::FAVORABLE }
+  legal_advice_date { Date.new(2012, 3, 19) }
+  contract_date { Date.new(2012, 3, 19) }
+  contract_expiration { 3 }
+  observations { "observacoes" }
+  document_types { [DocumentType.make!(:fiscal)] }
+  licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
+  price_registration { true }
+  type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM }
+  disqualify_by_documentation_problem { true }
+  disqualify_by_maximum_value { true }
+  consider_law_of_proposals { false }
+  execution_type { ExecutionType::INTEGRAL }
+  judgment_form { JudgmentForm.make!(:global)}
+end
+
+LicitationProcess.blueprint(:processo_licitatorio_tomada_preco) do
+  year { 2012 }
+  process_date { Date.new(2012, 3, 19) }
+  licitation_number { 1 }
+  administrative_process { AdministrativeProcess.make!(:contrucao_de_predio_tomada_preco) }
+  pledge_type { PledgeType::GLOBAL }
+  capability { Capability.make!(:reforma) }
+  expiration { 10 }
+  expiration_unit { PeriodUnit::DAY }
+  readjustment_index { Indexer.make!(:xpto) }
+  envelope_delivery_date { I18n.l(Date.current) }
+  envelope_delivery_time { "14:00" }
+  envelope_opening_date { I18n.l(Date.tomorrow) }
+  envelope_opening_time { "14:00" }
+  period { 1 }
+  period_unit { PeriodUnit::YEAR }
+  payment_method { PaymentMethod.make!(:dinheiro) }
+  caution_value { 9.99 }
+  legal_advice { LicitationProcessLegalAdvice::FAVORABLE }
+  legal_advice_date { Date.new(2012, 3, 19) }
+  contract_date { Date.new(2012, 3, 19) }
+  contract_expiration { 3 }
+  observations { "observacoes" }
+  document_types { [DocumentType.make!(:fiscal)] }
+  licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
+  price_registration { true }
+  type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM }
+  disqualify_by_documentation_problem { true }
+  disqualify_by_maximum_value { true }
+  consider_law_of_proposals { false }
+  execution_type { ExecutionType::INTEGRAL }
+  judgment_form { JudgmentForm.make!(:global)}
+end
+
+LicitationProcess.blueprint(:processo_licitatorio_leilao) do
+  year { 2012 }
+  process_date { Date.new(2012, 3, 19) }
+  licitation_number { 1 }
+  administrative_process { AdministrativeProcess.make!(:maior_lance_por_itens) }
+  pledge_type { PledgeType::GLOBAL }
+  capability { Capability.make!(:reforma) }
+  expiration { 10 }
+  expiration_unit { PeriodUnit::DAY }
+  readjustment_index { Indexer.make!(:xpto) }
+  envelope_delivery_date { I18n.l(Date.current) }
+  envelope_delivery_time { "14:00" }
+  envelope_opening_date { I18n.l(Date.tomorrow) }
+  envelope_opening_time { "14:00" }
+  period { 1 }
+  period_unit { PeriodUnit::YEAR }
+  payment_method { PaymentMethod.make!(:dinheiro) }
+  caution_value { 9.99 }
+  legal_advice { LicitationProcessLegalAdvice::FAVORABLE }
+  legal_advice_date { Date.new(2012, 3, 19) }
+  contract_date { Date.new(2012, 3, 19) }
+  contract_expiration { 3 }
+  observations { "observacoes" }
+  document_types { [DocumentType.make!(:fiscal)] }
+  licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
+  price_registration { true }
+  type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_GLOBAL_PRICE }
+  disqualify_by_documentation_problem { true }
+  disqualify_by_maximum_value { true }
+  consider_law_of_proposals { false }
+  execution_type { ExecutionType::INTEGRAL }
+  judgment_form { JudgmentForm.make!(:global_com_melhor_lance_ou_oferta)}
+end

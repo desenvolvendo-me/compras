@@ -69,7 +69,7 @@ class AdministrativeProcess < Compras::Model
   end
 
   def allow_licitation_process?
-    purchase_and_services? || construction_and_engineering_services?
+    purchase_and_services? || construction_and_engineering_services? || disposals_of_assets?
   end
 
   def attend_purchase_solicitation_items

@@ -64,6 +64,7 @@ class LicitationProcess < Compras::Model
            :to => :administrative_process, :allow_nil => true
   delegate :delivery_location, :to => :purchase_solicitation, :allow_nil => true,
            :prefix => true
+  delegate :licitation_kind, :to => :judgment_form, :allow_nil => true, :prefix => true
 
   validates :process_date, :administrative_process, :capability, :period,
             :period_unit, :expiration, :expiration_unit, :payment_method,
@@ -80,6 +81,7 @@ class LicitationProcess < Compras::Model
   validate :validate_administrative_process_allow_licitation_process
   validate :validate_bidders_before_edital_publication
   validate :validate_updates, :unless => :updatable?
+  validate :validate_envelope_opening_date, :on => :update
 
   with_options :allow_blank => true do |allowing_blank|
     allowing_blank.validates :year, :mask => "9999"
@@ -212,6 +214,10 @@ class LicitationProcess < Compras::Model
     trading.present?
   end
 
+  def last_publication_date
+    licitation_process_publications.last.publication_date
+  end
+
   protected
 
   def available_for_licitation_process_classification?
@@ -307,6 +313,10 @@ class LicitationProcess < Compras::Model
     if bidders.any? && !edital_published?
       errors.add(:base, :inclusion_of_bidders_before_edital_publication)
     end
+  end
+
+  def validate_envelope_opening_date
+    LicitationProcessEnvelopeOpeningDate.new(self).valid?
   end
 
   def published_editals
