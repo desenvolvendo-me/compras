@@ -53,12 +53,12 @@ describe MaterialsClass do
     end
   end
 
-  describe 'fill class_number on save' do
+  describe 'fill class_number before validate' do
     it 'should fills the class_number removing dots from masked_number' do
       subject.mask = '9.99.999.000'
       subject.masked_number = '1.23.560.000'
 
-      subject.run_callbacks(:save)
+      subject.valid?
 
       expect(subject.class_number).to eq '123560000'
     end

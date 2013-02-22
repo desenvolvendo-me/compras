@@ -15,7 +15,7 @@ class MaterialsClass < Compras::Model
   validate  :cannot_change_masked_number_when_has_materials, :on => :update
 
   before_validation :create_masked_number
-  before_save :fill_class_number
+  before_validation :fill_class_number
   after_save :update_parent_children
   after_destroy :update_parent_children
 
