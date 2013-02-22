@@ -9,10 +9,12 @@ describe LicitationProcessesController do
 
   context "with administrative process that does not allow licitation_process" do
     let :administrative_process do
-      AdministrativeProcess.make!(:maior_lance_por_itens)
+      AdministrativeProcess.make!(:maior_lance_por_itens, :object_type => AdministrativeProcessObjectType::CONCESSIONS_AND_PERMITS,
+                                  :modality => Modality::CONCURRENCE)
     end
 
     it 'should return 401 on access new url' do
+
       get :new, :administrative_process_id => administrative_process.id
 
       expect(response.code).to eq "401"

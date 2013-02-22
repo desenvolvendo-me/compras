@@ -55,5 +55,5 @@ pt-BR:
       has_already_a_ratification: "já foi homologado. Não pode ser alterado"
       has_already_a_publications: "já possui publicações. Não pode ser alterado"
       must_be_included_after_edital_publication: "Licitantes só podem ser incluídos após publicação do edital"
-      envelope_opening_date_greater_than_calendar_days: "Data de abertura do envelope precisa ser %{days} dias maior que a data da publicação mais recente"
-      envelope_opening_date_greater_than_working_days: "Data de abertura do envelope precisa ser %{days} dias úteis maior que a data da publicação mais recente"
+      envelope_opening_date_greater_than_calendar_days: "deve ser maior que %{limit}. Refente a %{days} dias maior que a data da publicação mais recente (%{publication})"
+      envelope_opening_date_greater_than_working_days: "deve ser maior que %{limit}. Refente a %{days} dias úteis maior que a data da publicação mais recente (%{publication})"

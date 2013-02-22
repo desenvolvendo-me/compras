@@ -70,7 +70,6 @@ class LicitationProcess < Compras::Model
             :period_unit, :expiration, :expiration_unit, :payment_method,
             :envelope_delivery_time, :year, :envelope_delivery_date,
             :pledge_type, :type_of_calculation, :execution_type, :presence => true
-  validates :envelope_opening_date, :envelope_opening_time, :presence => true, :on => :update
   validate :total_of_administrative_process_budget_allocations_items_must_be_less_or_equal_to_value
   validate :administrative_process_must_not_belong_to_another_licitation_process
   validate :validate_type_of_calculation_by_judgment_form_kind
@@ -215,7 +214,9 @@ class LicitationProcess < Compras::Model
   end
 
   def last_publication_date
-    licitation_process_publications.last.publication_date
+    return if licitation_process_publications.empty?
+
+    licitation_process_publications.current.publication_date
   end
 
   protected
@@ -316,6 +317,13 @@ class LicitationProcess < Compras::Model
   end
 
   def validate_envelope_opening_date
+    return unless envelope_opening_date
+
+    if envelope_opening_date && !last_publication_date
+      errors.add :envelope_opening_date, :absence
+      return false
+    end
+
     LicitationProcessEnvelopeOpeningDate.new(self).valid?
   end
 

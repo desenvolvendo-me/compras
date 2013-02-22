@@ -1425,8 +1425,6 @@ feature "LicitationProcesses" do
 
     within_tab 'Principal' do
       expect(page).to have_field 'Local de entrega', :with => 'Secretaria da Saúde'
-      fill_in 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow)
-      fill_in 'Hora da abertura', :with => '14:00'
     end
 
     click_button 'Salvar'

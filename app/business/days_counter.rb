@@ -20,10 +20,10 @@ class DaysCounter
   end
 
   def working_days_counter
-    each_day { |date| @days += 1 if util? date }
+    each_day { |date| @days += 1 if working_day? date }
   end
 
-  def util?(date)
+  def working_day?(date)
     (!date.saturday? && !date.sunday? && !holiday_repository.is_a_holiday?(date))
   end
 

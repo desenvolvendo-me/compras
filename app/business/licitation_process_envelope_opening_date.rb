@@ -23,7 +23,8 @@ class LicitationProcessEnvelopeOpeningDate
   end
 
   def over_days_error(days, context)
-    message = I18n.t("licitation_process.messages.envelope_opening_date_greater_than_#{context}_days", :days => days)
+    values  = { :limit => I18n.l(publication_date + days.days), :days => days, :publication => I18n.l(publication_date) }
+    message = I18n.t("licitation_process.messages.envelope_opening_date_greater_than_#{context}_days", values)
     licitation_process.errors.add :envelope_opening_date, message
     return false
   end

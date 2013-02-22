@@ -99,15 +99,28 @@ describe LicitationProcess do
         subject.stub(:validate_envelope_opening_date).and_return true
       end
 
-      it { should validate_presence_of :envelope_opening_date }
-      it { should validate_presence_of :envelope_opening_time }
       it { should allow_value("11:11").for(:envelope_opening_time) }
-      it { should_not allow_value("44:11").for(:envelope_opening_time) }
     end
 
-
     describe "#validate_envelope_opening_date" do
+      it "return when envelope opening date is not present" do
+        subject.stub(:envelope_opening_date).and_return nil
+        LicitationProcessEnvelopeOpeningDate.should_not_receive :new
+        subject.send(:validate_envelope_opening_date)
+        expect(subject.errors[:envelope_opening_date]).to_not include("deve ficar em branco")
+      end
+
+      it "envelope opening date should be blank when has not a publication" do
+        subject.stub(:envelope_opening_date).and_return Date.today
+        subject.stub(:last_publication_date).and_return nil
+
+        subject.send(:validate_envelope_opening_date)
+        expect(subject.errors[:envelope_opening_date]).to include("deve ficar em branco")
+      end
+
       it "validates the envelope opening date with the validation poro" do
+        subject.stub(:envelope_opening_date).and_return Date.today
+        subject.stub(:last_publication_date).and_return Date.today
         licitation_validation = double :licitation_process_envelope_opening_date
         LicitationProcessEnvelopeOpeningDate.should_receive(:new).with(subject).and_return licitation_validation
         licitation_validation.should_receive :valid?
@@ -648,13 +661,9 @@ describe LicitationProcess do
   end
 
   describe "#last_publication_date" do
-    let(:licitation_process_publications) do
-      [double(:licitation_process_publications, :publication_date => Date.today),
-       double(:licitation_process_publications, :publication_date => Date.tomorrow)]
-    end
-
     it "returns the publication date from the last publication" do
-      subject.stub(:licitation_process_publications).and_return licitation_process_publications
+      subject.stub_chain(:licitation_process_publications, :empty?).and_return false
+      subject.stub_chain(:licitation_process_publications, :current).and_return double(:licitation_process_publications, :publication_date => Date.tomorrow)
       expect(subject.last_publication_date).to eql Date.tomorrow
     end
   end

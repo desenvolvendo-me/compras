@@ -185,6 +185,7 @@ pt-BR:
       accepted: "deve ser aceito"
       empty: "não pode ficar vazio"
       blank: "não pode ficar em branco"
+      absence: "deve ficar em branco"
       too_long: "é muito longo (máximo: %{count} caracteres)"
       too_short: "é muito curto (mínimo: %{count} caracteres)"
       wrong_length: "não possui o tamanho esperado (%{count} caracteres)"
