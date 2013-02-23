@@ -508,7 +508,7 @@ feature "AdministrativeProcesses" do
 
     expect(page).to have_select 'Status do processo administrativo', :selected => 'Aguardando'
     expect(page).to have_disabled_element 'Novo processo licitatório',
-                    :reason => 'o tipo de objeto não permite processo licitatório'
+                    :reason => 'este processo administrativo ainda não foi liberado'
   end
 
   scenario 'should have disabled licitation process button when status is not released but is allowed' do
@@ -526,7 +526,11 @@ feature "AdministrativeProcesses" do
   end
 
   scenario 'should have disabled licitation process button when status is released but not allowed' do
-    AdministrativeProcess.make!(:maior_lance_por_itens)
+    judgment_form = JudgmentForm.make(:global)
+    AdministrativeProcess.make!(:maior_lance_por_itens,
+                                :object_type => AdministrativeProcessObjectType::CALL_NOTICE,
+                                :modality => Modality::COMPETITION,
+                                :judgment_form => judgment_form)
 
     navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
@@ -729,19 +733,6 @@ feature "AdministrativeProcesses" do
 
     expect(page).to_not have_button 'Anular'
     expect(page).to_not have_button 'Liberar'
-  end
-
-  scenario 'should have disabled licitation_process button if not allow licitation_process' do
-    AdministrativeProcess.make!(:maior_lance_por_itens)
-
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
-
-    within_records do
-      page.find('a').click
-    end
-
-    expect(page).to have_disabled_element 'Novo processo licitatório',
-                    :reason => 'o tipo de objeto não permite processo licitatório'
   end
 
   scenario 'should show only purchase_solicitation_item_group not annulled' do
