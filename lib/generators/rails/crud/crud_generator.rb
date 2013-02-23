@@ -47,8 +47,8 @@ module Rails
 
         template('controllers.yml', controllers) unless File.exist?(controllers_file)
 
-        in_root do
-          append_file controllers_file, "    #{plural_table_name}: \"#{plural}\"\n".force_encoding("ascii-8bit")
+        inject_into_file controllers_file, :after => 'controllers: &controllers' do
+          "\n    #{plural_table_name}: \"#{plural}\"\n".force_encoding("ascii-8bit")
         end
       end
 
