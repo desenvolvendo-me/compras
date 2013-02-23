@@ -24,8 +24,7 @@ class MaterialsClass < Compras::Model
 
   scope :term, lambda { |q|
     where {
-      (class_number.like("#{q.gsub('.','')}%") | description.like("#{q}%")) &
-      (class_number.like("%000") )}
+      (class_number.like("#{q.gsub('.','')}%") | description.like("#{q}%")) }
   }
 
   scope :without_children, lambda {
