@@ -203,6 +203,17 @@ feature "MaterialsClasses" do
     expect(page).to have_field 'Código', :with => '12'
   end
 
+  scenario 'should has mask when has not a parent class number' do
+    navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
+
+    click_link 'Criar Classe de Materiais'
+
+    fill_in 'Código', :with => '1234567'
+
+    expect(page).to have_field 'Classe superior', :with => ''
+    expect(page).to have_field 'Código', :with => '12'
+  end
+
   scenario 'should keep data when form has errors' do
     MaterialsClass.make!(:software)
 

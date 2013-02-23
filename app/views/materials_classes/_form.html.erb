@@ -36,6 +36,13 @@
     }
   });
 
+  $('#materials_class_number').focusin(function() {
+    if ($('#materials_class_parent_class_number').val() == "") {
+      $("#prepended-input").remove();
+      $(this).attr("data-mask", "99");
+    }
+  });
+
   (function() {
     $("#materials_class_parent_number").val('<%= resource.decorator.persisted_parent_masked_number %>');
     $("#materials_class_number").val('<%= resource.decorator.last_level_class_number %>');
