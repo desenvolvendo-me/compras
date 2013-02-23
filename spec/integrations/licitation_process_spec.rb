@@ -147,7 +147,7 @@ describe LicitationProcess do
         expect(licitation).to_not be_valid
         expect(licitation.errors[:envelope_opening_date]).to include "deve ser maior que #{I18n.l(Date.today + 5.days)}. Refente a 5 dias úteis maior que a data da publicação mais recente (#{I18n.l(Date.today)})"
 
-        licitation.envelope_opening_date = Date.today + 8.days
+        licitation.envelope_opening_date = Date.today + 10.days
         expect(licitation).to be_valid
       end
     end
