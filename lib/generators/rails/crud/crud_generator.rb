@@ -15,6 +15,8 @@ module Rails
 
       class_option :fields, :type => 'hash', :desc => 'Attribute names for i18n'
 
+      class_option :index_fields, :type => 'array', :desc => 'Fields in the index table header'
+
       check_class_collision :suffix => 'Controller'
 
       hook_for :orm, :as => :model do |invoked|
@@ -103,6 +105,10 @@ module Rails
         options["fields"] || attributes.map do |attribute|
           [attribute.name, attribute.human_name]
         end
+      end
+
+      def index_fields
+        options.fetch("index_fields", [])
       end
 
       def available_views
