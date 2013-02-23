@@ -73,6 +73,15 @@ describe MaterialsClass do
 
       expect(subject.class_number).to eq '123560000'
     end
+
+    it 'should return error when has not a number' do
+      subject.mask = '9.99.999.000'
+      subject.masked_number = '00'
+
+      subject.valid?
+
+      expect(subject.errors[:class_number]).to include('deve ser maior que 0')
+      end
   end
 
   describe '#levels' do

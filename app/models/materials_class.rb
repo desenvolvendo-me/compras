@@ -11,6 +11,7 @@ class MaterialsClass < Compras::Model
   validates :description, :masked_number, :presence => true
   validates :class_number, :uniqueness => { :allow_blank => true }
   validates :number, :numericality => { :allow_blank => true }
+  validates :class_number, :numericality => { :greater_than => 0 }
   validate  :not_allow_creation_when_parent_has_materials, :on => :create
   validate  :cannot_change_masked_number_when_has_materials, :on => :update
 
