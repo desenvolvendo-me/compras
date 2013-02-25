@@ -10,9 +10,15 @@ module ActiveRecord
       end
 
       def orderize(*attributes)
-        attributes = [:name] if attributes.empty?
+        if attributes.empty?
+          attributes = [:name]
+        elsif attributes.last.is_a? Hash
+          include_table = attributes.last.fetch(:on)
+          table_name = self.reflect_on_all_associations.select { |a| a.name.to_s == include_table.to_s }.first.table_name
+          attributes = "#{table_name}.#{attributes.first}" if include_table.present?
+        end
 
-        scope :ordered, order(*attributes)
+        scope :ordered, order(*attributes).joins(include_table)
       end
     end
   end

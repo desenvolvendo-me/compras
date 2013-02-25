@@ -12,7 +12,7 @@ class Signature < Compras::Model
   validate :uniqueness_by_start_date
   validate :uniqueness_by_end_date
 
-  orderize :position_id
+  orderize :name, :on => :person
   filterize
 
   def to_s

@@ -15,7 +15,7 @@ class Customization < Financeiro::Model
                     :message => :uniqueness_of_model_scoped_by_state_id }
   validate :must_have_data
 
-  orderize "id DESC"
+  orderize :name, :on => :state
   filterize
 
   def to_s

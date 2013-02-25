@@ -20,7 +20,7 @@ class MaterialsClass < Compras::Model
   after_save :update_parent_children
   after_destroy :update_parent_children
 
-  orderize :class_number
+  orderize :description
   filterize
 
   scope :term, lambda { |q|

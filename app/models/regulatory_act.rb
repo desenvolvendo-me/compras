@@ -46,7 +46,7 @@ class RegulatoryAct < Compras::Model
       }
   end
 
-  orderize :act_number
+  orderize :description, :on => :regulatory_act_type
   filterize
 
   def to_s

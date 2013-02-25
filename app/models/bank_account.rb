@@ -24,7 +24,7 @@ class BankAccount < Compras::Model
   validates :description, :uniqueness => { :scope => :agency_id },
             :allow_blank => true
 
-  orderize :description
+  orderize :account_number
   filterize
 
   def to_s

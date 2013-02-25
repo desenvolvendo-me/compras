@@ -47,7 +47,7 @@ class Contract < Compras::Model
   }, :allow_blank => true
   validate :presence_of_licitation_process_or_direct_purchase
 
-  orderize :contract_number
+  orderize "id DESC"
   filterize
 
   scope :founded, joins { service_or_contract_type }.where { service_or_contract_type.service_goal.eq(ServiceGoal::FOUNDED) }

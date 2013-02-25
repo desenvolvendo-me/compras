@@ -34,7 +34,7 @@ class Trading < Compras::Model
 
   before_create :set_percentage_limit_to_participate_in_bids
 
-  orderize :code
+  orderize "year DESC, code DESC"
   filterize
 
   def to_s
