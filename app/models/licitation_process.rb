@@ -60,8 +60,6 @@ class LicitationProcess < Compras::Model
            :item, :licitation_process, :date, :object_type, :judgment_form_kind,
            :summarized_object,
            :to => :administrative_process, :allow_nil => true, :prefix => true
-  delegate :administrative_process_budget_allocations, :items,
-           :to => :administrative_process, :allow_nil => true
   delegate :delivery_location, :to => :purchase_solicitation, :allow_nil => true,
            :prefix => true
   delegate :licitation_kind, :to => :judgment_form, :allow_nil => true, :prefix => true
