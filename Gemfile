@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 source 'http://rubygems.org'
-source 'https://gems.gemfury.com/SEqawpNNEx65yrzYS9p8/'
+source 'https://SEqawpNNEx65yrzYS9p8@gem.fury.io/me/'
 
 ruby "1.9.3"
 
@@ -12,9 +12,7 @@ gem 'pg', '0.14.1'
 gem 'activerecord-connections', '0.0.3'
 gem 'activerecord-postgres-hstore', '0.6.0'
 
-gem 'inscriptio_cursualis', '0.3.0'
-gem 'persona', '0.2.1'
-gem 'unico', '3.0.0'
+gem 'unico', '4.0.1'
 gem 'unico-assets', '1.3.0'
 gem 'devise', '2.2.3'
 gem 'cancan', :git => 'git://github.com/ryanb/cancan.git', :branch => '2.0'

@@ -2,6 +2,8 @@ class CreditorDocument < Compras::Model
   attr_accessible :document_type_id, :document_number, :emission_date,
               :validity, :issuer
 
+  has_enumeration_for :issuer
+
   belongs_to :creditor
   belongs_to :document_type
 

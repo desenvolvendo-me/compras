@@ -147,7 +147,7 @@ feature "Creditors" do
       fill_in 'Número', :with => '1234'
       fill_in 'Data de emissão', :with => '05/04/2012'
       fill_in 'Data de validade', :with => '05/04/2013'
-      fill_in 'Órgão emissor', :with => 'SSP'
+      select 'SSP', :from => 'Órgão emissor'
     end
 
     within_tab 'Materiais' do
@@ -232,7 +232,7 @@ feature "Creditors" do
       expect(page).to have_field 'Número', :with => '1234'
       expect(page).to have_field 'Data de emissão', :with => '05/04/2012'
       expect(page).to have_field 'Data de validade', :with => '05/04/2013'
-      expect(page).to have_field 'Órgão emissor', :with => 'SSP'
+      expect(page).to have_select 'Órgão emissor', :selected => 'SSP'
     end
 
     within_tab 'Materiais' do
@@ -644,7 +644,7 @@ feature "Creditors" do
       fill_in 'Número', :with => '12345'
       fill_in 'Data de emissão', :with => '05/05/2012'
       fill_in 'Data de validade', :with => '05/05/2013'
-      fill_in 'Órgão emissor', :with => 'PM'
+      select 'Polícia Federal', :from => 'Órgão emissor'
     end
 
     within_tab 'Representantes' do
@@ -747,9 +747,7 @@ feature "Creditors" do
       expect(page).to have_field 'Número', :with => '12345'
       expect(page).to have_field 'Data de emissão', :with => '05/05/2012'
       expect(page).to have_field 'Data de validade', :with => '05/05/2013'
-      expect(page).to have_field 'Órgão emissor', :with => 'PM'
-
-      expect(page).to_not have_content 'SSP'
+      expect(page).to have_select 'Órgão emissor', :selected => 'Polícia Federal'
     end
 
     within_tab 'Representantes' do

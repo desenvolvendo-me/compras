@@ -87,19 +87,15 @@ class ActiveRecord::Base
   include I18n::Alchemy
 end
 
-# InscriptioCursualis
-require 'inscriptio_cursualis/engine'
-require 'inscriptio_cursualis/model'
-
-$:.append InscriptioCursualis::Engine.config.root
-
-Dir["#{InscriptioCursualis::Engine.config.root}/app/enumerations/*.rb"].each do |file|
+Dir['app/parsers/*.rb'].each do |file|
   require File.expand_path(file)
 end
 
 # Unico
 require 'unico/engine'
 require 'unico/model'
+require 'persona'
+require 'inscriptio_cursualis'
 
 # Compras Model
 require 'compras'
@@ -109,9 +105,9 @@ require 'financeiro'
 
 $:.append Unico::Engine.config.root
 
-# Persona
-require 'persona/engine'
-require 'persona/model'
+Dir["#{Unico::Engine.config.root}/app/enumerations/*.rb"].each do |file|
+  require File.expand_path(file)
+end
 
 # Custom Data
 require 'lib/custom_data'
@@ -120,9 +116,3 @@ require 'app/models/unico/prefecture'
 require 'app/models/prefecture'
 
 require 'activerecord-postgres-hstore'
-
-$:.append Persona::Engine.config.root
-
-Dir["#{Persona::Engine.config.root}/app/enumerations/*.rb"].each do |file|
-  require File.expand_path(file)
-end

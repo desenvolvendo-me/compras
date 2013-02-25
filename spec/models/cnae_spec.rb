@@ -1,5 +1,6 @@
 # encoding: utf-8
 require 'model_helper'
+require 'app/models/unico/cnae'
 require 'app/models/cnae'
 require 'app/models/creditor'
 require 'app/models/creditor_secondary_cnae'
