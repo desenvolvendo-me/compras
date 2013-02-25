@@ -30,7 +30,7 @@ class JudgmentCommissionAdvice < Compras::Model
   before_validation :set_minutes_number, :on => :create
   before_validation :set_judgment_sequence, :on => :create
 
-  orderize :id
+  orderize "id DESC"
   filterize
 
   def to_s

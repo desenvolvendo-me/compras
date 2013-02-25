@@ -7,6 +7,6 @@ class LicitationProcessRatificationItem < Compras::Model
   delegate :description, :code, :reference_unit, :to => :bidder_proposal, :allow_nil => true
   delegate :quantity, :unit_price, :total_price, :to => :bidder_proposal, :allow_nil => true
 
-  orderize :id
+  orderize "id DESC"
   filterize
 end

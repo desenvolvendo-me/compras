@@ -1,4 +1,4 @@
 class CapabilityDestinationDetail < Compras::Model
-  orderize :id
+  orderize "id DESC"
   filterize
 end

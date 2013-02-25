@@ -13,7 +13,7 @@ class LicitationProcessClassification < Compras::Model
   delegate :benefited, :proposals, :will_submit_new_proposal_when_draw,
            :to => :bidder, :allow_nil => true
 
-  orderize :id
+  orderize "id DESC"
   filterize
 
   scope :disqualified, where { classification.eq(-1) }

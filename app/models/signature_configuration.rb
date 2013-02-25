@@ -18,7 +18,7 @@ class SignatureConfiguration < Compras::Model
     select('distinct report').pluck(:report)
   end
 
-  orderize :id
+  orderize "id DESC"
   filterize
 
   def to_s

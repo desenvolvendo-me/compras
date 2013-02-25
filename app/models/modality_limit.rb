@@ -9,7 +9,7 @@ class ModalityLimit < Compras::Model
   validates :work_invitation_letter, :work_taken_price, :presence => true
   validates :work_public_competition, :presence => true
 
-  orderize :id
+  orderize "id DESC"
   filterize
 
   def to_s

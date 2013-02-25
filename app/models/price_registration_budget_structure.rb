@@ -10,7 +10,7 @@ class PriceRegistrationBudgetStructure < Compras::Model
   validates :budget_structure_id, :uniqueness => { :scope => :price_registration_item_id }
 
   filterize
-  orderize :id
+  orderize "id DESC"
 
   def budget_structure_balance; end
 end

@@ -5,7 +5,7 @@ class RegularizationOrAdministrativeSanctionReason < Compras::Model
 
   validates :description, :reason_type, :presence => true
 
-  orderize :id
+  orderize "id DESC"
   filterize
 
   def to_s

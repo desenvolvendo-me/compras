@@ -16,7 +16,7 @@ class LicitationProcessLot < Compras::Model
   validate :administrative_process_budget_allocation_items_should_have_at_least_one
   validate :items_should_belong_to_administrative_process
 
-  orderize :id
+  orderize "id DESC"
   filterize
 
   scope :licitation_process_less_than_me, lambda { |licitation_process_id, id|

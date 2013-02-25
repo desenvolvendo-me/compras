@@ -20,7 +20,7 @@ class ReserveFund < Compras::Model
   delegate :year, :to => :descriptor, :allow_nil => true
   delegate :administrative_process, :to => :licitation_process, :allow_nil => true
 
-  orderize :id
+  orderize "id DESC"
   filterize
 
   def to_s

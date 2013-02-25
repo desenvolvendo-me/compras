@@ -23,7 +23,7 @@ class AdministrativeProcessBudgetAllocationItem < Compras::Model
 
   validates :material, :quantity, :presence => true
 
-  orderize :id
+  orderize "id DESC"
   filterize
 
   scope :administrative_process_id, lambda { |administrative_process_id|

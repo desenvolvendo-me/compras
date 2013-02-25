@@ -29,7 +29,7 @@ class TradingItem < Compras::Model
            :to => :trading
   delegate :allow_closing?, :to => :trading, :prefix => true
 
-  orderize :id
+  orderize "id DESC"
 
   default_scope { order(:id) }
 

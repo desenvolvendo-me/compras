@@ -76,7 +76,7 @@ class Creditor < Compras::Model
 
   before_save :clean_fields_when_is_no_autonomous
 
-  orderize :id
+  orderize "id DESC"
   filterize
 
   def self.filter(params)

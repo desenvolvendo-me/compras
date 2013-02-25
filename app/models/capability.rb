@@ -6,7 +6,7 @@ class Capability < Compras::Model
 
   belongs_to :descriptor
 
-  orderize :id
+  orderize "id DESC"
   filterize
 
   def to_s

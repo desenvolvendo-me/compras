@@ -8,7 +8,7 @@ class LicitationNotice < Compras::Model
 
   validates :licitation_process, :date, :number, :presence => true
 
-  orderize :id
+  orderize "id DESC"
   filterize
 
   def to_s

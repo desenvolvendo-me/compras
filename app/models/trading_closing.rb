@@ -7,7 +7,7 @@ class TradingClosing < Compras::Model
 
   validates :status, :trading, :presence => true
 
-  orderize :id
+  orderize "id DESC"
 
   def to_s
     "#{trading} - #{status_humanize}"

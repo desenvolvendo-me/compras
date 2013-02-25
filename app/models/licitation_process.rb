@@ -114,7 +114,7 @@ class LicitationProcess < Compras::Model
 
   before_update :assign_bidders_documents
 
-  orderize :id
+  orderize "id DESC"
   filterize
 
   scope :with_price_registrations, where { price_registration.eq true }

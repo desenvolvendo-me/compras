@@ -44,7 +44,7 @@ class PriceRegistration < Compras::Model
 
   auto_increment :number, :by => :year
 
-  orderize :id
+  orderize "id DESC"
   filterize
 
   def to_s

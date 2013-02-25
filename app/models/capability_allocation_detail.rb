@@ -1,5 +1,5 @@
 class CapabilityAllocationDetail < Compras::Model
-  orderize :id
+  orderize "id DESC"
   filterize
 
   def to_s

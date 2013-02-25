@@ -19,7 +19,7 @@ class PriceCollectionProposal < Compras::Model
   validates :creditor, :presence => true
   validate :must_have_a_valid_creditor_user
 
-  orderize :id
+  orderize "id DESC"
   filterize
 
   def self.destroy_all_classifications

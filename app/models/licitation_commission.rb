@@ -38,7 +38,7 @@ class LicitationCommission < Compras::Model
   validate :must_have_auctioneer, :must_have_support_team, :if => :trading?
   validate :validate_custom_data
 
-  orderize :id
+  orderize "id DESC"
   filterize
 
   def self.can_take_part_in_trading

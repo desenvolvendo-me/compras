@@ -25,7 +25,7 @@ class PurchaseSolicitationItemGroup < Compras::Model
 
   delegate :authorized?, :to => :direct_purchase, :prefix => true, :allow_nil => true
 
-  orderize :id
+  orderize "id DESC"
 
   def self.filter(options)
     query = scoped

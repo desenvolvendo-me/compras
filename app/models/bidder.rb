@@ -65,7 +65,7 @@ class Bidder < Compras::Model
 
   before_save :clear_invited_data, :set_default_values
 
-  orderize :id
+  orderize "id DESC"
   filterize
 
   scope :exclude_ids, lambda { |ids|  where { id.not_in(ids) } }

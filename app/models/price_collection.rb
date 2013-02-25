@@ -49,7 +49,7 @@ class PriceCollection < Compras::Model
 
   after_save :generate_proposal_items
 
-  orderize :id
+  orderize "id DESC"
   filterize
 
   def to_s
