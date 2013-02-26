@@ -36,7 +36,7 @@ describe LicitationProcess do
       let(:licitation)  { LicitationProcess.make!(:processo_licitatorio_concorrencia, :licitation_process_publications => [publication]) }
 
       context "integral execution type" do
-        it "should be 45 calendar days greater than last publication date" do
+        it "should be 45 calendar days greater than last publication date when best technique or technical and price" do
           licitation.envelope_opening_date = Date.today + 44.days
 
           licitation.judgment_form.licitation_kind = LicitationKind::BEST_TECHNIQUE
@@ -65,6 +65,14 @@ describe LicitationProcess do
 
           expect(licitation).to_not be_valid
           expect(licitation.errors[:envelope_opening_date]).to include "deve ser a partir de #{I18n.l(Date.today + 30.days)}. Refente a 30 dias maior que a data da publicação mais recente (#{I18n.l(Date.today)})"
+
+          licitation.execution_type = ExecutionType::INTEGRAL
+          licitation.judgment_form.licitation_kind = LicitationKind::BEST_AUCTION_OR_OFFER
+
+          expect(licitation).to_not be_valid
+          expect(licitation.errors[:envelope_opening_date]).to include "deve ser a partir de #{I18n.l(Date.today + 30.days)}. Refente a 30 dias maior que a data da publicação mais recente (#{I18n.l(Date.today)})"
+
+          licitation.execution_type = ExecutionType::TASK
 
           licitation.envelope_opening_date = Date.today + 30.days
           expect(licitation).to be_valid
