@@ -30,7 +30,7 @@ class LicitationProcessPublication < Compras::Model
   end
 
   def publication_before_envelope_opening
-    return unless licitation_process
+    return unless licitation_process && licitation_process.envelope_opening_date
 
     if publication_date >= licitation_process.envelope_opening_date
       errors.add(:publication_date, :should_be_prior_to_envelope_opening)

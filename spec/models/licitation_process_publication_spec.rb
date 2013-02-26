@@ -29,6 +29,17 @@ describe LicitationProcessPublication do
       expect(subject.errors[:publication_date]).to include "deve ser anterior à data de abertura dos envelopes"
     end
 
+    it "only validates publication date of publications of editals when has licitation processes" do
+      licitation_process = double(:envelope_opening_date => nil)
+      subject.stub(:licitation_process => licitation_process)
+      subject.publication_date = Date.new(2012, 2, 2)
+      subject.publication_of = PublicationOf::EDITAL
+
+      subject.valid?
+
+      expect(subject.errors[:publication_date]).to be_empty
+    end
+
     it "only validates publication date of publications of editals" do
       licitation_process = double(:envelope_opening_date => Date.new(2012, 2, 1))
       subject.stub(:licitation_process => licitation_process)
