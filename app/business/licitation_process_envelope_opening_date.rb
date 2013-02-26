@@ -39,10 +39,10 @@ class LicitationProcessEnvelopeOpeningDate
   end
 
   def concurrence_validation
-    if execution_type == "integral"
-      ["best_technique", "technical_and_price"].include?(licitation_kind) && valid_envelope_opening_date?(45, :calendar)
+    if execution_type == "integral" && ["best_technique", "technical_and_price"].include?(licitation_kind)
+      valid_envelope_opening_date?(45, :calendar)
     else
-      ["best_technique", "technical_and_price"].include?(licitation_kind) && valid_envelope_opening_date?(30, :calendar)
+      valid_envelope_opening_date?(30, :calendar)
     end
   end
 

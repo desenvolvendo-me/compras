@@ -75,15 +75,13 @@ describe LicitationProcessEnvelopeOpeningDate do
           licitation_process.stub(:execution_type).and_return double(:integral, :integral? => false)
         end
 
-        it "is valid when licitation kind is best technique and days difference is greater than 30 days" do
-          licitation_process.stub(:judgment_form_licitation_kind).and_return "best_technique"
+        it "is valid when days difference is greater than 30 days" do
           subject.should_receive(:respond_to?).with("concurrence_validation", true).and_return true
           days_counter.stub(:count).and_return 31
           expect(subject.valid?).to be true
         end
 
-        it "is not valid when licitation kind is best technique and days difference is lesser or equal than 30 days" do
-          licitation_process.stub(:judgment_form_licitation_kind).and_return double(:best_technique, :best_technique? => true)
+        it "is not valid when days difference is lesser or equal than 30 days" do
           subject.should_receive(:respond_to?).with("concurrence_validation", true).and_return true
           days_counter.stub(:count).and_return 30
           licitation_process.stub_chain(:errors, :add)

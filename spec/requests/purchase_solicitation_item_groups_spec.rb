@@ -377,12 +377,12 @@ feature "PurchaseSolicitationItemGroups" do
       expect(page).to have_content 'Situação'
 
       within 'tbody tr:nth-child(1)' do
-        expect(page).to have_content 'Agrupamento de arame farpado'
+        expect(page).to have_content 'Agrupamento de antivirus desenvolvimento'
         expect(page).to have_content 'Pendente'
       end
 
       within 'tbody tr:nth-child(2)' do
-        expect(page).to have_content 'Agrupamento de antivirus desenvolvimento'
+        expect(page).to have_content 'Agrupamento de arame farpado'
         expect(page).to have_content 'Pendente'
       end
     end

@@ -233,17 +233,19 @@ feature "LicitationProcessLots" do
 
     fill_in 'Observações', :with => 'obs'
 
-    fill_modal 'Itens', :with => '', :field => 'Material' do
+    within_modal 'Itens' do
       click_button 'Pesquisar'
 
-      # item 'Arame farpado' is not part of the administrative process and should not appear
-      expect(page).to_not have_content 'Arame farpado'
+      within_records do
+        # item 'Arame farpado' is not part of the administrative process and should not appear
+        expect(page).to_not have_content 'Arame farpado'
 
-      expect(page).to have_content 'Antivirus'
-      expect(page).to have_content 'Arame comum'
+        expect(page).to have_content 'Antivirus'
+        expect(page).to have_content 'Arame comum'
+      end
+
+      click_record '01.01.00001 - Antivirus'
     end
-
-    fill_modal 'Itens', :with => '01.01.00001 - Antivirus', :field => 'Material'
 
     click_button 'Salvar'
 
@@ -255,17 +257,21 @@ feature "LicitationProcessLots" do
 
     expect(page).to have_content 'Antivirus'
 
-    fill_modal 'Itens', :with => '', :field => 'Material' do
+    within_modal 'Itens' do
       click_button 'Pesquisar'
 
-      # item 'Arame farpado' is not part of the administrative process and should not appear
-      expect(page).to_not have_content 'Arame farpado'
+      within_records do
+        # item 'Arame farpado' is not part of the administrative process and should not appear
+        expect(page).to_not have_content 'Arame farpado'
 
-      # item 'Arame comum' is available and should appear
-      expect(page).to have_content 'Arame comum'
+        # item 'Arame comum' is available and should appear
+        expect(page).to have_content 'Arame comum'
 
-      # item 'Antivirus' was taken and should not appear
-      expect(page).to_not have_content 'Antivirus'
+        # item 'Antivirus' was taken and should not appear
+        expect(page).to_not have_content 'Antivirus'
+      end
+
+      click_link 'Voltar'
     end
 
     # removing 'Antivirus' item
@@ -283,7 +289,7 @@ feature "LicitationProcessLots" do
 
     expect(page).to have_content 'Arame comum'
 
-    fill_modal 'Itens', :with => '', :field => 'Material' do
+    within_modal 'Itens' do
       click_button 'Pesquisar'
 
       # item 'Arame farpado' is not part of the administrative process and should not appear
