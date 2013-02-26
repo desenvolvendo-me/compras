@@ -14,7 +14,7 @@ module ActiveRecord
           attributes = [:name]
         elsif attributes.last.is_a? Hash
           include_table = attributes.last.fetch(:on)
-          table_name = self.reflect_on_all_associations.select { |a| a.name.to_s == include_table.to_s }.first.table_name
+          table_name = include_table.to_s.classify.constantize.table_name
           attributes = "#{table_name}.#{attributes.first}" if include_table.present?
         end
 
