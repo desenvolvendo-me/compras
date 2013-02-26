@@ -1,4 +1,6 @@
 require 'model_helper'
+require 'app/models/inscriptio_cursualis/state'
+require 'app/models/state'
 require 'app/models/customization_data'
 require 'app/models/customization'
 require 'app/business/options_parser'

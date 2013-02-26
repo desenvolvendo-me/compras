@@ -1,5 +1,6 @@
 # encoding: utf-8
 require 'model_helper'
+require 'app/models/regulatory_act_type'
 require 'app/models/legal_text_nature'
 require 'app/models/regulatory_act'
 
