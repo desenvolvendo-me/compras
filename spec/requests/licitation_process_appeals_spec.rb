@@ -28,7 +28,9 @@ feature "LicitationProcessAppeals" do
 
     expect(page).to have_notice 'Interposição de Recurso do Processo Licitatório criada com sucesso.'
 
-    click_link LicitationProcessAppeal.last.to_s
+    within_records do
+      click_link '1'
+    end
 
     expect(page).to have_field 'Processo licitatório', :with => '1/2012'
     expect(page).to have_field 'Data do recurso', :with => I18n.l(Date.new(2012, 3, 20))
@@ -43,13 +45,15 @@ feature "LicitationProcessAppeals" do
   end
 
   scenario 'update an existent licitation_process_appeal' do
-    interposicao_processo_licitatorio = LicitationProcessAppeal.make!(:interposicao_processo_licitatorio)
+    LicitationProcessAppeal.make!(:interposicao_processo_licitatorio)
     LicitationProcess.make!(:processo_licitatorio_computador)
     Person.make!(:wenderson)
 
     navigate 'Processo Administrativo/Licitatório > Interposição de Recursos de Processos Licitatórios'
 
-    click_link interposicao_processo_licitatorio.to_s
+    within_records do
+      click_link '1'
+    end
 
     fill_modal 'Processo licitatório', :with => '2013', :field => 'Ano'
     fill_in 'Data do recurso', :with => I18n.l(Date.new(2013, 3, 20))
@@ -65,9 +69,11 @@ feature "LicitationProcessAppeals" do
 
     expect(page).to have_notice 'Interposição de Recurso do Processo Licitatório editada com sucesso.'
 
-    click_link interposicao_processo_licitatorio.to_s
+    within_records do
+      click_link '1'
+    end
 
-    expect(page).to have_field 'Processo licitatório', :with => '1/2013'
+    expect(page).to have_field 'Processo licitatório', :with => '2/2013'
     expect(page).to have_field 'Data do recurso', :with => I18n.l(Date.new(2013, 3, 20))
     expect(page).to have_select 'Referente ao', :selected => 'Revogação'
     expect(page).to have_field 'Autor', :with => 'Wenderson Malheiros'
@@ -80,22 +86,20 @@ feature "LicitationProcessAppeals" do
   end
 
   scenario 'destroy an existent licitation_process_appeal' do
-    interposicao_processo_licitatorio = LicitationProcessAppeal.make!(:interposicao_processo_licitatorio)
+    LicitationProcessAppeal.make!(:interposicao_processo_licitatorio)
 
     navigate 'Processo Administrativo/Licitatório > Interposição de Recursos de Processos Licitatórios'
 
-    click_link "#{interposicao_processo_licitatorio}"
+    within_records do
+      click_link '1'
+    end
 
     click_link "Apagar"
 
     expect(page).to have_notice 'Interposição de Recurso do Processo Licitatório apagada com sucesso.'
 
-    expect(page).to_not have_content '1/2013'
-    expect(page).to_not have_content I18n.l(Date.new(2012, 3, 20))
-    expect(page).to_not have_content 'Revogação'
-    expect(page).to_not have_content 'Wenderson Malheiros'
-    expect(page).to_not have_field 'Nova data da abertura dos envelopes', :with => I18n.l(Date.tomorrow )
-    expect(page).to_not have_field 'Nova hora da abertura dos envelopes', :with => '14:00'
-    expect(page).to_not have_content "#{interposicao_processo_licitatorio}"
+    within_records do
+      expect(page).to_not have_link "1"
+    end
   end
 end

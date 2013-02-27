@@ -9,7 +9,8 @@ class LicitationProcessAppeal < Compras::Model
   belongs_to :licitation_process
   belongs_to :person
 
-  delegate :administrative_process_description, :process_date, :to => :licitation_process, :allow_nil => true, :prefix => true
+  delegate :description, :process_date,
+           :to => :licitation_process, :allow_nil => true, :prefix => true
 
   validates :licitation_process, :person, :appeal_date, :presence => true
 

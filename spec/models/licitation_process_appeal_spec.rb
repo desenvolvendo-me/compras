@@ -20,6 +20,9 @@ describe LicitationProcessAppeal do
   it { should validate_presence_of :licitation_process }
   it { should validate_presence_of :appeal_date }
 
+  it { should delegate(:description).to(:licitation_process).allowing_nil(true).prefix(true) }
+  it { should delegate(:process_date).to(:licitation_process).allowing_nil(true).prefix(true) }
+
   context 'validating appeal_date' do
     before(:each) do
       subject.stub(:licitation_process).and_return(licitation_process)

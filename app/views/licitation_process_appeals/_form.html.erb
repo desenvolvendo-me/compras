@@ -13,7 +13,7 @@
 </div>
 
 <%= f.input :person %>
-<%= f.input :licitation_process_administrative_process_description, :disabled => true, :as => 'text' %>
+<%= f.input :licitation_process_description, :disabled => true, :as => 'text' %>
 
 <div class="yui3-g">
   <div class="yui3-u-1-3">
@@ -32,9 +32,9 @@
 <script>
   $('#licitation_process_appeal_licitation_process_id').change(function (event, licitation_process) {
     if (licitation_process) {
-      $('#licitation_process_appeal_licitation_process_administrative_process_description').val(licitation_process.administrative_process_description);
+      $('#licitation_process_appeal_licitation_process_description').val(licitation_process.description);
     } else {
-      $('#licitation_process_appeal_licitation_process_administrative_process_description').val('');
+      $('#licitation_process_appeal_licitation_process_description').val('');
     }
   });
 </script>
