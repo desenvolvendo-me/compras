@@ -27,7 +27,7 @@ describe Trading do
     it { should delegate(:auctioneer).to(:licitation_commission).allowing_nil(true) }
     it { should delegate(:support_team).to(:licitation_commission).allowing_nil(true) }
     it { should delegate(:licitation_commission_members).to(:licitation_commission).allowing_nil(true) }
-    it { should delegate(:administrative_process_summarized_object).to(:licitation_process).allowing_nil(true) }
+    it { should delegate(:summarized_object).to(:licitation_process).allowing_nil(true) }
     it { should delegate(:items).to(:licitation_process).allowing_nil(true).prefix(true) }
   end
 
@@ -51,7 +51,7 @@ describe Trading do
 
   describe "validations" do
     it "validates if the licitation modality is of 'trading' type" do
-      licitation_process = double(:administrative_process_trading? => false,
+      licitation_process = double(:trading? => false,
                                   :edital_published? => true)
       subject.stub(:licitation_process => licitation_process)
 
@@ -96,7 +96,7 @@ describe Trading do
 
     it "validates if associated licitation process has a published edital" do
       licitation_process = double(:edital_published? => false,
-                                  :administrative_process_trading? => true)
+                                  :trading? => true)
       subject.stub(:licitation_process => licitation_process)
 
       subject.valid?

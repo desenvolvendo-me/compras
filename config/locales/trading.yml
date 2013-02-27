@@ -12,7 +12,7 @@ pt-BR:
         licitation_commission: "Comissão de licitação"
         licitation_process: "Processo licitatório"
         licitating_unit: "Unidade licitante"
-        administrative_process_summarized_object: "Objeto resumido"
+        summarized_object: "Objeto resumido"
         year: "Ano"
         created_at_date: "Data"
         preamble: "Preâmbulo"

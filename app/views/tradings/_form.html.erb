@@ -38,9 +38,9 @@
   $(function() {
     $("#trading_licitation_process").on("change", function(e, licitationProcess) {
       if (licitationProcess) {
-        $("#trading_administrative_process_summarized_object").val(licitationProcess.summarized_object);
+        $("#trading_summarized_object").val(licitationProcess.summarized_object);
       } else {
-        $("#trading_administrative_process_summarized_object").val("");
+        $("#trading_summarized_object").val("");
       }
     });
 

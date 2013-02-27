@@ -29,7 +29,7 @@ class Trading < Compras::Model
 
   delegate :auctioneer, :support_team, :licitation_commission_members,
            :to => :licitation_commission, :allow_nil => true
-  delegate :administrative_process_summarized_object, :to => :licitation_process,
+  delegate :summarized_object, :to => :licitation_process,
            :allow_nil => true
   delegate :items, :to => :licitation_process, :allow_nil => true,
            :prefix => true
@@ -60,7 +60,7 @@ class Trading < Compras::Model
   def modality_type
     return unless licitation_process.present?
 
-    unless licitation_process.administrative_process_trading?
+    unless licitation_process.trading?
       errors.add(:licitation_process, :should_be_of_trading_type)
     end
   end

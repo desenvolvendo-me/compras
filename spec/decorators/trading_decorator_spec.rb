@@ -9,7 +9,7 @@ describe TradingDecorator do
       end
 
       it 'returns an invalid id' do
-        expect(subject.licitation_process_id).to eq -1
+        expect(subject.licitation_process_id).to eq(-1)
       end
     end
 
@@ -45,8 +45,8 @@ describe TradingDecorator do
       expect(described_class.header_attributes).to include :licitating_unit
     end
 
-    it 'should have administrative_process_summarized_object' do
-      expect(described_class.header_attributes).to include :administrative_process_summarized_object
+    it 'should have summarized_object' do
+      expect(described_class.header_attributes).to include :summarized_object
     end
   end
 
