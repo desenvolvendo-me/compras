@@ -17,6 +17,12 @@ describe AdministrativeProcessBudgetAllocationItem do
 
   it { should have_one(:trading_item).dependent(:restrict) }
 
+  it { should delegate(:reference_unit).to(:material).allowing_nil(true) }
+  it { should delegate(:description).to(:material).allowing_nil(true) }
+  it { should delegate(:licitation_process_id).to(:administrative_process_budget_allocation).allowing_nil(true) }
+  it { should delegate(:budget_allocation).to(:administrative_process_budget_allocation).allowing_nil(true) }
+  it { should delegate(:type_of_calculation).to(:administrative_process_budget_allocation).allowing_nil(true) }
+
   context 'with material' do
     let :material do
       double(:material)

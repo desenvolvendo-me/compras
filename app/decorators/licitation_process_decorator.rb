@@ -6,10 +6,8 @@ class LicitationProcessDecorator
   include ActionView::Helpers::NumberHelper
   include ActionView::Helpers::TranslationHelper
 
-  attr_header :code_and_year, :administrative_process_code_and_year,
-              :administrative_process_modality_humanize,
-              :administrative_process_object_type_humanize,
-              :envelope_opening_date, :status
+  attr_header :code_and_year, :modality, :object_type, :envelope_opening_date,
+              :status
 
   def judgment_forms_available(judgment_form_repository = JudgmentForm)
     if judgment_form
@@ -34,7 +32,7 @@ class LicitationProcessDecorator
   end
 
   def edit_path(routes)
-    if component.administrative_process_trading? && component.trading.present?
+    if trading? && trading.present?
       routes.edit_trading_path(component.trading)
     else
       routes.edit_licitation_process_path(component)
@@ -42,7 +40,7 @@ class LicitationProcessDecorator
   end
 
   def edit_link
-    if component.administrative_process_trading? && component.trading.present?
+    if trading? && trading.present?
       'Voltar ao pregão presencial'
     else
       'Voltar ao processo licitatório'
@@ -81,10 +79,6 @@ class LicitationProcessDecorator
 
   def code_and_year
     "#{process}/#{year}"
-  end
-
-  def administrative_process_code_and_year
-    administrative_process.decorator.code_and_year
   end
 
   def subtitle

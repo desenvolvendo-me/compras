@@ -8,13 +8,11 @@ class LicitationProcessLot < Compras::Model
   has_many :bidders, :through => :bidder_proposals
   has_many :licitation_process_classifications, :as => :classifiable, :dependent => :destroy
 
-  delegate :administrative_process, :administrative_process_id,
-           :type_of_calculation, :to => :licitation_process, :allow_nil => true
+  delegate :type_of_calculation, :to => :licitation_process, :allow_nil => true
   delegate :updatable?, :to => :licitation_process, :prefix => true,
            :allow_nil => true
 
   validate :administrative_process_budget_allocation_items_should_have_at_least_one
-  validate :items_should_belong_to_administrative_process
 
   orderize "id DESC"
   filterize
@@ -29,14 +27,6 @@ class LicitationProcessLot < Compras::Model
 
   def order_bidders_by_total_price
     bidders.sort { |a,b| a.proposal_total_value_by_lot(self) <=> b.proposal_total_value_by_lot(self) }
-  end
-
-  def items_should_belong_to_administrative_process
-    administrative_process_budget_allocation_items.each do |item|
-      if item.administrative_process_id != administrative_process.id
-        errors.add(:administrative_process_budget_allocation_items, :item_is_not_from_correct_administrative_process, :administrative_process => administrative_process)
-      end
-    end
   end
 
   def count_lots

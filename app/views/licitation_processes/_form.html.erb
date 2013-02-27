@@ -35,27 +35,200 @@
 </div>
 
 <script>
-  function cleanExistingAdministrativeProcessBudgetAllocations() {
-    $(".licitation-process-budget-allocation").remove()
-  }
+  $(function () {
+    var objectType = $(".object-type-select").val();
 
-  function createAdministrativeProcessBudgetAllocations(budgetAllocations) {
-    cleanExistingAdministrativeProcessBudgetAllocations();
+    if (objectType) {
+      filterModalities(objectType);
+    } else {
+      disableModalities();
+    }
 
-    var template = $('#administrative-process-budget-allocations-template'),
-        target = $('#budget-allocations');
+    $('form.licitation_process').on('change', '.object-type-select', function() {
+      $('#licitation_process_modality').html('');
 
-    $(budgetAllocations).each(function () {
-      target.append(template.mustache({id: this.id,
-                                       description: this.description,
-                                       administrative_process_id: this.administrative_process_id,
-                                       budget_allocation_id: this.budget_allocation_id,
-                                       uuid_administrative_process_budget_allocation: _.uniqueId('fresh-'),
-                                       value: numberWithDelimiter(this.value),
-                                       expenseNature: this.expense_nature,
-                                       amount: numberWithDelimiter(this.amount)}));
+      var objectType = $(this).val();
+      if (objectType) {
+        filterModalities(objectType);
+        enableModalities();
+      } else {
+        disableModalities();
+      }
     });
+
+    $('#licitation_process_modality').on('change', function() {
+      filterJudgmentForm();
+    });
+
+    function filterModalities(objectType) {
+      var modalitiesByObjectType = <%= Modality.by_object_type.to_json.html_safe %>,
+          validGroup = _(modalitiesByObjectType[objectType]),
+          currentModality = "<%= f.object.modality %>";
+
+      $("#licitation_process_modality").append(function() {
+        return $("<option>").text('').val('');
+      });
+
+      if (!validGroup.isUndefined() && !validGroup.isEmpty()){
+        validGroup.each(function(modality) {
+          $("#licitation_process_modality").append(function() {
+            if (modality[1] == "<%= f.object.modality %>") {
+              return $("<option>").text(modality[0]).val(modality[1]).attr('selected', 'selected');
+            } else {
+              return $("<option>").text(modality[0]).val(modality[1]);
+            }
+          });
+        });
+      }
+    }
+
+    function filterJudgmentForm() {
+      var licitationKindGroups = <%= JudgmentFormLicitationKindByObjectType.new.licitation_kind_groups.to_json.html_safe %>,
+          options = _(<%= f.object.decorator.judgment_forms_available.to_json.html_safe %>),
+          value = $("#licitation_process_object_type").val(),
+          validGroups = _(licitationKindGroups[value]);
+
+      if (!validGroups.isUndefined()) {
+        $("#licitation_process_judgment_form_id").html("");
+
+        $("#licitation_process_judgment_form_id").append(function () {
+          return $("<option>").text('').val('');
+        });
+
+        options.each(function(judgmentForm) {
+          validGroups.each(function(validLicitationKind) {
+            if (judgmentForm.licitation_kind == validLicitationKind) {
+              $("#licitation_process_judgment_form_id").append(function() {
+                return $("<option>").text(judgmentForm.description).
+                                     val(judgmentForm.id).
+                                     data('kind', judgmentForm.kind);
+              });
+            }
+          });
+        });
+
+        <% if f.object.judgment_form %>
+          $("#licitation_process_judgment_form_id option").filter('[value="<%= f.object.judgment_form_id %>"]').attr("selected", "selected");
+        <% end %>
+      }
+    }
+
+    function disableModalities() {
+      $('#licitation_process_modality').attr("disabled", "disabled");
+    }
+
+    function enableModalities() {
+      $('#licitation_process_modality').removeAttr("disabled");
+    }
+
+    filterJudgmentForm();
+  });
+
+  (function () {
+    var purchaseSolicitationItemGroupId = $("#licitation_process_purchase_solicitation_item_group_id").val(),
+        purchaseSolicitationId = $("#licitation_process_purchase_solicitation_id").val();
+
+    if (purchaseSolicitationItemGroupId) {
+      disablePurchaseSolicitation();
+      disableBudgetAllocations();
+    } else if (purchaseSolicitationId) {
+      disablePurchaseSolicitationItemGroup();
+      disableBudgetAllocations();
+    }
+  })();
+
+  function disableBudgetAllocations() {
+    $("#budget-allocations :input").attr("disabled", true);
+    $("#budget-allocations :input[type='button']").hide();
   }
+
+
+  function enableBudgetAllocations() {
+    $("#budget_allocations :input").attr("disabled", false);
+    $("#budget_allocations :input[type='button']").show();
+  }
+
+  function disablePurchaseSolicitation() {
+    $("#licitation_process_purchase_solicitation").attr("disabled", "disabled");
+  }
+
+  function disablePurchaseSolicitationItemGroup() {
+    $("#licitation_process_purchase_solicitation_item_group").attr("disabled", "disabled");
+  }
+
+  function enablePurchaseSolicitation() {
+    $("#licitation_process_purchase_solicitation").removeAttr("disabled");
+  }
+
+  function enablePurchaseSolicitationItemGroup() {
+    $("#licitation_process_purchase_solicitation_item_group").removeAttr("disabled");
+  }
+
+  function fillResponsible(responsible) {
+    var oldResponsible = $('#licitation_process_responsible_id').val();
+
+    if (responsible && oldResponsible == "") {
+      $('#licitation_process_responsible').val(responsible.to_s);
+      $('#licitation_process_responsible_id').val(responsible.id);
+    }
+  }
+
+  function fillBudgetAllocation(uuid, budget_allocation) {
+    var prefixNameUuid = "#licitation_process_administrative_process_budget_allocations_attributes_fresh-" + uuid;
+
+    $(prefixNameUuid + "_budget_allocation").val(budget_allocation.description);
+    $(prefixNameUuid + "_budget_allocation_id").val(budget_allocation.budget_allocation_id);
+    $(prefixNameUuid + "_budget_allocation_amount").val(numberWithDelimiter(budget_allocation.amount));
+    $(prefixNameUuid + "_value").val(numberWithDelimiter(budget_allocation.total_items_value));
+  }
+
+  function renderBudgetAllocation(budget_allocation) {
+    var budgetAllocationBinds = [];
+    var budgetAllocationUUID = _.uniqueId();
+
+    budgetAllocationBinds["uuid-administrative-process-budget-allocation"] = "fresh-" + budgetAllocationUUID;
+
+    $("#administrative-process-budget-allocation").append(
+      $("#administrative-process-budget-allocation-template").mustache(budgetAllocationBinds)
+    ).trigger("nestedForm:afterAdd");
+
+    fillBudgetAllocation(budgetAllocationUUID, budget_allocation);
+  }
+
+  $("#licitation_process_purchase_solicitation_item_group_id").on("change", function (event, purchase_solicitation_item_group) {
+    $("#administrative_process_budget_allocations").empty();
+
+    if (purchase_solicitation_item_group) {
+      $.each(purchase_solicitation_item_group.purchase_solicitations, function (i, purchase_solicitation) {
+        $.each(purchase_solicitation.budget_allocations, function (i, budget_allocation) {
+          renderBudgetAllocation(budget_allocation);
+        });
+      });
+
+      disableBudgetAllocations();
+      disablePurchaseSolicitation();
+    } else {
+      enableBudgetAllocations();
+      enablePurchaseSolicitation();
+    }
+  });
+
+  $("#licitation_process_purchase_solicitation_id").on("change", function (event, purchase_solicitation) {
+    $("#administrative_process_budget_allocations").empty();
+
+    if (purchase_solicitation) {
+      $.each(purchase_solicitation.budget_allocations, function (i, budget_allocation) {
+        renderBudgetAllocation(budget_allocation);
+      });
+
+      disableBudgetAllocations();
+      disablePurchaseSolicitationItemGroup();
+      fillResponsible(purchase_solicitation.responsible);
+    } else {
+      enableBudgetAllocations();
+      enablePurchaseSolicitationItemGroup();
+    }
+  });
 
   $('form.licitation_process').on('change', '.material', function (event, material) {
     if (material){
@@ -64,9 +237,9 @@
   });
 
   function calcItemOrder() {
-    $('fieldset.licitation-process-budget-allocation').each(function (index, item) {
+    $('.administrative_process_budget_allocation').each(function (index, item) {
       $(this).find('.item .hidden .destroy[value=false]').each(function (index, item) {
-        $(this).closest('.licitation-process-budget-allocation .item').find('.order').val(index + 1);
+        $(this).closest('.administrative_process_budget_allocation .item').find('.order').val(index + 1);
       });
     });
   }
@@ -84,7 +257,7 @@
 
   $('form.licitation_process').on('click', '.remove-item', function () {
     calcItemOrder();
-    calculateTotalOfItems($(this).closest('.licitation-process-budget-allocation'));
+    calculateTotalOfItems($(this).closest('.administrative_process_budget_allocation'));
   });
 
   $('form.licitation_process').on('nestedForm:afterAdd', function (){
@@ -100,7 +273,7 @@
         total = numberWithDelimiter(parseFloat(itemQuantity.multiply(itemUnitPrice)));
 
     itemDiv.find('.item-price').val(total);
-    calculateTotalOfItems(itemDiv.closest('.licitation-process-budget-allocation'));
+    calculateTotalOfItems(itemDiv.closest('.administrative_process_budget_allocation'));
   });
 
   $('form.licitation_process').on('keyup', '.item-price', function () {
@@ -115,11 +288,13 @@
     }
 
     itemDiv.find('.item-unit-price').val(unitPrice);
-    calculateTotalOfItems(itemDiv.closest('.licitation-process-budget-allocation'));
+    calculateTotalOfItems(itemDiv.closest('.administrative_process_budget_allocation'));
   });
 
-  function filterTypesOfCalculation (judgmentKind, objectType, modality) {
-    var typesOfCalculationGroupsForJudgmentFormKind = <%= LicitationProcessTypesOfCalculationByJudgmentFormKind.new.types_of_calculation_groups.to_json.html_safe %>,
+  function filterTypesOfCalculation (judgmentKind) {
+    var modality = $("#licitation_process_modality").val(),
+        objectType = $("#licitation_process_object_type").val(),
+        typesOfCalculationGroupsForJudgmentFormKind = <%= LicitationProcessTypesOfCalculationByJudgmentFormKind.new.types_of_calculation_groups.to_json.html_safe %>,
         typesOfCalculationGroupsForObjectType   = <%= LicitationProcessTypesOfCalculationByObjectType.new.types_of_calculation_groups.to_json.html_safe %>,
         typesOfCalculationGroupsForModality     = <%= LicitationProcessTypesOfCalculationByModality.new.types_of_calculation_groups.to_json.html_safe %>,
         typesOfCalculationOptions               = _(<%= LicitationProcessTypeOfCalculation.to_a.to_json.html_safe %>),
@@ -159,20 +334,12 @@
     });
   }
 
-  filterTypesOfCalculation('<%= f.object.administrative_process_judgment_form_kind %>',
-                           '<%= f.object.administrative_process_object_type %>',
-                           '<%= f.object.administrative_process_modality %>');
+  $("#licitation_process_judgment_form_id").on('change', function(event, judgmentForm) {
+    var option = $('#licitation_process_judgment_form_id option[value="'+ $(this).val() + '"]');
 
-  $('#licitation_process_judgment_form_id').change(function() {
-    var options = _(<%= f.object.decorator.judgment_forms_available.to_json.html_safe %>),
-        currentJudgmentFormId = $(this).val();
-
-    options.each(function(judgmentForm) {
-      if (judgmentForm.id == currentJudgmentFormId){
-        filterTypesOfCalculation(judgmentForm.kind, '<%= f.object.administrative_process_object_type %>', '<%= f.object.administrative_process_modality %>');
-        return;
-      }
-    });
+    if (option) {
+      filterTypesOfCalculation(option.data('kind'));
+    }
   });
 
   $("#licitation_process_type_of_calculation").val("<%= f.object.type_of_calculation %>");

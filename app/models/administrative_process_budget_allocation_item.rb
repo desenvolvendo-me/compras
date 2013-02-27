@@ -16,9 +16,7 @@ class AdministrativeProcessBudgetAllocationItem < Compras::Model
   has_one  :trading_item, :dependent => :restrict
 
   delegate :reference_unit, :description, :to => :material, :allow_nil => true
-  delegate :administrative_process_id, :budget_allocation,
-           :to => :administrative_process_budget_allocation, :allow_nil => true
-  delegate :type_of_calculation,
+  delegate :licitation_process_id, :budget_allocation, :type_of_calculation,
            :to => :administrative_process_budget_allocation, :allow_nil => true
 
   validates :material, :quantity, :presence => true

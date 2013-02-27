@@ -413,9 +413,7 @@ Compras::Application.routes.draw do
     end
   end
 
-  get 'licitation_processes/new/:administrative_process_id', :controller => :licitation_processes, :action => :new, :as => :new_licitation_process
-
-  resources :licitation_processes, :except => [ :destroy, :new ] do
+  resources :licitation_processes, :except => :destroy do
     collection do
       get :filter
       get :modal

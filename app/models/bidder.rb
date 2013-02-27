@@ -25,11 +25,11 @@ class Bidder < Compras::Model
   has_one :disqualification, :dependent => :destroy, :class_name => 'BidderDisqualification'
 
   delegate :document_type_ids, :process_date, :ratification?, :has_trading?,
+           :invitation?,
            :to => :licitation_process, :prefix => true, :allow_nil => true
-  delegate :administrative_process, :envelope_opening?, :items, :allow_bidders?,
+  delegate :envelope_opening?, :items, :allow_bidders?,
            :consider_law_of_proposals, :licitation_process_lots,
            :to => :licitation_process, :allow_nil => true
-  delegate :invitation?, :to => :administrative_process, :prefix => true
   delegate :administrative_process_budget_allocation_items, :to => :licitation_process_lots
   delegate :material, :to => :administrative_process_budget_allocation_items
   delegate :benefited, :to => :creditor, :allow_nil => true
@@ -421,8 +421,8 @@ class Bidder < Compras::Model
   end
 
   def validate_technical_score?
-    return unless administrative_process.present?
+    return unless licitation_process.present?
 
-    administrative_process.judgment_form_best_technique? || administrative_process.judgment_form_technical_and_price?
+    licitation_process.judgment_form_best_technique? || licitation_process.judgment_form_technical_and_price?
   end
 end

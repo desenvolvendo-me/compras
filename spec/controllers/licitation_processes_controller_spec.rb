@@ -7,82 +7,45 @@ describe LicitationProcessesController do
     controller.stub(:authorize_resource!)
   end
 
-  context "with administrative process that does not allow licitation_process" do
-    let :administrative_process do
-      AdministrativeProcess.make!(:maior_lance_por_itens, :object_type => AdministrativeProcessObjectType::CONCESSIONS_AND_PERMITS,
-                                  :modality => Modality::CONCURRENCE)
-    end
-
-    it 'should return 401 on access new url' do
-
-      get :new, :administrative_process_id => administrative_process.id
-
-      expect(response.code).to eq "401"
-    end
-
-    it 'should return 401 on access create url' do
-      post :create, :licitation_process => { :administrative_process_id => administrative_process.id }
-
-      expect(response.code).to eq "401"
-    end
-  end
-
-  context "with administrative process" do
-    let :purchase_solicitation do
-      PurchaseSolicitation.make!(:reparo)
-    end
-
-    let(:administrative_process) do
-      AdministrativeProcess.make!(:compra_com_itens,
-        :purchase_solicitation => purchase_solicitation)
-    end
-
+  describe "GET #new" do
     it 'uses current year as default value for year' do
-      get :new, :administrative_process_id => administrative_process.id
+      get :new
 
       expect(assigns(:licitation_process).year).to eq Date.current.year
     end
 
-    it 'uses delivery location from purchase_solicitation year as default value for delivery location' do
-      get :new, :administrative_process_id => administrative_process.id
-
-      expect(assigns(:licitation_process).delivery_location).to eq purchase_solicitation.delivery_location
-    end
-
-    it 'uses current year as default value for judgment form' do
-      get :new, :administrative_process_id => administrative_process.id
-
-      expect(assigns(:licitation_process).judgment_form.description).to eq 'Por Item com Melhor Técnica'
-    end
-
     it 'uses current date as default value for process_date' do
-      get :new, :administrative_process_id => administrative_process.id
+      get :new
 
       expect(assigns(:licitation_process).process_date).to eq Date.current
     end
 
     it 'uses waiting_for_open default value for status' do
-      get :new, :administrative_process_id => administrative_process.id
+      get :new
 
       expect(assigns(:licitation_process).status).to eq LicitationProcessStatus::WAITING_FOR_OPEN
     end
 
+
+  end
+
+  describe 'POST #create' do
     it 'should assign waiting_for_open default value for status' do
-      post :create, :licitation_process => { :id => 1, :administrative_process_id => administrative_process.id }
+      post :create, :licitation_process => { :id => 1 }
 
       expect(assigns(:licitation_process).status).to eq LicitationProcessStatus::WAITING_FOR_OPEN
     end
 
     it 'should assign the licitation number' do
-      LicitationProcess.any_instance.stub(:administrative_process).and_return(administrative_process)
       LicitationProcess.any_instance.stub(:licitation_number).and_return(2)
 
-      post :create, :licitation_process => { :administrative_process_id => administrative_process.id }
+      post :create
 
       expect(assigns(:licitation_process).licitation_number).to eq 2
     end
 
     it 'should update delivery_location of purchase_solicitation' do
+      purchase_solicitation = PurchaseSolicitation.make!(:reparo)
       delivery_location = DeliveryLocation.make!(:education)
 
       LicitationProcess.any_instance.should_receive(:transaction).and_yield
@@ -92,7 +55,9 @@ describe LicitationProcessesController do
       DeliveryLocationChanger.should_receive(:change).
                               with(purchase_solicitation, delivery_location)
 
-      post :create, :licitation_process => { :administrative_process_id => administrative_process.id, :delivery_location_id => delivery_location.id }
+      post :create, :licitation_process => {
+        :purchase_solicitation_id => purchase_solicitation.id,
+        :delivery_location_id => delivery_location.id }
     end
   end
 
@@ -102,14 +67,9 @@ describe LicitationProcessesController do
         PurchaseSolicitation.make!(:reparo)
       end
 
-      let(:administrative_process) do
-        AdministrativeProcess.make!(:compra_com_itens,
-          :purchase_solicitation => purchase_solicitation)
-      end
-
       let :licitation_process do
         LicitationProcess.make!(:processo_licitatorio,
-          :administrative_process => administrative_process,
+          :purchase_solicitation => purchase_solicitation,
           :delivery_location => purchase_solicitation.delivery_location)
       end
 
@@ -144,7 +104,7 @@ describe LicitationProcessesController do
       it 'should redirect to administrative process edit page after update' do
         put :update, :id => licitation_process.id
 
-        expect(response).to redirect_to(edit_licitation_process_path(licitation_process, :administrative_process_id => licitation_process.administrative_process_id))
+        expect(response).to redirect_to(edit_licitation_process_path(licitation_process))
       end
 
       it 'delete classifications and call classification generator' do

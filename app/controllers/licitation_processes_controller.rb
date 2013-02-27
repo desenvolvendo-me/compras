@@ -7,24 +7,18 @@ class LicitationProcessesController < CrudController
   has_scope :trading, :type => :boolean
   has_scope :published_edital, :type => :boolean
 
-  before_filter :block_administrative_process_not_allowed, :only => [:new, :create]
-  before_filter :localize_administrative_process
-
   def new
     object = build_resource
     object.year = Date.current.year
     object.process_date = Date.current
-    object.administrative_process = @administrative_process
-    object.judgment_form = @administrative_process.judgment_form
     object.status = LicitationProcessStatus::WAITING_FOR_OPEN
-    object.delivery_location = @administrative_process.delivery_location
 
     super
   end
 
   def create
     create! do |success, failure|
-      success.html { redirect_to edit_licitation_process_path(resource, :administrative_process_id => resource.administrative_process_id) }
+      success.html { redirect_to edit_licitation_process_path(resource) }
     end
   end
 
@@ -41,7 +35,7 @@ class LicitationProcessesController < CrudController
       redirect_to licitation_process_path(resource)
     else
       update! do |success, failure|
-        success.html { redirect_to edit_licitation_process_path(resource, :administrative_process_id => resource.administrative_process_id) }
+        success.html { redirect_to edit_licitation_process_path(resource) }
       end
     end
   end
@@ -81,22 +75,9 @@ class LicitationProcessesController < CrudController
 
       BidderStatusChanger.new(object).change
 
-      if object.save
+      if object.save!
         DeliveryLocationChanger.change(object.purchase_solicitation, object.delivery_location)
       end
-    end
-  end
-
-  def block_administrative_process_not_allowed
-    administrative_process_id = params[:administrative_process_id] || params[:licitation_process][:administrative_process_id]
-    @administrative_process = AdministrativeProcess.find(administrative_process_id)
-
-    raise Exceptions::Unauthorized unless @administrative_process.allow_licitation_process?
-  end
-
-  def localize_administrative_process
-    if params[:administrative_process_id]
-      @parent = AdministrativeProcess.find(params[:administrative_process_id])
     end
   end
 end

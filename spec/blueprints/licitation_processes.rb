@@ -1,9 +1,17 @@
 # encoding: utf-8
 LicitationProcess.blueprint(:processo_licitatorio) do
+  process { 1 }
+  protocol { '00088/2012' }
+  object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
+  modality { Modality::INVITATION }
+  judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
+  description { 'Licitação para compra de carteiras' }
+  item { 'Item 1' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
+  responsible { Employee.make!(:sobrinho) }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
-  administrative_process { AdministrativeProcess.make!(:compra_com_itens) }
   pledge_type { PledgeType::GLOBAL }
   capability { Capability.make!(:reforma) }
   expiration { 10 }
@@ -34,10 +42,18 @@ LicitationProcess.blueprint(:processo_licitatorio) do
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_computador) do
+  process { 2 }
+  protocol { '00089/2012' }
+  object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
+  modality { Modality::INVITATION }
+  judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
+  description { 'Licitação para compra de carteiras' }
+  responsible { Employee.make!(:sobrinho) }
+  item { 'Item 1' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   year { 2013 }
   process_date { Date.new(2013, 3, 20) }
   licitation_number { 1 }
-  administrative_process { AdministrativeProcess.make!(:compra_com_itens_2) }
   pledge_type { PledgeType::ESTIMATED }
   capability { Capability.make!(:reforma) }
   expiration { 10 }
@@ -65,10 +81,18 @@ LicitationProcess.blueprint(:processo_licitatorio_computador) do
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_fornecedores) do
+  process { 1 }
+  protocol { '00088/2012' }
+  object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
+  modality { Modality::INVITATION }
+  judgment_form { JudgmentForm.make!(:global_com_menor_preco) }
+  description { 'Licitação para compra de carteiras' }
+  responsible { Employee.make!(:sobrinho) }
+  item { 'Item 1' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
-  administrative_process { AdministrativeProcess.make!(:compra_com_itens_menor_preco) }
   pledge_type { PledgeType::GLOBAL }
   capability { Capability.make!(:reforma) }
   expiration { 10 }
@@ -95,10 +119,18 @@ LicitationProcess.blueprint(:processo_licitatorio_fornecedores) do
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_publicacao_cancelada) do
+  process { 1 }
+  protocol { '00088/2012' }
+  object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
+  modality { Modality::INVITATION }
+  judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
+  description { 'Licitação para compra de carteiras' }
+  item { 'Item 1' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
+  responsible { Employee.make!(:sobrinho) }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
-  administrative_process { AdministrativeProcess.make!(:compra_com_itens) }
   pledge_type { PledgeType::GLOBAL }
   capability { Capability.make!(:reforma) }
   expiration { 10 }
@@ -124,10 +156,18 @@ LicitationProcess.blueprint(:processo_licitatorio_publicacao_cancelada) do
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_canetas) do
+  process { 2 }
+  protocol { '00089/2012' }
+  object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
+  modality { Modality::INVITATION }
+  judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
+  description { 'Licitação para compra de carteiras' }
+  responsible { Employee.make!(:sobrinho) }
+  item { 'Item 1' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_2_itens)] }
   year { 2013 }
   process_date { Date.new(2013, 3, 20) }
   licitation_number { 1 }
-  administrative_process { AdministrativeProcess.make!(:compra_com_itens_3) }
   pledge_type { PledgeType::ESTIMATED }
   capability { Capability.make!(:reforma) }
   expiration { 10 }
@@ -156,10 +196,18 @@ LicitationProcess.blueprint(:processo_licitatorio_canetas) do
 end
 
 LicitationProcess.blueprint(:apuracao_por_itens) do
+  process { 1 }
+  protocol { '00088/2012' }
+  object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
+  modality { Modality::INVITATION }
+  judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
+  description { 'Licitação para compra de carteiras' }
+  responsible { Employee.make!(:sobrinho) }
+  item { 'Item 1' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_2_itens)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
-  administrative_process { AdministrativeProcess.make!(:apuracao_por_itens) }
   pledge_type { PledgeType::GLOBAL }
   capability { Capability.make!(:reforma) }
   expiration { 10 }
@@ -188,10 +236,18 @@ LicitationProcess.blueprint(:apuracao_por_itens) do
 end
 
 LicitationProcess.blueprint(:apuracao_por_lote) do
+  process { 1 }
+  protocol { '00088/2012' }
+  object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
+  modality { Modality::INVITATION }
+  judgment_form { JudgmentForm.make!(:por_lote_com_melhor_tecnica) }
+  description { 'Licitação para compra de carteiras' }
+  responsible { Employee.make!(:sobrinho) }
+  item { 'Item 1' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_2_itens)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
-  administrative_process { AdministrativeProcess.make!(:apuracao_por_lote) }
   pledge_type { PledgeType::GLOBAL }
   capability { Capability.make!(:reforma) }
   expiration { 10 }
@@ -219,10 +275,18 @@ LicitationProcess.blueprint(:apuracao_por_lote) do
 end
 
 LicitationProcess.blueprint(:valor_maximo_ultrapassado) do
+  process { 1 }
+  protocol { '00088/2012' }
+  object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
+  modality { Modality::INVITATION }
+  judgment_form { JudgmentForm.make!(:por_lote_com_melhor_tecnica) }
+  description { 'Licitação para compra de carteiras' }
+  responsible { Employee.make!(:sobrinho) }
+  item { 'Item 1' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_2_itens)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
-  administrative_process { AdministrativeProcess.make!(:apuracao_por_lote) }
   pledge_type { PledgeType::GLOBAL }
   capability { Capability.make!(:reforma) }
   expiration { 10 }
@@ -250,10 +314,18 @@ LicitationProcess.blueprint(:valor_maximo_ultrapassado) do
 end
 
 LicitationProcess.blueprint(:maior_lance_por_lote) do
+  process { 1 }
+  protocol { '00088/2012' }
+  object_type { AdministrativeProcessObjectType::CALL_NOTICE }
+  modality { Modality::CONCURRENCE }
+  judgment_form { JudgmentForm.make!(:por_lote_com_melhor_tecnica) }
+  description { 'Licitação para compra de carteiras' }
+  responsible { Employee.make!(:sobrinho) }
+  item { 'Item 1' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
-  administrative_process { AdministrativeProcess.make!(:maior_lance_por_lote) }
   pledge_type { PledgeType::GLOBAL }
   capability { Capability.make!(:reforma) }
   expiration { 10 }
@@ -281,10 +353,18 @@ LicitationProcess.blueprint(:maior_lance_por_lote) do
 end
 
 LicitationProcess.blueprint(:apuracao_global) do
+  process { 1 }
+  protocol { '00088/2012' }
+  object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
+  modality { Modality::INVITATION }
+  judgment_form { JudgmentForm.make!(:global) }
+  description { 'Licitação para compra de carteiras' }
+  responsible { Employee.make!(:sobrinho) }
+  item { 'Item 1' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
-  administrative_process { AdministrativeProcess.make!(:apuracao_global) }
   pledge_type { PledgeType::GLOBAL }
   capability { Capability.make!(:reforma) }
   expiration { 10 }
@@ -312,10 +392,18 @@ LicitationProcess.blueprint(:apuracao_global) do
 end
 
 LicitationProcess.blueprint(:apuracao_global_empatou) do
+  process { 1 }
+  protocol { '00088/2012' }
+  object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
+  modality { Modality::INVITATION }
+  judgment_form { JudgmentForm.make!(:global) }
+  description { 'Licitação para compra de carteiras' }
+  responsible { Employee.make!(:sobrinho) }
+  item { 'Item 1' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
-  administrative_process { AdministrativeProcess.make!(:apuracao_global) }
   pledge_type { PledgeType::GLOBAL }
   capability { Capability.make!(:reforma) }
   expiration { 10 }
@@ -343,10 +431,18 @@ LicitationProcess.blueprint(:apuracao_global_empatou) do
 end
 
 LicitationProcess.blueprint(:apuracao_global_sem_documentos) do
+  process { 1 }
+  protocol { '00088/2012' }
+  object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
+  modality { Modality::INVITATION }
+  judgment_form { JudgmentForm.make!(:global) }
+  description { 'Licitação para compra de carteiras' }
+  responsible { Employee.make!(:sobrinho) }
+  item { 'Item 1' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
-  administrative_process { AdministrativeProcess.make!(:apuracao_global) }
   pledge_type { PledgeType::GLOBAL }
   capability { Capability.make!(:reforma) }
   expiration { 10 }
@@ -374,10 +470,18 @@ LicitationProcess.blueprint(:apuracao_global_sem_documentos) do
 end
 
 LicitationProcess.blueprint(:apuracao_global_small_company) do
+  process { 1 }
+  protocol { '00088/2012' }
+  object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
+  modality { Modality::INVITATION }
+  judgment_form { JudgmentForm.make!(:global) }
+  description { 'Licitação para compra de carteiras' }
+  responsible { Employee.make!(:sobrinho) }
+  item { 'Item 1' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
-  administrative_process { AdministrativeProcess.make!(:apuracao_global) }
   pledge_type { PledgeType::GLOBAL }
   capability { Capability.make!(:reforma) }
   expiration { 10 }
@@ -405,10 +509,18 @@ LicitationProcess.blueprint(:apuracao_global_small_company) do
 end
 
 LicitationProcess.blueprint(:apuracao_global_small_company_without_new_proposal) do
+  process { 1 }
+  protocol { '00088/2012' }
+  object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
+  modality { Modality::INVITATION }
+  judgment_form { JudgmentForm.make!(:global) }
+  description { 'Licitação para compra de carteiras' }
+  responsible { Employee.make!(:sobrinho) }
+  item { 'Item 1' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
-  administrative_process { AdministrativeProcess.make!(:apuracao_global) }
   pledge_type { PledgeType::GLOBAL }
   capability { Capability.make!(:reforma) }
   expiration { 10 }
@@ -436,10 +548,18 @@ LicitationProcess.blueprint(:apuracao_global_small_company_without_new_proposal)
 end
 
 LicitationProcess.blueprint(:apuracao_global_small_company_2) do
+  process { 1 }
+  protocol { '00088/2012' }
+  object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
+  modality { Modality::INVITATION }
+  judgment_form { JudgmentForm.make!(:global) }
+  description { 'Licitação para compra de carteiras' }
+  responsible { Employee.make!(:sobrinho) }
+  item { 'Item 1' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
-  administrative_process { AdministrativeProcess.make!(:apuracao_global) }
   pledge_type { PledgeType::GLOBAL }
   capability { Capability.make!(:reforma) }
   expiration { 10 }
@@ -467,10 +587,18 @@ LicitationProcess.blueprint(:apuracao_global_small_company_2) do
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_nao_atualizavel) do
+  process { 1 }
+  protocol { '00088/2012' }
+  object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
+  modality { Modality::INVITATION }
+  judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
+  description { 'Licitação para compra de carteiras' }
+  responsible { Employee.make!(:sobrinho) }
+  item { 'Item 1' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
-  administrative_process { AdministrativeProcess.make!(:compra_com_itens) }
   pledge_type { PledgeType::GLOBAL }
   capability { Capability.make!(:reforma) }
   expiration { 10 }
@@ -497,10 +625,18 @@ LicitationProcess.blueprint(:processo_licitatorio_nao_atualizavel) do
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_canetas_sem_lote) do
+  process { 2 }
+  protocol { '00089/2012' }
+  object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
+  modality { Modality::INVITATION }
+  judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
+  description { 'Licitação para compra de carteiras' }
+  responsible { Employee.make!(:sobrinho) }
+  item { 'Item 1' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_2_itens)] }
   year { 2013 }
   process_date { Date.new(2013, 3, 20) }
   licitation_number { 1 }
-  administrative_process { AdministrativeProcess.make!(:compra_com_itens_3) }
   pledge_type { PledgeType::ESTIMATED }
   capability { Capability.make!(:reforma) }
   expiration { 10 }
@@ -527,10 +663,18 @@ LicitationProcess.blueprint(:processo_licitatorio_canetas_sem_lote) do
 end
 
 LicitationProcess.blueprint(:apuracao_melhor_tecnica_e_preco) do
+  process { 1 }
+  protocol { '00088/2012' }
+  object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
+  modality { Modality::INVITATION }
+  judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
+  description { 'Licitação para compra de carteiras' }
+  responsible { Employee.make!(:sobrinho) }
+  item { 'Item 1' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
-  administrative_process { AdministrativeProcess.make!(:apuracao_melhor_tecnica_e_preco) }
   pledge_type { PledgeType::GLOBAL }
   capability { Capability.make!(:reforma) }
   expiration { 10 }
@@ -558,10 +702,19 @@ LicitationProcess.blueprint(:apuracao_melhor_tecnica_e_preco) do
 end
 
 LicitationProcess.blueprint(:pregao_presencial) do
+  process { 1 }
+  protocol { '00088/2012' }
+  object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
+  modality { Modality::TRADING }
+  judgment_form { JudgmentForm.make!(:por_item_com_menor_preco) }
+  description { 'Licitação para compra de carteiras' }
+  responsible { Employee.make!(:sobrinho) }
+  item { 'Item 1' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
+  summarized_object { "Descrição resumida do objeto" }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
-  administrative_process { AdministrativeProcess.make!(:pregao_presencial) }
   pledge_type { PledgeType::GLOBAL }
   capability { Capability.make!(:reforma) }
   expiration { 10 }
@@ -590,10 +743,18 @@ LicitationProcess.blueprint(:pregao_presencial) do
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_concurso) do
+  process { 1 }
+  protocol { '00099/2012' }
+  object_type { AdministrativeProcessObjectType::CONSTRUCTION_AND_ENGINEERING_SERVICES }
+  modality { Modality::COMPETITION }
+  judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
+  description { 'Licitação para contrução de prédio' }
+  status { AdministrativeProcessStatus::RELEASED }
+  item { 'Item 2' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
-  administrative_process { AdministrativeProcess.make!(:contrucao_de_predio) }
   pledge_type { PledgeType::GLOBAL }
   capability { Capability.make!(:reforma) }
   expiration { 10 }
@@ -623,10 +784,17 @@ LicitationProcess.blueprint(:processo_licitatorio_concurso) do
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_concorrencia) do
+  process { 2 }
+  protocol { '00099/2012' }
+  object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
+  modality { Modality::CONCURRENCE }
+  description { 'Licitação para compra de computadores' }
+  responsible { Employee.make!(:sobrinho) }
+  item { 'Item 2' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
-  administrative_process { AdministrativeProcess.make!(:compra_de_computadores) }
   pledge_type { PledgeType::GLOBAL }
   capability { Capability.make!(:reforma) }
   expiration { 10 }
@@ -657,10 +825,17 @@ LicitationProcess.blueprint(:processo_licitatorio_concorrencia) do
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_tomada_preco) do
+  process { 1 }
+  protocol { '00099/2012' }
+  object_type { AdministrativeProcessObjectType::CONSTRUCTION_AND_ENGINEERING_SERVICES }
+  modality { Modality::TAKEN_PRICE }
+  description { 'Licitação para contrução de prédio' }
+  responsible { Employee.make!(:sobrinho) }
+  item { 'Item 2' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
-  administrative_process { AdministrativeProcess.make!(:contrucao_de_predio_tomada_preco) }
   pledge_type { PledgeType::GLOBAL }
   capability { Capability.make!(:reforma) }
   expiration { 10 }
@@ -691,10 +866,18 @@ LicitationProcess.blueprint(:processo_licitatorio_tomada_preco) do
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_leilao) do
+  process { 1 }
+  protocol { '00088/2012' }
+  object_type { AdministrativeProcessObjectType::DISPOSALS_OF_ASSETS }
+  modality { Modality::AUCTION }
+  judgment_form { JudgmentForm.make!(:global_com_melhor_lance_ou_oferta) }
+  description { 'Licitação para compra de carteiras' }
+  responsible { Employee.make!(:sobrinho) }
+  item { 'Item 1' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
-  administrative_process { AdministrativeProcess.make!(:maior_lance_por_itens) }
   pledge_type { PledgeType::GLOBAL }
   capability { Capability.make!(:reforma) }
   expiration { 10 }
@@ -721,5 +904,4 @@ LicitationProcess.blueprint(:processo_licitatorio_leilao) do
   disqualify_by_maximum_value { true }
   consider_law_of_proposals { false }
   execution_type { ExecutionType::INTEGRAL }
-  judgment_form { JudgmentForm.make!(:global_com_melhor_lance_ou_oferta)}
 end

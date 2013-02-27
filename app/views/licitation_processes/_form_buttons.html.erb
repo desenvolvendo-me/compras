@@ -17,6 +17,5 @@
     <%= f.button :submit, 'data-disabled' => f.object.decorator.not_updatable_message %>
   <% end %>
 
-  <%= link_to('Processo Administrativo', edit_administrative_process_path(resource.administrative_process), :class => 'button primary') %>
-  <%= link_to('Voltar à listagem', licitation_processes_path, :class => 'button primary') %>
+  <%= f.button :back %>
 </div>

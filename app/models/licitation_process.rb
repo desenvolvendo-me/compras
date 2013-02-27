@@ -1,21 +1,24 @@
 class LicitationProcess < Compras::Model
-  attr_accessible :administrative_process_id, :capability_id, :payment_method_id,
+  attr_accessible :capability_id, :payment_method_id,
                   :year, :process_date,:readjustment_index_id, :caution_value,
                   :legal_advice, :legal_advice_date, :contract_date,
                   :contract_expiration, :observations, :envelope_delivery_date,
                   :envelope_delivery_time, :envelope_opening_date,
                   :envelope_opening_time, :document_type_ids, :type_of_calculation,
-                  :pledge_type, :administrative_process_attributes,
                   :period, :period_unit, :expiration, :expiration_unit,
                   :judgment_form_id, :delivery_location_id, :execution_type,
                   :disqualify_by_documentation_problem, :disqualify_by_maximum_value,
-                  :consider_law_of_proposals, :price_registration, :status
+                  :consider_law_of_proposals, :price_registration, :status,
+                  :responsible_id, :purchase_solicitation_id, :object_type,
+                  :date, :protocol, :item, :purchase_solicitation_item_group_id,
+                  :summarized_object, :modality, :description, :pledge_type,
+                  :administrative_process_budget_allocations_attributes
 
   auto_increment :process, :by => :year
 
   attr_readonly :process, :year, :licitation_number
 
-  attr_modal :process, :year, :process_date, :licitation_number, :administrative_process_id
+  attr_modal :process, :year, :process_date, :licitation_number
 
   has_enumeration_for :legal_advice, :with => LicitationProcessLegalAdvice
   has_enumeration_for :pledge_type
@@ -24,13 +27,18 @@ class LicitationProcess < Compras::Model
   has_enumeration_for :period_unit, :with => PeriodUnit
   has_enumeration_for :status, :with => LicitationProcessStatus, :create_helpers => true
   has_enumeration_for :execution_type
+  has_enumeration_for :modality, :create_helpers => true, :create_scopes => true
+  has_enumeration_for :object_type, :with => AdministrativeProcessObjectType,
+                      :create_helpers => true
 
-  belongs_to :administrative_process
   belongs_to :capability
-  belongs_to :payment_method
-  belongs_to :readjustment_index, :class_name => 'Indexer'
-  belongs_to :judgment_form
   belongs_to :delivery_location
+  belongs_to :judgment_form
+  belongs_to :payment_method
+  belongs_to :purchase_solicitation
+  belongs_to :purchase_solicitation_item_group
+  belongs_to :readjustment_index, :class_name => 'Indexer'
+  belongs_to :responsible, :class_name => 'Employee'
 
   has_and_belongs_to_many :document_types, :join_table => :compras_document_types_compras_licitation_processes
 
@@ -48,34 +56,28 @@ class LicitationProcess < Compras::Model
   has_many :licitation_process_ratifications, :dependent => :restrict, :order => :id
   has_many :classifications, :through => :bidders, :class_name => 'LicitationProcessClassification',
            :source => :licitation_process_classifications
+  has_many :administrative_process_budget_allocations, :dependent => :destroy, :order => :id
+  has_many :items, :through => :administrative_process_budget_allocations, :order => :id
 
   has_one :trading, :dependent => :restrict
-  has_one :purchase_solicitation, :through => :administrative_process
-  has_one :purchase_solicitation_item_group, :through => :administrative_process
 
-  accepts_nested_attributes_for :administrative_process, :allow_destroy => true
+  accepts_nested_attributes_for :administrative_process_budget_allocations, :allow_destroy => true
 
-  delegate :modality, :modality_humanize, :object_type_humanize, :trading?,
-           :released?, :judgment_form, :description, :responsible,
-           :item, :licitation_process, :date, :object_type, :judgment_form_kind,
-           :summarized_object,
-           :to => :administrative_process, :allow_nil => true, :prefix => true
+  delegate :kind, :best_technique?, :technical_and_price?,
+           :to => :judgment_form, :allow_nil => true, :prefix => true
   delegate :delivery_location, :to => :purchase_solicitation, :allow_nil => true,
            :prefix => true
   delegate :licitation_kind, :to => :judgment_form, :allow_nil => true, :prefix => true
 
-  validates :process_date, :administrative_process, :capability, :period,
+  validates :process_date, :capability, :period,
             :period_unit, :expiration, :expiration_unit, :payment_method,
             :envelope_delivery_time, :year, :envelope_delivery_date,
-            :pledge_type, :type_of_calculation, :execution_type, :presence => true
-  validate :total_of_administrative_process_budget_allocations_items_must_be_less_or_equal_to_value
-  validate :administrative_process_must_not_belong_to_another_licitation_process
+            :pledge_type, :type_of_calculation, :execution_type, :object_type,
+            :modality, :judgment_form_id, :responsible, :description,
+            :presence => true
   validate :validate_type_of_calculation_by_judgment_form_kind
   validate :validate_type_of_calculation_by_object_type
   validate :validate_type_of_calculation_by_modality
-  validate :validate_administrative_process_status
-  validate :validate_administrative_process
-  validate :validate_administrative_process_allow_licitation_process
   validate :validate_bidders_before_edital_publication
   validate :validate_updates, :unless => :updatable?
   validate :validate_envelope_opening_date, :on => :update
@@ -102,12 +104,6 @@ class LicitationProcess < Compras::Model
         :type => :time,
         :on => :update
       }
-    allowing_blank.validates :process_date,
-      :timeliness => {
-        :on_or_after => :administrative_process_date,
-        :on_or_after_message => :should_be_on_or_after_administrative_process_date,
-        :type => :date
-      }
   end
 
   before_update :assign_bidders_documents
@@ -116,10 +112,6 @@ class LicitationProcess < Compras::Model
   filterize
 
   scope :with_price_registrations, where { price_registration.eq true }
-
-  scope :trading, lambda {
-    joins { administrative_process }.merge(AdministrativeProcess.trading)
-  }
 
   scope :without_trading, lambda { |except_id|
     joins { trading.outer }.
@@ -220,51 +212,15 @@ class LicitationProcess < Compras::Model
   protected
 
   def available_for_licitation_process_classification?
-    Modality.available_for_licitation_process_classification.include?(administrative_process_modality)
-  end
-
-  def validate_administrative_process_status
-    unless administrative_process_released?
-      errors.add(:administrative_process, :status_must_be_released)
-    end
-  end
-
-  def validate_administrative_process
-    return unless administrative_process.try(:licitation_process)
-
-    if administrative_process.licitation_process == self
-      return
-    end
-
-    errors.add(:administrative_process, :already_have_a_licitation_process)
+    Modality.available_for_licitation_process_classification.include?(modality)
   end
 
   def last_licitation_number_of_self_year_and_modality
     self.class.
-    joins { administrative_process }.
     where { |licitation_process|
-      licitation_process.year.eq(year) & licitation_process.administrative_process.modality.eq(administrative_process.modality)
+      licitation_process.year.eq(year) & licitation_process.modality.eq(modality)
     }.
     maximum(:licitation_number).to_i
-  end
-
-  def total_of_administrative_process_budget_allocations_items_must_be_less_or_equal_to_value(numeric_parser = ::I18n::Alchemy::NumericParser)
-    return if administrative_process_budget_allocations.blank?
-
-    administrative_process_budget_allocations.each do |apba|
-      if apba.total_items_value > apba.value
-        errors.add(:administrative_process_budget_allocations)
-        apba.errors.add(:total_items_value, :less_than_or_equal_to_predicted_value, :count => numeric_parser.localize(apba.value))
-      end
-    end
-  end
-
-  def administrative_process_must_not_belong_to_another_licitation_process
-    return if administrative_process.nil? || administrative_process_licitation_process == self
-
-    unless administrative_process_licitation_process.nil?
-      errors.add(:administrative_process, :taken)
-    end
   end
 
   def assign_bidders_documents
@@ -277,34 +233,26 @@ class LicitationProcess < Compras::Model
   end
 
   def validate_type_of_calculation_by_judgment_form_kind(verificator = LicitationProcessTypesOfCalculationByJudgmentFormKind.new)
-    return if type_of_calculation.nil? || administrative_process_judgment_form_kind.nil?
+    return if type_of_calculation.nil? || judgment_form_kind.nil?
 
-    unless verificator.correct_type_of_calculation?(administrative_process_judgment_form_kind, type_of_calculation)
+    unless verificator.correct_type_of_calculation?(judgment_form_kind, type_of_calculation)
       errors.add(:type_of_calculation, :not_permited_for_judgment_form_kind, :kind => LicitationProcessTypeOfCalculation.t(type_of_calculation))
     end
   end
 
   def validate_type_of_calculation_by_object_type(verificator = LicitationProcessTypesOfCalculationByObjectType.new)
-    return if type_of_calculation.nil? || administrative_process_object_type.nil?
+    return if type_of_calculation.nil? || object_type.nil?
 
-    unless verificator.correct_type_of_calculation?(administrative_process_object_type, type_of_calculation)
+    unless verificator.correct_type_of_calculation?(object_type, type_of_calculation)
       errors.add(:type_of_calculation, :not_permited_for_object_type, :kind => LicitationProcessTypeOfCalculation.t(type_of_calculation))
     end
   end
 
   def validate_type_of_calculation_by_modality(verificator = LicitationProcessTypesOfCalculationByModality.new)
-    return if type_of_calculation.nil? || administrative_process_modality.nil?
+    return if type_of_calculation.nil? || modality.nil?
 
-    unless verificator.correct_type_of_calculation?(administrative_process_modality, type_of_calculation)
+    unless verificator.correct_type_of_calculation?(modality, type_of_calculation)
       errors.add(:type_of_calculation, :not_permited_for_modality, :kind => LicitationProcessTypeOfCalculation.t(type_of_calculation))
-    end
-  end
-
-  def validate_administrative_process_allow_licitation_process
-    return if administrative_process.nil?
-
-    unless administrative_process.allow_licitation_process?
-      errors.add(:administrative_process, :not_allow_licitation_process)
     end
   end
 

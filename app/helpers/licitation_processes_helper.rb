@@ -1,13 +1,5 @@
 # encoding: utf-8
 module LicitationProcessesHelper
-  def new_title
-    "#{t("#{controller_name}.new", :resource => singular, :cascade => true)} no Processo Administrativo #{resource.administrative_process}"
-  end
-
-  def edit_title
-    "Editar Processo Licitatório #{resource} do Processo Administrativo #{resource.administrative_process}"
-  end
-
   def classification_link
     return unless resource.persisted?
 

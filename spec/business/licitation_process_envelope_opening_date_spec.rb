@@ -9,7 +9,7 @@ describe LicitationProcessEnvelopeOpeningDate do
   let(:licitation_process) do
     double(:licitation_process,
       :envelope_opening_date => Date.today, :last_publication_date => Date.today,
-      :administrative_process_modality => :competition, :execution_type => :integral,
+      :modality => :competition, :execution_type => :integral,
       :judgment_form_licitation_kind => :best_technique)
   end
 
@@ -27,7 +27,7 @@ describe LicitationProcessEnvelopeOpeningDate do
 
     describe "competition" do
       before do
-        licitation_process.stub(:administrative_process_modality).and_return :competition
+        licitation_process.stub(:modality).and_return :competition
       end
 
       it "is valid when the days difference is greater 45 days" do
@@ -46,7 +46,7 @@ describe LicitationProcessEnvelopeOpeningDate do
 
     describe "concurrence" do
       before do
-        licitation_process.stub(:administrative_process_modality).and_return :concurrence
+        licitation_process.stub(:modality).and_return :concurrence
       end
 
       context "integral execution type" do
@@ -92,7 +92,7 @@ describe LicitationProcessEnvelopeOpeningDate do
 
     describe "taken price" do
       before do
-        licitation_process.stub(:administrative_process_modality).and_return :taken_price
+        licitation_process.stub(:modality).and_return :taken_price
       end
 
       context "licitation kind is best technique" do
@@ -136,7 +136,7 @@ describe LicitationProcessEnvelopeOpeningDate do
 
     describe "auction" do
       before do
-        licitation_process.stub(:administrative_process_modality).and_return :auction
+        licitation_process.stub(:modality).and_return :auction
       end
 
       it "is valid when working days difference is greater than 15 days" do
@@ -155,7 +155,7 @@ describe LicitationProcessEnvelopeOpeningDate do
 
     describe "trading" do
       before do
-        licitation_process.stub(:administrative_process_modality).and_return :trading
+        licitation_process.stub(:modality).and_return :trading
       end
 
       it "is valid when working days difference is greater than 8 days" do
@@ -174,7 +174,7 @@ describe LicitationProcessEnvelopeOpeningDate do
 
     describe "invitation" do
       before do
-        licitation_process.stub(:administrative_process_modality).and_return :invitation
+        licitation_process.stub(:modality).and_return :invitation
       end
 
       it "is valid when working days difference is greater than 5 days" do

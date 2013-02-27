@@ -1,8 +1,17 @@
-<div id="budget-allocations">
-  <%= f.association :administrative_process, :collection => (f.object.administrative_process || AdministrativeProcess.new) do |a| %>
-    <%= a.input :id, :as => 'hidden' %>
-    <%= a.association :administrative_process_budget_allocations, :collection => localized(a.object.administrative_process_budget_allocations) do |p| %>
-      <%= render 'licitation_process_budget_allocations/form', :f => p, :data_disabled => f.object.decorator.not_updatable_message %>
+<div id="budget_allocations">
+  <p>
+    <input type="button" class="button affirmative add-administrative-process-budget-allocation" value="Adicionar Dotação">
+  </p>
+
+  <div id="administrative-process-budget-allocation" data-nested-form="administrative-process-budget-allocation" data-append-item=false>
+    <%= f.association :administrative_process_budget_allocations, :collection => localized(f.object.administrative_process_budget_allocations) do |p| %>
+      <%= render 'administrative_process_budget_allocations/form', :f => p, :data_disabled => f.object.decorator.not_updatable_message %>
+    <% end %>
+  </div>
+
+  <%= mustache 'administrative-process-budget-allocation-template' do %>
+    <%= f.association :administrative_process_budget_allocations_attributes, :collection => f.object.administrative_process_budget_allocations.build, :index => '{{uuid-administrative-process-budget-allocation}}' do |p| %>
+      <%= render 'administrative_process_budget_allocations/form', :f => p, :data_disabled => f.object.decorator.not_updatable_message %>
     <% end %>
   <% end %>
 </div>

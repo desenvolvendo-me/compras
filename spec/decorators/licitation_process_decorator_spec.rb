@@ -61,7 +61,7 @@ describe LicitationProcessDecorator do
     context "licitation process has a 'trading' modality" do
 
       before do
-        component.stub(:administrative_process_trading? => true)
+        component.stub(:trading? => true)
       end
 
       it "returns the associated trading path if it exists" do
@@ -80,7 +80,7 @@ describe LicitationProcessDecorator do
     end
 
     it "returns the licitation process type otherwise" do
-      component.stub(:administrative_process_trading? => false)
+      component.stub(:trading? => false)
 
       expect(subject.edit_path(routes)).to eq 'licitation_process_link'
     end
@@ -91,7 +91,7 @@ describe LicitationProcessDecorator do
     context "licitation process has a 'trading' modality" do
 
       before do
-        component.stub(:administrative_process_trading? => true)
+        component.stub(:trading? => true)
       end
 
       it "returns 'Voltar ao pregão presencial' if there is a associated trading" do
@@ -109,7 +109,7 @@ describe LicitationProcessDecorator do
     end
 
     it "returns 'Voltar ao processo licitatório' otherwise" do
-      component.stub(:administrative_process_trading? => false)
+      component.stub(:trading? => false)
 
       expect(subject.edit_link).to eq 'Voltar ao processo licitatório'
     end
@@ -190,11 +190,10 @@ describe LicitationProcessDecorator do
       expect(described_class.headers?).to be_true
     end
 
-    it 'should have code_and_year, administrative_process_code_and_year, administrative_process_licitation_modality, administrative_process_object_type_humanize and envelope_opening_date' do
+    it 'should have code_and_year, modality, object_type and envelope_opening_date' do
       expect(described_class.header_attributes).to include :code_and_year
-      expect(described_class.header_attributes).to include :administrative_process_code_and_year
-      expect(described_class.header_attributes).to include :administrative_process_modality_humanize
-      expect(described_class.header_attributes).to include :administrative_process_object_type_humanize
+      expect(described_class.header_attributes).to include :modality
+      expect(described_class.header_attributes).to include :object_type
       expect(described_class.header_attributes).to include :envelope_opening_date
       expect(described_class.header_attributes).to include :status
     end
@@ -279,17 +278,6 @@ describe LicitationProcessDecorator do
 
     it "should return code/year" do
       expect(subject.code_and_year).to eq "1/2012"
-    end
-  end
-
-  describe '#administrative_process_code_and_year' do
-    it 'should return administrative_process code_and_year' do
-      decorator = double(:decorator, :code_and_year => '1/2013')
-      administrative_process = double(:administrative_process, :decorator => decorator)
-
-      component.stub(:administrative_process => administrative_process)
-
-      expect(subject.administrative_process_code_and_year).to eq '1/2013'
     end
   end
 

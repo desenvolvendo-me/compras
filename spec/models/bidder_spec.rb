@@ -42,7 +42,6 @@ describe Bidder do
     it { should delegate(:ratification?).to(:licitation_process).prefix(true) }
     it { should delegate(:has_trading?).to(:licitation_process).prefix(true) }
 
-    it { should delegate(:administrative_process).to(:licitation_process).allowing_nil(true) }
     it { should delegate(:envelope_opening?).to(:licitation_process).allowing_nil(true) }
     it { should delegate(:items).to(:licitation_process).allowing_nil(true) }
     it { should delegate(:allow_bidders?).to(:licitation_process).allowing_nil(true) }
@@ -56,27 +55,27 @@ describe Bidder do
 
   context "licitation kind" do
     before do
-      subject.stub(:administrative_process => administrative_process)
+      subject.stub(:licitation_process => licitation_process)
     end
 
-    let :administrative_process do
-      double('administrative_process')
+    let :licitation_process do
+      double('licitation_process', :allow_bidders? => true, :ratification? => true)
     end
 
     it "should validate technical_score when licitation kind is best_technique" do
-      administrative_process.stub(:judgment_form_best_technique?).and_return(true)
+      licitation_process.stub(:judgment_form_best_technique?).and_return(true)
       should validate_presence_of(:technical_score)
     end
 
     it "should validate technical_score when licitation kind is technical_and_price" do
-      administrative_process.stub(:judgment_form_best_technique?).and_return(false)
-      administrative_process.stub(:judgment_form_technical_and_price?).and_return(true)
+      licitation_process.stub(:judgment_form_best_technique?).and_return(false)
+      licitation_process.stub(:judgment_form_technical_and_price?).and_return(true)
       should validate_presence_of(:technical_score)
     end
 
     it "should not validate technical_score when licitation kind is not best_technique or technical_and_price" do
-      administrative_process.stub(:judgment_form_best_technique?).and_return(false)
-      administrative_process.stub(:judgment_form_technical_and_price?).and_return(false)
+      licitation_process.stub(:judgment_form_best_technique?).and_return(false)
+      licitation_process.stub(:judgment_form_technical_and_price?).and_return(false)
       should_not validate_presence_of(:technical_score)
     end
   end
@@ -123,6 +122,7 @@ describe Bidder do
   context 'valitation licitation_process_ratification' do
     let(:licitation_process) do
       double(:licitation_process, :administrative_process => nil,
+             :judgment_form_best_technique? => true,
              :allow_bidders? => true, :to_s => '1/2012')
     end
 
@@ -243,7 +243,7 @@ describe Bidder do
     end
 
     let :licitation_process do
-      double('licitation_process', :administrative_process => nil, :ratification? => false)
+      double('licitation_process', :ratification? => false, :judgment_form_best_technique? => true)
     end
 
     it "should not allow changes if licitation_process does not allow_bidders" do

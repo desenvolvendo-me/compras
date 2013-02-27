@@ -6,10 +6,9 @@ builder resource, json do
   json.envelope_opening_time                    resource.decorator.envelope_opening_time
   json.advice_number                            resource.decorator.advice_number
   json.process_date                             resource.process_date
-  json.administrative_process_modality_humanize resource.administrative_process_modality_humanize.to_s
-  json.administrative_process_description       resource.administrative_process_description
-  json.administrative_process                   resource.administrative_process.to_s
-  json.summarized_object                        resource.administrative_process_summarized_object
+  json.modality_humanize                        resource.modality_humanize.to_s
+  json.description                              resource.description
+  json.summarized_object                        resource.summarized_object
   json.execution_type_humanize                  resource.execution_type_humanize
 
   json.items resource.items do |json, item|

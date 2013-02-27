@@ -2,9 +2,9 @@
 require 'model_helper'
 require 'lib/signable'
 require 'app/models/licitation_process'
-require 'app/models/administrative_process'
 require 'app/models/capability'
 require 'app/models/payment_method'
+require 'app/models/administrative_process_budget_allocation'
 require 'app/models/licitation_process_publication'
 require 'app/models/bidder'
 require 'app/models/licitation_process_impugnment'
@@ -40,12 +40,14 @@ describe LicitationProcess do
     expect(subject.to_s).to eq '1/2012'
   end
 
-  it { should belong_to :administrative_process }
   it { should belong_to :capability }
   it { should belong_to :payment_method }
   it { should belong_to :readjustment_index }
   it { should belong_to :judgment_form }
   it { should belong_to :delivery_location }
+  it { should belong_to :purchase_solicitation }
+  it { should belong_to :purchase_solicitation_item_group }
+  it { should belong_to :responsible }
 
   it { should have_and_belong_to_many(:document_types) }
   it { should have_many(:licitation_notices).dependent(:destroy) }
@@ -62,29 +64,27 @@ describe LicitationProcess do
   it { should have_many(:licitation_process_ratifications).dependent(:restrict) }
   it { should have_many(:classifications).through(:bidders) }
   it { should have_many(:classifications).through(:bidders) }
+  it { should have_many(:administrative_process_budget_allocations).dependent(:destroy) }
+  it { should have_many(:items).through(:administrative_process_budget_allocations) }
 
   it { should have_one(:trading).dependent(:restrict) }
-  it { should have_one(:purchase_solicitation) }
-  it { should have_one(:purchase_solicitation_item_group) }
-
-  it { should delegate(:summarized_object).to(:administrative_process).prefix(true) }
-  it { should delegate(:delivery_location).to(:purchase_solicitation).prefix(true) }
-  it { should delegate(:licitation_kind).to(:judgment_form).prefix(true).allowing_nil(true) }
 
   it { should validate_presence_of :year }
   it { should validate_presence_of :process_date }
-  it { should validate_presence_of :administrative_process }
-  it { should validate_presence_of :capability }
-  it { should validate_presence_of :expiration }
-  it { should validate_presence_of :expiration_unit }
   it { should validate_presence_of :period }
-  it { should validate_presence_of :period_unit }
-  it { should validate_presence_of :payment_method }
-  it { should validate_presence_of :envelope_delivery_date }
-  it { should validate_presence_of :envelope_delivery_time }
+  it { should validate_presence_of :capability }
   it { should validate_presence_of :pledge_type }
   it { should validate_presence_of :type_of_calculation }
   it { should validate_presence_of :execution_type }
+  it { should validate_presence_of :object_type }
+  it { should validate_presence_of :modality }
+  it { should validate_presence_of :judgment_form_id }
+  it { should validate_presence_of :responsible }
+  it { should validate_presence_of :description }
+  it { should validate_presence_of :expiration }
+  it { should validate_presence_of :expiration_unit }
+  it { should validate_presence_of :period_unit }
+  it { should validate_presence_of :payment_method }
 
   it { should_not validate_presence_of :envelope_opening_date }
   it { should_not validate_presence_of :envelope_opening_time }
@@ -194,29 +194,6 @@ describe LicitationProcess do
     end
   end
 
-  context 'validate process_date related with administrative_process_date' do
-    let :administrative_process_date do
-      Date.current + 10.days
-    end
-
-    before do
-      subject.stub(:administrative_process_date).and_return(administrative_process_date)
-    end
-
-    it 'should allow process_date after administrative_process_date' do
-      expect(subject).to allow_value(Date.current + 15.days).for(:process_date)
-    end
-
-    it 'should allow process_date equals to administrative_process_date' do
-      expect(subject).to allow_value(administrative_process_date).for(:process_date)
-    end
-
-    it 'should not allow process_date before administrative_process_date' do
-      expect(subject).not_to allow_value(Date.current).for(:process_date).
-                                                   with_message("deve ser igual ou posterior a data do processo administrativo (#{I18n.l administrative_process_date})")
-    end
-  end
-
   it "validates if bidders where added before publication" do
     subject.stub(:bidders => [double])
 
@@ -287,7 +264,7 @@ describe LicitationProcess do
   end
 
   it "should validate type_of_calculation by judgment_form_kind" do
-    subject.stub(:administrative_process_judgment_form_kind).and_return('any')
+    subject.stub(:judgment_form_kind).and_return('any')
     subject.stub(:type_of_calculation).and_return('lowest_total_price_by_item')
 
     LicitationProcessTypesOfCalculationByJudgmentFormKind.any_instance.stub(:correct_type_of_calculation?).and_return(false)
@@ -304,7 +281,7 @@ describe LicitationProcess do
   end
 
   it "should validate type_of_calculation by object type" do
-    subject.stub(:administrative_process_object_type).and_return('any')
+    subject.stub(:object_type).and_return('any')
     subject.stub(:type_of_calculation).and_return('lowest_total_price_by_item')
 
     LicitationProcessTypesOfCalculationByObjectType.any_instance.stub(:correct_type_of_calculation?).and_return(false)
@@ -322,7 +299,7 @@ describe LicitationProcess do
 
   describe 'validate type_of_calculation by modality' do
     it 'should not allow lowest_total_price_by_item as type_of_calculation when modality is trading' do
-      subject.stub(:administrative_process_modality => Modality::TRADING)
+      subject.stub(:modality => Modality::TRADING)
       subject.stub(:type_of_calculation => LicitationProcessTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM)
 
       LicitationProcessTypesOfCalculationByModality.
@@ -336,7 +313,7 @@ describe LicitationProcess do
     end
 
     it 'should allow lowest_total_price_by_item as type_of_calculation when modality is trading' do
-      subject.stub(:administrative_process_modality => Modality::TRADING)
+      subject.stub(:modality => Modality::TRADING)
       subject.stub(:type_of_calculation => LicitationProcessTypeOfCalculation::SORT_PARTICIPANTS_BY_ITEM)
 
       LicitationProcessTypesOfCalculationByModality.
@@ -350,7 +327,7 @@ describe LicitationProcess do
     end
 
     it 'should allow lowest_global_price as type_of_calculation when modality is auction' do
-      subject.stub(:administrative_process_modality => Modality::AUCTION)
+      subject.stub(:modality => Modality::AUCTION)
       subject.stub(:type_of_calculation => LicitationProcessTypeOfCalculation::LOWEST_GLOBAL_PRICE)
 
       LicitationProcessTypesOfCalculationByModality.
@@ -364,7 +341,7 @@ describe LicitationProcess do
     end
 
     it 'should allow lowest_global_price as type_of_calculation when modality is auction' do
-      subject.stub(:administrative_process_modality => Modality::AUCTION)
+      subject.stub(:modality => Modality::AUCTION)
       subject.stub(:type_of_calculation => LicitationProcessTypeOfCalculation::LOWEST_PRICE_BY_LOT)
 
       LicitationProcessTypesOfCalculationByModality.
@@ -378,7 +355,7 @@ describe LicitationProcess do
     end
 
     it 'should not allow lowest_total_price_by_item as type_of_calculation when modality is auction' do
-      subject.stub(:administrative_process_modality => Modality::AUCTION)
+      subject.stub(:modality => Modality::AUCTION)
       subject.stub(:type_of_calculation => LicitationProcessTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM)
 
       LicitationProcessTypesOfCalculationByModality.
@@ -396,88 +373,6 @@ describe LicitationProcess do
     subject.stub(:items).and_return(true)
     subject.items.stub(:without_lot?).and_return(false)
     expect(subject).to be_filled_lots
-  end
-
-  it "should validate administrative_process_status" do
-    subject.stub(:administrative_process_released?).and_return(false)
-
-    subject.valid?
-
-    expect(subject.errors[:administrative_process]).to include 'o status deve ser liberado'
-
-    subject.stub(:administrative_process_released?).and_return(true)
-
-    subject.valid?
-
-    expect(subject.errors[:administrative_process]).to_not include 'o status deve ser liberado'
-  end
-
-  context "with adminsitrative process" do
-    before do
-      subject.stub(:administrative_process => administrative_process)
-    end
-
-    let :administrative_process do
-      double('administrative_process',
-             :administrative_process_budget_allocations => [],
-             :released? => true
-      )
-    end
-
-    let :licitation_process do
-      double('licitation_process')
-    end
-
-    it "should not be valid if administrative process does not allow licitation process" do
-      administrative_process.stub(:allow_licitation_process? => false)
-      administrative_process.stub(:licitation_process => nil)
-
-      subject.stub(:administrative_process => administrative_process)
-
-      subject.valid?
-
-      expect(subject.errors[:administrative_process]).to include 'não permite processo licitatório'
-    end
-
-    it 'should validate that selected administrative process is available' do
-      expect(subject.errors.messages[:administrative_process]).to be_nil
-
-      subject.stub(:administrative_process_licitation_process).and_return(true)
-
-      administrative_process.stub(:licitation_process => licitation_process)
-      administrative_process.stub(:allow_licitation_process? => true)
-
-      subject.valid?
-
-      expect(subject.errors.messages[:administrative_process]).to include 'já está em uso'
-    end
-
-    it "should not be valid if administrative_process have another licitation_process" do
-      administrative_process.stub(:licitation_process => licitation_process)
-      administrative_process.stub(:allow_licitation_process? => true)
-
-      subject.valid?
-
-      expect(subject.errors[:administrative_process]).to include "já tem um processo licitatório"
-    end
-
-    it "should be valid if administrative_process have the current licitation_process" do
-      administrative_process.stub(:licitation_process => subject)
-      administrative_process.stub(:allow_licitation_process? => true)
-
-      subject.valid?
-
-      expect(subject.errors[:administrative_process]).to_not include "já tem um processo licitatório"
-    end
-
-    it "should be valid if administrative_process do not have licitation_process" do
-      administrative_process.stub(:licitation_process => nil)
-      administrative_process.stub(:allow_licitation_process? => true)
-
-      subject.valid?
-
-      expect(subject.errors[:administrative_process]).to_not include "já tem um processo licitatório"
-    end
   end
 
   context 'lots with items' do

@@ -2,11 +2,10 @@
 require 'spec_helper'
 
 feature "LicitationProcesses" do
-  let(:current_user) { User.make!(:sobrinho) }
+  let(:current_user) { User.make!(:sobrinho_as_admin_and_employee) }
 
   background do
-    create_roles ['administrative_processes',
-                  'judgment_forms',
+    create_roles ['judgment_forms',
                   'payment_methods',
                   'indexers',
                   'capabilities',
@@ -19,24 +18,19 @@ feature "LicitationProcesses" do
   end
 
   scenario 'create a new licitation_process' do
-    administrative_process = AdministrativeProcess.make!(:compra_de_cadeiras)
-    budget_allocation = administrative_process.administrative_process_budget_allocations.first.budget_allocation
     Capability.make!(:reforma)
     PaymentMethod.make!(:dinheiro)
     DocumentType.make!(:fiscal)
-    allocation = BudgetAllocation.make!(:alocacao)
+    JudgmentForm.make!(:por_item_com_melhor_tecnica)
+    BudgetAllocation.make!(:alocacao)
     Material.make!(:antivirus)
     Indexer.make!(:xpto)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
-    within_records do
-      page.find('a').click
-    end
+    click_link 'Criar Processo Licitatório'
 
-    click_link 'Novo processo licitatório'
-
-    expect(page).to have_content "Criar Processo Licitatório no Processo Administrativo 1/2012"
+    expect(page).to have_content "Criar Processo"
 
     expect(page).to_not have_link 'Publicações'
 
@@ -47,13 +41,8 @@ feature "LicitationProcesses" do
     within_tab 'Principal' do
       expect(page).to have_disabled_field 'Processo'
       expect(page).to have_disabled_field 'Modalidade'
-      expect(page).to have_disabled_field 'Tipo de objeto'
-      expect(page).to have_disabled_field 'Objeto do processo licitatório'
-      expect(page).to have_disabled_field 'Responsável'
-      expect(page).to have_disabled_field 'Inciso'
       expect(page).to have_disabled_field 'Data da homologação'
       expect(page).to have_disabled_field 'Data da adjudicação'
-      expect(page).to have_disabled_field 'Processo administrativo'
       expect(page).to have_disabled_field 'Data da abertura dos envelopes'
       expect(page).to have_disabled_field 'Hora da abertura'
 
@@ -61,13 +50,12 @@ feature "LicitationProcesses" do
       fill_in 'Data do processo', :with => '21/03/2012'
       select 'Global', :from => 'Tipo de empenho'
 
-      # testing delegated fields of administrative process (filled by javascript)
-      expect(page).to have_field 'Modalidade', :with => 'Concorrência'
-      expect(page).to have_field 'Tipo de objeto', :with => 'Compras e serviços'
-      expect(page).to have_select 'Forma de julgamento', :selected => 'Por Item com Melhor Técnica'
-      expect(page).to have_field 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
-      expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
-      expect(page).to have_field 'Inciso', :with => 'Item 1'
+      select 'Compras e serviços', :from => 'Tipo de objeto'
+      select 'Concorrência', :from => 'Modalidade'
+      select 'Por Item com Melhor Técnica', :from =>'Forma de julgamento'
+      fill_in 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
+      fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
+      fill_in 'Inciso', :with => 'Item 1'
 
       check 'Registro de preço'
       select 'Menor preço total por item', :from => 'Tipo da apuração'
@@ -94,10 +82,11 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Dotações' do
-      expect(page).to have_field 'Dotação orçamentária', :with => budget_allocation.to_s
-      expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
-      expect(page).to have_field 'Saldo da dotação', :with => '500,00'
-      expect(page).to have_field 'Valor previsto', :with => '20,00'
+      click_button 'Adicionar Dotação'
+
+      fill_modal 'Dotação orçamentária', :with => '1', :field => 'Código'
+
+      fill_in 'Valor previsto', :with => '20,00'
 
       click_button 'Adicionar Item'
 
@@ -129,14 +118,12 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Processo', :with => '1'
       expect(page).to have_field 'Ano', :with => '2012'
       expect(page).to have_field 'Data do processo', :with => '21/03/2012'
-      expect(page).to have_field 'Processo administrativo', :with => '1/2012'
       expect(page).to have_select 'Tipo de empenho', :selected => 'Global'
       expect(page).to_not have_disabled_field 'Data da abertura dos envelopes'
       expect(page).to_not have_disabled_field 'Hora da abertura'
 
-      # testing delegated fields of administrative process
-      expect(page).to have_field 'Modalidade', :with => 'Concorrência'
-      expect(page).to have_field 'Tipo de objeto', :with => 'Compras e serviços'
+      expect(page).to have_select 'Modalidade', :selected => 'Concorrência'
+      expect(page).to have_select 'Tipo de objeto', :selected => 'Compras e serviços'
       expect(page).to have_select 'Forma de julgamento', :selected => 'Por Item com Melhor Técnica'
       expect(page).to have_field 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
       expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
@@ -174,7 +161,7 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Dotações' do
-      expect(page).to have_field 'Dotação orçamentária', :with => budget_allocation.to_s
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
       expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
       expect(page).to have_field 'Saldo da dotação', :with => '500,00'
       expect(page).to have_field 'Valor previsto', :with => '20,00'
@@ -195,30 +182,26 @@ feature "LicitationProcesses" do
   end
 
   scenario 'changing judgment form' do
-    administrative_process = AdministrativeProcess.make!(:compra_de_cadeiras)
-    budget_allocation = administrative_process.administrative_process_budget_allocations.first.budget_allocation
     Capability.make!(:reforma)
     PaymentMethod.make!(:dinheiro)
     DocumentType.make!(:fiscal)
-    allocation = BudgetAllocation.make!(:alocacao)
+    BudgetAllocation.make!(:alocacao)
     Material.make!(:antivirus)
     Indexer.make!(:xpto)
     JudgmentForm.make!(:por_lote_com_melhor_tecnica)
     JudgmentForm.make!(:por_item_com_menor_preco)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
-    within_records do
-      page.find('a').click
-    end
+    click_link 'Criar Processo Licitatório'
 
-    click_link 'Novo processo licitatório'
-
-    expect(page).to have_content "Criar Processo Licitatório no Processo Administrativo 1/2012"
+    expect(page).to have_title "Criar Processo Licitatório"
 
     expect(page).to_not have_link 'Publicações'
 
     within_tab 'Principal' do
+      select 'Compras e serviços', :from => 'Tipo de objeto'
+      select 'Concorrência', :from => 'Modalidade'
       select 'Por Lote com Melhor Técnica', :from => 'Forma de julgamento'
       select 'Menor preço por lote', :from => 'Tipo da apuração'
 
@@ -230,23 +213,19 @@ feature "LicitationProcesses" do
 
   scenario 'update an existent licitation_process' do
     LicitationProcess.make!(:processo_licitatorio)
-    administrative_process = AdministrativeProcess.make!(:compra_de_computadores)
-    budget_allocation = administrative_process.administrative_process_budget_allocations.first.budget_allocation
     Capability.make!(:construcao)
     PaymentMethod.make!(:cheque)
     DocumentType.make!(:oficial)
     Material.make!(:arame_farpado)
     Indexer.make!(:selic)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
-      page.find('a').click
+      click_link '1/2012'
     end
 
-    click_link 'Editar processo licitatório'
-
-    expect(page).to have_title "Editar Processo Licitatório 1/2012 do Processo Administrativo 1/2012"
+    expect(page).to have_title "Editar Processo Licitatório"
     expect(page).to have_subtitle "1/2012"
 
     expect(page).to have_link 'Publicações'
@@ -309,7 +288,6 @@ feature "LicitationProcesses" do
 
     within_tab 'Principal' do
       expect(page).to have_field 'Data do processo', :with => '21/03/2013'
-      expect(page).to have_field 'Processo administrativo', :with => '1/2012'
       expect(page).to have_select 'Tipo de empenho', :selected => 'Estimativo'
       expect(page).to have_select 'Tipo da apuração', :selected => 'Menor preço total por item'
       expect(page).to have_select 'Forma de execução', :selected => 'Empreitada integral'
@@ -340,7 +318,7 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Dotações' do
-      expect(page).to have_field 'Dotação orçamentária', :with => budget_allocation.to_s
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
       expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
       expect(page).to have_field 'Saldo da dotação', :with => '500,00'
       expect(page).to have_field 'Valor previsto', :with => '20,00'
@@ -360,45 +338,14 @@ feature "LicitationProcesses" do
     end
   end
 
-  scenario 'budget allocation with total of items diferent than value should not be saved' do
-    LicitationProcess.make!(:processo_licitatorio)
-
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
-
-    within_records do
-      page.find('a').click
-    end
-
-    click_link 'Editar processo licitatório'
-
-    within_tab 'Dotações' do
-      expect(page).to have_field 'Valor previsto', :with => "20,00"
-      expect(page).to have_field 'Valor total dos itens', :with => "20,00"
-
-      fill_in 'Valor total', :with => '21,00'
-
-      expect(page).to have_field 'Valor total dos itens', :with => "21,00"
-    end
-
-    click_button 'Salvar'
-
-    within_tab 'Dotações' do
-      expect(page).to have_content 'deve ser menor ou igual ao valor previsto (R$ 20,00)'
-    end
-  end
-
   scenario 'calculating total of items via javascript' do
-    administrative_process = AdministrativeProcess.make!(:compra_de_cadeiras)
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
-
-    within_records do
-      page.find('a').click
-    end
-
-    click_link 'Novo processo licitatório'
+    click_link 'Criar Processo Licitatório'
 
     within_tab 'Dotações' do
+      click_button 'Adicionar Dotação'
+
       click_button 'Adicionar Item'
 
       fill_in 'Quantidade', :with => '5'
@@ -427,13 +374,11 @@ feature "LicitationProcesses" do
     LicitationProcess.make!(:processo_licitatorio_computador)
     DocumentType.make!(:oficial)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
-      page.find('a').click
+      click_link '2/2013'
     end
-
-    click_link 'Editar processo licitatório'
 
     click_link 'Licitantes'
 
@@ -457,7 +402,7 @@ feature "LicitationProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo Licitatório 1/2013 editado com sucesso.'
+    expect(page).to have_notice 'Processo Licitatório 2/2013 editado com sucesso.'
 
     click_link 'Licitantes'
 
@@ -474,13 +419,11 @@ feature "LicitationProcesses" do
   scenario "count link should not be available when envelope opening date is not the current date" do
     LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
-      page.find('a').click
+      click_link '1/2012'
     end
-
-    click_link 'Editar processo licitatório'
 
     expect(page).to_not have_link 'Apurar'
   end
@@ -488,13 +431,11 @@ feature "LicitationProcesses" do
   scenario 'cannot show update and nested buttons when the publication is (extension, edital, edital_rectification)' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_publicacao_cancelada)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
-      page.find('a').click
+      click_link '1/2012'
     end
-
-    click_link 'Editar processo licitatório'
 
     expect(page).to have_disabled_element 'Salvar', :reason => 'a última publicação é do tipo (Cancelamento). Não pode ser alterado'
 
@@ -507,47 +448,32 @@ feature "LicitationProcesses" do
   end
 
   scenario "should not have link to lots when creating a new licitation process" do
-    AdministrativeProcess.make!(:compra_de_cadeiras)
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
-
-    within_records do
-      page.find('a').click
-    end
-
-    click_link 'Novo processo licitatório'
+    click_link 'Criar Processo Licitatório'
 
     expect(page).to_not have_link 'Lotes de itens'
   end
 
   scenario "should brings some filled fields when creating a new licitation process" do
-    AdministrativeProcess.make!(:compra_de_cadeiras)
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
-
-    within_records do
-      page.find('a').click
-    end
-
-    click_link 'Novo processo licitatório'
+    click_link 'Criar Processo Licitatório'
 
     within_tab 'Principal' do
       expect(page).to have_field 'Ano', :with => "#{Date.current.year}"
       expect(page).to have_field 'Data do processo', :with => "#{I18n.l(Date.current)}"
-      expect(page).to have_field 'Processo administrativo', :with => "1/2012"
     end
   end
 
   scenario 'budget allocation with quantity empty and total item value should have 0 as unit value' do
     LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
-      page.find('a').click
+      click_link '1/2012'
     end
-
-    click_link 'Editar processo licitatório'
 
     within_tab 'Dotações' do
       click_button 'Remover Item'
@@ -560,22 +486,16 @@ feature "LicitationProcesses" do
   end
 
   scenario 'create a new licitation_process with envelope opening date today' do
-    administrative_process = AdministrativeProcess.make!(:compra_de_cadeiras)
-    budget_allocation = administrative_process.administrative_process_budget_allocations.first.budget_allocation
     Capability.make!(:reforma)
     PaymentMethod.make!(:dinheiro)
     DocumentType.make!(:fiscal)
-    allocation = BudgetAllocation.make!(:alocacao)
+    BudgetAllocation.make!(:alocacao)
     Material.make!(:antivirus)
     Indexer.make!(:xpto)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
-    within_records do
-      page.find('a').click
-    end
-
-    click_link 'Novo processo licitatório'
+    click_link 'Criar Processo Licitatório'
 
     within_tab 'Principal' do
       select 'Global', :from => 'Tipo de empenho'
@@ -661,17 +581,13 @@ feature "LicitationProcesses" do
   end
 
   scenario 'budget allocation items should have a sequential item' do
-    administrative_process = AdministrativeProcess.make!(:compra_de_cadeiras)
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
-
-    within_records do
-      page.find('a').click
-    end
-
-    click_link 'Novo processo licitatório'
+    click_link 'Criar Processo Licitatório'
 
     within_tab 'Dotações' do
+      click_button 'Adicionar Dotação'
+
       click_button 'Adicionar Item'
 
       within '.item:last' do
@@ -743,7 +659,7 @@ feature "LicitationProcesses" do
     click_button "Pesquisar"
 
     within_records do
-      click_link "1/2013"
+      click_link "2/2013"
     end
 
     within_tab "Principal" do
@@ -772,7 +688,6 @@ feature "LicitationProcesses" do
 
     within_records do
       expect(page).to have_content 'Código/Ano'
-      expect(page).to have_content 'Processo administrativo'
       expect(page).to have_content 'Modalidade'
       expect(page).to have_content 'Tipo de objeto'
       expect(page).to have_content 'Data da abertura dos envelopes'
@@ -802,7 +717,7 @@ feature "LicitationProcesses" do
     click_button "Pesquisar"
 
     within_records do
-      page.find('a').click
+      click_link '1/2012'
     end
 
     expect(page).to_not have_button 'Relatório'
@@ -837,7 +752,7 @@ feature "LicitationProcesses" do
     click_button "Pesquisar"
 
     within_records do
-      page.find('a').click
+      click_link '1/2012'
     end
 
     expect(page).to_not have_button 'Relatório'
@@ -880,7 +795,7 @@ feature "LicitationProcesses" do
     click_button "Pesquisar"
 
     within_records do
-      page.find('a').click
+      click_link '1/2012'
     end
 
     expect(page).to_not have_button 'Relatório'
@@ -916,7 +831,7 @@ feature "LicitationProcesses" do
     click_button "Pesquisar"
 
     within_records do
-      page.find('a').click
+      click_link '1/2012'
     end
 
     expect(page).to_not have_button 'Relatório'
@@ -944,7 +859,7 @@ feature "LicitationProcesses" do
     click_button "Pesquisar"
 
     within_records do
-      page.find('a').click
+      click_link '1/2012'
     end
 
     expect(page).to_not have_button 'Relatório'
@@ -986,7 +901,7 @@ feature "LicitationProcesses" do
     click_button "Pesquisar"
 
     within_records do
-      page.find('a').click
+      click_link '1/2012'
     end
 
     expect(page).to_not have_button 'Relatório'
@@ -1028,7 +943,7 @@ feature "LicitationProcesses" do
     click_button "Pesquisar"
 
     within_records do
-      page.find('a').click
+      click_link '1/2012'
     end
 
     expect(page).to_not have_button 'Relatório'
@@ -1110,7 +1025,7 @@ feature "LicitationProcesses" do
     click_button "Pesquisar"
 
     within_records do
-      page.find('a').click
+      click_link '1/2012'
     end
 
     expect(page).to_not have_button 'Relatório'
@@ -1190,7 +1105,7 @@ feature "LicitationProcesses" do
     click_button "Pesquisar"
 
     within_records do
-      page.find('a').click
+      click_link '1/2012'
     end
 
     expect(page).to_not have_button 'Relatório'
@@ -1256,7 +1171,7 @@ feature "LicitationProcesses" do
     click_button "Pesquisar"
 
     within_records do
-      page.find('a').click
+      click_link '1/2012'
     end
 
     click_button 'Apurar'
@@ -1348,7 +1263,7 @@ feature "LicitationProcesses" do
     click_button "Pesquisar"
 
     within_records do
-      page.find('a').click
+      click_link '1/2012'
     end
 
     click_button 'Apurar'
@@ -1427,30 +1342,6 @@ feature "LicitationProcesses" do
     end
   end
 
-  scenario 'button Administrative Process should take user to the administrative process view' do
-    LicitationProcess.make!(:processo_licitatorio)
-
-    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
-
-    click_link "Filtrar Processos Licitatórios"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
-
-    within_records do
-      page.find('a').click
-    end
-
-    click_link 'Processo Administrativo'
-
-    within_tab 'Principal' do
-      expect(page).to have_field 'Processo', :with => '1'
-      expect(page).to have_field 'Ano', :with => '2012'
-      expect(page).to have_field 'Número do protocolo', :with => '00088/2012'
-    end
-  end
-
   scenario "button Back to Listings should take user to licitation_process#index" do
     licitation_process = LicitationProcess.make!(:processo_licitatorio)
 
@@ -1463,10 +1354,10 @@ feature "LicitationProcesses" do
     click_button "Pesquisar"
 
     within_records do
-      page.find('a').click
+      click_link '1/2012'
     end
 
-    click_link 'Voltar à listagem'
+    click_link 'Voltar'
 
     click_link "Filtrar Processos Licitatórios"
 
@@ -1475,11 +1366,12 @@ feature "LicitationProcesses" do
     click_button "Pesquisar"
 
     expect(page).to have_link '1/2012'
+
+    expect(page).to have_title 'Processos Licitatórios'
   end
 
   scenario 'fill delivery_location automatically when has a purchase_solicitation' do
-    AdministrativeProcess.make!(:compra_com_itens,
-      :purchase_solicitation => PurchaseSolicitation.make!(:reparo_liberado))
+    PurchaseSolicitation.make!(:reparo_liberado)
     Capability.make!(:reforma)
     PaymentMethod.make!(:dinheiro)
     DocumentType.make!(:fiscal)
@@ -1487,6 +1379,7 @@ feature "LicitationProcesses" do
     Material.make!(:antivirus)
     Indexer.make!(:xpto)
     DeliveryLocation.make!(:health)
+    JudgmentForm.make!(:por_item_com_melhor_tecnica)
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
@@ -1502,18 +1395,21 @@ feature "LicitationProcesses" do
 
     expect(page).to have_field 'Local para entrega', :with => 'Secretaria da Educação'
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
-    within_records do
-      click_link '1/2012'
-    end
-
-    click_link 'Novo processo licitatório'
+    click_link 'Criar Processo Licitatório'
 
     within_tab 'Principal' do
-      expect(page).to have_field 'Local de entrega', :with => 'Secretaria da Educação'
+      fill_modal 'Solicitação de compra', :with => '1', :field => 'Código'
+      fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => "Descrição"
       fill_in 'Ano', :with => '2012'
       fill_in 'Data do processo', :with => '21/03/2012'
+      select 'Compras e serviços', :from => 'Tipo de objeto'
+      select 'Concorrência', :from => 'Modalidade'
+      select 'Por Item com Melhor Técnica', :from =>'Forma de julgamento'
+      fill_in 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
+      fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
+      fill_in 'Inciso', :with => 'Item 1'
       select 'Global', :from => 'Tipo de empenho'
       check 'Registro de preço'
       select 'Menor preço total por item', :from => 'Tipo da apuração'
@@ -1545,15 +1441,13 @@ feature "LicitationProcesses" do
       fill_modal 'Local de entrega', :with => 'Secretaria da Saúde', :field => "Descrição"
     end
 
-    expect(page).to have_notice 'Processo Licitatório 1/2012 criado com sucesso.'
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Processo Licitatório 1/2012 editado com sucesso.'
 
     within_tab 'Principal' do
       expect(page).to have_field 'Local de entrega', :with => 'Secretaria da Saúde'
     end
-
-    click_button 'Salvar'
-
-    expect(page).to have_notice 'Processo Licitatório 1/2012 editado com sucesso.'
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
@@ -1569,13 +1463,11 @@ feature "LicitationProcesses" do
 
     expect(page).to have_field 'Local para entrega', :with => 'Secretaria da Saúde'
 
-     navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
       click_link '1/2012'
     end
-
-    click_link 'Editar processo licitatório'
 
     within_tab 'Principal' do
       clear_modal 'Local de entrega'

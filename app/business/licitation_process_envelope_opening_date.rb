@@ -3,7 +3,7 @@ class LicitationProcessEnvelopeOpeningDate
     @licitation_process = licitation_process
     @envelope_opening_date = licitation_process.envelope_opening_date
     @publication_date = licitation_process.last_publication_date
-    @modality = licitation_process.administrative_process_modality
+    @modality = licitation_process.modality
     @execution_type = licitation_process.execution_type
     @licitation_kind = licitation_process.judgment_form_licitation_kind
   end
