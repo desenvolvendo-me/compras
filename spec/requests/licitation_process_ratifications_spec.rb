@@ -7,13 +7,13 @@ feature "LicitationProcessRatifications" do
   end
 
   scenario 'creating a new ratification' do
-    licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
+    LicitationProcess.make!(:processo_licitatorio_computador)
     BidderProposal.make!(:proposta_licitante_1, :bidder => Bidder.make!(:licitante))
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
-      page.find('a').click
+      click_link '2/2013'
     end
 
     expect(page).to have_field 'Data da homologação', :with => ""
@@ -33,7 +33,7 @@ feature "LicitationProcessRatifications" do
     expect(page).to_not have_disabled_field 'Participante vencedor'
 
     within_modal 'Participante vencedor' do
-      expect(page).to have_field 'Processo licitatório', :with => licitation_process.to_s
+      expect(page).to have_field 'Processo licitatório', :with => '2/2013'
       expect(page).to have_disabled_field 'Processo licitatório'
       click_button 'Pesquisar'
       click_record 'Wenderson Malheiros'
@@ -46,13 +46,13 @@ feature "LicitationProcessRatifications" do
 
     click_button 'Salvar'
 
-    expect(page).to have_content 'Homologação e Adjudicação de Processo Licitatório criada com sucesso.'
+    expect(page).to have_notice 'Homologação e Adjudicação de Processo Licitatório criada com sucesso.'
 
     within_records do
       click_link '1'
     end
 
-    expect(page).to have_field 'Processo licitatório', :with => '1/2013'
+    expect(page).to have_field 'Processo licitatório', :with => '2/2013'
     expect(page).to have_field 'Participante vencedor', :with => 'Wenderson Malheiros'
     expect(page).to have_field 'Data de homologação', :with => I18n.l(Date.current)
     expect(page).to have_field 'Data de adjudicação', :with => I18n.l(Date.current)
@@ -71,14 +71,6 @@ feature "LicitationProcessRatifications" do
 
     expect(page).to have_field 'Data da homologação', :with => "#{I18n.l(Date.current)}"
     expect(page).to have_field 'Data da adjudicação', :with => "#{I18n.l(Date.current)}"
-
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
-
-    within_records do
-      page.find('a').click
-    end
-
-     expect(page).to have_select 'Status do processo administrativo', :selected => "Homologado/Encerrado"
   end
 
   scenario 'updating a ratification' do
@@ -90,7 +82,7 @@ feature "LicitationProcessRatifications" do
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
-      page.find('a').click
+      click_link '2/2013'
     end
 
     expect(page).to have_field 'Data da homologação', :with => "#{I18n.l(Date.current)}"
@@ -99,7 +91,7 @@ feature "LicitationProcessRatifications" do
     navigate 'Processo Administrativo/Licitatório > Homologações e Adjudicações de Processos Licitatórios'
 
     within_records do
-      page.find('a').click
+      click_link '1 - Processo Licitatório 2/2013'
     end
 
     expect(page).to_not have_link 'Apagar'
@@ -115,13 +107,13 @@ feature "LicitationProcessRatifications" do
 
     click_button 'Salvar'
 
-    expect(page).to have_content 'Homologação e Adjudicação de Processo Licitatório editada com sucesso.'
+    expect(page).to have_notice 'Homologação e Adjudicação de Processo Licitatório editada com sucesso.'
 
     within_records do
       click_link '1'
     end
 
-    expect(page).to have_field 'Processo licitatório', :with => '1/2013'
+    expect(page).to have_field 'Processo licitatório', :with => '2/2013'
     expect(page).to have_field 'Participante vencedor', :with => 'Gabriel Sobrinho'
     expect(page).to have_field 'Data de homologação', :with => I18n.l(Date.tomorrow)
     expect(page).to have_field 'Data de adjudicação', :with => I18n.l(Date.tomorrow)
@@ -134,7 +126,7 @@ feature "LicitationProcessRatifications" do
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
-      page.find('a').click
+      click_link '2/2013'
     end
 
     expect(page).to have_field 'Data da homologação', :with => "#{I18n.l(Date.tomorrow)}"
@@ -142,13 +134,13 @@ feature "LicitationProcessRatifications" do
   end
 
   scenario 'cleaning items' do
-    licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
+    LicitationProcess.make!(:processo_licitatorio_computador)
     BidderProposal.make!(:proposta_licitante_1, :bidder => Bidder.make!(:licitante))
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
-      page.find('a').click
+      click_link '2/2013'
     end
 
     click_button 'Apurar'
@@ -161,7 +153,7 @@ feature "LicitationProcessRatifications" do
     fill_modal 'Processo licitatório', :with => '2013', :field => 'Ano'
 
     within_modal 'Participante vencedor' do
-      expect(page).to have_field 'Processo licitatório', :with => licitation_process.to_s
+      expect(page).to have_field 'Processo licitatório', :with => '2/2013'
       expect(page).to have_disabled_field 'Processo licitatório'
       click_button 'Pesquisar'
       click_record 'Wenderson Malheiros'
@@ -175,7 +167,7 @@ feature "LicitationProcessRatifications" do
     fill_modal 'Processo licitatório', :with => '2013', :field => 'Ano'
 
     within_modal 'Participante vencedor' do
-      expect(page).to have_field 'Processo licitatório', :with => licitation_process.to_s
+      expect(page).to have_field 'Processo licitatório', :with => '2/2013'
       expect(page).to have_disabled_field 'Processo licitatório'
       click_button 'Pesquisar'
       click_record 'Wenderson Malheiros'
@@ -199,13 +191,13 @@ feature "LicitationProcessRatifications" do
     navigate 'Processo Administrativo/Licitatório > Homologações e Adjudicações de Processos Licitatórios'
 
     within_records do
-      page.find('a').click
+      click_link '2/2013'
     end
 
     click_link 'Imprimir termo'
 
     expect(page).to have_content '1'
-    expect(page).to have_content '1/2013'
+    expect(page).to have_content '2/2013'
     expect(page).to have_content 'Convite'
     expect(page).to have_content I18n.l Date.current
     expect(page).to have_content 'Licitação para compra de carteiras'
@@ -240,7 +232,7 @@ feature "LicitationProcessRatifications" do
     fill_modal 'Processo licitatório', :with => '2013', :field => 'Ano'
 
     within_modal 'Participante vencedor' do
-      expect(page).to have_field 'Processo licitatório', :with => '1/2013'
+      expect(page).to have_field 'Processo licitatório', :with => '2/2013'
     end
   end
 
