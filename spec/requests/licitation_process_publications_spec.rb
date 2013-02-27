@@ -5,7 +5,7 @@ feature "LicitationProcessPublications" do
   let(:current_user) { User.make!(:sobrinho) }
 
   background do
-    create_roles ['administrative_processes']
+    create_roles ['licitation_processes']
     sign_in
   end
 

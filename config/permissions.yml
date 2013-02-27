@@ -1,12 +1,11 @@
 permissions:
   delegations:
-    bidders: administrative_processes
+    bidders: licitation_processes
     bidder_disqualifications: tradings
     contract_terminations: contracts
     judgment_commission_advices: licitation_processes
-    licitation_processes: administrative_processes
-    licitation_process_lots: administrative_processes
-    licitation_process_publications: administrative_processes
+    licitation_process_lots: licitation_processes
+    licitation_process_publications: licitation_processes
     occurrence_contractual_historics: contracts
     price_collection_proposals: price_collections
     purchase_solicitation_liberations: purchase_solicitations

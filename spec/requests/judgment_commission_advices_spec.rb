@@ -5,7 +5,7 @@ feature "JudgmentCommissionAdvices" do
   let(:current_user) { User.make!(:sobrinho) }
 
   background do
-    create_roles ['administrative_processes','licitation_processes',
+    create_roles ['licitation_processes',
                   'licitation_commissions', 'individuals']
     sign_in
   end
