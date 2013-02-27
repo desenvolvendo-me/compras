@@ -82,6 +82,10 @@ module CrudHelper
     link_to t("#{controller_name}.filter", :resource => plural, :cascade => true), filter_resources_path(current_scopes), :class => 'filter'
   end
 
+  def clear_filter_link
+    link_to t("clear_filter"), collection_path
+  end
+
   def annul_link(options = {})
     annul_controller_name = options[:annul_controller_name] || "#{controller_name.singularize}_annuls"
 

@@ -2184,4 +2184,34 @@ feature "DirectPurchases" do
       end
     end
   end
+
+  scenario 'Filter and clear direct purchase filter' do
+    DirectPurchase.make!(:compra)
+    DirectPurchase.make!(:compra, :year => 2013, :code => 2, :date => Date.new(2013, 2, 3))
+
+    navigate 'Processos de Compra > Compra Direta'
+
+    within_records do
+      expect(page).to have_content "1/2012"
+      expect(page).to have_content "2/2013"
+    end
+
+    click_link 'Filtrar Compras Diretas'
+
+    fill_in 'Ano', :with => '2013'
+
+    click_button 'Pesquisar'
+
+    within_records do
+      expect(page).to_not have_content "1/2012"
+      expect(page).to have_content "2/2013"
+    end
+
+    click_link 'Limpar Filtro'
+
+    within_records do
+      expect(page).to have_content "1/2012"
+      expect(page).to have_content "2/2013"
+    end
+  end
 end
