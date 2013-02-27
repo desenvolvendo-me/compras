@@ -38,7 +38,7 @@
 
     input.change(function (event, object) {
       $(this).removeClass("loading");
-      if (object === null) {
+      if (object === null && _.isEmpty(input.val())) {
         hiddenInput.val("");
       }
     });
