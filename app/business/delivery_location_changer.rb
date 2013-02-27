@@ -10,7 +10,7 @@ class DeliveryLocationChanger
   end
 
   def change!
-    return unless @delivery_location
+    return unless delivery_location
 
     change_object
   end
@@ -22,11 +22,11 @@ class DeliveryLocationChanger
   def change_object
     return unless object_delivery_location? && delivery_location_changed?
 
-    object.update_attributes(:delivery_location_id => @delivery_location.id)
+    object.update_attributes(:delivery_location_id => delivery_location.id)
   end
 
   def delivery_location_changed?
-    object.delivery_location != @delivery_location
+    object.delivery_location != delivery_location
   end
 
   def object_delivery_location?
