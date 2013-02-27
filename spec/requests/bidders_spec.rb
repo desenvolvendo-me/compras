@@ -14,47 +14,41 @@ feature "Bidders" do
   end
 
   scenario 'accessing the bidders and return to licitation process edit page' do
-    licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
-    bidder = licitation_process.bidders.first
+    LicitationProcess.make!(:processo_licitatorio_computador)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
-      page.find('a').click
+      click_link '2/2013'
     end
-
-    click_link 'Editar processo licitatório'
 
     click_link 'Licitantes'
 
-    expect(page).to have_link bidder.to_s
+    expect(page).to have_link 'Wenderson Malheiros'
 
     click_link 'Voltar ao processo licitatório'
 
-    expect(page).to have_content "Editar Processo Licitatório #{licitation_process} do Processo Administrativo #{licitation_process.administrative_process}"
+    expect(page).to have_title "Editar Processo Licitatório"
   end
 
   scenario 'creating a new bidder' do
-    licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
+    LicitationProcess.make!(:processo_licitatorio_computador)
     Creditor.make!(:sobrinho_sa)
     Person.make!(:wenderson)
     Person.make!(:joao_da_silva)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
-      page.find('a').click
+      click_link '2/2013'
     end
-
-    click_link 'Editar processo licitatório'
 
     click_link 'Licitantes'
 
     click_link 'Criar Licitante'
 
-    expect(page).to have_field 'Processo licitatório', :with => '1/2013'
+    expect(page).to have_field 'Processo licitatório', :with => '2/2013'
     expect(page).to have_field 'Data do processo licitatório', :with => '20/03/2013'
-    expect(page).to have_field 'Processo administrativo', :with => '1/2013'
     expect(page).to have_checked_field 'Apresentará nova proposta em caso de empate'
 
     fill_modal 'Fornecedor', :with => 'Gabriel Sobrinho'
@@ -103,12 +97,11 @@ feature "Bidders" do
     expect(page).to have_content 'Licitante criado com sucesso.'
 
     within_records do
-      click_link licitation_process.bidders.last.to_s
+      click_link 'Gabriel Sobrinho'
     end
 
-    expect(page).to have_field 'Processo licitatório', :with => '1/2013'
+    expect(page).to have_field 'Processo licitatório', :with => '2/2013'
     expect(page).to have_field 'Data do processo licitatório', :with => '20/03/2013'
-    expect(page).to have_field 'Processo administrativo', :with => '1/2013'
     expect(page).to have_field 'Fornecedor', :with => 'Gabriel Sobrinho'
     expect(page).to have_field 'Pontuação técnica', :with => '10,00'
     expect(page).to have_field 'Protocolo', :with => '123456'
@@ -157,23 +150,20 @@ feature "Bidders" do
     Creditor.make!(:sobrinho_sa)
     Person.make!(:wenderson)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
-      page.find('a').click
+      click_link '2/2013'
     end
-
-    click_link 'Editar processo licitatório'
 
     click_link 'Licitantes'
 
     within_records do
-      page.find('a').click
+      click_link 'Wenderson Malheiros'
     end
 
-    expect(page).to have_field 'Processo licitatório', :with => '1/2013'
+    expect(page).to have_field 'Processo licitatório', :with => '2/2013'
     expect(page).to have_field 'Data do processo licitatório', :with => '20/03/2013'
-    expect(page).to have_field 'Processo administrativo', :with => '1/2013'
 
     fill_modal 'Fornecedor', :with => 'Gabriel Sobrinho'
 
@@ -218,12 +208,11 @@ feature "Bidders" do
     expect(page).to have_content 'Licitante editado com sucesso.'
 
     within_records do
-      page.find('a').click
+      click_link 'Gabriel Sobrinho'
     end
 
-    expect(page).to have_field 'Processo licitatório', :with => '1/2013'
+    expect(page).to have_field 'Processo licitatório', :with => '2/2013'
     expect(page).to have_field 'Data do processo licitatório', :with => '20/03/2013'
-    expect(page).to have_field 'Processo administrativo', :with => '1/2013'
 
     expect(page).to_not have_checked_field 'Apresentará nova proposta em caso de empate'
     expect(page).to have_field 'Fornecedor', :with => 'Gabriel Sobrinho'
@@ -269,47 +258,42 @@ feature "Bidders" do
   end
 
   scenario 'deleting an bidder' do
-    licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
-    bidder = licitation_process.bidders.first
+    LicitationProcess.make!(:processo_licitatorio_computador)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
-      page.find('a').click
+      click_link '2/2013'
     end
-
-    click_link 'Editar processo licitatório'
 
     click_link 'Licitantes'
 
-    expect(page).to have_link bidder.to_s
-
     within_records do
-      page.find('a').click
+      click_link 'Wenderson Malheiros'
     end
 
     click_link 'Apagar'
 
     expect(page).to have_notice 'Licitante apagado com sucesso.'
 
-    expect(page).to_not have_link bidder.to_s
+    within_records do
+      expect(page).to_not have_link 'Wenderson Malheiros'
+    end
   end
 
   scenario 'when is not invited should disable and clear date, protocol fields' do
     LicitationProcess.make!(:processo_licitatorio_computador)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
-      page.find('a').click
+      click_link '2/2013'
     end
-
-    click_link 'Editar processo licitatório'
 
     click_link 'Licitantes'
 
     within_records do
-      page.find('a').click
+      click_link 'Wenderson Malheiros'
     end
 
     expect(page).to have_field 'Protocolo', :with => '123456'
@@ -336,7 +320,7 @@ feature "Bidders" do
     expect(page).to have_content 'Licitante editado com sucesso.'
 
     within_records do
-      page.find('a').click
+      click_link 'Wenderson Malheiros'
     end
 
     expect(page).to_not have_checked_field 'Convidado'
@@ -350,29 +334,26 @@ feature "Bidders" do
   end
 
   scenario 'showing some items without lot on proposals' do
-    licitation_process = LicitationProcess.make!(:processo_licitatorio_canetas_sem_lote)
-    bidder = licitation_process.bidders.first
+    LicitationProcess.make!(:processo_licitatorio_canetas_sem_lote)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
-      page.find('a').click
+      click_link '2/2013'
     end
-
-    click_link 'Editar processo licitatório'
 
     click_link 'Licitantes'
 
-    click_link bidder.to_s
+    within_records do
+      click_link 'Wenderson Malheiros'
+    end
 
-    expect(page).to have_field 'Processo licitatório', :with => '1/2013'
+    expect(page).to have_field 'Processo licitatório', :with => '2/2013'
     expect(page).to have_field 'Data do processo licitatório', :with => '20/03/2013'
-    expect(page).to have_field 'Processo administrativo', :with => '1/2013'
     expect(page).to have_field 'Fornecedor', :with => 'Wenderson Malheiros'
     expect(page).to have_field 'Protocolo', :with => '123456'
 
     within_tab 'Propostas' do
-
       within '.proposal' do
         expect(page).to have_content 'Item 1'
         expect(page).to have_disabled_field 'Material'
@@ -418,10 +399,11 @@ feature "Bidders" do
 
     expect(page).to have_content 'Licitante editado com sucesso.'
 
-    click_link bidder.to_s
+    within_records do
+      click_link 'Wenderson Malheiros'
+    end
 
     within_tab 'Propostas' do
-
       within '.proposal' do
         expect(page).to have_content 'Item 1'
         expect(page).to have_disabled_field 'Material'
@@ -466,16 +448,13 @@ feature "Bidders" do
   end
 
   scenario 'creating some lots and showing one tab for lot on proposals' do
-    licitation_process = LicitationProcess.make!(:processo_licitatorio_canetas_sem_lote)
-    bidder = licitation_process.bidders.first
+    LicitationProcess.make!(:processo_licitatorio_canetas_sem_lote)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
-      page.find('a').click
+      click_link '2/2013'
     end
-
-    click_link 'Editar processo licitatório'
 
     click_link 'Lotes de itens'
 
@@ -486,10 +465,10 @@ feature "Bidders" do
 
     click_button 'Salvar'
 
-    expect(page).to have_content 'Lote de itens criado com sucesso.'
+    expect(page).to have_notice 'Lote de itens criado com sucesso.'
 
     within_records do
-      click_link licitation_process.licitation_process_lots.last.to_s
+      click_link 'Lote 1'
     end
 
     expect(page).to have_field 'Observações', :with => 'Lote 1'
@@ -506,10 +485,10 @@ feature "Bidders" do
 
     click_button 'Salvar'
 
-    expect(page).to have_content 'Lote de itens criado com sucesso.'
+    expect(page).to have_notice 'Lote de itens criado com sucesso.'
 
     within_records do
-      click_link licitation_process.licitation_process_lots.last.to_s
+      click_link 'Lote 2'
     end
 
     expect(page).to have_field 'Observações', :with => 'Lote 2'
@@ -519,18 +498,21 @@ feature "Bidders" do
 
     click_link 'Voltar'
 
-    expect(page).to have_content 'Lote 1'
-    expect(page).to have_content 'Lote 2'
+    within_records do
+      expect(page).to have_content 'Lote 1'
+      expect(page).to have_content 'Lote 2'
+    end
 
     click_link 'Voltar ao processo licitatório'
 
     click_link 'Licitantes'
 
-    click_link bidder.to_s
+    within_records do
+      click_link 'Wenderson Malheiros'
+    end
 
-    expect(page).to have_field 'Processo licitatório', :with => '1/2013'
+    expect(page).to have_field 'Processo licitatório', :with => '2/2013'
     expect(page).to have_field 'Data do processo licitatório', :with => '20/03/2013'
-    expect(page).to have_field 'Processo administrativo', :with => '1/2013'
     expect(page).to have_field 'Fornecedor', :with => 'Wenderson Malheiros'
     expect(page).to have_field 'Protocolo', :with => '123456'
 
@@ -583,9 +565,9 @@ feature "Bidders" do
 
     click_button 'Salvar'
 
-    expect(page).to have_content 'Licitante editado com sucesso.'
+    expect(page).to have_notice 'Licitante editado com sucesso.'
 
-    click_link bidder.to_s
+    click_link 'Wenderson Malheiros'
 
     within_tab 'Propostas' do
       within_tab 'Lote 1' do
@@ -633,16 +615,13 @@ feature "Bidders" do
   end
 
   scenario 'should show message that can not update proposals when any item does not have lot and licitation process has lot' do
-    licitation_process = LicitationProcess.make!(:processo_licitatorio_canetas_sem_lote)
-    bidder = licitation_process.bidders.first
+    LicitationProcess.make!(:processo_licitatorio_canetas_sem_lote)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
-      page.find('a').click
+      click_link '2/2013'
     end
-
-    click_link 'Editar processo licitatório'
 
     click_link 'Lotes de itens'
 
@@ -653,10 +632,10 @@ feature "Bidders" do
 
     click_button 'Salvar'
 
-    expect(page).to have_content 'Lote de itens criado com sucesso.'
+    expect(page).to have_notice 'Lote de itens criado com sucesso.'
 
     within_records do
-      click_link licitation_process.licitation_process_lots.last.to_s
+      click_link 'Lote 1'
     end
 
     expect(page).to have_field 'Observações', :with => 'Lote 1'
@@ -672,11 +651,12 @@ feature "Bidders" do
 
     click_link 'Licitantes'
 
-    click_link bidder.to_s
+    within_records do
+      click_link 'Wenderson Malheiros'
+    end
 
-    expect(page).to have_field 'Processo licitatório', :with => '1/2013'
+    expect(page).to have_field 'Processo licitatório', :with => '2/2013'
     expect(page).to have_field 'Data do processo licitatório', :with => '20/03/2013'
-    expect(page).to have_field 'Processo administrativo', :with => '1/2013'
     expect(page).to have_field 'Fornecedor', :with => 'Wenderson Malheiros'
     expect(page).to have_field 'Protocolo', :with => '123456'
 
@@ -686,16 +666,14 @@ feature "Bidders" do
   end
 
   scenario 'create bidder link does show when envelope opening date is today' do
-    licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
+    LicitationProcess.make!(:processo_licitatorio_computador)
     Creditor.make!(:sobrinho_sa)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
-      page.find('a').click
+      click_link '2/2013'
     end
-
-    click_link 'Editar processo licitatório'
 
     click_link 'Licitantes'
 
@@ -715,112 +693,101 @@ feature "Bidders" do
   scenario "index should have title Licitantes do Processo Licitatório 1/2013" do
     LicitationProcess.make!(:processo_licitatorio_computador)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
-      page.find('a').click
+      click_link '2/2013'
     end
-
-    click_link 'Editar processo licitatório'
 
     click_link 'Licitantes'
 
-    expect(page).to have_content "Licitantes do Processo Licitatório 1/2013"
+    expect(page).to have_content "Licitantes do Processo Licitatório 2/2013"
   end
 
-  scenario "edit should have title Editar Licitante do Processo Licitatório 1/2013" do
-    licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
+  scenario "edit should have title Editar Licitante do Processo Licitatório 2/2013" do
+    LicitationProcess.make!(:processo_licitatorio_computador)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
-      page.find('a').click
+      click_link '2/2013'
     end
-
-    click_link 'Editar processo licitatório'
 
     click_link 'Licitantes'
 
     within_records do
-      page.find('a').click
+      click_link 'Wenderson Malheiros'
     end
 
-    bidder = licitation_process.bidders.last
-
-    expect(page).to have_content "Editar Licitante (#{bidder}) do Processo Licitatório 1/2013"
+    expect(page).to have_content "Editar Licitante (Wenderson Malheiros) do Processo Licitatório 2/2013"
   end
 
-  scenario "new should have title Novo Licitante do Processo Licitatório 1/2013" do
-    licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
+  scenario "new should have title Novo Licitante do Processo Licitatório 2/2013" do
+    LicitationProcess.make!(:processo_licitatorio_computador)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
-      page.find('a').click
+      click_link '2/2013'
     end
-
-    click_link 'Editar processo licitatório'
 
     click_link 'Licitantes'
 
     click_link 'Criar Licitante'
 
-    expect(page).to have_content "Criar Licitante no Processo Licitatório 1/2013"
+    expect(page).to have_content "Criar Licitante no Processo Licitatório 2/2013"
   end
 
  scenario 'should have field technical_score when licitation kind is technical_and_price' do
-    licitation_process = LicitationProcess.make!(:apuracao_melhor_tecnica_e_preco)
-    bidder = licitation_process.bidders.first
+    LicitationProcess.make!(:apuracao_melhor_tecnica_e_preco)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
-      page.find('a').click
+      click_link '1/2012'
     end
-
-    click_link 'Editar processo licitatório'
 
     click_link 'Licitantes'
 
-    click_link bidder.to_s
+    within_records do
+      click_link 'Wenderson Malheiros'
+    end
 
     expect(page).to have_field 'Pontuação técnica'
   end
 
   scenario 'should have field technical_score when licitation kind is best_technique' do
-    licitation_process = LicitationProcess.make!(:apuracao_global)
-    bidder = licitation_process.bidders.first
+    LicitationProcess.make!(:apuracao_global)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
-      page.find('a').click
+      click_link '1/2012'
     end
-
-    click_link 'Editar processo licitatório'
 
     click_link 'Licitantes'
 
-    click_link bidder.to_s
+    within_records do
+      click_link 'Wenderson Malheiros'
+    end
 
     expect(page).to have_field 'Pontuação técnica'
   end
 
   scenario 'should not have field technical_score when licitation kind is not(best_technique, technical_and_price)' do
-    licitation_process = LicitationProcess.make!(:processo_licitatorio_fornecedores, :envelope_opening_date => I18n.l(Date.current))
-    bidder = licitation_process.bidders.first
+    LicitationProcess.make!(:processo_licitatorio_fornecedores, :envelope_opening_date => I18n.l(Date.current))
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
-      page.find('a').click
+      click_link '1/2012'
     end
-
-    click_link 'Editar processo licitatório'
 
     click_link 'Licitantes'
 
-    click_link bidder.to_s
+    within_records do
+      click_link 'Wenderson Malheiros'
+    end
 
     expect(page).to_not have_field 'Pontuação técnica'
   end
@@ -828,19 +795,18 @@ feature "Bidders" do
   scenario "Save and destroy buttons should be disabled if licitation process envelope opening date is not today" do
     licitation_process = LicitationProcess.make!(:apuracao_global)
     licitation_process.update_attribute :envelope_opening_date, Date.tomorrow
-    bidder = licitation_process.bidders.first
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
-      page.find('a').click
+      click_link '1/2012'
     end
-
-    click_link 'Editar processo licitatório'
 
     click_link 'Licitantes'
 
-    click_link bidder.to_s
+    within_records do
+      click_link 'Wenderson Malheiros'
+    end
 
     expect(page).to have_disabled_element 'Apagar',
                     :reason => 'alterações permitidas somente no dia da abertura dos envelopes'
@@ -849,20 +815,18 @@ feature "Bidders" do
   end
 
   scenario "Save and destroy buttons should be shown if licitation process envelope opening date is today" do
-    licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
+    LicitationProcess.make!(:processo_licitatorio_computador)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
-      page.find('a').click
+      click_link '2/2013'
     end
-
-    click_link 'Editar processo licitatório'
 
     click_link 'Licitantes'
 
     within_records do
-      page.find('a').click
+      click_link 'Wenderson Malheiros'
     end
 
     expect(page).to have_button 'Salvar'
@@ -876,18 +840,16 @@ feature "Bidders" do
     LicitationProcessRatification.make!(:processo_licitatorio_computador,
       :licitation_process => licitation_process)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
-      page.find('a').click
+      click_link '2/2013'
     end
-
-    click_link 'Editar processo licitatório'
 
     click_link 'Licitantes'
 
     within_records do
-      page.find('a').click
+      click_link 'Wenderson Malheiros'
     end
 
     expect(page).to have_disabled_element 'Apagar',
@@ -897,7 +859,6 @@ feature "Bidders" do
 
     expect(page).to have_disabled_field 'Processo licitatório'
     expect(page).to have_disabled_field 'Data do processo licitatório'
-    expect(page).to have_disabled_field 'Processo administrativo'
     expect(page).to have_disabled_field 'Fornecedor'
     expect(page).to have_disabled_field 'Status'
     expect(page).to have_disabled_field 'Apresentará nova proposta em caso de empate'
@@ -929,13 +890,11 @@ feature "Bidders" do
   scenario 'when licitation process has a trading bidder proposals should be disabled' do
     Trading.make!(:pregao_presencial)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
       click_link  '1/2012'
     end
-
-    click_link 'Editar processo licitatório'
 
     click_link 'Licitantes'
 

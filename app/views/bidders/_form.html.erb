@@ -6,10 +6,6 @@
   <div class="yui3-u-1-3">
     <%= f.input :licitation_process_process_date, :disabled => true, :input_html => { :value => f.object.decorator.process_date } %>
   </div>
-
-  <div class="yui3-u-1-3">
-    <%= f.input :administrative_process, :disabled => true %>
-  </div>
 </div>
 
 <div class="yui3-g">
@@ -32,7 +28,7 @@
 
 <%= f.input :will_submit_new_proposal_when_draw %>
 
-<% if f.object.administrative_process_invitation? %>
+<% if f.object.licitation_process_invitation? %>
   <%= f.input :invited %>
 
   <div class="yui3-g">
