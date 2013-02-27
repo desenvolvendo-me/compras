@@ -216,7 +216,7 @@ feature "Contracts" do
     navigate 'Comum > Cadastrais > Contratos'
 
     within_records do
-      page.find('a').click
+      click_link '001'
     end
 
     click_link 'Empenhos'

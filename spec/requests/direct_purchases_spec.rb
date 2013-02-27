@@ -2006,14 +2006,14 @@ feature "DirectPurchases" do
       expect(page).to have_content 'Fornecedor'
       expect(page).to have_content 'Status'
 
-      within 'tbody tr:nth-child(1)' do
+      within 'tbody tr:nth-child(2)' do
         expect(page).to have_content '3/2011'
         expect(page).to have_content '1 - Secretaria de Educação'
         expect(page).to have_content 'Wenderson Malheiros'
         expect(page).to have_content 'Concluída'
       end
 
-      within 'tbody tr:nth-child(2)' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_content '1/2012'
         expect(page).to have_content '1 - Secretaria de Educação'
         expect(page).to have_content 'Wenderson Malheiros'
