@@ -133,7 +133,7 @@ feature "MaterialsClasses" do
       expect(page).to have_content '02.44.65.430.'
     end
 
-    fill_with_autocomplete 'Classe superior', :with => '01'
+    fill_with_autocomplete 'Classe superior', :with => '01.'
 
     expect(page).to have_field 'Classe superior', :with => '01.32 - Software'
 
@@ -141,7 +141,7 @@ feature "MaterialsClasses" do
       expect(page).to have_content '01.32'
     end
 
-    fill_with_autocomplete 'Classe superior', :with => '02'
+    fill_with_autocomplete 'Classe superior', :with => '02.'
 
     expect(page).to have_field 'Classe superior', :with => '02.44.65.430 - Arames'
 

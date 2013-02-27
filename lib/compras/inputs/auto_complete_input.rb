@@ -29,6 +29,7 @@ module Compras
           options['data-source']          ||= source_path
           options['data-hidden-field-id'] ||= hidden_field_id if hidden_field_id
           options['data-hidden-field-value-attribute'] ||= hidden_field_value_attribute
+          options['data-max-results'] ||= max_results
         end
       end
 
@@ -61,6 +62,10 @@ module Compras
 
       def hidden_field_value_attribute
         'id'
+      end
+
+      def max_results
+        options.fetch(:max_results, 10)
       end
 
       def index

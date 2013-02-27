@@ -2,12 +2,18 @@
   $("input[data-auto-complete]").live('focus', function() {
     var input = $(this),
         hiddenInput = $('#' + input.data("hidden-field-id")),
-        valueAttribute = input.data("hidden-field-value-attribute");
+        valueAttribute = input.data("hidden-field-value-attribute"),
+        maxResults = input.data("max-results");
 
     input.autocomplete({
-      source: input.data("source"),
-      minLenght: 3,
+      minLength: 3,
       delay: 500,
+
+      source: function(params, response) {
+        params.limit = maxResults;
+        $.getJSON(input.data("source"), params, function(data) { response(data) });
+      },
+
       select: function(event, ui) {
         input.val(ui.item.label);
         hiddenInput.val(ui.item[valueAttribute]);

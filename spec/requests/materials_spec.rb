@@ -261,7 +261,7 @@ feature "Materials" do
 
     click_link 'Criar Material'
 
-    within_autocomplete 'Classe', :with => '01' do
+    within_autocomplete 'Classe', :with => '01.' do
       expect(page).to have_content 'Antivirus'
       expect(page).to_not have_content 'Software'
     end

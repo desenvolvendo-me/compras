@@ -2,6 +2,7 @@
             :as => :auto_complete,
             :source_path => materials_classes_path,
             :hidden_field => 'class_number',
+            :max_results => 20,
             :label => 'Código',
             :input_html => { 'data-hidden-field-value-attribute' => 'class_number' } %>
 <%= f.input :description %>

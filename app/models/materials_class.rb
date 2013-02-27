@@ -28,6 +28,8 @@ class MaterialsClass < Compras::Model
       (class_number.like("#{q.gsub('.','')}%") | description.like("#{q}%")) }
   }
 
+  scope :limit, lambda { |q| limit(q) }
+
   scope :without_children, lambda {
     where { has_children.eq(false) }
   }

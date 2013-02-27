@@ -1,5 +1,6 @@
 class MaterialsClassesController < CrudController
   has_scope :term
+  has_scope :limit
   has_scope :without_children, :type => :boolean
 
   before_filter :block_when_not_editable, :only => [:update, :destroy]
