@@ -1,7 +1,10 @@
 class RemoveCnaes < ActiveRecord::Migration
   def change
-    if ActiveRecord::Base.connection.table_exists? :compras_cnaes
+    unless Cnae.any?
       Cnae.pg_copy_from Rails.root.join('lib/import/files/cnaes.csv').to_s
+    end
+
+    if ActiveRecord::Base.connection.table_exists? :compras_cnaes
 
       execute <<-SQL
         UPDATE compras_creditors as A
