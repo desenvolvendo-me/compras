@@ -24,9 +24,9 @@ class AdministrativeProcessBudgetAllocationItem < Compras::Model
   orderize "id DESC"
   filterize
 
-  scope :administrative_process_id, lambda { |administrative_process_id|
+  scope :licitation_process_id, lambda { |licitation_process_id|
     joins { administrative_process_budget_allocation }.
-    where { administrative_process_budget_allocation.administrative_process_id.eq administrative_process_id }
+    where { administrative_process_budget_allocation.licitation_process_id.eq licitation_process_id }
   }
 
   scope :without_lot_or_ids, lambda { |ids|
