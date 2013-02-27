@@ -8,9 +8,9 @@ class LicitationProcessImpugnment < Compras::Model
   belongs_to :licitation_process
   belongs_to :person
 
-  delegate :year, :process_date, :administrative_process_description, :to => :licitation_process, :allow_nil => true, :prefix => true
-  delegate :envelope_delivery_date, :envelope_delivery_time, :to => :licitation_process, :allow_nil => true, :prefix => true
-  delegate :envelope_opening_date, :envelope_opening_time, :to => :licitation_process, :allow_nil => true, :prefix => true
+  delegate :year, :process_date, :description, :envelope_delivery_date,
+           :envelope_delivery_time, :envelope_opening_date, :envelope_opening_time,
+           :to => :licitation_process, :allow_nil => true, :prefix => true
 
   validates :licitation_process, :person, :related, :situation, :impugnment_date, :presence => true
   validates :new_envelope_delivery_time, :timeliness => { :type => :time }, :if => :new_envelope_delivery_date?

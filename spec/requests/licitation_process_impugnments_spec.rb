@@ -30,7 +30,10 @@ feature "LicitationProcessImpugnments" do
     click_button 'Salvar'
 
     expect(page).to have_notice 'Impugnação do Processo Licitatório criada com sucesso.'
-    click_link LicitationProcessImpugnment.last.to_s
+
+    within_records do
+      click_link '1'
+    end
 
     expect(page).to have_field 'Processo licitatório', :with => '1/2012'
     expect(page).to have_field 'Data da impugnação', :with => I18n.l(Date.current + 2.days)
@@ -49,11 +52,13 @@ feature "LicitationProcessImpugnments" do
   end
 
   scenario 'update an existent licitation_process_impugnment' do
-    licitation_process_impugnment = LicitationProcessImpugnment.make!(:proibido_cadeiras)
+    LicitationProcessImpugnment.make!(:proibido_cadeiras)
 
     navigate 'Processo Administrativo/Licitatório > Impugnações dos Processos Licitatórios'
 
-    click_link licitation_process_impugnment.to_s
+    within_records do
+      click_link '1'
+    end
 
     fill_in 'Data da impugnação', :with => I18n.l(Date.current + 1.year + 2.days)
     select 'Pregão', :from => 'Referente ao'
@@ -69,7 +74,9 @@ feature "LicitationProcessImpugnments" do
 
     expect(page).to have_notice 'Impugnação do Processo Licitatório editada com sucesso.'
 
-    click_link licitation_process_impugnment.to_s
+    within_records do
+      click_link '1'
+    end
 
     expect(page).to have_field 'Processo licitatório', :with => '1/2012'
     expect(page).to have_field 'Data da impugnação', :with => I18n.l(Date.current + 1.year + 2.days)
@@ -87,11 +94,13 @@ feature "LicitationProcessImpugnments" do
   end
 
   scenario 'should have fields disabled when situation is not pending' do
-    licitation_process_impugnment = LicitationProcessImpugnment.make!(:proibido_cadeiras_deferida)
+    LicitationProcessImpugnment.make!(:proibido_cadeiras_deferida)
 
     navigate 'Processo Administrativo/Licitatório > Impugnações dos Processos Licitatórios'
 
-    click_link licitation_process_impugnment.to_s
+    within_records do
+      click_link '1'
+    end
 
     expect(page).to have_disabled_field 'Processo licitatório'
     expect(page).to have_disabled_field 'Data da impugnação'
@@ -109,17 +118,19 @@ feature "LicitationProcessImpugnments" do
   end
 
   scenario 'should not be able to destroy an existent licitation_process_impugnment' do
-    licitation_process_impugnment = LicitationProcessImpugnment.make!(:proibido_cadeiras)
+    LicitationProcessImpugnment.make!(:proibido_cadeiras)
 
     navigate 'Processo Administrativo/Licitatório > Impugnações dos Processos Licitatórios'
 
-    click_link licitation_process_impugnment.to_s
+    within_records do
+      click_link '1'
+    end
 
     expect(page).to_not have_link "Apagar"
   end
 
   scenario 'envelope dates should be filled when licitation process selected' do
-    licitation_process = LicitationProcess.make!(:processo_licitatorio)
+    LicitationProcess.make!(:processo_licitatorio)
 
     navigate 'Processo Administrativo/Licitatório > Impugnações dos Processos Licitatórios'
 
@@ -134,11 +145,13 @@ feature "LicitationProcessImpugnments" do
   end
 
   scenario 'envelope dates should be empty when clear licitaion process' do
-    licitation_process_impugnment = LicitationProcessImpugnment.make!(:proibido_cadeiras)
+    LicitationProcessImpugnment.make!(:proibido_cadeiras)
 
     navigate 'Processo Administrativo/Licitatório > Impugnações dos Processos Licitatórios'
 
-    click_link licitation_process_impugnment.to_s
+    within_records do
+      click_link '1'
+    end
 
     clear_modal 'Processo licitatório'
 

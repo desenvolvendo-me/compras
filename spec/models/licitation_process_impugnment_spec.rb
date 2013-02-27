@@ -12,6 +12,14 @@ describe LicitationProcessImpugnment do
   it { should validate_presence_of :person }
   it { should validate_presence_of :situation }
 
+  it { should delegate(:year).to(:licitation_process).allowing_nil(true).prefix(true) }
+  it { should delegate(:process_date).to(:licitation_process).allowing_nil(true).prefix(true) }
+  it { should delegate(:description).to(:licitation_process).allowing_nil(true).prefix(true) }
+  it { should delegate(:envelope_delivery_date).to(:licitation_process).allowing_nil(true).prefix(true) }
+  it { should delegate(:envelope_delivery_time).to(:licitation_process).allowing_nil(true).prefix(true) }
+  it { should delegate(:envelope_opening_date).to(:licitation_process).allowing_nil(true).prefix(true) }
+  it { should delegate(:envelope_opening_time).to(:licitation_process).allowing_nil(true).prefix(true) }
+
   context 'when new_envelope_opening_date and new_envelope_delivery_date exists and are different' do
     before do
       subject.new_envelope_delivery_date = Date.tomorrow
