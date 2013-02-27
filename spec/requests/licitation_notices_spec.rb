@@ -29,7 +29,7 @@ feature "LicitationNotices" do
     expect(page).to have_notice 'Aviso de Licitação criado com sucesso.'
 
     within_records do
-      page.find('a').click
+      click_link '1'
     end
 
     expect(page).to have_field 'Processo licitatório', :with => '1/2012'
@@ -43,12 +43,14 @@ feature "LicitationNotices" do
   end
 
   scenario 'update an existent licitation_notice' do
-    licitation_notice = LicitationNotice.make!(:aviso_de_licitacao)
+    LicitationNotice.make!(:aviso_de_licitacao)
     LicitationProcess.make!(:processo_licitatorio_computador)
 
     navigate 'Processo Administrativo/Licitatório > Avisos de Licitações'
 
-    click_link licitation_notice.to_s
+    within_records do
+      click_link '1'
+    end
 
     fill_modal 'Processo licitatório', :with => '2013', :field => 'Ano'
     fill_in 'Data do aviso', :with => '12/04/2012'
@@ -58,9 +60,11 @@ feature "LicitationNotices" do
 
     expect(page).to have_notice 'Aviso de Licitação editado com sucesso.'
 
-    click_link licitation_notice.to_s
+    within_records do
+      click_link '1'
+    end
 
-    expect(page).to have_field 'Processo licitatório', :with => '1/2013'
+    expect(page).to have_field 'Processo licitatório', :with => '2/2013'
     expect(page).to have_field 'Número do aviso', :with => '1'
     expect(page).to have_field 'Data do aviso', :with => '12/04/2012'
     expect(page).to have_field 'Modalidade', :with => 'Convite'
@@ -87,10 +91,10 @@ feature "LicitationNotices" do
     expect(page).to have_notice 'Aviso de Licitação criado com sucesso.'
 
     within_records do
-      click_link LicitationNotice.last.to_s
+      click_link '2'
     end
 
-    expect(page).to have_field 'Processo licitatório', :with => '1/2013'
+    expect(page).to have_field 'Processo licitatório', :with => '2/2013'
     expect(page).to have_field 'Número do aviso', :with => '1'
     expect(page).to have_field 'Data do aviso', :with => '07/04/2012'
     expect(page).to have_field 'Modalidade', :with => 'Convite'
@@ -116,7 +120,7 @@ feature "LicitationNotices" do
     expect(page).to have_notice 'Aviso de Licitação criado com sucesso.'
 
     within_records do
-      click_link LicitationNotice.last.to_s
+      click_link '2'
     end
 
     expect(page).to have_field 'Processo licitatório', :with => '1/2012'
@@ -130,11 +134,13 @@ feature "LicitationNotices" do
   end
 
   scenario 'destroy an existent licitation_notice' do
-    licitation_notice = LicitationNotice.make!(:aviso_de_licitacao)
+    LicitationNotice.make!(:aviso_de_licitacao)
 
     navigate 'Processo Administrativo/Licitatório > Avisos de Licitações'
 
-    click_link licitation_notice.to_s
+    within_records do
+      click_link '1'
+    end
 
     click_link 'Apagar'
 
@@ -145,11 +151,13 @@ feature "LicitationNotices" do
   end
 
   scenario 'delegate fields should be empty when clear licitaion process' do
-    licitation_notice = LicitationNotice.make!(:aviso_de_licitacao)
+    LicitationNotice.make!(:aviso_de_licitacao)
 
     navigate 'Processo Administrativo/Licitatório > Avisos de Licitações'
 
-    click_link licitation_notice.to_s
+    within_records do
+      click_link '1'
+    end
 
     clear_modal 'Processo licitatório'
 

@@ -3,8 +3,8 @@ class LicitationNotice < Compras::Model
 
   belongs_to :licitation_process
 
-  delegate :administrative_process_modality_humanize, :licitation_number, :process_date, :year,
-           :administrative_process_description, :to => :licitation_process, :prefix => true, :allow_nil => true
+  delegate :modality_humanize, :licitation_number, :process_date, :year,
+           :description, :to => :licitation_process, :prefix => true, :allow_nil => true
 
   validates :licitation_process, :date, :number, :presence => true
 
