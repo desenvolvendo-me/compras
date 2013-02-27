@@ -10,38 +10,31 @@ feature "LicitationProcessLots" do
   end
 
   scenario 'accessing the lots and return to licitation process edit page' do
-    licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
-    lot = licitation_process.licitation_process_lots.first
+    LicitationProcess.make!(:processo_licitatorio_computador)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
-      page.find('a').click
+      click_link '2/2013'
     end
-
-    click_link 'Editar processo licitatório'
 
     click_link 'Lotes de itens'
 
     expect(page).to have_link 'Criar Lote de itens'
 
-    expect(page).to have_link lot.to_s
-
     click_link 'Voltar ao processo licitatório'
 
-    expect(page).to have_content "Editar Processo Licitatório #{licitation_process} do Processo Administrativo #{licitation_process.administrative_process}"
+    expect(page).to have_content "Editar Processo Licitatório 2/2013"
   end
 
   scenario 'creating a new lot' do
-    licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
+    LicitationProcess.make!(:processo_licitatorio_computador)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
-      page.find('a').click
+      click_link '2/2013'
     end
-
-    click_link 'Editar processo licitatório'
 
     click_link 'Lotes de itens'
 
@@ -52,10 +45,10 @@ feature "LicitationProcessLots" do
 
     click_button 'Salvar'
 
-    expect(page).to have_content 'Lote de itens criado com sucesso.'
+    expect(page).to have_notice 'Lote de itens criado com sucesso.'
 
     within_records do
-      click_link licitation_process.licitation_process_lots.last.to_s
+      click_link 'Lote 1'
     end
 
     expect(page).to have_field 'Observações', :with => 'observacoes teste'
@@ -64,15 +57,13 @@ feature "LicitationProcessLots" do
   end
 
   scenario 'should not show link to create a new lot if licitation process is not updatable' do
-    licitation_process = LicitationProcess.make!(:processo_licitatorio_nao_atualizavel)
+    LicitationProcess.make!(:processo_licitatorio_nao_atualizavel)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
-      page.find('a').click
+      click_link '1/2012'
     end
-
-    click_link 'Editar processo licitatório'
 
     click_link 'Lotes de itens'
 
@@ -80,20 +71,18 @@ feature "LicitationProcessLots" do
   end
 
   scenario 'should disable Salvar and Apagar buttons when updating a lot if licitation process is not updatable' do
-    licitation_process = LicitationProcess.make!(:processo_licitatorio_nao_atualizavel)
+    LicitationProcess.make!(:processo_licitatorio_nao_atualizavel)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
-      page.find('a').click
+      click_link '1/2012'
     end
-
-    click_link 'Editar processo licitatório'
 
     click_link 'Lotes de itens'
 
     within_records do
-      page.find('a').click
+      click_link 'Lote 1'
     end
 
     expect(page).to have_disabled_element 'Salvar', :reason => "processo licitatório deste lote não pode ser alterado"
@@ -102,20 +91,18 @@ feature "LicitationProcessLots" do
   end
 
   scenario 'all fields should be disabled when updating a lot if licitation process is not updatable' do
-    licitation_process = LicitationProcess.make!(:processo_licitatorio_nao_atualizavel)
+    LicitationProcess.make!(:processo_licitatorio_nao_atualizavel)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
-      page.find('a').click
+      click_link '1/2012'
     end
-
-    click_link 'Editar processo licitatório'
 
     click_link 'Lotes de itens'
 
     within_records do
-      page.find('a').click
+      click_link 'Lote 1'
     end
 
     expect(page).to have_disabled_field 'Observações'
@@ -123,20 +110,18 @@ feature "LicitationProcessLots" do
   end
 
   scenario 'updating an existing lot' do
-    licitation_process = LicitationProcess.make!(:processo_licitatorio_canetas)
+    LicitationProcess.make!(:processo_licitatorio_canetas)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
-      page.find('a').click
+      click_link '2/2013'
     end
-
-    click_link 'Editar processo licitatório'
 
     click_link 'Lotes de itens'
 
     within_records do
-      page.find('a').click
+      click_link 'Lote 1'
     end
 
     fill_in 'Observações', :with => 'Arame'
@@ -147,7 +132,7 @@ feature "LicitationProcessLots" do
     expect(page).to have_notice 'Lote de itens editado com sucesso.'
 
     within_records do
-      page.find('a').click
+      click_link 'Lote 1'
     end
 
     expect(page).to have_field 'Observações', :with => 'Arame'
@@ -156,20 +141,18 @@ feature "LicitationProcessLots" do
   end
 
   scenario 'deleting a lot' do
-    licitation_process = LicitationProcess.make!(:processo_licitatorio_canetas)
+    LicitationProcess.make!(:processo_licitatorio_canetas)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
-      page.find('a').click
+      click_link '2/2013'
     end
-
-    click_link 'Editar processo licitatório'
 
     click_link 'Lotes de itens'
 
     within_records do
-      page.find('a').click
+      click_link 'Lote 1'
     end
 
     click_link 'Apagar'
@@ -177,25 +160,23 @@ feature "LicitationProcessLots" do
     expect(page).to have_notice 'Lote de itens apagado com sucesso'
 
     within_records do
-      expect(page).to_not have_css 'a'
+      expect(page).to_not have_link 'Lote 1'
     end
   end
 
   scenario 'edit an existing lot, search item, remove item and search item again' do
-    licitation_process = LicitationProcess.make!(:processo_licitatorio_canetas)
+    LicitationProcess.make!(:processo_licitatorio_canetas)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
-      page.find('a').click
+      click_link '2/2013'
     end
-
-    click_link 'Editar processo licitatório'
 
     click_link 'Lotes de itens'
 
     within_records do
-      page.find('a').click
+      click_link 'Lote 1'
     end
 
     within_modal 'Itens' do
@@ -216,16 +197,14 @@ feature "LicitationProcessLots" do
   end
 
   scenario 'only items from administrative process that are not included by any lot must be available' do
-    licitation_process = LicitationProcess.make!(:processo_licitatorio_canetas_sem_lote)
+    LicitationProcess.make!(:processo_licitatorio_canetas_sem_lote)
     AdministrativeProcessBudgetAllocationItem.make!(:item_arame_farpado)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
-      page.find('a').click
+      click_link '2/2013'
     end
-
-    click_link 'Editar processo licitatório'
 
     click_link 'Lotes de itens'
 
@@ -249,10 +228,10 @@ feature "LicitationProcessLots" do
 
     click_button 'Salvar'
 
-    expect(page).to have_content 'Lote de itens criado com sucesso.'
+    expect(page).to have_notice 'Lote de itens criado com sucesso.'
 
     within_records do
-      page.find('a').click
+      click_link 'Lote 1'
     end
 
     expect(page).to have_content 'Antivirus'
@@ -281,10 +260,10 @@ feature "LicitationProcessLots" do
 
     click_button 'Salvar'
 
-    expect(page).to have_content 'Lote de itens editado com sucesso.'
+    expect(page).to have_notice 'Lote de itens editado com sucesso.'
 
     within_records do
-      page.find('a').click
+      click_link 'Lote 1'
     end
 
     expect(page).to have_content 'Arame comum'
@@ -303,33 +282,29 @@ feature "LicitationProcessLots" do
     end
   end
 
-  scenario "index shoud have title Lotes de itens do Processo Licitatório 1/2013" do
-    licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
+  scenario "index shoud have title Lotes de itens do Processo Licitatório 2/2013" do
+    LicitationProcess.make!(:processo_licitatorio_computador)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
-      page.find('a').click
+      click_link '2/2013'
     end
-
-    click_link 'Editar processo licitatório'
 
     click_link 'Lotes de itens'
 
-    expect(page).to have_content "Lotes de itens do Processo Licitatório 1/2013"
+    expect(page).to have_content "Lotes de itens do Processo Licitatório 2/2013"
   end
 
-  scenario "edit shoud have title Editar Lotes de itens do Processo Licitatório 1/2013" do
-    licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
+  scenario "edit shoud have title Editar Lotes de itens do Processo Licitatório 2/2013" do
+    LicitationProcess.make!(:processo_licitatorio_computador)
     AdministrativeProcessBudgetAllocationItem.make!(:item_arame_farpado)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
-      page.find('a').click
+      click_link '2/2013'
     end
-
-    click_link 'Editar processo licitatório'
 
     click_link 'Lotes de itens'
 
@@ -342,27 +317,25 @@ feature "LicitationProcessLots" do
     click_button 'Salvar'
 
     within_records do
-      page.find('a').click
+      click_link 'Lote 1'
     end
 
-    expect(page).to have_content "Editar Lote 1 do Processo Licitatório 1/2013"
+    expect(page).to have_content "Editar Lote 1 do Processo Licitatório 2/2013"
   end
 
-  scenario "new shoud have title Criar Lotes de itens no Processo Licitatório 1/2013" do
-    licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
+  scenario "new shoud have title Criar Lotes de itens no Processo Licitatório 2/2013" do
+    LicitationProcess.make!(:processo_licitatorio_computador)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
-      page.find('a').click
+      click_link '2/2013'
     end
-
-    click_link 'Editar processo licitatório'
 
     click_link 'Lotes de itens'
 
     click_link 'Criar Lote de itens'
 
-    expect(page).to have_content "Criar Lote de itens no Processo Licitatório 1/2013"
+    expect(page).to have_content "Criar Lote de itens no Processo Licitatório 2/2013"
   end
 end
