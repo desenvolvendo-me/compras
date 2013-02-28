@@ -139,8 +139,8 @@
     $('#contract_direct_purchase').attr('disabled', licitationProcess !== undefined);
 
     if (licitationProcess) {
-      $('#contract_content').val(licitationProcess.administrative_process_description);
-      $('#contract_modality_humanize').val(licitationProcess.administrative_process_modality_humanize);
+      $('#contract_content').val(licitationProcess.description);
+      $('#contract_modality_humanize').val(licitationProcess.modality_humanize);
       $('#contract_execution_type_humanize').val(licitationProcess.execution_type_humanize);
     } else {
       clearModalityExecutionType();

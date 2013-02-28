@@ -33,6 +33,8 @@ class Contract < Compras::Model
   accepts_nested_attributes_for :delivery_schedules, :allow_destroy => true
 
   delegate :execution_type_humanize, :to => :licitation_process, :allow_nil => true
+  delegate :modality_humanize, :to => :licitation_process, :allow_nil => true, :prefix => true
+  delegate :modality_humanize, :to => :direct_purchase, :allow_nil => true, :prefix => true
 
   validates :year, :mask => "9999", :allow_blank => true
   validates :sequential_number, :year, :contract_number, :publication_date, :presence => true
@@ -58,7 +60,7 @@ class Contract < Compras::Model
   end
 
   def modality_humanize
-    licitation_process.try(:administrative_process_modality_humanize) || direct_purchase.try(:modality_humanize)
+    licitation_process_modality_humanize || direct_purchase_modality_humanize
   end
 
   def self.next_sequential(year)

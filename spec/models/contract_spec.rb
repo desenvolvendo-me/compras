@@ -42,7 +42,9 @@ describe Contract do
 
   it { should have_many(:pledges).dependent(:restrict) }
 
-  it { should delegate(:execution_type_humanize).to(:licitation_process) }
+  it { should delegate(:execution_type_humanize).to(:licitation_process).allowing_nil(true) }
+  it { should delegate(:modality_humanize).to(:licitation_process).allowing_nil(true).prefix(true) }
+  it { should delegate(:modality_humanize).to(:direct_purchase).allowing_nil(true).prefix(true) }
 
   it { should validate_presence_of :sequential_number }
   it { should validate_presence_of :year }
@@ -137,7 +139,7 @@ describe Contract do
       let(:modality) { double(:modality) }
 
       let :licitation_process do
-        double('LicitationProcess', :administrative_process_modality_humanize => modality)
+        double('LicitationProcess', :modality_humanize => modality)
       end
 
       before do
