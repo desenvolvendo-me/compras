@@ -25,8 +25,6 @@ describe LicitationProcessesController do
 
       expect(assigns(:licitation_process).status).to eq LicitationProcessStatus::WAITING_FOR_OPEN
     end
-
-
   end
 
   describe 'POST #create' do
@@ -119,6 +117,17 @@ describe LicitationProcessesController do
 
         expect(response).to redirect_to(licitation_process_path(licitation_process))
       end
+    end
+
+    it 'should clear old budget_allocations' do
+      licitation_process = LicitationProcess.make!(:processo_licitatorio)
+      item_group = PurchaseSolicitationItemGroup.make!(:antivirus)
+
+      AdministrativeProcessBudgetAllocationCleaner.any_instance.
+                                                   should_receive(:clear_old_records)
+
+      put :update, :id => licitation_process.id,
+                   :licitation_process => { :purchase_solicitation_item_group_id => item_group.id }
     end
   end
 

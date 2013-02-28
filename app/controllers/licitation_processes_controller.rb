@@ -71,6 +71,8 @@ class LicitationProcessesController < CrudController
     return unless object.updatable?
 
     object.transaction do
+      AdministrativeProcessBudgetAllocationCleaner.new(object, new_item_group).clear_old_records
+
       object.localized.assign_attributes(*attributes)
 
       BidderStatusChanger.new(object).change
@@ -79,5 +81,11 @@ class LicitationProcessesController < CrudController
         DeliveryLocationChanger.change(object.purchase_solicitation, object.delivery_location)
       end
     end
+  end
+
+  def new_item_group
+    item_group_id = params[:licitation_process][:purchase_solicitation_item_group_id]
+
+    PurchaseSolicitationItemGroup.find(item_group_id) if item_group_id.present?
   end
 end

@@ -1,18 +1,20 @@
 class AdministrativeProcessBudgetAllocationCleaner
-  def initialize(administrative_process, item_group)
-    @administrative_process = administrative_process
+  def initialize(licitation_process, item_group)
+    @licitation_process = licitation_process
     @item_group = item_group
   end
 
   def clear_old_records
     return unless item_group_changed?
 
-    @administrative_process.administrative_process_budget_allocations.each(&:mark_for_destruction)
+    licitation_process.administrative_process_budget_allocations.each(&:mark_for_destruction)
   end
 
   private
 
+  attr_reader :licitation_process, :item_group
+
   def item_group_changed?
-    @administrative_process.purchase_solicitation_item_group != @item_group
+    licitation_process.purchase_solicitation_item_group != item_group
   end
 end
