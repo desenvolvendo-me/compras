@@ -696,7 +696,7 @@ feature "PurchaseSolicitations" do
 
       fill_modal 'Fornecedor', :with => 'Wenderson Malheiros'
 
-      fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
+      fill_modal 'Solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
       fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
@@ -794,7 +794,7 @@ feature "PurchaseSolicitations" do
 
       fill_modal 'Fornecedor', :with => 'Wenderson Malheiros'
 
-      fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
+      fill_modal 'Solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
       fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
@@ -931,7 +931,7 @@ feature "PurchaseSolicitations" do
 
       within '.purchase-solicitation-budget-allocation:last' do
         within_modal 'Dotação' do
-          expect(page).to have_disabled_field 'Estrutura orçamentária', :with => '1 - Secretaria de Educação'
+          expect(page).to have_disabled_field 'Solicitante', :with => '1 - Secretaria de Educação'
 
           click_link 'Voltar'
         end
@@ -945,7 +945,7 @@ feature "PurchaseSolicitations" do
     within_tab 'Dotações orçamentárias' do
       within '.purchase-solicitation-budget-allocation:last' do
         within_modal 'Dotação' do
-          expect(page).to have_field 'Estrutura orçamentária', :with => ''
+          expect(page).to have_field 'Solicitante', :with => ''
         end
       end
     end

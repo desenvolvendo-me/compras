@@ -2,13 +2,13 @@ pt-BR:
   activerecord:
     models:
       price_registration_budget_structure:
-        one: "Estrutura Orçamentária do Registro de Preço"
-        other: "Estruturas Orçamentárias do Registro de Preço"
+        one: "Solicitante do Registro de Preço"
+        other: "Solicitantes do Registro de Preço"
 
     attributes:
       price_registration_budget_structure:
         price_registration: "Registro de preço"
-        budget_structure: "Estrutura orçamentária"
+        budget_structure: "Solicitante"
         quantity_requested: "Quantidade solicitada"
         budget_structure_balance: "Saldo"
         ride: "Carona"

@@ -2,12 +2,12 @@ pt-BR:
   activerecord:
     models:
       budget_structure_level:
-        one: "Nível de Estrutura Orçamentária"
-        other: "Níveis de Estruturas Orçamentárias"
+        one: "Nível de Solicitante"
+        other: "Níveis de Solicitantes"
 
     attributes:
       budget_structure_level:
-        budget_structure_configuration: "Configuração de estrutura orçamentária"
+        budget_structure_configuration: "Configuração de solicitante"
         description: "Descrição"
         digits: "Dígitos"
         level: "Nível"

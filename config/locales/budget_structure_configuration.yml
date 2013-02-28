@@ -2,8 +2,8 @@ pt-BR:
   activerecord:
     models:
       budget_structure_configuration:
-        one: "Configuração de Estrutura Orçamentária"
-        other: "Configurações de Estrutura Orçamentária"
+        one: "Configuração de Solicitante"
+        other: "Configurações de Solicitante"
 
     attributes:
       budget_structure_configuration:

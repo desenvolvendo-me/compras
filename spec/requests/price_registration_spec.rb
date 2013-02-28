@@ -50,20 +50,20 @@ feature "PriceRegistration" do
       fill_in 'Observações', :with => 'Aquisição de combustíveis'
     end
 
-    within_tab 'Itens por Estruturas Orçamentárias Participantes' do
+    within_tab 'Itens por Solicitantes Participantes' do
       click_button 'Adicionar Material'
 
       fill_modal 'Material', :with => 'Antivirus', :field => 'Material'
 
       click_button 'Adicionar Dotação'
 
-      fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
+      fill_modal 'Solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_in 'Quantidade solicitada', :with => '100,00'
 
       click_button 'Adicionar Dotação'
 
       within '.price-registration-budget-structure:first' do
-        fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Desenvolvimento', :field => 'Descrição'
+        fill_modal 'Solicitante', :with => 'Secretaria de Desenvolvimento', :field => 'Descrição'
         fill_in 'Quantidade solicitada', :with => '200,00'
       end
 
@@ -74,7 +74,7 @@ feature "PriceRegistration" do
 
         click_button 'Adicionar Dotação'
 
-        fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Educação com dois responsaveis', :field => 'Descrição'
+        fill_modal 'Solicitante', :with => 'Secretaria de Educação com dois responsaveis', :field => 'Descrição'
         fill_in 'Quantidade solicitada', :with => '300,00'
       end
     end
@@ -110,16 +110,16 @@ feature "PriceRegistration" do
       expect(page).to have_field 'Observações', :with => 'Aquisição de combustíveis'
     end
 
-    within_tab 'Itens por Estruturas Orçamentárias Participantes' do
+    within_tab 'Itens por Solicitantes Participantes' do
 
       within 'div.price-registration-item:last' do
         expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
-        expect(page).to have_field 'Estrutura orçamentária', :with => '1.29 - Secretaria de Desenvolvimento', :field => 'Descrição'
+        expect(page).to have_field 'Solicitante', :with => '1.29 - Secretaria de Desenvolvimento', :field => 'Descrição'
         expect(page).to have_field 'Quantidade solicitada', :with => '200,00'
         expect(page).to have_select 'Carona', :selected => 'Não'
 
         within 'div.price-registration-budget-structure:last' do
-          expect(page).to have_field 'Estrutura orçamentária', :with => '1 - Secretaria de Educação'
+          expect(page).to have_field 'Solicitante', :with => '1 - Secretaria de Educação'
           expect(page).to have_field 'Quantidade solicitada', :with => '100,00'
           expect(page).to have_select 'Carona', :selected => 'Não'
         end
@@ -127,7 +127,7 @@ feature "PriceRegistration" do
 
       within 'div.price-registration-item:first' do
         expect(page).to have_field 'Material', :with => '02.02.00002 - Arame comum'
-        expect(page).to have_field 'Estrutura orçamentária', :with => '1 - Secretaria de Educação com dois responsaveis', :field => 'Descrição'
+        expect(page).to have_field 'Solicitante', :with => '1 - Secretaria de Educação com dois responsaveis', :field => 'Descrição'
         expect(page).to have_field 'Quantidade solicitada', :with => '300,00'
         expect(page).to have_select 'Carona', :selected => 'Não'
       end
@@ -174,12 +174,12 @@ feature "PriceRegistration" do
       fill_in 'Observações', :with => 'Aquisição de carne'
     end
 
-    within_tab 'Itens por Estruturas Orçamentárias Participantes' do
+    within_tab 'Itens por Solicitantes Participantes' do
       click_button 'Remover'
 
       click_button 'Adicionar Dotação'
 
-      fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
+      fill_modal 'Solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_in 'Quantidade solicitada', :with => '400,00'
     end
 
@@ -214,14 +214,14 @@ feature "PriceRegistration" do
       expect(page).to have_field 'Observações', :with => 'Aquisição de carne'
     end
 
-    within_tab 'Itens por Estruturas Orçamentárias Participantes' do
+    within_tab 'Itens por Solicitantes Participantes' do
       expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
-      expect(page).to have_field 'Estrutura orçamentária', :with => '1.29 - Secretaria de Desenvolvimento', :field => 'Descrição'
+      expect(page).to have_field 'Solicitante', :with => '1.29 - Secretaria de Desenvolvimento', :field => 'Descrição'
       expect(page).to have_field 'Quantidade solicitada', :with => '200,00'
       expect(page).to have_select 'Carona', :selected => 'Não'
 
       within 'div.price-registration-budget-structure:last' do
-        expect(page).to have_field 'Estrutura orçamentária', :with => '1 - Secretaria de Educação'
+        expect(page).to have_field 'Solicitante', :with => '1 - Secretaria de Educação'
         expect(page).to have_field 'Quantidade solicitada', :with => '400,00'
         expect(page).to have_select 'Carona', :selected => 'Não'
       end
@@ -361,20 +361,20 @@ feature "PriceRegistration" do
 
     click_link 'Criar Registro de Preço'
 
-    within_tab 'Itens por Estruturas Orçamentárias Participantes' do
+    within_tab 'Itens por Solicitantes Participantes' do
       click_button 'Adicionar Material'
       fill_modal 'Material', :with => 'Antivirus', :field => 'Material'
 
       click_button 'Adicionar Dotação'
 
       within('.price-registration-budget-structure:first') do
-        fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Desenvolvimento', :field => 'Descrição'
+        fill_modal 'Solicitante', :with => 'Secretaria de Desenvolvimento', :field => 'Descrição'
       end
 
       click_button 'Adicionar Dotação'
 
       within('.price-registration-budget-structure:first') do
-        find_field('Estrutura orçamentária').click
+        find_field('Solicitante').click
       end
     end
 
