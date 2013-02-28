@@ -295,7 +295,7 @@ feature "PurchaseSolicitationItemGroups" do
   scenario 'disable fields and hiden buttons when not editable' do
     PurchaseSolicitationItemGroup.make!(
       :antivirus,
-      :administrative_process => AdministrativeProcess.make!(:compra_de_cadeiras)
+      :licitation_process => LicitationProcess.make!(:processo_licitatorio)
     )
 
     navigate 'Processos de Compra > Agrupamentos de Itens de Solicitações de Compra'
