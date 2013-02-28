@@ -38,6 +38,12 @@ feature "PurchaseSolicitationItemGroups" do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
+    click_link "Filtrar Solicitações de Compra"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       page.find('a').click
     end
@@ -58,6 +64,12 @@ feature "PurchaseSolicitationItemGroups" do
     click_button 'Salvar'
 
     navigate 'Processos de Compra > Solicitações de Compra'
+
+    click_link "Filtrar Solicitações de Compra"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     within_records do
       page.find('a').click
@@ -81,6 +93,12 @@ feature "PurchaseSolicitationItemGroups" do
     expect(page).to have_notice 'Agrupamento de Item de Solicitação de Compra editado com sucesso.'
 
     navigate 'Processos de Compra > Solicitações de Compra'
+
+    click_link "Filtrar Solicitações de Compra"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     within_records do
       page.find('a').click

@@ -345,6 +345,12 @@ feature "DirectPurchases" do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
+    click_link "Filtrar Solicitações de Compra"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       page.find('a').click
     end
@@ -378,6 +384,12 @@ feature "DirectPurchases" do
     expect(page).to have_notice 'Compra Direta 1/2012 editada com sucesso.'
 
     navigate 'Processos de Compra > Solicitações de Compra'
+
+    click_link "Filtrar Solicitações de Compra"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     within_records do
       page.find('a').click
@@ -1089,6 +1101,12 @@ feature "DirectPurchases" do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
+    click_link "Filtrar Solicitações de Compra"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       page.find('a').click
     end
@@ -1446,6 +1464,12 @@ feature "DirectPurchases" do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
+    click_link "Filtrar Solicitações de Compra"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       click_link purchase_solicitation.decorator.code_and_year
     end
@@ -1497,6 +1521,12 @@ feature "DirectPurchases" do
     click_link 'voltar'
 
     navigate 'Processos de Compra > Solicitações de Compra'
+
+    click_link "Filtrar Solicitações de Compra"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     within_records do
       click_link purchase_solicitation.decorator.code_and_year
@@ -1555,6 +1585,12 @@ feature "DirectPurchases" do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
+    click_link "Filtrar Solicitações de Compra"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     click_link '1/2012'
 
     expect(page).to have_select "Status de atendimento", :selected => 'Parcialmente atendido'
@@ -1579,11 +1615,23 @@ feature "DirectPurchases" do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
+    click_link "Filtrar Solicitações de Compra"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     click_link '1/2012'
 
     expect(page).to have_select "Status de atendimento", :selected => 'Liberada'
 
     navigate 'Processos de Compra > Solicitações de Compra'
+
+    click_link "Filtrar Solicitações de Compra"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     click_link '1/2013'
 
@@ -1770,6 +1818,12 @@ feature "DirectPurchases" do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
+    click_link "Filtrar Solicitações de Compra"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     item_group.purchase_solicitations.each do |purchase_solicitation|
       within_records do
         click_link purchase_solicitation.decorator.code_and_year
@@ -1805,6 +1859,12 @@ feature "DirectPurchases" do
     expect(page).to have_select "Situação", :selected => 'Atendido'
 
     navigate 'Processos de Compra > Solicitações de Compra'
+
+    click_link "Filtrar Solicitações de Compra"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     item_group.purchase_solicitations.each do |purchase_solicitation|
       within_records do
@@ -2206,6 +2266,12 @@ feature "DirectPurchases" do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
+    click_link "Filtrar Solicitações de Compra"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       click_link '1/2012'
     end
@@ -2263,6 +2329,12 @@ feature "DirectPurchases" do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
+    click_link "Filtrar Solicitações de Compra"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       click_link '1/2012'
     end
@@ -2301,6 +2373,12 @@ feature "DirectPurchases" do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
+    click_link "Filtrar Solicitações de Compra"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       click_link '1/2012'
     end
@@ -2316,6 +2394,12 @@ feature "DirectPurchases" do
     end
 
     click_link 'Voltar'
+
+    click_link "Filtrar Solicitações de Compra"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     within_records do
       click_link '1/2013'

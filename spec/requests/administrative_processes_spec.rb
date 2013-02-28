@@ -628,6 +628,12 @@ feature "AdministrativeProcesses" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
+    click_link "Filtrar Processos Administrativos"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       page.find('a').click
     end
@@ -658,6 +664,12 @@ feature "AdministrativeProcesses" do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
+    click_link "Filtrar Solicitações de Compra"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       page.find('a').click
     end
@@ -677,6 +689,12 @@ feature "AdministrativeProcesses" do
     expect(page).to have_notice 'Processo Administrativo anulado com sucesso'
 
     navigate 'Processos de Compra > Solicitações de Compra'
+
+    click_link "Filtrar Solicitações de Compra"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     within_records do
       page.find('a').click
@@ -932,6 +950,12 @@ feature "AdministrativeProcesses" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
+    click_link "Filtrar Processos Administrativos"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       page.find('a').click
     end
@@ -956,6 +980,12 @@ feature "AdministrativeProcesses" do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
+    click_link "Filtrar Solicitações de Compra"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       page.find('a').click
     end
@@ -970,6 +1000,12 @@ feature "AdministrativeProcesses" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
+    click_link "Filtrar Processos Administrativos"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       page.find('a').click
     end
@@ -983,6 +1019,12 @@ feature "AdministrativeProcesses" do
     expect(page).to have_notice 'Processo Administrativo 1/2012 editado com sucesso.'
 
     navigate 'Processos de Compra > Solicitações de Compra'
+
+    click_link "Filtrar Solicitações de Compra"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     within_records do
       page.find('a').click
@@ -1036,6 +1078,12 @@ feature "AdministrativeProcesses" do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
+    click_link "Filtrar Solicitações de Compra"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       page.find('a').click
     end
@@ -1083,6 +1131,12 @@ feature "AdministrativeProcesses" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
+    click_link "Filtrar Processos Administrativos"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       page.find('a').click
     end
@@ -1105,6 +1159,12 @@ feature "AdministrativeProcesses" do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
+    click_link "Filtrar Solicitações de Compra"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       click_link '1/2012'
     end
@@ -1114,6 +1174,12 @@ feature "AdministrativeProcesses" do
     end
 
     navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+
+    click_link "Filtrar Processos Administrativos"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     within_records do
       click_link '1/2012'
@@ -1137,6 +1203,12 @@ feature "AdministrativeProcesses" do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
+    click_link "Filtrar Solicitações de Compra"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       click_link '1/2012'
     end
@@ -1146,6 +1218,12 @@ feature "AdministrativeProcesses" do
     end
 
     click_link 'Voltar'
+
+    click_link "Filtrar Solicitações de Compra"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     within_records do
       click_link '2/2012'
@@ -1169,6 +1247,12 @@ feature "AdministrativeProcesses" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
+    click_link "Filtrar Processos Administrativos"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       page.find('a').click
     end
@@ -1191,6 +1275,12 @@ feature "AdministrativeProcesses" do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
+    click_link "Filtrar Solicitações de Compra"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       click_link '1/2012'
     end
@@ -1210,6 +1300,12 @@ feature "AdministrativeProcesses" do
     end
 
     navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+
+    click_link "Filtrar Processos Administrativos"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     within_records do
       click_link '1/2012'
@@ -1233,6 +1329,12 @@ feature "AdministrativeProcesses" do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
+    click_link "Filtrar Solicitações de Compra"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       click_link '1/2012'
     end
@@ -1252,6 +1354,12 @@ feature "AdministrativeProcesses" do
     end
 
     click_link 'Voltar'
+
+    click_link "Filtrar Solicitações de Compra"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     within_records do
       click_link '2/2012'
@@ -1351,6 +1459,12 @@ feature "AdministrativeProcesses" do
     expect(page).to have_notice 'Processo Administrativo 1/2012 editado com sucesso.'
 
     navigate 'Processos de Compra > Solicitações de Compra'
+
+    click_link "Filtrar Solicitações de Compra"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     within_records do
       click_link '1/2012'
@@ -1507,6 +1621,12 @@ feature "AdministrativeProcesses" do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
+    click_link "Filtrar Solicitações de Compra"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       click_link '1/2012'
     end
@@ -1580,6 +1700,12 @@ feature "AdministrativeProcesses" do
     AdministrativeProcess.make!(:compra_aguardando)
 
     navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+
+    click_link "Filtrar Processos Administrativos"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     within_records do
       expect(page).to have_content 'Código/Ano'

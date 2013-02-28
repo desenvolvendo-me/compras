@@ -15,6 +15,12 @@ feature "PurchaseSolicitationLiberations" do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
+    click_link "Filtrar Solicitações de Compra"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       page.find('a').click
     end

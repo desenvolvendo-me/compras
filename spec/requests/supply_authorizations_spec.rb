@@ -13,6 +13,12 @@ feature "SupplyAuthorizations" do
 
     navigate 'Processos de Compra > Compra Direta'
 
+    click_link "Filtrar Compras Diretas"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       page.find('a').click
     end
@@ -56,6 +62,12 @@ feature "SupplyAuthorizations" do
     SignatureConfiguration.make!(:autorizacoes_de_fornecimento)
 
     navigate 'Processos de Compra > Compra Direta'
+
+    click_link "Filtrar Compras Diretas"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     within_records do
       page.find('a').click
@@ -105,6 +117,12 @@ feature "SupplyAuthorizations" do
     SignatureConfiguration.make!(:autorizacoes_de_fornecimento)
 
     navigate 'Processos de Compra > Compra Direta'
+
+    click_link "Filtrar Compras Diretas"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     within_records do
       page.find('a').click

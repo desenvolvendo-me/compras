@@ -15,6 +15,12 @@ feature 'ContractTerminations' do
 
     navigate 'Comum > Cadastrais > Contratos'
 
+    click_link "Filtrar Contratos"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     click_link '001'
 
     click_link 'Rescisão'
@@ -75,6 +81,12 @@ feature 'ContractTerminations' do
 
     navigate 'Comum > Cadastrais > Contratos'
 
+    click_link "Filtrar Contratos"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     click_link '001'
 
     click_link 'Rescisão'
@@ -96,6 +108,12 @@ feature 'ContractTerminations' do
     ResourceAnnul.make!(:rescisao_de_contrato_anulada)
 
     navigate 'Comum > Cadastrais > Contratos'
+
+    click_link "Filtrar Contratos"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     click_link '001'
 

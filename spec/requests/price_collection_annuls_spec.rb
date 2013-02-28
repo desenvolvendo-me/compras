@@ -11,6 +11,12 @@ feature 'PriceCollectionAnnuls' do
 
     navigate 'Processos de Compra > Coletas de Preços'
 
+    click_link "Filtrar Coletas de Preços"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     click_link '1/2012'
 
     click_link 'Anular'
@@ -28,6 +34,12 @@ feature 'PriceCollectionAnnuls' do
     Employee.make!(:wenderson)
 
     navigate 'Processos de Compra > Coletas de Preços'
+
+    click_link "Filtrar Coletas de Preços"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     click_link '1/2012'
 

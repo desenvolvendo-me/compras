@@ -1490,6 +1490,12 @@ feature "LicitationProcesses" do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
+    click_link "Filtrar Solicitações de Compra"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       click_link '1/2012'
     end
@@ -1551,6 +1557,12 @@ feature "LicitationProcesses" do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
+    click_link "Filtrar Solicitações de Compra"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       click_link '1/2012'
     end
@@ -1578,6 +1590,12 @@ feature "LicitationProcesses" do
     end
 
     navigate 'Processos de Compra > Solicitações de Compra'
+
+    click_link "Filtrar Solicitações de Compra"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     within_records do
       click_link '1/2012'

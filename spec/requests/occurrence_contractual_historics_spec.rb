@@ -14,6 +14,12 @@ feature "OccurrenceContractualHistorics" do
 
     navigate 'Comum > Cadastrais > Contratos'
 
+    click_link "Filtrar Contratos"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       page.find('a').click
     end
@@ -45,6 +51,12 @@ feature "OccurrenceContractualHistorics" do
 
     navigate 'Comum > Cadastrais > Contratos'
 
+    click_link "Filtrar Contratos"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       page.find('a').click
     end
@@ -70,6 +82,12 @@ feature "OccurrenceContractualHistorics" do
     OccurrenceContractualHistoric.make!(:example)
 
     navigate 'Comum > Cadastrais > Contratos'
+
+    click_link "Filtrar Contratos"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     within_records do
       page.find('a').click

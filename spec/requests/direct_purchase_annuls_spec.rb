@@ -19,6 +19,12 @@ feature 'DirectPurchaseAnnuls' do
 
     navigate 'Processos de Compra > Compra Direta'
 
+    click_link "Filtrar Compras Diretas"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       page.find('a').click
     end
@@ -33,6 +39,12 @@ feature 'DirectPurchaseAnnuls' do
     )
 
     navigate 'Processos de Compra > Compra Direta'
+
+    click_link "Filtrar Compras Diretas"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     within_records do
       page.find('a').click
@@ -53,6 +65,12 @@ feature 'DirectPurchaseAnnuls' do
 
     navigate 'Processos de Compra > Compra Direta'
 
+    click_link "Filtrar Compras Diretas"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       page.find('a').click
     end
@@ -66,6 +84,12 @@ feature 'DirectPurchaseAnnuls' do
     DirectPurchase.make!(:compra)
 
     navigate 'Processos de Compra > Compra Direta'
+
+    click_link "Filtrar Compras Diretas"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     within_records do
       page.find('a').click
@@ -99,6 +123,12 @@ feature 'DirectPurchaseAnnuls' do
     )
 
     navigate 'Processos de Compra > Compra Direta'
+
+    click_link "Filtrar Compras Diretas"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     within_records do
       page.find('a').click
@@ -141,6 +171,12 @@ feature 'DirectPurchaseAnnuls' do
 
     navigate 'Processos de Compra > Compra Direta'
 
+    click_link "Filtrar Compras Diretas"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       page.find('a').click
     end
@@ -153,6 +189,12 @@ feature 'DirectPurchaseAnnuls' do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
+    click_link "Filtrar Solicitações de Compra"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       page.find('a').click
     end
@@ -162,6 +204,12 @@ feature 'DirectPurchaseAnnuls' do
     end
 
     navigate 'Processos de Compra > Compra Direta'
+
+    click_link "Filtrar Compras Diretas"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     within_records do
       page.find('a').click
@@ -188,6 +236,12 @@ feature 'DirectPurchaseAnnuls' do
     expect(page).to have_field 'Justificativa', :with => 'Anulação da compra direta'
 
     navigate 'Processos de Compra > Solicitações de Compra'
+
+    click_link "Filtrar Solicitações de Compra"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     within_records do
       page.find('a').click
@@ -208,6 +262,12 @@ feature 'DirectPurchaseAnnuls' do
 
     navigate 'Processos de Compra > Compra Direta'
 
+    click_link "Filtrar Compras Diretas"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       page.find('a').click
     end
@@ -226,6 +286,12 @@ feature 'DirectPurchaseAnnuls' do
     )
 
     navigate 'Processos de Compra > Compra Direta'
+
+    click_link "Filtrar Compras Diretas"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     within_records do
       page.find('a').click
@@ -252,6 +318,12 @@ feature 'DirectPurchaseAnnuls' do
     expect(page).to have_field 'Justificativa', :with => 'Anulação da compra direta'
 
     navigate 'Processos de Compra > Solicitações de Compra'
+
+    click_link "Filtrar Solicitações de Compra"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     within_records do
       page.find('a').click
@@ -278,6 +350,12 @@ feature 'DirectPurchaseAnnuls' do
 
     navigate 'Processo Administrativo/Licitatório > Auxiliar > Objetos de Licitação'
 
+    click_link "Filtrar Objetos de Licitação"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     click_link 'Ponte'
 
     within_tab 'Total acumulado' do
@@ -291,6 +369,12 @@ feature 'DirectPurchaseAnnuls' do
     end
 
     navigate 'Processos de Compra > Compra Direta'
+
+    click_link "Filtrar Compras Diretas"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     within_records do
       click_link "#{direct_purchase}"
@@ -317,6 +401,12 @@ feature 'DirectPurchaseAnnuls' do
     expect(page).to have_field 'Justificativa', :with => 'Anulação da compra direta'
 
     navigate 'Processo Administrativo/Licitatório > Auxiliar > Objetos de Licitação'
+
+    click_link "Filtrar Objetos de Licitação"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     click_link 'Ponte'
 

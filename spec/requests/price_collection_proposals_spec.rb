@@ -18,6 +18,12 @@ feature "PriceCollectionProposals" do
 
       navigate 'Processos de Compra > Coletas de Preços'
 
+      click_link "Filtrar Coletas de Preços"
+
+      clear_modal "Ano"
+
+      click_button "Pesquisar"
+
       click_link '1/2012'
 
       click_link 'Propostas'
@@ -31,6 +37,12 @@ feature "PriceCollectionProposals" do
 
       navigate 'Processos de Compra > Coletas de Preços'
 
+      click_link "Filtrar Coletas de Preços"
+
+      clear_modal "Ano"
+
+      click_button "Pesquisar"
+
       click_link '1/2012'
 
       click_link 'Propostas'
@@ -41,7 +53,13 @@ feature "PriceCollectionProposals" do
     scenario 'should not have a button to delete a proposal' do
       PriceCollection.make!(:coleta_de_precos)
 
-    navigate 'Processos de Compra > Coletas de Preços'
+      navigate 'Processos de Compra > Coletas de Preços'
+
+      click_link "Filtrar Coletas de Preços"
+
+      clear_modal "Ano"
+
+      click_button "Pesquisar"
 
       click_link '1/2012'
 
@@ -58,6 +76,12 @@ feature "PriceCollectionProposals" do
       price_collection = PriceCollection.make!(:coleta_de_precos)
 
       navigate 'Processos de Compra > Coletas de Preços'
+
+      click_link "Filtrar Coletas de Preços"
+
+      clear_modal "Ano"
+
+      click_button "Pesquisar"
 
       click_link '1/2012'
 
@@ -81,6 +105,12 @@ feature "PriceCollectionProposals" do
       PriceCollection.make!(:coleta_de_precos)
 
       navigate 'Processos de Compra > Coletas de Preços'
+
+      click_link "Filtrar Coletas de Preços"
+
+      clear_modal "Ano"
+
+      click_button "Pesquisar"
 
       click_link '1/2012'
 

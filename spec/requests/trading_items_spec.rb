@@ -14,6 +14,12 @@ feature TradingItem do
 
     navigate "Processo Administrativo/Licitatório > Pregão Presencial"
 
+    click_link "Filtrar Pregões Presenciais"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     click_link "1/2012"
 
     click_button "Salvar e ir para Itens/Ofertas"
@@ -45,6 +51,12 @@ feature TradingItem do
 
     navigate "Processo Administrativo/Licitatório > Pregão Presencial"
 
+    click_link "Filtrar Pregões Presenciais"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     click_link "1/2012"
 
     click_button "Salvar e ir para Itens/Ofertas"
@@ -65,6 +77,12 @@ feature TradingItem do
 
     navigate "Processo Administrativo/Licitatório > Pregão Presencial"
 
+    click_link "Filtrar Pregões Presenciais"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     click_link '1/2012'
 
     click_button 'Salvar e ir para Itens/Ofertas'
@@ -78,6 +96,12 @@ feature TradingItem do
     Trading.make!(:pregao_presencial)
 
     navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+
+    click_link "Filtrar Pregões Presenciais"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     click_link '1/2012'
 
@@ -95,6 +119,12 @@ feature TradingItem do
     Trading.make!(:pregao_presencial)
 
     navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+
+    click_link "Filtrar Pregões Presenciais"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     click_link '1/2012'
 
@@ -143,6 +173,12 @@ feature TradingItem do
     Trading.make!(:pregao_presencial, :licitation_process => licitation_process)
 
     navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+
+    click_link "Filtrar Pregões Presenciais"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     click_link "1/2012"
     click_button "Salvar e ir para Itens/Ofertas"
@@ -214,6 +250,12 @@ feature TradingItem do
 
     navigate "Processo Administrativo/Licitatório > Pregão Presencial"
 
+    click_link "Filtrar Pregões Presenciais"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     click_link "1/2012"
     click_button "Salvar e ir para Itens/Ofertas"
     click_link "Fazer oferta"
@@ -248,6 +290,12 @@ feature TradingItem do
     BidderDisqualification.create!(:bidder_id => bidder.id, :reason => "Inabilitado")
 
     navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+
+    click_link "Filtrar Pregões Presenciais"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     click_link "1/2012"
     click_button "Salvar e ir para Itens/Ofertas"
@@ -309,6 +357,12 @@ feature TradingItem do
     Trading.make!(:pregao_presencial, :licitation_process => licitation_process)
 
     navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+
+    click_link "Filtrar Pregões Presenciais"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     click_link "1/2012"
     click_button "Salvar e ir para Itens/Ofertas"
@@ -514,6 +568,12 @@ feature TradingItem do
 
     navigate "Processo Administrativo/Licitatório > Pregão Presencial"
 
+    click_link "Filtrar Pregões Presenciais"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     click_link "1/2012"
     click_button "Salvar e ir para Itens/Ofertas"
     click_link "Fazer oferta"
@@ -644,6 +704,12 @@ feature TradingItem do
 
     navigate "Processo Administrativo/Licitatório > Pregão Presencial"
 
+    click_link "Filtrar Pregões Presenciais"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     click_link "1/2012"
     click_button "Salvar e ir para Itens/Ofertas"
     click_link "Fazer oferta"
@@ -721,6 +787,12 @@ feature TradingItem do
     Trading.make!(:pregao_presencial, :licitation_process => licitation_process)
 
     navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+
+    click_link "Filtrar Pregões Presenciais"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     click_link "1/2012"
     click_button "Salvar e ir para Itens/Ofertas"
@@ -800,6 +872,12 @@ feature TradingItem do
 
     navigate "Processo Administrativo/Licitatório > Pregão Presencial"
 
+    click_link "Filtrar Pregões Presenciais"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     click_link "1/2012"
     click_button "Salvar e ir para Itens/Ofertas"
     click_link "Fazer oferta"
@@ -874,6 +952,12 @@ feature TradingItem do
 
     navigate "Processo Administrativo/Licitatório > Pregão Presencial"
 
+    click_link "Filtrar Pregões Presenciais"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     click_link "1/2012"
     click_button "Salvar e ir para Itens/Ofertas"
     click_link "Fazer oferta"
@@ -886,6 +970,12 @@ feature TradingItem do
     expect(page).to have_content 'Proposta criada com sucesso'
 
     navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+
+    click_link "Filtrar Pregões Presenciais"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     click_link "1/2012"
     click_button "Salvar e ir para Itens/Ofertas"
@@ -903,6 +993,12 @@ feature TradingItem do
                                :status => TradingItemClosingStatus::FAILED)
 
     navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+
+    click_link "Filtrar Pregões Presenciais"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     click_link "1/2012"
     click_button "Salvar e ir para Itens/Ofertas"
