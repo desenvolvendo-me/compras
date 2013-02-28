@@ -62,6 +62,11 @@ class LicitationProcessesController < CrudController
       object.status = LicitationProcessStatus::WAITING_FOR_OPEN
 
       if super
+        if params[:licitation_process]
+          AdministrativeProcessBudgetAllocationCloner.clone(
+            :licitation_process => object, :new_purchase_solicitation => new_purchase_solicitation)
+        end
+
         DeliveryLocationChanger.change(object.purchase_solicitation, object.delivery_location)
       end
     end
@@ -69,6 +74,9 @@ class LicitationProcessesController < CrudController
 
   def update_resource(object, attributes)
     return unless object.updatable?
+
+    old_item_group = object.purchase_solicitation_item_group
+    old_purchase_solicitation = object.purchase_solicitation
 
     object.transaction do
       AdministrativeProcessBudgetAllocationCleaner.new(object, new_item_group).clear_old_records
@@ -79,6 +87,11 @@ class LicitationProcessesController < CrudController
 
       if object.save!
         DeliveryLocationChanger.change(object.purchase_solicitation, object.delivery_location)
+
+        AdministrativeProcessBudgetAllocationCloner.clone(
+          :licitation_process => object,
+          :new_purchase_solicitation => new_purchase_solicitation,
+          :old_purchase_solicitation => old_purchase_solicitation)
       end
     end
   end
@@ -87,5 +100,11 @@ class LicitationProcessesController < CrudController
     item_group_id = params[:licitation_process][:purchase_solicitation_item_group_id]
 
     PurchaseSolicitationItemGroup.find(item_group_id) if item_group_id.present?
+  end
+
+  def new_purchase_solicitation
+    purchase_solicitation_id = params[:licitation_process][:purchase_solicitation_id]
+
+    PurchaseSolicitation.find(purchase_solicitation_id) if purchase_solicitation_id.present?
   end
 end

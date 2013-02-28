@@ -57,6 +57,19 @@ describe LicitationProcessesController do
         :purchase_solicitation_id => purchase_solicitation.id,
         :delivery_location_id => delivery_location.id }
     end
+
+    it 'should update item_group status and fullfil the item' do
+      item_group = PurchaseSolicitationItemGroup.make!(:antivirus)
+
+      LicitationProcess.any_instance.should_receive(:transaction).and_yield
+      LicitationProcess.any_instance.should_receive(:save).and_return(true)
+      LicitationProcess.any_instance.should_receive(:id).any_number_of_times.and_return(1)
+
+      AdministrativeProcessBudgetAllocationCloner.should_receive(:clone)
+
+      post :create, :licitation_process => {
+        :purchase_solicitation_item_group_id => item_group.id }
+    end
   end
 
   describe 'PUT #update' do
@@ -125,6 +138,15 @@ describe LicitationProcessesController do
 
       AdministrativeProcessBudgetAllocationCleaner.any_instance.
                                                    should_receive(:clear_old_records)
+
+      put :update, :id => licitation_process.id,
+                   :licitation_process => { :purchase_solicitation_item_group_id => item_group.id }
+    end
+
+    it 'should update purchase_solicitation fulfiller if has item group' do
+      licitation_process = LicitationProcess.make!(:processo_licitatorio)
+      item_group = PurchaseSolicitationItemGroup.make!(:antivirus)
+      AdministrativeProcessBudgetAllocationCloner.should_receive(:clone)
 
       put :update, :id => licitation_process.id,
                    :licitation_process => { :purchase_solicitation_item_group_id => item_group.id }

@@ -1,13 +1,14 @@
 require 'unit_helper'
+require 'active_support/core_ext/module/delegation'
 require 'app/business/administrative_process_budget_allocation_cloner'
 
 describe AdministrativeProcessBudgetAllocationCloner do
   subject do
-    described_class.new(:administrative_process => administrative_process,
+    described_class.new(:licitation_process => licitation_process,
                         :new_purchase_solicitation => purchase_solicitation)
   end
 
-  let(:administrative_process) { double(:administrative_process) }
+  let(:licitation_process) { double(:licitation_process) }
   let(:purchase_solicitation) { double(:purchase_solicitation) }
 
   describe 'delegates' do
@@ -21,7 +22,7 @@ describe AdministrativeProcessBudgetAllocationCloner do
   describe '#clone!' do
     context 'when has no purchase_solicitation' do
       subject do
-        described_class.new(:administrative_process => administrative_process)
+        described_class.new(:licitation_process => licitation_process)
       end
 
       it 'should do nothing' do
@@ -55,7 +56,7 @@ describe AdministrativeProcessBudgetAllocationCloner do
       end
     end
 
-    context 'with administrative_process and purchase_solicitations' do
+    context 'with licitation_process and purchase_solicitations' do
       let(:adm_budget_allocations) { double(:administrative_process_budget_allocations) }
       let(:adm_items) { double(:administrative_process_budget_allocation_items) }
       let(:adm_item) { double(:administrative_process_budget_allocation_item) }
@@ -76,11 +77,11 @@ describe AdministrativeProcessBudgetAllocationCloner do
 
       before do
         purchase_solicitation.stub(:purchase_solicitation_budget_allocations => [budget_allocation])
-        administrative_process.stub(:administrative_process_budget_allocations => adm_budget_allocations)
+        licitation_process.stub(:administrative_process_budget_allocations => adm_budget_allocations)
       end
 
       describe 'with new_purchase_solicitation different from old_purchase_solicitation' do
-        it 'should copy the budget_allocations from purchase_solicitation to administrative_process' do
+        it 'should copy the budget_allocations from purchase_solicitation to licitation_process' do
           adm_budget_allocations.should_receive(:destroy_all)
           adm_budget_allocations.should_receive(:build).and_return(adm_budget_allocation)
           adm_items.should_receive(:build).and_return(adm_item)
@@ -101,7 +102,7 @@ describe AdministrativeProcessBudgetAllocationCloner do
 
       describe 'with new_purchase_solicitation equals to old_purchase_solicitation' do
         subject do
-          described_class.new(:administrative_process => administrative_process,
+          described_class.new(:licitation_process => licitation_process,
                               :new_purchase_solicitation => purchase_solicitation,
                               :old_purchase_solicitation => purchase_solicitation)
         end
@@ -124,12 +125,12 @@ describe AdministrativeProcessBudgetAllocationCloner do
         end
 
         subject do
-          described_class.new(:administrative_process => administrative_process,
+          described_class.new(:licitation_process => licitation_process,
                               :new_purchase_solicitation => purchase_solicitation,
                               :material => material)
         end
 
-        it 'should copy the budget_allocations only with specific material from purchase_solicitation to administrative_process' do
+        it 'should copy the budget_allocations only with specific material from purchase_solicitation to licitation_process' do
           adm_budget_allocations.should_receive(:destroy_all)
           adm_budget_allocations.should_receive(:build).and_return(adm_budget_allocation)
           adm_items.should_receive(:build).and_return(adm_item)
@@ -151,12 +152,12 @@ describe AdministrativeProcessBudgetAllocationCloner do
 
       context 'without clear_old_data' do
         subject do
-          described_class.new(:administrative_process => administrative_process,
+          described_class.new(:licitation_process => licitation_process,
                               :new_purchase_solicitation => purchase_solicitation,
                               :clear_old_data => false)
         end
 
-        it 'should copy the budget_allocations from purchase_solicitation to administrative_process without clear old data' do
+        it 'should copy the budget_allocations from purchase_solicitation to licitation_process without clear old data' do
           adm_budget_allocations.should_not_receive(:destroy_all)
           adm_budget_allocations.should_receive(:build).and_return(adm_budget_allocation)
           adm_items.should_receive(:build).and_return(adm_item)

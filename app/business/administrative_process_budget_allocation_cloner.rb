@@ -1,6 +1,6 @@
 class AdministrativeProcessBudgetAllocationCloner
   def initialize(options = {})
-    @administrative_process     = options[:administrative_process]
+    @licitation_process         = options[:licitation_process]
     @new_purchase_solicitation  = options[:new_purchase_solicitation]
     @old_purchase_solicitation  = options[:old_purchase_solicitation]
     @material                   = options[:material]
@@ -12,12 +12,12 @@ class AdministrativeProcessBudgetAllocationCloner
   end
 
   def clone!
-    return unless @administrative_process.present?
+    return unless licitation_process
 
-    if @new_purchase_solicitation != @old_purchase_solicitation
+    if new_purchase_solicitation != old_purchase_solicitation
       clear_all_administrative_process_budget_allocations
 
-      if @new_purchase_solicitation.present?
+      if new_purchase_solicitation
         purchase_solicitation_budget_allocations.each do |psba|
           clone_budget_allocation(psba)
         end
@@ -28,19 +28,19 @@ class AdministrativeProcessBudgetAllocationCloner
   private
 
   attr_reader :new_purchase_solicitation, :old_purchase_solicitation,
-              :administrative_process, :material, :clear_old_data
+              :licitation_process, :material, :clear_old_data
 
   delegate :purchase_solicitation_budget_allocations,
            :to => :new_purchase_solicitation, :allow_nil => true
 
   def clear_all_administrative_process_budget_allocations
-    return unless @clear_old_data
+    return unless clear_old_data
 
-    @administrative_process.administrative_process_budget_allocations.destroy_all
+    licitation_process.administrative_process_budget_allocations.destroy_all
   end
 
   def clone_budget_allocation(psba)
-    new_budget_allocation = administrative_process.administrative_process_budget_allocations.build
+    new_budget_allocation = licitation_process.administrative_process_budget_allocations.build
 
     new_budget_allocation.transaction do
       new_budget_allocation.budget_allocation_id = psba.budget_allocation_id
@@ -69,8 +69,8 @@ class AdministrativeProcessBudgetAllocationCloner
   end
 
   def items_by_material(psba)
-    if @material
-      psba.items.by_material(@material.id)
+    if material
+      psba.items.by_material(material.id)
     else
       psba.items
     end
