@@ -2,7 +2,6 @@ pt-BR:
   controllers: &controllers
     addresses: "Endereços"
     administration_types: "Tipos de Administração"
-    administrative_process_liberations: "Liberações de Processos Administrativos"
     administrative_processes: "Processos Administrativos"
     agencies: "Agências"
     bank_accounts: "Contas Bancárias"

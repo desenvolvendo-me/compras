@@ -1,7 +1,0 @@
-<div class="buttons">
-  <% if f.object.new_record? && can?(:modify, main_controller_name) %>
-    <%= f.button :submit %>
-  <% end %>
-
-  <%= f.button :back, :href => edit_administrative_process_path(resource.administrative_process) %>
-</div>

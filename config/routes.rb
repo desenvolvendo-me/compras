@@ -89,8 +89,6 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :administrative_process_liberations, :except => [ :destroy, :index, :update ]
-
   resources :agencies do
     collection do
       get :modal
