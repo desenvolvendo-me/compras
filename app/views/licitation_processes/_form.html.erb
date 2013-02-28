@@ -138,14 +138,17 @@
   })();
 
   function disableBudgetAllocations() {
-    $("#budget-allocations :input").attr("disabled", true);
-    $("#budget-allocations :input[type='button']").hide();
+    $("#budget_allocations :input").attr("readonly", "readonly");
+    $("#budget_allocations .modal").attr("disabled", "disabled");
+    $("#budget_allocations .remove-item").hide();
+    $("#budget_allocations .remove-administrative-process-budget-allocation").hide();
+    $("#budget_allocations .add-administrative-process-budget-allocation").hide();
+    $("#budget_allocations .add-items").hide();
   }
 
-
   function enableBudgetAllocations() {
-    $("#budget_allocations :input").attr("disabled", false);
-    $("#budget_allocations :input[type='button']").show();
+    $("#budget_allocations .add-administrative-process-budget-allocation").attr("disabled", false);
+    $("#budget_allocations .add-administrative-process-budget-allocation").show();
   }
 
   function disablePurchaseSolicitation() {
@@ -173,13 +176,41 @@
     }
   }
 
+  function renderBudgetAllocationItem(budget_allocation_uuid, budget_allocation_item) {
+    var budgetAllocationItemBinds = [];
+    var itemsID = "#items-fresh-" + budget_allocation_uuid;
+    var itemMustacheId = "#items-template-fresh-" + budget_allocation_uuid;
+    var budgetAllocationItemUUID = _.uniqueId();
+
+    budgetAllocationItemBinds["uuid_item"] = "fresh-" + budgetAllocationItemUUID;
+
+    $(itemsID).append(
+      $(itemMustacheId).mustache(budgetAllocationItemBinds)
+    ).trigger("nestedForm:afterAdd");
+
+    fillBudgetAllocationItem(budgetAllocationItemUUID, budget_allocation_item);
+  }
+
+  function fillBudgetAllocationItem(uuid, budget_allocation_item) {
+    var prefixNameUuid = "#licitation_process_administrative_process_budget_allocations_attributes___uuid-administrative-process-budget-allocation___items_attributes_fresh-" + uuid;
+
+    $(prefixNameUuid + "_material").val(budget_allocation_item.material_description);
+    $(prefixNameUuid + "_material_id").val(budget_allocation_item.material_id);
+    $(prefixNameUuid + "_reference_unit").val(budget_allocation_item.reference_unit);
+    $(prefixNameUuid + "_quantity").val(numberWithDelimiter(budget_allocation_item.quantity));
+    $(prefixNameUuid + "_unit_price").val(numberWithDelimiter(budget_allocation_item.unit_price));
+    $(prefixNameUuid + "_estimated_total_price").val(numberWithDelimiter(budget_allocation_item.estimated_total_price));
+  }
+
   function fillBudgetAllocation(uuid, budget_allocation) {
     var prefixNameUuid = "#licitation_process_administrative_process_budget_allocations_attributes_fresh-" + uuid;
 
     $(prefixNameUuid + "_budget_allocation").val(budget_allocation.description);
     $(prefixNameUuid + "_budget_allocation_id").val(budget_allocation.budget_allocation_id);
+    $(prefixNameUuid + "_budget_allocation_expense_nature").val(budget_allocation.expense_nature);
     $(prefixNameUuid + "_budget_allocation_amount").val(numberWithDelimiter(budget_allocation.amount));
     $(prefixNameUuid + "_value").val(numberWithDelimiter(budget_allocation.total_items_value));
+    $(prefixNameUuid + "_total_items_value").val(numberWithDelimiter(budget_allocation.total_items_value));
   }
 
   function renderBudgetAllocation(budget_allocation) {
@@ -193,10 +224,14 @@
     ).trigger("nestedForm:afterAdd");
 
     fillBudgetAllocation(budgetAllocationUUID, budget_allocation);
+
+    $.each(budget_allocation.items, function(i, item) {
+      renderBudgetAllocationItem(budgetAllocationUUID, item);
+    });
   }
 
   $("#licitation_process_purchase_solicitation_item_group_id").on("change", function (event, purchase_solicitation_item_group) {
-    $("#administrative_process_budget_allocations").empty();
+    $("#administrative-process-budget-allocation").empty();
 
     if (purchase_solicitation_item_group) {
       $.each(purchase_solicitation_item_group.purchase_solicitations, function (i, purchase_solicitation) {
@@ -211,10 +246,12 @@
       enableBudgetAllocations();
       enablePurchaseSolicitation();
     }
+
+    calcItemOrder();
   });
 
   $("#licitation_process_purchase_solicitation_id").on("change", function (event, purchase_solicitation) {
-    $("#administrative_process_budget_allocations").empty();
+    $("#administrative-process-budget-allocation").empty();
 
     if (purchase_solicitation) {
       $.each(purchase_solicitation.budget_allocations, function (i, budget_allocation) {
@@ -237,9 +274,9 @@
   });
 
   function calcItemOrder() {
-    $('.administrative_process_budget_allocation').each(function (index, item) {
+    $('.nested-administrative-process-budget-allocation').each(function (index, item) {
       $(this).find('.item .hidden .destroy[value=false]').each(function (index, item) {
-        $(this).closest('.administrative_process_budget_allocation .item').find('.order').val(index + 1);
+        $(this).closest('.nested-administrative-process-budget-allocation .item').find('.order').val(index + 1);
       });
     });
   }
@@ -257,14 +294,13 @@
 
   $('form.licitation_process').on('click', '.remove-item', function () {
     calcItemOrder();
-    calculateTotalOfItems($(this).closest('.administrative_process_budget_allocation'));
+    calculateTotalOfItems($(this).closest('.nested-administrative-process-budget-allocation'));
   });
 
   $('form.licitation_process').on('nestedForm:afterAdd', function (){
     calcItemOrder();
   });
 
-  calcItemOrder();
 
   $('form.licitation_process').on('keyup', '.item-quantity, .item-unit-price', function() {
     var itemDiv = $(this).closest('.item'),
@@ -273,7 +309,7 @@
         total = numberWithDelimiter(parseFloat(itemQuantity.multiply(itemUnitPrice)));
 
     itemDiv.find('.item-price').val(total);
-    calculateTotalOfItems(itemDiv.closest('.administrative_process_budget_allocation'));
+    calculateTotalOfItems(itemDiv.closest('.nested-administrative-process-budget-allocation'));
   });
 
   $('form.licitation_process').on('keyup', '.item-price', function () {
@@ -288,7 +324,7 @@
     }
 
     itemDiv.find('.item-unit-price').val(unitPrice);
-    calculateTotalOfItems(itemDiv.closest('.administrative_process_budget_allocation'));
+    calculateTotalOfItems(itemDiv.closest('.nested-administrative-process-budget-allocation'));
   });
 
   function filterTypesOfCalculation (judgmentKind) {
@@ -343,6 +379,8 @@
   });
 
   $("#licitation_process_type_of_calculation").val("<%= f.object.type_of_calculation %>");
+
+  calcItemOrder();
 
   <% unless resource.updatable? %>
     $(function(){

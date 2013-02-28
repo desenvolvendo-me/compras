@@ -1495,4 +1495,1235 @@ feature "LicitationProcesses" do
 
     expect(page).to have_field 'Local para entrega', :with => 'Secretaria da Saúde'
   end
+
+  scenario 'fill budget allocations from purchase solicitation item group' do
+    BudgetStructure.make!(:secretaria_de_educacao)
+    JudgmentForm.make!(:por_item_com_melhor_tecnica)
+    Employee.make!(:sobrinho)
+    PurchaseSolicitationItemGroup.make!(:reparo_2013)
+    Capability.make!(:reforma)
+    PaymentMethod.make!(:dinheiro)
+    DocumentType.make!(:fiscal)
+    Material.make!(:antivirus)
+    Indexer.make!(:xpto)
+
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    click_link 'Criar Processo Licitatório'
+
+    within_tab 'Principal' do
+      fill_in 'Ano', :with => '2012'
+      fill_in 'Data do processo', :with => '21/03/2012'
+      select 'Global', :from => 'Tipo de empenho'
+
+      select 'Compras e serviços', :from => 'Tipo de objeto'
+      select 'Pregão', :from => 'Modalidade'
+      select 'Por Item com Melhor Técnica', :from => 'Forma de julgamento'
+      fill_in 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
+      fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
+      fill_in 'Inciso', :with => 'Item 1'
+
+      check 'Registro de preço'
+      select 'Menor preço total por item', :from => 'Tipo da apuração'
+      select 'Empreitada integral', :from => 'Forma de execução'
+      fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
+      fill_in 'Validade da proposta', :with => '5'
+      select 'dia/dias', :from => 'Período da validade da proposta'
+      fill_modal 'Índice de reajuste', :with => 'XPTO'
+      fill_in 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
+      fill_in 'Hora da entrega', :with => '14:00'
+      fill_in 'Prazo de entrega', :with => '1'
+      select 'ano/anos', :from => 'Período do prazo de entrega'
+      fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
+      fill_in 'Valor da caução', :with => '50,00'
+      select 'Favorável', :from => 'Parecer jurídico'
+      fill_in 'Data do parecer', :with => '30/03/2012'
+      fill_in 'Data do contrato', :with => '31/03/2012'
+      fill_in 'Validade do contrato (meses)', :with => '5'
+      fill_in 'Observações gerais', :with => 'observacoes'
+
+      within_modal 'Agrupamento de solicitações de compra' do
+        click_button 'Pesquisar'
+
+        click_record 'Agrupamento de reparo 2013'
+      end
+    end
+
+    within_tab 'Documentos' do
+      fill_modal 'Tipo de documento', :with => 'Fiscal', :field => 'Descrição'
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      expect(page).to_not have_button 'Adicionar Dotação'
+
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
+      expect(page).to have_disabled_field 'Dotação orçamentária'
+
+      expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
+      expect(page).to have_readonly_field 'Compl. do elemento'
+
+      expect(page).to have_field 'Saldo da dotação', :with => '500,00'
+      expect(page).to have_readonly_field 'Saldo da dotação'
+
+      expect(page).to have_field 'Valor previsto', :with => '19.800,00'
+      expect(page).to have_readonly_field 'Valor previsto'
+
+      expect(page).to have_field 'Valor total dos itens', :with => '19.800,00'
+      expect(page).to have_readonly_field 'Valor total dos itens'
+
+      expect(page).to_not have_button 'Adicionar Item'
+
+      expect(page).to have_field 'Item', :with => '1'
+      expect(page).to have_readonly_field 'Item'
+
+      expect(page).to have_field 'Material', :with => '02.02.00001 - Arame farpado'
+      expect(page).to have_disabled_field 'Material'
+
+      expect(page).to have_field 'Unidade', :with => 'UN'
+      expect(page).to have_readonly_field 'Unidade'
+
+      expect(page).to have_field 'Quantidade', :with => '99,00'
+      expect(page).to have_readonly_field 'Quantidade'
+
+      expect(page).to have_field 'Valor unitário', :with => '200,00'
+      expect(page).to have_readonly_field 'Valor unitário'
+
+      expect(page).to have_field 'Valor total', :with => '19.800,00'
+      expect(page).to have_readonly_field 'Valor total'
+
+      expect(page).to_not have_button 'Remover Dotação'
+      expect(page).to_not have_button 'Remover Item'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Processo Licitatório 1/2012 criado com sucesso.'
+
+    within_tab 'Principal' do
+      expect(page).to have_field 'Ano', :with => '2012'
+      expect(page).to have_field 'Data do processo', :with => '21/03/2012'
+      expect(page).to have_select 'Tipo de empenho', :selected => 'Global'
+
+      expect(page).to have_select 'Tipo de objeto', :selected => 'Compras e serviços'
+      expect(page).to have_select 'Modalidade', :selected => 'Pregão'
+      expect(page).to have_select 'Forma de julgamento', :selected => 'Por Item com Melhor Técnica'
+      expect(page).to have_field 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
+      expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
+      expect(page).to have_field 'Inciso', :with => 'Item 1'
+
+      check 'Registro de preço'
+      expect(page).to have_select 'Tipo da apuração', :selected => 'Menor preço total por item'
+      expect(page).to have_select 'Forma de execução', :selected => 'Empreitada integral'
+      expect(page).to have_field 'Fonte de recurso', :with => 'Reforma e Ampliação'
+      expect(page).to have_field 'Validade da proposta', :with => '5'
+      expect(page).to have_select 'Período da validade da proposta', :selected => 'dia/dias'
+      expect(page).to have_field 'Índice de reajuste', :with => 'XPTO'
+      expect(page).to have_field 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
+      expect(page).to have_field 'Hora da entrega', :with => '14:00'
+      expect(page).to have_field 'Prazo de entrega', :with => '1'
+      expect(page).to have_select 'Período do prazo de entrega', :selected => 'ano/anos'
+      expect(page).to have_field 'Forma de pagamento', :with => 'Dinheiro'
+      expect(page).to have_field 'Valor da caução', :with => '50,00'
+      expect(page).to have_select 'Parecer jurídico', :selected => 'Favorável'
+      expect(page).to have_field 'Data do parecer', :with => '30/03/2012'
+      expect(page).to have_field 'Data do contrato', :with => '31/03/2012'
+      expect(page).to have_field 'Validade do contrato (meses)', :with => '5'
+      expect(page).to have_field 'Observações gerais', :with => 'observacoes'
+      expect(page).to have_field 'Agrupamento de solicitações de compra', :with => 'Agrupamento de reparo 2013'
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      expect(page).to_not have_button 'Adicionar Dotação'
+
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
+      expect(page).to have_disabled_field 'Dotação orçamentária'
+
+      expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
+      expect(page).to have_readonly_field 'Compl. do elemento'
+
+      expect(page).to have_field 'Saldo da dotação', :with => '500,00'
+      expect(page).to have_readonly_field 'Saldo da dotação'
+
+      expect(page).to have_field 'Valor previsto', :with => '19.800,00'
+      expect(page).to have_readonly_field 'Valor previsto'
+
+      expect(page).to have_field 'Valor total dos itens', :with => '19.800,00'
+      expect(page).to have_readonly_field 'Valor total dos itens'
+
+      expect(page).to_not have_button 'Adicionar Item'
+
+      expect(page).to have_field 'Item', :with => '1'
+      expect(page).to have_readonly_field 'Item'
+
+      expect(page).to have_field 'Material', :with => '02.02.00001 - Arame farpado'
+      expect(page).to have_disabled_field 'Material'
+
+      expect(page).to have_field 'Unidade', :with => 'UN'
+      expect(page).to have_readonly_field 'Unidade'
+
+      expect(page).to have_field 'Quantidade', :with => '99'
+      expect(page).to have_readonly_field 'Quantidade'
+
+      expect(page).to have_field 'Valor unitário', :with => '200,00'
+      expect(page).to have_readonly_field 'Valor unitário'
+
+      expect(page).to have_field 'Valor total', :with => '19.800,00'
+      expect(page).to have_readonly_field 'Valor total'
+
+      expect(page).to_not have_button 'Remover Dotação'
+      expect(page).to_not have_button 'Remover Item'
+    end
+
+    navigate 'Processos de Compra > Agrupamentos de Itens de Solicitações de Compra'
+
+    within_records do
+      click_link 'Agrupamento de reparo 2013'
+    end
+
+    expect(page).to have_select 'Situação', :selected => 'Em processo de compra'
+
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    within_records do
+      click_link '1/2013'
+    end
+
+    within_tab 'Principal' do
+      expect(page).to have_select 'Status de atendimento', :selected => 'Parcialmente atendido'
+    end
+  end
+
+  scenario 'when clear purchase solicitation item group budget allocations should clear too' do
+    PurchaseSolicitationItemGroup.make!(:reparo_2013)
+    LicitationProcess.make!(:processo_licitatorio)
+
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    within_records do
+      click_link '1/2012'
+    end
+
+    within_tab 'Principal' do
+      expect(page).to_not have_disabled_field 'Solicitação de compra'
+
+      within_modal 'Agrupamento de solicitações de compra' do
+        click_button 'Pesquisar'
+
+        click_record 'Agrupamento de reparo 2013'
+      end
+
+      expect(page).to have_disabled_field 'Solicitação de compra'
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      expect(page).to_not have_button 'Adicionar Dotação'
+
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
+      expect(page).to have_disabled_field 'Dotação orçamentária'
+
+      expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
+      expect(page).to have_readonly_field 'Compl. do elemento'
+
+      expect(page).to have_field 'Saldo da dotação', :with => '500,00'
+      expect(page).to have_readonly_field 'Saldo da dotação'
+
+      expect(page).to have_field 'Valor previsto', :with => '19.800,00'
+      expect(page).to have_readonly_field 'Valor previsto'
+
+      expect(page).to have_field 'Valor total dos itens', :with => '19.800,00'
+      expect(page).to have_readonly_field 'Valor total dos itens'
+
+      expect(page).to_not have_button 'Adicionar Item'
+
+      expect(page).to have_field 'Item', :with => '1'
+      expect(page).to have_readonly_field 'Item'
+
+      expect(page).to have_field 'Material', :with => '02.02.00001 - Arame farpado'
+      expect(page).to have_disabled_field 'Material'
+
+      expect(page).to have_field 'Unidade', :with => 'UN'
+      expect(page).to have_readonly_field 'Unidade'
+
+      expect(page).to have_field 'Quantidade', :with => '99,00'
+      expect(page).to have_readonly_field 'Quantidade'
+
+      expect(page).to have_field 'Valor unitário', :with => '200,00'
+      expect(page).to have_readonly_field 'Valor unitário'
+
+      expect(page).to have_field 'Valor total', :with => '19.800,00'
+      expect(page).to have_readonly_field 'Valor total'
+
+      expect(page).to_not have_button 'Remover Dotação'
+      expect(page).to_not have_button 'Remover Item'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Processo Licitatório 1/2012 editado com sucesso.'
+
+    within_tab 'Principal' do
+      clear_modal 'Agrupamento de solicitações de compra'
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      expect(page).to have_button 'Adicionar Dotação'
+
+      expect(page).to_not have_field 'Dotação orçamentária', :with => '1 - Alocação'
+      expect(page).to_not have_field 'Dotação orçamentária', :with => '1 - Alocação'
+      expect(page).to_not have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
+      expect(page).to_not have_field 'Saldo da dotação', :with => '500,00'
+      expect(page).to_not have_field 'Valor previsto', :with => '19.800,00'
+      expect(page).to_not have_field 'Valor total dos itens', :with => '19.800,00'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Processo Licitatório 1/2012 editado com sucesso.'
+    navigate 'Processos de Compra > Agrupamentos de Itens de Solicitações de Compra'
+
+    within_records do
+      page.find('a').click
+    end
+
+    expect(page).to have_select 'Situação', :selected => 'Pendente'
+  end
+
+  scenario 'should show only purchase_solicitation_item_group not annulled' do
+    PurchaseSolicitationItemGroup.make!(:antivirus)
+
+    ResourceAnnul.make!(:anulacao_generica,
+                        :annullable => PurchaseSolicitationItemGroup.make!(:reparo_2013))
+
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    click_link 'Criar Processo Licitatório'
+
+    within_tab 'Principal' do
+      within_modal 'Agrupamento de solicitações de compra' do
+        click_button 'Pesquisar'
+
+        within_records do
+          expect(page).to_not have_content 'Agrupamento de reparo 2013'
+          expect(page).to have_content 'Agrupamento de antivirus'
+        end
+      end
+    end
+  end
+
+  scenario 'when select disposals_of_assets as object_type should show only best_auction_or_offer' do
+    JudgmentForm.make!(:global_com_menor_preco) # LOWEST_PRICE
+    JudgmentForm.make!(:por_item_com_melhor_tecnica) # BEST_TECHNIQUE
+    JudgmentForm.make!(:por_lote_com_tecnica_e_preco) # TECHNICAL_AND_PRICE
+    JudgmentForm.make!(:global_com_melhor_lance_ou_oferta) # BEST_AUCTION_OR_OFFER
+    JudgmentForm.make!(:por_item_com_menor_preco) # LOWEST_PRICE
+
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    click_link 'Criar Processo Licitatório'
+
+    within_tab 'Principal' do
+      select 'Alienação de bens', :from => 'Tipo de objeto'
+      select 'Leilão', :from => 'Modalidade'
+
+      expect(page).to have_select('Forma de julgamento',
+                                  :options => ['Global com Melhor Lance ou Oferta'])
+    end
+  end
+
+  scenario 'when select concessions_and_permits as object_type should show only best_auction_or_offer' do
+    JudgmentForm.make!(:global_com_menor_preco) # LOWEST_PRICE
+    JudgmentForm.make!(:por_item_com_melhor_tecnica) # BEST_TECHNIQUE
+    JudgmentForm.make!(:por_lote_com_tecnica_e_preco) # TECHNICAL_AND_PRICE
+    JudgmentForm.make!(:global_com_melhor_lance_ou_oferta) # BEST_AUCTION_OR_OFFER
+    JudgmentForm.make!(:por_item_com_menor_preco) # LOWEST_PRICE
+
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    click_link 'Criar Processo Licitatório'
+
+    within_tab 'Principal' do
+      select 'Concessões e permissões', :from => 'Tipo de objeto'
+      select 'Concorrência', :from => 'Modalidade'
+
+      expect(page).to have_select('Forma de julgamento',
+                                  :options => ['Global com Melhor Lance ou Oferta'])
+    end
+  end
+
+  scenario 'when select call_notice as object_type should show only best_technique' do
+    JudgmentForm.make!(:global_com_menor_preco) # LOWEST_PRICE
+    JudgmentForm.make!(:por_item_com_melhor_tecnica) # BEST_TECHNIQUE
+    JudgmentForm.make!(:por_lote_com_tecnica_e_preco) # TECHNICAL_AND_PRICE
+    JudgmentForm.make!(:global_com_melhor_lance_ou_oferta) # BEST_AUCTION_OR_OFFER
+    JudgmentForm.make!(:por_item_com_menor_preco) # LOWEST_PRICE
+
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    click_link 'Criar Processo Licitatório'
+
+    within_tab 'Principal' do
+      select 'Edital de chamamento/credenciamento', :from => 'Tipo de objeto'
+      select 'Concurso', :from => 'Modalidade'
+
+      expect(page).to have_select('Forma de julgamento',
+                                  :options => ['Por Item com Melhor Técnica'])
+    end
+  end
+
+  scenario 'when select construction_and_engineering_services as object_type should show only lowest_price and best_technique' do
+    JudgmentForm.make!(:global_com_menor_preco) # LOWEST_PRICE
+    JudgmentForm.make!(:por_item_com_melhor_tecnica) # BEST_TECHNIQUE
+    JudgmentForm.make!(:por_lote_com_tecnica_e_preco) # TECHNICAL_AND_PRICE
+    JudgmentForm.make!(:global_com_melhor_lance_ou_oferta) # BEST_AUCTION_OR_OFFER
+    JudgmentForm.make!(:por_item_com_menor_preco) # LOWEST_PRICE
+
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    click_link 'Criar Processo Licitatório'
+
+    within_tab 'Principal' do
+      select 'Obras e serviços de engenharia', :from => 'Tipo de objeto'
+      select 'Concorrência', :from => 'Modalidade'
+
+      expect(page).to have_select('Forma de julgamento',
+                                  :options => ['Por Item com Melhor Técnica', 'Por Item com Menor Preço'])
+
+      select 'Tomada de Preço', :from => 'Modalidade'
+
+      expect(page).to have_select('Forma de julgamento',
+                                  :options => ['Por Item com Melhor Técnica', 'Por Item com Menor Preço'])
+
+      select 'Convite', :from => 'Modalidade'
+
+      expect(page).to have_select('Forma de julgamento',
+                                  :options => ['Por Item com Melhor Técnica', 'Por Item com Menor Preço'])
+
+      select 'Concurso', :from => 'Modalidade'
+
+      expect(page).to have_select('Forma de julgamento',
+                                  :options => ['Por Item com Melhor Técnica', 'Por Item com Menor Preço'])
+
+      select 'Pregão', :from => 'Modalidade'
+
+      expect(page).to have_select('Forma de julgamento',
+                                  :options => ['Por Item com Melhor Técnica', 'Por Item com Menor Preço'])
+    end
+  end
+
+  scenario 'when select purchase_and_services as object_type should show only lowest_price and best_technique' do
+    JudgmentForm.make!(:global_com_menor_preco) # LOWEST_PRICE
+    JudgmentForm.make!(:por_item_com_melhor_tecnica) # BEST_TECHNIQUE
+    JudgmentForm.make!(:por_lote_com_tecnica_e_preco) # TECHNICAL_AND_PRICE
+    JudgmentForm.make!(:global_com_melhor_lance_ou_oferta) # BEST_AUCTION_OR_OFFER
+    JudgmentForm.make!(:por_item_com_menor_preco) # LOWEST_PRICE
+
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    click_link 'Criar Processo Licitatório'
+
+    within_tab 'Principal' do
+      select 'Compras e serviços', :from => 'Tipo de objeto'
+      select 'Concorrência', :from => 'Modalidade'
+
+      expect(page).to have_select('Forma de julgamento',
+                                  :options => ['Por Item com Melhor Técnica', 'Por Item com Menor Preço'])
+
+      select 'Tomada de Preço', :from => 'Modalidade'
+
+      expect(page).to have_select('Forma de julgamento',
+                                  :options => ['Por Item com Melhor Técnica', 'Por Item com Menor Preço'])
+
+      select 'Convite', :from => 'Modalidade'
+
+      expect(page).to have_select('Forma de julgamento',
+                                  :options => ['Por Item com Melhor Técnica', 'Por Item com Menor Preço'])
+
+      select 'Pregão', :from => 'Modalidade'
+
+      expect(page).to have_select('Forma de julgamento',
+                                  :options => ['Por Item com Melhor Técnica', 'Por Item com Menor Preço'])
+    end
+  end
+
+  scenario 'when clear object_type should not filter licitation_kind in judgment_form modal' do
+    JudgmentForm.make!(:global_com_menor_preco) # LOWEST_PRICE
+    JudgmentForm.make!(:por_item_com_melhor_tecnica) # BEST_TECHNIQUE
+    JudgmentForm.make!(:por_lote_com_tecnica_e_preco) # TECHNICAL_AND_PRICE
+    JudgmentForm.make!(:global_com_melhor_lance_ou_oferta) # BEST_AUCTION_OR_OFFER
+    JudgmentForm.make!(:por_item_com_menor_preco) # LOWEST_PRICE
+
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    click_link 'Criar Processo Licitatório'
+
+    within_tab 'Principal' do
+      select 'Compras e serviços', :from => 'Tipo de objeto'
+
+      select '', :from => 'Tipo de objeto'
+
+      expect(page).to have_select('Modalidade', :options => [])
+
+      expect(page).to have_select('Forma de julgamento', :options => [])
+    end
+  end
+
+  scenario 'when clear item group purchase solicitation item should clear budget_allocations' do
+    PurchaseSolicitationItemGroup.make!(:reparo_2013)
+    LicitationProcess.make!(:processo_licitatorio)
+
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    within_records do
+      click_link '1/2012'
+    end
+
+    within_tab 'Principal' do
+      within_modal 'Agrupamento de solicitações de compra' do
+        click_button 'Pesquisar'
+
+        click_record 'Agrupamento de reparo 2013'
+      end
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
+      expect(page).to have_field 'Saldo da dotação', :with => '500,00'
+
+      within '.nested-administrative-process-budget-allocation:first' do
+        fill_in 'Valor previsto', :with => '10,00'
+      end
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Processo Licitatório 1/2012 editado com sucesso.'
+
+    within_tab 'Principal' do
+      clear_modal 'Agrupamento de solicitações de compra'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Processo Licitatório 1/2012 editado com sucesso.'
+
+    within_tab 'Dotações orçamentárias' do
+      expect(page).to_not have_field 'Dotação orçamentária', :with => '1 - Alocação'
+      expect(page).to_not have_field 'Saldo da dotação', :with => '500,00'
+    end
+  end
+
+  scenario 'when clear item group purchase solicitation item should clear fulfiller' do
+    PurchaseSolicitationItemGroup.make!(:reparo_2013)
+    LicitationProcess.make!(:processo_licitatorio)
+
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    within_records do
+      click_link '1/2012'
+    end
+
+    within_tab 'Principal' do
+      within_modal 'Agrupamento de solicitações de compra' do
+        click_button 'Pesquisar'
+
+        click_record 'Agrupamento de reparo 2013'
+      end
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Processo Licitatório 1/2012 editado com sucesso.'
+
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    within_records do
+      click_link '1/2013'
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      within '.purchase-solicitation-budget-allocation:first' do
+        within '.item:first' do
+          expect(page).to have_field 'Atendido por', :with => 'Processo licitatório 1/2012'
+        end
+      end
+    end
+
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    within_records do
+      click_link '1/2012'
+    end
+
+    within_tab 'Principal' do
+      clear_modal 'Agrupamento de solicitações de compra'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Processo Licitatório 1/2012 editado com sucesso.'
+
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    within_records do
+      click_link '1/2013'
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      within '.purchase-solicitation-budget-allocation:first' do
+        within '.item:first' do
+          expect(page).to have_field 'Atendido por', :with => ''
+        end
+      end
+    end
+  end
+
+  scenario 'assigns a fulfiller to the purchase solicitation budget allocation item when assign a purchase_solicitation_item_group to licitation_process' do
+    PurchaseSolicitationItemGroup.make!(:antivirus)
+    Capability.make!(:reforma)
+    PaymentMethod.make!(:dinheiro)
+    DocumentType.make!(:fiscal)
+    JudgmentForm.make!(:por_item_com_melhor_tecnica)
+    BudgetAllocation.make!(:alocacao)
+    Material.make!(:antivirus)
+    Indexer.make!(:xpto)
+
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    click_link 'Criar Processo Licitatório'
+
+    expect(page).to have_content "Criar Processo"
+
+    expect(page).to_not have_link 'Publicações'
+
+    expect(page).to_not have_button 'Apurar'
+
+    expect(page).to have_disabled_field 'Status'
+
+    within_tab 'Principal' do
+      fill_in 'Ano', :with => '2012'
+      fill_in 'Data do processo', :with => '21/03/2012'
+      select 'Global', :from => 'Tipo de empenho'
+
+      select 'Compras e serviços', :from => 'Tipo de objeto'
+      select 'Concorrência', :from => 'Modalidade'
+      select 'Por Item com Melhor Técnica', :from =>'Forma de julgamento'
+      fill_in 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
+      fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
+      fill_in 'Inciso', :with => 'Item 1'
+
+      check 'Registro de preço'
+      select 'Menor preço total por item', :from => 'Tipo da apuração'
+      select 'Empreitada integral', :from => 'Forma de execução'
+      fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
+      fill_in 'Validade da proposta', :with => '5'
+      select 'dia/dias', :from => 'Período da validade da proposta'
+      fill_modal 'Índice de reajuste', :with => 'XPTO'
+      fill_in 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
+      fill_in 'Hora da entrega', :with => '14:00'
+      fill_in 'Prazo de entrega', :with => '1'
+      select 'ano/anos', :from => 'Período do prazo de entrega'
+      fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
+      fill_in 'Valor da caução', :with => '50,00'
+      select 'Favorável', :from => 'Parecer jurídico'
+      fill_in 'Data do parecer', :with => '30/03/2012'
+      fill_in 'Data do contrato', :with => '31/03/2012'
+      fill_in 'Validade do contrato (meses)', :with => '5'
+      fill_in 'Observações gerais', :with => 'observacoes'
+
+      within_modal 'Agrupamento de solicitações de compra' do
+        click_button 'Pesquisar'
+
+        click_record 'Agrupamento de antivirus'
+      end
+    end
+
+    within_tab 'Documentos' do
+      fill_modal 'Tipo de documento', :with => 'Fiscal', :field => 'Descrição'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Processo Licitatório 1/2012 criado com sucesso.'
+
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    within_records do
+      click_link '1/2012'
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      expect(page).to have_field 'Atendido por', :with => 'Processo licitatório 1/2012'
+    end
+  end
+
+  scenario "filtering modalities based on seleted object type" do
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    click_link 'Criar Processo Licitatório'
+
+    select 'Compras e serviços', :on => "Tipo de objeto"
+
+    expect(page).to have_select('Modalidade',
+                                :options => ['Concorrência', 'Tomada de Preço', 'Convite', 'Pregão'])
+
+    select 'Alienação de bens', :on => "Tipo de objeto"
+
+    expect(page).to have_select('Modalidade',
+                                :options => ['Leilão'])
+
+    select 'Concessões e permissões', :on => "Tipo de objeto"
+
+    expect(page).to have_select('Modalidade',
+                                :options => ['Concorrência'])
+
+    select 'Edital de chamamento/credenciamento', :on => "Tipo de objeto"
+
+    expect(page).to have_select('Modalidade',
+                                :options => ['Concurso'])
+
+    select 'Obras e serviços de engenharia', :on => "Tipo de objeto"
+
+    expect(page).to have_select('Modalidade',
+                                :options => ['Concorrência', 'Tomada de Preço', 'Convite', 'Concurso', 'Pregão'])
+  end
+
+  scenario "changing the purchase_solicitation_item_group should change purchase solicitation items fulfiller" do
+    PurchaseSolicitationItemGroup.make!(:antivirus)
+    PurchaseSolicitationItemGroup.make!(:office)
+    LicitationProcess.make!(:processo_licitatorio)
+
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    within_records do
+      click_link '1/2012'
+    end
+
+    within_tab 'Principal' do
+      within_modal 'Agrupamento de solicitações de compra' do
+        click_button 'Pesquisar'
+
+        click_record 'Agrupamento de antivirus'
+      end
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Processo Licitatório 1/2012 editado com sucesso.'
+
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    within_records do
+      click_link '1/2012'
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      expect(page).to have_field 'Atendido por', :with => 'Processo licitatório 1/2012'
+    end
+
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    within_records do
+      click_link '1/2012'
+    end
+
+    within_tab 'Principal' do
+      within_modal 'Agrupamento de solicitações de compra' do
+        click_button 'Pesquisar'
+
+        click_record 'Agrupamento de office'
+      end
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Processo Licitatório 1/2012 editado com sucesso.'
+
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    within_records do
+      click_link '1/2012'
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      expect(page).to have_field 'Atendido por', :with => ''
+    end
+
+    click_link 'Voltar'
+
+    within_records do
+      click_link '2/2012'
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      expect(page).to have_field 'Atendido por', :with => 'Processo licitatório 1/2012'
+    end
+  end
+
+  scenario "changing the purchase_solicitation_item_group should change purchase solicitation and items status" do
+    item_group = PurchaseSolicitationItemGroup.make!(:antivirus)
+    item_group.purchase_solicitation_items.each do |item|
+      item.update_column :purchase_solicitation_item_group_id, item_group.id
+    end
+    item_group = PurchaseSolicitationItemGroup.make!(:office)
+    item_group.purchase_solicitation_items.each do |item|
+      item.update_column :purchase_solicitation_item_group_id, item_group.id
+    end
+    LicitationProcess.make!(:processo_licitatorio)
+
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    within_records do
+      click_link '1/2012'
+    end
+
+    within_tab 'Principal' do
+      within_modal 'Agrupamento de solicitações de compra' do
+        click_button 'Pesquisar'
+
+        click_record 'Agrupamento de antivirus'
+      end
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Processo Licitatório 1/2012 editado com sucesso.'
+
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    within_records do
+      click_link '1/2012'
+    end
+
+    within_tab 'Principal' do
+      expect(page).to have_select 'Status de atendimento', :selected => 'Parcialmente atendido'
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      within '.purchase-solicitation-budget-allocation' do
+        within '.item' do
+          expect(page).to have_select 'Status', :selected => 'Parcialmente atendido'
+          expect(page).to have_field 'Agrupamento', :with => 'Agrupamento de antivirus'
+          expect(page).to have_field 'Atendido por', :with => 'Processo licitatório 1/2012'
+        end
+      end
+    end
+
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    within_records do
+      click_link '1/2012'
+    end
+
+    within_tab 'Principal' do
+      within_modal 'Agrupamento de solicitações de compra' do
+        click_button 'Pesquisar'
+
+        click_record 'Agrupamento de office'
+      end
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Processo Licitatório 1/2012 editado com sucesso.'
+
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    within_records do
+      click_link '1/2012'
+    end
+
+    within_tab 'Principal' do
+      #expect(page).to have_select 'Status de atendimento', :selected => 'Liberada'
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      within '.purchase-solicitation-budget-allocation:first' do
+        within '.item' do
+          expect(page).to have_select 'Status', :selected => 'Pendente'
+          expect(page).to have_field 'Agrupamento', :with => ''
+          expect(page).to have_field 'Atendido por', :with => ''
+        end
+      end
+    end
+
+    click_link 'Voltar'
+
+    within_records do
+      click_link '2/2012'
+    end
+
+    within_tab 'Principal' do
+      expect(page).to have_select 'Status de atendimento', :selected => 'Parcialmente atendido'
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      within '.purchase-solicitation-budget-allocation' do
+        within '.item' do
+          expect(page).to have_select 'Status', :selected => 'Parcialmente atendido'
+          #expect(page).to have_field 'Agrupamento', :with => 'Agrupamento de antivirus'
+          expect(page).to have_field 'Atendido por', :with => 'Processo licitatório 1/2012'
+        end
+      end
+    end
+  end
+
+  scenario 'clear budget allocations when purchase_solicititation is removed' do
+    PurchaseSolicitation.make!(:reparo_liberado)
+    BudgetStructure.make!(:secretaria_de_educacao)
+    JudgmentForm.make!(:por_item_com_melhor_tecnica)
+    Employee.make!(:sobrinho)
+    Capability.make!(:reforma)
+    PaymentMethod.make!(:dinheiro)
+    DocumentType.make!(:fiscal)
+    Material.make!(:antivirus)
+    Indexer.make!(:xpto)
+
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    click_link 'Criar Processo Licitatório'
+
+    expect(page).to be_on_tab 'Principal'
+
+    within_tab 'Principal' do
+      fill_in 'Ano', :with => '2012'
+      fill_in 'Data do processo', :with => '07/03/2012'
+      fill_in 'Número do protocolo', :with => '00099/2012'
+      select 'Global', :from => 'Tipo de empenho'
+      select 'Compras e serviços', :from => 'Tipo de objeto'
+      fill_modal 'Solicitação de compra', :with => '1', :field => 'Código'
+
+      expect(page).to have_disabled_field 'Agrupamento de solicitações de compra'
+
+      select 'Pregão', :from => 'Modalidade'
+      select 'Alienação de bens', :from => 'Tipo de objeto'
+
+      expect(page).to have_select 'Modalidade', :selected => ''
+
+      select 'Compras e serviços', :from => 'Tipo de objeto'
+      select 'Pregão', :from => 'Modalidade'
+
+      select 'Por Item com Melhor Técnica', :from =>'Forma de julgamento'
+      fill_in 'Objeto resumido do processo licitatório', :with => 'Objeto resumido'
+      fill_in 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
+      fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
+      fill_in 'Inciso', :with => 'Item 1'
+      select 'Menor preço total por item', :from => 'Tipo da apuração'
+      select 'Empreitada integral', :from => 'Forma de execução'
+      fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
+      fill_in 'Validade da proposta', :with => '5'
+      select 'dia/dias', :from => 'Período da validade da proposta'
+      fill_modal 'Índice de reajuste', :with => 'XPTO'
+      fill_in 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
+      fill_in 'Hora da entrega', :with => '14:00'
+      fill_in 'Prazo de entrega', :with => '1'
+      select 'ano/anos', :from => 'Período do prazo de entrega'
+      fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
+      fill_in 'Valor da caução', :with => '50,00'
+      select 'Favorável', :from => 'Parecer jurídico'
+      fill_in 'Data do parecer', :with => '30/03/2012'
+      fill_in 'Data do contrato', :with => '31/03/2012'
+      fill_in 'Validade do contrato (meses)', :with => '5'
+      fill_in 'Observações gerais', :with => 'observacoes'
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      expect(page).to_not have_button 'Adicionar Dotação'
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
+      expect(page).to have_disabled_field 'Dotação orçamentária'
+
+      expect(page).to have_field 'Saldo da dotação', :with => '500,00'
+      expect(page).to have_disabled_field 'Saldo da dotação'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Processo Licitatório 1/2012 criado com sucesso.'
+
+    within_tab 'Principal' do
+      clear_modal 'Solicitação de compra'
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      expect(page).to have_button 'Adicionar Dotação'
+      expect(page).to_not have_field 'Dotação orçamentária', :with => '1 - Alocação'
+
+      expect(page).to_not have_field 'Saldo da dotação', :with => '500,00'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Processo Licitatório 1/2012 editado com sucesso.'
+
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    within_records do
+      click_link '1/2012'
+    end
+
+    within_tab 'Principal' do
+      expect(page).to have_select 'Status de atendimento', :selected => 'Liberada'
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      within '.purchase-solicitation-budget-allocation' do
+        within '.item' do
+          expect(page).to have_select 'Status', :selected => 'Pendente'
+          #expect(page).to have_field 'Agrupamento', :with => 'Agrupamento de antivirus'
+          expect(page).to have_field 'Atendido por', :with => ''
+        end
+      end
+    end
+  end
+
+  scenario 'budget allocations should be fulfilled automatically when fulfill purchase_solicitation' do
+    PurchaseSolicitation.make!(:reparo_liberado)
+    Employee.make!(:sobrinho)
+    Capability.make!(:reforma)
+    PaymentMethod.make!(:dinheiro)
+    DocumentType.make!(:fiscal)
+    JudgmentForm.make!(:por_item_com_melhor_tecnica)
+    BudgetAllocation.make!(:alocacao)
+    Material.make!(:antivirus)
+    Indexer.make!(:xpto)
+
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    click_link 'Criar Processo Licitatório'
+
+    expect(page).to have_content "Criar Processo"
+
+    expect(page).to_not have_link 'Publicações'
+
+    expect(page).to_not have_button 'Apurar'
+
+    expect(page).to have_disabled_field 'Status'
+
+    within_tab 'Principal' do
+      fill_in 'Ano', :with => '2012'
+      fill_in 'Data do processo', :with => '21/03/2012'
+      select 'Global', :from => 'Tipo de empenho'
+
+      select 'Compras e serviços', :from => 'Tipo de objeto'
+      select 'Concorrência', :from => 'Modalidade'
+      select 'Por Item com Melhor Técnica', :from =>'Forma de julgamento'
+      fill_in 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
+      fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
+      fill_in 'Inciso', :with => 'Item 1'
+
+      check 'Registro de preço'
+      select 'Menor preço total por item', :from => 'Tipo da apuração'
+      select 'Empreitada integral', :from => 'Forma de execução'
+      fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
+      fill_in 'Validade da proposta', :with => '5'
+      select 'dia/dias', :from => 'Período da validade da proposta'
+      fill_modal 'Índice de reajuste', :with => 'XPTO'
+      fill_in 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
+      fill_in 'Hora da entrega', :with => '14:00'
+      fill_in 'Prazo de entrega', :with => '1'
+      select 'ano/anos', :from => 'Período do prazo de entrega'
+      fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
+      fill_in 'Valor da caução', :with => '50,00'
+      select 'Favorável', :from => 'Parecer jurídico'
+      fill_in 'Data do parecer', :with => '30/03/2012'
+      fill_in 'Data do contrato', :with => '31/03/2012'
+      fill_in 'Validade do contrato (meses)', :with => '5'
+      fill_in 'Observações gerais', :with => 'observacoes'
+      fill_modal 'Solicitação de compra', :with => '1', :field => 'Código'
+    end
+
+    within_tab 'Documentos' do
+      fill_modal 'Tipo de documento', :with => 'Fiscal', :field => 'Descrição'
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      expect(page).to_not have_button 'Adicionar Dotação'
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
+      expect(page).to have_disabled_field 'Dotação orçamentária'
+
+      expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
+      expect(page).to have_readonly_field 'Compl. do elemento'
+
+      expect(page).to have_field 'Saldo da dotação', :with => '500,00'
+      expect(page).to have_readonly_field 'Saldo da dotação'
+
+      expect(page).to have_field 'Valor previsto', :with => '600,00'
+
+      expect(page).to have_field 'Valor total dos itens', :with => '600,00'
+      expect(page).to have_readonly_field 'Valor total dos itens'
+
+      expect(page).to have_field 'Item', :with => '1'
+      expect(page).to have_readonly_field 'Item'
+
+      expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
+      expect(page).to have_readonly_field 'Material'
+
+      expect(page).to have_field 'Unidade', :with => 'UN'
+      expect(page).to have_readonly_field 'Unidade'
+
+      expect(page).to have_field 'Quantidade', :with => '3,00'
+      expect(page).to have_readonly_field 'Quantidade'
+
+      expect(page).to have_field 'Valor unitário máximo', :with => '200,00'
+      expect(page).to have_readonly_field 'Valor unitário máximo'
+
+      expect(page).to have_field 'Valor total', :with => '600,00'
+      expect(page).to have_readonly_field 'Valor total'
+
+      expect(page).to_not have_button 'Adicionar Item'
+      expect(page).to_not have_button 'Remover Item'
+      expect(page).to_not have_button 'Remover Dotação'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Processo Licitatório 1/2012 criado com sucesso.'
+
+    within_tab 'Principal' do
+      expect(page).to have_field 'Solicitação de compra', :with => '1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      expect(page).to_not have_button 'Adicionar Dotação'
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
+      expect(page).to have_disabled_field 'Dotação orçamentária'
+
+      expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
+      expect(page).to have_disabled_field 'Compl. do elemento'
+
+      expect(page).to have_field 'Saldo da dotação', :with => '500,00'
+      expect(page).to have_disabled_field 'Saldo da dotação'
+
+      expect(page).to have_field 'Valor previsto', :with => '600,00'
+      expect(page).to have_disabled_field 'Valor previsto'
+
+      expect(page).to have_field 'Valor total dos itens', :with => '600,00'
+      expect(page).to have_disabled_field 'Valor total dos itens'
+
+      expect(page).to have_field 'Item', :with => '1'
+      expect(page).to have_disabled_field 'Item'
+
+      expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
+      expect(page).to have_disabled_field 'Material'
+
+      expect(page).to have_field 'Unidade', :with => 'UN'
+      expect(page).to have_disabled_field 'Unidade'
+
+      expect(page).to have_field 'Quantidade', :with => '3'
+      expect(page).to have_disabled_field 'Quantidade'
+
+      expect(page).to have_field 'Valor unitário máximo', :with => '200,00'
+      expect(page).to have_disabled_field 'Valor unitário máximo'
+
+      expect(page).to have_field 'Valor total', :with => '600,00'
+      expect(page).to have_disabled_field 'Valor total'
+
+      expect(page).to_not have_button 'Adicionar Item'
+      expect(page).to_not have_button 'Remover Item'
+      expect(page).to_not have_button 'Remover Dotação'
+    end
+
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    within_records do
+      click_link '1/2012'
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      within '.item:nth-child(1)' do
+        expect(page).to have_select 'Status', :selected => 'Parcialmente atendido'
+        expect(page).to have_field 'Atendido por', :with => 'Processo licitatório 1/2012'
+      end
+    end
+
+    within_tab 'Principal' do
+      expect(page).to have_select 'Status de atendimento', :selected => 'Parcialmente atendido'
+    end
+  end
+
+  scenario 'when clear purchase_solicitation should enable item_group' do
+    PurchaseSolicitation.make!(:reparo_liberado)
+    PurchaseSolicitationItemGroup.make!(:antivirus)
+
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    click_link 'Criar Processo Licitatório'
+
+    expect(page).to be_on_tab 'Principal'
+
+    within_tab 'Principal' do
+      fill_modal 'Solicitação de compra', :with => '1', :field => 'Código'
+
+      expect(page).to have_disabled_field 'Agrupamento de solicitações de compra'
+
+      clear_modal 'Solicitação de compra'
+
+      expect(page).to_not have_disabled_field 'Agrupamento de solicitações de compra'
+
+      within_modal 'Agrupamento de solicitações de compra' do
+        click_button 'Pesquisar'
+
+        click_record 'Agrupamento de antivirus'
+      end
+
+      expect(page).to have_disabled_field 'Solicitação de compra'
+    end
+  end
+
+  scenario 'cannot overwrite reponsible when select a purchase_solicitation' do
+    PurchaseSolicitation.make!(:reparo_liberado)
+    PurchaseSolicitationItemGroup.make!(:antivirus)
+    Employee.make!(:wenderson)
+
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    click_link 'Criar Processo Licitatório'
+
+    within_tab 'Principal' do
+      fill_modal 'Responsável', :field => 'Matrícula', :with => '12903412'
+      fill_modal 'Solicitação de compra', :with => '1', :field => 'Código'
+
+      expect(page).to have_field 'Responsável', :with => 'Wenderson Malheiros'
+
+      clear_modal 'Responsável'
+      clear_modal 'Solicitação de compra'
+
+      fill_modal 'Solicitação de compra', :with => '1', :field => 'Código'
+
+      expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
+    end
+  end
+
+  scenario 'should not return duplicated data of purchase solicitation' do
+     purchase_solicitation = PurchaseSolicitation.make!(:reparo_liberado,
+                                                        :purchase_solicitation_budget_allocations => [
+                                                          PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria_office_2_itens_liberados)])
+
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    click_link 'Criar Processo Licitatório'
+
+    within_modal 'Solicitação de compra' do
+      click_button 'Pesquisar'
+
+      expect(page).to have_css 'table.records tbody tr', :count => 1
+    end
+  end
+
+  scenario 'should show only item group pending' do
+    PurchaseSolicitationItemGroup.make!(:antivirus)
+    PurchaseSolicitationItemGroup.make!(:reparo_2013,
+      :status => PurchaseSolicitationItemGroupStatus::FULFILLED)
+    PurchaseSolicitationItemGroup.make!(:antivirus_desenvolvimento,
+      :status => PurchaseSolicitationItemGroupStatus::ANNULLED)
+
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    click_link 'Criar Processo Licitatório'
+
+    within_modal 'Agrupamento de solicitações de compra' do
+      click_button 'Pesquisar'
+
+      expect(page).to have_css 'table.records tbody tr', :count => 1
+    end
+  end
 end
