@@ -14,7 +14,7 @@ describe LicitationProcess do
   end
 
   describe "#validate_envelope_opening_date" do
-    let(:publication) { LicitationProcessPublication.make!(:publicacao, :publication_date => Date.today) }
+    let(:publication) { LicitationProcessPublication.make(:publicacao, :publication_date => Date.today) }
 
     context "competition modality validation" do
       it "should be 45 calendar days greater than last publication date" do
