@@ -65,6 +65,9 @@ class LicitationProcessesController < CrudController
         if params[:licitation_process]
           AdministrativeProcessBudgetAllocationCloner.clone(
             :licitation_process => object, :new_purchase_solicitation => new_purchase_solicitation)
+
+          AdministrativeProcessItemGroupCloner.clone(object,
+            :new_item_group => new_item_group)
         end
 
         DeliveryLocationChanger.change(object.purchase_solicitation, object.delivery_location)
@@ -92,6 +95,10 @@ class LicitationProcessesController < CrudController
           :licitation_process => object,
           :new_purchase_solicitation => new_purchase_solicitation,
           :old_purchase_solicitation => old_purchase_solicitation)
+
+        AdministrativeProcessItemGroupCloner.clone(object,
+          :new_item_group => new_item_group,
+          :old_item_group => old_item_group)
       end
     end
   end

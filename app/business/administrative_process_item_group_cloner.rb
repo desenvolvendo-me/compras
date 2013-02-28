@@ -1,6 +1,6 @@
 class AdministrativeProcessItemGroupCloner
-  def initialize(administrative_process, options ={})
-    @administrative_process = administrative_process
+  def initialize(licitation_process, options ={})
+    @licitation_process = licitation_process
     @new_item_group = options[:new_item_group]
     @old_item_group = options[:old_item_group]
     @budget_allocation_cloner = options.fetch(:budget_allocation_cloner) { AdministrativeProcessBudgetAllocationCloner }
@@ -19,11 +19,11 @@ class AdministrativeProcessItemGroupCloner
 
   private
 
-  attr_reader :new_item_group, :old_item_group, :administrative_process,
+  attr_reader :new_item_group, :old_item_group, :licitation_process,
               :budget_allocation_cloner
 
   def can_clone?
-    @administrative_process.present? && @new_item_group != @old_item_group
+    licitation_process.present? && new_item_group != old_item_group
   end
 
   def clone_purchase_solicitations
@@ -32,7 +32,7 @@ class AdministrativeProcessItemGroupCloner
     @new_item_group.purchase_solicitation_item_group_materials.each do |item_material|
       item_material.purchase_solicitations.each do |purchase_solicitation|
         @budget_allocation_cloner.clone(
-          :administrative_process => @administrative_process,
+          :licitation_process => licitation_process,
           :new_purchase_solicitation => purchase_solicitation,
           :material => item_material.material,
           :clear_old_data => false
@@ -42,6 +42,6 @@ class AdministrativeProcessItemGroupCloner
   end
 
   def clear_all_administrative_process_budget_allocations
-    @administrative_process.administrative_process_budget_allocations.destroy_all
+    licitation_process.administrative_process_budget_allocations.destroy_all
   end
 end

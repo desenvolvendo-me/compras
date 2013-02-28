@@ -66,6 +66,7 @@ describe LicitationProcessesController do
       LicitationProcess.any_instance.should_receive(:id).any_number_of_times.and_return(1)
 
       AdministrativeProcessBudgetAllocationCloner.should_receive(:clone)
+      AdministrativeProcessItemGroupCloner.should_receive(:clone)
 
       post :create, :licitation_process => {
         :purchase_solicitation_item_group_id => item_group.id }
@@ -113,7 +114,7 @@ describe LicitationProcessesController do
       end
 
       it 'should redirect to administrative process edit page after update' do
-        put :update, :id => licitation_process.id
+        put :update, :id => licitation_process.id, :licitation_process => {}
 
         expect(response).to redirect_to(edit_licitation_process_path(licitation_process))
       end
@@ -146,6 +147,8 @@ describe LicitationProcessesController do
     it 'should update purchase_solicitation fulfiller if has item group' do
       licitation_process = LicitationProcess.make!(:processo_licitatorio)
       item_group = PurchaseSolicitationItemGroup.make!(:antivirus)
+
+      AdministrativeProcessItemGroupCloner.should_receive(:clone)
       AdministrativeProcessBudgetAllocationCloner.should_receive(:clone)
 
       put :update, :id => licitation_process.id,
