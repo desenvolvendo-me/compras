@@ -1,7 +1,6 @@
 require 'model_helper'
 require 'lib/signable'
 require 'app/models/judgment_form'
-require 'app/models/administrative_process'
 require 'app/models/licitation_process'
 
 describe JudgmentForm do
@@ -14,6 +13,5 @@ describe JudgmentForm do
   it { should validate_presence_of :kind }
   it { should validate_presence_of :licitation_kind }
 
-  it { should have_many(:administrative_processes).dependent(:restrict) }
   it { should have_many(:licitation_processes).dependent(:restrict) }
 end
