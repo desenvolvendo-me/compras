@@ -2,8 +2,8 @@ pt-BR:
   activerecord:
     models:
       reference_unit:
-        one: "Unidade de Referência"
-        other: "Unidades de Referência"
+        one: "Unidade de Medida"
+        other: "Unidades de Medida"
 
     attributes:
       reference_unit:

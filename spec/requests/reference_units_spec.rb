@@ -7,16 +7,16 @@ feature "ReferenceUnits" do
   end
 
   scenario 'create a new reference_unit' do
-    navigate 'Comum > Unidades de Referência'
+    navigate 'Comum > Unidades de Medida'
 
-    click_link 'Criar Unidade de Referência'
+    click_link 'Criar Unidade de Medida'
 
     fill_in 'Descrição', :with => 'Reais'
     fill_in 'Sigla', :with => 'R$'
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Unidade de Referência criada com sucesso.'
+    expect(page).to have_notice 'Unidade de Medida criada com sucesso.'
 
     click_link 'Reais'
 
@@ -27,7 +27,7 @@ feature "ReferenceUnits" do
   scenario 'update a reference_unit' do
     ReferenceUnit.make!(:metro)
 
-    navigate 'Comum > Unidades de Referência'
+    navigate 'Comum > Unidades de Medida'
 
     click_link 'Metro'
 
@@ -36,7 +36,7 @@ feature "ReferenceUnits" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Unidade de Referência editada com sucesso.'
+    expect(page).to have_notice 'Unidade de Medida editada com sucesso.'
 
     click_link 'Centímetro'
 
@@ -47,13 +47,13 @@ feature "ReferenceUnits" do
   scenario 'destroy an existent reference_unit' do
     ReferenceUnit.make!(:metro)
 
-    navigate 'Comum > Unidades de Referência'
+    navigate 'Comum > Unidades de Medida'
 
     click_link 'Metro'
 
     click_link 'Apagar'
 
-    expect(page).to have_notice 'Unidade de Referência apagada com sucesso.'
+    expect(page).to have_notice 'Unidade de Medida apagada com sucesso.'
 
     expect(page).to_not have_content 'Metro'
   end
@@ -61,7 +61,7 @@ feature "ReferenceUnits" do
   scenario 'index with columns at the index' do
     ReferenceUnit.make!(:metro)
 
-    navigate 'Comum > Unidades de Referência'
+    navigate 'Comum > Unidades de Medida'
 
     within_records do
       expect(page).to have_content 'Descrição'
