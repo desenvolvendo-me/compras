@@ -70,6 +70,11 @@ class LicitationProcessesController < CrudController
             :new_item_group => new_item_group)
         end
 
+        PurchaseSolicitationBudgetAllocationItemFulfiller.new(
+          :purchase_solicitation_item_group => object.purchase_solicitation_item_group,
+          :licitation_process => object,
+          :add_fulfill => true).fulfill
+
         DeliveryLocationChanger.change(object.purchase_solicitation, object.delivery_location)
       end
     end
@@ -99,6 +104,16 @@ class LicitationProcessesController < CrudController
         AdministrativeProcessItemGroupCloner.clone(object,
           :new_item_group => new_item_group,
           :old_item_group => old_item_group)
+
+        PurchaseSolicitationBudgetAllocationItemFulfiller.new(
+          :purchase_solicitation_item_group => old_item_group
+        ).fulfill
+
+        PurchaseSolicitationBudgetAllocationItemFulfiller.new(
+          :purchase_solicitation_item_group => new_item_group,
+          :licitation_process => object,
+          :add_fulfill => true
+        ).fulfill
       end
     end
   end

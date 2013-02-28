@@ -4,7 +4,7 @@ require 'app/business/purchase_solicitation_budget_allocation_item_fulfiller'
 describe PurchaseSolicitationBudgetAllocationItemFulfiller do
   let(:item_group) { double(:item_group) }
   let(:direct_purchase) { double(:direct_purchase) }
-  let(:administrative_process) { double(:administrative_process) }
+  let(:licitation_process) { double(:licitation_process) }
   let(:process) { double(:process) }
 
   context 'when have an item group' do
@@ -61,13 +61,13 @@ describe PurchaseSolicitationBudgetAllocationItemFulfiller do
     end
   end
 
-  context 'when have an administrative_process' do
+  context 'when have an licitation_process' do
     subject do
-      described_class.new( :administrative_process => administrative_process )
+      described_class.new( :licitation_process => licitation_process )
     end
 
     it 'should remove fulfill_items_from_item_group when has not a process' do
-      administrative_process.should_receive(:remove_fulfill_purchase_solicitation_items)
+      licitation_process.should_receive(:remove_fulfill_purchase_solicitation_items)
 
       subject.fulfill
     end
@@ -75,13 +75,13 @@ describe PurchaseSolicitationBudgetAllocationItemFulfiller do
     context 'when have a process' do
       subject do
         described_class.new(
-          :administrative_process => administrative_process,
+          :licitation_process => licitation_process,
           :add_fulfill => true
         )
       end
 
       it 'should fulfill_items_from_item_group with process' do
-        administrative_process.should_receive(:fulfill_purchase_solicitation_items)
+        licitation_process.should_receive(:fulfill_purchase_solicitation_items)
 
         subject.fulfill
       end

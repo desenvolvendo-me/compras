@@ -65,6 +65,9 @@ describe LicitationProcessesController do
       LicitationProcess.any_instance.should_receive(:save).and_return(true)
       LicitationProcess.any_instance.should_receive(:id).any_number_of_times.and_return(1)
 
+      PurchaseSolicitationBudgetAllocationItemFulfiller.
+        any_instance.should_receive(:fulfill)
+
       AdministrativeProcessBudgetAllocationCloner.should_receive(:clone)
       AdministrativeProcessItemGroupCloner.should_receive(:clone)
 
@@ -147,6 +150,21 @@ describe LicitationProcessesController do
     it 'should update purchase_solicitation fulfiller if has item group' do
       licitation_process = LicitationProcess.make!(:processo_licitatorio)
       item_group = PurchaseSolicitationItemGroup.make!(:antivirus)
+      fulfiller_instance = double(:fulfiller_instance)
+
+      fulfiller_instance.should_receive(:fulfill).twice
+
+      PurchaseSolicitationBudgetAllocationItemFulfiller.
+        should_receive(:new).
+        with(:purchase_solicitation_item_group => nil).
+        and_return(fulfiller_instance)
+
+      PurchaseSolicitationBudgetAllocationItemFulfiller.
+        should_receive(:new).
+        with(:purchase_solicitation_item_group => item_group,
+             :licitation_process => licitation_process,
+             :add_fulfill => true).
+        and_return(fulfiller_instance)
 
       AdministrativeProcessItemGroupCloner.should_receive(:clone)
       AdministrativeProcessBudgetAllocationCloner.should_receive(:clone)

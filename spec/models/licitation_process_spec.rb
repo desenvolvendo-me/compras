@@ -25,6 +25,7 @@ require 'app/models/indexer'
 require 'app/models/price_registration'
 require 'app/models/trading'
 require 'app/models/delivery_location'
+require 'app/models/purchase_solicitation_budget_allocation_item'
 
 describe LicitationProcess do
   let(:current_prefecture) { double(:current_prefecture) }
@@ -66,6 +67,8 @@ describe LicitationProcess do
   it { should have_many(:classifications).through(:bidders) }
   it { should have_many(:administrative_process_budget_allocations).dependent(:destroy) }
   it { should have_many(:items).through(:administrative_process_budget_allocations) }
+  it { should have_many(:materials).through(:items) }
+  it { should have_many(:purchase_solicitation_items) }
 
   it { should have_one(:trading).dependent(:restrict) }
 
@@ -560,6 +563,40 @@ describe LicitationProcess do
       subject.stub_chain(:licitation_process_publications, :empty?).and_return false
       subject.stub_chain(:licitation_process_publications, :current).and_return double(:licitation_process_publications, :publication_date => Date.tomorrow)
       expect(subject.last_publication_date).to eql Date.tomorrow
+    end
+  end
+
+  describe '#fulfill_purchase_solicitation_items' do
+    before do
+      subject.should_receive(:purchase_solicitation_items).
+              and_return([item, item2])
+    end
+
+    let(:item)  { double(:item) }
+    let(:item2) { double(:item2) }
+
+    it 'should fulfill items' do
+      item.should_receive(:fulfill).with(subject)
+      item2.should_receive(:fulfill).with(subject)
+
+      subject.fulfill_purchase_solicitation_items
+    end
+  end
+
+  describe '#remove_fulfill_purchase_solicitation_items' do
+    before do
+      subject.should_receive(:purchase_solicitation_items).
+              and_return([item, item2])
+    end
+
+    let(:item)  { double(:item) }
+    let(:item2) { double(:item2) }
+
+    it 'should fulfill items' do
+      item.should_receive(:fulfill).with(nil)
+      item2.should_receive(:fulfill).with(nil)
+
+      subject.remove_fulfill_purchase_solicitation_items
     end
   end
 end
