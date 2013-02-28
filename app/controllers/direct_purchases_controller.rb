@@ -40,6 +40,10 @@ class DirectPurchasesController < CrudController
 
   protected
 
+  def default_filters
+    { :year => Proc.new { Date.current.year } }
+  end
+
   def interpolation_options
     { :resource_name => "#{resource_class.model_name.human} #{resource.code}/#{resource.year}" }
   end

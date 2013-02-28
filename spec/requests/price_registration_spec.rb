@@ -83,6 +83,12 @@ feature "PriceRegistration" do
 
     expect(page).to have_notice 'Registro de Preço 1/2012 criado com sucesso.'
 
+    click_link "Filtrar Registros de Preços"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     click_link '1/2012'
 
     within_tab 'Principal' do
@@ -133,6 +139,12 @@ feature "PriceRegistration" do
 
     navigate 'Processos de Compra > Registros de Preços'
 
+    click_link "Filtrar Registros de Preços"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     click_link '1/2012'
 
     expect(page).to have_disabled_field 'Ano'
@@ -175,6 +187,12 @@ feature "PriceRegistration" do
 
     expect(page).to have_notice 'Registro de Preço 1/2012 editado com sucesso.'
 
+    click_link "Filtrar Registros de Preços"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     click_link '1/2012'
 
     within_tab 'Principal' do
@@ -214,6 +232,12 @@ feature "PriceRegistration" do
     PriceRegistration.make!(:registro_de_precos)
 
     navigate 'Processos de Compra > Registros de Preços'
+
+    click_link "Filtrar Registros de Preços"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     click_link '1/2012'
 
@@ -256,14 +280,30 @@ feature "PriceRegistration" do
       licitation_process = LicitationProcess.make!(:apuracao_global)
 
       navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+      click_link "Filtrar Processos Licitatórios"
+
+      clear_modal "Ano"
+
+      click_button "Pesquisar"
+
       click_link '1/2012'
+
       click_button 'Apurar'
+
       click_link 'voltar'
 
       PriceRegistration.make!(:registro_de_precos,
                               :licitation_process => licitation_process)
 
       navigate 'Processos de Compra > Registros de Preços'
+
+      click_link "Filtrar Registros de Preços"
+
+      clear_modal "Ano"
+
+      click_button "Pesquisar"
+
       click_link '1/2012'
 
       within_tab 'Fornecedores Vencedores' do
@@ -280,11 +320,25 @@ feature "PriceRegistration" do
                               :licitation_process => LicitationProcess.make!(:apuracao_global))
 
       navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+      click_link "Filtrar Processos Licitatórios"
+
+      clear_modal "Ano"
+
+      click_button "Pesquisar"
+
       click_link '1/2012'
+
       click_button 'Apurar'
 
       click_link 'voltar'
+
       navigate 'Processos de Compra > Registros de Preços'
+
+      click_link "Filtrar Registros de Preços"
+
+      clear_modal "Ano"
+
+      click_button "Pesquisar"
 
       click_link '1/2012'
 
@@ -325,6 +379,7 @@ feature "PriceRegistration" do
     end
 
     click_button('Pesquisar')
+
     within_records do
       expect(page).to have_content 'Secretaria de Educação'
       expect(page).not_to have_content 'Secretaria de Desenvolvimento'

@@ -11,6 +11,12 @@ feature "LicitationObjects" do
 
     navigate 'Processo Administrativo/Licitatório > Auxiliar > Objetos de Licitação'
 
+    click_link "Filtrar Objetos de Licitação"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     click_link 'Criar Objeto de Licitação'
 
     within_tab 'Principal' do
@@ -65,6 +71,12 @@ feature "LicitationObjects" do
 
     expect(page).to have_notice 'Objeto de Licitação criado com sucesso.'
 
+    click_link "Filtrar Objetos de Licitação"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     click_link 'Ponte'
 
     within_tab 'Principal' do
@@ -118,6 +130,12 @@ feature "LicitationObjects" do
 
     navigate 'Processo Administrativo/Licitatório > Auxiliar > Objetos de Licitação'
 
+    click_link "Filtrar Objetos de Licitação"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     click_link 'Viaduto'
 
     within_tab 'Materiais' do
@@ -128,6 +146,12 @@ feature "LicitationObjects" do
     click_button 'Salvar'
 
     expect(page).to have_notice 'Objeto de Licitação editado com sucesso.'
+
+    click_link "Filtrar Objetos de Licitação"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     click_link 'Viaduto'
 
@@ -141,6 +165,12 @@ feature "LicitationObjects" do
     Material.make!(:arame_comum)
 
     navigate 'Processo Administrativo/Licitatório > Auxiliar > Objetos de Licitação'
+
+    click_link "Filtrar Objetos de Licitação"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     click_link 'Ponte'
 
@@ -156,6 +186,12 @@ feature "LicitationObjects" do
     click_button 'Salvar'
 
     expect(page).to have_notice 'Objeto de Licitação editado com sucesso.'
+
+    click_link "Filtrar Objetos de Licitação"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     click_link 'Viaduto'
 
@@ -174,6 +210,12 @@ feature "LicitationObjects" do
 
     navigate 'Processo Administrativo/Licitatório > Auxiliar > Objetos de Licitação'
 
+    click_link "Filtrar Objetos de Licitação"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     click_link 'Ponte'
 
     click_link 'Apagar'
@@ -190,6 +232,12 @@ feature "LicitationObjects" do
     DirectPurchase.make!(:compra_2011)
 
     navigate 'Processo Administrativo/Licitatório > Auxiliar > Objetos de Licitação'
+
+    click_link "Filtrar Objetos de Licitação"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     click_link 'Ponte'
 
@@ -214,6 +262,12 @@ feature "LicitationObjects" do
     DirectPurchase.make!(:compra_2011)
 
     navigate 'Processo Administrativo/Licitatório > Auxiliar > Objetos de Licitação'
+
+    click_link "Filtrar Objetos de Licitação"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     click_link 'Ponte'
 

@@ -321,6 +321,12 @@ feature "DirectPurchases" do
 
     navigate 'Processos de Compra > Compra Direta'
 
+    click_link 'Filtrar Compras Diretas'
+
+    clear_mask "Ano"
+
+    click_button 'Pesquisar'
+
     within_records do
       page.find('a').click
     end
@@ -352,6 +358,12 @@ feature "DirectPurchases" do
     end
 
     navigate 'Processos de Compra > Compra Direta'
+
+    click_link 'Filtrar Compras Diretas'
+
+    clear_mask "Ano"
+
+    click_button 'Pesquisar'
 
     within_records do
       page.find('a').click
@@ -386,6 +398,12 @@ feature "DirectPurchases" do
     Material.make!(:antivirus)
 
     navigate 'Processos de Compra > Compra Direta'
+
+    click_link 'Filtrar Compras Diretas'
+
+    clear_mask "Ano"
+
+    click_button 'Pesquisar'
 
     click_link 'Gerar Compra Direta'
 
@@ -466,6 +484,12 @@ feature "DirectPurchases" do
 
     navigate 'Processos de Compra > Compra Direta'
 
+    click_link 'Filtrar Compras Diretas'
+
+    clear_mask "Ano"
+
+    click_button 'Pesquisar'
+
     within_records do
       page.find('a').click
     end
@@ -539,6 +563,12 @@ feature "DirectPurchases" do
 
     navigate 'Processos de Compra > Compra Direta'
 
+    click_link 'Filtrar Compras Diretas'
+
+    clear_mask "Ano"
+
+    click_button 'Pesquisar'
+
     within_records do
       page.find('a').click
     end
@@ -576,6 +606,12 @@ feature "DirectPurchases" do
 
     navigate 'Processos de Compra > Compra Direta'
 
+    click_link 'Filtrar Compras Diretas'
+
+    clear_mask "Ano"
+
+    click_button 'Pesquisar'
+
     within_records do
       page.find('a').click
     end
@@ -610,6 +646,12 @@ feature "DirectPurchases" do
 
     navigate 'Processos de Compra > Compra Direta'
 
+    click_link 'Filtrar Compras Diretas'
+
+    clear_mask "Ano"
+
+    click_button 'Pesquisar'
+
     within_records do
       page.find('a').click
     end
@@ -643,6 +685,8 @@ feature "DirectPurchases" do
 
     click_link 'Filtrar Compras Diretas'
 
+    clear_mask "Ano"
+
     fill_in 'Data da compra', :with => '20/12/2011'
 
     click_button 'Pesquisar'
@@ -660,6 +704,8 @@ feature "DirectPurchases" do
     navigate 'Processos de Compra > Compra Direta'
 
     click_link 'Filtrar Compras Diretas'
+
+    clear_mask "Ano"
 
     select 'Obras de engenharia', :from => 'Modalidade'
 
@@ -680,6 +726,8 @@ feature "DirectPurchases" do
 
     fill_in 'Compra', :with => 1
 
+    clear_mask "Ano"
+
     click_button 'Pesquisar'
 
     within_records do
@@ -693,6 +741,8 @@ feature "DirectPurchases" do
     navigate 'Processos de Compra > Compra Direta'
 
     click_link 'Filtrar Compras Diretas'
+
+    clear_mask "Ano"
 
     fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Educação',
                                          :field => 'Descrição'
@@ -710,6 +760,8 @@ feature "DirectPurchases" do
 
     click_link 'Filtrar Compras Diretas'
 
+    clear_mask "Ano"
+
     fill_modal 'Fornecedor', :with => 'Wenderson Malheiros',
                              :field => 'Nome'
     click_button 'Pesquisar'
@@ -725,6 +777,8 @@ feature "DirectPurchases" do
     navigate 'Processos de Compra > Compra Direta'
 
     click_link 'Filtrar Compras Diretas'
+
+    clear_mask "Ano"
 
     fill_in 'Data da compra', :with => '02/03/2012'
 
@@ -871,6 +925,12 @@ feature "DirectPurchases" do
 
     navigate 'Processos de Compra > Compra Direta'
 
+    click_link 'Filtrar Compras Diretas'
+
+    clear_mask "Ano"
+
+    click_button 'Pesquisar'
+
     within_records do
       page.find('a').click
     end
@@ -894,6 +954,12 @@ feature "DirectPurchases" do
 
     navigate 'Processos de Compra > Compra Direta'
 
+    click_link 'Filtrar Compras Diretas'
+
+    clear_mask "Ano"
+
+    click_button 'Pesquisar'
+
     within_records do
       page.find('a').click
     end
@@ -915,6 +981,12 @@ feature "DirectPurchases" do
     Prefecture.make!(:belo_horizonte)
 
     navigate 'Processos de Compra > Compra Direta'
+
+    click_link 'Filtrar Compras Diretas'
+
+    clear_mask "Ano"
+
+    click_button 'Pesquisar'
 
     within_records do
       page.find('a').click
@@ -1388,6 +1460,12 @@ feature "DirectPurchases" do
 
     navigate 'Processos de Compra > Compra Direta'
 
+    click_link 'Filtrar Compras Diretas'
+
+    clear_mask "Ano"
+
+    click_button 'Pesquisar'
+
     within_records do
       page.find('a').click
     end
@@ -1483,6 +1561,12 @@ feature "DirectPurchases" do
 
     navigate 'Processos de Compra > Compra Direta'
 
+    click_link 'Filtrar Compras Diretas'
+
+    clear_mask "Ano"
+
+    click_button 'Pesquisar'
+
     click_link '1/2012'
 
     within_tab 'Principal' do
@@ -1521,6 +1605,12 @@ feature "DirectPurchases" do
     )
 
     navigate 'Processos de Compra > Compra Direta'
+
+    click_link 'Filtrar Compras Diretas'
+
+    clear_mask "Ano"
+
+    click_button 'Pesquisar'
 
     within_records do
       click_link '1/2012'
@@ -1601,6 +1691,12 @@ feature "DirectPurchases" do
 
     navigate 'Processos de Compra > Compra Direta'
 
+    click_link 'Filtrar Compras Diretas'
+
+    clear_mask "Ano"
+
+    click_button 'Pesquisar'
+
     click_link '1/2012'
 
     within_tab 'Principal' do
@@ -1634,6 +1730,12 @@ feature "DirectPurchases" do
     )
 
     navigate 'Processos de Compra > Compra Direta'
+
+    click_link 'Filtrar Compras Diretas'
+
+    clear_mask "Ano"
+
+    click_button 'Pesquisar'
 
     click_link '1/2012'
 
@@ -1684,6 +1786,12 @@ feature "DirectPurchases" do
 
     navigate 'Processos de Compra > Compra Direta'
 
+    click_link 'Filtrar Compras Diretas'
+
+    clear_mask "Ano"
+
+    click_button 'Pesquisar'
+
     click_link '1/2012'
 
     click_button 'Gerar autorização de fornecimento'
@@ -1724,6 +1832,12 @@ feature "DirectPurchases" do
 
     navigate 'Processos de Compra > Compra Direta'
 
+    click_link 'Filtrar Compras Diretas'
+
+    clear_mask "Ano"
+
+    click_button 'Pesquisar'
+
     click_link '1/2012'
 
     within_tab 'Principal' do
@@ -1748,6 +1862,12 @@ feature "DirectPurchases" do
     )
 
     navigate 'Processos de Compra > Compra Direta'
+
+    click_link 'Filtrar Compras Diretas'
+
+    clear_mask "Ano"
+
+    click_button 'Pesquisar'
 
     click_link '1/2012'
 
@@ -1779,6 +1899,12 @@ feature "DirectPurchases" do
     )
 
     navigate 'Processos de Compra > Compra Direta'
+
+    click_link 'Filtrar Compras Diretas'
+
+    clear_mask "Ano"
+
+    click_button 'Pesquisar'
 
     click_link '1/2012'
 
@@ -1846,6 +1972,12 @@ feature "DirectPurchases" do
     )
 
     navigate 'Processos de Compra > Compra Direta'
+
+    click_link 'Filtrar Compras Diretas'
+
+    clear_mask "Ano"
+
+    click_button 'Pesquisar'
 
     click_link '1/2012'
 
@@ -1956,6 +2088,12 @@ feature "DirectPurchases" do
 
     navigate 'Processos de Compra > Compra Direta'
 
+    click_link 'Filtrar Compras Diretas'
+
+    clear_mask "Ano"
+
+    click_button 'Pesquisar'
+
     click_link '1/2012'
 
     within_tab 'Dotações' do
@@ -1999,6 +2137,12 @@ feature "DirectPurchases" do
     DirectPurchase.make!(:compra_2011)
 
     navigate 'Processos de Compra > Compra Direta'
+
+    click_link 'Filtrar Compras Diretas'
+
+    clear_mask "Ano"
+
+    click_button 'Pesquisar'
 
     within_records do
       expect(page).to have_content 'Código/Ano'
@@ -2135,6 +2279,12 @@ feature "DirectPurchases" do
 
     navigate 'Processos de Compra > Compra Direta'
 
+    click_link 'Filtrar Compras Diretas'
+
+    clear_mask "Ano"
+
+    click_button 'Pesquisar'
+
     within_records do
       click_link '1/2012'
     end
@@ -2191,6 +2341,12 @@ feature "DirectPurchases" do
 
     navigate 'Processos de Compra > Compra Direta'
 
+    click_link 'Filtrar Compras Diretas'
+
+    clear_mask "Ano"
+
+    click_button 'Pesquisar'
+
     within_records do
       expect(page).to have_content "1/2012"
       expect(page).to have_content "2/2013"
@@ -2207,7 +2363,11 @@ feature "DirectPurchases" do
       expect(page).to have_content "2/2013"
     end
 
-    click_link 'Limpar Filtro'
+    click_link 'Filtrar Compras Diretas'
+
+    clear_mask "Ano"
+
+    click_button 'Pesquisar'
 
     within_records do
       expect(page).to have_content "1/2012"

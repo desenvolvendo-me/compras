@@ -94,7 +94,22 @@ class CrudController < ApplicationController
 
   # Get collection using ordered scope
   def collection
+    set_default_filters
     get_collection_ivar || set_collection_ivar(end_of_association_chain.ordered)
+  end
+
+  def set_default_filters
+    params[:filter] ||= {}
+
+    #binding.pry
+
+    default_filters.each do |k, v|
+      params[:filter][k] ||= v.is_a?(Proc) ? v.call : v
+    end
+  end
+
+  def default_filters(filters={})
+    filters
   end
 
   def disable_pagination?

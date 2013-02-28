@@ -21,6 +21,10 @@ class ContractsController < CrudController
 
   protected
 
+  def default_filters
+    { :year => lambda { Date.current.year } }
+  end
+
   def create_resource(object)
     object.sequential_number = Contract.next_sequential(object.year)
 

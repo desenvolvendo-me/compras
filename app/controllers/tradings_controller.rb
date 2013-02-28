@@ -27,6 +27,10 @@ class TradingsController < CrudController
 
   protected
 
+  def default_filters
+    { :year => lambda { Date.current.year } }
+  end
+
   def create_resource(object)
     object.transaction do
       return unless super

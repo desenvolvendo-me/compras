@@ -3,6 +3,8 @@ class Trading < Compras::Model
                   :year, :licitation_process_id, :items_attributes,
                   :licitation_commission_id, :preamble, :closing_of_accreditation
 
+  attr_modal :code, :year, :licitation_process_id, :entity_id
+
   auto_increment :code, :by => :year
 
   belongs_to :entity

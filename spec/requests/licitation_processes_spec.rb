@@ -612,6 +612,12 @@ feature "LicitationProcesses" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
+    click_link "Filtrar Processos Licitatórios"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       expect(page).to have_css 'a', :count => 2
     end
@@ -640,6 +646,12 @@ feature "LicitationProcesses" do
                                                  :licitation_process => licitation_process)
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    click_link "Filtrar Processos Licitatórios"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     click_link '1/2012'
 
@@ -684,6 +696,12 @@ feature "LicitationProcesses" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
+    click_link "Filtrar Processos Licitatórios"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       click_link "1/2012"
     end
@@ -718,6 +736,12 @@ feature "LicitationProcesses" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
+    click_link "Filtrar Processos Licitatórios"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       click_link "1/2013"
     end
@@ -739,6 +763,12 @@ feature "LicitationProcesses" do
     LicitationProcess.make!(:processo_licitatorio, :status => LicitationProcessStatus::IN_PROGRESS)
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    click_link "Filtrar Processos Licitatórios"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     within_records do
       expect(page).to have_content 'Código/Ano'
@@ -764,6 +794,12 @@ feature "LicitationProcesses" do
                                :administrative_process_budget_allocation_items => [licitation_process.items.first])
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    click_link "Filtrar Processos Licitatórios"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     within_records do
       page.find('a').click
@@ -793,6 +829,12 @@ feature "LicitationProcesses" do
     licitation_process = LicitationProcess.make!(:apuracao_global_empatou)
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    click_link "Filtrar Processos Licitatórios"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     within_records do
       page.find('a').click
@@ -831,6 +873,12 @@ feature "LicitationProcesses" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
+    click_link "Filtrar Processos Licitatórios"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       page.find('a').click
     end
@@ -861,6 +909,12 @@ feature "LicitationProcesses" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
+    click_link "Filtrar Processos Licitatórios"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       page.find('a').click
     end
@@ -882,6 +936,12 @@ feature "LicitationProcesses" do
     licitation_process = LicitationProcess.make!(:apuracao_global_small_company, :consider_law_of_proposals => false)
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    click_link "Filtrar Processos Licitatórios"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     within_records do
       page.find('a').click
@@ -919,6 +979,12 @@ feature "LicitationProcesses" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
+    click_link "Filtrar Processos Licitatórios"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       page.find('a').click
     end
@@ -954,6 +1020,12 @@ feature "LicitationProcesses" do
     licitation_process = LicitationProcess.make!(:apuracao_global_small_company, :consider_law_of_proposals => true)
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    click_link "Filtrar Processos Licitatórios"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     within_records do
       page.find('a').click
@@ -1031,6 +1103,12 @@ feature "LicitationProcesses" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
+    click_link "Filtrar Processos Licitatórios"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       page.find('a').click
     end
@@ -1105,6 +1183,12 @@ feature "LicitationProcesses" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
+    click_link "Filtrar Processos Licitatórios"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       page.find('a').click
     end
@@ -1164,6 +1248,12 @@ feature "LicitationProcesses" do
                                :administrative_process_budget_allocation_items => [licitation_process.items.second])
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    click_link "Filtrar Processos Licitatórios"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     within_records do
       page.find('a').click
@@ -1251,6 +1341,12 @@ feature "LicitationProcesses" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
+    click_link "Filtrar Processos Licitatórios"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       page.find('a').click
     end
@@ -1335,9 +1431,17 @@ feature "LicitationProcesses" do
     LicitationProcess.make!(:processo_licitatorio)
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    click_link "Filtrar Processos Licitatórios"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       page.find('a').click
     end
+
     click_link 'Processo Administrativo'
 
     within_tab 'Principal' do
@@ -1351,10 +1455,24 @@ feature "LicitationProcesses" do
     licitation_process = LicitationProcess.make!(:processo_licitatorio)
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    click_link "Filtrar Processos Licitatórios"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       page.find('a').click
     end
+
     click_link 'Voltar à listagem'
+
+    click_link "Filtrar Processos Licitatórios"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     expect(page).to have_link '1/2012'
   end

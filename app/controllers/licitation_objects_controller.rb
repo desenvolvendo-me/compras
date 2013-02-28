@@ -16,6 +16,10 @@ class LicitationObjectsController < CrudController
 
   private
 
+  def default_filters
+    { :year => lambda { Date.current.year } }
+  end
+
   def initializes_values(object)
     object.purchase_invitation_letter     = 0.00
     object.purchase_taking_price          = 0.00

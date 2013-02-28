@@ -127,6 +127,12 @@ feature "Contracts" do
 
     expect(page).to have_notice 'Contrato criado com sucesso.'
 
+    click_link "Filtrar Contratos"
+
+    clear_mask "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       page.find('a').click
     end
@@ -161,6 +167,12 @@ feature "Contracts" do
 
     navigate 'Comum > Cadastrais > Contratos'
 
+    click_link "Filtrar Contratos"
+
+    clear_mask "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       page.find('a').click
     end
@@ -193,6 +205,12 @@ feature "Contracts" do
 
     navigate 'Comum > Cadastrais > Contratos'
 
+    click_link "Filtrar Contratos"
+
+    clear_mask "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       page.find('a').click
     end
@@ -215,6 +233,12 @@ feature "Contracts" do
 
     navigate 'Comum > Cadastrais > Contratos'
 
+    click_link "Filtrar Contratos"
+
+    clear_mask "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       click_link '001'
     end
@@ -230,6 +254,12 @@ feature "Contracts" do
     DeliverySchedule.make!(:primeira_entrega)
 
     navigate 'Comum > Cadastrais > Contratos'
+
+    click_link "Filtrar Contratos"
+
+    clear_mask "Ano"
+
+    click_button "Pesquisar"
 
     within_records do
       page.find('a').click
@@ -255,6 +285,12 @@ feature "Contracts" do
 
     expect(page).to have_notice 'Contrato editado com sucesso.'
 
+    click_link "Filtrar Contratos"
+
+    clear_mask "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       page.find('a').click
     end
@@ -275,6 +311,12 @@ feature "Contracts" do
 
     navigate 'Comum > Cadastrais > Contratos'
 
+    click_link "Filtrar Contratos"
+
+    clear_mask "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       page.find('a').click
     end
@@ -286,6 +328,12 @@ feature "Contracts" do
     click_button 'Salvar'
 
     expect(page).to have_notice 'Contrato editado com sucesso.'
+
+    click_link "Filtrar Contratos"
+
+    clear_mask "Ano"
+
+    click_button "Pesquisar"
 
     within_records do
       page.find('a').click
@@ -303,6 +351,12 @@ feature "Contracts" do
     Contract.make!(:primeiro_contrato)
 
     navigate 'Comum > Cadastrais > Contratos'
+
+    click_link "Filtrar Contratos"
+
+    clear_mask "Ano"
+
+    click_button "Pesquisar"
 
     within_records do
       expect(page).to have_content 'Número do contrato'
