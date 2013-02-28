@@ -101,8 +101,6 @@ class CrudController < ApplicationController
   def set_default_filters
     params[:filter] ||= {}
 
-    #binding.pry
-
     default_filters.each do |k, v|
       params[:filter][k] ||= v.is_a?(Proc) ? v.call : v
     end
