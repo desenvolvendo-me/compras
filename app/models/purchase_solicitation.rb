@@ -30,8 +30,7 @@ class PurchaseSolicitation < Compras::Model
 
   has_one  :annul, :class_name => 'ResourceAnnul', :as => :annullable, :dependent => :destroy
   has_one  :direct_purchase
-  has_one  :administrative_process
-  has_one  :licitation_process, :through => :administrative_process
+  has_one  :licitation_process
 
   accepts_nested_attributes_for :purchase_solicitation_budget_allocations, :allow_destroy => true
 
@@ -83,12 +82,12 @@ class PurchaseSolicitation < Compras::Model
     }.where { |purchase| purchase.id.eq(self.id) }
   end
 
-  def administrative_process_by_item_group
+  def licitation_process_by_item_group
     PurchaseSolicitation.joins {
       purchase_solicitation_item_group_material_purchase_solicitations.
       purchase_solicitation_item_group_material.
       purchase_solicitation_item_group.
-      administrative_process
+      licitation_process
     }.where { |purchase| purchase.id.eq(self.id) }
   end
 

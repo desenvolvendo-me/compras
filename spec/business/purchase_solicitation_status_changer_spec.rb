@@ -7,7 +7,7 @@ describe PurchaseSolicitationStatusChanger do
       purchase_solicitation_repository.should_receive(:find).with(purchase_solicitation).and_return(purchase_solicitation)
       purchase_solicitation.should_receive(:id).and_return(purchase_solicitation)
       purchase_solicitation.stub(:direct_purchase).and_return(direct_purchase)
-      purchase_solicitation.stub(:administrative_process).and_return(administrative_process)
+      purchase_solicitation.stub(:licitation_process).and_return(licitation_process)
       purchase_solicitation.items.stub(:attended).and_return(attended_items)
       purchase_solicitation.items.stub(:pending).and_return(pending_items)
     end
@@ -21,7 +21,7 @@ describe PurchaseSolicitationStatusChanger do
     let(:attended_items) { double(:attended_items) }
     let(:pending_items) { double(:pending_items) }
     let(:direct_purchase) { double(:direct_purchase, :present? => false) }
-    let(:administrative_process) { double(:administrative_process, :present? => false) }
+    let(:licitation_process) { double(:licitation_process, :present? => false) }
     let(:relation) { double(:relation) }
 
     context 'when all items is attended' do
@@ -68,7 +68,7 @@ describe PurchaseSolicitationStatusChanger do
         relation.should_receive(:any?).and_return(false)
         purchase_solicitation.should_receive(:direct_purchase_by_item_group).and_return(relation)
         relation.should_receive(:present?).and_return(false)
-        purchase_solicitation.should_receive(:administrative_process_by_item_group).and_return(relation)
+        purchase_solicitation.should_receive(:licitation_process_by_item_group).and_return(relation)
         relation.should_receive(:present?).and_return(false)
       end
 
@@ -93,7 +93,7 @@ describe PurchaseSolicitationStatusChanger do
         relation.should_receive(:any?).and_return(false)
         purchase_solicitation.should_receive(:direct_purchase_by_item_group).and_return(relation)
         relation.should_receive(:present?).and_return(false)
-        purchase_solicitation.should_receive(:administrative_process_by_item_group).and_return(relation)
+        purchase_solicitation.should_receive(:licitation_process_by_item_group).and_return(relation)
         relation.should_receive(:present?).and_return(false)
       end
 
@@ -118,7 +118,7 @@ describe PurchaseSolicitationStatusChanger do
         relation.should_receive(:any?).and_return(false)
         purchase_solicitation.should_receive(:direct_purchase_by_item_group).and_return(relation)
         relation.should_receive(:present?).and_return(false)
-        purchase_solicitation.should_receive(:administrative_process_by_item_group).and_return(relation)
+        purchase_solicitation.should_receive(:licitation_process_by_item_group).and_return(relation)
         relation.should_receive(:present?).and_return(false)
       end
 
@@ -164,7 +164,7 @@ describe PurchaseSolicitationStatusChanger do
         relation.should_receive(:any?).and_return(false)
         purchase_solicitation.should_receive(:direct_purchase_by_item_group).and_return(relation)
         relation.should_receive(:present?).and_return(false)
-        purchase_solicitation.should_receive(:administrative_process_by_item_group).and_return(relation)
+        purchase_solicitation.should_receive(:licitation_process_by_item_group).and_return(relation)
         relation.should_receive(:present?).and_return(true)
       end
 

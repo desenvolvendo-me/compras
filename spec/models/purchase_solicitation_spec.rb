@@ -12,7 +12,7 @@ require 'app/models/purchase_solicitation_item_group_material_purchase_solicitat
 require 'app/models/material.rb'
 require 'app/models/direct_purchase'
 require 'app/models/budget_structure.rb'
-require 'app/models/administrative_process'
+require 'app/models/licitation_process'
 
 describe PurchaseSolicitation do
   it 'should return the code/accounting_year in to_s method' do
@@ -31,8 +31,7 @@ describe PurchaseSolicitation do
   it { should have_many(:purchase_solicitation_item_group_material_purchase_solicitations).dependent(:destroy)}
   it { should have_one(:annul).dependent(:destroy) }
   it { should have_one(:direct_purchase) }
-  it { should have_one(:administrative_process) }
-  it { should have_one(:licitation_process).through(:administrative_process) }
+  it { should have_one(:licitation_process) }
   it { should belong_to :responsible }
   it { should belong_to :delivery_location }
   it { should belong_to :liberator }
