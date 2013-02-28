@@ -100,6 +100,21 @@ describe LicitationProcessesController do
       post :create, :licitation_process => {
            :purchase_solicitation_id => purchase_solicitation.id }
     end
+
+    it 'should updates the status of purchase_solicitation to in_purchase_process' do
+      purchase_solicitation = PurchaseSolicitation.make!(:reparo)
+
+      LicitationProcess.any_instance.should_receive(:transaction).and_yield
+      LicitationProcess.any_instance.should_receive(:save).and_return(true)
+      LicitationProcess.any_instance.should_receive(:id).any_number_of_times.and_return(1)
+
+      PurchaseSolicitationStatusChanger.
+        should_receive(:change).
+        with(purchase_solicitation)
+
+      post :create, :licitation_process => {
+           :purchase_solicitation_id => purchase_solicitation.id }
+    end
   end
 
   describe 'PUT #update' do
@@ -222,6 +237,20 @@ describe LicitationProcessesController do
           :old_purchase_solicitation_item_group => nil,
           :licitation_process => licitation_process).
         and_return(item_status_changer)
+
+      put :update, :id => licitation_process.id, :licitation_process => {
+        :purchase_solicitation_id => purchase_solicitation.id }
+    end
+
+    it 'should change status purchase solicitation' do
+      licitation_process = LicitationProcess.make!(:processo_licitatorio)
+      purchase_solicitation = PurchaseSolicitation.make!(:reparo)
+
+      PurchaseSolicitationStatusChanger.
+        should_receive(:change).with(purchase_solicitation)
+
+      PurchaseSolicitationStatusChanger.
+        should_receive(:change).with(nil)
 
       put :update, :id => licitation_process.id, :licitation_process => {
         :purchase_solicitation_id => purchase_solicitation.id }

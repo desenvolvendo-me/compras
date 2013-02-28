@@ -81,6 +81,8 @@ class LicitationProcessesController < CrudController
         ).change
 
         PurchaseSolicitationItemGroupProcess.new(:new_item_group => new_item_group).update_status
+        PurchaseSolicitationStatusChanger.change(new_purchase_solicitation)
+
         DeliveryLocationChanger.change(object.purchase_solicitation, object.delivery_location)
       end
     end
@@ -132,6 +134,9 @@ class LicitationProcessesController < CrudController
           :new_purchase_solicitation_item_group => new_item_group,
           :old_purchase_solicitation_item_group => old_item_group,
           :licitation_process => object).change
+
+        PurchaseSolicitationStatusChanger.change(new_purchase_solicitation)
+        PurchaseSolicitationStatusChanger.change(old_purchase_solicitation)
       end
     end
   end
