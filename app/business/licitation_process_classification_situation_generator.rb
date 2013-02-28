@@ -5,7 +5,7 @@ class LicitationProcessClassificationSituationGenerator
   attr_accessor :licitation_process
 
   delegate :bidders, :all_licitation_process_classifications,
-           :administrative_process_trading?, :lots_with_items, :items,
+           :trading?, :lots_with_items, :items,
            :consider_law_of_proposals, :lowest_total_price_by_item?,
            :lowest_price_by_lot?, :lowest_global_price?, :classifications,
            :to => :licitation_process, :allow_nil => true
@@ -127,6 +127,6 @@ class LicitationProcessClassificationSituationGenerator
   end
 
   def current_percentage
-    administrative_process_trading? ? PRESENCE_TRADING_PERCENTAGE : NORMAL_PERCENTAGE
+    trading? ? PRESENCE_TRADING_PERCENTAGE : NORMAL_PERCENTAGE
   end
 end

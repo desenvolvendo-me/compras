@@ -16,7 +16,7 @@ describe LicitationProcessClassificationSituationGenerator do
       :bidders => [bidder],
       :lots_with_items => [lot],
       :items => [],
-      :administrative_process_trading? => false,
+      :trading? => false,
       :consider_law_of_proposals => true
     )
   end
