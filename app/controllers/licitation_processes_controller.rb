@@ -75,6 +75,11 @@ class LicitationProcessesController < CrudController
           :licitation_process => object,
           :add_fulfill => true).fulfill
 
+        PurchaseSolicitationBudgetAllocationItemStatusChanger.new(
+          :new_purchase_solicitation => new_purchase_solicitation,
+          :licitation_process => object
+        ).change
+
         PurchaseSolicitationItemGroupProcess.new(:new_item_group => new_item_group).update_status
         DeliveryLocationChanger.change(object.purchase_solicitation, object.delivery_location)
       end
@@ -120,6 +125,13 @@ class LicitationProcessesController < CrudController
           :licitation_process => object,
           :add_fulfill => true
         ).fulfill
+
+        PurchaseSolicitationBudgetAllocationItemStatusChanger.new(
+          :new_purchase_solicitation => new_purchase_solicitation,
+          :old_purchase_solicitation => old_purchase_solicitation,
+          :new_purchase_solicitation_item_group => new_item_group,
+          :old_purchase_solicitation_item_group => old_item_group,
+          :licitation_process => object).change
       end
     end
   end

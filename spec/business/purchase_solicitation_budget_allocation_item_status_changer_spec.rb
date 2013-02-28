@@ -4,7 +4,7 @@ require 'app/business/purchase_solicitation_budget_allocation_item_status_change
 describe PurchaseSolicitationBudgetAllocationItemStatusChanger do
   let(:item_repository) { double(:item_repository) }
   let(:direct_purchase) { double(:direct_purchase, :id => 1, :class_name => 'DirectPurchase') }
-  let(:administrative_process) { double(:administrative_process, :id => 1, :class_name => 'AdministrativeProcess') }
+  let(:licitation_process) { double(:licitation_process, :id => 1, :class_name => 'LicitationProcess') }
   let(:purchase_solicitation) { double(:purchase_solicitation) }
   let(:purchase_solicitation_item_group) { double(:purchase_solicitation_item_group) }
   let(:items) { double(:items) }
@@ -71,7 +71,7 @@ describe PurchaseSolicitationBudgetAllocationItemStatusChanger do
     context 'when purchase solicitation is from direct purchase' do
       before do
         purchase_solicitation.should_receive(:direct_purchase).twice.and_return(direct_purchase)
-        purchase_solicitation.should_receive(:administrative_process).and_return(nil)
+        purchase_solicitation.should_receive(:licitation_process).and_return(nil)
       end
 
       it 'should mark all items from direct purchase as attended' do
@@ -85,12 +85,12 @@ describe PurchaseSolicitationBudgetAllocationItemStatusChanger do
     context 'when purchase solicitation is from direct purchase' do
       before do
         purchase_solicitation.should_receive(:direct_purchase).once.and_return(nil)
-        purchase_solicitation.should_receive(:administrative_process).twice.and_return(administrative_process)
+        purchase_solicitation.should_receive(:licitation_process).twice.and_return(licitation_process)
       end
 
-      it 'should mark all pending items from administrative process as attended' do
+      it 'should mark all pending items from licitation process as attended' do
         purchase_solicitation.should_receive(:direct_purchase_authorized?).and_return(true)
-        administrative_process.should_receive(:attend_purchase_solicitation_items)
+        licitation_process.should_receive(:attend_purchase_solicitation_items)
 
         subject.change
       end
@@ -119,12 +119,12 @@ describe PurchaseSolicitationBudgetAllocationItemStatusChanger do
     subject do
       PurchaseSolicitationBudgetAllocationItemStatusChanger.new(
         :old_purchase_solicitation => purchase_solicitation,
-        :administrative_process => administrative_process,
+        :licitation_process => licitation_process,
         :item_repository => item_repository)
     end
 
-    it 'should mark all items from administrative process as attended' do
-      item_repository.should_receive(:by_fulfiller).with(administrative_process.id, administrative_process.class.name).and_return(items)
+    it 'should mark all items from licitatio process as attended' do
+      item_repository.should_receive(:by_fulfiller).with(licitation_process.id, licitation_process.class.name).and_return(items)
       items.should_receive(:pending!)
 
       subject.change

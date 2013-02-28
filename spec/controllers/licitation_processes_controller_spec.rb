@@ -82,6 +82,24 @@ describe LicitationProcessesController do
       post :create, :licitation_process => {
         :purchase_solicitation_item_group_id => item_group.id }
     end
+
+    it 'should change budget allocation items status with purchase solicitation' do
+      purchase_solicitation = PurchaseSolicitation.make!(:reparo)
+
+      LicitationProcess.any_instance.should_receive(:transaction).and_yield
+      LicitationProcess.any_instance.should_receive(:save).and_return(true)
+      LicitationProcess.any_instance.should_receive(:id).any_number_of_times.and_return(1)
+
+      item_status_changer = double(:item_status_changer)
+      item_status_changer.should_receive(:change).once
+
+      PurchaseSolicitationBudgetAllocationItemStatusChanger.
+        should_receive(:new).
+        and_return(item_status_changer)
+
+      post :create, :licitation_process => {
+           :purchase_solicitation_id => purchase_solicitation.id }
+    end
   end
 
   describe 'PUT #update' do
@@ -187,6 +205,26 @@ describe LicitationProcessesController do
 
       put :update, :id => licitation_process.id,
                    :licitation_process => { :purchase_solicitation_item_group_id => item_group.id }
+    end
+
+    it 'should change budget allocation items status with purchase solicitation' do
+      licitation_process = LicitationProcess.make!(:processo_licitatorio)
+      purchase_solicitation = PurchaseSolicitation.make!(:reparo)
+
+      item_status_changer = double(:item_status_changer)
+      item_status_changer.should_receive(:change).once
+
+      PurchaseSolicitationBudgetAllocationItemStatusChanger.
+        should_receive(:new).with(
+          :new_purchase_solicitation => purchase_solicitation,
+          :old_purchase_solicitation => nil,
+          :new_purchase_solicitation_item_group => nil,
+          :old_purchase_solicitation_item_group => nil,
+          :licitation_process => licitation_process).
+        and_return(item_status_changer)
+
+      put :update, :id => licitation_process.id, :licitation_process => {
+        :purchase_solicitation_id => purchase_solicitation.id }
     end
   end
 

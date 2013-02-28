@@ -19,7 +19,7 @@ class PurchaseSolicitationBudgetAllocationItemStatusChanger
     @new_purchase_solicitation_item_group = options[:new_purchase_solicitation_item_group]
     @old_purchase_solicitation_item_group = options[:old_purchase_solicitation_item_group]
     @direct_purchase = options[:direct_purchase]
-    @administrative_process = options[:administrative_process]
+    @licitation_process = options[:licitation_process]
     @item_repository = options.fetch(:item_repository) { PurchaseSolicitationBudgetAllocationItem }
   end
 
@@ -28,15 +28,15 @@ class PurchaseSolicitationBudgetAllocationItemStatusChanger
     pending_items_by_ids
 
     pending_items_by_fulfiller(direct_purchase)
-    pending_items_by_fulfiller(administrative_process)
+    pending_items_by_fulfiller(licitation_process)
 
     if new_purchase_solicitation
       if attend_items?(new_purchase_solicitation)
         attend_items_by_direct_purchase
-        attend_items_by_administrative_process
+        attend_items_by_licitation_process
       else
         partially_fulfilled_items_by_direct_purchase
-        partially_fulfilled_items_by_administrative_process
+        partially_fulfilled_items_by_licitation_process
       end
     end
 
@@ -56,7 +56,7 @@ class PurchaseSolicitationBudgetAllocationItemStatusChanger
   attr_reader :new_item_ids, :old_item_ids, :new_purchase_solicitation,
               :old_purchase_solicitation, :purchase_solicitation_item_group_id,
               :new_purchase_solicitation_item_group, :old_purchase_solicitation_item_group,
-              :direct_purchase, :administrative_process, :item_repository
+              :direct_purchase, :licitation_process, :item_repository
 
   def group_items_by_ids
     return unless new_item_ids.any?
@@ -86,10 +86,10 @@ class PurchaseSolicitationBudgetAllocationItemStatusChanger
     new_purchase_solicitation.direct_purchase.attend_purchase_solicitation_items
   end
 
-  def attend_items_by_administrative_process
-    return unless new_purchase_solicitation.administrative_process
+  def attend_items_by_licitation_process
+    return unless new_purchase_solicitation.licitation_process
 
-    new_purchase_solicitation.administrative_process.attend_purchase_solicitation_items
+    new_purchase_solicitation.licitation_process.attend_purchase_solicitation_items
   end
 
   def pending_items_by_fulfiller(object)
@@ -104,9 +104,9 @@ class PurchaseSolicitationBudgetAllocationItemStatusChanger
     direct_purchase.partially_fulfilled_purchase_solicitation_items
   end
 
-  def partially_fulfilled_items_by_administrative_process
-    return unless administrative_process
+  def partially_fulfilled_items_by_licitation_process
+    return unless licitation_process
 
-    administrative_process.partially_fulfilled_purchase_solicitation_items
+    licitation_process.partially_fulfilled_purchase_solicitation_items
   end
 end

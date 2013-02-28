@@ -599,4 +599,29 @@ describe LicitationProcess do
       subject.remove_fulfill_purchase_solicitation_items
     end
   end
+
+  describe '#attend_purchase_solicitation_items' do
+    it 'should attend items' do
+      subject.purchase_solicitation_items.should_receive(:attend!)
+
+      subject.attend_purchase_solicitation_items
+    end
+  end
+
+  describe 'partially_fulfilled_purchase_solicitation_items' do
+    before do
+      subject.should_receive(:purchase_solicitation_items).
+              and_return([item, item2])
+    end
+
+    let(:item)  { double(:item) }
+    let(:item2) { double(:item2) }
+
+    it 'should fulfill items' do
+      item.should_receive(:partially_fulfilled!)
+      item2.should_receive(:partially_fulfilled!)
+
+      subject.partially_fulfilled_purchase_solicitation_items
+    end
+  end
 end

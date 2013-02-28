@@ -226,6 +226,17 @@ class LicitationProcess < Compras::Model
     end
   end
 
+  def attend_purchase_solicitation_items
+    purchase_solicitation_items.attend!
+  end
+
+  def partially_fulfilled_purchase_solicitation_items
+    purchase_solicitation_items.each do |item|
+      item.partially_fulfilled!
+    end
+  end
+
+
   protected
 
   def available_for_licitation_process_classification?
