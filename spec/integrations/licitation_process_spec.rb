@@ -3,16 +3,13 @@ require 'spec_helper'
 
 describe LicitationProcess do
   it 'auto increment process by year' do
-    licitation_2012 = LicitationProcess.make(:processo_licitatorio)
-    licitation_2012.save!
+    licitation_2012 = LicitationProcess.make!(:processo_licitatorio_computador, :year => 2012, :process => nil)
     expect(licitation_2012.process).to eq 1
 
-    licitation_2013 = LicitationProcess.make(:processo_licitatorio_computador)
-    licitation_2013.save!
+    licitation_2013 = LicitationProcess.make!(:processo_licitatorio_computador, :year => 2013, :process => nil)
     expect(licitation_2013.process).to eq 1
 
-    licitation_2013_2 = LicitationProcess.make(:processo_licitatorio_canetas)
-    licitation_2013_2.save!
+    licitation_2013_2 = LicitationProcess.make!(:processo_licitatorio_computador, :year => 2013, :licitation_number => 13, :process => nil)
     expect(licitation_2013_2.process).to eq 2
   end
 
@@ -33,7 +30,10 @@ describe LicitationProcess do
     end
 
     context "concurrence modality validation" do
-      let(:licitation)  { LicitationProcess.make!(:processo_licitatorio_concorrencia, :licitation_process_publications => [publication]) }
+      let(:licitation) do
+        LicitationProcess.make!(:processo_licitatorio_concorrencia,
+                                :licitation_process_publications => [publication])
+      end
 
       context "integral execution type" do
         it "should be 45 calendar days greater than last publication date when best technique or technical and price" do
@@ -118,8 +118,7 @@ describe LicitationProcess do
 
     context "auction modality validation" do
       it "should be 15 calendar days greater than last publication date" do
-        administrative_process = AdministrativeProcess.make!(:maior_lance_por_itens)
-        licitation = LicitationProcess.make!(:processo_licitatorio_leilao, :administrative_process => administrative_process, :licitation_process_publications => [publication])
+        licitation = LicitationProcess.make!(:processo_licitatorio_leilao, :licitation_process_publications => [publication])
         licitation.envelope_opening_date = Date.today + 14.days
 
         expect(licitation).to_not be_valid
@@ -132,9 +131,8 @@ describe LicitationProcess do
 
     context "trading modality validation" do
       it "should be 8 working days greater than last publication date" do
-        administrative_process = AdministrativeProcess.make!(:compra_com_itens, :modality => Modality::TRADING)
         licitation = LicitationProcess.make!(:processo_licitatorio, :licitation_process_publications => [publication],
-                                             :administrative_process => administrative_process, :execution_type => ExecutionType::INTEGRAL)
+                                             :modality => Modality::TRADING, :execution_type => ExecutionType::INTEGRAL)
         licitation.envelope_opening_date = Date.today + 5.days
 
         expect(licitation).to_not be_valid
@@ -147,9 +145,8 @@ describe LicitationProcess do
 
     context "invitation modality validation" do
       it "should be 5 working days greater than last publication date" do
-        administrative_process = AdministrativeProcess.make!(:compra_com_itens, :modality => Modality::INVITATION)
         licitation = LicitationProcess.make!(:processo_licitatorio, :licitation_process_publications => [publication],
-                                             :administrative_process => administrative_process, :execution_type => ExecutionType::INTEGRAL)
+                                             :modality => Modality::INVITATION, :execution_type => ExecutionType::INTEGRAL)
         licitation.envelope_opening_date = Date.today + 4.days
 
         expect(licitation).to_not be_valid

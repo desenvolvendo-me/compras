@@ -749,7 +749,7 @@ LicitationProcess.blueprint(:processo_licitatorio_concurso) do
   modality { Modality::COMPETITION }
   judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
   description { 'Licitação para contrução de prédio' }
-  status { AdministrativeProcessStatus::RELEASED }
+  responsible { Employee.make!(:sobrinho) }
   item { 'Item 2' }
   administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao)] }
   year { 2012 }
@@ -816,7 +816,7 @@ LicitationProcess.blueprint(:processo_licitatorio_concorrencia) do
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   price_registration { true }
-  type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM }
+  type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_GLOBAL_PRICE }
   disqualify_by_documentation_problem { true }
   disqualify_by_maximum_value { true }
   consider_law_of_proposals { false }
@@ -857,7 +857,7 @@ LicitationProcess.blueprint(:processo_licitatorio_tomada_preco) do
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   price_registration { true }
-  type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM }
+  type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_GLOBAL_PRICE }
   disqualify_by_documentation_problem { true }
   disqualify_by_maximum_value { true }
   consider_law_of_proposals { false }
