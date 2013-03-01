@@ -3,7 +3,6 @@ require 'unit_helper'
 require 'enumerate_it'
 require 'active_support/core_ext/module/delegation'
 require "active_support/core_ext/date/calculations"
-require 'app/enumerations/administrative_process_status'
 require 'app/enumerations/trading_item_bid_stage'
 require 'app/business/trading_item_bid_bidder_chooser'
 

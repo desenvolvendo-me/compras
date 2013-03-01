@@ -70,10 +70,8 @@ describe PurchaseSolicitationsController do
 
     it 'should update licitation_proecess delivery_location' do
       purchase_solicitation  = PurchaseSolicitation.make!(:reparo)
-      administrative_process = AdministrativeProcess.make!(:compra_com_itens,
-                                                           :purchase_solicitation => purchase_solicitation)
       licitation_process    = LicitationProcess.make!(:processo_licitatorio,
-                                                       :administrative_process => administrative_process)
+                                                      :purchase_solicitation => purchase_solicitation)
 
       DeliveryLocationChanger.should_receive(:change).with(licitation_process, purchase_solicitation.delivery_location)
 

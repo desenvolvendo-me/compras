@@ -1,7 +1,0 @@
-pt-BR:
-  enumerations:
-    administrative_process_status:
-      waiting: "Aguardando"
-      released: "Liberado"
-      annulled: "Anulado"
-      approved: "Homologado/Encerrado"
