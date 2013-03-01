@@ -2,7 +2,7 @@
 LicitationProcess.blueprint(:processo_licitatorio) do
   process { 1 }
   protocol { '00088/2012' }
-  object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
+  object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
   modality { Modality::INVITATION }
   judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
   description { 'Licitação para compra de carteiras' }
@@ -44,7 +44,7 @@ end
 LicitationProcess.blueprint(:processo_licitatorio_computador) do
   process { 2 }
   protocol { '00089/2012' }
-  object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
+  object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
   modality { Modality::INVITATION }
   judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
   description { 'Licitação para compra de carteiras' }
@@ -83,7 +83,7 @@ end
 LicitationProcess.blueprint(:processo_licitatorio_fornecedores) do
   process { 1 }
   protocol { '00088/2012' }
-  object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
+  object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
   modality { Modality::INVITATION }
   judgment_form { JudgmentForm.make!(:global_com_menor_preco) }
   description { 'Licitação para compra de carteiras' }
@@ -121,7 +121,7 @@ end
 LicitationProcess.blueprint(:processo_licitatorio_publicacao_cancelada) do
   process { 1 }
   protocol { '00088/2012' }
-  object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
+  object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
   modality { Modality::INVITATION }
   judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
   description { 'Licitação para compra de carteiras' }
@@ -158,7 +158,7 @@ end
 LicitationProcess.blueprint(:processo_licitatorio_canetas) do
   process { 2 }
   protocol { '00089/2012' }
-  object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
+  object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
   modality { Modality::INVITATION }
   judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
   description { 'Licitação para compra de carteiras' }
@@ -198,7 +198,7 @@ end
 LicitationProcess.blueprint(:apuracao_por_itens) do
   process { 1 }
   protocol { '00088/2012' }
-  object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
+  object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
   modality { Modality::INVITATION }
   judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
   description { 'Licitação para compra de carteiras' }
@@ -238,7 +238,7 @@ end
 LicitationProcess.blueprint(:apuracao_por_lote) do
   process { 1 }
   protocol { '00088/2012' }
-  object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
+  object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
   modality { Modality::INVITATION }
   judgment_form { JudgmentForm.make!(:por_lote_com_melhor_tecnica) }
   description { 'Licitação para compra de carteiras' }
@@ -277,7 +277,7 @@ end
 LicitationProcess.blueprint(:valor_maximo_ultrapassado) do
   process { 1 }
   protocol { '00088/2012' }
-  object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
+  object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
   modality { Modality::INVITATION }
   judgment_form { JudgmentForm.make!(:por_lote_com_melhor_tecnica) }
   description { 'Licitação para compra de carteiras' }
@@ -316,7 +316,7 @@ end
 LicitationProcess.blueprint(:maior_lance_por_lote) do
   process { 1 }
   protocol { '00088/2012' }
-  object_type { AdministrativeProcessObjectType::CALL_NOTICE }
+  object_type { LicitationProcessObjectType::CALL_NOTICE }
   modality { Modality::CONCURRENCE }
   judgment_form { JudgmentForm.make!(:por_lote_com_melhor_tecnica) }
   description { 'Licitação para compra de carteiras' }
@@ -355,7 +355,7 @@ end
 LicitationProcess.blueprint(:apuracao_global) do
   process { 1 }
   protocol { '00088/2012' }
-  object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
+  object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
   modality { Modality::INVITATION }
   judgment_form { JudgmentForm.make!(:global) }
   description { 'Licitação para compra de carteiras' }
@@ -394,7 +394,7 @@ end
 LicitationProcess.blueprint(:apuracao_global_empatou) do
   process { 1 }
   protocol { '00088/2012' }
-  object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
+  object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
   modality { Modality::INVITATION }
   judgment_form { JudgmentForm.make!(:global) }
   description { 'Licitação para compra de carteiras' }
@@ -433,7 +433,7 @@ end
 LicitationProcess.blueprint(:apuracao_global_sem_documentos) do
   process { 1 }
   protocol { '00088/2012' }
-  object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
+  object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
   modality { Modality::INVITATION }
   judgment_form { JudgmentForm.make!(:global) }
   description { 'Licitação para compra de carteiras' }
@@ -472,7 +472,7 @@ end
 LicitationProcess.blueprint(:apuracao_global_small_company) do
   process { 1 }
   protocol { '00088/2012' }
-  object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
+  object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
   modality { Modality::INVITATION }
   judgment_form { JudgmentForm.make!(:global) }
   description { 'Licitação para compra de carteiras' }
@@ -511,7 +511,7 @@ end
 LicitationProcess.blueprint(:apuracao_global_small_company_without_new_proposal) do
   process { 1 }
   protocol { '00088/2012' }
-  object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
+  object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
   modality { Modality::INVITATION }
   judgment_form { JudgmentForm.make!(:global) }
   description { 'Licitação para compra de carteiras' }
@@ -550,7 +550,7 @@ end
 LicitationProcess.blueprint(:apuracao_global_small_company_2) do
   process { 1 }
   protocol { '00088/2012' }
-  object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
+  object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
   modality { Modality::INVITATION }
   judgment_form { JudgmentForm.make!(:global) }
   description { 'Licitação para compra de carteiras' }
@@ -589,7 +589,7 @@ end
 LicitationProcess.blueprint(:processo_licitatorio_nao_atualizavel) do
   process { 1 }
   protocol { '00088/2012' }
-  object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
+  object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
   modality { Modality::INVITATION }
   judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
   description { 'Licitação para compra de carteiras' }
@@ -627,7 +627,7 @@ end
 LicitationProcess.blueprint(:processo_licitatorio_canetas_sem_lote) do
   process { 2 }
   protocol { '00089/2012' }
-  object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
+  object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
   modality { Modality::INVITATION }
   judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
   description { 'Licitação para compra de carteiras' }
@@ -665,7 +665,7 @@ end
 LicitationProcess.blueprint(:apuracao_melhor_tecnica_e_preco) do
   process { 1 }
   protocol { '00088/2012' }
-  object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
+  object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
   modality { Modality::INVITATION }
   judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
   description { 'Licitação para compra de carteiras' }
@@ -704,7 +704,7 @@ end
 LicitationProcess.blueprint(:pregao_presencial) do
   process { 1 }
   protocol { '00088/2012' }
-  object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
+  object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
   modality { Modality::TRADING }
   judgment_form { JudgmentForm.make!(:por_item_com_menor_preco) }
   description { 'Licitação para compra de carteiras' }
@@ -745,7 +745,7 @@ end
 LicitationProcess.blueprint(:processo_licitatorio_concurso) do
   process { 1 }
   protocol { '00099/2012' }
-  object_type { AdministrativeProcessObjectType::CONSTRUCTION_AND_ENGINEERING_SERVICES }
+  object_type { LicitationProcessObjectType::CONSTRUCTION_AND_ENGINEERING_SERVICES }
   modality { Modality::COMPETITION }
   judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
   description { 'Licitação para contrução de prédio' }
@@ -786,7 +786,7 @@ end
 LicitationProcess.blueprint(:processo_licitatorio_concorrencia) do
   process { 2 }
   protocol { '00099/2012' }
-  object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
+  object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
   modality { Modality::CONCURRENCE }
   description { 'Licitação para compra de computadores' }
   responsible { Employee.make!(:sobrinho) }
@@ -827,7 +827,7 @@ end
 LicitationProcess.blueprint(:processo_licitatorio_tomada_preco) do
   process { 1 }
   protocol { '00099/2012' }
-  object_type { AdministrativeProcessObjectType::CONSTRUCTION_AND_ENGINEERING_SERVICES }
+  object_type { LicitationProcessObjectType::CONSTRUCTION_AND_ENGINEERING_SERVICES }
   modality { Modality::TAKEN_PRICE }
   description { 'Licitação para contrução de prédio' }
   responsible { Employee.make!(:sobrinho) }
@@ -868,7 +868,7 @@ end
 LicitationProcess.blueprint(:processo_licitatorio_leilao) do
   process { 1 }
   protocol { '00088/2012' }
-  object_type { AdministrativeProcessObjectType::DISPOSALS_OF_ASSETS }
+  object_type { LicitationProcessObjectType::DISPOSALS_OF_ASSETS }
   modality { Modality::AUCTION }
   judgment_form { JudgmentForm.make!(:global_com_melhor_lance_ou_oferta) }
   description { 'Licitação para compra de carteiras' }

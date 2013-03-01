@@ -28,7 +28,7 @@ class LicitationProcess < Compras::Model
   has_enumeration_for :status, :with => LicitationProcessStatus, :create_helpers => true
   has_enumeration_for :execution_type, :create_helpers => true
   has_enumeration_for :modality, :create_helpers => true, :create_scopes => true
-  has_enumeration_for :object_type, :with => AdministrativeProcessObjectType,
+  has_enumeration_for :object_type, :with => LicitationProcessObjectType,
                       :create_helpers => true
 
   belongs_to :capability

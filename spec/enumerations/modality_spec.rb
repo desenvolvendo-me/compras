@@ -1,12 +1,12 @@
 # encoding: utf-8
 require 'enumeration_helper'
 require 'app/enumerations/modality'
-require 'app/enumerations/administrative_process_object_type'
+require 'app/enumerations/licitation_process_object_type'
 
 describe Modality do
   describe '.available_for_object_type' do
     context 'when object_type is purchase_and_services' do
-      let(:object_type) { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
+      let(:object_type) { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
 
       it 'should return only concurrence, taken_price, invitation and trading' do
         expect(described_class.available_for_object_type(object_type)).to eq [
@@ -16,7 +16,7 @@ describe Modality do
     end
 
     context 'when object_type is construction_and_engineering_services' do
-      let(:object_type) { AdministrativeProcessObjectType::CONSTRUCTION_AND_ENGINEERING_SERVICES }
+      let(:object_type) { LicitationProcessObjectType::CONSTRUCTION_AND_ENGINEERING_SERVICES }
 
       it 'should return only concurrence, taken_price, invitation, comptetition and trading' do
         expect(described_class.available_for_object_type(object_type)).to eq [
@@ -26,7 +26,7 @@ describe Modality do
     end
 
     context 'when object_type is disposals_of_assets' do
-      let(:object_type) { AdministrativeProcessObjectType::DISPOSALS_OF_ASSETS }
+      let(:object_type) { LicitationProcessObjectType::DISPOSALS_OF_ASSETS }
 
       it 'should return only auction' do
         expect(described_class.available_for_object_type(object_type)).to eq [Modality::AUCTION]
@@ -34,7 +34,7 @@ describe Modality do
     end
 
     context 'when object_type is concessions_and_permits' do
-      let(:object_type) { AdministrativeProcessObjectType::CONCESSIONS_AND_PERMITS }
+      let(:object_type) { LicitationProcessObjectType::CONCESSIONS_AND_PERMITS }
 
       it 'should return only concurrence' do
         expect(described_class.available_for_object_type(object_type)).to eq [Modality::CONCURRENCE]
@@ -42,7 +42,7 @@ describe Modality do
     end
 
     context 'when object_type is call_notice' do
-      let(:object_type) { AdministrativeProcessObjectType::CALL_NOTICE }
+      let(:object_type) { LicitationProcessObjectType::CALL_NOTICE }
 
       it 'should return only competition' do
         expect(described_class.available_for_object_type(object_type)).to eq [Modality::COMPETITION]

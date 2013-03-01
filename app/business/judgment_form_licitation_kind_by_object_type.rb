@@ -1,7 +1,7 @@
 class JudgmentFormLicitationKindByObjectType
   attr_accessor :licitation_kind, :object_type
 
-  def initialize(licitation_kind = LicitationKind, object_type = AdministrativeProcessObjectType)
+  def initialize(licitation_kind = LicitationKind, object_type = LicitationProcessObjectType)
     self.licitation_kind = licitation_kind
     self.object_type = object_type
   end
