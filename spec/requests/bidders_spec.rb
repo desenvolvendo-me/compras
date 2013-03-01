@@ -743,6 +743,12 @@ feature "Bidders" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
+    click_link "Filtrar Processos Licitatórios"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       click_link '1/2012'
     end
@@ -760,6 +766,12 @@ feature "Bidders" do
     LicitationProcess.make!(:apuracao_global)
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    click_link "Filtrar Processos Licitatórios"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     within_records do
       click_link '1/2012'
@@ -779,6 +791,12 @@ feature "Bidders" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
+    click_link "Filtrar Processos Licitatórios"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       click_link '1/2012'
     end
@@ -797,6 +815,12 @@ feature "Bidders" do
     licitation_process.update_attribute :envelope_opening_date, Date.tomorrow
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    click_link "Filtrar Processos Licitatórios"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     within_records do
       click_link '1/2012'
@@ -891,6 +915,12 @@ feature "Bidders" do
     Trading.make!(:pregao_presencial)
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    click_link "Filtrar Processos Licitatórios"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     within_records do
       click_link  '1/2012'

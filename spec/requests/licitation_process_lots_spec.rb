@@ -61,6 +61,12 @@ feature "LicitationProcessLots" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
+    click_link "Filtrar Processos Licitatórios"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
+
     within_records do
       click_link '1/2012'
     end
@@ -74,6 +80,12 @@ feature "LicitationProcessLots" do
     LicitationProcess.make!(:processo_licitatorio_nao_atualizavel)
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    click_link "Filtrar Processos Licitatórios"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     within_records do
       click_link '1/2012'
@@ -94,6 +106,12 @@ feature "LicitationProcessLots" do
     LicitationProcess.make!(:processo_licitatorio_nao_atualizavel)
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    click_link "Filtrar Processos Licitatórios"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     within_records do
       click_link '1/2012'

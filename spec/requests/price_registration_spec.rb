@@ -266,10 +266,8 @@ feature "PriceRegistration" do
 
         within_records do
           expect(page).to_not have_content '2013'
-          expect(page).to_not have_content '2/2013'
 
           expect(page).to have_content '2012'
-          expect(page).to have_content '1/2012'
         end
       end
     end

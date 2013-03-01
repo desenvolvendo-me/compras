@@ -12,13 +12,17 @@ feature "LicitationProcessPublications" do
   scenario 'index should have link to back to licitation_process and create a new publication' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    click_link "Filtrar Processos Licitatórios"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     within_records do
-      page.find('a').click
+      click_link '1/2012'
     end
-
-    click_link 'Editar processo licitatório'
 
     click_link 'Publicações'
 
@@ -30,13 +34,17 @@ feature "LicitationProcessPublications" do
   scenario 'create a new publication' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    click_link "Filtrar Processos Licitatórios"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     within_records do
-      page.find('a').click
+      click_link '1/2012'
     end
-
-    click_link 'Editar processo licitatório'
 
     click_link 'Publicações'
 
@@ -65,13 +73,17 @@ feature "LicitationProcessPublications" do
   scenario 'update an existing publication' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    click_link "Filtrar Processos Licitatórios"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     within_records do
-      page.find('a').click
+      click_link '1/2012'
     end
-
-    click_link 'Editar processo licitatório'
 
     click_link 'Publicações'
 
@@ -102,13 +114,17 @@ feature "LicitationProcessPublications" do
   scenario 'destroy a publication' do
     LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    click_link "Filtrar Processos Licitatórios"
+
+    clear_modal "Ano"
+
+    click_button "Pesquisar"
 
     within_records do
-      page.find('a').click
+      click_link '1/2012'
     end
-
-    click_link 'Editar processo licitatório'
 
     click_link 'Publicações'
 

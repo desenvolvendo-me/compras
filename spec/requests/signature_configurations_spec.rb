@@ -45,8 +45,8 @@ feature "SignatureConfigurations" do
 
     click_link 'Criar Configuração de Assinatura'
 
-    expect(page).to have_css '#signature_configuration_report option', :count => 4
-    expect(page).to have_select 'Relatório', :options => ['', 'Processos Administrativos']
+    expect(page).to have_css '#signature_configuration_report option', :count => 3
+    expect(page).to have_select 'Relatório', :options => ['']
   end
 
   scenario 'should have only availables reports when edit' do
@@ -56,8 +56,8 @@ feature "SignatureConfigurations" do
 
     click_link 'Autorizações de Fornecimento'
 
-    expect(page).to have_css '#signature_configuration_report option', :count => 5
-    expect(page).to have_select 'Relatório', :options => ['', 'Processos Administrativos', 'Autorizações de Fornecimento', 'Certificados de Registro Cadastral']
+    expect(page).to have_css '#signature_configuration_report option', :count => 4
+    expect(page).to have_select 'Relatório', :options => ['', 'Autorizações de Fornecimento', 'Certificados de Registro Cadastral']
   end
 
   scenario 'when fill signature should fill position' do
@@ -92,7 +92,7 @@ feature "SignatureConfigurations" do
 
     click_link 'Autorizações de Fornecimento'
 
-    select 'Processos Administrativos', :from => 'Relatório'
+    select 'Certificados de Registro Cadastral', :from => 'Relatório'
 
     click_button 'Remover'
     click_button 'Adicionar Assinatura'
@@ -109,9 +109,9 @@ feature "SignatureConfigurations" do
 
     expect(page).to have_notice 'Configuração de Assinatura editada com sucesso.'
 
-    click_link 'Processos Administrativos'
+    click_link 'Certificados de Registro Cadastral'
 
-    expect(page).to have_select 'Relatório', :selected => 'Processos Administrativos'
+    expect(page).to have_select 'Relatório', :selected => 'Certificados de Registro Cadastral'
     expect(page).to have_field 'Assinatura', :with => 'Wenderson Malheiros'
     expect(page).to have_disabled_field 'Cargo'
     expect(page).to have_field 'Ordem', :with => '1'
@@ -135,18 +135,18 @@ feature "SignatureConfigurations" do
 
   scenario 'acces modal' do
     SignatureConfiguration.make!(:autorizacoes_de_fornecimento)
-    SignatureConfiguration.make!(:processo_administrativo)
+    SignatureConfiguration.make!(:crc)
 
     navigate 'Geral > Parâmetros > Assinaturas > Configurações de Assinatura'
 
     click_link 'Filtrar Configurações de Assinatura'
 
-    select 'Processos Administrativos', :from => 'Relatório'
+    select 'Certificados de Registro Cadastral', :from => 'Relatório'
 
     click_button 'Pesquisar'
 
     within_records do
-      expect(page).to have_link 'Processos Administrativos'
+      expect(page).to have_link 'Certificados de Registro Cadastral'
       expect(page).to_not have_link 'Autorizações de Fornecimento'
     end
   end
