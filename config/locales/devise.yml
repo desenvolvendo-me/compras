@@ -22,3 +22,7 @@ pt-BR:
     confirmations:
       user:
         confirmed: 'Usuário confirmado com sucesso.'
+
+    mailer:
+      confirmation_instructions:
+        subject: "Instruções de Confirmação"

@@ -40,5 +40,18 @@ describe User do
 
       subject.save
     end
+
+    it 'should render confirmation the email correctly' do
+      user = User.make!(:wenderson)
+      user.send_confirmation_instructions
+
+      email = ActionMailer::Base.deliveries.first
+
+      expect(email.subject).to eq "Instruções de Confirmação"
+      expect(email.body).to include("Bem vindo wenderson.malheiros@gmail.com!")
+      expect(email.body).to include("Você pode confirmar sua conta através do link abaixo:")
+      expect(email.body).to include("Confirmar minha conta")
+    end
+
   end
 end
