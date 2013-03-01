@@ -11,3 +11,4 @@ pt-BR:
         issuer: "Orgão emissor"
         state: "Estado"
         issue: "Data de emissão"
+        state_id: "Estado"

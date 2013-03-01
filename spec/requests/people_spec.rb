@@ -29,7 +29,7 @@ feature "People" do
       fill_in 'Número', :with => 'MG23912702'
       select 'SSP', :from => 'Orgão emissor'
       fill_in 'Data de emissão', :with => '03/07/2004'
-      fill_modal 'Estado', :with => 'Minas Gerais'
+      select 'Minas Gerais', :from => 'Estado'
     end
 
     within_tab 'Contato' do
@@ -73,7 +73,7 @@ feature "People" do
       expect(page).to have_field 'Número', :with => 'MG23912702'
       expect(page).to have_select 'Orgão emissor', :selected => 'SSP'
       expect(page).to have_field 'Data de emissão', :with => '03/07/2004'
-      expect(page).to have_field 'Estado', :with => 'Minas Gerais'
+      expect(page).to have_select 'Estado', :selected => 'Minas Gerais'
     end
 
     within_tab 'Contato' do
