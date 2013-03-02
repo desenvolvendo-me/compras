@@ -12,7 +12,8 @@ class PriceCollectionProposalItem < Compras::Model
   delegate :creditor, :editable_by?, :price_collection, :to => :price_collection_proposal, :allow_nil => true
 
   scope :by_lot, lambda { |lot_id|
-    where { price_collection_lot_item_id.eq(lot_id) }
+    joins { price_collection_lot }.
+    where { price_collection_lot.id.eq(lot_id) }
   }
 
   def total_price
