@@ -3,10 +3,6 @@ require 'spec_helper'
 
 describe PriceCollectionProposalItem do
   describe ".by_lot" do
-    before do
-      item
-    end
-
     let(:price_collection) { PriceCollection.make!(:coleta_de_precos_com_2_lotes) }
     let(:proposal_1) { PriceCollectionProposal.make!(:proposta_de_coleta_de_precos, :price_collection => price_collection) }
     let(:item) do
