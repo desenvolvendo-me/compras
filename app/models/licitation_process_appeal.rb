@@ -25,6 +25,6 @@ class LicitationProcessAppeal < Compras::Model
   filterize
 
   def to_s
-    id.to_s
+    "#{licitation_process} - #{I18n.l(appeal_date)}"
   end
 end

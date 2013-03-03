@@ -7,10 +7,16 @@ require 'app/models/licitation_process_appeal'
 
 describe LicitationProcessAppeal do
 
-  it 'should return id as to_s method' do
-    subject.id = 2
+  let(:licitation_process) do
+    double(:licitation_process,
+           :to_s => '1/2013')
+  end
 
-    expect(subject.to_s).to eq '2'
+  it 'should return licitation process and date as to_s method' do
+    subject.stub(:licitation_process).and_return licitation_process
+    subject.appeal_date = Date.new(2013, 1, 1)
+
+    expect(subject.to_s).to eq '1/2013 - 01/01/2013'
   end
 
   it { should belong_to :person }

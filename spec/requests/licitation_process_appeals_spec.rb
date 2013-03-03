@@ -29,7 +29,7 @@ feature "LicitationProcessAppeals" do
     expect(page).to have_notice 'Interposição de Recurso do Processo Licitatório criada com sucesso.'
 
     within_records do
-      click_link '1'
+      click_link '1/2012 - 20/03/2012'
     end
 
     expect(page).to have_field 'Processo licitatório', :with => '1/2012'
@@ -52,7 +52,7 @@ feature "LicitationProcessAppeals" do
     navigate 'Processo Administrativo/Licitatório > Interposição de Recursos de Processos Licitatórios'
 
     within_records do
-      click_link '1'
+      click_link '1/2012 - 10/04/2012'
     end
 
     fill_modal 'Processo licitatório', :with => '2013', :field => 'Ano'
@@ -70,7 +70,7 @@ feature "LicitationProcessAppeals" do
     expect(page).to have_notice 'Interposição de Recurso do Processo Licitatório editada com sucesso.'
 
     within_records do
-      click_link '1'
+      click_link '2/2013 - 20/03/2013'
     end
 
     expect(page).to have_field 'Processo licitatório', :with => '2/2013'
@@ -91,7 +91,7 @@ feature "LicitationProcessAppeals" do
     navigate 'Processo Administrativo/Licitatório > Interposição de Recursos de Processos Licitatórios'
 
     within_records do
-      click_link '1'
+      click_link '1/2012 - 10/04/2012'
     end
 
     click_link "Apagar"
@@ -99,7 +99,7 @@ feature "LicitationProcessAppeals" do
     expect(page).to have_notice 'Interposição de Recurso do Processo Licitatório apagada com sucesso.'
 
     within_records do
-      expect(page).to_not have_link "1"
+      expect(page).to_not have_link '1/2012 - 10/04/2012'
     end
   end
 end
