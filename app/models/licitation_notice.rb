@@ -12,7 +12,7 @@ class LicitationNotice < Compras::Model
   filterize
 
   def to_s
-    id.to_s
+    "#{licitation_process} - #{I18n.l date}"
   end
 
   def next_number

@@ -6,6 +6,8 @@ feature "LicitationNotices" do
     sign_in
   end
 
+  let(:date_current) { I18n.l Date.current }
+
   scenario 'create a new licitation_notice' do
     LicitationProcess.make!(:processo_licitatorio)
 
@@ -29,7 +31,7 @@ feature "LicitationNotices" do
     expect(page).to have_notice 'Aviso de Licitação criado com sucesso.'
 
     within_records do
-      click_link '1'
+      click_link '1/2012 - 05/04/2012'
     end
 
     expect(page).to have_field 'Processo licitatório', :with => '1/2012'
@@ -49,7 +51,7 @@ feature "LicitationNotices" do
     navigate 'Processo Administrativo/Licitatório > Avisos de Licitações'
 
     within_records do
-      click_link '1'
+      click_link "1/2012 - #{date_current}"
     end
 
     fill_modal 'Processo licitatório', :with => '2013', :field => 'Ano'
@@ -61,7 +63,7 @@ feature "LicitationNotices" do
     expect(page).to have_notice 'Aviso de Licitação editado com sucesso.'
 
     within_records do
-      click_link '1'
+      click_link '2/2013 - 12/04/2012'
     end
 
     expect(page).to have_field 'Processo licitatório', :with => '2/2013'
@@ -91,7 +93,7 @@ feature "LicitationNotices" do
     expect(page).to have_notice 'Aviso de Licitação criado com sucesso.'
 
     within_records do
-      click_link '2'
+      click_link "2/2013 - 07/04/2012"
     end
 
     expect(page).to have_field 'Processo licitatório', :with => '2/2013'
@@ -120,7 +122,7 @@ feature "LicitationNotices" do
     expect(page).to have_notice 'Aviso de Licitação criado com sucesso.'
 
     within_records do
-      click_link '2'
+      click_link "1/2012 - 06/04/2012"
     end
 
     expect(page).to have_field 'Processo licitatório', :with => '1/2012'
@@ -139,7 +141,7 @@ feature "LicitationNotices" do
     navigate 'Processo Administrativo/Licitatório > Avisos de Licitações'
 
     within_records do
-      click_link '1'
+      click_link "1/2012 - #{date_current}"
     end
 
     click_link 'Apagar'
@@ -156,7 +158,7 @@ feature "LicitationNotices" do
     navigate 'Processo Administrativo/Licitatório > Avisos de Licitações'
 
     within_records do
-      click_link '1'
+      click_link "1/2012 - #{date_current}"
     end
 
     clear_modal 'Processo licitatório'
