@@ -86,5 +86,9 @@ module Compras
       # javascript files
       'trading_item_bid.js',
     ]
+
+    config.generators do |g|
+      g.fixture_replacement :factory_girl
+    end
   end
 end

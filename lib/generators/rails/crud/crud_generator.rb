@@ -67,11 +67,6 @@ module Rails
         route route_config
       end
 
-      def create_blueprint
-        blueprint_file = File.join('spec/blueprints', class_path, "#{plural_name}.rb")
-        template 'blueprint.rb', blueprint_file
-      end
-
       def create_request_spec
         request_file = File.join('spec/requests', class_path, "#{plural_name}_spec.rb")
         template 'request.rb', request_file

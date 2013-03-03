@@ -53,8 +53,10 @@ group :production, :training, :staging do
 end
 
 group :development, :test do
-  gem 'rspec-rails', '2.12.0'
+  gem "factory_girl-preload", "~> 2.0.2"
+  gem "factory_girl_rails", "~> 4.2.1"
   gem 'pry', '0.9.10'
+  gem 'rspec-rails', '2.12.0'
 end
 
 group :test do
