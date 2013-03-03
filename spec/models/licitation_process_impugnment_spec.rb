@@ -20,6 +20,13 @@ describe LicitationProcessImpugnment do
   it { should delegate(:envelope_opening_date).to(:licitation_process).allowing_nil(true).prefix(true) }
   it { should delegate(:envelope_opening_time).to(:licitation_process).allowing_nil(true).prefix(true) }
 
+  it 'should return licitation process and date as to_s method' do
+    subject.licitation_process.stub(:to_s).and_return('1/2013')
+    subject.impugnment_date = Date.new(2012,1,1)
+
+    expect(subject.to_s).to eq '1/2013 - 01/01/2012'
+  end
+
   context 'when new_envelope_opening_date and new_envelope_delivery_date exists and are different' do
     before do
       subject.new_envelope_delivery_date = Date.tomorrow

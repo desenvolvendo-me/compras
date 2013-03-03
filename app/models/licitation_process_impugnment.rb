@@ -33,6 +33,6 @@ class LicitationProcessImpugnment < Compras::Model
   filterize
 
   def to_s
-    id.to_s
+    "#{licitation_process} - #{I18n.l(impugnment_date)}"
   end
 end

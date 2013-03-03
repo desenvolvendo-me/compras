@@ -32,7 +32,7 @@ feature "LicitationProcessImpugnments" do
     expect(page).to have_notice 'Impugnação do Processo Licitatório criada com sucesso.'
 
     within_records do
-      click_link '1'
+      click_link "1/2012 - #{I18n.l(Date.current + 2.days)}"
     end
 
     expect(page).to have_field 'Processo licitatório', :with => '1/2012'
@@ -57,7 +57,7 @@ feature "LicitationProcessImpugnments" do
     navigate 'Processo Administrativo/Licitatório > Impugnações dos Processos Licitatórios'
 
     within_records do
-      click_link '1'
+      click_link "1/2012 - 01/04/2012"
     end
 
     fill_in 'Data da impugnação', :with => I18n.l(Date.current + 1.year + 2.days)
@@ -75,7 +75,7 @@ feature "LicitationProcessImpugnments" do
     expect(page).to have_notice 'Impugnação do Processo Licitatório editada com sucesso.'
 
     within_records do
-      click_link '1'
+      click_link "1/2012 - #{I18n.l(Date.current + 1.year + 2.days)}"
     end
 
     expect(page).to have_field 'Processo licitatório', :with => '1/2012'
@@ -99,7 +99,7 @@ feature "LicitationProcessImpugnments" do
     navigate 'Processo Administrativo/Licitatório > Impugnações dos Processos Licitatórios'
 
     within_records do
-      click_link '1'
+      click_link '1/2012 - 01/04/2012'
     end
 
     expect(page).to have_disabled_field 'Processo licitatório'
@@ -123,7 +123,7 @@ feature "LicitationProcessImpugnments" do
     navigate 'Processo Administrativo/Licitatório > Impugnações dos Processos Licitatórios'
 
     within_records do
-      click_link '1'
+      click_link '1/2012 - 01/04/2012'
     end
 
     expect(page).to_not have_link "Apagar"
@@ -150,7 +150,7 @@ feature "LicitationProcessImpugnments" do
     navigate 'Processo Administrativo/Licitatório > Impugnações dos Processos Licitatórios'
 
     within_records do
-      click_link '1'
+      click_link '1/2012 - 01/04/2012'
     end
 
     clear_modal 'Processo licitatório'
