@@ -15,14 +15,14 @@ describe SignatureConfigurationDecorator do
         signature_report_enumeration.stub(:availables).and_return(
           [
             ['Autorizações de Fornecimento', 'supply_authorizations'],
-            ['Processos Administrativos', 'administrative_processes']
+            ['Certificados de Registro Cadastral', 'registration_cadastral_certificates']
           ])
       end
 
       it 'should return all keys' do
         expect(subject.availables(signature_report_enumeration)).to eq [
           ['Autorizações de Fornecimento', 'supply_authorizations'],
-          ['Processos Administrativos', 'administrative_processes']
+          ['Certificados de Registro Cadastral', 'registration_cadastral_certificates']
         ]
       end
     end
@@ -32,7 +32,7 @@ describe SignatureConfigurationDecorator do
         component.stub(:report).and_return('supply_authorizations')
 
         signature_report_enumeration.stub(:availables).and_return([
-          ['Processos Administrativos', 'administrative_processes']
+          ['Certificados de Registro Cadastral', 'registration_cadastral_certificates']
         ])
 
         signature_report_enumeration.should_receive(:to_a_by_keys).
@@ -42,7 +42,7 @@ describe SignatureConfigurationDecorator do
 
       it 'should return all keys plus current' do
         expect(subject.availables(signature_report_enumeration)).to eq [
-          ['Processos Administrativos', 'administrative_processes'],
+          ['Certificados de Registro Cadastral', 'registration_cadastral_certificates'],
           ['Autorizações de Fornecimento', 'supply_authorizations']
         ]
       end
