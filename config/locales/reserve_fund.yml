@@ -17,7 +17,6 @@ pt-BR:
         date: "Data"
         reason: "Motivo"
         licitation_process: "Processo licitatório"
-        administrative_process: "Processo administrativo"
 
   simple_form:
     hints:
