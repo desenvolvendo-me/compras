@@ -9,8 +9,9 @@
       <%= calculation_link %>
 
       <%= link_to('Lotes de itens', licitation_process_lots_path(:licitation_process_id => resource.id), :class => "button primary") %>
+
+      <%= link_to('Pareceres da comissão julgadora', judgment_commission_advices_path(:licitation_process_id => resource.id), :class => "button primary") %>
     <% end %>
-    <%= link_to('Pareceres da comissão julgadora', judgment_commission_advices_path(:licitation_process_id => resource.id), :class => "button primary") %>
   </p>
 
   <% if can?(:modify, main_controller_name) %>
