@@ -285,7 +285,7 @@ pt-BR:
       should_belongs_to_licitation_process: "deve pertencer ao processo licitatório %{licitation_process}"
       is_annulled: "está anulado"
       invalid_licitation_kind_of_judgment_form_for_object_type: "tipo de licitação da forma de julgamento inválida para o tipo de objeto (%{object_type})"
-      already_exists_a_pending_purchase_solicitation_with_this_budget_structure_and_material: "já existe uma solicitação de compra pendente com esta estrutura orçamentária solicitante e material"
+      already_exists_a_pending_purchase_solicitation_with_this_budget_structure_and_material: "já existe uma solicitação de compra pendente para este solicitante e material"
       should_has_not_inactive_agreement: "não deve haver nenhum convênio inativo"
       should_has_at_least_one_agreement: "deve ser informado os Convênios firmados com o Estado e/ou com o Governo Federal"
       agreement_participants_convenente_should_be_equals_total: "a soma do valor dos participantes convenentes deve ser igual a R$ %{total}"

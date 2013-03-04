@@ -96,7 +96,7 @@ feature 'PurchaseSolicitationAnnul' do
     within_tab 'Principal' do
       expect(page).to have_disabled_field 'Ano'
       expect(page).to have_disabled_field 'Data da solicitação'
-      expect(page).to have_disabled_field 'Estrutura orçamentária solicitante'
+      expect(page).to have_disabled_field 'Solicitante'
       expect(page).to have_disabled_field 'Responsável pela solicitação'
       expect(page).to have_disabled_field 'Justificativa da solicitação'
       expect(page).to have_disabled_field 'Local para entrega'

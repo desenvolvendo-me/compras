@@ -2,12 +2,12 @@ pt-BR:
   activerecord:
     models:
       budget_structure_level:
-        one: "Nível de Solicitante"
-        other: "Níveis de Solicitantes"
+        one: "Nível do Solicitante"
+        other: "Níveis do Solicitantes"
 
     attributes:
       budget_structure_level:
-        budget_structure_configuration: "Configuração de solicitante"
+        budget_structure_configuration: "Configuração do solicitante"
         description: "Descrição"
         digits: "Dígitos"
         level: "Nível"

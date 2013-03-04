@@ -38,7 +38,7 @@ feature "PurchaseSolicitations" do
 
       fill_in 'Ano', :with => '2012'
       fill_in 'Data da solicitação', :with => '01/02/2012'
-      fill_modal 'Estrutura orçamentária solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
+      fill_modal 'Solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Responsável pela solicitação', :with => '958473', :field => 'Matrícula'
       fill_in 'Justificativa da solicitação', :with => 'Novas cadeiras'
       fill_modal 'Local para entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
@@ -82,7 +82,7 @@ feature "PurchaseSolicitations" do
       expect(page).to have_field 'Ano', :with => '2012'
       expect(page).to have_field 'Data da solicitação', :with => '01/02/2012'
       expect(page).to have_field 'Responsável pela solicitação', :with => 'Gabriel Sobrinho'
-      expect(page).to have_field 'Estrutura orçamentária solicitante', :with => '1 - Secretaria de Educação'
+      expect(page).to have_field 'Solicitante', :with => '1 - Secretaria de Educação'
       expect(page).to have_field 'Justificativa da solicitação', :with => 'Novas cadeiras'
       expect(page).to have_field 'Local para entrega', :selected => 'Secretaria da Educação'
       expect(page).to have_select 'Tipo de solicitação', :selected => 'Bens'
@@ -138,7 +138,7 @@ feature "PurchaseSolicitations" do
     within_tab 'Principal' do
       fill_in 'Data da solicitação', :with => '01/02/2013'
       fill_modal 'Responsável pela solicitação', :with => '12903412', :field => 'Matrícula'
-      fill_modal 'Estrutura orçamentária solicitante', :with => 'Secretaria de Desenvolvimento', :field => 'Descrição'
+      fill_modal 'Solicitante', :with => 'Secretaria de Desenvolvimento', :field => 'Descrição'
       fill_in 'Justificativa da solicitação', :with => 'Novas mesas'
       fill_modal 'Local para entrega', :with => 'Secretaria da Saúde', :field => "Descrição"
       select 'Produtos', :from => 'Tipo de solicitação'
@@ -183,7 +183,7 @@ feature "PurchaseSolicitations" do
       expect(page).to have_disabled_field 'Ano', :with => '2012'
       expect(page).to have_field 'Data da solicitação', :with => '01/02/2013'
       expect(page).to have_field 'Responsável pela solicitação', :with => 'Wenderson Malheiros'
-      expect(page).to have_field 'Estrutura orçamentária solicitante', :with => '1.29 - Secretaria de Desenvolvimento'
+      expect(page).to have_field 'Solicitante', :with => '1.29 - Secretaria de Desenvolvimento'
       expect(page).to have_field 'Justificativa da solicitação', :with => 'Novas mesas'
       expect(page).to have_field 'Local para entrega', :with => 'Secretaria da Saúde'
       expect(page).to have_select 'Tipo de solicitação', :selected => 'Produtos'
@@ -345,7 +345,7 @@ feature "PurchaseSolicitations" do
     within_tab 'Principal' do
       fill_in 'Ano', :with => '2012'
       fill_in 'Data da solicitação', :with => '01/02/2012'
-      fill_modal 'Estrutura orçamentária solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
+      fill_modal 'Solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Responsável pela solicitação', :with => '958473', :field => 'Matrícula'
       fill_in 'Justificativa da solicitação', :with => 'Novas cadeiras'
       fill_modal 'Local para entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
@@ -381,7 +381,7 @@ feature "PurchaseSolicitations" do
       expect(page).to have_field 'Ano', :with => '2012'
       expect(page).to have_field 'Data da solicitação', :with => '01/02/2012'
       expect(page).to have_field 'Responsável pela solicitação', :with => 'Gabriel Sobrinho'
-      expect(page).to have_field 'Estrutura orçamentária solicitante', :with => '1 - Secretaria de Educação'
+      expect(page).to have_field 'Solicitante', :with => '1 - Secretaria de Educação'
       expect(page).to have_field 'Justificativa da solicitação', :with => 'Novas cadeiras'
       expect(page).to have_field 'Local para entrega', :selected => 'Secretaria da Educação'
       expect(page).to have_select 'Tipo de solicitação', :selected => 'Bens'
@@ -459,7 +459,7 @@ feature "PurchaseSolicitations" do
     within_tab 'Principal' do
       fill_in 'Ano', :with => '2012'
       fill_in 'Data da solicitação', :with => '01/02/2012'
-      fill_modal 'Estrutura orçamentária solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
+      fill_modal 'Solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Responsável pela solicitação', :with => '958473', :field => 'Matrícula'
       fill_in 'Justificativa da solicitação', :with => 'Novas cadeiras'
       fill_modal 'Local para entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
@@ -489,7 +489,7 @@ feature "PurchaseSolicitations" do
     expect(page).to_not have_notice 'Solicitação de Compra 1/2012 criada com sucesso.'
 
     within_tab 'Dotações orçamentárias' do
-      expect(page).to have_content "já existe uma solicitação de compra pendente com esta estrutura orçamentária solicitante e material"
+      expect(page).to have_content "já existe uma solicitação de compra pendente para este solicitante e material"
     end
   end
 
@@ -519,7 +519,7 @@ feature "PurchaseSolicitations" do
     expect(page).to_not have_notice 'Solicitação de Compra 1/2012 criada com sucesso.'
 
     within_tab 'Dotações orçamentárias' do
-      expect(page).to have_content "já existe uma solicitação de compra pendente com esta estrutura orçamentária solicitante e material"
+      expect(page).to have_content "já existe uma solicitação de compra pendente para este solicitante e material"
     end
   end
 
@@ -564,7 +564,7 @@ feature "PurchaseSolicitations" do
 
     within_records do
       expect(page).to have_content 'Código/Ano'
-      expect(page).to have_content 'Estrutura orçamentária solicitante'
+      expect(page).to have_content 'Solicitante'
       expect(page).to have_content 'Responsável pela solicitação'
       expect(page).to have_content 'Status de atendimento'
 
@@ -870,7 +870,7 @@ feature "PurchaseSolicitations" do
     within_tab 'Principal' do
       fill_in 'Ano', :with => '2012'
       fill_in 'Data da solicitação', :with => '01/02/2012'
-      fill_modal 'Estrutura orçamentária solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
+      fill_modal 'Solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Responsável pela solicitação', :with => '958473', :field => 'Matrícula'
       fill_in 'Justificativa da solicitação', :with => 'Novas cadeiras'
       fill_modal 'Local para entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
@@ -923,7 +923,7 @@ feature "PurchaseSolicitations" do
     click_link 'Criar Solicitação de Compra'
 
     within_tab 'Principal' do
-      fill_modal 'Estrutura orçamentária solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
+      fill_modal 'Solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
     end
 
     within_tab 'Dotações orçamentárias' do
@@ -939,7 +939,7 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Principal' do
-      clear_modal 'Estrutura orçamentária solicitante'
+      clear_modal 'Solicitante'
     end
 
     within_tab 'Dotações orçamentárias' do
