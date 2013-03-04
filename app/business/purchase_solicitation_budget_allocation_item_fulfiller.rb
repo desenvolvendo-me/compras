@@ -9,7 +9,7 @@ class PurchaseSolicitationBudgetAllocationItemFulfiller
   def fulfill
     fulfill_items_from_item_group
     fulfill_items_from_direct_purchase
-    fulfill_items_from_administrative_process
+    fulfill_items_from_licitation_process
   end
 
   private
@@ -38,7 +38,7 @@ class PurchaseSolicitationBudgetAllocationItemFulfiller
     end
   end
 
-  def fulfill_items_from_administrative_process
+  def fulfill_items_from_licitation_process
     return unless licitation_process
 
     if add_fulfill
