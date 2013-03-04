@@ -15,7 +15,8 @@ class User < Compras::Model
 
   has_one :bookmark, :dependent => :destroy
 
-  delegate :roles, :to => :profile, :allow_nil => true
+  has_many :roles, :through => :profile
+
   delegate :name, :to => :authenticable, :allow_nil => true
 
   validates :login, :presence => true, :unless => lambda { |u| !u.persisted? && u.creditor? }
