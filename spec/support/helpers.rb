@@ -32,10 +32,6 @@ module Helpers
     page.execute_script %{ $('##{field[:id]}').val('') }
   end
 
-  def clear_modal_filter(locator)
-
-  end
-
   def create_roles(controllers)
     controllers.each do |controller|
       Role.make!(:general_role, :profile => current_user.profile, :controller => controller)

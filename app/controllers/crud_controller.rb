@@ -106,7 +106,7 @@ class CrudController < ApplicationController
     end
   end
 
-  def default_filters(filters={})
+  def default_filters(filters = {})
     filters
   end
 
