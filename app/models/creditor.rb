@@ -30,7 +30,7 @@ class Creditor < Compras::Model
   has_many :documents, :class_name => 'CreditorDocument', :dependent => :destroy, :order => :id
   has_many :bidders, :dependent => :restrict
   has_many :licitation_processes, :through => :bidders, :dependent => :restrict
-  has_many :materials, :through => :creditor_materials
+  has_many :materials, :through => :creditor_materials, :order => :id
   has_many :materials_classes, :through => :materials
   has_many :pledges, :dependent => :restrict
   has_many :precatories, :dependent => :restrict
