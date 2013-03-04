@@ -1,5 +1,4 @@
 # encoding: utf-8
-# https://semaphoreapp.com/projects/288/branches/831/builds/1281
 require 'spec_helper'
 
 feature "Customizations" do
