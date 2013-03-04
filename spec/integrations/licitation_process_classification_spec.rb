@@ -26,11 +26,6 @@ describe LicitationProcessClassification do
       :items => [antivirus, arame])
   end
 
-  let :administrative_process do
-    AdministrativeProcess.make!(:apuracao_por_itens,
-      :administrative_process_budget_allocations => [allocations])
-  end
-
   let :licitation_process do
     LicitationProcess.make!(:apuracao_por_itens,
                             :bidders => [bidder_active, bidder_inactive, bidder_without_status])
