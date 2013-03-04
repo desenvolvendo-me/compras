@@ -9,13 +9,13 @@ describe PurchaseSolicitationBudgetAllocationItem do
 
   describe '.group_by_ids' do
     it 'should group items by ids' do
-      PurchaseSolicitationBudgetAllocationItem.make!(:office)
+      budget_allocation_item = PurchaseSolicitationBudgetAllocationItem.make!(:office)
 
       item_group = PurchaseSolicitationItemGroup.make!(:antivirus)
 
-      PurchaseSolicitationBudgetAllocationItem.group_by_ids!(1, item_group.id)
+      PurchaseSolicitationBudgetAllocationItem.group_by_ids!(budget_allocation_item.id, item_group.id)
 
-      item = PurchaseSolicitationBudgetAllocationItem.find(1)
+      item = PurchaseSolicitationBudgetAllocationItem.find(budget_allocation_item.id)
 
       expect(item.status).to eq 'grouped'
       expect(item.purchase_solicitation_item_group_id).to eq item_group.id 
@@ -24,13 +24,13 @@ describe PurchaseSolicitationBudgetAllocationItem do
 
   describe '.pending_by_ids' do
     it 'should pending items by ids' do
-      PurchaseSolicitationBudgetAllocationItem.make!(:office, :status => 'grouped')
+      budget_allocation_item = PurchaseSolicitationBudgetAllocationItem.make!(:office, :status => 'grouped')
 
       item_group = PurchaseSolicitationItemGroup.make!(:antivirus)
 
-      PurchaseSolicitationBudgetAllocationItem.pending_by_ids!(1)
+      PurchaseSolicitationBudgetAllocationItem.pending_by_ids!(budget_allocation_item.id)
 
-      item = PurchaseSolicitationBudgetAllocationItem.find(1)
+      item = PurchaseSolicitationBudgetAllocationItem.find(budget_allocation_item.id)
 
       expect(item.status).to eq 'pending'
       expect(item.purchase_solicitation_item_group_id).to be_nil

@@ -275,10 +275,10 @@ describe TradingItemBid do
   end
 
   describe 'with many bids' do
-    before do
-      trading = Trading.make!(:pregao_presencial)
+    let(:trading) { Trading.make!(:pregao_presencial) }
+    let(:trading_item) { trading.items.first }
 
-      trading_item = trading.items.first
+    before do
       first_bidder = trading.bidders.first
       second_bidder = trading.bidders.second
 
@@ -356,15 +356,15 @@ describe TradingItemBid do
     end
 
     it 'should return lowest_proposal_by_item_at_stage_of_proposals' do
-      expect(described_class.lowest_proposal_by_item_at_stage_of_proposals(1)).to eq BigDecimal("100.0")
+      expect(described_class.lowest_proposal_by_item_at_stage_of_proposals(trading_item.id)).to eq BigDecimal("100.0")
     end
 
     it 'should return lowest_proposal_by_item_and_round' do
-      expect(described_class.lowest_proposal_by_item_and_round(1, 1)).to eq BigDecimal("98.0")
+      expect(described_class.lowest_proposal_by_item_and_round(trading_item.id, 1)).to eq BigDecimal("98.0")
     end
 
     it 'should return lowest_proposal_by_item_at_stage_of_negotiation' do
-      expect(described_class.lowest_proposal_by_item_at_stage_of_negotiation(1)).to eq BigDecimal("94.0")
+      expect(described_class.lowest_proposal_by_item_at_stage_of_negotiation(trading_item.id)).to eq BigDecimal("94.0")
     end
   end
 

@@ -38,7 +38,8 @@ describe PriceCollectionMailer do
 
   describe '#invite_registrated_creditor', :type => :request do
     let(:price_collection) { PriceCollection.make!(:coleta_de_precos) }
-    let(:creditor) { price_collection.price_collection_proposals.first.creditor }
+    let(:price_collection_proposal) { price_collection.price_collection_proposals.first }
+    let(:creditor) { price_collection_proposal.creditor }
     let(:customer) { double(:customer, :domain => 'example.com')}
 
     let :mail do
@@ -58,7 +59,7 @@ describe PriceCollectionMailer do
     end
 
     it 'should render user confirmation link' do
-      mail.body.encoded.should include('https://example.com/compras/price_collection_proposals/1/edit')
+      mail.body.encoded.should include("https://example.com/compras/price_collection_proposals/#{price_collection_proposal.id}/edit")
     end
   end
 end

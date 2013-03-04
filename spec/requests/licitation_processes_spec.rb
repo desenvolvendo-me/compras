@@ -729,6 +729,7 @@ feature "LicitationProcesses" do
 
   scenario 'generate calculation and disable a bidder by maximum value' do
     licitation_process = LicitationProcess.make!(:valor_maximo_ultrapassado, :disqualify_by_maximum_value => true)
+    bidder = licitation_process.bidders.first
     LicitationProcessLot.make!(:lote, :licitation_process => licitation_process,
                                :administrative_process_budget_allocation_items => [licitation_process.items.first])
 
@@ -754,7 +755,7 @@ feature "LicitationProcesses" do
 
     expect(page).to have_content 'Nohup'
 
-    within '.classification-1-0-0' do
+    within ".classification-#{bidder.id}-0-0" do
       expect(page).to have_content 'Antivirus'
       expect(page).to have_content '9,10'
       expect(page).to have_content '18,20'
