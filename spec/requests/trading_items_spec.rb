@@ -987,9 +987,10 @@ feature TradingItem do
 
   scenario 'cannot change minimum reductions when closed' do
     TradingConfiguration.make!(:pregao)
-    trading_item = Trading.make!(:pregao_presencial)
+    trading = Trading.make!(:pregao_presencial)
+    item = trading.items.first
 
-    TradingItemClosing.create!(:trading_item_id => trading_item.id,
+    TradingItemClosing.create!(:trading_item_id => item.id,
                                :status => TradingItemClosingStatus::FAILED)
 
     navigate "Processo Administrativo/Licitatório > Pregão Presencial"
