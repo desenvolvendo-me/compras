@@ -94,7 +94,7 @@ class CrudController < ApplicationController
 
   # Get collection using ordered scope
   def collection
-    set_default_filters
+    set_default_filters unless params[:clear_filters].present?
     get_collection_ivar || set_collection_ivar(end_of_association_chain.ordered)
   end
 

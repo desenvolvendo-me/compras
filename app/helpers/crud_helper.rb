@@ -83,7 +83,7 @@ module CrudHelper
   end
 
   def clear_filter_link
-    link_to t("clear_filter"), collection_path
+    link_to t("clear_filter"), collection_path(:clear_filters => true)
   end
 
   def annul_link(options = {})
