@@ -5,7 +5,7 @@ class LicitationProcessEnvelopeOpeningDate
     @publication_date = licitation_process.last_publication_date
     @modality = licitation_process.modality
     @execution_type = licitation_process.execution_type
-    @licitation_kind = licitation_process.judgment_form_licitation_kind
+    @judgment_form = licitation_process.judgment_form
   end
 
   def valid?
@@ -15,7 +15,7 @@ class LicitationProcessEnvelopeOpeningDate
   private
 
   attr_reader :licitation_process, :envelope_opening_date, :publication_date, :modality,
-              :execution_type, :licitation_kind
+              :execution_type, :judgment_form
 
   def run_validation
     return true unless respond_to?("#{@modality}_validation", true)
@@ -39,7 +39,7 @@ class LicitationProcessEnvelopeOpeningDate
   end
 
   def concurrence_validation
-    if execution_type == "integral" && ["best_technique", "technical_and_price"].include?(licitation_kind)
+    if licitation_process.integral? && (judgment_form.best_technique? || judgment_form.technical_and_price?)
       valid_envelope_opening_date?(45, :calendar)
     else
       valid_envelope_opening_date?(30, :calendar)
@@ -47,7 +47,7 @@ class LicitationProcessEnvelopeOpeningDate
   end
 
   def taken_price_validation
-    if ["best_technique", "technical_and_price"].include? licitation_kind
+    if judgment_form.best_technique? || judgment_form.technical_and_price?
       valid_envelope_opening_date?(30, :calendar)
     else
       valid_envelope_opening_date?(15, :calendar)

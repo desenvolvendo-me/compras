@@ -26,7 +26,7 @@ class LicitationProcess < Compras::Model
   has_enumeration_for :expiration_unit, :with => PeriodUnit
   has_enumeration_for :period_unit, :with => PeriodUnit
   has_enumeration_for :status, :with => LicitationProcessStatus, :create_helpers => true
-  has_enumeration_for :execution_type
+  has_enumeration_for :execution_type, :create_helpers => true
   has_enumeration_for :modality, :create_helpers => true, :create_scopes => true
   has_enumeration_for :object_type, :with => AdministrativeProcessObjectType,
                       :create_helpers => true
