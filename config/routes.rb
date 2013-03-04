@@ -76,13 +76,6 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :administrative_processes, :except => :destroy do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
   resources :administrative_process_budget_allocation_items, :only => [] do
     collection do
       get :modal
