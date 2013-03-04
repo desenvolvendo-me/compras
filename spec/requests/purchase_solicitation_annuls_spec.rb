@@ -24,11 +24,7 @@ feature 'PurchaseSolicitationAnnul' do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
-    click_link "Filtrar Solicitações de Compra"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     click_link "#{solicitation.decorator.code_and_year}"
 
@@ -50,11 +46,7 @@ feature 'PurchaseSolicitationAnnul' do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
-    click_link "Filtrar Solicitações de Compra"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     click_link "#{purchase_solicitation.decorator.code_and_year}"
 
@@ -67,11 +59,7 @@ feature 'PurchaseSolicitationAnnul' do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
-    click_link "Filtrar Solicitações de Compra"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     click_link "#{solicitation.decorator.code_and_year}"
 

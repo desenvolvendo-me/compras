@@ -11,11 +11,7 @@ feature 'PriceCollectionAnnuls' do
 
     navigate 'Processos de Compra > Coletas de Preços'
 
-    click_link "Filtrar Coletas de Preços"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     click_link '1/2012'
 
@@ -35,11 +31,7 @@ feature 'PriceCollectionAnnuls' do
 
     navigate 'Processos de Compra > Coletas de Preços'
 
-    click_link "Filtrar Coletas de Preços"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     click_link '1/2012'
 

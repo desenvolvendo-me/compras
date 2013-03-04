@@ -13,11 +13,7 @@ feature "SupplyAuthorizations" do
 
     navigate 'Processos de Compra > Compra Direta'
 
-    click_link "Filtrar Compras Diretas"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       page.find('a').click
@@ -63,11 +59,7 @@ feature "SupplyAuthorizations" do
 
     navigate 'Processos de Compra > Compra Direta'
 
-    click_link "Filtrar Compras Diretas"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       page.find('a').click
@@ -118,11 +110,7 @@ feature "SupplyAuthorizations" do
 
     navigate 'Processos de Compra > Compra Direta'
 
-    click_link "Filtrar Compras Diretas"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       page.find('a').click

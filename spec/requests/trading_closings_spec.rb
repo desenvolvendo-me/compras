@@ -15,11 +15,7 @@ feature TradingClosing do
 
     navigate "Processo Administrativo/Licitatório > Pregão Presencial"
 
-    click_link "Filtrar Pregões Presenciais"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     click_link "1/2012"
 

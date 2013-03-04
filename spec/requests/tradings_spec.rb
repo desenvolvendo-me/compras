@@ -34,11 +34,7 @@ feature "Tradings" do
 
     expect(page).to have_content "Pregão Presencial criado com sucesso"
 
-    click_link "Filtrar Pregões Presenciais"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     click_link "1/2012"
 
@@ -176,11 +172,7 @@ feature "Tradings" do
 
     click_link "Voltar"
 
-    click_link "Filtrar Pregões Presenciais"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       page.find('a').click
@@ -274,11 +266,7 @@ feature "Tradings" do
 
     navigate "Processo Administrativo/Licitatório > Pregão Presencial"
 
-    click_link "Filtrar Pregões Presenciais"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     click_link '1/2012'
 
@@ -307,11 +295,7 @@ feature "Tradings" do
 
     navigate "Processo Administrativo/Licitatório > Pregão Presencial"
 
-    click_link "Filtrar Pregões Presenciais"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     click_link "1/2012"
     click_button "Salvar e ir para Itens/Ofertas"
@@ -782,11 +766,7 @@ feature "Tradings" do
 
     navigate "Processo Administrativo/Licitatório > Pregão Presencial"
 
-    click_link "Filtrar Pregões Presenciais"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       within 'thead tr:nth-child(1)' do

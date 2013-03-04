@@ -15,11 +15,7 @@ feature 'ContractTerminations' do
 
     navigate 'Comum > Cadastrais > Contratos'
 
-    click_link "Filtrar Contratos"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     click_link '001'
 
@@ -81,11 +77,7 @@ feature 'ContractTerminations' do
 
     navigate 'Comum > Cadastrais > Contratos'
 
-    click_link "Filtrar Contratos"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     click_link '001'
 
@@ -109,11 +101,7 @@ feature 'ContractTerminations' do
 
     navigate 'Comum > Cadastrais > Contratos'
 
-    click_link "Filtrar Contratos"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     click_link '001'
 

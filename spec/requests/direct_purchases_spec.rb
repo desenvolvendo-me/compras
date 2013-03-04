@@ -345,11 +345,7 @@ feature "DirectPurchases" do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
-    click_link "Filtrar Solicitações de Compra"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       page.find('a').click
@@ -385,11 +381,7 @@ feature "DirectPurchases" do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
-    click_link "Filtrar Solicitações de Compra"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       page.find('a').click
@@ -1101,11 +1093,7 @@ feature "DirectPurchases" do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
-    click_link "Filtrar Solicitações de Compra"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       page.find('a').click
@@ -1464,11 +1452,7 @@ feature "DirectPurchases" do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
-    click_link "Filtrar Solicitações de Compra"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link purchase_solicitation.decorator.code_and_year
@@ -1522,11 +1506,7 @@ feature "DirectPurchases" do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
-    click_link "Filtrar Solicitações de Compra"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link purchase_solicitation.decorator.code_and_year
@@ -1585,11 +1565,7 @@ feature "DirectPurchases" do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
-    click_link "Filtrar Solicitações de Compra"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     click_link '1/2012'
 
@@ -1615,11 +1591,7 @@ feature "DirectPurchases" do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
-    click_link "Filtrar Solicitações de Compra"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     click_link '1/2012'
 
@@ -1627,11 +1599,7 @@ feature "DirectPurchases" do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
-    click_link "Filtrar Solicitações de Compra"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     click_link '1/2013'
 
@@ -1818,11 +1786,7 @@ feature "DirectPurchases" do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
-    click_link "Filtrar Solicitações de Compra"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     item_group.purchase_solicitations.each do |purchase_solicitation|
       within_records do
@@ -1860,11 +1824,7 @@ feature "DirectPurchases" do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
-    click_link "Filtrar Solicitações de Compra"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     item_group.purchase_solicitations.each do |purchase_solicitation|
       within_records do
@@ -2266,11 +2226,7 @@ feature "DirectPurchases" do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
-    click_link "Filtrar Solicitações de Compra"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link '1/2012'
@@ -2329,11 +2285,7 @@ feature "DirectPurchases" do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
-    click_link "Filtrar Solicitações de Compra"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link '1/2012'
@@ -2373,11 +2325,7 @@ feature "DirectPurchases" do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
-    click_link "Filtrar Solicitações de Compra"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link '1/2012'
@@ -2395,11 +2343,7 @@ feature "DirectPurchases" do
 
     click_link 'Voltar'
 
-    click_link "Filtrar Solicitações de Compra"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link '1/2013'

@@ -130,11 +130,7 @@ feature "PriceCollections" do
 
     expect(page).to have_notice 'Coleta de Preços 1/2012 criada com sucesso.'
 
-    click_link "Filtrar Coletas de Preço"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       page.find('a').click
@@ -194,11 +190,7 @@ feature "PriceCollections" do
 
     navigate 'Processos de Compra > Coletas de Preços'
 
-    click_link "Filtrar Coletas de Preço"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       page.find('a').click
@@ -250,11 +242,7 @@ feature "PriceCollections" do
 
     expect(page).to have_notice 'Coleta de Preços 1/2012 editada com sucesso.'
 
-    click_link "Filtrar Coletas de Preço"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       page.find('a').click
@@ -300,11 +288,7 @@ feature "PriceCollections" do
 
     navigate 'Processos de Compra > Coletas de Preços'
 
-    click_link "Filtrar Coletas de Preço"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       page.find('a').click
@@ -355,11 +339,7 @@ feature "PriceCollections" do
 
     navigate 'Processos de Compra > Coletas de Preços'
 
-    click_link "Filtrar Coletas de Preço"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       page.find('a').click
@@ -382,11 +362,7 @@ feature "PriceCollections" do
 
     navigate 'Processos de Compra > Coletas de Preços'
 
-    click_link "Filtrar Coletas de Preço"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       page.find('a').click
@@ -410,11 +386,7 @@ feature "PriceCollections" do
 
     expect(page).to have_notice 'Coleta de Preços 1/2012 editada com sucesso.'
 
-    click_link "Filtrar Coletas de Preço"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       page.find('a').click
@@ -437,11 +409,7 @@ feature "PriceCollections" do
 
     navigate 'Processos de Compra > Coletas de Preços'
 
-    click_link "Filtrar Coletas de Preço"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       page.find('a').click
@@ -455,11 +423,7 @@ feature "PriceCollections" do
 
     click_button 'Salvar'
 
-    click_link "Filtrar Coletas de Preço"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       page.find('a').click
@@ -475,11 +439,7 @@ feature "PriceCollections" do
 
     navigate 'Processos de Compra > Coletas de Preços'
 
-    click_link "Filtrar Coletas de Preço"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       page.find('a').click
@@ -516,11 +476,7 @@ feature "PriceCollections" do
 
     navigate 'Processos de Compra > Coletas de Preços'
 
-    click_link "Filtrar Coletas de Preço"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       page.find('a').click
@@ -596,11 +552,7 @@ feature "PriceCollections" do
 
     navigate 'Processos de Compra > Coletas de Preços'
 
-    click_link "Filtrar Coletas de Preço"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       page.find('a').click
@@ -648,11 +600,7 @@ feature "PriceCollections" do
 
     navigate 'Processos de Compra > Coletas de Preços'
 
-    click_link "Filtrar Coletas de Preço"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       page.find('a').click
@@ -720,11 +668,7 @@ feature "PriceCollections" do
 
     navigate 'Processos de Compra > Coletas de Preços'
 
-    click_link "Filtrar Coletas de Preço"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       page.find('a').click
@@ -772,11 +716,7 @@ feature "PriceCollections" do
 
     navigate 'Processos de Compra > Coletas de Preços'
 
-    click_link "Filtrar Coletas de Preço"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       page.find('a').click
@@ -846,11 +786,7 @@ feature "PriceCollections" do
 
     navigate 'Processos de Compra > Coletas de Preços'
 
-    click_link "Filtrar Coletas de Preço"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       page.find('a').click
@@ -896,11 +832,7 @@ feature "PriceCollections" do
 
     navigate 'Processos de Compra > Coletas de Preços'
 
-    click_link "Filtrar Coletas de Preço"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       page.find('a').click
@@ -961,11 +893,7 @@ feature "PriceCollections" do
 
     navigate 'Processos de Compra > Coletas de Preços'
 
-    click_link "Filtrar Coletas de Preço"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     click_link '1/2012'
 
@@ -1014,11 +942,7 @@ feature "PriceCollections" do
 
     navigate 'Processos de Compra > Coletas de Preços'
 
-    click_link "Filtrar Coletas de Preço"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       expect(page).to have_css('a', :count => 2)
@@ -1040,11 +964,7 @@ feature "PriceCollections" do
 
     navigate 'Processos de Compra > Coletas de Preços'
 
-    click_link "Filtrar Coletas de Preço"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       expect(page).to have_content 'Código/Ano'
@@ -1062,11 +982,7 @@ feature "PriceCollections" do
 
     navigate 'Processos de Compra > Coletas de Preços'
 
-    click_link "Filtrar Coletas de Preço"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       page.find('a').click
@@ -1083,11 +999,7 @@ feature "PriceCollections" do
 
     expect(page).to have_notice 'Coleta de Preços 1/2012 editada com sucesso.'
 
-    click_link "Filtrar Coletas de Preço"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       page.find('a').click

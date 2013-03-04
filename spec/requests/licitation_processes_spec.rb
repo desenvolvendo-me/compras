@@ -221,11 +221,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
-    click_link "Filtrar Processos Licitatórios"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link '1/2012'
@@ -427,11 +423,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
-    click_link "Filtrar Processos Licitatórios"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link '1/2012'
@@ -445,11 +437,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
-    click_link "Filtrar Processos Licitatórios"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link '1/2012'
@@ -489,11 +477,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
-    click_link "Filtrar Processos Licitatórios"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link '1/2012'
@@ -556,11 +540,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
-    click_link "Filtrar Processos Licitatórios"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       expect(page).to have_css 'a', :count => 2
@@ -591,11 +571,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
-    click_link "Filtrar Processos Licitatórios"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     click_link '1/2012'
 
@@ -636,11 +612,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
-    click_link "Filtrar Processos Licitatórios"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link "1/2012"
@@ -676,11 +648,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
-    click_link "Filtrar Processos Licitatórios"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link "2/2013"
@@ -704,11 +672,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
-    click_link "Filtrar Processos Licitatórios"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       expect(page).to have_content 'Código/Ano'
@@ -735,11 +699,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
-    click_link "Filtrar Processos Licitatórios"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link '1/2012'
@@ -770,11 +730,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
-    click_link "Filtrar Processos Licitatórios"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link '1/2012'
@@ -813,11 +769,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
-    click_link "Filtrar Processos Licitatórios"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link '1/2012'
@@ -849,11 +801,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
-    click_link "Filtrar Processos Licitatórios"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link '1/2012'
@@ -877,11 +825,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
-    click_link "Filtrar Processos Licitatórios"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link '1/2012'
@@ -919,11 +863,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
-    click_link "Filtrar Processos Licitatórios"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link '1/2012'
@@ -961,11 +901,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
-    click_link "Filtrar Processos Licitatórios"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link '1/2012'
@@ -1043,11 +979,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
-    click_link "Filtrar Processos Licitatórios"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link '1/2012'
@@ -1123,11 +1055,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
-    click_link "Filtrar Processos Licitatórios"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link '1/2012'
@@ -1189,11 +1117,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
-    click_link "Filtrar Processos Licitatórios"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link '1/2012'
@@ -1281,11 +1205,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
-    click_link "Filtrar Processos Licitatórios"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link '1/2012'
@@ -1372,11 +1292,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
-    click_link "Filtrar Processos Licitatórios"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link '1/2012'
@@ -1384,11 +1300,7 @@ feature "LicitationProcesses" do
 
     click_link 'Voltar'
 
-    click_link "Filtrar Processos Licitatórios"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     expect(page).to have_link '1/2012'
 
@@ -1408,11 +1320,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
-    click_link "Filtrar Solicitações de Compra"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link '1/2012'
@@ -1476,11 +1384,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
-    click_link "Filtrar Solicitações de Compra"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link '1/2012'
@@ -1490,11 +1394,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
-    click_link "Filtrar Processos Licitatórios"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link '1/2012'
@@ -1514,11 +1414,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
-    click_link "Filtrar Solicitações de Compra"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link '1/2012'
@@ -1730,11 +1626,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
-    click_link "Filtrar Processos Licitatórios"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link '1/2012'
@@ -2010,11 +1902,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
-    click_link "Filtrar Processos Licitatórios"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link '1/2012'
@@ -2061,11 +1949,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
-    click_link "Filtrar Processos Licitatórios"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link '1/2012'
@@ -2099,11 +1983,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
-    click_link "Filtrar Processos Licitatórios"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link '1/2012'
@@ -2202,11 +2082,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
-    click_link "Filtrar Solicitações de Compra"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link '1/2012'
@@ -2255,11 +2131,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
-    click_link "Filtrar Processos Licitatórios"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link '1/2012'
@@ -2279,11 +2151,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
-    click_link "Filtrar Solicitações de Compra"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link '1/2012'
@@ -2295,11 +2163,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
-    click_link "Filtrar Processos Licitatórios"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link '1/2012'
@@ -2319,11 +2183,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
-    click_link "Filtrar Solicitações de Compra"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link '1/2012'
@@ -2335,11 +2195,7 @@ feature "LicitationProcesses" do
 
     click_link 'Voltar'
 
-    click_link "Filtrar Solicitações de Compra"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link '2/2012'
@@ -2363,11 +2219,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
-    click_link "Filtrar Processos Licitatórios"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link '1/2012'
@@ -2387,11 +2239,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
-    click_link "Filtrar Solicitações de Compra"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link '1/2012'
@@ -2413,11 +2261,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
-    click_link "Filtrar Processos Licitatórios"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link '1/2012'
@@ -2437,11 +2281,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
-    click_link "Filtrar Solicitações de Compra"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link '1/2012'
@@ -2463,11 +2303,7 @@ feature "LicitationProcesses" do
 
     click_link 'Voltar'
 
-    click_link "Filtrar Solicitações de Compra"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link '2/2012'
@@ -2577,11 +2413,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
-    click_link "Filtrar Solicitações de Compra"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link '1/2012'
@@ -2751,11 +2583,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
-    click_link "Filtrar Solicitações de Compra"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link '1/2012'

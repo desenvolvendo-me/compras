@@ -83,11 +83,7 @@ feature "PriceRegistration" do
 
     expect(page).to have_notice 'Registro de Preço 1/2012 criado com sucesso.'
 
-    click_link "Filtrar Registros de Preços"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     click_link '1/2012'
 
@@ -139,11 +135,7 @@ feature "PriceRegistration" do
 
     navigate 'Processos de Compra > Registros de Preços'
 
-    click_link "Filtrar Registros de Preços"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     click_link '1/2012'
 
@@ -187,11 +179,7 @@ feature "PriceRegistration" do
 
     expect(page).to have_notice 'Registro de Preço 1/2012 editado com sucesso.'
 
-    click_link "Filtrar Registros de Preços"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     click_link '1/2012'
 
@@ -233,11 +221,7 @@ feature "PriceRegistration" do
 
     navigate 'Processos de Compra > Registros de Preços'
 
-    click_link "Filtrar Registros de Preços"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     click_link '1/2012'
 
@@ -279,11 +263,7 @@ feature "PriceRegistration" do
 
       navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
-      click_link "Filtrar Processos Licitatórios"
-
-      clear_modal "Ano"
-
-      click_button "Pesquisar"
+      click_link "Limpar Filtro"
 
       click_link '1/2012'
 
@@ -296,11 +276,7 @@ feature "PriceRegistration" do
 
       navigate 'Processos de Compra > Registros de Preços'
 
-      click_link "Filtrar Registros de Preços"
-
-      clear_modal "Ano"
-
-      click_button "Pesquisar"
+      click_link "Limpar Filtro"
 
       click_link '1/2012'
 
@@ -318,11 +294,7 @@ feature "PriceRegistration" do
                               :licitation_process => LicitationProcess.make!(:apuracao_global))
 
       navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
-      click_link "Filtrar Processos Licitatórios"
-
-      clear_modal "Ano"
-
-      click_button "Pesquisar"
+      click_link "Limpar Filtro"
 
       click_link '1/2012'
 
@@ -332,11 +304,7 @@ feature "PriceRegistration" do
 
       navigate 'Processos de Compra > Registros de Preços'
 
-      click_link "Filtrar Registros de Preços"
-
-      clear_modal "Ano"
-
-      click_button "Pesquisar"
+      click_link "Limpar Filtro"
 
       click_link '1/2012'
 

@@ -16,11 +16,7 @@ feature BidderDisqualification do
 
     navigate "Processo Administrativo/Licitatório > Pregão Presencial"
 
-    click_link "Filtrar Pregões Presenciais"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     click_link "1/2012"
     click_button "Salvar e ir para Itens/Ofertas"
@@ -82,11 +78,7 @@ feature BidderDisqualification do
 
     navigate "Processo Administrativo/Licitatório > Pregão Presencial"
 
-    click_link "Filtrar Pregões Presenciais"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     click_link "1/2012"
     click_button "Salvar e ir para Itens/Ofertas"
@@ -147,11 +139,7 @@ feature BidderDisqualification do
 
     navigate "Processo Administrativo/Licitatório > Pregão Presencial"
 
-    click_link "Filtrar Pregões Presenciais"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     click_link "1/2012"
     click_button "Salvar e ir para Itens/Ofertas"

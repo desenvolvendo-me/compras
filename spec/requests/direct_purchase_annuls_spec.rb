@@ -19,11 +19,7 @@ feature 'DirectPurchaseAnnuls' do
 
     navigate 'Processos de Compra > Compra Direta'
 
-    click_link "Filtrar Compras Diretas"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       page.find('a').click
@@ -40,11 +36,7 @@ feature 'DirectPurchaseAnnuls' do
 
     navigate 'Processos de Compra > Compra Direta'
 
-    click_link "Filtrar Compras Diretas"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       page.find('a').click
@@ -65,11 +57,7 @@ feature 'DirectPurchaseAnnuls' do
 
     navigate 'Processos de Compra > Compra Direta'
 
-    click_link "Filtrar Compras Diretas"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       page.find('a').click
@@ -85,11 +73,7 @@ feature 'DirectPurchaseAnnuls' do
 
     navigate 'Processos de Compra > Compra Direta'
 
-    click_link "Filtrar Compras Diretas"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       page.find('a').click
@@ -124,11 +108,7 @@ feature 'DirectPurchaseAnnuls' do
 
     navigate 'Processos de Compra > Compra Direta'
 
-    click_link "Filtrar Compras Diretas"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       page.find('a').click
@@ -171,11 +151,7 @@ feature 'DirectPurchaseAnnuls' do
 
     navigate 'Processos de Compra > Compra Direta'
 
-    click_link "Filtrar Compras Diretas"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       page.find('a').click
@@ -189,11 +165,7 @@ feature 'DirectPurchaseAnnuls' do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
-    click_link "Filtrar Solicitações de Compra"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       page.find('a').click
@@ -205,11 +177,7 @@ feature 'DirectPurchaseAnnuls' do
 
     navigate 'Processos de Compra > Compra Direta'
 
-    click_link "Filtrar Compras Diretas"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       page.find('a').click
@@ -237,11 +205,7 @@ feature 'DirectPurchaseAnnuls' do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
-    click_link "Filtrar Solicitações de Compra"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       page.find('a').click
@@ -262,11 +226,7 @@ feature 'DirectPurchaseAnnuls' do
 
     navigate 'Processos de Compra > Compra Direta'
 
-    click_link "Filtrar Compras Diretas"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       page.find('a').click
@@ -287,11 +247,7 @@ feature 'DirectPurchaseAnnuls' do
 
     navigate 'Processos de Compra > Compra Direta'
 
-    click_link "Filtrar Compras Diretas"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       page.find('a').click
@@ -319,11 +275,7 @@ feature 'DirectPurchaseAnnuls' do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
-    click_link "Filtrar Solicitações de Compra"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       page.find('a').click
@@ -350,11 +302,7 @@ feature 'DirectPurchaseAnnuls' do
 
     navigate 'Processo Administrativo/Licitatório > Auxiliar > Objetos de Licitação'
 
-    click_link "Filtrar Objetos de Licitação"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     click_link 'Ponte'
 
@@ -370,11 +318,7 @@ feature 'DirectPurchaseAnnuls' do
 
     navigate 'Processos de Compra > Compra Direta'
 
-    click_link "Filtrar Compras Diretas"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link "#{direct_purchase}"
@@ -402,11 +346,7 @@ feature 'DirectPurchaseAnnuls' do
 
     navigate 'Processo Administrativo/Licitatório > Auxiliar > Objetos de Licitação'
 
-    click_link "Filtrar Objetos de Licitação"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     click_link 'Ponte'
 

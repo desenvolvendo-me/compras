@@ -743,11 +743,7 @@ feature "Bidders" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
-    click_link "Filtrar Processos Licitatórios"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link '1/2012'
@@ -767,11 +763,7 @@ feature "Bidders" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
-    click_link "Filtrar Processos Licitatórios"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link '1/2012'
@@ -791,11 +783,7 @@ feature "Bidders" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
-    click_link "Filtrar Processos Licitatórios"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link '1/2012'
@@ -816,11 +804,7 @@ feature "Bidders" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
-    click_link "Filtrar Processos Licitatórios"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link '1/2012'
@@ -916,11 +900,7 @@ feature "Bidders" do
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
-    click_link "Filtrar Processos Licitatórios"
-
-    clear_modal "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link  '1/2012'

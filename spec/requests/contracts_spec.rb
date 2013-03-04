@@ -127,11 +127,7 @@ feature "Contracts" do
 
     expect(page).to have_notice 'Contrato criado com sucesso.'
 
-    click_link "Filtrar Contratos"
-
-    clear_mask "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       page.find('a').click
@@ -167,11 +163,7 @@ feature "Contracts" do
 
     navigate 'Comum > Cadastrais > Contratos'
 
-    click_link "Filtrar Contratos"
-
-    clear_mask "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       page.find('a').click
@@ -205,11 +197,7 @@ feature "Contracts" do
 
     navigate 'Comum > Cadastrais > Contratos'
 
-    click_link "Filtrar Contratos"
-
-    clear_mask "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       page.find('a').click
@@ -233,11 +221,7 @@ feature "Contracts" do
 
     navigate 'Comum > Cadastrais > Contratos'
 
-    click_link "Filtrar Contratos"
-
-    clear_mask "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       click_link '001'
@@ -255,11 +239,7 @@ feature "Contracts" do
 
     navigate 'Comum > Cadastrais > Contratos'
 
-    click_link "Filtrar Contratos"
-
-    clear_mask "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       page.find('a').click
@@ -285,11 +265,7 @@ feature "Contracts" do
 
     expect(page).to have_notice 'Contrato editado com sucesso.'
 
-    click_link "Filtrar Contratos"
-
-    clear_mask "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       page.find('a').click
@@ -311,11 +287,7 @@ feature "Contracts" do
 
     navigate 'Comum > Cadastrais > Contratos'
 
-    click_link "Filtrar Contratos"
-
-    clear_mask "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       page.find('a').click
@@ -329,11 +301,7 @@ feature "Contracts" do
 
     expect(page).to have_notice 'Contrato editado com sucesso.'
 
-    click_link "Filtrar Contratos"
-
-    clear_mask "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       page.find('a').click
@@ -352,11 +320,7 @@ feature "Contracts" do
 
     navigate 'Comum > Cadastrais > Contratos'
 
-    click_link "Filtrar Contratos"
-
-    clear_mask "Ano"
-
-    click_button "Pesquisar"
+    click_link "Limpar Filtro"
 
     within_records do
       expect(page).to have_content 'Número do contrato'
