@@ -21,6 +21,14 @@ class ChangeBudgetAllocationFromAdministrativeProcessToLicitationProcesses < Act
     remove_column :compras_administrative_process_budget_allocations, :administrative_process_id
 
     execute <<-SQL
+      DELETE FROM compras_administrative_process_budget_allocation_items a
+      USING compras_administrative_process_budget_allocations b
+      WHERE
+        b.id = a.administrative_process_budget_allocation_id AND
+        b.licitation_process_id IS NULL
+    SQL
+
+    execute <<-SQL
       DELETE FROM compras_administrative_process_budget_allocations
       WHERE licitation_process_id IS NULL
     SQL
