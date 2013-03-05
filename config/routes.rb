@@ -232,12 +232,7 @@ Compras::Application.routes.draw do
 
   get 'cities/modal', :as => :modal_cities
 
-  resources :cnaes do
-    collection do
-      get :modal
-      get :filter
-    end
-  end
+  get 'cnaes/modal', :as => :modal_cnaes
 
   resources :communication_sources do
     collection do

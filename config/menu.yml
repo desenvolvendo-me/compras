@@ -43,7 +43,6 @@ menu:
       - auxiliary:
         - regularization_or_administrative_sanction_reasons
         - company_sizes
-        - cnaes
         - risk_degrees
     - legislation:
       - dissemination_sources
