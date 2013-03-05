@@ -675,7 +675,7 @@ feature "LicitationProcesses" do
     click_link "Limpar Filtro"
 
     within_records do
-      expect(page).to have_content 'Código/Ano'
+      expect(page).to have_content 'Processo/Ano'
       expect(page).to have_content 'Modalidade'
       expect(page).to have_content 'Tipo de objeto'
       expect(page).to have_content 'Data da abertura dos envelopes'

@@ -44,7 +44,7 @@ pt-BR:
         disqualify_by_maximum_value: "Desclassificar participantes com cotações acima do valor máximo estabelecido no edital"
         consider_law_of_proposals: "Considerar Lei 123/2006 para classificação das propostas"
         price_registration: "Registro de preço"
-        code_and_year: "Código/Ano"
+        code_and_year: "Processo/Ano"
         delivery_location: "Local de entrega"
         execution_type: "Forma de execução"
         purchase_solicitation_item_group: "Agrupamento de solicitações de compra"
