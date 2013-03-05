@@ -68,7 +68,7 @@ feature "Contracts" do
     Creditor.make!(:sobrinho)
     BudgetStructure.make!(:secretaria_de_educacao)
     Employee.make!(:wenderson)
-    ServiceOrContractType.make!(:trainees)
+    ContractType.make!(:trainees)
 
     navigate 'Comum > Cadastrais > Contratos'
 

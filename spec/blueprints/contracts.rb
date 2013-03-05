@@ -8,7 +8,7 @@ Contract.blueprint(:primeiro_contrato) do
   description { "Objeto" }
   kind { ContractKind::MAIN }
   licitation_process { LicitationProcess.make!(:processo_licitatorio) }
-  service_or_contract_type { ServiceOrContractType.make!(:management) }
+  contract_type { ContractType.make!(:management) }
   dissemination_source { DisseminationSource.make!(:jornal_municipal) }
   creditor { Creditor.make!(:sobrinho) }
   contract_value { 1000 }
@@ -33,7 +33,7 @@ Contract.blueprint(:segundo_contrato) do
   kind { ContractKind::AMENDMENT }
   parent { Contract.make!(:primeiro_contrato) }
   direct_purchase { DirectPurchase.make!(:compra) }
-  service_or_contract_type { ServiceOrContractType.make!(:management) }
+  contract_type { ContractType.make!(:management) }
   dissemination_source { DisseminationSource.make!(:jornal_municipal) }
   creditor { Creditor.make!(:sobrinho) }
   contract_value { 1000 }
@@ -57,7 +57,7 @@ Contract.blueprint(:contrato_detran) do
   description { "Contrato" }
   kind { ContractKind::MAIN }
   direct_purchase { DirectPurchase.make!(:compra) }
-  service_or_contract_type { ServiceOrContractType.make!(:founded) }
+  contract_type { ContractType.make!(:founded) }
   creditor { Creditor.make!(:sobrinho) }
   contract_value { 1000 }
   contract_validity { 12 }

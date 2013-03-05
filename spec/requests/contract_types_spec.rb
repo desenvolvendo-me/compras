@@ -1,15 +1,15 @@
 # encoding: utf-8
 require 'spec_helper'
 
-feature "ServiceOrContractType" do
+feature "ContractType" do
   background do
     sign_in
   end
 
   scenario 'create a new service' do
-    navigate 'Comum > Tipos de Serviço ou Contrato'
+    navigate 'Comum > Tipos de Contrato'
 
-    click_link 'Criar Tipo de Serviço ou Contrato'
+    click_link 'Criar Tipo de Contrato'
 
     fill_in 'Código do TCE', :with => '123'
     fill_in 'Descrição', :with => 'Contratação de estagiários'
@@ -17,7 +17,7 @@ feature "ServiceOrContractType" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Tipo de Serviço ou Contrato criado com sucesso.'
+    expect(page).to have_notice 'Tipo de Contrato criado com sucesso.'
 
     click_link 'Contratação de estagiários'
 
@@ -27,9 +27,9 @@ feature "ServiceOrContractType" do
   end
 
   scenario 'update an existent service' do
-    ServiceOrContractType.make!(:trainees)
+    ContractType.make!(:trainees)
 
-    navigate 'Comum > Tipos de Serviço ou Contrato'
+    navigate 'Comum > Tipos de Contrato'
 
     click_link 'Contratação de estagiários'
 
@@ -37,7 +37,7 @@ feature "ServiceOrContractType" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Tipo de Serviço ou Contrato editado com sucesso.'
+    expect(page).to have_notice 'Tipo de Contrato editado com sucesso.'
 
     click_link 'Contratação de 10 estagiários'
 
@@ -47,15 +47,15 @@ feature "ServiceOrContractType" do
   end
 
   scenario 'destroy an existent service' do
-    ServiceOrContractType.make!(:trainees)
+    ContractType.make!(:trainees)
 
-    navigate 'Comum > Tipos de Serviço ou Contrato'
+    navigate 'Comum > Tipos de Contrato'
 
     click_link 'Contratação de estagiários'
 
     click_link 'Apagar'
 
-    expect(page).to have_notice 'Tipo de Serviço ou Contrato apagado com sucesso.'
+    expect(page).to have_notice 'Tipo de Contrato apagado com sucesso.'
 
     expect(page).to_not have_content '123'
     expect(page).to_not have_content 'Contratação de estagiários'
@@ -63,9 +63,9 @@ feature "ServiceOrContractType" do
   end
 
   scenario 'index with columns at the index' do
-    ServiceOrContractType.make!(:trainees)
+    ContractType.make!(:trainees)
 
-    navigate 'Comum > Tipos de Serviço ou Contrato'
+    navigate 'Comum > Tipos de Contrato'
 
     within_records do
       expect(page).to have_content 'Descrição'

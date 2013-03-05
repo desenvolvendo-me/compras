@@ -1,8 +1,8 @@
 # encoding: utf-8
 require 'decorator_helper'
-require 'app/decorators/service_or_contract_type_decorator'
+require 'app/decorators/contract_type_decorator'
 
-describe ServiceOrContractTypeDecorator do
+describe ContractTypeDecorator do
   context 'with attr_header' do
     it 'should have headers' do
       expect(described_class.headers?).to be_true

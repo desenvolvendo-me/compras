@@ -1,12 +1,12 @@
 pt-BR:
   activerecord:
     models:
-      service_or_contract_type:
-        one: "Tipo de Serviço ou Contrato"
-        other: "Tipos de Serviço ou Contrato"
+      contract_type:
+        one: "Tipo de Contrato"
+        other: "Tipos de Contrato"
 
     attributes:
-      service_or_contract_type:
+      contract_type:
         tce_code: "Código do TCE"
         description: "Descrição"
         service_goal: "Finalidade"

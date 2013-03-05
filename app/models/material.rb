@@ -2,7 +2,7 @@ class Material < Compras::Model
   attr_accessible :materials_class_id, :code, :material_type, :manufacturer,
                   :detailed_description, :minimum_stock_balance, :combustible,
                   :reference_unit_id, :material_characteristic, :perishable,
-                  :service_or_contract_type_id, :expense_nature_id, :description,
+                  :contract_type_id, :expense_nature_id, :description,
                   :storable, :autocomplete_materials_class
 
   attr_writer :autocomplete_materials_class
@@ -14,7 +14,7 @@ class Material < Compras::Model
 
   belongs_to :materials_class
   belongs_to :reference_unit
-  belongs_to :service_or_contract_type
+  belongs_to :contract_type
   belongs_to :expense_nature
 
   has_and_belongs_to_many :licitation_objects, :join_table => :compras_licitation_objects_compras_materials
@@ -31,7 +31,7 @@ class Material < Compras::Model
   validates :material_characteristic, :presence => true
   validates :code, :description, :presence => true, :uniqueness => { :allow_blank => true }
   validates :material_type, :presence => true, :if => :material?
-  validates :service_or_contract_type, :presence => true, :if => :service?
+  validates :contract_type, :presence => true, :if => :service?
 
   before_save :clean_unnecessary_type
 
@@ -86,7 +86,7 @@ class Material < Compras::Model
 
   def clean_unnecessary_type
     if material?
-      self.service_or_contract_type_id = nil
+      self.contract_type_id = nil
     elsif service?
       self.material_type = nil
     end

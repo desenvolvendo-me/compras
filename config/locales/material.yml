@@ -22,6 +22,6 @@ pt-BR:
         storable: "Material estocável"
         combustible: "Material combustível"
         material_characteristic: "Característica"
-        service_or_contract_type: "Tipo de serviço ou Contrato"
+        contract_type: "Tipo de contrato"
         material_type: "Tipo de material"
         expense_nature: "Natureza da despesa"

@@ -209,6 +209,13 @@ Compras::Application.routes.draw do
 
   resources :contract_termination_annuls, :only => [:new, :create, :edit, :update]
 
+  resources :contract_types do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :regulatory_act_type_classifications do
     collection do
       get :filter
@@ -610,13 +617,6 @@ Compras::Application.routes.draw do
     collection do
       get :modal
       get :filter
-    end
-  end
-
-  resources :service_or_contract_types do
-    collection do
-      get :filter
-      get :modal
     end
   end
 

@@ -2,7 +2,7 @@ class Contract < Compras::Model
   attr_accessible :year, :contract_number, :sequential_number, :publication_date, :lawyer_code, :contract_file
   attr_accessible :signature_date, :end_date, :description, :kind, :content, :contract_guarantees
   attr_accessible :contract_value, :guarantee_value, :contract_validity, :subcontracting, :cancellation_date, :cancellation_reason
-  attr_accessible :dissemination_source_id, :creditor_id, :service_or_contract_type_id, :licitation_process_id
+  attr_accessible :dissemination_source_id, :creditor_id, :contract_type_id, :licitation_process_id
   attr_accessible :direct_purchase_id, :budget_structure_id, :budget_structure_responsible_id, :lawyer_id, :parent_id
   attr_accessible :delivery_schedules_attributes
 
@@ -16,7 +16,7 @@ class Contract < Compras::Model
 
   belongs_to :dissemination_source
   belongs_to :creditor
-  belongs_to :service_or_contract_type
+  belongs_to :contract_type
   belongs_to :licitation_process
   belongs_to :direct_purchase
   belongs_to :budget_structure
@@ -38,7 +38,7 @@ class Contract < Compras::Model
 
   validates :year, :mask => "9999", :allow_blank => true
   validates :sequential_number, :year, :contract_number, :publication_date, :presence => true
-  validates :dissemination_source, :content, :creditor, :service_or_contract_type, :presence => true
+  validates :dissemination_source, :content, :creditor, :contract_type, :presence => true
   validates :contract_guarantees, :contract_value, :contract_validity, :signature_date, :presence => true
   validates :end_date, :budget_structure, :budget_structure_responsible, :kind, :presence => true
   validates :parent, :presence => true, :if => :amendment?
@@ -52,8 +52,8 @@ class Contract < Compras::Model
   orderize "id DESC"
   filterize
 
-  scope :founded, joins { service_or_contract_type }.where { service_or_contract_type.service_goal.eq(ServiceGoal::FOUNDED) }
-  scope :management, joins { service_or_contract_type }.where { service_or_contract_type.service_goal.eq(ServiceGoal::CONTRACT_MANAGEMENT) }
+  scope :founded, joins { contract_type }.where { contract_type.service_goal.eq(ServiceGoal::FOUNDED) }
+  scope :management, joins { contract_type }.where { contract_type.service_goal.eq(ServiceGoal::CONTRACT_MANAGEMENT) }
 
   def to_s
     contract_number

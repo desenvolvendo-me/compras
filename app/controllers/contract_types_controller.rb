@@ -1,0 +1,2 @@
+class ContractTypesController < CrudController
+end

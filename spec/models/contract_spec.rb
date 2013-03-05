@@ -5,7 +5,7 @@ require 'app/models/contract'
 require 'app/models/pledge'
 require 'app/models/dissemination_source'
 require 'app/models/creditor'
-require 'app/models/service_or_contract_type'
+require 'app/models/contract_type'
 require 'app/models/licitation_process'
 require 'app/models/direct_purchase'
 require 'app/models/budget_structure'
@@ -23,7 +23,7 @@ describe Contract do
 
   it { should belong_to :dissemination_source }
   it { should belong_to :creditor }
-  it { should belong_to :service_or_contract_type }
+  it { should belong_to :contract_type }
   it { should belong_to :licitation_process }
   it { should belong_to :direct_purchase }
   it { should belong_to :budget_structure }
@@ -61,7 +61,7 @@ describe Contract do
   it { should validate_presence_of :budget_structure }
   it { should validate_presence_of :budget_structure_responsible }
   it { should validate_presence_of :kind }
-  it { should validate_presence_of :service_or_contract_type }
+  it { should validate_presence_of :contract_type }
 
   it { should allow_value('2012').for(:year) }
   it { should_not allow_value('201a').for(:year) }

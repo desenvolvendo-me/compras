@@ -11,7 +11,7 @@ Material.blueprint(:antivirus) do
   storable { true }
   combustible { false }
   material_characteristic { "material" }
-  service_or_contract_type { ServiceOrContractType.make!(:reparos) }
+  contract_type { ContractType.make!(:reparos) }
   material_type { 'consumption' }
   expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
 end
@@ -28,7 +28,7 @@ Material.blueprint(:office) do
   storable { true }
   combustible { false }
   material_characteristic { "material" }
-  service_or_contract_type { ServiceOrContractType.make!(:reparos) }
+  contract_type { ContractType.make!(:reparos) }
   material_type { 'consumption' }
   expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
 end
@@ -45,7 +45,7 @@ Material.blueprint(:arame_farpado) do
   storable { true }
   combustible { false }
   material_characteristic { "material" }
-  service_or_contract_type { ServiceOrContractType.make!(:reparos) }
+  contract_type { ContractType.make!(:reparos) }
   material_type { 'consumption' }
   expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
 end
@@ -60,7 +60,7 @@ Material.blueprint(:arame_comum) do
   storable { true }
   combustible { false }
   material_characteristic { "material" }
-  service_or_contract_type { ServiceOrContractType.make!(:reparos) }
+  contract_type { ContractType.make!(:reparos) }
   material_type { 'consumption' }
   expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
 end
@@ -72,7 +72,7 @@ Material.blueprint(:manutencao) do
   detailed_description { "Manutenção de Computadores" }
   reference_unit { ReferenceUnit.make!(:unidade) }
   material_characteristic { MaterialCharacteristic::SERVICE }
-  service_or_contract_type { ServiceOrContractType.make!(:reparos) }
+  contract_type { ContractType.make!(:reparos) }
   material_type { 'consumption' }
   expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
 end

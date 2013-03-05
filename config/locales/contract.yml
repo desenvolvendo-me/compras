@@ -16,7 +16,7 @@ pt-BR:
         dissemination_source: 'Local de publicação'
         content: 'Objeto do contrato'
         creditor: 'Fornecedor'
-        service_or_contract_type: 'Tipo de contrato'
+        contract_type: 'Tipo de contrato'
         execution_type: 'Forma de execução'
         contract_guarantees: 'Garantias do contrato'
         contract_value: 'Valor do contrato'

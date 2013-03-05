@@ -54,11 +54,11 @@ describe Material do
   end
 
   it "should validate presence of service_or_contract_type only if material_characteristic is service" do
-    expect(subject).not_to validate_presence_of(:service_or_contract_type)
+    expect(subject).not_to validate_presence_of(:contract_type)
 
     subject.material_characteristic = MaterialCharacteristic::SERVICE
 
-    expect(subject).to validate_presence_of(:service_or_contract_type)
+    expect(subject).to validate_presence_of(:contract_type)
   end
 
   it "should have false as the default value of perishable" do

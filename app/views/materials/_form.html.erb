@@ -59,7 +59,7 @@
   </div>
 
   <div class="yui3-u-1-2">
-    <%= f.input :service_or_contract_type, :disabled => !f.object.service? %>
+    <%= f.input :contract_type, :disabled => !f.object.service? %>
   </div>
 </div>
 
@@ -93,7 +93,7 @@
     } else if (characteristicValue == 'service') {
       $("#material_material_type").attr('disabled', true)
                                   .requiredField(false);
-      $("#material_service_or_contract_type").attr('disabled', false)
+      $("#material_contract_type").attr('disabled', false)
                                              .requiredField(true);
     }
   };

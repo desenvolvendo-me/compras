@@ -57,7 +57,7 @@ menu:
     - document_types
     - delivery_locations
     - payment_methods
-    - service_or_contract_types
+    - contract_types
     - administration_types
 
   - purchasing_processes:

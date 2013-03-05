@@ -14,7 +14,7 @@ feature "Materials" do
     click_link 'Criar Material'
 
     expect(page).to have_disabled_field 'Tipo de material'
-    expect(page).to have_disabled_field 'Tipo de serviço'
+    expect(page).to have_disabled_field 'Tipo de contrato'
 
     fill_with_autocomplete 'Classe', :with => 'Software'
     fill_in 'Descrição', :with => 'Caixa'
@@ -27,13 +27,13 @@ feature "Materials" do
 
     # testing javascript
     select 'Material', :from => 'Característica'
-    expect(page).to have_disabled_field 'Tipo de serviço'
+    expect(page).to have_disabled_field 'Tipo de contrato'
 
     select 'Serviço', :from => 'Característica'
     expect(page).to have_disabled_field 'Tipo de material'
     # end of javascript test
 
-    fill_modal 'Tipo de serviço', :with => 'Contratação de estagiários', :field => 'Descrição'
+    fill_modal 'Tipo de contrato', :with => 'Contratação de estagiários', :field => 'Descrição'
     fill_modal 'Natureza da despesa', :with => '3.0.10.01.12', :field => 'Natureza da despesa'
 
     click_button 'Salvar'
@@ -52,7 +52,7 @@ feature "Materials" do
     expect(page).to have_checked_field 'Material estocável'
     expect(page).to_not have_checked_field 'Material combustível'
     expect(page).to have_select 'Característica', :selected => 'Serviço'
-    expect(page).to have_field 'Tipo de serviço', :with => 'Contratação de estagiários'
+    expect(page).to have_field 'Tipo de contrato', :with => 'Contratação de estagiários'
     expect(page).to have_disabled_field 'Tipo de material'
     expect(page).to have_field 'Natureza da despesa', :with => '3.0.10.01.12 - Vencimentos e Salários'
   end
@@ -75,7 +75,7 @@ feature "Materials" do
 
     select 'Serviço', :from => 'Característica'
 
-    fill_modal 'Tipo de serviço', :with => 'Contratação de estagiários', :field => 'Descrição'
+    fill_modal 'Tipo de contrato', :with => 'Contratação de estagiários', :field => 'Descrição'
     fill_modal 'Natureza da despesa', :with => '3.0.10.01.12', :field => 'Natureza da despesa'
 
     click_button 'Salvar'
@@ -115,7 +115,7 @@ feature "Materials" do
     select 'Material', :from => 'Característica'
 
     # testing javascript
-    expect(page).to have_disabled_field 'Tipo de serviço'
+    expect(page).to have_disabled_field 'Tipo de contrato'
     # end of javascript test
 
     select 'De consumo', :from => 'Tipo de material'
@@ -138,7 +138,7 @@ feature "Materials" do
     expect(page).to_not have_checked_field 'Material estocável'
     expect(page).to have_checked_field 'Material combustível'
     expect(page).to have_select 'Característica', :selected => 'Material'
-    expect(page).to have_disabled_field 'Tipo de serviço'
+    expect(page).to have_disabled_field 'Tipo de contrato'
     expect(page).to have_select 'Tipo de material', :selected => 'De consumo'
     expect(page).to have_field 'Natureza da despesa', :with => '3.0.10.01.11 - Compra de Material'
   end
@@ -188,9 +188,9 @@ feature "Materials" do
 
     select 'Serviço', :from => "Característica"
 
-    expect(page).to have_field 'Tipo de serviço', :with => ''
+    expect(page).to have_field 'Tipo de contrato', :with => ''
 
-    fill_modal 'Tipo de serviço', :with => 'Reparos', :field => 'Descrição'
+    fill_modal 'Tipo de contrato', :with => 'Reparos', :field => 'Descrição'
 
     click_button 'Salvar'
 
@@ -270,7 +270,7 @@ feature "Materials" do
   def make_dependencies!
     MaterialsClass.make!(:software)
     ReferenceUnit.make!(:unidade)
-    ServiceOrContractType.make!(:trainees)
+    ContractType.make!(:trainees)
     ExpenseNature.make!(:vencimento_e_salarios)
   end
 end
