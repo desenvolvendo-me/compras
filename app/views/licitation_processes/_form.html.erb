@@ -1,37 +1,28 @@
 <div class="tabs">
   <ul>
-    <li>
-      <a href="#main">Principal</a>
-    </li>
+    <li><a href="#tab-main">Principal</a></li>
+    <li><a href="#tab-requestor">Solicitantes</a></li>
+    <li><a href="#tab-periods">Prazos</a></li>
+    <li><a href="#tab-budgets">Orçamento</a></li>
+    <li><a href="#tab-items">Itens / Justificativa</a></li>
+    <li><a href="#tab-income">Receita</a></li>
 
-    <li>
-      <a href="#documents">Documentos</a>
-    </li>
-
-    <li>
-      <a href="#budget_allocations">Dotações orçamentárias</a>
-    </li>
-
-    <li>
-      <a href="#calculation_configuration">Configuração da apuração</a>
-    </li>
+    <li><a href="#tab-documents">Documentos</a></li>
+    <li><a href="#tab-budget_allocations">Dotações orçamentárias</a></li>
+    <li><a href="#tab-calculation_configuration">Configuração da apuração</a></li>
   </ul>
 
-  <div id="main">
-    <%= render 'main', :f => f %>
-  </div>
+  <div id="tab-main"><%= render 'main', :f => f %></div>
+  <div id="tab-requestor"><%= render 'requestor', :f => f %></div>
+  <div id="tab-periods"><%= render 'periods', :f => f %></div>
+  <div id="tab-budgets"><%= render 'budgets', :f => f %></div>
+  <div id="tab-items"><%= render 'items', :f => f %></div>
+  <div id="tab-income"><%= render 'income', :f => f %></div>
 
-  <div id="documents">
-    <%= render 'documents', :f => f %>
-  </div>
 
-  <div id="budget_allocations">
-    <%= render 'budget_allocations', :f => f %>
-  </div>
-
-  <div id="calculation_configuration">
-    <%= render 'calculation_configuration', :f => f %>
-  </div>
+  <div id="tab-documents"><%= render 'documents', :f => f %></div>
+  <div id="tab-budget_allocations"><%= render 'budget_allocations', :f => f %></div>
+  <div id="tab-calculation_configuration"><%= render 'calculation_configuration', :f => f %></div>
 </div>
 
 <script>
