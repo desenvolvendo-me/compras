@@ -12,7 +12,6 @@ builder resource, json do
   json.execution_type_humanize      resource.execution_type_humanize
   json.contract_guarantees_humanize resource.contract_guarantees_humanize
 
-
   json.items resource.items do |json, item|
     json.id                   item.id
     json.material_id          item.material_id
