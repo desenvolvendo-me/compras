@@ -131,9 +131,9 @@
   function disableBudgetAllocations() {
     $("#budget_allocations :input").attr("readonly", "readonly");
     $("#budget_allocations .modal").attr("disabled", "disabled");
-    $("#budget_allocations .auto_complete").attr("disabled", "disabled");
-    $("#budget_allocations .auto_complete").addClass("disabled_auto_complete");
-    $("#budget_allocations .auto_complete").removeClass("auto_complete");
+    $("#budget_allocations .auto_complete").attr("disabled", "disabled")
+                                           .addClass("disabled_auto_complete")
+                                           .removeClass("auto_complete");
     $("#budget_allocations .remove-item").hide();
     $("#budget_allocations .remove-administrative-process-budget-allocation").hide();
     $("#budget_allocations .add-administrative-process-budget-allocation").hide();
@@ -143,9 +143,9 @@
   function enableBudgetAllocations() {
     $("#budget_allocations .add-administrative-process-budget-allocation").attr("disabled", false);
     $("#budget_allocations .add-administrative-process-budget-allocation").show();
-    $("#budget_allocations .disabled_auto_complete").attr("disabled", false);
-    $("#budget_allocations .disabled_auto_complete").addClass("auto_complete");
-    $("#budget_allocations .disabled_auto_complete").removeClass("disabled_auto_complete");
+    $("#budget_allocations .disabled_auto_complete").attr("disabled", false)
+                                                    .addClass("auto_complete")
+                                                    .removeClass("disabled_auto_complete");
   }
 
   function disablePurchaseSolicitation() {
