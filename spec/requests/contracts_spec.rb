@@ -19,12 +19,13 @@ feature "Contracts" do
     expect(page).to have_field 'Objeto do contrato', :with => 'Licitação para compra de carteiras'
     expect(page).to have_disabled_field 'Modalidade'
     expect(page).to have_field 'Modalidade', :with => 'Convite'
-    expect(page).to have_disabled_field 'Forma de execução'
-    expect(page).to have_field 'Forma de execução', :with => 'Empreitada integral'
+    expect(page).to have_disabled_field 'Forma de execução', :with => 'Empreitada integral'
+    expect(page).to have_disabled_field 'Garantias do contrato', :with => 'Fiança bancária'
 
     clear_modal 'Processo licitatório'
     expect(page).to have_field 'Modalidade', :with => ''
     expect(page).to have_field 'Forma de execução', :with => ''
+    expect(page).to have_field 'Garantias do contrato', :with => ''
     expect(page).to have_field 'Processo licitatório', :with => ''
     expect(page).to have_field 'Compra direta', :with => ''
   end
@@ -42,8 +43,8 @@ feature "Contracts" do
     expect(page).to have_field 'Objeto do contrato', :with => ''
     expect(page).to have_disabled_field 'Modalidade'
     expect(page).to have_field 'Modalidade', :with => 'Material ou serviços'
-    expect(page).to have_disabled_field 'Forma de execução'
-    expect(page).to have_field 'Forma de execução', :with => ''
+    expect(page).to have_disabled_field 'Forma de execução', :with => ''
+    expect(page).to have_disabled_field 'Garantias do contrato', :with => ''
   end
 
   scenario 'selecting a amendment contract, submeting with error, the main contract should still enabled' do
@@ -79,6 +80,7 @@ feature "Contracts" do
     expect(page).to have_disabled_field 'Contrato principal'
     expect(page).to have_disabled_field 'Modalidade'
     expect(page).to have_disabled_field 'Forma de execução'
+    expect(page).to have_disabled_field 'Garantias do contrato'
 
     select 'Aditivo', :from => 'Tipo'
     expect(page).to_not have_disabled_field 'Contrato principal'
@@ -106,7 +108,6 @@ feature "Contracts" do
     fill_in 'Valor do contrato', :with => '1.000,00'
     fill_in 'Validade do contrato', :with => '12'
 
-    select 'Fiança bancária', :from => 'Garantias do contrato'
     select 'Sim', :from => 'Subcontratação'
 
     fill_modal 'Unidade orçamentária gestora responsável', :with => 'Secretaria de Educação', :field => 'Descrição'
@@ -145,10 +146,10 @@ feature "Contracts" do
     expect(page).to have_field 'Validade do contrato', :with => '12'
     expect(page).to have_field 'Fornecedor', :with => 'Gabriel Sobrinho'
 
-    expect(page).to have_select 'Garantias do contrato', :selected => 'Fiança bancária'
     expect(page).to have_select 'Subcontratação', :selected => 'Sim'
     expect(page).to have_field 'Modalidade', :with => 'Convite'
     expect(page).to have_field 'Forma de execução', :with => 'Empreitada integral'
+    expect(page).to have_field 'Garantias do contrato', :with => 'Fiança bancária'
     expect(page).to have_field 'Unidade orçamentária gestora responsável', :with => '1 - Secretaria de Educação'
     expect(page).to have_field 'Responsável pela unidade orçamentária gestora', :with => 'Wenderson Malheiros'
     expect(page).to have_field 'Advogado responsável pela gestão do contrato', :with => 'Wenderson Malheiros'

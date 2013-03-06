@@ -5,3 +5,4 @@ pt-BR:
       unit_price: 'Empreitada preço unitário'
       task: 'Tarefa'
       integral: 'Empreitada integral'
+      direct: 'Execução direta'

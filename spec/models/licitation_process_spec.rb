@@ -44,12 +44,12 @@ describe LicitationProcess do
   end
 
   it { should belong_to :capability }
-  it { should belong_to :payment_method }
-  it { should belong_to :readjustment_index }
-  it { should belong_to :judgment_form }
   it { should belong_to :delivery_location }
+  it { should belong_to :judgment_form }
+  it { should belong_to :payment_method }
   it { should belong_to :purchase_solicitation }
   it { should belong_to :purchase_solicitation_item_group }
+  it { should belong_to :readjustment_index }
   it { should belong_to :responsible }
 
   it { should have_and_belong_to_many(:document_types) }
@@ -74,22 +74,23 @@ describe LicitationProcess do
 
   it { should have_one(:trading).dependent(:restrict) }
 
-  it { should validate_presence_of :year }
-  it { should validate_presence_of :process_date }
-  it { should validate_presence_of :period }
   it { should validate_presence_of :capability }
-  it { should validate_presence_of :pledge_type }
-  it { should validate_presence_of :type_of_calculation }
-  it { should validate_presence_of :execution_type }
-  it { should validate_presence_of :object_type }
-  it { should validate_presence_of :modality }
-  it { should validate_presence_of :judgment_form_id }
-  it { should validate_presence_of :responsible }
+  it { should validate_presence_of :contract_guarantees }
   it { should validate_presence_of :description }
+  it { should validate_presence_of :execution_type }
   it { should validate_presence_of :expiration }
   it { should validate_presence_of :expiration_unit }
-  it { should validate_presence_of :period_unit }
+  it { should validate_presence_of :judgment_form_id }
+  it { should validate_presence_of :modality }
+  it { should validate_presence_of :object_type }
   it { should validate_presence_of :payment_method }
+  it { should validate_presence_of :period }
+  it { should validate_presence_of :period_unit }
+  it { should validate_presence_of :pledge_type }
+  it { should validate_presence_of :process_date }
+  it { should validate_presence_of :responsible }
+  it { should validate_presence_of :type_of_calculation }
+  it { should validate_presence_of :year }
 
   it { should_not validate_presence_of :envelope_opening_date }
   it { should_not validate_presence_of :envelope_opening_time }

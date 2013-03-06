@@ -13,7 +13,6 @@ Contract.blueprint(:primeiro_contrato) do
   creditor { Creditor.make!(:sobrinho) }
   contract_value { 1000 }
   contract_validity { 12 }
-  contract_guarantees { ContractGuarantees::BANK }
   subcontracting { true }
   budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
   budget_structure_responsible { Employee.make!(:wenderson) }
@@ -38,7 +37,6 @@ Contract.blueprint(:segundo_contrato) do
   creditor { Creditor.make!(:sobrinho) }
   contract_value { 1000 }
   contract_validity { 12 }
-  contract_guarantees { ContractGuarantees::BANK }
   subcontracting { false }
   budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
   budget_structure_responsible { Employee.make!(:wenderson) }
@@ -62,7 +60,6 @@ Contract.blueprint(:contrato_detran) do
   contract_value { 1000 }
   contract_validity { 12 }
   dissemination_source { DisseminationSource.make!(:jornal_municipal) }
-  contract_guarantees { ContractGuarantees::BANK }
   subcontracting { true }
   budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
   budget_structure_responsible { Employee.make!(:wenderson) }
@@ -85,7 +82,6 @@ Contract.blueprint(:contrato_educacao) do
   contract_value { 1000 }
   contract_validity { 12 }
   dissemination_source { DisseminationSource.make!(:jornal_municipal) }
-  contract_guarantees { ContractGuarantees::BANK }
   subcontracting { true }
   budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
   budget_structure_responsible { Employee.make!(:wenderson) }

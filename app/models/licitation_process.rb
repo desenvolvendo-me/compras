@@ -12,7 +12,8 @@ class LicitationProcess < Compras::Model
                   :responsible_id, :purchase_solicitation_id, :object_type,
                   :date, :protocol, :item, :purchase_solicitation_item_group_id,
                   :summarized_object, :modality, :description, :pledge_type,
-                  :administrative_process_budget_allocations_attributes
+                  :administrative_process_budget_allocations_attributes,
+                  :contract_guarantees
 
   auto_increment :process, :by => :year
 
@@ -30,6 +31,7 @@ class LicitationProcess < Compras::Model
   has_enumeration_for :modality, :create_helpers => true, :create_scopes => true
   has_enumeration_for :object_type, :with => LicitationProcessObjectType,
                       :create_helpers => true
+  has_enumeration_for :contract_guarantees
 
   belongs_to :capability
   belongs_to :delivery_location
@@ -74,7 +76,7 @@ class LicitationProcess < Compras::Model
            :prefix => true
   delegate :licitation_kind, :to => :judgment_form, :allow_nil => true, :prefix => true
 
-  validates :process_date, :capability, :period,
+  validates :process_date, :capability, :period, :contract_guarantees,
             :period_unit, :expiration, :expiration_unit, :payment_method,
             :envelope_delivery_time, :year, :envelope_delivery_date,
             :pledge_type, :type_of_calculation, :execution_type, :object_type,

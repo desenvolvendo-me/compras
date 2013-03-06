@@ -7,34 +7,33 @@ pt-BR:
 
     attributes:
       contract:
-        sequential_number: 'Número sequencial'
-        year: "Ano do contrato"
-        entity: "Entidade"
-        contract_number: "Número do contrato"
-        parent: 'Contrato principal'
-        publication_date: 'Data de publicação'
-        dissemination_source: 'Local de publicação'
-        content: 'Objeto do contrato'
-        creditor: 'Fornecedor'
-        contract_type: 'Tipo de contrato'
-        execution_type: 'Forma de execução'
-        contract_guarantees: 'Garantias do contrato'
-        contract_value: 'Valor do contrato'
-        guarantee_value: 'Valor da garantia'
-        contract_validity: 'Validade do contrato'
-        subcontracting: 'Subcontratação'
-        signature_date: "Data da assinatura"
-        end_date: "Data de validade"
-        cancellation_date: 'Data de cancelamento'
-        cancellation_reason: 'Motivo do cancelamento'
-        licitation_process: 'Processo licitatório'
-        direct_purchase: 'Compra direta'
         budget_structure: 'Unidade orçamentária gestora responsável'
         budget_structure_responsible: 'Responsável pela unidade orçamentária gestora'
+        cancellation_date: 'Data de cancelamento'
+        cancellation_reason: 'Motivo do cancelamento'
+        content: 'Objeto do contrato'
+        contract_file: 'Contrato'
+        contract_guarantees_humanize: 'Garantias do contrato'
+        contract_number: "Número do contrato"
+        contract_type: 'Tipo de contrato'
+        contract_validity: 'Validade do contrato'
+        contract_value: 'Valor do contrato'
+        creditor: 'Fornecedor'
+        description: "Observações gerais"
+        direct_purchase: 'Compra direta'
+        dissemination_source: 'Local de publicação'
+        end_date: "Data de validade"
+        entity: "Entidade"
+        execution_type_humanize: "Forma de execução"
+        guarantee_value: 'Valor da garantia'
+        kind: "Tipo"
         lawyer: 'Advogado responsável pela gestão do contrato'
         lawyer_code: 'O.A.B. do advogado responsável'
-        description: "Observações gerais"
-        kind: "Tipo"
-        contract_file: 'Contrato'
+        licitation_process: 'Processo licitatório'
         modality_humanize: 'Modalidade'
-        execution_type_humanize: "Forma de execução"
+        parent: 'Contrato principal'
+        publication_date: 'Data de publicação'
+        sequential_number: 'Número sequencial'
+        signature_date: "Data da assinatura"
+        subcontracting: 'Subcontratação'
+        year: "Ano do contrato"

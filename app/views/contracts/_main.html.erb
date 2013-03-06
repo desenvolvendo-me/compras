@@ -47,10 +47,6 @@
   <div class='yui3-u-1-3'>
     <%= f.input :contract_type %>
   </div>
-
-  <div class='yui3-u-1-3'>
-    <%= f.input :contract_guarantees %>
-  </div>
 </div>
 
 <div class='yui3-g'>
@@ -89,13 +85,15 @@
   </div>
 </div>
 
+<%= f.input :licitation_process %>
+
 <div class='yui3-g'>
   <div class='yui3-u-1-2'>
-    <%= f.input :licitation_process %>
+    <%= f.input :execution_type_humanize, :disabled => true %>
   </div>
 
-  <div class='yui3-u-1-2'>
-    <%= f.input :execution_type_humanize, :disabled => true %>
+  <div class='yui3-u-1-3'>
+    <%= f.input :contract_guarantees_humanize, :disabled => true %>
   </div>
 </div>
 
@@ -129,6 +127,7 @@
     $('#contract_modality_humanize').val('');
     $('#contract_execution_type').val('');
     $('#contract_execution_type_humanize').val('');
+    $('#contract_contract_guarantees_humanize').val('');
   };
 
   $('#contract_kind').change(function (e) {
@@ -142,6 +141,7 @@
       $('#contract_content').val(licitationProcess.description);
       $('#contract_modality_humanize').val(licitationProcess.modality_humanize);
       $('#contract_execution_type_humanize').val(licitationProcess.execution_type_humanize);
+      $('#contract_contract_guarantees_humanize').val(licitationProcess.contract_guarantees_humanize);
     } else {
       clearModalityExecutionType();
     }

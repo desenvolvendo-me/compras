@@ -1,10 +1,13 @@
 class Contract < Compras::Model
-  attr_accessible :year, :contract_number, :sequential_number, :publication_date, :lawyer_code, :contract_file
-  attr_accessible :signature_date, :end_date, :description, :kind, :content, :contract_guarantees
-  attr_accessible :contract_value, :guarantee_value, :contract_validity, :subcontracting, :cancellation_date, :cancellation_reason
-  attr_accessible :dissemination_source_id, :creditor_id, :contract_type_id, :licitation_process_id
-  attr_accessible :direct_purchase_id, :budget_structure_id, :budget_structure_responsible_id, :lawyer_id, :parent_id
-  attr_accessible :delivery_schedules_attributes
+  attr_accessible :year, :contract_number, :sequential_number, :publication_date,
+                  :lawyer_code, :contract_file, :signature_date, :end_date,
+                  :description, :kind, :content, :contract_value,
+                  :guarantee_value, :contract_validity, :subcontracting,
+                  :cancellation_date, :cancellation_reason, :delivery_schedules_attributes,
+                  :dissemination_source_id, :creditor_id, :contract_type_id,
+                  :licitation_process_id, :direct_purchase_id,
+                  :budget_structure_id, :budget_structure_responsible_id,
+                  :lawyer_id, :parent_id
 
   attr_modal :year, :contract_number, :sequential_number, :signature_date
 
@@ -12,34 +15,33 @@ class Contract < Compras::Model
   mount_uploader :contract_file, DocumentUploader
 
   has_enumeration_for :kind, :with => ContractKind, :create_helpers => true
-  has_enumeration_for :contract_guarantees
 
-  belongs_to :dissemination_source
-  belongs_to :creditor
-  belongs_to :contract_type
-  belongs_to :licitation_process
-  belongs_to :direct_purchase
   belongs_to :budget_structure
   belongs_to :budget_structure_responsible, :class_name => 'Employee'
+  belongs_to :contract_type
+  belongs_to :creditor
+  belongs_to :direct_purchase
+  belongs_to :dissemination_source
   belongs_to :lawyer, :class_name => 'Employee'
+  belongs_to :licitation_process
 
-  has_many :pledges, :dependent => :restrict
-  has_many :founded_debt_pledges, :class_name => 'Pledge', :dependent => :restrict, :foreign_key => 'founded_debt_contract_id'
   has_many :delivery_schedules, :dependent => :destroy, :order => :sequence
+  has_many :founded_debt_pledges, :class_name => 'Pledge', :dependent => :restrict, :foreign_key => 'founded_debt_contract_id'
   has_many :occurrence_contractual_historics, :dependent => :restrict
+  has_many :pledges, :dependent => :restrict
 
   has_one :contract_termination, :dependent => :restrict
 
   accepts_nested_attributes_for :delivery_schedules, :allow_destroy => true
 
-  delegate :execution_type_humanize, :to => :licitation_process, :allow_nil => true
+  delegate :execution_type_humanize, :contract_guarantees_humanize, :to => :licitation_process, :allow_nil => true
   delegate :modality_humanize, :to => :licitation_process, :allow_nil => true, :prefix => true
   delegate :modality_humanize, :to => :direct_purchase, :allow_nil => true, :prefix => true
 
   validates :year, :mask => "9999", :allow_blank => true
   validates :sequential_number, :year, :contract_number, :publication_date, :presence => true
   validates :dissemination_source, :content, :creditor, :contract_type, :presence => true
-  validates :contract_guarantees, :contract_value, :contract_validity, :signature_date, :presence => true
+  validates :contract_value, :contract_validity, :signature_date, :presence => true
   validates :end_date, :budget_structure, :budget_structure_responsible, :kind, :presence => true
   validates :parent, :presence => true, :if => :amendment?
   validates :end_date, :timeliness => {

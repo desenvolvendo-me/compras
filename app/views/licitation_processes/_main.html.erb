@@ -25,11 +25,22 @@
     <%= f.input :object_type, :input_html => { :class => 'object-type-select' } %>
   </div>
 
-  <div class="yui3-u-1-2">
-    <%= f.input :modality, :collection => [] %>
+  <div class="yui3-u-1-5">
+    <%= f.input :execution_type %>
+  </div>
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-3">
+    <%= f.input :payment_method %>
   </div>
 
+  <div class="yui3-u-1-3">
+    <%= f.input :contract_guarantees %>
+  </div>
 </div>
+
+<%= f.input :modality, :collection => [] %>
 
 <%= f.input :purchase_solicitation, :modal_url => modal_purchase_solicitations_path(:can_be_grouped => true) %>
 <%= f.input :purchase_solicitation_item_group, :modal_url => modal_purchase_solicitation_item_groups_path(:not_annulled => true, :pending => true) %>
@@ -57,9 +68,6 @@
     <%= f.input :type_of_calculation %>
   </div>
 
-  <div class="yui3-u-1-5">
-    <%= f.input :execution_type %>
-  </div>
 </div>
 
 <div class="yui3-g">
@@ -131,9 +139,6 @@
 </div>
 
 <div class="yui3-g">
-  <div class="yui3-u-1-3">
-    <%= f.input :payment_method %>
-  </div>
 
   <div class="yui3-u-1-5">
     <%= f.input :caution_value %>

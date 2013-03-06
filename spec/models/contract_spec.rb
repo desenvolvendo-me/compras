@@ -4,6 +4,8 @@ require 'app/uploaders/document_uploader'
 require 'app/models/contract'
 require 'app/models/pledge'
 require 'app/models/dissemination_source'
+require 'app/models/persona/person'
+require 'app/models/person'
 require 'app/models/creditor'
 require 'app/models/contract_type'
 require 'app/models/licitation_process'
@@ -53,7 +55,6 @@ describe Contract do
   it { should validate_presence_of :dissemination_source }
   it { should validate_presence_of :content }
   it { should validate_presence_of :creditor }
-  it { should validate_presence_of :contract_guarantees }
   it { should validate_presence_of :contract_value }
   it { should validate_presence_of :contract_validity }
   it { should validate_presence_of :signature_date }
