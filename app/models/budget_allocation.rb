@@ -47,6 +47,11 @@ class BudgetAllocation < Compras::Model
 
   orderize :description
 
+  scope :term, lambda { |q|
+    joins { budget_structure }.
+    where { (budget_structure.full_code.like("#{q}%") | description.like("#{q}%")) }
+  }
+
   def self.filter(options)
     query = scoped
     query = query.where { budget_structure_id.eq(options[:budget_structure_id]) } if options[:budget_structure_id].present?

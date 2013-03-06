@@ -25,11 +25,11 @@ module Compras
 
       def input_html_options
         super.tap do |options|
-          options['data-auto-complete']     = true
-          options['data-source']          ||= source_path
-          options['data-hidden-field-id'] ||= hidden_field_id if hidden_field_id
-          options['data-hidden-field-value-attribute'] ||= hidden_field_value_attribute
-          options['data-max-results'] ||= max_results
+          options['data-auto-complete']                   = true
+          options['data-source']                        ||= source_path
+          options['data-hidden-field-id']               ||= hidden_field_id if hidden_field_id
+          options['data-hidden-field-value-attribute']  ||= hidden_field_value_attribute
+          options['data-max-results']                   ||= max_results
         end
       end
 
@@ -53,7 +53,7 @@ module Compras
       end
 
       def hidden_field_name
-        options.fetch(:hidden_field, attribute_name)
+        options.fetch(:hidden_field, "#{attribute_name}_id")
       end
 
       def hidden_field_id

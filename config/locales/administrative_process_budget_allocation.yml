@@ -13,3 +13,4 @@ pt-BR:
         budget_allocation_amount: "Saldo da dotação"
         value: "Valor previsto"
         total_items_value: "Valor total dos itens"
+        budget_allocation_id: "Dotação orçamentária"

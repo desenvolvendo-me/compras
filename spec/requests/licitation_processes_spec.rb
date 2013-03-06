@@ -84,7 +84,7 @@ feature "LicitationProcesses" do
     within_tab 'Dotações' do
       click_button 'Adicionar Dotação'
 
-      fill_modal 'Dotação orçamentária', :with => '1', :field => 'Código'
+      fill_with_autocomplete 'Dotação orçamentária', :with => 'Alocação'
 
       fill_in 'Valor previsto', :with => '20,00'
 

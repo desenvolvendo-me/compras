@@ -2,7 +2,7 @@
   <%= f.input :id, :as => 'hidden' %>
   <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
 
-  <%= f.input :budget_allocation, :input_html => { :class => "budget-allocation" } %>
+  <%= f.input :budget_allocation, :as => :auto_complete, :source_path => budget_allocations_path %>
 
   <div class="yui3-g">
     <div class="yui3-u-1-4">
