@@ -30,6 +30,7 @@ module Compras
           options['data-hidden-field-id']               ||= hidden_field_id if hidden_field_id
           options['data-hidden-field-value-attribute']  ||= hidden_field_value_attribute
           options['data-max-results']                   ||= max_results
+          options['data-min-length']                    ||= min_length
         end
       end
 
@@ -66,6 +67,10 @@ module Compras
 
       def max_results
         options.fetch(:max_results, 10)
+      end
+
+      def min_length
+        options.fetch(:min_length, 3)
       end
 
       def index

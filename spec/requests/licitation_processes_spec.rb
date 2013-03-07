@@ -131,7 +131,6 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
       expect(page).to have_field 'Inciso', :with => 'Item 1'
 
-      expect(page).to have_checked_field 'Registro de preço'
       expect(page).to have_select 'Tipo da apuração', :selected => 'Menor preço total por item'
       expect(page).to have_select 'Forma de execução', :selected => 'Empreitada integral'
       expect(page).to have_select 'Tipo de garantia', :selected => 'Fiança bancária'
@@ -1549,7 +1548,6 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
       expect(page).to have_field 'Inciso', :with => 'Item 1'
 
-      check 'Registro de preço'
       expect(page).to have_select 'Tipo da apuração', :selected => 'Menor preço total por item'
       expect(page).to have_select 'Forma de execução', :selected => 'Empreitada integral'
       expect(page).to have_select 'Tipo de garantia', :selected => 'Fiança bancária'

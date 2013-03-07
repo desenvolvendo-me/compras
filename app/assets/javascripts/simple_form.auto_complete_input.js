@@ -3,11 +3,12 @@
     var input = $(this),
         hiddenInput = $('#' + input.data("hidden-field-id")),
         valueAttribute = input.data("hidden-field-value-attribute"),
-        maxResults = input.data("max-results");
+        maxResults = input.data("max-results"),
+        minLength  = input.data("min-length");
 
     input.autocomplete({
-      minLength: 3,
       delay: 500,
+      minLength: minLength,
 
       source: function(params, response) {
         params.limit = maxResults;

@@ -4,7 +4,7 @@
   <div class="yui3-u-2-3">
     <%= f.input :parent_class_number, :as => :auto_complete,
                 :source_path => materials_classes_path,
-                :hidden_field => 'parent_number', :max_results => 20,
+                :hidden_field => 'parent_number', :max_results => 20, :min_length => 1,
                 :input_html => { 'data-hidden-field-value-attribute' => 'filled_mask' } %>
   </div>
 
