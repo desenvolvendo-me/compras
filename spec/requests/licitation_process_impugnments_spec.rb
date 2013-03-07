@@ -32,10 +32,10 @@ feature "LicitationProcessImpugnments" do
     expect(page).to have_notice 'Impugnação do Processo de Compra criada com sucesso.'
 
     within_records do
-      click_link "1/2012 - #{I18n.l(Date.current + 2.days)}"
+      click_link "1/2012 - Convite 1 - #{I18n.l(Date.current + 2.days)}"
     end
 
-    expect(page).to have_field 'Processo de compra', :with => '1/2012'
+    expect(page).to have_field 'Processo de compra', :with => '1/2012 - Convite 1'
     expect(page).to have_field 'Data da impugnação', :with => I18n.l(Date.current + 2.days)
     expect(page).to have_select 'Referente ao', :selected => 'Pregão'
     expect(page).to have_field 'Autor', :with => 'Gabriel Sobrinho'
@@ -57,7 +57,7 @@ feature "LicitationProcessImpugnments" do
     navigate 'Processos de Compra > Impugnações dos Processos Licitatórios'
 
     within_records do
-      click_link "1/2012 - 01/04/2012"
+      click_link "1/2012 - Convite 1 - 01/04/2012"
     end
 
     fill_in 'Data da impugnação', :with => I18n.l(Date.current + 1.year + 2.days)
@@ -75,10 +75,10 @@ feature "LicitationProcessImpugnments" do
     expect(page).to have_notice 'Impugnação do Processo de Compra editada com sucesso.'
 
     within_records do
-      click_link "1/2012 - #{I18n.l(Date.current + 1.year + 2.days)}"
+      click_link "1/2012 - Convite 1 - #{I18n.l(Date.current + 1.year + 2.days)}"
     end
 
-    expect(page).to have_field 'Processo de compra', :with => '1/2012'
+    expect(page).to have_field 'Processo de compra', :with => '1/2012 - Convite 1'
     expect(page).to have_field 'Data da impugnação', :with => I18n.l(Date.current + 1.year + 2.days)
     expect(page).to have_select 'Referente ao', :selected => 'Pregão'
     expect(page).to have_field 'Autor', :with => 'Gabriel Sobrinho'
@@ -99,7 +99,7 @@ feature "LicitationProcessImpugnments" do
     navigate 'Processos de Compra > Impugnações dos Processos Licitatórios'
 
     within_records do
-      click_link '1/2012 - 01/04/2012'
+      click_link '1/2012 - Convite 1 - 01/04/2012'
     end
 
     expect(page).to have_disabled_field 'Processo de compra'
@@ -123,7 +123,7 @@ feature "LicitationProcessImpugnments" do
     navigate 'Processos de Compra > Impugnações dos Processos Licitatórios'
 
     within_records do
-      click_link '1/2012 - 01/04/2012'
+      click_link '1/2012 - Convite 1 - 01/04/2012'
     end
 
     expect(page).to_not have_link "Apagar"
@@ -150,7 +150,7 @@ feature "LicitationProcessImpugnments" do
     navigate 'Processos de Compra > Impugnações dos Processos Licitatórios'
 
     within_records do
-      click_link '1/2012 - 01/04/2012'
+      click_link '1/2012 - Convite 1 - 01/04/2012'
     end
 
     clear_modal 'Processo de compra'

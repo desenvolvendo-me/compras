@@ -17,8 +17,9 @@ class LicitationProcess < Compras::Model
                   :type_of_removal, :is_trading
 
   auto_increment :process, :by => :year
+  auto_increment :modality_number, :by => [:year, :modality]
 
-  attr_readonly :process, :year, :licitation_number
+  attr_readonly :process, :year, :licitation_number, :modality_number
 
   attr_modal :process, :year, :process_date, :licitation_number
 
@@ -137,7 +138,7 @@ class LicitationProcess < Compras::Model
   end
 
   def to_s
-    "#{process}/#{year}"
+    "#{process}/#{year} - #{modality_humanize} #{modality_number}"
   end
 
   def update_status(status)

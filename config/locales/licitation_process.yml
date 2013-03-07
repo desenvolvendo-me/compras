@@ -36,6 +36,7 @@ pt-BR:
         legal_advice_date: "Data do parecer"
         licitation_number: "Número da licitação"
         modality: "Modalidade"
+        modality_number: "Número da Modalidade"
         object_type: "Tipo de objeto"
         observations: "Observações gerais"
         payment_method: "Forma de pagamento"

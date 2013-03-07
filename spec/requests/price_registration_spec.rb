@@ -93,7 +93,11 @@ feature "PriceRegistration" do
       expect(page).to have_field 'Data', :with => '05/04/2012'
       expect(page).to have_field 'Data da validade', :with => '05/04/2013'
       expect(page).to have_select 'Situação', :selected => 'Ativo'
+<<<<<<< HEAD
       expect(page).to have_field 'Processo de compra', :with => '1/2012'
+=======
+      expect(page).to have_field 'Processo licitatório', :with => '1/2012 - Convite 1'
+>>>>>>> Adicionado auto increment de modality_number em Licitation Process
       expect(page).to have_field 'Objeto', :with => 'Aquisição de combustíveis'
       expect(page).to have_field 'Local de entrega', :with => 'Secretaria da Educação'
       expect(page).to have_field 'Unidade gestora', :with => 'Unidade Central'
@@ -189,7 +193,11 @@ feature "PriceRegistration" do
       expect(page).to have_field 'Data', :with => '05/04/2013'
       expect(page).to have_field 'Data da validade', :with => '05/04/2014'
       expect(page).to have_select 'Situação', :selected => 'Ativo'
+<<<<<<< HEAD
       expect(page).to have_field 'Processo de compra', :with => '1/2012'
+=======
+      expect(page).to have_field 'Processo licitatório', :with => '1/2012 - Convite 1'
+>>>>>>> Adicionado auto increment de modality_number em Licitation Process
       expect(page).to have_field 'Objeto', :with => 'Aquisição de combustíveis'
       expect(page).to have_field 'Local de entrega', :with => 'Secretaria da Educação'
       expect(page).to have_field 'Unidade gestora', :with => 'Unidade Central'

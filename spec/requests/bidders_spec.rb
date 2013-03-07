@@ -47,7 +47,7 @@ feature "Bidders" do
 
     click_link 'Criar Licitante'
 
-    expect(page).to have_field 'Processo de compra', :with => '2/2013'
+    expect(page).to have_field 'Processo de compra', :with => '2/2013 - Convite 1'
     expect(page).to have_field 'Data do processo licitatório', :with => '20/03/2013'
     expect(page).to have_checked_field 'Apresentará nova proposta em caso de empate'
 
@@ -100,7 +100,7 @@ feature "Bidders" do
       click_link 'Gabriel Sobrinho'
     end
 
-    expect(page).to have_field 'Processo de compra', :with => '2/2013'
+    expect(page).to have_field 'Processo de compra', :with => '2/2013 - Convite 1'
     expect(page).to have_field 'Data do processo licitatório', :with => '20/03/2013'
     expect(page).to have_field 'Fornecedor', :with => 'Gabriel Sobrinho'
     expect(page).to have_field 'Pontuação técnica', :with => '10,00'
@@ -162,7 +162,7 @@ feature "Bidders" do
       click_link 'Wenderson Malheiros'
     end
 
-    expect(page).to have_field 'Processo de compra', :with => '2/2013'
+    expect(page).to have_field 'Processo de compra', :with => '2/2013 - Convite 1'
     expect(page).to have_field 'Data do processo licitatório', :with => '20/03/2013'
 
     fill_modal 'Fornecedor', :with => 'Gabriel Sobrinho'
@@ -211,7 +211,7 @@ feature "Bidders" do
       click_link 'Gabriel Sobrinho'
     end
 
-    expect(page).to have_field 'Processo de compra', :with => '2/2013'
+    expect(page).to have_field 'Processo de compra', :with => '2/2013 - Convite 1'
     expect(page).to have_field 'Data do processo licitatório', :with => '20/03/2013'
 
     expect(page).to_not have_checked_field 'Apresentará nova proposta em caso de empate'
@@ -348,7 +348,7 @@ feature "Bidders" do
       click_link 'Wenderson Malheiros'
     end
 
-    expect(page).to have_field 'Processo de compra', :with => '2/2013'
+    expect(page).to have_field 'Processo de compra', :with => '2/2013 - Convite 1'
     expect(page).to have_field 'Data do processo licitatório', :with => '20/03/2013'
     expect(page).to have_field 'Fornecedor', :with => 'Wenderson Malheiros'
     expect(page).to have_field 'Protocolo', :with => '123456'
@@ -511,7 +511,7 @@ feature "Bidders" do
       click_link 'Wenderson Malheiros'
     end
 
-    expect(page).to have_field 'Processo de compra', :with => '2/2013'
+    expect(page).to have_field 'Processo de compra', :with => '2/2013 - Convite 1'
     expect(page).to have_field 'Data do processo licitatório', :with => '20/03/2013'
     expect(page).to have_field 'Fornecedor', :with => 'Wenderson Malheiros'
     expect(page).to have_field 'Protocolo', :with => '123456'
@@ -655,7 +655,7 @@ feature "Bidders" do
       click_link 'Wenderson Malheiros'
     end
 
-    expect(page).to have_field 'Processo de compra', :with => '2/2013'
+    expect(page).to have_field 'Processo de compra', :with => '2/2013 - Convite 1'
     expect(page).to have_field 'Data do processo licitatório', :with => '20/03/2013'
     expect(page).to have_field 'Fornecedor', :with => 'Wenderson Malheiros'
     expect(page).to have_field 'Protocolo', :with => '123456'

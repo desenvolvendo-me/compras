@@ -79,7 +79,7 @@ feature "Tradings" do
     within_tab "Principal" do
       expect(page).to have_field "Número", :with => "1"
       expect(page).to have_field "Ano", :with => "2012"
-      expect(page).to have_field "Processo de compra", :with => "1/2012"
+      expect(page).to have_field "Processo de compra", :with => "1/2012 - Pregão 1"
       expect(page).to have_field "Órgão/Entidade", :with => "Detran"
       expect(page).to have_field "Unidade licitante", :with => "Secretaria de Educação"
       expect(page).to have_field "Objeto resumido", :with => "Descrição resumida do objeto"
@@ -164,7 +164,7 @@ feature "Tradings" do
       click_button "Pesquisar"
 
       within_records do
-        expect(page).not_to have_content '1/2012'
+        expect(page).not_to have_content '1/2012 - Convite 1'
       end
 
       click_link "Voltar"

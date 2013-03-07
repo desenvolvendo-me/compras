@@ -52,50 +52,49 @@ module SequenceGenerator
       self.sequencer_callback = options.fetch(:on, :before_create)
       self.query_scope = options[:scope]
 
-      set_sequence_updater_callback
+      create_instance_methods
+
+      self.send(sequencer_callback, "set_next_sequence_for_#{sequencer_field}")
     end
 
-    protected
+    def create_instance_methods
+      class_eval %{
+        protected
 
-    def set_sequence_updater_callback
-      self.send(sequencer_callback, :set_next_sequence)
+        def set_next_sequence_for_#{sequencer_field}
+          return if sequence_value_for_#{sequencer_field}.present?
+
+          write_attribute(:#{sequencer_field}, next_sequence_for_#{sequencer_field})
+        end
+
+        def sequence_value_for_#{sequencer_field}
+          send :#{sequencer_field}
+        end
+
+        def sequence_query_for_#{sequencer_field}
+          query = self.class
+
+          if #{query_scope.nil? ? 'false' : 'true'}
+            query = query.send('#{query_scope}', self)
+          else
+            #{sequence_group.inspect}.each do |field|
+              field_value = read_attribute field
+
+              query = query.where(field => field_value)
+            end
+          end
+
+          query
+        end
+
+        def last_sequence_for_#{sequencer_field}
+          sequence_query_for_#{sequencer_field}.maximum('#{sequencer_field}').to_i
+        end
+
+        def next_sequence_for_#{sequencer_field}
+          last_sequence_for_#{sequencer_field}.succ
+        end
+      }
     end
-  end
-
-
-  protected
-
-  def set_next_sequence
-    return if sequence_value.present?
-
-    write_attribute(sequencer_field, next_sequence)
-  end
-
-  def sequence_value
-    send sequencer_field
-  end
-
-  def sequence_query
-    query = self.class
-
-    if query_scope
-      query = query.send(query_scope, self)
-    else
-      sequence_group.each do |field|
-        field_value = read_attribute field
-
-        query = query.where(field => field_value)
-      end
-    end
-
-    query
-  end
-
-  def last_sequence
-    sequence_query.maximum(sequencer_field).to_i
-  end
-
-  def next_sequence
-    last_sequence.succ
   end
 end

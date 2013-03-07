@@ -24,18 +24,18 @@ describe SequenceGenerator, 'ActiveRecord' do
       expect(BudgetAllocationWithoutOptions._create_callbacks.
                                      select { |cb| cb.kind.eql?(:before) }.
                                      collect(&:filter)).
-                                     to include(:set_next_sequence)
+                                     to include("(set_next_sequence_for_code)")
     end
 
     it 'should return the correct sequential number' do
       b = BudgetAllocationWithoutOptions.new(:description => 'description')
-      b.should_receive(:last_sequence).and_return(0)
+      b.should_receive(:last_sequence_for_code).and_return(0)
       b.save
 
       expect(b.code).to eq 1
 
       b = BudgetAllocationWithoutOptions.new(:description => 'description')
-      b.should_receive(:last_sequence).and_return(1)
+      b.should_receive(:last_sequence_for_code).and_return(1)
       b.save
 
       expect(b.code).to eq 2
@@ -62,7 +62,7 @@ describe SequenceGenerator, 'ActiveRecord' do
       expect(BudgetAllocationWithOptions._save_callbacks.
                                   select { |cb| cb.kind.eql?(:before) }.
                                   collect(&:filter)).
-                                  to include(:set_next_sequence)
+                                  to include("(set_next_sequence_for_code)")
     end
 
     it 'should force by to array' do
@@ -83,19 +83,19 @@ describe SequenceGenerator, 'ActiveRecord' do
 
     it 'should return the correct sequential number' do
       b = BudgetAllocationWithScope.new(:kind => 'little')
-      b.should_receive(:last_sequence).and_return(0)
+      b.should_receive(:last_sequence_for_code).and_return(0)
       b.save
 
       expect(b.code).to eq 1
 
       b = BudgetAllocationWithScope.new(:kind => 'little')
-      b.should_receive(:last_sequence).and_return(1)
+      b.should_receive(:last_sequence_for_code).and_return(1)
       b.save
 
       expect(b.code).to eq 2
 
       b = BudgetAllocationWithScope.new(:kind => 'big')
-      b.should_receive(:last_sequence).and_return(0)
+      b.should_receive(:last_sequence_for_code).and_return(0)
       b.save
 
       expect(b.code).to eq 1
