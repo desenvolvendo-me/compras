@@ -43,7 +43,7 @@ Compras::Application.configure do
   config.assets.allow_debugging = true
 
   # See everything in the log (default is :info)
-  config.log_level = :fatal
+  #config.log_level = :fatal
 
   config.action_mailer.default_url_options = { :host => 'localhost' }
 
