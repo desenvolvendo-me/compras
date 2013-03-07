@@ -1,6 +1,8 @@
 # encoding: utf-8
 require 'model_helper'
 require 'lib/signable'
+require 'app/models/persona/person'
+require 'app/models/person'
 require 'app/models/bidder'
 require 'app/models/bidder_proposal'
 require 'app/models/bidder_document'
