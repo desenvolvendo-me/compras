@@ -48,7 +48,7 @@ feature "LicitationProcesses" do
 
       choose 'Processo licitatório'
       fill_in 'Ano', :with => '2012'
-      fill_in 'Data do processo', :with => '21/03/2012'
+      fill_in 'Data da expedição', :with => '21/03/2012'
       select 'Global', :from => 'Tipo de empenho'
 
       select 'Compras e serviços', :from => 'Tipo de objeto'
@@ -119,7 +119,7 @@ feature "LicitationProcesses" do
 
       expect(page).to have_field 'Processo', :with => '1'
       expect(page).to have_field 'Ano', :with => '2012'
-      expect(page).to have_field 'Data do processo', :with => '21/03/2012'
+      expect(page).to have_field 'Data da expedição', :with => '21/03/2012'
       expect(page).to have_select 'Tipo de empenho', :selected => 'Global'
       expect(page).to_not have_disabled_field 'Data da abertura dos envelopes'
       expect(page).to_not have_disabled_field 'Hora da abertura'
@@ -238,7 +238,7 @@ feature "LicitationProcesses" do
     expect(page).to have_link 'Publicações'
 
     within_tab 'Principal' do
-      fill_in 'Data do processo', :with => '21/03/2013'
+      fill_in 'Data da expedição', :with => '21/03/2013'
       select 'Estimativo', :from => 'Tipo de empenho'
       select 'Menor preço total por item', :from => 'Tipo da apuração'
       select 'Empreitada integral', :from => 'Forma de execução'
@@ -260,7 +260,6 @@ feature "LicitationProcesses" do
       fill_in 'Data do contrato', :with => '31/03/2013'
       fill_in 'Validade do contrato (meses)', :with => '6'
       fill_in 'Observações gerais', :with => 'novas observacoes'
-      uncheck 'Registro de preço'
     end
 
     within_tab 'Documentos' do
@@ -295,7 +294,7 @@ feature "LicitationProcesses" do
     expect(page).to have_notice 'Processo Licitatório 1/2012 editado com sucesso.'
 
     within_tab 'Principal' do
-      expect(page).to have_field 'Data do processo', :with => '21/03/2013'
+      expect(page).to have_field 'Data da expedição', :with => '21/03/2013'
       expect(page).to have_select 'Tipo de empenho', :selected => 'Estimativo'
       expect(page).to have_select 'Tipo da apuração', :selected => 'Menor preço total por item'
       expect(page).to have_select 'Forma de execução', :selected => 'Empreitada integral'
@@ -317,7 +316,6 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Data do contrato', :with => '31/03/2013'
       expect(page).to have_field 'Validade do contrato (meses)', :with => '6'
       expect(page).to have_field 'Observações gerais', :with => 'novas observacoes'
-      expect(page).to_not have_checked_field 'Registro de preço'
     end
 
     within_tab 'Documentos' do
@@ -475,7 +473,7 @@ feature "LicitationProcesses" do
 
     within_tab 'Principal' do
       expect(page).to have_field 'Ano', :with => "#{Date.current.year}"
-      expect(page).to have_field 'Data do processo', :with => "#{I18n.l(Date.current)}"
+      expect(page).to have_field 'Data da expedição', :with => "#{I18n.l(Date.current)}"
     end
   end
 
@@ -665,7 +663,7 @@ feature "LicitationProcesses" do
 
     within_tab "Principal" do
       expect(page).to have_disabled_field "Forma de julgamento"
-      expect(page).to have_disabled_field "Data do processo"
+      expect(page).to have_disabled_field "Data da expedição"
       expect(page).to have_disabled_field "Fonte de recurso"
       expect(page).to have_disabled_field "Validade da proposta"
       expect(page).to have_disabled_field "Índice de reajuste"
@@ -1346,7 +1344,7 @@ feature "LicitationProcesses" do
       fill_modal 'Solicitação de compra', :with => '1', :field => 'Código'
       fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => "Descrição"
       fill_in 'Ano', :with => '2012'
-      fill_in 'Data do processo', :with => '21/03/2012'
+      fill_in 'Data da expedição', :with => '21/03/2012'
       select 'Compras e serviços', :from => 'Tipo de objeto'
       select 'Concorrência', :from => 'Modalidade'
       select 'Por Item com Melhor Técnica', :from =>'Forma de julgamento'
@@ -1452,7 +1450,7 @@ feature "LicitationProcesses" do
     within_tab 'Principal' do
       choose 'Processo licitatório'
       fill_in 'Ano', :with => '2012'
-      fill_in 'Data do processo', :with => '21/03/2012'
+      fill_in 'Data da expedição', :with => '21/03/2012'
       select 'Global', :from => 'Tipo de empenho'
 
       select 'Compras e serviços', :from => 'Tipo de objeto'
@@ -1541,7 +1539,7 @@ feature "LicitationProcesses" do
 
     within_tab 'Principal' do
       expect(page).to have_field 'Ano', :with => '2012'
-      expect(page).to have_field 'Data do processo', :with => '21/03/2012'
+      expect(page).to have_field 'Data da expedição', :with => '21/03/2012'
       expect(page).to have_select 'Tipo de empenho', :selected => 'Global'
 
       expect(page).to have_select 'Tipo de objeto', :selected => 'Compras e serviços'
@@ -2051,7 +2049,7 @@ feature "LicitationProcesses" do
     within_tab 'Principal' do
       choose 'Processo licitatório'
       fill_in 'Ano', :with => '2012'
-      fill_in 'Data do processo', :with => '21/03/2012'
+      fill_in 'Data da expedição', :with => '21/03/2012'
       select 'Global', :from => 'Tipo de empenho'
 
       select 'Compras e serviços', :from => 'Tipo de objeto'
@@ -2360,7 +2358,7 @@ feature "LicitationProcesses" do
     within_tab 'Principal' do
       choose 'Processo licitatório'
       fill_in 'Ano', :with => '2012'
-      fill_in 'Data do processo', :with => '07/03/2012'
+      fill_in 'Data da expedição', :with => '07/03/2012'
       fill_in 'Número do protocolo', :with => '00099/2012'
       select 'Global', :from => 'Tipo de empenho'
       select 'Compras e serviços', :from => 'Tipo de objeto'
@@ -2478,7 +2476,7 @@ feature "LicitationProcesses" do
     within_tab 'Principal' do
       choose 'Processo licitatório'
       fill_in 'Ano', :with => '2012'
-      fill_in 'Data do processo', :with => '21/03/2012'
+      fill_in 'Data da expedição', :with => '21/03/2012'
       select 'Global', :from => 'Tipo de empenho'
 
       select 'Compras e serviços', :from => 'Tipo de objeto'

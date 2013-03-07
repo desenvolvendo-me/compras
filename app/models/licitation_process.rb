@@ -13,7 +13,8 @@ class LicitationProcess < Compras::Model
                   :date, :protocol, :item, :purchase_solicitation_item_group_id,
                   :summarized_object, :modality, :description, :pledge_type,
                   :administrative_process_budget_allocations_attributes,
-                  :contract_guarantees, :extension_clause, :index_update_rate_id
+                  :contract_guarantees, :extension_clause, :index_update_rate_id,
+                  :type_of_removal, :is_trading
 
   auto_increment :process, :by => :year
 
@@ -30,8 +31,9 @@ class LicitationProcess < Compras::Model
   has_enumeration_for :period_unit, :with => PeriodUnit
   has_enumeration_for :pledge_type
   has_enumeration_for :status, :with => LicitationProcessStatus, :create_helpers => true
-  has_enumeration_for :type_of_purchase, :with => LicitationProcessTypeOfPurchase
   has_enumeration_for :type_of_calculation, :with => LicitationProcessTypeOfCalculation, :create_helpers => true
+  has_enumeration_for :type_of_purchase, :with => LicitationProcessTypeOfPurchase, :create_helpers => true
+  has_enumeration_for :type_of_removal
 
   belongs_to :capability
   belongs_to :delivery_location
@@ -81,8 +83,10 @@ class LicitationProcess < Compras::Model
             :period_unit, :expiration, :expiration_unit, :payment_method,
             :envelope_delivery_time, :year, :envelope_delivery_date,
             :pledge_type, :type_of_calculation, :execution_type, :object_type,
-            :modality, :judgment_form_id, :responsible, :description,
+            :judgment_form_id, :responsible, :description,
             :presence => true
+  validates :modality, :presence => true, :if => :licitation?
+  validates :type_of_removal, :presence => true, :if => :direct_purchase?
   validate :validate_type_of_calculation_by_judgment_form_kind
   validate :validate_type_of_calculation_by_object_type
   validate :validate_type_of_calculation_by_modality

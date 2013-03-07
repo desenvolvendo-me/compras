@@ -1,3 +1,8 @@
 .simple_form textarea.text.text-190 {
-    height: 190px;
+  height: 190px;
+}
+
+.hidden {
+  visibility: hidden;
+  height: 0px;
 }

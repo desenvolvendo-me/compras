@@ -28,6 +28,7 @@ pt-BR:
         extension_clause: "Cláusula de prorrogação"
         expiration: "Validade da proposta"
         expiration_unit: "Período da validade da proposta"
+        is_trading: "Pregão eletrônico"
         item: "Inciso"
         index_update_rate: "Índice de atualização"
         judgment_form_id: "Forma de julgamento"
@@ -43,7 +44,7 @@ pt-BR:
         pledge_type: "Tipo de empenho"
         price_registration: "Registro de preço"
         process: "Processo"
-        process_date: "Data do processo"
+        process_date: "Data da expedição"
         protocol: "Número do protocolo"
         purchase_solicitation: "Solicitação de compra"
         purchase_solicitation_item_group: "Agrupamento de solicitações de compra"
@@ -51,8 +52,9 @@ pt-BR:
         readjustment_index: "Índice de reajuste"
         responsible: "Responsável"
         summarized_object: "Objeto resumido do processo licitatório"
-        type_of_purchase: "Tipo da compra"
         type_of_calculation: "Tipo da apuração"
+        type_of_purchase: "Tipo da compra"
+        type_of_removal: "Tipo de afastamento"
         year: "Ano"
 
   licitation_process:

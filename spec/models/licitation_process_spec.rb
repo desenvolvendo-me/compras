@@ -81,7 +81,6 @@ describe LicitationProcess do
   it { should validate_presence_of :expiration }
   it { should validate_presence_of :expiration_unit }
   it { should validate_presence_of :judgment_form_id }
-  it { should validate_presence_of :modality }
   it { should validate_presence_of :object_type }
   it { should validate_presence_of :payment_method }
   it { should validate_presence_of :period }
@@ -95,6 +94,24 @@ describe LicitationProcess do
 
   it { should_not validate_presence_of :envelope_opening_date }
   it { should_not validate_presence_of :envelope_opening_time }
+  it { should_not validate_presence_of :modality }
+  it { should_not validate_presence_of :type_of_removal }
+
+  context "when is a licitation" do
+    before do
+      subject.type_of_purchase = LicitationProcessTypeOfPurchase::LICITATION
+    end
+
+    it { should validate_presence_of :modality }
+  end
+
+  context "when is a direct purchase" do
+    before do
+      subject.type_of_purchase = LicitationProcessTypeOfPurchase::DIRECT_PURCHASE
+    end
+
+    it { should validate_presence_of :type_of_removal }
+  end
 
   context "when updating a record" do
     before do

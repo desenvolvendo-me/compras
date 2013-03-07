@@ -1,0 +1,7 @@
+pt-BR:
+  enumerations:
+    type_of_removal:
+      removal_by_limit: "Dispensa por limite"
+      removal_justified: "Dispensa justificadas"
+      removal_by_ineligibility: "Inelegibilidade"
+      other_reasons_to_removal: "Demais afastamentos"
