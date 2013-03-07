@@ -89,6 +89,7 @@ describe LicitationProcess do
   it { should validate_presence_of :pledge_type }
   it { should validate_presence_of :process_date }
   it { should validate_presence_of :responsible }
+  it { should validate_presence_of :type_of_purchase }
   it { should validate_presence_of :type_of_calculation }
   it { should validate_presence_of :year }
 

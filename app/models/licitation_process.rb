@@ -1,5 +1,5 @@
 class LicitationProcess < Compras::Model
-  attr_accessible :capability_id, :payment_method_id,
+  attr_accessible :capability_id, :payment_method_id, :type_of_purchase,
                   :year, :process_date,:readjustment_index_id, :caution_value,
                   :legal_advice, :legal_advice_date, :contract_date,
                   :contract_expiration, :observations, :envelope_delivery_date,
@@ -32,6 +32,7 @@ class LicitationProcess < Compras::Model
   has_enumeration_for :object_type, :with => LicitationProcessObjectType,
                       :create_helpers => true
   has_enumeration_for :contract_guarantees
+  has_enumeration_for :type_of_purchase, :with => LicitationProcessTypeOfPurchase
 
   belongs_to :capability
   belongs_to :delivery_location
@@ -76,7 +77,7 @@ class LicitationProcess < Compras::Model
            :prefix => true
   delegate :licitation_kind, :to => :judgment_form, :allow_nil => true, :prefix => true
 
-  validates :process_date, :capability, :period, :contract_guarantees,
+  validates :process_date, :capability, :period, :contract_guarantees, :type_of_purchase,
             :period_unit, :expiration, :expiration_unit, :payment_method,
             :envelope_delivery_time, :year, :envelope_delivery_date,
             :pledge_type, :type_of_calculation, :execution_type, :object_type,

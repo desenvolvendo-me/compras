@@ -1,3 +1,5 @@
+<%= f.input :type_of_purchase, :as => :radio_buttons, :label => '', :label_html => {:class => 'inline' }, :item_wrapper_class => 'inline', :collection => LicitationProcessTypeOfPurchase.to_a %>
+
 <div class="yui3-g">
   <div class="yui3-u-1-4">
     <%= f.input :process, :disabled => true %>

@@ -46,6 +46,7 @@ feature "LicitationProcesses" do
       expect(page).to have_disabled_field 'Data da abertura dos envelopes'
       expect(page).to have_disabled_field 'Hora da abertura'
 
+      choose 'Processo licitatório'
       fill_in 'Ano', :with => '2012'
       fill_in 'Data do processo', :with => '21/03/2012'
       select 'Global', :from => 'Tipo de empenho'
@@ -202,6 +203,7 @@ feature "LicitationProcesses" do
     expect(page).to_not have_link 'Publicações'
 
     within_tab 'Principal' do
+      choose 'Processo licitatório'
       select 'Compras e serviços', :from => 'Tipo de objeto'
       select 'Concorrência', :from => 'Modalidade'
       select 'Por Lote com Melhor Técnica', :from => 'Forma de julgamento'
@@ -511,6 +513,7 @@ feature "LicitationProcesses" do
     click_link 'Criar Processo Licitatório'
 
     within_tab 'Principal' do
+      choose 'Processo licitatório'
       select 'Global', :from => 'Tipo de empenho'
 
       select 'Menor preço total por item', :from => 'Tipo da apuração'
@@ -1339,6 +1342,7 @@ feature "LicitationProcesses" do
     click_link 'Criar Processo Licitatório'
 
     within_tab 'Principal' do
+      choose 'Processo licitatório'
       fill_modal 'Solicitação de compra', :with => '1', :field => 'Código'
       fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => "Descrição"
       fill_in 'Ano', :with => '2012'
@@ -1446,6 +1450,7 @@ feature "LicitationProcesses" do
     click_link 'Criar Processo Licitatório'
 
     within_tab 'Principal' do
+      choose 'Processo licitatório'
       fill_in 'Ano', :with => '2012'
       fill_in 'Data do processo', :with => '21/03/2012'
       select 'Global', :from => 'Tipo de empenho'
@@ -2044,6 +2049,7 @@ feature "LicitationProcesses" do
     expect(page).to have_disabled_field 'Status'
 
     within_tab 'Principal' do
+      choose 'Processo licitatório'
       fill_in 'Ano', :with => '2012'
       fill_in 'Data do processo', :with => '21/03/2012'
       select 'Global', :from => 'Tipo de empenho'
@@ -2352,6 +2358,7 @@ feature "LicitationProcesses" do
     expect(page).to be_on_tab 'Principal'
 
     within_tab 'Principal' do
+      choose 'Processo licitatório'
       fill_in 'Ano', :with => '2012'
       fill_in 'Data do processo', :with => '07/03/2012'
       fill_in 'Número do protocolo', :with => '00099/2012'
@@ -2469,6 +2476,7 @@ feature "LicitationProcesses" do
     expect(page).to have_disabled_field 'Status'
 
     within_tab 'Principal' do
+      choose 'Processo licitatório'
       fill_in 'Ano', :with => '2012'
       fill_in 'Data do processo', :with => '21/03/2012'
       select 'Global', :from => 'Tipo de empenho'

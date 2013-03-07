@@ -1,5 +1,6 @@
 # encoding: utf-8
 LicitationProcess.blueprint(:processo_licitatorio) do
+  type_of_purchase { LicitationProcessTypeOfPurchase::LICITATION }
   process { 1 }
   protocol { '00088/2012' }
   object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
@@ -43,6 +44,7 @@ LicitationProcess.blueprint(:processo_licitatorio) do
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_computador) do
+  type_of_purchase { LicitationProcessTypeOfPurchase::LICITATION }
   process { 2 }
   protocol { '00089/2012' }
   object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
@@ -79,10 +81,12 @@ LicitationProcess.blueprint(:processo_licitatorio_computador) do
   bidders { [Bidder.make!(:licitante)] }
   type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM }
   execution_type { ExecutionType::INTEGRAL }
+  type_of_purchase { LicitationProcessTypeOfPurchase::LICITATION }
   contract_guarantees { ContractGuarantees::BANK }
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_fornecedores) do
+  type_of_purchase { LicitationProcessTypeOfPurchase::LICITATION }
   process { 1 }
   protocol { '00088/2012' }
   object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
@@ -122,6 +126,7 @@ LicitationProcess.blueprint(:processo_licitatorio_fornecedores) do
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_publicacao_cancelada) do
+  type_of_purchase { LicitationProcessTypeOfPurchase::LICITATION }
   process { 1 }
   protocol { '00088/2012' }
   object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
@@ -160,6 +165,7 @@ LicitationProcess.blueprint(:processo_licitatorio_publicacao_cancelada) do
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_canetas) do
+  type_of_purchase { LicitationProcessTypeOfPurchase::LICITATION }
   process { 2 }
   protocol { '00089/2012' }
   object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
@@ -201,6 +207,7 @@ LicitationProcess.blueprint(:processo_licitatorio_canetas) do
 end
 
 LicitationProcess.blueprint(:apuracao_por_itens) do
+  type_of_purchase { LicitationProcessTypeOfPurchase::LICITATION }
   process { 1 }
   protocol { '00088/2012' }
   object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
@@ -242,6 +249,7 @@ LicitationProcess.blueprint(:apuracao_por_itens) do
 end
 
 LicitationProcess.blueprint(:apuracao_por_lote) do
+  type_of_purchase { LicitationProcessTypeOfPurchase::LICITATION }
   process { 1 }
   protocol { '00088/2012' }
   object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
@@ -282,6 +290,7 @@ LicitationProcess.blueprint(:apuracao_por_lote) do
 end
 
 LicitationProcess.blueprint(:valor_maximo_ultrapassado) do
+  type_of_purchase { LicitationProcessTypeOfPurchase::LICITATION }
   process { 1 }
   protocol { '00088/2012' }
   object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
@@ -322,6 +331,7 @@ LicitationProcess.blueprint(:valor_maximo_ultrapassado) do
 end
 
 LicitationProcess.blueprint(:maior_lance_por_lote) do
+  type_of_purchase { LicitationProcessTypeOfPurchase::LICITATION }
   process { 1 }
   protocol { '00088/2012' }
   object_type { LicitationProcessObjectType::CALL_NOTICE }
@@ -362,6 +372,7 @@ LicitationProcess.blueprint(:maior_lance_por_lote) do
 end
 
 LicitationProcess.blueprint(:apuracao_global) do
+  type_of_purchase { LicitationProcessTypeOfPurchase::LICITATION }
   process { 1 }
   protocol { '00088/2012' }
   object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
@@ -402,6 +413,7 @@ LicitationProcess.blueprint(:apuracao_global) do
 end
 
 LicitationProcess.blueprint(:apuracao_global_empatou) do
+  type_of_purchase { LicitationProcessTypeOfPurchase::LICITATION }
   process { 1 }
   protocol { '00088/2012' }
   object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
@@ -442,6 +454,7 @@ LicitationProcess.blueprint(:apuracao_global_empatou) do
 end
 
 LicitationProcess.blueprint(:apuracao_global_sem_documentos) do
+  type_of_purchase { LicitationProcessTypeOfPurchase::LICITATION }
   process { 1 }
   protocol { '00088/2012' }
   object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
@@ -482,6 +495,7 @@ LicitationProcess.blueprint(:apuracao_global_sem_documentos) do
 end
 
 LicitationProcess.blueprint(:apuracao_global_small_company) do
+  type_of_purchase { LicitationProcessTypeOfPurchase::LICITATION }
   process { 1 }
   protocol { '00088/2012' }
   object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
@@ -522,6 +536,7 @@ LicitationProcess.blueprint(:apuracao_global_small_company) do
 end
 
 LicitationProcess.blueprint(:apuracao_global_small_company_without_new_proposal) do
+  type_of_purchase { LicitationProcessTypeOfPurchase::LICITATION }
   process { 1 }
   protocol { '00088/2012' }
   object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
@@ -562,6 +577,7 @@ LicitationProcess.blueprint(:apuracao_global_small_company_without_new_proposal)
 end
 
 LicitationProcess.blueprint(:apuracao_global_small_company_2) do
+  type_of_purchase { LicitationProcessTypeOfPurchase::LICITATION }
   process { 1 }
   protocol { '00088/2012' }
   object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
@@ -602,6 +618,7 @@ LicitationProcess.blueprint(:apuracao_global_small_company_2) do
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_nao_atualizavel) do
+  type_of_purchase { LicitationProcessTypeOfPurchase::LICITATION }
   process { 1 }
   protocol { '00088/2012' }
   object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
@@ -641,6 +658,7 @@ LicitationProcess.blueprint(:processo_licitatorio_nao_atualizavel) do
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_canetas_sem_lote) do
+  type_of_purchase { LicitationProcessTypeOfPurchase::LICITATION }
   process { 2 }
   protocol { '00089/2012' }
   object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
@@ -680,6 +698,7 @@ LicitationProcess.blueprint(:processo_licitatorio_canetas_sem_lote) do
 end
 
 LicitationProcess.blueprint(:apuracao_melhor_tecnica_e_preco) do
+  type_of_purchase { LicitationProcessTypeOfPurchase::LICITATION }
   process { 1 }
   protocol { '00088/2012' }
   object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
@@ -720,6 +739,7 @@ LicitationProcess.blueprint(:apuracao_melhor_tecnica_e_preco) do
 end
 
 LicitationProcess.blueprint(:pregao_presencial) do
+  type_of_purchase { LicitationProcessTypeOfPurchase::LICITATION }
   process { 1 }
   protocol { '00088/2012' }
   object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
@@ -762,6 +782,7 @@ LicitationProcess.blueprint(:pregao_presencial) do
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_concurso) do
+  type_of_purchase { LicitationProcessTypeOfPurchase::LICITATION }
   process { 1 }
   protocol { '00099/2012' }
   object_type { LicitationProcessObjectType::CONSTRUCTION_AND_ENGINEERING_SERVICES }
@@ -804,6 +825,7 @@ LicitationProcess.blueprint(:processo_licitatorio_concurso) do
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_concorrencia) do
+  type_of_purchase { LicitationProcessTypeOfPurchase::LICITATION }
   process { 2 }
   protocol { '00099/2012' }
   object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
@@ -846,6 +868,7 @@ LicitationProcess.blueprint(:processo_licitatorio_concorrencia) do
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_tomada_preco) do
+  type_of_purchase { LicitationProcessTypeOfPurchase::LICITATION }
   process { 1 }
   protocol { '00099/2012' }
   object_type { LicitationProcessObjectType::CONSTRUCTION_AND_ENGINEERING_SERVICES }
@@ -888,6 +911,7 @@ LicitationProcess.blueprint(:processo_licitatorio_tomada_preco) do
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_leilao) do
+  type_of_purchase { LicitationProcessTypeOfPurchase::LICITATION }
   process { 1 }
   protocol { '00088/2012' }
   object_type { LicitationProcessObjectType::DISPOSALS_OF_ASSETS }
