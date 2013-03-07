@@ -7,7 +7,7 @@ pt-BR:
 
     attributes:
       judgment_commission_advice:
-        licitation_process: "Processo licitatório"
+        licitation_process: "Processo de compra"
         licitation_commission: "Comissão julgadora"
         minutes_number: "Número da ata"
         year: "Ano"

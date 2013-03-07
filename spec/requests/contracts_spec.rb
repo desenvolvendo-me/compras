@@ -13,7 +13,7 @@ feature "Contracts" do
 
     click_link 'Criar Contrato'
 
-    fill_modal 'Processo licitatório', :field => 'Ano', :with => '2012'
+    fill_modal 'Processo de compra', :field => 'Ano', :with => '2012'
 
     expect(page).to have_disabled_field 'Compra direta'
     expect(page).to have_field 'Objeto do contrato', :with => 'Licitação para compra de carteiras'
@@ -22,11 +22,11 @@ feature "Contracts" do
     expect(page).to have_disabled_field 'Forma de execução', :with => 'Empreitada integral'
     expect(page).to have_disabled_field 'Garantias do contrato', :with => 'Fiança bancária'
 
-    clear_modal 'Processo licitatório'
+    clear_modal 'Processo de compra'
     expect(page).to have_field 'Modalidade', :with => ''
     expect(page).to have_field 'Forma de execução', :with => ''
     expect(page).to have_field 'Garantias do contrato', :with => ''
-    expect(page).to have_field 'Processo licitatório', :with => ''
+    expect(page).to have_field 'Processo de compra', :with => ''
     expect(page).to have_field 'Compra direta', :with => ''
   end
 
@@ -39,7 +39,7 @@ feature "Contracts" do
 
     fill_modal 'Compra direta', :field => 'Ano', :with => '2012'
 
-    expect(page).to have_disabled_field 'Processo licitatório'
+    expect(page).to have_disabled_field 'Processo de compra'
     expect(page).to have_field 'Objeto do contrato', :with => ''
     expect(page).to have_disabled_field 'Modalidade'
     expect(page).to have_field 'Modalidade', :with => 'Material ou serviços'
@@ -101,7 +101,7 @@ feature "Contracts" do
 
     attach_file 'Contrato', 'spec/fixtures/other_example_document.txt'
 
-    fill_modal 'Processo licitatório', :field => 'Ano', :with => '2012'
+    fill_modal 'Processo de compra', :field => 'Ano', :with => '2012'
     fill_modal 'Tipo de contrato', :with => 'Contratação de estagiários', :field => 'Descrição'
 
     fill_in 'Objeto do contrato', :with => 'Objeto'

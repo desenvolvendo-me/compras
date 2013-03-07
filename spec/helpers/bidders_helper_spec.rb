@@ -9,7 +9,7 @@ describe BiddersHelper do
       helper.stub(:singular => 'Licitante')
       helper.stub(:resource => resource)
 
-      expect(helper.edit_title).to eq 'Editar Licitante (Gabriel Sobrinho) do Processo Licitatório 1/2013'
+      expect(helper.edit_title).to eq 'Editar Licitante (Gabriel Sobrinho) do Processo de Compra 1/2013'
     end
   end
 
@@ -20,7 +20,7 @@ describe BiddersHelper do
       helper.stub(:singular => 'Licitante')
       helper.stub(:resource => resource)
 
-      expect(helper.new_title).to eq 'Criar Licitante no Processo Licitatório 1/2013'
+      expect(helper.new_title).to eq 'Criar Licitante no Processo de Compra 1/2013'
     end
   end
 end

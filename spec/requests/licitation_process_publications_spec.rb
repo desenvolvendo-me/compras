@@ -24,7 +24,7 @@ feature "LicitationProcessPublications" do
 
     expect(page).to have_link 'Voltar ao processo licitatório'
     expect(page).to have_link 'Criar Publicação'
-    expect(page).to have_content "Publicações do Processo Licitatório #{licitation_process}"
+    expect(page).to have_content "Publicações do Processo de Compra #{licitation_process}"
   end
 
   scenario 'create a new publication' do
@@ -42,7 +42,7 @@ feature "LicitationProcessPublications" do
 
     click_link 'Criar Publicação'
 
-    expect(page).to have_content "Criar Publicação para o Processo Licitatório #{licitation_process}"
+    expect(page).to have_content "Criar Publicação para o Processo de Compra #{licitation_process}"
 
     fill_in "Nome do veículo de comunicação", :with => 'Jornal'
     fill_in "Data da publicação", :with => '20/04/2012'
@@ -79,7 +79,7 @@ feature "LicitationProcessPublications" do
       click_link 'Publicacao'
     end
 
-    expect(page).to have_content "Editar Publicação Publicacao do Processo Licitatório #{licitation_process}"
+    expect(page).to have_content "Editar Publicação Publicacao do Processo de Compra #{licitation_process}"
 
     fill_in "Nome do veículo de comunicação", :with => 'Jornal'
     fill_in "Data da publicação", :with => '20/04/2012'

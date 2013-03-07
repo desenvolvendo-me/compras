@@ -24,7 +24,7 @@ feature "LicitationProcessLots" do
 
     click_link 'Voltar ao processo licitatório'
 
-    expect(page).to have_content "Editar Processo Licitatório 2/2013"
+    expect(page).to have_content "Editar Processo de Compra 2/2013"
   end
 
   scenario 'creating a new lot' do
@@ -288,7 +288,7 @@ feature "LicitationProcessLots" do
     end
   end
 
-  scenario "index shoud have title Lotes de itens do Processo Licitatório 2/2013" do
+  scenario "index shoud have title Lotes de itens do Processo de Compra 2/2013" do
     LicitationProcess.make!(:processo_licitatorio_computador)
 
     navigate 'Processos de Compra > Processos Licitatórios'
@@ -299,10 +299,10 @@ feature "LicitationProcessLots" do
 
     click_link 'Lotes de itens'
 
-    expect(page).to have_content "Lotes de itens do Processo Licitatório 2/2013"
+    expect(page).to have_content "Lotes de itens do Processo de Compra 2/2013"
   end
 
-  scenario "edit shoud have title Editar Lotes de itens do Processo Licitatório 2/2013" do
+  scenario "edit shoud have title Editar Lotes de itens do Processo de Compra 2/2013" do
     LicitationProcess.make!(:processo_licitatorio_computador)
     AdministrativeProcessBudgetAllocationItem.make!(:item_arame_farpado)
 
@@ -326,10 +326,10 @@ feature "LicitationProcessLots" do
       click_link 'Lote 1'
     end
 
-    expect(page).to have_content "Editar Lote 1 do Processo Licitatório 2/2013"
+    expect(page).to have_content "Editar Lote 1 do Processo de Compra 2/2013"
   end
 
-  scenario "new shoud have title Criar Lotes de itens no Processo Licitatório 2/2013" do
+  scenario "new shoud have title Criar Lotes de itens no Processo de Compra 2/2013" do
     LicitationProcess.make!(:processo_licitatorio_computador)
 
     navigate 'Processos de Compra > Processos Licitatórios'
@@ -342,6 +342,6 @@ feature "LicitationProcessLots" do
 
     click_link 'Criar Lote de itens'
 
-    expect(page).to have_content "Criar Lote de itens no Processo Licitatório 2/2013"
+    expect(page).to have_content "Criar Lote de itens no Processo de Compra 2/2013"
   end
 end

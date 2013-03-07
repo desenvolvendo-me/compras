@@ -4,7 +4,7 @@ LicitationProcessAppeal.blueprint(:interposicao_processo_licitatorio) do
   appeal_date { Date.new(2012, 4, 10) }
   related { LicitationProcessAppealRelated::EDITAL }
   person { Person.make!(:wenderson) }
-  valid_reason { "Processo licitatório inválido" }
+  valid_reason { "Processo de compra inválido" }
   licitation_committee_opinion { "" }
   situation { Situation::PENDING }
   new_envelope_opening_date { Date.tomorrow }

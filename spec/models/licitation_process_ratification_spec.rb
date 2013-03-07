@@ -7,7 +7,7 @@ require 'app/models/licitation_process_ratification_item'
 describe LicitationProcessRatification do
   it 'should return sequence as to_s' do
     subject.stub(:sequence => 1, :licitation_process => '1/2012')
-    expect(subject.to_s).to eq '1 - Processo Licitatório 1/2012'
+    expect(subject.to_s).to eq '1 - Processo de Compra 1/2012'
   end
 
   it { should belong_to :licitation_process }

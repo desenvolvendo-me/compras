@@ -2,12 +2,12 @@ pt-BR:
   activerecord:
     models:
       licitation_process_appeal:
-        one: "Interposição de Recurso do Processo Licitatório"
+        one: "Interposição de Recurso do Processo de Compra"
         other: "Interposição de Recursos de Processos Licitatórios"
 
     attributes:
       licitation_process_appeal:
-        licitation_process: "Processo licitatório"
+        licitation_process: "Processo de compra"
         appeal_date: "Data do recurso"
         related: "Referente ao"
         person: "Autor"

@@ -29,7 +29,7 @@ pt-BR:
         kind: "Tipo"
         lawyer: 'Advogado responsável pela gestão do contrato'
         lawyer_code: 'O.A.B. do advogado responsável'
-        licitation_process: 'Processo licitatório'
+        licitation_process: 'Processo de compra'
         modality_humanize: 'Modalidade'
         parent: 'Contrato principal'
         publication_date: 'Data de publicação'

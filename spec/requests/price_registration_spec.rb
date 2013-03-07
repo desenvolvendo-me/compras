@@ -29,7 +29,7 @@ feature "PriceRegistration" do
 
       fill_in 'Data da validade', :with => '05/04/2013'
       select 'Ativo', :from => 'Situação'
-      fill_modal 'Processo licitatório', :with => '2012', :field => 'Ano'
+      fill_modal 'Processo de compra', :with => '2012', :field => 'Ano'
       fill_in 'Objeto', :with => 'Aquisição de combustíveis'
       fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
       fill_modal 'Unidade gestora', :with => 'Unidade Central', :field => 'Descrição'
@@ -93,7 +93,7 @@ feature "PriceRegistration" do
       expect(page).to have_field 'Data', :with => '05/04/2012'
       expect(page).to have_field 'Data da validade', :with => '05/04/2013'
       expect(page).to have_select 'Situação', :selected => 'Ativo'
-      expect(page).to have_field 'Processo licitatório', :with => '1/2012'
+      expect(page).to have_field 'Processo de compra', :with => '1/2012'
       expect(page).to have_field 'Objeto', :with => 'Aquisição de combustíveis'
       expect(page).to have_field 'Local de entrega', :with => 'Secretaria da Educação'
       expect(page).to have_field 'Unidade gestora', :with => 'Unidade Central'
@@ -145,7 +145,7 @@ feature "PriceRegistration" do
       fill_in 'Data', :with => '05/04/2013'
       fill_in 'Data da validade', :with => '05/04/2014'
       select 'Ativo', :from => 'Situação'
-      fill_modal 'Processo licitatório', :with => '2012', :field => 'Ano'
+      fill_modal 'Processo de compra', :with => '2012', :field => 'Ano'
       fill_in 'Objeto', :with => 'Aquisição de combustíveis'
       fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
       fill_modal 'Unidade gestora', :with => 'Unidade Central', :field => 'Descrição'
@@ -189,7 +189,7 @@ feature "PriceRegistration" do
       expect(page).to have_field 'Data', :with => '05/04/2013'
       expect(page).to have_field 'Data da validade', :with => '05/04/2014'
       expect(page).to have_select 'Situação', :selected => 'Ativo'
-      expect(page).to have_field 'Processo licitatório', :with => '1/2012'
+      expect(page).to have_field 'Processo de compra', :with => '1/2012'
       expect(page).to have_field 'Objeto', :with => 'Aquisição de combustíveis'
       expect(page).to have_field 'Local de entrega', :with => 'Secretaria da Educação'
       expect(page).to have_field 'Unidade gestora', :with => 'Unidade Central'
@@ -245,7 +245,7 @@ feature "PriceRegistration" do
     click_link 'Criar Registro de Preço'
 
     within_tab 'Principal' do
-      within_modal 'Processo licitatório' do
+      within_modal 'Processo de compra' do
         click_button 'Pesquisar'
 
         within_records do

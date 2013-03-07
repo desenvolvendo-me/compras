@@ -28,7 +28,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processos de Compra > Processos Licitatórios'
 
-    click_link 'Criar Processo Licitatório'
+    click_link 'Criar Processo de Compra'
 
     expect(page).to have_content "Criar Processo"
 
@@ -46,7 +46,7 @@ feature "LicitationProcesses" do
       expect(page).to have_disabled_field 'Data da abertura dos envelopes'
       expect(page).to have_disabled_field 'Hora da abertura'
 
-      choose 'Processo licitatório'
+      choose 'Processo de compra'
       fill_in 'Ano', :with => '2012'
       fill_in 'Data da expedição', :with => '21/03/2012'
       select 'Global', :from => 'Tipo de empenho'
@@ -111,7 +111,7 @@ feature "LicitationProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo Licitatório 1/2012 criado com sucesso.'
+    expect(page).to have_notice 'Processo de Compra 1/2012 criado com sucesso.'
 
     within_tab 'Principal' do
       expect(page).to have_disabled_field 'Processo'
@@ -195,14 +195,14 @@ feature "LicitationProcesses" do
 
     navigate 'Processos de Compra > Processos Licitatórios'
 
-    click_link 'Criar Processo Licitatório'
+    click_link 'Criar Processo de Compra'
 
-    expect(page).to have_title "Criar Processo Licitatório"
+    expect(page).to have_title "Criar Processo de Compra"
 
     expect(page).to_not have_link 'Publicações'
 
     within_tab 'Principal' do
-      choose 'Processo licitatório'
+      choose 'Processo de compra'
       select 'Compras e serviços', :from => 'Tipo de objeto'
       select 'Concorrência', :from => 'Modalidade'
       select 'Por Lote com Melhor Técnica', :from => 'Forma de julgamento'
@@ -231,7 +231,7 @@ feature "LicitationProcesses" do
       click_link '1/2012'
     end
 
-    expect(page).to have_title "Editar Processo Licitatório"
+    expect(page).to have_title "Editar Processo de Compra"
     expect(page).to have_subtitle "1/2012"
 
     expect(page).to have_link 'Publicações'
@@ -290,7 +290,7 @@ feature "LicitationProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo Licitatório 1/2012 editado com sucesso.'
+    expect(page).to have_notice 'Processo de Compra 1/2012 editado com sucesso.'
 
     within_tab 'Principal' do
       expect(page).to have_field 'Data da expedição', :with => '21/03/2013'
@@ -347,7 +347,7 @@ feature "LicitationProcesses" do
   scenario 'calculating total of items via javascript' do
     navigate 'Processos de Compra > Processos Licitatórios'
 
-    click_link 'Criar Processo Licitatório'
+    click_link 'Criar Processo de Compra'
 
     within_tab 'Dotações' do
       click_button 'Adicionar Dotação'
@@ -408,7 +408,7 @@ feature "LicitationProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo Licitatório 2/2013 editado com sucesso.'
+    expect(page).to have_notice 'Processo de Compra 2/2013 editado com sucesso.'
 
     click_link 'Licitantes'
 
@@ -460,7 +460,7 @@ feature "LicitationProcesses" do
   scenario "should not have link to lots when creating a new licitation process" do
     navigate 'Processos de Compra > Processos Licitatórios'
 
-    click_link 'Criar Processo Licitatório'
+    click_link 'Criar Processo de Compra'
 
     expect(page).to_not have_link 'Lotes de itens'
   end
@@ -468,7 +468,7 @@ feature "LicitationProcesses" do
   scenario "should brings some filled fields when creating a new licitation process" do
     navigate 'Processos de Compra > Processos Licitatórios'
 
-    click_link 'Criar Processo Licitatório'
+    click_link 'Criar Processo de Compra'
 
     within_tab 'Principal' do
       expect(page).to have_field 'Ano', :with => "#{Date.current.year}"
@@ -507,10 +507,10 @@ feature "LicitationProcesses" do
 
     navigate 'Processos de Compra > Processos Licitatórios'
 
-    click_link 'Criar Processo Licitatório'
+    click_link 'Criar Processo de Compra'
 
     within_tab 'Principal' do
-      choose 'Processo licitatório'
+      choose 'Processo de compra'
       select 'Global', :from => 'Tipo de empenho'
 
       select 'Menor preço total por item', :from => 'Tipo da apuração'
@@ -589,7 +589,7 @@ feature "LicitationProcesses" do
   scenario 'budget allocation items should have a sequential item' do
     navigate 'Processos de Compra > Processos Licitatórios'
 
-    click_link 'Criar Processo Licitatório'
+    click_link 'Criar Processo de Compra'
 
     within_tab 'Dotações' do
       click_button 'Adicionar Dotação'
@@ -646,7 +646,7 @@ feature "LicitationProcesses" do
 
     click_link "Licitantes"
 
-    expect(page).to have_content "Licitantes do Processo Licitatório 1/2012"
+    expect(page).to have_content "Licitantes do Processo de Compra 1/2012"
   end
 
   scenario "allowing changes to licitation process after ratification" do
@@ -715,7 +715,7 @@ feature "LicitationProcesses" do
 
     click_button 'Apurar'
 
-    expect(page).to have_content 'Processo Licitatório 1/2012'
+    expect(page).to have_content 'Processo de Compra 1/2012'
 
     expect(page).to have_content 'Apuração: Menor preço por lote'
 
@@ -746,7 +746,7 @@ feature "LicitationProcesses" do
 
     click_button 'Apurar'
 
-    expect(page).to have_content 'Processo Licitatório 1/2012'
+    expect(page).to have_content 'Processo de Compra 1/2012'
 
     expect(page).to have_content 'Apuração: Menor preço global'
 
@@ -785,7 +785,7 @@ feature "LicitationProcesses" do
 
     click_button 'Apurar'
 
-    expect(page).to have_content 'Processo Licitatório 1/2012'
+    expect(page).to have_content 'Processo de Compra 1/2012'
 
     expect(page).to have_content 'Apuração: Menor preço global'
 
@@ -817,7 +817,7 @@ feature "LicitationProcesses" do
 
     click_button 'Apurar'
 
-    expect(page).to have_content 'Processo Licitatório 1/2012'
+    expect(page).to have_content 'Processo de Compra 1/2012'
 
     expect(page).to have_content 'Apuração: Menor preço global'
 
@@ -841,7 +841,7 @@ feature "LicitationProcesses" do
 
     click_button 'Apurar'
 
-    expect(page).to have_content 'Processo Licitatório 1/2012'
+    expect(page).to have_content 'Processo de Compra 1/2012'
 
     expect(page).to have_content 'Apuração: Menor preço global'
 
@@ -879,7 +879,7 @@ feature "LicitationProcesses" do
 
     click_button 'Apurar'
 
-    expect(page).to have_content 'Processo Licitatório 1/2012'
+    expect(page).to have_content 'Processo de Compra 1/2012'
 
     expect(page).to have_content 'Apuração: Menor preço global'
 
@@ -917,7 +917,7 @@ feature "LicitationProcesses" do
 
     click_button 'Apurar'
 
-    expect(page).to have_content 'Processo Licitatório 1/2012'
+    expect(page).to have_content 'Processo de Compra 1/2012'
 
     expect(page).to have_content 'Apuração: Menor preço global'
 
@@ -957,7 +957,7 @@ feature "LicitationProcesses" do
 
     click_button 'Apurar'
 
-    expect(page).to have_content 'Processo Licitatório 1/2012'
+    expect(page).to have_content 'Processo de Compra 1/2012'
 
     expect(page).to have_content 'Apuração: Menor preço global'
 
@@ -995,7 +995,7 @@ feature "LicitationProcesses" do
 
     click_button 'Apurar'
 
-    expect(page).to have_content 'Processo Licitatório 1/2012'
+    expect(page).to have_content 'Processo de Compra 1/2012'
 
     expect(page).to have_content 'Apuração: Menor preço global'
 
@@ -1033,7 +1033,7 @@ feature "LicitationProcesses" do
 
     click_button 'Apurar'
 
-    expect(page).to have_content 'Processo Licitatório 1/2012'
+    expect(page).to have_content 'Processo de Compra 1/2012'
 
     expect(page).to have_content 'Apuração: Menor preço global'
 
@@ -1071,7 +1071,7 @@ feature "LicitationProcesses" do
 
     click_button 'Apurar'
 
-    expect(page).to have_content 'Processo Licitatório 1/2012'
+    expect(page).to have_content 'Processo de Compra 1/2012'
 
     expect(page).to have_content 'Apuração: Menor preço global'
 
@@ -1131,7 +1131,7 @@ feature "LicitationProcesses" do
 
     click_button 'Apurar'
 
-    expect(page).to have_content 'Processo Licitatório 1/2012'
+    expect(page).to have_content 'Processo de Compra 1/2012'
 
     expect(page).to have_content 'Apuração: Menor preço por lote'
 
@@ -1219,7 +1219,7 @@ feature "LicitationProcesses" do
 
     click_button 'Apurar'
 
-    expect(page).to have_content 'Processo Licitatório 1/2012'
+    expect(page).to have_content 'Processo de Compra 1/2012'
 
     expect(page).to have_content 'Apuração: Menor preço total por item'
 
@@ -1270,7 +1270,7 @@ feature "LicitationProcesses" do
 
     click_link 'Relatório'
 
-    expect(page).to have_content 'Processo Licitatório 1/2012'
+    expect(page).to have_content 'Processo de Compra 1/2012'
 
     click_link 'voltar'
 
@@ -1336,10 +1336,10 @@ feature "LicitationProcesses" do
 
     navigate 'Processos de Compra > Processos Licitatórios'
 
-    click_link 'Criar Processo Licitatório'
+    click_link 'Criar Processo de Compra'
 
     within_tab 'Principal' do
-      choose 'Processo licitatório'
+      choose 'Processo de compra'
       fill_modal 'Solicitação de compra', :with => '1', :field => 'Código'
       fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => "Descrição"
       fill_in 'Ano', :with => '2012'
@@ -1374,7 +1374,7 @@ feature "LicitationProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo Licitatório 1/2012 criado com sucesso.'
+    expect(page).to have_notice 'Processo de Compra 1/2012 criado com sucesso.'
 
     within_tab 'Principal' do
       expect(page).to have_field 'Local de entrega', :with => 'Secretaria da Educação'
@@ -1384,7 +1384,7 @@ feature "LicitationProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo Licitatório 1/2012 editado com sucesso.'
+    expect(page).to have_notice 'Processo de Compra 1/2012 editado com sucesso.'
 
     within_tab 'Principal' do
       expect(page).to have_field 'Local de entrega', :with => 'Secretaria da Saúde'
@@ -1414,7 +1414,7 @@ feature "LicitationProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo Licitatório 1/2012 editado com sucesso.'
+    expect(page).to have_notice 'Processo de Compra 1/2012 editado com sucesso.'
 
     within_tab 'Principal' do
       expect(page).to have_field 'Local de entrega', :with => ''
@@ -1444,10 +1444,10 @@ feature "LicitationProcesses" do
 
     navigate 'Processos de Compra > Processos Licitatórios'
 
-    click_link 'Criar Processo Licitatório'
+    click_link 'Criar Processo de Compra'
 
     within_tab 'Principal' do
-      choose 'Processo licitatório'
+      choose 'Processo de compra'
       fill_in 'Ano', :with => '2012'
       fill_in 'Data da expedição', :with => '21/03/2012'
       select 'Global', :from => 'Tipo de empenho'
@@ -1534,7 +1534,7 @@ feature "LicitationProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo Licitatório 1/2012 criado com sucesso.'
+    expect(page).to have_notice 'Processo de Compra 1/2012 criado com sucesso.'
 
     within_tab 'Principal' do
       expect(page).to have_field 'Ano', :with => '2012'
@@ -1698,7 +1698,7 @@ feature "LicitationProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo Licitatório 1/2012 editado com sucesso.'
+    expect(page).to have_notice 'Processo de Compra 1/2012 editado com sucesso.'
 
     within_tab 'Principal' do
       clear_modal 'Agrupamento de solicitações de compra'
@@ -1717,7 +1717,7 @@ feature "LicitationProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo Licitatório 1/2012 editado com sucesso.'
+    expect(page).to have_notice 'Processo de Compra 1/2012 editado com sucesso.'
     navigate 'Processos de Compra > Agrupamentos de Itens de Solicitações de Compra'
 
     within_records do
@@ -1735,7 +1735,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processos de Compra > Processos Licitatórios'
 
-    click_link 'Criar Processo Licitatório'
+    click_link 'Criar Processo de Compra'
 
     within_tab 'Principal' do
       within_modal 'Agrupamento de solicitações de compra' do
@@ -1758,7 +1758,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processos de Compra > Processos Licitatórios'
 
-    click_link 'Criar Processo Licitatório'
+    click_link 'Criar Processo de Compra'
 
     within_tab 'Principal' do
       select 'Alienação de bens', :from => 'Tipo de objeto'
@@ -1778,7 +1778,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processos de Compra > Processos Licitatórios'
 
-    click_link 'Criar Processo Licitatório'
+    click_link 'Criar Processo de Compra'
 
     within_tab 'Principal' do
       select 'Concessões e permissões', :from => 'Tipo de objeto'
@@ -1798,7 +1798,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processos de Compra > Processos Licitatórios'
 
-    click_link 'Criar Processo Licitatório'
+    click_link 'Criar Processo de Compra'
 
     within_tab 'Principal' do
       select 'Edital de chamamento/credenciamento', :from => 'Tipo de objeto'
@@ -1818,7 +1818,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processos de Compra > Processos Licitatórios'
 
-    click_link 'Criar Processo Licitatório'
+    click_link 'Criar Processo de Compra'
 
     within_tab 'Principal' do
       select 'Obras e serviços de engenharia', :from => 'Tipo de objeto'
@@ -1858,7 +1858,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processos de Compra > Processos Licitatórios'
 
-    click_link 'Criar Processo Licitatório'
+    click_link 'Criar Processo de Compra'
 
     within_tab 'Principal' do
       select 'Compras e serviços', :from => 'Tipo de objeto'
@@ -1893,7 +1893,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processos de Compra > Processos Licitatórios'
 
-    click_link 'Criar Processo Licitatório'
+    click_link 'Criar Processo de Compra'
 
     within_tab 'Principal' do
       select 'Compras e serviços', :from => 'Tipo de objeto'
@@ -1937,7 +1937,7 @@ feature "LicitationProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo Licitatório 1/2012 editado com sucesso.'
+    expect(page).to have_notice 'Processo de Compra 1/2012 editado com sucesso.'
 
     within_tab 'Principal' do
       clear_modal 'Agrupamento de solicitações de compra'
@@ -1945,7 +1945,7 @@ feature "LicitationProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo Licitatório 1/2012 editado com sucesso.'
+    expect(page).to have_notice 'Processo de Compra 1/2012 editado com sucesso.'
 
     within_tab 'Dotações orçamentárias' do
       expect(page).to_not have_field 'Dotação orçamentária', :with => '1 - Alocação'
@@ -1975,7 +1975,7 @@ feature "LicitationProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo Licitatório 1/2012 editado com sucesso.'
+    expect(page).to have_notice 'Processo de Compra 1/2012 editado com sucesso.'
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
@@ -1986,7 +1986,7 @@ feature "LicitationProcesses" do
     within_tab 'Dotações orçamentárias' do
       within '.purchase-solicitation-budget-allocation:first' do
         within '.item:first' do
-          expect(page).to have_field 'Atendido por', :with => 'Processo licitatório 1/2012'
+          expect(page).to have_field 'Atendido por', :with => 'Processo de compra 1/2012'
         end
       end
     end
@@ -2005,7 +2005,7 @@ feature "LicitationProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo Licitatório 1/2012 editado com sucesso.'
+    expect(page).to have_notice 'Processo de Compra 1/2012 editado com sucesso.'
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
@@ -2034,7 +2034,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processos de Compra > Processos Licitatórios'
 
-    click_link 'Criar Processo Licitatório'
+    click_link 'Criar Processo de Compra'
 
     expect(page).to have_content "Criar Processo"
 
@@ -2045,7 +2045,7 @@ feature "LicitationProcesses" do
     expect(page).to have_disabled_field 'Status'
 
     within_tab 'Principal' do
-      choose 'Processo licitatório'
+      choose 'Processo de compra'
       fill_in 'Ano', :with => '2012'
       fill_in 'Data da expedição', :with => '21/03/2012'
       select 'Global', :from => 'Tipo de empenho'
@@ -2090,7 +2090,7 @@ feature "LicitationProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo Licitatório 1/2012 criado com sucesso.'
+    expect(page).to have_notice 'Processo de Compra 1/2012 criado com sucesso.'
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
@@ -2101,14 +2101,14 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Dotações orçamentárias' do
-      expect(page).to have_field 'Atendido por', :with => 'Processo licitatório 1/2012'
+      expect(page).to have_field 'Atendido por', :with => 'Processo de compra 1/2012'
     end
   end
 
   scenario "filtering modalities based on seleted object type" do
     navigate 'Processos de Compra > Processos Licitatórios'
 
-    click_link 'Criar Processo Licitatório'
+    click_link 'Criar Processo de Compra'
 
     select 'Compras e serviços', :on => "Tipo de objeto"
 
@@ -2159,7 +2159,7 @@ feature "LicitationProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo Licitatório 1/2012 editado com sucesso.'
+    expect(page).to have_notice 'Processo de Compra 1/2012 editado com sucesso.'
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
@@ -2170,7 +2170,7 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Dotações orçamentárias' do
-      expect(page).to have_field 'Atendido por', :with => 'Processo licitatório 1/2012'
+      expect(page).to have_field 'Atendido por', :with => 'Processo de compra 1/2012'
     end
 
     navigate 'Processos de Compra > Processos Licitatórios'
@@ -2191,7 +2191,7 @@ feature "LicitationProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo Licitatório 1/2012 editado com sucesso.'
+    expect(page).to have_notice 'Processo de Compra 1/2012 editado com sucesso.'
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
@@ -2214,7 +2214,7 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Dotações orçamentárias' do
-      expect(page).to have_field 'Atendido por', :with => 'Processo licitatório 1/2012'
+      expect(page).to have_field 'Atendido por', :with => 'Processo de compra 1/2012'
     end
   end
 
@@ -2247,7 +2247,7 @@ feature "LicitationProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo Licitatório 1/2012 editado com sucesso.'
+    expect(page).to have_notice 'Processo de Compra 1/2012 editado com sucesso.'
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
@@ -2266,7 +2266,7 @@ feature "LicitationProcesses" do
         within '.item' do
           expect(page).to have_select 'Status', :selected => 'Parcialmente atendido'
           expect(page).to have_field 'Agrupamento', :with => 'Agrupamento de antivirus'
-          expect(page).to have_field 'Atendido por', :with => 'Processo licitatório 1/2012'
+          expect(page).to have_field 'Atendido por', :with => 'Processo de compra 1/2012'
         end
       end
     end
@@ -2289,7 +2289,7 @@ feature "LicitationProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo Licitatório 1/2012 editado com sucesso.'
+    expect(page).to have_notice 'Processo de Compra 1/2012 editado com sucesso.'
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
@@ -2330,7 +2330,7 @@ feature "LicitationProcesses" do
         within '.item' do
           expect(page).to have_select 'Status', :selected => 'Parcialmente atendido'
           #expect(page).to have_field 'Agrupamento', :with => 'Agrupamento de antivirus'
-          expect(page).to have_field 'Atendido por', :with => 'Processo licitatório 1/2012'
+          expect(page).to have_field 'Atendido por', :with => 'Processo de compra 1/2012'
         end
       end
     end
@@ -2349,12 +2349,12 @@ feature "LicitationProcesses" do
 
     navigate 'Processos de Compra > Processos Licitatórios'
 
-    click_link 'Criar Processo Licitatório'
+    click_link 'Criar Processo de Compra'
 
     expect(page).to be_on_tab 'Principal'
 
     within_tab 'Principal' do
-      choose 'Processo licitatório'
+      choose 'Processo de compra'
       fill_in 'Ano', :with => '2012'
       fill_in 'Data da expedição', :with => '07/03/2012'
       fill_in 'Número do protocolo', :with => '00099/2012'
@@ -2408,7 +2408,7 @@ feature "LicitationProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo Licitatório 1/2012 criado com sucesso.'
+    expect(page).to have_notice 'Processo de Compra 1/2012 criado com sucesso.'
 
     within_tab 'Principal' do
       clear_modal 'Solicitação de compra'
@@ -2423,7 +2423,7 @@ feature "LicitationProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo Licitatório 1/2012 editado com sucesso.'
+    expect(page).to have_notice 'Processo de Compra 1/2012 editado com sucesso.'
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
@@ -2461,7 +2461,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processos de Compra > Processos Licitatórios'
 
-    click_link 'Criar Processo Licitatório'
+    click_link 'Criar Processo de Compra'
 
     expect(page).to have_content "Criar Processo"
 
@@ -2472,7 +2472,7 @@ feature "LicitationProcesses" do
     expect(page).to have_disabled_field 'Status'
 
     within_tab 'Principal' do
-      choose 'Processo licitatório'
+      choose 'Processo de compra'
       fill_in 'Ano', :with => '2012'
       fill_in 'Data da expedição', :with => '21/03/2012'
       select 'Global', :from => 'Tipo de empenho'
@@ -2551,7 +2551,7 @@ feature "LicitationProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo Licitatório 1/2012 criado com sucesso.'
+    expect(page).to have_notice 'Processo de Compra 1/2012 criado com sucesso.'
 
     within_tab 'Principal' do
       expect(page).to have_field 'Solicitação de compra', :with => '1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
@@ -2608,7 +2608,7 @@ feature "LicitationProcesses" do
     within_tab 'Dotações orçamentárias' do
       within '.item:nth-child(1)' do
         expect(page).to have_select 'Status', :selected => 'Parcialmente atendido'
-        expect(page).to have_field 'Atendido por', :with => 'Processo licitatório 1/2012'
+        expect(page).to have_field 'Atendido por', :with => 'Processo de compra 1/2012'
       end
     end
 
@@ -2623,7 +2623,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processos de Compra > Processos Licitatórios'
 
-    click_link 'Criar Processo Licitatório'
+    click_link 'Criar Processo de Compra'
 
     expect(page).to be_on_tab 'Principal'
 
@@ -2653,7 +2653,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processos de Compra > Processos Licitatórios'
 
-    click_link 'Criar Processo Licitatório'
+    click_link 'Criar Processo de Compra'
 
     within_tab 'Principal' do
       fill_modal 'Responsável', :field => 'Matrícula', :with => '12903412'
@@ -2677,7 +2677,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processos de Compra > Processos Licitatórios'
 
-    click_link 'Criar Processo Licitatório'
+    click_link 'Criar Processo de Compra'
 
     within_modal 'Solicitação de compra' do
       click_button 'Pesquisar'
@@ -2695,7 +2695,7 @@ feature "LicitationProcesses" do
 
     navigate 'Processos de Compra > Processos Licitatórios'
 
-    click_link 'Criar Processo Licitatório'
+    click_link 'Criar Processo de Compra'
 
     within_modal 'Agrupamento de solicitações de compra' do
       click_button 'Pesquisar'

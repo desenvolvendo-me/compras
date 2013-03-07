@@ -8,7 +8,7 @@ pt-BR:
     attributes:
       licitation_notice:
         date: "Data do aviso"
-        licitation_process: "Processo licitatório"
+        licitation_process: "Processo de compra"
         licitation_process_licitation_number: "Número da licitação"
         licitation_process_modality_humanize: "Modalidade"
         licitation_process_description: "Objeto da licitação"

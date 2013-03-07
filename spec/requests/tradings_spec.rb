@@ -18,7 +18,7 @@ feature "Tradings" do
 
     within_tab "Principal" do
       fill_in "Ano", :with => "2012"
-      fill_modal "Processo licitatório", :with => "1", :field => "Processo"
+      fill_modal "Processo de compra", :with => "1", :field => "Processo"
       fill_modal "Órgão/Entidade", :with => "Detran"
       fill_modal "Unidade licitante", :with => "Secretaria de Educação"
 
@@ -44,7 +44,7 @@ feature "Tradings" do
 
     within_tab "Principal" do
       fill_in "Ano", :with => "2012"
-      fill_modal "Processo licitatório", :with => "1", :field => "Processo"
+      fill_modal "Processo de compra", :with => "1", :field => "Processo"
       fill_modal "Órgão/Entidade", :with => "Detran"
       fill_modal "Unidade licitante", :with => "Secretaria de Educação"
 
@@ -79,7 +79,7 @@ feature "Tradings" do
     within_tab "Principal" do
       expect(page).to have_field "Número", :with => "1"
       expect(page).to have_field "Ano", :with => "2012"
-      expect(page).to have_field "Processo licitatório", :with => "1/2012"
+      expect(page).to have_field "Processo de compra", :with => "1/2012"
       expect(page).to have_field "Órgão/Entidade", :with => "Detran"
       expect(page).to have_field "Unidade licitante", :with => "Secretaria de Educação"
       expect(page).to have_field "Objeto resumido", :with => "Descrição resumida do objeto"
@@ -104,7 +104,7 @@ feature "Tradings" do
 
     click_link "Criar Pregão Presencial"
 
-    within_modal "Processo licitatório" do
+    within_modal "Processo de compra" do
       click_button "Pesquisar"
 
       within_records do
@@ -144,7 +144,7 @@ feature "Tradings" do
 
     within_tab "Principal" do
       fill_in "Ano", :with => "2012"
-      fill_modal "Processo licitatório", :with => "1", :field => "Processo"
+      fill_modal "Processo de compra", :with => "1", :field => "Processo"
       fill_modal "Órgão/Entidade", :with => "Detran"
       fill_modal "Unidade licitante", :with => "Secretaria de Educação"
       fill_in "Objeto resumido", :with => "Descrição resumida do objeto"
@@ -160,7 +160,7 @@ feature "Tradings" do
 
     click_link "Criar Pregão Presencial"
 
-    within_modal "Processo licitatório" do
+    within_modal "Processo de compra" do
       click_button "Pesquisar"
 
       within_records do
@@ -178,7 +178,7 @@ feature "Tradings" do
       page.find('a').click
     end
 
-    within_modal "Processo licitatório" do
+    within_modal "Processo de compra" do
       click_button "Pesquisar"
 
       within_records do
@@ -772,7 +772,7 @@ feature "Tradings" do
       within 'thead tr:nth-child(1)' do
         expect(page).to have_content 'Código/Ano'
         expect(page).to have_content 'Data'
-        expect(page).to have_content 'Processo licitatório'
+        expect(page).to have_content 'Processo de compra'
         expect(page).to have_content 'Unidade licitante'
         expect(page).to have_content 'Objeto resumido'
       end

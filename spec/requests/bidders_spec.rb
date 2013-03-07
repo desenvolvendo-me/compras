@@ -28,7 +28,7 @@ feature "Bidders" do
 
     click_link 'Voltar ao processo licitatório'
 
-    expect(page).to have_title "Editar Processo Licitatório"
+    expect(page).to have_title "Editar Processo de Compra"
   end
 
   scenario 'creating a new bidder' do
@@ -47,7 +47,7 @@ feature "Bidders" do
 
     click_link 'Criar Licitante'
 
-    expect(page).to have_field 'Processo licitatório', :with => '2/2013'
+    expect(page).to have_field 'Processo de compra', :with => '2/2013'
     expect(page).to have_field 'Data do processo licitatório', :with => '20/03/2013'
     expect(page).to have_checked_field 'Apresentará nova proposta em caso de empate'
 
@@ -100,7 +100,7 @@ feature "Bidders" do
       click_link 'Gabriel Sobrinho'
     end
 
-    expect(page).to have_field 'Processo licitatório', :with => '2/2013'
+    expect(page).to have_field 'Processo de compra', :with => '2/2013'
     expect(page).to have_field 'Data do processo licitatório', :with => '20/03/2013'
     expect(page).to have_field 'Fornecedor', :with => 'Gabriel Sobrinho'
     expect(page).to have_field 'Pontuação técnica', :with => '10,00'
@@ -162,7 +162,7 @@ feature "Bidders" do
       click_link 'Wenderson Malheiros'
     end
 
-    expect(page).to have_field 'Processo licitatório', :with => '2/2013'
+    expect(page).to have_field 'Processo de compra', :with => '2/2013'
     expect(page).to have_field 'Data do processo licitatório', :with => '20/03/2013'
 
     fill_modal 'Fornecedor', :with => 'Gabriel Sobrinho'
@@ -211,7 +211,7 @@ feature "Bidders" do
       click_link 'Gabriel Sobrinho'
     end
 
-    expect(page).to have_field 'Processo licitatório', :with => '2/2013'
+    expect(page).to have_field 'Processo de compra', :with => '2/2013'
     expect(page).to have_field 'Data do processo licitatório', :with => '20/03/2013'
 
     expect(page).to_not have_checked_field 'Apresentará nova proposta em caso de empate'
@@ -348,7 +348,7 @@ feature "Bidders" do
       click_link 'Wenderson Malheiros'
     end
 
-    expect(page).to have_field 'Processo licitatório', :with => '2/2013'
+    expect(page).to have_field 'Processo de compra', :with => '2/2013'
     expect(page).to have_field 'Data do processo licitatório', :with => '20/03/2013'
     expect(page).to have_field 'Fornecedor', :with => 'Wenderson Malheiros'
     expect(page).to have_field 'Protocolo', :with => '123456'
@@ -511,7 +511,7 @@ feature "Bidders" do
       click_link 'Wenderson Malheiros'
     end
 
-    expect(page).to have_field 'Processo licitatório', :with => '2/2013'
+    expect(page).to have_field 'Processo de compra', :with => '2/2013'
     expect(page).to have_field 'Data do processo licitatório', :with => '20/03/2013'
     expect(page).to have_field 'Fornecedor', :with => 'Wenderson Malheiros'
     expect(page).to have_field 'Protocolo', :with => '123456'
@@ -655,7 +655,7 @@ feature "Bidders" do
       click_link 'Wenderson Malheiros'
     end
 
-    expect(page).to have_field 'Processo licitatório', :with => '2/2013'
+    expect(page).to have_field 'Processo de compra', :with => '2/2013'
     expect(page).to have_field 'Data do processo licitatório', :with => '20/03/2013'
     expect(page).to have_field 'Fornecedor', :with => 'Wenderson Malheiros'
     expect(page).to have_field 'Protocolo', :with => '123456'
@@ -690,7 +690,7 @@ feature "Bidders" do
     expect(page).to_not have_link 'Criar Licitante'
   end
 
-  scenario "index should have title Licitantes do Processo Licitatório 1/2013" do
+  scenario "index should have title Licitantes do Processo de Compra 1/2013" do
     LicitationProcess.make!(:processo_licitatorio_computador)
 
     navigate 'Processos de Compra > Processos Licitatórios'
@@ -701,10 +701,10 @@ feature "Bidders" do
 
     click_link 'Licitantes'
 
-    expect(page).to have_content "Licitantes do Processo Licitatório 2/2013"
+    expect(page).to have_content "Licitantes do Processo de Compra 2/2013"
   end
 
-  scenario "edit should have title Editar Licitante do Processo Licitatório 2/2013" do
+  scenario "edit should have title Editar Licitante do Processo de Compra 2/2013" do
     LicitationProcess.make!(:processo_licitatorio_computador)
 
     navigate 'Processos de Compra > Processos Licitatórios'
@@ -719,10 +719,10 @@ feature "Bidders" do
       click_link 'Wenderson Malheiros'
     end
 
-    expect(page).to have_content "Editar Licitante (Wenderson Malheiros) do Processo Licitatório 2/2013"
+    expect(page).to have_content "Editar Licitante (Wenderson Malheiros) do Processo de Compra 2/2013"
   end
 
-  scenario "new should have title Novo Licitante do Processo Licitatório 2/2013" do
+  scenario "new should have title Novo Licitante do Processo de Compra 2/2013" do
     LicitationProcess.make!(:processo_licitatorio_computador)
 
     navigate 'Processos de Compra > Processos Licitatórios'
@@ -735,7 +735,7 @@ feature "Bidders" do
 
     click_link 'Criar Licitante'
 
-    expect(page).to have_content "Criar Licitante no Processo Licitatório 2/2013"
+    expect(page).to have_content "Criar Licitante no Processo de Compra 2/2013"
   end
 
  scenario 'should have field technical_score when licitation kind is technical_and_price' do
@@ -865,7 +865,7 @@ feature "Bidders" do
     expect(page).to have_disabled_element 'Salvar',
                     :reason => 'não pode ser alterado pois o processo licitatório possui homologação'
 
-    expect(page).to have_disabled_field 'Processo licitatório'
+    expect(page).to have_disabled_field 'Processo de compra'
     expect(page).to have_disabled_field 'Data do processo licitatório'
     expect(page).to have_disabled_field 'Fornecedor'
     expect(page).to have_disabled_field 'Status'

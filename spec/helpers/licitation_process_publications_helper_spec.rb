@@ -8,7 +8,7 @@ describe LicitationProcessPublicationsHelper do
     it 'should return the title for edit' do
       helper.stub(:resource => resource)
 
-      expect(helper.edit_title).to eq 'Editar Publicação 4 do Processo Licitatório 1/2013'
+      expect(helper.edit_title).to eq 'Editar Publicação 4 do Processo de Compra 1/2013'
     end
   end
 
@@ -19,7 +19,7 @@ describe LicitationProcessPublicationsHelper do
       helper.stub(:singular => 'Publicação')
       helper.stub(:resource => resource)
 
-      expect(helper.new_title).to eq 'Criar Publicação para o Processo Licitatório 1/2013'
+      expect(helper.new_title).to eq 'Criar Publicação para o Processo de Compra 1/2013'
     end
   end
 end

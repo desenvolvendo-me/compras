@@ -28,7 +28,7 @@ class LicitationProcessRatification < Compras::Model
   orderize :licitation_process_id
 
   def to_s
-    "#{sequence} - Processo Licitatório #{licitation_process.to_s}"
+    "#{sequence} - Processo de Compra #{licitation_process.to_s}"
   end
 
   def bidder_belongs_to_licitation_process

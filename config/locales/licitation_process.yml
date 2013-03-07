@@ -2,7 +2,7 @@ pt-BR:
   activerecord:
     models:
       licitation_process:
-        one: "Processo Licitatório"
+        one: "Processo de Compra"
         other: "Processos Licitatórios"
 
     attributes:

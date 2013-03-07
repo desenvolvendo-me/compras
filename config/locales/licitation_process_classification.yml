@@ -2,7 +2,7 @@ pt-BR:
   activerecord:
     models:
       licitation_process_classification:
-        one: "Classificação de Processo Licitatório"
+        one: "Classificação de Processo de Compra"
         other: "Classificações de Processos Licitatórios"
 
     attributes:

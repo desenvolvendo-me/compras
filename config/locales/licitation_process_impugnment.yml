@@ -2,12 +2,12 @@ pt-BR:
   activerecord:
     models:
       licitation_process_impugnment:
-        one: "Impugnação do Processo Licitatório"
+        one: "Impugnação do Processo de Compra"
         other: "Impugnações dos Processos Licitatórios"
 
     attributes:
       licitation_process_impugnment:
-        licitation_process: "Processo licitatório"
+        licitation_process: "Processo de compra"
         impugnment_date: "Data da impugnação"
         related: "Referente ao"
         person: "Autor"

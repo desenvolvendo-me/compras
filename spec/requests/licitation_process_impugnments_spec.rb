@@ -12,11 +12,11 @@ feature "LicitationProcessImpugnments" do
 
     navigate 'Processos de Compra > Impugnações dos Processos Licitatórios'
 
-    click_link 'Criar Impugnação do Processo Licitatório'
+    click_link 'Criar Impugnação do Processo de Compra'
 
     expect(page).to have_select 'Situação', :selected => 'Pendente'
 
-    fill_modal 'Processo licitatório', :with => '2012', :field => 'Ano'
+    fill_modal 'Processo de compra', :with => '2012', :field => 'Ano'
     fill_in 'Data da impugnação', :with => I18n.l(Date.current + 2.days)
     select 'Pregão', :from => 'Referente ao'
     fill_modal 'Autor', :with => 'Gabriel Sobrinho'
@@ -29,13 +29,13 @@ feature "LicitationProcessImpugnments" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Impugnação do Processo Licitatório criada com sucesso.'
+    expect(page).to have_notice 'Impugnação do Processo de Compra criada com sucesso.'
 
     within_records do
       click_link "1/2012 - #{I18n.l(Date.current + 2.days)}"
     end
 
-    expect(page).to have_field 'Processo licitatório', :with => '1/2012'
+    expect(page).to have_field 'Processo de compra', :with => '1/2012'
     expect(page).to have_field 'Data da impugnação', :with => I18n.l(Date.current + 2.days)
     expect(page).to have_select 'Referente ao', :selected => 'Pregão'
     expect(page).to have_field 'Autor', :with => 'Gabriel Sobrinho'
@@ -72,13 +72,13 @@ feature "LicitationProcessImpugnments" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Impugnação do Processo Licitatório editada com sucesso.'
+    expect(page).to have_notice 'Impugnação do Processo de Compra editada com sucesso.'
 
     within_records do
       click_link "1/2012 - #{I18n.l(Date.current + 1.year + 2.days)}"
     end
 
-    expect(page).to have_field 'Processo licitatório', :with => '1/2012'
+    expect(page).to have_field 'Processo de compra', :with => '1/2012'
     expect(page).to have_field 'Data da impugnação', :with => I18n.l(Date.current + 1.year + 2.days)
     expect(page).to have_select 'Referente ao', :selected => 'Pregão'
     expect(page).to have_field 'Autor', :with => 'Gabriel Sobrinho'
@@ -102,7 +102,7 @@ feature "LicitationProcessImpugnments" do
       click_link '1/2012 - 01/04/2012'
     end
 
-    expect(page).to have_disabled_field 'Processo licitatório'
+    expect(page).to have_disabled_field 'Processo de compra'
     expect(page).to have_disabled_field 'Data da impugnação'
     expect(page).to have_disabled_field 'Referente ao'
     expect(page).to have_disabled_field 'Autor'
@@ -134,9 +134,9 @@ feature "LicitationProcessImpugnments" do
 
     navigate 'Processos de Compra > Impugnações dos Processos Licitatórios'
 
-    click_link 'Criar Impugnação do Processo Licitatório'
+    click_link 'Criar Impugnação do Processo de Compra'
 
-    fill_modal 'Processo licitatório', :with => '2012', :field => 'Ano'
+    fill_modal 'Processo de compra', :with => '2012', :field => 'Ano'
 
     expect(page).to have_field 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
     expect(page).to have_field 'Hora da entrega', :with => '14:00'
@@ -153,7 +153,7 @@ feature "LicitationProcessImpugnments" do
       click_link '1/2012 - 01/04/2012'
     end
 
-    clear_modal 'Processo licitatório'
+    clear_modal 'Processo de compra'
 
     expect(page).to have_field 'Data da entrega dos envelopes', :with => ''
     expect(page).to have_field 'Hora da entrega', :with => ''

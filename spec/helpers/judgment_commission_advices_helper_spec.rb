@@ -8,7 +8,7 @@ describe JudgmentCommissionAdvicesHelper do
     it 'should return the title for edit' do
       helper.stub(:resource => resource)
 
-      expect(helper.edit_title).to eq 'Editar Parecer da Comissão Julgadora Gabriel Sobrinho do Processo Licitatório 1/2013'
+      expect(helper.edit_title).to eq 'Editar Parecer da Comissão Julgadora Gabriel Sobrinho do Processo de Compra 1/2013'
     end
   end
 
@@ -19,7 +19,7 @@ describe JudgmentCommissionAdvicesHelper do
       helper.stub(:singular => 'Parecer da Comissão Julgadora')
       helper.stub(:resource => resource)
 
-      expect(helper.new_title).to eq 'Criar Parecer da Comissão Julgadora para o Processo Licitatório 1/2013'
+      expect(helper.new_title).to eq 'Criar Parecer da Comissão Julgadora para o Processo de Compra 1/2013'
     end
   end
 end

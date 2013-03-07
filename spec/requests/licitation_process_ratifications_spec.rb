@@ -24,17 +24,17 @@ feature "LicitationProcessRatifications" do
 
     navigate 'Processos de Compra > Homologações e Adjudicações de Processos Licitatórios'
 
-    click_link 'Criar Homologação e Adjudicação de Processo Licitatório'
+    click_link 'Criar Homologação e Adjudicação de Processo de Compra'
 
     expect(page).to have_disabled_field 'Participante vencedor'
 
-    fill_modal 'Processo licitatório', :with => '2013', :field => 'Ano'
+    fill_modal 'Processo de compra', :with => '2013', :field => 'Ano'
 
     expect(page).to_not have_disabled_field 'Participante vencedor'
 
     within_modal 'Participante vencedor' do
-      expect(page).to have_field 'Processo licitatório', :with => '2/2013'
-      expect(page).to have_disabled_field 'Processo licitatório'
+      expect(page).to have_field 'Processo de compra', :with => '2/2013'
+      expect(page).to have_disabled_field 'Processo de compra'
       click_button 'Pesquisar'
       click_record 'Wenderson Malheiros'
     end
@@ -46,13 +46,13 @@ feature "LicitationProcessRatifications" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Homologação e Adjudicação de Processo Licitatório criada com sucesso.'
+    expect(page).to have_notice 'Homologação e Adjudicação de Processo de Compra criada com sucesso.'
 
     within_records do
       click_link '1'
     end
 
-    expect(page).to have_field 'Processo licitatório', :with => '2/2013'
+    expect(page).to have_field 'Processo de compra', :with => '2/2013'
     expect(page).to have_field 'Participante vencedor', :with => 'Wenderson Malheiros'
     expect(page).to have_field 'Data de homologação', :with => I18n.l(Date.current)
     expect(page).to have_field 'Data de adjudicação', :with => I18n.l(Date.current)
@@ -91,11 +91,11 @@ feature "LicitationProcessRatifications" do
     navigate 'Processos de Compra > Homologações e Adjudicações de Processos Licitatórios'
 
     within_records do
-      click_link '1 - Processo Licitatório 2/2013'
+      click_link '1 - Processo de Compra 2/2013'
     end
 
     expect(page).to_not have_link 'Apagar'
-    expect(page).to have_disabled_field 'Processo licitatório'
+    expect(page).to have_disabled_field 'Processo de compra'
 
     within_modal 'Participante vencedor' do
       click_button 'Pesquisar'
@@ -107,13 +107,13 @@ feature "LicitationProcessRatifications" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Homologação e Adjudicação de Processo Licitatório editada com sucesso.'
+    expect(page).to have_notice 'Homologação e Adjudicação de Processo de Compra editada com sucesso.'
 
     within_records do
       click_link '1'
     end
 
-    expect(page).to have_field 'Processo licitatório', :with => '2/2013'
+    expect(page).to have_field 'Processo de compra', :with => '2/2013'
     expect(page).to have_field 'Participante vencedor', :with => 'Gabriel Sobrinho'
     expect(page).to have_field 'Data de homologação', :with => I18n.l(Date.tomorrow)
     expect(page).to have_field 'Data de adjudicação', :with => I18n.l(Date.tomorrow)
@@ -148,27 +148,27 @@ feature "LicitationProcessRatifications" do
 
     navigate 'Processos de Compra > Homologações e Adjudicações de Processos Licitatórios'
 
-    click_link 'Criar Homologação e Adjudicação de Processo Licitatório'
+    click_link 'Criar Homologação e Adjudicação de Processo de Compra'
 
-    fill_modal 'Processo licitatório', :with => '2013', :field => 'Ano'
+    fill_modal 'Processo de compra', :with => '2013', :field => 'Ano'
 
     within_modal 'Participante vencedor' do
-      expect(page).to have_field 'Processo licitatório', :with => '2/2013'
-      expect(page).to have_disabled_field 'Processo licitatório'
+      expect(page).to have_field 'Processo de compra', :with => '2/2013'
+      expect(page).to have_disabled_field 'Processo de compra'
       click_button 'Pesquisar'
       click_record 'Wenderson Malheiros'
     end
 
-    clear_modal 'Processo licitatório'
+    clear_modal 'Processo de compra'
 
     expect(page).to have_disabled_field 'Participante vencedor'
     expect(page).to have_field 'Participante vencedor', :with => ''
 
-    fill_modal 'Processo licitatório', :with => '2013', :field => 'Ano'
+    fill_modal 'Processo de compra', :with => '2013', :field => 'Ano'
 
     within_modal 'Participante vencedor' do
-      expect(page).to have_field 'Processo licitatório', :with => '2/2013'
-      expect(page).to have_disabled_field 'Processo licitatório'
+      expect(page).to have_field 'Processo de compra', :with => '2/2013'
+      expect(page).to have_disabled_field 'Processo de compra'
       click_button 'Pesquisar'
       click_record 'Wenderson Malheiros'
     end
@@ -220,19 +220,19 @@ feature "LicitationProcessRatifications" do
 
     navigate 'Processos de Compra > Homologações e Adjudicações de Processos Licitatórios'
 
-    click_link 'Criar Homologação e Adjudicação de Processo Licitatório'
+    click_link 'Criar Homologação e Adjudicação de Processo de Compra'
 
-    fill_modal 'Processo licitatório', :with => '2012', :field => 'Ano'
+    fill_modal 'Processo de compra', :with => '2012', :field => 'Ano'
 
     within_modal 'Participante vencedor' do
-      expect(page).to have_field 'Processo licitatório', :with => '1/2012'
+      expect(page).to have_field 'Processo de compra', :with => '1/2012'
       click_link 'Voltar'
     end
 
-    fill_modal 'Processo licitatório', :with => '2013', :field => 'Ano'
+    fill_modal 'Processo de compra', :with => '2013', :field => 'Ano'
 
     within_modal 'Participante vencedor' do
-      expect(page).to have_field 'Processo licitatório', :with => '2/2013'
+      expect(page).to have_field 'Processo de compra', :with => '2/2013'
     end
   end
 
@@ -241,9 +241,9 @@ feature "LicitationProcessRatifications" do
 
     navigate 'Processos de Compra > Homologações e Adjudicações de Processos Licitatórios'
 
-    click_link 'Criar Homologação e Adjudicação de Processo Licitatório'
+    click_link 'Criar Homologação e Adjudicação de Processo de Compra'
 
-    fill_modal 'Processo licitatório', :with => '2012', :field => 'Ano'
+    fill_modal 'Processo de compra', :with => '2012', :field => 'Ano'
 
     within_modal 'Participante vencedor' do
       click_button 'Pesquisar'

@@ -12,9 +12,9 @@ feature "LicitationProcessAppeals" do
 
     navigate 'Processos de Compra > Interposição de Recursos de Processos Licitatórios'
 
-    click_link 'Criar Interposição de Recurso do Processo Licitatório'
+    click_link 'Criar Interposição de Recurso do Processo de Compra'
 
-    fill_modal 'Processo licitatório', :with => '2012', :field => 'Ano'
+    fill_modal 'Processo de compra', :with => '2012', :field => 'Ano'
     fill_in 'Data do recurso', :with => I18n.l(Date.new(2012, 3, 20))
     select 'Edital', :from => 'Referente ao'
     fill_modal 'Autor', :with => 'Gabriel Sobrinho'
@@ -26,13 +26,13 @@ feature "LicitationProcessAppeals" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Interposição de Recurso do Processo Licitatório criada com sucesso.'
+    expect(page).to have_notice 'Interposição de Recurso do Processo de Compra criada com sucesso.'
 
     within_records do
       click_link '1/2012 - 20/03/2012'
     end
 
-    expect(page).to have_field 'Processo licitatório', :with => '1/2012'
+    expect(page).to have_field 'Processo de compra', :with => '1/2012'
     expect(page).to have_field 'Data do recurso', :with => I18n.l(Date.new(2012, 3, 20))
     expect(page).to have_select 'Referente ao', :selected => 'Edital'
     expect(page).to have_field 'Autor', :with => 'Gabriel Sobrinho'
@@ -55,7 +55,7 @@ feature "LicitationProcessAppeals" do
       click_link '1/2012 - 10/04/2012'
     end
 
-    fill_modal 'Processo licitatório', :with => '2013', :field => 'Ano'
+    fill_modal 'Processo de compra', :with => '2013', :field => 'Ano'
     fill_in 'Data do recurso', :with => I18n.l(Date.new(2013, 3, 20))
     select 'Revogação', :from => 'Referente ao'
     fill_modal 'Autor', :with => 'Wenderson Malheiros'
@@ -67,13 +67,13 @@ feature "LicitationProcessAppeals" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Interposição de Recurso do Processo Licitatório editada com sucesso.'
+    expect(page).to have_notice 'Interposição de Recurso do Processo de Compra editada com sucesso.'
 
     within_records do
       click_link '2/2013 - 20/03/2013'
     end
 
-    expect(page).to have_field 'Processo licitatório', :with => '2/2013'
+    expect(page).to have_field 'Processo de compra', :with => '2/2013'
     expect(page).to have_field 'Data do recurso', :with => I18n.l(Date.new(2013, 3, 20))
     expect(page).to have_select 'Referente ao', :selected => 'Revogação'
     expect(page).to have_field 'Autor', :with => 'Wenderson Malheiros'
@@ -96,7 +96,7 @@ feature "LicitationProcessAppeals" do
 
     click_link "Apagar"
 
-    expect(page).to have_notice 'Interposição de Recurso do Processo Licitatório apagada com sucesso.'
+    expect(page).to have_notice 'Interposição de Recurso do Processo de Compra apagada com sucesso.'
 
     within_records do
       expect(page).to_not have_link '1/2012 - 10/04/2012'

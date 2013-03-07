@@ -2,12 +2,12 @@ pt-BR:
   activerecord:
     models:
       licitation_process_ratification:
-        one: "Homologação e Adjudicação de Processo Licitatório"
+        one: "Homologação e Adjudicação de Processo de Compra"
         other: "Homologações e Adjudicações de Processos Licitatórios"
 
     attributes:
       licitation_process_ratification:
-        licitation_process: "Processo licitatório"
+        licitation_process: "Processo de compra"
         bidder: "Participante vencedor"
         ratification_date: "Data de homologação"
         adjudication_date: "Data de adjudicação"
