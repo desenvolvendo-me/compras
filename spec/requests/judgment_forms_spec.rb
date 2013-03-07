@@ -7,7 +7,7 @@ feature "JudgmentForms" do
   end
 
   scenario 'cannot create a new judgment_form' do
-    navigate 'Processo Administrativo/Licitatório > Auxiliar > Formas de Julgamento das Licitações'
+    navigate 'Processos de Compra > Auxiliar > Formas de Julgamento das Licitações'
 
     expect(page).to_not have_link 'Criar Forma de Julgamento de Licitação'
     expect(page).to_not have_link 'Filtrar Formas de Julgamento de Licitação'
@@ -18,14 +18,14 @@ feature "JudgmentForms" do
     judgment2 = JudgmentForm.make!(:por_item_com_melhor_tecnica)
     judgment3 = JudgmentForm.make!(:por_lote_com_melhor_tecnica)
 
-    navigate 'Processo Administrativo/Licitatório > Auxiliar > Formas de Julgamento das Licitações'
+    navigate 'Processos de Compra > Auxiliar > Formas de Julgamento das Licitações'
 
     within_records do
       uncheck "judgment_form_#{judgment1.id}"
       uncheck "judgment_form_#{judgment2.id}"
     end
 
-    navigate 'Processo Administrativo/Licitatório > Auxiliar > Formas de Julgamento das Licitações'
+    navigate 'Processos de Compra > Auxiliar > Formas de Julgamento das Licitações'
 
     within_records do
       expect(page).to_not have_checked_field "judgment_form_#{judgment1.id}"

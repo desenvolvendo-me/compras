@@ -10,7 +10,7 @@ feature "LicitationProcessRatifications" do
     LicitationProcess.make!(:processo_licitatorio_computador)
     BidderProposal.make!(:proposta_licitante_1, :bidder => Bidder.make!(:licitante))
 
-    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos Licitatórios'
 
     within_records do
       click_link '2/2013'
@@ -22,7 +22,7 @@ feature "LicitationProcessRatifications" do
     click_button 'Apurar'
     click_link 'voltar'
 
-    navigate 'Processo Administrativo/Licitatório > Homologações e Adjudicações de Processos Licitatórios'
+    navigate 'Processos de Compra > Homologações e Adjudicações de Processos Licitatórios'
 
     click_link 'Criar Homologação e Adjudicação de Processo Licitatório'
 
@@ -63,7 +63,7 @@ feature "LicitationProcessRatifications" do
 
     expect(page).to have_checked_field bidder_checkbok_html_name(0)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos Licitatórios'
 
     within_records do
       page.find('a').click
@@ -79,7 +79,7 @@ feature "LicitationProcessRatifications" do
     LicitationProcessRatification.make!(:processo_licitatorio_computador, :licitation_process => licitation_process)
     BidderProposal.make!(:proposta_licitante_1, :bidder => bidder)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos Licitatórios'
 
     within_records do
       click_link '2/2013'
@@ -88,7 +88,7 @@ feature "LicitationProcessRatifications" do
     expect(page).to have_field 'Data da homologação', :with => "#{I18n.l(Date.current)}"
     expect(page).to have_field 'Data da adjudicação', :with => "#{I18n.l(Date.current)}"
 
-    navigate 'Processo Administrativo/Licitatório > Homologações e Adjudicações de Processos Licitatórios'
+    navigate 'Processos de Compra > Homologações e Adjudicações de Processos Licitatórios'
 
     within_records do
       click_link '1 - Processo Licitatório 2/2013'
@@ -123,7 +123,7 @@ feature "LicitationProcessRatifications" do
 
     expect(page).to_not have_checked_field bidder_checkbok_html_name(0)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos Licitatórios'
 
     within_records do
       click_link '2/2013'
@@ -137,7 +137,7 @@ feature "LicitationProcessRatifications" do
     LicitationProcess.make!(:processo_licitatorio_computador)
     BidderProposal.make!(:proposta_licitante_1, :bidder => Bidder.make!(:licitante))
 
-    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos Licitatórios'
 
     within_records do
       click_link '2/2013'
@@ -146,7 +146,7 @@ feature "LicitationProcessRatifications" do
     click_button 'Apurar'
     click_link 'voltar'
 
-    navigate 'Processo Administrativo/Licitatório > Homologações e Adjudicações de Processos Licitatórios'
+    navigate 'Processos de Compra > Homologações e Adjudicações de Processos Licitatórios'
 
     click_link 'Criar Homologação e Adjudicação de Processo Licitatório'
 
@@ -188,7 +188,7 @@ feature "LicitationProcessRatifications" do
     BidderProposal.make!(:proposta_licitante_1, :bidder => Bidder.make!(:licitante))
     SignatureConfiguration.make!(:homologacao_e_adjudicao_do_processo_licitatorio)
 
-    navigate 'Processo Administrativo/Licitatório > Homologações e Adjudicações de Processos Licitatórios'
+    navigate 'Processos de Compra > Homologações e Adjudicações de Processos Licitatórios'
 
     within_records do
       click_link '2/2013'
@@ -218,7 +218,7 @@ feature "LicitationProcessRatifications" do
     LicitationProcess.make!(:processo_licitatorio)
     LicitationProcess.make!(:processo_licitatorio_computador)
 
-    navigate 'Processo Administrativo/Licitatório > Homologações e Adjudicações de Processos Licitatórios'
+    navigate 'Processos de Compra > Homologações e Adjudicações de Processos Licitatórios'
 
     click_link 'Criar Homologação e Adjudicação de Processo Licitatório'
 
@@ -239,7 +239,7 @@ feature "LicitationProcessRatifications" do
   scenario "Bidder's modal should not have button new" do
     LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Processo Administrativo/Licitatório > Homologações e Adjudicações de Processos Licitatórios'
+    navigate 'Processos de Compra > Homologações e Adjudicações de Processos Licitatórios'
 
     click_link 'Criar Homologação e Adjudicação de Processo Licitatório'
 

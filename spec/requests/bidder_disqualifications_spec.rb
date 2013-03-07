@@ -14,7 +14,7 @@ feature BidderDisqualification do
 
     make_trading_item_at_classification
 
-    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+    navigate "Processos de Compra > Pregão Presencial"
 
     click_link "Limpar Filtro"
 
@@ -76,7 +76,7 @@ feature BidderDisqualification do
 
     make_trading_item_at_classification
 
-    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+    navigate "Processos de Compra > Pregão Presencial"
 
     click_link "Limpar Filtro"
 
@@ -137,7 +137,7 @@ feature BidderDisqualification do
 
     make_trading_item_at_classification
 
-    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+    navigate "Processos de Compra > Pregão Presencial"
 
     click_link "Limpar Filtro"
 

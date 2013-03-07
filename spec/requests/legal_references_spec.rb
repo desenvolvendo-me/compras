@@ -7,7 +7,7 @@ feature "LegalReferences" do
   end
 
   scenario 'create a new legal_reference' do
-    navigate 'Processo Administrativo/Licitatório > Auxiliar > Referências Legais'
+    navigate 'Processos de Compra > Auxiliar > Referências Legais'
 
     click_link 'Criar Referência Legal'
 
@@ -35,7 +35,7 @@ feature "LegalReferences" do
   scenario 'update an existent legal_reference' do
     LegalReference.make!(:referencia)
 
-    navigate 'Processo Administrativo/Licitatório > Auxiliar > Referências Legais'
+    navigate 'Processos de Compra > Auxiliar > Referências Legais'
 
     click_link 'Referencia'
 
@@ -63,7 +63,7 @@ feature "LegalReferences" do
   scenario 'destroy an existent legal_reference' do
     LegalReference.make!(:referencia)
 
-    navigate 'Processo Administrativo/Licitatório > Auxiliar > Referências Legais'
+    navigate 'Processos de Compra > Auxiliar > Referências Legais'
 
     click_link 'Referencia'
 

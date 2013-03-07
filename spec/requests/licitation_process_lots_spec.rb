@@ -12,7 +12,7 @@ feature "LicitationProcessLots" do
   scenario 'accessing the lots and return to licitation process edit page' do
     LicitationProcess.make!(:processo_licitatorio_computador)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos Licitatórios'
 
     within_records do
       click_link '2/2013'
@@ -30,7 +30,7 @@ feature "LicitationProcessLots" do
   scenario 'creating a new lot' do
     LicitationProcess.make!(:processo_licitatorio_computador)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos Licitatórios'
 
     within_records do
       click_link '2/2013'
@@ -59,7 +59,7 @@ feature "LicitationProcessLots" do
   scenario 'should not show link to create a new lot if licitation process is not updatable' do
     LicitationProcess.make!(:processo_licitatorio_nao_atualizavel)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos Licitatórios'
 
     click_link "Limpar Filtro"
 
@@ -75,7 +75,7 @@ feature "LicitationProcessLots" do
   scenario 'should disable Salvar and Apagar buttons when updating a lot if licitation process is not updatable' do
     LicitationProcess.make!(:processo_licitatorio_nao_atualizavel)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos Licitatórios'
 
     click_link "Limpar Filtro"
 
@@ -97,7 +97,7 @@ feature "LicitationProcessLots" do
   scenario 'all fields should be disabled when updating a lot if licitation process is not updatable' do
     LicitationProcess.make!(:processo_licitatorio_nao_atualizavel)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos Licitatórios'
 
     click_link "Limpar Filtro"
 
@@ -118,7 +118,7 @@ feature "LicitationProcessLots" do
   scenario 'updating an existing lot' do
     LicitationProcess.make!(:processo_licitatorio_canetas)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos Licitatórios'
 
     within_records do
       click_link '2/2013'
@@ -149,7 +149,7 @@ feature "LicitationProcessLots" do
   scenario 'deleting a lot' do
     LicitationProcess.make!(:processo_licitatorio_canetas)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos Licitatórios'
 
     within_records do
       click_link '2/2013'
@@ -173,7 +173,7 @@ feature "LicitationProcessLots" do
   scenario 'edit an existing lot, search item, remove item and search item again' do
     LicitationProcess.make!(:processo_licitatorio_canetas)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos Licitatórios'
 
     within_records do
       click_link '2/2013'
@@ -206,7 +206,7 @@ feature "LicitationProcessLots" do
     LicitationProcess.make!(:processo_licitatorio_canetas_sem_lote)
     AdministrativeProcessBudgetAllocationItem.make!(:item_arame_farpado)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos Licitatórios'
 
     within_records do
       click_link '2/2013'
@@ -291,7 +291,7 @@ feature "LicitationProcessLots" do
   scenario "index shoud have title Lotes de itens do Processo Licitatório 2/2013" do
     LicitationProcess.make!(:processo_licitatorio_computador)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos Licitatórios'
 
     within_records do
       click_link '2/2013'
@@ -306,7 +306,7 @@ feature "LicitationProcessLots" do
     LicitationProcess.make!(:processo_licitatorio_computador)
     AdministrativeProcessBudgetAllocationItem.make!(:item_arame_farpado)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos Licitatórios'
 
     within_records do
       click_link '2/2013'
@@ -332,7 +332,7 @@ feature "LicitationProcessLots" do
   scenario "new shoud have title Criar Lotes de itens no Processo Licitatório 2/2013" do
     LicitationProcess.make!(:processo_licitatorio_computador)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos Licitatórios'
 
     within_records do
       click_link '2/2013'

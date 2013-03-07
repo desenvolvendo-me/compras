@@ -9,7 +9,7 @@ feature "LicitationObjects" do
   scenario 'create a new licitation_object' do
     Material.make!(:antivirus)
 
-    navigate 'Processo Administrativo/Licitatório > Auxiliar > Objetos de Licitação'
+    navigate 'Processos de Compra > Auxiliar > Objetos de Licitação'
 
     click_link "Limpar Filtro"
 
@@ -120,7 +120,7 @@ feature "LicitationObjects" do
   scenario 'should remove material' do
     LicitationObject.make!(:viaduto)
 
-    navigate 'Processo Administrativo/Licitatório > Auxiliar > Objetos de Licitação'
+    navigate 'Processos de Compra > Auxiliar > Objetos de Licitação'
 
     click_link "Limpar Filtro"
 
@@ -148,7 +148,7 @@ feature "LicitationObjects" do
     LicitationObject.make!(:ponte)
     Material.make!(:arame_comum)
 
-    navigate 'Processo Administrativo/Licitatório > Auxiliar > Objetos de Licitação'
+    navigate 'Processos de Compra > Auxiliar > Objetos de Licitação'
 
     click_link "Limpar Filtro"
 
@@ -184,7 +184,7 @@ feature "LicitationObjects" do
   scenario 'destroy an existent licitation_object' do
     LicitationObject.make!(:ponte)
 
-    navigate 'Processo Administrativo/Licitatório > Auxiliar > Objetos de Licitação'
+    navigate 'Processos de Compra > Auxiliar > Objetos de Licitação'
 
     click_link "Limpar Filtro"
 
@@ -203,7 +203,7 @@ feature "LicitationObjects" do
     DirectPurchase.make!(:compra_nao_autorizada)
     DirectPurchase.make!(:compra_2011)
 
-    navigate 'Processo Administrativo/Licitatório > Auxiliar > Objetos de Licitação'
+    navigate 'Processos de Compra > Auxiliar > Objetos de Licitação'
 
     click_link "Limpar Filtro"
 
@@ -229,7 +229,7 @@ feature "LicitationObjects" do
     DirectPurchase.make!(:compra_nao_autorizada)
     DirectPurchase.make!(:compra_2011)
 
-    navigate 'Processo Administrativo/Licitatório > Auxiliar > Objetos de Licitação'
+    navigate 'Processos de Compra > Auxiliar > Objetos de Licitação'
 
     click_link "Limpar Filtro"
 

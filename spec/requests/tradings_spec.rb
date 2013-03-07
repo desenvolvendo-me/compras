@@ -12,7 +12,7 @@ feature "Tradings" do
     LicitationProcess.make!(:pregao_presencial)
     LicitationCommission.make!(:comissao_pregao_presencial)
 
-    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+    navigate "Processos de Compra > Pregão Presencial"
 
     click_link "Criar Pregão Presencial"
 
@@ -100,7 +100,7 @@ feature "Tradings" do
                             :year => 2014,
                             :licitation_process_publications => [])
 
-    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+    navigate "Processos de Compra > Pregão Presencial"
 
     click_link "Criar Pregão Presencial"
 
@@ -120,7 +120,7 @@ feature "Tradings" do
   scenario "choosing a commission for the trading session" do
     LicitationCommission.make!(:comissao_pregao_presencial)
 
-    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+    navigate "Processos de Compra > Pregão Presencial"
 
     click_link "Criar Pregão Presencial"
 
@@ -138,7 +138,7 @@ feature "Tradings" do
     LicitationProcess.make!(:pregao_presencial)
     LicitationCommission.make!(:comissao_pregao_presencial)
 
-    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+    navigate "Processos de Compra > Pregão Presencial"
 
     click_link "Criar Pregão Presencial"
 
@@ -190,7 +190,7 @@ feature "Tradings" do
 
   scenario "suggesting the current year as the trading's year" do
 
-    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+    navigate "Processos de Compra > Pregão Presencial"
 
     click_link "Criar Pregão Presencial"
 
@@ -205,7 +205,7 @@ feature "Tradings" do
                                :exoneration_date => nil)
     LicitationCommission.make!(:comissao_pregao_presencial)
 
-    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+    navigate "Processos de Compra > Pregão Presencial"
 
     click_link "Criar Pregão Presencial"
 
@@ -224,7 +224,7 @@ feature "Tradings" do
     LicitationCommission.make!(:comissao_pregao_presencial,
                                :expiration_date => Date.yesterday)
 
-    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+    navigate "Processos de Compra > Pregão Presencial"
 
     click_link "Criar Pregão Presencial"
 
@@ -242,7 +242,7 @@ feature "Tradings" do
     LicitationCommission.make!(:comissao_pregao_presencial,
                                :exoneration_date => Date.today)
 
-    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+    navigate "Processos de Compra > Pregão Presencial"
 
     click_link "Criar Pregão Presencial"
 
@@ -264,7 +264,7 @@ feature "Tradings" do
     })
     Creditor.make!(:sobrinho)
 
-    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+    navigate "Processos de Compra > Pregão Presencial"
 
     click_link "Limpar Filtro"
 
@@ -293,7 +293,7 @@ feature "Tradings" do
     trading = Trading.make!(:pregao_presencial, :items => [trading_item, trading_item2])
     trading.licitation_process.bidders << Bidder.make!(:licitante_com_proposta_3)
 
-    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+    navigate "Processos de Compra > Pregão Presencial"
 
     click_link "Limpar Filtro"
 
@@ -764,7 +764,7 @@ feature "Tradings" do
   scenario 'columns for index with att_header' do
     Trading.make!(:pregao_presencial)
 
-    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+    navigate "Processos de Compra > Pregão Presencial"
 
     click_link "Limpar Filtro"
 

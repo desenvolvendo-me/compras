@@ -12,7 +12,7 @@ feature "LicitationProcessPublications" do
   scenario 'index should have link to back to licitation_process and create a new publication' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos Licitatórios'
 
     click_link "Limpar Filtro"
 
@@ -30,7 +30,7 @@ feature "LicitationProcessPublications" do
   scenario 'create a new publication' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos Licitatórios'
 
     click_link "Limpar Filtro"
 
@@ -65,7 +65,7 @@ feature "LicitationProcessPublications" do
   scenario 'update an existing publication' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos Licitatórios'
 
     click_link "Limpar Filtro"
 
@@ -102,7 +102,7 @@ feature "LicitationProcessPublications" do
   scenario 'destroy a publication' do
     LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos Licitatórios'
 
     click_link "Limpar Filtro"
 

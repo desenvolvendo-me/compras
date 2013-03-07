@@ -45,7 +45,7 @@ feature TradingItemClosing do
       :stage => TradingItemBidStage::PROPOSALS,
       :status => TradingItemBidStatus::WITH_PROPOSAL)
 
-    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+    navigate "Processos de Compra > Pregão Presencial"
 
     click_link "Limpar Filtro"
 
@@ -102,7 +102,7 @@ feature TradingItemClosing do
       :stage => TradingItemBidStage::PROPOSALS,
       :status => TradingItemBidStatus::WITH_PROPOSAL)
 
-    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+    navigate "Processos de Compra > Pregão Presencial"
 
     click_link "Limpar Filtro"
 
@@ -135,7 +135,7 @@ feature TradingItemClosing do
         item,
         TradingItem.make!(:segundo_item_pregao_presencial)])
 
-    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+    navigate "Processos de Compra > Pregão Presencial"
 
     click_link "Limpar Filtro"
 
@@ -162,7 +162,7 @@ feature TradingItemClosing do
     TradingConfiguration.make!(:pregao)
     Trading.make!(:pregao_presencial)
 
-    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+    navigate "Processos de Compra > Pregão Presencial"
 
     click_link "Limpar Filtro"
 

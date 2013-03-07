@@ -60,19 +60,17 @@ menu:
     - administration_types
 
   - purchasing_processes:
-    - purchase_solicitation_item_groups
-    - price_collections
-    - direct_purchases
-    - price_registrations
-    - purchase_solicitations
-
-  - administrative_and_licitation_processes:
     - auxiliary:
       - licitation_commissions
       - trading_configuration
       - judgment_forms
       - licitation_objects
       - legal_references
+    - purchase_solicitation_item_groups
+    - price_collections
+    - direct_purchases
+    - price_registrations
+    - purchase_solicitations
     - licitation_processes
     - licitation_notices
     - licitation_process_impugnments

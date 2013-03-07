@@ -10,7 +10,7 @@ feature "LicitationProcessImpugnments" do
     LicitationProcess.make!(:processo_licitatorio)
     Person.make!(:sobrinho)
 
-    navigate 'Processo Administrativo/Licitatório > Impugnações dos Processos Licitatórios'
+    navigate 'Processos de Compra > Impugnações dos Processos Licitatórios'
 
     click_link 'Criar Impugnação do Processo Licitatório'
 
@@ -54,7 +54,7 @@ feature "LicitationProcessImpugnments" do
   scenario 'update an existent licitation_process_impugnment' do
     LicitationProcessImpugnment.make!(:proibido_cadeiras)
 
-    navigate 'Processo Administrativo/Licitatório > Impugnações dos Processos Licitatórios'
+    navigate 'Processos de Compra > Impugnações dos Processos Licitatórios'
 
     within_records do
       click_link "1/2012 - 01/04/2012"
@@ -96,7 +96,7 @@ feature "LicitationProcessImpugnments" do
   scenario 'should have fields disabled when situation is not pending' do
     LicitationProcessImpugnment.make!(:proibido_cadeiras_deferida)
 
-    navigate 'Processo Administrativo/Licitatório > Impugnações dos Processos Licitatórios'
+    navigate 'Processos de Compra > Impugnações dos Processos Licitatórios'
 
     within_records do
       click_link '1/2012 - 01/04/2012'
@@ -120,7 +120,7 @@ feature "LicitationProcessImpugnments" do
   scenario 'should not be able to destroy an existent licitation_process_impugnment' do
     LicitationProcessImpugnment.make!(:proibido_cadeiras)
 
-    navigate 'Processo Administrativo/Licitatório > Impugnações dos Processos Licitatórios'
+    navigate 'Processos de Compra > Impugnações dos Processos Licitatórios'
 
     within_records do
       click_link '1/2012 - 01/04/2012'
@@ -132,7 +132,7 @@ feature "LicitationProcessImpugnments" do
   scenario 'envelope dates should be filled when licitation process selected' do
     LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Processo Administrativo/Licitatório > Impugnações dos Processos Licitatórios'
+    navigate 'Processos de Compra > Impugnações dos Processos Licitatórios'
 
     click_link 'Criar Impugnação do Processo Licitatório'
 
@@ -147,7 +147,7 @@ feature "LicitationProcessImpugnments" do
   scenario 'envelope dates should be empty when clear licitaion process' do
     LicitationProcessImpugnment.make!(:proibido_cadeiras)
 
-    navigate 'Processo Administrativo/Licitatório > Impugnações dos Processos Licitatórios'
+    navigate 'Processos de Compra > Impugnações dos Processos Licitatórios'
 
     within_records do
       click_link '1/2012 - 01/04/2012'

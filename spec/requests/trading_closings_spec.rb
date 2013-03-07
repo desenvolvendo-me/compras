@@ -13,7 +13,7 @@ feature TradingClosing do
     TradingConfiguration.make!(:pregao)
     Trading.make!(:pregao_presencial)
 
-    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+    navigate "Processos de Compra > Pregão Presencial"
 
     click_link "Limpar Filtro"
 

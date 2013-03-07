@@ -11,7 +11,7 @@ feature "LicitationNotices" do
   scenario 'create a new licitation_notice' do
     LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Processo Administrativo/Licitatório > Avisos de Licitações'
+    navigate 'Processos de Compra > Avisos de Licitações'
 
     click_link 'Criar Aviso de Licitação'
 
@@ -48,7 +48,7 @@ feature "LicitationNotices" do
     LicitationNotice.make!(:aviso_de_licitacao)
     LicitationProcess.make!(:processo_licitatorio_computador)
 
-    navigate 'Processo Administrativo/Licitatório > Avisos de Licitações'
+    navigate 'Processos de Compra > Avisos de Licitações'
 
     within_records do
       click_link "1/2012 - #{date_current}"
@@ -80,7 +80,7 @@ feature "LicitationNotices" do
     LicitationNotice.make!(:aviso_de_licitacao)
     LicitationProcess.make!(:processo_licitatorio_computador)
 
-    navigate 'Processo Administrativo/Licitatório > Avisos de Licitações'
+    navigate 'Processos de Compra > Avisos de Licitações'
 
     click_link 'Criar Aviso de Licitação'
 
@@ -109,7 +109,7 @@ feature "LicitationNotices" do
   scenario 'create a new licitation_notice when already exists a licitation_notice with other licitation process year' do
     LicitationNotice.make!(:aviso_de_licitacao)
 
-    navigate 'Processo Administrativo/Licitatório > Avisos de Licitações'
+    navigate 'Processos de Compra > Avisos de Licitações'
 
     click_link 'Criar Aviso de Licitação'
 
@@ -138,7 +138,7 @@ feature "LicitationNotices" do
   scenario 'destroy an existent licitation_notice' do
     LicitationNotice.make!(:aviso_de_licitacao)
 
-    navigate 'Processo Administrativo/Licitatório > Avisos de Licitações'
+    navigate 'Processos de Compra > Avisos de Licitações'
 
     within_records do
       click_link "1/2012 - #{date_current}"
@@ -155,7 +155,7 @@ feature "LicitationNotices" do
   scenario 'delegate fields should be empty when clear licitaion process' do
     LicitationNotice.make!(:aviso_de_licitacao)
 
-    navigate 'Processo Administrativo/Licitatório > Avisos de Licitações'
+    navigate 'Processos de Compra > Avisos de Licitações'
 
     within_records do
       click_link "1/2012 - #{date_current}"

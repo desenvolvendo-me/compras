@@ -12,7 +12,7 @@ feature "TradingItemBids" do
   scenario "Placing an proposal to an item" do
     Trading.make!(:pregao_presencial)
 
-    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+    navigate "Processos de Compra > Pregão Presencial"
 
     click_link "Limpar Filtro"
 
@@ -50,7 +50,7 @@ feature "TradingItemBids" do
     TradingConfiguration.make!(:pregao)
     Trading.make!(:pregao_presencial)
 
-    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+    navigate "Processos de Compra > Pregão Presencial"
 
     click_link "Limpar Filtro"
 
@@ -355,7 +355,7 @@ feature "TradingItemBids" do
 
     make_stage_of_proposals :trading => trading
 
-    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+    navigate "Processos de Compra > Pregão Presencial"
 
     click_link "Limpar Filtro"
 
@@ -403,7 +403,7 @@ feature "TradingItemBids" do
 
     make_stage_of_proposals :trading => trading
 
-    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+    navigate "Processos de Compra > Pregão Presencial"
 
     click_link "Limpar Filtro"
 
@@ -484,7 +484,7 @@ feature "TradingItemBids" do
 
     make_stage_of_proposals :trading => trading
 
-    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+    navigate "Processos de Compra > Pregão Presencial"
 
     click_link "Limpar Filtro"
 
@@ -518,7 +518,7 @@ feature "TradingItemBids" do
 
     make_stage_of_proposals :trading => trading
 
-    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+    navigate "Processos de Compra > Pregão Presencial"
 
     click_link "Limpar Filtro"
 
@@ -547,7 +547,7 @@ feature "TradingItemBids" do
 
     make_stage_of_proposals :trading => trading
 
-    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+    navigate "Processos de Compra > Pregão Presencial"
 
     click_link "Limpar Filtro"
 
@@ -577,7 +577,7 @@ feature "TradingItemBids" do
 
     make_stage_of_proposals :trading => trading
 
-    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+    navigate "Processos de Compra > Pregão Presencial"
 
     click_link "Limpar Filtro"
 
@@ -605,7 +605,7 @@ feature "TradingItemBids" do
 
     make_stage_of_proposals :trading => trading
 
-    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+    navigate "Processos de Compra > Pregão Presencial"
 
     click_link "Limpar Filtro"
 
@@ -677,7 +677,7 @@ feature "TradingItemBids" do
 
     make_stage_of_proposals :trading => trading
 
-    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+    navigate "Processos de Compra > Pregão Presencial"
 
     click_link "Limpar Filtro"
 
@@ -714,7 +714,7 @@ feature "TradingItemBids" do
 
     make_stage_of_proposals :trading => trading
 
-    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+    navigate "Processos de Compra > Pregão Presencial"
 
     click_link "Limpar Filtro"
 
@@ -751,7 +751,7 @@ feature "TradingItemBids" do
 
     make_stage_of_proposals :trading => trading
 
-    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+    navigate "Processos de Compra > Pregão Presencial"
 
     click_link "Limpar Filtro"
 
@@ -794,7 +794,7 @@ feature "TradingItemBids" do
 
     make_stage_of_proposals :trading => trading
 
-    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+    navigate "Processos de Compra > Pregão Presencial"
 
     click_link "Limpar Filtro"
 
@@ -823,7 +823,7 @@ feature "TradingItemBids" do
   scenario "back link at new should back to trading_item index" do
     Trading.make!(:pregao_presencial)
 
-    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+    navigate "Processos de Compra > Pregão Presencial"
 
     click_link "Limpar Filtro"
 
@@ -845,7 +845,7 @@ feature "TradingItemBids" do
 
     make_stage_of_proposals :trading => trading
 
-    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+    navigate "Processos de Compra > Pregão Presencial"
 
     click_link "Limpar Filtro"
 
@@ -865,7 +865,7 @@ feature "TradingItemBids" do
   scenario 'edit the last proposal at round_of_bids' do
     make_stage_of_proposals
 
-    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+    navigate "Processos de Compra > Pregão Presencial"
 
     click_link "Limpar Filtro"
 
@@ -937,7 +937,7 @@ feature "TradingItemBids" do
 
     make_stage_of_proposals :trading => trading
 
-    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+    navigate "Processos de Compra > Pregão Presencial"
 
     click_link "Limpar Filtro"
 
@@ -1063,7 +1063,7 @@ feature "TradingItemBids" do
 
     make_stage_of_proposals :trading => trading
 
-    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+    navigate "Processos de Compra > Pregão Presencial"
 
     click_link "Limpar Filtro"
 
@@ -1160,7 +1160,7 @@ feature "TradingItemBids" do
   scenario 'negotiation of the winner not benefited' do
     make_stage_of_proposals
 
-    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+    navigate "Processos de Compra > Pregão Presencial"
 
     click_link "Limpar Filtro"
 

@@ -300,7 +300,7 @@ feature 'DirectPurchaseAnnuls' do
     DirectPurchase.make!(:compra_nao_autorizada)
     DirectPurchase.make!(:compra_2011)
 
-    navigate 'Processo Administrativo/Licitatório > Auxiliar > Objetos de Licitação'
+    navigate 'Processos de Compra > Auxiliar > Objetos de Licitação'
 
     click_link "Limpar Filtro"
 
@@ -344,7 +344,7 @@ feature 'DirectPurchaseAnnuls' do
     expect(page).to have_field 'Data', :with => '01/10/2012'
     expect(page).to have_field 'Justificativa', :with => 'Anulação da compra direta'
 
-    navigate 'Processo Administrativo/Licitatório > Auxiliar > Objetos de Licitação'
+    navigate 'Processos de Compra > Auxiliar > Objetos de Licitação'
 
     click_link "Limpar Filtro"
 

@@ -71,7 +71,6 @@ pt-BR:
 
   menu:
     <<: *controllers
-    administrative_and_licitation_processes: "Processo Administrativo/Licitatório"
     auxiliary: "Auxiliar"
     cadastral: "Cadastrais"
     commom: "Comum"
