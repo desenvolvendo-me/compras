@@ -9,16 +9,8 @@
     <%= f.input :year, :disabled => f.object.persisted? %>
   </div>
 
-  <div class="yui3-u-1-6">
-    <%= f.input :process_date %>
-  </div>
-
   <div class="yui3-u-1-4">
     <%= f.input :protocol %>
-  </div>
-
-  <div class="yui3-u-5-24">
-    <%= f.input :status, :disabled => true %>
   </div>
 </div>
 
@@ -40,7 +32,27 @@
   <div class="yui3-u-1-3">
     <%= f.input :contract_guarantees %>
   </div>
+
+  <div class="yui3-u-1-3">
+    <%= f.input :index_update_rate %>
+  </div>
 </div>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-3">
+    <%= f.input :readjustment_index %>
+  </div>
+
+  <div class="yui3-u-2-3">
+    <%= f.input :extension_clause %>
+  </div>
+</div>
+
+<%= f.input :description %>
+
+<%= f.input :process_date %>
+<%= f.input :status, :disabled => true %>
+
 
 <%= f.input :modality, :collection => [] %>
 
@@ -62,7 +74,6 @@
 </div>
 
 <%= f.input :summarized_object %>
-<%= f.input :description %>
 <%= f.input :price_registration %>
 
 <div class="yui3-g">
@@ -92,7 +103,6 @@
   </div>
 
   <div class="yui3-u-1-3">
-    <%= f.input :readjustment_index %>
   </div>
 </div>
 

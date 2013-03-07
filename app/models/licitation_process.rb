@@ -13,7 +13,7 @@ class LicitationProcess < Compras::Model
                   :date, :protocol, :item, :purchase_solicitation_item_group_id,
                   :summarized_object, :modality, :description, :pledge_type,
                   :administrative_process_budget_allocations_attributes,
-                  :contract_guarantees
+                  :contract_guarantees, :extension_clause, :index_update_rate_id
 
   auto_increment :process, :by => :year
 
@@ -21,18 +21,17 @@ class LicitationProcess < Compras::Model
 
   attr_modal :process, :year, :process_date, :licitation_number
 
-  has_enumeration_for :legal_advice, :with => LicitationProcessLegalAdvice
-  has_enumeration_for :pledge_type
-  has_enumeration_for :type_of_calculation, :with => LicitationProcessTypeOfCalculation, :create_helpers => true
-  has_enumeration_for :expiration_unit, :with => PeriodUnit
-  has_enumeration_for :period_unit, :with => PeriodUnit
-  has_enumeration_for :status, :with => LicitationProcessStatus, :create_helpers => true
-  has_enumeration_for :execution_type, :create_helpers => true
-  has_enumeration_for :modality, :create_helpers => true, :create_scopes => true
-  has_enumeration_for :object_type, :with => LicitationProcessObjectType,
-                      :create_helpers => true
   has_enumeration_for :contract_guarantees
+  has_enumeration_for :execution_type, :create_helpers => true
+  has_enumeration_for :expiration_unit, :with => PeriodUnit
+  has_enumeration_for :legal_advice, :with => LicitationProcessLegalAdvice
+  has_enumeration_for :modality, :create_helpers => true, :create_scopes => true
+  has_enumeration_for :object_type, :with => LicitationProcessObjectType, :create_helpers => true
+  has_enumeration_for :period_unit, :with => PeriodUnit
+  has_enumeration_for :pledge_type
+  has_enumeration_for :status, :with => LicitationProcessStatus, :create_helpers => true
   has_enumeration_for :type_of_purchase, :with => LicitationProcessTypeOfPurchase
+  has_enumeration_for :type_of_calculation, :with => LicitationProcessTypeOfCalculation, :create_helpers => true
 
   belongs_to :capability
   belongs_to :delivery_location
@@ -41,6 +40,7 @@ class LicitationProcess < Compras::Model
   belongs_to :purchase_solicitation
   belongs_to :purchase_solicitation_item_group
   belongs_to :readjustment_index, :class_name => 'Indexer'
+  belongs_to :index_update_rate, :class_name => 'Indexer'
   belongs_to :responsible, :class_name => 'Employee'
 
   has_and_belongs_to_many :document_types, :join_table => :compras_document_types_compras_licitation_processes
