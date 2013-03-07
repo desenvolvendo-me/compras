@@ -8,14 +8,9 @@ module Helpers
   end
 
   def sign_in
+    login_as current_user, :scope => :user
+
     visit root_path
-
-    fill_in 'Login', :with => current_user.login
-    fill_in 'Senha', :with => current_user.password
-
-    click_button 'Login'
-
-    page.should have_notice 'Login efetuado com sucesso.'
   end
 
   def clear_modal(locator)

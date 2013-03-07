@@ -28,7 +28,7 @@ feature "SignInAndSignOut" do
     expect(page).to have_notice 'Login efetuado com sucesso.'
   end
 
-  scenario 'sign out' do
+  scenario 'sign out and sign in' do
     visit root_path
 
     fill_in 'Login', :with => 'gabriel.sobrinho'
