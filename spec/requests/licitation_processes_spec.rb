@@ -41,7 +41,7 @@ feature "LicitationProcesses" do
     within_tab 'Principal' do
       expect(page).to have_disabled_field 'Processo'
       expect(page).to have_disabled_field 'Modalidade'
-      expect(page).to have_disabled_field 'Número da Modalidade'
+      expect(page).to have_disabled_field 'Número da modalidade'
       expect(page).to have_disabled_field 'Data da homologação'
       expect(page).to have_disabled_field 'Data da adjudicação'
       expect(page).to have_disabled_field 'Data da abertura dos envelopes'
@@ -126,7 +126,7 @@ feature "LicitationProcesses" do
       expect(page).to_not have_disabled_field 'Hora da abertura'
 
       expect(page).to have_select 'Modalidade', :selected => 'Concorrência'
-      expect(page).to have_disabled_field 'Número da Modalidade', :with => '1'
+      expect(page).to have_disabled_field 'Número da modalidade', :with => '1'
       expect(page).to have_select 'Tipo de objeto', :selected => 'Compras e serviços'
       expect(page).to have_select 'Forma de julgamento', :selected => 'Por Item com Melhor Técnica'
       expect(page).to have_field 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
@@ -2103,7 +2103,7 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Dotações orçamentárias' do
-      expect(page).to have_disabled_field 'Atendido por', :with => 'Processo licitatório 1/2012 - Concorrência 1'
+      expect(page).to have_disabled_field 'Atendido por', :with => 'Processo de compra 1/2012 - Concorrência 1'
     end
   end
 
@@ -2172,7 +2172,7 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Dotações orçamentárias' do
-      expect(page).to have_disabled_field 'Atendido por', :with => 'Processo licitatório 1/2012 - Convite 1'
+      expect(page).to have_disabled_field 'Atendido por', :with => 'Processo de compra 1/2012 - Convite 1'
     end
 
     navigate 'Processos de Compra > Processos Licitatórios'
@@ -2216,7 +2216,7 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Dotações orçamentárias' do
-      expect(page).to have_disabled_field 'Atendido por', :with => 'Processo licitatório 1/2012 - Convite 1'
+      expect(page).to have_disabled_field 'Atendido por', :with => 'Processo de compra 1/2012 - Convite 1'
     end
   end
 
@@ -2268,7 +2268,7 @@ feature "LicitationProcesses" do
         within '.item' do
           expect(page).to have_select 'Status', :selected => 'Parcialmente atendido'
           expect(page).to have_field 'Agrupamento', :with => 'Agrupamento de antivirus'
-          expect(page).to have_disabled_field 'Atendido por', :with => 'Processo licitatório 1/2012 - Convite 1'
+          expect(page).to have_disabled_field 'Atendido por', :with => 'Processo de compra 1/2012 - Convite 1'
         end
       end
     end
@@ -2332,7 +2332,7 @@ feature "LicitationProcesses" do
         within '.item' do
           expect(page).to have_select 'Status', :selected => 'Parcialmente atendido'
           #expect(page).to have_field 'Agrupamento', :with => 'Agrupamento de antivirus'
-          expect(page).to have_disabled_field 'Atendido por', :with => 'Processo licitatório 1/2012 - Convite 1'
+          expect(page).to have_disabled_field 'Atendido por', :with => 'Processo de compra 1/2012 - Convite 1'
         end
       end
     end
@@ -2610,7 +2610,7 @@ feature "LicitationProcesses" do
     within_tab 'Dotações orçamentárias' do
       within '.item:nth-child(1)' do
         expect(page).to have_select 'Status', :selected => 'Parcialmente atendido'
-        expect(page).to have_disabled_field 'Atendido por', :with => 'Processo licitatório 1/2012 - Concorrência 1'
+        expect(page).to have_disabled_field 'Atendido por', :with => 'Processo de compra 1/2012 - Concorrência 1'
       end
     end
 
