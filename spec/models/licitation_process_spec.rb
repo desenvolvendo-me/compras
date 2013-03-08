@@ -46,6 +46,7 @@ describe LicitationProcess do
   end
 
   it { should belong_to :capability }
+  it { should belong_to :contact }
   it { should belong_to :delivery_location }
   it { should belong_to :judgment_form }
   it { should belong_to :payment_method }

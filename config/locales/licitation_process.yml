@@ -8,10 +8,12 @@ pt-BR:
     attributes:
       licitation_process:
         adjudication_date: "Data da adjudicação"
+        availability_of_the_notice_date: "Data da disponibilidade"
         capability: "Fonte de recurso"
         caution_value: "Valor da caução"
         code_and_year: "Processo/Ano"
         consider_law_of_proposals: "Considerar Lei 123/2006 para classificação das propostas"
+        contact: "Contato para informações"
         contract_date: "Data do contrato"
         contract_expiration: "Validade do contrato (meses)"
         contract_guarantees: 'Tipo de garantia'
@@ -20,7 +22,7 @@ pt-BR:
         disqualify_by_documentation_problem: "Desclassificar participantes com problemas da documentação"
         disqualify_by_maximum_value: "Desclassificar participantes com cotações acima do valor máximo estabelecido no edital"
         document_types: "Tipo de documento"
-        envelope_delivery_date: "Data da entrega dos envelopes"
+        envelope_delivery_date: "Término do recebimento dos envelopes"
         envelope_delivery_time: "Hora da entrega"
         envelope_opening_date: "Data da abertura dos envelopes"
         envelope_opening_time: "Hora da abertura"
@@ -52,6 +54,7 @@ pt-BR:
         ratification_date: "Data da homologação"
         readjustment_index: "Índice de reajuste"
         responsible: "Responsável"
+        stage_of_bids_date: "Data da fase de lances"
         summarized_object: "Objeto resumido do processo licitatório"
         type_of_calculation: "Tipo da apuração"
         type_of_purchase: "Tipo da compra"

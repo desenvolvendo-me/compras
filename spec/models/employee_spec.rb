@@ -15,7 +15,8 @@ describe Employee do
   it { should belong_to :individual }
   it { should belong_to :position }
 
-  it { should have_many(:purchase_solicitations).dependent(:restrict) }
+  it { should have_many(:contacts_of_purchase_solicitations).dependent(:restrict) }
+  it { should have_many(:responsibles_of_purchase_solicitations).dependent(:restrict) }
   it { should have_many(:purchase_solicitation_liberations).dependent(:restrict) }
   it { should have_many(:budget_structure_responsibles).dependent(:restrict) }
   it { should have_many(:direct_purchases).dependent(:restrict) }

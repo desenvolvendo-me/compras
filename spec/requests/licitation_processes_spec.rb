@@ -44,12 +44,10 @@ feature "LicitationProcesses" do
       expect(page).to have_disabled_field 'Número da modalidade'
       expect(page).to have_disabled_field 'Data da homologação'
       expect(page).to have_disabled_field 'Data da adjudicação'
-      expect(page).to have_disabled_field 'Data da abertura dos envelopes'
-      expect(page).to have_disabled_field 'Hora da abertura'
+      expect(page).to have_field 'Ano', :with => "#{Date.current.year}"
 
       choose 'Processo de compra'
       fill_in 'Ano', :with => '2012'
-      fill_in 'Data da expedição', :with => '21/03/2012'
       select 'Global', :from => 'Tipo de empenho'
 
       select 'Compras e serviços', :from => 'Tipo de objeto'
@@ -64,13 +62,7 @@ feature "LicitationProcesses" do
       select 'Empreitada integral', :from => 'Forma de execução'
       select 'Fiança bancária', :from => 'Tipo de garantia'
       fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
-      fill_in 'Validade da proposta', :with => '5'
-      select 'dia/dias', :from => 'Período da validade da proposta'
       fill_modal 'Índice de reajuste', :with => 'XPTO'
-      fill_in 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
-      fill_in 'Hora da entrega', :with => '14:00'
-      fill_in 'Prazo de entrega', :with => '1'
-      select 'ano/anos', :from => 'Período do prazo de entrega'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Valor da caução', :with => '50,00'
       select 'Favorável', :from => 'Parecer jurídico'
@@ -78,6 +70,24 @@ feature "LicitationProcesses" do
       fill_in 'Data do contrato', :with => '31/03/2012'
       fill_in 'Validade do contrato (meses)', :with => '5'
       fill_in 'Observações gerais', :with => 'observacoes'
+    end
+
+    within_tab 'Prazos' do
+      expect(page).to have_disabled_field 'Data da abertura dos envelopes'
+      expect(page).to have_disabled_field 'Hora da abertura'
+
+      expect(page).to have_field 'Data da expedição', :with => I18n.l(Date.current)
+      fill_in 'Data da disponibilidade', :with => I18n.l(Date.current)
+      fill_modal 'Contato para informações', :with => '958473', :field => 'Matrícula'
+
+      fill_in 'Término do recebimento dos envelopes', :with => I18n.l(Date.current)
+      fill_in 'Hora da entrega', :with => '14:00'
+
+      fill_in 'Validade da proposta', :with => '5'
+      select 'dia/dias', :from => 'Período da validade da proposta'
+
+      fill_in 'Prazo de entrega', :with => '1'
+      select 'ano/anos', :from => 'Período do prazo de entrega'
     end
 
     within_tab 'Documentos' do
@@ -120,10 +130,7 @@ feature "LicitationProcesses" do
 
       expect(page).to have_field 'Processo', :with => '1'
       expect(page).to have_field 'Ano', :with => '2012'
-      expect(page).to have_field 'Data da expedição', :with => '21/03/2012'
       expect(page).to have_select 'Tipo de empenho', :selected => 'Global'
-      expect(page).to_not have_disabled_field 'Data da abertura dos envelopes'
-      expect(page).to_not have_disabled_field 'Hora da abertura'
 
       expect(page).to have_select 'Modalidade', :selected => 'Concorrência'
       expect(page).to have_disabled_field 'Número da modalidade', :with => '1'
@@ -137,26 +144,39 @@ feature "LicitationProcesses" do
       expect(page).to have_select 'Forma de execução', :selected => 'Empreitada integral'
       expect(page).to have_select 'Tipo de garantia', :selected => 'Fiança bancária'
       expect(page).to have_field 'Fonte de recurso', :with => 'Reforma e Ampliação'
-      expect(page).to have_field 'Validade da proposta', :with => '5'
-      expect(page).to have_select 'Período da validade da proposta', :selected => 'dia/dias'
       expect(page).to have_field 'Índice de reajuste', :with => 'XPTO'
-      expect(page).to have_field 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
-      expect(page).to have_field 'Hora da entrega', :with => '14:00'
-      expect(page).to have_field 'Data da abertura dos envelopes', :with => ''
-      expect(page).to have_field 'Hora da abertura', :with => ''
-      expect(page).to have_field 'Prazo de entrega', :with => '1'
-      expect(page).to have_select 'Período do prazo de entrega', :selected => 'ano/anos'
       expect(page).to have_field 'Forma de pagamento', :with => 'Dinheiro'
       expect(page).to have_field 'Valor da caução', :with => '50,00'
       expect(page).to have_select 'Parecer jurídico', :selected => 'Favorável'
       expect(page).to have_field 'Data do parecer', :with => '30/03/2012'
       expect(page).to have_field 'Data do contrato', :with => '31/03/2012'
-      expect(page).to have_field 'Validade do contrato (meses)', :with => '5'
       expect(page).to have_field 'Observações gerais', :with => 'observacoes'
 
       # testing fields of licitation number
       expect(page).to have_field 'Número da licitação', :with => '1'
       expect(page).to have_field 'Ano', :with => '2012'
+
+      expect(page).to have_field 'Validade do contrato (meses)', :with => '5'
+    end
+
+    within_tab 'Prazos' do
+      expect(page).to_not have_disabled_field 'Data da abertura dos envelopes'
+      expect(page).to_not have_disabled_field 'Hora da abertura'
+
+      expect(page).to have_field 'Data da expedição', :with => I18n.l(Date.current)
+      expect(page).to have_field 'Data da disponibilidade', :with => I18n.l(Date.current)
+      expect(page).to have_field 'Contato para informações', :with => 'Gabriel Sobrinho'
+
+      expect(page).to have_field 'Término do recebimento dos envelopes', :with => I18n.l(Date.current)
+      expect(page).to have_field 'Hora da entrega', :with => '14:00'
+
+      expect(page).to have_field 'Data da abertura dos envelopes', :with => ''
+      expect(page).to have_field 'Hora da abertura', :with => ''
+
+      expect(page).to have_field 'Validade da proposta', :with => '5'
+      expect(page).to have_select 'Período da validade da proposta', :selected => 'dia/dias'
+      expect(page).to have_field 'Prazo de entrega', :with => '1'
+      expect(page).to have_select 'Período do prazo de entrega', :selected => 'ano/anos'
     end
 
     within_tab 'Documentos' do
@@ -235,29 +255,15 @@ feature "LicitationProcesses" do
 
     expect(page).to have_title "Editar Processo de Compra"
     expect(page).to have_subtitle "1/2012"
-
     expect(page).to have_link 'Publicações'
 
-    fill_in 'Data da expedição', :with => '32/12/2012'
-    expect(page).to have_content "data inválida"
-    expect(page).to have_disabled_element "Salvar", :reason => "Há campos inválidos no formulário"
-
     within_tab 'Principal' do
-      fill_in 'Data da expedição', :with => '21/03/2013'
       select 'Estimativo', :from => 'Tipo de empenho'
       select 'Menor preço total por item', :from => 'Tipo da apuração'
       select 'Empreitada integral', :from => 'Forma de execução'
       select 'Fiança bancária', :from => 'Tipo de garantia'
       fill_modal 'Fonte de recurso', :with => 'Construção', :field => 'Descrição'
-      fill_in 'Validade da proposta', :with => '10'
-      select 'dia/dias', :from => 'Período da validade da proposta'
       fill_modal 'Índice de reajuste', :with => 'SELIC'
-      fill_in 'Data da entrega dos envelopes', :with => I18n.l(Date.tomorrow)
-      fill_in 'Hora da entrega', :with => '15:00'
-      fill_in 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow + 1.day)
-      fill_in 'Hora da abertura', :with => '15:00'
-      fill_in 'Prazo de entrega', :with => '3'
-      select  'mês/meses', :from => 'Período do prazo de entrega'
       fill_modal 'Forma de pagamento', :with => 'Cheque', :field => 'Descrição'
       fill_in 'Valor da caução', :with => '60,00'
       select 'Contrário', :from => 'Parecer jurídico'
@@ -265,6 +271,28 @@ feature "LicitationProcesses" do
       fill_in 'Data do contrato', :with => '31/03/2013'
       fill_in 'Validade do contrato (meses)', :with => '6'
       fill_in 'Observações gerais', :with => 'novas observacoes'
+    end
+
+    within_tab 'Prazos' do
+      fill_in 'Data da expedição', :with => '32/12/2012'
+      expect(page).to have_content "data inválida"
+    end
+
+    expect(page).to have_disabled_element "Salvar", :reason => "Há campos inválidos no formulário"
+
+    within_tab 'Prazos' do
+      fill_in 'Data da expedição', :with => '19/03/2012'
+      fill_in 'Data da disponibilidade', :with => I18n.l(Date.current)
+      fill_modal 'Contato para informações', :with => '958473', :field => 'Matrícula'
+
+      fill_in 'Término do recebimento dos envelopes', :with => I18n.l(Date.tomorrow)
+      fill_in 'Hora da entrega', :with => '15:00'
+
+      fill_in 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow + 1.day)
+      fill_in 'Hora da abertura', :with => '15:00'
+
+      fill_in 'Prazo de entrega', :with => '3'
+      select  'mês/meses', :from => 'Período do prazo de entrega'
     end
 
     within_tab 'Documentos' do
@@ -299,21 +327,12 @@ feature "LicitationProcesses" do
     expect(page).to have_notice 'Processo de Compra 1/2012 editado com sucesso.'
 
     within_tab 'Principal' do
-      expect(page).to have_field 'Data da expedição', :with => '21/03/2013'
       expect(page).to have_select 'Tipo de empenho', :selected => 'Estimativo'
       expect(page).to have_select 'Tipo da apuração', :selected => 'Menor preço total por item'
       expect(page).to have_select 'Forma de execução', :selected => 'Empreitada integral'
       expect(page).to have_select 'Tipo de garantia', :selected => 'Fiança bancária'
       expect(page).to have_field 'Fonte de recurso', :with => 'Construção'
-      expect(page).to have_field 'Validade da proposta', :with => '10'
-      expect(page).to have_select 'Período da validade da proposta', :selected => 'dia/dias'
       expect(page).to have_field 'Índice de reajuste', :with => 'SELIC'
-      expect(page).to have_field 'Data da entrega dos envelopes', :with => I18n.l(Date.tomorrow)
-      expect(page).to have_field 'Hora da entrega', :with => '15:00'
-      expect(page).to have_field 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow + 1.day)
-      expect(page).to have_field 'Hora da abertura', :with => '15:00'
-      expect(page).to have_field 'Prazo de entrega', :with => '3'
-      expect(page).to have_select 'Período do prazo de entrega', :selected => 'mês/meses'
       expect(page).to have_field 'Forma de pagamento', :with => 'Cheque'
       expect(page).to have_field 'Valor da caução', :with => '60,00'
       expect(page).to have_select 'Parecer jurídico', :selected => 'Contrário'
@@ -321,6 +340,25 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Data do contrato', :with => '31/03/2013'
       expect(page).to have_field 'Validade do contrato (meses)', :with => '6'
       expect(page).to have_field 'Observações gerais', :with => 'novas observacoes'
+      expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
+    end
+
+    within_tab 'Prazos' do
+      expect(page).to have_field 'Data da expedição', :with => '19/03/2012'
+      expect(page).to have_field 'Data da disponibilidade', :with => I18n.l(Date.current)
+      expect(page).to have_field 'Contato para informações', :with => 'Gabriel Sobrinho'
+
+      expect(page).to have_field 'Término do recebimento dos envelopes', :with => I18n.l(Date.tomorrow)
+      expect(page).to have_field 'Hora da entrega', :with => '15:00'
+
+      expect(page).to have_field 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow + 1.day)
+      expect(page).to have_field 'Hora da abertura', :with => '15:00'
+
+      expect(page).to have_field 'Validade da proposta', :with => '10'
+      expect(page).to have_select 'Período da validade da proposta', :selected => 'dia/dias'
+
+      expect(page).to have_field 'Prazo de entrega', :with => '3'
+      expect(page).to have_select 'Período do prazo de entrega', :selected => 'mês/meses'
     end
 
     within_tab 'Documentos' do
@@ -471,17 +509,6 @@ feature "LicitationProcesses" do
     expect(page).to_not have_link 'Lotes de itens'
   end
 
-  scenario "should brings some filled fields when creating a new licitation process" do
-    navigate 'Processos de Compra > Processos Licitatórios'
-
-    click_link 'Criar Processo de Compra'
-
-    within_tab 'Principal' do
-      expect(page).to have_field 'Ano', :with => "#{Date.current.year}"
-      expect(page).to have_field 'Data da expedição', :with => "#{I18n.l(Date.current)}"
-    end
-  end
-
   scenario 'budget allocation with quantity empty and total item value should have 0 as unit value' do
     LicitationProcess.make!(:processo_licitatorio)
 
@@ -523,15 +550,7 @@ feature "LicitationProcesses" do
       select 'Empreitada integral', :from => 'Forma de execução'
       select 'Fiança bancária', :from => 'Tipo de garantia'
       fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
-      fill_in 'Validade da proposta', :with => '5'
-      select 'dia/dias', :from => 'Período da validade da proposta'
       fill_modal 'Índice de reajuste', :with => 'XPTO'
-      fill_in 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
-      fill_in 'Hora da entrega', :with => I18n.l(Date.current, :format => 'time')
-      fill_in 'Data da abertura dos envelopes', :with => I18n.l(Date.current)
-      fill_in 'Hora da abertura', :with => I18n.l(Date.current, :format => 'time')
-      fill_in 'Prazo de entrega', :with => '1'
-      select 'ano/anos', :from => 'Período do prazo de entrega'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Valor da caução', :with => '50,00'
       select 'Favorável', :from => 'Parecer jurídico'
@@ -539,6 +558,23 @@ feature "LicitationProcesses" do
       fill_in 'Data do contrato', :with => '31/03/2012'
       fill_in 'Validade do contrato (meses)', :with => '5'
       fill_in 'Observações gerais', :with => 'observacoes'
+    end
+
+    within_tab 'Prazos' do
+      expect(page).to have_field 'Data da expedição', :with => I18n.l(Date.current)
+      fill_in 'Data da disponibilidade', :with => I18n.l(Date.current)
+      fill_modal 'Contato para informações', :with => '958473', :field => 'Matrícula'
+
+      fill_in 'Término do recebimento dos envelopes', :with => I18n.l(Date.current)
+      fill_in 'Hora da entrega', :with => I18n.l(Date.current, :format => 'time')
+      fill_in 'Data da abertura dos envelopes', :with => I18n.l(Date.current)
+      fill_in 'Hora da abertura', :with => I18n.l(Date.current, :format => 'time')
+
+      fill_in 'Validade da proposta', :with => '5'
+      select 'dia/dias', :from => 'Período da validade da proposta'
+
+      fill_in 'Prazo de entrega', :with => '1'
+      select 'ano/anos', :from => 'Período do prazo de entrega'
     end
 
     click_button 'Salvar'
@@ -668,15 +704,12 @@ feature "LicitationProcesses" do
 
     within_tab "Principal" do
       expect(page).to have_disabled_field "Forma de julgamento"
-      expect(page).to have_disabled_field "Data da expedição"
       expect(page).to have_disabled_field "Fonte de recurso"
-      expect(page).to have_disabled_field "Validade da proposta"
       expect(page).to have_disabled_field "Índice de reajuste"
       expect(page).to have_disabled_field "Observações gerais"
     end
 
-    expect(page).to have_disabled_element 'Salvar',
-                    :reason => 'já foi homologado. Não pode ser alterado'
+    expect(page).to have_disabled_element 'Salvar', :reason => 'já foi homologado. Não pode ser alterado'
   end
 
   scenario 'index with columns at the index' do
@@ -1349,7 +1382,6 @@ feature "LicitationProcesses" do
       fill_modal 'Solicitação de compra', :with => '1', :field => 'Código'
       fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => "Descrição"
       fill_in 'Ano', :with => '2012'
-      fill_in 'Data da expedição', :with => '21/03/2012'
       select 'Compras e serviços', :from => 'Tipo de objeto'
       select 'Concorrência', :from => 'Modalidade'
       select 'Por Item com Melhor Técnica', :from =>'Forma de julgamento'
@@ -1362,13 +1394,7 @@ feature "LicitationProcesses" do
       select 'Empreitada integral', :from => 'Forma de execução'
       select 'Fiança bancária', :from => 'Tipo de garantia'
       fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
-      fill_in 'Validade da proposta', :with => '5'
-      select 'dia/dias', :from => 'Período da validade da proposta'
       fill_modal 'Índice de reajuste', :with => 'XPTO'
-      fill_in 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
-      fill_in 'Hora da entrega', :with => '14:00'
-      fill_in 'Prazo de entrega', :with => '1'
-      select 'ano/anos', :from => 'Período do prazo de entrega'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Valor da caução', :with => '50,00'
       select 'Favorável', :from => 'Parecer jurídico'
@@ -1376,6 +1402,21 @@ feature "LicitationProcesses" do
       fill_in 'Data do contrato', :with => '31/03/2012'
       fill_in 'Validade do contrato (meses)', :with => '5'
       fill_in 'Observações gerais', :with => 'observacoes'
+    end
+
+    within_tab 'Prazos' do
+      fill_in 'Data da expedição', :with => '21/03/2012'
+      fill_in 'Data da disponibilidade', :with => I18n.l(Date.current)
+      fill_modal 'Contato para informações', :with => '958473', :field => 'Matrícula'
+
+      fill_in 'Término do recebimento dos envelopes', :with => I18n.l(Date.current)
+      fill_in 'Hora da entrega', :with => '14:00'
+
+      fill_in 'Validade da proposta', :with => '5'
+      select 'dia/dias', :from => 'Período da validade da proposta'
+
+      fill_in 'Prazo de entrega', :with => '1'
+      select 'ano/anos', :from => 'Período do prazo de entrega'
     end
 
     click_button 'Salvar'
@@ -1455,7 +1496,6 @@ feature "LicitationProcesses" do
     within_tab 'Principal' do
       choose 'Processo de compra'
       fill_in 'Ano', :with => '2012'
-      fill_in 'Data da expedição', :with => '21/03/2012'
       select 'Global', :from => 'Tipo de empenho'
 
       select 'Compras e serviços', :from => 'Tipo de objeto'
@@ -1470,13 +1510,7 @@ feature "LicitationProcesses" do
       select 'Empreitada integral', :from => 'Forma de execução'
       select 'Fiança bancária', :from => 'Tipo de garantia'
       fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
-      fill_in 'Validade da proposta', :with => '5'
-      select 'dia/dias', :from => 'Período da validade da proposta'
       fill_modal 'Índice de reajuste', :with => 'XPTO'
-      fill_in 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
-      fill_in 'Hora da entrega', :with => '14:00'
-      fill_in 'Prazo de entrega', :with => '1'
-      select 'ano/anos', :from => 'Período do prazo de entrega'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Valor da caução', :with => '50,00'
       select 'Favorável', :from => 'Parecer jurídico'
@@ -1490,6 +1524,21 @@ feature "LicitationProcesses" do
 
         click_record 'Agrupamento de reparo 2013'
       end
+    end
+
+    within_tab 'Prazos' do
+      fill_in 'Data da expedição', :with => '21/03/2012'
+      fill_in 'Data da disponibilidade', :with => I18n.l(Date.current)
+      fill_modal 'Contato para informações', :with => '958473', :field => 'Matrícula'
+
+      fill_in 'Término do recebimento dos envelopes', :with => I18n.l(Date.current)
+      fill_in 'Hora da entrega', :with => '14:00'
+
+      fill_in 'Validade da proposta', :with => '5'
+      select 'dia/dias', :from => 'Período da validade da proposta'
+
+      fill_in 'Prazo de entrega', :with => '1'
+      select 'ano/anos', :from => 'Período do prazo de entrega'
     end
 
     within_tab 'Documentos' do
@@ -1544,7 +1593,6 @@ feature "LicitationProcesses" do
 
     within_tab 'Principal' do
       expect(page).to have_field 'Ano', :with => '2012'
-      expect(page).to have_field 'Data da expedição', :with => '21/03/2012'
       expect(page).to have_select 'Tipo de empenho', :selected => 'Global'
 
       expect(page).to have_select 'Tipo de objeto', :selected => 'Compras e serviços'
@@ -1558,13 +1606,7 @@ feature "LicitationProcesses" do
       expect(page).to have_select 'Forma de execução', :selected => 'Empreitada integral'
       expect(page).to have_select 'Tipo de garantia', :selected => 'Fiança bancária'
       expect(page).to have_field 'Fonte de recurso', :with => 'Reforma e Ampliação'
-      expect(page).to have_field 'Validade da proposta', :with => '5'
-      expect(page).to have_select 'Período da validade da proposta', :selected => 'dia/dias'
       expect(page).to have_field 'Índice de reajuste', :with => 'XPTO'
-      expect(page).to have_field 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
-      expect(page).to have_field 'Hora da entrega', :with => '14:00'
-      expect(page).to have_field 'Prazo de entrega', :with => '1'
-      expect(page).to have_select 'Período do prazo de entrega', :selected => 'ano/anos'
       expect(page).to have_field 'Forma de pagamento', :with => 'Dinheiro'
       expect(page).to have_field 'Valor da caução', :with => '50,00'
       expect(page).to have_select 'Parecer jurídico', :selected => 'Favorável'
@@ -1573,6 +1615,21 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Validade do contrato (meses)', :with => '5'
       expect(page).to have_field 'Observações gerais', :with => 'observacoes'
       expect(page).to have_field 'Agrupamento de solicitações de compra', :with => 'Agrupamento de reparo 2013'
+    end
+
+    within_tab 'Prazos' do
+      expect(page).to have_field 'Data da expedição', :with => '21/03/2012'
+      expect(page).to have_field 'Data da disponibilidade', :with => I18n.l(Date.current)
+      expect(page).to have_field 'Contato para informações', :with => 'Gabriel Sobrinho'
+
+      expect(page).to have_field 'Término do recebimento dos envelopes', :with => I18n.l(Date.current)
+      expect(page).to have_field 'Hora da entrega', :with => '14:00'
+
+      expect(page).to have_field 'Validade da proposta', :with => '5'
+      expect(page).to have_select 'Período da validade da proposta', :selected => 'dia/dias'
+
+      expect(page).to have_field 'Prazo de entrega', :with => '1'
+      expect(page).to have_select 'Período do prazo de entrega', :selected => 'ano/anos'
     end
 
     within_tab 'Dotações orçamentárias' do
@@ -2053,7 +2110,6 @@ feature "LicitationProcesses" do
     within_tab 'Principal' do
       choose 'Processo de compra'
       fill_in 'Ano', :with => '2012'
-      fill_in 'Data da expedição', :with => '21/03/2012'
       select 'Global', :from => 'Tipo de empenho'
 
       select 'Compras e serviços', :from => 'Tipo de objeto'
@@ -2068,13 +2124,7 @@ feature "LicitationProcesses" do
       select 'Empreitada integral', :from => 'Forma de execução'
       select 'Fiança bancária', :from => 'Tipo de garantia'
       fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
-      fill_in 'Validade da proposta', :with => '5'
-      select 'dia/dias', :from => 'Período da validade da proposta'
       fill_modal 'Índice de reajuste', :with => 'XPTO'
-      fill_in 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
-      fill_in 'Hora da entrega', :with => '14:00'
-      fill_in 'Prazo de entrega', :with => '1'
-      select 'ano/anos', :from => 'Período do prazo de entrega'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Valor da caução', :with => '50,00'
       select 'Favorável', :from => 'Parecer jurídico'
@@ -2088,6 +2138,21 @@ feature "LicitationProcesses" do
 
         click_record 'Agrupamento de antivirus'
       end
+    end
+
+    within_tab 'Prazos' do
+      fill_in 'Data da expedição', :with => '07/03/2012'
+      fill_in 'Data da disponibilidade', :with => I18n.l(Date.current)
+      fill_modal 'Contato para informações', :with => '958473', :field => 'Matrícula'
+
+      fill_in 'Término do recebimento dos envelopes', :with => I18n.l(Date.current)
+      fill_in 'Hora da entrega', :with => '14:00'
+
+      fill_in 'Validade da proposta', :with => '5'
+      select 'dia/dias', :from => 'Período da validade da proposta'
+
+      fill_in 'Prazo de entrega', :with => '1'
+      select 'ano/anos', :from => 'Período do prazo de entrega'
     end
 
     within_tab 'Documentos' do
@@ -2362,7 +2427,6 @@ feature "LicitationProcesses" do
     within_tab 'Principal' do
       choose 'Processo de compra'
       fill_in 'Ano', :with => '2012'
-      fill_in 'Data da expedição', :with => '07/03/2012'
       fill_in 'Número do protocolo', :with => '00099/2012'
       select 'Global', :from => 'Tipo de empenho'
       select 'Compras e serviços', :from => 'Tipo de objeto'
@@ -2387,13 +2451,7 @@ feature "LicitationProcesses" do
       select 'Empreitada integral', :from => 'Forma de execução'
       select 'Fiança bancária', :from => 'Tipo de garantia'
       fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
-      fill_in 'Validade da proposta', :with => '5'
-      select 'dia/dias', :from => 'Período da validade da proposta'
       fill_modal 'Índice de reajuste', :with => 'XPTO'
-      fill_in 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
-      fill_in 'Hora da entrega', :with => '14:00'
-      fill_in 'Prazo de entrega', :with => '1'
-      select 'ano/anos', :from => 'Período do prazo de entrega'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Valor da caução', :with => '50,00'
       select 'Favorável', :from => 'Parecer jurídico'
@@ -2401,6 +2459,21 @@ feature "LicitationProcesses" do
       fill_in 'Data do contrato', :with => '31/03/2012'
       fill_in 'Validade do contrato (meses)', :with => '5'
       fill_in 'Observações gerais', :with => 'observacoes'
+    end
+
+    within_tab 'Prazos' do
+      fill_in 'Data da expedição', :with => '07/03/2012'
+      fill_in 'Data da disponibilidade', :with => I18n.l(Date.current)
+      fill_modal 'Contato para informações', :with => '958473', :field => 'Matrícula'
+
+      fill_in 'Término do recebimento dos envelopes', :with => I18n.l(Date.current)
+      fill_in 'Hora da entrega', :with => '14:00'
+
+      fill_in 'Validade da proposta', :with => '5'
+      select 'dia/dias', :from => 'Período da validade da proposta'
+
+      fill_in 'Prazo de entrega', :with => '1'
+      select 'ano/anos', :from => 'Período do prazo de entrega'
     end
 
     within_tab 'Dotações orçamentárias' do
@@ -2480,7 +2553,6 @@ feature "LicitationProcesses" do
     within_tab 'Principal' do
       choose 'Processo de compra'
       fill_in 'Ano', :with => '2012'
-      fill_in 'Data da expedição', :with => '21/03/2012'
       select 'Global', :from => 'Tipo de empenho'
 
       select 'Compras e serviços', :from => 'Tipo de objeto'
@@ -2495,13 +2567,7 @@ feature "LicitationProcesses" do
       select 'Empreitada integral', :from => 'Forma de execução'
       select 'Fiança bancária', :from => 'Tipo de garantia'
       fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
-      fill_in 'Validade da proposta', :with => '5'
-      select 'dia/dias', :from => 'Período da validade da proposta'
       fill_modal 'Índice de reajuste', :with => 'XPTO'
-      fill_in 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
-      fill_in 'Hora da entrega', :with => '14:00'
-      fill_in 'Prazo de entrega', :with => '1'
-      select 'ano/anos', :from => 'Período do prazo de entrega'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Valor da caução', :with => '50,00'
       select 'Favorável', :from => 'Parecer jurídico'
@@ -2510,6 +2576,21 @@ feature "LicitationProcesses" do
       fill_in 'Validade do contrato (meses)', :with => '5'
       fill_in 'Observações gerais', :with => 'observacoes'
       fill_modal 'Solicitação de compra', :with => '1', :field => 'Código'
+    end
+
+    within_tab 'Prazos' do
+      fill_in 'Data da expedição', :with => '21/03/2012'
+      fill_in 'Data da disponibilidade', :with => I18n.l(Date.current)
+      fill_modal 'Contato para informações', :with => '958473', :field => 'Matrícula'
+
+      fill_in 'Término do recebimento dos envelopes', :with => I18n.l(Date.current)
+      fill_in 'Hora da entrega', :with => '14:00'
+
+      fill_in 'Validade da proposta', :with => '5'
+      select 'dia/dias', :from => 'Período da validade da proposta'
+
+      fill_in 'Prazo de entrega', :with => '1'
+      select 'ano/anos', :from => 'Período do prazo de entrega'
     end
 
     within_tab 'Documentos' do

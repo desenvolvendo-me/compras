@@ -14,7 +14,8 @@ class LicitationProcess < Compras::Model
                   :summarized_object, :modality, :description, :pledge_type,
                   :administrative_process_budget_allocations_attributes,
                   :contract_guarantees, :extension_clause, :index_update_rate_id,
-                  :type_of_removal, :is_trading
+                  :type_of_removal, :is_trading, :availability_of_the_notice_date,
+                  :contact_id, :stage_of_bids_date
 
   auto_increment :process, :by => :year
   auto_increment :modality_number, :by => [:year, :modality]
@@ -37,6 +38,7 @@ class LicitationProcess < Compras::Model
   has_enumeration_for :type_of_removal
 
   belongs_to :capability
+  belongs_to :contact, :class_name => 'Employee'
   belongs_to :delivery_location
   belongs_to :judgment_form
   belongs_to :payment_method
@@ -84,7 +86,7 @@ class LicitationProcess < Compras::Model
             :period_unit, :expiration, :expiration_unit, :payment_method,
             :envelope_delivery_time, :year, :envelope_delivery_date,
             :pledge_type, :type_of_calculation, :execution_type, :object_type,
-            :judgment_form_id, :responsible, :description,
+            :judgment_form_id, :responsible, :description, :availability_of_the_notice_date,
             :presence => true
   validates :modality, :presence => true, :if => :licitation?
   validates :type_of_removal, :presence => true, :if => :direct_purchase?

@@ -94,7 +94,6 @@
 <%= f.input :summarized_object %>
 
 <%= f.input :status, :disabled => true %>
-<%= f.input :process_date %>
 
 <div class="yui3-g">
   <div class="yui3-u-1-2">
@@ -114,16 +113,6 @@
 </div>
 
 <div class="yui3-g">
-  <div class="yui3-u-1-5">
-    <%= f.input :expiration %>
-  </div>
-
-  <div class="yui3-u-1-3">
-    <%= f.input :expiration_unit %>
-  </div>
-</div>
-
-<div class="yui3-g">
   <div class="yui3-u-1-4">
     <%= f.input :licitation_number, :disabled => true %>
   </div>
@@ -134,36 +123,8 @@
 </div>
 
 <div class="yui3-g">
-  <div class="yui3-u-1-3">
-    <%= f.input :envelope_delivery_date %>
-  </div>
-
-  <div class="yui3-u-1-5">
-    <%= f.input :envelope_delivery_time %>
-  </div>
-</div>
-
-<div class="yui3-g">
-  <div class="yui3-u-1-3">
-    <%= f.input :envelope_opening_date, :disabled => f.object.new_record? %>
-  </div>
-
-  <div class="yui3-u-1-5">
-    <%= f.input :envelope_opening_time, :disabled => f.object.new_record? %>
-  </div>
-</div>
-
-<div class="yui3-g">
   <div class="yui3-u-1-2">
     <%= f.input :delivery_location %>
-  </div>
-
-  <div class="yui3-u-1-4">
-    <%= f.input :period %>
-  </div>
-
-  <div class="yui3-u-1-4">
-    <%= f.input :period_unit %>
   </div>
 </div>
 
@@ -215,12 +176,15 @@
     }
   };
 
-  $('input[name="licitation_process[type_of_purchase]"]').change(organizesModalities);
+  $('input[name="licitation_process[type_of_purchase]"]').change(function(){
+    organizesModalities();
+    toogleVisibilityFieldsToTrading();
+  });
 
   organizesModalities();
 
   function toogleVisibilityFieldsToTrading() {
-    if ($('#licitation_process_modality').val() == 'trading' || $('#licitation_process_modality').val() == 'concurrence') {
+    if (($('#licitation_process_modality').val() == 'trading') || ($('#licitation_process_modality').val() == 'concurrence')) {
       $('.fields-to-trading').removeClass('hidden');
     } else {
       $('.fields-to-trading').addClass('hidden');

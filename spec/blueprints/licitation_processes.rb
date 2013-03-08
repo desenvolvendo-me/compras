@@ -41,6 +41,7 @@ LicitationProcess.blueprint(:processo_licitatorio) do
   consider_law_of_proposals { false }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
+  availability_of_the_notice_date { I18n.l(Date.tomorrow) }
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_computador) do
@@ -83,6 +84,7 @@ LicitationProcess.blueprint(:processo_licitatorio_computador) do
   execution_type { ExecutionType::INTEGRAL }
   type_of_purchase { LicitationProcessTypeOfPurchase::LICITATION }
   contract_guarantees { ContractGuarantees::BANK }
+  availability_of_the_notice_date { I18n.l(Date.tomorrow) }
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_fornecedores) do
@@ -123,6 +125,7 @@ LicitationProcess.blueprint(:processo_licitatorio_fornecedores) do
   type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_GLOBAL_PRICE }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
+  availability_of_the_notice_date { I18n.l(Date.tomorrow) }
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_publicacao_cancelada) do
@@ -162,6 +165,7 @@ LicitationProcess.blueprint(:processo_licitatorio_publicacao_cancelada) do
   type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
+  availability_of_the_notice_date { I18n.l(Date.tomorrow) }
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_canetas) do
@@ -204,6 +208,7 @@ LicitationProcess.blueprint(:processo_licitatorio_canetas) do
   licitation_process_lots { [LicitationProcessLot.make(:lote_antivirus, :licitation_process => object)] }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
+  availability_of_the_notice_date { I18n.l(Date.tomorrow) }
 end
 
 LicitationProcess.blueprint(:apuracao_por_itens) do
@@ -246,6 +251,7 @@ LicitationProcess.blueprint(:apuracao_por_itens) do
   bidders { [Bidder.make!(:licitante_com_proposta_1),
              Bidder.make!(:licitante_com_proposta_2)] }
   contract_guarantees { ContractGuarantees::BANK }
+  availability_of_the_notice_date { I18n.l(Date.tomorrow) }
 end
 
 LicitationProcess.blueprint(:apuracao_por_lote) do
@@ -287,6 +293,7 @@ LicitationProcess.blueprint(:apuracao_por_lote) do
   bidders { [Bidder.make!(:licitante_com_proposta_1),
              Bidder.make!(:licitante_com_proposta_2)] }
   contract_guarantees { ContractGuarantees::BANK }
+  availability_of_the_notice_date { I18n.l(Date.tomorrow) }
 end
 
 LicitationProcess.blueprint(:valor_maximo_ultrapassado) do
@@ -328,6 +335,7 @@ LicitationProcess.blueprint(:valor_maximo_ultrapassado) do
   type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_PRICE_BY_LOT }
   bidders { [Bidder.make!(:licitante_com_proposta_3),
              Bidder.make!(:licitante_com_proposta_7)] }
+  availability_of_the_notice_date { I18n.l(Date.tomorrow) }
 end
 
 LicitationProcess.blueprint(:maior_lance_por_lote) do
@@ -369,6 +377,7 @@ LicitationProcess.blueprint(:maior_lance_por_lote) do
   contract_guarantees { ContractGuarantees::BANK }
   bidders { [Bidder.make!(:licitante_com_proposta_1),
              Bidder.make!(:licitante_com_proposta_2)] }
+  availability_of_the_notice_date { I18n.l(Date.tomorrow) }
 end
 
 LicitationProcess.blueprint(:apuracao_global) do
@@ -410,6 +419,7 @@ LicitationProcess.blueprint(:apuracao_global) do
   contract_guarantees { ContractGuarantees::BANK }
   bidders { [Bidder.make!(:licitante_com_proposta_1),
              Bidder.make!(:licitante_com_proposta_2)] }
+  availability_of_the_notice_date { I18n.l(Date.tomorrow) }
 end
 
 LicitationProcess.blueprint(:apuracao_global_empatou) do
@@ -451,6 +461,7 @@ LicitationProcess.blueprint(:apuracao_global_empatou) do
   contract_guarantees { ContractGuarantees::BANK }
   bidders { [Bidder.make!(:licitante_com_proposta_5),
              Bidder.make!(:licitante_com_proposta_6)] }
+  availability_of_the_notice_date { I18n.l(Date.tomorrow) }
 end
 
 LicitationProcess.blueprint(:apuracao_global_sem_documentos) do
@@ -492,6 +503,7 @@ LicitationProcess.blueprint(:apuracao_global_sem_documentos) do
   contract_guarantees { ContractGuarantees::BANK }
   bidders { [Bidder.make!(:licitante_com_proposta_3, :documents => []),
              Bidder.make!(:licitante_com_proposta_4, :documents => [])] }
+  availability_of_the_notice_date { I18n.l(Date.tomorrow) }
 end
 
 LicitationProcess.blueprint(:apuracao_global_small_company) do
@@ -533,6 +545,7 @@ LicitationProcess.blueprint(:apuracao_global_small_company) do
   contract_guarantees { ContractGuarantees::BANK }
   bidders { [Bidder.make!(:licitante_com_proposta_3),
              Bidder.make!(:licitante_com_proposta_4)] }
+  availability_of_the_notice_date { I18n.l(Date.tomorrow) }
 end
 
 LicitationProcess.blueprint(:apuracao_global_small_company_without_new_proposal) do
@@ -574,6 +587,7 @@ LicitationProcess.blueprint(:apuracao_global_small_company_without_new_proposal)
   contract_guarantees { ContractGuarantees::BANK }
   bidders { [Bidder.make!(:licitante_com_proposta_3, :will_submit_new_proposal_when_draw => false),
              Bidder.make!(:licitante_com_proposta_4)] }
+  availability_of_the_notice_date { I18n.l(Date.tomorrow) }
 end
 
 LicitationProcess.blueprint(:apuracao_global_small_company_2) do
@@ -615,6 +629,7 @@ LicitationProcess.blueprint(:apuracao_global_small_company_2) do
   contract_guarantees { ContractGuarantees::BANK }
   bidders { [Bidder.make!(:licitante_com_proposta_8),
              Bidder.make!(:licitante_com_proposta_9)] }
+  availability_of_the_notice_date { I18n.l(Date.tomorrow) }
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_nao_atualizavel) do
@@ -655,6 +670,7 @@ LicitationProcess.blueprint(:processo_licitatorio_nao_atualizavel) do
   licitation_process_lots { [LicitationProcessLot.make(:lote_antivirus, :licitation_process => object)] }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
+  availability_of_the_notice_date { I18n.l(Date.tomorrow) }
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_canetas_sem_lote) do
@@ -695,6 +711,7 @@ LicitationProcess.blueprint(:processo_licitatorio_canetas_sem_lote) do
   type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
+  availability_of_the_notice_date { I18n.l(Date.tomorrow) }
 end
 
 LicitationProcess.blueprint(:apuracao_melhor_tecnica_e_preco) do
@@ -736,6 +753,7 @@ LicitationProcess.blueprint(:apuracao_melhor_tecnica_e_preco) do
   contract_guarantees { ContractGuarantees::BANK }
   bidders { [Bidder.make!(:licitante_com_proposta_1),
              Bidder.make!(:licitante_com_proposta_2)] }
+  availability_of_the_notice_date { I18n.l(Date.tomorrow) }
 end
 
 LicitationProcess.blueprint(:pregao_presencial) do
@@ -779,6 +797,7 @@ LicitationProcess.blueprint(:pregao_presencial) do
                                                                         :licitation_process => object)] }
   type_of_calculation { LicitationProcessTypeOfCalculation::SORT_PARTICIPANTS_BY_ITEM }
   bidders { [Bidder.make!(:licitante_sobrinho), Bidder.make!(:licitante), Bidder.make!(:me_pregao)] }
+  availability_of_the_notice_date { I18n.l(Date.tomorrow) }
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_concurso) do
@@ -822,6 +841,7 @@ LicitationProcess.blueprint(:processo_licitatorio_concurso) do
   consider_law_of_proposals { false }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
+  availability_of_the_notice_date { I18n.l(Date.tomorrow) }
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_concorrencia) do
@@ -865,6 +885,7 @@ LicitationProcess.blueprint(:processo_licitatorio_concorrencia) do
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   judgment_form { JudgmentForm.make!(:global)}
+  availability_of_the_notice_date { I18n.l(Date.tomorrow) }
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_tomada_preco) do
@@ -908,6 +929,7 @@ LicitationProcess.blueprint(:processo_licitatorio_tomada_preco) do
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   judgment_form { JudgmentForm.make!(:global)}
+  availability_of_the_notice_date { I18n.l(Date.tomorrow) }
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_leilao) do
@@ -951,4 +973,5 @@ LicitationProcess.blueprint(:processo_licitatorio_leilao) do
   consider_law_of_proposals { false }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
+  availability_of_the_notice_date { I18n.l(Date.tomorrow) }
 end
