@@ -14,6 +14,9 @@ db/structure.sql
 log/*.log
 tmp/
 public/uploads
+public/compras
+public/unico
+public/financial
 Guardfile
 Gemfile.local
 Gemfile.local.lock

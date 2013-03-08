@@ -7,46 +7,44 @@ describe ApplicationController do
     end
   end
 
-  it 'should not handle customer connection on test environment' do
-    Rails.stub(:env).and_return(ActiveSupport::StringInquirer.new('test'))
+  let(:customer) { double('customer').as_null_object }
 
-    CustomerFinder.should_receive(:current).never
+  context 'when found a customer' do
+    it 'should handle customer connection' do
+      customer.should_receive(:using_connection)
 
-    get :index
+      request.env['X-Customer'] = 'ipatinga-mg'
+
+      Customer.should_receive(:find_by_domain).
+               with('ipatinga-mg').
+               and_return(customer)
+
+      get :index
+    end
   end
 
-  it 'should not handle customer connection on development environment' do
-    Rails.stub(:env).and_return(ActiveSupport::StringInquirer.new('development'))
+  context 'when do not found a customer' do
+    it 'should handle customer connection' do
+      NilCustomer.any_instance.should_receive(:using_connection)
 
-    CustomerFinder.should_receive(:current).never
+      request.env['X-Customer'] = 'ipatinga-mg'
 
-    get :index
+      Customer.should_receive(:find_by_domain).
+               with('ipatinga-mg').
+               and_return(nil)
+
+      get :index
+    end
   end
 
-  it 'should handle customer connection on training environment' do
-    Rails.stub(:env).and_return(ActiveSupport::StringInquirer.new('training'))
+  it 'should set the current domain to Uploader' do
+    customer.stub(:domain).and_return('url')
 
-    customer = double('customer')
-    customer.should_receive(:using_connection)
-
-    request.env['X-Customer'] = 'ipatinga-mg'
-
-    CustomerFinder.should_receive(:current).with('ipatinga-mg').and_return(customer)
+    Customer.stub(:find_by_domain).and_return(customer)
 
     get :index
-  end
 
-  it 'should handle customer connection on production environment' do
-    Rails.stub(:env).and_return(ActiveSupport::StringInquirer.new('production'))
-
-    customer = double('customer')
-    customer.should_receive(:using_connection)
-
-    request.env['X-Customer'] = 'ipatinga-mg'
-
-    CustomerFinder.should_receive(:current).with('ipatinga-mg').and_return(customer)
-
-    get :index
+    expect(Uploader.current_domain).to eq('url')
   end
 
   it 'should return current prefecture' do

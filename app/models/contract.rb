@@ -12,7 +12,7 @@ class Contract < Compras::Model
   attr_modal :year, :contract_number, :sequential_number, :signature_date
 
   acts_as_nested_set
-  mount_uploader :contract_file, DocumentUploader
+  mount_uploader :contract_file, UnicoUploader
 
   has_enumeration_for :kind, :with => ContractKind, :create_helpers => true
 

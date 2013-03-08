@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   layout :layout_by_user
 
-  around_filter :handle_customer, :if => :handle_customer?
+  around_filter :handle_customer
   before_filter :handle_action_mailer
   before_filter :authenticate_user!
 
@@ -51,11 +51,9 @@ class ApplicationController < ActionController::Base
   end
 
   def handle_customer(&block)
-    current_customer.using_connection(&block)
-  end
-
-  def handle_customer?
-    Rails.env.production? || Rails.env.training?
+    customer = current_customer
+    customer.using_connection(&block)
+    Uploader.set_current_domain(customer.domain)
   end
 
   def handle_action_mailer

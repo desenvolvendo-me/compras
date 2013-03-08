@@ -1,6 +1,5 @@
 # encoding: utf-8
 require 'model_helper'
-require 'app/uploaders/document_uploader'
 require 'app/models/contract'
 require 'app/models/pledge'
 require 'app/models/dissemination_source'

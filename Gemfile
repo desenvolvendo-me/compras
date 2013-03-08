@@ -12,7 +12,7 @@ gem 'pg', '0.14.1'
 gem 'activerecord-connections', '0.0.3'
 gem 'activerecord-postgres-hstore', '0.6.0'
 
-gem 'unico', '4.1.0'
+gem 'unico', '4.1.2'
 gem 'unico-assets', '1.3.0'
 gem 'devise', '2.2.3'
 gem 'cancan', :git => 'git://github.com/ryanb/cancan.git', :branch => '2.0'
@@ -23,7 +23,7 @@ gem 'simple_form', '2.0.2'
 gem 'kaminari', '0.14.1'
 
 gem 'squeel', '1.0.11'
-gem 'carrierwave', '0.6.2'
+gem 'carrierwave', '0.8.0'
 gem 'awesome_nested_set', '2.1.3'
 
 gem 'mail_validator', '0.2.0'

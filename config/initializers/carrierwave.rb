@@ -8,7 +8,7 @@ if Rails.env.production? || Rails.env.staging?
       :aws_secret_access_key => ENV['S3_SECRET']
     }
 
-    config.fog_directory = "compras-#{Rails.env}"
+    config.fog_directory = "integra-#{Rails.env}"
     config.fog_public = false
   end
 end

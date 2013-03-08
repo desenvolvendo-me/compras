@@ -1,5 +1,4 @@
 require 'model_helper'
-require 'app/uploaders/document_uploader'
 require 'app/models/contract'
 require 'app/models/dissemination_source'
 require 'app/models/contract_termination'

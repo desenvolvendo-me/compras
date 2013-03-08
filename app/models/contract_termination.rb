@@ -4,7 +4,7 @@ class ContractTermination < Compras::Model
 
   attr_readonly :number
 
-  mount_uploader :term_termination_file, DocumentUploader
+  mount_uploader :term_termination_file, UnicoUploader
 
   has_enumeration_for :status, :with => ContractTerminationStatus
 

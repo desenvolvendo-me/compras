@@ -105,13 +105,20 @@ require 'financeiro'
 
 $:.append Unico::Engine.config.root
 
+# uploaders
+require 'app/uploaders/uploader'
+require 'app/uploaders/unico_uploader'
+require 'app/uploaders/prefecture_logo_uploader'
+require 'app/uploaders/compras_uploader'
+require 'app/uploaders/image_uploader'
+require 'app/uploaders/attachment_uploader'
+
 Dir["#{Unico::Engine.config.root}/app/enumerations/*.rb"].each do |file|
   require File.expand_path(file)
 end
 
 # Custom Data
 require 'lib/custom_data'
-require 'app/uploaders/image_uploader'
 require 'app/models/unico/prefecture'
 require 'app/models/prefecture'
 
