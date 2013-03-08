@@ -147,7 +147,6 @@ feature "LicitationProcessLots" do
   end
 
   scenario 'deleting a lot' do
-    pending "This test is hanging up when using factory girl. We need to know why."
     LicitationProcess.make!(:processo_licitatorio_canetas)
 
     navigate 'Processos de Compra > Processos Licitatórios'
