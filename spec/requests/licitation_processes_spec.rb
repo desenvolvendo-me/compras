@@ -238,6 +238,10 @@ feature "LicitationProcesses" do
 
     expect(page).to have_link 'Publicações'
 
+    fill_in 'Data da expedição', :with => '32/12/2012'
+    expect(page).to have_content "data inválida"
+    expect(page).to have_disabled_element "Salvar", :reason => "Há campos inválidos no formulário"
+
     within_tab 'Principal' do
       fill_in 'Data da expedição', :with => '21/03/2013'
       select 'Estimativo', :from => 'Tipo de empenho'

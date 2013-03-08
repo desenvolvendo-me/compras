@@ -7,6 +7,8 @@
 //= require compras/session_timeout
 //= require jquery.ui.autocomplete
 //= require simple_form.auto_complete_input.js
+//= require compras/moment.min
+//= require date_field_validation
 
 $(".clear").live('click', function() {
   $(this).closest(".modal-finder").find("input.modal").val("");
