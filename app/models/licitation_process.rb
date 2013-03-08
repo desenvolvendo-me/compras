@@ -18,7 +18,7 @@ class LicitationProcess < Compras::Model
                   :contact_id, :stage_of_bids_date
 
   auto_increment :process, :by => :year
-  auto_increment :modality_number, :by => [:year, :modality]
+  auto_increment :modality_number, :by => [:year, :modality, :type_of_removal]
 
   attr_readonly :process, :year, :licitation_number, :modality_number
 

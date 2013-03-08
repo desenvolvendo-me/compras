@@ -13,6 +13,23 @@ describe LicitationProcess do
     expect(licitation_2013_2.process).to eq 2
   end
 
+  it 'auto increment modality_number by year and modality' do
+    licitation_2012 = LicitationProcess.make!(:processo_licitatorio_computador, :year => 2012, :process => nil)
+    expect(licitation_2012.modality_number).to eq 1
+
+    licitation_2013 = LicitationProcess.make!(:processo_licitatorio_computador, :year => 2013, :process => nil)
+    expect(licitation_2013.modality_number).to eq 1
+
+    licitation_2013_2 = LicitationProcess.make!(:processo_licitatorio_computador, :year => 2013, :licitation_number => 13, :process => nil)
+    expect(licitation_2013_2.modality_number).to eq 2
+
+    licitation_2013_3 = LicitationProcess.make!(:processo_licitatorio_computador, :year => 2013, :licitation_number => 14, :process => nil, :modality => Modality::COMPETITION)
+    expect(licitation_2013_3.modality_number).to eq 1
+
+    licitation_2013_4 = LicitationProcess.make!(:processo_licitatorio_computador, :year => 2013, :licitation_number => 15, :process => nil, :modality => Modality::COMPETITION)
+    expect(licitation_2013_4.modality_number).to eq 2
+  end
+
   describe "#validate_envelope_opening_date" do
     let(:publication) { LicitationProcessPublication.make(:publicacao, :publication_date => Date.today) }
 

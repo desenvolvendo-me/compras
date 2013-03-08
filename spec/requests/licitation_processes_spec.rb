@@ -41,7 +41,7 @@ feature "LicitationProcesses" do
     within_tab 'Principal' do
       expect(page).to have_disabled_field 'Processo'
       expect(page).to have_disabled_field 'Modalidade'
-      expect(page).to have_disabled_field 'Número da modalidade'
+      expect(page).to have_disabled_field 'Nº do afastamento'
       expect(page).to have_disabled_field 'Data da homologação'
       expect(page).to have_disabled_field 'Data da adjudicação'
       expect(page).to have_field 'Ano', :with => "#{Date.current.year}"
@@ -133,7 +133,7 @@ feature "LicitationProcesses" do
       expect(page).to have_select 'Tipo de empenho', :selected => 'Global'
 
       expect(page).to have_select 'Modalidade', :selected => 'Concorrência'
-      expect(page).to have_disabled_field 'Número da modalidade', :with => '1'
+      expect(page).to have_disabled_field 'Nº da modalidade', :with => '1'
       expect(page).to have_select 'Tipo de objeto', :selected => 'Compras e serviços'
       expect(page).to have_select 'Forma de julgamento', :selected => 'Por Item com Melhor Técnica'
       expect(page).to have_field 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
