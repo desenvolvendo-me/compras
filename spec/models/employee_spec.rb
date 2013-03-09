@@ -15,12 +15,13 @@ describe Employee do
   it { should belong_to :individual }
   it { should belong_to :position }
 
-  it { should have_many(:contacts_of_purchase_solicitations).dependent(:restrict) }
-  it { should have_many(:responsibles_of_purchase_solicitations).dependent(:restrict) }
+  it { should have_many(:purchase_solicitations_with_liberator).dependent(:restrict) }
+  it { should have_many(:purchase_solicitations_with_responsible).dependent(:restrict) }
   it { should have_many(:purchase_solicitation_liberations).dependent(:restrict) }
   it { should have_many(:budget_structure_responsibles).dependent(:restrict) }
   it { should have_many(:direct_purchases).dependent(:restrict) }
-  it { should have_many(:licitation_processes).dependent(:restrict) }
+  it { should have_many(:licitation_processes_with_contact).dependent(:restrict) }
+  it { should have_many(:licitation_processes_with_responsible).dependent(:restrict) }
   it { should have_many(:price_collections).dependent(:restrict) }
   it { should have_many(:price_registrations).dependent(:restrict) }
 

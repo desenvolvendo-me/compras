@@ -6,11 +6,12 @@ class Employee < Compras::Model
 
   has_one :user, :as => :authenticable
 
-  has_many :contacts_of_purchase_solicitations, :class_name => 'LicitationProcess', :foreign_key => :contact_id, :dependent => :restrict
-  has_many :responsibles_of_purchase_solicitations, :class_name => 'LicitationProcess', :foreign_key => :responsible_id, :dependent => :restrict
+  has_many :purchase_solicitations_with_liberator, :class_name => 'PurchaseSolicitation', :foreign_key => :liberator_id, :dependent => :restrict
+  has_many :purchase_solicitations_with_responsible, :class_name => 'PurchaseSolicitation', :foreign_key => :responsible_id, :dependent => :restrict
   has_many :purchase_solicitation_liberations, :foreign_key => :responsible_id, :dependent => :restrict
   has_many :budget_structure_responsibles, :foreign_key => :responsible_id, :dependent => :restrict
-  has_many :licitation_processes, :foreign_key => :responsible_id, :dependent => :restrict
+  has_many :licitation_processes_with_contact, :class_name => 'LicitationProcess', :foreign_key => :contact_id, :dependent => :restrict
+  has_many :licitation_processes_with_responsible, :class_name => 'LicitationProcess', :foreign_key => :responsible_id, :dependent => :restrict
   has_many :direct_purchases, :dependent => :restrict
   has_many :price_collections, :dependent => :restrict
   has_many :price_registrations, :foreign_key => :responsible_id, :dependent => :restrict
