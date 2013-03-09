@@ -1,5 +1,4 @@
 require 'model_helper'
-require 'app/uploaders/document_uploader'
 require 'app/models/entity'
 require 'app/models/budget_structure_configuration'
 require 'app/parsers/month_and_year_parser'
