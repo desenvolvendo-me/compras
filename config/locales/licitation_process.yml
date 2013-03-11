@@ -8,7 +8,7 @@ pt-BR:
     attributes:
       licitation_process:
         adjudication_date: "Data da adjudicação"
-        availability_of_the_notice_date: "Data da disponibilidade"
+        notice_availability_date: "Data da disponibilidade"
         capability: "Fonte de recurso"
         caution_value: "Valor da caução"
         code_and_year: "Processo/Ano"
