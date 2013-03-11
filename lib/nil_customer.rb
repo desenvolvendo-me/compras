@@ -7,10 +7,6 @@ class NilCustomer
     'nil-customer'
   end
 
-  def using_connection(&block)
-    block.call
-  end
-
   def id; end
   def domain; end
   def database; end
