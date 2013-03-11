@@ -43,7 +43,7 @@ class LicitationProcessDecorator
     if trading? && trading.present?
       'Voltar ao pregão presencial'
     else
-      'Voltar ao processo licitatório'
+      'Voltar ao processo de compra'
     end
   end
 

@@ -12,4 +12,4 @@ pt-BR:
 
   licitation_process_lot:
     messages:
-      licitation_process_not_updatable: "processo licitatório deste lote não pode ser alterado"
+      licitation_process_not_updatable: "processo de compra deste lote não pode ser alterado"

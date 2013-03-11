@@ -18,7 +18,7 @@ pt-BR:
         contract_expiration: "Validade do contrato (meses)"
         contract_guarantees: 'Tipo de garantia'
         delivery_location: "Local de entrega"
-        description: "Objeto do processo licitatório"
+        description: "Objeto do processo de compra"
         disqualify_by_documentation_problem: "Desclassificar participantes com problemas da documentação"
         disqualify_by_maximum_value: "Desclassificar participantes com cotações acima do valor máximo estabelecido no edital"
         document_types: "Tipo de documento"
@@ -55,7 +55,7 @@ pt-BR:
         readjustment_index: "Índice de reajuste"
         responsible: "Responsável"
         stage_of_bids_date: "Data da fase de lances"
-        summarized_object: "Objeto resumido do processo licitatório"
+        summarized_object: "Objeto resumido do processo de compra"
         type_of_calculation: "Tipo da apuração"
         type_of_purchase: "Tipo da compra"
         type_of_removal: "Tipo de afastamento"

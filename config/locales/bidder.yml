@@ -15,7 +15,7 @@ pt-BR:
         status: "Status"
         technical_score: "Pontuação técnica"
         licitation_process: "Processo de compra"
-        licitation_process_process_date: "Data do processo licitatório"
+        licitation_process_process_date: "Data do processo de compra"
         proposal_total_value: "Preço total dos itens"
         proposal_total_value_by_lot: "Preço total dos itens"
         people: "Representantes"
@@ -24,4 +24,4 @@ pt-BR:
   bidder:
     messages:
       cant_save_or_destroy: "alterações permitidas somente no dia da abertura dos envelopes"
-      cant_be_changed_when_licitation_process_has_a_ratification: "não pode ser alterado pois o processo licitatório possui homologação"
+      cant_be_changed_when_licitation_process_has_a_ratification: "não pode ser alterado pois o processo de compra possui homologação"

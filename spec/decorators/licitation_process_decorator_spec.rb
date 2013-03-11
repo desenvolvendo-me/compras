@@ -101,17 +101,17 @@ describe LicitationProcessDecorator do
         expect(subject.edit_link).to eq 'Voltar ao pregão presencial'
       end
 
-      it "returns 'Voltar ao processo licitatório' if there is no associated trading" do
+      it "returns 'Voltar ao processo de compra' if there is no associated trading" do
         component.stub(:trading => nil)
 
-        expect(subject.edit_link).to eq 'Voltar ao processo licitatório'
+        expect(subject.edit_link).to eq 'Voltar ao processo de compra'
       end
     end
 
-    it "returns 'Voltar ao processo licitatório' otherwise" do
+    it "returns 'Voltar ao processo de compra' otherwise" do
       component.stub(:trading? => false)
 
-      expect(subject.edit_link).to eq 'Voltar ao processo licitatório'
+      expect(subject.edit_link).to eq 'Voltar ao processo de compra'
     end
   end
 

@@ -54,7 +54,7 @@ describe LicitationProcessRatification do
 
       subject.valid?
 
-      expect(subject.errors[:bidder]).to include "deve pertencer ao processo licitatório 1/2012"
+      expect(subject.errors[:bidder]).to include "deve pertencer ao processo de compra 1/2012"
     end
   end
 end

@@ -22,7 +22,7 @@ feature "LicitationProcessLots" do
 
     expect(page).to have_link 'Criar Lote de itens'
 
-    click_link 'Voltar ao processo licitatório'
+    click_link 'Voltar ao processo de compra'
 
     expect(page).to have_content "Editar Processo de Compra 2/2013"
   end
@@ -89,8 +89,8 @@ feature "LicitationProcessLots" do
       click_link 'Lote 1'
     end
 
-    expect(page).to have_disabled_element 'Salvar', :reason => "processo licitatório deste lote não pode ser alterado"
-    expect(page).to have_disabled_element 'Apagar', :reason => "processo licitatório deste lote não pode ser alterado"
+    expect(page).to have_disabled_element 'Salvar', :reason => "processo de compra deste lote não pode ser alterado"
+    expect(page).to have_disabled_element 'Apagar', :reason => "processo de compra deste lote não pode ser alterado"
     expect(page).to_not have_button 'Remover'
   end
 

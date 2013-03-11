@@ -134,7 +134,7 @@ describe Bidder do
 
       subject.valid?
 
-      expect(subject.errors[:base]).to include 'não pode ser alterado quando o processo licitatório (1/2012) vinculado estiver homologado'
+      expect(subject.errors[:base]).to include 'não pode ser alterado quando o processo de compra (1/2012) vinculado estiver homologado'
     end
   end
 
@@ -252,14 +252,14 @@ describe Bidder do
       licitation_process.stub(:allow_bidders?).and_return(false)
 
       subject.valid?
-      expect(subject.errors[:licitation_process]).to include "deve ser a data da abertura do envelope do processo licitatório"
+      expect(subject.errors[:licitation_process]).to include "deve ser a data da abertura do envelope do processo de compra"
     end
 
     it "shuld allow changes if licitation_process allow bidders" do
       licitation_process.stub(:allow_bidders?).and_return(true)
 
       subject.valid?
-      expect(subject.errors[:licitation_process]).to_not include "deve ser a data da abertura do envelope do processo licitatório"
+      expect(subject.errors[:licitation_process]).to_not include "deve ser a data da abertura do envelope do processo de compra"
     end
   end
 

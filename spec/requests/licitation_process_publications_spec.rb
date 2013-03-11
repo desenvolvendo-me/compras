@@ -22,7 +22,7 @@ feature "LicitationProcessPublications" do
 
     click_link 'Publicações'
 
-    expect(page).to have_link 'Voltar ao processo licitatório'
+    expect(page).to have_link 'Voltar ao processo de compra'
     expect(page).to have_link 'Criar Publicação'
     expect(page).to have_content "Publicações do Processo de Compra #{licitation_process}"
   end

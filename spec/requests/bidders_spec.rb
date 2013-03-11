@@ -26,7 +26,7 @@ feature "Bidders" do
 
     expect(page).to have_link 'Wenderson Malheiros'
 
-    click_link 'Voltar ao processo licitatório'
+    click_link 'Voltar ao processo de compra'
 
     expect(page).to have_title "Editar Processo de Compra"
   end
@@ -48,7 +48,7 @@ feature "Bidders" do
     click_link 'Criar Licitante'
 
     expect(page).to have_field 'Processo de compra', :with => '2/2013 - Convite 1'
-    expect(page).to have_field 'Data do processo licitatório', :with => '20/03/2013'
+    expect(page).to have_field 'Data do processo de compra', :with => '20/03/2013'
     expect(page).to have_checked_field 'Apresentará nova proposta em caso de empate'
 
     fill_modal 'Fornecedor', :with => 'Gabriel Sobrinho'
@@ -101,7 +101,7 @@ feature "Bidders" do
     end
 
     expect(page).to have_field 'Processo de compra', :with => '2/2013 - Convite 1'
-    expect(page).to have_field 'Data do processo licitatório', :with => '20/03/2013'
+    expect(page).to have_field 'Data do processo de compra', :with => '20/03/2013'
     expect(page).to have_field 'Fornecedor', :with => 'Gabriel Sobrinho'
     expect(page).to have_field 'Pontuação técnica', :with => '10,00'
     expect(page).to have_field 'Protocolo', :with => '123456'
@@ -163,7 +163,7 @@ feature "Bidders" do
     end
 
     expect(page).to have_field 'Processo de compra', :with => '2/2013 - Convite 1'
-    expect(page).to have_field 'Data do processo licitatório', :with => '20/03/2013'
+    expect(page).to have_field 'Data do processo de compra', :with => '20/03/2013'
 
     fill_modal 'Fornecedor', :with => 'Gabriel Sobrinho'
 
@@ -212,7 +212,7 @@ feature "Bidders" do
     end
 
     expect(page).to have_field 'Processo de compra', :with => '2/2013 - Convite 1'
-    expect(page).to have_field 'Data do processo licitatório', :with => '20/03/2013'
+    expect(page).to have_field 'Data do processo de compra', :with => '20/03/2013'
 
     expect(page).to_not have_checked_field 'Apresentará nova proposta em caso de empate'
     expect(page).to have_field 'Fornecedor', :with => 'Gabriel Sobrinho'
@@ -349,7 +349,7 @@ feature "Bidders" do
     end
 
     expect(page).to have_field 'Processo de compra', :with => '2/2013 - Convite 1'
-    expect(page).to have_field 'Data do processo licitatório', :with => '20/03/2013'
+    expect(page).to have_field 'Data do processo de compra', :with => '20/03/2013'
     expect(page).to have_field 'Fornecedor', :with => 'Wenderson Malheiros'
     expect(page).to have_field 'Protocolo', :with => '123456'
 
@@ -503,7 +503,7 @@ feature "Bidders" do
       expect(page).to have_content 'Lote 2'
     end
 
-    click_link 'Voltar ao processo licitatório'
+    click_link 'Voltar ao processo de compra'
 
     click_link 'Licitantes'
 
@@ -512,7 +512,7 @@ feature "Bidders" do
     end
 
     expect(page).to have_field 'Processo de compra', :with => '2/2013 - Convite 1'
-    expect(page).to have_field 'Data do processo licitatório', :with => '20/03/2013'
+    expect(page).to have_field 'Data do processo de compra', :with => '20/03/2013'
     expect(page).to have_field 'Fornecedor', :with => 'Wenderson Malheiros'
     expect(page).to have_field 'Protocolo', :with => '123456'
 
@@ -647,7 +647,7 @@ feature "Bidders" do
 
     expect(page).to have_content 'Lote 1'
 
-    click_link 'Voltar ao processo licitatório'
+    click_link 'Voltar ao processo de compra'
 
     click_link 'Licitantes'
 
@@ -656,7 +656,7 @@ feature "Bidders" do
     end
 
     expect(page).to have_field 'Processo de compra', :with => '2/2013 - Convite 1'
-    expect(page).to have_field 'Data do processo licitatório', :with => '20/03/2013'
+    expect(page).to have_field 'Data do processo de compra', :with => '20/03/2013'
     expect(page).to have_field 'Fornecedor', :with => 'Wenderson Malheiros'
     expect(page).to have_field 'Protocolo', :with => '123456'
 
@@ -861,12 +861,12 @@ feature "Bidders" do
     end
 
     expect(page).to have_disabled_element 'Apagar',
-                    :reason => 'não pode ser alterado pois o processo licitatório possui homologação'
+                    :reason => 'não pode ser alterado pois o processo de compra possui homologação'
     expect(page).to have_disabled_element 'Salvar',
-                    :reason => 'não pode ser alterado pois o processo licitatório possui homologação'
+                    :reason => 'não pode ser alterado pois o processo de compra possui homologação'
 
     expect(page).to have_disabled_field 'Processo de compra'
-    expect(page).to have_disabled_field 'Data do processo licitatório'
+    expect(page).to have_disabled_field 'Data do processo de compra'
     expect(page).to have_disabled_field 'Fornecedor'
     expect(page).to have_disabled_field 'Status'
     expect(page).to have_disabled_field 'Apresentará nova proposta em caso de empate'
