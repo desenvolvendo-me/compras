@@ -15,6 +15,7 @@ feature "Materials" do
 
     expect(page).to have_disabled_field 'Tipo de material'
     expect(page).to have_disabled_field 'Tipo de contrato'
+    expect(page).to have_checked_field 'Ativo?'
 
     fill_with_autocomplete 'Classe', :with => 'Software'
     fill_in 'Descrição', :with => 'Caixa'
@@ -24,6 +25,7 @@ feature "Materials" do
     fill_in 'Referência do fabricante', :with => 'manufacturer'
     check 'Material perecível'
     check 'Material estocável'
+    uncheck 'Ativo?'
 
     # testing javascript
     select 'Material', :from => 'Característica'
@@ -51,6 +53,7 @@ feature "Materials" do
     expect(page).to have_checked_field 'Material perecível'
     expect(page).to have_checked_field 'Material estocável'
     expect(page).to_not have_checked_field 'Material combustível'
+    expect(page).to_not have_checked_field 'Ativo?'
     expect(page).to have_select 'Característica', :selected => 'Serviço'
     expect(page).to have_field 'Tipo de contrato', :with => 'Contratação de estagiários'
     expect(page).to have_disabled_field 'Tipo de material'
@@ -83,6 +86,10 @@ feature "Materials" do
     expect(page).to have_notice 'Material criado com sucesso.'
 
     expect(page).to have_content '01.32.00.000.000.00001'
+
+    click_link 'Caixa'
+
+    expect(page).to have_checked_field 'Ativo?'
   end
 
   scenario 'update an existent material' do

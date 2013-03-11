@@ -2,6 +2,8 @@
             :source_path => materials_classes_path(:without_children => true),
             :hidden_field => :materials_class_id, :max_results => 20, :min_length => 1 %>
 
+<%= f.input :active %>
+
 <% if f.object.persisted? %>
   <div class="yui3-g">
     <div class="yui3-u-1-3">

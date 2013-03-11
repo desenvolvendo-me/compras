@@ -5,6 +5,14 @@ describe MaterialsController do
     sign_in User.make!(:sobrinho_as_admin)
   end
 
+  describe 'GET #new' do
+    it 'should assign true as default value for active' do
+      get :new
+
+      expect(assigns(:material).active).to be_true
+    end
+  end
+
   describe 'POST create' do
     it 'should generate code to material' do
       MaterialCodeGenerator.any_instance.should_receive(:generate!)

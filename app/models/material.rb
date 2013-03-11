@@ -3,7 +3,7 @@ class Material < Compras::Model
                   :detailed_description, :minimum_stock_balance, :combustible,
                   :reference_unit_id, :material_characteristic, :perishable,
                   :contract_type_id, :expense_nature_id, :description,
-                  :storable, :autocomplete_materials_class
+                  :storable, :autocomplete_materials_class, :active
 
   attr_writer :autocomplete_materials_class
 
@@ -27,8 +27,8 @@ class Material < Compras::Model
   has_many :purchase_solicitation_item_group_materials, :dependent => :destroy
   has_many :purchase_solicitation_budget_allocations, :through => :purchase_solicitation_budget_allocation_items, :dependent => :restrict
 
-  validates :materials_class, :reference_unit, :presence => true
-  validates :material_characteristic, :presence => true
+  validates :materials_class, :reference_unit, :material_characteristic,
+            :presence => true
   validates :code, :description, :presence => true, :uniqueness => { :allow_blank => true }
   validates :material_type, :presence => true, :if => :material?
   validates :contract_type, :presence => true, :if => :service?

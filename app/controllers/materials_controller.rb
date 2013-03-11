@@ -2,6 +2,13 @@ class MaterialsController < CrudController
   has_scope :licitation_object_id
   has_scope :by_characteristic
 
+  def new
+    object = build_resource
+    object.active = true
+
+    super
+  end
+
   def create
     object = build_resource
     MaterialCodeGenerator.new(object).generate!
