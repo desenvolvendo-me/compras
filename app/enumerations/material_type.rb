@@ -1,3 +1,3 @@
 class MaterialType < EnumerateIt::Base
-  associate_values :permanent, :consumption
+  associate_values :asset, :consumption, :service
 end

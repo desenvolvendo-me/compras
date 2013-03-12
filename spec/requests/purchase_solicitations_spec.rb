@@ -16,7 +16,7 @@ feature "PurchaseSolicitations" do
     ExpenseNature.make!(:vencimento_e_salarios)
     DeliveryLocation.make!(:education)
     budget_allocation = BudgetAllocation.make!(:alocacao)
-    Material.make!(:antivirus)
+    Material.make!(:antivirus, :material_type => MaterialType::ASSET)
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
@@ -324,7 +324,7 @@ feature "PurchaseSolicitations" do
     ExpenseNature.make!(:vencimento_e_salarios)
     DeliveryLocation.make!(:education)
     budget_allocation = BudgetAllocation.make!(:alocacao)
-    Material.make!(:office)
+    Material.make!(:office, :material_type => MaterialType::ASSET)
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
@@ -443,7 +443,7 @@ feature "PurchaseSolicitations" do
       fill_modal 'Responsável pela solicitação', :with => '958473', :field => 'Matrícula'
       fill_in 'Justificativa da solicitação', :with => 'Novas cadeiras'
       fill_modal 'Local para entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
-      select 'Bens', :from => 'Tipo de solicitação'
+      select 'Produtos', :from => 'Tipo de solicitação'
       fill_in 'Observações gerais', :with => 'Muitas cadeiras estão quebrando no escritório'
     end
 
@@ -555,7 +555,7 @@ feature "PurchaseSolicitations" do
     ExpenseNature.make!(:vencimento_e_salarios)
     budget_allocation = BudgetAllocation.make!(:alocacao)
     Material.make!(:antivirus)
-    Material.make!(:manutencao)
+    Material.make!(:manutencao, :material_type => MaterialType::SERVICE)
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
@@ -826,7 +826,7 @@ feature "PurchaseSolicitations" do
       fill_modal 'Responsável pela solicitação', :with => '958473', :field => 'Matrícula'
       fill_in 'Justificativa da solicitação', :with => 'Novas cadeiras'
       fill_modal 'Local para entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
-      select 'Bens', :from => 'Tipo de solicitação'
+      select 'Produtos', :from => 'Tipo de solicitação'
       fill_in 'Observações gerais', :with => 'Muitas cadeiras estão quebrando no escritório'
     end
 

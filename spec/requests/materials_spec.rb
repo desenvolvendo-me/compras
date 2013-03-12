@@ -13,7 +13,6 @@ feature "Materials" do
 
     click_link 'Criar Material'
 
-    expect(page).to have_disabled_field 'Tipo de material'
     expect(page).to have_disabled_field 'Tipo de contrato'
     expect(page).to have_checked_field 'Ativo?'
 
@@ -28,11 +27,10 @@ feature "Materials" do
     uncheck 'Ativo?'
 
     # testing javascript
-    select 'Material', :from => 'Característica'
+    select 'Material de consumo', :from => 'Tipo de material'
     expect(page).to have_disabled_field 'Tipo de contrato'
 
-    select 'Serviço', :from => 'Característica'
-    expect(page).to have_disabled_field 'Tipo de material'
+    select 'Serviço', :from => 'Tipo de material'
     # end of javascript test
 
     fill_modal 'Tipo de contrato', :with => 'Contratação de estagiários', :field => 'Descrição'
@@ -54,9 +52,8 @@ feature "Materials" do
     expect(page).to have_checked_field 'Material estocável'
     expect(page).to_not have_checked_field 'Material combustível'
     expect(page).to_not have_checked_field 'Ativo?'
-    expect(page).to have_select 'Característica', :selected => 'Serviço'
+    expect(page).to have_select 'Tipo de material', :selected => 'Serviço'
     expect(page).to have_field 'Tipo de contrato', :with => 'Contratação de estagiários'
-    expect(page).to have_disabled_field 'Tipo de material'
     expect(page).to have_field 'Natureza da despesa', :with => '3.0.10.01.12 - Vencimentos e Salários'
   end
 
@@ -76,7 +73,7 @@ feature "Materials" do
     check 'Material perecível'
     check 'Material estocável'
 
-    select 'Serviço', :from => 'Característica'
+    select 'Serviço', :from => 'Tipo de material'
 
     fill_modal 'Tipo de contrato', :with => 'Contratação de estagiários', :field => 'Descrição'
     fill_modal 'Natureza da despesa', :with => '3.0.10.01.12', :field => 'Natureza da despesa'
@@ -119,13 +116,12 @@ feature "Materials" do
     uncheck 'Material perecível'
     uncheck 'Material estocável'
     check 'Material combustível'
-    select 'Material', :from => 'Característica'
+    select 'Material de consumo', :from => 'Tipo de material'
 
     # testing javascript
     expect(page).to have_disabled_field 'Tipo de contrato'
     # end of javascript test
 
-    select 'De consumo', :from => 'Tipo de material'
     fill_modal 'Natureza da despesa', :with => '3.0.10.01.11', :field => 'Natureza da despesa'
 
     click_button 'Salvar'
@@ -144,9 +140,8 @@ feature "Materials" do
     expect(page).to_not have_checked_field 'Material perecível'
     expect(page).to_not have_checked_field 'Material estocável'
     expect(page).to have_checked_field 'Material combustível'
-    expect(page).to have_select 'Característica', :selected => 'Material'
+    expect(page).to have_select 'Tipo de material', :selected => 'Material de consumo'
     expect(page).to have_disabled_field 'Tipo de contrato'
-    expect(page).to have_select 'Tipo de material', :selected => 'De consumo'
     expect(page).to have_field 'Natureza da despesa', :with => '3.0.10.01.11 - Compra de Material'
   end
 
@@ -178,22 +173,22 @@ feature "Materials" do
     expect(page).to have_alert 'Material não pode ser apagado.'
   end
 
-  scenario 'should clean the unnecessary type of material or service depending on characteristic' do
+  scenario 'should clean the unnecessary service depending on material type' do
     Material.make!(:antivirus)
 
     navigate 'Comum > Cadastrais > Materiais > Materiais'
 
     click_link 'Antivirus'
 
-    select 'Material', :from => "Característica"
-
-    select 'De consumo', :from => 'Tipo de material'
+    select 'Material de consumo', :from => 'Tipo de material'
 
     click_button 'Salvar'
 
+    expect(page).to have_notice 'Material editado com sucesso'
+
     click_link 'Antivirus'
 
-    select 'Serviço', :from => "Característica"
+    select 'Serviço', :from => "Tipo de material"
 
     expect(page).to have_field 'Tipo de contrato', :with => ''
 
@@ -201,11 +196,7 @@ feature "Materials" do
 
     click_button 'Salvar'
 
-    click_link 'Antivirus'
-
-    select 'Material', :from => "Característica"
-
-    expect(page).to have_select 'Tipo de material', :selected => ''
+    expect(page).to have_notice 'Material editado com sucesso'
   end
 
   it 'should not have the class disabled when editing material' do
@@ -232,12 +223,12 @@ feature "Materials" do
     expect(page).to_not have_disabled_field 'Natureza da despesa'
   end
 
-  scenario "provides a filter by characteristic" do
+  scenario "provides a filter by material_type" do
     navigate 'Comum > Cadastrais > Materiais > Materiais'
 
     click_link "Filtrar Materiais"
 
-    expect(page).to have_field "Característica"
+    expect(page).to have_field "Tipo de material"
   end
 
   scenario 'index with columns at the index' do

@@ -1,5 +1,7 @@
 # encoding: utf-8
 require 'decorator_helper'
+require 'enumerate_it'
+require 'app/enumerations/material_type'
 require 'app/decorators/purchase_solicitation_budget_allocation_item_decorator'
 
 describe PurchaseSolicitationBudgetAllocationItemDecorator do
@@ -53,17 +55,17 @@ describe PurchaseSolicitationBudgetAllocationItemDecorator do
     end
   end
 
-  context '#characteristic_filter' do
+  context '#material_type_filter' do
     it 'returns "service" if solicitation is for purchase of services' do
       component.stub(:services? => true)
 
-      expect(subject.characteristic_filter).to eq 'service'
+      expect(subject.material_type_filter).to eq MaterialType::SERVICE
     end
 
     it 'returns nil if solicitation is for purchase of products or goods' do
       component.stub(:services? => false)
 
-      expect(subject.characteristic_filter).to be_nil
+      expect(subject.material_type_filter).to be_nil
     end
   end
 end

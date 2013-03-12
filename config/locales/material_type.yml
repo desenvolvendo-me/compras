@@ -1,5 +1,6 @@
 pt-BR:
   enumerations:
     material_type:
-      permanent: "Permanente"
-      consumption: "De consumo"
+      service: "Serviço"
+      consumption: "Material de consumo"
+      asset: "Bem patrimonial"

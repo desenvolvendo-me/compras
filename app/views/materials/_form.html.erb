@@ -57,21 +57,17 @@
 
 <div class="yui3-g">
   <div class="yui3-u-1-2">
-    <%= f.input :material_characteristic %>
+    <%= f.input :material_type %>
   </div>
 
   <div class="yui3-u-1-2">
-    <%= f.input :contract_type, :disabled => !f.object.service? %>
+    <%= f.input :combustible %>
   </div>
 </div>
 
 <div class="yui3-g">
   <div class="yui3-u-1-2">
-    <%= f.input :material_type, :disabled => !f.object.material? %>
-  </div>
-
-  <div class="yui3-u-1-2">
-    <%= f.input :combustible %>
+    <%= f.input :contract_type, :disabled => !f.object.service? %>
   </div>
 </div>
 
@@ -82,25 +78,20 @@
 </div>
 
 <script>
-  $("#material_material_characteristic").change(changeFieldsByCharacteristic);
+  $("#material_material_type").change(changeFieldsByMaterialType);
 
-  function changeFieldsByCharacteristic() {
-    characteristicValue = $("#material_material_characteristic").val();
+  function changeFieldsByMaterialType() {
+    typeValue = $("#material_material_type").val();
 
-    if (characteristicValue == 'material') {
+    if (typeValue == "<%= MaterialType::CONSUMPTION %>" || typeValue == "<%= MaterialType::ASSET %>") {
       $("#material_service_or_contract_type").attr('disabled', true)
                                              .requiredField(false);
-      $("#material_material_type").attr('disabled', false)
-                                  .requiredField(true);
-    } else if (characteristicValue == 'service') {
-      $("#material_material_type").attr('disabled', true)
-                                  .requiredField(false);
-      $("#material_contract_type").attr('disabled', false)
-                                             .requiredField(true);
+    } else if (typeValue == "<%= MaterialType::SERVICE %>") {
+      $("#material_contract_type").attr('disabled', false).requiredField(true);
     }
   };
 
   (function(){
-    changeFieldsByCharacteristic();
+    changeFieldsByMaterialType();
   })();
 </script>

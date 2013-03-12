@@ -10,8 +10,8 @@
 
     <div class="yui3-u-7-8">
       <%= f.input :material, :label => f.object.decorator.material_label, :disabled => f.object.annulled?,
-        :modal_url => modal_materials_path(:by_characteristic => f.object.decorator.characteristic_filter,
-                                           :locked_fields => [:material_characteristic] ),
+        :modal_url => modal_materials_path(:by_material_type => f.object.decorator.material_type_filter,
+                                           :locked_fields => [:material_material_type] ),
         :input_html => { :class => 'material' }
          %>
     </div>

@@ -91,8 +91,8 @@
   function setMaterialModalUrl(){
     var url = "<%= modal_materials_path %>?",
     params = {
-      locked_fields: ['material_characteristic'],
-      by_characteristic: materialCharacteristic()
+      locked_fields: ['material_material_type'],
+      by_material_type: materialType()
     };
 
     url += jQuery.param(params);
@@ -120,16 +120,22 @@
     return materialOrService;
   }
 
-  function materialCharacteristic() {
-    var characteristic,
+  function materialType() {
+    var material_type,
         purchaseSolicitationKind = $('#purchase_solicitation_kind').val();
 
-    if (purchaseSolicitationKind === "<%= PurchaseSolicitationKind::SERVICES %>") {
-      characteristic = "service";
-    } else {
-      characteristic = "material";
+    switch (purchaseSolicitationKind) {
+      case "<%= PurchaseSolicitationKind::SERVICES %>" :
+        material_type = "<%= MaterialType::SERVICE %>";
+        break;
+      case "<%= PurchaseSolicitationKind::PRODUCTS %>" :
+        material_type = "<%= MaterialType::CONSUMPTION %>";
+        break;
+      case "<%= PurchaseSolicitationKind::GOODS %>" :
+        material_type = "<%= MaterialType::ASSET %>";
+        break;
     }
 
-    return characteristic;
+    return material_type;
   }
 </script>

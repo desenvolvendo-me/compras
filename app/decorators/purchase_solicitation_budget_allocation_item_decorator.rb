@@ -16,7 +16,7 @@ class PurchaseSolicitationBudgetAllocationItemDecorator
     services? ? "Serviço" : "Material"
   end
 
-  def characteristic_filter
-    services? ? "service" : nil
+  def material_type_filter
+    services? ? MaterialType::SERVICE : nil
   end
 end

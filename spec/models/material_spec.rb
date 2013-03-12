@@ -42,21 +42,13 @@ describe Material do
   it { should validate_presence_of :materials_class }
   it { should validate_presence_of :code }
   it { should validate_presence_of :description }
-  it { should validate_presence_of :material_characteristic }
   it { should validate_presence_of :reference_unit }
+  it { should validate_presence_of :material_type }
 
-  it "should validate presence of material_type only if material_characteristic is material" do
-    expect(subject).not_to validate_presence_of(:material_type)
-
-    subject.material_characteristic = MaterialCharacteristic::MATERIAL
-
-    expect(subject).to validate_presence_of(:material_type)
-  end
-
-  it "should validate presence of service_or_contract_type only if material_characteristic is service" do
+  it "should validate presence of service_or_contract_type only if material_type is service" do
     expect(subject).not_to validate_presence_of(:contract_type)
 
-    subject.material_characteristic = MaterialCharacteristic::SERVICE
+    subject.material_type = MaterialType::SERVICE
 
     expect(subject).to validate_presence_of(:contract_type)
   end

@@ -1,16 +1,15 @@
 class Material < Compras::Model
   attr_accessible :materials_class_id, :code, :material_type, :manufacturer,
                   :detailed_description, :minimum_stock_balance, :combustible,
-                  :reference_unit_id, :material_characteristic, :perishable,
-                  :contract_type_id, :expense_nature_id, :description,
-                  :storable, :autocomplete_materials_class, :active
+                  :reference_unit_id, :perishable,:contract_type_id, :active,
+                  :expense_nature_id, :description, :storable,
+                  :autocomplete_materials_class
 
   attr_writer :autocomplete_materials_class
 
-  attr_modal :description, :material_characteristic
+  attr_modal :description, :material_type
 
-  has_enumeration_for :material_characteristic, :create_helpers => true
-  has_enumeration_for :material_type, :create_helpers => true
+  has_enumeration_for :material_type, :create_helpers => true, :create_scopes => true
 
   belongs_to :materials_class
   belongs_to :reference_unit
@@ -27,10 +26,8 @@ class Material < Compras::Model
   has_many :purchase_solicitation_item_group_materials, :dependent => :destroy
   has_many :purchase_solicitation_budget_allocations, :through => :purchase_solicitation_budget_allocation_items, :dependent => :restrict
 
-  validates :materials_class, :reference_unit, :material_characteristic,
-            :presence => true
+  validates :materials_class, :reference_unit, :material_type, :presence => true
   validates :code, :description, :presence => true, :uniqueness => { :allow_blank => true }
-  validates :material_type, :presence => true, :if => :material?
   validates :contract_type, :presence => true, :if => :service?
 
   before_save :clean_unnecessary_type
@@ -44,15 +41,15 @@ class Material < Compras::Model
     joins(:licitation_objects).where { licitation_objects.id.eq(licitation_object_id) }
   }
 
+  scope :by_material_type, lambda { |material_type|
+    where { |material| material.material_type.eq(material_type) }
+  }
+
   def self.last_by_materials_class_and_group(params = {})
     record = scoped
     record = record.where { materials_class_id.eq(params.fetch(:materials_class_id)) }
     record = record.order { code }.last
     record
-  end
-
-  def self.by_characteristic(characteristic)
-    where { material_characteristic.eq characteristic }
   end
 
   def self.by_pending_purchase_solicitation_budget_structure_id(budget_structure_id)
@@ -85,10 +82,8 @@ class Material < Compras::Model
   protected
 
   def clean_unnecessary_type
-    if material?
+    if consumption? || asset?
       self.contract_type_id = nil
-    elsif service?
-      self.material_type = nil
     end
   end
 
