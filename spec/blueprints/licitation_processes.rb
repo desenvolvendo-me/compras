@@ -8,6 +8,7 @@ LicitationProcess.blueprint(:processo_licitatorio) do
   judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
   description { 'Licitação para compra de carteiras' }
   item { 'Item 1' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   items { [AdministrativeProcessBudgetAllocationItem.make!(:item)] }
   responsible { Employee.make!(:sobrinho) }
   year { 2012 }
@@ -54,6 +55,7 @@ LicitationProcess.blueprint(:processo_licitatorio_computador) do
   description { 'Licitação para compra de carteiras' }
   responsible { Employee.make!(:sobrinho) }
   item { 'Item 1' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   items { [AdministrativeProcessBudgetAllocationItem.make!(:item)] }
   year { 2013 }
   process_date { Date.new(2013, 3, 20) }
@@ -97,6 +99,7 @@ LicitationProcess.blueprint(:processo_licitatorio_fornecedores) do
   description { 'Licitação para compra de carteiras' }
   responsible { Employee.make!(:sobrinho) }
   item { 'Item 1' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   items { [AdministrativeProcessBudgetAllocationItem.make!(:item)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
@@ -137,6 +140,7 @@ LicitationProcess.blueprint(:processo_licitatorio_publicacao_cancelada) do
   judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
   description { 'Licitação para compra de carteiras' }
   item { 'Item 1' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   items { [AdministrativeProcessBudgetAllocationItem.make!(:item)] }
   responsible { Employee.make!(:sobrinho) }
   year { 2012 }
@@ -178,6 +182,7 @@ LicitationProcess.blueprint(:processo_licitatorio_canetas) do
   description { 'Licitação para compra de carteiras' }
   responsible { Employee.make!(:sobrinho) }
   item { 'Item 1' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_2_itens)] }
   items { [AdministrativeProcessBudgetAllocationItem.make!(:item),
            AdministrativeProcessBudgetAllocationItem.make!(:item_arame)] }
   year { 2013 }
@@ -222,6 +227,7 @@ LicitationProcess.blueprint(:apuracao_por_itens) do
   description { 'Licitação para compra de carteiras' }
   responsible { Employee.make!(:sobrinho) }
   item { 'Item 1' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_2_itens)] }
   items { [AdministrativeProcessBudgetAllocationItem.make!(:item),
            AdministrativeProcessBudgetAllocationItem.make!(:item_arame)] }
   year { 2012 }
@@ -266,6 +272,7 @@ LicitationProcess.blueprint(:apuracao_por_lote) do
   description { 'Licitação para compra de carteiras' }
   responsible { Employee.make!(:sobrinho) }
   item { 'Item 1' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_2_itens)] }
   items { [AdministrativeProcessBudgetAllocationItem.make!(:item),
            AdministrativeProcessBudgetAllocationItem.make!(:item_arame)] }
   year { 2012 }
@@ -309,6 +316,7 @@ LicitationProcess.blueprint(:valor_maximo_ultrapassado) do
   description { 'Licitação para compra de carteiras' }
   responsible { Employee.make!(:sobrinho) }
   item { 'Item 1' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_2_itens)] }
   items { [AdministrativeProcessBudgetAllocationItem.make!(:item),
            AdministrativeProcessBudgetAllocationItem.make!(:item_arame)] }
   year { 2012 }
@@ -352,6 +360,7 @@ LicitationProcess.blueprint(:apuracao_global) do
   description { 'Licitação para compra de carteiras' }
   responsible { Employee.make!(:sobrinho) }
   item { 'Item 1' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   items { [AdministrativeProcessBudgetAllocationItem.make!(:item)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
@@ -394,6 +403,7 @@ LicitationProcess.blueprint(:apuracao_global_empatou) do
   description { 'Licitação para compra de carteiras' }
   responsible { Employee.make!(:sobrinho) }
   item { 'Item 1' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   items { [AdministrativeProcessBudgetAllocationItem.make!(:item)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
@@ -436,6 +446,7 @@ LicitationProcess.blueprint(:apuracao_global_sem_documentos) do
   description { 'Licitação para compra de carteiras' }
   responsible { Employee.make!(:sobrinho) }
   item { 'Item 1' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   items { [AdministrativeProcessBudgetAllocationItem.make!(:item)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
@@ -478,6 +489,7 @@ LicitationProcess.blueprint(:apuracao_global_small_company) do
   description { 'Licitação para compra de carteiras' }
   responsible { Employee.make!(:sobrinho) }
   item { 'Item 1' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   items { [AdministrativeProcessBudgetAllocationItem.make!(:item)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
@@ -520,6 +532,7 @@ LicitationProcess.blueprint(:apuracao_global_small_company_2) do
   description { 'Licitação para compra de carteiras' }
   responsible { Employee.make!(:sobrinho) }
   item { 'Item 1' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   items { [AdministrativeProcessBudgetAllocationItem.make!(:item)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
@@ -562,6 +575,7 @@ LicitationProcess.blueprint(:processo_licitatorio_nao_atualizavel) do
   description { 'Licitação para compra de carteiras' }
   responsible { Employee.make!(:sobrinho) }
   item { 'Item 1' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   items { [AdministrativeProcessBudgetAllocationItem.make!(:item)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
@@ -603,6 +617,7 @@ LicitationProcess.blueprint(:processo_licitatorio_canetas_sem_lote) do
   description { 'Licitação para compra de carteiras' }
   responsible { Employee.make!(:sobrinho) }
   item { 'Item 1' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_2_itens)] }
   items { [AdministrativeProcessBudgetAllocationItem.make!(:item),
            AdministrativeProcessBudgetAllocationItem.make!(:item_arame)] }
   year { 2013 }
@@ -645,6 +660,7 @@ LicitationProcess.blueprint(:apuracao_melhor_tecnica_e_preco) do
   description { 'Licitação para compra de carteiras' }
   responsible { Employee.make!(:sobrinho) }
   item { 'Item 1' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   items { [AdministrativeProcessBudgetAllocationItem.make!(:item)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
@@ -687,6 +703,7 @@ LicitationProcess.blueprint(:pregao_presencial) do
   description { 'Licitação para compra de carteiras' }
   responsible { Employee.make!(:sobrinho) }
   item { 'Item 1' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   items { [AdministrativeProcessBudgetAllocationItem.make!(:item)] }
   summarized_object { "Descrição resumida do objeto" }
   year { 2012 }
@@ -863,6 +880,7 @@ LicitationProcess.blueprint(:processo_licitatorio_leilao) do
   description { 'Licitação para compra de carteiras' }
   responsible { Employee.make!(:sobrinho) }
   item { 'Item 1' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   items { [AdministrativeProcessBudgetAllocationItem.make!(:item)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
