@@ -9,9 +9,9 @@ describe AdministrativeProcessBudgetAllocationItem do
   it { should validate_presence_of :material }
   it { should validate_presence_of :quantity }
 
-  it { should belong_to :administrative_process_budget_allocation }
   it { should belong_to :material }
   it { should belong_to :licitation_process_lot }
+  it { should belong_to :licitation_process }
   it { should have_many :bidder_proposals }
   it { should have_many(:licitation_process_classifications).dependent(:destroy) }
 
@@ -19,9 +19,6 @@ describe AdministrativeProcessBudgetAllocationItem do
 
   it { should delegate(:reference_unit).to(:material).allowing_nil(true) }
   it { should delegate(:description).to(:material).allowing_nil(true) }
-  it { should delegate(:licitation_process_id).to(:administrative_process_budget_allocation).allowing_nil(true) }
-  it { should delegate(:budget_allocation).to(:administrative_process_budget_allocation).allowing_nil(true) }
-  it { should delegate(:type_of_calculation).to(:administrative_process_budget_allocation).allowing_nil(true) }
 
   context 'with material' do
     let :material do

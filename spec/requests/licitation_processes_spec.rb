@@ -94,13 +94,15 @@ feature "LicitationProcesses" do
       fill_modal 'Tipo de documento', :with => 'Fiscal', :field => 'Descrição'
     end
 
-    within_tab 'Dotações' do
+    within_tab 'Orçamento' do
       click_button 'Adicionar Dotação'
 
       fill_with_autocomplete 'Dotação orçamentária', :with => 'Alocação'
 
       fill_in 'Valor previsto', :with => '20,00'
+    end
 
+    within_tab "Itens / Justificativa" do
       click_button 'Adicionar Item'
 
       fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
@@ -184,12 +186,14 @@ feature "LicitationProcesses" do
       expect(page).to have_content '10'
     end
 
-    within_tab 'Dotações' do
+    within_tab 'Orçamento' do
       expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
       expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
       expect(page).to have_field 'Saldo da dotação', :with => '500,00'
       expect(page).to have_field 'Valor previsto', :with => '20,00'
+    end
 
+    within_tab "Itens / Justificativa" do
       expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
       expect(page).to have_field 'Unidade', :with => 'UN'
       expect(page).to have_field 'Quantidade', :with => '2'
@@ -244,6 +248,7 @@ feature "LicitationProcesses" do
     DocumentType.make!(:oficial)
     Material.make!(:arame_farpado)
     Indexer.make!(:selic)
+    BudgetAllocation.make!(:alocacao)
 
     navigate 'Processos de Compra > Processos Licitatórios'
 
@@ -301,7 +306,15 @@ feature "LicitationProcesses" do
       fill_modal 'Tipo de documento', :with => 'Oficial', :field => 'Descrição'
     end
 
-    within_tab 'Dotações' do
+    within_tab "Orçamento" do
+      click_button 'Adicionar Dotação'
+
+      fill_with_autocomplete 'Dotação orçamentária', :with => 'Alocação'
+
+      fill_in 'Valor previsto', :with => '20,00'
+    end
+
+    within_tab 'Itens / Justificativa' do
       click_button 'Remover Item'
 
       click_button 'Adicionar Item'
@@ -367,12 +380,14 @@ feature "LicitationProcesses" do
       expect(page).to have_content 'Oficial'
     end
 
-    within_tab 'Dotações' do
+    within_tab 'Orçamento' do
       expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
       expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
       expect(page).to have_field 'Saldo da dotação', :with => '500,00'
       expect(page).to have_field 'Valor previsto', :with => '20,00'
+    end
 
+    within_tab "Itens / Justificativa" do
       expect(page).to have_field 'Material', :with => '02.02.00001 - Arame farpado'
       expect(page).to have_field 'Unidade', :with => 'UN'
       expect(page).to have_field 'Quantidade', :with => '5'
@@ -388,35 +403,26 @@ feature "LicitationProcesses" do
     end
   end
 
-  scenario 'calculating total of items via javascript' do
+  scenario 'calculating items values via javascript' do
     navigate 'Processos de Compra > Processos Licitatórios'
 
     click_link 'Criar Processo de Compra'
 
-    within_tab 'Dotações' do
-      click_button 'Adicionar Dotação'
-
+    within_tab 'Itens / Justificativa' do
       click_button 'Adicionar Item'
 
       fill_in 'Quantidade', :with => '5'
       fill_in 'Valor unitário máximo', :with => '10,00'
 
-      expect(page).to have_field 'Valor total dos itens', :with => '50,00'
+      expect(page).to have_field 'Valor total', :with => '50,00'
 
       click_button 'Adicionar Item'
 
-      within '.item:first' do
+      within '.nested-licitation-process-item:first' do
         fill_in 'Quantidade', :with => '4'
         fill_in 'Valor unitário máximo', :with => '20,00'
+        expect(page).to have_field 'Valor total', :with => '80,00'
       end
-
-      expect(page).to have_field 'Valor total dos itens', :with => '130,00'
-
-      within '.item:last' do
-        click_button 'Remover Item'
-      end
-
-      expect(page).to have_field 'Valor total dos itens', :with => '80,00'
     end
   end
 
@@ -496,7 +502,7 @@ feature "LicitationProcesses" do
     click_link 'Documentos'
     expect(page).to have_disabled_element 'Remover', :reason => 'a última publicação é do tipo (Cancelamento). Não pode ser alterado'
 
-    click_link 'Dotações orçamentárias'
+    click_link 'Itens / Justificativa'
     expect(page).to have_disabled_element 'Adicionar Item', :reason => 'a última publicação é do tipo (Cancelamento). Não pode ser alterado'
     expect(page).to have_disabled_element 'Remover Item', :reason => 'a última publicação é do tipo (Cancelamento). Não pode ser alterado'
   end
@@ -520,7 +526,7 @@ feature "LicitationProcesses" do
       click_link '1/2012'
     end
 
-    within_tab 'Dotações' do
+    within_tab 'Itens / Justificativa' do
       click_button 'Remover Item'
       click_button 'Adicionar Item'
 
@@ -633,22 +639,20 @@ feature "LicitationProcesses" do
 
     click_link 'Criar Processo de Compra'
 
-    within_tab 'Dotações' do
-      click_button 'Adicionar Dotação'
-
+    within_tab 'Itens / Justificativa' do
       click_button 'Adicionar Item'
 
-      within '.item:last' do
+      within '.nested-licitation-process-item:last' do
         expect(page).to have_field 'Item', :with => '1'
       end
 
       click_button 'Adicionar Item'
 
-      within '.item:first' do
+      within '.nested-licitation-process-item:first' do
         expect(page).to have_field 'Item', :with => '1'
       end
 
-      within '.item:last' do
+      within '.nested-licitation-process-item:last' do
         expect(page).to have_field 'Item', :with => '2'
       end
     end
@@ -1545,7 +1549,7 @@ feature "LicitationProcesses" do
       fill_modal 'Tipo de documento', :with => 'Fiscal', :field => 'Descrição'
     end
 
-    within_tab 'Dotações orçamentárias' do
+    within_tab 'Orçamento' do
       expect(page).to_not have_button 'Adicionar Dotação'
 
       expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
@@ -1560,11 +1564,10 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Valor previsto', :with => '19.800,00'
       expect(page).to have_readonly_field 'Valor previsto'
 
-      expect(page).to have_field 'Valor total dos itens', :with => '19.800,00'
-      expect(page).to have_readonly_field 'Valor total dos itens'
+      expect(page).to_not have_button 'Remover Dotação'
+    end
 
-      expect(page).to_not have_button 'Adicionar Item'
-
+    within_tab "Itens / Justificativa" do
       expect(page).to have_field 'Item', :with => '1'
       expect(page).to have_readonly_field 'Item'
 
@@ -1582,9 +1585,6 @@ feature "LicitationProcesses" do
 
       expect(page).to have_field 'Valor total', :with => '19.800,00'
       expect(page).to have_readonly_field 'Valor total'
-
-      expect(page).to_not have_button 'Remover Dotação'
-      expect(page).to_not have_button 'Remover Item'
     end
 
     click_button 'Salvar'
@@ -1632,7 +1632,7 @@ feature "LicitationProcesses" do
       expect(page).to have_select 'Período do prazo de entrega', :selected => 'ano/anos'
     end
 
-    within_tab 'Dotações orçamentárias' do
+    within_tab 'Orçamento' do
       expect(page).to_not have_button 'Adicionar Dotação'
 
       expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
@@ -1647,11 +1647,10 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Valor previsto', :with => '19.800,00'
       expect(page).to have_readonly_field 'Valor previsto'
 
-      expect(page).to have_field 'Valor total dos itens', :with => '19.800,00'
-      expect(page).to have_readonly_field 'Valor total dos itens'
+      expect(page).to_not have_button 'Remover Dotação'
+    end
 
-      expect(page).to_not have_button 'Adicionar Item'
-
+    within_tab "Itens / Justificativa" do
       expect(page).to have_field 'Item', :with => '1'
       expect(page).to have_readonly_field 'Item'
 
@@ -1669,9 +1668,6 @@ feature "LicitationProcesses" do
 
       expect(page).to have_field 'Valor total', :with => '19.800,00'
       expect(page).to have_readonly_field 'Valor total'
-
-      expect(page).to_not have_button 'Remover Dotação'
-      expect(page).to_not have_button 'Remover Item'
     end
 
     navigate 'Processos de Compra > Agrupamentos de Itens de Solicitações de Compra'
@@ -1717,7 +1713,7 @@ feature "LicitationProcesses" do
       expect(page).to have_disabled_field 'Solicitação de compra'
     end
 
-    within_tab 'Dotações orçamentárias' do
+    within_tab 'Orçamento' do
       expect(page).to_not have_button 'Adicionar Dotação'
 
       expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
@@ -1732,11 +1728,10 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Valor previsto', :with => '19.800,00'
       expect(page).to have_readonly_field 'Valor previsto'
 
-      expect(page).to have_field 'Valor total dos itens', :with => '19.800,00'
-      expect(page).to have_readonly_field 'Valor total dos itens'
+      expect(page).to_not have_button 'Remover Dotação'
+    end
 
-      expect(page).to_not have_button 'Adicionar Item'
-
+    within_tab "Itens / Justificativa" do
       expect(page).to have_field 'Item', :with => '1'
       expect(page).to have_readonly_field 'Item'
 
@@ -1754,9 +1749,6 @@ feature "LicitationProcesses" do
 
       expect(page).to have_field 'Valor total', :with => '19.800,00'
       expect(page).to have_readonly_field 'Valor total'
-
-      expect(page).to_not have_button 'Remover Dotação'
-      expect(page).to_not have_button 'Remover Item'
     end
 
     click_button 'Salvar'
@@ -1767,7 +1759,7 @@ feature "LicitationProcesses" do
       clear_modal 'Agrupamento de solicitações de compra'
     end
 
-    within_tab 'Dotações orçamentárias' do
+    within_tab 'Orçamento' do
       expect(page).to have_button 'Adicionar Dotação'
 
       expect(page).to_not have_field 'Dotação orçamentária', :with => '1 - Alocação'
@@ -1775,7 +1767,6 @@ feature "LicitationProcesses" do
       expect(page).to_not have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
       expect(page).to_not have_field 'Saldo da dotação', :with => '500,00'
       expect(page).to_not have_field 'Valor previsto', :with => '19.800,00'
-      expect(page).to_not have_field 'Valor total dos itens', :with => '19.800,00'
     end
 
     click_button 'Salvar'
@@ -1989,7 +1980,7 @@ feature "LicitationProcesses" do
       end
     end
 
-    within_tab 'Dotações orçamentárias' do
+    within_tab 'Orçamento' do
       expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
       expect(page).to have_field 'Saldo da dotação', :with => '500,00'
 
@@ -2010,7 +2001,7 @@ feature "LicitationProcesses" do
 
     expect(page).to have_notice 'Processo de Compra 1/2012 editado com sucesso.'
 
-    within_tab 'Dotações orçamentárias' do
+    within_tab 'Orçamento' do
       expect(page).to_not have_field 'Dotação orçamentária', :with => '1 - Alocação'
       expect(page).to_not have_field 'Saldo da dotação', :with => '500,00'
     end
@@ -2240,7 +2231,7 @@ feature "LicitationProcesses" do
       click_link '1/2012'
     end
 
-    within_tab 'Dotações orçamentárias' do
+within_tab 'Dotações orçamentárias' do
       expect(page).to have_disabled_field 'Atendido por', :with => 'Processo de compra 1/2012 - Convite 1'
     end
 
@@ -2476,7 +2467,7 @@ feature "LicitationProcesses" do
       select 'ano/anos', :from => 'Período do prazo de entrega'
     end
 
-    within_tab 'Dotações orçamentárias' do
+    within_tab 'Orçamento' do
       expect(page).to_not have_button 'Adicionar Dotação'
       expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
       expect(page).to have_disabled_field 'Dotação orçamentária'
@@ -2493,7 +2484,7 @@ feature "LicitationProcesses" do
       clear_modal 'Solicitação de compra'
     end
 
-    within_tab 'Dotações orçamentárias' do
+    within_tab 'Orçamento' do
       expect(page).to have_button 'Adicionar Dotação'
       expect(page).to_not have_field 'Dotação orçamentária', :with => '1 - Alocação'
 
@@ -2597,7 +2588,7 @@ feature "LicitationProcesses" do
       fill_modal 'Tipo de documento', :with => 'Fiscal', :field => 'Descrição'
     end
 
-    within_tab 'Dotações orçamentárias' do
+    within_tab 'Orçamento' do
       expect(page).to_not have_button 'Adicionar Dotação'
       expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
       expect(page).to have_disabled_field 'Dotação orçamentária'
@@ -2609,10 +2600,10 @@ feature "LicitationProcesses" do
       expect(page).to have_readonly_field 'Saldo da dotação'
 
       expect(page).to have_field 'Valor previsto', :with => '600,00'
+      expect(page).to_not have_button 'Remover Dotação'
+    end
 
-      expect(page).to have_field 'Valor total dos itens', :with => '600,00'
-      expect(page).to have_readonly_field 'Valor total dos itens'
-
+    within_tab "Itens / Justificativa" do
       expect(page).to have_field 'Item', :with => '1'
       expect(page).to have_readonly_field 'Item'
 
@@ -2630,10 +2621,6 @@ feature "LicitationProcesses" do
 
       expect(page).to have_field 'Valor total', :with => '600,00'
       expect(page).to have_readonly_field 'Valor total'
-
-      expect(page).to_not have_button 'Adicionar Item'
-      expect(page).to_not have_button 'Remover Item'
-      expect(page).to_not have_button 'Remover Dotação'
     end
 
     click_button 'Salvar'
@@ -2644,7 +2631,7 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Solicitação de compra', :with => '1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
     end
 
-    within_tab 'Dotações orçamentárias' do
+    within_tab 'Orçamento' do
       expect(page).to_not have_button 'Adicionar Dotação'
       expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
       expect(page).to have_disabled_field 'Dotação orçamentária'
@@ -2658,9 +2645,10 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Valor previsto', :with => '600,00'
       expect(page).to have_disabled_field 'Valor previsto'
 
-      expect(page).to have_field 'Valor total dos itens', :with => '600,00'
-      expect(page).to have_disabled_field 'Valor total dos itens'
+      expect(page).to_not have_button 'Remover Dotação'
+    end
 
+    within_tab 'Itens / Justificativa' do
       expect(page).to have_field 'Item', :with => '1'
       expect(page).to have_disabled_field 'Item'
 
@@ -2678,10 +2666,6 @@ feature "LicitationProcesses" do
 
       expect(page).to have_field 'Valor total', :with => '600,00'
       expect(page).to have_disabled_field 'Valor total'
-
-      expect(page).to_not have_button 'Adicionar Item'
-      expect(page).to_not have_button 'Remover Item'
-      expect(page).to_not have_button 'Remover Dotação'
     end
 
     navigate 'Processos de Compra > Solicitações de Compra'

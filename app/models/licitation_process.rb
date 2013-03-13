@@ -15,7 +15,7 @@ class LicitationProcess < Compras::Model
                   :administrative_process_budget_allocations_attributes,
                   :contract_guarantees, :extension_clause, :index_update_rate_id,
                   :type_of_removal, :is_trading, :availability_of_the_notice_date,
-                  :contact_id, :stage_of_bids_date
+                  :contact_id, :stage_of_bids_date, :items_attributes
 
   auto_increment :process, :by => :year
   auto_increment :modality_number, :by => [:year, :modality, :type_of_removal]
@@ -65,7 +65,7 @@ class LicitationProcess < Compras::Model
   has_many :classifications, :through => :bidders, :class_name => 'LicitationProcessClassification',
            :source => :licitation_process_classifications
   has_many :administrative_process_budget_allocations, :dependent => :destroy, :order => :id
-  has_many :items, :through => :administrative_process_budget_allocations, :order => :id
+  has_many :items, :class_name => 'AdministrativeProcessBudgetAllocationItem', :dependent => :restrict, :order => :id
   has_many :materials, :through => :items
   has_many :purchase_solicitation_items,
            :class_name => 'PurchaseSolicitationBudgetAllocationItem',
@@ -74,7 +74,7 @@ class LicitationProcess < Compras::Model
 
   has_one :trading, :dependent => :restrict
 
-  accepts_nested_attributes_for :administrative_process_budget_allocations, :allow_destroy => true
+  accepts_nested_attributes_for :administrative_process_budget_allocations, :items, :allow_destroy => true
 
   delegate :kind, :best_technique?, :technical_and_price?,
            :to => :judgment_form, :allow_nil => true, :prefix => true

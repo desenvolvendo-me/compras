@@ -48,18 +48,18 @@ class AdministrativeProcessBudgetAllocationCloner
 
       new_budget_allocation.save!
 
-      clone_budget_allocation_items(new_budget_allocation, psba)
+      clone_budget_allocation_items(licitation_process, psba)
     end
   end
 
-  def clone_budget_allocation_items(budget_allocation, psba)
+  def clone_budget_allocation_items(licitation_process, psba)
     items_by_material(psba).each do |item|
-      clone_item(budget_allocation, item)
+      clone_item(licitation_process, item)
     end
   end
 
-  def clone_item(budget_allocation, item)
-    new_item = budget_allocation.items.build
+  def clone_item(licitation_process, item)
+    new_item = licitation_process.items.build
 
     new_item.material_id = item.material_id
     new_item.quantity    = item.quantity

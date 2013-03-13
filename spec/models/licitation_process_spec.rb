@@ -7,6 +7,7 @@ require 'app/models/licitation_process'
 require 'app/models/capability'
 require 'app/models/payment_method'
 require 'app/models/administrative_process_budget_allocation'
+require 'app/models/administrative_process_budget_allocation_item'
 require 'app/models/licitation_process_publication'
 require 'app/models/bidder'
 require 'app/models/licitation_process_impugnment'
@@ -71,7 +72,7 @@ describe LicitationProcess do
   it { should have_many(:classifications).through(:bidders) }
   it { should have_many(:classifications).through(:bidders) }
   it { should have_many(:administrative_process_budget_allocations).dependent(:destroy) }
-  it { should have_many(:items).through(:administrative_process_budget_allocations) }
+  it { should have_many(:items).dependent(:restrict)}
   it { should have_many(:materials).through(:items) }
   it { should have_many(:purchase_solicitation_items) }
 

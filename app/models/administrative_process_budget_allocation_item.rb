@@ -1,14 +1,13 @@
 class AdministrativeProcessBudgetAllocationItem < Compras::Model
-  attr_accessible :administrative_process_budget_allocation_id, :material_id,
-                  :quantity, :unit_price
+  attr_accessible :material_id, :quantity, :unit_price
 
   attr_accessor :order
 
   attr_modal :material, :quantity, :unit_price
 
-  belongs_to :administrative_process_budget_allocation
   belongs_to :material
   belongs_to :licitation_process_lot
+  belongs_to :licitation_process
 
   has_many :bidder_proposals
   has_many :licitation_process_classifications, :as => :classifiable, :dependent => :destroy
@@ -16,17 +15,14 @@ class AdministrativeProcessBudgetAllocationItem < Compras::Model
   has_one  :trading_item, :dependent => :restrict
 
   delegate :reference_unit, :description, :to => :material, :allow_nil => true
-  delegate :licitation_process_id, :budget_allocation, :type_of_calculation,
-           :to => :administrative_process_budget_allocation, :allow_nil => true
 
   validates :material, :quantity, :presence => true
 
   orderize "id DESC"
   filterize
 
-  scope :licitation_process_id, lambda { |licitation_process_id|
-    joins { administrative_process_budget_allocation }.
-    where { administrative_process_budget_allocation.licitation_process_id.eq licitation_process_id }
+  scope :by_licitation_process_id, lambda { |licitation_process_id|
+    where { licitation_process_id.eq licitation_process_id }
   }
 
   scope :without_lot_or_ids, lambda { |ids|

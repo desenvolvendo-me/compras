@@ -1,0 +1,17 @@
+<div id="items">
+  <p>
+    <input type="button" class="button affirmative add-licitation-process-item" <%= data_disabled_attribute(f.object.decorator.not_updatable_message)%> value="Adicionar Item">
+  </p>
+
+  <div id="licitation-process-item" data-nested-form="licitation-process-item" data-append-item=false>
+    <%= f.association :items, :collection => localized(f.object.items) do |p| %>
+      <%= render 'administrative_process_budget_allocation_items/form', :f => p %>
+    <% end %>
+  </div>
+
+  <%= mustache 'licitation-process-item-template' do %>
+    <%= f.association :items_attributes, :collection => f.object.items.build, :index => '{{uuid-licitation-process-item}}' do |p| %>
+      <%= render 'administrative_process_budget_allocation_items/form', :f => p, :data_disabled => f.object.decorator.not_updatable_message %>
+    <% end %>
+  <% end %>
+</div>

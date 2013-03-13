@@ -84,6 +84,7 @@ describe AdministrativeProcessBudgetAllocationCloner do
         it 'should copy the budget_allocations from purchase_solicitation to licitation_process' do
           adm_budget_allocations.should_receive(:destroy_all)
           adm_budget_allocations.should_receive(:build).and_return(adm_budget_allocation)
+          licitation_process.should_receive(:items).and_return(adm_items)
           adm_items.should_receive(:build).and_return(adm_item)
 
           adm_budget_allocation.should_receive(:transaction).and_yield
@@ -133,6 +134,7 @@ describe AdministrativeProcessBudgetAllocationCloner do
         it 'should copy the budget_allocations only with specific material from purchase_solicitation to licitation_process' do
           adm_budget_allocations.should_receive(:destroy_all)
           adm_budget_allocations.should_receive(:build).and_return(adm_budget_allocation)
+          licitation_process.should_receive(:items).and_return(adm_items)
           adm_items.should_receive(:build).and_return(adm_item)
           items.should_receive(:by_material).with(34).and_return([pur_item])
 
@@ -160,6 +162,7 @@ describe AdministrativeProcessBudgetAllocationCloner do
         it 'should copy the budget_allocations from purchase_solicitation to licitation_process without clear old data' do
           adm_budget_allocations.should_not_receive(:destroy_all)
           adm_budget_allocations.should_receive(:build).and_return(adm_budget_allocation)
+          licitation_process.should_receive(:items).and_return(adm_items)
           adm_items.should_receive(:build).and_return(adm_item)
 
           adm_budget_allocation.should_receive(:transaction).and_yield
