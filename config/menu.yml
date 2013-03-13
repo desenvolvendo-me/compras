@@ -33,6 +33,7 @@ menu:
       - materials:
         - materials_classes
         - materials
+	- reference_units
       - indexers
       - currencies
       - holidays
@@ -52,7 +53,6 @@ menu:
         - regulatory_act_types
         - regulatory_act_type_classifications
         - regulatory_acts
-    - reference_units
     - document_types
     - delivery_locations
     - payment_methods

@@ -7,7 +7,7 @@ feature "ReferenceUnits" do
   end
 
   scenario 'create a new reference_unit' do
-    navigate 'Comum > Unidades de Medida'
+    navigate 'Comum > Cadastrais > Materiais > Unidades de Medida'
 
     click_link 'Criar Unidade de Medida'
 
@@ -27,7 +27,7 @@ feature "ReferenceUnits" do
   scenario 'update a reference_unit' do
     ReferenceUnit.make!(:metro)
 
-    navigate 'Comum > Unidades de Medida'
+    navigate 'Comum > Cadastrais > Materiais > Unidades de Medida'
 
     click_link 'Metro'
 
@@ -47,7 +47,7 @@ feature "ReferenceUnits" do
   scenario 'destroy an existent reference_unit' do
     ReferenceUnit.make!(:metro)
 
-    navigate 'Comum > Unidades de Medida'
+    navigate 'Comum > Cadastrais > Materiais > Unidades de Medida'
 
     click_link 'Metro'
 
@@ -61,7 +61,7 @@ feature "ReferenceUnits" do
   scenario 'index with columns at the index' do
     ReferenceUnit.make!(:metro)
 
-    navigate 'Comum > Unidades de Medida'
+    navigate 'Comum > Cadastrais > Materiais > Unidades de Medida'
 
     within_records do
       expect(page).to have_content 'Descrição'
