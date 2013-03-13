@@ -7,7 +7,7 @@ describe SignatureReport do
     described_class.stub(:unavailables_keys).and_return(['supply_authorizations'])
     expect(described_class.availables).to eq [
       ["Certificados de Registro Cadastral", "registration_cadastral_certificates"],
-      ["Homologações e Adjudicações de Processos Licitatórios", "licitation_process_ratifications"]
+      ["Homologações e Adjudicações de Processos de Compras", "licitation_process_ratifications"]
     ]
   end
 
