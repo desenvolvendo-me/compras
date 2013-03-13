@@ -6,8 +6,9 @@ feature "AdministrationTypes" do
     sign_in
   end
 
-  scenario 'create a new administration_type' do
-    make_dependencies!
+  scenario 'create, update and destroy a new administration_type' do
+    LegalNature.make!(:administracao_publica)
+    LegalNature.make!(:executivo_federal)
 
     navigate 'Comum > Tipos de Administração'
 
@@ -28,17 +29,6 @@ feature "AdministrationTypes" do
     expect(page).to have_select 'Administração', :selected => 'Direta'
     expect(page).to have_select 'Tipo do órgão', :selected => 'Autarquia'
     expect(page).to have_field 'Natureza jurídica', :with => 'Administração Pública'
-  end
-
-  scenario 'update an existent administration_type' do
-    make_dependencies!
-
-    AdministrationType.make!(:publica)
-    LegalNature.make!(:executivo_federal)
-
-    navigate 'Comum > Tipos de Administração'
-
-    click_link 'Pública'
 
     fill_in 'Descrição', :with => 'Privada'
     select 'Indireta', :from => 'Administração'
@@ -55,14 +45,6 @@ feature "AdministrationTypes" do
     expect(page).to have_select 'Administração', :selected => 'Indireta'
     expect(page).to have_select 'Tipo do órgão', :selected => 'Fundo especial'
     expect(page).to have_field 'Natureza jurídica', :with => 'Orgão Público do Poder Executivo Federal'
-  end
-
-  scenario 'destroy an existent administration_type' do
-    AdministrationType.make!(:publica)
-
-    navigate 'Comum > Tipos de Administração'
-
-    click_link 'Pública'
 
     click_link 'Apagar'
 
@@ -87,9 +69,5 @@ feature "AdministrationTypes" do
         expect(page).to have_content 'Fundação pública'
       end
     end
-  end
-
-  def make_dependencies!
-    LegalNature.make!(:administracao_publica)
   end
 end
