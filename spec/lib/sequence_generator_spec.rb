@@ -6,35 +6,35 @@ describe SequenceGenerator, 'ActiveRecord' do
   end
 
   context 'class without' do
-    class BudgetAllocationWithoutOptions < Compras::Model
-      self.table_name = 'compras_budget_allocations'
-      auto_increment :code, :by => [:description]
+    class PurchaseSolicitationWithoutOptions < Compras::Model
+      self.table_name = 'compras_purchase_solicitations'
+      auto_increment :code, :by => :accounting_year
     end
 
     it 'should store values in variables when call auto_increment' do
-      expect(BudgetAllocationWithoutOptions.new.sequencer_field).to eq :code
-      expect(BudgetAllocationWithoutOptions.new.sequence_group).to eq [:description]
+      expect(PurchaseSolicitationWithoutOptions.new.sequencer_field).to eq :code
+      expect(PurchaseSolicitationWithoutOptions.new.sequence_group).to eq [:accounting_year]
     end
 
     it 'should have :before_create as default sequence update callback' do
-      expect(BudgetAllocationWithoutOptions.new.sequencer_callback).to eq :before_create
+      expect(PurchaseSolicitationWithoutOptions.new.sequencer_callback).to eq :before_create
     end
 
     it 'should set sequence update callback on auto_increment' do
-      expect(BudgetAllocationWithoutOptions._create_callbacks.
+      expect(PurchaseSolicitationWithoutOptions._create_callbacks.
                                      select { |cb| cb.kind.eql?(:before) }.
                                      collect(&:filter)).
                                      to include("(set_next_sequence_for_code)")
     end
 
     it 'should return the correct sequential number' do
-      b = BudgetAllocationWithoutOptions.new(:description => 'description')
+      b = PurchaseSolicitationWithoutOptions.new(:accounting_year => '2012')
       b.should_receive(:last_sequence_for_code).and_return(0)
       b.save
 
       expect(b.code).to eq 1
 
-      b = BudgetAllocationWithoutOptions.new(:description => 'description')
+      b = PurchaseSolicitationWithoutOptions.new(:accounting_year => '2012')
       b.should_receive(:last_sequence_for_code).and_return(1)
       b.save
 
@@ -42,7 +42,7 @@ describe SequenceGenerator, 'ActiveRecord' do
     end
 
     it 'should not increase the sequence if has already a sequence' do
-      b = BudgetAllocationWithoutOptions.new(:code => 1)
+      b = PurchaseSolicitationWithoutOptions.new(:code => 1)
       b.should_not_receive(:next_sequence)
       b.save
 
@@ -53,7 +53,7 @@ describe SequenceGenerator, 'ActiveRecord' do
   context 'class with options' do
     class BudgetAllocationWithOptions < Compras::Model
       self.table_name = 'compras_budget_allocations'
-      auto_increment :code, :by => :descriptor_id, :on => :before_save
+      auto_increment :code, :by => :accounting_year, :on => :before_save
     end
 
     it 'should have :before_save as callback' do
@@ -66,7 +66,7 @@ describe SequenceGenerator, 'ActiveRecord' do
     end
 
     it 'should force by to array' do
-      expect(BudgetAllocationWithOptions.new.sequence_group).to eq [:descriptor_id]
+      expect(BudgetAllocationWithOptions.new.sequence_group).to eq [:accounting_year]
     end
   end
 

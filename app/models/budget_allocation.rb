@@ -1,8 +1,8 @@
 class BudgetAllocation < Compras::Model
-  attr_accessible :descriptor_id, :description, :budget_structure_id, :date
+  attr_accessible :descriptor_id, :budget_structure_id, :date
   attr_accessible :subfunction_id, :government_program_id, :amount, :personal
-  attr_accessible :government_action_id, :foresight, :education, :description
-  attr_accessible :expense_nature_id, :capability_id, :goal, :kind
+  attr_accessible :government_action_id, :foresight, :education
+  attr_accessible :expense_nature_id, :capability_id, :kind
   attr_accessible :debt_type, :refinancing, :health
   attr_accessible :alienation_appeal, :function, :function_id
 
@@ -10,7 +10,7 @@ class BudgetAllocation < Compras::Model
 
   attr_readonly :code
 
-  attr_modal :code, :descriptor_id, :description
+  attr_modal :code, :descriptor_id
 
   auto_increment :code, :by => :descriptor_id
 
@@ -31,25 +31,24 @@ class BudgetAllocation < Compras::Model
   has_many :direct_purchase_budget_allocations, :dependent => :restrict
   has_many :administrative_process_budget_allocations, :dependent => :restrict
 
-  delegate :expense_nature, :to => :expense_nature, :allow_nil => true, :prefix => true
+  delegate :expense_nature, :description, :to => :expense_nature, :allow_nil => true, :prefix => true
   delegate :expense_category_id, :to => :expense_nature, :allow_nil => true
   delegate :expense_group_id, :to => :expense_nature, :allow_nil => true
   delegate :expense_modality_id, :to => :expense_nature, :allow_nil => true
   delegate :expense_element_id, :to => :expense_nature, :allow_nil => true
   delegate :code, :budget_structure, :to => :budget_structure, :prefix => true, :allow_nil => true
 
-  validates :descriptor, :budget_structure, :subfunction, :goal, :date,
+  validates :descriptor, :budget_structure, :subfunction, :date,
             :government_program, :government_action,
-            :expense_nature, :capability, :description, :function, :presence => true
+            :expense_nature, :capability, :function, :presence => true
   validates :amount, :presence => true, :if => :divide?
-  validates :description, :uniqueness => { :allow_blank => true }
   validates :code, :uniqueness => { :scope => [:descriptor_id] }, :allow_blank => true
 
-  orderize :description
+  orderize :code
 
   scope :term, lambda { |q|
-    joins { budget_structure }.
-    where { (budget_structure.full_code.like("#{q}%") | description.like("#{q}%")) }
+    joins { budget_structure }.joins { expense_nature }.
+    where { (budget_structure.full_code.like("#{q}%")  | expense_nature.description.like("#{q}%")) }
   }
 
   def self.filter(options)
@@ -79,7 +78,7 @@ class BudgetAllocation < Compras::Model
   end
 
   def to_s
-    "#{budget_structure_budget_structure} - #{description}"
+    "#{budget_structure_budget_structure} - #{expense_nature_description}"
   end
 
   def function

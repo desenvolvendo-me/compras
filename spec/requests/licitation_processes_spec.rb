@@ -97,7 +97,7 @@ feature "LicitationProcesses" do
     within_tab 'Orçamento' do
       click_button 'Adicionar Dotação'
 
-      fill_with_autocomplete 'Dotação orçamentária', :with => 'Alocação'
+      fill_with_autocomplete 'Dotação orçamentária', :with => 'Vencimentos'
 
       fill_in 'Valor previsto', :with => '20,00'
     end
@@ -187,7 +187,7 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Orçamento' do
-      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Vencimentos e Salários'
       expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
       expect(page).to have_field 'Saldo da dotação', :with => '500,00'
       expect(page).to have_field 'Valor previsto', :with => '20,00'
@@ -381,7 +381,7 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Orçamento' do
-      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Vencimentos e Salários'
       expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
       expect(page).to have_field 'Saldo da dotação', :with => '500,00'
       expect(page).to have_field 'Valor previsto', :with => '20,00'
@@ -1552,7 +1552,7 @@ feature "LicitationProcesses" do
     within_tab 'Orçamento' do
       expect(page).to_not have_button 'Adicionar Dotação'
 
-      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Vencimentos e Salários'
       expect(page).to have_disabled_field 'Dotação orçamentária'
 
       expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
@@ -1635,7 +1635,7 @@ feature "LicitationProcesses" do
     within_tab 'Orçamento' do
       expect(page).to_not have_button 'Adicionar Dotação'
 
-      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Vencimentos e Salários'
       expect(page).to have_disabled_field 'Dotação orçamentária'
 
       expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
@@ -1716,7 +1716,7 @@ feature "LicitationProcesses" do
     within_tab 'Orçamento' do
       expect(page).to_not have_button 'Adicionar Dotação'
 
-      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Vencimentos e Salários'
       expect(page).to have_disabled_field 'Dotação orçamentária'
 
       expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
@@ -1762,8 +1762,8 @@ feature "LicitationProcesses" do
     within_tab 'Orçamento' do
       expect(page).to have_button 'Adicionar Dotação'
 
-      expect(page).to_not have_field 'Dotação orçamentária', :with => '1 - Alocação'
-      expect(page).to_not have_field 'Dotação orçamentária', :with => '1 - Alocação'
+      expect(page).to_not have_field 'Dotação orçamentária', :with => '1 - Vencimentos e Salários'
+      expect(page).to_not have_field 'Dotação orçamentária', :with => '1 - Vencimentos e Salários'
       expect(page).to_not have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
       expect(page).to_not have_field 'Saldo da dotação', :with => '500,00'
       expect(page).to_not have_field 'Valor previsto', :with => '19.800,00'
@@ -1981,7 +1981,7 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Orçamento' do
-      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Vencimentos e Salários'
       expect(page).to have_field 'Saldo da dotação', :with => '500,00'
 
       within '.nested-administrative-process-budget-allocation:first' do
@@ -2002,7 +2002,7 @@ feature "LicitationProcesses" do
     expect(page).to have_notice 'Processo de Compra 1/2012 editado com sucesso.'
 
     within_tab 'Orçamento' do
-      expect(page).to_not have_field 'Dotação orçamentária', :with => '1 - Alocação'
+      expect(page).to_not have_field 'Dotação orçamentária', :with => '1 - Vencimentos e Salários'
       expect(page).to_not have_field 'Saldo da dotação', :with => '500,00'
     end
   end
@@ -2469,7 +2469,7 @@ within_tab 'Dotações orçamentárias' do
 
     within_tab 'Orçamento' do
       expect(page).to_not have_button 'Adicionar Dotação'
-      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Vencimentos e Salários'
       expect(page).to have_disabled_field 'Dotação orçamentária'
 
       expect(page).to have_field 'Saldo da dotação', :with => '500,00'
@@ -2486,7 +2486,7 @@ within_tab 'Dotações orçamentárias' do
 
     within_tab 'Orçamento' do
       expect(page).to have_button 'Adicionar Dotação'
-      expect(page).to_not have_field 'Dotação orçamentária', :with => '1 - Alocação'
+      expect(page).to_not have_field 'Dotação orçamentária', :with => '1 - Vencimentos e Salários'
 
       expect(page).to_not have_field 'Saldo da dotação', :with => '500,00'
     end
@@ -2590,7 +2590,7 @@ within_tab 'Dotações orçamentárias' do
 
     within_tab 'Orçamento' do
       expect(page).to_not have_button 'Adicionar Dotação'
-      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Vencimentos e Salários'
       expect(page).to have_disabled_field 'Dotação orçamentária'
 
       expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
@@ -2633,7 +2633,7 @@ within_tab 'Dotações orçamentárias' do
 
     within_tab 'Orçamento' do
       expect(page).to_not have_button 'Adicionar Dotação'
-      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Vencimentos e Salários'
       expect(page).to have_disabled_field 'Dotação orçamentária'
 
       expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'

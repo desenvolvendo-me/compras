@@ -209,7 +209,7 @@ feature "LicitationProcessRatifications" do
     expect(page).to have_content '-'
     expect(page).to have_content '10,00'
     expect(page).to have_content '20,00'
-    expect(page).to have_content '1 - Alocação Belo Horizonte'
+    expect(page).to have_content '1 - Vencimentos e Salários'
     expect(page).to have_content 'Supervisor'
     expect(page).to have_content 'Wenderson Malheiros'
     expect(page).to have_content 'Gerente'

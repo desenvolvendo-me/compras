@@ -8,8 +8,6 @@ BudgetAllocation.blueprint(:alocacao) do
   government_action { GovernmentAction.make!(:governamental) }
   expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
   capability { Capability.make!(:reforma) }
-  description { "Alocação" }
-  goal { 'Manutenção da Unidade Administrativa' }
   debt_type { DebtType::NOTHING }
   refinancing { true }
   health { false }
@@ -32,8 +30,6 @@ BudgetAllocation.blueprint(:alocacao_extra) do
   government_action { GovernmentAction.make!(:governamental) }
   expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
   capability { Capability.make!(:reforma) }
-  description { "Alocação extra" }
-  goal { 'Manutenção da Unidade Administrativa' }
   debt_type { DebtType::NOTHING }
   refinancing { true }
   health { false }
@@ -55,8 +51,6 @@ BudgetAllocation.blueprint(:reparo_2011) do
   government_action { GovernmentAction.make!(:nacional) }
   expense_nature { ExpenseNature.make!(:compra_de_material) }
   capability { Capability.make!(:reforma) }
-  description { "Manutenção e Reparo" }
-  goal { 'Manutenção da Unidade Administrativa' }
   debt_type { DebtType::NOTHING }
   refinancing { true }
   health { false }

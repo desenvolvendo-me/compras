@@ -1,4 +1,5 @@
 builder resource, json do
+  json.to_s                          resource.to_s
   json.real_amount                   resource.decorator.real_amount
   json.amount                        resource.amount
   json.function                      resource.function.to_s

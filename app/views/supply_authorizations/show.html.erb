@@ -210,7 +210,7 @@
 
 <div id="general-data" class="table-border">
   <% resource.direct_purchase.direct_purchase_budget_allocations.each_with_index do |dpba, idx| %>
-    <h3><%= idx + 1 %> - <%= dpba.budget_allocation.description %></h3>
+    <h3><%= idx + 1 %> - <%= dpba.budget_allocation.to_s %></h3>
 
     <h4>Itens da Dotação</h4>
 

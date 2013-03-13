@@ -11,6 +11,7 @@ class PurchaseSolicitationBudgetAllocation < Compras::Model
   accepts_nested_attributes_for :items, :allow_destroy => true
 
   delegate :annulled?, :services?, :to => :purchase_solicitation, :allow_nil => true
+  delegate :to_s, :to => :budget_allocation, :allow_nil => true
 
   validates :budget_allocation, :presence => true
   validates :items, :no_duplication => :material_id

@@ -170,7 +170,7 @@ feature "DirectPurchases" do
       expect(page).to have_field 'Valor total dos itens', :with => '19.800,00'
       expect(page).to have_readonly_field 'Valor total dos itens'
 
-      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Vencimentos e Salários'
       expect(page).to have_disabled_field 'Dotação orçamentária'
 
       expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
@@ -238,7 +238,7 @@ feature "DirectPurchases" do
       expect(page).to have_field 'Valor total dos itens', :with => '19.800,00'
       expect(page).to have_disabled_field 'Valor total dos itens'
 
-      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Vencimentos e Salários'
       expect(page).to have_disabled_field 'Dotação orçamentária'
 
       expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
@@ -295,7 +295,7 @@ feature "DirectPurchases" do
 
       expect(page).to have_field 'Valor total dos itens', :with => '19.800,00'
 
-      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Vencimentos e Salários'
       expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
       expect(page).to have_field 'Saldo da dotação', :with => '500,00'
     end
@@ -309,7 +309,7 @@ feature "DirectPurchases" do
 
       expect(page).to have_field 'Valor total dos itens', :with => '0,00'
 
-      expect(page).to_not have_field 'Dotação orçamentária', :with => '1 - Alocação'
+      expect(page).to_not have_field 'Dotação orçamentária', :with => '1 - Vencimentos e Salários'
       expect(page).to_not have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
       expect(page).to_not have_field 'Saldo da dotação', :with => '500,00'
     end
@@ -449,7 +449,7 @@ feature "DirectPurchases" do
       expect(page).to_not have_field 'Quantidade', :with => '3,50'
       expect(page).to_not have_field 'Valor total', :with => '700,00'
 
-      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Vencimentos e Salários'
       expect(page).to have_disabled_field 'Dotação orçamentária'
 
       expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
@@ -1215,7 +1215,7 @@ feature "DirectPurchases" do
       expect(page).to have_field 'Valor total dos itens', :with => '600,00'
       expect(page).to have_readonly_field 'Valor total dos itens'
 
-      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Vencimentos e Salários'
       expect(page).to have_disabled_field 'Dotação orçamentária'
 
       expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
@@ -1280,7 +1280,7 @@ feature "DirectPurchases" do
       expect(page).to have_field 'Valor total dos itens', :with => '600,00'
       expect(page).to have_disabled_field 'Valor total dos itens'
 
-      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Vencimentos e Salários'
       expect(page).to have_disabled_field 'Dotação orçamentária'
 
       expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
@@ -1932,7 +1932,7 @@ feature "DirectPurchases" do
       expect(page).to have_field 'Valor total dos itens', :with => '600,00'
 
       within '.direct-purchase-budget-allocation:first' do
-        expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
+        expect(page).to have_field 'Dotação orçamentária', :with => '1 - Vencimentos e Salários'
         expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
         expect(page).to have_field 'Saldo da dotação', :with => '500,00'
 
@@ -1963,7 +1963,7 @@ feature "DirectPurchases" do
       expect(page).to have_field 'Valor total dos itens', :with => '600,00'
 
       within '.direct-purchase-budget-allocation:first' do
-        expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação extra'
+        expect(page).to have_field 'Dotação orçamentária', :with => '1 - Vencimentos e Salários'
         expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
         expect(page).to have_field 'Saldo da dotação', :with => '200,00'
 
@@ -2005,7 +2005,7 @@ feature "DirectPurchases" do
       expect(page).to have_field 'Valor total dos itens', :with => '600,00'
 
       within '.direct-purchase-budget-allocation:first' do
-        expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
+        expect(page).to have_field 'Dotação orçamentária', :with => '1 - Vencimentos e Salários'
         expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
         expect(page).to have_field 'Saldo da dotação', :with => '500,00'
 
@@ -2033,7 +2033,7 @@ feature "DirectPurchases" do
       expect(page).to have_field 'Valor total dos itens', :with => '600,00'
 
       within '.direct-purchase-budget-allocation:first' do
-        expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação extra'
+        expect(page).to have_field 'Dotação orçamentária', :with => '1 - Vencimentos e Salários'
         expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
         expect(page).to have_field 'Saldo da dotação', :with => '200,00'
 
@@ -2120,7 +2120,7 @@ feature "DirectPurchases" do
       expect(page).to have_field 'Valor total dos itens', :with => '600,00'
 
       within '.direct-purchase-budget-allocation:first' do
-        expect(page).to have_field 'Dotação orçamentária', :with => '1 - Alocação'
+        expect(page).to have_field 'Dotação orçamentária', :with => '1 - Vencimentos e Salários'
         expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
         expect(page).to have_field 'Saldo da dotação', :with => '500,00'
 

@@ -36,19 +36,11 @@ describe BudgetAllocation do
     end
   end
 
-  it 'should return "budget structure budget structure - description" as to_s' do
-    subject.description = 'Secretaria de educação'
-    subject.stub(:budget_structure_budget_structure => '1')
-    expect(subject.to_s).to eq '1 - Secretaria de educação'
-  end
-
   it { should validate_presence_of :budget_structure }
   it { should validate_presence_of :capability }
   it { should validate_presence_of :date }
-  it { should validate_presence_of :description }
   it { should validate_presence_of :descriptor }
   it { should validate_presence_of :expense_nature }
-  it { should validate_presence_of :goal }
   it { should validate_presence_of :government_action }
   it { should validate_presence_of :government_program }
   it { should validate_presence_of :subfunction }

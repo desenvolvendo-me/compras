@@ -8,7 +8,7 @@ builder resource, json do
 
     json.budget_allocations purchase_solicitation.purchase_solicitation_budget_allocations_by_material(resource.material_ids) do |json, ps_budget_allocation|
       json.id                   ps_budget_allocation.id
-      json.description          ps_budget_allocation.budget_allocation.to_s
+      json.to_s                 ps_budget_allocation.budget_allocation.to_s
       json.budget_allocation_id ps_budget_allocation.budget_allocation_id
       json.expense_nature       ps_budget_allocation.budget_allocation.expense_nature.to_s
       json.amount               ps_budget_allocation.budget_allocation.amount.to_f

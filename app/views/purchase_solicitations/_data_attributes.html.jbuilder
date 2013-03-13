@@ -1,15 +1,15 @@
 builder resource, json do
   json.purchase_solicitation  resource.to_s
   json.quantity_by_material   resource.decorator.quantity_by_material(params[:by_material_id])
-  json.total            resource.total_allocations_items_value.to_f
-  json.modal_info_url   modal_info_link(resource)
-  json.budget_structure resource.budget_structure, :id, :to_s if resource.budget_structure
-  json.responsible resource.responsible, :id, :to_s if resource.responsible
-  json.delivery_location resource.delivery_location, :id, :to_s if resource.delivery_location
+  json.total                  resource.total_allocations_items_value.to_f
+  json.modal_info_url         modal_info_link(resource)
+  json.budget_structure       resource.budget_structure, :id, :to_s if resource.budget_structure
+  json.responsible            resource.responsible, :id, :to_s if resource.responsible
+  json.delivery_location      resource.delivery_location, :id, :to_s if resource.delivery_location
 
   json.budget_allocations resource.purchase_solicitation_budget_allocations do |json, budget_allocation|
     json.id                   budget_allocation.id
-    json.description          budget_allocation.budget_allocation.to_s
+    json.to_s                 budget_allocation.to_s
     json.budget_allocation_id budget_allocation.budget_allocation_id
     json.expense_nature       budget_allocation.budget_allocation.expense_nature.to_s
     json.amount               budget_allocation.budget_allocation.amount.to_f
