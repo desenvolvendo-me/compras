@@ -6,7 +6,7 @@ feature "Banks" do
     sign_in
   end
 
-  scenario 'create a new bank' do
+  scenario 'create, update and destroy a new bank' do
     navigate 'Comum > Cadastrais > Bancos > Bancos'
 
     click_link 'Criar Banco'
@@ -24,42 +24,26 @@ feature "Banks" do
     expect(page).to have_field 'Nome', :with => 'Banco do Brasil'
     expect(page).to have_field 'Código', :with => '1'
     expect(page).to have_field 'Sigla', :with => 'BB'
-  end
 
-  scenario 'update an existent bank' do
-    Bank.make!(:santander)
-
-    navigate 'Comum > Cadastrais > Bancos > Bancos'
-
-    click_link 'Santander'
-
-    fill_in 'Nome', :with => 'Banco Real'
-    fill_in 'Código', :with => '123'
-    fill_in 'Sigla', :with => 'BRE'
+    fill_in 'Nome', :with => 'Santander'
+    fill_in 'Código', :with => '33'
+    fill_in 'Sigla', :with => 'ST'
 
     click_button 'Salvar'
 
     expect(page).to have_notice 'Banco editado com sucesso.'
 
-    click_link 'Banco Real'
+    click_link 'Santander'
 
-    expect(page).to have_field 'Nome', :with => 'Banco Real'
-    expect(page).to have_field 'Código', :with => '123'
-    expect(page).to have_field 'Sigla', :with => 'BRE'
-  end
-
-  scenario 'destroy an existent bank' do
-    Bank.make!(:itau)
-
-    navigate 'Comum > Cadastrais > Bancos > Bancos'
-
-    click_link 'Itaú'
+    expect(page).to have_field 'Nome', :with => 'Santander'
+    expect(page).to have_field 'Código', :with => '33'
+    expect(page).to have_field 'Sigla', :with => 'ST'
 
     click_link 'Apagar'
 
     expect(page).to have_notice 'Banco apagado com sucesso.'
 
-    expect(page).to_not have_content 'Itaú'
+    expect(page).to_not have_content 'Santander'
   end
 
   scenario 'index with columns at the index' do
