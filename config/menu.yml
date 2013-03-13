@@ -33,7 +33,7 @@ menu:
       - materials:
         - materials_classes
         - materials
-	- reference_units
+        - reference_units
       - indexers
       - currencies
       - holidays
