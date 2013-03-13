@@ -42,4 +42,7 @@ RSpec.configure do |config|
   # config.screenshot_full = true
   # config.clear_screenshots_before_run =  true
   # config.screenshot_on_errors = ENV['SCREENSHOT']
+
+  # mark test like intermittent
+  config.filter_run_excluding :intermittent => true
 end
