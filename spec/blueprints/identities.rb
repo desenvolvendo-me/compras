@@ -21,11 +21,3 @@ Identity.blueprint(:joao_da_silva) do
   state  { State.make!(:mg) }
   issue  { '2004-07-03' }
 end
-
-Identity.blueprint(:maria_de_souza) do
-  individual { Individual.make!(:maria_de_souza) }
-  number { 'MG12345677' }
-  issuer { Issuer::SSP }
-  state  { State.make!(:mg) }
-  issue  { '2004-07-03' }
-end

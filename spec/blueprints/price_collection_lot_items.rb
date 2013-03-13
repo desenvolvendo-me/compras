@@ -15,9 +15,3 @@ PriceCollectionLotItem.blueprint(:arame) do
   brand { 'Tal' }
   quantity { 200 }
 end
-
-PriceCollectionLotItem.blueprint(:arame_farpado) do
-  material { Material.make!(:arame_farpado) }
-  brand { 'Tal' }
-  quantity { 200 }
-end

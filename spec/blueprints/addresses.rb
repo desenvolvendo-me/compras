@@ -9,17 +9,6 @@ Address.blueprint(:apto) do
   addressable { nil }
 end
 
-Address.blueprint(:house) do
-  neighborhood { Neighborhood.make!(:sao_francisco) }
-  street { Street.make!(:girassol_curitiba) }
-  land_subdivision { nil }
-  condominium { nil }
-  complement { "Apto 34" }
-  zip_code { "33400-500" }
-  number { 0666 }
-  addressable { nil }
-end
-
 Address.blueprint(:general) do
   neighborhood { Neighborhood.make!(:sao_francisco) }
   street { Street.make!(:girassol_curitiba) }

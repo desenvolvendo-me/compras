@@ -31,11 +31,3 @@ Individual.blueprint(:pedro_dos_santos) do
   gender    { Gender::MALE }
   identity  { Identity.make(:sobrinho, :individual => object) }
 end
-
-Individual.blueprint(:maria_de_souza) do
-  cpf       { '872.237.422-16' }
-  mother    { 'Elizabeth de Souza' }
-  birthdate { Date.new(1957, 9, 21) }
-  gender    { Gender::FEMALE }
-  identity  { Identity.make(:sobrinho, :individual => object) }
-end

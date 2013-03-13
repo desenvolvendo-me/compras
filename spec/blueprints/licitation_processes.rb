@@ -342,48 +342,6 @@ LicitationProcess.blueprint(:valor_maximo_ultrapassado) do
   notice_availability_date { I18n.l(Date.tomorrow) }
 end
 
-LicitationProcess.blueprint(:maior_lance_por_lote) do
-  type_of_purchase { LicitationProcessTypeOfPurchase::LICITATION }
-  process { 1 }
-  protocol { '00088/2012' }
-  object_type { LicitationProcessObjectType::CALL_NOTICE }
-  modality { Modality::CONCURRENCE }
-  judgment_form { JudgmentForm.make!(:por_lote_com_melhor_tecnica) }
-  description { 'Licitação para compra de carteiras' }
-  responsible { Employee.make!(:sobrinho) }
-  item { 'Item 1' }
-  items { [AdministrativeProcessBudgetAllocationItem.make!(:item)] }
-  year { 2012 }
-  process_date { Date.new(2012, 3, 19) }
-  licitation_number { 1 }
-  pledge_type { PledgeType::GLOBAL }
-  capability { Capability.make!(:reforma) }
-  expiration { 10 }
-  expiration_unit { PeriodUnit::DAY }
-  readjustment_index { Indexer.make!(:xpto) }
-  envelope_delivery_date { I18n.l(Date.current) }
-  envelope_delivery_time { "00:00" }
-  envelope_opening_date { I18n.l(Date.current) }
-  envelope_opening_time { "00:00" }
-  period { 1 }
-  period_unit { PeriodUnit::YEAR }
-  payment_method { PaymentMethod.make!(:dinheiro) }
-  caution_value { 9.99 }
-  legal_advice { LicitationProcessLegalAdvice::FAVORABLE }
-  legal_advice_date { Date.new(2012, 3, 19) }
-  contract_date { Date.new(2012, 3, 19) }
-  contract_expiration { 3 }
-  observations { "observacoes" }
-  document_types { [DocumentType.make!(:fiscal)] }
-  licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
-  type_of_calculation { LicitationProcessTypeOfCalculation::HIGHEST_BIDDER_BY_LOT}
-  execution_type { ExecutionType::INTEGRAL }
-  contract_guarantees { ContractGuarantees::BANK }
-  bidders { [Bidder.make!(:licitante_com_proposta_1),
-             Bidder.make!(:licitante_com_proposta_2)] }
-  notice_availability_date { I18n.l(Date.tomorrow) }
-end
-
 LicitationProcess.blueprint(:apuracao_global) do
   type_of_purchase { LicitationProcessTypeOfPurchase::LICITATION }
   process { 1 }
@@ -548,48 +506,6 @@ LicitationProcess.blueprint(:apuracao_global_small_company) do
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   bidders { [Bidder.make!(:licitante_com_proposta_3),
-             Bidder.make!(:licitante_com_proposta_4)] }
-  notice_availability_date { I18n.l(Date.tomorrow) }
-end
-
-LicitationProcess.blueprint(:apuracao_global_small_company_without_new_proposal) do
-  type_of_purchase { LicitationProcessTypeOfPurchase::LICITATION }
-  process { 1 }
-  protocol { '00088/2012' }
-  object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
-  modality { Modality::INVITATION }
-  judgment_form { JudgmentForm.make!(:global) }
-  description { 'Licitação para compra de carteiras' }
-  responsible { Employee.make!(:sobrinho) }
-  item { 'Item 1' }
-  items { [AdministrativeProcessBudgetAllocationItem.make!(:item)] }
-  year { 2012 }
-  process_date { Date.new(2012, 3, 19) }
-  licitation_number { 1 }
-  pledge_type { PledgeType::GLOBAL }
-  capability { Capability.make!(:reforma) }
-  expiration { 10 }
-  expiration_unit { PeriodUnit::DAY }
-  readjustment_index { Indexer.make!(:xpto) }
-  envelope_delivery_date { I18n.l(Date.current) }
-  envelope_delivery_time { "00:00" }
-  envelope_opening_date { I18n.l(Date.current) }
-  envelope_opening_time { "00:00" }
-  period { 1 }
-  period_unit { PeriodUnit::YEAR }
-  payment_method { PaymentMethod.make!(:dinheiro) }
-  caution_value { 9.99 }
-  legal_advice { LicitationProcessLegalAdvice::FAVORABLE }
-  legal_advice_date { Date.new(2012, 3, 19) }
-  contract_date { Date.new(2012, 3, 19) }
-  contract_expiration { 3 }
-  observations { "observacoes" }
-  document_types { [DocumentType.make!(:fiscal)] }
-  licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
-  type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_GLOBAL_PRICE }
-  execution_type { ExecutionType::INTEGRAL }
-  contract_guarantees { ContractGuarantees::BANK }
-  bidders { [Bidder.make!(:licitante_com_proposta_3, :will_submit_new_proposal_when_draw => false),
              Bidder.make!(:licitante_com_proposta_4)] }
   notice_availability_date { I18n.l(Date.tomorrow) }
 end

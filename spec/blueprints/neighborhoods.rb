@@ -10,11 +10,6 @@ Neighborhood.blueprint(:portugal) do
   district { District.make!(:leste) }
 end
 
-Neighborhood.blueprint(:alvorada) do
-  name  { 'Alvorada' }
-  city { City.make!(:porto_alegre) }
-end
-
 Neighborhood.blueprint(:sao_francisco) do
   name  { 'São Francisco' }
   city { City.make!(:curitiba) }

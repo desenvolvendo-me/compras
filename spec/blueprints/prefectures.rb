@@ -9,14 +9,3 @@ Prefecture.blueprint(:belo_horizonte) do
   address { Address.make!(:apto, :addressable => object) }
   setting { Setting.make!(:parametros_prefeitura, :prefecture => object) }
 end
-
-Prefecture.blueprint(:porto_alegre) do
-  name { "Porto Alegre" }
-  cnpj { "11.098.229/0001-27" }
-  phone { "(51) 8990-0909" }
-  fax { "(51) 3444-8908" }
-  email { "porto_alegre@portoalegre.com.br" }
-  mayor_name { "João da Silva" }
-  address { Address.make!(:house, :addressable => object) }
-  setting { Setting.make!(:parametros_prefeitura, :prefecture => object) }
-end

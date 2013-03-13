@@ -47,10 +47,3 @@ JudgmentForm.blueprint(:por_item_com_menor_preco) do
   licitation_kind { LicitationKind::LOWEST_PRICE }
   enabled { true }
 end
-
-JudgmentForm.blueprint(:item_com_melhor_lance_ou_oferta) do
-  description { 'Item com Melhor Lance ou Oferta' }
-  kind { JudgmentFormKind::ITEM }
-  licitation_kind { LicitationKind::BEST_AUCTION_OR_OFFER }
-  enabled { true }
-end

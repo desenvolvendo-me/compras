@@ -6,13 +6,6 @@ Subfunction.blueprint(:geral) do
   function { Function.make!(:administracao) }
 end
 
-Subfunction.blueprint(:gerente) do
-  descriptor { Descriptor.make!(:detran_2011) }
-  code { "02" }
-  description { "Gerente Geral" }
-  function { Function.make!(:administracao) }
-end
-
 Subfunction.blueprint(:supervisor) do
   descriptor { Descriptor.make!(:detran_2011) }
   code { "02" }

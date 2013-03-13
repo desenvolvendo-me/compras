@@ -46,29 +46,6 @@ BudgetAllocation.blueprint(:alocacao_extra) do
   kind { BudgetAllocationKind::DIVIDE }
 end
 
-BudgetAllocation.blueprint(:conserto) do
-  descriptor { Descriptor.make!(:detran_2012) }
-  code { 1 }
-  budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
-  subfunction { Subfunction.make!(:geral) }
-  government_program { GovernmentProgram.make!(:habitacao) }
-  government_action { GovernmentAction.make!(:governamental) }
-  expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
-  capability { Capability.make!(:reforma) }
-  description { "Conserto" }
-  goal { 'Manutenção da Unidade Administrativa' }
-  debt_type { DebtType::NOTHING }
-  refinancing { true }
-  health { false }
-  alienation_appeal { false }
-  education { false }
-  foresight { false }
-  personal { false }
-  date { Date.current }
-  amount { "300,00" }
-  kind { BudgetAllocationKind::DIVIDE }
-end
-
 BudgetAllocation.blueprint(:reparo_2011) do
   descriptor { Descriptor.make!(:secretaria_de_educacao_2011) }
   code { 1 }

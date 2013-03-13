@@ -8,12 +8,3 @@ BankAccount.blueprint(:itau_tributos) do
   digit { 2 }
   capabilities { [BankAccountCapability.make!(:reforma)] }
 end
-
-BankAccount.blueprint(:santander_folha) do
-  description { "Santander - Folha de Pagamento" }
-  agency { Agency.make!(:santander) }
-  account_number { "2222" }
-  status { Status::ACTIVE }
-  kind { BankAccountKind::APPLICATION }
-  digit { 1 }
-end
