@@ -6,8 +6,9 @@ feature "Agencies" do
     sign_in
   end
 
-  scenario 'create a new agency' do
+  scenario 'create, update and destroy a new agency' do
     Bank.make!(:banco_do_brasil)
+    Bank.make!(:santander)
 
     navigate 'Comum > Cadastrais > Bancos > Agências'
 
@@ -34,15 +35,6 @@ feature "Agencies" do
     expect(page).to have_field 'Telefone', :with => '(33) 3333-3333'
     expect(page).to have_field 'Fax', :with => '(99) 9999-9999'
     expect(page).to have_field 'E-mail', :with => 'wenderson.malheiros@gmail.com'
-  end
-
-  scenario 'update an existent agency' do
-    Bank.make!(:santander)
-    Agency.make!(:itau)
-
-    navigate 'Comum > Cadastrais > Bancos > Agências'
-
-    click_link 'Agência Itaú'
 
     fill_modal 'Banco', :with => 'Santander'
     fill_in 'Nome', :with => 'Agência ST'
@@ -55,20 +47,12 @@ feature "Agencies" do
 
     expect(page).to have_field 'Banco', :with => 'Santander'
     expect(page).to have_field 'Nome', :with => 'Agência ST'
-  end
-
-  scenario 'destroy an existent agency' do
-    Agency.make!(:santander)
-
-    navigate 'Comum > Cadastrais > Bancos > Agências'
-
-    click_link 'Agência Santander'
 
     click_link 'Apagar'
 
     expect(page).to have_notice 'Agência apagada com sucesso.'
 
-    expect(page).to_not have_content 'Agência Santander'
+    expect(page).to_not have_content 'Agência ST'
   end
 
   scenario 'index with columns at the index' do
