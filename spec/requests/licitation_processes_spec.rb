@@ -26,7 +26,7 @@ feature "LicitationProcesses" do
     Material.make!(:antivirus)
     Indexer.make!(:xpto)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -219,7 +219,7 @@ feature "LicitationProcesses" do
     JudgmentForm.make!(:por_lote_com_melhor_tecnica)
     JudgmentForm.make!(:por_item_com_menor_preco)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -250,7 +250,7 @@ feature "LicitationProcesses" do
     Indexer.make!(:selic)
     BudgetAllocation.make!(:alocacao)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -404,7 +404,7 @@ feature "LicitationProcesses" do
   end
 
   scenario 'calculating items values via javascript' do
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -430,7 +430,7 @@ feature "LicitationProcesses" do
     LicitationProcess.make!(:processo_licitatorio_computador)
     DocumentType.make!(:oficial)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     within_records do
       click_link '2/2013'
@@ -475,7 +475,7 @@ feature "LicitationProcesses" do
   scenario "count link should not be available when envelope opening date is not the current date" do
     LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -489,7 +489,7 @@ feature "LicitationProcesses" do
   scenario 'cannot show update and nested buttons when the publication is (extension, edital, edital_rectification)' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_publicacao_cancelada)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -508,7 +508,7 @@ feature "LicitationProcesses" do
   end
 
   scenario "should not have link to lots when creating a new licitation process" do
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -518,7 +518,7 @@ feature "LicitationProcesses" do
   scenario 'budget allocation with quantity empty and total item value should have 0 as unit value' do
     LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -544,7 +544,7 @@ feature "LicitationProcesses" do
     Material.make!(:antivirus)
     Indexer.make!(:xpto)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -592,7 +592,7 @@ feature "LicitationProcesses" do
     LicitationProcess.make!(:processo_licitatorio)
     LicitationProcess.make!(:processo_licitatorio_computador, :process => 2)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -600,7 +600,7 @@ feature "LicitationProcesses" do
       expect(page).to have_css 'a', :count => 2
     end
 
-    click_link 'Filtrar Processos Licitatórios'
+    click_link 'Filtrar Processos de Compras'
 
     fill_in 'Processo', :with => 1
 
@@ -623,7 +623,7 @@ feature "LicitationProcesses" do
     price_registration = PriceRegistration.make!(:registro_de_precos,
                                                  :licitation_process => licitation_process)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -635,7 +635,7 @@ feature "LicitationProcesses" do
   end
 
   scenario 'budget allocation items should have a sequential item' do
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -662,7 +662,7 @@ feature "LicitationProcesses" do
     LicitationProcess.make!(:processo_licitatorio,
                             :licitation_process_publications => [])
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -698,7 +698,7 @@ feature "LicitationProcesses" do
   scenario "allowing changes to licitation process after ratification" do
     LicitationProcessRatification.make!(:processo_licitatorio_computador)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -719,7 +719,7 @@ feature "LicitationProcesses" do
   scenario 'index with columns at the index' do
     LicitationProcess.make!(:processo_licitatorio, :status => LicitationProcessStatus::IN_PROGRESS)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -746,7 +746,7 @@ feature "LicitationProcesses" do
     LicitationProcessLot.make!(:lote, :licitation_process => licitation_process,
                                :administrative_process_budget_allocation_items => [licitation_process.items.first])
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -777,7 +777,7 @@ feature "LicitationProcesses" do
   scenario 'generate calculation with equalized result' do
     licitation_process = LicitationProcess.make!(:apuracao_global_empatou)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -816,7 +816,7 @@ feature "LicitationProcesses" do
     licitation_process = LicitationProcess.make!(:apuracao_global_sem_documentos, :consider_law_of_proposals => true,
                                                  :disqualify_by_documentation_problem => true)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -848,7 +848,7 @@ feature "LicitationProcesses" do
     licitation_process = LicitationProcess.make!(:apuracao_global_sem_documentos, :consider_law_of_proposals => false,
                                                  :disqualify_by_documentation_problem => true)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -872,7 +872,7 @@ feature "LicitationProcesses" do
   scenario 'generate calculation between a small company and a big company without consider law of proposals' do
     licitation_process = LicitationProcess.make!(:apuracao_global_small_company, :consider_law_of_proposals => false)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -910,7 +910,7 @@ feature "LicitationProcesses" do
   scenario 'generate calculation between a small company and a big company and consider law of proposals' do
     licitation_process = LicitationProcess.make!(:apuracao_global_small_company_2, :consider_law_of_proposals => true)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -948,7 +948,7 @@ feature "LicitationProcesses" do
   scenario 'generate calculation between a small company and a big company and consider law of proposals and make a new proposal' do
     licitation_process = LicitationProcess.make!(:apuracao_global_small_company, :consider_law_of_proposals => true)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -1026,7 +1026,7 @@ feature "LicitationProcesses" do
   scenario 'generate calculation between a small company and a big company and dont make a new proposal' do
     licitation_process = LicitationProcess.make!(:apuracao_global_small_company, :consider_law_of_proposals => true)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -1102,7 +1102,7 @@ feature "LicitationProcesses" do
   scenario 'generate calculation when type of calculation is global' do
     licitation_process = LicitationProcess.make!(:apuracao_global)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -1164,7 +1164,7 @@ feature "LicitationProcesses" do
     LicitationProcessLot.make!(:lote_antivirus, :licitation_process => licitation_process,
                                :administrative_process_budget_allocation_items => [licitation_process.items.second])
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -1252,7 +1252,7 @@ feature "LicitationProcesses" do
   scenario 'generate calculation when type of calculation is by item' do
     licitation_process = LicitationProcess.make!(:apuracao_por_itens)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -1339,7 +1339,7 @@ feature "LicitationProcesses" do
   scenario "button Back to Listings should take user to licitation_process#index" do
     licitation_process = LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -1353,7 +1353,7 @@ feature "LicitationProcesses" do
 
     expect(page).to have_link '1/2012'
 
-    expect(page).to have_title 'Processos Licitatórios'
+    expect(page).to have_title 'Processos de Compras'
   end
 
   scenario 'fill delivery_location automatically when has a purchase_solicitation' do
@@ -1377,7 +1377,7 @@ feature "LicitationProcesses" do
 
     expect(page).to have_field 'Local para entrega', :with => 'Secretaria da Educação'
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -1451,7 +1451,7 @@ feature "LicitationProcesses" do
 
     expect(page).to have_field 'Local para entrega', :with => 'Secretaria da Saúde'
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -1493,7 +1493,7 @@ feature "LicitationProcesses" do
     Material.make!(:antivirus)
     Indexer.make!(:xpto)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -1693,7 +1693,7 @@ feature "LicitationProcesses" do
     PurchaseSolicitationItemGroup.make!(:reparo_2013)
     LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -1787,7 +1787,7 @@ feature "LicitationProcesses" do
     ResourceAnnul.make!(:anulacao_generica,
                         :annullable => PurchaseSolicitationItemGroup.make!(:reparo_2013))
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -1810,7 +1810,7 @@ feature "LicitationProcesses" do
     JudgmentForm.make!(:global_com_melhor_lance_ou_oferta) # BEST_AUCTION_OR_OFFER
     JudgmentForm.make!(:por_item_com_menor_preco) # LOWEST_PRICE
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -1830,7 +1830,7 @@ feature "LicitationProcesses" do
     JudgmentForm.make!(:global_com_melhor_lance_ou_oferta) # BEST_AUCTION_OR_OFFER
     JudgmentForm.make!(:por_item_com_menor_preco) # LOWEST_PRICE
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -1850,7 +1850,7 @@ feature "LicitationProcesses" do
     JudgmentForm.make!(:global_com_melhor_lance_ou_oferta) # BEST_AUCTION_OR_OFFER
     JudgmentForm.make!(:por_item_com_menor_preco) # LOWEST_PRICE
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -1870,7 +1870,7 @@ feature "LicitationProcesses" do
     JudgmentForm.make!(:global_com_melhor_lance_ou_oferta) # BEST_AUCTION_OR_OFFER
     JudgmentForm.make!(:por_item_com_menor_preco) # LOWEST_PRICE
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -1910,7 +1910,7 @@ feature "LicitationProcesses" do
     JudgmentForm.make!(:global_com_melhor_lance_ou_oferta) # BEST_AUCTION_OR_OFFER
     JudgmentForm.make!(:por_item_com_menor_preco) # LOWEST_PRICE
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -1945,7 +1945,7 @@ feature "LicitationProcesses" do
     JudgmentForm.make!(:global_com_melhor_lance_ou_oferta) # BEST_AUCTION_OR_OFFER
     JudgmentForm.make!(:por_item_com_menor_preco) # LOWEST_PRICE
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -1964,7 +1964,7 @@ feature "LicitationProcesses" do
     PurchaseSolicitationItemGroup.make!(:reparo_2013)
     LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -2011,7 +2011,7 @@ feature "LicitationProcesses" do
     PurchaseSolicitationItemGroup.make!(:reparo_2013)
     LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -2045,7 +2045,7 @@ feature "LicitationProcesses" do
       end
     end
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -2086,7 +2086,7 @@ feature "LicitationProcesses" do
     Material.make!(:antivirus)
     Indexer.make!(:xpto)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -2168,7 +2168,7 @@ feature "LicitationProcesses" do
   end
 
   scenario "filtering modalities based on seleted object type" do
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -2203,7 +2203,7 @@ feature "LicitationProcesses" do
     PurchaseSolicitationItemGroup.make!(:office)
     LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -2235,7 +2235,7 @@ within_tab 'Dotações orçamentárias' do
       expect(page).to have_disabled_field 'Atendido por', :with => 'Processo de compra 1/2012 - Convite 1'
     end
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -2291,7 +2291,7 @@ within_tab 'Dotações orçamentárias' do
     end
     LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -2333,7 +2333,7 @@ within_tab 'Dotações orçamentárias' do
       end
     end
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -2409,7 +2409,7 @@ within_tab 'Dotações orçamentárias' do
     Material.make!(:antivirus)
     Indexer.make!(:xpto)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -2529,7 +2529,7 @@ within_tab 'Dotações orçamentárias' do
     Material.make!(:antivirus)
     Indexer.make!(:xpto)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -2692,7 +2692,7 @@ within_tab 'Dotações orçamentárias' do
     PurchaseSolicitation.make!(:reparo_liberado)
     PurchaseSolicitationItemGroup.make!(:antivirus)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -2722,7 +2722,7 @@ within_tab 'Dotações orçamentárias' do
     PurchaseSolicitationItemGroup.make!(:antivirus)
     Employee.make!(:wenderson)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -2746,7 +2746,7 @@ within_tab 'Dotações orçamentárias' do
                                                         :purchase_solicitation_budget_allocations => [
                                                           PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria_office_2_itens_liberados)])
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -2764,7 +2764,7 @@ within_tab 'Dotações orçamentárias' do
     PurchaseSolicitationItemGroup.make!(:antivirus_desenvolvimento,
       :status => PurchaseSolicitationItemGroupStatus::ANNULLED)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 

@@ -3,7 +3,7 @@ pt-BR:
     models:
       licitation_process_ratification:
         one: "Homologação e Adjudicação de Processo de Compra"
-        other: "Homologações e Adjudicações de Processos Licitatórios"
+        other: "Homologações e Adjudicações de Processos de Compras"
 
     attributes:
       licitation_process_ratification:

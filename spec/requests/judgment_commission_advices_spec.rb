@@ -16,7 +16,7 @@ feature "JudgmentCommissionAdvices" do
     Person.make!(:sobrinho)
     Person.make!(:wenderson)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -126,7 +126,7 @@ feature "JudgmentCommissionAdvices" do
     new_licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
     new_licitation_commission = LicitationCommission.make!(:comissao_nova)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -200,7 +200,7 @@ feature "JudgmentCommissionAdvices" do
   scenario 'destroy an existent judgment_commission_advice' do
     advice = JudgmentCommissionAdvice.make!(:parecer)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -228,7 +228,7 @@ feature "JudgmentCommissionAdvices" do
     LicitationProcess.make!(:processo_licitatorio)
     LicitationCommission.make!(:comissao)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -271,7 +271,7 @@ feature "JudgmentCommissionAdvices" do
     Person.make!(:wenderson)
     LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link "Limpar Filtro"
 

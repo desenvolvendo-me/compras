@@ -3,7 +3,7 @@ pt-BR:
     models:
       licitation_process_classification:
         one: "Classificação de Processo de Compra"
-        other: "Classificações de Processos Licitatórios"
+        other: "Classificações de Processos de Compras"
 
     attributes:
       licitation_process_classification:

@@ -3,7 +3,7 @@ pt-BR:
     models:
       licitation_process_impugnment:
         one: "Impugnação do Processo de Compra"
-        other: "Impugnações dos Processos Licitatórios"
+        other: "Impugnações dos Processos de Compras"
 
     attributes:
       licitation_process_impugnment:

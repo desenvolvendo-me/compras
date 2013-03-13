@@ -261,7 +261,7 @@ feature "PriceRegistration" do
     scenario 'displaying winning bids on Fornecedores Vencedores tab' do
       licitation_process = LicitationProcess.make!(:apuracao_global)
 
-      navigate 'Processos de Compra > Processos Licitatórios'
+      navigate 'Processos de Compra > Processos de Compras'
 
       click_link "Limpar Filtro"
 
@@ -293,7 +293,7 @@ feature "PriceRegistration" do
       PriceRegistration.make!(:registro_de_precos,
                               :licitation_process => LicitationProcess.make!(:apuracao_global))
 
-      navigate 'Processos de Compra > Processos Licitatórios'
+      navigate 'Processos de Compra > Processos de Compras'
       click_link "Limpar Filtro"
 
       click_link '1/2012'

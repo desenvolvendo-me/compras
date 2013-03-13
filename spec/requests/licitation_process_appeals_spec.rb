@@ -10,7 +10,7 @@ feature "LicitationProcessAppeals" do
     LicitationProcess.make!(:processo_licitatorio)
     Person.make!(:sobrinho)
 
-    navigate 'Processos de Compra > Interposição de Recursos de Processos Licitatórios'
+    navigate 'Processos de Compra > Interposição de Recursos de Processos de Compras'
 
     click_link 'Criar Interposição de Recurso do Processo de Compra'
 
@@ -49,7 +49,7 @@ feature "LicitationProcessAppeals" do
     LicitationProcess.make!(:processo_licitatorio_computador)
     Person.make!(:wenderson)
 
-    navigate 'Processos de Compra > Interposição de Recursos de Processos Licitatórios'
+    navigate 'Processos de Compra > Interposição de Recursos de Processos de Compras'
 
     within_records do
       click_link '1/2012 - Convite 1 - 10/04/2012'
@@ -88,7 +88,7 @@ feature "LicitationProcessAppeals" do
   scenario 'destroy an existent licitation_process_appeal' do
     LicitationProcessAppeal.make!(:interposicao_processo_licitatorio)
 
-    navigate 'Processos de Compra > Interposição de Recursos de Processos Licitatórios'
+    navigate 'Processos de Compra > Interposição de Recursos de Processos de Compras'
 
     within_records do
       click_link '1/2012 - Convite 1 - 10/04/2012'

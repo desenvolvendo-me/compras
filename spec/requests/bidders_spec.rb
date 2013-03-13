@@ -16,7 +16,7 @@ feature "Bidders" do
   scenario 'accessing the bidders and return to licitation process edit page' do
     LicitationProcess.make!(:processo_licitatorio_computador)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     within_records do
       click_link '2/2013'
@@ -37,7 +37,7 @@ feature "Bidders" do
     Person.make!(:wenderson)
     Person.make!(:joao_da_silva)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     within_records do
       click_link '2/2013'
@@ -150,7 +150,7 @@ feature "Bidders" do
     Creditor.make!(:sobrinho_sa)
     Person.make!(:wenderson)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     within_records do
       click_link '2/2013'
@@ -260,7 +260,7 @@ feature "Bidders" do
   scenario 'deleting an bidder' do
     LicitationProcess.make!(:processo_licitatorio_computador)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     within_records do
       click_link '2/2013'
@@ -284,7 +284,7 @@ feature "Bidders" do
   scenario 'when is not invited should disable and clear date, protocol fields' do
     LicitationProcess.make!(:processo_licitatorio_computador)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     within_records do
       click_link '2/2013'
@@ -336,7 +336,7 @@ feature "Bidders" do
   scenario 'showing some items without lot on proposals' do
     LicitationProcess.make!(:processo_licitatorio_canetas_sem_lote)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     within_records do
       click_link '2/2013'
@@ -450,7 +450,7 @@ feature "Bidders" do
   scenario 'creating some lots and showing one tab for lot on proposals' do
     LicitationProcess.make!(:processo_licitatorio_canetas_sem_lote)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     within_records do
       click_link '2/2013'
@@ -617,7 +617,7 @@ feature "Bidders" do
   scenario 'should show message that can not update proposals when any item does not have lot and licitation process has lot' do
     LicitationProcess.make!(:processo_licitatorio_canetas_sem_lote)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     within_records do
       click_link '2/2013'
@@ -669,7 +669,7 @@ feature "Bidders" do
     LicitationProcess.make!(:processo_licitatorio_computador)
     Creditor.make!(:sobrinho_sa)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     within_records do
       click_link '2/2013'
@@ -693,7 +693,7 @@ feature "Bidders" do
   scenario "index should have title Licitantes do Processo de Compra 1/2013" do
     LicitationProcess.make!(:processo_licitatorio_computador)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     within_records do
       click_link '2/2013'
@@ -707,7 +707,7 @@ feature "Bidders" do
   scenario "edit should have title Editar Licitante do Processo de Compra 2/2013" do
     LicitationProcess.make!(:processo_licitatorio_computador)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     within_records do
       click_link '2/2013'
@@ -725,7 +725,7 @@ feature "Bidders" do
   scenario "new should have title Novo Licitante do Processo de Compra 2/2013" do
     LicitationProcess.make!(:processo_licitatorio_computador)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     within_records do
       click_link '2/2013'
@@ -741,7 +741,7 @@ feature "Bidders" do
  scenario 'should have field technical_score when licitation kind is technical_and_price' do
     LicitationProcess.make!(:apuracao_melhor_tecnica_e_preco)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -761,7 +761,7 @@ feature "Bidders" do
   scenario 'should have field technical_score when licitation kind is best_technique' do
     LicitationProcess.make!(:apuracao_global)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -781,7 +781,7 @@ feature "Bidders" do
   scenario 'should not have field technical_score when licitation kind is not(best_technique, technical_and_price)' do
     LicitationProcess.make!(:processo_licitatorio_fornecedores, :envelope_opening_date => I18n.l(Date.current))
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -802,7 +802,7 @@ feature "Bidders" do
     licitation_process = LicitationProcess.make!(:apuracao_global)
     licitation_process.update_attribute :envelope_opening_date, Date.tomorrow
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -825,7 +825,7 @@ feature "Bidders" do
   scenario "Save and destroy buttons should be shown if licitation process envelope opening date is today" do
     LicitationProcess.make!(:processo_licitatorio_computador)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     within_records do
       click_link '2/2013'
@@ -848,7 +848,7 @@ feature "Bidders" do
     LicitationProcessRatification.make!(:processo_licitatorio_computador,
       :licitation_process => licitation_process)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     within_records do
       click_link '2/2013'
@@ -898,7 +898,7 @@ feature "Bidders" do
   scenario 'when licitation process has a trading bidder proposals should be disabled' do
     Trading.make!(:pregao_presencial)
 
-    navigate 'Processos de Compra > Processos Licitatórios'
+    navigate 'Processos de Compra > Processos de Compras'
 
     click_link "Limpar Filtro"
 

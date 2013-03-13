@@ -3,7 +3,7 @@ pt-BR:
     models:
       licitation_process:
         one: "Processo de Compra"
-        other: "Processos Licitatórios"
+        other: "Processos de Compras"
 
     attributes:
       licitation_process:

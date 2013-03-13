@@ -3,7 +3,7 @@ pt-BR:
     models:
       licitation_process_appeal:
         one: "Interposição de Recurso do Processo de Compra"
-        other: "Interposição de Recursos de Processos Licitatórios"
+        other: "Interposição de Recursos de Processos de Compras"
 
     attributes:
       licitation_process_appeal:
