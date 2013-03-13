@@ -4,11 +4,8 @@ Material.blueprint(:antivirus) do
   code { "01.01.00001" }
   description { "Antivirus" }
   detailed_description { "Antivirus avast" }
-  minimum_stock_balance { 100 }
   reference_unit { ReferenceUnit.make!(:unidade) }
   manufacturer { "Plantador" }
-  perishable { true }
-  storable { true }
   combustible { false }
   contract_type { ContractType.make!(:reparos) }
   material_type { MaterialType::CONSUMPTION }
@@ -20,11 +17,8 @@ Material.blueprint(:office) do
   code { "01.01.00002" }
   description { "Office" }
   detailed_description { "MS Office" }
-  minimum_stock_balance { 100 }
   reference_unit { ReferenceUnit.make!(:unidade) }
   manufacturer { "MS" }
-  perishable { true }
-  storable { true }
   combustible { false }
   contract_type { ContractType.make!(:reparos) }
   material_type { MaterialType::CONSUMPTION }
@@ -36,11 +30,8 @@ Material.blueprint(:arame_farpado) do
   code { "02.02.00001" }
   description { "Arame farpado" }
   detailed_description { "Arame farpado" }
-  minimum_stock_balance { 100 }
   reference_unit { ReferenceUnit.make!(:unidade) }
   manufacturer { "Moveis" }
-  perishable { true }
-  storable { true }
   combustible { false }
   contract_type { ContractType.make!(:reparos) }
   material_type { MaterialType::CONSUMPTION }
@@ -51,10 +42,7 @@ Material.blueprint(:arame_comum) do
   materials_class { MaterialsClass.make!(:arames) }
   code { "02.02.00002" }
   description { "Arame comum" }
-  minimum_stock_balance { 100 }
   reference_unit { ReferenceUnit.make!(:unidade) }
-  perishable { true }
-  storable { true }
   combustible { false }
   contract_type { ContractType.make!(:reparos) }
   material_type { MaterialType::CONSUMPTION }

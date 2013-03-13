@@ -10,14 +10,6 @@ require 'app/models/purchase_solicitation_item_group_material'
 
 describe Material do
   describe 'default values' do
-    it 'uses false as default for perishable' do
-      expect(subject.perishable).to be false
-    end
-
-    it 'uses false as default for storable' do
-      expect(subject.storable).to be false
-    end
-
     it 'uses false as default for combustible' do
       expect(subject.combustible).to be false
     end
@@ -51,14 +43,6 @@ describe Material do
     subject.material_type = MaterialType::SERVICE
 
     expect(subject).to validate_presence_of(:contract_type)
-  end
-
-  it "should have false as the default value of perishable" do
-    expect(subject.perishable).to eq false
-  end
-
-  it "should have false as the default value of storable" do
-    expect(subject.storable).to eq false
   end
 
   it "should have false as the default value of combustible" do

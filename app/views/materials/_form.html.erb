@@ -1,39 +1,13 @@
+<%= f.input :active %>
+
 <%= f.input :autocomplete_materials_class, :as => :auto_complete,
             :source_path => materials_classes_path(:without_children => true),
             :hidden_field => :materials_class_id, :max_results => 20, :min_length => 1 %>
 
-<%= f.input :active %>
-
-<% if f.object.persisted? %>
-  <div class="yui3-g">
-    <div class="yui3-u-1-3">
-      <%= f.input :code, :disabled => true %>
-    </div>
-  </div>
-<% end %>
 
 <%= f.input :description %>
+
 <%= f.input :detailed_description %>
-
-<div class="yui3-g">
-  <div class="yui3-u-1-2">
-    <%= f.input :unit_price, :disabled => true %>
-  </div>
-
-  <div class="yui3-u-1-2">
-    <%= f.input :minimum_stock_balance %>
-  </div>
-</div>
-
-<div class="yui3-g">
-  <div class="yui3-u-1-2">
-    <%= f.input :stock_balance, :disabled => true %>
-  </div>
-
-  <div class="yui3-u-1-2">
-    <%= f.input :cash_balance, :disabled => true %>
-  </div>
-</div>
 
 <div class="yui3-g">
   <div class="yui3-u-1-2">
@@ -42,16 +16,6 @@
 
   <div class="yui3-u-1-2">
     <%= f.input :manufacturer %>
-  </div>
-</div>
-
-<div class="yui3-g">
-  <div class="yui3-u-1-2">
-    <%= f.input :perishable %>
-  </div>
-
-  <div class="yui3-u-1-2">
-    <%= f.input :storable %>
   </div>
 </div>
 
@@ -67,13 +31,11 @@
 
 <div class="yui3-g">
   <div class="yui3-u-1-2">
-    <%= f.input :contract_type, :disabled => !f.object.service? %>
-  </div>
-</div>
-
-<div class="yui3-g">
-  <div class="yui3-u-1-2">
     <%= f.input :expense_nature %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :contract_type, :disabled => !f.object.service? %>
   </div>
 </div>
 
