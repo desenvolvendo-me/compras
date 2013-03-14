@@ -69,3 +69,4 @@ pt-BR:
       must_be_included_after_edital_publication: "Licitantes só podem ser incluídos após publicação do edital"
       envelope_opening_date_greater_than_calendar_days: "deve ser a partir de %{limit}. Refente a %{days} dias maior que a data da publicação mais recente (%{publication})"
       envelope_opening_date_greater_than_working_days: "deve ser a partir de %{limit}. Refente a %{days} dias úteis maior que a data da publicação mais recente (%{publication})"
+      disabled_envelope_message: "deve ter uma publição de edital"

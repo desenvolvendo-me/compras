@@ -343,4 +343,27 @@ describe LicitationProcessDecorator do
       expect(subject.budget_allocations).to eql "#{budget1}, #{budget2}"
     end
   end
+
+  describe "#disabled_envelope_message" do
+    before do
+      I18n.backend.store_translations 'pt-BR', :licitation_process => {
+        :messages => {
+          :disabled_envelope_message => 'deve ter uma publição de edital',
+        }
+      }
+    end
+
+    it "returns a message when there isn't a publication date" do
+      component.stub(:last_publication_date).and_return false
+
+      expect(subject.disabled_envelope_message).to eq "deve ter uma publição de edital"
+    end
+
+    it "returns null when there is a publication date" do
+      component.stub(:last_publication_date).and_return true
+
+      expect(subject.disabled_envelope_message).to be_nil
+    end
+  end
+
 end

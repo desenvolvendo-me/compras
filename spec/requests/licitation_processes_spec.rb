@@ -73,8 +73,8 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Prazos' do
-      expect(page).to have_disabled_field 'Data da abertura dos envelopes'
-      expect(page).to have_disabled_field 'Hora da abertura'
+      expect(page).to have_readonly_field 'Data da abertura dos envelopes'
+      expect(page).to have_readonly_field 'Hora da abertura'
 
       expect(page).to have_field 'Data da expedição', :with => I18n.l(Date.current)
       fill_in 'Data da disponibilidade', :with => I18n.l(Date.current)
@@ -162,8 +162,8 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Prazos' do
-      expect(page).to_not have_disabled_field 'Data da abertura dos envelopes'
-      expect(page).to_not have_disabled_field 'Hora da abertura'
+      expect(page).to have_readonly_field 'Data da abertura dos envelopes'
+      expect(page).to have_readonly_field 'Hora da abertura'
 
       expect(page).to have_field 'Data da expedição', :with => I18n.l(Date.current)
       expect(page).to have_field 'Data da disponibilidade', :with => I18n.l(Date.current)
@@ -400,6 +400,52 @@ feature "LicitationProcesses" do
     within_tab 'Configuração da apuração' do
       expect(page).to have_unchecked_field 'Desclassificar participantes com problemas da documentação'
       expect(page).to have_checked_field 'Desclassificar participantes com cotações acima do valor máximo estabelecido no edital'
+    end
+  end
+
+  scenario 'envelope opening date is disabled without publication' do
+    LicitationProcess.make!(:processo_licitatorio, :licitation_process_publications => [])
+    Capability.make!(:construcao)
+    PaymentMethod.make!(:cheque)
+    DocumentType.make!(:oficial)
+    Material.make!(:arame_farpado)
+    Indexer.make!(:selic)
+    BudgetAllocation.make!(:alocacao)
+
+    navigate 'Processos de Compra > Processos de Compras'
+
+    click_link "Limpar Filtro"
+
+    within_records do
+      click_link '1/2012'
+    end
+
+    within_tab 'Prazos' do
+      expect(page).to have_readonly_field "Data da abertura dos envelopes"
+      expect(page).to have_readonly_field "Hora da abertura"
+    end
+
+    click_link "Publicações"
+
+    click_link "Criar Publicação"
+
+    fill_in "Nome do veículo de comunicação", :with => "website"
+
+    fill_in "Data da publicação", :with => I18n.l(Date.current)
+
+    select "Edital", :on => "Publicação do(a)"
+
+    select "Internet", :on => "Tipo de circulação do veículo de comunicação"
+
+    click_button "Salvar"
+
+    expect(page).to have_notice "Publicação criada com sucesso"
+
+    click_link "Voltar ao processo de compra"
+
+    within_tab 'Prazos' do
+      expect(page).to_not have_readonly_field "Data da abertura dos envelopes"
+      expect(page).to_not have_readonly_field "Hora da abertura"
     end
   end
 

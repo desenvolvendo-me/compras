@@ -59,6 +59,12 @@ class LicitationProcessDecorator
     end
   end
 
+  def disabled_envelope_message
+    return if component.last_publication_date
+
+    t('licitation_process.messages.disabled_envelope_message')
+  end
+
   def must_have_published_edital
     unless edital_published?
       t("licitation_process.messages.must_be_included_after_edital_publication")
