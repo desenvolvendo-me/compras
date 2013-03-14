@@ -2277,7 +2277,7 @@ feature "LicitationProcesses" do
       click_link '1/2012'
     end
 
-within_tab 'Dotações orçamentárias' do
+    within_tab 'Dotações orçamentárias' do
       expect(page).to have_disabled_field 'Atendido por', :with => 'Processo de compra 1/2012 - Convite 1'
     end
 

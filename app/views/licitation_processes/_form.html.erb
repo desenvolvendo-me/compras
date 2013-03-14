@@ -147,15 +147,9 @@
     var $inputs = $("#items .nested-licitation-process-item :input"),
         $modals = $("#items .nested-licitation-process-item .modal");
 
-    if (enable) {
-      $inputs.attr("readonly", false);
-      $inputs.attr("disabled", false);
-      $modals.attr("disabled", false);
-    } else {
-      $inputs.attr("readonly", "readonly");
-      $inputs.attr("disabled", "disabled");
-      $modals.attr("disabled", "disabled");
-    }
+    $inputs.attr("readonly", !enable);
+    $inputs.attr("disabled", !enable);
+    $modals.attr("disabled", !enable);
   }
 
   function disablePurchaseSolicitation() {
