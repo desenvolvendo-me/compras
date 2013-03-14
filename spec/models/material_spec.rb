@@ -37,6 +37,12 @@ describe Material do
   it { should validate_presence_of :reference_unit }
   it { should validate_presence_of :material_type }
 
+  it 'should ensure control_amount to be true or false' do
+    expect(subject).to allow_value(true).for(:control_amount)
+    expect(subject).to allow_value(false).for(:control_amount)
+    expect(subject).to_not allow_value(nil).for(:control_amount)
+  end
+
   it "should validate presence of service_or_contract_type only if material_type is service" do
     expect(subject).not_to validate_presence_of(:contract_type)
 

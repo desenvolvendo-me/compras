@@ -29,6 +29,12 @@
   </div>
 </div>
 
+<div class="yui3-g control-amount">
+  <div class="yui3-u-1-2">
+    <%= f.input :control_amount %>
+  </div>
+</div>
+
 <div class="yui3-g">
   <div class="yui3-u-1-2">
     <%= f.input :expense_nature %>
@@ -41,6 +47,7 @@
 
 <script>
   $("#material_material_type").change(changeFieldsByMaterialType);
+  $("#material_material_type").change(setControlAmount);
 
   function changeFieldsByMaterialType() {
     typeValue = $("#material_material_type").val();
@@ -53,7 +60,20 @@
     }
   };
 
+  function setControlAmount() {
+    var controlAmount = $('.control-amount'),
+        materialType = $("#material_material_type").val();
+
+    if (typeValue == "<%= MaterialType::SERVICE %>") {
+      controlAmount.show();
+    } else {
+      controlAmount.find(':input').removeAttr('checked');
+      controlAmount.hide();
+    }
+  }
+
   (function(){
     changeFieldsByMaterialType();
+    setControlAmount();
   })();
 </script>

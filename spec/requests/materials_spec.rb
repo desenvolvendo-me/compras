@@ -15,6 +15,7 @@ feature "Materials" do
 
     expect(page).to have_disabled_field 'Tipo de contrato'
     expect(page).to have_checked_field 'Ativo?'
+    expect(page).to_not have_field 'Controla quantidade'
 
     fill_with_autocomplete 'Classe', :with => 'Software'
     fill_in 'Descrição', :with => 'Caixa'
@@ -26,8 +27,10 @@ feature "Materials" do
     # testing javascript
     select 'Material de consumo', :from => 'Tipo de material'
     expect(page).to have_disabled_field 'Tipo de contrato'
+    expect(page).to_not have_field 'Controla quantidade'
 
     select 'Serviço', :from => 'Tipo de material'
+    expect(page).to have_field 'Controla quantidade'
     # end of javascript test
 
     fill_modal 'Tipo de contrato', :with => 'Contratação de estagiários', :field => 'Descrição'
@@ -49,6 +52,7 @@ feature "Materials" do
     expect(page).to have_select 'Tipo de material', :selected => 'Serviço'
     expect(page).to have_field 'Tipo de contrato', :with => 'Contratação de estagiários'
     expect(page).to have_field 'Natureza da despesa', :with => '3.0.10.01.12 - Vencimentos e Salários'
+    expect(page).to have_unchecked_field 'Controla quantidade'
   end
 
   scenario 'generate code' do
@@ -66,6 +70,8 @@ feature "Materials" do
 
     select 'Serviço', :from => 'Tipo de material'
 
+    check 'Controla quantidade'
+
     fill_modal 'Tipo de contrato', :with => 'Contratação de estagiários', :field => 'Descrição'
     fill_modal 'Natureza da despesa', :with => '3.0.10.01.12', :field => 'Natureza da despesa'
 
@@ -78,6 +84,7 @@ feature "Materials" do
     click_link 'Caixa'
 
     expect(page).to have_checked_field 'Ativo?'
+    expect(page).to have_checked_field 'Controla quantidade'
   end
 
   scenario 'update an existent material' do
@@ -247,6 +254,28 @@ feature "Materials" do
       expect(page).to have_content 'Antivirus'
       expect(page).to_not have_content 'Software'
     end
+  end
+
+  scenario 'uncheck control_amount when material_type is not service' do
+    make_dependencies!
+
+    navigate 'Comum > Cadastrais > Materiais > Materiais'
+
+    click_link 'Criar Material'
+
+    select 'Serviço', :from => 'Tipo de material'
+
+    expect(page).to have_unchecked_field 'Controla quantidade'
+
+    check 'Controla quantidade'
+
+    select 'Material de consumo', :from => 'Tipo de material'
+
+    expect(page).to_not have_field 'Controla quantidade'
+
+    select 'Serviço', :from => 'Tipo de material'
+
+    expect(page).to have_unchecked_field 'Controla quantidade'
   end
 
   def make_dependencies!

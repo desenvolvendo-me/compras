@@ -1,7 +1,7 @@
 class Material < Compras::Model
   attr_accessible :code, :materials_class_id, :description, :detailed_description,
                   :reference_unit_id, :manufacturer, :material_type, :combustible,
-                  :expense_nature_id, :contract_type_id, :active
+                  :expense_nature_id, :contract_type_id, :active, :control_amount
 
   attr_writer :autocomplete_materials_class
 
@@ -27,6 +27,7 @@ class Material < Compras::Model
   validates :materials_class, :reference_unit, :material_type, :presence => true
   validates :code, :description, :presence => true, :uniqueness => { :allow_blank => true }
   validates :contract_type, :presence => true, :if => :service?
+  validates :control_amount, :inclusion => { :in => [true, false] }
 
   before_save :clean_unnecessary_type
 
