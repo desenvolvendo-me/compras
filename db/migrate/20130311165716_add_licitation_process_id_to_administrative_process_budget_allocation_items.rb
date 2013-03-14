@@ -8,19 +8,13 @@ class AddLicitationProcessIdToAdministrativeProcessBudgetAllocationItems < Activ
     add_foreign_key :compras_administrative_process_budget_allocation_items, :compras_licitation_processes,
       :column => :licitation_process_id, :name => :compras_adm_proc_bgt_alloc_items_licitation_process_id
 
-    begin
-      AdministrativeProcessBudgetAllocationItem.reset_column_information
-
-      execute <<-SQL
-        update compras_administrative_process_budget_allocation_items c
-        set    licitation_process_id = (
-          select  licitation_process_id
-          from    compras_administrative_process_budget_allocations co
-          where   co.id = c.id
-        )
-      SQL
-    rescue NameError
-      puts "AdministrativeProcessBudgetAllocationItem class doesn't exist anymore\nSkiping migration..."
-    end
+    execute <<-SQL
+      update compras_administrative_process_budget_allocation_items c
+      set    licitation_process_id = (
+        select  licitation_process_id
+        from    compras_administrative_process_budget_allocations co
+        where   co.id = c.id
+      )
+    SQL
   end
 end
