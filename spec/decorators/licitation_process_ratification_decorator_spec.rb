@@ -32,32 +32,4 @@ describe LicitationProcessRatificationDecorator do
 
     expect(subject.proposals_total_value).to eq "5.480,90"
   end
-
-  context 'with proposals' do
-    let :proposal1 do
-      double(:proposta1, :budget_allocation => 'Alocação 1')
-    end
-
-    let :proposal2 do
-      double(:proposta2, :budget_allocation => 'Alocação 1')
-    end
-
-    let :proposal3 do
-      double(:proposta2, :budget_allocation => 'Alocação 3')
-    end
-
-    let :proposals do
-      [
-        proposal1,
-        proposal2,
-        proposal3
-      ]
-    end
-
-    it 'should return unique budget_allocations' do
-      component.stub(:bidder_proposals).and_return(proposals)
-
-      expect(subject.budget_allocations).to eq 'Alocação 1, Alocação 3'
-    end
-  end
 end

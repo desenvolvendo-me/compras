@@ -85,6 +85,10 @@ class LicitationProcessDecorator
     code_and_year
   end
 
+  def budget_allocations
+    component.budget_allocations.uniq.join(', ')
+  end
+
   private
 
   def current_publication_of

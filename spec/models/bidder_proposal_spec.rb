@@ -4,10 +4,19 @@ require 'app/models/bidder_proposal'
 require 'app/models/licitation_process_ratification_item'
 
 describe BidderProposal do
-  it { should belong_to :bidder }
   it { should belong_to :administrative_process_budget_allocation_item }
+  it { should belong_to :bidder }
+
   it { should have_one(:licitation_process_lot).through(:administrative_process_budget_allocation_item) }
   it { should have_many(:licitation_process_ratification_items).dependent(:destroy) }
+
+  it { should delegate(:material).to(:administrative_process_budget_allocation_item).allowing_nil(true) }
+  it { should delegate(:quantity).to(:administrative_process_budget_allocation_item).allowing_nil(true) }
+  it { should delegate(:unit_price).to(:administrative_process_budget_allocation_item).allowing_nil(true).prefix(true) }
+  it { should delegate(:reference_unit).to(:material).allowing_nil(true) }
+  it { should delegate(:description).to(:material).allowing_nil(true) }
+  it { should delegate(:code).to(:material).allowing_nil(true) }
+  it { should delegate(:creditor).to(:bidder).allowing_nil(true) }
 
   it "should return total price when has unit_price and quantity" do
     subject.unit_price = 3

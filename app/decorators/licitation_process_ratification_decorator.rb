@@ -16,8 +16,4 @@ class LicitationProcessRatificationDecorator
   def proposals_total_value
     number_with_precision super if super
   end
-
-  def budget_allocations
-    component.bidder_proposals.map { |p| p.budget_allocation }.uniq.join(', ')
-  end
 end

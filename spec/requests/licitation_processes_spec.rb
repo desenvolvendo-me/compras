@@ -309,7 +309,7 @@ feature "LicitationProcesses" do
     within_tab "Orçamento" do
       click_button 'Adicionar Dotação'
 
-      fill_with_autocomplete 'Dotação orçamentária', :with => 'Alocação'
+      fill_with_autocomplete 'Dotação orçamentária', :with => 'Vencimentos'
 
       fill_in 'Valor previsto', :with => '20,00'
     end

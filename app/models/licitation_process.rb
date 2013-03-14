@@ -65,6 +65,7 @@ class LicitationProcess < Compras::Model
   has_many :classifications, :through => :bidders, :class_name => 'LicitationProcessClassification',
            :source => :licitation_process_classifications
   has_many :administrative_process_budget_allocations, :dependent => :destroy, :order => :id
+  has_many :budget_allocations, :through => :administrative_process_budget_allocations
   has_many :items, :class_name => 'AdministrativeProcessBudgetAllocationItem', :dependent => :restrict, :order => :id
   has_many :materials, :through => :items
   has_many :purchase_solicitation_items,

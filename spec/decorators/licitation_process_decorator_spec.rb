@@ -331,4 +331,16 @@ describe LicitationProcessDecorator do
       expect(subject.subtitle).to eq '1/2013'
     end
   end
+
+  describe "#budget_allocations" do
+    let(:budget1) { double(:budget_allocation, :budget_allocation => "Estrutura Orçamentária 1") }
+    let(:budget2) { double(:budget_allocation, :budget_allocation => "Estrutura Orçamentária 2") }
+
+    it 'should return budget_allocations' do
+      budgets = [budget1, budget2]
+
+      component.stub(:budget_allocations).and_return(budgets)
+      expect(subject.budget_allocations).to eql "#{budget1}, #{budget2}"
+    end
+  end
 end

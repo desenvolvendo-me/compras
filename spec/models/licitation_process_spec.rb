@@ -75,6 +75,7 @@ describe LicitationProcess do
   it { should have_many(:items).dependent(:restrict)}
   it { should have_many(:materials).through(:items) }
   it { should have_many(:purchase_solicitation_items) }
+  it { should have_many(:budget_allocations).through(:administrative_process_budget_allocations) }
 
   it { should have_one(:trading).dependent(:restrict) }
 

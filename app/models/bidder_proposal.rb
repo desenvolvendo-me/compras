@@ -11,7 +11,7 @@ class BidderProposal < Compras::Model
   belongs_to :administrative_process_budget_allocation_item
   belongs_to :bidder
 
-  delegate :material, :quantity, :budget_allocation, :to => :administrative_process_budget_allocation_item, :allow_nil => true
+  delegate :material, :quantity, :to => :administrative_process_budget_allocation_item, :allow_nil => true
   delegate :unit_price, :to => :administrative_process_budget_allocation_item, :allow_nil => true, :prefix => true
   delegate :reference_unit, :description, :code, :to => :material, :allow_nil => true
   delegate :creditor, :to => :bidder, :allow_nil => true
