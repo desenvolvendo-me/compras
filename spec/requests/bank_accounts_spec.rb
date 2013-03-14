@@ -25,7 +25,7 @@ feature "BankAccounts" do
     expect(page).to have_content 'Otimizar o atendimento a todos'
   end
 
-  scenario 'create a new bank_account' do
+  scenario 'create, update and destroy a new bank_account' do
     Agency.make!(:itau)
     Capability.make!(:reforma)
     Capability.make!(:construcao)
@@ -116,15 +116,6 @@ feature "BankAccounts" do
         expect(page).to have_field 'Data de desativação', :with => I18n.l(Date.current)
       end
     end
-  end
-
-  scenario 'update an existent bank_account' do
-    BankAccount.make!(:itau_tributos)
-    Capability.make!(:construcao)
-
-    navigate 'Comum > Cadastrais > Bancos > Contas Bancárias'
-
-    click_link '1111'
 
     within_tab 'Principal' do
       fill_in 'Descrição', :with => 'IPTU'
@@ -163,10 +154,17 @@ feature "BankAccounts" do
         expect(page).to have_select 'Status', :selected => 'Ativo'
       end
 
+      within 'div.nested-bank-account-capability:nth(2)' do
+	expect(page).to have_field 'Recurso', :with => 'Construção'
+	expect(page).to have_field 'Data de inclusão', :with => I18n.l(Date.current)
+	expect(page).to have_field 'Data de desativação', :with => I18n.l(Date.current)
+	expect(page).to have_select 'Status', :selected => 'Inativo'
+      end
+
       within 'div.nested-bank-account-capability:last' do
         expect(page).to have_field 'Recurso', :with => 'Reforma e Ampliação'
         expect(page).to have_select 'Status', :selected => 'Inativo'
-        expect(page).to have_field 'Data de inclusão', :with => '01/01/2012'
+	expect(page).to have_field 'Data de inclusão', :with => I18n.l(Date.current)
         expect(page).to have_field 'Data de desativação', :with => I18n.l(Date.current)
 
         click_link 'Mais informações'
@@ -174,6 +172,16 @@ feature "BankAccounts" do
     end
 
     expect(page).to have_content 'Otimizar o atendimento a todos'
+
+    within '.ui-dialog' do
+      click_link 'close'
+    end
+
+    click_link 'Apagar'
+
+    expect(page).to have_notice 'Conta Bancária apagada com sucesso.'
+
+    expect(page).to_not have_content 'IPTU'
   end
 
   scenario 'when fill/clear agency should fill/clear related fields' do
@@ -248,20 +256,6 @@ feature "BankAccounts" do
     within_tab 'Principal' do
       expect(page).to have_field 'Banco', :with => 'Itaú'
     end
-  end
-
-  scenario 'destroy an existent bank_account' do
-    BankAccount.make!(:itau_tributos)
-
-    navigate 'Comum > Cadastrais > Bancos > Contas Bancárias'
-
-    click_link '1111'
-
-    click_link 'Apagar'
-
-    expect(page).to have_notice 'Conta Bancária apagada com sucesso.'
-
-    expect(page).to_not have_content 'Itaú Tributos'
   end
 
   scenario 'index with columns at the index' do
