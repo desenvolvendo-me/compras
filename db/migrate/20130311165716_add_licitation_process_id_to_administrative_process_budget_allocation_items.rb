@@ -9,11 +9,11 @@ class AddLicitationProcessIdToAdministrativeProcessBudgetAllocationItems < Activ
       :column => :licitation_process_id, :name => :compras_adm_proc_bgt_alloc_items_licitation_process_id
 
     execute <<-SQL
-      update compras_administrative_process_budget_allocation_items c
+      update compras_administrative_process_budget_allocation_items ci
       set    licitation_process_id = (
         select  licitation_process_id
-        from    compras_administrative_process_budget_allocations co
-        where   co.id = c.id
+        from    compras_administrative_process_budget_allocations ca
+        where   ca.id = ci.administrative_process_budget_allocation_id
       )
     SQL
   end
