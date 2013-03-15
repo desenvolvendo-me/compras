@@ -1,0 +1,19 @@
+<%= paginate %>
+
+<table class="records">
+  <thead>
+    <% attributes.each do |attribute| %>
+      <th>
+        <%= resource_class.human_attribute_name attribute %>
+      </th>
+    <% end %>
+  </thead>
+  <tbody>
+    <%= render :partial => 'modal_record', :collection => localized(collection), :as => 'record' %>
+  </tbody>
+</table>
+
+<%= paginate %>
+
+
+

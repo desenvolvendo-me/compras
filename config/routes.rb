@@ -161,20 +161,15 @@ Compras::Application.routes.draw do
 
   get 'budget_structure_levels/modal', :as => :modal_budget_structure_levels
 
-  resources :capabilities do
-    collection do
-      get :filter
-      get :modal
-    end
-    get 'modal_info', :on => :member
-  end
+  get 'capabilities/modal', :as => :modal_capabilities
 
-  resources :capability_allocation_details do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
+  resources :capabilities, :except => [:new, :edit, :update, :destroy] do
+   collection do
+     get :filter
+     get :modal
+   end
+   get 'modal_info', :on => :member
+ end
 
   resources :capability_destinations do
     collection do
