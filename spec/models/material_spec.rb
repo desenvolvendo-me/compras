@@ -6,6 +6,7 @@ require 'app/models/direct_purchase_budget_allocation_item'
 require 'app/models/administrative_process_budget_allocation_item'
 require 'app/models/price_collection_lot_item'
 require 'app/models/creditor_material'
+require 'app/models/materials_control'
 require 'app/models/purchase_solicitation_item_group_material'
 
 describe Material do
@@ -30,6 +31,7 @@ describe Material do
   it { should have_many(:creditor_materials).dependent(:restrict) }
   it { should have_many(:purchase_solicitation_item_group_materials).dependent(:destroy) }
   it { should have_many(:purchase_solicitation_budget_allocations).dependent(:restrict) }
+  it { should have_many(:materials_controls).dependent(:destroy) }
 
   it { should validate_presence_of :materials_class }
   it { should validate_presence_of :code }

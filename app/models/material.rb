@@ -23,6 +23,7 @@ class Material < Compras::Model
   has_many :creditor_materials, :dependent => :restrict
   has_many :purchase_solicitation_item_group_materials, :dependent => :destroy
   has_many :purchase_solicitation_budget_allocations, :through => :purchase_solicitation_budget_allocation_items, :dependent => :restrict
+  has_many :materials_controls, :dependent => :destroy, :inverse_of => :material, :order => :id
 
   validates :materials_class, :reference_unit, :material_type, :presence => true
   validates :code, :description, :presence => true, :uniqueness => { :allow_blank => true }

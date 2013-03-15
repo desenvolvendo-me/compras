@@ -1,0 +1,41 @@
+<a id="show_stock" href="#">Visualizar estoque</a>
+
+<table class="records" id="stock">
+  <thead>
+    <tr>
+      <th>Almoxarifado</th>
+      <th>Máximo</th>
+      <th>Mínimo</th>
+      <th>Médio</th>
+      <th>Reposição</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% f.object.materials_controls.each do |material_control| %>
+      <tr>
+        <td><%= material_control.decorator.warehouse %></td>
+        <td><%= material_control.decorator.maximum_quantity %></td>
+        <td><%= material_control.decorator.minimum_quantity %></td>
+        <td><%= material_control.decorator.average_quantity %></td>
+        <td><%= material_control.decorator.replacement_quantity %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<script>
+  $('#show_stock').click(function(event) {
+    event.preventDefault();
+
+    $('#stock').toggle(200, function(){
+      if ($(this).is(':visible')){
+        $('#show_stock').text('Esconder estoque');
+      } else {
+        $('#show_stock').text('Visualizar estoque');
+      }
+    });
+  });
+
+  $('#stock').hide();
+</script>

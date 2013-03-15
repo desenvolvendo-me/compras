@@ -278,6 +278,57 @@ feature "Materials" do
     expect(page).to have_unchecked_field 'Controla quantidade'
   end
 
+  scenario 'show stock of material' do
+    material = Material.make!(:antivirus)
+    MaterialsControl.make!(:antivirus_general, :material => material)
+    MaterialsControl.make!(:antivirus_general,
+                           :material => material,
+                           :replacement_quantity => 3)
+
+    navigate 'Comum > Cadastrais > Materiais > Materiais'
+
+    click_link 'Antivirus'
+
+    expect(page).to_not have_css '#stock' # A tabela do stoque deve estar invisível
+
+    click_link 'Visualizar estoque'
+
+    expect(page).to_not have_link 'Visualizar estoque'
+    expect(page).to have_link 'Esconder estoque'
+    expect(page).to have_css '#stock' # A tabela do stoque deve estar visível
+
+    within '#stock' do
+      expect(page).to have_content 'Almoxarifado'
+      expect(page).to have_content 'Máximo'
+      expect(page).to have_content 'Mínimo'
+      expect(page).to have_content 'Médio'
+      expect(page).to have_content 'Reposição'
+
+      within 'tbody tr:nth-child(1)' do
+        expect(page).to have_content 'Almoxarifado Geral'
+        expect(page).to have_content '20,00'
+        expect(page).to have_content '10,00'
+        expect(page).to have_content '15,00'
+        expect(page).to have_content '5,00'
+      end
+
+      within 'tbody tr:nth-child(2)' do
+        expect(page).to have_content 'Almoxarifado Geral'
+        expect(page).to have_content '20,00'
+        expect(page).to have_content '10,00'
+        expect(page).to have_content '15,00'
+        expect(page).to have_content '3,00'
+      end
+    end
+
+    click_link 'Esconder estoque'
+
+    expect(page).to have_link 'Visualizar estoque'
+    expect(page).to_not have_link 'Esconder estoque'
+
+    expect(page).to_not have_css '#stock' # A tabela do stoque deve estar invisível
+  end
+
   def make_dependencies!
     MaterialsClass.make!(:software)
     ReferenceUnit.make!(:unidade)
