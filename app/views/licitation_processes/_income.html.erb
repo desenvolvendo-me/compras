@@ -1,0 +1,45 @@
+<div class="yui3-g">
+  <div class="yui3-u-1-3">
+    <%= f.input :minimum_bid_to_disposal %>
+  </div>
+
+  <div class="yui3-u-1-3">
+    <%= f.input :concession_period %>
+  </div>
+
+  <div class="yui3-u-1-3">
+    <%= f.input :concession_period_unit %>
+  </div>
+</div>
+
+<div class="fields-to-concessions-and-permits">
+  <%= f.input :goal %>
+  <%= f.input :licensor_rights_and_liabilities %>
+  <%= f.input :licensee_rights_and_liabilities %>
+</div>
+
+<script>
+  function minimumBidToDisposalVisibilityToogler() {
+    if ($("#licitation_process_object_type").val() == "<%= LicitationProcessObjectType::DISPOSALS_OF_ASSETS %>") {
+      $("#licitation_process_minimum_bid_to_disposal").closest('.yui3-u-1-3').show();
+    } else {
+      $("#licitation_process_minimum_bid_to_disposal").closest('.yui3-u-1-3').hide();
+    }
+  };
+
+  function fieldsToConcessionsAndPermitsOfAssetsVisibilityToogler() {
+    if ($("#licitation_process_object_type").val() == "<%= LicitationProcessObjectType::CONCESSIONS_AND_PERMITS %>") {
+      $(".fields-to-concessions-and-permits").show();
+    } else {
+      $(".fields-to-concessions-and-permits").hide();
+    }
+  };
+
+  $("form.licitation_process").on("change", "#licitation_process_object_type", function(){
+    minimumBidToDisposalVisibilityToogler();
+    fieldsToConcessionsAndPermitsOfAssetsVisibilityToogler();
+  });
+
+  minimumBidToDisposalVisibilityToogler();
+  fieldsToConcessionsAndPermitsOfAssetsVisibilityToogler();
+</script>

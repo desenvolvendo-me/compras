@@ -117,6 +117,16 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Valor total', :with => '20,00'
     end
 
+    within_tab 'Receita' do
+      fill_in 'Prazo da concessão', :with => '1'
+      select 'ano/anos', :from => 'Unidade do prazo da concessão'
+
+      expect(page).to_not have_field 'Valor da oferta mínima para alienações'
+      expect(page).to_not have_field 'Meta'
+      expect(page).to_not have_field 'Direitos e obrigações do concedente'
+      expect(page).to_not have_field 'Diretos e obrigações do concedido'
+    end
+
     within_tab 'Configuração da apuração' do
       check 'Desclassificar participantes com problemas da documentação'
       check 'Desclassificar participantes com cotações acima do valor máximo estabelecido no edital'
@@ -201,6 +211,11 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Valor total', :with => '20,00'
 
       expect(page).to have_field 'Item', :with => '1'
+    end
+
+    within_tab 'Receita' do
+      expect(page).to have_field 'Prazo da concessão', :with => '1'
+      expect(page).to have_select 'Unidade do prazo da concessão', :selected => 'ano/anos'
     end
 
     within_tab 'Configuração da apuração' do
@@ -2818,6 +2833,51 @@ feature "LicitationProcesses" do
       click_button 'Pesquisar'
 
       expect(page).to have_css 'table.records tbody tr', :count => 1
+    end
+  end
+
+  scenario 'assert javascript over object type' do
+    navigate 'Processos de Compra > Processos de Compras'
+
+    click_link 'Criar Processo de Compra'
+
+    within_tab 'Principal' do
+      select 'Compras e serviços', :from => 'Tipo de objeto'
+    end
+
+    within_tab 'Receita' do
+      expect(page).to_not have_field 'Valor da oferta mínima para alienações'
+      expect(page).to have_field 'Prazo da concessão'
+      expect(page).to have_field 'Unidade do prazo da concessão'
+      expect(page).to_not have_field 'Meta'
+      expect(page).to_not have_field 'Direitos e obrigações do concedente'
+      expect(page).to_not have_field 'Diretos e obrigações do concedido'
+    end
+
+    within_tab 'Principal' do
+      select 'Alienação de bens', :from => 'Tipo de objeto'
+    end
+
+    within_tab 'Receita' do
+      expect(page).to have_field 'Valor da oferta mínima para alienações'
+      expect(page).to have_field 'Prazo da concessão'
+      expect(page).to have_field 'Unidade do prazo da concessão'
+      expect(page).to_not have_field 'Meta'
+      expect(page).to_not have_field 'Direitos e obrigações do concedente'
+      expect(page).to_not have_field 'Diretos e obrigações do concedido'
+    end
+
+    within_tab 'Principal' do
+      select 'Concessões e permissões', :from => 'Tipo de objeto'
+    end
+
+    within_tab 'Receita' do
+      expect(page).to_not have_field 'Valor da oferta mínima para alienações'
+      expect(page).to have_field 'Prazo da concessão'
+      expect(page).to have_field 'Unidade do prazo da concessão'
+      expect(page).to have_field 'Meta'
+      expect(page).to have_field 'Direitos e obrigações do concedente'
+      expect(page).to have_field 'Diretos e obrigações do concedido'
     end
   end
 end

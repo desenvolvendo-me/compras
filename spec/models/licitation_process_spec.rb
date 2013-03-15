@@ -101,6 +101,9 @@ describe LicitationProcess do
   it { should_not validate_presence_of :envelope_opening_time }
   it { should_not validate_presence_of :modality }
   it { should_not validate_presence_of :type_of_removal }
+  it { should_not validate_presence_of :goal }
+  it { should_not validate_presence_of :licensor_rights_and_liabilities }
+  it { should_not validate_presence_of :licensee_rights_and_liabilities }
 
   context "when is a licitation" do
     before do
@@ -108,6 +111,16 @@ describe LicitationProcess do
     end
 
     it { should validate_presence_of :modality }
+  end
+
+  context "when is a licitation" do
+    before do
+      subject.object_type = LicitationProcessObjectType::CONCESSIONS_AND_PERMITS
+    end
+
+    it { should validate_presence_of :goal }
+    it { should validate_presence_of :licensor_rights_and_liabilities }
+    it { should validate_presence_of :licensee_rights_and_liabilities }
   end
 
   context "when is a direct purchase" do

@@ -15,7 +15,10 @@ class LicitationProcess < Compras::Model
                   :administrative_process_budget_allocations_attributes,
                   :contract_guarantees, :extension_clause, :index_update_rate_id,
                   :type_of_removal, :is_trading, :notice_availability_date,
-                  :contact_id, :stage_of_bids_date, :items_attributes
+                  :contact_id, :stage_of_bids_date, :items_attributes,
+                  :minimum_bid_to_disposal, :concession_period,
+                  :concession_period_unit, :goal, :licensor_rights_and_liabilities,
+                  :licensee_rights_and_liabilities
 
   auto_increment :process, :by => :year
   auto_increment :modality_number, :by => [:year, :modality, :type_of_removal]
@@ -24,6 +27,7 @@ class LicitationProcess < Compras::Model
 
   attr_modal :process, :year, :process_date, :licitation_number
 
+  has_enumeration_for :concession_period_unit, :with => PeriodUnit
   has_enumeration_for :contract_guarantees
   has_enumeration_for :execution_type, :create_helpers => true
   has_enumeration_for :expiration_unit, :with => PeriodUnit
@@ -90,6 +94,8 @@ class LicitationProcess < Compras::Model
             :judgment_form_id, :responsible, :description, :notice_availability_date,
             :presence => true
   validates :modality, :presence => true, :if => :licitation?
+  validates :goal, :licensor_rights_and_liabilities, :licensee_rights_and_liabilities,
+            :presence => true, :if => :concessions_and_permits?
   validates :type_of_removal, :presence => true, :if => :direct_purchase?
   validate :validate_type_of_calculation_by_judgment_form_kind
   validate :validate_type_of_calculation_by_object_type
