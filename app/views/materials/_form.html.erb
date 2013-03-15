@@ -46,8 +46,10 @@
 </div>
 
 <script>
-  $("#material_material_type").change(changeFieldsByMaterialType);
-  $("#material_material_type").change(setControlAmount);
+  $("#material_material_type").change(function() {
+    changeFieldsByMaterialType();
+    setControlAmount();
+  });
 
   function changeFieldsByMaterialType() {
     typeValue = $("#material_material_type").val();
