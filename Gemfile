@@ -19,7 +19,7 @@ gem 'cancan', :git => 'git://github.com/ryanb/cancan.git', :branch => '2.0'
 
 gem 'pdfkit', :git => 'git://github.com/comogo/pdfkit.git'
 gem 'wkhtmltopdf-binary', '0.9.9.1'
-gem 'simple_form', '2.0.2'
+gem 'simple_form', '2.1.0'
 gem 'kaminari', '0.14.1'
 
 gem 'squeel', '1.0.17'

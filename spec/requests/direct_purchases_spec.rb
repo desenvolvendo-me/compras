@@ -2252,7 +2252,7 @@ feature "DirectPurchases" do
       fill_modal 'Referência legal', :with => 'Referencia legal', :field => 'Descrição'
       select 'Material ou serviços', :from => 'Modalidade'
       select 'Global', :from => 'Tipo do empenho'
-      fill_modal 'Solicitação de compra', :with => '1', :field => 'Ano'
+      fill_modal 'Solicitação de compra', :with => '2012', :field => 'Ano'
       fill_modal 'Fornecedor', :with => 'Wenderson Malheiros'
       fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
       fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
