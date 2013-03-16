@@ -12,7 +12,7 @@ gem 'pg', '0.14.1'
 gem 'activerecord-connections', '0.0.3'
 gem 'activerecord-postgres-hstore', '0.6.0'
 
-gem 'unico', '4.1.2'
+gem 'unico', '4.2.0'
 gem 'unico-assets', '1.3.0'
 gem 'devise', '2.2.3'
 gem 'cancan', :git => 'git://github.com/ryanb/cancan.git', :branch => '2.0'
