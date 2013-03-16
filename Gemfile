@@ -22,7 +22,7 @@ gem 'wkhtmltopdf-binary', '0.9.9.1'
 gem 'simple_form', '2.0.2'
 gem 'kaminari', '0.14.1'
 
-gem 'squeel', '1.0.11'
+gem 'squeel', '1.0.17'
 gem 'carrierwave', '0.8.0'
 gem 'awesome_nested_set', '2.1.3'
 
