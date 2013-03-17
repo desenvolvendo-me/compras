@@ -101,7 +101,7 @@ class LicitationProcessesController < CrudController
 
       BidderStatusChanger.new(object).change
 
-      if object.save!
+      if object.save
         object = LicitationProcess.find(object.id)
 
         DeliveryLocationChanger.change(object.purchase_solicitation, object.delivery_location)
