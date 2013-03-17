@@ -7,8 +7,6 @@ feature "Districts" do
   end
 
   scenario 'create a new district' do
-    City.make!(:belo_horizonte)
-
     navigate 'Geral > Parâmetros > Endereços > Distritos'
 
     click_link 'Criar Distrito'

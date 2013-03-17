@@ -84,8 +84,6 @@ feature "Neighborhoods" do
   end
 
   scenario 'should lock district by city' do
-    City.make!(:porto_alegre)
-
     navigate 'Geral > Parâmetros > Endereços > Bairros'
 
     click_link 'Criar Bairro'
