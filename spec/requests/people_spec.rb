@@ -7,7 +7,6 @@ feature "People" do
   end
 
   scenario 'create a new person as individual' do
-    State.make!(:mg)
     Street.make!(:amazonas)
 
     navigate 'Comum > Pessoas > Pessoas'

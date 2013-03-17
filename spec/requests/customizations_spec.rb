@@ -8,7 +8,6 @@ feature "Customizations" do
 
   scenario 'create and update a customization' do
     Prefecture.make! :belo_horizonte
-    State.make! :pr
     Creditor.make! :nohup
 
     navigate 'Geral > Parâmetros > Customizações'
@@ -99,7 +98,6 @@ feature "Customizations" do
 
   scenario 'customization for licitation_commission' do
     Prefecture.make!(:belo_horizonte)
-    State.make!(:pr)
     LicitationCommission.make!(:comissao)
 
     navigate 'Geral > Parâmetros > Customizações'
@@ -143,7 +141,6 @@ feature "Customizations" do
 
   scenario 'customization for regulatory_act_type' do
     Prefecture.make!(:belo_horizonte)
-    State.make!(:pr)
     RegulatoryActType.make!(:lei)
 
     navigate 'Geral > Parâmetros > Customizações'
