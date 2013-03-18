@@ -23,7 +23,7 @@ feature 'Bookmarks' do
     expect(page).to have_link 'Perfis'
   end
 
-  scenario 'creates bookmarks' do
+  scenario 'creates, update and destroy bookmarks' do
     sign_in
 
     click_link 'Adicionar Cadastros'
@@ -41,12 +41,8 @@ feature 'Bookmarks' do
     click_link 'Editar'
 
     expect(page).to have_select 'Cadastros', :value => ['Usuários', 'Perfis']
-  end
 
-  scenario 'updates bookmarks' do
-    Bookmark.make!(:sobrinho)
-
-    sign_in
+    click_link 'Voltar'
 
     click_link 'Editar'
 
@@ -63,26 +59,19 @@ feature 'Bookmarks' do
     click_link 'Editar'
 
     expect(page).to have_select 'Cadastros', :value => ['Usuários']
-  end
 
-  scenario 'remove all bookmarks and redirect to empty page' do
-    Bookmark.make!(:sobrinho)
-
-    sign_in
-
-    click_link 'Editar'
-
-    unselect 'Usuários', :from => 'Cadastros'
+    select 'Agências', :from => 'Cadastros'
     unselect 'Perfis', :from => 'Cadastros'
 
     click_button 'Salvar'
 
     expect(page).to have_content 'Favoritos editado com sucesso.'
 
-    expect(page).to have_content 'Sua página inicial está vazia.'
-    expect(page).to have_content 'Clique no botão abaixo para adicionar atalhos para os cadastros que você mais utiliza.'
+    expect(page).to_not have_content 'Sua página inicial está vazia.'
+    expect(page).to_not have_content 'Clique no botão abaixo para adicionar atalhos para os cadastros que você mais utiliza.'
 
-    expect(page).to have_link 'Adicionar Cadastros'
+    expect(page).to_not have_link 'Adicionar Cadastros'
+    expect(page).to     have_link 'Editar'
   end
 
   scenario 'delete bookmarks and redirect to empty page' do
