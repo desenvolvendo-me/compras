@@ -10,13 +10,10 @@ class ReserveFund < Compras::Model
   belongs_to :budget_allocation
   belongs_to :creditor
 
-  delegate :real_amount, :amount, :function, :subfunction, :government_program, :government_action, :budget_structure,
-           :expense_nature, :reserved_value, :to => :budget_allocation, :allow_nil => true, :prefix => true
-  delegate :expense_category_id, :to => :budget_allocation, :allow_nil => true
-  delegate :expense_group_id, :to => :budget_allocation, :allow_nil => true
-  delegate :expense_modality_id, :to => :budget_allocation, :allow_nil => true
-  delegate :expense_element_id, :to => :budget_allocation, :allow_nil => true
-  delegate :expense_nature_expense_nature, :to => :budget_allocation, :allow_nil => true
+  delegate :real_amount, :amount, :function, :subfunction, :government_program,
+           :government_action, :budget_structure, :expense_nature,
+           :reserved_value,
+           :to => :budget_allocation, :allow_nil => true, :prefix => true
   delegate :year, :to => :descriptor, :allow_nil => true
 
   orderize "id DESC"

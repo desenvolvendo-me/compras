@@ -1,15 +1,9 @@
 class ExpenseNature < Compras::Model
-  attr_modal :expense_nature, :description, :regulatory_act_id,
-             :kind, :expense_category_id, :expense_group_id,
-             :expense_modality_id, :expense_element_id
+  attr_modal :expense_nature, :description, :regulatory_act_id, :kind
 
   has_enumeration_for :kind, :with => ExpenseNatureKind, :create_helpers => true
 
   belongs_to :regulatory_act
-  belongs_to :expense_category
-  belongs_to :expense_group
-  belongs_to :expense_modality
-  belongs_to :expense_element
 
   orderize :description
 

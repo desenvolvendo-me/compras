@@ -1,2 +1,0 @@
-class ExpenseGroupsController < CrudController
-end
