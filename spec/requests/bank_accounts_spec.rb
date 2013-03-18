@@ -155,16 +155,16 @@ feature "BankAccounts" do
       end
 
       within 'div.nested-bank-account-capability:nth(2)' do
-	expect(page).to have_field 'Recurso', :with => 'Construção'
-	expect(page).to have_field 'Data de inclusão', :with => I18n.l(Date.current)
-	expect(page).to have_field 'Data de desativação', :with => I18n.l(Date.current)
-	expect(page).to have_select 'Status', :selected => 'Inativo'
+        expect(page).to have_field 'Recurso', :with => 'Construção'
+        expect(page).to have_field 'Data de inclusão', :with => I18n.l(Date.current)
+        expect(page).to have_field 'Data de desativação', :with => I18n.l(Date.current)
+        expect(page).to have_select 'Status', :selected => 'Inativo'
       end
 
       within 'div.nested-bank-account-capability:last' do
         expect(page).to have_field 'Recurso', :with => 'Reforma e Ampliação'
         expect(page).to have_select 'Status', :selected => 'Inativo'
-	expect(page).to have_field 'Data de inclusão', :with => I18n.l(Date.current)
+        expect(page).to have_field 'Data de inclusão', :with => I18n.l(Date.current)
         expect(page).to have_field 'Data de desativação', :with => I18n.l(Date.current)
 
         click_link 'Mais informações'
