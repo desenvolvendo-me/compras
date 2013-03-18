@@ -31,7 +31,7 @@ feature "Bidders" do
     expect(page).to have_title "Editar Processo de Compra"
   end
 
-  scenario 'creating a new bidder' do
+  scenario 'creating, updating, destroy a new bidder' do
     LicitationProcess.make!(:processo_licitatorio_computador)
     Creditor.make!(:sobrinho_sa)
     Person.make!(:wenderson)
@@ -143,24 +143,6 @@ feature "Bidders" do
       expect(page).to have_field 'Preço total', :with => '22,44'
       expect(page).to have_field 'Marca', :with => 'Apple'
     end
-  end
-
-  scenario 'updating an existing bidder' do
-    LicitationProcess.make!(:processo_licitatorio_computador)
-    Creditor.make!(:sobrinho_sa)
-    Person.make!(:wenderson)
-
-    navigate 'Processos de Compra > Processos de Compras'
-
-    within_records do
-      click_link '2/2013'
-    end
-
-    click_link 'Licitantes'
-
-    within_records do
-      click_link 'Wenderson Malheiros'
-    end
 
     expect(page).to have_field 'Processo de compra', :with => '2/2013 - Convite 1'
     expect(page).to have_field 'Data do processo de compra', :with => '20/03/2013'
@@ -255,29 +237,14 @@ feature "Bidders" do
       expect(page).to have_field 'Preço total', :with => '20,02'
       expect(page).to have_field 'Marca', :with => 'LG'
     end
-  end
-
-  scenario 'deleting an bidder' do
-    LicitationProcess.make!(:processo_licitatorio_computador)
-
-    navigate 'Processos de Compra > Processos de Compras'
-
-    within_records do
-      click_link '2/2013'
-    end
-
-    click_link 'Licitantes'
-
-    within_records do
-      click_link 'Wenderson Malheiros'
-    end
 
     click_link 'Apagar'
 
     expect(page).to have_notice 'Licitante apagado com sucesso.'
 
     within_records do
-      expect(page).to_not have_link 'Wenderson Malheiros'
+      expect(page).to have_link 'Wenderson Malheiro'
+      expect(page).to_not have_link 'Gabriel Sobrinho'
     end
   end
 
