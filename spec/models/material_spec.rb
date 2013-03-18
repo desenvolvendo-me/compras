@@ -36,6 +36,7 @@ describe Material do
   it { should validate_presence_of :materials_class }
   it { should validate_presence_of :code }
   it { should validate_presence_of :description }
+  it { should validate_presence_of :detailed_description }
   it { should validate_presence_of :reference_unit }
   it { should validate_presence_of :material_type }
 

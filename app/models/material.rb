@@ -25,7 +25,7 @@ class Material < Compras::Model
   has_many :purchase_solicitation_budget_allocations, :through => :purchase_solicitation_budget_allocation_items, :dependent => :restrict
   has_many :materials_controls, :dependent => :destroy, :inverse_of => :material, :order => :id
 
-  validates :materials_class, :reference_unit, :material_type, :presence => true
+  validates :materials_class, :reference_unit, :material_type, :detailed_description, :presence => true
   validates :code, :description, :presence => true, :uniqueness => { :allow_blank => true }
   validates :contract_type, :presence => true, :if => :service?
   validates :control_amount, :inclusion => { :in => [true, false] }

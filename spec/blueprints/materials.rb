@@ -42,6 +42,7 @@ Material.blueprint(:arame_comum) do
   materials_class { MaterialsClass.make!(:arames) }
   code { "02.02.00002" }
   description { "Arame comum" }
+  detailed_description { "Arame comum" }
   reference_unit { ReferenceUnit.make!(:unidade) }
   combustible { false }
   contract_type { ContractType.make!(:reparos) }
