@@ -69,7 +69,7 @@ feature "SupplyAuthorizations" do
 
     expect(page).to have_content 'AUTORIZAÇÃO DE FORNECIMENTO'
     expect(page).to have_content "#{supply_authorization}"
-    expect(page).to have_content "1/2011"
+    expect(page).to have_content "1/2012"
     expect(page).to have_content '20/12/2011'
     expect(page).to have_content 'Nohup'
     expect(page).to have_content 'Girassol, 9874 - São Francisco'
