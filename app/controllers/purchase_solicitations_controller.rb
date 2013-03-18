@@ -40,12 +40,4 @@ class PurchaseSolicitationsController < CrudController
   def interpolation_options
     { :resource_name => "#{resource_class.model_name.human} #{resource.code}/#{resource.accounting_year}" }
   end
-
-  def update_resource(object, attributes)
-    object.transaction do
-      if super
-        DeliveryLocationChanger.change(object.licitation_process, object.delivery_location)
-      end
-    end
-  end
 end

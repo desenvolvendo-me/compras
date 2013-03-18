@@ -27,7 +27,6 @@ require 'app/models/reserve_fund'
 require 'app/models/indexer'
 require 'app/models/price_registration'
 require 'app/models/trading'
-require 'app/models/delivery_location'
 require 'app/models/purchase_solicitation_budget_allocation_item'
 
 describe LicitationProcess do
@@ -48,7 +47,6 @@ describe LicitationProcess do
 
   it { should belong_to :capability }
   it { should belong_to :contact }
-  it { should belong_to :delivery_location }
   it { should belong_to :judgment_form }
   it { should belong_to :payment_method }
   it { should belong_to :purchase_solicitation }

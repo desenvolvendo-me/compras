@@ -12,8 +12,7 @@ feature "LicitationProcesses" do
                   'document_types',
                   'materials',
                   'licitation_process_publications',
-                  'purchase_solicitations',
-                  'delivery_locations']
+                  'purchase_solicitations']
     sign_in
   end
 
@@ -1415,132 +1414,6 @@ feature "LicitationProcesses" do
     expect(page).to have_link '1/2012'
 
     expect(page).to have_title 'Processos de Compras'
-  end
-
-  scenario 'fill delivery_location automatically when has a purchase_solicitation' do
-    PurchaseSolicitation.make!(:reparo_liberado)
-    Capability.make!(:reforma)
-    PaymentMethod.make!(:dinheiro)
-    DocumentType.make!(:fiscal)
-    BudgetAllocation.make!(:alocacao)
-    Material.make!(:antivirus)
-    Indexer.make!(:xpto)
-    DeliveryLocation.make!(:health)
-    JudgmentForm.make!(:por_item_com_melhor_tecnica)
-
-    navigate 'Processos de Compra > Solicitações de Compra'
-
-    click_link "Limpar Filtro"
-
-    within_records do
-      click_link '1/2012'
-    end
-
-    expect(page).to have_field 'Local para entrega', :with => 'Secretaria da Educação'
-
-    navigate 'Processos de Compra > Processos de Compras'
-
-    click_link 'Criar Processo de Compra'
-
-    within_tab 'Principal' do
-      choose 'Processo licitatório'
-      fill_modal 'Solicitação de compra', :with => '1', :field => 'Código'
-      fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => "Descrição"
-      fill_in 'Ano', :with => '2012'
-      select 'Compras e serviços', :from => 'Tipo de objeto'
-      select 'Concorrência', :from => 'Modalidade'
-      select 'Por Item com Melhor Técnica', :from =>'Forma de julgamento'
-      fill_in 'Objeto do processo de compra', :with => 'Licitação para compra de carteiras'
-      fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
-      fill_in 'Inciso', :with => 'Item 1'
-      select 'Global', :from => 'Tipo de empenho'
-      check 'Registro de preço'
-      select 'Menor preço total por item', :from => 'Tipo da apuração'
-      select 'Empreitada integral', :from => 'Forma de execução'
-      select 'Fiança bancária', :from => 'Tipo de garantia'
-      fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
-      fill_modal 'Índice de reajuste', :with => 'XPTO'
-      fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
-      fill_in 'Valor da caução', :with => '50,00'
-      select 'Favorável', :from => 'Parecer jurídico'
-      fill_in 'Data do parecer', :with => '30/03/2012'
-      fill_in 'Data do contrato', :with => '31/03/2012'
-      fill_in 'Validade do contrato (meses)', :with => '5'
-      fill_in 'Observações gerais', :with => 'observacoes'
-    end
-
-    within_tab 'Prazos' do
-      fill_in 'Data da expedição', :with => '21/03/2012'
-      fill_in 'Data da disponibilidade', :with => I18n.l(Date.current)
-      fill_modal 'Contato para informações', :with => '958473', :field => 'Matrícula'
-
-      fill_in 'Término do recebimento dos envelopes', :with => I18n.l(Date.current)
-      fill_in 'Hora da entrega', :with => '14:00'
-
-      fill_in 'Validade da proposta', :with => '5'
-      select 'dia/dias', :from => 'Período da validade da proposta'
-
-      fill_in 'Prazo de entrega', :with => '1'
-      select 'ano/anos', :from => 'Período do prazo de entrega'
-    end
-
-    click_button 'Salvar'
-
-    expect(page).to have_notice 'Processo de Compra 1/2012 criado com sucesso.'
-
-    within_tab 'Principal' do
-      expect(page).to have_field 'Local de entrega', :with => 'Secretaria da Educação'
-
-      fill_modal 'Local de entrega', :with => 'Secretaria da Saúde', :field => "Descrição"
-    end
-
-    click_button 'Salvar'
-
-    expect(page).to have_notice 'Processo de Compra 1/2012 editado com sucesso.'
-
-    within_tab 'Principal' do
-      expect(page).to have_field 'Local de entrega', :with => 'Secretaria da Saúde'
-    end
-
-    navigate 'Processos de Compra > Solicitações de Compra'
-
-    click_link "Limpar Filtro"
-
-    within_records do
-      click_link '1/2012'
-    end
-
-    expect(page).to have_field 'Local para entrega', :with => 'Secretaria da Saúde'
-
-    navigate 'Processos de Compra > Processos de Compras'
-
-    click_link "Limpar Filtro"
-
-    within_records do
-      click_link '1/2012'
-    end
-
-    within_tab 'Principal' do
-      clear_modal 'Local de entrega'
-    end
-
-    click_button 'Salvar'
-
-    expect(page).to have_notice 'Processo de Compra 1/2012 editado com sucesso.'
-
-    within_tab 'Principal' do
-      expect(page).to have_field 'Local de entrega', :with => ''
-    end
-
-    navigate 'Processos de Compra > Solicitações de Compra'
-
-    click_link "Limpar Filtro"
-
-    within_records do
-      click_link '1/2012'
-    end
-
-    expect(page).to have_field 'Local para entrega', :with => 'Secretaria da Saúde'
   end
 
   scenario 'fill budget allocations from purchase solicitation item group' do

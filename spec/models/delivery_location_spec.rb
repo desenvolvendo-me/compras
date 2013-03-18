@@ -6,7 +6,6 @@ require 'app/models/purchase_solicitation'
 require 'app/models/direct_purchase'
 require 'app/models/price_registration'
 require 'app/models/price_collection'
-require 'app/models/licitation_process'
 
 describe DeliveryLocation do
   context "#to_s" do
@@ -27,6 +26,5 @@ describe DeliveryLocation do
     it { should have_many(:direct_purchases).dependent(:restrict) }
     it { should have_many(:price_collections).dependent(:restrict) }
     it { should have_many(:price_registrations).dependent(:restrict) }
-    it { should have_many(:licitation_processes).dependent(:restrict) }
   end
 end

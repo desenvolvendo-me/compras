@@ -18,7 +18,6 @@ pt-BR:
         contract_date: "Data do contrato"
         contract_expiration: "Validade do contrato (meses)"
         contract_guarantees: 'Tipo de garantia'
-        delivery_location: "Local de entrega"
         description: "Objeto do processo de compra"
         disqualify_by_documentation_problem: "Desclassificar participantes com problemas da documentação"
         disqualify_by_maximum_value: "Desclassificar participantes com cotações acima do valor máximo estabelecido no edital"

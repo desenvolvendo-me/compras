@@ -42,22 +42,6 @@ describe LicitationProcessesController do
       expect(assigns(:licitation_process).licitation_number).to eq 2
     end
 
-    it 'should update delivery_location of purchase_solicitation' do
-      purchase_solicitation = PurchaseSolicitation.make!(:reparo)
-      delivery_location = DeliveryLocation.make!(:education)
-
-      LicitationProcess.any_instance.should_receive(:transaction).and_yield
-      LicitationProcess.any_instance.should_receive(:save).and_return(true)
-      LicitationProcess.any_instance.should_receive(:to_param).and_return("1")
-
-      DeliveryLocationChanger.should_receive(:change).
-                              with(purchase_solicitation, delivery_location)
-
-      post :create, :licitation_process => {
-        :purchase_solicitation_id => purchase_solicitation.id,
-        :delivery_location_id => delivery_location.id }
-    end
-
     it 'should update item_group status and fullfil the item' do
       item_group = PurchaseSolicitationItemGroup.make!(:antivirus)
       item_group_process = double(:item_group_process)
@@ -124,9 +108,7 @@ describe LicitationProcessesController do
       end
 
       let :licitation_process do
-        LicitationProcess.make!(:processo_licitatorio,
-          :purchase_solicitation => purchase_solicitation,
-          :delivery_location => purchase_solicitation.delivery_location)
+        LicitationProcess.make!(:processo_licitatorio, :purchase_solicitation => purchase_solicitation)
       end
 
       let :licitation_process_classifications do
@@ -144,17 +126,6 @@ describe LicitationProcessesController do
         put :update, :id => licitation_process.to_param, :licitation_process => { :observations => "Descrição do objeto" }
 
         expect(assigns(:licitation_process).observations).to eq 'observacoes'
-      end
-
-      it 'should update any field when has not publication or when publication allow update licitation process' do
-        LicitationProcess.any_instance.stub(:updatable?).and_return(true)
-
-        DeliveryLocationChanger.should_receive(:change).
-                                with(purchase_solicitation, licitation_process.delivery_location)
-
-        put :update, :id => licitation_process.id, :licitation_process => { :observations => "Descrição do objeto" }
-
-        expect(assigns(:licitation_process).observations).to eq 'Descrição do objeto'
       end
 
       it 'should redirect to administrative process edit page after update' do

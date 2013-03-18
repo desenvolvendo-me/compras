@@ -82,8 +82,6 @@ class LicitationProcessesController < CrudController
 
         PurchaseSolicitationItemGroupProcess.new(:new_item_group => new_item_group).update_status
         PurchaseSolicitationStatusChanger.change(new_purchase_solicitation)
-
-        DeliveryLocationChanger.change(object.purchase_solicitation, object.delivery_location)
       end
     end
   end
@@ -103,8 +101,6 @@ class LicitationProcessesController < CrudController
 
       if object.save
         object = LicitationProcess.find(object.id)
-
-        DeliveryLocationChanger.change(object.purchase_solicitation, object.delivery_location)
 
         AdministrativeProcessBudgetAllocationCloner.clone(
           :licitation_process => object,

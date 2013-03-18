@@ -6,7 +6,7 @@ class LicitationProcess < Compras::Model
                   :envelope_delivery_time, :envelope_opening_date,
                   :envelope_opening_time, :document_type_ids, :type_of_calculation,
                   :period, :period_unit, :expiration, :expiration_unit,
-                  :judgment_form_id, :delivery_location_id, :execution_type,
+                  :judgment_form_id, :execution_type,
                   :disqualify_by_documentation_problem, :disqualify_by_maximum_value,
                   :consider_law_of_proposals, :price_registration, :status,
                   :responsible_id, :purchase_solicitation_id, :object_type,
@@ -43,7 +43,6 @@ class LicitationProcess < Compras::Model
 
   belongs_to :capability
   belongs_to :contact, :class_name => 'Employee'
-  belongs_to :delivery_location
   belongs_to :judgment_form
   belongs_to :payment_method
   belongs_to :purchase_solicitation
@@ -83,8 +82,6 @@ class LicitationProcess < Compras::Model
 
   delegate :kind, :best_technique?, :technical_and_price?,
            :to => :judgment_form, :allow_nil => true, :prefix => true
-  delegate :delivery_location, :to => :purchase_solicitation, :allow_nil => true,
-           :prefix => true
   delegate :licitation_kind, :to => :judgment_form, :allow_nil => true, :prefix => true
 
   validates :process_date, :capability, :period, :contract_guarantees, :type_of_purchase,
