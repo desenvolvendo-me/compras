@@ -122,4 +122,25 @@ feature "LicitationProcessPublications" do
 
     expect(page).to_not have_link 'Publicacao'
   end
+
+  scenario 'show columns at the index' do
+    LicitationProcess.make!(:processo_licitatorio)
+
+    navigate 'Processos de Compra > Processos de Compras'
+
+    click_link "Limpar Filtro"
+
+    within_records do
+      click_link '1/2012'
+    end
+
+    click_link 'Publicações'
+
+    within_records do
+       expect(page).to have_content 'Publicação'
+       expect(page).to have_content '20/04/2012'
+       expect(page).to have_content "Edital"
+       expect(page).to have_content 'Internet'
+     end
+  end
 end
