@@ -6,7 +6,7 @@ feature "DisseminationSources" do
     sign_in
   end
 
-  scenario 'create a new dissemination_source' do
+  scenario 'create, update and destroy a new dissemination_source' do
     CommunicationSource.make!(:jornal_municipal)
 
     navigate 'Comum > Legislação > Meios de Divulgação'
@@ -24,19 +24,9 @@ feature "DisseminationSources" do
 
     expect(page).to have_field 'Descrição', :with => 'Jornal Oficial do Município'
     expect(page).to have_field 'Tipo do meio de divulgação', :with => 'Jornal de Circulação Municipal'
-  end
-
-  scenario 'update an existent dissemination_source' do
-    DisseminationSource.make!(:jornal_municipal)
-    CommunicationSource.make!(:jornal_estadual)
-
-    navigate 'Comum > Legislação > Meios de Divulgação'
-
-    click_link 'Jornal Oficial do Município'
 
     fill_in 'Descrição', :with => 'Jornal Não Oficial do Município'
-
-    fill_modal 'Tipo do meio de divulgação', :with => 'Jornal de Circulação Estadual', :field => 'Descrição'
+    fill_modal 'Tipo do meio de divulgação', :with => 'Jornal de Circulação Municipal', :field => 'Descrição'
 
     click_button 'Salvar'
 
@@ -46,15 +36,7 @@ feature "DisseminationSources" do
 
     expect(page).to have_field 'Descrição', :with => 'Jornal Não Oficial do Município'
 
-    expect(page).to have_field 'Tipo do meio de divulgação', :with => 'Jornal de Circulação Estadual'
-  end
-
-  scenario 'destroy an existent dissemination_source' do
-    DisseminationSource.make!(:jornal_municipal)
-
-    navigate 'Comum > Legislação > Meios de Divulgação'
-
-    click_link 'Jornal Oficial do Município'
+    expect(page).to have_field 'Tipo do meio de divulgação', :with => 'Jornal de Circulação Municipal'
 
     click_link 'Apagar'
 
