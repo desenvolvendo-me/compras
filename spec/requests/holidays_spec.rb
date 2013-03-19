@@ -2,14 +2,13 @@
 require 'spec_helper'
 
 feature "Holidays" do
-  let(:navigate_to_holidays) { navigate 'Comum > Cadastrais > Feriados' }
-
   background do
     sign_in
   end
 
-  scenario 'create a new holiday' do
-    navigate_to_holidays
+  scenario 'create, update and destroy a new holiday' do
+    navigate 'Comum > Cadastrais > Feriados'
+
     click_link 'Criar Feriado'
 
     fill_in 'Nome', :with => 'Dia do Trabalho'
@@ -29,14 +28,6 @@ feature "Holidays" do
     expect(page).to have_field 'Mês', :with => '5'
     expect(page).to have_field 'Dia', :with => '1'
     expect(page).to have_checked_field 'Esse feriado é recorrente?'
-  end
-
-  scenario 'update an existent holiday' do
-    Holiday.make!(:example)
-
-    navigate_to_holidays
-
-    click_link 'Dia do Trabalho'
 
     fill_in 'Nome', :with => 'Natal'
     fill_in 'Ano', :with => '2013'
@@ -55,17 +46,10 @@ feature "Holidays" do
     expect(page).to have_field 'Mês', :with => '12'
     expect(page).to have_field 'Dia', :with => '25'
     expect(page).to have_checked_field 'Esse feriado é recorrente?'
-  end
-
-  scenario 'destroy an existent holiday' do
-    Holiday.make!(:example)
-    navigate_to_holidays
-
-    click_link 'Dia do Trabalho'
 
     click_link 'Apagar'
 
     expect(page).to have_notice 'Feriado apagado com sucesso.'
-    expect(page).to_not have_content 'Dia do Trabalho'
+    expect(page).to_not have_content 'Natal'
   end
 end
