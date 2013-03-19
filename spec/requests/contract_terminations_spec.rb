@@ -9,7 +9,7 @@ feature 'ContractTerminations' do
     sign_in
   end
 
-  scenario 'creating the terminations of a contract' do
+  scenario 'creating and updating the terminations of a contract' do
     Contract.make!(:primeiro_contrato)
     DisseminationSource.make!(:jornal_bairro)
 
@@ -70,16 +70,6 @@ feature 'ContractTerminations' do
     click_link 'Voltar'
 
     expect(page).to have_title 'Editar Contrato'
-  end
-
-  scenario 'editing a contract termination' do
-    ContractTermination.make!(:contrato_rescindido)
-
-    navigate 'Comum > Cadastrais > Contratos'
-
-    click_link "Limpar Filtro"
-
-    click_link '001'
 
     click_link 'Rescisão'
 
