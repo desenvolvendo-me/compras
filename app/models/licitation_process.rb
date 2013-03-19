@@ -4,7 +4,7 @@ class LicitationProcess < Compras::Model
                   :legal_advice, :legal_advice_date, :contract_date,
                   :contract_expiration, :observations, :envelope_delivery_date,
                   :envelope_delivery_time, :envelope_opening_date,
-                  :envelope_opening_time, :document_type_ids, :type_of_calculation,
+                  :envelope_opening_time, :document_type_ids,
                   :period, :period_unit, :expiration, :expiration_unit,
                   :judgment_form_id, :execution_type,
                   :disqualify_by_documentation_problem, :disqualify_by_maximum_value,
@@ -37,7 +37,6 @@ class LicitationProcess < Compras::Model
   has_enumeration_for :period_unit, :with => PeriodUnit
   has_enumeration_for :pledge_type
   has_enumeration_for :status, :with => LicitationProcessStatus, :create_helpers => true
-  has_enumeration_for :type_of_calculation, :with => LicitationProcessTypeOfCalculation, :create_helpers => true
   has_enumeration_for :type_of_purchase, :with => LicitationProcessTypeOfPurchase, :create_helpers => true
   has_enumeration_for :type_of_removal
 
@@ -87,16 +86,13 @@ class LicitationProcess < Compras::Model
   validates :process_date, :capability, :period, :contract_guarantees, :type_of_purchase,
             :period_unit, :expiration, :expiration_unit, :payment_method,
             :envelope_delivery_time, :year, :envelope_delivery_date,
-            :pledge_type, :type_of_calculation, :execution_type, :object_type,
+            :pledge_type, :execution_type, :object_type,
             :judgment_form_id, :responsible, :description, :notice_availability_date,
             :presence => true
   validates :modality, :presence => true, :if => :licitation?
   validates :goal, :licensor_rights_and_liabilities, :licensee_rights_and_liabilities,
             :presence => true, :if => :concessions_and_permits?
   validates :type_of_removal, :presence => true, :if => :direct_purchase?
-  validate :validate_type_of_calculation_by_judgment_form_kind
-  validate :validate_type_of_calculation_by_object_type
-  validate :validate_type_of_calculation_by_modality
   validate :validate_bidders_before_edital_publication
   validate :validate_updates, :unless => :updatable?
   validate :validate_envelope_opening_date, :on => :update
@@ -271,30 +267,6 @@ class LicitationProcess < Compras::Model
     bidders.each do |bidder|
       bidder.assign_document_types
       bidder.save!
-    end
-  end
-
-  def validate_type_of_calculation_by_judgment_form_kind(verificator = LicitationProcessTypesOfCalculationByJudgmentFormKind.new)
-    return if type_of_calculation.nil? || judgment_form_kind.nil?
-
-    unless verificator.correct_type_of_calculation?(judgment_form_kind, type_of_calculation)
-      errors.add(:type_of_calculation, :not_permited_for_judgment_form_kind, :kind => LicitationProcessTypeOfCalculation.t(type_of_calculation))
-    end
-  end
-
-  def validate_type_of_calculation_by_object_type(verificator = LicitationProcessTypesOfCalculationByObjectType.new)
-    return if type_of_calculation.nil? || object_type.nil?
-
-    unless verificator.correct_type_of_calculation?(object_type, type_of_calculation)
-      errors.add(:type_of_calculation, :not_permited_for_object_type, :kind => LicitationProcessTypeOfCalculation.t(type_of_calculation))
-    end
-  end
-
-  def validate_type_of_calculation_by_modality(verificator = LicitationProcessTypesOfCalculationByModality.new)
-    return if type_of_calculation.nil? || modality.nil?
-
-    unless verificator.correct_type_of_calculation?(modality, type_of_calculation)
-      errors.add(:type_of_calculation, :not_permited_for_modality, :kind => LicitationProcessTypeOfCalculation.t(type_of_calculation))
     end
   end
 

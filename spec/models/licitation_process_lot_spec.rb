@@ -8,10 +8,12 @@ require 'app/models/administrative_process_budget_allocation_item'
 
 describe LicitationProcessLot do
   it { should belong_to :licitation_process }
+
   it { should have_many(:administrative_process_budget_allocation_items).dependent(:nullify).order(:id) }
   it { should have_many(:licitation_process_classifications).dependent(:destroy) }
 
-  it { should delegate(:type_of_calculation).to(:licitation_process).allowing_nil(true) }
+  it { should have_one(:judgment_form).through(:licitation_process) }
+
   it { should delegate(:updatable?).to(:licitation_process).allowing_nil(true).prefix(true) }
   it { should delegate(:updatable?).to(:licitation_process).allowing_nil(true).prefix(true) }
 

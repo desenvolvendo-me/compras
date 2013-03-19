@@ -35,7 +35,6 @@ LicitationProcess.blueprint(:processo_licitatorio) do
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   price_registration { true }
-  type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM }
   licitation_process_lots { [LicitationProcessLot.make(:lote_antivirus, :licitation_process => object)] }
   disqualify_by_documentation_problem { true }
   disqualify_by_maximum_value { true }
@@ -82,7 +81,6 @@ LicitationProcess.blueprint(:processo_licitatorio_computador) do
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao,
                                                                         :licitation_process => object)] }
   bidders { [Bidder.make!(:licitante)] }
-  type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM }
   execution_type { ExecutionType::INTEGRAL }
   type_of_purchase { LicitationProcessTypeOfPurchase::LICITATION }
   contract_guarantees { ContractGuarantees::BANK }
@@ -125,7 +123,6 @@ LicitationProcess.blueprint(:processo_licitatorio_fornecedores) do
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   bidders { [Bidder.make!(:licitante), Bidder.make!(:licitante_sobrinho)] }
-  type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_GLOBAL_PRICE }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   notice_availability_date { I18n.l(Date.tomorrow) }
@@ -166,7 +163,6 @@ LicitationProcess.blueprint(:processo_licitatorio_publicacao_cancelada) do
   observations { "observacoes" }
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao_de_cancelamento)] }
-  type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   notice_availability_date { I18n.l(Date.tomorrow) }
@@ -210,7 +206,6 @@ LicitationProcess.blueprint(:processo_licitatorio_canetas) do
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao,
                                                                         :licitation_process => object)] }
   bidders { [Bidder.make!(:licitante)] }
-  type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM }
   licitation_process_lots { [LicitationProcessLot.make(:lote_antivirus, :licitation_process => object)] }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
@@ -223,7 +218,7 @@ LicitationProcess.blueprint(:apuracao_por_itens) do
   protocol { '00088/2012' }
   object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
   modality { Modality::INVITATION }
-  judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
+  judgment_form { JudgmentForm.make!(:por_item_com_menor_preco) }
   description { 'Licitação para compra de carteiras' }
   responsible { Employee.make!(:sobrinho) }
   item { 'Item 1' }
@@ -254,7 +249,6 @@ LicitationProcess.blueprint(:apuracao_por_itens) do
   document_types { [DocumentType.make!(:fiscal)] }
   disqualify_by_documentation_problem { false }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
-  type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM }
   execution_type { ExecutionType::INTEGRAL }
   bidders { [Bidder.make!(:licitante_com_proposta_1),
              Bidder.make!(:licitante_com_proposta_2)] }
@@ -268,7 +262,7 @@ LicitationProcess.blueprint(:apuracao_por_lote) do
   protocol { '00088/2012' }
   object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
   modality { Modality::INVITATION }
-  judgment_form { JudgmentForm.make!(:por_lote_com_melhor_tecnica) }
+  judgment_form { JudgmentForm.make!(:por_lote_com_menor_preco) }
   description { 'Licitação para compra de carteiras' }
   responsible { Employee.make!(:sobrinho) }
   item { 'Item 1' }
@@ -298,7 +292,6 @@ LicitationProcess.blueprint(:apuracao_por_lote) do
   observations { "observacoes" }
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
-  type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_PRICE_BY_LOT }
   execution_type { ExecutionType::INTEGRAL }
   bidders { [Bidder.make!(:licitante_com_proposta_1),
              Bidder.make!(:licitante_com_proposta_2)] }
@@ -312,7 +305,7 @@ LicitationProcess.blueprint(:valor_maximo_ultrapassado) do
   protocol { '00088/2012' }
   object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
   modality { Modality::INVITATION }
-  judgment_form { JudgmentForm.make!(:por_lote_com_melhor_tecnica) }
+  judgment_form { JudgmentForm.make!(:por_lote_com_menor_preco) }
   description { 'Licitação para compra de carteiras' }
   responsible { Employee.make!(:sobrinho) }
   item { 'Item 1' }
@@ -344,7 +337,6 @@ LicitationProcess.blueprint(:valor_maximo_ultrapassado) do
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
-  type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_PRICE_BY_LOT }
   bidders { [Bidder.make!(:licitante_com_proposta_3),
              Bidder.make!(:licitante_com_proposta_7)] }
   notice_availability_date { I18n.l(Date.tomorrow) }
@@ -356,7 +348,7 @@ LicitationProcess.blueprint(:apuracao_global) do
   protocol { '00088/2012' }
   object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
   modality { Modality::INVITATION }
-  judgment_form { JudgmentForm.make!(:global) }
+  judgment_form { JudgmentForm.make!(:global_com_menor_preco) }
   description { 'Licitação para compra de carteiras' }
   responsible { Employee.make!(:sobrinho) }
   item { 'Item 1' }
@@ -385,7 +377,6 @@ LicitationProcess.blueprint(:apuracao_global) do
   observations { "observacoes" }
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
-  type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_GLOBAL_PRICE }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   bidders { [Bidder.make!(:licitante_com_proposta_1),
@@ -399,7 +390,7 @@ LicitationProcess.blueprint(:apuracao_global_empatou) do
   protocol { '00088/2012' }
   object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
   modality { Modality::INVITATION }
-  judgment_form { JudgmentForm.make!(:global) }
+  judgment_form { JudgmentForm.make!(:global_com_menor_preco) }
   description { 'Licitação para compra de carteiras' }
   responsible { Employee.make!(:sobrinho) }
   item { 'Item 1' }
@@ -428,7 +419,6 @@ LicitationProcess.blueprint(:apuracao_global_empatou) do
   observations { "observacoes" }
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
-  type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_GLOBAL_PRICE }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   bidders { [Bidder.make!(:licitante_com_proposta_5),
@@ -442,7 +432,7 @@ LicitationProcess.blueprint(:apuracao_global_sem_documentos) do
   protocol { '00088/2012' }
   object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
   modality { Modality::INVITATION }
-  judgment_form { JudgmentForm.make!(:global) }
+  judgment_form { JudgmentForm.make!(:global_com_menor_preco) }
   description { 'Licitação para compra de carteiras' }
   responsible { Employee.make!(:sobrinho) }
   item { 'Item 1' }
@@ -471,7 +461,6 @@ LicitationProcess.blueprint(:apuracao_global_sem_documentos) do
   observations { "observacoes" }
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
-  type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_GLOBAL_PRICE }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   bidders { [Bidder.make!(:licitante_com_proposta_3, :documents => []),
@@ -485,7 +474,7 @@ LicitationProcess.blueprint(:apuracao_global_small_company) do
   protocol { '00088/2012' }
   object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
   modality { Modality::INVITATION }
-  judgment_form { JudgmentForm.make!(:global) }
+  judgment_form { JudgmentForm.make!(:global_com_menor_preco) }
   description { 'Licitação para compra de carteiras' }
   responsible { Employee.make!(:sobrinho) }
   item { 'Item 1' }
@@ -514,7 +503,6 @@ LicitationProcess.blueprint(:apuracao_global_small_company) do
   observations { "observacoes" }
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
-  type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_GLOBAL_PRICE }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   bidders { [Bidder.make!(:licitante_com_proposta_3),
@@ -528,7 +516,7 @@ LicitationProcess.blueprint(:apuracao_global_small_company_2) do
   protocol { '00088/2012' }
   object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
   modality { Modality::INVITATION }
-  judgment_form { JudgmentForm.make!(:global) }
+  judgment_form { JudgmentForm.make!(:global_com_menor_preco) }
   description { 'Licitação para compra de carteiras' }
   responsible { Employee.make!(:sobrinho) }
   item { 'Item 1' }
@@ -557,7 +545,6 @@ LicitationProcess.blueprint(:apuracao_global_small_company_2) do
   observations { "observacoes" }
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
-  type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_GLOBAL_PRICE }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   bidders { [Bidder.make!(:licitante_com_proposta_8),
@@ -600,7 +587,6 @@ LicitationProcess.blueprint(:processo_licitatorio_nao_atualizavel) do
   observations { "observacoes" }
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao_nao_atualizavel)] }
-  type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM }
   licitation_process_lots { [LicitationProcessLot.make(:lote_antivirus, :licitation_process => object)] }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
@@ -644,7 +630,6 @@ LicitationProcess.blueprint(:processo_licitatorio_canetas_sem_lote) do
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   bidders { [Bidder.make!(:licitante)] }
-  type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   notice_availability_date { I18n.l(Date.tomorrow) }
@@ -685,7 +670,6 @@ LicitationProcess.blueprint(:apuracao_melhor_tecnica_e_preco) do
   observations { "observacoes" }
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
-  type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   bidders { [Bidder.make!(:licitante_com_proposta_1),
@@ -733,7 +717,6 @@ LicitationProcess.blueprint(:pregao_presencial) do
   contract_guarantees { ContractGuarantees::BANK }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao,
                                                                         :licitation_process => object)] }
-  type_of_calculation { LicitationProcessTypeOfCalculation::SORT_PARTICIPANTS_BY_ITEM }
   bidders { [Bidder.make!(:licitante_sobrinho), Bidder.make!(:licitante), Bidder.make!(:me_pregao)] }
   notice_availability_date { I18n.l(Date.tomorrow) }
 end
@@ -773,7 +756,6 @@ LicitationProcess.blueprint(:processo_licitatorio_concurso) do
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   price_registration { true }
-  type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM }
   disqualify_by_documentation_problem { true }
   disqualify_by_maximum_value { true }
   consider_law_of_proposals { false }
@@ -816,13 +798,12 @@ LicitationProcess.blueprint(:processo_licitatorio_concorrencia) do
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   price_registration { true }
-  type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_GLOBAL_PRICE }
   disqualify_by_documentation_problem { true }
   disqualify_by_maximum_value { true }
   consider_law_of_proposals { false }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
-  judgment_form { JudgmentForm.make!(:global)}
+  judgment_form { JudgmentForm.make!(:global_com_menor_preco)}
   notice_availability_date { I18n.l(Date.tomorrow) }
 end
 
@@ -860,13 +841,12 @@ LicitationProcess.blueprint(:processo_licitatorio_tomada_preco) do
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   price_registration { true }
-  type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_GLOBAL_PRICE }
   disqualify_by_documentation_problem { true }
   disqualify_by_maximum_value { true }
   consider_law_of_proposals { false }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
-  judgment_form { JudgmentForm.make!(:global)}
+  judgment_form { JudgmentForm.make!(:global_com_menor_preco)}
   notice_availability_date { I18n.l(Date.tomorrow) }
 end
 
@@ -906,7 +886,6 @@ LicitationProcess.blueprint(:processo_licitatorio_leilao) do
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   price_registration { true }
-  type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_GLOBAL_PRICE }
   disqualify_by_documentation_problem { true }
   disqualify_by_maximum_value { true }
   consider_law_of_proposals { false }

@@ -57,7 +57,6 @@ feature "LicitationProcesses" do
       fill_in 'Inciso', :with => 'Item 1'
 
       check 'Registro de preço'
-      select 'Menor preço total por item', :from => 'Tipo da apuração'
       select 'Empreitada integral', :from => 'Forma de execução'
       select 'Fiança bancária', :from => 'Tipo de garantia'
       fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
@@ -151,7 +150,6 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
       expect(page).to have_field 'Inciso', :with => 'Item 1'
 
-      expect(page).to have_select 'Tipo da apuração', :selected => 'Menor preço total por item'
       expect(page).to have_select 'Forma de execução', :selected => 'Empreitada integral'
       expect(page).to have_select 'Tipo de garantia', :selected => 'Fiança bancária'
       expect(page).to have_field 'Fonte de recurso', :with => 'Reforma e Ampliação'
@@ -246,10 +244,8 @@ feature "LicitationProcesses" do
       select 'Compras e serviços', :from => 'Tipo de objeto'
       select 'Concorrência', :from => 'Modalidade'
       select 'Por Lote com Melhor Técnica', :from => 'Forma de julgamento'
-      select 'Menor preço por lote', :from => 'Tipo da apuração'
 
       select 'Por Item com Menor Preço', :from => 'Forma de julgamento'
-      select 'Menor preço total por item', :from => 'Tipo da apuração'
       select 'Empreitada integral', :from => 'Forma de execução'
       select 'Fiança bancária', :from => 'Tipo de garantia'
     end
@@ -278,7 +274,6 @@ feature "LicitationProcesses" do
 
     within_tab 'Principal' do
       select 'Estimativo', :from => 'Tipo de empenho'
-      select 'Menor preço total por item', :from => 'Tipo da apuração'
       select 'Empreitada integral', :from => 'Forma de execução'
       select 'Fiança bancária', :from => 'Tipo de garantia'
       fill_modal 'Fonte de recurso', :with => 'Construção', :field => 'Descrição'
@@ -355,7 +350,6 @@ feature "LicitationProcesses" do
 
     within_tab 'Principal' do
       expect(page).to have_select 'Tipo de empenho', :selected => 'Estimativo'
-      expect(page).to have_select 'Tipo da apuração', :selected => 'Menor preço total por item'
       expect(page).to have_select 'Forma de execução', :selected => 'Empreitada integral'
       expect(page).to have_select 'Tipo de garantia', :selected => 'Fiança bancária'
       expect(page).to have_field 'Fonte de recurso', :with => 'Construção'
@@ -612,7 +606,6 @@ feature "LicitationProcesses" do
       choose 'Processo licitatório'
       select 'Global', :from => 'Tipo de empenho'
 
-      select 'Menor preço total por item', :from => 'Tipo da apuração'
       select 'Empreitada integral', :from => 'Forma de execução'
       select 'Fiança bancária', :from => 'Tipo de garantia'
       fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
@@ -820,7 +813,7 @@ feature "LicitationProcesses" do
 
     expect(page).to have_content 'Processo de Compra 1/2012'
 
-    expect(page).to have_content 'Apuração: Menor preço por lote'
+    expect(page).to have_content 'Apuração: Por Lote com Menor Preço'
 
     expect(page).to have_content 'Nohup'
 
@@ -851,7 +844,7 @@ feature "LicitationProcesses" do
 
     expect(page).to have_content 'Processo de Compra 1/2012'
 
-    expect(page).to have_content 'Apuração: Menor preço global'
+    expect(page).to have_content 'Apuração: Forma Global com Menor Preço'
 
     expect(page).to have_content 'Gabriel Sobrinho'
 
@@ -890,7 +883,7 @@ feature "LicitationProcesses" do
 
     expect(page).to have_content 'Processo de Compra 1/2012'
 
-    expect(page).to have_content 'Apuração: Menor preço global'
+    expect(page).to have_content 'Apuração: Forma Global com Menor Preço'
 
     expect(page).to have_content 'Nohup'
 
@@ -922,7 +915,7 @@ feature "LicitationProcesses" do
 
     expect(page).to have_content 'Processo de Compra 1/2012'
 
-    expect(page).to have_content 'Apuração: Menor preço global'
+    expect(page).to have_content 'Apuração: Forma Global com Menor Preço'
 
     expect(page).to_not have_content 'Nohup'
 
@@ -946,7 +939,7 @@ feature "LicitationProcesses" do
 
     expect(page).to have_content 'Processo de Compra 1/2012'
 
-    expect(page).to have_content 'Apuração: Menor preço global'
+    expect(page).to have_content 'Apuração: Forma Global com Menor Preço'
 
     expect(page).to have_content 'Nohup'
 
@@ -984,7 +977,7 @@ feature "LicitationProcesses" do
 
     expect(page).to have_content 'Processo de Compra 1/2012'
 
-    expect(page).to have_content 'Apuração: Menor preço global'
+    expect(page).to have_content 'Apuração: Forma Global com Menor Preço'
 
     expect(page).to have_content 'Nohup'
 
@@ -1022,7 +1015,7 @@ feature "LicitationProcesses" do
 
     expect(page).to have_content 'Processo de Compra 1/2012'
 
-    expect(page).to have_content 'Apuração: Menor preço global'
+    expect(page).to have_content 'Apuração: Forma Global com Menor Preço'
 
     expect(page).to have_content 'Nohup'
 
@@ -1062,7 +1055,7 @@ feature "LicitationProcesses" do
 
     expect(page).to have_content 'Processo de Compra 1/2012'
 
-    expect(page).to have_content 'Apuração: Menor preço global'
+    expect(page).to have_content 'Apuração: Forma Global com Menor Preço'
 
     expect(page).to have_content 'Nohup'
 
@@ -1100,7 +1093,7 @@ feature "LicitationProcesses" do
 
     expect(page).to have_content 'Processo de Compra 1/2012'
 
-    expect(page).to have_content 'Apuração: Menor preço global'
+    expect(page).to have_content 'Apuração: Forma Global com Menor Preço'
 
     expect(page).to have_content 'Nohup'
 
@@ -1138,7 +1131,7 @@ feature "LicitationProcesses" do
 
     expect(page).to have_content 'Processo de Compra 1/2012'
 
-    expect(page).to have_content 'Apuração: Menor preço global'
+    expect(page).to have_content 'Apuração: Forma Global com Menor Preço'
 
     expect(page).to have_content 'Nohup'
 
@@ -1176,7 +1169,7 @@ feature "LicitationProcesses" do
 
     expect(page).to have_content 'Processo de Compra 1/2012'
 
-    expect(page).to have_content 'Apuração: Menor preço global'
+    expect(page).to have_content 'Apuração: Forma Global com Menor Preço'
 
     expect(page).to have_content 'Gabriel Sobrinho'
 
@@ -1236,7 +1229,7 @@ feature "LicitationProcesses" do
 
     expect(page).to have_content 'Processo de Compra 1/2012'
 
-    expect(page).to have_content 'Apuração: Menor preço por lote'
+    expect(page).to have_content 'Apuração: Por Lote com Menor Preço'
 
     expect(page).to have_content 'Wenderson Malheiros'
 
@@ -1324,7 +1317,7 @@ feature "LicitationProcesses" do
 
     expect(page).to have_content 'Processo de Compra 1/2012'
 
-    expect(page).to have_content 'Apuração: Menor preço total por item'
+    expect(page).to have_content 'Apuração: Por Item com Menor Preço'
 
     expect(page).to have_content 'Wenderson Malheiros'
 
@@ -1444,7 +1437,6 @@ feature "LicitationProcesses" do
       fill_in 'Inciso', :with => 'Item 1'
 
       check 'Registro de preço'
-      select 'Menor preço total por item', :from => 'Tipo da apuração'
       select 'Empreitada integral', :from => 'Forma de execução'
       select 'Fiança bancária', :from => 'Tipo de garantia'
       fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
@@ -1536,7 +1528,6 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
       expect(page).to have_field 'Inciso', :with => 'Item 1'
 
-      expect(page).to have_select 'Tipo da apuração', :selected => 'Menor preço total por item'
       expect(page).to have_select 'Forma de execução', :selected => 'Empreitada integral'
       expect(page).to have_select 'Tipo de garantia', :selected => 'Fiança bancária'
       expect(page).to have_field 'Fonte de recurso', :with => 'Reforma e Ampliação'
@@ -2045,7 +2036,6 @@ feature "LicitationProcesses" do
       fill_in 'Inciso', :with => 'Item 1'
 
       check 'Registro de preço'
-      select 'Menor preço total por item', :from => 'Tipo da apuração'
       select 'Empreitada integral', :from => 'Forma de execução'
       select 'Fiança bancária', :from => 'Tipo de garantia'
       fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
@@ -2372,7 +2362,6 @@ feature "LicitationProcesses" do
       fill_in 'Objeto do processo de compra', :with => 'Licitação para compra de carteiras'
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
       fill_in 'Inciso', :with => 'Item 1'
-      select 'Menor preço total por item', :from => 'Tipo da apuração'
       select 'Empreitada integral', :from => 'Forma de execução'
       select 'Fiança bancária', :from => 'Tipo de garantia'
       fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
@@ -2488,7 +2477,6 @@ feature "LicitationProcesses" do
       fill_in 'Inciso', :with => 'Item 1'
 
       check 'Registro de preço'
-      select 'Menor preço total por item', :from => 'Tipo da apuração'
       select 'Empreitada integral', :from => 'Forma de execução'
       select 'Fiança bancária', :from => 'Tipo de garantia'
       fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'

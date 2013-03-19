@@ -15,7 +15,7 @@ end
 
 JudgmentForm.blueprint(:por_lote_com_melhor_tecnica) do
   description { 'Por Lote com Melhor Técnica' }
-  kind { JudgmentFormKind::PART }
+  kind { JudgmentFormKind::LOT }
   licitation_kind { LicitationKind::BEST_TECHNIQUE }
   enabled { true }
 end
@@ -44,6 +44,13 @@ end
 JudgmentForm.blueprint(:por_item_com_menor_preco) do
   description { 'Por Item com Menor Preço' }
   kind { JudgmentFormKind::ITEM }
+  licitation_kind { LicitationKind::LOWEST_PRICE }
+  enabled { true }
+end
+
+JudgmentForm.blueprint(:por_lote_com_menor_preco) do
+  description { 'Por Lote com Menor Preço' }
+  kind { JudgmentFormKind::LOT }
   licitation_kind { LicitationKind::LOWEST_PRICE }
   enabled { true }
 end

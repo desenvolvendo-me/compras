@@ -726,7 +726,7 @@ feature "Bidders" do
   end
 
   scenario 'should have field technical_score when licitation kind is best_technique' do
-    LicitationProcess.make!(:apuracao_global)
+    LicitationProcess.make!(:apuracao_global, :judgment_form => JudgmentForm.make!(:por_item_com_melhor_tecnica))
 
     navigate 'Processos de Compra > Processos de Compras'
 

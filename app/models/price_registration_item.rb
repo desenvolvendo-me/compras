@@ -8,11 +8,13 @@ class PriceRegistrationItem < Compras::Model
 
   has_many :price_registration_budget_structures, :dependent => :destroy, :inverse_of => :price_registration_item, :order => :id
 
+  has_one :licitation_process, :through => :price_registration
+  has_one :judgment_form, :through => :licitation_process
+
   accepts_nested_attributes_for :price_registration_budget_structures, :allow_destroy => true
 
   delegate :quantity, :reference_unit, :licitation_process_lot,
            :to => :administrative_process_budget_allocation_item, :allow_nil => true
-  delegate :type_of_calculation, :licitation_process, :to => :price_registration
 
   validates :price_registration, :administrative_process_budget_allocation_item,
             :presence => true
@@ -30,11 +32,11 @@ class PriceRegistrationItem < Compras::Model
   end
 
   def winning_bid
-    if type_of_calculation == PriceCollectionTypeOfCalculation::LOWEST_GLOBAL_PRICE
+    if judgment_form.lowest_price? && judgment_form.global?
       licitation_process.winning_bid
-    elsif type_of_calculation == PriceCollectionTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM
+    elsif judgment_form.lowest_price? && judgment_form.item?
       administrative_process_budget_allocation_item.winning_bid
-    elsif type_of_calculation == PriceCollectionTypeOfCalculation::LOWEST_PRICE_BY_LOT
+    elsif judgment_form.lowest_price? && judgment_form.lot?
       licitation_process_lot.winning_bid
     end
   end

@@ -23,6 +23,7 @@ class Bidder < Compras::Model
   has_many :trading_item_closings, :dependent => :restrict
 
   has_one :disqualification, :dependent => :destroy, :class_name => 'BidderDisqualification'
+  has_one :judgment_form, :through => :licitation_process
 
   delegate :document_type_ids, :process_date, :ratification?, :has_trading?,
            :invitation?,
@@ -421,8 +422,8 @@ class Bidder < Compras::Model
   end
 
   def validate_technical_score?
-    return unless licitation_process.present?
+    return unless judgment_form.present?
 
-    licitation_process.judgment_form_best_technique? || licitation_process.judgment_form_technical_and_price?
+    judgment_form.best_technique? || judgment_form.technical_and_price?
   end
 end

@@ -57,28 +57,37 @@ describe Bidder do
 
   context "licitation kind" do
     before do
-      subject.stub(:licitation_process => licitation_process)
+      subject.stub(:judgment_form => judgment_form)
     end
 
     let :licitation_process do
-      double('licitation_process', :allow_bidders? => true, :ratification? => true)
+      double('licitation_process', :allow_bidders? => true, :ratification? => true, :judgment_form => judgment_form)
     end
 
-    it "should validate technical_score when licitation kind is best_technique" do
-      licitation_process.stub(:judgment_form_best_technique?).and_return(true)
-      should validate_presence_of(:technical_score)
+    let(:judgment_form) { double(:judgment_form) }
+
+    context "when judgment_form is best_technique" do
+      before { judgment_form.stub(:best_technique?).and_return(true) }
+
+      it { should validate_presence_of(:technical_score) }
     end
 
-    it "should validate technical_score when licitation kind is technical_and_price" do
-      licitation_process.stub(:judgment_form_best_technique?).and_return(false)
-      licitation_process.stub(:judgment_form_technical_and_price?).and_return(true)
-      should validate_presence_of(:technical_score)
+    context "when judgment_form is technical_and_price" do
+      before do
+        judgment_form.stub(:best_technique?).and_return(false)
+        judgment_form.stub(:technical_and_price?).and_return(true)
+      end
+
+      it { should validate_presence_of(:technical_score) }
     end
 
-    it "should not validate technical_score when licitation kind is not best_technique or technical_and_price" do
-      licitation_process.stub(:judgment_form_best_technique?).and_return(false)
-      licitation_process.stub(:judgment_form_technical_and_price?).and_return(false)
-      should_not validate_presence_of(:technical_score)
+    context "when judgment_form is not best_technique or technical_and_price" do
+      before do
+        judgment_form.stub(:best_technique?).and_return(false)
+        judgment_form.stub(:technical_and_price?).and_return(false)
+      end
+
+      it { should_not validate_presence_of(:technical_score) }
     end
   end
 

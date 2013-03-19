@@ -17,7 +17,8 @@ describe LicitationProcessClassificationSituationGenerator do
       :lots_with_items => [lot],
       :items => [],
       :trading? => false,
-      :consider_law_of_proposals => true
+      :consider_law_of_proposals => true,
+      :judgment_form => judgment_form
     )
   end
 
@@ -91,14 +92,20 @@ describe LicitationProcessClassificationSituationGenerator do
     )
   end
 
+  let :judgment_form do
+    double(:judgment_form,
+           :lowest_price? => true,
+           :item? => false,
+           :lot? => false,
+           :global? => false)
+  end
+
   context 'generate situation of classifications' do
     before do
       licitation_process.stub(
         :all_licitation_process_classifications => classifications,
-        :lowest_global_price? => true,
-        :lowest_total_price_by_item? => false,
-        :lowest_price_by_lot? => false,
         :bidders => [])
+      judgment_form.stub(:global?).and_return(true)
     end
 
     let :classifications do
@@ -202,10 +209,9 @@ describe LicitationProcessClassificationSituationGenerator do
       proposal.stub(:licitation_process_lot => lot)
 
       licitation_process.stub(
-        :all_licitation_process_classifications => classifications,
-        :lowest_global_price? => false,
-        :lowest_total_price_by_item? => false,
-        :lowest_price_by_lot? => true)
+        :all_licitation_process_classifications => classifications)
+
+      judgment_form.stub(:lot?).and_return(true)
     end
 
     let(:classifications) { [] }
@@ -242,10 +248,8 @@ describe LicitationProcessClassificationSituationGenerator do
       licitation_process.stub(
         :bidders => bidders,
         :type_of_calculation => nil,
-        :all_licitation_process_classifications => classifications,
-        :lowest_global_price? => true,
-        :lowest_total_price_by_item? => false,
-        :lowest_price_by_lot? => false)
+        :all_licitation_process_classifications => classifications)
+      judgment_form.stub(:global?).and_return(true)
     end
 
     let :classifications do
@@ -276,10 +280,9 @@ describe LicitationProcessClassificationSituationGenerator do
       licitation_process.stub(
         :items => [item],
         :all_licitation_process_classifications => classifications,
-        :classifications => classifications,
-        :lowest_global_price? => false,
-        :lowest_total_price_by_item? => true,
-        :lowest_price_by_lot? => false)
+        :classifications => classifications)
+
+      judgment_form.stub(:item?).and_return(true)
     end
 
     let :classifications do

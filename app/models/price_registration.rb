@@ -25,10 +25,9 @@ class PriceRegistration < Compras::Model
                    :order => :id
 
   has_one :direct_purchase, :dependent => :restrict
+  has_one :judgment_form, :through => :licitation_process
 
   accepts_nested_attributes_for :items, :allow_destroy => true
-
-  delegate :type_of_calculation, :to => :licitation_process
 
   validates :licitation_process, :year, :presence => true
   validates :date, :timeliness => { :type => :date },

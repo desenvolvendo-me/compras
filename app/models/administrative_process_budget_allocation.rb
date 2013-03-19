@@ -8,8 +8,6 @@ class AdministrativeProcessBudgetAllocation < Compras::Model
 
   delegate :expense_nature, :amount,
            :to => :budget_allocation, :allow_nil => true, :prefix => true
-  delegate :type_of_calculation,
-           :to => :licitation_process, :allow_nil => true
 
   validates :budget_allocation, :value, :presence => true
 end

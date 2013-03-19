@@ -26,12 +26,21 @@ describe LicitationProcessClassificationGenerator do
     double('BidderProposal')
   end
 
+  let :judgment_form do
+    double(:judgment_form,
+           :lowest_price? => true,
+           :item? => false,
+           :lot? => false,
+           :global? => false)
+  end
+
   context 'classification by lowest_global_price' do
     before do
       licitation_process.stub(
-        :type_of_calculation => 'lowest_global_price',
+        :judgment_form => judgment_form,
         :bidders => [bidder1, bidder2, bidder3]
       )
+      judgment_form.stub(:global?).and_return(true)
     end
 
     let :bidder1 do
@@ -118,9 +127,10 @@ describe LicitationProcessClassificationGenerator do
   context 'classification by lowest_total_price_by_item' do
     before do
       licitation_process.stub(
-        :type_of_calculation => 'lowest_total_price_by_item',
+        :judgment_form => judgment_form,
         :items => [item],
       )
+      judgment_form.stub(:item?).and_return(true)
     end
 
     let :item do
@@ -229,10 +239,11 @@ describe LicitationProcessClassificationGenerator do
   context '#lowest_price_by_lot' do
     before do
       licitation_process.stub(
-        :type_of_calculation => 'lowest_price_by_lot',
+        :judgment_form => judgment_form,
         :bidders => [bidder1, bidder2, bidder3],
         :licitation_process_lots => [lot]
       )
+      judgment_form.stub(:lot?).and_return(true)
     end
 
     let :lot do

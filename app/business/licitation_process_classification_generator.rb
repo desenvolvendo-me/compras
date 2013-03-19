@@ -1,7 +1,8 @@
+# encoding: utf-8
 class LicitationProcessClassificationGenerator
   attr_accessor :licitation_process, :classification_repository, :proposal_repository
 
-  delegate :type_of_calculation, :bidders, :items,
+  delegate :judgment_form, :bidders, :items,
            :all_licitation_process_classifications,
            :to => :licitation_process, :allow_nil => true
 
@@ -16,12 +17,20 @@ class LicitationProcessClassificationGenerator
   def generate!
     licitation_process.destroy_all_licitation_process_classifications
 
-    send(type_of_calculation) if type_of_calculation
+    if judgment_form.lowest_price? && judgment_form.item?
+      lowest_price_by_item
+    elsif judgment_form.lowest_price? && judgment_form.global?
+      lowest_global_price
+    elsif judgment_form.lowest_price? && judgment_form.lot?
+      lowest_price_by_lot
+    else
+      puts "impossible generate classification for judgment kind: #{judgment_form.kind} and judgment licitation kind #{judgment_form.licitation_kind}"
+    end
   end
 
   protected
 
-  def lowest_total_price_by_item
+  def lowest_price_by_item
     items.each do |item|
       proposals = proposal_repository.by_item_order_by_unit_price(item.id)
       ordered_proposals = proposals.reject { |proposal| proposal.unit_price <= 0 }

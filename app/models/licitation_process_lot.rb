@@ -9,7 +9,8 @@ class LicitationProcessLot < Compras::Model
   has_many :bidders, :through => :bidder_proposals
   has_many :licitation_process_classifications, :as => :classifiable, :dependent => :destroy
 
-  delegate :type_of_calculation, :to => :licitation_process, :allow_nil => true
+  has_one :judgment_form, :through => :licitation_process
+
   delegate :updatable?, :to => :licitation_process, :prefix => true,
            :allow_nil => true
 

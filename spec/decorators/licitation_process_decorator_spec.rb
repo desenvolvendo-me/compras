@@ -7,6 +7,14 @@ describe LicitationProcessDecorator do
     Time.new(2012, 1, 4, 10)
   end
 
+  let :judgment_form do
+    double(:judgment_form,
+           :lowest_price? => true,
+           :item? => false,
+           :lot? => false,
+           :global? => false)
+  end
+
   context '#envelope_delivery_time' do
     context 'when do not have envelope_delivery_time' do
       before do
@@ -366,4 +374,33 @@ describe LicitationProcessDecorator do
     end
   end
 
+  describe "#type_of_calculation" do
+    before do
+      component.stub(:judgment_form).and_return(judgment_form)
+    end
+
+    context "when lowest_price? and judgment_form.item? is true" do
+      before do
+        judgment_form.stub(:item?).and_return(true)
+      end
+
+      it { expect(subject.type_of_calculation).to eq 'lowest_price_by_item' }
+    end
+
+    context "when lowest_price? and judgment_form.global? is true" do
+      before do
+        judgment_form.stub(:global?).and_return(true)
+      end
+
+      it { expect(subject.type_of_calculation).to eq 'lowest_global_price' }
+    end
+
+    context "when lowest_price? and judgment_form.lot? is true" do
+      before do
+        judgment_form.stub(:lot?).and_return(true)
+      end
+
+      it { expect(subject.type_of_calculation).to eq 'lowest_price_by_lot' }
+    end
+  end
 end

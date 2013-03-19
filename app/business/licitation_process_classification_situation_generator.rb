@@ -4,10 +4,9 @@ class LicitationProcessClassificationSituationGenerator
 
   attr_accessor :licitation_process
 
-  delegate :bidders, :all_licitation_process_classifications,
-           :trading?, :lots_with_items, :items,
-           :consider_law_of_proposals, :lowest_total_price_by_item?,
-           :lowest_price_by_lot?, :lowest_global_price?, :classifications,
+  delegate :bidders, :all_licitation_process_classifications, :trading?,
+           :lots_with_items, :items, :consider_law_of_proposals, :judgment_form,
+           :classifications,
            :to => :licitation_process, :allow_nil => true
 
   def initialize(licitation_process)
@@ -27,7 +26,7 @@ class LicitationProcessClassificationSituationGenerator
   private
 
   def generate_situation_by_bidder
-    return unless lowest_global_price?
+    return unless judgment_form.lowest_price? && judgment_form.global?
 
     valid_classifications = all_licitation_process_classifications.reject(&:disqualified?).sort_by(&:classification)
 
@@ -37,7 +36,7 @@ class LicitationProcessClassificationSituationGenerator
   end
 
   def generate_situation_by_lot
-    return unless lowest_price_by_lot?
+    return unless judgment_form.lowest_price? && judgment_form.lot?
 
     lots_with_items.each do |lot|
       valid_classifications = lot.licitation_process_classifications.for_active_bidders.reject(&:disqualified?).sort_by(&:classification)
@@ -49,7 +48,7 @@ class LicitationProcessClassificationSituationGenerator
   end
 
   def generate_situation_by_item
-    return unless lowest_total_price_by_item?
+    return unless judgment_form.lowest_price? && judgment_form.item?
 
     items.each do |item|
       valid_classifications = classifications.for_active_bidders.for_item(item.id).reject(&:disqualified?).sort_by(&:classification)

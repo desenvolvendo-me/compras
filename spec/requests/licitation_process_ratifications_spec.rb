@@ -7,7 +7,8 @@ feature "LicitationProcessRatifications" do
   end
 
   scenario 'creating a new ratification' do
-    LicitationProcess.make!(:processo_licitatorio_computador)
+    LicitationProcess.make!(:processo_licitatorio_computador,
+                            :judgment_form => JudgmentForm.make!(:por_item_com_menor_preco))
     BidderProposal.make!(:proposta_licitante_1, :bidder => Bidder.make!(:licitante))
 
     navigate 'Processos de Compra > Processos de Compras'
@@ -115,7 +116,8 @@ feature "LicitationProcessRatifications" do
   end
 
   scenario 'cleaning items' do
-    LicitationProcess.make!(:processo_licitatorio_computador)
+    LicitationProcess.make!(:processo_licitatorio_computador,
+                            :judgment_form => JudgmentForm.make!(:por_item_com_menor_preco))
     BidderProposal.make!(:proposta_licitante_1, :bidder => Bidder.make!(:licitante))
 
     navigate 'Processos de Compra > Processos de Compras'

@@ -14,6 +14,7 @@ describe PriceRegistration do
   it { should have_many(:items).dependent(:destroy) }
 
   it { should have_one(:direct_purchase).dependent(:restrict) }
+  it { should have_one(:judgment_form).through(:licitation_process) }
 
   it { should validate_presence_of :licitation_process }
   it { should validate_presence_of :year }

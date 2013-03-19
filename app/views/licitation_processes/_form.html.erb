@@ -330,59 +330,6 @@
     itemDiv.find('.item-unit-price').val(unitPrice);
   });
 
-  function filterTypesOfCalculation (judgmentKind) {
-    var modality = $("#licitation_process_modality").val(),
-        objectType = $("#licitation_process_object_type").val(),
-        typesOfCalculationGroupsForJudgmentFormKind = <%= LicitationProcessTypesOfCalculationByJudgmentFormKind.new.types_of_calculation_groups.to_json.html_safe %>,
-        typesOfCalculationGroupsForObjectType   = <%= LicitationProcessTypesOfCalculationByObjectType.new.types_of_calculation_groups.to_json.html_safe %>,
-        typesOfCalculationGroupsForModality     = <%= LicitationProcessTypesOfCalculationByModality.new.types_of_calculation_groups.to_json.html_safe %>,
-        typesOfCalculationOptions               = _(<%= LicitationProcessTypeOfCalculation.to_a.to_json.html_safe %>),
-        options                                 = typesOfCalculationGroupsForJudgmentFormKind[judgmentKind] || [],
-        optionsForObjectType                    = _(typesOfCalculationGroupsForObjectType[objectType] || []),
-        optionsForModality                      = _(typesOfCalculationGroupsForModality[modality] || []);
-
-    if (!optionsForObjectType.include(options[1])) {
-      delete options[1];
-    }
-
-    if (!optionsForModality.include(options[2])) {
-      delete options[2];
-    }
-
-    if (_.size(options) == 0) {
-      $("#licitation_process_type_of_calculation").empty().closest("div.input").hide();
-      return;
-    }
-
-    $("#licitation_process_type_of_calculation").html("<option></option>").closest("div.input").show();
-
-    typesOfCalculationOptions.each(function (option) {
-      if (modality == 'auction') {
-        if (optionsForModality.include(option[1])) {
-          $("#licitation_process_type_of_calculation").append(function () {
-            return $("<option>").text(option[0]).val(option[1]);
-          });
-        }
-      } else {
-        if (_(options).include(option[1])) {
-          $("#licitation_process_type_of_calculation").append(function () {
-            return $("<option>").text(option[0]).val(option[1]);
-          });
-        }
-      }
-    });
-  }
-
-  $("#licitation_process_judgment_form_id").on('change', function(event, judgmentForm) {
-    var option = $('#licitation_process_judgment_form_id option[value="'+ $(this).val() + '"]');
-
-    if (option) {
-      filterTypesOfCalculation(option.data('kind'));
-    }
-  });
-
-  $("#licitation_process_type_of_calculation").val("<%= f.object.type_of_calculation %>");
-
   calcItemOrder();
 
   <% unless resource.updatable? %>

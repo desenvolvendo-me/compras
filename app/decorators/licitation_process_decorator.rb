@@ -95,6 +95,16 @@ class LicitationProcessDecorator
     component.budget_allocations.uniq.join(', ')
   end
 
+  def type_of_calculation
+    if judgment_form.lowest_price? && judgment_form.item?
+      "lowest_price_by_item"
+    elsif judgment_form.lowest_price? && judgment_form.global?
+      "lowest_global_price"
+    elsif judgment_form.lowest_price? && judgment_form.lot?
+      "lowest_price_by_lot"
+    end
+  end
+
   private
 
   def current_publication_of
