@@ -6,7 +6,7 @@ feature "DeliveryLocations" do
     sign_in
   end
 
-  scenario 'create a new delivery_location' do
+  scenario 'create, update and destroy a new delivery_location' do
     Address.make!(:general)
 
     navigate 'Comum > Locais de Entrega'
@@ -48,15 +48,6 @@ feature "DeliveryLocations" do
     expect(page).to have_field "Cidade", :with => 'Curitiba'
     expect(page).to have_field 'CEP', :with => '88900-000'
     expect(page).to have_field "Estado", :with => 'Paraná'
-  end
-
-  scenario 'update an existent delivery_location' do
-    Address.make!(:general)
-    DeliveryLocation.make!(:education)
-
-    navigate 'Comum > Locais de Entrega'
-
-    click_link 'Secretaria da Educação'
 
     fill_in 'Descrição', :with => 'Secretaria da Saúde'
     fill_modal 'Logradouro', :with => 'Girassol'
@@ -92,14 +83,6 @@ feature "DeliveryLocations" do
     expect(page).to have_field "Cidade", :with => 'Curitiba'
     expect(page).to have_field 'CEP', :with => '88900-000'
     expect(page).to have_field "Estado", :with => 'Paraná'
-  end
-
-  scenario 'destroy an existent delivery_location' do
-    DeliveryLocation.make!(:education)
-
-    navigate 'Comum > Locais de Entrega'
-
-    click_link 'Secretaria da Educação'
 
     click_link 'Apagar'
 
