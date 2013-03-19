@@ -6,7 +6,7 @@ feature "DocumentTypes" do
     sign_in
   end
 
-  scenario 'create a new document_type' do
+  scenario 'create, update and destroy a new document_type' do
     navigate 'Comum > Tipos de Documento'
 
     click_link 'Criar Tipo de Documento'
@@ -22,14 +22,6 @@ feature "DocumentTypes" do
 
     expect(page).to have_field 'Validade em dias', :with => '10'
     expect(page).to have_field 'Descrição', :with => 'Fiscal'
-  end
-
-  scenario 'update an existent document_type' do
-    DocumentType.make!(:fiscal)
-
-    navigate 'Comum > Tipos de Documento'
-
-    click_link 'Fiscal'
 
     fill_in 'Validade em dias', :with => '20'
     fill_in 'Descrição', :with => 'Oficial'
@@ -42,6 +34,13 @@ feature "DocumentTypes" do
 
     expect(page).to have_field 'Validade em dias', :with => '20'
     expect(page).to have_field 'Descrição', :with => 'Oficial'
+
+    click_link 'Apagar'
+
+    expect(page).to have_notice 'Tipo de Documento apagado com sucesso.'
+
+    expect(page).to_not have_content '10'
+    expect(page).to_not have_content 'Fiscal'
   end
 
   scenario 'cannot destroy an existent document_type with licitation_process relationship' do
@@ -56,21 +55,6 @@ feature "DocumentTypes" do
     expect(page).to_not have_notice 'Tipo de Documento apagado com sucesso.'
 
     expect(page).to have_alert 'Tipo de Documento não pode ser apagado.'
-  end
-
-  scenario 'destroy an existent document_type' do
-    DocumentType.make!(:fiscal)
-
-    navigate 'Comum > Tipos de Documento'
-
-    click_link 'Fiscal'
-
-    click_link 'Apagar'
-
-    expect(page).to have_notice 'Tipo de Documento apagado com sucesso.'
-
-    expect(page).to_not have_content '10'
-    expect(page).to_not have_content 'Fiscal'
   end
 
   scenario 'index with columns at the index' do
