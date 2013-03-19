@@ -6,7 +6,7 @@ feature "Employees" do
     sign_in
   end
 
-  scenario 'create a new employee' do
+  scenario 'create, update and destroy a new employee' do
     Person.make!(:sobrinho)
     Position.make!(:gerente)
 
@@ -29,42 +29,20 @@ feature "Employees" do
     expect(page).to have_field 'Pessoa', :with => 'Gabriel Sobrinho'
     expect(page).to have_field 'Cargo', :with => 'Gerente'
     expect(page).to have_field 'Matrícula', :with => '958473'
-  end
 
-  scenario 'update an existent employee' do
-    Person.make!(:wenderson)
-    Employee.make!(:sobrinho)
-    Position.make!(:supervisor)
-
-    navigate 'Geral > Usuários > Funcionários'
-
-    within_records do
-      click_link 'Gabriel Sobrinho'
-    end
-
-    fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
-    fill_modal 'Cargo', :with => 'Supervisor'
+    fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
+    fill_modal 'Cargo', :with => 'Gerente'
     fill_in 'Matrícula', :with => '123456'
 
     click_button 'Salvar'
 
     expect(page).to have_notice 'Funcionário editado com sucesso.'
 
-    click_link 'Wenderson Malheiros'
+    click_link 'Gabriel Sobrinho'
 
-    expect(page).to have_field 'Pessoa', :with => 'Wenderson Malheiros'
-    expect(page).to have_field 'Cargo', :with => 'Supervisor'
+    expect(page).to have_field 'Pessoa', :with => 'Gabriel Sobrinho'
+    expect(page).to have_field 'Cargo', :with => 'Gerente'
     expect(page).to have_field 'Matrícula', :with => '123456'
-  end
-
-  scenario 'destroy an existent employee' do
-    Employee.make!(:sobrinho)
-
-    navigate 'Geral > Usuários > Funcionários'
-
-    within_records do
-      click_link 'Gabriel Sobrinho'
-    end
 
     click_link 'Apagar'
 
