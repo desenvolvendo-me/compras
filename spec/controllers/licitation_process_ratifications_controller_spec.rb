@@ -6,10 +6,13 @@ describe LicitationProcessRatificationsController do
   end
 
   it 'uses current date as default value for date fields' do
-    get :new
+    licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
+
+    get :new, :licitation_process_id => licitation_process.id
 
     expect(assigns(:licitation_process_ratification).ratification_date).to eq Date.current
     expect(assigns(:licitation_process_ratification).adjudication_date).to eq Date.current
+    expect(assigns(:licitation_process_ratification).licitation_process).to eq licitation_process
   end
 
   it 'should not allow destroy' do

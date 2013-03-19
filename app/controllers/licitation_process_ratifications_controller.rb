@@ -5,8 +5,17 @@ class LicitationProcessRatificationsController < CrudController
     object = build_resource
     object.ratification_date = Date.current
     object.adjudication_date = Date.current
+    object.licitation_process = LicitationProcess.find(params[:licitation_process_id])
 
     super
+  end
+
+  def create
+    create! { licitation_process_ratifications_path(:licitation_process_id => resource.licitation_process_id) }
+  end
+
+  def update
+    update! { licitation_process_ratifications_path(:licitation_process_id => resource.licitation_process_id) }
   end
 
   def show
@@ -14,6 +23,12 @@ class LicitationProcessRatificationsController < CrudController
   end
 
   protected
+
+  def begin_of_association_chain
+    if params[:licitation_process_id]
+      @parent = LicitationProcess.find(params[:licitation_process_id])
+    end
+  end
 
   def create_resource(object)
     object.transaction do

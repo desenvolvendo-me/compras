@@ -4,7 +4,7 @@
   </div>
 
   <div class="yui3-u-1-3">
-    <%= f.input :licitation_process, :disabled => f.object.persisted? %>
+    <%= f.input :licitation_process %>
   </div>
 
   <div class="yui3-u-1-3">
@@ -60,26 +60,6 @@
     $('table.records input:checkbox').attr('checked', this.checked);
   });
 
-  $("#licitation_process_ratification_licitation_process_id").change(function (event, licitationProcess) {
-    if (licitationProcess) {
-      var urlModal = "<%= modal_bidders_path %>?",
-      params = {
-        locked_fields: ['licitation_process'],
-        licitation_process_id: licitationProcess.id,
-        won_calculation: true,
-        without_ratification: true
-      };
-
-      urlModal += jQuery.param(params);
-
-      $("#licitation_process_ratification_bidder").data("modal-url", urlModal).
-                                                   attr("disabled", false);
-    } else {
-      $('#licitation_process_ratification_bidder_id').val('');
-      $('#licitation_process_ratification_bidder').val('').attr('disabled', true);
-    }
-  });
-
   function clearExistingItems() {
     $('.ratification_item').each(function() {
       $(this).find('input.destroy').attr('value', 'true');
@@ -98,7 +78,7 @@
 
       $.each(bidder.proposals, function() {
         item = $('#item-template').mustache({ uuid_item: _.uniqueId('fresh-'),
-                                              id: this.id,
+                                              bidder_proposal_id: this.id,
                                               code: this.code,
                                               description: this.description,
                                               quantity: this.quantity,
@@ -111,5 +91,23 @@
     } else {
       clearExistingItems();
     }
-  })
+  });
+
+  $(function() {
+    var urlModal = "<%= modal_bidders_path %>?",
+        licitationProcessId = $('#licitation_process_ratification_licitation_process_id').val(),
+        params = {
+          locked_fields: ['licitation_process'],
+          licitation_process_id: licitationProcessId,
+          won_calculation: true,
+          without_ratification: true
+        };
+
+    urlModal += jQuery.param(params);
+
+    $("#licitation_process_ratification_bidder").data("modal-url", urlModal).
+                                                 attr("disabled", false);
+
+    $('#licitation_process_ratification_licitation_process').attr('disabled', true);
+  });
 </script>
