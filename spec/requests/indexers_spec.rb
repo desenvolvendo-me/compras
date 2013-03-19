@@ -6,7 +6,7 @@ feature "Indexers" do
     sign_in
   end
 
-  scenario 'create a new indexer' do
+  scenario 'create, update and destroy a new indexer' do
     Currency.make!(:real)
 
     navigate 'Comum > Cadastrais > Indexadores'
@@ -32,14 +32,6 @@ feature "Indexers" do
     expect(page).to have_field 'Moeda', :with => 'Real'
     expect(page).to have_field 'Data', :with => '01/05/2011'
     expect(page).to have_field 'Valor', :with => '0,990000'
-  end
-
-  scenario 'update a indexer' do
-    Indexer.make!(:selic)
-
-    navigate 'Comum > Cadastrais > Indexadores'
-
-    click_link 'SELIC'
 
     fill_in 'Valor', :with => '0,840000'
 
@@ -50,14 +42,6 @@ feature "Indexers" do
     click_link 'SELIC'
 
     expect(page).to have_field 'Valor', :with => '0,840000'
-  end
-
-  scenario 'destroy an existent indexer' do
-    Indexer.make!(:selic)
-
-    navigate 'Comum > Cadastrais > Indexadores'
-
-    click_link 'SELIC'
 
     click_link 'Apagar'
 
@@ -66,7 +50,7 @@ feature "Indexers" do
     expect(page).to_not have_content 'SELIC'
     expect(page).to_not have_content 'Real'
     expect(page).to_not have_content '01/05/2011'
-    expect(page).to_not have_content '0,990000'
+    expect(page).to_not have_content '084,0000'
   end
 
   scenario 'index with columns at the index' do
