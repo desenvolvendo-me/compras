@@ -6,7 +6,7 @@ feature "CompanySizes" do
     sign_in
   end
 
-  scenario 'create a new company_size' do
+  scenario 'create, update and destroy a new company_size' do
     navigate 'Comum > Pessoas > Auxiliar > Portes das Empresas'
 
     click_link 'Criar Porte da Empresa'
@@ -26,14 +26,6 @@ feature "CompanySizes" do
     expect(page).to have_field 'Sigla', :with => 'EMP'
     expect(page).to have_field 'Número', :with => '3'
     expect(page).to have_checked_field 'Beneficiado pela lei 123/2006'
-  end
-
-  scenario 'update an existent company_size' do
-    CompanySize.make!(:micro_empresa)
-
-    navigate 'Comum > Pessoas > Auxiliar > Portes das Empresas'
-
-    click_link 'Microempresa'
 
     fill_in 'Nome', :with => 'Microempreendedor individual'
     fill_in 'Sigla', :with => 'MEI'
@@ -48,14 +40,6 @@ feature "CompanySizes" do
     expect(page).to have_field 'Nome', :with => 'Microempreendedor individual'
     expect(page).to have_field 'Sigla', :with => 'MEI'
     expect(page).to have_field 'Número', :with => '5'
-  end
-
-  scenario 'destroy an existent company_size' do
-    CompanySize.make!(:empresa_de_grande_porte)
-
-    navigate 'Comum > Pessoas > Auxiliar > Portes das Empresas'
-
-    click_link 'Empresa de grande porte'
 
     click_link 'Apagar'
 
