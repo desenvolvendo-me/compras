@@ -62,7 +62,7 @@ feature "Contracts" do
     expect(page).to_not have_disabled_field 'Contrato principal'
   end
 
-  scenario 'create a new contract' do
+  scenario 'create, update and destroy a new contract' do
     Entity.make!(:detran)
     LicitationProcess.make!(:processo_licitatorio)
     DisseminationSource.make!(:jornal_municipal)
@@ -156,19 +156,6 @@ feature "Contracts" do
     expect(page).to have_field 'O.A.B. do advogado responsável', :with => '5678'
 
     expect(page).to have_link 'other_example_document.txt'
-  end
-
-  scenario 'update an existent contract' do
-    Contract.make!(:primeiro_contrato)
-    Entity.make!(:secretaria_de_educacao)
-
-    navigate 'Comum > Cadastrais > Contratos'
-
-    click_link "Limpar Filtro"
-
-    within_records do
-      page.find('a').click
-    end
 
     fill_in 'Ano do contrato', :with => '2013'
     fill_in 'Número do contrato', :with => '111'
@@ -191,18 +178,6 @@ feature "Contracts" do
     expect(page).to have_field 'Data de validade', :with => '30/12/2013'
     expect(page).to have_select 'Subcontratação', :selected => 'Não'
     expect(page).to have_link 'example_document.txt'
-  end
-
-  scenario 'destroy an existent contract' do
-    Contract.make!(:primeiro_contrato)
-
-    navigate 'Comum > Cadastrais > Contratos'
-
-    click_link "Limpar Filtro"
-
-    within_records do
-      page.find('a').click
-    end
 
     click_link 'Apagar'
 
