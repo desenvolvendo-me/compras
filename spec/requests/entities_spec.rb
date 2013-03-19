@@ -6,7 +6,7 @@ feature "Entities" do
     sign_in
   end
 
-  scenario 'create a new entity' do
+  scenario 'create, update and destroy a new entity' do
     navigate 'Geral > Parâmetros > Entidades'
 
     click_link 'Criar Entidade'
@@ -20,14 +20,6 @@ feature "Entities" do
     click_link 'Denatran'
 
     expect(page).to have_field 'Nome', :with => 'Denatran'
-  end
-
-  scenario 'update an existent entity' do
-    Entity.make!(:detran)
-
-    navigate 'Geral > Parâmetros > Entidades'
-
-    click_link 'Detran'
 
     fill_in 'Nome', :with => 'Contran'
 
@@ -38,20 +30,12 @@ feature "Entities" do
     click_link 'Contran'
 
     expect(page).to have_field 'Nome', :with => 'Contran'
-  end
-
-  scenario 'destroy an existent entity' do
-    Entity.make!(:detran)
-
-    navigate 'Geral > Parâmetros > Entidades'
-
-    click_link 'Detran'
 
     click_link 'Apagar'
 
     expect(page).to have_notice 'Entidade apagada com sucesso.'
 
-    expect(page).to_not have_content 'Detran'
+    expect(page).to_not have_content 'Contran'
   end
 
   scenario 'index with columns at the index' do
