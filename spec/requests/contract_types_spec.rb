@@ -6,7 +6,7 @@ feature "ContractType" do
     sign_in
   end
 
-  scenario 'create a new service' do
+  scenario 'create, update and destroy a new service' do
     navigate 'Comum > Tipos de Contrato'
 
     click_link 'Criar Tipo de Contrato'
@@ -24,14 +24,6 @@ feature "ContractType" do
     expect(page).to have_field 'Código do TCE', :with => '123'
     expect(page).to have_field 'Descrição', :with => 'Contratação de estagiários'
     expect(page).to have_select 'Finalidade', :selected => 'Estagiário'
-  end
-
-  scenario 'update an existent service' do
-    ContractType.make!(:trainees)
-
-    navigate 'Comum > Tipos de Contrato'
-
-    click_link 'Contratação de estagiários'
 
     fill_in 'Descrição', :with => 'Contratação de 10 estagiários'
 
@@ -44,14 +36,6 @@ feature "ContractType" do
     expect(page).to have_field 'Código do TCE', :with => '123'
     expect(page).to have_field 'Descrição', :with => 'Contratação de 10 estagiários'
     expect(page).to have_select 'Finalidade', :selected => 'Estagiário'
-  end
-
-  scenario 'destroy an existent service' do
-    ContractType.make!(:trainees)
-
-    navigate 'Comum > Tipos de Contrato'
-
-    click_link 'Contratação de estagiários'
 
     click_link 'Apagar'
 
