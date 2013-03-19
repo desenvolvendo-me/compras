@@ -6,7 +6,7 @@ feature "CommunicationSources" do
     sign_in
   end
 
-  scenario 'create a new communication_source' do
+  scenario 'create, update a new communication_source' do
     navigate 'Comum > Legislação > Tipos do Meio de Divulgação'
 
     click_link 'Criar Tipo do Meio de Divulgação'
@@ -20,14 +20,6 @@ feature "CommunicationSources" do
     click_link 'Jornal de Circulação Municipal'
 
     expect(page).to have_field 'Descrição', :with => 'Jornal de Circulação Municipal'
-  end
-
-  scenario 'update an existent communication_source' do
-    CommunicationSource.make!(:jornal_municipal)
-
-    navigate 'Comum > Legislação > Tipos do Meio de Divulgação'
-
-    click_link 'Jornal de Circulação Municipal'
 
     fill_in 'Descrição', :with => 'Revista de Circulação Municipal'
 
@@ -38,14 +30,6 @@ feature "CommunicationSources" do
     click_link 'Revista de Circulação Municipal'
 
     expect(page).to have_field 'Descrição', :with => 'Revista de Circulação Municipal'
-  end
-
-  scenario 'destroy an existent communication_source' do
-    CommunicationSource.make!(:jornal_municipal)
-
-    navigate 'Comum > Legislação > Tipos do Meio de Divulgação'
-
-    click_link 'Jornal de Circulação Municipal'
 
     click_link 'Apagar'
 
