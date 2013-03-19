@@ -6,10 +6,7 @@ feature "Condominia" do
     sign_in
   end
 
-  scenario 'create a new condominium' do
-    Neighborhood.make!(:sao_francisco)
-    Street.make!(:girassol)
-
+  scenario 'create, update and destroy a new condominium' do
     navigate 'Geral > Parâmetros > Endereços > Condomínios'
 
     click_link 'Criar Condomínio'
@@ -25,14 +22,6 @@ feature "Condominia" do
 
     expect(page).to have_field 'Nome', :with => 'Tambuata'
     expect(page).to have_select 'Tipo de condomínio', :selected => 'Vertical'
-  end
-
-  scenario 'update a condominium' do
-    Condominium.make!(:tambuata)
-
-    navigate 'Geral > Parâmetros > Endereços > Condomínios'
-
-    click_link 'Tambuata'
 
     fill_in 'Nome', :with => 'Parque das Flores'
 
@@ -43,14 +32,6 @@ feature "Condominia" do
     click_link 'Parque das Flores'
 
     expect(page).to have_field 'Nome', :with => 'Parque das Flores'
-  end
-
-  scenario 'destroy a condominium' do
-    Condominium.make!(:tambuata)
-
-    navigate 'Geral > Parâmetros > Endereços > Condomínios'
-
-    click_link 'Tambuata'
 
     click_link 'Apagar'
 
