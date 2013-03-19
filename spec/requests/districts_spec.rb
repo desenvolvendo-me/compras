@@ -6,7 +6,9 @@ feature "Districts" do
     sign_in
   end
 
-  scenario 'create a new district' do
+  scenario 'create, update and destroy a new district' do
+    City.make!(:belo_horizonte)
+
     navigate 'Geral > Parâmetros > Endereços > Distritos'
 
     click_link 'Criar Distrito'
@@ -22,32 +24,16 @@ feature "Districts" do
 
     expect(page).to have_field 'Nome', :with => 'Leste'
     expect(page).to have_field 'Cidade', :with => 'Belo Horizonte'
-  end
 
-  scenario 'update a district' do
-    District.make!(:sul)
-
-    navigate 'Geral > Parâmetros > Endereços > Distritos'
-
-    click_link 'Sul'
-
-    fill_in 'Nome', :with => 'Oeste'
+    fill_in 'Nome', :with => 'Sul'
 
     click_button 'Salvar'
 
     expect(page).to have_notice 'Distrito editado com sucesso.'
 
-    click_link 'Oeste'
-
-    expect(page).to have_field 'Nome', :with => 'Oeste'
-  end
-
-  scenario 'destroy a district' do
-    District.make!(:sul)
-
-    navigate 'Geral > Parâmetros > Endereços > Distritos'
-
     click_link 'Sul'
+
+    expect(page).to have_field 'Nome', :with => 'Sul'
 
     click_link 'Apagar'
 
