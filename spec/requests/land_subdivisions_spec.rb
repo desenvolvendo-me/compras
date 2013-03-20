@@ -6,7 +6,7 @@ feature "LandSubdivisions" do
     sign_in
   end
 
-  scenario 'create a new land subdivision' do
+  scenario 'create, update and destroy a new land subdivision' do
     navigate 'Geral > Parâmetros > Endereços > Loteamentos'
 
     click_link 'Criar Loteamento'
@@ -20,14 +20,6 @@ feature "LandSubdivisions" do
     click_link 'Oportunity'
 
     expect(page).to have_field 'Nome', :with => 'Oportunity'
-  end
-
-  scenario 'update a land subdivision' do
-    LandSubdivision.make!(:solar_da_serra)
-
-    navigate 'Geral > Parâmetros > Endereços > Loteamentos'
-
-    click_link 'Solar da Serra'
 
     fill_in 'Nome', :with => 'Monte Verde'
 
@@ -38,22 +30,11 @@ feature "LandSubdivisions" do
     click_link 'Monte Verde'
 
     expect(page).to have_field 'Nome', :with => 'Monte Verde'
-  end
-
-  scenario 'destroy a land subdivision' do
-    LandSubdivision.make!(:terra_prometida)
-
-    navigate 'Geral > Parâmetros > Endereços > Loteamentos'
-
-    click_link 'Terra Prometida'
 
     click_link 'Apagar'
 
     expect(page).to have_notice 'Loteamento apagado com sucesso.'
-
-    within_records do
-      expect(page).to_not have_content 'Terra Prometida'
-    end
+    expect(page).to_not have_content 'Monte Verde'
   end
 
   scenario 'index with columns at the index' do
