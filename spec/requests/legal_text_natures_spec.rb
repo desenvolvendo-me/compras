@@ -6,7 +6,7 @@ feature "LegalTextNatures" do
     sign_in
   end
 
-  scenario 'create a new legal_texts_nature' do
+  scenario 'create, update and destroy a new legal_texts_nature' do
     navigate 'Comum > Legislação > Naturezas de Textos Jurídicos'
 
     click_link 'Criar Natureza de Textos Jurídicos'
@@ -20,14 +20,6 @@ feature "LegalTextNatures" do
     click_link 'Natureza Cívica'
 
     expect(page).to have_field 'Descrição', :with => 'Natureza Cívica'
-  end
-
-  scenario 'update an existent legal_texts_nature' do
-    LegalTextNature.make!(:civica)
-
-    navigate 'Comum > Legislação > Naturezas de Textos Jurídicos'
-
-    click_link 'Natureza Cívica'
 
     fill_in 'Descrição', :with => 'Natureza Jurídica'
 
@@ -38,20 +30,12 @@ feature "LegalTextNatures" do
     click_link 'Natureza Jurídica'
 
     expect(page).to have_field 'Descrição', :with => 'Natureza Jurídica'
-  end
-
-  scenario 'destroy an existent legal_texts_nature' do
-    LegalTextNature.make!(:civica)
-
-    navigate 'Comum > Legislação > Naturezas de Textos Jurídicos'
-
-    click_link 'Natureza Cívica'
 
     click_link 'Apagar'
 
     expect(page).to have_notice 'Natureza de Textos Jurídicos apagada com sucesso.'
 
-    expect(page).to_not have_content 'Natureza Cívica'
+    expect(page).to_not have_content 'Natureza Jurídica'
   end
 
   scenario 'index with columns at the index' do
