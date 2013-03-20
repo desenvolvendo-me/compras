@@ -153,10 +153,12 @@
       $('div.modality').removeClass('hidden');
       $('div.type-of-removal').addClass('hidden');
       $('label[for="licitation_process_modality_number"]').html('Nº da modalidade');
+      $('a[href="#tab-items"]').html("Itens");
     } else {
       $('div.modality').addClass('hidden');
       $('div.type-of-removal').removeClass('hidden');
       $('label[for="licitation_process_modality_number"]').html('Nº do afastamento');
+      $('a[href="#tab-items"]').html("Itens / Justificativa");
     }
   };
 

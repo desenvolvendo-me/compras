@@ -100,7 +100,7 @@ feature "LicitationProcesses" do
       fill_in 'Valor previsto', :with => '20,00'
     end
 
-    within_tab "Itens / Justificativa" do
+    within_tab "Itens" do
       click_button 'Adicionar Item'
 
       fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
@@ -200,7 +200,7 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Valor previsto', :with => '20,00'
     end
 
-    within_tab "Itens / Justificativa" do
+    within_tab "Itens" do
       expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
       expect(page).to have_field 'Unidade', :with => 'UN'
       expect(page).to have_field 'Quantidade', :with => '2'
@@ -323,7 +323,7 @@ feature "LicitationProcesses" do
       fill_in 'Valor previsto', :with => '20,00'
     end
 
-    within_tab 'Itens / Justificativa' do
+    within_tab 'Itens' do
       click_button 'Remover Item'
 
       click_button 'Adicionar Item'
@@ -395,7 +395,7 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Valor previsto', :with => '20,00'
     end
 
-    within_tab "Itens / Justificativa" do
+    within_tab "Itens" do
       expect(page).to have_field 'Material', :with => '02.02.00001 - Arame farpado'
       expect(page).to have_field 'Unidade', :with => 'UN'
       expect(page).to have_field 'Quantidade', :with => '5'
@@ -462,7 +462,7 @@ feature "LicitationProcesses" do
 
     click_link 'Criar Processo de Compra'
 
-    within_tab 'Itens / Justificativa' do
+    within_tab 'Itens' do
       click_button 'Adicionar Item'
 
       fill_in 'Quantidade', :with => '5'
@@ -556,7 +556,7 @@ feature "LicitationProcesses" do
     click_link 'Documentos'
     expect(page).to have_disabled_element 'Remover', :reason => 'a última publicação é do tipo (Cancelamento). Não pode ser alterado'
 
-    click_link 'Itens / Justificativa'
+    click_link 'Itens'
     expect(page).to have_disabled_element 'Adicionar Item', :reason => 'a última publicação é do tipo (Cancelamento). Não pode ser alterado'
     expect(page).to have_disabled_element 'Remover Item', :reason => 'a última publicação é do tipo (Cancelamento). Não pode ser alterado'
   end
@@ -580,7 +580,7 @@ feature "LicitationProcesses" do
       click_link '1/2012'
     end
 
-    within_tab 'Itens / Justificativa' do
+    within_tab 'Itens' do
       click_button 'Remover Item'
       click_button 'Adicionar Item'
 
@@ -692,7 +692,7 @@ feature "LicitationProcesses" do
 
     click_link 'Criar Processo de Compra'
 
-    within_tab 'Itens / Justificativa' do
+    within_tab 'Itens' do
       click_button 'Adicionar Item'
 
       within '.nested-licitation-process-item:last' do
@@ -1493,7 +1493,7 @@ feature "LicitationProcesses" do
       expect(page).to_not have_button 'Remover Dotação'
     end
 
-    within_tab "Itens / Justificativa" do
+    within_tab "Itens" do
       expect(page).to have_field 'Item', :with => '1'
       expect(page).to have_readonly_field 'Item'
 
@@ -1575,7 +1575,7 @@ feature "LicitationProcesses" do
       expect(page).to_not have_button 'Remover Dotação'
     end
 
-    within_tab "Itens / Justificativa" do
+    within_tab "Itens" do
       expect(page).to have_field 'Item', :with => '1'
       expect(page).to have_readonly_field 'Item'
 
@@ -1656,7 +1656,7 @@ feature "LicitationProcesses" do
       expect(page).to_not have_button 'Remover Dotação'
     end
 
-    within_tab "Itens / Justificativa" do
+    within_tab "Itens" do
       expect(page).to have_field 'Item', :with => '1'
       expect(page).to have_readonly_field 'Item'
 
@@ -2525,7 +2525,7 @@ feature "LicitationProcesses" do
       expect(page).to_not have_button 'Remover Dotação'
     end
 
-    within_tab "Itens / Justificativa" do
+    within_tab "Itens" do
       expect(page).to have_field 'Item', :with => '1'
       expect(page).to have_readonly_field 'Item'
 
@@ -2570,7 +2570,7 @@ feature "LicitationProcesses" do
       expect(page).to_not have_button 'Remover Dotação'
     end
 
-    within_tab 'Itens / Justificativa' do
+    within_tab 'Itens' do
       expect(page).to have_field 'Item', :with => '1'
       expect(page).to have_disabled_field 'Item'
 
