@@ -6,7 +6,7 @@ feature "Currencies" do
     sign_in
   end
 
-  scenario 'create a new currency' do
+  scenario 'create,update and destroy a new currency' do
     navigate 'Comum > Cadastrais > Moedas'
 
     click_link 'Criar Moeda'
@@ -22,14 +22,6 @@ feature "Currencies" do
 
     expect(page).to have_field 'Nome', :with => 'Real'
     expect(page).to have_field 'Sigla', :with => 'R$'
-  end
-
-  scenario 'update a currency' do
-    Currency.make!(:real)
-
-    navigate 'Comum > Cadastrais > Moedas'
-
-    click_link 'Real'
 
     fill_in 'Nome', :with => 'Peso'
     fill_in 'Sigla', :with => '$'
@@ -42,20 +34,12 @@ feature "Currencies" do
 
     expect(page).to have_field 'Nome', :with => 'Peso'
     expect(page).to have_field 'Sigla', :with => '$'
-  end
-
-  scenario 'destroy a currency' do
-    Currency.make!(:real)
-
-    navigate 'Comum > Cadastrais > Moedas'
-
-    click_link 'Real'
 
     click_link 'Apagar'
 
     expect(page).to have_notice 'Moeda apagada com sucesso.'
 
-    expect(page).to_not have_content 'Real'
+    expect(page).to_not have_content 'Peso'
   end
 
   scenario 'index with columns at the index' do
