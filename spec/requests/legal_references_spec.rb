@@ -6,7 +6,7 @@ feature "LegalReferences" do
     sign_in
   end
 
-  scenario 'create a new legal_reference' do
+  scenario 'create, update and destroy a new legal_reference' do
     navigate 'Processos de Compra > Auxiliar > Referências Legais'
 
     click_link 'Criar Referência Legal'
@@ -30,14 +30,6 @@ feature "LegalReferences" do
     expect(page).to have_field 'Parágrafo', :with => '003'
     expect(page).to have_field 'Incisos', :with => '004'
     expect(page).to have_field 'Sinopse', :with => 'resumo'
-  end
-
-  scenario 'update an existent legal_reference' do
-    LegalReference.make!(:referencia)
-
-    navigate 'Processos de Compra > Auxiliar > Referências Legais'
-
-    click_link 'Referencia'
 
     fill_in 'Descrição', :with => 'Nova Referencia'
     fill_in 'Lei', :with => '101'
@@ -58,14 +50,6 @@ feature "LegalReferences" do
     expect(page).to have_field 'Parágrafo', :with => '103'
     expect(page).to have_field 'Incisos', :with => '104'
     expect(page).to have_field 'Sinopse', :with => 'novo resumo'
-  end
-
-  scenario 'destroy an existent legal_reference' do
-    LegalReference.make!(:referencia)
-
-    navigate 'Processos de Compra > Auxiliar > Referências Legais'
-
-    click_link 'Referencia'
 
     click_link 'Apagar'
 
