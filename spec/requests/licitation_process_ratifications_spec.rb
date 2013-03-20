@@ -17,9 +17,6 @@ feature "LicitationProcessRatifications" do
       click_link '2/2013'
     end
 
-    expect(page).to have_field 'Data da homologação', :with => ""
-    expect(page).to have_field 'Data da adjudicação', :with => ""
-
     click_button 'Apurar'
     click_link 'voltar'
     click_link 'Adjudicação/Homologação'
@@ -59,12 +56,6 @@ feature "LicitationProcessRatifications" do
     expect(page).to have_content '10,00'
 
     expect(page).to have_checked_field bidder_checkbok_html_name(0)
-
-    click_link 'Voltar'
-    click_link 'Voltar ao processo de compra'
-
-    expect(page).to have_field 'Data da homologação', :with => "#{I18n.l(Date.current)}"
-    expect(page).to have_field 'Data da adjudicação', :with => "#{I18n.l(Date.current)}"
   end
 
   scenario 'updating a ratification' do
@@ -75,9 +66,6 @@ feature "LicitationProcessRatifications" do
     within_records do
       click_link '2/2013'
     end
-
-    expect(page).to have_field 'Data da homologação', :with => "#{I18n.l(Date.current)}"
-    expect(page).to have_field 'Data da adjudicação', :with => "#{I18n.l(Date.current)}"
 
     click_link 'Adjudicação/Homologação'
 
@@ -107,12 +95,6 @@ feature "LicitationProcessRatifications" do
     expect(page).to have_content '10,00'
 
     expect(page).to_not have_checked_field bidder_checkbok_html_name(0)
-
-    click_link 'Voltar'
-    click_link 'Voltar ao processo de compra'
-
-    expect(page).to have_field 'Data da homologação', :with => "#{I18n.l(Date.tomorrow)}"
-    expect(page).to have_field 'Data da adjudicação', :with => "#{I18n.l(Date.tomorrow)}"
   end
 
   scenario 'cleaning items' do

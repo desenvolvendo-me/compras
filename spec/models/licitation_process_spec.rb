@@ -433,42 +433,6 @@ describe LicitationProcess do
     end
   end
 
-  describe '#ratification_date' do
-    let(:ratification) do
-      double(:ratification, :ratification_date => Date.today)
-    end
-
-    it 'should returns the ratification_date from first ratification' do
-      subject.stub(:licitation_process_ratifications).and_return([ratification, 'ratification2'])
-
-      expect(subject.ratification_date).to eq  Date.today
-    end
-
-    it 'should returns nil when there is no ratification' do
-      subject.stub(:licitation_process_ratifications).and_return([])
-
-      expect(subject.ratification_date).to be_nil
-    end
-  end
-
-  describe '#adjudication_date' do
-    let(:ratification) do
-      double(:ratification, :adjudication_date => Date.today)
-    end
-
-    it 'should returns the ratification_date from first ratification' do
-      subject.stub(:licitation_process_ratifications).and_return([ratification, 'ratification2'])
-
-      expect(subject.adjudication_date).to eq Date.today
-    end
-
-    it 'should returns nil when there is no ratification' do
-      subject.stub(:licitation_process_ratifications).and_return([])
-
-      expect(subject.adjudication_date).to be_nil
-    end
-  end
-
   describe '#has_trading?' do
     context 'when trading is not present' do
       it { expect(subject.has_trading?).to be_false }

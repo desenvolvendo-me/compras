@@ -41,8 +41,6 @@ feature "LicitationProcesses" do
       expect(page).to have_disabled_field 'Processo'
       expect(page).to have_disabled_field 'Modalidade'
       expect(page).to have_disabled_field 'Nº do afastamento'
-      expect(page).to have_disabled_field 'Data da homologação'
-      expect(page).to have_disabled_field 'Data da adjudicação'
       expect(page).to have_field 'Ano', :with => "#{Date.current.year}"
 
       choose 'Processo licitatório'
@@ -63,11 +61,6 @@ feature "LicitationProcesses" do
       fill_modal 'Índice de reajuste', :with => 'XPTO'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Valor da caução', :with => '50,00'
-      select 'Favorável', :from => 'Parecer jurídico'
-      fill_in 'Data do parecer', :with => '30/03/2012'
-      fill_in 'Data do contrato', :with => '31/03/2012'
-      fill_in 'Validade do contrato (meses)', :with => '5'
-      fill_in 'Observações gerais', :with => 'observacoes'
     end
 
     within_tab 'Prazos' do
@@ -156,16 +149,10 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Índice de reajuste', :with => 'XPTO'
       expect(page).to have_field 'Forma de pagamento', :with => 'Dinheiro'
       expect(page).to have_field 'Valor da caução', :with => '50,00'
-      expect(page).to have_select 'Parecer jurídico', :selected => 'Favorável'
-      expect(page).to have_field 'Data do parecer', :with => '30/03/2012'
-      expect(page).to have_field 'Data do contrato', :with => '31/03/2012'
-      expect(page).to have_field 'Observações gerais', :with => 'observacoes'
 
       # testing fields of licitation number
       expect(page).to have_field 'Número da licitação', :with => '1'
       expect(page).to have_field 'Ano', :with => '2012'
-
-      expect(page).to have_field 'Validade do contrato (meses)', :with => '5'
     end
 
     within_tab 'Prazos' do
@@ -280,11 +267,6 @@ feature "LicitationProcesses" do
       fill_modal 'Índice de reajuste', :with => 'SELIC'
       fill_modal 'Forma de pagamento', :with => 'Cheque', :field => 'Descrição'
       fill_in 'Valor da caução', :with => '60,00'
-      select 'Contrário', :from => 'Parecer jurídico'
-      fill_in 'Data do parecer', :with => '30/03/2013'
-      fill_in 'Data do contrato', :with => '31/03/2013'
-      fill_in 'Validade do contrato (meses)', :with => '6'
-      fill_in 'Observações gerais', :with => 'novas observacoes'
     end
 
     within_tab 'Prazos' do
@@ -356,11 +338,6 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Índice de reajuste', :with => 'SELIC'
       expect(page).to have_field 'Forma de pagamento', :with => 'Cheque'
       expect(page).to have_field 'Valor da caução', :with => '60,00'
-      expect(page).to have_select 'Parecer jurídico', :selected => 'Contrário'
-      expect(page).to have_field 'Data do parecer', :with => '30/03/2013'
-      expect(page).to have_field 'Data do contrato', :with => '31/03/2013'
-      expect(page).to have_field 'Validade do contrato (meses)', :with => '6'
-      expect(page).to have_field 'Observações gerais', :with => 'novas observacoes'
       expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
     end
 
@@ -612,11 +589,6 @@ feature "LicitationProcesses" do
       fill_modal 'Índice de reajuste', :with => 'XPTO'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Valor da caução', :with => '50,00'
-      select 'Favorável', :from => 'Parecer jurídico'
-      fill_in 'Data do parecer', :with => '30/03/2012'
-      fill_in 'Data do contrato', :with => '31/03/2012'
-      fill_in 'Validade do contrato (meses)', :with => '5'
-      fill_in 'Observações gerais', :with => 'observacoes'
     end
 
     within_tab 'Prazos' do
@@ -763,7 +735,6 @@ feature "LicitationProcesses" do
       expect(page).to have_disabled_field "Forma de julgamento"
       expect(page).to have_disabled_field "Fonte de recurso"
       expect(page).to have_disabled_field "Índice de reajuste"
-      expect(page).to have_disabled_field "Observações gerais"
     end
 
     expect(page).to have_disabled_element 'Salvar', :reason => 'já foi homologado. Não pode ser alterado'
@@ -1443,11 +1414,6 @@ feature "LicitationProcesses" do
       fill_modal 'Índice de reajuste', :with => 'XPTO'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Valor da caução', :with => '50,00'
-      select 'Favorável', :from => 'Parecer jurídico'
-      fill_in 'Data do parecer', :with => '30/03/2012'
-      fill_in 'Data do contrato', :with => '31/03/2012'
-      fill_in 'Validade do contrato (meses)', :with => '5'
-      fill_in 'Observações gerais', :with => 'observacoes'
 
       within_modal 'Agrupamento de solicitações de compra' do
         click_button 'Pesquisar'
@@ -1534,11 +1500,6 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Índice de reajuste', :with => 'XPTO'
       expect(page).to have_field 'Forma de pagamento', :with => 'Dinheiro'
       expect(page).to have_field 'Valor da caução', :with => '50,00'
-      expect(page).to have_select 'Parecer jurídico', :selected => 'Favorável'
-      expect(page).to have_field 'Data do parecer', :with => '30/03/2012'
-      expect(page).to have_field 'Data do contrato', :with => '31/03/2012'
-      expect(page).to have_field 'Validade do contrato (meses)', :with => '5'
-      expect(page).to have_field 'Observações gerais', :with => 'observacoes'
       expect(page).to have_field 'Agrupamento de solicitações de compra', :with => 'Agrupamento de reparo 2013'
     end
 
@@ -2042,11 +2003,6 @@ feature "LicitationProcesses" do
       fill_modal 'Índice de reajuste', :with => 'XPTO'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Valor da caução', :with => '50,00'
-      select 'Favorável', :from => 'Parecer jurídico'
-      fill_in 'Data do parecer', :with => '30/03/2012'
-      fill_in 'Data do contrato', :with => '31/03/2012'
-      fill_in 'Validade do contrato (meses)', :with => '5'
-      fill_in 'Observações gerais', :with => 'observacoes'
 
       within_modal 'Agrupamento de solicitações de compra' do
         click_button 'Pesquisar'
@@ -2368,11 +2324,6 @@ feature "LicitationProcesses" do
       fill_modal 'Índice de reajuste', :with => 'XPTO'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Valor da caução', :with => '50,00'
-      select 'Favorável', :from => 'Parecer jurídico'
-      fill_in 'Data do parecer', :with => '30/03/2012'
-      fill_in 'Data do contrato', :with => '31/03/2012'
-      fill_in 'Validade do contrato (meses)', :with => '5'
-      fill_in 'Observações gerais', :with => 'observacoes'
     end
 
     within_tab 'Prazos' do
@@ -2483,11 +2434,6 @@ feature "LicitationProcesses" do
       fill_modal 'Índice de reajuste', :with => 'XPTO'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Valor da caução', :with => '50,00'
-      select 'Favorável', :from => 'Parecer jurídico'
-      fill_in 'Data do parecer', :with => '30/03/2012'
-      fill_in 'Data do contrato', :with => '31/03/2012'
-      fill_in 'Validade do contrato (meses)', :with => '5'
-      fill_in 'Observações gerais', :with => 'observacoes'
       fill_modal 'Solicitação de compra', :with => '1', :field => 'Código'
     end
 

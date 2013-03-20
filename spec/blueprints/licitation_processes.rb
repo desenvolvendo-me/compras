@@ -27,11 +27,6 @@ LicitationProcess.blueprint(:processo_licitatorio) do
   period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
-  legal_advice { LicitationProcessLegalAdvice::FAVORABLE }
-  legal_advice_date { Date.new(2012, 3, 19) }
-  contract_date { Date.new(2012, 3, 19) }
-  contract_expiration { 3 }
-  observations { "observacoes" }
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   price_registration { true }
@@ -72,11 +67,6 @@ LicitationProcess.blueprint(:processo_licitatorio_computador) do
   period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
-  legal_advice { LicitationProcessLegalAdvice::FAVORABLE }
-  legal_advice_date { Date.new(2012, 3, 19) }
-  contract_date { Date.new(2013, 3, 19) }
-  contract_expiration { 3 }
-  observations { "observacoes" }
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao,
                                                                         :licitation_process => object)] }
@@ -115,11 +105,6 @@ LicitationProcess.blueprint(:processo_licitatorio_fornecedores) do
   period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
-  legal_advice { LicitationProcessLegalAdvice::FAVORABLE }
-  legal_advice_date { Date.new(2012, 3, 19) }
-  contract_date { Date.new(2012, 3, 19) }
-  contract_expiration { 3 }
-  observations { "observacoes" }
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   bidders { [Bidder.make!(:licitante), Bidder.make!(:licitante_sobrinho)] }
@@ -156,11 +141,6 @@ LicitationProcess.blueprint(:processo_licitatorio_publicacao_cancelada) do
   period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
-  legal_advice { LicitationProcessLegalAdvice::FAVORABLE }
-  legal_advice_date { Date.new(2012, 3, 19) }
-  contract_date { Date.new(2012, 3, 19) }
-  contract_expiration { 3 }
-  observations { "observacoes" }
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao_de_cancelamento)] }
   execution_type { ExecutionType::INTEGRAL }
@@ -197,11 +177,6 @@ LicitationProcess.blueprint(:processo_licitatorio_canetas) do
   period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
-  legal_advice { LicitationProcessLegalAdvice::FAVORABLE }
-  legal_advice_date { Date.new(2012, 3, 19) }
-  contract_date { Date.new(2013, 3, 19) }
-  contract_expiration { 3 }
-  observations { "observacoes" }
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao,
                                                                         :licitation_process => object)] }
@@ -241,11 +216,6 @@ LicitationProcess.blueprint(:apuracao_por_itens) do
   period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
-  legal_advice { LicitationProcessLegalAdvice::FAVORABLE }
-  legal_advice_date { Date.new(2012, 3, 19) }
-  contract_date { Date.new(2012, 3, 19) }
-  contract_expiration { 3 }
-  observations { "observacoes" }
   document_types { [DocumentType.make!(:fiscal)] }
   disqualify_by_documentation_problem { false }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
@@ -285,11 +255,6 @@ LicitationProcess.blueprint(:apuracao_por_lote) do
   period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
-  legal_advice { LicitationProcessLegalAdvice::FAVORABLE }
-  legal_advice_date { Date.new(2012, 3, 19) }
-  contract_date { Date.new(2012, 3, 19) }
-  contract_expiration { 3 }
-  observations { "observacoes" }
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   execution_type { ExecutionType::INTEGRAL }
@@ -328,11 +293,6 @@ LicitationProcess.blueprint(:valor_maximo_ultrapassado) do
   period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
-  legal_advice { LicitationProcessLegalAdvice::FAVORABLE }
-  legal_advice_date { Date.new(2012, 3, 19) }
-  contract_date { Date.new(2012, 3, 19) }
-  contract_expiration { 3 }
-  observations { "observacoes" }
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   execution_type { ExecutionType::INTEGRAL }
@@ -370,11 +330,6 @@ LicitationProcess.blueprint(:apuracao_global) do
   period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
-  legal_advice { LicitationProcessLegalAdvice::FAVORABLE }
-  legal_advice_date { Date.new(2012, 3, 19) }
-  contract_date { Date.new(2012, 3, 19) }
-  contract_expiration { 3 }
-  observations { "observacoes" }
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   execution_type { ExecutionType::INTEGRAL }
@@ -412,11 +367,6 @@ LicitationProcess.blueprint(:apuracao_global_empatou) do
   period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
-  legal_advice { LicitationProcessLegalAdvice::FAVORABLE }
-  legal_advice_date { Date.new(2012, 3, 19) }
-  contract_date { Date.new(2012, 3, 19) }
-  contract_expiration { 3 }
-  observations { "observacoes" }
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   execution_type { ExecutionType::INTEGRAL }
@@ -454,11 +404,6 @@ LicitationProcess.blueprint(:apuracao_global_sem_documentos) do
   period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
-  legal_advice { LicitationProcessLegalAdvice::FAVORABLE }
-  legal_advice_date { Date.new(2012, 3, 19) }
-  contract_date { Date.new(2012, 3, 19) }
-  contract_expiration { 3 }
-  observations { "observacoes" }
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   execution_type { ExecutionType::INTEGRAL }
@@ -496,11 +441,6 @@ LicitationProcess.blueprint(:apuracao_global_small_company) do
   period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
-  legal_advice { LicitationProcessLegalAdvice::FAVORABLE }
-  legal_advice_date { Date.new(2012, 3, 19) }
-  contract_date { Date.new(2012, 3, 19) }
-  contract_expiration { 3 }
-  observations { "observacoes" }
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   execution_type { ExecutionType::INTEGRAL }
@@ -538,11 +478,6 @@ LicitationProcess.blueprint(:apuracao_global_small_company_2) do
   period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
-  legal_advice { LicitationProcessLegalAdvice::FAVORABLE }
-  legal_advice_date { Date.new(2012, 3, 19) }
-  contract_date { Date.new(2012, 3, 19) }
-  contract_expiration { 3 }
-  observations { "observacoes" }
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   execution_type { ExecutionType::INTEGRAL }
@@ -580,11 +515,6 @@ LicitationProcess.blueprint(:processo_licitatorio_nao_atualizavel) do
   period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
-  legal_advice { LicitationProcessLegalAdvice::FAVORABLE }
-  legal_advice_date { Date.new(2012, 3, 19) }
-  contract_date { Date.new(2012, 3, 19) }
-  contract_expiration { 3 }
-  observations { "observacoes" }
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao_nao_atualizavel)] }
   licitation_process_lots { [LicitationProcessLot.make(:lote_antivirus, :licitation_process => object)] }
@@ -622,11 +552,6 @@ LicitationProcess.blueprint(:processo_licitatorio_canetas_sem_lote) do
   period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
-  legal_advice { LicitationProcessLegalAdvice::FAVORABLE }
-  legal_advice_date { Date.new(2012, 3, 19) }
-  contract_date { Date.new(2013, 3, 19) }
-  contract_expiration { 3 }
-  observations { "observacoes" }
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   bidders { [Bidder.make!(:licitante)] }
@@ -663,11 +588,6 @@ LicitationProcess.blueprint(:apuracao_melhor_tecnica_e_preco) do
   period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
-  legal_advice { LicitationProcessLegalAdvice::FAVORABLE }
-  legal_advice_date { Date.new(2012, 3, 19) }
-  contract_date { Date.new(2012, 3, 19) }
-  contract_expiration { 3 }
-  observations { "observacoes" }
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   execution_type { ExecutionType::INTEGRAL }
@@ -706,11 +626,6 @@ LicitationProcess.blueprint(:pregao_presencial) do
   period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
-  legal_advice { LicitationProcessLegalAdvice::FAVORABLE }
-  legal_advice_date { Date.new(2012, 3, 19) }
-  contract_date { Date.new(2012, 3, 19) }
-  contract_expiration { 3 }
-  observations { "observacoes" }
   consider_law_of_proposals { true }
   document_types { [DocumentType.make!(:fiscal)] }
   execution_type { ExecutionType::INTEGRAL }
@@ -748,11 +663,6 @@ LicitationProcess.blueprint(:processo_licitatorio_concurso) do
   period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
-  legal_advice { LicitationProcessLegalAdvice::FAVORABLE }
-  legal_advice_date { Date.new(2012, 3, 19) }
-  contract_date { Date.new(2012, 3, 19) }
-  contract_expiration { 3 }
-  observations { "observacoes" }
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   price_registration { true }
@@ -790,11 +700,6 @@ LicitationProcess.blueprint(:processo_licitatorio_concorrencia) do
   period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
-  legal_advice { LicitationProcessLegalAdvice::FAVORABLE }
-  legal_advice_date { Date.new(2012, 3, 19) }
-  contract_date { Date.new(2012, 3, 19) }
-  contract_expiration { 3 }
-  observations { "observacoes" }
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   price_registration { true }
@@ -833,11 +738,6 @@ LicitationProcess.blueprint(:processo_licitatorio_tomada_preco) do
   period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
-  legal_advice { LicitationProcessLegalAdvice::FAVORABLE }
-  legal_advice_date { Date.new(2012, 3, 19) }
-  contract_date { Date.new(2012, 3, 19) }
-  contract_expiration { 3 }
-  observations { "observacoes" }
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   price_registration { true }
@@ -878,11 +778,6 @@ LicitationProcess.blueprint(:processo_licitatorio_leilao) do
   period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
-  legal_advice { LicitationProcessLegalAdvice::FAVORABLE }
-  legal_advice_date { Date.new(2012, 3, 19) }
-  contract_date { Date.new(2012, 3, 19) }
-  contract_expiration { 3 }
-  observations { "observacoes" }
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   price_registration { true }

@@ -207,22 +207,6 @@ describe LicitationProcessDecorator do
     end
   end
 
-  describe '#adjudication_date' do
-    it 'should returns localized date' do
-      component.stub(:adjudication_date).and_return(Date.new(2012, 12, 27))
-
-      expect(subject.adjudication_date).to eq '27/12/2012'
-    end
-  end
-
-  describe '#ratification_date' do
-    it 'should returns localized date' do
-      component.stub(:ratification_date).and_return(Date.new(2012, 12, 27))
-
-      expect(subject.ratification_date).to eq '27/12/2012'
-    end
-  end
-
   describe '#all_licitation_process_classifications_groupped' do
     let(:bidder1) { double(:bidder1)}
     let(:bidder2) { double(:bidder2)}

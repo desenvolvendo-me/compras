@@ -1,8 +1,7 @@
 class LicitationProcess < Compras::Model
   attr_accessible :capability_id, :payment_method_id, :type_of_purchase,
                   :year, :process_date,:readjustment_index_id, :caution_value,
-                  :legal_advice, :legal_advice_date, :contract_date,
-                  :contract_expiration, :observations, :envelope_delivery_date,
+                  :envelope_delivery_date,
                   :envelope_delivery_time, :envelope_opening_date,
                   :envelope_opening_time, :document_type_ids,
                   :period, :period_unit, :expiration, :expiration_unit,
@@ -31,7 +30,6 @@ class LicitationProcess < Compras::Model
   has_enumeration_for :contract_guarantees
   has_enumeration_for :execution_type, :create_helpers => true
   has_enumeration_for :expiration_unit, :with => PeriodUnit
-  has_enumeration_for :legal_advice, :with => LicitationProcessLegalAdvice
   has_enumeration_for :modality, :create_helpers => true, :create_scopes => true
   has_enumeration_for :object_type, :with => LicitationProcessObjectType, :create_helpers => true
   has_enumeration_for :period_unit, :with => PeriodUnit
@@ -200,18 +198,6 @@ class LicitationProcess < Compras::Model
 
   def ratification?
     licitation_process_ratifications.any?
-  end
-
-  def adjudication_date
-    return unless first_ratification.present?
-
-    first_ratification.adjudication_date
-  end
-
-  def ratification_date
-    return unless first_ratification.present?
-
-    first_ratification.ratification_date
   end
 
   def has_trading?

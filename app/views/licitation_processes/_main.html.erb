@@ -117,36 +117,6 @@
   </div>
 </div>
 
-<div class="yui3-g">
-  <div class="yui3-u-1-5">
-    <%= f.input :legal_advice %>
-  </div>
-
-  <div class="yui3-u-1-6">
-    <%= f.input :legal_advice_date %>
-  </div>
-
-  <div class="yui3-u-1-6">
-    <%= f.input :contract_date %>
-  </div>
-
-  <div class="yui3-u-1-4">
-    <%= f.input :contract_expiration %>
-  </div>
-</div>
-
-<%= f.input :observations %>
-
-<div class="yui3-g">
-  <div class="yui3-u-1-5">
-    <%= f.input :ratification_date, :disabled => true, :input_html => { :class => 'important', :value => f.object.decorator.ratification_date } %>
-  </div>
-
-  <div class="yui3-u-1-5">
-    <%= f.input :adjudication_date, :disabled => true, :input_html => { :class => 'important', :value => f.object.decorator.adjudication_date } %>
-  </div>
-</div>
-
 <script>
   function organizesModalities() {
     if ($('#licitation_process_type_of_purchase_licitation').is(':checked')){
