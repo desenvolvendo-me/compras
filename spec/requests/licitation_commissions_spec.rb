@@ -6,7 +6,7 @@ feature "LicitationCommissions" do
     sign_in
   end
 
-  scenario 'create a new licitation_commission' do
+  scenario 'create, update and destroy a new licitation_commission' do
     RegulatoryAct.make!(:sopa)
     Person.make!(:wenderson)
     Person.make!(:sobrinho)
@@ -28,7 +28,7 @@ feature "LicitationCommissions" do
       fill_in 'Data da nomeação', :with => '20/03/2012'
       fill_in 'Data da expiração', :with => '22/03/2012'
       fill_in 'Data da exoneração', :with => '25/03/2012'
-      fill_in 'Descrição e finalidade da comissão', :with => 'descrição'
+      fill_in 'Descrição e finalidade da comissão', :with => 'Minha comissão é essa e tem essa finalidade'
     end
 
     within_tab 'Responsáveis' do
@@ -52,16 +52,14 @@ feature "LicitationCommissions" do
 
     expect(page).to have_notice 'Comissão de Licitação criada com sucesso.'
 
-    within_records do
-      page.find('a').click
-    end
+    click_link 'Minha comissão é essa e tem essa finalidade'
 
     within_tab 'Principal' do
       expect(page).to have_select 'Tipo de comissão', :selected => 'Especial'
       expect(page).to have_field 'Data da nomeação', :with => '20/03/2012'
       expect(page).to have_field 'Data da expiração', :with => '22/03/2012'
       expect(page).to have_field 'Data da exoneração', :with => '25/03/2012'
-      expect(page).to have_field 'Descrição e finalidade da comissão', :with => 'descrição'
+      expect(page).to have_field 'Descrição e finalidade da comissão', :with => 'Minha comissão é essa e tem essa finalidade'
     end
 
     within_tab 'Responsáveis' do
@@ -76,33 +74,20 @@ feature "LicitationCommissions" do
       expect(page).to have_select 'Função', :selected => 'Presidente'
       expect(page).to have_select 'Natureza do cargo', :selected => 'Servidor efetivo'
     end
-  end
-
-  scenario 'update an existent licitation_commission' do
-    RegulatoryAct.make!(:medida_provisoria)
-    LicitationCommission.make!(:comissao)
-    Person.make!(:sobrinho)
-    Person.make!(:wenderson)
-
-    navigate 'Processos de Compra > Auxiliar > Comissões de Licitação'
-
-    within_records do
-      page.find('a').click
-    end
 
     within_tab 'Principal' do
-      select 'Especial', :from => 'Tipo de comissão'
+      select 'Leiloeiros', :from => 'Tipo de comissão'
 
-      fill_modal 'Ato regulamentador', :with => '8901', :field => 'Número'
+      fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
 
-      expect(page).to have_field 'Ato regulamentador', :with => 'Emenda constitucional 8901'
+      expect(page).to have_field 'Ato regulamentador', :with => 'Lei 1234'
 
       expect(page).to have_disabled_field 'Data da publicação do ato'
-      expect(page).to have_field 'Data da publicação do ato', :with => '02/01/2013'
+      expect(page).to have_field 'Data da publicação do ato', :with => '02/01/2012'
 
-      fill_in 'Data da nomeação', :with => '20/03/2013'
-      fill_in 'Data da expiração', :with => '22/03/2013'
-      fill_in 'Data da exoneração', :with => '25/03/2013'
+      fill_in 'Data da nomeação', :with => '20/03/2014'
+      fill_in 'Data da expiração', :with => '22/03/2014'
+      fill_in 'Data da exoneração', :with => '25/03/2014'
       fill_in 'Descrição e finalidade da comissão', :with => 'nova descrição'
     end
 
@@ -116,16 +101,10 @@ feature "LicitationCommissions" do
     end
 
     within_tab 'Membros' do
-      expect(page).to have_field 'Membro', :with => 'Wenderson Malheiros'
-
-      click_button 'Remover Membro'
-
-      click_button 'Adicionar Membro'
-
       within '.member:first' do
-        fill_modal 'Membro', :with => 'Gabriel Sobrinho'
-        fill_in 'Matrícula', :with => '987654'
-        select 'Apoio', :from => 'Função'
+	fill_modal 'Membro', :with => 'Wenderson Malheiros'
+	fill_in 'Matrícula', :with => '123456'
+	select 'Presidente', :from => 'Função'
         select 'Outros', :from => 'Natureza do cargo'
       end
     end
@@ -134,15 +113,13 @@ feature "LicitationCommissions" do
 
     expect(page).to have_notice 'Comissão de Licitação editada com sucesso.'
 
-    within_records do
-      page.find('a').click
-    end
+    click_link 'nova descrição'
 
     within_tab 'Principal' do
-      expect(page).to have_select 'Tipo de comissão', :selected => 'Especial'
-      expect(page).to have_field 'Data da nomeação', :with => '20/03/2013'
-      expect(page).to have_field 'Data da expiração', :with => '22/03/2013'
-      expect(page).to have_field 'Data da exoneração', :with => '25/03/2013'
+      expect(page).to have_select 'Tipo de comissão', :selected => 'Leiloeiros'
+      expect(page).to have_field 'Data da nomeação', :with => '20/03/2014'
+      expect(page).to have_field 'Data da expiração', :with => '22/03/2014'
+      expect(page).to have_field 'Data da exoneração', :with => '25/03/2014'
       expect(page).to have_field 'Descrição e finalidade da comissão', :with => 'nova descrição'
     end
 
@@ -154,15 +131,21 @@ feature "LicitationCommissions" do
     end
 
     within_tab 'Membros' do
-      expect(page).to_not have_field 'Membro', :with => 'Wenderson Malheiros'
+      expect(page).to_not have_field 'Membro', :with => 'Gabriel Sobrinho'
 
       within '.member' do
-        expect(page).to have_field 'Membro', :with => 'Gabriel Sobrinho'
-        expect(page).to have_field 'Matrícula', :with => '987654'
-        expect(page).to have_select 'Função', :selected => 'Apoio'
+	expect(page).to have_field 'Membro', :with => 'Wenderson Malheiros'
+	expect(page).to have_field 'Matrícula', :with => '123456'
+	expect(page).to have_select 'Função', :selected => 'Presidente'
         expect(page).to have_select 'Natureza do cargo', :selected => 'Outros'
       end
     end
+
+    click_link 'Apagar'
+
+    expect(page).to have_notice 'Comissão de Licitação apagada com sucesso.'
+
+    expect(page).to_not have_link 'nova descrição'
   end
 
   scenario 'should clear publication_date when administractive act is clean' do
@@ -185,22 +168,6 @@ feature "LicitationCommissions" do
       expect(page).to have_field 'Ato regulamentador', :with => ''
       expect(page).to have_field 'Data da publicação do ato', :with => ''
     end
-  end
-
-  scenario 'destroy an existent licitation_commission' do
-    licitation_commission = LicitationCommission.make!(:comissao)
-
-    navigate 'Processos de Compra > Auxiliar > Comissões de Licitação'
-
-    within_records do
-      page.find('a').click
-    end
-
-    click_link 'Apagar'
-
-    expect(page).to have_notice 'Comissão de Licitação apagada com sucesso.'
-
-    expect(page).to_not have_link "#{licitation_commission.id}"
   end
 
   scenario 'should get the CPF number when selecting individual' do
