@@ -10,7 +10,7 @@ feature "JudgmentCommissionAdvices" do
     sign_in
   end
 
-  scenario 'create a new judgment_commission_advice' do
+  scenario 'create, update and destroy a new judgment_commission_advice' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio)
     licitation_commission = LicitationCommission.make!(:comissao)
     Person.make!(:sobrinho)
@@ -119,37 +119,17 @@ feature "JudgmentCommissionAdvices" do
       expect(page).to have_field "Texto da ata sobre julgamento das propostas / justificativas", :with => "texto 3"
       expect(page).to have_field "Texto da ata sobre julgamento - pareceres diversos", :with => "texto 4"
     end
-  end
-
-  scenario 'update an existent judgment_commission_advice' do
-    JudgmentCommissionAdvice.make!(:parecer)
-    new_licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
-    new_licitation_commission = LicitationCommission.make!(:comissao_nova)
-
-    navigate 'Processos de Compra > Processos de Compras'
-
-    click_link "Limpar Filtro"
-
-    within_records do
-      click_link '1/2012'
-    end
-
-    click_link 'Pareceres da comissão julgadora'
-
-    within_records do
-      page.find('a').click
-    end
 
     within_tab 'Principal' do
       fill_in 'Ano', :with => '2013'
-      fill_modal 'Comissão julgadora', :with => '20/04/2012', :field => 'Data da nomeação'
+      fill_modal 'Comissão julgadora', :with => '20/03/2012', :field => 'Data da nomeação'
     end
 
     within_tab 'Membros' do
-      expect(page).to have_field 'Membro', :with => 'Gabriel Sobrinho'
+      expect(page).to have_field 'Membro', :with => 'Wenderson Malheiros'
 
       within '.member:last' do
-        expect(page).to have_field 'Membro', :with => 'Wenderson Malheiros'
+	expect(page).to have_field 'Membro', :with => 'Gabriel Sobrinho'
 
         click_button 'Remover'
       end
@@ -177,12 +157,12 @@ feature "JudgmentCommissionAdvices" do
     within_tab 'Principal' do
       expect(page).to have_field 'Número da ata', :with => '1'
       expect(page).to have_field 'Ano', :with => '2013'
-      expect(page).to have_field 'Comissão julgadora', :with => new_licitation_commission.to_s
+      expect(page).to have_field 'Comissão julgadora', :with => licitation_commission.to_s
     end
 
     within_tab 'Membros' do
-      expect(page).to_not have_field 'Membro', :with => 'Wenderson Malheiros'
-      expect(page).to have_field 'Membro', :with => 'Gabriel Sobrinho'
+      expect(page).to_not have_field 'Membro', :with => 'Gabriel Sobrinho'
+      expect(page).to have_field 'Membro', :with => 'Wenderson Malheiros'
     end
 
     within_tab 'Parecer' do
@@ -195,32 +175,11 @@ feature "JudgmentCommissionAdvices" do
       expect(page).to have_field "Texto da ata sobre julgamento das propostas / justificativas", :with => "novo texto 3"
       expect(page).to have_field "Texto da ata sobre julgamento - pareceres diversos", :with => "novo texto 4"
     end
-  end
-
-  scenario 'destroy an existent judgment_commission_advice' do
-    advice = JudgmentCommissionAdvice.make!(:parecer)
-
-    navigate 'Processos de Compra > Processos de Compras'
-
-    click_link "Limpar Filtro"
-
-    within_records do
-      click_link '1/2012'
-    end
-
-    click_link 'Pareceres da comissão julgadora'
-
-    expect(page).to have_link advice.to_s
-
-    within_records do
-      page.find('a').click
-    end
 
     click_link 'Apagar'
 
     expect(page).to have_notice 'Parecer da Comissão Julgadora apagado com sucesso.'
-
-    expect(page).to_not have_link advice.to_s
+    expect(page).to_not have_link "40/2013"
   end
 
   scenario 'create another judgment_commission_advice to test the generated minutes number and judgment sequence' do
