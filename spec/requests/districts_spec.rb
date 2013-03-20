@@ -43,8 +43,6 @@ feature "Districts" do
   end
 
   scenario 'index with columns at the index' do
-    District.make!(:sul)
-
     navigate 'Geral > Parâmetros > Endereços > Distritos'
 
     within_records do
@@ -52,8 +50,8 @@ feature "Districts" do
       expect(page).to have_content 'Cidade'
 
       within 'tbody tr' do
-        expect(page).to have_content 'Sul'
-        expect(page).to have_content 'Belo Horizonte'
+        expect(page).to have_content 'Leste'
+        expect(page).to have_content 'Porto Alegre'
       end
     end
   end

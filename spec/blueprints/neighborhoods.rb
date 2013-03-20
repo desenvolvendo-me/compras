@@ -7,7 +7,7 @@ end
 Neighborhood.blueprint(:portugal) do
   name  { 'Portugal' }
   city { ::FactoryGirl::Preload.factories['City'][:porto_alegre] }
-  district { District.make!(:leste) }
+  district { ::FactoryGirl::Preload.factories['District'][:leste] }
 end
 
 Neighborhood.blueprint(:sao_francisco) do

@@ -12,4 +12,8 @@ FactoryGirl.define do
   factory :city do
     name 'Belo Horizonte'
   end
+
+  factory :district do
+    name 'Leste'
+  end
 end

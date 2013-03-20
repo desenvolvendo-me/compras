@@ -7,8 +7,6 @@ feature "Neighborhoods" do
   end
 
   scenario 'create a new neighborhood' do
-    District.make!(:leste)
-
     navigate 'Geral > Parâmetros > Endereços > Bairros'
 
     click_link 'Criar Bairro'
@@ -97,8 +95,7 @@ feature "Neighborhoods" do
   end
 
   scenario 'should filter district by city' do
-    District.make!(:centro)
-    District.make!(:leste)
+    FactoryGirl.create(:district, name: 'Centro', city: cities(:belo_horizonte))
 
     navigate 'Geral > Parâmetros > Endereços > Bairros'
 

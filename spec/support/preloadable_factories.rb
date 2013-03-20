@@ -7,4 +7,5 @@ FactoryGirl.preload do
   factory(:belo_horizonte)  { create(:city, name: 'Belo Horizonte', state: states(:mg)) }
   factory(:porto_alegre)    { create(:city, name: 'Porto Alegre'  , state: states(:rs)) }
   factory(:curitiba)        { create(:city, name: 'Curitiba'      , state: states(:pr)) }
+  factory(:leste)           { create(:district, city: cities(:porto_alegre)) }
 end
