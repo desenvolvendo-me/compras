@@ -1,5 +1,5 @@
 <div class="yui3-g">
-  <div class="yui3-u-1-3">
+  <div id="minimum-bid-to-disposal" class="yui3-u-1-3">
     <%= f.input :minimum_bid_to_disposal %>
   </div>
 
@@ -21,9 +21,9 @@
 <script>
   function minimumBidToDisposalVisibilityToogler() {
     if ($("#licitation_process_object_type").val() == "<%= LicitationProcessObjectType::DISPOSALS_OF_ASSETS %>") {
-      $("#licitation_process_minimum_bid_to_disposal").closest('.yui3-u-1-3').show();
+      $("#minimum-bid-to-disposal").show();
     } else {
-      $("#licitation_process_minimum_bid_to_disposal").closest('.yui3-u-1-3').hide();
+      $("#minimum-bid-to-disposal").hide();
     }
   };
 
