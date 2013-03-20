@@ -7,7 +7,6 @@ feature "Districts" do
   end
 
   scenario 'create, update and destroy a new district' do
-    City.make!(:belo_horizonte)
 
     navigate 'Geral > Parâmetros > Endereços > Distritos'
 
@@ -17,13 +16,13 @@ feature "Districts" do
     fill_modal 'Cidade', :with => "Belo Horizonte"
 
     click_button 'Salvar'
-
+ 
     expect(page).to have_notice 'Distrito criado com sucesso.'
 
     click_link 'Leste'
 
     expect(page).to have_field 'Nome', :with => 'Leste'
-    expect(page).to have_field 'Cidade', :with => 'Belo Horizonte'
+    expect(page).to have_field 'Cidade', :with => 'Porto Alegre'
 
     fill_in 'Nome', :with => 'Sul'
 
