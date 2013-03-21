@@ -6,7 +6,7 @@ feature "Profiles" do
     sign_in
   end
 
-  scenario 'create a new profile' do
+  scenario 'create a new profile, update and destroy an existing' do
     navigate 'Geral > Usuários > Perfis'
 
     click_link 'Criar Perfil'
@@ -20,39 +20,23 @@ feature "Profiles" do
     click_link 'Gestor'
 
     expect(page).to have_field 'Nome', :with => 'Gestor'
-  end
 
-  scenario 'update a profile' do
-    Profile.make!(:manager)
-
-    navigate 'Geral > Usuários > Perfis'
-
-    click_link 'Gestor'
-
-    fill_in 'Nome', :with => 'Gestão'
+    fill_in 'Nome', :with => 'Administrador'
 
     click_button 'Salvar'
 
     expect(page).to have_notice 'Perfil editado com sucesso.'
 
-    click_link 'Gestão'
+    click_link 'Administrador'
 
-    expect(page).to have_field 'Nome', :with => 'Gestão'
-  end
-
-  scenario 'destroy a profile' do
-    Profile.make!(:manager)
-
-    navigate 'Geral > Usuários > Perfis'
-
-    click_link 'Gestor'
+    expect(page).to have_field 'Nome', :with => 'Administrador'
 
     click_link 'Apagar'
 
     expect(page).to have_notice 'Perfil apagado com sucesso.'
 
     within_records do
-      expect(page).to_not have_content 'Gestor'
+      expect(page).to_not have_content 'Administrador'
     end
   end
 
