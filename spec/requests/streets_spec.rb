@@ -6,24 +6,20 @@ feature "Streets" do
     sign_in
   end
 
-  scenario 'create a new street' do
+  scenario 'create a new street, update and destroy an existing' do
     Neighborhood.make!(:centro)
     StreetType.make!(:rua)
+    StreetType.make!(:avenida)
 
     navigate 'Geral > Parâmetros > Endereços > Logradouros'
 
     click_link 'Criar Logradouro'
 
     fill_in 'Nome', :with => 'Cristiano do O'
-
     fill_modal 'Tipo do logradouro', :with => 'Rua'
-
     fill_in 'Zona fiscal', :with => '000'
-
     fill_modal 'Cidade', :with => 'Belo Horizonte'
-
     fill_modal 'Bairro', :with => 'Centro'
-    expect(page).to have_content "Bairro"
 
     click_button 'Salvar'
 
@@ -36,48 +32,28 @@ feature "Streets" do
     expect(page).to have_field 'Zona fiscal', :with => '000'
     expect(page).to have_field 'Cidade', :with => 'Belo Horizonte'
     expect(page).to have_content 'Centro'
-  end
 
-  scenario 'update a street' do
-    StreetType.make!(:avenida)
-    Street.make!(:girassol)
-
-    navigate 'Geral > Parâmetros > Endereços > Logradouros'
-
-    click_link 'Girassol'
-
-    fill_in 'Nome', :with => 'Francisco de Assis'
-
+    fill_in 'Nome', :with => 'Cristiano do OO'
     fill_modal 'Tipo do logradouro', :with => 'Avenida'
-
     fill_in 'Zona fiscal', :with => '003'
-
-    fill_modal 'Bairro', :with => 'São Francisco'
 
     click_button 'Salvar'
 
     expect(page).to have_notice 'Logradouro editado com sucesso.'
 
-    click_link 'Francisco de Assis'
+    click_link 'Cristiano do OO'
 
-    expect(page).to have_field 'Nome', :with => 'Francisco de Assis'
+    expect(page).to have_field 'Nome', :with => 'Cristiano do OO'
     expect(page).to have_field 'Tipo do logradouro', :with => 'Avenida'
     expect(page).to have_field 'Zona fiscal', :with => '003'
-    expect(page).to have_content 'São Francisco'
-  end
-
-  scenario 'destroy a street' do
-    Street.make!(:girassol)
-
-    navigate 'Geral > Parâmetros > Endereços > Logradouros'
-
-    click_link 'Girassol'
+    expect(page).to have_field 'Cidade', :with => 'Belo Horizonte'
+    expect(page).to have_content 'Centro'
 
     click_link 'Apagar'
 
     expect(page).to have_notice 'Logradouro apagado com sucesso.'
 
-    expect(page).to_not have_content 'Girassol'
+    expect(page).to_not have_content 'Cristiano do OO'
   end
 
   scenario 'should not allow more than one time neighborhood' do
