@@ -102,9 +102,9 @@ feature "LicitationCommissions" do
 
     within_tab 'Membros' do
       within '.member:first' do
-	fill_modal 'Membro', :with => 'Wenderson Malheiros'
-	fill_in 'Matrícula', :with => '123456'
-	select 'Presidente', :from => 'Função'
+        fill_modal 'Membro', :with => 'Wenderson Malheiros'
+        fill_in 'Matrícula', :with => '123456'
+        select 'Presidente', :from => 'Função'
         select 'Outros', :from => 'Natureza do cargo'
       end
     end
@@ -134,9 +134,9 @@ feature "LicitationCommissions" do
       expect(page).to_not have_field 'Membro', :with => 'Gabriel Sobrinho'
 
       within '.member' do
-	expect(page).to have_field 'Membro', :with => 'Wenderson Malheiros'
-	expect(page).to have_field 'Matrícula', :with => '123456'
-	expect(page).to have_select 'Função', :selected => 'Presidente'
+        expect(page).to have_field 'Membro', :with => 'Wenderson Malheiros'
+        expect(page).to have_field 'Matrícula', :with => '123456'
+        expect(page).to have_select 'Função', :selected => 'Presidente'
         expect(page).to have_select 'Natureza do cargo', :selected => 'Outros'
       end
     end
