@@ -34,7 +34,7 @@ feature "Signatures" do
     expect(page).to have_field 'Data final', :with => '31/12/2012'
 
     fill_modal 'Cargo', :with => 'Supervisor'
-    fill_in 'Data inicial', :with => '02/01/2012'
+    fill_in 'Data inicial', :with => '02/02/2012'
     fill_in 'Data final', :with => '02/12/2012'
 
     click_button 'Salvar'
@@ -46,7 +46,7 @@ feature "Signatures" do
     expect(page).to have_field 'Pessoa', :with => 'Gabriel Sobrinho'
     expect(page).to have_field 'Cargo', :with => 'Supervisor'
     expect(page).to have_select 'Tipo', :selected => 'Gestor'
-    expect(page).to have_field 'Data inicial', :with => '02/01/2012'
+    expect(page).to have_field 'Data inicial', :with => '02/02/2012'
     expect(page).to have_field 'Data final', :with => '02/12/2012'
 
     click_link 'Apagar'
