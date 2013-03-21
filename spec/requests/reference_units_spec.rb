@@ -6,7 +6,7 @@ feature "ReferenceUnits" do
     sign_in
   end
 
-  scenario 'create a new reference_unit' do
+  scenario 'create a new reference_unit, update and destroy an existing' do
     navigate 'Comum > Cadastrais > Materiais > Unidades de Medida'
 
     click_link 'Criar Unidade de Medida'
@@ -22,14 +22,6 @@ feature "ReferenceUnits" do
 
     expect(page).to have_field 'Descrição', :with => 'Reais'
     expect(page).to have_field 'Sigla', :with => 'R$'
-  end
-
-  scenario 'update a reference_unit' do
-    ReferenceUnit.make!(:metro)
-
-    navigate 'Comum > Cadastrais > Materiais > Unidades de Medida'
-
-    click_link 'Metro'
 
     fill_in 'Descrição', :with => 'Centímetro'
     fill_in 'Sigla', :with => 'cm'
@@ -42,20 +34,12 @@ feature "ReferenceUnits" do
 
     expect(page).to have_field 'Descrição', :with => 'Centímetro'
     expect(page).to have_field 'Sigla', :with => 'cm'
-  end
-
-  scenario 'destroy an existent reference_unit' do
-    ReferenceUnit.make!(:metro)
-
-    navigate 'Comum > Cadastrais > Materiais > Unidades de Medida'
-
-    click_link 'Metro'
-
+  
     click_link 'Apagar'
 
     expect(page).to have_notice 'Unidade de Medida apagada com sucesso.'
 
-    expect(page).to_not have_content 'Metro'
+    expect(page).to_not have_content 'Centímetro'
   end
 
   scenario 'index with columns at the index' do
