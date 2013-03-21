@@ -6,9 +6,10 @@ feature "Signatures" do
     sign_in
   end
 
-  scenario 'create a new signature' do
+  scenario 'create a new signature, update and destroy an existing' do
     Person.make!(:sobrinho)
     Position.make!(:gerente)
+    Position.make!(:supervisor)
 
     navigate 'Geral > Parâmetros > Assinaturas > Assinaturas'
 
@@ -29,18 +30,8 @@ feature "Signatures" do
     expect(page).to have_field 'Pessoa', :with => 'Gabriel Sobrinho'
     expect(page).to have_field 'Cargo', :with => 'Gerente'
     expect(page).to have_select 'Tipo', :selected => 'Gestor'
-    expect(page).to have_field 'Data inicial', :with => '01/01/2012'
+    expect(page).to have_field 'Data inicial', :with => '31/01/2012'
     expect(page).to have_field 'Data final', :with => '31/12/2012'
-  end
-
-  scenario 'update an existent signature' do
-    Signature.make!(:gerente_sobrinho)
-    Person.make!(:wenderson)
-    Position.make!(:supervisor)
-
-    navigate 'Geral > Parâmetros > Assinaturas > Assinaturas'
-
-    click_link 'Gabriel Sobrinho'
 
     fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
     fill_modal 'Cargo', :with => 'Supervisor'
@@ -56,9 +47,16 @@ feature "Signatures" do
 
     expect(page).to have_field 'Pessoa', :with => 'Wenderson Malheiros'
     expect(page).to have_field 'Cargo', :with => 'Supervisor'
-    expect(page).to have_select 'Tipo', :selected => 'Contador'
+    expect(page).to have_select 'Tipo', :selected => 'Gestor'
     expect(page).to have_field 'Data inicial', :with => '31/01/2012'
-    expect(page).to have_field 'Data final', :with => '31/01/2013'
+    expect(page).to have_field 'Data final', :with => '31/12/2012'
+
+    click_link 'Apagar'
+
+    expect(page).to have_notice 'Assinatura apagada com sucesso.'
+
+    expect(page).to_not have_content 'Wenderson Malheiros'
+    expect(page).to_not have_content 'Supervisor'
   end
 
   scenario 'show error when already from other date range' do
@@ -76,21 +74,6 @@ feature "Signatures" do
 
     expect(page).to have_content 'Foram encontrados os seguintes erros no formulário: '
     expect(page).to have_content 'intervalo de data já está contida em outra assinatura'
-  end
-
-  scenario 'destroy an existent signature' do
-    Signature.make!(:gerente_sobrinho)
-
-    navigate 'Geral > Parâmetros > Assinaturas > Assinaturas'
-
-    click_link 'Gabriel Sobrinho'
-
-    click_link 'Apagar'
-
-    expect(page).to have_notice 'Assinatura apagada com sucesso.'
-
-    expect(page).to_not have_content 'Gabriel Sobrinho'
-    expect(page).to_not have_content 'Gerente'
   end
 
   scenario 'index with columns at the index' do
