@@ -6,7 +6,7 @@ feature "StreetTypes" do
     sign_in
   end
 
-  scenario 'create a new street type' do
+  scenario 'create a new street type, update and destroy an existing' do
     navigate 'Geral > Parâmetros > Endereços > Tipos de Logradouros'
 
     click_link 'Criar Tipo de Logradouro'
@@ -22,17 +22,8 @@ feature "StreetTypes" do
 
     expect(page).to have_field 'Nome', :with => 'Alameda'
     expect(page).to have_field 'Sigla', :with => 'ALA'
-  end
-
-  scenario 'update a street type' do
-    StreetType.make!(:rua)
-
-    navigate 'Geral > Parâmetros > Endereços > Tipos de Logradouros'
-
-    click_link 'Rua'
 
     fill_in 'Nome', :with => 'Travessa'
-
     fill_in 'Sigla', :with => 'TRA'
 
     click_button 'Salvar'
@@ -43,20 +34,12 @@ feature "StreetTypes" do
 
     expect(page).to have_field 'Nome', :with => 'Travessa'
     expect(page).to have_field 'Sigla', :with => 'TRA'
-  end
-
-  scenario 'destroy a street type' do
-    StreetType.make!(:rua)
-
-    navigate 'Geral > Parâmetros > Endereços > Tipos de Logradouros'
-
-    click_link 'Rua'
 
     click_link 'Apagar'
 
     expect(page).to have_notice 'Tipo de Logradouro apagado com sucesso.'
 
-    expect(page).to_not have_content 'Rua'
+    expect(page).to_not have_content 'Travessa'
   end
 
   scenario 'index with columns at the index' do
