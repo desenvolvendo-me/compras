@@ -22,7 +22,7 @@ feature "RiskDegrees" do
 
     expect(page).to have_field 'Nível', :with => "1"
     expect(page).to have_field 'Nome', :with => "Médio"
-    
+
     fill_in 'Nível', :with => '2'
     fill_in 'Nome', :with => 'Muito Grave'
 
