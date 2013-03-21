@@ -6,7 +6,7 @@ feature "Users" do
     sign_in
   end
 
-  scenario 'create a new user' do
+  scenario 'create a new user, update and destroyer user an existent' do
     Employee.make!(:wenderson)
     Profile.make!(:manager)
 
@@ -23,7 +23,6 @@ feature "Users" do
     fill_in 'E-mail', :with => 'wenderson.malheiros@gmail.com'
     fill_in 'Senha', :with => '123456'
     fill_in 'Confirme a senha', :with => '123456'
-
     fill_modal 'Perfil', :with => 'Gestor'
 
     click_button 'Salvar'
@@ -37,40 +36,21 @@ feature "Users" do
     expect(page).to have_field 'E-mail', :with => 'wenderson.malheiros@gmail.com'
     expect(page).to have_field 'Senha', :with => ''
     expect(page).to have_field 'Confirme a senha', :with => ''
-  end
 
-  scenario 'update an user' do
-    User.make!(:wenderson)
-    Employee.make!(:sobrinho)
-
-    navigate 'Geral > Usuários > Usuários'
-
-    within_records do
-      click_link 'Wenderson Malheiros'
-    end
-
-    within_modal 'Funcionário' do
-      click_button 'Pesquisar'
-      click_record 'Gabriel Sobrinho'
-    end
+    fill_in 'Login', :with => 'wenderson'
+    fill_in 'E-mail', :with => 'wenderson@gmail.com'
+    fill_in 'Senha', :with => '12345678'
+    fill_in 'Confirme a senha', :with => '12345678'
 
     click_button 'Salvar'
 
     expect(page).to have_notice 'Usuário editado com sucesso.'
 
     within_records do
-      click_link 'Gabriel Sobrinho'
+      click_link 'Wenderson Malheiros'
     end
 
-    expect(page).to have_field 'Funcionário', :with => 'Gabriel Sobrinho'
-  end
-
-  scenario 'destroy an user' do
-    User.make!(:wenderson)
-
-    navigate 'Geral > Usuários > Usuários'
-
-    click_link 'Wenderson Malheiros'
+    expect(page).to have_field 'Funcionário', :with => 'Wenderson Malheiros'
 
     click_link 'Apagar'
 
