@@ -6,8 +6,9 @@ feature "RegulatoryActTypes" do
     sign_in
   end
 
-  scenario 'create a new regulatory_act_type' do
+  scenario 'create a new regulatory_act_type, update and destroy an existing' do
     RegulatoryActTypeClassification.make!(:primeiro_tipo)
+    RegulatoryActTypeClassification.make!(:segundo_tipo)
 
     navigate 'Comum > Legislação > Ato Regulamentador > Tipos de Ato Regulamentador'
 
@@ -24,15 +25,6 @@ feature "RegulatoryActTypes" do
 
     expect(page).to have_field 'Classificação do tipo de ato regulamentador', :with => 'Tipo 01'
     expect(page).to have_field 'Descrição', :with => 'Lei'
-  end
-
-  scenario 'update an existent regulatory_act_type' do
-    RegulatoryActType.make!(:lei)
-    RegulatoryActTypeClassification.make!(:segundo_tipo)
-
-    navigate 'Comum > Legislação > Ato Regulamentador > Tipos de Ato Regulamentador'
-
-    click_link 'Lei'
 
     fill_modal 'Classificação do tipo de ato regulamentador', :with => 'Tipo 02', :field => 'Descrição'
     fill_in 'Descrição', :with => 'Outra Lei'
@@ -45,20 +37,12 @@ feature "RegulatoryActTypes" do
 
     expect(page).to have_field 'Classificação do tipo de ato regulamentador', :with => 'Tipo 02'
     expect(page).to have_field 'Descrição', :with => 'Outra Lei'
-  end
-
-  scenario 'destroy an existent regulatory_act_type' do
-    RegulatoryActType.make!(:lei)
-
-    navigate 'Comum > Legislação > Ato Regulamentador > Tipos de Ato Regulamentador'
-
-    click_link 'Lei'
 
     click_link 'Apagar'
 
     expect(page).to have_notice 'Tipo de Ato Regulamentador apagado com sucesso.'
 
-    expect(page).to_not have_content 'Lei'
+    expect(page).to_not have_content 'Outra Lei'
   end
 
   scenario 'index with columns at the index' do
