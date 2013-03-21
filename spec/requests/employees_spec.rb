@@ -30,8 +30,6 @@ feature "Employees" do
     expect(page).to have_field 'Cargo', :with => 'Gerente'
     expect(page).to have_field 'Matrícula', :with => '958473'
 
-    fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
-    fill_modal 'Cargo', :with => 'Gerente'
     fill_in 'Matrícula', :with => '123456'
 
     click_button 'Salvar'
@@ -50,7 +48,7 @@ feature "Employees" do
 
     within_records do
       expect(page).to_not have_content 'Gabriel Sobrinho'
-      expect(page).to_not have_content '958473'
+      expect(page).to_not have_content '123456'
     end
   end
 
