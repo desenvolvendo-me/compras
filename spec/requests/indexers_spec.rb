@@ -50,7 +50,7 @@ feature "Indexers" do
     expect(page).to_not have_content 'SELIC'
     expect(page).to_not have_content 'Real'
     expect(page).to_not have_content '01/05/2011'
-    expect(page).to_not have_content '084,0000'
+    expect(page).to_not have_content '0,840000'
   end
 
   scenario 'index with columns at the index' do
