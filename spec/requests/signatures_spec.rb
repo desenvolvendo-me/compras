@@ -30,32 +30,30 @@ feature "Signatures" do
     expect(page).to have_field 'Pessoa', :with => 'Gabriel Sobrinho'
     expect(page).to have_field 'Cargo', :with => 'Gerente'
     expect(page).to have_select 'Tipo', :selected => 'Gestor'
-    expect(page).to have_field 'Data inicial', :with => '31/01/2012'
+    expect(page).to have_field 'Data inicial', :with => '01/01/2012'
     expect(page).to have_field 'Data final', :with => '31/12/2012'
 
-    fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
     fill_modal 'Cargo', :with => 'Supervisor'
-    select 'Contador', :from => 'Tipo'
-    fill_in 'Data inicial', :with => '31/01/2012'
-    fill_in 'Data final', :with => '31/01/2013'
+    fill_in 'Data inicial', :with => '02/01/2012'
+    fill_in 'Data final', :with => '02/12/2012'
 
     click_button 'Salvar'
 
     expect(page).to have_notice 'Assinatura editada com sucesso.'
 
-    click_link 'Wenderson Malheiros'
+    click_link 'Gabriel Sobrinho'
 
-    expect(page).to have_field 'Pessoa', :with => 'Wenderson Malheiros'
+    expect(page).to have_field 'Pessoa', :with => 'Gabriel Sobrinho'
     expect(page).to have_field 'Cargo', :with => 'Supervisor'
     expect(page).to have_select 'Tipo', :selected => 'Gestor'
-    expect(page).to have_field 'Data inicial', :with => '31/01/2012'
-    expect(page).to have_field 'Data final', :with => '31/12/2012'
+    expect(page).to have_field 'Data inicial', :with => '02/01/2012'
+    expect(page).to have_field 'Data final', :with => '02/12/2012'
 
     click_link 'Apagar'
 
     expect(page).to have_notice 'Assinatura apagada com sucesso.'
 
-    expect(page).to_not have_content 'Wenderson Malheiros'
+    expect(page).to_not have_content 'Gabriel Sobrinho'
     expect(page).to_not have_content 'Supervisor'
   end
 

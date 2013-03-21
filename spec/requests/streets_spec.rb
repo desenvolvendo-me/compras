@@ -64,7 +64,6 @@ feature "Streets" do
     click_link 'Criar Logradouro'
 
     fill_modal 'Bairro', :with => 'Centro'
-    fill_modal 'Bairro', :with => 'Centro'
 
     expect(page).to have_content 'Centro'
 
