@@ -6,7 +6,7 @@ feature "RegularizationOrAdministrativeSanctionReasons" do
     sign_in
   end
 
-  scenario 'create a new regularization_or_administrative_sanction_reason' do
+  scenario 'create a new regularization_or_administrative_sanction_reason, update and destroy an existing' do
     navigate 'Comum > Pessoas > Auxiliar > Motivos de Sanções Administrativas ou Regularizações'
 
     click_link 'Criar Motivo de Sanção Administrativa ou Regularização'
@@ -22,14 +22,6 @@ feature "RegularizationOrAdministrativeSanctionReasons" do
 
     expect(page).to have_field 'Descrição', :with => 'Advertência por desistência parcial da proposta devidamente justificada'
     expect(page).to have_select 'Tipo', :selected => 'Regularização'
-  end
-
-  scenario 'update an existent regularization_or_administrative_sanction_reason' do
-    RegularizationOrAdministrativeSanctionReason.make!(:sancao_administrativa)
-
-    navigate 'Comum > Pessoas > Auxiliar > Motivos de Sanções Administrativas ou Regularizações'
-
-    click_link 'Advertência por desistência parcial da proposta devidamente justificada'
 
     fill_in 'Descrição', :with => 'Ativação do registro cadastral'
     select 'Sanção administrativa', :from => 'Tipo'
@@ -42,20 +34,12 @@ feature "RegularizationOrAdministrativeSanctionReasons" do
 
     expect(page).to have_field 'Descrição', :with => 'Ativação do registro cadastral'
     expect(page).to have_select 'Tipo', :selected => 'Sanção administrativa'
-  end
-
-  scenario 'destroy an existent regularization_or_administrative_sanction_reason' do
-    RegularizationOrAdministrativeSanctionReason.make!(:sancao_administrativa)
-
-    navigate 'Comum > Pessoas > Auxiliar > Motivos de Sanções Administrativas ou Regularizações'
-
-    click_link 'Advertência por desistência parcial da proposta devidamente justificada'
 
     click_link 'Apagar'
 
     expect(page).to have_notice 'Motivo de Sanção Administrativa ou Regularização apagado com sucesso.'
 
-    expect(page).to_not have_content 'Advertência por desistência parcial da proposta devidamente justificada'
+    expect(page).to_not have_content 'Ativação do registro cadastral'
   end
 
   scenario 'index with columns at the index' do
