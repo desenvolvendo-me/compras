@@ -26,7 +26,6 @@ feature "DisseminationSources" do
     expect(page).to have_field 'Tipo do meio de divulgação', :with => 'Jornal de Circulação Municipal'
 
     fill_in 'Descrição', :with => 'Jornal Não Oficial do Município'
-    fill_modal 'Tipo do meio de divulgação', :with => 'Jornal de Circulação Municipal', :field => 'Descrição'
 
     click_button 'Salvar'
 
