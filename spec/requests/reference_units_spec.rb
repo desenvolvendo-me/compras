@@ -34,7 +34,7 @@ feature "ReferenceUnits" do
 
     expect(page).to have_field 'Descrição', :with => 'Centímetro'
     expect(page).to have_field 'Sigla', :with => 'cm'
-  
+
     click_link 'Apagar'
 
     expect(page).to have_notice 'Unidade de Medida apagada com sucesso.'
