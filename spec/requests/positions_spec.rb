@@ -6,7 +6,7 @@ feature "Positions" do
     sign_in
   end
 
-  scenario 'create a new position' do
+  scenario 'create a new position, update and destroy an existing' do
     navigate 'Geral > Usuários > Cargos'
 
     click_link 'Criar Cargo'
@@ -20,14 +20,6 @@ feature "Positions" do
     click_link 'Gerente'
 
     expect(page).to have_field 'Nome', :with => 'Gerente'
-  end
-
-  scenario 'update an existent position' do
-    Position.make!(:gerente)
-
-    navigate 'Geral > Usuários > Cargos'
-
-    click_link 'Gerente'
 
     fill_in 'Nome', :with => 'Gerente de Setor'
 
@@ -38,20 +30,11 @@ feature "Positions" do
     click_link 'Gerente de Setor'
 
     expect(page).to have_field 'Nome', :with => 'Gerente de Setor'
-  end
-
-  scenario 'destroy an existent position' do
-    Position.make!(:gerente)
-
-    navigate 'Geral > Usuários > Cargos'
-
-    click_link 'Gerente'
 
     click_link 'Apagar'
 
     expect(page).to have_notice 'Cargo apagado com sucesso.'
-
-    expect(page).to_not have_content 'Gerente'
+    expect(page).to_not have_content 'Gerente de Setor'
   end
 
   scenario 'index with columns at the index' do
