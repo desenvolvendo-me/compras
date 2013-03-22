@@ -1,5 +1,5 @@
 Address.blueprint(:apto) do
-  neighborhood { Neighborhood.make!(:sao_francisco) }
+  neighborhood { ::FactoryGirl::Preload.factories['Neighborhood'][:sao_francisco_curitiba] }
   street { Street.make!(:girassol_curitiba) }
   land_subdivision { LandSubdivision.make!(:solar_da_serra) }
   condominium { Condominium.make!(:parque_das_flores) }
@@ -10,7 +10,7 @@ Address.blueprint(:apto) do
 end
 
 Address.blueprint(:general) do
-  neighborhood { Neighborhood.make!(:sao_francisco) }
+  neighborhood { ::FactoryGirl::Preload.factories['Neighborhood'][:sao_francisco_curitiba] }
   street { Street.make!(:girassol_curitiba) }
   land_subdivision { LandSubdivision.make!(:solar_da_serra) }
   condominium { Condominium.make!(:parque_das_flores) }
@@ -21,7 +21,7 @@ Address.blueprint(:general) do
 end
 
 Address.blueprint(:education) do
-  neighborhood { Neighborhood.make!(:portugal) }
+  neighborhood { ::FactoryGirl::Preload.factories['Neighborhood'][:portugal_porto_alegre] }
   street { Street.make!(:amazonas) }
   land_subdivision { LandSubdivision.make!(:horizonte_a_vista) }
   condominium { Condominium.make!(:tambuata) }

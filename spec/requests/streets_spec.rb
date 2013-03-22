@@ -7,7 +7,6 @@ feature "Streets" do
   end
 
   scenario 'create a new street, update and destroy an existing' do
-    Neighborhood.make!(:centro)
     StreetType.make!(:rua)
     StreetType.make!(:avenida)
 
@@ -57,8 +56,6 @@ feature "Streets" do
   end
 
   scenario 'should not allow more than one time neighborhood' do
-    Neighborhood.make!(:centro)
-
     navigate 'Geral > Parâmetros > Endereços > Logradouros'
 
     click_link 'Criar Logradouro'

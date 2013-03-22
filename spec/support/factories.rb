@@ -16,4 +16,8 @@ FactoryGirl.define do
   factory :district do
     name 'Leste'
   end
+
+  factory :neighborhood do
+    name 'Centro'
+  end
 end

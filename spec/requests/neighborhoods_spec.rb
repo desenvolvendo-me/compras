@@ -35,7 +35,6 @@ feature "Neighborhoods" do
   end
 
   scenario 'update a neighborhood' do
-    Neighborhood.make!(:centro)
 
     navigate 'Geral > Parâmetros > Endereços > Bairros'
 
@@ -54,7 +53,6 @@ feature "Neighborhoods" do
   end
 
   scenario 'destroy a neighborhood' do
-    Neighborhood.make!(:centro)
 
     navigate 'Geral > Parâmetros > Endereços > Bairros'
 
@@ -112,7 +110,6 @@ feature "Neighborhoods" do
   end
 
   scenario 'index with columns at the index' do
-    Neighborhood.make!(:centro)
 
     navigate 'Geral > Parâmetros > Endereços > Bairros'
 

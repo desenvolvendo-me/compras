@@ -5,7 +5,7 @@ Street.blueprint(:amazonas) do
   street_type { StreetType.make!(:avenida) }
   tax_zone    { "2" }
   city { ::FactoryGirl::Preload.factories['City'][:porto_alegre] }
-  neighborhoods { [Neighborhood.make!(:portugal)] }
+  neighborhoods { ::FactoryGirl::Preload.factories['Neighborhood'][:portugal_porto_alegre] }
 end
 
 Street.blueprint(:girassol) do
@@ -13,7 +13,7 @@ Street.blueprint(:girassol) do
   street_type { StreetType.make!(:rua) }
   tax_zone    { "2" }
   city { ::FactoryGirl::Preload.factories['City'][:belo_horizonte] }
-  neighborhoods { [Neighborhood.make!(:centro), Neighborhood.make!(:sao_francisco_bh)] }
+  neighborhoods { [::FactoryGirl::Preload.factories['Neighborhood'][:centro_bh], ::FactoryGirl::Preload.factories['Neighborhood'][:sao_francisco_bh]] }
 end
 
 Street.blueprint(:girassol_curitiba) do
@@ -21,7 +21,7 @@ Street.blueprint(:girassol_curitiba) do
   street_type { StreetType.make!(:rua) }
   tax_zone    { "2" }
   city { ::FactoryGirl::Preload.factories['City'][:curitiba] }
-  neighborhoods { [Neighborhood.make!(:sao_francisco)] }
+  neighborhoods { ::FactoryGirl::Preload.factories['Neighborhood'][:sao_francisco_curitiba] }
 end
 
 Street.blueprint(:bento_goncalves) do
@@ -29,7 +29,7 @@ Street.blueprint(:bento_goncalves) do
   street_type { StreetType.make!(:rua) }
   tax_zone    { "2" }
   city { ::FactoryGirl::Preload.factories['City'][:porto_alegre] }
-  neighborhoods { [Neighborhood.make!(:portugal)] }
+  neighborhoods { ::FactoryGirl::Preload.factories['Neighborhood'][:portugal_porto_alegre] }
 end
 
 Street.blueprint(:cristiano_machado) do
@@ -37,5 +37,5 @@ Street.blueprint(:cristiano_machado) do
   street_type { StreetType.make!(:avenida) }
   tax_zone    { "2" }
   city { ::FactoryGirl::Preload.factories['City'][:belo_horizonte] }
-  neighborhoods { [Neighborhood.make!(:centro)] }
+  neighborhoods { [::FactoryGirl::Preload.factories['Neighborhood'][:centro_bh]] }
 end
