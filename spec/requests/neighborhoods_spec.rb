@@ -6,7 +6,7 @@ feature "Neighborhoods" do
     sign_in
   end
 
-  scenario 'create a new neighborhood' do
+  scenario 'create, update and destroy a new neighborhood' do
     navigate 'Geral > Parâmetros > Endereços > Bairros'
 
     click_link 'Criar Bairro'
@@ -32,37 +32,23 @@ feature "Neighborhoods" do
     expect(page).to have_field 'Nome', :with => 'Alvorada'
     expect(page).to have_field 'Cidade', :with => 'Porto Alegre'
     expect(page).to have_field 'Distrito', :with => 'Leste'
-  end
 
-  scenario 'update a neighborhood' do
-
-    navigate 'Geral > Parâmetros > Endereços > Bairros'
-
-    click_link 'Centro'
-
-    fill_in 'Nome', :with => 'Alvorada'
+    fill_in 'Nome', :with => 'Ponte Rasa'
 
     click_button 'Salvar'
 
     expect(page).to have_notice 'Bairro editado com sucesso.'
 
-    click_link 'Alvorada'
+    click_link 'Ponte Rasa'
 
-    expect(page).to have_field 'Nome', :with => 'Alvorada'
-    expect(page).to have_field 'Cidade', :with => 'Belo Horizonte'
-  end
-
-  scenario 'destroy a neighborhood' do
-
-    navigate 'Geral > Parâmetros > Endereços > Bairros'
-
-    click_link 'Centro'
+    expect(page).to have_field 'Nome', :with => 'Ponte Rasa'
+    expect(page).to have_field 'Cidade', :with => 'Porto Alegre'
 
     click_link 'Apagar'
 
     expect(page).to have_notice 'Bairro apagado com sucesso.'
 
-    expect(page).to_not have_content 'Centro'
+    expect(page).to_not have_content 'Ponte Rasa'
   end
 
   scenario 'cannot destroy a neighborhood with streets' do
