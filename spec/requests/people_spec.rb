@@ -6,7 +6,7 @@ feature "People" do
     sign_in
   end
 
-  scenario 'create a new person as individual' do
+  scenario 'create a new person as individual, update and destroy an existing' do
     Street.make!(:amazonas)
 
     navigate 'Comum > Pessoas > Pessoas'
@@ -94,14 +94,6 @@ feature "People" do
         expect(page).to have_field 'CEP', :with => '89009-187'
       end
     end
-  end
-
-  scenario 'update an existent person as individual' do
-    Person.make!(:wenderson)
-
-    navigate 'Comum > Pessoas > Pessoas'
-
-    click_link 'Wenderson'
 
     expect(page).to_not have_field 'Pessoa Física'
     expect(page).to_not have_field 'Pessoa Jurídica'
@@ -131,23 +123,14 @@ feature "People" do
       expect(page).to have_field "CEP", :with => "41600-223"
       expect(page).to have_field 'Complemento', :with => "Apto das alfalfas"
     end
-  end
-
-  scenario 'destroy an existent person' do
-    Person.make!(:wenderson)
-
-    navigate 'Comum > Pessoas > Pessoas'
-
-    click_link 'Wenderson Malheiros'
 
     click_link 'Apagar'
 
     expect(page).to have_notice 'Pessoa apagada com sucesso.'
-
-    expect(page).to_not have_content 'Wenderson Malheiros'
+    expect(page).to_not have_content 'Gabriel Sobrinho'
   end
 
-  scenario "create a new person as company" do
+  scenario "create a new person as company and update an existing" do
     LegalNature.make!(:administracao_publica)
     CompanySize.make!(:micro_empresa)
     Street.make!(:bento_goncalves)
@@ -247,15 +230,6 @@ feature "People" do
       expect(page).to have_field 'Pessoa', :with => 'Gabriel Sobrinho'
       expect(page).to have_field 'Percentual de cotas societárias', :with => '100,00'
     end
-  end
-
-  scenario 'update an existent person as company' do
-    Person.make!(:nohup)
-    Person.make!(:sobrinho)
-
-    navigate 'Comum > Pessoas > Pessoas'
-
-    click_link 'Nohup'
 
     expect(page).to_not have_field 'Pessoa Física'
     expect(page).to_not have_field 'Pessoa Jurídica'
@@ -274,7 +248,7 @@ feature "People" do
 
       click_button 'Adicionar Sócio'
 
-      fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
+      fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
       fill_in 'Percentual de cotas societárias', :with => '100,00'
     end
 
@@ -294,7 +268,7 @@ feature "People" do
     end
 
     within_tab 'Sócios'do
-      expect(page).to have_field 'Pessoa', :with => 'Gabriel Sobrinho'
+      expect(page).to have_field 'Pessoa', :with => 'Wenderson Malheiros'
       expect(page).to have_field 'Percentual de cotas societárias', :with => '100,00'
     end
   end
