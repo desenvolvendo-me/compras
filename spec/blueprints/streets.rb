@@ -29,7 +29,7 @@ Street.blueprint(:bento_goncalves) do
   street_type { StreetType.make!(:rua) }
   tax_zone    { "2" }
   city { ::FactoryGirl::Preload.factories['City'][:porto_alegre] }
-  neighborhoods { ::FactoryGirl::Preload.factories['Neighborhood'][:portugal_porto_alegre] }
+  neighborhoods { [::FactoryGirl::Preload.factories['Neighborhood'][:portugal_porto_alegre]] }
 end
 
 Street.blueprint(:cristiano_machado) do
