@@ -9,7 +9,7 @@ feature "OccurrenceContractualHistorics" do
     sign_in
   end
 
-  scenario 'create a new occurrence_contractual_historic' do
+  scenario 'create a new occurrence_contractual_historic, update and destroy an existing' do
     Contract.make!(:primeiro_contrato)
 
     navigate 'Comum > Cadastrais > Contratos'
@@ -40,22 +40,6 @@ feature "OccurrenceContractualHistorics" do
     expect(page).to have_field 'Observações', :with => 'divergência contratual'
     expect(page).to have_select 'Tipo de alteração', :selected => 'Bilateral'
     expect(page).to have_select 'Tipo de histórico', :selected => 'Outros'
-  end
-
-  scenario 'update an existent occurrence_contractual_historic' do
-    OccurrenceContractualHistoric.make!(:example)
-
-    navigate 'Comum > Cadastrais > Contratos'
-
-    click_link "Limpar Filtro"
-
-    within_records do
-      page.find('a').click
-    end
-
-    click_link 'Ocorrências Contratuais'
-
-    click_link '1'
 
     fill_in 'Data da ocorrência', :with => '10/07/2012'
     fill_in 'Observações', :with => 'problemas judiciais'
@@ -68,22 +52,6 @@ feature "OccurrenceContractualHistorics" do
 
     expect(page).to have_field 'Data da ocorrência', :with => '10/07/2012'
     expect(page).to have_field 'Observações', :with => 'problemas judiciais'
-  end
-
-  scenario 'destroy an existent occurrence_contractual_historic' do
-    OccurrenceContractualHistoric.make!(:example)
-
-    navigate 'Comum > Cadastrais > Contratos'
-
-    click_link "Limpar Filtro"
-
-    within_records do
-      page.find('a').click
-    end
-
-    click_link 'Ocorrências Contratuais'
-
-    click_link '1'
 
     click_link 'Apagar'
 
