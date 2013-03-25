@@ -15,7 +15,7 @@ describe DirectPurchase do
     it "changes the status of the purchase solicitation item group to Annuled" do
       employee = Employee.make!(:sobrinho)
       item_group = PurchaseSolicitationItemGroup.make!(:antivirus)
-      PurchaseSolicitationItemGroupAnnulmentCreator.new(item_group).create_annulment(employee, Date.today)
+      PurchaseSolicitationItemGroupAnnulmentCreator.new(item_group).create_annulment(employee, Date.current)
       expect(item_group.status).to eq PurchaseSolicitationItemGroupStatus::ANNULLED
     end
   end

@@ -35,7 +35,7 @@ describe PriceRegistration do
   describe 'validate validaty_date' do
     context 'when before a year of date' do
       it 'should allow' do
-        subject.stub(:date => Date.today)
+        subject.stub(:date => Date.current)
         subject.stub(:validaty_date => Date.tomorrow)
 
         subject.valid?
@@ -46,8 +46,8 @@ describe PriceRegistration do
 
     context 'when equals one year after date' do
       it 'should allow' do
-        subject.stub(:date => Date.today)
-        subject.stub(:validaty_date => Date.today + 1.year)
+        subject.stub(:date => Date.current)
+        subject.stub(:validaty_date => Date.current + 1.year)
 
         subject.valid?
 
@@ -57,7 +57,7 @@ describe PriceRegistration do
 
     context 'when greater than one year after date' do
       it 'should allow' do
-        subject.stub(:date => Date.today)
+        subject.stub(:date => Date.current)
         subject.stub(:validaty_date => Date.tomorrow + 1.year)
 
         subject.valid?
@@ -68,23 +68,23 @@ describe PriceRegistration do
 
     context 'when equals date' do
       it 'should allow' do
-        subject.stub(:date => Date.today)
-        subject.stub(:validaty_date => Date.today)
+        subject.stub(:date => Date.current)
+        subject.stub(:validaty_date => Date.current)
 
         subject.valid?
 
-        expect(subject.errors[:validaty_date]).to include("deve ser depois de #{I18n.l(Date.today)}")
+        expect(subject.errors[:validaty_date]).to include("deve ser depois de #{I18n.l(Date.current)}")
       end
     end
 
     context 'when before date' do
       it 'should allow' do
-        subject.stub(:date => Date.today)
+        subject.stub(:date => Date.current)
         subject.stub(:validaty_date => Date.yesterday)
 
         subject.valid?
 
-        expect(subject.errors[:validaty_date]).to include("deve ser depois de #{I18n.l(Date.today)}")
+        expect(subject.errors[:validaty_date]).to include("deve ser depois de #{I18n.l(Date.current)}")
       end
     end
   end

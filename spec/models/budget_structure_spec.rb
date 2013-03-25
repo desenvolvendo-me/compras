@@ -253,7 +253,7 @@ describe BudgetStructure do
     end
 
     let :responsible_persisted_with_end_date do
-      double('ResponsiblePersistedWithEndDate', :persisted? => true, :end_date => Date.today)
+      double('ResponsiblePersistedWithEndDate', :persisted? => true, :end_date => Date.current)
     end
 
     let :responsible_persisted_without_end_date do

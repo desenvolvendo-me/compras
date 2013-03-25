@@ -240,7 +240,7 @@ feature "Tradings" do
 
   scenario "filtering out exonerated licitation commissions" do
     LicitationCommission.make!(:comissao_pregao_presencial,
-                               :exoneration_date => Date.today)
+                               :exoneration_date => Date.current)
 
     navigate "Processos de Compra > Pregão Presencial"
 

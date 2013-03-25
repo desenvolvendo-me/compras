@@ -147,7 +147,7 @@ describe LicitationProcess do
       end
 
       it "envelope opening date should be blank when has not a publication" do
-        subject.stub(:proposal_envelope_opening_date).and_return Date.today
+        subject.stub(:proposal_envelope_opening_date).and_return Date.current
         subject.stub(:last_publication_date).and_return nil
 
         subject.send(:validate_proposal_envelope_opening_date)
@@ -155,8 +155,8 @@ describe LicitationProcess do
       end
 
       it "validates the envelope opening date with the validation poro" do
-        subject.stub(:proposal_envelope_opening_date).and_return Date.today
-        subject.stub(:last_publication_date).and_return Date.today
+        subject.stub(:proposal_envelope_opening_date).and_return Date.current
+        subject.stub(:last_publication_date).and_return Date.current
         licitation_validation = double :licitation_process_proposal_envelope_opening_date
         LicitationProcessEnvelopeOpeningDate.should_receive(:new).with(subject).and_return licitation_validation
         licitation_validation.should_receive :valid?
