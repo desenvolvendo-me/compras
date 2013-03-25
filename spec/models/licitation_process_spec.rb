@@ -243,8 +243,8 @@ describe LicitationProcess do
   it { should_not allow_value('a201').for(:year) }
 
   it "validate attribute changes if not updatable" do
-    subject.stub(:updatable? => false,
-                 :changed_attributes => [double])
+    subject.stub(:updatable? => false)
+    subject.year = 2014
 
     subject.valid?
 
