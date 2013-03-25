@@ -1,9 +1,7 @@
 class SupplyAuthorizationGenerator
-  def initialize(direct_purchase_object, supply_authorization_repository = SupplyAuthorization, item_repository = PurchaseSolicitationBudgetAllocationItem, item_group_status_changer = PurchaseSolicitationItemGroupStatusChanger)
+  def initialize(direct_purchase_object, supply_authorization_repository = SupplyAuthorization)
     @direct_purchase_object = direct_purchase_object
     @supply_authorization_repository = supply_authorization_repository
-    @item_repository = item_repository
-    @item_group_status_changer = item_group_status_changer
   end
 
   def generate!
@@ -12,18 +10,15 @@ class SupplyAuthorizationGenerator
     else
       attend_items_purchase_solicitation
       attend_purchase_solicitation
-      attend_items_purchase_solicitation_item_group
-      attend_purchase_solicitation_item_group
       authorize!
     end
   end
 
   private
 
-  attr_reader :direct_purchase_object, :supply_authorization_repository,
-              :item_repository, :item_group_status_changer
+  attr_reader :direct_purchase_object, :supply_authorization_repository
 
-  delegate :purchase_solicitation, :purchase_solicitation_item_group,
+  delegate :purchase_solicitation,
            :to => :direct_purchase_object, :allow_nil => true
 
   def authorize!
@@ -43,17 +38,5 @@ class SupplyAuthorizationGenerator
     return if purchase_solicitation.blank?
 
     purchase_solicitation.attend!
-  end
-
-  def attend_items_purchase_solicitation_item_group
-    return if purchase_solicitation_item_group.blank?
-
-    item_repository.by_item_group(purchase_solicitation_item_group).attend!
-  end
-
-  def attend_purchase_solicitation_item_group
-    return if purchase_solicitation_item_group.blank?
-
-    item_group_status_changer.change(purchase_solicitation_item_group)
   end
 end

@@ -13,7 +13,6 @@ class PurchaseSolicitationItemGroup < Compras::Model
 
   has_many :purchase_solicitation_item_group_materials, :dependent => :destroy
   has_many :purchase_solicitations, :through => :purchase_solicitation_item_group_materials, :uniq => true
-  has_one :direct_purchase, :dependent => :restrict
   has_one :annul, :class_name => 'ResourceAnnul', :as => :annullable, :dependent => :destroy
 
   validates :description, :presence => true
@@ -21,8 +20,6 @@ class PurchaseSolicitationItemGroup < Compras::Model
   validate :purchase_solicitation_status
 
   accepts_nested_attributes_for :purchase_solicitation_item_group_materials, :allow_destroy => true
-
-  delegate :authorized?, :to => :direct_purchase, :prefix => true, :allow_nil => true
 
   orderize :description
 
@@ -55,12 +52,8 @@ class PurchaseSolicitationItemGroup < Compras::Model
     purchase_solicitation_items.map(&:id)
   end
 
-  def editable?
-    direct_purchase.blank?
-  end
-
   def annullable?
-    editable?
+    true
   end
 
   def fulfill_items(process)

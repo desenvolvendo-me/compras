@@ -7,7 +7,6 @@ require 'app/models/direct_purchase'
 require 'app/models/budget_allocation'
 require 'app/models/direct_purchase_budget_allocation'
 require 'app/models/direct_purchase_budget_allocation_item'
-require 'app/models/purchase_solicitation_item_group'
 require 'app/models/supply_authorization'
 require 'app/models/modality_limit'
 require 'app/business/direct_purchase_modality_limit_verificator'
@@ -29,7 +28,6 @@ describe DirectPurchase do
   it { should belong_to :employee }
   it { should belong_to :payment_method }
   it { should belong_to :purchase_solicitation }
-  it { should belong_to :purchase_solicitation_item_group }
   it { should belong_to :price_registration }
 
   it { should have_many(:items).through(:direct_purchase_budget_allocations) }
@@ -75,14 +73,6 @@ describe DirectPurchase do
     expect(subject.licitation_object_build_licitation_exemption).to eq 200.0
   end
 
-  it 'should delegate items from purchase_solicitation_item_groups' do
-    expect(subject.purchase_solicitation_item_group_purchase_solicitation_item_ids).to eq nil
-
-    subject.stub(:purchase_solicitation_item_group).and_return(double(:purchase_solicitation_item_group, :purchase_solicitation_item_ids => [1, 2]))
-
-    expect(subject.purchase_solicitation_item_group_purchase_solicitation_item_ids).to eq [1, 2]
-  end
-
   context "validations" do
     it "the duplicated budget_allocations should be invalid except the first" do
       allocation_one = subject.direct_purchase_budget_allocations.build(:budget_allocation_id => 1)
@@ -106,13 +96,6 @@ describe DirectPurchase do
 
     context "budget structure validation" do
       it { should validate_presence_of :budget_structure }
-
-      it "does not validate budget_structure if item group is present" do
-        item_group = double(:item_group, :present? => true, :annulled? => false)
-        subject.stub(:purchase_solicitation_item_group => item_group)
-
-        should_not validate_presence_of :budget_structure
-      end
     end
 
     it { should validate_presence_of :year }
@@ -183,15 +166,6 @@ describe DirectPurchase do
         double(:can_be_grouped? => true)
       end
 
-      it "should not have a purchase solicitation AND a purchase solicitation item group" do
-        subject.stub(:purchase_solicitation => purchase_solicitation)
-        subject.stub(:purchase_solicitation_item_group => double(:annulled? => false))
-
-        subject.valid?
-
-        expect(subject.errors[:purchase_solicitation]).to include 'deve estar em branco se houver um Agrupamento de solicitações de compra selecionado'
-      end
-
       it "should not have a purchase solicitation that can't generate direct purchases" do
         purchase_solicitation.stub(:can_be_grouped? => false)
         subject.stub(:purchase_solicitation_id_changed? => true)
@@ -221,28 +195,6 @@ describe DirectPurchase do
       subject.stub(:direct_purchase_budget_allocations).and_return([item1, item2])
 
       subject.total_direct_purchase_budget_allocations_sum.should eq 1
-    end
-  end
-
-  context 'with purchase_solicitation_item_group' do
-    let :purchase_solicitation_item_group do
-      double(:purchase_solcitation_item_group)
-    end
-
-    it 'should not allow purchase_solicitation_item_group annulled' do
-      purchase_solicitation_item_group.stub(:annulled?).and_return(true)
-      subject.stub(:purchase_solicitation_item_group).and_return(purchase_solicitation_item_group)
-
-      subject.valid?
-      expect(subject.errors[:purchase_solicitation_item_group]).to include(I18n.translate('errors.messages.is_annulled'))
-    end
-
-    it 'should allow purchase_solicitation_item_group not annulled' do
-      purchase_solicitation_item_group.stub(:annulled?).and_return(false)
-      subject.stub(:purchase_solicitation_item_group).and_return(purchase_solicitation_item_group)
-
-      subject.valid?
-      expect(subject.errors[:purchase_solicitation_item_group]).to_not include(I18n.translate('errors.messages.is_annulled'))
     end
   end
 

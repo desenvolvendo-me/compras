@@ -11,7 +11,6 @@ describe DirectPurchaseAnnulment do
       :direct_purchase => direct_purchase,
       :resource_annul => resource_annul,
       :context => context,
-      :item_group_annulment => item_group_annulment,
       :email_sender => email_sender
     )
   end
@@ -35,10 +34,6 @@ describe DirectPurchaseAnnulment do
 
   let :supply_authorization do
     double(:supply_authorization)
-  end
-
-  let :item_group_annulment do
-    double(:item_status_changer, :annul => true)
   end
 
   let :resource_annul do
@@ -66,13 +61,6 @@ describe DirectPurchaseAnnulment do
       email_sender.should_receive(:deliver)
       email_sender.should_receive(:new).with(supply_authorization, context).and_return(email_sender)
 
-      item_group_annulment.should_receive(:new).
-                           with(purchase_solicitation_item_group).
-                           and_return(item_group_annulment)
-
-      item_group_annulment.should_receive(:create_annulment).
-                           with('João', Date.new(2012, 10, 01), 'Anulação')
-
       subject.annul
     end
 
@@ -83,8 +71,6 @@ describe DirectPurchaseAnnulment do
 
       email_sender.should_receive(:deliver)
       email_sender.should_receive(:new).with(supply_authorization, context).and_return(email_sender)
-
-      item_group_annulment.should_not_receive(:new)
 
       subject.annul
     end
@@ -139,17 +125,6 @@ describe DirectPurchaseAnnulment do
 
       subject.annul
     end
-  end
-
-  it 'should delegates purchase_solicitation_item_group to direct_purchase' do
-    direct_purchase.stub(:purchase_solicitation_item_group).and_return(true)
-    purchase_solicitation.stub(:present?).and_return(false)
-
-    expect(subject.purchase_solicitation_item_group).to be true
-
-    direct_purchase.stub(:purchase_solicitation_item_group).and_return(false)
-
-    expect(subject.purchase_solicitation_item_group).to be false
   end
 
   it 'should delegates supply_authorization to direct_purchase' do

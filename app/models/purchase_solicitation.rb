@@ -95,24 +95,6 @@ class PurchaseSolicitation < Compras::Model
     PurchaseSolicitation.update_all(:service_status => new_status)
   end
 
-  def direct_purchase_by_item_group
-    PurchaseSolicitation.joins {
-      purchase_solicitation_item_group_material_purchase_solicitations.
-      purchase_solicitation_item_group_material.
-      purchase_solicitation_item_group.
-      direct_purchase
-    }.where { |purchase| purchase.id.eq(self.id) }
-  end
-
-  def licitation_process_by_item_group
-    PurchaseSolicitation.joins {
-      purchase_solicitation_item_group_material_purchase_solicitations.
-      purchase_solicitation_item_group_material.
-      purchase_solicitation_item_group.
-      licitation_process
-    }.where { |purchase| purchase.id.eq(self.id) }
-  end
-
   def to_s
     "#{code}/#{accounting_year} #{budget_structure} - RESP: #{responsible}"
   end

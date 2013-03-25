@@ -4,13 +4,11 @@ require 'lib/signable'
 require 'lib/annullable'
 require 'app/models/purchase_solicitation_item_group'
 require 'app/models/purchase_solicitation_item_group_material'
-require 'app/models/direct_purchase'
 require 'app/models/resource_annul'
 
 describe PurchaseSolicitationItemGroup do
   it { should have_many(:purchase_solicitation_item_group_materials).dependent(:destroy) }
   it { should have_many(:purchase_solicitations).through(:purchase_solicitation_item_group_materials) }
-  it { should have_one(:direct_purchase).dependent(:restrict) }
   it { should have_one(:annul).dependent(:destroy) }
 
   it { should validate_presence_of(:description) }
@@ -49,28 +47,8 @@ describe PurchaseSolicitationItemGroup do
     expect(subject).not_to be_annulled
   end
 
-  context 'editable' do
-    let(:direct_purchase) { double(:direct_purchase) }
-
-    it 'should not be editable if has direct_purchase' do
-      subject.stub(:direct_purchase).and_return(direct_purchase)
-
-      expect(subject).not_to be_editable
-    end
-
-    it 'should be editable if does not have direct_purchase' do
-      expect(subject).to be_editable
-    end
-  end
-
   context 'annullable' do
     let(:direct_purchase) { double(:direct_purchase1) }
-
-    it 'should not be annullable if has direct_purchase' do
-      subject.stub(:direct_purchase).and_return(direct_purchase)
-
-      expect(subject).not_to be_annullable
-    end
 
     it 'should be annullable if does not have direct_purchase' do
       expect(subject).to be_annullable

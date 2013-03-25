@@ -35,19 +35,6 @@ describe DirectPurchasesController do
       post :create
     end
 
-    it 'updates the status of the item group through PurchaseSoliciationItemGroupProcess' do
-      item_group = PurchaseSolicitationItemGroup.make!(:antivirus)
-      item_group_process = double(:item_group_process)
-
-      DirectPurchase.any_instance.stub(:save).and_return(true)
-      DirectPurchase.any_instance.stub_chain(:errors, :empty?).and_return(false)
-      PurchaseSolicitationItemGroupProcess.should_receive(:new).
-        with(:new_item_group => item_group).and_return(item_group_process)
-      item_group_process.should_receive(:update_status)
-
-      post :create, :direct_purchase => { :purchase_solicitation_item_group_id => item_group.id }
-    end
-
     context 'without purchase_solicitation' do
       it 'should not update status of purchase solicitation' do
         item_status_changer = double(:item_status_changer)
@@ -123,7 +110,6 @@ describe DirectPurchasesController do
       it "should set the new item_group throught a PurchaseSolicitationItemGroupProcess" do
         item_group = PurchaseSolicitationItemGroup.make!(:antivirus)
         fulfiller_instance = double(:fulfiller_instance)
-        item_group_process = double(:item_group_process)
 
         DirectPurchaseBudgetAllocationCleaner.should_receive(:clear_old_records)
 
@@ -132,12 +118,6 @@ describe DirectPurchasesController do
         PurchaseSolicitationBudgetAllocationItemFulfiller.
           should_receive(:new).twice.
           and_return(fulfiller_instance)
-
-        PurchaseSolicitationItemGroupProcess.should_receive(:new).
-          with(:new_item_group => item_group, :old_item_group => direct_purchase.purchase_solicitation_item_group).
-          and_return(item_group_process)
-
-        item_group_process.should_receive(:update_status)
 
         put :update, :id => direct_purchase.id,
                      :direct_purchase => { :purchase_solicitation_item_group_id => item_group.id }
