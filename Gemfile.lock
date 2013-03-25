@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/MarceloCajueiro/factory_girl-preload.git
+  revision: d0aad287da0fd6c6a2a8a7a59d6aa159ebff7473
+  specs:
+    factory_girl-preload (2.0.2)
+      factory_girl (>= 3.0)
+
+GIT
   remote: git://github.com/carlosantoniodasilva/i18n_alchemy.git
   revision: 9eaa9930f46c26300857b3a24fdad403c100db94
   specs:
@@ -104,8 +111,6 @@ GEM
       multi_json (~> 1.0)
     factory_girl (4.2.0)
       activesupport (>= 3.0.0)
-    factory_girl-preload (2.0.2)
-      factory_girl (>= 3.0)
     factory_girl_rails (4.2.1)
       factory_girl (~> 4.2.0)
       railties (>= 3.0.0)
@@ -313,7 +318,7 @@ DEPENDENCIES
   decore!
   devise (= 2.2.3)
   enumerate_it (= 1.0.3)
-  factory_girl-preload (~> 2.0.2)
+  factory_girl-preload!
   factory_girl_rails (~> 4.2.1)
   foreigner (= 1.2.1)
   has_scope (= 0.5.1)

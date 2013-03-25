@@ -45,4 +45,21 @@ RSpec.configure do |config|
 
   # mark test like intermittent
   config.filter_run_excluding :intermittent => true
+
+  config.include FactoryGirl::Preload::Helpers
+
+  config.before(:suite) do
+    FactoryGirl::Preload.clean
+    FactoryGirl::Preload.run
+
+    Dir[Rails.root.join("spec/blueprints/**/*.rb")].each {|f| require f}
+
+    # Forces all threads to share the same connection. This works on
+    # Capybara because it starts the web server in a thread.
+    ActiveRecord::Base.shared_connection = ActiveRecord::Base.connection
+  end
+
+  config.before(:each) do
+    FactoryGirl::Preload.reload_factories
+  end
 end
