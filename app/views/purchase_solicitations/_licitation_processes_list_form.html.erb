@@ -1,0 +1,16 @@
+<tr class="record purchase-solicitation">
+  <td>
+    <%= code_and_year %>
+  </td>
+  <td>
+    <%= budget_structure %>
+  </td>
+  <td>
+    <%= responsible %>
+  </td>
+  <td>
+    <input id="licitation_process_purchase_solicitations_record_<%= id %>_id" class="purchase-solicitation-id autocomplete-form-hidden-id" type="hidden" name="<%= f.sanitized_object_name %>[purchase_solicitation_ids][]" value="<%= id %>" />
+
+    <a href="#" class="autocomplete-form-remove">Remover</a>
+  </td>
+</tr>

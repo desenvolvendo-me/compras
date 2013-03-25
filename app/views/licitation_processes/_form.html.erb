@@ -199,27 +199,59 @@
   }
 
   function renderBudgetAllocation(budget_allocation) {
-    var budgetAllocationBinds = [];
-    var budgetAllocationUUID = _.uniqueId();
+    var budgetAllocationBinds = [],
+        budgetAllocationUUID = _.uniqueId(),
+        gotBudgetAllocation = false,
+        nestedBudgetAllocationDiv = $("div.nested-administrative-process-budget-allocation"),
+        budgetAllocationRow;
 
     budgetAllocationBinds["uuid-administrative-process-budget-allocation"] = "fresh-" + budgetAllocationUUID;
 
-    $("#administrative-process-budget-allocation").append(
-      $("#administrative-process-budget-allocation-template").mustache(budgetAllocationBinds)
-    ).trigger("nestedForm:afterAdd");
+    nestedBudgetAllocationDiv.each(function(index, obj) {
+      budgetRow = $(obj).find(".licitation_process_administrative_process_budget_allocations_budget_allocation").
+                         find("input[type=hidden]");
+
+      if (budgetRow.val() == budget_allocation.budget_allocation_id) {
+        gotBudgetAllocation = true;
+        return false;
+      }
+    });
+
+    if ((nestedBudgetAllocationDiv.size() == 0) || (!gotBudgetAllocation)) {
+      $("#administrative-process-budget-allocation").append(
+        $("#administrative-process-budget-allocation-template").mustache(budgetAllocationBinds)
+      ).trigger("nestedForm:afterAdd");
+    }
 
     fillBudgetAllocation(budgetAllocationUUID, budget_allocation);
   }
 
   function renderItem(item) {
-    var itemBinds = [];
-    var itemUUID  = _.uniqueId();
+    var itemBinds = [],
+        itemUUID  = _.uniqueId(),
+        gotMaterial = false,
+        nestedItemDiv = $("div.nested-licitation-process-item"),
+        materialRow;
 
     itemBinds["uuid-licitation-process-item"] = "fresh-" + itemUUID;
 
-    $("#items").append(
-      $("#licitation-process-item-template").mustache(itemBinds)
-    ).trigger("nestedForm:afterAdd");
+    nestedItemDiv.each(function(index, obj) {
+      materialRow = $(obj).find(".licitation_process_items_material").find("input[type=hidden]");
+
+      if (materialRow.val() == item.material_id) {
+        gotMaterial = true;
+        return false;
+      }
+    });
+
+    if (gotMaterial) {
+      var material = materialRow.closest(".item-quantity");
+      material.val(material.val() + item.quantity);
+    }
+
+    if ((nestedItemDiv.size() == 0) || (!gotMaterial)) {
+      $("#licitation-process-item").append($("#licitation-process-item-template").mustache(itemBinds)).trigger("nestedForm:afterAdd");
+    }
 
     fillItem(itemUUID, item);
   }
@@ -251,10 +283,7 @@
     calcItemOrder();
   });
 
-  $("#licitation_process_purchase_solicitation_id").on("change", function (event, purchase_solicitation) {
-    $("#administrative-process-budget-allocation").empty();
-    $(".nested-licitation-process-item").empty()
-
+  $("#licitation_process_purchase_solicitations").on("change", function (event, purchase_solicitation) {
     if (purchase_solicitation) {
       $.each(purchase_solicitation.budget_allocations, function (i, budget_allocation) {
         renderBudgetAllocation(budget_allocation);
@@ -263,15 +292,6 @@
           renderItem(item);
         });
       });
-
-      disableBudgetAllocations();
-      disablePurchaseSolicitationItemGroup();
-      toggleItems(false);
-      fillResponsible(purchase_solicitation.responsible);
-    } else {
-      enableBudgetAllocations();
-      enablePurchaseSolicitationItemGroup();
-      toggleItems(true);
     }
   });
 
@@ -341,11 +361,4 @@
       $('form.licitation_process :input').not('[data-disabled]').attr('disabled', true);
     });
   <% end %>
-
-  <% if resource.decorator.disable_budget_allocations? %>
-    $("#budget_allocations :input").attr("disabled", "disabled");
-    $("#budget_allocations :input").removeClass("auto_complete");
-    $("#budget_allocations :input[type='button']").hide();
-  <% end %>
-
 </script>

@@ -9,6 +9,7 @@
 //= require simple_form.auto_complete_input.js
 //= require compras/moment.min
 //= require date_field_validation
+//= require compras/autocomplete_form
 
 $(".clear").live('click', function() {
   $(this).closest(".modal-finder").find("input.modal").val("");

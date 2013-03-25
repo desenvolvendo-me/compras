@@ -19,6 +19,8 @@ class PurchaseSolicitation < Compras::Model
   belongs_to :liberator, :class_name => 'Employee', :foreign_key => 'liberator_id'
   belongs_to :budget_structure
 
+  has_and_belongs_to_many :licitation_processes, :join_table => :compras_licitation_processes_purchase_solicitations
+
   has_many :purchase_solicitation_budget_allocations, :dependent => :destroy,
            :inverse_of => :purchase_solicitation, :order => :id
   has_many :items, :through => :purchase_solicitation_budget_allocations
@@ -30,7 +32,6 @@ class PurchaseSolicitation < Compras::Model
 
   has_one  :annul, :class_name => 'ResourceAnnul', :as => :annullable, :dependent => :destroy
   has_one  :direct_purchase
-  has_one  :licitation_process
 
   accepts_nested_attributes_for :purchase_solicitation_budget_allocations, :allow_destroy => true
 
@@ -59,6 +60,11 @@ class PurchaseSolicitation < Compras::Model
     }
   }
 
+  scope :by_licitation_process_id, lambda { |licitation_process_id|
+    joins { licitation_processes }.
+    where { licitation_processes.id.eq(licitation_process_id) }
+  }
+
   scope :except_ids, lambda { |ids| where { id.not_in(ids) } }
 
   scope :with_pending_items, joins { items }.merge(PurchaseSolicitationBudgetAllocationItem.pending)
@@ -68,9 +74,25 @@ class PurchaseSolicitation < Compras::Model
     PurchaseSolicitationServiceStatus::PARTIALLY_FULFILLED ]
   }.uniq
 
+  scope :term, lambda { |q|
+    joins { budget_structure.outer }.
+    where {
+      accounting_year.eq(Date.current.year) &
+      (service_status.in [
+        PurchaseSolicitationServiceStatus::LIBERATED,
+        PurchaseSolicitationServiceStatus::PARTIALLY_FULFILLED ]) &
+      ((code.eq(q) & code.not_eq(0)) | budget_structure.description.like("#{q}%")
+      )
+    }
+  }
+
   def self.by_material(material_ids)
     joins { items }.
       where { |purchase| purchase.items.material_id.in(material_ids) }
+  end
+
+  def self.update_service_status(new_status)
+    PurchaseSolicitation.update_all(:service_status => new_status)
   end
 
   def direct_purchase_by_item_group
@@ -93,6 +115,10 @@ class PurchaseSolicitation < Compras::Model
 
   def to_s
     "#{code}/#{accounting_year} #{budget_structure} - RESP: #{responsible}"
+  end
+
+  def code_and_year
+    "#{code}/#{accounting_year}"
   end
 
   def can_be_grouped?

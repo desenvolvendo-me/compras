@@ -53,7 +53,7 @@ pt-BR:
         proposal_envelope_opening_date: "Abertura das propostas"
         proposal_envelope_opening_time: "Hora da abertura"
         protocol: "Número do protocolo"
-        purchase_solicitation: "Solicitação de compra"
+        purchase_solicitations: "Solicitações de compra"
         purchase_solicitation_item_group: "Agrupamento de solicitações de compra"
         ratification_date: "Data da homologação"
         readjustment_index: "Índice de reajuste"

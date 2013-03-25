@@ -46,12 +46,12 @@ describe LicitationProcess do
   it { should belong_to :contact }
   it { should belong_to :judgment_form }
   it { should belong_to :payment_method }
-  it { should belong_to :purchase_solicitation }
   it { should belong_to :purchase_solicitation_item_group }
   it { should belong_to :readjustment_index }
   it { should belong_to :responsible }
 
   it { should have_and_belong_to_many(:document_types) }
+  it { should have_and_belong_to_many(:purchase_solicitations) }
   it { should have_many(:licitation_notices).dependent(:destroy) }
   it { should have_many(:licitation_process_publications).dependent(:destroy).order(:id) }
   it { should have_many(:bidders).dependent(:destroy).order(:id) }
@@ -496,6 +496,25 @@ describe LicitationProcess do
       subject.purchase_solicitation_items.should_receive(:attend!)
 
       subject.attend_purchase_solicitation_items
+    end
+  end
+
+  describe '#update_purchase_solicitation_to_purchase_process' do
+    let(:purchase_solicitation) { double(:purchase_solicitation) }
+
+    it "updates the purchase solicitation service_status to in_purchase_process" do
+      purchase_solicitation.stub(:new_record?).and_return false
+      purchase_solicitation.should_receive(:buy!)
+      subject.send(:update_purchase_solicitation_to_purchase_process, purchase_solicitation)
+    end
+  end
+
+  describe '#update_purchase_solicitation_to_liberated' do
+    let(:purchase_solicitation) { double(:purchase_solicitation) }
+
+    it "updates the purchase solicitation service_status to liberated" do
+      purchase_solicitation.should_receive(:liberate!)
+      subject.send(:update_purchase_solicitation_to_liberated, purchase_solicitation)
     end
   end
 

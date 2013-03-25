@@ -57,47 +57,10 @@ describe LicitationProcessesController do
 
       item_group_process.should_receive(:update_status)
 
-      PurchaseSolicitationBudgetAllocationItemFulfiller.
-        any_instance.should_receive(:fulfill)
-
-      AdministrativeProcessBudgetAllocationCloner.should_receive(:clone)
       AdministrativeProcessItemGroupCloner.should_receive(:clone)
 
       post :create, :licitation_process => {
         :purchase_solicitation_item_group_id => item_group.id }
-    end
-
-    it 'should change budget allocation items status with purchase solicitation' do
-      purchase_solicitation = PurchaseSolicitation.make!(:reparo)
-
-      LicitationProcess.any_instance.should_receive(:transaction).and_yield
-      LicitationProcess.any_instance.should_receive(:save).and_return(true)
-      LicitationProcess.any_instance.should_receive(:id).any_number_of_times.and_return(1)
-
-      item_status_changer = double(:item_status_changer)
-      item_status_changer.should_receive(:change).once
-
-      PurchaseSolicitationBudgetAllocationItemStatusChanger.
-        should_receive(:new).
-        and_return(item_status_changer)
-
-      post :create, :licitation_process => {
-           :purchase_solicitation_id => purchase_solicitation.id }
-    end
-
-    it 'should updates the status of purchase_solicitation to in_purchase_process' do
-      purchase_solicitation = PurchaseSolicitation.make!(:reparo)
-
-      LicitationProcess.any_instance.should_receive(:transaction).and_yield
-      LicitationProcess.any_instance.should_receive(:save).and_return(true)
-      LicitationProcess.any_instance.should_receive(:id).any_number_of_times.and_return(1)
-
-      PurchaseSolicitationStatusChanger.
-        should_receive(:change).
-        with(purchase_solicitation)
-
-      post :create, :licitation_process => {
-           :purchase_solicitation_id => purchase_solicitation.id }
     end
   end
 
@@ -108,7 +71,7 @@ describe LicitationProcessesController do
       end
 
       let :licitation_process do
-        LicitationProcess.make!(:processo_licitatorio, :purchase_solicitation => purchase_solicitation)
+        LicitationProcess.make!(:processo_licitatorio, :purchase_solicitations => [purchase_solicitation])
       end
 
       let :licitation_process_classifications do
@@ -157,74 +120,6 @@ describe LicitationProcessesController do
 
       put :update, :id => licitation_process.id,
                    :licitation_process => { :purchase_solicitation_item_group_id => item_group.id }
-    end
-
-    it 'should update purchase_solicitation fulfiller if has item group' do
-      licitation_process = LicitationProcess.make!(:processo_licitatorio)
-      item_group = PurchaseSolicitationItemGroup.make!(:antivirus)
-      fulfiller_instance = double(:fulfiller_instance)
-      item_group_process = double(:item_group_process)
-
-      fulfiller_instance.should_receive(:fulfill).twice
-
-      PurchaseSolicitationBudgetAllocationItemFulfiller.
-        should_receive(:new).
-        with(:purchase_solicitation_item_group => nil).
-        and_return(fulfiller_instance)
-
-      PurchaseSolicitationBudgetAllocationItemFulfiller.
-        should_receive(:new).
-        with(:purchase_solicitation_item_group => item_group,
-             :licitation_process => licitation_process,
-             :add_fulfill => true).
-        and_return(fulfiller_instance)
-
-      PurchaseSolicitationItemGroupProcess.
-        should_receive(:new).
-        with(:new_item_group => item_group, :old_item_group => licitation_process.purchase_solicitation_item_group).
-        and_return(item_group_process)
-
-      AdministrativeProcessItemGroupCloner.should_receive(:clone)
-      AdministrativeProcessBudgetAllocationCloner.should_receive(:clone)
-
-      item_group_process.should_receive(:update_status)
-
-      put :update, :id => licitation_process.id,
-                   :licitation_process => { :purchase_solicitation_item_group_id => item_group.id }
-    end
-
-    it 'should change budget allocation items status with purchase solicitation' do
-      licitation_process = LicitationProcess.make!(:processo_licitatorio)
-      purchase_solicitation = PurchaseSolicitation.make!(:reparo)
-
-      item_status_changer = double(:item_status_changer)
-      item_status_changer.should_receive(:change).once
-
-      PurchaseSolicitationBudgetAllocationItemStatusChanger.
-        should_receive(:new).with(
-          :new_purchase_solicitation => purchase_solicitation,
-          :old_purchase_solicitation => nil,
-          :new_purchase_solicitation_item_group => nil,
-          :old_purchase_solicitation_item_group => nil,
-          :licitation_process => licitation_process).
-        and_return(item_status_changer)
-
-      put :update, :id => licitation_process.id, :licitation_process => {
-        :purchase_solicitation_id => purchase_solicitation.id }
-    end
-
-    it 'should change status purchase solicitation' do
-      licitation_process = LicitationProcess.make!(:processo_licitatorio)
-      purchase_solicitation = PurchaseSolicitation.make!(:reparo)
-
-      PurchaseSolicitationStatusChanger.
-        should_receive(:change).with(purchase_solicitation)
-
-      PurchaseSolicitationStatusChanger.
-        should_receive(:change).with(nil)
-
-      put :update, :id => licitation_process.id, :licitation_process => {
-        :purchase_solicitation_id => purchase_solicitation.id }
     end
   end
 

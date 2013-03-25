@@ -29,7 +29,7 @@ class PurchaseSolicitationStatusChanger
   def partially_fulfilled!
     return if all_items_attended?
 
-    if items_partially_attended? || any_items_partially_fulfilled? || purchase_solicitation.direct_purchase.present? || purchase_solicitation.licitation_process.present? || purchase_solicitation.direct_purchase_by_item_group.present? || purchase_solicitation.licitation_process_by_item_group.present?
+    if items_partially_attended? || any_items_partially_fulfilled? || purchase_solicitation.direct_purchase.present? || purchase_solicitation.direct_purchase_by_item_group.present? || purchase_solicitation.licitation_process_by_item_group.present?
       purchase_solicitation.partially_fulfilled!
     end
   end

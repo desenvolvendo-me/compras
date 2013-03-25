@@ -24,6 +24,7 @@ describe PurchaseSolicitation do
     expect(subject.to_s).to eq "2/2012 01.01.001 - SECRETARIA DA EDUCAÇÃO - RESP: CARLOS DORNELES"
   end
 
+  it { should have_and_belong_to_many(:licitation_processes) }
   it { should have_many(:budget_allocations).dependent(:restrict) }
   it { should have_many(:purchase_solicitation_budget_allocations).dependent(:destroy).order(:id) }
   it { should have_many(:items).through(:purchase_solicitation_budget_allocations)}
@@ -31,7 +32,6 @@ describe PurchaseSolicitation do
   it { should have_many(:purchase_solicitation_item_group_material_purchase_solicitations).dependent(:destroy)}
   it { should have_one(:annul).dependent(:destroy) }
   it { should have_one(:direct_purchase) }
-  it { should have_one(:licitation_process) }
   it { should belong_to :responsible }
   it { should belong_to :delivery_location }
   it { should belong_to :liberator }
@@ -74,6 +74,15 @@ describe PurchaseSolicitation do
 
         expect(subject.errors[:service_status]).not_to include 'ainda não foi liberada"'
       end
+    end
+  end
+
+  describe "#code_and_year" do
+    it "returns the code and accounting yera" do
+      subject.accounting_year = 2012
+      subject.code = 2
+
+      expect(subject.code_and_year).to eq "2/2012"
     end
   end
 

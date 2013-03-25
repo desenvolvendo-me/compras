@@ -71,8 +71,12 @@ class LicitationProcessDecorator
     end
   end
 
-  def disable_budget_allocations?
-    purchase_solicitation.present? || purchase_solicitation_item_group.present?
+  def ratification_date
+    localize(super) if super
+  end
+
+  def adjudication_date
+    localize(super) if super
   end
 
   def code_and_year

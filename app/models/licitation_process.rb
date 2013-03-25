@@ -8,8 +8,7 @@ class LicitationProcess < Compras::Model
                   :judgment_form_id, :execution_type,
                   :disqualify_by_documentation_problem, :disqualify_by_maximum_value,
                   :consider_law_of_proposals, :price_registration, :status,
-                  :responsible_id, :purchase_solicitation_id, :object_type,
-                  :date, :protocol, :item, :purchase_solicitation_item_group_id,
+                  :responsible_id, :object_type, :date, :protocol, :item, :purchase_solicitation_item_group_id,
                   :summarized_object, :modality, :description, :pledge_type,
                   :administrative_process_budget_allocations_attributes,
                   :contract_guarantees, :extension_clause, :index_update_rate_id,
@@ -19,7 +18,9 @@ class LicitationProcess < Compras::Model
                   :concession_period_unit, :goal, :licensor_rights_and_liabilities,
                   :licensee_rights_and_liabilities, :authorization_envelope_opening_date,
                   :authorization_envelope_opening_time, :closing_of_accreditation_date,
-                  :closing_of_accreditation_time
+                  :closing_of_accreditation_time, :purchase_solicitation_ids
+
+  attr_accessor :autocomplete_purchase_solicitation
 
   auto_increment :process, :by => :year
   auto_increment :modality_number, :by => [:year, :modality, :type_of_removal]
@@ -44,13 +45,15 @@ class LicitationProcess < Compras::Model
   belongs_to :contact, :class_name => 'Employee'
   belongs_to :judgment_form
   belongs_to :payment_method
-  belongs_to :purchase_solicitation
   belongs_to :purchase_solicitation_item_group
   belongs_to :readjustment_index, :class_name => 'Indexer'
   belongs_to :index_update_rate, :class_name => 'Indexer'
   belongs_to :responsible, :class_name => 'Employee'
 
   has_and_belongs_to_many :document_types, :join_table => :compras_document_types_compras_licitation_processes
+  has_and_belongs_to_many :purchase_solicitations, :join_table => :compras_licitation_processes_purchase_solicitations,
+                          :before_add => :update_purchase_solicitation_to_purchase_process,
+                          :before_remove => :update_purchase_solicitation_to_liberated
 
   has_many :licitation_process_publications, :dependent => :destroy, :order => :id
   has_many :bidders, :dependent => :destroy, :order => :id
@@ -303,6 +306,16 @@ class LicitationProcess < Compras::Model
     return 0 if material_ids.size == 0
 
     material_ids.join(',')
+  end
+
+  def update_purchase_solicitation_to_purchase_process(purchase_solicitation)
+    return if purchase_solicitation.new_record?
+
+    purchase_solicitation.buy!
+  end
+
+  def update_purchase_solicitation_to_liberated(purchase_solicitation)
+    purchase_solicitation.liberate!
   end
 
   def purchase_solicitation_items_finder_sql

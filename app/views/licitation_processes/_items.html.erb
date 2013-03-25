@@ -11,7 +11,7 @@
 
   <%= mustache 'licitation-process-item-template' do %>
     <%= f.association :items_attributes, :collection => f.object.items.build, :index => '{{uuid-licitation-process-item}}' do |p| %>
-      <%= render 'administrative_process_budget_allocation_items/form', :f => p, :data_disabled => f.object.decorator.not_updatable_message %>
+      <%= render 'administrative_process_budget_allocation_items/form', :f => p %>
     <% end %>
   <% end %>
 </div>

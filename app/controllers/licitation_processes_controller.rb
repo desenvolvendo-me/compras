@@ -63,25 +63,10 @@ class LicitationProcessesController < CrudController
 
       if super
         if params[:licitation_process]
-          AdministrativeProcessBudgetAllocationCloner.clone(
-            :licitation_process => object, :new_purchase_solicitation => new_purchase_solicitation)
-
-          AdministrativeProcessItemGroupCloner.clone(object,
-            :new_item_group => new_item_group)
+          AdministrativeProcessItemGroupCloner.clone(object, :new_item_group => new_item_group)
         end
 
-        PurchaseSolicitationBudgetAllocationItemFulfiller.new(
-          :purchase_solicitation_item_group => object.purchase_solicitation_item_group,
-          :licitation_process => object,
-          :add_fulfill => true).fulfill
-
-        PurchaseSolicitationBudgetAllocationItemStatusChanger.new(
-          :new_purchase_solicitation => new_purchase_solicitation,
-          :licitation_process => object
-        ).change
-
         PurchaseSolicitationItemGroupProcess.new(:new_item_group => new_item_group).update_status
-        PurchaseSolicitationStatusChanger.change(new_purchase_solicitation)
       end
     end
   end
@@ -90,7 +75,6 @@ class LicitationProcessesController < CrudController
     return unless object.updatable?
 
     old_item_group = object.purchase_solicitation_item_group
-    old_purchase_solicitation = object.purchase_solicitation
 
     object.transaction do
       AdministrativeProcessBudgetAllocationCleaner.new(object, new_item_group).clear_old_records
@@ -102,39 +86,10 @@ class LicitationProcessesController < CrudController
       if object.save
         object = LicitationProcess.find(object.id)
 
-        AdministrativeProcessBudgetAllocationCloner.clone(
-          :licitation_process => object,
-          :new_purchase_solicitation => new_purchase_solicitation,
-          :old_purchase_solicitation => old_purchase_solicitation)
-
-        AdministrativeProcessItemGroupCloner.clone(object,
-          :new_item_group => new_item_group,
-          :old_item_group => old_item_group)
-
         PurchaseSolicitationItemGroupProcess.new(
           :new_item_group => new_item_group,
           :old_item_group => old_item_group
         ).update_status
-
-        PurchaseSolicitationBudgetAllocationItemFulfiller.new(
-          :purchase_solicitation_item_group => old_item_group
-        ).fulfill
-
-        PurchaseSolicitationBudgetAllocationItemFulfiller.new(
-          :purchase_solicitation_item_group => new_item_group,
-          :licitation_process => object,
-          :add_fulfill => true
-        ).fulfill
-
-        PurchaseSolicitationBudgetAllocationItemStatusChanger.new(
-          :new_purchase_solicitation => new_purchase_solicitation,
-          :old_purchase_solicitation => old_purchase_solicitation,
-          :new_purchase_solicitation_item_group => new_item_group,
-          :old_purchase_solicitation_item_group => old_item_group,
-          :licitation_process => object).change
-
-        PurchaseSolicitationStatusChanger.change(new_purchase_solicitation)
-        PurchaseSolicitationStatusChanger.change(old_purchase_solicitation)
       end
     end
   end
@@ -143,11 +98,5 @@ class LicitationProcessesController < CrudController
     item_group_id = params[:licitation_process][:purchase_solicitation_item_group_id]
 
     PurchaseSolicitationItemGroup.find(item_group_id) if item_group_id.present?
-  end
-
-  def new_purchase_solicitation
-    purchase_solicitation_id = params[:licitation_process][:purchase_solicitation_id]
-
-    PurchaseSolicitation.find(purchase_solicitation_id) if purchase_solicitation_id.present?
   end
 end

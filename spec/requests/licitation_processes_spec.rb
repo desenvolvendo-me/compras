@@ -1588,15 +1588,11 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Principal' do
-      expect(page).to_not have_disabled_field 'Solicitação de compra'
-
       within_modal 'Agrupamento de solicitações de compra' do
         click_button 'Pesquisar'
 
         click_record 'Agrupamento de reparo 2013'
       end
-
-      expect(page).to have_disabled_field 'Solicitação de compra'
     end
 
     within_tab 'Orçamento' do
@@ -1893,160 +1889,6 @@ feature "LicitationProcesses" do
     end
   end
 
-  scenario 'when clear item group purchase solicitation item should clear fulfiller' do
-    PurchaseSolicitationItemGroup.make!(:reparo_2013)
-    LicitationProcess.make!(:processo_licitatorio)
-
-    navigate 'Processos de Compra > Processos de Compras'
-
-    click_link "Limpar Filtro"
-
-    within_records do
-      click_link '1/2012'
-    end
-
-    within_tab 'Principal' do
-      within_modal 'Agrupamento de solicitações de compra' do
-        click_button 'Pesquisar'
-
-        click_record 'Agrupamento de reparo 2013'
-      end
-    end
-
-    click_button 'Salvar'
-
-    expect(page).to have_notice 'Processo de Compra 1/2012 editado com sucesso.'
-
-    navigate 'Processos de Compra > Solicitações de Compra'
-
-    within_records do
-      click_link '1/2013'
-    end
-
-    within_tab 'Dotações orçamentárias' do
-      within '.purchase-solicitation-budget-allocation:first' do
-        within '.item:first' do
-          expect(page).to have_field 'Atendido por', :with => 'Processo de compra 1/2012 - Convite 1'
-        end
-      end
-    end
-
-    navigate 'Processos de Compra > Processos de Compras'
-
-    click_link "Limpar Filtro"
-
-    within_records do
-      click_link '1/2012'
-    end
-
-    within_tab 'Principal' do
-      clear_modal 'Agrupamento de solicitações de compra'
-    end
-
-    click_button 'Salvar'
-
-    expect(page).to have_notice 'Processo de Compra 1/2012 editado com sucesso.'
-
-    navigate 'Processos de Compra > Solicitações de Compra'
-
-    within_records do
-      click_link '1/2013'
-    end
-
-    within_tab 'Dotações orçamentárias' do
-      within '.purchase-solicitation-budget-allocation:first' do
-        within '.item:first' do
-          expect(page).to have_field 'Atendido por', :with => ''
-        end
-      end
-    end
-  end
-
-  scenario 'assigns a fulfiller to the purchase solicitation budget allocation item when assign a purchase_solicitation_item_group to licitation_process' do
-    PurchaseSolicitationItemGroup.make!(:antivirus)
-    Capability.make!(:reforma)
-    PaymentMethod.make!(:dinheiro)
-    DocumentType.make!(:fiscal)
-    JudgmentForm.make!(:por_item_com_melhor_tecnica)
-    BudgetAllocation.make!(:alocacao)
-    Material.make!(:antivirus)
-    Indexer.make!(:xpto)
-
-    navigate 'Processos de Compra > Processos de Compras'
-
-    click_link 'Criar Processo de Compra'
-
-    expect(page).to have_content "Criar Processo"
-
-    expect(page).to_not have_link 'Publicações'
-
-    expect(page).to_not have_button 'Apurar'
-
-    expect(page).to have_disabled_field 'Status'
-
-    within_tab 'Principal' do
-      choose 'Processo licitatório'
-      fill_in 'Ano', :with => '2012'
-      select 'Global', :from => 'Tipo de empenho'
-
-      select 'Compras e serviços', :from => 'Tipo de objeto'
-      select 'Concorrência', :from => 'Modalidade'
-      select 'Por Item com Melhor Técnica', :from =>'Forma de julgamento'
-      fill_in 'Objeto do processo de compra', :with => 'Licitação para compra de carteiras'
-      fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
-      fill_in 'Inciso', :with => 'Item 1'
-
-      check 'Registro de preço'
-      select 'Empreitada integral', :from => 'Forma de execução'
-      select 'Fiança bancária', :from => 'Tipo de garantia'
-      fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
-      fill_modal 'Índice de reajuste', :with => 'XPTO'
-      fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
-      fill_in 'Valor da caução', :with => '50,00'
-
-      within_modal 'Agrupamento de solicitações de compra' do
-        click_button 'Pesquisar'
-
-        click_record 'Agrupamento de antivirus'
-      end
-    end
-
-    within_tab 'Prazos' do
-      fill_in 'Data da expedição', :with => '07/03/2012'
-      fill_in 'Data da disponibilidade', :with => I18n.l(Date.current)
-      fill_modal 'Contato para informações', :with => '958473', :field => 'Matrícula'
-
-      fill_in 'Término do recebimento dos envelopes', :with => I18n.l(Date.current)
-      fill_in 'Hora do recebimento', :with => '14:00'
-
-      fill_in 'Validade da proposta', :with => '5'
-      select 'dia/dias', :from => 'Período da validade da proposta'
-
-      fill_in 'Prazo de entrega', :with => '1'
-      select 'ano/anos', :from => 'Período do prazo de entrega'
-    end
-
-    within_tab 'Documentos' do
-      fill_modal 'Tipo de documento', :with => 'Fiscal', :field => 'Descrição'
-    end
-
-    click_button 'Salvar'
-
-    expect(page).to have_notice 'Processo de Compra 1/2012 criado com sucesso.'
-
-    navigate 'Processos de Compra > Solicitações de Compra'
-
-    click_link "Limpar Filtro"
-
-    within_records do
-      click_link '1/2012'
-    end
-
-    within_tab 'Dotações orçamentárias' do
-      expect(page).to have_disabled_field 'Atendido por', :with => 'Processo de compra 1/2012 - Concorrência 1'
-    end
-  end
-
   scenario "filtering modalities based on seleted object type" do
     navigate 'Processos de Compra > Processos de Compras'
 
@@ -2078,208 +1920,8 @@ feature "LicitationProcesses" do
                                 :options => ['Concorrência', 'Tomada de Preço', 'Convite', 'Concurso', 'Pregão'])
   end
 
-  scenario "changing the purchase_solicitation_item_group should change purchase solicitation items fulfiller" do
-    PurchaseSolicitationItemGroup.make!(:antivirus)
-    PurchaseSolicitationItemGroup.make!(:office)
-    LicitationProcess.make!(:processo_licitatorio)
-
-    navigate 'Processos de Compra > Processos de Compras'
-
-    click_link "Limpar Filtro"
-
-    within_records do
-      click_link '1/2012'
-    end
-
-    within_tab 'Principal' do
-      within_modal 'Agrupamento de solicitações de compra' do
-        click_button 'Pesquisar'
-
-        click_record 'Agrupamento de antivirus'
-      end
-    end
-
-    click_button 'Salvar'
-
-    expect(page).to have_notice 'Processo de Compra 1/2012 editado com sucesso.'
-
-    navigate 'Processos de Compra > Solicitações de Compra'
-
-    click_link "Limpar Filtro"
-
-    within_records do
-      click_link '1/2012'
-    end
-
-    within_tab 'Dotações orçamentárias' do
-      expect(page).to have_disabled_field 'Atendido por', :with => 'Processo de compra 1/2012 - Convite 1'
-    end
-
-    navigate 'Processos de Compra > Processos de Compras'
-
-    click_link "Limpar Filtro"
-
-    within_records do
-      click_link '1/2012'
-    end
-
-    within_tab 'Principal' do
-      within_modal 'Agrupamento de solicitações de compra' do
-        click_button 'Pesquisar'
-
-        click_record 'Agrupamento de office'
-      end
-    end
-
-    click_button 'Salvar'
-
-    expect(page).to have_notice 'Processo de Compra 1/2012 editado com sucesso.'
-
-    navigate 'Processos de Compra > Solicitações de Compra'
-
-    click_link "Limpar Filtro"
-
-    within_records do
-      click_link '1/2012'
-    end
-
-    within_tab 'Dotações orçamentárias' do
-      expect(page).to have_field 'Atendido por', :with => ''
-    end
-
-    click_link 'Voltar'
-
-    click_link "Limpar Filtro"
-
-    within_records do
-      click_link '2/2012'
-    end
-
-    within_tab 'Dotações orçamentárias' do
-      expect(page).to have_disabled_field 'Atendido por', :with => 'Processo de compra 1/2012 - Convite 1'
-    end
-  end
-
-  scenario "changing the purchase_solicitation_item_group should change purchase solicitation and items status" do
-    item_group = PurchaseSolicitationItemGroup.make!(:antivirus)
-    item_group.purchase_solicitation_items.each do |item|
-      item.update_column :purchase_solicitation_item_group_id, item_group.id
-    end
-    item_group = PurchaseSolicitationItemGroup.make!(:office)
-    item_group.purchase_solicitation_items.each do |item|
-      item.update_column :purchase_solicitation_item_group_id, item_group.id
-    end
-    LicitationProcess.make!(:processo_licitatorio)
-
-    navigate 'Processos de Compra > Processos de Compras'
-
-    click_link "Limpar Filtro"
-
-    within_records do
-      click_link '1/2012'
-    end
-
-    within_tab 'Principal' do
-      within_modal 'Agrupamento de solicitações de compra' do
-        click_button 'Pesquisar'
-
-        click_record 'Agrupamento de antivirus'
-      end
-    end
-
-    click_button 'Salvar'
-
-    expect(page).to have_notice 'Processo de Compra 1/2012 editado com sucesso.'
-
-    navigate 'Processos de Compra > Solicitações de Compra'
-
-    click_link "Limpar Filtro"
-
-    within_records do
-      click_link '1/2012'
-    end
-
-    within_tab 'Principal' do
-      expect(page).to have_select 'Status de atendimento', :selected => 'Parcialmente atendido'
-    end
-
-    within_tab 'Dotações orçamentárias' do
-      within '.purchase-solicitation-budget-allocation' do
-        within '.item' do
-          expect(page).to have_select 'Status', :selected => 'Parcialmente atendido'
-          expect(page).to have_field 'Agrupamento', :with => 'Agrupamento de antivirus'
-          expect(page).to have_disabled_field 'Atendido por', :with => 'Processo de compra 1/2012 - Convite 1'
-        end
-      end
-    end
-
-    navigate 'Processos de Compra > Processos de Compras'
-
-    click_link "Limpar Filtro"
-
-    within_records do
-      click_link '1/2012'
-    end
-
-    within_tab 'Principal' do
-      within_modal 'Agrupamento de solicitações de compra' do
-        click_button 'Pesquisar'
-
-        click_record 'Agrupamento de office'
-      end
-    end
-
-    click_button 'Salvar'
-
-    expect(page).to have_notice 'Processo de Compra 1/2012 editado com sucesso.'
-
-    navigate 'Processos de Compra > Solicitações de Compra'
-
-    click_link "Limpar Filtro"
-
-    within_records do
-      click_link '1/2012'
-    end
-
-    within_tab 'Principal' do
-      #expect(page).to have_select 'Status de atendimento', :selected => 'Liberada'
-    end
-
-    within_tab 'Dotações orçamentárias' do
-      within '.purchase-solicitation-budget-allocation:first' do
-        within '.item' do
-          expect(page).to have_select 'Status', :selected => 'Pendente'
-          expect(page).to have_field 'Agrupamento', :with => ''
-          expect(page).to have_field 'Atendido por', :with => ''
-        end
-      end
-    end
-
-    click_link 'Voltar'
-
-    click_link "Limpar Filtro"
-
-    within_records do
-      click_link '2/2012'
-    end
-
-    within_tab 'Principal' do
-      expect(page).to have_select 'Status de atendimento', :selected => 'Parcialmente atendido'
-    end
-
-    within_tab 'Dotações orçamentárias' do
-      within '.purchase-solicitation-budget-allocation' do
-        within '.item' do
-          expect(page).to have_select 'Status', :selected => 'Parcialmente atendido'
-          #expect(page).to have_field 'Agrupamento', :with => 'Agrupamento de antivirus'
-          expect(page).to have_disabled_field 'Atendido por', :with => 'Processo de compra 1/2012 - Convite 1'
-        end
-      end
-    end
-  end
-
   scenario 'clear budget allocations when purchase_solicititation is removed' do
-    PurchaseSolicitation.make!(:reparo_liberado)
+    PurchaseSolicitation.make!(:reparo_liberado, :accounting_year => Date.current.year)
     BudgetStructure.make!(:secretaria_de_educacao)
     JudgmentForm.make!(:por_item_com_melhor_tecnica)
     Employee.make!(:sobrinho)
@@ -2295,15 +1937,28 @@ feature "LicitationProcesses" do
 
     expect(page).to be_on_tab 'Principal'
 
+    within_tab "Solicitantes" do
+      fill_with_autocomplete "Solicitações de compra", :with => '1'
+
+      within_records do
+        expect(page).to have_content 'Código'
+        expect(page).to have_content 'Solicitante'
+        expect(page).to have_content 'Responsável pela solicitação'
+
+        within 'tbody tr' do
+          expect(page).to have_content '1/2013'
+          expect(page).to have_content '1 - Secretaria de Educação'
+          expect(page).to have_content 'Gabriel Sobrinho'
+        end
+      end
+    end
+
     within_tab 'Principal' do
       choose 'Processo licitatório'
       fill_in 'Ano', :with => '2012'
       fill_in 'Número do protocolo', :with => '00099/2012'
       select 'Global', :from => 'Tipo de empenho'
       select 'Compras e serviços', :from => 'Tipo de objeto'
-      fill_modal 'Solicitação de compra', :with => '1', :field => 'Código'
-
-      expect(page).to have_disabled_field 'Agrupamento de solicitações de compra'
 
       select 'Pregão', :from => 'Modalidade'
       select 'Alienação de bens', :from => 'Tipo de objeto'
@@ -2342,9 +1997,8 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Orçamento' do
-      expect(page).to_not have_button 'Adicionar Dotação'
+      expect(page).to have_button 'Adicionar Dotação'
       expect(page).to have_field 'Dotação orçamentária', :with => '1 - Vencimentos e Salários'
-      expect(page).to have_disabled_field 'Dotação orçamentária'
 
       expect(page).to have_field 'Saldo da dotação', :with => '500,00'
       expect(page).to have_disabled_field 'Saldo da dotação'
@@ -2354,27 +2008,60 @@ feature "LicitationProcesses" do
 
     expect(page).to have_notice 'Processo de Compra 1/2012 criado com sucesso.'
 
-    within_tab 'Principal' do
-      clear_modal 'Solicitação de compra'
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    click_link "Limpar Filtro"
+
+    within_records do
+      click_link '1/2013'
     end
 
-    within_tab 'Orçamento' do
-      expect(page).to have_button 'Adicionar Dotação'
-      expect(page).to_not have_field 'Dotação orçamentária', :with => '1 - Vencimentos e Salários'
+    within_tab 'Principal' do
+      expect(page).to have_select 'Status de atendimento', :selected => 'Em processo de compra'
+    end
 
-      expect(page).to_not have_field 'Saldo da dotação', :with => '500,00'
+    navigate 'Processos de Compra > Processos de Compras'
+
+    click_link "Limpar Filtro"
+
+    within_records do
+      click_link '1/2012'
+    end
+
+    within_tab 'Solicitantes' do
+      within_records do
+        expect(page).to have_content 'Código'
+        expect(page).to have_content 'Solicitante'
+        expect(page).to have_content 'Responsável pela solicitação'
+
+        within 'tbody tr' do
+          expect(page).to have_content '1/2013'
+          expect(page).to have_content '1 - Secretaria de Educação'
+          expect(page).to have_content 'Gabriel Sobrinho'
+        end
+
+        click_link "Remover"
+      end
     end
 
     click_button 'Salvar'
 
     expect(page).to have_notice 'Processo de Compra 1/2012 editado com sucesso.'
 
+    within_tab 'Solicitantes' do
+      within_records do
+        expect(page).to_not have_content '1/2013'
+        expect(page).to_not have_content '1 - Secretaria de Educação'
+        expect(page).to_not have_content 'Gabriel Sobrinho'
+      end
+    end
+
     navigate 'Processos de Compra > Solicitações de Compra'
 
     click_link "Limpar Filtro"
 
     within_records do
-      click_link '1/2012'
+      click_link '1/2013'
     end
 
     within_tab 'Principal' do
@@ -2393,7 +2080,7 @@ feature "LicitationProcesses" do
   end
 
   scenario 'budget allocations should be fulfilled automatically when fulfill purchase_solicitation' do
-    PurchaseSolicitation.make!(:reparo_liberado)
+    PurchaseSolicitation.make!(:reparo_liberado, :accounting_year => Date.current.year)
     Employee.make!(:sobrinho)
     Capability.make!(:reforma)
     PaymentMethod.make!(:dinheiro)
@@ -2434,7 +2121,22 @@ feature "LicitationProcesses" do
       fill_modal 'Índice de reajuste', :with => 'XPTO'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Valor da caução', :with => '50,00'
-      fill_modal 'Solicitação de compra', :with => '1', :field => 'Código'
+    end
+
+    within_tab "Solicitantes" do
+      fill_with_autocomplete 'Solicitações de compra', :with => '1'
+
+      within_records do
+        expect(page).to have_content 'Código'
+        expect(page).to have_content 'Solicitante'
+        expect(page).to have_content 'Responsável pela solicitação'
+
+        within 'tbody tr' do
+          expect(page).to have_content '1/2013'
+          expect(page).to have_content '1 - Secretaria de Educação'
+          expect(page).to have_content 'Gabriel Sobrinho'
+        end
+      end
     end
 
     within_tab 'Prazos' do
@@ -2457,52 +2159,8 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Orçamento' do
-      expect(page).to_not have_button 'Adicionar Dotação'
+      expect(page).to have_button 'Adicionar Dotação'
       expect(page).to have_field 'Dotação orçamentária', :with => '1 - Vencimentos e Salários'
-      expect(page).to have_disabled_field 'Dotação orçamentária'
-
-      expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
-      expect(page).to have_readonly_field 'Compl. do elemento'
-
-      expect(page).to have_field 'Saldo da dotação', :with => '500,00'
-      expect(page).to have_readonly_field 'Saldo da dotação'
-
-      expect(page).to have_field 'Valor previsto', :with => '600,00'
-      expect(page).to_not have_button 'Remover Dotação'
-    end
-
-    within_tab "Itens" do
-      expect(page).to have_field 'Item', :with => '1'
-      expect(page).to have_readonly_field 'Item'
-
-      expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
-      expect(page).to have_readonly_field 'Material'
-
-      expect(page).to have_field 'Unidade', :with => 'UN'
-      expect(page).to have_readonly_field 'Unidade'
-
-      expect(page).to have_field 'Quantidade', :with => '3,00'
-      expect(page).to have_readonly_field 'Quantidade'
-
-      expect(page).to have_field 'Valor unitário máximo', :with => '200,00'
-      expect(page).to have_readonly_field 'Valor unitário máximo'
-
-      expect(page).to have_field 'Valor total', :with => '600,00'
-      expect(page).to have_readonly_field 'Valor total'
-    end
-
-    click_button 'Salvar'
-
-    expect(page).to have_notice 'Processo de Compra 1/2012 criado com sucesso.'
-
-    within_tab 'Principal' do
-      expect(page).to have_field 'Solicitação de compra', :with => '1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
-    end
-
-    within_tab 'Orçamento' do
-      expect(page).to_not have_button 'Adicionar Dotação'
-      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Vencimentos e Salários'
-      expect(page).to have_disabled_field 'Dotação orçamentária'
 
       expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
       expect(page).to have_disabled_field 'Compl. do elemento'
@@ -2511,9 +2169,55 @@ feature "LicitationProcesses" do
       expect(page).to have_disabled_field 'Saldo da dotação'
 
       expect(page).to have_field 'Valor previsto', :with => '600,00'
-      expect(page).to have_disabled_field 'Valor previsto'
+      expect(page).to have_button 'Remover Dotação'
+    end
 
-      expect(page).to_not have_button 'Remover Dotação'
+    within_tab "Itens" do
+      expect(page).to have_field 'Item', :with => '1'
+
+      expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
+
+      expect(page).to have_field 'Unidade', :with => 'UN'
+      expect(page).to have_disabled_field 'Unidade'
+
+      expect(page).to have_field 'Quantidade', :with => '3,00'
+
+      expect(page).to have_field 'Valor unitário máximo', :with => '200,00'
+
+      expect(page).to have_field 'Valor total', :with => '600,00'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Processo de Compra 1/2012 criado com sucesso.'
+
+    within_tab 'Solicitantes' do
+      within_records do
+        expect(page).to have_content 'Código'
+        expect(page).to have_content 'Solicitante'
+        expect(page).to have_content 'Responsável pela solicitação'
+
+        within 'tbody tr' do
+          expect(page).to have_content '1/2013'
+          expect(page).to have_content '1 - Secretaria de Educação'
+          expect(page).to have_content 'Gabriel Sobrinho'
+        end
+      end
+    end
+
+    within_tab 'Orçamento' do
+      expect(page).to have_button 'Adicionar Dotação'
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Vencimentos e Salários'
+
+      expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
+      expect(page).to have_disabled_field 'Compl. do elemento'
+
+      expect(page).to have_field 'Saldo da dotação', :with => '500,00'
+      expect(page).to have_disabled_field 'Saldo da dotação'
+
+      expect(page).to have_field 'Valor previsto', :with => '600,00'
+
+      expect(page).to have_button 'Remover Dotação'
     end
 
     within_tab 'Itens' do
@@ -2521,19 +2225,15 @@ feature "LicitationProcesses" do
       expect(page).to have_disabled_field 'Item'
 
       expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
-      expect(page).to have_disabled_field 'Material'
 
       expect(page).to have_field 'Unidade', :with => 'UN'
       expect(page).to have_disabled_field 'Unidade'
 
       expect(page).to have_field 'Quantidade', :with => '3'
-      expect(page).to have_disabled_field 'Quantidade'
 
       expect(page).to have_field 'Valor unitário máximo', :with => '200,00'
-      expect(page).to have_disabled_field 'Valor unitário máximo'
 
       expect(page).to have_field 'Valor total', :with => '600,00'
-      expect(page).to have_disabled_field 'Valor total'
     end
 
     navigate 'Processos de Compra > Solicitações de Compra'
@@ -2541,23 +2241,16 @@ feature "LicitationProcesses" do
     click_link "Limpar Filtro"
 
     within_records do
-      click_link '1/2012'
-    end
-
-    within_tab 'Dotações orçamentárias' do
-      within '.item:nth-child(1)' do
-        expect(page).to have_select 'Status', :selected => 'Parcialmente atendido'
-        expect(page).to have_disabled_field 'Atendido por', :with => 'Processo de compra 1/2012 - Concorrência 1'
-      end
+      click_link '1/2013'
     end
 
     within_tab 'Principal' do
-      expect(page).to have_select 'Status de atendimento', :selected => 'Parcialmente atendido'
+      expect(page).to have_select 'Status de atendimento', :selected => 'Em processo de compra'
     end
   end
 
   scenario 'when clear purchase_solicitation should enable item_group' do
-    PurchaseSolicitation.make!(:reparo_liberado)
+    PurchaseSolicitation.make!(:reparo_liberado, :accounting_year => Date.current.year)
     PurchaseSolicitationItemGroup.make!(:antivirus)
 
     navigate 'Processos de Compra > Processos de Compras'
@@ -2566,62 +2259,28 @@ feature "LicitationProcesses" do
 
     expect(page).to be_on_tab 'Principal'
 
+    within_tab "Solicitantes" do
+      fill_with_autocomplete 'Solicitações de compra', :with => '1'
+
+      within_records do
+        expect(page).to have_content 'Código'
+        expect(page).to have_content 'Solicitante'
+        expect(page).to have_content 'Responsável pela solicitação'
+
+        within 'tbody tr' do
+          expect(page).to have_content '1/2013'
+          expect(page).to have_content '1 - Secretaria de Educação'
+          expect(page).to have_content 'Gabriel Sobrinho'
+        end
+      end
+    end
+
     within_tab 'Principal' do
-      fill_modal 'Solicitação de compra', :with => '1', :field => 'Código'
-
-      expect(page).to have_disabled_field 'Agrupamento de solicitações de compra'
-
-      clear_modal 'Solicitação de compra'
-
-      expect(page).to_not have_disabled_field 'Agrupamento de solicitações de compra'
-
       within_modal 'Agrupamento de solicitações de compra' do
         click_button 'Pesquisar'
 
         click_record 'Agrupamento de antivirus'
       end
-
-      expect(page).to have_disabled_field 'Solicitação de compra'
-    end
-  end
-
-  scenario 'cannot overwrite reponsible when select a purchase_solicitation' do
-    PurchaseSolicitation.make!(:reparo_liberado)
-    PurchaseSolicitationItemGroup.make!(:antivirus)
-    Employee.make!(:wenderson)
-
-    navigate 'Processos de Compra > Processos de Compras'
-
-    click_link 'Criar Processo de Compra'
-
-    within_tab 'Principal' do
-      fill_modal 'Responsável', :field => 'Matrícula', :with => '12903412'
-      fill_modal 'Solicitação de compra', :with => '1', :field => 'Código'
-
-      expect(page).to have_field 'Responsável', :with => 'Wenderson Malheiros'
-
-      clear_modal 'Responsável'
-      clear_modal 'Solicitação de compra'
-
-      fill_modal 'Solicitação de compra', :with => '1', :field => 'Código'
-
-      expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
-    end
-  end
-
-  scenario 'should not return duplicated data of purchase solicitation' do
-     purchase_solicitation = PurchaseSolicitation.make!(:reparo_liberado,
-                                                        :purchase_solicitation_budget_allocations => [
-                                                          PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria_office_2_itens_liberados)])
-
-    navigate 'Processos de Compra > Processos de Compras'
-
-    click_link 'Criar Processo de Compra'
-
-    within_modal 'Solicitação de compra' do
-      click_button 'Pesquisar'
-
-      expect(page).to have_css 'table.records tbody tr', :count => 1
     end
   end
 
