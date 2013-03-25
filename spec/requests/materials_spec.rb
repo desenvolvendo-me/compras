@@ -6,8 +6,9 @@ feature "Materials" do
     sign_in
   end
 
-  scenario 'create a new material' do
+  scenario 'create a new material, update and destroy an existing' do
     make_dependencies!
+    Material.make!(:arame_farpado)
 
     navigate 'Comum > Cadastrais > Materiais > Materiais'
 
@@ -53,6 +54,34 @@ feature "Materials" do
     expect(page).to have_field 'Tipo de contrato', :with => 'Contratação de estagiários'
     expect(page).to have_field 'Natureza da despesa', :with => '3.0.10.01.12 - Vencimentos e Salários'
     expect(page).to have_unchecked_field 'Controla quantidade'
+
+    fill_with_autocomplete 'Classe', :with => 'Arame'
+    fill_in 'Descrição', :with => 'Parafuso'
+    fill_in 'Descrição detalhada', :with => 'de rosca'
+    fill_in 'Referência do fabricante', :with => 'outro fabricante'
+    check 'Material combustível'
+    select 'Material de consumo', :from => 'Tipo de material'
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Material editado com sucesso.'
+
+    click_link 'Parafuso'
+
+    expect(page).to have_field 'Classe', :with => '02.44.65.430.000 - Arames'
+    expect(page).to have_field 'Descrição', :with => 'Parafuso'
+    expect(page).to have_field 'Descrição detalhada', :with => 'de rosca'
+    expect(page).to have_field 'Unidade', :with => 'UN'
+    expect(page).to have_field 'Referência do fabricante', :with => 'outro fabricante'
+    expect(page).to have_checked_field 'Material combustível'
+    expect(page).to have_select 'Tipo de material', :selected => 'Material de consumo'
+    expect(page).to have_field 'Natureza da despesa', :with => '3.0.10.01.12 - Vencimentos e Salários'
+
+    click_link 'Apagar'
+
+    expect(page).to have_notice 'Material apagado com sucesso.'
+
+    expect(page).to_not have_content 'Parafuso'
   end
 
   scenario 'generate code' do
@@ -85,69 +114,6 @@ feature "Materials" do
 
     expect(page).to have_checked_field 'Ativo?'
     expect(page).to have_checked_field 'Controla quantidade'
-  end
-
-  scenario 'update an existent material' do
-    make_dependencies!
-
-    # Ensure the update of code
-    # begin (do not change this order)
-    Material.make!(:arame_comum)
-    Material.make!(:antivirus)
-    Material.make!(:arame_farpado)
-    # end
-
-    ReferenceUnit.make!(:metro)
-    MaterialsClass.make!(:arames)
-    ExpenseNature.make!(:compra_de_material)
-
-    navigate 'Comum > Cadastrais > Materiais > Materiais'
-
-    click_link 'Antivirus'
-
-    fill_with_autocomplete 'Classe', :with => 'Arame'
-    fill_in 'Descrição', :with => 'Parafuso'
-    fill_in 'Descrição detalhada', :with => 'de rosca'
-    fill_modal 'Unidade', :with => 'Metro', :field => 'Descrição'
-    fill_in 'Referência do fabricante', :with => 'outro fabricante'
-    check 'Material combustível'
-    select 'Material de consumo', :from => 'Tipo de material'
-
-    # testing javascript
-    expect(page).to have_disabled_field 'Tipo de contrato'
-    # end of javascript test
-
-    fill_modal 'Natureza da despesa', :with => '3.0.10.01.11', :field => 'Natureza da despesa'
-
-    click_button 'Salvar'
-
-    expect(page).to have_notice 'Material editado com sucesso.'
-
-    click_link 'Parafuso'
-
-    expect(page).to have_field 'Classe', :with => '02.44.65.430.000 - Arames'
-    expect(page).to have_field 'Descrição', :with => 'Parafuso'
-    expect(page).to have_field 'Descrição detalhada', :with => 'de rosca'
-    expect(page).to have_field 'Unidade', :with => 'M'
-    expect(page).to have_field 'Referência do fabricante', :with => 'outro fabricante'
-    expect(page).to have_checked_field 'Material combustível'
-    expect(page).to have_select 'Tipo de material', :selected => 'Material de consumo'
-    expect(page).to have_disabled_field 'Tipo de contrato'
-    expect(page).to have_field 'Natureza da despesa', :with => '3.0.10.01.11 - Compra de Material'
-  end
-
-  scenario 'destroy an existent material' do
-    Material.make!(:antivirus)
-
-    navigate 'Comum > Cadastrais > Materiais > Materiais'
-
-    click_link 'Antivirus'
-
-    click_link 'Apagar'
-
-    expect(page).to have_notice 'Material apagado com sucesso.'
-
-    expect(page).to_not have_content 'Antivirus'
   end
 
   scenario 'cannot destroy an existent material with licitation_objects' do
