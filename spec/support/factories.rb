@@ -1,5 +1,11 @@
 # encoding: utf-8
 FactoryGirl.define do
+  factory :customer do
+    name { 'Test' }
+    domain { '127.0.0.1' }
+    database { Customer.connection_config }
+  end
+
   factory :country do
     name 'Brasil'
   end

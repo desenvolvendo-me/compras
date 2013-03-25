@@ -405,7 +405,6 @@ feature "PriceCollections" do
 
   scenario 'removing a lot' do
     PriceCollection.make!(:coleta_de_precos)
-    Customer.make!(:cliente)
 
     navigate 'Processos de Compra > Coletas de Preços'
 

@@ -9,38 +9,22 @@ describe ApplicationController do
 
   let(:customer) { double('customer').as_null_object }
 
-  context 'when found a customer' do
-    it 'should handle customer connection' do
-      customer.should_receive(:using_connection)
+  it 'should handle customer connection' do
+    customer.should_receive(:using_connection)
 
-      request.env['X-Customer'] = 'ipatinga-mg'
+    request.env['X-Customer'] = 'ipatinga-mg'
 
-      Customer.should_receive(:find_by_domain).
-               with('ipatinga-mg').
-               and_return(customer)
+    Customer.should_receive(:find_by_domain!).
+      with('ipatinga-mg').
+      and_return(customer)
 
-      get :index
-    end
-  end
-
-  context 'when do not found a customer' do
-    it 'should handle customer connection' do
-      NilCustomer.any_instance.should_receive(:using_connection)
-
-      request.env['X-Customer'] = 'ipatinga-mg'
-
-      Customer.should_receive(:find_by_domain).
-               with('ipatinga-mg').
-               and_return(nil)
-
-      get :index
-    end
+    get :index
   end
 
   it 'should set the current domain to Uploader' do
     customer.stub(:domain).and_return('url')
 
-    Customer.stub(:find_by_domain).and_return(customer)
+    Customer.stub(:find_by_domain!).and_return(customer)
 
     get :index
 

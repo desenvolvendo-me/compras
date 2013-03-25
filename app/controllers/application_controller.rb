@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_customer
-    @current_customer ||= CustomerFinder.current(request.headers['X-Customer'])
+    @current_customer ||= CustomerFinder.current(request)
   end
 
   def render_to_pdf(partial_name, options = {})
