@@ -1120,17 +1120,6 @@ feature "DirectPurchases" do
     purchase_solicitation = PurchaseSolicitation.make!(:reparo_liberado,
       :purchase_solicitation_budget_allocations => [budget_allocation])
 
-    item_group_material = PurchaseSolicitationItemGroupMaterial.make(
-      :reparo_office,
-      :purchase_solicitations => [purchase_solicitation])
-
-    item_group = PurchaseSolicitationItemGroup.make!(:office,
-      :purchase_solicitation_item_group_materials => [item_group_material])
-
-    item_group.purchase_solicitation_items.each do |item|
-      item.update_column :purchase_solicitation_item_group_id, item_group.id
-    end
-
     PurchaseSolicitation.make!(:reparo_liberado,
       :accounting_year => 2013,
       :responsible => Employee.make!(:wenderson),

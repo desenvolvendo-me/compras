@@ -7,7 +7,6 @@ require 'app/models/administrative_process_budget_allocation_item'
 require 'app/models/price_collection_lot_item'
 require 'app/models/creditor_material'
 require 'app/models/materials_control'
-require 'app/models/purchase_solicitation_item_group_material'
 
 describe Material do
   describe 'default values' do
@@ -29,7 +28,6 @@ describe Material do
   it { should have_many(:purchase_solicitation_budget_allocation_items).dependent(:restrict) }
   it { should have_many(:price_collection_lot_items).dependent(:restrict) }
   it { should have_many(:creditor_materials).dependent(:restrict) }
-  it { should have_many(:purchase_solicitation_item_group_materials).dependent(:destroy) }
   it { should have_many(:purchase_solicitation_budget_allocations).dependent(:restrict) }
   it { should have_many(:materials_controls).dependent(:destroy) }
 

@@ -100,51 +100,6 @@ feature 'DirectPurchaseAnnuls' do
     expect(page).to have_field 'Justificativa', :with => 'Anulação da compra direta'
   end
 
-  scenario 'annul an existent direct_purchase with purchase_solicitation_item_group' do
-    DirectPurchase.make!(
-      :compra,
-      :purchase_solicitation_item_group => PurchaseSolicitationItemGroup.make!(:antivirus)
-    )
-
-    navigate 'Processos de Compra > Compra Direta'
-
-    click_link "Limpar Filtro"
-
-    within_records do
-      page.find('a').click
-    end
-
-    click_link 'Anular'
-
-    expect(page).to have_content "Anular Compra Direta 1/2012"
-
-    fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
-    fill_in 'Data', :with => '01/10/2012'
-    fill_in 'Justificativa', :with => 'Anulação da compra direta'
-
-    click_button 'Salvar'
-
-    expect(page).to have_notice 'Compra direta 1/2012 anulada com sucesso'
-
-    click_link 'Anulação'
-
-    expect(page).to have_content "Anulação da Compra Direta 1/2012"
-
-    expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
-    expect(page).to have_field 'Data', :with => '01/10/2012'
-    expect(page).to have_field 'Justificativa', :with => 'Anulação da compra direta'
-
-    navigate 'Processos de Compra > Agrupamentos de Itens de Solicitações de Compra'
-
-    click_link 'Agrupamento de antivirus'
-
-    click_link 'Anulação'
-
-    expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
-    expect(page).to have_field 'Data', :with => '01/10/2012'
-    expect(page).to have_field 'Justificativa', :with => 'Anulação da compra direta'
-  end
-
   scenario 'annul an existent direct_purchase with purchase_solicitation' do
     DirectPurchase.make!(:compra)
     PurchaseSolicitation.make!(:reparo_liberado)

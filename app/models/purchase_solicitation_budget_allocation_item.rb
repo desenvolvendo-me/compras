@@ -10,7 +10,6 @@ class PurchaseSolicitationBudgetAllocationItem < Compras::Model
   has_enumeration_for :fulfiller_type
 
   belongs_to :purchase_solicitation_budget_allocation
-  belongs_to :purchase_solicitation_item_group
   belongs_to :material
   belongs_to :fulfiller, :polymorphic => true
   has_one    :purchase_solicitation, :through => :purchase_solicitation_budget_allocation
@@ -25,24 +24,6 @@ class PurchaseSolicitationBudgetAllocationItem < Compras::Model
   validates :material_id, :uniqueness => { :scope => :purchase_solicitation_budget_allocation_id }, :allow_nil => true
   validate :validate_material_characteristic, :if => :services?
 
-  def self.group_by_ids!(ids, purchase_solicitation_item_group_id)
-    where { id.in(ids) }.update_all(
-      :status => PurchaseSolicitationBudgetAllocationItemStatus::GROUPED,
-      :purchase_solicitation_item_group_id => purchase_solicitation_item_group_id
-    )
-  end
-
-  def self.pending_by_ids!(ids)
-    where { id.in(ids) }.update_all(
-      :status => PurchaseSolicitationBudgetAllocationItemStatus::PENDING,
-      :purchase_solicitation_item_group_id => nil
-    )
-  end
-
-  def self.by_item_group(item_group)
-    where { |item| item.purchase_solicitation_item_group_id.eq(item_group.id) }
-  end
-
   def self.by_purchase_solicitation(purchase_solicitation)
     joins { purchase_solicitation_budget_allocation }.
     where { purchase_solicitation_budget_allocation.purchase_solicitation_id.eq(purchase_solicitation.id) }
@@ -55,7 +36,6 @@ class PurchaseSolicitationBudgetAllocationItem < Compras::Model
 
   def self.pending!
     update_all(:status => PurchaseSolicitationBudgetAllocationItemStatus::PENDING,
-               :purchase_solicitation_item_group_id => nil,
                :fulfiller_id => nil,
                :fulfiller_type => nil)
   end

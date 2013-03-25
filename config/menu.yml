@@ -66,7 +66,6 @@ menu:
       - judgment_forms
       - licitation_objects
       - legal_references
-    - purchase_solicitation_item_groups
     - price_collections
     - direct_purchases
     - price_registrations

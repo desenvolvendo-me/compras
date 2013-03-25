@@ -6,7 +6,6 @@ require 'app/models/material'
 
 describe PurchaseSolicitationBudgetAllocationItem do
   it { should belong_to :purchase_solicitation_budget_allocation }
-  it { should belong_to :purchase_solicitation_item_group }
   it { should belong_to :material }
   it { should belong_to :fulfiller }
 

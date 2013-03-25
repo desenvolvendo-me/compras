@@ -8,7 +8,6 @@ require 'app/models/budget_allocation'
 require 'app/models/purchase_solicitation'
 require 'app/models/purchase_solicitation_liberation'
 require 'app/models/resource_annul'
-require 'app/models/purchase_solicitation_item_group_material_purchase_solicitation'
 require 'app/models/material.rb'
 require 'app/models/direct_purchase'
 require 'app/models/budget_structure.rb'
@@ -29,7 +28,6 @@ describe PurchaseSolicitation do
   it { should have_many(:purchase_solicitation_budget_allocations).dependent(:destroy).order(:id) }
   it { should have_many(:items).through(:purchase_solicitation_budget_allocations)}
   it { should have_many(:purchase_solicitation_liberations).dependent(:destroy).order(:sequence) }
-  it { should have_many(:purchase_solicitation_item_group_material_purchase_solicitations).dependent(:destroy)}
   it { should have_one(:annul).dependent(:destroy) }
   it { should have_one(:direct_purchase) }
   it { should belong_to :responsible }

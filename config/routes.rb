@@ -169,7 +169,7 @@ Compras::Application.routes.draw do
    get 'modal_info', :on => :member
  end
 
-  resources :capability_allocation_details do 
+  resources :capability_allocation_details do
     collection do
       get :filter
       get :modal
@@ -556,16 +556,6 @@ Compras::Application.routes.draw do
   end
 
   resources :purchase_solicitation_annuls, :only => [:new, :create, :edit, :update]
-
-  resources :purchase_solicitation_item_group_annuls, :only => [:new, :create, :edit, :update]
-
-  resources :purchase_solicitation_item_groups, :except => :destroy do
-    collection do
-      get :filter
-      get :modal
-    end
-    get 'modal_info', :on => :member
-  end
 
   resources :purchase_solicitation_liberations, :only => [:index, :new, :create, :edit] do
     collection do
