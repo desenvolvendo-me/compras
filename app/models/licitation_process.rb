@@ -8,7 +8,7 @@ class LicitationProcess < Compras::Model
                   :judgment_form_id, :execution_type,
                   :disqualify_by_documentation_problem, :disqualify_by_maximum_value,
                   :consider_law_of_proposals, :price_registration, :status,
-                  :responsible_id, :object_type, :date, :protocol, :item, :purchase_solicitation_item_group_id,
+                  :responsible_id, :object_type, :date, :protocol, :item,
                   :summarized_object, :modality, :description, :pledge_type,
                   :administrative_process_budget_allocations_attributes,
                   :contract_guarantees, :extension_clause, :index_update_rate_id,
@@ -44,7 +44,6 @@ class LicitationProcess < Compras::Model
   belongs_to :contact, :class_name => 'Employee'
   belongs_to :judgment_form
   belongs_to :payment_method
-  belongs_to :purchase_solicitation_item_group
   belongs_to :readjustment_index, :class_name => 'Indexer'
   belongs_to :index_update_rate, :class_name => 'Indexer'
   belongs_to :responsible, :class_name => 'Employee'

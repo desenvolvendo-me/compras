@@ -41,27 +41,6 @@ describe LicitationProcessesController do
 
       expect(assigns(:licitation_process).licitation_number).to eq 2
     end
-
-    it 'should update item_group status and fullfil the item' do
-      item_group = PurchaseSolicitationItemGroup.make!(:antivirus)
-      item_group_process = double(:item_group_process)
-
-      LicitationProcess.any_instance.should_receive(:transaction).and_yield
-      LicitationProcess.any_instance.should_receive(:save).and_return(true)
-      LicitationProcess.any_instance.should_receive(:id).any_number_of_times.and_return(1)
-
-      PurchaseSolicitationItemGroupProcess.
-        should_receive(:new).
-        with(:new_item_group => item_group).
-        and_return(item_group_process)
-
-      item_group_process.should_receive(:update_status)
-
-      AdministrativeProcessItemGroupCloner.should_receive(:clone)
-
-      post :create, :licitation_process => {
-        :purchase_solicitation_item_group_id => item_group.id }
-    end
   end
 
   describe 'PUT #update' do
@@ -109,17 +88,6 @@ describe LicitationProcessesController do
 
         expect(response).to redirect_to(licitation_process_path(licitation_process))
       end
-    end
-
-    it 'should clear old budget_allocations' do
-      licitation_process = LicitationProcess.make!(:processo_licitatorio)
-      item_group = PurchaseSolicitationItemGroup.make!(:antivirus)
-
-      AdministrativeProcessBudgetAllocationCleaner.any_instance.
-                                                   should_receive(:clear_old_records)
-
-      put :update, :id => licitation_process.id,
-                   :licitation_process => { :purchase_solicitation_item_group_id => item_group.id }
     end
   end
 

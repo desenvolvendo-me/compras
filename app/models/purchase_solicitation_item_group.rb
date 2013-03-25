@@ -14,7 +14,6 @@ class PurchaseSolicitationItemGroup < Compras::Model
   has_many :purchase_solicitation_item_group_materials, :dependent => :destroy
   has_many :purchase_solicitations, :through => :purchase_solicitation_item_group_materials, :uniq => true
   has_one :direct_purchase, :dependent => :restrict
-  has_one :licitation_process, :dependent => :restrict
   has_one :annul, :class_name => 'ResourceAnnul', :as => :annullable, :dependent => :destroy
 
   validates :description, :presence => true
@@ -57,7 +56,7 @@ class PurchaseSolicitationItemGroup < Compras::Model
   end
 
   def editable?
-    !(licitation_process || direct_purchase)
+    direct_purchase.blank?
   end
 
   def annullable?

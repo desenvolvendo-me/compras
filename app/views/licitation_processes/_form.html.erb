@@ -111,15 +111,9 @@
   });
 
   (function () {
-    var purchaseSolicitationItemGroupId = $("#licitation_process_purchase_solicitation_item_group_id").val(),
-        purchaseSolicitationId = $("#licitation_process_purchase_solicitation_id").val();
+    var purchaseSolicitationId = $("#licitation_process_purchase_solicitation_id").val();
 
-    if (purchaseSolicitationItemGroupId) {
-      disablePurchaseSolicitation();
-      disableBudgetAllocations();
-      toggleItems(false);
-    } else if (purchaseSolicitationId) {
-      disablePurchaseSolicitationItemGroup();
+    if (purchaseSolicitationId) {
       disableBudgetAllocations();
       toggleItems(false);
     }
@@ -152,20 +146,8 @@
     $modals.attr("disabled", !enable);
   }
 
-  function disablePurchaseSolicitation() {
-    $("#licitation_process_purchase_solicitation").attr("disabled", "disabled");
-  }
-
-  function disablePurchaseSolicitationItemGroup() {
-    $("#licitation_process_purchase_solicitation_item_group").attr("disabled", "disabled");
-  }
-
   function enablePurchaseSolicitation() {
     $("#licitation_process_purchase_solicitation").removeAttr("disabled");
-  }
-
-  function enablePurchaseSolicitationItemGroup() {
-    $("#licitation_process_purchase_solicitation_item_group").removeAttr("disabled");
   }
 
   function fillResponsible(responsible) {
@@ -256,34 +238,7 @@
     fillItem(itemUUID, item);
   }
 
-  $("#licitation_process_purchase_solicitation_item_group_id").on("change", function (event, purchase_solicitation_item_group) {
-    $("#administrative-process-budget-allocation").empty();
-    $(".nested-licitation-process-item").empty()
-
-    if (purchase_solicitation_item_group) {
-      $.each(purchase_solicitation_item_group.purchase_solicitations, function (i, purchase_solicitation) {
-        $.each(purchase_solicitation.budget_allocations, function (i, budget_allocation) {
-          renderBudgetAllocation(budget_allocation);
-
-          $.each(budget_allocation.items, function (i, item) {
-            renderItem(item);
-          });
-        });
-      });
-
-      disableBudgetAllocations();
-      disablePurchaseSolicitation();
-      toggleItems(false);
-    } else {
-      enableBudgetAllocations();
-      enablePurchaseSolicitation();
-      toggleItems(true);
-    }
-
-    calcItemOrder();
-  });
-
-  $("#licitation_process_purchase_solicitations").on("change", function (event, purchase_solicitation) {
+  $("#licitation_process_purchase_solicitation_id").on("change", function (event, purchase_solicitation) {
     if (purchase_solicitation) {
       $.each(purchase_solicitation.budget_allocations, function (i, budget_allocation) {
         renderBudgetAllocation(budget_allocation);

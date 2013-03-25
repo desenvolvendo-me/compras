@@ -61,42 +61,19 @@ class LicitationProcessesController < CrudController
       object.licitation_number = object.next_licitation_number
       object.status = LicitationProcessStatus::WAITING_FOR_OPEN
 
-      if super
-        if params[:licitation_process]
-          AdministrativeProcessItemGroupCloner.clone(object, :new_item_group => new_item_group)
-        end
-
-        PurchaseSolicitationItemGroupProcess.new(:new_item_group => new_item_group).update_status
-      end
+      super
     end
   end
 
   def update_resource(object, attributes)
     return unless object.updatable?
 
-    old_item_group = object.purchase_solicitation_item_group
-
     object.transaction do
-      AdministrativeProcessBudgetAllocationCleaner.new(object, new_item_group).clear_old_records
-
       object.localized.assign_attributes(*attributes)
 
       BidderStatusChanger.new(object).change
 
-      if object.save
-        object = LicitationProcess.find(object.id)
-
-        PurchaseSolicitationItemGroupProcess.new(
-          :new_item_group => new_item_group,
-          :old_item_group => old_item_group
-        ).update_status
-      end
+      super
     end
-  end
-
-  def new_item_group
-    item_group_id = params[:licitation_process][:purchase_solicitation_item_group_id]
-
-    PurchaseSolicitationItemGroup.find(item_group_id) if item_group_id.present?
   end
 end

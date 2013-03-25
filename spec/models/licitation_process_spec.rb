@@ -44,7 +44,6 @@ describe LicitationProcess do
   it { should belong_to :contact }
   it { should belong_to :judgment_form }
   it { should belong_to :payment_method }
-  it { should belong_to :purchase_solicitation_item_group }
   it { should belong_to :readjustment_index }
   it { should belong_to :responsible }
 
