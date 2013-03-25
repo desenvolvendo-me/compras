@@ -7,7 +7,7 @@ class LicitationProcessImpugnmentDecorator
     localize super if super
   end
 
-  def licitation_process_envelope_opening_date
+  def licitation_process_proposal_envelope_opening_date
     localize super if super
   end
 
@@ -15,7 +15,7 @@ class LicitationProcessImpugnmentDecorator
     localize(super, :format => :hour) if super
   end
 
-  def licitation_process_envelope_opening_time
+  def licitation_process_proposal_envelope_opening_time
     localize(super, :format => :hour) if super
   end
 

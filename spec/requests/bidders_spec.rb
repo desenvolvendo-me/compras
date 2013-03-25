@@ -746,7 +746,7 @@ feature "Bidders" do
   end
 
   scenario 'should not have field technical_score when licitation kind is not(best_technique, technical_and_price)' do
-    LicitationProcess.make!(:processo_licitatorio_fornecedores, :envelope_opening_date => I18n.l(Date.current))
+    LicitationProcess.make!(:processo_licitatorio_fornecedores, :proposal_envelope_opening_date => I18n.l(Date.current))
 
     navigate 'Processos de Compra > Processos de Compras'
 
@@ -767,7 +767,7 @@ feature "Bidders" do
 
   scenario "Save and destroy buttons should be disabled if licitation process envelope opening date is not today" do
     licitation_process = LicitationProcess.make!(:apuracao_global)
-    licitation_process.update_attribute :envelope_opening_date, Date.tomorrow
+    licitation_process.update_attribute :proposal_envelope_opening_date, Date.tomorrow
 
     navigate 'Processos de Compra > Processos de Compras'
 

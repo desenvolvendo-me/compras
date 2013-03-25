@@ -9,12 +9,12 @@ class LicitationProcessImpugnment < Compras::Model
   belongs_to :person
 
   delegate :year, :process_date, :description, :envelope_delivery_date,
-           :envelope_delivery_time, :envelope_opening_date, :envelope_opening_time,
+           :envelope_delivery_time, :proposal_envelope_opening_date, :proposal_envelope_opening_time,
            :to => :licitation_process, :allow_nil => true, :prefix => true
 
   validates :licitation_process, :person, :related, :situation, :impugnment_date, :presence => true
   validates :new_envelope_delivery_time, :timeliness => { :type => :time }, :if => :new_envelope_delivery_date?
-  validates :new_envelope_opening_time, :timeliness => { :type => :time }, :if => :new_envelope_opening_date?
+  validates :new_proposal_envelope_opening_time, :timeliness => { :type => :time }, :if => :new_proposal_envelope_opening_date?
 
   with_options :allow_blank => true do |allowing_blank|
     allowing_blank.validates :impugnment_date, :timeliness => {

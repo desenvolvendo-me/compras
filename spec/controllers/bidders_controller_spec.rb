@@ -73,7 +73,7 @@ describe BiddersController do
   describe 'PUT update ' do
     it 'should not save when envelope opening date is not today' do
       licitation_process = LicitationProcess.make!(:processo_licitatorio_fornecedores)
-      licitation_process.update_attributes(:envelope_opening_date => Date.tomorrow)
+      licitation_process.update_attributes(:proposal_envelope_opening_date => Date.tomorrow)
       bidder = licitation_process.bidders.first
 
       Bidder.any_instance.should_receive(:save).never
@@ -92,7 +92,7 @@ describe BiddersController do
 
     it 'should redirect to 401 when can not update a bidder' do
       licitation_process = LicitationProcess.make!(:processo_licitatorio_fornecedores)
-      licitation_process.update_attributes(:envelope_opening_date => Date.tomorrow)
+      licitation_process.update_attributes(:proposal_envelope_opening_date => Date.tomorrow)
 
       bidder = licitation_process.bidders.first
 
@@ -106,7 +106,7 @@ describe BiddersController do
   describe 'DELETE #destroy' do
     it 'should redirect to 401 when can not destroy a bidder' do
       licitation_process = LicitationProcess.make!(:processo_licitatorio_fornecedores)
-      licitation_process.update_attributes(:envelope_opening_date => Date.tomorrow)
+      licitation_process.update_attributes(:proposal_envelope_opening_date => Date.tomorrow)
 
       bidder = licitation_process.bidders.first
 

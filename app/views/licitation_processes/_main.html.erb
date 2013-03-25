@@ -33,7 +33,7 @@
     </div>
 </div>
 
-<div class="yui3-g fields-to-trading">
+<div class="yui3-g fields-to-trading-and-concurrence">
   <div class="yui3-u-1-3">
     <%= f.input :price_registration %>
   </div>
@@ -135,20 +135,35 @@
   $('input[name="licitation_process[type_of_purchase]"]').change(function(){
     organizesModalities();
     toogleVisibilityFieldsToTrading();
+    toogleVisibilityFieldsToTradingAndConcurrence();
   });
 
   organizesModalities();
 
-  function toogleVisibilityFieldsToTrading() {
+  function toogleVisibilityFieldsToTradingAndConcurrence() {
     if (($('#licitation_process_modality').val() == 'trading') || ($('#licitation_process_modality').val() == 'concurrence')) {
-      $('.fields-to-trading').removeClass('hidden');
+      $('.fields-to-trading-and-concurrence').removeClass('hidden');
     } else {
-      $('.fields-to-trading').addClass('hidden');
+      $('.fields-to-trading-and-concurrence').addClass('hidden');
       $('#licitation_process_price_registration, #licitation_process_is_trading').attr('checked', false)
     }
   };
 
-  $('#licitation_process_modality').on('change', toogleVisibilityFieldsToTrading);
+  function toogleVisibilityFieldsToTrading() {
+    if (($('#licitation_process_modality').val() == 'trading')) {
+      $('.fields-to-trading').removeClass('hidden');
+      $('.not-fields-to-trading').addClass('hidden');
+    } else {
+      $('.fields-to-trading').addClass('hidden');
+      $('.not-fields-to-trading').removeClass('hidden');
+    }
+  };
+
+  $('#licitation_process_modality').on('change', function() {
+    toogleVisibilityFieldsToTrading();
+    toogleVisibilityFieldsToTradingAndConcurrence();
+  });
 
   toogleVisibilityFieldsToTrading();
+  toogleVisibilityFieldsToTradingAndConcurrence();
 </script>

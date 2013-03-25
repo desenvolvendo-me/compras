@@ -64,7 +64,7 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Prazos' do
-      expect(page).to have_readonly_field 'Data da abertura dos envelopes'
+      expect(page).to have_readonly_field 'Abertura das propostas'
       expect(page).to have_readonly_field 'Hora da abertura'
 
       expect(page).to have_field 'Data da expedição', :with => I18n.l(Date.current)
@@ -72,7 +72,7 @@ feature "LicitationProcesses" do
       fill_modal 'Contato para informações', :with => '958473', :field => 'Matrícula'
 
       fill_in 'Término do recebimento dos envelopes', :with => I18n.l(Date.current)
-      fill_in 'Hora da entrega', :with => '14:00'
+      fill_in 'Hora do recebimento', :with => '14:00'
 
       fill_in 'Validade da proposta', :with => '5'
       select 'dia/dias', :from => 'Período da validade da proposta'
@@ -156,7 +156,7 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Prazos' do
-      expect(page).to have_readonly_field 'Data da abertura dos envelopes'
+      expect(page).to have_readonly_field 'Abertura das propostas'
       expect(page).to have_readonly_field 'Hora da abertura'
 
       expect(page).to have_field 'Data da expedição', :with => I18n.l(Date.current)
@@ -164,9 +164,9 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Contato para informações', :with => 'Gabriel Sobrinho'
 
       expect(page).to have_field 'Término do recebimento dos envelopes', :with => I18n.l(Date.current)
-      expect(page).to have_field 'Hora da entrega', :with => '14:00'
+      expect(page).to have_field 'Hora do recebimento', :with => '14:00'
 
-      expect(page).to have_field 'Data da abertura dos envelopes', :with => ''
+      expect(page).to have_field 'Abertura das propostas', :with => ''
       expect(page).to have_field 'Hora da abertura', :with => ''
 
       expect(page).to have_field 'Validade da proposta', :with => '5'
@@ -282,9 +282,9 @@ feature "LicitationProcesses" do
       fill_modal 'Contato para informações', :with => '958473', :field => 'Matrícula'
 
       fill_in 'Término do recebimento dos envelopes', :with => I18n.l(Date.tomorrow)
-      fill_in 'Hora da entrega', :with => '15:00'
+      fill_in 'Hora do recebimento', :with => '15:00'
 
-      fill_in 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow + 1.day)
+      fill_in 'Abertura das propostas', :with => I18n.l(Date.tomorrow + 1.day)
       fill_in 'Hora da abertura', :with => '15:00'
 
       fill_in 'Prazo de entrega', :with => '3'
@@ -347,9 +347,9 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Contato para informações', :with => 'Gabriel Sobrinho'
 
       expect(page).to have_field 'Término do recebimento dos envelopes', :with => I18n.l(Date.tomorrow)
-      expect(page).to have_field 'Hora da entrega', :with => '15:00'
+      expect(page).to have_field 'Hora do recebimento', :with => '15:00'
 
-      expect(page).to have_field 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow + 1.day)
+      expect(page).to have_field 'Abertura das propostas', :with => I18n.l(Date.tomorrow + 1.day)
       expect(page).to have_field 'Hora da abertura', :with => '15:00'
 
       expect(page).to have_field 'Validade da proposta', :with => '10'
@@ -406,7 +406,7 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Prazos' do
-      expect(page).to have_readonly_field "Data da abertura dos envelopes"
+      expect(page).to have_readonly_field "Abertura das propostas"
       expect(page).to have_readonly_field "Hora da abertura"
     end
 
@@ -429,7 +429,7 @@ feature "LicitationProcesses" do
     click_link "Voltar ao processo de compra"
 
     within_tab 'Prazos' do
-      expect(page).to_not have_readonly_field "Data da abertura dos envelopes"
+      expect(page).to_not have_readonly_field "Abertura das propostas"
       expect(page).to_not have_readonly_field "Hora da abertura"
     end
   end
@@ -597,8 +597,8 @@ feature "LicitationProcesses" do
       fill_modal 'Contato para informações', :with => '958473', :field => 'Matrícula'
 
       fill_in 'Término do recebimento dos envelopes', :with => I18n.l(Date.current)
-      fill_in 'Hora da entrega', :with => I18n.l(Date.current, :format => 'time')
-      fill_in 'Data da abertura dos envelopes', :with => I18n.l(Date.current)
+      fill_in 'Hora do recebimento', :with => I18n.l(Date.current, :format => 'time')
+      fill_in 'Abertura das propostas', :with => I18n.l(Date.current)
       fill_in 'Hora da abertura', :with => I18n.l(Date.current, :format => 'time')
 
       fill_in 'Validade da proposta', :with => '5'
@@ -641,7 +641,7 @@ feature "LicitationProcesses" do
                                                  :disqualify_by_documentation_problem => true)
 
     licitation_process.update_attributes({
-      :envelope_opening_date => Date.tomorrow,
+      :proposal_envelope_opening_date => Date.tomorrow,
       :envelope_delivery_date => Date.tomorrow
     })
 
@@ -751,7 +751,7 @@ feature "LicitationProcesses" do
       expect(page).to have_content 'Processo/Ano'
       expect(page).to have_content 'Modalidade'
       expect(page).to have_content 'Tipo de objeto'
-      expect(page).to have_content 'Data da abertura dos envelopes'
+      expect(page).to have_content 'Abertura das propostas'
       expect(page).to have_content 'Status'
 
       within 'tbody tr' do
@@ -1428,7 +1428,7 @@ feature "LicitationProcesses" do
       fill_modal 'Contato para informações', :with => '958473', :field => 'Matrícula'
 
       fill_in 'Término do recebimento dos envelopes', :with => I18n.l(Date.current)
-      fill_in 'Hora da entrega', :with => '14:00'
+      fill_in 'Hora do recebimento', :with => '14:00'
 
       fill_in 'Validade da proposta', :with => '5'
       select 'dia/dias', :from => 'Período da validade da proposta'
@@ -1509,7 +1509,7 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Contato para informações', :with => 'Gabriel Sobrinho'
 
       expect(page).to have_field 'Término do recebimento dos envelopes', :with => I18n.l(Date.current)
-      expect(page).to have_field 'Hora da entrega', :with => '14:00'
+      expect(page).to have_field 'Hora do recebimento', :with => '14:00'
 
       expect(page).to have_field 'Validade da proposta', :with => '5'
       expect(page).to have_select 'Período da validade da proposta', :selected => 'dia/dias'
@@ -2017,7 +2017,7 @@ feature "LicitationProcesses" do
       fill_modal 'Contato para informações', :with => '958473', :field => 'Matrícula'
 
       fill_in 'Término do recebimento dos envelopes', :with => I18n.l(Date.current)
-      fill_in 'Hora da entrega', :with => '14:00'
+      fill_in 'Hora do recebimento', :with => '14:00'
 
       fill_in 'Validade da proposta', :with => '5'
       select 'dia/dias', :from => 'Período da validade da proposta'
@@ -2332,7 +2332,7 @@ feature "LicitationProcesses" do
       fill_modal 'Contato para informações', :with => '958473', :field => 'Matrícula'
 
       fill_in 'Término do recebimento dos envelopes', :with => I18n.l(Date.current)
-      fill_in 'Hora da entrega', :with => '14:00'
+      fill_in 'Hora do recebimento', :with => '14:00'
 
       fill_in 'Validade da proposta', :with => '5'
       select 'dia/dias', :from => 'Período da validade da proposta'
@@ -2443,7 +2443,7 @@ feature "LicitationProcesses" do
       fill_modal 'Contato para informações', :with => '958473', :field => 'Matrícula'
 
       fill_in 'Término do recebimento dos envelopes', :with => I18n.l(Date.current)
-      fill_in 'Hora da entrega', :with => '14:00'
+      fill_in 'Hora do recebimento', :with => '14:00'
 
       fill_in 'Validade da proposta', :with => '5'
       select 'dia/dias', :from => 'Período da validade da proposta'
@@ -2685,6 +2685,40 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Meta'
       expect(page).to have_field 'Direitos e obrigações do concedente'
       expect(page).to have_field 'Diretos e obrigações do concedido'
+    end
+  end
+
+  scenario 'assert javascript over modality' do
+    pending 'this test is not working, but in browser is all ok' do
+      navigate 'Processos de Compra > Processos de Compras'
+
+      click_link 'Criar Processo de Compra'
+
+      within_tab 'Principal' do
+        choose 'Processo licitatório'
+        select 'Compras e serviços', :from => 'Tipo de objeto'
+        select 'Pregão', :from => 'Modalidade'
+      end
+
+      within_tab 'Prazos' do
+        expect(page).to_not have_field 'Abertura da habilitação'
+        expect(page).to_not have_field 'Hora da habilitação'
+        expect(page).to have_field 'Data do credenciamento'
+        expect(page).to have_field 'Hora do credenciamento'
+      end
+
+      within_tab 'Principal' do
+        choose 'Processo licitatório'
+        select 'Compras e serviços', :from => 'Tipo de objeto'
+        select 'Concorrência', :from => 'Modalidade'
+      end
+
+      within_tab 'Prazos' do
+        expect(page).to have_field 'Abertura da habilitação'
+        expect(page).to have_field 'Hora da habilitação'
+        expect(page).to_not have_field 'Data do credenciamento'
+        expect(page).to_not have_field 'Hora do credenciamento'
+      end
     end
   end
 end

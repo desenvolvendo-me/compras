@@ -8,8 +8,12 @@ pt-BR:
     attributes:
       licitation_process:
         adjudication_date: "Data da adjudicação"
+        authorization_envelope_opening_date: 'Abertura da habilitação'
+        authorization_envelope_opening_time: 'Hora da habilitação'
         capability: "Fonte de recurso"
         caution_value: "Valor da caução"
+        closing_of_accreditation_date: 'Data do credenciamento'
+        closing_of_accreditation_time: 'Hora do credenciamento'
         code_and_year: "Processo/Ano"
         concession_period: "Prazo da concessão"
         concession_period_unit: "Unidade do prazo da concessão"
@@ -21,9 +25,7 @@ pt-BR:
         disqualify_by_maximum_value: "Desclassificar participantes com cotações acima do valor máximo estabelecido no edital"
         document_types: "Tipo de documento"
         envelope_delivery_date: "Término do recebimento dos envelopes"
-        envelope_delivery_time: "Hora da entrega"
-        envelope_opening_date: "Data da abertura dos envelopes"
-        envelope_opening_time: "Hora da abertura"
+        envelope_delivery_time: "Hora do recebimento"
         execution_type: "Forma de execução"
         expiration: "Validade da proposta"
         expiration_unit: "Período da validade da proposta"
@@ -48,6 +50,8 @@ pt-BR:
         price_registration: "Registro de preço"
         process: "Processo"
         process_date: "Data da expedição"
+        proposal_envelope_opening_date: "Abertura das propostas"
+        proposal_envelope_opening_time: "Hora da abertura"
         protocol: "Número do protocolo"
         purchase_solicitation: "Solicitação de compra"
         purchase_solicitation_item_group: "Agrupamento de solicitações de compra"
@@ -66,6 +70,6 @@ pt-BR:
       has_already_a_ratification: "já foi homologado. Não pode ser alterado"
       has_already_a_publications: "já possui publicações. Não pode ser alterado"
       must_be_included_after_edital_publication: "Licitantes só podem ser incluídos após publicação do edital"
-      envelope_opening_date_greater_than_calendar_days: "deve ser a partir de %{limit}. Refente a %{days} dias maior que a data da publicação mais recente (%{publication})"
-      envelope_opening_date_greater_than_working_days: "deve ser a partir de %{limit}. Refente a %{days} dias úteis maior que a data da publicação mais recente (%{publication})"
+      proposal_envelope_opening_date_greater_than_calendar_days: "deve ser a partir de %{limit}. Refente a %{days} dias maior que a data da publicação mais recente (%{publication})"
+      proposal_envelope_opening_date_greater_than_working_days: "deve ser a partir de %{limit}. Refente a %{days} dias úteis maior que a data da publicação mais recente (%{publication})"
       disabled_envelope_message: "deve ter uma publição de edital"

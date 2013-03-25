@@ -42,7 +42,7 @@ class Bidder < Compras::Model
   validates :protocol, :protocol_date, :receipt_date, :presence => true, :if => :invited
   validates :creditor_id, :uniqueness => { :scope => :licitation_process_id, :allow_blank => true }
   validates :technical_score, :presence => true, :if => :validate_technical_score?
-  validate :validate_licitation_process_envelope_opening_date, :on => :create
+  validate :validate_licitation_process_proposal_envelope_opening_date, :on => :create
   validate :block_licitation_process_with_ratification
 
   with_options :allow_blank => true do |allowing_blank|
@@ -397,11 +397,11 @@ class Bidder < Compras::Model
     ((current_amount - first_place_amount) / first_place_amount) * BigDecimal(100)
   end
 
-  def validate_licitation_process_envelope_opening_date
+  def validate_licitation_process_proposal_envelope_opening_date
     return if licitation_process.nil?
 
     unless allow_bidders?
-      errors.add(:licitation_process, :must_be_the_licitation_process_envelope_opening_date)
+      errors.add(:licitation_process, :must_be_the_licitation_process_proposal_envelope_opening_date)
     end
   end
 

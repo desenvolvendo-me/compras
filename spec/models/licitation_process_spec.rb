@@ -91,8 +91,8 @@ describe LicitationProcess do
   it { should validate_presence_of :type_of_purchase }
   it { should validate_presence_of :year }
 
-  it { should_not validate_presence_of :envelope_opening_date }
-  it { should_not validate_presence_of :envelope_opening_time }
+  it { should_not validate_presence_of :proposal_envelope_opening_date }
+  it { should_not validate_presence_of :proposal_envelope_opening_time }
   it { should_not validate_presence_of :modality }
   it { should_not validate_presence_of :type_of_removal }
   it { should_not validate_presence_of :goal }
@@ -132,35 +132,35 @@ describe LicitationProcess do
 
     context "model validations" do
       before do
-        subject.stub(:validate_envelope_opening_date).and_return true
+        subject.stub(:validate_proposal_envelope_opening_date).and_return true
       end
 
-      it { should allow_value("11:11").for(:envelope_opening_time) }
+      it { should allow_value("11:11").for(:proposal_envelope_opening_time) }
     end
 
-    describe "#validate_envelope_opening_date" do
+    describe "#validate_proposal_envelope_opening_date" do
       it "return when envelope opening date is not present" do
-        subject.stub(:envelope_opening_date).and_return nil
+        subject.stub(:proposal_envelope_opening_date).and_return nil
         LicitationProcessEnvelopeOpeningDate.should_not_receive :new
-        subject.send(:validate_envelope_opening_date)
-        expect(subject.errors[:envelope_opening_date]).to_not include("deve ficar em branco")
+        subject.send(:validate_proposal_envelope_opening_date)
+        expect(subject.errors[:proposal_envelope_opening_date]).to_not include("deve ficar em branco")
       end
 
       it "envelope opening date should be blank when has not a publication" do
-        subject.stub(:envelope_opening_date).and_return Date.today
+        subject.stub(:proposal_envelope_opening_date).and_return Date.today
         subject.stub(:last_publication_date).and_return nil
 
-        subject.send(:validate_envelope_opening_date)
-        expect(subject.errors[:envelope_opening_date]).to include("deve ficar em branco")
+        subject.send(:validate_proposal_envelope_opening_date)
+        expect(subject.errors[:proposal_envelope_opening_date]).to include("deve ficar em branco")
       end
 
       it "validates the envelope opening date with the validation poro" do
-        subject.stub(:envelope_opening_date).and_return Date.today
+        subject.stub(:proposal_envelope_opening_date).and_return Date.today
         subject.stub(:last_publication_date).and_return Date.today
-        licitation_validation = double :licitation_process_envelope_opening_date
+        licitation_validation = double :licitation_process_proposal_envelope_opening_date
         LicitationProcessEnvelopeOpeningDate.should_receive(:new).with(subject).and_return licitation_validation
         licitation_validation.should_receive :valid?
-        subject.send(:validate_envelope_opening_date)
+        subject.send(:validate_proposal_envelope_opening_date)
       end
     end
   end
@@ -172,7 +172,7 @@ describe LicitationProcess do
     it { expect(subject.price_registration).to be false }
   end
 
-  context 'new_envelope_opening_date is not equal to new_envelope_delivery_date' do
+  context 'new_proposal_envelope_opening_date is not equal to new_envelope_delivery_date' do
     it { should allow_value("11:11").for(:envelope_delivery_time) }
     it { should_not allow_value("44:11").for(:envelope_delivery_time) }
   end
@@ -207,7 +207,7 @@ describe LicitationProcess do
     end
   end
 
-  context 'validate envelope_opening_date related with envelope_delivery_date' do
+  context 'validate proposal_envelope_opening_date related with envelope_delivery_date' do
     let :envelope_delivery_date do
       Date.current + 10.days
     end
@@ -216,16 +216,16 @@ describe LicitationProcess do
       subject.stub(:envelope_delivery_date).and_return(envelope_delivery_date)
     end
 
-    it 'should allow envelope_opening_date date after envelope_delivery_date' do
-      expect(subject).to allow_value(Date.current + 15.days).for(:envelope_opening_date)
+    it 'should allow proposal_envelope_opening_date date after envelope_delivery_date' do
+      expect(subject).to allow_value(Date.current + 15.days).for(:proposal_envelope_opening_date)
     end
 
-    it 'should allow envelope_opening_date date equals to envelope_delivery_date' do
-      expect(subject).to allow_value(envelope_delivery_date).for(:envelope_opening_date)
+    it 'should allow proposal_envelope_opening_date date equals to envelope_delivery_date' do
+      expect(subject).to allow_value(envelope_delivery_date).for(:proposal_envelope_opening_date)
     end
 
-    it 'should not allow envelope_opening_date date before envelope_delivery_date' do
-      expect(subject).not_to allow_value(Date.current).for(:envelope_opening_date).
+    it 'should not allow proposal_envelope_opening_date date before envelope_delivery_date' do
+      expect(subject).not_to allow_value(Date.current).for(:proposal_envelope_opening_date).
                                                     with_message("deve ser igual ou posterior a data da entrega dos envelopes (#{I18n.l envelope_delivery_date})")
     end
   end
@@ -264,15 +264,15 @@ describe LicitationProcess do
   end
 
   it 'should tell if it allow invitation bidders' do
-    subject.stub(:envelope_opening_date).and_return(Date.tomorrow)
+    subject.stub(:proposal_envelope_opening_date).and_return(Date.tomorrow)
 
     expect(subject).not_to be_allow_bidders
 
-    subject.stub(:envelope_opening_date).and_return(Date.current)
+    subject.stub(:proposal_envelope_opening_date).and_return(Date.current)
 
     expect(subject).to be_allow_bidders
 
-    subject.stub(:envelope_opening_date).and_return(Date.yesterday)
+    subject.stub(:proposal_envelope_opening_date).and_return(Date.yesterday)
 
     expect(subject).not_to be_allow_bidders
    end
@@ -283,17 +283,17 @@ describe LicitationProcess do
     expect(subject.advice_number).to eq 3
   end
 
-  context "when envelope_opening_date is not the current date" do
+  context "when proposal_envelope_opening_date is not the current date" do
     it "should return false for envelope_opening? method" do
-      subject.envelope_opening_date = Date.tomorrow
+      subject.proposal_envelope_opening_date = Date.tomorrow
 
       expect(subject).not_to be_envelope_opening
     end
   end
 
-  context "when envelope_opening_date is the current date" do
+  context "when proposal_envelope_opening_date is the current date" do
     it "should return true for envelope_opening? method" do
-      subject.envelope_opening_date = Date.current
+      subject.proposal_envelope_opening_date = Date.current
 
       expect(subject).to be_envelope_opening
     end

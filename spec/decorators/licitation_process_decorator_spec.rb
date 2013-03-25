@@ -37,24 +37,24 @@ describe LicitationProcessDecorator do
     end
   end
 
-  context '#envelope_opening_time' do
-    context 'when do not have envelope_opening_time' do
+  context '#proposal_envelope_opening_time' do
+    context 'when do not have proposal_envelope_opening_time' do
       before do
-        component.stub(:envelope_opening_time).and_return(nil)
+        component.stub(:proposal_envelope_opening_time).and_return(nil)
       end
 
       it 'should be nil' do
-        expect(subject.envelope_opening_time).to be_nil
+        expect(subject.proposal_envelope_opening_time).to be_nil
       end
     end
 
-    context 'when have envelope_opening_time' do
+    context 'when have proposal_envelope_opening_time' do
       before do
-        component.stub(:envelope_opening_time).and_return(time)
+        component.stub(:proposal_envelope_opening_time).and_return(time)
       end
 
       it 'should return localized opening_delivery_time' do
-        expect(subject.envelope_opening_time).to eq '10:00'
+        expect(subject.proposal_envelope_opening_time).to eq '10:00'
       end
     end
   end
@@ -198,11 +198,11 @@ describe LicitationProcessDecorator do
       expect(described_class.headers?).to be_true
     end
 
-    it 'should have code_and_year, modality, object_type and envelope_opening_date' do
+    it 'should have code_and_year, modality, object_type and proposal_envelope_opening_date' do
       expect(described_class.header_attributes).to include :code_and_year
       expect(described_class.header_attributes).to include :modality
       expect(described_class.header_attributes).to include :object_type
-      expect(described_class.header_attributes).to include :envelope_opening_date
+      expect(described_class.header_attributes).to include :proposal_envelope_opening_date
       expect(described_class.header_attributes).to include :status
     end
   end

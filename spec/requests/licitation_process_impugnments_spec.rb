@@ -22,9 +22,9 @@ feature "LicitationProcessImpugnments" do
     fill_modal 'Autor', :with => 'Gabriel Sobrinho'
     fill_in 'Motivo fundamentado da impugnação', :with => 'Não há a necessidade de comprar cadeiras.'
 
-    expect(page).to have_field 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
-    expect(page).to have_field 'Hora da entrega', :with => '14:00'
-    expect(page).to have_field 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow)
+    expect(page).to have_field 'Data do recebimento dos envelopes', :with => I18n.l(Date.current)
+    expect(page).to have_field 'Hora do recebimento', :with => '14:00'
+    expect(page).to have_field 'Abertura das propostas', :with => I18n.l(Date.tomorrow)
     expect(page).to have_field 'Hora da abertura', :with => '14:00'
 
     click_button 'Salvar'
@@ -45,9 +45,9 @@ feature "LicitationProcessImpugnments" do
     expect(page).to have_field 'Data do julgamento', :with => ''
     expect(page).to have_disabled_field 'Observação'
     expect(page).to have_field 'Observação', :with => ''
-    expect(page).to have_field 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
-    expect(page).to have_field 'Hora da entrega', :with => '14:00'
-    expect(page).to have_field 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow)
+    expect(page).to have_field 'Data do recebimento dos envelopes', :with => I18n.l(Date.current)
+    expect(page).to have_field 'Hora do recebimento', :with => '14:00'
+    expect(page).to have_field 'Abertura das propostas', :with => I18n.l(Date.tomorrow)
     expect(page).to have_field 'Hora da abertura', :with => '14:00'
   end
 
@@ -65,9 +65,9 @@ feature "LicitationProcessImpugnments" do
     fill_modal 'Autor', :with => 'Gabriel Sobrinho'
     fill_in 'Motivo fundamentado da impugnação', :with => 'Não há a necessidade de comprar cadeiras.'
 
-    expect(page).to have_field 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
-    expect(page).to have_field 'Hora da entrega', :with => '14:00'
-    expect(page).to have_field 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow)
+    expect(page).to have_field 'Data do recebimento dos envelopes', :with => I18n.l(Date.current)
+    expect(page).to have_field 'Hora do recebimento', :with => '14:00'
+    expect(page).to have_field 'Abertura das propostas', :with => I18n.l(Date.tomorrow)
     expect(page).to have_field 'Hora da abertura', :with => '14:00'
 
     click_button 'Salvar'
@@ -87,9 +87,9 @@ feature "LicitationProcessImpugnments" do
     expect(page).to have_field 'Data do julgamento', :with => ''
     expect(page).to have_disabled_field 'Observação'
     expect(page).to have_field 'Observação', :with => ''
-    expect(page).to have_field 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
-    expect(page).to have_field 'Hora da entrega', :with => '14:00'
-    expect(page).to have_field 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow)
+    expect(page).to have_field 'Data do recebimento dos envelopes', :with => I18n.l(Date.current)
+    expect(page).to have_field 'Hora do recebimento', :with => '14:00'
+    expect(page).to have_field 'Abertura das propostas', :with => I18n.l(Date.tomorrow)
     expect(page).to have_field 'Hora da abertura', :with => '14:00'
   end
 
@@ -109,9 +109,9 @@ feature "LicitationProcessImpugnments" do
     expect(page).to have_disabled_field 'Motivo fundamentado da impugnação'
     expect(page).to have_disabled_field 'Data do julgamento'
     expect(page).to have_disabled_field 'Observação'
-    expect(page).to have_disabled_field 'Data da entrega dos envelopes'
-    expect(page).to have_disabled_field 'Hora da entrega'
-    expect(page).to have_disabled_field 'Data da abertura dos envelopes'
+    expect(page).to have_disabled_field 'Data do recebimento dos envelopes'
+    expect(page).to have_disabled_field 'Hora do recebimento'
+    expect(page).to have_disabled_field 'Abertura das propostas'
     expect(page).to have_disabled_field 'Hora da abertura'
 
     expect(page).to have_disabled_element 'Salvar', :reason => 'permitido alterar somente em situação pendente'
@@ -138,9 +138,9 @@ feature "LicitationProcessImpugnments" do
 
     fill_modal 'Processo de compra', :with => '2012', :field => 'Ano'
 
-    expect(page).to have_field 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
-    expect(page).to have_field 'Hora da entrega', :with => '14:00'
-    expect(page).to have_field 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow)
+    expect(page).to have_field 'Data do recebimento dos envelopes', :with => I18n.l(Date.current)
+    expect(page).to have_field 'Hora do recebimento', :with => '14:00'
+    expect(page).to have_field 'Abertura das propostas', :with => I18n.l(Date.tomorrow)
     expect(page).to have_field 'Hora da abertura', :with => '14:00'
   end
 
@@ -155,9 +155,9 @@ feature "LicitationProcessImpugnments" do
 
     clear_modal 'Processo de compra'
 
-    expect(page).to have_field 'Data da entrega dos envelopes', :with => ''
-    expect(page).to have_field 'Hora da entrega', :with => ''
-    expect(page).to have_field 'Data da abertura dos envelopes', :with => ''
+    expect(page).to have_field 'Data do recebimento dos envelopes', :with => ''
+    expect(page).to have_field 'Hora do recebimento', :with => ''
+    expect(page).to have_field 'Abertura das propostas', :with => ''
     expect(page).to have_field 'Hora da abertura', :with => ''
   end
 end

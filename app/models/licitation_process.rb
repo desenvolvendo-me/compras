@@ -2,8 +2,8 @@ class LicitationProcess < Compras::Model
   attr_accessible :capability_id, :payment_method_id, :type_of_purchase,
                   :year, :process_date,:readjustment_index_id, :caution_value,
                   :envelope_delivery_date,
-                  :envelope_delivery_time, :envelope_opening_date,
-                  :envelope_opening_time, :document_type_ids,
+                  :envelope_delivery_time, :proposal_envelope_opening_date,
+                  :proposal_envelope_opening_time, :document_type_ids,
                   :period, :period_unit, :expiration, :expiration_unit,
                   :judgment_form_id, :execution_type,
                   :disqualify_by_documentation_problem, :disqualify_by_maximum_value,
@@ -17,7 +17,9 @@ class LicitationProcess < Compras::Model
                   :contact_id, :stage_of_bids_date, :items_attributes,
                   :minimum_bid_to_disposal, :concession_period,
                   :concession_period_unit, :goal, :licensor_rights_and_liabilities,
-                  :licensee_rights_and_liabilities
+                  :licensee_rights_and_liabilities, :authorization_envelope_opening_date,
+                  :authorization_envelope_opening_time, :closing_of_accreditation_date,
+                  :closing_of_accreditation_time
 
   auto_increment :process, :by => :year
   auto_increment :modality_number, :by => [:year, :modality, :type_of_removal]
@@ -93,7 +95,7 @@ class LicitationProcess < Compras::Model
   validates :type_of_removal, :presence => true, :if => :direct_purchase?
   validate :validate_bidders_before_edital_publication
   validate :validate_updates, :unless => :updatable?
-  validate :validate_envelope_opening_date, :on => :update
+  validate :validate_proposal_envelope_opening_date, :on => :update
 
   with_options :allow_blank => true do |allowing_blank|
     allowing_blank.validates :year, :mask => "9999"
@@ -105,14 +107,14 @@ class LicitationProcess < Compras::Model
         :on => :create,
         :unless => :allow_insert_past_processes?
       }
-    allowing_blank.validates :envelope_opening_date,
+    allowing_blank.validates :proposal_envelope_opening_date,
       :timeliness => {
         :on_or_after => :envelope_delivery_date,
         :on_or_after_message => :should_be_on_or_after_envelope_delivery_date,
         :type => :date,
         :on => :create
       }
-    allowing_blank.validates :envelope_delivery_time, :envelope_opening_time,
+    allowing_blank.validates :envelope_delivery_time, :proposal_envelope_opening_time,
       :timeliness => {
         :type => :time,
         :on => :update
@@ -158,8 +160,8 @@ class LicitationProcess < Compras::Model
   end
 
   def envelope_opening?
-    return unless envelope_opening_date
-    envelope_opening_date == Date.current
+    return unless proposal_envelope_opening_date
+    proposal_envelope_opening_date == Date.current
   end
 
   def updatable?
@@ -262,11 +264,11 @@ class LicitationProcess < Compras::Model
     end
   end
 
-  def validate_envelope_opening_date
-    return unless envelope_opening_date
+  def validate_proposal_envelope_opening_date
+    return unless proposal_envelope_opening_date
 
-    if envelope_opening_date && !last_publication_date
-      errors.add :envelope_opening_date, :absence
+    if proposal_envelope_opening_date && !last_publication_date
+      errors.add :proposal_envelope_opening_date, :absence
       return false
     end
 

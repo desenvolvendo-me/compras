@@ -6,7 +6,7 @@ class LicitationProcessDecorator
   include ActionView::Helpers::NumberHelper
   include ActionView::Helpers::TranslationHelper
 
-  attr_header :code_and_year, :modality, :object_type, :envelope_opening_date,
+  attr_header :code_and_year, :modality, :object_type, :proposal_envelope_opening_date,
               :status
 
   def judgment_forms_available(judgment_form_repository = JudgmentForm)
@@ -21,7 +21,7 @@ class LicitationProcessDecorator
     localize(super, :format => :hour) if super
   end
 
-  def envelope_opening_time
+  def proposal_envelope_opening_time
     localize(super, :format => :hour) if super
   end
 

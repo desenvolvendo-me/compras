@@ -263,7 +263,7 @@ pt-BR:
       cannot_be_destroyed_because_have_licitation_process_relationship: "não pode ser apagado pois há relacionamento com processo de compra"
       cannot_be_destroyed_because_have_licitation_object_relationship: "não pode ser apagado pois há relacionamento com objeto da licitação"
       cannot_have_street_relationship: "não pode ter relacionamento com rua"
-      must_be_the_licitation_process_envelope_opening_date: "deve ser a data da abertura do envelope do processo de compra"
+      must_be_the_licitation_process_proposal_envelope_opening_date: "deve ser a data da abertura do envelope do processo de compra"
       cannot_have_representative_equal_creditor: "não pode haver um representante igual ao credor"
       cannot_have_secondary_cnae_equal_main_cnae: "não pode haver um CNAE secundário igual ao CNAE principal"
       cannot_have_a_parent_who_is_not_immediate_superior: "deve ser uma estrutura com nível superior imediato (nível %{level})"

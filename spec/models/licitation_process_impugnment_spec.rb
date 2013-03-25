@@ -17,8 +17,8 @@ describe LicitationProcessImpugnment do
   it { should delegate(:description).to(:licitation_process).allowing_nil(true).prefix(true) }
   it { should delegate(:envelope_delivery_date).to(:licitation_process).allowing_nil(true).prefix(true) }
   it { should delegate(:envelope_delivery_time).to(:licitation_process).allowing_nil(true).prefix(true) }
-  it { should delegate(:envelope_opening_date).to(:licitation_process).allowing_nil(true).prefix(true) }
-  it { should delegate(:envelope_opening_time).to(:licitation_process).allowing_nil(true).prefix(true) }
+  it { should delegate(:proposal_envelope_opening_date).to(:licitation_process).allowing_nil(true).prefix(true) }
+  it { should delegate(:proposal_envelope_opening_time).to(:licitation_process).allowing_nil(true).prefix(true) }
 
   it 'should return licitation process and date as to_s method' do
     subject.licitation_process.stub(:to_s).and_return('1/2013')
@@ -27,17 +27,17 @@ describe LicitationProcessImpugnment do
     expect(subject.to_s).to eq '1/2013 - 01/01/2012'
   end
 
-  context 'when new_envelope_opening_date and new_envelope_delivery_date exists and are different' do
+  context 'when new_proposal_envelope_opening_date and new_envelope_delivery_date exists and are different' do
     before do
       subject.new_envelope_delivery_date = Date.tomorrow
-      subject.new_envelope_opening_date = Date.current
+      subject.new_proposal_envelope_opening_date = Date.current
     end
 
     it { should allow_value("11:11").for(:new_envelope_delivery_time) }
     it { should_not allow_value("44:11").for(:new_envelope_delivery_time) }
 
-    it { should allow_value("11:11").for(:new_envelope_opening_time) }
-    it { should_not allow_value("44:11").for(:new_envelope_opening_time) }
+    it { should allow_value("11:11").for(:new_proposal_envelope_opening_time) }
+    it { should_not allow_value("44:11").for(:new_proposal_envelope_opening_time) }
   end
 
   describe "validating judgment_date" do

@@ -8,7 +8,7 @@ require 'app/business/days_counter'
 describe LicitationProcessEnvelopeOpeningDate do
   let(:licitation_process) do
     double(:licitation_process,
-      :envelope_opening_date => Date.today, :last_publication_date => Date.today,
+      :proposal_envelope_opening_date => Date.today, :last_publication_date => Date.today,
       :modality => :competition, :execution_type => :integral, :judgment_form => judgment_form)
   end
 

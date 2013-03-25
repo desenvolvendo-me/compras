@@ -21,8 +21,8 @@ LicitationProcess.blueprint(:processo_licitatorio) do
   readjustment_index { Indexer.make!(:xpto) }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "14:00" }
-  envelope_opening_date { I18n.l(Date.tomorrow) }
-  envelope_opening_time { "14:00" }
+  proposal_envelope_opening_date { I18n.l(Date.tomorrow) }
+  proposal_envelope_opening_time { "14:00" }
   period { 1 }
   period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
@@ -61,8 +61,8 @@ LicitationProcess.blueprint(:processo_licitatorio_computador) do
   readjustment_index { Indexer.make!(:xpto) }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "14:00" }
-  envelope_opening_date { I18n.l(Date.current) }
-  envelope_opening_time { "14:00" }
+  proposal_envelope_opening_date { I18n.l(Date.current) }
+  proposal_envelope_opening_time { "14:00" }
   period { 1 }
   period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
@@ -99,8 +99,8 @@ LicitationProcess.blueprint(:processo_licitatorio_fornecedores) do
   readjustment_index { Indexer.make!(:xpto) }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "14:00" }
-  envelope_opening_date { I18n.l(Date.current) }
-  envelope_opening_time { "14:00" }
+  proposal_envelope_opening_date { I18n.l(Date.current) }
+  proposal_envelope_opening_time { "14:00" }
   period { 1 }
   period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
@@ -135,8 +135,8 @@ LicitationProcess.blueprint(:processo_licitatorio_publicacao_cancelada) do
   readjustment_index { Indexer.make!(:xpto) }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "14:00" }
-  envelope_opening_date { I18n.l(Date.tomorrow) }
-  envelope_opening_time { "14:00" }
+  proposal_envelope_opening_date { I18n.l(Date.tomorrow) }
+  proposal_envelope_opening_time { "14:00" }
   period { 1 }
   period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
@@ -171,8 +171,8 @@ LicitationProcess.blueprint(:processo_licitatorio_canetas) do
   readjustment_index { Indexer.make!(:xpto) }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "14:00" }
-  envelope_opening_date { I18n.l(Date.current) }
-  envelope_opening_time { "14:00" }
+  proposal_envelope_opening_date { I18n.l(Date.current) }
+  proposal_envelope_opening_time { "14:00" }
   period { 1 }
   period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
@@ -210,8 +210,8 @@ LicitationProcess.blueprint(:apuracao_por_itens) do
   readjustment_index { Indexer.make!(:xpto) }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "00:00" }
-  envelope_opening_date { I18n.l(Date.current) }
-  envelope_opening_time { "00:00" }
+  proposal_envelope_opening_date { I18n.l(Date.current) }
+  proposal_envelope_opening_time { "00:00" }
   period { 1 }
   period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
@@ -249,8 +249,8 @@ LicitationProcess.blueprint(:apuracao_por_lote) do
   readjustment_index { Indexer.make!(:xpto) }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "00:00" }
-  envelope_opening_date { I18n.l(Date.current) }
-  envelope_opening_time { "00:00" }
+  proposal_envelope_opening_date { I18n.l(Date.current) }
+  proposal_envelope_opening_time { "00:00" }
   period { 1 }
   period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
@@ -287,8 +287,8 @@ LicitationProcess.blueprint(:valor_maximo_ultrapassado) do
   readjustment_index { Indexer.make!(:xpto) }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "00:00" }
-  envelope_opening_date { I18n.l(Date.current) }
-  envelope_opening_time { "00:00" }
+  proposal_envelope_opening_date { I18n.l(Date.current) }
+  proposal_envelope_opening_time { "00:00" }
   period { 1 }
   period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
@@ -324,8 +324,8 @@ LicitationProcess.blueprint(:apuracao_global) do
   readjustment_index { Indexer.make!(:xpto) }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "00:00" }
-  envelope_opening_date { I18n.l(Date.current) }
-  envelope_opening_time { "00:00" }
+  proposal_envelope_opening_date { I18n.l(Date.current) }
+  proposal_envelope_opening_time { "00:00" }
   period { 1 }
   period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
@@ -361,8 +361,8 @@ LicitationProcess.blueprint(:apuracao_global_empatou) do
   readjustment_index { Indexer.make!(:xpto) }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "00:00" }
-  envelope_opening_date { I18n.l(Date.current) }
-  envelope_opening_time { "00:00" }
+  proposal_envelope_opening_date { I18n.l(Date.current) }
+  proposal_envelope_opening_time { "00:00" }
   period { 1 }
   period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
@@ -398,8 +398,8 @@ LicitationProcess.blueprint(:apuracao_global_sem_documentos) do
   readjustment_index { Indexer.make!(:xpto) }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "00:00" }
-  envelope_opening_date { I18n.l(Date.current) }
-  envelope_opening_time { "00:00" }
+  proposal_envelope_opening_date { I18n.l(Date.current) }
+  proposal_envelope_opening_time { "00:00" }
   period { 1 }
   period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
@@ -435,8 +435,8 @@ LicitationProcess.blueprint(:apuracao_global_small_company) do
   readjustment_index { Indexer.make!(:xpto) }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "00:00" }
-  envelope_opening_date { I18n.l(Date.current) }
-  envelope_opening_time { "00:00" }
+  proposal_envelope_opening_date { I18n.l(Date.current) }
+  proposal_envelope_opening_time { "00:00" }
   period { 1 }
   period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
@@ -472,8 +472,8 @@ LicitationProcess.blueprint(:apuracao_global_small_company_2) do
   readjustment_index { Indexer.make!(:xpto) }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "00:00" }
-  envelope_opening_date { I18n.l(Date.current) }
-  envelope_opening_time { "00:00" }
+  proposal_envelope_opening_date { I18n.l(Date.current) }
+  proposal_envelope_opening_time { "00:00" }
   period { 1 }
   period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
@@ -509,8 +509,8 @@ LicitationProcess.blueprint(:processo_licitatorio_nao_atualizavel) do
   readjustment_index { Indexer.make!(:xpto) }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "14:00" }
-  envelope_opening_date { I18n.l(Date.tomorrow) }
-  envelope_opening_time { "14:00" }
+  proposal_envelope_opening_date { I18n.l(Date.tomorrow) }
+  proposal_envelope_opening_time { "14:00" }
   period { 1 }
   period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
@@ -546,8 +546,8 @@ LicitationProcess.blueprint(:processo_licitatorio_canetas_sem_lote) do
   readjustment_index { Indexer.make!(:xpto) }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "14:00" }
-  envelope_opening_date { I18n.l(Date.current) }
-  envelope_opening_time { "14:00" }
+  proposal_envelope_opening_date { I18n.l(Date.current) }
+  proposal_envelope_opening_time { "14:00" }
   period { 1 }
   period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
@@ -582,8 +582,8 @@ LicitationProcess.blueprint(:apuracao_melhor_tecnica_e_preco) do
   readjustment_index { Indexer.make!(:xpto) }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "00:00" }
-  envelope_opening_date { I18n.l(Date.current) }
-  envelope_opening_time { "00:00" }
+  proposal_envelope_opening_date { I18n.l(Date.current) }
+  proposal_envelope_opening_time { "00:00" }
   period { 1 }
   period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
@@ -620,8 +620,8 @@ LicitationProcess.blueprint(:pregao_presencial) do
   readjustment_index { Indexer.make!(:xpto) }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "00:00" }
-  envelope_opening_date { I18n.l(Date.current) }
-  envelope_opening_time { "00:00" }
+  proposal_envelope_opening_date { I18n.l(Date.current) }
+  proposal_envelope_opening_time { "00:00" }
   period { 1 }
   period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
@@ -657,8 +657,8 @@ LicitationProcess.blueprint(:processo_licitatorio_concurso) do
   readjustment_index { Indexer.make!(:xpto) }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "14:00" }
-  envelope_opening_date { I18n.l(Date.tomorrow) }
-  envelope_opening_time { "14:00" }
+  proposal_envelope_opening_date { I18n.l(Date.tomorrow) }
+  proposal_envelope_opening_time { "14:00" }
   period { 1 }
   period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
@@ -694,8 +694,8 @@ LicitationProcess.blueprint(:processo_licitatorio_concorrencia) do
   readjustment_index { Indexer.make!(:xpto) }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "14:00" }
-  envelope_opening_date { I18n.l(Date.tomorrow) }
-  envelope_opening_time { "14:00" }
+  proposal_envelope_opening_date { I18n.l(Date.tomorrow) }
+  proposal_envelope_opening_time { "14:00" }
   period { 1 }
   period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
@@ -732,8 +732,8 @@ LicitationProcess.blueprint(:processo_licitatorio_tomada_preco) do
   readjustment_index { Indexer.make!(:xpto) }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "14:00" }
-  envelope_opening_date { I18n.l(Date.tomorrow) }
-  envelope_opening_time { "14:00" }
+  proposal_envelope_opening_date { I18n.l(Date.tomorrow) }
+  proposal_envelope_opening_time { "14:00" }
   period { 1 }
   period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
@@ -772,8 +772,8 @@ LicitationProcess.blueprint(:processo_licitatorio_leilao) do
   readjustment_index { Indexer.make!(:xpto) }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "14:00" }
-  envelope_opening_date { I18n.l(Date.tomorrow) }
-  envelope_opening_time { "14:00" }
+  proposal_envelope_opening_date { I18n.l(Date.tomorrow) }
+  proposal_envelope_opening_time { "14:00" }
   period { 1 }
   period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }

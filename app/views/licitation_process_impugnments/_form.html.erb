@@ -27,11 +27,11 @@
 
 <div class="yui3-g">
   <div class="yui3-u-1-3">
-    <%= f.input :licitation_process_envelope_opening_date, :disabled => true, :input_html => { :value => f.object.decorator.licitation_process_envelope_opening_date } %>
+    <%= f.input :licitation_process_proposal_envelope_opening_date, :disabled => true, :input_html => { :value => f.object.decorator.licitation_process_proposal_envelope_opening_date } %>
   </div>
 
   <div class="yui3-u-1-5">
-    <%= f.input :licitation_process_envelope_opening_time, :disabled => true, :input_html => { :value => f.object.decorator.licitation_process_envelope_opening_time } %>
+    <%= f.input :licitation_process_proposal_envelope_opening_time, :disabled => true, :input_html => { :value => f.object.decorator.licitation_process_proposal_envelope_opening_time } %>
   </div>
 </div>
 
@@ -59,11 +59,11 @@
 
 <div class="yui3-g">
   <div class="yui3-u-1-3">
-    <%= f.input :new_envelope_opening_date, :disabled => true %>
+    <%= f.input :new_proposal_envelope_opening_date, :disabled => true %>
   </div>
 
   <div class="yui3-u-1-5">
-    <%= f.input :new_envelope_opening_time, :disabled => true %>
+    <%= f.input :new_proposal_envelope_opening_time, :disabled => true %>
   </div>
 </div>
 
@@ -75,14 +75,14 @@
       $('#licitation_process_impugnment_licitation_process_description').val(licitation_process.description);
       $('#licitation_process_impugnment_licitation_process_envelope_delivery_date').val(licitation_process.envelope_delivery_date);
       $('#licitation_process_impugnment_licitation_process_envelope_delivery_time').val(licitation_process.envelope_delivery_time);
-      $('#licitation_process_impugnment_licitation_process_envelope_opening_date').val(licitation_process.envelope_opening_date);
-      $('#licitation_process_impugnment_licitation_process_envelope_opening_time').val(licitation_process.envelope_opening_time);
+      $('#licitation_process_impugnment_licitation_process_proposal_envelope_opening_date').val(licitation_process.proposal_envelope_opening_date);
+      $('#licitation_process_impugnment_licitation_process_proposal_envelope_opening_time').val(licitation_process.proposal_envelope_opening_time);
     } else {
       $('#licitation_process_impugnment_licitation_process_object_description').val('');
       $('#licitation_process_impugnment_licitation_process_envelope_delivery_date').val('');
       $('#licitation_process_impugnment_licitation_process_envelope_delivery_time').val('');
-      $('#licitation_process_impugnment_licitation_process_envelope_opening_date').val('');
-      $('#licitation_process_impugnment_licitation_process_envelope_opening_time').val('');
+      $('#licitation_process_impugnment_licitation_process_proposal_envelope_opening_date').val('');
+      $('#licitation_process_impugnment_licitation_process_proposal_envelope_opening_time').val('');
     }
   });
 </script>
