@@ -6,7 +6,7 @@ feature "LicitationProcessAppeals" do
     sign_in
   end
 
-  scenario 'create a new licitation_process_appeal' do
+  scenario 'create, update and destroy a new licitation_process_appeal' do
     LicitationProcess.make!(:processo_licitatorio)
     Person.make!(:sobrinho)
 
@@ -42,27 +42,12 @@ feature "LicitationProcessAppeals" do
     expect(page).to have_field 'Motivo fundamentado do recurso', :with => 'Interposição de recurso licitatório'
     expect(page).to have_field 'Parecer da comissão de licitação', :with => 'Parecer da comissão de licitação'
     expect(page).to have_select 'Situação', :selected => 'Pendente'
-  end
 
-  scenario 'update an existent licitation_process_appeal' do
-    LicitationProcessAppeal.make!(:interposicao_processo_licitatorio)
-    LicitationProcess.make!(:processo_licitatorio_computador)
-    Person.make!(:wenderson)
-
-    navigate 'Processos de Compra > Interposição de Recursos de Processos de Compras'
-
-    within_records do
-      click_link '1/2012 - Convite 1 - 10/04/2012'
-    end
-
-    fill_modal 'Processo de compra', :with => '2013', :field => 'Ano'
-    fill_in 'Data do recurso', :with => I18n.l(Date.new(2013, 3, 20))
     select 'Revogação', :from => 'Referente ao'
-    fill_modal 'Autor', :with => 'Wenderson Malheiros'
     fill_in 'Motivo fundamentado do recurso', :with => 'Interposição de recurso licitatório do computador'
     fill_in 'Nova data da abertura dos envelopes', :with => I18n.l(Date.tomorrow + 2)
     fill_in 'Nova hora da abertura dos envelopes', :with => '16:00'
-    fill_in 'Parecer da comissão de licitação', :with => 'Parecer da comissão de licitação - wenderson'
+    fill_in 'Parecer da comissão de licitação', :with => 'Parecer da comissão de licitação - Gabriel'
     select 'Deferido', :from => 'Situação'
 
     click_button 'Salvar'
@@ -70,36 +55,26 @@ feature "LicitationProcessAppeals" do
     expect(page).to have_notice 'Interposição de Recurso do Processo de Compra editada com sucesso.'
 
     within_records do
-      click_link '2/2013 - Convite 1 - 20/03/2013'
+      click_link '1/2012 - Convite 1 - 20/03/2012'
     end
 
-    expect(page).to have_field 'Processo de compra', :with => '2/2013 - Convite 1'
-    expect(page).to have_field 'Data do recurso', :with => I18n.l(Date.new(2013, 3, 20))
+    expect(page).to have_field 'Processo de compra', :with => '1/2012 - Convite 1'
+    expect(page).to have_field 'Data do recurso', :with => I18n.l(Date.new(2012, 3, 20))
     expect(page).to have_select 'Referente ao', :selected => 'Revogação'
-    expect(page).to have_field 'Autor', :with => 'Wenderson Malheiros'
+    expect(page).to have_field 'Autor', :with => 'Gabriel Sobrinho'
     expect(page).to have_field 'Objeto do Processo', :with => 'Licitação para compra de carteiras'
     expect(page).to have_field 'Nova data da abertura dos envelopes', :with => I18n.l(Date.tomorrow + 2)
     expect(page).to have_field 'Nova hora da abertura dos envelopes', :with => '16:00'
     expect(page).to have_field 'Motivo fundamentado do recurso', :with => 'Interposição de recurso licitatório do computador'
-    expect(page).to have_field 'Parecer da comissão de licitação', :with => 'Parecer da comissão de licitação - wenderson'
+    expect(page).to have_field 'Parecer da comissão de licitação', :with => 'Parecer da comissão de licitação - Gabriel'
     expect(page).to have_select 'Situação', :selected => 'Deferido'
-  end
-
-  scenario 'destroy an existent licitation_process_appeal' do
-    LicitationProcessAppeal.make!(:interposicao_processo_licitatorio)
-
-    navigate 'Processos de Compra > Interposição de Recursos de Processos de Compras'
-
-    within_records do
-      click_link '1/2012 - Convite 1 - 10/04/2012'
-    end
 
     click_link "Apagar"
 
     expect(page).to have_notice 'Interposição de Recurso do Processo de Compra apagada com sucesso.'
 
     within_records do
-      expect(page).to_not have_link '1/2012 - Convite 1 - 10/04/2012'
+      expect(page).to_not have_link '1/2012 - Convite 1 - 20/03/2012'
     end
   end
 end
