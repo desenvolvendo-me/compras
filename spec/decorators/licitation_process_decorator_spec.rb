@@ -310,7 +310,7 @@ describe LicitationProcessDecorator do
     before do
       I18n.backend.store_translations 'pt-BR', :licitation_process => {
         :messages => {
-          :disabled_envelope_message => 'deve ter uma publição de edital',
+          :disabled_envelope_message => 'deve ter uma publicação de edital',
         }
       }
     end
@@ -318,7 +318,7 @@ describe LicitationProcessDecorator do
     it "returns a message when there isn't a publication date" do
       component.stub(:last_publication_date).and_return false
 
-      expect(subject.disabled_envelope_message).to eq "deve ter uma publição de edital"
+      expect(subject.disabled_envelope_message).to eq "deve ter uma publicação de edital"
     end
 
     it "returns null when there is a publication date" do

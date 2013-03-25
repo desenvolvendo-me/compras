@@ -60,7 +60,7 @@ class LicitationProcessDecorator
   end
 
   def disabled_envelope_message
-    return if component.last_publication_date
+    return if last_publication_date
 
     t('licitation_process.messages.disabled_envelope_message')
   end
