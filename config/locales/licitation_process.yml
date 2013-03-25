@@ -10,7 +10,6 @@ pt-BR:
         adjudication_date: "Data da adjudicação"
         authorization_envelope_opening_date: 'Abertura da habilitação'
         authorization_envelope_opening_time: 'Hora da habilitação'
-        capability: "Fonte de recurso"
         caution_value: "Valor da caução"
         closing_of_accreditation_date: 'Data do credenciamento'
         closing_of_accreditation_time: 'Hora do credenciamento'

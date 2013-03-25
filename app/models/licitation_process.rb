@@ -1,5 +1,5 @@
 class LicitationProcess < Compras::Model
-  attr_accessible :capability_id, :payment_method_id, :type_of_purchase,
+  attr_accessible :payment_method_id, :type_of_purchase,
                   :year, :process_date,:readjustment_index_id, :caution_value,
                   :envelope_delivery_date,
                   :envelope_delivery_time, :proposal_envelope_opening_date,
@@ -41,7 +41,6 @@ class LicitationProcess < Compras::Model
   has_enumeration_for :type_of_purchase, :with => LicitationProcessTypeOfPurchase, :create_helpers => true
   has_enumeration_for :type_of_removal
 
-  belongs_to :capability
   belongs_to :contact, :class_name => 'Employee'
   belongs_to :judgment_form
   belongs_to :payment_method
@@ -86,7 +85,7 @@ class LicitationProcess < Compras::Model
            :to => :judgment_form, :allow_nil => true, :prefix => true
   delegate :licitation_kind, :to => :judgment_form, :allow_nil => true, :prefix => true
 
-  validates :process_date, :capability, :period, :contract_guarantees, :type_of_purchase,
+  validates :process_date, :period, :contract_guarantees, :type_of_purchase,
             :period_unit, :expiration, :expiration_unit, :payment_method,
             :envelope_delivery_time, :year, :envelope_delivery_date,
             :pledge_type, :execution_type, :object_type,

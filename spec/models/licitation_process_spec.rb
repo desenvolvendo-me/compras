@@ -4,7 +4,6 @@ require 'lib/signable'
 require 'app/models/persona/person'
 require 'app/models/person'
 require 'app/models/licitation_process'
-require 'app/models/capability'
 require 'app/models/payment_method'
 require 'app/models/administrative_process_budget_allocation'
 require 'app/models/administrative_process_budget_allocation_item'
@@ -42,7 +41,6 @@ describe LicitationProcess do
     expect(subject.to_s).to eq '1/2012 - Pregão 1'
   end
 
-  it { should belong_to :capability }
   it { should belong_to :contact }
   it { should belong_to :judgment_form }
   it { should belong_to :payment_method }
@@ -74,7 +72,6 @@ describe LicitationProcess do
 
   it { should have_one(:trading).dependent(:restrict) }
 
-  it { should validate_presence_of :capability }
   it { should validate_presence_of :contract_guarantees }
   it { should validate_presence_of :description }
   it { should validate_presence_of :execution_type }

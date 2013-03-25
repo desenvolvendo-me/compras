@@ -15,7 +15,6 @@ LicitationProcess.blueprint(:processo_licitatorio) do
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
   pledge_type { PledgeType::GLOBAL }
-  capability { Capability.make!(:reforma) }
   expiration { 10 }
   expiration_unit { PeriodUnit::DAY }
   readjustment_index { Indexer.make!(:xpto) }
@@ -55,7 +54,6 @@ LicitationProcess.blueprint(:processo_licitatorio_computador) do
   process_date { Date.new(2013, 3, 20) }
   licitation_number { 1 }
   pledge_type { PledgeType::ESTIMATED }
-  capability { Capability.make!(:reforma) }
   expiration { 10 }
   expiration_unit { PeriodUnit::DAY }
   readjustment_index { Indexer.make!(:xpto) }
@@ -93,7 +91,6 @@ LicitationProcess.blueprint(:processo_licitatorio_fornecedores) do
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
   pledge_type { PledgeType::GLOBAL }
-  capability { Capability.make!(:reforma) }
   expiration { 10 }
   expiration_unit { PeriodUnit::DAY }
   readjustment_index { Indexer.make!(:xpto) }
@@ -129,7 +126,6 @@ LicitationProcess.blueprint(:processo_licitatorio_publicacao_cancelada) do
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
   pledge_type { PledgeType::GLOBAL }
-  capability { Capability.make!(:reforma) }
   expiration { 10 }
   expiration_unit { PeriodUnit::DAY }
   readjustment_index { Indexer.make!(:xpto) }
@@ -165,7 +161,6 @@ LicitationProcess.blueprint(:processo_licitatorio_canetas) do
   process_date { Date.new(2013, 3, 20) }
   licitation_number { 1 }
   pledge_type { PledgeType::ESTIMATED }
-  capability { Capability.make!(:reforma) }
   expiration { 10 }
   expiration_unit { PeriodUnit::DAY }
   readjustment_index { Indexer.make!(:xpto) }
@@ -204,7 +199,6 @@ LicitationProcess.blueprint(:apuracao_por_itens) do
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
   pledge_type { PledgeType::GLOBAL }
-  capability { Capability.make!(:reforma) }
   expiration { 10 }
   expiration_unit { PeriodUnit::DAY }
   readjustment_index { Indexer.make!(:xpto) }
@@ -243,7 +237,6 @@ LicitationProcess.blueprint(:apuracao_por_lote) do
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
   pledge_type { PledgeType::GLOBAL }
-  capability { Capability.make!(:reforma) }
   expiration { 10 }
   expiration_unit { PeriodUnit::DAY }
   readjustment_index { Indexer.make!(:xpto) }
@@ -281,7 +274,6 @@ LicitationProcess.blueprint(:valor_maximo_ultrapassado) do
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
   pledge_type { PledgeType::GLOBAL }
-  capability { Capability.make!(:reforma) }
   expiration { 10 }
   expiration_unit { PeriodUnit::DAY }
   readjustment_index { Indexer.make!(:xpto) }
@@ -318,7 +310,6 @@ LicitationProcess.blueprint(:apuracao_global) do
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
   pledge_type { PledgeType::GLOBAL }
-  capability { Capability.make!(:reforma) }
   expiration { 10 }
   expiration_unit { PeriodUnit::DAY }
   readjustment_index { Indexer.make!(:xpto) }
@@ -355,7 +346,6 @@ LicitationProcess.blueprint(:apuracao_global_empatou) do
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
   pledge_type { PledgeType::GLOBAL }
-  capability { Capability.make!(:reforma) }
   expiration { 10 }
   expiration_unit { PeriodUnit::DAY }
   readjustment_index { Indexer.make!(:xpto) }
@@ -392,7 +382,6 @@ LicitationProcess.blueprint(:apuracao_global_sem_documentos) do
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
   pledge_type { PledgeType::GLOBAL }
-  capability { Capability.make!(:reforma) }
   expiration { 10 }
   expiration_unit { PeriodUnit::DAY }
   readjustment_index { Indexer.make!(:xpto) }
@@ -429,7 +418,6 @@ LicitationProcess.blueprint(:apuracao_global_small_company) do
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
   pledge_type { PledgeType::GLOBAL }
-  capability { Capability.make!(:reforma) }
   expiration { 10 }
   expiration_unit { PeriodUnit::DAY }
   readjustment_index { Indexer.make!(:xpto) }
@@ -466,7 +454,6 @@ LicitationProcess.blueprint(:apuracao_global_small_company_2) do
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
   pledge_type { PledgeType::GLOBAL }
-  capability { Capability.make!(:reforma) }
   expiration { 10 }
   expiration_unit { PeriodUnit::DAY }
   readjustment_index { Indexer.make!(:xpto) }
@@ -503,7 +490,6 @@ LicitationProcess.blueprint(:processo_licitatorio_nao_atualizavel) do
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
   pledge_type { PledgeType::GLOBAL }
-  capability { Capability.make!(:reforma) }
   expiration { 10 }
   expiration_unit { PeriodUnit::DAY }
   readjustment_index { Indexer.make!(:xpto) }
@@ -540,7 +526,6 @@ LicitationProcess.blueprint(:processo_licitatorio_canetas_sem_lote) do
   process_date { Date.new(2013, 3, 20) }
   licitation_number { 1 }
   pledge_type { PledgeType::ESTIMATED }
-  capability { Capability.make!(:reforma) }
   expiration { 10 }
   expiration_unit { PeriodUnit::DAY }
   readjustment_index { Indexer.make!(:xpto) }
@@ -576,7 +561,6 @@ LicitationProcess.blueprint(:apuracao_melhor_tecnica_e_preco) do
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
   pledge_type { PledgeType::GLOBAL }
-  capability { Capability.make!(:reforma) }
   expiration { 10 }
   expiration_unit { PeriodUnit::DAY }
   readjustment_index { Indexer.make!(:xpto) }
@@ -614,7 +598,6 @@ LicitationProcess.blueprint(:pregao_presencial) do
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
   pledge_type { PledgeType::GLOBAL }
-  capability { Capability.make!(:reforma) }
   expiration { 10 }
   expiration_unit { PeriodUnit::DAY }
   readjustment_index { Indexer.make!(:xpto) }
@@ -651,7 +634,6 @@ LicitationProcess.blueprint(:processo_licitatorio_concurso) do
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
   pledge_type { PledgeType::GLOBAL }
-  capability { Capability.make!(:reforma) }
   expiration { 10 }
   expiration_unit { PeriodUnit::DAY }
   readjustment_index { Indexer.make!(:xpto) }
@@ -688,7 +670,6 @@ LicitationProcess.blueprint(:processo_licitatorio_concorrencia) do
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
   pledge_type { PledgeType::GLOBAL }
-  capability { Capability.make!(:reforma) }
   expiration { 10 }
   expiration_unit { PeriodUnit::DAY }
   readjustment_index { Indexer.make!(:xpto) }
@@ -726,7 +707,6 @@ LicitationProcess.blueprint(:processo_licitatorio_tomada_preco) do
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
   pledge_type { PledgeType::GLOBAL }
-  capability { Capability.make!(:reforma) }
   expiration { 10 }
   expiration_unit { PeriodUnit::DAY }
   readjustment_index { Indexer.make!(:xpto) }
@@ -766,7 +746,6 @@ LicitationProcess.blueprint(:processo_licitatorio_leilao) do
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
   pledge_type { PledgeType::GLOBAL }
-  capability { Capability.make!(:reforma) }
   expiration { 10 }
   expiration_unit { PeriodUnit::DAY }
   readjustment_index { Indexer.make!(:xpto) }

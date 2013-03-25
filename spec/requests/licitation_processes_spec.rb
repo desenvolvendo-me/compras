@@ -57,7 +57,6 @@ feature "LicitationProcesses" do
       check 'Registro de preço'
       select 'Empreitada integral', :from => 'Forma de execução'
       select 'Fiança bancária', :from => 'Tipo de garantia'
-      fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
       fill_modal 'Índice de reajuste', :with => 'XPTO'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Valor da caução', :with => '50,00'
@@ -145,7 +144,6 @@ feature "LicitationProcesses" do
 
       expect(page).to have_select 'Forma de execução', :selected => 'Empreitada integral'
       expect(page).to have_select 'Tipo de garantia', :selected => 'Fiança bancária'
-      expect(page).to have_field 'Fonte de recurso', :with => 'Reforma e Ampliação'
       expect(page).to have_field 'Índice de reajuste', :with => 'XPTO'
       expect(page).to have_field 'Forma de pagamento', :with => 'Dinheiro'
       expect(page).to have_field 'Valor da caução', :with => '50,00'
@@ -263,7 +261,6 @@ feature "LicitationProcesses" do
       select 'Estimativo', :from => 'Tipo de empenho'
       select 'Empreitada integral', :from => 'Forma de execução'
       select 'Fiança bancária', :from => 'Tipo de garantia'
-      fill_modal 'Fonte de recurso', :with => 'Construção', :field => 'Descrição'
       fill_modal 'Índice de reajuste', :with => 'SELIC'
       fill_modal 'Forma de pagamento', :with => 'Cheque', :field => 'Descrição'
       fill_in 'Valor da caução', :with => '60,00'
@@ -334,7 +331,6 @@ feature "LicitationProcesses" do
       expect(page).to have_select 'Tipo de empenho', :selected => 'Estimativo'
       expect(page).to have_select 'Forma de execução', :selected => 'Empreitada integral'
       expect(page).to have_select 'Tipo de garantia', :selected => 'Fiança bancária'
-      expect(page).to have_field 'Fonte de recurso', :with => 'Construção'
       expect(page).to have_field 'Índice de reajuste', :with => 'SELIC'
       expect(page).to have_field 'Forma de pagamento', :with => 'Cheque'
       expect(page).to have_field 'Valor da caução', :with => '60,00'
@@ -585,7 +581,6 @@ feature "LicitationProcesses" do
 
       select 'Empreitada integral', :from => 'Forma de execução'
       select 'Fiança bancária', :from => 'Tipo de garantia'
-      fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
       fill_modal 'Índice de reajuste', :with => 'XPTO'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Valor da caução', :with => '50,00'
@@ -733,7 +728,6 @@ feature "LicitationProcesses" do
 
     within_tab "Principal" do
       expect(page).to have_disabled_field "Forma de julgamento"
-      expect(page).to have_disabled_field "Fonte de recurso"
       expect(page).to have_disabled_field "Índice de reajuste"
     end
 
@@ -1410,7 +1404,6 @@ feature "LicitationProcesses" do
       check 'Registro de preço'
       select 'Empreitada integral', :from => 'Forma de execução'
       select 'Fiança bancária', :from => 'Tipo de garantia'
-      fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
       fill_modal 'Índice de reajuste', :with => 'XPTO'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Valor da caução', :with => '50,00'
@@ -1496,7 +1489,6 @@ feature "LicitationProcesses" do
 
       expect(page).to have_select 'Forma de execução', :selected => 'Empreitada integral'
       expect(page).to have_select 'Tipo de garantia', :selected => 'Fiança bancária'
-      expect(page).to have_field 'Fonte de recurso', :with => 'Reforma e Ampliação'
       expect(page).to have_field 'Índice de reajuste', :with => 'XPTO'
       expect(page).to have_field 'Forma de pagamento', :with => 'Dinheiro'
       expect(page).to have_field 'Valor da caução', :with => '50,00'
@@ -1975,7 +1967,6 @@ feature "LicitationProcesses" do
       fill_in 'Inciso', :with => 'Item 1'
       select 'Empreitada integral', :from => 'Forma de execução'
       select 'Fiança bancária', :from => 'Tipo de garantia'
-      fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
       fill_modal 'Índice de reajuste', :with => 'XPTO'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Valor da caução', :with => '50,00'
@@ -2117,7 +2108,6 @@ feature "LicitationProcesses" do
       check 'Registro de preço'
       select 'Empreitada integral', :from => 'Forma de execução'
       select 'Fiança bancária', :from => 'Tipo de garantia'
-      fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
       fill_modal 'Índice de reajuste', :with => 'XPTO'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Valor da caução', :with => '50,00'
