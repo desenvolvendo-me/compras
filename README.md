@@ -1,4 +1,4 @@
-# Compras e Licitações
+# Compras e Licitações ![](https://semaphoreapp.com/api/v1/projects/d906cde0e497abf23305c0150b4a771f1f0b4c6c/831/badge.png)
 
 Gestão de compras e licitações do município.
 
