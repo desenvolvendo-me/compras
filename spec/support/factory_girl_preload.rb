@@ -1,19 +1,16 @@
 module FactoryGirl
   module Preload
     def self.clean(*names)
-      names = [
-        'unico_countries',
-        'unico_states',
-        'unico_cities',
-        'unico_districts',
-        'unico_neighborhoods',
-        'unico_customers'
-      ].join(", ")
+      query = case ActiveRecord::Base.connection.adapter_name
+              when "SQLite"     then "DELETE FROM %s"
+              when "PostgreSQL" then "TRUNCATE TABLE %s CASCADE"
+              else "TRUNCATE TABLE %s"
+              end
 
-      query = "TRUNCATE %s CASCADE" % names
+      names = ActiveRecord::Base.descendants.collect(&:table_name).compact if names.empty?
 
       ActiveRecord::Base.connection.disable_referential_integrity do
-        ActiveRecord::Base.connection.execute(query)
+        names.each {|table| ActiveRecord::Base.connection.execute(query % ActiveRecord::Base.connection.quote_table_name(table))}
       end
     end
   end
