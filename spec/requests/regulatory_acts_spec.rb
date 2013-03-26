@@ -6,7 +6,7 @@ feature "RegulatoryActs" do
     sign_in
   end
 
-  scenario 'create a new regulatory_act' do
+  scenario 'create a new regulatory_act, update and destroy an existing' do
     make_dependencies!
 
     navigate 'Comum > Legislação > Ato Regulamentador > Atos Regulamentadores'
@@ -62,23 +62,9 @@ feature "RegulatoryActs" do
     within_tab 'Meios de divulgação' do
       expect(page).to have_content 'Jornal Oficial do Município'
     end
-  end
-
-  scenario 'update an existent regulatory_act' do
-    make_dependencies!
-    RegulatoryActType.make!(:emenda)
-    RegulatoryAct.make!(:sopa)
-    DisseminationSource.make!(:jornal_bairro)
-    LegalTextNature.make!(:trabalhista)
-
-    navigate 'Comum > Legislação > Ato Regulamentador > Atos Regulamentadores'
-
-    click_link 'Lei'
 
     within_tab 'Principal' do
       fill_in 'Número', :with => '6789'
-      fill_modal 'Tipo', :with => 'Emenda constitucional', :field => 'Descrição'
-      fill_modal 'Natureza legal do texto jurídico', :with => 'Natureza Trabalhista', :field => 'Descrição'
       fill_in 'Data da criação', :with => '01/01/2013'
       fill_in 'Data da assinatura', :with => '01/01/2013'
       fill_in 'Data da publicação', :with => '02/01/2013'
@@ -93,20 +79,14 @@ feature "RegulatoryActs" do
       fill_in 'Valor autorizado da dívida', :with => '17.000,00'
     end
 
-    within_tab 'Meios de divulgação' do
-      fill_modal 'Meio de divulgação', :with => 'Jornal Oficial do Bairro', :field => 'Descrição'
-    end
-
     click_button 'Salvar'
 
     expect(page).to have_notice 'Ato Regulamentador editado com sucesso.'
 
-    click_link 'Emenda'
+    click_link 'Lei'
 
     within_tab 'Principal' do
       expect(page).to have_field 'Número', :with => '6789'
-      expect(page).to have_field 'Tipo', :with => 'Emenda constitucional'
-      expect(page).to have_field 'Natureza legal do texto jurídico', :with => 'Natureza Trabalhista'
       expect(page).to have_field 'Data da criação', :with => '01/01/2013'
       expect(page).to have_field 'Data da assinatura', :with => '01/01/2013'
       expect(page).to have_field 'Data da publicação', :with => '02/01/2013'
@@ -120,18 +100,6 @@ feature "RegulatoryActs" do
       expect(page).to have_field 'Porcentagem de antecipação da receita', :with => '13,00'
       expect(page).to have_field 'Valor autorizado da dívida', :with => '17.000,00'
     end
-
-    within_tab 'Meios de divulgação' do
-      expect(page).to have_content 'Jornal Oficial do Bairro'
-    end
-  end
-
-  scenario 'destroy an existent regulatory_act' do
-    RegulatoryAct.make!(:sopa)
-
-    navigate 'Comum > Legislação > Ato Regulamentador > Atos Regulamentadores'
-
-    click_link 'Lei'
 
     click_link 'Apagar'
 
