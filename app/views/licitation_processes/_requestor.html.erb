@@ -1,7 +1,7 @@
 <div class="yui3-g autocomplete-finder">
   <div class="yui3-u-2-3">
     <%= f.input :purchase_solicitations, :as => :auto_complete, :hidden_field => :autocomplete_purchase_solicitation, :min_length => 1,
-                :input_html => { :value => nil, :name => :foobar, :class => "autocomplete-form-input" }  %>
+                :input_html => { :value => nil, :name => :autocomplete_for_purchase_solicitation, :class => "autocomplete-form-input" }  %>
   </div>
 </div>
 
@@ -21,7 +21,7 @@
     <% f.object.purchase_solicitations.each do |purchase_solicitation| %>
       <%= render 'purchase_solicitations/licitation_processes_list_form',
                  :id => purchase_solicitation.id,
-                 :code_and_year => purchase_solicitation.code_and_year,
+                 :code_and_year => purchase_solicitation.decorator.code_and_year,
                  :budget_structure => purchase_solicitation.budget_structure,
                  :responsible => purchase_solicitation.responsible,
                  :description => purchase_solicitation.to_s,

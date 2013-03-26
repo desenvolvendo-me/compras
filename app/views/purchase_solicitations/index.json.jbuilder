@@ -2,7 +2,7 @@ json.array!(collection) do |json, obj|
   json.id               obj.id
   json.value            obj.to_s
   json.label            obj.to_s
-  json.code_and_year    obj.code_and_year
+  json.code_and_year    obj.decorator.code_and_year
   json.budget_structure obj.budget_structure.to_s
   json.responsible      obj.responsible.to_s
 

@@ -75,15 +75,6 @@ describe PurchaseSolicitation do
     end
   end
 
-  describe "#code_and_year" do
-    it "returns the code and accounting yera" do
-      subject.accounting_year = 2012
-      subject.code = 2
-
-      expect(subject.code_and_year).to eq "2/2012"
-    end
-  end
-
   describe "updating columns" do
     describe '#annul!' do
       it 'should updates the service status to annulled' do

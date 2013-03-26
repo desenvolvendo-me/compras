@@ -71,14 +71,6 @@ class LicitationProcessDecorator
     end
   end
 
-  def ratification_date
-    localize(super) if super
-  end
-
-  def adjudication_date
-    localize(super) if super
-  end
-
   def code_and_year
     "#{process}/#{year}"
   end

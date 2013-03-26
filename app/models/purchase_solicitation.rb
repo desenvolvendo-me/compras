@@ -58,11 +58,6 @@ class PurchaseSolicitation < Compras::Model
     }
   }
 
-  scope :by_licitation_process_id, lambda { |licitation_process_id|
-    joins { licitation_processes }.
-    where { licitation_processes.id.eq(licitation_process_id) }
-  }
-
   scope :except_ids, lambda { |ids| where { id.not_in(ids) } }
 
   scope :with_pending_items, joins { items }.merge(PurchaseSolicitationBudgetAllocationItem.pending)
@@ -89,16 +84,26 @@ class PurchaseSolicitation < Compras::Model
       where { |purchase| purchase.items.material_id.in(material_ids) }
   end
 
-  def self.update_service_status(new_status)
-    PurchaseSolicitation.update_all(:service_status => new_status)
+  def direct_purchase_by_item_group
+    PurchaseSolicitation.joins {
+      purchase_solicitation_item_group_material_purchase_solicitations.
+      purchase_solicitation_item_group_material.
+      purchase_solicitation_item_group.
+      direct_purchase
+    }.where { |purchase| purchase.id.eq(self.id) }
+  end
+
+  def licitation_process_by_item_group
+    PurchaseSolicitation.joins {
+      purchase_solicitation_item_group_material_purchase_solicitations.
+      purchase_solicitation_item_group_material.
+      purchase_solicitation_item_group.
+      licitation_process
+    }.where { |purchase| purchase.id.eq(self.id) }
   end
 
   def to_s
     "#{code}/#{accounting_year} #{budget_structure} - RESP: #{responsible}"
-  end
-
-  def code_and_year
-    "#{code}/#{accounting_year}"
   end
 
   def can_be_grouped?
