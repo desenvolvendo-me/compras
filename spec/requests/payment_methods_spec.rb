@@ -6,7 +6,7 @@ feature "PaymentMethods" do
     sign_in
   end
 
-  scenario 'create a new payment_method' do
+  scenario 'create a new payment_method, update and destroy an existing' do
     navigate 'Comum > Formas de Pagamento'
 
     click_link 'Criar Forma de Pagamento'
@@ -20,14 +20,6 @@ feature "PaymentMethods" do
     click_link 'Dinheiro'
 
     expect(page).to have_field 'Descrição', :with => 'Dinheiro'
-  end
-
-  scenario 'update an existent payment_method' do
-    PaymentMethod.make!(:dinheiro)
-
-    navigate 'Comum > Formas de Pagamento'
-
-    click_link 'Dinheiro'
 
     fill_in 'Descrição', :with => 'Cheque'
 
@@ -38,20 +30,12 @@ feature "PaymentMethods" do
     click_link 'Cheque'
 
     expect(page).to have_field 'Descrição', :with => 'Cheque'
-  end
-
-  scenario 'destroy an existent payment_method' do
-    PaymentMethod.make!(:dinheiro)
-
-    navigate 'Comum > Formas de Pagamento'
-
-    click_link 'Dinheiro'
 
     click_link 'Apagar'
 
     expect(page).to have_notice 'Forma de Pagamento apagada com sucesso.'
 
-    expect(page).to_not have_content 'Dinheiro'
+    expect(page).to_not have_content 'Cheque'
   end
 
   scenario 'index with columns at the index' do
