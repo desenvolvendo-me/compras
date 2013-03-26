@@ -1,8 +1,8 @@
-description;kind;licitation_kind
-Menor Preço - Global;global;lowest_price
-Menor Preço - Por Lote;part;lowest_price
-Menor Preço - Por Item;item;lowest_price
-Melhor Técnica;item;best_technique
-Técnica e Preço;item;technical_and_price
-Maior Lance ou Oferta;item;best_auction_or_offer
-Maior Desconto Sobre Tabela;item;higher_discount_on_table
+description,kind,licitation_kind,created_at,updated_at
+Menor Preço - Global,global,lowest_price,2013-02-08 12:52:43.076411,2013-02-08 12:52:43.076411
+Menor Preço - Por Lote,part,lowest_price,2013-02-08 12:52:43.076411,2013-02-08 12:52:43.076411
+Menor Preço - Por Item,item,lowest_price,2013-02-08 12:52:43.076411,2013-02-08 12:52:43.076411
+Melhor Técnica,item,best_technique,2013-02-08 12:52:43.076411,2013-02-08 12:52:43.076411
+Técnica e Preço,item,technical_and_price,2013-02-08 12:52:43.076411,2013-02-08 12:52:43.076411
+Maior Lance ou Oferta,item,best_auction_or_offer,2013-02-08 12:52:43.076411,2013-02-08 12:52:43.076411
+Maior Desconto Sobre Tabela,item,higher_discount_on_table,2013-02-08 12:52:43.076411,2013-02-08 12:52:43.076411
