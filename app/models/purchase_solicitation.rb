@@ -84,24 +84,6 @@ class PurchaseSolicitation < Compras::Model
       where { |purchase| purchase.items.material_id.in(material_ids) }
   end
 
-  def direct_purchase_by_item_group
-    PurchaseSolicitation.joins {
-      purchase_solicitation_item_group_material_purchase_solicitations.
-      purchase_solicitation_item_group_material.
-      purchase_solicitation_item_group.
-      direct_purchase
-    }.where { |purchase| purchase.id.eq(self.id) }
-  end
-
-  def licitation_process_by_item_group
-    PurchaseSolicitation.joins {
-      purchase_solicitation_item_group_material_purchase_solicitations.
-      purchase_solicitation_item_group_material.
-      purchase_solicitation_item_group.
-      licitation_process
-    }.where { |purchase| purchase.id.eq(self.id) }
-  end
-
   def to_s
     "#{code}/#{accounting_year} #{budget_structure} - RESP: #{responsible}"
   end
