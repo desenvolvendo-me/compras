@@ -8,7 +8,6 @@ feature "LicitationProcesses" do
     create_roles ['judgment_forms',
                   'payment_methods',
                   'indexers',
-                  'capabilities',
                   'document_types',
                   'materials',
                   'licitation_process_publications',
@@ -17,7 +16,6 @@ feature "LicitationProcesses" do
   end
 
   scenario 'create a new licitation_process' do
-    Capability.make!(:reforma)
     PaymentMethod.make!(:dinheiro)
     DocumentType.make!(:fiscal)
     JudgmentForm.make!(:por_item_com_melhor_tecnica)
@@ -207,7 +205,6 @@ feature "LicitationProcesses" do
   end
 
   scenario 'changing judgment form' do
-    Capability.make!(:reforma)
     PaymentMethod.make!(:dinheiro)
     DocumentType.make!(:fiscal)
     BudgetAllocation.make!(:alocacao)
@@ -238,7 +235,6 @@ feature "LicitationProcesses" do
 
   scenario 'update an existent licitation_process' do
     LicitationProcess.make!(:processo_licitatorio)
-    Capability.make!(:construcao)
     PaymentMethod.make!(:cheque)
     DocumentType.make!(:oficial)
     Material.make!(:arame_farpado)
@@ -386,7 +382,6 @@ feature "LicitationProcesses" do
 
   scenario 'envelope opening date is disabled without publication' do
     LicitationProcess.make!(:processo_licitatorio, :licitation_process_publications => [])
-    Capability.make!(:construcao)
     PaymentMethod.make!(:cheque)
     DocumentType.make!(:oficial)
     Material.make!(:arame_farpado)
@@ -564,7 +559,6 @@ feature "LicitationProcesses" do
   end
 
   scenario 'create a new licitation_process with envelope opening date today' do
-    Capability.make!(:reforma)
     PaymentMethod.make!(:dinheiro)
     DocumentType.make!(:fiscal)
     BudgetAllocation.make!(:alocacao)
