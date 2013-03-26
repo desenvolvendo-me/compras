@@ -2,6 +2,9 @@ class AddDescriptionOnPurchaseSolicitationItemGroups < ActiveRecord::Migration
   def change
     add_column :compras_purchase_solicitation_item_groups, :description, :string
 
-    PurchaseSolicitationItemGroup.update_all('description = id')
+    execute <<-SQL
+      UPDATE compras_purchase_solicitation_item_groups
+      SET description = id
+    SQL
   end
 end
