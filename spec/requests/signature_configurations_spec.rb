@@ -6,8 +6,9 @@ feature "SignatureConfigurations" do
     sign_in
   end
 
-  scenario 'create a new signature_configuration' do
+  scenario 'create a new signature_configuration, update and destroy an existing' do
     Signature.make!(:gerente_sobrinho)
+    Signature.make!(:supervisor_wenderson)
 
     navigate 'Geral > Parâmetros > Assinaturas > Configurações de Assinatura'
 
@@ -36,6 +37,33 @@ feature "SignatureConfigurations" do
     expect(page).to have_field 'Ordem', :with => '1'
     expect(page).to have_disabled_field 'Cargo'
     expect(page).to have_field 'Cargo', :with => 'Gerente'
+
+    fill_in 'Ordem', :with => '2'
+    within_modal 'Assinatura' do
+      fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
+      click_button 'Pesquisar'
+
+      click_record 'Supervisor'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Configuração de Assinatura editada com sucesso.'
+
+    click_link 'Autorizações de Fornecimento'
+
+    expect(page).to have_select 'Relatório', :selected => 'Autorizações de Fornecimento'
+    expect(page).to have_field 'Assinatura', :with => 'Wenderson Malheiros'
+    expect(page).to have_disabled_field 'Cargo'
+    expect(page).to have_field 'Ordem', :with => '2'
+
+    click_link 'Apagar'
+
+    expect(page).to have_notice 'Configuração de Assinatura apagada com sucesso.'
+
+    within_records do
+      expect(page).to_not have_content 'Autorizações de Fornecimento'
+    end
   end
 
   scenario 'should have only availables reports' do
@@ -82,55 +110,6 @@ feature "SignatureConfigurations" do
     clear_modal 'Assinatura'
 
     expect(page).to_not have_field 'Cargo', :with => 'Gerente'
-  end
-
-  scenario 'update an existent signature_configuration' do
-    Signature.make!(:supervisor_wenderson)
-    SignatureConfiguration.make!(:autorizacoes_de_fornecimento)
-
-    navigate 'Geral > Parâmetros > Assinaturas > Configurações de Assinatura'
-
-    click_link 'Autorizações de Fornecimento'
-
-    select 'Certificados de Registro Cadastral', :from => 'Relatório'
-
-    click_button 'Remover'
-    click_button 'Adicionar Assinatura'
-
-    fill_in 'Ordem', :with => '1'
-    within_modal 'Assinatura' do
-      fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
-      click_button 'Pesquisar'
-
-      click_record 'Supervisor'
-    end
-
-    click_button 'Salvar'
-
-    expect(page).to have_notice 'Configuração de Assinatura editada com sucesso.'
-
-    click_link 'Certificados de Registro Cadastral'
-
-    expect(page).to have_select 'Relatório', :selected => 'Certificados de Registro Cadastral'
-    expect(page).to have_field 'Assinatura', :with => 'Wenderson Malheiros'
-    expect(page).to have_disabled_field 'Cargo'
-    expect(page).to have_field 'Ordem', :with => '1'
-  end
-
-  scenario 'destroy an existent signature_configuration' do
-    SignatureConfiguration.make!(:autorizacoes_de_fornecimento)
-
-    navigate 'Geral > Parâmetros > Assinaturas > Configurações de Assinatura'
-
-    click_link 'Autorizações de Fornecimento'
-
-    click_link 'Apagar'
-
-    expect(page).to have_notice 'Configuração de Assinatura apagada com sucesso.'
-
-    within_records do
-      expect(page).to_not have_content 'Autorizações de Fornecimento'
-    end
   end
 
   scenario 'acces modal' do
