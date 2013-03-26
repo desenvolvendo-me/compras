@@ -56,9 +56,6 @@ class DirectPurchasesController < CrudController
           :add_fulfill => true).fulfill
 
         if params[:direct_purchase]
-          PurchaseSolicitationBudgetAllocationItemStatusChanger.new(
-            :new_purchase_solicitation => new_purchase_solicitation,
-            :direct_purchase => object).change
           PurchaseSolicitationStatusChanger.change(new_purchase_solicitation)
         end
       end
@@ -72,10 +69,6 @@ class DirectPurchasesController < CrudController
       DirectPurchaseBudgetAllocationCleaner.clear_old_records(object, new_purchase_solicitation)
 
       if super
-          PurchaseSolicitationBudgetAllocationItemStatusChanger.new(
-            :new_purchase_solicitation => new_purchase_solicitation,
-            :old_purchase_solicitation => old_purchase_solicitation,
-            :direct_purchase => object).change
           PurchaseSolicitationStatusChanger.change(new_purchase_solicitation)
           PurchaseSolicitationStatusChanger.change(old_purchase_solicitation)
 
