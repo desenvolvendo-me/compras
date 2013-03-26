@@ -58,6 +58,7 @@ class LicitationProcessesController < CrudController
     object.transaction do
       BidderStatusChanger.new(object).change
 
+      object.year = object.process_date_year
       object.licitation_number = object.next_licitation_number
       object.status = LicitationProcessStatus::WAITING_FOR_OPEN
 

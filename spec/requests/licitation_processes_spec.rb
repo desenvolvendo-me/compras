@@ -39,10 +39,8 @@ feature "LicitationProcesses" do
       expect(page).to have_disabled_field 'Processo'
       expect(page).to have_disabled_field 'Modalidade'
       expect(page).to have_disabled_field 'Nº do afastamento'
-      expect(page).to have_field 'Ano', :with => "#{Date.current.year}"
 
       choose 'Processo licitatório'
-      fill_in 'Ano', :with => '2012'
       select 'Global', :from => 'Tipo de empenho'
 
       select 'Compras e serviços', :from => 'Tipo de objeto'
@@ -122,14 +120,12 @@ feature "LicitationProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Processo de Compra 1/2012 criado com sucesso.'
+    expect(page).to have_notice "Processo de Compra 1/#{Date.current.year} criado com sucesso."
 
     within_tab 'Principal' do
       expect(page).to have_disabled_field 'Processo'
-      expect(page).to have_disabled_field 'Ano'
 
       expect(page).to have_field 'Processo', :with => '1'
-      expect(page).to have_field 'Ano', :with => '2012'
       expect(page).to have_select 'Tipo de empenho', :selected => 'Global'
 
       expect(page).to have_select 'Modalidade', :selected => 'Concorrência'
@@ -148,7 +144,6 @@ feature "LicitationProcesses" do
 
       # testing fields of licitation number
       expect(page).to have_field 'Número da licitação', :with => '1'
-      expect(page).to have_field 'Ano', :with => '2012'
     end
 
     within_tab 'Prazos' do
@@ -1367,7 +1362,6 @@ feature "LicitationProcesses" do
 
     expect(page).to have_title 'Processos de Compras'
   end
-
 
   scenario 'when select disposals_of_assets as object_type should show only best_auction_or_offer' do
     JudgmentForm.make!(:global_com_menor_preco) # LOWEST_PRICE

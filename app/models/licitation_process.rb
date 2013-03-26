@@ -97,6 +97,7 @@ class LicitationProcess < Compras::Model
   validate :validate_bidders_before_edital_publication
   validate :validate_updates, :unless => :updatable?
   validate :validate_proposal_envelope_opening_date, :on => :update
+  validate :validate_the_year_to_processe_date_are_the_same, :on => :update
 
   with_options :allow_blank => true do |allowing_blank|
     allowing_blank.validates :year, :mask => "9999"
@@ -235,6 +236,9 @@ class LicitationProcess < Compras::Model
     end
   end
 
+  def process_date_year
+    process_date && process_date.year
+  end
 
   protected
 
@@ -257,6 +261,10 @@ class LicitationProcess < Compras::Model
       bidder.assign_document_types
       bidder.save!
     end
+  end
+
+  def validate_the_year_to_processe_date_are_the_same
+    errors.add(:process_date, :cannot_change_the_year_from_the_date_of_dispatch) unless process_date_year == year
   end
 
   def validate_bidders_before_edital_publication
