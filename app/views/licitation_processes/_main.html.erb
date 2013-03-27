@@ -130,7 +130,7 @@
   organizesModalities();
 
   function toogleVisibilityFieldsToTradingAndConcurrence() {
-    if (($('#licitation_process_modality').val() == 'trading') || ($('#licitation_process_modality').val() == 'concurrence')) {
+    if (($('#licitation_process_modality').val() == '<%= Modality::TRADING %>' ) || ($('#licitation_process_modality').val() == '<%= Modality::CONCURRENCE %>')) {
       $('.fields-to-trading-and-concurrence').removeClass('hidden');
     } else {
       $('.fields-to-trading-and-concurrence').addClass('hidden');
@@ -139,7 +139,7 @@
   };
 
   function toogleVisibilityFieldsToTrading() {
-    if (($('#licitation_process_modality').val() == 'trading')) {
+    if (($('#licitation_process_modality').val() == '<%= Modality::TRADING %>')) {
       $('.fields-to-trading').removeClass('hidden');
       $('.not-fields-to-trading').addClass('hidden');
     } else {
