@@ -1754,6 +1754,28 @@ feature "LicitationProcesses" do
     end
   end
 
+  scenario 'assert javascript over type of purchase' do
+    pending 'this test is not working, but in browser is all ok' do
+      navigate 'Processos de Compra > Processos de Compras'
+
+      click_link 'Criar Processo de Compra'
+
+      within_tab 'Principal' do
+        choose 'Processo licitatório'
+        select 'Compras e serviços', :from => 'Tipo de objeto'
+        select 'Pregão', :from => 'Modalidade'
+
+        expect(page).to have_field 'Registro de preço'
+        expect(page).to have_field 'Pregão eletrônico'
+
+        choose 'Compra direta'
+
+        expect(page).to_not have_field 'Registro de preço'
+        expect(page).to_not have_field 'Pregão eletrônico'
+      end
+    end
+  end
+
   scenario 'assert javascript over modality' do
     pending 'this test is not working, but in browser is all ok' do
       navigate 'Processos de Compra > Processos de Compras'
