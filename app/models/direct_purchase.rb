@@ -164,18 +164,4 @@ class DirectPurchase < Compras::Model
 
     material_ids.join(',')
   end
-
-  def purchase_solicitation_items_finder_sql
-    %Q{
-        SELECT "compras_purchase_solicitation_budget_allocation_items".* FROM "compras_direct_purchases"
-          INNER JOIN "compras_purchase_solicitations" ON
-            "compras_purchase_solicitations"."id" = "compras_direct_purchases"."purchase_solicitation_id"
-          INNER JOIN "compras_purchase_solicitation_budget_allocations" ON
-            "compras_purchase_solicitation_budget_allocations"."purchase_solicitation_id" = "compras_purchase_solicitations"."id"
-          INNER JOIN "compras_purchase_solicitation_budget_allocation_items" ON
-            "compras_purchase_solicitation_budget_allocation_items"."purchase_solicitation_budget_allocation_id" = "compras_purchase_solicitation_budget_allocations"."id"
-          WHERE (("compras_direct_purchases"."id" = #{id} AND
-            "compras_purchase_solicitation_budget_allocation_items"."material_id" IN (#{material_ids_or_zero})))
-      }
-  end
 end
