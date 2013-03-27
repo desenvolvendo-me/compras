@@ -5,4 +5,4 @@ Menor Preço - Por Item,item,lowest_price,2013-02-08 12:52:43.076411,2013-02-08 
 Melhor Técnica,item,best_technique,2013-02-08 12:52:43.076411,2013-02-08 12:52:43.076411
 Técnica e Preço,item,technical_and_price,2013-02-08 12:52:43.076411,2013-02-08 12:52:43.076411
 Maior Lance ou Oferta,item,best_auction_or_offer,2013-02-08 12:52:43.076411,2013-02-08 12:52:43.076411
-Maior Desconto Sobre Tabela,item,higher_discount_on_table,2013-02-08 12:52:43.076411,2013-02-08 12:52:43.076411
+Menor Preço - Maior Desconto sobre Tabela,item,higher_discount_on_table,2013-02-08 12:52:43.076411,2013-02-08 12:52:43.076411
