@@ -70,7 +70,7 @@ module Compras
       end
 
       def min_length
-        options.fetch(:min_length, 3)
+        options.fetch(:min_length, 1)
       end
 
       def index
