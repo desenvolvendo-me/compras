@@ -71,10 +71,6 @@ class LicitationProcess < Compras::Model
   has_many :budget_allocations, :through => :administrative_process_budget_allocations
   has_many :items, :class_name => 'AdministrativeProcessBudgetAllocationItem', :dependent => :restrict, :order => :id
   has_many :materials, :through => :items
-  has_many :purchase_solicitation_items,
-           :class_name => 'PurchaseSolicitationBudgetAllocationItem',
-           :finder_sql => Proc.new { purchase_solicitation_items_finder_sql },
-           :inverse_of => :fulfiller
 
   has_one :trading, :dependent => :restrict
 
@@ -212,28 +208,6 @@ class LicitationProcess < Compras::Model
     return if licitation_process_publications.empty?
 
     licitation_process_publications.current.publication_date
-  end
-
-  def fulfill_purchase_solicitation_items
-    purchase_solicitation_items.each do |item|
-      item.fulfill(self)
-    end
-  end
-
-  def remove_fulfill_purchase_solicitation_items
-    purchase_solicitation_items.each do |item|
-      item.fulfill(nil)
-    end
-  end
-
-  def attend_purchase_solicitation_items
-    purchase_solicitation_items.attend!
-  end
-
-  def partially_fulfilled_purchase_solicitation_items
-    purchase_solicitation_items.each do |item|
-      item.partially_fulfilled!
-    end
   end
 
   def process_date_year

@@ -32,13 +32,11 @@
 
   $("#direct_purchase_purchase_solicitation_id").on("change", function (event, purchase_solicitation) {
     $("#budget-allocations").empty();
-    var allowedItemStatus = "<%= PurchaseSolicitationBudgetAllocationItemStatus::PENDING %>";
-
     if (purchase_solicitation) {
       $('#direct_purchase_total_allocations_items_value').val(numberWithDelimiter(purchase_solicitation.total));
 
       $.each(purchase_solicitation.budget_allocations, function (i, budget_allocation) {
-        renderBudgetAllocation(budget_allocation, allowedItemStatus);
+        renderBudgetAllocation(budget_allocation);
       });
 
       disableBudgetAllocations();
@@ -81,7 +79,7 @@
     $("#direct_purchase_budget_structure").removeAttr("disabled");
   }
 
-  function renderBudgetAllocation(budget_allocation, allowedItemStatus) {
+  function renderBudgetAllocation(budget_allocation) {
     var budgetAllocationBinds = [];
     var budgetAllocationUUID = _.uniqueId();
 
@@ -94,9 +92,7 @@
     fillBudgetAllocation(budgetAllocationUUID, budget_allocation);
 
     $.each(budget_allocation.items, function (i, budget_allocation_item) {
-      if (budget_allocation_item.status == allowedItemStatus ) {
-        renderBudgetAllocationItem(budgetAllocationUUID, budget_allocation_item);
-      }
+      renderBudgetAllocationItem(budgetAllocationUUID, budget_allocation_item);
     });
   }
 

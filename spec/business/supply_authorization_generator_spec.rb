@@ -17,7 +17,6 @@ describe SupplyAuthorizationGenerator do
   let(:supply_authorization_repository) { double(:supply_authorization_repository) }
   let(:supply_authorization_object) { double(:supply_authorization_object) }
   let(:purchase_solicitation) { double(:purchase_solicitation) }
-  let(:purchase_solicitation_item_group) { double(:purchase_solicitation_item_group) }
   let(:items) { double(:items) }
 
   it 'should return supply_authorization if already have' do
@@ -35,14 +34,11 @@ describe SupplyAuthorizationGenerator do
       before do
         direct_purchase_object.stub(:authorized?).and_return(false)
         direct_purchase_object.stub(:purchase_solicitation => purchase_solicitation)
-        direct_purchase_object.stub(:purchase_solicitation_item_group => purchase_solicitation_item_group)
         purchase_solicitation.stub(:blank? => false)
-        purchase_solicitation_item_group.stub(:blank? => true)
       end
 
       it 'should generate supply_authorization' do
         purchase_solicitation.should_receive(:attend!)
-        purchase_solicitation.should_receive(:attend_items!)
         expect(subject.generate!).to eq supply_authorization_object
       end
     end

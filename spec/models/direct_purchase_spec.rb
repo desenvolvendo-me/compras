@@ -32,9 +32,7 @@ describe DirectPurchase do
 
   it { should have_many(:items).through(:direct_purchase_budget_allocations) }
   it { should have_many(:materials).through(:items) }
-  it { should have_many(:purchase_solicitation_items) }
   it { should have_many(:direct_purchase_budget_allocations).dependent(:destroy).order(:id) }
-  it { should have_many(:purchase_solicitation_budget_allocation_items) }
 
   it { should have_one(:supply_authorization).dependent(:restrict) }
   it { should have_one(:annul).dependent(:destroy) }

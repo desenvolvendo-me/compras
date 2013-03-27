@@ -3,7 +3,6 @@ PurchaseSolicitationBudgetAllocationItem.blueprint(:item) do
   brand { "Norton" }
   quantity { 3 }
   unit_price { 200.0 }
-  status { PurchaseSolicitationBudgetAllocationItemStatus::PENDING }
 end
 
 PurchaseSolicitationBudgetAllocationItem.blueprint(:arame_farpado) do
@@ -11,7 +10,6 @@ PurchaseSolicitationBudgetAllocationItem.blueprint(:arame_farpado) do
   brand { "Arame" }
   quantity { 99 }
   unit_price { 200.0 }
-  status { PurchaseSolicitationBudgetAllocationItemStatus::PENDING }
 end
 
 PurchaseSolicitationBudgetAllocationItem.blueprint(:arame_farpado_2) do
@@ -27,5 +25,4 @@ PurchaseSolicitationBudgetAllocationItem.blueprint(:office) do
   brand { "Office" }
   quantity { 3 }
   unit_price { 200.0 }
-  status { PurchaseSolicitationBudgetAllocationItemStatus::PENDING }
 end

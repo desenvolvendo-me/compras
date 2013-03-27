@@ -8,7 +8,6 @@ class SupplyAuthorizationGenerator
     if direct_purchase_object.authorized?
       direct_purchase_object.supply_authorization
     else
-      attend_items_purchase_solicitation
       attend_purchase_solicitation
       authorize!
     end
@@ -26,12 +25,6 @@ class SupplyAuthorizationGenerator
       :direct_purchase_id => direct_purchase_object.id,
       :year => direct_purchase_object.year,
     )
-  end
-
-  def attend_items_purchase_solicitation
-    return if purchase_solicitation.blank?
-
-    purchase_solicitation.attend_items!
   end
 
   def attend_purchase_solicitation

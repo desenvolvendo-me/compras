@@ -204,28 +204,6 @@ describe PurchaseSolicitation do
     end
   end
 
-  describe '#attend_items!' do
-    let(:items) { double(:items) }
-
-    it "should change status of all items to 'attended'" do
-      subject.stub(:items).and_return(items)
-      items.should_receive(:attend!)
-
-      subject.attend_items!
-    end
-  end
-
-  describe '#partially_fulfilled_items!' do
-    let(:items) { double(:items) }
-
-    it "should change status of all items to 'attended'" do
-      subject.stub(:items).and_return(items)
-      items.should_receive(:partially_fulfilled!)
-
-      subject.partially_fulfilled_items!
-    end
-  end
-
   context '#active_purchase_solicitation_liberation' do
     before do
       subject.stub(:purchase_solicitation_liberations).

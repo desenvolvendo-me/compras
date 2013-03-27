@@ -15,8 +15,6 @@ class DirectPurchaseAnnulment
   end
 
   def annul
-    change_purchase_solicitation_items
-
     liberate_purchase_solicitation
 
     send_supply_authorization_annulment_by_email
@@ -26,12 +24,6 @@ class DirectPurchaseAnnulment
 
   def send_supply_authorization_annulment_by_email
     email_sender.new(supply_authorization, context).deliver
-  end
-
-  def change_purchase_solicitation_items
-    return unless purchase_solicitation.present?
-
-    purchase_solicitation.clear_items_fulfiller_and_status
   end
 
   def liberate_purchase_solicitation

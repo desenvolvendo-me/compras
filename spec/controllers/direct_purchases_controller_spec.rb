@@ -30,8 +30,6 @@ describe DirectPurchasesController do
       DirectPurchase.any_instance.stub(:save).and_return(true)
       DirectPurchase.any_instance.stub_chain(:errors, :empty?).and_return(false)
 
-      PurchaseSolicitationBudgetAllocationItemFulfiller.any_instance.should_receive(:fulfill)
-
       post :create
     end
 

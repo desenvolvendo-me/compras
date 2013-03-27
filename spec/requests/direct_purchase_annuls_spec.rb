@@ -127,7 +127,7 @@ feature 'DirectPurchaseAnnuls' do
     end
 
     within_tab 'Principal' do
-      expect(page).to have_select 'Status de atendimento', :selected => 'Parcialmente atendido'
+      expect(page).to have_select 'Status de atendimento', :selected => 'Liberada'
     end
 
     navigate 'Processos de Compra > Compra Direta'
@@ -168,15 +168,6 @@ feature 'DirectPurchaseAnnuls' do
 
     within_tab 'Principal' do
       expect(page).to have_select 'Status de atendimento', :selected => 'Liberada'
-    end
-
-    within_tab 'Dotações orçamentárias' do
-      within '.purchase-solicitation-budget-allocation:first' do
-        within '.item:first' do
-          expect(page).to have_select 'Status', :selected => 'Pendente'
-          expect(page).to have_field 'Atendido por', :with => ''
-        end
-      end
     end
 
     navigate 'Processos de Compra > Compra Direta'
@@ -238,15 +229,6 @@ feature 'DirectPurchaseAnnuls' do
 
     within_tab 'Principal' do
       expect(page).to have_select 'Status de atendimento', :selected => 'Liberada'
-    end
-
-    within_tab 'Dotações orçamentárias' do
-      within '.purchase-solicitation-budget-allocation:first' do
-        within '.item:first' do
-          expect(page).to have_select 'Status', :selected => 'Pendente'
-          expect(page).to have_field 'Atendido por', :with => ''
-        end
-      end
     end
   end
 

@@ -3,7 +3,6 @@ require 'unit_helper'
 require 'active_support/core_ext/module/delegation'
 require 'app/business/direct_purchase_annulment'
 require 'app/business/supply_authorization_email_sender'
-require 'app/business/purchase_solicitation_budget_allocation_item_status_changer'
 
 describe DirectPurchaseAnnulment do
   subject do
@@ -75,32 +74,6 @@ describe DirectPurchaseAnnulment do
       subject.annul
     end
 
-    it 'should clear purchase_solicitation items fulfiller and change status to pending' do
-      purchase_solicitation_item_group.stub(:present?).and_return(false)
-      purchase_solicitation.stub(:present?).and_return(true)
-      supply_authorization.stub(:present?).and_return(false)
-
-      email_sender.should_receive(:deliver)
-      email_sender.should_receive(:new).with(supply_authorization, context).and_return(email_sender)
-
-      purchase_solicitation.should_receive(:clear_items_fulfiller_and_status)
-
-      subject.annul
-    end
-
-    it 'should not clear purchase_solicitation items fulfiller and change status to pending when purchase_solicitation not present' do
-      purchase_solicitation_item_group.stub(:present?).and_return(false)
-      purchase_solicitation.stub(:present?).and_return(false)
-      supply_authorization.stub(:present?).and_return(false)
-
-      email_sender.should_receive(:deliver)
-      email_sender.should_receive(:new).with(supply_authorization, context).and_return(email_sender)
-
-      purchase_solicitation.should_not_receive(:clear_items_fulfiller_and_status)
-
-      subject.annul
-    end
-
     it 'should change status of purchase solicitation when there is a supply_authorization assigned' do
       purchase_solicitation_item_group.stub(:present?).and_return(false)
       purchase_solicitation.stub(:present?).and_return(false)
@@ -121,7 +94,6 @@ describe DirectPurchaseAnnulment do
       email_sender.should_receive(:deliver)
       email_sender.should_receive(:new).with(supply_authorization, context).and_return(email_sender)
       purchase_solicitation.should_receive(:liberate!)
-      purchase_solicitation.should_receive(:clear_items_fulfiller_and_status)
 
       subject.annul
     end

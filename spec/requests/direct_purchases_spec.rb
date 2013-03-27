@@ -774,10 +774,6 @@ feature "DirectPurchases" do
       expect(page).to have_select 'Status de atendimento', :selected => 'Liberada'
     end
 
-    within_tab 'Dotações orçamentárias' do
-      expect(page).to have_select 'Status', :selected => 'Pendente'
-    end
-
     navigate 'Processos de Compra > Compra Direta'
 
     click_link 'Filtrar Compras Diretas'
@@ -826,10 +822,6 @@ feature "DirectPurchases" do
 
     within_tab 'Principal' do
       expect(page).to have_select 'Status de atendimento', :selected => 'Atendida'
-    end
-
-    within_tab 'Dotações orçamentárias' do
-      expect(page).to have_select 'Status', :selected => 'Atendido'
     end
   end
 
@@ -881,7 +873,7 @@ feature "DirectPurchases" do
 
     click_link '1/2012'
 
-    expect(page).to have_select "Status de atendimento", :selected => 'Parcialmente atendido'
+    expect(page).to have_select "Status de atendimento", :selected => 'Liberada'
 
     navigate 'Processos de Compra > Compra Direta'
 
@@ -915,7 +907,7 @@ feature "DirectPurchases" do
 
     click_link '1/2013'
 
-    expect(page).to have_select "Status de atendimento", :selected => 'Parcialmente atendido'
+    expect(page).to have_select "Status de atendimento", :selected => 'Liberada'
   end
 
   scenario 'calculate total value of items when update' do
@@ -1113,8 +1105,7 @@ feature "DirectPurchases" do
       :alocacao_primaria,
       :items => [
         PurchaseSolicitationBudgetAllocationItem.make!(:item),
-        PurchaseSolicitationBudgetAllocationItem.make!(:office,
-          :status => PurchaseSolicitationBudgetAllocationItemStatus::GROUPED)
+        PurchaseSolicitationBudgetAllocationItem.make!(:office)
       ])
 
     purchase_solicitation = PurchaseSolicitation.make!(:reparo_liberado,
@@ -1125,24 +1116,6 @@ feature "DirectPurchases" do
       :responsible => Employee.make!(:wenderson),
       :purchase_solicitation_budget_allocations => [
         PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria_office)])
-
-    navigate 'Processos de Compra > Solicitações de Compra'
-
-    click_link "Limpar Filtro"
-
-    within_records do
-      click_link '1/2012'
-    end
-
-    within_tab 'Dotações orçamentárias' do
-      within '.item:nth-child(1)' do
-        expect(page).to have_select 'Status', :selected => 'Pendente'
-      end
-
-      within '.item:nth-child(2)' do
-        expect(page).to have_select 'Status', :selected => 'Agrupado'
-      end
-    end
 
     navigate 'Processos de Compra > Compra Direta'
 
@@ -1177,29 +1150,10 @@ feature "DirectPurchases" do
         click_button 'Pesquisar'
 
         within_records do
-          expect(page).to have_css('tbody tr', :count => 1)
-          expect(page).to_not have_content '2012'
+          expect(page).to have_css('tbody tr', :count => 2)
         end
 
         click_link 'Voltar'
-      end
-    end
-
-    navigate 'Processos de Compra > Solicitações de Compra'
-
-    click_link "Limpar Filtro"
-
-    within_records do
-      click_link '1/2012'
-    end
-
-    within_tab 'Dotações orçamentárias' do
-      within '.item:nth-child(1)' do
-        expect(page).to have_select 'Status', :selected => 'Parcialmente atendido'
-      end
-
-      within '.item:nth-child(2)' do
-        expect(page).to have_select 'Status', :selected => 'Agrupado'
       end
     end
 
@@ -1222,47 +1176,6 @@ feature "DirectPurchases" do
     click_button 'Salvar'
 
     expect(page).to have_notice 'Compra Direta 1/2012 editada com sucesso.'
-
-    click_link 'Voltar'
-
-    navigate 'Processos de Compra > Solicitações de Compra'
-
-    click_link "Limpar Filtro"
-
-    within_records do
-      click_link '1/2012'
-    end
-
-    within_tab 'Dotações orçamentárias' do
-      within '.item:nth-child(1)' do
-        expect(page).to have_select 'Status', :selected => 'Pendente'
-      end
-
-      within '.item:nth-child(2)' do
-        expect(page).to have_select 'Status', :selected => 'Agrupado'
-      end
-    end
-
-    click_link 'Voltar'
-
-    click_link "Limpar Filtro"
-
-    within_records do
-      click_link '1/2013'
-    end
-
-    within_tab 'Dotações orçamentárias' do
-      within '.item:nth-child(1)' do
-        expect(page).to have_select 'Status', :selected => 'Parcialmente atendido'
-      end
-    end
-
-    within_tab 'Dotações orçamentárias' do
-      within '.item:nth-child(1)' do
-        expect(page).to have_select 'Status', :selected => 'Parcialmente atendido'
-        expect(page).to have_field 'Atendido por', :with => 'Compra direta 1/2012'
-      end
-    end
   end
 
   scenario 'Filter and clear direct purchase filter' do

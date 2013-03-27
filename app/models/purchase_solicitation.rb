@@ -53,19 +53,17 @@ class PurchaseSolicitation < Compras::Model
   }
 
   scope :by_pending_or_ids, lambda { |ids|
-    joins { items }.where {
-      (items.status.eq(PurchaseSolicitationBudgetAllocationItemStatus::PENDING) | id.in(ids) )
-    }
+    where { id.in(ids) }
   }
 
   scope :except_ids, lambda { |ids| where { id.not_in(ids) } }
 
-  scope :with_pending_items, joins { items }.merge(PurchaseSolicitationBudgetAllocationItem.pending)
-
-  scope :can_be_grouped, with_pending_items.where { service_status.in [
-    PurchaseSolicitationServiceStatus::LIBERATED,
-    PurchaseSolicitationServiceStatus::PARTIALLY_FULFILLED ]
-  }.uniq
+  scope :can_be_grouped, lambda {
+    where { service_status.in [
+      PurchaseSolicitationServiceStatus::LIBERATED,
+      PurchaseSolicitationServiceStatus::PARTIALLY_FULFILLED ]
+    }.uniq
+  }
 
   scope :term, lambda { |q|
     joins { budget_structure.outer }.
@@ -144,18 +142,6 @@ class PurchaseSolicitation < Compras::Model
 
   def partially_fulfilled!
     update_column :service_status, PurchaseSolicitationServiceStatus::PARTIALLY_FULFILLED
-  end
-
-  def attend_items!
-    items.attend!
-  end
-
-  def partially_fulfilled_items!
-    items.partially_fulfilled!
-  end
-
-  def pending_items!
-    items.pending!
   end
 
   def active_purchase_solicitation_liberation

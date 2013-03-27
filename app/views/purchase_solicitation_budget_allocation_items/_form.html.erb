@@ -1,7 +1,6 @@
 <div class="item nested">
   <%= f.input :id, :as => 'hidden' %>
   <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
-  <%= f.input :status, :as => :hidden %>
 
   <div class="yui3-g">
     <div class="yui3-u-1-8">
@@ -40,18 +39,8 @@
   </div>
 
   <div class="yui3-g">
-    <div class="yui3-u-1-5">
-      <%= f.input :status, :disabled => true %>
-    </div>
-
-    <div class="yui3-u-1-3">
-      <%= f.input :fulfiller, :as => :string, :disabled => true, :input_html => { :value => f.object.decorator.fulfiller } %>
-    </div>
-  </div>
-
-  <div class="yui3-g">
     <p class="yui3-u">
-    <input type="button" class="button negative remove-item"<%= data_disabled_attribute(data_disabled) %> value="Remover Item">
+      <input type="button" class="button negative remove-item"<%= data_disabled_attribute(data_disabled) %> value="Remover Item">
     </p>
   </div>
 </div>

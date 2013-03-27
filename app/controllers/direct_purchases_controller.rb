@@ -51,10 +51,6 @@ class DirectPurchasesController < CrudController
   def create_resource(object)
     object.transaction do
       if super
-        PurchaseSolicitationBudgetAllocationItemFulfiller.new(
-          :direct_purchase => object,
-          :add_fulfill => true).fulfill
-
         if params[:direct_purchase]
           PurchaseSolicitationStatusChanger.change(new_purchase_solicitation)
         end
@@ -71,12 +67,6 @@ class DirectPurchasesController < CrudController
       if super
           PurchaseSolicitationStatusChanger.change(new_purchase_solicitation)
           PurchaseSolicitationStatusChanger.change(old_purchase_solicitation)
-
-        PurchaseSolicitationBudgetAllocationItemFulfiller.new(
-          :direct_purchase => object).fulfill
-        PurchaseSolicitationBudgetAllocationItemFulfiller.new(
-          :direct_purchase => object,
-          :add_fulfill => true).fulfill
       end
     end
   end

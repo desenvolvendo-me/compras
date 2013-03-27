@@ -30,12 +30,7 @@ class DirectPurchase < Compras::Model
   has_many :direct_purchase_budget_allocations, :dependent => :destroy, :order => :id
   has_many :items, :through => :direct_purchase_budget_allocations, :class_name => :DirectPurchaseBudgetAllocationItem
   has_many :materials, :through => :items
-  has_many :purchase_solicitation_items,
-           :class_name => 'PurchaseSolicitationBudgetAllocationItem',
-           :finder_sql => Proc.new { purchase_solicitation_items_finder_sql },
-           :inverse_of => :fulfiller
 
-  has_many :purchase_solicitation_budget_allocation_items, :as => :fulfiller
   has_one :supply_authorization, :dependent => :restrict
   has_one :annul, :class_name => 'ResourceAnnul', :as => :annullable, :dependent => :destroy
 

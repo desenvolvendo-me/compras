@@ -66,7 +66,6 @@ describe LicitationProcess do
   it { should have_many(:administrative_process_budget_allocations).dependent(:destroy) }
   it { should have_many(:items).dependent(:restrict)}
   it { should have_many(:materials).through(:items) }
-  it { should have_many(:purchase_solicitation_items) }
   it { should have_many(:budget_allocations).through(:administrative_process_budget_allocations) }
 
   it { should have_one(:trading).dependent(:restrict) }
@@ -453,48 +452,6 @@ describe LicitationProcess do
     end
   end
 
-  describe '#fulfill_purchase_solicitation_items' do
-    before do
-      subject.should_receive(:purchase_solicitation_items).
-              and_return([item, item2])
-    end
-
-    let(:item)  { double(:item) }
-    let(:item2) { double(:item2) }
-
-    it 'should fulfill items' do
-      item.should_receive(:fulfill).with(subject)
-      item2.should_receive(:fulfill).with(subject)
-
-      subject.fulfill_purchase_solicitation_items
-    end
-  end
-
-  describe '#remove_fulfill_purchase_solicitation_items' do
-    before do
-      subject.should_receive(:purchase_solicitation_items).
-              and_return([item, item2])
-    end
-
-    let(:item)  { double(:item) }
-    let(:item2) { double(:item2) }
-
-    it 'should fulfill items' do
-      item.should_receive(:fulfill).with(nil)
-      item2.should_receive(:fulfill).with(nil)
-
-      subject.remove_fulfill_purchase_solicitation_items
-    end
-  end
-
-  describe '#attend_purchase_solicitation_items' do
-    it 'should attend items' do
-      subject.purchase_solicitation_items.should_receive(:attend!)
-
-      subject.attend_purchase_solicitation_items
-    end
-  end
-
   describe '#update_purchase_solicitation_to_purchase_process' do
     let(:purchase_solicitation) { double(:purchase_solicitation) }
 
@@ -511,23 +468,6 @@ describe LicitationProcess do
     it "updates the purchase solicitation service_status to liberated" do
       purchase_solicitation.should_receive(:liberate!)
       subject.send(:update_purchase_solicitation_to_liberated, purchase_solicitation)
-    end
-  end
-
-  describe 'partially_fulfilled_purchase_solicitation_items' do
-    before do
-      subject.should_receive(:purchase_solicitation_items).
-              and_return([item, item2])
-    end
-
-    let(:item)  { double(:item) }
-    let(:item2) { double(:item2) }
-
-    it 'should fulfill items' do
-      item.should_receive(:partially_fulfilled!)
-      item2.should_receive(:partially_fulfilled!)
-
-      subject.partially_fulfilled_purchase_solicitation_items
     end
   end
 end
