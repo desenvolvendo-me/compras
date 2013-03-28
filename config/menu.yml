@@ -67,7 +67,6 @@ menu:
       - licitation_objects
       - legal_references
     - price_collections
-    - direct_purchases
     - price_registrations
     - purchase_solicitations
     - licitation_processes
