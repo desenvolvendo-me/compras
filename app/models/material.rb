@@ -18,10 +18,11 @@ class Material < Compras::Model
 
   has_many :direct_purchase_budget_allocation_items, :dependent => :restrict
   has_many :administrative_process_budget_allocation_items, :dependent => :restrict
-  has_many :purchase_solicitation_budget_allocation_items, :dependent => :restrict
+  has_many :purchase_solicitation_items, :dependent => :restrict
   has_many :price_collection_lot_items, :dependent => :restrict
   has_many :creditor_materials, :dependent => :restrict
-  has_many :purchase_solicitation_budget_allocations, :through => :purchase_solicitation_budget_allocation_items, :dependent => :restrict
+  has_many :purchase_solicitations, :through => :purchase_solicitation_items, :dependent => :restrict
+  has_many :purchase_solicitation_budget_allocations, :through => :purchase_solicitations, :dependent => :restrict
   has_many :materials_controls, :dependent => :destroy, :inverse_of => :material, :order => :id
 
   validates :materials_class, :reference_unit, :material_type, :detailed_description, :presence => true
@@ -52,19 +53,17 @@ class Material < Compras::Model
   end
 
   def self.by_pending_purchase_solicitation_budget_structure_id(budget_structure_id)
-    joins { purchase_solicitation_budget_allocation_items }.
-    joins { purchase_solicitation_budget_allocations.purchase_solicitation }.
+    joins { purchase_solicitation_items.purchase_solicitation }.
     where do
-      purchase_solicitation_budget_allocations.purchase_solicitation.budget_structure_id.eq(budget_structure_id) &
-      purchase_solicitation_budget_allocations.purchase_solicitation.service_status.eq(PurchaseSolicitationServiceStatus::PENDING)
+      purchase_solicitation_items.purchase_solicitation.budget_structure_id.eq(budget_structure_id) &
+      purchase_solicitation_items.purchase_solicitation.service_status.eq(PurchaseSolicitationServiceStatus::PENDING)
     end
   end
 
   def self.not_purchase_solicitation(purchase_solicitation_id)
-    joins { purchase_solicitation_budget_allocation_items }.
-    joins { purchase_solicitation_budget_allocations }.
+    joins { purchase_solicitation_items }.
     where do
-      purchase_solicitation_budget_allocations.purchase_solicitation_id.not_eq(purchase_solicitation_id)
+      purchase_solicitation_items.purchase_solicitation_id.not_eq(purchase_solicitation_id)
     end
   end
 

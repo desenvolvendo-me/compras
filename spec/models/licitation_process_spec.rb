@@ -23,7 +23,7 @@ require 'app/models/reserve_fund'
 require 'app/models/indexer'
 require 'app/models/price_registration'
 require 'app/models/trading'
-require 'app/models/purchase_solicitation_budget_allocation_item'
+require 'app/models/purchase_solicitation_item'
 
 describe LicitationProcess do
   let(:current_prefecture) { double(:current_prefecture) }

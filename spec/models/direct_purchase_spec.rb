@@ -10,7 +10,6 @@ require 'app/models/direct_purchase_budget_allocation_item'
 require 'app/models/supply_authorization'
 require 'app/models/modality_limit'
 require 'app/business/direct_purchase_modality_limit_verificator'
-require 'app/models/purchase_solicitation_budget_allocation_item'
 
 describe DirectPurchase do
   it 'should return code/year as to_s method' do

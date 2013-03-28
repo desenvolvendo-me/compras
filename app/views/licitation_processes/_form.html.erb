@@ -177,7 +177,6 @@
     $(prefixNameUuid + "_budget_allocation_id").val(budget_allocation.budget_allocation_id);
     $(prefixNameUuid + "_budget_allocation_expense_nature").val(budget_allocation.expense_nature);
     $(prefixNameUuid + "_budget_allocation_amount").val(numberWithDelimiter(budget_allocation.amount));
-    $(prefixNameUuid + "_value").val(numberWithDelimiter(budget_allocation.total_items_value));
   }
 
   function renderBudgetAllocation(budget_allocation) {
@@ -244,10 +243,10 @@
     if (purchase_solicitation) {
       $.each(purchase_solicitation.budget_allocations, function (i, budget_allocation) {
         renderBudgetAllocation(budget_allocation);
+      });
 
-        $.each(budget_allocation.items, function (i, item) {
-          renderItem(item);
-        });
+      $.each(purchase_solicitation.items, function (i, item) {
+        renderItem(item);
       });
     }
   });

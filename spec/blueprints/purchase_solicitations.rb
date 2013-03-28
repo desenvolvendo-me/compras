@@ -15,6 +15,7 @@ PurchaseSolicitation.blueprint(:reparo) do
   purchase_solicitation_budget_allocations {
     [PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria)]
   }
+  items { [PurchaseSolicitationItem.make!(:item)] }
   budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
 end
 
@@ -34,6 +35,7 @@ PurchaseSolicitation.blueprint(:reparo_liberado) do
   purchase_solicitation_budget_allocations {
     [PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria)]
   }
+  items { [PurchaseSolicitationItem.make!(:item)] }
   budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
   purchase_solicitation_liberations { [PurchaseSolicitationLiberation.make(:reparo)] }
 end
@@ -54,6 +56,7 @@ PurchaseSolicitation.blueprint(:reparo_2013) do
   purchase_solicitation_budget_allocations {
     [PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria_2013)]
   }
+  items { [PurchaseSolicitationItem.make!(:arame_farpado)] }
   budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
   purchase_solicitation_liberations { [PurchaseSolicitationLiberation.make!(:reparo, :purchase_solicitation => object)] }
 end
@@ -74,6 +77,7 @@ PurchaseSolicitation.blueprint(:reparo_desenvolvimento) do
   purchase_solicitation_budget_allocations {
     [PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria)]
   }
+  items { [PurchaseSolicitationItem.make!(:item)] }
   budget_structure { BudgetStructure.make!(:secretaria_de_desenvolvimento) }
 end
 
@@ -92,6 +96,9 @@ PurchaseSolicitation.blueprint(:reparo_office) do
   no_service_justification { "n/a" }
   purchase_solicitation_budget_allocations {
     [PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria_office)]
+  }
+  items {
+    [PurchaseSolicitationItem.make!(:office), PurchaseSolicitationItem.make!(:arame_farpado)]
   }
   budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
 end

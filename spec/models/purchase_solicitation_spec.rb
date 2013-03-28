@@ -3,7 +3,7 @@ require 'model_helper'
 require 'lib/annullable'
 require 'lib/signable'
 require 'app/models/purchase_solicitation_budget_allocation'
-require 'app/models/purchase_solicitation_budget_allocation_item'
+require 'app/models/purchase_solicitation_item'
 require 'app/models/budget_allocation'
 require 'app/models/purchase_solicitation'
 require 'app/models/purchase_solicitation_liberation'
@@ -26,7 +26,7 @@ describe PurchaseSolicitation do
   it { should have_and_belong_to_many(:licitation_processes) }
   it { should have_many(:budget_allocations).dependent(:restrict) }
   it { should have_many(:purchase_solicitation_budget_allocations).dependent(:destroy).order(:id) }
-  it { should have_many(:items).through(:purchase_solicitation_budget_allocations)}
+  it { should have_many(:items).dependent(:restrict)}
   it { should have_many(:purchase_solicitation_liberations).dependent(:destroy).order(:sequence) }
   it { should have_one(:annul).dependent(:destroy) }
   it { should have_one(:direct_purchase) }
@@ -72,6 +72,14 @@ describe PurchaseSolicitation do
 
         expect(subject.errors[:service_status]).not_to include 'ainda não foi liberada"'
       end
+    end
+
+    it 'should have at least one item' do
+      expect(subject.items).to be_empty
+
+      subject.valid?
+
+      expect(subject.errors[:items]).to include 'é necessário cadastrar pelo menos um item'
     end
   end
 
@@ -190,20 +198,6 @@ describe PurchaseSolicitation do
     end
   end
 
-  describe '#clear_items_fulfiller_and_status' do
-    it 'should clear_fulfiller_and_status of all items' do
-      item1 = double(:item1)
-      item2 = double(:item2)
-
-      subject.stub(:items).and_return([item1, item2])
-
-      item1.should_receive(:clear_fulfiller_and_status)
-      item2.should_receive(:clear_fulfiller_and_status)
-
-      subject.clear_items_fulfiller_and_status
-    end
-  end
-
   context '#active_purchase_solicitation_liberation' do
     before do
       subject.stub(:purchase_solicitation_liberations).
@@ -255,6 +249,24 @@ describe PurchaseSolicitation do
           expect(subject.errors[:service_status]).not_to include 'ainda não foi liberada'
         end
       end
+    end
+  end
+
+  describe '#total_items_value' do
+    it 'should return 0 as the total value of items when have no items' do
+      expect(subject.items).to be_empty
+
+      expect(subject.total_items_value).to eq 0
+    end
+
+    it 'should calculate the total value of items' do
+      subject.stub(:items).and_return([
+        double(:estimated_total_price => 10),
+        double(:estimated_total_price => 20),
+        double(:estimated_total_price => 15)
+      ])
+
+      expect(subject.total_items_value).to eq 45
     end
   end
 end

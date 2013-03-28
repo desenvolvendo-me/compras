@@ -3,10 +3,6 @@
   <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
 
   <div class="yui3-g">
-    <div class="yui3-u-1-8">
-      <%= f.input :order, :disabled => true, :input_html => { :class => 'order' } %>
-    </div>
-
     <div class="yui3-u-7-8">
       <%= f.input :material, :label => f.object.decorator.material_label, :disabled => f.object.annulled?,
         :modal_url => modal_materials_path(:by_material_type => f.object.decorator.material_type_filter,

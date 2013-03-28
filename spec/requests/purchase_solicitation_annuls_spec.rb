@@ -97,13 +97,8 @@ feature 'PurchaseSolicitationAnnul' do
       expect(page).to have_disabled_field 'Justificativa para não atendimento'
     end
 
-    within_tab 'Dotações orçamentárias' do
+    within_tab 'Itens' do
       expect(page).to have_disabled_field 'Valor total dos itens'
-
-      expect(page).to have_disabled_field 'Dotação'
-      expect(page).to have_disabled_field 'Natureza da despesa'
-
-      expect(page).to have_disabled_field 'Item'
       expect(page).to have_disabled_field 'Material'
       expect(page).to have_disabled_field 'Marca/Referência'
       expect(page).to have_disabled_field 'Unidade'
@@ -111,17 +106,25 @@ feature 'PurchaseSolicitationAnnul' do
       expect(page).to have_disabled_field 'Valor unitário'
       expect(page).to have_disabled_field 'Valor total'
     end
-    expect(page).to have_disabled_element 'Adicionar Dotação',
-                    :reason => 'esta solicitação foi anulada e não pode ser editada'
-    expect(page).to have_disabled_element 'Adicionar Item',
-                    :reason => 'esta solicitação foi anulada e não pode ser editada'
-    expect(page).to have_disabled_element 'Remover Item',
-                    :reason => 'esta solicitação foi anulada e não pode ser editada'
-    expect(page).to have_disabled_element 'Remover Dotação',
-                    :reason => 'esta solicitação foi anulada e não pode ser editada'
+
+    within_tab 'Itens' do
+      expect(page).to have_disabled_element 'Adicionar Item',
+                      :reason => 'esta solicitação foi anulada e não pode ser editada'
+      expect(page).to have_disabled_element 'Remover Item',
+                      :reason => 'esta solicitação foi anulada e não pode ser editada'
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      expect(page).to have_disabled_field 'Dotação'
+      expect(page).to have_disabled_field 'Natureza da despesa'
+      expect(page).to have_disabled_element 'Adicionar Dotação',
+                      :reason => 'esta solicitação foi anulada e não pode ser editada'
+      expect(page).to have_disabled_element 'Remover Dotação',
+                      :reason => 'esta solicitação foi anulada e não pode ser editada'
+    end
 
     expect(page).to have_disabled_element 'Salvar',
-                    :reason => 'esta solicitação foi anulada e não pode ser editada'
+                    :reason => 'esta solicitação já está em uso ou anulada e não pode ser editada'
 
     click_link 'Anulação'
 

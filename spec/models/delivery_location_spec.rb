@@ -1,7 +1,6 @@
 require 'model_helper'
 require 'app/models/delivery_location'
 require 'app/models/purchase_solicitation_budget_allocation'
-require 'app/models/purchase_solicitation_budget_allocation_item'
 require 'app/models/purchase_solicitation'
 require 'app/models/direct_purchase'
 require 'app/models/price_registration'

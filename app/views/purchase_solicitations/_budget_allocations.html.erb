@@ -1,11 +1,4 @@
 <div id="budget_allocations_selector">
-
-  <div class="yui3-g">
-    <div class="yui3-u-1-3">
-      <%= f.input :total_allocations_items_value, :disabled => true, :input_html => { :value => number_with_precision(f.object.total_allocations_items_value) } %>
-    </div>
-  </div>
-
   <%= f.error :purchase_solicitation_budget_allocations %>
 
   <p>
@@ -33,18 +26,5 @@
     uuid: 'uuid_purchase_solicitation_budget_allocation',
     fieldsWrapper: '.purchase-solicitation-budget-allocation',
     appendItem: false
-  });
-
-  <% if f.object.annulled? %>
-    $('form.purchase_solicitation [data-disabled]').on('click', function(event){
-      event.stopImmediatePropagation();
-      return false;
-    });
-  <% end %>
-
-  $('form').on('change', '.budget-allocation', function (event, budget_allocation) {
-    if (budget_allocation) {
-      var inputs = $(this).closest('div.nested').find(':input');
-    }
   });
 </script>

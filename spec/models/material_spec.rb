@@ -1,7 +1,8 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/material'
-require 'app/models/purchase_solicitation_budget_allocation_item'
+require 'app/models/purchase_solicitation_item'
+require 'app/models/purchase_solicitation'
 require 'app/models/direct_purchase_budget_allocation_item'
 require 'app/models/administrative_process_budget_allocation_item'
 require 'app/models/price_collection_lot_item'
@@ -25,10 +26,11 @@ describe Material do
   it { should have_and_belong_to_many :licitation_objects }
   it { should have_many(:direct_purchase_budget_allocation_items).dependent(:restrict) }
   it { should have_many(:administrative_process_budget_allocation_items).dependent(:restrict) }
-  it { should have_many(:purchase_solicitation_budget_allocation_items).dependent(:restrict) }
+  it { should have_many(:purchase_solicitation_items).dependent(:restrict) }
   it { should have_many(:price_collection_lot_items).dependent(:restrict) }
   it { should have_many(:creditor_materials).dependent(:restrict) }
-  it { should have_many(:purchase_solicitation_budget_allocations).dependent(:restrict) }
+  it { should have_many(:purchase_solicitations).through(:purchase_solicitation_items).dependent(:restrict) }
+  it { should have_many(:purchase_solicitation_budget_allocations).through(:purchase_solicitations).dependent(:restrict) }
   it { should have_many(:materials_controls).dependent(:destroy) }
 
   it { should validate_presence_of :materials_class }

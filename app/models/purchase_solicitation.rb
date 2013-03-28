@@ -2,7 +2,7 @@ class PurchaseSolicitation < Compras::Model
   attr_accessible :accounting_year, :request_date, :responsible_id, :kind,
                   :delivery_location_id, :general_observations, :justification,
                   :purchase_solicitation_budget_allocations_attributes,
-                  :budget_structure_id
+                  :items_attributes, :budget_structure_id
 
   attr_readonly :code
 
@@ -23,7 +23,8 @@ class PurchaseSolicitation < Compras::Model
 
   has_many :purchase_solicitation_budget_allocations, :dependent => :destroy,
            :inverse_of => :purchase_solicitation, :order => :id
-  has_many :items, :through => :purchase_solicitation_budget_allocations
+  has_many :items, :class_name => 'PurchaseSolicitationItem', :dependent => :restrict,
+           :inverse_of => :purchase_solicitation,:order => :id
   has_many :budget_allocations, :through => :purchase_solicitation_budget_allocations,
            :dependent => :restrict
   has_many :purchase_solicitation_liberations, :dependent => :destroy, :order => :sequence, :inverse_of => :purchase_solicitation
@@ -32,6 +33,7 @@ class PurchaseSolicitation < Compras::Model
   has_one  :direct_purchase
 
   accepts_nested_attributes_for :purchase_solicitation_budget_allocations, :allow_destroy => true
+  accepts_nested_attributes_for :items, :allow_destroy => true
 
   delegate :amount, :description, :id, :to => :budget_allocation,
            :prefix => true, :allow_nil => true
@@ -41,7 +43,9 @@ class PurchaseSolicitation < Compras::Model
   validates :accounting_year, :kind, :delivery_location, :presence => true
   validates :accounting_year, :numericality => true, :mask => '9999', :allow_blank => true
   validates :purchase_solicitation_budget_allocations, :no_duplication => :budget_allocation_id
+  validates :items, :no_duplication => :material_id
   validate :must_have_at_least_one_budget_allocation
+  validate :must_have_at_least_one_item
   validate :validate_budget_structure_and_materials
   validate :validate_liberated_status
 
@@ -77,10 +81,10 @@ class PurchaseSolicitation < Compras::Model
     }
   }
 
-  def self.by_material(material_ids)
+  scope :by_material, lambda { |material_ids|
     joins { items }.
-      where { |purchase| purchase.items.material_id.in(material_ids) }
-  end
+    where { |purchase| purchase.items.material_id.in(material_ids) }
+  }
 
   def to_s
     "#{code}/#{accounting_year} #{budget_structure} - RESP: #{responsible}"
@@ -90,8 +94,8 @@ class PurchaseSolicitation < Compras::Model
     liberated? || partially_fulfilled?
   end
 
-  def total_allocations_items_value
-    purchase_solicitation_budget_allocations.collect(&:total_items_value).sum
+  def total_items_value
+    items.collect(&:estimated_total_price).sum
   end
 
   def change_status!(status)
@@ -114,10 +118,6 @@ class PurchaseSolicitation < Compras::Model
 
   def budget_structure
     super || direct_purchase.try(:budget_structure)
-  end
-
-  def clear_items_fulfiller_and_status
-    items.each(&:clear_fulfiller_and_status)
   end
 
   def annul!
@@ -162,8 +162,18 @@ class PurchaseSolicitation < Compras::Model
     end
   end
 
+  def must_have_at_least_one_item
+    unless items?
+      errors.add(:items, :must_have_at_least_one_item)
+    end
+  end
+
   def purchase_solicitation_budget_allocations?
     !purchase_solicitation_budget_allocations.reject(&:marked_for_destruction?).empty?
+  end
+
+  def items?
+    !items.reject(&:marked_for_destruction?).empty?
   end
 
   def materials_of_other_peding_purchase_solicitation
@@ -172,12 +182,10 @@ class PurchaseSolicitation < Compras::Model
   end
 
   def validate_budget_structure_and_materials
-    purchase_solicitation_budget_allocations.each do |ps_budget_allocation|
-      ps_budget_allocation.items.each do |item|
-        if materials_of_other_peding_purchase_solicitation.include?(item.material)
-          item.errors.add(:material, :already_exists_a_pending_purchase_solicitation_with_this_budget_structure_and_material)
-          errors.add(:base, :invalid)
-        end
+    items.each do |item|
+      if materials_of_other_peding_purchase_solicitation.include?(item.material)
+        item.errors.add(:material, :already_exists_a_pending_purchase_solicitation_with_this_budget_structure_and_material)
+        errors.add(:base, :invalid)
       end
     end
   end

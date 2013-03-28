@@ -1,14 +1,12 @@
 # encoding: utf-8
 require 'model_helper'
-require 'app/models/purchase_solicitation_budget_allocation_item'
-require 'app/models/purchase_solicitation_budget_allocation'
+require 'app/models/purchase_solicitation_item'
+require 'app/models/purchase_solicitation'
 require 'app/models/material'
 
-describe PurchaseSolicitationBudgetAllocationItem do
-  it { should belong_to :purchase_solicitation_budget_allocation }
+describe PurchaseSolicitationItem do
+  it { should belong_to :purchase_solicitation }
   it { should belong_to :material }
-
-  it { should have_one :purchase_solicitation }
 
   it { should validate_presence_of :material }
   it { should validate_presence_of :quantity }
@@ -23,7 +21,7 @@ describe PurchaseSolicitationBudgetAllocationItem do
     expect(subject.errors[:material]).to include "deve ter a característica de Serviço"
   end
 
-  it { should delegate(:services?).to(:purchase_solicitation_budget_allocation).allowing_nil(true) }
+  it { should delegate(:services?).to(:purchase_solicitation).allowing_nil(true) }
   it { should delegate(:material_characteristic).to(:material).allowing_nil(true) }
 
   it 'should calculate total price' do

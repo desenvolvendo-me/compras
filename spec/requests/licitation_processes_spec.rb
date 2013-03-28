@@ -1628,8 +1628,9 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Saldo da dotação', :with => '500,00'
       expect(page).to have_disabled_field 'Saldo da dotação'
 
-      expect(page).to have_field 'Valor previsto', :with => '600,00'
       expect(page).to have_button 'Remover Dotação'
+
+      fill_in 'Valor previsto', :with => '600,00'
     end
 
     within_tab "Itens" do
@@ -1812,7 +1813,8 @@ feature "LicitationProcesses" do
 
   scenario "item quantity sum when duplicated by another licitation process association" do
     PurchaseSolicitation.make!(:reparo_liberado, :accounting_year => Date.current.year,
-                               :purchase_solicitation_budget_allocations => [PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria_office_2_itens_liberados)] )
+                               :purchase_solicitation_budget_allocations => [PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria_office)],
+                               :items => [PurchaseSolicitationItem.make!(:office), PurchaseSolicitationItem.make!(:arame_farpado_2)])
     PurchaseSolicitation.make!(:reparo_2013, :accounting_year => Date.current.year, :code => '2',
                                :delivery_location => DeliveryLocation.make!(:health), :responsible => Employee.make!(:wenderson))
 

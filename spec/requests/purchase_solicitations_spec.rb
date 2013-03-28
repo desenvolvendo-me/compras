@@ -42,14 +42,7 @@ feature "PurchaseSolicitations" do
       fill_in 'Observações gerais', :with => 'Muitas cadeiras estão quebrando no escritório'
     end
 
-    within_tab 'Dotações orçamentárias' do
-      click_button "Adicionar Dotação"
-
-      within '.purchase-solicitation-budget-allocation:last' do
-        fill_modal 'Dotação', :with => '1', :field => 'Código'
-        fill_modal 'Natureza da despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
-      end
-
+    within_tab 'Itens' do
       click_button 'Adicionar Item'
 
       fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
@@ -65,6 +58,15 @@ feature "PurchaseSolicitations" do
 
       # asserting calculated total price of the item
       expect(page).to have_field 'Valor total', :with => '700,00'
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      click_button "Adicionar Dotação"
+
+      within '.purchase-solicitation-budget-allocation:last' do
+        fill_modal 'Dotação', :with => '1', :field => 'Código'
+        fill_modal 'Natureza da despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
+      end
     end
 
     click_button 'Salvar'
@@ -86,18 +88,18 @@ feature "PurchaseSolicitations" do
       expect(page).to have_select 'Status de atendimento', :selected => 'Pendente'
     end
 
-    within_tab 'Dotações orçamentárias' do
-      expect(page).to have_field "Dotação", :with => budget_allocation.to_s
-      expect(page).to have_field 'Natureza da despesa', :with => '3.0.10.01.12 - Vencimentos e Salários'
-
+    within_tab 'Itens' do
       expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
       expect(page).to have_field 'Unidade', :with => 'UN'
       expect(page).to have_field 'Marca/Referência', :with => 'Norton'
       expect(page).to have_field 'Quantidade', :with => '3,50'
       expect(page).to have_field 'Valor unitário', :with => '200,00'
       expect(page).to have_field 'Valor total', :with => '700,00'
+    end
 
-      expect(page).to have_field 'Item', :with => '1'
+    within_tab 'Dotações orçamentárias' do
+      expect(page).to have_field "Dotação", :with => budget_allocation.to_s
+      expect(page).to have_field 'Natureza da despesa', :with => '3.0.10.01.12 - Vencimentos e Salários'
     end
   end
 
@@ -133,17 +135,10 @@ feature "PurchaseSolicitations" do
       fill_in 'Observações gerais', :with => 'Muitas mesas estão quebrando no escritório'
     end
 
-    within_tab 'Dotações orçamentárias' do
-      click_button "Remover Dotação"
+    within_tab 'Itens' do
+      click_button 'Remover Item'
 
-      click_button "Adicionar Dotação"
-
-      within_modal 'Dotação' do
-        click_button 'Pesquisar'
-        click_record '2011 - Secretaria de Educação'
-      end
-
-      fill_modal 'Natureza da despesa', :with => 'Compra de Material', :field => 'Descrição'
+      expect(page).to have_field 'Valor total dos itens', :with => '0,00'
 
       click_button 'Adicionar Item'
 
@@ -158,6 +153,19 @@ feature "PurchaseSolicitations" do
 
       # asserting calculated unit price of the item
       expect(page).to have_field 'Valor total', :with => '5.000,00'
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      click_button "Remover Dotação"
+
+      click_button "Adicionar Dotação"
+
+      within_modal 'Dotação' do
+        click_button 'Pesquisar'
+        click_record '2011 - Secretaria de Educação'
+      end
+
+      fill_modal 'Natureza da despesa', :with => 'Compra de Material', :field => 'Descrição'
     end
 
     click_button 'Salvar'
@@ -176,10 +184,8 @@ feature "PurchaseSolicitations" do
       expect(page).to have_field 'Observações gerais', :with => 'Muitas mesas estão quebrando no escritório'
     end
 
-    within_tab 'Dotações orçamentárias' do
-      expect(page).to have_field "Dotação", :with => budget_allocation.to_s
-      expect(page).to have_field 'Natureza da despesa', :with => '3.0.10.01.11 - Compra de Material'
-
+    within_tab 'Itens' do
+      expect(page).to have_field 'Valor total dos itens', :with => '5.000,00'
       expect(page).to have_field 'Material', :with => '02.02.00001 - Arame farpado'
       expect(page).to have_field 'Unidade', :with => 'UN'
       expect(page).to have_field 'Marca/Referência', :with => 'Ferro SA'
@@ -187,11 +193,15 @@ feature "PurchaseSolicitations" do
       expect(page).to have_field 'Valor unitário', :with => '25,00'
       expect(page).to have_field 'Valor total', :with => '5.000,00'
 
-      expect(page).to have_field 'Item', :with => '1'
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      expect(page).to have_field "Dotação", :with => budget_allocation.to_s
+      expect(page).to have_field 'Natureza da despesa', :with => '3.0.10.01.11 - Compra de Material'
     end
   end
 
-  scenario 'should have at least one budget allocation with one item' do
+  scenario 'should have at least one budget allocation and one item' do
     navigate 'Processos de Compra > Solicitações de Compra'
 
     click_link 'Criar Solicitação de Compra'
@@ -200,13 +210,9 @@ feature "PurchaseSolicitations" do
 
     within_tab 'Dotações orçamentárias' do
       expect(page).to have_content 'é necessário cadastrar pelo menos uma dotação'
-
-      click_button 'Adicionar Dotação'
     end
 
-    click_button 'Salvar'
-
-    within_tab 'Dotações orçamentárias' do
+    within_tab 'Itens' do
       expect(page).to have_content 'é necessário cadastrar pelo menos um item'
     end
   end
@@ -223,27 +229,35 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Dotações orçamentárias' do
-      expect(page).to have_field 'Item'
-
-      click_button 'Remover Item'
-    end
-
-    click_button 'Salvar'
-
-    within_tab 'Dotações orçamentárias' do
-      expect(page).to_not have_field 'Item'
-      expect(page).to have_content 'é necessário cadastrar pelo menos um item'
-
-      expect(page).to have_field 'Dotação'
-
       click_button 'Remover Dotação'
     end
 
     click_button 'Salvar'
 
+    expect(page).to_not have_notice 'Solicitação de Compra 1/2012 editada com sucesso.'
+
     within_tab 'Dotações orçamentárias' do
-      expect(page).to_not have_field 'Dotação'
       expect(page).to have_content 'é necessário cadastrar pelo menos uma dotação'
+    end
+
+    click_link 'Voltar'
+
+    click_link "Limpar Filtro"
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Itens' do
+      click_button 'Remover Item'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to_not have_notice 'Solicitação de Compra 1/2012 editada com sucesso.'
+
+    within_tab 'Itens' do
+      expect(page).to have_content 'é necessário cadastrar pelo menos um item'
     end
   end
 
@@ -252,60 +266,45 @@ feature "PurchaseSolicitations" do
 
     click_link 'Criar Solicitação de Compra'
 
-    within_tab 'Dotações orçamentárias' do
+    within_tab 'Itens' do
       expect(page).to have_disabled_field 'Valor total dos itens'
 
-      click_button 'Adicionar Dotação'
+      click_button 'Adicionar Item'
 
-      within '.purchase-solicitation-budget-allocation:first' do
-        click_button 'Adicionar Item'
-
-        within '.item:last' do
-          fill_in 'Quantidade', :with => '3,00'
-          fill_in 'Valor unitário', :with => '10,00'
-          expect(page).to have_field 'Valor total', :with => '30,00'
-        end
-
-        click_button 'Adicionar Item'
-
-        within '.item:last' do
-          fill_in 'Quantidade', :with => '5,00'
-          fill_in 'Valor unitário', :with => '2,00'
-          expect(page).to have_field 'Valor total', :with => '10,00'
-        end
+      within '.item:first' do
+        fill_in 'Quantidade', :with => '3,00'
+        fill_in 'Valor unitário', :with => '10,00'
+        expect(page).to have_field 'Valor total', :with => '30,00'
       end
 
-      click_button 'Adicionar Dotação'
+      expect(page).to have_field 'Valor total dos itens', :with => '30,00'
 
-      within '.purchase-solicitation-budget-allocation:first' do
-        click_button 'Adicionar Item'
+      click_button 'Adicionar Item'
 
-        within '.item:last' do
-          fill_in 'Quantidade', :with => '10,00'
-          fill_in 'Valor unitário', :with => '5,50'
-          expect(page).to have_field 'Valor total', :with => '55,00'
-        end
+      within '.item:first' do
+        fill_in 'Quantidade', :with => '5,00'
+        fill_in 'Valor unitário', :with => '2,00'
+        expect(page).to have_field 'Valor total', :with => '10,00'
+      end
+
+      expect(page).to have_field 'Valor total dos itens', :with => '40,00'
+
+      click_button 'Adicionar Item'
+
+      within '.item:first' do
+        fill_in 'Quantidade', :with => '10,00'
+        fill_in 'Valor unitário', :with => '5,50'
+        expect(page).to have_field 'Valor total', :with => '55,00'
       end
 
       expect(page).to have_field 'Valor total dos itens', :with => '95,00'
 
       # removing an item
-
-      within '.purchase-solicitation-budget-allocation:last' do
-        within '.item:last' do
-          click_button 'Remover Item'
-        end
+      within '.item:last' do
+        click_button 'Remover Item'
       end
 
-      expect(page).to have_field 'Valor total dos itens', :with => '85,00'
-
-      # removing an entire budget allocation
-
-      within '.purchase-solicitation-budget-allocation:first' do
-        click_button 'Remover Dotação'
-      end
-
-      expect(page).to have_field 'Valor total dos itens', :with => '30,00'
+      expect(page).to have_field 'Valor total dos itens', :with => '65,00'
     end
   end
 
@@ -333,14 +332,7 @@ feature "PurchaseSolicitations" do
       fill_in 'Observações gerais', :with => 'Muitas cadeiras estão quebrando no escritório'
     end
 
-    within_tab 'Dotações orçamentárias' do
-      click_button "Adicionar Dotação"
-
-      within '.purchase-solicitation-budget-allocation:last' do
-        fill_modal 'Dotação', :with => '1', :field => 'Código'
-        fill_modal 'Natureza da despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
-      end
-
+    within_tab 'Itens' do
       click_button 'Adicionar Item'
 
       fill_modal 'Material', :with => 'Office', :field => 'Descrição'
@@ -348,6 +340,15 @@ feature "PurchaseSolicitations" do
       fill_in 'Marca/Referência', :with => 'Norton'
       fill_in 'Quantidade', :with => '3,00'
       fill_in 'Valor unitário', :with => '200,00'
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      click_button "Adicionar Dotação"
+
+      within '.purchase-solicitation-budget-allocation:last' do
+        fill_modal 'Dotação', :with => '1', :field => 'Código'
+        fill_modal 'Natureza da despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
+      end
     end
 
     click_button 'Salvar'
@@ -369,18 +370,18 @@ feature "PurchaseSolicitations" do
       expect(page).to have_select 'Status de atendimento', :selected => 'Pendente'
     end
 
-    within_tab 'Dotações orçamentárias' do
-      expect(page).to have_field "Dotação", :with => budget_allocation.to_s
-      expect(page).to have_field 'Natureza da despesa', :with => '3.0.10.01.12 - Vencimentos e Salários'
-
+    within_tab 'Itens' do
       expect(page).to have_field 'Material', :with => '01.01.00002 - Office'
       expect(page).to have_field 'Unidade', :with => 'UN'
       expect(page).to have_field 'Marca/Referência', :with => 'Norton'
       expect(page).to have_field 'Quantidade', :with => '3,00'
       expect(page).to have_field 'Valor unitário', :with => '200,00'
       expect(page).to have_field 'Valor total', :with => '600,00'
+    end
 
-      expect(page).to have_field 'Item', :with => '1'
+    within_tab 'Dotações orçamentárias' do
+      expect(page).to have_field "Dotação", :with => budget_allocation.to_s
+      expect(page).to have_field 'Natureza da despesa', :with => '3.0.10.01.12 - Vencimentos e Salários'
     end
   end
 
@@ -435,14 +436,7 @@ feature "PurchaseSolicitations" do
       fill_in 'Observações gerais', :with => 'Muitas cadeiras estão quebrando no escritório'
     end
 
-    within_tab 'Dotações orçamentárias' do
-      click_button "Adicionar Dotação"
-
-      within '.purchase-solicitation-budget-allocation:last' do
-        fill_modal 'Dotação', :with => '1', :field => 'Código'
-        fill_modal 'Natureza da despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
-      end
-
+    within_tab 'Itens' do
       click_button 'Adicionar Item'
 
       fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
@@ -452,11 +446,20 @@ feature "PurchaseSolicitations" do
       fill_in 'Valor unitário', :with => '200,00'
     end
 
+    within_tab 'Dotações orçamentárias' do
+      click_button "Adicionar Dotação"
+
+      within '.purchase-solicitation-budget-allocation:last' do
+        fill_modal 'Dotação', :with => '1', :field => 'Código'
+        fill_modal 'Natureza da despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
+      end
+    end
+
     click_button 'Salvar'
 
     expect(page).to_not have_notice 'Solicitação de Compra 1/2012 criada com sucesso.'
 
-    within_tab 'Dotações orçamentárias' do
+    within_tab 'Itens' do
       expect(page).to have_content "já existe uma solicitação de compra pendente para este solicitante e material"
     end
   end
@@ -474,7 +477,7 @@ feature "PurchaseSolicitations" do
       click_link purchase_solicitation.decorator.code_and_year
     end
 
-    within_tab 'Dotações orçamentárias' do
+    within_tab 'Itens' do
       fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
     end
 
@@ -482,7 +485,7 @@ feature "PurchaseSolicitations" do
 
     expect(page).to_not have_notice 'Solicitação de Compra 1/2012 criada com sucesso.'
 
-    within_tab 'Dotações orçamentárias' do
+    within_tab 'Itens' do
       expect(page).to have_content "já existe uma solicitação de compra pendente para este solicitante e material"
     end
   end
@@ -538,12 +541,14 @@ feature "PurchaseSolicitations" do
   end
 
   scenario "purchase of services" do
+    item = PurchaseSolicitationItem.make!(:item, :material => Material.make!(:manutencao))
     PurchaseSolicitation.make!(:reparo,
+                               :items => [item],
                                :kind => PurchaseSolicitationKind::SERVICES)
     ExpenseNature.make!(:vencimento_e_salarios)
     budget_allocation = BudgetAllocation.make!(:alocacao)
     Material.make!(:antivirus)
-    Material.make!(:manutencao, :material_type => MaterialType::SERVICE)
+    Material.make!(:office, :material_type => MaterialType::SERVICE)
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
@@ -551,14 +556,7 @@ feature "PurchaseSolicitations" do
 
     select "Serviços", :on => "Tipo de solicitação"
 
-    within_tab "Dotações orçamentárias" do
-      click_button "Adicionar Dotação"
-
-      within '.purchase-solicitation-budget-allocation:last' do
-        fill_modal 'Dotação', :with => '1', :field => 'Código'
-        fill_modal 'Natureza da despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
-      end
-
+    within_tab 'Itens' do
       click_button 'Adicionar Item'
 
       within_modal "Serviço" do
@@ -573,6 +571,15 @@ feature "PurchaseSolicitations" do
       end
     end
 
+    within_tab "Dotações orçamentárias" do
+      click_button "Adicionar Dotação"
+
+      within '.purchase-solicitation-budget-allocation:last' do
+        fill_modal 'Dotação', :with => '1', :field => 'Código'
+        fill_modal 'Natureza da despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
+      end
+    end
+
     click_link "Voltar"
 
     click_link "Limpar Filtro"
@@ -581,7 +588,7 @@ feature "PurchaseSolicitations" do
       click_link "1/2012"
     end
 
-    within_tab "Dotações orçamentárias" do
+    within_tab "Itens" do
       clear_modal "Serviço"
 
       within_modal "Serviço" do
@@ -618,14 +625,7 @@ feature "PurchaseSolicitations" do
       fill_in 'Observações gerais', :with => 'Muitas cadeiras estão quebrando no escritório'
     end
 
-    within_tab 'Dotações orçamentárias' do
-      click_button "Adicionar Dotação"
-
-      within '.purchase-solicitation-budget-allocation:last' do
-        fill_modal 'Dotação', :with => '1', :field => 'Código'
-        fill_modal 'Natureza da despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
-      end
-
+    within_tab 'Itens' do
       click_button 'Adicionar Item'
 
       fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
@@ -635,7 +635,7 @@ feature "PurchaseSolicitations" do
 
       click_button 'Adicionar Item'
 
-      within '#allocations .item:last' do
+      within '.item:first' do
         fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
         fill_in 'Marca/Referência', :with => 'Norton'
         fill_in 'Quantidade', :with => '2,0'
@@ -643,12 +643,21 @@ feature "PurchaseSolicitations" do
       end
     end
 
+    within_tab 'Dotações orçamentárias' do
+      click_button "Adicionar Dotação"
+
+      within '.purchase-solicitation-budget-allocation:last' do
+        fill_modal 'Dotação', :with => '1', :field => 'Código'
+        fill_modal 'Natureza da despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
+      end
+    end
+
     click_button 'Salvar'
 
     expect(page).to_not have_notice 'Solicitação de Compra 1/2012 criada com sucesso.'
 
-    within_tab 'Dotações orçamentárias' do
-      within '#allocations .item:last' do
+    within_tab 'Itens' do
+      within '.item:last' do
         expect(page).to have_content 'já está em uso'
       end
     end
