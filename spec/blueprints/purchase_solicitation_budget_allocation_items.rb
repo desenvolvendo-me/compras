@@ -14,6 +14,14 @@ PurchaseSolicitationBudgetAllocationItem.blueprint(:arame_farpado) do
   status { PurchaseSolicitationBudgetAllocationItemStatus::PENDING }
 end
 
+PurchaseSolicitationBudgetAllocationItem.blueprint(:arame_farpado_2) do
+  material { Material.make!(:arame_farpado) }
+  brand { "Arame 2" }
+  quantity { 10 }
+  unit_price { 200.0 }
+  status { PurchaseSolicitationBudgetAllocationItemStatus::PENDING }
+end
+
 PurchaseSolicitationBudgetAllocationItem.blueprint(:office) do
   material { Material.make!(:office) }
   brand { "Office" }

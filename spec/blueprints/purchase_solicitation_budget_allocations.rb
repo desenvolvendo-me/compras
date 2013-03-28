@@ -25,5 +25,5 @@ PurchaseSolicitationBudgetAllocation.blueprint(:alocacao_primaria_office_2_itens
   expense_nature { ExpenseNature.make!(:compra_de_material) }
   blocked { false }
   items { [PurchaseSolicitationBudgetAllocationItem.make!(:office),
-           PurchaseSolicitationBudgetAllocationItem.make!(:arame_farpado)] }
+           PurchaseSolicitationBudgetAllocationItem.make!(:arame_farpado_2)] }
 end

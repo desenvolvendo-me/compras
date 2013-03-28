@@ -1541,143 +1541,6 @@ feature "LicitationProcesses" do
                                 :options => ['Concorrência'])
   end
 
-  scenario 'when select concessions_and_permits as object_type should show only best_auction_or_offer' do
-    JudgmentForm.make!(:global_com_menor_preco) # LOWEST_PRICE
-    JudgmentForm.make!(:por_item_com_melhor_tecnica) # BEST_TECHNIQUE
-    JudgmentForm.make!(:por_lote_com_tecnica_e_preco) # TECHNICAL_AND_PRICE
-    JudgmentForm.make!(:global_com_melhor_lance_ou_oferta) # BEST_AUCTION_OR_OFFER
-    JudgmentForm.make!(:por_item_com_menor_preco) # LOWEST_PRICE
-
-    navigate 'Processos de Compra > Processos de Compras'
-
-    click_link 'Criar Processo de Compra'
-
-    within_tab 'Principal' do
-      select 'Concessões e permissões', :from => 'Tipo de objeto'
-      select 'Concorrência', :from => 'Modalidade'
-
-      expect(page).to have_select('Forma de julgamento',
-                                  :options => ['Global com Melhor Lance ou Oferta'])
-    end
-  end
-
-  scenario 'when select call_notice as object_type should show only best_technique' do
-    JudgmentForm.make!(:global_com_menor_preco) # LOWEST_PRICE
-    JudgmentForm.make!(:por_item_com_melhor_tecnica) # BEST_TECHNIQUE
-    JudgmentForm.make!(:por_lote_com_tecnica_e_preco) # TECHNICAL_AND_PRICE
-    JudgmentForm.make!(:global_com_melhor_lance_ou_oferta) # BEST_AUCTION_OR_OFFER
-    JudgmentForm.make!(:por_item_com_menor_preco) # LOWEST_PRICE
-
-    navigate 'Processos de Compra > Processos de Compras'
-
-    click_link 'Criar Processo de Compra'
-
-    within_tab 'Principal' do
-      select 'Edital de chamamento/credenciamento', :from => 'Tipo de objeto'
-      select 'Concurso', :from => 'Modalidade'
-
-      expect(page).to have_select('Forma de julgamento',
-                                  :options => ['Por Item com Melhor Técnica'])
-    end
-  end
-
-  scenario 'when select construction_and_engineering_services as object_type should show only lowest_price and best_technique' do
-    JudgmentForm.make!(:global_com_menor_preco) # LOWEST_PRICE
-    JudgmentForm.make!(:por_item_com_melhor_tecnica) # BEST_TECHNIQUE
-    JudgmentForm.make!(:por_lote_com_tecnica_e_preco) # TECHNICAL_AND_PRICE
-    JudgmentForm.make!(:global_com_melhor_lance_ou_oferta) # BEST_AUCTION_OR_OFFER
-    JudgmentForm.make!(:por_item_com_menor_preco) # LOWEST_PRICE
-
-    navigate 'Processos de Compra > Processos de Compras'
-
-    click_link 'Criar Processo de Compra'
-
-    within_tab 'Principal' do
-      select 'Obras e serviços de engenharia', :from => 'Tipo de objeto'
-      select 'Concorrência', :from => 'Modalidade'
-
-      expect(page).to have_select('Forma de julgamento',
-                                  :options => ['Por Item com Melhor Técnica', 'Por Item com Menor Preço'])
-
-      select 'Tomada de Preço', :from => 'Modalidade'
-
-      expect(page).to have_select('Forma de julgamento',
-                                  :options => ['Por Item com Melhor Técnica', 'Por Item com Menor Preço'])
-
-      select 'Convite', :from => 'Modalidade'
-
-      expect(page).to have_select('Forma de julgamento',
-                                  :options => ['Por Item com Melhor Técnica', 'Por Item com Menor Preço'])
-
-      select 'Concurso', :from => 'Modalidade'
-
-      expect(page).to have_select('Forma de julgamento',
-                                  :options => ['Por Item com Melhor Técnica', 'Por Item com Menor Preço'])
-
-      select 'Pregão', :from => 'Modalidade'
-
-      expect(page).to have_select('Forma de julgamento',
-                                  :options => ['Por Item com Melhor Técnica', 'Por Item com Menor Preço'])
-    end
-  end
-
-  scenario 'when select purchase_and_services as object_type should show only lowest_price and best_technique' do
-    JudgmentForm.make!(:global_com_menor_preco) # LOWEST_PRICE
-    JudgmentForm.make!(:por_item_com_melhor_tecnica) # BEST_TECHNIQUE
-    JudgmentForm.make!(:por_lote_com_tecnica_e_preco) # TECHNICAL_AND_PRICE
-    JudgmentForm.make!(:global_com_melhor_lance_ou_oferta) # BEST_AUCTION_OR_OFFER
-    JudgmentForm.make!(:por_item_com_menor_preco) # LOWEST_PRICE
-
-    navigate 'Processos de Compra > Processos de Compras'
-
-    click_link 'Criar Processo de Compra'
-
-    within_tab 'Principal' do
-      select 'Compras e serviços', :from => 'Tipo de objeto'
-      select 'Concorrência', :from => 'Modalidade'
-
-      expect(page).to have_select('Forma de julgamento',
-                                  :options => ['Por Item com Melhor Técnica', 'Por Item com Menor Preço'])
-
-      select 'Tomada de Preço', :from => 'Modalidade'
-
-      expect(page).to have_select('Forma de julgamento',
-                                  :options => ['Por Item com Melhor Técnica', 'Por Item com Menor Preço'])
-
-      select 'Convite', :from => 'Modalidade'
-
-      expect(page).to have_select('Forma de julgamento',
-                                  :options => ['Por Item com Melhor Técnica', 'Por Item com Menor Preço'])
-
-      select 'Pregão', :from => 'Modalidade'
-
-      expect(page).to have_select('Forma de julgamento',
-                                  :options => ['Por Item com Melhor Técnica', 'Por Item com Menor Preço'])
-    end
-  end
-
-  scenario 'when clear object_type should not filter licitation_kind in judgment_form modal' do
-    JudgmentForm.make!(:global_com_menor_preco) # LOWEST_PRICE
-    JudgmentForm.make!(:por_item_com_melhor_tecnica) # BEST_TECHNIQUE
-    JudgmentForm.make!(:por_lote_com_tecnica_e_preco) # TECHNICAL_AND_PRICE
-    JudgmentForm.make!(:global_com_melhor_lance_ou_oferta) # BEST_AUCTION_OR_OFFER
-    JudgmentForm.make!(:por_item_com_menor_preco) # LOWEST_PRICE
-
-    navigate 'Processos de Compra > Processos de Compras'
-
-    click_link 'Criar Processo de Compra'
-
-    within_tab 'Principal' do
-      select 'Compras e serviços', :from => 'Tipo de objeto'
-
-      select '', :from => 'Tipo de objeto'
-
-      expect(page).to have_select('Modalidade', :options => [])
-
-      expect(page).to have_select('Forma de julgamento', :options => [])
-    end
-  end
-
   scenario "filtering modalities based on seleted object type" do
     navigate 'Processos de Compra > Processos de Compras'
 
@@ -1707,6 +1570,174 @@ feature "LicitationProcesses" do
 
     expect(page).to have_select('Modalidade',
                                 :options => ['Concorrência', 'Tomada de Preço', 'Convite', 'Concurso', 'Pregão'])
+  end
+
+  scenario 'budget allocations should be fulfilled automatically when fulfill purchase_solicitation' do
+    PurchaseSolicitation.make!(:reparo_liberado, :accounting_year => Date.current.year)
+    Employee.make!(:sobrinho)
+    Capability.make!(:reforma)
+    PaymentMethod.make!(:dinheiro)
+    DocumentType.make!(:fiscal)
+    JudgmentForm.make!(:por_item_com_melhor_tecnica)
+    BudgetAllocation.make!(:alocacao)
+    Material.make!(:antivirus)
+    Indexer.make!(:xpto)
+
+    navigate 'Processos de Compra > Processos de Compras'
+
+    click_link 'Criar Processo de Compra'
+
+    expect(page).to have_content "Criar Processo"
+
+    expect(page).to_not have_link 'Publicações'
+
+    expect(page).to_not have_button 'Apurar'
+
+    expect(page).to have_disabled_field 'Status'
+
+    within_tab 'Principal' do
+      choose 'Processo licitatório'
+      select 'Global', :from => 'Tipo de empenho'
+
+      select 'Compras e serviços', :from => 'Tipo de objeto'
+      select 'Concorrência', :from => 'Modalidade'
+      select 'Por Item com Melhor Técnica', :from =>'Forma de julgamento'
+      fill_in 'Objeto do processo de compra', :with => 'Licitação para compra de carteiras'
+      fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
+      fill_in 'Inciso', :with => 'Item 1'
+
+      check 'Registro de preço'
+      select 'Empreitada integral', :from => 'Forma de execução'
+      select 'Fiança bancária', :from => 'Tipo de garantia'
+      fill_modal 'Índice de reajuste', :with => 'XPTO'
+      fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
+      fill_in 'Valor da caução', :with => '50,00'
+    end
+
+    within_tab "Solicitantes" do
+      fill_with_autocomplete 'Solicitações de compra', :with => '1'
+
+      within_records do
+        expect(page).to have_content 'Código'
+        expect(page).to have_content 'Solicitante'
+        expect(page).to have_content 'Responsável pela solicitação'
+
+        within 'tbody tr' do
+          expect(page).to have_content '1/2013'
+          expect(page).to have_content '1 - Secretaria de Educação'
+          expect(page).to have_content 'Gabriel Sobrinho'
+        end
+      end
+    end
+
+    within_tab 'Prazos' do
+      fill_in 'Data da expedição', :with => '21/03/2012'
+      fill_in 'Data da disponibilidade', :with => I18n.l(Date.current)
+      fill_modal 'Contato para informações', :with => '958473', :field => 'Matrícula'
+
+      fill_in 'Término do recebimento dos envelopes', :with => I18n.l(Date.current)
+      fill_in 'Hora do recebimento', :with => '14:00'
+
+      fill_in 'Validade da proposta', :with => '5'
+      select 'dia/dias', :from => 'Período da validade da proposta'
+
+      fill_in 'Prazo de entrega', :with => '1'
+      select 'ano/anos', :from => 'Período do prazo de entrega'
+    end
+
+    within_tab 'Documentos' do
+      fill_modal 'Tipo de documento', :with => 'Fiscal', :field => 'Descrição'
+    end
+
+    within_tab 'Orçamento' do
+      expect(page).to have_button 'Adicionar Dotação'
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Vencimentos e Salários'
+
+      expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
+      expect(page).to have_disabled_field 'Compl. do elemento'
+
+      expect(page).to have_field 'Saldo da dotação', :with => '500,00'
+      expect(page).to have_disabled_field 'Saldo da dotação'
+
+      expect(page).to have_field 'Valor previsto', :with => '600,00'
+      expect(page).to have_button 'Remover Dotação'
+    end
+
+    within_tab "Itens" do
+      expect(page).to have_field 'Item', :with => '1'
+
+      expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
+
+      expect(page).to have_field 'Unidade', :with => 'UN'
+      expect(page).to have_disabled_field 'Unidade'
+
+      expect(page).to have_field 'Quantidade', :with => '3,00'
+
+      expect(page).to have_field 'Valor unitário máximo', :with => '200,00'
+
+      expect(page).to have_field 'Valor total', :with => '600,00'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Processo de Compra 1/2012 criado com sucesso.'
+
+    within_tab 'Solicitantes' do
+      within_records do
+        expect(page).to have_content 'Código'
+        expect(page).to have_content 'Solicitante'
+        expect(page).to have_content 'Responsável pela solicitação'
+
+        within 'tbody tr' do
+          expect(page).to have_content '1/2013'
+          expect(page).to have_content '1 - Secretaria de Educação'
+          expect(page).to have_content 'Gabriel Sobrinho'
+        end
+      end
+    end
+
+    within_tab 'Orçamento' do
+      expect(page).to have_button 'Adicionar Dotação'
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Vencimentos e Salários'
+
+      expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
+      expect(page).to have_disabled_field 'Compl. do elemento'
+
+      expect(page).to have_field 'Saldo da dotação', :with => '500,00'
+      expect(page).to have_disabled_field 'Saldo da dotação'
+
+      expect(page).to have_field 'Valor previsto', :with => '600,00'
+
+      expect(page).to have_button 'Remover Dotação'
+    end
+
+    within_tab 'Itens' do
+      expect(page).to have_field 'Item', :with => '1'
+      expect(page).to have_disabled_field 'Item'
+
+      expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
+
+      expect(page).to have_field 'Unidade', :with => 'UN'
+      expect(page).to have_disabled_field 'Unidade'
+
+      expect(page).to have_field 'Quantidade', :with => '3'
+
+      expect(page).to have_field 'Valor unitário máximo', :with => '200,00'
+
+      expect(page).to have_field 'Valor total', :with => '600,00'
+    end
+
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    click_link "Limpar Filtro"
+
+    within_records do
+      click_link '1/2013'
+    end
+
+    within_tab 'Principal' do
+      expect(page).to have_select 'Status de atendimento', :selected => 'Em processo de compra'
+    end
   end
 
   scenario 'assert javascript over object type' do
@@ -1809,4 +1840,60 @@ feature "LicitationProcesses" do
       end
     end
   end
+
+  scenario "item quantity sum when duplicated by another licitation process association" do
+    PurchaseSolicitation.make!(:reparo_liberado, :accounting_year => Date.current.year,
+                               :purchase_solicitation_budget_allocations => [PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria_office_2_itens_liberados)] )
+    PurchaseSolicitation.make!(:reparo_2013, :accounting_year => Date.current.year, :code => '2',
+                               :delivery_location => DeliveryLocation.make!(:health), :responsible => Employee.make!(:wenderson))
+
+    navigate 'Processos de Compra > Processos de Compras'
+
+    click_link 'Criar Processo de Compra'
+
+    within_tab "Solicitantes" do
+      fill_with_autocomplete 'Solicitações de compra', :with => '1'
+
+      within_records do
+        expect(page).to have_content 'Código'
+        expect(page).to have_content 'Solicitante'
+        expect(page).to have_content 'Responsável pela solicitação'
+
+        within 'tbody tr' do
+          expect(page).to have_content '1/2013'
+          expect(page).to have_content '1 - Secretaria de Educação'
+          expect(page).to have_content 'Gabriel Sobrinho'
+        end
+      end
+    end
+
+    within_tab "Itens / Justificativa" do
+      expect(page).to have_field 'Quantidade', :with => '10,00'
+
+      expect(page).to have_field 'Valor total', :with => '2.000,00'
+    end
+
+    within_tab "Solicitantes" do
+      fill_with_autocomplete 'Solicitações de compra', :with => '2'
+
+      within_records do
+        expect(page).to have_content 'Código'
+        expect(page).to have_content 'Solicitante'
+        expect(page).to have_content 'Responsável pela solicitação'
+
+        within 'tbody tr:nth-child(2)' do
+          expect(page).to have_content '2/2013'
+          expect(page).to have_content '1 - Secretaria de Educação'
+          expect(page).to have_content 'Wenderson Malheiros'
+        end
+      end
+    end
+
+    within_tab "Itens / Justificativa" do
+      expect(page).to have_field 'Quantidade', :with => '109,00'
+
+      expect(page).to have_field 'Valor total', :with => '21.800,00'
+    end
+  end
+
 end
