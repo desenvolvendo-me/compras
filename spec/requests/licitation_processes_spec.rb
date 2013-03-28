@@ -1541,37 +1541,6 @@ feature "LicitationProcesses" do
                                 :options => ['Concorrência'])
   end
 
-  scenario "filtering modalities based on seleted object type" do
-    navigate 'Processos de Compra > Processos de Compras'
-
-    click_link 'Criar Processo de Compra'
-
-    select 'Compras e serviços', :on => "Tipo de objeto"
-
-    expect(page).to have_select('Modalidade',
-                                :options => ['Concorrência', 'Tomada de Preço', 'Convite', 'Pregão'])
-
-    select 'Alienação de bens', :on => "Tipo de objeto"
-
-    expect(page).to have_select('Modalidade',
-                                :options => ['Leilão'])
-
-    select 'Concessões e permissões', :on => "Tipo de objeto"
-
-    expect(page).to have_select('Modalidade',
-                                :options => ['Concorrência'])
-
-    select 'Edital de chamamento/credenciamento', :on => "Tipo de objeto"
-
-    expect(page).to have_select('Modalidade',
-                                :options => ['Concurso'])
-
-    select 'Obras e serviços de engenharia', :on => "Tipo de objeto"
-
-    expect(page).to have_select('Modalidade',
-                                :options => ['Concorrência', 'Tomada de Preço', 'Convite', 'Concurso', 'Pregão'])
-  end
-
   scenario 'budget allocations should be fulfilled automatically when fulfill purchase_solicitation' do
     PurchaseSolicitation.make!(:reparo_liberado, :accounting_year => Date.current.year)
     Employee.make!(:sobrinho)
