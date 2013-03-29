@@ -25,34 +25,8 @@ describe DirectPurchasesController do
   end
 
   context 'POST #create' do
-    it 'should assign the fulfill of purchase_solicitation_budget_allocation_item' do
-      DirectPurchase.any_instance.stub(:transaction).and_yield
-      DirectPurchase.any_instance.stub(:save).and_return(true)
-      DirectPurchase.any_instance.stub_chain(:errors, :empty?).and_return(false)
-
-      post :create
-    end
-
-    context 'without purchase_solicitation' do
-      it 'should not update status of purchase solicitation' do
-        DirectPurchase.any_instance.stub(:transaction).and_yield
-        DirectPurchase.any_instance.stub(:save).and_return(true)
-        DirectPurchase.any_instance.stub_chain(:errors, :empty?).and_return(false)
-
-        post :create, :direct_purchase => {}
-      end
-    end
-
     context 'with purchase_solicitation' do
       let(:purchase_solicitation) { PurchaseSolicitation.make!(:reparo) }
-
-      it 'should update the status of pending items to attended' do
-        DirectPurchase.any_instance.stub(:transaction).and_yield
-        DirectPurchase.any_instance.stub(:save).and_return(true)
-        DirectPurchase.any_instance.stub_chain(:errors, :empty?).and_return(false)
-
-        post :create, :direct_purchase => { :purchase_solicitation_id => purchase_solicitation.id }
-      end
 
       it 'updates the status of a purchase solicitation through PurchaseSolicitationStatusChanger' do
         DirectPurchase.any_instance.stub(:save).and_return(true)
