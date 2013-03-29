@@ -6,6 +6,8 @@ class PurchaseSolicitation < Compras::Model
 
   attr_readonly :code
 
+  attr_accessor :autocomplete_budget_allocation, :autocomplete_expense_nature
+
   auto_increment :code, :by => :accounting_year
 
   attr_modal :code, :accounting_year, :kind, :delivery_location_id, :budget_structure_id, :responsible_id
@@ -26,6 +28,8 @@ class PurchaseSolicitation < Compras::Model
   has_many :items, :class_name => 'PurchaseSolicitationItem', :dependent => :restrict,
            :inverse_of => :purchase_solicitation,:order => :id
   has_many :budget_allocations, :through => :purchase_solicitation_budget_allocations,
+           :dependent => :restrict
+  has_many :expense_natures, :through => :purchase_solicitation_budget_allocations,
            :dependent => :restrict
   has_many :purchase_solicitation_liberations, :dependent => :destroy, :order => :sequence, :inverse_of => :purchase_solicitation
 
@@ -54,10 +58,6 @@ class PurchaseSolicitation < Compras::Model
 
   scope :by_material_id, lambda { |material_id|
     joins { items }.where { items.material_id.eq(material_id) }
-  }
-
-  scope :by_pending_or_ids, lambda { |ids|
-    where { id.in(ids) }
   }
 
   scope :except_ids, lambda { |ids| where { id.not_in(ids) } }
