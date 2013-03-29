@@ -47,6 +47,12 @@ class BudgetAllocation < Compras::Model
     where { (budget_structure.full_code.like("#{q}%")  | expense_nature.description.like("#{q}%")) }
   }
 
+  scope :budget_structure_id, lambda { |budget_structure_id|
+    where { |budget_allocation|
+      budget_allocation.budget_structure_id.eq(budget_structure_id)
+    }
+  }
+
   def self.filter(options)
     query = scoped
     query = query.where { budget_structure_id.eq(options[:budget_structure_id]) } if options[:budget_structure_id].present?
@@ -57,12 +63,6 @@ class BudgetAllocation < Compras::Model
     query = query.joins { subfunction }.where { subfunction.function_id.eq(options[:function_id]) } if options[:function_id].present?
     query = query.where { descriptor_id.eq(options[:descriptor_id]) } if options[:descriptor_id].present?
     query
-  end
-
-  def self.budget_structure_id(budget_structure_id)
-    where { |budget_allocation|
-      budget_allocation.budget_structure_id.eq(budget_structure_id)
-    }
   end
 
   def reserved_value
