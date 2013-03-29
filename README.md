@@ -27,14 +27,30 @@ Gestão de compras e licitações do município.
 
 A versão do PostgreSQL dever ser >= 9.1.
 
-Crie um usuário chamado `compras` com permissão para criar banco de dados.
+Crie um usuário chamado `compras` com permissão para criar banco de dados, ou altere o usuário do `database.yml` após executar o comando abaixo.
 
     $ cp config/database.sample.yml config/database.yml
     $ bundle exec rake db:create db:migrate db:test:prepare db:seed
 
 ### Servidor
 
-    $ bundle exec puma
+Usamos a [gem foreman](https://github.com/ddollar/foreman) para subir o servidor.
+
+Instale a gem:
+
+    $ gem install foreman
+
+Crie o arquivo .env no diretório do projeto com o seguinte conteúdo:
+
+    RACK_ENV=development
+    RAILS_RELATIVE_URL_ROOT=/compras
+    PORT=8080
+
+E para executar o servidor:
+
+    $ foreman start
+
+Feito isto o projeto estará disponível na url: http://localhost:8080/compras/
 
 ### Testes(RSpec)
 
@@ -239,3 +255,57 @@ validates :protocol_date,
 No locale precisa apenas colocar a inflection `restriction`, para o exemplo acima:
 
     should_be_on_or_after_emission_date: "deve ser igual ou posterior a data de emissão (%{restriction})"
+
+### Melhorando a velocidade dos testes
+
+
+#### PostgreSQL
+
+Se seu HD não é SSD e você usa o postgres somente para testar a aplicação pode inserir as seguintes linhas no `postgresql.conf`.
+Para achar esse arquivo, execute `rails db` e depois `SHOW config_file;`
+
+  ```
+    checkpoint_segments = '9'
+    checkpoint_timeout = '30min'
+    fsync = 'off'
+    full_page_writes = 'off'
+    synchronous_commit = 'off'
+  ```
+[Blog de referência](http://mentalized.net/journal/2012/12/07/how_we_took_our_tests_from_30_to_3_minutes/)
+
+[Documentação oficial](http://www.postgresql.org/docs/9.2/static/non-durability.html)
+
+#### Ruby
+
+Requisitos:
+
+`brew install autoconf`
+
+
+Para quem usa rvm:
+
+  ```
+    curl https://raw.github.com/gist/4136373/falcon-gc.diff > $rvm_path/patches/ruby/1.9.3/p327/falcon.patch
+    rvm install 1.9.3-p327 -n fast --patch falcon
+    rvm use 1.9.3-p327 --default
+  ```
+
+Para quem usar rbenv:
+
+  ```
+    VERSION="1.9.3-p327"
+    curl https://raw.github.com/gist/1688857/2-$VERSION-patched.sh > /tmp/$VERSION-perf
+    rbenv install /tmp/$VERSION-perf
+  ```
+
+Adicione o seguinte em seu `~/.bash_profile`
+
+  ```
+    export RUBY_GC_MALLOC_LIMIT=1000000000
+    export RUBY_FREE_MIN=500000
+    export RUBY_HEAP_MIN_SLOTS=40000
+  ```
+
+[Referência](https://gist.github.com/burke/1688857)
+
+
