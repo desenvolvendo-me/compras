@@ -65,6 +65,7 @@ describe Modality do
         "concessions_and_permits" => [["Concorrência", "concurrence"]],
         "construction_and_engineering_services" => [["Concorrência", "concurrence"], ["Tomada de Preço", "taken_price"], ["Convite", "invitation"], ["Concurso", "competition"], ["Pregão", "trading"]],
         "disposals_of_assets" => [["Leilão", "auction"]],
+        "property_lease" => [],
         "purchase_and_services" => [["Concorrência", "concurrence"], ["Tomada de Preço", "taken_price"], ["Convite", "invitation"], ["Pregão", "trading"]]
       })
     end
