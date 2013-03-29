@@ -52,6 +52,12 @@ E para executar o servidor:
 
 Feito isto o projeto estará disponível na url: http://localhost:8080/compras/
 
+Caso não queira instalar a gem foreman você pode rodar o projeto da seguinte forma.
+
+`$ RAILS_RELATIVE_URL_ROOT=/contabil bundle exec unicorn -p 8080`
+
+Dica: faça um alias.
+
 ### Testes(RSpec)
 
 Criamos uma variável de ambiente especial para quando se deseja que ao ocorrer
