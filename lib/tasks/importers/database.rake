@@ -8,11 +8,13 @@ namespace :db do
     ActiveRecord::Migration.verbose = verbose
     ActiveRecord::Migrator.migrate(migrations_paths, version)
 
-    Customer.find_each do |customer|
-      puts "migrating customer #{customer.domain}" if verbose
+    if Rails.env != 'development' && Rails.env != 'test'
+      Customer.find_each do |customer|
+        puts "migrating customer #{customer.domain}" if verbose
 
-      customer.using_connection do
-        ActiveRecord::Migrator.migrate(migrations_paths, version)
+        customer.using_connection do
+          ActiveRecord::Migrator.migrate(migrations_paths, version)
+        end
       end
     end
   end
