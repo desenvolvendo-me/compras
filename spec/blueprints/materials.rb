@@ -7,7 +7,6 @@ Material.blueprint(:antivirus) do
   reference_unit { ReferenceUnit.make!(:unidade) }
   manufacturer { "Plantador" }
   combustible { false }
-  contract_type { ContractType.make!(:reparos) }
   material_type { MaterialType::CONSUMPTION }
   expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
 end
@@ -20,7 +19,6 @@ Material.blueprint(:office) do
   reference_unit { ReferenceUnit.make!(:unidade) }
   manufacturer { "MS" }
   combustible { false }
-  contract_type { ContractType.make!(:reparos) }
   material_type { MaterialType::CONSUMPTION }
   expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
 end
@@ -33,7 +31,6 @@ Material.blueprint(:arame_farpado) do
   reference_unit { ReferenceUnit.make!(:unidade) }
   manufacturer { "Moveis" }
   combustible { false }
-  contract_type { ContractType.make!(:reparos) }
   material_type { MaterialType::CONSUMPTION }
   expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
 end
@@ -45,7 +42,6 @@ Material.blueprint(:arame_comum) do
   detailed_description { "Arame comum" }
   reference_unit { ReferenceUnit.make!(:unidade) }
   combustible { false }
-  contract_type { ContractType.make!(:reparos) }
   material_type { MaterialType::CONSUMPTION }
   expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
 end
@@ -56,7 +52,6 @@ Material.blueprint(:manutencao) do
   description { "Manutenção de Computadores" }
   detailed_description { "Manutenção de Computadores" }
   reference_unit { ReferenceUnit.make!(:unidade) }
-  contract_type { ContractType.make!(:reparos) }
   material_type { MaterialType::SERVICE }
   expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
 end

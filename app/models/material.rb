@@ -1,7 +1,7 @@
 class Material < Compras::Model
   attr_accessible :code, :materials_class_id, :description, :detailed_description,
                   :reference_unit_id, :manufacturer, :material_type, :combustible,
-                  :expense_nature_id, :contract_type_id, :active, :control_amount
+                  :expense_nature_id, :active, :control_amount
 
   attr_writer :autocomplete_materials_class
 
@@ -11,7 +11,6 @@ class Material < Compras::Model
 
   belongs_to :materials_class
   belongs_to :reference_unit
-  belongs_to :contract_type
   belongs_to :expense_nature
 
   has_and_belongs_to_many :licitation_objects, :join_table => :compras_licitation_objects_compras_materials
@@ -27,10 +26,7 @@ class Material < Compras::Model
 
   validates :materials_class, :reference_unit, :material_type, :detailed_description, :presence => true
   validates :code, :description, :presence => true, :uniqueness => { :allow_blank => true }
-  validates :contract_type, :presence => true, :if => :service?
   validates :control_amount, :inclusion => { :in => [true, false] }
-
-  before_save :clean_unnecessary_type
 
   before_destroy :validate_licitation_object_relationship
 
@@ -78,12 +74,6 @@ class Material < Compras::Model
   end
 
   protected
-
-  def clean_unnecessary_type
-    if consumption? || asset?
-      self.contract_type_id = nil
-    end
-  end
 
   def validate_licitation_object_relationship
     return unless licitation_objects.any?

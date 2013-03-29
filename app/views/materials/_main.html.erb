@@ -35,12 +35,4 @@
   </div>
 </div>
 
-<div class="yui3-g">
-  <div class="yui3-u-1-2">
-    <%= f.input :expense_nature %>
-  </div>
-
-  <div class="yui3-u-1-2">
-    <%= f.input :contract_type, :disabled => !f.object.service? %>
-  </div>
-</div>
+<%= f.input :expense_nature %>

@@ -8,26 +8,14 @@
 
 <script>
   $("#material_material_type").change(function() {
-    changeFieldsByMaterialType();
     setControlAmount();
   });
-
-  function changeFieldsByMaterialType() {
-    typeValue = $("#material_material_type").val();
-
-    if (typeValue == "<%= MaterialType::CONSUMPTION %>" || typeValue == "<%= MaterialType::ASSET %>") {
-      $("#material_service_or_contract_type").attr('disabled', true)
-                                             .requiredField(false);
-    } else if (typeValue == "<%= MaterialType::SERVICE %>") {
-      $("#material_contract_type").attr('disabled', false).requiredField(true);
-    }
-  };
 
   function setControlAmount() {
     var controlAmount = $('.control-amount'),
         materialType = $("#material_material_type").val();
 
-    if (typeValue == "<%= MaterialType::SERVICE %>") {
+    if (materialType == "<%= MaterialType::SERVICE %>") {
       controlAmount.show();
     } else {
       controlAmount.find(':input').removeAttr('checked');
@@ -36,7 +24,6 @@
   }
 
   (function(){
-    changeFieldsByMaterialType();
     setControlAmount();
   })();
 </script>

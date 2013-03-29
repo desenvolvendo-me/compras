@@ -14,7 +14,6 @@ feature "Materials" do
 
     click_link 'Criar Material'
 
-    expect(page).to have_disabled_field 'Tipo de contrato'
     expect(page).to have_checked_field 'Ativo?'
     expect(page).to_not have_field 'Controla quantidade'
 
@@ -27,14 +26,12 @@ feature "Materials" do
 
     # testing javascript
     select 'Material de consumo', :from => 'Tipo de material'
-    expect(page).to have_disabled_field 'Tipo de contrato'
     expect(page).to_not have_field 'Controla quantidade'
 
     select 'Serviço', :from => 'Tipo de material'
     expect(page).to have_field 'Controla quantidade'
     # end of javascript test
 
-    fill_modal 'Tipo de contrato', :with => 'Contratação de estagiários', :field => 'Descrição'
     fill_modal 'Natureza da despesa', :with => '3.0.10.01.12', :field => 'Natureza da despesa'
 
     click_button 'Salvar'
@@ -51,7 +48,6 @@ feature "Materials" do
     expect(page).to_not have_checked_field 'Material combustível'
     expect(page).to_not have_checked_field 'Ativo?'
     expect(page).to have_select 'Tipo de material', :selected => 'Serviço'
-    expect(page).to have_field 'Tipo de contrato', :with => 'Contratação de estagiários'
     expect(page).to have_field 'Natureza da despesa', :with => '3.0.10.01.12 - Vencimentos e Salários'
     expect(page).to have_unchecked_field 'Controla quantidade'
 
@@ -101,7 +97,6 @@ feature "Materials" do
 
     check 'Controla quantidade'
 
-    fill_modal 'Tipo de contrato', :with => 'Contratação de estagiários', :field => 'Descrição'
     fill_modal 'Natureza da despesa', :with => '3.0.10.01.12', :field => 'Natureza da despesa'
 
     click_button 'Salvar'
@@ -146,10 +141,6 @@ feature "Materials" do
     click_link 'Antivirus'
 
     select 'Serviço', :from => "Tipo de material"
-
-    expect(page).to have_field 'Tipo de contrato', :with => ''
-
-    fill_modal 'Tipo de contrato', :with => 'Reparos', :field => 'Descrição'
 
     click_button 'Salvar'
 
@@ -298,7 +289,6 @@ feature "Materials" do
   def make_dependencies!
     MaterialsClass.make!(:software)
     ReferenceUnit.make!(:unidade)
-    ContractType.make!(:trainees)
     ExpenseNature.make!(:vencimento_e_salarios)
   end
 end

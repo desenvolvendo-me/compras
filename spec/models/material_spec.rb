@@ -46,14 +46,6 @@ describe Material do
     expect(subject).to_not allow_value(nil).for(:control_amount)
   end
 
-  it "should validate presence of service_or_contract_type only if material_type is service" do
-    expect(subject).not_to validate_presence_of(:contract_type)
-
-    subject.material_type = MaterialType::SERVICE
-
-    expect(subject).to validate_presence_of(:contract_type)
-  end
-
   it "should have false as the default value of combustible" do
     expect(subject.combustible).to eq false
   end
