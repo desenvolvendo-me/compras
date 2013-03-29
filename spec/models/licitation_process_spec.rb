@@ -45,7 +45,6 @@ describe LicitationProcess do
   it { should belong_to :judgment_form }
   it { should belong_to :payment_method }
   it { should belong_to :readjustment_index }
-  it { should belong_to :responsible }
 
   it { should have_and_belong_to_many(:document_types) }
   it { should have_and_belong_to_many(:purchase_solicitations) }
@@ -80,9 +79,7 @@ describe LicitationProcess do
   it { should validate_presence_of :payment_method }
   it { should validate_presence_of :period }
   it { should validate_presence_of :period_unit }
-  it { should validate_presence_of :pledge_type }
   it { should validate_presence_of :process_date }
-  it { should validate_presence_of :responsible }
   it { should validate_presence_of :type_of_purchase }
   it { should validate_presence_of :year }
 
@@ -244,18 +241,6 @@ describe LicitationProcess do
     subject.valid?
 
     expect(subject.errors[:base]).to include "não pode ser editado"
-  end
-
-  describe '#next_licitation_number' do
-    context 'when the licitation_number of last licitation process is 4' do
-      before do
-        subject.stub(:last_licitation_number_of_self_year_and_modality).and_return(4)
-      end
-
-      it 'should be 5' do
-        expect(subject.next_licitation_number).to eq 5
-      end
-    end
   end
 
   it 'should tell if it allow invitation bidders' do

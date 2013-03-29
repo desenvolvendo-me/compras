@@ -150,15 +150,6 @@
     $("#licitation_process_purchase_solicitation").removeAttr("disabled");
   }
 
-  function fillResponsible(responsible) {
-    var oldResponsible = $('#licitation_process_responsible_id').val();
-
-    if (responsible && oldResponsible == "") {
-      $('#licitation_process_responsible').val(responsible.to_s);
-      $('#licitation_process_responsible_id').val(responsible.id);
-    }
-  }
-
   function fillItem(uuid, item) {
     var prefixNameUuid = "#licitation_process_items_attributes_fresh-" + uuid;
 

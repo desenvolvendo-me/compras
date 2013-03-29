@@ -9,7 +9,6 @@ describe LicitationNotice do
   it { should validate_presence_of :number }
 
   it { should delegate(:modality_humanize).to(:licitation_process).allowing_nil(true).prefix(true) }
-  it { should delegate(:licitation_number).to(:licitation_process).allowing_nil(true).prefix(true) }
   it { should delegate(:process_date).to(:licitation_process).allowing_nil(true).prefix(true) }
   it { should delegate(:year).to(:licitation_process).allowing_nil(true).prefix(true) }
   it { should delegate(:description).to(:licitation_process).allowing_nil(true).prefix(true) }

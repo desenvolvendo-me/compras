@@ -33,14 +33,6 @@ describe LicitationProcessesController do
 
       expect(assigns(:licitation_process).status).to eq LicitationProcessStatus::WAITING_FOR_OPEN
     end
-
-    it 'should assign the licitation number' do
-      LicitationProcess.any_instance.stub(:licitation_number).and_return(2)
-
-      post :create
-
-      expect(assigns(:licitation_process).licitation_number).to eq 2
-    end
   end
 
   describe 'PUT #update' do

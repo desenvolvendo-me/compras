@@ -1,5 +1,4 @@
 builder resource, json do
-  json.licitation_number            resource.licitation_number
   json.envelope_delivery_date       resource.envelope_delivery_date
   json.envelope_delivery_time       resource.decorator.envelope_delivery_time
   json.proposal_envelope_opening_date        resource.proposal_envelope_opening_date

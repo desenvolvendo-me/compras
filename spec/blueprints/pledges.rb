@@ -3,7 +3,6 @@ Pledge.blueprint(:empenho_em_quinze_dias) do
   reserve_fund { ReserveFund.make!(:detran_2012) }
   management_unit { ManagementUnit.make!(:unidade_central) }
   emission_date { Date.current + 15.days }
-  pledge_type { PledgeType::GLOBAL }
   budget_allocation { BudgetAllocation.make!(:alocacao) }
   value { 9.99 }
   material_kind { MaterialKind::PUBLIC }
@@ -21,7 +20,6 @@ Pledge.blueprint(:founded_debt) do
   reserve_fund { ReserveFund.make!(:detran_2012) }
   management_unit { ManagementUnit.make!(:unidade_central) }
   emission_date { Date.current + 15.days }
-  pledge_type { PledgeType::GLOBAL }
   budget_allocation { BudgetAllocation.make!(:alocacao) }
   value { 9.99 }
   material_kind { MaterialKind::PUBLIC }

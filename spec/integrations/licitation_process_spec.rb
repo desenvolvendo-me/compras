@@ -6,10 +6,10 @@ describe LicitationProcess do
     licitation_2012 = LicitationProcess.make!(:processo_licitatorio_computador, :year => 2012, :process => nil)
     expect(licitation_2012.process).to eq 1
 
-    licitation_2013 = LicitationProcess.make!(:processo_licitatorio_computador, :year => 2013, :process => nil)
+    licitation_2013 = LicitationProcess.make!(:processo_licitatorio_computador, :year => 2013, :process => nil, )
     expect(licitation_2013.process).to eq 1
 
-    licitation_2013_2 = LicitationProcess.make!(:processo_licitatorio_computador, :year => 2013, :licitation_number => 13, :process => nil)
+    licitation_2013_2 = LicitationProcess.make!(:processo_licitatorio_computador, :year => 2013, :process => nil, :caution_value => 1.99)
     expect(licitation_2013_2.process).to eq 2
   end
 
@@ -20,13 +20,13 @@ describe LicitationProcess do
     licitation_2013 = LicitationProcess.make!(:processo_licitatorio_computador, :year => 2013, :process => nil)
     expect(licitation_2013.modality_number).to eq 1
 
-    licitation_2013_2 = LicitationProcess.make!(:processo_licitatorio_computador, :year => 2013, :licitation_number => 13, :process => nil)
+    licitation_2013_2 = LicitationProcess.make!(:processo_licitatorio_computador, :year => 2013, :process => nil, :caution_value => 1.99)
     expect(licitation_2013_2.modality_number).to eq 2
 
-    licitation_2013_3 = LicitationProcess.make!(:processo_licitatorio_computador, :year => 2013, :licitation_number => 14, :process => nil, :modality => Modality::COMPETITION)
+    licitation_2013_3 = LicitationProcess.make!(:processo_licitatorio_computador, :year => 2013, :process => nil, :modality => Modality::COMPETITION)
     expect(licitation_2013_3.modality_number).to eq 1
 
-    licitation_2013_4 = LicitationProcess.make!(:processo_licitatorio_computador, :year => 2013, :licitation_number => 15, :process => nil, :modality => Modality::COMPETITION)
+    licitation_2013_4 = LicitationProcess.make!(:processo_licitatorio_computador, :year => 2013, :process => nil, :modality => Modality::COMPETITION, :caution_value => 1.99)
     expect(licitation_2013_4.modality_number).to eq 2
   end
 

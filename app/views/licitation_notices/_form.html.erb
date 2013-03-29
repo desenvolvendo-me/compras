@@ -17,10 +17,6 @@
     <%= f.input :licitation_process_modality_humanize, :disabled => true %>
   </div>
 
-  <div class="yui3-u-1-5">
-    <%= f.input :licitation_process_licitation_number, :disabled => true %>
-  </div>
-
   <div class="yui3-u-1-6">
     <%= f.input :licitation_process_process_date, :disabled => true, :input_html => { :value => f.object.decorator.licitation_process_process_date }  %>
   </div>
@@ -33,12 +29,10 @@
   $('#licitation_notice_licitation_process_id').change(function (event, licitation_process) {
     if (licitation_process) {
       $('#licitation_notice_licitation_process_modality_humanize').val(licitation_process.modality_humanize);
-      $('#licitation_notice_licitation_process_licitation_number').val(licitation_process.licitation_number);
       $('#licitation_notice_licitation_process_process_date').val(licitation_process.process_date);
       $('#licitation_notice_licitation_process_description').val(licitation_process.description);
     } else {
       $('#licitation_notice_licitation_process_modality_humanize').val('');
-      $('#licitation_notice_licitation_process_licitation_number').val('');
       $('#licitation_notice_licitation_process_process_date').val('');
       $('#licitation_notice_licitation_process_description').val('');
     }

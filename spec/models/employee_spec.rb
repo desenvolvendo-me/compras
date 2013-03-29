@@ -20,7 +20,6 @@ describe Employee do
   it { should have_many(:budget_structure_responsibles).dependent(:restrict) }
   it { should have_many(:direct_purchases).dependent(:restrict) }
   it { should have_many(:licitation_processes_with_contact).dependent(:restrict) }
-  it { should have_many(:licitation_processes_with_responsible).dependent(:restrict) }
   it { should have_many(:price_collections).dependent(:restrict) }
   it { should have_many(:price_registrations).dependent(:restrict) }
 

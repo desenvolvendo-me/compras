@@ -41,14 +41,11 @@ feature "LicitationProcesses" do
       expect(page).to have_disabled_field 'Nº do afastamento'
 
       choose 'Processo licitatório'
-      select 'Global', :from => 'Tipo de empenho'
 
       select 'Compras e serviços', :from => 'Tipo de objeto'
       select 'Concorrência', :from => 'Modalidade'
       select 'Por Item com Melhor Técnica', :from =>'Forma de julgamento'
       fill_in 'Objeto do processo de compra', :with => 'Licitação para compra de carteiras'
-      fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
-      fill_in 'Inciso', :with => 'Item 1'
 
       check 'Registro de preço'
       select 'Empreitada integral', :from => 'Forma de execução'
@@ -126,24 +123,18 @@ feature "LicitationProcesses" do
       expect(page).to have_disabled_field 'Processo'
 
       expect(page).to have_field 'Processo', :with => '1'
-      expect(page).to have_select 'Tipo de empenho', :selected => 'Global'
 
       expect(page).to have_select 'Modalidade', :selected => 'Concorrência'
       expect(page).to have_disabled_field 'Nº da modalidade', :with => '1'
       expect(page).to have_select 'Tipo de objeto', :selected => 'Compras e serviços'
       expect(page).to have_select 'Forma de julgamento', :selected => 'Por Item com Melhor Técnica'
       expect(page).to have_field 'Objeto do processo de compra', :with => 'Licitação para compra de carteiras'
-      expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
-      expect(page).to have_field 'Inciso', :with => 'Item 1'
 
       expect(page).to have_select 'Forma de execução', :selected => 'Empreitada integral'
       expect(page).to have_select 'Tipo de garantia', :selected => 'Fiança bancária'
       expect(page).to have_field 'Índice de reajuste', :with => 'XPTO'
       expect(page).to have_field 'Forma de pagamento', :with => 'Dinheiro'
       expect(page).to have_field 'Valor da caução', :with => '50,00'
-
-      # testing fields of licitation number
-      expect(page).to have_field 'Número da licitação', :with => '1'
     end
 
     within_tab 'Prazos' do
@@ -249,7 +240,6 @@ feature "LicitationProcesses" do
     expect(page).to have_link 'Publicações'
 
     within_tab 'Principal' do
-      select 'Estimativo', :from => 'Tipo de empenho'
       select 'Empreitada integral', :from => 'Forma de execução'
       select 'Fiança bancária', :from => 'Tipo de garantia'
       fill_modal 'Índice de reajuste', :with => 'SELIC'
@@ -319,13 +309,11 @@ feature "LicitationProcesses" do
     expect(page).to have_notice 'Processo de Compra 1/2012 editado com sucesso.'
 
     within_tab 'Principal' do
-      expect(page).to have_select 'Tipo de empenho', :selected => 'Estimativo'
       expect(page).to have_select 'Forma de execução', :selected => 'Empreitada integral'
       expect(page).to have_select 'Tipo de garantia', :selected => 'Fiança bancária'
       expect(page).to have_field 'Índice de reajuste', :with => 'SELIC'
       expect(page).to have_field 'Forma de pagamento', :with => 'Cheque'
       expect(page).to have_field 'Valor da caução', :with => '60,00'
-      expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
     end
 
     within_tab 'Prazos' do
@@ -566,7 +554,6 @@ feature "LicitationProcesses" do
 
     within_tab 'Principal' do
       choose 'Processo licitatório'
-      select 'Global', :from => 'Tipo de empenho'
 
       select 'Empreitada integral', :from => 'Forma de execução'
       select 'Fiança bancária', :from => 'Tipo de garantia'
@@ -1539,6 +1526,16 @@ feature "LicitationProcesses" do
 
     expect(page).to have_select('Modalidade',
                                 :options => ['Concorrência'])
+
+    select 'Edital de chamamento/credenciamento', :on => "Tipo de objeto"
+
+    expect(page).to have_select('Modalidade',
+                                :options => ['Concurso'])
+
+    select 'Obras e serviços de engenharia', :on => "Tipo de objeto"
+
+    expect(page).to have_select('Modalidade',
+                                :options => ['Concorrência', 'Tomada de Preço', 'Convite', 'Concurso', 'Pregão'])
   end
 
   scenario 'budget allocations should be fulfilled automatically when fulfill purchase_solicitation' do
@@ -1566,14 +1563,11 @@ feature "LicitationProcesses" do
 
     within_tab 'Principal' do
       choose 'Processo licitatório'
-      select 'Global', :from => 'Tipo de empenho'
 
       select 'Compras e serviços', :from => 'Tipo de objeto'
       select 'Concorrência', :from => 'Modalidade'
       select 'Por Item com Melhor Técnica', :from =>'Forma de julgamento'
       fill_in 'Objeto do processo de compra', :with => 'Licitação para compra de carteiras'
-      fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
-      fill_in 'Inciso', :with => 'Item 1'
 
       check 'Registro de preço'
       select 'Empreitada integral', :from => 'Forma de execução'
@@ -1629,7 +1623,6 @@ feature "LicitationProcesses" do
       expect(page).to have_disabled_field 'Saldo da dotação'
 
       expect(page).to have_button 'Remover Dotação'
-
       fill_in 'Valor previsto', :with => '600,00'
     end
 
@@ -1644,8 +1637,6 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Quantidade', :with => '3,00'
 
       expect(page).to have_field 'Valor unitário máximo', :with => '200,00'
-
-      expect(page).to have_field 'Valor total', :with => '600,00'
     end
 
     click_button 'Salvar'

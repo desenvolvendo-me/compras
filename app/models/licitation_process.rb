@@ -7,9 +7,8 @@ class LicitationProcess < Compras::Model
                   :period, :period_unit, :expiration, :expiration_unit,
                   :judgment_form_id, :execution_type,
                   :disqualify_by_documentation_problem, :disqualify_by_maximum_value,
-                  :consider_law_of_proposals, :price_registration, :status,
-                  :responsible_id, :object_type, :date, :protocol, :item,
-                  :summarized_object, :modality, :description, :pledge_type,
+                  :consider_law_of_proposals, :price_registration, :status,:object_type, :date,
+                  :protocol, :summarized_object, :modality, :description,
                   :administrative_process_budget_allocations_attributes,
                   :contract_guarantees, :extension_clause, :index_update_rate_id,
                   :type_of_removal, :is_trading, :notice_availability_date,
@@ -25,9 +24,9 @@ class LicitationProcess < Compras::Model
   auto_increment :process, :by => :year
   auto_increment :modality_number, :by => [:year, :modality, :type_of_removal]
 
-  attr_readonly :process, :year, :licitation_number, :modality_number
+  attr_readonly :process, :year, :modality_number
 
-  attr_modal :process, :year, :process_date, :licitation_number
+  attr_modal :process, :year, :process_date
 
   has_enumeration_for :concession_period_unit, :with => PeriodUnit
   has_enumeration_for :contract_guarantees
@@ -36,7 +35,6 @@ class LicitationProcess < Compras::Model
   has_enumeration_for :modality, :create_helpers => true, :create_scopes => true
   has_enumeration_for :object_type, :with => LicitationProcessObjectType, :create_helpers => true
   has_enumeration_for :period_unit, :with => PeriodUnit
-  has_enumeration_for :pledge_type
   has_enumeration_for :status, :with => LicitationProcessStatus, :create_helpers => true
   has_enumeration_for :type_of_purchase, :with => LicitationProcessTypeOfPurchase, :create_helpers => true
   has_enumeration_for :type_of_removal
@@ -46,7 +44,6 @@ class LicitationProcess < Compras::Model
   belongs_to :payment_method
   belongs_to :readjustment_index, :class_name => 'Indexer'
   belongs_to :index_update_rate, :class_name => 'Indexer'
-  belongs_to :responsible, :class_name => 'Employee'
 
   has_and_belongs_to_many :document_types, :join_table => :compras_document_types_compras_licitation_processes
   has_and_belongs_to_many :purchase_solicitations, :join_table => :compras_licitation_processes_purchase_solicitations,
@@ -83,8 +80,8 @@ class LicitationProcess < Compras::Model
   validates :process_date, :period, :contract_guarantees, :type_of_purchase,
             :period_unit, :expiration, :expiration_unit, :payment_method,
             :envelope_delivery_time, :year, :envelope_delivery_date,
-            :pledge_type, :execution_type, :object_type,
-            :judgment_form_id, :responsible, :description, :notice_availability_date,
+            :execution_type, :object_type,
+            :judgment_form_id, :description, :notice_availability_date,
             :presence => true
   validates :modality, :presence => true, :if => :licitation?
   validates :goal, :licensor_rights_and_liabilities, :licensee_rights_and_liabilities,
@@ -143,10 +140,6 @@ class LicitationProcess < Compras::Model
 
   def update_status(status)
     update_column :status, status
-  end
-
-  def next_licitation_number
-    last_licitation_number_of_self_year_and_modality.succ
   end
 
   def advice_number
@@ -218,14 +211,6 @@ class LicitationProcess < Compras::Model
 
   def available_for_licitation_process_classification?
     Modality.available_for_licitation_process_classification.include?(modality)
-  end
-
-  def last_licitation_number_of_self_year_and_modality
-    self.class.
-    where { |licitation_process|
-      licitation_process.year.eq(year) & licitation_process.modality.eq(modality)
-    }.
-    maximum(:licitation_number).to_i
   end
 
   def assign_bidders_documents
