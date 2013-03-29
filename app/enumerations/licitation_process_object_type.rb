@@ -3,5 +3,6 @@ class LicitationProcessObjectType < EnumerateIt::Base
                    :construction_and_engineering_services,
                    :disposals_of_assets,
                    :concessions_and_permits,
-                   :call_notice
+                   :call_notice,
+                   :property_lease
 end
