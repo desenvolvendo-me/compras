@@ -30,6 +30,8 @@ pt-BR:
         quantity_by_material: 'Quantidade'
         purchase_solicitation: 'Solicitação de compra'
         code_and_year: "Código/Ano"
+        budget_allocations: "Dotação"
+        expense_natures: "Natureza da despesa"
 
   purchase_solicitation:
     messages:

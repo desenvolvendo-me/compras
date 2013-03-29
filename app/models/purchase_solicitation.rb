@@ -158,7 +158,7 @@ class PurchaseSolicitation < Compras::Model
 
   def must_have_at_least_one_budget_allocation
     unless purchase_solicitation_budget_allocations?
-      errors.add(:purchase_solicitation_budget_allocations, :must_have_at_least_one_budget_allocation)
+      errors.add(:base, :must_have_at_least_one_budget_allocation)
     end
   end
 

@@ -61,12 +61,10 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Dotações orçamentárias' do
-      click_button "Adicionar Dotação"
+      fill_with_autocomplete 'Dotação', :with => 'Vencimentos'
+      fill_with_autocomplete 'Natureza da despesa', :with => 'Vencimentos e Salários'
 
-      within '.purchase-solicitation-budget-allocation:last' do
-        fill_modal 'Dotação', :with => '1', :field => 'Código'
-        fill_modal 'Natureza da despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
-      end
+      click_button "Adicionar"
     end
 
     click_button 'Salvar'
@@ -98,8 +96,10 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Dotações orçamentárias' do
-      expect(page).to have_field "Dotação", :with => budget_allocation.to_s
-      expect(page).to have_field 'Natureza da despesa', :with => '3.0.10.01.12 - Vencimentos e Salários'
+      within_records do
+        expect(page).to have_content budget_allocation.to_s
+        expect(page).to have_content '3.0.10.01.12 - Vencimentos e Salários'
+      end
     end
   end
 
@@ -156,16 +156,14 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Dotações orçamentárias' do
-      click_button "Remover Dotação"
-
-      click_button "Adicionar Dotação"
-
-      within_modal 'Dotação' do
-        click_button 'Pesquisar'
-        click_record '2011 - Secretaria de Educação'
+      within_records do
+        click_link "Remover"
       end
 
-      fill_modal 'Natureza da despesa', :with => 'Compra de Material', :field => 'Descrição'
+      fill_with_autocomplete 'Dotação', :with => 'Compra de Material'
+      fill_with_autocomplete 'Natureza da despesa', :with => 'Compra de Material'
+
+      click_button "Adicionar"
     end
 
     click_button 'Salvar'
@@ -196,8 +194,12 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Dotações orçamentárias' do
-      expect(page).to have_field "Dotação", :with => budget_allocation.to_s
-      expect(page).to have_field 'Natureza da despesa', :with => '3.0.10.01.11 - Compra de Material'
+      expect(page).to have_css('.records .record', :count => 1)
+
+      within_records do
+        expect(page).to have_content '1.29 - Compra de Material'
+        expect(page).to have_content '3.0.10.01.11 - Compra de Material'
+      end
     end
   end
 
@@ -208,9 +210,7 @@ feature "PurchaseSolicitations" do
 
     click_button 'Salvar'
 
-    within_tab 'Dotações orçamentárias' do
-      expect(page).to have_content 'é necessário cadastrar pelo menos uma dotação'
-    end
+    expect(page).to have_content 'é necessário cadastrar pelo menos uma dotação'
 
     within_tab 'Itens' do
       expect(page).to have_content 'é necessário cadastrar pelo menos um item'
@@ -229,16 +229,16 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Dotações orçamentárias' do
-      click_button 'Remover Dotação'
+      within_records do
+        click_link 'Remover'
+      end
     end
 
     click_button 'Salvar'
 
     expect(page).to_not have_notice 'Solicitação de Compra 1/2012 editada com sucesso.'
 
-    within_tab 'Dotações orçamentárias' do
-      expect(page).to have_content 'é necessário cadastrar pelo menos uma dotação'
-    end
+    expect(page).to have_content 'é necessário cadastrar pelo menos uma dotação'
 
     click_link 'Voltar'
 
@@ -343,12 +343,10 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Dotações orçamentárias' do
-      click_button "Adicionar Dotação"
+      fill_with_autocomplete 'Dotação', :with => 'Vencimentos'
+      fill_with_autocomplete 'Natureza da despesa', :with => 'Vencimentos e Salários'
 
-      within '.purchase-solicitation-budget-allocation:last' do
-        fill_modal 'Dotação', :with => '1', :field => 'Código'
-        fill_modal 'Natureza da despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
-      end
+      click_button "Adicionar"
     end
 
     click_button 'Salvar'
@@ -380,8 +378,10 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Dotações orçamentárias' do
-      expect(page).to have_field "Dotação", :with => budget_allocation.to_s
-      expect(page).to have_field 'Natureza da despesa', :with => '3.0.10.01.12 - Vencimentos e Salários'
+      within_records do
+        expect(page).to have_content budget_allocation.to_s
+        expect(page).to have_content '3.0.10.01.12 - Vencimentos e Salários'
+      end
     end
   end
 
@@ -447,12 +447,10 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Dotações orçamentárias' do
-      click_button "Adicionar Dotação"
+      fill_with_autocomplete 'Dotação', :with => 'Vencimentos'
+      fill_with_autocomplete 'Natureza da despesa', :with => 'Vencimentos e Salários'
 
-      within '.purchase-solicitation-budget-allocation:last' do
-        fill_modal 'Dotação', :with => '1', :field => 'Código'
-        fill_modal 'Natureza da despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
-      end
+      click_button "Adicionar"
     end
 
     click_button 'Salvar'
@@ -572,12 +570,10 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab "Dotações orçamentárias" do
-      click_button "Adicionar Dotação"
+      fill_with_autocomplete 'Dotação', :with => 'Vencimentos'
+      fill_with_autocomplete 'Natureza da despesa', :with => 'Vencimentos e Salários'
 
-      within '.purchase-solicitation-budget-allocation:last' do
-        fill_modal 'Dotação', :with => '1', :field => 'Código'
-        fill_modal 'Natureza da despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
-      end
+      click_button "Adicionar"
     end
 
     click_link "Voltar"
@@ -644,12 +640,10 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Dotações orçamentárias' do
-      click_button "Adicionar Dotação"
+      fill_with_autocomplete 'Dotação', :with => 'Vencimentos'
+      fill_with_autocomplete 'Natureza da despesa', :with => 'Vencimentos e Salários'
 
-      within '.purchase-solicitation-budget-allocation:last' do
-        fill_modal 'Dotação', :with => '1', :field => 'Código'
-        fill_modal 'Natureza da despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
-      end
+      click_button "Adicionar"
     end
 
     click_button 'Salvar'
@@ -664,39 +658,51 @@ feature "PurchaseSolicitations" do
   end
 
   scenario 'fill automatically budget structure from budget allocation' do
-    BudgetStructure.make!(:secretaria_de_educacao)
-    budget_allocation = BudgetAllocation.make!(:alocacao)
+    pending 'quando rodo o teste sozinho ele passa e se rodo tudo falha' do
+      BudgetAllocation.make!(:alocacao)
+      BudgetAllocation.make!(:reparo_2011)
+
+      navigate 'Processos de Compra > Solicitações de Compra'
+
+      click_link 'Criar Solicitação de Compra'
+
+      within_tab 'Principal' do
+        fill_modal 'Solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
+      end
+
+      within_tab 'Dotações orçamentárias' do
+        within_autocomplete 'Dotação', :with => 'Compra de Material' do
+          expect(page).to_not have_content 'Compra de Material'
+        end
+      end
+
+      within_tab 'Principal' do
+        clear_modal 'Solicitante'
+      end
+
+      within_tab 'Dotações orçamentárias' do
+        within_autocomplete 'Dotação', :with => 'Compra de Material' do
+          expect(page).to have_content 'Compra de Material'
+        end
+      end
+    end
+  end
+
+  scenario 'cannot add purchase solicitation budget allocations without budget_allocation' do
+    BudgetAllocation.make!(:reparo_2011)
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
     click_link 'Criar Solicitação de Compra'
 
-    within_tab 'Principal' do
-      fill_modal 'Solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
+    within_tab 'Dotações orçamentárias' do
+      click_button 'Adicionar'
     end
+
+    expect(page).to have_content 'dotação é um campo obrigatório'
 
     within_tab 'Dotações orçamentárias' do
-      click_button "Adicionar Dotação"
-
-      within '.purchase-solicitation-budget-allocation:last' do
-        within_modal 'Dotação' do
-          expect(page).to have_disabled_field 'Solicitante', :with => '1 - Secretaria de Educação'
-
-          click_link 'Voltar'
-        end
-      end
-    end
-
-    within_tab 'Principal' do
-      clear_modal 'Solicitante'
-    end
-
-    within_tab 'Dotações orçamentárias' do
-      within '.purchase-solicitation-budget-allocation:last' do
-        within_modal 'Dotação' do
-          expect(page).to have_field 'Solicitante', :with => ''
-        end
-      end
+      expect(page).to_not have_css '.record'
     end
   end
 end

@@ -10,3 +10,7 @@ pt-BR:
         budget_allocation: "Dotação"
         expense_nature: "Natureza da despesa"
         blocked: "Bloquear"
+
+  purchase_solicitation_budget_allocation:
+    messages:
+      not_allow_add: "dotação é um campo obrigatório"

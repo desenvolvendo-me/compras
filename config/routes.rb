@@ -307,7 +307,11 @@ Compras::Application.routes.draw do
   get 'expense_modalities/modal', :as => :modal_expense_modalities
   get 'expense_elements/modal', :as => :modal_expense_elements
 
-  get "expense_natures/modal", :as => :modal_expense_natures
+  resources :expense_natures, :only => [:modal, :index] do
+    collection do
+      get :modal
+    end
+  end
 
   resources :employees do
     collection do
