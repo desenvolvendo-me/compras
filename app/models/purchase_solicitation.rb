@@ -169,11 +169,11 @@ class PurchaseSolicitation < Compras::Model
   end
 
   def purchase_solicitation_budget_allocations?
-    !purchase_solicitation_budget_allocations.reject(&:marked_for_destruction?).empty?
+    purchase_solicitation_budget_allocations.reject(&:marked_for_destruction?).any?
   end
 
   def items?
-    !items.reject(&:marked_for_destruction?).empty?
+    items.reject(&:marked_for_destruction?).any?
   end
 
   def materials_of_other_peding_purchase_solicitation
