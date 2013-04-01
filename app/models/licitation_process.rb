@@ -68,14 +68,18 @@ class LicitationProcess < Compras::Model
   has_many :budget_allocations, :through => :administrative_process_budget_allocations
   has_many :items, :class_name => 'AdministrativeProcessBudgetAllocationItem', :dependent => :restrict, :order => :id
   has_many :materials, :through => :items
+  has_many :legal_analysis_appraisals, :dependent => :restrict
+  has_many :purchase_solicitation_items,
+           :class_name => 'PurchaseSolicitationBudgetAllocationItem',
+           :finder_sql => Proc.new { purchase_solicitation_items_finder_sql },
+           :inverse_of => :fulfiller
 
   has_one :trading, :dependent => :restrict
 
   accepts_nested_attributes_for :administrative_process_budget_allocations, :items, :allow_destroy => true
 
-  delegate :kind, :best_technique?, :technical_and_price?,
+  delegate :licitation_kind, :kind, :best_technique?, :technical_and_price?,
            :to => :judgment_form, :allow_nil => true, :prefix => true
-  delegate :licitation_kind, :to => :judgment_form, :allow_nil => true, :prefix => true
 
   validates :process_date, :period, :contract_guarantees, :type_of_purchase,
             :period_unit, :expiration, :expiration_unit, :payment_method,

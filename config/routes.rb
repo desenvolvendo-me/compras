@@ -352,6 +352,13 @@ Compras::Application.routes.draw do
     end
   end
 
+  resources :legal_analysis_appraisals do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   get "legal_natures/modal", :as => :modal_legal_natures
 
   resources :legal_references do

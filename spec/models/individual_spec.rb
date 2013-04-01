@@ -27,4 +27,7 @@ describe Individual do
   it { should have_many(:judgment_commission_advice_members).dependent(:restrict) }
 
   it { should validate_presence_of :cpf }
+
+  it { should delegate(:number).to(:identity).allowing_nil(true) }
+  it { should delegate(:issuer).to(:identity).allowing_nil(true) }
 end

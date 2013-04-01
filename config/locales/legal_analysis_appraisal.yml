@@ -1,0 +1,20 @@
+pt-BR:
+  activerecord:
+    models:
+      legal_analysis_appraisal:
+        one: "Laudo de Análise Jurídica"
+        other: "Laudos de Análises Jurídicas"
+
+    attributes:
+      legal_analysis_appraisal:
+        appraisal_expedition_date: "Data de expedição do laudo"
+        appraisal_type: "Tipo do laudo"
+        description: "Objeto"
+        licitation_process: "Processo de compra"
+        modality: "Tipo de compra"
+        process_and_year: "Processo/Ano"
+        reference: "Referência"
+        responsible: "Responsável"
+        responsible_issuer: "Orgão expedidor"
+        responsible_number: "Número"
+        substantiation: "Fundamentação"

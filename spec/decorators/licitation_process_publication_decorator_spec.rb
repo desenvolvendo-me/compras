@@ -1,7 +1,8 @@
 # encoding: utf-8
 require 'decorator_helper'
-require 'app/decorators/licitation_process_pulication_decorator'
+require 'app/decorators/licitation_process_publication_decorator'
 
+describe LicitationProcessPublicationDecorator do
   describe 'attr_header' do
     it 'should have header' do
       expect(described_class.headers?).to be_true
@@ -22,4 +23,5 @@ require 'app/decorators/licitation_process_pulication_decorator'
      it 'should have circulation_type' do
       expect(described_class.header_attributes).to include :circulation_type
     end
+  end
 end

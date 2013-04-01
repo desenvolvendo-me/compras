@@ -1,0 +1,7 @@
+pt-BR:
+  enumerations:
+    appraisal_reference:
+      draft: "Minuta"
+      notice: "Edital"
+      public_session: "Sessão pública"
+      others: "Outros"

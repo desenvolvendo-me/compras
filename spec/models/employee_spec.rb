@@ -9,6 +9,7 @@ require 'app/models/licitation_process'
 require 'app/models/budget_structure_responsible'
 require 'app/models/price_collection'
 require 'app/models/price_registration'
+require 'app/models/legal_analysis_appraisal'
 
 describe Employee do
   it { should belong_to :individual }
@@ -22,8 +23,13 @@ describe Employee do
   it { should have_many(:licitation_processes_with_contact).dependent(:restrict) }
   it { should have_many(:price_collections).dependent(:restrict) }
   it { should have_many(:price_registrations).dependent(:restrict) }
+  it { should have_many(:legal_analysis_appraisals).dependent(:restrict) }
 
   it { should validate_presence_of :individual }
   it { should validate_presence_of :registration }
   it { should validate_presence_of :position }
+
+  it { should delegate(:name).to(:individual).allowing_nil(true) }
+  it { should delegate(:number).to(:individual).allowing_nil(true) }
+  it { should delegate(:issuer).to(:individual).allowing_nil(true) }
 end

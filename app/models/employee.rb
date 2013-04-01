@@ -14,8 +14,9 @@ class Employee < Compras::Model
   has_many :direct_purchases, :dependent => :restrict
   has_many :price_collections, :dependent => :restrict
   has_many :price_registrations, :foreign_key => :responsible_id, :dependent => :restrict
+  has_many :legal_analysis_appraisals, :foreign_key => :responsible_id, :dependent => :restrict
 
-  delegate :to_s, :name, :to => :individual
+  delegate :to_s, :name, :number, :issuer, :to => :individual, :allow_nil => :true
 
   validates :individual_id, :registration, :uniqueness => { :allow_blank => true }
   validates :individual, :registration, :position, :presence => true

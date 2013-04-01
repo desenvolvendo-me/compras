@@ -11,6 +11,7 @@ class Individual < Persona::Individual
 
   delegate :to_s, :name, :to => :person, :allow_nil => true
   delegate :city, :zip_code, :to => :address, :allow_nil => true
+  delegate :number, :issuer, :to => :identity, :allow_nil => true
 
   filterize
   orderize :birthdate

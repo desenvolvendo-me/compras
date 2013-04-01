@@ -1,0 +1,57 @@
+<%= f.input :licitation_process_id, :as => 'hidden' %>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-3">
+    <%= f.input :appraisal_type,
+                       :as => :radio_buttons,
+                       :item_wrapper_class => 'inline',
+                       :collection => AppraisalType.to_a %>
+  </div>
+
+  <div class="yui3-u-2-3">
+    <%= f.input :reference, :as => :select, :collection => AppraisalReference.to_a %>
+  </div>
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-8">
+    <%= f.input :process_and_year, :disabled => true %>
+  </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :modality, :disabled => true %>
+  </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :appraisal_expedition_date %>
+  </div>
+</div>
+
+<%= f.input :description, :as => :text, :disabled => true %>
+<%= f.input :substantiation, :as => :text %>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :responsible %>
+  </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :responsible_number %>
+  </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :responsible_issuer %>
+  </div>
+</div>
+
+<script>
+  $("#legal_analysis_appraisal_responsible_id").change( function(event, responsible) {
+    if (responsible) {
+      $('#legal_analysis_appraisal_responsible_number').val(responsible.number);
+      $('#legal_analysis_appraisal_responsible_issuer').val(responsible.issuer);
+    } else {
+      $('#legal_analysis_appraisal_responsible_number').val('');
+      $('#legal_analysis_appraisal_responsible_issuer').val('');
+    }
+  });
+</script>

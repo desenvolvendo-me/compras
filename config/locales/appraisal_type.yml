@@ -1,0 +1,5 @@
+pt-BR:
+  enumerations:
+    appraisal_type:
+      legal: "Laudo jurídico"
+      technical: "Laudo técnico"
