@@ -59,9 +59,7 @@
         expenseNatureId = $('#purchase_solicitation_autocomplete_expense_nature').val(),
         expenseNature = $('#purchase_solicitation_expense_natures').val();
 
-    if (_.isEmpty(budgetAllocationId)) {
-      alert("<%=I18n.t('purchase_solicitation_budget_allocation.messages.not_allow_add') %>");
-    } else {
+    if (allowAddRecord(budgetAllocationId)) {
       var options = {
           budget_allocation: budgetAllocation,
           budget_allocation_id: budgetAllocationId,
@@ -86,6 +84,28 @@
      $('#purchase_solicitation_budget_allocations').val('');
      $('#purchase_solicitation_autocomplete_expense_nature').val('');
      $('#purchase_solicitation_expense_natures').val('');
+  }
+
+  function allowAddRecord(recordId) {
+    var allowed = true;
+
+    if (_.isEmpty(recordId)) {
+      alert("<%=I18n.t('purchase_solicitation_budget_allocation.messages.not_allow_add') %>");
+
+      allowed = false
+    } else {
+      $('.purchase-solicitation-budget-allocation:visible').each(function() {
+        var addedRecordId = $(this).find('.budget-allocation-id').val();
+
+        if (recordId == addedRecordId) {
+          alert("<%=I18n.t('errors.messages.record_already_exists') %>");
+
+          allowed = false
+        }
+      })
+    }
+
+    return allowed
   }
 
   $(function() {

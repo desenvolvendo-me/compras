@@ -65,6 +65,13 @@ feature "PurchaseSolicitations" do
       fill_with_autocomplete 'Natureza da despesa', :with => 'Vencimentos e Salários'
 
       click_button "Adicionar"
+
+      # Não pode adicionar 2 dotações iguais
+      fill_with_autocomplete 'Dotação', :with => 'Vencimentos'
+
+      click_button "Adicionar"
+
+      expect(page).to have_content 'registro já inserido'
     end
 
     click_button 'Salvar'

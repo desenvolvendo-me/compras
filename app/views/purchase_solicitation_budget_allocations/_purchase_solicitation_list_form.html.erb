@@ -4,7 +4,7 @@
   <td><%= expense_nature %></td>
 
   <td>
-    <%= f.input :budget_allocation_id, :as => :hidden, :input_html => { :value => budget_allocation_id } %>
+    <%= f.input :budget_allocation_id, :as => :hidden, :input_html => { :value => budget_allocation_id, :class => 'budget-allocation-id' } %>
     <%= f.input :expense_nature_id, :as => :hidden, :input_html => { :value => expense_nature_id } %>
     <%= f.input :id, :as => 'hidden' %>
     <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
