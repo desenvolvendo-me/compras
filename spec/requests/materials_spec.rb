@@ -14,7 +14,7 @@ feature "Materials" do
 
     click_link 'Criar Material'
 
-    expect(page).to have_checked_field 'Ativo?'
+    expect(page).to have_checked_field 'Ativo'
     expect(page).to_not have_field 'Controla quantidade'
 
     fill_with_autocomplete 'Classe', :with => 'Software'
@@ -22,7 +22,7 @@ feature "Materials" do
     fill_in 'Descrição detalhada', :with => 'Uma caixa'
     fill_modal 'Unidade', :with => 'Unidade', :field => 'Descrição'
     fill_in 'Referência do fabricante', :with => 'manufacturer'
-    uncheck 'Ativo?'
+    uncheck 'Ativo'
 
     # testing javascript
     select 'Material de consumo', :from => 'Tipo de material'
@@ -46,7 +46,7 @@ feature "Materials" do
     expect(page).to have_field 'Unidade', :with => 'UN'
     expect(page).to have_field 'Referência do fabricante', :with => 'manufacturer'
     expect(page).to_not have_checked_field 'Material combustível'
-    expect(page).to_not have_checked_field 'Ativo?'
+    expect(page).to_not have_checked_field 'Ativo'
     expect(page).to have_select 'Tipo de material', :selected => 'Serviço'
     expect(page).to have_field 'Natureza da despesa', :with => '3.0.10.01.12 - Vencimentos e Salários'
     expect(page).to have_unchecked_field 'Controla quantidade'
@@ -107,7 +107,7 @@ feature "Materials" do
 
     click_link 'Caixa'
 
-    expect(page).to have_checked_field 'Ativo?'
+    expect(page).to have_checked_field 'Ativo'
     expect(page).to have_checked_field 'Controla quantidade'
   end
 
