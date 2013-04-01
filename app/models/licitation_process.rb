@@ -17,7 +17,7 @@ class LicitationProcess < Compras::Model
                   :concession_period_unit, :goal, :licensor_rights_and_liabilities,
                   :licensee_rights_and_liabilities, :authorization_envelope_opening_date,
                   :authorization_envelope_opening_time, :closing_of_accreditation_date,
-                  :closing_of_accreditation_time, :purchase_solicitation_ids
+                  :closing_of_accreditation_time, :purchase_solicitation_ids, :total_value_of_items
 
   attr_accessor :autocomplete_purchase_solicitation
 
@@ -126,6 +126,7 @@ class LicitationProcess < Compras::Model
   end
 
   before_update :assign_bidders_documents
+  before_save :calculate_total_value_of_items
 
   orderize "id DESC"
   filterize
@@ -229,6 +230,12 @@ class LicitationProcess < Compras::Model
       bidder.assign_document_types
       bidder.save!
     end
+  end
+
+  def calculate_total_value_of_items
+    return unless items
+
+    self.total_value_of_items = items.reject(&:marked_for_destruction?).sum(&:estimated_total_price)
   end
 
   def validate_the_year_to_processe_date_are_the_same

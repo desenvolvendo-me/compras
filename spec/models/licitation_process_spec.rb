@@ -27,7 +27,6 @@ require 'app/models/purchase_solicitation_item'
 require 'app/models/purchase_solicitation_budget_allocation_item'
 require 'app/models/legal_analysis_appraisal'
 
-
 describe LicitationProcess do
   let(:current_prefecture) { double(:current_prefecture) }
 
@@ -73,6 +72,12 @@ describe LicitationProcess do
   it { should have_many(:budget_allocations).through(:administrative_process_budget_allocations) }
 
   it { should have_one(:trading).dependent(:restrict) }
+
+  describe 'default values' do
+    it 'total_value_of_items should be 0.0' do
+      expect(subject.total_value_of_items).to eq BigDecimal('0.0')
+    end
+  end
 
   it { should validate_presence_of :contract_guarantees }
   it { should validate_presence_of :description }
@@ -458,6 +463,50 @@ describe LicitationProcess do
     it "updates the purchase solicitation service_status to liberated" do
       purchase_solicitation.should_receive(:liberate!)
       subject.send(:update_purchase_solicitation_to_liberated, purchase_solicitation)
+    end
+  end
+
+  describe 'when save' do
+    describe "and has not items" do
+      it "total_value_of_items= has not called" do
+        subject.stub(:items).and_return(nil)
+        subject.should_not_receive(:total_value_of_items=)
+
+        subject.run_callbacks(:save)
+      end
+    end
+
+    describe "and has items" do
+      let(:items) { [item1, item2, item3] }
+
+      let(:item1) do
+        double(:items1,
+               :marked_for_destruction? => true,
+               :estimated_total_price => 100
+              )
+      end
+
+      let(:item2) do
+        double(:items2,
+               :marked_for_destruction? => false,
+               :estimated_total_price => 50
+              )
+      end
+
+      let(:item3) do
+        double(:items3,
+               :marked_for_destruction? => false,
+               :estimated_total_price => 10
+              )
+      end
+
+      it "should return tota_value_of_items" do
+        subject.stub(:items).and_return(items)
+
+        subject.run_callbacks(:save)
+
+        expect(subject.total_value_of_items).to eq 60
+      end
     end
   end
 end

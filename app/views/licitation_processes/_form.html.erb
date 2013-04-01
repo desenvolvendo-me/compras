@@ -21,6 +21,24 @@
 </div>
 
 <script>
+    $('a[href="#tab-budget_allocations"]').click(showTotalValueInField);
+
+    function showTotalValueInField() {
+      $("#licitation_process_total_value_of_items").val(numberWithDelimiter(sumOfItems()));
+    }
+
+    function sumOfItems() {
+      var total = 0;
+
+      $(".item-price:visible").each(function() {
+	total += parsePtBrFloat($(this).val());
+      });
+
+      return total;
+    }
+
+    sumOfItems();
+
   $(function () {
     var objectType = $(".object-type-select").val();
 

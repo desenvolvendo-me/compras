@@ -275,14 +275,6 @@ feature "LicitationProcesses" do
       fill_modal 'Tipo de documento', :with => 'Oficial', :field => 'Descrição'
     end
 
-    within_tab "Orçamento" do
-      click_button 'Adicionar Dotação'
-
-      fill_with_autocomplete 'Dotação orçamentária', :with => 'Vencimentos'
-
-      fill_in 'Valor previsto', :with => '20,00'
-    end
-
     within_tab 'Itens' do
       click_button 'Remover Item'
 
@@ -298,6 +290,16 @@ feature "LicitationProcesses" do
 
       # asserting calculated unit price of the item
       expect(page).to have_field 'Valor unitário máximo', :with => '4,00'
+    end
+
+    within_tab "Orçamento" do
+      expect(page).to have_disabled_field 'Valor total dos itens', :with => '20,00'
+
+      click_button 'Adicionar Dotação'
+
+      fill_with_autocomplete 'Dotação orçamentária', :with => 'Vencimentos'
+
+      fill_in 'Valor previsto', :with => '20,00'
     end
 
     within_tab 'Configuração da apuração' do
@@ -340,13 +342,6 @@ feature "LicitationProcesses" do
       expect(page).to have_content 'Oficial'
     end
 
-    within_tab 'Orçamento' do
-      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Vencimentos e Salários'
-      expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
-      expect(page).to have_field 'Saldo da dotação', :with => '500,00'
-      expect(page).to have_field 'Valor previsto', :with => '20,00'
-    end
-
     within_tab "Itens" do
       expect(page).to have_field 'Material', :with => '02.02.00001 - Arame farpado'
       expect(page).to have_field 'Unidade', :with => 'UN'
@@ -355,6 +350,14 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Valor total', :with => '20,00'
 
       expect(page).to have_field 'Item', :with => '1'
+    end
+
+    within_tab 'Orçamento' do
+      #TODO Remover valor errado de Valor total dos itens após correções pendentes.
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Vencimentos e Salários'
+      expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
+      expect(page).to have_field 'Saldo da dotação', :with => '500,00'
+      expect(page).to have_field 'Valor previsto', :with => '20,00'
     end
 
     within_tab 'Configuração da apuração' do
