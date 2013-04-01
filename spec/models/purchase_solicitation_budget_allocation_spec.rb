@@ -14,7 +14,6 @@ describe PurchaseSolicitationBudgetAllocation do
   it { should validate_presence_of :budget_allocation }
   it { should belong_to :purchase_solicitation }
   it { should belong_to :budget_allocation }
-  it { should belong_to :expense_nature }
 
   it "should have false as the default value of blocked" do
     expect(subject.blocked).to eq false

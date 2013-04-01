@@ -116,7 +116,6 @@ feature 'PurchaseSolicitationAnnul' do
 
     within_tab 'Dotações orçamentárias' do
       expect(page).to have_disabled_field 'Dotação'
-      expect(page).to have_disabled_field 'Natureza da despesa'
 
       within_records do
         expect(page).to have_disabled_element 'Remover',

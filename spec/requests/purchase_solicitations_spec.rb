@@ -13,7 +13,6 @@ feature "PurchaseSolicitations" do
   scenario 'create a new purchase_solicitation' do
     BudgetStructure.make!(:secretaria_de_educacao)
     Employee.make!(:sobrinho)
-    ExpenseNature.make!(:vencimento_e_salarios)
     DeliveryLocation.make!(:education)
     budget_allocation = BudgetAllocation.make!(:alocacao)
     Material.make!(:antivirus, :material_type => MaterialType::ASSET)
@@ -62,7 +61,6 @@ feature "PurchaseSolicitations" do
 
     within_tab 'Dotações orçamentárias' do
       fill_with_autocomplete 'Dotação', :with => 'Vencimentos'
-      fill_with_autocomplete 'Natureza da despesa', :with => 'Vencimentos e Salários'
 
       click_button "Adicionar"
 
@@ -105,7 +103,6 @@ feature "PurchaseSolicitations" do
     within_tab 'Dotações orçamentárias' do
       within_records do
         expect(page).to have_content budget_allocation.to_s
-        expect(page).to have_content '3.0.10.01.12 - Vencimentos e Salários'
       end
     end
   end
@@ -114,7 +111,6 @@ feature "PurchaseSolicitations" do
     PurchaseSolicitation.make!(:reparo)
     BudgetStructure.make!(:secretaria_de_desenvolvimento)
     Employee.make!(:wenderson)
-    ExpenseNature.make!(:compra_de_material)
     DeliveryLocation.make!(:health)
     budget_allocation = BudgetAllocation.make!(:reparo_2011)
     Material.make!(:arame_farpado)
@@ -168,7 +164,6 @@ feature "PurchaseSolicitations" do
       end
 
       fill_with_autocomplete 'Dotação', :with => 'Compra de Material'
-      fill_with_autocomplete 'Natureza da despesa', :with => 'Compra de Material'
 
       click_button "Adicionar"
     end
@@ -205,7 +200,6 @@ feature "PurchaseSolicitations" do
 
       within_records do
         expect(page).to have_content '1.29 - Compra de Material'
-        expect(page).to have_content '3.0.10.01.11 - Compra de Material'
       end
     end
   end
@@ -319,7 +313,6 @@ feature "PurchaseSolicitations" do
     PurchaseSolicitation.make!(:reparo)
     BudgetStructure.make!(:secretaria_de_educacao)
     Employee.make!(:sobrinho)
-    ExpenseNature.make!(:vencimento_e_salarios)
     DeliveryLocation.make!(:education)
     budget_allocation = BudgetAllocation.make!(:alocacao)
     Material.make!(:office, :material_type => MaterialType::ASSET)
@@ -351,7 +344,6 @@ feature "PurchaseSolicitations" do
 
     within_tab 'Dotações orçamentárias' do
       fill_with_autocomplete 'Dotação', :with => 'Vencimentos'
-      fill_with_autocomplete 'Natureza da despesa', :with => 'Vencimentos e Salários'
 
       click_button "Adicionar"
     end
@@ -387,7 +379,6 @@ feature "PurchaseSolicitations" do
     within_tab 'Dotações orçamentárias' do
       within_records do
         expect(page).to have_content budget_allocation.to_s
-        expect(page).to have_content '3.0.10.01.12 - Vencimentos e Salários'
       end
     end
   end
@@ -425,7 +416,6 @@ feature "PurchaseSolicitations" do
   scenario 'create a new purchase_solicitation with same budget_structure and material' do
     purchase_solicitation = PurchaseSolicitation.make!(:reparo)
     Employee.make!(:sobrinho)
-    ExpenseNature.make!(:vencimento_e_salarios)
     DeliveryLocation.make!(:education)
 
     navigate 'Processos de Compra > Solicitações de Compra'
@@ -455,7 +445,6 @@ feature "PurchaseSolicitations" do
 
     within_tab 'Dotações orçamentárias' do
       fill_with_autocomplete 'Dotação', :with => 'Vencimentos'
-      fill_with_autocomplete 'Natureza da despesa', :with => 'Vencimentos e Salários'
 
       click_button "Adicionar"
     end
@@ -550,7 +539,6 @@ feature "PurchaseSolicitations" do
     PurchaseSolicitation.make!(:reparo,
                                :items => [item],
                                :kind => PurchaseSolicitationKind::SERVICES)
-    ExpenseNature.make!(:vencimento_e_salarios)
     budget_allocation = BudgetAllocation.make!(:alocacao)
     Material.make!(:antivirus)
     Material.make!(:office, :material_type => MaterialType::SERVICE)
@@ -578,7 +566,6 @@ feature "PurchaseSolicitations" do
 
     within_tab "Dotações orçamentárias" do
       fill_with_autocomplete 'Dotação', :with => 'Vencimentos'
-      fill_with_autocomplete 'Natureza da despesa', :with => 'Vencimentos e Salários'
 
       click_button "Adicionar"
     end
@@ -608,7 +595,6 @@ feature "PurchaseSolicitations" do
   scenario 'should not allow duplicated materials' do
     BudgetStructure.make!(:secretaria_de_educacao)
     Employee.make!(:sobrinho)
-    ExpenseNature.make!(:vencimento_e_salarios)
     DeliveryLocation.make!(:education)
     budget_allocation = BudgetAllocation.make!(:alocacao)
     Material.make!(:antivirus)
@@ -648,7 +634,6 @@ feature "PurchaseSolicitations" do
 
     within_tab 'Dotações orçamentárias' do
       fill_with_autocomplete 'Dotação', :with => 'Vencimentos'
-      fill_with_autocomplete 'Natureza da despesa', :with => 'Vencimentos e Salários'
 
       click_button "Adicionar"
     end

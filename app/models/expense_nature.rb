@@ -7,10 +7,6 @@ class ExpenseNature < Compras::Model
 
   orderize :description
 
-  scope :term, lambda { |q|
-    where { description.like("#{q}%") }
-  }
-
   def self.filter(params)
     query = scoped
     query = query.where { expense_nature.eq(params[:expense_nature]) } if params[:expense_nature].present?

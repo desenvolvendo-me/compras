@@ -29,8 +29,6 @@ class PurchaseSolicitation < Compras::Model
            :inverse_of => :purchase_solicitation,:order => :id
   has_many :budget_allocations, :through => :purchase_solicitation_budget_allocations,
            :dependent => :restrict
-  has_many :expense_natures, :through => :purchase_solicitation_budget_allocations,
-           :dependent => :restrict
   has_many :purchase_solicitation_liberations, :dependent => :destroy, :order => :sequence, :inverse_of => :purchase_solicitation
 
   has_one  :annul, :class_name => 'ResourceAnnul', :as => :annullable, :dependent => :destroy

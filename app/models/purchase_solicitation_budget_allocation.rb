@@ -1,6 +1,5 @@
 class PurchaseSolicitationBudgetAllocation < Compras::Model
   attr_accessible :purchase_solicitation_id, :budget_allocation_id, :blocked
-  attr_accessible :expense_nature_id
 
   belongs_to :purchase_solicitation
   belongs_to :budget_allocation
