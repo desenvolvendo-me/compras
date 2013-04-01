@@ -163,6 +163,50 @@ describe LicitationProcess do
         subject.send(:validate_proposal_envelope_opening_date)
       end
     end
+
+    describe "#validate_the_year_to_processe_date_are_the_same" do
+      context 'when process_date_year is equals to year' do
+	before do
+	  subject.stub(:process_date_year => 2013)
+	  subject.stub(:year => 2013)
+	end
+
+	it 'should be valid' do
+	  subject.valid?
+
+	  expect(subject.errors[:process_date]).to_not include('não pode trocar o ano da data de expedição')
+	end
+      end
+
+      context 'when process_date_year is not equals to year' do
+	before do
+	  subject.stub(:process_date => 2013)
+	  subject.stub(:year => 2012)
+	end
+
+	it 'should not be valid' do
+	  expect(subject).to_not be_valid
+
+	  expect(subject.errors[:process_date]).to include('não pode trocar o ano da data de expedição')
+	end
+      end
+    end
+  end
+
+  describe '#process_date_year' do
+    context 'when process_date is nil' do
+      it 'should return nil' do
+	expect(subject.process_date_year).to be_nil
+      end
+    end
+
+    context 'when process_date is not nil' do
+      it 'should return the year of process_date' do
+	subject.process_date = Date.new(2013, 10, 10)
+
+	expect(subject.process_date_year).to eq 2013
+      end
+    end
   end
 
   describe 'default values' do
