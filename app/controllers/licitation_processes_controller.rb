@@ -73,7 +73,7 @@ class LicitationProcessesController < CrudController
 
       BidderStatusChanger.new(object).change
 
-      super
+      object.save
     end
   end
 end

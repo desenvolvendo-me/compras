@@ -353,7 +353,7 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Orçamento' do
-      #TODO Remover valor errado de Valor total dos itens após correções pendentes.
+      expect(page).to have_field 'Valor total dos itens', :with => '20,00'
       expect(page).to have_field 'Dotação orçamentária', :with => '1 - Vencimentos e Salários'
       expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
       expect(page).to have_field 'Saldo da dotação', :with => '500,00'
@@ -1802,6 +1802,152 @@ feature "LicitationProcesses" do
         expect(page).to_not have_field 'Data do credenciamento'
         expect(page).to_not have_field 'Hora do credenciamento'
       end
+    end
+  end
+
+  scenario 'items can be removed and added individually or with purchase solicitation' do
+    PurchaseSolicitation.make!(:reparo_liberado, :accounting_year => Date.current.year)
+    Employee.make!(:sobrinho)
+    Capability.make!(:reforma)
+    PaymentMethod.make!(:dinheiro)
+    DocumentType.make!(:fiscal)
+    JudgmentForm.make!(:por_item_com_melhor_tecnica)
+    BudgetAllocation.make!(:alocacao)
+    Material.make!(:antivirus)
+    Indexer.make!(:xpto)
+
+    navigate 'Processos de Compra > Processos de Compras'
+
+    click_link 'Criar Processo de Compra'
+
+    expect(page).to have_content "Criar Processo"
+
+    within_tab 'Principal' do
+      choose 'Processo licitatório'
+
+      select 'Compras e serviços', :from => 'Tipo de objeto'
+      select 'Concorrência', :from => 'Modalidade'
+      select 'Por Item com Melhor Técnica', :from =>'Forma de julgamento'
+      fill_in 'Objeto do processo de compra', :with => 'Licitação para compra de carteiras'
+
+      check 'Registro de preço'
+      select 'Empreitada integral', :from => 'Forma de execução'
+      select 'Fiança bancária', :from => 'Tipo de garantia'
+      fill_modal 'Índice de reajuste', :with => 'XPTO'
+      fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
+      fill_in 'Valor da caução', :with => '50,00'
+    end
+
+    within_tab "Solicitantes" do
+      fill_with_autocomplete 'Solicitações de compra', :with => '1'
+
+      within_records do
+        expect(page).to have_content 'Código'
+        expect(page).to have_content 'Solicitante'
+        expect(page).to have_content 'Responsável pela solicitação'
+
+        within 'tbody tr' do
+          expect(page).to have_content '1/2013'
+          expect(page).to have_content '1 - Secretaria de Educação'
+          expect(page).to have_content 'Gabriel Sobrinho'
+        end
+      end
+    end
+
+    within_tab 'Prazos' do
+      fill_in 'Data da expedição', :with => '21/03/2012'
+      fill_in 'Data da disponibilidade', :with => I18n.l(Date.current)
+      fill_modal 'Contato para informações', :with => '958473', :field => 'Matrícula'
+
+      fill_in 'Término do recebimento dos envelopes', :with => I18n.l(Date.current)
+      fill_in 'Hora do recebimento', :with => '14:00'
+
+      fill_in 'Validade da proposta', :with => '5'
+      select 'dia/dias', :from => 'Período da validade da proposta'
+
+      fill_in 'Prazo de entrega', :with => '1'
+      select 'ano/anos', :from => 'Período do prazo de entrega'
+    end
+
+    within_tab 'Documentos' do
+      fill_modal 'Tipo de documento', :with => 'Fiscal', :field => 'Descrição'
+    end
+
+    within_tab 'Orçamento' do
+      expect(page).to have_button 'Adicionar Dotação'
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Vencimentos e Salários'
+
+      expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
+      expect(page).to have_disabled_field 'Compl. do elemento'
+
+      expect(page).to have_field 'Saldo da dotação', :with => '500,00'
+      expect(page).to have_disabled_field 'Saldo da dotação'
+
+      expect(page).to have_button 'Remover Dotação'
+      fill_in 'Valor previsto', :with => '600,00'
+    end
+
+    within_tab "Itens" do
+      expect(page).to have_field 'Item', :with => '1'
+
+      expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
+
+      expect(page).to have_field 'Unidade', :with => 'UN'
+      expect(page).to have_disabled_field 'Unidade'
+
+      expect(page).to have_field 'Quantidade', :with => '3,00'
+
+      expect(page).to have_field 'Valor unitário máximo', :with => '200,00'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice "Processo de Compra 1/2012 criado com sucesso."
+
+    within_tab "Itens" do
+      click_button "Remover Item"
+
+      click_button "Adicionar Item"
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to_not have_notice "Processo de Compra 1/2012 criado com sucesso."
+
+    within_tab "Itens" do
+      expect(page).to have_css 'div.nested-licitation-process-item', :count => 1
+
+      click_button "Remover Item"
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Processo de Compra 1/2012 editado com sucesso.'
+
+    within_tab "Itens" do
+      expect(page).to_not have_css 'div.nested-licitation-process-item'
+
+      click_button "Adicionar Item"
+
+      fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
+
+      fill_in 'Quantidade', :with => '2'
+
+      fill_in 'Valor unitário máximo', :with => '50'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Processo de Compra 1/2012 editado com sucesso.'
+
+    within_tab "Itens" do
+      expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
+      expect(page).to have_field 'Unidade', :with => 'UN'
+      expect(page).to have_field 'Quantidade', :with => '2'
+      expect(page).to have_field 'Valor unitário máximo', :with => '0,50'
+      expect(page).to have_field 'Valor total', :with => '1,00'
+
+      expect(page).to have_field 'Item', :with => '1'
     end
   end
 
