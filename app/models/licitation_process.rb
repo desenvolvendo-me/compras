@@ -12,8 +12,8 @@ class LicitationProcess < Compras::Model
                   :administrative_process_budget_allocations_attributes,
                   :contract_guarantees, :extension_clause, :index_update_rate_id,
                   :type_of_removal, :is_trading, :notice_availability_date,
-                  :contact_id, :stage_of_bids_date, :items_attributes,
-                  :minimum_bid_to_disposal, :concession_period,
+                  :contact_id, :stage_of_bids_date, :stage_of_bids_time,
+                  :items_attributes, :minimum_bid_to_disposal, :concession_period,
                   :concession_period_unit, :goal, :licensor_rights_and_liabilities,
                   :licensee_rights_and_liabilities, :authorization_envelope_opening_date,
                   :authorization_envelope_opening_time, :closing_of_accreditation_date,
@@ -113,6 +113,11 @@ class LicitationProcess < Compras::Model
       :timeliness => {
         :type => :time,
         :on => :update
+      }
+
+    allowing_blank.validates :stage_of_bids_time,
+      :timeliness => {
+        :type => :time
       }
   end
 
