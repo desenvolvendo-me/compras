@@ -69,10 +69,6 @@ class LicitationProcess < Compras::Model
   has_many :items, :class_name => 'AdministrativeProcessBudgetAllocationItem', :dependent => :restrict, :order => :id
   has_many :materials, :through => :items
   has_many :legal_analysis_appraisals, :dependent => :restrict
-  has_many :purchase_solicitation_items,
-           :class_name => 'PurchaseSolicitationBudgetAllocationItem',
-           :finder_sql => Proc.new { purchase_solicitation_items_finder_sql },
-           :inverse_of => :fulfiller
 
   has_one :trading, :dependent => :restrict
 

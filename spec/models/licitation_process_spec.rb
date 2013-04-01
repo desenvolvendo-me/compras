@@ -24,7 +24,6 @@ require 'app/models/indexer'
 require 'app/models/price_registration'
 require 'app/models/trading'
 require 'app/models/purchase_solicitation_item'
-require 'app/models/purchase_solicitation_budget_allocation_item'
 require 'app/models/legal_analysis_appraisal'
 
 describe LicitationProcess do
@@ -67,7 +66,6 @@ describe LicitationProcess do
   it { should have_many(:administrative_process_budget_allocations).dependent(:destroy) }
   it { should have_many(:items).dependent(:restrict)}
   it { should have_many(:materials).through(:items) }
-  it { should have_many(:purchase_solicitation_items) }
   it { should have_many(:legal_analysis_appraisals).dependent(:restrict) }
   it { should have_many(:budget_allocations).through(:administrative_process_budget_allocations) }
 
