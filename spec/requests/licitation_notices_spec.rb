@@ -17,8 +17,8 @@ feature "LicitationNotices" do
 
     fill_modal 'Processo de compra', :with => '2012', :field => 'Ano'
 
-    expect(page).to have_field 'Processo de compra', :with => '1/2012 - Convite 1'
-    expect(page).to have_field 'Modalidade', :with => 'Convite'
+    expect(page).to have_field 'Processo de compra', :with => '1/2012 - Concorrência 1'
+    expect(page).to have_field 'Modalidade', :with => 'Concorrência'
     expect(page).to have_field 'Data do processo', :with => '19/03/2012'
     expect(page).to have_field 'Objeto da licitação', :with => 'Licitação para compra de carteiras'
 
@@ -30,13 +30,13 @@ feature "LicitationNotices" do
     expect(page).to have_notice 'Aviso de Licitação criado com sucesso.'
 
     within_records do
-      click_link '1/2012 - Convite 1 - 05/04/2012'
+      click_link '1/2012 - Concorrência 1 - 05/04/2012'
     end
 
-    expect(page).to have_field 'Processo de compra', :with => '1/2012 - Convite 1'
+    expect(page).to have_field 'Processo de compra', :with => '1/2012 - Concorrência 1'
     expect(page).to have_field 'Número do aviso', :with => '1'
     expect(page).to have_field 'Data do aviso', :with => '05/04/2012'
-    expect(page).to have_field 'Modalidade', :with => 'Convite'
+    expect(page).to have_field 'Modalidade', :with => 'Concorrência'
     expect(page).to have_field 'Data do processo', :with => '19/03/2012'
     expect(page).to have_field 'Objeto da licitação', :with => 'Licitação para compra de carteiras'
     expect(page).to have_field 'Observações gerais', :with => 'Aviso de processo'
@@ -49,13 +49,13 @@ feature "LicitationNotices" do
     expect(page).to have_notice 'Aviso de Licitação editado com sucesso.'
 
     within_records do
-      click_link '1/2012 - Convite 1 - 06/04/2012'
+      click_link '1/2012 - Concorrência 1 - 06/04/2012'
     end
 
-    expect(page).to have_field 'Processo de compra', :with => '1/2012 - Convite 1'
+    expect(page).to have_field 'Processo de compra', :with => '1/2012 - Concorrência 1'
     expect(page).to have_field 'Número do aviso', :with => '1'
     expect(page).to have_field 'Data do aviso', :with => '06/04/2012'
-    expect(page).to have_field 'Modalidade', :with => 'Convite'
+    expect(page).to have_field 'Modalidade', :with => 'Concorrência'
     expect(page).to have_field 'Data do processo', :with => '19/03/2012'
     expect(page).to have_field 'Objeto da licitação', :with => 'Licitação para compra de carteiras'
     expect(page).to have_field 'Observações gerais', :with => 'Novo aviso de processo, continuação.'
@@ -64,7 +64,7 @@ feature "LicitationNotices" do
 
     expect(page).to have_notice 'Aviso de Licitação apagado com sucesso.'
 
-    expect(page).to_not have_content '1/2012 - Convite 1 - 06/04/2012'
+    expect(page).to_not have_content '1/2012 - Concorrência 1 - 06/04/2012'
     expect(page).to_not have_content 'A licitação começou.'
   end
 
@@ -85,13 +85,13 @@ feature "LicitationNotices" do
     expect(page).to have_notice 'Aviso de Licitação criado com sucesso.'
 
     within_records do
-      click_link "2/2013 - Convite 1 - 07/04/2012"
+      click_link "2/2013 - Concorrência 1 - 07/04/2012"
     end
 
-    expect(page).to have_field 'Processo de compra', :with => '2/2013 - Convite 1'
+    expect(page).to have_field 'Processo de compra', :with => '2/2013 - Concorrência 1'
     expect(page).to have_field 'Número do aviso', :with => '1'
     expect(page).to have_field 'Data do aviso', :with => '07/04/2012'
-    expect(page).to have_field 'Modalidade', :with => 'Convite'
+    expect(page).to have_field 'Modalidade', :with => 'Concorrência'
     expect(page).to have_field 'Data do processo', :with => '20/03/2013'
     expect(page).to have_field 'Objeto da licitação', :with => 'Licitação para compra de carteiras'
     expect(page).to have_field 'Observações gerais', :with => 'Aviso de processo 3'
@@ -113,13 +113,13 @@ feature "LicitationNotices" do
     expect(page).to have_notice 'Aviso de Licitação criado com sucesso.'
 
     within_records do
-      click_link "1/2012 - Convite 1 - 06/04/2012"
+      click_link "1/2012 - Concorrência 1 - 06/04/2012"
     end
 
-    expect(page).to have_field 'Processo de compra', :with => '1/2012 - Convite 1'
+    expect(page).to have_field 'Processo de compra', :with => '1/2012 - Concorrência 1'
     expect(page).to have_field 'Número do aviso', :with => '2'
     expect(page).to have_field 'Data do aviso', :with => '06/04/2012'
-    expect(page).to have_field 'Modalidade', :with => 'Convite'
+    expect(page).to have_field 'Modalidade', :with => 'Concorrência'
     expect(page).to have_field 'Data do processo', :with => '19/03/2012'
     expect(page).to have_field 'Objeto da licitação', :with => 'Licitação para compra de carteiras'
     expect(page).to have_field 'Observações gerais', :with => 'Aviso de processo 2'
@@ -131,7 +131,7 @@ feature "LicitationNotices" do
     navigate 'Processos de Compra > Avisos de Licitações'
 
     within_records do
-      click_link "1/2012 - Convite 1 - #{date_current}"
+      click_link "1/2012 - Concorrência 1 - #{date_current}"
     end
 
     clear_modal 'Processo de compra'

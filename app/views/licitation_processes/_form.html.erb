@@ -87,34 +87,31 @@
     }
 
     function filterJudgmentForm() {
-      var licitationKindGroups = <%= JudgmentFormLicitationKindByObjectType.new.licitation_kind_groups.to_json.html_safe %>,
-          options = _(<%= f.object.decorator.judgment_forms_available.to_json.html_safe %>),
-          value = $("#licitation_process_object_type").val(),
-          validGroups = _(licitationKindGroups[value]);
+      var judgmentFormGroups = <%= JudgmentFormFilter.new.by_modality.to_json.html_safe %>,
+          modality = $('#licitation_process_modality').val(),
+          priceRegistration = $('#licitation_process_price_registration').is(':checked'),
+          judgmentForms;
 
-      if (!validGroups.isUndefined()) {
-        $("#licitation_process_judgment_form_id").html("");
+      if (modality) {
+        if (priceRegistration) {
+          judgmentForms = judgmentFormGroups.with_price_registration[modality];
+        } else {
+          judgmentForms = judgmentFormGroups.without_price_registration[modality];
+        }
 
-        $("#licitation_process_judgment_form_id").append(function () {
-          return $("<option>").text('').val('');
-        });
 
-        options.each(function(judgmentForm) {
-          validGroups.each(function(validLicitationKind) {
-            if (judgmentForm.licitation_kind == validLicitationKind) {
-              $("#licitation_process_judgment_form_id").append(function() {
-                return $("<option>").text(judgmentForm.description).
-                                     val(judgmentForm.id).
-                                     data('kind', judgmentForm.kind);
-              });
-            }
+        _(judgmentForms).each(function(judgmentForm) {
+          $("#licitation_process_judgment_form_id").append(function() {
+            return $("<option>").text(judgmentForm.description).
+                                 val(judgmentForm.id).
+                                 data('kind', judgmentForm.kind);
           });
         });
-
-        <% if f.object.judgment_form %>
-          $("#licitation_process_judgment_form_id option").filter('[value="<%= f.object.judgment_form_id %>"]').attr("selected", "selected");
-        <% end %>
       }
+
+      <% if f.object.judgment_form %>
+        $("#licitation_process_judgment_form_id option").filter('[value="<%= f.object.judgment_form_id %>"]').attr("selected", "selected");
+      <% end %>
     }
 
     function disableModalities() {

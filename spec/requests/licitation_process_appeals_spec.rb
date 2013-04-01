@@ -29,10 +29,10 @@ feature "LicitationProcessAppeals" do
     expect(page).to have_notice 'Interposição de Recurso do Processo de Compra criada com sucesso.'
 
     within_records do
-      click_link '1/2012 - Convite 1 - 20/03/2012'
+      click_link '1/2012 - Concorrência 1 - 20/03/2012'
     end
 
-    expect(page).to have_field 'Processo de compra', :with => '1/2012 - Convite 1'
+    expect(page).to have_field 'Processo de compra', :with => '1/2012 - Concorrência 1'
     expect(page).to have_field 'Data do recurso', :with => I18n.l(Date.new(2012, 3, 20))
     expect(page).to have_select 'Referente ao', :selected => 'Edital'
     expect(page).to have_field 'Autor', :with => 'Gabriel Sobrinho'
@@ -55,10 +55,10 @@ feature "LicitationProcessAppeals" do
     expect(page).to have_notice 'Interposição de Recurso do Processo de Compra editada com sucesso.'
 
     within_records do
-      click_link '1/2012 - Convite 1 - 20/03/2012'
+      click_link '1/2012 - Concorrência 1 - 20/03/2012'
     end
 
-    expect(page).to have_field 'Processo de compra', :with => '1/2012 - Convite 1'
+    expect(page).to have_field 'Processo de compra', :with => '1/2012 - Concorrência 1'
     expect(page).to have_field 'Data do recurso', :with => I18n.l(Date.new(2012, 3, 20))
     expect(page).to have_select 'Referente ao', :selected => 'Revogação'
     expect(page).to have_field 'Autor', :with => 'Gabriel Sobrinho'
@@ -74,7 +74,7 @@ feature "LicitationProcessAppeals" do
     expect(page).to have_notice 'Interposição de Recurso do Processo de Compra apagada com sucesso.'
 
     within_records do
-      expect(page).to_not have_link '1/2012 - Convite 1 - 20/03/2012'
+      expect(page).to_not have_link '1/2012 - Concorrência 1 - 20/03/2012'
     end
   end
 end

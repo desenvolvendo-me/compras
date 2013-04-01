@@ -18,7 +18,7 @@ feature "Contracts" do
     expect(page).to have_disabled_field 'Compra direta'
     expect(page).to have_field 'Objeto do contrato', :with => 'Licitação para compra de carteiras'
     expect(page).to have_disabled_field 'Modalidade'
-    expect(page).to have_field 'Modalidade', :with => 'Convite'
+    expect(page).to have_field 'Modalidade', :with => 'Concorrência'
     expect(page).to have_disabled_field 'Forma de execução', :with => 'Empreitada integral'
     expect(page).to have_disabled_field 'Garantias do contrato', :with => 'Fiança bancária'
 
@@ -147,7 +147,7 @@ feature "Contracts" do
     expect(page).to have_field 'Fornecedor', :with => 'Gabriel Sobrinho'
 
     expect(page).to have_select 'Subcontratação', :selected => 'Sim'
-    expect(page).to have_field 'Modalidade', :with => 'Convite'
+    expect(page).to have_field 'Modalidade', :with => 'Concorrência'
     expect(page).to have_field 'Forma de execução', :with => 'Empreitada integral'
     expect(page).to have_field 'Garantias do contrato', :with => 'Fiança bancária'
     expect(page).to have_field 'Unidade orçamentária gestora responsável', :with => '1 - Secretaria de Educação'

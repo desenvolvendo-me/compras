@@ -729,7 +729,7 @@ feature "LicitationProcesses" do
 
       within 'tbody tr' do
         expect(page).to have_content '1/2012'
-        expect(page).to have_content 'Convite'
+        expect(page).to have_content 'Concorrência'
         expect(page).to have_content 'Compras e serviços'
         expect(page).to have_content I18n.l Date.tomorrow
         expect(page).to have_content 'Em andamento'

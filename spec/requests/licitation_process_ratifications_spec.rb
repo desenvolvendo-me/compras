@@ -25,7 +25,7 @@ feature "LicitationProcessRatifications" do
     expect(page).to have_disabled_field 'Processo de compra'
 
     within_modal 'Participante vencedor' do
-      expect(page).to have_field 'Processo de compra', :with => '2/2013 - Convite 1'
+      expect(page).to have_field 'Processo de compra', :with => '2/2013 - Concorrência 1'
       expect(page).to have_disabled_field 'Processo de compra'
 
       click_button 'Pesquisar'
@@ -46,7 +46,7 @@ feature "LicitationProcessRatifications" do
     end
 
     expect(page).to have_disabled_field 'Processo de compra'
-    expect(page).to have_field 'Processo de compra', :with => '2/2013 - Convite 1'
+    expect(page).to have_field 'Processo de compra', :with => '2/2013 - Concorrência 1'
     expect(page).to have_field 'Participante vencedor', :with => 'Wenderson Malheiros'
     expect(page).to have_field 'Data de homologação', :with => I18n.l(Date.current)
     expect(page).to have_field 'Data de adjudicação', :with => I18n.l(Date.current)
@@ -70,7 +70,7 @@ feature "LicitationProcessRatifications" do
     click_link 'Adjudicação/Homologação'
 
     within_records do
-      click_link '1 - Processo de Compra 2/2013 - Convite 1'
+      click_link '1 - Processo de Compra 2/2013 - Concorrência 1'
     end
 
     expect(page).to_not have_link 'Apagar'
@@ -84,10 +84,10 @@ feature "LicitationProcessRatifications" do
     expect(page).to have_notice 'Homologação e Adjudicação de Processo de Compra editada com sucesso.'
 
     within_records do
-      click_link '1 - Processo de Compra 2/2013 - Convite 1'
+      click_link '1 - Processo de Compra 2/2013 - Concorrência 1'
     end
 
-    expect(page).to have_field 'Processo de compra', :with => '2/2013 - Convite 1'
+    expect(page).to have_field 'Processo de compra', :with => '2/2013 - Concorrência 1'
     expect(page).to have_field 'Participante vencedor', :with => 'Wenderson Malheiros'
     expect(page).to have_field 'Data de homologação', :with => I18n.l(Date.tomorrow)
     expect(page).to have_field 'Data de adjudicação', :with => I18n.l(Date.tomorrow)
@@ -118,7 +118,7 @@ feature "LicitationProcessRatifications" do
     fill_modal 'Processo de compra', :with => '2013', :field => 'Ano'
 
     within_modal 'Participante vencedor' do
-      expect(page).to have_field 'Processo de compra', :with => '2/2013 - Convite 1'
+      expect(page).to have_field 'Processo de compra', :with => '2/2013 - Concorrência 1'
       expect(page).to have_disabled_field 'Processo de compra'
 
       click_button 'Pesquisar'
@@ -149,14 +149,14 @@ feature "LicitationProcessRatifications" do
     click_link 'Adjudicação/Homologação'
 
     within_records do
-      click_link '1 - Processo de Compra 2/2013 - Convite 1'
+      click_link '1 - Processo de Compra 2/2013 - Concorrência 1'
     end
 
     click_link 'Imprimir termo'
 
     expect(page).to have_content '1'
     expect(page).to have_content '2/2013'
-    expect(page).to have_content 'Convite'
+    expect(page).to have_content 'Concorrência'
     expect(page).to have_content I18n.l Date.current
     expect(page).to have_content 'Licitação para compra de carteiras'
     expect(page).to have_content 'Wenderson Malheiros'

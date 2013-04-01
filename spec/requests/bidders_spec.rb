@@ -32,7 +32,9 @@ feature "Bidders" do
   end
 
   scenario 'creating, updating, destroy a new bidder' do
-    LicitationProcess.make!(:processo_licitatorio_computador)
+    LicitationProcess.make!(:processo_licitatorio_computador,
+      :modality => Modality::INVITATION,
+      :judgment_form => JudgmentForm.make!(:global_com_menor_preco))
     Creditor.make!(:sobrinho_sa)
     Person.make!(:wenderson)
     Person.make!(:joao_da_silva)
@@ -53,7 +55,6 @@ feature "Bidders" do
 
     fill_modal 'Fornecedor', :with => 'Gabriel Sobrinho'
 
-    fill_in 'Pontuação técnica', :with => '10,00'
     check 'Convidado'
     fill_in 'Protocolo', :with => '123456'
     fill_in 'Data do protocolo', :with => I18n.l(Date.current)
@@ -103,7 +104,6 @@ feature "Bidders" do
     expect(page).to have_field 'Processo de compra', :with => '2/2013 - Convite 1'
     expect(page).to have_field 'Data do processo de compra', :with => '20/03/2013'
     expect(page).to have_field 'Fornecedor', :with => 'Gabriel Sobrinho'
-    expect(page).to have_field 'Pontuação técnica', :with => '10,00'
     expect(page).to have_field 'Protocolo', :with => '123456'
     expect(page).to have_field 'Data do protocolo', :with => I18n.l(Date.current)
     expect(page).to have_field 'Data do recebimento', :with => I18n.l(Date.tomorrow)
@@ -149,7 +149,6 @@ feature "Bidders" do
 
     fill_modal 'Fornecedor', :with => 'Gabriel Sobrinho'
 
-    fill_in 'Pontuação técnica', :with => '10,00'
     uncheck 'Apresentará nova proposta em caso de empate'
     check 'Convidado'
     fill_in 'Protocolo', :with => '111111'
@@ -198,7 +197,6 @@ feature "Bidders" do
 
     expect(page).to_not have_checked_field 'Apresentará nova proposta em caso de empate'
     expect(page).to have_field 'Fornecedor', :with => 'Gabriel Sobrinho'
-    expect(page).to have_field 'Pontuação técnica', :with => '10,00'
     expect(page).to have_field 'Protocolo', :with => '111111'
     expect(page).to have_field 'Data do protocolo', :with => I18n.l(Date.tomorrow)
     expect(page).to have_field 'Data do recebimento', :with => I18n.l(Date.tomorrow + 1.day)
@@ -249,7 +247,9 @@ feature "Bidders" do
   end
 
   scenario 'when is not invited should disable and clear date, protocol fields' do
-    LicitationProcess.make!(:processo_licitatorio_computador)
+    LicitationProcess.make!(:processo_licitatorio_computador,
+      :modality => Modality::INVITATION,
+      :judgment_form => JudgmentForm.make!(:global_com_menor_preco))
 
     navigate 'Processos de Compra > Processos de Compras'
 

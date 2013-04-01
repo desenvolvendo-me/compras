@@ -4,7 +4,7 @@ LicitationProcess.blueprint(:processo_licitatorio) do
   process { 1 }
   protocol { '00088/2012' }
   object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
-  modality { Modality::INVITATION }
+  modality { Modality::CONCURRENCE }
   judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
   description { 'Licitação para compra de carteiras' }
   administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
@@ -39,7 +39,7 @@ LicitationProcess.blueprint(:processo_licitatorio_computador) do
   process { 2 }
   protocol { '00089/2012' }
   object_type { LicitationProcessObjectType::PURCHASE_AND_SERVICES }
-  modality { Modality::INVITATION }
+  modality { Modality::CONCURRENCE }
   judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
   description { 'Licitação para compra de carteiras' }
   administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
