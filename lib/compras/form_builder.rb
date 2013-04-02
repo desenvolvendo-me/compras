@@ -9,6 +9,7 @@ module Compras
     map_type :has_and_belongs_to_many,  :to => Compras::Inputs::HasAndBelongsToManyInput
     map_type :nested_form,              :to => Compras::Inputs::NestedFormInput
     map_type :auto_complete,            :to => Compras::Inputs::AutoCompleteInput
+    map_type :fake,                     :to => Compras::Inputs::FakeInput
 
     def sanitized_object_name
       @sanitized_object_name ||= object_name.gsub(/\]\[|[^-a-zA-Z0-9:.]/, "_").sub(/_$/, "")
