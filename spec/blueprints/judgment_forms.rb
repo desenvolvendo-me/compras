@@ -54,3 +54,10 @@ JudgmentForm.blueprint(:por_lote_com_menor_preco) do
   licitation_kind { LicitationKind::LOWEST_PRICE }
   enabled { true }
 end
+
+JudgmentForm.blueprint(:maior_desconto_por_tabela) do
+  description { 'Maior Desconto por Tabela' }
+  kind { JudgmentFormKind::GLOBAL }
+  licitation_kind { LicitationKind::HIGHER_DISCOUNT_ON_TABLE }
+  enabled { true }
+end

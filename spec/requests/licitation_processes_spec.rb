@@ -18,7 +18,7 @@ feature "LicitationProcesses" do
   scenario 'create a new licitation_process' do
     PaymentMethod.make!(:dinheiro)
     DocumentType.make!(:fiscal)
-    JudgmentForm.make!(:por_item_com_melhor_tecnica)
+    JudgmentForm.make!(:por_item_com_menor_preco)
     BudgetAllocation.make!(:alocacao)
     Material.make!(:antivirus)
     Indexer.make!(:xpto)
@@ -44,10 +44,10 @@ feature "LicitationProcesses" do
 
       select 'Compras e serviços', :from => 'Tipo de objeto'
       select 'Concorrência', :from => 'Modalidade'
-      select 'Por Item com Melhor Técnica', :from =>'Forma de julgamento'
       fill_in 'Objeto do processo de compra', :with => 'Licitação para compra de carteiras'
 
       check 'Registro de preço'
+      select 'Por Item com Menor Preço', :from =>'Forma de julgamento'
       select 'Empreitada integral', :from => 'Forma de execução'
       select 'Fiança bancária', :from => 'Tipo de garantia'
       fill_modal 'Índice de reajuste', :with => 'XPTO'
@@ -127,7 +127,7 @@ feature "LicitationProcesses" do
       expect(page).to have_select 'Modalidade', :selected => 'Concorrência'
       expect(page).to have_disabled_field 'Nº da modalidade', :with => '1'
       expect(page).to have_select 'Tipo de objeto', :selected => 'Compras e serviços'
-      expect(page).to have_select 'Forma de julgamento', :selected => 'Por Item com Melhor Técnica'
+      expect(page).to have_select 'Forma de julgamento', :selected => 'Por Item com Menor Preço'
       expect(page).to have_field 'Objeto do processo de compra', :with => 'Licitação para compra de carteiras'
 
       expect(page).to have_select 'Forma de execução', :selected => 'Empreitada integral'
@@ -1353,138 +1353,64 @@ feature "LicitationProcesses" do
     expect(page).to have_title 'Processos de Compras'
   end
 
-  scenario 'when select disposals_of_assets as object_type should show only best_auction_or_offer' do
-    JudgmentForm.make!(:global_com_menor_preco) # LOWEST_PRICE
-    JudgmentForm.make!(:por_item_com_melhor_tecnica) # BEST_TECHNIQUE
-    JudgmentForm.make!(:por_lote_com_tecnica_e_preco) # TECHNICAL_AND_PRICE
-    JudgmentForm.make!(:global_com_melhor_lance_ou_oferta) # BEST_AUCTION_OR_OFFER
-    JudgmentForm.make!(:por_item_com_menor_preco) # LOWEST_PRICE
+  scenario 'filter judgment form' do
+    JudgmentForm.make!(:global_com_menor_preco) # LOWEST_PRICE   Forma Global com Menor Preço
+    JudgmentForm.make!(:global_com_melhor_lance_ou_oferta) # BEST_AUCTION_OR_OFFER   Global com Melhor Lance ou Oferta
+    JudgmentForm.make!(:maior_desconto_por_tabela) # HIGHER_DISCOUNT_ON_TABLE   Maior Desconto por Tabela
+    JudgmentForm.make!(:por_item_com_melhor_tecnica) # BEST_TECHNIQUE   Por Item com Melhor Técnica
+    JudgmentForm.make!(:por_item_com_menor_preco) # LOWEST_PRICE   Por Item com Menor Preço
+    JudgmentForm.make!(:por_lote_com_tecnica_e_preco) # TECHNICAL_AND_PRICE   Por Lote com Técnica e Preço
 
     navigate 'Processos de Compra > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
     within_tab 'Principal' do
+      choose 'Processo licitatório'
+
       select 'Alienação de bens', :from => 'Tipo de objeto'
       select 'Leilão', :from => 'Modalidade'
 
       expect(page).to have_select('Forma de julgamento',
                                   :options => ['Global com Melhor Lance ou Oferta'])
-    end
-  end
 
-  scenario 'when select concessions_and_permits as object_type should show only best_auction_or_offer' do
-    JudgmentForm.make!(:global_com_menor_preco) # LOWEST_PRICE
-    JudgmentForm.make!(:por_item_com_melhor_tecnica) # BEST_TECHNIQUE
-    JudgmentForm.make!(:por_lote_com_tecnica_e_preco) # TECHNICAL_AND_PRICE
-    JudgmentForm.make!(:global_com_melhor_lance_ou_oferta) # BEST_AUCTION_OR_OFFER
-    JudgmentForm.make!(:por_item_com_menor_preco) # LOWEST_PRICE
-
-    navigate 'Processos de Compra > Processos de Compras'
-
-    click_link 'Criar Processo de Compra'
-
-    within_tab 'Principal' do
       select 'Concessões e permissões', :from => 'Tipo de objeto'
       select 'Concorrência', :from => 'Modalidade'
 
       expect(page).to have_select('Forma de julgamento',
-                                  :options => ['Global com Melhor Lance ou Oferta'])
-    end
-  end
+                                  :options => ['Forma Global com Menor Preço', 'Global com Melhor Lance ou Oferta', 'Por Item com Melhor Técnica', 'Por Item com Menor Preço', 'Por Lote com Técnica e Preço'])
 
-  scenario 'when select call_notice as object_type should show only best_technique' do
-    JudgmentForm.make!(:global_com_menor_preco) # LOWEST_PRICE
-    JudgmentForm.make!(:por_item_com_melhor_tecnica) # BEST_TECHNIQUE
-    JudgmentForm.make!(:por_lote_com_tecnica_e_preco) # TECHNICAL_AND_PRICE
-    JudgmentForm.make!(:global_com_melhor_lance_ou_oferta) # BEST_AUCTION_OR_OFFER
-    JudgmentForm.make!(:por_item_com_menor_preco) # LOWEST_PRICE
+      check 'Registro de preço'
 
-    navigate 'Processos de Compra > Processos de Compras'
+      expect(page).to have_select('Forma de julgamento',
+                                  :options => ['Forma Global com Menor Preço', 'Por Item com Menor Preço', 'Maior Desconto por Tabela'])
 
-    click_link 'Criar Processo de Compra'
-
-    within_tab 'Principal' do
       select 'Edital de chamamento/credenciamento', :from => 'Tipo de objeto'
       select 'Concurso', :from => 'Modalidade'
 
       expect(page).to have_select('Forma de julgamento',
                                   :options => ['Por Item com Melhor Técnica'])
-    end
-  end
 
-  scenario 'when select construction_and_engineering_services as object_type should show only lowest_price and best_technique' do
-    JudgmentForm.make!(:global_com_menor_preco) # LOWEST_PRICE
-    JudgmentForm.make!(:por_item_com_melhor_tecnica) # BEST_TECHNIQUE
-    JudgmentForm.make!(:por_lote_com_tecnica_e_preco) # TECHNICAL_AND_PRICE
-    JudgmentForm.make!(:global_com_melhor_lance_ou_oferta) # BEST_AUCTION_OR_OFFER
-    JudgmentForm.make!(:por_item_com_menor_preco) # LOWEST_PRICE
-
-    navigate 'Processos de Compra > Processos de Compras'
-
-    click_link 'Criar Processo de Compra'
-
-    within_tab 'Principal' do
       select 'Obras e serviços de engenharia', :from => 'Tipo de objeto'
-      select 'Concorrência', :from => 'Modalidade'
-
-      expect(page).to have_select('Forma de julgamento',
-                                  :options => ['Por Item com Melhor Técnica', 'Por Item com Menor Preço'])
-
       select 'Tomada de Preço', :from => 'Modalidade'
 
       expect(page).to have_select('Forma de julgamento',
-                                  :options => ['Por Item com Melhor Técnica', 'Por Item com Menor Preço'])
+                                  :options => ['Forma Global com Menor Preço', 'Global com Melhor Lance ou Oferta', 'Por Item com Melhor Técnica', 'Por Item com Menor Preço', 'Por Lote com Técnica e Preço'])
 
       select 'Convite', :from => 'Modalidade'
 
       expect(page).to have_select('Forma de julgamento',
-                                  :options => ['Por Item com Melhor Técnica', 'Por Item com Menor Preço'])
-
-      select 'Concurso', :from => 'Modalidade'
-
-      expect(page).to have_select('Forma de julgamento',
-                                  :options => ['Por Item com Melhor Técnica', 'Por Item com Menor Preço'])
+                                  :options => ['Forma Global com Menor Preço', 'Por Item com Menor Preço'])
 
       select 'Pregão', :from => 'Modalidade'
 
       expect(page).to have_select('Forma de julgamento',
-                                  :options => ['Por Item com Melhor Técnica', 'Por Item com Menor Preço'])
-    end
-  end
+                                  :options => ['Forma Global com Menor Preço', 'Por Item com Menor Preço'])
 
-  scenario 'when select purchase_and_services as object_type should show only lowest_price and best_technique' do
-    JudgmentForm.make!(:global_com_menor_preco) # LOWEST_PRICE
-    JudgmentForm.make!(:por_item_com_melhor_tecnica) # BEST_TECHNIQUE
-    JudgmentForm.make!(:por_lote_com_tecnica_e_preco) # TECHNICAL_AND_PRICE
-    JudgmentForm.make!(:global_com_melhor_lance_ou_oferta) # BEST_AUCTION_OR_OFFER
-    JudgmentForm.make!(:por_item_com_menor_preco) # LOWEST_PRICE
-
-    navigate 'Processos de Compra > Processos de Compras'
-
-    click_link 'Criar Processo de Compra'
-
-    within_tab 'Principal' do
-      select 'Compras e serviços', :from => 'Tipo de objeto'
-      select 'Concorrência', :from => 'Modalidade'
+      check 'Registro de preço'
 
       expect(page).to have_select('Forma de julgamento',
-                                  :options => ['Por Item com Melhor Técnica', 'Por Item com Menor Preço'])
-
-      select 'Tomada de Preço', :from => 'Modalidade'
-
-      expect(page).to have_select('Forma de julgamento',
-                                  :options => ['Por Item com Melhor Técnica', 'Por Item com Menor Preço'])
-
-      select 'Convite', :from => 'Modalidade'
-
-      expect(page).to have_select('Forma de julgamento',
-                                  :options => ['Por Item com Melhor Técnica', 'Por Item com Menor Preço'])
-
-      select 'Pregão', :from => 'Modalidade'
-
-      expect(page).to have_select('Forma de julgamento',
-                                  :options => ['Por Item com Melhor Técnica', 'Por Item com Menor Preço'])
+                                  :options => ['Forma Global com Menor Preço', 'Por Item com Menor Preço', 'Maior Desconto por Tabela'])
     end
   end
 
@@ -1547,7 +1473,7 @@ feature "LicitationProcesses" do
     Capability.make!(:reforma)
     PaymentMethod.make!(:dinheiro)
     DocumentType.make!(:fiscal)
-    JudgmentForm.make!(:por_item_com_melhor_tecnica)
+    JudgmentForm.make!(:por_item_com_menor_preco)
     BudgetAllocation.make!(:alocacao)
     Material.make!(:antivirus)
     Indexer.make!(:xpto)
@@ -1569,10 +1495,10 @@ feature "LicitationProcesses" do
 
       select 'Compras e serviços', :from => 'Tipo de objeto'
       select 'Concorrência', :from => 'Modalidade'
-      select 'Por Item com Melhor Técnica', :from =>'Forma de julgamento'
       fill_in 'Objeto do processo de compra', :with => 'Licitação para compra de carteiras'
 
       check 'Registro de preço'
+      select 'Por Item com Menor Preço', :from =>'Forma de julgamento'
       select 'Empreitada integral', :from => 'Forma de execução'
       select 'Fiança bancária', :from => 'Tipo de garantia'
       fill_modal 'Índice de reajuste', :with => 'XPTO'
@@ -1811,7 +1737,7 @@ feature "LicitationProcesses" do
     Capability.make!(:reforma)
     PaymentMethod.make!(:dinheiro)
     DocumentType.make!(:fiscal)
-    JudgmentForm.make!(:por_item_com_melhor_tecnica)
+    JudgmentForm.make!(:por_item_com_menor_preco)
     BudgetAllocation.make!(:alocacao)
     Material.make!(:antivirus)
     Indexer.make!(:xpto)
@@ -1827,10 +1753,10 @@ feature "LicitationProcesses" do
 
       select 'Compras e serviços', :from => 'Tipo de objeto'
       select 'Concorrência', :from => 'Modalidade'
-      select 'Por Item com Melhor Técnica', :from =>'Forma de julgamento'
       fill_in 'Objeto do processo de compra', :with => 'Licitação para compra de carteiras'
 
       check 'Registro de preço'
+      select 'Por Item com Menor Preço', :from =>'Forma de julgamento'
       select 'Empreitada integral', :from => 'Forma de execução'
       select 'Fiança bancária', :from => 'Tipo de garantia'
       fill_modal 'Índice de reajuste', :with => 'XPTO'

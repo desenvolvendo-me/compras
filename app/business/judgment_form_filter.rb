@@ -30,7 +30,7 @@ class JudgmentFormFilter
   attr_reader :judgment_form_repository
 
   def filter
-    judgment_form_repository.enabled
+    judgment_form_repository.enabled.order { description }
   end
 
   def concurrence(price_registration)

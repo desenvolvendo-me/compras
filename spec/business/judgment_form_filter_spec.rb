@@ -86,13 +86,14 @@ describe JudgmentFormFilter do
              :best_auction_or_offer? => true)
     end
 
-    before do
-      judgment_form_repository.should_receive(:enabled).any_number_of_times.and_return([
-        lowest_price, best_technique, technical_and_price,higher_discount_on_item,
-        higher_discount_on_lot, higher_discount_on_table, best_auction_or_offer])
-    end
+    let(:judgment_form_repository_enabled) { double(:judgment_form_repository_enabled) }
 
     it 'should return the hash with all judgment forms grouped by modality' do
+      judgment_form_repository.should_receive(:enabled).any_number_of_times.and_return(judgment_form_repository_enabled)
+      judgment_form_repository_enabled.should_receive(:order).any_number_of_times.and_return([
+        lowest_price, best_technique, technical_and_price,higher_discount_on_item,
+        higher_discount_on_lot, higher_discount_on_table, best_auction_or_offer])
+
       expect(subject.by_modality).to eq({
         :with_price_registration => {
           :concurrence => [lowest_price, higher_discount_on_table],

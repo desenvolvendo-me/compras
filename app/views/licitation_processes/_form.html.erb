@@ -60,7 +60,7 @@
       }
     });
 
-    $('#licitation_process_modality').on('change', function() {
+    $('#licitation_process_modality, #licitation_process_price_registration').on('change', function() {
       filterJudgmentForm();
     });
 
@@ -92,13 +92,14 @@
           priceRegistration = $('#licitation_process_price_registration').is(':checked'),
           judgmentForms;
 
+      $("#licitation_process_judgment_form_id option").remove();
+
       if (modality) {
         if (priceRegistration) {
           judgmentForms = judgmentFormGroups.with_price_registration[modality];
         } else {
           judgmentForms = judgmentFormGroups.without_price_registration[modality];
         }
-
 
         _(judgmentForms).each(function(judgmentForm) {
           $("#licitation_process_judgment_form_id").append(function() {
