@@ -1,6 +1,6 @@
 <div class="buttons">
-  <p>
-    <% if f.object.persisted? %>
+  <% if f.object.persisted? %>
+    <p>
       <%= link_to('Laudo de Análise Jurídica', legal_analysis_appraisals_path(:licitation_process_id => resource.id), :class => "button primary") %>
       <%= link_to('Licitantes', bidders_path(:licitation_process_id => resource.id), :class => "button primary",
                   'data-disabled' => f.object.decorator.must_have_published_edital) %>
@@ -9,12 +9,13 @@
 
       <%= classification_link %>
       <%= calculation_link %>
-
+    <p>
+    </p>
       <%= link_to('Lotes de itens', licitation_process_lots_path(:licitation_process_id => resource.id), :class => "button primary") %>
 
       <%= link_to('Pareceres da comissão julgadora', judgment_commission_advices_path(:licitation_process_id => resource.id), :class => "button primary") %>
-    <% end %>
-  </p>
+    </p>
+  <% end %>
 
   <% if can?(:modify, main_controller_name) %>
     <%= f.button :submit, 'data-disabled' => f.object.decorator.not_updatable_message %>
