@@ -1,7 +1,6 @@
 module Compras
   module Inputs
     module MaskedInput
-
       def input_html_options
         options = super
 
@@ -24,7 +23,7 @@ module Compras
       end
 
       def find_mask_validator
-        find_validator(MaskValidator)
+        find_validator(:mask)
       end
     end
   end
