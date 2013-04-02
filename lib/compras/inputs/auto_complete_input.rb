@@ -8,11 +8,20 @@ module Compras
       protected
 
       def auto_complete_field
-        @builder.text_field(label_target, input_html_options)
+        if fake?
+          name = "#{sanitized_object_name}[#{label_target}]"
+          template.text_field_tag(name, nil, input_html_options)
+        else
+          @builder.text_field(label_target, input_html_options)
+        end
       end
 
       def hidden_field
-        @builder.hidden_field(hidden_field_name) if hidden_field_name
+        if fake?
+          template.hidden_field_tag(hidden_field_name)
+        else
+          @builder.hidden_field(hidden_field_name)
+        end
       end
 
       def label_target
@@ -35,6 +44,10 @@ module Compras
         end
       end
 
+      def fake?
+        options.fetch(:fake, false)
+      end
+
       def source_path
         options[:source_path] || find_source_url
       end
@@ -54,12 +67,16 @@ module Compras
         name.to_s.underscore
       end
 
-      def hidden_field_name
+      def hidden_field_name_option
         options.fetch(:hidden_field, "#{attribute_name}_id")
       end
 
+      def hidden_field_name
+        options.fetch(:hidden_field, "#{sanitized_object_name}[#{attribute_name}_id]")
+      end
+
       def hidden_field_id
-        [sanitized_object_name, index, hidden_field_name].compact.join('_') if hidden_field_name
+        [sanitized_object_name, index, hidden_field_name_option].compact.join('_') if hidden_field_name_option
       end
 
       def hidden_field_value_attribute
