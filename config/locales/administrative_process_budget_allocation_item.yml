@@ -7,8 +7,9 @@ pt-BR:
 
     attributes:
       administrative_process_budget_allocation_item:
-        order: "Item"
-        reference_unit: "Unidade"
-        quantity: "Quantidade"
-        unit_price: "Valor unitário máximo"
         estimated_total_price: "Valor total"
+        lot: "Lote"
+        order: "Item"
+        quantity: "Quantidade"
+        reference_unit: "Unidade"
+        unit_price: "Valor unitário máximo"

@@ -88,6 +88,8 @@ feature "LicitationProcesses" do
     within_tab "Itens" do
       click_button 'Adicionar Item'
 
+      fill_in 'Lote', :with => '2234'
+
       fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
 
       # getting data from modal
@@ -170,6 +172,7 @@ feature "LicitationProcesses" do
     end
 
     within_tab "Itens" do
+      expect(page).to have_field 'Lote', :with => '2234'
       expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
       expect(page).to have_field 'Unidade', :with => 'UN'
       expect(page).to have_field 'Quantidade', :with => '2'
@@ -280,6 +283,7 @@ feature "LicitationProcesses" do
 
       click_button 'Adicionar Item'
 
+      fill_in 'Lote', :with => '5844'
       fill_modal 'Material', :with => 'Arame farpado', :field => 'Descrição'
 
       # getting data from modal
@@ -343,6 +347,7 @@ feature "LicitationProcesses" do
     end
 
     within_tab "Itens" do
+      expect(page).to have_field 'Lote', :with => '5844'
       expect(page).to have_field 'Material', :with => '02.02.00001 - Arame farpado'
       expect(page).to have_field 'Unidade', :with => 'UN'
       expect(page).to have_field 'Quantidade', :with => '5'
@@ -1556,6 +1561,9 @@ feature "LicitationProcesses" do
     end
 
     within_tab "Itens" do
+
+      fill_in 'Lote', :with => '2234'
+
       expect(page).to have_field 'Item', :with => '1'
 
       expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
@@ -1602,6 +1610,7 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Itens' do
+      expect(page).to have_field 'Lote', :with => '2234'
       expect(page).to have_field 'Item', :with => '1'
       expect(page).to have_disabled_field 'Item'
 
@@ -1834,6 +1843,8 @@ feature "LicitationProcesses" do
     end
 
     within_tab "Itens" do
+      fill_in 'Lote', :with => '2234'
+
       expect(page).to have_field 'Item', :with => '1'
 
       expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
@@ -1875,6 +1886,8 @@ feature "LicitationProcesses" do
 
       click_button "Adicionar Item"
 
+      fill_in 'Lote', :with => '2234'
+
       fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
 
       fill_in 'Quantidade', :with => '2'
@@ -1887,6 +1900,7 @@ feature "LicitationProcesses" do
     expect(page).to have_notice 'Processo de Compra 1/2012 editado com sucesso.'
 
     within_tab "Itens" do
+      expect(page).to have_field 'Lote', :with => '2234'
       expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
       expect(page).to have_field 'Unidade', :with => 'UN'
       expect(page).to have_field 'Quantidade', :with => '2'

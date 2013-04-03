@@ -4,6 +4,10 @@
 
   <div class="yui3-g">
     <div class="yui3-u-1-8">
+      <%= f.input :lot %>
+    </div>
+
+    <div class="yui3-u-1-8">
       <%= f.input :order, :disabled => true, :input_html => { :class => :order } %>
     </div>
 
@@ -14,9 +18,7 @@
     <div class="yui3-u-1-8">
       <%= f.input :reference_unit, :disabled => true, :input_html => { :class => 'reference-unit' } %>
     </div>
-  </div>
 
-  <div class="yui3-g">
     <div class="yui3-u-1-6">
       <%= f.input :quantity, :input_html => { :class => 'item-quantity' } %>
     </div>

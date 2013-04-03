@@ -1,5 +1,5 @@
 class AdministrativeProcessBudgetAllocationItem < Compras::Model
-  attr_accessible :material_id, :quantity, :unit_price
+  attr_accessible :material_id, :quantity, :unit_price, :lot
 
   attr_accessor :order
 
@@ -16,7 +16,7 @@ class AdministrativeProcessBudgetAllocationItem < Compras::Model
 
   delegate :reference_unit, :description, :to => :material, :allow_nil => true
 
-  validates :material, :quantity, :presence => true
+  validates :material, :quantity, :lot, :presence => true
 
   orderize "id DESC"
   filterize
