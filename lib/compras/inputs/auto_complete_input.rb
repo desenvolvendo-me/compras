@@ -18,9 +18,9 @@ module Compras
 
       def hidden_field
         if fake?
-          template.hidden_field_tag(hidden_field_name)
+          template.hidden_field_tag(hidden_field_name, nil, hidden_input_html_options)
         else
-          @builder.hidden_field(hidden_field_name)
+          @builder.hidden_field(hidden_field_name, hidden_input_html_options)
         end
       end
 
@@ -32,10 +32,17 @@ module Compras
         super.unshift("string")
       end
 
+      def hidden_input_html_options
+        {
+          :class => options['data-hidden-field-class'] || ''
+        }
+      end
+
       def input_html_options
         super.tap do |options|
           options['data-auto-complete']                   = true
           options['data-source']                        ||= source_path
+          options['data-hidden-field-class']            ||= ''
           options['data-hidden-field-id']               ||= hidden_field_id if hidden_field_id
           options['data-hidden-field-value-attribute']  ||= hidden_field_value_attribute
           options['data-max-results']                   ||= max_results
