@@ -15,4 +15,7 @@ FactoryGirl.preload do
   factory(:sao_francisco_bh)        { create(:neighborhood, name: 'São Francisco',  city: cities(:belo_horizonte)) }
   factory(:sao_francisco_curitiba)  { create(:neighborhood, name: 'São Francisco',  city: cities(:curitiba)) }
   factory(:portugal_porto_alegre)   { create(:neighborhood, name: 'Portugal',       city: cities(:porto_alegre)) }
+
+  factory(:metro)   { create(:reference_unit, name: 'Metro',   acronym: 'M' ) }
+  factory(:unidade) { create(:reference_unit, name: 'Unidade', acronym: 'UN') }
 end

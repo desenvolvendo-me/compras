@@ -26,4 +26,9 @@ FactoryGirl.define do
   factory :neighborhood do
     name 'Centro'
   end
+
+  factory :reference_unit do
+    name    'Metro'
+    acronym 'M'
+  end
 end

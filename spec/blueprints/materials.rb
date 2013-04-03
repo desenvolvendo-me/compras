@@ -4,7 +4,7 @@ Material.blueprint(:antivirus) do
   code { "01.01.00001" }
   description { "Antivirus" }
   detailed_description { "Antivirus avast" }
-  reference_unit { ReferenceUnit.make!(:unidade) }
+  reference_unit { ::FactoryGirl::Preload.factories['ReferenceUnit'][:unidade] }
   manufacturer { "Plantador" }
   combustible { false }
   material_type { MaterialType::CONSUMPTION }
@@ -16,7 +16,7 @@ Material.blueprint(:office) do
   code { "01.01.00002" }
   description { "Office" }
   detailed_description { "MS Office" }
-  reference_unit { ReferenceUnit.make!(:unidade) }
+  reference_unit { ::FactoryGirl::Preload.factories['ReferenceUnit'][:unidade] }
   manufacturer { "MS" }
   combustible { false }
   material_type { MaterialType::CONSUMPTION }
@@ -28,7 +28,7 @@ Material.blueprint(:arame_farpado) do
   code { "02.02.00001" }
   description { "Arame farpado" }
   detailed_description { "Arame farpado" }
-  reference_unit { ReferenceUnit.make!(:unidade) }
+  reference_unit { ::FactoryGirl::Preload.factories['ReferenceUnit'][:unidade] }
   manufacturer { "Moveis" }
   combustible { false }
   material_type { MaterialType::CONSUMPTION }
@@ -40,7 +40,7 @@ Material.blueprint(:arame_comum) do
   code { "02.02.00002" }
   description { "Arame comum" }
   detailed_description { "Arame comum" }
-  reference_unit { ReferenceUnit.make!(:unidade) }
+  reference_unit { ::FactoryGirl::Preload.factories['ReferenceUnit'][:unidade] }
   combustible { false }
   material_type { MaterialType::CONSUMPTION }
   expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
@@ -51,7 +51,7 @@ Material.blueprint(:manutencao) do
   code { "01.05.00001" }
   description { "Manutenção de Computadores" }
   detailed_description { "Manutenção de Computadores" }
-  reference_unit { ReferenceUnit.make!(:unidade) }
+  reference_unit { ::FactoryGirl::Preload.factories['ReferenceUnit'][:unidade] }
   material_type { MaterialType::SERVICE }
   expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
 end

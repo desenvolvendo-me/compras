@@ -43,8 +43,6 @@ feature "ReferenceUnits" do
   end
 
   scenario 'index with columns at the index' do
-    ReferenceUnit.make!(:metro)
-
     navigate 'Comum > Cadastrais > Materiais > Unidades de Medida'
 
     within_records do

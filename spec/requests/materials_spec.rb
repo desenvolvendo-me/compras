@@ -288,7 +288,6 @@ feature "Materials" do
 
   def make_dependencies!
     MaterialsClass.make!(:software)
-    ReferenceUnit.make!(:unidade)
     ExpenseNature.make!(:vencimento_e_salarios)
   end
 end
