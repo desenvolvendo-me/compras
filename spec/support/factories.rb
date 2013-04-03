@@ -39,4 +39,9 @@ FactoryGirl.define do
   factory :position do
     name 'Gerente'
   end
+
+  factory :condominium do
+    name 'Tambuata'
+    condominium_type CondominiumType::VERTICAL
+  end
 end

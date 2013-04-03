@@ -23,4 +23,7 @@ FactoryGirl.preload do
 
   factory(:gerente)    { create(:position, name: 'Gerente')    }
   factory(:supervisor) { create(:position, name: 'Supervisor') }
+
+  factory(:tambuata)          { create(:condominium, name: 'Tambuata',          condominium_type: CondominiumType::VERTICAL)   }
+  factory(:parque_das_flores) { create(:condominium, name: 'Parque das Flores', condominium_type: CondominiumType::HORIZONTAL) }
 end
