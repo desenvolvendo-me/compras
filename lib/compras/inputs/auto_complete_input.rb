@@ -31,6 +31,7 @@ module Compras
           options['data-hidden-field-value-attribute']  ||= hidden_field_value_attribute
           options['data-max-results']                   ||= max_results
           options['data-min-length']                    ||= min_length
+          options['data-clear-input']                   ||= clear_input
         end
       end
 
@@ -71,6 +72,10 @@ module Compras
 
       def min_length
         options.fetch(:min_length, 1)
+      end
+
+      def clear_input
+        options[:clear_input] || false
       end
 
       def index

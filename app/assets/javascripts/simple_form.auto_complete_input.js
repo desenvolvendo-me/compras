@@ -1,10 +1,11 @@
 (function ($) {
   $("input[data-auto-complete]").live('focus', function() {
-    var input = $(this),
-        hiddenInput = $('#' + input.data("hidden-field-id")),
-        valueAttribute = input.data("hidden-field-value-attribute"),
-        maxResults = input.data("max-results"),
-        minLength  = input.data("min-length");
+    var input           = $(this),
+        hiddenInput     = $('#' + input.data("hidden-field-id")),
+        valueAttribute  = input.data("hidden-field-value-attribute"),
+        maxResults      = input.data("max-results"),
+        minLength       = input.data("min-length");
+        clearAfterAdd   = input.data('clear-input');
 
     input.autocomplete({
       delay: 500,
@@ -19,6 +20,10 @@
         input.val(ui.item.label);
         hiddenInput.val(ui.item[valueAttribute]);
         input.trigger('change', ui.item);
+
+        if (clearAfterAdd) {
+          return false;
+        }
       },
 
       response: function(event, ui) {
@@ -37,7 +42,7 @@
       }
     });
 
-    input.change(function (event, object) {
+    input.change(function(event, object) {
       $(this).removeClass("loading");
       if (object === null && _.isEmpty(input.val())) {
         hiddenInput.val("");
