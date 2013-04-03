@@ -17,7 +17,8 @@ class LicitationProcess < Compras::Model
                   :concession_period_unit, :goal, :licensor_rights_and_liabilities,
                   :licensee_rights_and_liabilities, :authorization_envelope_opening_date,
                   :authorization_envelope_opening_time, :closing_of_accreditation_date,
-                  :closing_of_accreditation_time, :purchase_solicitation_ids, :total_value_of_items
+                  :closing_of_accreditation_time, :purchase_solicitation_ids, :total_value_of_items,
+                  :budget_allocations_total_value
 
   auto_increment :process, :by => :year
   auto_increment :modality_number, :by => [:year, :modality, :type_of_removal]
@@ -120,7 +121,7 @@ class LicitationProcess < Compras::Model
   end
 
   before_update :assign_bidders_documents
-  before_save :calculate_total_value_of_items
+  before_save :calculate_total_value_of_items, :calculate_budget_allocations_total_value
 
   orderize "id DESC"
   filterize
@@ -230,6 +231,12 @@ class LicitationProcess < Compras::Model
     return unless items
 
     self.total_value_of_items = items.reject(&:marked_for_destruction?).sum(&:estimated_total_price)
+  end
+
+  def calculate_budget_allocations_total_value
+    return unless administrative_process_budget_allocations
+
+    self.budget_allocations_total_value = administrative_process_budget_allocations.reject(&:marked_for_destruction?).sum(&:value)
   end
 
   def validate_the_year_to_processe_date_are_the_same

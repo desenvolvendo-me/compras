@@ -300,7 +300,7 @@ feature "LicitationProcesses" do
 
     within_tab "Orçamento" do
       expect(page).to have_disabled_field 'Valor total dos itens', :with => '20,00'
-
+      expect(page).to have_disabled_field 'Valor total das dotações', :with => '20,00'
       click_button 'Adicionar Dotação'
 
       fill_with_autocomplete 'Dotação orçamentária', :with => 'Aposentadorias'
@@ -360,7 +360,8 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Orçamento' do
-      expect(page).to have_field 'Valor total dos itens', :with => '20,00'
+      expect(page).to have_disabled_field 'Valor total dos itens', :with => '20,00'
+      expect(page).to have_disabled_field 'Valor total das dotações', :with => '40,00'
       expect(page).to have_field 'Dotação orçamentária', :with => '1 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
       expect(page).to have_field 'Compl. do elemento', :with => '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
       expect(page).to have_field 'Saldo da dotação', :with => '500,00'

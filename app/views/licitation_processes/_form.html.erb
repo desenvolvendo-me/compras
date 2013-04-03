@@ -21,23 +21,36 @@
 </div>
 
 <script>
-    $('a[href="#tab-budget_allocations"]').click(showTotalValueInField);
+  var fieldItems = '.item-price',
+      fieldBudget = '.allocation-value',
+      nestedItems = 'div.nested-licitation-process-item',
+      nestedBudget = 'div.nested-administrative-process-budget-allocation';
 
-    function showTotalValueInField() {
-      $("#licitation_process_total_value_of_items").val(numberWithDelimiter(sumOfItems()));
-    }
+  $('a[href="#tab-budget_allocations"]').click(function() {
+    $('#licitation_process_total_value_of_items').val(sumOfItems(nestedItems, fieldItems));
+    $('#licitation_process_budget_allocations_total_value').val(sumOfItems(nestedBudget, fieldBudget));
+  });
 
-    function sumOfItems() {
-      var total = 0;
+  function sumOfItems(nested, field) {
+    var total = 0,
+    div = $(nested).not('[style*="display: none"]');
 
-      $(".item-price:visible").each(function() {
-        total += parsePtBrFloat($(this).val());
-      });
+    div.find(field).each(function() {
+      total += parsePtBrFloat($(this).val());
+    });
 
-      return total;
-    }
+    total = numberWithDelimiter(total);
 
-    sumOfItems();
+    return total;
+  }
+
+  $('form.licitation_process').on('keyup', '.allocation-value', function() {
+    $('#licitation_process_budget_allocations_total_value').val(sumOfItems(nestedBudget, fieldBudget));
+  });
+
+  $('form.licitation_process').on('click', '.remove-administrative-process-budget-allocation', function() {
+    $('#licitation_process_budget_allocations_total_value').val(sumOfItems(nestedBudget, fieldBudget));
+  });
 
   $(function () {
     var objectType = $(".object-type-select").val();

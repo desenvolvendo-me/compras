@@ -75,6 +75,10 @@ describe LicitationProcess do
     it 'total_value_of_items should be 0.0' do
       expect(subject.total_value_of_items).to eq BigDecimal('0.0')
     end
+
+    it 'budget_allocations_total_value should be 0.0' do
+      expect(subject.budget_allocations_total_value).to eq BigDecimal('0.0')
+    end
   end
 
   it { should validate_presence_of :contract_guarantees }
@@ -548,6 +552,49 @@ describe LicitationProcess do
         subject.run_callbacks(:save)
 
         expect(subject.total_value_of_items).to eq 60
+      end
+    end
+
+    describe "and has budget allocations" do
+      it "budget_allocations_total_value= has not called" do
+        subject.stub(:administrative_process_budget_allocations).and_return(nil)
+        subject.should_not_receive(:budget_allocations_total_value=)
+
+        subject.run_callbacks(:save)
+      end
+    end
+
+    describe "and not has budget allocations" do
+      let(:administrative_process_budget_allocations) do
+        [budget_allocation1, budget_allocation2, budget_allocation3]
+      end
+
+      let(:budget_allocation1) do
+        double(:budget_allocation1,
+               :marked_for_destruction? => false,
+               :value => 5
+              )
+      end
+
+      let(:budget_allocation2) do
+        double(:budget_allocation2,
+               :marked_for_destruction? => true,
+               :value => 10
+              )
+      end
+
+      let(:budget_allocation3) do
+        double(:budget_allocation3,
+               :marked_for_destruction? => false,
+               :value => 5
+              )
+      end
+
+      it "should return budget_allocations_total_value" do
+        subject.stub(:administrative_process_budget_allocations).and_return(administrative_process_budget_allocations)
+        subject.run_callbacks(:save)
+
+        expect(subject.budget_allocations_total_value).to eq 10
       end
     end
   end
