@@ -1,5 +1,5 @@
 class AdministrativeProcessBudgetAllocationItem < Compras::Model
-  attr_accessible :material_id, :quantity, :unit_price, :lot
+  attr_accessible :material_id, :quantity, :unit_price, :lot, :additional_information
 
   attr_accessor :order
 

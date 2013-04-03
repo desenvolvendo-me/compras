@@ -97,6 +97,7 @@ feature "LicitationProcesses" do
 
       fill_in 'Quantidade', :with => '2'
       fill_in 'Valor unitário máximo', :with => '10,00'
+      fill_in 'Informações complementares', :with => 'Produto antivirus avast'
 
       # asserting calculated total price of the item
       expect(page).to have_field 'Valor total', :with => '20,00'
@@ -178,8 +179,8 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Quantidade', :with => '2'
       expect(page).to have_field 'Valor unitário máximo', :with => '10,00'
       expect(page).to have_field 'Valor total', :with => '20,00'
-
       expect(page).to have_field 'Item', :with => '1'
+      expect(page).to have_field 'Informações complementares', :with => 'Produto antivirus avast'
     end
 
     within_tab 'Receita' do
@@ -291,6 +292,7 @@ feature "LicitationProcesses" do
 
       fill_in 'Quantidade', :with => '5'
       fill_in 'Valor total', :with => '20,00'
+      fill_in 'Informações complementares', :with => 'Produto rolos de arame farpado'
 
       # asserting calculated unit price of the item
       expect(page).to have_field 'Valor unitário máximo', :with => '4,00'
@@ -353,8 +355,8 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Quantidade', :with => '5'
       expect(page).to have_field 'Valor unitário máximo', :with => '4,00'
       expect(page).to have_field 'Valor total', :with => '20,00'
-
       expect(page).to have_field 'Item', :with => '1'
+      expect(page).to have_field 'Informações complementares', :with => 'Produto rolos de arame farpado'
     end
 
     within_tab 'Orçamento' do

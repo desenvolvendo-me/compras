@@ -7,6 +7,7 @@ pt-BR:
 
     attributes:
       administrative_process_budget_allocation_item:
+        additional_information: "Informações complementares"
         estimated_total_price: "Valor total"
         lot: "Lote"
         order: "Item"

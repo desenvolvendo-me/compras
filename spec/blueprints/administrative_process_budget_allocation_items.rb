@@ -4,6 +4,7 @@ AdministrativeProcessBudgetAllocationItem.blueprint(:item) do
   lot { 2050 }
   quantity { 2 }
   unit_price { 10.0 }
+  additional_information { "produto antivirus avast" }
 end
 
 AdministrativeProcessBudgetAllocationItem.blueprint(:item_arame) do
@@ -18,6 +19,7 @@ AdministrativeProcessBudgetAllocationItem.blueprint(:item_arame_farpado) do
   lot { 2050 }
   quantity { 2 }
   unit_price { 30.0 }
+  additional_information { "produto arame farpado" }
 end
 
 AdministrativeProcessBudgetAllocationItem.blueprint(:item_with_proposals) do
@@ -30,4 +32,5 @@ AdministrativeProcessBudgetAllocationItem.blueprint(:item_with_proposals) do
     BidderProposal.make!(:proposta_licitante_7, :administrative_process_budget_allocation_item => object),
     BidderProposal.make!(:proposta_licitante_2, :administrative_process_budget_allocation_item => object)
   ] }
+  additional_information { "produto antivirus avg" }
 end
