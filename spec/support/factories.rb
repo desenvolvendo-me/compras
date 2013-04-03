@@ -44,4 +44,8 @@ FactoryGirl.define do
     name 'Tambuata'
     condominium_type CondominiumType::VERTICAL
   end
+
+  factory :land_subdivision do
+    name 'Solar da Serra'
+  end
 end

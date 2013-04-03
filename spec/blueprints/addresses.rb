@@ -1,7 +1,7 @@
 Address.blueprint(:apto) do
   neighborhood { ::FactoryGirl::Preload.factories['Neighborhood'][:sao_francisco_curitiba] }
   street { Street.make!(:girassol_curitiba) }
-  land_subdivision { LandSubdivision.make!(:solar_da_serra) }
+  land_subdivision { ::FactoryGirl::Preload.factories['LandSubdivision'][:solar_da_serra] }
   condominium { ::FactoryGirl::Preload.factories['Condominium'][:parque_das_flores] }
   complement { "Apto 34" }
   zip_code { "33400-500" }
@@ -12,7 +12,7 @@ end
 Address.blueprint(:general) do
   neighborhood { ::FactoryGirl::Preload.factories['Neighborhood'][:sao_francisco_curitiba] }
   street { Street.make!(:girassol_curitiba) }
-  land_subdivision { LandSubdivision.make!(:solar_da_serra) }
+  land_subdivision { ::FactoryGirl::Preload.factories['LandSubdivision'][:solar_da_serra] }
   condominium { ::FactoryGirl::Preload.factories['Condominium'][:parque_das_flores] }
   complement { "Apto 34" }
   zip_code { "33400-500" }
@@ -23,7 +23,7 @@ end
 Address.blueprint(:education) do
   neighborhood { ::FactoryGirl::Preload.factories['Neighborhood'][:portugal_porto_alegre] }
   street { Street.make!(:amazonas) }
-  land_subdivision { LandSubdivision.make!(:horizonte_a_vista) }
+  land_subdivision { ::FactoryGirl::Preload.factories['LandSubdivision'][:horizonte_a_vista] }
   condominium { ::FactoryGirl::Preload.factories['Condominium'][:tambuata] }
   complement { "Logo ali" }
   zip_code { "33600-500" }

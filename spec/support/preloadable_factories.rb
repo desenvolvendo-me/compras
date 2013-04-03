@@ -26,4 +26,7 @@ FactoryGirl.preload do
 
   factory(:tambuata)          { create(:condominium, name: 'Tambuata',          condominium_type: CondominiumType::VERTICAL)   }
   factory(:parque_das_flores) { create(:condominium, name: 'Parque das Flores', condominium_type: CondominiumType::HORIZONTAL) }
+
+  factory(:solar_da_serra)    { create(:land_subdivision, name: 'Solar da Serra')    }
+  factory(:horizonte_a_vista) { create(:land_subdivision, name: 'Horizonte a Vista') }
 end

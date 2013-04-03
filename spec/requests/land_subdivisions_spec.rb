@@ -38,15 +38,13 @@ feature "LandSubdivisions" do
   end
 
   scenario 'index with columns at the index' do
-    LandSubdivision.make!(:terra_prometida)
-
     navigate 'Geral > Parâmetros > Endereços > Loteamentos'
 
     within_records do
       expect(page).to have_content 'Nome'
 
       within 'tbody tr' do
-        expect(page).to have_content 'Terra Prometida'
+        expect(page).to have_content 'Horizonte a Vista'
       end
     end
   end
