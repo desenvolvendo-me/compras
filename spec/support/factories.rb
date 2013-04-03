@@ -31,4 +31,8 @@ FactoryGirl.define do
     name    'Metro'
     acronym 'M'
   end
+
+  factory :profile do
+    name 'Gestor'
+  end
 end

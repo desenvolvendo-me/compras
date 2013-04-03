@@ -11,15 +11,15 @@ feature "Profiles" do
 
     click_link 'Criar Perfil'
 
-    fill_in 'Nome', :with => 'Gestor'
+    fill_in 'Nome', :with => 'Gestor 2'
 
     click_button 'Salvar'
 
     expect(page).to have_notice 'Perfil criado com sucesso.'
 
-    click_link 'Gestor'
+    click_link 'Gestor 2'
 
-    expect(page).to have_field 'Nome', :with => 'Gestor'
+    expect(page).to have_field 'Nome', :with => 'Gestor 2'
 
     fill_in 'Nome', :with => 'Administrador'
 
@@ -41,8 +41,6 @@ feature "Profiles" do
   end
 
   scenario 'index with columns at the index' do
-    Profile.make!(:manager)
-
     navigate 'Geral > Usuários > Perfis'
 
     within_records do

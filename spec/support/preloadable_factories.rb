@@ -18,4 +18,6 @@ FactoryGirl.preload do
 
   factory(:metro)   { create(:reference_unit, name: 'Metro',   acronym: 'M' ) }
   factory(:unidade) { create(:reference_unit, name: 'Unidade', acronym: 'UN') }
+
+  factory(:manager) { create(:profile, name: 'Gestor') }
 end

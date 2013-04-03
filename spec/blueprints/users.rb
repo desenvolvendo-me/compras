@@ -3,7 +3,7 @@ User.blueprint(:sobrinho) do
   email         { 'gabriel.sobrinho@gmail.com' }
   password      { '123456' }
   login         { 'gabriel.sobrinho' }
-  profile       { Profile.make!(:manager) }
+  profile       { ::FactoryGirl::Preload.factories['Profile'][:manager] }
   authenticable { Employee.make!(:sobrinho) }
   confirmed_at  { 1.day.ago }
 end
@@ -13,7 +13,7 @@ User.blueprint(:wenderson) do
   email         { 'wenderson.malheiros@gmail.com' }
   login         { 'wenderson.malheiros'}
   password      { '123456' }
-  profile       { Profile.make!(:manager) }
+  profile       { ::FactoryGirl::Preload.factories['Profile'][:manager] }
   authenticable { Employee.make!(:wenderson) }
   confirmed_at  { 1.day.ago }
 end
@@ -31,7 +31,7 @@ User.blueprint(:sobrinho_as_admin_and_employee) do
   email         { 'gabriel.sobrinho@gmail.com' }
   password      { '123456' }
   login         { 'gabriel.sobrinho' }
-  profile       { Profile.make!(:manager) }
+  profile       { ::FactoryGirl::Preload.factories['Profile'][:manager] }
   administrator { true }
   authenticable { Employee.make!(:sobrinho) }
   confirmed_at  { 1.day.ago }

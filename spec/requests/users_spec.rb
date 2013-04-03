@@ -8,7 +8,6 @@ feature "Users" do
 
   scenario 'create a new user, update and destroyer user an existent' do
     Employee.make!(:wenderson)
-    Profile.make!(:manager)
 
     navigate 'Geral > Usuários > Usuários'
 
