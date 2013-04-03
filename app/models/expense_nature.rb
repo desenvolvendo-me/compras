@@ -1,9 +1,13 @@
-class ExpenseNature < Compras::Model
+class ExpenseNature < Accounting::Model
   attr_modal :expense_nature, :description, :regulatory_act_id, :kind
 
   has_enumeration_for :kind, :with => ExpenseNatureKind, :create_helpers => true
 
   belongs_to :regulatory_act
+  belongs_to :parent, :class_name => 'ExpenseNature'
+
+  has_many :children, :class_name => 'ExpenseNature', :foreign_key => :parent_id,
+           :dependent => :restrict
 
   orderize :description
 
@@ -13,33 +17,18 @@ class ExpenseNature < Compras::Model
     query = query.where { description.eq(params[:description]) } if params[:description].present?
     query = query.where { regulatory_act_id.eq(params[:regulatory_act_id]) } if params[:regulatory_act_id].present?
     query = query.where { kind.eq(params[:kind]) } if params[:kind].present?
-
-    if params[:expense_category_id].present?
-      category_id = value_or_nil(params[:expense_category_id])
-
-      query = query.where { expense_category_id.eq(category_id) }
-    end
-
-    if params[:expense_group_id].present?
-      group_id = value_or_nil(params[:expense_group_id])
-
-      query = query.where { expense_group_id.eq(group_id) }
-    end
-
-    if params[:expense_modality_id].present?
-      modality_id = value_or_nil(params[:expense_modality_id])
-
-      query = query.where { expense_modality_id.eq(modality_id) }
-    end
-
-    if params[:expense_element_id].present?
-      element_id = value_or_nil(params[:expense_element_id])
-
-      query = query.where { expense_element_id.eq(element_id) }
-    end
+    query = query.where { year.eq(params[:year]) } if params[:year].present?
 
     query
   end
+
+  scope :expense_nature_not_eq, lambda { |code| where { expense_nature.not_eq(code) } }
+
+  scope :by_parent_id, lambda { |parent_id|
+    where { |expense_nature| expense_nature.parent_id.eq(parent_id) }
+  }
+
+  scope :by_expense_nature, lambda { |code| where { expense_nature.eq(code) } }
 
   def to_s
     "#{expense_nature} - #{description}"
