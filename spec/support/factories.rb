@@ -35,4 +35,8 @@ FactoryGirl.define do
   factory :profile do
     name 'Gestor'
   end
+
+  factory :position do
+    name 'Gerente'
+  end
 end

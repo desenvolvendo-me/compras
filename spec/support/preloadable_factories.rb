@@ -20,4 +20,7 @@ FactoryGirl.preload do
   factory(:unidade) { create(:reference_unit, name: 'Unidade', acronym: 'UN') }
 
   factory(:manager) { create(:profile, name: 'Gestor') }
+
+  factory(:gerente)    { create(:position, name: 'Gerente')    }
+  factory(:supervisor) { create(:position, name: 'Supervisor') }
 end

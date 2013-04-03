@@ -8,8 +8,6 @@ feature "Signatures" do
 
   scenario 'create a new signature, update and destroy an existing' do
     Person.make!(:sobrinho)
-    Position.make!(:gerente)
-    Position.make!(:supervisor)
 
     navigate 'Geral > Parâmetros > Assinaturas > Assinaturas'
 

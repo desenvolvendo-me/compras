@@ -11,15 +11,15 @@ feature "Positions" do
 
     click_link 'Criar Cargo'
 
-    fill_in 'Nome', :with => 'Gerente'
+    fill_in 'Nome', :with => 'Gerente 2'
 
     click_button 'Salvar'
 
     expect(page).to have_notice 'Cargo criado com sucesso.'
 
-    click_link 'Gerente'
+    click_link 'Gerente 2'
 
-    expect(page).to have_field 'Nome', :with => 'Gerente'
+    expect(page).to have_field 'Nome', :with => 'Gerente 2'
 
     fill_in 'Nome', :with => 'Gerente de Setor'
 
@@ -38,8 +38,6 @@ feature "Positions" do
   end
 
   scenario 'index with columns at the index' do
-    Position.make!(:gerente)
-
     navigate 'Geral > Usuários > Cargos'
 
     within_records do

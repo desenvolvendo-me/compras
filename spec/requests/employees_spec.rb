@@ -8,7 +8,6 @@ feature "Employees" do
 
   scenario 'create, update and destroy a new employee' do
     Person.make!(:sobrinho)
-    Position.make!(:gerente)
 
     navigate 'Geral > Usuários > Funcionários'
 
