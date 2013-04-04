@@ -24,14 +24,12 @@ class RenameExpenseNaturesTable < ActiveRecord::Migration
         SQL
       end
 
-      last_expense_nature_id = ExpenseNature.last.id + 1
-
       execute <<-SQL
-        INSERT INTO accounting_expense_natures VALUES (#{last_expense_nature_id}, 1, '3.0.00.00.00', 'synthetic', 'Despesas Correntes', 'Registra o valor das despesas', '2013-04-03 15:58:39.740004', '2013-04-03 15:58:39.740004', 2012, NULL);
-        INSERT INTO accounting_expense_natures VALUES (#{last_expense_nature_id + 1}, 1, '3.1.00.00.00', 'synthetic', 'Pessoal e Encargos Sociais', 'Registra o valor das despesas com Pessoal e Encargos Sociais', '2013-04-03 15:58:39.755041', '2013-04-03 15:58:39.755041', 2012, #{last_expense_nature_id});
-        INSERT INTO accounting_expense_natures VALUES (#{last_expense_nature_id + 2}, 1, '3.1.90.00.00', 'both', 'Aplicações Diretas', 'Registra o valor das aplicações diretas', '2013-04-03 15:58:39.760617', '2013-04-03 15:58:39.760617', 2012, #{last_expense_nature_id + 1});
-        INSERT INTO accounting_expense_natures VALUES (#{last_expense_nature_id + 3}, 1, '3.1.90.01.00', 'synthetic', 'Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares', 'Registra o valor das despesas com aposentadorias, reserva e reformas', '2013-04-03 15:58:39.767925', '2013-04-03 15:58:39.767925', 2012, #{last_expense_nature_id + 2});
-        INSERT INTO accounting_expense_natures VALUES (#{last_expense_nature_id + 4}, 1, '3.1.90.01.01', 'analytical', 'Aposentadorias Custeadas com Recursos do RPPS', 'Registra o valor das despesas com aposentadorias', '2013-04-03 15:58:39.773091', '2013-04-03 15:58:39.773091', 2012, #{last_expense_nature_id + 3});
+        INSERT INTO accounting_expense_natures VALUES ((select max(id) + 1 from accounting_expense_natures), 1, '3.0.00.00.00', 'synthetic', 'Despesas Correntes', 'Registra o valor das despesas', '2013-04-03 15:58:39.740004', '2013-04-03 15:58:39.740004', 2012, NULL);
+        INSERT INTO accounting_expense_natures VALUES ((select max(id) + 1 from accounting_expense_natures), 1, '3.1.00.00.00', 'synthetic', 'Pessoal e Encargos Sociais', 'Registra o valor das despesas com Pessoal e Encargos Sociais', '2013-04-03 15:58:39.755041', '2013-04-03 15:58:39.755041', 2012, (Select max(id) from accounting_expense_natures));
+        INSERT INTO accounting_expense_natures VALUES ((select max(id) + 1 from accounting_expense_natures), 1, '3.1.90.00.00', 'both', 'Aplicações Diretas', 'Registra o valor das aplicações diretas', '2013-04-03 15:58:39.760617', '2013-04-03 15:58:39.760617', 2012, (Select max(id) from accounting_expense_natures));
+        INSERT INTO accounting_expense_natures VALUES ((select max(id) + 1 from accounting_expense_natures), 1, '3.1.90.01.00', 'synthetic', 'Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares', 'Registra o valor das despesas com aposentadorias, reserva e reformas', '2013-04-03 15:58:39.767925', '2013-04-03 15:58:39.767925', 2012, (Select max(id) from accounting_expense_natures));
+        INSERT INTO accounting_expense_natures VALUES ((select max(id) + 1 from accounting_expense_natures), 1, '3.1.90.01.01', 'analytical', 'Aposentadorias Custeadas com Recursos do RPPS', 'Registra o valor das despesas com aposentadorias', '2013-04-03 15:58:39.773091', '2013-04-03 15:58:39.773091', 2012, (Select max(id) from accounting_expense_natures));
       SQL
     end
   end
