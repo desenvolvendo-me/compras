@@ -103,9 +103,6 @@ require 'compras'
 # Financeiro Model
 require 'financeiro'
 
-# Contabilidade Model
-require 'accounting'
-
 $:.append Unico::Engine.config.root
 
 # uploaders

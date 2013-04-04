@@ -1,4 +1,4 @@
-class ExpenseNature < Accounting::Model
+class ExpenseNature < Compras::Model
   attr_modal :expense_nature, :description, :regulatory_act_id, :kind
 
   has_enumeration_for :kind, :with => ExpenseNatureKind, :create_helpers => true
