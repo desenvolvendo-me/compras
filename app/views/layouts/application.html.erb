@@ -7,6 +7,10 @@
 
     <title>icompras</title>
 
+    <% cache do %>
+      <%= render 'layouts/javascript_routes' %>
+    <% end %>
+
     <%= stylesheet_link_tag 'application', :media => "all" %>
     <%= javascript_include_tag 'application' %>
     <%= javascript_include_tag controller_name if controller_asset? %>

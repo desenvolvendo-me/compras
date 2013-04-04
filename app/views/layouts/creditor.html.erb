@@ -7,6 +7,10 @@
 
     <title>icompras</title>
 
+    <% cache do %>
+      <%= render 'layouts/javascript_routes' %>
+    <% end %>
+
     <%= stylesheet_link_tag 'application' %>
     <%= javascript_include_tag 'application' %>
     <link rel="shortcut icon" type="image/png" href="<%= image_path 'favicon.png' %>" />
