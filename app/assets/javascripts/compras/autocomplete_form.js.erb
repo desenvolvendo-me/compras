@@ -46,14 +46,15 @@ function canInsertRecord(record, input) {
   return available;
 }
 
-$(".autocomplete-form-remove").live("click", function(event) {
+$(document).on("click", '.autocomplete-form-remove', function(event) {
   event.preventDefault();
   removeFromGrid(this);
 });
 
-$(".autocomplete-form-input").live("change", function(event, record) {
+$(document).on("change", ".autocomplete-form-input", function(event, record) {
+  var autocompleteInput = $(this).closest('div.auto_complete').find(':input:visible');
+
   if (record) {
-    addRecordToGrid(record, this);
-    $(this).val('');
+    addRecordToGrid(record, autocompleteInput);
   }
 });

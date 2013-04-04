@@ -13,13 +13,13 @@
 
       source: function(params, response) {
         params.limit = maxResults;
-        $.getJSON(input.data("source"), params, function(data) { response(data) });
+        $.getJSON(input.data("source"), params, function(data) { response(data); });
       },
 
       select: function(event, ui) {
         input.val(ui.item.label);
         hiddenInput.val(ui.item[valueAttribute]);
-        input.trigger('change', ui.item);
+        hiddenInput.trigger('change', ui.item);
 
         if (clearAfterAdd) {
           return false;
@@ -42,7 +42,7 @@
       }
     });
 
-    input.change(function(event, object) {
+    hiddenInput.change(function(event, object) {
       $(this).removeClass("loading");
       if (object === null && _.isEmpty(input.val())) {
         hiddenInput.val("");

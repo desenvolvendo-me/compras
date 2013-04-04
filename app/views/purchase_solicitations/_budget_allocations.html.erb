@@ -94,7 +94,7 @@
     $("#purchase_solicitation_expense_nature").data('source', url);
   }
 
-  $('#purchase_solicitation_budget_allocation').on("change", function(event, budgetAllocation) {
+  $('#purchase_solicitation_budget_allocation_id').on("change", function(event, budgetAllocation) {
     if (budgetAllocation) {
       $('#purchase_solicitation_budget_allocation_amount').val(numberWithDelimiter(budgetAllocation.amount));
       $('#purchase_solicitation_budget_allocation_expense_nature').val(budgetAllocation.expense_nature);

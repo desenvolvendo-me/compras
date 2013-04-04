@@ -246,7 +246,7 @@
     fillItem(itemUUID, item);
   }
 
-  $("#licitation_process_purchase_solicitations").on("change", function (event, purchase_solicitation) {
+  $("#licitation_process_purchase_solicitations_id").on("change", function (event, purchase_solicitation) {
     if (purchase_solicitation) {
       $.each(purchase_solicitation.budget_allocations, function (i, budget_allocation) {
         renderBudgetAllocation(budget_allocation);

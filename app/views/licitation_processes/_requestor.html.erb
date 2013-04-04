@@ -1,7 +1,7 @@
 <div class="yui3-g autocomplete-finder">
   <div class="yui3-u-2-3">
-    <%= f.input :purchase_solicitations, :as => :auto_complete, :hidden_field => :autocomplete_purchase_solicitation, :clear_input => true,
-                :input_html => { :value => nil, :name => :autocomplete_for_purchase_solicitation, :class => "autocomplete-form-input" }  %>
+    <%= f.input :purchase_solicitations, :as => :auto_complete, :clear_input => true,
+                :fake => true, 'data-hidden-field-class' => 'autocomplete-form-input' %>
   </div>
 </div>
 
