@@ -31,7 +31,9 @@ pt-BR:
         purchase_solicitation: 'Solicitação de compra'
         code_and_year: "Código/Ano"
         budget_allocations: "Dotação"
-        expense_natures: "Natureza da despesa"
+        expense_nature: "Desdobramento"
+        budget_allocation_expense_nature: "Natureza da despesa"
+        estimated_value: "Valor estimado"
 
   purchase_solicitation:
     messages:

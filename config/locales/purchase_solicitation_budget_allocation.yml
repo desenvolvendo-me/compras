@@ -8,9 +8,8 @@ pt-BR:
     attributes:
       purchase_solicitation_budget_allocation:
         budget_allocation: "Dotação"
-        expense_nature: "Natureza da despesa"
+        budget_allocation_amount: "Saldo da dotação"
+        budget_allocation_expense_nature: "Natureza da despesa"
         blocked: "Bloquear"
-
-  purchase_solicitation_budget_allocation:
-    messages:
-      not_allow_add: "dotação é um campo obrigatório"
+        estimated_value: "Valor estimado"
+        expense_nature: "Desdobramento"

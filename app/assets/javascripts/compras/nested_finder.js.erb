@@ -1,0 +1,95 @@
+<%# encoding: utf-8 %>
+
+$(function () {
+  $(document).on("click", '.nested-fields .nested-add-record', function(event) {
+    event.preventDefault();
+
+    var template = $(this).data('template'),
+        clearFieldsAfterAdd = true,
+        recordsTableId = $(this).data('records'),
+        nestedFields = $(this).closest('.nested-fields');
+
+    if ( nestedRequiredFields(nestedFields) && nestedUniqueFields(nestedFields, recordsTableId) ) {
+      if ( !_.isUndefined($(this).data('clear-after-add')) ) {
+        clearFieldsAfterAdd = $(this).data('clear-after-add');
+      }
+
+      $('#' + recordsTableId).append($('#' + template).mustache(getNestedMustacheData(nestedFields)));
+
+      if (clearFieldsAfterAdd) {
+        nestedFields.find(':input').each(function() {
+          if ($(this).hasClass('numeric')) {
+            $(this).val('0,00');
+          } else {
+            $(this).val('');
+          }
+        });
+      }
+    }
+  });
+
+  $(document).on('click', '.nested-record .remove-nested-record', function(event) {
+    event.preventDefault();
+
+    $(this).closest('.nested-record').find('.destroy').val(true);
+    $(this).closest('.nested-record').hide();
+  });
+
+
+  function nestedRequiredFields(nestedFields) {
+    var allowed = true;
+
+    nestedFields.find('.required:input').each(function(){
+      if ($(this).val() === '' && allowed) {
+        allowed = false;
+      }
+    });
+
+    if (!allowed) {
+      alert("<%= I18n.t('errors.messages.all_required_fields_should_be_filled') %>");
+    }
+
+    return allowed;
+  }
+
+  function nestedUniqueFields(nestedFields, recordTableId) {
+    var records = $('#' + recordTableId).find('.nested-record'),
+        matches, name, valuei, unique = true;
+
+    nestedFields.find('.unique:input').each(function() {
+      matches = $(this).attr('name').match(/\[(\w+)\]/);
+
+      if (matches) {
+        name = matches[1];
+        value = $(this).val();
+
+        records.find(':input[name*="[' + name + ']"]').each(function() {
+          if ($(this).val() == value) {
+            unique = false;
+          }
+        });
+      }
+    });
+
+    if (!unique) {
+      alert("<%= I18n.t('errors.messages.record_already_exists') %>");
+    }
+
+    return unique;
+  }
+
+  function getNestedMustacheData(nestedFields) {
+    var data = {};
+
+    nestedFields.find(':input').each(function() {
+      var name = $(this).attr('name'),
+          matches = name.match(/\[(\w+)\]/);
+
+      if (matches) { // Remove o prefixo do nome do campo
+        data[matches[1]] = $(this).val();
+      }
+    });
+
+    return data;
+  }
+});

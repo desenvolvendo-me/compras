@@ -10,6 +10,8 @@ describe PurchaseSolicitationBudgetAllocation do
   end
 
   it { should delegate(:services?).to(:purchase_solicitation).allowing_nil(true) }
+  it { should delegate(:expense_nature).to(:budget_allocation).allowing_nil(true).prefix(true) }
+  it { should delegate(:amount).to(:budget_allocation).allowing_nil(true).prefix(true) }
 
   it { should validate_presence_of :budget_allocation }
   it { should belong_to :purchase_solicitation }

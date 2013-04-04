@@ -321,6 +321,7 @@ pt-BR:
       materials_class_with_material_cannot_has_children: "classe com materiais associados não podem ser base para outras classes"
       cannot_be_changed_when_has_materials: "não pode ser alterado quando houver materiais vinculados à classe"
       record_already_exists: "registro já inserido"
+      all_required_fields_should_be_filled: "é necesssário preencher todos os campos obrigatórios"
 
   activerecord:
     errors:

@@ -80,7 +80,7 @@ feature "LicitationProcesses" do
     within_tab 'Orçamento' do
       click_button 'Adicionar Dotação'
 
-      fill_with_autocomplete 'Dotação orçamentária', :with => 'Vencimentos'
+      fill_with_autocomplete 'Dotação orçamentária', :with => 'Aposentadorias'
 
       fill_in 'Valor previsto', :with => '20,00'
     end
@@ -166,8 +166,8 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Orçamento' do
-      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Vencimentos e Salários'
-      expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+      expect(page).to have_field 'Compl. do elemento', :with => '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
       expect(page).to have_field 'Saldo da dotação', :with => '500,00'
       expect(page).to have_field 'Valor previsto', :with => '20,00'
     end
@@ -303,7 +303,7 @@ feature "LicitationProcesses" do
 
       click_button 'Adicionar Dotação'
 
-      fill_with_autocomplete 'Dotação orçamentária', :with => 'Vencimentos'
+      fill_with_autocomplete 'Dotação orçamentária', :with => 'Aposentadorias'
 
       fill_in 'Valor previsto', :with => '20,00'
     end
@@ -361,8 +361,8 @@ feature "LicitationProcesses" do
 
     within_tab 'Orçamento' do
       expect(page).to have_field 'Valor total dos itens', :with => '20,00'
-      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Vencimentos e Salários'
-      expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+      expect(page).to have_field 'Compl. do elemento', :with => '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
       expect(page).to have_field 'Saldo da dotação', :with => '500,00'
       expect(page).to have_field 'Valor previsto', :with => '20,00'
     end
@@ -1550,9 +1550,9 @@ feature "LicitationProcesses" do
 
     within_tab 'Orçamento' do
       expect(page).to have_button 'Adicionar Dotação'
-      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Vencimentos e Salários'
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
 
-      expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
+      expect(page).to have_field 'Compl. do elemento', :with => '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
       expect(page).to have_disabled_field 'Compl. do elemento'
 
       expect(page).to have_field 'Saldo da dotação', :with => '500,00'
@@ -1598,9 +1598,9 @@ feature "LicitationProcesses" do
 
     within_tab 'Orçamento' do
       expect(page).to have_button 'Adicionar Dotação'
-      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Vencimentos e Salários'
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
 
-      expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
+      expect(page).to have_field 'Compl. do elemento', :with => '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
       expect(page).to have_disabled_field 'Compl. do elemento'
 
       expect(page).to have_field 'Saldo da dotação', :with => '500,00'
@@ -1832,9 +1832,9 @@ feature "LicitationProcesses" do
 
     within_tab 'Orçamento' do
       expect(page).to have_button 'Adicionar Dotação'
-      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Vencimentos e Salários'
+      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
 
-      expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
+      expect(page).to have_field 'Compl. do elemento', :with => '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
       expect(page).to have_disabled_field 'Compl. do elemento'
 
       expect(page).to have_field 'Saldo da dotação', :with => '500,00'

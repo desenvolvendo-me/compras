@@ -1,28 +1,64 @@
-<div class="yui3-g">
-  <div class="yui3-u-1-3">
-    <%= f.input :budget_allocations, :as => :auto_complete, :hidden_field => :autocomplete_budget_allocation,
-                :required => true, :disabled => f.object.annulled?,
-                :input_html => { :value => nil, :name => :autocomplete_for_budget_allocation, :class => 'budget-allocation' }  %>
+<div class="nested-fields">
+  <div class="yui3-g">
+    <div class="yui3-u-4-5">
+      <%= f.input :budget_allocation, :as => :auto_complete, :fake => true,
+                  :required => true, :disabled => f.object.annulled?,
+                  'data-hidden-field-class' => 'unique',
+                  :input_html => { :class => 'budget-allocation' }  %>
+    </div>
   </div>
 
-  <div class="yui3-u-1-3">
-    <%= button_tag 'Adicionar', :class => 'button add-purchase-solicitation-budget-allocation field-without-label' %>
+  <div class="yui3-g">
+    <div class="yui3-u-2-3">
+      <%= f.input :budget_allocation_expense_nature, :as => :fake, :disabled => true %>
+    </div>
+  </div>
+
+  <div class="yui3-g">
+    <div class="yui3-u-2-5">
+      <%= f.input :expense_nature, :as => :auto_complete, :fake =>  true %>
+    </div>
+
+    <div class="yui3-u-1-5">
+      <%= f.input :budget_allocation_amount, :as => :fake, :disabled => true,
+                  :input_html => { 'data-decimal' => true, :value => '0,00', 'data-precision' => 2, :maxlength => 15, :class => 'numeric' } %>
+    </div>
+
+    <div class="yui3-u-1-5">
+      <%= f.input :estimated_value, :as => :fake,
+                  :input_html => { 'data-decimal' => true, :value => '0,00', 'data-precision' => 2, :maxlength => 15, :class => 'numeric' } %>
+    </div>
+
+    <div class="yui3-u-1-5">
+      <%= button_tag 'Adicionar', :class => 'button nested-add-record field-without-label',
+                     'data-template' => 'purchase_solicitation_budget_allocations_template',
+                     'data-records' => 'budget-allocation-records' %>
+    </div>
   </div>
 </div>
 
-<table class="records">
+<table id="budget-allocation-records" class="records">
   <thead>
     <tr>
       <th><%= PurchaseSolicitationBudgetAllocation.human_attribute_name :budget_allocation %></th>
+      <th><%= PurchaseSolicitationBudgetAllocation.human_attribute_name :budget_allocation_expense_nature %></th>
+      <th><%= PurchaseSolicitationBudgetAllocation.human_attribute_name :expense_nature %></th>
+      <th><%= PurchaseSolicitationBudgetAllocation.human_attribute_name :budget_allocation_amount %></th>
+      <th><%= PurchaseSolicitationBudgetAllocation.human_attribute_name :estimated_value %></th>
       <th></th>
     </tr>
   </thead>
 
-  <tbody class="<%= f.sanitized_object_name %>_purchase_solicitation_budget_allocations_records">
+  <tbody>
     <%= f.association :purchase_solicitation_budget_allocations, :collection => localized(f.object.purchase_solicitation_budget_allocations) do |p| %>
       <%= render 'purchase_solicitation_budget_allocations/purchase_solicitation_list_form',
           :budget_allocation => p.object.budget_allocation,
           :budget_allocation_id => p.object.budget_allocation_id,
+          :expense_nature => p.object.expense_nature,
+          :expense_nature_id => p.object.expense_nature_id,
+          :budget_allocation_expense_nature => p.object.budget_allocation_expense_nature,
+          :budget_allocation_amount => number_with_precision(p.object.budget_allocation_amount),
+          :estimated_value => number_with_precision(p.object.estimated_value),
           :data_disabled => f.object.decorator.is_annulled_message,
           :f => p %>
     <% end %>
@@ -34,62 +70,40 @@
     <%= render 'purchase_solicitation_budget_allocations/purchase_solicitation_list_form',
                :budget_allocation => '{{budget_allocation}}',
                :budget_allocation_id => '{{budget_allocation_id}}',
+               :expense_nature => '{{expense_nature}}',
+               :expense_nature_id =>'{{expense_nature_id}}',
+               :budget_allocation_expense_nature => '{{budget_allocation_expense_nature}}',
+               :budget_allocation_amount => '{{budget_allocation_amount}}',
+               :estimated_value => '{{estimated_value}}',
                :data_disabled => nil,
                :f => p %>
   <% end %>
 <% end %>
 
 <script>
-  $(".add-purchase-solicitation-budget-allocation").on("click", function(event) {
-    event.preventDefault();
-
-    var budgetAllocationId = $('#purchase_solicitation_autocomplete_budget_allocation').val(),
-        budgetAllocation = $('#purchase_solicitation_budget_allocations').val();
-
-    if (allowAddRecord(budgetAllocationId)) {
-      var options = {
-          budget_allocation: budgetAllocation,
-          budget_allocation_id: budgetAllocationId
-        }
-
-      $('.records').append($('#purchase_solicitation_budget_allocations_template').mustache(options));
-
-      clearAutocompleteFields();
+  function filtercExpenseNatureSource(expenseNatureId) {
+    var url = "<%= expense_natures_path %>",
+    params = {
+      breakdown_of: expenseNatureId
     }
-  });
 
-  $('form').on('click', '.remove-budget-allocation', function(event) {
-    event.preventDefault();
-    $(this).closest('.purchase-solicitation-budget-allocation').find('.destroy').val(true);
-    $(this).closest('.purchase-solicitation-budget-allocation').hide();
-  });
+    if (expenseNatureId) {
+      url += "?" + jQuery.param(params);
+    }
 
-  function clearAutocompleteFields() {
-     $('#purchase_solicitation_autocomplete_budget_allocation').val('');
-     $('#purchase_solicitation_budget_allocations').val('');
+    $("#purchase_solicitation_expense_nature").data('source', url);
   }
 
-  function allowAddRecord(recordId) {
-    var allowed = true;
-
-    if (_.isEmpty(recordId)) {
-      alert("<%=I18n.t('purchase_solicitation_budget_allocation.messages.not_allow_add') %>");
-
-      allowed = false
+  $('#purchase_solicitation_budget_allocation').on("change", function(event, budgetAllocation) {
+    if (budgetAllocation) {
+      $('#purchase_solicitation_budget_allocation_amount').val(numberWithDelimiter(budgetAllocation.amount));
+      $('#purchase_solicitation_budget_allocation_expense_nature').val(budgetAllocation.expense_nature);
+      filtercExpenseNatureSource(budgetAllocation.expense_nature_id);
     } else {
-      $('.purchase-solicitation-budget-allocation:visible').each(function() {
-        var addedRecordId = $(this).find('.budget-allocation-id').val();
-
-        if (recordId == addedRecordId) {
-          alert("<%=I18n.t('errors.messages.record_already_exists') %>");
-
-          allowed = false
-        }
-      })
+      $('#purchase_solicitation_budget_allocation_amount').val('0,00');
+      $('#purchase_solicitation_budget_allocation_expense_nature').val('');
     }
-
-    return allowed
-  }
+  });
 
   $(function() {
     $('.purchase-solicitation-budget-allocation .destroy[value="true"]').closest('.purchase-solicitation-budget-allocation').hide();

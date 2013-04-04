@@ -11,6 +11,23 @@ class ExpenseNature < Accounting::Model
 
   orderize :description
 
+  scope :term, lambda { |q|
+    where { description.like("%#{q}%") | expense_nature.like("#{q}%") }
+  }
+
+  scope :expense_nature_not_eq, lambda { |code| where { expense_nature.not_eq(code) } }
+
+  scope :by_parent_id, lambda { |parent_id|
+    where { |expense_nature| expense_nature.parent_id.eq(parent_id) }
+  }
+
+  scope :breakdown_of, lambda { |parent_id|
+    by_parent_id(parent_id).
+    where { expense_nature.not_like("%.00") }
+  }
+
+  scope :by_expense_nature, lambda { |code| where { expense_nature.eq(code) } }
+
   def self.filter(params)
     query = scoped
     query = query.where { expense_nature.eq(params[:expense_nature]) } if params[:expense_nature].present?
@@ -21,14 +38,6 @@ class ExpenseNature < Accounting::Model
 
     query
   end
-
-  scope :expense_nature_not_eq, lambda { |code| where { expense_nature.not_eq(code) } }
-
-  scope :by_parent_id, lambda { |parent_id|
-    where { |expense_nature| expense_nature.parent_id.eq(parent_id) }
-  }
-
-  scope :by_expense_nature, lambda { |code| where { expense_nature.eq(code) } }
 
   def to_s
     "#{expense_nature} - #{description}"

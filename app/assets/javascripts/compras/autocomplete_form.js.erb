@@ -1,6 +1,8 @@
+<%# encoding: utf-8 %>
+
 function addRecordToGrid(record, input) {
   if (!canInsertRecord(record, input)) {
-    alert("Registro já inserido...");
+    alert("<%= I18n.t('errors.messages.record_already_exists') %>");
     $(input).val('');
     return false;
   }
@@ -38,7 +40,7 @@ function canInsertRecord(record, input) {
     if (recordId == hiddenId) {
       available = false;
       return false;
-    };
+    }
   });
 
   return available;

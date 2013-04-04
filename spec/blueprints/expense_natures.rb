@@ -25,6 +25,16 @@ ExpenseNature.blueprint(:aposentadorias_rpps) do
   parent { ExpenseNature.make!(:aposentadorias_reserva_reformas) }
 end
 
+ExpenseNature.blueprint(:aposentadorias_reserva) do
+  regulatory_act { RegulatoryAct.make!(:sopa) }
+  expense_nature { '3.1.90.01.02' }
+  kind { ExpenseNatureKind::ANALYTICAL }
+  description { 'Aposentadorias Custeadas com Recursos da Reserva Remunerada' }
+  docket { 'Registra o valor das despesas com aposentadorias' }
+  year { 2012 }
+  parent { ExpenseNature.make!(:aposentadorias_reserva_reformas) }
+end
+
 ExpenseNature.blueprint(:aposentadorias_reserva_reformas) do
   regulatory_act { RegulatoryAct.make!(:sopa) }
   expense_nature { '3.1.90.01.00' }

@@ -6,8 +6,6 @@ class PurchaseSolicitation < Compras::Model
 
   attr_readonly :code
 
-  attr_accessor :autocomplete_budget_allocation, :autocomplete_expense_nature
-
   auto_increment :code, :by => :accounting_year
 
   attr_modal :code, :accounting_year, :kind, :delivery_location_id, :budget_structure_id, :responsible_id
@@ -37,8 +35,6 @@ class PurchaseSolicitation < Compras::Model
   accepts_nested_attributes_for :purchase_solicitation_budget_allocations, :allow_destroy => true
   accepts_nested_attributes_for :items, :allow_destroy => true
 
-  delegate :amount, :description, :id, :to => :budget_allocation,
-           :prefix => true, :allow_nil => true
   delegate :authorized?, :to => :direct_purchase, :prefix => true, :allow_nil => true
 
   validates :request_date, :responsible, :delivery_location, :presence => true

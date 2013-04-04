@@ -15,6 +15,7 @@ feature "PurchaseSolicitations" do
     Employee.make!(:sobrinho)
     DeliveryLocation.make!(:education)
     budget_allocation = BudgetAllocation.make!(:alocacao)
+    ExpenseNature.make!(:aposentadorias_rpps)
     Material.make!(:antivirus, :material_type => MaterialType::ASSET)
 
     navigate 'Processos de Compra > Solicitações de Compra'
@@ -60,16 +61,36 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Dotações orçamentárias' do
-      fill_with_autocomplete 'Dotação', :with => 'Vencimentos'
+      click_button "Adicionar"
+
+      expect(page).to_not have_css '.nested-record'
+
+      fill_with_autocomplete 'Dotação', :with => 'Aposentadorias'
+      fill_with_autocomplete 'Desdobramento', :with => 'Aposentadorias'
+
+      expect(page).to have_field 'Natureza da despesa',:with => '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+      expect(page).to have_field 'Saldo da dotação',:with => '500,00'
+
+      fill_in 'Valor estimado', :with => '100,00'
 
       click_button "Adicionar"
+
+      within_records do
+        expect(page).to have_content '1 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+        expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+        expect(page).to have_content '3.1.90.01.01 - Aposentadorias Custeadas com Recursos do RPPS'
+        expect(page).to have_content '500,00'
+        expect(page).to have_content '100,00'
+      end
 
       # Não pode adicionar 2 dotações iguais
-      fill_with_autocomplete 'Dotação', :with => 'Vencimentos'
+      fill_with_autocomplete 'Dotação', :with => 'Aposentadorias'
 
       click_button "Adicionar"
 
-      expect(page).to have_content 'registro já inserido'
+      within_records do
+        expect(page).to have_css '.nested-record', :count => 1
+      end
     end
 
     click_button 'Salvar'
@@ -102,7 +123,11 @@ feature "PurchaseSolicitations" do
 
     within_tab 'Dotações orçamentárias' do
       within_records do
-        expect(page).to have_content budget_allocation.to_s
+        expect(page).to have_content '1 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+        expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+        expect(page).to have_content '3.1.90.01.01 - Aposentadorias Custeadas com Recursos do RPPS'
+        expect(page).to have_content '500,00'
+        expect(page).to have_content '100,00'
       end
     end
   end
@@ -112,6 +137,7 @@ feature "PurchaseSolicitations" do
     BudgetStructure.make!(:secretaria_de_desenvolvimento)
     Employee.make!(:wenderson)
     DeliveryLocation.make!(:health)
+    ExpenseNature.make!(:aposentadorias_reserva)
     budget_allocation = BudgetAllocation.make!(:reparo_2011)
     Material.make!(:arame_farpado)
 
@@ -163,9 +189,17 @@ feature "PurchaseSolicitations" do
         click_link "Remover"
       end
 
-      fill_with_autocomplete 'Dotação', :with => 'Compra de Material'
+      fill_with_autocomplete 'Dotação', :with => 'Aposentadorias'
+      fill_with_autocomplete 'Desdobramento', :with => 'Reserva'
 
       click_button "Adicionar"
+
+      within_records do
+        expect(page).to have_content '1.29 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+        expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+        expect(page).to have_content '3.1.90.01.02 - Aposentadorias Custeadas com Recursos da Reserva Remunerada'
+        expect(page).to have_content '3.000,00'
+      end
     end
 
     click_button 'Salvar'
@@ -199,7 +233,10 @@ feature "PurchaseSolicitations" do
       expect(page).to have_css('.records .record', :count => 1)
 
       within_records do
-        expect(page).to have_content '1.29 - Compra de Material'
+        expect(page).to have_content '1.29 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+        expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+        expect(page).to have_content '3.1.90.01.02 - Aposentadorias Custeadas com Recursos da Reserva Remunerada'
+        expect(page).to have_content '3.000,00'
       end
     end
   end
@@ -343,7 +380,7 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Dotações orçamentárias' do
-      fill_with_autocomplete 'Dotação', :with => 'Vencimentos'
+      fill_with_autocomplete 'Dotação', :with => 'Aposentadorias'
 
       click_button "Adicionar"
     end
@@ -444,7 +481,7 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Dotações orçamentárias' do
-      fill_with_autocomplete 'Dotação', :with => 'Vencimentos'
+      fill_with_autocomplete 'Dotação', :with => 'Aposentadorias'
 
       click_button "Adicionar"
     end
@@ -565,7 +602,7 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab "Dotações orçamentárias" do
-      fill_with_autocomplete 'Dotação', :with => 'Vencimentos'
+      fill_with_autocomplete 'Dotação', :with => 'Aposentadorias'
 
       click_button "Adicionar"
     end
@@ -633,7 +670,7 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Dotações orçamentárias' do
-      fill_with_autocomplete 'Dotação', :with => 'Vencimentos'
+      fill_with_autocomplete 'Dotação', :with => 'Aposentadorias'
 
       click_button "Adicionar"
     end
@@ -677,24 +714,6 @@ feature "PurchaseSolicitations" do
           expect(page).to have_content 'Compra de Material'
         end
       end
-    end
-  end
-
-  scenario 'cannot add purchase solicitation budget allocations without budget_allocation' do
-    BudgetAllocation.make!(:reparo_2011)
-
-    navigate 'Processos de Compra > Solicitações de Compra'
-
-    click_link 'Criar Solicitação de Compra'
-
-    within_tab 'Dotações orçamentárias' do
-      click_button 'Adicionar'
-    end
-
-    expect(page).to have_content 'dotação é um campo obrigatório'
-
-    within_tab 'Dotações orçamentárias' do
-      expect(page).to_not have_css '.record'
     end
   end
 end

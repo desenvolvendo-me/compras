@@ -37,12 +37,6 @@ describe PurchaseSolicitation do
 
   it { should auto_increment(:code).by(:accounting_year) }
 
-  it "must delegate the amount to budget_allocation" do
-    subject.stub(:budget_allocation).and_return double("Allocation", :amount  => '400,00')
-
-    expect(subject.budget_allocation_amount).to eq("400,00")
-  end
-
   context "validations" do
     it { should validate_presence_of :accounting_year }
     it { should validate_numericality_of :accounting_year }
