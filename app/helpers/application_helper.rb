@@ -112,4 +112,8 @@ module ApplicationHelper
 
     "#{protocol}://#{domain}/#{sub_path}#{relative_path}"
   end
+
+  def controller_asset?
+    Rails.application.assets.find_asset controller_name
+  end
 end
