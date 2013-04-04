@@ -7,15 +7,12 @@ feature "Agencies" do
   end
 
   scenario 'create, update and destroy a new agency' do
-    Bank.make!(:banco_do_brasil)
-    Bank.make!(:santander)
-
     navigate 'Comum > Cadastrais > Bancos > Agências'
 
     click_link 'Criar Agência'
 
-    fill_modal 'Banco', :with => 'Banco do Brasil'
-    fill_in 'Nome', :with => 'Comercial BB'
+    fill_modal 'Banco', :with => 'Itaú'
+    fill_in 'Nome', :with => 'Comercial Itaú'
     fill_in 'Número', :with => '10000'
     fill_in 'Dígito', :with => '3'
     fill_in 'Telefone', :with => '(33) 3333-3333'
@@ -26,10 +23,10 @@ feature "Agencies" do
 
     expect(page).to have_notice 'Agência criada com sucesso.'
 
-    click_link 'Comercial BB'
+    click_link 'Comercial Itaú'
 
-    expect(page).to have_field 'Banco', :with => 'Banco do Brasil'
-    expect(page).to have_field 'Nome', :with => 'Comercial BB'
+    expect(page).to have_field 'Banco', :with => 'Itaú'
+    expect(page).to have_field 'Nome', :with => 'Comercial Itaú'
     expect(page).to have_field 'Número', :with => '10000'
     expect(page).to have_field 'Dígito', :with => '3'
     expect(page).to have_field 'Telefone', :with => '(33) 3333-3333'

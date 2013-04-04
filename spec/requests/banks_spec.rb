@@ -25,7 +25,7 @@ feature "Banks" do
     expect(page).to have_field 'Código', :with => '1'
     expect(page).to have_field 'Sigla', :with => 'BB'
 
-    fill_in 'Nome', :with => 'Santander'
+    fill_in 'Nome', :with => 'Santander 1'
     fill_in 'Código', :with => '33'
     fill_in 'Sigla', :with => 'ST'
 
@@ -33,9 +33,9 @@ feature "Banks" do
 
     expect(page).to have_notice 'Banco editado com sucesso.'
 
-    click_link 'Santander'
+    click_link 'Santander 1'
 
-    expect(page).to have_field 'Nome', :with => 'Santander'
+    expect(page).to have_field 'Nome', :with => 'Santander 1'
     expect(page).to have_field 'Código', :with => '33'
     expect(page).to have_field 'Sigla', :with => 'ST'
 
@@ -43,12 +43,10 @@ feature "Banks" do
 
     expect(page).to have_notice 'Banco apagado com sucesso.'
 
-    expect(page).to_not have_content 'Santander'
+    expect(page).to_not have_content 'Santander 1'
   end
 
   scenario 'index with columns at the index' do
-    Bank.make!(:santander)
-
     navigate 'Comum > Cadastrais > Bancos > Bancos'
 
     within_records do
@@ -56,7 +54,7 @@ feature "Banks" do
       expect(page).to have_content 'Código'
       expect(page).to have_content 'Sigla'
 
-      within 'tbody tr' do
+      within 'tbody tr:last' do
         expect(page).to have_content 'Santander'
         expect(page).to have_content '33'
         expect(page).to have_content 'ST'

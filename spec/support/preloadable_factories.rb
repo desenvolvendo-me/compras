@@ -16,17 +16,20 @@ FactoryGirl.preload do
   factory(:sao_francisco_curitiba)  { create(:neighborhood, name: 'São Francisco',  city: cities(:curitiba)) }
   factory(:portugal_porto_alegre)   { create(:neighborhood, name: 'Portugal',       city: cities(:porto_alegre)) }
 
-  factory(:metro)   { create(:reference_unit, name: 'Metro',   acronym: 'M' ) }
-  factory(:unidade) { create(:reference_unit, name: 'Unidade', acronym: 'UN') }
+  factory(:metro)   { create :reference_unit }
+  factory(:unidade) { create :reference_unit, name: 'Unidade', acronym: 'UN' }
 
-  factory(:manager) { create(:profile, name: 'Gestor') }
+  factory(:manager) { create :profile }
 
-  factory(:gerente)    { create(:position, name: 'Gerente')    }
-  factory(:supervisor) { create(:position, name: 'Supervisor') }
+  factory(:gerente)    { create :position }
+  factory(:supervisor) { create :position, name: 'Supervisor' }
 
-  factory(:tambuata)          { create(:condominium, name: 'Tambuata',          condominium_type: CondominiumType::VERTICAL)   }
-  factory(:parque_das_flores) { create(:condominium, name: 'Parque das Flores', condominium_type: CondominiumType::HORIZONTAL) }
+  factory(:tambuata)          { create :condominium }
+  factory(:parque_das_flores) { create :condominium, name: 'Parque das Flores', condominium_type: CondominiumType::HORIZONTAL }
 
-  factory(:solar_da_serra)    { create(:land_subdivision, name: 'Solar da Serra')    }
-  factory(:horizonte_a_vista) { create(:land_subdivision, name: 'Horizonte a Vista') }
+  factory(:solar_da_serra)    { create :land_subdivision }
+  factory(:horizonte_a_vista) { create :land_subdivision, name: 'Horizonte a Vista' }
+
+  factory(:itau)      { create :bank }
+  factory(:santander) { create :bank, name: 'Santander', code: 33, acronym: 'ST' }
 end

@@ -48,4 +48,10 @@ FactoryGirl.define do
   factory :land_subdivision do
     name 'Solar da Serra'
   end
+
+  factory :bank do
+    name 'Itaú'
+    code 341
+    acronym 'IT'
+  end
 end
