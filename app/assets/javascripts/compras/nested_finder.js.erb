@@ -79,7 +79,9 @@ $(function () {
   }
 
   function getNestedMustacheData(nestedFields) {
-    var data = {};
+    var data = {
+       uuid: _.uniqueId('fresh-')
+    };
 
     nestedFields.find(':input').each(function() {
       var name = $(this).attr('name'),
