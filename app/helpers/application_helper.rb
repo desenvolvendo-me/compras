@@ -113,7 +113,9 @@ module ApplicationHelper
     "#{protocol}://#{domain}/#{sub_path}#{relative_path}"
   end
 
-  def controller_asset?
-    Rails.application.assets.find_asset controller_name
+  def controller_asset?(options = {})
+    options.merge!(:type => :js) unless options[:type]
+
+    Rails.application.assets.find_asset "#{controller_name}.#{options[:type].to_s}"
   end
 end
