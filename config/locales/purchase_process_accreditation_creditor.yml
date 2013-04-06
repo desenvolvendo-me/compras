@@ -1,0 +1,16 @@
+pt-BR:
+  activerecord:
+    models:
+      purchase_process_accreditation_creditor:
+        one: "Credenciamento do Fornecedor"
+        other: "Credenciamentos dos Fornecedores"
+
+    attributes:
+      purchase_process_accreditation_creditor:
+        company_size: "Porte"
+        creditor: "Fornecedor"
+        creditor_representative: "Representante"
+        has_power_of_attorney: "Possui procuração?"
+        kind: "Tipo"
+        licitation_process: "Processo de Compra"
+        personable_type: "Tipo de pessoa"

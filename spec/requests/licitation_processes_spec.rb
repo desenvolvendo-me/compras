@@ -30,6 +30,7 @@ feature "LicitationProcesses" do
     expect(page).to have_content "Criar Processo"
 
     expect(page).to_not have_link 'Publicações'
+    expect(page).to_not have_link 'Credenciamento'
 
     expect(page).to_not have_button 'Apurar'
 

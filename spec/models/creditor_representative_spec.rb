@@ -3,10 +3,13 @@ require 'model_helper'
 require 'app/models/creditor_representative'
 require 'app/models/persona/person'
 require 'app/models/person'
+require 'app/models/purchase_process_accreditation_creditor'
 
 describe CreditorRepresentative do
   it { should belong_to :creditor }
   it { should belong_to :representative_person }
+
+  it { should have_many(:purchase_process_accreditation_creditors).dependent(:restrict) }
 
   it { should delegate(:name).to(:representative_person).allowing_nil(true) }
   it { should delegate(:identity_document).to(:representative_person).allowing_nil(true) }

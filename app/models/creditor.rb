@@ -41,6 +41,7 @@ class Creditor < Compras::Model
   has_many :representative_people, :through => :representatives, :source => :representative_person
   has_many :representatives, :class_name => 'CreditorRepresentative', :dependent => :destroy, :order => :id
   has_many :reserve_funds, :dependent => :restrict
+  has_many :purchase_process_accreditation_creditors, :dependent => :restrict
 
   has_one :user, :as => :authenticable
 
@@ -48,6 +49,7 @@ class Creditor < Compras::Model
            :identity_document, :company?, :phone, :fax, :benefited, :address,
            :city, :zip_code, :company_size, :choose_simple, :legal_nature,
            :commercial_registration_number, :commercial_registration_date,
+           :personable_type_humanize,
            :to => :person, :allow_nil => true
   delegate :email, :to => :person, :allow_nil => true, :prefix => true
   delegate :identity_document, :to => :responsible, :prefix => true, :allow_nil => true
@@ -78,6 +80,11 @@ class Creditor < Compras::Model
 
   orderize :name, :on => :person
   filterize
+
+  scope :term, lambda { |q|
+    joins { person }.
+    where { person.name.like("#{q}%") }
+  }
 
   def self.filter(params)
     query = scoped

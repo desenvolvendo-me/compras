@@ -25,6 +25,7 @@ require 'app/models/price_registration'
 require 'app/models/trading'
 require 'app/models/purchase_solicitation_item'
 require 'app/models/legal_analysis_appraisal'
+require 'app/models/purchase_process_accreditation'
 
 describe LicitationProcess do
   let(:current_prefecture) { double(:current_prefecture) }
@@ -69,6 +70,7 @@ describe LicitationProcess do
   it { should have_many(:legal_analysis_appraisals).dependent(:restrict) }
   it { should have_many(:budget_allocations).through(:administrative_process_budget_allocations) }
 
+  it { should have_one(:purchase_process_accreditation).dependent(:restrict) }
   it { should have_one(:trading).dependent(:restrict) }
 
   describe 'default values' do

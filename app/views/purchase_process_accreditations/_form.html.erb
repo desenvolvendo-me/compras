@@ -1,0 +1,106 @@
+<%= f.input :licitation_process_id, :as => :hidden %>
+
+<div class="nested-fields">
+  <div class="yui3-g">
+    <div class="yui3-u-4-5">
+      <%= f.input :creditor, :as => :auto_complete, :required => true, :fake => true %>
+    </div>
+  </div>
+
+  <div class="yui3-g">
+    <div class="yui3-u-1-3">
+      <%= f.input :personable_type, :as => :fake, :disabled => true %>
+    </div>
+
+    <div class="yui3-u-1-3">
+      <label for="company_size">
+        <%= PurchaseProcessAccreditationCreditor.human_attribute_name :company_size %>
+      </label>
+
+      <%= select_tag :company_size, options_from_collection_for_select(CompanySize.all, 'id', 'name'),
+          :include_blank => true, :name => 'purchase_process_accreditation[company_size]' %>
+    </div>
+  </div>
+
+  <div class="yui3-g">
+    <div class="yui3-u-1-2">
+      <%= f.input :creditor_representative, :as => :auto_complete, :fake => true %>
+    </div>
+
+    <div class="yui3-u-1-4">
+      <label for="kind">
+        <%= PurchaseProcessAccreditationCreditor.human_attribute_name :kind %>
+      </label>
+
+      <%= select_tag :kind, options_for_select(PurchaseProcessAccreditationCreditorKind.to_a),
+          :include_blank => true, :name => 'purchase_process_accreditation[kind]', :class => 'required' %>
+    </div>
+  </div>
+
+  <div class="yui3-g">
+    <div class="yui3-u-1-4">
+      <label class="boolean checkbox optional field-without-label" for="has_power_of_attorney">
+        <%= check_box_tag :has_power_of_attorney, "1", false, :name => 'purchase_process_accreditation[has_power_of_attorney]' %>
+        <%= PurchaseProcessAccreditationCreditor.human_attribute_name :has_power_of_attorney %>
+      </label>
+    </div>
+
+    <div class="yui3-u-1-5">
+      <%= button_tag 'Adicionar', :class => 'button nested-add-record',
+                     'data-template' => 'purchase_process_accreditation_creditors_template',
+                     'data-records' => 'accreditation-records' %>
+    </div>
+  </div>
+</div>
+
+<table id="accreditation-records" class="records">
+  <thead>
+    <tr>
+      <th><%= PurchaseProcessAccreditationCreditor.human_attribute_name :creditor %></th>
+      <th><%= PurchaseProcessAccreditationCreditor.human_attribute_name :personable_type %></th>
+      <th><%= PurchaseProcessAccreditationCreditor.human_attribute_name :company_size %></th>
+      <th><%= PurchaseProcessAccreditationCreditor.human_attribute_name :creditor_representative %></th>
+      <th><%= PurchaseProcessAccreditationCreditor.human_attribute_name :kind %></th>
+      <th><%= PurchaseProcessAccreditationCreditor.human_attribute_name :has_power_of_attorney %></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%= f.association :purchase_process_accreditation_creditors, :collection => localized(f.object.purchase_process_accreditation_creditors) do |p| %>
+      <%= render 'purchase_process_accreditation_creditors/list_form',
+          :creditor => p.object.creditor,
+          :creditor_id => p.object.creditor_id,
+          :personable_type => p.object.creditor_personable_type_humanize,
+          :company_size_text => p.object.company_size,
+          :company_size_id => p.object.company_size_id,
+          :creditor_representative => p.object.creditor_representative,
+          :creditor_representative_id => p.object.creditor_representative_id,
+          :kind => p.object.kind,
+          :kind_text => p.object.kind_humanize,
+          :has_power_of_attorney => p.object.has_power_of_attorney,
+          :has_power_of_attorney_text => p.object.has_power_of_attorney ? 'Sim' : 'Não',
+          :data_disabled => nil,
+          :f => p %>
+    <% end %>
+  </tbody>
+</table>
+
+<%= mustache "purchase_process_accreditation_creditors_template" do %>
+  <%= f.association :purchase_process_accreditation_creditors_attributes, :collection => f.object.purchase_process_accreditation_creditors.build, :index => '{{uuid}}' do |p| %>
+    <%= render 'purchase_process_accreditation_creditors/list_form',
+               :creditor => '{{creditor}}',
+               :creditor_id => '{{creditor_id}}',
+               :personable_type => '{{personable_type}}',
+               :company_size_text =>'{{company_size_text}}',
+               :company_size_id => '{{company_size}}',
+               :creditor_representative => '{{creditor_representative}}',
+               :creditor_representative_id => '{{creditor_representative_id}}',
+               :kind => '{{kind}}',
+               :kind_text => '{{kind_text}}',
+               :has_power_of_attorney => '{{has_power_of_attorney}}',
+               :has_power_of_attorney_text => '{{has_power_of_attorney_text}}',
+               :data_disabled => nil,
+               :f => p %>
+  <% end %>
+<% end %>

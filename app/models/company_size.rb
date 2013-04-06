@@ -5,6 +5,8 @@ class CompanySize < Persona::CompanySize
 
   has_one :extended_company_size, :dependent => :destroy
 
+  has_many :purchase_process_accreditation_creditors, :dependent => :restrict
+
   accepts_nested_attributes_for :extended_company_size
 
   delegate :benefited, :to => :extended_company_size, :allow_nil => true

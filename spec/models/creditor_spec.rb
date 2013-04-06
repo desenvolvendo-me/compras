@@ -18,6 +18,7 @@ require 'app/models/registration_cadastral_certificate'
 require 'app/models/direct_purchase'
 require 'app/models/bidder'
 require 'app/models/licitation_process'
+require 'app/models/purchase_process_accreditation_creditor'
 
 describe Creditor do
   describe 'default values' do
@@ -49,6 +50,7 @@ describe Creditor do
   it { should have_many(:bidders).dependent(:restrict) }
   it { should have_many(:licitation_processes).dependent(:restrict).through(:bidders) }
   it { should validate_duplication_of(:document_type_id).on(:documents) }
+  it { should have_many(:purchase_process_accreditation_creditors).dependent(:restrict) }
 
   it { should validate_presence_of :person }
   it { should_not validate_presence_of :main_cnae }
@@ -56,6 +58,7 @@ describe Creditor do
   it { should_not validate_presence_of :social_identification_number }
 
   it { should delegate(:name).to(:person).allowing_nil(true) }
+  it { should delegate(:personable_type_humanize).to(:person).allowing_nil(true) }
 
   context 'when is company' do
     before do

@@ -69,6 +69,7 @@ class LicitationProcess < Compras::Model
   has_many :materials, :through => :items
   has_many :legal_analysis_appraisals, :dependent => :restrict
 
+  has_one :purchase_process_accreditation, :dependent => :restrict
   has_one :trading, :dependent => :restrict
 
   accepts_nested_attributes_for :administrative_process_budget_allocations, :items, :allow_destroy => true

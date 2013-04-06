@@ -15,6 +15,8 @@ Compras::Application.routes.draw do
     get 'modal_info', :on => :member
   end
 
+  resources :creditor_representatives, :only => :index
+
   resources :customizations do
     collection do
       get :filter
@@ -557,6 +559,8 @@ Compras::Application.routes.draw do
   end
 
   resources :property_variable_setting_options, :only => :index
+
+  resources :purchase_process_accreditations, :only => [:new, :create, :edit, :update]
 
   resources :purchase_solicitations, :except => :destroy do
     collection do

@@ -1,0 +1,6 @@
+pt-BR:
+  enumerations:
+    purchase_process_accreditation_creditor_kind:
+      owner: "Proprietário"
+      legal: "Legal"
+      commercial: "Comercial"
