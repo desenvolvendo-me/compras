@@ -33,6 +33,7 @@ $(function () {
 
     $(this).closest('.nested-record').find('.destroy').val(true);
     $(this).closest('.nested-record').hide();
+    $(this).trigger('nestedFinder:afterRemove');
   });
 
 
