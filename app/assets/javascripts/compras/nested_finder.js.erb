@@ -77,18 +77,42 @@ $(function () {
 
     return unique;
   }
+  /*
+    Converte os fields do .nested-fields em json para passar para o mustache.
 
+    - Campos boolean(checkbox) serão transformados em 2 campos json, o primeiro
+      é o próprio nome do field com o valor ou vazio dependendo se está marcado
+      ou não, e o segundo campo é o field_text, que contém a string 'Sim' ou
+      'Não' conforme o estado do checkbox.
+
+    - Campos select também serão transformados em 2 campos json, o primeiro
+      é o próprio nome do field e conterá o id do option selecionado e o segundo
+      é o field_text que conterá o texto do option selecionado.
+  */
   function getNestedMustacheData(nestedFields) {
     var data = {
-       uuid: _.uniqueId('fresh-')
+      uuid: _.uniqueId('fresh-')
     };
 
     nestedFields.find(':input').each(function() {
       var name = $(this).attr('name'),
           matches = name.match(/\[(\w+)\]/);
 
-      if (matches) { // Remove o prefixo do nome do campo
-        data[matches[1]] = $(this).val();
+      if ( matches ) { // Remove o prefixo do nome do campo
+        if ( $(this).is(':checkbox') ){
+          if ( $(this).is(':checked') ) {
+            data[matches[1]] = $(this).val();
+            data[matches[1] + '_text'] = 'Sim';
+          } else {
+            data[matches[1]] = '';
+            data[matches[1] + '_text'] = 'Não';
+          }
+        } else if ( $(this).is('select') ) {
+          data[matches[1]] = $(this).val();
+          data[matches[1] + '_text'] = $(this).find('option:selected').text();
+        } else {
+          data[matches[1]] = $(this).val();
+        }
       }
     });
 
