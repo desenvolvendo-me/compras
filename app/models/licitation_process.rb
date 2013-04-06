@@ -17,8 +17,8 @@ class LicitationProcess < Compras::Model
                   :concession_period_unit, :goal, :licensor_rights_and_liabilities,
                   :licensee_rights_and_liabilities, :authorization_envelope_opening_date,
                   :authorization_envelope_opening_time, :closing_of_accreditation_date,
-                  :closing_of_accreditation_time, :purchase_solicitation_ids, :total_value_of_items,
-                  :budget_allocations_total_value
+                  :closing_of_accreditation_time, :purchase_solicitation_ids,
+                  :budget_allocations_total_value, :total_value_of_items
 
   auto_increment :process, :by => :year
   auto_increment :modality_number, :by => [:year, :modality, :type_of_removal]
@@ -72,7 +72,8 @@ class LicitationProcess < Compras::Model
   has_one :purchase_process_accreditation, :dependent => :restrict
   has_one :trading, :dependent => :restrict
 
-  accepts_nested_attributes_for :administrative_process_budget_allocations, :items, :allow_destroy => true
+  accepts_nested_attributes_for :administrative_process_budget_allocations, :items,
+                                :allow_destroy => true
 
   delegate :licitation_kind, :kind, :best_technique?, :technical_and_price?,
            :to => :judgment_form, :allow_nil => true, :prefix => true
