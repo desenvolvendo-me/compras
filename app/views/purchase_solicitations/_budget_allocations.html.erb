@@ -66,7 +66,7 @@
 </table>
 
 <%= mustache "purchase_solicitation_budget_allocations_template" do %>
-  <%= f.association :purchase_solicitation_budget_allocations, :collection => f.object.purchase_solicitation_budget_allocations.build do |p| %>
+  <%= f.association :purchase_solicitation_budget_allocations_attributes, :collection => f.object.purchase_solicitation_budget_allocations.build, :index => '{{uuid}}' do |p| %>
     <%= render 'purchase_solicitation_budget_allocations/purchase_solicitation_list_form',
                :budget_allocation => '{{budget_allocation}}',
                :budget_allocation_id => '{{budget_allocation_id}}',
