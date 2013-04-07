@@ -10,7 +10,7 @@
 //= require compras/moment.min
 //= require date_field_validation
 //= require compras/autocomplete_form
-//= require compras/nested_finder
+//= require compras/nested_grid
 
 $(".clear").live('click', function() {
   $(this).closest(".modal-finder").find("input.modal").val("");

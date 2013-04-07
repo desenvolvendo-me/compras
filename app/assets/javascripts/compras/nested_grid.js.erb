@@ -15,7 +15,7 @@ $(function () {
       }
 
       $('#' + recordsTableId).append($('#' + template).mustache(getNestedMustacheData(nestedFields)));
-      $('#' + recordsTableId).trigger('nestedFinder:afterAdd');
+      $('#' + recordsTableId).trigger('nestedGrid:afterAdd');
 
       if (clearFieldsAfterAdd) {
         nestedFields.find(':input').each(function() {
@@ -34,7 +34,7 @@ $(function () {
 
     $(this).closest('.nested-record').find('.destroy').val(true);
     $(this).closest('.nested-record').hide();
-    $(this).closest('table.records').trigger('nestedFinder:afterRemove');
+    $(this).closest('table.records').trigger('nestedGrid:afterRemove');
   });
 
 
