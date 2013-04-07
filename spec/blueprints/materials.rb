@@ -1,6 +1,6 @@
 #encoding: utf-8
 Material.blueprint(:antivirus) do
-  materials_class { MaterialsClass.make!(:software) }
+  materials_class { ::FactoryGirl::Preload.factories['MaterialsClass'][:software] }
   code { "01.01.00001" }
   description { "Antivirus" }
   detailed_description { "Antivirus avast" }
@@ -12,7 +12,7 @@ Material.blueprint(:antivirus) do
 end
 
 Material.blueprint(:office) do
-  materials_class { MaterialsClass.make!(:software) }
+  materials_class { ::FactoryGirl::Preload.factories['MaterialsClass'][:software] }
   code { "01.01.00002" }
   description { "Office" }
   detailed_description { "MS Office" }
@@ -24,7 +24,7 @@ Material.blueprint(:office) do
 end
 
 Material.blueprint(:arame_farpado) do
-  materials_class { MaterialsClass.make!(:arames) }
+  materials_class { ::FactoryGirl::Preload.factories['MaterialsClass'][:arames] }
   code { "02.02.00001" }
   description { "Arame farpado" }
   detailed_description { "Arame farpado" }
@@ -36,7 +36,7 @@ Material.blueprint(:arame_farpado) do
 end
 
 Material.blueprint(:arame_comum) do
-  materials_class { MaterialsClass.make!(:arames) }
+  materials_class { ::FactoryGirl::Preload.factories['MaterialsClass'][:arames] }
   code { "02.02.00002" }
   description { "Arame comum" }
   detailed_description { "Arame comum" }
@@ -47,7 +47,7 @@ Material.blueprint(:arame_comum) do
 end
 
 Material.blueprint(:manutencao) do
-  materials_class { MaterialsClass.make!(:software) }
+  materials_class { ::FactoryGirl::Preload.factories['MaterialsClass'][:software] }
   code { "01.05.00001" }
   description { "Manutenção de Computadores" }
   detailed_description { "Manutenção de Computadores" }

@@ -54,4 +54,13 @@ FactoryGirl.define do
     code 341
     acronym 'IT'
   end
+
+  factory :materials_class do
+    masked_number "01.32.00.000.000"
+    class_number "013200000000"
+    mask "99.99.99.999.999"
+    description "Software"
+    details "Softwares de computador"
+    has_children false
+  end
 end

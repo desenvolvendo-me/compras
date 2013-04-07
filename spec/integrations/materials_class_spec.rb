@@ -3,7 +3,7 @@ require 'spec_helper'
 
 describe MaterialsClass do
   context 'uniqueness validations' do
-    before { MaterialsClass.make!(:software) }
+    before { ::FactoryGirl::Preload.factories['MaterialsClass'][:software] }
 
     it { should validate_uniqueness_of(:class_number) }
   end
@@ -15,9 +15,9 @@ describe MaterialsClass do
       comp_eletricos
     end
 
-    let(:software) { MaterialsClass.make!(:software) }
-    let(:arames) { MaterialsClass.make!(:arames) }
-    let(:comp_eletricos) { MaterialsClass.make!(:comp_eletricos) }
+    let(:software)        { ::FactoryGirl::Preload.factories['MaterialsClass'][:software]  }
+    let(:arames)          { ::FactoryGirl::Preload.factories['MaterialsClass'][:arames]  }
+    let(:comp_eletricos)  { ::FactoryGirl::Preload.factories['MaterialsClass'][:comp_eletricos]  }
 
     it 'return without using mask on class_number' do
       expect(MaterialsClass.term('013')).to eq [software]
@@ -38,14 +38,11 @@ describe MaterialsClass do
 
   describe '#parent' do
     subject do
-      MaterialsClass.make!(:software,
-                           :masked_number => "01.32.15.000.000",
-                           :description => 'Antivirus')
+      ::FactoryGirl::Preload.factories['MaterialsClass'][:software]
     end
 
     it 'should return the parent based on masked_number hierarchy' do
-      parent = MaterialsClass.make!(:software)
-
+      parent = FactoryGirl.create(:materials_class, :masked_number => '01.00.00.000.000', :class_number => '01.00.00.000.000')
       expect(subject.parent).to eq parent
     end
 
@@ -56,17 +53,17 @@ describe MaterialsClass do
 
   describe '#children' do
     subject do
-      MaterialsClass.make!(:software)
+      ::FactoryGirl::Preload.factories['MaterialsClass'][:software]
     end
 
     it 'should return all children based on masked_number' do
-      child1 = MaterialsClass.make!(:software,
-                :masked_number => "01.32.15.000.000", :description => 'Antivirus')
+      child1 = FactoryGirl.create(:materials_class,
+                                  :masked_number => "01.32.15.000.000", :class_number => "013215000000", :description => 'Antivirus')
 
-      child2 = MaterialsClass.make!(:software,
-                :masked_number => "01.32.16.000.000", :description => 'Sistemas Operacionais')
+      child2 = FactoryGirl.create(:materials_class,
+                                  :masked_number => "01.32.16.000.000", :class_number => "013216000000", :description => 'Sistemas Operacionais')
 
-      not_child = MaterialsClass.make!(:arames)
+      not_child = ::FactoryGirl::Preload.factories['MaterialsClass'][:arames]
 
       expect(subject.children).to include(child1, child2)
       expect(subject.children).to_not include(not_child)
@@ -75,14 +72,14 @@ describe MaterialsClass do
 
   describe 'update has_children on save' do
     subject do
-      MaterialsClass.make!(:software)
+      ::FactoryGirl::Preload.factories['MaterialsClass'][:software]
     end
 
     it 'should change the parent has_children when save or remove children' do
       expect(subject.has_children).to be_false
 
-      child = MaterialsClass.make!(:software,
-        :masked_number => "01.32.15.000.000", :description => 'Antivirus')
+      child = FactoryGirl.create(:materials_class,
+                                 :masked_number => "01.32.15.000.000", :description => 'Antivirus')
 
       subject.reload # Need this, else is getting the cached subject.
 
@@ -98,9 +95,8 @@ describe MaterialsClass do
 
   describe '.without_children' do
     it 'should return only material classes without children' do
-      parent = MaterialsClass.make!(:software)
-      child = MaterialsClass.make!(:software,
-        :masked_number => "01.32.15.000.000", :description => 'Antivirus')
+      child = FactoryGirl.create(:materials_class,
+                                 :masked_number => "01.32.15.000.000", :description => 'Antivirus', :has_children => false)
 
       expect(described_class.without_children).to eq [child]
     end

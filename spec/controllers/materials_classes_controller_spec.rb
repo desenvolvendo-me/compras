@@ -9,7 +9,7 @@ describe MaterialsClassesController do
 
   describe 'PUT #update' do
     it 'should raise not authorized when not editable' do
-      material_class = MaterialsClass.make!(:software, :imported => true)
+      material_class = ::FactoryGirl::Preload.factories['MaterialsClass'][:software]
 
       put :update, :id => material_class.id
 
@@ -20,7 +20,7 @@ describe MaterialsClassesController do
 
   describe 'DELETE #destroy' do
     it 'should raise not authorized when not editable' do
-      material_class = MaterialsClass.make!(:software, :imported => true)
+      material_class = ::FactoryGirl::Preload.factories['MaterialsClass'][:software]
 
       delete :destroy, :id => material_class.id
 

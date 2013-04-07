@@ -8,10 +8,8 @@ feature "Materials" do
 
   scenario 'create a new material, update and destroy an existing' do
     make_dependencies!
-    Material.make!(:arame_farpado)
 
     navigate 'Comum > Cadastrais > Materiais > Materiais'
-
     click_link 'Criar Material'
 
     expect(page).to have_checked_field 'Ativo'
@@ -51,9 +49,8 @@ feature "Materials" do
     expect(page).to have_field 'Natureza da despesa', :with => '3.0.10.01.12 - Vencimentos e Salários'
     expect(page).to have_unchecked_field 'Controla quantidade'
 
-    fill_with_autocomplete 'Classe', :with => 'Arame'
-    fill_in 'Descrição', :with => 'Parafuso'
-    fill_in 'Descrição detalhada', :with => 'de rosca'
+    fill_in 'Descrição', :with => 'Desfragmentador de disco'
+    fill_in 'Descrição detalhada', :with => 'Desfragmentador de disco com antivirus'
     fill_in 'Referência do fabricante', :with => 'outro fabricante'
     check 'Material combustível'
     select 'Material de consumo', :from => 'Tipo de material'
@@ -62,11 +59,11 @@ feature "Materials" do
 
     expect(page).to have_notice 'Material editado com sucesso.'
 
-    click_link 'Parafuso'
+    click_link 'Desfragmentador de disco'
 
-    expect(page).to have_field 'Classe', :with => '02.44.65.430.000 - Arames'
-    expect(page).to have_field 'Descrição', :with => 'Parafuso'
-    expect(page).to have_field 'Descrição detalhada', :with => 'de rosca'
+    expect(page).to have_field 'Classe', :with => '01.32.00.000.000 - Software'
+    expect(page).to have_field 'Descrição', :with => 'Desfragmentador de disco'
+    expect(page).to have_field 'Descrição detalhada', :with => 'Desfragmentador de disco com antivirus'
     expect(page).to have_field 'Unidade', :with => 'UN'
     expect(page).to have_field 'Referência do fabricante', :with => 'outro fabricante'
     expect(page).to have_checked_field 'Material combustível'
@@ -200,7 +197,7 @@ feature "Materials" do
   scenario 'does not show material classes with child' do
     make_dependencies!
 
-    MaterialsClass.make!(:software,
+    FactoryGirl.create(:materials_class,
       :masked_number => "01.32.15.000.000", :description => 'Antivirus')
 
     navigate 'Comum > Cadastrais > Materiais > Materiais'
@@ -287,7 +284,6 @@ feature "Materials" do
   end
 
   def make_dependencies!
-    MaterialsClass.make!(:software)
     ExpenseNature.make!(:vencimento_e_salarios)
   end
 end

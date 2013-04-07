@@ -32,4 +32,8 @@ FactoryGirl.preload do
 
   factory(:itau)      { create :bank }
   factory(:santander) { create :bank, name: 'Santander', code: 33, acronym: 'ST' }
+
+  factory(:software)          { create(:materials_class, :imported => true) }
+  factory(:arames)            { create(:materials_class, masked_number: "02.44.65.430.000", description: "Arames", details: "Arames de aço e ferro", has_children: true) }
+  factory(:comp_eletricos)    { create(:materials_class, masked_number: "03.05.33.000.00000", description: "Componentes elétricos", details: "Componentes elétricos", has_children: true) }
 end

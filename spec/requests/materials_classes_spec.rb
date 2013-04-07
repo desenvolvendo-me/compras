@@ -7,9 +7,6 @@ feature "MaterialsClasses" do
   end
 
   scenario 'create a new materials_class' do
-    MaterialsClass.make!(:software)
-    MaterialsClass.make!(:arames)
-
     navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
 
     click_link 'Criar Classe de Materiais'
@@ -43,9 +40,6 @@ feature "MaterialsClasses" do
   end
 
   scenario 'update an existent materials_class' do
-    MaterialsClass.make!(:comp_eletricos)
-    MaterialsClass.make!(:arames)
-
     navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
 
     click_link 'Componentes elétricos'
@@ -79,8 +73,6 @@ feature "MaterialsClasses" do
   end
 
   scenario 'destroy an existent materials_class' do
-    MaterialsClass.make!(:comp_eletricos)
-
     navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
 
     click_link 'Componentes elétricos'
@@ -94,8 +86,6 @@ feature "MaterialsClasses" do
   end
 
   scenario 'index with columns at the index' do
-    MaterialsClass.make!(:software)
-
     navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
 
     within_records do
@@ -103,16 +93,13 @@ feature "MaterialsClasses" do
       expect(page).to have_content 'Código'
 
       within 'tbody tr' do
-        expect(page).to have_content 'Software'
-        expect(page).to have_content '01.32'
+        expect(page).to have_content 'Arames'
+        expect(page).to have_content '02.44'
       end
     end
   end
 
   scenario 'use the autocomplete to fill parent class by description or class_number' do
-    MaterialsClass.make!(:software)
-    MaterialsClass.make!(:arames)
-
     navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
 
     click_link 'Criar Classe de Materiais'
@@ -151,33 +138,26 @@ feature "MaterialsClasses" do
   end
 
   scenario 'cannot edit when material class is imported' do
-    MaterialsClass.make!(:software, :imported => true)
-    MaterialsClass.make!(:software,
-      :masked_number => '01.00.00.000.000',
-      :description => 'Teste',
-      :imported => true
-    )
+    FactoryGirl.create(:materials_class, :masked_number => '01.32.15.000.000', :class_number => '013215000000', :imported => true)
 
     navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
 
     click_link 'Software'
 
     within '.number-prepend' do
-      expect(page).to have_content '01.'
+      expect(page).to have_content '01.32.'
     end
 
     expect(page).to_not have_button 'Salvar'
     expect(page).to_not have_link 'Apagar'
 
-    expect(page).to have_disabled_field 'Classe superior', :with => '01 - Teste'
-    expect(page).to have_disabled_field 'Código', :with => '32'
+    expect(page).to have_disabled_field 'Classe superior', :with => '01.32 - Software'
+    expect(page).to have_disabled_field 'Código', :with => '15'
     expect(page).to have_disabled_field 'Descrição', :with => 'Software'
     expect(page).to have_disabled_field 'Detalhamento', :with => 'Softwares de computador'
   end
 
   scenario 'filter and modal can search class_number with dot' do
-    MaterialsClass.make!(:software)
-
     navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
 
     click_link 'Filtrar Classes de Materiais'
@@ -193,14 +173,13 @@ feature "MaterialsClasses" do
   end
 
   scenario 'update an existent materials_class when at first level' do
-    MaterialsClass.make!(:software, :masked_number => '12.00.00.000.000')
+    FactoryGirl.create(:materials_class, :description => 'Segurança', :masked_number => '01.00.00.000.000')
 
     navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
-
-    click_link 'Software'
+    click_link 'Segurança'
 
     expect(page).to have_field 'Classe superior', :with => ''
-    expect(page).to have_field 'Código', :with => '12'
+    expect(page).to have_field 'Código', :with => '01'
   end
 
   scenario 'should has mask when has not a parent class number' do
@@ -215,8 +194,6 @@ feature "MaterialsClasses" do
   end
 
   scenario 'should keep data when form has errors' do
-    MaterialsClass.make!(:software)
-
     navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
 
     click_link 'Criar Classe de Materiais'
@@ -263,9 +240,6 @@ feature "MaterialsClasses" do
   end
 
   scenario 'modal form at filter should have an autocomplete for class_number' do
-    MaterialsClass.make!(:software)
-    MaterialsClass.make!(:arames)
-
     navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
 
     within_records do
