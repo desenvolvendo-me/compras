@@ -53,6 +53,27 @@ feature "PurchaseProcessAccreditation" do
       expect(page).to have_content 'Não'
     end
 
+    fill_with_autocomplete 'Fornecedor', :with => 'Gabriel'
+
+    expect(page).to have_disabled_field 'Tipo de pessoa', :with => 'Pessoa física'
+    expect(page).to have_select 'Porte', :selected => ''
+
+    select 'Empresa de grande porte', :from => 'Porte'
+    select 'Wenderson Malheiros', :from => 'Representante'
+    select 'Comercial', :from => 'Tipo'
+
+    click_button 'Adicionar'
+
+    within_records do
+      expect(page).to have_css('.record', :count => 1)
+      expect(page).to have_content 'Gabriel Sobrinho'
+      expect(page).to have_content 'Pessoa física'
+      expect(page).to have_content 'Empresa de grande porte'
+      expect(page).to have_content 'Wenderson Malheiros'
+      expect(page).to have_content 'Comercial'
+      expect(page).to have_content 'Não'
+    end
+
     click_button 'Salvar'
 
     expect(page).to have_notice 'Credenciamento criado com sucesso'
