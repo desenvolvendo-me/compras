@@ -2,14 +2,14 @@
   <td><%= creditor %></td>
   <td><%= personable_type %></td>
   <td><%= company_size_text %></td>
-  <td><%= creditor_representative %></td>
+  <td><%= creditor_representative_text %></td>
   <td><%= kind_text %></td>
   <td><%= has_power_of_attorney_text %></td>
 
   <td>
     <%= f.input :creditor_id, :as => :hidden, :input_html => { :value => creditor_id } %>
     <%= f.input :company_size_id, :as => :hidden, :input_html => { :value => company_size_id } %>
-    <%= f.input :creditor_representative_id, :as => :hidden, :input_html => { :value => creditor_representative_id } %>
+    <%= f.input :creditor_representative_id, :as => :hidden, :input_html => { :value => creditor_representative } %>
     <%= f.input :kind, :as => :hidden, :input_html => { :value => kind } %>
     <%= f.input :has_power_of_attorney, :as => :hidden, :input_html => { :value => has_power_of_attorney } %>
     <%= f.input :id, :as => 'hidden' %>

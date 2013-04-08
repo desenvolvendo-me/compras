@@ -12,10 +12,16 @@ feature "PurchaseProcessAccreditation" do
   scenario 'create, update and remove accreditance' do
     LicitationProcess.make!(:processo_licitatorio)
     CompanySize.make!(:empresa_de_grande_porte)
-    Creditor.make!(:sobrinho)
-    Creditor.make!(:nobe)
+    sobrinho = Creditor.make!(:sobrinho)
+    nobe = Creditor.make!(:nobe)
+
     CreditorRepresentative.make!(:representante_sobrinho,
-      :representative_person => Person.make(:wenderson))
+      :representative_person => Person.make!(:wenderson),
+      :creditor => sobrinho)
+
+    CreditorRepresentative.make!(:representante_sobrinho,
+      :representative_person => Person.make!(:joao_da_silva),
+      :creditor => nobe)
 
     navigate 'Processos de Compra > Processos de Compras'
 
@@ -33,9 +39,7 @@ feature "PurchaseProcessAccreditation" do
     expect(page).to have_select 'Porte', :selected => ''
 
     select 'Empresa de grande porte', :from => 'Porte'
-
-    fill_with_autocomplete 'Representante', :with => 'Wenderson'
-
+    select 'Wenderson Malheiros', :from => 'Representante'
     select 'Comercial', :from => 'Tipo'
 
     click_button 'Adicionar'
@@ -69,8 +73,7 @@ feature "PurchaseProcessAccreditation" do
     expect(page).to have_disabled_field 'Tipo de pessoa', :with => 'Pessoa jurídica'
     expect(page).to have_select 'Porte', :selected => 'Microempresa'
 
-    fill_with_autocomplete 'Representante', :with => 'Wenderson'
-
+    select 'Joao da Silva', :from => 'Representante'
     select 'Legal', :from => 'Tipo'
 
     check 'Possui procuração?'
@@ -88,7 +91,7 @@ feature "PurchaseProcessAccreditation" do
       expect(page).to have_content 'Nobe'
       expect(page).to have_content 'Pessoa jurídica'
       expect(page).to have_content 'Microempresa'
-      expect(page).to have_content 'Wenderson Malheiros'
+      expect(page).to have_content 'Joao da Silva'
       expect(page).to have_content 'Legal'
       expect(page).to have_content 'Sim'
     end
@@ -110,7 +113,7 @@ feature "PurchaseProcessAccreditation" do
       expect(page).to have_content 'Nobe'
       expect(page).to have_content 'Pessoa jurídica'
       expect(page).to have_content 'Microempresa'
-      expect(page).to have_content 'Wenderson Malheiros'
+      expect(page).to have_content 'Joao da Silva'
       expect(page).to have_content 'Legal'
       expect(page).to have_content 'Sim'
     end
@@ -137,7 +140,7 @@ feature "PurchaseProcessAccreditation" do
       expect(page).to have_content 'Nobe'
       expect(page).to have_content 'Pessoa jurídica'
       expect(page).to have_content 'Microempresa'
-      expect(page).to have_content 'Wenderson Malheiros'
+      expect(page).to have_content 'Joao da Silva'
       expect(page).to have_content 'Legal'
       expect(page).to have_content 'Sim'
     end

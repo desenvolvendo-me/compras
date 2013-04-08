@@ -24,7 +24,12 @@
 
   <div class="yui3-g">
     <div class="yui3-u-1-2">
-      <%= f.input :creditor_representative, :as => :auto_complete, :fake => true %>
+      <label for="creditor_representative">
+        <%= PurchaseProcessAccreditationCreditor.human_attribute_name :creditor_representative %>
+      </label>
+
+      <%= select_tag :creditor_representative, options_for_select([]),
+          :include_blank => true, :name => 'purchase_process_accreditation[creditor_representative]' %>
     </div>
 
     <div class="yui3-u-1-4">
@@ -74,8 +79,8 @@
           :personable_type => p.object.creditor_personable_type_humanize,
           :company_size_text => p.object.company_size,
           :company_size_id => p.object.company_size_id,
-          :creditor_representative => p.object.creditor_representative,
-          :creditor_representative_id => p.object.creditor_representative_id,
+          :creditor_representative_text => p.object.creditor_representative,
+          :creditor_representative => p.object.creditor_representative_id,
           :kind => p.object.kind,
           :kind_text => p.object.kind_humanize,
           :has_power_of_attorney => p.object.has_power_of_attorney,
@@ -94,8 +99,8 @@
                :personable_type => '{{personable_type}}',
                :company_size_text =>'{{company_size_text}}',
                :company_size_id => '{{company_size}}',
+               :creditor_representative_text => '{{creditor_representative_text}}',
                :creditor_representative => '{{creditor_representative}}',
-               :creditor_representative_id => '{{creditor_representative_id}}',
                :kind => '{{kind}}',
                :kind_text => '{{kind_text}}',
                :has_power_of_attorney => '{{has_power_of_attorney}}',
