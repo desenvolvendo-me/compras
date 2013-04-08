@@ -15,8 +15,6 @@ describe LegalAnalysisAppraisal do
   it { should delegate(:process).to(:licitation_process).allowing_nil(true) }
   it { should delegate(:modality).to(:licitation_process).allowing_nil(true) }
   it { should delegate(:description).to(:licitation_process).allowing_nil(true) }
-  it { should delegate(:number).to(:responsible).allowing_nil(true).prefix(:true) }
-  it { should delegate(:issuer).to(:responsible).allowing_nil(true).prefix(:true) }
 
   it "should return process and year as process_and_year method" do
     subject.stub(:process).and_return(1)

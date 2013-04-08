@@ -43,6 +43,8 @@ feature "LegalAnalysisAppraisals" do
     select 'Outros', :from => 'Referência'
     fill_in 'Data de expedição do laudo', :with => '30/03/2013'
     fill_modal 'Responsável',  :with => '12903412', :field => 'Matrícula'
+    fill_in 'Número', :with => '9223356'
+    fill_in 'Orgão expedidor', :with => 'SPPPR'
 
     click_button 'Salvar'
 
@@ -54,6 +56,8 @@ feature "LegalAnalysisAppraisals" do
     expect(page).to have_select  'Referência', :with => 'Outros'
     expect(page).to have_field 'Data de expedição do laudo', :with => '30/03/2013'
     expect(page).to have_field 'Responsável', :with => 'Wenderson Malheiros'
+    expect(page).to have_field 'Número', :with => '9223356'
+    expect(page).to have_field 'Orgão expedidor', :with => 'SPPPR'
 
     click_link 'Apagar'
 

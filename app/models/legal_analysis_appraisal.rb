@@ -1,6 +1,7 @@
 class LegalAnalysisAppraisal < Compras::Model
   attr_accessible :appraisal_expedition_date, :appraisal_type, :reference,
-                  :responsible_id, :substantiation, :licitation_process_id
+                  :responsible_id, :substantiation, :licitation_process_id,
+                  :responsible_issuer, :responsible_number
 
   belongs_to :licitation_process
   belongs_to :responsible, :class_name => "Employee"
@@ -13,7 +14,6 @@ class LegalAnalysisAppraisal < Compras::Model
             :appraisal_expedition_date, :responsible, :presence => true
 
   delegate :year, :process, :modality, :description, :to => :licitation_process, :allow_nil => true
-  delegate :number, :issuer, :to => :responsible, :prefix => true, :allow_nil => :true
 
   orderize :appraisal_expedition_date
 
