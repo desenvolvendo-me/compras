@@ -14,7 +14,7 @@ $(function () {
         clearFieldsAfterAdd = $(this).data('clear-after-add');
       }
 
-      $('#' + recordsTableId).append($('#' + template).mustache(getNestedMustacheData(nestedFields)));
+      $('#' + recordsTableId + ' tbody').append($('#' + template).mustache(getNestedMustacheData(nestedFields)));
       $('#' + recordsTableId).trigger('nestedGrid:afterAdd');
 
       if (clearFieldsAfterAdd) {
