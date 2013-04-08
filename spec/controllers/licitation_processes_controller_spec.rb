@@ -8,12 +8,6 @@ describe LicitationProcessesController do
   end
 
   describe "GET #new" do
-    it 'uses current year as default value for year' do
-      get :new
-
-      expect(assigns(:licitation_process).year).to eq Date.current.year
-    end
-
     it 'uses current date as default value for process_date' do
       get :new
 
@@ -28,6 +22,12 @@ describe LicitationProcessesController do
   end
 
   describe 'POST #create' do
+    it 'uses year of process_date as value for year' do
+      post :create, :licitation_process => { :id => 1, :process_date => Date.current }
+
+      expect(assigns(:licitation_process).year).to eq Date.current.year
+    end
+
     it 'should assign waiting_for_open default value for status' do
       post :create, :licitation_process => { :id => 1 }
 
