@@ -87,7 +87,6 @@ feature "Creditors" do
     CompanySize.make!(:micro_empresa)
     DocumentType.make!(:fiscal)
     Material.make!(:arame_farpado)
-    Agency.make!(:itau)
     RegularizationOrAdministrativeSanctionReason.make!(:sancao_administrativa)
 
     navigate 'Comum > Pessoas > Credores'
@@ -273,7 +272,6 @@ feature "Creditors" do
     Person.make!(:sobrinho)
     Material.make!(:arame_farpado)
     OccupationClassification.make!(:armed_forces)
-    Agency.make!(:itau)
     RegularizationOrAdministrativeSanctionReason.make!(:sancao_administrativa)
 
     navigate 'Comum > Pessoas > Credores'
@@ -588,7 +586,6 @@ feature "Creditors" do
     DocumentType.make!(:oficial)
     Person.make!(:wenderson)
     Material.make!(:arame_farpado)
-    Agency.make!(:santander)
     RegularizationOrAdministrativeSanctionReason.make!(:regularizacao)
 
     navigate 'Comum > Pessoas > Credores'
@@ -805,7 +802,6 @@ feature "Creditors" do
     OccupationClassification.make!(:engineer)
     Material.make!(:arame_farpado)
     Material.make!(:arame_comum)
-    Agency.make!(:santander)
     RegularizationOrAdministrativeSanctionReason.make!(:regularizacao)
 
     navigate 'Comum > Pessoas > Credores'

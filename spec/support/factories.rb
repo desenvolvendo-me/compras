@@ -68,4 +68,13 @@ FactoryGirl.define do
     acronym 'RUA'
     name    'Rua'
   end
+
+  factory :agency do
+    digit '1'
+    email 'agency_email@itau.com.br'
+    fax '(11) 9090-7070'
+    name 'Agência Itaú'
+    number '10009'
+    phone '(11) 7070-7070'
+  end
 end

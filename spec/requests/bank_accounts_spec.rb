@@ -7,7 +7,6 @@ feature "BankAccounts" do
   end
 
   scenario 'opening modal info in a new capability' do
-    Agency.make!(:itau)
     Capability.make!(:reforma)
 
     navigate 'Comum > Cadastrais > Bancos > Contas Bancárias'
@@ -26,7 +25,6 @@ feature "BankAccounts" do
   end
 
   scenario 'create, update and destroy a new bank_account' do
-    Agency.make!(:itau)
     Capability.make!(:reforma)
     Capability.make!(:construcao)
 
@@ -185,7 +183,6 @@ feature "BankAccounts" do
   end
 
   scenario 'when fill/clear agency should fill/clear related fields' do
-    Agency.make!(:itau)
 
     navigate 'Comum > Cadastrais > Bancos > Contas Bancárias'
 
@@ -207,7 +204,6 @@ feature "BankAccounts" do
   end
 
   scenario 'when clear bank should clear agency too' do
-    Agency.make!(:itau)
 
     navigate 'Comum > Cadastrais > Bancos > Contas Bancárias'
 
@@ -227,7 +223,6 @@ feature "BankAccounts" do
   end
 
   scenario 'when select agency before bank, bank should fill bank' do
-    Agency.make!(:itau)
 
     navigate 'Comum > Cadastrais > Bancos > Contas Bancárias'
 
@@ -241,7 +236,6 @@ feature "BankAccounts" do
   end
 
   scenario 'when fill bank and submit form with errors should return with bank' do
-    Agency.make!(:itau)
 
     navigate 'Comum > Cadastrais > Bancos > Contas Bancárias'
 

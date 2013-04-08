@@ -53,8 +53,6 @@ feature "Agencies" do
   end
 
   scenario 'index with columns at the index' do
-    Agency.make!(:santander)
-
     navigate 'Comum > Cadastrais > Bancos > Agências'
 
     within_records do
@@ -62,8 +60,8 @@ feature "Agencies" do
       expect(page).to have_content 'Banco'
 
       within 'tbody tr' do
-        expect(page).to have_content 'Agência Santander'
-        expect(page).to have_content 'Santander'
+        expect(page).to have_content 'Agência Itaú'
+        expect(page).to have_content 'Itaú'
       end
     end
   end
