@@ -557,20 +557,16 @@ describe LicitationProcess do
       end
     end
 
-    describe "and has budget allocations" do
+    describe "and not has budget allocations" do
       it "budget_allocations_total_value= has not called" do
-        subject.stub(:administrative_process_budget_allocations).and_return(nil)
+        subject.stub(:administrative_process_budget_allocations).and_return([])
         subject.should_not_receive(:budget_allocations_total_value=)
 
         subject.run_callbacks(:save)
       end
     end
 
-    describe "and not has budget allocations" do
-      let(:administrative_process_budget_allocations) do
-        [budget_allocation1, budget_allocation2, budget_allocation3]
-      end
-
+    describe "and has budget allocations" do
       let(:budget_allocation1) do
         double(:budget_allocation1,
                :marked_for_destruction? => false,
@@ -593,7 +589,7 @@ describe LicitationProcess do
       end
 
       it "should return budget_allocations_total_value" do
-        subject.stub(:administrative_process_budget_allocations).and_return(administrative_process_budget_allocations)
+        subject.stub(:administrative_process_budget_allocations).and_return([budget_allocation1, budget_allocation2, budget_allocation3])
         subject.run_callbacks(:save)
 
         expect(subject.budget_allocations_total_value).to eq 10

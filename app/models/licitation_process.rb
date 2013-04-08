@@ -236,7 +236,7 @@ class LicitationProcess < Compras::Model
   end
 
   def calculate_budget_allocations_total_value
-    return unless administrative_process_budget_allocations
+    return unless administrative_process_budget_allocations.any?
 
     self.budget_allocations_total_value = administrative_process_budget_allocations.reject(&:marked_for_destruction?).sum(&:value)
   end
