@@ -82,4 +82,10 @@ FactoryGirl.define do
     level '1'
     name 'Leve'
   end
+
+  factory :warehouse do
+    code '99.999'
+    name 'Almoxarifado Geral'
+    acronym 'AG'
+  end
 end

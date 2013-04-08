@@ -48,4 +48,6 @@ FactoryGirl.preload do
   factory(:leve)                    { create :risk_degree }
   factory(:medio)                   { create :risk_degree, level: '2', name: 'Médio'}
   factory(:grave)                   { create :risk_degree, level: '3', name: 'Grave'}
+
+  factory(:general)                 { create :warehouse }
 end

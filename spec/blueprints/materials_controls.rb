@@ -1,5 +1,5 @@
 MaterialsControl.blueprint(:antivirus_general) do
-  warehouse { Warehouse.make!(:general) }
+  warehouse { ::FactoryGirl::Preload.factories['Warehouse'][:general] }
   material { Material.make!(:antivirus) }
   minimum_quantity { 10.0 }
   maximum_quantity { 20.0 }
