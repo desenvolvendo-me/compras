@@ -63,4 +63,9 @@ FactoryGirl.define do
     details "Softwares de computador"
     has_children false
   end
+
+  factory :street_type do
+    acronym 'RUA'
+    name    'Rua'
+  end
 end

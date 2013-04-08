@@ -13,7 +13,7 @@ describe StreetType do
 
   describe 'acronym' do
     it 'should be valid when size is equal to three' do
-      subject.acronym = 'RUA'
+      subject.acronym = 'LOG'
       expect(subject).to be_invalid
       expect(subject.errors[:acronym]).to be_empty
     end

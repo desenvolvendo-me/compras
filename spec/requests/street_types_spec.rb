@@ -43,17 +43,15 @@ feature "StreetTypes" do
   end
 
   scenario 'index with columns at the index' do
-    StreetType.make!(:rua)
-
     navigate 'Geral > Parâmetros > Endereços > Tipos de Logradouros'
 
     within_records do
       expect(page).to have_content 'Nome'
       expect(page).to have_content 'Sigla'
 
-      within 'tbody tr' do
-        expect(page).to have_content 'Rua'
-        expect(page).to have_content 'RUA'
+      within 'tbody tr:first' do
+        expect(page).to have_content 'Avenida'
+        expect(page).to have_content 'AVE'
       end
     end
   end

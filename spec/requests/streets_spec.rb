@@ -7,9 +7,6 @@ feature "Streets" do
   end
 
   scenario 'create a new street, update and destroy an existing' do
-    StreetType.make!(:rua)
-    StreetType.make!(:avenida)
-
     navigate 'Geral > Parâmetros > Endereços > Logradouros'
 
     click_link 'Criar Logradouro'
