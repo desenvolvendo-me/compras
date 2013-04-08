@@ -77,4 +77,9 @@ FactoryGirl.define do
     number '10009'
     phone '(11) 7070-7070'
   end
+
+  factory :risk_degree do
+    level '1'
+    name 'Leve'
+  end
 end

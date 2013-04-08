@@ -11,19 +11,19 @@ feature "RiskDegrees" do
 
     click_link 'Criar Grau de Risco'
 
-    fill_in 'Nível', :with => '1'
-    fill_in 'Nome', :with => 'Médio'
+    fill_in 'Nível', :with => '4'
+    fill_in 'Nome', :with => 'Médio Leve'
 
     click_button 'Salvar'
 
     expect(page).to have_notice 'Grau de Risco criado com sucesso.'
 
-    click_link 'Médio'
+    click_link 'Médio Leve'
 
-    expect(page).to have_field 'Nível', :with => "1"
-    expect(page).to have_field 'Nome', :with => "Médio"
+    expect(page).to have_field 'Nível', :with => "4"
+    expect(page).to have_field 'Nome', :with => "Médio Leve"
 
-    fill_in 'Nível', :with => '2'
+    fill_in 'Nível', :with => '5'
     fill_in 'Nome', :with => 'Muito Grave'
 
     click_button 'Salvar'
@@ -32,7 +32,7 @@ feature "RiskDegrees" do
 
     click_link 'Muito Grave'
 
-    expect(page).to have_field 'Nível', :with => "2"
+    expect(page).to have_field 'Nível', :with => "5"
     expect(page).to have_field 'Nome', :with => "Muito Grave"
 
     click_link 'Apagar'
@@ -43,8 +43,6 @@ feature "RiskDegrees" do
   end
 
   scenario 'index with columns at the index' do
-    RiskDegree.make!(:grave)
-
     navigate 'Comum > Pessoas > Auxiliar > Grau de Riscos'
 
     within_records do

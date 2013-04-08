@@ -44,4 +44,8 @@ FactoryGirl.preload do
   factory(:santander)               { create(:agency, digit:'5', email: 'agency_email@santander.com.br',
                                               fax:'(11) 9090-7070', name: 'Agência Santander', number: '10099',
                                               phone: '(11) 7070-7070', bank: banks(:santander)) }
+
+  factory(:leve)                    { create :risk_degree }
+  factory(:medio)                   { create :risk_degree, level: '2', name: 'Médio'}
+  factory(:grave)                   { create :risk_degree, level: '3', name: 'Grave'}
 end
