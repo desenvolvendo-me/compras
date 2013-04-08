@@ -46,7 +46,7 @@ Compras::Application.routes.draw do
   end
 
   # Keep routes sorted alphabetically
-  devise_for :users, :controllers => { :confirmations => 'confirmations' }
+  devise_for :users, :controllers => { :confirmations => 'confirmations', :sessions => 'sessions' }
 
   devise_scope :user do
     put '/confirm' => 'confirmations#confirm'

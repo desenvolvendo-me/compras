@@ -15,9 +15,13 @@ describe PriceCollectionAnnulsController do
       Employee.new
     end
 
+    let :user do
+      User.make!(:sobrinho)
+    end
+
     before do
       PriceCollection.stub(:find).with("1").and_return price_collection
-      controller.stub(:current_user).and_return double(:authenticable => authenticable, :creditor? => false)
+      controller.stub(:current_user).and_return(user)
 
       get :new, :price_collection_id => 1
     end
@@ -27,7 +31,7 @@ describe PriceCollectionAnnulsController do
     end
 
     it 'should have the current user authenticable as default responsible' do
-      expect(assigns(:price_collection_annul).employee).to eq authenticable
+      expect(assigns(:price_collection_annul).employee).to eq user.authenticable
     end
 
     it 'should have the param price_collection as default price_collection' do

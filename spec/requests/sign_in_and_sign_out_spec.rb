@@ -42,4 +42,14 @@ feature "SignInAndSignOut" do
 
     expect(page).to have_alert 'Por favor, efetue seu login.'
   end
+
+  scenario 'shared account not allowed' do
+    sign_in
+
+    current_user.update_attribute(:login_token, 'some_different_thing')
+
+    visit root_path
+
+    expect(page).to have_alert 'Sua conta de usuário foi acessada em outro local. Em caso de dúvida, entre em contato com o administrador.'
+  end
 end
