@@ -40,14 +40,12 @@ FactoryGirl.preload do
   factory(:rua)     { create(:street_type) }
   factory(:avenida) { create(:street_type, acronym: 'AVE', name: 'Avenida') }
 
-  factory(:itau)                    { create(:agency, bank: banks(:itau)) }
-  factory(:santander)               { create(:agency, digit:'5', email: 'agency_email@santander.com.br',
-                                              fax:'(11) 9090-7070', name: 'Agência Santander', number: '10099',
-                                              phone: '(11) 7070-7070', bank: banks(:santander)) }
+  factory(:itau)      { create(:agency, bank: banks(:itau)) }
+  factory(:santander) { create(:agency, digit:'5', email: 'agency_email@santander.com.br', fax:'(11) 9090-7070', name: 'Agência Santander', number: '10099', phone: '(11) 7070-7070', bank: banks(:santander)) }
 
-  factory(:leve)                    { create :risk_degree }
-  factory(:medio)                   { create :risk_degree, level: '2', name: 'Médio'}
-  factory(:grave)                   { create :risk_degree, level: '3', name: 'Grave'}
+  factory(:leve)  { create :risk_degree }
+  factory(:medio) { create :risk_degree, level: '2', name: 'Médio'}
+  factory(:grave) { create :risk_degree, level: '3', name: 'Grave'}
 
   factory(:general)                 { create :warehouse }
 end
