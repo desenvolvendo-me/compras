@@ -20,6 +20,7 @@
         input.val(ui.item.label);
         hiddenInput.val(ui.item[valueAttribute]);
         hiddenInput.trigger('change', ui.item);
+        $(this).removeClass("loading");
 
         if (clearAfterAdd) {
           return false;
@@ -28,6 +29,13 @@
 
       response: function(event, ui) {
         $(this).removeClass("loading");
+      },
+
+      change: function(event, ui) {
+        if (ui.item === null || _.isEmpty(input.val()) ) {
+          hiddenInput.val("");
+          hiddenInput.trigger('change', ui.item);
+        }
       }
     });
 
@@ -39,13 +47,6 @@
         if (!_.contains(invalidKeys, event.which)){
           $(this).addClass("loading");
         }
-      }
-    });
-
-    hiddenInput.change(function(event, object) {
-      $(this).removeClass("loading");
-      if (object === null && _.isEmpty(input.val())) {
-        hiddenInput.val("");
       }
     });
   });
