@@ -28,6 +28,9 @@ feature "LegalAnalysisAppraisals" do
     fill_in 'Data de expedição do laudo', :with => '27/03/2013'
     fill_modal 'Responsável',  :with => '958473', :field => 'Matrícula'
 
+    expect(page).to have_field 'Número', :with => 'MG16236013'
+    expect(page).to have_field 'Orgão expedidor', :with => 'ssp'
+
     click_button 'Salvar'
 
     expect(page).to have_notice 'Laudo de Análise Jurídica criado com sucesso.'
