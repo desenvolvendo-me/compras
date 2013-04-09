@@ -2,6 +2,9 @@ $(document).ready(function() {
   $("#company_size").requiredField(true);
 
   $("#purchase_process_accreditation_creditor_id").on('change', function(event, creditor){
+    $('#creditor_representative').val('');
+    $('#creditor_representative').empty();
+
     if (creditor) {
       $('#purchase_process_accreditation_personable_type').val(creditor.personable_type);
       $('#company_size').val(creditor.company_size_id);
@@ -9,8 +12,6 @@ $(document).ready(function() {
     } else {
       $('#purchase_process_accreditation_personable_type').val('');
       $('#company_size').val('');
-      $('#creditor_representative').val('');
-      $('#creditor_representative').empty();
     }
 
     kindRequired(false);
