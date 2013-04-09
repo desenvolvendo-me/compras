@@ -1,27 +1,92 @@
-<div id="budget_allocations">
-  <div class="yui3-g">
-    <div class="yui3-u-1-4">
-      <%= f.input :total_value_of_items, :disabled => true %>
-    </div>
-
-    <div class="yui3-u-1-4">
-      <%= f.input :budget_allocations_total_value, :disabled => true %>
-    </div>
+<div class="yui3-g">
+  <div class="yui3-u-1-4">
+    <%= f.input :total_value_of_items, :disabled => true %>
   </div>
 
-  <p>
-    <input type="button" class="button affirmative add-administrative-process-budget-allocation" value="Adicionar Dotação">
-  </p>
-
-  <div id="administrative-process-budget-allocation" data-nested-form="administrative-process-budget-allocation" data-append-item=false>
-    <%= f.association :administrative_process_budget_allocations, :collection => localized(f.object.administrative_process_budget_allocations) do |p| %>
-      <%= render 'administrative_process_budget_allocations/form', :f => p, :data_disabled => f.object.decorator.not_updatable_message %>
-    <% end %>
+  <div class="yui3-u-1-4">
+    <%= f.input :budget_allocations_total_value, :disabled => true %>
   </div>
-
-  <%= mustache 'administrative-process-budget-allocation-template' do %>
-    <%= f.association :administrative_process_budget_allocations_attributes, :collection => f.object.administrative_process_budget_allocations.build, :index => '{{uuid-administrative-process-budget-allocation}}' do |p| %>
-      <%= render 'administrative_process_budget_allocations/form', :f => p, :data_disabled => f.object.decorator.not_updatable_message %>
-    <% end %>
-  <% end %>
 </div>
+
+<div id="budget_allocations" class="nested-fields">
+  <div class="yui3-g">
+    <div class="yui3-u-3-4">
+      <%= f.input :budget_allocation, :as => :auto_complete, :fake => true, :source_path => budget_allocations_path,
+                  :required => true %>
+    </div>
+  </div>
+
+  <div class="yui3-g">
+    <div class="yui3-u-1-2">
+      <%= f.input :expense_nature, :as => :fake, :disabled => true %>
+      <%= hidden_field_tag :expense_nature_id %>
+    </div>
+  </div>
+
+  <div class="yui3-g">
+    <div class="yui3-u-2-5">
+      <%= f.input :expense_nature_split, :as => :auto_complete, :fake => true, :source_path => expense_natures_path,
+                  :required => true %>
+    </div>
+
+    <div class="yui3-u-1-5">
+      <%= f.input :budget_allocation_amount, :as => :fake, :disabled => true %>
+    </div>
+
+    <div class="yui3-u-1-5">
+      <%= f.input :administrative_process_budget_allocation_value, :as => :fake,
+                  :input_html => { :class => 'decimal', 'data-decimal' => true } %>
+    </div>
+
+    <div class="yui3-u-1-5">
+      <%= button_tag 'Adicionar', :class => 'button nested-add-record field-without-label',
+                     'data-template' => 'administrative_process_budget_allocations_template',
+                     'data-records' => 'administrative-process-budget-allocation-records' %>
+    </div>
+  </div>
+</div>
+
+<table class="records" id="administrative-process-budget-allocation-records">
+  <thead>
+    <tr>
+      <th><%= PurchaseSolicitationBudgetAllocation.human_attribute_name :budget_allocation %></th>
+      <th><%= BudgetAllocation.human_attribute_name :expense_nature %></th>
+      <th><%= AdministrativeProcessBudgetAllocation.human_attribute_name :expense_nature_split %></th>
+      <th><%= AdministrativeProcessBudgetAllocation.human_attribute_name :budget_allocation_amount %></th>
+      <th><%= AdministrativeProcessBudgetAllocation.human_attribute_name :value %></th>
+      <th>Remover</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%= f.association :administrative_process_budget_allocations, :collection => localized(f.object.administrative_process_budget_allocations) do |p| %>
+      <%= render 'administrative_process_budget_allocations/form',
+          :budget_allocation => p.object.budget_allocation.to_s,
+          :budget_allocation_id => p.object.budget_allocation_id,
+          :budget_allocation_expense_nature => p.object.budget_allocation_expense_nature.to_s,
+          :expense_nature_split => p.object.expense_nature_split,
+          :expense_nature_split_id => p.object.expense_nature_split_id,
+          :budget_allocation_amount => p.object.decorator.budget_allocation_amount,
+          :value => p.object.decorator.value,
+          :data_disabled => f.object.decorator.not_updatable_message,
+          :f => p %>
+    <% end %>
+  </tbody>
+
+</table>
+
+<%= mustache 'administrative_process_budget_allocations_template' do %>
+  <%= f.association :administrative_process_budget_allocations_attributes, :index => '{{uuid}}',
+      :collection => f.object.administrative_process_budget_allocations.build do |p| %>
+    <%= render 'administrative_process_budget_allocations/form',
+        :budget_allocation => '{{budget_allocation}}',
+        :budget_allocation_id => '{{budget_allocation_id}}',
+        :budget_allocation_expense_nature => '{{expense_nature}}',
+        :expense_nature_split => '{{expense_nature_split}}',
+        :expense_nature_split_id => '{{expense_nature_split_id}}',
+        :budget_allocation_amount => '{{budget_allocation_amount}}',
+        :value => '{{administrative_process_budget_allocation_value}}',
+        :data_disabled => nil,
+        :f => p %>
+  <% end %>
+<% end %>

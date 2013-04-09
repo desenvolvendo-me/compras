@@ -1,24 +1,17 @@
-<div class="nested-administrative-process-budget-allocation contrasted">
-  <%= f.input :id, :as => 'hidden' %>
-  <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
+<tr class="record nested-record">
+  <td><%= budget_allocation %></td>
+  <td><%= budget_allocation_expense_nature %></td>
+  <td><%= expense_nature_split %></td>
+  <td><%= budget_allocation_amount %></td>
+  <td class='administrative_process_budget_allocation_value'><%= value %></td>
 
-  <%= f.input :budget_allocation, :as => :auto_complete, :hidden_field => :budget_allocation_id %>
+  <td>
+    <%= f.input :budget_allocation_id, :as => :hidden, :input_html => { :value => budget_allocation_id, :class => 'budget_allocation_id' } %>
+    <%= f.input :expense_nature_split_id, :as => :hidden, :input_html => { :value => expense_nature_split_id } %>
+    <%= f.input :value, :as => :hidden, :input_html => { :value => value } %>
+    <%= f.input :id, :as => 'hidden' %>
+    <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
 
-  <div class="yui3-g">
-    <div class="yui3-u-1-4">
-      <%= f.input :budget_allocation_expense_nature, :disabled => true %>
-    </div>
-
-    <div class="yui3-u-1-4">
-      <%= f.input :budget_allocation_amount, :disabled => true, :input_html => { :value => number_with_precision(f.object.budget_allocation_amount) } %>
-    </div>
-
-    <div class="yui3-u-1-4">
-      <%= f.input :value, :input_html => { :class => 'allocation-value' } %>
-    </div>
-  </div>
-
-  <p class="yui3-u">
-    <input type="button" class="button negative remove-administrative-process-budget-allocation" value="Remover Dotação">
-  </p>
-</div>
+    <%= link_to 'Remover', '#', :class => 'remove-nested-record', 'data-disabled' => data_disabled %>
+  </td>
+</tr>

@@ -22,6 +22,7 @@ feature "LicitationProcesses" do
     BudgetAllocation.make!(:alocacao)
     Material.make!(:antivirus)
     Indexer.make!(:xpto)
+    ExpenseNature.make!(:aposentadorias_rpps, :year => Date.current.year)
 
     navigate 'Processos de Compra > Processos de Compras'
 
@@ -79,11 +80,34 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Orçamento' do
-      click_button 'Adicionar Dotação'
-
       fill_with_autocomplete 'Dotação orçamentária', :with => 'Aposentadorias'
 
+      expect(page).to have_field 'Natureza da despesa', :with => '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+      expect(page).to have_field 'Saldo da dotação', :with => '500,00'
+
+      fill_with_autocomplete 'Desdobramento', :with => '3.1'
+
+      expect(page).to have_field '', :with => '3.1.90.01.01 - Aposentadorias Custeadas com Recursos do RPPS'
+
       fill_in 'Valor previsto', :with => '20,00'
+
+      click_button 'Adicionar'
+
+      within_records do
+        expect(page).to have_content 'Dotação'
+        expect(page).to have_content 'Natureza da despesa'
+        expect(page).to have_content 'Desdobramento'
+        expect(page).to have_content 'Saldo da dotação'
+        expect(page).to have_content 'Valor previsto'
+
+        within 'tbody tr' do
+          expect(page).to have_content '1 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+          expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+          expect(page).to have_content '3.1.90.01.01 - Aposentadorias Custeadas com Recursos do RPPS'
+          expect(page).to have_content '500,00'
+          expect(page).to have_content '20,00'
+        end
+      end
     end
 
     within_tab "Itens" do
@@ -167,10 +191,21 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Orçamento' do
-      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
-      expect(page).to have_field 'Compl. do elemento', :with => '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
-      expect(page).to have_field 'Saldo da dotação', :with => '500,00'
-      expect(page).to have_field 'Valor previsto', :with => '20,00'
+      within_records do
+        expect(page).to have_content 'Dotação'
+        expect(page).to have_content 'Natureza da despesa'
+        expect(page).to have_content 'Desdobramento'
+        expect(page).to have_content 'Saldo da dotação'
+        expect(page).to have_content 'Valor previsto'
+
+        within 'tbody tr' do
+          expect(page).to have_content '1 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+          expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+          expect(page).to have_content '3.1.90.01.01 - Aposentadorias Custeadas com Recursos do RPPS'
+          expect(page).to have_content '500,00'
+          expect(page).to have_content '20,00'
+        end
+      end
     end
 
     within_tab "Itens" do
@@ -203,6 +238,7 @@ feature "LicitationProcesses" do
     Indexer.make!(:xpto)
     JudgmentForm.make!(:por_lote_com_melhor_tecnica)
     JudgmentForm.make!(:por_item_com_menor_preco)
+    ExpenseNature.make!(:aposentadorias_rpps, :year => Date.current.year)
 
     navigate 'Processos de Compra > Processos de Compras'
 
@@ -231,6 +267,7 @@ feature "LicitationProcesses" do
     Material.make!(:arame_farpado)
     Indexer.make!(:selic)
     BudgetAllocation.make!(:alocacao)
+    ExpenseNature.make!(:aposentadorias_rpps, :year => Date.current.year)
 
     navigate 'Processos de Compra > Processos de Compras'
 
@@ -302,11 +339,28 @@ feature "LicitationProcesses" do
     within_tab "Orçamento" do
       expect(page).to have_disabled_field 'Valor total dos itens', :with => '20,00'
       expect(page).to have_disabled_field 'Valor total das dotações', :with => '20,00'
-      click_button 'Adicionar Dotação'
+
+      within_records do
+        click_link "Remover"
+      end
+
+      expect(page).to have_disabled_field 'Valor total das dotações', :with => '0,00'
 
       fill_with_autocomplete 'Dotação orçamentária', :with => 'Aposentadorias'
 
+      expect(page).to have_field 'Natureza da despesa', :with => '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+
+      expect(page).to have_field 'Saldo da dotação', :with => '500,00'
+
+      fill_with_autocomplete 'Desdobramento', :with => '3.1'
+
+      expect(page).to have_field '', :with => '3.1.90.01.01 - Aposentadorias Custeadas com Recursos do RPPS'
+
       fill_in 'Valor previsto', :with => '20,00'
+
+      click_button 'Adicionar'
+
+      expect(page).to have_disabled_field 'Valor total das dotações', :with => '20,00'
     end
 
     within_tab 'Configuração da apuração' do
@@ -362,11 +416,23 @@ feature "LicitationProcesses" do
 
     within_tab 'Orçamento' do
       expect(page).to have_disabled_field 'Valor total dos itens', :with => '20,00'
-      expect(page).to have_disabled_field 'Valor total das dotações', :with => '40,00'
-      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
-      expect(page).to have_field 'Compl. do elemento', :with => '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
-      expect(page).to have_field 'Saldo da dotação', :with => '500,00'
-      expect(page).to have_field 'Valor previsto', :with => '20,00'
+      expect(page).to have_disabled_field 'Valor total das dotações', :with => '20,00'
+
+      within_records do
+        expect(page).to have_content 'Dotação'
+        expect(page).to have_content 'Natureza da despesa'
+        expect(page).to have_content 'Desdobramento'
+        expect(page).to have_content 'Saldo da dotação'
+        expect(page).to have_content 'Valor previsto'
+
+        within 'tbody tr' do
+          expect(page).to have_content '1 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+          expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+          expect(page).to have_content '3.1.90.01.01 - Aposentadorias Custeadas com Recursos do RPPS'
+          expect(page).to have_content '500,00'
+          expect(page).to have_content '20,00'
+        end
+      end
     end
 
     within_tab 'Configuração da apuração' do
@@ -1551,21 +1617,27 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Orçamento' do
-      expect(page).to have_button 'Adicionar Dotação'
-      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+      expect(page).to have_disabled_field 'Valor total dos itens', :with => '600,00'
+      expect(page).to have_disabled_field 'Valor total das dotações', :with => '20,00'
 
-      expect(page).to have_field 'Compl. do elemento', :with => '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
-      expect(page).to have_disabled_field 'Compl. do elemento'
+      within_records do
+        expect(page).to have_content 'Dotação'
+        expect(page).to have_content 'Natureza da despesa'
+        expect(page).to have_content 'Desdobramento'
+        expect(page).to have_content 'Saldo da dotação'
+        expect(page).to have_content 'Valor previsto'
 
-      expect(page).to have_field 'Saldo da dotação', :with => '500,00'
-      expect(page).to have_disabled_field 'Saldo da dotação'
-
-      expect(page).to have_button 'Remover Dotação'
-      fill_in 'Valor previsto', :with => '600,00'
+        within 'tbody tr' do
+          expect(page).to have_content '1 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+          expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+          expect(page).to have_content '3.1.90.01.01 - Aposentadorias Custeadas com Recursos do RPPS'
+          expect(page).to have_content '500,00'
+          expect(page).to have_content '20,00'
+        end
+      end
     end
 
     within_tab "Itens" do
-
       fill_in 'Lote', :with => '2234'
 
       expect(page).to have_field 'Item', :with => '1'
@@ -1599,18 +1671,24 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Orçamento' do
-      expect(page).to have_button 'Adicionar Dotação'
-      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+      expect(page).to have_disabled_field 'Valor total dos itens', :with => '600,00'
+      expect(page).to have_disabled_field 'Valor total das dotações', :with => '20,00'
 
-      expect(page).to have_field 'Compl. do elemento', :with => '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
-      expect(page).to have_disabled_field 'Compl. do elemento'
+      within_records do
+        expect(page).to have_content 'Dotação'
+        expect(page).to have_content 'Natureza da despesa'
+        expect(page).to have_content 'Desdobramento'
+        expect(page).to have_content 'Saldo da dotação'
+        expect(page).to have_content 'Valor previsto'
 
-      expect(page).to have_field 'Saldo da dotação', :with => '500,00'
-      expect(page).to have_disabled_field 'Saldo da dotação'
-
-      expect(page).to have_field 'Valor previsto', :with => '600,00'
-
-      expect(page).to have_button 'Remover Dotação'
+        within 'tbody tr' do
+          expect(page).to have_content '1 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+          expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+          expect(page).to have_content '3.1.90.01.01 - Aposentadorias Custeadas com Recursos do RPPS'
+          expect(page).to have_content '500,00'
+          expect(page).to have_content '20,00'
+        end
+      end
     end
 
     within_tab 'Itens' do
@@ -1833,17 +1911,24 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Orçamento' do
-      expect(page).to have_button 'Adicionar Dotação'
-      expect(page).to have_field 'Dotação orçamentária', :with => '1 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+      expect(page).to have_disabled_field 'Valor total dos itens', :with => '600,00'
+      expect(page).to have_disabled_field 'Valor total das dotações', :with => '20,00'
 
-      expect(page).to have_field 'Compl. do elemento', :with => '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
-      expect(page).to have_disabled_field 'Compl. do elemento'
+      within_records do
+        expect(page).to have_content 'Dotação'
+        expect(page).to have_content 'Natureza da despesa'
+        expect(page).to have_content 'Desdobramento'
+        expect(page).to have_content 'Saldo da dotação'
+        expect(page).to have_content 'Valor previsto'
 
-      expect(page).to have_field 'Saldo da dotação', :with => '500,00'
-      expect(page).to have_disabled_field 'Saldo da dotação'
-
-      expect(page).to have_button 'Remover Dotação'
-      fill_in 'Valor previsto', :with => '600,00'
+        within 'tbody tr' do
+          expect(page).to have_content '1 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+          expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+          expect(page).to have_content '3.1.90.01.01 - Aposentadorias Custeadas com Recursos do RPPS'
+          expect(page).to have_content '500,00'
+          expect(page).to have_content '20,00'
+        end
+      end
     end
 
     within_tab "Itens" do

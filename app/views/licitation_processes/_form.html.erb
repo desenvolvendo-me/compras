@@ -22,14 +22,24 @@
 
 <script>
   var fieldItems = '.item-price',
-      fieldBudget = '.allocation-value',
-      nestedItems = 'div.nested-licitation-process-item',
-      nestedBudget = 'div.nested-administrative-process-budget-allocation';
+      nestedItems = 'div.nested-licitation-process-item';
 
   $('a[href="#tab-budget_allocations"]').click(function() {
     $('#licitation_process_total_value_of_items').val(sumOfItems(nestedItems, fieldItems));
-    $('#licitation_process_budget_allocations_total_value').val(sumOfItems(nestedBudget, fieldBudget));
   });
+
+  function sumAdministrativeProcessBudgetAllocationTotalValue() {
+    var totalValue = 0,
+        tableData  = $('#administrative-process-budget-allocation-records tr.record').not('[style*="display: none"]');
+
+    tableData.find('td.administrative_process_budget_allocation_value').each(function() {
+      totalValue += parsePtBrFloat($(this).html());
+    })
+
+    totalValue = numberWithDelimiter(totalValue);
+
+    $('#licitation_process_budget_allocations_total_value').val(totalValue);
+  }
 
   function sumOfItems(nested, field) {
     var total = 0,
@@ -44,12 +54,12 @@
     return total;
   }
 
-  $('form.licitation_process').on('keyup', '.allocation-value', function() {
-    $('#licitation_process_budget_allocations_total_value').val(sumOfItems(nestedBudget, fieldBudget));
+  $('#administrative-process-budget-allocation-records').on('nestedGrid:afterAdd', function() {
+    sumAdministrativeProcessBudgetAllocationTotalValue();
   });
 
-  $('form.licitation_process').on('click', '.remove-administrative-process-budget-allocation', function() {
-    $('#licitation_process_budget_allocations_total_value').val(sumOfItems(nestedBudget, fieldBudget));
+  $('#administrative-process-budget-allocation-records').on('nestedGrid:afterRemove', function() {
+    sumAdministrativeProcessBudgetAllocationTotalValue();
   });
 
   $(function () {
@@ -190,43 +200,6 @@
     $(prefixNameUuid + "_estimated_total_price").val(numberWithDelimiter(item.estimated_total_price));
   }
 
-  function fillBudgetAllocation(uuid, budget_allocation) {
-    var prefixNameUuid = "#licitation_process_administrative_process_budget_allocations_attributes_fresh-" + uuid;
-
-    $(prefixNameUuid + "_budget_allocation").val(budget_allocation.to_s);
-    $(prefixNameUuid + "_budget_allocation_id").val(budget_allocation.budget_allocation_id);
-    $(prefixNameUuid + "_budget_allocation_expense_nature").val(budget_allocation.expense_nature);
-    $(prefixNameUuid + "_budget_allocation_amount").val(numberWithDelimiter(budget_allocation.amount));
-  }
-
-  function renderBudgetAllocation(budget_allocation) {
-    var budgetAllocationBinds = [],
-        budgetAllocationUUID = _.uniqueId(),
-        gotBudgetAllocation = false,
-        nestedBudgetAllocationDiv = $("div.nested-administrative-process-budget-allocation"),
-        budgetAllocationRow;
-
-    budgetAllocationBinds["uuid-administrative-process-budget-allocation"] = "fresh-" + budgetAllocationUUID;
-
-    nestedBudgetAllocationDiv.each(function(index, obj) {
-      budgetRow = $(obj).find(".licitation_process_administrative_process_budget_allocations_budget_allocation").
-                         find("input[type=hidden]");
-
-      if (budgetRow.val() == budget_allocation.budget_allocation_id) {
-        gotBudgetAllocation = true;
-        return false;
-      }
-    });
-
-    if ((nestedBudgetAllocationDiv.size() == 0) || (!gotBudgetAllocation)) {
-      $("#administrative-process-budget-allocation").append(
-        $("#administrative-process-budget-allocation-template").mustache(budgetAllocationBinds)
-      ).trigger("nestedForm:afterAdd");
-    }
-
-    fillBudgetAllocation(budgetAllocationUUID, budget_allocation);
-  }
-
   function renderItem(item) {
     var itemBinds = [],
         itemUUID  = _.uniqueId(),
@@ -259,19 +232,7 @@
     fillItem(itemUUID, item);
   }
 
-  $("#licitation_process_purchase_solicitations_id").on("change", function (event, purchase_solicitation) {
-    if (purchase_solicitation) {
-      $.each(purchase_solicitation.budget_allocations, function (i, budget_allocation) {
-        renderBudgetAllocation(budget_allocation);
-      });
-
-      $.each(purchase_solicitation.items, function (i, item) {
-        renderItem(item);
-      });
-    }
-  });
-
-  $('form.licitation_process').on('change', '.material', function (event, material) {
+  $('form.licitation_process').on('change', '.material', function(event, material) {
     if (material){
       $(this).closest('.nested-licitation-process-item').find('.reference-unit').val(material.reference_unit);
     }

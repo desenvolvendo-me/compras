@@ -1,6 +1,8 @@
 # encoding: utf-8
 PurchaseSolicitationBudgetAllocation.blueprint(:alocacao_primaria) do
   budget_allocation { BudgetAllocation.make!(:alocacao) }
+  estimated_value { 20.0 }
+  expense_nature { ExpenseNature.make!(:aposentadorias_rpps)}
   blocked { false }
 end
 
