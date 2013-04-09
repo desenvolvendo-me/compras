@@ -138,11 +138,6 @@ feature "LicitationProcesses" do
       expect(page).to_not have_field 'Diretos e obrigações do concedido'
     end
 
-    within_tab 'Configuração da apuração' do
-      check 'Desclassificar participantes com problemas da documentação'
-      check 'Desclassificar participantes com cotações acima do valor máximo estabelecido no edital'
-    end
-
     click_button 'Salvar'
 
     expect(page).to have_notice "Processo de Compra 1/#{Date.current.year} criado com sucesso."
@@ -222,11 +217,6 @@ feature "LicitationProcesses" do
     within_tab 'Receita' do
       expect(page).to have_field 'Prazo da concessão', :with => '1'
       expect(page).to have_select 'Unidade do prazo da concessão', :selected => 'ano/anos'
-    end
-
-    within_tab 'Configuração da apuração' do
-      expect(page).to have_checked_field 'Desclassificar participantes com problemas da documentação'
-      expect(page).to have_checked_field 'Desclassificar participantes com cotações acima do valor máximo estabelecido no edital'
     end
   end
 
@@ -363,10 +353,6 @@ feature "LicitationProcesses" do
       expect(page).to have_disabled_field 'Valor total das dotações', :with => '20,00'
     end
 
-    within_tab 'Configuração da apuração' do
-      uncheck 'Desclassificar participantes com problemas da documentação'
-    end
-
     click_button 'Salvar'
 
     expect(page).to have_notice 'Processo de Compra 1/2012 editado com sucesso.'
@@ -433,11 +419,6 @@ feature "LicitationProcesses" do
           expect(page).to have_content '20,00'
         end
       end
-    end
-
-    within_tab 'Configuração da apuração' do
-      expect(page).to have_unchecked_field 'Desclassificar participantes com problemas da documentação'
-      expect(page).to have_checked_field 'Desclassificar participantes com cotações acima do valor máximo estabelecido no edital'
     end
   end
 
@@ -686,8 +667,7 @@ feature "LicitationProcesses" do
   end
 
   scenario 'should not validate changes on bidders when classification is done' do
-    licitation_process = LicitationProcess.make!(:apuracao_global,
-                                                 :disqualify_by_documentation_problem => true)
+    licitation_process = LicitationProcess.make!(:apuracao_global)
 
     licitation_process.update_attributes({
       :proposal_envelope_opening_date => Date.tomorrow,
@@ -813,7 +793,7 @@ feature "LicitationProcesses" do
   end
 
   scenario 'generate calculation and disable a bidder by maximum value' do
-    licitation_process = LicitationProcess.make!(:valor_maximo_ultrapassado, :disqualify_by_maximum_value => true)
+    licitation_process = LicitationProcess.make!(:valor_maximo_ultrapassado)
     bidder = licitation_process.bidders.first
     LicitationProcessLot.make!(:lote, :licitation_process => licitation_process,
                                :administrative_process_budget_allocation_items => [licitation_process.items.first])
@@ -884,41 +864,8 @@ feature "LicitationProcesses" do
     end
   end
 
-  scenario 'generate calculation with companies without documents and considering law of proposals' do
-    licitation_process = LicitationProcess.make!(:apuracao_global_sem_documentos, :consider_law_of_proposals => true,
-                                                 :disqualify_by_documentation_problem => true)
-
-    navigate 'Processos de Compra > Processos de Compras'
-
-    click_link "Limpar Filtro"
-
-    within_records do
-      click_link '1/2012'
-    end
-
-    expect(page).to_not have_button 'Relatório'
-
-    click_button 'Apurar'
-
-    expect(page).to have_content 'Processo de Compra 1/2012'
-
-    expect(page).to have_content 'Apuração: Forma Global com Menor Preço'
-
-    expect(page).to have_content 'Nohup'
-
-    within '.classification-2-0' do
-      expect(page).to have_content 'Antivirus'
-      expect(page).to have_content '9,10'
-      expect(page).to have_content '18,20'
-      expect(page).to have_content 'Ganhou'
-    end
-
-    expect(page).to_not have_content 'IBM'
-  end
-
   scenario 'generate calculation with companies without documents' do
-    licitation_process = LicitationProcess.make!(:apuracao_global_sem_documentos, :consider_law_of_proposals => false,
-                                                 :disqualify_by_documentation_problem => true)
+    licitation_process = LicitationProcess.make!(:apuracao_global_sem_documentos)
 
     navigate 'Processos de Compra > Processos de Compras'
 
@@ -936,51 +883,13 @@ feature "LicitationProcesses" do
 
     expect(page).to have_content 'Apuração: Forma Global com Menor Preço'
 
-    expect(page).to_not have_content 'Nohup'
+    expect(page).to_not have_content 'Wenderson'
 
     expect(page).to_not have_content 'IBM'
-  end
-
-  scenario 'generate calculation between a small company and a big company without consider law of proposals' do
-    licitation_process = LicitationProcess.make!(:apuracao_global_small_company, :consider_law_of_proposals => false)
-
-    navigate 'Processos de Compra > Processos de Compras'
-
-    click_link "Limpar Filtro"
-
-    within_records do
-      click_link '1/2012'
-    end
-
-    expect(page).to_not have_button 'Relatório'
-
-    click_button 'Apurar'
-
-    expect(page).to have_content 'Processo de Compra 1/2012'
-
-    expect(page).to have_content 'Apuração: Forma Global com Menor Preço'
-
-    expect(page).to have_content 'Nohup'
-
-    within '.classification-2-0' do
-      expect(page).to have_content 'Antivirus'
-      expect(page).to have_content '9,10'
-      expect(page).to have_content '18,20'
-      expect(page).to have_content 'Perdeu'
-    end
-
-    expect(page).to have_content 'IBM'
-
-    within '.classification-1-0' do
-      expect(page).to have_content 'Antivirus'
-      expect(page).to have_content '9,00'
-      expect(page).to have_content '18,00'
-      expect(page).to have_content 'Ganhou'
-    end
   end
 
   scenario 'generate calculation between a small company and a big company and consider law of proposals' do
-    licitation_process = LicitationProcess.make!(:apuracao_global_small_company_2, :consider_law_of_proposals => true)
+    licitation_process = LicitationProcess.make!(:apuracao_global_small_company_2)
 
     navigate 'Processos de Compra > Processos de Compras'
 
@@ -1018,7 +927,7 @@ feature "LicitationProcesses" do
   end
 
   scenario 'generate calculation between a small company and a big company and consider law of proposals and make a new proposal' do
-    licitation_process = LicitationProcess.make!(:apuracao_global_small_company, :consider_law_of_proposals => true)
+    licitation_process = LicitationProcess.make!(:apuracao_global_small_company)
 
     navigate 'Processos de Compra > Processos de Compras'
 
@@ -1096,7 +1005,7 @@ feature "LicitationProcesses" do
   end
 
   scenario 'generate calculation between a small company and a big company and dont make a new proposal' do
-    licitation_process = LicitationProcess.make!(:apuracao_global_small_company, :consider_law_of_proposals => true)
+    licitation_process = LicitationProcess.make!(:apuracao_global_small_company)
 
     navigate 'Processos de Compra > Processos de Compras'
 

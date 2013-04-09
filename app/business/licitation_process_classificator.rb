@@ -1,11 +1,9 @@
 class LicitationProcessClassificator
-  attr_accessor :classification_a, :classification_b, :tolerance,
-                :consider_law_of_proposals
+  attr_accessor :classification_a, :classification_b, :tolerance
 
   def initialize(classification_a, classification_b, options = {})
     self.classification_a = classification_a
     self.classification_b = classification_b
-    self.consider_law_of_proposals = options.fetch(:consider_law_of_proposals, false)
     self.tolerance = options.fetch(:tolerance, 10)
   end
 
@@ -72,7 +70,7 @@ class LicitationProcessClassificator
   end
 
   def classify_by_lowest_value?
-    classification_a.benefited == classification_b.benefited || !consider_law_of_proposals
+    classification_a.benefited == classification_b.benefited
   end
 
   def classification_benefited

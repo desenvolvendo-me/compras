@@ -28,8 +28,7 @@ class Bidder < Compras::Model
   delegate :document_type_ids, :process_date, :ratification?, :has_trading?,
            :invitation?,
            :to => :licitation_process, :prefix => true, :allow_nil => true
-  delegate :envelope_opening?, :items, :allow_bidders?,
-           :consider_law_of_proposals, :licitation_process_lots,
+  delegate :envelope_opening?, :items, :allow_bidders?, :licitation_process_lots,
            :to => :licitation_process, :allow_nil => true
   delegate :administrative_process_budget_allocation_items, :to => :licitation_process_lots
   delegate :material, :to => :administrative_process_budget_allocation_items
@@ -280,7 +279,7 @@ class Bidder < Compras::Model
   end
 
   def benefited_by_law_of_proposals?
-    consider_law_of_proposals && benefited
+    benefited
   end
 
   def inactivate!

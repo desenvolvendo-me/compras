@@ -26,9 +26,6 @@ LicitationProcess.blueprint(:processo_licitatorio) do
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   price_registration { true }
   licitation_process_lots { [LicitationProcessLot.make(:lote_antivirus, :licitation_process => object)] }
-  disqualify_by_documentation_problem { true }
-  disqualify_by_maximum_value { true }
-  consider_law_of_proposals { false }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   notice_availability_date { I18n.l(Date.tomorrow) }
@@ -187,7 +184,6 @@ LicitationProcess.blueprint(:apuracao_por_itens) do
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
   document_types { [DocumentType.make!(:fiscal)] }
-  disqualify_by_documentation_problem { false }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   execution_type { ExecutionType::INTEGRAL }
   bidders { [Bidder.make!(:licitante_com_proposta_1),
@@ -353,7 +349,7 @@ LicitationProcess.blueprint(:apuracao_global_sem_documentos) do
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
-  bidders { [Bidder.make!(:licitante_com_proposta_3, :documents => []),
+  bidders { [Bidder.make!(:licitante_com_proposta_6, :documents => []),
              Bidder.make!(:licitante_com_proposta_4, :documents => [])] }
   notice_availability_date { I18n.l(Date.tomorrow) }
 end
@@ -541,7 +537,6 @@ LicitationProcess.blueprint(:pregao_presencial) do
   period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
-  consider_law_of_proposals { true }
   document_types { [DocumentType.make!(:fiscal)] }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
@@ -576,9 +571,6 @@ LicitationProcess.blueprint(:processo_licitatorio_concurso) do
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   price_registration { true }
-  disqualify_by_documentation_problem { true }
-  disqualify_by_maximum_value { true }
-  consider_law_of_proposals { false }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   notice_availability_date { I18n.l(Date.tomorrow) }
@@ -608,9 +600,6 @@ LicitationProcess.blueprint(:processo_licitatorio_concorrencia) do
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   price_registration { true }
-  disqualify_by_documentation_problem { true }
-  disqualify_by_maximum_value { true }
-  consider_law_of_proposals { false }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   judgment_form { JudgmentForm.make!(:global_com_menor_preco)}
@@ -641,9 +630,6 @@ LicitationProcess.blueprint(:processo_licitatorio_tomada_preco) do
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   price_registration { true }
-  disqualify_by_documentation_problem { true }
-  disqualify_by_maximum_value { true }
-  consider_law_of_proposals { false }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   judgment_form { JudgmentForm.make!(:global_com_menor_preco)}
@@ -676,9 +662,6 @@ LicitationProcess.blueprint(:processo_licitatorio_leilao) do
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   price_registration { true }
-  disqualify_by_documentation_problem { true }
-  disqualify_by_maximum_value { true }
-  consider_law_of_proposals { false }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   notice_availability_date { I18n.l(Date.tomorrow) }

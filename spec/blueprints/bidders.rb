@@ -27,7 +27,7 @@ Bidder.blueprint(:licitante_com_proposta_1) do
   protocol { "123456" }
   protocol_date { Date.current }
   receipt_date { Date.tomorrow }
-  documents { [BidderDocument.make!(:documento)] }
+  documents { [BidderDocument.make!(:documento, :document_number => '111111')] }
   proposals { [
     BidderProposal.make!(:proposta_licitante_1),
     BidderProposal.make!(:proposta_licitante_2,
@@ -95,7 +95,7 @@ Bidder.blueprint(:licitante_com_proposta_5) do
   protocol { "123456" }
   protocol_date { Date.current }
   receipt_date { Date.tomorrow }
-  documents { [BidderDocument.make!(:documento)] }
+  documents { [BidderDocument.make!(:documento, :document_number => '111112232')] }
   proposals { [BidderProposal.make!(:proposta_licitante_5)] }
   technical_score { 100 }
   will_submit_new_proposal_when_draw { true }

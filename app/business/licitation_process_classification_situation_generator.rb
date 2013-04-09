@@ -5,7 +5,7 @@ class LicitationProcessClassificationSituationGenerator
   attr_accessor :licitation_process
 
   delegate :bidders, :all_licitation_process_classifications, :trading?,
-           :lots_with_items, :items, :consider_law_of_proposals, :judgment_form,
+           :lots_with_items, :items, :judgment_form,
            :classifications,
            :to => :licitation_process, :allow_nil => true
 
@@ -59,10 +59,6 @@ class LicitationProcessClassificationSituationGenerator
     change_proposal_situation_by_item!
   end
 
-  def is_benefited_classification?(classification_a, classification_b)
-    classification_a.benefited == classification_b.benefited || !consider_law_of_proposals
-  end
-
   def classificate(valid_classifications)
     classification_a = valid_classifications.first
 
@@ -75,8 +71,7 @@ class LicitationProcessClassificationSituationGenerator
       classificator = LicitationProcessClassificator.new(
         classification_a,
         classification_b,
-        :tolerance => current_percentage,
-        :consider_law_of_proposals => consider_law_of_proposals
+        :tolerance => current_percentage
       )
 
       if classificator.draw?

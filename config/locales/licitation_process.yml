@@ -17,12 +17,9 @@ pt-BR:
         code_and_year: "Processo/Ano"
         concession_period: "Prazo da concessão"
         concession_period_unit: "Unidade do prazo da concessão"
-        consider_law_of_proposals: "Considerar Lei 123/2006 para classificação das propostas"
         contact: "Contato para informações"
         contract_guarantees: 'Tipo de garantia'
         description: "Objeto do processo de compra"
-        disqualify_by_documentation_problem: "Desclassificar participantes com problemas da documentação"
-        disqualify_by_maximum_value: "Desclassificar participantes com cotações acima do valor máximo estabelecido no edital"
         document_types: "Tipo de documento"
         envelope_delivery_date: "Término do recebimento dos envelopes"
         envelope_delivery_time: "Hora do recebimento"

@@ -17,7 +17,6 @@ describe LicitationProcessClassificationSituationGenerator do
       :lots_with_items => [lot],
       :items => [],
       :trading? => false,
-      :consider_law_of_proposals => true,
       :judgment_form => judgment_form
     )
   end
@@ -138,7 +137,6 @@ describe LicitationProcessClassificationSituationGenerator do
     it 'should change classifications situation to equalized' do
       classifications.stub(:disqualified).and_return([])
 
-      licitation_process.stub(:consider_law_of_proposals => true)
       classification_2.stub(:total_value => 9, :benefited => false)
       classification_1.stub(:will_submit_new_proposal_when_draw => true)
       classification_1.stub(:total_value => 10, :benefited => true)
@@ -151,7 +149,6 @@ describe LicitationProcessClassificationSituationGenerator do
 
     it 'should change classifications situation to lost' do
       classifications.stub(:disqualified).and_return([])
-      licitation_process.stub(:consider_law_of_proposals => true)
       classification_2.stub(:total_value => 9, :benefited => false)
       classification_1.stub(:will_submit_new_proposal_when_draw => false)
       classification_1.stub(:total_value => 10, :benefited => true)
@@ -177,7 +174,6 @@ describe LicitationProcessClassificationSituationGenerator do
     it 'should change classifications to won and lost' do
       classifications.stub(:disqualified).and_return([])
 
-      licitation_process.stub(:consider_law_of_proposals => true)
       classification_2.stub(:total_value => 9, :benefited => false)
       classification_1.stub(:total_value => 11, :benefited => true)
       classification_1.stub(:will_submit_new_proposal_when_draw => false)
@@ -191,7 +187,6 @@ describe LicitationProcessClassificationSituationGenerator do
     it 'should change classifications to benefited won' do
       classifications.stub(:disqualified).and_return([])
 
-      licitation_process.stub(:consider_law_of_proposals => true)
       classification_2.stub(:total_value => 19, :benefited => true)
       classification_1.stub(:total_value => 20, :benefited => false)
 
