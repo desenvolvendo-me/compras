@@ -6,7 +6,7 @@ feature "LicitationProcessImpugnments" do
     sign_in
   end
 
-  scenario 'create a new licitation_process_impugnment' do
+  scenario 'create and update a licitation_process_impugnment' do
     LicitationProcess.make!(:processo_licitatorio)
     Person.make!(:sobrinho)
 
@@ -49,26 +49,10 @@ feature "LicitationProcessImpugnments" do
     expect(page).to have_field 'Hora do recebimento', :with => '14:00'
     expect(page).to have_field 'Abertura das propostas', :with => I18n.l(Date.tomorrow)
     expect(page).to have_field 'Hora da abertura', :with => '14:00'
-  end
-
-  scenario 'update an existent licitation_process_impugnment' do
-    LicitationProcessImpugnment.make!(:proibido_cadeiras)
-
-    navigate 'Processos de Compra > Impugnações dos Processos de Compras'
-
-    within_records do
-      click_link "1/2012 - Concorrência 1 - 01/04/2012"
-    end
 
     fill_in 'Data da impugnação', :with => I18n.l(Date.current + 1.year + 2.days)
-    select 'Pregão', :from => 'Referente ao'
-    fill_modal 'Autor', :with => 'Gabriel Sobrinho'
-    fill_in 'Motivo fundamentado da impugnação', :with => 'Não há a necessidade de comprar cadeiras.'
-
-    expect(page).to have_field 'Data do recebimento dos envelopes', :with => I18n.l(Date.current)
-    expect(page).to have_field 'Hora do recebimento', :with => '14:00'
-    expect(page).to have_field 'Abertura das propostas', :with => I18n.l(Date.tomorrow)
-    expect(page).to have_field 'Hora da abertura', :with => '14:00'
+    select 'Edital', :from => 'Referente ao'
+    fill_in 'Motivo fundamentado da impugnação', :with => 'Não há a necessidade de comprar cadeiras e mesas.'
 
     click_button 'Salvar'
 
@@ -80,9 +64,9 @@ feature "LicitationProcessImpugnments" do
 
     expect(page).to have_field 'Processo de compra', :with => '1/2012 - Concorrência 1'
     expect(page).to have_field 'Data da impugnação', :with => I18n.l(Date.current + 1.year + 2.days)
-    expect(page).to have_select 'Referente ao', :selected => 'Pregão'
+    expect(page).to have_select 'Referente ao', :selected => 'Edital'
     expect(page).to have_field 'Autor', :with => 'Gabriel Sobrinho'
-    expect(page).to have_field 'Motivo fundamentado da impugnação', :with => 'Não há a necessidade de comprar cadeiras.'
+    expect(page).to have_field 'Motivo fundamentado da impugnação', :with => 'Não há a necessidade de comprar cadeiras e mesas.'
     expect(page).to have_disabled_field 'Data do julgamento'
     expect(page).to have_field 'Data do julgamento', :with => ''
     expect(page).to have_disabled_field 'Observação'
