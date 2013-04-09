@@ -85,6 +85,8 @@ module Compras
 
       # javascript files
       'trading_item_bid.js',
+      'licitation_processes.js',
+      'purchase_process_accreditations.js',
     ]
 
     config.generators do |g|
