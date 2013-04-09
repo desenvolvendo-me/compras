@@ -26,10 +26,10 @@ feature "LegalAnalysisAppraisals" do
     choose 'Laudo jurídico'
     select 'Edital', :from => 'Referência'
     fill_in 'Data de expedição do laudo', :with => '27/03/2013'
-    fill_modal 'Responsável',  :with => '958473', :field => 'Matrícula'
+    fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
 
     expect(page).to have_field 'Número', :with => 'MG16236013'
-    expect(page).to have_field 'Orgão expedidor', :with => 'ssp'
+    expect(page).to have_select 'Orgão expedidor', :with => 'SSP'
 
     click_button 'Salvar'
 
@@ -45,9 +45,9 @@ feature "LegalAnalysisAppraisals" do
     choose 'Laudo técnico'
     select 'Outros', :from => 'Referência'
     fill_in 'Data de expedição do laudo', :with => '30/03/2013'
-    fill_modal 'Responsável',  :with => '12903412', :field => 'Matrícula'
+    fill_modal 'Responsável', :with => '12903412', :field => 'Matrícula'
     fill_in 'Número', :with => '9223356'
-    fill_in 'Orgão expedidor', :with => 'SPPPR'
+    select 'Conselho Regional de Medicina Veterinária', :from => 'Orgão expedidor'
 
     click_button 'Salvar'
 
@@ -56,11 +56,11 @@ feature "LegalAnalysisAppraisals" do
     click_link '1/2012'
 
     expect(page).to have_checked_field 'Laudo técnico'
-    expect(page).to have_select  'Referência', :with => 'Outros'
+    expect(page).to have_select 'Referência', :with => 'Outros'
     expect(page).to have_field 'Data de expedição do laudo', :with => '30/03/2013'
     expect(page).to have_field 'Responsável', :with => 'Wenderson Malheiros'
     expect(page).to have_field 'Número', :with => '9223356'
-    expect(page).to have_field 'Orgão expedidor', :with => 'SPPPR'
+    expect(page).to have_select 'Orgão expedidor', :with => 'Conselho Regional de Medicina Veterinária'
 
     click_link 'Apagar'
 

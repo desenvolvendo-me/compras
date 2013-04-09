@@ -9,6 +9,7 @@ class LegalAnalysisAppraisal < Compras::Model
   has_enumeration_for :appraisal_type
   has_enumeration_for :reference, :with => AppraisalReference
   has_enumeration_for :modality
+  has_enumeration_for :responsible_issuer, :with => Issuer
 
   validates :licitation_process, :appraisal_type, :reference,
             :appraisal_expedition_date, :responsible, :presence => true
