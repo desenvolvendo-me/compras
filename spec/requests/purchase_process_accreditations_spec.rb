@@ -223,8 +223,6 @@ feature "PurchaseProcessAccreditation" do
     fill_with_autocomplete 'Fornecedor', :with => 'Gabriel'
 
     expect(page).to have_disabled_field 'Tipo de pessoa', :with => 'Pessoa física'
-    expect(page).to have_select 'Porte', :selected => ''
-
     select 'Empresa de grande porte', :from => 'Porte'
 
     click_button 'Adicionar'
@@ -235,8 +233,6 @@ feature "PurchaseProcessAccreditation" do
       expect(page).to have_content 'Pessoa física'
       expect(page).to have_content 'Empresa de grande porte'
       expect(page).to have_content 'Não'
-
-      click_link 'Remover'
     end
   end
 end

@@ -55,7 +55,7 @@ $(function () {
   }
 
   function nestedUniqueFields(nestedFields, recordTableId) {
-    var records = $('#' + recordTableId).find('.nested-record'),
+    var records = $('#' + recordTableId).find('.nested-record:visible'),
         matches, name, valuei, unique = true;
 
     nestedFields.find('.unique:input').each(function() {
