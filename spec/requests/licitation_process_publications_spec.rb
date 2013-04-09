@@ -27,7 +27,7 @@ feature "LicitationProcessPublications" do
     expect(page).to have_content "Publicações do Processo de Compra #{licitation_process}"
   end
 
-  scenario 'create a new publication' do
+  scenario 'create, update and destroy a publication' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio)
 
     navigate 'Processos de Compra > Processos de Compras'
@@ -57,70 +57,34 @@ feature "LicitationProcessPublications" do
       click_link 'Jornal'
     end
 
+    expect(page).to have_content "Editar Publicação Jornal do Processo de Compra #{licitation_process}"
+
     expect(page).to have_field 'Nome do veículo de comunicação', :with => 'Jornal'
     expect(page).to have_field 'Data da publicação', :with => '20/04/2012'
     expect(page).to have_select 'Publicação do(a)', :selected => 'Edital'
-  end
 
-  scenario 'update an existing publication' do
-    licitation_process = LicitationProcess.make!(:processo_licitatorio)
-
-    navigate 'Processos de Compra > Processos de Compras'
-
-    click_link "Limpar Filtro"
-
-    within_records do
-      click_link '1/2012'
-    end
-
-    click_link 'Publicações'
-
-    within_records do
-      click_link 'Publicacao'
-    end
-
-    expect(page).to have_content "Editar Publicação Publicacao do Processo de Compra #{licitation_process}"
-
-    fill_in "Nome do veículo de comunicação", :with => 'Jornal'
-    fill_in "Data da publicação", :with => '20/04/2012'
-    select "Edital", :from => "Publicação do(a)"
-    select "Internet", :from => "Tipo de circulação do veículo de comunicação"
+    fill_in "Nome do veículo de comunicação", :with => 'Portal do servidor'
+    fill_in "Data da publicação", :with => '22/04/2012'
+    select "Cancelamento", :from => "Publicação do(a)"
+    select "Diário oficial do estado", :from => "Tipo de circulação do veículo de comunicação"
 
     click_button 'Salvar'
 
     expect(page).to have_notice 'Publicação editada com sucesso'
 
     within_records do
-      click_link 'Jornal'
+      click_link 'Portal do servidor'
     end
 
-    expect(page).to have_field 'Nome do veículo de comunicação', :with => 'Jornal'
-    expect(page).to have_field 'Data da publicação', :with => '20/04/2012'
-    expect(page).to have_select 'Publicação do(a)', :selected => 'Edital'
-  end
-
-  scenario 'destroy a publication' do
-    LicitationProcess.make!(:processo_licitatorio)
-
-    navigate 'Processos de Compra > Processos de Compras'
-
-    click_link "Limpar Filtro"
-
-    within_records do
-      click_link '1/2012'
-    end
-
-    click_link 'Publicações'
-
-    within_records do
-      click_link 'Publicacao'
-    end
+    expect(page).to have_field 'Nome do veículo de comunicação', :with => 'Portal do servidor'
+    expect(page).to have_field 'Data da publicação', :with => '22/04/2012'
+    expect(page).to have_select 'Publicação do(a)', :selected => 'Cancelamento'
 
     click_link 'Apagar'
 
     expect(page).to have_notice 'Publicação apagada com sucesso'
 
-    expect(page).to_not have_link 'Publicacao'
+    expect(page).to_not have_link 'Portal do servidor'
   end
 
   scenario 'show columns at the index' do
