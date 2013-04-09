@@ -38,6 +38,20 @@ jQuery(document).ready(function($) {
     }
   }
 
+  function toggleItemCreditorVisibility(visible) {
+    var creditorDiv = $(".item-creditor");
+
+    if (visible) {
+      creditorDiv.removeClass('hidden');
+      creditorDiv.find('input').removeClass('disabled');
+      creditorDiv.find('input').prop('disabled', false);
+    } else {
+      creditorDiv.addClass('hidden');
+      creditorDiv.find('input').addClass('disabled');
+      creditorDiv.find('input').prop('disabled', true);
+    }
+  }
+
   // listeners
   $('#licitation_process_budget_allocation_id').on('change', function(event, budget_allocation) {
     var url    = Routes.expense_natures,
@@ -64,4 +78,11 @@ jQuery(document).ready(function($) {
     }
   });
 
+  $("#licitation_process_type_of_purchase_direct_purchase").on('click', function() {
+    toggleItemCreditorVisibility(true);
+  });
+
+  $("#licitation_process_type_of_purchase_licitation").on('click', function() {
+    toggleItemCreditorVisibility(false);
+  });
 });

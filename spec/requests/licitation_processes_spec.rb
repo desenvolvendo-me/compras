@@ -1761,6 +1761,7 @@ feature "LicitationProcesses" do
     BudgetAllocation.make!(:alocacao)
     Material.make!(:antivirus)
     Indexer.make!(:xpto)
+    Creditor.make!(:sobrinho)
 
     navigate 'Processos de Compra > Processos de Compras'
 
@@ -1844,14 +1845,10 @@ feature "LicitationProcesses" do
       fill_in 'Lote', :with => '2234'
 
       expect(page).to have_field 'Item', :with => '1'
-
       expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
-
       expect(page).to have_field 'Unidade', :with => 'UN'
       expect(page).to have_disabled_field 'Unidade'
-
       expect(page).to have_field 'Quantidade', :with => '3,00'
-
       expect(page).to have_field 'Valor unitário máximo', :with => '200,00'
     end
 
@@ -1859,7 +1856,25 @@ feature "LicitationProcesses" do
 
     expect(page).to have_notice "Processo de Compra 1/2012 criado com sucesso."
 
+    within_tab 'Principal' do
+      choose 'Compra direta'
+
+      select 'Demais afastamentos', from: 'Tipo de afastamento'
+    end
+
+    within_tab 'Itens / Justificativa' do
+      expect(page).to have_field('Fornecedor')
+
+      fill_modal 'Fornecedor', with: 'Gabriel', field: 'Nome'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice "Processo de Compra 1/2012 editado com sucesso."
+
     within_tab "Itens" do
+      expect(page).to have_field 'Fornecedor', with: 'Gabriel Sobrinho'
+
       click_button "Remover Item"
 
       click_button "Adicionar Item"
@@ -1867,7 +1882,7 @@ feature "LicitationProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).to_not have_notice "Processo de Compra 1/2012 criado com sucesso."
+    expect(page).to_not have_notice "Processo de Compra 1/2012 editado com sucesso."
 
     within_tab "Itens" do
       expect(page).to have_css 'div.nested-licitation-process-item', :count => 1
@@ -1895,6 +1910,17 @@ feature "LicitationProcesses" do
 
     click_button 'Salvar'
 
+    expect(page).to_not have_notice 'Processo de Compra 1/2012 editado com sucesso.'
+
+    within_tab 'Itens / Justificativa' do
+      expect(page).to have_field 'Fornecedor', with: ''
+      expect(page).to have_content 'não pode ficar em branco'
+
+      fill_modal 'Fornecedor', with: 'Gabriel', field: 'Nome'
+    end
+
+    click_button 'Salvar'
+
     expect(page).to have_notice 'Processo de Compra 1/2012 editado com sucesso.'
 
     within_tab "Itens" do
@@ -1904,7 +1930,7 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Quantidade', :with => '2'
       expect(page).to have_field 'Valor unitário máximo', :with => '0,50'
       expect(page).to have_field 'Valor total', :with => '1,00'
-
+      expect(page).to have_field 'Fornecedor', :with => 'Gabriel Sobrinho'
       expect(page).to have_field 'Item', :with => '1'
     end
   end

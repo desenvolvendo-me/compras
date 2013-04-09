@@ -27,6 +27,7 @@ pt-BR:
         cpf: "CPF"
         cnpj: "CNPJ"
         identity_document: "CPF / CNPJ"
+        administrative_process_budget_allocation_items: "Items"
 
   creditor:
     messages:

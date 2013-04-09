@@ -32,6 +32,10 @@
     </div>
   </div>
 
+  <div class="item-creditor <%= f.object.decorator.hidden_creditor%>">
+    <%= f.input :creditor, required: true, disabled: f.object.decorator.disable_creditor? %>
+  </div>
+
   <%= f.input :additional_information %>
 
   <p class="yui3-u">

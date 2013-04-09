@@ -19,6 +19,7 @@ require 'app/models/direct_purchase'
 require 'app/models/bidder'
 require 'app/models/licitation_process'
 require 'app/models/purchase_process_accreditation_creditor'
+require 'app/models/administrative_process_budget_allocation_item'
 
 describe Creditor do
   describe 'default values' do
@@ -49,10 +50,12 @@ describe Creditor do
   it { should have_many(:direct_purchases).dependent(:restrict) }
   it { should have_many(:bidders).dependent(:restrict) }
   it { should have_many(:licitation_processes).dependent(:restrict).through(:bidders) }
-  it { should validate_duplication_of(:document_type_id).on(:documents) }
   it { should have_many(:purchase_process_accreditation_creditors).dependent(:restrict) }
+  it { should have_many(:administrative_process_budget_allocation_items).dependent(:restrict) }
 
   it { should validate_presence_of :person }
+  it { should validate_duplication_of(:document_type_id).on(:documents) }
+
   it { should_not validate_presence_of :main_cnae }
   it { should_not validate_presence_of :contract_start_date }
   it { should_not validate_presence_of :social_identification_number }

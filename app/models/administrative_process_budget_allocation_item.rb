@@ -1,5 +1,6 @@
 class AdministrativeProcessBudgetAllocationItem < Compras::Model
-  attr_accessible :material_id, :quantity, :unit_price, :lot, :additional_information
+  attr_accessible :material_id, :quantity, :unit_price, :lot, :additional_information,
+                  :creditor_id
 
   attr_accessor :order
 
@@ -8,6 +9,7 @@ class AdministrativeProcessBudgetAllocationItem < Compras::Model
   belongs_to :material
   belongs_to :licitation_process_lot
   belongs_to :licitation_process
+  belongs_to :creditor
 
   has_many :bidder_proposals
   has_many :licitation_process_classifications, :as => :classifiable, :dependent => :destroy
@@ -15,8 +17,10 @@ class AdministrativeProcessBudgetAllocationItem < Compras::Model
   has_one  :trading_item, :dependent => :restrict
 
   delegate :reference_unit, :description, :to => :material, :allow_nil => true
+  delegate :direct_purchase?, :to => :licitation_process, :allow_nil => true
 
   validates :material, :quantity, :lot, :presence => true
+  validates :creditor, presence: true, if: :direct_purchase?
 
   orderize "id DESC"
   filterize

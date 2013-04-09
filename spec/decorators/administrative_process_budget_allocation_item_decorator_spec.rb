@@ -111,4 +111,36 @@ describe AdministrativeProcessBudgetAllocationItemDecorator do
       end
     end
   end
+
+  describe '#disable_creditor?' do
+    context 'when object is a direct_purchase' do
+      it 'returns false' do
+        component.stub(:direct_purchase?).and_return true
+        expect(subject.disable_creditor?).to eql false
+      end
+    end
+
+    context 'when object is not a direct_purchase' do
+      it 'returns true' do
+        component.stub(:direct_purchase?).and_return false
+        expect(subject.disable_creditor?).to eql true
+      end
+    end
+  end
+
+  describe 'hidden_creditor' do
+    context 'when object is a direct_purchase' do
+      it 'returns nil' do
+        component.stub(:direct_purchase?).and_return true
+        expect(subject.hidden_creditor).to eql nil
+      end
+    end
+
+    context 'when object is not a direct_purchase' do
+      it "returns 'hidden'" do
+        component.stub(:direct_purchase?).and_return false
+        expect(subject.hidden_creditor).to eql 'hidden'
+      end
+    end
+  end
 end

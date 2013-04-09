@@ -13,6 +13,8 @@ describe AdministrativeProcessBudgetAllocationItem do
   it { should belong_to :material }
   it { should belong_to :licitation_process_lot }
   it { should belong_to :licitation_process }
+  it { should belong_to :creditor }
+
   it { should have_many :bidder_proposals }
   it { should have_many(:licitation_process_classifications).dependent(:destroy) }
 
@@ -20,6 +22,21 @@ describe AdministrativeProcessBudgetAllocationItem do
 
   it { should delegate(:reference_unit).to(:material).allowing_nil(true) }
   it { should delegate(:description).to(:material).allowing_nil(true) }
+  it { should delegate(:direct_purchase?).to(:licitation_process).allowing_nil(true) }
+
+  describe "creditor validation" do
+    it 'validates presence when direct purchase' do
+      subject.stub(:direct_purchase?).and_return true
+      subject.valid?
+      expect(subject.errors[:creditor]).to_not be_empty
+    end
+
+    it 'does not validate presence when not direct purchase' do
+      subject.stub(:direct_purchase?).and_return false
+      subject.valid?
+      expect(subject.errors[:creditor]).to be_empty
+    end
+  end
 
   context 'with material' do
     let :material do
