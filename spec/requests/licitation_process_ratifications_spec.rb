@@ -6,7 +6,7 @@ feature "LicitationProcessRatifications" do
     sign_in
   end
 
-  scenario 'creating a new ratification' do
+  scenario 'creating and updating a ratification' do
     LicitationProcess.make!(:processo_licitatorio_computador,
                             :judgment_form => JudgmentForm.make!(:por_item_com_menor_preco))
     BidderProposal.make!(:proposta_licitante_1, :bidder => Bidder.make!(:licitante))
@@ -56,22 +56,6 @@ feature "LicitationProcessRatifications" do
     expect(page).to have_content '10,00'
 
     expect(page).to have_checked_field bidder_checkbok_html_name(0)
-  end
-
-  scenario 'updating a ratification' do
-    LicitationProcessRatification.make!(:processo_licitatorio_computador)
-
-    navigate 'Processos de Compra > Processos de Compras'
-
-    within_records do
-      click_link '2/2013'
-    end
-
-    click_link 'Adjudicação/Homologação'
-
-    within_records do
-      click_link '1 - Processo de Compra 2/2013 - Concorrência 1'
-    end
 
     expect(page).to_not have_link 'Apagar'
     expect(page).to have_disabled_field 'Processo de compra'
@@ -94,7 +78,7 @@ feature "LicitationProcessRatifications" do
     expect(page).to have_content 'Antivirus'
     expect(page).to have_content '10,00'
 
-    expect(page).to_not have_checked_field bidder_checkbok_html_name(0)
+    expect(page).to have_checked_field bidder_checkbok_html_name(0)
   end
 
   scenario 'cleaning items' do
