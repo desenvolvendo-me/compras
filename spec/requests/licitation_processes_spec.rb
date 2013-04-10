@@ -20,9 +20,11 @@ feature "LicitationProcesses" do
     DocumentType.make!(:fiscal)
     JudgmentForm.make!(:por_item_com_menor_preco)
     BudgetAllocation.make!(:alocacao)
+    BudgetAllocation.make!(:reparo_2011, expense_nature: ExpenseNature.make!(:aplicacoes_diretas))
     Material.make!(:antivirus)
     Indexer.make!(:xpto)
     ExpenseNature.make!(:aposentadorias_rpps, :year => Date.current.year)
+    ExpenseNature.make!(:compra_de_material, :year => Date.current.year, parent: ExpenseNature.make!(:aplicacoes_diretas))
 
     navigate 'Processos de Compra > Processos de Compras'
 
@@ -102,6 +104,37 @@ feature "LicitationProcesses" do
           expect(page).to have_content '20,00'
         end
       end
+
+      fill_with_autocomplete 'Dotação orçamentária', :with => 'Aplicações'
+
+      expect(page).to have_field 'Natureza da despesa', :with => '3.1.90.00.00 - Aplicações Diretas'
+      expect(page).to have_field 'Saldo da dotação', :with => '3.000,00'
+
+      fill_with_autocomplete 'Desdobramento', :with => '3.0'
+
+      expect(page).to have_field '', :with => '3.0.10.01.11 - Compra de Material'
+
+      fill_in 'Valor previsto', :with => '250,00'
+
+      click_button 'Adicionar'
+
+      within_records do
+        expect(page).to have_content 'Dotação'
+        expect(page).to have_content 'Natureza da despesa'
+        expect(page).to have_content 'Desdobramento'
+        expect(page).to have_content 'Saldo da dotação'
+        expect(page).to have_content 'Valor previsto'
+
+        within 'tbody tr:last' do
+          expect(page).to have_content '1.29 - Aplicações Diretas'
+          expect(page).to have_content '3.1.90.00.00 - Aplicações Diretas'
+          expect(page).to have_content '3.0.10.01.11 - Compra de Material'
+          expect(page).to have_content '3.000,00'
+          expect(page).to have_content '250,00'
+        end
+      end
+
+      expect(page).to have_disabled_field 'Valor total das dotações', with: '270,00'
     end
 
     within_tab "Itens" do
@@ -180,6 +213,8 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Orçamento' do
+      expect(page).to have_disabled_field 'Valor total das dotações', with: '270,00'
+
       within_records do
         expect(page).to have_content 'Dotação'
         expect(page).to have_content 'Natureza da despesa'
@@ -191,6 +226,14 @@ feature "LicitationProcesses" do
           expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
           expect(page).to have_content '500,00'
           expect(page).to have_content '20,00'
+        end
+
+        within 'tbody tr:last' do
+          expect(page).to have_content '1.29 - Aplicações Diretas'
+          expect(page).to have_content '3.1.90.00.00 - Aplicações Diretas'
+          expect(page).to have_content '3.0.10.01.11 - Compra de Material'
+          expect(page).to have_content '3.000,00'
+          expect(page).to have_content '250,00'
         end
       end
     end

@@ -8,8 +8,7 @@ class ExpenseNature < Compras::Model
 
   has_many :children, :class_name => 'ExpenseNature', :foreign_key => :parent_id,
            :dependent => :restrict
-
-  has_many :administrative_process_budget_allocations, :foreign_key => :expense_nature_split_id
+  has_many :administrative_process_budget_allocations
 
   orderize :description
 

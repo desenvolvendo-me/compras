@@ -14,4 +14,4 @@ pt-BR:
         value: "Valor previsto"
         total_items_value: "Valor total dos itens"
         budget_allocation_id: "Dotação orçamentária"
-        expense_nature_split: "Desdobramento"
+        expense_nature: "Desdobramento"

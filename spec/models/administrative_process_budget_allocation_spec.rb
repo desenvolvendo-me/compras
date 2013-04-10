@@ -6,7 +6,7 @@ require 'app/models/material'
 describe AdministrativeProcessBudgetAllocation do
   it { should belong_to :licitation_process }
   it { should belong_to :budget_allocation }
-  it { should belong_to :expense_nature_split }
+  it { should belong_to :expense_nature }
 
   it { should validate_presence_of :budget_allocation }
   it { should validate_presence_of :value }

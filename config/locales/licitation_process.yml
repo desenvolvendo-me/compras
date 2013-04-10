@@ -58,8 +58,8 @@ pt-BR:
         type_of_removal: "Tipo de afastamento"
         year: "Ano"
         budget_allocation: "Dotação orçamentária"
-        expense_nature_split: "Desdobramento"
-        expense_nature: "Natureza da despesa"
+        expense_nature: "Desdobramento"
+        budget_allocation_expense_nature: "Natureza da despesa"
         budget_allocation_amount: "Saldo da dotação"
         administrative_process_budget_allocation_value: "Valor previsto"
 

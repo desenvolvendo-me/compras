@@ -8,16 +8,16 @@ json.array!(collection) do |json, obj|
   json.total_items_value obj.total_items_value.to_f
 
   json.budget_allocations obj.purchase_solicitation_budget_allocations do |json, psba|
-    json.id                       psba.id
-    json.to_s                     psba.to_s
-    json.budget_allocation        psba.budget_allocation.to_s
-    json.budget_allocation_id     psba.budget_allocation_id
-    json.expense_nature           psba.budget_allocation.expense_nature.to_s
-    json.expense_nature_id        psba.budget_allocation.expense_nature_id
-    json.expense_nature_split     psba.expense_nature.to_s
-    json.expense_nature_split_id  psba.expense_nature_id
-    json.amount                   psba.budget_allocation.amount.to_f
-    json.estimated_value          psba.estimated_value.to_f
+    json.id                                  psba.id
+    json.to_s                                psba.to_s
+    json.budget_allocation                   psba.budget_allocation.to_s
+    json.budget_allocation_id                psba.budget_allocation_id
+    json.budget_allocation_expense_nature    psba.budget_allocation.expense_nature.to_s
+    json.budget_allocation_expense_nature_id psba.budget_allocation.expense_nature_id
+    json.expense_nature                      psba.expense_nature.to_s
+    json.expense_nature_id                   psba.expense_nature_id
+    json.amount                              psba.budget_allocation.amount.to_f
+    json.estimated_value                     psba.estimated_value.to_f
   end
 
   json.items obj.items do |json, item|
