@@ -36,7 +36,7 @@ class BudgetAllocation < Compras::Model
 
   validates :descriptor, :budget_structure, :subfunction, :date,
             :government_program, :government_action,
-            :expense_nature, :capability, :function, :presence => true
+            :capability, :function, :presence => true
   validates :amount, :presence => true, :if => :divide?
   validates :code, :uniqueness => { :scope => [:descriptor_id] }, :allow_blank => true
 
