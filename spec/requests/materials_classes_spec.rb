@@ -6,7 +6,7 @@ feature "MaterialsClasses" do
     sign_in
   end
 
-  scenario 'create a new materials_class' do
+  scenario 'create, update and destroy an materials_class' do
     navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
 
     click_link 'Criar Classe de Materiais'
@@ -37,52 +37,32 @@ feature "MaterialsClasses" do
     expect(page).to have_field 'Código', :with => '22'
     expect(page).to have_field 'Descrição', :with => 'Materiais de Escritório'
     expect(page).to have_field 'Detalhamento', :with => 'materiais para escritório'
-  end
 
-  scenario 'update an existent materials_class' do
-    navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
-
-    click_link 'Componentes elétricos'
-
-    fill_with_autocomplete 'Classe superior', :with => 'Arames'
-
-    expect(page).to have_field 'Classe superior', :with => '02.44.65.430 - Arames'
-
-    within '.number-prepend' do
-      expect(page).to have_content '02.44.65.430.'
-    end
-
-    fill_in 'Código', :with => '234'
-    fill_in 'Descrição', :with => 'Lampada'
-    fill_in 'Detalhamento', :with => 'Lampadas para escritório'
+    fill_in 'Código', :with => '23'
+    fill_in 'Descrição', :with => 'Cooler de mesa'
+    fill_in 'Detalhamento', :with => 'Cooler de mesa para resfriamento de notebook'
 
     click_button 'Salvar'
 
     expect(page).to have_notice 'Classe de Materiais editada com sucesso.'
 
-    click_link 'Lampada'
+    click_link 'Cooler de mesa'
 
     within '.number-prepend' do
-      expect(page).to have_content '02.44.65.430.'
+      expect(page).to have_content '01.32'
     end
 
-    expect(page).to have_field 'Classe superior', :with => '02.44.65.430 - Arames'
-    expect(page).to have_field 'Código', :with => '234'
-    expect(page).to have_field 'Descrição', :with => 'Lampada'
-    expect(page).to have_field 'Detalhamento', :with => 'Lampadas para escritório'
-  end
-
-  scenario 'destroy an existent materials_class' do
-    navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
-
-    click_link 'Componentes elétricos'
+    expect(page).to have_field 'Classe superior', :with => '01.32 - Software'
+    expect(page).to have_field 'Código', :with => '23'
+    expect(page).to have_field 'Descrição', :with => 'Cooler de mesa'
+    expect(page).to have_field 'Detalhamento', :with => 'Cooler de mesa para resfriamento de notebook'
 
     click_link 'Apagar'
 
     expect(page).to have_notice 'Classe de Materiais apagada com sucesso.'
 
-    expect(page).to_not have_content 'Componentes elétricos'
-    expect(page).to_not have_content '03053300000000'
+    expect(page).to_not have_content 'Cooler de mesa'
+    expect(page).to_not have_content '013223'
   end
 
   scenario 'index with columns at the index' do
