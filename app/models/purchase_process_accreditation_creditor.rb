@@ -12,5 +12,13 @@ class PurchaseProcessAccreditationCreditor < Compras::Model
   delegate :personable_type_humanize,
            :to => :creditor, :allow_nil => true, :prefix => true
 
-  validates :kind, :creditor, :company_size, :presence => true
+  validates :kind, :presence => true, :if => :creditor_representative_present?
+  validates :creditor, :company_size, :purchase_process_accreditation,
+            :presence => true
+
+  private
+
+  def creditor_representative_present?
+    creditor_representative.present?
+  end
 end

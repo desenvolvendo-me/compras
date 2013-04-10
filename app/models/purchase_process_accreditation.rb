@@ -4,7 +4,8 @@ class PurchaseProcessAccreditation < Compras::Model
 
   belongs_to :licitation_process
 
-  has_many :purchase_process_accreditation_creditors, :dependent => :destroy, :order => :id
+  has_many :purchase_process_accreditation_creditors, :dependent => :destroy,
+           :inverse_of => :purchase_process_accreditation, :order => :id
 
   accepts_nested_attributes_for :purchase_process_accreditation_creditors,
                                 :allow_destroy => true
