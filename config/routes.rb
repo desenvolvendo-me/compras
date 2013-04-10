@@ -560,7 +560,7 @@ Compras::Application.routes.draw do
 
   resources :property_variable_setting_options, :only => :index
 
-  resources :purchase_process_accreditations, :only => [:new, :create, :edit, :update]
+  resources :purchase_process_accreditations, :only => [:new, :create, :edit, :update, :show]
 
   resources :purchase_solicitations, :except => :destroy do
     collection do

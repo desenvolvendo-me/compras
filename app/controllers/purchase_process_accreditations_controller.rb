@@ -1,7 +1,7 @@
 class PurchaseProcessAccreditationsController < CrudController
   defaults :collection_name => :purchase_process_accreditation
 
-  actions :new, :create, :edit, :update
+  actions :new, :create, :edit, :update, :show
 
   before_filter :parent
 
@@ -18,6 +18,10 @@ class PurchaseProcessAccreditationsController < CrudController
 
   def update
     update! { edit_licitation_process_path(parent) }
+  end
+
+  def show
+    render :layout => 'report'
   end
 
   protected

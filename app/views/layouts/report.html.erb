@@ -15,13 +15,8 @@
 
   <body>
     <div id="container">
-      <% if current_prefecture %>
-        <div id="header">
-          <p><%= prefecture_image %></p>
-
-          <h2><%= current_prefecture.name %> | CNPJ: <%= current_prefecture.cnpj %></h2>
-          <h3>E-mail: <%= current_prefecture.email %> | Telefone: <%= current_prefecture.phone %> | Fax: <%= current_prefecture.fax %></h3>
-        </div>
+      <% if header = yield(:header) %>
+        <%= header %>
       <% end %>
 
       <div id="content">
@@ -29,7 +24,7 @@
       </div>
 
       <div id="footer">
-        <p>
+        <p class="right">
           <%= back_link %> ou <%= print_link %>
         </p>
       </div>

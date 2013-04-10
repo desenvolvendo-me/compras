@@ -6,7 +6,7 @@ class CreditorRepresentative < Compras::Model
 
   has_many :purchase_process_accreditation_creditors, :dependent => :restrict
 
-  delegate :name, :identity_document, :to_s,
+  delegate :name, :identity_document, :phone, :email, :identity_number, :to_s,
            :to => :representative_person, :allow_nil => true
 
   orderize :id

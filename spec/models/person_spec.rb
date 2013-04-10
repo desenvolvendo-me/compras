@@ -150,4 +150,15 @@ describe Person do
       expect(subject.commercial_registration_number).to eq '1234'
     end
   end
+
+  describe '#identity_number' do
+    it 'should not return identity_number if is not individual' do
+      expect(subject.identity_number).to be_nil
+    end
+
+    it 'should return identity_number if is individual' do
+      personable.stub(:number => '1111')
+      expect(subject.identity_number).to eq '1111'
+    end
+  end
 end

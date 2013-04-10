@@ -13,6 +13,9 @@ describe CreditorRepresentative do
 
   it { should delegate(:name).to(:representative_person).allowing_nil(true) }
   it { should delegate(:identity_document).to(:representative_person).allowing_nil(true) }
+  it { should delegate(:phone).to(:representative_person).allowing_nil(true) }
+  it { should delegate(:email).to(:representative_person).allowing_nil(true) }
+  it { should delegate(:identity_number).to(:representative_person).allowing_nil(true) }
 
   it 'should to_s return representative_person' do
     representative_person = Person.new(:name => 'foo')

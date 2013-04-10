@@ -8,6 +8,20 @@ describe PurchaseProcessAccreditationCreditor do
   it { should belong_to(:company_size) }
   it { should belong_to(:creditor_representative) }
 
+  it { should delegate(:personable_type_humanize).to(:creditor).allowing_nil(true).prefix(true) }
+  it { should delegate(:address).to(:creditor).allowing_nil(true).prefix(true) }
+  it { should delegate(:city).to(:creditor).allowing_nil(true).prefix(true) }
+  it { should delegate(:state).to(:creditor).allowing_nil(true).prefix(true) }
+  it { should delegate(:identity_document).to(:creditor).allowing_nil(true).prefix(true) }
+  it { should delegate(:neighborhood).to(:creditor).allowing_nil(true).prefix(true) }
+  it { should delegate(:zip_code).to(:creditor).allowing_nil(true).prefix(true) }
+  it { should delegate(:phone).to(:creditor).allowing_nil(true).prefix(true) }
+  it { should delegate(:person_email).to(:creditor).allowing_nil(true).prefix(true) }
+  it { should delegate(:identity_document).to(:creditor_representative).allowing_nil(true).prefix(true) }
+  it { should delegate(:phone).to(:creditor_representative).allowing_nil(true).prefix(true) }
+  it { should delegate(:email).to(:creditor_representative).allowing_nil(true).prefix(true) }
+  it { should delegate(:identity_number).to(:creditor_representative).allowing_nil(true).prefix(true) }
+
   describe "validations" do
     it { should validate_presence_of :creditor }
     it { should validate_presence_of :company_size }

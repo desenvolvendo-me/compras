@@ -1,0 +1,137 @@
+<style type="text/css">
+  .bordered {
+    border: solid 1px #000;
+    margin-bottom: 0;
+    width: 100%;
+  }
+
+  .bordered + .bordered {
+    border-top: none;
+  }
+
+  .bordered tr {
+    line-height: 0.75em;
+  }
+
+  .bordered td {
+    border: 0;
+    font-size: 12px;
+    padding: 5px 15px;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .bordered tr.first td {
+    padding-top: 15px;
+  }
+
+  .bordered tr.last td {
+    padding-bottom: 15px;
+  }
+
+  .bordered h1, p {
+    margin: 5px 0;
+    text-align: left;
+  }
+
+  div.bordered {
+    padding: 15px;
+    width: 970px;
+  }
+
+  .label {
+    font-weight: bold;
+  }
+
+  .border-left {
+    border-left: 1px solid #000 !important;
+  }
+</style>
+
+<%= render "reports/header", :report_name => "Credenciamento" %>
+
+<% resource.purchase_process_accreditation_creditors.each do |accreditation| %>
+  <table class="bordered creditor">
+    <tbody>
+      <tr class="first">
+        <td colspan="3">
+          <h1>Razão Social: <%= accreditation.creditor %></h1>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="3">
+          <span class="label">CNPJ/CPF</span>: <%= accreditation.creditor_identity_document %>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2">
+          <span class="label">Endereço</span>: <%= accreditation.creditor_address %>
+        </td>
+
+        <td>
+          <span class="label">Bairro</span>: <%= accreditation.creditor_neighborhood %>
+        </td>
+      </tr>
+
+      <tr>
+        <td style="width: 390px;">
+          <span class="label">CEP</span>: <%= accreditation.creditor_zip_code %>
+        </td>
+
+        <td style="width: 300px;">
+          <span class="label">UF</span>: <%= accreditation.creditor_state %>
+        </td>
+
+        <td style="width: 240px;">
+          <span class="label">Telefone</span>: <%= accreditation.creditor_phone %>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="3">
+          <span class="label">Email</span>: <%= accreditation.creditor_person_email %>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="3">
+          <h1>Representada por: <%= accreditation.decorator.creditor_representative %></h1>
+        </td>
+      </tr>
+
+       <% if accreditation.creditor_representative.present? %>
+         <tr>
+          <td>
+            <span class="label">RG</span>: <%= accreditation.creditor_representative_identity_number %>
+          </td>
+
+          <td colspan="2">
+            <span class="label">CPF</span>: <%= accreditation.creditor_representative_identity_document %>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="3">
+            <span class="label">Telefone</span>: <%= accreditation.creditor_representative_phone %>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="3">
+            <span class="label">Email</span>: <%= accreditation.creditor_representative_email %>
+          </td>
+        </tr>
+      <% end %>
+
+      <tr>
+        <td colspan="3">
+          <div class="signature">
+            <span class="label">Visto</span>: _________________________________________
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+<% end %>

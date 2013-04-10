@@ -1,4 +1,8 @@
 <div class="buttons">
+  <% if resource.persisted? %>
+    <%= link_to('Relatório', purchase_process_accreditation_path(resource), :class => "button primary") %>
+  <% end %>
+
   <%= f.button :submit if can?(:modify, main_controller_name) %>
   <%= f.button :back, :href => edit_licitation_process_path(@parent) %>
 </div>

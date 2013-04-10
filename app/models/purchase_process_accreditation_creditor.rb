@@ -9,8 +9,11 @@ class PurchaseProcessAccreditationCreditor < Compras::Model
   belongs_to :company_size
   belongs_to :creditor_representative
 
-  delegate :personable_type_humanize,
+  delegate :personable_type_humanize, :address, :city, :state, :identity_document,
+           :neighborhood, :zip_code, :phone, :person_email,
            :to => :creditor, :allow_nil => true, :prefix => true
+  delegate :identity_document, :phone, :email, :identity_number,
+           :to => :creditor_representative, :allow_nil => true, :prefix => true
 
   validates :kind, :presence => true, :if => :creditor_representative_present?
   validates :creditor, :company_size, :purchase_process_accreditation,

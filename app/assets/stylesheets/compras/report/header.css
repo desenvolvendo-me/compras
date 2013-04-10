@@ -1,0 +1,42 @@
+#header {
+  border: 1px solid #000;
+  margin-bottom: 20px;
+  padding: 10px;
+  overflow: auto;
+  zoom: 1;
+}
+
+.prefecture-image {
+  display: table;
+  float: left;
+  height: 80px;
+}
+
+.prefecture-image p {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.prefecture-details {
+  float: left;
+  margin: 0 10px;
+  text-align: left;
+}
+
+.prefecture-details h2 {
+  font-weight: bold;
+  margin: 5px;
+}
+
+.prefecture-details h3 {
+  margin: 5px;
+}
+
+.created-at {
+  float: right;
+  text-align: right;
+}
+
+.created-at h3 {
+  margin: 5px;
+}

@@ -1,3 +1,16 @@
+@media all {
+  .page-break {
+    display: none;
+  }
+}
+
+@media print {
+  .page-break {
+    display: block;
+    page-break-before: always;
+  }
+}
+
 .table-border {
   border: 1px solid;
   padding: 10px;

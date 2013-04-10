@@ -62,4 +62,8 @@ class Person < Persona::Person
   def commercial_registration_number
     personable.commercial_registration_number if personable.respond_to?(:commercial_registration_number)
   end
+
+  def identity_number
+    personable.number if personable.respond_to?(:number)
+  end
 end

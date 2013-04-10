@@ -1,0 +1,20 @@
+<% if current_prefecture %>
+  <div id="header">
+    <div class="prefecture-image">
+      <p><%= prefecture_image %></p>
+    </div>
+
+    <div class="prefecture-details">
+      <h2>PREFEITURA MUNICIPAL DE <%= current_prefecture.city.to_s.upcase %></h2>
+      <h2>ESTADO DE <%= current_prefecture.state.to_s.upcase %></h2>
+      <h3><%= report_name.to_s.upcase %></h3>
+    </div>
+
+    <div class="created-at">
+      <h3>Data: <%= DateTime.current.strftime("%d/%m/%y") %></h3>
+      <h3>Hora: <%= DateTime.current.strftime("%H:%M:%S") %></h3>
+      <h3><%= current_user.name %></h3>
+    </div>
+  </div>
+<% end %>
+
