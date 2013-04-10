@@ -18,11 +18,7 @@ $(document).ready(function() {
   });
 
   $("#creditor_representative").on("change", function() {
-    if ( $(this).val() ){
-      kindRequired(true);
-    } else {
-      kindRequired(false);
-    }
+    kindRequired( $(this).val() );
   });
 
   $("#accreditation-records").on('nestedGrid:afterAdd', function(){
