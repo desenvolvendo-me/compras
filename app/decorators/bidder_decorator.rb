@@ -2,8 +2,11 @@
 class BidderDecorator
   include Decore
   include Decore::Proxy
+  include Decore::Header
   include ActionView::Helpers::NumberHelper
   include ActionView::Helpers::TranslationHelper
+
+  attr_header :creditor, :status
 
   def process_date
     localize component.licitation_process_process_date if component.licitation_process_process_date

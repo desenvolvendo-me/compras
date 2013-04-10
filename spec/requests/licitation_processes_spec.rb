@@ -546,7 +546,7 @@ feature "LicitationProcesses" do
       click_link '2/2013'
     end
 
-    click_link 'Licitantes'
+    click_link 'Habilitação'
 
     within_records do
       page.find('a').click
@@ -570,7 +570,7 @@ feature "LicitationProcesses" do
 
     expect(page).to have_notice 'Processo de Compra 2/2013 editado com sucesso.'
 
-    click_link 'Licitantes'
+    click_link 'Habilitação'
 
     within_records do
       page.find('a').click
@@ -770,7 +770,7 @@ feature "LicitationProcesses" do
       click_link "1/2012"
     end
 
-    expect(page).to have_disabled_element "Licitantes", :reason => "Licitantes só podem ser incluídos após publicação do edital"
+    expect(page).to have_disabled_element "Habilitação", :reason => "Licitantes só podem ser incluídos após publicação do edital"
 
     click_link "Publicações"
 
@@ -790,7 +790,7 @@ feature "LicitationProcesses" do
 
     click_link "Voltar ao processo de compra"
 
-    click_link "Licitantes"
+    click_link "Habilitação"
 
     expect(page).to have_content "Licitantes do Processo de Compra 1/2012"
   end
@@ -1011,7 +1011,7 @@ feature "LicitationProcesses" do
 
     click_link 'voltar'
 
-    click_link 'Licitantes'
+    click_link 'Habilitação'
 
     click_link 'Nohup'
 
@@ -1089,7 +1089,7 @@ feature "LicitationProcesses" do
 
     click_link 'voltar'
 
-    click_link 'Licitantes'
+    click_link 'Habilitação'
 
     click_link 'Nohup'
 
@@ -1165,7 +1165,7 @@ feature "LicitationProcesses" do
 
     click_link 'voltar'
 
-    click_link 'Licitantes'
+    click_link 'Habilitação'
 
     click_link 'Wenderson Malheiros'
 
@@ -1243,7 +1243,7 @@ feature "LicitationProcesses" do
 
     click_link 'voltar'
 
-    click_link 'Licitantes'
+    click_link 'Habilitação'
 
     click_link 'Wenderson Malheiros'
 
@@ -1344,7 +1344,7 @@ feature "LicitationProcesses" do
 
     click_link 'voltar'
 
-    click_link 'Licitantes'
+    click_link 'Habilitação'
 
     click_link 'Wenderson Malheiros'
 

@@ -3,6 +3,17 @@ require 'decorator_helper'
 require 'app/decorators/bidder_decorator'
 
 describe BidderDecorator do
+  context 'with attr_header' do
+    it 'should have headers' do
+      expect(described_class.headers?).to be_true
+    end
+
+    it 'should have creditor and status' do
+      expect(described_class.header_attributes).to include :creditor
+      expect(described_class.header_attributes).to include :status
+    end
+  end
+
   context '#process_date' do
     context 'when do not have licitation_process_process_date' do
       before do

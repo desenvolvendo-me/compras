@@ -22,7 +22,7 @@ feature "Bidders" do
       click_link '2/2013'
     end
 
-    click_link 'Licitantes'
+    click_link 'Habilitação'
 
     expect(page).to have_link 'Wenderson Malheiros'
 
@@ -45,7 +45,7 @@ feature "Bidders" do
       click_link '2/2013'
     end
 
-    click_link 'Licitantes'
+    click_link 'Habilitação'
 
     click_link 'Criar Licitante'
 
@@ -257,7 +257,242 @@ feature "Bidders" do
       click_link '2/2013'
     end
 
-    click_link 'Licitantes'
+    click_link 'Habilitação'
+
+    expect(page).to have_link 'Wenderson Malheiros'
+
+    click_link 'Voltar ao processo de compra'
+
+    expect(page).to have_title "Editar Processo de Compra"
+  end
+
+  scenario 'creating, updating, destroy a new bidder' do
+    LicitationProcess.make!(:processo_licitatorio_computador,
+      :modality => Modality::INVITATION,
+      :judgment_form => JudgmentForm.make!(:global_com_menor_preco))
+    Creditor.make!(:sobrinho_sa)
+    Person.make!(:wenderson)
+    Person.make!(:joao_da_silva)
+
+    navigate 'Processos de Compra > Processos de Compras'
+
+    within_records do
+      click_link '2/2013'
+    end
+
+    click_link 'Habilitação'
+
+    click_link 'Criar Licitante'
+
+    expect(page).to have_field 'Processo de compra', :with => '2/2013 - Convite 1'
+    expect(page).to have_field 'Data do processo de compra', :with => '20/03/2013'
+    expect(page).to have_checked_field 'Apresentará nova proposta em caso de empate'
+
+    fill_modal 'Fornecedor', :with => 'Gabriel Sobrinho'
+
+    check 'Convidado'
+    fill_in 'Protocolo', :with => '123456'
+    fill_in 'Data do protocolo', :with => I18n.l(Date.current)
+    fill_in 'Data do recebimento', :with => I18n.l(Date.tomorrow)
+
+    within_tab 'Representantes credenciados' do
+      fill_modal 'Representantes', :with => 'Wenderson Malheiros'
+      fill_modal 'Representantes', :with => 'Joao da Silva'
+    end
+
+    within_tab 'Documentos' do
+      # testing that document type from licitation process are automaticaly included in bidder
+      expect(page).to have_disabled_field 'Documento'
+      expect(page).to have_field 'Documento', :with => 'Fiscal'
+
+      fill_in 'Número/certidão', :with => '222222'
+      fill_in 'Data de emissão', :with => I18n.l(Date.current)
+      fill_in 'Validade', :with => I18n.l(Date.tomorrow + 5.days)
+    end
+
+    within_tab 'Propostas' do
+      expect(page).to have_content 'Item 1'
+      expect(page).to have_disabled_field 'Preço total dos itens'
+      expect(page).to have_disabled_field 'Material'
+      expect(page).to have_disabled_field 'Situação'
+      expect(page).to have_disabled_field 'Classificação'
+      expect(page).to have_disabled_field 'Unidade'
+      expect(page).to have_disabled_field 'Quantidade'
+      expect(page).to have_disabled_field 'Preço total'
+      expect(page).to have_select 'Situação', :selected => 'Indefinido'
+
+      fill_in 'Marca', :with => 'Apple'
+      fill_in 'Preço unitário', :with => '11,22'
+
+      expect(page).to have_field 'Preço total', :with => '22,44'
+      expect(page).to have_field 'Preço total dos itens', :with => '22,44'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_content 'Licitante criado com sucesso.'
+
+    within_records do
+      click_link 'Gabriel Sobrinho'
+    end
+
+    expect(page).to have_field 'Processo de compra', :with => '2/2013 - Convite 1'
+    expect(page).to have_field 'Data do processo de compra', :with => '20/03/2013'
+    expect(page).to have_field 'Fornecedor', :with => 'Gabriel Sobrinho'
+    expect(page).to have_field 'Protocolo', :with => '123456'
+    expect(page).to have_field 'Data do protocolo', :with => I18n.l(Date.current)
+    expect(page).to have_field 'Data do recebimento', :with => I18n.l(Date.tomorrow)
+    expect(page).to have_checked_field 'Apresentará nova proposta em caso de empate'
+
+    within_tab 'Representantes credenciados' do
+      expect(page).to have_content 'Wenderson Malheiros'
+      expect(page).to have_content '003.149.513-34'
+      expect(page).to have_content 'Joao da Silva'
+      expect(page).to have_content '206.538.014-40'
+    end
+
+    within_tab 'Documentos' do
+      expect(page).to have_field 'Documento', :with => 'Fiscal'
+      expect(page).to have_field 'Número/certidão', :with => '222222'
+      expect(page).to have_field 'Data de emissão', :with => I18n.l(Date.current)
+      expect(page).to have_field 'Validade', :with => I18n.l(Date.tomorrow + 5.days)
+    end
+
+    within_tab 'Propostas' do
+      expect(page).to have_content 'Item 1'
+      expect(page).to have_disabled_field 'Preço total dos itens'
+      expect(page).to have_disabled_field 'Material'
+      expect(page).to have_disabled_field 'Situação'
+      expect(page).to have_disabled_field 'Classificação'
+      expect(page).to have_disabled_field 'Unidade'
+      expect(page).to have_disabled_field 'Quantidade'
+      expect(page).to have_disabled_field 'Preço total'
+
+      expect(page).to have_field 'Preço total dos itens', :with => '22,44'
+      expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
+      expect(page).to have_select 'Situação', :selected => 'Indefinido'
+      expect(page).to have_field 'Classificação', :with => ''
+      expect(page).to have_field 'Unidade', :with => 'UN'
+      expect(page).to have_field 'Quantidade', :with => '2'
+      expect(page).to have_field 'Preço unitário', :with => '11,22'
+      expect(page).to have_field 'Preço total', :with => '22,44'
+      expect(page).to have_field 'Marca', :with => 'Apple'
+    end
+
+    expect(page).to have_field 'Processo de compra', :with => '2/2013 - Convite 1'
+    expect(page).to have_field 'Data do processo de compra', :with => '20/03/2013'
+
+    fill_modal 'Fornecedor', :with => 'Gabriel Sobrinho'
+
+    uncheck 'Apresentará nova proposta em caso de empate'
+    check 'Convidado'
+    fill_in 'Protocolo', :with => '111111'
+    fill_in 'Data do protocolo', :with => I18n.l(Date.tomorrow)
+    fill_in 'Data do recebimento', :with => I18n.l(Date.tomorrow + 1.day)
+
+    within_tab 'Representantes credenciados' do
+      click_button 'Remover Pessoa'
+
+      fill_modal 'Representantes', :with => 'Wenderson Malheiros'
+    end
+
+    within_tab 'Documentos' do
+      fill_in 'Número/certidão', :with => '333333'
+      fill_in 'Data de emissão', :with => I18n.l(Date.yesterday)
+      fill_in 'Validade', :with => I18n.l(Date.tomorrow + 6.days)
+    end
+
+    within_tab 'Propostas' do
+      expect(page).to have_content 'Item 1'
+      expect(page).to have_disabled_field 'Preço total dos itens'
+      expect(page).to have_disabled_field 'Material'
+      expect(page).to have_disabled_field 'Situação'
+      expect(page).to have_disabled_field 'Classificação'
+      expect(page).to have_disabled_field 'Unidade'
+      expect(page).to have_disabled_field 'Quantidade'
+      expect(page).to have_disabled_field 'Preço total'
+
+      fill_in 'Marca', :with => 'LG'
+      fill_in 'Preço unitário', :with => '10,01'
+
+      expect(page).to have_field 'Preço unitário', :with => '10,01'
+      expect(page).to have_field 'Preço total', :with => '20,02'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_content 'Licitante editado com sucesso.'
+
+    within_records do
+      click_link 'Gabriel Sobrinho'
+    end
+
+    expect(page).to have_field 'Processo de compra', :with => '2/2013 - Convite 1'
+    expect(page).to have_field 'Data do processo de compra', :with => '20/03/2013'
+
+    expect(page).to_not have_checked_field 'Apresentará nova proposta em caso de empate'
+    expect(page).to have_field 'Fornecedor', :with => 'Gabriel Sobrinho'
+    expect(page).to have_field 'Protocolo', :with => '111111'
+    expect(page).to have_field 'Data do protocolo', :with => I18n.l(Date.tomorrow)
+    expect(page).to have_field 'Data do recebimento', :with => I18n.l(Date.tomorrow + 1.day)
+
+    within_tab 'Representantes credenciados' do
+      expect(page).to_not have_content 'Gabriel Sobrinho'
+      expect(page).to_not have_content '003.151.987-37'
+      expect(page).to have_content 'Wenderson Malheiros'
+      expect(page).to have_content '003.149.513-34'
+    end
+
+    within_tab 'Documentos' do
+      expect(page).to have_field 'Documento', :with => 'Fiscal'
+      expect(page).to have_field 'Número/certidão', :with => '333333'
+      expect(page).to have_field 'Data de emissão', :with => I18n.l(Date.yesterday)
+      expect(page).to have_field 'Validade', :with => I18n.l(Date.tomorrow + 6.days)
+    end
+
+    within_tab 'Propostas' do
+      expect(page).to have_content 'Item 1'
+      expect(page).to have_disabled_field 'Preço total dos itens'
+      expect(page).to have_disabled_field 'Material'
+      expect(page).to have_disabled_field 'Situação'
+      expect(page).to have_disabled_field 'Classificação'
+      expect(page).to have_disabled_field 'Unidade'
+      expect(page).to have_disabled_field 'Quantidade'
+      expect(page).to have_disabled_field 'Preço total'
+
+      expect(page).to have_field 'Preço total dos itens', :with => '20,02'
+      expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
+      expect(page).to have_select 'Situação', :selected => 'Indefinido'
+      expect(page).to have_field 'Classificação', :with => ''
+      expect(page).to have_field 'Unidade', :with => 'UN'
+      expect(page).to have_field 'Quantidade', :with => '2'
+      expect(page).to have_field 'Preço unitário', :with => '10,01'
+      expect(page).to have_field 'Preço total', :with => '20,02'
+      expect(page).to have_field 'Marca', :with => 'LG'
+    end
+
+    click_link 'Apagar'
+
+    expect(page).to have_notice 'Licitante apagado com sucesso.'
+
+    within_records do
+      expect(page).to have_link 'Wenderson Malheiro'
+      expect(page).to_not have_link 'Gabriel Sobrinho'
+    end
+  end
+
+  scenario 'when is not invited should disable and clear date, protocol fields' do
+    LicitationProcess.make!(:processo_licitatorio_computador,
+      :modality => Modality::INVITATION,
+      :judgment_form => JudgmentForm.make!(:global_com_menor_preco))
+
+    navigate 'Processos de Compra > Processos de Compras'
+
+    within_records do
+      click_link '2/2013'
+    end
+
+    click_link 'Habilitação'
 
     within_records do
       click_link 'Wenderson Malheiros'
@@ -309,7 +544,7 @@ feature "Bidders" do
       click_link '2/2013'
     end
 
-    click_link 'Licitantes'
+    click_link 'Habilitação'
 
     within_records do
       click_link 'Wenderson Malheiros'
@@ -472,7 +707,7 @@ feature "Bidders" do
 
     click_link 'Voltar ao processo de compra'
 
-    click_link 'Licitantes'
+    click_link 'Habilitação'
 
     within_records do
       click_link 'Wenderson Malheiros'
@@ -616,7 +851,7 @@ feature "Bidders" do
 
     click_link 'Voltar ao processo de compra'
 
-    click_link 'Licitantes'
+    click_link 'Habilitação'
 
     within_records do
       click_link 'Wenderson Malheiros'
@@ -642,7 +877,7 @@ feature "Bidders" do
       click_link '2/2013'
     end
 
-    click_link 'Licitantes'
+    click_link 'Habilitação'
 
     click_link 'Criar Licitante'
 
@@ -666,7 +901,7 @@ feature "Bidders" do
       click_link '2/2013'
     end
 
-    click_link 'Licitantes'
+    click_link 'Habilitação'
 
     expect(page).to have_content "Licitantes do Processo de Compra 2/2013"
   end
@@ -680,7 +915,7 @@ feature "Bidders" do
       click_link '2/2013'
     end
 
-    click_link 'Licitantes'
+    click_link 'Habilitação'
 
     within_records do
       click_link 'Wenderson Malheiros'
@@ -698,7 +933,7 @@ feature "Bidders" do
       click_link '2/2013'
     end
 
-    click_link 'Licitantes'
+    click_link 'Habilitação'
 
     click_link 'Criar Licitante'
 
@@ -716,7 +951,7 @@ feature "Bidders" do
       click_link '1/2012'
     end
 
-    click_link 'Licitantes'
+    click_link 'Habilitação'
 
     within_records do
       click_link 'Wenderson Malheiros'
@@ -736,7 +971,7 @@ feature "Bidders" do
       click_link '1/2012'
     end
 
-    click_link 'Licitantes'
+    click_link 'Habilitação'
 
     within_records do
       click_link 'Wenderson Malheiros'
@@ -756,7 +991,7 @@ feature "Bidders" do
       click_link '1/2012'
     end
 
-    click_link 'Licitantes'
+    click_link 'Habilitação'
 
     within_records do
       click_link 'Wenderson Malheiros'
@@ -777,7 +1012,7 @@ feature "Bidders" do
       click_link '1/2012'
     end
 
-    click_link 'Licitantes'
+    click_link 'Habilitação'
 
     within_records do
       click_link 'Wenderson Malheiros'
@@ -798,7 +1033,7 @@ feature "Bidders" do
       click_link '2/2013'
     end
 
-    click_link 'Licitantes'
+    click_link 'Habilitação'
 
     within_records do
       click_link 'Wenderson Malheiros'
@@ -821,7 +1056,7 @@ feature "Bidders" do
       click_link '2/2013'
     end
 
-    click_link 'Licitantes'
+    click_link 'Habilitação'
 
     within_records do
       click_link 'Wenderson Malheiros'
@@ -873,7 +1108,7 @@ feature "Bidders" do
       click_link  '1/2012'
     end
 
-    click_link 'Licitantes'
+    click_link 'Habilitação'
 
     within_records do
       click_link 'Gabriel Sobrinho'
