@@ -18,9 +18,10 @@ feature "LicitationProcesses" do
     sign_in
   end
 
-  scenario 'create a new licitation_process' do
+  scenario 'create and update a licitation_process' do
     PaymentMethod.make!(:dinheiro)
     DocumentType.make!(:fiscal)
+    DocumentType.make!(:oficial)
     JudgmentForm.make!(:por_item_com_menor_preco)
     BudgetAllocation.make!(:alocacao)
     BudgetAllocation.make!(:reparo_2011, expense_nature: ExpenseNature.make!(:aplicacoes_diretas))
@@ -80,8 +81,22 @@ feature "LicitationProcesses" do
       select 'ano/anos', :from => 'Período do prazo de entrega'
     end
 
-    within_tab 'Documentos' do
-      fill_modal 'Tipo de documento', :with => 'Fiscal', :field => 'Descrição'
+    within_tab "Itens" do
+      click_button 'Adicionar Item'
+
+      fill_in 'Lote', :with => '2234'
+
+      fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
+
+      # getting data from modal
+      expect(page).to have_field 'Unidade', :with => 'UN'
+
+      fill_in 'Quantidade', :with => '2'
+      fill_in 'Valor unitário máximo', :with => '10,00'
+      fill_in 'Informações complementares', :with => 'Produto antivirus avast'
+
+      # asserting calculated total price of the item
+      expect(page).to have_field 'Valor total', :with => '20,00'
     end
 
     within_tab 'Orçamento' do
@@ -146,22 +161,8 @@ feature "LicitationProcesses" do
       expect(page).to have_disabled_field 'Valor total das dotações', with: '270,00'
     end
 
-    within_tab "Itens" do
-      click_button 'Adicionar Item'
-
-      fill_in 'Lote', :with => '2234'
-
-      fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
-
-      # getting data from modal
-      expect(page).to have_field 'Unidade', :with => 'UN'
-
-      fill_in 'Quantidade', :with => '2'
-      fill_in 'Valor unitário máximo', :with => '10,00'
-      fill_in 'Informações complementares', :with => 'Produto antivirus avast'
-
-      # asserting calculated total price of the item
-      expect(page).to have_field 'Valor total', :with => '20,00'
+    within_tab 'Documentos' do
+      fill_modal 'Tipo de documento', :with => 'Fiscal', :field => 'Descrição'
     end
 
     within_tab 'Receita' do
@@ -264,6 +265,150 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Prazo da concessão', :with => '1'
       expect(page).to have_select 'Unidade do prazo da concessão', :selected => 'ano/anos'
     end
+
+ # scenario 'update an existent licitation_process' do
+    within_tab 'Principal' do
+      fill_in 'Valor da caução', :with => '60,00'
+    end
+
+    within_tab 'Prazos' do
+      fill_in 'Data da expedição', :with => '32/12/2012'
+      expect(page).to have_content "data inválida"
+    end
+
+    expect(page).to have_disabled_element "Salvar", :reason => "Há campos inválidos no formulário"
+
+    within_tab 'Prazos' do
+      fill_in 'Data da expedição', :with => I18n.l(Date.current + 1.day)
+      fill_in 'Data da disponibilidade', :with => I18n.l(Date.current + 2.days)
+
+      fill_in 'Término do recebimento dos envelopes', :with => I18n.l(Date.tomorrow)
+      fill_in 'Hora do recebimento', :with => '15:00'
+
+      #fill_in 'Abertura das propostas', :with => I18n.l(Date.tomorrow + 1.day)
+      fill_in 'Hora da abertura', :with => '15:00'
+
+      fill_in 'Prazo de entrega', :with => '3'
+      select  'mês/meses', :from => 'Período do prazo de entrega'
+    end
+
+    within_tab 'Documentos' do
+      click_button 'Remover'
+
+      fill_modal 'Tipo de documento', :with => 'Oficial', :field => 'Descrição'
+    end
+
+    within_tab 'Itens' do
+      fill_in 'Quantidade', :with => '4'
+      fill_in 'Valor total', :with => '16,00'
+      fill_in 'Informações complementares', :with => 'Produto rolos de arame farpado'
+
+      # asserting calculated unit price of the item
+      expect(page).to have_field 'Valor unitário máximo', :with => '4,00'
+    end
+
+    within_tab "Orçamento" do
+      expect(page).to have_disabled_field 'Valor total dos itens', :with => '16,00'
+      expect(page).to have_disabled_field 'Valor total das dotações', :with => '270,00'
+
+      within_records do
+        click_link "Remover"
+      end
+
+      expect(page).to have_disabled_field 'Valor total das dotações', :with => '250,00'
+
+      fill_with_autocomplete 'Dotação orçamentária', :with => 'Aposentadorias'
+
+      expect(page).to have_field 'Natureza da despesa', :with => '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+
+      expect(page).to have_field 'Saldo da dotação', :with => '500,00'
+
+      fill_with_autocomplete 'Desdobramento', :with => '3.1'
+
+      expect(page).to have_field '', :with => '3.1.90.01.01 - Aposentadorias Custeadas com Recursos do RPPS'
+
+      fill_in 'Valor previsto', :with => '20,00'
+
+      click_button 'Adicionar'
+
+      expect(page).to have_disabled_field 'Valor total das dotações', :with => '270,00'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice "Processo de Compra 1/#{Date.current.year} editado com sucesso."
+
+    within_tab 'Principal' do
+      expect(page).to have_select 'Forma de execução', :selected => 'Empreitada integral'
+      expect(page).to have_select 'Tipo de garantia', :selected => 'Fiança bancária'
+      expect(page).to have_field 'Índice de reajuste', :with => 'XPTO'
+      expect(page).to have_field 'Forma de pagamento', :with => 'Dinheiro'
+      expect(page).to have_field 'Valor da caução', :with => '60,00'
+    end
+
+    within_tab 'Prazos' do
+      expect(page).to have_field 'Data da expedição', :with => I18n.l(Date.current + 1.day)
+      expect(page).to have_field 'Data da disponibilidade', :with => I18n.l(Date.current + 2.days)
+      expect(page).to have_field 'Contato para informações', :with => 'Gabriel Sobrinho'
+
+      expect(page).to have_field 'Término do recebimento dos envelopes', :with => I18n.l(Date.tomorrow)
+      expect(page).to have_field 'Hora do recebimento', :with => '15:00'
+
+      expect(page).to have_field 'Abertura das propostas', :with => ''
+      expect(page).to have_field 'Hora da abertura', :with => '15:00'
+
+      expect(page).to have_field 'Validade da proposta', :with => '5'
+      expect(page).to have_select 'Período da validade da proposta', :selected => 'dia/dias'
+
+      expect(page).to have_field 'Prazo de entrega', :with => '3'
+      expect(page).to have_select 'Período do prazo de entrega', :selected => 'mês/meses'
+    end
+
+    within_tab "Itens" do
+      expect(page).to have_field 'Lote', :with => '2234'
+      expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
+      expect(page).to have_field 'Unidade', :with => 'UN'
+      expect(page).to have_field 'Quantidade', :with => '4'
+      expect(page).to have_field 'Valor unitário máximo', :with => '4,00'
+      expect(page).to have_field 'Valor total', :with => '16,00'
+      expect(page).to have_field 'Item', :with => '1'
+      expect(page).to have_field 'Informações complementares', :with => 'Produto rolos de arame farpado'
+    end
+
+    within_tab 'Orçamento' do
+      expect(page).to have_disabled_field 'Valor total dos itens', :with => '16,00'
+      expect(page).to have_disabled_field 'Valor total das dotações', :with => '270,00'
+
+      within_records do
+        expect(page).to have_content 'Dotação'
+        expect(page).to have_content 'Natureza da despesa'
+        expect(page).to have_content 'Desdobramento'
+        expect(page).to have_content 'Saldo da dotação'
+        expect(page).to have_content 'Valor previsto'
+
+        within 'tbody tr:first' do
+          expect(page).to have_content '1.29 - Aplicações Diretas'
+          expect(page).to have_content '3.1.90.00.00 - Aplicações Diretas'
+          expect(page).to have_content '3.0.10.01.11 - Compra de Material'
+          expect(page).to have_content '3.000,00'
+          expect(page).to have_content '250,00'
+        end
+
+        within 'tbody tr:last' do
+          expect(page).to have_content '1 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+          expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+          expect(page).to have_content '3.1.90.01.01 - Aposentadorias Custeadas com Recursos do RPPS'
+          expect(page).to have_content '500,00'
+          expect(page).to have_content '20,00'
+        end
+      end
+    end
+
+    within_tab 'Documentos' do
+      expect(page).to_not have_content 'Fiscal'
+
+      expect(page).to have_content 'Oficial'
+    end
   end
 
   scenario 'changing judgment form' do
@@ -293,178 +438,6 @@ feature "LicitationProcesses" do
       select 'Por Item com Menor Preço', :from => 'Forma de julgamento'
       select 'Empreitada integral', :from => 'Forma de execução'
       select 'Fiança bancária', :from => 'Tipo de garantia'
-    end
-  end
-
-  scenario 'update an existent licitation_process' do
-    LicitationProcess.make!(:processo_licitatorio)
-    PaymentMethod.make!(:cheque)
-    DocumentType.make!(:oficial)
-    Material.make!(:arame_farpado)
-    Indexer.make!(:selic)
-    BudgetAllocation.make!(:alocacao)
-    ExpenseNature.make!(:aposentadorias_rpps, :year => Date.current.year)
-
-    navigate 'Processos de Compra > Processos de Compras'
-
-    click_link "Limpar Filtro"
-
-    within_records do
-      click_link '1/2012'
-    end
-
-    expect(page).to have_title "Editar Processo de Compra"
-    expect(page).to have_subtitle "1/2012"
-    expect(page).to have_link 'Publicações'
-
-    within_tab 'Principal' do
-      select 'Empreitada integral', :from => 'Forma de execução'
-      select 'Fiança bancária', :from => 'Tipo de garantia'
-      fill_modal 'Índice de reajuste', :with => 'SELIC'
-      fill_modal 'Forma de pagamento', :with => 'Cheque', :field => 'Descrição'
-      fill_in 'Valor da caução', :with => '60,00'
-    end
-
-    within_tab 'Prazos' do
-      fill_in 'Data da expedição', :with => '32/12/2012'
-      expect(page).to have_content "data inválida"
-    end
-
-    expect(page).to have_disabled_element "Salvar", :reason => "Há campos inválidos no formulário"
-
-    within_tab 'Prazos' do
-      fill_in 'Data da expedição', :with => '19/03/2012'
-      fill_in 'Data da disponibilidade', :with => I18n.l(Date.current)
-      fill_modal 'Contato para informações', :with => '958473', :field => 'Matrícula'
-
-      fill_in 'Término do recebimento dos envelopes', :with => I18n.l(Date.tomorrow)
-      fill_in 'Hora do recebimento', :with => '15:00'
-
-      fill_in 'Abertura das propostas', :with => I18n.l(Date.tomorrow + 1.day)
-      fill_in 'Hora da abertura', :with => '15:00'
-
-      fill_in 'Prazo de entrega', :with => '3'
-      select  'mês/meses', :from => 'Período do prazo de entrega'
-    end
-
-    within_tab 'Documentos' do
-      click_button 'Remover'
-
-      fill_modal 'Tipo de documento', :with => 'Oficial', :field => 'Descrição'
-    end
-
-    within_tab 'Itens' do
-      click_button 'Remover Item'
-
-      click_button 'Adicionar Item'
-
-      fill_in 'Lote', :with => '5844'
-      fill_modal 'Material', :with => 'Arame farpado', :field => 'Descrição'
-
-      # getting data from modal
-      expect(page).to have_field 'Unidade', :with => 'UN'
-
-      fill_in 'Quantidade', :with => '5'
-      fill_in 'Valor total', :with => '20,00'
-      fill_in 'Informações complementares', :with => 'Produto rolos de arame farpado'
-
-      # asserting calculated unit price of the item
-      expect(page).to have_field 'Valor unitário máximo', :with => '4,00'
-    end
-
-    within_tab "Orçamento" do
-      expect(page).to have_disabled_field 'Valor total dos itens', :with => '20,00'
-      expect(page).to have_disabled_field 'Valor total das dotações', :with => '20,00'
-
-      within_records do
-        click_link "Remover"
-      end
-
-      expect(page).to have_disabled_field 'Valor total das dotações', :with => '0,00'
-
-      fill_with_autocomplete 'Dotação orçamentária', :with => 'Aposentadorias'
-
-      expect(page).to have_field 'Natureza da despesa', :with => '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
-
-      expect(page).to have_field 'Saldo da dotação', :with => '500,00'
-
-      fill_with_autocomplete 'Desdobramento', :with => '3.1'
-
-      expect(page).to have_field '', :with => '3.1.90.01.01 - Aposentadorias Custeadas com Recursos do RPPS'
-
-      fill_in 'Valor previsto', :with => '20,00'
-
-      click_button 'Adicionar'
-
-      expect(page).to have_disabled_field 'Valor total das dotações', :with => '20,00'
-    end
-
-    click_button 'Salvar'
-
-    expect(page).to have_notice 'Processo de Compra 1/2012 editado com sucesso.'
-
-    within_tab 'Principal' do
-      expect(page).to have_select 'Forma de execução', :selected => 'Empreitada integral'
-      expect(page).to have_select 'Tipo de garantia', :selected => 'Fiança bancária'
-      expect(page).to have_field 'Índice de reajuste', :with => 'SELIC'
-      expect(page).to have_field 'Forma de pagamento', :with => 'Cheque'
-      expect(page).to have_field 'Valor da caução', :with => '60,00'
-    end
-
-    within_tab 'Prazos' do
-      expect(page).to have_field 'Data da expedição', :with => '19/03/2012'
-      expect(page).to have_field 'Data da disponibilidade', :with => I18n.l(Date.current)
-      expect(page).to have_field 'Contato para informações', :with => 'Gabriel Sobrinho'
-
-      expect(page).to have_field 'Término do recebimento dos envelopes', :with => I18n.l(Date.tomorrow)
-      expect(page).to have_field 'Hora do recebimento', :with => '15:00'
-
-      expect(page).to have_field 'Abertura das propostas', :with => I18n.l(Date.tomorrow + 1.day)
-      expect(page).to have_field 'Hora da abertura', :with => '15:00'
-
-      expect(page).to have_field 'Validade da proposta', :with => '10'
-      expect(page).to have_select 'Período da validade da proposta', :selected => 'dia/dias'
-
-      expect(page).to have_field 'Prazo de entrega', :with => '3'
-      expect(page).to have_select 'Período do prazo de entrega', :selected => 'mês/meses'
-    end
-
-    within_tab 'Documentos' do
-      expect(page).to_not have_content 'Fiscal'
-
-      expect(page).to have_content 'Oficial'
-    end
-
-    within_tab "Itens" do
-      expect(page).to have_field 'Lote', :with => '5844'
-      expect(page).to have_field 'Material', :with => '02.02.00001 - Arame farpado'
-      expect(page).to have_field 'Unidade', :with => 'UN'
-      expect(page).to have_field 'Quantidade', :with => '5'
-      expect(page).to have_field 'Valor unitário máximo', :with => '4,00'
-      expect(page).to have_field 'Valor total', :with => '20,00'
-      expect(page).to have_field 'Item', :with => '1'
-      expect(page).to have_field 'Informações complementares', :with => 'Produto rolos de arame farpado'
-    end
-
-    within_tab 'Orçamento' do
-      expect(page).to have_disabled_field 'Valor total dos itens', :with => '20,00'
-      expect(page).to have_disabled_field 'Valor total das dotações', :with => '20,00'
-
-      within_records do
-        expect(page).to have_content 'Dotação'
-        expect(page).to have_content 'Natureza da despesa'
-        expect(page).to have_content 'Desdobramento'
-        expect(page).to have_content 'Saldo da dotação'
-        expect(page).to have_content 'Valor previsto'
-
-        within 'tbody tr' do
-          expect(page).to have_content '1 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
-          expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
-          expect(page).to have_content '3.1.90.01.01 - Aposentadorias Custeadas com Recursos do RPPS'
-          expect(page).to have_content '500,00'
-          expect(page).to have_content '20,00'
-        end
-      end
     end
   end
 
