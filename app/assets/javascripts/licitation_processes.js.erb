@@ -1,5 +1,7 @@
 jQuery(document).ready(function($) {
 
+  var licitationProcessTypeOfPurchase = <%= LicitationProcessTypeOfPurchase.to_json.html_safe %>;
+
   // functions
   function buildBudgetAllocationGridRowData(budget_allocation) {
     var budgetAllocationBinds = [];
@@ -84,5 +86,12 @@ jQuery(document).ready(function($) {
 
   $("#licitation_process_type_of_purchase_licitation").on('click', function() {
     toggleItemCreditorVisibility(false);
+  });
+
+  $("#licitation-process-item").on('nestedForm:afterAdd', function() {
+    var typeOfPurchaseRadio = $("input:radio[name='licitation_process[type_of_purchase]']:checked").val(),
+        directPurchase      = '<%= LicitationProcessTypeOfPurchase::DIRECT_PURCHASE %>';
+
+    toggleItemCreditorVisibility(typeOfPurchaseRadio === directPurchase);
   });
 });

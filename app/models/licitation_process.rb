@@ -64,7 +64,8 @@ class LicitationProcess < Compras::Model
            :source => :licitation_process_classifications
   has_many :administrative_process_budget_allocations, :dependent => :destroy, :order => :id
   has_many :budget_allocations, :through => :administrative_process_budget_allocations
-  has_many :items, :class_name => 'AdministrativeProcessBudgetAllocationItem', :dependent => :restrict, :order => :id
+  has_many :items, :class_name => 'AdministrativeProcessBudgetAllocationItem', :dependent => :restrict,
+           :order => :id, :inverse_of => :licitation_process
   has_many :materials, :through => :items
   has_many :legal_analysis_appraisals, :dependent => :restrict
 
