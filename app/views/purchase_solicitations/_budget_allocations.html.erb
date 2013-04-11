@@ -4,7 +4,7 @@
       <%= f.input :budget_allocation, :as => :auto_complete, :fake => true,
                   :required => true, :disabled => f.object.annulled?,
                   'data-hidden-field-class' => 'unique',
-                  :input_html => { :class => 'budget-allocation' }  %>
+                  :input_html => { :class => 'budget-allocation' } %>
     </div>
   </div>
 
@@ -16,7 +16,7 @@
 
   <div class="yui3-g">
     <div class="yui3-u-2-5">
-      <%= f.input :expense_nature, :as => :auto_complete, :fake =>  true %>
+      <%= f.input :expense_nature, :as => :auto_complete, :fake => true %>
     </div>
 
     <div class="yui3-u-1-5">
