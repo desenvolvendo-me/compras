@@ -6,7 +6,7 @@ feature "Prefecture" do
     sign_in
   end
 
-  scenario 'create a new prefecture, update and destroy an existing' do
+  scenario 'create a new prefecture, update and destroy an existing', js: true do
     Street.make!(:bento_goncalves)
 
     navigate 'Geral > Parâmetros > Organização'

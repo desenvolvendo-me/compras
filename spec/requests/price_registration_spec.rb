@@ -6,7 +6,7 @@ feature "PriceRegistration" do
     sign_in
   end
 
-  scenario 'create a new price_registration' do
+  scenario 'create a new price_registration', js: true do
     LicitationProcess.make!(:processo_licitatorio)
     LicitationProcess.make!(:processo_licitatorio_canetas)
     DeliveryLocation.make!(:education)
@@ -130,7 +130,7 @@ feature "PriceRegistration" do
     end
   end
 
-  scenario 'update an existent price_registration' do
+  scenario 'update an existent price_registration', js: true do
     PriceRegistration.make!(:registro_de_precos)
 
     navigate 'Processos de Compra > Registros de Preços'
@@ -236,7 +236,7 @@ feature "PriceRegistration" do
     end
   end
 
-  scenario 'licitation process modal should list only records with price_registrations' do
+  scenario 'licitation process modal should list only records with price_registrations', js: true do
     LicitationProcess.make!(:processo_licitatorio)
     LicitationProcess.make!(:processo_licitatorio_computador)
 
@@ -258,7 +258,7 @@ feature "PriceRegistration" do
   end
 
   context 'winning bids' do
-    scenario 'displaying winning bids on Fornecedores Vencedores tab' do
+    scenario 'displaying winning bids on Fornecedores Vencedores tab', js: true do
       licitation_process = LicitationProcess.make!(:apuracao_global)
 
       navigate 'Processos de Compra > Processos de Compras'
@@ -289,7 +289,7 @@ feature "PriceRegistration" do
       end
     end
 
-    scenario 'updates winning bids on price registration if it is created before classification is done' do
+    scenario 'updates winning bids on price registration if it is created before classification is done', js: true do
       PriceRegistration.make!(:registro_de_precos,
                               :licitation_process => LicitationProcess.make!(:apuracao_global))
 
@@ -318,7 +318,7 @@ feature "PriceRegistration" do
     end
   end
 
-  scenario 'does not allow duplicate budget structures for the same material' do
+  scenario 'does not allow duplicate budget structures for the same material', js: true do
     Material.make!(:antivirus)
     LicitationProcess.make!(:processo_licitatorio)
     BudgetStructure.make!(:secretaria_de_desenvolvimento)

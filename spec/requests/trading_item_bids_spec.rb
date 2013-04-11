@@ -9,7 +9,7 @@ feature "TradingItemBids" do
     sign_in
   end
 
-  scenario "Placing an proposal to an item" do
+  scenario "Placing an proposal to an item", js: true do
     Trading.make!(:pregao_presencial)
 
     navigate "Processos de Compra > Pregão Presencial"
@@ -350,7 +350,7 @@ feature "TradingItemBids" do
     end
   end
 
-  scenario "Placing an offer to an item" do
+  scenario "Placing an offer to an item", js: true do
     trading = Trading.make!(:pregao_presencial)
 
     make_stage_of_proposals :trading => trading
@@ -542,7 +542,7 @@ feature "TradingItemBids" do
     expect(page).to have_field 'Número da rodada', :with => '1'
   end
 
-  scenario 'enable disclassification_reason when status is disqualified' do
+  scenario 'enable disclassification_reason when status is disqualified', js: true do
     trading = Trading.make!(:pregao_presencial)
 
     make_stage_of_proposals :trading => trading
@@ -1157,7 +1157,7 @@ feature "TradingItemBids" do
     end
   end
 
-  scenario 'negotiation of the winner not benefited' do
+  scenario 'negotiation of the winner not benefited', js: true do
     make_stage_of_proposals
 
     navigate "Processos de Compra > Pregão Presencial"

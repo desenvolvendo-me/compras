@@ -10,7 +10,7 @@ feature "PurchaseSolicitations" do
     sign_in
   end
 
-  scenario 'create a new purchase_solicitation' do
+  scenario 'create a new purchase_solicitation', js: true do
     BudgetStructure.make!(:secretaria_de_educacao)
     Employee.make!(:sobrinho)
     DeliveryLocation.make!(:education)
@@ -141,7 +141,7 @@ feature "PurchaseSolicitations" do
     end
   end
 
-  scenario 'update an existent purchase_solicitation' do
+  scenario 'update an existent purchase_solicitation', js: true do
     PurchaseSolicitation.make!(:reparo)
     BudgetStructure.make!(:secretaria_de_desenvolvimento)
     Employee.make!(:wenderson)
@@ -283,7 +283,7 @@ feature "PurchaseSolicitations" do
     end
   end
 
-  scenario 'should have at least one budget allocation and one item' do
+  scenario 'should have at least one budget allocation and one item', js: true do
     navigate 'Processos de Compra > Solicitações de Compra'
 
     click_link 'Criar Solicitação de Compra'
@@ -297,7 +297,7 @@ feature "PurchaseSolicitations" do
     end
   end
 
-  scenario 'should validate presence of budget allocations and items when editing' do
+  scenario 'should validate presence of budget allocations and items when editing', js: true do
     PurchaseSolicitation.make!(:reparo)
 
     navigate 'Processos de Compra > Solicitações de Compra'
@@ -345,7 +345,7 @@ feature "PurchaseSolicitations" do
     end
   end
 
-  scenario 'calculate total value of items' do
+  scenario 'calculate total value of items', js: true do
     Material.make!(:antivirus, :material_type => MaterialType::CONSUMPTION)
     Material.make!(:arame_farpado, :material_type => MaterialType::CONSUMPTION)
 
@@ -390,7 +390,7 @@ feature "PurchaseSolicitations" do
     end
   end
 
-  scenario 'create a new purchase_solicitation with the same accouting year the code should be increased by 1' do
+  scenario 'create a new purchase_solicitation with the same accouting year the code should be increased by 1', js: true do
     PurchaseSolicitation.make!(:reparo)
     BudgetStructure.make!(:secretaria_de_educacao)
     Employee.make!(:sobrinho)
@@ -466,7 +466,7 @@ feature "PurchaseSolicitations" do
     end
   end
 
-  scenario 'should not show edit button when is not editable' do
+  scenario 'should not show edit button when is not editable', js: true do
     PurchaseSolicitation.make!(:reparo_liberado)
 
     navigate 'Processos de Compra > Solicitações de Compra'
@@ -496,7 +496,7 @@ feature "PurchaseSolicitations" do
     expect(page).to have_button 'Salvar'
   end
 
-  scenario 'create a new purchase_solicitation with same budget_structure and material' do
+  scenario 'create a new purchase_solicitation with same budget_structure and material', js: true do
     purchase_solicitation = PurchaseSolicitation.make!(:reparo)
     Employee.make!(:sobrinho)
     DeliveryLocation.make!(:education)
@@ -539,7 +539,7 @@ feature "PurchaseSolicitations" do
     expect(page).to have_content "já existe uma solicitação de compra pendente para este solicitante (1 - Secretaria de Educação) e material (01.01.00001 - Antivirus)"
   end
 
-  scenario 'update a purchase_solicitation with same budget_structure and material' do
+  scenario 'update a purchase_solicitation with same budget_structure and material', js: true do
     PurchaseSolicitation.make!(:reparo)
     purchase_solicitation = PurchaseSolicitation.make!(:reparo_2013,
                                                        :service_status => PurchaseSolicitationServiceStatus::PENDING,
@@ -576,7 +576,7 @@ feature "PurchaseSolicitations" do
     expect(page).to have_content "já existe uma solicitação de compra pendente para este solicitante (1 - Secretaria de Educação) e material (01.01.00001 - Antivirus)"
   end
 
-  scenario 'provide purchase solicitation search by code and responsible' do
+  scenario 'provide purchase solicitation search by code and responsible', js: true do
     PurchaseSolicitation.make!(:reparo)
 
     navigate 'Processos de Compra > Solicitações de Compra'
@@ -626,7 +626,7 @@ feature "PurchaseSolicitations" do
     end
   end
 
-  scenario "purchase of services" do
+  scenario "purchase of services", js: true do
     item = PurchaseSolicitationItem.make!(:item, :material => Material.make!(:manutencao))
     PurchaseSolicitation.make!(:reparo,
                                :items => [item],
@@ -668,7 +668,7 @@ feature "PurchaseSolicitations" do
     end
   end
 
-  scenario 'should not allow duplicated materials' do
+  scenario 'should not allow duplicated materials', js: true do
     Material.make!(:antivirus)
 
     navigate 'Processos de Compra > Solicitações de Compra'
@@ -742,7 +742,7 @@ feature "PurchaseSolicitations" do
     end
   end
 
-  scenario 'testing javascript when select kind is empty' do
+  scenario 'testing javascript when select kind is empty', js: true do
     Material.make!(:antivirus, :material_type => MaterialType::ASSET)
 
     navigate 'Processos de Compra > Solicitações de Compra'

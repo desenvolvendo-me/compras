@@ -25,7 +25,7 @@ feature 'PriceCollectionAnnuls' do
     expect(page).to have_title 'Editar Coleta de Preços'
   end
 
-  scenario 'creating a price collection annul' do
+  scenario 'creating a price collection annul', js: true do
     PriceCollection.make!(:coleta_de_precos)
     Employee.make!(:wenderson)
 

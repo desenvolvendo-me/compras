@@ -30,7 +30,7 @@ feature 'PriceCollectionProposalAnnul' do
     expect(page).to have_content 'Proposta do Fornecedor Wenderson Malheiros para a Coleta de Preço 1/2012'
   end
 
-  scenario 'creating an annul' do
+  scenario 'creating an annul', js: true do
     PriceCollection.make!(:coleta_de_precos)
     Employee.make!(:wenderson)
 

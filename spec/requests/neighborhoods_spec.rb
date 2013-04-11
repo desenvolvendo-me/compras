@@ -6,7 +6,7 @@ feature "Neighborhoods" do
     sign_in
   end
 
-  scenario 'create, update and destroy a new neighborhood' do
+  scenario 'create, update and destroy a new neighborhood', js: true do
     navigate 'Geral > Parâmetros > Endereços > Bairros'
 
     click_link 'Criar Bairro'
@@ -65,7 +65,7 @@ feature "Neighborhoods" do
     expect(page).to have_alert 'Bairro não pode ser apagado.'
   end
 
-  scenario 'should lock district by city' do
+  scenario 'should lock district by city', js: true do
     navigate 'Geral > Parâmetros > Endereços > Bairros'
 
     click_link 'Criar Bairro'
@@ -78,7 +78,7 @@ feature "Neighborhoods" do
     end
   end
 
-  scenario 'should filter district by city' do
+  scenario 'should filter district by city', js: true do
     FactoryGirl.create(:district, name: 'Centro', city: cities(:belo_horizonte))
 
     navigate 'Geral > Parâmetros > Endereços > Bairros'

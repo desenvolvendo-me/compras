@@ -28,7 +28,7 @@ feature TradingItem do
     expect(page).to have_title 'Editar Pregão Presencial'
   end
 
-  scenario "listing trading items with one item started" do
+  scenario "listing trading items with one item started", js: true do
     TradingConfiguration.make!(:pregao)
     item = TradingItem.make!(:item_pregao_presencial)
     trading = Trading.make!(:pregao_presencial,
@@ -99,7 +99,7 @@ feature TradingItem do
     expect(page).to have_link "Antivirus"
   end
 
-  scenario 'edit and existing item' do
+  scenario 'edit and existing item', js: true do
     Trading.make!(:pregao_presencial)
 
     navigate "Processos de Compra > Pregão Presencial"
@@ -220,7 +220,7 @@ feature TradingItem do
     end
   end
 
-  scenario 'not allow to go to the round of bids without proposal valid' do
+  scenario 'not allow to go to the round of bids without proposal valid', js: true do
     TradingConfiguration.make!(:pregao)
     Trading.make!(:pregao_presencial)
 
@@ -253,7 +253,7 @@ feature TradingItem do
     expect(page).to have_disabled_element 'Registrar lances', :reason => 'Não é permitido registrar ofertas enquanto não houver licitante com proposta'
   end
 
-  scenario 'show bidders disqualified at proposal_report' do
+  scenario 'show bidders disqualified at proposal_report', js: true do
     TradingConfiguration.make!(:pregao)
     trading = Trading.make!(:pregao_presencial)
 
@@ -310,7 +310,7 @@ feature TradingItem do
     end
   end
 
-  scenario 'activate proposals at classification' do
+  scenario 'activate proposals at classification', js: true do
     TradingConfiguration.make!(:pregao)
 
     licitation_process = LicitationProcess.make!(:pregao_presencial,
@@ -516,7 +516,7 @@ feature TradingItem do
     end
   end
 
-  scenario 'cannot undo a bid if the bidder is disabled' do
+  scenario 'cannot undo a bid if the bidder is disabled', js: true do
     TradingConfiguration.make!(:pregao)
 
     licitation_process = LicitationProcess.make!(:pregao_presencial,
@@ -894,7 +894,7 @@ feature TradingItem do
     end
   end
 
-  scenario 'cannot change minimum reductions when started' do
+  scenario 'cannot change minimum reductions when started', js: true do
     TradingConfiguration.make!(:pregao)
     Trading.make!(:pregao_presencial)
 
@@ -925,7 +925,7 @@ feature TradingItem do
     expect(page).to have_disabled_field 'Redução mínima admissível entre os lances em valor'
   end
 
-  scenario 'cannot change minimum reductions when closed' do
+  scenario 'cannot change minimum reductions when closed', js: true do
     TradingConfiguration.make!(:pregao)
     trading = Trading.make!(:pregao_presencial)
     item = trading.items.first

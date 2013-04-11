@@ -6,7 +6,7 @@ feature "LicitationObjects" do
     sign_in
   end
 
-  scenario 'create a new licitation_object' do
+  scenario 'create a new licitation_object', js: true do
     Material.make!(:antivirus)
 
     navigate 'Processos de Compra > Auxiliar > Objetos de Licitação'
@@ -117,7 +117,7 @@ feature "LicitationObjects" do
     end
   end
 
-  scenario 'should remove material' do
+  scenario 'should remove material', js: true do
     LicitationObject.make!(:viaduto)
 
     navigate 'Processos de Compra > Auxiliar > Objetos de Licitação'
@@ -144,7 +144,7 @@ feature "LicitationObjects" do
     end
   end
 
-  scenario 'update an existent licitation_object' do
+  scenario 'update an existent licitation_object', js: true do
     LicitationObject.make!(:ponte)
     Material.make!(:arame_comum)
 
@@ -198,7 +198,7 @@ feature "LicitationObjects" do
     expect(page).to_not have_content '2012'
   end
 
-  scenario 'validating total of purchase and build licitation exemptions' do
+  scenario 'validating total of purchase and build licitation exemptions', js: true do
     DirectPurchase.make!(:compra)
     DirectPurchase.make!(:compra_nao_autorizada)
     DirectPurchase.make!(:compra_2011)
@@ -220,7 +220,7 @@ feature "LicitationObjects" do
     end
   end
 
-  scenario 'validating total of purchase and build licitation exemptions when a direct purchase is annulled' do
+  scenario 'validating total of purchase and build licitation exemptions when a direct purchase is annulled', js: true do
     ResourceAnnul.make!(
       :anulacao_generica,
       :annullable => DirectPurchase.make!(:compra)

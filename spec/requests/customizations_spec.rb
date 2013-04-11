@@ -6,7 +6,7 @@ feature "Customizations" do
     sign_in
   end
 
-  scenario 'create and update a customization' do
+  scenario 'create and update a customization', js: true do
     Prefecture.make! :belo_horizonte
     Creditor.make! :nohup
 
@@ -96,7 +96,7 @@ feature "Customizations" do
     end
   end
 
-  scenario 'customization for licitation_commission' do
+  scenario 'customization for licitation_commission', js: true do
     Prefecture.make!(:belo_horizonte)
     LicitationCommission.make!(:comissao)
 
@@ -139,7 +139,7 @@ feature "Customizations" do
     expect(page).to have_field 'Campo novo', :with => 'Conteúdo do campo novo'
   end
 
-  scenario 'customization for regulatory_act_type' do
+  scenario 'customization for regulatory_act_type', js: true do
     Prefecture.make!(:belo_horizonte)
     RegulatoryActType.make!(:lei)
 

@@ -6,7 +6,7 @@ feature "People" do
     sign_in
   end
 
-  scenario 'create a new person as individual, update and destroy an existing' do
+  scenario 'create a new person as individual, update and destroy an existing', js: true do
     Street.make!(:amazonas)
 
     navigate 'Comum > Pessoas > Pessoas'
@@ -130,7 +130,7 @@ feature "People" do
     expect(page).to_not have_content 'Gabriel Sobrinho'
   end
 
-  scenario "create a new person as company and update an existing" do
+  scenario "create a new person as company and update an existing", js: true do
     LegalNature.make!(:administracao_publica)
     CompanySize.make!(:micro_empresa)
     Street.make!(:bento_goncalves)
@@ -273,7 +273,7 @@ feature "People" do
     end
   end
 
-  scenario 'neighborhoods must be filtered by the selected street' do
+  scenario 'neighborhoods must be filtered by the selected street', js: true do
     Street.make!(:amazonas)
     Street.make!(:cristiano_machado)
 
@@ -302,7 +302,7 @@ feature "People" do
     end
   end
 
-  scenario 'should validate at least one partner' do
+  scenario 'should validate at least one partner', js: true do
     Person.make!(:wenderson)
 
     navigate 'Comum > Pessoas > Pessoas'
@@ -329,7 +329,7 @@ feature "People" do
     end
   end
 
-  scenario "should show only one partner after select 2 times type company at personable" do
+  scenario "should show only one partner after select 2 times type company at personable", js: true do
     navigate 'Comum > Pessoas > Pessoas'
 
     click_link 'Criar Pessoa'

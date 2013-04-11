@@ -23,7 +23,7 @@ feature 'Bookmarks' do
     expect(page).to have_link 'Perfis'
   end
 
-  scenario 'creates, update and destroy bookmarks' do
+  scenario 'creates, update and destroy bookmarks', js: true do
     sign_in
 
     click_link 'Adicionar Cadastros'
@@ -91,7 +91,7 @@ feature 'Bookmarks' do
     expect(page).to have_link 'Adicionar Cadastros'
   end
 
-  scenario 'show all links after create for all possible' do
+  scenario 'show all links after create for all possible', js: true do
     sign_in
 
     click_link 'Adicionar Cadastros'

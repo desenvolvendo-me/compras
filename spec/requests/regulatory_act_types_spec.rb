@@ -6,7 +6,7 @@ feature "RegulatoryActTypes" do
     sign_in
   end
 
-  scenario 'create a new regulatory_act_type, update and destroy an existing' do
+  scenario 'create a new regulatory_act_type, update and destroy an existing', js: true do
     RegulatoryActTypeClassification.make!(:primeiro_tipo)
     RegulatoryActTypeClassification.make!(:segundo_tipo)
 

@@ -6,7 +6,7 @@ feature "Employees" do
     sign_in
   end
 
-  scenario 'create, update and destroy a new employee' do
+  scenario 'create, update and destroy a new employee', js: true do
     Person.make!(:sobrinho)
 
     navigate 'Geral > Usuários > Funcionários'

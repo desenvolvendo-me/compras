@@ -6,7 +6,7 @@ feature "Users" do
     sign_in
   end
 
-  scenario 'create a new user, update and destroyer user an existent' do
+  scenario 'create a new user, update and destroyer user an existent', js: true do
     Employee.make!(:wenderson)
 
     navigate 'Geral > Usuários > Usuários'
@@ -58,7 +58,7 @@ feature "Users" do
     expect(page).to_not have_content 'Wenderson Malheiros'
   end
 
-  scenario 'open the window to new perfil through the perfil modal' do
+  scenario 'open the window to new perfil through the perfil modal', js: true do
     navigate 'Geral > Usuários > Usuários'
 
     click_link 'Criar Usuário'

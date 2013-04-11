@@ -13,7 +13,7 @@ feature "JudgmentForms" do
     expect(page).to_not have_link 'Filtrar Formas de Julgamento de Licitação'
   end
 
-  scenario 'enable and disable judgment_forms through ajax' do
+  scenario 'enable and disable judgment_forms through ajax', js: true do
     judgment1 = JudgmentForm.make!(:global_com_menor_preco)
     judgment2 = JudgmentForm.make!(:por_item_com_melhor_tecnica)
     judgment3 = JudgmentForm.make!(:por_lote_com_melhor_tecnica)

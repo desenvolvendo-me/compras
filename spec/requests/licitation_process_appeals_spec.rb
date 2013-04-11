@@ -6,7 +6,7 @@ feature "LicitationProcessAppeals" do
     sign_in
   end
 
-  scenario 'create, update and destroy a new licitation_process_appeal' do
+  scenario 'create, update and destroy a new licitation_process_appeal', js: true do
     LicitationProcess.make!(:processo_licitatorio)
     Person.make!(:sobrinho)
 

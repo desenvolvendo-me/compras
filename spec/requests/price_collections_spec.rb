@@ -8,7 +8,7 @@ feature "PriceCollections" do
     sign_in
   end
 
-  scenario 'can not create a new price collection when no set the creditor email' do
+  scenario 'can not create a new price collection when no set the creditor email', js: true do
     DeliveryLocation.make!(:education)
     Employee.make!(:sobrinho)
     PaymentMethod.make!(:dinheiro)
@@ -72,7 +72,7 @@ feature "PriceCollections" do
     end
   end
 
-  scenario 'create a new price_collection' do
+  scenario 'create a new price_collection', js: true do
     DeliveryLocation.make!(:education)
     Employee.make!(:sobrinho)
     PaymentMethod.make!(:dinheiro)
@@ -187,7 +187,7 @@ feature "PriceCollections" do
     expect(page).to have_select 'Status', :selected => 'Ativo'
   end
 
-  scenario 'update an existent price_collection' do
+  scenario 'update an existent price_collection', js: true do
     PriceCollection.make!(:coleta_de_precos)
     DeliveryLocation.make!(:health)
     Employee.make!(:wenderson)
@@ -307,7 +307,7 @@ feature "PriceCollections" do
     expect(page).to_not have_button 'Apagar'
   end
 
-  scenario 'trying to create without items to see the error message' do
+  scenario 'trying to create without items to see the error message', js: true do
     DeliveryLocation.make!(:education)
     Employee.make!(:sobrinho)
     PaymentMethod.make!(:dinheiro)
@@ -344,7 +344,7 @@ feature "PriceCollections" do
     end
   end
 
-  scenario 'trying to remove all the items to see the error message' do
+  scenario 'trying to remove all the items to see the error message', js: true do
     PriceCollection.make!(:coleta_de_precos)
 
     navigate 'Processos de Compra > Coletas de Preços'
@@ -366,7 +366,7 @@ feature "PriceCollections" do
     end
   end
 
-  scenario 'removing an item and adding another one' do
+  scenario 'removing an item and adding another one', js: true do
     PriceCollection.make!(:coleta_de_precos)
     Material.make!(:arame_farpado)
 
@@ -415,7 +415,7 @@ feature "PriceCollections" do
     end
   end
 
-  scenario 'removing a lot' do
+  scenario 'removing a lot', js: true do
     PriceCollection.make!(:coleta_de_precos)
 
     navigate 'Processos de Compra > Coletas de Preços'
@@ -445,7 +445,7 @@ feature "PriceCollections" do
     end
   end
 
-  scenario 'showing numberd labels on each lot' do
+  scenario 'showing numberd labels on each lot', js: true do
     PriceCollection.make!(:coleta_de_precos)
 
     navigate 'Processos de Compra > Coletas de Preços'
@@ -480,7 +480,7 @@ feature "PriceCollections" do
     end
   end
 
-  scenario 'calc by lowest_total_price_by_item' do
+  scenario 'calc by lowest_total_price_by_item', js: true do
     price_collection = PriceCollection.make!(:coleta_de_precos_com_2_lotes, :type_of_calculation => PriceCollectionTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM)
 
     make_proposals_dependencies!(price_collection)
@@ -838,7 +838,7 @@ feature "PriceCollections" do
     end
   end
 
-  scenario 'showing numbered labels on each item' do
+  scenario 'showing numbered labels on each item', js: true do
     PriceCollection.make!(:coleta_de_precos)
 
     navigate 'Processos de Compra > Coletas de Preços'
@@ -882,7 +882,7 @@ feature "PriceCollections" do
     end
   end
 
-  scenario 'disable email when the creditor has a related user' do
+  scenario 'disable email when the creditor has a related user', js: true do
     Creditor.make!(:wenderson_sa_with_user)
 
     navigate 'Processos de Compra > Coletas de Preços'
@@ -899,7 +899,7 @@ feature "PriceCollections" do
     end
   end
 
-  scenario 'can not edit any data from a annulled price collection' do
+  scenario 'can not edit any data from a annulled price collection', js: true do
     PriceCollectionAnnul.make!(:coleta_anulada)
 
     navigate 'Processos de Compra > Coletas de Preços'
@@ -988,7 +988,7 @@ feature "PriceCollections" do
     end
   end
 
-  scenario 'disable proposals button when there is no one creditor' do
+  scenario 'disable proposals button when there is no one creditor', js: true do
     PriceCollection.make!(:coleta_de_precos)
 
     navigate 'Processos de Compra > Coletas de Preços'

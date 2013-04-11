@@ -6,7 +6,7 @@ feature "AdministrationTypes" do
     sign_in
   end
 
-  scenario 'create, update and destroy a new administration_type' do
+  scenario 'create, update and destroy a new administration_type', js: true do
     LegalNature.make!(:administracao_publica)
     LegalNature.make!(:executivo_federal)
 

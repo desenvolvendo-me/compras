@@ -1,5 +1,6 @@
 require 'capybara/rspec'
 require 'capybara/poltergeist'
+require "rack_session_access/capybara"
 
 module Capybara
   class Session
@@ -31,6 +32,9 @@ module Capybara
 end
 
 Capybara.configure do |config|
-  config.default_driver = :poltergeist
+  config.default_driver = :rack_test
+  config.javascript_driver = :poltergeist
   config.ignore_hidden_elements = true
+
+  config.default_host = 'http://127.0.0.1'
 end

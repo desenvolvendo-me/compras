@@ -27,7 +27,7 @@ feature "LicitationProcessLots" do
     expect(page).to have_content "Editar Processo de Compra 2/2013"
   end
 
-  scenario 'creating a new lot' do
+  scenario 'creating a new lot', js: true do
     LicitationProcess.make!(:processo_licitatorio_computador)
 
     navigate 'Processos de Compra > Processos de Compras'
@@ -72,7 +72,7 @@ feature "LicitationProcessLots" do
     expect(page).to_not have_link 'Criar Lote de itens'
   end
 
-  scenario 'should disable Salvar and Apagar buttons when updating a lot if licitation process is not updatable' do
+  scenario 'should disable Salvar and Apagar buttons when updating a lot if licitation process is not updatable', js: true do
     LicitationProcess.make!(:processo_licitatorio_nao_atualizavel)
 
     navigate 'Processos de Compra > Processos de Compras'
@@ -115,7 +115,7 @@ feature "LicitationProcessLots" do
     expect(page).to have_disabled_field 'Itens'
   end
 
-  scenario 'updating an existing lot' do
+  scenario 'updating an existing lot', js: true do
     LicitationProcess.make!(:processo_licitatorio_canetas)
 
     navigate 'Processos de Compra > Processos de Compras'
@@ -202,7 +202,7 @@ feature "LicitationProcessLots" do
     end
   end
 
-  scenario 'only items from administrative process that are not included by any lot must be available' do
+  scenario 'only items from administrative process that are not included by any lot must be available', js: true do
     LicitationProcess.make!(:processo_licitatorio_canetas_sem_lote)
     PurchaseProcessItem.make!(:item_arame_farpado)
 
@@ -302,7 +302,7 @@ feature "LicitationProcessLots" do
     expect(page).to have_content "Lotes de itens do Processo de Compra 2/2013"
   end
 
-  scenario "edit shoud have title Editar Lotes de itens do Processo de Compra 2/2013" do
+  scenario "edit shoud have title Editar Lotes de itens do Processo de Compra 2/2013", js: true do
     LicitationProcess.make!(:processo_licitatorio_computador)
     PurchaseProcessItem.make!(:item_arame_farpado)
 

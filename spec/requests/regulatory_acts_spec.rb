@@ -6,7 +6,7 @@ feature "RegulatoryActs" do
     sign_in
   end
 
-  scenario 'create a new regulatory_act, update and destroy an existing' do
+  scenario 'create a new regulatory_act, update and destroy an existing', js: true do
     make_dependencies!
 
     navigate 'Comum > Legislação > Ato Regulamentador > Atos Regulamentadores'
@@ -108,7 +108,7 @@ feature "RegulatoryActs" do
     expect(page).to_not have_link 'Lei'
   end
 
-  scenario 'remove dissemination source from an existent regulatory_act' do
+  scenario 'remove dissemination source from an existent regulatory_act', js: true do
     RegulatoryAct.make!(:sopa)
 
     navigate 'Comum > Legislação > Ato Regulamentador > Atos Regulamentadores'
