@@ -227,12 +227,14 @@ feature "LicitationProcesses" do
       within_records do
         expect(page).to have_content 'Dotação'
         expect(page).to have_content 'Natureza da despesa'
+        expect(page).to have_content 'Desdobramento'
         expect(page).to have_content 'Saldo da dotação'
         expect(page).to have_content 'Valor previsto'
 
         within 'tbody tr' do
           expect(page).to have_content '1 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
           expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+          expect(page).to have_content '3.1.90.01.01 - Aposentadorias Custeadas com Recursos do RPPS'
           expect(page).to have_content '500,00'
           expect(page).to have_content '20,00'
         end

@@ -25,7 +25,8 @@
 
   <div class="yui3-g">
     <div class="yui3-u-2-5">
-      <%= f.input :expense_nature, :as => :auto_complete, :fake => true, :required => true %>
+      <%= f.input :expense_nature_split, :as => :auto_complete, :fake => true, :source_path => expense_natures_path,
+                  :required => true %>
     </div>
 
     <div class="yui3-u-1-5">

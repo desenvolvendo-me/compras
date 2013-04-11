@@ -39,6 +39,7 @@ describe BudgetAllocation do
   it { should validate_presence_of :capability }
   it { should validate_presence_of :date }
   it { should validate_presence_of :descriptor }
+  it { should validate_presence_of :expense_nature }
   it { should validate_presence_of :government_action }
   it { should validate_presence_of :government_program }
   it { should validate_presence_of :subfunction }
