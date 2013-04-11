@@ -60,11 +60,6 @@ feature "Bidders" do
     fill_in 'Data do protocolo', :with => I18n.l(Date.current)
     fill_in 'Data do recebimento', :with => I18n.l(Date.tomorrow)
 
-    within_tab 'Representantes credenciados' do
-      fill_modal 'Representantes', :with => 'Wenderson Malheiros'
-      fill_modal 'Representantes', :with => 'Joao da Silva'
-    end
-
     within_tab 'Documentos' do
       # testing that document type from licitation process are automaticaly included in bidder
       expect(page).to have_disabled_field 'Documento'
@@ -109,13 +104,6 @@ feature "Bidders" do
     expect(page).to have_field 'Data do recebimento', :with => I18n.l(Date.tomorrow)
     expect(page).to have_checked_field 'Apresentará nova proposta em caso de empate'
 
-    within_tab 'Representantes credenciados' do
-      expect(page).to have_content 'Wenderson Malheiros'
-      expect(page).to have_content '003.149.513-34'
-      expect(page).to have_content 'Joao da Silva'
-      expect(page).to have_content '206.538.014-40'
-    end
-
     within_tab 'Documentos' do
       expect(page).to have_field 'Documento', :with => 'Fiscal'
       expect(page).to have_field 'Número/certidão', :with => '222222'
@@ -154,12 +142,6 @@ feature "Bidders" do
     fill_in 'Protocolo', :with => '111111'
     fill_in 'Data do protocolo', :with => I18n.l(Date.tomorrow)
     fill_in 'Data do recebimento', :with => I18n.l(Date.tomorrow + 1.day)
-
-    within_tab 'Representantes credenciados' do
-      click_button 'Remover Pessoa'
-
-      fill_modal 'Representantes', :with => 'Wenderson Malheiros'
-    end
 
     within_tab 'Documentos' do
       fill_in 'Número/certidão', :with => '333333'
@@ -200,13 +182,6 @@ feature "Bidders" do
     expect(page).to have_field 'Protocolo', :with => '111111'
     expect(page).to have_field 'Data do protocolo', :with => I18n.l(Date.tomorrow)
     expect(page).to have_field 'Data do recebimento', :with => I18n.l(Date.tomorrow + 1.day)
-
-    within_tab 'Representantes credenciados' do
-      expect(page).to_not have_content 'Gabriel Sobrinho'
-      expect(page).to_not have_content '003.151.987-37'
-      expect(page).to have_content 'Wenderson Malheiros'
-      expect(page).to have_content '003.149.513-34'
-    end
 
     within_tab 'Documentos' do
       expect(page).to have_field 'Documento', :with => 'Fiscal'
@@ -295,11 +270,6 @@ feature "Bidders" do
     fill_in 'Data do protocolo', :with => I18n.l(Date.current)
     fill_in 'Data do recebimento', :with => I18n.l(Date.tomorrow)
 
-    within_tab 'Representantes credenciados' do
-      fill_modal 'Representantes', :with => 'Wenderson Malheiros'
-      fill_modal 'Representantes', :with => 'Joao da Silva'
-    end
-
     within_tab 'Documentos' do
       # testing that document type from licitation process are automaticaly included in bidder
       expect(page).to have_disabled_field 'Documento'
@@ -344,13 +314,6 @@ feature "Bidders" do
     expect(page).to have_field 'Data do recebimento', :with => I18n.l(Date.tomorrow)
     expect(page).to have_checked_field 'Apresentará nova proposta em caso de empate'
 
-    within_tab 'Representantes credenciados' do
-      expect(page).to have_content 'Wenderson Malheiros'
-      expect(page).to have_content '003.149.513-34'
-      expect(page).to have_content 'Joao da Silva'
-      expect(page).to have_content '206.538.014-40'
-    end
-
     within_tab 'Documentos' do
       expect(page).to have_field 'Documento', :with => 'Fiscal'
       expect(page).to have_field 'Número/certidão', :with => '222222'
@@ -389,12 +352,6 @@ feature "Bidders" do
     fill_in 'Protocolo', :with => '111111'
     fill_in 'Data do protocolo', :with => I18n.l(Date.tomorrow)
     fill_in 'Data do recebimento', :with => I18n.l(Date.tomorrow + 1.day)
-
-    within_tab 'Representantes credenciados' do
-      click_button 'Remover Pessoa'
-
-      fill_modal 'Representantes', :with => 'Wenderson Malheiros'
-    end
 
     within_tab 'Documentos' do
       fill_in 'Número/certidão', :with => '333333'
@@ -435,13 +392,6 @@ feature "Bidders" do
     expect(page).to have_field 'Protocolo', :with => '111111'
     expect(page).to have_field 'Data do protocolo', :with => I18n.l(Date.tomorrow)
     expect(page).to have_field 'Data do recebimento', :with => I18n.l(Date.tomorrow + 1.day)
-
-    within_tab 'Representantes credenciados' do
-      expect(page).to_not have_content 'Gabriel Sobrinho'
-      expect(page).to_not have_content '003.151.987-37'
-      expect(page).to have_content 'Wenderson Malheiros'
-      expect(page).to have_content '003.149.513-34'
-    end
 
     within_tab 'Documentos' do
       expect(page).to have_field 'Documento', :with => 'Fiscal'
@@ -1072,10 +1022,6 @@ feature "Bidders" do
     expect(page).to have_disabled_field 'Fornecedor'
     expect(page).to have_disabled_field 'Status'
     expect(page).to have_disabled_field 'Apresentará nova proposta em caso de empate'
-
-    within_tab 'Representantes credenciados' do
-      expect(page).to have_disabled_field 'Representantes'
-    end
 
     within_tab 'Documentos' do
       expect(page).to have_disabled_field 'Documento'
