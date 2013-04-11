@@ -81,7 +81,7 @@
 <% end %>
 
 <script>
-  function filtercExpenseNatureSource(expenseNatureId) {
+  function filterc_expense_nature_source(expenseNatureId) {
     var url = "<%= expense_natures_path %>",
     params = {
       breakdown_of: expenseNatureId
@@ -94,11 +94,11 @@
     $("#purchase_solicitation_expense_nature").data('source', url);
   }
 
-  $('#purchase_solicitation_budget_allocation_id').on("change", function(event, budgetAllocation) {
-    if (budgetAllocation) {
-      $('#purchase_solicitation_budget_allocation_amount').val(numberWithDelimiter(budgetAllocation.amount));
-      $('#purchase_solicitation_budget_allocation_expense_nature').val(budgetAllocation.expense_nature);
-      filtercExpenseNatureSource(budgetAllocation.expense_nature_id);
+  $('#purchase_solicitation_budget_allocation_id').on("change", function(event, budget_allocation) {
+    if (budget_allocation) {
+      $('#purchase_solicitation_budget_allocation_amount').val(numberWithDelimiter(budget_allocation.amount));
+      $('#purchase_solicitation_budget_allocation_expense_nature').val(budget_allocation.expense_nature);
+      filterc_expense_nature_source(budget_allocation.expense_nature_id);
     } else {
       $('#purchase_solicitation_budget_allocation_amount').val('0,00');
       $('#purchase_solicitation_budget_allocation_expense_nature').val('');

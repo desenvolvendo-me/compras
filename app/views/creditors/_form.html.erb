@@ -136,10 +136,10 @@
 
   $('#creditor_main_cnae_id').change(setModalUrlToCnae);
 
-  $('form.creditor').on('change', '.regularization-or-administrative-sanction-reason', function (event, sanctionReason) {
-    if (sanctionReason) {
-      $(this).closest('.regularization-or-administrative-sanction').find('.sanction-reason-description').val(sanctionReason.description);
-      $(this).closest('.regularization-or-administrative-sanction').find('.sanction-reason-type-humanize').val(sanctionReason.reason_type_humanize);
+  $('form.creditor').on('change', '.regularization-or-administrative-sanction-reason', function (event, sanction_reason) {
+    if (sanction_reason) {
+      $(this).closest('.regularization-or-administrative-sanction').find('.sanction-reason-description').val(sanction_reason.description);
+      $(this).closest('.regularization-or-administrative-sanction').find('.sanction-reason-type-humanize').val(sanction_reason.reason_type_humanize);
     } else {
       $(this).closest('.regularization-or-administrative-sanction').find('.sanction-reason-description').val('');
       $(this).closest('.regularization-or-administrative-sanction').find('.sanction-reason-type-humanize').val('');
