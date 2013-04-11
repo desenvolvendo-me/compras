@@ -53,10 +53,10 @@
     });
   }
 
-  $('#judgment_commission_advice_licitation_commission_id').change(function (event, advice_licitation_commission) {
-    if (advice_licitation_commission){
-      $('#judgment_commission_advice_licitation_commission_president_name').val(advice_licitation_commission.president_name);
-      createMembersFromLicitationCommission(advice_licitation_commission.members);
+  $('#judgment_commission_advice_licitation_commission_id').change(function (event, adviceLicitationCommission) {
+    if (adviceLicitationCommission){
+      $('#judgment_commission_advice_licitation_commission_president_name').val(adviceLicitationCommission.president_name);
+      createMembersFromLicitationCommission(adviceLicitationCommission.members);
     } else {
       $('#judgment_commission_advice_licitation_commission_president_name').val('');
       cleanExistingMembers();

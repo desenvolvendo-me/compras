@@ -30,26 +30,26 @@
     }
   })();
 
-  $("#direct_purchase_purchase_solicitation_id").on("change", function (event, purchase_solicitation) {
+  $("#direct_purchase_purchase_solicitation_id").on("change", function (event, purchaseSolicitation) {
     $("#budget-allocations").empty();
-    if (purchase_solicitation) {
-      $('#direct_purchase_total_allocations_items_value').val(numberWithDelimiter(purchase_solicitation.total));
+    if (purchaseSolicitation) {
+      $('#direct_purchase_total_allocations_items_value').val(numberWithDelimiter(purchaseSolicitation.total));
 
-      $.each(purchase_solicitation.budget_allocations, function (i, budget_allocation) {
+      $.each(purchaseSolicitation.budget_allocations, function (i, budget_allocation) {
         renderBudgetAllocation(budget_allocation);
       });
 
       disableBudgetAllocations();
-      fillBudgetStructure(purchase_solicitation.budget_structure);
+      fillBudgetStructure(purchaseSolicitation.budget_structure);
 
-      if (purchase_solicitation.responsible && $('#direct_purchase_employee_id').val() == '') {
-        $('#direct_purchase_employee').val(purchase_solicitation.responsible.to_s);
-        $('#direct_purchase_employee_id').val(purchase_solicitation.responsible.id);
+      if (purchaseSolicitation.responsible && $('#direct_purchase_employee_id').val() == '') {
+        $('#direct_purchase_employee').val(purchaseSolicitation.responsible.to_s);
+        $('#direct_purchase_employee_id').val(purchaseSolicitation.responsible.id);
       }
 
-      if (purchase_solicitation.delivery_location && $('#direct_purchase_delivery_location_id').val() == '') {
-        $('#direct_purchase_delivery_location').val(purchase_solicitation.delivery_location.to_s);
-        $('#direct_purchase_delivery_location_id').val(purchase_solicitation.delivery_location.id);
+      if (purchaseSolicitation.delivery_location && $('#direct_purchase_delivery_location_id').val() == '') {
+        $('#direct_purchase_delivery_location').val(purchaseSolicitation.delivery_location.to_s);
+        $('#direct_purchase_delivery_location_id').val(purchaseSolicitation.delivery_location.id);
       }
     } else {
       $('#direct_purchase_total_allocations_items_value').val("0,00");
@@ -146,10 +146,10 @@
     $("#allocations .add-direct-purchase-budget-allocation").show();
   }
 
-  $('form.direct_purchase').on('change', '.budget-allocation', function (event, budget_allocation) {
-    if (budget_allocation) {
-      $(this).closest('div.direct-purchase-budget-allocation').find('.classification').val(budget_allocation.expense_nature);
-      $(this).closest('div.direct-purchase-budget-allocation').find('.amount').val(budget_allocation.amount);
+  $('form.direct_purchase').on('change', '.budget-allocation', function (event, budgetAllocation) {
+    if (budgetAllocation) {
+      $(this).closest('div.direct-purchase-budget-allocation').find('.classification').val(budgetAllocation.expense_nature);
+      $(this).closest('div.direct-purchase-budget-allocation').find('.amount').val(budgetAllocation.amount);
     }
   });
 
@@ -219,10 +219,10 @@
     }
   }
 
-  $('form.direct_purchase').on('change', '#direct_purchase_licitation_object_id', function (event, licitation_object) {
-    if (licitation_object) {
-      purchaseLicitationExemption = licitation_object.purchase_licitation_exemption;
-      buildLicitationExemption    = licitation_object.build_licitation_exemption;
+  $('form.direct_purchase').on('change', '#direct_purchase_licitation_object_id', function (event, licitationObject) {
+    if (licitationObject) {
+      purchaseLicitationExemption = licitationObject.purchase_licitation_exemption;
+      buildLicitationExemption    = licitationObject.build_licitation_exemption;
     } else {
       purchaseLicitationExemption = 0;
       buildLicitationExemption = 0;

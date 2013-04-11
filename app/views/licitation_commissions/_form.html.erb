@@ -27,9 +27,9 @@
 </div>
 
 <script>
-  $("#licitation_commission_regulatory_act_id").change(function (event, regulatory_act) {
-    if (regulatory_act) {
-      $('#licitation_commission_regulatory_act_publication_date').val(regulatory_act.publication_date);
+  $("#licitation_commission_regulatory_act_id").change(function (event, regulatoryAct) {
+    if (regulatoryAct) {
+      $('#licitation_commission_regulatory_act_publication_date').val(regulatoryAct.publication_date);
     } else {
       $('#licitation_commission_regulatory_act_publication_date').val('');
     }

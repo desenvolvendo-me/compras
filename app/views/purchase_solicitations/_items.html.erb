@@ -41,8 +41,8 @@
     });
   <% end %>
 
-  $('form').on('change', '.budget-allocation', function (event, budget_allocation) {
-    if (budget_allocation) {
+  $('form').on('change', '.budget-allocation', function (event, budgetAllocation) {
+    if (budgetAllocation) {
       var inputs = $(this).closest('div.nested').find(':input');
     }
   });

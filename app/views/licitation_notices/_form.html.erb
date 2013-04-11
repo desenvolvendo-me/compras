@@ -26,11 +26,11 @@
 <%= f.input :observations %>
 
 <script>
-  $('#licitation_notice_licitation_process_id').change(function (event, licitation_process) {
-    if (licitation_process) {
-      $('#licitation_notice_licitation_process_modality_humanize').val(licitation_process.modality_humanize);
-      $('#licitation_notice_licitation_process_process_date').val(licitation_process.process_date);
-      $('#licitation_notice_licitation_process_description').val(licitation_process.description);
+  $('#licitation_notice_licitation_process_id').change(function (event, licitationProcess) {
+    if (licitationProcess) {
+      $('#licitation_notice_licitation_process_modality_humanize').val(licitationProcess.modality_humanize);
+      $('#licitation_notice_licitation_process_process_date').val(licitationProcess.process_date);
+      $('#licitation_notice_licitation_process_description').val(licitationProcess.description);
     } else {
       $('#licitation_notice_licitation_process_modality_humanize').val('');
       $('#licitation_notice_licitation_process_process_date').val('');
