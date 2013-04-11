@@ -134,24 +134,24 @@
     $('#contract_parent').attr('disabled', $(this).val() != '<%= ContractKind::AMENDMENT %>');
   });
 
-  $('form').on('change', '#contract_licitation_process_id', function (event, licitation_process) {
-    $('#contract_direct_purchase').attr('disabled', licitation_process !== undefined);
+  $('form').on('change', '#contract_licitation_process_id', function (event, licitationProcess) {
+    $('#contract_direct_purchase').attr('disabled', licitationProcess !== undefined);
 
-    if (licitation_process) {
-      $('#contract_content').val(licitation_process.description);
-      $('#contract_modality_humanize').val(licitation_process.modality_humanize);
-      $('#contract_execution_type_humanize').val(licitation_process.execution_type_humanize);
-      $('#contract_contract_guarantees_humanize').val(licitation_process.contract_guarantees_humanize);
+    if (licitationProcess) {
+      $('#contract_content').val(licitationProcess.description);
+      $('#contract_modality_humanize').val(licitationProcess.modality_humanize);
+      $('#contract_execution_type_humanize').val(licitationProcess.execution_type_humanize);
+      $('#contract_contract_guarantees_humanize').val(licitationProcess.contract_guarantees_humanize);
     } else {
       clearModalityExecutionType();
     }
   });
 
-  $('form').on('change', '#contract_direct_purchase_id', function (event, direct_purchase) {
-    $('#contract_licitation_process').attr('disabled', direct_purchase !== undefined);
+  $('form').on('change', '#contract_direct_purchase_id', function (event, directPurchase) {
+    $('#contract_licitation_process').attr('disabled', directPurchase !== undefined);
 
-    if (direct_purchase) {
-      $('#contract_modality_humanize').val(direct_purchase.modality_humanize);
+    if (directPurchase) {
+      $('#contract_modality_humanize').val(directPurchase.modality_humanize);
     } else {
       clearModalityExecutionType();
     }
