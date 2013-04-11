@@ -178,8 +178,8 @@ class PurchaseSolicitation < Compras::Model
   def validate_budget_structure_and_materials
     items.each do |item|
       if materials_of_other_peding_purchase_solicitation.include?(item.material)
-        item.errors.add(:material, :already_exists_a_pending_purchase_solicitation_with_this_budget_structure_and_material)
-        errors.add(:base, :invalid)
+        errors.add(:base, :already_exists_a_pending_purchase_solicitation_with_this_budget_structure_and_material,
+                   :budget_structure => budget_structure, :material => item.material)
       end
     end
   end

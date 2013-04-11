@@ -41,6 +41,10 @@ class Material < Compras::Model
     where { |material| material.material_type.eq(material_type) }
   }
 
+  scope :term, lambda { |q|
+    where { code.like("#{q}%") | description.like("#{q}%") }
+  }
+
   def self.last_by_materials_class_and_group(params = {})
     record = scoped
     record = record.where { materials_class_id.eq(params.fetch(:materials_class_id)) }

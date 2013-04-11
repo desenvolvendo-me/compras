@@ -43,21 +43,28 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Itens' do
-      click_button 'Adicionar Item'
-
-      fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
+      fill_with_autocomplete 'Material', :with => 'Antivirus'
 
       # getting data from modal
-      expect(page).to have_field 'Unidade', :with => 'UN'
+      expect(page).to have_disabled_field 'Unidade', :with => 'UN'
 
       fill_in 'Marca/Referência', :with => 'Norton'
       fill_in 'Quantidade', :with => '3,50'
       fill_in 'Valor unitário', :with => '200,00'
 
-      expect(page).to have_disabled_field 'Valor total'
-
       # asserting calculated total price of the item
-      expect(page).to have_field 'Valor total', :with => '700,00'
+      expect(page).to have_disabled_field 'Valor total', :with => '700,00'
+
+      click_button 'Adicionar'
+
+      within_records do
+        expect(page).to have_content '01.01.00001 - Antivirus'
+        expect(page).to have_content 'UN'
+        expect(page).to have_content 'Norton'
+        expect(page).to have_content '3,50'
+        expect(page).to have_content '200,00'
+        expect(page).to have_content '700,00'
+      end
     end
 
     within_tab 'Dotações orçamentárias' do
@@ -113,12 +120,14 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Itens' do
-      expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
-      expect(page).to have_field 'Unidade', :with => 'UN'
-      expect(page).to have_field 'Marca/Referência', :with => 'Norton'
-      expect(page).to have_field 'Quantidade', :with => '3,50'
-      expect(page).to have_field 'Valor unitário', :with => '200,00'
-      expect(page).to have_field 'Valor total', :with => '700,00'
+      within_records do
+        expect(page).to have_content '01.01.00001 - Antivirus'
+        expect(page).to have_content 'UN'
+        expect(page).to have_content 'Norton'
+        expect(page).to have_content '3,50'
+        expect(page).to have_content '200,00'
+        expect(page).to have_content '700,00'
+      end
     end
 
     within_tab 'Dotações orçamentárias' do
@@ -165,23 +174,43 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Itens' do
-      click_button 'Remover Item'
-
-      expect(page).to have_field 'Valor total dos itens', :with => '0,00'
-
-      click_button 'Adicionar Item'
-
-      fill_modal 'Material', :with => 'Arame farpado', :field => 'Descrição'
+      fill_with_autocomplete 'Material', :with => 'Arame farpado'
 
       # getting data from modal
-      expect(page).to have_field 'Unidade', :with => 'UN'
+      expect(page).to have_disabled_field 'Unidade', :with => 'UN'
 
       fill_in 'Marca/Referência', :with => 'Ferro SA'
       fill_in 'Quantidade', :with => '200,00'
       fill_in 'Valor unitário', :with => '25,00'
 
       # asserting calculated unit price of the item
-      expect(page).to have_field 'Valor total', :with => '5.000,00'
+      expect(page).to have_disabled_field 'Valor total', :with => '5.000,00'
+
+      expect(page).to have_disabled_field 'Valor total dos itens', :with => '5.600,00'
+
+      click_button 'Adicionar'
+
+      within_records do
+        within 'tbody tr:nth-child(1)' do
+          expect(page).to have_content '01.01.00001 - Antivirus'
+          expect(page).to have_content 'UN'
+          expect(page).to have_content 'Norton'
+          expect(page).to have_content '3,00'
+          expect(page).to have_content '200,00'
+          expect(page).to have_content '600,00'
+        end
+
+         within 'tbody tr:nth-child(2)' do
+          expect(page).to have_content '02.02.00001 - Arame farpado'
+          expect(page).to have_content 'UN'
+          expect(page).to have_content 'Ferro SA'
+          expect(page).to have_content '200,00'
+          expect(page).to have_content '25,00'
+          expect(page).to have_content '5.000,00'
+        end
+      end
+
+      expect(page).to have_disabled_field 'Valor total dos itens', :with => '5.600,00'
     end
 
     within_tab 'Dotações orçamentárias' do
@@ -219,14 +248,27 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Itens' do
-      expect(page).to have_field 'Valor total dos itens', :with => '5.000,00'
-      expect(page).to have_field 'Material', :with => '02.02.00001 - Arame farpado'
-      expect(page).to have_field 'Unidade', :with => 'UN'
-      expect(page).to have_field 'Marca/Referência', :with => 'Ferro SA'
-      expect(page).to have_field 'Quantidade', :with => '200,00'
-      expect(page).to have_field 'Valor unitário', :with => '25,00'
-      expect(page).to have_field 'Valor total', :with => '5.000,00'
+      within_records do
+        within 'tbody tr:nth-child(1)' do
+          expect(page).to have_content '01.01.00001 - Antivirus'
+          expect(page).to have_content 'UN'
+          expect(page).to have_content 'Norton'
+          expect(page).to have_content '3,00'
+          expect(page).to have_content '200,00'
+          expect(page).to have_content '600,00'
+        end
 
+         within 'tbody tr:nth-child(2)' do
+          expect(page).to have_content '02.02.00001 - Arame farpado'
+          expect(page).to have_content 'UN'
+          expect(page).to have_content 'Ferro SA'
+          expect(page).to have_content '200,00'
+          expect(page).to have_content '25,00'
+          expect(page).to have_content '5.000,00'
+        end
+      end
+
+      expect(page).to have_disabled_field 'Valor total dos itens', :with => '5.600,00'
     end
 
     within_tab 'Dotações orçamentárias' do
@@ -287,7 +329,11 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Itens' do
-      click_button 'Remover Item'
+      within_records do
+        within 'tbody tr:first' do
+          click_link 'Remover'
+        end
+      end
     end
 
     click_button 'Salvar'
@@ -300,49 +346,47 @@ feature "PurchaseSolicitations" do
   end
 
   scenario 'calculate total value of items' do
+    Material.make!(:antivirus, :material_type => MaterialType::CONSUMPTION)
+    Material.make!(:arame_farpado, :material_type => MaterialType::CONSUMPTION)
+
     navigate 'Processos de Compra > Solicitações de Compra'
 
     click_link 'Criar Solicitação de Compra'
 
+    within_tab 'Principal' do
+      select 'Produtos', :from => 'Tipo de solicitação'
+    end
+
     within_tab 'Itens' do
       expect(page).to have_disabled_field 'Valor total dos itens'
 
-      click_button 'Adicionar Item'
+      fill_with_autocomplete 'Material', :with => 'Antivirus'
+      fill_in 'Quantidade', :with => '3,00'
+      fill_in 'Valor unitário', :with => '10,00'
 
-      within '.item:first' do
-        fill_in 'Quantidade', :with => '3,00'
-        fill_in 'Valor unitário', :with => '10,00'
-        expect(page).to have_field 'Valor total', :with => '30,00'
-      end
+      expect(page).to have_disabled_field 'Valor total', :with => '30,00'
+
+      click_button 'Adicionar'
 
       expect(page).to have_field 'Valor total dos itens', :with => '30,00'
 
-      click_button 'Adicionar Item'
+      fill_with_autocomplete 'Material', :with => 'Arame'
+      fill_in 'Quantidade', :with => '5,00'
+      fill_in 'Valor unitário', :with => '2,00'
 
-      within '.item:first' do
-        fill_in 'Quantidade', :with => '5,00'
-        fill_in 'Valor unitário', :with => '2,00'
-        expect(page).to have_field 'Valor total', :with => '10,00'
-      end
+      expect(page).to have_field 'Valor total', :with => '10,00'
+
+      click_button 'Adicionar'
 
       expect(page).to have_field 'Valor total dos itens', :with => '40,00'
 
-      click_button 'Adicionar Item'
-
-      within '.item:first' do
-        fill_in 'Quantidade', :with => '10,00'
-        fill_in 'Valor unitário', :with => '5,50'
-        expect(page).to have_field 'Valor total', :with => '55,00'
+      within_records do
+        within 'tbody tr:first' do
+          click_link 'Remover'
+        end
       end
 
-      expect(page).to have_field 'Valor total dos itens', :with => '95,00'
-
-      # removing an item
-      within '.item:last' do
-        click_button 'Remover Item'
-      end
-
-      expect(page).to have_field 'Valor total dos itens', :with => '65,00'
+      expect(page).to have_field 'Valor total dos itens', :with => '10,00'
     end
   end
 
@@ -370,13 +414,13 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Itens' do
-      click_button 'Adicionar Item'
-
-      fill_modal 'Material', :with => 'Office', :field => 'Descrição'
+      fill_with_autocomplete 'Material', :with => 'Office'
 
       fill_in 'Marca/Referência', :with => 'Norton'
       fill_in 'Quantidade', :with => '3,00'
       fill_in 'Valor unitário', :with => '200,00'
+
+      click_button 'Adicionar'
     end
 
     within_tab 'Dotações orçamentárias' do
@@ -405,12 +449,14 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Itens' do
-      expect(page).to have_field 'Material', :with => '01.01.00002 - Office'
-      expect(page).to have_field 'Unidade', :with => 'UN'
-      expect(page).to have_field 'Marca/Referência', :with => 'Norton'
-      expect(page).to have_field 'Quantidade', :with => '3,00'
-      expect(page).to have_field 'Valor unitário', :with => '200,00'
-      expect(page).to have_field 'Valor total', :with => '600,00'
+      within_records do
+        expect(page).to have_content '01.01.00002 - Office'
+        expect(page).to have_content 'UN'
+        expect(page).to have_content 'Norton'
+        expect(page).to have_content '3,00'
+        expect(page).to have_content '200,00'
+        expect(page).to have_content '600,00'
+      end
     end
 
     within_tab 'Dotações orçamentárias' do
@@ -471,13 +517,13 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Itens' do
-      click_button 'Adicionar Item'
-
-      fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
+      fill_with_autocomplete 'Material', :with => 'Antivirus'
 
       fill_in 'Marca/Referência', :with => 'Norton'
-      fill_in 'Quantidade', :with => '3,50'
+      fill_in 'Quantidade', :with => '3,00'
       fill_in 'Valor unitário', :with => '200,00'
+
+      click_button 'Adicionar'
     end
 
     within_tab 'Dotações orçamentárias' do
@@ -490,15 +536,14 @@ feature "PurchaseSolicitations" do
 
     expect(page).to_not have_notice 'Solicitação de Compra 1/2012 criada com sucesso.'
 
-    within_tab 'Itens' do
-      expect(page).to have_content "já existe uma solicitação de compra pendente para este solicitante e material"
-    end
+    expect(page).to have_content "já existe uma solicitação de compra pendente para este solicitante (1 - Secretaria de Educação) e material (01.01.00001 - Antivirus)"
   end
 
   scenario 'update a purchase_solicitation with same budget_structure and material' do
     PurchaseSolicitation.make!(:reparo)
     purchase_solicitation = PurchaseSolicitation.make!(:reparo_2013,
-                                                       :service_status => PurchaseSolicitationServiceStatus::PENDING)
+                                                       :service_status => PurchaseSolicitationServiceStatus::PENDING,
+                                                       :kind => PurchaseSolicitationKind::PRODUCTS)
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
@@ -509,16 +554,26 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Itens' do
-      fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
+      within_records do
+        within 'tbody tr:first' do
+          click_link 'Remover'
+        end
+      end
+
+      fill_with_autocomplete 'Material', :with => 'Antivirus'
+
+      fill_in 'Marca/Referência', :with => 'Norton'
+      fill_in 'Quantidade', :with => '3,00'
+      fill_in 'Valor unitário', :with => '200,00'
+
+      click_button 'Adicionar'
     end
 
     click_button 'Salvar'
 
     expect(page).to_not have_notice 'Solicitação de Compra 1/2012 criada com sucesso.'
 
-    within_tab 'Itens' do
-      expect(page).to have_content "já existe uma solicitação de compra pendente para este solicitante e material"
-    end
+    expect(page).to have_content "já existe uma solicitação de compra pendente para este solicitante (1 - Secretaria de Educação) e material (01.01.00001 - Antivirus)"
   end
 
   scenario 'provide purchase solicitation search by code and responsible' do
@@ -587,17 +642,8 @@ feature "PurchaseSolicitations" do
     select "Serviços", :on => "Tipo de solicitação"
 
     within_tab 'Itens' do
-      click_button 'Adicionar Item'
-
-      within_modal "Serviço" do
-        click_button "Pesquisar"
-
-        within_records do
-          expect(page).to have_content "Manutenção de Computadores"
-          expect(page).not_to have_content "Antivirus"
-        end
-
-        click_link "Voltar"
+      within_autocomplete "Serviço", :with => "Manutenção de Computadores" do
+        expect(page).to have_content 'Manutenção de Computadores'
       end
     end
 
@@ -616,24 +662,13 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab "Itens" do
-      clear_modal "Serviço"
-
-      within_modal "Serviço" do
-        click_button "Pesquisar"
-
-        within_records do
-          expect(page).to have_content "Manutenção de Computadores"
-          expect(page).not_to have_content "Antivirus"
-        end
+      within_autocomplete "Serviço", :with => "Manutenção de Computadores" do
+        expect(page).to have_content 'Manutenção de Computadores'
       end
     end
   end
 
   scenario 'should not allow duplicated materials' do
-    BudgetStructure.make!(:secretaria_de_educacao)
-    Employee.make!(:sobrinho)
-    DeliveryLocation.make!(:education)
-    budget_allocation = BudgetAllocation.make!(:alocacao)
     Material.make!(:antivirus)
 
     navigate 'Processos de Compra > Solicitações de Compra'
@@ -641,47 +676,37 @@ feature "PurchaseSolicitations" do
     click_link 'Criar Solicitação de Compra'
 
     within_tab 'Principal' do
-      fill_in 'Ano', :with => '2012'
-      fill_in 'Data da solicitação', :with => '01/02/2012'
-      fill_modal 'Solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
-      fill_modal 'Responsável pela solicitação', :with => '958473', :field => 'Matrícula'
-      fill_in 'Justificativa da solicitação', :with => 'Novas cadeiras'
-      fill_modal 'Local para entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
       select 'Produtos', :from => 'Tipo de solicitação'
-      fill_in 'Observações gerais', :with => 'Muitas cadeiras estão quebrando no escritório'
     end
 
     within_tab 'Itens' do
-      click_button 'Adicionar Item'
+      fill_with_autocomplete 'Material', :with => 'Antivirus'
 
-      fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
       fill_in 'Marca/Referência', :with => 'Norton'
       fill_in 'Quantidade', :with => '3,50'
       fill_in 'Valor unitário', :with => '200,00'
 
-      click_button 'Adicionar Item'
+      click_button 'Adicionar'
 
-      within '.item:first' do
-        fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
-        fill_in 'Marca/Referência', :with => 'Norton'
-        fill_in 'Quantidade', :with => '2,0'
-        fill_in 'Valor unitário', :with => '300,00'
+      within_records do
+        expect(page).to have_content '01.01.00001 - Antivirus'
+        expect(page).to have_content 'UN'
+        expect(page).to have_content 'Norton'
+        expect(page).to have_content '3,50'
+        expect(page).to have_content '200,00'
+        expect(page).to have_content '700,00'
       end
-    end
 
-    within_tab 'Dotações orçamentárias' do
-      fill_with_autocomplete 'Dotação', :with => 'Aposentadorias'
+      fill_with_autocomplete 'Material', :with => 'Antivirus'
 
-      click_button "Adicionar"
-    end
+      fill_in 'Marca/Referência', :with => 'Norton'
+      fill_in 'Quantidade', :with => '3,50'
+      fill_in 'Valor unitário', :with => '200,00'
 
-    click_button 'Salvar'
+      click_button 'Adicionar'
 
-    expect(page).to_not have_notice 'Solicitação de Compra 1/2012 criada com sucesso.'
-
-    within_tab 'Itens' do
-      within '.item:last' do
-        expect(page).to have_content 'já está em uso'
+      within_records do
+        expect(page).to have_css('.nested-record', :count => 1)
       end
     end
   end

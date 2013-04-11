@@ -99,19 +99,16 @@ feature 'PurchaseSolicitationAnnul' do
 
     within_tab 'Itens' do
       expect(page).to have_disabled_field 'Valor total dos itens'
-      expect(page).to have_disabled_field 'Material'
-      expect(page).to have_disabled_field 'Marca/Referência'
-      expect(page).to have_disabled_field 'Unidade'
-      expect(page).to have_disabled_field 'Quantidade'
-      expect(page).to have_disabled_field 'Valor unitário'
-      expect(page).to have_disabled_field 'Valor total'
     end
 
     within_tab 'Itens' do
-      expect(page).to have_disabled_element 'Adicionar Item',
+      expect(page).to have_disabled_element 'Adicionar',
                       :reason => 'esta solicitação foi anulada e não pode ser editada'
-      expect(page).to have_disabled_element 'Remover Item',
-                      :reason => 'esta solicitação foi anulada e não pode ser editada'
+
+      within_records do
+        expect(page).to have_disabled_element 'Remover',
+                        :reason => 'esta solicitação foi anulada e não pode ser editada'
+      end
     end
 
     within_tab 'Dotações orçamentárias' do
