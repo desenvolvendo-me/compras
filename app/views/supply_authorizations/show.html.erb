@@ -1,6 +1,4 @@
-<h1>
-  AUTORIZAÇÃO DE FORNECIMENTO
-</h1>
+<%= render "reports/header", :report_name => "AUTORIZAÇÃO DE FORNECIMENTO" %>
 
 <div class="table-border">
   <div class="yui3-g">
@@ -159,7 +157,7 @@
     <div class="yui3-u-1">
       <span class="label">
         <%= resource.class.human_attribute_name :payment_method %>
-      </span>: 
+      </span>:
 
       <%= resource.payment_method %>
     </div>
@@ -179,7 +177,7 @@
     <div class="yui3-u-1">
       <span class="label">
         <%= resource.class.human_attribute_name :delivery_location %>
-      </span>: 
+      </span>:
 
       <%= resource.delivery_location %>
     </div>
@@ -189,7 +187,7 @@
     <div class="yui3-u-1">
       <span class="label">
         <%= resource.class.human_attribute_name :licitation_object %>
-      </span>: 
+      </span>:
 
       <%= resource.licitation_object %>
     </div>
@@ -199,7 +197,7 @@
     <div class="yui3-u-1">
       <span class="label">
         <%= resource.class.human_attribute_name :observation %>
-      </span>: 
+      </span>:
 
       <%= resource.observation %>
     </div>

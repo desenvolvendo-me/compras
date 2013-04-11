@@ -5,9 +5,9 @@
     </div>
 
     <div class="prefecture-details">
-      <h2>PREFEITURA MUNICIPAL DE <%= current_prefecture.city.to_s.upcase %></h2>
-      <h2>ESTADO DE <%= current_prefecture.state.to_s.upcase %></h2>
-      <h3><%= report_name.to_s.upcase %></h3>
+      <h2>PREFEITURA MUNICIPAL DE <%= current_prefecture.city.to_s.mb_chars.upcase %></h2>
+      <h2>ESTADO DE <%= current_prefecture.state.to_s.mb_chars.upcase %></h2>
+      <h3><%= report_name.to_s.mb_chars.upcase %></h3>
     </div>
 
     <div class="created-at">

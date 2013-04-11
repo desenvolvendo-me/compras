@@ -12,6 +12,9 @@ feature "LicitationProcesses" do
                   'materials',
                   'licitation_process_publications',
                   'purchase_solicitations']
+
+    Prefecture.make!(:belo_horizonte)
+
     sign_in
   end
 
@@ -851,7 +854,7 @@ feature "LicitationProcesses" do
 
     click_button 'Apurar'
 
-    expect(page).to have_content 'Processo de Compra 1/2012'
+    expect(page).to have_content 'PROCESSO DE COMPRA 1/2012'
 
     expect(page).to have_content 'Apuração: Por Lote com Menor Preço'
 
@@ -882,7 +885,7 @@ feature "LicitationProcesses" do
 
     click_button 'Apurar'
 
-    expect(page).to have_content 'Processo de Compra 1/2012'
+    expect(page).to have_content 'PROCESSO DE COMPRA 1/2012'
 
     expect(page).to have_content 'Apuração: Forma Global com Menor Preço'
 
@@ -920,7 +923,7 @@ feature "LicitationProcesses" do
 
     click_button 'Apurar'
 
-    expect(page).to have_content 'Processo de Compra 1/2012'
+    expect(page).to have_content 'PROCESSO DE COMPRA 1/2012'
 
     expect(page).to have_content 'Apuração: Forma Global com Menor Preço'
 
@@ -944,7 +947,7 @@ feature "LicitationProcesses" do
 
     click_button 'Apurar'
 
-    expect(page).to have_content 'Processo de Compra 1/2012'
+    expect(page).to have_content 'PROCESSO DE COMPRA 1/2012'
 
     expect(page).to have_content 'Apuração: Forma Global com Menor Preço'
 
@@ -982,7 +985,7 @@ feature "LicitationProcesses" do
 
     click_button 'Apurar'
 
-    expect(page).to have_content 'Processo de Compra 1/2012'
+    expect(page).to have_content 'PROCESSO DE COMPRA 1/2012'
 
     expect(page).to have_content 'Apuração: Forma Global com Menor Preço'
 
@@ -1022,7 +1025,7 @@ feature "LicitationProcesses" do
 
     click_button 'Apurar'
 
-    expect(page).to have_content 'Processo de Compra 1/2012'
+    expect(page).to have_content 'PROCESSO DE COMPRA 1/2012'
 
     expect(page).to have_content 'Apuração: Forma Global com Menor Preço'
 
@@ -1060,7 +1063,7 @@ feature "LicitationProcesses" do
 
     click_button 'Apurar'
 
-    expect(page).to have_content 'Processo de Compra 1/2012'
+    expect(page).to have_content 'PROCESSO DE COMPRA 1/2012'
 
     expect(page).to have_content 'Apuração: Forma Global com Menor Preço'
 
@@ -1098,7 +1101,7 @@ feature "LicitationProcesses" do
 
     click_button 'Apurar'
 
-    expect(page).to have_content 'Processo de Compra 1/2012'
+    expect(page).to have_content 'PROCESSO DE COMPRA 1/2012'
 
     expect(page).to have_content 'Apuração: Forma Global com Menor Preço'
 
@@ -1136,7 +1139,7 @@ feature "LicitationProcesses" do
 
     click_button 'Apurar'
 
-    expect(page).to have_content 'Processo de Compra 1/2012'
+    expect(page).to have_content 'PROCESSO DE COMPRA 1/2012'
 
     expect(page).to have_content 'Apuração: Forma Global com Menor Preço'
 
@@ -1196,7 +1199,7 @@ feature "LicitationProcesses" do
 
     click_button 'Apurar'
 
-    expect(page).to have_content 'Processo de Compra 1/2012'
+    expect(page).to have_content 'PROCESSO DE COMPRA 1/2012'
 
     expect(page).to have_content 'Apuração: Por Lote com Menor Preço'
 
@@ -1284,7 +1287,7 @@ feature "LicitationProcesses" do
 
     click_button 'Apurar'
 
-    expect(page).to have_content 'Processo de Compra 1/2012'
+    expect(page).to have_content 'PROCESSO DE COMPRA 1/2012'
 
     expect(page).to have_content 'Apuração: Por Item com Menor Preço'
 
@@ -1335,7 +1338,7 @@ feature "LicitationProcesses" do
 
     click_link 'Relatório'
 
-    expect(page).to have_content 'Processo de Compra 1/2012'
+    expect(page).to have_content 'PROCESSO DE COMPRA 1/2012'
 
     click_link 'voltar'
 

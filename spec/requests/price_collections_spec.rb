@@ -3,6 +3,8 @@ require 'spec_helper'
 
 feature "PriceCollections" do
   background do
+    Prefecture.make!(:belo_horizonte)
+
     sign_in
   end
 
@@ -483,7 +485,7 @@ feature "PriceCollections" do
 
     click_button 'Apurar'
 
-    expect(page).to have_content 'Quadro Comparativo de Preços da Coleta de preço 1/2012'
+    expect(page).to have_content 'QUADRO COMPARATIVO DE PREÇOS DA COLETA DE PREÇO 1/2012'
 
     expect(page).to have_content 'Apuração: Menor preço total por item'
 
@@ -523,7 +525,7 @@ feature "PriceCollections" do
 
     click_link 'Relatório'
 
-    expect(page).to have_content 'Quadro Comparativo de Preços da Coleta de preço 1/2012'
+    expect(page).to have_content 'QUADRO COMPARATIVO DE PREÇOS DA COLETA DE PREÇO 1/2012'
   end
 
   scenario 'calc by lowest_total_price_by_item with zero item' do
@@ -559,7 +561,7 @@ feature "PriceCollections" do
 
     click_button 'Apurar'
 
-    expect(page).to have_content 'Quadro Comparativo de Preços da Coleta de preço 1/2012'
+    expect(page).to have_content 'QUADRO COMPARATIVO DE PREÇOS DA COLETA DE PREÇO 1/2012'
 
     expect(page).to have_content 'Apuração: Menor preço total por item'
 
@@ -607,7 +609,7 @@ feature "PriceCollections" do
 
     click_button 'Apurar'
 
-    expect(page).to have_content 'Quadro Comparativo de Preços da Coleta de preço 1/2012'
+    expect(page).to have_content 'QUADRO COMPARATIVO DE PREÇOS DA COLETA DE PREÇO 1/2012'
 
     expect(page).to have_content 'Apuração: Menor preço por lote'
 
@@ -675,7 +677,7 @@ feature "PriceCollections" do
 
     click_button 'Apurar'
 
-    expect(page).to have_content 'Quadro Comparativo de Preços da Coleta de preço 1/2012'
+    expect(page).to have_content 'QUADRO COMPARATIVO DE PREÇOS DA COLETA DE PREÇO 1/2012'
 
     expect(page).to have_content 'Apuração: Menor preço por lote'
 
@@ -723,7 +725,7 @@ feature "PriceCollections" do
 
     click_button 'Apurar'
 
-    expect(page).to have_content 'Quadro Comparativo de Preços da Coleta de preço 1/2012'
+    expect(page).to have_content 'QUADRO COMPARATIVO DE PREÇOS DA COLETA DE PREÇO 1/2012'
 
     expect(page).to have_content 'Apuração: Menor preço global'
 
@@ -793,7 +795,7 @@ feature "PriceCollections" do
 
     click_button 'Apurar'
 
-    expect(page).to have_content 'Quadro Comparativo de Preços da Coleta de preço 1/2012'
+    expect(page).to have_content 'QUADRO COMPARATIVO DE PREÇOS DA COLETA DE PREÇO 1/2012'
 
     expect(page).to have_content 'Apuração: Menor preço global'
 
