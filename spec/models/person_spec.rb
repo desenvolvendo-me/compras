@@ -74,91 +74,79 @@ describe Person do
     expect(subject.identity_document).to eq '76.238.594/0001-35'
   end
 
-  context 'company_size' do
-    let :company_size do
-      double('CompanySize')
+  context 'with personable' do
+    let :personable do
+      double(:personable)
     end
 
-    it 'should not return company_size if is not company' do
-      subject.stub(:company?).and_return false
-      expect(subject.company_size).to be_nil
+    before do
+      subject.stub(:personable => personable)
     end
 
-    it 'should return company_size if is company' do
-      subject.stub(:company_size).and_return company_size
-      subject.stub(:company?).and_return false
-      expect(subject.company_size).to eq company_size
-    end
-  end
+    describe '#company_size' do
+      it 'should not return company_size if is not company' do
+        expect(subject.company_size).to be_nil
+      end
 
-  context 'choose_simple' do
-    it 'should not return choose_simple if is not company' do
-      subject.stub(:company?).and_return false
-      expect(subject.choose_simple).to be_nil
+      it 'should return company_size if is company' do
+        personable.stub(:company_size).and_return('company_size')
+        expect(subject.company_size).to eq 'company_size'
+      end
     end
 
-    it 'should return choose_simple if is company' do
-      subject.stub(:choose_simple).and_return true
-      subject.stub(:company?).and_return false
-      expect(subject.company_size).to be_false
-    end
-  end
+    describe '#choose_simple' do
+      it 'should not return choose_simple if is not company' do
+        expect(subject.choose_simple).to be_nil
+      end
 
-  context 'legal_nature' do
-    let :legal_nature do
-      double('LegalNature')
-    end
-
-    it 'should not return legal_nature if is not company' do
-      subject.stub(:company?).and_return false
-      expect(subject.legal_nature).to be_nil
+      it 'should return choose_simple if is company' do
+        personable.stub(:choose_simple).and_return(true)
+        expect(subject.company_size).to be_false
+      end
     end
 
-    it 'should return legal_nature if is company' do
-      subject.stub(:legal_nature).and_return legal_nature
-      subject.stub(:company?).and_return false
-      expect(subject.legal_nature).to eq legal_nature
-    end
-  end
+    describe '#legal_nature' do
+      it 'should not return legal_nature if is not company' do
+        expect(subject.legal_nature).to be_nil
+      end
 
-  context '#commercial_registration_date' do
-    let :date do
-      Date.new(2012, 7, 13)
-    end
-
-    it 'should not return commercial_registration_date if is not company' do
-      subject.stub(:company?).and_return false
-      expect(subject.commercial_registration_date).to be_nil
+      it 'should return legal_nature if is company' do
+        personable.stub(:legal_nature).and_return('legal_nature')
+        expect(subject.legal_nature).to eq 'legal_nature'
+      end
     end
 
-    it 'should return commercial_registration_date if is company' do
-      subject.stub(:commercial_registration_date).and_return date
-      subject.stub(:company?).and_return false
-      expect(subject.commercial_registration_date).to eq date
-    end
-  end
+    describe '#commercial_registration_date' do
+      it 'should not return commercial_registration_date if is not company' do
+        expect(subject.commercial_registration_date).to be_nil
+      end
 
-  context '#commercial_registration_number' do
-    it 'should not return commercial_registration_number if is not company' do
-      subject.stub(:company?).and_return false
-      expect(subject.commercial_registration_number).to be_nil
+      it 'should return commercial_registration_date if is company' do
+        personable.stub(:commercial_registration_date).and_return('date')
+        expect(subject.commercial_registration_date).to eq 'date'
+      end
     end
 
-    it 'should return commercial_registration_number if is company' do
-      subject.stub(:commercial_registration_number).and_return '1234'
-      subject.stub(:company?).and_return false
-      expect(subject.commercial_registration_number).to eq '1234'
-    end
-  end
+    describe '#commercial_registration_number' do
+      it 'should not return commercial_registration_number if is not company' do
+        expect(subject.commercial_registration_number).to be_nil
+      end
 
-  describe '#identity_number' do
-    it 'should not return identity_number if is not individual' do
-      expect(subject.identity_number).to be_nil
+      it 'should return commercial_registration_number if is company' do
+        personable.stub(:commercial_registration_number).and_return('1234')
+        expect(subject.commercial_registration_number).to eq '1234'
+      end
     end
 
-    it 'should return identity_number if is individual' do
-      personable.stub(:number => '1111')
-      expect(subject.identity_number).to eq '1111'
+    describe '#identity_number' do
+      it 'should not return identity_number if is not individual' do
+        expect(subject.identity_number).to be_nil
+      end
+
+      it 'should return identity_number if is individual' do
+        personable.stub(:number => '1111')
+        expect(subject.identity_number).to eq '1111'
+      end
     end
   end
 end
