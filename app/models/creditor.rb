@@ -43,6 +43,7 @@ class Creditor < Compras::Model
   has_many :reserve_funds, :dependent => :restrict
   has_many :purchase_process_accreditation_creditors, :dependent => :restrict
   has_many :administrative_process_budget_allocation_items, :dependent => :restrict
+  has_many :purchase_process_creditor_proposals, dependent: :restrict
 
   has_one :user, :as => :authenticable
 

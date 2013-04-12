@@ -17,7 +17,8 @@ class LicitationProcess < Compras::Model
                   :licensee_rights_and_liabilities, :authorization_envelope_opening_date,
                   :authorization_envelope_opening_time, :closing_of_accreditation_date,
                   :closing_of_accreditation_time, :purchase_solicitation_ids,
-                  :budget_allocations_total_value, :total_value_of_items
+                  :budget_allocations_total_value, :total_value_of_items,
+                  :creditor_proposals_attributes
 
   auto_increment :process, :by => :year
   auto_increment :modality_number, :by => [:year, :modality, :type_of_removal]
@@ -55,7 +56,6 @@ class LicitationProcess < Compras::Model
   has_many :pledges, :dependent => :restrict
   has_many :judgment_commission_advices, :dependent => :restrict
   has_many :licitation_notices, :dependent => :destroy
-  has_many :creditors, :through => :bidders, :dependent => :restrict
   has_many :licitation_process_lots, :dependent => :destroy, :order => :id
   has_many :reserve_funds, :dependent => :restrict
   has_many :price_registrations, :dependent => :restrict
@@ -68,11 +68,14 @@ class LicitationProcess < Compras::Model
            :order => :id, :inverse_of => :licitation_process
   has_many :materials, :through => :items
   has_many :legal_analysis_appraisals, :dependent => :restrict
+  has_many :license_creditors, :through => :bidders, :dependent => :restrict, :source => :creditor, order: :id
+  has_many :accreditation_creditors, :through => :purchase_process_accreditation, :source => :creditors, order: :id
+  has_many :creditor_proposals, through: :items, class_name: 'PurchaseProcessCreditorProposal'
 
   has_one :purchase_process_accreditation, :dependent => :restrict
   has_one :trading, :dependent => :restrict
 
-  accepts_nested_attributes_for :administrative_process_budget_allocations, :items,
+  accepts_nested_attributes_for :administrative_process_budget_allocations, :items, :creditor_proposals,
                                 :allow_destroy => true
 
   delegate :licitation_kind, :kind, :best_technique?, :technical_and_price?,
@@ -142,6 +145,10 @@ class LicitationProcess < Compras::Model
 
   def to_s
     "#{process}/#{year} - #{modality_humanize} #{modality_number}"
+  end
+
+  def creditors
+    trading? ? license_creditors : accreditation_creditors
   end
 
   def update_status(status)

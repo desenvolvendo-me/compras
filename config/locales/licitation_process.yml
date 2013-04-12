@@ -70,6 +70,8 @@ pt-BR:
         estimated_total_price: "Valor total"
         material: "Material"
         creditor: "Fornecedor"
+        creditor_email: "Email"
+        creditor_proposal_total_value: "Valor total da proposta"
 
   licitation_process:
     messages:

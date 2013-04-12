@@ -1,0 +1,19 @@
+pt-BR:
+  activerecord:
+    models:
+      purchase_process_creditor_proposal:
+        one: "Proposta Comercial"
+        other: "Propostas Comerciais"
+
+    attributes:
+      purchase_process_creditor_proposal:
+        creditor: "Credor"
+        administrative_process_budget_allocation_item: "Item"
+        brand: "Marca"
+        unit_price: "Preço unitário"
+        item_lot: "Lote"
+        lot: "Lote"
+        quantity: "Quantidade"
+        total_price: "Preço total"
+        reference_unit: "Unidade"
+        creditor_proposal_total_value: "Valor total da proposta"

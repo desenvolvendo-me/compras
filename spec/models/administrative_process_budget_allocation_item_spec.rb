@@ -4,6 +4,7 @@ require 'app/models/administrative_process_budget_allocation_item'
 require 'app/models/licitation_process_classification'
 require 'app/models/trading_item'
 require 'app/models/bidder_proposal'
+require 'app/models/purchase_process_creditor_proposal'
 
 describe AdministrativeProcessBudgetAllocationItem do
   it { should validate_presence_of :material }
@@ -16,6 +17,7 @@ describe AdministrativeProcessBudgetAllocationItem do
   it { should belong_to :creditor }
 
   it { should have_many :bidder_proposals }
+  it { should have_many(:creditor_proposals).dependent(:destroy) }
   it { should have_many(:licitation_process_classifications).dependent(:destroy) }
 
   it { should have_one(:trading_item).dependent(:restrict) }

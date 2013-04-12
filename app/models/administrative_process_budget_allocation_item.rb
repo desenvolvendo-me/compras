@@ -1,6 +1,6 @@
 class AdministrativeProcessBudgetAllocationItem < Compras::Model
   attr_accessible :material_id, :quantity, :unit_price, :lot, :additional_information,
-                  :creditor_id
+                  :creditor_id, :creditor_proposals_attributes
 
   attr_accessor :order
 
@@ -13,8 +13,12 @@ class AdministrativeProcessBudgetAllocationItem < Compras::Model
 
   has_many :bidder_proposals
   has_many :licitation_process_classifications, :as => :classifiable, :dependent => :destroy
+  has_many :creditor_proposals, dependent: :destroy, class_name: 'PurchaseProcessCreditorProposal',
+    source: :purchase_process_creditor_proposals
 
   has_one  :trading_item, :dependent => :restrict
+
+  accepts_nested_attributes_for :creditor_proposals
 
   delegate :reference_unit, :description, :to => :material, :allow_nil => true
   delegate :direct_purchase?, :to => :licitation_process, :allow_nil => true
