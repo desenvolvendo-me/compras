@@ -254,7 +254,7 @@ class LicitationProcess < Compras::Model
   def validate_proposal_envelope_opening_date
     return unless proposal_envelope_opening_date
 
-    if proposal_envelope_opening_date && !last_publication_date
+    unless last_publication_date
       errors.add :proposal_envelope_opening_date, :absence
       return false
     end
