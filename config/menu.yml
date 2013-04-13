@@ -65,9 +65,15 @@ menu:
     - administration_types
 
   - purchasing_processes:
-    - price_collections
+    - auxiliary:
+      - licitation_commissions
+      - trading_configuration
+      - judgment_forms
+      - licitation_objects
+      - legal_references
     - price_registrations
     - purchase_solicitations
+    - price_collections
     - licitation_processes
     - licitation_notices
     - licitation_process_impugnments
