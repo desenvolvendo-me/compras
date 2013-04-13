@@ -22,12 +22,4 @@ class AdministrativeProcessBudgetAllocationItemDecorator
   def quantity
     number_with_precision super if super
   end
-
-  def disable_creditor?
-    !direct_purchase?
-  end
-
-  def hidden_creditor
-    'hidden' unless direct_purchase?
-  end
 end

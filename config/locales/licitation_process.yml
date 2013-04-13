@@ -62,6 +62,14 @@ pt-BR:
         budget_allocation_expense_nature: "Natureza da despesa"
         budget_allocation_amount: "Saldo da dotação"
         administrative_process_budget_allocation_value: "Valor previsto"
+        lot: "Lote"
+        quantity: "Quantidade"
+        reference_unit: "Unidade"
+        unit_price: "Valor unitário máximo"
+        additional_information: "Informações complementares"
+        estimated_total_price: "Valor total"
+        material: "Material"
+        creditor: "Fornecedor"
 
   licitation_process:
     messages:

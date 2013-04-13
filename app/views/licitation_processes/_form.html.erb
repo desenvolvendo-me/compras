@@ -3,8 +3,8 @@
     <li><a href="#tab-main">Principal</a></li>
     <li><a href="#tab-requestor">Solicitantes</a></li>
     <li><a href="#tab-periods">Prazos</a></li>
-    <li><a href="#tab-items">Itens / Justificativa</a></li>
-    <li><a href="#tab-budget_allocations">Orçamento</a></li>
+    <li><a href="#tab-items" id="items_tab_header">Itens / Justificativa</a></li>
+    <li><a href="#tab-budget_allocations" id="budget_allocation_tab_header">Orçamento</a></li>
     <li><a href="#tab-income">Receita</a></li>
     <li><a href="#tab-documents">Documentos</a></li>
   </ul>
@@ -19,281 +19,100 @@
 </div>
 
 <script>
-  var fieldItems = '.item-price',
-      nestedItems = 'div.nested-licitation-process-item';
+  function filterJudgmentForm() {
+    var judgmentFormGroups    = <%= JudgmentFormFilter.new.by_modality.to_json.html_safe %>,
+        modality              = $('#licitation_process_modality').val(),
+        priceRegistration     = $('#licitation_process_price_registration').is(':checked'),
+        currentJudgmentFormId = $('#current_judgment_form_id').val(),
+        judgmentForms;
 
-  $('a[href="#tab-budget_allocations"]').click(function() {
-    $('#licitation_process_total_value_of_items').val(sumOfItems(nestedItems, fieldItems));
-  });
+    $("#licitation_process_judgment_form_id").empty();
+    $("#licitation_process_judgment_form_id").val('');
 
-  function sumAdministrativeProcessBudgetAllocationTotalValue() {
-    var totalValue = 0,
-        tableData  = $('#administrative-process-budget-allocation-records tr.record').not('[style*="display: none"]');
-
-    tableData.find('td.administrative_process_budget_allocation_value').each(function() {
-      totalValue += parsePtBrFloat($(this).html());
-    })
-
-    totalValue = numberWithDelimiter(totalValue);
-
-    $('#licitation_process_budget_allocations_total_value').val(totalValue);
-  }
-
-  function sumOfItems(nested, field) {
-    var total = 0,
-    div = $(nested).not('[style*="display: none"]');
-
-    div.find(field).each(function() {
-      total += parsePtBrFloat($(this).val());
+    $("#licitation_process_judgment_form_id").append(function() {
+      return $("<option>").text('').val('');
     });
 
-    total = numberWithDelimiter(total);
-
-    return total;
-  }
-
-  $('#administrative-process-budget-allocation-records').on('nestedGrid:afterAdd', function() {
-    sumAdministrativeProcessBudgetAllocationTotalValue();
-  });
-
-  $('#administrative-process-budget-allocation-records').on('nestedGrid:afterRemove', function() {
-    sumAdministrativeProcessBudgetAllocationTotalValue();
-  });
-
-  $(function () {
-    var objectType = $(".object-type-select").val();
-
-    if (objectType) {
-      filterModalities(objectType);
-    } else {
-      disableModalities();
-    }
-
-    $('form.licitation_process').on('change', '.object-type-select', function() {
-      $('#licitation_process_modality').html('');
-
-      var objectType = $(this).val();
-      if (objectType) {
-        filterModalities(objectType);
-        enableModalities();
+    if (modality) {
+      if (priceRegistration) {
+        judgmentForms = judgmentFormGroups.with_price_registration[modality];
       } else {
-        disableModalities();
+        judgmentForms = judgmentFormGroups.without_price_registration[modality];
       }
-    });
 
-    $('#licitation_process_modality, #licitation_process_price_registration').on('change', function() {
-      filterJudgmentForm();
-    });
-
-    function filterModalities(objectType) {
-      var modalitiesByObjectType = <%= Modality.by_object_type.to_json.html_safe %>,
-          validGroup = _(modalitiesByObjectType[objectType]),
-          currentModality = "<%= f.object.modality %>";
-
-      $("#licitation_process_modality").append(function() {
-        return $("<option>").text('').val('');
+      _(judgmentForms).each(function(judgmentForm) {
+        $("#licitation_process_judgment_form_id").append(function() {
+          return $("<option>").text(judgmentForm.description)
+                              .val(judgmentForm.id)
+                              .data('kind', judgmentForm.kind);
+        });
       });
-
-      if (!validGroup.isUndefined() && !validGroup.isEmpty()){
-        validGroup.each(function(modality) {
-          $("#licitation_process_modality").append(function() {
-            if (modality[1] == "<%= f.object.modality %>") {
-              return $("<option>").text(modality[0]).val(modality[1]).attr('selected', 'selected');
-            } else {
-              return $("<option>").text(modality[0]).val(modality[1]);
-            }
-          });
-        });
-      }
     }
 
-    function filterJudgmentForm() {
-      var judgmentFormGroups = <%= JudgmentFormFilter.new.by_modality.to_json.html_safe %>,
-          modality = $('#licitation_process_modality').val(),
-          priceRegistration = $('#licitation_process_price_registration').is(':checked'),
-          judgmentForms;
-
-      $("#licitation_process_judgment_form_id option").remove();
-
-      if (modality) {
-        if (priceRegistration) {
-          judgmentForms = judgmentFormGroups.with_price_registration[modality];
-        } else {
-          judgmentForms = judgmentFormGroups.without_price_registration[modality];
+    if (currentJudgmentFormId) {
+      $("#licitation_process_judgment_form_id option").each(function() {
+        if ( $(this).val() == currentJudgmentFormId ){
+          $("#licitation_process_judgment_form_id").val(currentJudgmentFormId);
         }
+      });
+    }
+  }
 
-        _(judgmentForms).each(function(judgmentForm) {
-          $("#licitation_process_judgment_form_id").append(function() {
-            return $("<option>").text(judgmentForm.description).
-                                 val(judgmentForm.id).
-                                 data('kind', judgmentForm.kind);
-          });
+  function filterModalities(objectType) {
+    var modalitiesByObjectType = <%= Modality.by_object_type.to_json.html_safe %>,
+        validGroup             = _(modalitiesByObjectType[objectType]),
+        currentModality        = $("#current_modality_id").val();
+
+    $("#licitation_process_modality").empty();
+
+    $("#licitation_process_modality").append(function() {
+      return $("<option>").text('').val('');
+    });
+
+    if (!validGroup.isUndefined() && !validGroup.isEmpty()){
+      validGroup.each(function(modality) {
+        $("#licitation_process_modality").append(function() {
+          if (modality[1] == currentModality) {
+            return $("<option>").text(modality[0]).val(modality[1]).attr('selected', 'selected');
+          } else {
+            return $("<option>").text(modality[0]).val(modality[1]);
+          }
         });
-      }
-
-      <% if f.object.judgment_form %>
-        $("#licitation_process_judgment_form_id option").filter('[value="<%= f.object.judgment_form_id %>"]').attr("selected", "selected");
-      <% end %>
+      });
     }
+  }
 
-    function disableModalities() {
-      $('#licitation_process_modality').attr("disabled", "disabled");
-    }
+  function disableModalities() {
+    $('#licitation_process_modality').attr("disabled", "disabled");
+  }
 
-    function enableModalities() {
-      $('#licitation_process_modality').removeAttr("disabled");
-    }
+  function enableModalities() {
+    $('#licitation_process_modality').removeAttr("disabled");
+  }
 
+  $('#licitation_process_modality, #licitation_process_price_registration').on('change', function() {
     filterJudgmentForm();
   });
 
-  (function () {
-    var purchaseSolicitationId = $("#licitation_process_purchase_solicitation_id").val();
+  $('form.licitation_process').on('change', '.object-type-select', function() {
+    $('#licitation_process_modality').html('');
 
-    if (purchaseSolicitationId) {
-      disableBudgetAllocations();
-      toggleItems(false);
-    }
-  })();
-
-  function disableBudgetAllocations() {
-    $("#budget_allocations :input").attr("readonly", "readonly");
-    $("#budget_allocations .modal").attr("disabled", "disabled");
-    $("#budget_allocations .auto_complete").attr("disabled", "disabled")
-                                           .addClass("disabled_auto_complete")
-                                           .removeClass("auto_complete");
-    $("#budget_allocations .remove-administrative-process-budget-allocation").hide();
-    $("#budget_allocations .add-administrative-process-budget-allocation").hide();
-  }
-
-  function enableBudgetAllocations() {
-    $("#budget_allocations .add-administrative-process-budget-allocation").attr("disabled", false);
-    $("#budget_allocations .add-administrative-process-budget-allocation").show();
-    $("#budget_allocations .disabled_auto_complete").attr("disabled", false)
-                                                    .addClass("auto_complete")
-                                                    .removeClass("disabled_auto_complete");
-  }
-
-  function toggleItems(enable) {
-    var $inputs = $("#items .nested-licitation-process-item :input"),
-        $modals = $("#items .nested-licitation-process-item .modal");
-
-    $inputs.attr("readonly", !enable);
-    $inputs.attr("disabled", !enable);
-    $modals.attr("disabled", !enable);
-  }
-
-  function enablePurchaseSolicitation() {
-    $("#licitation_process_purchase_solicitation").removeAttr("disabled");
-  }
-
-  function fillItem(uuid, item) {
-    var prefixNameUuid = "#licitation_process_items_attributes_fresh-" + uuid;
-
-    $(prefixNameUuid + "_material").val(item.material_description);
-    $(prefixNameUuid + "_material_id").val(item.material_id);
-    $(prefixNameUuid + "_reference_unit").val(item.reference_unit);
-    $(prefixNameUuid + "_quantity").val(numberWithDelimiter(item.quantity));
-    $(prefixNameUuid + "_unit_price").val(numberWithDelimiter(item.unit_price));
-    $(prefixNameUuid + "_estimated_total_price").val(numberWithDelimiter(item.estimated_total_price));
-  }
-
-  function renderItem(item) {
-    var itemBinds = [],
-        itemUUID  = _.uniqueId(),
-        gotMaterial = false,
-        nestedItemDiv = $("div.nested-licitation-process-item"),
-        materialRow;
-
-    itemBinds["uuid-licitation-process-item"] = "fresh-" + itemUUID;
-
-    nestedItemDiv.each(function(index, obj) {
-      materialRow = $(obj).find(".licitation_process_items_material").find("input[type=hidden]");
-
-      if (materialRow.val() == item.material_id) {
-        gotMaterial = true;
-        return false;
-      }
-    });
-
-    if (gotMaterial) {
-      var material = materialRow.closest('.nested-licitation-process-item').find('.item-quantity');
-      var value    = parseFloat(material.val().replace(",", "."));
-      material.val(numberWithDelimiter(value + item.quantity));
-      sumItemQuantity(material);
-    }
-
-    if ((nestedItemDiv.size() == 0) || (!gotMaterial)) {
-      $("#licitation-process-item").append($("#licitation-process-item-template").mustache(itemBinds)).trigger("nestedForm:afterAdd");
-    }
-
-    fillItem(itemUUID, item);
-  }
-
-  $('form.licitation_process').on('change', '.material', function(event, material) {
-    if (material){
-      $(this).closest('.nested-licitation-process-item').find('.reference-unit').val(material.reference_unit);
+    var objectType = $(this).val();
+    if (objectType) {
+      filterModalities(objectType);
+      enableModalities();
+    } else {
+      disableModalities();
     }
   });
 
-  function calcItemOrder() {
-    $('.nested-licitation-process-item .hidden .destroy[value=false]').each(function (index, item) {
-      $(this).closest('.nested-licitation-process-item').find('.order').val(index + 1);
-    });
+  if ( $(".object-type-select").val() ) {
+    filterModalities( $(".object-type-select").val() );
+  } else {
+    disableModalities();
   }
 
-  function calculateTotalOfItems(administrativeProcessBudgetAllocation) {
-    var itemPrices = administrativeProcessBudgetAllocation.find('.item-price:visible'),
-        totalValue = 0;
-
-    itemPrices.each(function () {
-      totalValue += parsePtBrFloat(this.value);
-    });
-
-    administrativeProcessBudgetAllocation.find('.total-value').val(numberWithDelimiter(totalValue));
-  }
-
-  $('form.licitation_process').on('click', '.remove-licitation-process-item', function () {
-    calcItemOrder();
-    calculateTotalOfItems($(this).closest('.nested-administrative-process-budget-allocation'));
-  });
-
-  $('form.licitation_process').on('nestedForm:afterAdd', function (){
-    calcItemOrder();
-  });
-
-  function sumItemQuantity(obj) {
-    var itemDiv = $(obj).closest('.nested-licitation-process-item'),
-        itemQuantity = new BigNumber(parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0')),
-        itemUnitPrice = new BigNumber(parsePtBrFloat(itemDiv.find('.item-unit-price').val() || '0')),
-        total = numberWithDelimiter(parseFloat(itemQuantity.multiply(itemUnitPrice)));
-
-    itemDiv.find('.item-price').val(total);
-  }
-
-  function sumItemPrice(obj) {
-    var itemDiv = $(obj).closest('.nested-licitation-process-item'),
-        itemQuantity = new BigNumber(parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0')),
-        itemPrice = new BigNumber(parsePtBrFloat(itemDiv.find('.item-price').val() || '0')),
-        unitPrice = numberWithDelimiter(0);
-
-    if (itemQuantity != '0') {
-      unitPrice = itemPrice.divide(itemQuantity);
-      unitPrice = numberWithDelimiter(parseFloat(unitPrice));
-    }
-
-    itemDiv.find('.item-unit-price').val(unitPrice);
-  }
-
-  $('form.licitation_process').on('keyup', '.item-quantity, .item-unit-price', function() {
-    sumItemQuantity(this);
-  });
-
-  $('form.licitation_process').on('keyup', '.item-price', function() {
-    sumItemPrice(this);
-  });
-
-  calcItemOrder();
+  filterJudgmentForm();
 
   <% unless resource.updatable? %>
     $(function(){
