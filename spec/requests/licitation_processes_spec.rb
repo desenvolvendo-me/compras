@@ -266,7 +266,6 @@ feature "LicitationProcesses" do
       expect(page).to have_select 'Unidade do prazo da concessão', :selected => 'ano/anos'
     end
 
- # scenario 'update an existent licitation_process' do
     within_tab 'Principal' do
       fill_in 'Valor da caução', :with => '60,00'
     end
@@ -285,7 +284,7 @@ feature "LicitationProcesses" do
       fill_in 'Término do recebimento dos envelopes', :with => I18n.l(Date.tomorrow)
       fill_in 'Hora do recebimento', :with => '15:00'
 
-      #fill_in 'Abertura das propostas', :with => I18n.l(Date.tomorrow + 1.day)
+      fill_in 'Abertura das propostas', :with => ''
       fill_in 'Hora da abertura', :with => '15:00'
 
       fill_in 'Prazo de entrega', :with => '3'
