@@ -34,6 +34,7 @@ $(function () {
 
     $(this).closest('.nested-record').find('.destroy').val(true);
     $(this).closest('.nested-record').hide();
+    $(this).closest('.nested-record').addClass('removed');
     $(this).closest('table.records').trigger('nestedGrid:afterRemove');
   });
 
