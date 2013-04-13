@@ -1,9 +1,10 @@
 class PriceCollection < Compras::Model
-  attr_accessible :code, :year, :date, :delivery_location_id, :employee_id, :payment_method_id
-  attr_accessible :object_description, :observations, :expiration
-  attr_accessible :period, :period_unit, :proposal_validity, :proposal_validity_unit
-  attr_accessible :price_collection_lots_attributes, :creditor_ids, :type_of_calculation
-  attr_accessible :price_collection_proposals_attributes
+  attr_accessible :code, :year, :date, :delivery_location_id, :employee_id,
+                  :payment_method_id, :object_description, :observations,
+                  :expiration, :period, :period_unit, :proposal_validity,
+                  :proposal_validity_unit, :price_collection_lots_attributes,
+                  :creditor_ids, :type_of_calculation,
+                  :price_collection_proposals_attributes
 
   attr_readonly :year, :code
 
@@ -14,21 +15,22 @@ class PriceCollection < Compras::Model
 
   auto_increment :code, :by => :year
 
-  has_enumeration_for :status, :with => PriceCollectionStatus, :create_helpers => true
   has_enumeration_for :period_unit, :with => PeriodUnit
   has_enumeration_for :proposal_validity_unit, :with => PeriodUnit
+  has_enumeration_for :status, :with => PriceCollectionStatus, :create_helpers => true
   has_enumeration_for :type_of_calculation, :with => PriceCollectionTypeOfCalculation
 
   belongs_to :delivery_location
   belongs_to :employee
   belongs_to :payment_method
 
-  has_one :annul, :class_name => 'PriceCollectionAnnul'
-  has_many :price_collection_lots, :dependent => :destroy, :order => :id
-  has_many :items, :through => :price_collection_lots, :order => :id
-  has_many :price_collection_proposals, :dependent => :destroy, :order => :id
   has_many :creditors, :through => :price_collection_proposals
+  has_many :items, :through => :price_collection_lots, :order => :id
   has_many :price_collection_classifications, :as => :classifiable, :dependent => :destroy
+  has_many :price_collection_lots, :dependent => :destroy, :order => :id
+  has_many :price_collection_proposals, :dependent => :destroy, :order => :id
+
+  has_one  :annul, :class_name => 'PriceCollectionAnnul'
 
   delegate :creditor, :total_price, :to => :winner_proposal, :allow_nil => true, :prefix => true
 
@@ -56,28 +58,28 @@ class PriceCollection < Compras::Model
     "#{code}/#{year}"
   end
 
-  def winner_proposal
-    price_collection_proposals.min_by(&:total_price)
-  end
-
-  def full_period
-    "#{period} #{period_unit_humanize}"
+  def all_price_collection_classifications
+    price_collection_proposals.classifications
   end
 
   def annul!
     update_column :status, PriceCollectionStatus::ANNULLED
   end
 
-  def all_price_collection_classifications
-    price_collection_proposals.classifications
-  end
-
   def destroy_all_price_collection_classifications
     price_collection_proposals.destroy_all_classifications
   end
 
+  def full_period
+    "#{period} #{period_unit_humanize}"
+  end
+
   def price_collection_lots_with_items
     price_collection_lots.select {|l| l unless l.items.empty? }
+  end
+
+  def winner_proposal
+    price_collection_proposals.min_by(&:total_price)
   end
 
   protected
