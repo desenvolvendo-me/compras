@@ -14,3 +14,7 @@ pt-BR:
         kind: "Tipo"
         licitation_process: "Processo de Compra"
         personable_type: "Tipo de pessoa"
+
+  purchase_process_accreditation:
+    messages:
+      must_have_creditors: "Inclua algum credor primeiro"

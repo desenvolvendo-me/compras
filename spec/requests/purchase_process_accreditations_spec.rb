@@ -29,6 +29,8 @@ feature "PurchaseProcessAccreditation" do
 
     click_link 'Credenciamento'
 
+    expect(page).to have_disabled_element "Relatório", :reason => "Inclua algum credor primeiro"
+
     fill_with_autocomplete 'Fornecedor', :with => 'Gabriel'
 
     expect(page).to have_disabled_field 'Tipo de pessoa', :with => 'Pessoa física'
