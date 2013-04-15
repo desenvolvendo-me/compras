@@ -1911,58 +1911,63 @@ feature "LicitationProcesses" do
     within_tab 'Itens / Justificativa' do
       expect(page).to have_field('Fornecedor')
 
-      fill_modal 'Fornecedor', with: 'Gabriel', field: 'Nome'
+      within_records do
+        within 'tbody tr:first' do
+          click_link 'Editar'
+        end
+      end
+
+      fill_with_autocomplete 'Fornecedor', with: 'Gabriel'
+
+      click_button 'Adicionar'
     end
 
     click_button 'Salvar'
 
     expect(page).to have_notice "Processo de Compra 1/2012 editado com sucesso."
 
-    within_tab "Itens" do
-      expect(page).to have_field 'Fornecedor', with: 'Gabriel Sobrinho'
+    within_tab "Itens / Justificativa" do
+      within_records do
+        expect(page).to have_css 'tbody tr', :count => 1
 
-      click_button "Remover Item"
+        within 'tbody tr:first' do
+          expect(page).to have_content 'Gabriel Sobrinho'
 
-      click_button "Adicionar Item"
-    end
-
-    click_button 'Salvar'
-
-    expect(page).to_not have_notice "Processo de Compra 1/2012 editado com sucesso."
-
-    within_tab "Itens" do
-      expect(page).to have_css 'div.nested-licitation-process-item', :count => 1
-
-      click_button "Remover Item"
+          click_link "Remover"
+        end
+      end
     end
 
     click_button 'Salvar'
 
     expect(page).to have_notice 'Processo de Compra 1/2012 editado com sucesso.'
 
-    within_tab "Itens" do
-      expect(page).to_not have_css 'div.nested-licitation-process-item'
-
-      click_button "Adicionar Item"
+    within_tab "Itens / Justificativa" do
+      within_records do
+        expect(page).to_not have_css 'tbody tr'
+      end
 
       fill_in 'Lote', :with => '2234'
 
-      fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
+      fill_with_autocomplete 'Material', :with => 'Antivirus'
 
       fill_in 'Quantidade', :with => '2'
 
       fill_in 'Valor unitário máximo', :with => '50'
-    end
 
-    click_button 'Salvar'
+      click_button 'Adicionar'
 
-    expect(page).to_not have_notice 'Processo de Compra 1/2012 editado com sucesso.'
+      within_records do
+        expect(page).to_not have_css 'tbody tr'
+      end
 
-    within_tab 'Itens / Justificativa' do
-      expect(page).to have_field 'Fornecedor', with: ''
-      expect(page).to have_content 'não pode ficar em branco'
+      fill_with_autocomplete 'Fornecedor', with: 'Gabriel'
 
-      fill_modal 'Fornecedor', with: 'Gabriel', field: 'Nome'
+      click_button 'Adicionar'
+
+      within_records do
+        expect(page).to have_css 'tbody tr', count: 1
+      end
     end
 
     click_button 'Salvar'
@@ -1970,14 +1975,19 @@ feature "LicitationProcesses" do
     expect(page).to have_notice 'Processo de Compra 1/2012 editado com sucesso.'
 
     within_tab "Itens" do
-      expect(page).to have_field 'Lote', :with => '2234'
-      expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
-      expect(page).to have_field 'Unidade', :with => 'UN'
-      expect(page).to have_field 'Quantidade', :with => '2'
-      expect(page).to have_field 'Valor unitário máximo', :with => '0,50'
-      expect(page).to have_field 'Valor total', :with => '1,00'
-      expect(page).to have_field 'Fornecedor', :with => 'Gabriel Sobrinho'
-      expect(page).to have_field 'Item', :with => '1'
+      within_records do
+        expect(page).to have_css 'tbody tr', count: 1
+
+        expect(page).to have_content '2234'
+        expect(page).to have_content '01.01.00001 - Antivirus'
+        expect(page).to have_content 'Gabriel Sobrinho'
+        expect(page).to have_content 'UN'
+        expect(page).to have_content '2'
+        expect(page).to have_content '0,50'
+        expect(page).to have_content '1,00'
+        expect(page).to have_content '2234'
+        expect(page).to have_content '2234'
+      end
     end
   end
 

@@ -38,6 +38,29 @@ $(function () {
     $(this).closest('table.records').trigger('nestedGrid:afterRemove');
   });
 
+  $(document).on('click', '.nested-record .edit-nested-record', function(event) {
+    event.preventDefault();
+
+    editNestedGridRecord( $(this).closest('.nested-record') )
+  });
+
+  function editNestedGridRecord(row) {
+    var nestedFields = row.closest('table.records').siblings('.nested-fields:visible'),
+        name, matches, input;
+
+    row.find(':input').each(function() {
+      matches = $(this).attr('name').match(/\[(\w+)\]$/);
+
+      if (matches) {
+        name = matches[1];
+        input = nestedFields.find(':input[name*="[' + name + ']"]');
+
+        input.val( $(this).val() );
+      }
+    });
+
+    row.remove();
+  }
 
   function nestedRequiredFields(nestedFields) {
     var allowed = true;
@@ -57,7 +80,7 @@ $(function () {
 
   function nestedUniqueFields(nestedFields, recordTableId) {
     var records = $('#' + recordTableId).find('.nested-record:visible'),
-        matches, name, valuei, unique = true;
+        matches, name, value, unique = true;
 
     nestedFields.find('.unique:input').each(function() {
       matches = $(this).attr('name').match(/\[(\w+)\]/);

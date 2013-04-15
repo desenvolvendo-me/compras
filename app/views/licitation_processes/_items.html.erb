@@ -1,5 +1,7 @@
 <div id="items">
   <div class="nested-fields add-margin-bottom">
+    <%= hidden_field_tag :item_id, nil, :name => 'licitation_process_item[id]' %>
+
     <div class="yui3-g">
       <div class="yui3-u-1-8">
         <%= f.input :lot, :as => :fake, :required => true %>
@@ -64,12 +66,14 @@
         <th>Valor unitário</th>
         <th><%= AdministrativeProcessBudgetAllocationItem.human_attribute_name :estimated_total_price %></th>
         <th></th>
+        <th></th>
       </tr>
     </thead>
 
     <tbody>
       <%= f.association :items, :collection => localized(f.object.items) do |p| %>
         <%= render 'administrative_process_budget_allocation_items/licitation_process_list_form',
+            id: p.object.id,
             lot: p.object.lot,
             material: p.object.material,
             material_id: p.object.material_id,
@@ -89,6 +93,7 @@
   <%= mustache "licitation_process_items_template" do %>
     <%= f.association :items_attributes, :collection => f.object.items.build, :index => '{{uuid}}' do |p| %>
       <%= render 'administrative_process_budget_allocation_items/licitation_process_list_form',
+                 id: '{{id}}',
                  lot: '{{lot}}',
                  material: '{{material}}',
                  material_id: '{{material_id}}',

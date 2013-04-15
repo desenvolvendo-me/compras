@@ -8,6 +8,7 @@
  *= require compras/table_size
  *= require compras/error_base
  *= require compras/simple_form
+ *= require compras/nested_grid
  *= require simple_form.auto_complete_input
  *= require bootstrap_prepend
  */

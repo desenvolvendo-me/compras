@@ -28,6 +28,7 @@ $(document).ready(function() {
   function renderItem(item) {
     var itemBinds = {
       uuid: _.uniqueId('fresh-'),
+      id: '',
       lot: '1',
       material_id: item.material_id,
       material: item.material_description,
@@ -39,6 +40,22 @@ $(document).ready(function() {
 
     $('#items-records tbody').append( $('#licitation_process_items_template').mustache(itemBinds) )
                              .trigger("nestedGrid:afterAdd");
+  }
+
+  function showHideCreditor() {
+    var isDirectPurchase = $('#licitation_process_type_of_purchase_direct_purchase').is(':checked');
+
+    if ( isDirectPurchase ) {
+      $('.item-creditor').removeClass('hidden');
+      $('#licitation_process_creditor').requiredField(true);
+      $('#licitation_process_creditor').addClass('required');
+      $('input.creditor-id').attr('disabled', false);
+    } else {
+      $('.item-creditor').addClass('hidden');
+      $('#licitation_process_creditor').requiredField(false);
+      $('#licitation_process_creditor').removeClass('required');
+      $('input.creditor-id').attr('disabled', true);
+    }
   }
 
   $('form.licitation_process').on('keyup', '#licitation_process_unit_price, #licitation_process_quantity', function() {
@@ -83,17 +100,11 @@ $(document).ready(function() {
   });
 
   $("#items_tab_header").on('click', function(){
-    var isDirectPurchase = $('#licitation_process_type_of_purchase_direct_purchase').is(':checked');
+    showHideCreditor();
+  });
 
-    if ( isDirectPurchase ) {
-      $('.item-creditor').removeClass('hidden');
-      $('#licitation_process_creditor').requiredField(true);
-      $('input.creditor-id').attr('disabled', false);
-    } else {
-      $('.item-creditor').addClass('hidden');
-      $('#licitation_process_creditor').requiredField(false);
-      $('input.creditor-id').attr('disabled', true);
-    }
+  $('#items-records').on('nestedGrid:afterAdd', function() {
+    showHideCreditor();
   });
 
   if ( $("#licitation_process_purchase_solicitation_id").val() ) {

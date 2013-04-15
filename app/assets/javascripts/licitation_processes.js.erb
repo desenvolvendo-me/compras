@@ -4,11 +4,15 @@ $(document).ready(function() {
   function organizesModalities() {
     if ($('#licitation_process_type_of_purchase_licitation').is(':checked')){
       $('div.modality').removeClass('hidden');
+      $('div.licitation_process_judgment_form_id').removeClass('hidden');
+      $('#licitation_process_judgment_form_id').requiredField(true);
       $('div.type-of-removal').addClass('hidden');
       $('label[for="licitation_process_modality_number"]').html('Nº da modalidade');
       $('a[href="#tab-items"]').html("Itens");
     } else {
       $('div.modality').addClass('hidden');
+      $('div.licitation_process_judgment_form_id').addClass('hidden');
+      $('#licitation_process_judgment_form_id').requiredField(false);
       $('div.type-of-removal').removeClass('hidden');
       $('label[for="licitation_process_modality_number"]').html('Nº do afastamento');
       $('a[href="#tab-items"]').html("Itens / Justificativa");
