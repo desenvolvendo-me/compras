@@ -1,0 +1,32 @@
+<tr class="nested-record record">
+  <% column_names.each do |column_name| %>
+    <td class="<%= column_name %>">
+      <%= "{{#{column_name}}}" %>
+    </td>
+  <% end %>
+
+  <td>
+    <%= link_to 'Editar', '#', class: 'edit-nested-record', 'data-disabled' => data_disabled %>
+  </td>
+
+  <td>
+    <%= link_to 'Remover', '#', class: 'remove-nested-record', 'data-disabled' => data_disabled %>
+
+    <%= f.input :id, as: :hidden, input_html: { value: '{{id}}' } %>
+    <%= f.input :_destroy, as: :hidden, input_html: { class: 'destroy' } %>
+
+    <% column_names.each do |column_name| %>
+      <% unless exclude_data.include?(column_name) %>
+        <% if f.object.class.reflect_on_association(column_name) %>
+          <%= f.input "#{column_name}_id", as: :hidden, input_html: { value: "{{#{column_name}_id}}" } %>
+        <% end %>
+
+        <%= f.input column_name, as: :hidden, input_html: { value: "{{#{column_name}}}" } %>
+      <% end %>
+    <% end %>
+
+    <% extra_data.each do |data| %>
+      <%= f.input data, as: :hidden, input_html: { value: "{{#{column_name}}}" } %>
+    <% end %>
+  </td>
+</tr>

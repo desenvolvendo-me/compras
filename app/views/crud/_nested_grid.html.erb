@@ -1,0 +1,49 @@
+<div class="nested-grid">
+  <div class="nested-fields">
+    <%= hidden_field_tag :id, nil, name: "#{f.sanitized_object_name}_nested_grid_[id]" %>
+
+    <%= render "#{template_folder}/nested_fields", f: f %>
+
+    <%= button_tag 'Adicionar',
+      class: 'button nested-add-record field-without-label add-margin-bottom',
+      'data-template' => "#{template_folder}_template",
+      'data-records' => "#{template_folder}_records",
+      'data-disabled' => data_disabled %>
+  </div>
+
+  <table id="<%= "#{template_folder}_records" %>" class="records">
+    <thead>
+      <tr>
+        <% column_names.each do |column_name| %>
+          <th><%= association_class.human_attribute_name column_name %></th>
+        <% end %>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= f.association association, collection: localized(f.object.send(association)) do |a| %>
+        <%= render "nested_grid_row",
+                   template_folder: template_folder,
+                   column_names: column_names,
+                   extra_data: extra_data,
+                   exclude_data: exclude_data,
+                   data_disabled: data_disabled,
+                   f: a %>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= mustache "#{template_folder}_template" do %>
+    <%= f.association "#{association}_attributes".to_sym, collection: f.object.send(association).build.localized, :index => '{{uuid}}' do |a| %>
+      <%= render "nested_grid_row_mustache",
+                 template_folder: template_folder,
+                 column_names: column_names,
+                 extra_data: extra_data,
+                 exclude_data: exclude_data,
+                 data_disabled: nil,
+                 f: a %>
+    <% end %>
+  <% end %>
+</div>
