@@ -12,6 +12,7 @@ describe PriceCollectionLotItem do
 
   it { should validate_presence_of :material }
   it { should validate_presence_of :quantity }
+  it { should validate_presence_of :lot }
   it { should validate_numericality_of :quantity }
 
   it 'should not have quantity less than 1' do

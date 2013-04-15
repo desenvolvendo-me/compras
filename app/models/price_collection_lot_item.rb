@@ -1,5 +1,5 @@
 class PriceCollectionLotItem < Compras::Model
-  attr_accessible :price_collection_lot_id, :material_id, :brand, :quantity
+  attr_accessible :price_collection_lot_id, :material_id, :brand, :quantity, :lot
 
   belongs_to :price_collection_lot
   belongs_to :material
@@ -13,7 +13,7 @@ class PriceCollectionLotItem < Compras::Model
 
   after_initialize :set_default_values
 
-  validates :material, :quantity, :presence => true
+  validates :lot, :material, :quantity, :presence => true
   validates :quantity, :numericality => { :greater_than_or_equal_to => 1 }
 
   def unit_price_by_proposal(proposal)

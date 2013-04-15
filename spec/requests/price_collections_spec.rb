@@ -45,6 +45,8 @@ feature "PriceCollections" do
       fill_in 'Observações', :with => 'lote 1'
 
       click_button 'Adicionar Item'
+
+      fill_in 'Lote', :with => '3110122013'
       fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
 
       # testing fill reference unit with javascript
@@ -110,6 +112,8 @@ feature "PriceCollections" do
       fill_in 'Observações', :with => 'lote 1'
 
       click_button 'Adicionar Item'
+
+      fill_in 'Lote', :with => '31011020'
       fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
 
       # testing fill reference unit with javascript
@@ -160,6 +164,7 @@ feature "PriceCollections" do
 
     within_tab 'Lotes de itens' do
       expect(page).to have_field 'Observações', :with => 'lote 1'
+      expect(page).to have_field 'Lote', :with => '31011020'
       expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
       expect(page).to have_disabled_field 'Unidade'
       expect(page).to have_field 'Unidade', :with => 'UN'
@@ -221,6 +226,8 @@ feature "PriceCollections" do
         fill_in 'Observações', :with => 'lote 2'
 
         click_button 'Adicionar Item'
+
+        fill_in 'Lote', :with => '311012501'
         fill_modal 'Material', :with => 'Arame farpado', :field => 'Descrição'
         fill_in 'Marca', :with => 'Aço inox'
         fill_in 'Quantidade', :with => '100'
@@ -271,6 +278,7 @@ feature "PriceCollections" do
 
     within_tab 'Lotes de itens' do
       expect(page).to have_field 'Observações', :with => 'lote 2'
+      expect(page).to have_field 'Lote', :with => '311012501'
       expect(page).to have_field 'Material', :with => '02.02.00001 - Arame farpado'
       expect(page).to have_disabled_field 'Unidade'
       expect(page).to have_field 'Unidade', :with => 'UN'
@@ -379,6 +387,7 @@ feature "PriceCollections" do
 
       click_button 'Adicionar Item'
 
+      fill_in 'Lote', :with => '10256987'
       fill_modal 'Material', :with => 'Arame farpado', :field => 'Descrição'
       fill_in 'Marca', :with => 'Aço inox'
       fill_in 'Quantidade', :with => '100'
@@ -395,6 +404,7 @@ feature "PriceCollections" do
     end
 
     within_tab 'Lotes de itens' do
+      expect(page).to have_field 'Lote', :with => '10256987'
       expect(page).to have_field 'Material', :with => '02.02.00001 - Arame farpado'
       expect(page).to have_field 'Marca', :with => 'Aço inox'
       expect(page).to have_field 'Quantidade', :with => '100'
