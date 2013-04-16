@@ -26,7 +26,7 @@
     <% end %>
 
     <% extra_data.each do |data| %>
-      <%= f.input data, as: :hidden, input_html: { value: "{{#{column_name}}}" } %>
+      <%= f.input data, as: :hidden, input_html: { value: "{{#{data}}}" } %>
     <% end %>
   </td>
 </tr>
