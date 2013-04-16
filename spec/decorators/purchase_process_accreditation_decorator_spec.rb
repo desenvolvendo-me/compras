@@ -41,4 +41,14 @@ describe PurchaseProcessAccreditationDecorator do
       end
     end
   end
+
+  describe '#company_sizes' do
+    let(:company_size_repository) { double(:company_size_class) }
+
+    it 'should return all company sizes' do
+      company_size_repository.should_receive(:all)
+
+      subject.company_sizes(company_size_repository)
+    end
+  end
 end
