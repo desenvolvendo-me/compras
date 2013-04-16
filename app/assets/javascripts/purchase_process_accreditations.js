@@ -2,17 +2,15 @@ $(document).ready(function() {
   $("#company_size").requiredField(true);
 
   $("#purchase_process_accreditation_creditor_id").on('change', function(event, creditor){
+    if (!creditor) {
+      creditor = {}
+    }
+
     $('#creditor_representative').val('');
     $('#creditor_representative').empty();
-
-    if (creditor) {
-      $('#purchase_process_accreditation_personable_type').val(creditor.personable_type);
-      $('#company_size').val(creditor.company_size_id);
-      fillCreditorRepresentative(creditor.representatives);
-    } else {
-      $('#purchase_process_accreditation_personable_type').val('');
-      $('#company_size').val('');
-    }
+    $('#purchase_process_accreditation_personable_type').val(creditor.personable_type);
+    $('#company_size').val(creditor.company_size_id);
+    fillCreditorRepresentative(creditor.representatives);
 
     kindRequired(false);
   });
