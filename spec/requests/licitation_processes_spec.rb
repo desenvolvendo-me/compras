@@ -26,6 +26,7 @@ feature "LicitationProcesses" do
     BudgetAllocation.make!(:alocacao)
     BudgetAllocation.make!(:reparo_2011, expense_nature: ExpenseNature.make!(:aplicacoes_diretas))
     Material.make!(:antivirus)
+    Material.make!(:arame_farpado)
     Indexer.make!(:xpto)
     ExpenseNature.make!(:aposentadorias_rpps, :year => Date.current.year)
     ExpenseNature.make!(:compra_de_material, :year => Date.current.year, parent: ExpenseNature.make!(:aplicacoes_diretas))
@@ -45,10 +46,11 @@ feature "LicitationProcesses" do
 
     within_tab 'Principal' do
       expect(page).to have_disabled_field 'Processo'
-      expect(page).to have_disabled_field 'Modalidade'
       expect(page).to have_disabled_field 'Nº do afastamento'
 
       choose 'Processo licitatório'
+
+      expect(page).to have_disabled_field 'Modalidade'
 
       select 'Compras e serviços', :from => 'Tipo de objeto'
       select 'Concorrência', :from => 'Modalidade'
@@ -82,11 +84,9 @@ feature "LicitationProcesses" do
     end
 
     within_tab "Itens" do
-      click_button 'Adicionar Item'
-
       fill_in 'Lote', :with => '2234'
 
-      fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
+      fill_with_autocomplete 'Material', :with => 'Antivirus'
 
       # getting data from modal
       expect(page).to have_field 'Unidade', :with => 'UN'
@@ -97,9 +97,22 @@ feature "LicitationProcesses" do
 
       # asserting calculated total price of the item
       expect(page).to have_field 'Valor total', :with => '20,00'
+
+      click_button 'Adicionar'
+
+      within_records do
+        expect(page).to have_content '2234'
+        expect(page).to have_content '01.01.00001 - Antivirus'
+        expect(page).to have_content 'UN'
+        expect(page).to have_content '2'
+        expect(page).to have_content '10,00'
+        expect(page).to have_content '20,00'
+      end
     end
 
     within_tab 'Orçamento' do
+      expect(page).to have_disabled_field 'Valor total dos itens', :with => '20,00'
+
       fill_with_autocomplete 'Dotação orçamentária', :with => 'Aposentadorias'
 
       expect(page).to have_field 'Natureza da despesa', :with => '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
@@ -251,14 +264,14 @@ feature "LicitationProcesses" do
     end
 
     within_tab "Itens" do
-      expect(page).to have_field 'Lote', :with => '2234'
-      expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
-      expect(page).to have_field 'Unidade', :with => 'UN'
-      expect(page).to have_field 'Quantidade', :with => '2'
-      expect(page).to have_field 'Valor unitário máximo', :with => '10,00'
-      expect(page).to have_field 'Valor total', :with => '20,00'
-      expect(page).to have_field 'Item', :with => '1'
-      expect(page).to have_field 'Informações complementares', :with => 'Produto antivirus avast'
+      within_records do
+        expect(page).to have_content '2234'
+        expect(page).to have_content '01.01.00001 - Antivirus'
+        expect(page).to have_content 'UN'
+        expect(page).to have_content '2'
+        expect(page).to have_content '10,00'
+        expect(page).to have_content '20,00'
+      end
     end
 
     within_tab 'Receita' do
@@ -298,16 +311,45 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Itens' do
+      fill_in 'Lote', :with => '2236'
+
+      fill_with_autocomplete 'Material', :with => 'Arame'
+
+      # getting data from modal
+      expect(page).to have_field 'Unidade', :with => 'UN'
+
       fill_in 'Quantidade', :with => '4'
-      fill_in 'Valor total', :with => '16,00'
+      fill_in 'Valor unitário máximo', :with => '16,00'
       fill_in 'Informações complementares', :with => 'Produto rolos de arame farpado'
 
-      # asserting calculated unit price of the item
-      expect(page).to have_field 'Valor unitário máximo', :with => '4,00'
+      # asserting calculated total price of the item
+      expect(page).to have_field 'Valor total', :with => '64,00'
+
+      click_button 'Adicionar'
+
+      within_records do
+        within '.record:first' do
+          expect(page).to have_content '2234'
+          expect(page).to have_content '01.01.00001 - Antivirus'
+          expect(page).to have_content 'UN'
+          expect(page).to have_content '2'
+          expect(page).to have_content '10,00'
+          expect(page).to have_content '20,00'
+        end
+
+        within '.record:last' do
+          expect(page).to have_content '2236'
+          expect(page).to have_content '02.02.00001 - Arame farpado'
+          expect(page).to have_content 'UN'
+          expect(page).to have_content '4'
+          expect(page).to have_content '16,00'
+          expect(page).to have_content '64,00'
+        end
+      end
     end
 
     within_tab "Orçamento" do
-      expect(page).to have_disabled_field 'Valor total dos itens', :with => '16,00'
+      expect(page).to have_disabled_field 'Valor total dos itens', :with => '84,00'
       expect(page).to have_disabled_field 'Valor total das dotações', :with => '270,00'
 
       within_records do
@@ -364,18 +406,29 @@ feature "LicitationProcesses" do
     end
 
     within_tab "Itens" do
-      expect(page).to have_field 'Lote', :with => '2234'
-      expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
-      expect(page).to have_field 'Unidade', :with => 'UN'
-      expect(page).to have_field 'Quantidade', :with => '4'
-      expect(page).to have_field 'Valor unitário máximo', :with => '4,00'
-      expect(page).to have_field 'Valor total', :with => '16,00'
-      expect(page).to have_field 'Item', :with => '1'
-      expect(page).to have_field 'Informações complementares', :with => 'Produto rolos de arame farpado'
+      within_records do
+        within '.record:first' do
+          expect(page).to have_content '2234'
+          expect(page).to have_content '01.01.00001 - Antivirus'
+          expect(page).to have_content 'UN'
+          expect(page).to have_content '2'
+          expect(page).to have_content '10,00'
+          expect(page).to have_content '20,00'
+        end
+
+        within '.record:last' do
+          expect(page).to have_content '2236'
+          expect(page).to have_content '02.02.00001 - Arame farpado'
+          expect(page).to have_content 'UN'
+          expect(page).to have_content '4'
+          expect(page).to have_content '16,00'
+          expect(page).to have_content '64,00'
+        end
+      end
     end
 
     within_tab 'Orçamento' do
-      expect(page).to have_disabled_field 'Valor total dos itens', :with => '16,00'
+      expect(page).to have_disabled_field 'Valor total dos itens', :with => '84,00'
       expect(page).to have_disabled_field 'Valor total das dotações', :with => '270,00'
 
       within_records do
@@ -491,20 +544,16 @@ feature "LicitationProcesses" do
     click_link 'Criar Processo de Compra'
 
     within_tab 'Itens' do
-      click_button 'Adicionar Item'
-
       fill_in 'Quantidade', :with => '5'
       fill_in 'Valor unitário máximo', :with => '10,00'
 
       expect(page).to have_field 'Valor total', :with => '50,00'
 
-      click_button 'Adicionar Item'
+      fill_in 'Valor unitário máximo', :with => ''
 
-      within '.nested-licitation-process-item:first' do
-        fill_in 'Quantidade', :with => '4'
-        fill_in 'Valor unitário máximo', :with => '20,00'
-        expect(page).to have_field 'Valor total', :with => '80,00'
-      end
+      fill_in 'Valor total', :with => '50,00'
+
+      expect(page).to have_field 'Valor unitário máximo', :with => '10,00'
     end
   end
 
@@ -581,12 +630,14 @@ feature "LicitationProcesses" do
 
     expect(page).to have_disabled_element 'Salvar', :reason => 'a última publicação é do tipo (Cancelamento). Não pode ser alterado'
 
-    click_link 'Documentos'
-    expect(page).to have_disabled_element 'Remover', :reason => 'a última publicação é do tipo (Cancelamento). Não pode ser alterado'
+    within_tab 'Documentos' do
+      expect(page).to have_disabled_element 'Remover', :reason => 'a última publicação é do tipo (Cancelamento). Não pode ser alterado'
+    end
 
-    click_link 'Itens'
-    expect(page).to have_disabled_element 'Adicionar Item', :reason => 'a última publicação é do tipo (Cancelamento). Não pode ser alterado'
-    expect(page).to have_disabled_element 'Remover Item', :reason => 'a última publicação é do tipo (Cancelamento). Não pode ser alterado'
+    within_tab 'Itens' do
+      expect(page).to have_disabled_element 'Adicionar', :reason => 'a última publicação é do tipo (Cancelamento). Não pode ser alterado'
+      expect(page).to have_disabled_element 'Remover', :reason => 'a última publicação é do tipo (Cancelamento). Não pode ser alterado'
+    end
   end
 
   scenario "should not have link to lots when creating a new licitation process" do
@@ -609,8 +660,9 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Itens' do
-      click_button 'Remover Item'
-      click_button 'Adicionar Item'
+      within_records do
+        click_link 'Remover'
+      end
 
       fill_in 'Valor total', :with => '20,00'
 
@@ -704,30 +756,6 @@ feature "LicitationProcesses" do
     click_button 'Apurar'
 
     expect(page).to have_content 'Ganhou'
-  end
-
-  scenario 'budget allocation items should have a sequential item' do
-    navigate 'Processos de Compra > Processos de Compras'
-
-    click_link 'Criar Processo de Compra'
-
-    within_tab 'Itens' do
-      click_button 'Adicionar Item'
-
-      within '.nested-licitation-process-item:last' do
-        expect(page).to have_field 'Item', :with => '1'
-      end
-
-      click_button 'Adicionar Item'
-
-      within '.nested-licitation-process-item:first' do
-        expect(page).to have_field 'Item', :with => '1'
-      end
-
-      within '.nested-licitation-process-item:last' do
-        expect(page).to have_field 'Item', :with => '2'
-      end
-    end
   end
 
   scenario 'allowance of adding bidders and publication of the edital' do
@@ -1428,6 +1456,8 @@ feature "LicitationProcesses" do
     click_link 'Criar Processo de Compra'
 
     within_tab 'Principal' do
+      choose 'Processo licitatório'
+
       select 'Compras e serviços', :from => 'Tipo de objeto'
 
       select '', :from => 'Tipo de objeto'
@@ -1443,30 +1473,34 @@ feature "LicitationProcesses" do
 
     click_link 'Criar Processo de Compra'
 
-    select 'Compras e serviços', :on => "Tipo de objeto"
+    within_tab 'Principal' do
+      choose 'Processo licitatório'
 
-    expect(page).to have_select('Modalidade',
-                                :options => ['Concorrência', 'Tomada de Preço', 'Convite', 'Pregão'])
+      select 'Compras e serviços', :on => "Tipo de objeto"
 
-    select 'Alienação de bens', :on => "Tipo de objeto"
+      expect(page).to have_select('Modalidade',
+                                  :options => ['Concorrência', 'Tomada de Preço', 'Convite', 'Pregão'])
 
-    expect(page).to have_select('Modalidade',
-                                :options => ['Leilão'])
+      select 'Alienação de bens', :on => "Tipo de objeto"
 
-    select 'Concessões e permissões', :on => "Tipo de objeto"
+      expect(page).to have_select('Modalidade',
+                                  :options => ['Leilão'])
 
-    expect(page).to have_select('Modalidade',
-                                :options => ['Concorrência'])
+      select 'Concessões e permissões', :on => "Tipo de objeto"
 
-    select 'Edital de chamamento/credenciamento', :on => "Tipo de objeto"
+      expect(page).to have_select('Modalidade',
+                                  :options => ['Concorrência'])
 
-    expect(page).to have_select('Modalidade',
-                                :options => ['Concurso'])
+      select 'Edital de chamamento/credenciamento', :on => "Tipo de objeto"
 
-    select 'Obras e serviços de engenharia', :on => "Tipo de objeto"
+      expect(page).to have_select('Modalidade',
+                                  :options => ['Concurso'])
 
-    expect(page).to have_select('Modalidade',
-                                :options => ['Concorrência', 'Tomada de Preço', 'Convite', 'Concurso', 'Pregão'])
+      select 'Obras e serviços de engenharia', :on => "Tipo de objeto"
+
+      expect(page).to have_select('Modalidade',
+                                  :options => ['Concorrência', 'Tomada de Preço', 'Convite', 'Concurso', 'Pregão'])
+    end
   end
 
   scenario 'budget allocations should be fulfilled automatically when fulfill purchase_solicitation' do
@@ -1565,18 +1599,18 @@ feature "LicitationProcesses" do
     end
 
     within_tab "Itens" do
-      fill_in 'Lote', :with => '2234'
+      within_records do
+        expect(page).to have_css('.nested-record', :count => 1)
 
-      expect(page).to have_field 'Item', :with => '1'
-
-      expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
-
-      expect(page).to have_field 'Unidade', :with => 'UN'
-      expect(page).to have_disabled_field 'Unidade'
-
-      expect(page).to have_field 'Quantidade', :with => '3,00'
-
-      expect(page).to have_field 'Valor unitário máximo', :with => '200,00'
+        within 'tbody tr:first' do
+          expect(page).to have_content '1'
+          expect(page).to have_content '01.01.00001 - Antivirus'
+          expect(page).to have_content 'UN'
+          expect(page).to have_content '3'
+          expect(page).to have_content '200,00'
+          expect(page).to have_content '600,00'
+        end
+      end
     end
 
     click_button 'Salvar'
@@ -1619,20 +1653,18 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Itens' do
-      expect(page).to have_field 'Lote', :with => '2234'
-      expect(page).to have_field 'Item', :with => '1'
-      expect(page).to have_disabled_field 'Item'
+      within_records do
+        expect(page).to have_css('.nested-record', :count => 1)
 
-      expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
-
-      expect(page).to have_field 'Unidade', :with => 'UN'
-      expect(page).to have_disabled_field 'Unidade'
-
-      expect(page).to have_field 'Quantidade', :with => '3'
-
-      expect(page).to have_field 'Valor unitário máximo', :with => '200,00'
-
-      expect(page).to have_field 'Valor total', :with => '600,00'
+        within 'tbody tr:first' do
+          expect(page).to have_content '1'
+          expect(page).to have_content '01.01.00001 - Antivirus'
+          expect(page).to have_content 'UN'
+          expect(page).to have_content '3'
+          expect(page).to have_content '200,00'
+          expect(page).to have_content '600,00'
+        end
+      end
     end
 
     navigate 'Processos de Compra > Solicitações de Compra'
@@ -1694,24 +1726,22 @@ feature "LicitationProcesses" do
   end
 
   scenario 'assert javascript over type of purchase' do
-    pending 'this test is not working, but in browser is all ok' do
-      navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Processos de Compra > Processos de Compras'
 
-      click_link 'Criar Processo de Compra'
+    click_link 'Criar Processo de Compra'
 
-      within_tab 'Principal' do
-        choose 'Processo licitatório'
-        select 'Compras e serviços', :from => 'Tipo de objeto'
-        select 'Pregão', :from => 'Modalidade'
+    within_tab 'Principal' do
+      choose 'Processo licitatório'
+      select 'Compras e serviços', :from => 'Tipo de objeto'
+      select 'Pregão', :from => 'Modalidade'
 
-        expect(page).to have_field 'Registro de preço'
-        expect(page).to have_field 'Pregão eletrônico'
+      expect(page).to have_field 'Registro de preço'
+      expect(page).to have_field 'Pregão eletrônico'
 
-        choose 'Compra direta'
+      choose 'Compra direta'
 
-        expect(page).to_not have_field 'Registro de preço'
-        expect(page).to_not have_field 'Pregão eletrônico'
-      end
+      expect(page).to_not have_field 'Registro de preço'
+      expect(page).to_not have_field 'Pregão eletrônico'
     end
   end
 
@@ -1860,14 +1890,12 @@ feature "LicitationProcesses" do
     end
 
     within_tab "Itens" do
-      fill_in 'Lote', :with => '2234'
-
-      expect(page).to have_field 'Item', :with => '1'
-      expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
-      expect(page).to have_field 'Unidade', :with => 'UN'
-      expect(page).to have_disabled_field 'Unidade'
-      expect(page).to have_field 'Quantidade', :with => '3,00'
-      expect(page).to have_field 'Valor unitário máximo', :with => '200,00'
+      within_records do
+        expect(page).to have_content '01.01.00001 - Antivirus'
+        expect(page).to have_content 'UN'
+        expect(page).to have_content '3,00'
+        expect(page).to have_content '200,00'
+      end
     end
 
     click_button 'Salvar'
@@ -1883,58 +1911,63 @@ feature "LicitationProcesses" do
     within_tab 'Itens / Justificativa' do
       expect(page).to have_field('Fornecedor')
 
-      fill_modal 'Fornecedor', with: 'Gabriel', field: 'Nome'
+      within_records do
+        within 'tbody tr:first' do
+          click_link 'Editar'
+        end
+      end
+
+      fill_with_autocomplete 'Fornecedor', with: 'Gabriel'
+
+      click_button 'Adicionar'
     end
 
     click_button 'Salvar'
 
     expect(page).to have_notice "Processo de Compra 1/2012 editado com sucesso."
 
-    within_tab "Itens" do
-      expect(page).to have_field 'Fornecedor', with: 'Gabriel Sobrinho'
+    within_tab "Itens / Justificativa" do
+      within_records do
+        expect(page).to have_css 'tbody tr', :count => 1
 
-      click_button "Remover Item"
+        within 'tbody tr:first' do
+          expect(page).to have_content 'Gabriel Sobrinho'
 
-      click_button "Adicionar Item"
-    end
-
-    click_button 'Salvar'
-
-    expect(page).to_not have_notice "Processo de Compra 1/2012 editado com sucesso."
-
-    within_tab "Itens" do
-      expect(page).to have_css 'div.nested-licitation-process-item', :count => 1
-
-      click_button "Remover Item"
+          click_link "Remover"
+        end
+      end
     end
 
     click_button 'Salvar'
 
     expect(page).to have_notice 'Processo de Compra 1/2012 editado com sucesso.'
 
-    within_tab "Itens" do
-      expect(page).to_not have_css 'div.nested-licitation-process-item'
-
-      click_button "Adicionar Item"
+    within_tab "Itens / Justificativa" do
+      within_records do
+        expect(page).to_not have_css 'tbody tr'
+      end
 
       fill_in 'Lote', :with => '2234'
 
-      fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
+      fill_with_autocomplete 'Material', :with => 'Antivirus'
 
       fill_in 'Quantidade', :with => '2'
 
       fill_in 'Valor unitário máximo', :with => '50'
-    end
 
-    click_button 'Salvar'
+      click_button 'Adicionar'
 
-    expect(page).to_not have_notice 'Processo de Compra 1/2012 editado com sucesso.'
+      within_records do
+        expect(page).to_not have_css 'tbody tr'
+      end
 
-    within_tab 'Itens / Justificativa' do
-      expect(page).to have_field 'Fornecedor', with: ''
-      expect(page).to have_content 'não pode ficar em branco'
+      fill_with_autocomplete 'Fornecedor', with: 'Gabriel'
 
-      fill_modal 'Fornecedor', with: 'Gabriel', field: 'Nome'
+      click_button 'Adicionar'
+
+      within_records do
+        expect(page).to have_css 'tbody tr', count: 1
+      end
     end
 
     click_button 'Salvar'
@@ -1942,14 +1975,19 @@ feature "LicitationProcesses" do
     expect(page).to have_notice 'Processo de Compra 1/2012 editado com sucesso.'
 
     within_tab "Itens" do
-      expect(page).to have_field 'Lote', :with => '2234'
-      expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
-      expect(page).to have_field 'Unidade', :with => 'UN'
-      expect(page).to have_field 'Quantidade', :with => '2'
-      expect(page).to have_field 'Valor unitário máximo', :with => '0,50'
-      expect(page).to have_field 'Valor total', :with => '1,00'
-      expect(page).to have_field 'Fornecedor', :with => 'Gabriel Sobrinho'
-      expect(page).to have_field 'Item', :with => '1'
+      within_records do
+        expect(page).to have_css 'tbody tr', count: 1
+
+        expect(page).to have_content '2234'
+        expect(page).to have_content '01.01.00001 - Antivirus'
+        expect(page).to have_content 'Gabriel Sobrinho'
+        expect(page).to have_content 'UN'
+        expect(page).to have_content '2'
+        expect(page).to have_content '0,50'
+        expect(page).to have_content '1,00'
+        expect(page).to have_content '2234'
+        expect(page).to have_content '2234'
+      end
     end
   end
 
@@ -1981,9 +2019,12 @@ feature "LicitationProcesses" do
     end
 
     within_tab "Itens / Justificativa" do
-      expect(page).to have_field 'Quantidade', :with => '10,00'
-
-      expect(page).to have_field 'Valor total', :with => '2.000,00'
+      within_records do
+        within 'tbody tr:last' do
+          expect(page).to have_content '10,00'
+          expect(page).to have_content '2.000,00'
+        end
+      end
     end
 
     within_tab "Solicitantes" do
@@ -2003,10 +2044,12 @@ feature "LicitationProcesses" do
     end
 
     within_tab "Itens / Justificativa" do
-      expect(page).to have_field 'Quantidade', :with => '109,00'
-
-      expect(page).to have_field 'Valor total', :with => '21.800,00'
+      within_records do
+        within 'tbody tr:last' do
+          expect(page).to have_content '109,00'
+          expect(page).to have_content '21.800,00'
+        end
+      end
     end
   end
-
 end

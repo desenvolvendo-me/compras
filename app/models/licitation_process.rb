@@ -81,10 +81,9 @@ class LicitationProcess < Compras::Model
   validates :process_date, :period, :contract_guarantees, :type_of_purchase,
             :period_unit, :expiration, :expiration_unit, :payment_method,
             :envelope_delivery_time, :year, :envelope_delivery_date,
-            :execution_type, :object_type,
-            :judgment_form_id, :description, :notice_availability_date,
+            :execution_type, :object_type, :description, :notice_availability_date,
             :presence => true
-  validates :modality, :presence => true, :if => :licitation?
+  validates :modality, :judgment_form_id, :presence => true, :if => :licitation?
   validates :goal, :licensor_rights_and_liabilities, :licensee_rights_and_liabilities,
             :presence => true, :if => :concessions_and_permits?
   validates :type_of_removal, :presence => true, :if => :direct_purchase?
@@ -254,7 +253,7 @@ class LicitationProcess < Compras::Model
   def validate_proposal_envelope_opening_date
     return unless proposal_envelope_opening_date
 
-    if proposal_envelope_opening_date && !last_publication_date
+    unless last_publication_date
       errors.add :proposal_envelope_opening_date, :absence
       return false
     end

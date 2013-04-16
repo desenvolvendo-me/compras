@@ -3,7 +3,7 @@ $(document).ready(function() {
     var total = new BigNumber(0),
         value;
 
-    $('.nested-record:visible').find('.item-total-value').each(function() {
+    $('.nested-record:visible').find('.input.purchase_solicitation_items_estimated_total_price :input').each(function() {
       value = $(this).attr('value');
 
       if (value) {
@@ -113,11 +113,11 @@ $(document).ready(function() {
     setBudgetAllocationSource();
   });
 
-  $('#item-records').on('nestedGrid:AfterAdd', function() {
+  $('#purchase_solicitation_items_records').on('nestedGrid:AfterAdd', function() {
     refreshItemsTotalValue( calculateItemsTotalValue() );
   });
 
-  $('#items-records').on('nestedGrid:afterRemove', function() {
+  $('#purchase_solicitation_items_records').on('nestedGrid:afterRemove', function() {
     refreshItemsTotalValue( calculateItemsTotalValue() );
   });
 

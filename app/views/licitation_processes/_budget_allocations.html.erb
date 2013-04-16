@@ -59,7 +59,7 @@
 
   <tbody>
     <%= f.association :administrative_process_budget_allocations, :collection => localized(f.object.administrative_process_budget_allocations) do |p| %>
-      <%= render 'administrative_process_budget_allocations/form',
+      <%= render 'administrative_process_budget_allocations/list_form',
           :budget_allocation => p.object.budget_allocation.to_s,
           :budget_allocation_id => p.object.budget_allocation_id,
           :budget_allocation_expense_nature => p.object.budget_allocation_expense_nature.to_s,
@@ -77,7 +77,7 @@
 <%= mustache 'administrative_process_budget_allocations_template' do %>
   <%= f.association :administrative_process_budget_allocations_attributes, :index => '{{uuid}}',
       :collection => f.object.administrative_process_budget_allocations.build do |p| %>
-    <%= render 'administrative_process_budget_allocations/form',
+    <%= render 'administrative_process_budget_allocations/list_form',
         :budget_allocation => '{{budget_allocation}}',
         :budget_allocation_id => '{{budget_allocation_id}}',
         :budget_allocation_expense_nature => '{{budget_allocation_expense_nature}}',

@@ -3,12 +3,12 @@
   <td><%= budget_allocation_expense_nature %></td>
   <td><%= expense_nature %></td>
   <td><%= budget_allocation_amount %></td>
-  <td class='administrative_process_budget_allocation_value'><%= value %></td>
+  <td><%= value %></td>
 
   <td>
     <%= f.input :budget_allocation_id, :as => :hidden, :input_html => { :value => budget_allocation_id, :class => 'budget_allocation_id' } %>
     <%= f.input :expense_nature_id, :as => :hidden, :input_html => { :value => expense_nature_id } %>
-    <%= f.input :value, :as => :hidden, :input_html => { :value => value } %>
+    <%= f.input :value, :as => :hidden, :input_html => { :value => value, :class => 'administrative_process_budget_allocation_value' } %>
     <%= f.input :id, :as => 'hidden' %>
     <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
 

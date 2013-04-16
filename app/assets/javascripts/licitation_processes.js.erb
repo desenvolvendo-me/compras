@@ -1,95 +1,57 @@
-jQuery(document).ready(function($) {
+//= require_tree ./licitation_processes
 
-  // functions
-  function buildBudgetAllocationGridRowData(budgetAllocation) {
-    var budgetAllocationBinds = [];
-
-    budgetAllocationBinds["uuid"] = _.uniqueId('fresh-');
-    budgetAllocationBinds["budget_allocation"] = budgetAllocation.budget_allocation;
-    budgetAllocationBinds["budget_allocation_id"] = budgetAllocation.budget_allocation_id;
-    budgetAllocationBinds["budget_allocation_expense_nature"] = budgetAllocation.budget_allocation_expense_nature;
-    budgetAllocationBinds["expense_nature"] = budgetAllocation.expense_nature;
-    budgetAllocationBinds["expense_nature_id"] = budgetAllocation.expense_nature_id;
-    budgetAllocationBinds["budget_allocation_amount"] = numberWithDelimiter(budgetAllocation.amount);
-    budgetAllocationBinds["administrative_process_budget_allocation_value"] = numberWithDelimiter(budgetAllocation.estimated_value);
-
-    return budgetAllocationBinds;
-  }
-
-  function renderBudgetAllocation(budgetAllocation) {
-    var gotBudgetAllocation = false,
-        nestedBudgetAllocationGridId = "#administrative-process-budget-allocation-records",
-        nestedBudgetAllocationGridRows = $("#administrative-process-budget-allocation-records tr.record").not('[style*="display: none"]'),
-        nestedBudgetAllocationGridTemplate = $("#administrative_process_budget_allocations_template"),
-        budgetAllocationData = buildBudgetAllocationGridRowData(budgetAllocation);
-
-    nestedBudgetAllocationGridRows.each(function(index, obj) {
-      var budgetRow = $(obj).find("input.budget_allocation_id");
-
-      if (budgetRow.val() == budgetAllocation.budget_allocation_id) {
-        gotBudgetAllocation = true;
-        return false;
-      }
-    });
-
-    if ((nestedBudgetAllocationGridRows.size() == 0) || (!gotBudgetAllocation)) {
-      $(nestedBudgetAllocationGridId + ' tbody').append(nestedBudgetAllocationGridTemplate.mustache(budgetAllocationData))
-      $(nestedBudgetAllocationGridId).trigger('nestedGrid:afterAdd');
-    }
-  }
-
-  function toggleItemCreditorVisibility(visible) {
-    var creditorDiv = $(".item-creditor");
-
-    if (visible) {
-      creditorDiv.removeClass('hidden');
-      creditorDiv.find('input').removeClass('disabled');
-      creditorDiv.find('input').prop('disabled', false);
+$(document).ready(function() {
+  function organizesModalities() {
+    if ($('#licitation_process_type_of_purchase_licitation').is(':checked')){
+      $('div.modality').removeClass('hidden');
+      $('div.licitation_process_judgment_form_id').removeClass('hidden');
+      $('#licitation_process_judgment_form_id').requiredField(true);
+      $('div.type-of-removal').addClass('hidden');
+      $('label[for="licitation_process_modality_number"]').html('Nº da modalidade');
+      $('a[href="#tab-items"]').html("Itens");
     } else {
-      creditorDiv.addClass('hidden');
-      creditorDiv.find('input').addClass('disabled');
-      creditorDiv.find('input').prop('disabled', true);
+      $('div.modality').addClass('hidden');
+      $('div.licitation_process_judgment_form_id').addClass('hidden');
+      $('#licitation_process_judgment_form_id').requiredField(false);
+      $('div.type-of-removal').removeClass('hidden');
+      $('label[for="licitation_process_modality_number"]').html('Nº do afastamento');
+      $('a[href="#tab-items"]').html("Itens / Justificativa");
+      $('#licitation_process_modality').val('');
+      toogleVisibilityFieldsToTradingAndConcurrence();
     }
-  }
+  };
 
-  // listeners
-  $('#licitation_process_budget_allocation_id').on('change', function(event, budgetAllocation) {
-    var url    = Routes.expense_natures,
-        params = { breakdown_of: budgetAllocation.expense_nature_id };
-
-    $('#licitation_process_budget_allocation_amount').val(numberWithDelimiter(parseFloat(budgetAllocation.amount)));
-    $('#licitation_process_budget_allocation_expense_nature').val(budgetAllocation.expense_nature);
-    $('#budget_allocation_expense_nature_id').val(budgetAllocation.expense_nature_id);
-
-    url += "?" + jQuery.param(params);
-
-    $("#licitation_process_expense_nature").data('source', url);
-  });
-
-  $("#licitation_process_purchase_solicitations_id").on("change", function(event, purchaseSolicitation) {
-    if (purchaseSolicitation) {
-      $.each(purchaseSolicitation.budget_allocations, function(i, budgetAllocation) {
-        renderBudgetAllocation(budgetAllocation);
-      });
-
-      $.each(purchaseSolicitation.items, function(i, item) {
-        renderItem(item);
-      });
+  function toogleVisibilityFieldsToTradingAndConcurrence() {
+    if (($('#licitation_process_modality').val() == '<%= Modality::TRADING %>' ) || ($('#licitation_process_modality').val() == '<%= Modality::CONCURRENCE %>')) {
+      $('.fields-to-trading-and-concurrence').removeClass('hidden');
+    } else {
+      $('.fields-to-trading-and-concurrence').addClass('hidden');
+      $('#licitation_process_price_registration, #licitation_process_is_trading').attr('checked', false)
     }
+  };
+
+  function toogleVisibilityFieldsToTrading() {
+    if (($('#licitation_process_modality').val() == '<%= Modality::TRADING %>')) {
+      $('.field-to-trading').removeClass('hidden');
+      $('.not-fields-to-trading').addClass('hidden');
+    } else {
+      $('.field-to-trading').addClass('hidden');
+      $('.not-fields-to-trading').removeClass('hidden');
+    }
+  };
+
+  $('input[name="licitation_process[type_of_purchase]"]').change(function(){
+    organizesModalities();
+    toogleVisibilityFieldsToTrading();
+    toogleVisibilityFieldsToTradingAndConcurrence();
   });
 
-  $("#licitation_process_type_of_purchase_direct_purchase").on('click', function() {
-    toggleItemCreditorVisibility(true);
+  $('#licitation_process_modality').on('change', function() {
+    toogleVisibilityFieldsToTrading();
+    toogleVisibilityFieldsToTradingAndConcurrence();
   });
 
-  $("#licitation_process_type_of_purchase_licitation").on('click', function() {
-    toggleItemCreditorVisibility(false);
-  });
-
-  $("#licitation-process-item").on('nestedForm:afterAdd', function() {
-    var typeOfPurchaseRadio = $("input:radio[name='licitation_process[type_of_purchase]']:checked").val(),
-        directPurchase      = '<%= LicitationProcessTypeOfPurchase::DIRECT_PURCHASE %>';
-
-    toggleItemCreditorVisibility(typeOfPurchaseRadio === directPurchase);
-  });
+  organizesModalities();
+  toogleVisibilityFieldsToTrading();
+  toogleVisibilityFieldsToTradingAndConcurrence();
 });

@@ -34,9 +34,33 @@ $(function () {
 
     $(this).closest('.nested-record').find('.destroy').val(true);
     $(this).closest('.nested-record').hide();
+    $(this).closest('.nested-record').addClass('removed');
     $(this).closest('table.records').trigger('nestedGrid:afterRemove');
   });
 
+  $(document).on('click', '.nested-record .edit-nested-record', function(event) {
+    event.preventDefault();
+
+    editNestedGridRecord( $(this).closest('.nested-record') )
+  });
+
+  function editNestedGridRecord(row) {
+    var nestedFields = row.closest('table.records').siblings('.nested-fields:visible'),
+        name, matches, input;
+
+    row.find(':input').each(function() {
+      matches = $(this).attr('name').match(/\[(\w+)\]$/);
+
+      if (matches) {
+        name = matches[1];
+        input = nestedFields.find(':input[name*="[' + name + ']"]');
+
+        input.val( $(this).val() );
+      }
+    });
+
+    row.remove();
+  }
 
   function nestedRequiredFields(nestedFields) {
     var allowed = true;
@@ -56,7 +80,7 @@ $(function () {
 
   function nestedUniqueFields(nestedFields, recordTableId) {
     var records = $('#' + recordTableId).find('.nested-record:visible'),
-        matches, name, valuei, unique = true;
+        matches, name, value, unique = true;
 
     nestedFields.find('.unique:input').each(function() {
       matches = $(this).attr('name').match(/\[(\w+)\]/);
@@ -98,7 +122,7 @@ $(function () {
 
     nestedFields.find(':input').each(function() {
       var name = $(this).attr('name'),
-          matches = name.match(/\[(\w+)\]/);
+          matches = name.match(/\[(\w+)\]$/);
 
       if ( matches ) { // Remove o prefixo do nome do campo
         if ( $(this).is(':checkbox') ){
