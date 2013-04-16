@@ -1,0 +1,30 @@
+<div class="yui3-g">
+  <div class="yui3-u-4-5">
+    <%= f.input :budget_allocation, :as => :auto_complete, :fake => true,
+                :required => true, :disabled => f.object.annulled?,
+                'data-hidden-field-class' => 'unique',
+                :input_html => { :class => 'budget-allocation' } %>
+  </div>
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-2-3">
+    <%= f.input :budget_allocation_expense_nature, :as => :fake, :disabled => true %>
+  </div>
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-2-5">
+    <%= f.input :expense_nature, :as => :auto_complete, :fake => true %>
+  </div>
+
+  <div class="yui3-u-1-5">
+    <%= f.input :budget_allocation_amount, :as => :fake, :disabled => true,
+                :input_html => { 'data-decimal' => true, :value => '0,00', 'data-precision' => 2, :maxlength => 15, :class => 'numeric' } %>
+  </div>
+
+  <div class="yui3-u-1-5">
+    <%= f.input :estimated_value, :as => :fake,
+                :input_html => { 'data-decimal' => true, :value => '0,00', 'data-precision' => 2, :maxlength => 15, :class => 'numeric' } %>
+  </div>
+</div>
