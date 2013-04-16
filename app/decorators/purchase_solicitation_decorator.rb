@@ -36,4 +36,10 @@ class PurchaseSolicitationDecorator
   def subtitle
     code_and_year
   end
+
+  def disabled_materials
+    return if kind
+
+    t('purchase_solicitation.messages.disabled_materials')
+  end
 end

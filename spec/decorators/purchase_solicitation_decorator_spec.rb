@@ -97,4 +97,26 @@ describe PurchaseSolicitationDecorator do
       expect(subject.code_and_year).to eq '1/2013'
     end
   end
+
+  describe "#disabled_materials" do
+    before do
+      I18n.backend.store_translations 'pt-BR', :purchase_solicitation => {
+        :messages => {
+          :disabled_materials => 'Escolha um tipo de solicitação primeiro',
+        }
+      }
+    end
+
+    it "returns a message when there isn't a kind" do
+      component.stub(:kind).and_return false
+
+      expect(subject.disabled_materials).to eq "Escolha um tipo de solicitação primeiro"
+    end
+
+    it "returns null when there is a kind" do
+      component.stub(:kind).and_return true
+
+      expect(subject.disabled_materials).to be_nil
+    end
+  end
 end

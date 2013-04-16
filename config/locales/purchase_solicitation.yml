@@ -47,3 +47,4 @@ pt-BR:
       not_annullable: "está sendo utilizada na compra direta (%{direct_purchase}), não pode ser anulada."
       is_annulled: "esta solicitação foi anulada e não pode ser editada"
       not_persisted: "salve a solicitação primeiro"
+      disabled_materials: "Escolha um tipo de solicitação primeiro"

@@ -741,4 +741,45 @@ feature "PurchaseSolicitations" do
       end
     end
   end
+
+  scenario 'testing javascript when select kind is empty' do
+    Material.make!(:antivirus, :material_type => MaterialType::ASSET)
+
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    click_link 'Criar Solicitação de Compra'
+
+    within_tab 'Itens' do
+      expect(page).to have_disabled_element 'Material', :reason => "Escolha um tipo de solicitação primeiro"
+    end
+
+    within_tab 'Principal' do
+      select 'Bens', :from => 'Tipo de solicitação'
+    end
+
+    within_tab 'Itens' do
+      fill_with_autocomplete 'Material', :with => 'Antivirus'
+
+      # getting data from modal
+      expect(page).to have_disabled_field 'Unidade', :with => 'UN'
+
+      fill_in 'Marca/Referência', :with => 'Norton'
+      fill_in 'Quantidade', :with => '3,50'
+      fill_in 'Valor unitário', :with => '200,00'
+
+      # asserting calculated total price of the item
+      expect(page).to have_disabled_field 'Valor total', :with => '700,00'
+
+      click_button 'Adicionar'
+
+      within_records do
+        expect(page).to have_content '01.01.00001 - Antivirus'
+        expect(page).to have_content 'UN'
+        expect(page).to have_content 'Norton'
+        expect(page).to have_content '3,50'
+        expect(page).to have_content '200,00'
+        expect(page).to have_content '700,00'
+      end
+    end
+  end
 end
