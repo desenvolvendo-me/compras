@@ -12,21 +12,15 @@
   <td>
     <%= link_to 'Remover', '#', class: 'remove-nested-record', 'data-disabled' => data_disabled %>
 
-    <%= f.input :id, as: :hidden, input_html: { value: f.object.id } %>
+    <%= f.input :id, as: :hidden, input_html: { value: f.object.id, class: "id" } %>
     <%= f.input :_destroy, as: :hidden, input_html: { class: 'destroy' } %>
 
-    <% column_names.each do |column_name| %>
-      <% unless exclude_data.include?(column_name) %>
-        <% if f.object.class.reflect_on_association(column_name) %>
-          <%= f.input "#{column_name}_id", as: :hidden, input_html: { value: f.object.decorator.send("#{column_name}_id") } %>
-        <% end %>
-
-        <%= f.input column_name, as: :hidden, input_html: { value: f.object.decorator.send(column_name) } %>
+    <% all_hidden_fields.each do |column_name| %>
+      <% if f.object.class.reflect_on_association(column_name) %>
+        <%= f.input "#{column_name}_id", as: :hidden, input_html: { value: f.object.decorator.send("#{column_name}_id"), class: "#{column_name}_id" } %>
       <% end %>
-    <% end %>
 
-    <% extra_data.each do |data| %>
-      <%= f.input data, as: :hidden, input_html: { value: f.object.decorator.send(data) } %>
+      <%= f.input column_name, as: :hidden, input_html: { value: f.object.decorator.send(column_name), class: "#{column_name}" } %>
     <% end %>
   </td>
 </tr>
