@@ -3,40 +3,45 @@ require 'decorator_helper'
 require 'app/decorators/purchase_process_accreditation_decorator'
 
 describe PurchaseProcessAccreditationDecorator do
-  context "#must_have_creditors" do
-    describe 'whith must_have_creditors' do
-      it 'should return must_have_creditors' do
-        component.stub(:creditors).and_return([double(:creditors, :id => 1)])
-        expect(subject.must_have_creditors).to be_nil
-      end
+  describe '#must_have_creditors' do
+    I18n.backend.store_translations 'pt-BR', :purchase_process_accreditation => {
+      :messages => { :must_have_creditors => 'Inclua algum credor primeiro' }
+    }
+
+    context 'when have creditors' do
+      before { component.stub(:creditors).and_return([double(:creditors)]) }
+
+      it { expect(subject.must_have_creditors).to be_nil }
     end
 
-    describe 'whithout must_have_creditors' do
+    context 'when have not creditors' do
+      before { component.stub(:creditors).and_return([]) }
+
       it 'should return "Inclua algum credor primeiro"' do
-        I18n.backend.store_translations 'pt-BR', :purchase_process_accreditation => {
-          :messages => {
-            :must_have_creditors => 'Inclua algum credor primeiro'
-          }
-        }
-        component.stub(:creditors).and_return([])
         expect(subject.must_have_creditors).to eq "Inclua algum credor primeiro"
       end
     end
+  end
+end
+describe PurchaseProcessAccreditationDecorator do
+  describe '#accreditation_path' do
+    let(:routes) { double(:routes) }
 
-    describe 'accreditation_path' do
-      let(:routes) { double(:routes) }
+    context 'when is persisted' do
+      before { component.stub(:persisted? => true, :component => double(:id => 1)) }
 
-      it 'should return accreditation_path when persisted' do
-        component.stub(:persisted? => true, :component => double(:id => 1))
-
-        routes.stub(:purchase_process_accreditation_path).
-        with(component).and_return('purchase_process_accreditation_path')
+      it 'should return accreditation_path' do
+        routes.stub(:purchase_process_accreditation_path).with(component).
+        and_return('purchase_process_accreditation_path')
 
         expect(subject.accreditation_path(routes)).to eq 'purchase_process_accreditation_path'
       end
+    end
 
-      it 'should return # when is not persisted' do
-        component.stub(:persisted? => false)
+    context 'when is not persisted' do
+      before { component.stub(:persisted? => false) }
+
+      it 'should return #' do
         expect(subject.accreditation_path(routes)).to eq '#'
       end
     end
