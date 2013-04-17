@@ -1,21 +1,21 @@
 # encoding: utf-8
-class LicitationProcessClassificationGenerator
-  attr_accessor :licitation_process, :classification_repository, :proposal_repository
+class PurchaseProcessClassificationGenerator
+  attr_accessor :purchase_process, :classification_repository, :proposal_repository
 
   delegate :judgment_form, :bidders, :items,
            :all_licitation_process_classifications,
-           :to => :licitation_process, :allow_nil => true
+           :to => :purchase_process, :allow_nil => true
 
-  def initialize(licitation_process,
+  def initialize(purchase_process,
     classification_repository = LicitationProcessClassification,
     proposal_repository = BidderProposal)
-    self.licitation_process = licitation_process
+    self.purchase_process = purchase_process
     self.classification_repository = classification_repository
     self.proposal_repository = proposal_repository
   end
 
   def generate!
-    licitation_process.destroy_all_licitation_process_classifications
+    purchase_process.destroy_all_licitation_process_classifications
 
     if judgment_form.lowest_price? && judgment_form.item?
       lowest_price_by_item
@@ -62,7 +62,7 @@ class LicitationProcessClassificationGenerator
   end
 
   def lowest_price_by_lot
-    licitation_process.licitation_process_lots.each do |lot|
+    purchase_process.licitation_process_lots.each do |lot|
       ordered_bidders = lot.order_bidders_by_total_price.
                             reject { |bidder| bidder.has_item_with_unit_price_equals_zero(lot) }
 

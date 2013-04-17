@@ -53,7 +53,7 @@ describe BiddersController do
 
       Bidder.any_instance.should_receive(:save).and_return(true)
       status_changer.should_receive(:in_progress!)
-      LicitationProcessStatusChanger.should_receive(:new).
+      PurchaseProcessStatusChanger.should_receive(:new).
                                      with(licitation_process).
                                      and_return(status_changer)
 

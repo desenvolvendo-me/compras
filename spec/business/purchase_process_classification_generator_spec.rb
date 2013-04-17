@@ -1,17 +1,17 @@
 require 'unit_helper'
 require 'active_support/core_ext/module/delegation'
-require 'app/business/licitation_process_classification_generator'
+require 'app/business/purchase_process_classification_generator'
 
-describe LicitationProcessClassificationGenerator do
+describe PurchaseProcessClassificationGenerator do
   subject do
-    LicitationProcessClassificationGenerator.new(
-      licitation_process,
+    described_class.new(
+      purchase_process,
       classification_repository,
       proposal_repository
     )
   end
 
-  let :licitation_process do
+  let :purchase_process do
     double('LicitationProcess',
       :id => 1,
       :destroy_all_licitation_process_classifications => true,
@@ -36,7 +36,7 @@ describe LicitationProcessClassificationGenerator do
 
   context 'classification by lowest_global_price' do
     before do
-      licitation_process.stub(
+      purchase_process.stub(
         :judgment_form => judgment_form,
         :bidders => [bidder1, bidder2, bidder3]
       )
@@ -126,7 +126,7 @@ describe LicitationProcessClassificationGenerator do
 
   context 'classification by lowest_total_price_by_item' do
     before do
-      licitation_process.stub(
+      purchase_process.stub(
         :judgment_form => judgment_form,
         :items => [item],
       )
@@ -238,7 +238,7 @@ describe LicitationProcessClassificationGenerator do
 
   context '#lowest_price_by_lot' do
     before do
-      licitation_process.stub(
+      purchase_process.stub(
         :judgment_form => judgment_form,
         :bidders => [bidder1, bidder2, bidder3],
         :licitation_process_lots => [lot]

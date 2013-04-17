@@ -32,7 +32,7 @@ describe LicitationProcessRatificationsController do
       licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
 
       LicitationProcessRatification.any_instance.should_receive(:save).and_return(true)
-      LicitationProcess.any_instance.should_receive(:update_status).with(LicitationProcessStatus::APPROVED)
+      LicitationProcess.any_instance.should_receive(:update_status).with(PurchaseProcessStatus::APPROVED)
 
       post :create, :licitation_process_ratification => {
         :licitation_process_id => licitation_process.id }

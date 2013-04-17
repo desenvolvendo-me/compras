@@ -1,4 +1,4 @@
-class LicitationProcessClassificationValue
+class PurchaseProcessClassificationValue
   include Comparable
 
   attr_accessor :classification, :tolerance, :classify_by_lowest_value

@@ -1,10 +1,10 @@
-class LicitationProcessClassificationBiddersVerifier
-  attr_accessor :licitation_process
+class PurchaseProcessClassificationBiddersVerifier
+  attr_accessor :purchase_process
 
-  delegate :bidders, :to => :licitation_process, :allow_nil => true
+  delegate :bidders, :to => :purchase_process, :allow_nil => true
 
-  def initialize(licitation_process)
-    self.licitation_process = licitation_process
+  def initialize(purchase_process)
+    self.purchase_process = purchase_process
   end
 
   def verify!

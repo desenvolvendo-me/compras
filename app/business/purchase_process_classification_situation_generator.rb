@@ -1,16 +1,16 @@
-class LicitationProcessClassificationSituationGenerator
+class PurchaseProcessClassificationSituationGenerator
   NORMAL_PERCENTAGE = 10
   PRESENCE_TRADING_PERCENTAGE = 5
 
-  attr_accessor :licitation_process
+  attr_accessor :purchase_process
 
   delegate :bidders, :all_licitation_process_classifications, :trading?,
            :lots_with_items, :items, :judgment_form,
            :classifications,
-           :to => :licitation_process, :allow_nil => true
+           :to => :purchase_process, :allow_nil => true
 
-  def initialize(licitation_process)
-    self.licitation_process = licitation_process
+  def initialize(purchase_process)
+    self.purchase_process = purchase_process
   end
 
   def generate!
@@ -68,7 +68,7 @@ class LicitationProcessClassificationSituationGenerator
     end
 
     valid_classifications.reject { |c| c == classification_a }.each do |classification_b|
-      classificator = LicitationProcessClassificator.new(
+      classificator = PurchaseProcessClassificator.new(
         classification_a,
         classification_b,
         :tolerance => current_percentage

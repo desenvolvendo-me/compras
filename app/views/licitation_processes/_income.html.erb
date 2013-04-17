@@ -20,7 +20,7 @@
 
 <script>
   function minimumBidToDisposalVisibilityToogler() {
-    if ($("#licitation_process_object_type").val() == "<%= LicitationProcessObjectType::DISPOSALS_OF_ASSETS %>") {
+    if ($("#licitation_process_object_type").val() == "<%= PurchaseProcessObjectType::DISPOSALS_OF_ASSETS %>") {
       $("#minimum-bid-to-disposal").show();
     } else {
       $("#minimum-bid-to-disposal").hide();
@@ -28,7 +28,7 @@
   };
 
   function fieldsToConcessionsAndPermitsOfAssetsVisibilityToogler() {
-    if ($("#licitation_process_object_type").val() == "<%= LicitationProcessObjectType::CONCESSIONS_AND_PERMITS %>") {
+    if ($("#licitation_process_object_type").val() == "<%= PurchaseProcessObjectType::CONCESSIONS_AND_PERMITS %>") {
       $(".fields-to-concessions-and-permits").show();
     } else {
       $(".fields-to-concessions-and-permits").hide();

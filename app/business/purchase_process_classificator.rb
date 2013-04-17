@@ -1,4 +1,4 @@
-class LicitationProcessClassificator
+class PurchaseProcessClassificator
   attr_accessor :classification_a, :classification_b, :tolerance
 
   def initialize(classification_a, classification_b, options = {})
@@ -90,10 +90,10 @@ class LicitationProcessClassificator
   end
 
   def classification_a_total_value
-    @classification_a_total_value ||= LicitationProcessClassificationValue.new(classification_a, tolerance, classify_by_lowest_value?)
+    @classification_a_total_value ||= PurchaseProcessClassificationValue.new(classification_a, tolerance, classify_by_lowest_value?)
   end
 
   def classification_b_total_value
-    @classification_b_total_value ||= LicitationProcessClassificationValue.new(classification_b, tolerance, classify_by_lowest_value?)
+    @classification_b_total_value ||= PurchaseProcessClassificationValue.new(classification_b, tolerance, classify_by_lowest_value?)
   end
 end

@@ -841,7 +841,7 @@ feature "LicitationProcesses" do
   end
 
   scenario 'index with columns at the index' do
-    LicitationProcess.make!(:processo_licitatorio, :status => LicitationProcessStatus::IN_PROGRESS)
+    LicitationProcess.make!(:processo_licitatorio, :status => PurchaseProcessStatus::IN_PROGRESS)
 
     navigate 'Processos de Compra > Processos de Compras'
 

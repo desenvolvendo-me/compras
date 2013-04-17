@@ -39,6 +39,6 @@ class LicitationProcessRatificationsController < CrudController
   end
 
   def approve_licitation_process(licitation_process)
-    licitation_process.update_status(LicitationProcessStatus::APPROVED)
+    licitation_process.update_status(PurchaseProcessStatus::APPROVED)
   end
 end

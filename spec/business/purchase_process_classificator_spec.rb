@@ -1,9 +1,9 @@
 require 'unit_helper'
-require 'app/business/licitation_process_classificator'
+require 'app/business/purchase_process_classificator'
 
-describe LicitationProcessClassificator do
+describe PurchaseProcessClassificator do
   subject do
-    LicitationProcessClassificator.new(classification_a, classification_b)
+    described_class.new(classification_a, classification_b)
   end
 
   let :classification_a do

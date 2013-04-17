@@ -1,11 +1,11 @@
-class LicitationProcessEnvelopeOpeningDate
-  def initialize(licitation_process)
-    @licitation_process = licitation_process
-    @proposal_envelope_opening_date = licitation_process.proposal_envelope_opening_date
-    @publication_date = licitation_process.last_publication_date
-    @modality = licitation_process.modality
-    @execution_type = licitation_process.execution_type
-    @judgment_form = licitation_process.judgment_form
+class PurchaseProcessEnvelopeOpeningDate
+  def initialize(purchase_process)
+    @purchase_process = purchase_process
+    @proposal_envelope_opening_date = purchase_process.proposal_envelope_opening_date
+    @publication_date = purchase_process.last_publication_date
+    @modality = purchase_process.modality
+    @execution_type = purchase_process.execution_type
+    @judgment_form = purchase_process.judgment_form
   end
 
   def valid?
@@ -14,7 +14,7 @@ class LicitationProcessEnvelopeOpeningDate
 
   private
 
-  attr_reader :licitation_process, :proposal_envelope_opening_date, :publication_date, :modality,
+  attr_reader :purchase_process, :proposal_envelope_opening_date, :publication_date, :modality,
               :execution_type, :judgment_form
 
   def run_validation
@@ -25,7 +25,7 @@ class LicitationProcessEnvelopeOpeningDate
   def over_days_error(days, context)
     values  = { :limit => I18n.l(publication_date + days.days), :days => days, :publication => I18n.l(publication_date) }
     message = I18n.t("licitation_process.messages.proposal_envelope_opening_date_greater_than_#{context}_days", values)
-    licitation_process.errors.add :proposal_envelope_opening_date, message
+    purchase_process.errors.add :proposal_envelope_opening_date, message
     return false
   end
 
@@ -39,7 +39,7 @@ class LicitationProcessEnvelopeOpeningDate
   end
 
   def concurrence_validation
-    if licitation_process.integral? && (judgment_form.best_technique? || judgment_form.technical_and_price?)
+    if purchase_process.integral? && (judgment_form.best_technique? || judgment_form.technical_and_price?)
       valid_proposal_envelope_opening_date?(45, :calendar)
     else
       valid_proposal_envelope_opening_date?(30, :calendar)

@@ -1,9 +1,9 @@
 require 'unit_helper'
 require 'active_support/core_ext/module/delegation'
-require 'app/business/licitation_process_classification_bidders_verifier'
+require 'app/business/purchase_process_classification_bidders_verifier'
 
-describe LicitationProcessClassificationBiddersVerifier do
-  let :licitation_process do
+describe PurchaseProcessClassificationBiddersVerifier do
+  let :purchase_process do
     double('LicitationProcess',
       :id => 1
     )
@@ -14,12 +14,12 @@ describe LicitationProcessClassificationBiddersVerifier do
   end
 
   subject do
-    described_class.new(licitation_process)
+    described_class.new(purchase_process)
   end
 
   context 'disable bidders by documentation problem' do
     before do
-      licitation_process.stub(:bidders => [bidder])
+      purchase_process.stub(:bidders => [bidder])
     end
 
     it 'activate bidder when it does not have problem with documentation' do
@@ -58,7 +58,7 @@ describe LicitationProcessClassificationBiddersVerifier do
 
   context 'disable bidders if unit price is greater than item unit price' do
     before do
-      licitation_process.stub(:bidders => [bidder])
+      purchase_process.stub(:bidders => [bidder])
     end
 
     it 'should disable bidder' do

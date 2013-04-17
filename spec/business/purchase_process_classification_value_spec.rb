@@ -1,13 +1,13 @@
 require 'unit_helper'
-require 'app/business/licitation_process_classification_value'
+require 'app/business/purchase_process_classification_value'
 
-describe LicitationProcessClassificationValue do
+describe PurchaseProcessClassificationValue do
   subject do
-    LicitationProcessClassificationValue.new(classification_a, tolerance = 10)
+    described_class.new(classification_a, tolerance = 10)
   end
 
   let :other do
-    LicitationProcessClassificationValue.new(classification_b, tolerance = 10)
+    described_class.new(classification_b, tolerance = 10)
   end
 
   let :classification_a do

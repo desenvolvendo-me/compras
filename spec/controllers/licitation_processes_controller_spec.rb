@@ -17,7 +17,7 @@ describe LicitationProcessesController do
     it 'uses waiting_for_open default value for status' do
       get :new
 
-      expect(assigns(:licitation_process).status).to eq LicitationProcessStatus::WAITING_FOR_OPEN
+      expect(assigns(:licitation_process).status).to eq PurchaseProcessStatus::WAITING_FOR_OPEN
     end
   end
 
@@ -31,7 +31,7 @@ describe LicitationProcessesController do
     it 'should assign waiting_for_open default value for status' do
       post :create, :licitation_process => { :id => 1 }
 
-      expect(assigns(:licitation_process).status).to eq LicitationProcessStatus::WAITING_FOR_OPEN
+      expect(assigns(:licitation_process).status).to eq PurchaseProcessStatus::WAITING_FOR_OPEN
     end
   end
 
@@ -72,9 +72,9 @@ describe LicitationProcessesController do
         LicitationProcess.stub(:find).and_return(licitation_process)
         licitation_process.should_receive(:transaction).and_yield
 
-        LicitationProcessClassificationGenerator.any_instance.should_receive(:generate!)
-        LicitationProcessClassificationSituationGenerator.any_instance.should_receive(:generate!)
-        LicitationProcessClassificationBiddersVerifier.any_instance.should_receive(:verify!)
+        PurchaseProcessClassificationGenerator.any_instance.should_receive(:generate!)
+        PurchaseProcessClassificationSituationGenerator.any_instance.should_receive(:generate!)
+        PurchaseProcessClassificationBiddersVerifier.any_instance.should_receive(:verify!)
 
         put :update, :id => licitation_process.id, :commit => 'Apurar'
 

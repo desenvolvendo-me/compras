@@ -1,15 +1,15 @@
 require 'unit_helper'
 require 'active_support/core_ext/module/delegation'
-require 'app/business/licitation_process_classificator'
-require 'app/business/licitation_process_classification_value'
-require 'app/business/licitation_process_classification_situation_generator'
+require 'app/business/purchase_process_classification_value'
+require 'app/business/purchase_process_classificator'
+require 'app/business/purchase_process_classification_situation_generator'
 
-describe LicitationProcessClassificationSituationGenerator do
+describe PurchaseProcessClassificationSituationGenerator do
   subject do
-    described_class.new(licitation_process)
+    described_class.new(purchase_process)
   end
 
-  let :licitation_process do
+  let :purchase_process do
     double(
       'LicitationProcess',
       :id => 1,
@@ -101,7 +101,7 @@ describe LicitationProcessClassificationSituationGenerator do
 
   context 'generate situation of classifications' do
     before do
-      licitation_process.stub(
+      purchase_process.stub(
         :all_licitation_process_classifications => classifications,
         :bidders => [])
       judgment_form.stub(:global?).and_return(true)
@@ -203,7 +203,7 @@ describe LicitationProcessClassificationSituationGenerator do
 
       proposal.stub(:licitation_process_lot => lot)
 
-      licitation_process.stub(
+      purchase_process.stub(
         :all_licitation_process_classifications => classifications)
 
       judgment_form.stub(:lot?).and_return(true)
@@ -240,7 +240,7 @@ describe LicitationProcessClassificationSituationGenerator do
     before do
       bidder.stub(:licitation_process_classifications_by_classifiable => [classification_bidder])
 
-      licitation_process.stub(
+      purchase_process.stub(
         :bidders => bidders,
         :type_of_calculation => nil,
         :all_licitation_process_classifications => classifications)
@@ -272,7 +272,7 @@ describe LicitationProcessClassificationSituationGenerator do
     before do
       item.stub(:licitation_process_classifications => [classification_item])
       proposal.stub(:purchase_process_item => item)
-      licitation_process.stub(
+      purchase_process.stub(
         :items => [item],
         :all_licitation_process_classifications => classifications,
         :classifications => classifications)
