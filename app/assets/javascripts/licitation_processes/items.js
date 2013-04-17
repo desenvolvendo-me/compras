@@ -14,7 +14,7 @@ $(document).ready(function() {
     var material       = $('#items-records input.material-id[value="' + item.material_id + '"]'),
         record         = material.closest('.nested-record'),
         itemQuantity   = new BigNumber(parsePtBrFloat( record.find('input.item-quantity').val() )),
-        itemTotalValue = new BigNumber(parsePtBrFloat( record.find('input.item-total-value').val() ))
+        itemTotalValue = new BigNumber(parsePtBrFloat( record.find('input.item-total-value').val() )),
         totalQuantity  = numberWithDelimiter(parseFloat( itemQuantity.add(item.quantity) )),
         totalValue     = numberWithDelimiter(parseFloat( itemTotalValue.add(item.estimated_total_price) ));
 
@@ -29,6 +29,8 @@ $(document).ready(function() {
     var itemBinds = {
       uuid: _.uniqueId('fresh-'),
       id: '',
+      creditor: '',
+      creditor_id: '',
       lot: '1',
       material_id: item.material_id,
       material: item.material_description,
