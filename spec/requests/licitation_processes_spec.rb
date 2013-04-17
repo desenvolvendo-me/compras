@@ -353,10 +353,37 @@ feature "LicitationProcesses" do
       expect(page).to have_disabled_field 'Valor total das dotações', :with => '270,00'
 
       within_records do
-        click_link "Remover"
+        within 'tbody .nested-record:first' do
+          click_link "Remover"
+        end
+
+
+        within 'tbody .nested-record:last' do
+          click_link 'Editar'
+        end
       end
 
-      expect(page).to have_disabled_field 'Valor total das dotações', :with => '250,00'
+      expect(page).to have_field 'Dotação orçamentária', with: '1.29 - Aplicações Diretas'
+      expect(page).to have_field 'Natureza da despesa', with: '3.1.90.00.00 - Aplicações Diretas'
+      expect(page).to have_field 'Desdobramento', with: '3.0.10.01.11 - Compra de Material'
+      expect(page).to have_field 'Saldo da dotação', with: '3.000,00'
+      expect(page).to have_field 'Valor previsto', with: '250,00'
+
+      fill_in 'Valor previsto', with: '300,00'
+
+      click_button 'Adicionar'
+
+      within_records do
+        within 'tbody .nested-record:last' do
+          expect(page).to have_content '1.29 - Aplicações Diretas'
+          expect(page).to have_content '3.1.90.00.00 - Aplicações Diretas'
+          expect(page).to have_content '3.0.10.01.11 - Compra de Material'
+          expect(page).to have_content '3.000,00'
+          expect(page).to have_content '300,00'
+        end
+      end
+
+      expect(page).to have_disabled_field 'Valor total das dotações', :with => '300,00'
 
       fill_with_autocomplete 'Dotação orçamentária', :with => 'Aposentadorias'
 
@@ -372,7 +399,7 @@ feature "LicitationProcesses" do
 
       click_button 'Adicionar'
 
-      expect(page).to have_disabled_field 'Valor total das dotações', :with => '270,00'
+      expect(page).to have_disabled_field 'Valor total das dotações', :with => '320,00'
     end
 
     click_button 'Salvar'
@@ -429,7 +456,7 @@ feature "LicitationProcesses" do
 
     within_tab 'Orçamento' do
       expect(page).to have_disabled_field 'Valor total dos itens', :with => '84,00'
-      expect(page).to have_disabled_field 'Valor total das dotações', :with => '270,00'
+      expect(page).to have_disabled_field 'Valor total das dotações', :with => '320,00'
 
       within_records do
         expect(page).to have_content 'Dotação'
@@ -443,7 +470,7 @@ feature "LicitationProcesses" do
           expect(page).to have_content '3.1.90.00.00 - Aplicações Diretas'
           expect(page).to have_content '3.0.10.01.11 - Compra de Material'
           expect(page).to have_content '3.000,00'
-          expect(page).to have_content '250,00'
+          expect(page).to have_content '300,00'
         end
 
         within 'tbody tr:last' do
