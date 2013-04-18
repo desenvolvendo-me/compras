@@ -8,7 +8,7 @@ class LicitationProcessClassification < Compras::Model
 
   delegate :description, :reference_unit, :quantity,
            :to => :classifiable, :allow_nil => true
-  delegate :administrative_process_budget_allocation_items, :items,
+  delegate :purchase_process_items, :items,
            :to => :classifiable, :allow_nil => true
   delegate :benefited, :proposals, :will_submit_new_proposal_when_draw,
            :to => :bidder, :allow_nil => true
@@ -24,7 +24,7 @@ class LicitationProcessClassification < Compras::Model
   end
 
   def self.for_item(item_id)
-    joins { classifiable(AdministrativeProcessBudgetAllocationItem) }.
+    joins { classifiable(PurchaseProcessItem) }.
     where { classifiable.id.eq(item_id)}
   end
 

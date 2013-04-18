@@ -40,7 +40,7 @@
 
     <div class="yui3-g">
       <div class="yui3-u-2-3">
-        <%= label_tag :additional_information, AdministrativeProcessBudgetAllocationItem.human_attribute_name(:additional_information) %>
+        <%= label_tag :additional_information, PurchaseProcessItem.human_attribute_name(:additional_information) %>
 
         <%= text_area_tag :additional_information, nil, rows: 20, cols: 40,
           name: "licitation_process[additional_information]", class: "text" %>
@@ -58,13 +58,13 @@
   <table id="items-records" class="records">
     <thead>
       <tr>
-        <th><%= AdministrativeProcessBudgetAllocationItem.human_attribute_name :lot %></th>
-        <th><%= AdministrativeProcessBudgetAllocationItem.human_attribute_name :material %></th>
-        <th class="item-creditor hidden"><%= AdministrativeProcessBudgetAllocationItem.human_attribute_name :creditor %></th>
-        <th><%= AdministrativeProcessBudgetAllocationItem.human_attribute_name :reference_unit %></th>
-        <th><%= AdministrativeProcessBudgetAllocationItem.human_attribute_name :quantity %></th>
+        <th><%= PurchaseProcessItem.human_attribute_name :lot %></th>
+        <th><%= PurchaseProcessItem.human_attribute_name :material %></th>
+        <th class="item-creditor hidden"><%= PurchaseProcessItem.human_attribute_name :creditor %></th>
+        <th><%= PurchaseProcessItem.human_attribute_name :reference_unit %></th>
+        <th><%= PurchaseProcessItem.human_attribute_name :quantity %></th>
         <th>Valor unitário</th>
-        <th><%= AdministrativeProcessBudgetAllocationItem.human_attribute_name :estimated_total_price %></th>
+        <th><%= PurchaseProcessItem.human_attribute_name :estimated_total_price %></th>
         <th></th>
         <th></th>
       </tr>
@@ -72,7 +72,7 @@
 
     <tbody>
       <%= f.association :items, :collection => localized(f.object.items) do |p| %>
-        <%= render 'administrative_process_budget_allocation_items/licitation_process_list_form',
+        <%= render 'purchase_process_items/licitation_process_list_form',
             id: p.object.id,
             lot: p.object.lot,
             material: p.object.material,
@@ -92,7 +92,7 @@
 
   <%= mustache "licitation_process_items_template" do %>
     <%= f.association :items_attributes, :collection => f.object.items.build, :index => '{{uuid}}' do |p| %>
-      <%= render 'administrative_process_budget_allocation_items/licitation_process_list_form',
+      <%= render 'purchase_process_items/licitation_process_list_form',
                  id: '{{id}}',
                  lot: '{{lot}}',
                  material: '{{material}}',

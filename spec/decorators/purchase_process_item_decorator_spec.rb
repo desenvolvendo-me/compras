@@ -1,7 +1,7 @@
 require 'decorator_helper'
-require 'app/decorators/administrative_process_budget_allocation_item_decorator'
+require 'app/decorators/purchase_process_item_decorator'
 
-describe AdministrativeProcessBudgetAllocationItemDecorator do
+describe PurchaseProcessItemDecorator do
   context '#total_price' do
     context 'when do not have total_price' do
       before do

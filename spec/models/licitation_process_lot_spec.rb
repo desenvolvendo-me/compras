@@ -4,12 +4,12 @@ require 'app/models/licitation_process_lot'
 require 'app/models/bidder'
 require 'app/models/bidder_proposal'
 require 'app/models/licitation_process_classification'
-require 'app/models/administrative_process_budget_allocation_item'
+require 'app/models/purchase_process_item'
 
 describe LicitationProcessLot do
   it { should belong_to :licitation_process }
 
-  it { should have_many(:administrative_process_budget_allocation_items).dependent(:nullify).order(:id) }
+  it { should have_many(:purchase_process_items).dependent(:nullify).order(:id) }
   it { should have_many(:licitation_process_classifications).dependent(:destroy) }
 
   it { should have_one(:judgment_form).through(:licitation_process) }
@@ -23,9 +23,9 @@ describe LicitationProcessLot do
   end
 
   it 'administrative process budget allocation items should have at least one' do
-    subject.stub(:administrative_process_budget_allocation_items => [])
+    subject.stub(:purchase_process_items => [])
     subject.valid?
-    expect(subject.errors.messages[:administrative_process_budget_allocation_items]).to include "deve haver ao menos um item"
+    expect(subject.errors.messages[:purchase_process_items]).to include "deve haver ao menos um item"
   end
 
   context '#order_bidders_by_total_price' do

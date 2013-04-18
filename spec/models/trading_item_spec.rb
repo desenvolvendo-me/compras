@@ -1,6 +1,6 @@
 # encoding: utf-8
 require 'model_helper'
-require 'app/models/administrative_process_budget_allocation_item'
+require 'app/models/purchase_process_item'
 require 'app/models/trading'
 require 'app/models/trading_item'
 require 'app/models/trading_item_bid'
@@ -12,18 +12,18 @@ require 'app/business/trading_item_bidders'
 
 describe TradingItem do
   it { should belong_to :trading }
-  it { should belong_to :administrative_process_budget_allocation_item }
+  it { should belong_to :purchase_process_item }
 
   it { should have_many(:bids).dependent(:destroy) }
   it { should have_many(:bidders).through(:trading).order(:id) }
 
   it { should have_one(:closing).dependent(:destroy) }
 
-  it { should delegate(:material).to(:administrative_process_budget_allocation_item).allowing_nil(true) }
-  it { should delegate(:material_id).to(:administrative_process_budget_allocation_item).allowing_nil(true) }
-  it { should delegate(:reference_unit).to(:administrative_process_budget_allocation_item).allowing_nil(true) }
-  it { should delegate(:quantity).to(:administrative_process_budget_allocation_item).allowing_nil(true) }
-  it { should delegate(:unit_price).to(:administrative_process_budget_allocation_item).allowing_nil(true) }
+  it { should delegate(:material).to(:purchase_process_item).allowing_nil(true) }
+  it { should delegate(:material_id).to(:purchase_process_item).allowing_nil(true) }
+  it { should delegate(:reference_unit).to(:purchase_process_item).allowing_nil(true) }
+  it { should delegate(:quantity).to(:purchase_process_item).allowing_nil(true) }
+  it { should delegate(:unit_price).to(:purchase_process_item).allowing_nil(true) }
   it { should delegate(:licitation_process_id).to(:trading) }
   it { should delegate(:allow_closing?).to(:trading).prefix(true) }
 
@@ -39,11 +39,11 @@ describe TradingItem do
     let(:administrative_process_item) { double(:process_item) }
 
     before do
-      subject.stub(:administrative_process_budget_allocation_item => administrative_process_item)
+      subject.stub(:purchase_process_item => administrative_process_item)
     end
 
     describe "#to_s" do
-      it "delegates to administrative_process_budget_allocation_item" do
+      it "delegates to purchase_process_item" do
         administrative_process_item.should_receive(:to_s)
         subject.to_s
       end

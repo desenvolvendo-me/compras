@@ -7,7 +7,7 @@ pt-BR:
 
     attributes:
       price_registration_item:
-        administrative_process_budget_allocation_item: "Material"
+        purchase_process_item: "Material"
         balance: "Saldo"
         quantity: "Quantidade"
         reference_unit: "Unidade"

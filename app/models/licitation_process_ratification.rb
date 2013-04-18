@@ -40,9 +40,9 @@ class LicitationProcessRatification < Compras::Model
   end
 
   def proposals_total_value
-    total = self.class.joins { bidder_proposals.administrative_process_budget_allocation_item }.
+    total = self.class.joins { bidder_proposals.purchase_process_item }.
       where { |ratification| ratification.id.eq id }.
-      select { sum(bidder_proposals.administrative_process_budget_allocation_item.quantity * bidder_proposals.unit_price).
+      select { sum(bidder_proposals.purchase_process_item.quantity * bidder_proposals.unit_price).
       as(proposal_total) }.first.proposal_total
 
     BigDecimal(total || 0)

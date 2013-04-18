@@ -14,11 +14,11 @@ describe LicitationProcessClassification do
   end
 
   let :antivirus do
-    AdministrativeProcessBudgetAllocationItem.make!(:item)
+    PurchaseProcessItem.make!(:item)
   end
 
   let :arame do
-    AdministrativeProcessBudgetAllocationItem.make!(:item_arame)
+    PurchaseProcessItem.make!(:item_arame)
   end
 
   let :allocations do

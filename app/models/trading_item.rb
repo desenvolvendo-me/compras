@@ -1,9 +1,9 @@
 class TradingItem < Compras::Model
   attr_accessible :detailed_description, :minimum_reduction_percent,
                   :minimum_reduction_value, :trading_id,
-                  :administrative_process_budget_allocation_item_id
+                  :purchase_process_item_id
 
-  belongs_to :administrative_process_budget_allocation_item
+  belongs_to :purchase_process_item
   belongs_to :trading
 
   has_many :bidders, :through => :trading, :order => :id
@@ -23,7 +23,7 @@ class TradingItem < Compras::Model
 
   delegate :material, :material_id, :reference_unit,
            :quantity, :unit_price, :to_s,
-           :to => :administrative_process_budget_allocation_item,
+           :to => :purchase_process_item,
            :allow_nil => true
   delegate :licitation_process_id, :percentage_limit_to_participate_in_bids,
            :to => :trading

@@ -8,7 +8,7 @@ pt-BR:
     attributes:
       bidder_proposal:
         bidder: "Licitante"
-        administrative_process_budget_allocation_item": "Item"
+        purchase_process_item": "Item"
         unit_price: "Preço unitário"
         brand: "Marca"
         situation: "Situação"

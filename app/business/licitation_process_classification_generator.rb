@@ -41,7 +41,7 @@ class LicitationProcessClassificationGenerator
           :total_value => proposal.total_price,
           :classification => classify_item(proposal, ordered_proposals),
           :bidder => proposal.bidder,
-          :classifiable => proposal.administrative_process_budget_allocation_item
+          :classifiable => proposal.purchase_process_item
         )
       end
     end

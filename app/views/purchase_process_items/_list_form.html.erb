@@ -12,7 +12,7 @@
     <%= unit_price %>
   </td>
   <td>
-    <input id="<%= f.sanitized_object_name %>_administrative_process_budget_allocation_items_record_<%= id %>_id" type="hidden" name="<%= f.sanitized_object_name %>[administrative_process_budget_allocation_item_ids][]" value="<%= id %>" />
+    <input id="<%= f.sanitized_object_name %>_purchase_process_items_record_<%= id %>_id" type="hidden" name="<%= f.sanitized_object_name %>[purchase_process_item_ids][]" value="<%= id %>" />
     <%= button_tag 'Remover', :type => :button,  :class => 'button negative modal-finder-remove' if f.object.licitation_process_updatable? %>
   </td>
 </tr>

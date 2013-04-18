@@ -14,6 +14,6 @@ class BidderProposalBuilder
   private
 
   def build_proposal(item)
-    bidder.proposals.build({ :administrative_process_budget_allocation_item => item })
+    bidder.proposals.build({ :purchase_process_item => item })
   end
 end
