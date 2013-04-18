@@ -17,7 +17,7 @@ module Compras
       private
 
       def all_hidden_fields
-        (column_names + exclude_data) - exclude_data
+        (column_names + extra_data) - exclude_data
       end
 
       def association_name
@@ -33,11 +33,11 @@ module Compras
       end
 
       def extra_data
-         Set.new(options.fetch(:extra_data, []))
+       Set.new(options.fetch(:extra_data, []))
       end
 
       def column_names
-         Set.new(options.fetch(:columns, []))
+       Set.new(options.fetch(:columns, []))
       end
 
       def exclude_data
