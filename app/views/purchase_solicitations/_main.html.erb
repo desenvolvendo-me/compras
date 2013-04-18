@@ -55,10 +55,10 @@
 
 <script>
   $('#purchase_solicitation_kind').change(function(){
-      if (this.value.length > 0){
-        $('#purchase_solicitation_material').attr('readonly', false).data('disabled', '');
-      }else{
-        $('#purchase_solicitation_material').val('').attr('readonly', true).data('disabled', '<%= f.object.decorator.disabled_materials %>');
-      }
+    if (this.value.length > 0){
+      $('#purchase_solicitation_material').attr('readonly', false).data('disabled', false);
+    }else{
+      $('#purchase_solicitation_material').val('').attr('readonly', true).data('disabled', '<%= f.object.decorator.disabled_materials %>');
+    }
   });
 </script>
