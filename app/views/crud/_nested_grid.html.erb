@@ -24,11 +24,14 @@
 
     <tbody>
       <%= f.association association, collection: localized(f.object.send(association)) do |a| %>
+        <% all_hidden_fields.each do |column_name| %>
+          <%= a.full_error column_name %>
+        <% end %>
+
         <%= render "nested_grid_row",
                    template_folder: template_folder,
                    column_names: column_names,
-                   extra_data: extra_data,
-                   exclude_data: exclude_data,
+                   all_hidden_fields: all_hidden_fields,
                    data_disabled: data_disabled,
                    f: a %>
       <% end %>
@@ -40,8 +43,7 @@
       <%= render "nested_grid_row_mustache",
                  template_folder: template_folder,
                  column_names: column_names,
-                 extra_data: extra_data,
-                 exclude_data: exclude_data,
+                 all_hidden_fields: all_hidden_fields,
                  data_disabled: nil,
                  f: a %>
     <% end %>
