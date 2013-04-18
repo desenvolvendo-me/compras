@@ -13,6 +13,6 @@ class SessionsController < Devise::SessionsController
     token = Devise.friendly_token
 
     current_user.update_attribute(:login_token, token)
-    session[:token] = token
+    session[:login_token] = token
   end
 end

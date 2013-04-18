@@ -70,14 +70,14 @@ class ApplicationController < ActionController::Base
   end
 
   def check_concurrent_session
-    if is_already_logged_in?
+    if user_already_logged_in?
       sign_out(current_user)
 
       redirect_to new_user_session_path, :alert => I18n.t('devise.failure.shared_account')
     end
   end
 
-  def is_already_logged_in?
-    current_user && !(session[:token] == current_user.login_token)
+  def user_already_logged_in?
+    current_user && !(session[:login_token] == current_user.login_token)
   end
 end

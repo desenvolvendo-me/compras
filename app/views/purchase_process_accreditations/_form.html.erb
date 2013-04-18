@@ -18,7 +18,7 @@
         <%= PurchaseProcessAccreditationCreditor.human_attribute_name :company_size %>
       </label>
 
-      <%= select_tag :company_size, options_from_collection_for_select(CompanySize.all, 'id', 'name'),
+      <%= select_tag :company_size, options_from_collection_for_select(f.object.decorator.company_sizes, 'id', 'name'),
           :include_blank => true, :name => 'purchase_process_accreditation[company_size]' %>
     </div>
   </div>

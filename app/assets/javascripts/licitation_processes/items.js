@@ -4,6 +4,8 @@ $(document).ready(function() {
     $('#items-records input.material-id').each(function() {
       if ( $(this).val() == item.material_id ) {
         added = true;
+
+        return added;
       }
     });
 
