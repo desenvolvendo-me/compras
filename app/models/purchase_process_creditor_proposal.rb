@@ -14,6 +14,6 @@ class PurchaseProcessCreditorProposal < Compras::Model
   validates :creditor, :item, :brand, :unit_price, presence: true
 
   def total_price
-    unit_price * item_quantity
+    (unit_price || 0) * (item_quantity || 0)
   end
 end
