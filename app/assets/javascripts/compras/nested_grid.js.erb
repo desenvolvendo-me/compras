@@ -32,10 +32,19 @@ $(function () {
   $(document).on('click', '.nested-record .remove-nested-record', function(event) {
     event.preventDefault();
 
-    $(this).closest('.nested-record').find('.destroy').val(true);
-    $(this).closest('.nested-record').hide();
-    $(this).closest('.nested-record').addClass('removed');
-    $(this).closest('table.records').trigger('nestedGrid:afterRemove');
+    var nestedRecord = $(this).closest('.nested-record'),
+        recordId = nestedRecord.find(':input:hidden[name*="[id]"]').val(),
+        nestedRecords = $(this).closest('table.records');
+
+    if (recordId) {
+      nestedRecord.find('.destroy').val(true);
+      nestedRecord.hide();
+      nestedRecord.addClass('removed');
+    } else {
+      nestedRecord.remove();
+    }
+
+    nestedRecords.trigger('nestedGrid:afterRemove');
   });
 
   $(document).on('click', '.nested-record .edit-nested-record', function(event) {
