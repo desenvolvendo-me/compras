@@ -22,8 +22,7 @@ describe PurchaseProcessAccreditationDecorator do
       end
     end
   end
-end
-describe PurchaseProcessAccreditationDecorator do
+
   describe '#accreditation_path' do
     let(:routes) { double(:routes) }
 

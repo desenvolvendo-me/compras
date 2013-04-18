@@ -1,6 +1,6 @@
 <div class="buttons">
   <%= link_to('Relatório', f.object.decorator.accreditation_path(controller),
-  :class => "button primary", 'data-disabled' => f.object.decorator.must_have_creditors) %>
+      :class => "button primary", 'data-disabled' => f.object.decorator.must_have_creditors) %>
 
   <%= f.button :submit if can?(:modify, main_controller_name) %>
   <%= f.button :back, :href => edit_licitation_process_path(@parent) %>
