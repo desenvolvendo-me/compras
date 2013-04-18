@@ -1,91 +1,14 @@
-<div class="nested-fields">
-  <div class="yui3-g">
-    <div class="yui3-u-4-5">
-      <%= f.input :budget_allocation, :as => :auto_complete, :fake => true,
-                  :required => true, :disabled => f.object.annulled?,
-                  'data-hidden-field-class' => 'unique',
-                  :input_html => { :class => 'budget-allocation' } %>
-    </div>
-  </div>
-
-  <div class="yui3-g">
-    <div class="yui3-u-2-3">
-      <%= f.input :budget_allocation_expense_nature, :as => :fake, :disabled => true %>
-    </div>
-  </div>
-
-  <div class="yui3-g">
-    <div class="yui3-u-2-5">
-      <%= f.input :expense_nature, :as => :auto_complete, :fake => true %>
-    </div>
-
-    <div class="yui3-u-1-5">
-      <%= f.input :budget_allocation_amount, :as => :fake, :disabled => true,
-                  :input_html => { 'data-decimal' => true, :value => '0,00', 'data-precision' => 2, :maxlength => 15, :class => 'numeric' } %>
-    </div>
-
-    <div class="yui3-u-1-5">
-      <%= f.input :estimated_value, :as => :fake,
-                  :input_html => { 'data-decimal' => true, :value => '0,00', 'data-precision' => 2, :maxlength => 15, :class => 'numeric' } %>
-    </div>
-
-    <div class="yui3-u-1-5">
-      <%= button_tag 'Adicionar', :class => 'button nested-add-record field-without-label',
-                     'data-template' => 'purchase_solicitation_budget_allocations_template',
-                     'data-records' => 'budget-allocation-records' %>
-    </div>
-  </div>
-</div>
-
-<table id="budget-allocation-records" class="records">
-  <thead>
-    <tr>
-      <th><%= PurchaseSolicitationBudgetAllocation.human_attribute_name :budget_allocation %></th>
-      <th><%= PurchaseSolicitationBudgetAllocation.human_attribute_name :budget_allocation_expense_nature %></th>
-      <th><%= PurchaseSolicitationBudgetAllocation.human_attribute_name :expense_nature %></th>
-      <th><%= PurchaseSolicitationBudgetAllocation.human_attribute_name :budget_allocation_amount %></th>
-      <th><%= PurchaseSolicitationBudgetAllocation.human_attribute_name :estimated_value %></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <%= f.association :purchase_solicitation_budget_allocations, :collection => localized(f.object.purchase_solicitation_budget_allocations) do |p| %>
-      <%= render 'purchase_solicitation_budget_allocations/purchase_solicitation_list_form',
-          :budget_allocation => p.object.budget_allocation,
-          :budget_allocation_id => p.object.budget_allocation_id,
-          :expense_nature => p.object.expense_nature,
-          :expense_nature_id => p.object.expense_nature_id,
-          :budget_allocation_expense_nature => p.object.budget_allocation_expense_nature,
-          :budget_allocation_amount => number_with_precision(p.object.budget_allocation_amount),
-          :estimated_value => number_with_precision(p.object.estimated_value),
-          :data_disabled => f.object.decorator.is_annulled_message,
-          :f => p %>
-    <% end %>
-  </tbody>
-</table>
-
-<%= mustache "purchase_solicitation_budget_allocations_template" do %>
-  <%= f.association :purchase_solicitation_budget_allocations_attributes, :collection => f.object.purchase_solicitation_budget_allocations.build, :index => '{{uuid}}' do |p| %>
-    <%= render 'purchase_solicitation_budget_allocations/purchase_solicitation_list_form',
-               :budget_allocation => '{{budget_allocation}}',
-               :budget_allocation_id => '{{budget_allocation_id}}',
-               :expense_nature => '{{expense_nature}}',
-               :expense_nature_id =>'{{expense_nature_id}}',
-               :budget_allocation_expense_nature => '{{budget_allocation_expense_nature}}',
-               :budget_allocation_amount => '{{budget_allocation_amount}}',
-               :estimated_value => '{{estimated_value}}',
-               :data_disabled => nil,
-               :f => p %>
-  <% end %>
-<% end %>
+<%= f.input :purchase_solicitation_budget_allocations, as: :nested_grid,
+    :data_disabled => f.object.decorator.is_annulled_message,
+    columns: [:budget_allocation, :budget_allocation_expense_nature, :expense_nature,
+              :budget_allocation_amount, :estimated_value]%>
 
 <script>
   function filterc_expense_nature_source(expenseNatureId) {
     var url = "<%= expense_natures_path %>",
-    params = {
-      breakdown_of: expenseNatureId
-    }
+        params = {
+          breakdown_of: expenseNatureId
+        }
 
     if (expenseNatureId) {
       url += "?" + jQuery.param(params);
@@ -103,9 +26,5 @@
       $('#purchase_solicitation_budget_allocation_amount').val('0,00');
       $('#purchase_solicitation_budget_allocation_expense_nature').val('');
     }
-  });
-
-  $(function() {
-    $('.purchase-solicitation-budget-allocation .destroy[value="true"]').closest('.purchase-solicitation-budget-allocation').hide();
   });
 </script>
