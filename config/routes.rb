@@ -426,6 +426,14 @@ Compras::Application.routes.draw do
     end
   end
 
+  resources :purchase_process_creditor_proposals do
+    collection do
+      get :creditors
+      get :batch_edit
+      put :batch_update
+    end
+  end
+
   resources :bidders do
     collection do
       get :filter

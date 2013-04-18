@@ -26,6 +26,7 @@ require 'app/models/trading'
 require 'app/models/purchase_solicitation_item'
 require 'app/models/legal_analysis_appraisal'
 require 'app/models/purchase_process_accreditation'
+require 'app/models/purchase_process_creditor_proposal'
 
 describe LicitationProcess do
   let(:current_prefecture) { double(:current_prefecture) }
@@ -57,7 +58,7 @@ describe LicitationProcess do
   it { should have_many(:licitation_process_appeals).dependent(:restrict) }
   it { should have_many(:pledges).dependent(:restrict) }
   it { should have_many(:judgment_commission_advices).dependent(:restrict) }
-  it { should have_many(:creditors).dependent(:restrict).through(:bidders) }
+  it { should have_many(:license_creditors).dependent(:restrict).through(:bidders) }
   it { should have_many(:licitation_process_lots).dependent(:destroy).order(:id) }
   it { should have_many(:reserve_funds).dependent(:restrict) }
   it { should have_many(:price_registrations).dependent(:restrict) }
@@ -69,6 +70,7 @@ describe LicitationProcess do
   it { should have_many(:materials).through(:items) }
   it { should have_many(:legal_analysis_appraisals).dependent(:restrict) }
   it { should have_many(:budget_allocations).through(:administrative_process_budget_allocations) }
+  it { should have_many(:creditor_proposals).through(:items) }
 
   it { should have_one(:purchase_process_accreditation).dependent(:restrict) }
   it { should have_one(:trading).dependent(:restrict) }
@@ -168,6 +170,30 @@ describe LicitationProcess do
         LicitationProcessEnvelopeOpeningDate.should_receive(:new).with(subject).and_return licitation_validation
         licitation_validation.should_receive :valid?
         subject.send(:validate_proposal_envelope_opening_date)
+      end
+    end
+
+    describe '#creditors' do
+      context 'when modality trading' do
+        it 'returns license creditors from bidders' do
+          license_creditor = double :license_creditors
+
+          subject.stub(:trading?).and_return true
+          subject.stub(:license_creditors).and_return [license_creditor]
+
+          expect(subject.creditors).to eql [license_creditor]
+        end
+      end
+
+      context 'when modality is not trading' do
+        it 'returns creditors from accreditation' do
+          accreditation_creditors = double :accreditation_creditors
+
+          subject.stub(:trading?).and_return false
+          subject.stub(:accreditation_creditors).and_return [accreditation_creditors]
+
+          expect(subject.creditors).to eql [accreditation_creditors]
+        end
       end
     end
 

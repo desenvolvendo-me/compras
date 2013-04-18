@@ -20,6 +20,7 @@ require 'app/models/bidder'
 require 'app/models/licitation_process'
 require 'app/models/purchase_process_accreditation_creditor'
 require 'app/models/administrative_process_budget_allocation_item'
+require 'app/models/purchase_process_creditor_proposal'
 
 describe Creditor do
   describe 'default values' do
@@ -52,6 +53,7 @@ describe Creditor do
   it { should have_many(:licitation_processes).dependent(:restrict).through(:bidders) }
   it { should have_many(:purchase_process_accreditation_creditors).dependent(:restrict) }
   it { should have_many(:administrative_process_budget_allocation_items).dependent(:restrict) }
+  it { should have_many(:purchase_process_creditor_proposals).dependent(:restrict) }
 
   it { should validate_presence_of :person }
   it { should validate_duplication_of(:document_type_id).on(:documents) }

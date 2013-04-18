@@ -1,0 +1,36 @@
+$(document).ready(function() {
+  calculateTotalValue();
+  countItems();
+
+  function calculateTotalValue() {
+    var totalValueInput  = $("div#total_value").find('input'),
+        totalPriceInputs = $("div.total_price input"),
+        totalValue       = 0;
+
+    totalPriceInputs.each(function(i, input) {
+      totalValue += parsePtBrFloat($(input).val());
+    });
+
+    totalValueInput.val(numberWithDelimiter(totalValue));
+  };
+
+  function countItems() {
+    $('input.item_counter').each(function(index, input) {
+      $(input).val(index + 1);
+    });
+  }
+
+  $("div.total_price").on('change', 'input', function() {
+    calculateTotalValue();
+  });
+
+  $("div.unit_price").on('keyup', function() {
+    var unitPrice       = parsePtBrFloat($(this).find('input').val()),
+        quantity        = $(this).prev('.quantity').find('input').val(),
+        totalPrice      = numberWithDelimiter(unitPrice * quantity),
+        totalPriceInput = $(this).next('.total_price').find('input');
+
+    totalPriceInput.val(totalPrice);
+    totalPriceInput.trigger('change');
+  });
+});

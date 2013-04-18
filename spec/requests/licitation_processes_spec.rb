@@ -2079,4 +2079,29 @@ feature "LicitationProcesses" do
       end
     end
   end
+
+  scenario 'list license creditors when modality is trading' do
+    LicitationProcess.make!(:processo_licitatorio, modality: 'trading',
+      bidders: [Bidder.make!(:licitante_sobrinho)] )
+
+    navigate 'Processos de Compra > Processos de Compras'
+
+    click_link "Limpar Filtro"
+
+    within_records do
+      click_link '1/2012'
+    end
+
+    click_link 'Propostas'
+
+    within_records do
+      expect(page).to have_content 'Fornecedor'
+      expect(page).to have_content 'Email'
+
+      within 'tbody tr:first' do
+        expect(page).to have_content 'Gabriel Sobrinho'
+        expect(page).to have_content 'gabriel.sobrinho@gmail.com'
+      end
+    end
+  end
 end
