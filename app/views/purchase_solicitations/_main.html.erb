@@ -56,9 +56,9 @@
 <script>
   $('#purchase_solicitation_kind').change(function(){
     if (this.value.length > 0){
-      $('#purchase_solicitation_material').attr('readonly', false).data('disabled', false);
+      $('#purchase_solicitation_material').attr('readonly', false).removeAttr('data-disabled');
     }else{
-      $('#purchase_solicitation_material').val('').attr('readonly', true).data('disabled', '<%= f.object.decorator.disabled_materials %>');
+      $('#purchase_solicitation_material').val('').attr('readonly', true).attr('data-disabled', '<%= f.object.decorator.disabled_materials %>');
     }
   });
 </script>
