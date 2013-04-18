@@ -357,7 +357,6 @@ feature "LicitationProcesses" do
           click_link "Remover"
         end
 
-
         within 'tbody .nested-record:last' do
           click_link 'Editar'
         end
