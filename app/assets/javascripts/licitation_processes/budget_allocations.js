@@ -1,10 +1,10 @@
 $(document).ready(function() {
   function hasAlreadyAddedBudgetAllocation(budgetAllocation) {
-    var nestedBudgetAllocationGridRows = $("#administrative-process-budget-allocation-records tr.record").not('[style*="display: none"]'),
+    var nestedBudgetAllocationGridRows = $("#administrative_process_budget_allocations_records tr.record").not('.removed'),
         gotBudgetAllocation = false;
 
     nestedBudgetAllocationGridRows.each(function(index, obj) {
-      var budgetRow = $(obj).find("input.budget_allocation_id");
+      var budgetRow = $(obj).find(".licitation_process_administrative_process_budget_allocations_budget_allocation_id :input");
 
       if (budgetRow.val() == budgetAllocation.budget_allocation_id) {
         gotBudgetAllocation = true;
@@ -19,26 +19,27 @@ $(document).ready(function() {
     var nestedBudgetAllocationGridTemplate = $("#administrative_process_budget_allocations_template"),
         budgetAllocationBinds = {
           uuid: _.uniqueId('fresh-'),
+          id: '',
           budget_allocation: budgetAllocation.budget_allocation,
           budget_allocation_id: budgetAllocation.budget_allocation_id,
           budget_allocation_expense_nature: budgetAllocation.budget_allocation_expense_nature,
           expense_nature: budgetAllocation.expense_nature,
           expense_nature_id: budgetAllocation.expense_nature_id,
           budget_allocation_amount: numberWithDelimiter(budgetAllocation.amount),
-          administrative_process_budget_allocation_value: numberWithDelimiter(budgetAllocation.estimated_value)
+          value: numberWithDelimiter(budgetAllocation.estimated_value)
         };
 
     if ( !hasAlreadyAddedBudgetAllocation(budgetAllocation) ) {
-      $("#administrative-process-budget-allocation-records tbody").append(nestedBudgetAllocationGridTemplate.mustache(budgetAllocationBinds));
-      $("#administrative-process-budget-allocation-records").trigger('nestedGrid:afterAdd');
+      $("#administrative_process_budget_allocations_records tbody").append(nestedBudgetAllocationGridTemplate.mustache(budgetAllocationBinds));
+      $("#administrative_process_budget_allocations_records").trigger('nestedGrid:afterAdd');
     }
   }
 
   function sumAdministrativeProcessBudgetAllocationTotalValue() {
     var totalValue = 0,
-        tableRows  = $('#administrative-process-budget-allocation-records tr.record').not('.removed');
+        tableRows  = $('#administrative_process_budget_allocations_records tr.record').not('.removed');
 
-    tableRows.find('input.administrative_process_budget_allocation_value').each(function() {
+    tableRows.find('.licitation_process_administrative_process_budget_allocations_value :input').each(function() {
       totalValue += parsePtBrFloat( $(this).val() );
     });
 
@@ -86,11 +87,11 @@ $(document).ready(function() {
     $("#licitation_process_expense_nature").data('source', url);
   });
 
-  $('#administrative-process-budget-allocation-records').on('nestedGrid:afterAdd', function() {
+  $('#administrative_process_budget_allocations_records').on('nestedGrid:afterAdd', function() {
     sumAdministrativeProcessBudgetAllocationTotalValue();
   });
 
-  $('#administrative-process-budget-allocation-records').on('nestedGrid:afterRemove', function() {
+  $('#administrative_process_budget_allocations_records').on('nestedGrid:afterRemove', function() {
     sumAdministrativeProcessBudgetAllocationTotalValue();
   });
 
