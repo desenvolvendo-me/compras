@@ -1,30 +1,29 @@
 class BidderProposal < Compras::Model
-  attr_accessible :bidder, :brand, :unit_price,
-                  :administrative_process_budget_allocation_item,
-                  :administrative_process_budget_allocation_item_id
+  attr_accessible :bidder, :brand, :unit_price, :purchase_process_item,
+                  :purchase_process_item_id
 
   has_enumeration_for :situation, :with => SituationOfProposal
 
-  has_one :licitation_process_lot, :through => :administrative_process_budget_allocation_item
+  has_one :licitation_process_lot, :through => :purchase_process_item
   has_many :licitation_process_ratification_items, :dependent => :destroy
 
-  belongs_to :administrative_process_budget_allocation_item
+  belongs_to :purchase_process_item
   belongs_to :bidder
 
-  delegate :material, :quantity, :to => :administrative_process_budget_allocation_item, :allow_nil => true
-  delegate :unit_price, :to => :administrative_process_budget_allocation_item, :allow_nil => true, :prefix => true
+  delegate :material, :quantity, :to => :purchase_process_item, :allow_nil => true
+  delegate :unit_price, :to => :purchase_process_item, :allow_nil => true, :prefix => true
   delegate :reference_unit, :description, :code, :to => :material, :allow_nil => true
   delegate :creditor, :to => :bidder, :allow_nil => true
 
   after_initialize :set_default_values
 
   scope :by_lot, lambda { |lot_id|
-    joins { administrative_process_budget_allocation_item.licitation_process_lot }.
-    where { administrative_process_budget_allocation_item.licitation_process_lot.id.eq(lot_id) }
+    joins { purchase_process_item.licitation_process_lot }.
+    where { purchase_process_item.licitation_process_lot.id.eq(lot_id) }
   }
 
   def self.by_item_order_by_unit_price(item_id)
-    where { administrative_process_budget_allocation_item_id.eq(item_id) & unit_price.not_eq(nil)}.
+    where { purchase_process_item_id.eq(item_id) & unit_price.not_eq(nil)}.
     reorder {  unit_price }
   end
 
@@ -48,7 +47,7 @@ class BidderProposal < Compras::Model
   end
 
   def unit_price_greater_than_budget_allocation_item_unit_price?
-    unit_price > administrative_process_budget_allocation_item_unit_price
+    unit_price > purchase_process_item_unit_price
   end
 
   protected

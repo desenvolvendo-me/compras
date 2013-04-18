@@ -24,7 +24,7 @@ describe PriceRegistrationItem do
     it 'returns the winning_bid of the administrative process item if calculation is "lowest_item_by_price"' do
       licitation_process = LicitationProcess.make!(:apuracao_por_itens)
       item = PriceRegistrationItem.make(:antivirus,
-                                        :administrative_process_budget_allocation_item => licitation_process.items.first)
+                                        :purchase_process_item => licitation_process.items.first)
       price_registration = PriceRegistration.make!(:registro_de_precos,
                                                    :licitation_process => licitation_process,
                                                    :items => [item])
@@ -38,10 +38,10 @@ describe PriceRegistrationItem do
       licitation_process = LicitationProcess.make!(:apuracao_por_lote)
       lote = LicitationProcessLot.make!(:lote,
                                         :licitation_process => licitation_process,
-                                        :administrative_process_budget_allocation_items => [licitation_process.items.first])
+                                        :purchase_process_items => [licitation_process.items.first])
 
       item = PriceRegistrationItem.make(:antivirus,
-                                        :administrative_process_budget_allocation_item => licitation_process.items.first)
+                                        :purchase_process_item => licitation_process.items.first)
       price_registration = PriceRegistration.make!(:registro_de_precos,
                                                    :licitation_process  => licitation_process,
                                                    :items => [item])

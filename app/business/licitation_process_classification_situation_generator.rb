@@ -105,7 +105,7 @@ class LicitationProcessClassificationSituationGenerator
   def change_proposal_situation_by_item!
     items.each do |item|
       item.licitation_process_classifications.each do |classification|
-        proposals = classification.proposals.select { |p| p.administrative_process_budget_allocation_item == item }
+        proposals = classification.proposals.select { |p| p.purchase_process_item == item }
 
         change_proposals_situation!(proposals, classification)
       end

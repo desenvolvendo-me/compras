@@ -1,10 +1,9 @@
 class PriceRegistrationItem < Compras::Model
-  attr_accessible :price_registration_id,
-                  :administrative_process_budget_allocation_item_id,
+  attr_accessible :price_registration_id, :purchase_process_item_id,
                   :price_registration_budget_structures_attributes
 
   belongs_to :price_registration
-  belongs_to :administrative_process_budget_allocation_item
+  belongs_to :purchase_process_item
 
   has_many :price_registration_budget_structures, :dependent => :destroy, :inverse_of => :price_registration_item, :order => :id
 
@@ -14,13 +13,13 @@ class PriceRegistrationItem < Compras::Model
   accepts_nested_attributes_for :price_registration_budget_structures, :allow_destroy => true
 
   delegate :quantity, :reference_unit, :licitation_process_lot,
-           :to => :administrative_process_budget_allocation_item, :allow_nil => true
+           :to => :purchase_process_item, :allow_nil => true
 
-  validates :price_registration, :administrative_process_budget_allocation_item,
+  validates :price_registration, :purchase_process_item,
             :presence => true
 
   def to_s
-    administrative_process_budget_allocation_item.to_s
+    purchase_process_item.to_s
   end
 
   def unit_price
@@ -35,7 +34,7 @@ class PriceRegistrationItem < Compras::Model
     if judgment_form.lowest_price? && judgment_form.global?
       licitation_process.winning_bid
     elsif judgment_form.lowest_price? && judgment_form.item?
-      administrative_process_budget_allocation_item.winning_bid
+      purchase_process_item.winning_bid
     elsif judgment_form.lowest_price? && judgment_form.lot?
       licitation_process_lot.winning_bid
     end

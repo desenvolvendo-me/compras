@@ -8,7 +8,7 @@ pt-BR:
     attributes:
       purchase_process_creditor_proposal:
         creditor: "Credor"
-        administrative_process_budget_allocation_item: "Item"
+        purchase_process_item: "Item"
         brand: "Marca"
         unit_price: "Preço unitário"
         item_lot: "Lote"

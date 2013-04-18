@@ -1,11 +1,10 @@
 class LicitationProcessLot < Compras::Model
-  attr_accessible :observations, :licitation_process_id,
-                  :administrative_process_budget_allocation_item_ids
+  attr_accessible :observations, :licitation_process_id, :purchase_process_item_ids
 
   belongs_to :licitation_process
 
-  has_many :administrative_process_budget_allocation_items, :dependent => :nullify, :order => :id
-  has_many :bidder_proposals, :through => :administrative_process_budget_allocation_items
+  has_many :purchase_process_items, :dependent => :nullify, :order => :id
+  has_many :bidder_proposals, :through => :purchase_process_items
   has_many :bidders, :through => :bidder_proposals
   has_many :licitation_process_classifications, :as => :classifiable, :dependent => :destroy
 
@@ -14,7 +13,7 @@ class LicitationProcessLot < Compras::Model
   delegate :updatable?, :to => :licitation_process, :prefix => true,
            :allow_nil => true
 
-  validate :administrative_process_budget_allocation_items_should_have_at_least_one
+  validate :purchase_process_items_should_have_at_least_one
 
   orderize "id DESC"
   filterize
@@ -41,9 +40,9 @@ class LicitationProcessLot < Compras::Model
 
   private
 
-  def administrative_process_budget_allocation_items_should_have_at_least_one
-    if administrative_process_budget_allocation_items.empty?
-      errors.add :administrative_process_budget_allocation_items, :should_be_at_least_one_item
+  def purchase_process_items_should_have_at_least_one
+    if purchase_process_items.empty?
+      errors.add :purchase_process_items, :should_be_at_least_one_item
     end
   end
 end

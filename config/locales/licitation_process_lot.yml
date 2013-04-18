@@ -8,7 +8,7 @@ pt-BR:
     attributes:
       licitation_process_lot:
         observations: "Observações"
-        administrative_process_budget_allocation_items: "Itens"
+        purchase_process_items: "Itens"
 
   licitation_process_lot:
     messages:

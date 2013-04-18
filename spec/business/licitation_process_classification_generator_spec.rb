@@ -152,15 +152,15 @@ describe LicitationProcessClassificationGenerator do
     it 'should classify proposals' do
       proposal1.stub(:unit_price).and_return(10)
       proposal1.stub(:total_price).and_return(20)
-      proposal1.stub(:administrative_process_budget_allocation_item).and_return(item)
+      proposal1.stub(:purchase_process_item).and_return(item)
 
       proposal2.stub(:unit_price).and_return(1)
       proposal2.stub(:total_price).and_return(5)
-      proposal2.stub(:administrative_process_budget_allocation_item).and_return(item)
+      proposal2.stub(:purchase_process_item).and_return(item)
 
       proposal3.stub(:unit_price).and_return(5)
       proposal3.stub(:total_price).and_return(15)
-      proposal3.stub(:administrative_process_budget_allocation_item).and_return(item)
+      proposal3.stub(:purchase_process_item).and_return(item)
 
       proposal_repository.should_receive(:by_item_order_by_unit_price).
                           with(1).and_return([proposal2, proposal3, proposal1])
@@ -195,15 +195,15 @@ describe LicitationProcessClassificationGenerator do
     it 'should classify disqualifying proposals that has unit_price less or equal zero' do
       proposal1.stub(:unit_price).and_return(10)
       proposal1.stub(:total_price).and_return(20)
-      proposal1.stub(:administrative_process_budget_allocation_item).and_return(item)
+      proposal1.stub(:purchase_process_item).and_return(item)
 
       proposal2.stub(:unit_price).and_return(0)
       proposal2.stub(:total_price).and_return(0)
-      proposal2.stub(:administrative_process_budget_allocation_item).and_return(item)
+      proposal2.stub(:purchase_process_item).and_return(item)
 
       proposal3.stub(:unit_price).and_return(5)
       proposal3.stub(:total_price).and_return(15)
-      proposal3.stub(:administrative_process_budget_allocation_item).and_return(item)
+      proposal3.stub(:purchase_process_item).and_return(item)
 
       proposal_repository.should_receive(:by_item_order_by_unit_price).
                           with(1).and_return([proposal2, proposal3, proposal1])

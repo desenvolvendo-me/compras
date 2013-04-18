@@ -1,10 +1,10 @@
 class PurchaseProcessCreditorProposal < Compras::Model
-  attr_accessible :creditor_id, :administrative_process_budget_allocation_item_id,
+  attr_accessible :creditor_id, :purchase_process_item_id,
                   :brand, :unit_price, :item, :creditor
 
   belongs_to :creditor
-  belongs_to :item, class_name: 'AdministrativeProcessBudgetAllocationItem',
-    foreign_key: :administrative_process_budget_allocation_item_id
+  belongs_to :item, class_name: 'PurchaseProcessItem',
+             foreign_key: :purchase_process_item_id
 
   has_one :licitation_process, through: :item
 

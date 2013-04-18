@@ -64,7 +64,7 @@ class LicitationProcess < Compras::Model
            :source => :licitation_process_classifications
   has_many :administrative_process_budget_allocations, :dependent => :destroy, :order => :id
   has_many :budget_allocations, :through => :administrative_process_budget_allocations
-  has_many :items, :class_name => 'AdministrativeProcessBudgetAllocationItem', :dependent => :restrict,
+  has_many :items, :class_name => 'PurchaseProcessItem', :dependent => :restrict,
            :order => :id, :inverse_of => :licitation_process
   has_many :materials, :through => :items
   has_many :legal_analysis_appraisals, :dependent => :restrict
@@ -186,7 +186,7 @@ class LicitationProcess < Compras::Model
 
   def lots_with_items
     licitation_process_lots.select do |lot|
-      lot.administrative_process_budget_allocation_items.present? && lot.bidder_proposals.present?
+      lot.purchase_process_items.present? && lot.bidder_proposals.present?
     end
   end
 

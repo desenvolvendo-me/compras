@@ -49,8 +49,8 @@ describe Bidder do
     it { should delegate(:allow_bidders?).to(:licitation_process).allowing_nil(true) }
     it { should delegate(:licitation_process_lots).to(:licitation_process).allowing_nil(true) }
 
-    it { should delegate(:administrative_process_budget_allocation_items).to(:licitation_process_lots) }
-    it { should delegate(:material).to(:administrative_process_budget_allocation_items) }
+    it { should delegate(:purchase_process_items).to(:licitation_process_lots) }
+    it { should delegate(:material).to(:purchase_process_items) }
     it { should delegate(:benefited).to(:creditor).allowing_nil(true) }
   end
 

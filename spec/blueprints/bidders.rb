@@ -31,7 +31,7 @@ Bidder.blueprint(:licitante_com_proposta_1) do
   proposals { [
     BidderProposal.make!(:proposta_licitante_1),
     BidderProposal.make!(:proposta_licitante_2,
-      :administrative_process_budget_allocation_item => AdministrativeProcessBudgetAllocationItem.make!(:item_arame) )
+      :purchase_process_item => PurchaseProcessItem.make!(:item_arame) )
   ] }
   technical_score { 100 }
   will_submit_new_proposal_when_draw { true }
@@ -47,7 +47,7 @@ Bidder.blueprint(:licitante_com_proposta_2) do
   proposals { [
     BidderProposal.make!(:proposta_licitante_2),
     BidderProposal.make!(:proposta_licitante_1,
-      :administrative_process_budget_allocation_item => AdministrativeProcessBudgetAllocationItem.make!(:item_arame) )
+      :purchase_process_item => PurchaseProcessItem.make!(:item_arame) )
   ] }
   technical_score { 100 }
   will_submit_new_proposal_when_draw { true }

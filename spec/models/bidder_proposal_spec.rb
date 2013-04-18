@@ -4,15 +4,15 @@ require 'app/models/bidder_proposal'
 require 'app/models/licitation_process_ratification_item'
 
 describe BidderProposal do
-  it { should belong_to :administrative_process_budget_allocation_item }
+  it { should belong_to :purchase_process_item }
   it { should belong_to :bidder }
 
-  it { should have_one(:licitation_process_lot).through(:administrative_process_budget_allocation_item) }
+  it { should have_one(:licitation_process_lot).through(:purchase_process_item) }
   it { should have_many(:licitation_process_ratification_items).dependent(:destroy) }
 
-  it { should delegate(:material).to(:administrative_process_budget_allocation_item).allowing_nil(true) }
-  it { should delegate(:quantity).to(:administrative_process_budget_allocation_item).allowing_nil(true) }
-  it { should delegate(:unit_price).to(:administrative_process_budget_allocation_item).allowing_nil(true).prefix(true) }
+  it { should delegate(:material).to(:purchase_process_item).allowing_nil(true) }
+  it { should delegate(:quantity).to(:purchase_process_item).allowing_nil(true) }
+  it { should delegate(:unit_price).to(:purchase_process_item).allowing_nil(true).prefix(true) }
   it { should delegate(:reference_unit).to(:material).allowing_nil(true) }
   it { should delegate(:description).to(:material).allowing_nil(true) }
   it { should delegate(:code).to(:material).allowing_nil(true) }
@@ -56,13 +56,13 @@ describe BidderProposal do
     end
 
     it 'should return false' do
-      subject.stub(:administrative_process_budget_allocation_item_unit_price => 11)
+      subject.stub(:purchase_process_item_unit_price => 11)
 
       expect(subject.unit_price_greater_than_budget_allocation_item_unit_price?).to be false
     end
 
     it 'should return true' do
-      subject.stub(:administrative_process_budget_allocation_item_unit_price => 9)
+      subject.stub(:purchase_process_item_unit_price => 9)
 
       expect(subject.unit_price_greater_than_budget_allocation_item_unit_price?).to be true
     end

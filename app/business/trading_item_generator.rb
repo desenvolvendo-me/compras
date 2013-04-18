@@ -12,7 +12,7 @@ class TradingItemGenerator
     trading.licitation_process_items.each do |item|
       trading_item_repository.create!(
         :trading_id => trading.id,
-        :administrative_process_budget_allocation_item_id => item.id)
+        :purchase_process_item_id => item.id)
     end
   end
 

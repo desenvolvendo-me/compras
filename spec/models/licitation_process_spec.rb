@@ -6,7 +6,7 @@ require 'app/models/person'
 require 'app/models/licitation_process'
 require 'app/models/payment_method'
 require 'app/models/administrative_process_budget_allocation'
-require 'app/models/administrative_process_budget_allocation_item'
+require 'app/models/purchase_process_item'
 require 'app/models/licitation_process_publication'
 require 'app/models/bidder'
 require 'app/models/licitation_process_impugnment'
@@ -369,9 +369,9 @@ describe LicitationProcess do
 
   context 'lots with items' do
     let :lot_with_items do
-      [double("LicitationProcessLot", :administrative_process_budget_allocation_items => [double("LicitationProcessLotItem")],
+      [double("LicitationProcessLot", :purchase_process_items => [double("LicitationProcessLotItem")],
               :bidder_proposals => [double]),
-       double("LicitationProcessLot", :administrative_process_budget_allocation_items => [],
+       double("LicitationProcessLot", :purchase_process_items => [],
               :bidder_proposals => [double])]
     end
 

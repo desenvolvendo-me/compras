@@ -5,7 +5,7 @@ creditors:
 bidders:
   - people
 licitation_process_lots:
-  - administrative_process_budget_allocation_items
+  - purchase_process_items
 regulatory_acts:
   - dissemination_sources
 licitation_processes:

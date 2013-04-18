@@ -5,7 +5,7 @@ feature "LicitationProcessLots" do
   let(:current_user) { User.make!(:sobrinho) }
 
   background do
-    create_roles ['licitation_processes', 'administrative_process_budget_allocation_items']
+    create_roles ['licitation_processes', 'purchase_process_items']
     sign_in
   end
 
@@ -204,7 +204,7 @@ feature "LicitationProcessLots" do
 
   scenario 'only items from administrative process that are not included by any lot must be available' do
     LicitationProcess.make!(:processo_licitatorio_canetas_sem_lote)
-    AdministrativeProcessBudgetAllocationItem.make!(:item_arame_farpado)
+    PurchaseProcessItem.make!(:item_arame_farpado)
 
     navigate 'Processos de Compra > Processos de Compras'
 
@@ -304,7 +304,7 @@ feature "LicitationProcessLots" do
 
   scenario "edit shoud have title Editar Lotes de itens do Processo de Compra 2/2013" do
     LicitationProcess.make!(:processo_licitatorio_computador)
-    AdministrativeProcessBudgetAllocationItem.make!(:item_arame_farpado)
+    PurchaseProcessItem.make!(:item_arame_farpado)
 
     navigate 'Processos de Compra > Processos de Compras'
 

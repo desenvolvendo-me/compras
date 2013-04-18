@@ -3,7 +3,7 @@ require 'app/models/purchase_process_creditor_proposal'
 
 describe PurchaseProcessCreditorProposal do
   it { should belong_to :creditor }
-  it { should belong_to(:item).class_name('AdministrativeProcessBudgetAllocationItem') }
+  it { should belong_to(:item).class_name('PurchaseProcessItem') }
 
   it { should have_one(:licitation_process).through(:item) }
 

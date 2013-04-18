@@ -1,4 +1,4 @@
-class AdministrativeProcessBudgetAllocationItem < Compras::Model
+class PurchaseProcessItem < Compras::Model
   attr_accessible :material_id, :quantity, :unit_price, :lot, :additional_information,
                   :creditor_id, :creditor_proposals_attributes
 
@@ -58,7 +58,7 @@ class AdministrativeProcessBudgetAllocationItem < Compras::Model
   end
 
   def unit_price_by_bidder(bidder)
-    first = bidder.proposals.select { |item| item.administrative_process_budget_allocation_item == self }.first
+    first = bidder.proposals.select { |item| item.purchase_process_item == self }.first
 
     first.nil? ? BigDecimal(0) : first.unit_price
   end

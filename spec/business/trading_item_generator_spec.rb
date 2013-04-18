@@ -16,10 +16,10 @@ describe TradingItemGenerator do
 
       it 'should create trading_items based on items of licitation_process' do
         trading_item_repository.should_receive(:create!).
-          with(:trading_id => 1, :administrative_process_budget_allocation_item_id => 5)
+          with(:trading_id => 1, :purchase_process_item_id => 5)
 
         trading_item_repository.should_receive(:create!).
-          with(:trading_id => 1, :administrative_process_budget_allocation_item_id => 30)
+          with(:trading_id => 1, :purchase_process_item_id => 30)
 
         described_class.generate!(trading, trading_item_repository)
       end

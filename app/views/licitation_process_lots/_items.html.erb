@@ -1,54 +1,54 @@
 <div class="yui3-g modal-finder">
   <div class="yui3-u-1-2">
-    <%= f.association :administrative_process_budget_allocation_items,
+    <%= f.association :purchase_process_items,
                       :disabled => !f.object.licitation_process.updatable?,
                       :as => :modal,
                       :hidden_field => false,
                       :input_html => {
                         :value => nil,
-                        'data-modal-url' => modal_administrative_process_budget_allocation_items_path(:licitation_process_id => f.object.licitation_process_id, :without_lot => true, :ids => "")
+                        'data-modal-url' => modal_purchase_process_items_path(:licitation_process_id => f.object.licitation_process_id, :without_lot => true, :ids => "")
                       } %>
   </div>
 </div>
 
-<input type="hidden" name="<%= f.sanitized_object_name %>[administrative_process_budget_allocation_item_ids][]" />
+<input type="hidden" name="<%= f.sanitized_object_name %>[purchase_process_item_ids][]" />
 
 <table class="records">
   <thead>
     <tr>
       <th>
-        <%= AdministrativeProcessBudgetAllocationItem.human_attribute_name :id %>
+        <%= PurchaseProcessItem.human_attribute_name :id %>
       </th>
       <th>
-        <%= AdministrativeProcessBudgetAllocationItem.human_attribute_name :material %>
+        <%= PurchaseProcessItem.human_attribute_name :material %>
       </th>
       <th>
-        <%= AdministrativeProcessBudgetAllocationItem.human_attribute_name :quantity %>
+        <%= PurchaseProcessItem.human_attribute_name :quantity %>
       </th>
       <th>
-        <%= AdministrativeProcessBudgetAllocationItem.human_attribute_name :unit_price %>
+        <%= PurchaseProcessItem.human_attribute_name :unit_price %>
       </th>
       <th>
       </th>
     </tr>
   </thead>
 
-  <tbody class="<%= f.sanitized_object_name %>_administrative_process_budget_allocation_items_records">
-    <% f.object.administrative_process_budget_allocation_items.each do |item| %>
-      <%= render 'administrative_process_budget_allocation_items/list_form', :material => item.material, :id => item.id, :quantity => item.quantity, :unit_price => item.decorator.unit_price, :f => f %>
+  <tbody class="<%= f.sanitized_object_name %>_purchase_process_items_records">
+    <% f.object.purchase_process_items.each do |item| %>
+      <%= render 'purchase_process_items/list_form', :material => item.material, :id => item.id, :quantity => item.quantity, :unit_price => item.decorator.unit_price, :f => f %>
     <% end %>
   </tbody>
 </table>
 
-<%= mustache "#{f.sanitized_object_name}_administrative_process_budget_allocation_items_template" do %>
-  <%= f.association :administrative_process_budget_allocation_items, :collection => f.object.administrative_process_budget_allocation_items.build do |p| %>
-    <%= render 'administrative_process_budget_allocation_items/list_form', :material => '{{material}}', :quantity => '{{quantity}}', :unit_price => '{{unit_price}}', :id => '{{id}}', :f => f %>
+<%= mustache "#{f.sanitized_object_name}_purchase_process_items_template" do %>
+  <%= f.association :purchase_process_items, :collection => f.object.purchase_process_items.build do |p| %>
+    <%= render 'purchase_process_items/list_form', :material => '{{material}}', :quantity => '{{quantity}}', :unit_price => '{{unit_price}}', :id => '{{id}}', :f => f %>
   <% end %>
 <% end %>
 
 <script>
-  $('#licitation_process_lot_administrative_process_budget_allocation_items').focus(function() {
-    var objectBudgetAllocationItemIds = '<%= f.object.administrative_process_budget_allocation_item_ids.join(",") %>';
+  $('#licitation_process_lot_purchase_process_items').focus(function() {
+    var objectBudgetAllocationItemIds = '<%= f.object.purchase_process_item_ids.join(",") %>';
     objectBudgetAllocationItemIds = objectBudgetAllocationItemIds.split(',');
 
     var tableItems = [];
@@ -64,7 +64,7 @@
       }
     });
 
-    var modalUrl = '<%= modal_administrative_process_budget_allocation_items_path(:licitation_process_id => f.object.licitation_process_id) %>';
+    var modalUrl = '<%= modal_purchase_process_items_path(:licitation_process_id => f.object.licitation_process_id) %>';
 
     if (deletedItems.length < 1) {
       modalUrl += '&without_lot=true';
@@ -72,6 +72,6 @@
       modalUrl += '&without_lot_or_ids=' + deletedItems.join();
     }
 
-    $('#licitation_process_lot_administrative_process_budget_allocation_items').data('modal-url', modalUrl);
+    $('#licitation_process_lot_purchase_process_items').data('modal-url', modalUrl);
   });
 </script>

@@ -76,7 +76,7 @@ describe LicitationProcessClassificationSituationGenerator do
   let :lot do
     double(
       :lot,
-      :administrative_process_budget_allocation_items => [item],
+      :purchase_process_items => [item],
       :licitation_process_classifications => []
     )
   end
@@ -265,13 +265,13 @@ describe LicitationProcessClassificationSituationGenerator do
   context 'change situation and classification of proposals by item' do
     let :classification_item do
       double('LicitationProcessClassification', :classification => 1, :situation => 'won',
-             :classifiable => 'AdministrativeProcessBudgetAllocationItem',
+             :classifiable => 'PurchaseProcessItem',
              :proposals => proposals, :disqualified? => false)
     end
 
     before do
       item.stub(:licitation_process_classifications => [classification_item])
-      proposal.stub(:administrative_process_budget_allocation_item => item)
+      proposal.stub(:purchase_process_item => item)
       licitation_process.stub(
         :items => [item],
         :all_licitation_process_classifications => classifications,

@@ -1,12 +1,12 @@
 # encoding: utf-8
 require 'model_helper'
-require 'app/models/administrative_process_budget_allocation_item'
+require 'app/models/purchase_process_item'
 require 'app/models/licitation_process_classification'
 require 'app/models/trading_item'
 require 'app/models/bidder_proposal'
 require 'app/models/purchase_process_creditor_proposal'
 
-describe AdministrativeProcessBudgetAllocationItem do
+describe PurchaseProcessItem do
   it { should validate_presence_of :material }
   it { should validate_presence_of :quantity }
   it { should validate_presence_of :lot }
@@ -79,7 +79,7 @@ describe AdministrativeProcessBudgetAllocationItem do
     end
 
     let :proposal do
-      double('LicitationProcessProposal', :id => 1, :administrative_process_budget_allocation_item => subject, :unit_price => 10)
+      double('LicitationProcessProposal', :id => 1, :purchase_process_item => subject, :unit_price => 10)
     end
 
     it 'should return unit price by bidder' do

@@ -9,7 +9,7 @@ feature "Bidders" do
                   'people',
                   'creditors',
                   'licitation_process_lots',
-                  'administrative_process_budget_allocation_items']
+                  'purchase_process_items']
     sign_in
   end
 

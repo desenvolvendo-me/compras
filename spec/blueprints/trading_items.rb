@@ -1,13 +1,13 @@
 TradingItem.blueprint(:item_pregao_presencial) do
   minimum_reduction_value { 0.01 }
-  administrative_process_budget_allocation_item {
-    AdministrativeProcessBudgetAllocationItem.make!(:item)
+  purchase_process_item {
+    PurchaseProcessItem.make!(:item)
   }
 end
 
 TradingItem.blueprint(:segundo_item_pregao_presencial) do
   minimum_reduction_value { 0.01 }
-  administrative_process_budget_allocation_item {
-    AdministrativeProcessBudgetAllocationItem.make!(:item)
+  purchase_process_item {
+    PurchaseProcessItem.make!(:item)
   }
 end

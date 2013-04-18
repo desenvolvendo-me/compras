@@ -7,7 +7,7 @@ require 'app/models/price_registration_budget_structure'
 
 describe PriceRegistrationItem do
   it { should belong_to :price_registration }
-  it { should belong_to :administrative_process_budget_allocation_item }
+  it { should belong_to :purchase_process_item }
 
   it { should have_many(:price_registration_budget_structures).dependent(:destroy) }
 
@@ -15,15 +15,15 @@ describe PriceRegistrationItem do
   it { should have_one(:judgment_form).through(:licitation_process) }
 
   it { should validate_presence_of :price_registration }
-  it { should validate_presence_of :administrative_process_budget_allocation_item }
+  it { should validate_presence_of :purchase_process_item }
 
   context "with material" do
-    let :administrative_process_budget_allocation_item do
+    let :purchase_process_item do
       double :to_s => 'Cadeira'
     end
 
-    it 'should administrative_process_budget_allocation_item response as to_s' do
-      subject.stub(:administrative_process_budget_allocation_item).and_return(administrative_process_budget_allocation_item)
+    it 'should purchase_process_item response as to_s' do
+      subject.stub(:purchase_process_item).and_return(purchase_process_item)
 
       expect(subject.to_s).to eq 'Cadeira'
     end
@@ -64,7 +64,7 @@ describe PriceRegistrationItem do
       administrative_process_item = double(:administrative_process_item)
       subject.stub(:judgment_form => judgment_form)
       judgment_form.stub(:item? => true)
-      subject.stub(:administrative_process_budget_allocation_item => administrative_process_item)
+      subject.stub(:purchase_process_item => administrative_process_item)
 
       administrative_process_item.should_receive(:winning_bid)
 

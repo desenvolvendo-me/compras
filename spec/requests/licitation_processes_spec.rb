@@ -869,7 +869,7 @@ feature "LicitationProcesses" do
     licitation_process = LicitationProcess.make!(:valor_maximo_ultrapassado)
     bidder = licitation_process.bidders.first
     LicitationProcessLot.make!(:lote, :licitation_process => licitation_process,
-                               :administrative_process_budget_allocation_items => [licitation_process.items.first])
+                               :purchase_process_items => [licitation_process.items.first])
 
     navigate 'Processos de Compra > Processos de Compras'
 
@@ -1214,9 +1214,9 @@ feature "LicitationProcesses" do
   scenario 'generate calculation when type of calculation is by lot' do
     licitation_process = LicitationProcess.make!(:apuracao_por_lote)
     LicitationProcessLot.make!(:lote, :licitation_process => licitation_process,
-                               :administrative_process_budget_allocation_items => [licitation_process.items.first])
+                               :purchase_process_items => [licitation_process.items.first])
     LicitationProcessLot.make!(:lote_antivirus, :licitation_process => licitation_process,
-                               :administrative_process_budget_allocation_items => [licitation_process.items.second])
+                               :purchase_process_items => [licitation_process.items.second])
 
     navigate 'Processos de Compra > Processos de Compras'
 

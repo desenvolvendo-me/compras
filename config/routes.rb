@@ -78,7 +78,7 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :administrative_process_budget_allocation_items, :only => [] do
+  resources :purchase_process_items, :only => [] do
     collection do
       get :modal
     end
