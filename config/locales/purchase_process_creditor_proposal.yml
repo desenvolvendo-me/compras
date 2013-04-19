@@ -7,13 +7,14 @@ pt-BR:
 
     attributes:
       purchase_process_creditor_proposal:
-        creditor: "Credor"
-        purchase_process_item: "Item"
         brand: "Marca"
-        unit_price: "Preço unitário"
+        creditor: "Credor"
+        creditor_proposal_total_value: "Valor total da proposta"
+        delivery_term: "Prazo de entrega"
         item_lot: "Lote"
         lot: "Lote"
+        purchase_process_item: "Item"
         quantity: "Quantidade"
-        total_price: "Preço total"
         reference_unit: "Unidade"
-        creditor_proposal_total_value: "Valor total da proposta"
+        total_price: "Preço total"
+        unit_price: "Preço unitário"
