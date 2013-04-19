@@ -255,9 +255,9 @@ describe PurchaseSolicitation do
 
     it 'should calculate the total value of items' do
       subject.stub(:items).and_return([
-        double(:estimated_total_price => 10),
-        double(:estimated_total_price => 20),
-        double(:estimated_total_price => 15)
+        double(:estimated_total_price_rounded  => 10),
+        double(:estimated_total_price_rounded => 20),
+        double(:estimated_total_price_rounded => 15)
       ])
 
       expect(subject.total_items_value).to eq 45

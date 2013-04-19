@@ -32,4 +32,12 @@ describe PurchaseSolicitationItem do
 
     expect(subject.estimated_total_price).to eq 50
   end
+
+  describe '#estimated_total_price_rounded' do
+    it 'should return the estimated total price rounded' do
+      subject.stub(:estimated_total_price => 8.1892)
+
+      expect(subject.estimated_total_price_rounded).to eq 8.19
+    end
+  end
 end
