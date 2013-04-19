@@ -7,8 +7,8 @@ $(document).ready(function() {
         totalPriceInputs = $("div.total_price input"),
         totalValue       = 0;
 
-    totalPriceInputs.each(function(i, input) {
-      totalValue += parsePtBrFloat($(input).val());
+    totalPriceInputs.each(function() {
+      totalValue += parsePtBrFloat($(this).val());
     });
 
     totalValueInput.val(numberWithDelimiter(totalValue));

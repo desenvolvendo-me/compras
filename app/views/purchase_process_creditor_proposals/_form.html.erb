@@ -11,9 +11,9 @@
 </div>
 
 <div id="purchase_process_creditor_proposals">
-  <%= f.association :items, collection: localized(f.object.items) do |p| %>
-    <%= p.association :creditor_proposals, collection: collection_for_association(p.object.creditor_proposals) do |i| %>
-      <%= render 'main', :f => i %>
+  <%= f.association :items, collection: localized(f.object.items) do |i| %>
+    <%= i.association :creditor_proposals, collection: collection_for_association(i.object.creditor_proposals) do |c| %>
+      <%= render 'main', :f => c %>
     <% end %>
   <% end %>
 </div>

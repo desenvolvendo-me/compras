@@ -2,12 +2,12 @@
 
 module PurchaseProcessCreditorProposalsHelper
   def view_or_edit_creditor_proposal(creditor)
-    if @licitation_process.creditor_proposals.where(creditor_id: creditor.id).empty?
+    if @licitation_process.creditor_proposals_of_creditor(creditor).empty?
       link_to 'Cadastrar Propostas', new_purchase_process_creditor_proposal_path(creditor_id: creditor,
-        licitation_process_id: resource.licitation_process)
+        licitation_process_id: @licitation_process)
     else
       link_to 'Editar Propostas', batch_edit_purchase_process_creditor_proposals_path(creditor_id: creditor,
-        licitation_process_id: resource.licitation_process)
+        licitation_process_id: @licitation_process)
     end
   end
 

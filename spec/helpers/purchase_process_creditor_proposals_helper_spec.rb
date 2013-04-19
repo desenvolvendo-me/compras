@@ -2,32 +2,28 @@
 require 'spec_helper'
 
 describe PurchaseProcessCreditorProposalsHelper do
+  let(:creditor) { double(:creditor, to_s: 1, id: 1) }
+
   describe '#view_or_edit_creditor_proposal' do
-    let(:licitation_process) { double(:licitation_process, creditor_proposals: creditor_proposals) }
-    let(:creditor)           { double(:creditor, to_s: 1, id: 1) }
-    let(:resource)           { double(:resource, licitation_process: '1', id: 1) }
+    before { assign(:licitation_process, licitation_process) }
 
-    before do
-      assign(:licitation_process, licitation_process)
-      helper.stub(:resource => resource)
-    end
-
-    context 'when creditor proposals exist' do
-      let(:creditor_proposals) { double(:creditor_proposals, where: [creditor]) }
+    context 'when creditor got proposals' do
+      let(:licitation_process) { double(:licitation_process, to_s: 1, creditor_proposals_of_creditor: [creditor]) }
 
       it 'returns a link to edit proposals' do
         output = link_to 'Editar Propostas', batch_edit_purchase_process_creditor_proposals_path(creditor_id: creditor.id,
-        licitation_process_id: resource.licitation_process)
+          licitation_process_id: licitation_process)
+
         expect(helper.view_or_edit_creditor_proposal(creditor)).to eql output
       end
     end
 
     context "when there's no creditor proposals" do
-      let(:creditor_proposals) { double(:creditor_proposals, where: []) }
+      let(:licitation_process) { double(:licitation_process, to_s: 1, creditor_proposals_of_creditor: []) }
 
       it 'returns a link to create new proposals' do
         output = link_to 'Cadastrar Propostas', new_purchase_process_creditor_proposal_path(creditor_id: creditor.id,
-        licitation_process_id: resource.licitation_process)
+        licitation_process_id: licitation_process)
         expect(helper.view_or_edit_creditor_proposal(creditor)).to eql output
       end
     end

@@ -220,6 +220,10 @@ class LicitationProcess < Compras::Model
     process_date && process_date.year
   end
 
+  def creditor_proposals_of_creditor(creditor)
+    creditor_proposals.where(creditor_id: creditor.id)
+  end
+
   protected
 
   def available_for_licitation_process_classification?

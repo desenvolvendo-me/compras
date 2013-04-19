@@ -540,6 +540,18 @@ describe LicitationProcess do
     end
   end
 
+  describe '#creditor_proposals_of_creditor' do
+    let(:creditor)  { double :creditor, id: 1 }
+    let(:proposals) { double :creditor_proposals }
+
+    it 'returns the creditor proposals of the creditor parameter' do
+      subject.stub(:creditor_proposals).and_return proposals
+      subject.creditor_proposals.should_receive(:where).with({ creditor_id: 1 })
+
+      subject.creditor_proposals_of_creditor(creditor)
+    end
+  end
+
   describe 'when save' do
     describe "and has not items" do
       it "total_value_of_items= has not called" do
