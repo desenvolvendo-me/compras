@@ -84,6 +84,7 @@ module Compras
       'compras/table_size.css',
 
       # javascript files
+      'bidders.js',
       'trading_item_bid.js',
       'licitation_processes.js',
       'purchase_process_accreditations.js',

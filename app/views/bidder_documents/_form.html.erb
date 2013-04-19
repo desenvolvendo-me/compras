@@ -2,9 +2,10 @@
   <%= f.input :id, :as => 'hidden' %>
   <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
   <%= f.input :document_type_id, :as => 'hidden', :input_html => { :class => 'bidder-document-type-id', :value => (f.object.document_type_id || "{{docId}}") } %>
+  <%= f.input :purchase_document, :as => 'hidden', :input_html => { :value => f.object.purchase_document } %>
 
   <div class="yui3-g">
-    <div class="yui3-u-1-2">
+    <div class="yui3-u-1-3">
       <%= f.input :description, :disabled => true, :input_html => { :value => (f.object.description || "{{docDescription}}") } %>
     </div>
 

@@ -38,6 +38,7 @@ feature "Bidders" do
     Creditor.make!(:sobrinho_sa)
     Person.make!(:wenderson)
     Person.make!(:joao_da_silva)
+    DocumentType.make!(:oficial)
 
     navigate 'Processos de Compra > Processos de Compras'
 
@@ -68,6 +69,16 @@ feature "Bidders" do
       fill_in 'Número/certidão', :with => '222222'
       fill_in 'Data de emissão', :with => I18n.l(Date.current)
       fill_in 'Validade', :with => I18n.l(Date.tomorrow + 5.days)
+
+      click_button 'Adicionar Documento'
+
+      within '#bidder_documents' do
+        fill_modal 'Documento', :with => 'Oficial', :field => 'Descrição'
+
+        fill_in 'Número/certidão', :with => '1234'
+        fill_in 'Data de emissão', :with => I18n.l(Date.yesterday)
+        fill_in 'Validade', :with => I18n.l(Date.tomorrow + 15.days)
+      end
     end
 
     within_tab 'Propostas' do
@@ -109,6 +120,13 @@ feature "Bidders" do
       expect(page).to have_field 'Número/certidão', :with => '222222'
       expect(page).to have_field 'Data de emissão', :with => I18n.l(Date.current)
       expect(page).to have_field 'Validade', :with => I18n.l(Date.tomorrow + 5.days)
+
+      within '#bidder_documents' do
+        expect(page).to have_field 'Documento', :with => 'Oficial'
+        expect(page).to have_field 'Número/certidão', :with => '1234'
+        expect(page).to have_field 'Data de emissão', :with => I18n.l(Date.yesterday)
+        expect(page).to have_field 'Validade', :with => I18n.l(Date.tomorrow + 15.days)
+      end
     end
 
     within_tab 'Propostas' do
@@ -147,6 +165,10 @@ feature "Bidders" do
       fill_in 'Número/certidão', :with => '333333'
       fill_in 'Data de emissão', :with => I18n.l(Date.yesterday)
       fill_in 'Validade', :with => I18n.l(Date.tomorrow + 6.days)
+
+      within '#bidder_documents' do
+        click_button 'Remover'
+      end
     end
 
     within_tab 'Propostas' do
@@ -188,6 +210,13 @@ feature "Bidders" do
       expect(page).to have_field 'Número/certidão', :with => '333333'
       expect(page).to have_field 'Data de emissão', :with => I18n.l(Date.yesterday)
       expect(page).to have_field 'Validade', :with => I18n.l(Date.tomorrow + 6.days)
+
+      within '#bidder_documents' do
+        expect(page).to_not have_field 'Documento', :with => 'Oficial'
+        expect(page).to_not have_field 'Número/certidão', :with => '1234'
+        expect(page).to_not have_field 'Data de emissão', :with => I18n.l(Date.yesterday)
+        expect(page).to_not have_field 'Validade', :with => I18n.l(Date.tomorrow + 15.days)
+      end
     end
 
     within_tab 'Propostas' do
