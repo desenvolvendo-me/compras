@@ -1,4 +1,4 @@
-class AdministrativeProcessBudgetAllocation < Compras::Model
+class PurchaseProcessBudgetAllocation < Compras::Model
   attr_accessible :licitation_process_id, :budget_allocation_id, :value,
                   :expense_nature_id
 

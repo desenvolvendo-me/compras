@@ -5,7 +5,7 @@ require 'app/models/persona/person'
 require 'app/models/person'
 require 'app/models/licitation_process'
 require 'app/models/payment_method'
-require 'app/models/administrative_process_budget_allocation'
+require 'app/models/purchase_process_budget_allocation'
 require 'app/models/purchase_process_item'
 require 'app/models/licitation_process_publication'
 require 'app/models/bidder'
@@ -67,11 +67,11 @@ describe LicitationProcess do
   it { should have_many(:licitation_process_ratifications).dependent(:restrict) }
   it { should have_many(:classifications).through(:bidders) }
   it { should have_many(:classifications).through(:bidders) }
-  it { should have_many(:administrative_process_budget_allocations).dependent(:destroy) }
+  it { should have_many(:purchase_process_budget_allocations).dependent(:destroy) }
   it { should have_many(:items).dependent(:restrict)}
   it { should have_many(:materials).through(:items) }
   it { should have_many(:legal_analysis_appraisals).dependent(:restrict) }
-  it { should have_many(:budget_allocations).through(:administrative_process_budget_allocations) }
+  it { should have_many(:budget_allocations).through(:purchase_process_budget_allocations) }
   it { should have_many(:creditor_proposals).through(:items) }
 
   it { should have_one(:purchase_process_accreditation).dependent(:restrict) }
@@ -597,7 +597,7 @@ describe LicitationProcess do
 
     describe "and not has budget allocations" do
       it "budget_allocations_total_value= has not called" do
-        subject.stub(:administrative_process_budget_allocations).and_return([])
+        subject.stub(:purchase_process_budget_allocations).and_return([])
         subject.should_not_receive(:budget_allocations_total_value=)
 
         subject.run_callbacks(:save)
@@ -627,7 +627,7 @@ describe LicitationProcess do
       end
 
       it "should return budget_allocations_total_value" do
-        subject.stub(:administrative_process_budget_allocations).and_return([budget_allocation1, budget_allocation2, budget_allocation3])
+        subject.stub(:purchase_process_budget_allocations).and_return([budget_allocation1, budget_allocation2, budget_allocation3])
         subject.run_callbacks(:save)
 
         expect(subject.budget_allocations_total_value).to eq 10

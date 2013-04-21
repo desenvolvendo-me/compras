@@ -1,9 +1,9 @@
 # encoding: utf-8
 require 'model_helper'
-require 'app/models/administrative_process_budget_allocation'
+require 'app/models/purchase_process_budget_allocation'
 require 'app/models/material'
 
-describe AdministrativeProcessBudgetAllocation do
+describe PurchaseProcessBudgetAllocation do
   it { should belong_to :licitation_process }
   it { should belong_to :budget_allocation }
   it { should belong_to :expense_nature }

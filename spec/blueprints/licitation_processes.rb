@@ -7,7 +7,7 @@ LicitationProcess.blueprint(:processo_licitatorio) do
   modality { Modality::CONCURRENCE }
   judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
   description { 'Licitação para compra de carteiras' }
-  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
+  purchase_process_budget_allocations { [PurchaseProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   items { [PurchaseProcessItem.make!(:item)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
@@ -39,7 +39,7 @@ LicitationProcess.blueprint(:processo_licitatorio_computador) do
   modality { Modality::CONCURRENCE }
   judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
   description { 'Licitação para compra de carteiras' }
-  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
+  purchase_process_budget_allocations { [PurchaseProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   items { [PurchaseProcessItem.make!(:item)] }
   year { 2013 }
   process_date { Date.new(2013, 3, 20) }
@@ -72,7 +72,7 @@ LicitationProcess.blueprint(:processo_licitatorio_fornecedores) do
   modality { Modality::INVITATION }
   judgment_form { JudgmentForm.make!(:global_com_menor_preco) }
   description { 'Licitação para compra de carteiras' }
-  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
+  purchase_process_budget_allocations { [PurchaseProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   items { [PurchaseProcessItem.make!(:item)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
@@ -103,7 +103,7 @@ LicitationProcess.blueprint(:processo_licitatorio_publicacao_cancelada) do
   modality { Modality::INVITATION }
   judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
   description { 'Licitação para compra de carteiras' }
-  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
+  purchase_process_budget_allocations { [PurchaseProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   items { [PurchaseProcessItem.make!(:item)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
@@ -133,7 +133,7 @@ LicitationProcess.blueprint(:processo_licitatorio_canetas) do
   modality { Modality::INVITATION }
   judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
   description { 'Licitação para compra de carteiras' }
-  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_2_itens)] }
+  purchase_process_budget_allocations { [PurchaseProcessBudgetAllocation.make!(:alocacao_com_2_itens)] }
   items { [PurchaseProcessItem.make!(:item),
            PurchaseProcessItem.make!(:item_arame)] }
   year { 2013 }
@@ -167,7 +167,7 @@ LicitationProcess.blueprint(:apuracao_por_itens) do
   modality { Modality::INVITATION }
   judgment_form { JudgmentForm.make!(:por_item_com_menor_preco) }
   description { 'Licitação para compra de carteiras' }
-  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_2_itens)] }
+  purchase_process_budget_allocations { [PurchaseProcessBudgetAllocation.make!(:alocacao_com_2_itens)] }
   items { [PurchaseProcessItem.make!(:item),
            PurchaseProcessItem.make!(:item_arame)] }
   year { 2012 }
@@ -200,7 +200,7 @@ LicitationProcess.blueprint(:apuracao_por_lote) do
   modality { Modality::INVITATION }
   judgment_form { JudgmentForm.make!(:por_lote_com_menor_preco) }
   description { 'Licitação para compra de carteiras' }
-  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_2_itens)] }
+  purchase_process_budget_allocations { [PurchaseProcessBudgetAllocation.make!(:alocacao_com_2_itens)] }
   items { [PurchaseProcessItem.make!(:item),
            PurchaseProcessItem.make!(:item_arame)] }
   year { 2012 }
@@ -233,7 +233,7 @@ LicitationProcess.blueprint(:valor_maximo_ultrapassado) do
   modality { Modality::INVITATION }
   judgment_form { JudgmentForm.make!(:por_lote_com_menor_preco) }
   description { 'Licitação para compra de carteiras' }
-  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_2_itens)] }
+  purchase_process_budget_allocations { [PurchaseProcessBudgetAllocation.make!(:alocacao_com_2_itens)] }
   items { [PurchaseProcessItem.make!(:item),
            PurchaseProcessItem.make!(:item_arame)] }
   year { 2012 }
@@ -266,7 +266,7 @@ LicitationProcess.blueprint(:apuracao_global) do
   modality { Modality::INVITATION }
   judgment_form { JudgmentForm.make!(:global_com_menor_preco) }
   description { 'Licitação para compra de carteiras' }
-  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
+  purchase_process_budget_allocations { [PurchaseProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   items { [PurchaseProcessItem.make!(:item)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
@@ -298,7 +298,7 @@ LicitationProcess.blueprint(:apuracao_global_empatou) do
   modality { Modality::INVITATION }
   judgment_form { JudgmentForm.make!(:global_com_menor_preco) }
   description { 'Licitação para compra de carteiras' }
-  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
+  purchase_process_budget_allocations { [PurchaseProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   items { [PurchaseProcessItem.make!(:item)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
@@ -330,7 +330,7 @@ LicitationProcess.blueprint(:apuracao_global_sem_documentos) do
   modality { Modality::INVITATION }
   judgment_form { JudgmentForm.make!(:global_com_menor_preco) }
   description { 'Licitação para compra de carteiras' }
-  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
+  purchase_process_budget_allocations { [PurchaseProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   items { [PurchaseProcessItem.make!(:item)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
@@ -362,7 +362,7 @@ LicitationProcess.blueprint(:apuracao_global_small_company) do
   modality { Modality::INVITATION }
   judgment_form { JudgmentForm.make!(:global_com_menor_preco) }
   description { 'Licitação para compra de carteiras' }
-  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
+  purchase_process_budget_allocations { [PurchaseProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   items { [PurchaseProcessItem.make!(:item)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
@@ -394,7 +394,7 @@ LicitationProcess.blueprint(:apuracao_global_small_company_2) do
   modality { Modality::INVITATION }
   judgment_form { JudgmentForm.make!(:global_com_menor_preco) }
   description { 'Licitação para compra de carteiras' }
-  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
+  purchase_process_budget_allocations { [PurchaseProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   items { [PurchaseProcessItem.make!(:item)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
@@ -426,7 +426,7 @@ LicitationProcess.blueprint(:processo_licitatorio_nao_atualizavel) do
   modality { Modality::INVITATION }
   judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
   description { 'Licitação para compra de carteiras' }
-  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
+  purchase_process_budget_allocations { [PurchaseProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   items { [PurchaseProcessItem.make!(:item)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
@@ -457,7 +457,7 @@ LicitationProcess.blueprint(:processo_licitatorio_canetas_sem_lote) do
   modality { Modality::INVITATION }
   judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
   description { 'Licitação para compra de carteiras' }
-  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_2_itens)] }
+  purchase_process_budget_allocations { [PurchaseProcessBudgetAllocation.make!(:alocacao_com_2_itens)] }
   items { [PurchaseProcessItem.make!(:item),
            PurchaseProcessItem.make!(:item_arame)] }
   year { 2013 }
@@ -489,7 +489,7 @@ LicitationProcess.blueprint(:apuracao_melhor_tecnica_e_preco) do
   modality { Modality::INVITATION }
   judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
   description { 'Licitação para compra de carteiras' }
-  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
+  purchase_process_budget_allocations { [PurchaseProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   items { [PurchaseProcessItem.make!(:item)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
@@ -521,7 +521,7 @@ LicitationProcess.blueprint(:pregao_presencial) do
   modality { Modality::TRADING }
   judgment_form { JudgmentForm.make!(:por_item_com_menor_preco) }
   description { 'Licitação para compra de carteiras' }
-  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
+  purchase_process_budget_allocations { [PurchaseProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   items { [PurchaseProcessItem.make!(:item)] }
   summarized_object { "Descrição resumida do objeto" }
   year { 2012 }
@@ -554,7 +554,7 @@ LicitationProcess.blueprint(:processo_licitatorio_concurso) do
   modality { Modality::COMPETITION }
   judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
   description { 'Licitação para contrução de prédio' }
-  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao)] }
+  purchase_process_budget_allocations { [PurchaseProcessBudgetAllocation.make!(:alocacao)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
   expiration { 10 }
@@ -583,7 +583,7 @@ LicitationProcess.blueprint(:processo_licitatorio_concorrencia) do
   object_type { PurchaseProcessObjectType::PURCHASE_AND_SERVICES }
   modality { Modality::CONCURRENCE }
   description { 'Licitação para compra de computadores' }
-  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao)] }
+  purchase_process_budget_allocations { [PurchaseProcessBudgetAllocation.make!(:alocacao)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
   expiration { 10 }
@@ -613,7 +613,7 @@ LicitationProcess.blueprint(:processo_licitatorio_tomada_preco) do
   object_type { PurchaseProcessObjectType::CONSTRUCTION_AND_ENGINEERING_SERVICES }
   modality { Modality::TAKEN_PRICE }
   description { 'Licitação para contrução de prédio' }
-  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao)] }
+  purchase_process_budget_allocations { [PurchaseProcessBudgetAllocation.make!(:alocacao)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
   expiration { 10 }
@@ -644,7 +644,7 @@ LicitationProcess.blueprint(:processo_licitatorio_leilao) do
   modality { Modality::AUCTION }
   judgment_form { JudgmentForm.make!(:global_com_melhor_lance_ou_oferta) }
   description { 'Licitação para compra de carteiras' }
-  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
+  purchase_process_budget_allocations { [PurchaseProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   items { [PurchaseProcessItem.make!(:item)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }

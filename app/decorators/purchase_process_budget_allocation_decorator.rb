@@ -1,4 +1,4 @@
-class AdministrativeProcessBudgetAllocationDecorator
+class PurchaseProcessBudgetAllocationDecorator
   include Decore
   include Decore::Proxy
   include ActionView::Helpers::NumberHelper

@@ -1,8 +1,8 @@
 # encoding: utf-8
 require 'decorator_helper'
-require 'app/decorators/administrative_process_budget_allocation_decorator'
+require 'app/decorators/purchase_process_budget_allocation_decorator'
 
-describe AdministrativeProcessBudgetAllocationDecorator do
+describe PurchaseProcessBudgetAllocationDecorator do
   context '#budget_allocation_amount' do
     context 'when do not have budget_allocation_amount' do
       before do
