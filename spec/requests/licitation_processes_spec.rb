@@ -2103,4 +2103,26 @@ feature "LicitationProcesses" do
       end
     end
   end
+
+  scenario 'when the modality is not trading, should not appear accreditation button' do
+    LicitationProcess.make!(:processo_licitatorio)
+    JudgmentForm.make!(:por_item_com_menor_preco)
+
+    navigate 'Processos de Compra > Processos de Compras'
+
+    click_link "Limpar Filtro"
+
+    click_link '1/2012'
+
+    expect(page).to_not have_link 'Credenciamento'
+
+    select 'Compras e serviços', :from => 'Tipo de objeto'
+    select 'Pregão', :from => 'Modalidade'
+    select 'Por Item com Menor Preço', :from =>'Forma de julgamento'
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Processo de Compra 1/2012 editado com sucesso.'
+    expect(page).to have_link 'Credenciamento'
+  end
 end

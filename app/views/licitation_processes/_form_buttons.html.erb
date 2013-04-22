@@ -2,7 +2,11 @@
   <% if f.object.persisted? %>
     <p>
       <%= link_to('Laudo de Análise Jurídica', legal_analysis_appraisals_path(:licitation_process_id => resource.id), :class => "button primary") %>
-      <%= link_to('Credenciamento', accreditation_path_helper, :class => "button primary") %>
+
+      <% if f.object.trading? %>
+        <%= link_to('Credenciamento', accreditation_path_helper, :class => "button primary") %>
+      <% end %>
+
       <%= link_to('Habilitação', bidders_path(:licitation_process_id => resource.id), :class => "button primary",
                   'data-disabled' => f.object.decorator.must_have_published_edital) %>
       <%= link_to('Propostas', creditors_purchase_process_creditor_proposals_path(licitation_process_id: resource.id), :class => "button primary") %>

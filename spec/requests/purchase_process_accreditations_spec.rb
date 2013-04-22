@@ -10,7 +10,7 @@ feature "PurchaseProcessAccreditation" do
   end
 
   scenario 'create, update and remove accreditance' do
-    LicitationProcess.make!(:processo_licitatorio)
+    LicitationProcess.make!(:pregao_presencial)
     CompanySize.make!(:empresa_de_grande_porte)
     Creditor.make!(:sobrinho)
     nobe = Creditor.make!(:nobe)
@@ -163,7 +163,7 @@ feature "PurchaseProcessAccreditation" do
   end
 
   scenario 'kind should be required only when has a representative' do
-    LicitationProcess.make!(:processo_licitatorio)
+    LicitationProcess.make!(:pregao_presencial)
     CompanySize.make!(:empresa_de_grande_porte)
     sobrinho = Creditor.make!(:sobrinho)
 
@@ -228,7 +228,7 @@ feature "PurchaseProcessAccreditation" do
   end
 
   scenario 'show report' do
-    licitation_process = LicitationProcess.make!(:processo_licitatorio)
+    licitation_process = LicitationProcess.make!(:pregao_presencial)
     company_size = CompanySize.make!(:empresa_de_grande_porte)
     sobrinho = Creditor.make!(:sobrinho)
     nobe = Creditor.make!(:nobe)
