@@ -1,0 +1,46 @@
+$(document).ready(function() {
+
+  function allItemsChecked() {
+    var items      = $('input.item_check'),
+        allChecked = true;
+
+    items.each(function() {
+      if ($(this).attr('checked') !== 'checked') {
+        allChecked = false;
+        return false;
+      };
+    });
+
+    return allChecked;
+  };
+
+  function checkAllItems() {
+    var items = $('input.item_check');
+
+    items.each(function() {
+      $(this).attr('checked', 'checked');
+    });
+  };
+
+  function setKind() {
+    if (allItemsChecked()) {
+      $('#purchase_process_creditor_disqualification_kind_total').attr('checked', 'checked');
+    } else {
+      $('#purchase_process_creditor_disqualification_kind_partial').attr('checked', 'checked');
+    };
+  };
+
+  $('#purchase_process_creditor_disqualification_kind_total').on('click', function() {
+    if ($(this).attr('checked') === 'checked') {
+      checkAllItems();
+    };
+  });
+
+  $('input.item_check').on('click', function() {
+    setKind();
+  });
+
+  $('#purchase_process_creditor_disqualification_kind_partial').on('click', function() {
+    setKind();
+  });
+});

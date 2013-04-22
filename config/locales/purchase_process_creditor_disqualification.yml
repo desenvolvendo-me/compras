@@ -1,0 +1,15 @@
+pt-BR:
+  activerecord:
+    models:
+      purchase_process_creditor_disqualification:
+        one: "Desclassificação de Proposta de Credor"
+        other: "Desclassificações de Propostas de Credores"
+
+    attributes:
+      purchase_process_creditor_disqualification:
+        licitation_process: "Processo de compra"
+        creditor: "Credor"
+        disqualification_date: "Data de desclassificação"
+        reason: "Motivo"
+        kind: "Tipo de desclassificação"
+        proposal_total_value: "Valor total da proposta"

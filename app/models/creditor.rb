@@ -44,6 +44,7 @@ class Creditor < Compras::Model
   has_many :purchase_process_accreditation_creditors, :dependent => :restrict
   has_many :purchase_process_items, :dependent => :restrict
   has_many :purchase_process_creditor_proposals, dependent: :restrict
+  has_many :proposal_disqualifications, class_name: 'PurchaseProcessCreditorDisqualification', dependent: :restrict
 
   has_one :user, :as => :authenticable
 

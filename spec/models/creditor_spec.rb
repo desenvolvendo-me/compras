@@ -21,6 +21,7 @@ require 'app/models/licitation_process'
 require 'app/models/purchase_process_accreditation_creditor'
 require 'app/models/purchase_process_item'
 require 'app/models/purchase_process_creditor_proposal'
+require 'app/models/purchase_process_creditor_disqualification'
 
 describe Creditor do
   describe 'default values' do
@@ -54,6 +55,7 @@ describe Creditor do
   it { should have_many(:purchase_process_accreditation_creditors).dependent(:restrict) }
   it { should have_many(:purchase_process_items).dependent(:restrict) }
   it { should have_many(:purchase_process_creditor_proposals).dependent(:restrict) }
+  it { should have_many(:proposal_disqualifications).dependent(:restrict) }
 
   it { should validate_presence_of :person }
   it { should validate_duplication_of(:document_type_id).on(:documents) }

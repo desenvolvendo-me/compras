@@ -25,4 +25,18 @@ describe PurchaseProcessCreditorProposal do
       expect(subject.total_price).to eql 5.97
     end
   end
+
+  describe '#disqualify!' do
+    it 'updates the disqualified attribute to true' do
+      subject.should_receive(:update_attribute).with(:disqualified, true)
+      subject.disqualify!
+    end
+  end
+
+  describe '#qualify!' do
+    it 'updates the disqualified attribute to false' do
+      subject.should_receive(:update_attribute).with(:disqualified, false)
+      subject.qualify!
+    end
+  end
 end

@@ -8,7 +8,7 @@ describe PurchaseProcessCreditorProposalsHelper do
     before { assign(:licitation_process, licitation_process) }
 
     context 'when creditor got proposals' do
-      let(:licitation_process) { double(:licitation_process, to_s: 1, creditor_proposals_of_creditor: [creditor]) }
+      let(:licitation_process) { double(:licitation_process, to_s: 1, proposals_of_creditor: [creditor]) }
 
       it 'returns a link to edit proposals' do
         output = link_to 'Editar Propostas', batch_edit_purchase_process_creditor_proposals_path(creditor_id: creditor.id,
@@ -19,12 +19,59 @@ describe PurchaseProcessCreditorProposalsHelper do
     end
 
     context "when there's no creditor proposals" do
-      let(:licitation_process) { double(:licitation_process, to_s: 1, creditor_proposals_of_creditor: []) }
+      let(:licitation_process) { double(:licitation_process, to_s: 1, proposals_of_creditor: []) }
 
       it 'returns a link to create new proposals' do
         output = link_to 'Cadastrar Propostas', new_purchase_process_creditor_proposal_path(creditor_id: creditor.id,
         licitation_process_id: licitation_process)
+
         expect(helper.view_or_edit_creditor_proposal(creditor)).to eql output
+      end
+    end
+  end
+
+  describe '#link_to_disqualify_creditor_proposal' do
+    let(:disqualification) { double(:disqualification) }
+
+    before { assign(:licitation_process, licitation_process) }
+
+    context 'when creditor got proposals' do
+      let(:licitation_process) { double(:licitation_process, to_s: 1, proposals_of_creditor: [creditor]) }
+
+      context 'when a disqualification already exists' do
+        before do
+          disqualification.stub(:new_record?).and_return false
+          disqualification.stub(:to_s).and_return '1'
+          PurchaseProcessCreditorDisqualification.stub(:find_or_initialize).and_return disqualification
+        end
+
+        it 'returns a link to edit the proposal disqualification' do
+          output = link_to 'Desclassificar Propostas', edit_purchase_process_creditor_disqualification_path(disqualification)
+
+          expect(helper.link_to_disqualify_creditor_proposal(creditor)).to eql output
+        end
+      end
+
+      context "when there's no disclassification" do
+        before do
+          disqualification.stub(:new_record?).and_return true
+          PurchaseProcessCreditorDisqualification.stub(:find_or_initialize).and_return disqualification
+        end
+
+        it 'returns a link to disqualify the proposals' do
+          output = link_to 'Desclassificar Propostas', new_purchase_process_creditor_disqualification_path(creditor_id: creditor.id,
+          licitation_process_id: licitation_process)
+
+          expect(helper.link_to_disqualify_creditor_proposal(creditor)).to eql output
+        end
+      end
+    end
+
+    context "when there's no creditor proposals" do
+      let(:licitation_process) { double(:licitation_process, proposals_of_creditor: []) }
+
+      it 'returns message about no proposals' do
+        expect(helper.link_to_disqualify_creditor_proposal(creditor)).to eql 'Nenhuma Proposta cadastrada'
       end
     end
   end

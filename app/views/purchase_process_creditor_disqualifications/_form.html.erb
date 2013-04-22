@@ -1,0 +1,45 @@
+<%= f.input :licitation_process_id, as: :hidden, fake: true,
+  input_html: { value: params[:licitation_process_id], name: 'licitation_process_id' } %>
+<%= f.input :creditor_id, as: :hidden, fake: true, input_html: { value: params[:creditor_id], name: 'creditor_id' } %>
+
+<%= f.input :licitation_process_id, as: :hidden %>
+<%= f.input :creditor_id, as: :hidden %>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-4">
+    <%= f.input :disqualification_date, required: true %>
+  </div>
+</div>
+
+<%= f.input :reason, required: true %>
+
+<%= f.input :kind, as: :radio_buttons, label: '', label_html: { class: 'inline' },
+  item_wrapper_class: :inline, collection: PurchaseProcessCreditorDisqualificationKind.to_a %>
+
+<table class="records" id="purchase_process_creditor_disqualification_items">
+  <thead>
+    <tr>
+      <th><%= PurchaseProcessItem.human_attribute_name :lot %></th>
+      <th><%= PurchaseProcessItem.human_attribute_name :order %></th>
+      <th><%= PurchaseProcessItem.human_attribute_name :material %></th>
+      <th><%= PurchaseProcessItem.human_attribute_name :reference_unit %></th>
+      <th><%= PurchaseProcessItem.human_attribute_name :quantity %></th>
+      <th><%= PurchaseProcessItem.human_attribute_name :unit_value %></th>
+      <th><%= PurchaseProcessItem.human_attribute_name :estimated_total_price %></th>
+      <th>Selecionar</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%= render partial: 'proposal_items', collection: localized(resource.proposal_items), as: :proposal_item %>
+  </tbody>
+</table>
+
+<div class="yui3-g right">
+  <div class="yui3-u-1-5">
+    <%= f.input :proposal_total_value, fake: true, disabled: true,
+          input_html: { value: resource.licitation_process.decorator.proposals_total_price(resource.creditor),
+            'data-decimal' => true, class: :numeric },
+          label_html: { class: :right } %>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<tr>
+  <td><%= proposal_item.item_lot %></td>
+  <td><%= proposal_item_counter + 1 %></td>
+  <td><%= proposal_item.item %></td>
+  <td><%= proposal_item.item_reference_unit %></td>
+  <td class='right'><%= proposal_item.item_quantity %></td>
+  <td class='right'><%= proposal_item.unit_price %></td>
+  <td class='right'><%= proposal_item.decorator.total_price %></td>
+
+  <td align='center'>
+    <%= check_box_tag 'purchase_process_creditor_disqualification[proposal_item_ids][]', proposal_item.id, check_proposal_item?(proposal_item),
+      { id: "proposal_item_ids_#{proposal_item.id}", class: 'item_check' } %>
+  </td>
+</tr>

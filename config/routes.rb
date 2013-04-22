@@ -426,13 +426,15 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :purchase_process_creditor_proposals do
+  resources :purchase_process_creditor_proposals, except: [:destroy] do
     collection do
       get :creditors
       get :batch_edit
       put :batch_update
     end
   end
+
+  resources :purchase_process_creditor_disqualifications, except: [:destroy]
 
   resources :bidders do
     collection do

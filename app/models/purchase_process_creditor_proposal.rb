@@ -15,4 +15,12 @@ class PurchaseProcessCreditorProposal < Compras::Model
   def total_price
     (unit_price || 0) * (item_quantity || 0)
   end
+
+  def qualify!
+    update_attribute(:disqualified, false)
+  end
+
+  def disqualify!
+    update_attribute(:disqualified, true)
+  end
 end

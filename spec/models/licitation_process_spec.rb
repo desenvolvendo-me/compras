@@ -27,6 +27,7 @@ require 'app/models/purchase_solicitation_item'
 require 'app/models/legal_analysis_appraisal'
 require 'app/models/purchase_process_accreditation'
 require 'app/models/purchase_process_creditor_proposal'
+require 'app/models/purchase_process_creditor_disqualification'
 
 describe LicitationProcess do
   let(:current_prefecture) { double(:current_prefecture) }
@@ -74,6 +75,7 @@ describe LicitationProcess do
   it { should have_many(:budget_allocations).through(:purchase_process_budget_allocations) }
   it { should have_many(:creditor_proposals).through(:items) }
   it { should have_many(:items_creditors).through(:items) }
+  it { should have_many(:creditor_disqualifications).dependent(:restrict) }
 
   it { should have_one(:purchase_process_accreditation).dependent(:restrict) }
   it { should have_one(:trading).dependent(:restrict) }
@@ -541,15 +543,29 @@ describe LicitationProcess do
     end
   end
 
-  describe '#creditor_proposals_of_creditor' do
+  describe '#proposals_of_creditor' do
     let(:creditor)  { double :creditor, id: 1 }
     let(:proposals) { double :creditor_proposals }
+    let(:proposal_collection) { double :proposal_collection }
 
     it 'returns the creditor proposals of the creditor parameter' do
       subject.stub(:creditor_proposals).and_return proposals
-      subject.creditor_proposals.should_receive(:where).with({ creditor_id: 1 })
+      subject.creditor_proposals.should_receive(:where).with({ creditor_id: 1 }).and_return proposal_collection
+      proposal_collection.should_receive(:order).with(:id)
 
-      subject.creditor_proposals_of_creditor(creditor)
+      subject.proposals_of_creditor(creditor)
+    end
+  end
+
+  describe '#proposals_total_price' do
+    let(:proposal_1) { double(:proposal, total_price: 15.10) }
+    let(:proposal_2) { double(:proposal, total_price: 1.10) }
+    let(:proposals)  { [proposal_1, proposal_2] }
+
+    it 'returns proposals total price for the given creditor' do
+      subject.stub(:proposals_of_creditor).and_return(proposals)
+
+      expect(subject.proposals_total_price(double(:creditor))).to eql 16.20
     end
   end
 

@@ -1,0 +1,5 @@
+pt-BR:
+  enumerations:
+    purchase_process_creditor_disqualification_kind:
+      total: "Toda proposta"
+      partial: "Itens da proposta"

@@ -2,12 +2,25 @@
 
 module PurchaseProcessCreditorProposalsHelper
   def view_or_edit_creditor_proposal(creditor)
-    if @licitation_process.creditor_proposals_of_creditor(creditor).empty?
+    if @licitation_process.proposals_of_creditor(creditor).empty?
       link_to 'Cadastrar Propostas', new_purchase_process_creditor_proposal_path(creditor_id: creditor,
         licitation_process_id: @licitation_process)
     else
       link_to 'Editar Propostas', batch_edit_purchase_process_creditor_proposals_path(creditor_id: creditor,
         licitation_process_id: @licitation_process)
+    end
+  end
+
+  def link_to_disqualify_creditor_proposal(creditor)
+    if @licitation_process.proposals_of_creditor(creditor).any?
+      disqualification = PurchaseProcessCreditorDisqualification.find_or_initialize(@licitation_process, creditor)
+      if disqualification.new_record?
+        link_to 'Desclassificar Propostas', new_purchase_process_creditor_disqualification_path(creditor_id: creditor, licitation_process_id: @licitation_process)
+      else
+        link_to 'Desclassificar Propostas', edit_purchase_process_creditor_disqualification_path(disqualification)
+      end
+    else
+      'Nenhuma Proposta cadastrada'
     end
   end
 

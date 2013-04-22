@@ -72,6 +72,7 @@ class LicitationProcess < Compras::Model
   has_many :accreditation_creditors, :through => :purchase_process_accreditation, :source => :creditors, order: :id
   has_many :creditor_proposals, through: :items, class_name: 'PurchaseProcessCreditorProposal'
   has_many :items_creditors, through: :items, source: :creditor, order: :id
+  has_many :creditor_disqualifications, class_name: 'PurchaseProcessCreditorDisqualification', dependent: :restrict
 
   has_one :purchase_process_accreditation, :dependent => :restrict
   has_one :trading, :dependent => :restrict
@@ -221,8 +222,12 @@ class LicitationProcess < Compras::Model
     process_date && process_date.year
   end
 
-  def creditor_proposals_of_creditor(creditor)
-    creditor_proposals.where(creditor_id: creditor.id)
+  def proposals_of_creditor(creditor)
+    creditor_proposals.where(creditor_id: creditor.id).order(:id)
+  end
+
+  def proposals_total_price(creditor)
+    proposals_of_creditor(creditor).sum(&:total_price)
   end
 
   protected

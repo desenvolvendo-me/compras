@@ -328,6 +328,15 @@ describe LicitationProcessDecorator do
     end
   end
 
+  describe '#proposals_total_price' do
+    it 'returns the localized proposals total price' do
+      creditor = double(:creditor)
+      component.stub(:proposals_total_price).and_return 9.99
+
+      expect(subject.proposals_total_price(creditor)).to eql '9,99'
+    end
+  end
+
   describe "#type_of_calculation" do
     before do
       component.stub(:judgment_form).and_return(judgment_form)

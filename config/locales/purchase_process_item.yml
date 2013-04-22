@@ -15,3 +15,5 @@ pt-BR:
         reference_unit: "Unidade"
         unit_price: "Valor unitário máximo"
         creditor: "Fornecedor"
+        material: "Material"
+        unit_value: 'Valor unitário'

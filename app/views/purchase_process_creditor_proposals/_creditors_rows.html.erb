@@ -1,5 +1,6 @@
 <tr>
   <td><%= creditor.to_s %></td>
   <td><%= creditor.person_email %></td>
-  <td><%= view_or_edit_creditor_proposal creditor %> </td>
+  <td><%= view_or_edit_creditor_proposal creditor %></td>
+  <td><%= link_to_disqualify_creditor_proposal creditor %></td>
 </tr>

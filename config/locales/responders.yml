@@ -222,3 +222,6 @@ pt-BR:
       <<: *female
       batch_update:
         notice: "%{resource_name} editada com sucesso"
+
+    purchase_process_creditor_disqualifications:
+      <<: *female

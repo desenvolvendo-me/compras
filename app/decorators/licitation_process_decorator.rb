@@ -93,6 +93,10 @@ class LicitationProcessDecorator
     end
   end
 
+  def proposals_total_price(creditor)
+    number_with_precision super(creditor) if super
+  end
+
   private
 
   def current_publication_of
