@@ -124,4 +124,8 @@ module CrudHelper
   def modal_info_link(resource)
     resource ? send("modal_info_#{resource.class.to_s.underscore}_path", resource) : "#"
   end
+
+  def state_format(state)
+    StatePreposition.new(state).format
+  end
 end
