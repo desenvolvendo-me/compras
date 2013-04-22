@@ -3,7 +3,7 @@ class LicitationProcessAppeal < Compras::Model
   attr_accessible :new_proposal_envelope_opening_date, :new_proposal_envelope_opening_time
   attr_accessible :licitation_committee_opinion, :situation
 
-  has_enumeration_for :related, :with => LicitationProcessAppealRelated
+  has_enumeration_for :related, :with => PurchaseProcessAppealRelated
   has_enumeration_for :situation
 
   belongs_to :licitation_process

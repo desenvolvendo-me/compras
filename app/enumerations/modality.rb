@@ -4,15 +4,15 @@ class Modality < EnumerateIt::Base
 
   def self.available_for_object_type(object_type)
     case object_type
-    when LicitationProcessObjectType::PURCHASE_AND_SERVICES
+    when PurchaseProcessObjectType::PURCHASE_AND_SERVICES
       [CONCURRENCE, TAKEN_PRICE, INVITATION, TRADING]
-    when LicitationProcessObjectType::CONSTRUCTION_AND_ENGINEERING_SERVICES
+    when PurchaseProcessObjectType::CONSTRUCTION_AND_ENGINEERING_SERVICES
       [CONCURRENCE, TAKEN_PRICE, INVITATION, COMPETITION, TRADING]
-    when LicitationProcessObjectType::DISPOSALS_OF_ASSETS
+    when PurchaseProcessObjectType::DISPOSALS_OF_ASSETS
       [AUCTION]
-    when LicitationProcessObjectType::CONCESSIONS_AND_PERMITS
+    when PurchaseProcessObjectType::CONCESSIONS_AND_PERMITS
       [CONCURRENCE]
-    when LicitationProcessObjectType::CALL_NOTICE
+    when PurchaseProcessObjectType::CALL_NOTICE
       [COMPETITION]
     else
       []
@@ -26,7 +26,7 @@ class Modality < EnumerateIt::Base
   def self.by_object_type
     object_type_hash = {}
 
-    LicitationProcessObjectType.list.each do |object_type|
+    PurchaseProcessObjectType.list.each do |object_type|
       object_type_hash.merge!(hash_for(object_type))
     end
 

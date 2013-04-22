@@ -22,7 +22,7 @@ describe LicitationProcessClassification do
   end
 
   let :allocations do
-    AdministrativeProcessBudgetAllocation.make!(:alocacao_com_2_itens,
+    PurchaseProcessBudgetAllocation.make!(:alocacao_com_2_itens,
       :items => [antivirus, arame])
   end
 

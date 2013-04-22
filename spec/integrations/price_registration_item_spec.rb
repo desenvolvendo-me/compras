@@ -5,11 +5,11 @@ describe PriceRegistrationItem do
   context '#winning_bid' do
 
     def classify_process(licitation_process)
-      LicitationProcessClassificationGenerator.new(licitation_process).generate!
+      PurchaseProcessClassificationGenerator.new(licitation_process).generate!
 
-      LicitationProcessClassificationBiddersVerifier.new(licitation_process).verify!
+      PurchaseProcessClassificationBiddersVerifier.new(licitation_process).verify!
 
-      LicitationProcessClassificationSituationGenerator.new(licitation_process).generate!
+      PurchaseProcessClassificationSituationGenerator.new(licitation_process).generate!
     end
 
     it 'returns the winning bid of the licitation process if type of calculation is "lowest_global_price' do
@@ -20,7 +20,7 @@ describe PriceRegistrationItem do
 
       expect(price_registration.items.first.winning_bid).to eq licitation_process.winning_bid
     end
-    
+
     it 'returns the winning_bid of the administrative process item if calculation is "lowest_item_by_price"' do
       licitation_process = LicitationProcess.make!(:apuracao_por_itens)
       item = PriceRegistrationItem.make(:antivirus,

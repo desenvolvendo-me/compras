@@ -10,7 +10,7 @@ class LicitationProcessesController < CrudController
   def new
     object = build_resource
     object.process_date = Date.current
-    object.status = LicitationProcessStatus::WAITING_FOR_OPEN
+    object.status = PurchaseProcessStatus::WAITING_FOR_OPEN
 
     super
   end
@@ -24,11 +24,11 @@ class LicitationProcessesController < CrudController
   def update
     if params[:commit] == 'Apurar'
       resource.transaction do
-        LicitationProcessClassificationGenerator.new(resource).generate!
+        PurchaseProcessClassificationGenerator.new(resource).generate!
 
-        LicitationProcessClassificationBiddersVerifier.new(resource).verify!
+        PurchaseProcessClassificationBiddersVerifier.new(resource).verify!
 
-        LicitationProcessClassificationSituationGenerator.new(resource).generate!
+        PurchaseProcessClassificationSituationGenerator.new(resource).generate!
       end
 
       redirect_to licitation_process_path(resource)
@@ -58,7 +58,7 @@ class LicitationProcessesController < CrudController
       BidderStatusChanger.new(object).change
 
       object.year = object.process_date_year
-      object.status = LicitationProcessStatus::WAITING_FOR_OPEN
+      object.status = PurchaseProcessStatus::WAITING_FOR_OPEN
 
       super
     end

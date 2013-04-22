@@ -8,7 +8,7 @@ class LicitationProcess < Compras::Model
                   :judgment_form_id, :execution_type,
                   :price_registration, :status,:object_type, :date,
                   :protocol, :summarized_object, :modality, :description,
-                  :administrative_process_budget_allocations_attributes,
+                  :purchase_process_budget_allocations_attributes,
                   :contract_guarantees, :extension_clause, :index_update_rate_id,
                   :type_of_removal, :is_trading, :notice_availability_date,
                   :contact_id, :stage_of_bids_date, :stage_of_bids_time,
@@ -32,10 +32,10 @@ class LicitationProcess < Compras::Model
   has_enumeration_for :execution_type, :create_helpers => true
   has_enumeration_for :expiration_unit, :with => PeriodUnit
   has_enumeration_for :modality, :create_helpers => true, :create_scopes => true
-  has_enumeration_for :object_type, :with => LicitationProcessObjectType, :create_helpers => true
+  has_enumeration_for :object_type, :with => PurchaseProcessObjectType, :create_helpers => true
   has_enumeration_for :period_unit, :with => PeriodUnit
-  has_enumeration_for :status, :with => LicitationProcessStatus, :create_helpers => true
-  has_enumeration_for :type_of_purchase, :with => LicitationProcessTypeOfPurchase, :create_helpers => true
+  has_enumeration_for :status, :with => PurchaseProcessStatus, :create_helpers => true
+  has_enumeration_for :type_of_purchase, :with => PurchaseProcessTypeOfPurchase, :create_helpers => true
   has_enumeration_for :type_of_removal
 
   belongs_to :contact, :class_name => 'Employee'
@@ -62,8 +62,8 @@ class LicitationProcess < Compras::Model
   has_many :licitation_process_ratifications, :dependent => :restrict, :order => :id
   has_many :classifications, :through => :bidders, :class_name => 'LicitationProcessClassification',
            :source => :licitation_process_classifications
-  has_many :administrative_process_budget_allocations, :dependent => :destroy, :order => :id
-  has_many :budget_allocations, :through => :administrative_process_budget_allocations
+  has_many :purchase_process_budget_allocations, :dependent => :destroy, :order => :id
+  has_many :budget_allocations, :through => :purchase_process_budget_allocations
   has_many :items, :class_name => 'PurchaseProcessItem', :dependent => :restrict,
            :order => :id, :inverse_of => :licitation_process
   has_many :materials, :through => :items
@@ -75,7 +75,7 @@ class LicitationProcess < Compras::Model
   has_one :purchase_process_accreditation, :dependent => :restrict
   has_one :trading, :dependent => :restrict
 
-  accepts_nested_attributes_for :administrative_process_budget_allocations, :items, :creditor_proposals,
+  accepts_nested_attributes_for :purchase_process_budget_allocations, :items, :creditor_proposals,
                                 :allow_destroy => true
 
   delegate :licitation_kind, :kind, :best_technique?, :technical_and_price?,
@@ -246,9 +246,9 @@ class LicitationProcess < Compras::Model
   end
 
   def calculate_budget_allocations_total_value
-    return unless administrative_process_budget_allocations.any?
+    return unless purchase_process_budget_allocations.any?
 
-    self.budget_allocations_total_value = administrative_process_budget_allocations.reject(&:marked_for_destruction?).sum(&:value)
+    self.budget_allocations_total_value = purchase_process_budget_allocations.reject(&:marked_for_destruction?).sum(&:value)
   end
 
   def validate_the_year_to_processe_date_are_the_same
@@ -269,7 +269,7 @@ class LicitationProcess < Compras::Model
       return false
     end
 
-    LicitationProcessEnvelopeOpeningDate.new(self).valid?
+    PurchaseProcessEnvelopeOpeningDate.new(self).valid?
   end
 
   def published_editals

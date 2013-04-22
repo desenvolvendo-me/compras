@@ -64,7 +64,7 @@ class BiddersController < CrudController
 
     object.transaction do
       if super
-        LicitationProcessStatusChanger.new(object.licitation_process).in_progress!
+        PurchaseProcessStatusChanger.new(object.licitation_process).in_progress!
       end
     end
   end

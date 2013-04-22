@@ -5,7 +5,7 @@ require 'app/models/persona/person'
 require 'app/models/person'
 require 'app/models/licitation_process'
 require 'app/models/payment_method'
-require 'app/models/administrative_process_budget_allocation'
+require 'app/models/purchase_process_budget_allocation'
 require 'app/models/purchase_process_item'
 require 'app/models/licitation_process_publication'
 require 'app/models/bidder'
@@ -18,7 +18,7 @@ require 'app/models/judgment_commission_advice'
 require 'app/models/creditor'
 require 'app/models/licitation_notice'
 require 'app/models/licitation_process_lot'
-require 'app/business/licitation_process_envelope_opening_date'
+require 'app/business/purchase_process_envelope_opening_date'
 require 'app/models/reserve_fund'
 require 'app/models/indexer'
 require 'app/models/price_registration'
@@ -67,11 +67,11 @@ describe LicitationProcess do
   it { should have_many(:licitation_process_ratifications).dependent(:restrict) }
   it { should have_many(:classifications).through(:bidders) }
   it { should have_many(:classifications).through(:bidders) }
-  it { should have_many(:administrative_process_budget_allocations).dependent(:destroy) }
+  it { should have_many(:purchase_process_budget_allocations).dependent(:destroy) }
   it { should have_many(:items).dependent(:restrict)}
   it { should have_many(:materials).through(:items) }
   it { should have_many(:legal_analysis_appraisals).dependent(:restrict) }
-  it { should have_many(:budget_allocations).through(:administrative_process_budget_allocations) }
+  it { should have_many(:budget_allocations).through(:purchase_process_budget_allocations) }
   it { should have_many(:creditor_proposals).through(:items) }
 
   it { should have_one(:purchase_process_accreditation).dependent(:restrict) }
@@ -111,7 +111,7 @@ describe LicitationProcess do
 
   context "when is a licitation" do
     before do
-      subject.type_of_purchase = LicitationProcessTypeOfPurchase::LICITATION
+      subject.type_of_purchase = PurchaseProcessTypeOfPurchase::LICITATION
     end
 
     it { should validate_presence_of :modality }
@@ -120,7 +120,7 @@ describe LicitationProcess do
 
   context "when is a licitation" do
     before do
-      subject.object_type = LicitationProcessObjectType::CONCESSIONS_AND_PERMITS
+      subject.object_type = PurchaseProcessObjectType::CONCESSIONS_AND_PERMITS
     end
 
     it { should validate_presence_of :goal }
@@ -130,7 +130,7 @@ describe LicitationProcess do
 
   context "when is a direct purchase" do
     before do
-      subject.type_of_purchase = LicitationProcessTypeOfPurchase::DIRECT_PURCHASE
+      subject.type_of_purchase = PurchaseProcessTypeOfPurchase::DIRECT_PURCHASE
     end
 
     it { should validate_presence_of :type_of_removal }
@@ -152,7 +152,7 @@ describe LicitationProcess do
     describe "#validate_proposal_envelope_opening_date" do
       it "return when envelope opening date is not present" do
         subject.stub(:proposal_envelope_opening_date).and_return nil
-        LicitationProcessEnvelopeOpeningDate.should_not_receive :new
+        PurchaseProcessEnvelopeOpeningDate.should_not_receive :new
         subject.send(:validate_proposal_envelope_opening_date)
         expect(subject.errors[:proposal_envelope_opening_date]).to_not include("deve ficar em branco")
       end
@@ -169,7 +169,7 @@ describe LicitationProcess do
         subject.stub(:proposal_envelope_opening_date).and_return Date.current
         subject.stub(:last_publication_date).and_return Date.current
         licitation_validation = double :licitation_process_proposal_envelope_opening_date
-        LicitationProcessEnvelopeOpeningDate.should_receive(:new).with(subject).and_return licitation_validation
+        PurchaseProcessEnvelopeOpeningDate.should_receive(:new).with(subject).and_return licitation_validation
         licitation_validation.should_receive :valid?
         subject.send(:validate_proposal_envelope_opening_date)
       end
@@ -491,9 +491,9 @@ describe LicitationProcess do
 
   describe '#update_status' do
     it 'should update status' do
-      subject.should_receive(:update_column).with(:status, LicitationProcessStatus::IN_PROGRESS)
+      subject.should_receive(:update_column).with(:status, PurchaseProcessStatus::IN_PROGRESS)
 
-      subject.update_status(LicitationProcessStatus::IN_PROGRESS)
+      subject.update_status(PurchaseProcessStatus::IN_PROGRESS)
     end
   end
 
@@ -597,7 +597,7 @@ describe LicitationProcess do
 
     describe "and not has budget allocations" do
       it "budget_allocations_total_value= has not called" do
-        subject.stub(:administrative_process_budget_allocations).and_return([])
+        subject.stub(:purchase_process_budget_allocations).and_return([])
         subject.should_not_receive(:budget_allocations_total_value=)
 
         subject.run_callbacks(:save)
@@ -627,7 +627,7 @@ describe LicitationProcess do
       end
 
       it "should return budget_allocations_total_value" do
-        subject.stub(:administrative_process_budget_allocations).and_return([budget_allocation1, budget_allocation2, budget_allocation3])
+        subject.stub(:purchase_process_budget_allocations).and_return([budget_allocation1, budget_allocation2, budget_allocation3])
         subject.run_callbacks(:save)
 
         expect(subject.budget_allocations_total_value).to eq 10
