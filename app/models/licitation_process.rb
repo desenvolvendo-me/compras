@@ -71,6 +71,7 @@ class LicitationProcess < Compras::Model
   has_many :license_creditors, :through => :bidders, :dependent => :restrict, :source => :creditor, order: :id
   has_many :accreditation_creditors, :through => :purchase_process_accreditation, :source => :creditors, order: :id
   has_many :creditor_proposals, through: :items, class_name: 'PurchaseProcessCreditorProposal'
+  has_many :items_creditors, through: :items, source: :creditor, order: :id
 
   has_one :purchase_process_accreditation, :dependent => :restrict
   has_one :trading, :dependent => :restrict
@@ -148,7 +149,7 @@ class LicitationProcess < Compras::Model
   end
 
   def creditors
-    trading? ? license_creditors : accreditation_creditors
+    trading? ? license_creditors : items_creditors
   end
 
   def update_status(status)

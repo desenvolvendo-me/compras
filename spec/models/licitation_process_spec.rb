@@ -73,6 +73,7 @@ describe LicitationProcess do
   it { should have_many(:legal_analysis_appraisals).dependent(:restrict) }
   it { should have_many(:budget_allocations).through(:purchase_process_budget_allocations) }
   it { should have_many(:creditor_proposals).through(:items) }
+  it { should have_many(:items_creditors).through(:items) }
 
   it { should have_one(:purchase_process_accreditation).dependent(:restrict) }
   it { should have_one(:trading).dependent(:restrict) }
@@ -180,21 +181,21 @@ describe LicitationProcess do
         before { subject.stub(:trading?).and_return true }
 
         it 'returns license creditors from bidders' do
-          license_creditor = double :license_creditors
-          subject.stub(:license_creditors).and_return [license_creditor]
+          subject.should_receive(:license_creditors).and_return(['creditor'])
+          subject.should_not_receive(:items_creditors)
 
-          expect(subject.creditors).to eql [license_creditor]
+          expect(subject.creditors).to eq ['creditor']
         end
       end
 
       context 'when modality is not trading' do
         before { subject.stub(:trading?).and_return false }
 
-        it 'returns creditors from accreditation' do
-          accreditation_creditors = double :accreditation_creditors
-          subject.stub(:accreditation_creditors).and_return [accreditation_creditors]
+        it 'returns creditors from items' do
+          subject.should_receive(:items_creditors).and_return(['creditor'])
+          subject.should_not_receive(:license_creditors)
 
-          expect(subject.creditors).to eql [accreditation_creditors]
+          expect(subject.creditors).to eql ['creditor']
         end
       end
     end
