@@ -75,10 +75,11 @@ pt-BR:
 
   licitation_process:
     messages:
-      no_one_publication_with_valid_type: "a última publicação é do tipo (%{publication_of}). Não pode ser alterado"
-      has_already_a_ratification: "já foi homologado. Não pode ser alterado"
+      disabled_envelope_message: "deve ter uma publicação de edital"
       has_already_a_publications: "já possui publicações. Não pode ser alterado"
+      has_already_a_ratification: "já foi homologado. Não pode ser alterado"
       must_be_included_after_edital_publication: "Licitantes só podem ser incluídos após publicação do edital"
+      must_have_creditors_and_items: "deve possuir credores e itens"
+      no_one_publication_with_valid_type: "a última publicação é do tipo (%{publication_of}). Não pode ser alterado"
       proposal_envelope_opening_date_greater_than_calendar_days: "deve ser a partir de %{limit}. Refente a %{days} dias maior que a data da publicação mais recente (%{publication})"
       proposal_envelope_opening_date_greater_than_working_days: "deve ser a partir de %{limit}. Refente a %{days} dias úteis maior que a data da publicação mais recente (%{publication})"
-      disabled_envelope_message: "deve ter uma publicação de edital"
