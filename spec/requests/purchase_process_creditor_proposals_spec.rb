@@ -57,8 +57,10 @@ feature 'PurchaseProcessCreditorProposals' do
     expect(page).to have_disabled_field 'Quantidade', with: '2'
     expect(page).to have_disabled_field 'Preço total', with: '0,00'
 
-    fill_in 'Prazo de entrega', with: '10/05/2013'
     fill_in 'Preço unitário', with: '50,20'
+
+    expect(page).to have_disabled_field 'Valor total da proposta', with: '100,40'
+    expect(page).to have_disabled_field 'Preço total', with: '100,40'
 
     click_button 'Salvar'
 
@@ -66,6 +68,7 @@ feature 'PurchaseProcessCreditorProposals' do
     expect(page).to have_content 'não pode ficar em branco'
 
     fill_in 'Marca', with: 'Tabajara'
+    fill_in 'Prazo de entrega', with: '10/05/2013'
 
     click_button 'Salvar'
 
