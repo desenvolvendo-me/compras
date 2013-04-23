@@ -18,3 +18,4 @@ permissions:
     trading_item_bid_proposals: tradings
     trading_item_bid_round_of_bids: tradings
     trading_item_closings: tradings
+    purchase_process_creditor_disqualifications: licitation_processes
