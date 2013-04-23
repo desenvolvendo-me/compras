@@ -10,4 +10,12 @@ class Role < Compras::Model
   def controller_name
     I18n.translate("controllers.#{controller}")
   end
+
+  after_save :touch_profile
+
+  private
+
+  def touch_profile
+    profile.touch
+  end
 end
