@@ -2,11 +2,12 @@
   <%= render 'bidder_documents/form', :f => d %>
 <% end %>
 
-<input type="button" class="button affirmative add_bidder_document add-margin-bottom" value="Adicionar Documento">
+<%= button_tag 'Adicionar Documento', class: "button affirmative add_bidder_document add-margin-bottom",
+  'data-disabled' => f.object.decorator.cant_save_or_destroy_message %>
 
 <div id="bidder_documents">
   <%= f.association :documents, :collection => localized(f.object.bidder_documents) do |d| %>
-    <%= render 'bidder_documents/bidder_document_form', :f => d %>
+    <%= render 'bidder_documents/bidder_document_form', :f => d, :data_disabled => f.object.decorator.cant_save_or_destroy_message %>
   <% end %>
 
   <%= mustache 'bidder_documents_template' do %>
