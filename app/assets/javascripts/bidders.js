@@ -8,7 +8,7 @@ $(document).ready(function() {
     appendItem: true
   });
 
-  $(document).on('click', 'button.remove_bidder_document', function(event) {
+  $(document).on('click', 'button.remove_bidder_document, button.add_bidder_document', function(event) {
     event.preventDefault()
   });
 });
