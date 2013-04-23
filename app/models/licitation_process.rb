@@ -230,6 +230,10 @@ class LicitationProcess < Compras::Model
     proposals_of_creditor(creditor).sum(&:total_price)
   end
 
+  def allow_trading_auto_creation?
+    persisted? && trading? && !has_trading?
+  end
+
   protected
 
   def available_for_licitation_process_classification?

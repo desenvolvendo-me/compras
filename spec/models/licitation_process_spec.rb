@@ -651,4 +651,34 @@ describe LicitationProcess do
       end
     end
   end
+
+  describe '#allow_trading_auto_creation?' do
+    context 'when not persisted' do
+      it { expect(subject.allow_trading_auto_creation?).to be_false }
+    end
+
+    context 'when is not trading' do
+      before do
+        subject.stub(:persisted? => true, :trading? => false)
+      end
+
+      it { expect(subject.allow_trading_auto_creation?).to be_false }
+    end
+
+    context 'when has trading' do
+      before do
+        subject.stub(:persisted? => true, :trading? => true, :has_trading? => true)
+      end
+
+      it { expect(subject.allow_trading_auto_creation?).to be_false }
+    end
+
+    context 'when has no trading' do
+      before do
+        subject.stub(:persisted? => true, :trading? => true, :has_trading? => false)
+      end
+
+      it { expect(subject.allow_trading_auto_creation?).to be_true }
+    end
+  end
 end

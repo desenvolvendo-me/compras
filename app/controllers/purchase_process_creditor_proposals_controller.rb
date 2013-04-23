@@ -7,6 +7,8 @@ class PurchaseProcessCreditorProposalsController < CrudController
 
   def new
     object = build_resource
+
+    TradingCreator.create!(@licitation_process)
   end
 
   def create
@@ -34,7 +36,8 @@ class PurchaseProcessCreditorProposalsController < CrudController
     @creditors = @licitation_process.creditors.includes(:purchase_process_creditor_proposals)
   end
 
-private
+  private
+
   def load_licitation_process
     @licitation_process = LicitationProcess.find(params[:licitation_process_id])
   end
