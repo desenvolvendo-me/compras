@@ -576,5 +576,18 @@ describe Bidder do
         expect(subject.purchase_process_documents).to eq [purchase_document]
       end
     end
+
+    it 'should not allow document_type duplications' do
+      errors = double(:errors)
+      purchase_document.stub(:document_type_id => 19, :marked_for_destruction? => false)
+      bidder_document.stub(:document_type_id => 19, :marked_for_destruction? => false)
+
+      purchase_document.should_receive(:errors).and_return(errors)
+      errors.should_receive(:add).with(:document_type_id, :taken)
+
+      expect(subject.valid?).to be_false
+
+      expect(subject.errors[:documents]).to include('não é válido')
+    end
   end
 end
