@@ -267,4 +267,27 @@ feature "BankAccounts" do
       end
     end
   end
+
+  scenario 'should javascript' do
+    BankAccount.make!(:itau_tributos)
+    BankAccount.make!(:santander_tributos)
+
+    navigate 'Comum > Cadastrais > Bancos > Contas Bancárias'
+
+    click_link 'Criar Conta Bancária'
+
+    fill_modal 'Banco', :with => 'Itaú'
+
+    within_modal 'Agência' do
+      expect(page).to have_field 'Banco', :with => 'Itaú'
+
+      click_button 'Pesquisar'
+
+      within_records do
+        within 'tbody tr td:nth-child(3)' do
+          expect(page).to have_content 'Itaú'
+        end
+      end
+    end
+  end
 end
