@@ -55,6 +55,7 @@ end
 group :development, :test do
   gem "factory_girl-preload", :git => 'git://github.com/MarceloCajueiro/factory_girl-preload.git'
   gem "factory_girl_rails", "~> 4.2.1"
+  gem 'postgres-copy', '~> 0.5.8'
   gem 'pry', '0.9.12'
   gem 'rspec-rails', '2.12.0'
 end
