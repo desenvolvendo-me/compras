@@ -118,4 +118,16 @@ module ApplicationHelper
 
     Rails.application.assets.find_asset "#{controller_name}.#{options[:type].to_s}"
   end
+
+  def menu_sha1_digest
+    Digest::SHA1.hexdigest(File.open("#{Rails.root}/config/locales/controllers.yml").read +
+                           File.open("#{Rails.root}/config/menu.yml").read)
+  end
+
+  def menu_key
+    ["saude-menu-#{current_customer.cache_key}",
+     "profile-id-#{current_user.profile_id}",
+     "profile-updated-at-#{current_user.profile_updated_at}",
+     "controllers-sha1-digest-#{menu_sha1_digest}"].join("-")
+  end
 end

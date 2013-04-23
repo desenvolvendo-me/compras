@@ -48,7 +48,7 @@
 
         <div id="menu">
           <ul>
-            <% cache "compras-menu-#{current_customer.cache_key}-profile-id-#{current_user.profile_id}" do %>
+            <% cache menu_key do %>
               <%= render_menu %>
             <% end %>
           </ul>

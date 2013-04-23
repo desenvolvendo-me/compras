@@ -18,6 +18,7 @@ class User < Compras::Model
   has_many :roles, :through => :profile
 
   delegate :name, :to => :authenticable, :allow_nil => true
+  delegate :updated_at, :to => :profile, :allow_nil => true, :prefix => true
 
   validates :login, :presence => true, :unless => lambda { |u| !u.persisted? && u.creditor? }
   validates :authenticable, :presence => true, :unless => :administrator?
