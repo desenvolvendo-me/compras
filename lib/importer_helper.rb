@@ -8,6 +8,7 @@ module ImporterHelper
           customer.using_connection do
             block_call(block)
           end
+          puts "Imported for the customer \"#{customer}\""
         end
       else
         Customer.find_by_domain(customer).using_connection do
