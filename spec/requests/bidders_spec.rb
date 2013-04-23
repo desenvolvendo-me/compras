@@ -60,6 +60,9 @@ feature "Bidders" do
     fill_in 'Protocolo', :with => '123456'
     fill_in 'Data do protocolo', :with => I18n.l(Date.current)
     fill_in 'Data do recebimento', :with => I18n.l(Date.tomorrow)
+    select 'Sim', :from => 'Renúncia a recurso'
+    select 'Sim', :from => 'Registro de presença em ata'
+    select 'Sim', :from => 'Habilitado'
 
     within_tab 'Documentos' do
       # testing that document type from licitation process are automaticaly included in bidder
@@ -114,6 +117,9 @@ feature "Bidders" do
     expect(page).to have_field 'Data do protocolo', :with => I18n.l(Date.current)
     expect(page).to have_field 'Data do recebimento', :with => I18n.l(Date.tomorrow)
     expect(page).to have_checked_field 'Apresentará nova proposta em caso de empate'
+    expect(page).to have_select 'Renúncia a recurso', :selected => 'Sim'
+    expect(page).to have_select 'Registro de presença em ata', :selected => 'Sim'
+    expect(page).to have_select 'Habilitado', :selected => 'Sim'
 
     within_tab 'Documentos' do
       expect(page).to have_field 'Documento', :with => 'Fiscal'
@@ -160,6 +166,9 @@ feature "Bidders" do
     fill_in 'Protocolo', :with => '111111'
     fill_in 'Data do protocolo', :with => I18n.l(Date.tomorrow)
     fill_in 'Data do recebimento', :with => I18n.l(Date.tomorrow + 1.day)
+    select 'Não', :from => 'Renúncia a recurso'
+    select 'Não', :from => 'Registro de presença em ata'
+    select 'Não', :from => 'Habilitado'
 
     within_tab 'Documentos' do
       fill_in 'Número/certidão', :with => '333333'
@@ -204,6 +213,9 @@ feature "Bidders" do
     expect(page).to have_field 'Protocolo', :with => '111111'
     expect(page).to have_field 'Data do protocolo', :with => I18n.l(Date.tomorrow)
     expect(page).to have_field 'Data do recebimento', :with => I18n.l(Date.tomorrow + 1.day)
+    expect(page).to have_select 'Renúncia a recurso', :selected => 'Não'
+    expect(page).to have_select 'Registro de presença em ata', :selected => 'Não'
+    expect(page).to have_select 'Habilitado', :selected => 'Não'
 
     within_tab 'Documentos' do
       expect(page).to have_field 'Documento', :with => 'Fiscal'
