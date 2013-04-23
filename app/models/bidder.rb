@@ -242,8 +242,16 @@ class Bidder < Compras::Model
 
   def build_documents
     licitation_process_document_type_ids.each do |document_type_id|
-      documents.build(:document_type_id => document_type_id)
+      documents.build(document_type_id: document_type_id, purchase_document: true)
     end
+  end
+
+  def purchase_process_documents
+    documents.select { |d| d.purchase_document? }
+  end
+
+  def bidder_documents
+    documents.select { |d| !d.purchase_document? }
   end
 
   def can_update_proposals?

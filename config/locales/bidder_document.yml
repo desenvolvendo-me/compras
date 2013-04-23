@@ -7,7 +7,7 @@ pt-BR:
 
     attributes:
       bidder_document:
-        document_type: "Tipo de documento"
+        document_type: "Documento"
         description: "Documento"
         document_number: "Número/certidão"
         emission_date: "Data de emissão"

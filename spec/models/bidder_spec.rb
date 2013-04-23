@@ -556,4 +556,25 @@ describe Bidder do
       it { expect(subject.selected_for_trading_item?(item)).to be_false }
     end
   end
+
+  context 'with documents' do
+    let(:purchase_document) { double(:purchase_document, :purchase_document? => true) }
+    let(:bidder_document) { double(:bidder_document, :purchase_document? => false) }
+
+    before do
+      subject.stub(:documents => [bidder_document, purchase_document])
+    end
+
+    describe '#bidder_documents' do
+      it 'should return all documents where purchase_document is false' do
+        expect(subject.bidder_documents).to eq [bidder_document]
+      end
+    end
+
+    describe '#purchase_process_documents' do
+      it 'should return all documents where purchase_document is false' do
+        expect(subject.purchase_process_documents).to eq [purchase_document]
+      end
+    end
+  end
 end

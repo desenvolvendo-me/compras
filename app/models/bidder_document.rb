@@ -1,5 +1,6 @@
 class BidderDocument < Compras::Model
-  attr_accessible :document_type_id, :document_number, :emission_date, :validity
+  attr_accessible :document_type_id, :document_number, :emission_date, :validity,
+                  :purchase_document
 
   belongs_to :bidder
   belongs_to :document_type

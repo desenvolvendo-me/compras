@@ -1,3 +1,17 @@
-<%= f.association :documents, :collection => localized(f.object.documents) do |p| %>
-  <%= render 'bidder_documents/form', :f => p %>
+<%= f.association :documents, :collection => localized(f.object.purchase_process_documents) do |d| %>
+  <%= render 'bidder_documents/form', :f => d %>
 <% end %>
+
+<input type="button" class="button affirmative add_bidder_document add-margin-bottom" value="Adicionar Documento">
+
+<div id="bidder_documents">
+  <%= f.association :documents, :collection => localized(f.object.bidder_documents) do |d| %>
+    <%= render 'bidder_documents/bidder_document_form', :f => d %>
+  <% end %>
+
+  <%= mustache 'bidder_documents_template' do %>
+    <%= f.association :documents_attributes, :collection => f.object.documents.build, :index => '{{uuid_documents}}' do |d| %>
+      <%= render 'bidder_documents/bidder_document_form', :f => d, :data_disabled => nil %>
+    <% end %>
+  <% end %>
+</div>
