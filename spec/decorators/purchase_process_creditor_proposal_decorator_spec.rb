@@ -23,4 +23,13 @@ describe PurchaseProcessCreditorProposalDecorator do
       expect(subject.total_price).to eql "11.000,12"
     end
   end
+
+  describe '#subtitle' do
+    it 'should returns the subtitle based creditors and licitation process' do
+      subject.stub(:creditor => 'Joao', :licitation_process => '1/2013')
+
+      expect(subject.subtitle).to eq 'Fornecedor Joao - Processo 1/2013'
+    end
+
+  end
 end

@@ -15,4 +15,8 @@ class PurchaseProcessCreditorProposalDecorator
   def total_price
     number_with_precision super if super
   end
+
+  def subtitle
+    "Fornecedor #{creditor} - Processo #{licitation_process.to_s}"
+  end
 end

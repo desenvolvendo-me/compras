@@ -48,6 +48,7 @@ feature 'PurchaseProcessCreditorProposals' do
     end
 
     expect(page).to have_content 'Criar Proposta Comercial'
+    expect(page).to have_content 'Fornecedor Gabriel Sobrinho - Processo 1/2012 - Pregão 1'
 
     expect(page).to have_disabled_field 'Valor total da proposta', with: '0,00'
     expect(page).to have_disabled_field 'Lote', with: '2050'
@@ -97,6 +98,8 @@ feature 'PurchaseProcessCreditorProposals' do
     end
 
     expect(page).to have_content 'Editar Proposta Comercial'
+    expect(page).to have_content 'Fornecedor Gabriel Sobrinho - Processo 1/2012 - Pregão 1'
+
 
     expect(page).to have_disabled_field 'Valor total da proposta', with: '100,40'
     expect(page).to have_disabled_field 'Lote', with: '2050'
