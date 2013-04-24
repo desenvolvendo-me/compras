@@ -9,7 +9,7 @@ feature 'ContractTerminations' do
     sign_in
   end
 
-  scenario 'creating and updating the terminations of a contract', js: true do
+  scenario 'creating and updating the terminations of a contract' do
     Contract.make!(:primeiro_contrato)
     DisseminationSource.make!(:jornal_bairro)
 
@@ -86,7 +86,7 @@ feature 'ContractTerminations' do
     expect(page).to have_field 'Motivo da rescisão', :with => 'Motivo vai aqui'
   end
 
-  scenario 'contract termination annulled should have fields disabled', js: true do
+  scenario 'contract termination annulled should have fields disabled' do
     ResourceAnnul.make!(:rescisao_de_contrato_anulada)
 
     navigate 'Comum > Cadastrais > Contratos'

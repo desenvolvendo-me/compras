@@ -9,7 +9,7 @@ feature 'PurchaseProcessCreditorProposals' do
     sign_in
   end
 
-  scenario 'create and update creditor proposals', js: true do
+  scenario 'create and update creditor proposals' do
     LicitationProcess.make!(:pregao_presencial,
       bidders: [Bidder.make!(:licitante_sobrinho), Bidder.make!(:licitante)])
 

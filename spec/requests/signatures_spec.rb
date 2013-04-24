@@ -6,7 +6,7 @@ feature "Signatures" do
     sign_in
   end
 
-  scenario 'create a new signature, update and destroy an existing', js: true do
+  scenario 'create a new signature, update and destroy an existing' do
     Person.make!(:sobrinho)
 
     navigate 'Geral > Parâmetros > Assinaturas > Assinaturas'

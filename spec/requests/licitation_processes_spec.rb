@@ -18,7 +18,7 @@ feature "LicitationProcesses" do
     sign_in
   end
 
-  scenario 'create and update a licitation_process', js: true do
+  scenario 'create and update a licitation_process' do
     PaymentMethod.make!(:dinheiro)
     DocumentType.make!(:fiscal)
     DocumentType.make!(:oficial)
@@ -489,7 +489,7 @@ feature "LicitationProcesses" do
     end
   end
 
-  scenario 'changing judgment form', js: true do
+  scenario 'changing judgment form' do
     PaymentMethod.make!(:dinheiro)
     DocumentType.make!(:fiscal)
     BudgetAllocation.make!(:alocacao)
@@ -519,7 +519,7 @@ feature "LicitationProcesses" do
     end
   end
 
-  scenario 'envelope opening date is disabled without publication', js: true do
+  scenario 'envelope opening date is disabled without publication' do
     LicitationProcess.make!(:processo_licitatorio, :licitation_process_publications => [])
     PaymentMethod.make!(:cheque)
     DocumentType.make!(:oficial)
@@ -564,7 +564,7 @@ feature "LicitationProcesses" do
     end
   end
 
-  scenario 'calculating items values via javascript', js: true do
+  scenario 'calculating items values via javascript' do
     navigate 'Processos de Compra > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
@@ -583,7 +583,7 @@ feature "LicitationProcesses" do
     end
   end
 
-  scenario 'change document types to ensure that the changes are reflected on bidder documents', js: true do
+  scenario 'change document types to ensure that the changes are reflected on bidder documents' do
     LicitationProcess.make!(:processo_licitatorio_computador)
     DocumentType.make!(:oficial)
 
@@ -643,7 +643,7 @@ feature "LicitationProcesses" do
     expect(page).to_not have_link 'Apurar'
   end
 
-  scenario 'cannot show update and nested buttons when the publication is (extension, edital, edital_rectification)', js: true do
+  scenario 'cannot show update and nested buttons when the publication is (extension, edital, edital_rectification)' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_publicacao_cancelada)
 
     navigate 'Processos de Compra > Processos de Compras'
@@ -674,7 +674,7 @@ feature "LicitationProcesses" do
     expect(page).to_not have_link 'Lotes de itens'
   end
 
-  scenario 'budget allocation with quantity empty and total item value should have 0 as unit value', js: true do
+  scenario 'budget allocation with quantity empty and total item value should have 0 as unit value' do
     LicitationProcess.make!(:processo_licitatorio)
 
     navigate 'Processos de Compra > Processos de Compras'
@@ -696,7 +696,7 @@ feature "LicitationProcesses" do
     end
   end
 
-  scenario 'create a new licitation_process with envelope opening date today', js: true do
+  scenario 'create a new licitation_process with envelope opening date today' do
     PaymentMethod.make!(:dinheiro)
     DocumentType.make!(:fiscal)
     BudgetAllocation.make!(:alocacao)
@@ -784,7 +784,7 @@ feature "LicitationProcesses" do
     expect(page).to have_content 'Ganhou'
   end
 
-  scenario 'allowance of adding bidders and publication of the edital', js: true do
+  scenario 'allowance of adding bidders and publication of the edital' do
     LicitationProcess.make!(:processo_licitatorio,
                             :licitation_process_publications => [])
 
@@ -821,7 +821,7 @@ feature "LicitationProcesses" do
     expect(page).to have_content "Licitantes do Processo de Compra 1/2012"
   end
 
-  scenario "allowing changes to licitation process after ratification", js: true do
+  scenario "allowing changes to licitation process after ratification" do
     LicitationProcessRatification.make!(:processo_licitatorio_computador)
 
     navigate 'Processos de Compra > Processos de Compras'
@@ -998,7 +998,7 @@ feature "LicitationProcesses" do
     end
   end
 
-  scenario 'generate calculation between a small company and a big company and consider law of proposals and make a new proposal', js: true do
+  scenario 'generate calculation between a small company and a big company and consider law of proposals and make a new proposal' do
     licitation_process = LicitationProcess.make!(:apuracao_global_small_company)
 
     navigate 'Processos de Compra > Processos de Compras'
@@ -1076,7 +1076,7 @@ feature "LicitationProcesses" do
     end
   end
 
-  scenario 'generate calculation between a small company and a big company and dont make a new proposal', js: true do
+  scenario 'generate calculation between a small company and a big company and dont make a new proposal' do
     licitation_process = LicitationProcess.make!(:apuracao_global_small_company)
 
     navigate 'Processos de Compra > Processos de Compras'
@@ -1152,7 +1152,7 @@ feature "LicitationProcesses" do
     end
   end
 
-  scenario 'generate calculation when type of calculation is global', js: true do
+  scenario 'generate calculation when type of calculation is global' do
     licitation_process = LicitationProcess.make!(:apuracao_global)
 
     navigate 'Processos de Compra > Processos de Compras'
@@ -1210,7 +1210,7 @@ feature "LicitationProcesses" do
     end
   end
 
-  scenario 'generate calculation when type of calculation is by lot', js: true do
+  scenario 'generate calculation when type of calculation is by lot' do
     licitation_process = LicitationProcess.make!(:apuracao_por_lote)
     LicitationProcessLot.make!(:lote, :licitation_process => licitation_process,
                                :purchase_process_items => [licitation_process.items.first])
@@ -1302,7 +1302,7 @@ feature "LicitationProcesses" do
     end
   end
 
-  scenario 'generate calculation when type of calculation is by item', js: true do
+  scenario 'generate calculation when type of calculation is by item' do
     licitation_process = LicitationProcess.make!(:apuracao_por_itens)
 
     navigate 'Processos de Compra > Processos de Compras'
@@ -1409,7 +1409,7 @@ feature "LicitationProcesses" do
     expect(page).to have_title 'Processos de Compras'
   end
 
-  scenario 'filter judgment form', js: true do
+  scenario 'filter judgment form' do
     JudgmentForm.make!(:global_com_menor_preco) # LOWEST_PRICE   Forma Global com Menor Preço
     JudgmentForm.make!(:global_com_melhor_lance_ou_oferta) # BEST_AUCTION_OR_OFFER   Global com Melhor Lance ou Oferta
     JudgmentForm.make!(:maior_desconto_por_tabela) # HIGHER_DISCOUNT_ON_TABLE   Maior Desconto por Tabela
@@ -1470,7 +1470,7 @@ feature "LicitationProcesses" do
     end
   end
 
-  scenario 'when clear object_type should not filter licitation_kind in judgment_form modal', js: true do
+  scenario 'when clear object_type should not filter licitation_kind in judgment_form modal' do
     JudgmentForm.make!(:global_com_menor_preco) # LOWEST_PRICE
     JudgmentForm.make!(:por_item_com_melhor_tecnica) # BEST_TECHNIQUE
     JudgmentForm.make!(:por_lote_com_tecnica_e_preco) # TECHNICAL_AND_PRICE
@@ -1494,7 +1494,7 @@ feature "LicitationProcesses" do
     end
   end
 
-  scenario "filtering modalities based on seleted object type", js: true do
+  scenario "filtering modalities based on seleted object type" do
     navigate 'Processos de Compra > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
@@ -1529,7 +1529,7 @@ feature "LicitationProcesses" do
     end
   end
 
-  scenario 'budget allocations should be fulfilled automatically when fulfill purchase_solicitation', js: true do
+  scenario 'budget allocations should be fulfilled automatically when fulfill purchase_solicitation' do
     PurchaseSolicitation.make!(:reparo_liberado, :accounting_year => Date.current.year)
     Employee.make!(:sobrinho)
     Capability.make!(:reforma)
@@ -1706,7 +1706,7 @@ feature "LicitationProcesses" do
     end
   end
 
-  scenario 'assert javascript over object type', js: true do
+  scenario 'assert javascript over object type' do
     navigate 'Processos de Compra > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
@@ -1751,7 +1751,7 @@ feature "LicitationProcesses" do
     end
   end
 
-  scenario 'assert javascript over type of purchase', js: true do
+  scenario 'assert javascript over type of purchase' do
     navigate 'Processos de Compra > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
@@ -1771,7 +1771,7 @@ feature "LicitationProcesses" do
     end
   end
 
-  scenario 'assert javascript over modality', js: true do
+  scenario 'assert javascript over modality' do
     navigate 'Processos de Compra > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
@@ -1825,7 +1825,7 @@ feature "LicitationProcesses" do
     end
   end
 
-  scenario 'items can be removed and added individually or with purchase solicitation', js: true do
+  scenario 'items can be removed and added individually or with purchase solicitation' do
     PurchaseSolicitation.make!(:reparo_liberado, :accounting_year => Date.current.year)
     Employee.make!(:sobrinho)
     Capability.make!(:reforma)
@@ -2017,7 +2017,7 @@ feature "LicitationProcesses" do
     end
   end
 
-  scenario "item quantity sum when duplicated by another licitation process association", js: true do
+  scenario "item quantity sum when duplicated by another licitation process association" do
     PurchaseSolicitation.make!(:reparo_liberado, :accounting_year => Date.current.year,
                                :purchase_solicitation_budget_allocations => [PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria_office)],
                                :items => [PurchaseSolicitationItem.make!(:office), PurchaseSolicitationItem.make!(:arame_farpado_2)])
@@ -2104,7 +2104,7 @@ feature "LicitationProcesses" do
     end
   end
 
-  scenario 'when the modality is not trading, should not appear accreditation button', js: true do
+  scenario 'when the modality is not trading, should not appear accreditation button' do
     LicitationProcess.make!(:processo_licitatorio)
     JudgmentForm.make!(:por_item_com_menor_preco)
 

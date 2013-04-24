@@ -6,7 +6,7 @@ feature "BankAccounts" do
     sign_in
   end
 
-  scenario 'opening modal info in a new capability', js: true do
+  scenario 'opening modal info in a new capability' do
     Capability.make!(:reforma)
 
     navigate 'Comum > Cadastrais > Bancos > Contas Bancárias'
@@ -24,7 +24,7 @@ feature "BankAccounts" do
     expect(page).to have_content 'Otimizar o atendimento a todos'
   end
 
-  scenario 'create, update and destroy a new bank_account', js: true do
+  scenario 'create, update and destroy a new bank_account' do
     Capability.make!(:reforma)
     Capability.make!(:construcao)
 
@@ -182,7 +182,7 @@ feature "BankAccounts" do
     expect(page).to_not have_content 'IPTU'
   end
 
-  scenario 'when fill/clear agency should fill/clear related fields', js: true do
+  scenario 'when fill/clear agency should fill/clear related fields' do
 
     navigate 'Comum > Cadastrais > Bancos > Contas Bancárias'
 
@@ -203,7 +203,7 @@ feature "BankAccounts" do
     end
   end
 
-  scenario 'when clear bank should clear agency too', js: true do
+  scenario 'when clear bank should clear agency too' do
 
     navigate 'Comum > Cadastrais > Bancos > Contas Bancárias'
 
@@ -222,7 +222,7 @@ feature "BankAccounts" do
     end
   end
 
-  scenario 'when select agency before bank, bank should fill bank', js: true do
+  scenario 'when select agency before bank, bank should fill bank' do
 
     navigate 'Comum > Cadastrais > Bancos > Contas Bancárias'
 
@@ -235,7 +235,7 @@ feature "BankAccounts" do
     end
   end
 
-  scenario 'when fill bank and submit form with errors should return with bank', js: true do
+  scenario 'when fill bank and submit form with errors should return with bank' do
 
     navigate 'Comum > Cadastrais > Bancos > Contas Bancárias'
 

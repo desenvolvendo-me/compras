@@ -9,7 +9,7 @@ feature "OccurrenceContractualHistorics" do
     sign_in
   end
 
-  scenario 'create a new occurrence_contractual_historic, update and destroy an existing', js: true do
+  scenario 'create a new occurrence_contractual_historic, update and destroy an existing' do
     Contract.make!(:primeiro_contrato)
 
     navigate 'Comum > Cadastrais > Contratos'

@@ -6,7 +6,7 @@ feature "LegalAnalysisAppraisals" do
     sign_in
   end
 
-  scenario 'create a new legal_analysis_appraisal, update and destroy an existing', js: true do
+  scenario 'create a new legal_analysis_appraisal, update and destroy an existing' do
     LicitationProcess.make!(:processo_licitatorio)
     Employee.make!(:sobrinho)
     Employee.make!(:wenderson)

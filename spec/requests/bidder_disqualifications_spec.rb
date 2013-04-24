@@ -71,7 +71,7 @@ feature BidderDisqualification do
     end
   end
 
-  scenario 'Edit a existing disqualification', js: true do
+  scenario 'Edit a existing disqualification' do
     TradingConfiguration.make!(:pregao)
 
     make_trading_item_at_classification

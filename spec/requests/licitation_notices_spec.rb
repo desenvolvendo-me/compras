@@ -8,7 +8,7 @@ feature "LicitationNotices" do
 
   let(:date_current) { I18n.l Date.current }
 
-  scenario 'create, update and destroy destroy a new licitation_notice', js: true do
+  scenario 'create, update and destroy destroy a new licitation_notice' do
     LicitationProcess.make!(:processo_licitatorio)
 
     navigate 'Processos de Compra > Avisos de Licitações'
@@ -68,7 +68,7 @@ feature "LicitationNotices" do
     expect(page).to_not have_content 'A licitação começou.'
   end
 
-  scenario 'create a new licitation_notice when already exists a licitation_notice with the same licitation process year', js: true do
+  scenario 'create a new licitation_notice when already exists a licitation_notice with the same licitation process year' do
     LicitationNotice.make!(:aviso_de_licitacao)
     LicitationProcess.make!(:processo_licitatorio_computador)
 
@@ -97,7 +97,7 @@ feature "LicitationNotices" do
     expect(page).to have_field 'Observações gerais', :with => 'Aviso de processo 3'
   end
 
-  scenario 'create a new licitation_notice when already exists a licitation_notice with other licitation process year', js: true do
+  scenario 'create a new licitation_notice when already exists a licitation_notice with other licitation process year' do
     LicitationNotice.make!(:aviso_de_licitacao)
 
     navigate 'Processos de Compra > Avisos de Licitações'
@@ -125,7 +125,7 @@ feature "LicitationNotices" do
     expect(page).to have_field 'Observações gerais', :with => 'Aviso de processo 2'
   end
 
-  scenario 'delegate fields should be empty when clear licitaion process', js: true do
+  scenario 'delegate fields should be empty when clear licitaion process' do
     LicitationNotice.make!(:aviso_de_licitacao)
 
     navigate 'Processos de Compra > Avisos de Licitações'

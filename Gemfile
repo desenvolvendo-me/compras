@@ -65,7 +65,6 @@ group :test do
   gem 'machinist', '2.0'
   gem 'machinist-caching', '0.0.1'
   gem 'poltergeist', '0.7.0'
-  gem 'rack_session_access', '0.1.1'
   gem 'shoulda-matchers', '1.4.2'
   gem 'simplecov', :require => false
 end

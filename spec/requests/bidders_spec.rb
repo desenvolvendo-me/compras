@@ -31,7 +31,7 @@ feature "Bidders" do
     expect(page).to have_title "Editar Processo de Compra"
   end
 
-  scenario 'creating, updating, destroy a new bidder', js: true do
+  scenario 'creating, updating, destroy a new bidder' do
     LicitationProcess.make!(:processo_licitatorio_computador,
       :modality => Modality::INVITATION,
       :judgment_form => JudgmentForm.make!(:global_com_menor_preco))
@@ -282,7 +282,7 @@ feature "Bidders" do
     expect(page).to have_title "Editar Processo de Compra"
   end
 
-  scenario 'creating, updating, destroy a new bidder', js: true do
+  scenario 'creating, updating, destroy a new bidder' do
     LicitationProcess.make!(:processo_licitatorio_computador,
       :modality => Modality::INVITATION,
       :judgment_form => JudgmentForm.make!(:global_com_menor_preco))
@@ -472,7 +472,7 @@ feature "Bidders" do
     end
   end
 
-  scenario 'when is not invited should disable and clear date, protocol fields', js: true do
+  scenario 'when is not invited should disable and clear date, protocol fields' do
     LicitationProcess.make!(:processo_licitatorio_computador,
       :modality => Modality::INVITATION,
       :judgment_form => JudgmentForm.make!(:global_com_menor_preco))
@@ -526,7 +526,7 @@ feature "Bidders" do
     expect(page).to have_disabled_field 'Data do recebimento'
   end
 
-  scenario 'showing some items without lot on proposals', js: true do
+  scenario 'showing some items without lot on proposals' do
     LicitationProcess.make!(:processo_licitatorio_canetas_sem_lote)
 
     navigate 'Processos de Compra > Processos de Compras'
@@ -640,7 +640,7 @@ feature "Bidders" do
     end
   end
 
-  scenario 'creating some lots and showing one tab for lot on proposals', js: true do
+  scenario 'creating some lots and showing one tab for lot on proposals' do
     LicitationProcess.make!(:processo_licitatorio_canetas_sem_lote)
 
     navigate 'Processos de Compra > Processos de Compras'
@@ -807,7 +807,7 @@ feature "Bidders" do
     end
   end
 
-  scenario 'should show message that can not update proposals when any item does not have lot and licitation process has lot', js: true do
+  scenario 'should show message that can not update proposals when any item does not have lot and licitation process has lot' do
     LicitationProcess.make!(:processo_licitatorio_canetas_sem_lote)
 
     navigate 'Processos de Compra > Processos de Compras'
@@ -991,7 +991,7 @@ feature "Bidders" do
     expect(page).to_not have_field 'Pontuação técnica'
   end
 
-  scenario "Save and destroy buttons should be disabled if licitation process envelope opening date is not today", js: true do
+  scenario "Save and destroy buttons should be disabled if licitation process envelope opening date is not today" do
     licitation_process = LicitationProcess.make!(:apuracao_global)
     licitation_process.update_attribute :proposal_envelope_opening_date, Date.tomorrow
 
@@ -1034,7 +1034,7 @@ feature "Bidders" do
     expect(page).to have_link 'Apagar'
   end
 
-  scenario 'Bidders cant be changed when the licitation process has a ratification', js: true do
+  scenario 'Bidders cant be changed when the licitation process has a ratification' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
     Creditor.make!(:sobrinho_sa)
     Person.make!(:wenderson)
@@ -1084,7 +1084,7 @@ feature "Bidders" do
     end
   end
 
-  scenario 'when licitation process has a trading bidder proposals should be disabled', js: true do
+  scenario 'when licitation process has a trading bidder proposals should be disabled' do
     Trading.make!(:pregao_presencial)
 
     navigate 'Processos de Compra > Processos de Compras'

@@ -6,7 +6,7 @@ feature "ContractType" do
     sign_in
   end
 
-  scenario 'create, update and destroy a new service', js: true do
+  scenario 'create, update and destroy a new service' do
     navigate 'Comum > Tipos de Contrato'
 
     click_link 'Criar Tipo de Contrato'

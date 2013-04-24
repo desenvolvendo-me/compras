@@ -10,7 +10,7 @@ feature "JudgmentCommissionAdvices" do
     sign_in
   end
 
-  scenario 'create, update and destroy a new judgment_commission_advice', js: true do
+  scenario 'create, update and destroy a new judgment_commission_advice' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio)
     licitation_commission = LicitationCommission.make!(:comissao)
     Person.make!(:sobrinho)
@@ -182,7 +182,7 @@ feature "JudgmentCommissionAdvices" do
     expect(page).to_not have_link "40/2013"
   end
 
-  scenario 'create another judgment_commission_advice to test the generated minutes number and judgment sequence', js: true do
+  scenario 'create another judgment_commission_advice to test the generated minutes number and judgment sequence' do
     JudgmentCommissionAdvice.make!(:parecer)
     LicitationProcess.make!(:processo_licitatorio)
     LicitationCommission.make!(:comissao)
@@ -226,7 +226,7 @@ feature "JudgmentCommissionAdvices" do
     end
   end
 
-  scenario 'should get the CPF number when selecting individual', js: true do
+  scenario 'should get the CPF number when selecting individual' do
     Person.make!(:wenderson)
     LicitationProcess.make!(:processo_licitatorio)
 

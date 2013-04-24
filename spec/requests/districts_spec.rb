@@ -6,7 +6,7 @@ feature "Districts" do
     sign_in
   end
 
-  scenario 'create, update and destroy a new district', js: true do
+  scenario 'create, update and destroy a new district' do
     navigate 'Geral > Parâmetros > Endereços > Distritos'
 
     click_link 'Criar Distrito'

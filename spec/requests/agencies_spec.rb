@@ -6,7 +6,7 @@ feature "Agencies" do
     sign_in
   end
 
-  scenario 'create, update and destroy a new agency', js: true do
+  scenario 'create, update and destroy a new agency' do
     navigate 'Comum > Cadastrais > Bancos > Agências'
 
     click_link 'Criar Agência'

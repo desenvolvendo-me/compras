@@ -6,7 +6,7 @@ feature "Creditors" do
     sign_in
   end
 
-  scenario 'creditor filter by person', js: true do
+  scenario 'creditor filter by person' do
     Creditor.make!(:nohup)
     Creditor.make!(:wenderson_sa)
 
@@ -27,7 +27,7 @@ feature "Creditors" do
     expect(page).to_not have_link 'Nohup'
   end
 
-  scenario 'creditor filter by CNPJ or CPF', js: true do
+  scenario 'creditor filter by CNPJ or CPF' do
     Creditor.make!(:nohup)
     Creditor.make!(:sobrinho)
 
@@ -48,7 +48,7 @@ feature "Creditors" do
     expect(page).to_not have_link 'Gabriel Sobrinho'
   end
 
-  scenario 'show main tab to special entry when have custom data', js: true do
+  scenario 'show main tab to special entry when have custom data' do
     prefecture = Prefecture.make!(:belo_horizonte)
     Customization.make!(:campo_string, :state => prefecture.state)
 
@@ -61,7 +61,7 @@ feature "Creditors" do
     end
   end
 
-  scenario 'viewing more data from the selected person', js: true do
+  scenario 'viewing more data from the selected person' do
     Person.make!(:nohup)
 
     navigate 'Comum > Pessoas > Credores'
@@ -79,7 +79,7 @@ feature "Creditors" do
     expect(page).to have_content 'Wenderson Malheiros'
   end
 
-  scenario 'create a new creditor when people is a company', js: true do
+  scenario 'create a new creditor when people is a company' do
     Person.make!(:ibrama)
     Cnae.make!(:varejo)
     Cnae.make!(:aluguel)
@@ -268,7 +268,7 @@ feature "Creditors" do
     end
   end
 
-  scenario 'create a new creditor when people is individual', js: true do
+  scenario 'create a new creditor when people is individual' do
     Person.make!(:sobrinho)
     Material.make!(:arame_farpado)
     OccupationClassification.make!(:armed_forces)
@@ -385,7 +385,7 @@ feature "Creditors" do
     end
   end
 
-  scenario 'acessing a CRC for a creditor and returning to creditor', js: true do
+  scenario 'acessing a CRC for a creditor and returning to creditor' do
     Creditor.make!(:nohup)
 
     navigate 'Comum > Pessoas > Credores'
@@ -422,7 +422,7 @@ feature "Creditors" do
     expect(page).to have_title 'Editar Credor'
   end
 
-  scenario 'create a CRC for a creditor', js: true do
+  scenario 'create a CRC for a creditor' do
     Creditor.make!(:nohup)
 
     navigate 'Comum > Pessoas > Credores'
@@ -504,7 +504,7 @@ feature "Creditors" do
     expect(page).to have_field 'Data da revogação', :with => '05/04/2014'
   end
 
-  scenario 'update a CRC for a creditor', js: true do
+  scenario 'update a CRC for a creditor' do
     Creditor.make!(:nohup)
 
     navigate 'Comum > Pessoas > Credores'
@@ -568,7 +568,7 @@ feature "Creditors" do
     expect(page).to have_link 'CRC'
   end
 
-  scenario 'should disable CRC when creditor is individual', js: true do
+  scenario 'should disable CRC when creditor is individual' do
     Creditor.make!(:sobrinho)
 
     navigate 'Comum > Pessoas > Credores'
@@ -578,7 +578,7 @@ feature "Creditors" do
     expect(page).to have_disabled_element 'CRC', :reason => 'não disponível para pessoa física'
   end
 
-  scenario 'update a creditor when people is a company', js: true do
+  scenario 'update a creditor when people is a company' do
     Creditor.make!(:nohup)
     Cnae.make!(:aluguel)
     Cnae.make!(:direito_social)
@@ -797,7 +797,7 @@ feature "Creditors" do
     end
   end
 
-  scenario 'update a creditor when people is individual', js: true do
+  scenario 'update a creditor when people is individual' do
     Creditor.make!(:sobrinho)
     OccupationClassification.make!(:engineer)
     Material.make!(:arame_farpado)
@@ -929,7 +929,7 @@ feature "Creditors" do
     end
   end
 
-  scenario 'validating javascript to regularization or administrative sanction reason modal', js: true do
+  scenario 'validating javascript to regularization or administrative sanction reason modal' do
     Creditor.make!(:nohup)
     RegularizationOrAdministrativeSanctionReason.make!(:sancao_administrativa)
 
@@ -967,7 +967,7 @@ feature "Creditors" do
     expect(page).to have_content 'Mateus Lorandi'
   end
 
-  scenario 'show only the tabs that are common to all personable of people when has not a people.', js: true do
+  scenario 'show only the tabs that are common to all personable of people when has not a people.' do
     navigate 'Comum > Pessoas > Credores'
 
     click_link 'Criar Credor'
@@ -984,7 +984,7 @@ feature "Creditors" do
     end
   end
 
-  scenario 'should only show only tabs for individual people', js: true do
+  scenario 'should only show only tabs for individual people' do
     Person.make!(:sobrinho)
 
     navigate 'Comum > Pessoas > Credores'
@@ -1005,7 +1005,7 @@ feature "Creditors" do
     end
   end
 
-  scenario 'should only show only tabs for company people', js: true do
+  scenario 'should only show only tabs for company people' do
     Person.make!(:nohup)
 
     navigate 'Comum > Pessoas > Credores'

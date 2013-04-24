@@ -6,7 +6,7 @@ feature "Tradings" do
     sign_in
   end
 
-  scenario "creating a new trading", js: true do
+  scenario "creating a new trading" do
     Entity.make!(:detran)
     Entity.make!(:secretaria_de_educacao)
     LicitationProcess.make!(:pregao_presencial)
@@ -92,7 +92,7 @@ feature "Tradings" do
     end
   end
 
-  scenario "filtering out non-published licitation process with modalities other than 'Trading'", js: true do
+  scenario "filtering out non-published licitation process with modalities other than 'Trading'" do
     LicitationProcess.make!(:pregao_presencial)
     LicitationProcess.make!(:processo_licitatorio, :year => 2013)
     LicitationProcess.make!(:pregao_presencial,
@@ -117,7 +117,7 @@ feature "Tradings" do
     end
   end
 
-  scenario "choosing a commission for the trading session", js: true do
+  scenario "choosing a commission for the trading session" do
     LicitationCommission.make!(:comissao_pregao_presencial)
 
     navigate "Processos de Compra > Pregão Presencial"
@@ -132,7 +132,7 @@ feature "Tradings" do
     end
   end
 
-  scenario "only allows a licitation process to be used once", js: true do
+  scenario "only allows a licitation process to be used once" do
     Entity.make!(:detran)
     Entity.make!(:secretaria_de_educacao)
     LicitationProcess.make!(:pregao_presencial)
@@ -188,7 +188,7 @@ feature "Tradings" do
     end
   end
 
-  scenario "suggesting the current year as the trading's year", js: true do
+  scenario "suggesting the current year as the trading's year" do
 
     navigate "Processos de Compra > Pregão Presencial"
 
@@ -199,7 +199,7 @@ feature "Tradings" do
     end
   end
 
-  scenario "filtering out licitation commissions with type other than trading", js: true do
+  scenario "filtering out licitation commissions with type other than trading" do
     LicitationCommission.make!(:comissao,
                                :expiration_date => Date.tomorrow,
                                :exoneration_date => nil)
@@ -220,7 +220,7 @@ feature "Tradings" do
     end
   end
 
-  scenario "filtering out expired licitation commissions", js: true do
+  scenario "filtering out expired licitation commissions" do
     LicitationCommission.make!(:comissao_pregao_presencial,
                                :expiration_date => Date.yesterday)
 
@@ -238,7 +238,7 @@ feature "Tradings" do
     end
   end
 
-  scenario "filtering out exonerated licitation commissions", js: true do
+  scenario "filtering out exonerated licitation commissions" do
     LicitationCommission.make!(:comissao_pregao_presencial,
                                :exoneration_date => Date.current)
 
@@ -258,7 +258,7 @@ feature "Tradings" do
     end
   end
 
-  scenario "adding bidders to the trading", js: true do
+  scenario "adding bidders to the trading" do
     Trading.make!(:pregao_presencial, {
       :licitation_process => LicitationProcess.make!(:pregao_presencial, :bidders => [])
     })
@@ -285,7 +285,7 @@ feature "Tradings" do
     expect(page).to have_content "Editar Pregão Presencial"
   end
 
-  scenario "trading session with negotiation and closing stage", js: true do
+  scenario "trading session with negotiation and closing stage" do
     TradingConfiguration.make!(:pregao)
     trading_item = TradingItem.make!(:item_pregao_presencial,
       :minimum_reduction_value => 1.0)

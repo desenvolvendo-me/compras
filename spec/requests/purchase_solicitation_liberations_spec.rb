@@ -9,7 +9,7 @@ feature "PurchaseSolicitationLiberations" do
     sign_in
   end
 
-  scenario 'create a new purchase_solicitation_liberation', js: true do
+  scenario 'create a new purchase_solicitation_liberation' do
     PurchaseSolicitation.make!(:reparo)
     Employee.make!(:wenderson)
 

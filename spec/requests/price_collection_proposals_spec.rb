@@ -60,7 +60,7 @@ feature "PriceCollectionProposals" do
       expect(page).to_not have_link 'Apagar'
     end
 
-    scenario 'editing proposal', js: true do
+    scenario 'editing proposal' do
       price_collection = PriceCollection.make!(:coleta_de_precos)
 
       navigate 'Processos de Compra > Coletas de Preços'
@@ -161,7 +161,7 @@ feature "PriceCollectionProposals" do
       expect(page).to have_content 'Propostas Para Coletas de Preços'
     end
 
-    scenario 'I can update my own proposals', js: true do
+    scenario 'I can update my own proposals' do
       PriceCollection.make!(:coleta_de_precos_com_2_propostas)
 
       navigate 'Compras e Licitações > Coletas de Preço'

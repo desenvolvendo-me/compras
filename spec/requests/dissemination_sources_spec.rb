@@ -6,7 +6,7 @@ feature "DisseminationSources" do
     sign_in
   end
 
-  scenario 'create, update and destroy a new dissemination_source', js: true do
+  scenario 'create, update and destroy a new dissemination_source' do
     CommunicationSource.make!(:jornal_municipal)
 
     navigate 'Comum > Legislação > Meios de Divulgação'

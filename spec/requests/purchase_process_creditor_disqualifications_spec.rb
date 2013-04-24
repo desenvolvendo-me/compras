@@ -9,7 +9,7 @@ feature 'PurchaseProcessCreditorDisqualifications' do
     sign_in
   end
 
-  scenario 'create and update a partial creditor disqualification', js: true do
+  scenario 'create and update a partial creditor disqualification' do
     PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado)
     PurchaseProcessCreditorProposal.make!(:proposta_arame)
 
@@ -174,7 +174,7 @@ feature 'PurchaseProcessCreditorDisqualifications' do
     expect(page).to have_content 'Proposta Comercial Processo 1/2012 - Pregão 1'
   end
 
-  scenario 'checking all itens change the disqualification kind', js: true do
+  scenario 'checking all itens change the disqualification kind' do
     PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado)
     PurchaseProcessCreditorProposal.make!(:proposta_arame)
 

@@ -6,7 +6,7 @@ feature "LicitationCommissions" do
     sign_in
   end
 
-  scenario 'create, update and destroy a new licitation_commission', js: true do
+  scenario 'create, update and destroy a new licitation_commission' do
     RegulatoryAct.make!(:sopa)
     Person.make!(:wenderson)
     Person.make!(:sobrinho)
@@ -148,7 +148,7 @@ feature "LicitationCommissions" do
     expect(page).to_not have_link 'nova descrição'
   end
 
-  scenario 'should clear publication_date when administractive act is clean', js: true do
+  scenario 'should clear publication_date when administractive act is clean' do
     LicitationCommission.make!(:comissao)
 
     navigate 'Processos de Compra > Auxiliar > Comissões de Licitação'
@@ -170,7 +170,7 @@ feature "LicitationCommissions" do
     end
   end
 
-  scenario 'should get the CPF number when selecting individual', js: true do
+  scenario 'should get the CPF number when selecting individual' do
     Person.make!(:wenderson)
 
     navigate 'Processos de Compra > Auxiliar > Comissões de Licitação'
@@ -204,7 +204,7 @@ feature "LicitationCommissions" do
     end
   end
 
-  scenario 'should enable/disable class_register field depending on selected role', js: true do
+  scenario 'should enable/disable class_register field depending on selected role' do
     navigate 'Processos de Compra > Auxiliar > Comissões de Licitação'
 
     click_link 'Criar Comissão de Licitação'
@@ -232,7 +232,7 @@ feature "LicitationCommissions" do
     end
   end
 
-  scenario "should clean the class_register when value selected for role is not lawyer", js: true do
+  scenario "should clean the class_register when value selected for role is not lawyer" do
     LicitationCommission.make!(:comissao)
 
     navigate 'Processos de Compra > Auxiliar > Comissões de Licitação'
@@ -263,7 +263,7 @@ feature "LicitationCommissions" do
     end
   end
 
-  scenario 'must have one member with role president', js: true do
+  scenario 'must have one member with role president' do
     Person.make!(:wenderson)
     Person.make!(:sobrinho)
 
@@ -330,7 +330,7 @@ feature "LicitationCommissions" do
     expect(page).to have_field "Descrição"
   end
 
-  scenario 'creating a trading licitation commission', js: true do
+  scenario 'creating a trading licitation commission' do
     RegulatoryAct.make!(:sopa)
     Person.make!(:wenderson)
     Person.make!(:sobrinho)

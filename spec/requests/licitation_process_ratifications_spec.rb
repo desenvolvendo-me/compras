@@ -6,7 +6,7 @@ feature "LicitationProcessRatifications" do
     sign_in
   end
 
-  scenario 'creating and updating a ratification', js: true do
+  scenario 'creating and updating a ratification' do
     LicitationProcess.make!(:processo_licitatorio_computador,
                             :judgment_form => JudgmentForm.make!(:por_item_com_menor_preco))
     BidderProposal.make!(:proposta_licitante_1, :bidder => Bidder.make!(:licitante))
@@ -81,7 +81,7 @@ feature "LicitationProcessRatifications" do
     expect(page).to have_checked_field bidder_checkbok_html_name(0)
   end
 
-  scenario 'cleaning items', js: true do
+  scenario 'cleaning items' do
     LicitationProcess.make!(:processo_licitatorio_computador,
                             :judgment_form => JudgmentForm.make!(:por_item_com_menor_preco))
     BidderProposal.make!(:proposta_licitante_1, :bidder => Bidder.make!(:licitante))

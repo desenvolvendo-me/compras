@@ -6,7 +6,7 @@ feature "LicitationProcessImpugnments" do
     sign_in
   end
 
-  scenario 'create and update a licitation_process_impugnment', js: true do
+  scenario 'create and update a licitation_process_impugnment' do
     LicitationProcess.make!(:processo_licitatorio)
     Person.make!(:sobrinho)
 
@@ -77,7 +77,7 @@ feature "LicitationProcessImpugnments" do
     expect(page).to have_field 'Hora da abertura', :with => '14:00'
   end
 
-  scenario 'should have fields disabled when situation is not pending', js: true do
+  scenario 'should have fields disabled when situation is not pending' do
     LicitationProcessImpugnment.make!(:proibido_cadeiras_deferida)
 
     navigate 'Processos de Compra > Impugnações dos Processos de Compras'
@@ -113,7 +113,7 @@ feature "LicitationProcessImpugnments" do
     expect(page).to_not have_link "Apagar"
   end
 
-  scenario 'envelope dates should be filled when licitation process selected', js: true do
+  scenario 'envelope dates should be filled when licitation process selected' do
     LicitationProcess.make!(:processo_licitatorio)
 
     navigate 'Processos de Compra > Impugnações dos Processos de Compras'
@@ -128,7 +128,7 @@ feature "LicitationProcessImpugnments" do
     expect(page).to have_field 'Hora da abertura', :with => '14:00'
   end
 
-  scenario 'envelope dates should be empty when clear licitaion process', js: true do
+  scenario 'envelope dates should be empty when clear licitaion process' do
     LicitationProcessImpugnment.make!(:proibido_cadeiras)
 
     navigate 'Processos de Compra > Impugnações dos Processos de Compras'

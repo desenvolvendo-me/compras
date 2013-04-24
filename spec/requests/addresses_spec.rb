@@ -6,7 +6,7 @@ feature "Addresses" do
     sign_in
   end
 
-  scenario "filter neighborhood through street", js: true do
+  scenario "filter neighborhood through street" do
     Street.make!(:amazonas)
     Street.make!(:girassol)
 
@@ -28,7 +28,7 @@ feature "Addresses" do
     end
   end
 
-  scenario "fetch city and state from neighborhood", js: true do
+  scenario "fetch city and state from neighborhood" do
     Street.make!(:amazonas)
     Street.make!(:girassol)
 

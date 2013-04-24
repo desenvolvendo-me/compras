@@ -8,11 +8,7 @@ module Helpers
   end
 
   def sign_in
-    if example.metadata[:js]
-      login_as current_user, :scope => :user
-    else
-      page.set_rack_session("warden.user.user.key" => User.serialize_into_session(current_user).unshift("User"))
-    end
+    login_as current_user, :scope => :user
 
     visit root_path
   end

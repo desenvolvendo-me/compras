@@ -6,7 +6,7 @@ feature 'ContractTerminationAnnuls' do
     sign_in
   end
 
-  scenario 'create a contract termination annulment', js: true do
+  scenario 'create a contract termination annulment' do
     ContractTermination.make!(:contrato_rescindido)
 
     navigate 'Comum > Cadastrais > Contratos'
@@ -38,7 +38,7 @@ feature 'ContractTerminationAnnuls' do
     expect(page).to have_field 'Justificativa', :with => 'Anulação da rescisão do contrato'
   end
 
-  scenario 'a contract termination annul should have all fields disabled', js: true do
+  scenario 'a contract termination annul should have all fields disabled' do
     ResourceAnnul.make!(:rescisao_de_contrato_anulada)
 
     navigate 'Comum > Cadastrais > Contratos'

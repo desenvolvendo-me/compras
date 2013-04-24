@@ -9,7 +9,7 @@ feature TradingItemClosing do
     sign_in
   end
 
-  scenario "closing an item at index page", js: true do
+  scenario "closing an item at index page" do
     TradingConfiguration.make!(:pregao)
     item = TradingItem.make!(:item_pregao_presencial)
     trading = Trading.make!(:pregao_presencial,
@@ -86,7 +86,7 @@ feature TradingItemClosing do
     expect(page).to have_title 'Itens do Pregão Presencial 1/2012'
   end
 
-  scenario "closing the last item or trading", js: true do
+  scenario "closing the last item or trading" do
     TradingConfiguration.make!(:pregao)
     item = TradingItem.make!(:item_pregao_presencial)
     trading = Trading.make!(:pregao_presencial,
@@ -127,7 +127,7 @@ feature TradingItemClosing do
     expect(page).to have_disabled_field 'Pregão', :with => '1/2012'
   end
 
-  scenario "closing an item with status winner without a bidder", js: true do
+  scenario "closing an item with status winner without a bidder" do
     TradingConfiguration.make!(:pregao)
     item = TradingItem.make!(:item_pregao_presencial)
     trading = Trading.make!(:pregao_presencial,

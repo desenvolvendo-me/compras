@@ -6,7 +6,7 @@ feature "DeliveryLocations" do
     sign_in
   end
 
-  scenario 'create, update and destroy a new delivery_location', js: true do
+  scenario 'create, update and destroy a new delivery_location' do
     Address.make!(:general)
 
     navigate 'Comum > Locais de Entrega'

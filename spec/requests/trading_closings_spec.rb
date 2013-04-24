@@ -9,7 +9,7 @@ feature TradingClosing do
     sign_in
   end
 
-  scenario 'closing an trading', js: true do
+  scenario 'closing an trading' do
     TradingConfiguration.make!(:pregao)
     Trading.make!(:pregao_presencial)
 

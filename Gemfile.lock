@@ -199,9 +199,6 @@ GEM
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
-    rack_session_access (0.1.1)
-      builder (>= 2.0.0)
-      rack (>= 1.0.0)
     rails (3.2.12)
       actionmailer (= 3.2.12)
       actionpack (= 3.2.12)
@@ -342,7 +339,6 @@ DEPENDENCIES
   poltergeist (= 0.7.0)
   postgres-copy (~> 0.5.8)
   pry (= 0.9.12)
-  rack_session_access (= 0.1.1)
   rails (= 3.2.12)
   responders (= 0.9.3)
   rspec-rails (= 2.12.0)

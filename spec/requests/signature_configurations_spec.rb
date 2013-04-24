@@ -6,7 +6,7 @@ feature "SignatureConfigurations" do
     sign_in
   end
 
-  scenario 'create a new signature_configuration, update and destroy an existing', js: true do
+  scenario 'create a new signature_configuration, update and destroy an existing' do
     Signature.make!(:gerente_sobrinho)
     Signature.make!(:supervisor_wenderson)
 
@@ -88,7 +88,7 @@ feature "SignatureConfigurations" do
     expect(page).to have_select 'Relatório', :options => ['', 'Autorizações de Fornecimento', 'Certificados de Registro Cadastral']
   end
 
-  scenario 'when fill signature should fill position', js: true do
+  scenario 'when fill signature should fill position' do
     Signature.make!(:gerente_sobrinho)
 
     navigate 'Geral > Parâmetros > Assinaturas > Configurações de Assinatura'

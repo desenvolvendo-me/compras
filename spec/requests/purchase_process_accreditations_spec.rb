@@ -9,7 +9,7 @@ feature "PurchaseProcessAccreditation" do
     sign_in
   end
 
-  scenario 'create, update and remove accreditance', js: true do
+  scenario 'create, update and remove accreditance' do
     LicitationProcess.make!(:pregao_presencial)
     CompanySize.make!(:empresa_de_grande_porte)
     Creditor.make!(:sobrinho)
@@ -162,7 +162,7 @@ feature "PurchaseProcessAccreditation" do
     expect(page).to have_title 'Editar Processo de Compra'
   end
 
-  scenario 'kind should be required only when has a representative', js: true do
+  scenario 'kind should be required only when has a representative' do
     LicitationProcess.make!(:processo_licitatorio, modality: Modality::TRADING)
     CompanySize.make!(:empresa_de_grande_porte)
     sobrinho = Creditor.make!(:sobrinho)

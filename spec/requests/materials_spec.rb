@@ -6,7 +6,7 @@ feature "Materials" do
     sign_in
   end
 
-  scenario 'create a new material, update and destroy an existing', js: true do
+  scenario 'create a new material, update and destroy an existing' do
     make_dependencies!
 
     navigate 'Comum > Cadastrais > Materiais > Materiais'
@@ -77,7 +77,7 @@ feature "Materials" do
     expect(page).to_not have_content 'Parafuso'
   end
 
-  scenario 'generate code', js: true do
+  scenario 'generate code' do
     make_dependencies!
 
     navigate 'Comum > Cadastrais > Materiais > Materiais'
@@ -194,7 +194,7 @@ feature "Materials" do
     end
   end
 
-  scenario 'does not show material classes with child', js: true do
+  scenario 'does not show material classes with child' do
     make_dependencies!
 
     FactoryGirl.create(:materials_class,
@@ -210,7 +210,7 @@ feature "Materials" do
     end
   end
 
-  scenario 'uncheck control_amount when material_type is not service', js: true do
+  scenario 'uncheck control_amount when material_type is not service' do
     make_dependencies!
 
     navigate 'Comum > Cadastrais > Materiais > Materiais'
@@ -232,7 +232,7 @@ feature "Materials" do
     expect(page).to have_unchecked_field 'Controla quantidade'
   end
 
-  scenario 'show stock of material', js: true do
+  scenario 'show stock of material' do
     material = Material.make!(:antivirus)
     MaterialsControl.make!(:antivirus_general, :material => material)
     MaterialsControl.make!(:antivirus_general,

@@ -6,7 +6,7 @@ feature "Contracts" do
     sign_in
   end
 
-  scenario 'picking a licitation process', js: true do
+  scenario 'picking a licitation process' do
     LicitationProcess.make!(:processo_licitatorio)
 
     navigate 'Comum > Cadastrais > Contratos'
@@ -30,7 +30,7 @@ feature "Contracts" do
     expect(page).to have_field 'Compra direta', :with => ''
   end
 
-  scenario 'picking a direct purchase', js: true do
+  scenario 'picking a direct purchase' do
     DirectPurchase.make!(:compra)
 
     navigate 'Comum > Cadastrais > Contratos'
@@ -47,7 +47,7 @@ feature "Contracts" do
     expect(page).to have_disabled_field 'Garantias do contrato', :with => ''
   end
 
-  scenario 'selecting a amendment contract, submeting with error, the main contract should still enabled', js: true do
+  scenario 'selecting a amendment contract, submeting with error, the main contract should still enabled' do
     navigate 'Comum > Cadastrais > Contratos'
 
     click_link 'Criar Contrato'
@@ -62,7 +62,7 @@ feature "Contracts" do
     expect(page).to_not have_disabled_field 'Contrato principal'
   end
 
-  scenario 'create, update and destroy a new contract', js: true do
+  scenario 'create, update and destroy a new contract' do
     Entity.make!(:detran)
     LicitationProcess.make!(:processo_licitatorio)
     DisseminationSource.make!(:jornal_municipal)
@@ -210,7 +210,7 @@ feature "Contracts" do
     expect(page).to have_content '19,98'
   end
 
-  scenario 'add delivery schedule', js: true do
+  scenario 'add delivery schedule' do
     DeliverySchedule.make!(:primeira_entrega)
 
     navigate 'Comum > Cadastrais > Contratos'
@@ -258,7 +258,7 @@ feature "Contracts" do
     expect(page).to have_select 'Status', :selected => 'Vencido'
   end
 
-  scenario 'remove delivery schedule', js: true do
+  scenario 'remove delivery schedule' do
     DeliverySchedule.make!(:primeira_entrega)
 
     navigate 'Comum > Cadastrais > Contratos'

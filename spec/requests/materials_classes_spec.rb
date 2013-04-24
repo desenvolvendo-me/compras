@@ -6,7 +6,7 @@ feature "MaterialsClasses" do
     sign_in
   end
 
-  scenario 'create, update and destroy an materials_class', js: true do
+  scenario 'create, update and destroy an materials_class' do
     navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
 
     click_link 'Criar Classe de Materiais'
@@ -79,7 +79,7 @@ feature "MaterialsClasses" do
     end
   end
 
-  scenario 'use the autocomplete to fill parent class by description or class_number', js: true do
+  scenario 'use the autocomplete to fill parent class by description or class_number' do
     navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
 
     click_link 'Criar Classe de Materiais'
@@ -117,7 +117,7 @@ feature "MaterialsClasses" do
     end
   end
 
-  scenario 'cannot edit when material class is imported', js: true do
+  scenario 'cannot edit when material class is imported' do
     FactoryGirl.create(:materials_class, :masked_number => '01.32.15.000.000', :class_number => '013215000000', :imported => true)
 
     navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
@@ -152,7 +152,7 @@ feature "MaterialsClasses" do
     end
   end
 
-  scenario 'update an existent materials_class when at first level', js: true do
+  scenario 'update an existent materials_class when at first level' do
     FactoryGirl.create(:materials_class, :description => 'Segurança', :masked_number => '01.00.00.000.000')
 
     navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
@@ -162,7 +162,7 @@ feature "MaterialsClasses" do
     expect(page).to have_field 'Código', :with => '01'
   end
 
-  scenario 'should has mask when has not a parent class number', js: true do
+  scenario 'should has mask when has not a parent class number' do
     navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
 
     click_link 'Criar Classe de Materiais'
@@ -173,7 +173,7 @@ feature "MaterialsClasses" do
     expect(page).to have_field 'Código', :with => '12'
   end
 
-  scenario 'should keep data when form has errors', js: true do
+  scenario 'should keep data when form has errors' do
     navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
 
     click_link 'Criar Classe de Materiais'
@@ -219,7 +219,7 @@ feature "MaterialsClasses" do
     expect(page).to have_field 'Detalhamento', :with => 'materiais para escritório'
   end
 
-  scenario 'modal form at filter should have an autocomplete for class_number', js: true do
+  scenario 'modal form at filter should have an autocomplete for class_number' do
     navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
 
     within_records do
