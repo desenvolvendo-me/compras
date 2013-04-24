@@ -125,7 +125,7 @@ module ApplicationHelper
   end
 
   def menu_key
-    ["saude-menu-#{current_customer.cache_key}",
+    ["compras-menu-#{current_customer.cache_key}",
      "profile-id-#{current_user.profile_id}",
      "profile-updated-at-#{current_user.profile_updated_at}",
      "controllers-sha1-digest-#{menu_sha1_digest}"].join("-")
