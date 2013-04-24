@@ -163,7 +163,7 @@ feature "PurchaseProcessAccreditation" do
   end
 
   scenario 'kind should be required only when has a representative' do
-    LicitationProcess.make!(:pregao_presencial)
+    LicitationProcess.make!(:processo_licitatorio, modality: Modality::TRADING)
     CompanySize.make!(:empresa_de_grande_porte)
     sobrinho = Creditor.make!(:sobrinho)
 
