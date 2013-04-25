@@ -154,7 +154,7 @@ class LicitationProcess < Compras::Model
       items_creditors
     elsif trading?
       license_creditors
-    elsif !trading?
+    else
       accreditation_creditors
     end
   end
