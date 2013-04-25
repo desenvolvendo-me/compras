@@ -1,5 +1,6 @@
 class PurchaseProcessCreditorProposal < Compras::Model
-  attr_accessible :creditor_id, :brand, :unit_price, :item_id, :creditor_id
+  attr_accessible :creditor_id, :brand, :unit_price, :item_id, :creditor_id,
+                  :delivery_term
 
   belongs_to :creditor
   belongs_to :item, class_name: 'PurchaseProcessItem',
