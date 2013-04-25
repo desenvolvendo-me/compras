@@ -150,7 +150,13 @@ class LicitationProcess < Compras::Model
   end
 
   def creditors
-    trading? ? license_creditors : items_creditors
+    if direct_purchase?
+      items_creditors
+    elsif trading?
+      license_creditors
+    else
+      accreditation_creditors
+    end
   end
 
   def update_status(status)

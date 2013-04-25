@@ -179,10 +179,21 @@ describe LicitationProcess do
     end
 
     describe '#creditors' do
+      context 'when direct purchase' do
+        before { subject.stub(:direct_purchase?).and_return true }
+
+        it 'returns creditors from items' do
+          subject.should_receive(:items_creditors).and_return(['creditor'])
+          subject.should_not_receive(:license_creditors)
+
+          expect(subject.creditors).to eql ['creditor']
+        end
+      end
+
       context 'when modality trading' do
         before { subject.stub(:trading?).and_return true }
 
-        it 'returns license creditors from bidders' do
+        it 'returns creditors from license_creditors' do
           subject.should_receive(:license_creditors).and_return(['creditor'])
           subject.should_not_receive(:items_creditors)
 
@@ -193,8 +204,8 @@ describe LicitationProcess do
       context 'when modality is not trading' do
         before { subject.stub(:trading?).and_return false }
 
-        it 'returns creditors from items' do
-          subject.should_receive(:items_creditors).and_return(['creditor'])
+        it 'returns creditors from accreditation_creditors' do
+          subject.should_receive(:accreditation_creditors).and_return(['creditor'])
           subject.should_not_receive(:license_creditors)
 
           expect(subject.creditors).to eql ['creditor']
