@@ -124,7 +124,7 @@ feature 'PurchaseProcessCreditorProposals' do
 
   scenario 'create and update lot creditor proposals' do
     LicitationProcess.make!(:pregao_presencial,
-      bidders: [Bidder.make!(:licitante_sobrinho), Bidder.make!(:licitante)],
+      purchase_process_accreditation: PurchaseProcessAccreditation.make(:general_accreditation),
       judgment_form: JudgmentForm.make!(:por_lote_com_melhor_tecnica),
       items: [PurchaseProcessItem.make!(:item), PurchaseProcessItem.make!(:item_arame, lot: 10),
               PurchaseProcessItem.make!(:item_arame_farpado)] )
@@ -277,7 +277,7 @@ feature 'PurchaseProcessCreditorProposals' do
 
   scenario 'create and update global creditor proposals' do
     LicitationProcess.make!(:pregao_presencial,
-      bidders: [Bidder.make!(:licitante_sobrinho), Bidder.make!(:licitante)],
+      purchase_process_accreditation: PurchaseProcessAccreditation.make(:general_accreditation),
       judgment_form: JudgmentForm.make!(:global_com_menor_preco),
       items: [PurchaseProcessItem.make!(:item), PurchaseProcessItem.make!(:item_arame, lot: 10),
               PurchaseProcessItem.make!(:item_arame_farpado)])
