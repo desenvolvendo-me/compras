@@ -153,9 +153,9 @@ class LicitationProcess < Compras::Model
     if direct_purchase?
       items_creditors
     elsif trading?
-      license_creditors
-    else
       accreditation_creditors
+    else
+      license_creditors
     end
   end
 

@@ -190,8 +190,8 @@ describe LicitationProcess do
         end
       end
 
-      context 'when modality trading' do
-        before { subject.stub(:trading?).and_return true }
+      context 'when modality is not trading' do
+        before { subject.stub(:trading?).and_return false }
 
         it 'returns creditors from license_creditors' do
           subject.should_receive(:license_creditors).and_return(['creditor'])
@@ -201,8 +201,8 @@ describe LicitationProcess do
         end
       end
 
-      context 'when modality is not trading' do
-        before { subject.stub(:trading?).and_return false }
+      context 'when modality trading' do
+        before { subject.stub(:trading?).and_return true }
 
         it 'returns creditors from accreditation_creditors' do
           subject.should_receive(:accreditation_creditors).and_return(['creditor'])
