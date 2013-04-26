@@ -11,7 +11,7 @@ feature 'PurchaseProcessCreditorProposals' do
 
   scenario 'create and update item creditor proposals' do
     LicitationProcess.make!(:pregao_presencial,
-      purchase_process_accreditation: PurchaseProcessAccreditation.make(:general_accreditation) ),
+      purchase_process_accreditation: PurchaseProcessAccreditation.make(:general_accreditation),
       judgment_form: JudgmentForm.make!(:por_item_com_melhor_tecnica))
 
     navigate 'Processos de Compra > Processos de Compras'
