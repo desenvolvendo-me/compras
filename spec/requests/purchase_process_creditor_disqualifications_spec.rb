@@ -173,7 +173,7 @@ feature 'PurchaseProcessCreditorDisqualifications' do
     expect(page).to have_content 'Proposta Comercial Processo 1/2012 - Pregão 1'
   end
 
-  scenario 'checking all itens change the disqualification kind' do #veja se vai passar isso
+  scenario 'checking all itens change the disqualification kind' do
     licitation = LicitationProcess.make!(:pregao_presencial,
       purchase_process_accreditation: PurchaseProcessAccreditation.make(:general_accreditation),
       items: [ PurchaseProcessItem.make!(:item_arame_farpado),
