@@ -17,6 +17,7 @@ feature "PurchaseSolicitations" do
     budget_allocation = BudgetAllocation.make!(:alocacao)
     ExpenseNature.make!(:aposentadorias_rpps)
     Material.make!(:antivirus, :material_type => MaterialType::ASSET)
+    Material.make!(:office, :material_type => MaterialType::ASSET)
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
@@ -49,11 +50,27 @@ feature "PurchaseSolicitations" do
       expect(page).to have_disabled_field 'Unidade', :with => 'UN'
 
       fill_in 'Marca/Referência', :with => 'Norton'
-      fill_in 'Quantidade', :with => '3,50'
-      fill_in 'Valor unitário', :with => '200,00'
+      fill_in 'Quantidade', :with => '2,22'
+      fill_in 'Valor unitário', :with => '0,22'
 
       # asserting calculated total price of the item
-      expect(page).to have_disabled_field 'Valor total', :with => '700,00'
+      expect(page).to have_disabled_field 'Valor total', :with => '0,49'
+
+      click_button 'Adicionar'
+
+      fill_with_autocomplete 'Material', :with => 'Office'
+
+      # getting data from modal
+      expect(page).to have_disabled_field 'Unidade', :with => 'UN'
+
+      fill_in 'Marca/Referência', :with => 'MS Office'
+      fill_in 'Quantidade', :with => '0,12'
+      fill_in 'Valor unitário', :with => '121,22'
+
+      # asserting calculated unit price of the item
+      expect(page).to have_disabled_field 'Valor total', :with => '14,55'
+
+      expect(page).to have_disabled_field 'Valor total dos itens', :with => '15,04'
 
       click_button 'Adicionar'
 
@@ -61,9 +78,18 @@ feature "PurchaseSolicitations" do
         expect(page).to have_content '01.01.00001 - Antivirus'
         expect(page).to have_content 'UN'
         expect(page).to have_content 'Norton'
-        expect(page).to have_content '3,50'
-        expect(page).to have_content '200,00'
-        expect(page).to have_content '700,00'
+        expect(page).to have_content '2,22'
+        expect(page).to have_content '0,22'
+        expect(page).to have_content '0,49'
+      end
+
+      within_records do
+        expect(page).to have_content '01.01.00002 - Office'
+        expect(page).to have_content 'UN'
+        expect(page).to have_content 'MS Office'
+        expect(page).to have_content '0,12'
+        expect(page).to have_content '121,22'
+        expect(page).to have_content '14,55'
       end
     end
 
@@ -120,13 +146,25 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Itens' do
+
+      expect(page).to have_disabled_field 'Valor total dos itens', :with => '15,04'
+
       within_records do
         expect(page).to have_content '01.01.00001 - Antivirus'
         expect(page).to have_content 'UN'
         expect(page).to have_content 'Norton'
-        expect(page).to have_content '3,50'
-        expect(page).to have_content '200,00'
-        expect(page).to have_content '700,00'
+        expect(page).to have_content '2,22'
+        expect(page).to have_content '0,22'
+        expect(page).to have_content '0,49'
+      end
+
+      within_records do
+        expect(page).to have_content '01.01.00002 - Office'
+        expect(page).to have_content 'UN'
+        expect(page).to have_content 'MS Office'
+        expect(page).to have_content '0,12'
+        expect(page).to have_content '121,22'
+        expect(page).to have_content '14,55'
       end
     end
 
@@ -200,7 +238,7 @@ feature "PurchaseSolicitations" do
           expect(page).to have_content '600,00'
         end
 
-         within 'tbody tr:nth-child(2)' do
+        within 'tbody tr:nth-child(2)' do
           expect(page).to have_content '02.02.00001 - Arame farpado'
           expect(page).to have_content 'UN'
           expect(page).to have_content 'Ferro SA'
@@ -258,7 +296,7 @@ feature "PurchaseSolicitations" do
           expect(page).to have_content '600,00'
         end
 
-         within 'tbody tr:nth-child(2)' do
+        within 'tbody tr:nth-child(2)' do
           expect(page).to have_content '02.02.00001 - Arame farpado'
           expect(page).to have_content 'UN'
           expect(page).to have_content 'Ferro SA'

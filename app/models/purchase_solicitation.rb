@@ -89,7 +89,7 @@ class PurchaseSolicitation < Compras::Model
   end
 
   def total_items_value
-    items.collect(&:estimated_total_price).sum
+    items.collect(&:estimated_total_price_rounded).sum
   end
 
   def change_status!(status)

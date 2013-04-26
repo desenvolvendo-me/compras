@@ -26,6 +26,10 @@ class PurchaseSolicitationItem < Compras::Model
     (quantity || BigDecimal(0)) * (unit_price || BigDecimal(0))
   end
 
+  def estimated_total_price_rounded
+    estimated_total_price.round(2)
+  end
+
   private
 
   def validate_material_characteristic
