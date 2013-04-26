@@ -37,7 +37,4 @@ Compras::Application.configure do
 
   config.action_mailer.default_url_options = { :host => 'localhost' }
   ActionMailer::Base.default :from => 'noreply@nobesistemas.com.br'
-
-  config.logger = Logger.new(STDOUT)
-  config.logger.level = Logger.const_get(ENV['LOG_LEVEL'] ? ENV['LOG_LEVEL'].upcase : 'DEBUG')
 end
