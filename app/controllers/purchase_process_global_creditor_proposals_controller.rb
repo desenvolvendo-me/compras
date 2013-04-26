@@ -1,0 +1,2 @@
+class PurchaseProcessGlobalCreditorProposalsController < PurchaseProcessCreditorProposalsController
+end

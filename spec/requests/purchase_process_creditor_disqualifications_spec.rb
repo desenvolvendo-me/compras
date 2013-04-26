@@ -10,14 +10,14 @@ feature 'PurchaseProcessCreditorDisqualifications' do
   end
 
   scenario 'create and update a partial creditor disqualification' do
-    PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado)
-    PurchaseProcessCreditorProposal.make!(:proposta_arame)
-
-    LicitationProcess.make!(:pregao_presencial,
+    licitation = LicitationProcess.make!(:pregao_presencial,
       bidders: [Bidder.make!(:licitante_sobrinho),
         Bidder.make!(:licitante)],
       items: [PurchaseProcessItem.make!(:item_arame_farpado),
         PurchaseProcessItem.make!(:item_arame)])
+
+    PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado, licitation_process: licitation)
+    PurchaseProcessCreditorProposal.make!(:proposta_arame, licitation_process: licitation)
 
     navigate 'Processos de Compra > Processos de Compras'
 
@@ -40,19 +40,19 @@ feature 'PurchaseProcessCreditorDisqualifications' do
       within 'tbody tr:first' do
         expect(page).to have_content 'Gabriel Sobrinho'
         expect(page).to have_content 'gabriel.sobrinho@gmail.com'
-        expect(page).to have_content 'Editar Propostas'
-        expect(page).to have_content 'Desclassificar Propostas'
+        expect(page).to have_content 'Editar propostas'
+        expect(page).to have_content 'Desclassificar propostas'
       end
 
       within 'tbody tr:last' do
         expect(page).to have_content 'Wenderson Malheiros'
         expect(page).to have_content 'wenderson.malheiros@gmail.com'
-        expect(page).to have_content 'Cadastrar Propostas'
-        expect(page).to have_content 'Nenhuma Proposta cadastrada'
+        expect(page).to have_content 'Cadastrar propostas'
+        expect(page).to have_content 'Nenhuma proposta cadastrada'
       end
 
       within 'tbody tr:first' do
-        click_link 'Desclassificar Propostas'
+        click_link 'Desclassificar propostas'
       end
     end
 
@@ -111,7 +111,7 @@ feature 'PurchaseProcessCreditorDisqualifications' do
 
     within_records do
       within 'tbody tr:first' do
-        click_link 'Desclassificar Propostas'
+        click_link 'Desclassificar propostas'
       end
     end
 
@@ -149,7 +149,7 @@ feature 'PurchaseProcessCreditorDisqualifications' do
 
     within_records do
       within 'tbody tr:first' do
-        click_link 'Desclassificar Propostas'
+        click_link 'Desclassificar propostas'
       end
     end
 
@@ -175,14 +175,14 @@ feature 'PurchaseProcessCreditorDisqualifications' do
   end
 
   scenario 'checking all itens change the disqualification kind' do
-    PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado)
-    PurchaseProcessCreditorProposal.make!(:proposta_arame)
-
-    LicitationProcess.make!(:pregao_presencial,
+    licitation = LicitationProcess.make!(:pregao_presencial,
       bidders: [Bidder.make!(:licitante_sobrinho),
         Bidder.make!(:licitante)],
       items: [PurchaseProcessItem.make!(:item_arame_farpado),
         PurchaseProcessItem.make!(:item_arame)])
+
+    PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado, licitation_process: licitation)
+    PurchaseProcessCreditorProposal.make!(:proposta_arame, licitation_process: licitation)
 
     navigate 'Processos de Compra > Processos de Compras'
 
@@ -205,19 +205,19 @@ feature 'PurchaseProcessCreditorDisqualifications' do
       within 'tbody tr:first' do
         expect(page).to have_content 'Gabriel Sobrinho'
         expect(page).to have_content 'gabriel.sobrinho@gmail.com'
-        expect(page).to have_content 'Editar Propostas'
-        expect(page).to have_content 'Desclassificar Propostas'
+        expect(page).to have_content 'Editar propostas'
+        expect(page).to have_content 'Desclassificar propostas'
       end
 
       within 'tbody tr:last' do
         expect(page).to have_content 'Wenderson Malheiros'
         expect(page).to have_content 'wenderson.malheiros@gmail.com'
-        expect(page).to have_content 'Cadastrar Propostas'
-        expect(page).to have_content 'Nenhuma Proposta cadastrada'
+        expect(page).to have_content 'Cadastrar propostas'
+        expect(page).to have_content 'Nenhuma proposta cadastrada'
       end
 
       within 'tbody tr:first' do
-        click_link 'Desclassificar Propostas'
+        click_link 'Desclassificar propostas'
       end
     end
 

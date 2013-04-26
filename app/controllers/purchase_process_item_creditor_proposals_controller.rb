@@ -1,0 +1,2 @@
+class PurchaseProcessItemCreditorProposalsController < PurchaseProcessCreditorProposalsController
+end

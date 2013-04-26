@@ -2,6 +2,7 @@
 class PurchaseProcessCreditorDisqualificationsController < CrudController
   before_filter :load_licitation_process, only: [:new, :create]
   before_filter :load_creditor, only: [:new, :create]
+  before_filter :load_proposal_path_generator
 
   def new
     object = build_resource
@@ -12,13 +13,13 @@ class PurchaseProcessCreditorDisqualificationsController < CrudController
 
   def create
     create! do |success, failure|
-      success.html { redirect_to creditors_purchase_process_creditor_proposals_path(licitation_process_id: resource.licitation_process) }
+      success.html { redirect_to @proposal_path_generator.proposals_path }
     end
   end
 
   def update
     update! do |success, failure|
-      success.html { redirect_to creditors_purchase_process_creditor_proposals_path(licitation_process_id: resource.licitation_process) }
+      success.html { redirect_to @proposal_path_generator.proposals_path }
     end
   end
 
@@ -30,5 +31,10 @@ class PurchaseProcessCreditorDisqualificationsController < CrudController
 
   def load_creditor
     @creditor = Creditor.find(params[:creditor_id])
+  end
+
+  def load_proposal_path_generator
+    purchase_process = @licitation_process || resource.licitation_process
+    @proposal_path_generator = PurchaseProcessCreditorProposalPathGenerator.new(purchase_process, self)
   end
 end

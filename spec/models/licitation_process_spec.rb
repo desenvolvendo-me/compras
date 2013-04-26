@@ -67,13 +67,12 @@ describe LicitationProcess do
   it { should have_many(:price_registrations).dependent(:restrict) }
   it { should have_many(:licitation_process_ratifications).dependent(:restrict) }
   it { should have_many(:classifications).through(:bidders) }
-  it { should have_many(:classifications).through(:bidders) }
   it { should have_many(:purchase_process_budget_allocations).dependent(:destroy) }
   it { should have_many(:items).dependent(:restrict)}
   it { should have_many(:materials).through(:items) }
   it { should have_many(:legal_analysis_appraisals).dependent(:restrict) }
   it { should have_many(:budget_allocations).through(:purchase_process_budget_allocations) }
-  it { should have_many(:creditor_proposals).through(:items) }
+  it { should have_many(:creditor_proposals) }
   it { should have_many(:items_creditors).through(:items) }
   it { should have_many(:creditor_disqualifications).dependent(:restrict) }
 
@@ -551,6 +550,22 @@ describe LicitationProcess do
     it "updates the purchase solicitation service_status to liberated" do
       purchase_solicitation.should_receive(:liberate!)
       subject.send(:update_purchase_solicitation_to_liberated, purchase_solicitation)
+    end
+  end
+
+  describe '#each_item_lot' do
+    let(:item1) { double(:item, lot: 1) }
+    let(:item2) { double(:item, lot: 1) }
+    let(:item3) { double(:item, lot: 2) }
+
+    before do
+      subject.stub(:items).and_return([item1, item2, item3])
+    end
+
+    it 'returns the unique item lots yielded' do
+      subject.should_receive(:each_item_lot).and_yield(3).and_yield(2)
+
+      subject.each_item_lot { |p| }
     end
   end
 

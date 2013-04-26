@@ -3,5 +3,5 @@
     <%= f.button :submit %>
   <% end %>
 
-  <%= f.button :back, href: creditors_purchase_process_creditor_proposals_path(licitation_process_id: resource.licitation_process) %>
+  <%= f.button :back, href: @proposal_path_generator.proposals_path %>
 </div>

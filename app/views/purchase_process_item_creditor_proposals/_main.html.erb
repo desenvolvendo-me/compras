@@ -1,6 +1,7 @@
 <div class="add-margin-bottom">
   <div class="yui3-g">
     <%= f.input :creditor_id, as: :hidden %>
+    <%= f.input :licitation_process_id, as: :hidden, input_html: { value: params[:licitation_process_id] } %>
 
     <div class="yui3-u-1-8">
       <%= f.input :lot, fake: true, disabled: true, input_html: { value: f.object.item_lot } %>

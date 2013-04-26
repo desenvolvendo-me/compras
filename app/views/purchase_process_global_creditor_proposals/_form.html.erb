@@ -1,0 +1,10 @@
+<%= f.input :licitation_process_id, as: :hidden, fake: true,
+  input_html: { value: params[:licitation_process_id], name: 'licitation_process_id' } %>
+
+<%= f.input :creditor_id, as: :hidden, fake: true, input_html: { value: params[:creditor_id], name: 'creditor_id' } %>
+
+<div id="purchase_process_creditor_proposals">
+  <%= f.association :creditor_proposals, collection: PurchaseProcessCreditorProposalBuilder.global_proposals(f.object, params[:creditor_id]) do |c| %>
+    <%= render 'main', :f => c %>
+  <% end %>
+</div>

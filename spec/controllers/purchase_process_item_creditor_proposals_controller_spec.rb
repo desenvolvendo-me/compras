@@ -1,9 +1,10 @@
 require 'spec_helper'
 
-describe PurchaseProcessCreditorProposalsController do
+describe PurchaseProcessItemCreditorProposalsController do
   let(:licitation_process) { double :licitation_process, id: 1, to_s: 1 }
   let(:creditor)           { Creditor.new }
   let(:creditors)          { double :creditors, includes: :purchase_process_creditor_proposals }
+  let(:path_generator)     { double :path_generator }
   let(:localized_licitation_process) { double :localized_licitation_process }
 
   before do
@@ -11,6 +12,7 @@ describe PurchaseProcessCreditorProposalsController do
     controller.stub(:authorize_resource!)
     LicitationProcess.stub(:find).and_return licitation_process
     Creditor.stub(:find).and_return creditor
+    PurchaseProcessCreditorProposalPathGenerator.stub(:new).and_return path_generator
   end
 
   describe 'GET new' do
@@ -31,11 +33,12 @@ describe PurchaseProcessCreditorProposalsController do
     context 'when saving is successfully' do
       before do
         licitation_process.should_receive(:save).and_return true
+        path_generator.stub(:proposals_path).and_return creditors_purchase_process_item_creditor_proposals_path(licitation_process_id: 1)
       end
 
       it 'should redirect to creditors proposals' do
         post :create
-        expect(response).to redirect_to(creditors_purchase_process_creditor_proposals_path(licitation_process_id: 1))
+        expect(response).to redirect_to(creditors_purchase_process_item_creditor_proposals_path(licitation_process_id: 1))
       end
     end
 
@@ -67,11 +70,12 @@ describe PurchaseProcessCreditorProposalsController do
     context 'when updating is successfully' do
       before do
         licitation_process.should_receive(:save).and_return true
+        path_generator.stub(:proposals_path).and_return creditors_purchase_process_item_creditor_proposals_path(licitation_process_id: 1)
       end
 
       it 'should redirect to creditors proposals' do
         put :batch_update
-        expect(response).to redirect_to(creditors_purchase_process_creditor_proposals_path(licitation_process_id: 1))
+        expect(response).to redirect_to(creditors_purchase_process_item_creditor_proposals_path(licitation_process_id: 1))
       end
     end
 
@@ -88,6 +92,8 @@ describe PurchaseProcessCreditorProposalsController do
   end
 
   describe 'GET creditors' do
+    let(:licitation_process) { LicitationProcess.new }
+
     it 'renders the creditors template' do
       licitation_process.should_receive(:creditors).and_return creditors
       creditors.should_receive(:includes).with(:purchase_process_creditor_proposals)

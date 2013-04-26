@@ -218,10 +218,19 @@ pt-BR:
     trading_item_bid_negotiations:
       <<: *female
 
-    purchase_process_creditor_proposals:
+    purchase_process_creditor_proposals: &purchase_process_creditor_proposals
       <<: *female
       batch_update:
         notice: "%{resource_name} editada com sucesso"
+
+    purchase_process_item_creditor_proposals:
+      <<: *purchase_process_creditor_proposals
+
+    purchase_process_lot_creditor_proposals:
+      <<: *purchase_process_creditor_proposals
+
+    purchase_process_global_creditor_proposals:
+      <<: *purchase_process_creditor_proposals
 
     purchase_process_creditor_disqualifications:
       <<: *female

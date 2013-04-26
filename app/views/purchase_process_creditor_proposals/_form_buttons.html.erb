@@ -3,5 +3,5 @@
     <%= f.button :submit, 'data-disabled' => f.object.decorator.not_updatable_message %>
   <% end %>
 
-  <%= f.button :back, href: creditors_purchase_process_creditor_proposals_path(licitation_process_id: @licitation_process) %>
+  <%= f.button :back, href: creditors_proposals_url %>
 </div>

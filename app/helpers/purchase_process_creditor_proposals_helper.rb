@@ -1,45 +1,26 @@
 # encoding: utf-8
-
 module PurchaseProcessCreditorProposalsHelper
   def view_or_edit_creditor_proposal(creditor)
     if @licitation_process.proposals_of_creditor(creditor).empty?
-      link_to 'Cadastrar Propostas', new_purchase_process_creditor_proposal_path(creditor_id: creditor,
-        licitation_process_id: @licitation_process)
+      link_to 'Cadastrar propostas', @proposal_path_generator.new_proposal_path(creditor)
     else
-      link_to 'Editar Propostas', batch_edit_purchase_process_creditor_proposals_path(creditor_id: creditor,
-        licitation_process_id: @licitation_process)
+      link_to 'Editar propostas', @proposal_path_generator.edit_proposal_path(creditor)
     end
   end
 
   def link_to_disqualify_creditor_proposal(creditor)
     if @licitation_process.proposals_of_creditor(creditor).any?
-      disqualification = PurchaseProcessCreditorDisqualification.find_or_initialize(@licitation_process, creditor)
-      if disqualification.new_record?
-        link_to 'Desclassificar Propostas', new_purchase_process_creditor_disqualification_path(creditor_id: creditor, licitation_process_id: @licitation_process)
-      else
-        link_to 'Desclassificar Propostas', edit_purchase_process_creditor_disqualification_path(disqualification)
-      end
+      link_to "Desclassificar propostas", @proposal_path_generator.disqualify_proposal_path(creditor)
     else
-      'Nenhuma Proposta cadastrada'
+      'Nenhuma proposta cadastrada'
     end
   end
 
-  def collection_for_association(creditor_proposals)
-    creditor_id = params[:creditor_id].to_i
-
-    creditor    = creditor_proposals.select(&:new_record?).first
-    creditor  ||= creditor_proposals.select { |c| c.creditor_id == creditor_id }.first
-    creditor  ||= creditor_proposals.where(creditor_id: creditor_id).first
-    creditor  ||= creditor_proposals.build(creditor_id: creditor_id)
-
-    creditor
+  def creditors_proposals_url
+    @proposal_path_generator.proposals_path
   end
 
   def form_path
-    if ["batch_edit", "batch_update"].include? params[:action]
-      { :url => batch_update_purchase_process_creditor_proposals_path, :method => :put }
-    else
-      { :url => purchase_process_creditor_proposals_path, :method => :post }
-    end
+    @proposal_path_generator.form_proposal_path params[:action]
   end
 end

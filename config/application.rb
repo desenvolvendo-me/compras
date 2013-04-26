@@ -89,7 +89,8 @@ module Compras
       'licitation_processes.js',
       'purchase_process_accreditations.js',
       'purchase_solicitations.js',
-      'purchase_process_creditor_proposals.js',
+      'purchase_process_item_creditor_proposals.js',
+      'purchase_process_lot_creditor_proposals.js',
       'purchase_process_creditor_disqualifications.js'
     ]
 

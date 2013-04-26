@@ -3,6 +3,7 @@ class PurchaseProcessCreditorProposalsController < CrudController
   custom_actions collection: [:creditors, :batch_edit, :batch_update]
 
   before_filter :load_licitation_process
+  before_filter :load_path_generator
   before_filter :load_creditor, only: [:new, :batch_edit]
 
   def new
@@ -15,7 +16,7 @@ class PurchaseProcessCreditorProposalsController < CrudController
 
   def create
     create! do |success, failure|
-      success.html { redirect_to creditors_purchase_process_creditor_proposals_path(licitation_process_id: @licitation_process) }
+      success.html { redirect_to @proposal_path_generator.proposals_path }
     end
   end
 
@@ -29,7 +30,7 @@ class PurchaseProcessCreditorProposalsController < CrudController
     object = build_resource
 
     update! do |success, failure|
-      success.html { redirect_to creditors_purchase_process_creditor_proposals_path(licitation_process_id: @licitation_process) }
+      success.html { redirect_to @proposal_path_generator.proposals_path }
       failure.html { render :batch_edit }
     end
   end
@@ -44,6 +45,10 @@ class PurchaseProcessCreditorProposalsController < CrudController
 
   def load_licitation_process
     @licitation_process = LicitationProcess.find(params[:licitation_process_id])
+  end
+
+  def load_path_generator
+    @proposal_path_generator = PurchaseProcessCreditorProposalPathGenerator.new(@licitation_process, self)
   end
 
   def load_creditor

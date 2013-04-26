@@ -123,6 +123,40 @@ describe LicitationProcessDecorator do
     end
   end
 
+  describe '#proposals_path' do
+    let(:judgment_form) { double :judgment_form }
+    let(:routes)        { double(:routes) }
+
+    before { subject.stub(:judgment_form).and_return judgment_form }
+
+    context 'when licitation process judged by item' do
+      before { judgment_form.stub(:kind).and_return :item }
+
+      it 'returns a path to creditors_purchase_process_item_creditor_proposals_path' do
+        routes.should_receive(:send).with('creditors_purchase_process_item_creditor_proposals_path', licitation_process_id: component)
+        subject.proposals_path(routes)
+      end
+    end
+
+    context 'when licitation process judged by lot' do
+      before { judgment_form.stub(:kind).and_return :lot }
+
+      it 'returns a path to creditors_purchase_process_lot_creditor_proposals_path' do
+        routes.should_receive(:send).with('creditors_purchase_process_lot_creditor_proposals_path', licitation_process_id: component)
+        subject.proposals_path(routes)
+      end
+    end
+
+    context 'when licitation process global judged' do
+      before { judgment_form.stub(:kind).and_return :global }
+
+      it 'returns a path to creditors_purchase_process_global_creditor_proposals_path' do
+        routes.should_receive(:send).with('creditors_purchase_process_global_creditor_proposals_path', licitation_process_id: component)
+        subject.proposals_path(routes)
+      end
+    end
+  end
+
   context '#not_updatable_message' do
     let(:current_publication) { double(:current_publication, :publication_of_humanize => 'Edital')}
     let(:publications) { double(:publications, :current => current_publication) }

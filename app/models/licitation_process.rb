@@ -70,7 +70,7 @@ class LicitationProcess < Compras::Model
   has_many :legal_analysis_appraisals, :dependent => :restrict
   has_many :license_creditors, :through => :bidders, :dependent => :restrict, :source => :creditor, order: :id
   has_many :accreditation_creditors, :through => :purchase_process_accreditation, :source => :creditors, order: :id
-  has_many :creditor_proposals, through: :items, class_name: 'PurchaseProcessCreditorProposal'
+  has_many :creditor_proposals, class_name: 'PurchaseProcessCreditorProposal', order: :id
   has_many :items_creditors, through: :items, source: :creditor, order: :id
   has_many :creditor_disqualifications, class_name: 'PurchaseProcessCreditorDisqualification', dependent: :restrict
 
@@ -238,6 +238,12 @@ class LicitationProcess < Compras::Model
 
   def allow_trading_auto_creation?
     persisted? && trading? && !has_trading?
+  end
+
+  def each_item_lot
+    items.map(&:lot).uniq.each do |lot|
+      yield lot
+    end
   end
 
   protected
