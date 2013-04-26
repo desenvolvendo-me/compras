@@ -11,8 +11,7 @@ feature 'PurchaseProcessCreditorDisqualifications' do
 
   scenario 'create and update a partial creditor disqualification' do
     licitation = LicitationProcess.make!(:pregao_presencial,
-      bidders: [Bidder.make!(:licitante_sobrinho),
-        Bidder.make!(:licitante)],
+        purchase_process_accreditation: PurchaseProcessAccreditation.make(:general_accreditation),
       items: [PurchaseProcessItem.make!(:item_arame_farpado),
         PurchaseProcessItem.make!(:item_arame)])
 
@@ -174,12 +173,11 @@ feature 'PurchaseProcessCreditorDisqualifications' do
     expect(page).to have_content 'Proposta Comercial Processo 1/2012 - Pregão 1'
   end
 
-  scenario 'checking all itens change the disqualification kind' do
+  scenario 'checking all itens change the disqualification kind' do #veja se vai passar isso
     licitation = LicitationProcess.make!(:pregao_presencial,
-      bidders: [Bidder.make!(:licitante_sobrinho),
-        Bidder.make!(:licitante)],
-      items: [PurchaseProcessItem.make!(:item_arame_farpado),
-        PurchaseProcessItem.make!(:item_arame)])
+      purchase_process_accreditation: PurchaseProcessAccreditation.make(:general_accreditation),
+      items: [ PurchaseProcessItem.make!(:item_arame_farpado),
+               PurchaseProcessItem.make!(:item_arame)])
 
     PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado, licitation_process: licitation)
     PurchaseProcessCreditorProposal.make!(:proposta_arame, licitation_process: licitation)

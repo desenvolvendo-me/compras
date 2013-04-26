@@ -2079,9 +2079,9 @@ feature "LicitationProcesses" do
     end
   end
 
-  scenario 'list license creditors when modality is trading' do
+  scenario 'list accreditation creditors when modality is trading' do
     LicitationProcess.make!(:processo_licitatorio, modality: 'trading',
-      bidders: [Bidder.make!(:licitante_sobrinho)] )
+      purchase_process_accreditation: PurchaseProcessAccreditation.make(:general_accreditation) )
 
     navigate 'Processos de Compra > Processos de Compras'
 
