@@ -7,6 +7,8 @@ class PurchaseProcessCreditorProposalsController < CrudController
 
   def new
     object = build_resource
+    object.creditor = @creditor
+    object.licitation_process = @licitation_process
 
     TradingCreator.create!(@licitation_process)
   end
@@ -19,6 +21,8 @@ class PurchaseProcessCreditorProposalsController < CrudController
 
   def batch_edit
     object = build_resource
+    object.creditor = @creditor
+    object.licitation_process = @licitation_process
   end
 
   def batch_update
