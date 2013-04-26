@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe PurchaseProcessItemCreditorProposalsController do
-  let(:licitation_process) { double :licitation_process, id: 1, to_s: 1 }
+  let(:licitation_process) { LicitationProcess.new }
   let(:creditor)           { Creditor.new }
   let(:creditors)          { double :creditors, includes: :purchase_process_creditor_proposals }
   let(:path_generator)     { double :path_generator }
