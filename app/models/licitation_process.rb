@@ -331,9 +331,11 @@ class LicitationProcess < Compras::Model
   end
 
   def update_purchase_solicitation_to_purchase_process(purchase_solicitation)
-    return if purchase_solicitation.new_record?
+    return unless valid?
 
-    purchase_solicitation.buy!
+    purchase_solicitations.each do |purchase_solicitation|
+      purchase_solicitation.buy!
+    end
   end
 
   def update_purchase_solicitation_to_liberated(purchase_solicitation)

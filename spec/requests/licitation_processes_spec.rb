@@ -42,9 +42,8 @@ feature "LicitationProcesses" do
 
     expect(page).to_not have_button 'Apurar'
 
-    expect(page).to have_disabled_field 'Status'
-
     within_tab 'Principal' do
+      expect(page).to have_disabled_field 'Status'
       expect(page).to have_disabled_field 'Processo'
       expect(page).to have_disabled_field 'Nº do afastamento'
 
@@ -1550,7 +1549,9 @@ feature "LicitationProcesses" do
 
     expect(page).to_not have_button 'Apurar'
 
-    expect(page).to have_disabled_field 'Status'
+    within_tab 'Principal' do
+      expect(page).to have_disabled_field 'Status'
+    end
 
     within_tab 'Principal' do
       choose 'Processo licitatório'

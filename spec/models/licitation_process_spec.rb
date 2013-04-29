@@ -553,8 +553,12 @@ describe LicitationProcess do
   describe '#update_purchase_solicitation_to_purchase_process' do
     let(:purchase_solicitation) { double(:purchase_solicitation) }
 
+    before do
+      subject.stub(:valid?).and_return true
+      subject.stub(:purchase_solicitations).and_return [purchase_solicitation]
+    end
+
     it "updates the purchase solicitation service_status to in_purchase_process" do
-      purchase_solicitation.stub(:new_record?).and_return false
       purchase_solicitation.should_receive(:buy!)
       subject.send(:update_purchase_solicitation_to_purchase_process, purchase_solicitation)
     end
