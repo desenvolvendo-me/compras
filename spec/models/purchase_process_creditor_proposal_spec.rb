@@ -6,6 +6,8 @@ describe PurchaseProcessCreditorProposal do
   it { should belong_to :licitation_process }
   it { should belong_to(:item).class_name('PurchaseProcessItem') }
 
+  it { should have_one(:judgment_form).through(:licitation_process) }
+
   describe 'validations' do
     it { should validate_presence_of :creditor }
     it { should validate_presence_of :licitation_process }
@@ -30,7 +32,6 @@ describe PurchaseProcessCreditorProposal do
   it { should delegate(:quantity).to(:item).allowing_nil(true).prefix(true) }
   it { should delegate(:reference_unit).to(:item).allowing_nil(true).prefix(true) }
   it { should delegate(:material).to(:item).allowing_nil(true).prefix(true) }
-  it { should delegate(:judgment_form).to(:licitation_process).allowing_nil(true).prefix(true) }
 
   describe '#total_price' do
     it 'multiplies the unit_price with the item quantity' do
@@ -55,15 +56,10 @@ describe PurchaseProcessCreditorProposal do
   end
 
   describe '#item?' do
-    let(:licitation_process) { double :licitation_process }
-    let(:judgment_form)      { double :judgment_form, item?: true }
-
-    before do
-      subject.stub(:licitation_process).and_return licitation_process
-      subject.stub(:licitation_process_judgment_form).and_return judgment_form
-    end
+    let(:judgment_form) { double :judgment_form, item?: true }
 
     it 'returns true when licitation_process process judgment form is item' do
+      subject.stub(:judgment_form).and_return judgment_form
       expect(subject.item?).to be_true
     end
   end

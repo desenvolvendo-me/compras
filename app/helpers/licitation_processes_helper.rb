@@ -21,4 +21,9 @@ module LicitationProcessesHelper
       new_purchase_process_accreditation_path(:licitation_process_id => resource.id)
     end
   end
+
+  def proposals_path
+    link = "creditors_purchase_process_#{resource.judgment_form.kind}_creditor_proposals_path"
+    send(link, licitation_process_id: resource)
+  end
 end

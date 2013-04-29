@@ -6,9 +6,10 @@ class PurchaseProcessCreditorProposal < Compras::Model
   belongs_to :licitation_process
   belongs_to :item, class_name: 'PurchaseProcessItem', foreign_key: :purchase_process_item_id
 
+  has_one :judgment_form, through: :licitation_process
+
   delegate :lot, :additional_information, :quantity, :reference_unit, :material,
     to: :item, allow_nil: true, prefix: true
-  delegate :judgment_form, to: :licitation_process, allow_nil: true, prefix: true
 
   validates :creditor, :licitation_process, :unit_price, presence: true
   validates :lot, numericality: { allow_blank: true }
@@ -27,7 +28,7 @@ class PurchaseProcessCreditorProposal < Compras::Model
   end
 
   def item?
-    return false unless licitation_process
-    licitation_process_judgment_form.item?
+    return false unless judgment_form
+    judgment_form.item?
   end
 end

@@ -1,10 +1,8 @@
 class PurchaseProcessCreditorProposalPathGenerator
-  attr_accessor :purchase_process, :creditor, :controller, :kind
-
   def initialize(purchase_process, controller)
-    self.controller       = controller
-    self.purchase_process = purchase_process
-    self.kind             = purchase_process.judgment_form.kind
+    @controller       = controller
+    @purchase_process = purchase_process
+    @kind             = purchase_process.judgment_form.kind
   end
 
   def proposals_path
@@ -50,6 +48,8 @@ class PurchaseProcessCreditorProposalPathGenerator
   end
 
   private
+
+  attr_accessor :purchase_process, :creditor, :controller, :kind
 
   def with_creditor(creditor)
     self.creditor = creditor

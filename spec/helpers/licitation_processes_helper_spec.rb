@@ -46,4 +46,41 @@ describe LicitationProcessesHelper do
       end
     end
   end
+
+  describe '#proposals_path' do
+    let(:judgment_form) { double :judgment_form }
+    let(:resource)      { double :resource }
+
+    before do
+      helper.stub(resource: resource)
+      resource.stub(:judgment_form).and_return judgment_form
+    end
+
+    context 'when licitation process judged by item' do
+      before { judgment_form.stub(:kind).and_return :item }
+
+      it 'returns a path to creditors_purchase_process_item_creditor_proposals_path' do
+        helper.should_receive(:send).with('creditors_purchase_process_item_creditor_proposals_path', licitation_process_id: resource)
+        helper.proposals_path
+      end
+    end
+
+    context 'when licitation process judged by lot' do
+      before { judgment_form.stub(:kind).and_return :lot }
+
+      it 'returns a path to creditors_purchase_process_lot_creditor_proposals_path' do
+        helper.should_receive(:send).with('creditors_purchase_process_lot_creditor_proposals_path', licitation_process_id: resource)
+        helper.proposals_path
+      end
+    end
+
+    context 'when licitation process global judged' do
+      before { judgment_form.stub(:kind).and_return :global }
+
+      it 'returns a path to creditors_purchase_process_global_creditor_proposals_path' do
+        helper.should_receive(:send).with('creditors_purchase_process_global_creditor_proposals_path', licitation_process_id: resource)
+        helper.proposals_path
+      end
+    end
+  end
 end

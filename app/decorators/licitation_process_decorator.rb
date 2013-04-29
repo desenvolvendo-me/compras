@@ -47,11 +47,6 @@ class LicitationProcessDecorator
     end
   end
 
-  def proposals_path(routes)
-    link = "creditors_purchase_process_#{judgment_form.kind}_creditor_proposals_path"
-    routes.send(link, licitation_process_id: component)
-  end
-
   def not_updatable_message
     return if updatable?
 

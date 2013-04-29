@@ -34,7 +34,10 @@ class PurchaseProcessCreditorDisqualificationsController < CrudController
   end
 
   def load_proposal_path_generator
-    purchase_process = @licitation_process || resource.licitation_process
     @proposal_path_generator = PurchaseProcessCreditorProposalPathGenerator.new(purchase_process, self)
+  end
+
+  def purchase_process
+    @licitation_process || resource.licitation_process
   end
 end
