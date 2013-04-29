@@ -219,9 +219,15 @@ class LicitationProcess < Compras::Model
   end
 
   def last_publication_date
+    return unless current_publication
+
+    current_publication.publication_date
+  end
+
+  def current_publication
     return if licitation_process_publications.empty?
 
-    licitation_process_publications.current.publication_date
+    licitation_process_publications.current
   end
 
   def process_date_year

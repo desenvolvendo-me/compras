@@ -527,10 +527,26 @@ describe LicitationProcess do
   end
 
   describe "#last_publication_date" do
+    let(:current_publication) { double :current_publication, publication_date: Date.tomorrow }
+
+    before { subject.stub(:current_publication).and_return current_publication }
+
     it "returns the publication date from the last publication" do
-      subject.stub_chain(:licitation_process_publications, :empty?).and_return false
-      subject.stub_chain(:licitation_process_publications, :current).and_return double(:licitation_process_publications, :publication_date => Date.tomorrow)
       expect(subject.last_publication_date).to eql Date.tomorrow
+    end
+  end
+
+  describe '#current_publication' do
+    let(:publications) { double :publications }
+
+    before do
+      subject.stub(:licitation_process_publications).and_return publications
+      publications.should_receive(:empty?).and_return false
+    end
+
+    it 'returns the current licitation process publication' do
+      publications.should_receive(:current)
+      subject.current_publication
     end
   end
 
