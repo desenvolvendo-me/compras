@@ -140,7 +140,7 @@ describe LicitationProcessDecorator do
 
     it 'when is not updatable by invalid publication type' do
       component.stub(:updatable? => false)
-      component.stub(:licitation_process_publications).and_return(publications)
+      component.stub(:publications).and_return(publications)
       publications.stub(:current_updatable?).and_return(false)
 
       expect(subject.not_updatable_message).to eq 'tipo invalido'
@@ -148,7 +148,7 @@ describe LicitationProcessDecorator do
 
     it 'when is not updatable by invalid ratification' do
       component.stub(:updatable? => false)
-      component.stub(:licitation_process_publications).and_return(publications)
+      component.stub(:publications).and_return(publications)
       component.stub(:licitation_process_ratifications).and_return(ratifications)
       publications.stub(:current_updatable?).and_return(true)
       ratifications.stub(:any?).and_return(true)
@@ -159,7 +159,7 @@ describe LicitationProcessDecorator do
 
     it 'when is not updatable by invalid publications' do
       component.stub(:updatable? => false)
-      component.stub(:licitation_process_publications).and_return(publications)
+      component.stub(:publications).and_return(publications)
       component.stub(:licitation_process_ratifications).and_return(ratifications)
       publications.stub(:current_updatable?).and_return(true)
       publications.stub(:any?).and_return(true)

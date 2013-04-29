@@ -1,4 +1,6 @@
 class LicitationProcessPublicationsController < CrudController
+  defaults collection_name: :publications
+
   def new
     object = build_resource
     object.licitation_process = LicitationProcess.find(params[:licitation_process_id])

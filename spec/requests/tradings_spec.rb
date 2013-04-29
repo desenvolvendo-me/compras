@@ -98,7 +98,7 @@ feature "Tradings" do
     LicitationProcess.make!(:pregao_presencial,
                             :bidders => [],
                             :year => 2014,
-                            :licitation_process_publications => [])
+                            :publications => [])
 
     navigate "Processos de Compra > Pregão Presencial"
 

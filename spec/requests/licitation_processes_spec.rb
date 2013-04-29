@@ -10,7 +10,7 @@ feature "LicitationProcesses" do
                   'indexers',
                   'document_types',
                   'materials',
-                  'licitation_process_publications',
+                  'publications',
                   'purchase_solicitations']
 
     Prefecture.make!(:belo_horizonte)
@@ -520,7 +520,7 @@ feature "LicitationProcesses" do
   end
 
   scenario 'envelope opening date is disabled without publication' do
-    LicitationProcess.make!(:processo_licitatorio, :licitation_process_publications => [])
+    LicitationProcess.make!(:processo_licitatorio, :publications => [])
     PaymentMethod.make!(:cheque)
     DocumentType.make!(:oficial)
     Material.make!(:arame_farpado)
@@ -786,7 +786,7 @@ feature "LicitationProcesses" do
 
   scenario 'allowance of adding bidders and publication of the edital' do
     LicitationProcess.make!(:processo_licitatorio,
-                            :licitation_process_publications => [])
+                            :publications => [])
 
     navigate 'Processos de Compra > Processos de Compras'
 

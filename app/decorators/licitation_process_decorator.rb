@@ -50,11 +50,11 @@ class LicitationProcessDecorator
   def not_updatable_message
     return if updatable?
 
-    if !licitation_process_publications.current_updatable?
+    if !publications.current_updatable?
       t('licitation_process.messages.no_one_publication_with_valid_type', :publication_of => current_publication_of)
     elsif licitation_process_ratifications.any?
       t('licitation_process.messages.has_already_a_ratification')
-    elsif licitation_process_publications.any?
+    elsif publications.any?
       t('licitation_process.messages.has_already_a_publications')
     end
   end
@@ -100,6 +100,6 @@ class LicitationProcessDecorator
   private
 
   def current_publication_of
-    licitation_process_publications.current.publication_of_humanize
+    publications.current.publication_of_humanize
   end
 end

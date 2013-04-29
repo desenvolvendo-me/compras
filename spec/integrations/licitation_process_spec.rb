@@ -35,7 +35,7 @@ describe LicitationProcess do
 
     context "competition modality validation" do
       it "should be 45 calendar days greater than last publication date" do
-        licitation = LicitationProcess.make!(:processo_licitatorio_concurso, :licitation_process_publications => [publication])
+        licitation = LicitationProcess.make!(:processo_licitatorio_concurso, :publications => [publication])
         licitation.proposal_envelope_opening_date = Date.current + 44.days
 
         expect(licitation).to_not be_valid
@@ -48,8 +48,7 @@ describe LicitationProcess do
 
     context "concurrence modality validation" do
       let(:licitation) do
-        LicitationProcess.make!(:processo_licitatorio_concorrencia,
-                                :licitation_process_publications => [publication])
+        LicitationProcess.make!(:processo_licitatorio_concorrencia, :publications => [publication])
       end
 
       context "integral execution type" do
@@ -98,7 +97,7 @@ describe LicitationProcess do
     end
 
     context "taken price modality validation" do
-      let(:licitation)  { LicitationProcess.make!(:processo_licitatorio_tomada_preco, :licitation_process_publications => [publication]) }
+      let(:licitation)  { LicitationProcess.make!(:processo_licitatorio_tomada_preco, :publications => [publication]) }
 
       context "licitation kind is best technique or technical and price" do
         it "should be 30 calendar days greater than last publication date" do
@@ -135,7 +134,7 @@ describe LicitationProcess do
 
     context "auction modality validation" do
       it "should be 15 calendar days greater than last publication date" do
-        licitation = LicitationProcess.make!(:processo_licitatorio_leilao, :licitation_process_publications => [publication])
+        licitation = LicitationProcess.make!(:processo_licitatorio_leilao, :publications => [publication])
         licitation.proposal_envelope_opening_date = Date.current + 14.days
 
         expect(licitation).to_not be_valid
@@ -148,7 +147,7 @@ describe LicitationProcess do
 
     context "trading modality validation" do
       it "should be 8 working days greater than last publication date" do
-        licitation = LicitationProcess.make!(:processo_licitatorio, :licitation_process_publications => [publication],
+        licitation = LicitationProcess.make!(:processo_licitatorio, :publications => [publication],
                                              :modality => Modality::TRADING, :execution_type => ExecutionType::INTEGRAL)
         licitation.proposal_envelope_opening_date = Date.current + 5.days
 
@@ -162,7 +161,7 @@ describe LicitationProcess do
 
     context "invitation modality validation" do
       it "should be 5 working days greater than last publication date" do
-        licitation = LicitationProcess.make!(:processo_licitatorio, :licitation_process_publications => [publication],
+        licitation = LicitationProcess.make!(:processo_licitatorio, :publications => [publication],
                                              :modality => Modality::INVITATION, :execution_type => ExecutionType::INTEGRAL)
         licitation.proposal_envelope_opening_date = Date.current + 4.days
 

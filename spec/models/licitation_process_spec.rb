@@ -53,7 +53,7 @@ describe LicitationProcess do
   it { should have_and_belong_to_many(:document_types) }
   it { should have_and_belong_to_many(:purchase_solicitations) }
   it { should have_many(:licitation_notices).dependent(:destroy) }
-  it { should have_many(:licitation_process_publications).dependent(:destroy).order(:id) }
+  it { should have_many(:publications).dependent(:destroy).order(:id) }
   it { should have_many(:bidders).dependent(:destroy).order(:id) }
   it { should have_many(:licitation_process_impugnments).dependent(:restrict).order(:id) }
   it { should have_many(:licitation_process_appeals).dependent(:restrict) }
@@ -434,7 +434,7 @@ describe LicitationProcess do
   describe "#edital_published?" do
     it "returns true if there are any published editals" do
       publications = double(:edital => [double])
-      subject.stub(:licitation_process_publications => publications)
+      subject.stub(:publications => publications)
 
       expect(subject.edital_published?).to be_true
     end
@@ -450,7 +450,7 @@ describe LicitationProcess do
     end
 
     before do
-      subject.stub(:licitation_process_publications => publications)
+      subject.stub(:publications => publications)
       subject.stub(:licitation_process_ratifications => ratifications)
       subject.stub(:new_record? => false)
     end
@@ -540,7 +540,7 @@ describe LicitationProcess do
     let(:publications) { double :publications }
 
     before do
-      subject.stub(:licitation_process_publications).and_return publications
+      subject.stub(:publications).and_return publications
       publications.should_receive(:empty?).and_return false
     end
 

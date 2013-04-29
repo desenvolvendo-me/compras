@@ -49,7 +49,7 @@ class LicitationProcess < Compras::Model
                           :before_add => :update_purchase_solicitation_to_purchase_process,
                           :before_remove => :update_purchase_solicitation_to_liberated
 
-  has_many :licitation_process_publications, :dependent => :destroy, :order => :id
+  has_many :publications, class_name: 'LicitationProcessPublication', dependent: :destroy, order: :id
   has_many :bidders, :dependent => :destroy, :order => :id
   has_many :licitation_process_impugnments, :dependent => :restrict, :order => :id
   has_many :licitation_process_appeals, :dependent => :restrict
@@ -140,8 +140,8 @@ class LicitationProcess < Compras::Model
   }
 
   def self.published_edital
-    joins { licitation_process_publications }.where {
-      licitation_process_publications.publication_of.eq PublicationOf::EDITAL
+    joins { publications }.where {
+      publications.publication_of.eq PublicationOf::EDITAL
     }
   end
 
@@ -177,7 +177,7 @@ class LicitationProcess < Compras::Model
   end
 
   def updatable?
-    new_record? || ((licitation_process_ratifications.empty? || licitation_process_publications.empty?) && licitation_process_publications.current_updatable?)
+    new_record? || ((licitation_process_ratifications.empty? || publications.empty?) && publications.current_updatable?)
   end
 
   def filled_lots?
@@ -225,9 +225,9 @@ class LicitationProcess < Compras::Model
   end
 
   def current_publication
-    return if licitation_process_publications.empty?
+    return if publications.empty?
 
-    licitation_process_publications.current
+    publications.current
   end
 
   def process_date_year
@@ -301,7 +301,7 @@ class LicitationProcess < Compras::Model
   end
 
   def published_editals
-    licitation_process_publications.edital
+    publications.edital
   end
 
   def validate_updates

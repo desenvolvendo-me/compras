@@ -23,7 +23,7 @@ LicitationProcess.blueprint(:processo_licitatorio) do
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
   document_types { [DocumentType.make!(:fiscal)] }
-  licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
+  publications { [LicitationProcessPublication.make!(:publicacao)] }
   price_registration { true }
   licitation_process_lots { [LicitationProcessLot.make(:lote_antivirus, :licitation_process => object)] }
   execution_type { ExecutionType::INTEGRAL }
@@ -55,7 +55,7 @@ LicitationProcess.blueprint(:processo_licitatorio_computador) do
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
   document_types { [DocumentType.make!(:fiscal)] }
-  licitation_process_publications { [LicitationProcessPublication.make!(:publicacao,
+  publications { [LicitationProcessPublication.make!(:publicacao,
                                                                         :licitation_process => object)] }
   bidders { [Bidder.make!(:licitante)] }
   execution_type { ExecutionType::INTEGRAL }
@@ -88,7 +88,7 @@ LicitationProcess.blueprint(:processo_licitatorio_fornecedores) do
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
   document_types { [DocumentType.make!(:fiscal)] }
-  licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
+  publications { [LicitationProcessPublication.make!(:publicacao)] }
   bidders { [Bidder.make!(:licitante), Bidder.make!(:licitante_sobrinho)] }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
@@ -119,7 +119,7 @@ LicitationProcess.blueprint(:processo_licitatorio_publicacao_cancelada) do
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
   document_types { [DocumentType.make!(:fiscal)] }
-  licitation_process_publications { [LicitationProcessPublication.make!(:publicacao_de_cancelamento)] }
+  publications { [LicitationProcessPublication.make!(:publicacao_de_cancelamento)] }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   notice_availability_date { I18n.l(Date.tomorrow) }
@@ -150,7 +150,7 @@ LicitationProcess.blueprint(:processo_licitatorio_canetas) do
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
   document_types { [DocumentType.make!(:fiscal)] }
-  licitation_process_publications { [LicitationProcessPublication.make!(:publicacao,
+  publications { [LicitationProcessPublication.make!(:publicacao,
                                                                         :licitation_process => object)] }
   bidders { [Bidder.make!(:licitante)] }
   licitation_process_lots { [LicitationProcessLot.make(:lote_antivirus, :licitation_process => object)] }
@@ -184,7 +184,7 @@ LicitationProcess.blueprint(:apuracao_por_itens) do
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
   document_types { [DocumentType.make!(:fiscal)] }
-  licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
+  publications { [LicitationProcessPublication.make!(:publicacao)] }
   execution_type { ExecutionType::INTEGRAL }
   bidders { [Bidder.make!(:licitante_com_proposta_1),
              Bidder.make!(:licitante_com_proposta_2)] }
@@ -217,7 +217,7 @@ LicitationProcess.blueprint(:apuracao_por_lote) do
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
   document_types { [DocumentType.make!(:fiscal)] }
-  licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
+  publications { [LicitationProcessPublication.make!(:publicacao)] }
   execution_type { ExecutionType::INTEGRAL }
   bidders { [Bidder.make!(:licitante_com_proposta_1),
              Bidder.make!(:licitante_com_proposta_2)] }
@@ -250,7 +250,7 @@ LicitationProcess.blueprint(:valor_maximo_ultrapassado) do
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
   document_types { [DocumentType.make!(:fiscal)] }
-  licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
+  publications { [LicitationProcessPublication.make!(:publicacao)] }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   bidders { [Bidder.make!(:licitante_com_proposta_3),
@@ -282,7 +282,7 @@ LicitationProcess.blueprint(:apuracao_global) do
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
   document_types { [DocumentType.make!(:fiscal)] }
-  licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
+  publications { [LicitationProcessPublication.make!(:publicacao)] }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   bidders { [Bidder.make!(:licitante_com_proposta_1),
@@ -314,7 +314,7 @@ LicitationProcess.blueprint(:apuracao_global_empatou) do
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
   document_types { [DocumentType.make!(:fiscal)] }
-  licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
+  publications { [LicitationProcessPublication.make!(:publicacao)] }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   bidders { [Bidder.make!(:licitante_com_proposta_5),
@@ -346,7 +346,7 @@ LicitationProcess.blueprint(:apuracao_global_sem_documentos) do
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
   document_types { [DocumentType.make!(:fiscal)] }
-  licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
+  publications { [LicitationProcessPublication.make!(:publicacao)] }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   bidders { [Bidder.make!(:licitante_com_proposta_6, :documents => []),
@@ -378,7 +378,7 @@ LicitationProcess.blueprint(:apuracao_global_small_company) do
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
   document_types { [DocumentType.make!(:fiscal)] }
-  licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
+  publications { [LicitationProcessPublication.make!(:publicacao)] }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   bidders { [Bidder.make!(:licitante_com_proposta_3),
@@ -410,7 +410,7 @@ LicitationProcess.blueprint(:apuracao_global_small_company_2) do
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
   document_types { [DocumentType.make!(:fiscal)] }
-  licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
+  publications { [LicitationProcessPublication.make!(:publicacao)] }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   bidders { [Bidder.make!(:licitante_com_proposta_8),
@@ -442,7 +442,7 @@ LicitationProcess.blueprint(:processo_licitatorio_nao_atualizavel) do
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
   document_types { [DocumentType.make!(:fiscal)] }
-  licitation_process_publications { [LicitationProcessPublication.make!(:publicacao_nao_atualizavel)] }
+  publications { [LicitationProcessPublication.make!(:publicacao_nao_atualizavel)] }
   licitation_process_lots { [LicitationProcessLot.make(:lote_antivirus, :licitation_process => object)] }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
@@ -474,7 +474,7 @@ LicitationProcess.blueprint(:processo_licitatorio_canetas_sem_lote) do
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
   document_types { [DocumentType.make!(:fiscal)] }
-  licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
+  publications { [LicitationProcessPublication.make!(:publicacao)] }
   bidders { [Bidder.make!(:licitante)] }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
@@ -505,7 +505,7 @@ LicitationProcess.blueprint(:apuracao_melhor_tecnica_e_preco) do
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
   document_types { [DocumentType.make!(:fiscal)] }
-  licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
+  publications { [LicitationProcessPublication.make!(:publicacao)] }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   bidders { [Bidder.make!(:licitante_com_proposta_1),
@@ -540,7 +540,7 @@ LicitationProcess.blueprint(:pregao_presencial) do
   document_types { [DocumentType.make!(:fiscal)] }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
-  licitation_process_publications { [LicitationProcessPublication.make!(:publicacao,
+  publications { [LicitationProcessPublication.make!(:publicacao,
                                                                         :licitation_process => object)] }
   bidders { [Bidder.make!(:licitante_sobrinho), Bidder.make!(:licitante), Bidder.make!(:me_pregao)] }
   notice_availability_date { I18n.l(Date.tomorrow) }
@@ -569,7 +569,7 @@ LicitationProcess.blueprint(:processo_licitatorio_concurso) do
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
   document_types { [DocumentType.make!(:fiscal)] }
-  licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
+  publications { [LicitationProcessPublication.make!(:publicacao)] }
   price_registration { true }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
@@ -598,7 +598,7 @@ LicitationProcess.blueprint(:processo_licitatorio_concorrencia) do
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
   document_types { [DocumentType.make!(:fiscal)] }
-  licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
+  publications { [LicitationProcessPublication.make!(:publicacao)] }
   price_registration { true }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
@@ -628,7 +628,7 @@ LicitationProcess.blueprint(:processo_licitatorio_tomada_preco) do
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
   document_types { [DocumentType.make!(:fiscal)] }
-  licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
+  publications { [LicitationProcessPublication.make!(:publicacao)] }
   price_registration { true }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
@@ -660,7 +660,7 @@ LicitationProcess.blueprint(:processo_licitatorio_leilao) do
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
   document_types { [DocumentType.make!(:fiscal)] }
-  licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
+  publications { [LicitationProcessPublication.make!(:publicacao)] }
   price_registration { true }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
