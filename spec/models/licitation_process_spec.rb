@@ -568,6 +568,7 @@ describe LicitationProcess do
     let(:purchase_solicitation) { double(:purchase_solicitation) }
 
     it "updates the purchase solicitation service_status to liberated" do
+      subject.stub(:valid?).and_return true
       purchase_solicitation.should_receive(:liberate!)
       subject.send(:update_purchase_solicitation_to_liberated, purchase_solicitation)
     end
