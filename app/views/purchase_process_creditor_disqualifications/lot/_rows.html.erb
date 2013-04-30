@@ -1,0 +1,9 @@
+<tr>
+  <td><%= proposal.lot %></td>
+  <td class='right'><%= proposal.decorator.total_price %></td>
+
+  <td align='center'>
+    <%= check_box_tag 'purchase_process_creditor_disqualification[proposal_item_ids][]', proposal.id, check_proposal_item?(proposal),
+      { id: "proposal_item_ids_#{proposal.id}", class: 'item_check' } %>
+  </td>
+</tr>

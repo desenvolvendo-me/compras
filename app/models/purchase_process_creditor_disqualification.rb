@@ -9,6 +9,8 @@ class PurchaseProcessCreditorDisqualification < Compras::Model
   belongs_to :licitation_process
   belongs_to :creditor
 
+  has_one :judgment_form, through: :licitation_process
+
   validates :licitation_process, :creditor, :disqualification_date,
             :reason, :kind, presence: true
 

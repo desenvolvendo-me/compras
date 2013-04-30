@@ -1,0 +1,11 @@
+<table class="records" id="purchase_process_creditor_disqualification_global">
+  <thead>
+    <th><%= PurchaseProcessItem.human_attribute_name :estimated_total_price %></th>
+    <th>Selecionar</th>
+  </thead>
+
+  <tbody>
+    <%= render partial: 'purchase_process_creditor_disqualifications/global/rows',
+      collection: localized(resource.proposal_items), as: :proposal %>
+  </tbody>
+</table>

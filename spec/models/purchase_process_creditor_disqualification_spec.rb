@@ -5,6 +5,8 @@ describe PurchaseProcessCreditorDisqualification do
   it { should belong_to :licitation_process }
   it { should belong_to :creditor }
 
+  it { should have_one(:judgment_form).through :licitation_process }
+
   it { should validate_presence_of :licitation_process }
   it { should validate_presence_of :creditor }
   it { should validate_presence_of :disqualification_date }

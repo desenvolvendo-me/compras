@@ -1,0 +1,19 @@
+<table class="records" id="purchase_process_creditor_disqualification_items">
+  <thead>
+    <tr>
+      <th><%= PurchaseProcessItem.human_attribute_name :lot %></th>
+      <th><%= PurchaseProcessItem.human_attribute_name :order %></th>
+      <th><%= PurchaseProcessItem.human_attribute_name :material %></th>
+      <th><%= PurchaseProcessItem.human_attribute_name :reference_unit %></th>
+      <th><%= PurchaseProcessItem.human_attribute_name :quantity %></th>
+      <th><%= PurchaseProcessItem.human_attribute_name :unit_value %></th>
+      <th><%= PurchaseProcessItem.human_attribute_name :estimated_total_price %></th>
+      <th>Selecionar</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%= render partial: 'purchase_process_creditor_disqualifications/item/rows',
+      collection: localized(resource.proposal_items), as: :proposal %>
+  </tbody>
+</table>

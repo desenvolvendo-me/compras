@@ -16,7 +16,7 @@ class PurchaseProcessCreditorProposal < Compras::Model
   validates :brand, presence: true, if: :item?
 
   def total_price
-    (unit_price || 0) * (item_quantity || 0)
+    (unit_price || 0) * (item_quantity || 1)
   end
 
   def qualify!
