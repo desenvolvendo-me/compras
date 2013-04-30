@@ -1,11 +1,10 @@
 $(document).ready(function() {
-  $("#company_size").requiredField(true);
-
   $("#purchase_process_accreditation_creditor_id").on('change', function(event, creditor){
     if (!creditor) {
       creditor = {}
     }
 
+    $("#company_size").requiredField(creditor.is_company);
     $('#creditor_representative').val('');
     $('#creditor_representative').empty();
     $('#purchase_process_accreditation_personable_type').val(creditor.personable_type);
