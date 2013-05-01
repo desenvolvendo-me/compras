@@ -2126,4 +2126,44 @@ feature "LicitationProcesses" do
     expect(page).to have_notice 'Processo de Compra 1/2012 editado com sucesso.'
     expect(page).to have_link 'Credenciamento'
   end
+
+  scenario 'when not having creditors and items'do
+    LicitationProcess.make!(:pregao_presencial, :items => [],
+      purchase_process_accreditation: PurchaseProcessAccreditation.make(:general_accreditation))
+
+    navigate 'Processos de Compra > Processos de Compras'
+
+    click_link "Limpar Filtro"
+    click_link '1/2012'
+
+    expect(page).to have_disabled_element "Propostas", :reason => "deve possuir credores e itens"
+
+      within_tab "Itens" do
+        fill_in 'Lote', :with => '2050'
+
+        fill_with_autocomplete 'Material', :with => 'Antivirus'
+
+        expect(page).to have_field 'Unidade', :with => 'UN'
+
+        fill_in 'Quantidade', :with => '2'
+        fill_in 'Valor unitário máximo', :with => '10,00'
+
+        expect(page).to have_field 'Valor total', :with => '20,00'
+
+        click_button 'Adicionar'
+
+        expect(page).to have_content '2050'
+        expect(page).to have_content '01.01.00001 - Antivirus'
+        expect(page).to have_content 'UN'
+        expect(page).to have_content '2'
+        expect(page).to have_content '10,00'
+        expect(page).to have_content '20,00'
+      end
+
+    click_button 'Salvar'
+
+    click_link 'Propostas'
+
+    expect(page).to have_content "Proposta Comercial Processo 1/2012 - Pregão 1"
+  end
 end

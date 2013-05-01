@@ -366,4 +366,23 @@ describe LicitationProcessDecorator do
       it { expect(subject.type_of_calculation).to eq 'lowest_price_by_lot' }
     end
   end
+
+  describe "#must_have_creditors_and_items" do
+    it "returns nil if licitation process has creditors and items" do
+      component.stub(:materials => [double], :creditors => [double])
+
+      expect(subject.must_have_creditors_and_items).to be_nil
+    end
+
+    it "returns disabled_message if licitation process has not items or creditors" do
+      I18n.backend.store_translations 'pt-BR', :licitation_process => {
+        :messages => {
+          :must_have_creditors_and_items => 'deve ter credores e itens'
+        }
+      }
+
+      component.stub(:materials => [double], :creditors => [])
+      expect(subject.must_have_creditors_and_items).to eq 'deve ter credores e itens'
+    end
+  end
 end

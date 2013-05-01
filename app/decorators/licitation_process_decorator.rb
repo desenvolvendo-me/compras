@@ -97,6 +97,12 @@ class LicitationProcessDecorator
     number_with_precision super(creditor) if super
   end
 
+  def must_have_creditors_and_items
+    if creditors.blank? || materials.blank?
+      t("licitation_process.messages.must_have_creditors_and_items")
+    end
+  end
+
   private
 
   def current_publication_of
