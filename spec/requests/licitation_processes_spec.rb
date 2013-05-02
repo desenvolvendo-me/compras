@@ -2162,6 +2162,8 @@ feature "LicitationProcesses" do
 
     click_button 'Salvar'
 
+    expect(page).to have_notice "Processo de Compra 1/2012 editado com sucesso."
+
     click_link 'Propostas'
 
     expect(page).to have_content "Proposta Comercial Processo 1/2012 - Pregão 1"
