@@ -15,8 +15,9 @@ class PurchaseProcessCreditorProposal < Compras::Model
   validates :lot, numericality: { allow_blank: true }
   validates :brand, presence: true, if: :item?
 
-  scope :by_creditor_and_licitation_process, lambda { |creditor, licitation_process|
-    where(creditor_id: creditor, licitation_process_id: licitation_process) }
+  scope :by_creditor_id, lambda { |creditor_id|
+    where { |proposal| proposal.creditor_id.eq(creditor_id) }
+  }
 
   def total_price
     (unit_price || 0) * (item_quantity || 1)
