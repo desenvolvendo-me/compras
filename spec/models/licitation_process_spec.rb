@@ -593,12 +593,13 @@ describe LicitationProcess do
   describe '#proposals_of_creditor' do
     let(:creditor)  { double :creditor, id: 1 }
     let(:proposals) { double :creditor_proposals }
-    let(:proposal_collection) { double :proposal_collection }
+
+    before { subject.stub(:id).and_return 1 }
 
     it 'returns the creditor proposals of the creditor parameter' do
-      subject.stub(:creditor_proposals).and_return proposals
-      subject.creditor_proposals.should_receive(:where).with({ creditor_id: 1 }).and_return proposal_collection
-      proposal_collection.should_receive(:order).with(:id)
+      PurchaseProcessCreditorProposal.should_receive(:by_creditor_and_licitation_process).
+        with(creditor.id, subject.id).and_return(proposals)
+      proposals.should_receive(:order).with(:id)
 
       subject.proposals_of_creditor(creditor)
     end
