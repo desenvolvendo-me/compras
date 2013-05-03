@@ -7,7 +7,7 @@ feature "TradingConfigurations" do
   end
 
   scenario 'create a new trading_configuration and update an existent' do
-    navigate "Processos de Compra > Auxiliar > Configuração do Pregão Presencial"
+    navigate 'Comum > Auxiliar > Configuração do Pregão Presencial'
 
     fill_in 'Porcentagem limite para participar das ofertas', :with => '10,00'
 

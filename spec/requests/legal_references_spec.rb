@@ -7,7 +7,7 @@ feature "LegalReferences" do
   end
 
   scenario 'create, update and destroy a new legal_reference' do
-    navigate 'Processos de Compra > Auxiliar > Referências Legais'
+    navigate 'Comum > Auxiliar > Referências Legais'
 
     click_link 'Criar Referência Legal'
 

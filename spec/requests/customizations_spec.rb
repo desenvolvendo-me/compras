@@ -118,7 +118,7 @@ feature "Customizations" do
     expect(page).to have_notice 'Customização criado com sucesso.'
 
 
-    navigate 'Processos de Compra > Auxiliar > Comissões de Licitação'
+    navigate 'Comum > Auxiliar > Comissões de Licitação'
 
     within_records do
       click_link 'descricao da comissao'

@@ -24,6 +24,12 @@ menu:
       - users
 
   - commom:
+    - auxiliary:
+      - licitation_commissions
+      - trading_configuration
+      - judgment_forms
+      - licitation_objects
+      - legal_references
     - cadastral:
       - contracts
       - banks:
@@ -60,12 +66,6 @@ menu:
     - administration_types
 
   - purchasing_processes:
-    - auxiliary:
-      - licitation_commissions
-      - trading_configuration
-      - judgment_forms
-      - licitation_objects
-      - legal_references
     - price_collections
     - price_registrations
     - purchase_solicitations
