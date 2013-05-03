@@ -1,0 +1,5 @@
+pt-BR:
+  activemodel:
+    attributes:
+      map_of_proposal_report:
+        order: 'Ordem'

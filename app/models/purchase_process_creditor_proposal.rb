@@ -10,6 +10,7 @@ class PurchaseProcessCreditorProposal < Compras::Model
 
   delegate :lot, :additional_information, :quantity, :reference_unit, :material,
     to: :item, allow_nil: true, prefix: true
+  delegate :name, :cnpj , to: :creditor, allow_nil: true, prefix: true
 
   validates :creditor, :licitation_process, :unit_price, presence: true
   validates :lot, numericality: { allow_blank: true }
@@ -22,6 +23,9 @@ class PurchaseProcessCreditorProposal < Compras::Model
   scope :by_item_id, lambda { |item_id|
     where { purchase_process_item_id.eq(item_id) }
   }
+
+  orderize
+  filterize
 
   def total_price
     (unit_price || 0) * (item_quantity || 1)

@@ -30,6 +30,20 @@ describe PurchaseProcessCreditorProposalDecorator do
 
       expect(subject.subtitle).to eq 'Fornecedor Joao - Processo 1/2013'
     end
+  end
 
+  describe '#css_class' do
+    let :proposal do
+      double('PurchaseProcessCreditorProposal', :id => 1)
+    end
+
+    let(:map_of_proposal) { double(:map_of_proposal) }
+
+    it 'return draw when draw' do
+      map_of_proposal.stub(:draw?).and_return true
+      map_of_proposal.stub(:lowest_proposal?).and_return false
+
+      expect(subject.css_class(proposal, map_of_proposal)).to eql "draw"
+    end
   end
 end

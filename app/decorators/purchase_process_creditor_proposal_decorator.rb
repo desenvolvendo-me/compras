@@ -19,4 +19,19 @@ class PurchaseProcessCreditorProposalDecorator
   def subtitle
     "Fornecedor #{creditor} - Processo #{licitation_process.to_s}"
   end
+
+  def unit_price_with_currency
+    number_to_currency unit_price if unit_price
+  end
+
+  def total_price_with_currency
+    number_to_currency total_price if total_price
+  end
+
+  def css_class(proposal, map_of_proposal = MapOfProposal)
+    return "winner" if map_of_proposal.lowest_proposal?(proposal)
+    return "draw" if map_of_proposal.draw?(proposal)
+
+    "lost"
+  end
 end

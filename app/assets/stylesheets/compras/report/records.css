@@ -1,12 +1,37 @@
-table.records.black {
-  color: #000;
+table.records {
+  border: solid 1px #E8EAEE;
 }
 
 table.records td, table.records th {
-  border: 1px solid #000;
-  padding: 1em;
+  border: 0;
 }
 
-table.records tr:nth-child(even) td, table.records tr.zebra td {
-  background-color: #FFF;
+table.records th {
+  background: #EEEEEE;
+  background: -o-linear-gradient(#FEFEFE, #EEEEEE);
+  background: -moz-linear-gradient(#FEFEFE, #EEEEEE);
+  background: -webkit-linear-gradient(#FEFEFE, #EEEEEE);
+  border-bottom: solid 1px #E8EAEE;
+  color: #555452;
+  text-align: left;
+}
+
+table.records td.annulled {
+  color: #FF0000;
+}
+
+table.records td.status {
+  font-weight: bold;
+}
+
+table tr.draw {
+  color: red;
+}
+
+table tr.winner {
+  color: blue;
+}
+
+table tr.lost {
+  color: black;
 }

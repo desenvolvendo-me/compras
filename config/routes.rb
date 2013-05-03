@@ -786,4 +786,10 @@ Compras::Application.routes.draw do
       end
     end
   end
+
+  namespace :report do
+    scope :only => [:index, :new, :show] do
+      resources :map_of_proposals
+    end
+  end
 end

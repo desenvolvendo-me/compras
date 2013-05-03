@@ -68,6 +68,7 @@ pt-BR:
     tce_export_monthly_monitorings: "SICOM - Acompanhamento Mensal"
     tradings: "Pregão Presencial"
     users: "Usuários"
+    report_map_of_proposals: "Mapa de Propostas"
 
   menu:
     <<: *controllers
