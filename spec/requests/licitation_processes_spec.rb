@@ -848,14 +848,14 @@ feature "LicitationProcesses" do
 
     within_records do
       expect(page).to have_content 'Processo/Ano'
-      expect(page).to have_content 'Modalidade'
+      expect(page).to have_content 'Modalidade / Tipo do afastamento'
       expect(page).to have_content 'Tipo de objeto'
       expect(page).to have_content 'Abertura das propostas'
       expect(page).to have_content 'Status'
 
       within 'tbody tr' do
         expect(page).to have_content '1/2012'
-        expect(page).to have_content 'Concorrência'
+        expect(page).to have_content '1 - Concorrência'
         expect(page).to have_content 'Compras e serviços'
         expect(page).to have_content I18n.l Date.tomorrow
         expect(page).to have_content 'Em andamento'

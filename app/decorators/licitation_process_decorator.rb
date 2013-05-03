@@ -6,8 +6,12 @@ class LicitationProcessDecorator
   include ActionView::Helpers::NumberHelper
   include ActionView::Helpers::TranslationHelper
 
-  attr_header :code_and_year, :modality, :object_type, :proposal_envelope_opening_date,
+  attr_header :code_and_year, :modality_or_type_of_removal, :object_type, :proposal_envelope_opening_date,
               :status
+
+  def modality_or_type_of_removal
+    "#{modality_number} - #{component.modality_humanize || component.type_of_removal_humanize}"
+  end
 
   def judgment_forms_available(judgment_form_repository = JudgmentForm)
     if judgment_form
