@@ -2168,4 +2168,255 @@ feature "LicitationProcesses" do
 
     expect(page).to have_content "Proposta Comercial Processo 1/2012 - Pregão 1"
   end
+
+  scenario 'purchase solicitation changes its status when associated with licitation process' do
+    PurchaseSolicitation.make!(:reparo_liberado, :accounting_year => Date.current.year)
+    Employee.make!(:sobrinho)
+    Capability.make!(:reforma)
+    PaymentMethod.make!(:dinheiro)
+    DocumentType.make!(:fiscal)
+    JudgmentForm.make!(:por_item_com_menor_preco)
+    BudgetAllocation.make!(:alocacao)
+    Material.make!(:antivirus)
+    Indexer.make!(:xpto)
+
+    navigate 'Processos de Compra > Processos de Compras'
+
+    click_link 'Criar Processo de Compra'
+
+    expect(page).to have_content "Criar Processo"
+
+    expect(page).to_not have_link 'Publicações'
+
+    expect(page).to_not have_button 'Apurar'
+
+    within_tab 'Principal' do
+      expect(page).to have_disabled_field 'Status'
+    end
+
+    within_tab 'Principal' do
+      choose 'Processo licitatório'
+
+      select 'Compras e serviços', :from => 'Tipo de objeto'
+      select 'Concorrência', :from => 'Modalidade'
+      fill_in 'Objeto do processo de compra', :with => 'Licitação para compra de carteiras'
+
+      check 'Registro de preço'
+      select 'Por Item com Menor Preço', :from =>'Forma de julgamento'
+      select 'Empreitada integral', :from => 'Forma de execução'
+      select 'Fiança bancária', :from => 'Tipo de garantia'
+      fill_modal 'Índice de reajuste', :with => 'XPTO'
+      fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
+      fill_in 'Valor da caução', :with => '50,00'
+    end
+
+    within_tab "Solicitantes" do
+      fill_with_autocomplete 'Solicitações de compra', :with => '1'
+
+      within_records do
+        expect(page).to have_content 'Código'
+        expect(page).to have_content 'Solicitante'
+        expect(page).to have_content 'Responsável pela solicitação'
+
+        within 'tbody tr' do
+          expect(page).to have_content '1/2013'
+          expect(page).to have_content '1 - Secretaria de Educação'
+          expect(page).to have_content 'Gabriel Sobrinho'
+        end
+      end
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to_not have_notice 'Processo de Compra 1/2012 criado com sucesso.'
+
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    within_records do
+      within 'tbody tr:first' do
+        expect(page).to have_content 'Liberada'
+      end
+    end
+
+    navigate 'Processos de Compra > Processos de Compras'
+
+    click_link 'Criar Processo de Compra'
+
+    expect(page).to have_content "Criar Processo"
+
+    expect(page).to_not have_link 'Publicações'
+
+    expect(page).to_not have_button 'Apurar'
+
+    within_tab 'Principal' do
+      expect(page).to have_disabled_field 'Status'
+    end
+
+    within_tab 'Principal' do
+      choose 'Processo licitatório'
+
+      select 'Compras e serviços', :from => 'Tipo de objeto'
+      select 'Concorrência', :from => 'Modalidade'
+      fill_in 'Objeto do processo de compra', :with => 'Licitação para compra de carteiras'
+
+      check 'Registro de preço'
+      select 'Por Item com Menor Preço', :from =>'Forma de julgamento'
+      select 'Empreitada integral', :from => 'Forma de execução'
+      select 'Fiança bancária', :from => 'Tipo de garantia'
+      fill_modal 'Índice de reajuste', :with => 'XPTO'
+      fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
+      fill_in 'Valor da caução', :with => '50,00'
+    end
+
+    within_tab "Solicitantes" do
+      fill_with_autocomplete 'Solicitações de compra', :with => '1'
+
+      within_records do
+        expect(page).to have_content 'Código'
+        expect(page).to have_content 'Solicitante'
+        expect(page).to have_content 'Responsável pela solicitação'
+
+        within 'tbody tr' do
+          expect(page).to have_content '1/2013'
+          expect(page).to have_content '1 - Secretaria de Educação'
+          expect(page).to have_content 'Gabriel Sobrinho'
+        end
+      end
+    end
+
+    within_tab 'Prazos' do
+      fill_in 'Data da expedição', :with => '21/03/2012'
+      fill_in 'Data da disponibilidade', :with => I18n.l(Date.current)
+      fill_modal 'Contato para informações', :with => '958473', :field => 'Matrícula'
+
+      fill_in 'Término do recebimento dos envelopes', :with => I18n.l(Date.current)
+      fill_in 'Hora do recebimento', :with => '14:00'
+
+      fill_in 'Validade da proposta', :with => '5'
+      select 'dia/dias', :from => 'Período da validade da proposta'
+
+      fill_in 'Prazo de entrega', :with => '1'
+      select 'ano/anos', :from => 'Período do prazo de entrega'
+    end
+
+    within_tab 'Documentos' do
+      fill_modal 'Tipo de documento', :with => 'Fiscal', :field => 'Descrição'
+    end
+
+    within_tab 'Orçamento' do
+      expect(page).to have_disabled_field 'Valor total dos itens', :with => '600,00'
+      expect(page).to have_disabled_field 'Valor total das dotações', :with => '20,00'
+
+      within_records do
+        expect(page).to have_content 'Dotação'
+        expect(page).to have_content 'Natureza da despesa'
+        expect(page).to have_content 'Desdobramento'
+        expect(page).to have_content 'Saldo da dotação'
+        expect(page).to have_content 'Valor previsto'
+
+        within 'tbody tr' do
+          expect(page).to have_content '1 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+          expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+          expect(page).to have_content '3.1.90.01.01 - Aposentadorias Custeadas com Recursos do RPPS'
+          expect(page).to have_content '500,00'
+          expect(page).to have_content '20,00'
+        end
+      end
+    end
+
+    within_tab "Itens" do
+      within_records do
+        expect(page).to have_css('.nested-record', :count => 1)
+
+        within 'tbody tr:first' do
+          expect(page).to have_content '1'
+          expect(page).to have_content '01.01.00001 - Antivirus'
+          expect(page).to have_content 'UN'
+          expect(page).to have_content '3'
+          expect(page).to have_content '200,00'
+          expect(page).to have_content '600,00'
+        end
+      end
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Processo de Compra 1/2012 criado com sucesso.'
+
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    within_records do
+      within 'tbody tr:first' do
+        expect(page).to have_content 'Em processo de compra'
+      end
+    end
+
+    navigate 'Processos de Compra > Processos de Compras'
+
+    click_link 'Limpar Filtro'
+
+    within_records do
+      click_link '1/2012'
+    end
+
+    within_tab 'Principal' do
+      fill_in 'Objeto do processo de compra', :with => ''
+    end
+
+    within_tab 'Solicitantes' do
+      within_records do
+        click_link 'Remover'
+      end
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to_not have_notice 'Processo de Compra 1/2012 editado com sucesso.'
+
+    within_tab 'Solicitantes' do
+      within_records do
+        expect(page).to_not have_css 'tbody tr'
+      end
+    end
+
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    within_records do
+      within 'tbody tr:first' do
+        expect(page).to have_content 'Em processo de compra'
+      end
+    end
+
+    navigate 'Processos de Compra > Processos de Compras'
+
+    click_link 'Limpar Filtro'
+
+    within_records do
+      click_link '1/2012'
+    end
+
+    within_tab 'Solicitantes' do
+      within_records do
+        click_link 'Remover'
+      end
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Processo de Compra 1/2012 editado com sucesso.'
+
+    within_tab 'Solicitantes' do
+      within_records do
+        expect(page).to_not have_css 'tbody tr'
+      end
+    end
+
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    within_records do
+      within 'tbody tr:first' do
+        expect(page).to have_content 'Liberada'
+      end
+    end
+  end
 end

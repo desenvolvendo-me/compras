@@ -55,24 +55,10 @@ class LicitationProcessesController < CrudController
 
   def create_resource(object)
     object.transaction do
-      BidderStatusChanger.new(object).change
-
       object.year = object.process_date_year
       object.status = PurchaseProcessStatus::WAITING_FOR_OPEN
 
       super
-    end
-  end
-
-  def update_resource(object, attributes)
-    return unless object.updatable?
-
-    object.transaction do
-      object.localized.assign_attributes(*attributes)
-
-      BidderStatusChanger.new(object).change
-
-      object.save
     end
   end
 end
