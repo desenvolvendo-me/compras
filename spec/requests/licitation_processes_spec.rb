@@ -2419,4 +2419,42 @@ feature "LicitationProcesses" do
       end
     end
   end
+
+  scenario 'should disabled link when licitation_process has not publications' do
+    LicitationProcess.make!(:pregao_presencial,
+                            publications: [],
+                            bidders: [])
+
+    navigate 'Processos de Compra > Processos de Compras'
+
+    click_link "Limpar Filtro"
+
+    within_records do
+      click_link "1/2012"
+    end
+
+    expect(page).to have_disabled_element "Credenciamento", :reason => "Licitantes só podem ser incluídos após publicação do edital"
+
+    click_link "Publicações"
+
+    click_link "Criar Publicação"
+
+    fill_in "Nome do veículo de comunicação", :with => "website"
+
+    fill_in "Data da publicação", :with => "01/05/2013"
+
+    select "Edital", :on => "Publicação do(a)"
+
+    select "Internet", :on => "Tipo de circulação do veículo de comunicação"
+
+    click_button "Salvar"
+
+    expect(page).to have_notice "Publicação criada com sucesso"
+
+    click_link "Voltar ao processo de compra"
+
+    click_link "Credenciamento"
+
+    expect(page).to have_content "Criar Credenciamento"
+  end
 end
