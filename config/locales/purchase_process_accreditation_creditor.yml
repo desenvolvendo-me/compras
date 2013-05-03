@@ -10,7 +10,7 @@ pt-BR:
         company_size: "Porte"
         creditor: "Fornecedor"
         creditor_representative: "Representante"
-        has_power_of_attorney: "Possui procuração?"
+        has_power_of_attorney: "Procurador"
         kind: "Tipo"
         licitation_process: "Processo de Compra"
         personable_type: "Tipo de pessoa"
