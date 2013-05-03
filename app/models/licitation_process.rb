@@ -139,11 +139,11 @@ class LicitationProcess < Compras::Model
     where { |licitation| licitation.trading.id.eq(nil) | licitation.id.eq(except_id) }
   }
 
-  def self.published_edital
+  scope :published_edital, lambda {
     joins { publications }.where {
       publications.publication_of.eq PublicationOf::EDITAL
     }
-  end
+  }
 
   def to_s
     "#{process}/#{year} - #{modality_humanize} #{modality_number}"
