@@ -31,9 +31,27 @@ class CreditorUserCreator
 
   def create_user(creditor)
     user_repository.create!(:name => creditor.name,
-                            :email => creditor.email,
+                            :email => creditor_user_email(creditor),
                             :login => creditor.login,
                             :authenticable_id => creditor.id,
                             :authenticable_type => AuthenticableType::CREDITOR)
+  end
+
+  def creditor_params
+    context.params[:price_collection] && context.params[:price_collection][:price_collection_proposals_attributes]
+  end
+
+  def creditor_user_email(creditor)
+    return unless creditor_params
+
+    creditor_params.each do |_, value|
+      continue if value[:_destroy] == "true"
+
+      if value[:creditor_id] == creditor.id.to_s
+        return value[:email]
+      end
+    end
+
+    nil
   end
 end

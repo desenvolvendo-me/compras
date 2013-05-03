@@ -6,6 +6,8 @@ json.array!(collection) do |json, obj|
   json.company_size    obj.company_size.to_s
   json.company_size_id obj.company_size.try(:id)
   json.is_company      obj.company?
+  json.person_email    obj.person_email
+  json.email           obj.email
 
   json.representatives obj.representatives do |json, representative|
     json.id   representative.id

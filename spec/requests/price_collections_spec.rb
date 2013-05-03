@@ -58,17 +58,13 @@ feature "PriceCollections" do
     end
 
     within_tab 'Fornecedores' do
-      click_on 'Adicionar Fornecedor'
+      fill_with_autocomplete 'Fornecedor', :with => 'Gabriel'
 
-      fill_modal 'Fornecedor', :with => 'Gabriel Sobrinho SA'
-    end
+      click_button 'Adicionar'
 
-    click_button 'Salvar'
-
-    expect(page).to_not have_content 'Coleta de Preços 1/2012 criada com sucesso'
-
-    within_tab 'Fornecedores' do
-      expect(page).to have_content 'não pode ficar em branco'
+      within_records do
+        expect(page).to_not have_css '.nested-record'
+      end
     end
   end
 
@@ -125,11 +121,19 @@ feature "PriceCollections" do
     end
 
     within_tab 'Fornecedores' do
-      click_on 'Adicionar Fornecedor'
-
-      fill_modal 'Fornecedor', :with => 'Wenderson Malheiros'
-
+      fill_with_autocomplete 'Fornecedor', :with => 'Wen'
       expect(page).to have_field 'Email', :with => 'wenderson.malheiros@gmail.com'
+
+      click_button 'Adicionar'
+
+      within_records do
+        expect(page).to have_css '.nested-record', :count => 1
+
+        within '.nested-record:first' do
+          expect(page).to have_content 'Wenderson Malheiros'
+          expect(page).to have_content 'wenderson.malheiros@gmail.com'
+        end
+      end
     end
 
     click_button 'Salvar'
@@ -173,18 +177,21 @@ feature "PriceCollections" do
     end
 
     within_tab 'Fornecedores' do
-      expect(page).to have_field 'Fornecedor', :with => 'Wenderson Malheiros'
-      expect(page).to have_disabled_field 'Fornecedor'
-      expect(page).to have_field 'E-mail', :with => 'wenderson.malheiros@gmail.com'
-      expect(page).to have_disabled_field 'E-mail'
+      within_records do
+        expect(page).to have_css '.nested-record', :count => 1
+
+        within '.nested-record:first' do
+          expect(page).to have_content 'Wenderson Malheiros'
+          expect(page).to have_content 'wenderson.malheiros@gmail.com'
+        end
+      end
     end
 
     click_link 'Propostas'
 
     click_link '1/2012'
-
     expect(page).to have_disabled_field 'Status'
-    expect(page).to have_select 'Status', :selected => 'Ativo'
+    expect(page).to have_select 'Status', :selected => ''
   end
 
   scenario 'update an existent price_collection' do
@@ -235,16 +242,18 @@ feature "PriceCollections" do
     end
 
     within_tab 'Fornecedores' do
-      expect(page).to have_field 'Fornecedor', :with => 'Wenderson Malheiros'
+      within_records do
+        within '.nested-record:first' do
+          expect(page).to have_content 'Wenderson Malheiros'
+          expect(page).to have_content 'wenderson.malheiros@gmail.com'
+        end
+      end
 
-      click_button 'Remover'
+      click_link 'Remover'
 
-      click_on 'Adicionar Fornecedor'
+      click_button 'Adicionar'
 
-      fill_modal 'Fornecedor', :with => 'José Gomes'
-
-      expect(page).to_not have_disabled_field 'Email'
-      fill_in 'Email', :with => 'contato@sobrinho.com'
+      expect(page).to_not have_css '.nested-record'
     end
 
     click_button 'Salvar'
@@ -288,8 +297,6 @@ feature "PriceCollections" do
 
     within_tab 'Fornecedores' do
       expect(page).to_not have_field 'Fornecedor', :with => 'Wenderson Malheiros'
-      expect(page).to have_field 'Fornecedor', :with => 'José Gomes'
-      expect(page).to have_field 'E-mail', :with => 'contato@sobrinho.com'
     end
   end
 
@@ -890,61 +897,11 @@ feature "PriceCollections" do
     click_link 'Criar Coleta de Preços'
 
     within_tab 'Fornecedores' do
-      click_button 'Adicionar Fornecedor'
-
-      fill_modal 'Fornecedor', :with => 'Wenderson Malheiros'
+      fill_with_autocomplete 'Fornecedor', :with => 'Wenderson Malheiros'
 
       expect(page).to have_disabled_field 'Email'
       expect(page).to have_field 'Email', :with => 'wenderson.malheiros@gmail.com'
     end
-  end
-
-  scenario 'can not edit any data from a annulled price collection' do
-    PriceCollectionAnnul.make!(:coleta_anulada)
-
-    navigate 'Processos de Compra > Coletas de Preços'
-
-    click_link "Limpar Filtro"
-
-    click_link '1/2012'
-
-    within_tab 'Principal' do
-      expect(page).to have_disabled_field 'Ano'
-      expect(page).to have_disabled_field 'Data'
-      expect(page).to have_disabled_field 'Status'
-      expect(page).to have_disabled_field 'Tipo de apuração'
-      expect(page).to have_disabled_field 'Local de entrega'
-      expect(page).to have_disabled_field 'Responsável'
-      expect(page).to have_disabled_field 'Forma de pagamento'
-      expect(page).to have_disabled_field 'Prazo de entrega'
-      expect(page).to have_disabled_field 'Vencimento'
-      expect(page).to have_disabled_field 'Período do prazo de entrega'
-      expect(page).to have_disabled_field 'Validade da proposta'
-      expect(page).to have_disabled_field 'Período da validade da proposta'
-      expect(page).to have_disabled_field 'Objeto'
-      expect(page).to have_disabled_field 'Observações'
-    end
-
-    within_tab 'Lotes de itens' do
-      expect(page).to have_disabled_field 'Observações'
-      expect(page).to have_disabled_field 'Material'
-      expect(page).to have_disabled_field 'Marca'
-      expect(page).to have_disabled_field 'Unidade'
-      expect(page).to have_disabled_field 'Quantidade'
-    end
-    expect(page).to have_disabled_element 'Remover Item', :reason => 'não é permitido alterar coleta anulada'
-    expect(page).to have_disabled_element 'Adicionar Item', :reason => 'não é permitido alterar coleta anulada'
-    expect(page).to have_disabled_element 'Remover Lote', :reason => 'não é permitido alterar coleta anulada'
-    expect(page).to have_disabled_element 'Adicionar Lote', :reason => 'não é permitido alterar coleta anulada'
-
-    within_tab 'Fornecedores' do
-      expect(page).to have_disabled_field 'Fornecedor'
-      expect(page).to have_disabled_field 'E-mail'
-    end
-    expect(page).to have_disabled_element 'Adicionar Fornecedor', :reason => 'não é permitido alterar coleta anulada'
-    expect(page).to have_disabled_element 'Remover Fornecedor', :reason => 'não é permitido alterar coleta anulada'
-
-    expect(page).to have_disabled_element 'Salvar', :reason => 'não é permitido alterar coleta anulada'
   end
 
   scenario 'opening the filter modal' do
@@ -1003,7 +960,7 @@ feature "PriceCollections" do
                                               :reason => 'para inserir uma proposta, deve-se cadastrar ao menos um fornecedor'
 
     within_tab 'Fornecedores' do
-      click_button 'Remover Fornecedor'
+      click_link 'Remover'
     end
 
     click_button 'Salvar'
