@@ -24,9 +24,17 @@ describe PurchaseProcessAccreditationCreditor do
 
   describe "validations" do
     it { should validate_presence_of :creditor }
-    it { should validate_presence_of :company_size }
     it { should validate_presence_of :purchase_process_accreditation }
     it { should_not validate_presence_of :kind}
+    it { should_not validate_presence_of :company_size }
+
+    context 'when is a company' do
+      before do
+        subject.stub(:creditor_company?).and_return(true)
+      end
+
+      it { should validate_presence_of :company_size }
+    end
 
     context 'with creditor_representative' do
       let(:creditor_representative) { double(:creditor_representative) }
@@ -36,7 +44,7 @@ describe PurchaseProcessAccreditationCreditor do
         subject.stub(:creditor_representative => creditor_representative)
       end
 
-      it { should validate_presence_of :kind}
+      it { should validate_presence_of :kind }
     end
   end
 end
