@@ -1,0 +1,52 @@
+<h3 id="item_title"></h3>
+
+<div id="errors_dialog" title="O formulário contém erros" class="simple_form">
+  <p>Foram encontrados os seguintes erros no formulário:</p>
+
+  <ul id="errors_content"></ul>
+
+  <%= mustache 'error_template' do %>
+    <li class="error">{{error}}</li>
+  <% end %>
+
+  <div class="buttons">
+    <%= button_tag 'Ok', id: 'close_error_dialog', class: 'button' %>
+  </div>
+</div>
+
+<div class="yui3-g">
+  <%= hidden_field_tag :item_id, @item.id %>
+  <%= hidden_field_tag :bid_id, @next_bid.try(:id) %>
+  <%= hidden_field_tag :lot, @next_bid.try(:lot) %>
+
+  <div class="yui3-u-1-12 input">
+    <%= label_tag :round, PurchaseProcessTradingBid.human_attribute_name(:round) %>
+
+    <%= text_field_tag :round, @next_bid.try(:round), disabled: true, class: 'string' %>
+  </div>
+
+  <div class="yui3-u-11-24 input">
+    <%= label_tag :accreditation_creditor,
+      PurchaseProcessTradingBid.human_attribute_name(:accreditation_creditor) %>
+
+      <%= text_field_tag :accreditation_creditor, @next_bid.try(:accreditation_creditor),
+        disabled: true, class: 'string' %>
+
+    <%= hidden_field_tag :accreditation_creditor_id, @next_bid.try(:purchase_process_accreditation_creditor_id) %>
+  </div>
+
+  <div class="yui3-u-1-6 input">
+    <%= label_tag :amount, PurchaseProcessTradingBid.human_attribute_name(:amount) %>
+
+    <%= text_field_tag :amount, '0,00', class: 'string decimal',
+      'data-decimal' => true, disabled: @next_bid.blank? %>
+  </div>
+
+  <div class="yui3-u-1-7 field-without-label">
+    <%= button_tag 'Gravar lance', class: 'button primary', id: 'make_bid', 'data-disabled' => make_bid_disabled_message(@next_bid) %>
+  </div>
+
+  <div class="yui3-u-1-7 field-without-label">
+    <%= button_tag 'Desfazer', class: 'button', id: 'undo_bid', 'data-disabled' => undo_bid_disabled_message(@historic) %>
+  </div>
+</div>

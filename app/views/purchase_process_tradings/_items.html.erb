@@ -1,0 +1,18 @@
+<tr>
+  <td>
+    <% if index == 0 %>
+      <input class="item_chooser" type="radio" value="true" name="item_chooser" checked="checked">
+    <% else %>
+      <input class="item_chooser" type="radio" value="true" name="item_chooser">
+    <% end %>
+  </td>
+
+  <td class="lot"><%= item.lot %></td>
+  <td class="item" data-id="<%= item.id %>"><%= item %></td>
+  <td class="bid_amount"><%= item.decorator.lowest_bid_amount %></td>
+  <td class="bid_creditor"><%= item.decorator.lowest_bid_creditor %></td>
+  <td><%= item.decorator.lowest_proposal_amount %></td>
+  <td><%= item.decorator.lowest_proposal_creditor %></td>
+  <td>Status</td>
+  <td>Histórico</td>
+</tr>

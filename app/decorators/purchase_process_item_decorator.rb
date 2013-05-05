@@ -22,4 +22,28 @@ class PurchaseProcessItemDecorator
   def quantity
     number_with_precision super if super
   end
+
+  def lowest_bid_amount
+    return '-' unless lowest_trading_bid.present?
+
+    number_with_precision lowest_trading_bid.amount
+  end
+
+  def lowest_bid_creditor
+    return '-' unless lowest_trading_bid.present?
+
+    lowest_trading_bid.accreditation_creditor
+  end
+
+  def lowest_proposal_amount
+    return '-' unless trading_lowest_proposal
+
+    number_with_precision trading_lowest_proposal.unit_price
+  end
+
+  def lowest_proposal_creditor
+    return '-' unless trading_lowest_proposal
+
+    trading_lowest_proposal.creditor
+  end
 end

@@ -47,4 +47,12 @@ describe PurchaseProcessAccreditationCreditor do
       it { should validate_presence_of :kind }
     end
   end
+
+  describe 'to_s' do
+    it 'should return the to_s of creditor' do
+      subject.stub(creditor: double(:creditor, to_s: 'creditor 1'))
+
+      expect(subject.to_s).to eq 'creditor 1'
+    end
+  end
 end

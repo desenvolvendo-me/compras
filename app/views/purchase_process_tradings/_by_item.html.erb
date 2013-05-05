@@ -1,0 +1,19 @@
+<table id="items" class="records">
+  <thead>
+    <th></th>
+    <th>Lote</th>
+    <th>Item</th>
+    <th>Melhor Lance</th>
+    <th>Fornecedor Lance</th>
+    <th>Melhor Proposta</th>
+    <th>Fornecedor Proposta</th>
+    <th>Status</th>
+    <th>Histórico</th>
+  </thead>
+
+  <tbody>
+    <% resource.items.each_with_index do |item, index| %>
+      <%= render 'items', item: item, index: index %>
+    <% end %>
+  </tbody>
+</table>

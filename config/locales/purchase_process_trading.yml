@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      purchase_process_trading:
+        one: "Pregão Presencial"
+        other: "Pregões Presenciais"
+
+  purchase_process_trading:
+    messages:
+      make_bid_disabled_message: "todos os lances já foram efetuados"
+      undo_bid_disabled_message: "não há lance para ser desfeito"

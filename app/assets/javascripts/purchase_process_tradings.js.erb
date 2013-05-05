@@ -1,0 +1,231 @@
+<%# encoding: utf-8 %>
+$(document).ready(function() {
+  $('input.item_chooser:first').attr('checked', true);
+
+  function allowNewBid(allowed) {
+    if (allowed) {
+      $('button#make_bid').removeAttr('data-disabled');
+      $('#amount').attr('disabled', false);
+    } else {
+      $('button#make_bid').attr('data-disabled', '');
+      $('button#make_bid').data('disabled', "<%= I18n.t 'purchase_process_trading.messages.make_bid_disabled_message' %>");
+      $('#amount').attr('disabled', true);
+    }
+  }
+
+  function allowUndoBid(allowed) {
+    if (allowed) {
+      $('button#undo_bid').removeAttr('data-disabled');
+    } else {
+      $('button#undo_bid').attr('data-disabled', '');
+      $('button#undo_bid').data('disabled', "<%= I18n.t 'purchase_process_trading.messages.undo_bid_disabled_message' %>");
+    }
+  }
+
+  function fillForm(bid) {
+    $('#amount').val('0,00');
+
+    if (_.isEmpty(bid)) {
+      $('#bid_id').val('');
+      $('#accreditation_creditor').val('');
+      $('#accresitation_creditor_id').val('');
+      $('#lot').val('');
+      $('#round').val('');
+
+      allowNewBid(false);
+    } else {
+      $('#bid_id').val(bid.id);
+      $('#accreditation_creditor').val(bid.accreditation_creditor);
+      $('#accreditation_creditor_id').val(bid.accreditation_creditor_id);
+      $('#lot').val(bid.lot);
+      $('#round').val(bid.round);
+
+      allowNewBid(true);
+    }
+  }
+
+  function fillLowestBid(lowest_bid) {
+    var itemChecked = $('input.item_chooser:checked'),
+        bidAmount = itemChecked.closest('tr').find('td.bid_amount'),
+        bidCreditor = itemChecked.closest('tr').find('td.bid_creditor');
+
+    if ( _.isEmpty(lowest_bid) ) {
+      lowest_bid.amount = '-';
+      lowest_bid.creditor = '-';
+    }
+
+    bidCreditor.text(lowest_bid.creditor);
+    bidAmount.text(lowest_bid.amount);
+  }
+
+  function getNextBidFromServer() {
+    var itemId = $('#item_id').val(),
+        oldUrl = $('#next_bid_url').val(),
+        newUrl = oldUrl.replace(/\/\d+\//, '/' + itemId + '/');
+
+    $.ajax({
+      url: newUrl,
+      cache: false,
+      dataType: 'json',
+      success: function(data) {
+        fillForm(data.next_bid);
+        fillHistoric(data.historic);
+        fillLowestBid(data.lowest_bid);
+      }
+    });
+  }
+
+  function processPersistErrors(errors) {
+    var template     = $('#error_template'),
+        error_dialog = $('#errors_dialog'),
+        target       = error_dialog.find('#errors_content');
+
+    target.empty();
+
+    _.each(errors, function(error) {
+      target.append( template.mustache({ error: error }) );
+    });
+
+
+    error_dialog.dialog('open');
+  }
+
+  function addBidToHistoric(bid, append) {
+    var target   = $('table#historic tbody'),
+        template = $('#historic_template'),
+        content  = template.mustache(bid);
+
+    if (append) {
+      target.append( content );
+    } else {
+      target.prepend( content );
+    }
+  }
+
+  function fillHistoric(historic) {
+    $('table#historic tbody').empty();
+
+    if ( _.isEmpty(historic) ) {
+      allowUndoBid(false);
+    } else {
+      allowUndoBid(true);
+    }
+
+    _.each(historic, function(bid) {
+      addBidToHistoric(bid, true);
+    });
+  }
+
+  function persistBid(bidId) {
+    var url = $('#persist_bid_url').val(),
+        currentBid = {
+          id: bidId,
+          _method: 'put',
+          purchase_process_trading_bid: {
+            amount: $('#amount').val()
+          }
+        };
+
+    $.ajax({
+      url: url + bidId,
+      data: currentBid,
+      dataType: 'json',
+      type: 'POST',
+      success: function() {
+        getNextBidFromServer();
+        allowUndoBid(true);
+      },
+      error: function(xhr) {
+        var errors = $.parseJSON(xhr.responseText).errors;
+
+        processPersistErrors(errors);
+      }
+    });
+  }
+
+  function fillCreditors(creditors) {
+    var target = $('table#accreditation_creditors tbody'),
+        template = $('#accreditation_creditors_template');
+
+    target.empty();
+
+    _.each(creditors, function(creditor) {
+      target.append( template.mustache(creditor));
+    });
+  }
+
+  function getCreditors(itemId) {
+    var oldUrl = $('#creditor_list').val(),
+        newUrl = oldUrl.replace(/\/\d+\//, '/' + itemId + '/');
+
+    $.ajax({
+      url: newUrl,
+      cache: false,
+      dataType: 'json',
+      type: 'GET',
+      success: function(creditors) {
+        fillCreditors(creditors);
+      }
+    });
+  }
+
+  function undoLastBid(itemId) {
+    var oldUrl = $('#undo_last_bid_url').val(),
+        newUrl = oldUrl.replace(/\/\d+\//, '/' + itemId + '/');
+
+    $.ajax({
+      url: newUrl,
+      dataType: 'json',
+      type: 'POST',
+      success: function(data) {
+        fillForm(data.next_bid);
+        fillHistoric(data.historic);
+        fillLowestBid(data.lowest_bid);
+
+        allowNewBid(true);
+      }
+    });
+  }
+
+  $('button#make_bid').on('click', function(event) {
+    event.preventDefault();
+
+    var bidId = $('#bid_id').val(),
+        dataDisabled = _($(this).attr('data-disabled'));
+
+    if ( dataDisabled.isEmpty() && bidId) {
+      persistBid(bidId);
+    }
+  });
+
+  $('button#undo_bid').on('click', function(event) {
+    event.preventDefault();
+
+    var itemId = $('#item_id').val(),
+        dataDisabled = _($(this).attr('data-disabled'));
+
+    if ( dataDisabled.isEmpty() && itemId) {
+      undoLastBid(itemId);
+    }
+  });
+
+  $('.item_chooser').on('change', function() {
+    var itemId = $(this).closest('td').siblings('td.item').data('id');
+
+    $('#item_id').val(itemId);
+
+    getNextBidFromServer();
+    getCreditors(itemId);
+  });
+
+  $('#errors_dialog').dialog({
+    autoOpen: false,
+    modal: true,
+    resizable: false,
+    width: 500
+  });
+
+  $('#close_error_dialog').on('click', function() {
+    $('#errors_dialog').dialog('close');
+  });
+});

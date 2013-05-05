@@ -10,6 +10,9 @@ permissions:
     occurrence_contractual_historics: contracts
     price_collection_proposals: price_collections
     purchase_process_accreditations: licitation_processes
+    purchase_process_item_tradings: licitation_processes
+    purchase_process_tradings: licitation_processes
+    purchase_process_trading_bids: licitation_processes
     purchase_solicitation_liberations: purchase_solicitations
     registration_cadastral_certificates: creditors
     trading_closings: tradings

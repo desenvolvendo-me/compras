@@ -1,5 +1,5 @@
 class TradingCreator
-  def initialize(purchase_process, trading_repository = Trading)
+  def initialize(purchase_process, trading_repository = PurchaseProcessTrading)
     @purchase_process   = purchase_process
     @trading_repository = trading_repository
   end
@@ -11,9 +11,7 @@ class TradingCreator
   def create
     return unless allow_create_trading?
 
-    @trading_repository.create(
-      year: Date.current.year,
-      licitation_process_id: @purchase_process.id)
+    @trading_repository.create!(purchase_process_id: @purchase_process.id)
   end
 
   private

@@ -90,6 +90,7 @@ module Compras
       'purchase_process_creditor_disqualifications.js',
       'purchase_process_item_creditor_proposals.js',
       'purchase_process_lot_creditor_proposals.js',
+      'purchase_process_tradings.js',
       'purchase_solicitations.js',
       'trading_item_bid.js'
     ]

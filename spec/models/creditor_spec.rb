@@ -195,4 +195,20 @@ describe Creditor do
       expect(subject.errors.messages[:representatives]).to be_nil
     end
   end
+
+  describe '#proposal_by_item' do
+    let(:item) { double(:item, id: 5) }
+    let(:purchase_process_creditor_proposals) { double(:purchase_process_creditor_proposals) }
+
+    it 'should return the proposal for a given item' do
+      subject.stub(purchase_process_creditor_proposals: purchase_process_creditor_proposals)
+
+      purchase_process_creditor_proposals.
+        should_receive(:by_item_id).
+        with(5).
+        and_return(['proposal'])
+
+      expect(subject.proposal_by_item(item)).to eq 'proposal'
+    end
+  end
 end

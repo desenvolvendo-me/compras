@@ -84,3 +84,4 @@ pt-BR:
       no_one_publication_with_valid_type: "a última publicação é do tipo (%{publication_of}). Não pode ser alterado"
       proposal_envelope_opening_date_greater_than_calendar_days: "deve ser a partir de %{limit}. Refente a %{days} dias maior que a data da publicação mais recente (%{publication})"
       proposal_envelope_opening_date_greater_than_working_days: "deve ser a partir de %{limit}. Refente a %{days} dias úteis maior que a data da publicação mais recente (%{publication})"
+      disabled_trading_message: "todas as propostas devem ser preenchidas"
