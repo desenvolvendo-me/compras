@@ -11,10 +11,6 @@ class PurchaseProcessAccreditationDecorator
     end
   end
 
-  def accreditation_path(routes)
-    persisted? ? routes.purchase_process_accreditation_path(component) : '#'
-  end
-
   def company_sizes(company_size_repository = CompanySize)
     company_size_repository.all
   end

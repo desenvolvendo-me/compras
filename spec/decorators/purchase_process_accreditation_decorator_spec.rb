@@ -23,29 +23,6 @@ describe PurchaseProcessAccreditationDecorator do
     end
   end
 
-  describe '#accreditation_path' do
-    let(:routes) { double(:routes) }
-
-    context 'when is persisted' do
-      before { component.stub(:persisted? => true, :component => double(:id => 1)) }
-
-      it 'should return accreditation_path' do
-        routes.stub(:purchase_process_accreditation_path).with(component).
-        and_return('purchase_process_accreditation_path')
-
-        expect(subject.accreditation_path(routes)).to eq 'purchase_process_accreditation_path'
-      end
-    end
-
-    context 'when is not persisted' do
-      before { component.stub(:persisted? => false) }
-
-      it 'should return #' do
-        expect(subject.accreditation_path(routes)).to eq '#'
-      end
-    end
-  end
-
   describe '#company_sizes' do
     let(:company_size_repository) { double(:company_size_class) }
 
