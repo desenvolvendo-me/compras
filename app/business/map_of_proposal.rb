@@ -21,7 +21,7 @@ class MapOfProposal
   def draw?
     if proposal == lowest_proposal
       proposals_with_lowest_unit_price.count > 1
-    elsif proposal.creditor.benefited && !lowest_proposal.creditor.benefited
+    elsif proposal.creditor_benefited && !lowest_proposal.creditor_benefited
       value_lowest_proposal_with_margin >= proposal.unit_price
     else
       value_lowest_proposal == proposal.unit_price && lowest_proposal != proposal

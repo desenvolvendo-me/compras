@@ -2,9 +2,7 @@ require 'unit_helper'
 require 'app/business/map_of_proposal'
 
 describe MapOfProposal do
-  let(:purchase_process) do
-    double('LicitationProcess', id: 1)
-  end
+  let(:purchase_process) { double('LicitationProcess', id: 1) }
 
   let :bidder_one do
     double('Bidder', id: 11, benefited: false, status: :enabled)
