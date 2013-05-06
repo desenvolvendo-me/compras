@@ -35,22 +35,6 @@ class LicitationProcessDecorator
     end
   end
 
-  def edit_path(routes)
-    if trading? && trading.present?
-      routes.edit_trading_path(component.trading)
-    else
-      routes.edit_licitation_process_path(component)
-    end
-  end
-
-  def edit_link
-    if trading? && trading.present?
-      'Voltar ao pregão presencial'
-    else
-      'Voltar ao processo de compra'
-    end
-  end
-
   def not_updatable_message
     return if updatable?
 
