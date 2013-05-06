@@ -3,7 +3,7 @@ class MapOfProposalSearcher
   repository PurchaseProcessCreditorProposal
 
   def licitation_process(id)
-    joins { licitation_process }.where { licitation_process.id.eq id}
+    joins { licitation_process }.where { licitation_process.id.eq id }
   end
 
   def order(order)

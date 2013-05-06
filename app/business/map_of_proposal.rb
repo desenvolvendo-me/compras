@@ -19,11 +19,12 @@ class MapOfProposal
   end
 
   def draw?
-    if proposal.creditor.benefited
+    if proposal == lowest_proposal
+      proposals_with_lowest_unit_price.count > 1
+    elsif proposal.creditor.benefited && !lowest_proposal.creditor.benefited
       value_lowest_proposal_with_margin >= proposal.unit_price
     else
-      proposal_unit_price = proposal.unit_price
-      other_proposals.where { unit_price.eq(proposal_unit_price) }.any?
+      value_lowest_proposal == proposal.unit_price && lowest_proposal != proposal
     end
   end
 
@@ -57,10 +58,6 @@ class MapOfProposal
     return unless lowest_proposal
 
     lowest_proposal.unit_price
-  end
-
-  def proposals_with_same_unit_price
-    proposal_repository.where { item}
   end
 
   def value_lowest_proposal_with_margin

@@ -1,5 +1,6 @@
 class MapOfProposalReport < ActiveRelatus::Base
   extend EnumerateIt
+  include Decore::Infection
 
   attr_accessor :order, :licitation_process_id
 
@@ -13,6 +14,14 @@ class MapOfProposalReport < ActiveRelatus::Base
 
   def item_creditor_proposals(item)
     records.where { purchase_process_item_id.eq item.id }
+  end
+
+  def average_unit_price_item(item)
+    item_creditor_proposals(item).sum(:unit_price) / item_creditor_proposals(item).count
+  end
+
+  def average_total_price_item(item)
+    average_unit_price_item(item) * item.quantity
   end
 
   protected

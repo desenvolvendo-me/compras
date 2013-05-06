@@ -32,6 +32,9 @@ describe PurchaseProcessCreditorProposal do
   it { should delegate(:quantity).to(:item).allowing_nil(true).prefix(true) }
   it { should delegate(:reference_unit).to(:item).allowing_nil(true).prefix(true) }
   it { should delegate(:material).to(:item).allowing_nil(true).prefix(true) }
+  it { should delegate(:name).to(:creditor).allowing_nil(true).prefix(true) }
+  it { should delegate(:cnpj).to(:creditor).allowing_nil(true).prefix(true) }
+  it { should delegate(:benefited).to(:creditor).allowing_nil(true).prefix(true) }
 
   describe '#total_price' do
     it 'multiplies the unit_price with the item quantity' do

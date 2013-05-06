@@ -32,6 +32,20 @@ describe PurchaseProcessCreditorProposalDecorator do
     end
   end
 
+  describe "#unit_price_with_currency" do
+    it 'return with currency unit_price' do
+      component.stub(:unit_price).and_return 1050.30
+      expect(subject.unit_price_with_currency).to eql "R$ 1.050,30"
+    end
+  end
+
+  describe "#total_price_with_currency" do
+    it 'return with currency total_price' do
+      component.stub(:total_price).and_return 10500.30
+      expect(subject.total_price_with_currency).to eql "R$ 10.500,30"
+    end
+  end
+
   describe '#css_class' do
     let :proposal do
       double('PurchaseProcessCreditorProposal', :id => 1)

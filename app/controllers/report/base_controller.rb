@@ -6,7 +6,7 @@ class Report::BaseController < ApplicationController
   before_filter :authorize_resource!
 
   def index
-    redirect_to :controller => controller_name, :action => :new
+    redirect_to controller: controller_name, action: :new
   end
 
   def new
@@ -16,7 +16,7 @@ class Report::BaseController < ApplicationController
   def show
     @report = report_instance
     if @report.valid?
-      render :layout => 'report'
+      render layout: 'report'
     else
       render :new
     end

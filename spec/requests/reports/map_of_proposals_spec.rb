@@ -35,16 +35,24 @@ feature 'Report::MapOfProposals' do
         expect(page).to have_content '2'
       end
 
-      within 'tr.winner' do
-        expect(page).to have_content '- Gabriel Sobrinho'
-        expect(page).to have_content 'R$ 2,99'
-        expect(page).to have_content 'R$ 5,98'
-      end
+      within 'tbody' do
+        within 'tr.winner' do
+          expect(page).to have_content '- Gabriel Sobrinho'
+          expect(page).to have_content 'R$ 2,99'
+          expect(page).to have_content 'R$ 5,98'
+        end
 
-      within 'tr.lost' do
-        expect(page).to have_content 'Wenderson Malheiros'
-        expect(page).to have_content 'R$ 4,99'
-        expect(page).to have_content 'R$ 9,98'
+        within 'tr.lost' do
+          expect(page).to have_content 'Wenderson Malheiros'
+          expect(page).to have_content 'R$ 4,99'
+          expect(page).to have_content 'R$ 9,98'
+        end
+
+        within 'tr:last' do
+          expect(page).to have_content 'Preço Médio'
+          expect(page).to have_content 'R$ 3,99'
+          expect(page).to have_content 'R$ 7,98'
+        end
       end
     end
 
@@ -55,16 +63,24 @@ feature 'Report::MapOfProposals' do
         expect(page).to have_content '1'
       end
 
-      within '.gabriel-sobrinho' do
-        expect(page).to have_content '- Gabriel Sobrinho'
-        expect(page).to have_content 'R$ 4,99'
-        expect(page).to have_content 'R$ 4,99'
-      end
+      within 'tbody' do
+        within '.gabriel-sobrinho.draw' do
+          expect(page).to have_content '- Gabriel Sobrinho'
+          expect(page).to have_content 'R$ 4,99'
+          expect(page).to have_content 'R$ 4,99'
+        end
 
-      within '.wenderson-malheiros' do
-        expect(page).to have_content 'Wenderson Malheiros'
-        expect(page).to have_content 'R$ 4,99'
-        expect(page).to have_content 'R$ 4,99'
+        within '.wenderson-malheiros.draw' do
+          expect(page).to have_content 'Wenderson Malheiros'
+          expect(page).to have_content 'R$ 4,99'
+          expect(page).to have_content 'R$ 4,99'
+        end
+
+        within 'tr:last' do
+          expect(page).to have_content 'Preço Médio'
+          expect(page).to have_content 'R$ 4,99'
+          expect(page).to have_content 'R$ 4,99'
+        end
       end
     end
   end
@@ -180,76 +196,13 @@ feature 'Report::MapOfProposals' do
         expect(page).to have_content '1'
       end
 
-      within '.gabriel-sobrinho' do
+      within '.gabriel-sobrinho.draw' do
         expect(page).to have_content '- Gabriel Sobrinho'
         expect(page).to have_content 'R$ 4,99'
         expect(page).to have_content 'R$ 4,99'
       end
 
-      within '.wenderson-malheiros' do
-        expect(page).to have_content 'Wenderson Malheiros'
-        expect(page).to have_content 'R$ 4,99'
-        expect(page).to have_content 'R$ 4,99'
-      end
-    end
-  end
-
-  scenario 'should colors when proposal is winner' do
-    make_dependencies!
-
-    navigate 'Processos de Compra > Processos de Compras'
-
-    click_link "Limpar Filtro"
-
-    within_records do
-      click_link '1/2012'
-    end
-
-    click_link 'Propostas'
-    click_link 'Mapa de Propostas'
-
-    select 'Valor crescente', :from => 'Ordem'
-
-    click_button 'Gerar Mapa de Proposta'
-
-    expect(page).to have_content 'Belo Horizonte'
-    expect(page).to have_content 'Mapa Comparativo de Preços'
-    expect(page).to have_content '1/2012 - Pregão 1'
-
-    within '.antivirus' do
-      within 'thead' do
-        expect(page).to have_content '01.01.00001 - Antivirus'
-        expect(page).to have_content 'Quantidade'
-        expect(page).to have_content '2'
-      end
-
-      within 'tr.winner' do
-        expect(page).to have_content '- Gabriel Sobrinho'
-        expect(page).to have_content 'R$ 2,99'
-        expect(page).to have_content 'R$ 5,98'
-      end
-
-      within 'tr.lost' do
-        expect(page).to have_content 'Wenderson Malheiros'
-        expect(page).to have_content 'R$ 4,99'
-        expect(page).to have_content 'R$ 9,98'
-      end
-    end
-
-    within '.arame-comum' do
-      within 'thead' do
-        expect(page).to have_content '02.02.00002 - Arame comum'
-        expect(page).to have_content 'Quantidade'
-        expect(page).to have_content '1'
-      end
-
-      within '.gabriel-sobrinho' do
-        expect(page).to have_content '- Gabriel Sobrinho'
-        expect(page).to have_content 'R$ 4,99'
-        expect(page).to have_content 'R$ 4,99'
-      end
-
-      within '.wenderson-malheiros' do
+      within '.wenderson-malheiros.draw' do
         expect(page).to have_content 'Wenderson Malheiros'
         expect(page).to have_content 'R$ 4,99'
         expect(page).to have_content 'R$ 4,99'

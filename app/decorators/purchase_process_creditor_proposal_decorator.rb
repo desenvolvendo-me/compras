@@ -29,8 +29,8 @@ class PurchaseProcessCreditorProposalDecorator
   end
 
   def css_class(proposal, map_of_proposal = MapOfProposal)
-    return "winner" if map_of_proposal.lowest_proposal?(proposal)
     return "draw" if map_of_proposal.draw?(proposal)
+    return "winner" if map_of_proposal.lowest_proposal?(proposal)
 
     "lost"
   end
