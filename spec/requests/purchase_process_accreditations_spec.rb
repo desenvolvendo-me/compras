@@ -85,7 +85,7 @@ feature "PurchaseProcessAccreditation" do
     select 'Joao da Silva', :from => 'Representante'
     select 'Legal', :from => 'Tipo'
 
-    check 'Possui procuração?'
+    check 'Procurador'
 
     click_button 'Adicionar'
 
