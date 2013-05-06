@@ -47,7 +47,7 @@ class PurchaseSolicitation < Compras::Model
   validate :validate_budget_structure_and_materials
   validate :validate_liberated_status
 
-  orderize :request_date
+  orderize "id DESC"
   filterize
 
   scope :by_material_id, lambda { |material_id|
