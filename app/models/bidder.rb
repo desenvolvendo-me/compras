@@ -19,12 +19,9 @@ class Bidder < Compras::Model
   has_many :people, :through => :accredited_representatives
   has_many :licitation_process_classifications, :dependent => :destroy
   has_many :licitation_process_classifications_by_classifiable, :as => :classifiable, :dependent => :destroy, :class_name => 'LicitationProcessClassification'
-  has_many :trading_item_bids, :dependent => :restrict
   has_many :licitation_process_ratifications, :dependent => :restrict
-  has_many :trading_item_closings, :dependent => :restrict
   has_many :items, :through => :licitation_process
 
-  has_one :disqualification, :dependent => :destroy, :class_name => 'BidderDisqualification'
   has_one :judgment_form, :through => :licitation_process
 
   delegate :document_type_ids, :process_date, :ratification?, :has_trading?,
@@ -75,30 +72,6 @@ class Bidder < Compras::Model
     where { 'compras_extended_company_sizes.benefited = true' }
   end
 
-  def self.with_negotiation_proposal_for(trading_item_id)
-    enabled.
-    joins { trading_item_bids }.
-    where {
-      trading_item_bids.stage.eq(TradingItemBidStage::NEGOTIATION) &
-      trading_item_bids.trading_item_id.eq(trading_item_id)
-    }
-  end
-
-  def self.eligible_for_negotiation_stage(value)
-    enabled.
-    joins { trading_item_bids.trading_item }.
-    where {
-      (trading_item_bids.status.eq(TradingItemBidStatus::WITH_PROPOSAL) &
-       trading_item_bids.stage.eq(TradingItemBidStage::ROUND_OF_BIDS) &
-       trading_item_bids.amount.lteq(value)) |
-
-      (trading_item_bids.status.eq(TradingItemBidStatus::WITH_PROPOSAL) &
-       trading_item_bids.stage.eq(TradingItemBidStage::PROPOSALS) &
-       trading_item_bids.amount.gt(value) &
-       trading_item_bids.trading_item.proposals_activated_at.not_eq(nil))
-    }.uniq
-  end
-
   def self.won_calculation
     joins { licitation_process_classifications }.
     where { licitation_process_classifications.situation.eq(SituationOfProposal::WON) }
@@ -107,98 +80,6 @@ class Bidder < Compras::Model
   def self.without_ratification
     joins { licitation_process_ratifications.outer }.
     where { licitation_process_ratifications.id.eq(nil) }
-  end
-
-  def self.with_no_proposal_for_trading_item(trading_item_id)
-    joins { trading_item_bids }.
-    where {
-      trading_item_bids.status.not_eq(TradingItemBidStatus::WITH_PROPOSAL) &
-      trading_item_bids.trading_item_id.eq(trading_item_id)
-    }.uniq
-  end
-
-  def self.with_proposal_for_trading_item(trading_item_id)
-    joins { trading_item_bids }.
-    where {
-      trading_item_bids.status.eq(TradingItemBidStatus::WITH_PROPOSAL) &
-      trading_item_bids.trading_item_id.eq(trading_item_id)
-    }.uniq
-  end
-
-  def self.with_proposal_for_trading_item_at_stage_of_round_of_bids(trading_item_id)
-    joins { trading_item_bids }.
-    where {
-      trading_item_bids.status.eq(TradingItemBidStatus::WITH_PROPOSAL) &
-      trading_item_bids.stage.eq(TradingItemBidStage::ROUND_OF_BIDS) &
-      trading_item_bids.trading_item_id.eq(trading_item_id)
-    }.uniq
-  end
-
-  def self.with_proposal_for_trading_item_at_stage_of_negotiation(trading_item_id)
-    joins { trading_item_bids }.
-    where {
-      trading_item_bids.status.eq(TradingItemBidStatus::WITH_PROPOSAL) &
-      trading_item_bids.stage.eq(TradingItemBidStage::NEGOTIATION) &
-      trading_item_bids.trading_item_id.eq(trading_item_id)
-    }.uniq
-  end
-
-  def self.with_proposal_for_trading_item_round(round)
-    joins { trading_item_bids }.
-    where {
-      trading_item_bids.status.eq(TradingItemBidStatus::WITH_PROPOSAL) &
-      trading_item_bids.round.eq(round)
-    }
-  end
-
-  def self.under_limit_value(trading_item_id, limit_value)
-    joins { trading_item_bids }.
-    where {
-      trading_item_bids.status.eq(TradingItemBidStatus::WITH_PROPOSAL) &
-      trading_item_bids.amount.lteq(limit_value) &
-      trading_item_bids.trading_item_id.eq(trading_item_id)
-    }
-  end
-
-  def self.enabled
-    joins { disqualification.outer }.
-    where { disqualification.id.eq(nil) }
-  end
-
-  def self.disabled
-    joins { disqualification }
-  end
-
-  def self.at_bid_round(round, trading_item_id)
-    joins { trading_item_bids }.
-    where {
-      trading_item_bids.round.eq(round) &
-      trading_item_bids.trading_item_id.eq(trading_item_id)
-    }
-  end
-
-  def self.at_round_of_bids(trading_item_id)
-    joins { trading_item_bids }.
-    where {
-      trading_item_bids.trading_item_id.eq(trading_item_id) &
-      trading_item_bids.stage.eq(TradingItemBidStage::ROUND_OF_BIDS)
-    }
-  end
-
-  def self.at_proposals(trading_item_id)
-    joins { trading_item_bids }.
-    where {
-      trading_item_bids.trading_item_id.eq(trading_item_id) &
-      trading_item_bids.stage.eq(TradingItemBidStage::PROPOSALS)
-    }
-  end
-
-  def self.ordered_by_trading_item_bid_amount(trading_item_id)
-    joins { trading_item_bids.outer }.
-    where { |bidder| bidder.trading_item_bids.trading_item_id.eq(trading_item_id) }.
-    group { id }.
-    reorder { [min(trading_item_bids.amount), id] }.
-    select('compras_bidders.*, min(compras_trading_item_bids.amount)')
   end
 
   def destroy_all_classifications
@@ -284,95 +165,7 @@ class Bidder < Compras::Model
     !filled_documents? || expired_documents?
   end
 
-  def lower_trading_item_bid_amount(trading_item)
-    lower_trading_item_bid(trading_item).try(:amount) || BigDecimal(0)
-  end
-
-  def lower_trading_item_bid_amount_at_stage_of_proposals(trading_item)
-    lower_trading_item_bid_at_stage_of_proposals(trading_item).try(:amount) || BigDecimal(0)
-  end
-
-  def lower_trading_item_bid_amount_at_stage_of_round_of_bids(trading_item)
-    lower_trading_item_bid_at_stage_of_round_of_bids(trading_item).try(:amount) || BigDecimal(0)
-  end
-
-  def lower_trading_item_bid_amount_at_stage_of_negotiation(trading_item)
-    lower_trading_item_bid_at_stage_of_negotiation(trading_item).try(:amount) || BigDecimal(0)
-  end
-
-  def trading_item_classification_percent(trading_item)
-    return unless lower_trading_item_bid(trading_item)
-
-    if trading_item.lowest_proposal_amount == lower_trading_item_bid_amount(trading_item)
-      BigDecimal(0)
-    else
-      classification_percent(trading_item.lowest_proposal_amount, lower_trading_item_bid_amount(trading_item))
-    end
-  end
-
-  def trading_item_proposal_percent(trading_item)
-    return unless lower_trading_item_bid_at_stage_of_proposals(trading_item)
-
-    if trading_item.lowest_proposal_at_stage_of_proposals_amount == lower_trading_item_bid_at_stage_of_proposals_amount(trading_item)
-      BigDecimal(0)
-    else
-      classification_percent(trading_item.lowest_proposal_at_stage_of_proposals_amount, lower_trading_item_bid_at_stage_of_proposals_amount(trading_item))
-    end
-  end
-
-  def lower_trading_item_bid(trading_item)
-    trading_item_bids.for_trading_item(trading_item.id).with_proposal.last
-  end
-
-  def last_amount_valid_for_trading_item(item)
-    trading_item_bids.for_trading_item(item.id).last_valid_proposal.amount
-  end
-
-  def last_amount_valid_for_trading_item_at_stage_of_round_of_bids(item)
-    trading_item_bids.at_stage_of_round_of_bids.for_trading_item(item.id).last_valid_proposal.try(:amount) || BigDecimal(0)
-  end
-
-  def last_amount_valid_for_trading_item_at_stage_of_negotiation(item)
-    trading_item_bids.at_stage_of_negotiation.for_trading_item(item.id).last_valid_proposal.try(:amount) || BigDecimal(0)
-  end
-
-  def last_bid(item)
-    trading_item_bids.for_trading_item(item.id).last
-  end
-
-  def disabled
-    disqualification.present?
-  end
-
-  def can_be_disabled?(trading_item)
-    (trading_item.bidder_with_lowest_proposal == self) && !benefited && negotiation_for(trading_item.id).empty?
-  end
-
-  def selected_for_trading_item?(trading_item)
-    trading_item.selected_bidders_at_proposals.include?(self)
-  end
-
   protected
-
-  def negotiation_for(trading_item_id)
-    trading_item_bids.at_stage_of_negotiation.for_trading_item(trading_item_id)
-  end
-
-  def lower_trading_item_bid_at_stage_of_proposals_amount(trading_item)
-    lower_trading_item_bid_at_stage_of_proposals(trading_item).try(:amount) || BigDecimal(0)
-  end
-
-  def lower_trading_item_bid_at_stage_of_proposals(trading_item)
-    trading_item_bids.at_stage_of_proposals.for_trading_item(trading_item.id).with_proposal.last
-  end
-
-  def lower_trading_item_bid_at_stage_of_round_of_bids(trading_item)
-    trading_item_bids.at_stage_of_round_of_bids.for_trading_item(trading_item.id).with_proposal.last
-  end
-
-  def lower_trading_item_bid_at_stage_of_negotiation(trading_item)
-    trading_item_bids.at_stage_of_negotiation.for_trading_item(trading_item.id).with_proposal.last
-  end
 
   def block_licitation_process_with_ratification
     return unless licitation_process.present?

@@ -1,7 +1,6 @@
 permissions:
   delegations:
     bidders: licitation_processes
-    bidder_disqualifications: tradings
     contract_terminations: contracts
     judgment_commission_advices: licitation_processes
     licitation_process_publications: licitation_processes
@@ -14,10 +13,4 @@ permissions:
     purchase_process_trading_bids: licitation_processes
     purchase_solicitation_liberations: purchase_solicitations
     registration_cadastral_certificates: creditors
-    trading_closings: tradings
-    trading_items: tradings
-    trading_item_bid_negotiations: tradings
-    trading_item_bid_proposals: tradings
-    trading_item_bid_round_of_bids: tradings
-    trading_item_closings: tradings
     purchase_process_creditor_disqualifications: licitation_processes

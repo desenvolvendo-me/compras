@@ -41,10 +41,6 @@ class LicitationCommission < Compras::Model
   orderize "id DESC"
   filterize
 
-  def self.can_take_part_in_trading
-    trading.not_expired.not_exonerated
-  end
-
   def self.not_expired
     where { expiration_date >= Date.current }
   end

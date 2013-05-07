@@ -67,7 +67,6 @@ pt-BR:
     street_types: "Tipos de Logradouros"
     streets: "Logradouros"
     tce_export_monthly_monitorings: "SICOM - Acompanhamento Mensal"
-    tradings: "Pregão Presencial"
     users: "Usuários"
     report_map_of_proposals: "Mapa de Propostas"
 
@@ -83,4 +82,3 @@ pt-BR:
     parameters: "Parâmetros"
     purchasing_processes: "Processos de Compra"
     regulatory_act: "Ato Regulamentador"
-    trading_configuration: "Configuração do Pregão Presencial"

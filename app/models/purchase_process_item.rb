@@ -18,7 +18,6 @@ class PurchaseProcessItem < Compras::Model
     order: :amount
   has_many :purchase_process_accreditation_creditors, through: :purchase_process_accreditation
 
-  has_one  :trading_item, :dependent => :restrict
   has_one  :purchase_process_accreditation, through: :licitation_process
 
   accepts_nested_attributes_for :creditor_proposals

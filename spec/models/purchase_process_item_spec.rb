@@ -2,7 +2,6 @@
 require 'model_helper'
 require 'app/models/purchase_process_item'
 require 'app/models/licitation_process_classification'
-require 'app/models/trading_item'
 require 'app/models/bidder_proposal'
 require 'app/models/purchase_process_creditor_proposal'
 require 'app/models/purchase_process_trading_bid'
@@ -22,7 +21,6 @@ describe PurchaseProcessItem do
   it { should have_many(:trading_bids).dependent(:restrict) }
   it { should have_many(:purchase_process_accreditation_creditors) }
 
-  it { should have_one(:trading_item).dependent(:restrict) }
   it { should have_one(:purchase_process_accreditation) }
 
   it { should delegate(:reference_unit).to(:material).allowing_nil(true) }
