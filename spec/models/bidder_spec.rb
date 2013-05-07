@@ -247,30 +247,6 @@ describe Bidder do
     expect(subject).to be_can_update_proposals
   end
 
-  context "with licitation_process" do
-    before do
-      subject.stub(:licitation_process => licitation_process)
-    end
-
-    let :licitation_process do
-      double('licitation_process', :ratification? => false, :judgment_form_best_technique? => true)
-    end
-
-    it "should not allow changes if licitation_process does not allow_bidders" do
-      licitation_process.stub(:allow_bidders?).and_return(false)
-
-      subject.valid?
-      expect(subject.errors[:licitation_process]).to include "deve ser a data da abertura do envelope do processo de compra"
-    end
-
-    it "shuld allow changes if licitation_process allow bidders" do
-      licitation_process.stub(:allow_bidders?).and_return(true)
-
-      subject.valid?
-      expect(subject.errors[:licitation_process]).to_not include "deve ser a data da abertura do envelope do processo de compra"
-    end
-  end
-
   it 'should return 0 as the total price when there are no proposals' do
     expect(subject.total_price).to eq 0
   end
