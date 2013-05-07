@@ -58,6 +58,22 @@ describe CreditorUserCreator do
   end
 
   context 'none of the users exists' do
+    let(:creditor_params) do
+      {
+        'fresh-0' => {
+          creditor_id: "1",
+          _destroy: "false",
+          email: "joao@silva.com"
+        },
+
+        'fresh-1' => {
+          creditor_id: "2",
+          _destroy: "false",
+          email: "manoel@pereira.com"
+        }
+      }
+    end
+
     before do
       creditor_1.stub(:user?).and_return false
       creditor_2.stub(:user?).and_return false
@@ -65,6 +81,9 @@ describe CreditorUserCreator do
 
     it 'generates a user for each creditor in price_collection' do
       mailer.as_null_object
+
+      subject.should_receive(:creditor_params).any_number_of_times.and_return(creditor_params)
+
       creditor_1_info.merge!(:authenticable_id => 1,
                              :authenticable_type => AuthenticableType::CREDITOR)
       creditor_2_info.merge!(:authenticable_id => 2,
@@ -79,6 +98,8 @@ describe CreditorUserCreator do
     it 'sends an email for each generated user' do
       user_repository.stub(:create!).and_return(user_1, user_2)
 
+      subject.should_receive(:creditor_params).any_number_of_times.and_return(creditor_params)
+
       mailer.should_receive(:invite_new_creditor).
              with(user_1, price_collection).
              and_return(stub(:deliver => true))
@@ -91,6 +112,22 @@ describe CreditorUserCreator do
   end
 
   context 'the creditor_1 has a user' do
+    let(:creditor_params) do
+      {
+        'fresh-0' => {
+          creditor_id: "1",
+          _destroy: "false",
+          email: "joao@silva.com"
+        },
+
+        'fresh-1' => {
+          creditor_id: "2",
+          _destroy: "false",
+          email: "manoel@pereira.com"
+        }
+      }
+    end
+
     before do
       creditor_1.stub(:user?).and_return true
       creditor_1.stub(:user).and_return(user_1)
@@ -99,6 +136,8 @@ describe CreditorUserCreator do
 
     it 'generates a user for each creditor in price_collection' do
       mailer.as_null_object
+
+      subject.should_receive(:creditor_params).any_number_of_times.and_return(creditor_params)
 
       creditor_1_info.merge!(:authenticable_id => 1,
                              :authenticable_type => AuthenticableType::CREDITOR)
@@ -114,6 +153,8 @@ describe CreditorUserCreator do
     it 'send a email for users already registrated' do
       creditor_2_info.merge!(:authenticable_id => 2,
                              :authenticable_type => AuthenticableType::CREDITOR)
+
+      subject.should_receive(:creditor_params).any_number_of_times.and_return(creditor_params)
 
       user_repository.stub(:create!).with(creditor_2_info).and_return(user_2)
 

@@ -23,6 +23,8 @@ pt-BR:
         creditors: "Fornecedor"
         type_of_calculation: "Tipo de apuração"
         code_and_year: 'Código/Ano'
+        creditor: "Fornecedor"
+        creditor_user_email: "Email"
 
   price_collection:
     messages:

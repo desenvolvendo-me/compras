@@ -1,47 +1,18 @@
-<p>
-  <input type="button" class="button affirmative add-creditor"<%= data_disabled_attribute(f.object.decorator.is_annulled_message) %> value="Adicionar Fornecedor">
-</p>
-
-<div id="creditors-list">
-  <%= f.association :price_collection_proposals, :collection => localized(f.object.price_collection_proposals) do |p| %>
-    <%= render 'creditors_form', :f => p, :data_disabled => f.object.decorator.is_annulled_message %>
-  <% end %>
-</div>
-
-<%= mustache "#{f.sanitized_object_name}_creditors_template" do %>
-  <%= f.association :price_collection_proposals_attributes, :collection => f.object.price_collection_proposals.build(:status => PriceCollectionStatus::ACTIVE), :index => '{{uuid_creditor}}' do |p| %>
-    <%= render 'creditors_form', :f => p, :data_disabled => nil %>
-  <% end %>
-<% end %>
+<%= f.input :price_collection_proposals, as: :nested_grid, columns: [:creditor, :email] %>
 
 <script>
-  $("#<%= f.sanitized_object_name %>_creditors_template").nestedForm({
-    add: '.add-creditor',
-    remove: '.remove-creditor',
-    target: '#creditors-list',
-    uuid: 'uuid_creditor',
-    fieldsWrapper: '.creditor_collection_proposal',
-    appendItem: false
-  });
-
-  <% if f.object.annulled? %>
-    $('form.price_collection').find('.add-creditor, .remove-creditor').on('click', function(event){
-      event.stopImmediatePropagation();
-      return false;
-    });
-  <% end %>
-
-  $('form.price_collection').on('change', '.creditor', function (event, creditor) {
+  $('#price_collection_creditor_id').on('change', function (event, creditor) {
     if(creditor){
-      var input = $(this).closest('.creditor').find('input.email');
-      $(input).val(creditor.email);
+      $('#price_collection_email').val(creditor.email || creditor.person_email);
+
+      if ($('#price_collection_email').val() == ""){
+        $('#price_collection_email').removeAttr('disabled');
+      }
     }
   });
 
-  $('#creditors-list').on('change', '.creditor-modal input[type=hidden]', function (event, creditor) {
-    var mainDiv = $(this).closest('div.creditor_collection_proposal'),
-        emailInput = mainDiv.find('input.email');
-
+  $('#price_collection_creditor_id').on('change', function (event, creditor) {
+    var emailInput = $('.nested-fields').find('input[name="price_collection[email]"]');
     emailInput.val(creditor.email || creditor.person_email);
 
     if(creditor.email){
