@@ -8,9 +8,13 @@ pt-BR:
     attributes:
       purchase_process_accreditation_creditor:
         company_size: "Porte"
+        company_size_id: "Porte"
         creditor: "Fornecedor"
         creditor_representative: "Representante"
+        creditor_representative_id: "Representante"
         has_power_of_attorney: "Procurador"
+        has_power_of_attorney_text: "Procurador"
         kind: "Tipo"
+        kind_text: "Tipo"
         licitation_process: "Processo de Compra"
         personable_type: "Tipo de pessoa"

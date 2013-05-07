@@ -1,0 +1,52 @@
+<div class="yui3-g">
+  <div class="yui3-u-4-5">
+    <%= f.input :creditor, :as => :auto_complete, :required => true, :fake => true,
+                'data-hidden-field-class' => 'unique' %>
+  </div>
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-3">
+    <%= f.input :personable_type, :as => :fake, :disabled => true %>
+  </div>
+
+  <div class="yui3-u-1-3">
+    <label for="company_size_id">
+      <%= PurchaseProcessAccreditationCreditor.human_attribute_name :company_size_id %>
+    </label>
+
+    <%= select_tag :company_size_id, options_from_collection_for_select(f.object.decorator.company_sizes, 'id', 'name'),
+        :include_blank => true, :name => 'purchase_process_accreditation[company_size_id]' %>
+
+    <%= hidden_field_tag :company_size, nil, name: 'purchase_process_accreditation[company_size]' %>
+  </div>
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-3">
+    <label for="creditor_representative_id">
+      <%= PurchaseProcessAccreditationCreditor.human_attribute_name :creditor_representative_id %>
+    </label>
+
+    <%= select_tag :creditor_representative_id, options_for_select([]),
+        :include_blank => true, :name => 'purchase_process_accreditation[creditor_representative_id]' %>
+
+    <%= hidden_field_tag :creditor_representative, nil, name: 'purchase_process_accreditation[creditor_representative]' %>
+  </div>
+
+  <div class="yui3-u-1-4">
+    <label for="kind">
+      <%= PurchaseProcessAccreditationCreditor.human_attribute_name :kind %>
+    </label>
+
+    <%= select_tag :kind, options_for_select(PurchaseProcessAccreditationCreditorKind.to_a),
+        :include_blank => true, :name => 'purchase_process_accreditation[kind]', :class => 'required' %>
+  </div>
+
+  <div class="yui3-u-1-4 field-without-label">
+    <label class="boolean checkbox optional" for="has_power_of_attorney">
+      <%= check_box_tag :has_power_of_attorney, "1", false, :name => 'purchase_process_accreditation[has_power_of_attorney]' %>
+      <%= PurchaseProcessAccreditationCreditor.human_attribute_name :has_power_of_attorney %>
+    </label>
+  </div>
+</div>

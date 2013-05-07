@@ -89,6 +89,10 @@ class Creditor < Compras::Model
     where { person.name.like("#{q}%") }
   }
 
+  scope :by_id, lambda { |id|
+    where { |creditor| creditor.id.eq(id) }
+  }
+
   def self.filter(params)
     query = scoped
     query = query.joins { person.outer.personable(Company).outer }

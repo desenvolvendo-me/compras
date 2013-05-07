@@ -17,4 +17,16 @@ class PurchaseProcessAccreditationCreditorDecorator
   def selected?
     I18n.t("#{has_power_of_attorney}")
   end
+
+  def personable_type
+    creditor_personable_type_humanize
+  end
+
+  def has_power_of_attorney_text
+    I18n.t("#{has_power_of_attorney}")
+  end
+
+  def kind_text
+    kind_humanize
+  end
 end
