@@ -23,6 +23,9 @@ namespace :import do
       puts "tipos de movimento"
       MovimentTypeImporter.new.import! if MovimentType.count.zero?
 
+      puts "Etapas do Processo"
+      StageProcess.pg_copy_from Rails.root.join('lib/import/files/stage_processes.csv').to_s unless StageProcess.any?
+
       puts "importações realizadas com sucesso."
     end
   end

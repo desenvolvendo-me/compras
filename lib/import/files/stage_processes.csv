@@ -1,0 +1,17 @@
+type_of_purchase,description,created_at,updated_at
+direct_purchase,Autorização para abertura do procedimento de dispensa ou inexigibilidade,2013-02-08 12:52:43.076411,2013-02-08 12:52:43.076411
+direct_purchase,Cotação de preços,2013-02-08 12:52:43.076411,2013-02-08 12:52:43.076411
+direct_purchase,Informação de existência de recursos orçamentários,2013-02-08 12:52:43.076411,2013-02-08 12:52:43.076411
+direct_purchase,Ratificação,2013-02-08 12:52:43.076411,2013-02-08 12:52:43.076411
+direct_purchase,Publicação em órgão oficial,2013-02-08 12:52:43.076411,2013-02-08 12:52:43.076411
+direct_purchase,Parecer Jurídico,2013-02-08 12:52:43.076411,2013-02-08 12:52:43.076411
+direct_purchase,Parecer (outros),2013-02-08 12:52:43.076411,2013-02-08 12:52:43.076411
+licitation,Autorização para abertura do procedimento licitatório,2013-02-08 12:52:43.076411,2013-02-08 12:52:43.076411
+licitation,Emissão do edital,2013-02-08 12:52:43.076411,2013-02-08 12:52:43.076411
+licitation,Pesquisa de preços,2013-02-08 12:52:43.076411,2013-02-08 12:52:43.076411
+licitation,Informação de existência de recursos orçamentários,2013-02-08 12:52:43.076411,2013-02-08 12:52:43.076411
+licitation,Condução do procedimento licitatório,2013-02-08 12:52:43.076411,2013-02-08 12:52:43.076411
+licitation,Homologação,2013-02-08 12:52:43.076411,2013-02-08 12:52:43.076411
+licitation,Adjudicação,2013-02-08 12:52:43.076411,2013-02-08 12:52:43.076411
+licitation,Publicação em órgão Oficial,2013-02-08 12:52:43.076411,2013-02-08 12:52:43.076411
+licitation,Avaliação de Bens,2013-02-08 12:52:43.076411,2013-02-08 12:52:43.076411

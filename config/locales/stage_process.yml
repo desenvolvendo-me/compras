@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      stage_process:
+        one: "Etapa do Processo"
+        other: "Etapas do Processo"
+
+    attributes:
+      stage_process:
+        description: "Descrição"
+        type_of_purchase: "Tipo de compra"
