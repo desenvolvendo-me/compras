@@ -58,7 +58,6 @@ class LicitationProcess < Compras::Model
   has_many :licitation_notices, :dependent => :destroy
   has_many :licitation_process_lots, :dependent => :destroy, :order => :id
   has_many :reserve_funds, :dependent => :restrict
-  has_many :price_registrations, :dependent => :restrict
   has_many :licitation_process_ratifications, :dependent => :restrict, :order => :id
   has_many :classifications, :through => :bidders, :class_name => 'LicitationProcessClassification',
            :source => :licitation_process_classifications
