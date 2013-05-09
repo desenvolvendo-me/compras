@@ -18,7 +18,8 @@ class LicitationProcess < Compras::Model
                   :authorization_envelope_opening_time, :closing_of_accreditation_date,
                   :closing_of_accreditation_time, :purchase_solicitation_ids,
                   :budget_allocations_total_value, :total_value_of_items,
-                  :creditor_proposals_attributes, :execution_unit_responsible
+                  :creditor_proposals_attributes, :execution_unit_responsible,
+                  :process_responsibles_attributes
 
   auto_increment :process, :by => :year
   auto_increment :modality_number, :by => [:year, :modality, :type_of_removal]
@@ -72,12 +73,13 @@ class LicitationProcess < Compras::Model
   has_many :creditor_proposals, class_name: 'PurchaseProcessCreditorProposal', order: :id
   has_many :items_creditors, through: :items, source: :creditor, order: :id
   has_many :creditor_disqualifications, class_name: 'PurchaseProcessCreditorDisqualification', dependent: :restrict
+  has_many :process_responsibles, :dependent => :restrict
 
   has_one :purchase_process_accreditation, :dependent => :restrict
   has_one :trading, class_name: 'PurchaseProcessTrading', :dependent => :restrict,
     foreign_key: :purchase_process_id
 
-  accepts_nested_attributes_for :purchase_process_budget_allocations, :items, :creditor_proposals,
+  accepts_nested_attributes_for :purchase_process_budget_allocations, :items, :creditor_proposals, :process_responsibles,
                                 :allow_destroy => true
 
   delegate :licitation_kind, :kind, :best_technique?, :technical_and_price?,
