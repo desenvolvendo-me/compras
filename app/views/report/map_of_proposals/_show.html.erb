@@ -10,21 +10,24 @@
       <td>Quantidade</td>
       <td><%= number_with_delimiter item.quantity %></td>
     </tr>
+
     <tr>
       <td>Fornecedor</td>
       <td>Valor Unitário</td>
       <td>Valor Total</td>
     </tr>
   </thead>
+
   <tbody>
     <% resource.item_creditor_proposals(item).each do |creditor_proposal| %>
-    <% css_class = creditor_proposal.decorator.css_class creditor_proposal %>
-    <tr class="<%= css_class %> <%= creditor_proposal.creditor_name.parameterize %>">
-      <td><%= "#{creditor_proposal.creditor_cnpj} - #{creditor_proposal.creditor_name}" %></td>
-      <td><%= creditor_proposal.decorator.unit_price_with_currency %></td>
-      <td><%= creditor_proposal.decorator.total_price_with_currency %></td>
-    </tr>
+      <% css_class = creditor_proposal.decorator.css_class creditor_proposal %>
+      <tr class="<%= css_class %> <%= creditor_proposal.creditor_name.parameterize %>">
+        <td><%= "#{creditor_proposal.creditor_cnpj} - #{creditor_proposal.creditor_name}" %></td>
+        <td><%= creditor_proposal.decorator.unit_price_with_currency %></td>
+        <td><%= creditor_proposal.decorator.total_price_with_currency %></td>
+      </tr>
     <% end %>
+
     <tr class="average_price">
       <td>Preço Médio</td>
       <td><%= resource.decorator.average_unit_price_item item %></td>

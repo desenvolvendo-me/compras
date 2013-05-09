@@ -211,32 +211,36 @@ feature 'Report::MapOfProposals' do
   end
 
   def make_dependencies!
-    licitation = LicitationProcess.make!(:pregao_presencial,
+    creditor_sobrinho = Creditor.make!(:sobrinho)
+    creditor_wenderson = Creditor.make!(:wenderson_sa)
+
+    item = PurchaseProcessItem.make!(:item)
+    item_arame = PurchaseProcessItem.make!(:item_arame)
+
+    purchase_process = LicitationProcess.make!(:pregao_presencial,
       purchase_process_accreditation: PurchaseProcessAccreditation.make(:general_accreditation),
-      items: [PurchaseProcessItem.make!(:item), PurchaseProcessItem.make!(:item_arame) ])
+      items: [item, item_arame])
 
-    creditor_sobrinho = licitation.creditors.select { |creditor|  creditor.name == 'Gabriel Sobrinho' }.first
-    creditor_wenderson = licitation.creditors.select { |creditor|  creditor.name == 'Wenderson Malheiros' }.first
 
     PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado,
-      licitation_process: licitation,
+      licitation_process: purchase_process,
       creditor: creditor_wenderson,
-      item: PurchaseProcessItem.make!(:item))
+      item: item)
 
     PurchaseProcessCreditorProposal.make!(:proposta_arame,
-      licitation_process: licitation,
+      licitation_process: purchase_process,
       creditor: creditor_sobrinho,
-      item: PurchaseProcessItem.make!(:item))
+      item: item)
 
     PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado,
-      licitation_process: licitation,
+      licitation_process: purchase_process,
       creditor: creditor_wenderson,
-      item: PurchaseProcessItem.make!(:item_arame))
+      item: item_arame)
 
     PurchaseProcessCreditorProposal.make!(:proposta_arame,
-      licitation_process: licitation,
+      licitation_process: purchase_process,
       creditor: creditor_sobrinho,
-      item: PurchaseProcessItem.make!(:item_arame),
+      item: item_arame,
       unit_price: 4.99)
   end
 end
