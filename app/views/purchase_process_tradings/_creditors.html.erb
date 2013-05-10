@@ -1,0 +1,34 @@
+<h3><%= "Fornecedores Habilitados Para Lances #{resource.kind_humanize.titleize}" %></h3>
+
+<table id="accreditation_creditors" class="records">
+  <thead>
+    <th>Ordenação</th>
+    <th>Fornecedor</th>
+    <th>Porte</th>
+    <th>Valor da Proposta</th>
+    <th>% da Diferença da Proposta Vencedora</th>
+    <th>Habilitado</th>
+  </thead>
+
+  <tbody>
+    <% @creditors.each_with_index do |accreditation_creditor, index| %>
+      <%= render 'creditors_row',
+        order: index + 1,
+        creditor: accreditation_creditor,
+        company_size: accreditation_creditor.company_size,
+        amount: accreditation_creditor.decorator.unit_price_of_proposal_by_item(@item),
+        percent: '-',
+        selected: accreditation_creditor.decorator.selected? %>
+    <% end %>
+  </tbody>
+</table>
+
+<%= mustache 'accreditation_creditors_template' do %>
+  <%= render 'creditors_row',
+    order: '{{order}}',
+    creditor: '{{creditor}}',
+    company_size: '{{company_size}}',
+    amount: '{{amount}}',
+    percent: '{{percent}}',
+    selected: '{{selected}}' %>
+<% end %>

@@ -27,6 +27,7 @@ require 'app/models/legal_analysis_appraisal'
 require 'app/models/purchase_process_accreditation'
 require 'app/models/purchase_process_creditor_proposal'
 require 'app/models/purchase_process_creditor_disqualification'
+require 'app/models/purchase_process_trading'
 
 describe LicitationProcess do
   let(:current_prefecture) { double(:current_prefecture) }
@@ -726,6 +727,88 @@ describe LicitationProcess do
       end
 
       it { expect(subject.allow_trading_auto_creation?).to be_true }
+    end
+  end
+
+  describe '#all_proposals_given?' do
+    context 'when judgment_form is by item' do
+      before do
+        subject.stub(judgment_form_kind: JudgmentFormKind::ITEM)
+      end
+
+      context 'when the number of proposals are equal to creditors * items' do
+        before do
+          subject.stub(creditor_proposals: ['p1', 'p2', 'p3', 'p4'])
+          subject.stub(creditors: ['c1', 'c2'])
+          subject.stub(items: ['i1', 'i2'])
+        end
+
+        it { expect(subject.all_proposals_given?).to be_true }
+      end
+
+      context 'when the number of proposals are not equal to creditors * items' do
+        before do
+          subject.stub(creditor_proposals: ['p1', 'p2', 'p3'])
+          subject.stub(creditors: ['c1', 'c2'])
+          subject.stub(items: ['i1', 'i2'])
+        end
+
+        it { expect(subject.all_proposals_given?).to be_false }
+      end
+    end
+
+    context 'when judgment_form is by lot' do
+      let(:items) { double(:items) }
+
+      before do
+        subject.stub(judgment_form_kind: JudgmentFormKind::LOT)
+      end
+
+      context 'when the number of proposals are equal to creditors * lots' do
+        before do
+          subject.stub(creditor_proposals: ['p1', 'p2', 'p3', 'p4'])
+          subject.stub(creditors: ['c1', 'c2'])
+          subject.stub(items: items)
+          items.stub(lots: ['l1', 'l2'])
+        end
+
+        it { expect(subject.all_proposals_given?).to be_true }
+      end
+
+      context 'when the number of proposals are not equal to creditors * lots' do
+        before do
+          subject.stub(creditor_proposals: ['p1', 'p2', 'p3'])
+          subject.stub(creditors: ['c1', 'c2'])
+          subject.stub(items: items)
+          items.stub(lots: ['l1', 'l2'])
+        end
+
+        it { expect(subject.all_proposals_given?).to be_false }
+      end
+    end
+
+    context 'when judgment_form is global' do
+      before do
+        subject.stub(judgment_form_kind: JudgmentFormKind::GLOBAL)
+      end
+
+      context 'when the number of proposals are equal to creditors' do
+        before do
+          subject.stub(creditor_proposals: ['p1', 'p2'])
+          subject.stub(creditors: ['c1', 'c2'])
+        end
+
+        it { expect(subject.all_proposals_given?).to be_true }
+      end
+
+      context 'when the number of proposals are not equal to creditors' do
+        before do
+          subject.stub(creditor_proposals: ['p1'])
+          subject.stub(creditors: ['c1', 'c2'])
+        end
+
+        it { expect(subject.all_proposals_given?).to be_false }
+      end
     end
   end
 end

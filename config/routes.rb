@@ -84,6 +84,22 @@ Compras::Application.routes.draw do
     end
   end
 
+  resources :purchase_process_item_tradings, only: [:creditor_list, :next_bid, :undo_last_bid] do
+    member do
+      get  :creditor_list
+      get  :next_bid
+      post :undo_last_bid
+    end
+  end
+
+  resources :purchase_process_tradings, only: [:bids, :new] do
+    member do
+      get :bids
+    end
+  end
+
+  resources :purchase_process_trading_bids, only: [:update, :show]
+
   resources :agencies do
     collection do
       get :modal

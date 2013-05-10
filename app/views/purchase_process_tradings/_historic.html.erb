@@ -1,0 +1,41 @@
+<table id="historic" class="records">
+  <thead>
+    <th><%= PurchaseProcessTradingBid.human_attribute_name :round %></th>
+    <th><%= PurchaseProcessTradingBid.human_attribute_name :number %></th>
+    <th><%= PurchaseProcessTradingBid.human_attribute_name :lot %></th>
+    <th><%= PurchaseProcessTradingBid.human_attribute_name :item %></th>
+    <th><%= PurchaseProcessTradingBid.human_attribute_name :accreditation_creditor %></th>
+    <th><%= PurchaseProcessTradingBid.human_attribute_name :accreditation_creditor_company_size %></th>
+    <th><%= PurchaseProcessTradingBid.human_attribute_name :status %></th>
+    <th><%= PurchaseProcessTradingBid.human_attribute_name :amount %></th>
+    <th><%= PurchaseProcessTradingBid.human_attribute_name :percent %></th>
+  </thead>
+
+  <tbody>
+    <% @historic.each do |bid| %>
+      <%= render 'historic_row',
+        number:                 bid.number,
+        round:                  bid.round,
+        lot:                    bid.lot,
+        item:                   bid.item,
+        creditor:               bid.accreditation_creditor,
+        creditor_company_size:  bid.accreditation_creditor.company_size,
+        status:                 bid.status_humanize,
+        amount:                 number_with_precision(bid.amount),
+        percent:                bid.decorator.percent %>
+    <% end %>
+  </tbody>
+</table>
+
+<%= mustache 'historic_template' do %>
+  <%= render 'historic_row',
+    number:                 '{{number}}',
+    round:                  '{{round}}',
+    lot:                    '{{lot}}',
+    item:                   '{{item}}',
+    creditor:               '{{accreditation_creditor}}',
+    creditor_company_size:  '{{creditor_company_size}}',
+    status:                 '{{status}}',
+    amount:                 '{{amount}}',
+    percent:                '{{percent}}' %>
+<% end %>

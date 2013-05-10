@@ -17,10 +17,10 @@ describe TradingCreator do
           purchase_process.stub(:allow_trading_auto_creation? => true)
         end
 
-        it 'should create a new trading whit current year and purchase_process' do
+        it 'should create a new trading whith current year and purchase_process' do
           trading_repository.
-            should_receive(:create).
-            with(year: Date.current.year, licitation_process_id: 10).
+            should_receive(:create!).
+            with(purchase_process_id: 10).
             and_return('new trading')
 
           expect(subject.create).to eq 'new trading'
@@ -33,7 +33,7 @@ describe TradingCreator do
         end
 
         it 'should return nil' do
-          trading_repository.should_not_receive(:create)
+          trading_repository.should_not_receive(:create!)
 
           expect(subject.create).to be_nil
         end
@@ -47,7 +47,7 @@ describe TradingCreator do
     end
 
     it 'should return nil' do
-      trading_repository.should_not_receive(:create)
+      trading_repository.should_not_receive(:create!)
 
       expect(subject.create).to be_nil
     end

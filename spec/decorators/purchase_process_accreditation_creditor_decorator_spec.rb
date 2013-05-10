@@ -24,4 +24,59 @@ describe PurchaseProcessAccreditationCreditorDecorator do
       end
     end
   end
+
+  describe '#unit_price_of_proposal_by_item' do
+    let(:item) { double(:item) }
+
+    context 'without creditor_proposal_by_item' do
+      before do
+        component.should_receive(:creditor_proposal_by_item).with(item).and_return(nil)
+      end
+
+      it 'should return "-"' do
+        expect(subject.unit_price_of_proposal_by_item(item)).to eq '-'
+      end
+    end
+
+    context 'with creditor_proposal_by_item' do
+      let(:proposal) { double(:proposal, unit_price: 1223.45) }
+
+      before do
+        component.should_receive(:creditor_proposal_by_item).with(item).and_return(proposal)
+      end
+
+      it 'should return the unit_price with precision' do
+        component.should_receive(:creditor_proposal_by_item).with(item).and_return(proposal)
+
+        expect(subject.unit_price_of_proposal_by_item(item)).to eq '1.223,45'
+      end
+    end
+  end
+
+  describe '#selected?' do
+    before do
+      I18n.backend.store_translations 'pt-BR', true: 'Sim'
+      I18n.backend.store_translations 'pt-BR', false: 'Não'
+    end
+
+    context 'when has power of attorney' do
+      before do
+        component.stub(has_power_of_attorney: true)
+      end
+
+      it 'should return Sim' do
+        expect(subject.selected?).to eq 'Sim'
+      end
+    end
+
+    context 'when has no power of attorney' do
+      before do
+        component.stub(has_power_of_attorney: false)
+      end
+
+      it 'should return Não' do
+        expect(subject.selected?).to eq 'Não'
+      end
+    end
+  end
 end

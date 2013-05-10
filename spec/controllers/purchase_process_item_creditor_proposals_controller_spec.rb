@@ -17,8 +17,6 @@ describe PurchaseProcessItemCreditorProposalsController do
 
   describe 'GET new' do
     it 'renders the new template' do
-      TradingCreator.should_receive(:create!).with(licitation_process)
-
       get :new
       expect(response).to render_template :new
     end

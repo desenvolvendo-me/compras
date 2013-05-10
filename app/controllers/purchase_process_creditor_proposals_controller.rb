@@ -10,8 +10,6 @@ class PurchaseProcessCreditorProposalsController < CrudController
     object = build_resource
     object.creditor = @creditor
     object.licitation_process = @licitation_process
-
-    TradingCreator.create!(@licitation_process)
   end
 
   def create

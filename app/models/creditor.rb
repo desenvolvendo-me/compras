@@ -111,6 +111,10 @@ class Creditor < Compras::Model
     user.present? && user.persisted?
   end
 
+  def proposal_by_item(item)
+    purchase_process_creditor_proposals.by_item_id(item.id).first
+  end
+
   protected
 
   def clean_fields_when_is_no_autonomous

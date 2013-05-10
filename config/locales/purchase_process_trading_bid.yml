@@ -1,0 +1,18 @@
+pt-BR:
+  activerecord:
+    models:
+      purchase_process_trading_bid:
+        one: "Lance do Pregão Presencial"
+        other: "Lances do Pregão Presencial"
+
+    attributes:
+      purchase_process_trading_bid:
+        amount: "Valor"
+        accreditation_creditor: "Fornecedor"
+        accreditation_creditor_company_size: "Porte"
+        item: "Item"
+        lot: "Lote"
+        number: "Lance"
+        percent: "Diferença %"
+        round: "Etapa"
+

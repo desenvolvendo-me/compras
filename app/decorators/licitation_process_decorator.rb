@@ -59,6 +59,12 @@ class LicitationProcessDecorator
     end
   end
 
+  def disabled_trading_message
+    return if all_proposals_given?
+
+    t('licitation_process.messages.disabled_trading_message')
+  end
+
   def code_and_year
     "#{process}/#{year}"
   end

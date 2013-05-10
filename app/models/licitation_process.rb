@@ -74,7 +74,8 @@ class LicitationProcess < Compras::Model
   has_many :creditor_disqualifications, class_name: 'PurchaseProcessCreditorDisqualification', dependent: :restrict
 
   has_one :purchase_process_accreditation, :dependent => :restrict
-  has_one :trading, :dependent => :restrict
+  has_one :trading, class_name: 'PurchaseProcessTrading', :dependent => :restrict,
+    foreign_key: :purchase_process_id
 
   accepts_nested_attributes_for :purchase_process_budget_allocations, :items, :creditor_proposals,
                                 :allow_destroy => true
@@ -248,6 +249,19 @@ class LicitationProcess < Compras::Model
   def each_item_lot
     items.map(&:lot).uniq.each do |lot|
       yield lot
+    end
+  end
+
+  def all_proposals_given?
+    return false if creditor_proposals.empty?
+
+    case judgment_form_kind
+    when JudgmentFormKind::ITEM
+      creditor_proposals.count == creditors.count * items.count
+    when JudgmentFormKind::LOT
+      creditor_proposals.count == creditors.count * items.lots.count
+    else
+      creditor_proposals.count == creditors.count
     end
   end
 

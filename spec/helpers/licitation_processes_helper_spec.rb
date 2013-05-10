@@ -83,4 +83,40 @@ describe LicitationProcessesHelper do
       end
     end
   end
+
+  describe '#trading_path_helper' do
+    let(:resource) { double(:resource, id: 10) }
+    let(:trading) { double(:trading) }
+
+    before do
+      helper.stub(resource: resource)
+    end
+
+    context 'when has a trading' do
+      before do
+        resource.stub(has_trading?: true)
+        resource.stub(trading: trading)
+      end
+
+      it 'should return the link to bids' do
+        helper.should_receive(:bids_purchase_process_trading_path).with(trading).and_return('bids_path')
+
+        expect(helper.trading_path_helper).to eq 'bids_path'
+      end
+    end
+
+    context 'when have not a trading' do
+      before do
+        resource.stub(has_trading?: false)
+      end
+
+      it 'should return the link to new' do
+        helper.should_receive(:new_purchase_process_trading_path).
+               with(purchase_process_id: 10).
+               and_return('new_path')
+
+        expect(helper.trading_path_helper).to eq 'new_path'
+      end
+    end
+  end
 end

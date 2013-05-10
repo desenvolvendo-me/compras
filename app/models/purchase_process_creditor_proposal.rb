@@ -19,6 +19,10 @@ class PurchaseProcessCreditorProposal < Compras::Model
     where { |proposal| proposal.creditor_id.eq(creditor_id) }
   }
 
+  scope :by_item_id, lambda { |item_id|
+    where { purchase_process_item_id.eq(item_id) }
+  }
+
   def total_price
     (unit_price || 0) * (item_quantity || 1)
   end
