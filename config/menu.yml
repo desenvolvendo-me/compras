@@ -26,6 +26,7 @@ menu:
   - commom:
     - auxiliary:
       - licitation_commissions
+      - trading_configuration
       - judgment_forms
       - licitation_objects
       - legal_references
@@ -64,12 +65,6 @@ menu:
     - administration_types
 
   - purchasing_processes:
-    - auxiliary:
-      - licitation_commissions
-      - trading_configuration
-      - judgment_forms
-      - licitation_objects
-      - legal_references
     - purchase_solicitations
     - price_collections
     - licitation_processes
