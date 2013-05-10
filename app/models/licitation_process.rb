@@ -18,7 +18,7 @@ class LicitationProcess < Compras::Model
                   :authorization_envelope_opening_time, :closing_of_accreditation_date,
                   :closing_of_accreditation_time, :purchase_solicitation_ids,
                   :budget_allocations_total_value, :total_value_of_items,
-                  :creditor_proposals_attributes
+                  :creditor_proposals_attributes, :execution_unit_responsible
 
   auto_increment :process, :by => :year
   auto_increment :modality_number, :by => [:year, :modality, :type_of_removal]

@@ -73,6 +73,7 @@ pt-BR:
         creditor: "Fornecedor"
         creditor_email: "Email"
         creditor_proposal_total_value: "Valor total da proposta"
+        execution_unit_responsible: "Unidade responsável pela execução"
 
   licitation_process:
     messages:
