@@ -769,9 +769,6 @@ feature "LicitationProcesses" do
       :envelope_delivery_date => Date.tomorrow
     })
 
-    price_registration = PriceRegistration.make!(:registro_de_precos,
-                                                 :licitation_process => licitation_process)
-
     navigate 'Processos de Compra > Processos de Compras'
 
     click_link "Limpar Filtro"

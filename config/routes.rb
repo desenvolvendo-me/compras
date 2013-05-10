@@ -713,13 +713,6 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :price_registrations do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
   resources :regulatory_act_types do
     collection do
       get :filter

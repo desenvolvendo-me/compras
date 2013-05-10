@@ -24,7 +24,6 @@ LicitationProcess.blueprint(:processo_licitatorio) do
   caution_value { 9.99 }
   document_types { [DocumentType.make!(:fiscal)] }
   publications { [LicitationProcessPublication.make!(:publicacao)] }
-  price_registration { true }
   licitation_process_lots { [LicitationProcessLot.make(:lote_antivirus, :licitation_process => object)] }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
@@ -570,7 +569,6 @@ LicitationProcess.blueprint(:processo_licitatorio_concurso) do
   caution_value { 9.99 }
   document_types { [DocumentType.make!(:fiscal)] }
   publications { [LicitationProcessPublication.make!(:publicacao)] }
-  price_registration { true }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   notice_availability_date { I18n.l(Date.tomorrow) }
@@ -599,7 +597,6 @@ LicitationProcess.blueprint(:processo_licitatorio_concorrencia) do
   caution_value { 9.99 }
   document_types { [DocumentType.make!(:fiscal)] }
   publications { [LicitationProcessPublication.make!(:publicacao)] }
-  price_registration { true }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   judgment_form { JudgmentForm.make!(:global_com_menor_preco)}
@@ -629,7 +626,6 @@ LicitationProcess.blueprint(:processo_licitatorio_tomada_preco) do
   caution_value { 9.99 }
   document_types { [DocumentType.make!(:fiscal)] }
   publications { [LicitationProcessPublication.make!(:publicacao)] }
-  price_registration { true }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   judgment_form { JudgmentForm.make!(:global_com_menor_preco)}
@@ -661,7 +657,6 @@ LicitationProcess.blueprint(:processo_licitatorio_leilao) do
   caution_value { 9.99 }
   document_types { [DocumentType.make!(:fiscal)] }
   publications { [LicitationProcessPublication.make!(:publicacao)] }
-  price_registration { true }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   notice_availability_date { I18n.l(Date.tomorrow) }

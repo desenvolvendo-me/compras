@@ -21,7 +21,6 @@ require 'app/models/licitation_process_lot'
 require 'app/business/purchase_process_envelope_opening_date'
 require 'app/models/reserve_fund'
 require 'app/models/indexer'
-require 'app/models/price_registration'
 require 'app/models/trading'
 require 'app/models/purchase_solicitation_item'
 require 'app/models/legal_analysis_appraisal'
@@ -64,7 +63,6 @@ describe LicitationProcess do
 
   it { should have_many(:licitation_process_lots).dependent(:destroy).order(:id) }
   it { should have_many(:reserve_funds).dependent(:restrict) }
-  it { should have_many(:price_registrations).dependent(:restrict) }
   it { should have_many(:licitation_process_ratifications).dependent(:restrict) }
   it { should have_many(:classifications).through(:bidders) }
   it { should have_many(:purchase_process_budget_allocations).dependent(:destroy) }
@@ -255,10 +253,6 @@ describe LicitationProcess do
         expect(subject.process_date_year).to eq 2013
       end
     end
-  end
-
-  describe 'default values' do
-    it { expect(subject.price_registration).to be false }
   end
 
   context 'new_proposal_envelope_opening_date is not equal to new_envelope_delivery_date' do

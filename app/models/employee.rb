@@ -13,7 +13,6 @@ class Employee < Compras::Model
   has_many :licitation_processes_with_contact, :class_name => 'LicitationProcess', :foreign_key => :contact_id, :dependent => :restrict
   has_many :direct_purchases, :dependent => :restrict
   has_many :price_collections, :dependent => :restrict
-  has_many :price_registrations, :foreign_key => :responsible_id, :dependent => :restrict
   has_many :legal_analysis_appraisals, :foreign_key => :responsible_id, :dependent => :restrict
 
   delegate :to_s, :name, :number, :issuer, :to => :individual, :allow_nil => :true
