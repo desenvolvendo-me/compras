@@ -22,6 +22,7 @@ describe RegulatoryAct do
 
   context 'Delegations' do
     it { should delegate(:classification_law?).to(:parent).allowing_nil(true).prefix(true) }
+    it { should delegate(:kind).to(:regulatory_act_type).allowing_nil(true).prefix(true) }
   end
 
   context 'Validations' do

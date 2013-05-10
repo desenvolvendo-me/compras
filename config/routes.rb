@@ -769,4 +769,12 @@ Compras::Application.routes.draw do
       get :filter
     end
   end
+
+  namespace :tce_export do
+    resources :monthly_monitorings, :except => :destroy do
+      collection do
+        get :filter
+      end
+    end
+  end
 end

@@ -30,6 +30,10 @@ module ApplicationHelper
     url_for :controller => controller_name, :action => :show, :id => 'report', :only_path => true
   end
 
+  def smart_tce_export_path
+    url_for :controller => controller_name, :action => :show, :id => 'tce_exports', :only_path => true
+  end
+
   def custom_fields(form)
     inputs = ''
 
@@ -129,5 +133,13 @@ module ApplicationHelper
      "profile-id-#{current_user.profile_id}",
      "profile-updated-at-#{current_user.profile_updated_at}",
      "controllers-sha1-digest-#{menu_sha1_digest}"].join("-")
+  end
+
+  def current_subpath
+    Rails.env.development? ? ENV['RAILS_RELATIVE_URL_ROOT'].to_s : nil
+  end
+
+  def relative_link_to(body, url, html_options={})
+    link_to body, current_subpath.to_s + url, html_options
   end
 end

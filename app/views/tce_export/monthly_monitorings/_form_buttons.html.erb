@@ -1,0 +1,15 @@
+<div class="buttons">
+  <% if f.object.new_record? %>
+    <%= f.button :submit, "Gerar arquivo" %>
+  <% end %>
+
+  <% if f.object.processed? %>
+    <%= relative_link_to "Download do arquivo", f.object.file_url, :class => "button primary" %>
+  <% end %>
+
+  <% if f.object.persisted? && f.object.processing? %>
+    <%= button_tag 'Cancelar', :class => 'button negative', :name => 'commit', :value => 'cancel' %>
+  <% end %>
+
+  <%= f.button :back %>
+</div>

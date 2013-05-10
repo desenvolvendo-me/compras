@@ -1,0 +1,7 @@
+pt-BR:
+  enumerations:
+    monthly_monitoring_status:
+      processing: "Em processamento"
+      processed: "Processado"
+      cancelled: "Cancelado"
+      processed_with_errors: "Processado com erros"

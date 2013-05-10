@@ -1,0 +1,30 @@
+<div class="yui3-g">
+  <div class="yui3-u-1-3">
+    <%= f.input :month, collection: Month.sorted_array, disabled: f.object.persisted? %>
+  </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :year, disabled: f.object.persisted? %>
+  </div>
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-3">
+    <%= f.input :control_code, disabled: true %>
+  </div>
+
+  <div class="yui3-u-1-3">
+    <%= f.input :status_humanize, as: :string, disabled: true %>
+  </div>
+</div>
+
+<% if f.object.processed_with_errors? %>
+  <%= f.input :error_message, disabled: true %>
+<% end %>
+
+Arquivos a serem gerados:
+<ul>
+  <% MonthlyMonitoringFiles.list.each do |file| %>
+    <li><%= MonthlyMonitoringFiles.t(file) %></li>
+  <% end %>
+</ul>

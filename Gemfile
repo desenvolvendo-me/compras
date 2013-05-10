@@ -6,6 +6,7 @@ ruby "1.9.3"
 
 gem 'rails', '3.2.12'
 gem 'unicorn', '4.6.2'
+gem 'sidekiq', '2.11.2'
 
 gem 'pg', '0.14.1'
 
@@ -31,6 +32,8 @@ gem 'cnpj_validator', '0.3.1'
 gem 'cpf_validator', '0.2.0'
 gem 'mask_validator', '0.2.1'
 gem 'validates_timeliness', '3.0.14'
+gem 'typecaster', '0.0.2', :git => 'git://github.com/ricardohsd/typecaster'
+gem 'rubyzip', '0.9.9'
 
 gem 'inherited_resources', '1.3.1'
 gem 'has_scope', '0.5.1'

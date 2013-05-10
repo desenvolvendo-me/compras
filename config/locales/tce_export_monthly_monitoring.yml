@@ -1,0 +1,20 @@
+pt-BR:
+  activerecord:
+    models:
+      tce_export/monthly_monitoring:
+        one: "Acompanhamento Mensal"
+        other: "Acompanhamentos Mensais"
+
+    attributes:
+      tce_export/monthly_monitoring:
+        control_code: "Código de controle externo da remessa"
+        error_message: "Mensagem de erro"
+        month: "Mês da prestação de contas"
+        status_humanize: "Situação"
+        year: "Ano da prestação de contas"
+
+  tce_export/monthly_monitoring:
+    messages:
+      success: "Arquivo encaminhado para geração"
+      cancelled: "Geração do arquivo cancelada"
+      cant_cancel: "Geração não pode ser cancelada pois já foi processada"

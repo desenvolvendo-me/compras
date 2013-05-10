@@ -1,0 +1,83 @@
+require 'model_helper'
+require 'app/uploaders/monthly_monitoring_file_uploader'
+require 'app/models/tce_export'
+require 'app/models/tce_export/monthly_monitoring'
+
+describe TceExport::MonthlyMonitoring do
+  it { should belong_to :customer }
+  it { should belong_to :prefecture }
+
+  it { should validate_presence_of :month }
+  it { should validate_presence_of :year }
+
+  describe "#control_code" do
+    it "returns the string representation of the code" do
+      subject.stub(year: 2013)
+      subject.control_code = 1
+
+      expect(subject.control_code).to eq "20130000000000000001"
+    end
+  end
+
+  describe "#date" do
+    it "returns a date object representing the month from which the data will be extracted" do
+      subject.stub(year: 2013)
+      subject.month = 3
+
+      expect(subject.date).to eq Date.new(2013, 3)
+    end
+  end
+
+  describe "#cancel!" do
+    it "sets the status to Cancelled" do
+      subject.cancel!
+
+      expect(subject.status).to eq MonthlyMonitoringStatus::CANCELLED
+    end
+  end
+
+  describe "#set_file" do
+    it "sets the file attribute" do
+      subject.stub(save!: true)
+      file = double
+
+      subject.set_file(file)
+
+      expect(subject.file.to_s).to eq ""
+    end
+
+    it "changes the status to Processed" do
+      subject.stub(save!: true)
+
+      subject.set_file(double)
+
+      expect(subject.status).to eq MonthlyMonitoringStatus::PROCESSED
+    end
+  end
+
+  describe "#set_errors" do
+    let(:exception) { double(message: "message", backtrace: "backtrace") }
+
+    before do
+      subject.stub(save!: true)
+    end
+
+    it "changes the status to Processed with errors" do
+      subject.set_errors(exception)
+
+      expect(subject.status).to eq MonthlyMonitoringStatus::PROCESSED_WITH_ERRORS
+    end
+
+    it "sets the processing errors attributes" do
+      subject.set_errors(exception)
+
+      expect(subject.processing_errors).to eq "backtrace"
+    end
+
+    it "sets the error message attributes" do
+      subject.set_errors(exception)
+
+      expect(subject.error_message).to eq "message"
+    end
+  end
+end

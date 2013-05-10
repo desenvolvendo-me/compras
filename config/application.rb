@@ -26,6 +26,8 @@ module Compras
       #{config.root}/app/importers
       #{config.root}/app/reports
       #{config.root}/app/validators
+      #{config.root}/app/tce_exports
+      #{config.root}/app/workers
     )
 
     # Custom route files you want to be loaded.
