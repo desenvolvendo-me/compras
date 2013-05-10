@@ -1,5 +1,13 @@
 <div class="actions">
   <ul>
-    <li></li>
+    <% if filter? %>
+      <li>
+        <%= filter_link %>
+      </li>
+
+      <li>
+        <%= clear_filter_link %>
+      </li>
+    <% end %>
   </ul>
 </div>

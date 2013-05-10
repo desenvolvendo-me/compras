@@ -28,7 +28,6 @@ class CreateResponsibleProcess
     purchase_process.process_responsibles
   end
 
-
   def type_of_purchase
     purchase_process.type_of_purchase
   end
