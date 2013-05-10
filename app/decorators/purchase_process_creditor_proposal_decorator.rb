@@ -28,9 +28,9 @@ class PurchaseProcessCreditorProposalDecorator
     number_to_currency total_price if total_price
   end
 
-  def css_class(proposal, map_of_proposal = MapOfProposal)
-    return "draw" if map_of_proposal.draw?(proposal)
-    return "winner" if map_of_proposal.lowest_proposal?(proposal)
+  def css_class(map_of_proposal = MapOfProposal)
+    return "draw" if map_of_proposal.draw?(component)
+    return "winner" if map_of_proposal.lowest_proposal?(component)
 
     "lost"
   end

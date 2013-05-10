@@ -57,7 +57,7 @@ describe PurchaseProcessCreditorProposalDecorator do
       map_of_proposal.stub(:draw?).and_return true
       map_of_proposal.stub(:lowest_proposal?).and_return false
 
-      expect(subject.css_class(proposal, map_of_proposal)).to eql "draw"
+      expect(subject.css_class(map_of_proposal)).to eql "draw"
     end
   end
 end
