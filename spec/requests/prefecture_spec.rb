@@ -20,6 +20,8 @@ feature "Prefecture" do
     fill_modal 'Logradouro', :with => 'Bento Gonçalves'
     fill_modal 'Bairro', :with => 'Portugal'
     fill_in 'CEP', :with => '33400-500'
+    fill_in 'Código do órgão', with: "98"
+    fill_in 'Tipo do órgão', with: "02"
     check 'Permitir inserir processos passados?'
 
     click_button 'Salvar'
@@ -35,8 +37,9 @@ feature "Prefecture" do
     expect(page).to have_field 'Logradouro', :with => 'Rua Bento Gonçalves'
     expect(page).to have_field 'Bairro', :with => 'Portugal'
     expect(page).to have_field 'CEP', :with => '33400-500'
+    expect(page).to have_field 'Código do órgão', :with => '98'
+    expect(page).to have_field 'Tipo do órgão', :with => '02'
     expect(page).to have_checked_field 'Permitir inserir processos passados?'
-
 
     fill_in 'Nome', :with => 'Prefeitura Municipal de Toledo'
     fill_in 'Telefone', :with => '(45) 3378-1785'

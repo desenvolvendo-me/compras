@@ -88,4 +88,14 @@ FactoryGirl.define do
     name 'Almoxarifado Geral'
     acronym 'AG'
   end
+
+  factory :monthly_monitoring, class: TceExport::MonthlyMonitoring do
+    month 10
+    year 2013
+  end
+
+  factory :extended_prefecture do
+    organ_code "98"
+    organ_kind "02"
+  end
 end

@@ -20,6 +20,12 @@ GIT
     pdfkit (0.5.2)
 
 GIT
+  remote: git://github.com/ricardohsd/typecaster
+  revision: 238e75df8b3fe2a61204d84a3518b598a0704db2
+  specs:
+    typecaster (0.0.2)
+
+GIT
   remote: git://github.com/ryanb/cancan.git
   revision: ccd24ab30fdd0b48ac0ad71080445f5366788208
   branch: 2.0
@@ -88,11 +94,14 @@ GEM
     carrierwave (0.8.0)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
+    celluloid (0.14.0)
+      timers (>= 1.0.0)
     childprocess (0.3.3)
       ffi (~> 1.0.6)
     cnpj_validator (0.3.1)
       activemodel (>= 3.0)
     coderay (1.0.9)
+    connection_pool (1.0.0)
     cpf_validator (0.2.0)
       activemodel (>= 3.0)
     dalli (2.6.2)
@@ -218,6 +227,9 @@ GEM
     rake (10.0.4)
     rdoc (3.12.2)
       json (~> 1.4)
+    redis (3.0.4)
+    redis-namespace (1.3.0)
+      redis (~> 3.0.0)
     responders (0.9.3)
       railties (~> 3.1)
     rmagick (2.13.2)
@@ -247,6 +259,12 @@ GEM
     shoulda-matchers (1.4.2)
       activesupport (>= 3.0.0)
       bourne (~> 1.1.2)
+    sidekiq (2.11.2)
+      celluloid (>= 0.13.0)
+      connection_pool (>= 1.0.0)
+      multi_json
+      redis (>= 3.0)
+      redis-namespace
     simple_form (2.1.0)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
@@ -267,6 +285,7 @@ GEM
     thor (0.18.1)
     tilt (1.3.7)
     timeliness (0.3.6)
+    timers (1.1.0)
     treetop (1.4.12)
       polyglot
       polyglot (>= 0.3.1)
@@ -342,11 +361,14 @@ DEPENDENCIES
   rails (= 3.2.12)
   responders (= 0.9.3)
   rspec-rails (= 2.12.0)
+  rubyzip (= 0.9.9)
   sentry-raven (= 0.4.4)
   shoulda-matchers (= 1.4.2)
+  sidekiq (= 2.11.2)
   simple_form (= 2.1.0)
   simplecov
   squeel (= 1.0.18)
+  typecaster (= 0.0.2)!
   uglifier (= 1.3.0)
   unico (= 4.2.0)
   unico-assets (= 1.3.0)

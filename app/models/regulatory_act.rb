@@ -27,6 +27,7 @@ class RegulatoryAct < Compras::Model
   has_many :licitation_commissions, :dependent => :restrict
 
   delegate :classification_law?, :to => :parent, :prefix => true, :allow_nil => true
+  delegate :kind, to: :regulatory_act_type, allow_nil: true, prefix: true
 
   validates :regulatory_act_type, :creation_date, :publication_date, :content,
             :signature_date, :vigor_date, :legal_text_nature, :act_number,
@@ -67,6 +68,14 @@ class RegulatoryAct < Compras::Model
 
   orderize :act_number
   filterize
+
+  scope :trading_or_price_registration, lambda {
+    joins { regulatory_act_type }.
+    where {
+      regulatory_act_type.kind.in([RegulatoryActTypeKind::PRICE_REGISTRATION,
+                                  RegulatoryActTypeKind::TRADING])
+    }
+  }
 
   def to_s
     "#{regulatory_act_type} #{act_number}"

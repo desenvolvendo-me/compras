@@ -18,12 +18,12 @@ describe RegulatoryActTypeImporter do
   end
 
   it 'imports' do
-    null_repository.should_receive(:create!).with('description' => 'PPA', 'imported' => true)
-    null_repository.should_receive(:create!).with('description' => 'LDO', 'imported' => true)
-    null_repository.should_receive(:create!).with('description' => 'LOA', 'imported' => true)
-    null_repository.should_receive(:create!).with('description' => 'Alteração Orçamentária', 'imported' => true)
-    null_repository.should_receive(:create!).with('description' => 'Regulamenta o Registro de Preço no Município', 'imported' => true)
-    null_repository.should_receive(:create!).with('description' => 'Regulamenta o Pregão no Município', 'imported' => true)
+    null_repository.should_receive(:create!).with('description' => 'PPA', 'kind' => nil,  'imported' => true)
+    null_repository.should_receive(:create!).with('description' => 'LDO', 'kind' => nil, 'imported' => true)
+    null_repository.should_receive(:create!).with('description' => 'LOA', 'kind' => nil, 'imported' => true)
+    null_repository.should_receive(:create!).with('description' => 'Alteração Orçamentária', 'kind' => nil, 'imported' => true)
+    null_repository.should_receive(:create!).with('description' => 'Regulamenta o Registro de Preço no Município', 'kind' => '1',  'imported' => true)
+    null_repository.should_receive(:create!).with('description' => 'Regulamenta o Pregão no Município', 'kind' => '2', 'imported' => true)
 
     subject.import!
   end

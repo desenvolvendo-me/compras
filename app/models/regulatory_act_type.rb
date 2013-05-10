@@ -2,7 +2,9 @@ class RegulatoryActType < Compras::Model
   include CustomData
   reload_custom_data
 
-  attr_accessible :description, :imported
+  attr_accessible :description, :imported, :kind
+
+  has_enumeration_for :kind, with: RegulatoryActTypeKind
 
   has_many :regulatory_acts, :dependent => :restrict
 

@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      extended_prefecture:
+        one: "Organização"
+        other: "Organizações"
+
+    attributes:
+      extended_prefecture:
+        organ_code: "Código do órgão"
+        organ_kind: "Tipo do órgão"
