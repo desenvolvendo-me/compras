@@ -322,6 +322,7 @@ pt-BR:
       cannot_be_changed_when_has_materials: "não pode ser alterado quando houver materiais vinculados à classe"
       record_already_exists: "registro já inserido"
       all_required_fields_should_be_filled: "é necesssário preencher todos os campos obrigatórios"
+      parent_classification_should_be_law: "A classificação do Ato principal deve ser Lei, quando a classificação do ato secundário for Decreto"
 
   activerecord:
     errors:

@@ -1,2 +1,0 @@
-class RegulatoryActTypeClassificationsController < CrudController
-end

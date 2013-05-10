@@ -8,9 +8,8 @@ describe RegulatoryActTypeDecorator do
       expect(described_class.headers?).to be_true
     end
 
-    it 'should have description and regulatory_act_type_classification' do
+    it 'should have description' do
       expect(described_class.header_attributes).to include :description
-      expect(described_class.header_attributes).to include :regulatory_act_type_classification
     end
   end
 end

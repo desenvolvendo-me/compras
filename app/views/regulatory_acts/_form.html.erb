@@ -24,3 +24,62 @@
     <%= render 'dissemination_sources', :f => f %>
   </div>
 </div>
+
+<script>
+  $(function() {
+    var $regulatoryActTypeInput = $('#regulatory_act_regulatory_act_type'),
+        $classificationInput = $('#regulatory_act_classification'),
+        $budgetChangeDecreeTypeInput = $('#regulatory_act_budget_change_decree_type'),
+        $budgetChangeLawTypeInput = $('#regulatory_act_budget_change_law_type');
+
+    $regulatoryActTypeInput.on('change', function(event) {
+      changeBudgetChangeDecreeTypeVisibility(event);
+      changeBudgetChangeLawTypeVisibility(event);
+    });
+
+    $classificationInput.on('change', function(event) {
+      changeBudgetChangeDecreeTypeVisibility(event);
+      changeBudgetChangeLawTypeVisibility(event);
+    });
+
+    $budgetChangeDecreeTypeInput.on('change', changeOriginVisibility);
+
+    function changeBudgetChangeDecreeTypeVisibility(event) {
+      var $BudgetChangeDecreeTypeWrapper = $budgetChangeDecreeTypeInput.closest('div');
+
+      if ($regulatoryActTypeInput.val() == 'Alteração Orçamentária' &&
+          $classificationInput.val() == '<%= RegulatoryActClassification::DECREE %>') {
+          $BudgetChangeDecreeTypeWrapper.show();
+      } else {
+        $BudgetChangeDecreeTypeWrapper.hide();
+      }
+
+      $budgetChangeDecreeTypeInput.change();
+    };
+
+    function changeOriginVisibility(event) {
+      var $originWrapper = $('#regulatory_act_origin').closest('div');
+
+      if ($budgetChangeDecreeTypeInput.is(':visible') && (
+          $budgetChangeDecreeTypeInput.val() == '<%= BudgetChangeDecreeType::EXTRA_CREDIT_DECREE %>' ||
+          $budgetChangeDecreeTypeInput.val() == '<%= BudgetChangeDecreeType::SPECIAL_CREDIT_DECREE %>')) {
+        $originWrapper.show();
+      } else {
+        $originWrapper.hide();
+      }
+    };
+
+    function changeBudgetChangeLawTypeVisibility(event) {
+      var $BudgetChangeLawTypeWrapper = $budgetChangeLawTypeInput.closest('div');
+
+      if ($regulatoryActTypeInput.val() == 'Alteração Orçamentária' &&
+          $classificationInput.val() == '<%= RegulatoryActClassification::LAW %>') {
+        $BudgetChangeLawTypeWrapper.show();
+      } else {
+        $BudgetChangeLawTypeWrapper.hide();
+      }
+
+      $budgetChangeLawTypeInput.change();
+    };
+  });
+</script>

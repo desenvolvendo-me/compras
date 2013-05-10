@@ -180,9 +180,6 @@ pt-BR:
     reference_units:
       <<: *female
 
-    regulatory_act_type_classifications:
-      <<: *female
-
     reserve_funds:
       <<: *female
 

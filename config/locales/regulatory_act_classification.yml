@@ -1,0 +1,7 @@
+pt-BR:
+  enumerations:
+    regulatory_act_classification:
+      law: 'Lei'
+      decree: 'Decreto'
+      ordinance: 'Portaria'
+      normative_instruction: 'Instrução normativa'

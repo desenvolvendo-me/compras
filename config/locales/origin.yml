@@ -1,0 +1,7 @@
+pt-BR:
+  enumerations:
+    origin:
+      allocation_cancellation: 'Anulação de Dotações'
+      credit_operation: 'Operação de crédito'
+      excessive_tax_revenue: 'Excesso de Arrecadação'
+      financial_surplus: 'Superávit Financeiro'

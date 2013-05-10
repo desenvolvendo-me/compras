@@ -7,14 +7,12 @@ feature "RegulatoryActTypes" do
   end
 
   scenario 'create a new regulatory_act_type, update and destroy an existing' do
-    RegulatoryActTypeClassification.make!(:primeiro_tipo)
-    RegulatoryActTypeClassification.make!(:segundo_tipo)
-
     navigate 'Comum > Legislação > Ato Regulamentador > Tipos de Ato Regulamentador'
 
     click_link 'Criar Tipo de Ato Regulamentador'
 
-    fill_modal 'Classificação do tipo de ato regulamentador', :with => 'Tipo 01', :field => 'Descrição'
+    expect(page).to_not have_disabled_field 'Descrição' 
+
     fill_in 'Descrição', :with => 'Lei'
 
     click_button 'Salvar'
@@ -23,10 +21,8 @@ feature "RegulatoryActTypes" do
 
     click_link 'Lei'
 
-    expect(page).to have_field 'Classificação do tipo de ato regulamentador', :with => 'Tipo 01'
     expect(page).to have_field 'Descrição', :with => 'Lei'
 
-    fill_modal 'Classificação do tipo de ato regulamentador', :with => 'Tipo 02', :field => 'Descrição'
     fill_in 'Descrição', :with => 'Outra Lei'
 
     click_button 'Salvar'
@@ -35,7 +31,6 @@ feature "RegulatoryActTypes" do
 
     click_link 'Outra Lei'
 
-    expect(page).to have_field 'Classificação do tipo de ato regulamentador', :with => 'Tipo 02'
     expect(page).to have_field 'Descrição', :with => 'Outra Lei'
 
     click_link 'Apagar'
@@ -45,6 +40,20 @@ feature "RegulatoryActTypes" do
     expect(page).to_not have_content 'Outra Lei'
   end
 
+  scenario 'cannot change imported regulatory_act_type' do
+    RegulatoryActType.make!(:lei, imported: true)
+
+    navigate 'Comum > Legislação > Ato Regulamentador > Tipos de Ato Regulamentador'
+
+    click_link 'Lei'
+
+    expect(page).to have_disabled_field 'Descrição'
+    expect(page).to have_field 'Descrição', :with => 'Lei'
+
+    expect(page).to_not have_button 'Salvar'
+    expect(page).to_not have_link 'Apagar'
+  end
+
   scenario 'index with columns at the index' do
     RegulatoryActType.make!(:lei)
 
@@ -52,11 +61,9 @@ feature "RegulatoryActTypes" do
 
     within_records do
       expect(page).to have_content 'Descrição'
-      expect(page).to have_content 'Classificação do tipo de ato regulamentador'
 
       within 'tbody tr' do
         expect(page).to have_content 'Lei'
-        expect(page).to have_content 'Tipo 01'
       end
     end
   end

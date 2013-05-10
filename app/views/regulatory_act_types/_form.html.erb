@@ -1,4 +1,3 @@
-<%= f.input :regulatory_act_type_classification %>
-<%= f.input :description %>
+<%= f.input :description, :disabled => !f.object.updateable? %>
 
 <%= custom_fields f %>

@@ -9,8 +9,34 @@ describe RegulatoryActType do
   end
 
   it { should have_many(:regulatory_acts).dependent(:restrict) }
-  it { should belong_to :regulatory_act_type_classification }
 
   it { should validate_presence_of :description }
-  it { should validate_presence_of :regulatory_act_type_classification }
+
+  context 'default values' do
+    it { expect(subject.imported).to be false }
+  end
+
+  context '#updateable?' do
+    it 'returns true if not imported' do
+      subject.imported = false
+      expect(subject.updateable?).to eq true
+    end
+
+    it 'returns false if imported' do
+      subject.imported = true
+      expect(subject.updateable?).to eq false
+    end
+  end
+
+  context '#destroyable?' do
+    it 'returns true if not imported' do
+      subject.imported = false
+      expect(subject.destroyable?).to eq true
+    end
+
+    it 'returns false if imported' do
+      subject.imported = true
+      expect(subject.destroyable?).to eq false
+    end
+  end
 end

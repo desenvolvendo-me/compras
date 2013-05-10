@@ -8,15 +8,20 @@ pt-BR:
     attributes:
       regulatory_act:
         act_number: "Número"
-        regulatory_act_type: "Tipo"
-        legal_text_nature: "Natureza legal do texto jurídico"
-        creation_date: "Data da criação"
-        signature_date: "Data da assinatura"
-        publication_date: "Data da publicação"
-        vigor_date: "Data a vigorar"
-        end_date: "Data do término"
-        content: "Ementa"
-        budget_law_percent: "Porcentagem de lei orçamentária"
-        revenue_antecipation_percent: "Porcentagem de antecipação da receita"
         authorized_debt_value: "Valor autorizado da dívida"
+        budget_change_decree_type: 'Tipo de decreto de alteração orçamentária'
+        budget_change_law_type: 'Tipo de lei de alteração orçamentária'
+        budget_law_percent: "Porcentagem de lei orçamentária"
+        classification: 'Classificação'
+        content: "Ementa"
+        creation_date: "Data da criação"
         dissemination_sources: "Meio de divulgação"
+        end_date: "Data do término"
+        legal_text_nature: "Natureza legal do texto jurídico"
+        origin: 'Origem'
+        parent: 'Ato principal'
+        publication_date: "Data da publicação"
+        regulatory_act_type: "Tipo"
+        revenue_antecipation_percent: "Porcentagem de antecipação da receita"
+        signature_date: "Data da assinatura"
+        vigor_date: "Data a vigorar"

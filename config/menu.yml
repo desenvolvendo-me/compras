@@ -56,7 +56,6 @@ menu:
       - legal_text_natures
       - regulatory_act:
         - regulatory_act_types
-        - regulatory_act_type_classifications
         - regulatory_acts
     - document_types
     - delivery_locations

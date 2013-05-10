@@ -1,0 +1,7 @@
+pt-BR:
+  enumerations:
+    budget_change_law_type:
+      capability_source_change_authorization_law: 'Lei autorizativa de alteração da fonte de recurso'
+      extra_credit_authorization_law: 'Lei autorizativa de Crédito Suplementar'
+      relocation_transposition_transfer_authorization_law: 'Lei autorizativa de Remanejamento / transposição / transferência'
+      special_credit_authorization_law: 'Lei autorizativa de Crédito Especial'

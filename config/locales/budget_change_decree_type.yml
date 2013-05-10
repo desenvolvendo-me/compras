@@ -1,0 +1,10 @@
+pt-BR:
+  enumerations:
+    budget_change_decree_type:
+      decree_or_act_of_changing_capability_source: 'Decreto ou ato de alteração de fonte de recurso'
+      extra_credit_decree: 'Decreto de Crédito Suplementar'
+      extraordinary_credit_decree: 'Decreto de Crédito Extraordinário'
+      extraordinary_credit_reopening_decree: 'Decreto de reabertura de crédito extraordinário'
+      relocation_transposition_transfer_decree: 'Decreto de Remanejamento / transposição / transferência'
+      special_credit_decree: 'Decreto de Crédito Especial'
+      special_credit_reopening_decree: 'Decreto de reabertura de crédito especial'

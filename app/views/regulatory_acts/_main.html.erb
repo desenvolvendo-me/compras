@@ -1,5 +1,37 @@
-<%= f.input :act_number %>
-<%= f.input :regulatory_act_type %>
+<div class="yui3-g">
+  <div class="yui3-u-1-5">
+    <%= f.input :act_number %>
+  </div>
+
+  <div class="yui3-u-4-5">
+    <%= f.input :parent %>
+  </div>
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-4-5">
+    <%= f.input :regulatory_act_type %>
+  </div>
+
+  <div class="yui3-u-1-5">
+    <%= f.input :classification %>
+  </div>
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-4-5">
+    <%= f.input :budget_change_decree_type, :wrapper_html => {
+                :hidden => !f.object.budget_change_decree_type_required? } %>
+  </div>
+
+  <div class="yui3-u-1-5">
+    <%= f.input :origin, :wrapper_html => { :hidden => !f.object.origin_updateable? } %>
+  </div>
+</div>
+
+<%= f.input :budget_change_law_type, :wrapper_html => {
+            :hidden => !f.object.budget_change_law_type_required? } %>
+
 <%= f.input :legal_text_nature %>
 
 <div class="yui3-g">
