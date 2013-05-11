@@ -1,0 +1,6 @@
+pt-BR:
+  enumerations:
+    map_proposal_report_order:
+      creditor_name: "Ordem alfabética"
+      price_desc: "Valor decrescente"
+      price_asc: "Valor crescente"

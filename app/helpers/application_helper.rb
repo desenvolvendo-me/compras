@@ -5,7 +5,7 @@ module ApplicationHelper
   def simple_form_for(object, *args, &block)
     options = args.extract_options!
     options[:builder] ||= Compras::FormBuilder
-    options[:html] = { :class => dom_class(resource) }
+    options[:html] = { :class => dom_class(object) }
 
     super(object, *(args << options), &block)
   end

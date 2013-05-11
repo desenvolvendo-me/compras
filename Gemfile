@@ -17,6 +17,8 @@ gem 'unico', '4.2.0'
 gem 'unico-assets', '1.3.0'
 gem 'devise', '2.2.3'
 gem 'cancan', :git => 'git://github.com/ryanb/cancan.git', :branch => '2.0'
+gem 'quaestio', '0.1.1'
+gem 'active_relatus', '0.1.1'
 
 gem 'pdfkit', :git => 'git://github.com/comogo/pdfkit.git'
 gem 'wkhtmltopdf-binary', '0.9.9.1'

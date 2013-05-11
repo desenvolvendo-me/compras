@@ -59,6 +59,7 @@ pt-BR:
     regularization_or_administrative_sanction_reasons: "Motivos de Sanções Administrativas ou Regularizações"
     regulatory_act_types: "Tipos de Ato Regulamentador"
     regulatory_acts: "Atos Regulamentadores"
+    report_map_of_proposals: "Mapa de Propostas"
     risk_degrees: "Grau de Riscos"
     signature_configurations: "Configurações de Assinatura"
     signatures: "Assinaturas"
@@ -68,6 +69,7 @@ pt-BR:
     tce_export_monthly_monitorings: "SICOM - Acompanhamento Mensal"
     tradings: "Pregão Presencial"
     users: "Usuários"
+    report_map_of_proposals: "Mapa de Propostas"
 
   menu:
     <<: *controllers
