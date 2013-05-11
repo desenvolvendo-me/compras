@@ -79,4 +79,47 @@ describe PurchaseProcessAccreditationCreditorDecorator do
       end
     end
   end
+
+  describe '#personable_type' do
+    it "should return the component's creditor_personable_type_humanize" do
+      component.should_receive(:creditor_personable_type_humanize).and_return('Pessoa física')
+
+      expect(subject.personable_type).to eq 'Pessoa física'
+    end
+  end
+
+  describe '#has_power_of_attorney_text' do
+    before do
+      I18n.backend.store_translations 'pt-BR', true: 'Sim'
+      I18n.backend.store_translations 'pt-BR', false: 'Não'
+    end
+
+    context 'when has power of attorney' do
+      before do
+        component.stub(has_power_of_attorney: true)
+      end
+
+      it 'should return Sim' do
+        expect(subject.selected?).to eq 'Sim'
+      end
+    end
+
+    context 'when has no power of attorney' do
+      before do
+        component.stub(has_power_of_attorney: false)
+      end
+
+      it 'should return Não' do
+        expect(subject.selected?).to eq 'Não'
+      end
+    end
+  end
+
+  describe '#kind_text' do
+    it "should return the component's kind_humanize" do
+      component.should_receive(:kind_humanize).and_return('Legal')
+
+      expect(subject.kind_text).to eq 'Legal'
+    end
+  end
 end

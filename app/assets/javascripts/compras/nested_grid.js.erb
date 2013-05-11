@@ -50,7 +50,7 @@ $(function () {
   $(document).on('click', '.nested-record .edit-nested-record', function(event) {
     event.preventDefault();
 
-    editNestedGridRecord( $(this).closest('.nested-record') )
+    editNestedGridRecord( $(this).closest('.nested-record') );
   });
 
   function editNestedGridRecord(row) {
@@ -64,7 +64,15 @@ $(function () {
         name = matches[1];
         input = nestedFields.find(':input[name*="[' + name + ']"]');
 
-        input.val( $(this).val() );
+        if ( input.is(':checkbox') ) {
+          if ( $(this).val() == 'true' || $(this).val() == '1' ) {
+            input.attr('checked', true);
+          } else {
+            input.attr('checked', false);
+          }
+        } else {
+          input.val( $(this).val() );
+        }
       }
     });
 
@@ -136,10 +144,10 @@ $(function () {
       if ( matches ) { // Remove o prefixo do nome do campo
         if ( $(this).is(':checkbox') ){
           if ( $(this).is(':checked') ) {
-            data[matches[1]] = $(this).val();
+            data[matches[1]] = '1';
             data[matches[1] + '_text'] = 'Sim';
           } else {
-            data[matches[1]] = '';
+            data[matches[1]] = '0';
             data[matches[1] + '_text'] = 'Não';
           }
         } else if ( $(this).is('select') ) {
