@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      process_responsible:
+        one: "Responsável pelo Processo"
+        other: "Responsáveis pelo Process"
+
+    attributes:
+      process_responsible:
+        licitation_process: "Processo de compra"
+        stage_process: "Etapas do Processo"
+        employee: "Funcionário"

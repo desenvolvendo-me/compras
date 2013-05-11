@@ -1,0 +1,18 @@
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <h4>Etapa do processo</h4>
+  </div>
+  <div class="yui3-u-1-2">
+    <h4>Responsável</h4>
+  </div>
+</div>
+<%= f.association :process_responsibles do |r| %>
+  <div class="yui3-g <%= r.object.stage_process.description.parameterize %>">
+    <div class="yui3-u-1-2">
+      <%= r.input :stage_process, disabled: true, label: false, input_html: { id: "#{r.object.stage_process.description.parameterize}-stage_process_id" } %>
+    </div>
+    <div class="yui3-u-1-2">
+      <%= r.input :employee, label: false, input_html: { id: "#{r.object.stage_process.description.parameterize}-employee_id" } %>
+    </div>
+  </div>
+<% end %>

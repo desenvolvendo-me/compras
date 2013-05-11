@@ -14,6 +14,7 @@ class Employee < Compras::Model
   has_many :direct_purchases, :dependent => :restrict
   has_many :price_collections, :dependent => :restrict
   has_many :legal_analysis_appraisals, :foreign_key => :responsible_id, :dependent => :restrict
+  has_many :process_responsibles, :dependent => :restrict
 
   delegate :to_s, :name, :number, :issuer, :to => :individual, :allow_nil => :true
 

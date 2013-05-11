@@ -1,4 +1,5 @@
 Compras::Application.routes.draw do
+
   root :to => 'bookmarks#show'
 
   get 'agreements/modal', :as => :modal_agreements
@@ -435,6 +436,13 @@ Compras::Application.routes.draw do
     end
   end
 
+  resources :process_responsibles do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :purchase_process_creditor_proposals
 
   resources :purchase_process_item_creditor_proposals, except: :destroy do
@@ -696,7 +704,6 @@ Compras::Application.routes.draw do
       get :modal
     end
   end
-
 
   get 'states/modal', :as => :modal_states
 

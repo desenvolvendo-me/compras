@@ -72,6 +72,7 @@ menu:
     - licitation_process_impugnments
     - licitation_process_appeals
     - stage_processes
+    - process_responsibles
 
   - "Prestação de Contas":
     - tce_export_monthly_monitorings
