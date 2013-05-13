@@ -13,6 +13,8 @@ describe PurchaseProcessCreditorDisqualification do
   it { should validate_presence_of :reason }
   it { should validate_presence_of :kind }
 
+  it { should delegate(:global?).to(:judgment_form).allowing_nil(true).prefix(true) }
+
   describe '.find_or_initialize' do
     let(:licitation_process) { double :licitation_process, id: 1 }
     let(:creditor)           { double :creditor, id: 1 }
@@ -102,6 +104,20 @@ describe PurchaseProcessCreditorDisqualification do
       item_ids.should_receive(:include?).with("1").and_return true
 
       expect(subject.send(:disqualify_item?, item)).to be_true
+    end
+  end
+
+  describe '#kind_should_be_total' do
+    let(:error) { double :error }
+
+    before do
+      subject.should_receive(:errors).and_return error
+      subject.stub(:kind).and_return :total
+    end
+
+    it 'adds error to kind unless it is total' do
+      error.should_receive(:add).with(:kind, :should_be_total)
+      subject.send :kind_should_be_total
     end
   end
 end

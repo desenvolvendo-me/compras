@@ -4,15 +4,17 @@ class PurchaseProcessCreditorDisqualification < Compras::Model
 
   attr_accessor :proposal_item_ids
 
-  has_enumeration_for :kind, :with => PurchaseProcessCreditorDisqualificationKind
+  has_enumeration_for :kind, :with => PurchaseProcessCreditorDisqualificationKind, create_helpers: true
 
   belongs_to :licitation_process
   belongs_to :creditor
 
   has_one :judgment_form, through: :licitation_process
 
-  validates :licitation_process, :creditor, :disqualification_date,
-            :reason, :kind, presence: true
+  delegate :global?, to: :judgment_form, allow_nil: true, prefix: true
+
+  validates :licitation_process, :creditor, :disqualification_date, :reason, :kind, presence: true
+  validate :kind_should_be_total, if: :judgment_form_global?
 
   after_save :disqualify_proposal_items
 
@@ -41,7 +43,11 @@ class PurchaseProcessCreditorDisqualification < Compras::Model
   end
 
   def disqualify_item?(item)
-    return true if kind == PurchaseProcessCreditorDisqualificationKind::TOTAL
+    return true if total?
     return true if proposal_item_ids.include? item.id.to_s
+  end
+
+  def kind_should_be_total
+    errors.add(:kind, :should_be_total) unless total?
   end
 end

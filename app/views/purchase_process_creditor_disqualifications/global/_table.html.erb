@@ -1,7 +1,9 @@
+<%= f.input :kind, as: :hidden, input_html: { value: PurchaseProcessCreditorDisqualificationKind::TOTAL } %>
+
 <table class="records" id="purchase_process_creditor_disqualification_global">
   <thead>
-    <th><%= PurchaseProcessItem.human_attribute_name :estimated_total_price %></th>
-    <th>Selecionar</th>
+    <th class='right'><%= PurchaseProcessItem.human_attribute_name :estimated_total_price %></th>
+    <th class='center'>Selecionar</th>
   </thead>
 
   <tbody>

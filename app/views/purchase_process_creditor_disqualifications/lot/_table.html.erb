@@ -1,8 +1,11 @@
+<%= f.input :kind, as: :radio_buttons, label: '', label_html: { class: 'inline' },
+  item_wrapper_class: :inline, collection: f.object.decorator.lot_kind_radio_collection %>
+
 <table class="records" id="purchase_process_creditor_disqualification_lots">
   <thead>
     <th><%= PurchaseProcessItem.human_attribute_name :lot %></th>
-    <th><%= PurchaseProcessItem.human_attribute_name :estimated_total_price %></th>
-    <th>Selecionar</th>
+    <th class='right'><%= PurchaseProcessItem.human_attribute_name :estimated_total_price %></th>
+    <th class='center'>Selecionar</th>
   </thead>
 
   <tbody>

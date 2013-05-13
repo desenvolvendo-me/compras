@@ -5,6 +5,8 @@
 <%= f.input :licitation_process_id, as: :hidden %>
 <%= f.input :creditor_id, as: :hidden %>
 
+<input type="hidden" name="<%= f.sanitized_object_name %>[proposal_item_ids][]" />
+
 <div class="yui3-g">
   <div class="yui3-u-1-4">
     <%= f.input :disqualification_date, required: true %>
@@ -13,10 +15,8 @@
 
 <%= f.input :reason, required: true %>
 
-<%= f.input :kind, as: :radio_buttons, label: '', label_html: { class: 'inline' },
-  item_wrapper_class: :inline, collection: PurchaseProcessCreditorDisqualificationKind.to_a %>
-
-<%= render partial: "purchase_process_creditor_disqualifications/#{f.object.judgment_form.kind}/table" %>
+<%= render partial: "purchase_process_creditor_disqualifications/#{f.object.judgment_form.kind}/table",
+  locals: { f: f } %>
 
 <div class="yui3-g right">
   <div class="yui3-u-1-5">

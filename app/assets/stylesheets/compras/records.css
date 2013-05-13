@@ -1,3 +1,11 @@
+th.right {
+  text-align: right !important;
+}
+
+th.center {
+  text-align: center !important;
+}
+
 table.records {
   border: solid 1px #E8EAEE;
 }

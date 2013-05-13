@@ -225,7 +225,7 @@ feature 'PurchaseProcessCreditorDisqualifications' do
     expect(page).to have_field 'Data de desclassificação', with: I18n.l(Date.current)
     expect(page).to have_field 'Motivo', with: ''
     expect(page).to have_field 'Toda proposta'
-    expect(page).to have_field 'Itens da proposta'
+    expect(page).to have_field 'Lotes da proposta'
     expect(page).to have_field 'Valor total da proposta', with: '7,98'
 
     within_records do
@@ -246,7 +246,7 @@ feature 'PurchaseProcessCreditorDisqualifications' do
 
     fill_in 'Motivo', with: 'Motivo para desclassificação'
 
-    choose 'Itens da proposta'
+    choose 'Lotes da proposta'
 
     within_records do
       within 'tbody tr:first' do
@@ -267,7 +267,7 @@ feature 'PurchaseProcessCreditorDisqualifications' do
     expect(page).to have_content 'Desclassificar fornecedor Gabriel Sobrinho - Processo 1/2012 - Pregão 1'
 
     expect(page).to have_field 'Motivo', with: 'Motivo para desclassificação'
-    expect(page).to have_checked_field 'Itens da proposta'
+    expect(page).to have_checked_field 'Lotes da proposta'
     expect(page).to have_field 'Valor total da proposta', with: '7,98'
 
     within_records do
@@ -361,6 +361,7 @@ feature 'PurchaseProcessCreditorDisqualifications' do
     expect(page).to have_field 'Data de desclassificação', with: I18n.l(Date.current)
     expect(page).to have_field 'Motivo', with: ''
     expect(page).to have_field 'Valor total da proposta', with: '1.100,00'
+    expect(page).to_not have_field 'Toda proposta'
 
     fill_in 'Motivo', with: 'Motivo para desclassificação'
 
@@ -387,7 +388,7 @@ feature 'PurchaseProcessCreditorDisqualifications' do
     expect(page).to have_content 'Desclassificar fornecedor Gabriel Sobrinho - Processo 1/2012 - Pregão 1'
 
     expect(page).to have_field 'Motivo', with: 'Motivo para desclassificação'
-    expect(page).to have_checked_field 'Toda proposta'
+    expect(page).to_not have_checked_field 'Toda proposta'
     expect(page).to have_field 'Valor total da proposta', with: '1.100,00'
 
     click_button 'Salvar'
