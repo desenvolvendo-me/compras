@@ -17,7 +17,8 @@ describe JudgmentFormFilter do
              :higher_discount_on_item? => false,
              :higher_discount_on_lot? => false,
              :higher_discount_on_table? => false,
-             :best_auction_or_offer? => false)
+             :best_auction_or_offer? => false,
+             :global? => false)
     end
 
     let(:best_technique) do
@@ -28,7 +29,8 @@ describe JudgmentFormFilter do
              :higher_discount_on_item? => false,
              :higher_discount_on_lot? => false,
              :higher_discount_on_table? => false,
-             :best_auction_or_offer? => false)
+             :best_auction_or_offer? => false,
+             :global? => true)
     end
 
     let(:technical_and_price) do
@@ -39,7 +41,8 @@ describe JudgmentFormFilter do
              :higher_discount_on_item? => false,
              :higher_discount_on_lot? => false,
              :higher_discount_on_table? => false,
-             :best_auction_or_offer? => false)
+             :best_auction_or_offer? => false,
+             :global? => true)
     end
 
     let(:higher_discount_on_item) do
@@ -50,7 +53,8 @@ describe JudgmentFormFilter do
              :higher_discount_on_item? => true,
              :higher_discount_on_lot? => false,
              :higher_discount_on_table? => false,
-             :best_auction_or_offer? => false)
+             :best_auction_or_offer? => false,
+             :global? => true)
     end
 
     let(:higher_discount_on_lot) do
@@ -61,7 +65,8 @@ describe JudgmentFormFilter do
              :higher_discount_on_item? => false,
              :higher_discount_on_lot? => true,
              :higher_discount_on_table? => false,
-             :best_auction_or_offer? => false)
+             :best_auction_or_offer? => false,
+             :global? => true)
     end
 
     let(:higher_discount_on_table) do
@@ -72,7 +77,8 @@ describe JudgmentFormFilter do
              :higher_discount_on_item? => false,
              :higher_discount_on_lot? => false,
              :higher_discount_on_table? => true,
-             :best_auction_or_offer? => false)
+             :best_auction_or_offer? => false,
+             :global? => true)
     end
 
     let(:best_auction_or_offer) do
@@ -83,7 +89,8 @@ describe JudgmentFormFilter do
              :higher_discount_on_item? => false,
              :higher_discount_on_lot? => false,
              :higher_discount_on_table? => false,
-             :best_auction_or_offer? => true)
+             :best_auction_or_offer? => true,
+             :global? => true)
     end
 
     let(:judgment_form_repository_enabled) { double(:judgment_form_repository_enabled) }

@@ -59,7 +59,7 @@ class JudgmentFormFilter
     if (price_registration)
       filter.select { |item| item.lowest_price? || item.higher_discount_on_table? }
     else
-      filter.select { |item| item.lowest_price? }
+      filter.select { |item| item.lowest_price? && !item.global? }
     end
   end
 
