@@ -2,15 +2,15 @@ require 'spec_helper'
 
 describe LicitationProcessClassification do
   let :bidder_inactive do
-    Bidder.make!(:licitante, :status => Status::INACTIVE)
+    Bidder.make!(:licitante, :enabled => false)
   end
 
   let :bidder_without_status do
-    Bidder.make!(:licitante_com_proposta_1, :status => nil)
+    Bidder.make!(:licitante_com_proposta_1, :enabled => nil)
   end
 
   let :bidder_active do
-    Bidder.make!(:licitante_com_proposta_2, :status => Status::ACTIVE)
+    Bidder.make!(:licitante_com_proposta_2, :enabled => true)
   end
 
   let :antivirus do

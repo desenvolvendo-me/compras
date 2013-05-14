@@ -18,7 +18,6 @@ require 'app/models/trading_item_closing'
 describe Bidder do
   describe 'default values' do
     it { expect(subject.invited).to be false }
-    it { expect(subject.will_submit_new_proposal_when_draw).to be true }
   end
 
   it { should belong_to :licitation_process }
@@ -302,15 +301,15 @@ describe Bidder do
   end
 
   context '#inactivate!' do
-    it 'changes the bidder status to Inactive' do
-      subject.should_receive(:update_column).with(:status, "inactive")
+    it 'changes the bidder enabled to Inactive' do
+      subject.should_receive(:update_column).with(:enabled, false)
       subject.inactivate!
     end
   end
 
   context '#activate!' do
-    it 'changes the bidder status to Active' do
-      subject.should_receive(:update_column).with(:status, "active")
+    it 'changes the bidder enabled to Active' do
+      subject.should_receive(:update_column).with(:enabled, true)
       subject.activate!
     end
   end

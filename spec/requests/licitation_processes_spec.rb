@@ -862,6 +862,42 @@ feature "LicitationProcesses" do
     end
   end
 
+  scenario 'generate calculation and disable a bidder by maximum value' do
+    licitation_process = LicitationProcess.make!(:valor_maximo_ultrapassado,
+                                                  :bidders => [Bidder.make!(:licitante_com_proposta_3, :enabled => true),
+                                                               Bidder.make!(:licitante_com_proposta_7, :enabled => true)] )
+    bidder = licitation_process.bidders.first
+    LicitationProcessLot.make!(:lote, :licitation_process => licitation_process,
+                               :purchase_process_items => [licitation_process.items.first])
+
+    navigate 'Processos de Compra > Processos de Compras'
+
+    click_link "Limpar Filtro"
+
+    within_records do
+      click_link '1/2012'
+    end
+
+    expect(page).to_not have_button 'Relatório'
+
+    click_button 'Apurar'
+
+    expect(page).to have_content 'PROCESSO DE COMPRA 1/2012'
+
+    expect(page).to have_content 'Apuração: Por Lote com Menor Preço'
+
+    expect(page).to have_content 'Nohup'
+
+    within ".classification-#{bidder.id}-0-0" do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '9,10'
+      expect(page).to have_content '18,20'
+      expect(page).to have_content 'Ganhou'
+    end
+
+    expect(page).to_not have_content 'IBM'
+  end
+
   scenario 'generate calculation with equalized result' do
     licitation_process = LicitationProcess.make!(:apuracao_global_empatou)
 
@@ -925,7 +961,9 @@ feature "LicitationProcesses" do
   end
 
   scenario 'generate calculation between a small company and a big company and consider law of proposals' do
-    licitation_process = LicitationProcess.make!(:apuracao_global_small_company_2)
+    licitation_process = LicitationProcess.make!(:apuracao_global_small_company_2,
+                                                  :bidders => [Bidder.make!(:licitante_com_proposta_8, :enabled => true),
+                                                               Bidder.make!(:licitante_com_proposta_9, :enabled => true)] )
 
     navigate 'Processos de Compra > Processos de Compras'
 
@@ -963,7 +1001,9 @@ feature "LicitationProcesses" do
   end
 
   scenario 'generate calculation between a small company and a big company and consider law of proposals and make a new proposal' do
-    licitation_process = LicitationProcess.make!(:apuracao_global_small_company)
+    licitation_process = LicitationProcess.make!(:apuracao_global_small_company,
+                                                  :bidders => [Bidder.make!(:licitante_com_proposta_3, :enabled => true),
+                                                               Bidder.make!(:licitante_com_proposta_4, :enabled => true)] )
 
     navigate 'Processos de Compra > Processos de Compras'
 
@@ -1001,7 +1041,10 @@ feature "LicitationProcesses" do
   end
 
   scenario 'generate calculation between a small company and a big company and dont make a new proposal' do
-    licitation_process = LicitationProcess.make!(:apuracao_global_small_company)
+    licitation_process = LicitationProcess.make!(:apuracao_global_small_company,
+                                                  :bidders => [Bidder.make!(:licitante_com_proposta_3, :enabled => true),
+                                                               Bidder.make!(:licitante_com_proposta_4, :enabled => true)] )
+
 
     navigate 'Processos de Compra > Processos de Compras'
 
@@ -1035,44 +1078,6 @@ feature "LicitationProcesses" do
       expect(page).to have_content '9,00'
       expect(page).to have_content '18,00'
       expect(page).to have_content 'Empatou'
-    end
-
-    click_link 'voltar'
-
-    click_link 'Habilitação'
-
-    click_link 'Nohup'
-
-    uncheck 'Apresentará nova proposta em caso de empate'
-
-    click_button 'Salvar'
-
-    expect(page).to have_notice 'Licitante editado com sucesso.'
-
-    click_link 'Voltar ao processo de compra'
-
-    click_button 'Apurar'
-
-    expect(page).to have_content 'PROCESSO DE COMPRA 1/2012'
-
-    expect(page).to have_content 'Apuração: Forma Global com Menor Preço'
-
-    expect(page).to have_content 'Nohup'
-
-    within '.classification-1-0' do
-      expect(page).to have_content 'Antivirus'
-      expect(page).to have_content '9,00'
-      expect(page).to have_content '18,00'
-      expect(page).to have_content 'Ganhou'
-    end
-
-    expect(page).to have_content 'IBM'
-
-    within '.classification-2-0' do
-      expect(page).to have_content 'Antivirus'
-      expect(page).to have_content '9,10'
-      expect(page).to have_content '18,20'
-      expect(page).to have_content 'Perdeu'
     end
   end
 

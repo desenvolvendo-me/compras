@@ -1,3 +1,4 @@
+#encoding: utf-8
 require 'unit_helper'
 require 'active_support/core_ext/module/delegation'
 require 'app/business/purchase_process_classification_value'
@@ -31,7 +32,7 @@ describe PurchaseProcessClassificationSituationGenerator do
       :id => 11,
       :proposals => proposals,
       :benefited => false,
-      :status => :enabled,
+      :enabled => true,
       :licitation_process_classifications_by_classifiable => []
     )
   end
@@ -138,7 +139,6 @@ describe PurchaseProcessClassificationSituationGenerator do
       classifications.stub(:disqualified).and_return([])
 
       classification_2.stub(:total_value => 9, :benefited => false)
-      classification_1.stub(:will_submit_new_proposal_when_draw => true)
       classification_1.stub(:total_value => 10, :benefited => true)
 
       classification_1.should_receive(:equalize!).and_return(true)
@@ -148,9 +148,9 @@ describe PurchaseProcessClassificationSituationGenerator do
     end
 
     it 'should change classifications situation to lost' do
+      pending 'será removido na nova apuração'
       classifications.stub(:disqualified).and_return([])
-      classification_2.stub(:total_value => 9, :benefited => false)
-      classification_1.stub(:will_submit_new_proposal_when_draw => false)
+      classification_2.stub(:total_value => 12, :benefited => false)
       classification_1.stub(:total_value => 10, :benefited => true)
 
       classification_2.should_receive(:win!).and_return(true)
@@ -172,11 +172,11 @@ describe PurchaseProcessClassificationSituationGenerator do
     end
 
     it 'should change classifications to won and lost' do
+      pending 'será removido na proxima apuração'
       classifications.stub(:disqualified).and_return([])
 
       classification_2.stub(:total_value => 9, :benefited => false)
       classification_1.stub(:total_value => 11, :benefited => true)
-      classification_1.stub(:will_submit_new_proposal_when_draw => false)
 
       classification_2.should_receive(:win!).and_return(true)
       classification_1.should_receive(:lose!).and_return(true)

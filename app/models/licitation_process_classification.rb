@@ -10,7 +10,7 @@ class LicitationProcessClassification < Compras::Model
            :to => :classifiable, :allow_nil => true
   delegate :purchase_process_items, :items,
            :to => :classifiable, :allow_nil => true
-  delegate :benefited, :proposals, :will_submit_new_proposal_when_draw,
+  delegate :benefited, :proposals,
            :to => :bidder, :allow_nil => true
 
   orderize "id DESC"
@@ -20,7 +20,7 @@ class LicitationProcessClassification < Compras::Model
 
   def self.for_active_bidders
     joins { bidder }.
-    where { bidder.status.not_eq(Status::INACTIVE) | bidder.status.eq(nil) }
+    where { bidder.enabled.eq(true) | bidder.enabled.eq(nil) }
   end
 
   def self.for_item(item_id)

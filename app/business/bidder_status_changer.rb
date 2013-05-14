@@ -1,30 +1,29 @@
 class BidderStatusChanger
-  attr_accessor :licitation_process, :status
+  attr_accessor :licitation_process
 
   delegate :bidders, :to => :licitation_process
 
-  def initialize(licitation_process, status = Status)
+  def initialize(licitation_process)
     self.licitation_process = licitation_process
-    self.status = status
   end
 
   def change
     bidders.each do |bidder|
       if bidder.filled_documents?
-        bidder.status = active_status
+        bidder.enabled = active
       else
-        bidder.status = inactive_status
+        bidder.enabled = inactive
       end
     end
   end
 
   private
 
-  def active_status
-    status.value_for(:ACTIVE)
+  def active
+    true
   end
 
-  def inactive_status
-    status.value_for(:INACTIVE)
+  def inactive
+    false
   end
 end

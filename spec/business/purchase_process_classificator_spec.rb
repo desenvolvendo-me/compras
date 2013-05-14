@@ -1,3 +1,4 @@
+#encoding: utf-8
 require 'unit_helper'
 require 'app/business/purchase_process_classificator'
 
@@ -27,29 +28,24 @@ context 'with one benefited' do
     end
 
     context 'when will submit new proposal' do
-      before do
-        classification_b.stub(:will_submit_new_proposal_when_draw).and_return(true)
-      end
-
       it 'should draw' do
         expect(subject.draw?).to be true
       end
 
       it 'should not have winner' do
+        pending 'será removido na proxima apuração'
         expect(subject.winner).to eq nil
       end
 
       it 'should not have loser' do
+        pending 'será removido na proxima apuração'
         expect(subject.loser).to eq nil
       end
     end
 
     context 'when will not submit new proposal' do
-      before do
-        classification_b.stub(:will_submit_new_proposal_when_draw).and_return(false)
-      end
-
       it 'should not draw' do
+        pending 'será removido na proxima apuração'
         expect(subject.draw?).to eq false
       end
 
@@ -70,10 +66,6 @@ context 'with one benefited' do
       end
 
       context 'when will submit new proposal' do
-        before do
-          classification_b.stub(:will_submit_new_proposal_when_draw).and_return(true)
-        end
-
         it 'should not draw' do
           expect(subject.draw?).to be false
         end
@@ -88,10 +80,6 @@ context 'with one benefited' do
       end
 
       context 'when will not submit new proposal' do
-        before do
-          classification_b.stub(:will_submit_new_proposal_when_draw).and_return(false)
-        end
-
         it 'should not draw' do
           expect(subject.draw?).to eq false
         end
@@ -120,10 +108,6 @@ context 'with one benefited' do
       end
 
       context 'when will submit new proposal' do
-        before do
-          classification_b.stub(:will_submit_new_proposal_when_draw).and_return(true)
-        end
-
         it 'should draw' do
           expect(subject.draw?).to be true
         end
@@ -138,10 +122,6 @@ context 'with one benefited' do
       end
 
       context 'when will not submit new proposal' do
-        before do
-          classification_b.stub(:will_submit_new_proposal_when_draw).and_return(false)
-        end
-
         it 'should not draw' do
           expect(subject.draw?).to eq true
         end
@@ -163,10 +143,6 @@ context 'with one benefited' do
       end
 
       context 'when will submit new proposal' do
-        before do
-          classification_b.stub(:will_submit_new_proposal_when_draw).and_return(true)
-        end
-
         it 'should not draw' do
           expect(subject.draw?).to be false
         end
@@ -181,10 +157,6 @@ context 'with one benefited' do
       end
 
       context 'when will not submit new proposal' do
-        before do
-          classification_b.stub(:will_submit_new_proposal_when_draw).and_return(false)
-        end
-
         it 'should not draw' do
           expect(subject.draw?).to eq false
         end
@@ -213,10 +185,6 @@ context 'with one benefited' do
       end
 
       context 'when will submit new proposal' do
-        before do
-          classification_b.stub(:will_submit_new_proposal_when_draw).and_return(true)
-        end
-
         it 'should draw' do
           expect(subject.draw?).to be true
         end
@@ -231,10 +199,6 @@ context 'with one benefited' do
       end
 
       context 'when will not submit new proposal' do
-        before do
-          classification_b.stub(:will_submit_new_proposal_when_draw).and_return(false)
-        end
-
         it 'should not draw' do
           expect(subject.draw?).to eq true
         end
@@ -256,10 +220,6 @@ context 'with one benefited' do
       end
 
       context 'when will submit new proposal' do
-        before do
-          classification_b.stub(:will_submit_new_proposal_when_draw).and_return(true)
-        end
-
         it 'should not draw' do
           expect(subject.draw?).to be false
         end
@@ -274,10 +234,6 @@ context 'with one benefited' do
       end
 
       context 'when will not submit new proposal' do
-        before do
-          classification_b.stub(:will_submit_new_proposal_when_draw).and_return(false)
-        end
-
         it 'should not draw' do
           expect(subject.draw?).to eq false
         end
