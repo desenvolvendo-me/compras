@@ -13,8 +13,10 @@ class PurchaseProcessCreditorProposal < Compras::Model
   delegate :name, :cnpj, :benefited, to: :creditor, allow_nil: true, prefix: true
 
   validates :creditor, :licitation_process, :unit_price, presence: true
-  validates :lot, numericality: { allow_blank: true }
+  validates :lot, :ranking, numericality: { allow_blank: true }
   validates :brand, presence: true, if: :item?
+
+  after_save :update_ranking
 
   scope :by_creditor_id, lambda { |creditor_id|
     where { |proposal| proposal.creditor_id.eq(creditor_id) }
@@ -22,6 +24,13 @@ class PurchaseProcessCreditorProposal < Compras::Model
 
   scope :by_item_id, lambda { |item_id|
     where { purchase_process_item_id.eq(item_id) }
+  }
+
+  scope :find_brothers, lambda { |creditor_proposal|
+    where { purchase_process_item_id.eq(creditor_proposal.purchase_process_item_id) &
+            lot.eq(creditor_proposal.lot) &
+            licitation_process_id.eq(creditor_proposal.licitation_process_id) }.
+    order { unit_price }
   }
 
   orderize
@@ -42,5 +51,11 @@ class PurchaseProcessCreditorProposal < Compras::Model
   def item?
     return false unless judgment_form
     judgment_form.item?
+  end
+
+  private
+
+  def update_ranking
+    PurchaseProcessCreditorProposalRanking.rank! self
   end
 end

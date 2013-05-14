@@ -1,6 +1,7 @@
 require 'model_helper'
 require 'app/models/purchase_process_creditor_proposal'
 require 'app/models/licitation_process'
+require 'app/business/purchase_process_creditor_proposal_ranking'
 
 describe PurchaseProcessCreditorProposal do
   it { should belong_to :creditor }
@@ -14,6 +15,7 @@ describe PurchaseProcessCreditorProposal do
     it { should validate_presence_of :licitation_process }
     it { should validate_presence_of :unit_price }
     it { should validate_numericality_of :lot }
+    it { should validate_numericality_of :ranking }
 
     describe 'brand' do
       context 'when licitaton process judgment form is item' do
@@ -65,6 +67,14 @@ describe PurchaseProcessCreditorProposal do
     it 'returns true when licitation_process process judgment form is item' do
       subject.stub(:judgment_form).and_return judgment_form
       expect(subject.item?).to be_true
+    end
+  end
+
+  describe '#update_ranking' do
+    it 'updates the ranking of proposals' do
+      PurchaseProcessCreditorProposalRanking.should_receive(:rank!).with subject
+
+      subject.send(:update_ranking)
     end
   end
 end
