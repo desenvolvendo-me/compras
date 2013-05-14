@@ -10,6 +10,9 @@ describe TceExport::MonthlyMonitoring do
   it { should validate_presence_of :month }
   it { should validate_presence_of :year }
 
+  it { should delegate(:organ_code).to(:prefecture).allowing_nil(true) }
+  it { should delegate(:organ_kind).to(:prefecture).allowing_nil(true) }
+
   describe "#control_code" do
     it "returns the string representation of the code" do
       subject.stub(year: 2013)

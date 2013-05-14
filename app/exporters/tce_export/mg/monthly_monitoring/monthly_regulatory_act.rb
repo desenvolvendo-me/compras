@@ -41,7 +41,7 @@ module TceExport::MG
 
     class MonthlyRegulatoryActGenerator
       def self.generate_data(monthly_monitoring)
-        RegulatoryAct.trading_or_price_registration.map do |regulatory_act|
+        RegulatoryAct.trading_or_price_registration.order(:act_number).map do |regulatory_act|
           {
             cod_orgao: monthly_monitoring.prefecture.organ_code,
             tipo_decreto: regulatory_act.regulatory_act_type_kind,

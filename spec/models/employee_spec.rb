@@ -9,6 +9,7 @@ require 'app/models/licitation_process'
 require 'app/models/budget_structure_responsible'
 require 'app/models/price_collection'
 require 'app/models/legal_analysis_appraisal'
+require 'app/models/process_responsible'
 
 describe Employee do
   it { should belong_to :individual }
@@ -24,6 +25,9 @@ describe Employee do
   it { should have_many(:legal_analysis_appraisals).dependent(:restrict) }
   it { should have_many(:process_responsibles).dependent(:restrict) }
 
+  it { should have_one(:street).through(:individual) }
+  it { should have_one(:neighborhood).through(:individual) }
+
   it { should validate_presence_of :individual }
   it { should validate_presence_of :registration }
   it { should validate_presence_of :position }
@@ -31,4 +35,10 @@ describe Employee do
   it { should delegate(:name).to(:individual).allowing_nil(true) }
   it { should delegate(:number).to(:individual).allowing_nil(true) }
   it { should delegate(:issuer).to(:individual).allowing_nil(true) }
+  it { should delegate(:cpf).to(:individual).allowing_nil(true) }
+  it { should delegate(:phone).to(:individual).allowing_nil(true) }
+  it { should delegate(:email).to(:individual).allowing_nil(true) }
+  it { should delegate(:zip_code).to(:individual).allowing_nil(true) }
+  it { should delegate(:city).to(:individual).allowing_nil(true) }
+  it { should delegate(:state).to(:individual).allowing_nil(true) }
 end

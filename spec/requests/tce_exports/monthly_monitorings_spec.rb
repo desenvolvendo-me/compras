@@ -24,6 +24,7 @@ feature "Monthly Monitoring TCE File" do
     expect(page).to have_disabled_field "Código de controle externo da remessa"
     expect(page).to have_content "Arquivos a serem gerados"
     expect(page).to have_content "REGLIC - Decreto Municipal Regulamentador do Pregão / Registro de Preços"
+    expect(page).to have_content "RESPLIC - Responsáveis pela Licitação"
 
     fill_in "Ano da prestação de contas", with: "2013"
 

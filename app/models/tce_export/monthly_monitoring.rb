@@ -18,6 +18,8 @@ class TceExport::MonthlyMonitoring < Compras::Model
   belongs_to :customer
   belongs_to :prefecture
 
+  delegate :organ_code, :organ_kind, to: :prefecture, allow_nil: true
+
   validates :year, :month, presence: true
   validates :year, mask: "9999"
 

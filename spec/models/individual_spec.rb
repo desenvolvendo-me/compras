@@ -21,6 +21,8 @@ describe Individual do
   end
 
   it { should have_one :employee }
+  it { should have_one(:street).through(:person) }
+  it { should have_one(:neighborhood).through(:person) }
 
   it { should have_many(:licitation_commission_responsibles).dependent(:restrict) }
   it { should have_many(:licitation_commission_members).dependent(:restrict) }
@@ -30,4 +32,10 @@ describe Individual do
 
   it { should delegate(:number).to(:identity).allowing_nil(true) }
   it { should delegate(:issuer).to(:identity).allowing_nil(true) }
+  it { should delegate(:name).to(:person).allowing_nil(true) }
+  it { should delegate(:city).to(:person).allowing_nil(true) }
+  it { should delegate(:state).to(:person).allowing_nil(true) }
+  it { should delegate(:zip_code).to(:person).allowing_nil(true) }
+  it { should delegate(:phone).to(:person).allowing_nil(true) }
+  it { should delegate(:email).to(:person).allowing_nil(true) }
 end
