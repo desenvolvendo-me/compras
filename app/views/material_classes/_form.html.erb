@@ -3,7 +3,7 @@
 <div class="yui3-g">
   <div class="yui3-u-2-3">
     <%= f.input :parent_class_number, :as => :auto_complete,
-                :source_path => materials_classes_path,
+                :source_path => material_classes_path,
                 :hidden_field => 'parent_number', :max_results => 20,
                 :input_html => { 'data-hidden-field-value-attribute' => 'filled_mask' } %>
   </div>
@@ -18,36 +18,36 @@
 <%= f.input :details %>
 
 <script>
-  $('#materials_class_parent_number').on('change', function(event, materialClass){
+  $('#material_class_parent_number').on('change', function(event, materialClass){
     $("#prepended-input").remove();
 
     if (materialClass) {
-      $("#materials_class_mask").val(materialClass.mask);
-      $("#materials_class_number").attr("data-mask", materialClass.child_mask);
-      $("#materials_class_number").before(function() {
+      $("#material_class_mask").val(materialClass.mask);
+      $("#material_class_number").attr("data-mask", materialClass.child_mask);
+      $("#material_class_number").before(function() {
         var text = materialClass.filled_mask + '.';
         return $("<span>").text(text).addClass('add-on').attr("id", "prepended-input");
       });
     } else {
-      $("#materials_class_mask").val('');
-      $("#materials_class_number").removeData("mask");
+      $("#material_class_mask").val('');
+      $("#material_class_number").removeData("mask");
     }
   });
 
-  $('#materials_class_number').focusin(function() {
-    if ($('#materials_class_parent_class_number').val() == "") {
+  $('#material_class_number').focusin(function() {
+    if ($('#material_class_parent_class_number').val() == "") {
       $("#prepended-input").remove();
       $(this).attr("data-mask", "99");
     }
   });
 
   (function() {
-    $("#materials_class_parent_number").val('<%= resource.decorator.persisted_parent_masked_number %>');
-    $("#materials_class_number").val('<%= resource.decorator.last_level_class_number %>');
-    $("#materials_class_number").data("mask", "<%= resource.decorator.child_mask %>");
-    $("#materials_class_parent_class_number").val("<%= resource.decorator.persisted_masked_to_s %>");
+    $("#material_class_parent_number").val('<%= resource.decorator.persisted_parent_masked_number %>');
+    $("#material_class_number").val('<%= resource.decorator.last_level_class_number %>');
+    $("#material_class_number").data("mask", "<%= resource.decorator.child_mask %>");
+    $("#material_class_parent_class_number").val("<%= resource.decorator.persisted_masked_to_s %>");
 
-    $("#materials_class_number").before(function() {
+    $("#material_class_number").before(function() {
       return $("<span>").text('<%= resource.decorator.persisted_parent_masked_number(true) %>').addClass('add-on').attr("id", "prepended-input");
     });
 

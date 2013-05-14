@@ -1,4 +1,4 @@
-class MaterialsClassDecorator
+class MaterialClassDecorator
   include Decore
   include Decore::Proxy
   include Decore::Header

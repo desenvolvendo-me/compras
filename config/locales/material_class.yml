@@ -1,12 +1,12 @@
 pt-BR:
   activerecord:
     models:
-      materials_class:
+      material_class:
         one: "Classe de Materiais"
         other: "Classes de Materiais"
 
     attributes:
-      materials_class:
+      material_class:
         number: "Código"
         class_number: "Código"
         masked_number: "Código"

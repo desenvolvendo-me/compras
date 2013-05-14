@@ -37,7 +37,7 @@ menu:
         - banks
         - bank_accounts
       - materials:
-        - materials_classes
+        - material_classes
         - materials
         - reference_units
       - indexers

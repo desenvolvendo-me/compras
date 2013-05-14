@@ -1,8 +1,8 @@
 <%= f.input :active %>
 
-<%= f.input :autocomplete_materials_class, :as => :auto_complete,
-            :source_path => materials_classes_path(:without_children => true),
-            :hidden_field => :materials_class_id, :max_results => 20 %>
+<%= f.input :autocomplete_material_class, :as => :auto_complete,
+            :source_path => material_classes_path(:without_children => true),
+            :hidden_field => :material_class_id, :max_results => 20 %>
 
 
 <%= f.input :description %>

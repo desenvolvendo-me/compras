@@ -55,7 +55,7 @@ FactoryGirl.define do
     acronym 'IT'
   end
 
-  factory :materials_class do
+  factory :material_class do
     masked_number "01.32.00.000.000"
     class_number "013200000000"
     mask "99.99.99.999.999"

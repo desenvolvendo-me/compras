@@ -136,7 +136,7 @@ pt-BR:
     management_units:
       <<: *female
 
-    materials_classes:
+    material_classes:
       <<: *female
 
     payment_methods:

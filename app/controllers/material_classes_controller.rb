@@ -1,4 +1,4 @@
-class MaterialsClassesController < CrudController
+class MaterialClassesController < CrudController
   has_scope :term, :allow_blank => true
   has_scope :limit
   has_scope :without_children, :type => :boolean

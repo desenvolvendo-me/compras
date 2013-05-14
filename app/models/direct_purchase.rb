@@ -40,7 +40,7 @@ class DirectPurchase < Compras::Model
   delegate :accounts, :agencies, :banks, :to => :creditor, :allow_nil => true
   delegate :purchase_licitation_exemption, :build_licitation_exemption,
            :to => :licitation_object, :allow_nil => true, :prefix => true
-  delegate :materials, :materials_classes,
+  delegate :materials, :material_classes,
            :to => :creditor, :allow_nil => true, :prefix => true
 
   validates :year, :mask => "9999", :allow_blank => true

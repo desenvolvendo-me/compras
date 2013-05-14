@@ -31,7 +31,7 @@ class Creditor < Compras::Model
   has_many :bidders, :dependent => :restrict
   has_many :licitation_processes, :through => :bidders, :dependent => :restrict
   has_many :materials, :through => :creditor_materials, :order => :id
-  has_many :materials_classes, :through => :materials
+  has_many :material_classes, :through => :materials
   has_many :pledges, :dependent => :restrict
   has_many :precatories, :dependent => :restrict
   has_many :price_collection_proposals, :dependent => :restrict, :order => :id

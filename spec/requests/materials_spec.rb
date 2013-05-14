@@ -197,7 +197,7 @@ feature "Materials" do
   scenario 'does not show material classes with child' do
     make_dependencies!
 
-    FactoryGirl.create(:materials_class,
+    FactoryGirl.create(:material_class,
       :masked_number => "01.32.15.000.000", :description => 'Antivirus')
 
     navigate 'Comum > Cadastrais > Materiais > Materiais'

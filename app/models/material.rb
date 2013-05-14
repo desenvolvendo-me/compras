@@ -1,15 +1,15 @@
 class Material < Compras::Model
-  attr_accessible :code, :materials_class_id, :description, :detailed_description,
+  attr_accessible :code, :material_class_id, :description, :detailed_description,
                   :reference_unit_id, :manufacturer, :material_type, :combustible,
                   :expense_nature_id, :active, :control_amount
 
-  attr_writer :autocomplete_materials_class
+  attr_writer :autocomplete_material_class
 
   attr_modal :description, :material_type
 
   has_enumeration_for :material_type, :create_helpers => true, :create_scopes => true
 
-  belongs_to :materials_class
+  belongs_to :material_class
   belongs_to :reference_unit
   belongs_to :expense_nature
 
@@ -24,7 +24,7 @@ class Material < Compras::Model
   has_many :purchase_solicitation_budget_allocations, :through => :purchase_solicitations, :dependent => :restrict
   has_many :materials_controls, :dependent => :destroy, :inverse_of => :material, :order => :id
 
-  validates :materials_class, :reference_unit, :material_type, :detailed_description, :presence => true
+  validates :material_class, :reference_unit, :material_type, :detailed_description, :presence => true
   validates :code, :description, :presence => true, :uniqueness => { :allow_blank => true }
   validates :control_amount, :inclusion => { :in => [true, false] }
 
@@ -45,9 +45,9 @@ class Material < Compras::Model
     where { code.like("#{q}%") | description.like("#{q}%") }
   }
 
-  def self.last_by_materials_class_and_group(params = {})
+  def self.last_by_material_class_and_group(params = {})
     record = scoped
-    record = record.where { materials_class_id.eq(params.fetch(:materials_class_id)) }
+    record = record.where { material_class_id.eq(params.fetch(:material_class_id)) }
     record = record.order { code }.last
     record
   end
@@ -71,10 +71,10 @@ class Material < Compras::Model
     "#{code} - #{description}"
   end
 
-  def autocomplete_materials_class
-    return '' unless materials_class.present?
+  def autocomplete_material_class
+    return '' unless material_class.present?
 
-    materials_class.to_s
+    material_class.to_s
   end
 
   protected

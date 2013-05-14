@@ -8,8 +8,8 @@ pt-BR:
     attributes:
       material:
         active: "Ativo"
-        materials_class: "Classe"
-        autocomplete_materials_class: 'Classe'
+        material_class: "Classe"
+        autocomplete_material_class: 'Classe'
         code: "Código"
         control_amount: "Controla quantidade"
         description: "Descrição"
