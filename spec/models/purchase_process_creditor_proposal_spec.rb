@@ -1,5 +1,6 @@
 require 'model_helper'
 require 'app/models/purchase_process_creditor_proposal'
+require 'app/models/licitation_process'
 
 describe PurchaseProcessCreditorProposal do
   it { should belong_to :creditor }

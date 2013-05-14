@@ -35,12 +35,14 @@ feature 'PurchaseProcessCreditorDisqualifications' do
       expect(page).to have_content 'Email'
       expect(page).to have_content 'Propostas'
       expect(page).to have_content 'Desclassificar'
+      expect(page).to have_content 'Desclassificada?'
 
       within 'tbody tr:first' do
         expect(page).to have_content 'Gabriel Sobrinho'
         expect(page).to have_content 'gabriel.sobrinho@gmail.com'
         expect(page).to have_content 'Editar propostas'
         expect(page).to have_content 'Desclassificar propostas'
+        expect(page).to have_content 'Não'
       end
 
       within 'tbody tr:last' do
@@ -48,6 +50,7 @@ feature 'PurchaseProcessCreditorDisqualifications' do
         expect(page).to have_content 'wenderson.malheiros@gmail.com'
         expect(page).to have_content 'Cadastrar propostas'
         expect(page).to have_content 'Nenhuma proposta cadastrada'
+        expect(page).to have_content 'Não'
       end
 
       within 'tbody tr:first' do
@@ -110,6 +113,7 @@ feature 'PurchaseProcessCreditorDisqualifications' do
 
     within_records do
       within 'tbody tr:first' do
+        expect(page).to have_content 'Parcialmente'
         click_link 'Desclassificar propostas'
       end
     end
@@ -148,6 +152,7 @@ feature 'PurchaseProcessCreditorDisqualifications' do
 
     within_records do
       within 'tbody tr:first' do
+        expect(page).to have_content 'Totalmente'
         click_link 'Desclassificar propostas'
       end
     end
@@ -200,12 +205,14 @@ feature 'PurchaseProcessCreditorDisqualifications' do
       expect(page).to have_content 'Email'
       expect(page).to have_content 'Propostas'
       expect(page).to have_content 'Desclassificar'
+      expect(page).to have_content 'Desclassificada?'
 
       within 'tbody tr:first' do
         expect(page).to have_content 'Gabriel Sobrinho'
         expect(page).to have_content 'gabriel.sobrinho@gmail.com'
         expect(page).to have_content 'Editar propostas'
         expect(page).to have_content 'Desclassificar propostas'
+        expect(page).to have_content 'Não'
       end
 
       within 'tbody tr:last' do
@@ -213,6 +220,7 @@ feature 'PurchaseProcessCreditorDisqualifications' do
         expect(page).to have_content 'wenderson.malheiros@gmail.com'
         expect(page).to have_content 'Cadastrar propostas'
         expect(page).to have_content 'Nenhuma proposta cadastrada'
+        expect(page).to have_content 'Não'
       end
 
       within 'tbody tr:first' do
@@ -260,6 +268,7 @@ feature 'PurchaseProcessCreditorDisqualifications' do
 
     within_records do
       within 'tbody tr:first' do
+        expect(page).to have_content 'Parcialmente'
         click_link 'Desclassificar propostas'
       end
     end
@@ -298,6 +307,7 @@ feature 'PurchaseProcessCreditorDisqualifications' do
 
     within_records do
       within 'tbody tr:first' do
+        expect(page).to have_content 'Totalmente'
         click_link 'Desclassificar propostas'
       end
     end
@@ -336,12 +346,14 @@ feature 'PurchaseProcessCreditorDisqualifications' do
       expect(page).to have_content 'Email'
       expect(page).to have_content 'Propostas'
       expect(page).to have_content 'Desclassificar'
+      expect(page).to have_content 'Desclassificada?'
 
       within 'tbody tr:first' do
         expect(page).to have_content 'Gabriel Sobrinho'
         expect(page).to have_content 'gabriel.sobrinho@gmail.com'
         expect(page).to have_content 'Editar propostas'
         expect(page).to have_content 'Desclassificar propostas'
+        expect(page).to have_content 'Não'
       end
 
       within 'tbody tr:last' do
@@ -349,6 +361,7 @@ feature 'PurchaseProcessCreditorDisqualifications' do
         expect(page).to have_content 'wenderson.malheiros@gmail.com'
         expect(page).to have_content 'Cadastrar propostas'
         expect(page).to have_content 'Nenhuma proposta cadastrada'
+        expect(page).to have_content 'Não'
       end
 
       within 'tbody tr:first' do
@@ -381,6 +394,7 @@ feature 'PurchaseProcessCreditorDisqualifications' do
 
     within_records do
       within 'tbody tr:first' do
+        expect(page).to have_content 'Totalmente'
         click_link 'Desclassificar propostas'
       end
     end
@@ -422,12 +436,14 @@ feature 'PurchaseProcessCreditorDisqualifications' do
       expect(page).to have_content 'Email'
       expect(page).to have_content 'Propostas'
       expect(page).to have_content 'Desclassificar'
+      expect(page).to have_content 'Desclassificada?'
 
       within 'tbody tr:first' do
         expect(page).to have_content 'Gabriel Sobrinho'
         expect(page).to have_content 'gabriel.sobrinho@gmail.com'
         expect(page).to have_content 'Editar propostas'
         expect(page).to have_content 'Desclassificar propostas'
+        expect(page).to have_content 'Não'
       end
 
       within 'tbody tr:last' do
@@ -435,6 +451,7 @@ feature 'PurchaseProcessCreditorDisqualifications' do
         expect(page).to have_content 'wenderson.malheiros@gmail.com'
         expect(page).to have_content 'Cadastrar propostas'
         expect(page).to have_content 'Nenhuma proposta cadastrada'
+        expect(page).to have_content 'Não'
       end
 
       within 'tbody tr:first' do

@@ -29,8 +29,24 @@ class PurchaseProcessCreditorDisqualification < Compras::Model
     by_licitation_process_and_creditor(licitation_process.id, creditor.id).first_or_initialize
   end
 
+  def self.disqualification_status(licitation_process_id, creditor_id)
+    disqualification = self.by_licitation_process_and_creditor(licitation_process_id, creditor_id).first
+
+    return :not if (disqualification.nil? || disqualification.all_items_qualified?)
+    return :fully if disqualification.all_items_disqualified?
+    :partially
+  end
+
   def proposal_items
     licitation_process.proposals_of_creditor(creditor)
+  end
+
+  def all_items_disqualified?
+    proposal_items.all?(&:disqualified?)
+  end
+
+  def all_items_qualified?
+    proposal_items.all? { |item| !item.disqualified? }
   end
 
   private

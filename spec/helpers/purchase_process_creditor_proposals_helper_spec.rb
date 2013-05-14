@@ -70,4 +70,15 @@ describe PurchaseProcessCreditorProposalsHelper do
       helper.form_path
     end
   end
+
+  describe '#disqualification_status' do
+    let(:licitation_process) { double(:licitation_process, id: 1) }
+
+    before { assign(:licitation_process, licitation_process) }
+
+    it 'returns the translated disqualification status' do
+      PurchaseProcessCreditorDisqualification.should_receive(:disqualification_status).with(1, 1).and_return :fully
+      helper.disqualification_status(creditor).should eql "Totalmente"
+    end
+  end
 end

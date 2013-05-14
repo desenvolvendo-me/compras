@@ -1,5 +1,6 @@
 require 'model_helper'
 require 'app/models/purchase_process_creditor_disqualification'
+require 'app/models/licitation_process'
 
 describe PurchaseProcessCreditorDisqualification do
   it { should belong_to :licitation_process }
@@ -41,6 +42,42 @@ describe PurchaseProcessCreditorDisqualification do
       it 'builds a new one' do
         result = subject.class.find_or_initialize(licitation_process, creditor)
         expect(result.new_record?).to be_true
+      end
+    end
+  end
+
+  describe '.disqualification_status' do
+    let(:proposal) { double :proposal }
+
+    context 'when got no disqualification' do
+      before { subject.class.should_receive(:by_licitation_process_and_creditor).with(1, 1).and_return [] }
+
+      it 'returns :not' do
+        expect(subject.class.disqualification_status(1, 1)).to eql :not
+      end
+    end
+
+    context 'when all proposals are disqualified' do
+      before do
+        subject.class.should_receive(:by_licitation_process_and_creditor).with(1, 1).and_return [proposal]
+        proposal.stub(:all_items_qualified?).and_return false
+        proposal.stub(:all_items_disqualified?).and_return true
+      end
+
+      it 'returns :fully' do
+        expect(subject.class.disqualification_status(1, 1)).to eql :fully
+      end
+    end
+
+    context 'when some proposals are disqualified' do
+      before do
+        subject.class.should_receive(:by_licitation_process_and_creditor).with(1, 1).and_return [proposal]
+        proposal.stub(:all_items_qualified?).and_return false
+        proposal.stub(:all_items_disqualified?).and_return false
+      end
+
+      it 'returns :partially' do
+        expect(subject.class.disqualification_status(1, 1)).to eql :partially
       end
     end
   end
@@ -89,7 +126,7 @@ describe PurchaseProcessCreditorDisqualification do
     end
   end
 
-  describe 'disqualify_item?' do
+  describe '#disqualify_item?' do
     let(:item)     { double(:item, id: '1') }
     let(:item_ids) { double(:item_ids) }
 
@@ -118,6 +155,32 @@ describe PurchaseProcessCreditorDisqualification do
     it 'adds error to kind unless it is total' do
       error.should_receive(:add).with(:kind, :should_be_total)
       subject.send :kind_should_be_total
+    end
+  end
+
+  describe '#all_items_disqualified?' do
+    let(:proposal_items) { double :proposal_items }
+    let(:proposal_item)  { double :proposal_item }
+
+    it 'checks to see if all proposal items are disqualified' do
+      subject.should_receive(:proposal_items).and_return proposal_items
+      proposal_items.should_receive(:all?).and_yield proposal_item
+      proposal_item.should_receive(:disqualified?).and_return true
+
+      expect(subject.all_items_disqualified?).to be_true
+    end
+  end
+
+  describe '#all_items_qualified?' do
+    let(:proposal_items) { double :proposal_items }
+    let(:proposal_item)  { double :proposal_item }
+
+    it 'checks to see if all proposal items are qualified' do
+      subject.should_receive(:proposal_items).and_return proposal_items
+      proposal_items.should_receive(:all?).and_yield proposal_item
+      proposal_item.should_receive(:disqualified?).and_return false
+
+      expect(subject.all_items_qualified?).to be_true
     end
   end
 end
