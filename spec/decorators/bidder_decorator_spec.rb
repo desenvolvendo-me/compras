@@ -36,37 +36,6 @@ describe BidderDecorator do
     end
   end
 
-  context '#show_proposal_tabs' do
-    it "should return items partial when can update proposals and haven't lots" do
-      component.stub(:can_update_proposals?).and_return(true)
-      component.stub_chain(:licitation_process_lots, :empty?).and_return(true)
-      expect(subject.show_proposal_tabs).to eq "bidders/proposal_by_items"
-    end
-
-    it "should return lots partial when can update proposals and have lots" do
-      component.stub(:can_update_proposals?).and_return(true)
-      component.stub_chain(:licitation_process_lots, :empty?).and_return(false)
-      expect(subject.show_proposal_tabs).to eq "bidders/proposal_by_lots"
-    end
-
-    context 'when cannot update proposals' do
-      before do
-        I18n.backend.store_translations 'pt-BR', :other => {
-          'compras' => {
-            'messages' => {
-              'to_add_proposals_all_items_must_belong_to_any_lot_or_any_lot_must_exist' => 'Para adicionar propostas, todos os itens devem pertencer a algum Lote ou nenhum lote deve existir.'
-            }
-          }
-        }
-      end
-
-      it "should return erro message" do
-        component.stub(:can_update_proposals?).and_return(false)
-        expect(subject.show_proposal_tabs).to eq :text => "Para adicionar propostas, todos os itens devem pertencer a algum Lote ou nenhum lote deve existir."
-      end
-    end
-  end
-
   describe "#proposal_total_value_by_lot" do
     context 'when do not have proposal_total_value_by_lot' do
       before do

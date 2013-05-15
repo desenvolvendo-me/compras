@@ -4,8 +4,6 @@ creditors:
   - representatives
 bidders:
   - people
-licitation_process_lots:
-  - purchase_process_items
 regulatory_acts:
   - dissemination_sources
 licitation_processes:

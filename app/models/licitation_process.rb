@@ -57,7 +57,6 @@ class LicitationProcess < Compras::Model
   has_many :pledges, :dependent => :restrict
   has_many :judgment_commission_advices, :dependent => :restrict
   has_many :licitation_notices, :dependent => :destroy
-  has_many :licitation_process_lots, :dependent => :destroy, :order => :id
   has_many :reserve_funds, :dependent => :restrict
   has_many :licitation_process_ratifications, :dependent => :restrict, :order => :id
   has_many :classifications, :through => :bidders, :class_name => 'LicitationProcessClassification',
@@ -182,22 +181,12 @@ class LicitationProcess < Compras::Model
     new_record? || ((licitation_process_ratifications.empty? || publications.empty?) && publications.current_updatable?)
   end
 
-  def filled_lots?
-    items && !items.without_lot?
-  end
-
   def all_licitation_process_classifications
     classifications.for_active_bidders.order(:bidder_id, :classification)
   end
 
   def destroy_all_licitation_process_classifications
     bidders.each(&:destroy_all_classifications)
-  end
-
-  def lots_with_items
-    licitation_process_lots.select do |lot|
-      lot.purchase_process_items.present? && lot.bidder_proposals.present?
-    end
   end
 
   def has_bidders_and_is_available_for_classification

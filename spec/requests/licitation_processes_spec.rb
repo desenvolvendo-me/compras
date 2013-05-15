@@ -862,40 +862,6 @@ feature "LicitationProcesses" do
     end
   end
 
-  scenario 'generate calculation and disable a bidder by maximum value' do
-    licitation_process = LicitationProcess.make!(:valor_maximo_ultrapassado)
-    bidder = licitation_process.bidders.first
-    LicitationProcessLot.make!(:lote, :licitation_process => licitation_process,
-                               :purchase_process_items => [licitation_process.items.first])
-
-    navigate 'Processos de Compra > Processos de Compras'
-
-    click_link "Limpar Filtro"
-
-    within_records do
-      click_link '1/2012'
-    end
-
-    expect(page).to_not have_button 'Relatório'
-
-    click_button 'Apurar'
-
-    expect(page).to have_content 'PROCESSO DE COMPRA 1/2012'
-
-    expect(page).to have_content 'Apuração: Por Lote com Menor Preço'
-
-    expect(page).to have_content 'Nohup'
-
-    within ".classification-#{bidder.id}-0-0" do
-      expect(page).to have_content 'Antivirus'
-      expect(page).to have_content '9,10'
-      expect(page).to have_content '18,20'
-      expect(page).to have_content 'Ganhou'
-    end
-
-    expect(page).to_not have_content 'IBM'
-  end
-
   scenario 'generate calculation with equalized result' do
     licitation_process = LicitationProcess.make!(:apuracao_global_empatou)
 
@@ -1032,46 +998,6 @@ feature "LicitationProcesses" do
       expect(page).to have_content '18,00'
       expect(page).to have_content 'Empatou'
     end
-
-    click_link 'voltar'
-
-    click_link 'Habilitação'
-
-    click_link 'Nohup'
-
-    within_tab 'Propostas' do
-      fill_in 'Preço unitário', :with => '8,99'
-    end
-
-    click_button 'Salvar'
-
-    expect(page).to have_notice 'Licitante editado com sucesso.'
-
-    click_link 'Voltar ao processo de compra'
-
-    click_button 'Apurar'
-
-    expect(page).to have_content 'PROCESSO DE COMPRA 1/2012'
-
-    expect(page).to have_content 'Apuração: Forma Global com Menor Preço'
-
-    expect(page).to have_content 'Nohup'
-
-    within '.classification-1-0' do
-      expect(page).to have_content 'Antivirus'
-      expect(page).to have_content '8,99'
-      expect(page).to have_content '17,98'
-      expect(page).to have_content 'Ganhou'
-    end
-
-    expect(page).to have_content 'IBM'
-
-    within '.classification-2-0' do
-      expect(page).to have_content 'Antivirus'
-      expect(page).to have_content '9,00'
-      expect(page).to have_content '18,00'
-      expect(page).to have_content 'Perdeu'
-    end
   end
 
   scenario 'generate calculation between a small company and a big company and dont make a new proposal' do
@@ -1186,118 +1112,6 @@ feature "LicitationProcesses" do
       expect(page).to have_content '20,00'
       expect(page).to have_content 'Perdeu'
     end
-
-    click_link 'voltar'
-
-    click_link 'Habilitação'
-
-    click_link 'Wenderson Malheiros'
-
-    within_tab 'Propostas' do
-      expect(page).to have_select 'Situação', :selected => 'Perdeu'
-      expect(page).to have_field 'Classificação', :with => '2'
-    end
-
-    click_link 'Voltar'
-
-    click_link 'Gabriel Sobrinho'
-
-    within_tab 'Propostas' do
-      expect(page).to have_select 'Situação', :selected => 'Ganhou'
-      expect(page).to have_field 'Classificação', :with => '1'
-    end
-  end
-
-  scenario 'generate calculation when type of calculation is by lot' do
-    licitation_process = LicitationProcess.make!(:apuracao_por_lote)
-    LicitationProcessLot.make!(:lote, :licitation_process => licitation_process,
-                               :purchase_process_items => [licitation_process.items.first])
-    LicitationProcessLot.make!(:lote_antivirus, :licitation_process => licitation_process,
-                               :purchase_process_items => [licitation_process.items.second])
-
-    navigate 'Processos de Compra > Processos de Compras'
-
-    click_link "Limpar Filtro"
-
-    within_records do
-      click_link '1/2012'
-    end
-
-    click_button 'Apurar'
-
-    expect(page).to have_content 'PROCESSO DE COMPRA 1/2012'
-
-    expect(page).to have_content 'Apuração: Por Lote com Menor Preço'
-
-    expect(page).to have_content 'Wenderson Malheiros'
-
-    within 'table.records:nth-of-type(1)' do
-      within 'tbody tr:nth-child(1)' do
-        expect(page).to have_content 'Antivirus'
-        expect(page).to have_content '10,00'
-        expect(page).to have_content '20,00'
-        expect(page).to have_content 'Perdeu'
-      end
-
-      within 'tbody tr:nth-child(2)' do
-        expect(page).to have_content 'Arame comum'
-        expect(page).to have_content '1'
-        expect(page).to have_content '9,00'
-        expect(page).to have_content 'Ganhou'
-      end
-    end
-
-    expect(page).to have_content 'Gabriel Sobrinho'
-
-    within 'table.records:nth-of-type(2)' do
-      within 'tbody tr:nth-child(1)' do
-        expect(page).to have_content 'Antivirus'
-        expect(page).to have_content '9,00'
-        expect(page).to have_content '18,00'
-        expect(page).to have_content 'Ganhou'
-      end
-
-      within 'tbody tr:nth-child(2)' do
-        expect(page).to have_content 'Arame comum'
-        expect(page).to have_content '1'
-        expect(page).to have_content '10,00'
-        expect(page).to have_content 'Perdeu'
-      end
-    end
-
-    click_link 'voltar'
-
-    click_link 'Habilitação'
-
-    click_link 'Wenderson Malheiros'
-
-    within_tab 'Propostas' do
-      within_tab 'Lote 1' do
-        expect(page).to have_select 'Situação', :selected => 'Perdeu'
-        expect(page).to have_field 'Classificação', :with => '2'
-      end
-
-      within_tab 'Lote 2' do
-        expect(page).to have_select 'Situação', :selected => 'Ganhou'
-        expect(page).to have_field 'Classificação', :with => '1'
-      end
-    end
-
-    click_link 'Voltar'
-
-    click_link 'Gabriel Sobrinho'
-
-    within_tab 'Propostas' do
-      within_tab 'Lote 1' do
-        expect(page).to have_select 'Situação', :selected => 'Ganhou'
-        expect(page).to have_field 'Classificação', :with => '1'
-      end
-
-      within_tab 'Lote 2' do
-        expect(page).to have_select 'Situação', :selected => 'Perdeu'
-        expect(page).to have_field 'Classificação', :with => '2'
-      end
-    end
   end
 
   scenario 'generate calculation when type of calculation is by item' do
@@ -1358,32 +1172,6 @@ feature "LicitationProcesses" do
         expect(page).to have_content '10,00'
         expect(page).to have_content 'Perdeu'
       end
-    end
-
-    click_link 'voltar'
-
-    click_link 'Relatório'
-
-    expect(page).to have_content 'PROCESSO DE COMPRA 1/2012'
-
-    click_link 'voltar'
-
-    click_link 'Habilitação'
-
-    click_link 'Wenderson Malheiros'
-
-    within_tab 'Propostas' do
-      expect(page).to have_select 'Situação', :selected => 'Perdeu'
-      expect(page).to have_field 'Classificação', :with => '2'
-    end
-
-    click_link 'Voltar'
-
-    click_link 'Gabriel Sobrinho'
-
-    within_tab 'Propostas' do
-      expect(page).to have_select 'Situação', :selected => 'Ganhou'
-      expect(page).to have_field 'Classificação', :with => '1'
     end
   end
 

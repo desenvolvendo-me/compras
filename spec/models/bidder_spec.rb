@@ -33,6 +33,7 @@ describe Bidder do
   it { should have_many(:trading_item_bids).dependent(:restrict) }
   it { should have_many(:licitation_process_ratifications).dependent(:restrict) }
   it { should have_many(:trading_item_closings).dependent(:restrict) }
+  it { should have_many(:items).through(:licitation_process) }
 
   it { should have_one(:disqualification).dependent(:destroy) }
 
@@ -45,12 +46,7 @@ describe Bidder do
     it { should delegate(:has_trading?).to(:licitation_process).prefix(true) }
 
     it { should delegate(:envelope_opening?).to(:licitation_process).allowing_nil(true) }
-    it { should delegate(:items).to(:licitation_process).allowing_nil(true) }
     it { should delegate(:allow_bidders?).to(:licitation_process).allowing_nil(true) }
-    it { should delegate(:licitation_process_lots).to(:licitation_process).allowing_nil(true) }
-
-    it { should delegate(:purchase_process_items).to(:licitation_process_lots) }
-    it { should delegate(:material).to(:purchase_process_items) }
     it { should delegate(:benefited).to(:creditor).allowing_nil(true) }
   end
 
@@ -234,17 +230,6 @@ describe Bidder do
         subject.run_callbacks(:save)
       end
     end
-  end
-
-  it "should can update proposals when all licitation process lots are filled" do
-    subject.stub_chain(:licitation_process, :filled_lots?).and_return(true)
-    expect(subject).to be_can_update_proposals
-  end
-
-  it "should can update proposals when has not any lots" do
-    subject.stub_chain(:licitation_process, :filled_lots?).and_return(false)
-    subject.stub(:licitation_process_lots).and_return( Array.new )
-    expect(subject).to be_can_update_proposals
   end
 
   it 'should return 0 as the total price when there are no proposals' do

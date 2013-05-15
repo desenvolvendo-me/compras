@@ -4,7 +4,6 @@ permissions:
     bidder_disqualifications: tradings
     contract_terminations: contracts
     judgment_commission_advices: licitation_processes
-    licitation_process_lots: licitation_processes
     licitation_process_publications: licitation_processes
     legal_analysis_appraisals: licitation_processes
     occurrence_contractual_historics: contracts

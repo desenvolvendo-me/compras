@@ -197,40 +197,6 @@ describe PurchaseProcessClassificationSituationGenerator do
     end
   end
 
-  context 'change situation and classification of proposals by lot' do
-    before do
-      lot.stub(:licitation_process_classifications => licitation_process_classifications)
-
-      proposal.stub(:licitation_process_lot => lot)
-
-      purchase_process.stub(
-        :all_licitation_process_classifications => classifications)
-
-      judgment_form.stub(:lot?).and_return(true)
-    end
-
-    let(:classifications) { [] }
-    let(:licitation_process_classifications) { [classification_lot] }
-
-    let :classification_lot do
-      double('LicitationProcessClassification', :classification => 1, :situation => 'won',
-             :classifiable => 'LicitationProcessLot', :proposals => proposals,
-             :disqualified? => false)
-    end
-
-    it 'it should change classification and situation of proposal' do
-      licitation_process_classifications.stub(:for_active_bidders).and_return([classification_lot])
-      classifications.stub(:disqualified).and_return([])
-
-      classification_lot.should_receive(:win!)
-      proposal.should_receive(:save!).and_return(true)
-      proposal.should_receive(:situation=).with('won')
-      proposal.should_receive(:classification=).with(1)
-
-      subject.generate!
-    end
-  end
-
   context 'change situation and classification of proposals by bidder' do
     let :classification_bidder do
       double('LicitationProcessClassification', :classification => 1, :situation => 'won',

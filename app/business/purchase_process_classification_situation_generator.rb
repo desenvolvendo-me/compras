@@ -92,16 +92,6 @@ class PurchaseProcessClassificationSituationGenerator
     end
   end
 
-  def change_proposal_situation_by_lot!
-    lots_with_items.each do |lot|
-      lot.licitation_process_classifications.each do |classification|
-        proposals = classification.proposals.select { |p| p.licitation_process_lot == lot }
-
-        change_proposals_situation!(proposals, classification)
-      end
-    end
-  end
-
   def change_proposal_situation_by_item!
     items.each do |item|
       item.licitation_process_classifications.each do |classification|

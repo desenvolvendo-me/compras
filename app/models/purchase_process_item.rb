@@ -7,7 +7,6 @@ class PurchaseProcessItem < Compras::Model
   attr_modal :material, :quantity, :unit_price
 
   belongs_to :material
-  belongs_to :licitation_process_lot
   belongs_to :licitation_process
   belongs_to :creditor
 
@@ -38,18 +37,6 @@ class PurchaseProcessItem < Compras::Model
   scope :licitation_process_id, lambda { |licitation_process_id|
     where(:licitation_process_id => licitation_process_id)
   }
-
-  scope :without_lot_or_ids, lambda { |ids|
-    where { licitation_process_lot_id.eq(nil) | id.in(ids) }
-  }
-
-  def self.without_lot
-    where { licitation_process_lot_id.eq(nil) }
-  end
-
-  def self.without_lot?
-    without_lot.any?
-  end
 
   def to_s
     material.to_s

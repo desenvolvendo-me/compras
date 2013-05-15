@@ -13,7 +13,6 @@ describe PurchaseProcessItem do
   it { should validate_presence_of :lot }
 
   it { should belong_to :material }
-  it { should belong_to :licitation_process_lot }
   it { should belong_to :licitation_process }
   it { should belong_to :creditor }
 

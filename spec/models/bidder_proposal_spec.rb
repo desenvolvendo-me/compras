@@ -7,7 +7,6 @@ describe BidderProposal do
   it { should belong_to :purchase_process_item }
   it { should belong_to :bidder }
 
-  it { should have_one(:licitation_process_lot).through(:purchase_process_item) }
   it { should have_many(:licitation_process_ratification_items).dependent(:destroy) }
 
   it { should delegate(:material).to(:purchase_process_item).allowing_nil(true) }
