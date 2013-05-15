@@ -1247,7 +1247,7 @@ feature "LicitationProcesses" do
       select 'Pregão', :from => 'Modalidade'
 
       expect(page).to have_select('Forma de julgamento',
-                                  :options => ['Forma Global com Menor Preço', 'Por Item com Menor Preço'])
+                                  :options => ['Por Item com Menor Preço'])
 
       check 'Registro de preço'
 
