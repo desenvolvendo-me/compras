@@ -22,6 +22,7 @@ class Bidder < Compras::Model
   has_many :trading_item_bids, :dependent => :restrict
   has_many :licitation_process_ratifications, :dependent => :restrict
   has_many :trading_item_closings, :dependent => :restrict
+  has_many :items, :through => :licitation_process
 
   has_one :disqualification, :dependent => :destroy, :class_name => 'BidderDisqualification'
   has_one :judgment_form, :through => :licitation_process
@@ -29,10 +30,8 @@ class Bidder < Compras::Model
   delegate :document_type_ids, :process_date, :ratification?, :has_trading?,
            :invitation?,
            :to => :licitation_process, :prefix => true, :allow_nil => true
-  delegate :envelope_opening?, :items, :allow_bidders?, :licitation_process_lots,
+  delegate :envelope_opening?, :allow_bidders?,
            :to => :licitation_process, :allow_nil => true
-  delegate :purchase_process_items, :to => :licitation_process_lots
-  delegate :material, :to => :purchase_process_items
   delegate :benefited, :to => :creditor, :allow_nil => true
 
   accepts_nested_attributes_for :documents, :allow_destroy => true
@@ -206,10 +205,6 @@ class Bidder < Compras::Model
     licitation_process_classifications.destroy_all
   end
 
-  def proposals_by_lot(lot)
-    proposals.select { |proposal| proposal.licitation_process_lot == lot }
-  end
-
   def filled_documents?
     return false if documents.empty?
 
@@ -255,23 +250,9 @@ class Bidder < Compras::Model
     documents.select { |d| !d.purchase_document? }
   end
 
-  def can_update_proposals?
-    licitation_process.filled_lots? || licitation_process_lots.empty?
-  end
-
   def proposal_total_value
     total = self.class.joins { proposals.purchase_process_item }.
       where { |bidder| bidder.id.eq id }.
-      select { sum(proposals.purchase_process_item.quantity * proposals.unit_price).as(proposal_total) }.first.proposal_total
-
-    BigDecimal(total || 0)
-  end
-
-  def proposal_total_value_by_lot(lot_id = nil)
-    return BigDecimal(0) unless lot_id
-
-    total = self.class.joins { proposals.purchase_process_item.licitation_process_lot }.
-      where { |bidder| (bidder.id.eq id) & (bidder.proposals.purchase_process_item.licitation_process_lot.id.eq lot_id) }.
       select { sum(proposals.purchase_process_item.quantity * proposals.unit_price).as(proposal_total) }.first.proposal_total
 
     BigDecimal(total || 0)

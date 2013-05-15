@@ -17,7 +17,6 @@ require 'app/models/pledge'
 require 'app/models/judgment_commission_advice'
 require 'app/models/creditor'
 require 'app/models/licitation_notice'
-require 'app/models/licitation_process_lot'
 require 'app/business/purchase_process_envelope_opening_date'
 require 'app/models/reserve_fund'
 require 'app/models/indexer'
@@ -62,7 +61,6 @@ describe LicitationProcess do
   it { should have_many(:license_creditors).dependent(:restrict).through(:bidders) }
   it { should have_many(:accreditation_creditors).through(:purchase_process_accreditation) }
 
-  it { should have_many(:licitation_process_lots).dependent(:destroy).order(:id) }
   it { should have_many(:reserve_funds).dependent(:restrict) }
   it { should have_many(:licitation_process_ratifications).dependent(:restrict) }
   it { should have_many(:classifications).through(:bidders) }
@@ -369,27 +367,6 @@ describe LicitationProcess do
       subject.proposal_envelope_opening_date = Date.current
 
       expect(subject).to be_envelope_opening
-    end
-  end
-
-  it "should have filled lots" do
-    subject.stub(:items).and_return(true)
-    subject.items.stub(:without_lot?).and_return(false)
-    expect(subject).to be_filled_lots
-  end
-
-  context 'lots with items' do
-    let :lot_with_items do
-      [double("LicitationProcessLot", :purchase_process_items => [double("LicitationProcessLotItem")],
-              :bidder_proposals => [double]),
-       double("LicitationProcessLot", :purchase_process_items => [],
-              :bidder_proposals => [double])]
-    end
-
-    it 'should filter lots with items' do
-      subject.should_receive(:licitation_process_lots).and_return(lot_with_items)
-
-      expect(subject.lots_with_items.size).to eq 1
     end
   end
 

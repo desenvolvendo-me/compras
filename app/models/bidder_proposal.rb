@@ -4,7 +4,7 @@ class BidderProposal < Compras::Model
 
   has_enumeration_for :situation, :with => SituationOfProposal
 
-  has_one :licitation_process_lot, :through => :purchase_process_item
+  has_one :purchase_process_item
   has_many :licitation_process_ratification_items, :dependent => :destroy
 
   belongs_to :purchase_process_item
@@ -16,11 +16,6 @@ class BidderProposal < Compras::Model
   delegate :creditor, :to => :bidder, :allow_nil => true
 
   after_initialize :set_default_values
-
-  scope :by_lot, lambda { |lot_id|
-    joins { purchase_process_item.licitation_process_lot }.
-    where { purchase_process_item.licitation_process_lot.id.eq(lot_id) }
-  }
 
   def self.by_item_order_by_unit_price(item_id)
     where { purchase_process_item_id.eq(item_id) & unit_price.not_eq(nil)}.

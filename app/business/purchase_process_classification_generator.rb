@@ -61,22 +61,6 @@ class PurchaseProcessClassificationGenerator
     end
   end
 
-  def lowest_price_by_lot
-    purchase_process.licitation_process_lots.each do |lot|
-      ordered_bidders = lot.order_bidders_by_total_price.
-                            reject { |bidder| bidder.has_item_with_unit_price_equals_zero(lot) }
-
-      bidders.each do |bidder|
-        classification_repository.create!(
-          :total_value => bidder.proposal_total_value_by_lot(lot),
-          :classification => classify_item(bidder, ordered_bidders),
-          :bidder => bidder,
-          :classifiable => lot
-        )
-      end
-    end
-  end
-
   def classify_item(item, ordered_items)
     item_index = ordered_items.index(item)
 

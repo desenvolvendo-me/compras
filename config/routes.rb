@@ -486,13 +486,6 @@ Compras::Application.routes.draw do
 
   resources :bidder_disqualifications, :except => [:index, :filter, :modal]
 
-  resources :licitation_process_lots do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
   resources :licitation_process_publications do
     collection do
       get :filter

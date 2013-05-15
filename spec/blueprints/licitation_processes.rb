@@ -24,7 +24,7 @@ LicitationProcess.blueprint(:processo_licitatorio) do
   caution_value { 9.99 }
   document_types { [DocumentType.make!(:fiscal)] }
   publications { [LicitationProcessPublication.make!(:publicacao)] }
-  licitation_process_lots { [LicitationProcessLot.make(:lote_antivirus, :licitation_process => object)] }
+  price_registration { true }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   notice_availability_date { I18n.l(Date.tomorrow) }
@@ -152,7 +152,6 @@ LicitationProcess.blueprint(:processo_licitatorio_canetas) do
   publications { [LicitationProcessPublication.make!(:publicacao,
                                                                         :licitation_process => object)] }
   bidders { [Bidder.make!(:licitante)] }
-  licitation_process_lots { [LicitationProcessLot.make(:lote_antivirus, :licitation_process => object)] }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   notice_availability_date { I18n.l(Date.tomorrow) }
@@ -442,7 +441,6 @@ LicitationProcess.blueprint(:processo_licitatorio_nao_atualizavel) do
   caution_value { 9.99 }
   document_types { [DocumentType.make!(:fiscal)] }
   publications { [LicitationProcessPublication.make!(:publicacao_nao_atualizavel)] }
-  licitation_process_lots { [LicitationProcessLot.make(:lote_antivirus, :licitation_process => object)] }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   notice_availability_date { I18n.l(Date.tomorrow) }
