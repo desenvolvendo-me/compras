@@ -14,51 +14,27 @@ require 'app/models/inscriptio_cursualis/address'
 require 'app/models/address'
 
 describe Person do
-  it "return name when call to_s" do
-    subject.name = "Wenderson"
-    expect(subject.to_s).to eq subject.name
-  end
-
-  context "#correspondence_address?" do
-    it "should return true if has correspondence address" do
-      subject.stub_chain(:correspondence_address, :present?).and_return(true)
-      expect(subject.correspondence_address?).to be_true
-    end
-  end
-
-  describe "#company?" do
-    it "should be a company" do
-      subject.stub(:personable).and_return(double(:cnpj => '12345'))
-      expect(subject.company?).to be_true
-    end
-
-    it "should not be a company" do
-      subject.stub(:personable_type).and_return("Individual")
-      expect(subject.company?).to be_false
-    end
-  end
-
-  describe '#individual' do
-    it 'should be individual' do
-      subject.stub(:personable).and_return(double(:cpf => '12345'))
-      expect(subject).to be_individual
-    end
-
-    it 'should not be individual' do
-      subject.stub(:personable_type).and_return 'Company'
-      expect(subject).not_to be_individual
-    end
-  end
-
-  it { should have_one(:creditor).dependent(:restrict) }
-
   it { should have_many(:licitation_process_impugnments).dependent(:restrict) }
   it { should have_many(:licitation_process_appeals).dependent(:restrict) }
   it { should have_many :partners }
   it { should have_many(:bidders).through(:accredited_representatives) }
   it { should have_many(:accredited_representatives).dependent(:restrict) }
 
+  it { should have_one(:creditor).dependent(:restrict) }
+  it { should have_one(:street).through(:address) }
+  it { should have_one(:neighborhood).through(:address) }
+
   it { should validate_presence_of(:address) }
+
+  it { should delegate(:city).to(:address).allowing_nil(true) }
+  it { should delegate(:state).to(:address).allowing_nil(true) }
+  it { should delegate(:zip_code).to(:address).allowing_nil(true) }
+  it { should delegate(:benefited).to(:company_size).allowing_nil(true) }
+
+  it "return name when call to_s" do
+    subject.name = "Wenderson"
+    expect(subject.to_s).to eq subject.name
+  end
 
   it "should return an empty string on identity document when personable doesn't respond_to both cpf and cnpj" do
     expect(subject.identity_document).to eq ''
@@ -80,7 +56,7 @@ describe Person do
     end
 
     before do
-      subject.stub(:personable => personable)
+      subject.stub(personable: personable)
     end
 
     describe '#company_size' do
@@ -144,9 +120,40 @@ describe Person do
       end
 
       it 'should return identity_number if is individual' do
-        personable.stub(:number => '1111')
+        personable.stub(number: '1111')
         expect(subject.identity_number).to eq '1111'
       end
+    end
+  end
+
+  context "#correspondence_address?" do
+    it "should return true if has correspondence address" do
+      subject.stub_chain(:correspondence_address, :present?).and_return(true)
+      expect(subject.correspondence_address?).to be_true
+    end
+  end
+
+  describe "#company?" do
+    it "should be a company" do
+      subject.stub(:personable).and_return(double(cnpj: '12345'))
+      expect(subject.company?).to be_true
+    end
+
+    it "should not be a company" do
+      subject.stub(:personable_type).and_return("Individual")
+      expect(subject.company?).to be_false
+    end
+  end
+
+  describe '#individual' do
+    it 'should be individual' do
+      subject.stub(:personable).and_return(double(cpf: '12345'))
+      expect(subject).to be_individual
+    end
+
+    it 'should not be individual' do
+      subject.stub(:personable_type).and_return 'Company'
+      expect(subject).not_to be_individual
     end
   end
 end
