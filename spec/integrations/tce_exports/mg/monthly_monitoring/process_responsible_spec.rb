@@ -1,7 +1,7 @@
 #encoding: utf-8
 require 'spec_helper'
 
-describe TceExport::MG::MonthlyMonitoring::MonthlyProcessResponsible do
+describe TceExport::MG::MonthlyMonitoring::ProcessResponsibleGenerator do
   describe "#generate_file" do
     before do
       FileUtils.rm_f('tmp/RESPLIC.csv')
@@ -74,7 +74,7 @@ describe TceExport::MG::MonthlyMonitoring::MonthlyProcessResponsible do
         prefecture: prefecture,
         year: 2013)
 
-      subject.generate_file(monthly_monitoring)
+      described_class.generate_file(monthly_monitoring)
 
       csv = File.read('tmp/RESPLIC.csv', encoding: 'ISO-8859-1')
 

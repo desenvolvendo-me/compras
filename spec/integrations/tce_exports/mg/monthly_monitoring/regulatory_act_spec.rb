@@ -1,7 +1,7 @@
 #encoding: utf-8
 require 'spec_helper'
 
-describe TceExport::MG::MonthlyMonitoring::MonthlyRegulatoryAct do
+describe TceExport::MG::MonthlyMonitoring::RegulatoryActGenerator do
   describe "#generate_file" do
     before do
       FileUtils.rm_f('tmp/REGLIC.csv')
@@ -16,6 +16,13 @@ describe TceExport::MG::MonthlyMonitoring::MonthlyRegulatoryAct do
         address: Address.make!(:general))
     end
 
+    let(:monthly_monitoring) do
+      FactoryGirl.create(:monthly_monitoring,
+        prefecture: prefecture,
+        year: 2013,
+        city_code: "51234")
+    end
+
     it "generates a CSV file with the required data" do
       FactoryGirl.create(:extended_prefecture, prefecture: prefecture)
       RegulatoryAct.make!(:sopa,
@@ -25,12 +32,8 @@ describe TceExport::MG::MonthlyMonitoring::MonthlyRegulatoryAct do
         regulatory_act_type: RegulatoryActType.make!(:emenda,
           kind: RegulatoryActTypeKind::TRADING))
 
-      monthly_monitoring = FactoryGirl.create(:monthly_monitoring,
-        prefecture: prefecture,
-        year: 2013,
-        city_code: "51234")
 
-      subject.generate_file(monthly_monitoring)
+      described_class.generate_file(monthly_monitoring)
 
       csv = File.read('tmp/REGLIC.csv', encoding: 'ISO-8859-1')
 
