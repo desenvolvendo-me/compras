@@ -1,2 +1,0 @@
-class StageProcessesController < CrudController
-end
