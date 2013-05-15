@@ -649,31 +649,6 @@ feature "Bidders" do
     end
   end
 
-  scenario 'create bidder link does show when envelope opening date is today' do
-    LicitationProcess.make!(:processo_licitatorio_computador)
-    Creditor.make!(:sobrinho_sa)
-
-    navigate 'Processos de Compra > Processos de Compras'
-
-    within_records do
-      click_link '2/2013'
-    end
-
-    click_link 'Habilitação'
-
-    click_link 'Criar Licitante'
-
-    expect(page).to have_button 'Salvar'
-  end
-
-  scenario 'create bidder link does not show when envelope opening date is not today' do
-    licitation_process = LicitationProcess.make!(:processo_licitatorio)
-
-    visit bidders_path(:licitation_process_id => licitation_process.id)
-
-    expect(page).to_not have_link 'Criar Licitante'
-  end
-
   scenario "index should have title Licitantes do Processo de Compra 1/2013" do
     LicitationProcess.make!(:processo_licitatorio_computador)
 
@@ -780,49 +755,6 @@ feature "Bidders" do
     end
 
     expect(page).to_not have_field 'Pontuação técnica'
-  end
-
-  scenario "Save and destroy buttons should be disabled if licitation process envelope opening date is not today" do
-    licitation_process = LicitationProcess.make!(:apuracao_global)
-    licitation_process.update_attribute :proposal_envelope_opening_date, Date.tomorrow
-
-    navigate 'Processos de Compra > Processos de Compras'
-
-    click_link "Limpar Filtro"
-
-    within_records do
-      click_link '1/2012'
-    end
-
-    click_link 'Habilitação'
-
-    within_records do
-      click_link 'Wenderson Malheiros'
-    end
-
-    expect(page).to have_disabled_element 'Apagar',
-                    :reason => 'alterações permitidas somente no dia da abertura dos envelopes'
-    expect(page).to have_disabled_element 'Salvar',
-                    :reason => 'alterações permitidas somente no dia da abertura dos envelopes'
-  end
-
-  scenario "Save and destroy buttons should be shown if licitation process envelope opening date is today" do
-    LicitationProcess.make!(:processo_licitatorio_computador)
-
-    navigate 'Processos de Compra > Processos de Compras'
-
-    within_records do
-      click_link '2/2013'
-    end
-
-    click_link 'Habilitação'
-
-    within_records do
-      click_link 'Wenderson Malheiros'
-    end
-
-    expect(page).to have_button 'Salvar'
-    expect(page).to have_link 'Apagar'
   end
 
   scenario 'Bidders cant be changed when the licitation process has a ratification' do
