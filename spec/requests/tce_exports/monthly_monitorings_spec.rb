@@ -26,6 +26,7 @@ feature "Monthly Monitoring TCE File" do
     expect(page).to have_content "REGLIC - Decreto Municipal Regulamentador do Pregão / Registro de Preços"
     expect(page).to have_content "RESPLIC - Responsáveis pela Licitação"
     expect(page).to have_content "REGADESAO - Adesão a Registro de Preços"
+    expect(page).to have_content "PARELIC - Parecer da Licitação"
 
     fill_in "Ano da prestação de contas", with: "2013"
 

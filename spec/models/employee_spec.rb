@@ -41,4 +41,8 @@ describe Employee do
   it { should delegate(:zip_code).to(:individual).allowing_nil(true) }
   it { should delegate(:city).to(:individual).allowing_nil(true) }
   it { should delegate(:state).to(:individual).allowing_nil(true) }
+  it { should delegate(:name).to(:street).allowing_nil(true).prefix(true) }
+  it { should delegate(:name).to(:neighborhood).allowing_nil(true).prefix(true) }
+  it { should delegate(:tce_mg_code).to(:city).allowing_nil(true).prefix(true) }
+  it { should delegate(:acronym).to(:state).allowing_nil(true).prefix(true) }
 end
