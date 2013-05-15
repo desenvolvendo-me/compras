@@ -8,7 +8,7 @@ gem 'rails', '3.2.12'
 gem 'unicorn', '4.6.2'
 gem 'sidekiq', '2.11.2'
 
-gem 'pg', '0.14.1'
+gem 'pg', '0.15.1'
 
 gem 'activerecord-connections', '0.0.3'
 gem 'activerecord-postgres-hstore', '0.6.0'

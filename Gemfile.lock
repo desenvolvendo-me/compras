@@ -186,7 +186,7 @@ GEM
     net-ssh (2.6.6)
     nokogiri (1.5.5)
     orm_adapter (0.4.0)
-    pg (0.14.1)
+    pg (0.15.1)
     poltergeist (0.7.0)
       capybara (~> 1.1)
       childprocess (~> 0.3)
@@ -362,7 +362,7 @@ DEPENDENCIES
   mail_validator (= 0.2.0)
   mask_validator (= 0.2.1)
   pdfkit!
-  pg (= 0.14.1)
+  pg (= 0.15.1)
   poltergeist (= 0.7.0)
   postgres-copy (~> 0.5.8)
   pry (= 0.9.12)
