@@ -49,7 +49,7 @@ gem 'enumerate_it', '1.0.3'
 gem 'decore', :git => 'git://github.com/sobrinho/decore.git'
 
 group :assets do
-  gem 'uglifier', '1.3.0'
+  gem 'uglifier', '2.1.0'
 end
 
 group :production, :training, :staging do
