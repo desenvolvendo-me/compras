@@ -9,7 +9,7 @@ feature "ProcessResponsibles" do
   scenario 'create a new process_responsible' do
     make_dependencies!
 
-    navigate 'Processos de Compra > Responsáveis pelo Process'
+    navigate 'Processos de Compra > Responsáveis pelo Processo'
 
     click_link 'Criar responsável'
 

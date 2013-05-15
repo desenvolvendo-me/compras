@@ -3,7 +3,7 @@ pt-BR:
     models:
       process_responsible:
         one: "Responsável pelo Processo"
-        other: "Responsáveis pelo Process"
+        other: "Responsáveis pelo Processo"
 
     attributes:
       process_responsible:
