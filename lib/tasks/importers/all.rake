@@ -8,9 +8,6 @@ namespace :import do
       puts "cnaes"
       CnaeImporter.new.import! if Cnae.count.zero?
 
-      puts "company_size"
-      CompanySizeImporter.new.import! if CompanySize.count.zero?
-
       puts "Forma de Julgamento de Licitação"
       JudgmentForm.pg_copy_from Rails.root.join('lib/import/files/judgment_forms.csv').to_s unless JudgmentForm.any?
 
