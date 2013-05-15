@@ -37,7 +37,7 @@ gem 'validates_timeliness', '3.0.14'
 gem 'typecaster', '0.0.2', :git => 'git://github.com/ricardohsd/typecaster'
 gem 'rubyzip', '0.9.9'
 
-gem 'inherited_resources', '1.3.1'
+gem 'inherited_resources', '1.4.0'
 gem 'has_scope', '0.5.1'
 gem 'responders', '0.9.3'
 gem 'jbuilder', '1.0.2'
