@@ -1,47 +1,8 @@
 module TceExport::MG
   module MonthlyMonitoring
-    class MonthlyRegulatoryAct
-      def initialize(options = {})
-        @generator = options.fetch(:generator) { MonthlyRegulatoryActGenerator }
-        @formatter = options.fetch(:formatter) { MonthlyRegulatoryActFormatter }
-      end
-
-      def generate_file(monthly_monitoring)
-        @monthly_monitoring = monthly_monitoring
-
-        File.open(path, 'w', :encoding => 'ISO-8859-1') do |f|
-          f.write(generate_data(monthly_monitoring))
-        end
-
-        filename
-      end
-
-      private
-
-      attr_reader :generator, :formatter
-
-      def filename
-        'REGLIC.csv'
-      end
-
-      def path
-        "tmp/#{filename}"
-      end
-
-      def generate_data(monthly_monitoring)
-        generator.generate_data(monthly_monitoring).map do |data|
-          format_data(data)
-        end.join("\n")
-      end
-
-      def format_data(data)
-        formatter.new(data).to_s
-      end
-    end
-
-    class MonthlyRegulatoryActGenerator
-      def self.generate_data(monthly_monitoring)
-        RegulatoryAct.trading_or_price_registration.order(:act_number).map do |regulatory_act|
+    class RegulatoryActDataGenerator < DataGeneratorBase
+      def generate_data
+        query.map do |regulatory_act|
           {
             cod_orgao: monthly_monitoring.prefecture.organ_code,
             tipo_decreto: regulatory_act.regulatory_act_type_kind,
@@ -51,9 +12,15 @@ module TceExport::MG
           }
         end
       end
+
+      private
+
+      def query
+        RegulatoryAct.trading_or_price_registration.order(:act_number)
+      end
     end
 
-    class MonthlyRegulatoryActFormatter
+    class RegulatoryActFormatter
       include Typecaster
 
       output_separator ";"
@@ -68,6 +35,20 @@ module TceExport::MG
                 required: true, caster: Casters::DateCaster
       attribute :data_publicacao_decreto_municipal, position: 4, size: 8,
                 min_size: 8, required: true, caster: Casters::DateCaster
+    end
+
+    class RegulatoryActGenerator < GeneratorBase
+      acronym 'REGLIC'
+
+      formatters formatter: RegulatoryActFormatter
+
+      formats :format_data
+
+      private
+
+      def format_data(data)
+        formatter.new(data).to_s
+      end
     end
   end
 end

@@ -1,3 +1,3 @@
 class MonthlyMonitoringFiles < EnumerateIt::Base
-  associate_values :monthly_regulatory_act, :monthly_process_responsible
+  associate_values :regulatory_act, :process_responsible
 end

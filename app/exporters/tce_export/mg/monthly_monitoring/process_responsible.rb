@@ -1,140 +1,31 @@
 # encoding: utf-8
 module TceExport::MG
   module MonthlyMonitoring
-    class MonthlyProcessResponsible
-      def initialize(options = {})
-        @generator = options.fetch(:generator) { MonthlyProcessResponsibleGenerator }
-        @responsible_formatter = options.fetch(:responsible_formatter) { MonthlyProcessResponsibleFormatter }
-        @member_formatter = options.fetch(:member_formatter) { MonthlyLicitationCommissionMemberFormatter }
-      end
-
-      def generate_file(monthly_monitoring)
+    class ProcessResponsibleMemberDataGenerator < DataGeneratorBase
+      def initialize(monthly_monitoring, responsible)
         @monthly_monitoring = monthly_monitoring
-
-        File.open(path, 'w', :encoding => 'ISO-8859-1') do |f|
-          f.write(formatted_data)
-        end
-
-        filename
-      end
-
-      private
-
-      attr_reader :generator, :responsible_formatter, :member_formatter, :monthly_monitoring
-
-      def filename
-        'RESPLIC.csv'
-      end
-
-      def path
-        "tmp/#{filename}"
-      end
-
-      def formatted_data
-        generate_data.map do |data|
-          [format_responsible(data), format_members(data)].compact.join("\n")
-        end.join("\n")
-      end
-
-      def format_responsible(data)
-        responsible_formatter.new(data.except(:members)).to_s
-      end
-
-      def format_members(data)
-        return unless data[:members]
-
-        data[:members].map do |member|
-          format_member(member)
-        end.compact.join("\n")
-      end
-
-      def format_member(member)
-        member_formatter.new(member).to_s
+        @responsible = responsible
       end
 
       def generate_data
-        generator.generate_data(monthly_monitoring)
-      end
-    end
-
-    class MonthlyProcessResponsibleGenerator
-      def initialize(monthly_monitoring)
-        @monthly_monitoring = monthly_monitoring
-      end
-
-      def self.generate_data(*args)
-        new(*args).generate_data
-      end
-
-      def generate_data
-        ProcessResponsible.licitation.order(:id).map do |responsible|
+        query.map do |member|
           {
             tipo_registro: 10,
             cod_orgao: monthly_monitoring.organ_code,
             cod_unidade_sub: responsible.execution_unit_responsible,
             exercicio_licitacao: responsible.licitation_process_year,
             nro_processo_licitatorio: responsible.licitation_process_process,
-            tipo_resp: responsible_kind(responsible),
-            nro_cpf_resp: only_numbers(responsible.cpf),
-            nome_resp: responsible.name,
-            logradouro: responsible.street_name,
-            bairro_logra: responsible.neighborhood_name,
-            cod_cidade_logra: responsible.city_tce_mg_code,
-            uf_cidade_logra: responsible.state_acronym,
-            cep_logra: only_numbers(responsible.zip_code),
-            telefone: only_numbers(responsible.phone),
-            email: responsible.email,
-            members: generate_members(responsible)
-          }
-        end
-      end
-
-      private
-
-      attr_reader :monthly_monitoring
-
-      def responsible_kind(responsible)
-        case responsible.stage_process_description
-        when 'Autorização para abertura do procedimento licitatório'
-          1
-        when 'Emissão do edital'
-          2
-        when 'Pesquisa de preços'
-          3
-        when 'Informação de existência de recursos orçamentários'
-          4
-        when 'Condução do procedimento licitatório'
-          5
-        when 'Homologação'
-          6
-        when 'Adjudicação'
-          7
-        when 'Publicação em órgão Oficial'
-          8
-        when 'Avaliação de Bens'
-          9
-        end
-      end
-
-      def generate_members(responsible)
-        responsible.licitation_commission_members.map do |member|
-          {
-            tipo_registro: 10,
-            cod_orgao: monthly_monitoring.organ_code,
-            cod_unidade_sub: responsible.execution_unit_responsible,
-            exercicio_licitacao: responsible.licitation_process_year,
-            nro_processo_licitatorio: responsible.licitation_process_process,
-            cod_tipo_comissao: member_commission_type_number(member),
-            descricao_ato_nomeacao: member_classification(member),
+            cod_tipo_comissao: commission_type_number(member),
+            descricao_ato_nomeacao: classification(member),
             nro_ato_nomeacao: member.regulatory_act_act_number,
             data_ato_nomeacao: member.licitation_commission_nomination_date,
             inicio_vigencia: member.regulatory_act_vigor_date,
             final_vigencia: member.regulatory_act_end_date,
             cpf_membro_comissao: only_numbers(member.individual_cpf),
             nom_membro_com_lic: member.individual_name,
-            cod_atribuicao: member_role(member),
+            cod_atribuicao: role(member),
             cargo: member.position_name,
-            natureza_cargo: member_role_nature(member),
+            natureza_cargo: role_nature(member),
             logradouro: member.street_name,
             bairro_logra: member.neighborhood_name,
             cod_cidade_logra: member.city_tce_mg_code,
@@ -146,22 +37,24 @@ module TceExport::MG
         end
       end
 
-      def only_numbers(data)
-        return unless data
+      private
 
-        data.gsub(/\D/, '')
+      attr_reader :responsible
+
+      def query
+        responsible.licitation_commission_members
       end
 
-      def member_commission_type_number(member)
+      def commission_type_number(member)
         member.licitation_commission_permanent? ? 2 : 1
       end
 
-      def member_classification(member)
+      def classification(member)
         return 1 if member.regulatory_act_classification_ordinance?
         return 2 if member.regulatory_act_classification_decree?
       end
 
-      def member_role_nature(member)
+      def role_nature(member)
         case member.role_nature
         when LicitationCommissionMemberRoleNature::EFECTIVE_SERVER
           1
@@ -178,7 +71,7 @@ module TceExport::MG
         end
       end
 
-      def member_role(member)
+      def role(member)
         case member.role
         when LicitationCommissionMemberRole::MEMBER
           2
@@ -204,7 +97,67 @@ module TceExport::MG
       end
     end
 
-    class MonthlyProcessResponsibleFormatter
+    class ProcessResponsibleDataGenerator < DataGeneratorBase
+      def generate_data
+        query.map do |responsible|
+          {
+            tipo_registro: 10,
+            cod_orgao: monthly_monitoring.organ_code,
+            cod_unidade_sub: responsible.execution_unit_responsible,
+            exercicio_licitacao: responsible.licitation_process_year,
+            nro_processo_licitatorio: responsible.licitation_process_process,
+            tipo_resp: responsible_kind(responsible),
+            nro_cpf_resp: only_numbers(responsible.cpf),
+            nome_resp: responsible.name,
+            logradouro: responsible.street_name,
+            bairro_logra: responsible.neighborhood_name,
+            cod_cidade_logra: responsible.city_tce_mg_code,
+            uf_cidade_logra: responsible.state_acronym,
+            cep_logra: only_numbers(responsible.zip_code),
+            telefone: only_numbers(responsible.phone),
+            email: responsible.email,
+            members: generate_members(responsible)
+          }
+        end
+      end
+
+      private
+
+      def query
+        ProcessResponsible.licitation.order(:id)
+      end
+
+      def generate_members(responsible)
+        ProcessResponsibleMemberDataGenerator.
+          new(monthly_monitoring, responsible).
+          generate_data
+      end
+
+      def responsible_kind(responsible)
+        case responsible.stage_process_description
+        when 'Autorização para abertura do procedimento licitatório'
+          1
+        when 'Emissão do edital'
+          2
+        when 'Pesquisa de preços'
+          3
+        when 'Informação de existência de recursos orçamentários'
+          4
+        when 'Condução do procedimento licitatório'
+          5
+        when 'Homologação'
+          6
+        when 'Adjudicação'
+          7
+        when 'Publicação em órgão Oficial'
+          8
+        when 'Avaliação de Bens'
+          9
+        end
+      end
+    end
+
+    class ProcessResponsibleFormatter
       include Typecaster
 
       output_separator ";"
@@ -225,12 +178,11 @@ module TceExport::MG
       attribute :telefone, position: 13, size: 10, min_size: 10, required: true, caster: Casters::IntegerCaster
       attribute :email, position: 14, size: 50, min_size: 1, required: true, caster: Casters::TextCaster
     end
-  end
 
-  class MonthlyLicitationCommissionMemberFormatter
-    include Typecaster
+    class LicitationCommissionMemberFormatter
+      include Typecaster
 
-    output_separator ";"
+      output_separator ";"
 
       attribute :tipo_registro, position: 0, size: 2, min_size: 2, required: true, caster: Casters::IntegerCaster
       attribute :cod_orgao, position: 1, size: 2, min_size: 2, required: true, caster: Casters::TextCaster
@@ -255,5 +207,31 @@ module TceExport::MG
       attribute :cep_logra, position: 20, size: 8, min_size: 8, required: true, caster: Casters::IntegerCaster
       attribute :telefone, position: 21, size: 10, min_size: 10, required: true, caster: Casters::IntegerCaster
       attribute :email, position: 22, size: 50, min_size: 1, required: true, caster: Casters::TextCaster
+    end
+
+    class ProcessResponsibleGenerator < GeneratorBase
+      acronym 'RESPLIC'
+
+      formatters responsible_formatter: ProcessResponsibleFormatter,
+                 member_formatter: LicitationCommissionMemberFormatter
+
+      formats :format_responsible, :format_members
+
+      private
+
+      def format_responsible(data)
+        responsible_formatter.new(data.except(:members)).to_s
+      end
+
+      def format_members(data)
+        return unless data[:members]
+
+        data[:members].map { |member| format_member(member) }.compact.join("\n")
+      end
+
+      def format_member(member)
+        member_formatter.new(member).to_s
+      end
+    end
   end
 end
