@@ -109,7 +109,7 @@ GEM
     cpf_validator (0.2.0)
       activemodel (>= 3.0)
     dalli (2.6.2)
-    devise (2.2.3)
+    devise (2.2.4)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
       railties (~> 3.1)
@@ -347,7 +347,7 @@ DEPENDENCIES
   cpf_validator (= 0.2.0)
   dalli (= 2.6.2)
   decore!
-  devise (= 2.2.3)
+  devise (= 2.2.4)
   enumerate_it (= 1.0.3)
   factory_girl-preload!
   factory_girl_rails (~> 4.2.1)
