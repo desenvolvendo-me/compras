@@ -445,6 +445,8 @@ Compras::Application.routes.draw do
 
   resources :purchase_process_creditor_proposals
 
+  resources :purchase_process_proposal_tiebreaks, only: [:edit, :update]
+
   resources :purchase_process_item_creditor_proposals, except: :destroy do
     collection do
       get :creditors

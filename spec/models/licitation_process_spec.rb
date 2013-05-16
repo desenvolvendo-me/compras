@@ -69,6 +69,7 @@ describe LicitationProcess do
   it { should have_many(:legal_analysis_appraisals).dependent(:restrict) }
   it { should have_many(:budget_allocations).through(:purchase_process_budget_allocations) }
   it { should have_many(:creditor_proposals) }
+  it { should have_many(:tied_creditor_proposals) }
   it { should have_many(:items_creditors).through(:items) }
   it { should have_many(:creditor_disqualifications).dependent(:restrict) }
   it { should have_many(:process_responsibles).dependent(:restrict) }
@@ -98,6 +99,7 @@ describe LicitationProcess do
   it { should validate_presence_of :process_date }
   it { should validate_presence_of :type_of_purchase }
   it { should validate_presence_of :year }
+  it { should validate_duplication_of(:ranking).on(:tied_creditor_proposals) }
 
   it { should_not validate_presence_of :proposal_envelope_opening_date }
   it { should_not validate_presence_of :proposal_envelope_opening_time }
