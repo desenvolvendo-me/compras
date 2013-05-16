@@ -1,0 +1,6 @@
+pt-BR:
+  enumerations:
+    organ_responsible:
+      records_office: "Cartório de registro"
+      papers_and_documents: "Títulos e documentos"
+      commercial_registry: "Junta comercial"

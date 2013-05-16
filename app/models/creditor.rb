@@ -8,11 +8,14 @@ class Creditor < Compras::Model
                   :social_identification_number, :documents_attributes,
                   :representative_person_ids, :creditor_balances_attributes,
                   :accounts_attributes, :material_ids, :representative_ids,
-                  :regularization_or_administrative_sanctions_attributes
+                  :regularization_or_administrative_sanctions_attributes,
+                  :organ_responsible_for_registration
 
   attr_accessor :name, :cpf, :cnpj
 
   attr_modal :name, :cpf, :cnpj
+
+  has_enumeration_for :organ_responsible_for_registration, with: OrganResponsible
 
   belongs_to :main_cnae, :class_name => 'Cnae'
   belongs_to :occupation_classification
