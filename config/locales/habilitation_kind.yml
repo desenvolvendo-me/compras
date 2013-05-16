@@ -1,0 +1,6 @@
+pt-BR:
+  enumerations:
+    habilitation_kind:
+      certificate_regularity_fgts: "Certidão de regularidade FGTS"
+      certificate_regularity_inss: "Certidão de regularidade INSS"
+      clearance_certificate_labor_debts: "Certidão negativa de débitos trabalhistas"

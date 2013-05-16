@@ -13,6 +13,7 @@ feature "DocumentTypes" do
 
     fill_in 'Validade em dias', :with => '10'
     fill_in 'Descrição', :with => 'Fiscal'
+    select 'Certidão negativa de débitos trabalhistas', :from => 'Tipo da habilitação TCE'
 
     click_button 'Salvar'
 
@@ -22,9 +23,11 @@ feature "DocumentTypes" do
 
     expect(page).to have_field 'Validade em dias', :with => '10'
     expect(page).to have_field 'Descrição', :with => 'Fiscal'
+    expect(page).to have_select 'Tipo da habilitação TCE', :selected => 'Certidão negativa de débitos trabalhistas'
 
     fill_in 'Validade em dias', :with => '20'
     fill_in 'Descrição', :with => 'Oficial'
+    select 'Certidão de regularidade FGTS', :from => 'Tipo da habilitação TCE'
 
     click_button 'Salvar'
 
@@ -34,6 +37,7 @@ feature "DocumentTypes" do
 
     expect(page).to have_field 'Validade em dias', :with => '20'
     expect(page).to have_field 'Descrição', :with => 'Oficial'
+    expect(page).to have_select 'Tipo da habilitação TCE', :selected => 'Certidão de regularidade FGTS'
 
     click_link 'Apagar'
 
