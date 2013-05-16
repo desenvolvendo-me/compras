@@ -4,7 +4,6 @@ class BidderProposal < Compras::Model
 
   has_enumeration_for :situation, :with => SituationOfProposal
 
-  has_one :purchase_process_item
   has_many :licitation_process_ratification_items, :dependent => :destroy
 
   belongs_to :purchase_process_item
