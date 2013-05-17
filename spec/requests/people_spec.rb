@@ -184,6 +184,7 @@ feature "People" do
 
       fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
       fill_in 'Percentual de cotas societárias', :with => '100,00'
+      select 'Representante legal', from: 'Tipo da sociedade'
     end
 
     click_button 'Salvar'
@@ -229,6 +230,7 @@ feature "People" do
     within_tab 'Sócios'do
       expect(page).to have_field 'Pessoa', :with => 'Gabriel Sobrinho'
       expect(page).to have_field 'Percentual de cotas societárias', :with => '100,00'
+      expect(page).to have_select 'Tipo da sociedade', selected: 'Representante legal'
     end
 
     expect(page).to_not have_field 'Pessoa Física'
@@ -250,6 +252,7 @@ feature "People" do
 
       fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
       fill_in 'Percentual de cotas societárias', :with => '100,00'
+      select 'Demais membros do quadro societário', from: 'Tipo da sociedade'
     end
 
     click_button 'Salvar'
@@ -270,6 +273,7 @@ feature "People" do
     within_tab 'Sócios'do
       expect(page).to have_field 'Pessoa', :with => 'Wenderson Malheiros'
       expect(page).to have_field 'Percentual de cotas societárias', :with => '100,00'
+      expect(page).to have_select 'Tipo da sociedade', selected: 'Demais membros do quadro societário'
     end
   end
 
