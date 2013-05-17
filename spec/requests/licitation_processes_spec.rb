@@ -862,42 +862,6 @@ feature "LicitationProcesses" do
     end
   end
 
-  scenario 'generate calculation and disable a bidder by maximum value' do
-    licitation_process = LicitationProcess.make!(:valor_maximo_ultrapassado,
-                                                  :bidders => [Bidder.make!(:licitante_com_proposta_3, :enabled => true),
-                                                               Bidder.make!(:licitante_com_proposta_7, :enabled => true)] )
-    bidder = licitation_process.bidders.first
-    LicitationProcessLot.make!(:lote, :licitation_process => licitation_process,
-                               :purchase_process_items => [licitation_process.items.first])
-
-    navigate 'Processos de Compra > Processos de Compras'
-
-    click_link "Limpar Filtro"
-
-    within_records do
-      click_link '1/2012'
-    end
-
-    expect(page).to_not have_button 'Relatório'
-
-    click_button 'Apurar'
-
-    expect(page).to have_content 'PROCESSO DE COMPRA 1/2012'
-
-    expect(page).to have_content 'Apuração: Por Lote com Menor Preço'
-
-    expect(page).to have_content 'Nohup'
-
-    within ".classification-#{bidder.id}-0-0" do
-      expect(page).to have_content 'Antivirus'
-      expect(page).to have_content '9,10'
-      expect(page).to have_content '18,20'
-      expect(page).to have_content 'Ganhou'
-    end
-
-    expect(page).to_not have_content 'IBM'
-  end
-
   scenario 'generate calculation with equalized result' do
     licitation_process = LicitationProcess.make!(:apuracao_global_empatou)
 
