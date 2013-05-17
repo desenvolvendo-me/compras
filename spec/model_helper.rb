@@ -112,6 +112,7 @@ require 'app/uploaders/prefecture_logo_uploader'
 require 'app/uploaders/compras_uploader'
 require 'app/uploaders/image_uploader'
 require 'app/uploaders/attachment_uploader'
+require 'app/uploaders/individual_image_uploader'
 
 Dir["#{Unico::Engine.config.root}/app/enumerations/*.rb"].each do |file|
   require File.expand_path(file)

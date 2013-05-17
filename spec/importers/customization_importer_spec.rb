@@ -1,4 +1,5 @@
 # encoding: utf-8
+require 'importer_helper'
 require 'spec_helper'
 
 describe CustomizationImporter do

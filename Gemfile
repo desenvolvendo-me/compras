@@ -8,14 +8,14 @@ gem 'rails', '3.2.12'
 gem 'unicorn', '4.6.2'
 gem 'sidekiq', '2.11.2'
 
-gem 'pg', '0.14.1'
+gem 'pg', '0.15.1'
 
 gem 'activerecord-connections', '0.0.3'
 gem 'activerecord-postgres-hstore', '0.6.0'
 
-gem 'unico', '4.2.0'
+gem 'unico', '4.6.0'
 gem 'unico-assets', '1.3.0'
-gem 'devise', '2.2.3'
+gem 'devise', '2.2.4'
 gem 'cancan', :git => 'git://github.com/ryanb/cancan.git', :branch => '2.0'
 gem 'quaestio', '0.1.1'
 gem 'active_relatus', '0.1.1'
@@ -37,10 +37,10 @@ gem 'validates_timeliness', '3.0.14'
 gem 'typecaster', '0.0.2', :git => 'git://github.com/ricardohsd/typecaster'
 gem 'rubyzip', '0.9.9'
 
-gem 'inherited_resources', '1.3.1'
+gem 'inherited_resources', '1.4.0'
 gem 'has_scope', '0.5.1'
 gem 'responders', '0.9.3'
-gem 'jbuilder', '1.0.2'
+gem 'jbuilder', '1.4.1'
 
 gem 'foreigner', '1.2.1'
 gem 'i18n_alchemy', :git => 'git://github.com/carlosantoniodasilva/i18n_alchemy.git'
@@ -49,12 +49,12 @@ gem 'enumerate_it', '1.0.3'
 gem 'decore', :git => 'git://github.com/sobrinho/decore.git'
 
 group :assets do
-  gem 'uglifier', '1.3.0'
+  gem 'uglifier', '2.1.0'
 end
 
 group :production, :training, :staging do
-  gem 'sentry-raven', '0.4.4'
-  gem 'dalli', '2.6.2'
+  gem 'sentry-raven', '0.4.8'
+  gem 'dalli', '2.6.3'
 end
 
 group :development, :test do
