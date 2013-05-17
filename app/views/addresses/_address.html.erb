@@ -53,7 +53,20 @@
 <script>
   $("#<%= a.sanitized_object_name %>_street_id").change(function (event, street) {
     if (street) {
-      $("#<%= a.sanitized_object_name %>_neighborhood").attr("data-modal-url", "<%= modal_neighborhoods_path %>?street_id=" + street.id).val("");
+      var modal_url = "<%= modal_neighborhoods_path %>?",
+        params = $.param({
+        street_id: street.id,
+        neighborhood: {
+          city:    street.city,
+          city_id: street.city_id
+        },
+        locked_fields: ["city"]
+      });
+
+      modal_url += params;
+
+      $("#<%= a.sanitized_object_name %>_neighborhood").data("modal-url", modal_url).val("");
+
       $("#<%= a.sanitized_object_name %>_neighborhood_id").val("");
     }
 
