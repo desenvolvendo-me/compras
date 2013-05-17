@@ -1,9 +1,9 @@
 # encoding: utf-8
 require 'model_helper'
-require 'app/models/materials_class'
+require 'app/models/material_class'
 require 'app/models/material'
 
-describe MaterialsClass do
+describe MaterialClass do
   it { should have_many(:materials).dependent(:restrict) }
 
   it { should validate_presence_of :masked_number }

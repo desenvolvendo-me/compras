@@ -3,5 +3,5 @@ class MaterialDecorator
   include Decore::Proxy
   include Decore::Header
 
-  attr_header :description, :code, :materials_class
+  attr_header :description, :code, :material_class
 end

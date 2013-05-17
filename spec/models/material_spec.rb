@@ -33,7 +33,7 @@ describe Material do
   it { should have_many(:purchase_solicitation_budget_allocations).through(:purchase_solicitations).dependent(:restrict) }
   it { should have_many(:materials_controls).dependent(:destroy) }
 
-  it { should validate_presence_of :materials_class }
+  it { should validate_presence_of :material_class }
   it { should validate_presence_of :code }
   it { should validate_presence_of :description }
   it { should validate_presence_of :detailed_description }
@@ -70,22 +70,22 @@ describe Material do
     expect(subject.errors[:base]).to_not include "Este registro não pôde ser apagado pois há outros cadastros que dependem dele"
   end
 
-  describe '#autocomplete_materials_class' do
-    context 'when has a materials_class' do
-      let(:materials_class) { double(:materials_class, :to_s => '123 - Software') }
+  describe '#autocomplete_material_class' do
+    context 'when has a material_class' do
+      let(:material_class) { double(:material_class, :to_s => '123 - Software') }
 
       before do
-        subject.stub(:materials_class => materials_class)
+        subject.stub(:material_class => material_class)
       end
 
-      it 'should returns the materials_class to_s' do
-        expect(subject.autocomplete_materials_class).to eq '123 - Software'
+      it 'should returns the material_class to_s' do
+        expect(subject.autocomplete_material_class).to eq '123 - Software'
       end
     end
 
-    context 'when does not have a materials_class' do
-      it 'should returns the materials_class to_s' do
-        expect(subject.autocomplete_materials_class).to eq ''
+    context 'when does not have a material_class' do
+      it 'should returns the material_class to_s' do
+        expect(subject.autocomplete_material_class).to eq ''
       end
     end
   end

@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
 
-feature "MaterialsClasses" do
+feature "MaterialClasses" do
   background do
     sign_in
   end
@@ -118,7 +118,7 @@ feature "MaterialsClasses" do
   end
 
   scenario 'cannot edit when material class is imported' do
-    FactoryGirl.create(:materials_class, :masked_number => '01.32.15.000.000', :class_number => '013215000000', :imported => true)
+    FactoryGirl.create(:material_class, :masked_number => '01.32.15.000.000', :class_number => '013215000000', :imported => true)
 
     navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
 
@@ -153,7 +153,7 @@ feature "MaterialsClasses" do
   end
 
   scenario 'update an existent materials_class when at first level' do
-    FactoryGirl.create(:materials_class, :description => 'Segurança', :masked_number => '01.00.00.000.000')
+    FactoryGirl.create(:material_class, :description => 'Segurança', :masked_number => '01.00.00.000.000')
 
     navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
     click_link 'Segurança'

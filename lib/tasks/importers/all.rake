@@ -15,7 +15,7 @@ namespace :import do
       JudgmentForm.pg_copy_from Rails.root.join('lib/import/files/judgment_forms.csv').to_s unless JudgmentForm.any?
 
       puts "classes de materias"
-      MaterialsClassImporter.new.import! if MaterialsClass.count.zero?
+      MaterialClassImporter.new.import! if MaterialClass.count.zero?
 
       puts "limite por modalidade"
       ModalityLimitImporter.new.import! if ModalityLimit.count.zero?

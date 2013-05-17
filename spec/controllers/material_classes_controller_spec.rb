@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
 
-describe MaterialsClassesController do
+describe MaterialClassesController do
   before do
     controller.stub(:authenticate_user!)
     controller.stub(:authorize_resource!)
@@ -9,7 +9,7 @@ describe MaterialsClassesController do
 
   describe 'PUT #update' do
     it 'should raise not authorized when not editable' do
-      material_class = ::FactoryGirl::Preload.factories['MaterialsClass'][:software]
+      material_class = ::FactoryGirl::Preload.factories['MaterialClass'][:software]
 
       put :update, :id => material_class.id
 
@@ -20,7 +20,7 @@ describe MaterialsClassesController do
 
   describe 'DELETE #destroy' do
     it 'should raise not authorized when not editable' do
-      material_class = ::FactoryGirl::Preload.factories['MaterialsClass'][:software]
+      material_class = ::FactoryGirl::Preload.factories['MaterialClass'][:software]
 
       delete :destroy, :id => material_class.id
 

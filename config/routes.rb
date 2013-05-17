@@ -502,7 +502,7 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :materials_classes do
+  resources :material_classes do
     collection do
       get :filter
       get :modal
