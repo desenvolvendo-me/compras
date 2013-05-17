@@ -9,3 +9,4 @@ pt-BR:
       document_type:
         validity: "Validade em dias"
         description: "Descrição"
+        habilitation_kind: "Tipo da habilitação TCE"
