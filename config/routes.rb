@@ -484,8 +484,6 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :bidder_disqualifications, :except => [:index, :filter, :modal]
-
   resources :licitation_process_publications do
     collection do
       get :filter
@@ -736,42 +734,12 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :tradings do
-    collection do
-      get :modal
-      get :filter
-    end
-  end
-
   resources :holidays do
     collection do
       get :filter
       get :modal
     end
   end
-
-  resources :trading_closings, :only => [:new, :create]
-
-  resources :trading_items, :except => [:new, :create, :destroy] do
-    member do
-      get :classification
-      get :offers
-      get :proposal_report
-      get :activate_proposals
-    end
-
-    collection do
-      get :modal
-    end
-  end
-
-  resources :trading_item_closings, :except => [:index, :destroy, :update]
-
-  resources :trading_item_bid_negotiations, :only => [:new, :create, :destroy]
-  resources :trading_item_bid_proposals, :only => [:new, :create, :edit, :update]
-  resources :trading_item_bid_round_of_bids, :only => [:new, :create, :destroy]
-
-  resource :trading_configuration
 
   resources :users do
     collection do

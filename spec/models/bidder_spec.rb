@@ -11,9 +11,6 @@ require 'app/models/creditor'
 require 'app/models/accredited_representative'
 require 'app/models/licitation_process_classification'
 require 'app/models/licitation_process_ratification'
-require 'app/models/trading_item_bid'
-require 'app/models/bidder_disqualification'
-require 'app/models/trading_item_closing'
 
 describe Bidder do
   describe 'default values' do
@@ -30,12 +27,8 @@ describe Bidder do
   it { should have_many(:people).through(:accredited_representatives) }
   it { should have_many(:licitation_process_classifications).dependent(:destroy) }
   it { should have_many(:licitation_process_classifications_by_classifiable).dependent(:destroy) }
-  it { should have_many(:trading_item_bids).dependent(:restrict) }
   it { should have_many(:licitation_process_ratifications).dependent(:restrict) }
-  it { should have_many(:trading_item_closings).dependent(:restrict) }
   it { should have_many(:items).through(:licitation_process) }
-
-  it { should have_one(:disqualification).dependent(:destroy) }
 
   it { should validate_presence_of :creditor }
 
@@ -338,85 +331,6 @@ describe Bidder do
     end
   end
 
-  describe '#lower_trading_item_bid_amount' do
-    it 'should return zero when bidder there is no proposal for item' do
-      trading_item = double(:trading_item)
-
-      subject.should_receive(:lower_trading_item_bid).with(trading_item).and_return(nil)
-
-      expect(subject.lower_trading_item_bid_amount(trading_item)).to eq 0
-    end
-
-    it 'should return the amount of lowest proposal of bidder for item' do
-      trading_item = double(:trading_item)
-      lower_bid = double(:lower_bid, :amount => 120.56)
-
-      subject.should_receive(:lower_trading_item_bid).with(trading_item).and_return(lower_bid)
-
-      expect(subject.lower_trading_item_bid_amount(trading_item)).to eq 120.56
-    end
-  end
-
-  describe '#trading_item_classification_percent' do
-    it 'should return nil when there are no proposal for the item' do
-      trading_item = double(:trading_item)
-
-      subject.should_receive(:lower_trading_item_bid).with(trading_item).and_return(nil)
-
-      expect(subject.trading_item_classification_percent(trading_item)).to be_nil
-    end
-
-    it 'should return zero for the first place of the classification' do
-      trading_item = double(:trading_item, :lowest_proposal_amount => 100.0)
-      lower_trading_item_bid = double(:lower_trading_item_bid, :amount => 100.0)
-
-      subject.should_receive(:lower_trading_item_bid).
-              at_least(1).times.with(trading_item).and_return(lower_trading_item_bid)
-
-      expect(subject.trading_item_classification_percent(trading_item)).to eq 0
-    end
-
-    it 'should calculate de percentual based on the first place of the classification' do
-      trading_item = double(:trading_item, :lowest_proposal_amount => 100.0)
-      lower_trading_item_bid = double(:lower_trading_item_bid, :amount => 120.0)
-
-      subject.should_receive(:lower_trading_item_bid).
-              at_least(1).times.with(trading_item).and_return(lower_trading_item_bid)
-
-      expect(subject.trading_item_classification_percent(trading_item)).to eq 20.0
-    end
-  end
-
-  describe '#trading_item_proposal_percent' do
-    it 'should return nil when there are no proposal for the item' do
-      trading_item = double(:trading_item)
-
-      subject.should_receive(:lower_trading_item_bid_at_stage_of_proposals).with(trading_item).and_return(nil)
-
-      expect(subject.trading_item_proposal_percent(trading_item)).to be_nil
-    end
-
-    it 'should return zero for the first place of the classification' do
-      trading_item = double(:trading_item, :lowest_proposal_at_stage_of_proposals_amount => 100.0)
-      lower_trading_item_bid_at_stage_of_proposals = double(:lower_trading_item_bid_at_stage_of_proposals, :amount => 100.0)
-
-      subject.should_receive(:lower_trading_item_bid_at_stage_of_proposals).
-              at_least(1).times.with(trading_item).and_return(lower_trading_item_bid_at_stage_of_proposals)
-
-      expect(subject.trading_item_proposal_percent(trading_item)).to eq 0
-    end
-
-    it 'should calculate de percentual based on the first place of the classification' do
-      trading_item = double(:trading_item, :lowest_proposal_at_stage_of_proposals_amount => 100.0)
-      lower_trading_item_bid_at_stage_of_proposals = double(:lower_trading_item_bid_at_stage_of_proposals, :amount => 120.0)
-
-      subject.should_receive(:lower_trading_item_bid_at_stage_of_proposals).
-              at_least(1).times.with(trading_item).and_return(lower_trading_item_bid_at_stage_of_proposals)
-
-      expect(subject.trading_item_proposal_percent(trading_item)).to eq 20.0
-    end
-  end
-
   describe '#descroy_all_classifications' do
     let(:classifications) { double(:licitation_process_classifications) }
 
@@ -426,95 +340,6 @@ describe Bidder do
       classifications.should_receive(:destroy_all)
 
       subject.destroy_all_classifications
-    end
-  end
-
-  describe '#last_bid' do
-    let(:trading_item_bids) { double(:trading_item_bids) }
-    let(:trading_item) { double(:trading_item, :id => 6) }
-
-    before do
-      subject.stub(:trading_item_bids => trading_item_bids)
-    end
-
-    it 'should return nil when there are no bids for item' do
-      trading_item_bids.should_receive(:for_trading_item).with(6).and_return([])
-
-      expect(subject.last_bid(trading_item)).to be_nil
-    end
-
-    it 'should return last bid when there are bids for item' do
-      trading_item_bids.should_receive(:for_trading_item).with(6).and_return(['first', 'last'])
-
-      expect(subject.last_bid(trading_item)).to eq 'last'
-    end
-  end
-
-  describe '#disabled' do
-    context 'when it has not a disqualication' do
-      it { expect(subject.disabled).to be_false }
-    end
-
-    context 'when it has a disqualification' do
-      before do
-        subject.stub(:disqualification => 'disqualification')
-      end
-
-      it { expect(subject.disabled).to be_true }
-    end
-  end
-
-  describe "#can_be_disabled?" do
-    let(:at_stage_of_negotiation) { double(:at_stage_of_negotiation) }
-    let(:trading_item_bids) { double(:trading_item_bids)}
-    let(:trading_item) do
-      double(:trading_item, :id => 5, :bidder_with_lowest_proposal => subject)
-    end
-
-    before do
-      subject.stub(:trading_item_bids => trading_item_bids)
-    end
-
-    it "returns true if bidder has lowest bid" do
-      subject.stub(:benefited => false)
-      trading_item_bids.should_receive(:at_stage_of_negotiation).and_return(at_stage_of_negotiation)
-      at_stage_of_negotiation.should_receive(:for_trading_item).with(5).and_return([])
-
-      expect(subject.can_be_disabled?(trading_item)).to be_true
-    end
-
-    it "returns false if bidder is benefited" do
-      subject.stub(:benefited => true)
-
-      expect(subject.can_be_disabled?(trading_item)).to be_false
-    end
-
-    it "returns false if has negotiation" do
-      subject.stub(:benefited => false)
-      trading_item_bids.should_receive(:at_stage_of_negotiation).and_return(at_stage_of_negotiation)
-      at_stage_of_negotiation.should_receive(:for_trading_item).with(5).and_return(['negotiation'])
-
-      expect(subject.can_be_disabled?(trading_item)).to be_false
-    end
-  end
-
-  describe '#selected_for_trading_item?' do
-    let(:item) { double(:item) }
-
-    context 'when bidder is selected at proposals of trading_item' do
-      before do
-        item.stub(:selected_bidders_at_proposals => [subject])
-      end
-
-      it { expect(subject.selected_for_trading_item?(item)).to be_true }
-    end
-
-    context 'when bidder is not selected at proposals of trading_item' do
-      before do
-        item.stub(:selected_bidders_at_proposals => ['bidder2'])
-      end
-
-      it { expect(subject.selected_for_trading_item?(item)).to be_false }
     end
   end
 

@@ -31,9 +31,6 @@ pt-BR:
     bank_accounts:
       <<: *female
 
-    bidder_disqualifications:
-      <<: *female
-
     branch_classifications:
       <<: *female
 
@@ -202,17 +199,6 @@ pt-BR:
       <<: *female
 
     tce_specification_capabilities:
-      <<: *female
-
-    trading_item_bid_proposals:
-      <<: *female
-
-    trading_item_bid_round_of_bids:
-      <<: *female
-      destroy:
-        notice: ''
-
-    trading_item_bid_negotiations:
       <<: *female
 
     purchase_process_creditor_proposals: &purchase_process_creditor_proposals
