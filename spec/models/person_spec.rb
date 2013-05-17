@@ -132,28 +132,4 @@ describe Person do
       expect(subject.correspondence_address?).to be_true
     end
   end
-
-  describe "#company?" do
-    it "should be a company" do
-      subject.stub(:personable).and_return(double(cnpj: '12345'))
-      expect(subject.company?).to be_true
-    end
-
-    it "should not be a company" do
-      subject.stub(:personable_type).and_return("Individual")
-      expect(subject.company?).to be_false
-    end
-  end
-
-  describe '#individual' do
-    it 'should be individual' do
-      subject.stub(:personable).and_return(double(cpf: '12345'))
-      expect(subject).to be_individual
-    end
-
-    it 'should not be individual' do
-      subject.stub(:personable_type).and_return 'Company'
-      expect(subject).not_to be_individual
-    end
-  end
 end
