@@ -9,7 +9,7 @@ feature "PurchaseProcessAccreditation" do
     sign_in
   end
 
-  scenario 'create, update and remove accreditance' do
+  scenario 'create, update and remove accreditance', intermittent: true do
     LicitationProcess.make!(:pregao_presencial)
     CompanySize.make!(:empresa_de_grande_porte)
     Creditor.make!(:sobrinho)
