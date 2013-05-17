@@ -17,9 +17,6 @@ namespace :import do
       puts "limite por modalidade"
       ModalityLimitImporter.new.import! if ModalityLimit.count.zero?
 
-      puts "tipos de movimento"
-      MovimentTypeImporter.new.import! if MovimentType.count.zero?
-
       puts "Tipos do Ato Regulamentor"
       RegulatoryActTypeImporter.new.import! if RegulatoryActType.count.zero?
 
