@@ -106,6 +106,9 @@ feature "Creditors" do
       expect(page).to have_field 'Número do registro na junta comercial', :with => '099901'
       expect(page).to have_disabled_field 'Data do registro na junta comercial'
       expect(page).to have_field 'Data do registro na junta comercial', :with => '29/06/2011'
+      expect(page).to have_select 'Órgão responsável pelo registro'
+
+      select 'Junta comercial', from: 'Órgão responsável pelo registro'
     end
 
     within_tab 'CNAEs' do
@@ -216,6 +219,7 @@ feature "Creditors" do
       expect(page).to have_disabled_field 'Data do registro na junta comercial'
       expect(page).to have_field 'Data do registro na junta comercial', :with => '29/06/2011'
       expect(page).to_not have_field 'PIS/PASEP'
+      expect(page).to have_select 'Órgão responsável pelo registro', selected: 'Junta comercial'
     end
 
     within_tab 'CNAEs' do
@@ -285,6 +289,8 @@ feature "Creditors" do
       check 'Autônomo'
       fill_in 'PIS/PASEP', :with => '123456'
       fill_in 'Início do contrato', :with => '05/04/2012'
+
+      expect(page).to_not have_select 'Órgão responsável pelo registro'
     end
 
     within_tab 'Materiais' do
