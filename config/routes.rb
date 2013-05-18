@@ -682,13 +682,7 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :stage_processes do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
+  get 'stage_processes/modal', :as => :modal_stage_processes
   get 'states/modal', :as => :modal_states
 
   resources :street_types do

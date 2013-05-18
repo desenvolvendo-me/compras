@@ -3,7 +3,6 @@ require 'app/models/stage_process'
 
 describe StageProcess do
   it { should have_many(:process_responsibles).dependent(:restrict) }
-  it { should validate_presence_of :description }
 
   it "return the description when call to_s" do
     subject.description = "1 Etapa"
