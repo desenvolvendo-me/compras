@@ -84,4 +84,11 @@ describe PurchaseProcessCreditorProposal do
       expect(subject.qualified?).to be_true
     end
   end
+
+  describe '#reset_ranking!' do
+    it 'updates the ranking column to 0' do
+      subject.should_receive(:update_column).with(:ranking, 0)
+      subject.reset_ranking!
+    end
+  end
 end

@@ -57,6 +57,10 @@ class PurchaseProcessCreditorProposal < Compras::Model
     !disqualified?
   end
 
+  def reset_ranking!
+    update_column :ranking, 0
+  end
+
   private
 
   def update_ranking

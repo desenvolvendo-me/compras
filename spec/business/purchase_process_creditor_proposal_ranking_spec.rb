@@ -59,8 +59,8 @@ describe PurchaseProcessCreditorProposalRanking do
     let(:proposals)  { [proposal_1, proposal_2] }
 
     it 'updates each proposal with ranking 0' do
-      proposal_1.should_receive(:update_column).with(:ranking, 0)
-      proposal_2.should_receive(:update_column).with(:ranking, 0)
+      proposal_1.should_receive(:reset_ranking!)
+      proposal_2.should_receive(:reset_ranking!)
 
       subject.send(:draw_proposals, proposals)
     end

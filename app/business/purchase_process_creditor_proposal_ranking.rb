@@ -15,7 +15,7 @@ class PurchaseProcessCreditorProposalRanking
 
     each_ordered_proposals do |proposals|
       rank_proposals proposals, ranking
-      ranking = ranking + proposals.size
+      ranking += proposals.size
     end
   end
 
@@ -36,8 +36,6 @@ class PurchaseProcessCreditorProposalRanking
   end
 
   def draw_proposals(proposals)
-    proposals.each do |proposal|
-      proposal.update_column :ranking, 0
-    end
+    proposals.each(&:reset_ranking!)
   end
 end
