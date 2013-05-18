@@ -77,4 +77,11 @@ describe PurchaseProcessCreditorProposal do
       subject.send(:update_ranking)
     end
   end
+
+  describe '#qualified?' do
+    it 'returns true if the object is not disqualified' do
+      subject.disqualified = false
+      expect(subject.qualified?).to be_true
+    end
+  end
 end

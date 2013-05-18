@@ -178,7 +178,7 @@ describe PurchaseProcessCreditorDisqualification do
     it 'checks to see if all proposal items are qualified' do
       subject.should_receive(:proposal_items).and_return proposal_items
       proposal_items.should_receive(:all?).and_yield proposal_item
-      proposal_item.should_receive(:disqualified?).and_return false
+      proposal_item.should_receive(:qualified?).and_return true
 
       expect(subject.all_items_qualified?).to be_true
     end

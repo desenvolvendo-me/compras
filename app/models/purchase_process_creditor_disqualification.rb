@@ -46,7 +46,7 @@ class PurchaseProcessCreditorDisqualification < Compras::Model
   end
 
   def all_items_qualified?
-    proposal_items.all? { |item| !item.disqualified? }
+    proposal_items.all?(&:qualified?)
   end
 
   private

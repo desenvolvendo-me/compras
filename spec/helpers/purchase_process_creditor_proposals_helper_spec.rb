@@ -71,14 +71,29 @@ describe PurchaseProcessCreditorProposalsHelper do
     end
   end
 
+  describe '#disqualification_status_message' do
+    let(:licitation_process) { double(:licitation_process, id: 1) }
+
+    before do
+      assign(:licitation_process, licitation_process)
+      helper.stub(:disqualification_status).and_return :fully
+    end
+
+    it 'returns the translated disqualification status' do
+      helper.disqualification_status_message(creditor).should eql "Totalmente"
+    end
+  end
+
   describe '#disqualification_status' do
     let(:licitation_process) { double(:licitation_process, id: 1) }
 
-    before { assign(:licitation_process, licitation_process) }
+    before do
+      assign(:licitation_process, licitation_process)
+    end
 
-    it 'returns the translated disqualification status' do
+    it 'returns the disqualification status' do
       PurchaseProcessCreditorDisqualification.should_receive(:disqualification_status).with(1, 1).and_return :fully
-      helper.disqualification_status(creditor).should eql "Totalmente"
+      expect(helper.send(:disqualification_status, creditor)).to eql :fully
     end
   end
 end

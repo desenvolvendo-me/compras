@@ -53,6 +53,10 @@ class PurchaseProcessCreditorProposal < Compras::Model
     judgment_form.item?
   end
 
+  def qualified?
+    !disqualified?
+  end
+
   private
 
   def update_ranking

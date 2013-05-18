@@ -24,8 +24,13 @@ module PurchaseProcessCreditorProposalsHelper
     @proposal_path_generator.form_proposal_path params[:action]
   end
 
+  def disqualification_status_message(creditor)
+    I18n.t("other.compras.messages.#{disqualification_status(creditor)}")
+  end
+
+  private
+
   def disqualification_status(creditor)
-    status = PurchaseProcessCreditorDisqualification.disqualification_status(@licitation_process.id, creditor.id)
-    I18n.t("other.compras.messages.#{status}")
+    PurchaseProcessCreditorDisqualification.disqualification_status(@licitation_process.id, creditor.id)
   end
 end
