@@ -51,7 +51,6 @@ feature "Bidders" do
 
     expect(page).to have_field 'Processo de compra', :with => '2/2013 - Convite 1'
     expect(page).to have_field 'Data do processo de compra', :with => '20/03/2013'
-    expect(page).to have_checked_field 'Apresentará nova proposta em caso de empate'
 
     fill_modal 'Fornecedor', :with => 'Gabriel Sobrinho'
 
@@ -98,7 +97,6 @@ feature "Bidders" do
     expect(page).to have_field 'Protocolo', :with => '123456'
     expect(page).to have_field 'Data do protocolo', :with => I18n.l(Date.current)
     expect(page).to have_field 'Data do recebimento', :with => I18n.l(Date.tomorrow)
-    expect(page).to have_checked_field 'Apresentará nova proposta em caso de empate'
     expect(page).to have_checked_field 'Renúncia a recurso'
     expect(page).to have_checked_field 'Registro de presença em ata'
     expect(page).to have_checked_field 'Habilitado'
@@ -122,7 +120,6 @@ feature "Bidders" do
 
     fill_modal 'Fornecedor', :with => 'Gabriel Sobrinho'
 
-    uncheck 'Apresentará nova proposta em caso de empate'
     check 'Convidado'
     fill_in 'Protocolo', :with => '111111'
     fill_in 'Data do protocolo', :with => I18n.l(Date.tomorrow)
@@ -152,7 +149,6 @@ feature "Bidders" do
     expect(page).to have_field 'Processo de compra', :with => '2/2013 - Convite 1'
     expect(page).to have_field 'Data do processo de compra', :with => '20/03/2013'
 
-    expect(page).to_not have_checked_field 'Apresentará nova proposta em caso de empate'
     expect(page).to have_field 'Fornecedor', :with => 'Gabriel Sobrinho'
     expect(page).to have_field 'Protocolo', :with => '111111'
     expect(page).to have_field 'Data do protocolo', :with => I18n.l(Date.tomorrow)
@@ -428,8 +424,6 @@ feature "Bidders" do
     expect(page).to have_disabled_field 'Processo de compra'
     expect(page).to have_disabled_field 'Data do processo de compra'
     expect(page).to have_disabled_field 'Fornecedor'
-    expect(page).to have_disabled_field 'Status'
-    expect(page).to have_disabled_field 'Apresentará nova proposta em caso de empate'
 
     within_tab 'Documentos' do
       expect(page).to have_disabled_field 'Documento'

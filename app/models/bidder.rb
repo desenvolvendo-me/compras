@@ -1,13 +1,11 @@
 class Bidder < Compras::Model
   attr_accessible :licitation_process_id, :creditor_id, :protocol, :protocol_date,
                   :receipt_date, :invited, :documents_attributes, :proposals_attributes,
-                  :technical_score, :person_ids, :licitation_process_id, :status,
-                  :will_submit_new_proposal_when_draw, :enabled, :renounce_resource,
+                  :technical_score, :person_ids, :licitation_process_id,
+                  :enabled, :renounce_resource,
                   :recording_attendance
 
-  attr_modal :licitation_process_id, :creditor_id, :protocol, :protocol_date, :status
-
-  has_enumeration_for :status, :create_helpers => true
+  attr_modal :licitation_process_id, :creditor_id, :protocol, :protocol_date
 
   belongs_to :licitation_process
   belongs_to :creditor
@@ -154,11 +152,11 @@ class Bidder < Compras::Model
   end
 
   def inactivate!
-    update_column(:status, Status::INACTIVE)
+    update_column(:enabled, false)
   end
 
   def activate!
-    update_column(:status, Status::ACTIVE)
+    update_column(:enabled, true)
   end
 
   def has_documentation_problem?

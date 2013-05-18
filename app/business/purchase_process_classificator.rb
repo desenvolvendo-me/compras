@@ -14,7 +14,7 @@ class PurchaseProcessClassificator
     if classify_by_lowest_value?
       draw_by_total_value?
     else
-      draw_by_total_value? && classification_benefited.will_submit_new_proposal_when_draw
+      draw_by_total_value?
     end
   end
 
@@ -39,9 +39,7 @@ class PurchaseProcessClassificator
       end
     else
       if draw_by_total_value?
-        unless classification_benefited.will_submit_new_proposal_when_draw
-          classification_not_benefited
-        end
+        classification_not_benefited
       else
         classification_with_lowest_total_price
       end

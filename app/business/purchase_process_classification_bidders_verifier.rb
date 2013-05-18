@@ -17,7 +17,7 @@ class PurchaseProcessClassificationBiddersVerifier
   private
 
   def validate_bidder_by_maximum_value?(bidder)
-    bidder.status.nil? || bidder.active?
+    bidder.enabled.nil? || bidder.enabled?
   end
 
   def disable_bidder_by_documentation_problem(bidder)

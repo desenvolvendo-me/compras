@@ -16,17 +16,11 @@
 
 <div class="yui3-g">
   <div class="yui3-u-1-2">
-    <%= f.input :status, :disabled => true %>
-  </div>
-
-  <div class="yui3-u-1-2">
     <% if f.object.validate_technical_score? %>
       <%= f.input :technical_score, :input_html => { :maxlength => 6 } %>
     <% end %>
   </div>
 </div>
-
-<%= f.input :will_submit_new_proposal_when_draw %>
 
 <% if f.object.licitation_process_invitation? %>
   <%= f.input :invited %>

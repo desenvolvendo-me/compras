@@ -10,7 +10,6 @@ describe BidderDecorator do
 
     it 'should have creditor and status' do
       expect(described_class.header_attributes).to include :creditor
-      expect(described_class.header_attributes).to include :status
     end
   end
 
