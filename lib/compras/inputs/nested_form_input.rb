@@ -9,7 +9,8 @@ module Compras
                         :association => reflection_or_attribute_name,
                         :include_add_button => options.fetch(:include_add_button, true),
                         :inline => options.fetch(:inline, false),
-                        :append => options.fetch(:append, false)
+                        :append => options.fetch(:append, false),
+                        :partial => options.fetch(:partial, 'form')
       end
     end
   end

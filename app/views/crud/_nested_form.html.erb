@@ -16,13 +16,13 @@
 
   <div id="<%= association %>" class='fields' data-nested-form="<%= association %>" data-append-item="<%= append %>" data-inline="<%= inline %>">
     <%= f.association association, :collection => localized(f.object.send(association)) do |a| %>
-      <%= render "#{template_folder}/form", :f => a %>
+      <%= render "#{template_folder}/#{partial}", :f => a %>
     <% end %>
   </div>
 
   <%= mustache "#{association}-template" do %>
     <%= f.association :"#{association}_attributes", :collection => f.object.send(association).build.localized, :index => "{{uuid-#{association}}}" do |a| %>
-      <%= render "#{template_folder}/form", :f => a %>
+      <%= render "#{template_folder}/#{partial}", :f => a %>
     <% end %>
   <% end %>
 </div>
