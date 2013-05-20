@@ -6,6 +6,9 @@ class StageProcess < Compras::Model
 
   has_many :process_responsibles, :dependent => :restrict
 
+  orderize :description
+  filterize
+
   def to_s
     "#{description}"
   end
