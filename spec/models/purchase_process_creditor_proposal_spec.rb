@@ -38,6 +38,10 @@ describe PurchaseProcessCreditorProposal do
   it { should delegate(:name).to(:creditor).allowing_nil(true).prefix(true) }
   it { should delegate(:cnpj).to(:creditor).allowing_nil(true).prefix(true) }
   it { should delegate(:benefited).to(:creditor).allowing_nil(true).prefix(true) }
+  it { should delegate(:identity_document).to(:creditor).allowing_nil(true).prefix(true) }
+  it { should delegate(:execution_unit_responsible).to(:licitation_process).allowing_nil(true).prefix(true) }
+  it { should delegate(:year).to(:licitation_process).allowing_nil(true).prefix(true) }
+  it { should delegate(:process).to(:licitation_process).allowing_nil(true).prefix(true) }
 
   describe '#total_price' do
     it 'multiplies the unit_price with the item quantity' do
