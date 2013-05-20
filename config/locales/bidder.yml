@@ -21,6 +21,7 @@ pt-BR:
         enabled: "Habilitado"
         renounce_resource: "Renúncia a recurso"
         recording_attendance: "Registro de presença em ata"
+        habilitation_date: 'Data da habilitação'
 
   bidder:
     messages:
