@@ -30,7 +30,7 @@ describe TceExport::MG::MonthlyMonitoring::PriceRegistrationAccessionGenerator d
 
       csv = File.read('tmp/REGADESAO.csv', encoding: 'ISO-8859-1')
 
-      expect(csv).to eq "11"
+      expect(csv).to eq ""
     end
   end
 end
