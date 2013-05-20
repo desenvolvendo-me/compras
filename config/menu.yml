@@ -64,12 +64,6 @@ menu:
     - administration_types
 
   - purchasing_processes:
-    - auxiliary:
-      - licitation_commissions
-      - judgment_forms
-      - licitation_objects
-      - legal_references
-    - price_registrations
     - purchase_solicitations
     - price_collections
     - licitation_processes
