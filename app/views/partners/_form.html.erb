@@ -1,18 +1,34 @@
 <div class="partner">
   <div class="yui3-g">
-    <div class="yui3-u-1-2">
+    <div class="yui3-u-1-3">
       <%= f.input :person %>
     </div>
 
-    <div class="yui3-u-1-2">
+    <div class="yui3-u-1-3">
       <%= f.input :percentage %>
+    </div>
+
+    <div class="yui3-u-1-3">
+      <%= label_tag :society_kind,
+        ExtendedPartner.human_attribute_name(:society_kind),
+        for: society_kind_id(f, mustache) %>
+
+      <%= select_tag :society_kind, options_for_select(SocietyKind.to_a, f.object.society_kind),
+        include_blank: true,
+        class: 'required society_kind',
+        id: society_kind_id(f, mustache),
+        name: society_kind_name(f, mustache) %>
     </div>
   </div>
 
-  <%= f.input :id, :as => 'hidden' %>
-  <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
+  <%= f.input :id, as: 'hidden' %>
+  <%= f.input :_destroy, as: 'hidden', input_html: { class: 'destroy' } %>
 
   <p class="yui3-u">
     <input type="button" class="button negative remove-partner" value="Remover Sócio">
   </p>
 </div>
+
+<script>
+  $('.society_kind').requiredField(true);
+</script>

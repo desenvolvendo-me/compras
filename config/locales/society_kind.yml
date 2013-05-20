@@ -1,0 +1,6 @@
+pt-BR:
+  enumerations:
+    society_kind:
+      legal_representative: "Representante legal"
+      other_company_shareholder_members: "Demais membros do quadro societário"
+

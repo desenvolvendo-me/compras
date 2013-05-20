@@ -1,0 +1,5 @@
+pt-BR:
+  activerecord:
+    attributes:
+      extended_partner:
+        society_kind: "Tipo da sociedade"
