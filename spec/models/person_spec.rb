@@ -124,6 +124,18 @@ describe Person do
         expect(subject.identity_number).to eq '1111'
       end
     end
+
+    describe '#company_partners' do
+      it 'should return nill when does not respond to partners' do
+        expect(subject.company_partners).to be_nil
+      end
+
+      it 'should return partners when respond to partners' do
+        personable.stub(:partners).and_return('partners')
+
+        expect(subject.company_partners).to eq 'partners'
+      end
+    end
   end
 
   context "#correspondence_address?" do

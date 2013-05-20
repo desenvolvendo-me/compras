@@ -23,11 +23,16 @@ class Bidder < Compras::Model
   has_one :judgment_form, :through => :licitation_process
 
   delegate :document_type_ids, :process_date, :ratification?, :has_trading?,
-           :invitation?,
+           :invitation?, :year, :process,
            :to => :licitation_process, :prefix => true, :allow_nil => true
-  delegate :envelope_opening?, :allow_bidders?,
+  delegate :envelope_opening?, :allow_bidders?, :execution_unit_responsible,
            :to => :licitation_process, :allow_nil => true
-  delegate :benefited, :to => :creditor, :allow_nil => true
+  delegate :benefited, :company?, :identity_document, :name, :state_registration,
+    :uf_state_registration,
+    :to => :creditor, :allow_nil => true
+  delegate :organ_responsible_for_registration, :commercial_registration_date,
+    :company_partners, :commercial_registration_number,
+    to: :creditor, allow_nil: true, prefix: true
 
   accepts_nested_attributes_for :documents, :allow_destroy => true
   accepts_nested_attributes_for :proposals, :allow_destroy => true
@@ -64,6 +69,18 @@ class Bidder < Compras::Model
   filterize
 
   scope :exclude_ids, lambda { |ids|  where { id.not_in(ids) } }
+
+  scope :by_ratification_month_and_year, lambda { |month, year|
+    joins { licitation_process_ratifications }.
+    where(%{
+      extract(month from compras_licitation_process_ratifications.ratification_date) = ? AND
+      extract(year from compras_licitation_process_ratifications.ratification_date) = ?},
+      month, year)
+  }
+
+  scope :enabled, lambda {
+    where { enabled.eq(true) }
+  }
 
   scope :benefited, lambda {
     joins { creditor.person.personable(Company).company_size.extended_company_size }.

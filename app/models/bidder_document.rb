@@ -24,6 +24,11 @@ class BidderDocument < Compras::Model
       :on_or_after_message => :validity_should_be_on_or_after_emission_date
     }, :allow_blank => true
 
+  scope :by_habilitation_kind, lambda { |kind|
+    joins { document_type }.
+    where { document_type.habilitation_kind.eq kind }
+  }
+
   def expired?
     validity && validity < Date.current
   end

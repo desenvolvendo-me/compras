@@ -45,6 +45,14 @@ class Person < Persona::Person
     correspondence_address.present?
   end
 
+  def company_partners
+    personable.partners if personable.respond_to?(:partners)
+  end
+
+  def uf_state_registration
+    personable.uf_state_registration if personable.respond_to?(:uf_state_registration)
+  end
+
   def company_size
     personable.company_size if personable.respond_to?(:company_size)
   end

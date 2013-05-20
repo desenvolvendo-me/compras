@@ -5,7 +5,11 @@ class Partner < Persona::Partner
 
   accepts_nested_attributes_for :extended_partner, allow_destroy: true
 
-  delegate :society_kind, :society_kind_humanize, to: :extended_partner, allow_nil: true
+  delegate :society_kind, :society_kind_humanize, :society_kind_legal_representative?,
+    :society_kind_other_company_shareholder_members?,
+    to: :extended_partner, allow_nil: true
 
   validates :person_id, :uniqueness => { :scope => [:company_id] }
+
+  delegate :cpf, to: :person, allow_nil: true
 end
