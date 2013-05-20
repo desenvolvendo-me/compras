@@ -1,6 +1,6 @@
 class PurchaseProcessCreditorProposal < Compras::Model
   attr_accessible :creditor_id, :brand, :unit_price, :item_id, :delivery_date,
-                  :licitation_process_id, :lot
+                  :licitation_process_id, :lot, :ranking
 
   belongs_to :creditor
   belongs_to :licitation_process
@@ -16,7 +16,8 @@ class PurchaseProcessCreditorProposal < Compras::Model
   validates :lot, :ranking, numericality: { allow_blank: true }
   validates :brand, presence: true, if: :item?
 
-  after_save :update_ranking
+  validates :ranking, presence: true, if: :ranking_changed?
+  after_save :update_ranking, unless: :ranking_changed?
 
   scope :by_creditor_id, lambda { |creditor_id|
     where { |proposal| proposal.creditor_id.eq(creditor_id) }
@@ -59,6 +60,29 @@ class PurchaseProcessCreditorProposal < Compras::Model
 
   def reset_ranking!
     update_column :ranking, 0
+  end
+
+  def item_or_lot_or_purchase_process
+    item || lot || licitation_process
+  end
+
+  def available_rankings
+    first = cheaper_brothers.size + 1
+    last  = same_price_brothers.size + first
+
+    (first...last).to_a
+  end
+
+  def cheaper_brothers
+    PurchaseProcessCreditorProposal.find_brothers(self).where { |query|
+      query.unit_price.lt(self.unit_price)
+    }
+  end
+
+  def same_price_brothers
+    PurchaseProcessCreditorProposal.find_brothers(self).where { |query|
+      query.unit_price.eq(self.unit_price)
+    }
   end
 
   private

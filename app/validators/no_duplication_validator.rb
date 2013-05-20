@@ -13,14 +13,34 @@ class NoDuplicationValidator < ActiveModel::EachValidator
     return if value.blank?
 
     attribute_to_validate = options[:with]
-    single_items = []
+    scope                 = options[:scope]     || []
+    allow_nil             = options[:allow_nil] || false
 
-    value.reject(&:marked_for_destruction?).each do |element|
-      if single_items.include?(element.send(attribute_to_validate))
-        record.errors.add(attribute)
-        element.errors.add(attribute_to_validate, :taken)
+    value = value.reject(&:marked_for_destruction?)
+
+    value = value.group_by do |p|
+      group = []
+      scope.each { |field| group << p.send(field) }
+      group
+    end
+
+    value.each do |scope, elements|
+      single_items = []
+
+      elements.each do |element|
+        attr_value = element.send(attribute_to_validate)
+
+        if single_items.include? attr_value
+          record.errors.add(attribute)
+          element.errors.add(attribute_to_validate, :taken)
+        end
+
+        if allow_nil
+          single_items << attr_value
+        else
+          single_items << attr_value unless attr_value.nil?
+        end
       end
-      single_items << element.send(attribute_to_validate)
     end
   end
 end

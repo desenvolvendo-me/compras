@@ -74,7 +74,54 @@ describe PurchaseProcessCreditorProposal do
     it 'updates the ranking of proposals' do
       PurchaseProcessCreditorProposalRanking.should_receive(:rank!).with subject
 
-      subject.send(:update_ranking)
+      subject.run_callbacks(:save)
+    end
+  end
+
+  describe '#item_or_lot_or_purchase_process' do
+    context 'when there is item' do
+      before { subject.stub(:item).and_return 'item' }
+
+      it 'returns item' do
+        expect(subject.item_or_lot_or_purchase_process).to eql 'item'
+      end
+    end
+
+    context 'when there is no item and there is lot' do
+      before do
+        subject.stub(:item).and_return nil
+        subject.stub(:lot).and_return 'lot'
+      end
+
+      it 'returns lot' do
+        expect(subject.item_or_lot_or_purchase_process).to eql 'lot'
+      end
+    end
+
+    context 'when there is no item and no lot' do
+      before do
+        subject.stub(:item).and_return nil
+        subject.stub(:lot).and_return nil
+        subject.stub(:licitation_process).and_return 'licitation_process'
+      end
+
+      it 'returns licitation process' do
+        expect(subject.item_or_lot_or_purchase_process).to eql 'licitation_process'
+      end
+    end
+  end
+
+  describe '#available_rankings' do
+    let(:cheaper_brothers)    { double(:cheaper_brothers, size: 2) }
+    let(:same_price_brothers) { double(:same_price_brothers, size: 2) }
+
+    before do
+      subject.stub(:cheaper_brothers).and_return cheaper_brothers
+      subject.stub(:same_price_brothers).and_return same_price_brothers
+    end
+
+    it 'returns an array of available rankings for the proposal' do
+      expect(subject.available_rankings).to eql [3, 4]
     end
   end
 

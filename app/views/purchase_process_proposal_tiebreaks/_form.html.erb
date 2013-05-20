@@ -1,0 +1,24 @@
+<div id="tied_creditor_proposals">
+  <%= f.association :tied_creditor_proposals, collection: localized(f.object.tied_creditor_proposals) do |c| %>
+    <div class="creditor_proposal_rankings">
+      <div class="yui3-g">
+        <div class="yui3-u-1-3">
+          <%= c.input :creditor, disabled: true %>
+        </div>
+
+        <div class="yui3-u-1-3">
+          <%= c.input :item, disabled: true, input_html: { value: c.object.item_or_lot_or_purchase_process },
+            label: 'Item/Lote' %>
+        </div>
+
+        <div class="yui3-u-1-6">
+          <%= c.input :unit_price, disabled: true %>
+        </div>
+
+        <div class="yui3-u-1-6">
+          <%= c.input :ranking, as: :select, collection: c.object.available_rankings, include_blank: false %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

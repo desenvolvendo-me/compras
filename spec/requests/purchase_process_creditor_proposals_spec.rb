@@ -365,4 +365,89 @@ feature 'PurchaseProcessCreditorProposals' do
       expect(page).to have_field 'Valor total da proposta', with: '0,00'
     end
   end
+
+  scenario 'tie brake draw proposals' do
+    LicitationProcess.make!(:pregao_presencial,
+      purchase_process_accreditation: PurchaseProcessAccreditation.make(:general_accreditation),
+      judgment_form: JudgmentForm.make!(:por_item_com_melhor_tecnica))
+
+    navigate 'Processos de Compra > Processos de Compras'
+
+    click_link "Limpar Filtro"
+
+    within_records do
+      click_link '1/2012'
+    end
+
+    click_link 'Propostas'
+
+    expect(page).to have_title 'Proposta Comercial Processo 1/2012 - Pregão 1'
+
+    within_records do
+      within 'tbody tr:first' do
+        click_link 'Cadastrar propostas'
+      end
+    end
+
+    fill_in 'Preço unitário', with: '50,20'
+    fill_in 'Marca', with: 'Chevrolet'
+    fill_in 'Prazo de entrega', with: '10/05/2013'
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Proposta Comercial criada com sucesso'
+
+    within_records do
+      within 'tbody tr:last' do
+        click_link 'Cadastrar propostas'
+      end
+    end
+
+    fill_in 'Preço unitário', with: '50,20'
+    fill_in 'Marca', with: 'Fiat'
+    fill_in 'Prazo de entrega', with: '10/05/2013'
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Proposta Comercial criada com sucesso'
+
+    click_link "Desempatar propostas"
+
+    expect(page).to have_title 'Desempate de Propostas'
+    expect(page).to have_subtitle '1/2012 - Pregão 1'
+
+    within 'div#tied_creditor_proposals' do
+      within 'div.creditor_proposal_rankings:first' do
+        expect(page).to have_disabled_field 'Credor', with: 'Wenderson Malheiros'
+        expect(page).to have_disabled_field 'Item/Lote', with: '01.01.00001 - Antivirus'
+        expect(page).to have_disabled_field 'Preço unitário', with: '50,20'
+        expect(page).to have_select 'Posição', options: ['1', '2'], selected: '1'
+      end
+
+      within 'div.creditor_proposal_rankings:last' do
+        expect(page).to have_disabled_field 'Credor', with: 'Gabriel Sobrinho'
+        expect(page).to have_disabled_field 'Item/Lote', with: '01.01.00001 - Antivirus'
+        expect(page).to have_disabled_field 'Preço unitário', with: '50,20'
+        expect(page).to have_select 'Posição', options: ['1', '2'], selected: '1'
+      end
+    end
+
+    click_button "Salvar"
+
+    expect(page).to have_content 'já está em uso'
+
+    within 'div#tied_creditor_proposals' do
+      within 'div.creditor_proposal_rankings:first' do
+        select '2', :from => 'Posição'
+      end
+    end
+
+    click_button "Salvar"
+
+    expect(page).to have_notice 'Desempate editado com sucesso'
+
+    click_link 'Desempatar propostas'
+
+    expect(page).to_not have_button "Salvar"
+  end
 end
