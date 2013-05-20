@@ -1,7 +1,7 @@
 # encoding: utf-8
 module TceExport::MG
   module MonthlyMonitoring
-    class PriceRegistrationDataGenerator < DataGeneratorBase
+    class ProcessResponsibleMemberDataGenerator < DataGeneratorBase
       def initialize(monthly_monitoring, responsible)
         @monthly_monitoring = monthly_monitoring
         @responsible = responsible
