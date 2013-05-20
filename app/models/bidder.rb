@@ -2,7 +2,7 @@ class Bidder < Compras::Model
   attr_accessible :licitation_process_id, :creditor_id, :protocol, :protocol_date,
                   :receipt_date, :invited, :documents_attributes, :proposals_attributes,
                   :technical_score, :person_ids, :licitation_process_id,
-                  :enabled, :renounce_resource,
+                  :enabled, :renounce_resource, :habilitation_date,
                   :recording_attendance
 
   attr_modal :licitation_process_id, :creditor_id, :protocol, :protocol_date

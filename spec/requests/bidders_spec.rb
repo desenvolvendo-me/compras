@@ -100,6 +100,7 @@ feature "Bidders" do
     expect(page).to have_checked_field 'Renúncia a recurso'
     expect(page).to have_checked_field 'Registro de presença em ata'
     expect(page).to have_checked_field 'Habilitado'
+    expect(page).to have_field 'Data da habilitação', :with => I18n.l(Date.current)
 
     within_tab 'Documentos' do
       expect(page).to have_field 'Documento', :with => 'Fiscal'
@@ -156,6 +157,7 @@ feature "Bidders" do
     expect(page).to_not have_checked_field 'Renúncia a recurso'
     expect(page).to_not have_checked_field 'Registro de presença em ata'
     expect(page).to_not have_checked_field 'Habilitado'
+    expect(page).to have_field 'Data da habilitação', ''
 
     within_tab 'Documentos' do
       expect(page).to have_field 'Documento', :with => 'Fiscal'
