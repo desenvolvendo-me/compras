@@ -65,22 +65,22 @@ class Bidder < Compras::Model
 
   scope :exclude_ids, lambda { |ids|  where { id.not_in(ids) } }
 
-  def self.benefited
+  scope :benefited, lambda {
     joins { creditor.person.personable(Company).company_size.extended_company_size }.
     where { 'compras_extended_company_sizes.benefited = true' }
-  end
+  }
 
-  def self.won_calculation
+  scope :won_calculation, lambda {
     joins { licitation_process.creditor_proposals }.
     where { licitation_process.creditor_proposals.ranking.eq(1) }.
     where { '"compras_bidders".creditor_id = "compras_purchase_process_creditor_proposals".creditor_id' }.
     uniq
-  end
+  }
 
-  def self.without_ratification
+  scope :without_ratification, lambda {
     joins { licitation_process_ratifications.outer }.
     where { licitation_process_ratifications.id.eq(nil) }
-  end
+  }
 
   def creditor_proposals
     licitation_process.creditor_proposals.winning_proposals.by_creditor_id(self.creditor_id)
