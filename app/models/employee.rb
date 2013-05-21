@@ -21,6 +21,10 @@ class Employee < Compras::Model
 
   delegate :to_s, :name, :number, :issuer, :cpf, :phone, :email, :zip_code,
     :city, :state, to: :individual, allow_nil: :true
+  delegate :name, to: :street, allow_nil: true, prefix: true
+  delegate :name, to: :neighborhood, allow_nil: true, prefix: true
+  delegate :tce_mg_code, to: :city, allow_nil: true, prefix: true
+  delegate :acronym, to: :state, allow_nil: true, prefix: true
 
   validates :individual_id, :registration, uniqueness: { allow_blank: true }
   validates :individual, :registration, :position, presence: true

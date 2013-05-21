@@ -15,6 +15,16 @@ describe LegalAnalysisAppraisal do
   it { should delegate(:process).to(:licitation_process).allowing_nil(true) }
   it { should delegate(:modality).to(:licitation_process).allowing_nil(true) }
   it { should delegate(:description).to(:licitation_process).allowing_nil(true) }
+  it { should delegate(:execution_unit_responsible).to(:licitation_process).allowing_nil(true) }
+  it { should delegate(:cpf).to(:responsible).allowing_nil(true).prefix(true) }
+  it { should delegate(:name).to(:responsible).allowing_nil(true).prefix(true) }
+  it { should delegate(:street_name).to(:responsible).allowing_nil(true).prefix(true) }
+  it { should delegate(:neighborhood_name).to(:responsible).allowing_nil(true).prefix(true) }
+  it { should delegate(:city_tce_mg_code).to(:responsible).allowing_nil(true).prefix(true) }
+  it { should delegate(:state_acronym).to(:responsible).allowing_nil(true).prefix(true) }
+  it { should delegate(:zip_code).to(:responsible).allowing_nil(true).prefix(true) }
+  it { should delegate(:phone).to(:responsible).allowing_nil(true).prefix(true) }
+  it { should delegate(:email).to(:responsible).allowing_nil(true).prefix(true) }
 
   it "should return process and year as process_and_year method" do
     subject.stub(:process).and_return(1)
