@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'zip/zip'
 
-describe TceExport::MG::MonthlyMonitoring do 
+describe TceExport::MG::MonthlyMonitoring do
   describe "#generate_zip_file" do
     before do
       FileUtils.rm_f("tmp/AM_51234_66_10_2013.zip")
@@ -37,7 +37,7 @@ describe TceExport::MG::MonthlyMonitoring do
 
       TceExport::MG::MonthlyMonitoring.generate_zip_file(monthly_monitoring)
       entries = Zip::ZipFile.open("tmp/AM_51234_66_10_2013.zip").entries.map(&:to_s)
-      expect(entries).to include("REGLIC.csv", 'RESPLIC.csv')
+      expect(entries).to include('REGLIC.csv', 'RESPLIC.csv', 'REGADESAO.csv')
     end
   end
 end
