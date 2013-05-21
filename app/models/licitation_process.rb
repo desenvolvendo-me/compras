@@ -34,7 +34,7 @@ class LicitationProcess < Compras::Model
   has_enumeration_for :expiration_unit, :with => PeriodUnit
   has_enumeration_for :modality, :create_helpers => true, :create_scopes => true
   has_enumeration_for :object_type, :with => PurchaseProcessObjectType, :create_helpers => true
-  has_enumeration_for :period_unit, :with => PeriodUnit
+  has_enumeration_for :period_unit, :with => PeriodUnit, create_helpers: { prefix: true }
   has_enumeration_for :status, :with => PurchaseProcessStatus, :create_helpers => true
   has_enumeration_for :type_of_purchase, :with => PurchaseProcessTypeOfPurchase, :create_helpers => true
   has_enumeration_for :type_of_removal
@@ -63,6 +63,7 @@ class LicitationProcess < Compras::Model
            :source => :licitation_process_classifications
   has_many :purchase_process_budget_allocations, :dependent => :destroy, :order => :id
   has_many :budget_allocations, :through => :purchase_process_budget_allocations
+  has_many :budget_allocation_capabilities, through: :budget_allocations
   has_many :items, :class_name => 'PurchaseProcessItem', :dependent => :restrict,
            :order => :id, :inverse_of => :licitation_process
   has_many :materials, :through => :items
@@ -148,6 +149,14 @@ class LicitationProcess < Compras::Model
     joins { publications }.where {
       publications.publication_of.eq PublicationOf::EDITAL
     }
+  }
+
+  scope :by_ratification_month_and_year, lambda { |month, year|
+    joins { licitation_process_ratifications }.
+      where(%{
+        extract(month from compras_licitation_process_ratifications.ratification_date) = ? AND
+        extract(year from compras_licitation_process_ratifications.ratification_date) = ?},
+        month, year)
   }
 
   def to_s

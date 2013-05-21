@@ -1,10 +1,11 @@
 pt-BR:
   enumerations:
     monthly_monitoring_files:
-      regulatory_act: "REGLIC - Decreto Municipal Regulamentador do Pregão / Registro de Preços"
-      process_responsible: "RESPLIC - Responsáveis pela Licitação"
-      price_registration_accession: "REGADESAO - Adesão a Registro de Preços"
+      bidding_authorization: "HABLIC - Habilitação da Licitação"
       legal_analysis_appraisal: "PARELIC - Parecer da Licitação"
       licitation_judgment: "JULGLIC - Julgamento da Licitação"
       licitation_ratification: "HOMOLIC - Homologação da Licitação"
-      bidding_authorization: "HABLIC - Habilitação da Licitação"
+      price_registration_accession: "REGADESAO - Adesão a Registro de Preços"
+      process_responsible: "RESPLIC - Responsáveis pela Licitação"
+      purchase_opening: "ABERLIC - Abertura da Licitação"
+      regulatory_act: "REGLIC - Decreto Municipal Regulamentador do Pregão / Registro de Preços"
