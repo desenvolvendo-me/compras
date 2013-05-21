@@ -65,6 +65,15 @@ class LicitationProcessDecorator
     t('licitation_process.messages.disabled_trading_message')
   end
 
+  def enabled_realignment_price
+    bidders.each do |bidder|
+      if proposals_of_creditor(bidder.creditor).empty?
+        return false
+      end
+    end
+    (judgment_form.global? || judgment_form.lot?)
+  end
+
   def code_and_year
     "#{process}/#{year}"
   end

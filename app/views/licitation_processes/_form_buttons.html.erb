@@ -9,6 +9,9 @@
         <%= link_to('Credenciamento', accreditation_path_helper, :class => "button primary", 'data-disabled' => f.object.decorator.must_have_published_edital) %>
       <% end %>
 
+      <%= link_to('Realinhamento de preço', realigment_prices_path(purchase_process_id: resource), :class => "button primary",
+                  'data-disabled' => f.object.decorator.must_have_creditors_and_items) if f.object.decorator.enabled_realignment_price %>
+
       <%= link_to('Propostas', proposals_path, :class => "button primary",
                   'data-disabled' => f.object.decorator.must_have_creditors_and_items) if f.object.licitation? %>
 

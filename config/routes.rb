@@ -1,5 +1,4 @@
 Compras::Application.routes.draw do
-
   root :to => 'bookmarks#show'
 
   get 'agreements/modal', :as => :modal_agreements
@@ -610,6 +609,13 @@ Compras::Application.routes.draw do
   resources :purchase_solicitation_annuls, :only => [:new, :create, :edit, :update]
 
   resources :purchase_solicitation_liberations, :only => [:index, :new, :create, :edit] do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
+  resources :realigment_prices do
     collection do
       get :filter
       get :modal
