@@ -7,7 +7,6 @@ BudgetAllocation.blueprint(:alocacao) do
   government_program { GovernmentProgram.make!(:habitacao) }
   government_action { GovernmentAction.make!(:governamental) }
   expense_nature { ExpenseNature.make!(:aposentadorias_reserva_reformas) }
-  capability { Capability.make!(:reforma) }
   debt_type { DebtType::NOTHING }
   refinancing { true }
   health { false }
@@ -16,7 +15,7 @@ BudgetAllocation.blueprint(:alocacao) do
   foresight { false }
   personal { false }
   date { Date.current }
-  amount { "500,00" }
+  budget_allocation_capabilities { [BudgetAllocationCapability.make!(:generic, amount: 500.0, budget_allocation: object)] }
   kind { BudgetAllocationKind::DIVIDE }
   reserve_funds { [ReserveFund.make!(:detran_2011, :budget_allocation => object)] }
 end
@@ -29,7 +28,6 @@ BudgetAllocation.blueprint(:alocacao_extra) do
   government_program { GovernmentProgram.make!(:habitacao) }
   government_action { GovernmentAction.make!(:governamental) }
   expense_nature { ExpenseNature.make!(:aposentadorias_reserva_reformas) }
-  capability { Capability.make!(:reforma) }
   debt_type { DebtType::NOTHING }
   refinancing { true }
   health { false }
@@ -37,7 +35,7 @@ BudgetAllocation.blueprint(:alocacao_extra) do
   education { false }
   foresight { false }
   personal { false }
-  amount { "200,00" }
+  budget_allocation_capabilities { [BudgetAllocationCapability.make!(:generic, amount: 200.0, budget_allocation: object)] }
   date { Date.current }
   kind { BudgetAllocationKind::DIVIDE }
 end
@@ -50,7 +48,6 @@ BudgetAllocation.blueprint(:reparo_2011) do
   government_program { GovernmentProgram.make!(:educacao) }
   government_action { GovernmentAction.make!(:nacional) }
   expense_nature { ExpenseNature.make!(:aposentadorias_reserva_reformas) }
-  capability { Capability.make!(:reforma) }
   debt_type { DebtType::NOTHING }
   refinancing { true }
   health { false }
@@ -59,6 +56,6 @@ BudgetAllocation.blueprint(:reparo_2011) do
   foresight { false }
   personal { false }
   date { Date.current }
-  amount { "3000,00" }
+  budget_allocation_capabilities { [BudgetAllocationCapability.make!(:generic, amount: 3000.0, budget_allocation: object)] }
   kind { BudgetAllocationKind::DIVIDE }
 end

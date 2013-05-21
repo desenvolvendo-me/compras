@@ -1,14 +1,12 @@
-class BudgetStructureLevel < Compras::Model
-  attr_accessible :level, :description, :digits, :separator
-  attr_accessible :budget_structure_configuration_id
+class BudgetStructureLevel < Accounting::Model
+  include CustomData
+  reload_custom_data
 
   attr_modal :budget_structure_configuration_id, :level, :description
 
   has_enumeration_for :separator, :with => BudgetStructureSeparator, :create_helpers => true
 
   belongs_to :budget_structure_configuration
-
-  validates :description, :level, :digits, :presence => true
 
   orderize :level
   filterize

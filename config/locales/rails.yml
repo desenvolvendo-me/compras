@@ -323,6 +323,7 @@ pt-BR:
       all_required_fields_should_be_filled: "é necesssário preencher todos os campos obrigatórios"
       parent_classification_should_be_law: "A classificação do Ato principal deve ser Lei, quando a classificação do ato secundário for Decreto"
       should_be_total: "deve ser toda proposta"
+      readonly: "model somente leitura"
 
   activerecord:
     errors:
