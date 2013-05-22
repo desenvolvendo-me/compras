@@ -3,7 +3,7 @@
   <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
 
   <div class="yui3-g nested">
-    <div class="yui3-u-1-3">
+    <div class="yui3-u-2-5">
       <%= f.input :stage_process,
         :modal_url => modal_stage_processes_path(
           stage_process: {
@@ -11,10 +11,10 @@
             },
           locked_fields: [:type_of_purchase]) %>
     </div>
-    <div class="yui3-u-1-3">
+    <div class="yui3-u-2-5">
       <%= f.input :employee %>
     </div>
-    <div class="yui3-u-1-8 nested-remove">
+    <div class="yui3-u-1-8 nested-remove" style="padding-top: 28px;">
       <input type="button" class="button negative remove-process_responsibles" value="Remover">
     </div>
   </div>
