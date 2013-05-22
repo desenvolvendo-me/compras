@@ -10,7 +10,10 @@ class PurchaseProcessCreditorProposal < Compras::Model
 
   delegate :lot, :additional_information, :quantity, :reference_unit, :material,
     to: :item, allow_nil: true, prefix: true
-  delegate :name, :cnpj, :benefited, to: :creditor, allow_nil: true, prefix: true
+  delegate :name, :cnpj, :benefited, :identity_document,
+    to: :creditor, allow_nil: true, prefix: true
+  delegate :execution_unit_responsible, :year, :process,
+    to: :licitation_process, allow_nil: true, prefix: true
 
   validates :creditor, :licitation_process, :unit_price, presence: true
   validates :lot, :ranking, numericality: { allow_blank: true }
