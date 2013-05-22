@@ -1,0 +1,9 @@
+pt-BR:
+  enumerations:
+    contract_additive_type:
+      extension_term: "Prorrogação de Prazo"
+      others: "Outros"
+      readjustment: "Reajuste"
+      recomposition: "Recomposição"
+      value_additions: "Acréscimo de valor"
+      value_decrease: "Descréscimo de valor"

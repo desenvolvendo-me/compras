@@ -210,6 +210,68 @@ feature "Contracts" do
     expect(page).to have_content '19,98'
   end
 
+  scenario 'add contract additives' do
+    ContractAdditive.make!(:aditivo)
+
+    navigate 'Comum > Cadastrais > Contratos'
+
+    click_link 'Limpar Filtro'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within '#additives' do
+      expect(page).to have_field 'Número', with: '666'
+      expect(page).to have_select 'Tipo', with: 'Outros'
+      expect(page).to have_field 'Data da assinatura', with: '13/10/2013'
+      expect(page).to have_field 'Data de publicação', with: '13/10/2013'
+      expect(page).to have_field 'Meio de divulgação', with: 'Jornal Oficial do Município'
+      expect(page).to have_field 'Observações', with: 'aditivo 1'
+    end
+
+    click_link 'Adicionar Aditivo'
+
+    within '.nested-additives:last' do
+      select 'Prorrogação de Prazo', from: 'Tipo'
+      expect(page).to have_field 'Data de término'
+      expect(page).not_to have_field 'Valor'
+
+      select 'Outros', from: 'Tipo'
+      expect(page).not_to have_field 'Data de término'
+      expect(page).not_to have_field 'Valor'
+
+      select 'Acréscimo de valor', from: 'Tipo'
+      expect(page).not_to have_field 'Data de término'
+      expect(page).to have_field 'Valor'
+
+      fill_in 'Número', with: '123'
+      select 'Outros', from: 'Tipo'
+      fill_in 'Data da assinatura', with: '13/10/2013'
+      fill_in 'Data de publicação', with: '13/10/2013'
+      fill_modal 'Meio de divulgação', with: 'Jornal Oficial do Município', field: 'Descrição'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Contrato editado com sucesso'
+
+    click_link 'Limpar Filtro'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within '#additives' do
+      expect(page).to have_field 'Número', with: '666'
+      expect(page).to have_select 'Tipo', with: 'Outros'
+      expect(page).to have_field 'Data da assinatura', with: '13/10/2013'
+      expect(page).to have_field 'Data de publicação', with: '13/10/2013'
+      expect(page).to have_field 'Meio de divulgação', with: 'Jornal Oficial do Município'
+      expect(page).to have_field 'Observações', with: 'aditivo 1'
+    end
+  end
+
   scenario 'add delivery schedule' do
     DeliverySchedule.make!(:primeira_entrega)
 

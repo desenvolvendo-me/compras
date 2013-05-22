@@ -1,0 +1,18 @@
+pt-BR:
+  activerecord:
+    models:
+      contract_additive:
+        one: "Aditivo"
+        other: "Aditivos"
+
+    attributes:
+      contract_additive:
+        additive_type: "Tipo"
+        dissemination_source: "Meio de divulgação"
+        end_date: "Data de término"
+        number: "Número"
+        observation: "Observações"
+        publication_date: "Data de publicação"
+        signature_date: "Data da assinatura"
+        value: "Valor"
+

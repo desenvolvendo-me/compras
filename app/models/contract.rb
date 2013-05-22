@@ -7,7 +7,7 @@ class Contract < Compras::Model
                   :dissemination_source_id, :creditor_id, :contract_type_id,
                   :licitation_process_id, :direct_purchase_id,
                   :budget_structure_id, :budget_structure_responsible_id,
-                  :lawyer_id, :parent_id
+                  :lawyer_id, :parent_id, :additives_attributes
 
   attr_modal :year, :contract_number, :sequential_number, :signature_date
 
@@ -25,6 +25,7 @@ class Contract < Compras::Model
   belongs_to :lawyer, :class_name => 'Employee'
   belongs_to :licitation_process
 
+  has_many :additives, class_name: 'ContractAdditive', dependent: :restrict
   has_many :delivery_schedules, :dependent => :destroy, :order => :sequence
   has_many :founded_debt_pledges, :class_name => 'Pledge', :dependent => :restrict, :foreign_key => 'founded_debt_contract_id'
   has_many :occurrence_contractual_historics, :dependent => :restrict
@@ -32,6 +33,7 @@ class Contract < Compras::Model
 
   has_one :contract_termination, :dependent => :restrict
 
+  accepts_nested_attributes_for :additives, :allow_destroy => true
   accepts_nested_attributes_for :delivery_schedules, :allow_destroy => true
 
   delegate :execution_type_humanize, :contract_guarantees_humanize, :to => :licitation_process, :allow_nil => true
