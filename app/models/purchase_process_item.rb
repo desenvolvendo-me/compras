@@ -22,7 +22,7 @@ class PurchaseProcessItem < Compras::Model
 
   accepts_nested_attributes_for :creditor_proposals
 
-  delegate :reference_unit, :description, :to => :material, :allow_nil => true
+  delegate :reference_unit, :description, :code, :to => :material, :allow_nil => true
   delegate :direct_purchase?, :to => :licitation_process, :allow_nil => true
 
   validates :material, :quantity, :lot, :presence => true

@@ -11,7 +11,7 @@ class LicitationProcessRatification < Compras::Model
   belongs_to :bidder
 
   has_many :licitation_process_ratification_items, :dependent => :destroy
-  has_many :bidder_proposals, :through => :licitation_process_ratification_items
+  has_many :creditor_proposals, :through => :licitation_process
 
   accepts_nested_attributes_for :licitation_process_ratification_items, :allow_destroy => true
 
@@ -40,9 +40,9 @@ class LicitationProcessRatification < Compras::Model
   end
 
   def proposals_total_value
-    total = self.class.joins { bidder_proposals.purchase_process_item }.
+    total = self.class.joins { creditor_proposals.item }.
       where { |ratification| ratification.id.eq id }.
-      select { sum(bidder_proposals.purchase_process_item.quantity * bidder_proposals.unit_price).
+      select { sum(creditor_proposals.item.quantity * creditor_proposals.unit_price).
       as(proposal_total) }.first.proposal_total
 
     BigDecimal(total || 0)

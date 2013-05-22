@@ -71,13 +71,19 @@ class Bidder < Compras::Model
   end
 
   def self.won_calculation
-    joins { licitation_process_classifications }.
-    where { licitation_process_classifications.situation.eq(SituationOfProposal::WON) }
+    joins { licitation_process.creditor_proposals }.
+    where { licitation_process.creditor_proposals.ranking.eq(1) }.
+    where { '"compras_bidders".creditor_id = "compras_purchase_process_creditor_proposals".creditor_id' }.
+    uniq
   end
 
   def self.without_ratification
     joins { licitation_process_ratifications.outer }.
     where { licitation_process_ratifications.id.eq(nil) }
+  end
+
+  def creditor_proposals
+    licitation_process.creditor_proposals.won.by_creditor_id(self.creditor_id)
   end
 
   def destroy_all_classifications
