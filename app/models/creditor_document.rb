@@ -26,6 +26,11 @@ class CreditorDocument < Compras::Model
     },
     :allow_blank => true
 
+  scope :by_habilitation_kind, lambda { |kind|
+    joins { document_type }.
+    where { document_type.habilitation_kind.eq kind }
+  }
+
   def to_s
     document_type
   end

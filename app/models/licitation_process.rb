@@ -37,8 +37,9 @@ class LicitationProcess < Compras::Model
   has_enumeration_for :object_type, :with => PurchaseProcessObjectType, :create_helpers => true
   has_enumeration_for :period_unit, :with => PeriodUnit, create_helpers: { prefix: true }
   has_enumeration_for :status, :with => PurchaseProcessStatus, :create_helpers => true
-  has_enumeration_for :type_of_purchase, :with => PurchaseProcessTypeOfPurchase, :create_helpers => true
-  has_enumeration_for :type_of_removal
+  has_enumeration_for :type_of_purchase, :with => PurchaseProcessTypeOfPurchase,
+    :create_helpers => true, create_scopes: true
+  has_enumeration_for :type_of_removal, create_helpers: { prefix: true }
 
   belongs_to :contact, :class_name => 'Employee'
   belongs_to :judgment_form

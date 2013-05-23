@@ -659,3 +659,38 @@ LicitationProcess.blueprint(:processo_licitatorio_leilao) do
   contract_guarantees { ContractGuarantees::BANK }
   notice_availability_date { I18n.l(Date.tomorrow) }
 end
+
+
+LicitationProcess.blueprint(:compra_direta) do
+  type_of_purchase { PurchaseProcessTypeOfPurchase::DIRECT_PURCHASE }
+  process { 2 }
+  protocol { '00089/2012' }
+  object_type { PurchaseProcessObjectType::PURCHASE_AND_SERVICES }
+  modality { Modality::CONCURRENCE }
+  judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
+  description { 'Licitação para compra de carteiras' }
+  purchase_process_budget_allocations { [PurchaseProcessBudgetAllocation.make!(:alocacao_com_itens)] }
+  items { [PurchaseProcessItem.make!(:item, creditor: Creditor.make!(:wenderson_sa))] }
+  justification_and_legal { 'Justificativa legal' }
+  justification { 'Justificativa' }
+  type_of_removal { TypeOfRemoval::REMOVAL_JUSTIFIED }
+  year { 2013 }
+  process_date { Date.new(2013, 3, 20) }
+  expiration { 10 }
+  expiration_unit { PeriodUnit::DAY }
+  readjustment_index { Indexer.make!(:xpto) }
+  envelope_delivery_date { I18n.l(Date.current) }
+  envelope_delivery_time { "14:00" }
+  proposal_envelope_opening_date { I18n.l(Date.current) }
+  proposal_envelope_opening_time { "14:00" }
+  period { 1 }
+  period_unit { PeriodUnit::YEAR }
+  payment_method { PaymentMethod.make!(:dinheiro) }
+  caution_value { 9.99 }
+  document_types { [DocumentType.make!(:fiscal)] }
+  publications { [LicitationProcessPublication.make!(:publicacao,
+                                                     :licitation_process => object)] }
+  execution_type { ExecutionType::INTEGRAL }
+  contract_guarantees { ContractGuarantees::BANK }
+  notice_availability_date { I18n.l(Date.tomorrow) }
+end
