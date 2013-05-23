@@ -23,11 +23,16 @@ class Bidder < Compras::Model
   has_one :judgment_form, :through => :licitation_process
 
   delegate :document_type_ids, :process_date, :ratification?, :has_trading?,
-           :invitation?,
+           :invitation?, :year, :process,
            :to => :licitation_process, :prefix => true, :allow_nil => true
-  delegate :envelope_opening?, :allow_bidders?,
+  delegate :envelope_opening?, :allow_bidders?, :execution_unit_responsible,
            :to => :licitation_process, :allow_nil => true
-  delegate :benefited, :to => :creditor, :allow_nil => true
+  delegate :benefited, :company?, :identity_document, :name, :state_registration,
+    :uf_state_registration,
+    :to => :creditor, :allow_nil => true
+  delegate :organ_responsible_for_registration, :commercial_registration_date,
+    :company_partners, :commercial_registration_number,
+    to: :creditor, allow_nil: true, prefix: true
 
   accepts_nested_attributes_for :documents, :allow_destroy => true
   accepts_nested_attributes_for :proposals, :allow_destroy => true
@@ -65,22 +70,34 @@ class Bidder < Compras::Model
 
   scope :exclude_ids, lambda { |ids|  where { id.not_in(ids) } }
 
-  def self.benefited
+  scope :by_ratification_month_and_year, lambda { |month, year|
+    joins { licitation_process_ratifications }.
+    where(%{
+      extract(month from compras_licitation_process_ratifications.ratification_date) = ? AND
+      extract(year from compras_licitation_process_ratifications.ratification_date) = ?},
+      month, year)
+  }
+
+  scope :enabled, lambda {
+    where { enabled.eq(true) }
+  }
+
+  scope :benefited, lambda {
     joins { creditor.person.personable(Company).company_size.extended_company_size }.
     where { 'compras_extended_company_sizes.benefited = true' }
-  end
+  }
 
-  def self.won_calculation
+  scope :won_calculation, lambda {
     joins { licitation_process.creditor_proposals }.
     where { licitation_process.creditor_proposals.ranking.eq(1) }.
     where { '"compras_bidders".creditor_id = "compras_purchase_process_creditor_proposals".creditor_id' }.
     uniq
-  end
+  }
 
-  def self.without_ratification
+  scope :without_ratification, lambda {
     joins { licitation_process_ratifications.outer }.
     where { licitation_process_ratifications.id.eq(nil) }
-  end
+  }
 
   def creditor_proposals
     licitation_process.creditor_proposals.winning_proposals.by_creditor_id(self.creditor_id)

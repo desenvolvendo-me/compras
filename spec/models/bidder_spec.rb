@@ -32,14 +32,27 @@ describe Bidder do
   it { should validate_presence_of :creditor }
 
   describe 'delegations' do
-    it { should delegate(:document_type_ids).to(:licitation_process).prefix(true) }
-    it { should delegate(:process_date).to(:licitation_process).prefix(true) }
-    it { should delegate(:ratification?).to(:licitation_process).prefix(true) }
-    it { should delegate(:has_trading?).to(:licitation_process).prefix(true) }
+    it { should delegate(:document_type_ids).to(:licitation_process).allowing_nil(true).prefix(true) }
+    it { should delegate(:process_date).to(:licitation_process).allowing_nil(true).prefix(true) }
+    it { should delegate(:ratification?).to(:licitation_process).allowing_nil(true).prefix(true) }
+    it { should delegate(:has_trading?).to(:licitation_process).allowing_nil(true).prefix(true) }
+    it { should delegate(:year).to(:licitation_process).allowing_nil(true).prefix(true) }
+    it { should delegate(:process).to(:licitation_process).allowing_nil(true).prefix(true) }
 
     it { should delegate(:envelope_opening?).to(:licitation_process).allowing_nil(true) }
+    it { should delegate(:execution_unit_responsible).to(:licitation_process).allowing_nil(true) }
     it { should delegate(:allow_bidders?).to(:licitation_process).allowing_nil(true) }
+
     it { should delegate(:benefited).to(:creditor).allowing_nil(true) }
+    it { should delegate(:company?).to(:creditor).allowing_nil(true) }
+    it { should delegate(:identity_document).to(:creditor).allowing_nil(true) }
+    it { should delegate(:name).to(:creditor).allowing_nil(true) }
+    it { should delegate(:state_registration).to(:creditor).allowing_nil(true) }
+
+    it { should delegate(:organ_responsible_for_registration).to(:creditor).allowing_nil(true).prefix(true) }
+    it { should delegate(:commercial_registration_date).to(:creditor).allowing_nil(true).prefix(true) }
+    it { should delegate(:commercial_registration_number).to(:creditor).allowing_nil(true).prefix(true) }
+    it { should delegate(:company_partners).to(:creditor).allowing_nil(true).prefix(true) }
   end
 
   context "licitation kind" do

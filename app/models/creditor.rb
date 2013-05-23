@@ -55,7 +55,7 @@ class Creditor < Compras::Model
            :identity_document, :company?, :phone, :fax, :benefited, :address,
            :city, :zip_code, :company_size, :choose_simple, :legal_nature,
            :commercial_registration_number, :commercial_registration_date,
-           :personable_type_humanize,
+           :personable_type_humanize, :company_partners, :uf_state_registration,
            :to => :person, :allow_nil => true
   delegate :email, :to => :person, :allow_nil => true, :prefix => true
   delegate :identity_document, :to => :responsible, :prefix => true, :allow_nil => true

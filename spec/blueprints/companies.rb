@@ -9,6 +9,7 @@ Company.blueprint(:nohup) do
   commercial_registration_date { Date.new(2011, 6, 29) }
   company_size { CompanySize.make!(:micro_empresa) }
   choose_simple { false }
+  uf_state_registration { 'pr' }
   responsible_role { "Administrador" }
   partners { [Partner.make!(:wenderson)] }
 end
@@ -22,6 +23,7 @@ Company.blueprint(:nobe) do
   commercial_registration_date { Date.new(2011, 6, 29) }
   company_size { CompanySize.make!(:micro_empresa) }
   choose_simple { false }
+  uf_state_registration { 'pr' }
   responsible_role { "Administrador" }
   partners { [Partner.make!(:wenderson)] }
 end
@@ -36,6 +38,7 @@ Company.blueprint(:ibrama) do
   company_size { CompanySize.make!(:micro_empresa) }
   choose_simple { true }
   responsible_role { "Administrador" }
+  uf_state_registration { 'pr' }
   partners { [Partner.make!(:wenderson)] }
 end
 
@@ -49,5 +52,6 @@ Company.blueprint(:ibm) do
   company_size { CompanySize.make!(:empresa_de_grande_porte) }
   choose_simple { true }
   responsible_role { "Administrador" }
+  uf_state_registration { 'pr' }
   partners { [Partner.make!(:wenderson)] }
 end

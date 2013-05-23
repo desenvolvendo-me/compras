@@ -66,6 +66,7 @@ describe Creditor do
 
   it { should delegate(:name).to(:person).allowing_nil(true) }
   it { should delegate(:personable_type_humanize).to(:person).allowing_nil(true) }
+  it { should delegate(:company_partners).to(:person).allowing_nil(true) }
 
   context 'when is company' do
     before do
