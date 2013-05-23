@@ -135,6 +135,7 @@ describe LicitationProcess do
     end
 
     it { should validate_presence_of :type_of_removal }
+    it { should validate_presence_of :justification }
   end
 
   context "when updating a record" do

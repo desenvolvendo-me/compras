@@ -1548,6 +1548,28 @@ feature "LicitationProcesses" do
     end
   end
 
+  scenario 'assert javascript direct_purchase show input justification' do
+    navigate 'Processos de Compra > Processos de Compras'
+
+    click_link 'Criar Processo de Compra'
+
+    within_tab 'Principal' do
+      choose 'Processo licitatório'
+    end
+
+    within_tab 'Itens' do
+      expect(page).to_not have_css '.justification'
+    end
+
+    within_tab 'Principal' do
+      choose 'Compra direta'
+    end
+
+    within_tab 'Itens' do
+      expect(page).to have_css '.justification'
+    end
+  end
+
   scenario 'assert javascript over modality' do
     pending 'this test is not working, but in browser is all ok' do
       navigate 'Processos de Compra > Processos de Compras'
@@ -1692,6 +1714,7 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Itens / Justificativa' do
+      fill_in 'Justificativa', with: 'Justificando'
       expect(page).to have_field('Fornecedor')
 
       within_records do
@@ -1710,6 +1733,7 @@ feature "LicitationProcesses" do
     expect(page).to have_notice "Processo de Compra 1/2012 editado com sucesso."
 
     within_tab "Itens / Justificativa" do
+      expect(page).to have_field 'Justificativa', with: 'Justificando'
       within_records do
         expect(page).to have_css 'tbody tr', :count => 1
 

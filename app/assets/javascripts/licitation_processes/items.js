@@ -51,11 +51,15 @@ $(document).ready(function() {
 
     if ( isDirectPurchase ) {
       $('.item-creditor').removeClass('hidden');
+      $('.justification').removeClass('hidden');
+      $('#licitation_process_justification').addClass('required');
+      $('#licitation_process_justification').requiredField(true);
       $('#licitation_process_creditor').requiredField(true);
       $('#licitation_process_creditor').addClass('required');
       $('input.creditor-id').attr('disabled', false);
     } else {
       $('.item-creditor').addClass('hidden');
+      $('.justification').addClass('hidden');
       $('#licitation_process_creditor').requiredField(false);
       $('#licitation_process_creditor').removeClass('required');
       $('input.creditor-id').attr('disabled', true);

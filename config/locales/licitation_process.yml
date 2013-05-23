@@ -74,6 +74,7 @@ pt-BR:
         creditor_email: "Email"
         creditor_proposal_total_value: "Valor total da proposta"
         execution_unit_responsible: "Unidade responsável pela execução"
+        justification: "Justificativa da escolha"
 
   licitation_process:
     messages:

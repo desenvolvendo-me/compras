@@ -1,7 +1,11 @@
 <div id="items">
+  <div class="yui3-g">
+    <div class="yui3-u-1-2 justification">
+      <%= f.input :justification %>
+    </div>
+  </div>
   <div class="nested-fields add-margin-bottom">
     <%= hidden_field_tag :item_id, nil, :name => 'licitation_process_item[id]' %>
-
     <div class="yui3-g">
       <div class="yui3-u-1-8">
         <%= f.input :lot, :as => :fake, :required => true %>

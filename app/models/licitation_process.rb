@@ -19,7 +19,8 @@ class LicitationProcess < Compras::Model
                   :closing_of_accreditation_time, :purchase_solicitation_ids,
                   :budget_allocations_total_value, :total_value_of_items,
                   :creditor_proposals_attributes, :tied_creditor_proposals_attributes,
-                  :execution_unit_responsible, :process_responsibles_attributes
+                  :execution_unit_responsible, :process_responsibles_attributes,
+                  :justification
 
   auto_increment :process, :by => :year
   auto_increment :modality_number, :by => [:year, :modality, :type_of_removal]
@@ -92,6 +93,7 @@ class LicitationProcess < Compras::Model
             :execution_type, :object_type, :description, :notice_availability_date,
             :presence => true
   validates :modality, :judgment_form_id, :presence => true, :if => :licitation?
+  validates :justification, :presence => true, :if => :direct_purchase?
   validates :goal, :licensor_rights_and_liabilities, :licensee_rights_and_liabilities,
             :presence => true, :if => :concessions_and_permits?
   validates :type_of_removal, :presence => true, :if => :direct_purchase?
