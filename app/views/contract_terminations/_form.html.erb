@@ -36,13 +36,19 @@
 
 <div class="yui3-g">
   <div class="yui3-u-1-4">
+    <%= f.input :termination_value, :disabled => f.object.annulled? %>
+  </div>
+
+  <div class="yui3-u-1-4">
     <%= f.input :fine_value, :disabled => f.object.annulled? %>
   </div>
 
   <div class="yui3-u-1-4">
     <%= f.input :compensation_value, :disabled => f.object.annulled? %>
   </div>
+</div>
 
+<div class="yui3-g">
   <div class="yui3-u-1-4">
     <%= f.input :term_termination_file, :disabled => f.object.annulled? %>
   </div>

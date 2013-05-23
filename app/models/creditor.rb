@@ -154,6 +154,10 @@ class Creditor < Compras::Model
     purchase_process_creditor_proposals.by_item_id(item.id).first
   end
 
+  def first_representative_individual
+    representative_people.joins { personable(Individual) }.first
+  end
+
   protected
 
   def clean_fields_when_is_no_autonomous

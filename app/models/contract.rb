@@ -33,6 +33,8 @@ class Contract < Compras::Model
   has_many :founded_debt_pledges, :class_name => 'Pledge', :dependent => :restrict, :foreign_key => 'founded_debt_contract_id'
   has_many :occurrence_contractual_historics, :dependent => :restrict
   has_many :pledges, :dependent => :restrict
+  has_many :ratifications, through: :licitation_process, source: :licitation_process_ratifications
+  has_many :ratifications_items, through: :ratifications, source: :licitation_process_ratification_items
 
   has_and_belongs_to_many :creditors, join_table: :compras_contracts_creditors
 
@@ -41,7 +43,10 @@ class Contract < Compras::Model
   accepts_nested_attributes_for :additives, :allow_destroy => true
   accepts_nested_attributes_for :delivery_schedules, :allow_destroy => true
 
-  delegate :modality_humanize, :type_of_removal_humanize, :to => :licitation_process, :allow_nil => true, :prefix => true
+  delegate :execution_type_humanize, :contract_guarantees_humanize, :contract_guarantees,
+    :to => :licitation_process, :allow_nil => true
+  delegate :modality_humanize, :process, :execution_unit_responsible, :year, :type_of_removal_humanize,
+    :to => :licitation_process, :allow_nil => true, :prefix => true
 
   validates :year, :mask => "9999", :allow_blank => true
   validates :sequential_number, :year, :contract_number, :publication_date,
@@ -63,6 +68,9 @@ class Contract < Compras::Model
 
   scope :founded, joins { contract_type }.where { contract_type.service_goal.eq(ServiceGoal::FOUNDED) }
   scope :management, joins { contract_type }.where { contract_type.service_goal.eq(ServiceGoal::CONTRACT_MANAGEMENT) }
+  scope :by_signature_date, lambda { |date_range|
+    where { signature_date.in(date_range) }
+  }
 
   def to_s
     contract_number
