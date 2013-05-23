@@ -40,28 +40,11 @@ describe Modality do
         expect(described_class.available_for_object_type(object_type)).to eq [Modality::CONCURRENCE]
       end
     end
-
-    context 'when object_type is call_notice' do
-      let(:object_type) { PurchaseProcessObjectType::CALL_NOTICE }
-
-      it 'should return only competition' do
-        expect(described_class.available_for_object_type(object_type)).to eq [Modality::COMPETITION]
-      end
-    end
-
-    context 'when object_type unknown' do
-      let(:object_type) { 'whatever' }
-
-      it 'should return an empty array' do
-        expect(described_class.available_for_object_type(object_type)).to eq []
-      end
-    end
   end
 
   describe '.by_object_type' do
     it 'should return a array with the object_type as key and translation/value of modality' do
       expect(described_class.by_object_type).to eq({
-        "call_notice" => [["Concurso", "competition"]],
         "concessions" => [["Concorrência", "concurrence"]],
         "construction_and_engineering_services" => [["Concorrência", "concurrence"], ["Tomada de Preço", "taken_price"], ["Convite", "invitation"], ["Concurso", "competition"], ["Pregão", "trading"]],
         "disposals_of_assets" => [["Leilão", "auction"]],

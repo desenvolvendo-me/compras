@@ -895,12 +895,6 @@ feature "LicitationProcesses" do
       expect(page).to have_select('Forma de julgamento',
                                   :options => ['Forma Global com Menor Preço', 'Por Item com Menor Preço', 'Maior Desconto por Tabela'])
 
-      select 'Edital de chamamento/credenciamento', :from => 'Tipo de objeto'
-      select 'Concurso', :from => 'Modalidade'
-
-      expect(page).to have_select('Forma de julgamento',
-                                  :options => ['Por Item com Melhor Técnica'])
-
       select 'Obras e serviços de engenharia', :from => 'Tipo de objeto'
       select 'Tomada de Preço', :from => 'Modalidade'
 
@@ -971,10 +965,6 @@ feature "LicitationProcesses" do
       expect(page).to have_select('Modalidade',
                                   :options => ['Concorrência'])
 
-      select 'Edital de chamamento/credenciamento', :on => "Tipo de objeto"
-
-      expect(page).to have_select('Modalidade',
-                                  :options => ['Concurso'])
 
       select 'Obras e serviços de engenharia', :on => "Tipo de objeto"
 
