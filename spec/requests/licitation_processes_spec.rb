@@ -1818,7 +1818,7 @@ feature "LicitationProcesses" do
         expect(page).to have_content 'Solicitante'
         expect(page).to have_content 'Responsável pela solicitação'
 
-        within 'tbody tr:nth-child(2)' do
+        within 'tbody tr:last-child' do
           expect(page).to have_content '2/2013'
           expect(page).to have_content '1 - Secretaria de Educação'
           expect(page).to have_content 'Wenderson Malheiros'
