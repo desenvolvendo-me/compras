@@ -28,6 +28,7 @@ feature "Monthly Monitoring TCE File" do
     expect(page).to have_content "REGADESAO - Adesão a Registro de Preços"
     expect(page).to have_content "PARELIC - Parecer da Licitação"
     expect(page).to have_content "JULGLIC - Julgamento da Licitação"
+    expect(page).to have_content "HOMOLIC - Homologação da Licitação"
 
     fill_in "Ano da prestação de contas", with: "2013"
 

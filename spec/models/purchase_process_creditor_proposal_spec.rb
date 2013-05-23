@@ -31,15 +31,22 @@ describe PurchaseProcessCreditorProposal do
     end
   end
 
-  it { should delegate(:lot).to(:item).allowing_nil(true).prefix(true) }
-  it { should delegate(:additional_information).to(:item).allowing_nil(true).prefix(true) }
-  it { should delegate(:quantity).to(:item).allowing_nil(true).prefix(true) }
-  it { should delegate(:name).to(:creditor).allowing_nil(true).prefix(true) }
-  it { should delegate(:cnpj).to(:creditor).allowing_nil(true).prefix(true) }
-  it { should delegate(:benefited).to(:creditor).allowing_nil(true).prefix(true) }
   it { should delegate(:code).to(:material).allowing_nil(true).prefix(true) }
   it { should delegate(:description).to(:material).allowing_nil(true).prefix(true) }
   it { should delegate(:reference_unit).to(:material).allowing_nil(true).prefix(true) }
+
+  it { should delegate(:lot).to(:item).allowing_nil(true).prefix(true) }
+  it { should delegate(:additional_information).to(:item).allowing_nil(true).prefix(true) }
+  it { should delegate(:quantity).to(:item).allowing_nil(true).prefix(true) }
+
+  it { should delegate(:name).to(:creditor).allowing_nil(true).prefix(true) }
+  it { should delegate(:cnpj).to(:creditor).allowing_nil(true).prefix(true) }
+  it { should delegate(:benefited).to(:creditor).allowing_nil(true).prefix(true) }
+  it { should delegate(:identity_document).to(:creditor).allowing_nil(true).prefix(true) }
+
+  it { should delegate(:execution_unit_responsible).to(:licitation_process).allowing_nil(true).prefix(true) }
+  it { should delegate(:year).to(:licitation_process).allowing_nil(true).prefix(true) }
+  it { should delegate(:process).to(:licitation_process).allowing_nil(true).prefix(true) }
 
   describe '#total_price' do
     it 'multiplies the unit_price with the item quantity' do

@@ -83,7 +83,7 @@ class Bidder < Compras::Model
   end
 
   def creditor_proposals
-    licitation_process.creditor_proposals.won.by_creditor_id(self.creditor_id)
+    licitation_process.creditor_proposals.winning_proposals.by_creditor_id(self.creditor_id)
   end
 
   def destroy_all_classifications

@@ -9,9 +9,14 @@ class PurchaseProcessCreditorProposal < Compras::Model
   has_one :judgment_form, through: :licitation_process
   has_one :material, through: :item
 
-  delegate :code, :description, :reference_unit, to: :material, prefix: true, allow_nil: true
-  delegate :lot, :additional_information, :quantity, to: :item, prefix: true, allow_nil: true
-  delegate :name, :cnpj, :benefited, to: :creditor, allow_nil: true, prefix: true
+  delegate :code, :description, :reference_unit,
+    to: :material, prefix: true, allow_nil: true
+  delegate :lot, :additional_information, :quantity,
+    to: :item, prefix: true, allow_nil: true
+  delegate :name, :cnpj, :benefited, :identity_document,
+    to: :creditor, allow_nil: true, prefix: true
+  delegate :execution_unit_responsible, :year, :process,
+    to: :licitation_process, allow_nil: true, prefix: true
 
   validates :creditor, :licitation_process, :unit_price, presence: true
   validates :lot, :ranking, numericality: { allow_blank: true }
@@ -35,7 +40,7 @@ class PurchaseProcessCreditorProposal < Compras::Model
     order { unit_price }
   }
 
-  scope :won, where { ranking.eq 1 }
+  scope :winning_proposals, where { ranking.eq 1 }.order { creditor_id }
 
   orderize
   filterize

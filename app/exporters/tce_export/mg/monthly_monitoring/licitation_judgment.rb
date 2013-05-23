@@ -16,7 +16,7 @@ module TceExport::MG
             dsc_produto_servico: proposal.item.to_s,
             vl_unitario: proposal.unit_price,
             quantidade: quantidade(proposal.item),
-            unidade: proposal.item_reference_unit,
+            unidade: proposal.material_reference_unit,
             judgment_date_detail: generate_judment_date_detail(proposal.licitation_process)
           }
         end
