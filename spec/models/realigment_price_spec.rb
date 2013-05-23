@@ -1,6 +1,9 @@
 require 'model_helper'
 require 'app/models/realigment_price'
+require 'app/models/purchase_process_creditor_proposal'
 
 describe RealigmentPrice do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { should validate_presence_of :price }
+
+  it { should belong_to :purchase_process_item }
 end
