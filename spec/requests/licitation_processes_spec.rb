@@ -1811,14 +1811,16 @@ feature "LicitationProcesses" do
                                :purchase_solicitation_budget_allocations => [PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria_office)],
                                :items => [PurchaseSolicitationItem.make!(:office), PurchaseSolicitationItem.make!(:arame_farpado_2)])
     PurchaseSolicitation.make!(:reparo_2013, :accounting_year => Date.current.year, :code => '2',
-                               :delivery_location => DeliveryLocation.make!(:health), :responsible => Employee.make!(:wenderson))
+                               :delivery_location => DeliveryLocation.make!(:health),
+                               :responsible => Employee.make!(:wenderson),
+                               budget_structure: BudgetStructure.make!(:secretaria_de_desenvolvimento))
 
     navigate 'Processos de Compra > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
     within_tab "Solicitantes" do
-      fill_with_autocomplete 'Solicitações de compra', :with => '1'
+      fill_with_autocomplete 'Solicitações de compra', :with => 'Secretaria de Educação'
 
       within_records do
         expect(page).to have_content 'Código'
@@ -1843,16 +1845,23 @@ feature "LicitationProcesses" do
     end
 
     within_tab "Solicitantes" do
-      fill_with_autocomplete 'Solicitações de compra', :with => '2'
+      fill_with_autocomplete 'Solicitações de compra', :with => 'Secretaria de Desenvolvimento'
 
       within_records do
         expect(page).to have_content 'Código'
         expect(page).to have_content 'Solicitante'
         expect(page).to have_content 'Responsável pela solicitação'
+        expect(page).to have_css 'tbody tr', count: 2
+
+        within 'tbody tr:first-child' do
+          expect(page).to have_content '1/2013'
+          expect(page).to have_content '1 - Secretaria de Educação'
+          expect(page).to have_content 'Gabriel Sobrinho'
+        end
 
         within 'tbody tr:last-child' do
           expect(page).to have_content '2/2013'
-          expect(page).to have_content '1 - Secretaria de Educação'
+          expect(page).to have_content '1.29 - Secretaria de Desenvolvimento'
           expect(page).to have_content 'Wenderson Malheiros'
         end
       end
