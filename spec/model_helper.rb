@@ -99,6 +99,7 @@ require 'inscriptio_cursualis'
 
 # Compras Model
 require 'compras'
+require 'accounting'
 
 # Financeiro Model
 require 'financeiro'

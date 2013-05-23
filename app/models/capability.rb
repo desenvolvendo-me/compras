@@ -1,10 +1,10 @@
-class Capability < Compras::Model
-  attr_modal :descriptor_id, :description, :kind, :status
+class Capability < Accounting::Model
+  attr_modal :description, :kind, :status
+
+  belongs_to :descriptor
 
   has_enumeration_for :kind, :with => CapabilityKind
   has_enumeration_for :status, :create_helpers => true
-
-  belongs_to :descriptor
 
   orderize "id DESC"
   filterize

@@ -1,14 +1,5 @@
-class BudgetStructure < Compras::Model
-  attr_accessible :description, :code, :tce_code, :acronym
-  attr_accessible :performance_field, :budget_structure_configuration_id
-  attr_accessible :administration_type_id, :address_attributes
-  attr_accessible :budget_structure_responsibles_attributes, :kind
-  attr_accessible :budget_structure_level_id, :parent_id
-
-  attr_modal :parent, :budget_structure_level_id, :description
-
-  has_enumeration_for :kind, :with => BudgetStructureKind,
-    :create_helpers => true, :create_scopes => true
+class BudgetStructure < Accounting::Model
+  attr_modal :full_code, :description, :budget_structure_level_id, :kind
 
   belongs_to :budget_structure_configuration
   belongs_to :administration_type
@@ -17,8 +8,9 @@ class BudgetStructure < Compras::Model
 
   has_one :address, :as => :addressable, :dependent => :destroy
 
+  has_many :entity, :dependent => :restrict
+  has_many :signatures, :dependent => :restrict
   has_many :budget_allocations, :dependent => :restrict
-  has_many :purchase_solicitations, :dependent => :restrict
   has_many :budget_structure_responsibles, :dependent => :destroy, :order => :id
   has_many :direct_purchases, :dependent => :restrict
   has_many :children, :class_name => 'BudgetStructure', :foreign_key => :parent_id, :dependent => :restrict
@@ -27,33 +19,31 @@ class BudgetStructure < Compras::Model
   delegate :mask, :to => :budget_structure_level, :prefix => true,
            :allow_nil => true
 
-  validates :description, :code, :tce_code, :acronym, :presence => true
-  validates :performance_field, :budget_structure_configuration, :presence => true
-  validates :administration_type, :kind, :presence => true
-  validates :budget_structure_level, :presence => true
-  validates :code, :mask => :budget_structure_level_mask
-  validates :parent, :presence => true, :if => :level_greater_than_1?
-  validate :parent_level_must_be_immediate_superior, :if => :level
+  delegate :street, :street_id, :number, :complement, :zip_code,
+           :to => :address, :prefix => true, :allow_nil => true
 
-  accepts_nested_attributes_for :address
-  accepts_nested_attributes_for :budget_structure_responsibles, :allow_destroy => true
+  delegate :neighborhood, :neighborhood_id, :city, :state,
+           :to => :address, :prefix => true, :allow_nil => true
 
-  orderize :description
-  filterize
-
-  scope :search_by_code_and_configuration_and_level, lambda { |code, configuration_id, level|
-    joins{ budget_structure_configuration }.
-    joins{ budget_structure_level }.
-    where{ |structure|
-      structure.code.eq(code) &
-      structure.budget_structure_level.level.eq(level) &
-      structure.budget_structure_configuration.id.eq(configuration_id)
-    }
+  scope :by_year, lambda { |year|
+    joins { budget_structure_configuration }.
+    where { |budget_structure| budget_structure.budget_structure_configuration.year.eq(year) }
   }
 
-  scope :except_ids, lambda { |ids| where { id.not_in(ids) } }
+  scope :by_structure_sequence_ids, lambda { |ids|
+    where { id.in(ids) }
+  }
 
-  before_create :cannot_have_duplicated_code_in_same_configuration_and_level
+  scope :ordered, joins { parent.outer }.
+                  order { parent.code }.
+                  order { code }
+
+  filterize
+
+  def self.order_by_level
+    joins { budget_structure_level }.
+    order { budget_structure_level.level }
+  end
 
   def parent_budget_structure_level_id
     upper_budget_structure_level.id if parent
@@ -80,7 +70,19 @@ class BudgetStructure < Compras::Model
   end
 
   def to_s
-    "#{budget_structure} - #{description}"
+    "#{full_code || budget_structure} - #{description}"
+  end
+
+  def structure_sequence
+    return [self] if parent.nil?
+
+    parent.structure_sequence << self
+  end
+
+  def child_structure_sequence
+    return [self] if children.empty?
+
+    children.flat_map(&:child_structure_sequence) + [self]
   end
 
   protected
@@ -88,6 +90,10 @@ class BudgetStructure < Compras::Model
   def budget_structure
     return '' unless code
     parent_budget_structure(parent) + code.to_s
+  end
+
+  def set_full_code_with_budget_structure
+    write_attribute :full_code, budget_structure
   end
 
   def parent_level_must_be_immediate_superior
@@ -99,15 +105,21 @@ class BudgetStructure < Compras::Model
     end
   end
 
-  def cannot_have_duplicated_code_in_same_configuration_and_level
-    if any_code_in_same_configuration_and_level?
-      errors.add(:base, :invalid)
-      errors.add(:code, :cannot_have_a_code_with_configuration_and_level_repeated)
+  def cannot_have_the_same_code_and_configuration_and_level
+    if duplicated_code?
+      errors.add(:code, :cannot_have_the_same_code_and_configuration_and_level)
     end
   end
 
-  def any_code_in_same_configuration_and_level?
-    BudgetStructure.search_by_code_and_configuration_and_level(code, budget_structure_configuration_id, level).any?
+  def duplicated_code?
+    BudgetStructure.
+      where{ |structure|
+        structure.id.not_eq(id) &
+        structure.code.eq(code) &
+        structure.budget_structure_level_id.eq(budget_structure_level_id) &
+        structure.budget_structure_configuration_id.eq(budget_structure_configuration_id) &
+        structure.parent_id.eq(parent_id)
+      }.any?
   end
 
   def level_greater_than_1?

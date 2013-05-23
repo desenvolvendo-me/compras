@@ -1,7 +1,4 @@
-class BudgetStructureConfiguration < Compras::Model
-  attr_accessible :description, :entity_id, :regulatory_act_id
-  attr_accessible :budget_structure_levels, :budget_structure_levels_attributes
-
+class BudgetStructureConfiguration < Accounting::Model
   attr_modal :description, :entity_id, :regulatory_act_id
 
   belongs_to :regulatory_act
@@ -10,13 +7,19 @@ class BudgetStructureConfiguration < Compras::Model
   has_many :budget_structure_levels, :order => 'level asc', :dependent => :destroy, :order => :id
   has_many :budget_structures, :dependent => :restrict
 
-  accepts_nested_attributes_for :budget_structure_levels, :allow_destroy => true
-
-  validates :description, :entity, :regulatory_act, :presence => true
-  validate :separator_for_budget_structure_levels
-
   orderize :description
-  filterize
+
+  def self.filter(params)
+    query = scoped
+    query = query.where { entity_id.eq(params[:entity_id]) } if params[:entity_id].present?
+    query = query.where { description.eq(params[:description]) } if params[:description].present?
+    query = query.where { regulatory_act_id.eq(params[:regulatory_act_id]) } if params[:regulatory_act_id].present?
+    query = query.where { year.eq(params[:year]) } if params[:year].present?
+
+    query
+  end
+
+  scope :by_year, lambda { |year| where(year: year) if year.present? }
 
   def to_s
     description
