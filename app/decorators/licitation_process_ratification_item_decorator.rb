@@ -11,8 +11,8 @@ class LicitationProcessRatificationItemDecorator
     number_to_currency(super, :format => "%n") if super
   end
 
-  def bidder_proposal_id_or_mustache_variable
-    bidder_proposal_id || "{{bidder_proposal_id}}"
+  def creditor_proposal_id_or_mustache_variable
+    purchase_process_creditor_proposal_id || "{{purchase_process_creditor_proposal_id}}"
   end
 
   def code_or_mustache_variable

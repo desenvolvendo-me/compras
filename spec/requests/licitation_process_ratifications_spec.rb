@@ -7,9 +7,14 @@ feature "LicitationProcessRatifications" do
   end
 
   scenario 'creating and updating a ratification' do
-    LicitationProcess.make!(:processo_licitatorio_computador,
-                            :judgment_form => JudgmentForm.make!(:por_item_com_menor_preco))
-    BidderProposal.make!(:proposta_licitante_1, :bidder => Bidder.make!(:licitante))
+    licitation = LicitationProcess.make!(:processo_licitatorio_computador,
+      judgment_form: JudgmentForm.make!(:por_item_com_menor_preco),
+      bidders:[Bidder.make!(:licitante_sobrinho)],
+      items: [PurchaseProcessItem.make!(:item_arame_farpado),
+        PurchaseProcessItem.make!(:item_arame)])
+
+    PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado, licitation_process: licitation, ranking: 1)
+    PurchaseProcessCreditorProposal.make!(:proposta_arame, licitation_process: licitation, ranking: 1)
 
     navigate 'Processos de Compra > Processos de Compras'
 
@@ -29,11 +34,14 @@ feature "LicitationProcessRatifications" do
       expect(page).to have_disabled_field 'Processo de compra'
 
       click_button 'Pesquisar'
-      click_record 'Wenderson Malheiros'
+      click_record 'Gabriel Sobrinho'
     end
 
-    expect(page).to have_content 'Antivirus'
-    expect(page).to have_content '10,00'
+    expect(page).to have_content 'Arame comum'
+    expect(page).to have_content 'Arame farpado'
+    expect(page).to have_content '2,99'
+    expect(page).to have_content '4,99'
+    expect(page).to have_content '9,98'
 
     check 'checkAll'
 
@@ -47,13 +55,16 @@ feature "LicitationProcessRatifications" do
 
     expect(page).to have_disabled_field 'Processo de compra'
     expect(page).to have_field 'Processo de compra', :with => '2/2013 - Concorrência 1'
-    expect(page).to have_field 'Participante vencedor', :with => 'Wenderson Malheiros'
+    expect(page).to have_field 'Participante vencedor', :with => 'Gabriel Sobrinho'
     expect(page).to have_field 'Data de homologação', :with => I18n.l(Date.current)
     expect(page).to have_field 'Data de adjudicação', :with => I18n.l(Date.current)
     expect(page).to have_field 'Sequência', :with => '1'
 
-    expect(page).to have_content 'Antivirus'
-    expect(page).to have_content '10,00'
+    expect(page).to have_content 'Arame comum'
+    expect(page).to have_content 'Arame farpado'
+    expect(page).to have_content '2,99'
+    expect(page).to have_content '4,99'
+    expect(page).to have_content '9,98'
 
     expect(page).to have_checked_field bidder_checkbok_html_name(0)
 
@@ -72,19 +83,27 @@ feature "LicitationProcessRatifications" do
     end
 
     expect(page).to have_field 'Processo de compra', :with => '2/2013 - Concorrência 1'
-    expect(page).to have_field 'Participante vencedor', :with => 'Wenderson Malheiros'
+    expect(page).to have_field 'Participante vencedor', :with => 'Gabriel Sobrinho'
     expect(page).to have_field 'Data de homologação', :with => I18n.l(Date.tomorrow)
     expect(page).to have_field 'Data de adjudicação', :with => I18n.l(Date.tomorrow)
-    expect(page).to have_content 'Antivirus'
-    expect(page).to have_content '10,00'
+    expect(page).to have_content 'Arame comum'
+    expect(page).to have_content 'Arame farpado'
+    expect(page).to have_content '2,99'
+    expect(page).to have_content '4,99'
+    expect(page).to have_content '9,98'
 
     expect(page).to have_checked_field bidder_checkbok_html_name(0)
   end
 
   scenario 'cleaning items' do
-    LicitationProcess.make!(:processo_licitatorio_computador,
-                            :judgment_form => JudgmentForm.make!(:por_item_com_menor_preco))
-    BidderProposal.make!(:proposta_licitante_1, :bidder => Bidder.make!(:licitante))
+    licitation = LicitationProcess.make!(:processo_licitatorio_computador,
+      judgment_form: JudgmentForm.make!(:por_item_com_menor_preco),
+      bidders:[Bidder.make!(:licitante_sobrinho)],
+      items: [PurchaseProcessItem.make!(:item_arame_farpado),
+        PurchaseProcessItem.make!(:item_arame)])
+
+    PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado, licitation_process: licitation, ranking: 1)
+    PurchaseProcessCreditorProposal.make!(:proposta_arame, licitation_process: licitation, ranking: 1)
 
     navigate 'Processos de Compra > Processos de Compras'
 
@@ -106,22 +125,26 @@ feature "LicitationProcessRatifications" do
       expect(page).to have_disabled_field 'Processo de compra'
 
       click_button 'Pesquisar'
-      click_record 'Wenderson Malheiros'
+      click_record 'Gabriel Sobrinho'
     end
 
-    expect(page).to have_content 'Antivirus'
-    expect(page).to have_content '10,00'
+    expect(page).to have_content 'Arame comum'
+    expect(page).to have_content 'Arame farpado'
+    expect(page).to have_content '2,99'
+    expect(page).to have_content '4,99'
+    expect(page).to have_content '9,98'
 
     clear_modal 'Participante vencedor'
 
-    expect(page).to_not have_content 'Antivirus'
+    expect(page).to_not have_content 'Arame comum'
+    expect(page).to_not have_content 'Arame farpado'
   end
 
   scenario 'print report' do
     Prefecture.make!(:belo_horizonte)
-    LicitationProcess.make!(:processo_licitatorio_computador)
+    licitation = LicitationProcess.make!(:processo_licitatorio_computador)
     LicitationProcessRatification.make!(:processo_licitatorio_computador)
-    BidderProposal.make!(:proposta_licitante_1, :bidder => Bidder.make!(:licitante))
+    PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado, licitation_process: licitation, ranking: 1)
     SignatureConfiguration.make!(:homologacao_e_adjudicao_do_processo_licitatorio)
 
     navigate 'Processos de Compra > Processos de Compras'
@@ -144,11 +167,11 @@ feature "LicitationProcessRatifications" do
     expect(page).to have_content I18n.l Date.current
     expect(page).to have_content 'Licitação para compra de carteiras'
     expect(page).to have_content 'Wenderson Malheiros'
-    expect(page).to have_content '01.01.00001 - Antivirus'
-    expect(page).to have_content '10'
+    expect(page).to have_content '02.02.00001 - Arame farpado'
+    expect(page).to have_content '2'
     expect(page).to have_content '-'
-    expect(page).to have_content '10,00'
-    expect(page).to have_content '20,00'
+    expect(page).to have_content '4,99'
+    expect(page).to have_content '9,98'
     expect(page).to have_content '1 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
     expect(page).to have_content 'Supervisor'
     expect(page).to have_content 'Wenderson Malheiros'

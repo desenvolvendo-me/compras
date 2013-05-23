@@ -47,24 +47,24 @@ describe LicitationProcessRatificationItemDecorator do
     end
   end
 
-  describe '#bidder_proposal_id_or_mustache_variable' do
-    context 'when component has a bidder_proposal_id' do
+  describe '#creditor_proposal_id_or_mustache_variable' do
+    context 'when component has a purchase_process_creditor_proposal_id' do
       before do
-        component.stub(:bidder_proposal_id => 10)
+        component.stub(:purchase_process_creditor_proposal_id => 10)
       end
 
-      it 'should return the bidder_proposal_id' do
-        expect(subject.bidder_proposal_id_or_mustache_variable).to eq 10
+      it 'should return the purchase_process_creditor_proposal_id' do
+        expect(subject.creditor_proposal_id_or_mustache_variable).to eq 10
       end
     end
 
-    context "when component's bidder_proposal_id is nil" do
+    context "when component's purchase_process_creditor_proposal_id is nil" do
       before do
-        component.stub(:bidder_proposal_id => nil)
+        component.stub(:purchase_process_creditor_proposal_id => nil)
       end
 
-      it 'should return the {{bidder_proposal_id}}' do
-        expect(subject.bidder_proposal_id_or_mustache_variable).to eq '{{bidder_proposal_id}}'
+      it 'should return the {{purchase_process_creditor_proposal_id}}' do
+        expect(subject.creditor_proposal_id_or_mustache_variable).to eq '{{purchase_process_creditor_proposal_id}}'
       end
     end
   end

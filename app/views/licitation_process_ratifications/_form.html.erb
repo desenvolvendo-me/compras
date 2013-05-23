@@ -78,7 +78,7 @@
 
       $.each(bidder.proposals, function() {
         item = $('#item-template').mustache({ uuid_item: _.uniqueId('fresh-'),
-                                              bidder_proposal_id: this.id,
+                                              purchase_process_creditor_proposal_id: this.id,
                                               code: this.code,
                                               description: this.description,
                                               quantity: this.quantity,

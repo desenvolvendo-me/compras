@@ -418,14 +418,14 @@ feature 'PurchaseProcessCreditorProposals' do
 
     within 'div#tied_creditor_proposals' do
       within 'div.creditor_proposal_rankings:first' do
-        expect(page).to have_disabled_field 'Credor', with: 'Wenderson Malheiros'
+        expect(page).to have_disabled_field 'Credor', with: 'Gabriel Sobrinho'
         expect(page).to have_disabled_field 'Item/Lote', with: '01.01.00001 - Antivirus'
         expect(page).to have_disabled_field 'Preço unitário', with: '50,20'
         expect(page).to have_select 'Posição', options: ['1', '2'], selected: '1'
       end
 
       within 'div.creditor_proposal_rankings:last' do
-        expect(page).to have_disabled_field 'Credor', with: 'Gabriel Sobrinho'
+        expect(page).to have_disabled_field 'Credor', with: 'Wenderson Malheiros'
         expect(page).to have_disabled_field 'Item/Lote', with: '01.01.00001 - Antivirus'
         expect(page).to have_disabled_field 'Preço unitário', with: '50,20'
         expect(page).to have_select 'Posição', options: ['1', '2'], selected: '1'
