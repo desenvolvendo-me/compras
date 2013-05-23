@@ -22,8 +22,6 @@ feature "LicitationProcessRatifications" do
       click_link '2/2013'
     end
 
-    click_button 'Apurar'
-    click_link 'voltar'
     click_link 'Adjudicação/Homologação'
     click_link 'Criar Homologação e Adjudicação de Processo de Compra'
 
@@ -110,9 +108,6 @@ feature "LicitationProcessRatifications" do
     within_records do
       click_link '2/2013'
     end
-
-    click_button 'Apurar'
-    click_link 'voltar'
 
     click_link 'Adjudicação/Homologação'
 
