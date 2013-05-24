@@ -1,6 +1,5 @@
 # encoding: utf-8
 Capability.blueprint(:reforma) do
-  descriptor { Descriptor.make!(:detran_2012) }
   description { 'Reforma e Ampliação' }
   goal { 'Otimizar o atendimento a todos' }
   kind { CapabilityKind::ORDINARY }
@@ -8,7 +7,6 @@ Capability.blueprint(:reforma) do
 end
 
 Capability.blueprint(:construcao) do
-  descriptor { Descriptor.make!(:detran_2012) }
   description { 'Construção' }
   goal { 'Duplicar o atendimento a todos' }
   kind { CapabilityKind::ORDINARY }

@@ -3,6 +3,7 @@ BudgetAllocation.blueprint(:alocacao) do
   descriptor { Descriptor.make!(:detran_2012) }
   code { 1 }
   budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
+  function { Function.make!(:administracao) }
   subfunction { Subfunction.make!(:geral) }
   government_program { GovernmentProgram.make!(:habitacao) }
   government_action { GovernmentAction.make!(:governamental) }
@@ -24,6 +25,7 @@ BudgetAllocation.blueprint(:alocacao_extra) do
   descriptor { Descriptor.make!(:detran_2011) }
   code { 1 }
   budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
+  function { Function.make!(:administracao) }
   subfunction { Subfunction.make!(:geral) }
   government_program { GovernmentProgram.make!(:habitacao) }
   government_action { GovernmentAction.make!(:governamental) }
@@ -44,6 +46,7 @@ BudgetAllocation.blueprint(:reparo_2011) do
   descriptor { Descriptor.make!(:secretaria_de_educacao_2011) }
   code { 1 }
   budget_structure { BudgetStructure.make!(:secretaria_de_desenvolvimento) }
+  function { Function.make!(:administracao) }
   subfunction { Subfunction.make!(:supervisor) }
   government_program { GovernmentProgram.make!(:educacao) }
   government_action { GovernmentAction.make!(:nacional) }

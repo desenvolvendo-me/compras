@@ -3,7 +3,8 @@ class LicitationProcessPublication < Compras::Model
 
   has_enumeration_for :publication_of, :with => PublicationOf,
                       :create_helpers => true, :create_scopes => true
-  has_enumeration_for :circulation_type, :with => PublicationCirculationType
+  has_enumeration_for :circulation_type, :with => PublicationCirculationType,
+                      create_scopes: true
 
   belongs_to :licitation_process
 
@@ -13,16 +14,16 @@ class LicitationProcessPublication < Compras::Model
   orderize :publication_date
   filterize
 
-  def to_s
-    name
-  end
-
   def self.current
     where { publication_date.lteq(Date.current) }.order { publication_date }.last
   end
 
   def self.current_updatable?
     current.nil? || current.updatable?
+  end
+
+  def to_s
+    name
   end
 
   def updatable?
