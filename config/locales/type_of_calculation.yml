@@ -3,6 +3,4 @@ pt-BR:
     type_of_calculation:
       money: "Real"
       percentage: "Porcentagem"
-      unenforceability_accreditation: "Inexigibilidade - Credenciamento"
-      dispensation_justified_accreditation: "Dispensa justificada - Credenciamento"
-      call: "Chamamento"
+
