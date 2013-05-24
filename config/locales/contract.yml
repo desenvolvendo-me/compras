@@ -37,3 +37,5 @@ pt-BR:
         signature_date: "Data da assinatura"
         subcontracting: 'Subcontratação'
         year: "Ano do contrato"
+        penalty_fine: "Multa rescisória"
+        default_fine: "Multa inadimplemento"

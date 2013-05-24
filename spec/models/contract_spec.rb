@@ -64,6 +64,8 @@ describe Contract do
   it { should validate_presence_of :budget_structure_responsible }
   it { should validate_presence_of :kind }
   it { should validate_presence_of :contract_type }
+  it { should validate_presence_of :penalty_fine }
+  it { should validate_presence_of :default_fine }
 
   it { should allow_value('2012').for(:year) }
   it { should_not allow_value('201a').for(:year) }

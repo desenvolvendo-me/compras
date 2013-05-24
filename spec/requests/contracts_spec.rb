@@ -106,6 +106,8 @@ feature "Contracts" do
 
     fill_in 'Objeto do contrato', :with => 'Objeto'
     fill_in 'Valor do contrato', :with => '1.000,00'
+    fill_in 'Multa rescisória', :with => 'rescisória'
+    fill_in 'Multa inadimplemento', :with => 'inadimplemento'
     fill_in 'Validade do contrato', :with => '12'
 
     select 'Sim', :from => 'Subcontratação'
@@ -143,6 +145,8 @@ feature "Contracts" do
     expect(page).to have_field 'Objeto do contrato', :with => 'Objeto'
     expect(page).to have_field 'Local de publicação', :with => 'Jornal Oficial do Município'
     expect(page).to have_field 'Valor do contrato', :with => '1.000,00'
+    expect(page).to have_field 'Multa rescisória', :with => 'rescisória'
+    expect(page).to have_field 'Multa inadimplemento', :with => 'inadimplemento'
     expect(page).to have_field 'Validade do contrato', :with => '12'
     expect(page).to have_field 'Fornecedor', :with => 'Gabriel Sobrinho'
 

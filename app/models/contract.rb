@@ -7,7 +7,7 @@ class Contract < Compras::Model
                   :dissemination_source_id, :creditor_id, :contract_type_id,
                   :licitation_process_id, :direct_purchase_id,
                   :budget_structure_id, :budget_structure_responsible_id,
-                  :lawyer_id, :parent_id, :additives_attributes
+                  :lawyer_id, :parent_id, :additives_attributes, :penalty_fine, :default_fine
 
   attr_modal :year, :contract_number, :sequential_number, :signature_date
 
@@ -41,7 +41,8 @@ class Contract < Compras::Model
   delegate :modality_humanize, :to => :direct_purchase, :allow_nil => true, :prefix => true
 
   validates :year, :mask => "9999", :allow_blank => true
-  validates :sequential_number, :year, :contract_number, :publication_date, :presence => true
+  validates :sequential_number, :year, :contract_number, :publication_date,
+    :default_fine, :penalty_fine, :presence => true
   validates :dissemination_source, :content, :creditor, :contract_type, :presence => true
   validates :contract_value, :contract_validity, :signature_date, :presence => true
   validates :end_date, :budget_structure, :budget_structure_responsible, :kind, :presence => true
