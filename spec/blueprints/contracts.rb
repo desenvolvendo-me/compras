@@ -20,6 +20,8 @@ Contract.blueprint(:primeiro_contrato) do
   lawyer_code { '5678' }
   publication_date { Date.new(2012, 1, 10) }
   content { 'Objeto' }
+  penalty_fine { 'Multa rescisória' }
+  default_fine { 'Multa inadimplemento' }
 end
 
 Contract.blueprint(:contrato_detran) do
@@ -43,4 +45,6 @@ Contract.blueprint(:contrato_detran) do
   lawyer_code { '5678' }
   publication_date { Date.new(2012, 1, 10) }
   content { 'Objeto' }
+  penalty_fine { 'Multa rescisória' }
+  default_fine { 'Multa inadimplemento' }
 end
