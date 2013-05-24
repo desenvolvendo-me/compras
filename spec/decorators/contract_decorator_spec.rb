@@ -30,11 +30,10 @@ describe ContractDecorator do
       expect(described_class.headers?).to be_true
     end
 
-    it 'should have contract_number, year, publication_date and creditor' do
+    it 'should have contract_number, year and publication_date' do
       expect(described_class.header_attributes).to include :contract_number
       expect(described_class.header_attributes).to include :year
       expect(described_class.header_attributes).to include :publication_date
-      expect(described_class.header_attributes).to include :creditor
     end
   end
 end

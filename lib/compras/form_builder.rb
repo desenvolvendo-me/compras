@@ -46,7 +46,9 @@ module Compras
     def association(association, options = {}, &block)
       association_class = find_association_reflection(association).try(:association_class)
 
-      options[:as] ||= if association_class == ActiveRecord::Associations::HasManyAssociation
+      options[:as] ||= if (association_class == ActiveRecord::Associations::HasAndBelongsToManyAssociation || association_class == ActiveRecord::Associations::HasManyThroughAssociation)
+                         'has_and_belongs_to_many'
+                       elsif association_class == ActiveRecord::Associations::HasManyAssociation
                          'nested_form'
                        else
                          'modal'

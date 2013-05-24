@@ -18,6 +18,7 @@ pt-BR:
         contract_type: 'Tipo de contrato'
         contract_validity: 'Validade do contrato'
         contract_value: 'Valor do contrato'
+        creditors: 'Fornecedores'
         creditor: 'Fornecedor'
         description: "Observações gerais"
         direct_purchase: 'Compra direta'

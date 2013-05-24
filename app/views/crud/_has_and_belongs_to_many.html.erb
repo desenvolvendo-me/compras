@@ -1,30 +1,50 @@
 <%
   singular = association.to_s.singularize
+  modal_url_method ||= "modal_#{association}_path"
   modal_options ||= nil
+  columns ||= [:name]
+  link_by ||= nil
 %>
-<div id='<%= association %>'>
-  <div class="modal-finder" >
-    <%= f.input singular, :as => :modal , :modal_url => send("modal_#{association}_path", modal_options), :hidden_field => false %>
-  </div>
 
-  <table class="records">
-    <thead>
-      <tr>
-        <th><%= f.object.class.human_attribute_name singular %></th>
-        <th/>
-      </tr>
-    </thead>
-    <tbody class="<%= f.sanitized_object_name %>_<%= singular %>_records">
-      <input type="hidden" name="<%= f.sanitized_object_name %>[<%= singular %>_ids][]">
-      <% f.object.send(association).each do |item| %>
-        <%= render 'crud/item', :id => item.id, :name => item.to_s, :f => f, :singular => singular %>
+<fieldset class='group'>
+  <legend>
+    <%= resource.class.human_attribute_name association.to_s %>
+  </legend>
+  <div class='wrapper' id='<%= association %>'>
+    <div class="modal-finder" >
+      <%= f.input singular, :as => :modal , :modal_url => send(modal_url_method, modal_options), :hidden_field => false %>
+    </div>
+
+    <table class="records">
+      <thead>
+        <tr>
+          <% columns.each do |column| %>
+            <th><%= f.object.association(association).klass.human_attribute_name column %></th>
+          <% end %>
+          <th/>
+        </tr>
+      </thead>
+
+      <tbody class="<%= f.sanitized_object_name %>_<%= singular %>_records">
+        <input type="hidden" name="<%= f.sanitized_object_name %>[<%= singular %>_ids][]">
+
+        <% f.object.send(association).each do |item| %>
+          <%
+            attributes = Hash[*columns.map do |column|
+                          value = begin item.decorator.__send__(column) rescue item.__send__(column) end
+                          [column, value]
+                        end.flatten].merge(:name => item.to_s)
+          %>
+          <%= render 'crud/item', :f => f, :singular => singular, :id => item.id, :columns => columns, :attributes => attributes, :link_by => link_by %>
+        <% end %>
+      </tbody>
+    </table>
+
+    <%= mustache "#{f.sanitized_object_name}_#{singular}_template" do %>
+      <%= f.association association, :collection => f.object.send(association).build do |item| %>
+        <% attributes = Hash[*columns.map { |column| [column, "{{#{column}}}"] }.flatten].merge(:name => '{{value}}') %>
+        <%= render "crud/item", :f => f, :id => '{{id}}', :singular => singular, :columns => columns, :attributes => attributes, :link_by => link_by %>
       <% end %>
-    </tbody>
-  </table>
-
-  <%= mustache "#{f.sanitized_object_name}_#{singular}_template" do %>
-    <%= f.association association, :collection => f.object.send(association).build do |item| %>
-      <%= render "crud/item", :f => f, :id => '{{id}}', :name => '{{value}}', :singular => singular %>
     <% end %>
-  <% end %>
-</div>
+  </div>
+</fieldset>

@@ -129,9 +129,13 @@ feature "Contracts" do
     expect(page).to have_field 'Multa rescisória', :with => 'rescisória'
     expect(page).to have_field 'Multa inadimplemento', :with => 'inadimplemento'
     expect(page).to have_field 'Validade do contrato', :with => '12'
-    expect(page).to have_field 'Fornecedor', :with => 'Gabriel Sobrinho'
     expect(page).to have_select 'Forma de execução', :selected => 'Empreitada integral'
     expect(page).to have_select 'Garantias do contrato', :selected => 'Fiança bancária'
+
+    within '#creditors' do
+      expect(page).to have_content 'Gabriel Sobrinho'
+    end
+
     expect(page).to have_select 'Subcontratação', :selected => 'Sim'
     expect(page).to have_field 'Modalidade', :with => 'Concorrência'
     expect(page).to have_field 'Unidade orçamentária gestora responsável', :with => '1 - Secretaria de Educação'
@@ -350,14 +354,12 @@ feature "Contracts" do
       expect(page).to have_content 'Número do contrato'
       expect(page).to have_content 'Ano do contrato'
       expect(page).to have_content 'Data de publicação'
-      expect(page).to have_content 'Fornecedor'
 
 
       within 'tbody tr' do
         expect(page).to have_content '001'
         expect(page).to have_content '2012'
         expect(page).to have_content '10/01/2012'
-        expect(page).to have_content 'Gabriel Sobrinho'
       end
     end
   end
