@@ -32,7 +32,6 @@ Contract.blueprint(:contrato_detran) do
   end_date { Date.new(2013, 2, 23) }
   description { "Contrato" }
   kind { ContractKind::MAIN }
-  direct_purchase { DirectPurchase.make!(:compra) }
   contract_type { ContractType.make!(:founded) }
   creditor { Creditor.make!(:sobrinho) }
   contract_value { 1000 }

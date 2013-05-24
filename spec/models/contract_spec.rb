@@ -27,7 +27,6 @@ describe Contract do
   it { should belong_to :creditor }
   it { should belong_to :contract_type }
   it { should belong_to :licitation_process }
-  it { should belong_to :direct_purchase }
   it { should belong_to :budget_structure }
   it { should belong_to :budget_structure_responsible }
   it { should belong_to :lawyer }
@@ -45,9 +44,8 @@ describe Contract do
 
   it { should have_many(:pledges).dependent(:restrict) }
 
-  it { should delegate(:execution_type_humanize).to(:licitation_process).allowing_nil(true) }
   it { should delegate(:modality_humanize).to(:licitation_process).allowing_nil(true).prefix(true) }
-  it { should delegate(:modality_humanize).to(:direct_purchase).allowing_nil(true).prefix(true) }
+  it { should delegate(:type_of_removal_humanize).to(:licitation_process).allowing_nil(true).prefix(true) }
 
   it { should validate_presence_of :sequential_number }
   it { should validate_presence_of :year }
@@ -104,46 +102,14 @@ describe Contract do
     end
   end
 
-  context 'validating licitation process or direct purchase' do
-    let :licitation_process do
-      double(:licitation_process)
-    end
-
-    let :direct_purchase do
-      double(:direct_purchase)
-    end
-
-    it 'only licitation process must be valid' do
-      subject.stub(:licitation_process => licitation_process)
-      subject.valid?
-      expect(subject.errors[:licitation_process]).to be_empty
-    end
-
-    it 'only direct purchase must be valid' do
-      subject.stub(:direct_purchase => direct_purchase)
-      subject.valid?
-      expect(subject.errors[:licitation_process]).to be_empty
-    end
-
-    it 'no licitation_process and no direct_purchase must be invalid' do
-      subject.valid?
-      expect(subject.errors[:licitation_process]).to eq ["selecione um processo licitário ou uma compra direta, mas não ambos"]
-    end
-
-    it 'both must be invalid' do
-      subject.stub(:direct_purchase => direct_purchase)
-      subject.stub(:licitation_process => licitation_process)
-      subject.valid?
-      expect(subject.errors[:licitation_process]).to eq ["selecione um processo licitário ou uma compra direta, mas não ambos"]
-    end
-  end
-
   describe '#modality_humanize' do
     context 'given a licitation process' do
       let(:modality) { double(:modality) }
 
+      let(:direct_purchase?) { false }
+
       let :licitation_process do
-        double('LicitationProcess', :modality_humanize => modality)
+        double('LicitationProcess', modality_humanize: modality, direct_purchase?: direct_purchase?)
       end
 
       before do
@@ -155,13 +121,15 @@ describe Contract do
       end
     end
 
-    context 'given a direct purchase' do
-      let :direct_purchase do
-        double('DirectPurchase', :modality_humanize => 'xxto')
+    context 'given a type_of_removal' do
+      let(:direct_purchase?) { true }
+
+      let :licitation_process do
+        double('LicitationProcess', type_of_removal_humanize: 'xxto', direct_purchase?: direct_purchase?)
       end
 
       before do
-        subject.stub(:direct_purchase).and_return direct_purchase
+        subject.stub(:licitation_process).and_return licitation_process
       end
 
       it 'should return the direct purchase modality' do

@@ -10,6 +10,8 @@ builder resource, json do
   json.summarized_object            resource.summarized_object
   json.execution_type_humanize      resource.execution_type_humanize
   json.contract_guarantees_humanize resource.contract_guarantees_humanize
+  json.execution_type      resource.execution_type
+  json.contract_guarantees resource.contract_guarantees
 
   json.items resource.items do |json, item|
     json.id                   item.id
