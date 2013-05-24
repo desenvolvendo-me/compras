@@ -1548,7 +1548,7 @@ feature "LicitationProcesses" do
     end
   end
 
-  scenario 'assert javascript direct_purchase show input justification' do
+  scenario 'assert javascript direct_purchase show input justification and tab justification_and_legal' do
     navigate 'Processos de Compra > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
@@ -1728,6 +1728,10 @@ feature "LicitationProcesses" do
       click_button 'Adicionar'
     end
 
+    within_tab 'Fundamentação Legal Dispensa/Inexigibilidade' do
+      fill_in 'Justificativa e fundamentação legal', with: 'Justificando e fundamentando'
+    end
+
     click_button 'Salvar'
 
     expect(page).to have_notice "Processo de Compra 1/2012 editado com sucesso."
@@ -1775,6 +1779,10 @@ feature "LicitationProcesses" do
       within_records do
         expect(page).to have_css 'tbody tr', count: 1
       end
+    end
+
+    within_tab 'Fundamentação Legal Dispensa/Inexigibilidade' do
+      expect(page).to have_field 'Justificativa e fundamentação legal', with: 'Justificando e fundamentando'
     end
 
     click_button 'Salvar'

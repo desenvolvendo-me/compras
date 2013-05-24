@@ -75,6 +75,7 @@ pt-BR:
         creditor_proposal_total_value: "Valor total da proposta"
         execution_unit_responsible: "Unidade responsável pela execução"
         justification: "Justificativa da escolha"
+        justification_and_legal: "Justificativa e fundamentação legal"
 
   licitation_process:
     messages:

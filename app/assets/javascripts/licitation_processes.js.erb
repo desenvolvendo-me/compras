@@ -9,6 +9,7 @@ $(document).ready(function() {
       $('div.type-of-removal').addClass('hidden');
       $('label[for="licitation_process_modality_number"]').html('Nº da modalidade');
       $('a[href="#tab-items"]').html("Itens");
+      $('#legal_reasons_tab').addClass('hidden');
     } else {
       $('div.modality').addClass('hidden');
       $('div.licitation_process_judgment_form_id').addClass('hidden');
@@ -17,6 +18,7 @@ $(document).ready(function() {
       $('label[for="licitation_process_modality_number"]').html('Nº do afastamento');
       $('a[href="#tab-items"]').html("Itens / Justificativa");
       $('#licitation_process_modality').val('');
+      $('#legal_reasons_tab').removeClass('hidden');
       toogleVisibilityFieldsToTradingAndConcurrence();
     }
   };
