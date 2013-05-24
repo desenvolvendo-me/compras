@@ -28,7 +28,8 @@
   };
 
   function fieldsToConcessionsAndPermitsOfAssetsVisibilityToogler() {
-    if ($("#licitation_process_object_type").val() == "<%= PurchaseProcessObjectType::CONCESSIONS_AND_PERMITS %>") {
+    if ($("#licitation_process_object_type").val() == "<%= PurchaseProcessObjectType::CONCESSIONS %>" ||
+        $("#licitation_process_object_type").val() == "<%= PurchaseProcessObjectType::PERMITS %>") {
       $(".fields-to-concessions-and-permits").show();
     } else {
       $(".fields-to-concessions-and-permits").hide();

@@ -34,7 +34,7 @@ describe Modality do
     end
 
     context 'when object_type is concessions_and_permits' do
-      let(:object_type) { PurchaseProcessObjectType::CONCESSIONS_AND_PERMITS }
+      let(:object_type) { PurchaseProcessObjectType::CONCESSIONS }
 
       it 'should return only concurrence' do
         expect(described_class.available_for_object_type(object_type)).to eq [Modality::CONCURRENCE]
@@ -62,9 +62,10 @@ describe Modality do
     it 'should return a array with the object_type as key and translation/value of modality' do
       expect(described_class.by_object_type).to eq({
         "call_notice" => [["Concurso", "competition"]],
-        "concessions_and_permits" => [["Concorrência", "concurrence"]],
+        "concessions" => [["Concorrência", "concurrence"]],
         "construction_and_engineering_services" => [["Concorrência", "concurrence"], ["Tomada de Preço", "taken_price"], ["Convite", "invitation"], ["Concurso", "competition"], ["Pregão", "trading"]],
         "disposals_of_assets" => [["Leilão", "auction"]],
+        "permits" => [["Concorrência", "concurrence"]],
         "property_lease" => [],
         "purchase_and_services" => [["Concorrência", "concurrence"], ["Tomada de Preço", "taken_price"], ["Convite", "invitation"], ["Pregão", "trading"]]
       })

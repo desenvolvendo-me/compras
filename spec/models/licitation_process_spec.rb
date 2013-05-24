@@ -26,6 +26,7 @@ require 'app/models/purchase_process_accreditation'
 require 'app/models/purchase_process_creditor_proposal'
 require 'app/models/purchase_process_creditor_disqualification'
 require 'app/models/purchase_process_trading'
+require 'app/models/process_responsible'
 
 describe LicitationProcess do
   let(:current_prefecture) { double(:current_prefecture) }
@@ -121,7 +122,7 @@ describe LicitationProcess do
 
   context "when is a licitation" do
     before do
-      subject.object_type = PurchaseProcessObjectType::CONCESSIONS_AND_PERMITS
+      subject.object_type = PurchaseProcessObjectType::PERMITS
     end
 
     it { should validate_presence_of :goal }
@@ -253,6 +254,32 @@ describe LicitationProcess do
         subject.process_date = Date.new(2013, 10, 10)
 
         expect(subject.process_date_year).to eq 2013
+      end
+    end
+  end
+
+  describe "#concessions_or_permits?" do
+    context "when object_type is concession" do
+      it "should return true" do
+        subject.object_type = PurchaseProcessObjectType::CONCESSIONS
+
+        expect(subject.concessions_or_permits?).to be_true
+      end
+    end
+
+    context "when object_type is permits" do
+      it "should return true" do
+        subject.object_type = PurchaseProcessObjectType::PERMITS
+
+        expect(subject.concessions_or_permits?).to be_true
+      end
+    end
+
+    context "when object_type is not concessions or permits" do
+      it "should return false" do
+        subject.object_type = PurchaseProcessObjectType::CALL_NOTICE
+
+        expect(subject.concessions_or_permits?).to be_false
       end
     end
   end

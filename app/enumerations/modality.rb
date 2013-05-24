@@ -10,7 +10,9 @@ class Modality < EnumerateIt::Base
       [CONCURRENCE, TAKEN_PRICE, INVITATION, COMPETITION, TRADING]
     when PurchaseProcessObjectType::DISPOSALS_OF_ASSETS
       [AUCTION]
-    when PurchaseProcessObjectType::CONCESSIONS_AND_PERMITS
+    when PurchaseProcessObjectType::CONCESSIONS
+      [CONCURRENCE]
+    when PurchaseProcessObjectType::PERMITS
       [CONCURRENCE]
     when PurchaseProcessObjectType::CALL_NOTICE
       [COMPETITION]

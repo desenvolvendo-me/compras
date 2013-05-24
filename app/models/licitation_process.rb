@@ -95,7 +95,7 @@ class LicitationProcess < Compras::Model
   validates :modality, :judgment_form_id, :presence => true, :if => :licitation?
   validates :justification, :presence => true, :if => :direct_purchase?
   validates :goal, :licensor_rights_and_liabilities, :licensee_rights_and_liabilities,
-            :presence => true, :if => :concessions_and_permits?
+            :presence => true, :if => :concessions_or_permits?
   validates :type_of_removal, :presence => true, :if => :direct_purchase?
   validates :tied_creditor_proposals, no_duplication: { with: :ranking, allow_nil: true,
     scope: [:licitation_process_id, :purchase_process_item_id, :lot] }
@@ -260,6 +260,12 @@ class LicitationProcess < Compras::Model
     else
       creditor_proposals.count == creditors.count
     end
+  end
+
+  def concessions_or_permits?
+    return unless object_type
+
+    concessions? || permits?
   end
 
   protected

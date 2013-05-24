@@ -1185,7 +1185,7 @@ feature "LicitationProcesses" do
       expect(page).to have_select('Forma de julgamento',
                                   :options => ['Global com Melhor Lance ou Oferta'])
 
-      select 'Concessões e permissões', :from => 'Tipo de objeto'
+      select 'Concessões', :from => 'Tipo de objeto'
       select 'Concorrência', :from => 'Modalidade'
 
       expect(page).to have_select('Forma de julgamento',
@@ -1267,7 +1267,7 @@ feature "LicitationProcesses" do
       expect(page).to have_select('Modalidade',
                                   :options => ['Leilão'])
 
-      select 'Concessões e permissões', :on => "Tipo de objeto"
+      select 'Concessões', :on => "Tipo de objeto"
 
       expect(page).to have_select('Modalidade',
                                   :options => ['Concorrência'])
@@ -1495,7 +1495,7 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Principal' do
-      select 'Concessões e permissões', :from => 'Tipo de objeto'
+      select 'Permissões', :from => 'Tipo de objeto'
     end
 
     within_tab 'Receita' do
