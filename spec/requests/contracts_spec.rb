@@ -75,7 +75,8 @@ feature "Contracts" do
 
     fill_in 'Data de publicação', :with => '10/01/2012'
     fill_in 'Número do contrato', :with => '001'
-    fill_in 'Data da assinatura', :with => '01)01/2012'
+    fill_in 'Data da assinatura', :with => '01/01/2012'
+    fill_in 'Início da vigência', :with => '01/01/2012'
     fill_in 'Data de validade', :with => '30/12/2012'
 
     attach_file 'Contrato', 'spec/fixtures/other_example_document.txt'
@@ -120,6 +121,7 @@ feature "Contracts" do
     expect(page).to have_field 'Número do contrato', :with => '001'
     expect(page).to have_field 'Data de publicação', :with => '10/01/2012'
     expect(page).to have_field 'Data da assinatura', :with => '01/01/2012'
+    expect(page).to have_field 'Início da vigência', :with => '01/01/2012'
     expect(page).to have_field 'Data de validade', :with => '30/12/2012'
     expect(page).to have_field 'Objeto do contrato', :with => 'Objeto'
     expect(page).to have_field 'Local de publicação', :with => 'Jornal Oficial do Município'
@@ -142,6 +144,7 @@ feature "Contracts" do
     fill_in 'Ano do contrato', :with => '2013'
     fill_in 'Número do contrato', :with => '111'
     fill_in 'Data da assinatura', :with => '01/01/2013'
+    fill_in 'Início da vigência', :with => '01/12/2012'
     fill_in 'Data de validade', :with => '30/12/2013'
     select 'Não', :from => 'Subcontratação'
     attach_file 'Contrato', 'spec/fixtures/example_document.txt'
@@ -157,6 +160,7 @@ feature "Contracts" do
     expect(page).to have_field 'Ano do contrato', :with => '2013'
     expect(page).to have_field 'Número do contrato', :with => '111'
     expect(page).to have_field 'Data da assinatura', :with => '01/01/2013'
+    expect(page).to have_field 'Início da vigência', :with => '01/12/2012'
     expect(page).to have_field 'Data de validade', :with => '30/12/2013'
     expect(page).to have_select 'Subcontratação', :selected => 'Não'
     expect(page).to have_link 'example_document.txt'
