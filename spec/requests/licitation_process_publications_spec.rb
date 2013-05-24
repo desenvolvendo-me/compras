@@ -107,4 +107,37 @@ feature "LicitationProcessPublications" do
        expect(page).to have_content 'Internet'
      end
   end
+
+  scenario 'should javascript when licitation_process is direct_purchase publication_of is default confirmation' do
+    LicitationProcess.make!(:pregao_presencial,
+      type_of_purchase: PurchaseProcessTypeOfPurchase::DIRECT_PURCHASE, justification: 'Justificativa',
+      type_of_removal: TypeOfRemoval::REMOVAL_JUSTIFIED,
+      items: [PurchaseProcessItem.make!(:item, creditor: Creditor.make!(:sobrinho))] )
+
+    navigate 'Processos de Compra > Processos de Compras'
+
+    click_link "Limpar Filtro"
+
+    within_records do
+      click_link '1/2012'
+    end
+
+    click_link 'Publicações'
+
+    click_link 'Criar Publicação'
+
+    expect(page).to have_select 'Publicação do(a)', selected: 'Ratificação'
+
+    fill_in 'Nome do veículo de comunicação', with:'veículo'
+    fill_in 'Data da publicação', with: I18n.l(Date.current)
+    select 'Internet', form: 'Tipo de circulação do veículo de comunicação'
+
+    click_button 'Salvar'
+    click_link 'veículo'
+
+    expect(page).to have_field 'Nome do veículo de comunicação', with: 'veículo'
+    expect(page).to have_field 'Data da publicação', with: I18n.l(Date.current)
+    expect(page).to have_select 'Publicação do(a)', selected: 'Ratificação'
+    expect(page).to have_select 'Tipo de circulação do veículo de comunicação', selected: 'Internet'
+  end
 end

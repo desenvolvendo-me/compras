@@ -17,3 +17,11 @@
     <%= f.input :circulation_type %>
   </div>
 </div>
+<% if !f.object.persisted? && f.object.licitation_process.direct_purchase?%>
+<script>
+  $('#licitation_process_publication_publication_of option').each(function(){
+    if($(this).val() == 'confirmation')
+      $(this).attr('selected', 'selected');
+  });
+</script>
+<% end %>
