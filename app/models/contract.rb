@@ -7,7 +7,8 @@ class Contract < Compras::Model
                   :dissemination_source_id, :creditor_id, :contract_type_id,
                   :licitation_process_id, :direct_purchase_id,
                   :budget_structure_id, :budget_structure_responsible_id,
-                  :lawyer_id, :parent_id, :additives_attributes, :penalty_fine, :default_fine
+                  :lawyer_id, :parent_id, :additives_attributes, :penalty_fine, :default_fine,
+                  :execution_type, :contract_guarantees
 
   attr_modal :year, :contract_number, :sequential_number, :signature_date
 
@@ -15,12 +16,13 @@ class Contract < Compras::Model
   mount_uploader :contract_file, UnicoUploader
 
   has_enumeration_for :kind, :with => ContractKind, :create_helpers => true
+  has_enumeration_for :contract_guarantees
+  has_enumeration_for :execution_type, :create_helpers => true
 
   belongs_to :budget_structure
   belongs_to :budget_structure_responsible, :class_name => 'Employee'
   belongs_to :contract_type
   belongs_to :creditor
-  belongs_to :direct_purchase
   belongs_to :dissemination_source
   belongs_to :lawyer, :class_name => 'Employee'
   belongs_to :licitation_process
@@ -36,9 +38,7 @@ class Contract < Compras::Model
   accepts_nested_attributes_for :additives, :allow_destroy => true
   accepts_nested_attributes_for :delivery_schedules, :allow_destroy => true
 
-  delegate :execution_type_humanize, :contract_guarantees_humanize, :to => :licitation_process, :allow_nil => true
-  delegate :modality_humanize, :to => :licitation_process, :allow_nil => true, :prefix => true
-  delegate :modality_humanize, :to => :direct_purchase, :allow_nil => true, :prefix => true
+  delegate :modality_humanize, :type_of_removal_humanize, :to => :licitation_process, :allow_nil => true, :prefix => true
 
   validates :year, :mask => "9999", :allow_blank => true
   validates :sequential_number, :year, :contract_number, :publication_date,
@@ -52,7 +52,6 @@ class Contract < Compras::Model
     :type => :date,
     :after_message => :end_date_should_be_after_signature_date
   }, :allow_blank => true
-  validate :presence_of_licitation_process_or_direct_purchase
 
   orderize "id DESC"
   filterize
@@ -65,20 +64,15 @@ class Contract < Compras::Model
   end
 
   def modality_humanize
-    licitation_process_modality_humanize || direct_purchase_modality_humanize
+    if licitation_process && licitation_process.direct_purchase?
+      licitation_process_type_of_removal_humanize
+    else
+      licitation_process_modality_humanize
+    end
   end
 
   def self.next_sequential(year)
     self.where { self.year.eq year }.size + 1
-  end
-
-  # It's a XNOR validation.
-  # Must have licitation process or direct purchase,
-  # but not both and not neither one.
-  def presence_of_licitation_process_or_direct_purchase
-    unless licitation_process.present? ^ direct_purchase.present?
-      errors.add :licitation_process, :must_select_licitation_process_or_direct_purchase
-    end
   end
 
   def all_pledges
