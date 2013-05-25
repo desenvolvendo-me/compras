@@ -23,8 +23,7 @@ describe TceExport::MG::MonthlyMonitoring::LegalAnalysisAppraisalGenerator do
     end
 
     let :processo_licitatorio do
-      LicitationProcess.make!(:processo_licitatorio,
-        execution_unit_responsible: "ABCDE")
+      LicitationProcess.make!(:processo_licitatorio)
     end
 
     let :pregao do 
@@ -66,8 +65,8 @@ describe TceExport::MG::MonthlyMonitoring::LegalAnalysisAppraisalGenerator do
 
       csv = File.read('tmp/PARELIC.csv', encoding: 'ISO-8859-1')
 
-      expect(csv).to eq "98;ABCDE;2012;1;13052013;1;00315198737;Gabriel Sobrinho;Girassol;São Francisco;1;PR;33400500;3333333333;gabriel.sobrinho@gmail.com\n" +
-                        "98; ;2012;1;11052013;3;00314951334;Wenderson Malheiros;Girassol;São Francisco;1;PR;33400500;3333333333;wenderson.malheiros@gmail.com"
+      expect(csv).to eq "98;98029;2012;1;13052013;1;00315198737;Gabriel Sobrinho;Girassol;São Francisco;1;PR;33400500;3333333333;gabriel.sobrinho@gmail.com\n" +
+                        "98;98029;2012;1;11052013;3;00314951334;Wenderson Malheiros;Girassol;São Francisco;1;PR;33400500;3333333333;wenderson.malheiros@gmail.com"
     end
   end
 end

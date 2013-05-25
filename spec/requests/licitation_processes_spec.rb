@@ -62,7 +62,7 @@ feature "LicitationProcesses" do
       fill_modal 'Índice de reajuste', :with => 'XPTO'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Valor da caução', :with => '50,00'
-      fill_in 'Unidade responsável pela execução', with: 'Responsável pela execução'
+      fill_modal 'Unidade responsável pela execução', with: 'Secretaria de Educação', field: 'Descrição'
     end
 
     within_tab 'Prazos' do
@@ -208,7 +208,7 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Índice de reajuste', :with => 'XPTO'
       expect(page).to have_field 'Forma de pagamento', :with => 'Dinheiro'
       expect(page).to have_field 'Valor da caução', :with => '50,00'
-      expect(page).to have_field 'Unidade responsável pela execução', with: 'Responsável pela execução'
+      expect(page).to have_field 'Unidade responsável pela execução', with: '1 - Secretaria de Educação'
     end
 
     within_tab 'Prazos' do

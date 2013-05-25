@@ -13,7 +13,7 @@ module TceExport::MG
           {
             tipo_registro: 11,
             cod_orgao: monthly_monitoring.organ_code,
-            cod_unidade_sub: bidder.execution_unit_responsible,
+            cod_unidade_sub: budget_structure_code(bidder.execution_unit_responsible),
             exercicio_licitacao: bidder.licitation_process_year,
             nro_processo_licitatorio: bidder.licitation_process_process,
             tipo_documento_cnpj_empresa_hablic: 6,
@@ -41,6 +41,10 @@ module TceExport::MG
           2
         end
       end
+
+      def budget_structure_code(budget)
+        Formatters::BudgetStructureCodeFormatter.new(monthly_monitoring.organ_code, budget)
+      end
     end
 
     class BiddingAuthorizationDataGenerator < DataGeneratorBase
@@ -49,7 +53,7 @@ module TceExport::MG
           {
             tipo_registro: 10,
             cod_orgao: monthly_monitoring.organ_code,
-            cod_unidade_sub: bidder.execution_unit_responsible,
+            cod_unidade_sub: budget_structure_code(bidder.execution_unit_responsible),
             exercicio_licitacao: bidder.licitation_process_year,
             nro_processo_licitatorio: bidder.licitation_process_process,
             tipo_documento: document_kind(bidder),
@@ -129,6 +133,10 @@ module TceExport::MG
 
       def renounce_resource(bidder)
         bidder.renounce_resource ? 1 : 2
+      end
+
+      def budget_structure_code(budget)
+        Formatters::BudgetStructureCodeFormatter.new(monthly_monitoring.organ_code, budget)
       end
     end
 

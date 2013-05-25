@@ -5,6 +5,8 @@ describe LegalAnalysisAppraisal do
   it { should belong_to :responsible }
   it { should belong_to :licitation_process }
 
+  it { should have_one(:execution_unit_responsible).through(:licitation_process) }
+
   it { should validate_presence_of(:licitation_process) }
   it { should validate_presence_of(:appraisal_type) }
   it { should validate_presence_of(:reference) }
@@ -15,7 +17,6 @@ describe LegalAnalysisAppraisal do
   it { should delegate(:process).to(:licitation_process).allowing_nil(true) }
   it { should delegate(:modality).to(:licitation_process).allowing_nil(true) }
   it { should delegate(:description).to(:licitation_process).allowing_nil(true) }
-  it { should delegate(:execution_unit_responsible).to(:licitation_process).allowing_nil(true) }
   it { should delegate(:cpf).to(:responsible).allowing_nil(true).prefix(true) }
   it { should delegate(:name).to(:responsible).allowing_nil(true).prefix(true) }
   it { should delegate(:street_name).to(:responsible).allowing_nil(true).prefix(true) }

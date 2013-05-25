@@ -1,6 +1,7 @@
 class BudgetStructuresController < CrudController
   has_scope :synthetic, :type => :boolean
   has_scope :except_ids, :type => :array
+  has_scope :by_year
 
   protected
 

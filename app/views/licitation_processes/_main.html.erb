@@ -10,7 +10,7 @@
   </div>
 
   <div class="yui3-u-1-3">
-    <%= f.input :execution_unit_responsible %>
+    <%= f.input :execution_unit_responsible, modal_url: modal_budget_structures_path(by_year: f.object.year || Date.current.year) %>
   </div>
 </div>
 

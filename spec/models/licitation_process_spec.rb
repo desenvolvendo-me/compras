@@ -13,6 +13,7 @@ require 'app/models/licitation_process_impugnment'
 require 'app/models/licitation_process_appeal'
 require 'app/models/licitation_process_ratification'
 require 'app/models/budget_allocation'
+require 'app/models/budget_structure'
 require 'app/models/pledge'
 require 'app/models/judgment_commission_advice'
 require 'app/models/creditor'
@@ -48,6 +49,7 @@ describe LicitationProcess do
   it { should belong_to :judgment_form }
   it { should belong_to :payment_method }
   it { should belong_to :readjustment_index }
+  it { should belong_to :execution_unit_responsible  }
 
   it { should have_and_belong_to_many(:document_types) }
   it { should have_and_belong_to_many(:purchase_solicitations) }

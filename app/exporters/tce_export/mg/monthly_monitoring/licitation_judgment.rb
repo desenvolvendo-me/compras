@@ -6,7 +6,7 @@ module TceExport::MG
           {
             tipo_registro: 10,
             cod_orgao: monthly_monitoring.organ_code,
-            cod_unidade_sub: proposal.licitation_process_execution_unit_responsible,
+            cod_unidade_sub: budget_structure_code(proposal.licitation_process_execution_unit_responsible),
             exercicio_licitacao: proposal.licitation_process_year,
             nro_processo_licitatorio: proposal.licitation_process_process.to_s,
             tp_documento: tp_documento(proposal.creditor),
@@ -40,6 +40,10 @@ module TceExport::MG
       def quantidade(item)
         item.material.control_amount ? item.quantity : 1
       end
+
+      def budget_structure_code(budget)
+        Formatters::BudgetStructureCodeFormatter.new(monthly_monitoring.organ_code, budget)
+      end
     end
 
     class JudgmentDateDetailDataGenerator < DataGeneratorBase
@@ -52,7 +56,7 @@ module TceExport::MG
         {
           tipo_registro: 30,
           cod_orgao: monthly_monitoring.organ_code,
-          cod_unidade_sub: purchase_process.execution_unit_responsible,
+          cod_unidade_sub: budget_structure_code(purchase_process.execution_unit_responsible),
           exercicio_licitacao: purchase_process.year,
           nro_processo_licitatorio: purchase_process.process.to_s,
           dt_julgamento: purchase_process.proposal_envelope_opening_date,
@@ -77,6 +81,10 @@ module TceExport::MG
 
       def bidder
         purchase_process.bidders.any? && purchase_process.bidders.first
+      end
+
+      def budget_structure_code(budget)
+        Formatters::BudgetStructureCodeFormatter.new(monthly_monitoring.organ_code, budget)
       end
     end
 

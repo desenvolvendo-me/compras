@@ -19,7 +19,7 @@ class LicitationProcess < Compras::Model
                   :closing_of_accreditation_time, :purchase_solicitation_ids,
                   :budget_allocations_total_value, :total_value_of_items,
                   :creditor_proposals_attributes, :tied_creditor_proposals_attributes,
-                  :execution_unit_responsible, :process_responsibles_attributes,
+                  :execution_unit_responsible_id, :process_responsibles_attributes,
                   :justification, :justification_and_legal
 
   auto_increment :process, :by => :year
@@ -46,6 +46,7 @@ class LicitationProcess < Compras::Model
   belongs_to :payment_method
   belongs_to :readjustment_index, :class_name => 'Indexer'
   belongs_to :index_update_rate, :class_name => 'Indexer'
+  belongs_to :execution_unit_responsible, class_name: 'BudgetStructure'
 
   has_and_belongs_to_many :document_types, :join_table => :compras_document_types_compras_licitation_processes
   has_and_belongs_to_many :purchase_solicitations, :join_table => :compras_licitation_processes_purchase_solicitations,

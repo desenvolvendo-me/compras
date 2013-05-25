@@ -6,7 +6,7 @@ module TceExport::MG
           {
             tipo_registro: 10,
             cod_orgao: monthly_monitoring.organ_code,
-            cod_unidade_sub: ratification.licitation_process_execution_unit_responsible,
+            cod_unidade_sub: budget_structure_code(ratification.licitation_process.execution_unit_responsible),
             exercicio_licitacao: ratification.licitation_process_year,
             nro_processo_licitatorio: ratification.licitation_process_process.to_s,
             tp_documento: tp_documento(ratification.creditor),
@@ -39,6 +39,10 @@ module TceExport::MG
         RatificationDateDetailDataGenerator.new(monthly_monitoring, ratification).
           generate_data
       end
+
+      def budget_structure_code(budget)
+        Formatters::BudgetStructureCodeFormatter.new(monthly_monitoring.organ_code, budget)
+      end
     end
 
     class RatificationDateDetailDataGenerator < DataGeneratorBase
@@ -51,7 +55,7 @@ module TceExport::MG
         {
           tipo_registro: 30,
           cod_orgao: monthly_monitoring.organ_code,
-          cod_unidade_sub: ratification.licitation_process_execution_unit_responsible,
+          cod_unidade_sub: budget_structure_code(ratification.licitation_process.execution_unit_responsible),
           exercicio_licitacao: ratification.licitation_process_year,
           nro_processo_licitatorio: ratification.licitation_process_process.to_s,
           dt_homologacao: ratification.licitation_process_ratification.ratification_date,
@@ -62,6 +66,10 @@ module TceExport::MG
       private
 
       attr_reader :ratification
+
+      def budget_structure_code(budget)
+        Formatters::BudgetStructureCodeFormatter.new(monthly_monitoring.organ_code, budget)
+      end
     end
 
     class LicitationRatificationFormatter

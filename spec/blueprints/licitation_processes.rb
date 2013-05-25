@@ -28,6 +28,7 @@ LicitationProcess.blueprint(:processo_licitatorio) do
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   notice_availability_date { I18n.l(Date.tomorrow) }
+  execution_unit_responsible { BudgetStructure.make!(:secretaria_de_desenvolvimento) }
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_computador) do
@@ -61,6 +62,7 @@ LicitationProcess.blueprint(:processo_licitatorio_computador) do
   type_of_purchase { PurchaseProcessTypeOfPurchase::LICITATION }
   contract_guarantees { ContractGuarantees::BANK }
   notice_availability_date { I18n.l(Date.tomorrow) }
+  execution_unit_responsible { BudgetStructure.make!(:secretaria_de_desenvolvimento) }
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_fornecedores) do
@@ -92,6 +94,7 @@ LicitationProcess.blueprint(:processo_licitatorio_fornecedores) do
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   notice_availability_date { I18n.l(Date.tomorrow) }
+  execution_unit_responsible { BudgetStructure.make!(:secretaria_de_desenvolvimento) }
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_publicacao_cancelada) do
@@ -122,6 +125,7 @@ LicitationProcess.blueprint(:processo_licitatorio_publicacao_cancelada) do
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   notice_availability_date { I18n.l(Date.tomorrow) }
+  execution_unit_responsible { BudgetStructure.make!(:secretaria_de_desenvolvimento) }
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_canetas) do
@@ -155,6 +159,7 @@ LicitationProcess.blueprint(:processo_licitatorio_canetas) do
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   notice_availability_date { I18n.l(Date.tomorrow) }
+  execution_unit_responsible { BudgetStructure.make!(:secretaria_de_desenvolvimento) }
 end
 
 LicitationProcess.blueprint(:apuracao_por_itens) do
@@ -188,6 +193,7 @@ LicitationProcess.blueprint(:apuracao_por_itens) do
              Bidder.make!(:licitante_com_proposta_2)] }
   contract_guarantees { ContractGuarantees::BANK }
   notice_availability_date { I18n.l(Date.tomorrow) }
+  execution_unit_responsible { BudgetStructure.make!(:secretaria_de_desenvolvimento) }
 end
 
 LicitationProcess.blueprint(:apuracao_por_lote) do
@@ -221,6 +227,7 @@ LicitationProcess.blueprint(:apuracao_por_lote) do
              Bidder.make!(:licitante_com_proposta_2)] }
   contract_guarantees { ContractGuarantees::BANK }
   notice_availability_date { I18n.l(Date.tomorrow) }
+  execution_unit_responsible { BudgetStructure.make!(:secretaria_de_desenvolvimento) }
 end
 
 LicitationProcess.blueprint(:valor_maximo_ultrapassado) do
@@ -254,6 +261,7 @@ LicitationProcess.blueprint(:valor_maximo_ultrapassado) do
   bidders { [Bidder.make!(:licitante_com_proposta_3),
              Bidder.make!(:licitante_com_proposta_7)] }
   notice_availability_date { I18n.l(Date.tomorrow) }
+  execution_unit_responsible { BudgetStructure.make!(:secretaria_de_desenvolvimento) }
 end
 
 LicitationProcess.blueprint(:apuracao_global) do
@@ -286,6 +294,7 @@ LicitationProcess.blueprint(:apuracao_global) do
   bidders { [Bidder.make!(:licitante_com_proposta_1),
              Bidder.make!(:licitante_com_proposta_2)] }
   notice_availability_date { I18n.l(Date.tomorrow) }
+  execution_unit_responsible { BudgetStructure.make!(:secretaria_de_desenvolvimento) }
 end
 
 LicitationProcess.blueprint(:apuracao_global_empatou) do
@@ -318,6 +327,7 @@ LicitationProcess.blueprint(:apuracao_global_empatou) do
   bidders { [Bidder.make!(:licitante_com_proposta_5),
              Bidder.make!(:licitante_com_proposta_6)] }
   notice_availability_date { I18n.l(Date.tomorrow) }
+  execution_unit_responsible { BudgetStructure.make!(:secretaria_de_desenvolvimento) }
 end
 
 LicitationProcess.blueprint(:apuracao_global_sem_documentos) do
@@ -350,6 +360,7 @@ LicitationProcess.blueprint(:apuracao_global_sem_documentos) do
   bidders { [Bidder.make!(:licitante_com_proposta_6, :documents => []),
              Bidder.make!(:licitante_com_proposta_4, :documents => [])] }
   notice_availability_date { I18n.l(Date.tomorrow) }
+  execution_unit_responsible { BudgetStructure.make!(:secretaria_de_desenvolvimento) }
 end
 
 LicitationProcess.blueprint(:apuracao_global_small_company) do
@@ -382,6 +393,7 @@ LicitationProcess.blueprint(:apuracao_global_small_company) do
   bidders { [Bidder.make!(:licitante_com_proposta_3),
              Bidder.make!(:licitante_com_proposta_4)] }
   notice_availability_date { I18n.l(Date.tomorrow) }
+  execution_unit_responsible { BudgetStructure.make!(:secretaria_de_desenvolvimento) }
 end
 
 LicitationProcess.blueprint(:apuracao_global_small_company_2) do
@@ -414,6 +426,7 @@ LicitationProcess.blueprint(:apuracao_global_small_company_2) do
   bidders { [Bidder.make!(:licitante_com_proposta_8),
              Bidder.make!(:licitante_com_proposta_9)] }
   notice_availability_date { I18n.l(Date.tomorrow) }
+  execution_unit_responsible { BudgetStructure.make!(:secretaria_de_desenvolvimento) }
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_nao_atualizavel) do
@@ -444,6 +457,7 @@ LicitationProcess.blueprint(:processo_licitatorio_nao_atualizavel) do
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   notice_availability_date { I18n.l(Date.tomorrow) }
+  execution_unit_responsible { BudgetStructure.make!(:secretaria_de_desenvolvimento) }
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_canetas_sem_lote) do
@@ -476,6 +490,7 @@ LicitationProcess.blueprint(:processo_licitatorio_canetas_sem_lote) do
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   notice_availability_date { I18n.l(Date.tomorrow) }
+  execution_unit_responsible { BudgetStructure.make!(:secretaria_de_desenvolvimento) }
 end
 
 LicitationProcess.blueprint(:apuracao_melhor_tecnica_e_preco) do
@@ -508,6 +523,7 @@ LicitationProcess.blueprint(:apuracao_melhor_tecnica_e_preco) do
   bidders { [Bidder.make!(:licitante_com_proposta_1),
              Bidder.make!(:licitante_com_proposta_2)] }
   notice_availability_date { I18n.l(Date.tomorrow) }
+  execution_unit_responsible { BudgetStructure.make!(:secretaria_de_desenvolvimento) }
 end
 
 LicitationProcess.blueprint(:pregao_presencial) do
@@ -537,10 +553,10 @@ LicitationProcess.blueprint(:pregao_presencial) do
   document_types { [DocumentType.make!(:fiscal)] }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
-  publications { [LicitationProcessPublication.make!(:publicacao,
-                                                                        :licitation_process => object)] }
+  publications { [LicitationProcessPublication.make!(:publicacao, :licitation_process => object)] }
   bidders { [Bidder.make!(:licitante_sobrinho), Bidder.make!(:licitante), Bidder.make!(:me_pregao)] }
   notice_availability_date { I18n.l(Date.tomorrow) }
+  execution_unit_responsible { BudgetStructure.make!(:secretaria_de_desenvolvimento) }
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_concurso) do
@@ -570,6 +586,7 @@ LicitationProcess.blueprint(:processo_licitatorio_concurso) do
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   notice_availability_date { I18n.l(Date.tomorrow) }
+  execution_unit_responsible { BudgetStructure.make!(:secretaria_de_desenvolvimento) }
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_concorrencia) do
@@ -599,6 +616,7 @@ LicitationProcess.blueprint(:processo_licitatorio_concorrencia) do
   contract_guarantees { ContractGuarantees::BANK }
   judgment_form { JudgmentForm.make!(:global_com_menor_preco)}
   notice_availability_date { I18n.l(Date.tomorrow) }
+  execution_unit_responsible { BudgetStructure.make!(:secretaria_de_desenvolvimento) }
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_tomada_preco) do
@@ -628,6 +646,7 @@ LicitationProcess.blueprint(:processo_licitatorio_tomada_preco) do
   contract_guarantees { ContractGuarantees::BANK }
   judgment_form { JudgmentForm.make!(:global_com_menor_preco)}
   notice_availability_date { I18n.l(Date.tomorrow) }
+  execution_unit_responsible { BudgetStructure.make!(:secretaria_de_desenvolvimento) }
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_leilao) do
@@ -658,6 +677,7 @@ LicitationProcess.blueprint(:processo_licitatorio_leilao) do
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   notice_availability_date { I18n.l(Date.tomorrow) }
+  execution_unit_responsible { BudgetStructure.make!(:secretaria_de_desenvolvimento) }
 end
 
 

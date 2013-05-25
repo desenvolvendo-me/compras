@@ -65,8 +65,8 @@ describe TceExport::MG::MonthlyMonitoring::BiddingAuthorizationGenerator do
 
       csv = File.read('tmp/HABLIC.csv', encoding: 'ISO-8859-1')
 
-      expect(csv).to eq "10;98; ;2013;2;2;00000000999962;Nohup; ; ;29062011;099901; ; ;;PR; ; ; ; ; ; ; ; ; ;20052013;2;2\n" +
-                        "11;98; ;2013;2;6;00000000999962;1;27056534147;Pedro dos Santos;1"
+      expect(csv).to eq "10;98;98029;2013;2;2;00000000999962;Nohup; ; ;29062011;099901; ; ;;PR; ; ; ; ; ; ; ; ; ;20052013;2;2\n" +
+                        "11;98;98029;2013;2;6;00000000999962;1;27056534147;Pedro dos Santos;1"
     end
   end
 end

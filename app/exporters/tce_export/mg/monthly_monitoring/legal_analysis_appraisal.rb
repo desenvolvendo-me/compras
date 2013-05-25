@@ -5,7 +5,7 @@ module TceExport::MG
         query.map do |analysis|
           {
             cod_orgao: monthly_monitoring.organ_code,
-            cod_unidade_sub: analysis.execution_unit_responsible,
+            cod_unidade_sub: budget_structure_code(analysis.execution_unit_responsible),
             exercicio_licitacao: analysis.year,
             nro_processo_licitatorio: analysis.process,
             data_parecer: analysis.appraisal_expedition_date,
@@ -41,6 +41,10 @@ module TceExport::MG
             4
           end
         end
+      end
+
+      def budget_structure_code(budget)
+        Formatters::BudgetStructureCodeFormatter.new(monthly_monitoring.organ_code, budget)
       end
     end
 
