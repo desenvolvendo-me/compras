@@ -5,10 +5,10 @@ class Contract < Compras::Model
                   :guarantee_value, :contract_validity, :subcontracting,
                   :cancellation_date, :cancellation_reason, :delivery_schedules_attributes,
                   :dissemination_source_id, :creditor_id, :contract_type_id,
-                  :licitation_process_id, :direct_purchase_id,
+                  :licitation_process_id, :direct_purchase_id, :start_date,
                   :budget_structure_id, :budget_structure_responsible_id,
-                  :lawyer_id, :parent_id, :additives_attributes, :penalty_fine, :default_fine,
-                  :execution_type, :contract_guarantees
+                  :lawyer_id, :parent_id, :additives_attributes, :penalty_fine,
+                  :default_fine, :execution_type, :contract_guarantees
 
   attr_modal :year, :contract_number, :sequential_number, :signature_date
 
@@ -42,10 +42,10 @@ class Contract < Compras::Model
 
   validates :year, :mask => "9999", :allow_blank => true
   validates :sequential_number, :year, :contract_number, :publication_date,
+    :dissemination_source, :content, :creditor, :contract_type,
+    :contract_value, :contract_validity, :signature_date, :start_date,
+    :end_date, :budget_structure, :budget_structure_responsible, :kind,
     :default_fine, :penalty_fine, :presence => true
-  validates :dissemination_source, :content, :creditor, :contract_type, :presence => true
-  validates :contract_value, :contract_validity, :signature_date, :presence => true
-  validates :end_date, :budget_structure, :budget_structure_responsible, :kind, :presence => true
   validates :parent, :presence => true, :if => :amendment?
   validates :end_date, :timeliness => {
     :after => :signature_date,

@@ -57,6 +57,7 @@ describe Contract do
   it { should validate_presence_of :contract_value }
   it { should validate_presence_of :contract_validity }
   it { should validate_presence_of :signature_date }
+  it { should validate_presence_of :start_date }
   it { should validate_presence_of :end_date }
   it { should validate_presence_of :budget_structure }
   it { should validate_presence_of :budget_structure_responsible }

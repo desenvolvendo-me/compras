@@ -19,6 +19,7 @@ Contract.blueprint(:primeiro_contrato) do
   lawyer { Employee.make!(:wenderson) }
   lawyer_code { '5678' }
   publication_date { Date.new(2012, 1, 10) }
+  start_date { Date.new(2012, 1, 9) }
   content { 'Objeto' }
   penalty_fine { 'Multa rescisória' }
   default_fine { 'Multa inadimplemento' }
@@ -43,6 +44,7 @@ Contract.blueprint(:contrato_detran) do
   lawyer { Employee.make!(:wenderson) }
   lawyer_code { '5678' }
   publication_date { Date.new(2012, 1, 10) }
+  start_date { Date.new(2012, 1, 9) }
   content { 'Objeto' }
   penalty_fine { 'Multa rescisória' }
   default_fine { 'Multa inadimplemento' }

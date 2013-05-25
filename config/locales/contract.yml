@@ -36,6 +36,7 @@ pt-BR:
         sequential_number: 'Número sequencial'
         signature_date: "Data da assinatura"
         subcontracting: 'Subcontratação'
+        start_date: "Início da vigência"
         year: "Ano do contrato"
         penalty_fine: "Multa rescisória"
         default_fine: "Multa inadimplemento"
