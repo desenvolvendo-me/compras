@@ -14,8 +14,6 @@ class Capability < Accounting::Model
   has_many :budget_allocation_capabilities, :dependent => :restrict
   has_many :budget_allocations, :through => :budget_allocation_capabilities
   has_many :extra_credit_moviment_types, :dependent => :restrict
-  has_many :budget_revenue_capabilities, :dependent => :restrict
-  has_many :budget_revenues, :through => :budget_revenue_capabilities
   has_many :bank_account_capabilities, :dependent => :restrict
   has_many :pledges, :dependent => :restrict
 
@@ -87,17 +85,5 @@ class Capability < Accounting::Model
 
   def to_s
     description
-  end
-
-  def revenue_amount_for(month)
-    budget_revenue_capabilities.inject(0) do |sum, budget_revenue_capability|
-      sum + budget_revenue_capability.revenue_amount_for(month)
-    end
-  end
-
-  def revenue_amount_until(month)
-    budget_revenue_capabilities.inject(0) do |sum, budget_revenue_capability|
-      sum + budget_revenue_capability.revenue_amount_until(month)
-    end
   end
 end
