@@ -53,6 +53,10 @@ class Person < Persona::Person
     personable.uf_state_registration if personable.respond_to?(:uf_state_registration)
   end
 
+  def state_registration
+    personable.state_registration if personable.respond_to?(:state_registration)
+  end
+
   def company_size
     personable.company_size if personable.respond_to?(:company_size)
   end

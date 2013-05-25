@@ -17,6 +17,7 @@ FactoryGirl.define do
 
   factory :city do
     name 'Belo Horizonte'
+    tce_mg_code 1
   end
 
   factory :district do

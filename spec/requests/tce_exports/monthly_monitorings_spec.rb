@@ -31,6 +31,7 @@ feature "Monthly Monitoring TCE File" do
     expect(page).to have_content "HOMOLIC - Homologação da Licitação"
     expect(page).to have_content "HABLIC - Habilitação da Licitação"
     expect(page).to have_content "ABERLIC - Abertura da Licitação"
+    expect(page).to have_content "DISPENSA - Dispensa ou Inexigibilidade"
 
     fill_in "Ano da prestação de contas", with: "2013"
 

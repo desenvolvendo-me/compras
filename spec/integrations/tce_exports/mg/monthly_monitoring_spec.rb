@@ -39,6 +39,7 @@ describe TceExport::MG::MonthlyMonitoring do
       entries = Zip::ZipFile.open("tmp/AM_51234_66_10_2013.zip").entries.map(&:to_s)
       expect(entries.sort).to eq [
         'ABERLIC.csv',
+        'DISPENSA.csv',
         'HABLIC.csv',
         'HOMOLIC.csv',
         'JULGLIC.csv',

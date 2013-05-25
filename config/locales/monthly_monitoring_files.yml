@@ -2,6 +2,7 @@ pt-BR:
   enumerations:
     monthly_monitoring_files:
       bidding_authorization: "HABLIC - Habilitação da Licitação"
+      direct_purchase: "DISPENSA - Dispensa ou Inexigibilidade"
       legal_analysis_appraisal: "PARELIC - Parecer da Licitação"
       licitation_judgment: "JULGLIC - Julgamento da Licitação"
       licitation_ratification: "HOMOLIC - Homologação da Licitação"
