@@ -7,9 +7,6 @@ class LicitationObject < Compras::Model
 
   attr_modal :description, :year
 
-  has_many :direct_purchases, :dependent => :restrict
-  has_many :items, :through => :direct_purchases
-
   has_and_belongs_to_many :materials, :join_table => :compras_licitation_objects_compras_materials
 
   validates :description, :year, :purchase_invitation_letter, :presence => true
@@ -23,21 +20,7 @@ class LicitationObject < Compras::Model
   orderize :description
   filterize
 
-  def purchase_licitation_exemption
-    licitation_exemption DirectPurchaseModality::MATERIAL_OR_SERVICE
-  end
-
-  def build_licitation_exemption
-    licitation_exemption DirectPurchaseModality::ENGINEERING_WORKS
-  end
-
   def to_s
     description
-  end
-
-  private
-
-  def licitation_exemption(modality)
-    items.not_annulled.by_modality(modality).sum(&:estimated_total_price)
   end
 end

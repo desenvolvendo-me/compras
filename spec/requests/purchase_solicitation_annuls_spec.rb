@@ -41,8 +41,7 @@ feature 'PurchaseSolicitationAnnul' do
 
   scenario 'annul button should be disabled when there is a direct_purchase related' do
     purchase_solicitation = PurchaseSolicitation.make!(:reparo_liberado)
-    DirectPurchase.make!(:compra,
-        :purchase_solicitation => purchase_solicitation)
+    LicitationProcess.make!(:processo_licitatorio, purchase_solicitations: [purchase_solicitation])
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
@@ -51,7 +50,7 @@ feature 'PurchaseSolicitationAnnul' do
     click_link "#{purchase_solicitation.decorator.code_and_year}"
 
     expect(page).to have_disabled_element 'Anular',
-                                          :reason => 'está sendo utilizada na compra direta (1/2012), não pode ser anulada.'
+                                          :reason => 'está sendo utilizada no processo de compra, não pode ser anulada.'
   end
 
   scenario 'annuling a purchase solicitation' do

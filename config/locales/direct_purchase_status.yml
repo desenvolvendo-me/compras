@@ -1,5 +1,0 @@
-pt-BR:
-  enumerations:
-    direct_purchase_status:
-      completed: "Concluída"
-      annulled: "Anulada"

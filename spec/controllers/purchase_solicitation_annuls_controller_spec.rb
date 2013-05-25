@@ -7,7 +7,7 @@ describe PurchaseSolicitationAnnulsController do
   end
 
   describe 'GET #new' do
-    it 'should render new when it is not related to direct purchase' do
+    it 'should render new when it is not related to purchase process' do
       purchase_solicitation = PurchaseSolicitation.make!(:reparo_liberado)
 
       get :new, :annullable_id => purchase_solicitation.id
@@ -15,10 +15,10 @@ describe PurchaseSolicitationAnnulsController do
       expect(response.code).to eq '200'
     end
 
-    it 'should raise exception when is related with a direct_purchase' do
+    it 'should raise exception when is related with a purchase process' do
       purchase_solicitation = PurchaseSolicitation.make!(:reparo_liberado)
-      DirectPurchase.make!(:compra,
-        :purchase_solicitation => purchase_solicitation)
+      LicitationProcess.make!(:processo_licitatorio,
+        purchase_solicitations: [purchase_solicitation])
 
       get :new, :annullable_id => purchase_solicitation.id
 
@@ -28,7 +28,7 @@ describe PurchaseSolicitationAnnulsController do
   end
 
   describe 'POST #create' do
-    it 'should render create when it is not related to direct purchase' do
+    it 'should render create when it is not related to purchase process' do
       purchase_solicitation = PurchaseSolicitation.make!(:reparo_liberado)
 
       post :create, :annullable_id => purchase_solicitation.id
@@ -36,10 +36,10 @@ describe PurchaseSolicitationAnnulsController do
       expect(response.code).to eq '200'
     end
 
-    it 'should raise exception when is related with a direct_purchase' do
+    it 'should raise exception when is related with a purchase process' do
       purchase_solicitation = PurchaseSolicitation.make!(:reparo_liberado)
-      DirectPurchase.make!(:compra,
-        :purchase_solicitation => purchase_solicitation)
+      LicitationProcess.make!(:processo_licitatorio,
+        purchase_solicitations: [purchase_solicitation])
 
       post :create, :annullable_id => purchase_solicitation.id
 

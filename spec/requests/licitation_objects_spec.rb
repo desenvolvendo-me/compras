@@ -22,24 +22,20 @@ feature "LicitationObjects" do
 
     within_tab 'Total acumulado' do
       within_fieldset 'Total acumulado de compras e serviços' do
-        expect(page).to have_disabled_field  'Dispensa de licitação'
         expect(page).to have_disabled_field  'Carta convite'
         expect(page).to have_disabled_field  'Tomada de preço'
         expect(page).to have_disabled_field  'Concorrência pública'
 
-        expect(page).to have_field 'Dispensa de licitação', :with => '0,00'
         expect(page).to have_field 'Carta convite', :with => '0,00'
         expect(page).to have_field 'Tomada de preço', :with => '0,00'
         expect(page).to have_field 'Concorrência pública', :with => '0,00'
       end
 
       within_fieldset 'Total acumulado de obras e engenharia' do
-        expect(page).to have_disabled_field  'Dispensa de licitação'
         expect(page).to have_disabled_field  'Carta convite'
         expect(page).to have_disabled_field  'Tomada de preço'
         expect(page).to have_disabled_field  'Concorrência pública'
 
-        expect(page).to have_field 'Dispensa de licitação', :with => '0,00'
         expect(page).to have_field 'Carta convite', :with => '0,00'
         expect(page).to have_field 'Tomada de preço', :with => '0,00'
         expect(page).to have_field 'Concorrência pública', :with => '0,00'
@@ -78,24 +74,20 @@ feature "LicitationObjects" do
 
     within_tab 'Total acumulado' do
       within_fieldset 'Total acumulado de compras e serviços' do
-        expect(page).to have_disabled_field  'Dispensa de licitação'
         expect(page).to have_disabled_field  'Carta convite'
         expect(page).to have_disabled_field  'Tomada de preço'
         expect(page).to have_disabled_field  'Concorrência pública'
 
-        expect(page).to have_field 'Dispensa de licitação', :with => '0,00'
         expect(page).to have_field 'Carta convite', :with => '0,00'
         expect(page).to have_field 'Tomada de preço', :with => '0,00'
         expect(page).to have_field 'Concorrência pública', :with => '0,00'
       end
 
       within_fieldset 'Total acumulado de obras e engenharia' do
-        expect(page).to have_disabled_field  'Dispensa de licitação'
         expect(page).to have_disabled_field  'Carta convite'
         expect(page).to have_disabled_field  'Tomada de preço'
         expect(page).to have_disabled_field  'Concorrência pública'
 
-        expect(page).to have_field 'Dispensa de licitação', :with => '0,00'
         expect(page).to have_field 'Carta convite', :with => '0,00'
         expect(page).to have_field 'Tomada de preço', :with => '0,00'
         expect(page).to have_field 'Concorrência pública', :with => '0,00'
@@ -196,53 +188,5 @@ feature "LicitationObjects" do
 
     expect(page).to_not have_content 'Ponte'
     expect(page).to_not have_content '2012'
-  end
-
-  scenario 'validating total of purchase and build licitation exemptions' do
-    DirectPurchase.make!(:compra)
-    DirectPurchase.make!(:compra_nao_autorizada)
-    DirectPurchase.make!(:compra_2011)
-
-    navigate 'Comum > Auxiliar > Objetos de Licitação'
-
-    click_link "Limpar Filtro"
-
-    click_link 'Ponte'
-
-    within_tab 'Total acumulado' do
-      within_fieldset 'Total acumulado de compras e serviços' do
-        expect(page).to have_field 'Dispensa de licitação', :with => '1.200,00'
-      end
-
-      within_fieldset 'Total acumulado de obras e engenharia' do
-        expect(page).to have_field 'Dispensa de licitação', :with => '600,00'
-      end
-    end
-  end
-
-  scenario 'validating total of purchase and build licitation exemptions when a direct purchase is annulled' do
-    ResourceAnnul.make!(
-      :anulacao_generica,
-      :annullable => DirectPurchase.make!(:compra)
-    )
-
-    DirectPurchase.make!(:compra_nao_autorizada)
-    DirectPurchase.make!(:compra_2011)
-
-    navigate 'Comum > Auxiliar > Objetos de Licitação'
-
-    click_link "Limpar Filtro"
-
-    click_link 'Ponte'
-
-    within_tab 'Total acumulado' do
-      within_fieldset 'Total acumulado de compras e serviços' do
-        expect(page).to have_field 'Dispensa de licitação', :with => '600,00'
-      end
-
-      within_fieldset 'Total acumulado de obras e engenharia' do
-        expect(page).to have_field 'Dispensa de licitação', :with => '600,00'
-      end
-    end
   end
 end

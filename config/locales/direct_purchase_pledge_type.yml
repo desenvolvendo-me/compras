@@ -1,6 +1,0 @@
-pt-BR:
-  enumerations:
-    direct_purchase_pledge_type:
-      global: "Global"
-      estimated: "Estimativo"
-      ordinary: "Ordinário"

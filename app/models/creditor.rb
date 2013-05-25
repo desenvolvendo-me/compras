@@ -28,7 +28,6 @@ class Creditor < Compras::Model
   has_many :creditor_balances, :inverse_of => :creditor, :dependent => :destroy
   has_many :creditor_materials, :dependent => :destroy, :inverse_of => :creditor
   has_many :creditor_secondary_cnaes, :dependent => :destroy
-  has_many :direct_purchases, :dependent => :restrict
   has_many :document_types, :through => :documents
   has_many :documents, :class_name => 'CreditorDocument', :dependent => :destroy, :order => :id
   has_many :bidders, :dependent => :restrict

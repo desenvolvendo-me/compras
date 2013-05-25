@@ -5,7 +5,7 @@ class Contract < Compras::Model
                   :guarantee_value, :contract_validity, :subcontracting,
                   :cancellation_date, :cancellation_reason, :delivery_schedules_attributes,
                   :dissemination_source_id, :creditor_id, :contract_type_id,
-                  :licitation_process_id, :direct_purchase_id, :start_date,
+                  :licitation_process_id, :start_date,
                   :budget_structure_id, :budget_structure_responsible_id,
                   :lawyer_id, :parent_id, :additives_attributes, :penalty_fine,
                   :default_fine, :execution_type, :contract_guarantees

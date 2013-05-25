@@ -3,7 +3,6 @@ require 'model_helper'
 require 'app/models/material'
 require 'app/models/purchase_solicitation_item'
 require 'app/models/purchase_solicitation'
-require 'app/models/direct_purchase_budget_allocation_item'
 require 'app/models/purchase_process_item'
 require 'app/models/price_collection_lot_item'
 require 'app/models/creditor_material'
@@ -24,7 +23,6 @@ describe Material do
 
   it { should belong_to :expense_nature }
   it { should have_and_belong_to_many :licitation_objects }
-  it { should have_many(:direct_purchase_budget_allocation_items).dependent(:restrict) }
   it { should have_many(:purchase_process_items).dependent(:restrict) }
   it { should have_many(:purchase_solicitation_items).dependent(:restrict) }
   it { should have_many(:price_collection_lot_items).dependent(:restrict) }

@@ -1,7 +1,6 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/licitation_object'
-require 'app/models/direct_purchase'
 
 describe LicitationObject do
   it 'should return description as to_s method' do
@@ -26,7 +25,4 @@ describe LicitationObject do
   it { should allow_value('2012').for(:year) }
 
   it { should have_and_belong_to_many :materials }
-
-  it { should have_many(:direct_purchases).dependent(:restrict) }
-  it { should have_many(:items).through(:direct_purchases) }
 end

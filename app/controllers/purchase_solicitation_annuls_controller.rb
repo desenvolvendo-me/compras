@@ -1,12 +1,12 @@
 class PurchaseSolicitationAnnulsController < ResourceAnnulsController
-  before_filter :deny_annul_with_direct_purchase, :only => [:new, :create]
+  before_filter :deny_annul_with_purchase_process, :only => [:new, :create]
 
   private
 
-  def deny_annul_with_direct_purchase
+  def deny_annul_with_purchase_process
     purchase_solicitation = PurchaseSolicitation.find(purchase_solicitation_id)
 
-    raise Exceptions::Unauthorized if purchase_solicitation.direct_purchase.present?
+    raise Exceptions::Unauthorized if purchase_solicitation.licitation_processes.any?
   end
 
   def purchase_solicitation_id

@@ -1,7 +1,6 @@
 class PaymentMethod < Compras::Model
   attr_accessible :description
 
-  has_many :direct_purchases, :dependent => :restrict
   has_many :licitation_processes, :dependent => :restrict
   has_many :price_collections, :dependent => :restrict
 

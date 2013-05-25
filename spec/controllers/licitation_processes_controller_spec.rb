@@ -72,7 +72,6 @@ describe LicitationProcessesController do
         LicitationProcess.stub(:find).and_return(licitation_process)
         licitation_process.should_receive(:transaction).and_yield
 
-        PurchaseProcessClassificationGenerator.any_instance.should_receive(:generate!)
         PurchaseProcessClassificationSituationGenerator.any_instance.should_receive(:generate!)
         PurchaseProcessClassificationBiddersVerifier.any_instance.should_receive(:verify!)
 

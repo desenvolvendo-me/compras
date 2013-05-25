@@ -1,7 +1,0 @@
-<div class="buttons">
-  <% if can?(:modify, main_controller_name) %>
-    <%= f.button :submit, :confirm => "Confirma a anulação da Compra Direta?" if f.object.new_record? %>
-  <% end %>
-
-  <%= f.button :back, :href => edit_parent_path %>
-</div>

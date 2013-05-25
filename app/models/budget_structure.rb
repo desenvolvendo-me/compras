@@ -12,7 +12,6 @@ class BudgetStructure < Accounting::Model
   has_many :signatures, :dependent => :restrict
   has_many :budget_allocations, :dependent => :restrict
   has_many :budget_structure_responsibles, :dependent => :destroy, :order => :id
-  has_many :direct_purchases, :dependent => :restrict
   has_many :children, :class_name => 'BudgetStructure', :foreign_key => :parent_id, :dependent => :restrict
 
   delegate :digits, :level, :separator, :upper_budget_structure_level, :to => :budget_structure_level, :allow_nil => true
