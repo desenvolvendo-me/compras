@@ -25,7 +25,9 @@ module TceExport::MG
       private
 
       def query
-        PurchaseProcessCreditorProposal.order(:id)
+        PurchaseProcessCreditorProposal.by_ratification_month_and_year(
+          monthly_monitoring.month, monthly_monitoring.year).
+          order(:id)
       end
 
       def generate_judment_date_detail(licitation_process)

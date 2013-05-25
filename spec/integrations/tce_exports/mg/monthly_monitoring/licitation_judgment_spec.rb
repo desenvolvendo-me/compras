@@ -20,17 +20,36 @@ describe TceExport::MG::MonthlyMonitoring::LicitationJudgmentGenerator do
       FactoryGirl.create(:monthly_monitoring,
         prefecture: prefecture,
         year: 2013,
+        month: 5,
         city_code: "51234")
     end
 
     it "generates a CSV file with the required data" do
       FactoryGirl.create(:extended_prefecture, prefecture: prefecture)
 
-      item = PurchaseProcessItem.make!(:item_arame_farpado)
-      PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado, item: item)
+      creditor = Creditor.make!(:wenderson_sa)
+
+      bidder = Bidder.make(:licitante, creditor: creditor)
+
+      licitation_process = LicitationProcess.make(:pregao_presencial,
+        bidders: [bidder])
+
+      item = PurchaseProcessItem.make(:item_arame_farpado)
+
+      proposal = PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado,
+        licitation_process: licitation_process,
+        item: item)
 
       item_2 = PurchaseProcessItem.make!(:item_arame)
-      PurchaseProcessCreditorProposal.make!(:proposta_arame, item: item_2)
+
+      PurchaseProcessCreditorProposal.make!(:proposta_arame,
+        licitation_process: licitation_process,
+        item: item_2)
+
+      LicitationProcessRatification.make!(:processo_licitatorio_computador,
+        licitation_process: bidder.licitation_process,
+        bidder: bidder,
+        ratification_date: Date.new(2013, 5, 23))
 
       described_class.generate_file(monthly_monitoring)
 

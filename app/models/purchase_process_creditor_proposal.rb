@@ -9,6 +9,8 @@ class PurchaseProcessCreditorProposal < Compras::Model
   has_one :judgment_form, through: :licitation_process
   has_one :material, through: :item
 
+  has_one :licitation_process_ratifications, through: :licitation_process
+
   delegate :code, :description, :reference_unit,
     to: :material, prefix: true, allow_nil: true
   delegate :lot, :additional_information, :quantity,
@@ -41,6 +43,14 @@ class PurchaseProcessCreditorProposal < Compras::Model
   }
 
   scope :winning_proposals, where { ranking.eq 1 }.order { creditor_id }
+
+  scope :by_ratification_month_and_year, lambda { |month, year|
+    joins { licitation_process_ratifications }.
+    where(%{
+      extract(month from compras_licitation_process_ratifications.ratification_date) = ? AND
+      extract(year from compras_licitation_process_ratifications.ratification_date) = ?},
+      month, year)
+  }
 
   orderize
   filterize
