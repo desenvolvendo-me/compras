@@ -2,25 +2,25 @@
 class LicitationProcessRatification < Compras::Model
   include Signable
 
-  attr_accessible :adjudication_date, :ratification_date, :licitation_process_id, :bidder_id,
+  attr_accessible :adjudication_date, :ratification_date, :licitation_process_id, :creditor_id,
                   :licitation_process_ratification_items_attributes
 
   attr_modal :sequence, :licitation_process_id, :ratification_date, :adjudication_date
 
   belongs_to :licitation_process
-  belongs_to :bidder
+  belongs_to :creditor
 
   has_many :licitation_process_ratification_items, :dependent => :destroy
   has_many :creditor_proposals, :through => :licitation_process
 
   accepts_nested_attributes_for :licitation_process_ratification_items, :allow_destroy => true
 
-  delegate :process, :modality_humanize, :description,
+  delegate :process, :modality_humanize, :description, :licitation?,
            :to => :licitation_process, :prefix => true, :allow_nil => true
 
-  validates :licitation_process, :bidder, :presence => true
+  validates :licitation_process, :creditor, :presence => true
   validates :adjudication_date, :ratification_date, :presence => true
-  validate :bidder_belongs_to_licitation_process, :if => :bidder
+  validate :creditor_belongs_to_licitation_process, :if => :creditor
 
   auto_increment :sequence, :by => :licitation_process_id
 
@@ -31,11 +31,12 @@ class LicitationProcessRatification < Compras::Model
     "#{sequence} - Processo de Compra #{licitation_process.to_s}"
   end
 
-  def bidder_belongs_to_licitation_process
-    if bidder.licitation_process != licitation_process
-      errors.add(:bidder,
+  def creditor_belongs_to_licitation_process
+    unless licitation_process.creditors.include?(creditor)
+      errors.add(:creditor,
                  :should_belongs_to_licitation_process,
-                 :licitation_process => licitation_process)
+                 :licitation_process => licitation_process,
+                 :creditor => creditor.to_s)
     end
   end
 

@@ -47,6 +47,7 @@ class Creditor < Compras::Model
   has_many :purchase_process_items, :dependent => :restrict
   has_many :purchase_process_creditor_proposals, dependent: :restrict
   has_many :proposal_disqualifications, class_name: 'PurchaseProcessCreditorDisqualification', dependent: :restrict
+  has_many :licitation_process_ratifications, dependent: :restrict
 
   has_one :user, :as => :authenticable
 
@@ -83,7 +84,7 @@ class Creditor < Compras::Model
 
   before_save :clean_fields_when_is_no_autonomous
 
-  orderize :name, :on => :person
+  orderize :name, on: :person
   filterize
 
   scope :term, lambda { |q|
@@ -93,6 +94,36 @@ class Creditor < Compras::Model
 
   scope :by_id, lambda { |id|
     where { |creditor| creditor.id.eq(id) }
+  }
+
+  scope :without_direct_purchase_ratification, lambda { |licitation_process_id|
+    select { 'compras_creditors.*, unico_people.name' }.
+    joins { purchase_process_items.licitation_process.licitation_process_ratifications.outer }.
+    joins { person }.
+    where {
+      purchase_process_items.licitation_process_id.eq(licitation_process_id) &
+      purchase_process_items.licitation_process.licitation_process_ratifications.id.eq(nil)
+    }.uniq
+  }
+
+  scope :without_licitation_ratification, lambda { |licitation_process_id|
+    select { 'compras_creditors.*, unico_people.name' }.
+    joins { bidders.licitation_process.licitation_process_ratifications.outer }.
+    joins { person }.
+    where {
+      bidders.licitation_process_id.eq(licitation_process_id) &
+      bidders.licitation_process.licitation_process_ratifications.id.eq(nil)
+    }.uniq
+  }
+
+  scope :won_calculation, lambda { |licitation_process_id|
+    joins { bidders.licitation_process.creditor_proposals }.
+    where { |query|
+      query.bidders.licitation_process.creditor_proposals.licitation_process_id.eq(licitation_process_id) &
+      query.bidders.licitation_process.creditor_proposals.ranking.eq(1)
+    }.
+    where { '"compras_creditors".id = "compras_purchase_process_creditor_proposals".creditor_id' }.
+    uniq
   }
 
   def self.filter(params)

@@ -1,6 +1,5 @@
 class BiddersController < CrudController
   has_scope :won_calculation, :type => :boolean
-  has_scope :without_ratification, :type => :boolean
 
   before_filter :block_not_allow_bidders, :only => [ :new, :create, :update, :destroy ]
   before_filter :block_changes_when_have_ratifications, :only => [:create, :update, :destroy]

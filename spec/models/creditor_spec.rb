@@ -54,6 +54,7 @@ describe Creditor do
   it { should have_many(:purchase_process_items).dependent(:restrict) }
   it { should have_many(:purchase_process_creditor_proposals).dependent(:restrict) }
   it { should have_many(:proposal_disqualifications).dependent(:restrict) }
+  it { should have_many(:licitation_process_ratifications).dependent(:restrict) }
 
   it { should validate_presence_of :person }
   it { should validate_duplication_of(:document_type_id).on(:documents) }

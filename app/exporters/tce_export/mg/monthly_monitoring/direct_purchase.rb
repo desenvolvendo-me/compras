@@ -14,7 +14,7 @@ module TceExport::MG
           {
             tipo_registro: 14,
             cod_orgao_resp: monthly_monitoring.organ_code,
-            cod_unidade_sub_resp: process.execution_unit_responsible,
+            cod_unidade_sub_resp: budget_structure_code(process.execution_unit_responsible),
             exercicio_processo: process.year,
             nro_processo: process.process,
             tipo_processo: type_of_removal(process),
@@ -46,6 +46,10 @@ module TceExport::MG
 
       def query
         process.items
+      end
+
+      def budget_structure_code(budget)
+        Formatters::BudgetStructureCodeFormatter.new(monthly_monitoring.organ_code, budget)
       end
 
       def type_of_removal(process)
@@ -95,7 +99,7 @@ module TceExport::MG
           {
             tipo_registro: 13,
             cod_orgao_resp: monthly_monitoring.organ_code,
-            cod_unidade_sub_resp: process.execution_unit_responsible,
+            cod_unidade_sub_resp: execution_unit_responsible_code(process.execution_unit_responsible),
             exercicio_processo: process.year,
             nro_processo: process.process,
             tipo_processo: type_of_removal(process),
@@ -119,6 +123,10 @@ module TceExport::MG
 
       def query
         process.budget_allocation_capabilities.uniq
+      end
+
+      def execution_unit_responsible_code(budget)
+        Formatters::BudgetStructureCodeFormatter.new(monthly_monitoring.organ_code, budget)
       end
 
       def type_of_removal(process)
@@ -151,7 +159,7 @@ module TceExport::MG
           {
             tipo_registro: 12,
             cod_orgao_resp: monthly_monitoring.organ_code,
-            cod_unidade_sub_resp: process.execution_unit_responsible,
+            cod_unidade_sub_resp: budget_structure_code(process.execution_unit_responsible),
             exercicio_processo: process.year,
             nro_processo: process.process,
             tipo_processo: type_of_removal(process),
@@ -169,6 +177,10 @@ module TceExport::MG
 
       def query
         process.items
+      end
+
+      def budget_structure_code(budget)
+        Formatters::BudgetStructureCodeFormatter.new(monthly_monitoring.organ_code, budget)
       end
 
       def type_of_removal(process)
@@ -191,7 +203,7 @@ module TceExport::MG
           {
             tipo_registro: 11,
             cod_orgao_resp: monthly_monitoring.organ_code,
-            cod_unidade_sub_resp: process.execution_unit_responsible,
+            cod_unidade_sub_resp: budget_structure_code(process.execution_unit_responsible),
             exercicio_processo: process.year,
             nro_processo: process.process,
             tipo_processo: type_of_removal(process),
@@ -215,6 +227,10 @@ module TceExport::MG
 
       def query
         process.process_responsibles
+      end
+
+      def budget_structure_code(budget)
+        Formatters::BudgetStructureCodeFormatter.new(monthly_monitoring.organ_code, budget)
       end
 
       def type_of_removal(process)
@@ -251,7 +267,7 @@ module TceExport::MG
           {
             tipo_registro: 10,
             cod_orgao_resp: monthly_monitoring.organ_code,
-            cod_unidade_sub_resp: process.execution_unit_responsible,
+            cod_unidade_sub_resp: budget_structure_code(process.execution_unit_responsible),
             exercicio_processo: process.year,
             nro_processo: process.process,
             tipo_processo: type_of_removal(process),
@@ -275,6 +291,10 @@ module TceExport::MG
       def query
         LicitationProcess.direct_purchase.
           by_ratification_month_and_year(monthly_monitoring.month, monthly_monitoring.year)
+      end
+
+      def budget_structure_code(budget)
+        Formatters::BudgetStructureCodeFormatter.new(monthly_monitoring.organ_code, budget)
       end
 
       def creditors(process)

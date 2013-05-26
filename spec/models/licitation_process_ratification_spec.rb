@@ -18,23 +18,23 @@ describe LicitationProcessRatification do
   it { should validate_presence_of :licitation_process }
   it { should validate_presence_of :ratification_date }
   it { should validate_presence_of :adjudication_date }
-  it { should validate_presence_of :bidder }
+  it { should validate_presence_of :creditor }
 
   it { should delegate(:process).to(:licitation_process).allowing_nil(true).prefix(true) }
   it { should delegate(:modality_humanize).to(:licitation_process).allowing_nil(true).prefix(true) }
   it { should delegate(:description).to(:licitation_process).allowing_nil(true).prefix(true) }
 
-  context 'bidder should belongs to licitation process' do
-    let :bidder_with_licitation_process do
-      double(:licitation_process => licitation_process)
+  context 'creditor should belongs to licitation process' do
+    let :creditor_with_licitation_process do
+      double(:creditor, to_s: 'Credor Geral')
     end
 
-    let :bidder_with_new_licitation_process do
-      double(:licitation_process => double)
+    let :creditor_with_new_licitation_process do
+      double(:licitation_process => double, to_s: 'Credor Geral')
     end
 
     let :licitation_process do
-      double(:to_s => '1/2012')
+      double(:to_s => '1/2012', creditors: [creditor_with_licitation_process])
     end
 
     before do
@@ -42,19 +42,19 @@ describe LicitationProcessRatification do
     end
 
     it 'should be valid' do
-      subject.stub(:bidder => bidder_with_licitation_process)
+      subject.stub(:creditor => creditor_with_licitation_process)
 
       subject.valid?
 
-      expect(subject.errors[:bidder]).to be_empty
+      expect(subject.errors[:creditor]).to be_empty
     end
 
     it 'should be invalid' do
-      subject.stub(:bidder => bidder_with_new_licitation_process)
+      subject.stub(:creditor => creditor_with_new_licitation_process)
 
       subject.valid?
 
-      expect(subject.errors[:bidder]).to include "deve pertencer ao processo de compra 1/2012"
+      expect(subject.errors[:creditor]).to include "Credor Geral não pertence ao processo de compra 1/2012"
     end
   end
 end

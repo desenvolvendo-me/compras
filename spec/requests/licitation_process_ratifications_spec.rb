@@ -28,9 +28,6 @@ feature "LicitationProcessRatifications" do
     expect(page).to have_disabled_field 'Processo de compra'
 
     within_modal 'Participante vencedor' do
-      expect(page).to have_field 'Processo de compra', :with => '2/2013 - Concorrência 1'
-      expect(page).to have_disabled_field 'Processo de compra'
-
       click_button 'Pesquisar'
       click_record 'Gabriel Sobrinho'
     end
@@ -116,9 +113,6 @@ feature "LicitationProcessRatifications" do
     fill_modal 'Processo de compra', :with => '2013', :field => 'Ano'
 
     within_modal 'Participante vencedor' do
-      expect(page).to have_field 'Processo de compra', :with => '2/2013 - Concorrência 1'
-      expect(page).to have_disabled_field 'Processo de compra'
-
       click_button 'Pesquisar'
       click_record 'Gabriel Sobrinho'
     end
