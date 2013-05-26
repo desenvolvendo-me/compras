@@ -15,7 +15,7 @@ module TceExport::MG
           {
             tipo_registro: 13,
             cod_orgao_resp: monthly_monitoring.organ_code,
-            cod_unidade_sub_resp: purchase.execution_unit_responsible,
+            cod_unidade_sub_resp: execution_unit_responsible_code(purchase.execution_unit_responsible),
             exercicio_licitacao: purchase.year,
             nro_processo_licitatorio: purchase.process,
             cod_orgao: monthly_monitoring.organ_code,
@@ -46,6 +46,12 @@ module TceExport::MG
           budget.budget_structure)
       end
 
+      def execution_unit_responsible_code(budget)
+        Formatters::BudgetStructureCodeFormatter.new(
+          monthly_monitoring.organ_code,
+          budget)
+      end
+
       def item_expenditure(expense_nature)
         expense_nature.split(".")[0..3].join
       end
@@ -62,7 +68,7 @@ module TceExport::MG
           {
             tipo_registro: 11,
             cod_orgao_resp: monthly_monitoring.organ_code,
-            cod_unidade_sub_resp: purchase.execution_unit_responsible,
+            cod_unidade_sub_resp: execution_unit_responsible_code(purchase.execution_unit_responsible),
             exercicio_licitacao: purchase.year,
             nro_processo_licitatorio: purchase.process,
             nro_lote: item.lot,
@@ -85,6 +91,12 @@ module TceExport::MG
         purchase.items
       end
 
+      def execution_unit_responsible_code(budget)
+        Formatters::BudgetStructureCodeFormatter.new(
+          monthly_monitoring.organ_code,
+          budget)
+      end
+
       def disposals_of_assets_value
         return 0.0 if !purchase.disposals_of_assets? && !purchase.auction?
 
@@ -98,7 +110,7 @@ module TceExport::MG
           {
             tipo_registro: 10,
             cod_orgao_resp: monthly_monitoring.organ_code,
-            cod_unidade_sub_resp: purchase.execution_unit_responsible,
+            cod_unidade_sub_resp: execution_unit_responsible_code(purchase.execution_unit_responsible),
             exercicio_licitacao: purchase.year,
             nro_processo_licitatorio: purchase.process,
             cod_modalidade_licitacao: modality(purchase),
@@ -134,6 +146,12 @@ module TceExport::MG
       def query
         LicitationProcess.by_ratification_month_and_year(
           monthly_monitoring.month, monthly_monitoring.year)
+      end
+
+      def execution_unit_responsible_code(budget)
+        Formatters::BudgetStructureCodeFormatter.new(
+          monthly_monitoring.organ_code,
+          budget)
       end
 
       def capabilities(purchase)
