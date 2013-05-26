@@ -79,10 +79,10 @@ describe TceExport::MG::MonthlyMonitoring::ProcessResponsibleGenerator do
       csv = File.read('tmp/RESPLIC.csv', encoding: 'ISO-8859-1')
 
       expect(csv).to eq "10;98;98029;2012;1;2;00315198737;Gabriel Sobrinho;Girassol;São Francisco;1;PR;33400500;3333333333;gabriel.sobrinho@gmail.com\n" +
-                        "10;98;98029;2012;1;2;1;1212;20032012;03012012;09012012;00314951334;Wenderson Malheiros;3;Gerente;1;Girassol;São Francisco;1;PR;33400500;3333333333;wenderson.malheiros@gmail.com\n" +
+                        "20;98;98029;2012;1;2;1;1212;20032012;03012012;09012012;00314951334;Wenderson Malheiros;3;Gerente;1;Girassol;São Francisco;1;PR;33400500;3333333333;wenderson.malheiros@gmail.com\n" +
                         "10;98;98029;2012;1;2;00314951334;Wenderson Malheiros;Girassol;São Francisco;1;PR;33400500;3333333333;wenderson.malheiros@gmail.com\n" +
-                        "10;98;98029;2012;1;1;1;1213;20032012;03012012;09012012;20653801440;Joao da Silva;6;Gerente;1;Girassol;São Francisco;1;PR;33400500;3333333333;joao.da.silva@gmail.com\n" +
-                        "10;98;98029;2012;1;1;1;1213;20032012;03012012;09012012;27056534147;Pedro dos Santos;2;Gerente;1;Girassol;São Francisco;1;PR;33400500;3333333333;pedro.dos.santos@gmail.com"
+                        "20;98;98029;2012;1;1;1;1213;20032012;03012012;09012012;20653801440;Joao da Silva;6;Gerente;1;Girassol;São Francisco;1;PR;33400500;3333333333;joao.da.silva@gmail.com\n" +
+                        "20;98;98029;2012;1;1;1;1213;20032012;03012012;09012012;27056534147;Pedro dos Santos;2;Gerente;1;Girassol;São Francisco;1;PR;33400500;3333333333;pedro.dos.santos@gmail.com"
     end
   end
 end

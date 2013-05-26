@@ -10,7 +10,7 @@ module TceExport::MG
       def generate_data
         query.map do |member|
           {
-            tipo_registro: 10,
+            tipo_registro: 20,
             cod_orgao: monthly_monitoring.organ_code,
             cod_unidade_sub: budget_structure_code(responsible.execution_unit_responsible),
             exercicio_licitacao: responsible.licitation_process_year,
