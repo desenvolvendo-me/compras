@@ -3,7 +3,7 @@ class PurchaseProcessItemDecorator
   include Decore::Proxy
   include ActionView::Helpers::NumberHelper
 
-  def total_price
+  def estimated_total_price
     number_to_currency super if super
   end
 

@@ -2,24 +2,24 @@ require 'decorator_helper'
 require 'app/decorators/purchase_process_item_decorator'
 
 describe PurchaseProcessItemDecorator do
-  context '#total_price' do
-    context 'when do not have total_price' do
+  context '#estimated_total_price' do
+    context 'when do not have estimated_total_price' do
       before do
-        component.stub(:total_price).and_return(nil)
+        component.stub(:estimated_total_price).and_return(nil)
       end
 
       it 'should be nil' do
-        expect(subject.total_price).to be_nil
+        expect(subject.estimated_total_price).to be_nil
       end
     end
 
-    context 'when have total_price' do
+    context 'when have estimated_total_price' do
       before do
-        component.stub(:total_price).and_return(9.99)
+        component.stub(:estimated_total_price).and_return(9.99)
       end
 
       it 'should applies precision' do
-        expect(subject.total_price).to eq 'R$ 9,99'
+        expect(subject.estimated_total_price).to eq 'R$ 9,99'
       end
     end
   end
