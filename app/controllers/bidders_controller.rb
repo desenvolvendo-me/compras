@@ -59,19 +59,11 @@ class BiddersController < CrudController
   end
 
   def create_resource(object)
-    return unless object.envelope_opening?
-
     object.transaction do
       if super
         PurchaseProcessStatusChanger.new(object.licitation_process).in_progress!
       end
     end
-  end
-
-  def update_resource(object, attributes)
-    return unless object.envelope_opening?
-
-    super
   end
 
   def block_not_allow_bidders

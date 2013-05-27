@@ -283,14 +283,6 @@ feature "Bidders" do
     expect(page).to have_button 'Salvar'
   end
 
-  scenario 'create bidder link does not show when envelope opening date is not today' do
-    licitation_process = LicitationProcess.make!(:processo_licitatorio)
-
-    visit bidders_path(:licitation_process_id => licitation_process.id)
-
-    expect(page).to_not have_link 'Criar Licitante'
-  end
-
   scenario "index should have title Licitantes do Processo de Compra 1/2013" do
     LicitationProcess.make!(:processo_licitatorio_computador)
 

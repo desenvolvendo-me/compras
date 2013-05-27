@@ -71,16 +71,6 @@ describe BiddersController do
   end
 
   describe 'PUT update ' do
-    it 'should not save when envelope opening date is not today' do
-      licitation_process = LicitationProcess.make!(:processo_licitatorio_fornecedores)
-      licitation_process.update_attributes(:proposal_envelope_opening_date => Date.tomorrow)
-      bidder = licitation_process.bidders.first
-
-      Bidder.any_instance.should_receive(:save).never
-
-      put :update, :id => bidder.id, :licitation_process_id => licitation_process.id
-    end
-
     it 'should save when envelope opening date is today' do
       licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
       bidder = licitation_process.bidders.first
