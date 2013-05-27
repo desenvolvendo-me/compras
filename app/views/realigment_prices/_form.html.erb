@@ -16,16 +16,20 @@
       <div class="yui3-u-1-4">
         <%= r.input :purchase_process_item, disabled: true %>
       </div>
+
       <div class="yui3-u-1-4">
         <%= r.input :brand %>
       </div>
+
       <div class="yui3-u-1-4 quantity">
         <%= r.input :quantity, input_html: { class: 'quantity'} %>
       </div>
+
       <div class="yui3-u-1-4 price">
         <%= r.input :price, input_html: { value: r.object.decorator.price_with_precision } %>
       </div>
     </div>
+
     <div class="yui3-g">
       <div class="yui3-u-1-2">
         <%= r.input :delivery_date, input_html: { value: r.object.localized.delivery_date } %>
@@ -37,6 +41,7 @@
 <script>
 
 calculated_difference_price();
+
 function calculated_difference_price(){
   var totalValueInput      = $("div#total_value").find('input'),
       differenceValueInput = $("div#difference_value").find('input'),
@@ -47,6 +52,7 @@ function calculated_difference_price(){
     quantity = $(this).prev('.quantity').find('input').val();
     totalDifferenceValue += parsePtBrFloat($(this).find('input').val()) * quantity;
   });
+
   totalValue = parsePtBrFloat(totalValueInput.val());
   differenceValue = totalValue - totalDifferenceValue;
   differenceValueInput.val(numberWithDelimiter(differenceValue));

@@ -71,7 +71,7 @@ class LicitationProcessDecorator
         return false
       end
     end
-    (judgment_form.global? || judgment_form.lot?)
+    licitation? && (judgment_form.global? || judgment_form.lot?)
   end
 
   def code_and_year

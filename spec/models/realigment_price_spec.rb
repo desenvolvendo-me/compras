@@ -6,4 +6,5 @@ describe RealigmentPrice do
   it { should validate_presence_of :price }
 
   it { should belong_to :purchase_process_item }
+  it { should belong_to(:proposal).class_name('PurchaseProcessCreditorProposal') }
 end
