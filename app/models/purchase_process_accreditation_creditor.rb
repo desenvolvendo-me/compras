@@ -28,7 +28,10 @@ class PurchaseProcessAccreditationCreditor < Compras::Model
 
   scope :by_lowest_proposal, lambda { |item_id|
     joins { creditor.purchase_process_creditor_proposals }.
-    where { creditor.purchase_process_creditor_proposals.purchase_process_item_id.eq(item_id) }.
+    where {
+      creditor.purchase_process_creditor_proposals.purchase_process_item_id.eq(item_id) &
+      creditor.purchase_process_creditor_proposals.disqualified.eq(false)
+    }.
     order('has_power_of_attorney DESC, compras_purchase_process_creditor_proposals.unit_price DESC')
   }
 
