@@ -570,6 +570,10 @@ feature "LicitationProcesses" do
 
     click_link 'Criar Processo de Compra'
 
+    within_tab 'Principal' do
+      choose 'Processo licitatório'
+    end
+
     within_tab 'Itens' do
       fill_in 'Quantidade', :with => '5'
       fill_in 'Valor unitário máximo', :with => '10,00'
@@ -1219,11 +1223,21 @@ feature "LicitationProcesses" do
 
       expect(page).to have_field 'Registro de preço'
       expect(page).to have_field 'Pregão eletrônico'
+    end
 
+    within_tab 'Itens' do
+      expect(page).to have_content 'Valor unitário máximo'
+    end
+
+    within_tab 'Principal' do
       choose 'Compra direta'
 
       expect(page).to_not have_field 'Registro de preço'
       expect(page).to_not have_field 'Pregão eletrônico'
+    end
+
+    within_tab 'Itens / Justificativa' do
+      expect(page).to have_content 'Valor unitário'
     end
   end
 
@@ -1463,7 +1477,7 @@ feature "LicitationProcesses" do
 
       fill_in 'Quantidade', :with => '2'
 
-      fill_in 'Valor unitário máximo', :with => '50'
+      fill_in 'Valor unitário', :with => '50'
 
       click_button 'Adicionar'
 
