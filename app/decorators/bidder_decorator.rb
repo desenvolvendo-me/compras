@@ -6,7 +6,7 @@ class BidderDecorator
   include ActionView::Helpers::NumberHelper
   include ActionView::Helpers::TranslationHelper
 
-  attr_header :creditor
+  attr_header :creditor, :enabled
 
   def process_date
     localize component.licitation_process_process_date if component.licitation_process_process_date
