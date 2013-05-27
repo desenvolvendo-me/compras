@@ -22,7 +22,6 @@ describe Material do
   end
 
   it { should belong_to :expense_nature }
-  it { should have_and_belong_to_many :licitation_objects }
   it { should have_many(:purchase_process_items).dependent(:restrict) }
   it { should have_many(:purchase_solicitation_items).dependent(:restrict) }
   it { should have_many(:price_collection_lot_items).dependent(:restrict) }
@@ -46,20 +45,6 @@ describe Material do
 
   it "should have false as the default value of combustible" do
     expect(subject.combustible).to eq false
-  end
-
-  context "with licitation_object" do
-    let :licitation_objects do
-      [ double('licitation_object') ]
-    end
-
-    it "should not destroy if has licitation_processes" do
-      subject.stub(:licitation_objects => licitation_objects)
-
-      subject.run_callbacks(:destroy)
-
-      expect(subject.errors[:base]).to include "Este registro não pôde ser apagado pois há outros cadastros que dependem dele"
-    end
   end
 
   it "should destroy if does not have licitation_processes" do

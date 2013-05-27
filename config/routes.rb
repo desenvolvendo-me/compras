@@ -400,13 +400,6 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :licitation_objects do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
   resources :licitation_process_appeals do
     collection do
       get :filter

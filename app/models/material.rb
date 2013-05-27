@@ -13,8 +13,6 @@ class Material < Compras::Model
   belongs_to :reference_unit
   belongs_to :expense_nature
 
-  has_and_belongs_to_many :licitation_objects, :join_table => :compras_licitation_objects_compras_materials
-
   has_many :purchase_process_items, :dependent => :restrict
   has_many :purchase_solicitation_items, :dependent => :restrict
   has_many :price_collection_lot_items, :dependent => :restrict
@@ -27,14 +25,8 @@ class Material < Compras::Model
   validates :code, :description, :presence => true, :uniqueness => { :allow_blank => true }
   validates :control_amount, :inclusion => { :in => [true, false] }
 
-  before_destroy :validate_licitation_object_relationship
-
   orderize :description
   filterize
-
-  scope :licitation_object_id, lambda { |licitation_object_id|
-    joins(:licitation_objects).where { licitation_objects.id.eq(licitation_object_id) }
-  }
 
   scope :by_material_type, lambda { |material_type|
     where { |material| material.material_type.eq(material_type) }
@@ -74,15 +66,5 @@ class Material < Compras::Model
     return '' unless material_class.present?
 
     material_class.to_s
-  end
-
-  protected
-
-  def validate_licitation_object_relationship
-    return unless licitation_objects.any?
-
-    errors.add(:base, :cant_be_destroyed)
-
-    false
   end
 end
