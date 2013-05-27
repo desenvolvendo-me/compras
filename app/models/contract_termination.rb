@@ -1,6 +1,7 @@
 class ContractTermination < Compras::Model
-  attr_accessible :expiry_date, :number, :reason, :termination_date, :year, :publication_date, :contract_id
-  attr_accessible :dissemination_source_id, :fine_value, :compensation_value, :term_termination_file
+  attr_accessible :expiry_date, :number, :reason, :termination_date, :year,
+    :publication_date, :contract_id, :dissemination_source_id, :fine_value,
+    :compensation_value, :term_termination_file, :termination_value
 
   attr_readonly :number
 

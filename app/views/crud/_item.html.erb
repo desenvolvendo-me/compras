@@ -1,0 +1,14 @@
+<tr class="record" id="<%= f.sanitized_object_name %>_<%= singular %>_record_<%= id %>">
+  <% columns.each do |column| %>
+    <% if column == link_by %>
+      <td><%= link_to attributes[column], send("edit_#{singular}_path", id).gsub('%7B', '{').gsub('%7D', '}'), :target => :_blank %></td>
+    <% else %>
+      <td><%= attributes[column] %></td>
+    <% end %>
+  <% end %>
+
+  <td>
+    <input type="hidden" name="<%= f.sanitized_object_name %>[<%= singular %>_ids][]" value="<%= id %>">
+    <button class="button negative modal-finder-remove">Remover</button>
+  </td>
+</tr>

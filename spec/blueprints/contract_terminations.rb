@@ -9,4 +9,5 @@ ContractTermination.blueprint(:contrato_rescindido) do
   dissemination_source { DisseminationSource.make!(:jornal_bairro) }
   fine_value { 15000.0 }
   compensation_value { 3000.0 }
+  termination_value { 1500.0 }
 end

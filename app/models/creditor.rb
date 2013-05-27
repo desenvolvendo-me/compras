@@ -51,6 +51,8 @@ class Creditor < Compras::Model
 
   has_one :user, :as => :authenticable
 
+  has_and_belongs_to_many :contracts, join_table: :compras_contracts_creditors
+
   delegate :personable_type, :cnpj, :state_registration, :responsible,
            :identity_document, :company?, :phone, :fax, :benefited, :address,
            :city, :zip_code, :company_size, :choose_simple, :legal_nature,
@@ -150,6 +152,10 @@ class Creditor < Compras::Model
 
   def proposal_by_item(item)
     purchase_process_creditor_proposals.by_item_id(item.id).first
+  end
+
+  def first_representative_individual
+    representative_people.joins { personable(Individual) }.first
   end
 
   protected

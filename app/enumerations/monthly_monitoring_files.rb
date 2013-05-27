@@ -1,6 +1,7 @@
 class MonthlyMonitoringFiles < EnumerateIt::Base
   associate_values(
     :bidding_authorization,
+    :contract,
     :direct_purchase,
     :legal_analysis_appraisal,
     :licitation_judgment,

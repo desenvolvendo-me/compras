@@ -17,6 +17,7 @@ pt-BR:
         fine_value: 'Valor da multa'
         compensation_value: 'Valor da indenização'
         term_termination_file: 'Termo de rescisão'
+        termination_value: 'Valor recisão'
 
   contract_termination:
     messages:
