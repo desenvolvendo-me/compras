@@ -12,14 +12,26 @@ class TradingBidCreator
   end
 
   def create!
-    return unless allow_creation?
+    if clear_bids_before_creation?
+      clear_bids
+    end
 
-    available_accreditation_creditors.each do |creditor|
-      create_bid(creditor)
+    if allow_creation?
+      available_accreditation_creditors.each do |creditor|
+        create_bid(creditor)
+      end
     end
   end
 
   private
+
+  def clear_bids_before_creation?
+    bids.not_without_proposal.empty?
+  end
+
+  def clear_bids
+    bids.destroy_all
+  end
 
   def allow_creation?
     bids.empty? || all_creditors_gave_a_bid_for_last_round?

@@ -19,6 +19,7 @@ describe TradingBidCreator do
   context 'when bids are empty' do
     before do
       bids.stub(empty?: true)
+      subject.stub(clear_bids_before_creation?: false)
     end
 
     it 'should create bids for creditors' do
@@ -43,6 +44,7 @@ describe TradingBidCreator do
     context 'when not all bidders gave a bid for current round' do
       before do
         subject.stub(creditors_without_bid_for_last_round: [creditor])
+        subject.stub(clear_bids_before_creation?: false)
       end
 
       it 'should do nothing' do
@@ -55,9 +57,12 @@ describe TradingBidCreator do
     context 'when all bidders gave a bid for current round' do
       before do
         subject.stub(creditors_without_bid_for_last_round: [])
+        subject.stub(clear_bids_before_creation?: true)
       end
 
       it 'should create bids for next round' do
+        subject.should_receive(:clear_bids)
+
         creditor2 = double(:creditor2, id: 34)
 
         subject.stub(last_round: 1)
