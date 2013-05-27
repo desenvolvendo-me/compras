@@ -24,49 +24,90 @@ describe TceExport::MG::MonthlyMonitoring::LicitationJudgmentGenerator do
         city_code: "51234")
     end
 
-    it "generates a CSV file with the required data" do
-      FactoryGirl.create(:extended_prefecture, prefecture: prefecture)
+    context 'with creditor proposals' do
+      it "generates a CSV file with the required data" do
+        FactoryGirl.create(:extended_prefecture, prefecture: prefecture)
 
-      creditor = Creditor.make!(:wenderson_sa)
+        creditor = Creditor.make!(:wenderson_sa)
 
-      bidder = Bidder.make(:licitante, creditor: creditor)
+        bidder = Bidder.make(:licitante, creditor: creditor)
 
-      licitation_process = LicitationProcess.make(:pregao_presencial,
-        bidders: [bidder])
+        licitation_process = LicitationProcess.make(:pregao_presencial,
+          bidders: [bidder])
 
-      PurchaseProcessAccreditation.make!(:general_accreditation,
-        licitation_process: licitation_process)
+        PurchaseProcessAccreditation.make!(:general_accreditation,
+          licitation_process: licitation_process)
 
-      item = PurchaseProcessItem.make(:item_arame_farpado)
+        item = PurchaseProcessItem.make(:item_arame_farpado)
 
-      proposal = PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado,
-        licitation_process: licitation_process,
-        item: item)
+        proposal = PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado,
+          licitation_process: licitation_process,
+          item: item)
 
-      item_2 = PurchaseProcessItem.make!(:item_arame)
+        item_2 = PurchaseProcessItem.make!(:item_arame)
 
-      PurchaseProcessCreditorProposal.make!(:proposta_arame,
-        licitation_process: licitation_process,
-        item: item_2)
+        PurchaseProcessCreditorProposal.make!(:proposta_arame,
+          licitation_process: licitation_process,
+          item: item_2)
 
-      LicitationProcessRatification.make!(:processo_licitatorio_computador,
-        licitation_process: bidder.licitation_process,
-        creditor: bidder.creditor,
-        ratification_date: Date.new(2013, 5, 23))
+        LicitationProcessRatification.make!(:processo_licitatorio_computador,
+          licitation_process: bidder.licitation_process,
+          creditor: bidder.creditor,
+          ratification_date: Date.new(2013, 5, 23))
 
-      described_class.generate_file(monthly_monitoring)
+        described_class.generate_file(monthly_monitoring)
 
-      current_date = Date.current.strftime('%d%m%Y')
+        current_date = Date.current.strftime('%d%m%Y')
 
-      csv = File.read('tmp/JULGLIC.csv', encoding: 'ISO-8859-1')
+        csv = File.read('tmp/JULGLIC.csv', encoding: 'ISO-8859-1')
 
-      reg_10_1 = "10;98;98029;2012;1;1;00315198737; ;#{item.id};02.02.00001 - Arame farpado;4,9900;1,0000;UN"
-      reg_30_1 = "30;98;98029;2012;1;#{current_date};2;2"
+        reg_10_1 = "10;98;98029;2012;1;1;00315198737; ;#{item.id};02.02.00001 - Arame farpado;4,9900;1,0000;UN"
+        reg_30_1 = "30;98;98029;2012;1;#{current_date};2;2"
 
-      reg_10_2 = "10;98;98029;2012;1;1;00315198737; ;#{item_2.id};02.02.00002 - Arame comum;2,9900;1,0000;UN"
-      reg_30_2 = "30;98;98029;2012;1;#{current_date};2;2"
+        reg_10_2 = "10;98;98029;2012;1;1;00315198737; ;#{item_2.id};02.02.00002 - Arame comum;2,9900;1,0000;UN"
+        reg_30_2 = "30;98;98029;2012;1;#{current_date};2;2"
 
-      expect(csv).to eq [reg_10_1, reg_30_1, reg_10_2, reg_30_2].join("\n")
+        expect(csv).to eq [reg_10_1, reg_30_1, reg_10_2, reg_30_2].join("\n")
+      end
+    end
+
+    context "with price realigment" do
+      it "generates a CSV file with realigment_prices data" do
+        FactoryGirl.create(:extended_prefecture, prefecture: prefecture)
+
+        creditor = Creditor.make!(:wenderson_sa)
+
+        bidder = Bidder.make!(:licitante, creditor: creditor)
+
+        licitation_process = LicitationProcess.make!(:pregao_presencial,
+          bidders: [bidder], judgment_form: JudgmentForm.make!(:global_com_menor_preco))
+
+        PurchaseProcessAccreditation.make!(:general_accreditation,
+          licitation_process: licitation_process)
+
+        item = PurchaseProcessItem.make!(:item_arame_farpado)
+
+        proposal = PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado,
+          licitation_process: licitation_process, unit_price: 9.99)
+
+        LicitationProcessRatification.make!(:processo_licitatorio_computador,
+          licitation_process: bidder.licitation_process,
+          creditor: bidder.creditor,
+          ratification_date: Date.new(2013, 5, 23))
+
+        RealigmentPrice.make!(:realinhamento, proposal: proposal, item: item)
+
+        described_class.generate_file(monthly_monitoring)
+
+        current_date = Date.current.strftime('%d%m%Y')
+
+        csv = File.read('tmp/JULGLIC.csv', encoding: 'ISO-8859-1')
+
+        reg_10_1 = "10;98;98029;2012;1;1;00315198737; ;#{item.id};02.02.00001 - Arame farpado;9,9900;1,0000;UN"
+        reg_30_1 = "30;98;98029;2012;1;#{current_date};2;2"
+
+        expect(csv).to eq [reg_10_1, reg_30_1].join("\n")
+      end
     end
   end
 end

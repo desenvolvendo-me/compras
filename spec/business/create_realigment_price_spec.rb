@@ -26,9 +26,9 @@ describe CreateRealigmentPrice do
         repository.stub(:items).and_return items
         repository.stub(:realigment_prices).and_return realignment_prices
 
-        realignment_prices.should_receive(:build).with(purchase_process_item: item_one, brand: "", price: 0.0, quantity: 0, delivery_date: "")
-        realignment_prices.should_receive(:build).with(purchase_process_item: item_two, brand: "", price: 0.0, quantity: 0, delivery_date: "")
-        realignment_prices.should_receive(:build).with(purchase_process_item: item_three, brand: "", price: 0.0, quantity: 0, delivery_date: "")
+        realignment_prices.should_receive(:build).with(item: item_one, brand: "", price: 0.0, quantity: 0, delivery_date: "")
+        realignment_prices.should_receive(:build).with(item: item_two, brand: "", price: 0.0, quantity: 0, delivery_date: "")
+        realignment_prices.should_receive(:build).with(item: item_three, brand: "", price: 0.0, quantity: 0, delivery_date: "")
 
         subject.create_realigment_price!
       end

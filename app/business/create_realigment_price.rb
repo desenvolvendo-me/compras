@@ -13,7 +13,7 @@ class CreateRealigmentPrice
   def create_realigment_price!
     if realignment_prices.empty?
       items.each do |item|
-        realignment_prices.build(purchase_process_item: item, price: 0.00, brand: "", quantity: 0, delivery_date: "")
+        realignment_prices.build(item: item, price: 0.00, brand: "", quantity: 0, delivery_date: "")
       end
     end
   end

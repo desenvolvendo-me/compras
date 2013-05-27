@@ -11,10 +11,10 @@
 </div>
 
 <%= f.association :realigment_prices do |r| %>
-  <div class="nested nested-realignment_prices <%= r.object.purchase_process_item.description.parameterize %>">
+  <div class="nested nested-realignment_prices <%= r.object.item.description.parameterize %>">
     <div class="yui3-g">
       <div class="yui3-u-1-4">
-        <%= r.input :purchase_process_item, disabled: true %>
+        <%= r.input :item, disabled: true %>
       </div>
 
       <div class="yui3-u-1-4">
