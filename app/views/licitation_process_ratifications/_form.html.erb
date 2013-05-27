@@ -8,7 +8,7 @@
   </div>
 
   <div class="yui3-u-1-3">
-    <%= f.input :bidder, :disabled => true %>
+    <%= f.input :creditor, :disabled => true %>
   </div>
 </div>
 
@@ -68,15 +68,15 @@
     });
   }
 
-  $('#licitation_process_ratification_bidder_id').change(function (event, bidder) {
+  $('#licitation_process_ratification_creditor_id').change(function (event, creditor) {
     clearExistingItems();
 
-    if (bidder) {
+    if (creditor) {
       var template = $('#item-template'),
           target = $('#ratification_items'),
           item;
 
-      $.each(bidder.proposals, function() {
+      $.each(creditor.proposals, function() {
         item = $('#item-template').mustache({ uuid_item: _.uniqueId('fresh-'),
                                               purchase_process_creditor_proposal_id: this.id,
                                               code: this.code,
@@ -94,18 +94,21 @@
   });
 
   $(function() {
-    var urlModal = "<%= modal_bidders_path %>?",
+    var urlModal = "<%= modal_creditors_path %>?",
         licitationProcessId = $('#licitation_process_ratification_licitation_process_id').val(),
         params = {
-          locked_fields: ['licitation_process'],
-          licitation_process_id: licitationProcessId,
-          won_calculation: true,
-          without_ratification: true
+          <% if resource.licitation_process_licitation? %>
+            won_calculation: licitationProcessId,
+            without_licitation_ratification: licitationProcessId
+          <% else %>
+            without_direct_purchase_ratification: licitationProcessId
+          <% end %>
         };
+
 
     urlModal += jQuery.param(params);
 
-    $("#licitation_process_ratification_bidder").data("modal-url", urlModal).
+    $("#licitation_process_ratification_creditor").data("modal-url", urlModal).
                                                  attr("disabled", false);
 
     $('#licitation_process_ratification_licitation_process').attr('disabled', true);

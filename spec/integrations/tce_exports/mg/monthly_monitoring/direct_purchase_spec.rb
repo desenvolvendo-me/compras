@@ -44,13 +44,11 @@ describe TceExport::MG::MonthlyMonitoring::DirectPurchaseGenerator do
         budget_allocation: budget_allocation)
 
       creditor = Creditor.make!(:wenderson_sa)
-      bidder   = Bidder.make!(:licitante, creditor: creditor)
       item = PurchaseProcessItem.make!(:item, creditor: creditor)
 
       licitation = LicitationProcess.make!(:compra_direta,
         purchase_process_budget_allocations: [purchase_process_budget_allocation],
         items: [item],
-        bidders: [bidder],
         authorization_envelope_opening_date: Date.new(2013, 5, 20))
 
       ProcessResponsible.create!(licitation_process_id: licitation.id,
@@ -63,18 +61,18 @@ describe TceExport::MG::MonthlyMonitoring::DirectPurchaseGenerator do
 
       ratification = LicitationProcessRatification.make!(:processo_licitatorio_computador,
         licitation_process: licitation,
-        bidder: bidder,
+        creditor: creditor,
         ratification_date: Date.new(2013, 5, 23))
 
       described_class.generate_file(monthly_monitoring)
 
       csv = File.read('tmp/DISPENSA.csv', encoding: 'ISO-8859-1')
 
-      expect(csv).to eq "10;98; ;2013;2;1;20032013;2;Licitação para compra de carteiras;Justificativa legal;Justificativa;20042012;Publicacao\n" +
-                        "11;98; ;2013;2;1;2;00315198737;Gabriel Sobrinho;Girassol;São Francisco;1;PR;33400500;3333333333;gabriel.sobrinho@gmail.com\n" + 
-                        "12;98; ;2013;2;1;2050;#{item.id};Antivirus;10,0000\n" +
-                        "13;98; ;2013;2;1;98;98029;04;01;003;003; ;319001;001;50080\n" +
-                        "14;98; ;2013;2;1;1;003.149.513-34;Wenderson Malheiros; ; ; ; ; ; ; ; ; ; ; ;2050;#{item.id};2,0000;10,0000"
+      expect(csv).to eq "10;98;98029;2013;2;1;20032013;2;Licitação para compra de carteiras;Justificativa legal;Justificativa;20042012;Publicacao\n" +
+                        "11;98;98029;2013;2;1;2;00315198737;Gabriel Sobrinho;Girassol;São Francisco;1;PR;33400500;3333333333;gabriel.sobrinho@gmail.com\n" +
+                        "12;98;98029;2013;2;1;2050;#{item.id};Antivirus;10,0000\n" +
+                        "13;98;98029;2013;2;1;98;98029;04;01;003;003; ;319001;001;50080\n" +
+                        "14;98;98029;2013;2;1;1;003.149.513-34;Wenderson Malheiros; ; ; ; ; ; ; ; ; ; ; ;2050;#{item.id};2,0000;10,0000"
     end
   end
 end

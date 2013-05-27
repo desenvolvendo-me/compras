@@ -42,7 +42,7 @@ describe TceExport::MG::MonthlyMonitoring::BiddingAuthorizationGenerator do
       ratification = LicitationProcessRatification.make!(:processo_licitatorio_computador,
         ratification_date: Date.new(2013, 5, 20),
         licitation_process: licitation_process,
-        bidder: bidder)
+        creditor: bidder.creditor)
 
       bidder.activate!
       bidder.update_column :habilitation_date, Date.new(2013, 5, 20)

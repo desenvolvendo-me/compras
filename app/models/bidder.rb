@@ -17,7 +17,7 @@ class Bidder < Compras::Model
   has_many :people, :through => :accredited_representatives
   has_many :licitation_process_classifications, :dependent => :destroy
   has_many :licitation_process_classifications_by_classifiable, :as => :classifiable, :dependent => :destroy, :class_name => 'LicitationProcessClassification'
-  has_many :licitation_process_ratifications, :dependent => :restrict
+  has_many :licitation_process_ratifications, through: :creditor
   has_many :items, :through => :licitation_process
 
   has_one :judgment_form, :through => :licitation_process
@@ -92,11 +92,6 @@ class Bidder < Compras::Model
     where { licitation_process.creditor_proposals.ranking.eq(1) }.
     where { '"compras_bidders".creditor_id = "compras_purchase_process_creditor_proposals".creditor_id' }.
     uniq
-  }
-
-  scope :without_ratification, lambda {
-    joins { licitation_process_ratifications.outer }.
-    where { licitation_process_ratifications.id.eq(nil) }
   }
 
   def creditor_proposals

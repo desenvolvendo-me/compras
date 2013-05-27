@@ -34,6 +34,9 @@ describe TceExport::MG::MonthlyMonitoring::LicitationJudgmentGenerator do
       licitation_process = LicitationProcess.make(:pregao_presencial,
         bidders: [bidder])
 
+      PurchaseProcessAccreditation.make!(:general_accreditation,
+        licitation_process: licitation_process)
+
       item = PurchaseProcessItem.make(:item_arame_farpado)
 
       proposal = PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado,
@@ -48,7 +51,7 @@ describe TceExport::MG::MonthlyMonitoring::LicitationJudgmentGenerator do
 
       LicitationProcessRatification.make!(:processo_licitatorio_computador,
         licitation_process: bidder.licitation_process,
-        bidder: bidder,
+        creditor: bidder.creditor,
         ratification_date: Date.new(2013, 5, 23))
 
       described_class.generate_file(monthly_monitoring)

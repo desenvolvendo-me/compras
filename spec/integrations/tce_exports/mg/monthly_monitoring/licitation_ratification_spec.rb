@@ -39,11 +39,15 @@ describe TceExport::MG::MonthlyMonitoring::LicitationRatificationGenerator do
 
     let(:licitation_process_ratification) do
       LicitationProcessRatification.make!(:processo_licitatorio_computador,
+        creditor: Creditor.make!(:sobrinho_sa),
         licitation_process: licitation_process)
     end
 
     it "generates a CSV file with the required data" do
       FactoryGirl.create(:extended_prefecture, prefecture: prefecture)
+
+      accreditation = PurchaseProcessAccreditation.make!(:general_accreditation,
+        licitation_process: licitation_process)
 
       LicitationProcessRatificationItem.make!(:item, ratificated: true,
         licitation_process_ratification: licitation_process_ratification,
