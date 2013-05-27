@@ -6,7 +6,7 @@ feature "LicitationProcessRatifications" do
     sign_in
   end
 
-  scenario 'creating and updating a ratification' do
+  scenario 'creating and updating a ratification to licitation process' do
     licitation = LicitationProcess.make!(:processo_licitatorio_computador,
       judgment_form: JudgmentForm.make!(:por_item_com_menor_preco),
       bidders:[Bidder.make!(:licitante_sobrinho)],
@@ -86,6 +86,95 @@ feature "LicitationProcessRatifications" do
     expect(page).to have_content '2,99'
     expect(page).to have_content '4,99'
     expect(page).to have_content '9,98'
+
+    expect(page).to have_checked_field bidder_checkbok_html_name(0)
+  end
+
+  scenario 'creating and updating a ratification to direct purchase' do
+    licitation = LicitationProcess.make!(:compra_direta,
+      judgment_form: JudgmentForm.make!(:por_item_com_menor_preco),
+      items: [PurchaseProcessItem.make!(:item_arame_farpado, creditor: Creditor.make!(:sobrinho_sa)),
+        PurchaseProcessItem.make!(:item_arame, creditor: Creditor.make!(:sobrinho_sa))])
+
+    PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado, licitation_process: licitation, ranking: 1)
+    PurchaseProcessCreditorProposal.make!(:proposta_arame, licitation_process: licitation, ranking: 1)
+
+    navigate 'Processos de Compra > Processos de Compras'
+
+    within_records do
+      click_link '2/2013'
+    end
+
+    click_link 'Adjudicação/Homologação'
+    click_link 'Criar Homologação e Adjudicação de Processo de Compra'
+
+    expect(page).to have_disabled_field 'Processo de compra'
+
+    within_modal 'Participante vencedor' do
+      click_button 'Pesquisar'
+      click_record 'Gabriel Sobrinho'
+    end
+
+    expect(page).to have_content 'Arame comum'
+    expect(page).to have_content 'Arame farpado'
+    expect(page).to have_content '1'
+    expect(page).to have_content '10,00'
+    expect(page).to have_content '2'
+    expect(page).to have_content '30,00'
+    expect(page).to have_content '60,00'
+
+    check 'checkAll'
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Homologação e Adjudicação de Processo de Compra criada com sucesso.'
+
+    within_records do
+      click_link '1'
+    end
+
+    expect(page).to have_disabled_field 'Processo de compra'
+    expect(page).to have_field 'Processo de compra', :with => '2/2013 - Concorrência 1'
+    expect(page).to have_field 'Participante vencedor', :with => 'Gabriel Sobrinho'
+    expect(page).to have_field 'Data de homologação', :with => I18n.l(Date.current)
+    expect(page).to have_field 'Data de adjudicação', :with => I18n.l(Date.current)
+    expect(page).to have_field 'Sequência', :with => '1'
+
+    expect(page).to have_content 'Arame comum'
+    expect(page).to have_content 'Arame farpado'
+    expect(page).to have_content '1'
+    expect(page).to have_content '2'
+    expect(page).to have_content '10,00'
+    expect(page).to have_content '30,00'
+    expect(page).to have_content '60,00'
+
+    expect(page).to have_checked_field bidder_checkbok_html_name(0)
+
+    expect(page).to_not have_link 'Apagar'
+    expect(page).to have_disabled_field 'Processo de compra'
+
+    fill_in 'Data de homologação', :with => "#{I18n.l(Date.tomorrow)}"
+    fill_in 'Data de adjudicação', :with => "#{I18n.l(Date.tomorrow)}"
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Homologação e Adjudicação de Processo de Compra editada com sucesso.'
+
+    within_records do
+      click_link '1 - Processo de Compra 2/2013 - Concorrência 1'
+    end
+
+    expect(page).to have_field 'Processo de compra', :with => '2/2013 - Concorrência 1'
+    expect(page).to have_field 'Participante vencedor', :with => 'Gabriel Sobrinho'
+    expect(page).to have_field 'Data de homologação', :with => I18n.l(Date.tomorrow)
+    expect(page).to have_field 'Data de adjudicação', :with => I18n.l(Date.tomorrow)
+    expect(page).to have_content 'Arame comum'
+    expect(page).to have_content 'Arame farpado'
+    expect(page).to have_content '1'
+    expect(page).to have_content '2'
+    expect(page).to have_content '10,00'
+    expect(page).to have_content '30,00'
+    expect(page).to have_content '60,00'
 
     expect(page).to have_checked_field bidder_checkbok_html_name(0)
   end

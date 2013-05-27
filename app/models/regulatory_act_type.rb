@@ -4,6 +4,8 @@ class RegulatoryActType < Compras::Model
 
   attr_accessible :description, :imported, :kind
 
+  attr_modal :description
+
   has_enumeration_for :kind, with: RegulatoryActTypeKind
 
   has_many :regulatory_acts, :dependent => :restrict

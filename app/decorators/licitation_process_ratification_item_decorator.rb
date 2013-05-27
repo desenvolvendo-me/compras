@@ -15,6 +15,10 @@ class LicitationProcessRatificationItemDecorator
     purchase_process_creditor_proposal_id || "{{purchase_process_creditor_proposal_id}}"
   end
 
+  def purchase_process_item_id_or_mustache_variable
+    purchase_process_item_id || "{{purchase_process_item_id}}"
+  end
+
   def code_or_mustache_variable
     code || "{{code}}"
   end

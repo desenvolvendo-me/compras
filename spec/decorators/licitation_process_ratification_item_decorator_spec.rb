@@ -200,4 +200,26 @@ describe LicitationProcessRatificationItemDecorator do
       end
     end
   end
+
+  describe '#purchase_process_item_id_or_mustache_variable' do
+    context 'when has not a purchase_process_item_id' do
+      before do
+        component.stub(purchase_process_item_id: nil)
+      end
+
+      it 'should return the mustache variable' do
+        expect(subject.purchase_process_item_id_or_mustache_variable).to eq '{{purchase_process_item_id}}'
+      end
+    end
+
+    context 'when has a purchase_process_item_id' do
+      before do
+        component.stub(purchase_process_item_id: 10)
+      end
+
+      it 'should return the purchase_process_item_id' do
+        expect(subject.purchase_process_item_id_or_mustache_variable).to eq 10
+      end
+    end
+  end
 end

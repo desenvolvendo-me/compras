@@ -3,8 +3,15 @@
     <%= f.check_box :ratificated %>
 
     <%= f.input :id, :as => 'hidden' %>
-    <%= f.input :purchase_process_creditor_proposal_id, :as => 'hidden',
-                :input_html => { :value => f.object.decorator.creditor_proposal_id_or_mustache_variable } %>
+    <% if resource.licitation_process_licitation? %>
+      <%= f.input :purchase_process_creditor_proposal_id, :as => 'hidden',
+                  :input_html => { :value => f.object.decorator.creditor_proposal_id_or_mustache_variable } %>
+    <% else %>
+      <%= f.input :purchase_process_item_id, :as => 'hidden',
+                  :input_html => { :value => f.object.decorator.purchase_process_item_id_or_mustache_variable } %>
+    <% end %>
+
+    <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
     <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
   </td>
 
