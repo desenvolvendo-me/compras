@@ -31,7 +31,11 @@ class NextBidCalculator
     @item.lowest_trading_bid
   end
 
+  def lowest_proposal_creditor
+    @item.trading_creditors_ordered.selected_creditors.last
+  end
+
   def lowest_trading_bid_creditor
-    lowest_trading_bid.try(:accreditation_creditor)
+    lowest_trading_bid.try(:accreditation_creditor) || lowest_proposal_creditor
   end
 end
