@@ -108,20 +108,6 @@ feature "Materials" do
     expect(page).to have_checked_field 'Controla quantidade'
   end
 
-  scenario 'cannot destroy an existent material with licitation_objects' do
-    LicitationObject.make!(:ponte)
-
-    navigate 'Comum > Cadastrais > Materiais > Materiais'
-
-    click_link 'Antivirus'
-
-    click_link 'Apagar'
-
-    expect(page).to_not have_notice 'Material apagado com sucesso.'
-
-    expect(page).to have_alert 'Material não pode ser apagado.'
-  end
-
   scenario 'should clean the unnecessary service depending on material type' do
     Material.make!(:antivirus)
 

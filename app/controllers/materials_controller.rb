@@ -1,5 +1,4 @@
 class MaterialsController < CrudController
-  has_scope :licitation_object_id, :allow_blank => true
   has_scope :by_material_type, :allow_blank => true
   has_scope :term, :allow_blank => true
 

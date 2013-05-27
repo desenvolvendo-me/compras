@@ -27,7 +27,6 @@ menu:
     - auxiliary:
       - licitation_commissions
       - judgment_forms
-      - licitation_objects
       - legal_references
     - cadastral:
       - contracts
