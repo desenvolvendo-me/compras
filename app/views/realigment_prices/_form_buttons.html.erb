@@ -1,0 +1,7 @@
+<div class="buttons">
+  <% if can?(:modify, main_controller_name) %>
+    <%= f.button :submit %>
+  <% end %>
+
+  <%= f.button :back, href: realigment_prices_path(purchase_process_id: f.object.licitation_process) %>
+</div>

@@ -1,6 +1,8 @@
 class PurchaseProcessCreditorProposal < Compras::Model
   attr_accessible :creditor_id, :brand, :unit_price, :item_id, :delivery_date,
-                  :licitation_process_id, :lot, :ranking
+                  :licitation_process_id, :lot, :ranking, :realigment_prices_attributes
+
+  attr_accessor :difference_price
 
   belongs_to :creditor
   belongs_to :licitation_process
@@ -8,8 +10,11 @@ class PurchaseProcessCreditorProposal < Compras::Model
 
   has_one :judgment_form, through: :licitation_process
   has_one :material, through: :item
-
   has_one :licitation_process_ratifications, through: :licitation_process
+
+  has_many :realigment_prices, dependent: :destroy
+
+  accepts_nested_attributes_for :realigment_prices, allow_destroy: true
 
   delegate :code, :description, :reference_unit,
     to: :material, prefix: true, allow_nil: true
