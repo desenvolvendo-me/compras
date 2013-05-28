@@ -14,7 +14,7 @@ module TceExport::MG
             nro_lote: proposal.lot,
             nro_item: proposal.item.id,
             dsc_produto_servico: proposal.item.to_s,
-            vl_unitario: proposal.unit_price,
+            vl_unitario: vl_unitario(proposal),
             quantidade: quantidade(proposal.item),
             unidade: proposal.material_reference_unit,
             judgment_date_detail: generate_judment_date_detail(proposal.licitation_process)
@@ -25,9 +25,15 @@ module TceExport::MG
       private
 
       def query
-        PurchaseProcessCreditorProposal.by_ratification_month_and_year(
-          monthly_monitoring.month, monthly_monitoring.year).
-          order(:id)
+        items = PurchaseProcessCreditorProposal.by_ratification_month_and_year(
+          monthly_monitoring.month, monthly_monitoring.year).judgment_by_item.order(:id)
+
+        lots_global = PurchaseProcessCreditorProposal.by_ratification_month_and_year(
+          monthly_monitoring.month, monthly_monitoring.year).judgment_by_lot_or_global
+
+        lots_global = lots_global.flat_map(&:realigment_prices)
+
+        [items + lots_global].flatten.sort
       end
 
       def generate_judment_date_detail(licitation_process)
@@ -45,6 +51,14 @@ module TceExport::MG
 
       def budget_structure_code(budget)
         Formatters::BudgetStructureCodeFormatter.new(monthly_monitoring.organ_code, budget)
+      end
+
+      def vl_unitario(proposal)
+        realigment?(proposal) ? proposal.price : proposal.unit_price
+      end
+
+      def realigment?(proposal)
+        proposal.is_a? RealigmentPrice
       end
     end
 

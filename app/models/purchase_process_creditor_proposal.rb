@@ -57,6 +57,16 @@ class PurchaseProcessCreditorProposal < Compras::Model
       month, year)
   }
 
+  scope :judgment_by_item, lambda {
+    joins { judgment_form }.
+    where { judgment_form.kind.eq(JudgmentFormKind::ITEM) }
+  }
+
+  scope :judgment_by_lot_or_global, lambda {
+    joins { judgment_form }.
+    where { judgment_form.kind.in([JudgmentFormKind::LOT, JudgmentFormKind::GLOBAL]) }
+  }
+
   orderize
   filterize
 
