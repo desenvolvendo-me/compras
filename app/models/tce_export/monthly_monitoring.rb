@@ -23,7 +23,7 @@ class TceExport::MonthlyMonitoring < Compras::Model
   validates :year, :month, presence: true
   validates :year, mask: "9999"
 
-  orderize :control_code
+  orderize 'id DESC'
   filterize
 
   def control_code
