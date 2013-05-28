@@ -3,7 +3,6 @@ menu:
     - parameters:
       - prefecture
       - entities
-      - customizations
 
       - addresses:
         - districts

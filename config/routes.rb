@@ -17,13 +17,6 @@ Compras::Application.routes.draw do
 
   resources :creditor_representatives, :only => :index
 
-  resources :customizations do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
   resources :holidays do
     collection do
       get :filter
