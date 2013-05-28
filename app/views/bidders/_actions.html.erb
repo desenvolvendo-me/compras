@@ -4,10 +4,8 @@
       <%= link_to 'Voltar ao processo de compra', edit_licitation_process_path(@parent) %>
     </li>
 
-    <% if @parent.allow_bidders? %>
-      <li>
-        <%= create_link(:licitation_process_id => @parent.id) %>
-      </li>
-    <% end %>
+    <li>
+      <%= create_link(:licitation_process_id => @parent.id) %>
+    </li>
   </ul>
 </div>
