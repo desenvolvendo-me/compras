@@ -33,7 +33,8 @@ feature "Bidders" do
   scenario 'creating, updating, destroy a new bidder' do
     LicitationProcess.make!(:processo_licitatorio_computador,
       :modality => Modality::INVITATION,
-      :judgment_form => JudgmentForm.make!(:global_com_menor_preco))
+      :judgment_form => JudgmentForm.make!(:global_com_menor_preco),
+      :proposal_envelope_opening_date => Date.tomorrow)
     Creditor.make!(:sobrinho_sa)
     Person.make!(:wenderson)
     Person.make!(:joao_da_silva)

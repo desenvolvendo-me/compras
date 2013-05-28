@@ -1,7 +1,6 @@
 class BiddersController < CrudController
   has_scope :won_calculation, :type => :boolean
 
-  before_filter :block_not_allow_bidders, :only => [ :new, :create, :update, :destroy ]
   before_filter :block_changes_when_have_ratifications, :only => [:create, :update, :destroy]
 
   def new
@@ -64,10 +63,6 @@ class BiddersController < CrudController
         PurchaseProcessStatusChanger.new(object.licitation_process).in_progress!
       end
     end
-  end
-
-  def block_not_allow_bidders
-    raise Exceptions::Unauthorized unless parent.allow_bidders?
   end
 
   def block_changes_when_have_ratifications

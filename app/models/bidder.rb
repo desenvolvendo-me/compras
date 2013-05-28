@@ -25,7 +25,7 @@ class Bidder < Compras::Model
   delegate :document_type_ids, :process_date, :ratification?, :has_trading?,
            :invitation?, :year, :process,
            :to => :licitation_process, :prefix => true, :allow_nil => true
-  delegate :envelope_opening?, :allow_bidders?, :execution_unit_responsible,
+  delegate :envelope_opening?, :execution_unit_responsible,
            :to => :licitation_process, :allow_nil => true
   delegate :benefited, :company?, :identity_document, :name, :state_registration,
     :uf_state_registration,

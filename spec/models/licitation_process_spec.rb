@@ -357,20 +357,6 @@ describe LicitationProcess do
     expect(subject.errors[:base]).to include "não pode ser editado"
   end
 
-  it 'should tell if it allow invitation bidders' do
-    subject.stub(:proposal_envelope_opening_date).and_return(Date.tomorrow)
-
-    expect(subject).not_to be_allow_bidders
-
-    subject.stub(:proposal_envelope_opening_date).and_return(Date.current)
-
-    expect(subject).to be_allow_bidders
-
-    subject.stub(:proposal_envelope_opening_date).and_return(Date.yesterday)
-
-    expect(subject).not_to be_allow_bidders
-   end
-
   it 'should return the advice number correctly' do
     subject.stub(:judgment_commission_advices).and_return([1, 2, 3])
 
