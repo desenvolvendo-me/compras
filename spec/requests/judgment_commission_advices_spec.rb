@@ -6,31 +6,31 @@ feature "JudgmentCommissionAdvices" do
 
   background do
     create_roles ['licitation_processes',
-                  'licitation_commissions', 'individuals']
-    sign_in
-  end
-
-  scenario 'create, update and destroy a new judgment_commission_advice' do
-    licitation_process = LicitationProcess.make!(:processo_licitatorio)
-    licitation_commission = LicitationCommission.make!(:comissao)
-    Person.make!(:sobrinho)
-    Person.make!(:wenderson)
-
-    navigate 'Processos de Compra > Processos de Compras'
-
-    click_link "Limpar Filtro"
-
-    within_records do
-      click_link '1/2012'
+      'licitation_commissions', 'individuals']
+      sign_in
     end
 
-    click_link 'Pareceres da comissão julgadora'
+    scenario 'create, update and destroy a new judgment_commission_advice' do
+      licitation_process = LicitationProcess.make!(:processo_licitatorio)
+      licitation_commission = LicitationCommission.make!(:comissao)
+      Person.make!(:sobrinho)
+      Person.make!(:wenderson)
 
-    click_link 'Criar Parecer da Comissão Julgadora'
+      navigate 'Processos de Compra > Processos de Compras'
 
-    within_tab 'Principal' do
-      fill_in 'Ano', :with => '2012'
-      fill_modal 'Comissão julgadora', :with => '20/03/2012', :field => 'Data da nomeação'
+      click_link "Limpar Filtro"
+
+      within_records do
+        click_link '1/2012'
+      end
+
+      click_link 'Pareceres da comissão julgadora'
+
+      click_link 'Criar Parecer da Comissão Julgadora'
+
+      within_tab 'Principal' do
+        fill_in 'Ano', :with => '2012'
+        fill_modal 'Comissão julgadora', :with => '20/03/2012', :field => 'Data da nomeação'
 
       # testing delegated president name from licitation commission
       expect(page).to have_disabled_field 'Presidente da comissão'
@@ -129,7 +129,7 @@ feature "JudgmentCommissionAdvices" do
       expect(page).to have_field 'Membro', :with => 'Wenderson Malheiros'
 
       within '.member:last' do
-	expect(page).to have_field 'Membro', :with => 'Gabriel Sobrinho'
+        expect(page).to have_field 'Membro', :with => 'Gabriel Sobrinho'
 
         click_button 'Remover'
       end
@@ -253,6 +253,43 @@ feature "JudgmentCommissionAdvices" do
       clear_modal 'Membro'
       expect(page).to have_disabled_field 'CPF'
       expect(page).to have_field 'CPF', :with => ''
+    end
+  end
+
+  scenario 'should hidden Parecer when licitation_process is direct_purchase' do
+    LicitationProcess.make!(:compra_direta)
+    LicitationProcess.make!(:processo_licitatorio)
+
+    navigate 'Processos de Compra > Processos de Compras'
+
+    click_link "Limpar Filtro"
+
+    within_records do
+      click_link '1/2012'
+    end
+
+    click_link 'Pareceres da comissão julgadora'
+
+    click_link 'Criar Parecer da Comissão Julgadora'
+
+    within '#judment_commission_advices' do
+      expect(page).to have_link 'Parecer'
+    end
+
+    navigate 'Processos de Compra > Processos de Compras'
+
+    click_link "Limpar Filtro"
+
+    within_records do
+      click_link '2/2013'
+    end
+
+    click_link 'Pareceres da comissão julgadora'
+
+    click_link 'Criar Parecer da Comissão Julgadora'
+
+    within '#judment_commission_advices' do
+      expect(page).to_not have_link 'Parecer'
     end
   end
 end

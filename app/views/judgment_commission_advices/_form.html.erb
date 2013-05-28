@@ -1,4 +1,4 @@
-<div class="tabs">
+<div class="tabs" id="judment_commission_advices">
   <ul>
     <li>
       <a href="#main">Principal</a>
@@ -8,7 +8,7 @@
       <a href="#members">Membros</a>
     </li>
 
-    <li>
+    <li class='advice'>
       <a href="#advice">Parecer</a>
     </li>
   </ul>
@@ -70,4 +70,9 @@
       $(this).closest('.nested').find('.cpf').val('');
     }
   });
+  <% if f.object.licitation_process.direct_purchase? %>
+    $('.advice').addClass('hidden');
+  <% else %>
+    $('.advice').removeClass('hidden');
+  <% end %>
 </script>
