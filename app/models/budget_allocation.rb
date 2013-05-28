@@ -16,6 +16,8 @@ class BudgetAllocation < Accounting::Model
   has_many :budget_allocation_capabilities, :dependent => :destroy, :inverse_of => :budget_allocation
   has_many :capabilities, :through => :budget_allocation_capabilities
 
+  has_one :budget_structure_configuration, through: :budget_structure
+
   delegate :expense_nature, :description, :kind, :to => :expense_nature, :allow_nil => true, :prefix => true
   delegate :code, :budget_structure, :structure_sequence, :to => :budget_structure, :prefix => true, :allow_nil => true
   delegate :code, :to => :function, :prefix => true, :allow_nil => true
@@ -28,6 +30,11 @@ class BudgetAllocation < Accounting::Model
   scope :term, lambda { |q|
     joins { budget_structure }.joins { expense_nature }.
     where { (budget_structure.full_code.like("%#{q}%")  | expense_nature.description.like("%#{q}%")) }
+  }
+
+  scope :year, lambda { |year|
+    joins { budget_structure_configuration }.
+    where { |budget_allocation| budget_allocation.budget_structure_configuration.year.eq(year) }
   }
 
   scope :budget_structure_id, lambda { |budget_structure_id|
