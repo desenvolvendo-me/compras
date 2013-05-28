@@ -190,10 +190,6 @@ class LicitationProcess < Compras::Model
     judgment_commission_advices.count
   end
 
-  def allow_bidders?
-    envelope_opening?
-  end
-
   def envelope_opening?
     return unless proposal_envelope_opening_date
     proposal_envelope_opening_date == Date.current
@@ -291,8 +287,6 @@ class LicitationProcess < Compras::Model
   end
 
   def assign_bidders_documents
-    return unless allow_bidders?
-
     bidders.each do |bidder|
       bidder.assign_document_types
       bidder.save!

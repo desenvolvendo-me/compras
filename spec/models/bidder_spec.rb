@@ -41,7 +41,6 @@ describe Bidder do
 
     it { should delegate(:envelope_opening?).to(:licitation_process).allowing_nil(true) }
     it { should delegate(:execution_unit_responsible).to(:licitation_process).allowing_nil(true) }
-    it { should delegate(:allow_bidders?).to(:licitation_process).allowing_nil(true) }
 
     it { should delegate(:benefited).to(:creditor).allowing_nil(true) }
     it { should delegate(:company?).to(:creditor).allowing_nil(true) }
@@ -61,7 +60,7 @@ describe Bidder do
     end
 
     let :licitation_process do
-      double('licitation_process', :allow_bidders? => true, :ratification? => true, :judgment_form => judgment_form)
+      double('licitation_process', :ratification? => true, :judgment_form => judgment_form)
     end
 
     let(:judgment_form) { double(:judgment_form) }
@@ -134,7 +133,7 @@ describe Bidder do
     let(:licitation_process) do
       double(:licitation_process, :administrative_process => nil,
              :judgment_form_best_technique? => true,
-             :allow_bidders? => true, :to_s => '1/2012')
+             :to_s => '1/2012')
     end
 
     it 'should not allow save when licitation_process has ratification' do
