@@ -8,6 +8,8 @@ class LegalAnalysisAppraisal < Compras::Model
 
   has_one :execution_unit_responsible, through: :licitation_process
 
+  has_many :licitation_process_ratifications, through: :licitation_process
+
   has_enumeration_for :appraisal_type, create_helpers: { prefix: true }
   has_enumeration_for :reference, :with => AppraisalReference, create_helpers: { prefix: true }
   has_enumeration_for :modality
@@ -23,6 +25,14 @@ class LegalAnalysisAppraisal < Compras::Model
     to: :responsible, allow_nil: true, prefix: true
 
   orderize :appraisal_expedition_date
+
+  scope :by_ratification_month_and_year, lambda { |month, year|
+    joins { licitation_process.licitation_process_ratifications }.
+      where(%{
+        extract(month from compras_licitation_process_ratifications.ratification_date) = ? AND
+        extract(year from compras_licitation_process_ratifications.ratification_date) = ?},
+        month, year)
+  }
 
   def process_and_year
     "#{process}/#{year}"

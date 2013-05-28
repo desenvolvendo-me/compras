@@ -6,6 +6,7 @@ describe LegalAnalysisAppraisal do
   it { should belong_to :licitation_process }
 
   it { should have_one(:execution_unit_responsible).through(:licitation_process) }
+  it { should have_many(:licitation_process_ratifications).through(:licitation_process) }
 
   it { should validate_presence_of(:licitation_process) }
   it { should validate_presence_of(:appraisal_type) }
