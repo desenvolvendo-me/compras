@@ -962,7 +962,7 @@ feature "LicitationProcesses" do
       select 'Alienação de bens', :on => "Tipo de objeto"
 
       expect(page).to have_select('Modalidade',
-                                  :options => ['Leilão'])
+                                  :options => ['Leilão', 'Concorrência'])
 
       select 'Concessões', :on => "Tipo de objeto"
 
