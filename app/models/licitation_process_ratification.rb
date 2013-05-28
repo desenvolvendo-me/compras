@@ -20,7 +20,8 @@ class LicitationProcessRatification < Compras::Model
 
   validates :licitation_process, :creditor, :presence => true
   validates :adjudication_date, :ratification_date, :presence => true
-  validate :creditor_belongs_to_licitation_process, :if => :creditor
+  validate  :creditor_belongs_to_licitation_process, :if => :creditor
+  validate  :without_judgment_commission_advice
 
   auto_increment :sequence, :by => :licitation_process_id
 
@@ -47,5 +48,16 @@ class LicitationProcessRatification < Compras::Model
       as(proposal_total) }.first.proposal_total
 
     BigDecimal(total || 0)
+  end
+
+  private
+
+  def without_judgment_commission_advice
+    return unless licitation_process && licitation_process_licitation?
+
+    if licitation_process.judgment_commission_advices.empty?
+      errors.add(:base, :licitation_process_without_judgment_commission_advices,
+                licitation_process: licitation_process.to_s)
+    end
   end
 end

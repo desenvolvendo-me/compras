@@ -108,12 +108,16 @@ describe BiddersController do
   end
 
   context 'with ratification' do
-    let :ratification do
-      LicitationProcessRatification.make!(:processo_licitatorio_computador)
+    let :licitation_process do
+      LicitationProcess.make!(:processo_licitatorio_computador)
     end
 
-    let(:licitation_process) { ratification.licitation_process }
     let(:bidder) { licitation_process.bidders.first }
+
+    before do
+      LicitationProcessRatification.make!(:processo_licitatorio_computador,
+                                          licitation_process: licitation_process)
+    end
 
     describe 'POST #create' do
       it 'should raise exception' do

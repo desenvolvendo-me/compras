@@ -53,6 +53,8 @@ describe TceExport::MG::MonthlyMonitoring::ContractGenerator do
       it "generates a CSV file with the required data" do
         FactoryGirl.create(:extended_prefecture, prefecture: prefecture)
 
+        JudgmentCommissionAdvice.make!(:parecer, licitation_process: licitation_process)
+
         ratification_item = LicitationProcessRatificationItem.make!(:item,
           purchase_process_creditor_proposal: creditor_proposal,
           licitation_process_ratification: ratification)
@@ -84,6 +86,8 @@ describe TceExport::MG::MonthlyMonitoring::ContractGenerator do
     context "with only one creditor" do
       it "generates a CSV file with the required data" do
         FactoryGirl.create(:extended_prefecture, prefecture: prefecture)
+
+        JudgmentCommissionAdvice.make!(:parecer, licitation_process: licitation_process)
 
         ratification_item = LicitationProcessRatificationItem.make!(:item,
           purchase_process_creditor_proposal: creditor_proposal,

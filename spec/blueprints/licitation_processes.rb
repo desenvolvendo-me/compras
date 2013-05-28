@@ -63,6 +63,7 @@ LicitationProcess.blueprint(:processo_licitatorio_computador) do
   contract_guarantees { ContractGuarantees::BANK }
   notice_availability_date { I18n.l(Date.tomorrow) }
   execution_unit_responsible { BudgetStructure.make!(:secretaria_de_desenvolvimento) }
+  judgment_commission_advices { [JudgmentCommissionAdvice.make!(:parecer, licitation_process: object)] }
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_fornecedores) do
