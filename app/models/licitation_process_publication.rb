@@ -9,6 +9,7 @@ class LicitationProcessPublication < Compras::Model
   belongs_to :licitation_process
 
   validates :name, :publication_date, :publication_of, :circulation_type, :presence => true
+  validate  :block_edital
   validate  :publication_before_envelope_opening, :if => :edital?
 
   orderize :publication_date
@@ -36,5 +37,17 @@ class LicitationProcessPublication < Compras::Model
     if publication_date >= licitation_process.proposal_envelope_opening_date
       errors.add(:publication_date, :should_be_prior_to_envelope_opening)
     end
+  end
+
+  private
+
+  def block_edital
+    return unless licitation_process && direct_purchase_and_edital?
+
+    errors.add(:publication_of, :invalid)
+  end
+
+  def direct_purchase_and_edital?
+    licitation_process.direct_purchase? && edital?
   end
 end

@@ -20,6 +20,7 @@ describe LicitationProcessPublication do
   describe "validation of publication date" do
     it "validates if publication date is prior to envelope opening" do
       licitation_process = double(:proposal_envelope_opening_date => Date.new(2012, 2, 1))
+      licitation_process.stub(direct_purchase?: false)
       subject.stub(:licitation_process => licitation_process)
       subject.publication_date = Date.new(2012, 2, 2)
       subject.publication_of = PublicationOf::EDITAL
@@ -31,6 +32,7 @@ describe LicitationProcessPublication do
 
     it "only validates publication date of publications of editals when has licitation processes" do
       licitation_process = double(:proposal_envelope_opening_date => nil)
+      licitation_process.stub(direct_purchase?: false)
       subject.stub(:licitation_process => licitation_process)
       subject.publication_date = Date.new(2012, 2, 2)
       subject.publication_of = PublicationOf::EDITAL
@@ -42,12 +44,37 @@ describe LicitationProcessPublication do
 
     it "only validates publication date of publications of editals" do
       licitation_process = double(:proposal_envelope_opening_date => Date.new(2012, 2, 1))
+      licitation_process.stub(direct_purchase?: false)
       subject.stub(:licitation_process => licitation_process)
       subject.publication_date = Date.new(2012, 2, 2)
 
       subject.valid?
 
       expect(subject.errors[:publication_date]).to be_empty
+    end
+  end
+
+  describe 'validate publication_of when edital' do
+    let(:licitation_process) { double(:licitation_process, proposal_envelope_opening_date: nil) }
+
+    before do
+      subject.stub(licitation_process: licitation_process)
+    end
+
+    context 'when direct_purchase' do
+      before do
+        licitation_process.stub(direct_purchase?: true)
+      end
+
+      it { should_not allow_value(PublicationOf::EDITAL).for(:publication_of) }
+    end
+
+    context 'when not direct_purchase' do
+      before do
+        licitation_process.stub(direct_purchase?: false)
+      end
+
+      it { should allow_value(PublicationOf::EDITAL).for(:publication_of) }
     end
   end
 end
