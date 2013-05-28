@@ -14,8 +14,6 @@ class Modality < EnumerateIt::Base
       [CONCURRENCE]
     when PurchaseProcessObjectType::PERMITS
       [CONCURRENCE]
-    when PurchaseProcessObjectType::CALL_NOTICE
-      [COMPETITION]
     else
       []
     end

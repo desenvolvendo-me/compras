@@ -276,14 +276,6 @@ describe LicitationProcess do
         expect(subject.concessions_or_permits?).to be_true
       end
     end
-
-    context "when object_type is not concessions or permits" do
-      it "should return false" do
-        subject.object_type = PurchaseProcessObjectType::CALL_NOTICE
-
-        expect(subject.concessions_or_permits?).to be_false
-      end
-    end
   end
 
   context 'new_proposal_envelope_opening_date is not equal to new_envelope_delivery_date' do

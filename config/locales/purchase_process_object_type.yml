@@ -1,7 +1,6 @@
 pt-BR:
   enumerations:
     purchase_process_object_type:
-      call_notice: "Edital de chamamento/credenciamento"
       concessions: "Concessões"
       construction_and_engineering_services: "Obras e serviços de engenharia"
       disposals_of_assets: "Alienação de bens"

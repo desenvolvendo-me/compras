@@ -10,7 +10,7 @@ class LicitationProcess < Compras::Model
                   :protocol, :summarized_object, :modality, :description,
                   :purchase_process_budget_allocations_attributes,
                   :contract_guarantees, :extension_clause, :index_update_rate_id,
-                  :type_of_removal, :is_trading, :notice_availability_date,
+                  :type_of_removal, :eletronic_trading, :notice_availability_date,
                   :contact_id, :stage_of_bids_date, :stage_of_bids_time,
                   :items_attributes, :minimum_bid_to_disposal, :concession_period,
                   :concession_period_unit, :goal, :licensor_rights_and_liabilities,
