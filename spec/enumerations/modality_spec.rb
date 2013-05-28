@@ -29,7 +29,7 @@ describe Modality do
       let(:object_type) { PurchaseProcessObjectType::DISPOSALS_OF_ASSETS }
 
       it 'should return only auction' do
-        expect(described_class.available_for_object_type(object_type)).to eq [Modality::AUCTION]
+        expect(described_class.available_for_object_type(object_type)).to eq [Modality::AUCTION, Modality::CONCURRENCE]
       end
     end
 
@@ -47,7 +47,7 @@ describe Modality do
       expect(described_class.by_object_type).to eq({
         "concessions" => [["Concorrência", "concurrence"]],
         "construction_and_engineering_services" => [["Concorrência", "concurrence"], ["Tomada de Preço", "taken_price"], ["Convite", "invitation"], ["Concurso", "competition"], ["Pregão", "trading"]],
-        "disposals_of_assets" => [["Leilão", "auction"]],
+        "disposals_of_assets" => [["Leilão", "auction"], ["Concorrência", "concurrence"]],
         "permits" => [["Concorrência", "concurrence"]],
         "property_lease" => [],
         "purchase_and_services" => [["Concorrência", "concurrence"], ["Tomada de Preço", "taken_price"], ["Convite", "invitation"], ["Pregão", "trading"]]

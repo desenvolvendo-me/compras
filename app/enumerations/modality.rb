@@ -9,7 +9,7 @@ class Modality < EnumerateIt::Base
     when PurchaseProcessObjectType::CONSTRUCTION_AND_ENGINEERING_SERVICES
       [CONCURRENCE, TAKEN_PRICE, INVITATION, COMPETITION, TRADING]
     when PurchaseProcessObjectType::DISPOSALS_OF_ASSETS
-      [AUCTION]
+      [AUCTION, CONCURRENCE]
     when PurchaseProcessObjectType::CONCESSIONS
       [CONCURRENCE]
     when PurchaseProcessObjectType::PERMITS
