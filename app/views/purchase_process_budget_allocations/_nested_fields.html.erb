@@ -1,6 +1,7 @@
 <div class="yui3-g">
   <div class="yui3-u-3-4">
-    <%= f.input :budget_allocation, as: :auto_complete, fake: true, required: true %>
+    <%= f.input :budget_allocation, as: :auto_complete, fake: true, required: true,
+      source_path: budget_allocations_path(year: (f.object.year || Date.current.year)) %>
   </div>
 </div>
 
@@ -13,7 +14,8 @@
 
 <div class="yui3-g">
   <div class="yui3-u-2-5">
-    <%= f.input :expense_nature, as: :auto_complete, fake: true %>
+    <%= f.input :expense_nature, as: :auto_complete, fake: true,
+      source_path: expense_natures_path(year: (f.object.year || Date.current.year)) %>
   </div>
 
   <div class="yui3-u-1-5">
