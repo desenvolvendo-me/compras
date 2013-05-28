@@ -4,6 +4,7 @@
       <%= f.input :justification %>
     </div>
   </div>
+
   <div class="nested-fields add-margin-bottom">
     <%= hidden_field_tag :item_id, nil, :name => 'licitation_process_item[id]' %>
     <div class="yui3-g">
@@ -13,7 +14,7 @@
 
       <div class="yui3-u-3-4">
         <%= f.input :material, :as => :auto_complete, :fake => true, :required => true,
-          'data-hidden-field-class' => 'unique' %>
+          'data-hidden-field-class' => f.object.decorator.material_unique_class %>
       </div>
 
       <div class="yui3-u-1-8">
@@ -58,6 +59,8 @@
       </div>
     </div>
   </div>
+
+  <%= f.error :items %>
 
   <table id="items-records" class="records">
     <thead>

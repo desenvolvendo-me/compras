@@ -6,4 +6,11 @@ class TypeOfRemoval < EnumerateIt::Base
                    :unenforceability_accreditation,
                    :dispensation_justified_accreditation,
                    :call
+
+  def self.allow_duplicated_items
+    [
+      DISPENSATION_JUSTIFIED_ACCREDITATION,
+      UNENFORCEABILITY_ACCREDITATION
+    ]
+  end
 end

@@ -1994,4 +1994,77 @@ feature "LicitationProcesses" do
 
     expect(page).to have_content "Criar Credenciamento"
   end
+
+  scenario 'allow same item' do
+    Creditor.make!(:sobrinho)
+    Creditor.make!(:wenderson_sa)
+    Material.make!(:antivirus)
+
+    navigate 'Processos de Compra > Processos de Compras'
+
+    click_link 'Criar Processo de Compra'
+
+    within_tab 'Principal' do
+      choose 'Compra direta'
+      select 'Dispensa justificada - Credenciamento', from: 'Tipo de afastamento'
+    end
+
+    within_tab 'Itens / Justificativa' do
+      fill_in 'Justificativa da escolha', with: 'Justificativa'
+      fill_in 'Lote', with: '1'
+
+      fill_with_autocomplete 'Material', :with => 'Antivirus'
+
+      fill_in 'Quantidade', with: '10'
+
+      fill_with_autocomplete 'Fornecedor', :with => 'Gabriel Sobrinho'
+
+      click_button 'Adicionar'
+
+      within '#items-records' do
+        expect(page).to have_content '1'
+        expect(page).to have_content '01.01.00001 - Antivirus'
+        expect(page).to have_content 'Gabriel Sobrinho'
+        expect(page).to have_content 'UN'
+        expect(page).to have_content '10'
+        expect(page).to have_content '0,00'
+        expect(page).to have_content '0,00'
+      end
+
+      fill_in 'Justificativa da escolha', with: 'Justificativa 2'
+      fill_in 'Lote', with: '1'
+
+      fill_with_autocomplete 'Material', :with => 'Antivirus'
+
+      fill_in 'Quantidade', with: '5'
+
+      fill_with_autocomplete 'Fornecedor', :with => 'Wenderson Malheiros'
+
+      click_button 'Adicionar'
+      click_button 'Adicionar'
+      click_button 'Adicionar'
+
+      within '#items-records' do
+        within 'tbody tr:first' do
+          expect(page).to have_content '1'
+          expect(page).to have_content '01.01.00001 - Antivirus'
+          expect(page).to have_content 'Gabriel Sobrinho'
+          expect(page).to have_content 'UN'
+          expect(page).to have_content '10'
+          expect(page).to have_content '0,00'
+          expect(page).to have_content '0,00'
+        end
+
+        within 'tbody tr:last' do
+          expect(page).to have_content '1'
+          expect(page).to have_content '01.01.00001 - Antivirus'
+          expect(page).to have_content 'Wenderson Malheiros'
+          expect(page).to have_content 'UN'
+          expect(page).to have_content '5'
+          expect(page).to have_content '0,00'
+          expect(page).to have_content '0,00'
+        end
+      end
+    end
+  end
 end

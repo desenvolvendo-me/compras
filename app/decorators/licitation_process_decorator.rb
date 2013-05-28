@@ -106,6 +106,13 @@ class LicitationProcessDecorator
     end
   end
 
+  def material_unique_class
+    return '' if direct_purchase? && (type_of_removal_dispensation_justified_accreditation? ||
+                                      type_of_removal_unenforceability_accreditation?)
+
+    'unique'
+  end
+
   private
 
   def current_publication_of

@@ -368,4 +368,46 @@ describe LicitationProcessDecorator do
       expect(subject.disabled_trading_message).to be_nil
     end
   end
+
+  describe '#material_unique_class' do
+    context 'when not direct_purchase' do
+      before do
+        component.stub(direct_purchase?: false)
+      end
+
+      it { expect(subject.material_unique_class).to eq 'unique' }
+    end
+
+    context 'when is a direct_purchase' do
+      before do
+        component.stub(direct_purchase?: true)
+      end
+
+      context 'when dispensation_justified_accreditation' do
+        before do
+          component.stub(type_of_removal_dispensation_justified_accreditation?: true)
+        end
+
+        it { expect(subject.material_unique_class).to eq '' }
+      end
+
+      context 'when unenforceability_accreditation' do
+        before do
+          component.stub(type_of_removal_dispensation_justified_accreditation?: false)
+          component.stub(type_of_removal_unenforceability_accreditation?: true)
+        end
+
+        it { expect(subject.material_unique_class).to eq '' }
+      end
+
+      context 'when not dispensation_justified_accreditation neighter unenforceability_accreditation' do
+        before do
+          component.stub(type_of_removal_dispensation_justified_accreditation?: false)
+          component.stub(type_of_removal_unenforceability_accreditation?: false)
+        end
+
+        it { expect(subject.material_unique_class).to eq 'unique' }
+      end
+    end
+  end
 end
