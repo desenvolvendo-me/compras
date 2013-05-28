@@ -323,6 +323,7 @@ pt-BR:
       parent_classification_should_be_law: "A classificação do Ato principal deve ser Lei, quando a classificação do ato secundário for Decreto"
       should_be_total: "deve ser toda proposta"
       readonly: "model somente leitura"
+      material_cannot_be_duplicated_by_creditor: "O material para o fornecedor já está em uso"
 
   activerecord:
     errors:

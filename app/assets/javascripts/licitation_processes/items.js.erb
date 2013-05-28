@@ -1,4 +1,18 @@
 $(document).ready(function() {
+  function blockMaterial() {
+    var isDirectPurchase = $('#licitation_process_type_of_purchase_direct_purchase').is(':checked'),
+        typeOfRemoval = $('#licitation_process_type_of_removal').val(),
+        allowedTypeOfRemoval = <%= TypeOfRemoval.allow_duplicated_items.to_json %>;
+
+   if (isDirectPurchase && (allowedTypeOfRemoval.indexOf(typeOfRemoval) >= 0)) {
+     $('#licitation_process_material_id').removeClass('unique');
+   } else {
+     if ( !$('#licitation_process_material_id').hasClass('unique') ) {
+       $('#licitation_process_material_id').addClass('unique');
+     }
+   }
+  }
+
   function hasItemAlreadyAdded(item) {
     var added = false;
     $('#items-records input.material-id').each(function() {
@@ -113,6 +127,10 @@ $(document).ready(function() {
 
   $('#items-records').on('nestedGrid:afterAdd', function() {
     showHideCreditor();
+  });
+
+  $('#licitation_process_type_of_purchase_direct_purchase, #licitation_process_type_of_removal').on('change', function() {
+    blockMaterial();
   });
 
   if ( $("#licitation_process_purchase_solicitation_id").val() ) {

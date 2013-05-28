@@ -102,6 +102,11 @@ class LicitationProcess < Compras::Model
   validates :type_of_removal, :presence => true, :if => :direct_purchase?
   validates :tied_creditor_proposals, no_duplication: { with: :ranking, allow_nil: true,
     scope: [:licitation_process_id, :purchase_process_item_id, :lot] }
+  validates :items, no_duplication: {
+    with: :material_id,
+    scope: [:creditor_id],
+    message: :material_cannot_be_duplicated_by_creditor
+  }
   validate :validate_bidders_before_edital_publication
   validate :validate_updates, :unless => :updatable?
   validate :validate_proposal_envelope_opening_date, :on => :update

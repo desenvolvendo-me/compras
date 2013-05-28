@@ -15,6 +15,7 @@ class NoDuplicationValidator < ActiveModel::EachValidator
     attribute_to_validate = options[:with]
     scope                 = options[:scope]     || []
     allow_nil             = options[:allow_nil] || false
+    message               = options[:message]
 
     value = value.reject(&:marked_for_destruction?)
 
@@ -31,7 +32,7 @@ class NoDuplicationValidator < ActiveModel::EachValidator
         attr_value = element.send(attribute_to_validate)
 
         if single_items.include? attr_value
-          record.errors.add(attribute)
+          record.errors.add(attribute, message)
           element.errors.add(attribute_to_validate, :taken)
         end
 

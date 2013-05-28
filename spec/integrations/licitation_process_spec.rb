@@ -173,4 +173,18 @@ describe LicitationProcess do
       end
     end
   end
+
+  describe "no item duplication validation" do
+    it 'should validate item duplication for same creditor' do
+      item = PurchaseProcessItem.make(:item, creditor: Creditor.make!(:wenderson_sa))
+
+      direct_purchase = LicitationProcess.make(:compra_direta,
+        type_of_removal: TypeOfRemoval::DISPENSATION_JUSTIFIED_ACCREDITATION,
+        items: [item, item])
+
+      expect(direct_purchase).to_not be_valid
+
+      expect(direct_purchase.errors[:items]).to include "O material para o fornecedor já está em uso"
+    end
+  end
 end
