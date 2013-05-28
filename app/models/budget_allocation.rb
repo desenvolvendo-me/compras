@@ -46,7 +46,7 @@ class BudgetAllocation < Accounting::Model
   end
 
   def to_s
-    "#{budget_structure_budget_structure} - #{expense_nature_description}"
+    "#{code} - #{expense_nature.to_s}"
   end
 
   def capability

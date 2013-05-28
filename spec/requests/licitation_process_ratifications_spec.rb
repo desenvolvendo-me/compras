@@ -250,7 +250,7 @@ feature "LicitationProcessRatifications" do
     expect(page).to have_content '-'
     expect(page).to have_content '4,99'
     expect(page).to have_content '9,98'
-    expect(page).to have_content '1 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+    expect(page).to have_content '1 - 3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
     expect(page).to have_content 'Supervisor'
     expect(page).to have_content 'Wenderson Malheiros'
     expect(page).to have_content 'Gerente'
