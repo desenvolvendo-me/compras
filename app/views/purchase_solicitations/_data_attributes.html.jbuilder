@@ -7,7 +7,7 @@ builder resource, json do
   json.responsible            resource.responsible, :id, :to_s if resource.responsible
   json.delivery_location      resource.delivery_location, :id, :to_s if resource.delivery_location
 
-  json.budget_allocations resource.purchase_solicitation_budget_allocations do |json, budget_allocation|
+  json.budget_allocations resource.purchase_solicitation_budget_allocations do |budget_allocation|
     json.id                   budget_allocation.id
     json.to_s                 budget_allocation.to_s
     json.budget_allocation_id budget_allocation.budget_allocation_id
@@ -15,7 +15,7 @@ builder resource, json do
     json.amount               budget_allocation.budget_allocation.amount.to_f
   end
 
-  json.items resource.items do |json, item|
+  json.items resource.items do |item|
     json.id                    item.id
     json.material_id           item.material_id
     json.material_description  item.material.to_s

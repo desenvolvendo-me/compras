@@ -1,4 +1,4 @@
-json.array!(collection) do |json, obj|
+json.array!(collection) do |obj|
   json.id                obj.id
   json.value             obj.to_s
   json.label             obj.to_s
@@ -7,7 +7,7 @@ json.array!(collection) do |json, obj|
   json.responsible       obj.responsible.to_s
   json.total_items_value obj.total_items_value.to_f
 
-  json.budget_allocations obj.purchase_solicitation_budget_allocations do |json, psba|
+  json.budget_allocations obj.purchase_solicitation_budget_allocations do |psba|
     json.id                                  psba.id
     json.to_s                                psba.to_s
     json.budget_allocation                   psba.budget_allocation.to_s
@@ -20,7 +20,7 @@ json.array!(collection) do |json, obj|
     json.estimated_value                     psba.estimated_value.to_f
   end
 
-  json.items obj.items do |json, item|
+  json.items obj.items do |item|
     json.id                    item.id
     json.material_id           item.material_id
     json.material_description  item.material.to_s

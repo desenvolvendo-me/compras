@@ -5,7 +5,7 @@ builder resource, json do
   json.modal_info_url modal_info_link(resource)
   json.id                   resource.id
 
-  json.proposals resource.purchase_process_creditor_proposals do |json, proposal|
+  json.proposals resource.purchase_process_creditor_proposals do |proposal|
     json.purchase_process_creditor_proposal_id proposal.id
     json.code                                  proposal.material_code
     json.description                           proposal.material_description
@@ -15,7 +15,7 @@ builder resource, json do
     json.quantity                              proposal.item_quantity
   end
 
-  json.purchase_items resource.purchase_process_items do |json, item|
+  json.purchase_items resource.purchase_process_items do |item|
     json.purchase_process_creditor_proposal_id nil
     json.purchase_process_item_id              item.id
     json.code                                  item.code
