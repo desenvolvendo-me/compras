@@ -263,63 +263,6 @@ feature "LicitationCommissions" do
     end
   end
 
-  scenario 'must have one member with role president' do
-    Person.make!(:wenderson)
-    Person.make!(:sobrinho)
-
-    navigate 'Comum > Auxiliar > Comissões de Licitação'
-
-    click_link 'Criar Comissão de Licitação'
-
-    # testing with no members
-    click_button 'Salvar'
-
-    within_tab 'Membros' do
-      expect(page).to have_content 'deve haver um presidente'
-    end
-
-    # testing with one member that is no president
-    within_tab 'Membros' do
-      click_button 'Adicionar Membro'
-
-      fill_modal 'Membro', :with => 'Wenderson Malheiros'
-      select 'Suplente', :from => 'Função'
-    end
-
-    click_button 'Salvar'
-
-    within_tab 'Membros' do
-      expect(page).to have_content 'deve haver um presidente'
-    end
-
-    # testing with one president
-    within_tab 'Membros' do
-      select 'Presidente', :from => 'Função'
-    end
-
-    click_button 'Salvar'
-
-    within_tab 'Membros' do
-      expect(page).to_not have_content 'deve haver um presidente'
-    end
-
-    # testing with two presidents
-    within_tab 'Membros' do
-      click_button 'Adicionar Membro'
-
-      within '.member:first' do
-        fill_modal 'Membro', :with => 'Gabriel Sobrinho'
-        select 'Presidente', :from => 'Função'
-      end
-    end
-
-    click_button 'Salvar'
-
-    within_tab 'Membros' do
-      expect(page).to have_content 'deve haver apenas um presidente'
-    end
-  end
-
   scenario "using the description field to filter licitation commissions" do
     LicitationCommission.make!(:comissao)
 

@@ -69,60 +69,26 @@ describe LicitationCommission do
     end
   end
 
-  context "validates auctioneer and support team if trading commission" do
-    before do
-      subject.licitation_commission_members.stub(:auctioneer => [],
-                                                 :support_team => [])
-      subject.stub(:trading? => true)
-
-      subject.valid?
-    end
-
-    it "validates presence of auctioneer" do
-      expect(subject.errors[:licitation_commission_members]).to include "deve ter ao menos um pregoeiro"
-    end
-
-    it "validates presence of support team" do
-      expect(subject.errors[:licitation_commission_members]).to include "deve ter ao menos um membro na equipe de apoio"
-    end
-  end
-
   it "should delegate publication_date to regulatory_act with prefix" do
     subject.stub(:regulatory_act).and_return stub(:publication_date => Date.new(2012, 2, 28))
     expect(subject.regulatory_act_publication_date).to eq Date.new(2012, 2, 28)
   end
 
-  context 'must have one president' do
+  context 'must have one member in licitation commission' do
     let(:member_1) do
       double('member 1', :individual_id => 1, :president? => false, :marked_for_destruction? => false)
     end
 
-    let(:president_1) do
-      double('president 1', :individual_id => 3, :president? => true, :marked_for_destruction? => false)
-    end
-
-    let(:president_2) do
-      double('president 2', :individual_id => 4, :president? => true, :marked_for_destruction? => false)
-    end
-
-    it "must be invalid when there is no president" do
-      subject.stub(:licitation_commission_members).and_return([member_1])
+    it 'must be invalid when licitation commission members is empty' do
+      subject.stub(:licitation_commission_members).and_return []
 
       subject.valid?
 
-      expect(subject.errors.messages[:licitation_commission_members]).to include 'deve haver um presidente'
+      expect(subject.errors.messages[:licitation_commission_members]).to include 'deve ter ao menos um membro na comissão'
     end
 
-    it "must be invalid when there are two presidents" do
-      subject.stub(:licitation_commission_members).and_return([president_1, president_2])
-
-      subject.valid?
-
-      expect(subject.errors.messages[:licitation_commission_members]).to include 'deve haver apenas um presidente'
-    end
-
-    it "must be valid when there are one president" do
-      subject.stub(:licitation_commission_members).and_return([president_1, member_1])
+    it 'must be valid when licitation commission members is not empty' do
+      subject.stub(:licitation_commission_members).and_return [member_1]
 
       subject.valid?
 
