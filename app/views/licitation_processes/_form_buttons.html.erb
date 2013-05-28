@@ -20,7 +20,7 @@
       <% end %>
 
       <%= link_to('Habilitação', bidders_path(:licitation_process_id => resource.id), :class => "button primary",
-                  'data-disabled' => f.object.decorator.must_have_published_edital) %>
+                  'data-disabled' => f.object.decorator.must_have_published_edital_or_direct_purchase) %>
 
       <%= classification_link %>
 
