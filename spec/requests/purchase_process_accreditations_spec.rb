@@ -271,6 +271,37 @@ feature "PurchaseProcessAccreditation" do
     end
   end
 
+  scenario 'should enable fields when creditor_representative is not blank' do
+    LicitationProcess.make!(:processo_licitatorio, modality: Modality::TRADING)
+    CompanySize.make!(:empresa_de_grande_porte)
+    sobrinho = Creditor.make!(:sobrinho)
+
+    CreditorRepresentative.make!(:representante_sobrinho,
+      :representative_person => Person.make!(:wenderson),
+      :creditor => sobrinho)
+
+    navigate 'Processos de Compra > Processos de Compras'
+
+    click_link "Limpar Filtro"
+
+    within_records do
+      click_link '1/2012'
+    end
+
+    click_link 'Credenciamento'
+
+    fill_with_autocomplete 'Fornecedor', :with => 'Gabriel'
+
+    select '', from: 'Representante'
+
+    expect(page).to_not have_select 'Tipo'
+    expect(page).to_not have_checked_field 'Procurador'
+
+    select 'Wenderson', from: 'Representante'
+
+    expect(page).to have_select 'Tipo'
+  end
+
   scenario 'show report' do
     licitation_process = LicitationProcess.make!(:pregao_presencial)
     company_size = CompanySize.make!(:empresa_de_grande_porte)

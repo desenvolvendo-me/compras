@@ -34,7 +34,7 @@
     <%= hidden_field_tag :creditor_representative, nil, name: 'purchase_process_accreditation[creditor_representative]' %>
   </div>
 
-  <div class="yui3-u-1-4">
+  <div class="yui3-u-1-4 kind">
     <label for="kind">
       <%= PurchaseProcessAccreditationCreditor.human_attribute_name :kind %>
     </label>
@@ -43,10 +43,27 @@
         :include_blank => true, :name => 'purchase_process_accreditation[kind]', :class => 'required' %>
   </div>
 
-  <div class="yui3-u-1-4 field-without-label">
+  <div class="yui3-u-1-4 field-without-label has_power_of_attorney">
     <label class="boolean checkbox optional" for="has_power_of_attorney">
       <%= check_box_tag :has_power_of_attorney, "1", false, :name => 'purchase_process_accreditation[has_power_of_attorney]' %>
       <%= PurchaseProcessAccreditationCreditor.human_attribute_name :has_power_of_attorney %>
     </label>
   </div>
 </div>
+
+<script>
+enabledFieldsRepresentative();
+function enabledFieldsRepresentative(){
+  if ($("#creditor_representative_id").val() == ""){
+    $(".kind").addClass('hidden');
+    $(".has_power_of_attorney").addClass('hidden');
+  }else{
+    $(".kind").removeClass('hidden');
+    $(".has_power_of_attorney").removeClass('hidden');
+  }
+}
+
+$("#creditor_representative_id").on('change', function(){
+  enabledFieldsRepresentative();
+});
+</script>
