@@ -1219,6 +1219,17 @@ feature "LicitationProcesses" do
       expect(page).to have_content 'Valor unitário máximo'
     end
 
+    within_tab 'Prazos' do
+      expect(page).to have_field 'Abertura das propostas'
+      expect(page).to have_field 'Hora da abertura'
+      expect(page).to have_field 'Término do recebimento dos envelopes'
+      expect(page).to have_field 'Hora do recebimento'
+      expect(page).to have_field 'Data do credenciamento'
+      expect(page).to have_field 'Hora do credenciamento'
+      expect(page).to have_field 'Data da fase de lances'
+      expect(page).to have_field 'Hora da fase de lances'
+    end
+
     within_tab 'Principal' do
       choose 'Compra direta'
 
@@ -1228,6 +1239,32 @@ feature "LicitationProcesses" do
 
     within_tab 'Itens / Justificativa' do
       expect(page).to have_content 'Valor unitário'
+    end
+
+    within_tab 'Prazos' do
+      expect(page).to_not have_field 'Abertura das propostas'
+      expect(page).to_not have_field 'Hora da abertura'
+      expect(page).to_not have_field 'Término do recebimento dos envelopes'
+      expect(page).to_not have_field 'Hora do recebimento'
+      expect(page).to_not have_field 'Data do credenciamento'
+      expect(page).to_not have_field 'Hora do credenciamento'
+      expect(page).to_not have_field 'Data da fase de lances'
+      expect(page).to_not have_field 'Hora da fase de lances'
+    end
+
+    within_tab 'Principal' do
+      choose 'Processo licitatório'
+    end
+
+    within_tab 'Prazos' do
+      expect(page).to have_field 'Abertura das propostas'
+      expect(page).to have_field 'Hora da abertura'
+      expect(page).to have_field 'Término do recebimento dos envelopes'
+      expect(page).to have_field 'Hora do recebimento'
+      expect(page).to have_field 'Data do credenciamento'
+      expect(page).to have_field 'Hora do credenciamento'
+      expect(page).to have_field 'Data da fase de lances'
+      expect(page).to have_field 'Hora da fase de lances'
     end
   end
 
