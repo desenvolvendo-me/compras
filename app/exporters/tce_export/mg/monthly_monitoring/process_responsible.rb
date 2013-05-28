@@ -60,7 +60,7 @@ module TceExport::MG
           1
         when LicitationCommissionMemberRoleNature::TEMPORARY_SERVER
           2
-        when LicitationCommissionMemberRoleNature::COMISSION_ROLE
+        when LicitationCommissionMemberRoleNature::COMMISSION_ROLE
           3
         when LicitationCommissionMemberRoleNature::PUBLIC_EMPLOYEE
           4
