@@ -59,6 +59,12 @@ class LicitationProcessDecorator
     end
   end
 
+  def must_have_published_edital_or_direct_purchase
+    unless edital_published? || direct_purchase?
+      t("licitation_process.messages.must_be_included_after_edital_publication")
+    end
+  end
+
   def disabled_trading_message
     return if all_proposals_given?
 

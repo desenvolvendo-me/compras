@@ -154,6 +154,31 @@ describe LicitationProcessDecorator do
     end
   end
 
+  describe "#must_have_published_edital_or_direct_purchase" do
+    it "returns nil if edital have been published or licitation_process is direct_purchase" do
+      component.stub(:edital_published? => true)
+      component.stub(:direct_purchase? => true)
+      expect(subject.must_have_published_edital).to be_nil
+    end
+
+    it "returns disabled_message if edital have not been published or licitation process is licitation " do
+      I18n.backend.store_translations 'pt-BR', :licitation_process => {
+        :messages => {
+          :must_be_included_after_edital_publication => 'não pode'
+        }
+      }
+      component.stub(:edital_published? => false)
+      component.stub(:direct_purchase? => false)
+      expect(subject.must_have_published_edital).to eq "não pode"
+    end
+
+    it "returns nil if edital have been published or licitation_process is licitation " do
+      component.stub(:edital_published? => true)
+      component.stub(:direct_purchase? => false)
+      expect(subject.must_have_published_edital).to eq nil
+    end
+  end
+
   context 'with attr_header' do
     it 'should have headers' do
       expect(described_class.headers?).to be_true
