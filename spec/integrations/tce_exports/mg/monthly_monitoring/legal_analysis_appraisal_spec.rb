@@ -19,15 +19,12 @@ describe TceExport::MG::MonthlyMonitoring::LegalAnalysisAppraisalGenerator do
     let :monthly_monitoring do
       FactoryGirl.create(:monthly_monitoring,
         prefecture: prefecture,
+        month: 5,
         year: 2013)
     end
 
     let :processo_licitatorio do
-      LicitationProcess.make!(:processo_licitatorio)
-    end
-
-    let :pregao do 
-      LicitationProcess.make!(:pregao_presencial)
+      LicitationProcess.make!(:processo_licitatorio_computador)
     end
 
     let(:sobrinho) { Employee.make!(:sobrinho) }
@@ -37,6 +34,9 @@ describe TceExport::MG::MonthlyMonitoring::LegalAnalysisAppraisalGenerator do
     it "generates a CSV file with the required data" do
       FactoryGirl.create(:extended_prefecture, prefecture: prefecture)
 
+      LicitationProcessRatification.make!(:processo_licitatorio_computador,
+        licitation_process: processo_licitatorio)
+
       LegalAnalysisAppraisal.create!(
         licitation_process_id: processo_licitatorio.id,
         responsible_id: sobrinho.id,
@@ -45,19 +45,7 @@ describe TceExport::MG::MonthlyMonitoring::LegalAnalysisAppraisalGenerator do
         reference: AppraisalReference::DRAFT
       )
 
-      LegalAnalysisAppraisal.create!(
-        licitation_process_id: pregao.id,
-        responsible_id: wenderson.id,
-        appraisal_expedition_date: Date.new(2013, 5, 11),
-        appraisal_type: AppraisalType::LEGAL,
-        reference: AppraisalReference::PUBLIC_SESSION
-      )
-
       city = sobrinho.city
-      city.tce_mg_code = 1
-      city.save!
-
-      city = wenderson.city
       city.tce_mg_code = 1
       city.save!
 
@@ -65,8 +53,7 @@ describe TceExport::MG::MonthlyMonitoring::LegalAnalysisAppraisalGenerator do
 
       csv = File.read('tmp/PARELIC.csv', encoding: 'ISO-8859-1')
 
-      expect(csv).to eq "98;98029;2012;1;13052013;1;00315198737;Gabriel Sobrinho;Girassol;São Francisco;1;PR;33400500;3333333333;gabriel.sobrinho@gmail.com\n" +
-                        "98;98029;2012;1;11052013;3;00314951334;Wenderson Malheiros;Girassol;São Francisco;1;PR;33400500;3333333333;wenderson.malheiros@gmail.com"
+      expect(csv).to eq "98;98029;2013;2;13052013;1;00315198737;Gabriel Sobrinho;Girassol;São Francisco;1;PR;33400500;3333333333;gabriel.sobrinho@gmail.com"
     end
   end
 end

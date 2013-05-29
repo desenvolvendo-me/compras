@@ -26,7 +26,9 @@ module TceExport::MG
       private
 
       def query
-        LegalAnalysisAppraisal.all
+        LegalAnalysisAppraisal.
+          by_ratification_month_and_year(monthly_monitoring.month, monthly_monitoring.year).
+          uniq
       end
 
       def appraisal_type(analysis)
