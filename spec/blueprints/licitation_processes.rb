@@ -537,7 +537,6 @@ LicitationProcess.blueprint(:pregao_presencial) do
   description { 'Licitação para compra de carteiras' }
   purchase_process_budget_allocations { [PurchaseProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   items { [PurchaseProcessItem.make!(:item)] }
-  summarized_object { "Descrição resumida do objeto" }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
   expiration { 10 }
