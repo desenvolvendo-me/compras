@@ -2,8 +2,8 @@ pt-BR:
   activerecord:
     models:
       bidder:
-        one: "Licitante"
-        other: "Licitantes"
+        one: "Habilitação"
+        other: "Habilitações"
 
     attributes:
       bidder:

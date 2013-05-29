@@ -779,7 +779,7 @@ feature "LicitationProcesses" do
       click_link "1/2012"
     end
 
-    expect(page).to have_disabled_element "Habilitação", :reason => "Licitantes só podem ser incluídos após publicação do edital"
+    expect(page).to have_disabled_element "Habilitação", :reason => "Habilitações só podem ser incluídos após publicação do edital"
 
     click_link "Publicações"
 
@@ -801,7 +801,7 @@ feature "LicitationProcesses" do
 
     click_link "Habilitação"
 
-    expect(page).to have_content "Licitantes do Processo de Compra 1/2012"
+    expect(page).to have_content "Habilitações do Processo de Compra 1/2012"
   end
 
   scenario "allowing changes to licitation process after ratification" do
@@ -1970,7 +1970,7 @@ feature "LicitationProcesses" do
       click_link "1/2012"
     end
 
-    expect(page).to have_disabled_element "Credenciamento", :reason => "Licitantes só podem ser incluídos após publicação do edital"
+    expect(page).to have_disabled_element "Credenciamento", :reason => "Habilitações só podem ser incluídos após publicação do edital"
 
     click_link "Publicações"
 
