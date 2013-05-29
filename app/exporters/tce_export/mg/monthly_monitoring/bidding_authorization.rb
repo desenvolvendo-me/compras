@@ -67,7 +67,7 @@ module TceExport::MG
             data_registro_cvm: bidder.creditor.data_do_registro_cvm, # custom_data
             nro_registro_cvm: bidder.creditor.numero_do_registro_cvm, #custom_data
             nro_inscricao_estadual: only_numbers(bidder.state_registration),
-            uf_inscricao_estatual: bidder.uf_state_registration.upcase,
+            uf_inscricao_estatual: bidder.uf_state_registration,
             nro_certidao_regularidade_inss: document_field(bidder, :inss, :document_number),
             dt_emissao_certidao_regularidade_inss: document_field(bidder, :inss, :emission_date),
             dt_validade_certidao_regularidade_inss: document_field(bidder, :inss, :validity),
@@ -160,7 +160,7 @@ module TceExport::MG
       attribute :data_registro_cvm, position: 12, size: 8, min_size: 8, required: false, caster: Casters::DateCaster
       attribute :nro_registro_cvm, position: 13, size: 20, min_size: 1, required: false, caster: Casters::TextCaster
       attribute :nro_inscricao_estadual, position: 14, size: 30, min_size: 1, required: false, caster: Casters::TextCaster
-      attribute :uf_inscricao_estatual, position: 15, size: 2, min_size: 2, required: false, caster: Casters::TextCaster
+      attribute :uf_inscricao_estatual, position: 15, size: 2, min_size: 2, required: false, upcase: true, caster: Casters::TextCaster
       attribute :nro_certidao_regularidade_inss, position: 16, size: 30, min_size: 1, required: false, caster: Casters::TextCaster
       attribute :dt_emissao_certidao_regularidade_inss, position: 17, size: 8, min_size: 8, required: false, caster: Casters::DateCaster
       attribute :dt_validade_certidao_regularidade_inss, position: 18, size: 8, min_size: 8, required: false, caster: Casters::DateCaster

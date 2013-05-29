@@ -22,7 +22,7 @@ module TceExport::MG
             nro_documento: creditor.identity_document,
             nom_razao_social: creditor.name,
             nro_inscricao_estadual: only_numbers(creditor.state_registration),
-            uf_inscricao_estadual: creditor.uf_state_registration.try(:upcase),
+            uf_inscricao_estadual: creditor.uf_state_registration,
             nro_certidao_regularidade_inss: document_field(creditor, :inss, :document_number),
             dt_emissao_certidao_regularidade_inss: document_field(creditor, :inss, :emission_date),
             dt_validade_certidao_regularidade_inss: document_field(creditor, :inss, :validity),
@@ -349,7 +349,7 @@ module TceExport::MG
       attribute :nro_documento, position: 7, size: 14, min_size: 1, required: true, caster: Casters::TextCaster
       attribute :nom_razao_social, position: 8, size: 120, min_size: 1, required: true, caster: Casters::TextCaster
       attribute :nro_inscricao_estadual, position: 9, size: 30, min_size: 1, required: false, caster: Casters::TextCaster
-      attribute :uf_inscricao_estadual, position: 10, size: 2, min_size: 2, required: false, caster: Casters::TextCaster
+      attribute :uf_inscricao_estadual, position: 10, size: 2, min_size: 2, required: false, upcase: true, caster: Casters::TextCaster
       attribute :nro_certidao_regularidade_inss, position: 11, size: 30, min_size: 1, required: false, caster: Casters::TextCaster
       attribute :dt_emissao_certidao_regularidade_inss, position: 12, size: 8, min_size: 8, required: false, caster: Casters::DateCaster
       attribute :dt_validade_certidao_regularidade_inss, position: 13, size: 8, min_size: 8, required: false, caster: Casters::DateCaster
