@@ -709,6 +709,7 @@ LicitationProcess.blueprint(:compra_direta) do
   caution_value { 9.99 }
   document_types { [DocumentType.make!(:fiscal)] }
   publications { [LicitationProcessPublication.make!(:publicacao,
+                                                     publication_of: PublicationOf::EXTENSION,
                                                      :licitation_process => object)] }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }

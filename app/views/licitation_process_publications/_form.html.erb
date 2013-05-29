@@ -10,18 +10,19 @@
   </div>
 
   <div class="yui3-u-1-2">
-    <%= f.input :publication_of %>
+    <%= f.input :publication_of, collection: publication_of_collection(f.object.licitation_process) %>
   </div>
 
   <div class="yui3-u-1-2">
     <%= f.input :circulation_type %>
   </div>
 </div>
+
 <% if !f.object.persisted? && f.object.licitation_process.direct_purchase?%>
-<script>
-  $('#licitation_process_publication_publication_of option').each(function(){
-    if($(this).val() == 'confirmation')
-      $(this).attr('selected', 'selected');
-  });
-</script>
+  <script>
+    $('#licitation_process_publication_publication_of option').each(function(){
+      if($(this).val() == 'confirmation')
+        $(this).attr('selected', 'selected');
+    });
+  </script>
 <% end %>

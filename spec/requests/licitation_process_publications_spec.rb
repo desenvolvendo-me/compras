@@ -109,17 +109,19 @@ feature "LicitationProcessPublications" do
   end
 
   scenario 'should javascript when licitation_process is direct_purchase publication_of is default confirmation' do
-    LicitationProcess.make!(:pregao_presencial,
-      type_of_purchase: PurchaseProcessTypeOfPurchase::DIRECT_PURCHASE, justification: 'Justificativa',
+    licitation = LicitationProcess.make!(:compra_direta,
+      type_of_purchase: PurchaseProcessTypeOfPurchase::DIRECT_PURCHASE,
+      justification: 'Justificativa',
       type_of_removal: TypeOfRemoval::REMOVAL_JUSTIFIED,
       items: [PurchaseProcessItem.make!(:item, creditor: Creditor.make!(:sobrinho))] )
+
 
     navigate 'Processos de Compra > Processos de Compras'
 
     click_link "Limpar Filtro"
 
     within_records do
-      click_link '1/2012'
+      click_link '2/2013'
     end
 
     click_link 'Publicações'
@@ -139,5 +141,26 @@ feature "LicitationProcessPublications" do
     expect(page).to have_field 'Data da publicação', with: I18n.l(Date.current)
     expect(page).to have_select 'Publicação do(a)', selected: 'Ratificação'
     expect(page).to have_select 'Tipo de circulação do veículo de comunicação', selected: 'Internet'
+  end
+
+  scenario 'does not have edital when direct_purchase' do
+    licitation_process = LicitationProcess.make!(:compra_direta, publications: [])
+
+    navigate 'Processos de Compra > Processos de Compras'
+
+    click_link "Limpar Filtro"
+
+    within_records do
+      click_link '2/2013'
+    end
+
+    click_link 'Publicações'
+
+    click_link 'Criar Publicação'
+
+    expect(page).to have_content "Criar Publicação para o Processo de Compra #{licitation_process}"
+
+    expect(page).to have_select 'Publicação do(a)', options: ['Cancelamento', 'Homologação', 'Outros', 'Prorrogação',
+                                                              'Ratificação', 'Retificação do edital', 'Vencedores']
   end
 end
