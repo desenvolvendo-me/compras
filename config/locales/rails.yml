@@ -322,6 +322,7 @@ pt-BR:
       all_required_fields_should_be_filled: "é necesssário preencher todos os campos obrigatórios"
       parent_classification_should_be_law: "A classificação do Ato principal deve ser Lei, quando a classificação do ato secundário for Decreto"
       should_be_total: "deve ser toda proposta"
+      licitation_process_without_judgment_commission_advices: "O processo de compra (%{licitation_process}) deve possuir parecer(es) da comissão de licitação"
       readonly: "model somente leitura"
       material_cannot_be_duplicated_by_creditor: "O material para o fornecedor já está em uso"
 

@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'lib/signable'
+require 'app/models/licitation_process'
 require 'app/models/licitation_process_ratification'
 require 'app/models/licitation_process_ratification_item'
 
@@ -30,11 +31,13 @@ describe LicitationProcessRatification do
     end
 
     let :creditor_with_new_licitation_process do
-      double(:licitation_process => double, to_s: 'Credor Geral')
+      double(:licitation_process => double, to_s: 'Credor Geral', licitation?: true,
+            judgment_commission_advices: [])
     end
 
     let :licitation_process do
-      double(:to_s => '1/2012', creditors: [creditor_with_licitation_process])
+      double(:to_s => '1/2012', creditors: [creditor_with_licitation_process], licitation?: true,
+            judgment_commission_advices: [])
     end
 
     before do
@@ -55,6 +58,62 @@ describe LicitationProcessRatification do
       subject.valid?
 
       expect(subject.errors[:creditor]).to include "Credor Geral não pertence ao processo de compra 1/2012"
+    end
+  end
+
+  describe 'judgment_comisson_advice validate' do
+    let(:licitation_process) { double(:licitation_procss, to_s: '1/2013') }
+
+    before do
+      subject.stub(licitation_process: licitation_process)
+    end
+
+    context 'when is a licitation' do
+      before do
+        licitation_process.stub(licitation?: true)
+      end
+
+      context 'when has no judgment_commission_advices' do
+        before do
+          licitation_process.stub(judgment_commission_advices: [])
+        end
+
+        it 'should not be valid' do
+          expect(subject.valid?).to be_false
+
+          expect(subject.errors[:base]).to include('O processo de compra (1/2013) deve possuir parecer(es) da comissão de licitação')
+        end
+      end
+
+      context 'when has judgment_commission_advices' do
+        before do
+          licitation_process.stub(judgment_commission_advices: ['advice'])
+        end
+
+        it 'should be valid' do
+         subject.valid?
+
+          expect(subject.errors[:base]).to_not include('O processo de compra (1/2013) deve possuir parecer(es) da comissão de licitação')
+        end
+      end
+    end
+
+    context 'when is not a licitation' do
+      before do
+        licitation_process.stub(licitation?: false)
+      end
+
+      context 'when has no judgment_commission_advices' do
+        before do
+          subject.stub(judgment_commission_advices: [])
+        end
+
+        it 'should not be valid' do
+          subject.valid?
+
+          expect(subject.errors[:base]).to_not include('O processo de compra (1/2013) deve possuir parecer(es) da comissão de licitação')
+        end
+      end
     end
   end
 end

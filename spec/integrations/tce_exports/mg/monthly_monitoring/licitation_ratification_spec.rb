@@ -46,6 +46,8 @@ describe TceExport::MG::MonthlyMonitoring::LicitationRatificationGenerator do
     it "generates a CSV file with the required data" do
       FactoryGirl.create(:extended_prefecture, prefecture: prefecture)
 
+      JudgmentCommissionAdvice.make!(:parecer, licitation_process: licitation_process)
+
       accreditation = PurchaseProcessAccreditation.make!(:general_accreditation,
         licitation_process: licitation_process)
 

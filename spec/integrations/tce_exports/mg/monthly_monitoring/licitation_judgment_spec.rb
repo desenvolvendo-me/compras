@@ -35,6 +35,8 @@ describe TceExport::MG::MonthlyMonitoring::LicitationJudgmentGenerator do
         licitation_process = LicitationProcess.make(:pregao_presencial,
           bidders: [bidder])
 
+        JudgmentCommissionAdvice.make!(:parecer, licitation_process: licitation_process)
+
         PurchaseProcessAccreditation.make!(:general_accreditation,
           licitation_process: licitation_process)
 
@@ -81,6 +83,8 @@ describe TceExport::MG::MonthlyMonitoring::LicitationJudgmentGenerator do
 
         licitation_process = LicitationProcess.make!(:pregao_presencial,
           bidders: [bidder], judgment_form: JudgmentForm.make!(:global_com_menor_preco))
+
+        JudgmentCommissionAdvice.make!(:parecer, licitation_process: licitation_process)
 
         PurchaseProcessAccreditation.make!(:general_accreditation,
           licitation_process: licitation_process)
