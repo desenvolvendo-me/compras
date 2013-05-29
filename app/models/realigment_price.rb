@@ -22,4 +22,8 @@ class RealigmentPrice < Compras::Model
     to: :material, prefix: true, allow_nil: true
 
   orderize :id
+
+  def total_price
+    (item.quantity || BigDecimal(0)) * (price || BigDecimal(0))
+  end
 end

@@ -77,7 +77,11 @@
           item;
 
       <% if resource.licitation_process_licitation? %>
-        var proposals = creditor.proposals;
+        <% if resource.licitation_process.judgment_form.item? %>
+          var proposals = creditor.proposals;
+        <% else %>
+          var proposals = creditor.realigment_prices;
+        <% end %>
       <% else %>
         var proposals = creditor.purchase_items;
       <% end %>

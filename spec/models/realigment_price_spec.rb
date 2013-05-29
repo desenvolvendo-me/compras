@@ -26,4 +26,17 @@ describe RealigmentPrice do
   it { should delegate(:reference_unit).to(:material).allowing_nil(true).prefix(true) }
 
   it { should delegate(:lot).to(:proposal).allowing_nil(true).prefix(false) }
+
+  describe '#total_price' do
+    let(:item) { double(:item, quantity: 3) }
+
+    before do
+      subject.stub(:item).and_return item
+      subject.price = 2.99
+    end
+
+    it 'returns the sum of item quantity and price' do
+      expect(subject.total_price.to_f).to eq 8.97
+    end
+  end
 end

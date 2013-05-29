@@ -17,10 +17,12 @@ require 'app/models/regularization_or_administrative_sanction'
 require 'app/models/registration_cadastral_certificate'
 require 'app/models/bidder'
 require 'app/models/licitation_process'
+require 'app/models/licitation_process_ratification'
 require 'app/models/purchase_process_accreditation_creditor'
 require 'app/models/purchase_process_item'
 require 'app/models/purchase_process_creditor_proposal'
 require 'app/models/purchase_process_creditor_disqualification'
+require 'app/models/realigment_price'
 
 describe Creditor do
   describe 'default values' do
@@ -36,6 +38,7 @@ describe Creditor do
   it { should belong_to :person }
   it { should belong_to :occupation_classification }
   it { should belong_to :main_cnae }
+
   it { should have_many :creditor_secondary_cnaes }
   it { should have_many(:cnaes).through(:creditor_secondary_cnaes) }
   it { should have_many(:documents) }
@@ -53,6 +56,7 @@ describe Creditor do
   it { should have_many(:purchase_process_accreditation_creditors).dependent(:restrict) }
   it { should have_many(:purchase_process_items).dependent(:restrict) }
   it { should have_many(:purchase_process_creditor_proposals).dependent(:restrict) }
+  it { should have_many(:realigment_prices).through(:purchase_process_creditor_proposals) }
   it { should have_many(:proposal_disqualifications).dependent(:restrict) }
   it { should have_many(:licitation_process_ratifications).dependent(:restrict) }
 
