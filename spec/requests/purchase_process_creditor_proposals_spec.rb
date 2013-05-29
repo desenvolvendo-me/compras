@@ -446,7 +446,19 @@ feature 'PurchaseProcessCreditorProposals' do
 
     expect(page).to have_notice 'Desempate editado com sucesso'
 
-    click_link 'Desempatar propostas'
+    within_records do
+      within 'tbody tr:first' do
+        click_link 'Editar propostas'
+      end
+    end
+
+    fill_in 'Preço unitário', with: '100,00'
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Proposta Comercial editada com sucesso'
+
+    click_link "Desempatar propostas"
 
     expect(page).to_not have_button "Salvar"
   end

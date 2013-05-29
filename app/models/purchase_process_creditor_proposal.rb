@@ -93,6 +93,12 @@ class PurchaseProcessCreditorProposal < Compras::Model
 
   def reset_ranking!
     update_column :ranking, 0
+    update_column :tied, true
+  end
+
+  def apply_ranking!(rank)
+    update_column :ranking, rank
+    update_column :tied, false
   end
 
   def item_or_lot_or_purchase_process
