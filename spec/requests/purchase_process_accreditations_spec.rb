@@ -209,11 +209,12 @@ feature "PurchaseProcessAccreditation" do
   scenario 'kind should be required only when has a representative' do
     LicitationProcess.make!(:processo_licitatorio, modality: Modality::TRADING)
     CompanySize.make!(:empresa_de_grande_porte)
-    sobrinho = Creditor.make!(:sobrinho)
+    nohup = Creditor.make!(:nohup)
+    Creditor.make!(:sobrinho)
 
     CreditorRepresentative.make!(:representante_sobrinho,
       :representative_person => Person.make!(:wenderson),
-      :creditor => sobrinho)
+      :creditor => nohup)
 
     navigate 'Processos de Compra > Processos de Compras'
 
@@ -225,12 +226,11 @@ feature "PurchaseProcessAccreditation" do
 
     click_link 'Credenciamento'
 
-    fill_with_autocomplete 'Fornecedor', :with => 'Gabriel'
+    fill_with_autocomplete 'Fornecedor', :with => 'Nohup'
 
-    expect(page).to have_disabled_field 'Tipo de pessoa', :with => 'Pessoa física'
-    expect(page).to have_select 'Porte', :selected => ''
+    expect(page).to have_disabled_field 'Tipo de pessoa', :with => 'Pessoa jurídica'
+    expect(page).to have_select 'Porte', :selected => 'Microempresa'
 
-    select 'Empresa de grande porte', :from => 'Porte'
     select 'Wenderson Malheiros', :from => 'Representante'
 
     click_button 'Adicionar'
@@ -238,18 +238,17 @@ feature "PurchaseProcessAccreditation" do
     within_records do
       expect(page).to_not have_css('.record')
     end
-
-    select 'Comercial', :from => 'Tipo'
+    select 'Legal', :from => 'Tipo'
 
     click_button 'Adicionar'
 
     within_records do
       expect(page).to have_css('.record', :count => 1)
-      expect(page).to have_content 'Gabriel Sobrinho'
-      expect(page).to have_content 'Pessoa física'
-      expect(page).to have_content 'Empresa de grande porte'
+      expect(page).to have_content 'Nohup'
+      expect(page).to have_content 'Pessoa jurídica'
+      expect(page).to have_content 'Microempresa'
       expect(page).to have_content 'Wenderson Malheiros'
-      expect(page).to have_content 'Comercial'
+      expect(page).to have_content 'Legal'
       expect(page).to have_content 'Não'
 
       click_link 'Remover'
@@ -274,11 +273,11 @@ feature "PurchaseProcessAccreditation" do
   scenario 'should enable fields when creditor_representative is not blank' do
     LicitationProcess.make!(:processo_licitatorio, modality: Modality::TRADING)
     CompanySize.make!(:empresa_de_grande_porte)
-    sobrinho = Creditor.make!(:sobrinho)
+    nohup = Creditor.make!(:nohup)
 
     CreditorRepresentative.make!(:representante_sobrinho,
       :representative_person => Person.make!(:wenderson),
-      :creditor => sobrinho)
+      :creditor => nohup)
 
     navigate 'Processos de Compra > Processos de Compras'
 
@@ -290,16 +289,18 @@ feature "PurchaseProcessAccreditation" do
 
     click_link 'Credenciamento'
 
-    fill_with_autocomplete 'Fornecedor', :with => 'Gabriel'
+    fill_with_autocomplete 'Fornecedor', :with => 'Nohup'
 
     select '', from: 'Representante'
 
-    expect(page).to_not have_select 'Tipo'
-    expect(page).to_not have_checked_field 'Procurador'
+    expect(page).to have_disabled_field 'Tipo', :with => ''
+    expect(page).to have_disabled_field 'Procurador'
 
     select 'Wenderson', from: 'Representante'
 
-    expect(page).to have_select 'Tipo'
+    expect(page).to_not have_disabled_field 'Tipo', :with => ''
+    expect(page).to_not have_disabled_field 'Procurador'
+
   end
 
   scenario 'show report' do
