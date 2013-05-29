@@ -120,6 +120,8 @@ describe LicitationProcess do
 
     it { should validate_presence_of :modality }
     it { should validate_presence_of :judgment_form_id }
+    it { should validate_presence_of :envelope_delivery_date }
+    it { should validate_presence_of :envelope_delivery_time }
   end
 
   context "when is a licitation" do
@@ -155,6 +157,10 @@ describe LicitationProcess do
     end
 
     describe "#validate_proposal_envelope_opening_date" do
+      before do
+        subject.type_of_purchase = PurchaseProcessTypeOfPurchase::LICITATION
+      end
+
       it "return when envelope opening date is not present" do
         subject.stub(:proposal_envelope_opening_date).and_return nil
         PurchaseProcessEnvelopeOpeningDate.should_not_receive :new
@@ -279,6 +285,10 @@ describe LicitationProcess do
   end
 
   context 'new_proposal_envelope_opening_date is not equal to new_envelope_delivery_date' do
+    before do
+      subject.type_of_purchase = PurchaseProcessTypeOfPurchase::LICITATION
+    end
+
     it { should allow_value("11:11").for(:envelope_delivery_time) }
     it { should_not allow_value("44:11").for(:envelope_delivery_time) }
   end
