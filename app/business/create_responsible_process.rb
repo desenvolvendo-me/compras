@@ -15,7 +15,7 @@ class CreateResponsibleProcess
 
     if process_responsibles.empty?
       stage_process_repository.send(type_of_purchase).each do |stage_process|
-        process_responsibles.build(stage_process_id: stage_process.id)
+        process_responsibles.build(stage_process_id: stage_process.id, imported: true)
       end
     end
   end

@@ -35,9 +35,9 @@ describe CreateResponsibleProcess do
       context 'when process_responsibles is empty' do
         it 'should build process responsibles' do
           repository.should_receive(:send).with('licitation').and_return stage_processes
-          process_responsibles.should_receive(:build).with(stage_process_id: 1)
-          process_responsibles.should_receive(:build).with(stage_process_id: 2)
-          process_responsibles.should_receive(:build).with(stage_process_id: 3)
+          process_responsibles.should_receive(:build).with(stage_process_id: 1, imported: true)
+          process_responsibles.should_receive(:build).with(stage_process_id: 2, imported: true)
+          process_responsibles.should_receive(:build).with(stage_process_id: 3, imported: true)
 
           subject.create_responsible_process!
         end
