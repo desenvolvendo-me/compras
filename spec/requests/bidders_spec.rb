@@ -48,7 +48,7 @@ feature "Bidders" do
 
     click_link 'Habilitação'
 
-    click_link 'Criar Licitante'
+    click_link 'Criar Habilitação'
 
     expect(page).to have_field 'Processo de compra', :with => '2/2013 - Convite 1'
     expect(page).to have_field 'Data do processo de compra', :with => '20/03/2013'
@@ -86,7 +86,7 @@ feature "Bidders" do
 
     click_button 'Salvar'
 
-    expect(page).to have_content 'Licitante criado com sucesso.'
+    expect(page).to have_content 'Habilitação criado com sucesso.'
 
     within_records do
       click_link 'Gabriel Sobrinho'
@@ -142,7 +142,7 @@ feature "Bidders" do
 
     click_button 'Salvar'
 
-    expect(page).to have_content 'Licitante editado com sucesso.'
+    expect(page).to have_content 'Habilitação editado com sucesso.'
 
     within_records do
       click_link 'Gabriel Sobrinho'
@@ -176,7 +176,7 @@ feature "Bidders" do
 
     click_link 'Apagar'
 
-    expect(page).to have_notice 'Licitante apagado com sucesso.'
+    expect(page).to have_notice 'Habilitação apagado com sucesso.'
 
     within_records do
       expect(page).to have_link 'Wenderson Malheiro'
@@ -222,7 +222,7 @@ feature "Bidders" do
 
     click_button 'Salvar'
 
-    expect(page).to have_content 'Licitante editado com sucesso.'
+    expect(page).to have_content 'Habilitação editado com sucesso.'
 
     within_records do
       click_link 'Wenderson Malheiros'
@@ -260,7 +260,7 @@ feature "Bidders" do
 
     click_button 'Salvar'
 
-    expect(page).to have_content 'Licitante editado com sucesso.'
+    expect(page).to have_content 'Habilitação editado com sucesso.'
 
     within_records do
       click_link 'Wenderson Malheiros'
@@ -279,12 +279,12 @@ feature "Bidders" do
 
     click_link 'Habilitação'
 
-    click_link 'Criar Licitante'
+    click_link 'Criar Habilitação'
 
     expect(page).to have_button 'Salvar'
   end
 
-  scenario "index should have title Licitantes do Processo de Compra 1/2013" do
+  scenario "index should have title Habilitaçãos do Processo de Compra 1/2013" do
     LicitationProcess.make!(:processo_licitatorio_computador)
 
     navigate 'Processos de Compra > Processos de Compras'
@@ -295,10 +295,10 @@ feature "Bidders" do
 
     click_link 'Habilitação'
 
-    expect(page).to have_content "Licitantes do Processo de Compra 2/2013"
+    expect(page).to have_content "Habilitações do Processo de Compra 2/2013"
   end
 
-  scenario "edit should have title Editar Licitante do Processo de Compra 2/2013" do
+  scenario "edit should have title Editar Habilitação do Processo de Compra 2/2013" do
     LicitationProcess.make!(:processo_licitatorio_computador)
 
     navigate 'Processos de Compra > Processos de Compras'
@@ -313,10 +313,10 @@ feature "Bidders" do
       click_link 'Wenderson Malheiros'
     end
 
-    expect(page).to have_content "Editar Licitante (Wenderson Malheiros) do Processo de Compra 2/2013"
+    expect(page).to have_content "Editar Habilitação (Wenderson Malheiros) do Processo de Compra 2/2013"
   end
 
-  scenario "new should have title Novo Licitante do Processo de Compra 2/2013" do
+  scenario "new should have title Nova Habilitação do Processo de Compra 2/2013" do
     LicitationProcess.make!(:processo_licitatorio_computador)
 
     navigate 'Processos de Compra > Processos de Compras'
@@ -327,9 +327,9 @@ feature "Bidders" do
 
     click_link 'Habilitação'
 
-    click_link 'Criar Licitante'
+    click_link 'Criar Habilitação'
 
-    expect(page).to have_content "Criar Licitante no Processo de Compra 2/2013"
+    expect(page).to have_content "Criar Habilitação no Processo de Compra 2/2013"
   end
 
  scenario 'should have field technical_score when licitation kind is technical_and_price' do
