@@ -26,6 +26,7 @@ describe RealigmentPrice do
   it { should delegate(:reference_unit).to(:material).allowing_nil(true).prefix(true) }
 
   it { should delegate(:lot).to(:proposal).allowing_nil(true).prefix(false) }
+  it { should delegate(:quantity).to(:item).allowing_nil(true).prefix(false) }
 
   describe '#total_price' do
     let(:item) { double(:item, quantity: 3) }

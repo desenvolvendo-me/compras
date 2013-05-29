@@ -5,5 +5,4 @@ RealigmentPrice.blueprint(:realinhamento) do
   price { 9.99 }
   brand { "Acme" }
   delivery_date { Date.current }
-  quantity { 2 }
 end
