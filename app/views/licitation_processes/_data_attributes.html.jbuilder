@@ -7,7 +7,6 @@ builder resource, json do
   json.process_date                    resource.process_date
   json.modality_humanize               resource.modality_humanize.to_s
   json.description                     resource.description
-  json.summarized_object               resource.summarized_object
   json.execution_type_humanize         resource.execution_type_humanize
   json.contract_guarantees_humanize    resource.contract_guarantees_humanize
   json.execution_type                 resource.execution_type

@@ -7,7 +7,7 @@ class LicitationProcess < Compras::Model
                   :period, :period_unit, :expiration, :expiration_unit,
                   :judgment_form_id, :execution_type,
                   :price_registration, :status,:object_type, :date,
-                  :protocol, :summarized_object, :modality, :description,
+                  :protocol, :modality, :description,
                   :purchase_process_budget_allocations_attributes,
                   :contract_guarantees, :extension_clause, :index_update_rate_id,
                   :type_of_removal, :eletronic_trading, :notice_availability_date,
