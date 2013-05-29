@@ -1,4 +1,4 @@
-json.array!(collection) do |json, obj|
+json.array!(collection) do |obj|
   json.id              obj.id
   json.value           obj.to_s
   json.label           obj.to_s
@@ -9,7 +9,7 @@ json.array!(collection) do |json, obj|
   json.person_email    obj.person_email
   json.email           obj.email
 
-  json.representatives obj.representatives do |json, representative|
+  json.representatives obj.representatives do |representative|
     json.id   representative.id
     json.name representative.to_s
   end

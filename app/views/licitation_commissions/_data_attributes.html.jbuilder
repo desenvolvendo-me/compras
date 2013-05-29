@@ -1,6 +1,7 @@
 builder resource, json do
-  json.president_name                resource.president_name
-  json.members resource.licitation_commission_members do |json, member|
+  json.president_name resource.president_name
+
+  json.members resource.licitation_commission_members do |member|
     json.id                    member.id
     json.role_humanize         member.role_humanize
     json.role_nature_humanize  member.role_nature_humanize
@@ -9,12 +10,12 @@ builder resource, json do
     json.cpf                   member.individual_cpf
   end
 
-  json.auctioneer resource.auctioneer do |json, member|
+  json.auctioneer resource.auctioneer do |member|
     json.role_humanize         member.role_humanize
     json.individual_name       member.individual.to_s
   end
 
-  json.support_team resource.support_team do |json, member|
+  json.support_team resource.support_team do |member|
     json.role_humanize         member.role_humanize
     json.individual_name       member.individual.to_s
   end

@@ -1,4 +1,4 @@
-json.array!(collection) do |json, obj|
+json.array!(collection) do |obj|
   json.id           obj.id
   json.value        obj.decorator.masked_to_s
   json.label        obj.decorator.masked_to_s
