@@ -10,11 +10,15 @@ module TceExport::MG::Casters
 
       rjust = options.fetch(:rjust, nil)
       ljust = options.fetch(:ljust, nil)
+      upcase = options.fetch(:upcase, false)
+
+      return " " if value.nil?
 
       value = value.rjust(options[:size], rjust) if rjust
       value = value.ljust(options[:size], ljust) if ljust
+      value = value.to_s.upcase if upcase
 
-      value.nil? ? " " : value
+      value
     end
   end
 end
