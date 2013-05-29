@@ -178,6 +178,16 @@ feature "LicitationProcesses" do
       fill_modal 'Tipo de documento', :with => 'Fiscal', :field => 'Descrição'
     end
 
+    within_tab 'Receita' do
+      fill_in 'Prazo da concessão', :with => '1'
+      select 'ano/anos', :from => 'Unidade do prazo da concessão'
+
+      expect(page).to_not have_field 'Valor da oferta mínima para alienações'
+      expect(page).to_not have_field 'Meta'
+      expect(page).to_not have_field 'Direitos e obrigações do concedente'
+      expect(page).to_not have_field 'Diretos e obrigações do concedido'
+    end
+
     click_button 'Salvar'
 
     expect(page).to have_notice "Processo de Compra 1/#{Date.current.year} criado com sucesso."
@@ -263,6 +273,11 @@ feature "LicitationProcesses" do
         expect(page).to have_content '10,00'
         expect(page).to have_content '20,00'
       end
+    end
+
+    within_tab 'Receita' do
+      expect(page).to have_field 'Prazo da concessão', :with => '1'
+      expect(page).to have_select 'Unidade do prazo da concessão', :selected => 'ano/anos'
     end
 
     within_tab 'Principal' do
@@ -1147,6 +1162,7 @@ feature "LicitationProcesses" do
     click_link 'Criar Processo de Compra'
 
     within_tab 'Principal' do
+      choose 'Processo licitatório'
       select 'Compras e serviços', :from => 'Tipo de objeto'
     end
 
@@ -1203,7 +1219,7 @@ feature "LicitationProcesses" do
     end
 
     within '#licitation_process' do
-      expect(page).to_not have_link 'Receita'
+      expect(page).to have_link 'Receita'
     end
 
     within_tab 'Itens' do
@@ -1233,7 +1249,7 @@ feature "LicitationProcesses" do
     end
 
     within '#licitation_process' do
-      expect(page).to have_link 'Receita'
+      expect(page).to_not have_link 'Receita'
     end
 
     within_tab 'Itens / Justificativa' do
