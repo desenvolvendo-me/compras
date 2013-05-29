@@ -90,8 +90,8 @@ describe LicitationProcessRatification do
           licitation_process.stub(judgment_commission_advices: ['advice'])
         end
 
-        it 'should be valid' do
-         subject.valid?
+        it 'should not have errors on base' do
+          subject.valid?
 
           expect(subject.errors[:base]).to_not include('O processo de compra (1/2013) deve possuir parecer(es) da comissão de licitação')
         end
