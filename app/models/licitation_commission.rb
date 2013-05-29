@@ -34,8 +34,7 @@ class LicitationCommission < Compras::Model
       :on_or_after_message => :should_be_on_or_after_nomination_date
     }, :allow_blank => true
   validates :licitation_commission_responsibles, :licitation_commission_members, :no_duplication => :individual_id
-  validate :must_have_one_member_with_role_president, :unless => :trading?
-  validate :must_have_auctioneer, :must_have_support_team, :if => :trading?
+  validate :must_have_one_member_in_licitation_commission
   validate :validate_custom_data
 
   orderize "id DESC"
@@ -72,35 +71,9 @@ class LicitationCommission < Compras::Model
 
   protected
 
-  def must_have_one_member_with_role_president
-    if presidents.empty?
-      errors.add(:licitation_commission_members, :must_have_one_president)
-    elsif presidents.count > 1
-      errors.add(:licitation_commission_members, :must_have_only_one_president)
+  def must_have_one_member_in_licitation_commission
+    if licitation_commission_members.empty?
+      errors.add(:licitation_commission_members, :must_have_one_member_in_licitation_commission)
     end
-  end
-
-  def must_have_auctioneer
-    if auctioneer.empty?
-      errors.add(:licitation_commission_members, :must_have_one_auctioneer)
-    end
-  end
-
-  def must_have_support_team
-    if support_team.empty?
-      errors.add(:licitation_commission_members, :must_have_one_support_team_member)
-    end
-  end
-
-  def auctioneer
-    licitation_commission_members.select(&:auctioneer?)
-  end
-
-  def support_team
-    licitation_commission_members.select(&:support_team?)
-  end
-
-  def presidents
-    licitation_commission_members.select(&:president?)
   end
 end
