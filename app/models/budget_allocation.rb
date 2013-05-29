@@ -56,6 +56,10 @@ class BudgetAllocation < Accounting::Model
     "#{code} - #{expense_nature.to_s}"
   end
 
+  def autocomplete_budget_allocation
+    "#{code} - #{expense_nature_description}"
+  end
+
   def capability
     capabilities.map(&:to_s).uniq.join(', ')
   end

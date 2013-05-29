@@ -134,7 +134,7 @@ feature "LicitationProcesses" do
         expect(page).to have_content 'Valor previsto'
 
         within 'tbody tr' do
-          expect(page).to have_content '1 - 3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+          expect(page).to have_content '1 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
           expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
           expect(page).to have_content '3.1.90.01.01 - Aposentadorias Custeadas com Recursos do RPPS'
           expect(page).to have_content '500,00'
@@ -163,7 +163,7 @@ feature "LicitationProcesses" do
         expect(page).to have_content 'Valor previsto'
 
         within 'tbody tr:last' do
-          expect(page).to have_content '1 - 3.1.90.00.00 - Aplicações Diretas'
+          expect(page).to have_content '1 - Aplicações Diretas'
           expect(page).to have_content '3.1.90.00.00 - Aplicações Diretas'
           expect(page).to have_content '3.0.10.01.11 - Compra de Material'
           expect(page).to have_content '3.000,00'
