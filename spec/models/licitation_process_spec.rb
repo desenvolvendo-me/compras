@@ -93,8 +93,6 @@ describe LicitationProcess do
   it { should validate_presence_of :contract_guarantees }
   it { should validate_presence_of :description }
   it { should validate_presence_of :execution_type }
-  it { should validate_presence_of :expiration }
-  it { should validate_presence_of :expiration_unit }
   it { should validate_presence_of :object_type }
   it { should validate_presence_of :payment_method }
   it { should validate_presence_of :period }
@@ -122,6 +120,8 @@ describe LicitationProcess do
     it { should validate_presence_of :judgment_form_id }
     it { should validate_presence_of :envelope_delivery_date }
     it { should validate_presence_of :envelope_delivery_time }
+    it { should validate_presence_of :expiration }
+    it { should validate_presence_of :expiration_unit }
   end
 
   context "when is a licitation" do
