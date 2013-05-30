@@ -7,6 +7,7 @@ $(document).ready(function() {
       $('div.licitation_process_judgment_form_id').removeClass('hidden');
       $('#licitation_process_judgment_form_id').requiredField(true);
       $('div.type-of-removal').addClass('hidden');
+      $('li.income').removeClass('hidden');
       $('label[for="licitation_process_modality_number"]').html('Nº da modalidade');
       $('label[for="licitation_process_unit_price"]').html('Valor unitário máximo');
       $('a[href="#tab-items"]').html("Itens");
@@ -15,11 +16,14 @@ $(document).ready(function() {
       $('.proposal_envelope_opening_date').removeClass('hidden');
       $('.closing_of_accreditation_date').removeClass('hidden');
       $('.stage_of_bids_date').removeClass('hidden');
+      $('.authorization_envelope_opening_date').removeClass('hidden');
+      $('.expiration').removeClass('hidden');
     } else {
       $('div.modality').addClass('hidden');
       $('div.licitation_process_judgment_form_id').addClass('hidden');
       $('#licitation_process_judgment_form_id').requiredField(false);
       $('div.type-of-removal').removeClass('hidden');
+      $('li.income').addClass('hidden');
       $('label[for="licitation_process_modality_number"]').html('Nº do afastamento');
       $('label[for="licitation_process_unit_price"]').html('Valor unitário');
       $('a[href="#tab-items"]').html("Itens / Justificativa");
@@ -29,6 +33,8 @@ $(document).ready(function() {
       $('.proposal_envelope_opening_date').addClass('hidden');
       $('.closing_of_accreditation_date').addClass('hidden');
       $('.stage_of_bids_date').addClass('hidden');
+      $('.authorization_envelope_opening_date').addClass('hidden');
+      $('.expiration').addClass('hidden');
       toogleVisibilityFieldsToTradingAndConcurrence();
     }
   };

@@ -1162,6 +1162,7 @@ feature "LicitationProcesses" do
     click_link 'Criar Processo de Compra'
 
     within_tab 'Principal' do
+      choose 'Processo licitatório'
       select 'Compras e serviços', :from => 'Tipo de objeto'
     end
 
@@ -1213,6 +1214,12 @@ feature "LicitationProcesses" do
 
       expect(page).to have_field 'Registro de preço'
       expect(page).to have_field 'Pregão eletrônico'
+
+      select '', :from => 'Modalidade'
+    end
+
+    within '#licitation_process' do
+      expect(page).to have_link 'Receita'
     end
 
     within_tab 'Itens' do
@@ -1228,6 +1235,10 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Hora do credenciamento'
       expect(page).to have_field 'Data da fase de lances'
       expect(page).to have_field 'Hora da fase de lances'
+      expect(page).to have_field 'Abertura da habilitação'
+      expect(page).to have_field 'Hora da habilitação'
+      expect(page).to have_field 'Validade da proposta'
+      expect(page).to have_field 'Período da validade da proposta'
     end
 
     within_tab 'Principal' do
@@ -1235,6 +1246,10 @@ feature "LicitationProcesses" do
 
       expect(page).to_not have_field 'Registro de preço'
       expect(page).to_not have_field 'Pregão eletrônico'
+    end
+
+    within '#licitation_process' do
+      expect(page).to_not have_link 'Receita'
     end
 
     within_tab 'Itens / Justificativa' do
@@ -1250,6 +1265,10 @@ feature "LicitationProcesses" do
       expect(page).to_not have_field 'Hora do credenciamento'
       expect(page).to_not have_field 'Data da fase de lances'
       expect(page).to_not have_field 'Hora da fase de lances'
+      expect(page).to_not have_field 'Abertura da habilitação'
+      expect(page).to_not have_field 'Hora da habilitação'
+      expect(page).to_not have_field 'Validade da proposta'
+      expect(page).to_not have_field 'Período da validade da proposta'
     end
 
     within_tab 'Principal' do

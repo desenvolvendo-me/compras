@@ -91,10 +91,10 @@ class LicitationProcess < Compras::Model
            :to => :judgment_form, :allow_nil => true, :prefix => true
 
   validates :process_date, :period, :contract_guarantees, :type_of_purchase,
-            :period_unit, :expiration, :expiration_unit, :payment_method,
+            :period_unit, :payment_method,
             :year, :execution_type, :object_type, :description, :notice_availability_date,
             :presence => true
-  validates :envelope_delivery_date, :envelope_delivery_time,
+  validates :envelope_delivery_date, :envelope_delivery_time, :expiration, :expiration_unit,
             :modality, :judgment_form_id, :presence => true, :if => :licitation?
   validates :goal, :licensor_rights_and_liabilities, :licensee_rights_and_liabilities,
             :presence => true, :if => :concessions_or_permits?
