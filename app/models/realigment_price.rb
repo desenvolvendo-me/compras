@@ -1,6 +1,6 @@
 class RealigmentPrice < Compras::Model
   attr_accessible :price, :item, :purchase_process_item_id,
-                  :proposal, :brand, :delivery_date, :quantity, :proposal_id
+                  :proposal, :brand, :delivery_date, :proposal_id
 
   belongs_to :proposal, class_name: 'PurchaseProcessCreditorProposal',
     foreign_key: :purchase_process_creditor_proposal_id
@@ -14,6 +14,7 @@ class RealigmentPrice < Compras::Model
   validates :price, presence: true
 
   delegate :lot, to: :proposal, allow_nil: true, prefix: false
+  delegate :quantity, to: :item, allow_nil: true, prefix: false
   delegate :execution_unit_responsible, :year, :process,
     to: :licitation_process, allow_nil: true, prefix: true
   delegate :name, :cnpj, :benefited, :identity_document,
