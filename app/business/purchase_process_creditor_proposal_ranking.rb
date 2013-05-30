@@ -29,7 +29,7 @@ class PurchaseProcessCreditorProposalRanking
 
   def rank_proposals(proposals, ranking)
     if proposals.size == 1
-      proposals.first.update_column :ranking, ranking
+      proposals.first.apply_ranking! ranking
     else
       draw_proposals proposals
     end

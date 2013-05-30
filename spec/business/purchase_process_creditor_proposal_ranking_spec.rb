@@ -36,7 +36,7 @@ describe PurchaseProcessCreditorProposalRanking do
       let(:proposals) { [proposal] }
 
       it 'ranks the proposal with the passed rank' do
-        proposal.should_receive(:update_column).with(:ranking, 1)
+        proposal.should_receive(:apply_ranking!).with 1
 
         subject.send(:rank_proposals, proposals, 1)
       end
