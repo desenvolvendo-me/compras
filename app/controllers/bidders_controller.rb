@@ -3,6 +3,12 @@ class BiddersController < CrudController
 
   before_filter :block_changes_when_have_ratifications, :only => [:create, :update, :destroy]
 
+  def index
+    BidderCreditorCreator.create!(licitation_process) if licitation_process.direct_purchase?
+
+    super
+  end
+
   def new
     object = build_resource
     object.licitation_process = LicitationProcess.find(params[:licitation_process_id])
@@ -69,5 +75,11 @@ class BiddersController < CrudController
     return unless parent.ratification?
 
     raise ActiveRecord::RecordNotFound
+  end
+
+  private
+
+  def licitation_process
+    LicitationProcess.find params[:licitation_process_id]
   end
 end

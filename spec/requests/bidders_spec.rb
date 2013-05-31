@@ -48,6 +48,10 @@ feature "Bidders" do
 
     click_link 'Habilitação'
 
+    within_records do
+      expect(page).to have_link 'Wenderson Malheiros'
+    end
+
     click_link 'Criar Habilitação'
 
     expect(page).to have_field 'Processo de compra', :with => '2/2013 - Convite 1'
