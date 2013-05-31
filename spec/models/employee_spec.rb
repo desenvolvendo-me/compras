@@ -30,15 +30,19 @@ describe Employee do
   it { should validate_presence_of :registration }
   it { should validate_presence_of :position }
 
+  it { should allow_value('estevancunhaaraujo@teleworm.us').for(:email) }
+  it { should_not allow_value('estevancunhaaraujoteleworm.us').for(:email) }
+  it { should_not allow_value('missing.host').for(:email) }
+
   it { should delegate(:name).to(:individual).allowing_nil(true) }
   it { should delegate(:number).to(:individual).allowing_nil(true) }
   it { should delegate(:issuer).to(:individual).allowing_nil(true) }
   it { should delegate(:cpf).to(:individual).allowing_nil(true) }
-  it { should delegate(:phone).to(:individual).allowing_nil(true) }
-  it { should delegate(:email).to(:individual).allowing_nil(true) }
   it { should delegate(:zip_code).to(:individual).allowing_nil(true) }
   it { should delegate(:city).to(:individual).allowing_nil(true) }
   it { should delegate(:state).to(:individual).allowing_nil(true) }
+  it { should delegate(:email).to(:individual).allowing_nil(true).prefix(true) }
+  it { should delegate(:phone).to(:individual).allowing_nil(true).prefix(true) }
   it { should delegate(:name).to(:street).allowing_nil(true).prefix(true) }
   it { should delegate(:name).to(:neighborhood).allowing_nil(true).prefix(true) }
   it { should delegate(:tce_mg_code).to(:city).allowing_nil(true).prefix(true) }

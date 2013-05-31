@@ -1,5 +1,5 @@
 class Employee < Compras::Model
-  attr_accessible :individual_id, :position_id, :registration
+  attr_accessible :email, :individual_id, :phone, :position_id, :registration
 
   belongs_to :individual
   belongs_to :position
@@ -18,17 +18,28 @@ class Employee < Compras::Model
   has_one :street, through: :individual
   has_one :neighborhood, through: :individual
 
-  delegate :to_s, :name, :number, :issuer, :cpf, :phone, :email, :zip_code,
+  delegate :to_s, :name, :number, :issuer, :cpf, :zip_code,
     :city, :state, to: :individual, allow_nil: :true
+  delegate :email, :phone, to: :individual, allow_nil: :true, prefix: true
   delegate :name, to: :street, allow_nil: true, prefix: true
   delegate :name, to: :neighborhood, allow_nil: true, prefix: true
   delegate :tce_mg_code, to: :city, allow_nil: true, prefix: true
   delegate :acronym, to: :state, allow_nil: true, prefix: true
 
+  validates :email, mail: true, allow_blank: true
   validates :individual_id, :registration, uniqueness: { allow_blank: true }
   validates :individual, :registration, :position, presence: true
+  validates :phone, mask: "(99) 9999-9999", allow_blank: true
 
   filterize
 
   scope :ordered, joins { individual }.order { individual.id }
+
+  def email
+    super || individual_email
+  end
+
+  def phone
+    super || individual_phone
+  end
 end

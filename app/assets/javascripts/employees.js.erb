@@ -1,0 +1,29 @@
+function changeFieldAttribute(){
+  if ($('#employee_email').val() != '') {
+    $('#employee_email').attr('disabled', true);
+  }else{
+    $('#employee_email').removeAttr('disabled');
+  }
+
+  if ($('#employee_phone').val() != '') {
+    $('#employee_phone').attr('disabled', true);
+  }else{
+    $('#employee_phone').removeAttr('disabled');
+  }
+}
+
+$(document).ready(function() {
+  $('#employee_individual_id').on('change', function (event, individual) {
+    if(individual) {
+      $('#employee_email').val(individual.person_email);
+      $('#employee_phone').val(individual.person_phone);
+      changeFieldAttribute();
+    }
+  });
+
+  $('#employee_individual').on('change', function () {
+    if($(this).val() == '') {
+      $('#employee_email, #employee_phone').val('').removeAttr('disabled');
+    }
+  });
+});
