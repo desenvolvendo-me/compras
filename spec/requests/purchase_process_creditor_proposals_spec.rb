@@ -458,8 +458,6 @@ feature 'PurchaseProcessCreditorProposals' do
 
     expect(page).to have_notice 'Proposta Comercial editada com sucesso'
 
-    click_link "Desempatar propostas"
-
-    expect(page).to_not have_button "Salvar"
+    expect(page).to_not have_link "Desempatar propostas"
   end
 end
