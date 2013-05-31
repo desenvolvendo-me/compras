@@ -110,6 +110,7 @@
     var urlModal = "<%= modal_creditors_path %>?",
         licitationProcessId = $('#licitation_process_ratification_licitation_process_id').val(),
         params = {
+            enabled_by_licitation: licitationProcessId,
           <% if resource.licitation_process_licitation? %>
             won_calculation: licitationProcessId,
             without_licitation_ratification: licitationProcessId
