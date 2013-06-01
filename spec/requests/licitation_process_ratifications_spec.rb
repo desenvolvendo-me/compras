@@ -9,7 +9,7 @@ feature "LicitationProcessRatifications" do
   scenario 'creating and updating a ratification to licitation process' do
     licitation = LicitationProcess.make!(:processo_licitatorio_computador,
       judgment_form: JudgmentForm.make!(:por_item_com_menor_preco),
-      bidders:[Bidder.make!(:licitante_sobrinho)],
+      bidders:[Bidder.make!(:licitante_sobrinho, enabled: true)],
       items: [PurchaseProcessItem.make!(:item_arame_farpado),
         PurchaseProcessItem.make!(:item_arame)])
 
@@ -91,14 +91,15 @@ feature "LicitationProcessRatifications" do
   end
 
   scenario 'creating and updating a ratification to direct purchase' do
+    creditor = Creditor.make!(:sobrinho_sa)
     licitation = LicitationProcess.make!(:compra_direta,
       judgment_form: JudgmentForm.make!(:por_item_com_menor_preco),
-      items: [PurchaseProcessItem.make!(:item_arame_farpado, creditor: Creditor.make!(:sobrinho_sa)),
-        PurchaseProcessItem.make!(:item_arame, creditor: Creditor.make!(:sobrinho_sa))])
+      items: [PurchaseProcessItem.make!(:item_arame_farpado, creditor: creditor),
+        PurchaseProcessItem.make!(:item_arame, creditor: creditor)])
 
     PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado, licitation_process: licitation, ranking: 1)
     PurchaseProcessCreditorProposal.make!(:proposta_arame, licitation_process: licitation, ranking: 1)
-
+    Bidder.make!(:licitante_sobrinho, licitation_process: licitation, creditor: creditor, enabled: true)
     navigate 'Processos de Compra > Processos de Compras'
 
     within_records do
@@ -182,7 +183,7 @@ feature "LicitationProcessRatifications" do
   scenario 'cleaning items' do
     licitation = LicitationProcess.make!(:processo_licitatorio_computador,
       judgment_form: JudgmentForm.make!(:por_item_com_menor_preco),
-      bidders:[Bidder.make!(:licitante_sobrinho)],
+      bidders:[Bidder.make!(:licitante_sobrinho, enabled: true)],
       items: [PurchaseProcessItem.make!(:item_arame_farpado),
         PurchaseProcessItem.make!(:item_arame)])
 

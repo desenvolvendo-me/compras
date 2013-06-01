@@ -99,6 +99,11 @@ class Creditor < Compras::Model
     where { |creditor| creditor.id.eq(id) }
   }
 
+  scope :enabled_by_licitation, lambda { | licitation_process_id |
+    joins { bidders }.
+    where { (bidders.licitation_process_id.eq licitation_process_id) & (bidders.enabled.eq 't') }
+  }
+
   scope :without_direct_purchase_ratification, lambda { |licitation_process_id|
     select { 'compras_creditors.*, unico_people.name' }.
     joins { purchase_process_items.licitation_process.licitation_process_ratifications.outer }.
