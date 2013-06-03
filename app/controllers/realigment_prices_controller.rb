@@ -5,7 +5,8 @@ class RealigmentPricesController < CrudController
   has_scope :creditor_id, allow_blank: true
 
   def index
-    @creditors = licitation_process.creditors.includes(:purchase_process_creditor_proposals)
+    @creditors = Creditor.enabled_by_licitation(licitation_process_id).
+      winner_without_disqualifications
     @licitation_process = licitation_process
   end
 

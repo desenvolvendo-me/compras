@@ -105,6 +105,14 @@ class Creditor < Compras::Model
     where { (bidders.licitation_process_id.eq licitation_process_id) & (bidders.enabled.eq 't') }
   }
 
+  scope :winner_without_disqualifications, -> {
+    joins { purchase_process_creditor_proposals }.
+    where {
+      (purchase_process_creditor_proposals.ranking.eq 1) &
+      (purchase_process_creditor_proposals.disqualified.not_eq 't')
+    }.uniq
+  }
+
   scope :without_direct_purchase_ratification, lambda { |licitation_process_id|
     select { 'compras_creditors.*, unico_people.name' }.
     joins { purchase_process_items.licitation_process.licitation_process_ratifications.outer }.
