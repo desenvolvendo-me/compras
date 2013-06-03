@@ -4,6 +4,7 @@ class LicitationProcessPublicationsController < CrudController
   def new
     object = build_resource
     object.licitation_process = LicitationProcess.find(params[:licitation_process_id])
+    object.publication_of = PublicationOf::CONFIRMATION if object.licitation_process.direct_purchase?
 
     super
   end
