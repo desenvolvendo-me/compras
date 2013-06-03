@@ -19,6 +19,7 @@ BudgetAllocation.blueprint(:alocacao) do
   budget_allocation_capabilities { [BudgetAllocationCapability.make!(:generic, amount: 500.0, budget_allocation: object)] }
   kind { BudgetAllocationKind::DIVIDE }
   reserve_funds { [ReserveFund.make!(:detran_2011, :budget_allocation => object)] }
+  year { 2012 }
 end
 
 BudgetAllocation.blueprint(:alocacao_extra) do
@@ -40,6 +41,7 @@ BudgetAllocation.blueprint(:alocacao_extra) do
   budget_allocation_capabilities { [BudgetAllocationCapability.make!(:generic, amount: 200.0, budget_allocation: object)] }
   date { Date.current }
   kind { BudgetAllocationKind::DIVIDE }
+  year { 2011 }
 end
 
 BudgetAllocation.blueprint(:reparo_2011) do
@@ -61,4 +63,5 @@ BudgetAllocation.blueprint(:reparo_2011) do
   date { Date.current }
   budget_allocation_capabilities { [BudgetAllocationCapability.make!(:generic, amount: 3000.0, budget_allocation: object)] }
   kind { BudgetAllocationKind::DIVIDE }
+  year { 2011 }
 end

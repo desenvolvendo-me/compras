@@ -28,14 +28,11 @@ class BudgetAllocation < Accounting::Model
   orderize :code
 
   scope :term, lambda { |q|
-    joins { budget_structure }.joins { expense_nature }.
-    where { (budget_structure.full_code.like("%#{q}%")  | expense_nature.description.like("%#{q}%")) }
+    joins { expense_nature }.
+    where { code.eq("#{q}")  | expense_nature.description.like("%#{q}%") }
   }
 
-  scope :year, lambda { |year|
-    joins { budget_structure_configuration }.
-    where { |budget_allocation| budget_allocation.budget_structure_configuration.year.eq(year) }
-  }
+  scope :by_year, ->(year) { where(year: year) if year.present? }
 
   scope :budget_structure_id, lambda { |budget_structure_id|
     where { |budget_allocation|
