@@ -7,10 +7,12 @@
     <li>
       <%= link_to 'Mapa de Propostas', new_report_map_of_proposal_path(licitation_process_id: @licitation_process) unless @creditors.empty? %>
     </li>
-    <li>
-      <%= link_to 'Desempatar propostas',
-        edit_purchase_process_proposal_tiebreak_path(@licitation_process) %>
-    </li>
+    <% if @licitation_process.tied_creditor_proposals.any? %>
+      <li>
+        <%= link_to 'Desempatar propostas',
+          edit_purchase_process_proposal_tiebreak_path(@licitation_process) %>
+      </li>
+    <% end %>
     <li>
       <%= link_to 'Voltar ao processo de compra', edit_licitation_process_path(@licitation_process) %>
     </li>
