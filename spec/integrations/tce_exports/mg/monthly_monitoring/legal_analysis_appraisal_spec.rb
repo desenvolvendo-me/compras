@@ -23,7 +23,7 @@ describe TceExport::MG::MonthlyMonitoring::LegalAnalysisAppraisalGenerator do
         year: 2013)
     end
 
-    let :processo_licitatorio do
+    let :licitation_process do
       LicitationProcess.make!(:processo_licitatorio_computador)
     end
 
@@ -35,10 +35,13 @@ describe TceExport::MG::MonthlyMonitoring::LegalAnalysisAppraisalGenerator do
       FactoryGirl.create(:extended_prefecture, prefecture: prefecture)
 
       LicitationProcessRatification.make!(:processo_licitatorio_computador,
-        licitation_process: processo_licitatorio)
+        licitation_process: licitation_process,
+        ratification_date: Date.new(2013, 5, 13),
+        adjudication_date: Date.new(2013, 5, 13)
+      )
 
       LegalAnalysisAppraisal.create!(
-        licitation_process_id: processo_licitatorio.id,
+        licitation_process_id: licitation_process.id,
         responsible_id: sobrinho.id,
         appraisal_expedition_date: Date.new(2013, 5, 13),
         appraisal_type: AppraisalType::TECHNICAL,
@@ -57,4 +60,3 @@ describe TceExport::MG::MonthlyMonitoring::LegalAnalysisAppraisalGenerator do
     end
   end
 end
-
