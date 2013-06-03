@@ -53,18 +53,18 @@
 </div>
 
 <script>
-enabledFieldsRepresentative();
-function enabledFieldsRepresentative(){
-  if ($("#creditor_representative_id").val() == ""){
-    $("#kind").attr('disabled',true);
-    $("#purchase_process_accreditation_has_power_of_attorney").attr('disabled',true);
-  }else{
-    $("#kind").removeAttr('disabled');
-    $("#purchase_process_accreditation_has_power_of_attorney").removeAttr('disabled');
-  }
-}
-
-$("#creditor_representative_id").on('change', function(){
   enabledFieldsRepresentative();
-});
+  function enabledFieldsRepresentative(){
+    if ($("#creditor_representative_id").val() == ""){
+      $("#kind").attr('disabled',true);
+      $("#purchase_process_accreditation_has_power_of_attorney").attr('disabled',true);
+    }else{
+      $("#kind").removeAttr('disabled');
+      $("#purchase_process_accreditation_has_power_of_attorney").removeAttr('disabled');
+    }
+  }
+
+  $("#creditor_representative_id").on('change', function(){
+    enabledFieldsRepresentative();
+  });
 </script>
