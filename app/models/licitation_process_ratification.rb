@@ -27,6 +27,7 @@ class LicitationProcessRatification < Compras::Model
   validates :adjudication_date, :ratification_date, :presence => true
   validate  :creditor_belongs_to_licitation_process, :if => :creditor
   validate  :without_judgment_commission_advice
+  validate  :without_proposal_envelope_opening_date
   validate  :should_have_at_least_one_item
 
   after_destroy :update_licitation_process_status_to_in_progress,
@@ -88,5 +89,14 @@ class LicitationProcessRatification < Compras::Model
 
   def licitation_process_got_ratifications?
     licitation_process.licitation_process_ratifications.any?
+  end
+
+  def without_proposal_envelope_opening_date
+    return unless licitation_process && licitation_process_licitation?
+
+    if licitation_process.proposal_envelope_opening_date.blank?
+      errors.add(:base, :licitation_process_without_proposal_envelope_opening_date,
+                licitation_process: licitation_process.to_s)
+    end
   end
 end

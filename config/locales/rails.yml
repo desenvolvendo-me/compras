@@ -322,6 +322,7 @@ pt-BR:
       parent_classification_should_be_law: "A classificação do Ato principal deve ser Lei, quando a classificação do ato secundário for Decreto"
       should_be_total: "deve ser toda proposta"
       licitation_process_without_judgment_commission_advices: "O processo de compra (%{licitation_process}) deve possuir parecer(es) da comissão de licitação"
+      licitation_process_without_proposal_envelope_opening_date: "O processo de compra (%{licitation_process}) não tem data da Abertura da Proposta"
       readonly: "model somente leitura"
       material_cannot_be_duplicated_by_creditor: "O material para o fornecedor já está em uso"
       cant_be_changed_when_is_imported: "não pode ser modificado quando importado automaticamente"
