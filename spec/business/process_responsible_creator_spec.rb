@@ -1,7 +1,7 @@
 require 'unit_helper'
-require 'app/business/create_responsible_process'
+require 'app/business/process_responsible_creator'
 
-describe CreateResponsibleProcess do
+describe ProcessResponsibleCreator do
   let(:stage_process_one) { double('StageProcess', id: 1, type_of_purchase: 'licitation') }
   let(:stage_process_two) { double('StageProcess', id: 2, type_of_purchase: 'licitation') }
   let(:stage_process_three) { double('StageProcess', id: 3, type_of_purchase: 'licitation') }
