@@ -16,6 +16,20 @@
                     'data-disabled' => f.object.decorator.must_have_published_edital) %>
       <% end %>
 
+      <% unless f.object.trading? %>
+        <%= link_to('Habilitação',
+                    bidders_path(:licitation_process_id => resource.id),
+                    :class => "button primary",
+                    'data-disabled' => f.object.decorator.must_have_published_edital_or_direct_purchase) %>
+
+        <% if f.object.decorator.enabled_realignment_price? %>
+          <%= link_to('Realinhamento de preço',
+                      realigment_prices_path(purchase_process_id: resource),
+                      :class => "button primary",
+                      'data-disabled' => f.object.decorator.must_have_creditors_and_items) %>
+        <% end %>
+      <% end %>
+
       <% if f.object.licitation? %>
         <%= link_to('Propostas', proposals_path, :class => "button primary",
                     'data-disabled' => f.object.decorator.must_have_creditors_and_items) %>
@@ -24,22 +38,23 @@
       <% if f.object.trading? %>
         <%= link_to('Lances', trading_path_helper, class: 'button primary',
                     'data-disabled' => f.object.decorator.disabled_trading_message) %>
-      <% end %>
 
-      <% if f.object.decorator.enabled_realignment_price %>
-        <%= link_to('Realinhamento de preço',
-                    realigment_prices_path(purchase_process_id: resource),
+        <%= link_to('Habilitação',
+                    bidders_path(:licitation_process_id => resource.id),
                     :class => "button primary",
-                    'data-disabled' => f.object.decorator.must_have_creditors_and_items) %>
-      <% end %>
+                    'data-disabled' => f.object.decorator.must_have_published_edital_or_direct_purchase) %>
 
-      <%= link_to('Habilitação',
-                  bidders_path(:licitation_process_id => resource.id),
-                  :class => "button primary",
-                  'data-disabled' => f.object.decorator.must_have_published_edital_or_direct_purchase) %>
+        <% if f.object.decorator.enabled_realignment_price? %>
+          <%= link_to('Realinhamento de preço',
+                      realigment_prices_path(purchase_process_id: resource),
+                      :class => "button primary",
+                      'data-disabled' => f.object.decorator.must_have_creditors_and_items) %>
+        <% end %>
+      <% end %>
 
       <%= classification_link %>
     </p>
+
     <p>
       <%= link_to('Pareceres da comissão julgadora',
                   judgment_commission_advices_path(:licitation_process_id => resource.id),
