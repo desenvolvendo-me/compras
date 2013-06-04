@@ -44,9 +44,10 @@ describe TceExport::MG::MonthlyMonitoring::ContractGenerator do
     end
 
     let(:ratification) do
-      LicitationProcessRatification.make!(:processo_licitatorio_computador,
+      LicitationProcessRatification.make(:processo_licitatorio_computador,
         licitation_process: licitation_process, ratification_date: signature_date,
-        adjudication_date: signature_date)
+        adjudication_date: signature_date,
+        licitation_process_ratification_items: [])
     end
 
     context "with two or more creditors" do
@@ -58,6 +59,9 @@ describe TceExport::MG::MonthlyMonitoring::ContractGenerator do
         ratification_item = LicitationProcessRatificationItem.make!(:item,
           purchase_process_creditor_proposal: creditor_proposal,
           licitation_process_ratification: ratification)
+
+        ratification.licitation_process_ratification_items << ratification_item
+        ratification.save!
 
         contract = Contract.make!(:primeiro_contrato, signature_date: signature_date,
           end_date: end_date, licitation_process: licitation_process,
@@ -92,6 +96,9 @@ describe TceExport::MG::MonthlyMonitoring::ContractGenerator do
         ratification_item = LicitationProcessRatificationItem.make!(:item,
           purchase_process_creditor_proposal: creditor_proposal,
           licitation_process_ratification: ratification)
+
+        ratification.licitation_process_ratification_items << ratification_item
+        ratification.save!
 
         contract = Contract.make!(:primeiro_contrato, signature_date: signature_date,
           end_date: end_date, licitation_process: licitation_process,

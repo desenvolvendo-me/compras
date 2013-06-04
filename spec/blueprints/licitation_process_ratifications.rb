@@ -4,4 +4,9 @@ LicitationProcessRatification.blueprint(:processo_licitatorio_computador) do
   ratification_date { Date.current }
   adjudication_date { Date.current }
   sequence { 1 }
+  licitation_process_ratification_items { [
+    LicitationProcessRatificationItem.make!(:item,
+      licitation_process_ratification: object,
+      purchase_process_creditor_proposal: nil)
+  ] }
 end

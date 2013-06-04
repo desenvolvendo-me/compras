@@ -116,4 +116,29 @@ describe LicitationProcessRatification do
       end
     end
   end
+
+  describe 'validate items' do
+    context 'when has no items' do
+      it 'should add an error to items' do
+        subject.valid?
+
+        expect(subject.errors[:licitation_process_ratification_items]).to include('é necessário cadastrar pelo menos um item')
+      end
+    end
+
+    context 'when has items' do
+      let(:item) { double(:item) }
+
+      before do
+        item.stub(marked_for_destruction?: false)
+        subject.stub(licitation_process_ratification_items: [item])
+      end
+
+      it 'should not add an error to items' do
+        subject.valid?
+
+        expect(subject.errors[:licitation_process_ratification_items]).to_not include('é necessário cadastrar pelo menos um item')
+      end
+    end
+  end
 end

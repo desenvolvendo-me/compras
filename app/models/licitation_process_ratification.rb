@@ -22,6 +22,7 @@ class LicitationProcessRatification < Compras::Model
   validates :adjudication_date, :ratification_date, :presence => true
   validate  :creditor_belongs_to_licitation_process, :if => :creditor
   validate  :without_judgment_commission_advice
+  validate  :should_have_at_least_one_item
 
   auto_increment :sequence, :by => :licitation_process_id
 
@@ -58,6 +59,12 @@ class LicitationProcessRatification < Compras::Model
     if licitation_process.judgment_commission_advices.empty?
       errors.add(:base, :licitation_process_without_judgment_commission_advices,
                 licitation_process: licitation_process.to_s)
+    end
+  end
+
+  def should_have_at_least_one_item
+    if licitation_process_ratification_items.reject(&:marked_for_destruction?).empty?
+      errors.add(:licitation_process_ratification_items, :must_have_at_least_one_item)
     end
   end
 end
