@@ -1,9 +1,10 @@
 class PurchaseProcessCreditorProposalRanking
-  attr_accessor :creditor_proposal, :all_proposals
+  attr_accessor :creditor_proposal, :all_proposals, :repository
 
   def initialize(creditor_proposal, repository = PurchaseProcessCreditorProposal)
     self.creditor_proposal = creditor_proposal
-    self.all_proposals = repository.find_brothers(creditor_proposal)
+    self.repository        = repository
+    self.all_proposals     = repository.find_brothers_for_ranking(creditor_proposal)
   end
 
   def self.rank!(creditor_proposal)
@@ -12,6 +13,8 @@ class PurchaseProcessCreditorProposalRanking
 
   def set_ranking
     ranking = 1
+
+    reset_proposals
 
     each_ordered_proposals do |proposals|
       rank_proposals proposals, ranking
@@ -31,11 +34,15 @@ class PurchaseProcessCreditorProposalRanking
     if proposals.size == 1
       proposals.first.apply_ranking! ranking
     else
-      draw_proposals proposals
+      tie_proposals proposals
     end
   end
 
-  def draw_proposals(proposals)
-    proposals.each(&:reset_ranking!)
+  def tie_proposals(proposals)
+    proposals.each(&:tie_ranking!)
+  end
+
+  def reset_proposals
+    repository.find_brothers(creditor_proposal).each(&:reset_ranking!)
   end
 end

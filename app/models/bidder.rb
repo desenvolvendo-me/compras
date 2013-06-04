@@ -64,6 +64,7 @@ class Bidder < Compras::Model
   end
 
   before_save :clear_invited_data, :set_default_values
+  after_save :update_proposal_ranking, if: :enabled_changed?
 
   orderize "id DESC"
   filterize
@@ -93,10 +94,6 @@ class Bidder < Compras::Model
     where { '"compras_bidders".creditor_id = "compras_purchase_process_creditor_proposals".creditor_id' }.
     uniq
   }
-
-  def creditor_proposals
-    licitation_process.creditor_proposals.winning_proposals.by_creditor_id(self.creditor_id)
-  end
 
   def destroy_all_classifications
     licitation_process_classifications.destroy_all
@@ -182,6 +179,14 @@ class Bidder < Compras::Model
   end
 
   protected
+
+  def update_proposal_ranking
+    return unless licitation_process
+
+    licitation_process.proposals_of_creditor(creditor).each do |creditor_proposal|
+      PurchaseProcessCreditorProposalRanking.rank! creditor_proposal
+    end
+  end
 
   def block_licitation_process_with_ratification
     return unless licitation_process.present?

@@ -367,8 +367,15 @@ feature 'PurchaseProcessCreditorProposals' do
   end
 
   scenario 'tie brake draw proposals' do
+    bidders = [
+      Bidder.make!(:licitante_sobrinho, enabled: true, habilitation_date: Date.current),
+      Bidder.make!(:licitante, enabled: true, habilitation_date: Date.current),
+      Bidder.make!(:me_pregao, enabled: true, habilitation_date: Date.current)
+    ]
+
     LicitationProcess.make!(:pregao_presencial,
       purchase_process_accreditation: PurchaseProcessAccreditation.make(:general_accreditation),
+      bidders: bidders,
       judgment_form: JudgmentForm.make!(:por_item_com_melhor_tecnica))
 
     navigate 'Processos de Compra > Processos de Compras'

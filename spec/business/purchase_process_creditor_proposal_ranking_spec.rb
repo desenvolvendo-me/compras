@@ -7,7 +7,7 @@ describe PurchaseProcessCreditorProposalRanking do
   let(:repository)        { double :repository }
   let(:subject)           { described_class.new(creditor_proposal, repository) }
 
-  before { repository.stub(:find_brothers).and_return proposals }
+  before { repository.stub(:find_brothers_for_ranking).and_return proposals }
 
   describe '.rank!' do
     it 'initializes and call set_ranking' do
@@ -25,6 +25,7 @@ describe PurchaseProcessCreditorProposalRanking do
 
     it 'sets the ranking for each proposal' do
       subject.should_receive(:rank_proposals).with(proposals, 1)
+      subject.should_receive :reset_proposals
       subject.set_ranking
     end
   end
@@ -46,23 +47,41 @@ describe PurchaseProcessCreditorProposalRanking do
       let(:proposals) { [proposal, proposal] }
 
       it 'draws the proposals' do
-        subject.should_receive(:draw_proposals).with proposals
+        subject.should_receive(:tie_proposals).with proposals
 
         subject.send(:rank_proposals, proposals, 1)
       end
     end
   end
 
-  describe '#draw_proposals' do
+  describe '#tie_proposals' do
     let(:proposal_1) { double :proposal_1 }
     let(:proposal_2) { double :proposal_2 }
     let(:proposals)  { [proposal_1, proposal_2] }
 
     it 'updates each proposal with ranking 0' do
+      proposal_1.should_receive(:tie_ranking!)
+      proposal_2.should_receive(:tie_ranking!)
+
+      subject.send(:tie_proposals, proposals)
+    end
+  end
+
+  describe '#reset_proposals' do
+    let(:proposal_1) { double :proposal_1 }
+    let(:proposal_2) { double :proposal_2 }
+    let(:proposals)  { [proposal_1, proposal_2] }
+
+    before do
+      repository.should_receive(:find_brothers).with(proposal_1).and_return proposals
+      subject.stub(:creditor_proposal).and_return proposal_1
+    end
+
+    it 'resets each proposals ranking' do
       proposal_1.should_receive(:reset_ranking!)
       proposal_2.should_receive(:reset_ranking!)
 
-      subject.send(:draw_proposals, proposals)
+      subject.send(:reset_proposals)
     end
   end
 end
