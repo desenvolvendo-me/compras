@@ -1,9 +1,5 @@
 #encoding: utf-8
-require 'unit_helper'
-require 'app/exporters/tce_export'
-require 'app/exporters/tce_export/mg'
-require 'app/exporters/tce_export/mg/casters'
-require 'app/exporters/tce_export/mg/casters/validators'
+require 'exporter_helper'
 require 'app/exporters/tce_export/mg/casters/date_caster'
 
 describe TceExport::MG::Casters::DateCaster do
@@ -15,9 +11,15 @@ describe TceExport::MG::Casters::DateCaster do
     expect(described_class.call(nil, {})).to eq " "
   end
 
-  it "raises an error if value is required but nil was passed" do
+  it "validates presence of required attributes" do
+    options = { :required => true, :attribute => "data" }
+
     expect do
-      expect(described_class.call(nil, { :required => true, :attribute => "data" }))
-    end.to raise_error(ArgumentError, "data não pode ficar em branco.")
+      expect(described_class.call(nil, options))
+    end.to raise_error(TceExport::MG::Exceptions::InvalidData, "data não pode ficar em branco.")
+
+    expect do
+      expect(described_class.call(' ', options))
+    end.to raise_error(TceExport::MG::Exceptions::InvalidData, "data não pode ficar em branco.")
   end
 end

@@ -155,7 +155,7 @@ module TceExport::MG
               send(format, data)
             end.compact.join("\n")
           end.join("\n")
-        rescue Exception => e
+        rescue TceExport::MG::Exceptions::InvalidData => e
           raise e.class, "#{acronym} - #{e.message}"
         end
       end

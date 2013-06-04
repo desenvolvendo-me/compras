@@ -1,9 +1,5 @@
 #encoding: utf-8
-require 'model_helper'
-require 'app/exporters/tce_export'
-require 'app/exporters/tce_export/mg'
-require 'app/exporters/tce_export/mg/casters'
-require 'app/exporters/tce_export/mg/casters/validators'
+require 'exporter_helper'
 require 'app/exporters/tce_export/mg/casters/integer_caster'
 
 describe TceExport::MG::Casters::IntegerCaster do
@@ -16,7 +12,7 @@ describe TceExport::MG::Casters::IntegerCaster do
     options = { size: 2, :attribute => "number" }
     expect {
       TceExport::MG::Casters::IntegerCaster.call(100, options)
-    }.to raise_error(ArgumentError, "number muito longo.")
+    }.to raise_error(TceExport::MG::Exceptions::InvalidData, "number muito longo.")
   end
 
   it "completes value min size with zeroes" do
@@ -31,10 +27,15 @@ describe TceExport::MG::Casters::IntegerCaster do
     expect(result).to eq " "
   end
 
-  it "validates if attribute is required" do
+  it "validates presence of required attributes" do
     options = { required: true, :attribute => "number" }
+
     expect {
       TceExport::MG::Casters::IntegerCaster.call(nil, options)
-    }.to raise_error(ArgumentError, "number não pode ficar em branco.")
+    }.to raise_error(TceExport::MG::Exceptions::InvalidData, "number não pode ficar em branco.")
+
+    expect {
+      TceExport::MG::Casters::IntegerCaster.call(' ', options)
+    }.to raise_error(TceExport::MG::Exceptions::InvalidData, "number não pode ficar em branco.")
   end
 end
