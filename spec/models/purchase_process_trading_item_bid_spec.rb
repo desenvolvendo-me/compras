@@ -11,6 +11,9 @@ describe PurchaseProcessTradingItemBid do
   context 'delegations' do
     it { should delegate(:name).to(:creditor).allowing_nil(true).prefix(true) }
     it { should delegate(:lowest_bid).to(:item).allowing_nil(true) }
+    it { should delegate(:reduction_rate_value).to(:item).allowing_nil(true) }
+    it { should delegate(:reduction_rate_percent).to(:item).allowing_nil(true) }
+    it { should delegate(:lowest_bid_or_proposal_amount).to(:item).allowing_nil(true) }
     it { should delegate(:item_lot).to(:item).allowing_nil(true).prefix(true) }
   end
 
@@ -161,6 +164,44 @@ describe PurchaseProcessTradingItemBid do
         it 'should calculate the percent value' do
           expect(subject.percent).to eq 11.11
         end
+      end
+    end
+  end
+
+  describe 'amount_with_reduction' do
+    context 'without reductions' do
+      before do
+        subject.stub(reduction_rate_value: 0.0, reduction_rate_percent: 0.0)
+      end
+
+      it 'should return the lowest_bid_or_proposal subtracted from 0.01' do
+        subject.stub(lowest_bid_or_proposal_amount: 100.0)
+
+        expect(subject.amount_with_reduction).to eq 99.99
+      end
+    end
+
+    context 'with reduction_rate_value' do
+      before do
+        subject.stub(reduction_rate_value: 10.0, reduction_rate_percent: 0.0)
+      end
+
+      it 'should subtract reduction_rate_value from lowest_bid_or_proposal' do
+        subject.stub(lowest_bid_or_proposal_amount: 100.0)
+
+        expect(subject.amount_with_reduction).to eq 90.00
+      end
+    end
+
+    context 'with reduction_rate_value' do
+      before do
+        subject.stub(reduction_rate_value: 0.0, reduction_rate_percent: 5.0)
+      end
+
+      it 'should subtract reduction_rate_percent from lowest_bid_or_proposal' do
+        subject.stub(lowest_bid_or_proposal_amount: 100.0)
+
+        expect(subject.amount_with_reduction).to eq 95.00
       end
     end
   end

@@ -23,4 +23,26 @@ describe PurchaseProcessTradingItemBidDecorator do
       end
     end
   end
+
+  describe '#amount_with_reduction' do
+    context 'when amount_with_reduction' do
+      before do
+        component.stub(amount_with_reduction: 10.12)
+      end
+
+      it 'should return number with precision' do
+        expect(subject.amount_with_reduction).to eq '10,12'
+      end
+    end
+
+    context 'when has not amount_with_reduction' do
+      before do
+        component.stub(amount_with_reduction: nil)
+      end
+
+      it 'should return 0,00' do
+        expect(subject.amount_with_reduction).to eq '0,00'
+      end
+    end
+  end
 end

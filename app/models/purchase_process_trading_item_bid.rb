@@ -15,7 +15,8 @@ class PurchaseProcessTradingItemBid < Compras::Model
   has_one :creditor, through: :accreditation_creditor
 
   delegate :name, to: :creditor, allow_nil: true, prefix: true
-  delegate :lowest_bid, to: :item, allow_nil: true
+  delegate :lowest_bid, :reduction_rate_value, :reduction_rate_percent,
+    :lowest_bid_or_proposal_amount, to: :item, allow_nil: true
   delegate :item_lot, to: :item, allow_nil: true, prefix: true
 
   validates :accreditation_creditor, :item, :amount, :status, :round,  presence: true
@@ -44,7 +45,21 @@ class PurchaseProcessTradingItemBid < Compras::Model
     end
   end
 
+  def amount_with_reduction
+    lowest_bid_or_proposal_amount - reduction_value
+  end
+
   private
+
+  def reduction_value
+    if reduction_rate_value > 0
+      reduction_rate_value
+    elsif reduction_rate_percent > 0
+      lowest_bid_or_proposal_amount * (reduction_rate_percent / BigDecimal('100'))
+    else
+      BigDecimal('0.01')
+    end
+  end
 
   def validate_minimum_amount
     return unless lowest_bid_amount.present?
