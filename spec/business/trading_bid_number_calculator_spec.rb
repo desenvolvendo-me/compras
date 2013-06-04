@@ -2,12 +2,11 @@ require 'unit_helper'
 require 'app/business/trading_bid_number_calculator'
 
 describe TradingBidNumberCalculator do
-  let(:trading) { double(:trading) }
   let(:item) { double(:item) }
 
   describe '#calculate_number' do
     subject do
-      described_class.new(trading, item)
+      described_class.new(item)
     end
 
     context 'when has no bids' do
@@ -35,10 +34,10 @@ describe TradingBidNumberCalculator do
     it 'should instantiate and call calculate_number' do
       instance = double(:instance)
 
-      described_class.should_receive(:new).with(trading, item).and_return(instance)
+      described_class.should_receive(:new).with(item).and_return(instance)
       instance.should_receive(:calculate_number)
 
-      described_class.calculate(trading, item)
+      described_class.calculate(item)
     end
   end
 end

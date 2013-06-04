@@ -1,7 +1,7 @@
 require 'decorator_helper'
-require 'app/decorators/purchase_process_trading_bid_decorator'
+require 'app/decorators/purchase_process_trading_item_bid_decorator'
 
-describe PurchaseProcessTradingBidDecorator do
+describe PurchaseProcessTradingItemBidDecorator do
   describe '#percent' do
     context 'when percent is nil' do
       before do

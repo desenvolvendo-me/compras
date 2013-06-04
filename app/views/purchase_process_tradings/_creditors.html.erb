@@ -16,7 +16,7 @@
         order: index + 1,
         creditor: accreditation_creditor,
         company_size: accreditation_creditor.company_size,
-        amount: accreditation_creditor.decorator.unit_price_of_proposal_by_item(@item),
+        amount: accreditation_creditor.decorator.unit_price_of_proposal_by_item(@item.item),
         percent: '-',
         selected: accreditation_creditor.decorator.selected? %>
     <% end %>

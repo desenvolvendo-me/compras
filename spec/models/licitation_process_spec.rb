@@ -80,16 +80,6 @@ describe LicitationProcess do
   it { should have_one(:purchase_process_accreditation).dependent(:restrict) }
   it { should have_one(:trading).dependent(:restrict) }
 
-  describe 'default values' do
-    it 'total_value_of_items should be 0.0' do
-      expect(subject.total_value_of_items).to eq BigDecimal('0.0')
-    end
-
-    it 'budget_allocations_total_value should be 0.0' do
-      expect(subject.budget_allocations_total_value).to eq BigDecimal('0.0')
-    end
-  end
-
   it { should validate_presence_of :contract_guarantees }
   it { should validate_presence_of :description }
   it { should validate_presence_of :execution_type }
@@ -110,6 +100,19 @@ describe LicitationProcess do
   it { should_not validate_presence_of :goal }
   it { should_not validate_presence_of :licensor_rights_and_liabilities }
   it { should_not validate_presence_of :licensee_rights_and_liabilities }
+
+  it { should delegate(:lot?).to(:judgment_form).allowing_nil(true).prefix(true) }
+  it { should delegate(:item?).to(:judgment_form).allowing_nil(true).prefix(true) }
+
+  describe 'default values' do
+    it 'total_value_of_items should be 0.0' do
+      expect(subject.total_value_of_items).to eq BigDecimal('0.0')
+    end
+
+    it 'budget_allocations_total_value should be 0.0' do
+      expect(subject.budget_allocations_total_value).to eq BigDecimal('0.0')
+    end
+  end
 
   context "when is a licitation" do
     before do

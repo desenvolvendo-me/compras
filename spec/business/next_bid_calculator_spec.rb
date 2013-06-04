@@ -28,13 +28,25 @@ describe NextBidCalculator do
         bids = double(:bids)
         next_bid = double(:next_bid)
 
-        item.should_receive(:trading_bids).and_return(bids)
+        item.should_receive(:bids).and_return(bids)
         bids.should_receive(:without_proposal).and_return(bids)
         bids.should_receive(:reorder).with(:id).and_return(bids)
         bids.should_receive(:first).and_return(next_bid)
 
         expect(subject.next_bid).to eq next_bid
       end
+    end
+  end
+
+  describe '.next_bid' do
+    it 'should instanciate and call #next_bid' do
+      instance = double(:instance)
+
+      described_class.should_receive(:new).with(item).and_return(instance)
+
+      instance.should_receive(:next_bid)
+
+      described_class.next_bid(item)
     end
   end
 end

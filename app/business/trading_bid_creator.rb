@@ -1,13 +1,12 @@
 class TradingBidCreator
-  def initialize(trading, item, options = {})
-    @trading        = trading
+  def initialize(item, options = {})
     @item           = item
-    @bid_repository = options.fetch(:bid_repository) { PurchaseProcessTradingBid }
+    @bid_repository = options.fetch(:bid_repository) { PurchaseProcessTradingItemBid }
   end
 
   def self.create_items_bids!(trading)
     trading.items.each do |item|
-      new(trading, item).create!
+      new(item).create!
     end
   end
 
@@ -25,6 +24,8 @@ class TradingBidCreator
 
   private
 
+  attr_reader :bid_repository, :item
+
   def clear_bids_before_creation?
     bids.not_without_proposal.empty?
   end
@@ -38,7 +39,7 @@ class TradingBidCreator
   end
 
   def bids
-    @item.trading_bids
+    item.bids
   end
 
   def last_round
@@ -55,7 +56,7 @@ class TradingBidCreator
 
   def available_accreditation_creditors
     if bids.empty?
-      @item.trading_creditors_selected
+      item.creditors_selected
     else
       if creditors_with_bid_for_last_round.count > 1
         creditors_with_bid_for_last_round
@@ -76,13 +77,11 @@ class TradingBidCreator
   end
 
   def create_bid(accreditation_creditor)
-    @bid_repository.create!(
+    bid_repository.create!(
       round: last_round.succ,
       status: TradingItemBidStatus::WITHOUT_PROPOSAL,
       amount: 0,
       purchase_process_accreditation_creditor_id: accreditation_creditor.id,
-      purchase_process_item_id: @item.id,
-      purchase_process_trading_id: @trading.id,
-      lot: @item.lot)
+      item_id: item.id)
   end
 end

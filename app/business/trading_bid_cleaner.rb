@@ -16,11 +16,13 @@ class TradingBidCleaner
 
   private
 
+  attr_reader :item, :next_bid_calculator
+
   def next_bid
-    @next_bid_calculator.new(@item).next_bid
+    next_bid_calculator.next_bid(item)
   end
 
   def bids_without_proposal
-    @item.trading_bids.without_proposal
+    item.bids.without_proposal
   end
 end

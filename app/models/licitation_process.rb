@@ -88,6 +88,7 @@ class LicitationProcess < Compras::Model
                                 :process_responsibles, :tied_creditor_proposals, allow_destroy: true
 
   delegate :licitation_kind, :kind, :best_technique?, :technical_and_price?,
+           :item?, :lot?,
            :to => :judgment_form, :allow_nil => true, :prefix => true
 
   validates :process_date, :period, :contract_guarantees, :type_of_purchase,

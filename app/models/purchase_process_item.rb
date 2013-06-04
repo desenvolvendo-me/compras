@@ -14,8 +14,6 @@ class PurchaseProcessItem < Compras::Model
   has_many :licitation_process_classifications, :as => :classifiable, :dependent => :destroy
   has_many :creditor_proposals, dependent: :destroy, class_name: 'PurchaseProcessCreditorProposal',
     source: :purchase_process_creditor_proposals
-  has_many :trading_bids, class_name: 'PurchaseProcessTradingBid', dependent: :restrict,
-    order: :amount
   has_many :purchase_process_accreditation_creditors, through: :purchase_process_accreditation
 
   has_one  :purchase_process_accreditation, through: :licitation_process
@@ -61,37 +59,5 @@ class PurchaseProcessItem < Compras::Model
 
   def winning_bid
     licitation_process_classifications.detect { |classification| classification.situation == SituationOfProposal::WON}
-  end
-
-  def bids_historic
-    trading_bids.not_without_proposal.reorder('number DESC')
-  end
-
-  def lowest_trading_bid
-    trading_bids.with_proposal.first
-  end
-
-  def trading_creditors_ordered
-    purchase_process_accreditation_creditors.by_lowest_proposal(id)
-  end
-
-  def trading_creditors_selected
-    trading_creditors_ordered.selected_creditors
-  end
-
-  def trading_lowest_proposal
-    return unless trading_creditor_with_lowest_proposal
-
-    trading_creditor_with_lowest_proposal.creditor_proposal_by_item(self)
-  end
-
-  def last_trading_bid
-    trading_bids.not_without_proposal.reorder(:id).last
-  end
-
-  private
-
-  def trading_creditor_with_lowest_proposal
-    trading_creditors_selected.last
   end
 end

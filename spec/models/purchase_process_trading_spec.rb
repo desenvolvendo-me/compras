@@ -1,12 +1,11 @@
 require 'model_helper'
 require 'app/models/purchase_process_trading'
-require 'app/models/purchase_process_trading_bid'
+require 'app/models/purchase_process_trading_item'
 
 describe PurchaseProcessTrading do
   it { should belong_to :purchase_process }
 
-  it { should have_many(:bids).dependent(:restrict) }
-  it { should have_many(:items).through(:purchase_process) }
+  it { should have_many(:items) }
   it { should have_many(:purchase_process_accreditation_creditors).through(:purchase_process_accreditation) }
   it { should have_many(:creditors).through(:purchase_process_accreditation_creditors) }
 

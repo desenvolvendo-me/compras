@@ -1,7 +1,6 @@
 class TradingBidNumberCalculator
-  def initialize(trading, item)
-    @trading = trading
-    @item    = item
+  def initialize(item)
+    @item = item
   end
 
   def self.calculate(*args)
@@ -14,11 +13,13 @@ class TradingBidNumberCalculator
 
   private
 
+  attr_reader :item
+
   def bid_numbers_by_item
-    @trading.
+    item.
       bids.
       not_without_proposal.
-      by_item_id(@item.id).
+      by_item_id(item.id).
       pluck(:number)
   end
 

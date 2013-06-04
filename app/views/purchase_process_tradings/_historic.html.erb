@@ -1,14 +1,14 @@
 <table id="historic" class="records">
   <thead>
-    <th><%= PurchaseProcessTradingBid.human_attribute_name :round %></th>
-    <th><%= PurchaseProcessTradingBid.human_attribute_name :number %></th>
-    <th><%= PurchaseProcessTradingBid.human_attribute_name :lot %></th>
-    <th><%= PurchaseProcessTradingBid.human_attribute_name :item %></th>
-    <th><%= PurchaseProcessTradingBid.human_attribute_name :accreditation_creditor %></th>
-    <th><%= PurchaseProcessTradingBid.human_attribute_name :accreditation_creditor_company_size %></th>
-    <th><%= PurchaseProcessTradingBid.human_attribute_name :status %></th>
-    <th><%= PurchaseProcessTradingBid.human_attribute_name :amount %></th>
-    <th><%= PurchaseProcessTradingBid.human_attribute_name :percent %></th>
+    <th><%= PurchaseProcessTradingItemBid.human_attribute_name :round %></th>
+    <th><%= PurchaseProcessTradingItemBid.human_attribute_name :number %></th>
+    <th><%= PurchaseProcessTradingItemBid.human_attribute_name :item_lot %></th>
+    <th><%= PurchaseProcessTradingItemBid.human_attribute_name :item %></th>
+    <th><%= PurchaseProcessTradingItemBid.human_attribute_name :accreditation_creditor %></th>
+    <th><%= PurchaseProcessTradingItemBid.human_attribute_name :accreditation_creditor_company_size %></th>
+    <th><%= PurchaseProcessTradingItemBid.human_attribute_name :status %></th>
+    <th><%= PurchaseProcessTradingItemBid.human_attribute_name :amount %></th>
+    <th><%= PurchaseProcessTradingItemBid.human_attribute_name :percent %></th>
   </thead>
 
   <tbody>
@@ -16,7 +16,7 @@
       <%= render 'historic_row',
         number:                 bid.number,
         round:                  bid.round,
-        lot:                    bid.lot,
+        lot:                    bid.item_item_lot,
         item:                   bid.item,
         creditor:               bid.accreditation_creditor,
         creditor_company_size:  bid.accreditation_creditor.company_size,
