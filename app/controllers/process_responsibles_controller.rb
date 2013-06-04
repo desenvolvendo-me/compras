@@ -6,6 +6,6 @@ class ProcessResponsiblesController < CrudController
   end
 
   def edit
-    CreateResponsibleProcess.create!(resource)
+    ProcessResponsibleCreator.create!(resource)
   end
 end

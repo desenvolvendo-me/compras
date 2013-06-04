@@ -1,4 +1,4 @@
-class CreateResponsibleProcess
+class ProcessResponsibleCreator
   attr_accessor :purchase_process
 
   def initialize(purchase_process, stage_process_repository = StageProcess)
