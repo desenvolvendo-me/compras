@@ -13,6 +13,7 @@ class PurchaseProcessCreditorProposal < Compras::Model
   has_one :licitation_process_ratifications, through: :licitation_process
 
   has_many :realigment_prices, dependent: :destroy
+  has_many :bidders, through: :licitation_process
 
   accepts_nested_attributes_for :realigment_prices, allow_destroy: true
 
@@ -45,6 +46,13 @@ class PurchaseProcessCreditorProposal < Compras::Model
             lot.eq(creditor_proposal.lot) &
             licitation_process_id.eq(creditor_proposal.licitation_process_id) }.
     order { unit_price }
+  }
+
+  scope :find_brothers_for_ranking, lambda { |creditor_proposal|
+    find_brothers(creditor_proposal).
+    joins { bidders }.
+    where { '"compras_bidders"."creditor_id" = "compras_purchase_process_creditor_proposals"."creditor_id"' }.
+    where { bidders.enabled.eq(true) }
   }
 
   scope :winning_proposals, where { ranking.eq 1 }.order { creditor_id }
@@ -91,9 +99,13 @@ class PurchaseProcessCreditorProposal < Compras::Model
     !disqualified?
   end
 
-  def reset_ranking!
+  def tie_ranking!
     update_column :ranking, 0
     update_column :tied, true
+  end
+
+  def reset_ranking!
+    apply_ranking! -1
   end
 
   def apply_ranking!(rank)

@@ -11,6 +11,7 @@ require 'app/models/creditor'
 require 'app/models/accredited_representative'
 require 'app/models/licitation_process_classification'
 require 'app/models/licitation_process_ratification'
+require 'app/business/purchase_process_creditor_proposal_ranking'
 
 describe Bidder do
   describe 'default values' do
@@ -387,4 +388,25 @@ describe Bidder do
       expect(subject.errors[:documents]).to include('não é válido')
     end
   end
+
+  describe '#update_proposal_ranking' do
+    let(:proposal)  { double :proposal }
+    let(:proposals) { [proposal] }
+    let(:licitation_process) { double :licitation_process }
+    let(:creditor) { double :creditor }
+
+    before do
+      subject.stub(:enabled_changed?).and_return true
+      subject.stub(:creditor).and_return creditor
+      subject.stub(:licitation_process).and_return licitation_process
+
+      licitation_process.should_receive(:proposals_of_creditor).with(creditor).and_return proposals
+    end
+
+    it 'calls PurchaseProcessCreditorProposalRanking with the bidder proposals' do
+      PurchaseProcessCreditorProposalRanking.should_receive(:rank!).with proposal
+      subject.run_callbacks(:save)
+    end
+  end
+
 end

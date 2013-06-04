@@ -18,4 +18,30 @@ describe Bidder do
       expect(Bidder.benefited).to eq [licitante_com_proposta_3]
     end
   end
+
+  context 'callbacks' do
+    describe '#update_proposal_ranking' do
+      let(:bidder) do
+        Bidder.make!(:licitante_sobrinho, enabled: true,  habilitation_date: Date.current)
+      end
+
+      let(:licitation_process) do
+        LicitationProcess.make!(:pregao_presencial,
+          purchase_process_accreditation: PurchaseProcessAccreditation.make(:general_accreditation),
+          judgment_form: JudgmentForm.make!(:por_item_com_melhor_tecnica),
+          creditor_proposals: [PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado)],
+          bidders: [bidder])
+      end
+
+      it 'updates the bidder creditor proposals when they are enabled or not' do
+        expect(licitation_process.creditor_proposals.first.ranking).to eql 1
+
+        bidder.enabled = false
+        bidder.habilitation_date = nil
+        bidder.save
+
+        expect(licitation_process.creditor_proposals.first.ranking).to eql -1
+      end
+    end
+  end
 end

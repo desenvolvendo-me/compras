@@ -142,10 +142,17 @@ describe PurchaseProcessCreditorProposal do
     end
   end
 
-  describe '#reset_ranking!' do
+  describe '#tie_ranking!' do
     it 'updates the ranking column to 0 and tie the proposal' do
       subject.should_receive(:update_column).with :ranking, 0
       subject.should_receive(:update_column).with :tied, true
+      subject.tie_ranking!
+    end
+  end
+
+  describe '#reset_ranking!' do
+    it 'updates the ranking column to -1 and untie the proposal' do
+      subject.should_receive(:apply_ranking!).with -1
       subject.reset_ranking!
     end
   end
