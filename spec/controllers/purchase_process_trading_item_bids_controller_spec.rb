@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe PurchaseProcessTradingBidsController do
+describe PurchaseProcessTradingItemBidsController do
   before do
     controller.stub(:authenticate_user!)
     controller.stub(:authorize_resource!)
@@ -14,12 +14,12 @@ describe PurchaseProcessTradingBidsController do
         bid = double(:bid, trading: trading, item: item)
         status_chooser = double(:status_chooser)
 
-        PurchaseProcessTradingBid.should_receive(:find).with("10").and_return(bid)
+        PurchaseProcessTradingItemBid.should_receive(:find).with("10").and_return(bid)
         TradingBidStatusChooser.should_receive(:new).with(bid).and_return(status_chooser)
         status_chooser.should_receive(:choose).and_return('status')
         TradingBidNumberCalculator.
           should_receive(:calculate).
-          with(trading, item).
+          with(item).
           and_return(5)
 
         bid.should_receive(:transaction).and_yield
@@ -32,7 +32,7 @@ describe PurchaseProcessTradingBidsController do
         TradingBidCreator.should_receive(:create_items_bids!).with(trading)
         TradingBidCleaner.should_receive(:clean).with(item)
 
-        put :update, id: 10, purchase_process_trading_bid: { amount: 15 }
+        put :update, id: 10, purchase_process_trading_item_bid: { amount: 15 }
 
         expect(response.code).to eq '200'
         expect(response.body).to eq '{}'
@@ -47,12 +47,12 @@ describe PurchaseProcessTradingBidsController do
         status_chooser = double(:status_chooser)
         errors = double(:errors, full_messages: ["error"])
 
-        PurchaseProcessTradingBid.should_receive(:find).with("10").and_return(bid)
+        PurchaseProcessTradingItemBid.should_receive(:find).with("10").and_return(bid)
         TradingBidStatusChooser.should_receive(:new).with(bid).and_return(status_chooser)
         status_chooser.should_receive(:choose).and_return('status')
         TradingBidNumberCalculator.
           should_receive(:calculate).
-          with(trading, item).
+          with(item).
           and_return(5)
 
         bid.should_receive(:transaction).and_yield
@@ -66,7 +66,7 @@ describe PurchaseProcessTradingBidsController do
         TradingBidCreator.should_not_receive(:create_items_bids!)
         TradingBidCleaner.should_not_receive(:clean)
 
-        put :update, id: 10, purchase_process_trading_bid: { amount: 15 }
+        put :update, id: 10, purchase_process_trading_item_bid: { amount: 15 }
 
         expect(response.code).to eq '422'
         expect(response.body).to eq '{"errors":["error"]}'

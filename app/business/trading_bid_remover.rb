@@ -17,7 +17,9 @@ class TradingBidRemover
 
   private
 
+  attr_reader :item
+
   def last_bid
-    @item.last_trading_bid
+    item.last_bid
   end
 end

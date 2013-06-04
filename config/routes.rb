@@ -77,7 +77,7 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :purchase_process_item_tradings, only: [:creditor_list, :next_bid, :undo_last_bid] do
+  resources :purchase_process_trading_items, only: [:creditor_list, :next_bid, :undo_last_bid] do
     member do
       get  :creditor_list
       get  :next_bid
@@ -91,7 +91,7 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :purchase_process_trading_bids, only: [:update, :show]
+  resources :purchase_process_trading_item_bids, only: [:update, :show]
 
   resources :agencies do
     collection do

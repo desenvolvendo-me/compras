@@ -6,14 +6,14 @@ require 'app/business/trading_bid_creator'
 describe TradingBidCreator do
   let(:trading) { double(:trading, id: 2) }
   let(:bids) { double(:bids, with_proposal: with_proposal) }
-  let(:item) { double(:item, id: 10, lot: 1, trading_bids: bids) }
+  let(:item) { double(:item, id: 10, lot: 1, bids: bids, trading: trading) }
   let(:bid_repository) { double(:bid_repository) }
   let(:with_proposal) { double(:with_proposal) }
   let(:by_item_id) { double(:by_item_id, with_proposal: with_proposal) }
   let(:creditor) { double(:creditor, id: 5) }
 
   subject do
-    described_class.new(trading, item, bid_repository: bid_repository)
+    described_class.new(item, bid_repository: bid_repository)
   end
 
   context 'when bids are empty' do
@@ -24,13 +24,13 @@ describe TradingBidCreator do
 
     it 'should create bids for creditors' do
       subject.stub(:last_round => 0)
-      item.should_receive(:trading_creditors_selected).and_return([creditor])
+      item.should_receive(:creditors_selected).and_return([creditor])
 
       bid_repository.
         should_receive(:create!).
         with(round: 1, purchase_process_accreditation_creditor_id: 5,
              status: TradingItemBidStatus::WITHOUT_PROPOSAL, amount: 0,
-             purchase_process_item_id: 10, lot: 1, purchase_process_trading_id: 2)
+             item_id: 10)
 
       subject.create!
     end
@@ -72,13 +72,13 @@ describe TradingBidCreator do
           should_receive(:create!).
           with(round: 2, purchase_process_accreditation_creditor_id: 5,
                status: TradingItemBidStatus::WITHOUT_PROPOSAL, amount: 0,
-               purchase_process_item_id: 10, lot: 1, purchase_process_trading_id: 2)
+               item_id: 10)
 
         bid_repository.
           should_receive(:create!).
           with(round: 2, purchase_process_accreditation_creditor_id: 34,
                status: TradingItemBidStatus::WITHOUT_PROPOSAL, amount: 0,
-               purchase_process_item_id: 10, lot: 1, purchase_process_trading_id: 2)
+               item_id: 10)
 
         subject.create!
       end
@@ -93,8 +93,8 @@ describe TradingBidCreator do
 
       trading.stub(items: [item, item2])
 
-      described_class.should_receive(:new).with(trading, item).and_return(instance1)
-      described_class.should_receive(:new).with(trading, item2).and_return(instance2)
+      described_class.should_receive(:new).with(item).and_return(instance1)
+      described_class.should_receive(:new).with(item2).and_return(instance2)
 
       instance1.should_receive(:create!)
       instance2.should_receive(:create!)

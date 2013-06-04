@@ -6,11 +6,10 @@ if resource
   json.id                        resource.id
   json.item                      resource.item.to_s
   json.item_id                   resource.item.id
-  json.lot                       resource.lot
+  json.lot                       resource.item_item_lot
   json.number                    resource.number
   json.percent                   resource.decorator.percent
   json.round                     resource.round
   json.status                    resource.status_humanize
-  json.trading_id                resource.trading.id
   json.errors                    resource.errors
 end

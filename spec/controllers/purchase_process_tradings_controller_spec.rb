@@ -37,16 +37,14 @@ describe PurchaseProcessTradingsController do
     it 'should create bids, and return item and the next_bid' do
       item                = double(:item)
       trading             = double(:trading, items: [item])
-      next_bid_calculator = double(:next_bid_calculator)
 
       PurchaseProcessTrading.should_receive(:find).with("10").and_return(trading)
       trading.should_receive(:transaction).and_yield
       TradingBidCreator.should_receive(:create_items_bids!).with(trading)
-      NextBidCalculator.should_receive(:new).with(item).and_return(next_bid_calculator)
-      next_bid_calculator.should_receive(:next_bid)
+      NextBidCalculator.should_receive(:next_bid).with(item)
 
       item.should_receive(:bids_historic)
-      item.should_receive(:trading_creditors_ordered)
+      item.should_receive(:creditors_ordered)
 
       get :bids, id: 10
     end

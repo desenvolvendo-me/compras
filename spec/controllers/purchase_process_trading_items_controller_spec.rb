@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
 
-describe PurchaseProcessItemTradingsController do
+describe PurchaseProcessTradingItemsController do
   before do
     controller.stub(:authenticate_user!)
     controller.stub(:authorize_resource!)
@@ -12,16 +12,12 @@ describe PurchaseProcessItemTradingsController do
 
     describe 'GET #next_bid' do
       it 'should calculate ne next_bid' do
-        next_bid_calculator = double(:next_bid_calculator)
+        PurchaseProcessTradingItem.should_receive(:find).with('10').and_return(item)
 
-        PurchaseProcessItem.should_receive(:find).with('10').and_return(item)
-
-        NextBidCalculator.should_receive(:new).with(item).and_return(next_bid_calculator)
-        next_bid_calculator.should_receive(:next_bid)
-
+        NextBidCalculator.should_receive(:next_bid).with(item)
 
         item.should_receive(:bids_historic)
-        item.should_receive(:lowest_trading_bid)
+        item.should_receive(:lowest_bid)
 
         get :next_bid, id: 10, format: 'json'
       end
@@ -29,9 +25,9 @@ describe PurchaseProcessItemTradingsController do
 
     describe 'GET #creditor_list' do
       it 'should return the list of creditor for a given item' do
-        PurchaseProcessItem.should_receive(:find).with('5').and_return(item)
+        PurchaseProcessTradingItem.should_receive(:find).with('5').and_return(item)
 
-        item.should_receive(:trading_creditors_ordered)
+        item.should_receive(:creditors_ordered)
 
         get :creditor_list, id: 5, format: 'json'
       end
@@ -42,12 +38,12 @@ describe PurchaseProcessItemTradingsController do
         it 'should redirect to next_bid' do
           item.stub(to_params: '4')
 
-          PurchaseProcessItem.should_receive(:find).with('4').and_return(item)
+          PurchaseProcessTradingItem.should_receive(:find).with('4').and_return(item)
           TradingBidRemover.should_receive(:undo).with(item).and_return(true)
 
           post :undo_last_bid, id: 4
 
-          expect(response).to redirect_to(next_bid_purchase_process_item_trading_path(item))
+          expect(response).to redirect_to(next_bid_purchase_process_trading_item_path(item))
         end
       end
 
@@ -55,7 +51,7 @@ describe PurchaseProcessItemTradingsController do
         it 'should render errors' do
           item.stub(to_params: '4')
 
-          PurchaseProcessItem.should_receive(:find).with('4').and_return(item)
+          PurchaseProcessTradingItem.should_receive(:find).with('4').and_return(item)
           TradingBidRemover.should_receive(:undo).with(item).and_return(false)
 
           post :undo_last_bid, id: 4

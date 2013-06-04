@@ -1,4 +1,4 @@
-class PurchaseProcessTradingBidDecorator
+class PurchaseProcessTradingItemBidDecorator
   include Decore
   include Decore::Proxy
   include ActionView::Helpers::NumberHelper

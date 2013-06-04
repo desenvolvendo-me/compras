@@ -14,7 +14,7 @@ describe TradingBidRemover do
   describe '#undo_last_bid' do
     context 'when has a last bid' do
       before do
-        item.stub(last_trading_bid: last_bid)
+        item.stub(last_bid: last_bid)
       end
 
       it 'should change status and amount' do
@@ -29,7 +29,7 @@ describe TradingBidRemover do
 
     context 'when has no last bid' do
       before do
-        item.stub(last_trading_bid: nil)
+        item.stub(last_bid: nil)
       end
 
       it 'should change status and amount' do

@@ -1,20 +1,21 @@
 require 'model_helper'
-require 'app/models/purchase_process_trading_bid'
+require 'app/models/purchase_process_trading_item_bid'
 
-describe PurchaseProcessTradingBid do
+describe PurchaseProcessTradingItemBid do
   it { should belong_to :accreditation_creditor }
   it { should belong_to :item }
-  it { should belong_to :trading }
 
+  it { should have_one(:trading).through(:item) }
   it { should have_one(:creditor).through(:accreditation_creditor) }
 
   context 'delegations' do
     it { should delegate(:name).to(:creditor).allowing_nil(true).prefix(true) }
-    it { should delegate(:lowest_trading_bid).to(:item).allowing_nil(true) }
+    it { should delegate(:lowest_bid).to(:item).allowing_nil(true) }
+    it { should delegate(:item_lot).to(:item).allowing_nil(true).prefix(true) }
   end
 
   context 'validations' do
-    it { should validate_presence_of :trading }
+    it { should validate_presence_of :item }
     it { should validate_presence_of :accreditation_creditor }
     it { should validate_presence_of :status }
     it { should validate_presence_of :round }
@@ -60,7 +61,7 @@ describe PurchaseProcessTradingBid do
 
         context 'when there is a lowest proposal for the item' do
           before do
-            subject.stub(lowest_trading_bid_amount: 100.0)
+            subject.stub(lowest_bid_amount: 100.0)
           end
 
           context 'when amount is lowest than lowest_trading_amount' do
@@ -102,7 +103,7 @@ describe PurchaseProcessTradingBid do
 
         context 'when there is no lowest proposal for item' do
           before do
-            subject.stub(lowest_trading_bid_amount: nil)
+            subject.stub(lowest_bid_amount: nil)
             subject.amount = 1
           end
 
@@ -132,9 +133,9 @@ describe PurchaseProcessTradingBid do
         subject.stub(amount: 10.0)
       end
 
-      context 'when has no lowest_trading_bid_amount' do
+      context 'when has no lowest_bid_amount' do
         before do
-          subject.stub(lowest_trading_bid_amount: nil)
+          subject.stub(lowest_bid_amount: nil)
         end
 
         it 'should be zero' do
@@ -142,9 +143,9 @@ describe PurchaseProcessTradingBid do
         end
       end
 
-      context 'when lowest_trading_bid_amount is equal to amount' do
+      context 'when lowest_bid_amount is equal to amount' do
         before do
-          subject.stub(lowest_trading_bid_amount: 10)
+          subject.stub(lowest_bid_amount: 10)
         end
 
         it 'should be zero' do
@@ -152,9 +153,9 @@ describe PurchaseProcessTradingBid do
         end
       end
 
-      context 'when lowest_trading_bid_amount is not equal to amount' do
+      context 'when lowest_bid_amount is not equal to amount' do
         before do
-          subject.stub(lowest_trading_bid_amount: 9.0)
+          subject.stub(lowest_bid_amount: 9.0)
         end
 
         it 'should calculate the percent value' do

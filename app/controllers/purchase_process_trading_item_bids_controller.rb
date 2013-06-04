@@ -1,4 +1,4 @@
-class PurchaseProcessTradingBidsController < CrudController
+class PurchaseProcessTradingItemBidsController < CrudController
   respond_to :json
 
   actions :update, :show
@@ -20,7 +20,7 @@ class PurchaseProcessTradingBidsController < CrudController
       object.localized.assign_attributes(*attributes, as: :trading_user)
 
       object.status = TradingBidStatusChooser.new(object).choose
-      object.number = TradingBidNumberCalculator.calculate(object.trading, object.item)
+      object.number = TradingBidNumberCalculator.calculate(object.item)
 
       if object.save
         TradingBidCreator.create_items_bids!(object.trading)
@@ -34,6 +34,6 @@ class PurchaseProcessTradingBidsController < CrudController
   end
 
   def item
-    @item ||= PurchaseProcessItem.find(params[:item_id])
+    @item ||= PurchaseProcessTradingItem.find(params[:item_id])
   end
 end
