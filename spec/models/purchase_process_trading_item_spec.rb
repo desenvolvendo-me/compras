@@ -19,7 +19,7 @@ describe PurchaseProcessTradingItem do
 
       subject.valid?
 
-      expect(subject.errors[:reduction_rate_value]).to include('é permitido apenas um tipo de decréscimo')
+      expect(subject.errors[:reduction_rate_value]).to include('não pode ser usado ao mesmo tempo que o decréscimo em percentual')
     end
 
     it 'should allow reduction by value' do
@@ -27,7 +27,7 @@ describe PurchaseProcessTradingItem do
 
       subject.valid?
 
-      expect(subject.errors[:reduction_rate_value]).to_not include('é permitido apenas um tipo de decréscimo')
+      expect(subject.errors[:reduction_rate_value]).to_not include('não pode ser usado ao mesmo tempo que o decréscimo em percentual')
     end
 
     it 'should allow reduction by percentage' do
@@ -35,7 +35,7 @@ describe PurchaseProcessTradingItem do
 
       subject.valid?
 
-      expect(subject.errors[:reduction_rate_value]).to_not include('é permitido apenas um tipo de decréscimo')
+      expect(subject.errors[:reduction_rate_value]).to_not include('não pode ser usado ao mesmo tempo que o decréscimo em percentual')
     end
 
     it 'should not allow a negative value for reduction_rato_value on update' do

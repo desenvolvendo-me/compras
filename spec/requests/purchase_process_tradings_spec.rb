@@ -1167,6 +1167,18 @@ feature "PurchaseProcessTradings" do
     expect(page).to have_field 'Valor', with: "99,99"
 
     fill_in 'Decréscimo em valor', with: '10,00'
+    fill_in 'Decréscimo em percentual', with: '10,00'
+
+    click_button 'Gravar decréscimo'
+
+    expect(page).to have_content 'Decréscimo em valor não pode ser usado ao mesmo tempo que o decréscimo em percentual'
+
+    click_button 'Ok'
+
+    expect(page).to have_field 'Decréscimo em valor', with: "0,00"
+    expect(page).to have_field 'Decréscimo em percentual', with: "0,00"
+
+    fill_in 'Decréscimo em valor', with: '10,00'
 
     click_button 'Gravar decréscimo'
 
