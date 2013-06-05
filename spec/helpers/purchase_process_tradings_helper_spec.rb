@@ -31,4 +31,24 @@ describe PurchaseProcessTradingsHelper do
       end
     end
   end
+
+  describe '#amount_with_reduction'do
+    context 'when next_bid is nil' do
+      it 'should return 0,00' do
+        expect(helper.amount_with_reduction(nil)).to eq '0,00'
+      end
+    end
+
+    context 'when next_bid is not nil' do
+      let(:next_bid) { double(:next_bid) }
+      let(:decorator) { double(:decorator) }
+
+      it "should return calls the decorator's amount_with_reduction method" do
+        next_bid.should_receive(:decorator).and_return(decorator)
+        decorator.should_receive(:amount_with_reduction).and_return('100,50')
+
+        expect(helper.amount_with_reduction(next_bid)).to eq '100,50'
+      end
+    end
+  end
 end
