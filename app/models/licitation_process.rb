@@ -100,8 +100,6 @@ class LicitationProcess < Compras::Model
   validates :goal, :licensor_rights_and_liabilities, :licensee_rights_and_liabilities,
             :presence => true, :if => :concessions_or_permits?
   validates :type_of_removal, :justification, :presence => true, :if => :direct_purchase?
-  validates :tied_creditor_proposals, no_duplication: { with: :ranking, allow_nil: true,
-    scope: [:licitation_process_id, :purchase_process_item_id, :lot] }
   validates :items, no_duplication: {
     with: :material_id,
     scope: [:creditor_id],
