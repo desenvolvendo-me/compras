@@ -16,6 +16,12 @@ class PurchaseProcessCreditorProposalDecorator
     number_with_precision super if super
   end
 
+  def best_proposal
+    proposal = component.class.best_proposal_for(component)
+
+    number_with_precision(proposal.unit_price) if proposal
+  end
+
   def subtitle
     "Fornecedor #{creditor} - Processo #{licitation_process.to_s}"
   end

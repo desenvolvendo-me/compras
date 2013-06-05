@@ -1,0 +1,45 @@
+<div class="add-margin-bottom">
+  <div class="yui3-g">
+    <div class="yui3-u-1-8">
+      <%= f.input :lot, fake: true, disabled: true, input_html: { value: f.object.item_lot } %>
+    </div>
+
+    <div class="yui3-u-1-8">
+      <%= f.input :item, fake: true, disabled: true, required: false, input_html: { value: '1', class: 'item_counter' } %>
+    </div>
+
+    <div class="yui3-u-3-8">
+      <%= f.input :material_fake, fake: true, disabled: true, input_html: { value: f.object.material.to_s } %>
+    </div>
+
+    <div class="yui3-u-1-6">
+      <%= f.input :reference_unit, fake: true, disabled: true, input_html: { value: f.object.material_reference_unit } %>
+    </div>
+
+    <div class="yui3-u-1-6 quantity">
+      <%= f.input :quantity, fake: true, disabled: true, input_html: { value: f.object.item_quantity } %>
+    </div>
+  </div>
+
+  <div class="yui3-g">
+    <div class="yui3-u-1-4 unit_price">
+      <%= f.input :best_proposal, disabled: true, label: 'Melhor proposta', fake: true,
+        input_html: { value: f.object.decorator.best_proposal, 'data-decimal' => true } %>
+    </div>
+
+    <div class="yui3-u-1-4 unit_price">
+      <%= f.input :old_unit_price, disabled: true,
+        input_html: { value: number_with_precision(f.object.decorator.old_unit_price), 'data-decimal' => true } %>
+    </div>
+
+    <div class="yui3-u-1-4 unit_price">
+      <%= f.input :unit_price, required: true, label: 'Nova proposta',
+        input_html: { value: f.object.decorator.unit_price, 'data-decimal' => true } %>
+    </div>
+
+    <div class="yui3-u-1-4 total_price">
+      <%= f.input :total_price, fake: true, required: false, disabled: true,
+        input_html: { value: f.object.decorator.total_price, 'data-decimal' => true, class: :numeric } %>
+    </div>
+  </div>
+</div>

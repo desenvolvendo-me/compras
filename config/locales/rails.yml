@@ -326,6 +326,7 @@ pt-BR:
       material_cannot_be_duplicated_by_creditor: "O material para o fornecedor já está em uso"
       cant_be_changed_when_is_imported: "não pode ser modificado quando importado automaticamente"
       only_one_reduction_allowed: "não pode ser usado ao mesmo tempo que o decréscimo em percentual"
+      unit_price_should_be_lower_than_old_unit_price: "deve ser menor que o valor da melhor proposta"
 
   activerecord:
     errors:
