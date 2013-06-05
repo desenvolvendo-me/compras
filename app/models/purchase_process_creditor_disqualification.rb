@@ -55,12 +55,12 @@ class PurchaseProcessCreditorDisqualification < Compras::Model
     proposal_items.each do |item|
       item.qualify!
       item.disqualify! if disqualify_item? item
+      PurchaseProcessCreditorProposalRanking.rank! item
     end
   end
 
   def disqualify_item?(item)
-    return true if total?
-    return true if proposal_item_ids.include? item.id.to_s
+    return true if (total? || proposal_item_ids.include?(item.id.to_s))
   end
 
   def kind_should_be_total
