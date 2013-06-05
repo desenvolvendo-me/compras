@@ -34,7 +34,7 @@ describe Contract do
   it { should have_many(:founded_debt_pledges).dependent(:restrict) }
   it { should have_many(:additives).dependent(:restrict) }
   it { should have_one(:contract_termination).dependent(:restrict) }
-  it { should have_and_belong_to_many :creditors }
+  it { should have_and_belong_to_many(:creditors).order(:id) }
 
   it 'should return contract_number as to_s method' do
     subject.contract_number = '001'
