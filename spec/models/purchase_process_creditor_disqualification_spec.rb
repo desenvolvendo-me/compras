@@ -1,6 +1,8 @@
 require 'model_helper'
 require 'app/models/purchase_process_creditor_disqualification'
+require 'app/models/purchase_process_creditor_proposal'
 require 'app/models/licitation_process'
+require 'app/business/purchase_process_creditor_proposal_ranking'
 
 describe PurchaseProcessCreditorDisqualification do
   it { should belong_to :licitation_process }
@@ -109,8 +111,9 @@ describe PurchaseProcessCreditorDisqualification do
       it 'disqualifies an item when' do
         item.should_receive(:qualify!)
         item.should_receive(:disqualify!)
+        PurchaseProcessCreditorProposalRanking.should_receive(:rank!).with item
 
-        subject.send(:disqualify_proposal_items)
+        subject.run_callbacks(:save)
       end
     end
 
@@ -120,8 +123,9 @@ describe PurchaseProcessCreditorDisqualification do
       it 'only qualifies an item' do
         item.should_receive(:qualify!)
         item.should_not_receive(:disqualify!)
+        PurchaseProcessCreditorProposalRanking.should_receive(:rank!).with item
 
-        subject.send(:disqualify_proposal_items)
+        subject.run_callbacks(:save)
       end
     end
   end
