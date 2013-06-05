@@ -51,7 +51,6 @@ menu:
     - legislation:
       - dissemination_sources
       - communication_sources
-      - legal_text_natures
       - regulatory_act:
         - regulatory_act_types
         - regulatory_acts

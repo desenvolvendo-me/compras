@@ -9,7 +9,6 @@ require 'app/models/agreement'
 describe RegulatoryAct do
   context 'Relationships' do
     it { should belong_to :regulatory_act_type }
-    it { should belong_to :legal_text_nature }
     it { should belong_to :parent }
 
     it { should have_many(:expense_natures).dependent(:restrict) }
@@ -33,7 +32,6 @@ describe RegulatoryAct do
     it { should validate_presence_of :publication_date }
     it { should validate_presence_of :vigor_date }
     it { should validate_presence_of :content }
-    it { should validate_presence_of :legal_text_nature }
 
     it { should validate_numericality_of :budget_law_percent }
     it { should validate_numericality_of :revenue_antecipation_percent }

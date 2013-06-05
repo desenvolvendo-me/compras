@@ -26,7 +26,6 @@ feature "RegulatoryActs" do
 
       select 'Decreto de Crédito Suplementar', :from => 'Tipo de decreto de alteração orçamentária'
 
-      fill_modal 'Natureza legal do texto jurídico', :with => 'Natureza Cívica', :field => 'Descrição'
       fill_in 'Data da criação', :with => '01/01/2012'
       fill_in 'Data da assinatura', :with => '01/01/2012'
       fill_in 'Data da publicação', :with => '02/01/2012'
@@ -57,7 +56,6 @@ feature "RegulatoryActs" do
       expect(page).to have_field 'Tipo', :with => 'Alteração Orçamentária'
       expect(page).to have_select 'Classificação', :selected => 'Decreto'
       expect(page).to have_select 'Tipo de decreto de alteração orçamentária', :selected => 'Decreto de Crédito Suplementar'
-      expect(page).to have_field 'Natureza legal do texto jurídico', :with => 'Natureza Cívica'
       expect(page).to have_field 'Data da criação', :with => '01/01/2012'
       expect(page).to have_field 'Data da assinatura', :with => '01/01/2012'
       expect(page).to have_field 'Data da publicação', :with => '02/01/2012'
@@ -324,6 +322,5 @@ feature "RegulatoryActs" do
     RegulatoryActType.make!(:emenda, description: 'Alteração Orçamentária')
     RegulatoryAct.make!(:emenda)
     DisseminationSource.make!(:jornal_municipal)
-    LegalTextNature.make!(:civica)
   end
 end

@@ -372,13 +372,6 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :legal_text_natures do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
   resources :licitation_commissions do
     collection do
       get :filter
