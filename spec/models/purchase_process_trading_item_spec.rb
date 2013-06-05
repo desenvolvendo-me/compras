@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'model_helper'
 require 'app/models/purchase_process_trading_item'
 require 'app/models/purchase_process_trading_item_bid'
@@ -10,6 +11,53 @@ describe PurchaseProcessTradingItem do
   it { should have_many(:purchase_process_accreditation_creditors).through(:item) }
 
   it { should delegate(:lot).to(:item).allowing_nil(true).prefix(true) }
+
+  describe 'validations' do
+    it 'cannot have 2 kind of reductions' do
+      subject.reduction_rate_value = 10.0
+      subject.reduction_rate_percent = 10.0
+
+      subject.valid?
+
+      expect(subject.errors[:reduction_rate_value]).to include('é permitido apenas um tipo de decréscimo')
+    end
+
+    it 'should allow reduction by value' do
+      subject.reduction_rate_value = 10.0
+
+      subject.valid?
+
+      expect(subject.errors[:reduction_rate_value]).to_not include('é permitido apenas um tipo de decréscimo')
+    end
+
+    it 'should allow reduction by percentage' do
+      subject.reduction_rate_percent = 10.0
+
+      subject.valid?
+
+      expect(subject.errors[:reduction_rate_value]).to_not include('é permitido apenas um tipo de decréscimo')
+    end
+
+    it 'should not allow a negative value for reduction_rato_value on update' do
+      subject.reduction_rate_value = -1
+
+      subject.stub(:validation_context).and_return(:update)
+
+      subject.valid?
+
+      expect(subject.errors[:reduction_rate_value]).to include('deve ser maior ou igual a 0')
+    end
+
+    it 'should not allow a negative value for reduction_rato_value on update' do
+      subject.reduction_rate_percent = -1
+
+      subject.stub(:validation_context).and_return(:update)
+
+      subject.valid?
+
+      expect(subject.errors[:reduction_rate_percent]).to include('deve ser maior ou igual a 0')
+    end
+  end
 
   describe '#to_s' do
     context 'when has lot' do
@@ -141,6 +189,32 @@ describe PurchaseProcessTradingItem do
 
       it 'should return nil' do
         expect(subject.lowest_bid).to be_nil
+      end
+    end
+  end
+
+  describe '#lowest_bid_or_proposal_amount' do
+    context 'when has last_bid' do
+      let(:lowest_bid) { double(:lowest_bid, amount: 10.0) }
+
+      before do
+        subject.stub(lowest_bid: lowest_bid)
+      end
+
+      it "should return lowest_bid's amount" do
+        expect(subject.lowest_bid_or_proposal_amount).to eq 10.0
+      end
+    end
+
+    context 'when has not last_bid' do
+      let(:lowest_proposal) { double(:lowest_proposal, unit_price: 16.0) }
+
+      before do
+        subject.stub(lowest_proposal: lowest_proposal, last_bid: nil)
+      end
+
+      it "should return lowest_proposal's unit_price" do
+        expect(subject.lowest_bid_or_proposal_amount).to eq 16.0
       end
     end
   end

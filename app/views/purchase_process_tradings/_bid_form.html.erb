@@ -37,7 +37,7 @@
   <div class="yui3-u-1-6 input">
     <%= label_tag :amount, PurchaseProcessTradingItemBid.human_attribute_name(:amount) %>
 
-    <%= text_field_tag :amount, '0,00', class: 'string decimal',
+    <%= text_field_tag :amount, @next_bid.decorator.amount_with_reduction, class: 'string decimal',
       'data-decimal' => true, disabled: @next_bid.blank? %>
   </div>
 

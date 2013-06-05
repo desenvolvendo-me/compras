@@ -1,0 +1,19 @@
+<div id="reductions" class="yui3-g">
+  <div class="yui3-u-1-4 input">
+    <%= label_tag :reduction_rate_value, PurchaseProcessTradingItem.human_attribute_name(:reduction_rate_value) %>
+
+    <%= text_field_tag :reduction_rate_value, @item.decorator.reduction_rate_value, class: 'string decimal',
+      'data-decimal' => true %>
+  </div>
+
+  <div class="yui3-u-1-4">
+    <%= label_tag :reduction_rate_percent, PurchaseProcessTradingItem.human_attribute_name(:reduction_rate_percent) %>
+
+    <%= text_field_tag :reduction_rate_percent, @item.decorator.reduction_rate_percent, class: 'string decimal',
+      'data-decimal' => true %>
+  </div>
+
+  <div class="yui3-u-1-4 field-without-label">
+    <%= button_tag 'Gravar decréscimo', class: 'button primary', id: 'reduction_button' %>
+  </div>
+</div>

@@ -1,3 +1,7 @@
+json.id                     resource.id
+json.reduction_rate_value   resource.decorator.reduction_rate_value
+json.reduction_rate_percent resource.decorator.reduction_rate_percent
+
 json.lowest_bid do
   if @lowest_bid
     json.amount    number_with_precision(@lowest_bid.amount)

@@ -39,6 +39,7 @@ $(document).ready(function() {
       $('#accreditation_creditor_id').val(bid.accreditation_creditor_id);
       $('#lot').val(bid.lot);
       $('#round').val(bid.round);
+      $('#amount').val(bid.amount_with_reduction);
 
       allowNewBid(true);
     }
@@ -58,6 +59,11 @@ $(document).ready(function() {
     bidAmount.text(lowest_bid.amount);
   }
 
+  function fillReductions(item) {
+    $('#reduction_rate_value').val(item.reduction_rate_value);
+    $('#reduction_rate_percent').val(item.reduction_rate_percent);
+  }
+
   function getNextBidFromServer() {
     var itemId = $('#item_id').val(),
         oldUrl = $('#next_bid_url').val(),
@@ -67,10 +73,11 @@ $(document).ready(function() {
       url: newUrl,
       cache: false,
       dataType: 'json',
-      success: function(data) {
-        fillForm(data.next_bid);
-        fillHistoric(data.historic);
-        fillLowestBid(data.lowest_bid);
+      success: function(item) {
+        fillReductions(item)
+        fillForm(item.next_bid);
+        fillHistoric(item.historic);
+        fillLowestBid(item.lowest_bid);
       }
     });
   }
@@ -186,6 +193,45 @@ $(document).ready(function() {
       }
     });
   }
+
+  function submitReductions(itemId) {
+    var url = $('#persist_item_url').val(),
+        percentData = {
+          id: itemId,
+          _method: 'put',
+          purchase_process_trading_item: {
+            reduction_rate_value: $('#reduction_rate_value').val(),
+            reduction_rate_percent: $('#reduction_rate_percent').val()
+          }
+        };
+
+    $.ajax({
+      url: url + itemId,
+      data: percentData,
+      type: 'POST',
+      dataType: 'json',
+      success: function(data) {
+        fillForm(data.next_bid);
+      },
+
+      error: function(xhr) {
+        var errors = $.parseJSON(xhr.responseText).errors;
+
+        $('#reduction_rate_value').val('0,00'),
+        $('#reduction_rate_percent').val('0,00')
+
+        processPersistErrors(errors);
+      }
+    });
+  }
+
+  $('button#reduction_button').on('click', function(event) {
+    event.preventDefault();
+
+    var itemId = $('#item_id').val();
+
+    submitReductions(itemId);
+  });
 
   $('button#make_bid').on('click', function(event) {
     event.preventDefault();

@@ -64,4 +64,41 @@ describe PurchaseProcessTradingItemsController do
       end
     end
   end
+
+  describe 'PUT #update' do
+    context 'when has no errors' do
+      it 'should redirect to next_bid' do
+        item = double(:item)
+
+        PurchaseProcessTradingItem.should_receive(:find).with("10").and_return(item)
+
+        item.should_receive(:localized).and_return(item)
+        item.should_receive(:assign_attributes).with({ 'reduction_rate_value' => '10,00', 'reduction_rate_percent' => '0,00'}, as: :trading_user)
+        item.should_receive(:save).and_return(true)
+
+        put :update, id: 10, purchase_process_trading_item: { reduction_rate_value: '10,00', reduction_rate_percent: '0,00' }
+
+        expect(response).to redirect_to(next_bid_purchase_process_trading_item_path(item))
+      end
+    end
+
+    context 'when has errors' do
+      it 'should return the errors' do
+        item = double(:item)
+        errors = double(:errors, full_messages: ["error"])
+
+        PurchaseProcessTradingItem.should_receive(:find).with("10").and_return(item)
+
+        item.should_receive(:localized).and_return(item)
+        item.should_receive(:assign_attributes).with({ 'reduction_rate_value' => '10,00', 'reduction_rate_percent' => '10,00'}, as: :trading_user)
+        item.should_receive(:save).and_return(false)
+        item.should_receive(:errors).and_return(errors)
+
+        put :update, id: 10, purchase_process_trading_item: { reduction_rate_value: '10,00', reduction_rate_percent: '10,00' }
+
+        expect(response.code).to eq '422'
+        expect(response.body).to eq '{"errors":["error"]}'
+      end
+    end
+  end
 end

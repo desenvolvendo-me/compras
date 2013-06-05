@@ -1,0 +1,15 @@
+pt-BR:
+  activerecord:
+    models:
+      purchase_process_trading_item:
+        one: "Item doPregão Presencial"
+        other: "Itens do Pregão Presencial"
+
+
+    attributes:
+      purchase_process_trading_item:
+        trading: "Pregão"
+        lot: "Lote"
+        item: "Item"
+        reduction_rate_value: "Decréscimo em valor"
+        reduction_rate_percent: "Decréscimo em percentual"

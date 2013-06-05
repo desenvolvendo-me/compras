@@ -87,4 +87,48 @@ describe PurchaseProcessTradingItemDecorator do
       end
     end
   end
+
+  describe '#reduction_rate_value' do
+    context 'when reduction_rate_value' do
+      before do
+        component.stub(reduction_rate_value: 10.12)
+      end
+
+      it 'should return number with precision' do
+        expect(subject.reduction_rate_value).to eq '10,12'
+      end
+    end
+
+    context 'when has not reduction_rate_value' do
+      before do
+        component.stub(reduction_rate_value: nil)
+      end
+
+      it 'should return 0,00' do
+        expect(subject.reduction_rate_value).to eq '0,00'
+      end
+    end
+  end
+
+  describe '#reduction_rate_percent' do
+    context 'when reduction_rate_percent' do
+      before do
+        component.stub(reduction_rate_percent: 10.12)
+      end
+
+      it 'should return number with precision' do
+        expect(subject.reduction_rate_percent).to eq '10,12'
+      end
+    end
+
+    context 'when has not reduction_rate_percent' do
+      before do
+        component.stub(reduction_rate_percent: nil)
+      end
+
+      it 'should return 0,00' do
+        expect(subject.reduction_rate_percent).to eq '0,00'
+      end
+    end
+  end
 end

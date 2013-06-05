@@ -1,6 +1,6 @@
 class PurchaseProcessTradingItem < Compras::Model
-  attr_accessible :trading_id, :item_id, :lot, :reduction_rate_value,
-    :reduction_rate_percent
+  attr_accessible :reduction_rate_value, :reduction_rate_percent, as: :trading_user
+  attr_accessible :trading_id, :item_id, :lot, :bids_attributes
 
   belongs_to :trading, class_name: 'PurchaseProcessTrading'
   belongs_to :item, class_name: 'PurchaseProcessItem'
@@ -10,6 +10,12 @@ class PurchaseProcessTradingItem < Compras::Model
   has_many :purchase_process_accreditation_creditors, through: :item
 
   delegate :lot, to: :item, allow_nil: true, prefix: true
+
+  validates :reduction_rate_value, numericality: { greater_than_or_equal_to: 0 }, on: :update
+  validates :reduction_rate_percent, numericality: { greater_than_or_equal_to: 0 }, on: :update
+  validate :validate_reductions
+
+  accepts_nested_attributes_for :bids, allow_destroy: true
 
   def to_s
     return lot.to_s if lot
@@ -43,9 +49,25 @@ class PurchaseProcessTradingItem < Compras::Model
     bids.not_without_proposal.reorder('number DESC')
   end
 
+  def lowest_bid_or_proposal_amount
+    if lowest_bid
+      lowest_bid.amount
+    else
+      lowest_proposal.unit_price
+    end
+  end
+
   private
 
   def creditor_with_lowest_proposal
     creditors_selected.last
+  end
+
+  def validate_reductions
+    return unless reduction_rate_value.present? && reduction_rate_percent.present?
+
+    if reduction_rate_value > 0 && reduction_rate_percent > 0
+      errors.add(:reduction_rate_value, :only_one_reduction_allowed)
+    end
   end
 end

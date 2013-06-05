@@ -26,4 +26,12 @@ class PurchaseProcessTradingItemDecorator
 
     lowest_proposal.creditor
   end
+
+  def reduction_rate_value
+    number_with_precision(super) || '0,00'
+  end
+
+  def reduction_rate_percent
+    number_with_precision(super) || '0,00'
+  end
 end
