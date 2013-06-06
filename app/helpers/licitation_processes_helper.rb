@@ -28,4 +28,12 @@ module LicitationProcessesHelper
       new_purchase_process_trading_path(purchase_process_id: resource.id)
     end
   end
+
+  def judgment_commission_advice
+    if resource.judgment_commission_advice
+      edit_judgment_commission_advice_path(resource.judgment_commission_advice)
+    else
+      new_judgment_commission_advice_path(licitation_process_id: resource.id)
+    end
+  end
 end

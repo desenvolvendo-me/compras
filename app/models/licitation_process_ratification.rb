@@ -56,7 +56,7 @@ class LicitationProcessRatification < Compras::Model
   def without_judgment_commission_advice
     return unless licitation_process && licitation_process_licitation?
 
-    if licitation_process.judgment_commission_advices.empty?
+    if licitation_process.judgment_commission_advice.nil?
       errors.add(:base, :licitation_process_without_judgment_commission_advices,
                 licitation_process: licitation_process.to_s)
     end

@@ -58,7 +58,6 @@ class LicitationProcess < Compras::Model
   has_many :licitation_process_impugnments, :dependent => :restrict, :order => :id
   has_many :licitation_process_appeals, :dependent => :restrict
   has_many :pledges, :dependent => :restrict
-  has_many :judgment_commission_advices, :dependent => :restrict
   has_many :licitation_notices, :dependent => :destroy
   has_many :reserve_funds, :dependent => :restrict
   has_many :licitation_process_ratifications, :dependent => :restrict, :order => :id
@@ -80,6 +79,7 @@ class LicitationProcess < Compras::Model
   has_many :creditor_disqualifications, class_name: 'PurchaseProcessCreditorDisqualification', dependent: :restrict
   has_many :process_responsibles, :dependent => :restrict
 
+  has_one :judgment_commission_advice, :dependent => :restrict
   has_one :purchase_process_accreditation, :dependent => :restrict
   has_one :trading, class_name: 'PurchaseProcessTrading', :dependent => :restrict,
     foreign_key: :purchase_process_id
@@ -188,10 +188,6 @@ class LicitationProcess < Compras::Model
 
   def update_status(status)
     update_column :status, status
-  end
-
-  def advice_number
-    judgment_commission_advices.count
   end
 
   def envelope_opening?

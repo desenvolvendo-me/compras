@@ -59,7 +59,6 @@ describe LicitationProcess do
   it { should have_many(:licitation_process_impugnments).dependent(:restrict).order(:id) }
   it { should have_many(:licitation_process_appeals).dependent(:restrict) }
   it { should have_many(:pledges).dependent(:restrict) }
-  it { should have_many(:judgment_commission_advices).dependent(:restrict) }
   it { should have_many(:license_creditors).dependent(:restrict).through(:bidders) }
   it { should have_many(:accreditation_creditors).through(:purchase_process_accreditation) }
 
@@ -77,6 +76,7 @@ describe LicitationProcess do
   it { should have_many(:creditor_disqualifications).dependent(:restrict) }
   it { should have_many(:process_responsibles).dependent(:restrict) }
 
+  it { should have_one(:judgment_commission_advice).dependent(:restrict) }
   it { should have_one(:purchase_process_accreditation).dependent(:restrict) }
   it { should have_one(:trading).dependent(:restrict) }
 
@@ -368,12 +368,6 @@ describe LicitationProcess do
     subject.valid?
 
     expect(subject.errors[:base]).to include "não pode ser editado"
-  end
-
-  it 'should return the advice number correctly' do
-    subject.stub(:judgment_commission_advices).and_return([1, 2, 3])
-
-    expect(subject.advice_number).to eq 3
   end
 
   context "when proposal_envelope_opening_date is not the current date" do

@@ -32,12 +32,12 @@ describe LicitationProcessRatification do
 
     let :creditor_with_new_licitation_process do
       double(:licitation_process => double, to_s: 'Credor Geral', licitation?: true,
-            judgment_commission_advices: [])
+            judgment_commission_advice: nil)
     end
 
     let :licitation_process do
       double(:to_s => '1/2012', creditors: [creditor_with_licitation_process], licitation?: true,
-            judgment_commission_advices: [])
+            judgment_commission_advice: nil)
     end
 
     before do
@@ -75,7 +75,7 @@ describe LicitationProcessRatification do
 
       context 'when has no judgment_commission_advices' do
         before do
-          licitation_process.stub(judgment_commission_advices: [])
+          licitation_process.stub(judgment_commission_advice: nil)
         end
 
         it 'should not be valid' do
@@ -87,7 +87,7 @@ describe LicitationProcessRatification do
 
       context 'when has judgment_commission_advices' do
         before do
-          licitation_process.stub(judgment_commission_advices: ['advice'])
+          licitation_process.stub(judgment_commission_advice: 'advice')
         end
 
         it 'should not have errors on base' do
