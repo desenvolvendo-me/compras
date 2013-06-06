@@ -44,24 +44,14 @@ class Bidder < Compras::Model
   validates :documents, no_duplication: :document_type_id
   validate :block_licitation_process_with_ratification
 
-  with_options :allow_blank => true do |allowing_blank|
-    allowing_blank.validates :protocol_date,
-      :timeliness => {
-        :on_or_after => :today,
-        :on_or_after_message => :should_be_on_or_after_today,
-        :type => :date,
-        :on => :create,
-        :if => :invited
-      }
-    allowing_blank.validates :receipt_date,
+  validates :receipt_date,
       :timeliness => {
         :on_or_after => :protocol_date,
         :on_or_after_message => :should_be_on_or_after_protocol_date,
         :type => :date,
         :on => :create,
         :if => :invited
-      }
-  end
+      }, allow_blank: true
 
   before_save :clear_invited_data, :set_default_values
   after_save :update_proposal_ranking, if: :enabled_changed?

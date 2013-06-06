@@ -91,21 +91,6 @@ describe Bidder do
     end
   end
 
-  context 'validate protocol_date related with today' do
-    before do
-      subject.invited = true
-    end
-
-    it { should allow_value(Date.current).for(:protocol_date) }
-
-    it { should allow_value(Date.tomorrow).for(:protocol_date) }
-
-    it 'should not allow date after today' do
-      expect(subject).not_to allow_value(Date.yesterday).for(:protocol_date).
-        with_message("deve ser igual ou posterior a data atual (#{I18n.l(Date.current)})")
-    end
-  end
-
   context 'validate receipt_date related with protocol_date' do
     let :protocol_date do
       Date.current + 10.days
