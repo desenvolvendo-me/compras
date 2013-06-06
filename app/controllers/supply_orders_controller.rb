@@ -1,0 +1,2 @@
+class SupplyOrdersController < CrudController
+end

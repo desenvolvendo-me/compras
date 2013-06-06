@@ -114,6 +114,13 @@ Compras::Application.routes.draw do
     end
   end
 
+  resources :supply_orders do
+    collection do
+      get :modal
+      get :filter
+    end
+  end
+
   resources :banks do
     collection do
       get :modal
