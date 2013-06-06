@@ -72,6 +72,7 @@ describe LicitationProcess do
   it { should have_many(:budget_allocations).through(:purchase_process_budget_allocations) }
   it { should have_many(:creditor_proposals) }
   it { should have_many(:tied_creditor_proposals) }
+  it { should have_many(:realigment_prices).through(:creditor_proposals) }
   it { should have_many(:items_creditors).through(:items) }
   it { should have_many(:creditor_disqualifications).dependent(:restrict) }
   it { should have_many(:process_responsibles).dependent(:restrict) }

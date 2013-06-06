@@ -21,6 +21,10 @@ class LicitationProcessDecorator
     end
   end
 
+  def has_records_class(association)
+    :has_records if association.any?
+  end
+
   def envelope_delivery_time
     localize(super, :format => :hour) if super
   end
