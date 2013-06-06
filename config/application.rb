@@ -94,6 +94,7 @@ module Compras
       'purchase_process_lot_creditor_proposals.js',
       'purchase_process_tradings.js',
       'purchase_solicitations.js',
+      'employees.js'
     ]
 
     config.generators do |g|
