@@ -10,9 +10,13 @@ class TradingBidRemover
   def undo_last_bid
     return unless last_bid
 
-    last_bid.update_attributes(
-      status: TradingItemBidStatus::WITHOUT_PROPOSAL,
-      amount: 0)
+    if last_bid.benefited?
+      last_bid.destroy
+    else
+      last_bid.update_attributes(
+        status: TradingItemBidStatus::WITHOUT_PROPOSAL,
+        amount: 0)
+    end
   end
 
   private

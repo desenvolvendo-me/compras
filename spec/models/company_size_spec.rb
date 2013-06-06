@@ -8,4 +8,7 @@ describe CompanySize do
   it { should have_one(:extended_company_size).dependent(:destroy) }
 
   it { should have_many(:purchase_process_accreditation_creditors).dependent(:restrict) }
+
+  it { should delegate(:benefited).to(:extended_company_size).allowing_nil(:true) }
+  it { should delegate(:benefited?).to(:extended_company_size).allowing_nil(:true) }
 end

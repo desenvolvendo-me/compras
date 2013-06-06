@@ -1,12 +1,15 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/purchase_process_accreditation_creditor'
+require 'app/models/purchase_process_trading_item_bid'
 
 describe PurchaseProcessAccreditationCreditor do
   it { should belong_to(:purchase_process_accreditation) }
   it { should belong_to(:creditor) }
   it { should belong_to(:company_size) }
   it { should belong_to(:creditor_representative) }
+
+  it { should have_many(:trading_item_bids).class_name('PurchaseProcessTradingItemBid').dependent(:restrict) }
 
   it { should delegate(:personable_type_humanize).to(:creditor).allowing_nil(true).prefix(true) }
   it { should delegate(:address).to(:creditor).allowing_nil(true).prefix(true) }
@@ -21,6 +24,7 @@ describe PurchaseProcessAccreditationCreditor do
   it { should delegate(:phone).to(:creditor_representative).allowing_nil(true).prefix(true) }
   it { should delegate(:email).to(:creditor_representative).allowing_nil(true).prefix(true) }
   it { should delegate(:identity_number).to(:creditor_representative).allowing_nil(true).prefix(true) }
+  it { should delegate(:benefited?).to(:company_size).allowing_nil(true) }
 
   describe "validations" do
     it { should validate_presence_of :creditor }

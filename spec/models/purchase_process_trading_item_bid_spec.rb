@@ -19,7 +19,7 @@ describe PurchaseProcessTradingItemBid do
 
   context 'validations' do
     it { should validate_presence_of :item }
-    it { should validate_presence_of :accreditation_creditor }
+    it { should validate_presence_of :purchase_process_accreditation_creditor_id }
     it { should validate_presence_of :status }
     it { should validate_presence_of :round }
     it { should validate_presence_of :amount }
@@ -64,7 +64,7 @@ describe PurchaseProcessTradingItemBid do
 
         context 'when there is a lowest proposal for the item' do
           before do
-            subject.stub(lowest_bid_amount: 100.0)
+            subject.stub(lowest_bid_or_proposal_amount: 100.0)
           end
 
           context 'when amount is lowest than lowest_trading_amount' do
@@ -106,7 +106,7 @@ describe PurchaseProcessTradingItemBid do
 
         context 'when there is no lowest proposal for item' do
           before do
-            subject.stub(lowest_bid_amount: nil)
+            subject.stub(lowest_bid_or_proposal_amount: nil)
             subject.amount = 1
           end
 
@@ -136,9 +136,9 @@ describe PurchaseProcessTradingItemBid do
         subject.stub(amount: 10.0)
       end
 
-      context 'when has no lowest_bid_amount' do
+      context 'when has no lowest_bid_or_proposal_amount' do
         before do
-          subject.stub(lowest_bid_amount: nil)
+          subject.stub(lowest_bid_or_proposal_amount: nil)
         end
 
         it 'should be zero' do
@@ -146,9 +146,9 @@ describe PurchaseProcessTradingItemBid do
         end
       end
 
-      context 'when lowest_bid_amount is equal to amount' do
+      context 'when lowest_bid_or_proposal_amount is equal to amount' do
         before do
-          subject.stub(lowest_bid_amount: 10)
+          subject.stub(lowest_bid_or_proposal_amount: 10)
         end
 
         it 'should be zero' do
@@ -156,9 +156,9 @@ describe PurchaseProcessTradingItemBid do
         end
       end
 
-      context 'when lowest_bid_amount is not equal to amount' do
+      context 'when lowest_bid_or_proposal_amount is not equal to amount' do
         before do
-          subject.stub(lowest_bid_amount: 9.0)
+          subject.stub(lowest_bid_or_proposal_amount: 9.0)
         end
 
         it 'should calculate the percent value' do

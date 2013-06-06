@@ -31,6 +31,14 @@ class PurchaseProcessTradingItem < Compras::Model
     creditors_ordered.selected_creditors
   end
 
+  def creditors_benefited
+    creditors_selected.
+      benefited.
+      less_or_equal_to_trading_bid_value(minimum_amount_for_benefited).
+      to_a.
+      uniq
+  end
+
   def lowest_proposal
     return unless creditor_with_lowest_proposal
 
@@ -43,6 +51,10 @@ class PurchaseProcessTradingItem < Compras::Model
 
   def last_bid
     bids.not_without_proposal.reorder(:id).last
+  end
+
+  def last_bid_with_proposal
+    bids.with_proposal.reorder(:id).last
   end
 
   def bids_historic
@@ -58,6 +70,10 @@ class PurchaseProcessTradingItem < Compras::Model
   end
 
   private
+
+  def minimum_amount_for_benefited(percent_rate = BigDecimal('5'))
+    lowest_bid_or_proposal_amount + (lowest_bid_or_proposal_amount * (percent_rate / BigDecimal('100')))
+  end
 
   def creditor_with_lowest_proposal
     creditors_selected.last

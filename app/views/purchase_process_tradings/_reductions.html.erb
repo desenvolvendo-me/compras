@@ -13,7 +13,12 @@
       'data-decimal' => true %>
   </div>
 
-  <div class="yui3-u-1-4 field-without-label">
+  <div class="yui3-u-1-5 field-without-label">
     <%= button_tag 'Gravar decréscimo', class: 'button primary', id: 'reduction_button' %>
+  </div>
+
+  <div class="yui3-u-1-6 field-without-label">
+    <%= link_to 'Desempate ficto', new_purchase_process_trading_item_bid_benefited_path(item_id: @item),
+      id: 'benefited_bid', class: 'button primary', 'data-disabled' => @item.decorator.benefited_bid_message %>
   </div>
 </div>

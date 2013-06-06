@@ -12,4 +12,8 @@ class PurchaseProcessTradingItemBidDecorator
   def amount_with_reduction
     number_with_precision(super) || '0,00'
   end
+
+  def lowest_bid_amount
+    number_with_precision super
+  end
 end
