@@ -1,33 +1,42 @@
 class JudgmentCommissionAdvicesController < CrudController
+  defaults :collection_name => :judgment_commission_advice
+
+  actions :new, :create, :edit, :update
+
+  before_filter :parent
+
   def new
     object = build_resource
-    object.licitation_process = LicitationProcess.find(parent_id)
+    object.licitation_process = parent
     object.year = Date.current.year
 
     super
   end
 
   def create
-    create! { judgment_commission_advices_path(:licitation_process_id => resource.licitation_process_id) }
+    create! { edit_licitation_process_path(parent) }
   end
 
   def update
-    update! { judgment_commission_advices_path(:licitation_process_id => resource.licitation_process_id) }
-  end
-
-  def destroy
-    destroy! { judgment_commission_advices_path(:licitation_process_id => resource.licitation_process_id) }
-  end
-
-  def begin_of_association_chain
-    if parent_id
-      @parent = LicitationProcess.find(parent_id)
-    end
+    update! { edit_licitation_process_path(parent) }
   end
 
   protected
+  def parent
+    @parent ||= parent_from_params_or_licitation_process
+  end
 
   def parent_id
-    params[:licitation_process_id]
+    return unless params[:licitation_process_id] || params[:judgment_commission_advice]
+
+    params[:licitation_process_id] || params[:judgment_commission_advice][:licitation_process_id]
+  end
+
+  def parent_from_params_or_licitation_process
+    if parent_id
+      LicitationProcess.find(parent_id)
+    else
+      resource.licitation_process
+    end
   end
 end

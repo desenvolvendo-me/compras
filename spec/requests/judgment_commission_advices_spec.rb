@@ -26,8 +26,6 @@ feature "JudgmentCommissionAdvices" do
 
     click_link 'Pareceres da comissão julgadora'
 
-    click_link 'Criar Parecer da Comissão Julgadora'
-
     within_tab 'Principal' do
       fill_in 'Ano', :with => '2012'
       fill_modal 'Comissão julgadora', :with => '20/03/2012', :field => 'Data da nomeação'
@@ -76,9 +74,7 @@ feature "JudgmentCommissionAdvices" do
 
     expect(page).to have_notice 'Parecer da Comissão Julgadora criado com sucesso.'
 
-    within_records do
-      page.find('a').click
-    end
+    click_link 'Pareceres da comissão julgadora'
 
     within_tab 'Principal' do
       expect(page).to have_field 'Número da ata', :with => '1'
@@ -150,9 +146,7 @@ feature "JudgmentCommissionAdvices" do
 
     expect(page).to have_notice 'Parecer da Comissão Julgadora editado com sucesso.'
 
-    within_records do
-      page.find('a').click
-    end
+    click_link 'Pareceres da comissão julgadora'
 
     within_tab 'Principal' do
       expect(page).to have_field 'Número da ata', :with => '1'
@@ -175,55 +169,6 @@ feature "JudgmentCommissionAdvices" do
       expect(page).to have_field "Texto da ata sobre julgamento das propostas / justificativas", :with => "novo texto 3"
       expect(page).to have_field "Texto da ata sobre julgamento - pareceres diversos", :with => "novo texto 4"
     end
-
-    click_link 'Apagar'
-
-    expect(page).to have_notice 'Parecer da Comissão Julgadora apagado com sucesso.'
-    expect(page).to_not have_link "40/2013"
-  end
-
-  scenario 'create another judgment_commission_advice to test the generated minutes number and judgment sequence' do
-    JudgmentCommissionAdvice.make!(:parecer)
-    LicitationProcess.make!(:processo_licitatorio)
-    LicitationCommission.make!(:comissao)
-
-    navigate 'Processos de Compra > Processos de Compras'
-
-    click_link "Limpar Filtro"
-
-    within_records do
-      click_link '1/2012'
-    end
-
-    click_link 'Pareceres da comissão julgadora'
-
-    click_link 'Criar Parecer da Comissão Julgadora'
-
-    within_tab 'Principal' do
-      fill_in 'Ano', :with => '2012'
-      fill_modal 'Comissão julgadora', :with => '20/03/2012', :field => 'Data da nomeação'
-    end
-
-    within_tab 'Parecer' do
-      fill_in "Data do início do julgamento", :with => "20/01/2012"
-      fill_in "Hora do início do julgamento", :with => "12:00"
-      fill_in "Data do fim do julgamento", :with => "21/01/2012"
-      fill_in "Hora do fim do julgamento", :with => "13:00"
-      fill_in "Texto da ata sobre as empresas licitantes", :with => "texto 1"
-      fill_in "Texto da ata sobre documentação das empresas licitantes", :with => "texto 2"
-      fill_in "Texto da ata sobre julgamento das propostas / justificativas", :with => "texto 3"
-      fill_in "Texto da ata sobre julgamento - pareceres diversos", :with => "texto 4"
-    end
-
-    click_button 'Salvar'
-
-    expect(page).to have_notice 'Parecer da Comissão Julgadora criado com sucesso.'
-
-    click_link JudgmentCommissionAdvice.last.to_s
-
-    within_tab 'Principal' do
-      expect(page).to have_field 'Número da ata', :with => '2'
-    end
   end
 
   scenario 'should get the CPF number when selecting individual' do
@@ -239,8 +184,6 @@ feature "JudgmentCommissionAdvices" do
     end
 
     click_link 'Pareceres da comissão julgadora'
-
-    click_link 'Criar Parecer da Comissão Julgadora'
 
     within_tab 'Membros' do
       click_button 'Adicionar Membro'
@@ -270,8 +213,6 @@ feature "JudgmentCommissionAdvices" do
 
     click_link 'Pareceres da comissão julgadora'
 
-    click_link 'Criar Parecer da Comissão Julgadora'
-
     within '#judment_commission_advices' do
       expect(page).to have_link 'Parecer'
     end
@@ -285,8 +226,6 @@ feature "JudgmentCommissionAdvices" do
     end
 
     click_link 'Pareceres da comissão julgadora'
-
-    click_link 'Criar Parecer da Comissão Julgadora'
 
     within '#judment_commission_advices' do
       expect(page).to_not have_link 'Parecer'
@@ -307,8 +246,6 @@ feature "JudgmentCommissionAdvices" do
 
     click_link 'Pareceres da comissão julgadora'
 
-    click_link 'Criar Parecer da Comissão Julgadora'
-
     within '#judment_commission_advices' do
       expect(page).to have_link 'Parecer'
     end
@@ -322,8 +259,6 @@ feature "JudgmentCommissionAdvices" do
     end
 
     click_link 'Pareceres da comissão julgadora'
-
-    click_link 'Criar Parecer da Comissão Julgadora'
 
     within '#judment_commission_advices' do
       expect(page).to_not have_link 'Parecer'

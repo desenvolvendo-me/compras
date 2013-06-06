@@ -3,7 +3,6 @@ builder resource, json do
   json.envelope_delivery_time          resource.decorator.envelope_delivery_time
   json.proposal_envelope_opening_date  resource.proposal_envelope_opening_date
   json.proposal_envelope_opening_time  resource.decorator.proposal_envelope_opening_time
-  json.advice_number                   resource.decorator.advice_number
   json.process_date                    resource.process_date
   json.modality_humanize               resource.modality_humanize.to_s
   json.description                     resource.description

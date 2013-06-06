@@ -14,11 +14,10 @@ class JudgmentCommissionAdvice < Compras::Model
   accepts_nested_attributes_for :judgment_commission_advice_members, :allow_destroy => true
 
   delegate :modality_humanize, :to => :licitation_process, :allow_nil => true, :prefix => true
-  delegate :advice_number, :to => :licitation_process, :allow_nil => true, :prefix => true
   delegate :president_name, :to => :licitation_commission, :allow_nil => true, :prefix => true
   delegate :licitation_commission_members, :to => :licitation_commission, :allow_nil => true
 
-  validates :licitation_process, :licitation_commission, :year, :minutes_number, :judgment_sequence, :presence => true
+  validates :licitation_process, :licitation_commission, :year, :minutes_number, :presence => true
   validates :year, :mask => "9999"
   validates :judgment_start_date, :judgment_start_time, :judgment_end_date, :presence => true
   validates :judgment_end_time, :companies_minutes, :companies_documentation_minutes, :presence => true
@@ -28,7 +27,6 @@ class JudgmentCommissionAdvice < Compras::Model
   validate :start_date_time_should_not_be_greater_than_end_date_time
 
   before_validation :set_minutes_number, :on => :create
-  before_validation :set_judgment_sequence, :on => :create
 
   orderize "id DESC"
   filterize
@@ -46,16 +44,6 @@ class JudgmentCommissionAdvice < Compras::Model
   end
 
   protected
-
-  def set_judgment_sequence
-    self.judgment_sequence = next_judgment_commission_advice_number
-  end
-
-  def next_judgment_commission_advice_number
-    return unless licitation_process
-
-    licitation_process_advice_number.succ
-  end
 
   def set_minutes_number
     self.minutes_number = next_minutes_number
