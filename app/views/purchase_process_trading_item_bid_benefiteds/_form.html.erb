@@ -1,0 +1,21 @@
+<%= f.input :item_id, as: :hidden %>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-3">
+    <%= f.input :lowest_bid_accreditation_creditor, disabled: true %>
+  </div>
+
+  <div class="yui3-u-1-6">
+    <%= f.input :lowest_bid_amount, disabled: true, input_html: { value: f.object.decorator.lowest_bid_amount, class: 'decimal' } %>
+  </div>
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-3">
+    <%= f.input :purchase_process_accreditation_creditor_id, as: :select, collection: f.object.item.decorator.creditors_benefited %>
+  </div>
+
+  <div class="yui3-u-1-6">
+    <%= f.input :amount %>
+  </div>
+</div>

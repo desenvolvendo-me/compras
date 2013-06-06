@@ -2,9 +2,8 @@ pt-BR:
   activerecord:
     models:
       purchase_process_trading_item:
-        one: "Item doPregão Presencial"
+        one: "Item do Pregão Presencial"
         other: "Itens do Pregão Presencial"
-
 
     attributes:
       purchase_process_trading_item:
@@ -13,3 +12,8 @@ pt-BR:
         item: "Item"
         reduction_rate_value: "Decréscimo em valor"
         reduction_rate_percent: "Decréscimo em percentual"
+
+  purchase_process_trading_item:
+    messages:
+      trading_item_not_finished: "o item do pregão ainda não chegou ao final dos lances"
+      lowest_proposal_already_benefited: "o fornecedor do menor lance já é beneficiado pela lei"

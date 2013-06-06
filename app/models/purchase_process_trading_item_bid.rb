@@ -18,10 +18,11 @@ class PurchaseProcessTradingItemBid < Compras::Model
   delegate :lowest_bid, :reduction_rate_value, :reduction_rate_percent,
     :lowest_bid_or_proposal_amount, to: :item, allow_nil: true
   delegate :item_lot, to: :item, allow_nil: true, prefix: true
+  delegate :benefited?, to: :accreditation_creditor, allow_nil: true, prefix: true
 
-  validates :accreditation_creditor, :item, :amount, :status, :round,  presence: true
+  validates :purchase_process_accreditation_creditor_id, :item, :amount, :status, :round,  presence: true
   validates :amount, numericality: { greater_than: 0, if: :with_proposal? }
-  validate  :validate_minimum_amount, on: :update, if: :with_proposal?
+  validate  :validate_minimum_amount, if: :with_proposal?
 
   scope :by_item_id, lambda { |item_id|
     where { |bid| bid.item_id.eq(item_id) }
@@ -38,8 +39,8 @@ class PurchaseProcessTradingItemBid < Compras::Model
   def percent
     return unless amount > BigDecimal("0")
 
-    if lowest_bid_amount && amount != lowest_bid_amount
-      ( (amount - lowest_bid_amount) / lowest_bid_amount * BigDecimal('100') ).round(2)
+    if lowest_bid_or_proposal_amount && amount != lowest_bid_or_proposal_amount
+      ( (amount - lowest_bid_or_proposal_amount) / lowest_bid_or_proposal_amount * BigDecimal('100') ).round(2)
     else
       BigDecimal("0")
     end
@@ -47,6 +48,14 @@ class PurchaseProcessTradingItemBid < Compras::Model
 
   def amount_with_reduction
     lowest_bid_or_proposal_amount - reduction_value
+  end
+
+  def lowest_bid_amount
+    lowest_bid.try :amount
+  end
+
+  def lowest_bid_accreditation_creditor
+    lowest_bid.try :accreditation_creditor
   end
 
   private
@@ -62,18 +71,10 @@ class PurchaseProcessTradingItemBid < Compras::Model
   end
 
   def validate_minimum_amount
-    return unless lowest_bid_amount.present?
+    return unless lowest_bid_or_proposal_amount.present?
 
-    if amount >= lowest_bid_amount
-      errors.add(:amount, :less_than, :count => I18n::Alchemy::NumericParser.localize(lowest_bid_amount))
-    end
-  end
-
-  def lowest_bid_amount
-    if lowest_bid
-      lowest_bid.amount
-    else
-      item_lowest_proposal_unit_price
+    if amount >= lowest_bid_or_proposal_amount
+      errors.add(:amount, :less_than, :count => I18n::Alchemy::NumericParser.localize(lowest_bid_or_proposal_amount))
     end
   end
 

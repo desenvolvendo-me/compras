@@ -9,12 +9,16 @@ class PurchaseProcessAccreditationCreditor < Compras::Model
   belongs_to :company_size
   belongs_to :creditor_representative
 
+  has_many :trading_item_bids, class_name: 'PurchaseProcessTradingItemBid',
+    dependent: :restrict
+
   delegate :company?, :personable_type_humanize, :address, :city, :state, :identity_document,
            :neighborhood, :zip_code, :phone, :person_email,
            :proposal_by_item,
            :to => :creditor, :allow_nil => true, :prefix => true
   delegate :identity_document, :phone, :email, :identity_number,
            :to => :creditor_representative, :allow_nil => true, :prefix => true
+  delegate :benefited?, to: :company_size, allow_nil: true
 
   validates :kind, :presence => true, :if => :creditor_representative_present?
   validates :creditor, :purchase_process_accreditation, :presence => true
@@ -33,6 +37,18 @@ class PurchaseProcessAccreditationCreditor < Compras::Model
       creditor.purchase_process_creditor_proposals.disqualified.eq(false)
     }.
     order('has_power_of_attorney DESC, compras_purchase_process_creditor_proposals.unit_price DESC')
+  }
+
+  scope :benefited, lambda {
+    joins { company_size.extended_company_size }.
+    where {
+      company_size.extended_company_size.benefited.eq(true)
+    }
+  }
+
+  scope :less_or_equal_to_trading_bid_value, lambda { |value|
+    joins { trading_item_bids }.
+    where { trading_item_bids.amount.lteq(value) }
   }
 
   def to_s

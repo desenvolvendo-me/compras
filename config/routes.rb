@@ -77,17 +77,17 @@ Compras::Application.routes.draw do
     end
   end
 
+  resources :purchase_process_tradings, only: [:bids, :new] do
+    member do
+      get :bids
+    end
+  end
+
   resources :purchase_process_trading_items, only: [:creditor_list, :next_bid, :undo_last_bid, :update] do
     member do
       get  :creditor_list
       get  :next_bid
       post :undo_last_bid
-    end
-  end
-
-  resources :purchase_process_tradings, only: [:bids, :new] do
-    member do
-      get :bids
     end
   end
 
@@ -99,6 +99,8 @@ Compras::Application.routes.draw do
       get :filter
     end
   end
+
+  resources :purchase_process_trading_item_bid_benefiteds, only: [:new, :create]
 
   resources :supply_authorizations, :only => [:show, :modal] do
     collection do

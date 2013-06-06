@@ -17,13 +17,31 @@ describe TradingBidRemover do
         item.stub(last_bid: last_bid)
       end
 
-      it 'should change status and amount' do
-        last_bid.
-          should_receive(:update_attributes).
-          with(amount: 0, status: TradingItemBidStatus::WITHOUT_PROPOSAL).
-          and_return(true)
+      context 'when bid is benefited' do
+        before do
+          last_bid.stub(benefited?: true)
+        end
 
-        expect(subject.undo_last_bid).to be_true
+        it 'should destroy the last_bid' do
+          last_bid.should_receive(:destroy)
+
+          expect(subject.undo_last_bid)
+        end
+      end
+
+      context 'when bid is not benefited' do
+        before do
+          last_bid.stub(benefited?: false)
+        end
+
+        it 'should change status and amount' do
+          last_bid.
+            should_receive(:update_attributes).
+            with(amount: 0, status: TradingItemBidStatus::WITHOUT_PROPOSAL).
+            and_return(true)
+
+          expect(subject.undo_last_bid)
+        end
       end
     end
 

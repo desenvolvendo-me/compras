@@ -22,6 +22,23 @@ $(document).ready(function() {
     }
   }
 
+  function allowBenefitedBid(historic, lowest_bid, next_bid) {
+    var message = null;
+
+    if (_.isEmpty(historic) || !_.isEmpty(next_bid)) {
+      message = "<%= I18n.t 'purchase_process_trading_item.messages.trading_item_not_finished' %>";
+    } else if (lowest_bid.creditor_benefited) {
+      message = "<%= I18n.t 'purchase_process_trading_item.messages.lowest_proposal_already_benefited' %>";
+    }
+
+    if (message) {
+      $('a#benefited_bid').attr('data-disabled', '');
+      $('a#benefited_bid').data('disabled', message);
+    } else {
+      $('a#benefited_bid').removeAttr('data-disabled');
+    }
+  }
+
   function fillForm(bid) {
     $('#amount').val('0,00');
 
@@ -78,6 +95,7 @@ $(document).ready(function() {
         fillForm(item.next_bid);
         fillHistoric(item.historic);
         fillLowestBid(item.lowest_bid);
+        allowBenefitedBid(item.historic, item.lowest_bid, item.next_bid);
       }
     });
   }
@@ -189,7 +207,8 @@ $(document).ready(function() {
         fillHistoric(data.historic);
         fillLowestBid(data.lowest_bid);
 
-        allowNewBid(true);
+        allowNewBid(!_.isEmpty(data.next_bid));
+        allowBenefitedBid(data.historic, data.lowest_bid, data.next_bid);
       }
     });
   }
