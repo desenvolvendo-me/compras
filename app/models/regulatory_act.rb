@@ -1,13 +1,13 @@
 # encoding: utf-8
 class RegulatoryAct < Compras::Model
   attr_accessible :act_number, :regulatory_act_type_id, :creation_date,
-                  :legal_text_nature_id, :publication_date, :vigor_date,
+                  :publication_date, :vigor_date, :budget_change_law_type,
                   :end_date, :content, :budget_law_percent, :signature_date,
                   :revenue_antecipation_percent, :authorized_debt_value,
                   :dissemination_source_ids, :classification, :parent_id,
-                  :budget_change_decree_type, :origin, :budget_change_law_type
+                  :budget_change_decree_type, :origin
 
-  attr_modal :act_number, :regulatory_act_type_id, :legal_text_nature_id
+  attr_modal :act_number, :regulatory_act_type_id
 
   has_enumeration_for :budget_change_decree_type, :create_helpers => { :prefix => true }
   has_enumeration_for :budget_change_law_type
@@ -15,7 +15,6 @@ class RegulatoryAct < Compras::Model
   has_enumeration_for :origin
 
   belongs_to :regulatory_act_type
-  belongs_to :legal_text_nature
   belongs_to :parent, :class_name => 'RegulatoryAct'
 
   has_and_belongs_to_many :dissemination_sources, :join_table => :compras_dissemination_sources_compras_regulatory_acts
@@ -30,7 +29,7 @@ class RegulatoryAct < Compras::Model
   delegate :kind, to: :regulatory_act_type, allow_nil: true, prefix: true
 
   validates :regulatory_act_type, :creation_date, :publication_date, :content,
-            :signature_date, :vigor_date, :legal_text_nature, :act_number,
+            :signature_date, :vigor_date, :act_number,
             :presence => true
   validates :budget_change_decree_type, :presence => true, if: :budget_change_decree_type_required?
   validates :budget_change_law_type, :presence => true, :if => :budget_change_law_type_required?

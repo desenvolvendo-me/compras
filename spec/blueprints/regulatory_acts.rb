@@ -2,7 +2,6 @@
 RegulatoryAct.blueprint(:sopa) do
   act_number { "1234" }
   regulatory_act_type { RegulatoryActType.make!(:lei) }
-  legal_text_nature { LegalTextNature.make!(:civica) }
   creation_date { Date.new(2012, 1, 1) }
   signature_date { Date.new(2012, 1, 1) }
   publication_date { Date.new(2012, 1, 2) }
@@ -19,7 +18,6 @@ end
 RegulatoryAct.blueprint(:medida_provisoria) do
   act_number { "8901" }
   regulatory_act_type { RegulatoryActType.make!(:emenda) }
-  legal_text_nature { LegalTextNature.make!(:civica) }
   creation_date { Date.new(2013, 1, 1) }
   signature_date { Date.new(2012, 1, 1) }
   publication_date { Date.new(2013, 1, 2) }
@@ -35,7 +33,6 @@ end
 RegulatoryAct.blueprint(:emenda) do
   act_number { "4567" }
   regulatory_act_type { RegulatoryActType.make!(:emenda) }
-  legal_text_nature { LegalTextNature.make!(:civica) }
   creation_date { Date.new(2012, 1, 1) }
   signature_date { Date.new(2012, 1, 1) }
   publication_date { Date.new(2012, 1, 2) }

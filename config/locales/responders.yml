@@ -112,9 +112,6 @@ pt-BR:
     legal_references:
       <<: *female
 
-    legal_text_natures:
-      <<: *female
-
     licitation_commissions:
       <<: *female
 

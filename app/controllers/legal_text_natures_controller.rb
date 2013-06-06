@@ -1,2 +1,0 @@
-class LegalTextNaturesController < CrudController
-end
