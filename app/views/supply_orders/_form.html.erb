@@ -1,10 +1,14 @@
 <div class="yui3-g">
-  <div class="yui3-u-1-2">
-    <%= f.input :creditor %>
+  <div class="yui3-u-1-8">
+    <%= f.input :year %>
   </div>
 
   <div class="yui3-u-1-2">
     <%= f.input :licitation_process %>
+  </div>
+
+  <div class="yui3-u-1-3">
+    <%= f.input :creditor %>
   </div>
 </div>
 
@@ -13,3 +17,42 @@
     <%= f.input :authorization_date %>
   </div>
 </div>
+
+<%= f.association :items do |i| %>
+  <%= render 'supply_order_quantities/form', f: i %>
+<% end %>
+
+<script>
+  function setModalUrlToLicitationProcess() {
+    var urlModal = "<%= modal_licitation_processes_path %>?",
+    params = {
+      by_ratification_and_year: $('#supply_order_year').val(),
+      licitation_process: { year: $('#supply_order_year').val() },
+      locked_fields: ['year']
+    };
+
+    urlModal += $.param(params);
+    $('#supply_order_licitation_process').attr('data-modal-url', urlModal);
+  }
+
+  $('form.supply_order').on('change', '#supply_order_year', function() {
+    setModalUrlToLicitationProcess();
+  });
+
+  function setModalUrlToCreditor() {
+    var urlModal = "<%= modal_creditors_path %>?",
+    params = {
+      by_ratification_and_licitation_process_id: $('#supply_order_licitation_process_id').val()
+    };
+
+    urlModal += $.param(params);
+    $('#supply_order_creditor').attr('data-modal-url', urlModal);
+  }
+
+  $('form.supply_order').on('change', '#supply_order_licitation_process_id', function() {
+    setModalUrlToCreditor();
+  });
+
+  setModalUrlToLicitationProcess();
+  setModalUrlToCreditor();
+</script> 

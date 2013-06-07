@@ -6,6 +6,7 @@ class LicitationProcessesController < CrudController
   has_scope :without_trading
   has_scope :trading, :type => :boolean
   has_scope :published_edital, :type => :boolean
+  has_scope :by_ratification_and_year
 
   def new
     object = build_resource

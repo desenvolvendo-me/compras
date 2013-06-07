@@ -49,6 +49,7 @@ class Creditor < Compras::Model
   has_many :realigment_prices, through: :purchase_process_creditor_proposals
   has_many :proposal_disqualifications, class_name: 'PurchaseProcessCreditorDisqualification', dependent: :restrict
   has_many :licitation_process_ratifications, dependent: :restrict
+  has_many :licitation_process_ratification_items, through: :licitation_process_ratifications
 
   has_one :user, :as => :authenticable
 
@@ -113,6 +114,11 @@ class Creditor < Compras::Model
       purchase_process_items.licitation_process.licitation_process_ratifications.id.eq(nil)
     }.uniq
   }
+
+  scope :by_ratification_and_licitation_process_id, ->(licitation_process_id) do
+    joins { licitation_process_ratifications }.
+    where { |query| query.licitation_process_ratifications.licitation_process_id.eq(licitation_process_id) }
+  end
 
   scope :without_licitation_ratification, lambda { |licitation_process_id|
     select { 'compras_creditors.*, unico_people.name' }.

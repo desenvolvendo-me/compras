@@ -17,6 +17,13 @@ class LicitationProcessRatificationItem < Compras::Model
     to: :licitation_process, allow_nil: true, prefix: true
   delegate :material, :quantity, :lot, to: :item, allow_nil: true
 
+  scope :by_licitation_process_and_creditor, ->(licitation_process, creditor) do
+    joins { licitation_process_ratification }.
+    where { licitation_process_ratification.licitation_process_id.eq(licitation_process.id) &
+            licitation_process_ratification.creditor_id.eq(creditor.id)
+    }
+  end
+
   def unit_price
     purchase_process_creditor_proposal.try(:unit_price) || purchase_process_item.try(:unit_price)
   end

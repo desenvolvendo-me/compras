@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      supply_order_item:
+        one: "Item da Ordem de Fornecimento"
+        other: "Itens da Ordem de Fornecimento"
+
+    attributes:
+      supply_order_item:
+        authorization_quantity: "Quantidade"
+        supply_order: "Ordem de Fornecimento"
+        purchase_process_item: "Item"

@@ -1,4 +1,5 @@
 Compras::Application.routes.draw do
+
   root :to => 'bookmarks#show'
 
   get 'agreements/modal', :as => :modal_agreements
@@ -120,6 +121,8 @@ Compras::Application.routes.draw do
       get :filter
     end
   end
+
+  resources :supply_order_quantities, only: [:edit, :update]
 
   resources :banks do
     collection do
