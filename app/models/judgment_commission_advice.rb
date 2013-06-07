@@ -61,9 +61,12 @@ class JudgmentCommissionAdvice < Compras::Model
     self.class.where { |p| p.year.eq(year) }.order { id }.last
   end
 
+  def got_start_and_end_dates?
+    (judgment_start_date && judgment_start_time && judgment_end_date && judgment_end_time)
+  end
+
   def start_date_time_should_not_be_greater_than_end_date_time
-    return unless judgment_start_date || judgment_start_time ||
-                  judgment_end_date || judgment_end_time
+    return unless got_start_and_end_dates?
 
     if judgment_start > judgment_end
       errors.add(:judgment_end_date, :start_date_time_should_not_be_greater_than_end_date_time, :restriction => I18n.l(judgment_end, :format => :clean))
