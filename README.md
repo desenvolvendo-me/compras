@@ -30,7 +30,10 @@ A versão do PostgreSQL dever ser >= 9.1.
 Crie um usuário chamado `compras` com permissão para criar banco de dados, ou altere o usuário do `database.yml` após executar o comando abaixo.
 
     $ cp config/database.sample.yml config/database.yml
-    $ bundle exec rake db:create db:migrate db:test:prepare db:seed
+    $ bundle exec rake db:create
+    $ bundle exec rake db:migrate
+    $ bundle exec rake db:test:prepare
+    $ bundle exec rake db:seed
 
 ### Servidor
 
