@@ -32,6 +32,6 @@ class PurchaseProcessTrading < Compras::Model
   end
 
   def allow_negotiation?
-    items.count == items.closed.count
+    items.pending.count == 0
   end
 end
