@@ -358,6 +358,9 @@ module TceExport::MG
 
       def generate_data
         termination = contract.contract_termination
+
+        return unless termination
+
         {
           tipo_registro: 40,
           cod_orgao: monthly_monitoring.organ_code,
