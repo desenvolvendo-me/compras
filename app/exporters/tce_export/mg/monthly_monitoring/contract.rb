@@ -108,7 +108,7 @@ module TceExport::MG
 
       def representante_legal_contratado(creditor)
         if creditor.company?
-          creditor.first_representative_individial
+          creditor.first_representative_individual
         else
           creditor
         end
