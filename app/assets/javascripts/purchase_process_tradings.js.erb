@@ -76,7 +76,14 @@ $(document).ready(function() {
     bidAmount.text(lowest_bid.amount);
   }
 
-  function fillReductions(item) {
+  function fillItem(item) {
+    var itemChecked = $('input.item_chooser:checked'),
+        status = itemChecked.closest('tr').find('td.status');
+
+    fillLowestBid(item.lowest_bid);
+
+    status.text(item.status);
+
     $('#reduction_rate_value').val(item.reduction_rate_value);
     $('#reduction_rate_percent').val(item.reduction_rate_percent);
   }
@@ -91,10 +98,9 @@ $(document).ready(function() {
       cache: false,
       dataType: 'json',
       success: function(item) {
-        fillReductions(item)
         fillForm(item.next_bid);
         fillHistoric(item.historic);
-        fillLowestBid(item.lowest_bid);
+        fillItem(item)
         allowBenefitedBid(item.historic, item.lowest_bid, item.next_bid);
       }
     });
