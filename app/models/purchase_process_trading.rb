@@ -23,12 +23,12 @@ class PurchaseProcessTrading < Compras::Model
 
   def items_by_winner(accreditation_creditor)
     items.select do |item|
-      item.lowest_bid && item.lowest_bid.accreditation_creditor == accreditation_creditor
+      item.lowest_bid_or_proposal_accreditation_creditor == accreditation_creditor
     end
   end
 
   def creditors_with_lowest_proposal
-    items.map { |item| item.lowest_bid.accreditation_creditor }.compact.uniq
+    items.map { |item| item.lowest_bid_or_proposal_accreditation_creditor }.compact.uniq
   end
 
   def allow_negotiation?
