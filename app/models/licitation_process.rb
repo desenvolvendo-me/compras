@@ -73,6 +73,7 @@ class LicitationProcess < Compras::Model
   has_many :license_creditors, :through => :bidders, :dependent => :restrict, :source => :creditor, order: :id
   has_many :accreditation_creditors, :through => :purchase_process_accreditation, :source => :creditors, order: :id
   has_many :creditor_proposals, class_name: 'PurchaseProcessCreditorProposal', order: :id
+  has_many :realigment_prices, through: :creditor_proposals
   has_many :tied_creditor_proposals, class_name: 'PurchaseProcessCreditorProposal',
            conditions: { tied: true }, order: 'ranking, creditor_id, purchase_process_item_id, lot'
   has_many :items_creditors, through: :items, source: :creditor, order: :id

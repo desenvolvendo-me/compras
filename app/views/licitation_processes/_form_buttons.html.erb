@@ -2,53 +2,50 @@
   <% if f.object.persisted? %>
     <p>
       <%= link_to('Laudo de Análise Jurídica',
-                  legal_analysis_appraisals_path(:licitation_process_id => resource.id),
-                  :class => "button primary") %>
+        legal_analysis_appraisals_path(:licitation_process_id => resource.id),
+        class: "button primary #{f.object.decorator.has_records_class(f.object.legal_analysis_appraisals)}") %>
 
       <%= link_to('Publicações',
-                  licitation_process_publications_path(:licitation_process_id => resource.id),
-                  :class => "button primary") %>
+        licitation_process_publications_path(:licitation_process_id => resource.id),
+        class: "button primary #{f.object.decorator.has_records_class(f.object.publications)}") %>
 
       <% if f.object.trading? %>
-        <%= link_to('Credenciamento',
-                    accreditation_path_helper,
-                    :class => "button primary",
-                    'data-disabled' => f.object.decorator.must_have_published_edital) %>
+        <%= link_to('Credenciamento', accreditation_path_helper,
+          class: "button primary #{f.object.decorator.has_records_class([f.object.purchase_process_accreditation])}",
+          'data-disabled' => f.object.decorator.must_have_published_edital) %>
       <% end %>
 
       <% unless f.object.trading? %>
-        <%= link_to('Habilitação',
-                    bidders_path(:licitation_process_id => resource.id),
-                    :class => "button primary",
-                    'data-disabled' => f.object.decorator.must_have_published_edital_or_direct_purchase) %>
+        <%= link_to('Habilitação', bidders_path(:licitation_process_id => resource.id),
+          class: "button primary #{f.object.decorator.has_records_class(f.object.bidders)}",
+          'data-disabled' => f.object.decorator.must_have_published_edital_or_direct_purchase) %>
 
         <% if f.object.decorator.enabled_realignment_price? %>
-          <%= link_to('Realinhamento de preço',
-                      realigment_prices_path(purchase_process_id: resource),
-                      :class => "button primary",
-                      'data-disabled' => f.object.decorator.must_have_creditors_and_items) %>
+          <%= link_to('Realinhamento de preço', realigment_prices_path(purchase_process_id: resource),
+            class: "button primary #{f.object.decorator.has_records_class(f.object.realigment_prices)}",
+            'data-disabled' => f.object.decorator.must_have_creditors_and_items) %>
         <% end %>
       <% end %>
 
       <% if f.object.licitation? %>
-        <%= link_to('Propostas', proposals_path, :class => "button primary",
-                    'data-disabled' => f.object.decorator.must_have_creditors_and_items) %>
+        <%= link_to('Propostas', proposals_path,
+          class: "button primary #{f.object.decorator.has_records_class(f.object.creditor_proposals)}",
+          'data-disabled' => f.object.decorator.must_have_creditors_and_items) %>
       <% end %>
 
       <% if f.object.trading? %>
-        <%= link_to('Lances', trading_path_helper, class: 'button primary',
-                    'data-disabled' => f.object.decorator.disabled_trading_message) %>
+        <%= link_to('Lances', trading_path_helper,
+          class: "button primary #{f.object.decorator.has_records_class([f.object.trading])}",
+          'data-disabled' => f.object.decorator.disabled_trading_message) %>
 
-        <%= link_to('Habilitação',
-                    bidders_path(:licitation_process_id => resource.id),
-                    :class => "button primary",
-                    'data-disabled' => f.object.decorator.must_have_published_edital_or_direct_purchase) %>
+        <%= link_to('Habilitação', bidders_path(:licitation_process_id => resource.id),
+          class: "button primary #{f.object.decorator.has_records_class(f.object.bidders)}",
+          'data-disabled' => f.object.decorator.must_have_published_edital_or_direct_purchase) %>
 
         <% if f.object.decorator.enabled_realignment_price? %>
-          <%= link_to('Realinhamento de preço',
-                      realigment_prices_path(purchase_process_id: resource),
-                      :class => "button primary",
-                      'data-disabled' => f.object.decorator.must_have_creditors_and_items) %>
+          <%= link_to('Realinhamento de preço', realigment_prices_path(purchase_process_id: resource),
+            class: "button primary #{f.object.decorator.has_records_class(f.object.realigment_prices)}",
+            'data-disabled' => f.object.decorator.must_have_creditors_and_items) %>
         <% end %>
       <% end %>
 
@@ -56,13 +53,12 @@
     </p>
 
     <p>
-      <%= link_to('Pareceres da comissão julgadora',
-                  judgment_commission_advice,
-                  :class => "button primary") %>
+      <%= link_to('Pareceres da comissão julgadora', judgment_commission_advice,
+        class: "button primary #{f.object.decorator.has_records_class([f.object.judgment_commission_advice])}") %>
 
       <%= link_to('Adjudicação/Homologação',
-                  licitation_process_ratifications_path(:licitation_process_id => resource.id),
-                  :class => "button primary") %>
+        licitation_process_ratifications_path(licitation_process_id: resource.id),
+        class: "button primary #{f.object.decorator.has_records_class(f.object.licitation_process_ratifications)}") %>
     </p>
   <% end %>
 
