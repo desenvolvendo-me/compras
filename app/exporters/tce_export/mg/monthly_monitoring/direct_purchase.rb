@@ -345,7 +345,7 @@ module TceExport::MG
       attribute :exercicio_processo, position: 3, size: 4, min_size: 4, required: true, caster: Casters::IntegerCaster
       attribute :nro_processo, position: 4, size: 12, min_size: 1, required: true, caster: Casters::TextCaster
       attribute :tipo_processo, position: 5, size: 1, min_size: 1, required: true, caster: Casters::IntegerCaster
-      attribute :tipo_documento, position: 6, size: 1, min_size: 1, required: true, caster: Casters::IntegerCaster
+      attribute :tipo_documento, position: 6, size: 1, min_size: 1, required: true, caster: Casters::TextCaster
       attribute :nro_documento, position: 7, size: 14, min_size: 1, required: true, caster: Casters::IntegerCaster
       attribute :nom_razao_social, position: 8, size: 120, min_size: 1, required: true, caster: Casters::TextCaster
       attribute :nro_inscricao_estadual, position: 9, size: 30, min_size: 1, required: false, caster: Casters::TextCaster
