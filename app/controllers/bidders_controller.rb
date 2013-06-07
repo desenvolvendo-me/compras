@@ -4,7 +4,7 @@ class BiddersController < CrudController
   before_filter :block_changes_when_have_ratifications, :only => [:create, :update, :destroy]
 
   def index
-    BidderCreditorCreator.create!(licitation_process) if licitation_process.direct_purchase?
+    BidderCreditorCreator.create!(licitation_process)
 
     super
   end
