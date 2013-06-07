@@ -83,4 +83,16 @@ describe TceExport::MonthlyMonitoring do
       expect(subject.error_message).to eq "message"
     end
   end
+
+  context 'Callbacks' do
+    describe 'before_save' do
+      it 'removes empty values from only_files' do
+        subject.only_files = ['foo', nil, 'bar', '']
+
+        subject.run_callbacks :save
+
+        expect(subject.only_files).to eq ['foo', 'bar']
+      end
+    end
+  end
 end

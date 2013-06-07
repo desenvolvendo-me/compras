@@ -12,6 +12,7 @@ pt-BR:
         month: "Mês da prestação de contas"
         status_humanize: "Situação"
         year: "Ano da prestação de contas"
+        check_all: 'Marcar todos'
 
   tce_export/monthly_monitoring:
     messages:

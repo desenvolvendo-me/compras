@@ -22,9 +22,36 @@
   <%= f.input :error_message, disabled: true %>
 <% end %>
 
-Arquivos a serem gerados:
-<ul>
-  <% MonthlyMonitoringFiles.list.each do |file| %>
-    <li><%= MonthlyMonitoringFiles.t(file) %></li>
-  <% end %>
-</ul>
+<p>Arquivos a serem gerados:</p>
+
+<div id='only_files' class='collection-as-block'>
+  <%= f.input :check_all, :as => :boolean, :disabled => f.object.persisted?,
+              :wrapper_html => { :class => 'check-all' } %>
+
+  <div class='nested-collection'>
+    <%= f.collection_check_boxes :only_files, MonthlyMonitoringFiles.list.map { |file|
+      [file, MonthlyMonitoringFiles.t(file)] }, :first, :last %>
+  </div>
+</div>
+
+<script>
+  $(function() {
+    var $checkAllInput = $("#tce_export_monthly_monitoring_check_all"),
+        $fileInputs = $('#only_files input[type=checkbox]').not($checkAllInput);
+
+    $checkAllInput.on('change', function(event) {
+      if ($checkAllInput.is(':checked'))
+        $fileInputs.attr('checked', 'checked');
+      else
+        $fileInputs.removeAttr('checked');
+    });
+
+    <% if !f.object.persisted? %>
+      $checkAllInput.attr('checked', 'checked');
+      $checkAllInput.change();
+    <% else %>
+      $checkAllInput.closest('div').hide();
+      $fileInputs.attr('disabled', 'disabled');
+    <% end %>
+  });
+</script>

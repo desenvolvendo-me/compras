@@ -12,6 +12,7 @@ module TceExport::MG
         @prefecture = monthly_monitoring.prefecture
         @date = monthly_monitoring.date
         @city_code = monthly_monitoring.city_code
+        @only_files = monthly_monitoring.only_files
       end
 
       def generate_zip_file
@@ -33,9 +34,23 @@ module TceExport::MG
       attr_reader :prefecture, :date, :city_code, :monthly_monitoring
 
       def generator_classes
-        MonthlyMonitoringFiles.list.map do |file|
+        csv_files.map do |file|
           self.class.module_eval("#{file.classify}Generator").new(monthly_monitoring)
         end
+      end
+
+      def csv_files
+        if @only_files.present?
+          reject_csv_file_class_injection @only_files
+          @only_files
+        else
+          MonthlyMonitoringFiles.list
+        end
+      end
+
+      def reject_csv_file_class_injection insecure_files
+        not_allowed_files = insecure_files - MonthlyMonitoringFiles.list
+        raise "Invalid csv files: #{not_allowed_files.join(', ')}" if not_allowed_files.present?
       end
 
       def zipfile_name
