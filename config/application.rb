@@ -87,14 +87,15 @@ module Compras
 
       # javascript files
       'bidders.js',
+      'creditor_proposal_benefited_tieds.js',
+      'employees.js',
       'licitation_processes.js',
       'purchase_process_accreditations.js',
       'purchase_process_creditor_disqualifications.js',
       'purchase_process_item_creditor_proposals.js',
       'purchase_process_lot_creditor_proposals.js',
       'purchase_process_tradings.js',
-      'purchase_solicitations.js',
-      'employees.js'
+      'purchase_solicitations.js'
     ]
 
     config.generators do |g|
