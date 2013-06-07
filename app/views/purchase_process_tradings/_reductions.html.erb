@@ -19,6 +19,7 @@
 
   <div class="yui3-u-1-6 field-without-label">
     <%= link_to 'Desempate ficto', new_purchase_process_trading_item_bid_benefited_path(item_id: @item),
+      'data-url' => new_purchase_process_trading_item_bid_benefited_path,
       id: 'benefited_bid', class: 'button primary', 'data-disabled' => @item.decorator.benefited_bid_message %>
   </div>
 </div>

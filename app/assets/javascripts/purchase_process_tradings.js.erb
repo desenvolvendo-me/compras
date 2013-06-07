@@ -22,6 +22,14 @@ $(document).ready(function() {
     }
   }
 
+  function updateBenefitedBidLink(itemId) {
+    var url = $('a#benefited_bid').data('url');
+
+    url = $.param({item_id: itemId});
+
+    $('a#benefited_bid').attr('href', url);
+  }
+
   function allowBenefitedBid(historic, lowest_bid, next_bid) {
     var message = null;
 
@@ -287,6 +295,7 @@ $(document).ready(function() {
 
     getNextBidFromServer();
     getCreditors(itemId);
+    updateBenefitedBidLink(itemId);
   });
 
   $('#errors_dialog').dialog({
