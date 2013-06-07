@@ -19,7 +19,7 @@ module TceExport::MG
             nro_processo: process.process,
             tipo_processo: type_of_removal(process),
             tipo_documento: document_type(creditor),
-            nro_documento: creditor.identity_document,
+            nro_documento: only_numbers(creditor.identity_document),
             nom_razao_social: creditor.name,
             nro_inscricao_estadual: only_numbers(creditor.state_registration),
             uf_inscricao_estadual: creditor.uf_state_registration,
@@ -346,7 +346,7 @@ module TceExport::MG
       attribute :nro_processo, position: 4, size: 12, min_size: 1, required: true, caster: Casters::TextCaster
       attribute :tipo_processo, position: 5, size: 1, min_size: 1, required: true, caster: Casters::IntegerCaster
       attribute :tipo_documento, position: 6, size: 1, min_size: 1, required: true, caster: Casters::IntegerCaster
-      attribute :nro_documento, position: 7, size: 14, min_size: 1, required: true, caster: Casters::TextCaster
+      attribute :nro_documento, position: 7, size: 14, min_size: 1, required: true, caster: Casters::IntegerCaster
       attribute :nom_razao_social, position: 8, size: 120, min_size: 1, required: true, caster: Casters::TextCaster
       attribute :nro_inscricao_estadual, position: 9, size: 30, min_size: 1, required: false, caster: Casters::TextCaster
       attribute :uf_inscricao_estadual, position: 10, size: 2, min_size: 2, required: false, upcase: true, caster: Casters::TextCaster
