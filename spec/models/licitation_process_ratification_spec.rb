@@ -24,6 +24,7 @@ describe LicitationProcessRatification do
   it { should delegate(:process).to(:licitation_process).allowing_nil(true).prefix(true) }
   it { should delegate(:modality_humanize).to(:licitation_process).allowing_nil(true).prefix(true) }
   it { should delegate(:description).to(:licitation_process).allowing_nil(true).prefix(true) }
+  it { should delegate(:execution_unit_responsible).to(:licitation_process).allowing_nil(true).prefix(true) }
 
   context 'creditor should belongs to licitation process' do
     let :creditor_with_licitation_process do

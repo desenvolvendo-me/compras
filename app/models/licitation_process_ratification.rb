@@ -15,7 +15,7 @@ class LicitationProcessRatification < Compras::Model
 
   accepts_nested_attributes_for :licitation_process_ratification_items, :allow_destroy => true
 
-  delegate :process, :modality_humanize, :description, :licitation?,
+  delegate :process, :modality_humanize, :description, :licitation?, :execution_unit_responsible,
            :to => :licitation_process, :prefix => true, :allow_nil => true
 
   validates :licitation_process, :creditor, :presence => true
