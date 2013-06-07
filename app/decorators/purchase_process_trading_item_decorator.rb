@@ -47,9 +47,9 @@ class PurchaseProcessTradingItemDecorator
   end
 
   def benefited_bid_message
-    if bids.empty? || NextBidCalculator.next_bid(component)
+    if pending?
       I18n.t 'purchase_process_trading_item.messages.trading_item_not_finished'
-    elsif last_bid_with_proposal.accreditation_creditor_benefited?
+    elsif last_bid_with_proposal && last_bid_with_proposal.accreditation_creditor_benefited?
       I18n.t 'purchase_process_trading_item.messages.lowest_proposal_already_benefited'
     end
   end
