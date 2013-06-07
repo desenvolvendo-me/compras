@@ -75,6 +75,12 @@ class LicitationProcessDecorator
     t('licitation_process.messages.disabled_trading_message')
   end
 
+  def disabled_negotiation_message
+    return if trading_allow_negotiation?
+
+    t('licitation_process.messages.disabled_negotiation_message')
+  end
+
   def enabled_realignment_price?
     bidders.each do |bidder|
       if proposals_of_creditor(bidder.creditor).empty?

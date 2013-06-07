@@ -87,3 +87,4 @@ pt-BR:
       proposal_envelope_opening_date_greater_than_calendar_days: "deve ser a partir de %{limit}. Refente a %{days} dias maior que a data da publicação mais recente (%{publication})"
       proposal_envelope_opening_date_greater_than_working_days: "deve ser a partir de %{limit}. Refente a %{days} dias úteis maior que a data da publicação mais recente (%{publication})"
       disabled_trading_message: "todas as propostas devem ser preenchidas"
+      disabled_negotiation_message: "todos os itens do pregão devem ter um vencedor"

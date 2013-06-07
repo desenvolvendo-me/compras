@@ -88,6 +88,7 @@ class LicitationProcess < Compras::Model
   accepts_nested_attributes_for :purchase_process_budget_allocations, :items, :creditor_proposals,
                                 :process_responsibles, :tied_creditor_proposals, allow_destroy: true
 
+  delegate :allow_negotiation?, to: :trading, allow_nil: true, prefix: true
   delegate :licitation_kind, :kind, :best_technique?, :technical_and_price?,
            :item?, :lot?,
            :to => :judgment_form, :allow_nil => true, :prefix => true

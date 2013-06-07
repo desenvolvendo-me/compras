@@ -93,6 +93,12 @@ Compras::Application.routes.draw do
 
   resources :purchase_process_trading_item_bids, only: [:update, :show]
 
+  resources :purchase_process_trading_negotiations, only: [:edit, :update, :list] do
+    member do
+      get :list
+    end
+  end
+
   resources :agencies do
     collection do
       get :modal

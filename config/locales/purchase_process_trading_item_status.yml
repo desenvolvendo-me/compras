@@ -1,0 +1,6 @@
+pt-BR:
+  enumerations:
+    purchase_process_trading_item_status:
+      closed: "Encerrado"
+      failed: "Frustrado"
+      pending: "Pendente"

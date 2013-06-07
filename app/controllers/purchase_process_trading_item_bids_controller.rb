@@ -23,8 +23,9 @@ class PurchaseProcessTradingItemBidsController < CrudController
       object.number = TradingBidNumberCalculator.calculate(object.item)
 
       if object.save
-        TradingBidCreator.create_items_bids!(object.trading)
+        TradingBidCreator.create!(object.item)
         TradingBidCleaner.clean(object.item)
+        TradingItemStatusChanger.change(object.item)
 
         return true
       end

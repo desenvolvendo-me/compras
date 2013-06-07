@@ -40,6 +40,7 @@ describe PurchaseProcessTradingItemsController do
 
           PurchaseProcessTradingItem.should_receive(:find).with('4').and_return(item)
           TradingBidRemover.should_receive(:undo).with(item).and_return(true)
+          TradingItemStatusChanger.should_receive(:change).with(item)
 
           post :undo_last_bid, id: 4
 

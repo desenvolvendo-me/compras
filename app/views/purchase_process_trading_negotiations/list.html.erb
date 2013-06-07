@@ -1,0 +1,32 @@
+<h2 id="title">
+  Negociações do Pregão
+</h2>
+
+<div id="subtitle">
+  <%= resource %>
+</div>
+
+<div class="actions">
+  <ul>
+    <li>
+    <%= link_to 'Voltar ao Processo de Compra', edit_licitation_process_path(resource.purchase_process) %>
+    </li>
+  </ul>
+</div>
+
+<table class="records">
+  <tbody>
+    <% resource.creditors_with_lowest_proposal.each do |creditor| %>
+      <tr id="<%= dom_id creditor %>">
+        <td>
+          <%= creditor %>
+        </td>
+
+        <td>
+          <%= link_to 'Negociar', edit_purchase_process_trading_negotiation_path(resource, accreditation_creditor_id: creditor.id),
+            class: 'button primary' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -23,7 +23,11 @@ class PurchaseProcessTradingItemBidBenefitedsController < CrudController
   private
 
   def create_resource(object)
-    TradingItemBidBenefitedCreator.create(object).save
+    if TradingItemBidBenefitedCreator.create(object).save
+      TradingItemStatusChanger.change(object.item)
+
+      true
+    end
   end
 
   def item

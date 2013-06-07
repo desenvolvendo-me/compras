@@ -10,6 +10,10 @@ class TradingBidCreator
     end
   end
 
+  def self.create!(*args)
+    new(*args).create!
+  end
+
   def create!
     if clear_bids_before_creation?
       clear_bids
