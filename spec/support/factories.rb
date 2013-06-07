@@ -93,6 +93,7 @@ FactoryGirl.define do
   factory :monthly_monitoring, class: TceExport::MonthlyMonitoring do
     month 10
     year 2013
+    only_files []
   end
 
   factory :extended_prefecture do

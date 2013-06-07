@@ -1,9 +1,11 @@
 class TceExport::MonthlyMonitoring < Compras::Model
-  attr_accessible :month, :year
+  attr_accessible :month, :year, :check_all, :only_files
 
   attr_modal :control_code, :month
 
   auto_increment :control_code, by: :year
+
+  serialize :only_files, Array
 
   has_enumeration_for :month, :required => true
   has_enumeration_for :status, :with => MonthlyMonitoringStatus,
@@ -22,6 +24,8 @@ class TceExport::MonthlyMonitoring < Compras::Model
 
   validates :year, :month, presence: true
   validates :year, mask: "9999"
+
+  before_save :remove_empty_values_from_only_files
 
   orderize 'id DESC'
   filterize
@@ -51,5 +55,11 @@ class TceExport::MonthlyMonitoring < Compras::Model
 
   def cancel!
     update_attribute :status, MonthlyMonitoringStatus::CANCELLED
+  end
+
+  protected
+
+  def remove_empty_values_from_only_files
+    self.only_files.reject!(&:blank?)
   end
 end

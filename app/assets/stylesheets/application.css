@@ -65,3 +65,21 @@
 .add-margin-bottom {
   margin-bottom :10px;
 }
+
+.collection-as-block .check-all {
+  margin-bottom: 10px;
+}
+
+.collection-as-block .nested-collection {
+  margin-left: 20px;
+}
+
+.collection-as-block span {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.collection-as-block span label {
+  vertical-align: bottom;
+  margin-left: 5px;
+}

@@ -20,6 +20,8 @@ feature "Monthly Monitoring TCE File" do
 
     select "Janeiro", on: "Mês da prestação de contas"
 
+    expect(page).to have_checked_field 'Marcar todos'
+
     expect(page).to have_field "Ano da prestação de contas", with: "#{Date.current.year}"
     expect(page).to have_disabled_field "Código de controle externo da remessa"
     expect(page).to have_content "Arquivos a serem gerados"
@@ -34,9 +36,48 @@ feature "Monthly Monitoring TCE File" do
     expect(page).to have_content "REGLIC - Decreto Municipal Regulamentador do Pregão / Registro de Preços"
     expect(page).to have_content "RESPLIC - Responsáveis pela Licitação"
 
+    uncheck 'Marcar todos'
+
+    expect(page).to_not have_checked_field "ABERLIC - Abertura da Licitação"
+    expect(page).to_not have_checked_field "CONTRATOS - Contratos"
+    expect(page).to_not have_checked_field "DISPENSA - Dispensa ou Inexigibilidade"
+    expect(page).to_not have_checked_field "HABLIC - Habilitação da Licitação"
+    expect(page).to_not have_checked_field "HOMOLIC - Homologação da Licitação"
+    expect(page).to_not have_checked_field "JULGLIC - Julgamento da Licitação"
+    expect(page).to_not have_checked_field "PARELIC - Parecer da Licitação"
+    expect(page).to_not have_checked_field "REGADESAO - Adesão a Registro de Preços"
+    expect(page).to_not have_checked_field "REGLIC - Decreto Municipal Regulamentador do Pregão / Registro de Preços"
+    expect(page).to_not have_checked_field "RESPLIC - Responsáveis pela Licitação"
+
+    check 'Marcar todos'
+
+    expect(page).to have_checked_field "ABERLIC - Abertura da Licitação"
+    expect(page).to have_checked_field "CONTRATOS - Contratos"
+    expect(page).to have_checked_field "DISPENSA - Dispensa ou Inexigibilidade"
+    expect(page).to have_checked_field "HABLIC - Habilitação da Licitação"
+    expect(page).to have_checked_field "HOMOLIC - Homologação da Licitação"
+    expect(page).to have_checked_field "JULGLIC - Julgamento da Licitação"
+    expect(page).to have_checked_field "PARELIC - Parecer da Licitação"
+    expect(page).to have_checked_field "REGADESAO - Adesão a Registro de Preços"
+    expect(page).to have_checked_field "REGLIC - Decreto Municipal Regulamentador do Pregão / Registro de Preços"
+    expect(page).to have_checked_field "RESPLIC - Responsáveis pela Licitação"
+
     fill_in "Ano da prestação de contas", with: "2013"
 
     click_button "Gerar arquivo"
+
+    expect(page).to_not have_field "Marcar todos", visible: true
+
+    expect(page).to have_checked_field "ABERLIC - Abertura da Licitação"
+    expect(page).to have_checked_field "CONTRATOS - Contratos"
+    expect(page).to have_checked_field "DISPENSA - Dispensa ou Inexigibilidade"
+    expect(page).to have_checked_field "HABLIC - Habilitação da Licitação"
+    expect(page).to have_checked_field "HOMOLIC - Homologação da Licitação"
+    expect(page).to have_checked_field "JULGLIC - Julgamento da Licitação"
+    expect(page).to have_checked_field "PARELIC - Parecer da Licitação"
+    expect(page).to have_checked_field "REGADESAO - Adesão a Registro de Preços"
+    expect(page).to have_checked_field "REGLIC - Decreto Municipal Regulamentador do Pregão / Registro de Preços"
+    expect(page).to have_checked_field "RESPLIC - Responsáveis pela Licitação"
 
     expect(page).to have_notice "Arquivo encaminhado para geração"
     expect(page).to have_content "Acompanhamento Mensal"

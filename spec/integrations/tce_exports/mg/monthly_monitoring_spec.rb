@@ -50,5 +50,37 @@ describe TceExport::MG::MonthlyMonitoring do
         'RESPLIC.csv'
       ]
     end
+
+    it "rejects csv file class injection" do
+      monthly_monitoring = FactoryGirl.create(:monthly_monitoring, {
+        prefecture: prefecture,
+        city_code: "51234",
+        only_files: ['insecure_class', 'direct_purchase', 'another_insecure_class']
+      })
+
+      expect do
+        TceExport::MG::MonthlyMonitoring.generate_zip_file(monthly_monitoring)
+      end.to raise_error(RuntimeError, 'Invalid csv files: insecure_class, another_insecure_class')
+    end
+
+    it "generates a zip file containing only specified CSVs" do
+      FactoryGirl.create(:extended_prefecture,
+        prefecture: prefecture,
+        organ_code: "66",
+        organ_kind: "10")
+
+      monthly_monitoring = FactoryGirl.create(:monthly_monitoring,
+        prefecture: prefecture,
+        city_code: "51234",
+        only_files: ['contract', 'direct_purchase', 'regulatory_act'])
+
+      TceExport::MG::MonthlyMonitoring.generate_zip_file(monthly_monitoring)
+      entries = Zip::ZipFile.open("tmp/AM_51234_66_10_2013.zip").entries.map(&:to_s)
+      expect(entries.sort).to eq [
+        'CONTRATO.csv',
+        'DISPENSA.csv',
+        'REGLIC.csv'
+      ]
+    end
   end
 end
