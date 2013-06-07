@@ -23,11 +23,7 @@ class PurchaseProcessTradingItemBidBenefitedsController < CrudController
   private
 
   def create_resource(object)
-    if TradingItemBidBenefitedCreator.create(object).save
-      TradingItemStatusChanger.change(object.item)
-
-      true
-    end
+    TradingItemBidBenefitedCreator.create(object).save
   end
 
   def item
@@ -41,7 +37,7 @@ class PurchaseProcessTradingItemBidBenefitedsController < CrudController
   end
 
   def winner_is_benefited
-    if item.last_bid_with_proposal.blank? || item.last_bid_with_proposal.accreditation_creditor.benefited?
+    if !item.closed? || !item.benefited_tie?
       redirect_to bids_purchase_process_trading_path(item.trading)
     end
   end

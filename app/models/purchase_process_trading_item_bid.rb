@@ -16,7 +16,8 @@ class PurchaseProcessTradingItemBid < Compras::Model
 
   delegate :name, to: :creditor, allow_nil: true, prefix: true
   delegate :lowest_bid, :reduction_rate_value, :reduction_rate_percent,
-    :lowest_bid_or_proposal_amount, to: :item, allow_nil: true
+    :lowest_bid_or_proposal_amount, :lowest_bid_or_proposal_accreditation_creditor,
+    to: :item, allow_nil: true
   delegate :item_lot, to: :item, allow_nil: true, prefix: true
   delegate :benefited?, to: :accreditation_creditor, allow_nil: true, prefix: true
 
@@ -48,14 +49,6 @@ class PurchaseProcessTradingItemBid < Compras::Model
 
   def amount_with_reduction
     lowest_bid_or_proposal_amount - reduction_value
-  end
-
-  def lowest_bid_amount
-    lowest_bid.try :amount
-  end
-
-  def lowest_bid_accreditation_creditor
-    lowest_bid.try :accreditation_creditor
   end
 
   private

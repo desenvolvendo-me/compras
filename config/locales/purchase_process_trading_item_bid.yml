@@ -12,8 +12,8 @@ pt-BR:
         accreditation_creditor_company_size: "Porte"
         item: "Item"
         item_lot: "Lote"
-        lowest_bid_accreditation_creditor: 'Fornecedor do menor lance'
-        lowest_bid_amount: 'Valor do menor lance'
+        lowest_bid_or_proposal_accreditation_creditor: 'Fornecedor do menor lance'
+        lowest_bid_or_proposal_amount: 'Valor do menor lance'
         number: "Lance"
         percent: "Diferença %"
         purchase_process_accreditation_creditor_id: "Fornecedor"

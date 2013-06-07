@@ -49,7 +49,7 @@ class PurchaseProcessTradingItemDecorator
   def benefited_bid_message
     if pending?
       I18n.t 'purchase_process_trading_item.messages.trading_item_not_finished'
-    elsif last_bid_with_proposal && last_bid_with_proposal.accreditation_creditor_benefited?
+    elsif closed? && !benefited_tie?
       I18n.t 'purchase_process_trading_item.messages.lowest_proposal_already_benefited'
     end
   end

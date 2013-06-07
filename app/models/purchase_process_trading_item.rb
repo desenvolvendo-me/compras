@@ -71,11 +71,11 @@ class PurchaseProcessTradingItem < Compras::Model
   end
 
   def lowest_bid_or_proposal_amount
-    if lowest_bid
-      lowest_bid.amount
-    else
-      lowest_proposal.unit_price
-    end
+    lowest_bid.try(:amount) || lowest_proposal.try(:unit_price)
+  end
+
+  def lowest_bid_or_proposal_accreditation_creditor
+    lowest_bid.try(:accreditation_creditor) || creditor_with_lowest_proposal
   end
 
   def close!
@@ -84,6 +84,10 @@ class PurchaseProcessTradingItem < Compras::Model
 
   def pending!
     update_column :status, PurchaseProcessTradingItemStatus::PENDING
+  end
+
+  def benefited_tie?
+    creditors_benefited.any?
   end
 
   private
