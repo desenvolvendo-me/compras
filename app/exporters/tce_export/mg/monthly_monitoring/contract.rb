@@ -14,7 +14,7 @@ module TceExport::MG
             tipo_documento: tp_documento(contract),
             nro_documento: nro_documento(contract),
             representante_legal_contratado: nome_representante_legal_contratado(contract),
-            cpf_representante_legal_contratado: cpf_representante_legal(contract),
+            cpf_representante_legal_contratado: only_numbers(cpf_representante_legal(contract)),
             nro_processo_licitatorio: contract.licitation_process_process,
             exercicio_processo_licitatorio: contract.licitation_process_year,
             natureza_objeto: natureza_objeto(contract.licitation_process),
