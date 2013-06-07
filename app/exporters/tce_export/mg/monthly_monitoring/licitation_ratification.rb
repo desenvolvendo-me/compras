@@ -11,7 +11,7 @@ module TceExport::MG
             nro_processo_licitatorio: ratification.licitation_process_process.to_s,
             tp_documento: tp_documento(ratification.creditor),
             nro_documento: only_numbers(ratification.creditor_identity_document),
-            nro_lote: ratification.item.lot,
+            nro_lote: ratification.lot,
             nro_item: ratification.item.id,
             dsc_produto_servico: ratification.item.to_s,
             quantidade: quantidade(ratification.item),

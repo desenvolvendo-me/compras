@@ -7,23 +7,15 @@ class LicitationProcessRatificationItem < Compras::Model
   belongs_to :purchase_process_item
 
   has_one :licitation_process, through: :purchase_process_creditor_proposal
-  has_one :item, through: :purchase_process_creditor_proposal
   has_one :creditor, through: :licitation_process_ratification
 
   delegate :description, :code, :reference_unit, to: :material, allow_nil: true
   delegate :identity_document, to: :creditor, allow_nil: true, prefix: true
-  delegate :unit_price, :total_price, :lot,
+  delegate :unit_price, :total_price,
     to: :purchase_process_creditor_proposal, allow_nil: true
   delegate :execution_unit_responsible, :year, :process,
     to: :licitation_process, allow_nil: true, prefix: true
-
-  def material
-    item.try(:material) || purchase_process_item.try(:material)
-  end
-
-  def quantity
-    item.try(:quantity) || purchase_process_item.try(:quantity)
-  end
+  delegate :material, :quantity, :lot, to: :item, allow_nil: true
 
   def unit_price
     purchase_process_creditor_proposal.try(:unit_price) || purchase_process_item.try(:unit_price)
@@ -33,8 +25,8 @@ class LicitationProcessRatificationItem < Compras::Model
     purchase_process_creditor_proposal.try(:total_price) || purchase_process_item.try(:estimated_total_price)
   end
 
-  def lot
-    purchase_process_creditor_proposal.try(:lot) || purchase_process_item.try(:lot)
+  def item
+    purchase_process_creditor_proposal.try(:item) || purchase_process_item
   end
 
   orderize "id DESC"
