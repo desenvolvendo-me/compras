@@ -1,32 +1,38 @@
 <div id="tied_creditor_proposals">
-  <%= f.association :tied_creditor_proposals, collection: localized(f.object.tied_creditor_proposals) do |c| %>
-    <div class="creditor_proposal_rankings">
-      <div class="yui3-g">
-        <div class="yui3-u-1-4">
-          <%= c.input :creditor, disabled: true %>
-        </div>
+  <% f.object.tied_creditor_proposals.group_by(&:item_or_lot_or_purchase_process).each do |item, proposals| %>
 
-        <div class="yui3-u-1-4">
-          <%= c.input :item, disabled: true, input_html: { value: c.object.item_or_lot_or_purchase_process },
-            label: 'Item/Lote' %>
-        </div>
-
-        <div class="yui3-u-1-6">
-          <%= c.input :unit_price, disabled: true %>
-        </div>
-
-        <div class="yui3-u-1-6">
-          <%= c.input :ranking, as: :select, collection: c.object.available_rankings, include_blank: false %>
-        </div>
-
-        <% if c.object.benefited_tied? && !f.object.trading? %>
-          <div class="yui3-u-1-6">
-            <label>Proposta</label>
-            <%= link_to "Atualizar", edit_creditor_proposal_benefited_tied_path(c.object), class: 'button primary' %>
-          </div>
-        <% end %>
-
+    <div class="yui3-g">
+      <div class="yui3-u-2-3">
+        <%= f.input :proposal_item, disabled: true, fake: true, label: 'Item/Lote',
+          input_html: { value: item } %>
       </div>
     </div>
+
+    <%= f.association :tied_creditor_proposals, collection: localized(proposals) do |c| %>
+      <div class="creditor_proposal_rankings">
+        <div class="yui3-g grouped">
+          <div class="yui3-u-1-2">
+            <%= c.input :creditor, disabled: true, required: false %>
+          </div>
+
+          <div class="yui3-u-1-6">
+            <%= c.input :unit_price, disabled: true, required: false %>
+          </div>
+
+          <div class="yui3-u-1-6">
+            <%= c.input :ranking, as: :select, collection: c.object.available_rankings,
+              include_blank: false, required: true %>
+          </div>
+
+          <% if c.object.benefited_tied? && !f.object.trading? %>
+            <div class="yui3-u-1-6">
+              <label>Proposta</label>
+              <%= link_to "Atualizar", edit_creditor_proposal_benefited_tied_path(c.object), class: 'button primary' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
   <% end %>
 </div>

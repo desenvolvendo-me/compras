@@ -5,3 +5,7 @@
 .right {
   text-align: right;
 }
+
+div.grouped {
+  margin-left: 30px;
+}
