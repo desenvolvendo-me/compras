@@ -3,3 +3,8 @@ pt-BR:
     map_of_proposal_report:
       one: "Mapa de Proposta"
       other: "Mapas de Propostas"
+
+  minute_purchase_process_reports:
+    minute_purchase_process_report:
+      one: "minute_purchase_process"
+      other: "minute_purchase_process"

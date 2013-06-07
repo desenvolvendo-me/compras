@@ -1,0 +1,4 @@
+pt-BR:
+  activemodel:
+    attributes:
+      minute_purchase_process_report:
