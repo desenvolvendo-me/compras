@@ -7,6 +7,8 @@ class PurchaseProcessTradingItemNegotiation < Compras::Model
   belongs_to :accreditation_creditor, class_name: 'PurchaseProcessAccreditationCreditor',
     foreign_key: :purchase_process_accreditation_creditor_id
 
+  has_one :creditor, through: :accreditation_creditor
+
   delegate :lowest_bid_or_proposal_amount, to: :item, allow_nil: true
 
   validates :item, :purchase_process_accreditation_creditor_id, :amount, presence: true

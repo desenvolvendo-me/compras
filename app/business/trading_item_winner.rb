@@ -25,10 +25,10 @@ class TradingItemWinner
   end
 
   def lowest_creditor
-    item.lowest_bid.try(:creditor) || item.lowest_proposal.try(:creditor)
+    item.negotiation.try(:creditor) || item.lowest_bid.try(:creditor) || item.lowest_proposal.try(:creditor)
   end
 
   def lowest_amount
-    item.lowest_bid.try(:amount) || item.lowest_proposal.try(:unit_price)
+    item.negotiation.try(:amount) || item.lowest_bid.try(:amount) || item.lowest_proposal.try(:unit_price)
   end
 end
