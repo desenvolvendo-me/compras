@@ -64,9 +64,12 @@ describe TradingBidCreator do
         subject.should_receive(:clear_bids)
 
         creditor2 = double(:creditor2, id: 34)
+        item.stub(creditors_selected: [creditor])
 
         subject.stub(last_round: 1)
         subject.stub(creditors_with_bid_for_last_round: [creditor, creditor2])
+        subject.stub(creditors_for_last_round: [creditor, creditor2])
+
 
         bid_repository.
           should_receive(:create!).

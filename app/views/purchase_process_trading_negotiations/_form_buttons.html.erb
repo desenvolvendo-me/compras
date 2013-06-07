@@ -1,0 +1,5 @@
+<div class="buttons">
+  <%= f.button :submit if can?(:modify, main_controller_name) %>
+  <%= f.button :back, href: list_purchase_process_trading_negotiation_path(resource) %>
+</div>
+

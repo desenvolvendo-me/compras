@@ -25,7 +25,16 @@ class PurchaseProcessTradingItemsController < CrudController
   end
 
   def undo_last_bid
-    if TradingBidRemover.undo(resource)
+    success = false
+
+    resource.transaction do
+      if success = TradingBidRemover.undo(resource)
+        TradingItemStatusChanger.change(resource)
+        TradingBidCreator.create!(resource)
+      end
+    end
+
+    if success
       redirect_to next_bid_purchase_process_trading_item_path(resource)
     else
       render json: { errors: [I18n.t('purchase_process_trading.messages.undo_bid_disabled_message')] }, status: :unprocessable_entity

@@ -2,6 +2,7 @@
 require 'model_helper'
 require 'app/models/purchase_process_trading_item'
 require 'app/models/purchase_process_trading_item_bid'
+require 'app/models/purchase_process_trading_item_negotiation'
 
 describe PurchaseProcessTradingItem do
   it { should belong_to :trading }
@@ -9,6 +10,8 @@ describe PurchaseProcessTradingItem do
 
   it { should have_many(:bids).dependent(:destroy) }
   it { should have_many(:purchase_process_accreditation_creditors).through(:item) }
+
+  it { should have_one(:negotiation).dependent(:restrict) }
 
   it { should delegate(:lot).to(:item).allowing_nil(true).prefix(true) }
 

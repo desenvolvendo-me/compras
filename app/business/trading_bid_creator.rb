@@ -10,6 +10,10 @@ class TradingBidCreator
     end
   end
 
+  def self.create!(*args)
+    new(*args).create!
+  end
+
   def create!
     if clear_bids_before_creation?
       clear_bids
@@ -43,7 +47,17 @@ class TradingBidCreator
   end
 
   def last_round
-    @last_round ||= bids.maximum(:round) || 0
+    @last_round ||= bids.not_without_proposal.maximum(:round) || 0
+  end
+
+  def current_round
+    if bids.empty?
+      1
+    elsif last_round.pred == 0 && creditors_for_last_round.count < item.creditors_selected.count
+      last_round
+    else
+      last_round.succ
+    end
   end
 
   def creditors_with_bid_for_last_round
@@ -54,15 +68,23 @@ class TradingBidCreator
       map(&:accreditation_creditor)
   end
 
+  def creditors_for_last_round
+    bids.
+      not_without_proposal.
+      by_round(last_round).
+      reorder('amount DESC').
+      map(&:accreditation_creditor)
+  end
+
   def available_accreditation_creditors
     if bids.empty?
       item.creditors_selected
+    elsif last_round.pred == 0 && creditors_for_last_round.count < item.creditors_selected.count
+      item.creditors_selected - creditors_for_last_round
+    elsif creditors_with_bid_for_last_round.count > 1
+      creditors_with_bid_for_last_round
     else
-      if creditors_with_bid_for_last_round.count > 1
-        creditors_with_bid_for_last_round
-      else
-        []
-      end
+      []
     end
   end
 
@@ -78,7 +100,7 @@ class TradingBidCreator
 
   def create_bid(accreditation_creditor)
     bid_repository.create!(
-      round: last_round.succ,
+      round: current_round,
       status: TradingItemBidStatus::WITHOUT_PROPOSAL,
       amount: 0,
       purchase_process_accreditation_creditor_id: accreditation_creditor.id,

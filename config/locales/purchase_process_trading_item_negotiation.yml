@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      purchase_process_trading_item_negotiation:
+        one: "Negociação do Item do Pregão"
+        other: "Negociações dos Itens Pregão"
+
+    attributes:
+      purchase_process_trading_item_negotiation:
+        item: "Item/Lote"
+        amount: "Valor"

@@ -1,6 +1,7 @@
 class TradingItemBidBenefitedCreator
-  def initialize(bid)
+  def initialize(bid, options = {})
     @bid = bid
+    @number_calculator = options.fetch(:number_calculator) { TradingBidNumberCalculator }
   end
 
   def self.create(*args)
@@ -10,7 +11,7 @@ class TradingItemBidBenefitedCreator
   def create
     bid.status = TradingItemBidStatus::WITH_PROPOSAL
     bid.round  = last_round
-    bid.number = last_number.succ
+    bid.number = TradingBidNumberCalculator.calculate(item)
     bid.benefited = true
 
     bid
@@ -18,7 +19,7 @@ class TradingItemBidBenefitedCreator
 
   private
 
-  attr_reader :bid
+  attr_reader :bid, :number_calculator
 
   def item
     bid.item
@@ -30,9 +31,5 @@ class TradingItemBidBenefitedCreator
 
   def last_round
     item_bids.maximum(:round) || 0
-  end
-
-  def last_number
-    item_bids.maximum(:number) || 0
   end
 end

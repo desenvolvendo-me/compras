@@ -1,0 +1,28 @@
+<%= hidden_field_tag :accreditation_creditor_id, @accreditation_creditor.id %>
+
+<%= f.association :items, collection: resource.items_by_winner(@accreditation_creditor) do |i| %>
+  <%= i.association :negotiation, collection: i.object.negotiation || i.object.build_negotiation(purchase_process_accreditation_creditor_id: @accreditation_creditor.id) do |n| %>
+    <div class="negotiation">
+      <%= n.input :purchase_process_accreditation_creditor_id, as: :hidden %>
+
+      <div class="yui3-g">
+        <div class="yui3-u-1-3">
+          <%= n.input :item, as: :string,  disabled: true %>
+        </div>
+
+        <div class="yui3-u-1-6">
+          <%= i.input :lowest_bid_or_proposal_amount, disabled: true,
+            input_html: { value: number_with_precision(i.object.lowest_bid_or_proposal_amount), class: :decimal } %>
+        </div>
+
+        <div class="yui3-u-1-6">
+          <%= n.input :amount, input_html: { value: number_with_precision(n.object.amount) } %>
+        </div>
+
+        <div class="yui3-u-1-6">
+          <%= i.input :status, as: :select, collection: PurchaseProcessTradingItemStatus.allowed_for_negotiation, include_blank: false %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>

@@ -29,8 +29,9 @@ describe PurchaseProcessTradingItemBidsController do
         bid.should_receive(:number=).with(5)
         bid.should_receive(:save).and_return(true)
 
-        TradingBidCreator.should_receive(:create_items_bids!).with(trading)
+        TradingBidCreator.should_receive(:create!).with(item)
         TradingBidCleaner.should_receive(:clean).with(item)
+        TradingItemStatusChanger.should_receive(:change).with(item)
 
         put :update, id: 10, purchase_process_trading_item_bid: { amount: 15 }
 

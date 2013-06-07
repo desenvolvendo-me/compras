@@ -1,6 +1,7 @@
 json.id                     resource.id
 json.reduction_rate_value   resource.decorator.reduction_rate_value
 json.reduction_rate_percent resource.decorator.reduction_rate_percent
+json.status                 resource.status_humanize
 
 json.lowest_bid do
   if @lowest_bid

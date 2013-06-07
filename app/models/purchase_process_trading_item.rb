@@ -1,6 +1,10 @@
 class PurchaseProcessTradingItem < Compras::Model
   attr_accessible :reduction_rate_value, :reduction_rate_percent, as: :trading_user
-  attr_accessible :trading_id, :item_id, :lot, :bids_attributes
+  attr_accessible :trading_id, :item_id, :lot, :bids_attributes, :negotiation_attributes,
+    :status
+
+  has_enumeration_for :status, with: PurchaseProcessTradingItemStatus,
+    create_helpers: true, create_scopes: true
 
   belongs_to :trading, class_name: 'PurchaseProcessTrading'
   belongs_to :item, class_name: 'PurchaseProcessItem'
@@ -9,6 +13,9 @@ class PurchaseProcessTradingItem < Compras::Model
     foreign_key: :item_id, dependent: :destroy, order: 'number DESC'
   has_many :purchase_process_accreditation_creditors, through: :item
 
+  has_one :negotiation, class_name: 'PurchaseProcessTradingItemNegotiation',
+    dependent: :restrict, inverse_of: :item
+
   delegate :lot, to: :item, allow_nil: true, prefix: true
 
   validates :reduction_rate_value, numericality: { greater_than_or_equal_to: 0 }, on: :update
@@ -16,6 +23,8 @@ class PurchaseProcessTradingItem < Compras::Model
   validate :validate_reductions
 
   accepts_nested_attributes_for :bids, allow_destroy: true
+  accepts_nested_attributes_for :negotiation, allow_destroy: true,
+    reject_if: proc { |attributes|  attributes[:amount].blank? || BigDecimal(attributes[:amount]) <= 0 }
 
   def to_s
     return lot.to_s if lot
@@ -67,6 +76,14 @@ class PurchaseProcessTradingItem < Compras::Model
     else
       lowest_proposal.unit_price
     end
+  end
+
+  def close!
+    update_column :status, PurchaseProcessTradingItemStatus::CLOSED
+  end
+
+  def pending!
+    update_column :status, PurchaseProcessTradingItemStatus::PENDING
   end
 
   private

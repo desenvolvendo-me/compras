@@ -6,6 +6,7 @@ require 'app/business/trading_bid_remover'
 describe TradingBidRemover do
   let(:item) { double(:item) }
   let(:last_bid) { double(:last_bid) }
+  let(:bids_without_proposal) { double(:bids_without_proposal) }
 
   subject do
     described_class.new(item)
@@ -17,31 +18,13 @@ describe TradingBidRemover do
         item.stub(last_bid: last_bid)
       end
 
-      context 'when bid is benefited' do
-        before do
-          last_bid.stub(benefited?: true)
-        end
+      it 'should destroy the last_bid' do
+        last_bid.should_receive(:destroy)
 
-        it 'should destroy the last_bid' do
-          last_bid.should_receive(:destroy)
+        subject.should_receive(:bids_without_proposal).and_return(bids_without_proposal)
+        bids_without_proposal.should_receive(:destroy_all)
 
-          expect(subject.undo_last_bid)
-        end
-      end
-
-      context 'when bid is not benefited' do
-        before do
-          last_bid.stub(benefited?: false)
-        end
-
-        it 'should change status and amount' do
-          last_bid.
-            should_receive(:update_attributes).
-            with(amount: 0, status: TradingItemBidStatus::WITHOUT_PROPOSAL).
-            and_return(true)
-
-          expect(subject.undo_last_bid)
-        end
+        expect(subject.undo_last_bid)
       end
     end
 
