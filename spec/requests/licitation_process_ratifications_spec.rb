@@ -63,7 +63,6 @@ feature "LicitationProcessRatifications" do
 
     expect(page).to have_checked_field bidder_checkbok_html_name(0)
 
-    expect(page).to_not have_link 'Apagar'
     expect(page).to have_disabled_field 'Processo de compra'
 
     fill_in 'Data de homologação', :with => "#{I18n.l(Date.tomorrow)}"
@@ -151,7 +150,6 @@ feature "LicitationProcessRatifications" do
 
     expect(page).to have_checked_field bidder_checkbok_html_name(0)
 
-    expect(page).to_not have_link 'Apagar'
     expect(page).to have_disabled_field 'Processo de compra'
 
     fill_in 'Data de homologação', :with => "#{I18n.l(Date.tomorrow)}"

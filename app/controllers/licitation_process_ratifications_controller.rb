@@ -1,6 +1,4 @@
 class LicitationProcessRatificationsController < CrudController
-  actions :all, :except => :destroy
-
   def new
     object = build_resource
     object.ratification_date = Date.current
@@ -20,6 +18,10 @@ class LicitationProcessRatificationsController < CrudController
 
   def show
     render :layout => 'report'
+  end
+
+  def destroy
+    destroy! { licitation_process_ratifications_path(:licitation_process_id => resource.licitation_process_id) }
   end
 
   protected

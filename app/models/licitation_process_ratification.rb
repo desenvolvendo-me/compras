@@ -24,6 +24,9 @@ class LicitationProcessRatification < Compras::Model
   validate  :without_judgment_commission_advice
   validate  :should_have_at_least_one_item
 
+  after_destroy :update_licitation_process_status_to_in_progress,
+    unless: :licitation_process_got_ratifications?
+
   auto_increment :sequence, :by => :licitation_process_id
 
   filterize
@@ -66,5 +69,13 @@ class LicitationProcessRatification < Compras::Model
     if licitation_process_ratification_items.reject(&:marked_for_destruction?).empty?
       errors.add(:licitation_process_ratification_items, :must_have_at_least_one_item)
     end
+  end
+
+  def update_licitation_process_status_to_in_progress
+    PurchaseProcessStatusChanger.new(licitation_process).in_progress!
+  end
+
+  def licitation_process_got_ratifications?
+    licitation_process.licitation_process_ratifications.any?
   end
 end

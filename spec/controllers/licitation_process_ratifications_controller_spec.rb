@@ -15,10 +15,6 @@ describe LicitationProcessRatificationsController do
     expect(assigns(:licitation_process_ratification).licitation_process).to eq licitation_process
   end
 
-  it 'should not allow destroy' do
-    expect { delete :destroy, :id => 1 }.to raise_exception(ActionController::RoutingError)
-  end
-
   it 'should render report layout on #show' do
     ratification = LicitationProcessRatification.make!(:processo_licitatorio_computador)
 
