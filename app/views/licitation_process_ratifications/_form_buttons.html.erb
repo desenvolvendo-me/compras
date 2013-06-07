@@ -2,4 +2,8 @@
   <%= f.button :submit if can?(:modify, main_controller_name) %>
   <%= link_to 'Imprimir termo', resource_path(resource), :class => 'button neutral' if f.object.persisted? %>
   <%= f.button :back, :href => licitation_process_ratifications_path(:licitation_process_id => f.object.licitation_process_id) %>
+
+  <% if f.object.persisted? && can?(:destroy, main_controller_name) %>
+    <%= f.button :destroy %>
+  <% end %>
 </div>
