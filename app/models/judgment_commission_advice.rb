@@ -3,7 +3,7 @@ class JudgmentCommissionAdvice < Compras::Model
   attr_accessible :judgment_commission_advice_members_attributes
   attr_accessible :judgment_start_date, :judgment_start_time, :judgment_end_date
   attr_accessible :judgment_end_time, :companies_minutes, :companies_documentation_minutes
-  attr_accessible :justification_minutes, :judgment_minutes
+  attr_accessible :justification_minutes, :judgment_minutes, :issuance_date
 
   belongs_to :licitation_process
   belongs_to :licitation_commission
