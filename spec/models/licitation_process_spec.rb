@@ -349,12 +349,22 @@ describe LicitationProcess do
     end
   end
 
-  it "validates if bidders where added before publication" do
-    subject.stub(:bidders => [double])
+  context '#validate_bidders_before_edital_publication' do
+    it "when bidders where added before publication and is a licitation" do
+      subject.stub(:bidders => [double], licitation?: true )
 
-    subject.valid?
+      subject.valid?
 
-    expect(subject.errors[:base]).to include "Habilitações não podem ser incluídos antes da publicação do edital"
+      expect(subject.errors[:base]).to include "Habilitações não podem ser incluídos antes da publicação do edital"
+    end
+
+    it "when bidders where added before publication and is a direct purchase" do
+      subject.stub(:bidders => [double], licitation?: false )
+
+      subject.valid?
+
+      expect(subject.errors[:base]).to_not include "Habilitações não podem ser incluídos antes da publicação do edital"
+    end
   end
 
   it { should allow_value('2012').for(:year) }

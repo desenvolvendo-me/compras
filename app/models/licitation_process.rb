@@ -310,7 +310,7 @@ class LicitationProcess < Compras::Model
   end
 
   def validate_bidders_before_edital_publication
-    if bidders.any? && !edital_published?
+    if bidders.any? && !edital_published? && licitation?
       errors.add(:base, :inclusion_of_bidders_before_edital_publication)
     end
   end
