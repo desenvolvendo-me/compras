@@ -9,7 +9,7 @@ describe LicitationProcessRatificationItem do
 
   it { should have_one(:licitation_process).through :purchase_process_creditor_proposal }
   it { should have_one(:item).through :purchase_process_creditor_proposal }
-  it { should have_one(:creditor).through :purchase_process_creditor_proposal }
+  it { should have_one(:creditor).through :licitation_process_ratification }
 
   it { should delegate(:quantity).to(:item).allowing_nil true }
   it { should delegate(:description).to(:material).allowing_nil true }

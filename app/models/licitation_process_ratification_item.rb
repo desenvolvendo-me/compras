@@ -8,7 +8,7 @@ class LicitationProcessRatificationItem < Compras::Model
 
   has_one :licitation_process, through: :purchase_process_creditor_proposal
   has_one :item, through: :purchase_process_creditor_proposal
-  has_one :creditor, through: :purchase_process_creditor_proposal
+  has_one :creditor, through: :licitation_process_ratification
 
   delegate :description, :code, :reference_unit, to: :material, allow_nil: true
   delegate :identity_document, to: :creditor, allow_nil: true, prefix: true
