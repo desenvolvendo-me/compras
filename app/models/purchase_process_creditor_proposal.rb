@@ -32,7 +32,6 @@ class PurchaseProcessCreditorProposal < Compras::Model
   validates :unit_price, numericality: { greater_than: 0 }
   validates :brand, presence: true, if: :item?
   validates :ranking, presence: true, if: :ranking_changed?
-  validates :old_unit_price, presence: true, on: :update, if: :benefited_tied?
 
   validate :unit_price_is_lower_than_best_proposal, if: :benefited_tied?
 
@@ -175,7 +174,7 @@ class PurchaseProcessCreditorProposal < Compras::Model
   end
 
   def unit_price_is_lower_than_best_proposal
-    return unless unit_price
+    return unless (unit_price && old_unit_price)
 
     if unit_price >= best_proposal
       errors.add(:unit_price, :unit_price_should_be_lower_than_old_unit_price)
