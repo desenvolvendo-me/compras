@@ -1,6 +1,7 @@
 class PurchaseProcessCreditorProposal < Compras::Model
-  attr_accessible :creditor_id, :brand, :unit_price, :item_id, :delivery_date,
-                  :licitation_process_id, :lot, :ranking, :realigment_prices_attributes
+  attr_accessible :creditor_id, :brand, :unit_price, :old_unit_price,
+    :item_id, :delivery_date, :licitation_process_id, :lot, :ranking,
+    :realigment_prices_attributes
 
   attr_accessor :difference_price
 
@@ -28,9 +29,13 @@ class PurchaseProcessCreditorProposal < Compras::Model
 
   validates :creditor, :licitation_process, :unit_price, presence: true
   validates :lot, :ranking, numericality: { allow_blank: true }
+  validates :unit_price, numericality: { greater_than: 0 }
   validates :brand, presence: true, if: :item?
-
   validates :ranking, presence: true, if: :ranking_changed?
+  validates :old_unit_price, presence: true, on: :update, if: :benefited_tied?
+
+  validate :unit_price_is_lower_than_best_proposal, if: :benefited_tied?
+
   after_save :update_ranking, unless: :ranking_changed?
 
   scope :by_creditor_id, lambda { |creditor_id|
@@ -78,8 +83,35 @@ class PurchaseProcessCreditorProposal < Compras::Model
   orderize
   filterize
 
+  def self.best_proposal_for(creditor_proposal)
+    find_brothers_for_ranking(creditor_proposal).first
+  end
+
   def total_price
     (unit_price || 0) * (item_quantity || 1)
+  end
+
+  def benefited_unit_price
+    return unit_price unless creditor.benefited
+
+    best_proposal  = self.class.best_proposal_for(self).unit_price
+    max_unit_price = best_proposal + (best_proposal * 0.1)
+
+    if unit_price <= max_unit_price
+      return best_proposal
+    else
+      return unit_price
+    end
+  end
+
+  def benefited_tied?
+    return false unless available_for_benefit?
+
+    if unit_price > benefited_unit_price
+      return true
+    else
+      return false
+    end
   end
 
   def qualify!
@@ -140,5 +172,21 @@ class PurchaseProcessCreditorProposal < Compras::Model
 
   def update_ranking
     PurchaseProcessCreditorProposalRanking.rank! self
+  end
+
+  def unit_price_is_lower_than_best_proposal
+    return unless unit_price
+
+    if unit_price >= best_proposal
+      errors.add(:unit_price, :unit_price_should_be_lower_than_old_unit_price)
+    end
+  end
+
+  def best_proposal
+    self.class.best_proposal_for(self).unit_price
+  end
+
+  def available_for_benefit?
+    unit_price && tied? && creditor && creditor.benefited
   end
 end

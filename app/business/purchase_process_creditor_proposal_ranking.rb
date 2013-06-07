@@ -25,7 +25,7 @@ class PurchaseProcessCreditorProposalRanking
   private
 
   def each_ordered_proposals
-    all_proposals.group_by(&:unit_price).each_pair do |price, proposals|
+    all_proposals.group_by(&:benefited_unit_price).each_pair do |price, proposals|
       yield proposals
     end
   end

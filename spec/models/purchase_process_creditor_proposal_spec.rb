@@ -164,4 +164,46 @@ describe PurchaseProcessCreditorProposal do
       subject.apply_ranking! 1
     end
   end
+
+  describe '#benefited_tied?' do
+    before { subject.stub(:creditor).and_return creditor }
+
+    context 'theres no tie nor the creditor is benefited' do
+      let(:creditor) { double :creditor, benefited: false }
+
+      before { subject.tied = false }
+
+      it 'returns false' do
+        expect(subject.benefited_tied?).to be_false
+      end
+    end
+
+    context 'theres a tied, the creditor is benefited but his proposal was to high' do
+      let(:creditor) { double :creditor, benefited: false }
+
+      before do
+        subject.tied = true
+        subject.unit_price = 2.00
+        subject.stub(:benefited_unit_price).and_return 1.00
+      end
+
+      it 'returns false' do
+        expect(subject.benefited_tied?).to be_false
+      end
+    end
+
+    context 'theres is a tie, the creditor is benefited and is using the benefit' do
+      let(:creditor) { double :creditor, benefited: true }
+
+      before do
+        subject.tied = true
+        subject.unit_price = 1.10
+        subject.stub(:benefited_unit_price).and_return 1.00
+      end
+
+      it 'returns true' do
+        expect(subject.benefited_tied?).to be_true
+      end
+    end
+  end
 end
