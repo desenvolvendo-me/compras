@@ -46,7 +46,7 @@ describe TceExport::MonthlyMonitoringWorker do
 
   it "sets the monitoring status as 'processed with errors' if an error occur" do
     TceExport::MG::MonthlyMonitoring.stub(:generate_zip_file).
-      and_raise(RuntimeError, "Test error")
+      and_raise(TceExport::MG::Exceptions::InvalidData, "Test error")
 
     subject.perform(customer.id, monthly_monitoring.id)
 

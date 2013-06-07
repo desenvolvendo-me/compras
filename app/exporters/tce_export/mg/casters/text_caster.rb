@@ -12,13 +12,13 @@ module TceExport::MG::Casters
       ljust = options.fetch(:ljust, nil)
       upcase = options.fetch(:upcase, false)
 
-      return " " if value.nil?
+      return " " if value.blank?
 
       value = value.rjust(options[:size], rjust) if rjust
       value = value.ljust(options[:size], ljust) if ljust
       value = value.to_s.upcase if upcase
 
-      value
+      value.to_s.gsub(";", ",")
     end
   end
 end
