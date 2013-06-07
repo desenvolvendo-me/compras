@@ -36,4 +36,14 @@ module LicitationProcessesHelper
       new_judgment_commission_advice_path(licitation_process_id: resource.id)
     end
   end
+
+  def minute_purchase_process_link
+    unless resource.judgment_commission_advice.nil?
+      if resource.trading?
+        link_to('Imprimir ATA', report_minute_purchase_process_tradings_path(resource.id), class: "button primary")
+      else
+        link_to('Imprimir ATA', report_minute_purchase_processes_path(resource.id), class: "button primary")
+      end
+    end
+  end
 end

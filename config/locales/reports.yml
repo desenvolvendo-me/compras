@@ -6,5 +6,11 @@ pt-BR:
 
   minute_purchase_process_reports:
     minute_purchase_process_report:
-      one: "minute_purchase_process"
-      other: "minute_purchase_process"
+      one: "ATA do processo de compra"
+      other: "ATA do processo de compra"
+
+  minute_purchase_process_trading_reports:
+    minute_purchase_process_trading_report:
+      one: "ATA do processo de compra pregão"
+      other: "ATA do processo de compra pregão"
+

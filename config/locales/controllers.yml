@@ -66,6 +66,8 @@ pt-BR:
     tce_export_monthly_monitorings: "SICOM - Acompanhamento Mensal"
     users: "Usuários"
     report_map_of_proposals: "Mapa de Propostas"
+    report_minute_purchase_processes: "minute_purchase_processes"
+    report_minute_purchase_process_tradings: "minute_purchase_process_tradings"
 
   menu:
     <<: *controllers
@@ -79,4 +81,4 @@ pt-BR:
     parameters: "Parâmetros"
     purchasing_processes: "Processos de Compra"
     regulatory_act: "Ato Regulamentador"
-    report_minute_purchase_processes: "minute_purchase_processes"
+
