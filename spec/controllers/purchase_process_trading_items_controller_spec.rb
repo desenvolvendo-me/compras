@@ -39,8 +39,11 @@ describe PurchaseProcessTradingItemsController do
           item.stub(to_params: '4')
 
           PurchaseProcessTradingItem.should_receive(:find).with('4').and_return(item)
+
+          item.should_receive(:transaction).and_yield
           TradingBidRemover.should_receive(:undo).with(item).and_return(true)
           TradingItemStatusChanger.should_receive(:change).with(item)
+          TradingBidCreator.should_receive(:create!).with(item)
 
           post :undo_last_bid, id: 4
 
@@ -53,7 +56,10 @@ describe PurchaseProcessTradingItemsController do
           item.stub(to_params: '4')
 
           PurchaseProcessTradingItem.should_receive(:find).with('4').and_return(item)
+
+          item.should_receive(:transaction).and_yield
           TradingBidRemover.should_receive(:undo).with(item).and_return(false)
+          TradingBidCreator.should_not_receive(:create!)
 
           post :undo_last_bid, id: 4
 
