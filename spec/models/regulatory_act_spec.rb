@@ -8,12 +8,12 @@ require 'app/models/agreement'
 
 describe RegulatoryAct do
   context 'Relationships' do
-    it { should belong_to :regulatory_act_type }
     it { should belong_to :parent }
 
     it { should have_many(:expense_natures).dependent(:restrict) }
     it { should have_many(:budget_structure_configurations).dependent(:restrict) }
     it { should have_many(:budget_structure_responsibles).dependent(:restrict) }
+    it { should have_many(:agreements).dependent(:restrict) }
     it { should have_many(:children).dependent(:restrict) }
 
     it { should have_and_belong_to_many :dissemination_sources}
@@ -21,7 +21,8 @@ describe RegulatoryAct do
 
   context 'Delegations' do
     it { should delegate(:classification_law?).to(:parent).allowing_nil(true).prefix(true) }
-    it { should delegate(:kind).to(:regulatory_act_type).allowing_nil(true).prefix(true) }
+    it { should delegate(:regulatory_act_type_budget_change?).to(:parent).allowing_nil(true).prefix(true) }
+    it { should delegate(:regulatory_act_type_loa?).to(:parent).allowing_nil(true).prefix(true) }
   end
 
   context 'Validations' do
@@ -32,22 +33,12 @@ describe RegulatoryAct do
     it { should validate_presence_of :publication_date }
     it { should validate_presence_of :vigor_date }
     it { should validate_presence_of :content }
+    it { should validate_presence_of :classification }
 
-    it { should validate_numericality_of :budget_law_percent }
-    it { should validate_numericality_of :revenue_antecipation_percent }
     it { should validate_numericality_of :act_number }
 
-    it 'should have zero as default value to budget_law_percent' do
-      expect(subject.budget_law_percent).to eq 0.0
-    end
-
-    it 'should have zero as default value to revenue_antecipation_percent' do
-      expect(subject.revenue_antecipation_percent).to eq 0.0
-    end
-
-    it 'should have zero as default value to authorized_debt_value' do
-      expect(subject.authorized_debt_value).to eq 0.0
-    end
+    it { should ensure_length_of(:article_number).is_at_most(6) }
+    it { should ensure_length_of(:article_description).is_at_most(512) }
 
     context 'validate vigor_date related with creation_date' do
       let :creation_date do
@@ -67,8 +58,7 @@ describe RegulatoryAct do
       end
 
       it 'should not allow vigor_date date before creation_date' do
-        expect(subject).not_to allow_value(Date.current).for(:vigor_date).
-                                                     with_message("deve ser igual ou posterior a data de criação (#{I18n.l creation_date})")
+        expect(subject).not_to allow_value(Date.current).for(:vigor_date).with_message("deve ser igual ou posterior a data de criação (#{I18n.l creation_date})")
       end
     end
 
@@ -91,8 +81,7 @@ describe RegulatoryAct do
       end
 
       it 'should not allow publication_date date before creation_date' do
-        expect(subject).not_to allow_value(Date.current).for(:publication_date).
-                                                     with_message("deve ser igual ou posterior a data de criação (#{I18n.l creation_date})")
+        expect(subject).not_to allow_value(Date.current).for(:publication_date).with_message("deve ser igual ou posterior a data de criação (#{I18n.l creation_date})")
       end
     end
 
@@ -115,19 +104,20 @@ describe RegulatoryAct do
       end
 
       it 'should not allow publication_date after vigor_date' do
-        expect(subject).not_to allow_value(vigor_date + 5.days).for(:publication_date).
-                                                            with_message("deve ser em ou antes da data a vigorar (#{I18n.l vigor_date})")
+        expect(subject).not_to allow_value(vigor_date + 5.days).for(:publication_date).with_message("deve ser em ou antes da data a vigorar (#{I18n.l vigor_date})")
       end
     end
 
-    it 'should not allow budget_law_percent greater than 100' do
-      expect(subject).not_to allow_value(101).for(:budget_law_percent).
-                                             with_message('deve ser menor ou igual a 100')
-    end
+    context "percentage fields" do
+      it 'should not allow additional_percent greater than 100' do
+        subject.stub(:is_law_and_loa_or_budget_change?).and_return(true)
+        expect(subject).not_to allow_value(101).for(:additional_percent).with_message('deve ser menor ou igual a 100')
+      end
 
-    it 'should not allow revenue_antecipation_percent greater than 100' do
-      expect(subject).not_to allow_value(101).for(:revenue_antecipation_percent).
-                                             with_message('deve ser menor ou igual a 100')
+      it 'should not allow additional_percent equal 0' do
+        subject.stub(:is_law_and_loa_or_budget_change?).and_return(true)
+        expect(subject).not_to allow_value(0).for(:additional_percent).with_message('deve ser maior que 0')
+      end
     end
 
     describe '#budget_change_decree_type' do
@@ -155,6 +145,34 @@ describe RegulatoryAct do
         subject.stub(:budget_change_law_type_required?).and_return(false)
 
         expect(subject).to_not validate_presence_of :budget_change_law_type
+      end
+    end
+
+    describe '#additional_percent' do
+      it 'should be required when additional_percent is required' do
+        subject.stub(:is_law_and_loa_or_budget_change?).and_return(true)
+
+        expect(subject).to validate_presence_of :additional_percent
+      end
+
+      it 'should not be required when additional_percent is not required' do
+        subject.stub(:is_law_and_loa_or_budget_change?).and_return(false)
+
+        expect(subject).to_not validate_presence_of :additional_percent
+      end
+    end
+
+    describe '#authorized_value' do
+      it 'should be required when authorized_value is required' do
+        subject.stub(:is_law_and_loa_or_budget_change_or_decree_and_parent_is_loa_or_budget_change?).and_return(true)
+
+        expect(subject).to validate_presence_of :authorized_value
+      end
+
+      it 'should not be required when authorized_value is not required' do
+        subject.stub(:is_law_and_loa_or_budget_change_or_decree_and_parent_is_loa_or_budget_change?).and_return(false)
+
+        expect(subject).to_not validate_presence_of :authorized_value
       end
     end
 
@@ -242,13 +260,53 @@ describe RegulatoryAct do
         expect(subject.budget_change_law_type).to be_blank
       end
     end
+
+    describe '#authorized_value' do
+      it "should not be clean if required" do
+        subject.stub(:authorized_value_required?).and_return(true)
+        subject.authorized_value = 1.12
+
+        subject.run_callbacks(:save)
+
+        expect(subject.authorized_value).to eq 1.12
+      end
+
+      it "should be clean if not required" do
+        subject.stub(:authorized_value_required?).and_return(false)
+        subject.authorized_value = 1.12
+
+        subject.run_callbacks(:save)
+
+        expect(subject.authorized_value).to be_nil
+      end
+    end
+
+    describe '#additional_percent' do
+      it "should not be clean if required" do
+        subject.stub(:additional_percent_required?).and_return(true)
+        subject.additional_percent = 1.12
+
+        subject.run_callbacks(:save)
+
+        expect(subject.additional_percent).to eq 1.12
+      end
+
+      it "should be clean if not required" do
+        subject.stub(:additional_percent_required?).and_return(false)
+        subject.additional_percent = 1.12
+
+        subject.run_callbacks(:save)
+
+        expect(subject.additional_percent).to be_nil
+      end
+    end
   end
 
   context 'Methods' do
     describe '#budget_change_decree_type_required?' do
-      it 'returns true when classification is decree and regulatory_act_type is "Alteração Orçamentária"' do
-        subject.classification = RegulatoryActClassification::DECREE
-        subject.stub(:regulatory_act_type).and_return('Alteração Orçamentária')
+      it 'returns true when classification is decree and regulatory_act_type is budget_change' do
+        subject.stub(:classification_decree?).and_return true
+        subject.stub(:regulatory_act_type_budget_change?).and_return true
 
         subject.run_callbacks(:save)
 
@@ -256,17 +314,17 @@ describe RegulatoryAct do
       end
 
       it 'returns false when classification is not decree' do
-        subject.classification = RegulatoryActClassification::LAW
-        subject.stub(:regulatory_act_type).and_return('Alteração Orçamentária')
+        subject.stub(:classification_decree?).and_return false
+        subject.stub(:regulatory_act_type_budget_change?).and_return true
 
         subject.run_callbacks(:save)
 
         expect(subject.budget_change_decree_type_required?).to be_false
       end
 
-      it 'returns false when regulatory_act_type is not "Alteração Orçamentária"' do
-        subject.classification = RegulatoryActClassification::DECREE
-        subject.stub(:regulatory_act_type).and_return('PPA')
+      it 'returns false when regulatory_act_type is not budget_change' do
+        subject.stub(:classification_decree?).and_return true
+        subject.stub(:regulatory_act_type_budget_change?).and_return false
 
         subject.run_callbacks(:save)
 
@@ -292,9 +350,9 @@ describe RegulatoryAct do
     end
 
     describe '#budget_change_law_type_required?' do
-      it 'returns true when classification is law and regulatory_act_type is "Alteração Orçamentária"' do
-        subject.classification = RegulatoryActClassification::LAW
-        subject.stub(:regulatory_act_type).and_return('Alteração Orçamentária')
+      it 'returns true when classification is law and regulatory_act_type is budget_change' do
+        subject.stub(:classification_law?).and_return true
+        subject.stub(:regulatory_act_type_budget_change?).and_return true
 
         subject.run_callbacks(:save)
 
@@ -302,30 +360,126 @@ describe RegulatoryAct do
       end
 
       it 'returns false when classification is not law' do
-        subject.classification = RegulatoryActClassification::DECREE
-        subject.stub(:regulatory_act_type).and_return('Alteração Orçamentária')
+        subject.stub(:classification_law?).and_return false
+        subject.stub(:regulatory_act_type_budget_change?).and_return true
 
         subject.run_callbacks(:save)
 
         expect(subject.budget_change_law_type_required?).to be_false
       end
 
-      it 'returns false when regulatory_act_type is not "Alteração Orçamentária"' do
+      it 'returns false when regulatory_act_type is not budget_change' do
         subject.classification = RegulatoryActClassification::LAW
-        subject.stub(:regulatory_act_type).and_return('PPA')
+        subject.stub(:regulatory_act_type_budget_change?).and_return false
 
         subject.run_callbacks(:save)
 
         expect(subject.budget_change_law_type_required?).to be_false
       end
     end
+
+    describe '#additional_percent_required?' do
+      it 'returns true when classification is law and regulatory_act_type is budget_change' do
+        subject.stub(:classification_law?).and_return true
+        subject.stub(:regulatory_act_type_budget_change?).and_return true
+
+        subject.run_callbacks(:save)
+
+        expect(subject.additional_percent_required?).to be_true
+      end
+
+      it 'returns true when classification is law and regulatory_act_type is loa' do
+        subject.stub(:classification_law?).and_return true
+        subject.stub(:regulatory_act_type_loa?).and_return true
+
+        subject.run_callbacks(:save)
+
+        expect(subject.additional_percent_required?).to be_true
+      end
+
+      it 'returns false when classification is not law' do
+        subject.stub(:classification_law?).and_return false
+        subject.stub(:regulatory_act_type_budget_change?).and_return true
+
+        subject.run_callbacks(:save)
+
+        expect(subject.additional_percent_required?).to be_false
+      end
+
+      it 'returns false when classification is not law' do
+        subject.stub(:classification_law?).and_return false
+        subject.stub(:regulatory_act_type_loa?).and_return true
+
+        subject.run_callbacks(:save)
+
+        expect(subject.additional_percent_required?).to be_false
+      end
+
+      it 'returns false when regulatory_act_type is not budget_change nor loa' do
+        subject.classification = RegulatoryActClassification::LAW
+        subject.stub(:regulatory_act_type_budget_change?).and_return false
+        subject.stub(:regulatory_act_type_loa?).and_return false
+
+        subject.run_callbacks(:save)
+
+        expect(subject.additional_percent_required?).to be_false
+      end
+    end
+
+    describe '#authorized_value_required?' do
+      it 'returns true when classification is law and regulatory_act_type is budget_change' do
+        subject.stub(:classification_law?).and_return true
+        subject.stub(:regulatory_act_type_budget_change?).and_return true
+
+        subject.run_callbacks(:save)
+
+        expect(subject.authorized_value_required?).to be_true
+      end
+
+      it 'returns true when classification is law and regulatory_act_type is loa' do
+        subject.stub(:classification_law?).and_return true
+        subject.stub(:regulatory_act_type_loa?).and_return true
+
+        subject.run_callbacks(:save)
+
+        expect(subject.authorized_value_required?).to be_true
+      end
+
+      it 'returns false when classification is not law' do
+        subject.stub(:classification_law?).and_return false
+        subject.stub(:regulatory_act_type_budget_change?).and_return true
+
+        subject.run_callbacks(:save)
+
+        expect(subject.authorized_value_required?).to be_false
+      end
+
+      it 'returns false when classification is not law' do
+        subject.stub(:classification_law?).and_return false
+        subject.stub(:regulatory_act_type_loa?).and_return true
+
+        subject.run_callbacks(:save)
+
+        expect(subject.authorized_value_required?).to be_false
+      end
+
+      it 'returns false when regulatory_act_type is not budget_change nor loa' do
+        subject.classification = RegulatoryActClassification::LAW
+        subject.stub(:regulatory_act_type_budget_change?).and_return false
+        subject.stub(:regulatory_act_type_loa?).and_return false
+
+        subject.run_callbacks(:save)
+
+        expect(subject.authorized_value_required?).to be_false
+      end
+    end
   end
 
   describe '#to_s' do
-    it 'should return act_number' do
-      subject.stub(:regulatory_act_type).and_return('Lei')
+    it 'should return humanized regulatory_act_type and act_number' do
+      subject.stub(:regulatory_act_type).and_return RegulatoryActType::BUDGET_CHANGE
       subject.act_number = '01'
-      expect(subject.to_s).to eq 'Lei 01'
+      expect(subject.to_s).to eq 'Alteração Orçamentária 01'
     end
   end
 end

@@ -5,7 +5,7 @@ module TceExport::MG
         query.map do |regulatory_act|
           {
             cod_orgao: monthly_monitoring.prefecture.organ_code,
-            tipo_decreto: regulatory_act.regulatory_act_type_kind,
+            tipo_decreto: regulatory_act.regulatory_act_type,
             nro_decreto_municipal: regulatory_act.act_number,
             data_decreto_municipal: regulatory_act.creation_date,
             data_publicacao_decreto_municipal: regulatory_act.publication_date

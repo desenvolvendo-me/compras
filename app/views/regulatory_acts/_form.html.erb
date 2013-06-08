@@ -30,32 +30,79 @@
     var $regulatoryActTypeInput = $('#regulatory_act_regulatory_act_type'),
         $classificationInput = $('#regulatory_act_classification'),
         $budgetChangeDecreeTypeInput = $('#regulatory_act_budget_change_decree_type'),
-        $budgetChangeLawTypeInput = $('#regulatory_act_budget_change_law_type');
+        $budgetChangeLawTypeInput = $('#regulatory_act_budget_change_law_type'),
+        $authorizedValue = $("#regulatory_act_authorized_value"),
+        $additionalPercent = $("#regulatory_act_additional_percent"),
+        $wrapper = $("#wrapper"),
+        $notAuthorizedValueWrapper = $("#not_authorized_value_wrapper"),
+        $parentId = $("#regulatory_act_parent_id"),
+        $parent = null;
+
+    <% if f.object.classification_law? && (f.object.regulatory_act_type_loa? || f.object.regulatory_act_type_budget_change?) %>
+      $wrapper.show();
+      $notAuthorizedValueWrapper.css("visibility", "visible");
+    <% elsif f.object.classification_decree? && (f.object.parent_regulatory_act_type_budget_change? || f.object.parent_regulatory_act_type_loa?) %>
+      $wrapper.show();
+      $notAuthorizedValueWrapper.css("visibility", "hidden");
+    <% else %>
+      $wrapper.hide();
+      $notAuthorizedValueWrapper.css("visibility", "hidden");
+    <% end %>
+
+    $additionalPercent.requiredField(true);
+    $authorizedValue.requiredField(true);
+    $budgetChangeLawTypeInput.requiredField($budgetChangeLawTypeInput.is(':visible'));
+    $budgetChangeDecreeTypeInput.requiredField($budgetChangeDecreeTypeInput.is(':visible'));
 
     $regulatoryActTypeInput.on('change', function(event) {
       changeBudgetChangeDecreeTypeVisibility(event);
       changeBudgetChangeLawTypeVisibility(event);
+      changeAuthorizedWrapperVisibility(event);
     });
 
     $classificationInput.on('change', function(event) {
       changeBudgetChangeDecreeTypeVisibility(event);
       changeBudgetChangeLawTypeVisibility(event);
+      changeAuthorizedWrapperVisibility(event);
+    });
+
+    $parentId.on("change", function(event, parent){
+      $parent = parent;
+      changeAuthorizedWrapperVisibility(event);
     });
 
     $budgetChangeDecreeTypeInput.on('change', changeOriginVisibility);
 
+    function changeAuthorizedWrapperVisibility(event){
+      if(($classificationInput.val() == '<%= RegulatoryActClassification::LAW %>') &&
+         (($regulatoryActTypeInput.val() == '<%= RegulatoryActType::BUDGET_CHANGE %>') ||
+          ($regulatoryActTypeInput.val() == '<%= RegulatoryActType::LOA %>'))) {
+        $wrapper.show();
+        $notAuthorizedValueWrapper.css("visibility", "visible");
+      } else if(($classificationInput.val() == '<%= RegulatoryActClassification::DECREE %>') && $parent &&
+                (($parent.regulatory_act_type == '<%= RegulatoryActType::LOA %>') ||
+                 ($parent.regulatory_act_type == '<%= RegulatoryActType::BUDGET_CHANGE %>'))) {
+        $wrapper.show();
+        $notAuthorizedValueWrapper.css("visibility", "hidden");
+      } else {
+        $wrapper.hide();
+        $notAuthorizedValueWrapper.css("visibility", "hidden");
+      }
+    }
+
     function changeBudgetChangeDecreeTypeVisibility(event) {
       var $BudgetChangeDecreeTypeWrapper = $budgetChangeDecreeTypeInput.closest('div');
 
-      if ($regulatoryActTypeInput.val() == 'Alteração Orçamentária' &&
+      if ($regulatoryActTypeInput.val() == '<%= RegulatoryActType::BUDGET_CHANGE %>' &&
           $classificationInput.val() == '<%= RegulatoryActClassification::DECREE %>') {
-          $BudgetChangeDecreeTypeWrapper.show();
+        $BudgetChangeDecreeTypeWrapper.show();
       } else {
         $BudgetChangeDecreeTypeWrapper.hide();
       }
 
       $budgetChangeDecreeTypeInput.change();
-    };
+      $budgetChangeDecreeTypeInput.requiredField($budgetChangeDecreeTypeInput.is(':visible'));
+    }
 
     function changeOriginVisibility(event) {
       var $originWrapper = $('#regulatory_act_origin').closest('div');
@@ -67,19 +114,19 @@
       } else {
         $originWrapper.hide();
       }
-    };
+    }
 
     function changeBudgetChangeLawTypeVisibility(event) {
       var $BudgetChangeLawTypeWrapper = $budgetChangeLawTypeInput.closest('div');
 
-      if ($regulatoryActTypeInput.val() == 'Alteração Orçamentária' &&
+      if ($regulatoryActTypeInput.val() == '<%= RegulatoryActType::BUDGET_CHANGE %>' &&
           $classificationInput.val() == '<%= RegulatoryActClassification::LAW %>') {
         $BudgetChangeLawTypeWrapper.show();
       } else {
         $BudgetChangeLawTypeWrapper.hide();
       }
 
-      $budgetChangeLawTypeInput.change();
-    };
+      $budgetChangeLawTypeInput.requiredField($budgetChangeLawTypeInput.is(':visible'));
+    }
   });
 </script>
