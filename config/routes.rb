@@ -122,8 +122,6 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :supply_order_quantities, only: [:edit, :update]
-
   resources :banks do
     collection do
       get :modal

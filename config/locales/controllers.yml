@@ -1,7 +1,5 @@
 pt-BR:
   controllers: &controllers
-    supply_order_items: "Itens da Ordem de Fornecimento"
-
     addresses: "Endereços"
     administration_types: "Tipos de Administração"
     agencies: "Agências"

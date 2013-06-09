@@ -1,10 +1,4 @@
 <div class="buttons">
-  <% if f.object.persisted? %>
-    <%= link_to('Fornecer Itens',
-                edit_supply_order_quantity_path(resource),
-                :class => "button primary") %>
-  <% end %>
-
   <%= f.button :submit if can?(:modify, main_controller_name) %>
   <%= f.button :back %>
 

@@ -9,6 +9,9 @@ class SupplyOrder < Compras::Model
 
   accepts_nested_attributes_for :items, allow_destroy: true
 
+  delegate :modality_number, :modality_humanize, :type_of_removal_humanize,
+    to: :licitation_process, allow_nil: true
+
   validates :authorization_date, :creditor, :licitation_process, presence: true
 
   orderize "id DESC"

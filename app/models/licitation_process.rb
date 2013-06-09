@@ -188,6 +188,10 @@ class LicitationProcess < Compras::Model
     "#{process}/#{year} - #{modality_humanize} #{modality_number}"
   end
 
+  def modality_or_type_of_removal
+    "#{modality_number} - #{modality_humanize || type_of_removal_humanize}"
+  end
+
   def creditors
     if direct_purchase?
       items_creditors

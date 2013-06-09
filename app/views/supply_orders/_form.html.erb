@@ -13,13 +13,45 @@
 </div>
 
 <div class="yui3-g">
-  <div class="yui3-u-1-6">
+  <div class="yui3-u-1-4">
+    <%= f.input :modality_or_type_of_removal, as: :fake, disabled: true, input_html: { value: f.object.decorator.modality_or_type_of_removal } %>
+  </div>
+
+  <div class="yui3-u-1-5">
     <%= f.input :authorization_date %>
   </div>
 </div>
 
+<div id="supply_order_items">
 <%= f.association :items do |i| %>
-  <%= render 'supply_order_quantities/form', f: i %>
+  <%= render 'supply_order_items/form',
+    f: i,
+    authorized_quantity:  i.object.authorized_quantity,
+    balance:              i.object.balance,
+    material:             i.object.material,
+    quantity:             i.object.quantity,
+    ratification_item_id: i.object.licitation_process_ratification_item.id,
+    reference_unit:       i.object.reference_unit,
+    total_price:          i.object.total_price,
+    unit_price:           i.object.unit_price
+  %>
+<% end %>
+</div>
+
+<%= mustache 'supply_orderm_items_template' do %>
+  <%= f.association :items_attributes, :collection => f.object.items.build, :index => '{{uuid_item}}' do |p| %>
+    <%= render 'supply_order_items/form',
+      f: p,
+      authorized_quantity:  '{{authorized_quantity}}',
+      balance:              '{{balance}}',
+      material:             '{{material}}',
+      quantity:             '{{quantity}}',
+      ratification_item_id: '{{ratification_item_id}}',
+      reference_unit:       '{{reference_unit}}',
+      total_price:          '{{total_price}}',
+      unit_price:           '{{unit_price}}'
+    %>
+  <% end %>
 <% end %>
 
 <script>
@@ -32,7 +64,7 @@
     };
 
     urlModal += $.param(params);
-    $('#supply_order_licitation_process').attr('data-modal-url', urlModal);
+    $('#supply_order_licitation_process').data('modal-url', urlModal);
   }
 
   $('form.supply_order').on('change', '#supply_order_year', function() {
@@ -46,12 +78,37 @@
     };
 
     urlModal += $.param(params);
-    $('#supply_order_creditor').attr('data-modal-url', urlModal);
+    $('#supply_order_creditor').data('modal-url', urlModal);
   }
 
   $('form.supply_order').on('change', '#supply_order_licitation_process_id', function() {
     setModalUrlToCreditor();
   });
+
+  $('#supply_order_licitation_process').on('change', function (event, licitation_process) {
+    if(licitation_process){
+      $("#supply_order_modality_or_type_of_removal").val(licitation_process.modality_or_type_of_removal);
+    } else {
+      $("#supply_order_modality_or_type_of_removal, #supply_order_creditor").val('');
+    }
+  });
+
+  $('#supply_order_creditor_id').on('change', function (event, creditor) {
+    if(creditor){
+      fillSupplyOrderQuantities(creditor.ratification_items);
+    }
+  });
+
+  function fillSupplyOrderQuantities(ratification_items) {
+    var target = $('div#supply_order_items'),
+      template = $('#supply_orderm_items_template');
+
+    target.empty();
+
+    _.each(ratification_items, function(ratification_item) {
+      target.append(template.mustache(ratification_item));
+    });
+  }
 
   setModalUrlToLicitationProcess();
   setModalUrlToCreditor();

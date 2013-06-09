@@ -9,6 +9,8 @@ class LicitationProcessRatificationItem < Compras::Model
   has_one :licitation_process, through: :purchase_process_creditor_proposal
   has_one :creditor, through: :licitation_process_ratification
 
+  has_many :supply_order_items
+
   delegate :description, :code, :reference_unit, to: :material, allow_nil: true
   delegate :identity_document, to: :creditor, allow_nil: true, prefix: true
   delegate :unit_price, :total_price,
@@ -17,10 +19,10 @@ class LicitationProcessRatificationItem < Compras::Model
     to: :licitation_process, allow_nil: true, prefix: true
   delegate :material, :quantity, :lot, to: :item, allow_nil: true
 
-  scope :by_licitation_process_and_creditor, ->(licitation_process, creditor) do
+  scope :by_licitation_process_id_and_creditor_id, ->(licitation_process_id, creditor_id) do
     joins { licitation_process_ratification }.
-    where { licitation_process_ratification.licitation_process_id.eq(licitation_process.id) &
-            licitation_process_ratification.creditor_id.eq(creditor.id)
+    where { licitation_process_ratification.licitation_process_id.eq(licitation_process_id) &
+            licitation_process_ratification.creditor_id.eq(creditor_id)
     }
   end
 
@@ -34,6 +36,14 @@ class LicitationProcessRatificationItem < Compras::Model
 
   def item
     purchase_process_creditor_proposal.try(:item) || purchase_process_item
+  end
+
+  def authorized_quantity
+    supply_order_items.sum(:authorization_quantity)
+  end
+
+  def supply_order_item_balance
+    (quantity || 0) - (authorized_quantity || 0)
   end
 
   orderize "id DESC"
