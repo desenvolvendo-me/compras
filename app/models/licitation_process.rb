@@ -93,7 +93,7 @@ class LicitationProcess < Compras::Model
 
   delegate :allow_negotiation?, to: :trading, allow_nil: true, prefix: true
   delegate :licitation_kind, :kind, :best_technique?, :technical_and_price?,
-           :item?, :lot?,
+           :item?, :lot?, :global?,
            :to => :judgment_form, :allow_nil => true, :prefix => true
 
   validates :process_date, :period, :contract_guarantees, :type_of_purchase,

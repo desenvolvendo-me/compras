@@ -107,6 +107,7 @@ describe LicitationProcess do
 
   it { should delegate(:lot?).to(:judgment_form).allowing_nil(true).prefix(true) }
   it { should delegate(:item?).to(:judgment_form).allowing_nil(true).prefix(true) }
+  it { should delegate(:global?).to(:judgment_form).allowing_nil(true).prefix(true) }
 
   describe 'default values' do
     it 'total_value_of_items should be 0.0' do
