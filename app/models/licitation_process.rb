@@ -61,6 +61,7 @@ class LicitationProcess < Compras::Model
   has_many :licitation_notices, :dependent => :destroy
   has_many :reserve_funds, :dependent => :restrict
   has_many :licitation_process_ratifications, :dependent => :restrict, :order => :id
+  has_many :ratifications_items, through: :licitation_process_ratifications, source: :licitation_process_ratification_items, order: :id
   has_many :classifications, :through => :bidders, :class_name => 'LicitationProcessClassification',
            :source => :licitation_process_classifications
   has_many :purchase_process_budget_allocations, :dependent => :destroy, :order => :id
@@ -79,6 +80,8 @@ class LicitationProcess < Compras::Model
   has_many :items_creditors, through: :items, source: :creditor, order: :id
   has_many :creditor_disqualifications, class_name: 'PurchaseProcessCreditorDisqualification', dependent: :restrict
   has_many :process_responsibles, :dependent => :restrict
+  has_many :trading_items, through: :trading, source: :items, order: :id
+  has_many :trading_item_bids, through: :trading_items, source: :bids, order: :id
 
   has_one :judgment_commission_advice, :dependent => :restrict
   has_one :purchase_process_accreditation, :dependent => :restrict

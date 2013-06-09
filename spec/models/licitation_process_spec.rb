@@ -64,6 +64,7 @@ describe LicitationProcess do
 
   it { should have_many(:reserve_funds).dependent(:restrict) }
   it { should have_many(:licitation_process_ratifications).dependent(:restrict) }
+  it { should have_many(:ratifications_items).through(:licitation_process_ratifications) }
   it { should have_many(:classifications).through(:bidders) }
   it { should have_many(:purchase_process_budget_allocations).dependent(:destroy) }
   it { should have_many(:items).dependent(:restrict)}
@@ -76,6 +77,8 @@ describe LicitationProcess do
   it { should have_many(:items_creditors).through(:items) }
   it { should have_many(:creditor_disqualifications).dependent(:restrict) }
   it { should have_many(:process_responsibles).dependent(:restrict) }
+  it { should have_many(:trading_items).through(:trading) }
+  it { should have_many(:trading_item_bids).through(:trading_items) }
 
   it { should have_one(:judgment_commission_advice).dependent(:restrict) }
   it { should have_one(:purchase_process_accreditation).dependent(:restrict) }

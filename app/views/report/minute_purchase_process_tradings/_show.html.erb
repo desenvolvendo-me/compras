@@ -1,0 +1,221 @@
+<div>
+  <table class="records">
+    <thead>
+      <tr>
+        <td colspan=2>ATA DE SESSÃO PÚBLICA DO CREDENCIAMENTO, ANÁLISE DE PROPOSTAS, HABILITAÇÃO E, ADJUDICAÇÃO DO OBJETO.</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td colspan=2>CIRCUNSTANCIADA EM <%= I18n.l(resource.judgment_commission_advice.issuance_date) %></td>
+      </tr>
+      <tr>
+        <td width="20%">PREGÃO N˚</td>
+        <td width="80%"><%= resource.licitation_process.modality_number %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div style="text-align: justify">
+  <span>
+    EM <%= I18n.l(resource.licitation_process.proposal_envelope_opening_date) %>, REUNIRAM-SE NAS DEPENDÊNCIAS DA <%= current_prefecture %>, A PARTIR DAS <%= I18n.l(resource.licitation_process.proposal_envelope_opening_time, format: :hour) %> HORAS, O(A) PREGOEIRO(A), SENHOR(A) <%= resource.auctioneer %>, E  <%= resource.licitation_commission_members %>, SERVINDO COMO MEMBROS DA EQUIPE DE APOIO, NO FINAL ASSINADOS, DESIGNADOS PELA PORTARIA Nº NÚMERO DA PORTARIA DE DESIGNAÇÃO, PARA PROCEDER ÀS ATIVIDADES PERTINENTES AO PROCEDIMENTO LICITATÓRIO MODALIDADE <%= resource.licitation_process.modality_humanize.upcase %>  SOB O <%= resource.licitation_process.modality_number %>, QUE TEM COMO OBJETO DESCRIÇÃO DO OBJETO DA LICITAÇÃO. A SESSÃO PÚBLICA INICIOU-SE COM O RECEBIMENTO DOS ELEMENTOS NECESSÁRIOS À HABILITAÇÃO PRELIMINAR (ENVELOPES DE PROPOSTA E DE DOCUMENTAÇÃO PROTOCOLIZADOS E A DECLARAÇÃO) E DE IDENTIFICAÇÃO/CREDENCIAMENTO DE REPRESENTANTE LEGAL, TENDO SIDO RECEBIDOS OS ELEMENTOS DAS EMPRESAS, A SABER:
+  </span>
+</div>
+
+<br>
+
+<div>
+  <table class="records">
+    <thead>
+      <tr>
+        <th>FORNECEDOR</th>
+        <th>REPRESENTANTE</th>
+        <th>CPF</th>
+        <th>RG</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% resource.creditor_accreditations.each do |creditor| %>
+        <tr>
+          <td><%= creditor %></td>
+          <td><%= resource.representative_creditor(creditor) %></td>
+          <td><%= resource.representative_creditor(creditor).identity_document unless resource.representative_creditor(creditor).nil? %></td>
+          <td><%= resource.representative_creditor(creditor).identity_number unless resource.representative_creditor(creditor).nil? %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div style="text-align: justify">
+  <span>
+    ATO CONTÍNUO, O(A) <%= resource.auctioneer %> VERIFICOU AS CONDIÇÕES ESTABELECIDAS  PARA  A  HABILITAÇÃO PRELIMINAR POR PARTE DAS EMPRESAS PARTICIPANTES, SENDO CONSIDERADAS APTAS AS SEGUINTES EMPRESAS:
+  </span>
+</div>
+
+<br>
+
+<div>
+  <table class="records">
+    <thead>
+      <tr>
+        <th>FORNECEDOR</th>
+        <th>CPF/CNPJ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% resource.creditor_accreditations.each do |creditor| %>
+        <tr>
+          <td><%= creditor %></td>
+          <td><%= creditor.identity_document %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div style="text-align: justify">
+  <span>
+    NA SEQÜÊNCIA FOI EFETIVADA A ABERTURA DOS ENVELOPES DE PREÇOS. O <%= resource.auctioneer %> INFORMOU AOS REPRESENTANTES PRESENTES OS PROCEDIMENTOS A SEREM ADOTADOS DURANTE A SESSÃO PÚBLICA DO PREGÃO E, RESSALTOU QUE A AUSÊNCIA DE QUALQUER DELES QUANDO DA LAVRATURA DA ATA, AO FINAL DA SESSÃO PÚBLICA, IMPLICARÁ NA PRECLUSÃO DO DIREITO A RECURSO E NA SUBMISSÃO AO DISPOSTO NA ATA. SEQÜENCIALMENTE OCORREU A ANÁLISE DAS PROPOSTAS DE PREÇOS APRESENTADAS PELAS LICITANTES, TENDO COMO APOIO DE AVALIAÇÃO AS DETERMINAÇÕES CONSTADAS NO EDITAL, LOGRANDO CLASSIFICADAS AS EMPRESAS.
+  </span>
+</div>
+
+<div>
+  <br><br>
+  <span>PROPOSTAS VÁLIDAS</span>
+
+  <table class="records">
+    <thead>
+      <tr>
+        <th>LOTE</th>
+        <th>ITEM</th>
+        <th>VALOR UNITÁRIO</th>
+        <th>FORNECEDOR</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% resource.proposals.each do |proposal| %>
+      <tr>
+        <td><%= proposal.lot %></td>
+        <td><%= proposal.item %></td>
+        <td><%= number_to_currency proposal.unit_price %></td>
+        <td><%= proposal.creditor %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div style="text-align: justify">
+  <span>
+    OS PREÇOS PROPOSTOS SERÃO ANALISADOS APÓS A ETAPA DE LANCES VERBAIS. OS REPRESENTANTES PRESENTES PROCEDERAM COM VISTAS ÀS PROPOSTAS APRESENTADAS, CONCORDANDO COM AS ANÁLISES E CONCLUSÕES DO PREGOEIRO. ENCERRADA A FASE DE LANCES, CLASSIFICOU-SE EM 1º LUGAR A(S) EMPRESA(S):
+
+  </span>
+</div>
+
+<div>
+  <table class="records">
+    <thead>
+      <tr>
+        <th>LOTE</th>
+        <th>ITEM</th>
+        <th>VALOR LANCE</th>
+        <th>N˚ LANCE</th>
+        <th>FORNECEDOR</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%resource.bids.each do |bid| %>
+        <tr>
+          <td><%= bid.item.lot %></td>
+          <td><%= bid.item %></td>
+          <td><%= number_to_currency bid.amount %></td>
+          <td><%= bid.number %></td>
+          <td><%= bid.creditor %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div style="text-align: justify">
+  <span>
+    INICIOU-SE ENTÃO A FASE DE NEGOCIAÇÃO, ONDE O PROPONENTE REFEZ SUA OFERTA, CONSEGUINDO A SIM PROPOR UM VALOR DE:
+  </span>
+</div>
+
+<br>
+
+<div>
+  <table class="records">
+    <thead>
+      <tr>
+        <th>FORNECEDOR</th>
+        <th>VALOR TOTAL</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% resource.trading_items.each do |item| %>
+      <tr>
+        <td><%= resource.creditor_winner(item) %></td>
+        <td><%= number_to_currency resource.amount_winner(item) %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div style="text-align: justify">
+  <span>
+    DURANTE A SESSÃO PÚBLICA, PODE SE REGISTRAR AS SEGUINTES OCORRÊNCIAS:
+    <br>
+    <%= resource.judgment_commission_advice.companies_minutes %><br><br>
+    <%= resource.judgment_commission_advice.companies_documentation_minutes %><br><br>
+    <%= resource.judgment_commission_advice.justification_minutes%><br><br>
+    <%= resource.judgment_commission_advice.judgment_minutes %><br><br>
+
+    CONCLUÍDOS OS PROCEDIMENTOS RELATIVOS AO <%= resource.licitation_process.modality_humanize.mb_chars.upcase %>  SOB O Nº <%= resource.licitation_process.modality_number %>,  E CONSIDERANDO QUE: 1) AS PROPOSTAS DAS EMPRESAS VENCEDORAS SATISFAZEM ÀS EXIGÊNCIAS DO EDITAL; 2) AS EMPRESAS VENCEDORAS ENCONTRAM-SE DEVIDAMENTE HABILITADAS QUANTO À DOCUMENTAÇÃO EXIGIDA; 3) OS PREÇOS VITORIOSOS ESTÃO DENTRO DO LIMITE ESTABELECIDO PELA <%= current_prefecture %>; POR CONSEGUINTE O(A) <%= resource.auctioneer %>  ADJUDICA  O  OBJETO  DO  CERTAME  À(S)  EMPRESA(S):
+  </span>
+</div>
+
+<div>
+  <table class="records">
+    <thead>
+      <tr>
+        <th>FORNECEDOR</th>
+        <th>VALOR TOTAL</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% resource.ratifications_items.each do |item| %>
+      <tr>
+        <td><%= item.creditor %></td>
+        <td><%= number_to_currency item.total_price %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div style="text-align: justify">
+  <span>
+    NADA MAIS HAVENDO, FOI LAVRADA ESTA ATA, QUE APÓS LIDA E ACHADA CONFORME, VAI ASSINADA PELO(A) <%= resource.auctioneer %>, PELO MEMBRO DA EQUIPE DE APOIO E PELOS REPRESENTANTES PRESENTES AO FINAL DA SESSÃO PÚBLICA. RESSALVANDO QUE O MEMBRO DA EQUIPE DE APOIO, AO ASSINAR ESTA ATA, ATESTA SUA PARTICIPAÇÃO E COLABORAÇÃO NO CERTAME, NÃO LHE APLICANDO AS ATRIBUIÇÕES E OBRIGAÇÕES DE QUE TRATA O INCISO IV DO ART. 3º DA LEI 10.520/02.
+  </span>
+</div>
+
+<br>
+<div class="signature" style="text-align: center">
+  <p>
+    <hr>
+    <%= resource.auctioneer %><br>
+    PRESIDENTE DA COMISSÃO <br><br><br>
+    <hr>
+    <%= resource.member %><br>
+    MEMBRO DA COMISSÃO <br><br><br>
+    <hr>
+    REPRESENTANTE <br><br><br>
+    <hr>
+    REPRESENTANTE <br><br><br>
+  </p>
+</div>

@@ -3,3 +3,14 @@ pt-BR:
     map_of_proposal_report:
       one: "Mapa de Proposta"
       other: "Mapas de Propostas"
+
+  minute_purchase_process_reports:
+    minute_purchase_process_report:
+      one: "ATA do processo de compra"
+      other: "ATA do processo de compra"
+
+  minute_purchase_process_trading_reports:
+    minute_purchase_process_trading_report:
+      one: "ATA do processo de compra pregão"
+      other: "ATA do processo de compra pregão"
+
