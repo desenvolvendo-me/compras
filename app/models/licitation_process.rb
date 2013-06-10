@@ -178,8 +178,18 @@ class LicitationProcess < Compras::Model
         month, year)
   }
 
+  scope :by_ratification_and_year, lambda { |year|
+    joins { licitation_process_ratifications }.
+    where(%{
+      extract(year from compras_licitation_process_ratifications.ratification_date) = ?}, year)
+  }
+
   def to_s
     "#{process}/#{year} - #{modality_humanize} #{modality_number}"
+  end
+
+  def modality_or_type_of_removal
+    "#{modality_number} - #{modality_humanize || type_of_removal_humanize}"
   end
 
   def creditors

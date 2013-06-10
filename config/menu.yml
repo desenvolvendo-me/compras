@@ -69,5 +69,8 @@ menu:
     - licitation_process_appeals
     - process_responsibles
 
+  - "Instrumentos Contratuais":
+    - supply_orders
+
   - "Prestação de Contas":
     - tce_export_monthly_monitorings

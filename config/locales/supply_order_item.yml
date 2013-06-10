@@ -1,0 +1,19 @@
+pt-BR:
+  activerecord:
+    models:
+      supply_order_item:
+        one: "Item da Ordem de Fornecimento"
+        other: "Itens da Ordem de Fornecimento"
+
+    attributes:
+      supply_order_item:
+        authorization_quantity: "Qtde a autorizar"
+        authorized_quantity: "Qtde já autorizada"
+        balance: "Saldo"
+        material: "Material"
+        purchase_process_item: "Item"
+        quantity: "Quantidade"
+        reference_unit: "Unidade"
+        supply_order: "Ordem de Fornecimento"
+        total_price: "Total"
+        unit_price: "Valor unitário"

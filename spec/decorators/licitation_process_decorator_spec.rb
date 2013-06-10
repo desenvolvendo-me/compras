@@ -15,31 +15,6 @@ describe LicitationProcessDecorator do
            :global? => false)
   end
 
-  describe '#modality_or_type_of_removal' do
-    context 'when has a modality' do
-      before do
-        component.stub(:modality_number).and_return(1)
-        component.stub(:modality_humanize).and_return('Pregão')
-      end
-
-      it 'returns number and modality' do
-        expect(subject.modality_or_type_of_removal).to eql '1 - Pregão'
-      end
-    end
-
-    context 'when has a type of removal' do
-      before do
-        component.stub(:modality_number).and_return(1)
-        component.stub(:modality_humanize).and_return(nil)
-        component.stub(:type_of_removal_humanize).and_return('Afastamento')
-      end
-
-      it 'returns number and modality' do
-        expect(subject.modality_or_type_of_removal).to eql '1 - Afastamento'
-      end
-    end
-  end
-
   context '#envelope_delivery_time' do
     context 'when do not have envelope_delivery_time' do
       before do

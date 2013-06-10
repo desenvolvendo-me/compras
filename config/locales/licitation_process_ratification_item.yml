@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      licitation_process_ratification_item:
+        one: "Ordem de Fornecimento"
+        other: "Ordem de Fornecimento"
+
+    attributes:
+      licitation_process_ratification_item:
+        authorization_date: "Data da autorização"
+        creditor: "Fornecedor"
+        licitation_process: "Processo de compra"
+        year: "Ano"
