@@ -5,17 +5,38 @@ class MinutePurchaseProcessReport < ActiveRelatus::Base
     records.first
   end
 
+  def issuance_date
+    return if licitation_process.judgment_commission_advice_issuance_date.nil?
+
+    I18n.l licitation_process.judgment_commission_advice_issuance_date
+  end
+
   def licitation_commission
     return if judgment_commission_advice.nil?
     judgment_commission_advice.licitation_commission
   end
 
+  def proposal_envelope_opening_date
+    return if licitation_process.proposal_envelope_opening_date.nil?
+
+    I18n.l licitation_process.proposal_envelope_opening_date
+  end
+
+  def proposal_envelope_opening_time
+    return if licitation_process.proposal_envelope_opening_time.nil?
+
+    I18n.l licitation_process.proposal_envelope_opening_time, format: :hour
+  end
+
   def licitation_commission_members
-    return if licitation_commission.nil?
+    return if licitation_commission.licitation_commission_members.empty?
+
     licitation_commission.licitation_commission_members.map(&:individual).join(', ').upcase
   end
 
   def member
+    return if licitation_commission.licitation_commission_members.empty?
+
     licitation_commission.licitation_commission_members.last
   end
 
