@@ -17,7 +17,7 @@ describe RegulatoryActDecorator do
     end
 
     it 'should have regulatory_act_type, act_number and creation_date' do
-      expect(described_class.header_attributes).to include :regulatory_act_type
+      expect(described_class.header_attributes).to include :regulatory_act_type_humanize
       expect(described_class.header_attributes).to include :act_number
       expect(described_class.header_attributes).to include :creation_date
     end

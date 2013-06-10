@@ -51,9 +51,7 @@ menu:
     - legislation:
       - dissemination_sources
       - communication_sources
-      - regulatory_act:
-        - regulatory_act_types
-        - regulatory_acts
+      - regulatory_acts
     - document_types
     - delivery_locations
     - payment_methods

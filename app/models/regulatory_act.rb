@@ -1,44 +1,48 @@
 # encoding: utf-8
 class RegulatoryAct < Compras::Model
-  attr_accessible :act_number, :regulatory_act_type_id, :creation_date,
-                  :publication_date, :vigor_date, :budget_change_law_type,
-                  :end_date, :content, :budget_law_percent, :signature_date,
-                  :revenue_antecipation_percent, :authorized_debt_value,
-                  :dissemination_source_ids, :classification, :parent_id,
-                  :budget_change_decree_type, :origin
+  attr_accessible :act_number, :regulatory_act_type, :creation_date,
+                  :publication_date, :vigor_date, :end_date, :content,
+                  :signature_date, :dissemination_source_ids, :article_number,
+                  :article_description, :classification, :parent_id,
+                  :budget_change_decree_type, :origin, :budget_change_law_type,
+                  :authorized_value, :additional_percent
 
-  attr_modal :act_number, :regulatory_act_type_id
+  attr_modal :act_number, :regulatory_act_type
 
+  has_enumeration_for :classification, :with => RegulatoryActClassification, :create_helpers => { :prefix => true }
   has_enumeration_for :budget_change_decree_type, :create_helpers => { :prefix => true }
-  has_enumeration_for :budget_change_law_type
-  has_enumeration_for :classification, :with => RegulatoryActClassification, create_helpers: { prefix: true }
   has_enumeration_for :origin
+  has_enumeration_for :budget_change_law_type
+  has_enumeration_for :regulatory_act_type, :create_helpers => { :prefix => true }
 
-  belongs_to :regulatory_act_type
   belongs_to :parent, :class_name => 'RegulatoryAct'
 
   has_and_belongs_to_many :dissemination_sources, :join_table => :compras_dissemination_sources_compras_regulatory_acts
 
-  has_many :children, :class_name => 'RegulatoryAct', :foreign_key => :parent_id, :dependent => :restrict
   has_many :expense_natures, :dependent => :restrict
   has_many :budget_structure_configurations, :dependent => :restrict
   has_many :budget_structure_responsibles, :dependent => :restrict
-  has_many :licitation_commissions, :dependent => :restrict
+  has_many :agreements, :dependent => :restrict
+  has_many :children, :class_name => 'RegulatoryAct', :foreign_key => :parent_id, :dependent => :restrict
 
-  delegate :classification_law?, :to => :parent, :prefix => true, :allow_nil => true
-  delegate :kind, to: :regulatory_act_type, allow_nil: true, prefix: true
+  delegate :classification_law?, :regulatory_act_type_budget_change?, :regulatory_act_type_loa?, :to => :parent, :prefix => true, :allow_nil => true
 
   validates :regulatory_act_type, :creation_date, :publication_date, :content,
             :signature_date, :vigor_date, :act_number,
-            :presence => true
-  validates :budget_change_decree_type, :presence => true, if: :budget_change_decree_type_required?
+            :classification, :presence => true
+  validates :authorized_value, :presence => true, :if => :is_law_and_loa_or_budget_change_or_decree_and_parent_is_loa_or_budget_change?
+  validates :additional_percent, :presence => true, :if => :is_law_and_loa_or_budget_change?
+  validates :additional_percent, :numericality => { :greater_than => 0, :less_than_or_equal_to => 100 },
+            :if => :is_law_and_loa_or_budget_change?
+  validates :article_number, :length => { :maximum => 6 }, :allow_blank => true
+  validates :article_description, :length => { :maximum => 512 }, :allow_blank => true
+  validates :budget_change_decree_type, :presence => true, :if => :budget_change_decree_type_required?
   validates :budget_change_law_type, :presence => true, :if => :budget_change_law_type_required?
   validates :parent, :presence => true, :if => :classification_decree?
-  validate  :validate_parent_classification
+
+  validate :validate_parent_classification
 
   with_options :allow_blank => true do |allowing_blank|
-    allowing_blank.validates :revenue_antecipation_percent, :numericality => { :less_than_or_equal_to => 100 }
-    allowing_blank.validates :budget_law_percent, :numericality => { :less_than_or_equal_to => 100 }
     allowing_blank.validates :act_number, :content, :uniqueness => true
     allowing_blank.validates :act_number, :numericality => true
     allowing_blank.validates :vigor_date,
@@ -61,27 +65,50 @@ class RegulatoryAct < Compras::Model
       }
   end
 
-  before_save :clear_budget_change_decree_type_unless_required
-  before_save :clear_origin_unless_updateable
-  before_save :clear_budget_change_law_type_unless_required
+  scope :created_at_before, lambda {
+    |year, month, day| where {
+      creation_date.lte(Date.new(year.to_i, month.to_i, day.to_i))
+    }
+  }
+
+  scope :trading_or_price_registration, lambda {
+    where {
+      regulatory_act_type.in([RegulatoryActType::REGULAMENTATION_OF_PRICE_REGISTRATION,
+                              RegulatoryActType::REGULAMENTATION_OF_TRADING])
+    }
+  }
+
+  before_save :clear_budget_change_decree_type_unless_required,
+              :clear_authorized_value_unless_required,
+              :clear_additional_percent_unless_required,
+              :clear_origin_unless_updateable,
+              :clear_budget_change_law_type_unless_required
 
   orderize :act_number
   filterize
 
-  scope :trading_or_price_registration, lambda {
-    joins { regulatory_act_type }.
-    where {
-      regulatory_act_type.kind.in([RegulatoryActTypeKind::PRICE_REGISTRATION,
-                                  RegulatoryActTypeKind::TRADING])
-    }
-  }
+  def self.by_creation_date(date_range)
+    where { creation_date.in(date_range) }
+  end
+
+  def self.by_creation_month(date)
+    by_creation_date(date.beginning_of_month..date.end_of_month)
+  end
+
+  def self.by_classification(classification_key)
+    where { classification.eq classification_key }
+  end
+
+  def used_percent
+    0
+  end
 
   def to_s
-    "#{regulatory_act_type} #{act_number}"
+    "#{regulatory_act_type_humanize} #{act_number}"
   end
 
   def budget_change_decree_type_required?
-    classification_decree? && regulatory_act_type.to_s == 'Alteração Orçamentária'
+    classification_decree? && regulatory_act_type_budget_change?
   end
 
   def origin_updateable?
@@ -89,10 +116,34 @@ class RegulatoryAct < Compras::Model
   end
 
   def budget_change_law_type_required?
-    classification_law? && regulatory_act_type.to_s == 'Alteração Orçamentária'
+    classification_law? && regulatory_act_type_budget_change?
+  end
+
+  def additional_percent_required?
+    is_law_and_loa_or_budget_change?
+  end
+
+  def authorized_value_required?
+    is_law_and_loa_or_budget_change_or_decree_and_parent_is_loa_or_budget_change?
   end
 
   private
+
+  def is_law_and_loa_or_budget_change_or_decree_and_parent_is_loa_or_budget_change?
+    is_law_and_loa_or_budget_change? || is_decree_and_parent_is_loa_or_budget_change?
+  end
+
+  def is_decree_and_parent_is_loa_or_budget_change?
+    classification_decree? && (parent_regulatory_act_type_budget_change? || parent_regulatory_act_type_loa?)
+  end
+
+  def is_law_and_loa_or_budget_change?
+    classification_law? && (regulatory_act_type_budget_change? || regulatory_act_type_loa?)
+  end
+
+  def self.year_period(date)
+    (date.beginning_of_year..date)
+  end
 
   def clear_budget_change_decree_type_unless_required
     self.budget_change_decree_type = nil unless budget_change_decree_type_required?
@@ -104,6 +155,14 @@ class RegulatoryAct < Compras::Model
 
   def clear_budget_change_law_type_unless_required
     self.budget_change_law_type = nil unless budget_change_law_type_required?
+  end
+
+  def clear_authorized_value_unless_required
+    self.authorized_value = nil unless authorized_value_required?
+  end
+
+    def clear_additional_percent_unless_required
+    self.additional_percent = nil unless additional_percent_required?
   end
 
   def validate_parent_classification

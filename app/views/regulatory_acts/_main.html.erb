@@ -8,29 +8,47 @@
   </div>
 </div>
 
-<div class="yui3-g">
-  <div class="yui3-u-4-5">
-    <%= f.input :regulatory_act_type %>
-  </div>
+<%= f.input :regulatory_act_type %>
 
-  <div class="yui3-u-1-5">
-    <%= f.input :classification %>
+<div class="yui3-g" id="wrapper">
+  <div class="yui3-u-1-3 inline-block">
+    <%= f.input :authorized_value %>
+  </div>
+  <div id="not_authorized_value_wrapper" class="inline-block margin-left">
+    <div class="yui3-u-1-2">
+      <%= f.input :additional_percent,
+                  :input_html => {
+                    :value => number_with_precision(f.object.additional_percent)
+                  } %>
+    </div>
+    <div class="yui3-u-1-2">
+      <%= f.input :used_percent, :as => :decimal,
+                  :input_html => {
+                    :value => number_with_precision(f.object.used_percent),
+                    :'data-precision' => 2
+                  },
+                  :disabled => true %>
+    </div>
   </div>
 </div>
 
 <div class="yui3-g">
-  <div class="yui3-u-4-5">
+  <div class="yui3-u-1-5">
+    <%= f.input :classification %>
+  </div>
+
+  <div class="yui3-u-2-5">
     <%= f.input :budget_change_decree_type, :wrapper_html => {
-                :hidden => !f.object.budget_change_decree_type_required? } %>
+      :hidden => !f.object.budget_change_decree_type_required? } %>
+
+    <%= f.input :budget_change_law_type, :wrapper_html => {
+      :hidden => !f.object.budget_change_law_type_required? } %>
   </div>
 
   <div class="yui3-u-1-5">
     <%= f.input :origin, :wrapper_html => { :hidden => !f.object.origin_updateable? } %>
   </div>
 </div>
-
-<%= f.input :budget_change_law_type, :wrapper_html => {
-            :hidden => !f.object.budget_change_law_type_required? } %>
 
 <div class="yui3-g">
   <div class="yui3-u-1-5">
