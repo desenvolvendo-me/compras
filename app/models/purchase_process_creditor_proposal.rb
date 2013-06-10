@@ -37,6 +37,9 @@ class PurchaseProcessCreditorProposal < Compras::Model
 
   after_save :update_ranking, unless: :ranking_changed?
 
+  orderize
+  filterize
+
   scope :by_creditor_id, lambda { |creditor_id|
     where { |proposal| proposal.creditor_id.eq(creditor_id) }
   }
@@ -78,9 +81,6 @@ class PurchaseProcessCreditorProposal < Compras::Model
     joins { judgment_form }.
     where { judgment_form.kind.in([JudgmentFormKind::LOT, JudgmentFormKind::GLOBAL]) }
   }
-
-  orderize
-  filterize
 
   def self.best_proposal_for(creditor_proposal)
     find_brothers_for_ranking(creditor_proposal).first
