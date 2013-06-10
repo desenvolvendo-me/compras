@@ -13,10 +13,13 @@ class LicitationProcessRatification < Compras::Model
   has_many :licitation_process_ratification_items, :dependent => :destroy
   has_many :creditor_proposals, :through => :licitation_process
 
+  has_one :judgment_form, through: :licitation_process
+
   accepts_nested_attributes_for :licitation_process_ratification_items, :allow_destroy => true
 
   delegate :process, :modality_humanize, :description, :licitation?, :execution_unit_responsible,
            :to => :licitation_process, :prefix => true, :allow_nil => true
+  delegate :item?, to: :judgment_form, allow_nil: true, prefix: true
 
   validates :licitation_process, :creditor, :presence => true
   validates :adjudication_date, :ratification_date, :presence => true

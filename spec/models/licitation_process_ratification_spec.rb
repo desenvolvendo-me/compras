@@ -16,6 +16,8 @@ describe LicitationProcessRatification do
   it { should have_many(:licitation_process_ratification_items).dependent(:destroy) }
   it { should have_many(:creditor_proposals).through :licitation_process }
 
+  it { should have_one(:judgment_form).through(:licitation_process) }
+
   it { should validate_presence_of :licitation_process }
   it { should validate_presence_of :ratification_date }
   it { should validate_presence_of :adjudication_date }
@@ -25,6 +27,7 @@ describe LicitationProcessRatification do
   it { should delegate(:modality_humanize).to(:licitation_process).allowing_nil(true).prefix(true) }
   it { should delegate(:description).to(:licitation_process).allowing_nil(true).prefix(true) }
   it { should delegate(:execution_unit_responsible).to(:licitation_process).allowing_nil(true).prefix(true) }
+  it { should delegate(:item?).to(:judgment_form).allowing_nil(true).prefix(true) }
 
   context 'creditor should belongs to licitation process' do
     let :creditor_with_licitation_process do

@@ -68,28 +68,18 @@
     });
   }
 
-  $('#licitation_process_ratification_creditor_id').change(function (event, creditor) {
-    clearExistingItems();
+  function getProposals(creditorId, purchaseProcessId) {
+    var proposalsUrl = "<%= creditor_proposals_helper_path(resource) %>",
+        params = {
+          creditor_id: creditorId,
+          licitation_process_id: purchaseProcessId
+        }, item;
 
-    if (creditor) {
-      var template = $('#item-template'),
-          target = $('#ratification_items'),
-          item;
-
-      <% if resource.licitation_process_licitation? %>
-        <% if resource.licitation_process.judgment_form.item? %>
-          var proposals = creditor.proposals;
-        <% else %>
-          var proposals = creditor.realigment_prices;
-        <% end %>
-      <% else %>
-        var proposals = creditor.purchase_items;
-      <% end %>
-
+    $.getIndex(proposalsUrl, params, function (proposals) {
       $.each(proposals, function() {
         item = $('#item-template').mustache({
           uuid_item: _.uniqueId('fresh-'),
-          purchase_process_creditor_proposal_id:  this.purchase_process_creditor_proposal_id,
+          purchase_process_creditor_proposal_id:  this.id,
           purchase_process_item_id:               this.purchase_process_item_id,
           code:                                   this.code,
           description:                            this.description,
@@ -99,10 +89,18 @@
           total_price:                            this.total_price
         });
 
-        target.prepend(item);
+        $('#ratification_items').prepend(item);
       });
-    } else {
-      clearExistingItems();
+    });
+  }
+
+  $('#licitation_process_ratification_creditor_id').change(function (event, creditor) {
+    var licitationProcessId = $('#licitation_process_ratification_licitation_process_id').val();
+
+    clearExistingItems();
+
+    if (creditor) {
+      getProposals(creditor.id, licitationProcessId);
     }
   });
 

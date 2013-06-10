@@ -1,6 +1,9 @@
 class RealigmentPricesController < CrudController
   defaults resource_class: PurchaseProcessCreditorProposal
 
+  has_scope :licitation_process_id, allow_blank: true
+  has_scope :creditor_id, allow_blank: true
+
   def index
     @creditors = licitation_process.creditors.includes(:purchase_process_creditor_proposals)
     @licitation_process = licitation_process

@@ -35,6 +35,10 @@ class PurchaseProcessItem < Compras::Model
     where { |item| item.licitation_process_id.eq(licitation_process_id) }
   }
 
+  scope :creditor_id, lambda { |creditor_id|
+    where { |item| item.creditor_id.eq(creditor_id) }
+  }
+
   def to_s
     material.to_s
   end

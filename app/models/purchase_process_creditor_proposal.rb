@@ -37,8 +37,12 @@ class PurchaseProcessCreditorProposal < Compras::Model
 
   after_save :update_ranking, unless: :ranking_changed?
 
-  orderize
+  orderize :id
   filterize
+
+  scope :licitation_process_id, lambda { |licitation_process_id|
+    where { |proposal| proposal.licitation_process_id.eq(licitation_process_id) }
+  }
 
   scope :creditor_id, lambda { |creditor_id|
     where { |proposal| proposal.creditor_id.eq(creditor_id) }
