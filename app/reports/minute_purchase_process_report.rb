@@ -86,6 +86,10 @@ class MinutePurchaseProcessReport < ActiveRelatus::Base
     end
   end
 
+  def ratifications_items
+    licitation_process.ratifications_items.select(&:ratificated)
+  end
+
   protected
 
   def normalize_attributes

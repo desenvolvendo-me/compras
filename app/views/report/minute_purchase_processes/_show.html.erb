@@ -153,19 +153,15 @@
   <table class="records">
     <thead>
       <tr>
-        <th>LOTE</th>
-        <th>ITEM</th>
-        <th>VALOR UNITÁRIO</th>
         <th>FORNECEDOR</th>
+        <th>VALOR TOTAL</th>
       </tr>
     </thead>
     <tbody>
-      <% resource.creditor_winner.each do |proposal| %>
+      <% resource.ratifications_items.each do |item| %>
       <tr>
-        <td><%= proposal.lot %></td>
-        <td><%= proposal.item %></td>
-        <td><%= number_to_currency proposal.unit_price %></td>
-        <td><%= proposal.creditor %></td>
+        <td><%= item.creditor %></td>
+        <td><%= number_to_currency item.total_price %></td>
       </tr>
       <% end %>
     </tbody>
