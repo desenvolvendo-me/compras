@@ -92,6 +92,7 @@ class LicitationProcess < Compras::Model
                                 :process_responsibles, :tied_creditor_proposals, allow_destroy: true
 
   delegate :allow_negotiation?, to: :trading, allow_nil: true, prefix: true
+  delegate :issuance_date, to: :judgment_commission_advice, allow_nil: true, prefix: true
   delegate :licitation_kind, :kind, :best_technique?, :technical_and_price?,
            :item?, :lot?, :global?,
            :to => :judgment_form, :allow_nil => true, :prefix => true

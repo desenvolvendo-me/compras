@@ -6,6 +6,18 @@ class MinutePurchaseProcessTradingReport < ActiveRelatus::Base
     records.first
   end
 
+  def issuance_date
+    return if licitation_process.judgment_commission_advice_issuance_date.nil?
+
+    I18n.l licitation_process.judgment_commission_advice_issuance_date
+  end
+
+  def proposal_envelope_opening_date
+    return if licitation_process.proposal_envelope_opening_date.nil?
+
+    I18n.l licitation_process.proposal_envelope_opening_date
+  end
+
   def creditor_accreditations
     licitation_process.creditors
   end

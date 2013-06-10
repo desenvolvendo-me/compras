@@ -1,7 +1,7 @@
 #encoding: utf-8
 require 'spec_helper'
 
-feature 'Report::MinutePurchaseProcesses' do
+feature 'Report::MinutePurchaseProcessTradings' do
   background do
     sign_in
   end
@@ -16,8 +16,8 @@ feature 'Report::MinutePurchaseProcesses' do
 
     click_link 'Imprimir ATA'
 
-    expect(page).to have_content '10/06/2013'
-    expect(page).to have_content '14:00'
+    expect(page).to have_content '09/06/2013'
+    expect(page).to have_content '00:00'
     expect(page).to have_content 'Wenderson Malheiros'
     expect(page).to have_content 'Gabriel Sobrinho'
   end
@@ -30,8 +30,8 @@ feature 'Report::MinutePurchaseProcesses' do
     item = PurchaseProcessItem.make!(:item)
     item_arame = PurchaseProcessItem.make!(:item_arame)
 
-    purchase_process = LicitationProcess.make!(:processo_licitatorio,
-      bidders: [Bidder.make!(:licitante, creditor: creditor_wenderson), Bidder.make!(:licitante_sobrinho, creditor: creditor_sobrinho)],
+    purchase_process = LicitationProcess.make!(:pregao_presencial,
+      purchase_process_accreditation: PurchaseProcessAccreditation.make(:general_accreditation),
       items: [item, item_arame])
 
     PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado,
