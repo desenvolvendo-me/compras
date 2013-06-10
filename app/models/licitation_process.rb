@@ -82,6 +82,7 @@ class LicitationProcess < Compras::Model
   has_many :process_responsibles, :dependent => :restrict
   has_many :trading_items, through: :trading, source: :items, order: :id
   has_many :trading_item_bids, through: :trading_items, source: :bids, order: :id
+  has_many :trading_item_negotiations, through: :trading_items, source: :negotiation, order: :id
 
   has_one :judgment_commission_advice, :dependent => :restrict
   has_one :purchase_process_accreditation, :dependent => :restrict
