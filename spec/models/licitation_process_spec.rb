@@ -630,7 +630,7 @@ describe LicitationProcess do
 
     it 'returns the creditor proposals of the creditor parameter' do
       proposals.
-        should_receive(:by_creditor_id).
+        should_receive(:creditor_id).
         with(creditor.id).and_return(proposals)
 
       proposals.should_receive(:order).with(:id)

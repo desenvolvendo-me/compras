@@ -40,7 +40,7 @@ class PurchaseProcessCreditorProposal < Compras::Model
   orderize
   filterize
 
-  scope :by_creditor_id, lambda { |creditor_id|
+  scope :creditor_id, lambda { |creditor_id|
     where { |proposal| proposal.creditor_id.eq(creditor_id) }
   }
 

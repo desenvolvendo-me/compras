@@ -261,7 +261,7 @@ class LicitationProcess < Compras::Model
   end
 
   def proposals_of_creditor(creditor)
-    creditor_proposals.by_creditor_id(creditor.id).order(:id)
+    creditor_proposals.creditor_id(creditor.id).order(:id)
   end
 
   def proposals_total_price(creditor)
