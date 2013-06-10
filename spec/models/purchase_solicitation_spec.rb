@@ -23,6 +23,7 @@ describe PurchaseSolicitation do
   end
 
   it { should have_and_belong_to_many(:licitation_processes) }
+  it { should have_and_belong_to_many(:price_collections) }
   it { should have_many(:budget_allocations).dependent(:restrict) }
   it { should have_many(:purchase_solicitation_budget_allocations).dependent(:destroy).order(:id) }
   it { should have_many(:items).dependent(:restrict)}

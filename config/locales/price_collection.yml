@@ -25,6 +25,7 @@ pt-BR:
         code_and_year: 'Código/Ano'
         creditor: "Fornecedor"
         creditor_user_email: "Email"
+        purchase_solicitations: "Solicitações de compra"
 
   price_collection:
     messages:

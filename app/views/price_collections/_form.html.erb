@@ -5,6 +5,10 @@
     </li>
 
     <li>
+      <a href="#purchase_solicitations">Solicitações de compras</a>
+    </li>
+
+    <li>
       <a href="#lots">Lotes de itens</a>
     </li>
 
@@ -14,15 +18,19 @@
   </ul>
 
   <div id="main">
-    <%= render 'main', :f => f %>
+    <%= render 'main', f: f %>
+  </div>
+
+  <div id="purchase_solicitations">
+    <%= render 'purchase_solicitations', f: f %>
   </div>
 
   <div id="lots">
-    <%= render 'lots', :f => f %>
+    <%= render 'lots', f: f %>
   </div>
 
   <div id="creditors">
-    <%= render 'creditors', :f => f %>
+    <%= render 'creditors', f: f %>
   </div>
 </div>
 

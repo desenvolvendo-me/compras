@@ -74,6 +74,7 @@ feature "PriceCollections" do
     PaymentMethod.make!(:dinheiro)
     Material.make!(:antivirus)
     Creditor.make!(:wenderson_sa)
+    PurchaseSolicitation.make!(:reparo_liberado, accounting_year: Date.current.year)
 
     navigate 'Processos de Compra > Coletas de Preços'
 
@@ -100,6 +101,22 @@ feature "PriceCollections" do
       select 'ano/anos', :from => 'Período da validade da proposta'
       fill_in 'Objeto', :with => 'objeto da coleta'
       fill_in 'Observações', :with => 'observacoes da coleta'
+    end
+
+     within_tab "Solicitações de compras" do
+      fill_with_autocomplete 'Solicitações de compra', with: '1'
+
+      within_records do
+        expect(page).to have_content 'Código'
+        expect(page).to have_content 'Solicitante'
+        expect(page).to have_content 'Responsável pela solicitação'
+
+        within 'tbody tr' do
+          expect(page).to have_content '1/2013'
+          expect(page).to have_content '1 - Secretaria de Educação'
+          expect(page).to have_content 'Gabriel Sobrinho'
+        end
+      end
     end
 
     within_tab 'Lotes de itens' do
@@ -164,6 +181,20 @@ feature "PriceCollections" do
       expect(page).to have_select 'Período da validade da proposta', :selected => 'ano/anos'
       expect(page).to have_field 'Objeto', :with => 'objeto da coleta'
       expect(page).to have_field 'Observações', :with => 'observacoes da coleta'
+    end
+
+    within_tab "Solicitações de compras" do
+      within_records do
+        expect(page).to have_content 'Código'
+        expect(page).to have_content 'Solicitante'
+        expect(page).to have_content 'Responsável pela solicitação'
+
+        within 'tbody tr' do
+          expect(page).to have_content '1/2013'
+          expect(page).to have_content '1 - Secretaria de Educação'
+          expect(page).to have_content 'Gabriel Sobrinho'
+        end
+      end
     end
 
     within_tab 'Lotes de itens' do

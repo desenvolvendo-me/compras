@@ -31,6 +31,8 @@ class PurchaseSolicitation < Compras::Model
 
   has_one  :annul, :class_name => 'ResourceAnnul', :as => :annullable, :dependent => :destroy
 
+  has_and_belongs_to_many :price_collections, join_table: :compras_price_collections_purchase_solicitations
+
   accepts_nested_attributes_for :purchase_solicitation_budget_allocations, :allow_destroy => true
   accepts_nested_attributes_for :items, :allow_destroy => true
 

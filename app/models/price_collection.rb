@@ -3,7 +3,7 @@ class PriceCollection < Compras::Model
                   :payment_method_id, :object_description, :observations,
                   :expiration, :period, :period_unit, :proposal_validity,
                   :proposal_validity_unit, :price_collection_lots_attributes,
-                  :creditor_ids, :type_of_calculation,
+                  :creditor_ids, :type_of_calculation, :purchase_solicitation_ids,
                   :price_collection_proposals_attributes
 
   attr_readonly :year, :code
@@ -31,6 +31,8 @@ class PriceCollection < Compras::Model
   has_many :price_collection_proposals, :dependent => :destroy, :order => :id
 
   has_one  :annul, :class_name => 'PriceCollectionAnnul'
+
+  has_and_belongs_to_many :purchase_solicitations, join_table: :compras_price_collections_purchase_solicitations
 
   delegate :creditor, :total_price, :to => :winner_proposal, :allow_nil => true, :prefix => true
 
