@@ -43,7 +43,7 @@ module TceExport::MG
       end
 
       def budget_structure_code(budget)
-        return nil unless budget
+        return unless budget
 
         Formatters::BudgetStructureCodeFormatter.new(monthly_monitoring.organ_code, budget)
       end
@@ -138,7 +138,7 @@ module TceExport::MG
       end
 
       def budget_structure_code(budget)
-        return nil unless budget
+        return unless budget
 
         Formatters::BudgetStructureCodeFormatter.new(monthly_monitoring.organ_code, budget)
       end
