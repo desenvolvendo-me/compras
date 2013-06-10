@@ -25,13 +25,13 @@
 <table class="records">
   <thead>
     <tr>
-      <th><input type="checkbox" id="checkAll"/></th>
-      <th><%= Material.human_attribute_name :code %></th>
+      <th class="center"><input type="checkbox" id="checkAll"/></th>
+      <th class="right"><%= Material.human_attribute_name :code %></th>
       <th><%= Material.human_attribute_name :description %></th>
-      <th><%= Material.human_attribute_name :reference_unit %></th>
-      <th><%= BidderProposal.human_attribute_name :quantity %></th>
-      <th><%= BidderProposal.human_attribute_name :unit_price %></th>
-      <th><%= BidderProposal.human_attribute_name :total_price %></th>
+      <th class="right"><%= Material.human_attribute_name :reference_unit %></th>
+      <th class="right"><%= BidderProposal.human_attribute_name :quantity %></th>
+      <th class="right"><%= BidderProposal.human_attribute_name :unit_price %></th>
+      <th class="right"><%= BidderProposal.human_attribute_name :total_price %></th>
     </tr>
   </thead>
 
