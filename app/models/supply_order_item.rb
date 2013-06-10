@@ -31,11 +31,11 @@ class SupplyOrderItem < Compras::Model
 
   def authorization_quantity_should_be_lower_than_quantity
     if real_authorization_quantity > supply_order_item_balance
-      errors.add(:authorization_quantity, :less_than_or_equal_to, count: supply_order_item_balance + authorization_quantity_was )
+      errors.add(:authorization_quantity, :less_than_or_equal_to, count: (supply_order_item_balance || 0) + authorization_quantity_was )
     end
   end
 
   def real_authorization_quantity
-    (authorization_quantity || 0) - (authorization_quantity_was || 0)
+    (authorization_quantity || 0) - authorization_quantity_was
   end
 end
