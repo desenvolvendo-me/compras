@@ -32,7 +32,7 @@ class PurchaseProcessItem < Compras::Model
   scope :lots, lambda { pluck(:lot).uniq }
 
   scope :licitation_process_id, lambda { |licitation_process_id|
-    where(:licitation_process_id => licitation_process_id)
+    where { |item| item.licitation_process_id.eq(licitation_process_id) }
   }
 
   def to_s
