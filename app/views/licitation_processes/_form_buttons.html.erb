@@ -40,7 +40,8 @@
 
         <% if f.object.trading.present? %>
           <%= link_to('Negociação', list_purchase_process_trading_negotiation_path(resource.trading),
-            class: 'button primary', 'data-disabled' => f.object.decorator.disabled_negotiation_message) %>
+            class: "button primary #{f.object.decorator.has_records_class([f.object.trading_item_negotiations])}",
+            'data-disabled' => f.object.decorator.disabled_negotiation_message) %>
         <% end %>
 
         <%= link_to('Habilitação', bidders_path(:licitation_process_id => resource.id),
