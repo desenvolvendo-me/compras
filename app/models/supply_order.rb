@@ -5,7 +5,7 @@ class SupplyOrder < Compras::Model
   belongs_to :licitation_process
   belongs_to :creditor
 
-  has_many :items, class_name: 'SupplyOrderItem'
+  has_many :items, class_name: 'SupplyOrderItem', dependent: :destroy
 
   accepts_nested_attributes_for :items, allow_destroy: true
 
