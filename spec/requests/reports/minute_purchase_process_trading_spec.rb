@@ -16,7 +16,7 @@ feature 'Report::MinutePurchaseProcessTradings' do
 
     click_link 'Imprimir ATA'
 
-    expect(page).to have_content '09/06/2013'
+    expect(page).to have_content I18n.l(Date.current)
     expect(page).to have_content '00:00'
     expect(page).to have_content 'Wenderson Malheiros'
     expect(page).to have_content 'Gabriel Sobrinho'
