@@ -18,6 +18,12 @@ class MinutePurchaseProcessTradingReport < ActiveRelatus::Base
     I18n.l licitation_process.proposal_envelope_opening_date
   end
 
+  def proposal_envelope_opening_time
+    return if licitation_process.proposal_envelope_opening_time.nil?
+
+    I18n.l licitation_process.proposal_envelope_opening_time, format: :hour
+  end
+
   def creditor_accreditations
     licitation_process.creditors
   end
