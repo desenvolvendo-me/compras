@@ -1,9 +1,9 @@
 builder resource, json do
+  json.id             resource.id
   json.email          resource.email
   json.person_email   resource.person_email
   json.login          resource.login
   json.modal_info_url modal_info_link(resource)
-  json.id                   resource.id
 
   json.proposals resource.purchase_process_creditor_proposals.where { licitation_process_id.eq( my{ params[:enabled_by_licitation] }) } do |proposal|
     json.purchase_process_creditor_proposal_id proposal.id
