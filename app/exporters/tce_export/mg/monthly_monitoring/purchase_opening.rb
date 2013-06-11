@@ -228,10 +228,7 @@ module TceExport::MG
       end
 
       def object_type_nature(purchase)
-        return 3 if purchase.call_notice?
-        return 2 if purchase.price_registration?
-
-        1
+        purchase.price_registration? ? 2 : 1
       end
 
       def publication_edital_official_date(purchase)
