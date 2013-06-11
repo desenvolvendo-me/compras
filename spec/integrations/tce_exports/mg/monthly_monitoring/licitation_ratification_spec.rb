@@ -71,9 +71,9 @@ describe TceExport::MG::MonthlyMonitoring::LicitationRatificationGenerator do
 
       csv = File.read('tmp/HOMOLIC.csv', encoding: 'ISO-8859-1')
 
-      reg_10_1 = "10;98;98029;2012;1;1;00315198737;2050;#{arame_farpado_id};02.02.00001 - Arame farpado;1,0000;4,9900"
+      reg_10_1 = "10;98;98029;2012;1;1;00315198737;2050;#{arame_farpado_id};Arame farpado;1,0000;4,9900"
       reg_30_1 = "30;98;98029;2012;1;#{current_date};#{current_date}"
-      reg_10_2 = "10;98;98029;2012;1;1;00315198737;2050;#{arame_comum_id};02.02.00002 - Arame comum;1,0000;2,9900"
+      reg_10_2 = "10;98;98029;2012;1;1;00315198737;2050;#{arame_comum_id};Arame comum;1,0000;2,9900"
       reg_30_2 = "30;98;98029;2012;1;#{current_date};#{current_date}"
 
       expect(csv).to eq [reg_10_1, reg_30_1, reg_10_2, reg_30_2].join("\n")

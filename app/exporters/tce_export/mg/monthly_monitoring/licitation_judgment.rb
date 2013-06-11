@@ -13,7 +13,7 @@ module TceExport::MG
             nro_documento: only_numbers(proposal.creditor_identity_document),
             nro_lote: proposal.lot,
             nro_item: proposal.item.id,
-            dsc_produto_servico: proposal.item.to_s,
+            dsc_produto_servico: proposal.item.description,
             vl_unitario: vl_unitario(proposal),
             quantidade: quantidade(proposal.item),
             unidade: proposal.material_reference_unit,
