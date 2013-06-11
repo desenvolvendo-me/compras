@@ -28,6 +28,10 @@ class SupplyOrderItem < Compras::Model
   orderize "id DESC"
   filterize
 
+  def quantity
+    licitation_process_ratification_item_quantity || 0
+  end
+
   private
 
   def authorization_quantity_should_be_lower_than_quantity
@@ -46,10 +50,6 @@ class SupplyOrderItem < Compras::Model
 
   def supply_order_item_balance
     licitation_process_ratification_item_supply_order_item_balance || 0
-  end
-
-  def quantity
-    licitation_process_ratification_item_quantity || 0
   end
 
   def real_authorization_quantity
