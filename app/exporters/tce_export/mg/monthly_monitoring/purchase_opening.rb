@@ -74,7 +74,7 @@ module TceExport::MG
             nro_lote: item.lot,
             nro_item: item.id,
             dt_cotacao: purchase.process_date,
-            dsc_item: item.material.to_s,
+            dsc_item: item.material.description,
             vl_cot_precos_unitario: item.unit_price,
             quantidade: item.quantity,
             unidade: item.reference_unit,
