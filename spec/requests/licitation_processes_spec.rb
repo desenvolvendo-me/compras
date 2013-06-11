@@ -1214,7 +1214,14 @@ feature "LicitationProcesses" do
 
       expect(page).to have_field 'Registro de preço'
       expect(page).to have_field 'Pregão eletrônico'
+    end
 
+    within_tab 'Prazos' do
+      expect(page).to have_field 'Abertura das propostas'
+      expect(page).to have_field 'Hora da abertura'
+    end
+
+    within_tab 'Principal' do
       select '', :from => 'Modalidade'
     end
 
