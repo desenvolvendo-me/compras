@@ -5,15 +5,17 @@ class SupplyOrderItem < Compras::Model
   belongs_to :supply_order
   belongs_to :licitation_process_ratification_item
 
-  delegate  :material, :reference_unit, :unit_price, :total_price,
-    to: :licitation_process_ratification_item, allow_nil: true
-  delegate :supply_order_item_balance, :quantity,
-    to: :licitation_process_ratification_item, allow_nil: true, prefix: true
+  delegate :material, :reference_unit, :unit_price, :total_price,
+    :supply_order_item_balance, to: :licitation_process_ratification_item, allow_nil: true
 
   def authorized_quantity
     SupplyOrderItem.where { |query|
       query.licitation_process_ratification_item_id.eq(licitation_process_ratification_item_id)
     }.sum(:authorization_quantity) || 0
+  end
+
+  def quantity
+    licitation_process_ratification_item.try(:quantity).to_i
   end
 
   def balance
@@ -25,34 +27,15 @@ class SupplyOrderItem < Compras::Model
 
   validate :authorization_quantity_should_be_lower_than_quantity
 
-  orderize "id DESC"
-  filterize
-
-  def quantity
-    licitation_process_ratification_item_quantity || 0
-  end
-
   private
 
   def authorization_quantity_should_be_lower_than_quantity
-    if real_authorization_quantity > supply_order_item_balance
-      errors.add(:authorization_quantity, :less_than_or_equal_to, count: supply_order_item_balance + authorization_quantity_was )
+    if real_authorization_quantity > supply_order_item_balance.to_i
+      errors.add(:authorization_quantity, :less_than_or_equal_to, count: supply_order_item_balance.to_i + authorization_quantity_was.to_i)
     end
   end
 
-  def authorization_quantity_was
-    super || 0
-  end
-
-  def authorization_quantity
-    super || 0
-  end
-
-  def supply_order_item_balance
-    licitation_process_ratification_item_supply_order_item_balance || 0
-  end
-
   def real_authorization_quantity
-    authorization_quantity - authorization_quantity_was
+    authorization_quantity.to_i - authorization_quantity_was.to_i
   end
 end
