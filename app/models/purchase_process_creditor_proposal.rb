@@ -35,6 +35,7 @@ class PurchaseProcessCreditorProposal < Compras::Model
 
   validate :unit_price_is_lower_than_best_proposal, if: :benefited_tied?
 
+  before_update :reset_old_unit_price, if: :should_reset_old_unit_price?
   after_save :update_ranking, unless: :ranking_changed?
 
   orderize :id
@@ -191,5 +192,13 @@ class PurchaseProcessCreditorProposal < Compras::Model
 
   def available_for_benefit?
     unit_price && tied? && creditor && creditor.benefited
+  end
+
+  def should_reset_old_unit_price?
+    !old_unit_price_changed? && unit_price_changed?
+  end
+
+  def reset_old_unit_price
+    write_attribute :old_unit_price, nil
   end
 end

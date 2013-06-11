@@ -165,6 +165,30 @@ describe PurchaseProcessCreditorProposal do
     end
   end
 
+  describe '#reset_old_unit_price' do
+    before do
+      subject.stub(:should_reset_old_unit_price?).and_return true
+    end
+
+    it 'sets the old_unit_price to nil when updating' do
+      subject.should_receive(:write_attribute).with(:old_unit_price, nil)
+      subject.run_callbacks(:update)
+    end
+  end
+
+  describe 'should_reset_old_unit_price?' do
+    context "there is no update of old_unit_price and there is a update of unit_price" do
+      before do
+        subject.stub(:old_unit_price_changed?).and_return false
+        subject.stub(:unit_price_changed?).and_return true
+      end
+
+      it 'returns true' do
+        expect(subject.send(:should_reset_old_unit_price?)).to be_true
+      end
+    end
+  end
+
   describe '#benefited_tied?' do
     before { subject.stub(:creditor).and_return creditor }
 
