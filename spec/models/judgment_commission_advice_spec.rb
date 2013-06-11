@@ -14,14 +14,6 @@ describe JudgmentCommissionAdvice do
   it { should validate_presence_of :licitation_process }
   it { should validate_presence_of :licitation_commission }
   it { should validate_presence_of :year }
-  it { should validate_presence_of :judgment_start_date }
-  it { should validate_presence_of :judgment_start_time }
-  it { should validate_presence_of :judgment_end_date }
-  it { should validate_presence_of :judgment_end_time }
-  it { should validate_presence_of :companies_minutes }
-  it { should validate_presence_of :companies_documentation_minutes }
-  it { should validate_presence_of :justification_minutes }
-  it { should validate_presence_of :judgment_minutes }
   it { should validate_duplication_of(:individual_id).on(:judgment_commission_advice_members) }
 
   it { should allow_value('2012').for(:year) }
@@ -32,6 +24,21 @@ describe JudgmentCommissionAdvice do
     subject.year = 2012
 
     expect(subject.to_s).to eq '1/2012'
+  end
+
+  context 'licitation_process is licitation' do
+    before do
+      subject.stub(:licitation_process_licitation?).and_return true
+    end
+
+    it { should validate_presence_of :judgment_start_date }
+    it { should validate_presence_of :judgment_start_time }
+    it { should validate_presence_of :judgment_end_date }
+    it { should validate_presence_of :judgment_end_time }
+    it { should validate_presence_of :companies_minutes }
+    it { should validate_presence_of :companies_documentation_minutes }
+    it { should validate_presence_of :justification_minutes }
+    it { should validate_presence_of :judgment_minutes }
   end
 
   context "inherited and not inherited members" do

@@ -13,15 +13,16 @@ class JudgmentCommissionAdvice < Compras::Model
 
   accepts_nested_attributes_for :judgment_commission_advice_members, :allow_destroy => true
 
-  delegate :modality_humanize, :to => :licitation_process, :allow_nil => true, :prefix => true
+  delegate :modality_humanize, :licitation?, :direct_purchase?, :to => :licitation_process, :allow_nil => true, :prefix => true
   delegate :president_name, :to => :licitation_commission, :allow_nil => true, :prefix => true
   delegate :licitation_commission_members, :to => :licitation_commission, :allow_nil => true
 
   validates :licitation_process, :licitation_commission, :year, :minutes_number, :presence => true
   validates :year, :mask => "9999"
-  validates :judgment_start_date, :judgment_start_time, :judgment_end_date, :presence => true
-  validates :judgment_end_time, :companies_minutes, :companies_documentation_minutes, :presence => true
-  validates :justification_minutes, :judgment_minutes, :presence => true
+  validates :judgment_start_date, :judgment_start_time, :judgment_end_date, :presence => true, if: :licitation_process_licitation?
+  validates :judgment_end_time, :companies_minutes, :companies_documentation_minutes,
+            :presence => true, if: :licitation_process_licitation?
+  validates :justification_minutes, :judgment_minutes, :presence => true, if: :licitation_process_licitation?
   validates :judgment_commission_advice_members, :no_duplication => :individual_id
 
   validate :start_date_time_should_not_be_greater_than_end_date_time
