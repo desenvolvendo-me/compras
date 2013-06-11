@@ -18,6 +18,7 @@ describe PriceCollection do
     it { should have_many(:creditors).through(:price_collection_proposals) }
     it { should have_many(:items).through(:price_collection_lots) }
     it { should have_many(:price_collection_classifications).dependent(:destroy) }
+    it { should have_and_belong_to_many(:purchase_solicitations) }
   end
 
   context 'validations' do
