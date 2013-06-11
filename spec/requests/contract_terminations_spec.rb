@@ -13,7 +13,7 @@ feature 'ContractTerminations' do
     Contract.make!(:primeiro_contrato)
     DisseminationSource.make!(:jornal_bairro)
 
-    navigate 'Comum > Cadastrais > Contratos'
+    navigate 'Instrumentos Contratuais > Contratos'
 
     click_link "Limpar Filtro"
 
@@ -89,7 +89,7 @@ feature 'ContractTerminations' do
   scenario 'contract termination annulled should have fields disabled' do
     ResourceAnnul.make!(:rescisao_de_contrato_anulada)
 
-    navigate 'Comum > Cadastrais > Contratos'
+    navigate 'Instrumentos Contratuais > Contratos'
 
     click_link "Limpar Filtro"
 
