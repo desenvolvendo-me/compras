@@ -163,7 +163,7 @@ module TceExport::MG
       end
 
       def discount_on_table(purchase)
-        purchase.judgment_form.higher_discount_on_table? ? 1 : 2
+        purchase.judgment_form_higher_discount_on_table? ? 1 : 2
 
       end
 
@@ -200,15 +200,15 @@ module TceExport::MG
       def licitation_kind(purchase)
         return unless purchase.judgment_form
 
-        if purchase.judgment_form.lowest_price? || purchase.judgment_form.higher_discount_on_lot? ||
-          purchase.judgment_form.higher_discount_on_item? || purchase.judgment_form.higher_discount_on_table?
+        if purchase.judgment_form_lowest_price? || purchase.judgment_form_higher_discount_on_lot? ||
+          purchase.judgment_form_higher_discount_on_item? || purchase.judgment_form_higher_discount_on_table?
 
           return 1
         end
 
-        return 2 if purchase.judgment_form.best_technique?
-        return 3 if purchase.judgment_form.technical_and_price?
-        return 4 if purchase.judgment_form.best_auction_or_offer?
+        return 2 if purchase.judgment_form_best_technique?
+        return 3 if purchase.judgment_form_technical_and_price?
+        return 4 if purchase.judgment_form_best_auction_or_offer?
       end
 
       def object_type(purchase)
