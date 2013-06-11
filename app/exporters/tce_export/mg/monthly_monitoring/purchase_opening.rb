@@ -198,6 +198,8 @@ module TceExport::MG
       end
 
       def licitation_kind(purchase)
+        return unless purchase.judgment_form
+
         if purchase.judgment_form.lowest_price? || purchase.judgment_form.higher_discount_on_lot? ||
           purchase.judgment_form.higher_discount_on_item? || purchase.judgment_form.higher_discount_on_table?
 
