@@ -47,6 +47,8 @@ class MinutePurchaseProcessTradingReport < ActiveRelatus::Base
   end
 
   def member
+    return if licitation_commission.licitation_commission_members.empty?
+
     licitation_commission.licitation_commission_members.first
   end
 
