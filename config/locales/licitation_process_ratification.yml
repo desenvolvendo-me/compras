@@ -12,3 +12,7 @@ pt-BR:
         ratification_date: "Data de homologação"
         adjudication_date: "Data de adjudicação"
         sequence: "Sequência"
+
+  licitation_process_ratification:
+    messages:
+      cant_save_without_responsibles: "Primeiro crie responsáveis do processo"

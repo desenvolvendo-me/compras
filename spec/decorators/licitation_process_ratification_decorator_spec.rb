@@ -32,4 +32,33 @@ describe LicitationProcessRatificationDecorator do
 
     expect(subject.proposals_total_value).to eq "5.480,90"
   end
+
+  describe '#save_disabled_message' do
+    before do
+      I18n.backend.store_translations 'pt-BR',
+        licitation_process_ratification: {
+          messages: { cant_save_without_responsibles: 'cant save without responsibles' }
+        }
+    end
+
+    context 'process responsibles are empty' do
+      before do
+        component.stub(:process_responsibles).and_return []
+      end
+
+      it 'returns a cannot save message' do
+        expect(subject.save_disabled_message).to eql 'cant save without responsibles'
+      end
+    end
+
+    context 'process responsibles arent empty' do
+      let(:process_responsible) { double(:process_responsible) }
+
+      before { component.stub(:process_responsibles).and_return [process_responsible] }
+
+      it 'returns nil' do
+        expect(subject.save_disabled_message).to be_nil
+      end
+    end
+  end
 end

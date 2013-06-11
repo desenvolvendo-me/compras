@@ -16,6 +16,9 @@ feature "LicitationProcessRatifications" do
     PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado, licitation_process: licitation, ranking: 1)
     PurchaseProcessCreditorProposal.make!(:proposta_arame, licitation_process: licitation, ranking: 1)
 
+    FactoryGirl.create(:process_responsible, licitation_process: licitation,
+      stage_process: StageProcess.make(:emissao_edital))
+
     navigate 'Processos de Compra > Processos de Compras'
 
     within_records do
@@ -99,6 +102,10 @@ feature "LicitationProcessRatifications" do
     PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado, licitation_process: licitation, ranking: 1)
     PurchaseProcessCreditorProposal.make!(:proposta_arame, licitation_process: licitation, ranking: 1)
     Bidder.make!(:licitante_sobrinho, licitation_process: licitation, creditor: creditor, enabled: true)
+
+    FactoryGirl.create(:process_responsible, licitation_process: licitation,
+      stage_process: StageProcess.make(:emissao_edital))
+
     navigate 'Processos de Compra > Processos de Compras'
 
     within_records do
@@ -276,6 +283,33 @@ feature "LicitationProcessRatifications" do
 
       expect(page).to_not have_link 'Novo'
     end
+  end
+
+  scenario 'cant create a ratification if dont have any process_responsibles' do
+    licitation = LicitationProcess.make!(:processo_licitatorio_computador,
+      judgment_form: JudgmentForm.make!(:por_item_com_menor_preco),
+      bidders:[Bidder.make!(:licitante_sobrinho, enabled: true)],
+      items: [PurchaseProcessItem.make!(:item_arame_farpado),
+        PurchaseProcessItem.make!(:item_arame)])
+
+    PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado, licitation_process: licitation, ranking: 1)
+    PurchaseProcessCreditorProposal.make!(:proposta_arame, licitation_process: licitation, ranking: 1)
+
+    navigate 'Processos de Compra > Processos de Compras'
+
+    within_records do
+      click_link '2/2013'
+    end
+
+    click_link 'Adjudicação/Homologação'
+    click_link 'Criar Homologação e Adjudicação de Processo de Compra'
+
+    expect(page).to have_disabled_element 'Salvar', reason: 'Primeiro crie responsáveis do processo'
+    expect(page).to have_link "Criar Responsáveis do processo"
+
+    click_link "Criar Responsáveis do processo"
+
+    expect(page).to have_title "Editar responsável do Processo de Compras"
   end
 
   def bidder_checkbok_html_name(number)
