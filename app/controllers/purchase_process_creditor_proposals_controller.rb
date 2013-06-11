@@ -2,6 +2,9 @@
 class PurchaseProcessCreditorProposalsController < CrudController
   custom_actions collection: [:creditors, :batch_edit, :batch_update]
 
+  has_scope :licitation_process_id, allow_blank: true
+  has_scope :creditor_id, allow_blank: true
+
   before_filter :load_licitation_process
   before_filter :load_path_generator
   before_filter :load_creditor, only: [:new, :batch_edit]
