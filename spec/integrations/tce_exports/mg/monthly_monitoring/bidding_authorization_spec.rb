@@ -19,9 +19,18 @@ describe TceExport::MG::MonthlyMonitoring::BiddingAuthorizationGenerator do
       Bidder.make!(:licitante, creditor: creditor)
     end
 
+    let :bidder_two do
+      Bidder.make!(:licitante_sobrinho, creditor: creditor)
+    end
+
     let :licitation_process do
       licitation_process = LicitationProcess.make!(:processo_licitatorio_computador,
         bidders: [bidder])
+    end
+
+    let :licitation_process_two do
+      licitation_process_two = LicitationProcess.make!(:processo_licitatorio,
+        bidders: [bidder_two])
     end
 
     it "generates a CSV file with the required data" do
@@ -36,6 +45,8 @@ describe TceExport::MG::MonthlyMonitoring::BiddingAuthorizationGenerator do
           CustomizationData.make(:string, data: 'Data do registro CVM')
       ])
 
+      JudgmentCommissionAdvice.make!(:parecer, licitation_process: licitation_process_two)
+
       PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado,
         licitation_process: licitation_process, ranking: 1, creditor: creditor)
 
@@ -44,8 +55,15 @@ describe TceExport::MG::MonthlyMonitoring::BiddingAuthorizationGenerator do
         licitation_process: licitation_process,
         creditor: bidder.creditor)
 
+      ratification_two = LicitationProcessRatification.make!(:processo_licitatorio_computador,
+        ratification_date: Date.new(2013, 5, 20),
+        licitation_process: licitation_process_two,
+        creditor: bidder_two.creditor)
+
       bidder.activate!
+      bidder_two.activate!
       bidder.update_column :habilitation_date, Date.new(2013, 5, 20)
+      bidder_two.update_column :habilitation_date, Date.new(2013, 5, 20)
 
       Partner.destroy_all
 
@@ -66,7 +84,9 @@ describe TceExport::MG::MonthlyMonitoring::BiddingAuthorizationGenerator do
       csv = File.read('tmp/HABLIC.csv', encoding: 'ISO-8859-1')
 
       expect(csv).to eq "10;98;98029;2013;2;2;00000000999962;Nohup; ; ;29062011;099901; ; ; ;PR; ; ; ; ; ; ; ; ; ;20052013;2;2\n" +
-                        "11;98;98029;2013;2;6;00000000999962;1;27056534147;Pedro dos Santos;1"
+                        "11;98;98029;2013;2;6;00000000999962;1;27056534147;Pedro dos Santos;1\n"+
+                        "10;98;98029;2012;1;2;00000000999962;Nohup; ; ;29062011;099901; ; ; ;PR; ; ; ; ; ; ; ; ; ;20052013;2;2\n" +
+                        "11;98;98029;2012;1;6;00000000999962;1;27056534147;Pedro dos Santos;1"
     end
   end
 end
