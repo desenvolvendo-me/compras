@@ -34,4 +34,23 @@ describe Creditor do
       expect(Creditor.winner_without_disqualifications).to eq [creditor_sobrinho]
     end
   end
+
+  describe '.enabled_or_benefited' do
+    it 'should list only creditors benefited or enabled' do
+      ibm       = Creditor.make!(:ibm)
+      wenderson = Creditor.make!(:wenderson_sa)
+      nobe      = Creditor.make!(:nobe)
+      nohup     = Creditor.make!(:nohup)
+      licitation_process = LicitationProcess.make!(:processo_licitatorio_canetas,
+        bidders: [
+          Bidder.make!(:licitante, creditor: wenderson, proposals: [], documents: [], enabled: true),
+          Bidder.make!(:licitante_sobrinho, creditor: ibm, proposals: [], documents: [], enabled: false),
+          Bidder.make!(:me_pregao, creditor: nobe, proposals: [], documents: [], enabled: true),
+          Bidder.make!(:me_pregao, creditor: nohup, proposals: [], documents: [], enabled: false)
+        ])
+
+      expect(described_class.enabled_or_benefited).to include(wenderson, nobe, nohup)
+      expect(described_class.enabled_or_benefited).to_not include(ibm)
+    end
+  end
 end

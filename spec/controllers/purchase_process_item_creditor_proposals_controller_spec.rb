@@ -93,7 +93,7 @@ describe PurchaseProcessItemCreditorProposalsController do
     let(:licitation_process) { LicitationProcess.new }
 
     it 'renders the creditors template' do
-      licitation_process.should_receive(:creditors).and_return creditors
+      licitation_process.should_receive(:creditors_enabled).and_return(creditors)
       creditors.should_receive(:includes).with(:purchase_process_creditor_proposals)
 
       get :creditors
