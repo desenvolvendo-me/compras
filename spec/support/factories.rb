@@ -4,6 +4,7 @@ FactoryGirl.define do
     name { 'Test' }
     domain { '127.0.0.1' }
     database { Customer.connection_config }
+    secret_token '1234'
   end
 
   factory :country do

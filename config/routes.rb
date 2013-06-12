@@ -757,4 +757,8 @@ Compras::Application.routes.draw do
     match 'minute_purchase_process_tradings/:licitation_process_id' => 'minute_purchase_process_tradings#show',
       as: :minute_purchase_process_tradings
   end
+
+  namespace :api do
+    resources :material_classes, :only => [:index, :show]
+  end
 end
