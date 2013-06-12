@@ -423,6 +423,8 @@ Compras::Application.routes.draw do
     end
   end
 
+  resources :licitation_process_ratification_items, only: :index
+
   resources :licitation_processes, :except => :destroy do
     collection do
       get :filter
