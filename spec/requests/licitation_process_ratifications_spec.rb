@@ -313,6 +313,160 @@ feature "LicitationProcessRatifications" do
     expect(page).to have_title "Editar responsável do Processo de Compras"
   end
 
+  scenario 'creating and updating ratification for trading' do
+    creditor_sobrinho = Creditor.make!(:sobrinho_sa)
+    creditor_nohup    = Creditor.make!(:nohup)
+
+    item_arame_farpado = PurchaseProcessItem.make!(:item_arame_farpado)
+    item_arame         = PurchaseProcessItem.make!(:item_arame)
+
+    licitation = LicitationProcess.make!(:pregao_presencial,
+      bidders: [],
+      items: [item_arame_farpado, item_arame])
+
+    accreditation_sobrinho = PurchaseProcessAccreditationCreditor.make(:sobrinho_creditor,
+      creditor: creditor_sobrinho)
+
+    accreditation_nohup = PurchaseProcessAccreditationCreditor.make(:wenderson_creditor,
+      creditor: creditor_nohup)
+
+    accreditation = PurchaseProcessAccreditation.make!(:general_accreditation,
+      licitation_process: licitation,
+      purchase_process_accreditation_creditors: [accreditation_sobrinho, accreditation_nohup])
+
+    PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado,
+        licitation_process: licitation, creditor: creditor_sobrinho,
+        item: item_arame_farpado, unit_price: 3.00)
+
+    PurchaseProcessCreditorProposal.make!(:proposta_arame,
+        licitation_process: licitation, creditor: creditor_sobrinho,
+        item: item_arame, unit_price: 15.00)
+
+    PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado,
+        licitation_process: licitation, creditor: creditor_nohup,
+        item: item_arame_farpado, unit_price: 9.00)
+
+    PurchaseProcessCreditorProposal.make!(:proposta_arame,
+        licitation_process: licitation, creditor: creditor_nohup,
+        item: item_arame, unit_price: 5.00)
+
+    trading = PurchaseProcessTrading.create!(purchase_process_id: licitation.id)
+
+    trading_item_arame_farpado = PurchaseProcessTradingItem.create!(trading_id: trading.id,
+      item_id: item_arame_farpado.id)
+
+    trading_item_arame = PurchaseProcessTradingItem.create!(trading_id: trading.id,
+      item_id: item_arame.id)
+
+    accreditation_sobrinho = accreditation.purchase_process_accreditation_creditors.first
+    accreditation_nohup    = accreditation.purchase_process_accreditation_creditors.last
+
+    PurchaseProcessTradingItemBid.create!(item_id: trading_item_arame_farpado.id,
+      purchase_process_accreditation_creditor_id: accreditation_nohup.id,
+      amount: 0, round: 1, number: 1, status: TradingItemBidStatus::DECLINED)
+
+    PurchaseProcessTradingItemBid.create!(item_id: trading_item_arame.id,
+      purchase_process_accreditation_creditor_id: accreditation_sobrinho.id,
+      amount: 0, round: 1, number: 1, status: TradingItemBidStatus::DECLINED)
+
+    trading_item_arame_farpado.close!
+    trading_item_arame.close!
+
+    Bidder.make!(:licitante, creditor: creditor_sobrinho, enabled: true,
+      licitation_process: licitation)
+    Bidder.make!(:licitante, creditor: creditor_nohup, enabled: true,
+      licitation_process: licitation)
+
+    JudgmentCommissionAdvice.make!(:parecer, licitation_process: licitation)
+
+    FactoryGirl.create(:process_responsible, licitation_process: licitation,
+      stage_process: StageProcess.make(:emissao_edital))
+
+    navigate 'Processos de Compra > Processos de Compras'
+
+    click_link 'Limpar Filtro'
+
+    within_records do
+      click_link '1/2012'
+    end
+
+    click_link 'Adjudicação/Homologação'
+    click_link 'Criar Homologação e Adjudicação de Processo de Compra'
+
+    expect(page).to have_disabled_field 'Processo de compra'
+
+    within_modal 'Participante vencedor' do
+      click_button 'Pesquisar'
+
+      within_records do
+        expect(page).to have_content 'Gabriel Sobrinho'
+        expect(page).to have_content 'Nohup'
+      end
+
+      click_link 'Voltar'
+    end
+
+    within_modal 'Participante vencedor' do
+      click_button 'Pesquisar'
+      click_record 'Gabriel Sobrinho'
+    end
+
+    expect(page).to have_content '02.02.00001'
+    expect(page).to have_content 'Arame farpado'
+    expect(page).to have_content 'UN'
+    expect(page).to have_content '2'
+    expect(page).to have_content '3,00'
+    expect(page).to have_content '6,00'
+
+    check 'checkAll'
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Homologação e Adjudicação de Processo de Compra criada com sucesso.'
+
+    click_link 'Criar Homologação e Adjudicação de Processo de Compra'
+
+     within_modal 'Participante vencedor' do
+      click_button 'Pesquisar'
+
+      within_records do
+        expect(page).to_not have_content 'Gabriel Sobrinho'
+        expect(page).to have_content 'Nohup'
+      end
+
+      click_link 'Voltar'
+    end
+
+    within_modal 'Participante vencedor' do
+      click_button 'Pesquisar'
+      click_record 'Nohup'
+    end
+
+    expect(page).to have_content '02.02.00002'
+    expect(page).to have_content 'Arame comum'
+    expect(page).to have_content 'UN'
+    expect(page).to have_content '1'
+    expect(page).to have_content '5,00'
+    expect(page).to have_content '5,00'
+
+    check 'checkAll'
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Homologação e Adjudicação de Processo de Compra criada com sucesso.'
+
+    click_link 'Criar Homologação e Adjudicação de Processo de Compra'
+
+    within_modal 'Participante vencedor' do
+      click_button 'Pesquisar'
+
+      within_records do
+        expect(page).to_not have_content 'Gabriel Sobrinho'
+        expect(page).to_not have_content 'Nohup'
+      end
+    end
+  end
+
   def bidder_checkbok_html_name(number)
     "licitation_process_ratification[licitation_process_ratification_items_attributes][#{number}][ratificated]"
   end

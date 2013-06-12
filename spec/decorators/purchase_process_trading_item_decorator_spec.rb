@@ -131,4 +131,29 @@ describe PurchaseProcessTradingItemDecorator do
       end
     end
   end
+
+  describe '#total_price' do
+    context 'when lowest_proposal is nil' do
+      before do
+        component.stub(lowest_proposal: nil)
+      end
+
+      it 'returns "-"' do
+        expect(subject.total_price).to eq '-'
+      end
+    end
+
+    context 'when lowest_proposal is not nil' do
+      let(:proposal) { double(:proposal, unit_price: 10) }
+
+      before do
+        component.stub(quantity: 5)
+        component.stub(lowest_proposal: proposal)
+      end
+
+      it "returns proposal's total_price" do
+        expect(subject.total_price).to eq '50,00'
+      end
+    end
+  end
 end

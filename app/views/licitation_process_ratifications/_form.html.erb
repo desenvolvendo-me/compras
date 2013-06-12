@@ -1,4 +1,9 @@
 <div class="yui3-g">
+  <% if f.object.licitation_process.trading %>
+    <%= f.input :trading_id, as: :hidden, fake: true,
+        input_html: { value: f.object.licitation_process.trading.id} %>
+  <% end %>
+
   <div class="yui3-u-1-8">
     <%= f.input :sequence, :disabled => true %>
   </div>
@@ -72,7 +77,8 @@
     var proposalsUrl = "<%= creditor_proposals_helper_path(resource) %>",
         params = {
           creditor_id: creditorId,
-          licitation_process_id: purchaseProcessId
+          licitation_process_id: purchaseProcessId,
+          trading_id: $("#licitation_process_ratification_trading_id").val()
         }, item;
 
     $.getIndex(proposalsUrl, params, function (proposals) {
@@ -81,6 +87,7 @@
           uuid_item: _.uniqueId('fresh-'),
           purchase_process_creditor_proposal_id:  this.id,
           purchase_process_item_id:               this.purchase_process_item_id,
+          purchase_process_trading_item_id:       this.trading_item_id,
           code:                                   this.code,
           description:                            this.description,
           quantity:                               this.quantity,
@@ -110,7 +117,11 @@
         params = {
             enabled_by_licitation: licitationProcessId,
           <% if resource.licitation_process_licitation? %>
-            won_calculation: licitationProcessId,
+            <% if resource.licitation_process_trading? %>
+              won_calculation_for_trading: licitationProcessId,
+            <% else %>
+              won_calculation: licitationProcessId,
+            <% end %>
             without_licitation_ratification: licitationProcessId
           <% else %>
             without_direct_purchase_ratification: licitationProcessId

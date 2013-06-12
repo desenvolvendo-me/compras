@@ -12,11 +12,12 @@ class PurchaseProcessTradingItem < Compras::Model
   has_many :bids, class_name: 'PurchaseProcessTradingItemBid',
     foreign_key: :item_id, dependent: :destroy, order: 'number DESC'
   has_many :purchase_process_accreditation_creditors, through: :item
+  has_many :ratification_items, class_name: 'LicitationProcessRatificationItem'
 
   has_one :negotiation, class_name: 'PurchaseProcessTradingItemNegotiation',
     dependent: :restrict, inverse_of: :item
 
-  delegate :lot, to: :item, allow_nil: true, prefix: true
+  delegate :lot, :quantity, to: :item, allow_nil: true, prefix: true
 
   validates :reduction_rate_value, numericality: { greater_than_or_equal_to: 0 }, on: :update
   validates :reduction_rate_percent, numericality: { greater_than_or_equal_to: 0 }, on: :update
@@ -25,6 +26,20 @@ class PurchaseProcessTradingItem < Compras::Model
   accepts_nested_attributes_for :bids, allow_destroy: true
   accepts_nested_attributes_for :negotiation, allow_destroy: true,
     reject_if: proc { |attributes|  attributes[:amount].blank? || BigDecimal(attributes[:amount]) <= 0 }
+
+  scope :trading_id, ->(trading_id) do
+    where { |query|
+      query.trading_id.eq(trading_id)
+    }
+  end
+
+  def self.creditor_winner_items(creditor_id, trading_id)
+    [].tap do |items|
+      scoped.trading_id(trading_id).each do |trading_item|
+        items << trading_item if TradingItemWinner.new(trading_item).creditor.id == creditor_id
+      end
+    end
+  end
 
   def to_s
     return lot.to_s if lot
@@ -80,6 +95,11 @@ class PurchaseProcessTradingItem < Compras::Model
 
   def lowest_bid_or_proposal_accreditation_creditor
     lowest_bid.try(:accreditation_creditor) || creditor_with_lowest_proposal
+  end
+
+  def quantity
+    #TODO essa quantidade irá mudar quando a contagem for por lote de itens
+    item.quantity
   end
 
   def close!

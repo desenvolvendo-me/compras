@@ -17,8 +17,9 @@ class LicitationProcessRatification < Compras::Model
 
   accepts_nested_attributes_for :licitation_process_ratification_items, :allow_destroy => true
 
-  delegate :process, :modality_humanize, :description, :licitation?, :execution_unit_responsible,
-           :to => :licitation_process, :prefix => true, :allow_nil => true
+  delegate :process, :modality_humanize, :description, :licitation?, :trading?,
+    :execution_unit_responsible,
+    :to => :licitation_process, :prefix => true, :allow_nil => true
   delegate :item?, to: :judgment_form, allow_nil: true, prefix: true
   delegate :process_responsibles, to: :licitation_process, allow_nil: true
 
@@ -35,6 +36,12 @@ class LicitationProcessRatification < Compras::Model
 
   filterize
   orderize :licitation_process_id
+
+  scope :licitation_process_id, ->(licitation_process_id) do
+    where { |query|
+      query.licitation_process_id.eq(licitation_process_id)
+    }
+  end
 
   def to_s
     "#{sequence} - Processo de Compra #{licitation_process.to_s}"

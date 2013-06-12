@@ -3,6 +3,7 @@ require 'model_helper'
 require 'app/models/purchase_process_trading_item'
 require 'app/models/purchase_process_trading_item_bid'
 require 'app/models/purchase_process_trading_item_negotiation'
+require 'app/models/licitation_process_ratification_item'
 
 describe PurchaseProcessTradingItem do
   it { should belong_to :trading }
@@ -10,10 +11,12 @@ describe PurchaseProcessTradingItem do
 
   it { should have_many(:bids).dependent(:destroy) }
   it { should have_many(:purchase_process_accreditation_creditors).through(:item) }
+  it { should have_many(:ratification_items).class_name('LicitationProcessRatificationItem') }
 
   it { should have_one(:negotiation).dependent(:restrict) }
 
   it { should delegate(:lot).to(:item).allowing_nil(true).prefix(true) }
+  it { should delegate(:quantity).to(:item).allowing_nil(true).prefix(true) }
 
   describe 'validations' do
     it 'cannot have 2 kind of reductions' do
@@ -194,6 +197,10 @@ describe PurchaseProcessTradingItem do
         expect(subject.lowest_bid).to be_nil
       end
     end
+  end
+
+  describe '#quantity' do
+    pending 'we need information about lot quantity'
   end
 
   describe '#lowest_bid_or_proposal_amount' do

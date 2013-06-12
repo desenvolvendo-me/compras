@@ -223,6 +223,28 @@ describe LicitationProcessRatificationItemDecorator do
     end
   end
 
+  describe '#trading_item_id_or_mustache_variable' do
+    context 'when has not a trading_item_id' do
+      before do
+        component.stub(purchase_process_trading_item_id: nil)
+      end
+
+      it 'should return the mustache variable' do
+        expect(subject.trading_item_id_or_mustache_variable).to eq '{{purchase_process_trading_item_id}}'
+      end
+    end
+
+    context 'when has a trading_item_id' do
+      before do
+        component.stub(purchase_process_trading_item_id: 10)
+      end
+
+      it 'should return the trading_item_id' do
+        expect(subject.trading_item_id_or_mustache_variable).to eq 10
+      end
+    end
+  end
+
   describe '#authorized_value' do
     context 'theres authorized_value ' do
       before { component.stub(authorized_value: 10.15) }

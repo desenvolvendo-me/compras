@@ -41,6 +41,10 @@ class PurchaseProcessTradingItemsController < CrudController
     end
   end
 
+  def creditor_winner_items
+    @winners = PurchaseProcessTradingItem.creditor_winner_items(params[:creditor_id].to_i, params[:trading_id].to_i)
+  end
+
   private
 
   def update_resource(object, attributes)
