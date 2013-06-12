@@ -16,4 +16,10 @@ class LicitationProcessRatificationDecorator
   def proposals_total_value
     number_with_precision super if super
   end
+
+  def save_disabled_message
+    if component.process_responsibles.empty?
+      I18n.t 'licitation_process_ratification.messages.cant_save_without_responsibles'
+    end
+  end
 end

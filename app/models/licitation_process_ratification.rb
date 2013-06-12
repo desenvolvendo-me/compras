@@ -20,6 +20,7 @@ class LicitationProcessRatification < Compras::Model
   delegate :process, :modality_humanize, :description, :licitation?, :execution_unit_responsible,
            :to => :licitation_process, :prefix => true, :allow_nil => true
   delegate :item?, to: :judgment_form, allow_nil: true, prefix: true
+  delegate :process_responsibles, to: :licitation_process, allow_nil: true
 
   validates :licitation_process, :creditor, :presence => true
   validates :adjudication_date, :ratification_date, :presence => true
