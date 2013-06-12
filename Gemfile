@@ -48,6 +48,8 @@ gem 'i18n_alchemy', :git => 'git://github.com/carlosantoniodasilva/i18n_alchemy.
 gem 'enumerate_it', '1.0.3'
 gem 'decore', :git => 'git://github.com/sobrinho/decore.git'
 
+gem 'strong_parameters', '0.2.1'
+
 group :assets do
   gem 'uglifier', '2.1.0'
 end
