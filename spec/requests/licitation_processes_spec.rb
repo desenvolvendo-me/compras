@@ -1382,6 +1382,156 @@ feature "LicitationProcesses" do
     expect(page).to have_content "Criar Processo"
 
     within_tab 'Principal' do
+      choose 'Compra direta'
+
+      select 'Compras e serviços', :from => 'Tipo de objeto'
+      fill_in 'Objeto do processo de compra', :with => 'Licitação para compra de carteiras'
+
+      select 'Empreitada integral', :from => 'Forma de execução'
+      select 'Fiança bancária', :from => 'Tipo de garantia'
+      fill_modal 'Índice de reajuste', :with => 'XPTO'
+      fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
+      fill_in 'Valor da caução', :with => '50,00'
+      select 'Demais afastamentos', from: 'Tipo de afastamento'
+    end
+
+    within_tab 'Prazos' do
+      fill_in 'Data da expedição', :with => '21/03/2012'
+      fill_in 'Data da disponibilidade', :with => I18n.l(Date.current)
+      fill_modal 'Contato para informações', :with => '958473', :field => 'Matrícula'
+
+      fill_in 'Prazo de entrega', :with => '1'
+      select 'ano/anos', :from => 'Período do prazo de entrega'
+    end
+
+    within_tab "Solicitantes" do
+      fill_with_autocomplete 'Solicitações de compra', :with => '1'
+
+      within_records do
+        expect(page).to have_content 'Código'
+        expect(page).to have_content 'Solicitante'
+        expect(page).to have_content 'Responsável pela solicitação'
+
+        within 'tbody tr' do
+          expect(page).to have_content '1/2013'
+          expect(page).to have_content '1 - Secretaria de Educação'
+          expect(page).to have_content 'Gabriel Sobrinho'
+        end
+      end
+    end
+
+    within_tab 'Itens / Justificativa' do
+      fill_in 'Justificativa', with: 'Justificando'
+      expect(page).to have_field('Fornecedor')
+
+      within_records do
+        within 'tbody tr:first' do
+          click_link 'Editar'
+        end
+      end
+
+      fill_with_autocomplete 'Fornecedor', with: 'Gabriel'
+
+      click_button 'Adicionar'
+    end
+
+    within_tab 'Fundamentação Legal Dispensa/Inexigibilidade' do
+      fill_in 'Justificativa e fundamentação legal', with: 'Justificando e fundamentando'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice "Processo de Compra 1/2012 criado com sucesso."
+
+    within_tab "Itens / Justificativa" do
+      expect(page).to have_field 'Justificativa', with: 'Justificando'
+      within_records do
+        expect(page).to have_css 'tbody tr', :count => 1
+
+        within 'tbody tr:first' do
+          expect(page).to have_content 'Gabriel Sobrinho'
+
+          click_link "Remover"
+        end
+      end
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Processo de Compra 1/2012 editado com sucesso.'
+
+    within_tab "Itens / Justificativa" do
+      within_records do
+        expect(page).to_not have_css 'tbody tr'
+      end
+
+      fill_in 'Lote', :with => '2234'
+
+      fill_with_autocomplete 'Material', :with => 'Antivirus'
+
+      fill_in 'Quantidade', :with => '2'
+
+      fill_in 'Valor unitário', :with => '50'
+
+      click_button 'Adicionar'
+
+      within_records do
+        expect(page).to_not have_css 'tbody tr'
+      end
+
+      fill_with_autocomplete 'Fornecedor', with: 'Gabriel'
+
+      click_button 'Adicionar'
+
+      within_records do
+        expect(page).to have_css 'tbody tr', count: 1
+      end
+    end
+
+    within_tab 'Fundamentação Legal Dispensa/Inexigibilidade' do
+      expect(page).to have_field 'Justificativa e fundamentação legal', with: 'Justificando e fundamentando'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Processo de Compra 1/2012 editado com sucesso.'
+
+    within_tab "Itens" do
+      within_records do
+        expect(page).to have_css 'tbody tr', count: 1
+
+        expect(page).to have_content '2234'
+        expect(page).to have_content '01.01.00001 - Antivirus'
+        expect(page).to have_content 'Gabriel Sobrinho'
+        expect(page).to have_content 'UN'
+        expect(page).to have_content '2'
+        expect(page).to have_content '0,50'
+        expect(page).to have_content '1,00'
+        expect(page).to have_content '2234'
+        expect(page).to have_content '2234'
+      end
+    end
+  end
+
+  scenario 'items can be removed and added individually or with purchase solicitation' do
+    PurchaseSolicitation.make!(:reparo_liberado, :accounting_year => Date.current.year)
+    Employee.make!(:sobrinho)
+    Capability.make!(:reforma)
+    PaymentMethod.make!(:dinheiro)
+    DocumentType.make!(:fiscal)
+    JudgmentForm.make!(:por_item_com_menor_preco)
+    BudgetAllocation.make!(:alocacao)
+    Material.make!(:antivirus)
+    Indexer.make!(:xpto)
+    Creditor.make!(:sobrinho)
+
+    navigate 'Processos de Compra > Processos de Compras'
+
+    click_link 'Criar Processo de Compra'
+
+    expect(page).to have_content "Criar Processo"
+
+    within_tab 'Principal' do
       choose 'Processo licitatório'
 
       select 'Compras e serviços', :from => 'Tipo de objeto'
@@ -1465,104 +1615,6 @@ feature "LicitationProcesses" do
     click_button 'Salvar'
 
     expect(page).to have_notice "Processo de Compra 1/2012 criado com sucesso."
-
-    within_tab 'Principal' do
-      choose 'Compra direta'
-
-      select 'Demais afastamentos', from: 'Tipo de afastamento'
-    end
-
-    within_tab 'Itens / Justificativa' do
-      fill_in 'Justificativa', with: 'Justificando'
-      expect(page).to have_field('Fornecedor')
-
-      within_records do
-        within 'tbody tr:first' do
-          click_link 'Editar'
-        end
-      end
-
-      fill_with_autocomplete 'Fornecedor', with: 'Gabriel'
-
-      click_button 'Adicionar'
-    end
-
-    within_tab 'Fundamentação Legal Dispensa/Inexigibilidade' do
-      fill_in 'Justificativa e fundamentação legal', with: 'Justificando e fundamentando'
-    end
-
-    click_button 'Salvar'
-
-    expect(page).to have_notice "Processo de Compra 1/2012 editado com sucesso."
-
-    within_tab "Itens / Justificativa" do
-      expect(page).to have_field 'Justificativa', with: 'Justificando'
-      within_records do
-        expect(page).to have_css 'tbody tr', :count => 1
-
-        within 'tbody tr:first' do
-          expect(page).to have_content 'Gabriel Sobrinho'
-
-          click_link "Remover"
-        end
-      end
-    end
-
-    click_button 'Salvar'
-
-    expect(page).to have_notice 'Processo de Compra 1/2012 editado com sucesso.'
-
-    within_tab "Itens / Justificativa" do
-      within_records do
-        expect(page).to_not have_css 'tbody tr'
-      end
-
-      fill_in 'Lote', :with => '2234'
-
-      fill_with_autocomplete 'Material', :with => 'Antivirus'
-
-      fill_in 'Quantidade', :with => '2'
-
-      fill_in 'Valor unitário', :with => '50'
-
-      click_button 'Adicionar'
-
-      within_records do
-        expect(page).to_not have_css 'tbody tr'
-      end
-
-      fill_with_autocomplete 'Fornecedor', with: 'Gabriel'
-
-      click_button 'Adicionar'
-
-      within_records do
-        expect(page).to have_css 'tbody tr', count: 1
-      end
-    end
-
-    within_tab 'Fundamentação Legal Dispensa/Inexigibilidade' do
-      expect(page).to have_field 'Justificativa e fundamentação legal', with: 'Justificando e fundamentando'
-    end
-
-    click_button 'Salvar'
-
-    expect(page).to have_notice 'Processo de Compra 1/2012 editado com sucesso.'
-
-    within_tab "Itens" do
-      within_records do
-        expect(page).to have_css 'tbody tr', count: 1
-
-        expect(page).to have_content '2234'
-        expect(page).to have_content '01.01.00001 - Antivirus'
-        expect(page).to have_content 'Gabriel Sobrinho'
-        expect(page).to have_content 'UN'
-        expect(page).to have_content '2'
-        expect(page).to have_content '0,50'
-        expect(page).to have_content '1,00'
-        expect(page).to have_content '2234'
-        expect(page).to have_content '2234'
-      end
-    end
   end
 
   scenario "item quantity sum when duplicated by another licitation process association" do
