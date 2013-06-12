@@ -25,14 +25,14 @@ feature "RealigmentPrices" do
       expect(page).to have_disabled_field 'Quantidade', with: '2'
 
       fill_in 'Marca', with: 'Avira'
-      fill_in 'Valor', with: '10,00'
+      fill_in 'Valor', with: '25,00'
     end
 
     within '.arame-comum' do
       expect(page).to have_disabled_field 'Quantidade', with: '1'
 
       fill_in 'Marca', with: 'Farpado'
-      fill_in 'Valor', with: '10,00'
+      fill_in 'Valor', with: '50,00'
     end
 
     click_button 'Salvar'
@@ -44,14 +44,14 @@ feature "RealigmentPrices" do
     within '.antivirus' do
       expect(page).to have_disabled_field 'Quantidade', with: '2'
       expect(page).to have_field 'Marca', with: 'Avira'
-      expect(page).to have_field 'Valor', with: '10,00'
+      expect(page).to have_field 'Valor', with: '25,00'
     end
 
     within '.arame-comum' do
       expect(page).to have_disabled_field 'Quantidade', with: '1'
 
       expect(page).to have_field 'Marca', with: 'Farpado'
-      expect(page).to have_field 'Valor', with: '10,00'
+      expect(page).to have_field 'Valor', with: '50,00'
     end
 
     click_button 'Salvar'
@@ -60,8 +60,18 @@ feature "RealigmentPrices" do
   end
 
   def make_dependencies!
-    purchase_process = LicitationProcess.make!(:valor_maximo_ultrapassado)
-    PurchaseProcessCreditorProposal.make!(:proposta_global_nohup)
-    PurchaseProcessCreditorProposal.make!(:proposta_global_ibm)
+    creditor_nohup = Creditor.make!(:nohup)
+    creditor_ibm = Creditor.make!(:ibm)
+    purchase_process = LicitationProcess.make!(:valor_maximo_ultrapassado,
+      publications: [LicitationProcessPublication.make!(:publicacao)],
+      bidders: [Bidder.make!(:licitante_com_proposta_3, creditor: creditor_nohup,
+                              licitation_process: purchase_process, enabled: true),
+                Bidder.make!(:licitante_com_proposta_7, creditor: creditor_ibm,
+                              licitation_process: purchase_process, enabled: true)])
+    PurchaseProcessCreditorProposal.make!(:proposta_global_nohup, creditor: creditor_nohup,
+      disqualified: false, licitation_process: purchase_process, ranking: 1)
+    PurchaseProcessCreditorProposal.make!(:proposta_global_ibm, creditor: creditor_ibm,
+      disqualified: true, licitation_process: purchase_process, ranking: 1)
+
   end
 end
