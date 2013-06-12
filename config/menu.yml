@@ -28,7 +28,6 @@ menu:
       - judgment_forms
       - legal_references
     - cadastral:
-      - contracts
       - banks:
         - agencies
         - banks
@@ -68,6 +67,7 @@ menu:
     - process_responsibles
 
   - "Instrumentos Contratuais":
+    - contracts
     - supply_orders
 
   - "Prestação de Contas":

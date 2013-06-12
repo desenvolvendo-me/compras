@@ -12,7 +12,7 @@ feature "OccurrenceContractualHistorics" do
   scenario 'create a new occurrence_contractual_historic, update and destroy an existing' do
     Contract.make!(:primeiro_contrato)
 
-    navigate 'Comum > Cadastrais > Contratos'
+    navigate 'Instrumentos Contratuais > Contratos'
 
     click_link "Limpar Filtro"
 

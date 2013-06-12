@@ -9,7 +9,7 @@ feature "Contracts" do
   scenario 'picking a licitation process' do
     LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Comum > Cadastrais > Contratos'
+    navigate 'Instrumentos Contratuais > Contratos'
 
     click_link 'Criar Contrato'
 
@@ -29,7 +29,7 @@ feature "Contracts" do
   end
 
   scenario 'selecting a amendment contract, submeting with error, the main contract should still enabled' do
-    navigate 'Comum > Cadastrais > Contratos'
+    navigate 'Instrumentos Contratuais > Contratos'
 
     click_link 'Criar Contrato'
 
@@ -52,7 +52,7 @@ feature "Contracts" do
     Employee.make!(:wenderson)
     ContractType.make!(:trainees)
 
-    navigate 'Comum > Cadastrais > Contratos'
+    navigate 'Instrumentos Contratuais > Contratos'
 
     click_link 'Criar Contrato'
 
@@ -185,7 +185,7 @@ feature "Contracts" do
     Pledge.make!(:empenho_em_quinze_dias)
     Pledge.make!(:founded_debt)
 
-    navigate 'Comum > Cadastrais > Contratos'
+    navigate 'Instrumentos Contratuais > Contratos'
 
     click_link "Limpar Filtro"
 
@@ -203,7 +203,7 @@ feature "Contracts" do
   scenario 'add contract additives' do
     ContractAdditive.make!(:aditivo)
 
-    navigate 'Comum > Cadastrais > Contratos'
+    navigate 'Instrumentos Contratuais > Contratos'
 
     click_link 'Limpar Filtro'
 
@@ -265,7 +265,7 @@ feature "Contracts" do
   scenario 'add delivery schedule' do
     DeliverySchedule.make!(:primeira_entrega)
 
-    navigate 'Comum > Cadastrais > Contratos'
+    navigate 'Instrumentos Contratuais > Contratos'
 
     click_link "Limpar Filtro"
 
@@ -313,7 +313,7 @@ feature "Contracts" do
   scenario 'remove delivery schedule' do
     DeliverySchedule.make!(:primeira_entrega)
 
-    navigate 'Comum > Cadastrais > Contratos'
+    navigate 'Instrumentos Contratuais > Contratos'
 
     click_link "Limpar Filtro"
 
@@ -346,7 +346,7 @@ feature "Contracts" do
   scenario 'index with columns at the index' do
     Contract.make!(:primeiro_contrato)
 
-    navigate 'Comum > Cadastrais > Contratos'
+    navigate 'Instrumentos Contratuais > Contratos'
 
     click_link "Limpar Filtro"
 
