@@ -154,7 +154,7 @@ LicitationProcess.blueprint(:processo_licitatorio_canetas) do
   caution_value { 9.99 }
   document_types { [DocumentType.make!(:fiscal)] }
   publications { [LicitationProcessPublication.make!(:publicacao,
-                                                                        :licitation_process => object)] }
+                                                     licitation_process: object)] }
   bidders { [Bidder.make!(:licitante)] }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
@@ -357,8 +357,8 @@ LicitationProcess.blueprint(:apuracao_global_sem_documentos) do
   publications { [LicitationProcessPublication.make!(:publicacao)] }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
-  bidders { [Bidder.make!(:licitante_com_proposta_6, :documents => []),
-             Bidder.make!(:licitante_com_proposta_4, :documents => [])] }
+  bidders { [Bidder.make!(:licitante_com_proposta_6, documents: []),
+             Bidder.make!(:licitante_com_proposta_4, documents: [])] }
   notice_availability_date { I18n.l(Date.tomorrow) }
   execution_unit_responsible { BudgetStructure.make!(:secretaria_de_desenvolvimento) }
 end
@@ -552,7 +552,7 @@ LicitationProcess.blueprint(:pregao_presencial) do
   document_types { [DocumentType.make!(:fiscal)] }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
-  publications { [LicitationProcessPublication.make!(:publicacao, :licitation_process => object)] }
+  publications { [LicitationProcessPublication.make!(:publicacao, licitation_process: object)] }
   bidders { [Bidder.make!(:licitante_sobrinho), Bidder.make!(:licitante), Bidder.make!(:me_pregao)] }
   notice_availability_date { I18n.l(Date.tomorrow) }
   execution_unit_responsible { BudgetStructure.make!(:secretaria_de_desenvolvimento) }
@@ -709,7 +709,7 @@ LicitationProcess.blueprint(:compra_direta) do
   document_types { [DocumentType.make!(:fiscal)] }
   publications { [LicitationProcessPublication.make!(:publicacao,
                                                      publication_of: PublicationOf::EXTENSION,
-                                                     :licitation_process => object)] }
+                                                     licitation_process: object)] }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   notice_availability_date { I18n.l(Date.tomorrow) }
