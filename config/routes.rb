@@ -655,13 +655,6 @@ Compras::Application.routes.draw do
   get 'revenue_subcategories/modal', :as => :modal_revenue_subcategories
   get 'revenue_categories/modal', :as => :modal_revenue_categories
 
-  resources :risk_degrees do
-    collection do
-      get :modal
-      get :filter
-    end
-  end
-
   resources :side_streets do
     collection do
       get :modal

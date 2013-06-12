@@ -46,7 +46,6 @@ menu:
       - auxiliary:
         - regularization_or_administrative_sanction_reasons
         - company_sizes
-        - risk_degrees
     - legislation:
       - dissemination_sources
       - communication_sources
