@@ -7,7 +7,7 @@ module TceExport::MG
       end
 
       def generate_data
-        return [] unless bidder.company?
+        return unless bidder.company?
 
         query.map do |partner|
           {

@@ -15,12 +15,20 @@ describe TceExport::MG::MonthlyMonitoring::BiddingAuthorizationGenerator do
       Creditor.make!(:nohup)
     end
 
+    let :creditor_pf do
+      Creditor.make!(:sobrinho)
+    end
+
     let :bidder do
       Bidder.make!(:licitante, creditor: creditor)
     end
 
     let :bidder_two do
       Bidder.make!(:licitante_sobrinho, creditor: creditor)
+    end
+
+    let :bidder_pf do
+      Bidder.make!(:licitante_sobrinho, creditor: creditor_pf, protocol: "654321")
     end
 
     let :licitation_process do
@@ -31,6 +39,11 @@ describe TceExport::MG::MonthlyMonitoring::BiddingAuthorizationGenerator do
     let :licitation_process_two do
       licitation_process_two = LicitationProcess.make!(:processo_licitatorio,
         bidders: [bidder_two])
+    end
+
+    let :licitation_process_three do
+      licitation_process_three = LicitationProcess.make!(:processo_licitatorio_canetas,
+        bidders: [bidder_pf])
     end
 
     it "generates a CSV file with the required data" do
@@ -46,6 +59,7 @@ describe TceExport::MG::MonthlyMonitoring::BiddingAuthorizationGenerator do
       ])
 
       JudgmentCommissionAdvice.make!(:parecer, licitation_process: licitation_process_two)
+      JudgmentCommissionAdvice.make!(:parecer, licitation_process: licitation_process_three)
 
       PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado,
         licitation_process: licitation_process, ranking: 1, creditor: creditor)
@@ -60,10 +74,17 @@ describe TceExport::MG::MonthlyMonitoring::BiddingAuthorizationGenerator do
         licitation_process: licitation_process_two,
         creditor: bidder_two.creditor)
 
+      ratification_two = LicitationProcessRatification.make!(:processo_licitatorio_computador,
+        ratification_date: Date.new(2013, 5, 20),
+        licitation_process: licitation_process_three,
+        creditor: bidder_pf.creditor)
+
       bidder.activate!
       bidder_two.activate!
+      bidder_pf.activate!
       bidder.update_column :habilitation_date, Date.new(2013, 5, 20)
       bidder_two.update_column :habilitation_date, Date.new(2013, 5, 20)
+      bidder_pf.update_column :habilitation_date, Date.new(2013, 5, 20)
 
       Partner.destroy_all
 
@@ -85,6 +106,7 @@ describe TceExport::MG::MonthlyMonitoring::BiddingAuthorizationGenerator do
 
       expect(csv).to eq "10;98;98029;2012;1;2;00000000999962;Nohup; ; ;29062011;099901; ; ; ;PR; ; ; ; ; ; ; ; ; ;20052013;2;2\n" +
                         "11;98;98029;2012;1;6;00000000999962;1;27056534147;Pedro dos Santos;1\n"+
+                        "10;98;98029;2013;2;1;00315198737;Gabriel Sobrinho; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ;20052013;2;2\n"+
                         "10;98;98029;2013;2;2;00000000999962;Nohup; ; ;29062011;099901; ; ; ;PR; ; ; ; ; ; ; ; ; ;20052013;2;2\n" +
                         "11;98;98029;2013;2;6;00000000999962;1;27056534147;Pedro dos Santos;1"
 
