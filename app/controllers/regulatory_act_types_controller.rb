@@ -1,2 +1,0 @@
-class RegulatoryActTypesController < CrudController
-end

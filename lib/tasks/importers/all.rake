@@ -17,9 +17,6 @@ namespace :import do
       puts "limite por modalidade"
       ModalityLimitImporter.new.import! if ModalityLimit.count.zero?
 
-      puts "Tipos do Ato Regulamentor"
-      RegulatoryActTypeImporter.new.import! if RegulatoryActType.count.zero?
-
       puts "Etapas do Processo"
       StageProcess.pg_copy_from Rails.root.join('lib/import/files/stage_processes.csv').to_s unless StageProcess.any?
 
