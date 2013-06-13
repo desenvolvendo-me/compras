@@ -135,6 +135,7 @@ module TceExport::MG
         return 3 if process.type_of_removal_unenforceability_accreditation?
         return 3 if process.type_of_removal_other_reasons_to_removal?
         return 4 if process.type_of_removal_dispensation_justified_accreditation?
+        return 4 if process.type_of_removal_call?
       end
 
       def budget_structure_code(budget)
@@ -189,6 +190,7 @@ module TceExport::MG
         return 3 if process.type_of_removal_unenforceability_accreditation?
         return 3 if process.type_of_removal_other_reasons_to_removal?
         return 4 if process.type_of_removal_dispensation_justified_accreditation?
+        return 4 if process.type_of_removal_call?
       end
     end
 
@@ -239,6 +241,7 @@ module TceExport::MG
         return 3 if process.type_of_removal_unenforceability_accreditation?
         return 3 if process.type_of_removal_other_reasons_to_removal?
         return 4 if process.type_of_removal_dispensation_justified_accreditation?
+        return 4 if process.type_of_removal_call?
       end
 
       def responsible_kind(stage_process)
@@ -319,6 +322,7 @@ module TceExport::MG
         return 3 if process.type_of_removal_unenforceability_accreditation?
         return 3 if process.type_of_removal_other_reasons_to_removal?
         return 4 if process.type_of_removal_dispensation_justified_accreditation?
+        return 4 if process.type_of_removal_call?
       end
 
       def last_publication(process, field)
