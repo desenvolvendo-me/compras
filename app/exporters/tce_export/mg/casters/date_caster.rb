@@ -5,7 +5,7 @@ module TceExport::MG::Casters
     def self.call(value, options)
       validate_blank(value, options)
 
-      value.blank? ? " " : value.strftime('%d%m%Y')
+      value.blank? ? " " : value.to_date.strftime('%d%m%Y')
     end
   end
 end
