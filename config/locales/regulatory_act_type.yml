@@ -1,9 +1,10 @@
 pt-BR:
   enumerations:
     regulatory_act_type:
-      ppa: "PPA"
+      budget_change: "Alteração Orçamentária"
+      establishes_licitation_comission: "Institui a Comissão de Licitações"
       ldo: "LDO"
       loa: "LOA"
-      budget_change: "Alteração Orçamentária"
+      ppa: "PPA"
       regulamentation_of_price_registration: "Regulamenta o Registro de Preço no Município"
       regulamentation_of_trading: "Regulamenta o Pregão no Município"
