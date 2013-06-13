@@ -15,7 +15,7 @@ class RealigmentPrice < Compras::Model
 
   delegate :lot, to: :proposal, allow_nil: true, prefix: false
   delegate :quantity, to: :item, allow_nil: true, prefix: false
-  delegate :execution_unit_responsible, :year, :process,
+  delegate :execution_unit_responsible, :year, :process, :id,
     to: :licitation_process, allow_nil: true, prefix: true
   delegate :name, :cnpj, :benefited, :identity_document,
     to: :creditor, allow_nil: true, prefix: true
