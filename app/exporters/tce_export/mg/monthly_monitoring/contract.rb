@@ -117,13 +117,13 @@ module TceExport::MG
       def nome_representante_legal_contratado(contract)
         return nil unless contract.creditors.size == 1
 
-        representante_legal_contratado(contract.creditors.first).name
+        representante_legal_contratado(contract.creditors.first).try :name
       end
 
       def cpf_representante_legal(contract)
         return nil unless contract.creditors.size == 1
 
-        representante_legal_contratado(contract.creditors.first).cpf
+        representante_legal_contratado(contract.creditors.first).try :cpf
       end
 
       def forma_fornecimento(contract)
