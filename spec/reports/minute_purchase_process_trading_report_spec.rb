@@ -18,7 +18,6 @@ describe MinutePurchaseProcessTradingReport do
   let(:member_two) { double 'LicitationCommissionMember', id:2, individual_id: 2 }
   let(:member_three) { double 'LicitationCommissionMember', id:3, individual_id: 3 }
   let(:licitation_commission_members) { [member_one, member_two, member_three] }
-  let(:auctioneers) { [member_one] }
   let(:creditor_one) { double('Creditor', id: 1, representatives: [individual_one, individual_two]) }
   let(:creditor_two) { double('Creditor', id: 2, representatives: [individual_two, individual_three]) }
   let(:creditors) { [creditor_one, creditor_two] }
@@ -26,13 +25,15 @@ describe MinutePurchaseProcessTradingReport do
     unit_price: 100.00, creditor: creditor_one, licitation_process: licitation_process, ranking: 2) }
   let(:proposal_two) { double('PurchaseProcessCreditorProposal', id: 2,
     unit_price: 90.00, creditor: creditor_two, licitation_process: licitation_process, ranking: 1) }
-  let(:proposals) { [proposal, proposal_two] }
   let(:trading_item_one) { double('PurchaseProcessTradingItem', id: 1) }
   let(:trading_item_two) { double('PurchaseProcessTradingItem', id: 2) }
   let(:trading) { double('PurchaseProcessTrading', id: 1, items: [trading_item_one, trading_item_two]) }
   let(:trading_item_bid) { double('PurchaseProcessTradingItemBid', id:1, item: trading_item_one) }
   let(:trading_item_bid_two) { double('PurchaseProcessTradingItemBid', id:2, item: trading_item_two) }
   let(:trading_item_winner) { double('TradingItemWinner') }
+  let(:trading_item_bids) { double('PurchaseProcessTradingItemBid') }
+  let(:ratifications_item) { double('LicitationProcessRatificationItem', id: 1, ratificated: true) }
+  let(:ratifications) { double('LicitationProcessRatification', id: 1, licitation_process_ratification_items: [ratifications_item]) }
 
   subject do
     described_class.new minute_purchase_process_trading_searcher_repository, licitation_process_id: licitation_process.id
@@ -153,9 +154,9 @@ describe MinutePurchaseProcessTradingReport do
     end
 
     it 'return proposals' do
-      licitation_process.stub(:creditor_proposals).and_return proposals
+      licitation_process.stub(:creditor_proposals).and_return [proposal, proposal_two]
 
-      expect(subject.proposals).to eq proposals
+      expect(subject.proposals).to eq [proposal, proposal_two]
     end
 
     it 'return trading_items' do
@@ -172,7 +173,11 @@ describe MinutePurchaseProcessTradingReport do
       end
 
       it 'return trading_item_bids if trading_item_bids is not nil' do
-        licitation_process.stub(:trading_item_bids).and_return [trading_item_bid, trading_item_bid_two]
+        licitation_process.stub(:licitation_process_ratifications).and_return ratifications
+        ratifications.should_receive(:map).and_return [creditor_one.id]
+        licitation_process.stub(:trading_item_bids).and_return trading_item_bids
+        trading_item_bids.should_receive(:creditor_ids).with([creditor_one.id]).and_return [trading_item_bid, trading_item_bid_two]
+
 
         expect(subject.bids).to eq [trading_item_bid, trading_item_bid_two]
       end
@@ -190,7 +195,7 @@ describe MinutePurchaseProcessTradingReport do
       it 'return auctioneer if auctioneer is not empty' do
         licitation_process.stub(:judgment_commission_advice).and_return judgment_commission_advice
         judgment_commission_advice.stub(:licitation_commission).and_return licitation_commission
-        licitation_commission.should_receive(:auctioneer).at_least(2).times.and_return auctioneers
+        licitation_commission.should_receive(:auctioneer).at_least(2).times.and_return [member_one]
         member_one.should_receive(:individual).and_return individual_one
         individual_one.stub(:to_s).and_return 'Rodrigo'
 

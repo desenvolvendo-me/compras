@@ -66,7 +66,8 @@ class MinutePurchaseProcessTradingReport < ActiveRelatus::Base
 
   def bids
     return [] if licitation_process.trading_item_bids.nil?
-    licitation_process.trading_item_bids
+
+    bids_creditor_ids ratification_creditor_ids
   end
 
   def auctioneer
@@ -86,9 +87,17 @@ class MinutePurchaseProcessTradingReport < ActiveRelatus::Base
     licitation_process.ratifications_items.select(&:ratificated)
   end
 
-  protected
+  private
 
   def normalize_attributes
     { :licitation_process => licitation_process_id }
+  end
+
+  def ratification_creditor_ids
+    licitation_process.licitation_process_ratifications.map(&:creditor_id)
+  end
+
+  def bids_creditor_ids(creditor_ids)
+    licitation_process.trading_item_bids.creditor_ids creditor_ids
   end
 end
