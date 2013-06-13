@@ -18,7 +18,6 @@ require 'app/models/pledge'
 require 'app/models/judgment_commission_advice'
 require 'app/models/creditor'
 require 'app/models/licitation_notice'
-require 'app/business/purchase_process_envelope_opening_date'
 require 'app/models/reserve_fund'
 require 'app/models/indexer'
 require 'app/models/purchase_solicitation_item'
@@ -28,6 +27,7 @@ require 'app/models/purchase_process_creditor_proposal'
 require 'app/models/purchase_process_creditor_disqualification'
 require 'app/models/purchase_process_trading'
 require 'app/models/process_responsible'
+require 'app/business/purchase_process_proposal_envelope_opening_date_calculator'
 
 describe LicitationProcess do
   let(:current_prefecture) { double(:current_prefecture) }
@@ -208,6 +208,63 @@ describe LicitationProcess do
       end
 
       it { should allow_value("11:11").for(:proposal_envelope_opening_time) }
+
+      describe 'proposal_envelope_opening_date' do
+        before do
+          subject.type_of_purchase = PurchaseProcessTypeOfPurchase::LICITATION
+        end
+
+        context 'when proposal envelope opening date before calculated' do
+          it "should have error" do
+            subject.proposal_envelope_opening_date = Date.current
+            subject.stub(last_publication_date: Date.current)
+            subject.stub(:validation_context).and_return(:update)
+
+            PurchaseProcessProposalEnvelopeOpeningDateCalculator.
+              should_receive(:calculate).
+              with(subject).
+              and_return(Date.tomorrow)
+
+            subject.valid?
+
+            expect(subject.errors[:proposal_envelope_opening_date]).to include("deve ser em ou depois de #{I18n.l Date.tomorrow}")
+          end
+        end
+
+        context 'when proposal envelope opening date on calculated' do
+          it "should not have an error" do
+            subject.proposal_envelope_opening_date = Date.current
+            subject.stub(last_publication_date: Date.current)
+            subject.stub(:validation_context).and_return(:update)
+
+            PurchaseProcessProposalEnvelopeOpeningDateCalculator.
+              should_receive(:calculate).
+              with(subject).
+              and_return(Date.current)
+
+            subject.valid?
+
+            expect(subject.errors[:proposal_envelope_opening_date]).to_not include("deve ser em ou depois de #{I18n.l Date.current}")
+          end
+        end
+
+        context 'when proposal envelope opening date after calculated' do
+          it "should not have an error" do
+            subject.proposal_envelope_opening_date = Date.current
+            subject.stub(last_publication_date: Date.current)
+            subject.stub(:validation_context).and_return(:update)
+
+            PurchaseProcessProposalEnvelopeOpeningDateCalculator.
+              should_receive(:calculate).
+              with(subject).
+              and_return(Date.yesterday)
+
+            subject.valid?
+
+            expect(subject.errors[:proposal_envelope_opening_date]).to_not include("deve ser em ou depois de #{I18n.l Date.yesterday}")
+          end
+        end
+      end
     end
 
     describe "#validate_proposal_envelope_opening_date" do
@@ -217,7 +274,6 @@ describe LicitationProcess do
 
       it "return when envelope opening date is not present" do
         subject.stub(:proposal_envelope_opening_date).and_return nil
-        PurchaseProcessEnvelopeOpeningDate.should_not_receive :new
         subject.send(:validate_proposal_envelope_opening_date)
         expect(subject.errors[:proposal_envelope_opening_date]).to_not include("deve ficar em branco")
       end
@@ -228,15 +284,6 @@ describe LicitationProcess do
 
         subject.send(:validate_proposal_envelope_opening_date)
         expect(subject.errors[:proposal_envelope_opening_date]).to include("deve ficar em branco")
-      end
-
-      it "validates the envelope opening date with the validation poro" do
-        subject.stub(:proposal_envelope_opening_date).and_return Date.current
-        subject.stub(:last_publication_date).and_return Date.current
-        licitation_validation = double :licitation_process_proposal_envelope_opening_date
-        PurchaseProcessEnvelopeOpeningDate.should_receive(:new).with(subject).and_return licitation_validation
-        licitation_validation.should_receive :valid?
-        subject.send(:validate_proposal_envelope_opening_date)
       end
     end
 
@@ -864,6 +911,16 @@ describe LicitationProcess do
 
         it { expect(subject.all_proposals_given?).to be_false }
       end
+    end
+  end
+
+  describe '#published_editals' do
+    it 'should return the publications of kind edital' do
+      publications = double(:publications)
+      subject.should_receive(:publications).and_return publications
+      publications.should_receive(:edital).and_return ['edital']
+
+      expect(subject.published_editals).to eq ['edital']
     end
   end
 end

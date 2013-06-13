@@ -135,6 +135,13 @@ class LicitationProcess < Compras::Model
         :unless => :allow_insert_past_processes?
       }
     allowing_blank.validates :proposal_envelope_opening_date,
+      timeliness: {
+        on_or_after: :proposal_envelope_opening_date_limit,
+        type: :date,
+        on: :update,
+        if: :licitation?
+      }
+    allowing_blank.validates :proposal_envelope_opening_date,
       :timeliness => {
         :on_or_after => :envelope_delivery_date,
         :on_or_after_message => :should_be_on_or_after_envelope_delivery_date,
@@ -146,7 +153,6 @@ class LicitationProcess < Compras::Model
         :type => :time,
         :on => :update
       }
-
     allowing_blank.validates :stage_of_bids_time,
       :timeliness => {
         :type => :time
@@ -302,6 +308,10 @@ class LicitationProcess < Compras::Model
     concessions? || permits?
   end
 
+  def published_editals
+    publications.edital
+  end
+
   protected
 
   def available_for_licitation_process_classification?
@@ -344,12 +354,10 @@ class LicitationProcess < Compras::Model
       errors.add :proposal_envelope_opening_date, :absence
       return false
     end
-
-    PurchaseProcessEnvelopeOpeningDate.new(self).valid?
   end
 
-  def published_editals
-    publications.edital
+  def proposal_envelope_opening_date_limit
+    PurchaseProcessProposalEnvelopeOpeningDateCalculator.calculate(self)
   end
 
   def validate_updates
