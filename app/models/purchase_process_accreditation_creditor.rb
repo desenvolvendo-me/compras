@@ -25,8 +25,9 @@ class PurchaseProcessAccreditationCreditor < Compras::Model
   validates :company_size, presence: true, if: :creditor_company?
 
   scope :selected_creditors, lambda {
+    joins { creditor.person }.
     where {
-      has_power_of_attorney.eq(true)
+      has_power_of_attorney.eq(true) | creditor.person.personable_type.eq('Individual')
     }
   }
 
