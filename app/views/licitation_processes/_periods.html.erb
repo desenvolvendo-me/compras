@@ -24,7 +24,8 @@
 
 <div class="yui3-g proposal_envelope_opening_date">
   <div class="yui3-u-1-3">
-    <%= f.input :proposal_envelope_opening_date, :input_html => { "data-disabled" => f.object.decorator.disabled_envelope_message,
+    <%= f.input :proposal_envelope_opening_date, disabled: !f.object.edital_published?,
+      :input_html => { "data-disabled" => f.object.decorator.disabled_envelope_message,
       :readonly => f.object.decorator.disabled_envelope_message } %>
   </div>
 
@@ -36,22 +37,22 @@
 
 <div class="yui3-g authorization_envelope_opening_date">
   <div class="yui3-u-1-3">
-    <%= f.input :authorization_envelope_opening_date %>
+    <%= f.input :authorization_envelope_opening_date, disabled: !f.object.edital_published? %>
   </div>
 
   <div class="yui3-u-1-5">
-    <%= f.input :authorization_envelope_opening_time %>
+    <%= f.input :authorization_envelope_opening_time, disabled: !f.object.edital_published?  %>
   </div>
 </div>
 
 <div class="fields-to-trading closing_of_accreditation_date">
   <div class="yui3-g">
     <div class="yui3-u-1-3">
-      <%= f.input :closing_of_accreditation_date %>
+      <%= f.input :closing_of_accreditation_date, disabled: !f.object.edital_published? %>
     </div>
 
     <div class="yui3-u-1-5">
-      <%= f.input :closing_of_accreditation_time %>
+      <%= f.input :closing_of_accreditation_time, disabled: !f.object.edital_published? %>
     </div>
   </div>
 </div>
@@ -76,10 +77,10 @@
 
 <div class="yui3-g fields-to-trading stage_of_bids_date">
   <div class="yui3-u-1-3">
-    <%= f.input :stage_of_bids_date %>
+    <%= f.input :stage_of_bids_date, disabled: !f.object.edital_published? %>
   </div>
 
   <div class="yui3-u-1-5">
-    <%= f.input :stage_of_bids_time %>
+    <%= f.input :stage_of_bids_time, disabled: !f.object.edital_published? %>
   </div>
 </div>

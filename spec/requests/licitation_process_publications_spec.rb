@@ -163,4 +163,61 @@ feature "LicitationProcessPublications" do
     expect(page).to have_select 'Publicação do(a)', options: ['Cancelamento', 'Homologação', 'Outros', 'Prorrogação',
                                                               'Ratificação', 'Retificação do edital', 'Vencedores']
   end
+
+  scenario "it should suggest licitation_process's dates when create a publication with kind edital" do
+    LicitationProcess.make!(:processo_licitatorio,
+      publications: [],
+      proposal_envelope_opening_date: nil)
+
+    navigate 'Processos de Compra > Processos de Compras'
+
+    click_link "Limpar Filtro"
+
+    within_records do
+      click_link '1/2012'
+    end
+
+    within_tab 'Prazos' do
+      expect(page).to have_disabled_field 'Abertura das propostas', with: ''
+      expect(page).to have_disabled_field 'Abertura da habilitação', with: ''
+      expect(page).to have_disabled_field 'Data do credenciamento', with: ''
+      expect(page).to have_disabled_field 'Data da fase de lances', with: ''
+    end
+
+    click_link 'Publicações'
+    click_link 'Criar Publicação'
+
+    fill_in "Nome do veículo de comunicação", :with => 'Jornal'
+    fill_in "Data da publicação", :with => '01/06/2013'
+    select "Edital", :from => "Publicação do(a)"
+    select "Internet", :from => "Tipo de circulação do veículo de comunicação"
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Publicação criada com sucesso'
+
+    click_link 'Voltar ao processo de compra'
+
+    within_tab 'Prazos' do
+      expect(page).to have_field 'Abertura das propostas',  with: '16/07/2013'
+      expect(page).to have_field 'Abertura da habilitação', with: '16/07/2013'
+      expect(page).to have_field 'Data do credenciamento',  with: '16/07/2013'
+      expect(page).to have_field 'Data da fase de lances',  with: '16/07/2013'
+    end
+
+    click_link 'Voltar'
+
+    click_link "Limpar Filtro"
+
+    within_records do
+      click_link '1/2012'
+    end
+
+    within_tab 'Prazos' do
+      expect(page).to have_field 'Abertura das propostas',  with: '16/07/2013'
+      expect(page).to have_field 'Abertura da habilitação', with: '16/07/2013'
+      expect(page).to have_field 'Data do credenciamento',  with: '16/07/2013'
+      expect(page).to have_field 'Data da fase de lances',  with: '16/07/2013'
+    end
+  end
 end

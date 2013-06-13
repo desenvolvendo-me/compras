@@ -11,18 +11,18 @@ class DateCalculator
   end
 
   def calculate
-    send "#{context}_calculator"
+    send "#{context}_day_calculator"
   end
 
   private
 
   attr_reader :initial_date, :days, :holiday_repository, :context
 
-  def calendar_calculator
+  def calendar_day_calculator
     initial_date + days.days
   end
 
-  def working_calculator
+  def working_day_calculator
     counter = 0
     current_date = initial_date
 

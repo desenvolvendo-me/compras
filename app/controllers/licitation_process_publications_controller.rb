@@ -21,9 +21,21 @@ class LicitationProcessPublicationsController < CrudController
     destroy! { licitation_process_publications_path(:licitation_process_id => resource.licitation_process_id) }
   end
 
+  private
+
   def begin_of_association_chain
     if params[:licitation_process_id]
       @parent = LicitationProcess.find(params[:licitation_process_id])
     end
+  end
+
+  def create_resource(object)
+    if object.save
+      PurchaseProcessDatesFiller.fill(object.licitation_process)
+
+      return true
+    end
+
+    false
   end
 end
