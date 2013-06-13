@@ -5,7 +5,7 @@
 
   <% if f.object.process_responsibles.empty? %>
     <%= link_to 'Criar Responsáveis do processo', edit_process_responsible_path(f.object.licitation_process),
-      class: 'button primary' %>
+      class: 'button primary', :target => "_blank", id: 'process_responsible_link' %>
   <% end %>
 
   <%= link_to 'Imprimir termo', resource_path(resource), class: 'button neutral' if f.object.persisted? %>

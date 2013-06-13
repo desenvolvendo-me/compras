@@ -307,7 +307,8 @@ feature "LicitationProcessRatifications" do
     expect(page).to have_disabled_element 'Salvar', reason: 'Primeiro crie responsáveis do processo'
     expect(page).to have_link "Criar Responsáveis do processo"
 
-    click_link "Criar Responsáveis do processo"
+    expect(page).to have_selector "a#process_responsible_link[target='_blank']"
+    visit edit_process_responsible_path(licitation.id)
 
     expect(page).to have_title "Editar responsável do Processo de Compras"
   end
