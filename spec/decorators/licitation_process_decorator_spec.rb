@@ -347,28 +347,6 @@ describe LicitationProcessDecorator do
     end
   end
 
-  describe "#disabled_trading_message" do
-    before do
-      I18n.backend.store_translations 'pt-BR', licitation_process: {
-        messages: {
-          disabled_trading_message: 'message'
-        }
-      }
-    end
-
-    it "returns a message when there are proposals to be given" do
-      component.stub(all_proposals_given?: false)
-
-      expect(subject.disabled_trading_message).to eq "message"
-    end
-
-    it "returns nil when all proposals were given" do
-      component.stub(all_proposals_given?: true)
-
-      expect(subject.disabled_trading_message).to be_nil
-    end
-  end
-
   describe '#material_unique_class' do
     context 'when not direct_purchase' do
       before do
