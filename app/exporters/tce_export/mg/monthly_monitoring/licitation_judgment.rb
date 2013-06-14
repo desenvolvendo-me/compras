@@ -1,8 +1,14 @@
 module TceExport::MG
   module MonthlyMonitoring
     class LicitationJudgmentDataGenerator < DataGeneratorBase
+      def initialize(monthly_monitoring)
+        @last_process = nil
+
+        super
+      end
+
       def generate_data
-        query.map do |proposal|
+        data = query.map do |proposal|
           {
             tipo_registro: 10,
             cod_orgao: monthly_monitoring.organ_code,
@@ -20,9 +26,17 @@ module TceExport::MG
             judgment_date_detail: generate_judment_date_detail(proposal.licitation_process)
           }
         end
+
+        if data.any?
+          data.last.merge!(judgment_date_detail: generate_judment_date_detail(nil))
+        end
+
+        data
       end
 
       private
+
+      attr_reader :last_process
 
       def query
         items = PurchaseProcessCreditorProposal.by_ratification_month_and_year(
@@ -33,12 +47,21 @@ module TceExport::MG
 
         lots_global = lots_global.flat_map(&:realigment_prices)
 
-        [items + lots_global].flatten.sort
+        [items + lots_global].flatten.sort_by(&:licitation_process_id)
       end
 
       def generate_judment_date_detail(licitation_process)
-        JudgmentDateDetailDataGenerator.new(monthly_monitoring, licitation_process).
+        @last_process = licitation_process if last_process.nil?
+
+        return if last_process == licitation_process
+
+        data = JudgmentDateDetailDataGenerator.
+          new(monthly_monitoring, last_process).
           generate_data
+
+        @last_process = licitation_process
+
+        data
       end
 
       def tp_documento(creditor)
@@ -154,6 +177,8 @@ module TceExport::MG
       end
 
       def format_judgment_date_detail(data)
+        return unless data[:judgment_date_detail]
+
         judgment_date_detail_formatter.new(data[:judgment_date_detail]).to_s
       end
     end
