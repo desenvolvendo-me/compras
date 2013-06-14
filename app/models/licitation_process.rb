@@ -186,6 +186,10 @@ class LicitationProcess < Compras::Model
       extract(year from compras_licitation_process_ratifications.ratification_date) = ?}, year)
   }
 
+  scope :not_removal_by_limit, -> do
+    where { type_of_removal.not_eq TypeOfRemoval::REMOVAL_BY_LIMIT }
+  end
+
   def to_s
     "#{process}/#{year} - #{modality_humanize} #{modality_number}"
   end

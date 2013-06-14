@@ -290,6 +290,7 @@ module TceExport::MG
 
       def query
         LicitationProcess.direct_purchase.
+          not_removal_by_limit.
           by_ratification_month_and_year(monthly_monitoring.month, monthly_monitoring.year)
       end
 
