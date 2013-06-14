@@ -10,6 +10,8 @@ module TceExport::MG
       end
 
       def to_s
+        return "" unless budget_structure
+
         format
       end
 
