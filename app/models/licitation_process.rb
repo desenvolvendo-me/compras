@@ -191,7 +191,7 @@ class LicitationProcess < Compras::Model
   end
 
   def to_s
-    "#{process}/#{year} - #{modality_humanize} #{modality_number}"
+    "#{process}/#{year} - #{modality_humanize || type_of_removal_humanize} #{modality_number}"
   end
 
   def modality_or_type_of_removal
