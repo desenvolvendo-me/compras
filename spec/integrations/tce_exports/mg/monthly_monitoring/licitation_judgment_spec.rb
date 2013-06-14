@@ -63,8 +63,8 @@ describe TceExport::MG::MonthlyMonitoring::LicitationJudgmentGenerator do
 
         csv = File.read('tmp/JULGLIC.csv', encoding: 'ISO-8859-1')
 
-        reg_10_1 = "10;98;98029;2012;1;1;00315198737; ;#{item.id};Arame farpado;4,9900;1,0000;UN"
-        reg_10_2 = "10;98;98029;2012;1;1;00315198737; ;#{item_2.id};Arame comum;2,9900;1,0000;UN"
+        reg_10_1 = "10;98;98029;2012;1;1;00315198737;#{item.lot};#{item.id};Arame farpado;4,9900;1,0000;UN"
+        reg_10_2 = "10;98;98029;2012;1;1;00315198737;#{item.lot};#{item_2.id};Arame comum;2,9900;1,0000;UN"
         reg_30 = "30;98;98029;2012;1;#{current_date};2;2"
 
         expect(csv).to eq [reg_10_1,  reg_10_2, reg_30].join("\n")
@@ -105,7 +105,7 @@ describe TceExport::MG::MonthlyMonitoring::LicitationJudgmentGenerator do
 
         csv = File.read('tmp/JULGLIC.csv', encoding: 'ISO-8859-1')
 
-        reg_10_1 = "10;98;98029;2012;1;1;00315198737; ;#{item.id};Arame farpado;9,9900;1,0000;UN"
+        reg_10_1 = "10;98;98029;2012;1;1;00315198737;#{item.lot};#{item.id};Arame farpado;9,9900;1,0000;UN"
         reg_30_1 = "30;98;98029;2012;1;#{current_date};2;2"
 
         expect(csv).to eq [reg_10_1, reg_30_1].join("\n")

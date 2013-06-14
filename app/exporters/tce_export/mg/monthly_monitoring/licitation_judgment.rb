@@ -17,7 +17,7 @@ module TceExport::MG
             nro_processo_licitatorio: proposal.licitation_process_process.to_s,
             tp_documento: tp_documento(proposal.creditor),
             nro_documento: only_numbers(proposal.creditor_identity_document),
-            nro_lote: proposal.lot,
+            nro_lote: lot_number(proposal),
             nro_item: proposal.item.id,
             dsc_produto_servico: proposal.item.description,
             vl_unitario: vl_unitario(proposal),
@@ -82,6 +82,10 @@ module TceExport::MG
 
       def realigment?(proposal)
         proposal.is_a? RealigmentPrice
+      end
+
+      def lot_number(proposal)
+        proposal.lot || proposal.item.lot
       end
     end
 
