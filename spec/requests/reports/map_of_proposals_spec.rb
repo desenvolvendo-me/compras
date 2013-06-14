@@ -49,9 +49,9 @@ feature 'Report::MapOfProposals' do
         end
 
         within 'tr:last' do
-          expect(page).to have_content 'Preço Médio'
-          expect(page).to have_content 'R$ 3,99'
-          expect(page).to have_content 'R$ 7,98'
+          expect(page).to have_content 'Valor de referência'
+          expect(page).to have_content 'R$ 10,00'
+          expect(page).to have_content 'R$ 20,00'
         end
       end
     end
@@ -77,9 +77,9 @@ feature 'Report::MapOfProposals' do
         end
 
         within 'tr:last' do
-          expect(page).to have_content 'Preço Médio'
-          expect(page).to have_content 'R$ 4,99'
-          expect(page).to have_content 'R$ 4,99'
+          expect(page).to have_content 'Valor de referência'
+          expect(page).to have_content 'R$ 10,00'
+          expect(page).to have_content 'R$ 10,00'
         end
       end
     end
