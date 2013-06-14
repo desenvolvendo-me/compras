@@ -37,12 +37,24 @@ describe LicitationProcess do
     current_prefecture.stub(:allow_insert_past_processes => true)
   end
 
-  it 'should return process/year - modality modality_number as to_s' do
-    subject.process = '1'
-    subject.year = '2012'
-    subject.modality_number = '1'
-    subject.stub(:modality_humanize).and_return 'Pregão'
-    expect(subject.to_s).to eq '1/2012 - Pregão 1'
+  describe '#to_s' do
+    before do
+      subject.process = 1
+      subject.year = 2012
+      subject.modality_number = 1
+    end
+
+    context 'when has modality' do
+      before { subject.stub(modality_humanize: 'Pregão') }
+
+      it { expect(subject.to_s).to eq '1/2012 - Pregão 1' }
+    end
+
+    context 'when has type_of_removal' do
+      before { subject.stub(type_of_removal_humanize: 'Compra Direta') }
+
+      it { expect(subject.to_s).to eq '1/2012 - Compra Direta 1' }
+    end
   end
 
   it { should belong_to :contact }
