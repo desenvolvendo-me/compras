@@ -10,12 +10,18 @@ describe PurchaseProcessAccreditationCreditor do
 
       sobrinho = PurchaseProcessAccreditationCreditor.make!(:sobrinho_creditor,
                                                             purchase_process_accreditation: accreditation,
+                                                            creditor: Creditor.make!(:sobrinho),
                                                             has_power_of_attorney: false)
       wenderson = PurchaseProcessAccreditationCreditor.make!(:wenderson_creditor,
                                                              purchase_process_accreditation: accreditation,
                                                              has_power_of_attorney: true)
+      nohup = PurchaseProcessAccreditationCreditor.make!(:sobrinho_creditor,
+                                                         purchase_process_accreditation: accreditation,
+                                                         creditor: Creditor.make!(:nohup),
+                                                         has_power_of_attorney: false)
 
-      expect(described_class.selected_creditors).to eq [wenderson]
+      expect(described_class.selected_creditors).to include(wenderson, sobrinho)
+      expect(described_class.selected_creditors).to_not include(nohup)
     end
   end
 
