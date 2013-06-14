@@ -107,7 +107,7 @@ class LicitationProcess < Compras::Model
             :modality, :judgment_form_id, :presence => true, :if => :licitation?
   validates :goal, :licensor_rights_and_liabilities, :licensee_rights_and_liabilities,
             :presence => true, :if => :concessions_or_permits?
-  validates :type_of_removal, :justification, :presence => true, :if => :direct_purchase?
+  validates :type_of_removal, :justification, :justification_and_legal, :presence => true, :if => :direct_purchase?
   validates :tied_creditor_proposals, no_duplication: {
     with: :ranking,
     allow_nil: true,
