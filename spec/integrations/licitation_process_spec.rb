@@ -39,7 +39,7 @@ describe LicitationProcess do
         licitation.proposal_envelope_opening_date = Date.current + 44.days
 
         expect(licitation).to_not be_valid
-        expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser a partir de #{I18n.l(Date.current + 45.days)}. Refente a 45 dias maior que a data da publicação mais recente (#{I18n.l(Date.current)})"
+        expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser em ou depois de #{I18n.l(Date.current + 45.days)}"
 
         licitation.proposal_envelope_opening_date = Date.current + 45.days
         expect(licitation).to be_valid
@@ -57,11 +57,11 @@ describe LicitationProcess do
 
           licitation.judgment_form.licitation_kind = LicitationKind::BEST_TECHNIQUE
           expect(licitation).to_not be_valid
-          expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser a partir de #{I18n.l(Date.current + 45.days)}. Refente a 45 dias maior que a data da publicação mais recente (#{I18n.l(Date.current)})"
+          expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser em ou depois de #{I18n.l(Date.current + 45.days)}"
 
           licitation.judgment_form.licitation_kind = LicitationKind::TECHNICAL_AND_PRICE
           expect(licitation).to_not be_valid
-          expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser a partir de #{I18n.l(Date.current + 45.days)}. Refente a 45 dias maior que a data da publicação mais recente (#{I18n.l(Date.current)})"
+          expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser em ou depois de #{I18n.l(Date.current + 45.days)}"
 
           licitation.proposal_envelope_opening_date = Date.current + 45.days
           expect(licitation).to be_valid
@@ -75,18 +75,18 @@ describe LicitationProcess do
           licitation.judgment_form.licitation_kind = LicitationKind::BEST_TECHNIQUE
 
           expect(licitation).to_not be_valid
-          expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser a partir de #{I18n.l(Date.current + 30.days)}. Refente a 30 dias maior que a data da publicação mais recente (#{I18n.l(Date.current)})"
+          expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser em ou depois de #{I18n.l(Date.current + 30.days)}"
 
           licitation.judgment_form.licitation_kind = LicitationKind::TECHNICAL_AND_PRICE
 
           expect(licitation).to_not be_valid
-          expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser a partir de #{I18n.l(Date.current + 30.days)}. Refente a 30 dias maior que a data da publicação mais recente (#{I18n.l(Date.current)})"
+          expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser em ou depois de #{I18n.l(Date.current + 30.days)}"
 
           licitation.execution_type = ExecutionType::INTEGRAL
           licitation.judgment_form.licitation_kind = LicitationKind::BEST_AUCTION_OR_OFFER
 
           expect(licitation).to_not be_valid
-          expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser a partir de #{I18n.l(Date.current + 30.days)}. Refente a 30 dias maior que a data da publicação mais recente (#{I18n.l(Date.current)})"
+          expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser em ou depois de #{I18n.l(Date.current + 30.days)}"
 
           licitation.execution_type = ExecutionType::TASK
 
@@ -105,12 +105,12 @@ describe LicitationProcess do
           licitation.judgment_form.licitation_kind = LicitationKind::BEST_TECHNIQUE
 
           expect(licitation).to_not be_valid
-          expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser a partir de #{I18n.l(Date.current + 30.days)}. Refente a 30 dias maior que a data da publicação mais recente (#{I18n.l(Date.current)})"
+          expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser em ou depois de #{I18n.l(Date.current + 30.days)}"
 
           licitation.judgment_form.licitation_kind = LicitationKind::TECHNICAL_AND_PRICE
 
           expect(licitation).to_not be_valid
-          expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser a partir de #{I18n.l(Date.current + 30.days)}. Refente a 30 dias maior que a data da publicação mais recente (#{I18n.l(Date.current)})"
+          expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser em ou depois de #{I18n.l(Date.current + 30.days)}"
 
           licitation.proposal_envelope_opening_date = Date.current + 30.days
           expect(licitation).to be_valid
@@ -124,7 +124,7 @@ describe LicitationProcess do
           licitation.proposal_envelope_opening_date = Date.current + 14.days
 
           expect(licitation).to_not be_valid
-          expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser a partir de #{I18n.l(Date.current + 15.days)}. Refente a 15 dias maior que a data da publicação mais recente (#{I18n.l(Date.current)})"
+          expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser em ou depois de #{I18n.l(Date.current + 15.days)}"
 
           licitation.proposal_envelope_opening_date = Date.current + 15.days
           expect(licitation).to be_valid
@@ -138,7 +138,7 @@ describe LicitationProcess do
         licitation.proposal_envelope_opening_date = Date.current + 14.days
 
         expect(licitation).to_not be_valid
-        expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser a partir de #{I18n.l(Date.current + 15.days)}. Refente a 15 dias maior que a data da publicação mais recente (#{I18n.l(Date.current)})"
+        expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser em ou depois de #{I18n.l(Date.current + 15.days)}"
 
         licitation.proposal_envelope_opening_date = Date.current + 15.days
         expect(licitation).to be_valid
@@ -152,7 +152,7 @@ describe LicitationProcess do
         licitation.proposal_envelope_opening_date = Date.current + 5.days
 
         expect(licitation).to_not be_valid
-        expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser a partir de #{I18n.l(Date.current + 8.days)}. Refente a 8 dias úteis maior que a data da publicação mais recente (#{I18n.l(Date.current)})"
+        expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser em ou depois de #{I18n.l(Date.current + 12.days)}"
 
         licitation.proposal_envelope_opening_date = Date.current + 15.days
         expect(licitation).to be_valid
@@ -166,7 +166,7 @@ describe LicitationProcess do
         licitation.proposal_envelope_opening_date = Date.current + 4.days
 
         expect(licitation).to_not be_valid
-        expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser a partir de #{I18n.l(Date.current + 5.days)}. Refente a 5 dias úteis maior que a data da publicação mais recente (#{I18n.l(Date.current)})"
+        expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser em ou depois de #{I18n.l(Date.current + 7.days)}"
 
         licitation.proposal_envelope_opening_date = Date.current + 10.days
         expect(licitation).to be_valid
