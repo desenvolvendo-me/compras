@@ -13,7 +13,7 @@ gem 'pg', '0.15.1'
 gem 'activerecord-connections', '0.0.3'
 gem 'activerecord-postgres-hstore', '0.6.0'
 
-gem 'unico', '4.7.0'
+gem 'unico', '4.8.0'
 gem 'unico-assets', '1.4.1'
 gem 'devise', '2.2.4'
 gem 'cancan', :git => 'git://github.com/ryanb/cancan.git', :branch => '2.0'
@@ -42,7 +42,7 @@ gem 'has_scope', '0.5.1'
 gem 'responders', '0.9.3'
 gem 'jbuilder', '1.4.2'
 
-gem 'foreigner', '1.2.1'
+gem 'foreigner', '1.4.1'
 gem 'i18n_alchemy', :git => 'git://github.com/carlosantoniodasilva/i18n_alchemy.git'
 
 gem 'enumerate_it', '1.0.3'
