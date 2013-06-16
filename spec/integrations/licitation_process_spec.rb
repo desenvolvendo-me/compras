@@ -31,17 +31,17 @@ describe LicitationProcess do
   end
 
   describe "#validate_proposal_envelope_opening_date" do
-    let(:publication) { LicitationProcessPublication.make(:publicacao, :publication_date => Date.current) }
+    let(:publication) { LicitationProcessPublication.make(:publicacao, :publication_date => Date.new(2013, 6, 1)) }
 
     context "competition modality validation" do
       it "should be 45 calendar days greater than last publication date" do
         licitation = LicitationProcess.make!(:processo_licitatorio_concurso, :publications => [publication])
-        licitation.proposal_envelope_opening_date = Date.current + 44.days
+        licitation.proposal_envelope_opening_date = Date.new(2013, 6, 1) + 44.days
 
         expect(licitation).to_not be_valid
-        expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser em ou depois de #{I18n.l(Date.current + 45.days)}"
+        expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser em ou depois de #{I18n.l(Date.new(2013, 6, 1) + 45.days)}"
 
-        licitation.proposal_envelope_opening_date = Date.current + 45.days
+        licitation.proposal_envelope_opening_date = Date.new(2013, 6, 1) + 45.days
         expect(licitation).to be_valid
       end
     end
@@ -53,17 +53,17 @@ describe LicitationProcess do
 
       context "integral execution type" do
         it "should be 45 calendar days greater than last publication date when best technique or technical and price" do
-          licitation.proposal_envelope_opening_date = Date.current + 44.days
+          licitation.proposal_envelope_opening_date = Date.new(2013, 6, 1) + 44.days
 
           licitation.judgment_form.licitation_kind = LicitationKind::BEST_TECHNIQUE
           expect(licitation).to_not be_valid
-          expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser em ou depois de #{I18n.l(Date.current + 45.days)}"
+          expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser em ou depois de #{I18n.l(Date.new(2013, 6, 1) + 45.days)}"
 
           licitation.judgment_form.licitation_kind = LicitationKind::TECHNICAL_AND_PRICE
           expect(licitation).to_not be_valid
-          expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser em ou depois de #{I18n.l(Date.current + 45.days)}"
+          expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser em ou depois de #{I18n.l(Date.new(2013, 6, 1) + 45.days)}"
 
-          licitation.proposal_envelope_opening_date = Date.current + 45.days
+          licitation.proposal_envelope_opening_date = Date.new(2013, 6, 1) + 45.days
           expect(licitation).to be_valid
         end
       end
@@ -71,26 +71,26 @@ describe LicitationProcess do
       context "execution type different from integral" do
         it "should be 30 calendar days greater than last publication date" do
           licitation.execution_type = ExecutionType::TASK
-          licitation.proposal_envelope_opening_date = Date.current + 29.days
+          licitation.proposal_envelope_opening_date = Date.new(2013, 6, 1) + 29.days
           licitation.judgment_form.licitation_kind = LicitationKind::BEST_TECHNIQUE
 
           expect(licitation).to_not be_valid
-          expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser em ou depois de #{I18n.l(Date.current + 30.days)}"
+          expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser em ou depois de #{I18n.l(Date.new(2013, 6, 1) + 30.days)}"
 
           licitation.judgment_form.licitation_kind = LicitationKind::TECHNICAL_AND_PRICE
 
           expect(licitation).to_not be_valid
-          expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser em ou depois de #{I18n.l(Date.current + 30.days)}"
+          expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser em ou depois de #{I18n.l(Date.new(2013, 6, 1) + 30.days)}"
 
           licitation.execution_type = ExecutionType::INTEGRAL
           licitation.judgment_form.licitation_kind = LicitationKind::BEST_AUCTION_OR_OFFER
 
           expect(licitation).to_not be_valid
-          expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser em ou depois de #{I18n.l(Date.current + 30.days)}"
+          expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser em ou depois de #{I18n.l(Date.new(2013, 6, 1) + 30.days)}"
 
           licitation.execution_type = ExecutionType::TASK
 
-          licitation.proposal_envelope_opening_date = Date.current + 30.days
+          licitation.proposal_envelope_opening_date = Date.new(2013, 6, 1) + 30.days
           expect(licitation).to be_valid
         end
       end
@@ -101,18 +101,18 @@ describe LicitationProcess do
 
       context "licitation kind is best technique or technical and price" do
         it "should be 30 calendar days greater than last publication date" do
-          licitation.proposal_envelope_opening_date = Date.current + 29.days
+          licitation.proposal_envelope_opening_date = Date.new(2013, 6, 1) + 29.days
           licitation.judgment_form.licitation_kind = LicitationKind::BEST_TECHNIQUE
 
           expect(licitation).to_not be_valid
-          expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser em ou depois de #{I18n.l(Date.current + 30.days)}"
+          expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser em ou depois de #{I18n.l(Date.new(2013, 6, 1) + 30.days)}"
 
           licitation.judgment_form.licitation_kind = LicitationKind::TECHNICAL_AND_PRICE
 
           expect(licitation).to_not be_valid
-          expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser em ou depois de #{I18n.l(Date.current + 30.days)}"
+          expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser em ou depois de #{I18n.l(Date.new(2013, 6, 1) + 30.days)}"
 
-          licitation.proposal_envelope_opening_date = Date.current + 30.days
+          licitation.proposal_envelope_opening_date = Date.new(2013, 6, 1) + 30.days
           expect(licitation).to be_valid
         end
       end
@@ -121,12 +121,12 @@ describe LicitationProcess do
         it "should be 15 calendar days greater than last publication date" do
           licitation.judgment_form.licitation_kind = LicitationKind::BEST_AUCTION_OR_OFFER
           licitation.save
-          licitation.proposal_envelope_opening_date = Date.current + 14.days
+          licitation.proposal_envelope_opening_date = Date.new(2013, 6, 1) + 14.days
 
           expect(licitation).to_not be_valid
-          expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser em ou depois de #{I18n.l(Date.current + 15.days)}"
+          expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser em ou depois de #{I18n.l(Date.new(2013, 6, 1) + 15.days)}"
 
-          licitation.proposal_envelope_opening_date = Date.current + 15.days
+          licitation.proposal_envelope_opening_date = Date.new(2013, 6, 1) + 15.days
           expect(licitation).to be_valid
         end
       end
@@ -135,12 +135,12 @@ describe LicitationProcess do
     context "auction modality validation" do
       it "should be 15 calendar days greater than last publication date" do
         licitation = LicitationProcess.make!(:processo_licitatorio_leilao, :publications => [publication])
-        licitation.proposal_envelope_opening_date = Date.current + 14.days
+        licitation.proposal_envelope_opening_date = Date.new(2013, 6, 1) + 14.days
 
         expect(licitation).to_not be_valid
-        expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser em ou depois de #{I18n.l(Date.current + 15.days)}"
+        expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser em ou depois de #{I18n.l(Date.new(2013, 6, 1) + 15.days)}"
 
-        licitation.proposal_envelope_opening_date = Date.current + 15.days
+        licitation.proposal_envelope_opening_date = Date.new(2013, 6, 1) + 15.days
         expect(licitation).to be_valid
       end
     end
@@ -149,12 +149,12 @@ describe LicitationProcess do
       it "should be 8 working days greater than last publication date" do
         licitation = LicitationProcess.make!(:processo_licitatorio, :publications => [publication],
                                              :modality => Modality::TRADING, :execution_type => ExecutionType::INTEGRAL)
-        licitation.proposal_envelope_opening_date = Date.current + 5.days
+        licitation.proposal_envelope_opening_date = Date.new(2013, 6, 1) + 5.days
 
         expect(licitation).to_not be_valid
-        expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser em ou depois de #{I18n.l(Date.current + 12.days)}"
+        expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser em ou depois de 12/06/2013"
 
-        licitation.proposal_envelope_opening_date = Date.current + 15.days
+        licitation.proposal_envelope_opening_date = Date.new(2013, 6, 1) + 15.days
         expect(licitation).to be_valid
       end
     end
@@ -163,12 +163,12 @@ describe LicitationProcess do
       it "should be 5 working days greater than last publication date" do
         licitation = LicitationProcess.make!(:processo_licitatorio, :publications => [publication],
                                              :modality => Modality::INVITATION, :execution_type => ExecutionType::INTEGRAL)
-        licitation.proposal_envelope_opening_date = Date.current + 4.days
+        licitation.proposal_envelope_opening_date = Date.new(2013, 6, 1) + 4.days
 
         expect(licitation).to_not be_valid
-        expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser em ou depois de #{I18n.l(Date.current + 7.days)}"
+        expect(licitation.errors[:proposal_envelope_opening_date]).to include "deve ser em ou depois de 07/06/2013"
 
-        licitation.proposal_envelope_opening_date = Date.current + 10.days
+        licitation.proposal_envelope_opening_date = Date.new(2013, 6, 1) + 10.days
         expect(licitation).to be_valid
       end
     end
