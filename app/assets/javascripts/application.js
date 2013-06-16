@@ -5,10 +5,8 @@
 //= require compras/currency_manipulation
 //= require compras/modal_info_link_disabler
 //= require compras/session_timeout
-//= require jquery.ui.autocomplete
 //= require simple_form.auto_complete_input.js
 //= require compras/moment.min
-//= require date_field_validation
 //= require compras/autocomplete_form
 //= require compras/nested_grid
 //= require compras/index_json
