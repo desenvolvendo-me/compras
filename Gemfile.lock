@@ -7,9 +7,9 @@ GIT
 
 GIT
   remote: git://github.com/carlosantoniodasilva/i18n_alchemy.git
-  revision: 9eaa9930f46c26300857b3a24fdad403c100db94
+  revision: d875ee507550b85819f7dd31af9dc3637401023b
   specs:
-    i18n_alchemy (0.0.1)
+    i18n_alchemy (0.1.0)
       activesupport (~> 3.0)
       i18n (~> 0.5)
 
