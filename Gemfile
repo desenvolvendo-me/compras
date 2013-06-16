@@ -6,7 +6,7 @@ ruby "1.9.3"
 
 gem 'rails', '3.2.13'
 gem 'unicorn', '4.6.2'
-gem 'sidekiq', '2.11.2'
+gem 'sidekiq', '2.12.4'
 
 gem 'pg', '0.15.1'
 
