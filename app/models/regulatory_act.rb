@@ -38,7 +38,6 @@ class RegulatoryAct < Compras::Model
   validates :article_description, :length => { :maximum => 512 }, :allow_blank => true
   validates :budget_change_decree_type, :presence => true, :if => :budget_change_decree_type_required?
   validates :budget_change_law_type, :presence => true, :if => :budget_change_law_type_required?
-  validates :parent, :presence => true, :if => :classification_decree?
 
   validate :validate_parent_classification
 

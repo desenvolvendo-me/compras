@@ -177,18 +177,6 @@ describe RegulatoryAct do
     end
 
     describe '#parent' do
-      it 'should be required when classification is decree' do
-        subject.stub(:classification).and_return(RegulatoryActClassification::DECREE)
-
-        expect(subject).to validate_presence_of :parent
-      end
-
-      it 'should not be required when classification is not decree' do
-        subject.stub(:classification).and_return(RegulatoryActClassification::LAW)
-
-        expect(subject).to_not validate_presence_of :parent
-      end
-
       it 'should have law as classification, when child classification is decree' do
         subject.stub(:classification).and_return(RegulatoryActClassification::DECREE)
         subject.stub(:parent_classification).and_return(RegulatoryActClassification::DECREE)
