@@ -17,4 +17,16 @@ class Individual < Persona::Individual
 
   filterize
   orderize :birthdate
+
+  def self.filter(params)
+    query = scoped.joins { person }
+    query = query.where { birthday.eq(params[:birthday]) } if params[:birthday].present?
+    query = query.where { cpf.eq(params[:cpf]) } if params[:cpf].present?
+    query = query.where { gender.eq(params[:gender]) } if params[:gender].present?
+    query = query.where { father.like("#{params[:father]}%") } if params[:father].present?
+    query = query.where { mother.like("#{params[:mother]}%") } if params[:mother].present?
+    query = query.where { person.name.like("#{params[:person]}%") } if params[:person].present?
+
+    query
+  end
 end
