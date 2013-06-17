@@ -4,17 +4,17 @@ source 'https://SEqawpNNEx65yrzYS9p8@gem.fury.io/me/'
 
 ruby "1.9.3"
 
-gem 'rails', '3.2.12'
+gem 'rails', '3.2.13'
 gem 'unicorn', '4.6.2'
-gem 'sidekiq', '2.11.2'
+gem 'sidekiq', '2.12.4'
 
 gem 'pg', '0.15.1'
 
 gem 'activerecord-connections', '0.0.3'
 gem 'activerecord-postgres-hstore', '0.6.0'
 
-gem 'unico', '4.7.0'
-gem 'unico-assets', '1.3.0'
+gem 'unico', '4.8.0'
+gem 'unico-assets', '1.4.1'
 gem 'devise', '2.2.4'
 gem 'cancan', :git => 'git://github.com/ryanb/cancan.git', :branch => '2.0'
 gem 'quaestio', '0.1.1'
@@ -40,9 +40,9 @@ gem 'rubyzip', '0.9.9'
 gem 'inherited_resources', '1.4.0'
 gem 'has_scope', '0.5.1'
 gem 'responders', '0.9.3'
-gem 'jbuilder', '1.4.1'
+gem 'jbuilder', '1.4.2'
 
-gem 'foreigner', '1.2.1'
+gem 'foreigner', '1.4.1'
 gem 'i18n_alchemy', :git => 'git://github.com/carlosantoniodasilva/i18n_alchemy.git'
 
 gem 'enumerate_it', '1.0.3'
@@ -51,12 +51,12 @@ gem 'decore', :git => 'git://github.com/sobrinho/decore.git'
 gem 'strong_parameters', '0.2.1'
 
 group :assets do
-  gem 'uglifier', '2.1.0'
+  gem 'uglifier', '2.1.1'
 end
 
 group :production, :training, :staging do
   gem 'sentry-raven', '0.4.8'
-  gem 'dalli', '2.6.3'
+  gem 'dalli', '2.6.4'
 end
 
 group :development, :test do
