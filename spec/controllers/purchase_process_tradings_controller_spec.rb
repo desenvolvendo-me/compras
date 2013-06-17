@@ -44,7 +44,7 @@ describe PurchaseProcessTradingsController do
       NextBidCalculator.should_receive(:next_bid).with(item)
 
       item.should_receive(:bids_historic)
-      item.should_receive(:creditors_ordered)
+      item.should_receive(:creditors_ordered_outer)
 
       get :bids, id: 10
     end

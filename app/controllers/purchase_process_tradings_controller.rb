@@ -18,7 +18,7 @@ class PurchaseProcessTradingsController < CrudController
 
     @item      = resource.items.first
     @historic  = @item.bids_historic
-    @creditors = @item.creditors_ordered
+    @creditors = @item.creditors_ordered_outer
     @next_bid  = NextBidCalculator.next_bid(@item)
   end
 

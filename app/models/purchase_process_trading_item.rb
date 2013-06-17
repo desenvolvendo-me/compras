@@ -36,6 +36,10 @@ class PurchaseProcessTradingItem < Compras::Model
     purchase_process_accreditation_creditors.by_lowest_proposal(item.id)
   end
 
+  def creditors_ordered_outer
+    purchase_process_accreditation_creditors.by_lowest_proposal_outer(item.id)
+  end
+
   def creditors_selected
     creditors_ordered.selected_creditors
   end
