@@ -46,70 +46,10 @@
       balance:              '{{balance}}',
       material:             '{{material}}',
       quantity:             '{{quantity}}',
-      ratification_item_id: '{{ratification_item_id}}',
+      ratification_item_id: '{{id}}',
       reference_unit:       '{{reference_unit}}',
       total_price:          '{{total_price}}',
       unit_price:           '{{unit_price}}'
     %>
   <% end %>
 <% end %>
-
-<script>
-  function setModalUrlToLicitationProcess() {
-    var urlModal = "<%= modal_licitation_processes_path %>?",
-    params = {
-      by_ratification_and_year: $('#supply_order_year').val(),
-      licitation_process: { year: $('#supply_order_year').val() },
-      locked_fields: ['year']
-    };
-
-    urlModal += $.param(params);
-    $('#supply_order_licitation_process').data('modal-url', urlModal);
-  }
-
-  $('form.supply_order').on('change', '#supply_order_year', function() {
-    setModalUrlToLicitationProcess();
-  });
-
-  function setModalUrlToCreditor() {
-    var urlModal = "<%= modal_creditors_path %>?",
-    params = {
-      by_ratification_and_licitation_process_id: $('#supply_order_licitation_process_id').val()
-    };
-
-    urlModal += $.param(params);
-    $('#supply_order_creditor').data('modal-url', urlModal);
-  }
-
-  $('form.supply_order').on('change', '#supply_order_licitation_process_id', function() {
-    setModalUrlToCreditor();
-  });
-
-  $('#supply_order_licitation_process').on('change', function (event, licitation_process) {
-    if(licitation_process){
-      $("#supply_order_modality_or_type_of_removal").val(licitation_process.modality_or_type_of_removal);
-    } else {
-      $("#supply_order_modality_or_type_of_removal, #supply_order_creditor").val('');
-    }
-  });
-
-  $('#supply_order_creditor_id').on('change', function (event, creditor) {
-    if(creditor){
-      fillSupplyOrderQuantities(creditor.ratification_items);
-    }
-  });
-
-  function fillSupplyOrderQuantities(ratification_items) {
-    var target = $('div#supply_order_items'),
-      template = $('#supply_orderm_items_template');
-
-    target.empty();
-
-    _.each(ratification_items, function(ratification_item) {
-      target.append(template.mustache(ratification_item));
-    });
-  }
-
-  setModalUrlToLicitationProcess();
-  setModalUrlToCreditor();
-</script> 
