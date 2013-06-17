@@ -6,6 +6,7 @@ $(document).ready(function() {
       $('div.modality').removeClass('hidden');
       $('div.licitation_process_judgment_form_id').removeClass('hidden');
       $('#licitation_process_judgment_form_id').requiredField(true);
+      $('#licitation_process_justification_and_legal').requiredField(false);
       $('div.type-of-removal').addClass('hidden');
       $('li.income').removeClass('hidden');
       $('label[for="licitation_process_modality_number"]').html('Nº da modalidade');
@@ -22,6 +23,7 @@ $(document).ready(function() {
       $('div.modality').addClass('hidden');
       $('div.licitation_process_judgment_form_id').addClass('hidden');
       $('#licitation_process_judgment_form_id').requiredField(false);
+      $('#licitation_process_justification_and_legal').requiredField(true);
       $('div.type-of-removal').removeClass('hidden');
       $('li.income').addClass('hidden');
       $('label[for="licitation_process_modality_number"]').html('Nº do afastamento');
