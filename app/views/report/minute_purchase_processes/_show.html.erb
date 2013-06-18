@@ -36,7 +36,7 @@
       </tr>
     </thead>
     <tbody>
-      <% resource.bidders.each do |bidder| %>
+      <% resource.licitation_process.bidders.each do |bidder| %>
       <tr>
         <td><%= bidder.creditor %></td>
         <td><%= resource.representative_creditor(bidder.creditor)%></td>

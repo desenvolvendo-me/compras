@@ -1,5 +1,4 @@
 class MinutePurchaseProcessTradingReport < ActiveRelatus::Base
-  include EnumerateIt
   attr_accessor :licitation_process_id
 
   def licitation_process
@@ -24,14 +23,6 @@ class MinutePurchaseProcessTradingReport < ActiveRelatus::Base
     I18n.l licitation_process.proposal_envelope_opening_time, format: :hour
   end
 
-  def creditor_accreditations
-    licitation_process.creditors
-  end
-
-  def proposals
-    licitation_process.creditor_proposals
-  end
-
   def judgment_commission_advice
     licitation_process.judgment_commission_advice
   end
@@ -47,7 +38,7 @@ class MinutePurchaseProcessTradingReport < ActiveRelatus::Base
   end
 
   def member
-    return if licitation_commission.licitation_commission_members.empty?
+    return if licitation_commission.nil?
 
     licitation_commission.licitation_commission_members.first
   end
@@ -58,10 +49,6 @@ class MinutePurchaseProcessTradingReport < ActiveRelatus::Base
     else
       creditor.person
     end
-  end
-
-  def trading_items
-    licitation_process.trading_items
   end
 
   def bids
@@ -84,7 +71,7 @@ class MinutePurchaseProcessTradingReport < ActiveRelatus::Base
   end
 
   def ratifications_items
-    licitation_process.ratifications_items.select(&:ratificated)
+    licitation_process.ratifications_items.by_ratificated
   end
 
   private

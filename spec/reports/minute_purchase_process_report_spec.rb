@@ -1,5 +1,4 @@
 require 'report_helper'
-require 'enumerate_it'
 require 'app/reports/minute_purchase_process_report'
 
 describe MinutePurchaseProcessReport do
@@ -7,42 +6,41 @@ describe MinutePurchaseProcessReport do
     double(:minute_purchase_process_searcher_repository)
   end
 
-  let(:licitation_process) { double('LicitationProcess', id: 1, creditors: creditors, items: items) }
-  let(:records) { [licitation_process] }
+  let(:licitation_process) { double('LicitationProcess', id: 1, creditors: [creditor_one, creditor_two],
+    items: [item_one, item_two]) }
   let(:licitation_commission) { double('LicitationCommission', id: 1) }
-  let(:judgment_commission_advice) { double('JudgmentCommissionAdvice', id: 1, licitation_commission: licitation_commission) }
+  let(:judgment_commission_advice) { double('JudgmentCommissionAdvice', id: 1,
+    licitation_commission: licitation_commission) }
   let(:individual_one) { double 'Person', id:1, name: "Rodrigo" }
   let(:individual_two) { double 'Person', id:2, name: "Jose" }
   let(:individual_three) { double 'Person', id:3, name: "Mateus" }
   let(:member_one) { double 'LicitationCommissionMember', id:1, individual_id: 1 }
   let(:member_two) { double 'LicitationCommissionMember', id:2, individual_id: 2 }
   let(:member_three) { double 'LicitationCommissionMember', id:3, individual_id: 3 }
-  let(:licitation_commission_members) { [member_one, member_two, member_three] }
   let(:bidder_one) { double('Bidder', id: 1, enabled: true) }
   let(:bidder_two) { double('Bidder', id: 2, enabled: false) }
-  let(:bidders) { [bidder_one, bidder_two] }
+  let(:bidders) { double('Bidder') }
   let(:item_one) { double('PurchaseProcessItem', id: 1) }
   let(:item_two) { double('PurchaseProcessItem', id: 2) }
-  let(:items) { [item_one, item_two] }
   let(:creditor_one) { double('Creditor', id: 1, representatives: [individual_one, individual_two]) }
   let(:creditor_two) { double('Creditor', id: 2, representatives: [individual_two, individual_three]) }
-  let(:creditors) { [creditor_one, creditor_two] }
   let(:proposal) { double('PurchaseProcessCreditorProposal', id: 1,
     unit_price: 100.00, creditor: creditor_one, licitation_process: licitation_process, ranking: 2) }
   let(:proposal_two) { double('PurchaseProcessCreditorProposal', id: 2,
     unit_price: 90.00, creditor: creditor_two, licitation_process: licitation_process, ranking: 1) }
-  let(:proposals) { [proposal, proposal_two] }
+  let(:proposals) { double('PurchaseProcessCreditorProposal') }
   let(:ratifications_item) { double('LicitationProcessRatificationItem', id: 1, ratificated: true) }
+  let(:ratifications_items) { double('LicitationProcessRatificationItem') }
   let(:ratifications) { double('LicitationProcessRatification', id: 1, licitation_process_ratification_items: [ratifications_item]) }
 
   subject do
-    described_class.new minute_purchase_process_searcher_repository, licitation_process_id: 1
+    described_class.new minute_purchase_process_searcher_repository, licitation_process_id: licitation_process.id
   end
 
   it 'queries the repository' do
     minute_purchase_process_searcher_repository.should_receive(:search).
                                                 with(licitation_process: 1).
-                                                and_return minute_purchase_process_searcher_repository
+                                                and_return [licitation_process]
 
     subject.records
   end
@@ -50,11 +48,10 @@ describe MinutePurchaseProcessReport do
   describe '#licitation_process' do
     it "return licitation_process" do
       minute_purchase_process_searcher_repository.should_receive(:search).
-                                                  at_least(2).times.
+                                                  at_least(1).times.
                                                   with(licitation_process: 1).
-                                                  and_return minute_purchase_process_searcher_repository
+                                                  and_return [licitation_process]
 
-      subject.records.should_receive(:first).and_return licitation_process
       expect(subject.licitation_process).to eq licitation_process
     end
   end
@@ -64,11 +61,10 @@ describe MinutePurchaseProcessReport do
       minute_purchase_process_searcher_repository.should_receive(:search).
                                                   at_least(2).times.
                                                   with(licitation_process: 1).
-                                                  and_return minute_purchase_process_searcher_repository
+                                                  and_return [licitation_process]
 
-      subject.records.should_receive(:first).at_least(1).times.and_return licitation_process
+      subject.licitation_process
     end
-
 
     describe '#issuance_date' do
       it 'return nil if judgment_commission_advice_issuance_date is nil' do
@@ -147,12 +143,6 @@ describe MinutePurchaseProcessReport do
       end
     end
 
-    it 'return bidders' do
-      licitation_process.stub(:bidders).and_return bidders
-
-      expect(subject.bidders).to eq bidders
-    end
-
     it 'return bidders_enabled' do
       licitation_process.stub(:bidders).and_return bidders
       bidders.should_receive(:where).and_return [bidder_one]
@@ -182,7 +172,7 @@ describe MinutePurchaseProcessReport do
         it 'return item' do
           licitation_process.stub(:direct_purchase?).and_return true
 
-          expect(subject.proposals).to eq items
+          expect(subject.proposals).to eq [item_one, item_two]
         end
       end
 
@@ -190,19 +180,18 @@ describe MinutePurchaseProcessReport do
         it 'return items' do
           licitation_process.stub(:direct_purchase?).and_return true
 
-          expect(subject.proposals).to eq items
+          expect(subject.proposals).to eq [item_one, item_two]
         end
       end
-
     end
 
     context "when licitation_process is not direct_purchase" do
       describe '#proposals' do
         it 'return proposals' do
           licitation_process.stub(:direct_purchase?).and_return false
-          licitation_process.stub(:creditor_proposals).and_return proposals
+          licitation_process.stub(:creditor_proposals).and_return [proposal, proposal_two]
 
-          expect(subject.proposals).to eq proposals
+          expect(subject.proposals).to eq [proposal, proposal_two]
         end
       end
 
@@ -219,12 +208,11 @@ describe MinutePurchaseProcessReport do
 
     it 'return ratifications_items' do
       licitation_process.stub(:ratifications).and_return ratifications
-      licitation_process.stub(:ratifications_items).and_return [ratifications_item]
+      licitation_process.stub(:ratifications_items).and_return ratifications_items
+      ratifications_items.stub(:by_ratificated).and_return [ratifications_item]
 
       expect(subject.ratifications_items).to eq [ratifications_item]
     end
-
-
   end
 
   describe '#representative' do

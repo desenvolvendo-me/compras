@@ -36,7 +36,7 @@
       </tr>
     </thead>
     <tbody>
-      <% resource.creditor_accreditations.each do |creditor| %>
+      <% resource.licitation_process.creditors.each do |creditor| %>
         <tr>
           <td><%= creditor %></td>
           <td><%= resource.representative_creditor(creditor) %></td>
@@ -65,7 +65,7 @@
       </tr>
     </thead>
     <tbody>
-      <% resource.creditor_accreditations.each do |creditor| %>
+      <% resource.licitation_process.creditors.each do |creditor| %>
         <tr>
           <td><%= creditor %></td>
           <td><%= creditor.identity_document %></td>
@@ -95,7 +95,7 @@
       </tr>
     </thead>
     <tbody>
-      <% resource.proposals.each do |proposal| %>
+      <% resource.licitation_process.creditor_proposals.each do |proposal| %>
       <tr>
         <td><%= proposal.lot %></td>
         <td><%= proposal.item %></td>
@@ -156,7 +156,7 @@
       </tr>
     </thead>
     <tbody>
-      <% resource.trading_items.each do |item| %>
+      <% resource.licitation_process.trading_items.each do |item| %>
       <tr>
         <td><%= resource.creditor_winner(item) %></td>
         <td><%= number_to_currency resource.amount_winner(item) %></td>

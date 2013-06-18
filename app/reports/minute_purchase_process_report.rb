@@ -53,10 +53,6 @@ class MinutePurchaseProcessReport < ActiveRelatus::Base
     end
   end
 
-  def bidders
-    licitation_process.bidders
-  end
-
   def judgment_commission_advice
     licitation_process.judgment_commission_advice
   end
@@ -87,7 +83,7 @@ class MinutePurchaseProcessReport < ActiveRelatus::Base
   end
 
   def ratifications_items
-    licitation_process.ratifications_items.select(&:ratificated)
+    licitation_process.ratifications_items.by_ratificated
   end
 
   protected

@@ -26,6 +26,8 @@ class LicitationProcessRatificationItem < Compras::Model
     }
   end
 
+  scope :by_ratificated, -> { where { ratificated.eq(true) } }
+
   def unit_price
     purchase_process_creditor_proposal.try(:unit_price) || purchase_process_item.try(:unit_price)
   end
