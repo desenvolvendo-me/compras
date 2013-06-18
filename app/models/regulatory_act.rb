@@ -39,8 +39,6 @@ class RegulatoryAct < Compras::Model
   validates :budget_change_decree_type, :presence => true, :if => :budget_change_decree_type_required?
   validates :budget_change_law_type, :presence => true, :if => :budget_change_law_type_required?
 
-  validate :validate_parent_classification
-
   with_options :allow_blank => true do |allowing_blank|
     allowing_blank.validates :act_number, :content, :uniqueness => true
     allowing_blank.validates :act_number, :numericality => true
@@ -162,11 +160,5 @@ class RegulatoryAct < Compras::Model
 
     def clear_additional_percent_unless_required
     self.additional_percent = nil unless additional_percent_required?
-  end
-
-  def validate_parent_classification
-    if classification_decree? and !parent_classification_law?
-      errors.add(:parent, :parent_classification_should_be_law)
-    end
   end
 end

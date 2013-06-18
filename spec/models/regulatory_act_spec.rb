@@ -175,17 +175,6 @@ describe RegulatoryAct do
         expect(subject).to_not validate_presence_of :authorized_value
       end
     end
-
-    describe '#parent' do
-      it 'should have law as classification, when child classification is decree' do
-        subject.stub(:classification).and_return(RegulatoryActClassification::DECREE)
-        subject.stub(:parent_classification).and_return(RegulatoryActClassification::DECREE)
-
-        subject.valid?
-
-        expect(subject.errors[:parent]).to include 'A classificação do Ato principal deve ser Lei, quando a classificação do ato secundário for Decreto'
-      end
-    end
   end
 
   context 'Callbacks' do
