@@ -53,6 +53,12 @@ class LicitationProcessDecorator
     t('licitation_process.messages.disabled_envelope_message')
   end
 
+  def must_be_published_on_edital
+    unless edital_published?
+      t("licitation_process.messages.disabled_envelope_message")
+    end
+  end
+
   def must_have_published_edital
     unless edital_published?
       t("licitation_process.messages.must_be_included_after_edital_publication")
