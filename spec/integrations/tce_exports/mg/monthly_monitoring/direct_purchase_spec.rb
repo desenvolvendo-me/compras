@@ -70,9 +70,9 @@ describe TceExport::MG::MonthlyMonitoring::DirectPurchaseGenerator do
 
       expect(csv).to eq "10;98;98029;2013;2;1;20032013;2;Licitação para compra de carteiras;Justificativa legal;Justificativa;20042012;Publicacao\n" +
                         "11;98;98029;2013;2;1;2;00315198737;Gabriel Sobrinho;Girassol;São Francisco;1;PR;33400500;3333333333;gabriel.sobrinho@gmail.com\n" +
-                        "12;98;98029;2013;2;1;2050;#{item.id};Antivirus;10,0000\n" +
+                        "12;98;98029;2013;2;1;2050;#{item.item_number};Antivirus;10,0000\n" +
                         "13;98;98029;2013;2;1;98;98029;04;01;003;003; ;319001;001;50080\n" +
-                        "14;98;98029;2013;2;1;1;00314951334;Wenderson Malheiros; ; ; ; ; ; ; ; ; ; ; ;2050;#{item.id};2,0000;10,0000"
+                        "14;98;98029;2013;2;1;1;00314951334;Wenderson Malheiros; ; ; ; ; ; ; ; ; ; ; ;2050;#{item.item_number};2,0000;10,0000"
     end
 
     it 'should not generate data when removal_by_limit' do

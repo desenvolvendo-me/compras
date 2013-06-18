@@ -33,7 +33,7 @@ module TceExport::MG
             dt_emissao_cndt: document_field(creditor, :debts, :emission_date),
             dt_validade_cndt: document_field(creditor, :debts, :validity),
             nro_lote: item.lot,
-            nro_item: item.id,
+            nro_item: item.item_number,
             quantidade: item.quantity,
             vlr_item: item.unit_price
           }
@@ -165,7 +165,7 @@ module TceExport::MG
             nro_processo: process.process,
             tipo_processo: type_of_removal(process),
             nro_lote: item.lot,
-            nro_item: item.id,
+            nro_item: item.item_number,
             dsc_item: item.description,
             vl_cot_precos_unitatio: item.unit_price
           }

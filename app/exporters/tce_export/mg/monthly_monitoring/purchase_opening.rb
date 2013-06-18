@@ -72,7 +72,7 @@ module TceExport::MG
             exercicio_licitacao: purchase.year,
             nro_processo_licitatorio: purchase.process,
             nro_lote: item.lot,
-            nro_item: item.id,
+            nro_item: item.item_number,
             dt_cotacao: purchase.process_date,
             dsc_item: item.material.description,
             vl_cot_precos_unitario: item.unit_price,

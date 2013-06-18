@@ -64,16 +64,16 @@ describe TceExport::MG::MonthlyMonitoring::LicitationRatificationGenerator do
         purchase_process_creditor_proposal: creditor_proposal_arame)
 
       current_date     = Date.current.strftime('%d%m%Y')
-      arame_farpado_id = creditor_proposal_arame_farpado.purchase_process_item_id
-      arame_comum_id   = creditor_proposal_arame.purchase_process_item_id
+      arame_farpado = creditor_proposal_arame_farpado.item
+      arame_comum   = creditor_proposal_arame.item
 
       described_class.generate_file(monthly_monitoring)
 
       csv = File.read('tmp/HOMOLIC.csv', encoding: 'ISO-8859-1')
 
-      reg_10_1 = "10;98;98029;2012;1;1;00315198737;2050;#{arame_farpado_id};Arame farpado;1,0000;4,9900"
+      reg_10_1 = "10;98;98029;2012;1;1;00315198737;2050;#{arame_farpado.item_number};Arame farpado;1,0000;4,9900"
       reg_30_1 = "30;98;98029;2012;1;#{current_date};#{current_date}"
-      reg_10_2 = "10;98;98029;2012;1;1;00315198737;2050;#{arame_comum_id};Arame comum;1,0000;2,9900"
+      reg_10_2 = "10;98;98029;2012;1;1;00315198737;2050;#{arame_comum.item_number};Arame comum;1,0000;2,9900"
       reg_30_2 = "30;98;98029;2012;1;#{current_date};#{current_date}"
 
       expect(csv).to eq [reg_10_1, reg_30_1, reg_10_2, reg_30_2].join("\n")
