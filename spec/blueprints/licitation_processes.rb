@@ -55,8 +55,7 @@ LicitationProcess.blueprint(:processo_licitatorio_computador) do
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
   document_types { [DocumentType.make!(:fiscal)] }
-  publications { [LicitationProcessPublication.make!(:publicacao,
-                                                                        :licitation_process => object)] }
+  publications { [LicitationProcessPublication.make!(:publicacao, :licitation_process => object)] }
   bidders { [Bidder.make!(:licitante)] }
   execution_type { ExecutionType::INTEGRAL }
   type_of_purchase { PurchaseProcessTypeOfPurchase::LICITATION }

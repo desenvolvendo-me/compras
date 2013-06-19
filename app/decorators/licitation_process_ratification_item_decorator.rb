@@ -11,6 +11,16 @@ class LicitationProcessRatificationItemDecorator
     number_to_currency(super, :format => "%n") if super
   end
 
+  def authorized_value
+    number_with_precision super if super
+  end
+
+  def supply_order_item_value_balance
+    value = component.supply_order_item_value_balance
+
+    number_with_precision value if value
+  end
+
   def creditor_proposal_id_or_mustache_variable
     purchase_process_creditor_proposal_id || "{{purchase_process_creditor_proposal_id}}"
   end

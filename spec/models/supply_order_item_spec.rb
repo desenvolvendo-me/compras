@@ -12,6 +12,32 @@ describe SupplyOrderItem do
   it { should delegate(:unit_price).to(:licitation_process_ratification_item).allowing_nil(true) }
   it { should delegate(:total_price).to(:licitation_process_ratification_item).allowing_nil(true) }
   it { should delegate(:supply_order_item_balance).to(:licitation_process_ratification_item).allowing_nil(true) }
+  it { should delegate(:supply_order_item_value_balance).to(:licitation_process_ratification_item).allowing_nil(true) }
+  it { should delegate(:control_amount?).to(:material).allowing_nil true }
+
+  context 'validations' do
+    before do
+      subject.stub(supply_order_item_value_balance: 0)
+    end
+
+    describe '#authorization_value' do
+      it 'should be greater than 0' do
+        subject.authorization_value = 0
+
+        expect(subject.valid?).to be_false
+        expect(subject.errors[:authorization_value]).to include("deve ser maior que 0")
+      end
+    end
+
+    describe '#authorization_quantity' do
+      it 'should be greater than 0' do
+        subject.authorization_quantity = 0
+
+        expect(subject.valid?).to be_false
+        expect(subject.errors[:authorization_quantity]).to include("deve ser maior que 0")
+      end
+    end
+  end
 
   describe "#balance" do
     it "when quantity is greater than authorized balance is greater than zero" do
@@ -23,17 +49,35 @@ describe SupplyOrderItem do
   end
 
   describe "#quantity" do
-    it "when ratification item quantity is nil" do
-      allow_message_expectations_on_nil
+    let(:licitation_process_ratification_item) { double :licitation_process_ratification_item }
 
-      subject.licitation_process_ratification_item = LicitationProcessRatificationItem.new
-      expect(subject.quantity).to eq(0)
+    it 'tries to return licitation_process_ratification_item quantity' do
+      subject.stub(licitation_process_ratification_item: licitation_process_ratification_item)
+      licitation_process_ratification_item.should_receive(:try).with :quantity
+
+      subject.quantity
+    end
+  end
+
+  describe '#value' do
+    let(:licitation_process_ratification_item) { double :licitation_process_ratification_item }
+
+    it 'tries to return licitation_process_ratification_item value' do
+      subject.stub(licitation_process_ratification_item: licitation_process_ratification_item)
+      licitation_process_ratification_item.should_receive(:try).with :unit_price
+
+      subject.value
+    end
+  end
+
+  describe '#value_balance' do
+    before do
+      subject.stub(:value).and_return 10
+      subject.stub(:authorized_value).and_return 3
     end
 
-    it "when ratification item quantity is 2" do
-      pending 'Não está passando'
-      subject.licitation_process_ratification_item.stub(:quantity).and_return(2)
-      expect(subject.quantity).to eq(2)
+    it 'returns the value - authorized value' do
+      expect(subject.value_balance).to eq 7
     end
   end
 
@@ -43,5 +87,20 @@ describe SupplyOrderItem do
 
     subject.valid?
     expect(subject.errors[:authorization_quantity]).to include("deve ser menor ou igual a 3")
+  end
+
+  describe '#authorization_value_should_be_lower_than_value' do
+    before do
+      subject.stub(real_authorization_value: 10)
+      subject.stub(supply_order_item_value_balance: 5)
+      subject.stub(authorization_value_changed?: true)
+      subject.stub(authorization_value_limit: '4,00')
+    end
+
+    it 'sets an error if authorization_value is greater than value' do
+      subject.valid?
+
+      expect(subject.errors[:authorization_value]).to include("deve ser menor ou igual a 4,00")
+    end
   end
 end

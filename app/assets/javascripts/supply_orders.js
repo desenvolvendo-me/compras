@@ -33,13 +33,21 @@ function getRatificationItems(licitationProcessId) {
 }
 
 function fillSupplyOrderQuantities(ratification_items) {
-  var target = $('div#supply_order_items'),
-      template = $('#supply_orderm_items_template');
+  var target           = $('div#supply_order_items'),
+      templateValue    = $('#supply_order_items_value_template'),
+      templateQuantity = $('#supply_order_items_quantity_template');
 
   target.empty();
 
   _.each(ratification_items, function(ratification_item) {
-    target.append(template.mustache(ratification_item));
+    var defaults = { uuid_item: _.uniqueId('fresh-') };
+    var options  = $.extend({}, defaults, ratification_item);
+
+    if (ratification_item.control_amount) {
+      target.append(templateQuantity.mustache(options));
+    } else {
+      target.append(templateValue.mustache(options));
+    };
   });
 }
 

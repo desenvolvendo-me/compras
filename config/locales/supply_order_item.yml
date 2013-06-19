@@ -17,3 +17,7 @@ pt-BR:
         supply_order: "Ordem de Fornecimento"
         total_price: "Total"
         unit_price: "Valor unitário"
+        value: "Valor"
+        authorized_value: "Valor já autorizado"
+        authorization_value: "Valor a autorizar"
+        value_balance: "Saldo"

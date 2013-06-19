@@ -215,6 +215,8 @@ pt-BR:
     purchase_process_creditor_disqualifications:
       <<: *female
 
+    supply_orders:
+      <<: *female
     purchase_process_proposal_tiebreaks:
       update:
         notice: "Desempate editado com sucesso."
