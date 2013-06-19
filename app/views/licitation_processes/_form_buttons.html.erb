@@ -40,6 +40,9 @@
           class: "button primary #{f.object.decorator.has_records_class([f.object.trading])}",
           'data-disabled' => f.object.decorator.disabled_trading_message) %>
 
+        <%= link_to('Mapa de lances', report_map_of_bids_path(resource.id), class: "button primary",
+          'data-disabled' => f.object.decorator.must_have_trading) %>
+
         <% if f.object.trading.present? %>
           <%= link_to('Negociação', list_purchase_process_trading_negotiation_path(resource.trading),
             class: "button primary #{f.object.decorator.has_records_class(f.object.trading_item_negotiations)}",

@@ -1,0 +1,6 @@
+<h1>Propostas</h1>
+<% if resource.purchase_process.judgment_form_lot? %>
+  <%= render 'judgment_form_lot', resource: resource %>
+<% else %>
+  <%= render 'other_judgment_form', resource: resource %>
+<% end %>

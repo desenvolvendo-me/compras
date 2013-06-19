@@ -1,0 +1,99 @@
+<% resource.lots.each do |lot| %>
+  <h2>Lote: <%= lot%></h2>
+
+  <h1>Itens</h1>
+
+  <table class="records items_<%= lot%>">
+    <thead>
+      <tr>
+        <td>Material/Serviço</td>
+        <td>Quantidade</td>
+        <td>Valor unitário</td>
+        <td>Valor total</td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% resource.items_by_lot(lot).each do |item| %>
+        <tr>
+          <td><%= item.material %></td>
+          <td><%= item.quantity %></td>
+          <td><%= item.decorator.unit_price_with_currency %></td>
+          <td><%= item.decorator.total_price_with_currency %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <h1>Propostas</h1>
+  <table class="records proposals_<%= lot%>">
+    <thead>
+      <tr>
+        <td>Fornecedor</td>
+        <td>Valor</td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% resource.proposals_by_lot(lot).each do |creditor_proposal| %>
+        <tr class="<%= creditor_proposal.decorator.css_class %>">
+          <td><%= creditor_proposal.creditor %></td>
+          <td><%= creditor_proposal.decorator.unit_price_with_currency %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<h1>Lances</h1>
+
+<table class="records bids">
+  <thead>
+    <tr>
+      <td>Lote</td>
+      <td>Fornecedor</td>
+      <td>Etapa</td>
+      <td>Lance</td>
+      <td>Valor</td>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% resource.bids_grouped_by_lot.each_value do |items_bids|%>
+      <% items_bids.each do |bid|%>
+      <tr>
+        <td><%= bid.item %></td>
+        <td><%= bid.creditor %></td>
+        <td><%= bid.round %></td>
+        <td><%= bid.number %></td>
+        <td><%= bid.decorator.amount %></td>
+      </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<table class="records negotiations">
+  <thead>
+    <tr><td colspan=3 align="center">Negociações</td></tr>
+
+    <tr>
+      <td>Lote</td>
+      <td>Fornecedor</td>
+      <td>Valor</td>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% resource.trading_items.each do |trading_item| %>
+      <% unless trading_item.negotiation.nil? %>
+          <tr>
+            <td><%= trading_item %></td>
+            <td><%= trading_item.negotiation.creditor %></td>
+            <td><%= trading_item.negotiation.decorator.amount %></td>
+          </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+

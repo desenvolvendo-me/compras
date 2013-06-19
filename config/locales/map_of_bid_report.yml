@@ -1,0 +1,4 @@
+pt-BR:
+  activemodel:
+    attributes:
+      map_of_bid_report:

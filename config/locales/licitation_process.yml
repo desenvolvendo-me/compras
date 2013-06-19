@@ -88,3 +88,4 @@ pt-BR:
       disabled_trading_message: "todas as propostas devem ser preenchidas"
       disabled_negotiation_message: "todos os itens do pregão devem ter um vencedor"
       disabled_trading_message: "deve ter ao menos uma proposta"
+      must_have_trading: "deve ter lances"

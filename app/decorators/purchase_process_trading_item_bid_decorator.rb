@@ -9,6 +9,10 @@ class PurchaseProcessTradingItemBidDecorator
     number_with_precision super
   end
 
+  def amount
+    number_to_currency super if super
+  end
+
   def amount_with_reduction
     number_with_precision(super) || '0,00'
   end

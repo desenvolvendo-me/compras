@@ -8,6 +8,7 @@ class PurchaseProcessTrading < Compras::Model
   has_many :creditors, through: :accreditation_creditors
   has_many :items, class_name: 'PurchaseProcessTradingItem', foreign_key: :trading_id,
     order: :id
+  has_many :items_bids, through: :items, source: :bids, order: :round
 
   has_one :judgment_form, through: :purchase_process
   has_one :purchase_process_accreditation, through: :purchase_process
