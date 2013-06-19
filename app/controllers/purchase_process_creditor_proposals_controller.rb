@@ -39,7 +39,7 @@ class PurchaseProcessCreditorProposalsController < CrudController
   def creditors
     object = build_resource
     object.licitation_process = @licitation_process
-    @creditors = @licitation_process.creditors.includes(:purchase_process_creditor_proposals)
+    @creditors = @licitation_process.creditors_enabled.includes(:purchase_process_creditor_proposals)
   end
 
   private

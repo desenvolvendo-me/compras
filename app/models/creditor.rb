@@ -113,6 +113,13 @@ class Creditor < Compras::Model
     }.uniq
   }
 
+  scope :enabled_or_benefited, -> do
+    joins { bidders.creditor.person.personable(Company).outer.company_size.outer.extended_company_size.outer }.
+    where {
+      bidders.enabled.eq('t') | compras_extended_company_sizes.benefited.eq(true)
+    }.uniq
+  end
+
   scope :without_direct_purchase_ratification, lambda { |licitation_process_id|
     select { 'compras_creditors.*, unico_people.name' }.
     joins { purchase_process_items.licitation_process.licitation_process_ratifications.outer }.

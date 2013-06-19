@@ -214,6 +214,12 @@ class LicitationProcess < Compras::Model
     end
   end
 
+  def creditors_enabled
+    return creditors if trading?
+
+    creditors.enabled_or_benefited
+  end
+
   def update_status(status)
     update_column :status, status
   end

@@ -322,6 +322,31 @@ describe LicitationProcess do
       end
     end
 
+    describe '#creditors_enabled' do
+      context 'when trading' do
+        before { subject.stub(:trading?).and_return true }
+
+        it 'should return the creditors' do
+          subject.should_receive(:creditors).and_return ['creditor']
+
+          expect(subject.creditors_enabled).to eq ['creditor']
+        end
+      end
+
+      context 'when not trading' do
+        let(:creditors) { double(:creditors) }
+
+        before { subject.stub(:trading?).and_return false }
+
+        it 'should return the creditors scoped by enabled_or_benefited' do
+          subject.should_receive(:creditors).and_return creditors
+          creditors.should_receive(:enabled_or_benefited).and_return ['creditor']
+
+          expect(subject.creditors_enabled).to eq ['creditor']
+        end
+      end
+    end
+
     describe "#validate_the_year_to_processe_date_are_the_same" do
       context 'when process_date_year is equals to year' do
         before do
