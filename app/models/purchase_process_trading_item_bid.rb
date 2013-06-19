@@ -37,6 +37,10 @@ class PurchaseProcessTradingItemBid < Compras::Model
     where { status.not_eq(TradingItemBidStatus::WITHOUT_PROPOSAL) }
   }
 
+  scope :creditor_ids, lambda { |creditor_ids|
+    joins { accreditation_creditor }.where { accreditation_creditor.creditor_id.in(creditor_ids) }
+  }
+
   def percent
     return unless amount > BigDecimal("0")
 

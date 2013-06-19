@@ -1,5 +1,4 @@
 class MinutePurchaseProcessTradingReport < ActiveRelatus::Base
-  include EnumerateIt
   attr_accessor :licitation_process_id
 
   def licitation_process
@@ -24,14 +23,6 @@ class MinutePurchaseProcessTradingReport < ActiveRelatus::Base
     I18n.l licitation_process.proposal_envelope_opening_time, format: :hour
   end
 
-  def creditor_accreditations
-    licitation_process.creditors
-  end
-
-  def proposals
-    licitation_process.creditor_proposals
-  end
-
   def judgment_commission_advice
     licitation_process.judgment_commission_advice
   end
@@ -47,6 +38,8 @@ class MinutePurchaseProcessTradingReport < ActiveRelatus::Base
   end
 
   def member
+    return if licitation_commission.nil?
+
     licitation_commission.licitation_commission_members.first
   end
 
@@ -58,13 +51,10 @@ class MinutePurchaseProcessTradingReport < ActiveRelatus::Base
     end
   end
 
-  def trading_items
-    licitation_process.trading_items
-  end
-
   def bids
     return [] if licitation_process.trading_item_bids.nil?
-    licitation_process.trading_item_bids
+
+    bids_creditor_ids ratification_creditor_ids
   end
 
   def auctioneer
@@ -81,12 +71,20 @@ class MinutePurchaseProcessTradingReport < ActiveRelatus::Base
   end
 
   def ratifications_items
-    licitation_process.ratifications_items.select(&:ratificated)
+    licitation_process.ratifications_items.by_ratificated
   end
 
-  protected
+  private
 
   def normalize_attributes
     { :licitation_process => licitation_process_id }
+  end
+
+  def ratification_creditor_ids
+    licitation_process.licitation_process_ratifications.map(&:creditor_id)
+  end
+
+  def bids_creditor_ids(creditor_ids)
+    licitation_process.trading_item_bids.creditor_ids creditor_ids
   end
 end
