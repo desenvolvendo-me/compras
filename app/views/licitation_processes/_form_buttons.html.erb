@@ -41,10 +41,14 @@
 
         <% if f.object.trading.present? %>
           <%= link_to('Negociação', list_purchase_process_trading_negotiation_path(resource.trading),
-            class: "button primary #{f.object.decorator.has_records_class([f.object.trading_item_negotiations])}",
+            class: "button primary #{f.object.decorator.has_records_class(f.object.trading_item_negotiations)}",
             'data-disabled' => f.object.decorator.disabled_negotiation_message) %>
         <% end %>
+      <% end %>
+    </p>
 
+    <p>
+      <% if f.object.trading? %>
         <%= link_to('Habilitação', bidders_path(:licitation_process_id => resource.id),
           class: "button primary #{f.object.decorator.has_records_class(f.object.bidders)}",
           'data-disabled' => f.object.decorator.must_have_published_edital_or_direct_purchase) %>
@@ -57,9 +61,6 @@
       <% end %>
 
       <%= classification_link %>
-    </p>
-
-    <p>
 
       <%= minute_purchase_process_link %>
 
