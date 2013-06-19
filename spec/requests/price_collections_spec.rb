@@ -1008,6 +1008,72 @@ feature "PriceCollections" do
                                           :reason => 'para inserir uma proposta, deve-se cadastrar ao menos um fornecedor'
   end
 
+  scenario 'can not create a new price collection when using an email already in use' do
+    DeliveryLocation.make!(:education)
+    Employee.make!(:sobrinho)
+    PaymentMethod.make!(:dinheiro)
+    Material.make!(:antivirus)
+    Creditor.make!(:sobrinho_sa_without_email)
+    User.make!(:geraldi)
+
+    navigate 'Processos de Compra > Coletas de Preços'
+
+    click_link 'Criar Coleta de Preços'
+
+    within_tab 'Principal' do
+      expect(page).to have_disabled_field 'Número'
+      expect(page).to have_disabled_field 'Status'
+      expect(page).to have_select 'Status', :selected => 'Ativo'
+
+      fill_in 'Ano', :with => '2012'
+      fill_in 'Data', :with => I18n.l(Date.current)
+      select 'Menor preço total por item', :from => 'Tipo de apuração'
+      fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
+      fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
+      fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
+      fill_in 'Prazo de entrega', :with => '1'
+      fill_in 'Vencimento', :with => I18n.l(Date.tomorrow)
+      select 'ano/anos', :from => 'Período do prazo de entrega'
+      fill_in 'Validade da proposta', :with => '1'
+      select 'ano/anos', :from => 'Período da validade da proposta'
+      fill_in 'Objeto', :with => 'objeto da coleta'
+      fill_in 'Observações', :with => 'observacoes da coleta'
+    end
+
+    within_tab 'Lotes de itens' do
+      click_button 'Adicionar Lote'
+
+      fill_in 'Observações', :with => 'lote 1'
+
+      click_button 'Adicionar Item'
+
+      fill_in 'Lote', :with => '1'
+      fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
+
+      # testing fill reference unit with javascript
+      expect(page).to have_disabled_field 'Unidade'
+      expect(page).to have_field 'Unidade', :with => 'UN'
+
+      fill_in 'Marca', :with => 'Norton'
+      fill_in 'Quantidade', :with => '10'
+    end
+
+    within_tab 'Fornecedores' do
+      fill_with_autocomplete 'Fornecedor', :with => 'Gabriel'
+      fill_in 'Email', with: 'tiago.geraldi@gmail.com'
+
+      click_button 'Adicionar'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to_not have_notice 'Coleta de Preços 1/2012 criada com sucesso.'
+
+    within_tab 'Fornecedores' do
+      expect(page).to have_content 'E-mail já está em uso'
+    end
+  end
+
   def make_proposals_dependencies!(price_collection)
     proposal_1 = PriceCollectionProposal.make!(:proposta_de_coleta_de_precos, :price_collection => price_collection)
     proposal_2 = PriceCollectionProposal.make!(:sobrinho_sa_proposta, :price_collection => price_collection)
