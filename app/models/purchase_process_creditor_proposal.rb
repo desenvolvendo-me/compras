@@ -64,7 +64,8 @@ class PurchaseProcessCreditorProposal < Compras::Model
     find_brothers(creditor_proposal).
     joins { bidders }.
     where { '"compras_bidders"."creditor_id" = "compras_purchase_process_creditor_proposals"."creditor_id"' }.
-    where { bidders.enabled.eq(true) & disqualified.eq(false) }
+    where { bidders.enabled.eq(true) & disqualified.eq(false) }.
+    reorder { ranking }
   }
 
   scope :winning_proposals, where { ranking.eq 1 }.order { creditor_id }
