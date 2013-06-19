@@ -178,10 +178,10 @@ feature "LicitationProcessPublications" do
     end
 
     within_tab 'Prazos' do
-      expect(page).to have_disabled_field 'Abertura das propostas', with: ''
-      expect(page).to have_disabled_field 'Abertura da habilitação', with: ''
-      expect(page).to have_disabled_field 'Data do credenciamento', with: ''
-      expect(page).to have_disabled_field 'Data da fase de lances', with: ''
+      expect(page).to have_disabled_element 'Abertura das propostas', reason: 'deve ter uma publicação de edital'
+      expect(page).to have_disabled_element 'Abertura da habilitação', reason: 'deve ter uma publicação de edital'
+      expect(page).to have_disabled_element 'Data do credenciamento', reason: 'deve ter uma publicação de edital'
+      expect(page).to have_disabled_element 'Data da fase de lances', reason: 'deve ter uma publicação de edital'
     end
 
     click_link 'Publicações'
