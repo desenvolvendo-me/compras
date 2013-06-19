@@ -18,7 +18,7 @@ module TceExport::MG
             tp_documento: tp_documento(proposal.creditor),
             nro_documento: only_numbers(proposal.creditor_identity_document),
             nro_lote: lot_number(proposal),
-            nro_item: proposal.item.id,
+            nro_item: proposal.item.item_number,
             dsc_produto_servico: proposal.item.description,
             vl_unitario: vl_unitario(proposal),
             quantidade: quantidade(proposal.item),

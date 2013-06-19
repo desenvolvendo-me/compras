@@ -12,7 +12,7 @@ module TceExport::MG
             tp_documento: tp_documento(ratification.creditor),
             nro_documento: only_numbers(ratification.creditor_identity_document),
             nro_lote: ratification.lot,
-            nro_item: ratification.item.id,
+            nro_item: ratification.item.item_number,
             dsc_produto_servico: ratification.item.description,
             quantidade: quantidade(ratification.item),
             vl_homologado: ratification.unit_price,

@@ -61,7 +61,7 @@ describe TceExport::MG::MonthlyMonitoring::PurchaseOpeningGenerator do
       csv = File.read('tmp/ABERLIC.csv', encoding: 'ISO-8859-1')
 
       expect(csv).to eq "10;98;98029;2013;2;3;1;1;20032013;20032013; ;20042012;Internet; ; ;20052013;2;2;Licitação para compra de carteiras; ; ; ;2;12;Dinheiro;Por Item com Melhor Técnica;2\n" +
-                        "11;98;98029;2013;2;2050;#{item.id};20032013;Antivirus;10,0000;2,0000;UN;000\n" +
+                        "11;98;98029;2013;2;2050;#{item.item_number};20032013;Antivirus;10,0000;2,0000;UN;000\n" +
                         "13;98;98029;2013;2;98;98029;04;01;003;003; ;319001;001;50080"
     end
   end
