@@ -17,7 +17,7 @@ class MapOfProposalReport < ActiveRelatus::Base
   end
 
   def average_unit_price_item(item)
-    item_creditor_proposals(item).sum(:unit_price) / item_creditor_proposals(item).count
+    item.unit_price
   end
 
   def average_total_price_item(item)

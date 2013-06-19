@@ -1,5 +1,6 @@
 require 'report_helper'
 require 'enumerate_it'
+require 'decore'
 require 'app/enumerations/map_proposal_report_order'
 require 'app/reports/map_of_proposal_report'
 
