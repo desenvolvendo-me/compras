@@ -40,6 +40,16 @@ class PurchaseProcessAccreditationCreditor < Compras::Model
     order('has_power_of_attorney DESC, compras_purchase_process_creditor_proposals.unit_price DESC')
   }
 
+  scope :by_lowest_proposal_outer, lambda { |item_id|
+    joins { creditor.purchase_process_creditor_proposals.outer }.
+    where {
+      (creditor.purchase_process_creditor_proposals.purchase_process_item_id.eq(item_id) &
+      creditor.purchase_process_creditor_proposals.disqualified.eq(false) ) |
+      creditor.purchase_process_creditor_proposals.id.eq(nil)
+    }.
+    order('has_power_of_attorney DESC, compras_purchase_process_creditor_proposals.unit_price DESC')
+  }
+
   scope :benefited, lambda {
     joins { company_size.extended_company_size }.
     where {

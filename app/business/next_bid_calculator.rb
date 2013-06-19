@@ -18,7 +18,7 @@ class NextBidCalculator
   attr_reader :item
 
   def item_bids
-    item.bids
+    item.bids(true)
   end
 
   def next_creditor_has_lowest_bid?
