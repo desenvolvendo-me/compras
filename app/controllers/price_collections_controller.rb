@@ -42,18 +42,16 @@ class PriceCollectionsController < CrudController
   def create_resource(object)
     object.status = Status::ACTIVE
 
-    object.transaction do
-      return unless super
-
+    if super
       CreditorUserCreator.new(object, self).generate
     end
   end
 
   def update_resource(object, attributes)
-    object.transaction do
-      return unless super
-
+    if super
       CreditorUserCreator.new(object, self).generate
+
+      return false
     end
   end
 

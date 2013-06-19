@@ -16,9 +16,17 @@ class CreditorUserCreator
       else
         user = create_user(creditor)
 
-        mailer.invite_new_creditor(user, price_collection).deliver
+        if user.persisted?
+          mailer.invite_new_creditor(user, price_collection).deliver
+        else
+          price_collection.errors.add(:email, user.errors.to_a.join(', '))
+
+          return false
+        end
       end
     end
+
+    true
   end
 
   private
@@ -30,11 +38,11 @@ class CreditorUserCreator
   end
 
   def create_user(creditor)
-    user_repository.create!(:name => creditor.name,
-                            :email => creditor_user_email(creditor),
-                            :login => creditor.login,
-                            :authenticable_id => creditor.id,
-                            :authenticable_type => AuthenticableType::CREDITOR)
+    user_repository.create(:name => creditor.name,
+                           :email => creditor_user_email(creditor),
+                           :login => creditor.login,
+                           :authenticable_id => creditor.id,
+                           :authenticable_type => AuthenticableType::CREDITOR)
   end
 
   def creditor_params
@@ -45,7 +53,7 @@ class CreditorUserCreator
     return unless creditor_params
 
     creditor_params.each do |_, value|
-      continue if value[:_destroy] == "true"
+      next if value[:_destroy] == "true"
 
       if value[:creditor_id] == creditor.id.to_s
         return value[:email]

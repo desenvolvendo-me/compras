@@ -86,8 +86,6 @@ describe PriceCollectionsController do
       end
 
       it 'should generate users for any creditor' do
-        price_collection.should_receive(:transaction).and_yield
-
         CreditorUserCreator.any_instance.should_receive(:generate)
 
         put :update, :id => 1
@@ -100,8 +98,6 @@ describe PriceCollectionsController do
       end
 
       it 'should not generate users for any creditor' do
-        price_collection.should_receive(:transaction).and_yield
-
         CreditorUserCreator.any_instance.should_not_receive(:generate)
 
         put :update, :id => 1

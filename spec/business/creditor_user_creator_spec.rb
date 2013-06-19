@@ -79,35 +79,59 @@ describe CreditorUserCreator do
       creditor_2.stub(:user?).and_return false
     end
 
-    it 'generates a user for each creditor in price_collection' do
-      mailer.as_null_object
+    context 'when users have no errors' do
+      it 'generates a user for each creditor in price_collection' do
+        mailer.as_null_object
 
-      subject.should_receive(:creditor_params).any_number_of_times.and_return(creditor_params)
+        subject.should_receive(:creditor_params).any_number_of_times.and_return(creditor_params)
 
-      creditor_1_info.merge!(:authenticable_id => 1,
-                             :authenticable_type => AuthenticableType::CREDITOR)
-      creditor_2_info.merge!(:authenticable_id => 2,
-                             :authenticable_type => AuthenticableType::CREDITOR)
+        creditor_1_info.merge!(:authenticable_id => 1,
+                               :authenticable_type => AuthenticableType::CREDITOR)
+        creditor_2_info.merge!(:authenticable_id => 2,
+                               :authenticable_type => AuthenticableType::CREDITOR)
 
-      user_repository.should_receive(:create!).with(creditor_1_info)
-      user_repository.should_receive(:create!).with(creditor_2_info)
+        user_repository.should_receive(:create).with(creditor_1_info).and_return(user_1)
+        user_repository.should_receive(:create).with(creditor_2_info).and_return(user_2)
 
-      subject.generate
+        user_1.should_receive(:persisted?).and_return(true)
+        user_2.should_receive(:persisted?).and_return(true)
+
+        mailer.should_receive(:invite_new_creditor).
+               with(user_1, price_collection).
+               and_return(stub(:deliver => true))
+        mailer.should_receive(:invite_new_creditor).
+               with(user_2, price_collection).
+               and_return(stub(:deliver => true))
+
+        expect(subject.generate).to be_true
+      end
     end
 
-    it 'sends an email for each generated user' do
-      user_repository.stub(:create!).and_return(user_1, user_2)
+    context 'when users have errors' do
+      it 'should add an error to price_collection and return false' do
+        mailer.as_null_object
+        errors = double(:errors)
 
-      subject.should_receive(:creditor_params).any_number_of_times.and_return(creditor_params)
+        subject.should_receive(:creditor_params).any_number_of_times.and_return(creditor_params)
 
-      mailer.should_receive(:invite_new_creditor).
-             with(user_1, price_collection).
-             and_return(stub(:deliver => true))
-      mailer.should_receive(:invite_new_creditor).
-             with(user_2, price_collection).
-             and_return(stub(:deliver => true))
+        creditor_1_info.merge!(:authenticable_id => 1,
+                               :authenticable_type => AuthenticableType::CREDITOR)
+        creditor_2_info.merge!(:authenticable_id => 2,
+                               :authenticable_type => AuthenticableType::CREDITOR)
 
-      subject.generate
+        user_repository.should_receive(:create).with(creditor_1_info).and_return(user_1)
+
+        user_1.should_receive(:persisted?).and_return(false)
+
+        mailer.should_not_receive(:invite_new_creditor)
+
+        user_1.should_receive(:errors).and_return(['error'])
+
+        price_collection.should_receive(:errors).and_return(errors)
+        errors.should_receive(:add).with(:email, 'error')
+
+        expect(subject.generate).to be_false
+      end
     end
   end
 
@@ -144,8 +168,10 @@ describe CreditorUserCreator do
       creditor_2_info.merge!(:authenticable_id => 2,
                              :authenticable_type => AuthenticableType::CREDITOR)
 
-      user_repository.should_not_receive(:create!).with(creditor_1_info)
-      user_repository.should_receive(:create!).with(creditor_2_info)
+      user_repository.should_not_receive(:create).with(creditor_1_info)
+      user_repository.should_receive(:create).with(creditor_2_info).and_return(user_2)
+
+      user_2.should_receive(:persisted?).and_return(true)
 
       subject.generate
     end
@@ -156,7 +182,8 @@ describe CreditorUserCreator do
 
       subject.should_receive(:creditor_params).any_number_of_times.and_return(creditor_params)
 
-      user_repository.stub(:create!).with(creditor_2_info).and_return(user_2)
+      user_repository.stub(:create).with(creditor_2_info).and_return(user_2)
+      user_2.should_receive(:persisted?).and_return(true)
 
       mailer.should_receive(:invite_registered_creditor).
              with(creditor_1, price_collection, 'Prefeitura', 'Customer').and_return(stub(:deliver => true))
