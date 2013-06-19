@@ -222,4 +222,40 @@ describe LicitationProcessRatificationItemDecorator do
       end
     end
   end
+
+  describe '#authorized_value' do
+    context 'theres authorized_value ' do
+      before { component.stub(authorized_value: 10.15) }
+
+      it 'returns formatted authorized_value' do
+        expect(subject.authorized_value).to eq '10,15'
+      end
+    end
+
+    context 'theres not authorized_value ' do
+      before { component.stub(authorized_value: nil) }
+
+      it 'returns nil' do
+        expect(subject.authorized_value).to be_nil
+      end
+    end
+  end
+
+  describe '#supply_order_item_value_balance' do
+    context 'theres supply_order_item_value_balance' do
+      before { component.stub(supply_order_item_value_balance: 10.15) }
+
+      it 'returns formatted supply_order_item_value_balance' do
+        expect(subject.supply_order_item_value_balance).to eq '10,15'
+      end
+    end
+
+    context 'theres not supply_order_item_value_balance' do
+      before { component.stub(supply_order_item_value_balance: nil) }
+
+      it 'returns nil' do
+        expect(subject.supply_order_item_value_balance).to be_nil
+      end
+    end
+  end
 end

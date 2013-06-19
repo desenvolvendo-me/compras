@@ -18,6 +18,7 @@ class LicitationProcessRatificationItem < Compras::Model
   delegate :execution_unit_responsible, :year, :process,
     to: :licitation_process, allow_nil: true, prefix: true
   delegate :material, :quantity, :lot, to: :item, allow_nil: true
+  delegate :control_amount?, to: :material, allow_nil: true
 
   scope :creditor_id, ->(creditor_id) do
     joins { licitation_process_ratification }.
@@ -45,8 +46,16 @@ class LicitationProcessRatificationItem < Compras::Model
     supply_order_items.sum(:authorization_quantity)
   end
 
+  def authorized_value
+    supply_order_items.sum(:authorization_value)
+  end
+
   def supply_order_item_balance
     (quantity || 0) - (authorized_quantity || 0)
+  end
+
+  def supply_order_item_value_balance
+    (total_price || 0) - (authorized_value || 0)
   end
 
   orderize "id DESC"

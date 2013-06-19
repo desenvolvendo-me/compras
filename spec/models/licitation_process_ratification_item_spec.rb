@@ -13,6 +13,7 @@ describe LicitationProcessRatificationItem do
   it { should delegate(:description).to(:material).allowing_nil true }
   it { should delegate(:code).to(:material).allowing_nil true }
   it { should delegate(:reference_unit).to(:material).allowing_nil true }
+  it { should delegate(:control_amount?).to(:material).allowing_nil true }
   it { should delegate(:unit_price).to(:purchase_process_creditor_proposal).allowing_nil true }
   it { should delegate(:total_price).to(:purchase_process_creditor_proposal).allowing_nil true }
   it { should delegate(:execution_unit_responsible).to(:licitation_process).allowing_nil(true).prefix(true) }
@@ -86,6 +87,39 @@ describe LicitationProcessRatificationItem do
 
         expect(subject.total_price).to eq 'total_price'
       end
+    end
+  end
+
+  describe '#authorized_quantity' do
+    let(:supply_order_items) { double :supply_order_items }
+
+    it 'returns the sum of supply items authorized quantity' do
+      subject.stub(supply_order_items: supply_order_items)
+      supply_order_items.should_receive(:sum).with(:authorization_quantity)
+
+      subject.authorized_quantity
+    end
+  end
+
+  describe '#authorized_value' do
+    let(:supply_order_items) { double :supply_order_items }
+
+    it 'returns the sum of supply items authorized value' do
+      subject.stub(supply_order_items: supply_order_items)
+      supply_order_items.should_receive(:sum).with(:authorization_value)
+
+      subject.authorized_value
+    end
+  end
+
+  describe '#supply_order_item_value_balance' do
+    before do
+      subject.stub(total_price: 10)
+      subject.stub(authorized_value: 3)
+    end
+
+    it 'returns total_price - authorized_value' do
+      expect(subject.supply_order_item_value_balance).to eq 7
     end
   end
 end

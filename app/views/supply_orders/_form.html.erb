@@ -23,24 +23,27 @@
 </div>
 
 <div id="supply_order_items">
-<%= f.association :items do |i| %>
-  <%= render 'supply_order_items/form',
-    f: i,
-    authorized_quantity:  i.object.authorized_quantity,
-    balance:              i.object.balance,
-    material:             i.object.material,
-    quantity:             i.object.quantity,
-    ratification_item_id: i.object.licitation_process_ratification_item.id,
-    reference_unit:       i.object.reference_unit,
-    total_price:          i.object.total_price,
-    unit_price:           i.object.unit_price
-  %>
-<% end %>
+  <%= f.association :items do |i| %>
+    <%= render i.object.decorator.nested_form_path,
+      f: i,
+      authorized_quantity:  i.object.authorized_quantity,
+      authorized_value:     i.object.decorator.authorized_value,
+      balance:              i.object.balance,
+      value_balance:        i.object.decorator.value_balance,
+      material:             i.object.material,
+      quantity:             i.object.quantity,
+      ratification_item_id: i.object.licitation_process_ratification_item.id,
+      reference_unit:       i.object.reference_unit,
+      total_price:          i.object.decorator.total_price,
+      unit_price:           i.object.decorator.unit_price,
+      control_amount:       i.object.control_amount?
+    %>
+  <% end %>
 </div>
 
-<%= mustache 'supply_orderm_items_template' do %>
-  <%= f.association :items_attributes, :collection => f.object.items.build, :index => '{{uuid_item}}' do |p| %>
-    <%= render 'supply_order_items/form',
+<%= mustache 'supply_order_items_quantity_template' do %>
+  <%= f.association :items_attributes, collection: f.object.items.build, index: '{{uuid_item}}' do |p| %>
+    <%= render 'supply_order_items/form_quantity',
       f: p,
       authorized_quantity:  '{{authorized_quantity}}',
       balance:              '{{balance}}',
@@ -49,7 +52,25 @@
       ratification_item_id: '{{id}}',
       reference_unit:       '{{reference_unit}}',
       total_price:          '{{total_price}}',
-      unit_price:           '{{unit_price}}'
+      unit_price:           '{{unit_price}}',
+      control_amount:       '{{control_amount}}'
+    %>
+  <% end %>
+<% end %>
+
+<%= mustache 'supply_order_items_value_template' do %>
+  <%= f.association :items_attributes, collection: f.object.items.build, index: '{{uuid_item}}' do |p| %>
+    <%= render 'supply_order_items/form_value',
+      f: p,
+      authorized_value:     '{{authorized_value}}',
+      value_balance:        '{{value_balance}}',
+      material:             '{{material}}',
+      value:                '{{value}}',
+      ratification_item_id: '{{id}}',
+      reference_unit:       '{{reference_unit}}',
+      total_price:          '{{total_price}}',
+      unit_price:           '{{unit_price}}',
+      control_amount:       '{{control_amount}}'
     %>
   <% end %>
 <% end %>
