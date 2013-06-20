@@ -115,7 +115,7 @@ feature "PriceCollectionProposals" do
     end
 
     scenario 'I can see only my proposals' do
-      PriceCollection.make!(:coleta_de_precos_com_2_propostas)
+      PriceCollection.make!(:coleta_de_precos_com_3_propostas)
 
       navigate 'Compras e Licitações > Coletas de Preço'
 
@@ -127,7 +127,7 @@ feature "PriceCollectionProposals" do
     end
 
     scenario 'I can see the information about the price collection' do
-      PriceCollection.make!(:coleta_de_precos_com_2_propostas)
+      PriceCollection.make!(:coleta_de_precos_com_3_propostas)
 
       navigate 'Compras e Licitações > Coletas de Preço'
 
@@ -162,7 +162,7 @@ feature "PriceCollectionProposals" do
     end
 
     scenario 'I can update my own proposals' do
-      PriceCollection.make!(:coleta_de_precos_com_2_propostas)
+      PriceCollection.make!(:coleta_de_precos_com_3_propostas)
 
       navigate 'Compras e Licitações > Coletas de Preço'
 
@@ -190,7 +190,7 @@ feature "PriceCollectionProposals" do
     end
 
     scenario "I can not update other's proposals" do
-       collection = PriceCollection.make!(:coleta_de_precos_com_2_propostas)
+       collection = PriceCollection.make!(:coleta_de_precos_com_3_propostas)
        proposal = collection.price_collection_proposals.first
 
        visit "/price_collection_proposals/#{proposal.id}/edit"

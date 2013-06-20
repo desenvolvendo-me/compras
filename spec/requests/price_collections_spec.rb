@@ -74,6 +74,9 @@ feature "PriceCollections" do
     PaymentMethod.make!(:dinheiro)
     Material.make!(:antivirus)
     Creditor.make!(:wenderson_sa)
+    Creditor.make!(:mateus)
+    Creditor.make!(:ibm)
+
     PurchaseSolicitation.make!(:reparo_liberado, accounting_year: Date.current.year)
 
     navigate 'Processos de Compra > Coletas de Preços'
@@ -143,12 +146,32 @@ feature "PriceCollections" do
 
       click_button 'Adicionar'
 
-      within_records do
-        expect(page).to have_css '.nested-record', :count => 1
+      fill_with_autocomplete 'Fornecedor', :with => 'Mateus'
+      expect(page).to have_field 'Email', :with => 'mcomogo@gmail.com'
 
-        within '.nested-record:first' do
+      click_button 'Adicionar'
+
+      fill_with_autocomplete 'Fornecedor', :with => 'IBM'
+      expect(page).to have_field 'Email', :with => 'ibm@gmail.com'
+
+      click_button 'Adicionar'
+
+      within_records do
+        expect(page).to have_css '.nested-record', :count => 3
+
+        within 'tbody tr:nth-child(1)' do
           expect(page).to have_content 'Wenderson Malheiros'
           expect(page).to have_content 'wenderson.malheiros@gmail.com'
+        end
+
+        within 'tbody tr:nth-child(2)' do
+          expect(page).to have_content 'Mateus'
+          expect(page).to have_content 'mcomogo@gmail.com'
+        end
+
+        within 'tbody tr:nth-child(3)' do
+          expect(page).to have_content 'IBM'
+          expect(page).to have_content 'ibm@gmail.com'
         end
       end
     end
@@ -209,11 +232,21 @@ feature "PriceCollections" do
 
     within_tab 'Fornecedores' do
       within_records do
-        expect(page).to have_css '.nested-record', :count => 1
+        expect(page).to have_css '.nested-record', :count => 3
 
-        within '.nested-record:first' do
+        within 'tbody tr:nth-child(1)' do
           expect(page).to have_content 'Wenderson Malheiros'
           expect(page).to have_content 'wenderson.malheiros@gmail.com'
+        end
+
+        within 'tbody tr:nth-child(2)' do
+          expect(page).to have_content 'Mateus'
+          expect(page).to have_content 'mcomogo@gmail.com'
+        end
+
+        within 'tbody tr:nth-child(3)' do
+          expect(page).to have_content 'IBM'
+          expect(page).to have_content 'ibm@gmail.com'
         end
       end
     end
@@ -231,7 +264,7 @@ feature "PriceCollections" do
     Employee.make!(:wenderson)
     PaymentMethod.make!(:cheque)
     Material.make!(:arame_farpado)
-    Creditor.make!(:sobrinho_sa, :person => Person.make!(:sobrinho_without_email, :name => 'José Gomes'))
+
 
     navigate 'Processos de Compra > Coletas de Preços'
 
@@ -274,17 +307,23 @@ feature "PriceCollections" do
 
     within_tab 'Fornecedores' do
       within_records do
-        within '.nested-record:first' do
+        expect(page).to have_css '.nested-record', :count => 3
+
+        within 'tbody tr:nth-child(1)' do
           expect(page).to have_content 'Wenderson Malheiros'
           expect(page).to have_content 'wenderson.malheiros@gmail.com'
         end
+
+        within 'tbody tr:nth-child(2)' do
+          expect(page).to have_content 'Gabriel Sobrinho'
+          expect(page).to have_content 'tiago.geraldi@gmail.com'
+        end
+
+        within 'tbody tr:nth-child(3)' do
+          expect(page).to have_content 'IBM'
+          expect(page).to have_content 'alovisk@gmail.com'
+        end
       end
-
-      click_link 'Remover'
-
-      click_button 'Adicionar'
-
-      expect(page).to_not have_css '.nested-record'
     end
 
     click_button 'Salvar'
@@ -349,6 +388,9 @@ feature "PriceCollections" do
     DeliveryLocation.make!(:education)
     Employee.make!(:sobrinho)
     PaymentMethod.make!(:dinheiro)
+    Creditor.make!(:wenderson_sa)
+    Creditor.make!(:mateus)
+    Creditor.make!(:ibm)
 
     navigate 'Processos de Compra > Coletas de Preços'
 
@@ -375,6 +417,23 @@ feature "PriceCollections" do
       fill_in 'Observações', :with => 'lote 2'
     end
 
+    within_tab 'Fornecedores' do
+      fill_with_autocomplete 'Fornecedor', :with => 'Wen'
+      expect(page).to have_field 'Email', :with => 'wenderson.malheiros@gmail.com'
+
+      click_button 'Adicionar'
+
+      fill_with_autocomplete 'Fornecedor', :with => 'Mateus'
+      expect(page).to have_field 'Email', :with => 'mcomogo@gmail.com'
+
+      click_button 'Adicionar'
+
+      fill_with_autocomplete 'Fornecedor', :with => 'IBM'
+      expect(page).to have_field 'Email', :with => 'ibm@gmail.com'
+
+      click_button 'Adicionar'
+    end
+
     click_button 'Salvar'
 
     within_tab 'Lotes de itens' do
@@ -383,7 +442,7 @@ feature "PriceCollections" do
   end
 
   scenario 'trying to remove all the items to see the error message' do
-    PriceCollection.make!(:coleta_de_precos)
+    price_collection = PriceCollection.make!(:coleta_de_precos)
 
     navigate 'Processos de Compra > Coletas de Preços'
 
@@ -484,7 +543,7 @@ feature "PriceCollections" do
   end
 
   scenario 'showing numberd labels on each lot' do
-    PriceCollection.make!(:coleta_de_precos)
+    price_collection = PriceCollection.make!(:coleta_de_precos)
 
     navigate 'Processos de Compra > Coletas de Preços'
 
@@ -519,7 +578,8 @@ feature "PriceCollections" do
   end
 
   scenario 'calc by lowest_total_price_by_item' do
-    price_collection = PriceCollection.make!(:coleta_de_precos_com_2_lotes, :type_of_calculation => PriceCollectionTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM)
+    price_collection = PriceCollection.make!(:coleta_de_precos_com_2_lotes,
+                          type_of_calculation: PriceCollectionTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM)
 
     make_proposals_dependencies!(price_collection)
 
@@ -537,34 +597,20 @@ feature "PriceCollections" do
 
     expect(page).to have_content 'Apuração: Menor preço total por item'
 
-    expect(page).to have_content 'Gabriel Sobrinho'
+    expect(page).to have_content 'Wenderson Malheiros'
 
-    within '.classification-1-1' do
-      expect(page).to have_content 'Antivirus'
-      expect(page).to have_content '40,00'
+    within '.classification-1-3' do
+      expect(page).to have_content 'Arame comum'
+      expect(page).to have_content '2,00'
       expect(page).to have_content '400,00'
       expect(page).to have_content 'Sim'
     end
 
-    within '.classification-2-0' do
-      expect(page).to have_content 'Arame comum'
-      expect(page).to have_content '3,00'
-      expect(page).to have_content '600,00'
-      expect(page).to have_content 'Não'
-    end
+    expect(page).to have_content 'Gabriel Sobrinho'
 
-    expect(page).to have_content 'Wenderson Malheiros'
-
-    within '.classification-2-1' do
+    within '.classification-1-2' do
       expect(page).to have_content 'Antivirus'
-      expect(page).to have_content '50,00'
-      expect(page).to have_content '500,00'
-      expect(page).to have_content 'Não'
-    end
-
-    within '.classification-1-0' do
-      expect(page).to have_content 'Arame comum'
-      expect(page).to have_content '2,00'
+      expect(page).to have_content '40,00'
       expect(page).to have_content '400,00'
       expect(page).to have_content 'Sim'
     end
@@ -577,9 +623,10 @@ feature "PriceCollections" do
   end
 
   scenario 'calc by lowest_total_price_by_item with zero item' do
-    price_collection = PriceCollection.make!(:coleta_de_precos_com_2_lotes, :type_of_calculation => PriceCollectionTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM)
-    proposal_1 = PriceCollectionProposal.make!(:proposta_de_coleta_de_precos, :price_collection => price_collection)
-    proposal_2 = PriceCollectionProposal.make!(:sobrinho_sa_proposta, :price_collection => price_collection)
+    price_collection = PriceCollection.make!(:coleta_de_precos_com_2_lotes, type_of_calculation: PriceCollectionTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM)
+    proposal_1 = PriceCollectionProposal.make!(:proposta_de_coleta_de_precos, price_collection: price_collection)
+    proposal_2 = PriceCollectionProposal.make!(:sobrinho_sa_proposta, price_collection: price_collection,
+                   creditor: Creditor.make(:sobrinho_sa, accounts: [ CreditorBankAccount.make(:conta_2, number: '000103') ] ))
 
     PriceCollectionProposalItem.make!(:wenderson_antivirus,
                                       :price_collection_proposal => proposal_1,
@@ -615,27 +662,13 @@ feature "PriceCollections" do
 
     expect(page).to have_content 'Gabriel Sobrinho'
 
-    within '.classification--1-0' do
-      expect(page).to have_content 'Antivirus'
-      expect(page).to have_content '0,00'
-      expect(page).to have_content 'Não'
-    end
-
-    within '.classification-2-1' do
-      expect(page).to have_content 'Arame comum'
-      expect(page).to have_content '3,00'
-      expect(page).to have_content 'Não'
-    end
-
-    expect(page).to have_content 'Wenderson Malheiros'
-
-    within '.classification-1-1' do
+    within '.classification-1-0' do
       expect(page).to have_content 'Antivirus'
       expect(page).to have_content '50,00'
       expect(page).to have_content 'Sim'
     end
 
-    within '.classification-1-0' do
+    within '.classification-1-1' do
       expect(page).to have_content 'Arame comum'
       expect(page).to have_content '2,00'
       expect(page).to have_content 'Sim'
@@ -663,33 +696,49 @@ feature "PriceCollections" do
 
     expect(page).to have_content 'Wenderson Malheiros'
 
-    within '.classification-2-0-0' do
+    within '.classification--1-0-0' do
       expect(page).to have_content 'Antivirus'
-      expect(page).to have_content '50,00'
-      expect(page).to have_content '500,00'
+      expect(page).to have_content '0,00'
+      expect(page).to have_content '0,00'
       expect(page).to have_content 'Não'
     end
 
-    within '.classification-1-1-0' do
+    within '.classification--1-1-0' do
       expect(page).to have_content 'Arame comum'
-      expect(page).to have_content '2,00'
-      expect(page).to have_content '400,00'
-      expect(page).to have_content 'Sim'
+      expect(page).to have_content '0,00'
+      expect(page).to have_content '0,00'
+      expect(page).to have_content 'Não'
     end
 
     expect(page).to have_content 'Gabriel Sobrinho'
 
-    within '.classification-1-0-0' do
+    within '.classification--1-0-0' do
       expect(page).to have_content 'Antivirus'
-      expect(page).to have_content '40,00'
-      expect(page).to have_content '400,00'
-      expect(page).to have_content 'Sim'
+      expect(page).to have_content '0,00'
+      expect(page).to have_content '0,00'
+      expect(page).to have_content 'Não'
     end
 
-    within 'tr.classification-2-1-0' do
+    within '.classification--1-1-0' do
       expect(page).to have_content 'Arame comum'
-      expect(page).to have_content '3,00'
-      expect(page).to have_content '600,00'
+      expect(page).to have_content '0,00'
+      expect(page).to have_content '0,00'
+      expect(page).to have_content 'Não'
+    end
+
+    expect(page).to have_content 'IBM'
+
+    within '.classification--1-0-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '0,00'
+      expect(page).to have_content '0,00'
+      expect(page).to have_content 'Não'
+    end
+
+    within '.classification--1-1-0' do
+      expect(page).to have_content 'Arame comum'
+      expect(page).to have_content '0,00'
+      expect(page).to have_content '0,00'
       expect(page).to have_content 'Não'
     end
   end
@@ -697,7 +746,8 @@ feature "PriceCollections" do
   scenario 'calc by lowest_price_by_lot with item zero' do
     price_collection = PriceCollection.make!(:coleta_de_precos_com_2_itens_no_mesmo_lote, :type_of_calculation => PriceCollectionTypeOfCalculation::LOWEST_PRICE_BY_LOT)
     proposal_1 = PriceCollectionProposal.make!(:proposta_de_coleta_de_precos, :price_collection => price_collection)
-    proposal_2 = PriceCollectionProposal.make!(:sobrinho_sa_proposta, :price_collection => price_collection)
+    proposal_2 = PriceCollectionProposal.make!(:sobrinho_sa_proposta, price_collection: price_collection,
+                   creditor: Creditor.make(:sobrinho_sa, accounts: [ CreditorBankAccount.make(:conta_2, number: '000103') ] ))
 
     PriceCollectionProposalItem.make!(:wenderson_antivirus,
                                       :price_collection_proposal => proposal_1,
@@ -729,22 +779,6 @@ feature "PriceCollections" do
 
     expect(page).to have_content 'Apuração: Menor preço por lote'
 
-    expect(page).to have_content 'Wenderson Malheiros'
-
-    within '.classification--1-0-0' do
-      expect(page).to have_content 'Antivirus'
-      expect(page).to have_content '0,00'
-      expect(page).to have_content 'Não'
-    end
-
-    within '.classification--1-0-1' do
-      expect(page).to have_content 'Office'
-      expect(page).to have_content '10,00'
-      expect(page).to have_content 'Não'
-    end
-
-    expect(page).to have_content 'Gabriel Sobrinho'
-
     within '.classification-1-0-0' do
       expect(page).to have_content 'Antivirus'
       expect(page).to have_content '30,00'
@@ -760,8 +794,29 @@ feature "PriceCollections" do
 
   scenario 'calc by lowest_global_price' do
     price_collection = PriceCollection.make!(:coleta_de_precos_com_2_lotes, :type_of_calculation => PriceCollectionTypeOfCalculation::LOWEST_GLOBAL_PRICE)
+    proposal_1 = PriceCollectionProposal.make!(:proposta_de_coleta_de_precos, :price_collection => price_collection)
+    proposal_2 = PriceCollectionProposal.make!(:sobrinho_sa_proposta, price_collection: price_collection,
+                   creditor: Creditor.make(:sobrinho_sa, accounts: [ CreditorBankAccount.make(:conta_2, number: '000103') ] ))
 
-    make_proposals_dependencies!(price_collection)
+    PriceCollectionProposalItem.make!(:wenderson_antivirus,
+                                      :price_collection_proposal => proposal_1,
+                                      :price_collection_lot_item => price_collection.items.first,
+                                      :unit_price => 0)
+    PriceCollectionProposalItem.make!(:wenderson_arame,
+                                      :price_collection_proposal => proposal_1,
+                                      :price_collection_lot_item => price_collection.items.second,
+                                      :unit_price => 3)
+
+    PriceCollectionProposalItem.make!(:sobrinho_antivirus,
+                                      :price_collection_proposal => proposal_2,
+                                      :price_collection_lot_item => price_collection.items.first,
+                                      :unit_price => 50)
+    PriceCollectionProposalItem.make!(:sobrinho_arame,
+                                      :price_collection_proposal => proposal_2,
+                                      :price_collection_lot_item => price_collection.items.second,
+                                      :unit_price => 2)
+
+    #make_proposals_dependencies!(price_collection)
 
     navigate 'Processos de Compra > Coletas de Preços'
 
@@ -777,7 +832,7 @@ feature "PriceCollections" do
 
     expect(page).to have_content 'Apuração: Menor preço global'
 
-    expect(page).to have_content 'Wenderson Malheiros'
+    expect(page).to have_content 'Gabriel Sobrinho'
 
     within '.classification-1-0' do
       expect(page).to have_content 'Antivirus'
@@ -792,28 +847,13 @@ feature "PriceCollections" do
       expect(page).to have_content '400,00'
       expect(page).to have_content 'Sim'
     end
-
-    expect(page).to have_content 'Gabriel Sobrinho'
-
-    within '.classification-2-0' do
-      expect(page).to have_content 'Antivirus'
-      expect(page).to have_content '40,00'
-      expect(page).to have_content '400,00'
-      expect(page).to have_content 'Não'
-    end
-
-    within '.classification-2-1' do
-      expect(page).to have_content 'Arame comum'
-      expect(page).to have_content '3,00'
-      expect(page).to have_content '600,00'
-      expect(page).to have_content 'Não'
-    end
   end
 
   scenario 'calc by lowest_global_price with unit price equals zero' do
     price_collection = PriceCollection.make!(:coleta_de_precos_com_2_lotes, :type_of_calculation => PriceCollectionTypeOfCalculation::LOWEST_GLOBAL_PRICE)
     proposal_1 = PriceCollectionProposal.make!(:proposta_de_coleta_de_precos, :price_collection => price_collection)
-    proposal_2 = PriceCollectionProposal.make!(:sobrinho_sa_proposta, :price_collection => price_collection)
+    proposal_2 = PriceCollectionProposal.make!(:sobrinho_sa_proposta, price_collection: price_collection,
+                   creditor: Creditor.make(:sobrinho_sa, accounts: [ CreditorBankAccount.make(:conta_2, number: '000103') ] ))
 
     PriceCollectionProposalItem.make!(:wenderson_antivirus,
                                       :price_collection_proposal => proposal_1,
@@ -848,18 +888,6 @@ feature "PriceCollections" do
     expect(page).to have_content 'Apuração: Menor preço global'
 
     expect(page).to have_content 'Wenderson Malheiros'
-
-    within '.classification--1-0' do
-      expect(page).to have_content 'Antivirus'
-      expect(page).to have_content '0,00'
-      expect(page).to have_content 'Não'
-    end
-
-    within '.classification--1-1' do
-      expect(page).to have_content 'Arame comum'
-      expect(page).to have_content '10,00'
-      expect(page).to have_content 'Não'
-    end
 
     expect(page).to have_content 'Gabriel Sobrinho'
 
@@ -937,7 +965,14 @@ feature "PriceCollections" do
 
   scenario 'opening the filter modal' do
     PriceCollection.make!(:coleta_de_precos)
-    PriceCollection.make!(:coleta_de_precos_anulada)
+
+    PriceCollection.make!(:coleta_de_precos_anulada,
+      price_collection_proposals: [ PriceCollectionProposal.make!(:proposta_de_coleta_de_precos, price_collection: nil),
+                                    PriceCollectionProposal.make!(:proposta_de_coleta_de_precos, price_collection: nil),
+                                    PriceCollectionProposal.make!(:sobrinho_sa_proposta, price_collection: nil,
+                                      creditor: Creditor.make!(:ibm, user: User.make!(:geraldi, login: 'alovisk', email: 'alovisk@gmail.com'),
+                                        accounts: [ CreditorBankAccount.make(:conta_2, number: '000104') ]))
+                                  ])
 
     navigate 'Processos de Compra > Coletas de Preços'
 
@@ -981,6 +1016,8 @@ feature "PriceCollections" do
     Employee.make!(:sobrinho)
     PaymentMethod.make!(:dinheiro)
     Material.make!(:antivirus)
+    Creditor.make!(:wenderson_sa)
+    Creditor.make!(:mateus)
     Creditor.make!(:sobrinho_sa_without_email)
     User.make!(:geraldi)
 
@@ -1027,8 +1064,19 @@ feature "PriceCollections" do
     end
 
     within_tab 'Fornecedores' do
+      fill_with_autocomplete 'Fornecedor', :with => 'Wen'
+      expect(page).to have_field 'Email', :with => 'wenderson.malheiros@gmail.com'
+
+      click_button 'Adicionar'
+
+      fill_with_autocomplete 'Fornecedor', :with => 'Mateus'
+      expect(page).to have_field 'Email', :with => 'mcomogo@gmail.com'
+
+      click_button 'Adicionar'
+
       fill_with_autocomplete 'Fornecedor', :with => 'Gabriel'
-      fill_in 'Email', with: 'tiago.geraldi@gmail.com'
+      expect(page).to have_field 'Email', :with => ''
+      fill_in 'Email', with: 'mcomogo@gmail.com'
 
       click_button 'Adicionar'
     end
@@ -1043,21 +1091,15 @@ feature "PriceCollections" do
   end
 
   def make_proposals_dependencies!(price_collection)
-    proposal_1 = PriceCollectionProposal.make!(:proposta_de_coleta_de_precos, :price_collection => price_collection)
-    proposal_2 = PriceCollectionProposal.make!(:sobrinho_sa_proposta, :price_collection => price_collection)
-
     PriceCollectionProposalItem.make!(:wenderson_antivirus,
-                                      :price_collection_proposal => proposal_1,
+                                      :price_collection_proposal => price_collection.price_collection_proposals.first,
                                       :price_collection_lot_item => price_collection.items.first)
     PriceCollectionProposalItem.make!(:wenderson_arame,
-                                      :price_collection_proposal => proposal_1,
+                                      :price_collection_proposal => price_collection.price_collection_proposals.first,
                                       :price_collection_lot_item => price_collection.items.second)
 
     PriceCollectionProposalItem.make!(:sobrinho_antivirus,
-                                      :price_collection_proposal => proposal_2,
+                                      :price_collection_proposal => price_collection.price_collection_proposals.second,
                                       :price_collection_lot_item => price_collection.items.first)
-    PriceCollectionProposalItem.make!(:sobrinho_arame,
-                                      :price_collection_proposal => proposal_2,
-                                      :price_collection_lot_item => price_collection.items.second)
   end
 end

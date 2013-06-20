@@ -62,6 +62,7 @@ describe PriceCollection do
           with_message("deve ser igual ou posterior a data atual (#{I18n.l(Date.current)})")
       end
     end
+
   end
 
   it "should return code_and_year as to_s method" do
@@ -104,6 +105,22 @@ describe PriceCollection do
       subject.should_receive(:price_collection_lots).and_return(lot_with_items)
 
       expect(subject.price_collection_lots_with_items.size).to eq 1
+    end
+  end
+
+  describe "#validate_quantity_of_creditors" do
+    it "when returns 2 creditors" do
+      subject.stub(:proposals_count).and_return(2)
+      subject.valid?
+
+      expect(subject.errors[:base]).to include "deve ter no mínimo três fornecedores"
+    end
+
+    it "when returns 4 creditors" do
+      subject.stub(:proposals_count).and_return(4)
+      subject.valid?
+
+      expect(subject.errors[:base]).to_not include "deve ter no mínimo três fornecedores"
     end
   end
 end

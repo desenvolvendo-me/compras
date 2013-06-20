@@ -12,6 +12,8 @@ end
 
 PriceCollectionProposal.blueprint(:sobrinho_sa_proposta) do
   price_collection { PriceCollection.make!(:coleta_de_precos) }
-  creditor { Creditor.make!(:sobrinho_sa, :user => User.make!(:geraldi)) }
+  creditor { Creditor.make!(:sobrinho_sa,
+              accounts: [ CreditorBankAccount.make(:conta_2, number: '000101')],
+              :user => User.make!(:geraldi)) }
   status { PriceCollectionStatus::ACTIVE }
 end
