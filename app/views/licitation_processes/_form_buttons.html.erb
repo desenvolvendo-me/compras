@@ -37,7 +37,8 @@
 
       <% if f.object.trading? %>
         <%= link_to('Lances', trading_path_helper,
-          class: "button primary #{f.object.decorator.has_records_class([f.object.trading])}") %>
+          class: "button primary #{f.object.decorator.has_records_class([f.object.trading])}",
+          'data-disabled' => f.object.decorator.disabled_trading_message) %>
 
         <% if f.object.trading.present? %>
           <%= link_to('Negociação', list_purchase_process_trading_negotiation_path(resource.trading),

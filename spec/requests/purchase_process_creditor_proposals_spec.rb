@@ -22,6 +22,8 @@ feature 'PurchaseProcessCreditorProposals' do
       click_link '1/2012'
     end
 
+    expect(page).to have_disabled_element 'Lances', reason: 'deve ter ao menos uma proposta'
+
     click_link 'Propostas'
 
     expect(page).to have_content 'Proposta Comercial Processo 1/2012 - Pregão 1'
@@ -101,7 +103,6 @@ feature 'PurchaseProcessCreditorProposals' do
     expect(page).to have_content 'Editar Proposta Comercial'
     expect(page).to have_content 'Fornecedor Gabriel Sobrinho - Processo 1/2012 - Pregão 1'
 
-
     expect(page).to have_disabled_field 'Valor total da proposta', with: '100,40'
     expect(page).to have_disabled_field 'Lote', with: '2050'
     expect(page).to have_disabled_field 'Item', with: '1'
@@ -120,6 +121,10 @@ feature 'PurchaseProcessCreditorProposals' do
     click_button 'Salvar'
 
     expect(page).to have_content 'Proposta Comercial editada com sucesso'
+
+    click_link "Voltar ao processo de compra"
+
+    expect(page).to_not have_disabled_element 'Lances', reason: 'deve ter ao menos uma proposta'
   end
 
   scenario 'create and update lot creditor proposals' do

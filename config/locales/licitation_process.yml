@@ -86,3 +86,4 @@ pt-BR:
       no_one_publication_with_valid_type: "a última publicação é do tipo (%{publication_of}). Não pode ser alterado"
       disabled_trading_message: "todas as propostas devem ser preenchidas"
       disabled_negotiation_message: "todos os itens do pregão devem ter um vencedor"
+      disabled_trading_message: "deve ter ao menos uma proposta"

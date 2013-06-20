@@ -35,6 +35,12 @@ class LicitationProcessDecorator
     end
   end
 
+  def disabled_trading_message
+    return unless creditor_proposals.empty?
+
+    t('licitation_process.messages.disabled_trading_message')
+  end
+
   def not_updatable_message
     return if updatable?
 
