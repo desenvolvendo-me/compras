@@ -93,15 +93,21 @@ feature "LicitationProcessRatifications" do
   end
 
   scenario 'creating and updating a ratification to direct purchase' do
-    creditor = Creditor.make!(:sobrinho_sa)
+    sobrinho_creditor = Creditor.make!(:sobrinho_sa)
+    wenderson_creditor = Creditor.make!(:wenderson_sa)
     licitation = LicitationProcess.make!(:compra_direta,
       judgment_form: JudgmentForm.make!(:por_item_com_menor_preco),
-      items: [PurchaseProcessItem.make!(:item_arame_farpado, creditor: creditor),
-        PurchaseProcessItem.make!(:item_arame, creditor: creditor)])
+      items: [
+        PurchaseProcessItem.make!(:item_arame_farpado, creditor: sobrinho_creditor),
+        PurchaseProcessItem.make!(:item_arame, creditor: sobrinho_creditor),
+        PurchaseProcessItem.make!(:item_arame_farpado, creditor: wenderson_creditor),
+        PurchaseProcessItem.make!(:item_arame, creditor: wenderson_creditor),
+      ])
 
     PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado, licitation_process: licitation, ranking: 1)
     PurchaseProcessCreditorProposal.make!(:proposta_arame, licitation_process: licitation, ranking: 1)
-    Bidder.make!(:licitante_sobrinho, licitation_process: licitation, creditor: creditor, enabled: true)
+    Bidder.make!(:licitante_sobrinho, licitation_process: licitation, creditor: sobrinho_creditor, enabled: true)
+    Bidder.make!(:licitante_sobrinho, licitation_process: licitation, creditor: wenderson_creditor, enabled: true)
 
     FactoryGirl.create(:process_responsible, licitation_process: licitation,
       stage_process: StageProcess.make(:emissao_edital))
@@ -183,6 +189,31 @@ feature "LicitationProcessRatifications" do
     expect(page).to have_content '60,00'
 
     expect(page).to have_checked_field bidder_checkbok_html_name(0)
+
+    click_link 'Voltar'
+
+    click_link 'Criar Homologação e Adjudicação de Processo de Compra'
+
+    expect(page).to have_disabled_field 'Processo de compra'
+
+    within_modal 'Participante vencedor' do
+      click_button 'Pesquisar'
+      click_record 'Wenderson'
+    end
+
+    expect(page).to have_content 'Arame comum'
+    expect(page).to have_content 'Arame farpado'
+    expect(page).to have_content '1'
+    expect(page).to have_content '10,00'
+    expect(page).to have_content '2'
+    expect(page).to have_content '30,00'
+    expect(page).to have_content '60,00'
+
+    check 'checkAll'
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Homologação e Adjudicação de Processo de Compra criada com sucesso.'
   end
 
   scenario 'cleaning items' do
