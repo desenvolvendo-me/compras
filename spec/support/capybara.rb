@@ -31,6 +31,10 @@ module Capybara
 end
 
 Capybara.configure do |config|
-  config.default_driver = :poltergeist
+  config.default_driver = ENV['SELENIUM'] ? :selenium : :poltergeist
   config.ignore_hidden_elements = true
+end
+
+Capybara.register_driver :selenium do |app|
+  Capybara::Selenium::Driver.new(app, :browser => :chrome)
 end
