@@ -27,7 +27,7 @@ describe PurchaseProcessTradingItemsController do
       it 'should return the list of creditor for a given item' do
         PurchaseProcessTradingItem.should_receive(:find).with('5').and_return(item)
 
-        item.should_receive(:creditors_ordered)
+        item.should_receive(:creditors_ordered_outer)
 
         get :creditor_list, id: 5, format: 'json'
       end

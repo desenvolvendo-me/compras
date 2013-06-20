@@ -1,10 +1,7 @@
 class PurchaseProcessCreditorProposalRanking
-  attr_accessor :creditor_proposal, :all_proposals, :repository
-
   def initialize(creditor_proposal, repository = PurchaseProcessCreditorProposal)
-    self.creditor_proposal = creditor_proposal
-    self.repository        = repository
-    self.all_proposals     = repository.find_brothers_for_ranking(creditor_proposal)
+    @creditor_proposal = creditor_proposal
+    @repository        = repository
   end
 
   def self.rank!(creditor_proposal)
@@ -23,6 +20,8 @@ class PurchaseProcessCreditorProposalRanking
   end
 
   private
+
+  attr_reader :creditor_proposal, :repository
 
   def each_ordered_proposals
     all_proposals.group_by(&:benefited_unit_price).each_pair do |price, proposals|
@@ -44,5 +43,13 @@ class PurchaseProcessCreditorProposalRanking
 
   def reset_proposals
     repository.find_brothers(creditor_proposal).each(&:reset_ranking!)
+  end
+
+  def all_proposals
+    if creditor_proposal.licitation_process_trading?
+      repository.find_brothers_for_ranking(creditor_proposal)
+    else
+      repository.find_brothers_for_ranking_with_bidder_enabled(creditor_proposal)
+    end
   end
 end

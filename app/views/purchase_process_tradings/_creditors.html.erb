@@ -18,7 +18,8 @@
         company_size: accreditation_creditor.company_size,
         amount: accreditation_creditor.decorator.unit_price_of_proposal_by_item(@item.item),
         percent: '-',
-        selected: accreditation_creditor.decorator.selected? %>
+        selected: accreditation_creditor.decorator.selected?,
+        not_selected_class: accreditation_creditor.decorator.not_selected_class %>
     <% end %>
   </tbody>
 </table>
@@ -30,5 +31,6 @@
     company_size: '{{company_size}}',
     amount: '{{amount}}',
     percent: '{{percent}}',
-    selected: '{{selected}}' %>
+    selected: '{{selected}}',
+    not_selected_class: '{{not_selected_class}}' %>
 <% end %>

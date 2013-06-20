@@ -46,7 +46,7 @@ describe PurchaseProcessAccreditationCreditor do
       nobe = PurchaseProcessAccreditationCreditor.make!(:wenderson_creditor,
                                                         purchase_process_accreditation: accreditation,
                                                         creditor: Creditor.make!(:nobe),
-                                                        has_power_of_attorney: true)
+                                                        has_power_of_attorney: false)
 
       sobrinho_proposal = PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado,
                                                                 licitation_process: purchase_process,
@@ -66,7 +66,7 @@ describe PurchaseProcessAccreditationCreditor do
                                                             creditor: nobe.creditor,
                                                             unit_price: 5.0)
 
-      expect(described_class.by_lowest_proposal(item.id)).to eq [wenderson, nobe, sobrinho]
+      expect(described_class.by_lowest_proposal(item.id)).to eq [sobrinho, wenderson, nobe]
     end
   end
 
@@ -91,7 +91,7 @@ describe PurchaseProcessAccreditationCreditor do
       nobe = PurchaseProcessAccreditationCreditor.make!(:wenderson_creditor,
                                                         purchase_process_accreditation: accreditation,
                                                         creditor: Creditor.make!(:nobe),
-                                                        has_power_of_attorney: true)
+                                                        has_power_of_attorney: false)
 
       wenderson_proposal = PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado,
                                                                  licitation_process: purchase_process,
@@ -105,7 +105,7 @@ describe PurchaseProcessAccreditationCreditor do
                                                             creditor: nobe.creditor,
                                                             unit_price: 5.0)
 
-      expect(described_class.by_lowest_proposal_outer(item.id)).to eq [wenderson, nobe, sobrinho]
+      expect(described_class.by_lowest_proposal_outer(item.id)).to eq [sobrinho, wenderson, nobe]
     end
   end
 end

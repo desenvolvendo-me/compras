@@ -24,7 +24,7 @@ class PurchaseProcessCreditorProposal < Compras::Model
     to: :item, prefix: true, allow_nil: true
   delegate :name, :cnpj, :benefited, :identity_document,
     to: :creditor, allow_nil: true, prefix: true
-  delegate :execution_unit_responsible, :year, :process,
+  delegate :execution_unit_responsible, :year, :process, :trading?,
     to: :licitation_process, allow_nil: true, prefix: true
 
   validates :creditor, :licitation_process, :unit_price, presence: true
@@ -60,11 +60,16 @@ class PurchaseProcessCreditorProposal < Compras::Model
     order { unit_price }
   }
 
-  scope :find_brothers_for_ranking, lambda { |creditor_proposal|
-    find_brothers(creditor_proposal).
+  scope :find_brothers_for_ranking_with_bidder_enabled, lambda { |creditor_proposal|
+    find_brothers_for_ranking(creditor_proposal).
     joins { bidders }.
     where { '"compras_bidders"."creditor_id" = "compras_purchase_process_creditor_proposals"."creditor_id"' }.
-    where { bidders.enabled.eq(true) & disqualified.eq(false) }
+    where { bidders.enabled.eq(true) }
+  }
+
+  scope :find_brothers_for_ranking, lambda { |creditor_proposal|
+    find_brothers(creditor_proposal).
+    where { disqualified.eq(false) }
   }
 
   scope :winning_proposals, where { ranking.eq 1 }.order { creditor_id }
@@ -88,7 +93,11 @@ class PurchaseProcessCreditorProposal < Compras::Model
   }
 
   def self.best_proposal_for(creditor_proposal)
-    find_brothers_for_ranking(creditor_proposal).first
+    if creditor_proposal.licitation_process.trading?
+      find_brothers_for_ranking(creditor_proposal).first
+    else
+      find_brothers_for_ranking_with_bidder_enabled(creditor_proposal).first
+    end
   end
 
   def total_price

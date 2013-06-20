@@ -174,18 +174,18 @@ feature "PurchaseProcessTradings" do
 
       within 'tbody tr:nth-child(3)' do
         expect(page).to have_content '3'
-        expect(page).to have_content 'Wenderson Malheiros'
-        expect(page).to have_content 'Microempresa'
-        expect(page).to have_content '100,00'
-        expect(page).to have_content 'Sim'
-      end
-
-      within 'tbody tr:nth-child(4)' do
-        expect(page).to have_content '4'
         expect(page).to have_content 'Nobe'
         expect(page).to have_content 'Empresa de grande porte'
         expect(page).to have_content '120,00'
         expect(page).to have_content 'Não'
+      end
+
+      within 'tbody tr:nth-child(4)' do
+        expect(page).to have_content '4'
+        expect(page).to have_content 'Wenderson Malheiros'
+        expect(page).to have_content 'Microempresa'
+        expect(page).to have_content '100,00'
+        expect(page).to have_content 'Sim'
       end
     end
 
@@ -440,22 +440,30 @@ feature "PurchaseProcessTradings" do
     within 'table#accreditation_creditors' do
       within 'tbody tr:nth-child(1)' do
         expect(page).to have_content '1'
+        expect(page).to have_content 'Gabriel Sobrinho'
+        expect(page).to have_content 'Empresa de grande porte'
+        expect(page).to have_content '-'
+        expect(page).to have_content 'Sim'
+      end
+
+      within 'tbody tr:nth-child(2)' do
+        expect(page).to have_content '2'
         expect(page).to have_content 'Wenderson Malheiros'
         expect(page).to have_content 'Microempresa'
         expect(page).to have_content '130,00'
         expect(page).to have_content 'Sim'
       end
 
-      within 'tbody tr:nth-child(2)' do
-        expect(page).to have_content '2'
+      within 'tbody tr:nth-child(3)' do
+        expect(page).to have_content '3'
         expect(page).to have_content 'IBM'
         expect(page).to have_content 'Empresa de grande porte'
         expect(page).to have_content '100,00'
         expect(page).to have_content 'Sim'
       end
 
-      within 'tbody tr:nth-child(3)' do
-        expect(page).to have_content '3'
+      within 'tbody tr:nth-child(4)' do
+        expect(page).to have_content '4'
         expect(page).to have_content 'Nobe'
         expect(page).to have_content 'Empresa de grande porte'
         expect(page).to have_content '110,00'

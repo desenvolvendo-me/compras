@@ -61,21 +61,53 @@ describe PurchaseProcessAccreditationCreditorDecorator do
 
     context 'when has power of attorney' do
       before do
-        component.stub(has_power_of_attorney: true)
+        component.stub(has_power_of_attorney?: true)
       end
 
-      it 'should return Sim' do
-        expect(subject.selected?).to eq 'Sim'
+      context 'when is not an individual' do
+        before do
+          component.stub(creditor_individual?: false)
+        end
+
+        it 'should return Sim' do
+          expect(subject.selected?).to eq 'Sim'
+        end
+      end
+
+      context 'when is an individual' do
+        before do
+          component.stub(creditor_individual?: true)
+        end
+
+        it 'should return Sim' do
+          expect(subject.selected?).to eq 'Sim'
+        end
       end
     end
 
     context 'when has no power of attorney' do
       before do
-        component.stub(has_power_of_attorney: false)
+        component.stub(has_power_of_attorney?: false)
       end
 
-      it 'should return Não' do
-        expect(subject.selected?).to eq 'Não'
+      context 'when is not an individual' do
+        before do
+          component.stub(creditor_individual?: false)
+        end
+
+        it 'should return Não' do
+          expect(subject.selected?).to eq 'Não'
+        end
+      end
+
+      context 'when is an individual' do
+        before do
+          component.stub(creditor_individual?: true)
+        end
+
+        it 'should return Sim' do
+          expect(subject.selected?).to eq 'Sim'
+        end
       end
     end
   end
@@ -96,21 +128,21 @@ describe PurchaseProcessAccreditationCreditorDecorator do
 
     context 'when has power of attorney' do
       before do
-        component.stub(has_power_of_attorney: true)
+        component.stub(has_power_of_attorney?: true)
       end
 
       it 'should return Sim' do
-        expect(subject.selected?).to eq 'Sim'
+        expect(subject.has_power_of_attorney_text).to eq 'Sim'
       end
     end
 
     context 'when has no power of attorney' do
       before do
-        component.stub(has_power_of_attorney: false)
+        component.stub(has_power_of_attorney?: false)
       end
 
       it 'should return Não' do
-        expect(subject.selected?).to eq 'Não'
+        expect(subject.has_power_of_attorney_text).to eq 'Não'
       end
     end
   end

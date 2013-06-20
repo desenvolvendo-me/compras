@@ -20,6 +20,8 @@ describe PurchaseProcessAccreditationCreditor do
   it { should delegate(:zip_code).to(:creditor).allowing_nil(true).prefix(true) }
   it { should delegate(:phone).to(:creditor).allowing_nil(true).prefix(true) }
   it { should delegate(:person_email).to(:creditor).allowing_nil(true).prefix(true) }
+  it { should delegate(:company?).to(:creditor).allowing_nil(true).prefix(true) }
+  it { should delegate(:individual?).to(:creditor).allowing_nil(true).prefix(true) }
   it { should delegate(:identity_document).to(:creditor_representative).allowing_nil(true).prefix(true) }
   it { should delegate(:phone).to(:creditor_representative).allowing_nil(true).prefix(true) }
   it { should delegate(:email).to(:creditor_representative).allowing_nil(true).prefix(true) }

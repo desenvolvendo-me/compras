@@ -15,7 +15,12 @@ class PurchaseProcessAccreditationCreditorDecorator
   end
 
   def selected?
-    I18n.t("#{has_power_of_attorney}")
+    I18n.t("#{allowed?}")
+  end
+
+  def not_selected_class
+    return if allowed?
+    'not_selected'
   end
 
   def personable_type
@@ -23,10 +28,16 @@ class PurchaseProcessAccreditationCreditorDecorator
   end
 
   def has_power_of_attorney_text
-    I18n.t("#{has_power_of_attorney}")
+    I18n.t("#{has_power_of_attorney?}")
   end
 
   def kind_text
     kind_humanize
+  end
+
+  private
+
+  def allowed?
+    has_power_of_attorney? || creditor_individual?
   end
 end

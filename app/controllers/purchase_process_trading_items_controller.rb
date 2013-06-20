@@ -21,7 +21,7 @@ class PurchaseProcessTradingItemsController < CrudController
   end
 
   def creditor_list
-    @creditors = resource.creditors_ordered
+    @creditors = resource.creditors_ordered_outer
   end
 
   def undo_last_bid

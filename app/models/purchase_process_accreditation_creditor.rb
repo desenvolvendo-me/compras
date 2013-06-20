@@ -12,8 +12,8 @@ class PurchaseProcessAccreditationCreditor < Compras::Model
   has_many :trading_item_bids, class_name: 'PurchaseProcessTradingItemBid',
     dependent: :restrict
 
-  delegate :company?, :personable_type_humanize, :address, :city, :state, :identity_document,
-           :neighborhood, :zip_code, :phone, :person_email,
+  delegate :personable_type_humanize, :address, :city, :state, :identity_document,
+           :neighborhood, :zip_code, :phone, :person_email, :individual?, :company?,
            :proposal_by_item,
            :to => :creditor, :allow_nil => true, :prefix => true
   delegate :identity_document, :phone, :email, :identity_number,
@@ -37,7 +37,7 @@ class PurchaseProcessAccreditationCreditor < Compras::Model
       creditor.purchase_process_creditor_proposals.purchase_process_item_id.eq(item_id) &
       creditor.purchase_process_creditor_proposals.disqualified.eq(false)
     }.
-    order('has_power_of_attorney DESC, compras_purchase_process_creditor_proposals.unit_price DESC')
+    order('compras_purchase_process_creditor_proposals.ranking DESC')
   }
 
   scope :by_lowest_proposal_outer, lambda { |item_id|
@@ -47,7 +47,7 @@ class PurchaseProcessAccreditationCreditor < Compras::Model
       creditor.purchase_process_creditor_proposals.disqualified.eq(false) ) |
       creditor.purchase_process_creditor_proposals.id.eq(nil)
     }.
-    order('has_power_of_attorney DESC, compras_purchase_process_creditor_proposals.unit_price DESC')
+    order('compras_purchase_process_creditor_proposals.ranking DESC')
   }
 
   scope :benefited, lambda {

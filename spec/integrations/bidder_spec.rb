@@ -26,7 +26,7 @@ describe Bidder do
       end
 
       let(:licitation_process) do
-        LicitationProcess.make!(:pregao_presencial,
+        LicitationProcess.make!(:processo_licitatorio_computador,
           purchase_process_accreditation: PurchaseProcessAccreditation.make(:general_accreditation),
           judgment_form: JudgmentForm.make!(:por_item_com_melhor_tecnica),
           creditor_proposals: [PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado)],

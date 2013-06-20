@@ -82,3 +82,8 @@
   vertical-align: bottom;
   margin-left: 5px;
 }
+
+table.records tr.not_selected td {
+  background-color: #ffede5;
+  color: #ff100e;
+}
