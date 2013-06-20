@@ -28,6 +28,14 @@ class PurchaseProcessTradingItemDecorator
     lowest_proposal.creditor
   end
 
+  def total_price
+    return '-' unless lowest_proposal
+
+    total = lowest_proposal.unit_price * quantity
+
+    number_with_precision total
+  end
+
   def reduction_rate_value
     number_with_precision(super) || '0,00'
   end

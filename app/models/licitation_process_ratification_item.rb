@@ -1,9 +1,10 @@
 class LicitationProcessRatificationItem < Compras::Model
   attr_accessible :licitation_process_ratification_id, :purchase_process_creditor_proposal_id,
-    :ratificated, :purchase_process_item_id
+    :ratificated, :purchase_process_item_id, :purchase_process_trading_item_id
 
   belongs_to :licitation_process_ratification
   belongs_to :purchase_process_creditor_proposal
+  belongs_to :purchase_process_trading_item
   belongs_to :purchase_process_item
 
   has_one :licitation_process, through: :purchase_process_creditor_proposal
@@ -32,16 +33,19 @@ class LicitationProcessRatificationItem < Compras::Model
 
   scope :by_ratificated, -> { where { ratificated.eq(true) } }
 
+  orderize "id DESC"
+  filterize
+
   def unit_price
-    purchase_process_creditor_proposal.try(:unit_price) || purchase_process_item.try(:unit_price)
+    creditor_proposal_unit_price || trading_item_unit_price || purchase_process_item_unit_price
   end
 
   def total_price
-    purchase_process_creditor_proposal.try(:total_price) || purchase_process_item.try(:estimated_total_price)
+    creditor_proposal_total_price || trading_item_total_price || purchase_process_total_price
   end
 
   def item
-    purchase_process_creditor_proposal.try(:item) || purchase_process_item
+    creditor_proposal_item || trading_item || purchase_process_item
   end
 
   def authorized_quantity
@@ -60,6 +64,39 @@ class LicitationProcessRatificationItem < Compras::Model
     (total_price || 0) - (authorized_value || 0)
   end
 
-  orderize "id DESC"
-  filterize
+  private
+
+  def creditor_proposal_item
+    purchase_process_creditor_proposal.try(:item)
+  end
+
+  def trading_item
+    purchase_process_trading_item.try(:item)
+  end
+
+  def creditor_proposal_unit_price
+    purchase_process_creditor_proposal.try(:unit_price)
+  end
+
+  def trading_item_unit_price
+    return unless purchase_process_trading_item
+    TradingItemWinner.new(purchase_process_trading_item).amount
+  end
+
+  def purchase_process_item_unit_price
+    purchase_process_item.try(:unit_price)
+  end
+
+  def creditor_proposal_total_price
+    purchase_process_creditor_proposal.try(:total_price)
+  end
+
+  def purchase_process_total_price
+    purchase_process_item.try(:estimated_total_price)
+  end
+
+  def trading_item_total_price
+    return unless (purchase_process_trading_item && trading_item_unit_price)
+    (trading_item_unit_price * purchase_process_trading_item.item_quantity)
+  end
 end

@@ -27,8 +27,8 @@ describe LicitationProcessRatificationsHelper do
           ratification.stub(judgment_form_item?: true)
         end
 
-        it "should return the proposals' index path" do
-          helper.should_receive(:purchase_process_creditor_proposals_path).and_return('proposals_index')
+        it "should return the trading or proposals' index path" do
+          helper.should_receive(:trading_or_proposals_path).and_return('proposals_index')
 
           expect(helper.creditor_proposals_helper_path(ratification)).to eq 'proposals_index'
         end
@@ -47,5 +47,28 @@ describe LicitationProcessRatificationsHelper do
       end
     end
   end
-end
 
+  describe '#trading_or_proposals_path' do
+    let(:ratification) { double(:ratification) }
+
+    context 'licitation_process is trading' do
+      before { ratification.stub(licitation_process_trading?: true) }
+
+      it 'returns creditor_winner_items_purchase_process_trading_items_path' do
+        helper.should_receive(:creditor_winner_items_purchase_process_trading_items_path).and_return 'trading_path'
+
+        expect(helper.send(:trading_or_proposals_path, ratification)).to eq 'trading_path'
+      end
+    end
+
+    context 'licitation_process is not trading' do
+      before { ratification.stub(licitation_process_trading?: false) }
+
+      it 'returns purchase_process_creditor_proposals_path' do
+        helper.should_receive(:purchase_process_creditor_proposals_path).and_return 'proposal_path'
+
+        expect(helper.send(:trading_or_proposals_path, ratification)).to eq 'proposal_path'
+      end
+    end
+  end
+end

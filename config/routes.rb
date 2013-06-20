@@ -90,6 +90,10 @@ Compras::Application.routes.draw do
       get  :next_bid
       post :undo_last_bid
     end
+
+    collection do
+      get :creditor_winner_items
+    end
   end
 
   resources :purchase_process_trading_item_bids, only: [:update, :show]

@@ -108,4 +108,14 @@ describe PurchaseProcessTradingItemsController do
       end
     end
   end
+
+  describe 'GET #creditor_winner_items' do
+    it 'renders the creditor winner items as json' do
+      PurchaseProcessTradingItem.should_receive(:creditor_winner_items).with(2, 3)
+
+      get :creditor_winner_items, creditor_id: 2, trading_id: 3, format: :json
+
+      expect(response).to render_template :creditor_winner_items
+    end
+  end
 end

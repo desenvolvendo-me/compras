@@ -136,12 +136,15 @@ class Creditor < Compras::Model
   end
 
   scope :without_licitation_ratification, lambda { |licitation_process_id|
-    select { 'compras_creditors.*, unico_people.name' }.
+    creditor_ids = LicitationProcessRatification.licitation_process_id(licitation_process_id).
+      flat_map(&:creditor_id)
+
+    scoped.select { 'compras_creditors.*, unico_people.name' }.
     joins { bidders.licitation_process.licitation_process_ratifications.outer }.
     joins { person }.
     where {
       bidders.licitation_process_id.eq(licitation_process_id) &
-      bidders.licitation_process.licitation_process_ratifications.id.eq(nil)
+      bidders.creditor_id.not_in(creditor_ids)
     }.uniq
   }
 
@@ -153,6 +156,14 @@ class Creditor < Compras::Model
     }.
     where { '"compras_creditors".id = "compras_purchase_process_creditor_proposals".creditor_id' }.
     uniq
+  }
+
+  scope :won_calculation_for_trading, lambda{ |licitation_process_id|
+    creditor_ids = LicitationProcess.find(licitation_process_id).trading_items.map { |item|
+      TradingItemWinner.new(item).creditor.id
+    }
+
+    scoped.where("compras_creditors.id in (?)", creditor_ids)
   }
 
   def self.filter(params)

@@ -6,6 +6,7 @@ require 'app/models/licitation_process_ratification'
 describe LicitationProcessRatificationItem do
   it { should belong_to :licitation_process_ratification }
   it { should belong_to :purchase_process_creditor_proposal }
+  it { should belong_to :purchase_process_trading_item }
 
   it { should have_one(:licitation_process).through :purchase_process_creditor_proposal }
   it { should have_one(:creditor).through :licitation_process_ratification }
@@ -29,63 +30,113 @@ describe LicitationProcessRatificationItem do
   end
 
   describe '#unit_price' do
-    let(:purchase_process_creditor_proposal) { double(:purchase_process_creditor_proposal) }
-    let(:purchase_process_item) { double(:purchase_process_item) }
+    context 'there is creditor proposal' do
+      before { subject.stub(:creditor_proposal_unit_price).and_return 10 }
 
-    context 'when there is an purchase_process_creditor_proposal' do
-      before do
-        subject.stub(purchase_process_creditor_proposal: purchase_process_creditor_proposal)
-      end
-
-      it "should try the purchase_process_creditor_proposal's unit_price" do
-        purchase_process_creditor_proposal.should_receive(:try).with(:unit_price).and_return('unit_price')
-
-        expect(subject.unit_price).to eq 'unit_price'
+      it 'returns creditor proposal unit price' do
+        subject.should_receive(:creditor_proposal_unit_price)
+        expect(subject.unit_price).to eq 10
       end
     end
 
-    context 'when there is not an item' do
+    context 'there is trading item and no creditor proposal' do
       before do
-        subject.stub(
-          purchase_process_creditor_proposal: nil,
-          purchase_process_item: purchase_process_item)
+        subject.stub(:creditor_proposal_unit_price).and_return nil
+        subject.stub(:trading_item_unit_price).and_return 11
       end
 
-      it "should try the purchase_process_item's unit_price" do
-        purchase_process_item.should_receive(:try).with(:unit_price).and_return('unit_price')
+      it 'returns creditor proposal unit price' do
+        subject.should_receive(:trading_item_unit_price)
+        expect(subject.unit_price).to eql 11
+      end
+    end
 
-        expect(subject.unit_price).to eq 'unit_price'
+    context 'there is only purchase process item' do
+      before do
+        subject.stub(:creditor_proposal_unit_price).and_return nil
+        subject.stub(:trading_item_unit_price).and_return nil
+        subject.stub(:purchase_process_item_unit_price).and_return 12
+      end
+
+      it 'returns creditor proposal unit price' do
+        subject.should_receive(:purchase_process_item_unit_price)
+        expect(subject.unit_price).to eq 12
       end
     end
   end
 
   describe '#total_price' do
-    let(:purchase_process_creditor_proposal) { double(:purchase_process_creditor_proposal) }
-    let(:purchase_process_item) { double(:purchase_process_item) }
+    context 'there is creditor proposal' do
+      before { subject.stub(:creditor_proposal_total_price).and_return 13 }
 
-    context 'when there is an purchase_process_creditor_proposal' do
-      before do
-        subject.stub(purchase_process_creditor_proposal: purchase_process_creditor_proposal)
-      end
-
-      it "should try the purchase_process_creditor_proposal's total_price" do
-        purchase_process_creditor_proposal.should_receive(:try).with(:total_price).and_return('total_price')
-
-        expect(subject.total_price).to eq 'total_price'
+      it 'returns creditor proposal total price' do
+        subject.should_receive(:creditor_proposal_total_price)
+        expect(subject.total_price).to eq 13
       end
     end
 
-    context 'when there is not an item' do
+    context 'there is trading item and no creditor proposal' do
       before do
-        subject.stub(
-          purchase_process_creditor_proposal: nil,
-          purchase_process_item: purchase_process_item)
+        subject.stub(:creditor_proposal_total_price).and_return nil
+        subject.stub(:trading_item_total_price).and_return 14
       end
 
-      it "should try the purchase_process_item's estimated_total_price" do
-        purchase_process_item.should_receive(:try).with(:estimated_total_price).and_return('total_price')
+      it 'returns creditor proposal total price' do
+        subject.should_receive(:trading_item_total_price)
+        expect(subject.total_price).to eq 14
+      end
+    end
 
-        expect(subject.total_price).to eq 'total_price'
+    context 'there is only purchase process item' do
+      before do
+        subject.stub(:creditor_proposal_total_price).and_return nil
+        subject.stub(:trading_item_total_price).and_return nil
+        subject.stub(:purchase_process_total_price).and_return 15
+      end
+
+      it 'returns creditor proposal total price' do
+        subject.should_receive(:purchase_process_total_price)
+        expect(subject.total_price).to eq 15
+      end
+    end
+  end
+
+  describe '#item' do
+    let(:creditor_proposal_item) { double :creditor_proposal_item }
+    let(:trading_item)           { double :trading_item }
+    let(:purchase_process_item)  { double :purchase_process_item }
+
+    context 'there is creditor proposal' do
+      before { subject.stub(:creditor_proposal_item).and_return creditor_proposal_item }
+
+      it 'returns creditor proposal total price' do
+        subject.should_receive(:creditor_proposal_item)
+        expect(subject.item).to eq creditor_proposal_item
+      end
+    end
+
+    context 'there is trading item and no creditor proposal' do
+      before do
+        subject.stub(:creditor_proposal_item).and_return nil
+        subject.stub(:trading_item).and_return trading_item
+      end
+
+      it 'returns creditor proposal total price' do
+        subject.should_receive(:trading_item)
+        expect(subject.item).to eq trading_item
+      end
+    end
+
+    context 'there is only purchase process item' do
+      before do
+        subject.stub(:creditor_proposal_item).and_return nil
+        subject.stub(:trading_item).and_return nil
+        subject.stub(:purchase_process_item).and_return purchase_process_item
+      end
+
+      it 'returns creditor proposal total price' do
+        subject.should_receive(:purchase_process_item)
+        expect(subject.item).to eq purchase_process_item
       end
     end
   end
@@ -121,5 +172,41 @@ describe LicitationProcessRatificationItem do
     it 'returns total_price - authorized_value' do
       expect(subject.supply_order_item_value_balance).to eq 7
     end
+  end
+
+  describe '#supply_order_item_balance' do
+    pending
+  end
+
+  describe '#creditor_proposal_item' do
+    pending
+  end
+
+  describe '#trading_item' do
+    pending
+  end
+
+  describe '#creditor_proposal_unit_price' do
+    pending
+  end
+
+  describe '#trading_item_unit_price' do
+    pending
+  end
+
+  describe '#purchase_process_item_unit_price' do
+    pending
+  end
+
+  describe '#creditor_proposal_total_price' do
+    pending
+  end
+
+  describe '#purchase_process_total_price' do
+    pending
+  end
+
+  describe '#trading_item_total_price' do
+    pending
   end
 end

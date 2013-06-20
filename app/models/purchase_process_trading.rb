@@ -31,6 +31,10 @@ class PurchaseProcessTrading < Compras::Model
     items.map { |item| item.lowest_bid_or_proposal_accreditation_creditor }.compact.uniq
   end
 
+  def creditors_winners
+    items.map { |item| TradingItemWinner.new(item).creditor }.compact.uniq
+  end
+
   def allow_negotiation?
     items.pending.count == 0
   end
