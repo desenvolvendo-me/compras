@@ -4,10 +4,6 @@ class PurchaseProcessCreditorProposalDecorator
   include Decore::Proxy
   include ActionView::Helpers::NumberHelper
 
-  def creditors_title
-    "Proposta Comercial Processo #{licitation_process.to_s}"
-  end
-
   def unit_price
     number_with_precision super if super
   end
@@ -20,10 +16,6 @@ class PurchaseProcessCreditorProposalDecorator
     proposal = component.class.best_proposal_for(component)
 
     number_with_precision(proposal.unit_price) if proposal
-  end
-
-  def subtitle
-    "Fornecedor #{creditor} - Processo #{licitation_process.to_s}"
   end
 
   def unit_price_with_currency

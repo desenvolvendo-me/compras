@@ -2,7 +2,9 @@
 require 'spec_helper'
 
 feature "PurchaseProcessTradings" do
-  let(:current_user) { User.make!(:sobrinho_as_admin_and_employee) }
+  let(:current_user)       { User.make!(:sobrinho_as_admin_and_employee) }
+  let(:first_proposal_div) { '//*[@id="purchase_process_creditor_proposals"]/div[2]' }
+  let(:last_proposal_div)  { '//*[@id="purchase_process_creditor_proposals"]/div[4]' }
 
   background do
     create_roles ['judgment_forms',
@@ -61,21 +63,19 @@ feature "PurchaseProcessTradings" do
       end
     end
 
-    within '#purchase_process_creditor_proposals' do
-      within 'div.add-margin-bottom:nth-of-type(1)' do
-        fill_in 'Marca', with: 'IBM'
-        fill_in 'Preço unitário', with: '100,00'
-      end
+    within :xpath, first_proposal_div do
+      fill_in 'Marca', with: 'IBM'
+      fill_in 'Preço unitário', with: '100,00'
+    end
 
-      within 'div.add-margin-bottom:nth-of-type(2)' do
-        fill_in 'Marca', with: 'IBM'
-        fill_in 'Preço unitário', with: '130,00'
-      end
+    within :xpath, last_proposal_div do
+      fill_in 'Marca', with: 'IBM'
+      fill_in 'Preço unitário', with: '130,00'
     end
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Proposta Comercial criada com sucesso'
+    expect(page).to have_notice 'Proposta Comercial editada com sucesso'
 
     within_records do
       within 'tbody tr:nth-child(3)' do
@@ -85,21 +85,19 @@ feature "PurchaseProcessTradings" do
       end
     end
 
-    within '#purchase_process_creditor_proposals' do
-      within 'div.add-margin-bottom:nth-of-type(1)' do
-        fill_in 'Marca', with: 'Fio'
-        fill_in 'Preço unitário', with: '120,00'
-      end
+    within :xpath, first_proposal_div do
+      fill_in 'Marca', with: 'Fio'
+      fill_in 'Preço unitário', with: '120,00'
+    end
 
-      within 'div.add-margin-bottom:nth-of-type(2)' do
-        fill_in 'Marca', with: 'Fio'
-        fill_in 'Preço unitário', with: '111,00'
-      end
+    within :xpath, last_proposal_div do
+      fill_in 'Marca', with: 'Fio'
+      fill_in 'Preço unitário', with: '111,00'
     end
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Proposta Comercial criada com sucesso'
+    expect(page).to have_notice 'Proposta Comercial editada com sucesso'
 
     within_records do
       within 'tbody tr:nth-child(4)' do
@@ -109,21 +107,19 @@ feature "PurchaseProcessTradings" do
       end
     end
 
-    within '#purchase_process_creditor_proposals' do
-      within 'div.add-margin-bottom:nth-of-type(1)' do
-        fill_in 'Marca', with: 'Fio'
-        fill_in 'Preço unitário', with: '130,00'
-      end
+    within :xpath, first_proposal_div do
+      fill_in 'Marca', with: 'Fio'
+      fill_in 'Preço unitário', with: '130,00'
+    end
 
-      within 'div.add-margin-bottom:nth-of-type(2)' do
-        fill_in 'Marca', with: 'Fio'
-        fill_in 'Preço unitário', with: '100,00'
-      end
+    within :xpath, last_proposal_div do
+      fill_in 'Marca', with: 'Fio'
+      fill_in 'Preço unitário', with: '100,00'
     end
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Proposta Comercial criada com sucesso'
+    expect(page).to have_notice 'Proposta Comercial editada com sucesso'
 
     click_link 'Voltar ao processo de compra'
 
@@ -737,21 +733,19 @@ feature "PurchaseProcessTradings" do
       end
     end
 
-    within '#purchase_process_creditor_proposals' do
-      within 'div.add-margin-bottom:nth-of-type(1)' do
-        fill_in 'Marca', with: 'IBM'
-        fill_in 'Preço unitário', with: '100,00'
-      end
+    within :xpath, first_proposal_div do
+      fill_in 'Marca', with: 'IBM'
+      fill_in 'Preço unitário', with: '100,00'
+    end
 
-      within 'div.add-margin-bottom:nth-of-type(2)' do
-        fill_in 'Marca', with: 'IBM'
-        fill_in 'Preço unitário', with: '130,00'
-      end
+    within :xpath, last_proposal_div do
+      fill_in 'Marca', with: 'IBM'
+      fill_in 'Preço unitário', with: '130,00'
     end
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Proposta Comercial criada com sucesso'
+    expect(page).to have_notice 'Proposta Comercial editada com sucesso'
 
     within_records do
       within 'tbody tr:nth-child(2)' do
@@ -761,21 +755,19 @@ feature "PurchaseProcessTradings" do
       end
     end
 
-    within '#purchase_process_creditor_proposals' do
-      within 'div.add-margin-bottom:nth-of-type(1)' do
-        fill_in 'Marca', with: 'Fio'
-        fill_in 'Preço unitário', with: '110,00'
-      end
+    within :xpath, first_proposal_div do
+      fill_in 'Marca', with: 'Fio'
+      fill_in 'Preço unitário', with: '110,00'
+    end
 
-      within 'div.add-margin-bottom:nth-of-type(2)' do
-        fill_in 'Marca', with: 'Fio'
-        fill_in 'Preço unitário', with: '120,00'
-      end
+    within :xpath, last_proposal_div do
+      fill_in 'Marca', with: 'Fio'
+      fill_in 'Preço unitário', with: '120,00'
     end
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Proposta Comercial criada com sucesso'
+    expect(page).to have_notice 'Proposta Comercial editada com sucesso'
 
     within_records do
       within 'tbody tr:nth-child(3)' do
@@ -785,21 +777,19 @@ feature "PurchaseProcessTradings" do
       end
     end
 
-    within '#purchase_process_creditor_proposals' do
-      within 'div.add-margin-bottom:nth-of-type(1)' do
-        fill_in 'Marca', with: 'Fio'
-        fill_in 'Preço unitário', with: '130,00'
-      end
+    within :xpath, first_proposal_div do
+      fill_in 'Marca', with: 'Fio'
+      fill_in 'Preço unitário', with: '130,00'
+    end
 
-      within 'div.add-margin-bottom:nth-of-type(2)' do
-        fill_in 'Marca', with: 'Fio'
-        fill_in 'Preço unitário', with: '100,00'
-      end
+    within :xpath, last_proposal_div do
+      fill_in 'Marca', with: 'Fio'
+      fill_in 'Preço unitário', with: '100,00'
     end
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Proposta Comercial criada com sucesso'
+    expect(page).to have_notice 'Proposta Comercial editada com sucesso'
 
     within_records do
       within 'tbody tr:nth-child(3)' do
@@ -921,21 +911,19 @@ feature "PurchaseProcessTradings" do
       end
     end
 
-    within '#purchase_process_creditor_proposals' do
-      within 'div.add-margin-bottom:nth-of-type(1)' do
-        fill_in 'Marca', with: 'IBM'
-        fill_in 'Preço unitário', with: '100,00'
-      end
+    within :xpath, first_proposal_div do
+      fill_in 'Marca', with: 'IBM'
+      fill_in 'Preço unitário', with: '100,00'
+    end
 
-      within 'div.add-margin-bottom:nth-of-type(2)' do
-        fill_in 'Marca', with: 'IBM'
-        fill_in 'Preço unitário', with: '130,00'
-      end
+    within :xpath, last_proposal_div do
+      fill_in 'Marca', with: 'IBM'
+      fill_in 'Preço unitário', with: '130,00'
     end
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Proposta Comercial criada com sucesso'
+    expect(page).to have_notice 'Proposta Comercial editada com sucesso'
 
     within_records do
       within 'tbody tr:nth-child(2)' do
@@ -945,21 +933,19 @@ feature "PurchaseProcessTradings" do
       end
     end
 
-    within '#purchase_process_creditor_proposals' do
-      within 'div.add-margin-bottom:nth-of-type(1)' do
-        fill_in 'Marca', with: 'Fio'
-        fill_in 'Preço unitário', with: '110,00'
-      end
+    within :xpath, first_proposal_div do
+      fill_in 'Marca', with: 'Fio'
+      fill_in 'Preço unitário', with: '110,00'
+    end
 
-      within 'div.add-margin-bottom:nth-of-type(2)' do
-        fill_in 'Marca', with: 'Fio'
-        fill_in 'Preço unitário', with: '120,00'
-      end
+    within :xpath, last_proposal_div do
+      fill_in 'Marca', with: 'Fio'
+      fill_in 'Preço unitário', with: '120,00'
     end
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Proposta Comercial criada com sucesso'
+    expect(page).to have_notice 'Proposta Comercial editada com sucesso'
 
     within_records do
       within 'tbody tr:nth-child(3)' do
@@ -969,21 +955,19 @@ feature "PurchaseProcessTradings" do
       end
     end
 
-    within '#purchase_process_creditor_proposals' do
-      within 'div.add-margin-bottom:nth-of-type(1)' do
-        fill_in 'Marca', with: 'Fio'
-        fill_in 'Preço unitário', with: '130,00'
-      end
+    within :xpath, first_proposal_div do
+      fill_in 'Marca', with: 'Fio'
+      fill_in 'Preço unitário', with: '130,00'
+    end
 
-      within 'div.add-margin-bottom:nth-of-type(2)' do
-        fill_in 'Marca', with: 'Fio'
-        fill_in 'Preço unitário', with: '100,00'
-      end
+    within :xpath, last_proposal_div do
+      fill_in 'Marca', with: 'Fio'
+      fill_in 'Preço unitário', with: '100,00'
     end
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Proposta Comercial criada com sucesso'
+    expect(page).to have_notice 'Proposta Comercial editada com sucesso'
 
     within_records do
       within 'tbody tr:nth-child(3)' do
@@ -1133,21 +1117,19 @@ feature "PurchaseProcessTradings" do
       end
     end
 
-    within '#purchase_process_creditor_proposals' do
-      within 'div.add-margin-bottom:nth-of-type(1)' do
-        fill_in 'Marca', with: 'IBM'
-        fill_in 'Preço unitário', with: '100,00'
-      end
+    within :xpath, first_proposal_div do
+      fill_in 'Marca', with: 'IBM'
+      fill_in 'Preço unitário', with: '100,00'
+    end
 
-      within 'div.add-margin-bottom:nth-of-type(2)' do
-        fill_in 'Marca', with: 'IBM'
-        fill_in 'Preço unitário', with: '130,00'
-      end
+    within :xpath, last_proposal_div do
+      fill_in 'Marca', with: 'IBM'
+      fill_in 'Preço unitário', with: '130,00'
     end
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Proposta Comercial criada com sucesso'
+    expect(page).to have_notice 'Proposta Comercial editada com sucesso'
 
     within_records do
       within 'tbody tr:nth-child(2)' do
@@ -1157,21 +1139,19 @@ feature "PurchaseProcessTradings" do
       end
     end
 
-    within '#purchase_process_creditor_proposals' do
-      within 'div.add-margin-bottom:nth-of-type(1)' do
-        fill_in 'Marca', with: 'Fio'
-        fill_in 'Preço unitário', with: '110,00'
-      end
+    within :xpath, first_proposal_div do
+      fill_in 'Marca', with: 'Fio'
+      fill_in 'Preço unitário', with: '110,00'
+    end
 
-      within 'div.add-margin-bottom:nth-of-type(2)' do
-        fill_in 'Marca', with: 'Fio'
-        fill_in 'Preço unitário', with: '120,00'
-      end
+    within :xpath, last_proposal_div do
+      fill_in 'Marca', with: 'Fio'
+      fill_in 'Preço unitário', with: '120,00'
     end
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Proposta Comercial criada com sucesso'
+    expect(page).to have_notice 'Proposta Comercial editada com sucesso'
 
     within_records do
       within 'tbody tr:nth-child(3)' do
@@ -1181,21 +1161,19 @@ feature "PurchaseProcessTradings" do
       end
     end
 
-    within '#purchase_process_creditor_proposals' do
-      within 'div.add-margin-bottom:nth-of-type(1)' do
-        fill_in 'Marca', with: 'Fio'
-        fill_in 'Preço unitário', with: '130,00'
-      end
+    within :xpath, first_proposal_div do
+      fill_in 'Marca', with: 'Fio'
+      fill_in 'Preço unitário', with: '130,00'
+    end
 
-      within 'div.add-margin-bottom:nth-of-type(2)' do
-        fill_in 'Marca', with: 'Fio'
-        fill_in 'Preço unitário', with: '100,00'
-      end
+    within :xpath, last_proposal_div do
+      fill_in 'Marca', with: 'Fio'
+      fill_in 'Preço unitário', with: '100,00'
     end
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Proposta Comercial criada com sucesso'
+    expect(page).to have_notice 'Proposta Comercial editada com sucesso'
 
     within_records do
       within 'tbody tr:nth-child(3)' do

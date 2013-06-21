@@ -449,30 +449,6 @@ Compras::Application.routes.draw do
 
   resources :purchase_process_proposal_tiebreaks, only: [:edit, :update]
 
-  resources :purchase_process_item_creditor_proposals, except: :destroy do
-    collection do
-      get :creditors
-      get :batch_edit
-      put :batch_update
-    end
-  end
-
-  resources :purchase_process_global_creditor_proposals, except: :destroy do
-    collection do
-      get :creditors
-      get :batch_edit
-      put :batch_update
-    end
-  end
-
-  resources :purchase_process_lot_creditor_proposals, except: :destroy do
-    collection do
-      get :creditors
-      get :batch_edit
-      put :batch_update
-    end
-  end
-
   resources :purchase_process_creditor_disqualifications, except: :destroy do
     collection do
       get :creditors

@@ -1,45 +1,32 @@
 # encoding: utf-8
 class PurchaseProcessCreditorProposalsController < CrudController
-  custom_actions collection: [:creditors, :batch_edit, :batch_update]
+  defaults resource_class: LicitationProcess
+
+  before_filter :load_licitation_process, only: [:index, :new]
+  before_filter :load_creditor, except: [:index]
 
   has_scope :licitation_process_id, allow_blank: true
   has_scope :creditor_id, allow_blank: true
 
-  before_filter :load_licitation_process
-  before_filter :load_path_generator
-  before_filter :load_creditor, only: [:new, :batch_edit]
+  def index
+    respond_to do |format|
+      format.json { @creditor_proposals = apply_scopes(PurchaseProcessCreditorProposal).all }
+      format.html { @creditors = @licitation_process.creditors_enabled.includes(:purchase_process_creditor_proposals) }
+    end
+  end
 
   def new
-    object = build_resource
-    object.creditor = @creditor
-    object.licitation_process = @licitation_process
+    @proposals = PurchaseProcessCreditorProposalBuilder.build_proposals(@licitation_process, @creditor)
   end
 
-  def create
-    create! do |success, failure|
-      success.html { redirect_to @proposal_path_generator.proposals_path }
-    end
+  def edit
+    @proposals = resource.proposals_of_creditor(@creditor)
   end
 
-  def batch_edit
-    object = build_resource
-    object.creditor = @creditor
-    object.licitation_process = @licitation_process
-  end
-
-  def batch_update
-    object = build_resource
-
+  def update
     update! do |success, failure|
-      success.html { redirect_to @proposal_path_generator.proposals_path }
-      failure.html { render :batch_edit }
+      success.html { redirect_to purchase_process_creditor_proposals_path(licitation_process_id: resource.id) }
     end
-  end
-
-  def creditors
-    object = build_resource
-    object.licitation_process = @licitation_process
-    @creditors = @licitation_process.creditors_enabled.includes(:purchase_process_creditor_proposals)
   end
 
   private
@@ -48,21 +35,11 @@ class PurchaseProcessCreditorProposalsController < CrudController
     @licitation_process = LicitationProcess.find(params[:licitation_process_id])
   end
 
-  def load_path_generator
-    @proposal_path_generator = PurchaseProcessCreditorProposalPathGenerator.new(@licitation_process, self)
-  end
-
   def load_creditor
-    @creditor = Creditor.find(params[:creditor_id])
+    @creditor = Creditor.find params.delete(:creditor_id)
   end
 
-  def create_resource(object)
-    @licitation_process.localized.assign_attributes(params[:licitation_process])
-    super unless @licitation_process.save
-  end
-
-  def update_resource(object, resource_params)
-    @licitation_process.localized.assign_attributes(params[:licitation_process])
-    super unless @licitation_process.save
+  def interpolation_options
+    { resource_name: PurchaseProcessCreditorProposal.model_name.human }
   end
 end

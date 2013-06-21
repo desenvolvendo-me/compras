@@ -1,6 +1,7 @@
 require 'model_helper'
 require 'app/models/purchase_process_creditor_proposal'
 require 'app/models/licitation_process'
+require 'app/models/purchase_process_item'
 require 'app/business/purchase_process_creditor_proposal_ranking'
 
 describe PurchaseProcessCreditorProposal do
@@ -15,19 +16,46 @@ describe PurchaseProcessCreditorProposal do
   describe 'validations' do
     it { should validate_presence_of :creditor }
     it { should validate_presence_of :licitation_process }
-    it { should validate_presence_of :unit_price }
     it { should validate_numericality_of :lot }
     it { should validate_numericality_of :ranking }
 
     describe 'brand' do
-      context 'when licitaton process judgment form is item' do
-        before { subject.stub(:item?).and_return true }
+      context 'when licitaton process judgment form is item and price is greater than 0' do
+        before do
+          subject.stub(item?: true)
+          subject.stub(unit_price: 10)
+        end
+
         it { should validate_presence_of :brand }
       end
 
       context 'when licitaton process judgment form is not item' do
         before { subject.stub(:item?).and_return false }
         it { should_not validate_presence_of :brand }
+      end
+    end
+
+    describe 'unit_price' do
+      context 'brand is not nil' do
+        before { subject.brand = 'Marca' }
+
+        it 'validates unit price is greater than 0' do
+          subject.stub(item?: true)
+
+          expect(subject.valid?).to be_false
+          expect(subject.errors[:unit_price]).to include('deve ser maior que 0')
+        end
+      end
+
+      context 'brand is nil' do
+        before { subject.brand = nil }
+
+        it 'does not validate unit price is greater than 0' do
+          subject.stub(item?: true)
+          subject.valid?
+
+          expect(subject.errors[:unit_price]).to be_empty
+        end
       end
     end
   end
@@ -186,6 +214,24 @@ describe PurchaseProcessCreditorProposal do
       it 'returns true' do
         expect(subject.send(:should_reset_old_unit_price?)).to be_true
       end
+    end
+  end
+
+  describe '#validate_brand_presence?' do
+    it 'returns true if judgment form is item' do
+      subject.stub(item?: true)
+      subject.stub(unit_price: 10)
+
+      expect(subject.send(:validate_brand_presence?)).to be_true
+    end
+
+    it 'returns true if unit price is greater than 0' do
+      subject.stub(item?: true)
+      subject.stub(unit_price: nil)
+      expect(subject.send(:validate_brand_presence?)).to be_false
+
+      subject.stub(unit_price: 10)
+      expect(subject.send(:validate_brand_presence?)).to be_true
     end
   end
 

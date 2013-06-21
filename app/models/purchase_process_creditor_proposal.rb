@@ -1,7 +1,7 @@
 class PurchaseProcessCreditorProposal < Compras::Model
   attr_accessible :creditor_id, :brand, :unit_price, :old_unit_price,
     :item_id, :delivery_date, :licitation_process_id, :lot, :ranking,
-    :realigment_prices_attributes
+    :realigment_prices_attributes, :purchase_process_item_id
 
   attr_accessor :difference_price
 
@@ -29,8 +29,8 @@ class PurchaseProcessCreditorProposal < Compras::Model
 
   validates :creditor, :licitation_process, :unit_price, presence: true
   validates :lot, :ranking, numericality: { allow_blank: true }
-  validates :unit_price, numericality: { greater_than: 0 }
-  validates :brand, presence: true, if: :item?
+  validates :unit_price, numericality: { greater_than: 0, if: :validate_unit_price? }
+  validates :brand, presence: true, if: :validate_brand_presence?
   validates :ranking, presence: true, if: :ranking_changed?
 
   validate :unit_price_is_lower_than_best_proposal, if: :benefited_tied?
@@ -194,6 +194,16 @@ class PurchaseProcessCreditorProposal < Compras::Model
   end
 
   private
+
+  def validate_brand_presence?
+    return false unless item?
+    (unit_price || 0) > 0
+  end
+
+  def validate_unit_price?
+    return false unless item?
+    brand.present?
+  end
 
   def update_ranking
     PurchaseProcessCreditorProposalRanking.rank! self

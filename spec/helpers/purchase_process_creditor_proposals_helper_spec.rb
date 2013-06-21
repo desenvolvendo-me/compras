@@ -2,98 +2,133 @@
 require 'spec_helper'
 
 describe PurchaseProcessCreditorProposalsHelper do
-  let(:creditor)                { double(:creditor, to_s: 1, id: 1) }
-  let(:proposal_path_generator) { double :proposal_path_generator }
+  let(:licitation_process) { double(:licitation_process, to_s: 'Proc. Licitatório', id: 13) }
+  let(:creditor)           { double(:creditor, to_s: 'Credor', id: 12) }
 
-  before { assign(:proposal_path_generator, proposal_path_generator) }
+  describe '#title' do
+    before { assign(:licitation_process, licitation_process) }
 
-  describe '#view_or_edit_creditor_proposal' do
+    it 'returns the index title' do
+      expect(helper.title).to eq "Proposta Comercial Processo Proc. Licitatório"
+    end
+  end
+
+  describe '#new_title' do
+    it 'returns the new layout title' do
+      expect(helper.new_title).to eq "Criar Proposta Comercial"
+    end
+  end
+
+  describe '#edit_title' do
+    it 'returns the edit layout title' do
+      expect(helper.edit_title).to eq "Editar Proposta Comercial"
+    end
+  end
+
+  describe '#subtitle' do
     before do
-      assign(:licitation_process, licitation_process)
+      assign(:creditor, creditor)
+      helper.stub(licitation_process_object: licitation_process)
     end
 
-    context 'when creditor got proposals' do
-      let(:licitation_process) { double(:licitation_process, to_s: 1, proposals_of_creditor: [creditor]) }
+    it 'returns the edit layout title' do
+      expect(helper.subtitle).to eq "Fornecedor Credor - Processo Proc. Licitatório"
+    end
+  end
 
-      it 'returns a link to edit proposals via the path generator' do
-        proposal_path_generator.stub(:edit_proposal_path).and_return 'edit_proposal_path'
-        expect(helper.view_or_edit_creditor_proposal(creditor)).to eql link_to('Editar propostas', 'edit_proposal_path')
+  describe '#form_partial' do
+    before { helper.stub(licitation_process_object: licitation_process) }
+
+    it 'returns the form based on licitation process judgment form kind' do
+      licitation_process.stub(judgment_form_kind: :item)
+      expect(helper.form_partial).to eq "form_item"
+
+      licitation_process.stub(judgment_form_kind: :lot)
+      expect(helper.form_partial).to eq "form_lot"
+    end
+  end
+
+  describe '#update_path' do
+    before { helper.stub(licitation_process_object: licitation_process) }
+
+    it 'returns the path to update action on creditor proposals controller' do
+      expect(helper.update_path).to eq "/purchase_process_creditor_proposals/13"
+    end
+  end
+
+  describe '#creditor_proposals_collection' do
+    let(:creditor_proposal) { double(:creditor_proposal, creditor_id: 1) }
+    let(:resource) { double(:resource, creditor_proposals: [creditor_proposal]) }
+
+    context 'when @proposals is set' do
+      before { assign(:proposals, '@proposals') }
+
+      it 'returns the @proposals when present' do
+        expect(helper.creditor_proposals_collection).to eq "@proposals"
       end
     end
 
-    context "when there's no creditor proposals via the path generator" do
-      let(:licitation_process) { double(:licitation_process, to_s: 1, proposals_of_creditor: []) }
+    context 'when @proposals is nil' do
+      before do
+        assign(:proposals, nil)
+        assign(:creditor, creditor)
+        helper.stub(resource: resource)
+        creditor.stub(id: 1)
+      end
 
-      it 'returns a link to create new proposals' do
-        proposal_path_generator.stub(:new_proposal_path).and_return 'new_proposal_path'
+      it 'returns the resource current creditor proposals' do
+        expect(helper.creditor_proposals_collection).to eq [creditor_proposal]
+      end
+    end
+  end
 
-        expect(helper.view_or_edit_creditor_proposal(creditor)).to eql link_to('Cadastrar propostas', 'new_proposal_path')
+  describe '#view_or_edit_creditor_proposal' do
+    before { assign(:licitation_process, licitation_process) }
+
+    context 'when there are no creditor proposals' do
+      before { licitation_process.stub(proposals_of_creditor: []) }
+
+      it 'returns a link to new proposals' do
+        expect(helper.view_or_edit_creditor_proposal(creditor)).to eq link_to 'Cadastrar propostas',
+          new_purchase_process_creditor_proposal_path(licitation_process_id: 13, creditor_id: 12)
+      end
+    end
+
+    context 'when there are creditor proposals' do
+      before do
+        licitation_process.stub(proposals_of_creditor: [double(:proposals)])
+        licitation_process.stub(to_s: 13)
+      end
+
+      it 'returns a link to edit proposals' do
+        expect(helper.view_or_edit_creditor_proposal(creditor)).to eq link_to 'Editar propostas',
+          edit_purchase_process_creditor_proposal_path(id: 13, creditor_id: 12)
       end
     end
   end
 
   describe '#link_to_disqualify_creditor_proposal' do
-    let(:disqualification) { double(:disqualification) }
-
     before { assign(:licitation_process, licitation_process) }
 
-    context 'when creditor got proposals' do
-      let(:licitation_process) { double(:licitation_process, to_s: 1, proposals_of_creditor: [creditor]) }
+    context 'when there are no creditor proposals' do
+      before { licitation_process.stub(proposals_of_creditor: []) }
 
-      it 'returns a link to edit the proposal disqualification via the proposal path generator' do
-        proposal_path_generator.stub(:disqualify_proposal_path).and_return 'disqualify_proposal_path'
-
-        expect(helper.link_to_disqualify_creditor_proposal(creditor)).to eql link_to('Desclassificar propostas', 'disqualify_proposal_path')
+      it 'returns a message with no proposal' do
+        expect(helper.link_to_disqualify_creditor_proposal(creditor)).to eq 'Nenhuma proposta cadastrada'
       end
     end
 
-    context "when there's no creditor proposals" do
-      let(:licitation_process) { double(:licitation_process, proposals_of_creditor: []) }
-
-      it 'returns message about no proposals' do
-        expect(helper.link_to_disqualify_creditor_proposal(creditor)).to eql 'Nenhuma proposta cadastrada'
+    context 'when there are creditor proposals' do
+      before do
+        licitation_process.stub(proposals_of_creditor: [double(:proposals)])
+        licitation_process.stub(to_s: 13)
+        helper.stub(disqualify_creditor_proposal_path: 'disqualify_path')
       end
-    end
-  end
 
-  describe '#creditors_proposals_url' do
-    it 'returns the creditors proposals path via the path generator' do
-      proposal_path_generator.should_receive(:proposals_path).and_return 'proposals_path'
-      expect(helper.creditors_proposals_url).to eql 'proposals_path'
-    end
-  end
-
-  describe '#form_path' do
-    it 'returns a form path via the path generator' do
-      helper.stub(:params).and_return({ action: 'new' })
-      proposal_path_generator.should_receive(:form_proposal_path).with 'new'
-      helper.form_path
-    end
-  end
-
-  describe '#disqualification_status_message' do
-    let(:licitation_process) { double(:licitation_process, id: 1) }
-
-    before do
-      assign(:licitation_process, licitation_process)
-      helper.stub(:disqualification_status).and_return :fully
-    end
-
-    it 'returns the translated disqualification status' do
-      helper.disqualification_status_message(creditor).should eql "Totalmente"
-    end
-  end
-
-  describe '#disqualification_status' do
-    let(:licitation_process) { double(:licitation_process, id: 1) }
-
-    before do
-      assign(:licitation_process, licitation_process)
-    end
-
-    it 'returns the disqualification status' do
-      PurchaseProcessCreditorDisqualification.should_receive(:disqualification_status).with(1, 1).and_return :fully
-      expect(helper.send(:disqualification_status, creditor)).to eql :fully
+      it 'returns a link to disqualify creditor proposal' do
+        expect(helper.link_to_disqualify_creditor_proposal(creditor)).to eq link_to 'Desclassificar propostas',
+          'disqualify_path'
+      end
     end
   end
 end

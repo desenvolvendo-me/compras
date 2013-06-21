@@ -1,39 +1,51 @@
 class PurchaseProcessCreditorProposalBuilder
-  def self.item_proposals(proposals, creditor_id)
-    build_or_find(proposals, { creditor_id: creditor_id.to_i })
+  attr_accessor :licitation_process, :creditor, :kind
+
+  def initialize(licitation_process, creditor)
+    self.licitation_process = licitation_process
+    self.creditor           = creditor
+    self.kind               = licitation_process.judgment_form_kind
   end
 
-  def self.lot_proposals(purchase_process, creditor_id)
-    attrs = { licitation_process_id: purchase_process.id, creditor_id: creditor_id.to_i }
+  def self.build_proposals(*attributes)
+    self.new(*attributes).proposals
+  end
 
-    [].tap do |proposals|
-      purchase_process.each_item_lot do |lot|
-        attrs.merge!(lot: lot)
-        proposals << build_or_find(purchase_process.creditor_proposals, attrs)
+  def proposals
+    [].tap do |all_proposals|
+      each_object do |item|
+        all_proposals << build_creditor_proposal(item)
       end
     end
   end
 
-  def self.global_proposals(purchase_process, creditor_id)
-    attrs = { licitation_process_id: purchase_process.id, creditor_id: creditor_id.to_i,
-              lot: nil, purchase_process_item_id: nil }
-
-    build_or_find(purchase_process.creditor_proposals, attrs)
-  end
-
   private
 
-  def self.build_or_find(proposals, attrs = {})
-    proposal   = proposals.select { |c| c.new_record? && check_attrs(c, attrs) }.first
-    proposal ||= proposals.select { |c| check_attrs(c, attrs) }.first
-    proposal ||= proposals.where(attrs).first
-    proposal ||= proposals.build(attrs)
-
-    proposal
+  def each_object
+    send(kind).each do |item|
+      yield item
+    end
   end
 
-  def self.check_attrs(proposal, attrs)
-    attrs.each { |k, v| return false unless proposal[k] == v }
-    true
+  def build_creditor_proposal(item)
+    creditor_proposal = licitation_process.creditor_proposals.build
+    creditor_proposal.creditor_id = creditor.id
+
+    creditor_proposal.purchase_process_item_id = item.id if kind == JudgmentFormKind::ITEM
+    creditor_proposal.lot = item                         if kind == JudgmentFormKind::LOT
+
+    creditor_proposal
+  end
+
+  def item
+    licitation_process.items
+  end
+
+  def lot
+    licitation_process.items.map(&:lot).uniq
+  end
+
+  def global
+    [licitation_process]
   end
 end
