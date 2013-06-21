@@ -137,8 +137,7 @@ class Creditor < Compras::Model
   end
 
   scope :without_licitation_ratification, lambda { |licitation_process_id|
-    creditor_ids = LicitationProcessRatification.licitation_process_id(licitation_process_id).
-      flat_map(&:creditor_id)
+    creditor_ids = LicitationProcess.find(licitation_process_id).licitation_process_ratification_creditor_ids
 
     scoped.select { 'compras_creditors.*, unico_people.name' }.
     joins { bidders.licitation_process.licitation_process_ratifications.outer }.

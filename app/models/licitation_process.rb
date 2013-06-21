@@ -62,6 +62,7 @@ class LicitationProcess < Compras::Model
   has_many :reserve_funds, :dependent => :restrict
   has_many :licitation_process_ratifications, :dependent => :restrict, :order => :id
   has_many :ratifications_items, through: :licitation_process_ratifications, source: :licitation_process_ratification_items, order: :id
+  has_many :licitation_process_ratification_creditors, through: :licitation_process_ratifications, source: :creditor, order: :id
   has_many :classifications, :through => :bidders, :class_name => 'LicitationProcessClassification',
            :source => :licitation_process_classifications
   has_many :purchase_process_budget_allocations, :dependent => :destroy, :order => :id

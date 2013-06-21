@@ -76,6 +76,7 @@ describe LicitationProcess do
   it { should have_many(:reserve_funds).dependent(:restrict) }
   it { should have_many(:licitation_process_ratifications).dependent(:restrict) }
   it { should have_many(:ratifications_items).through(:licitation_process_ratifications) }
+  it { should have_many(:licitation_process_ratification_creditors).through(:licitation_process_ratifications).order(:id) }
   it { should have_many(:classifications).through(:bidders) }
   it { should have_many(:purchase_process_budget_allocations).dependent(:destroy) }
   it { should have_many(:items).dependent(:restrict)}
