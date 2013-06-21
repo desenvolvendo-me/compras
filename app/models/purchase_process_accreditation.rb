@@ -11,5 +11,7 @@ class PurchaseProcessAccreditation < Compras::Model
   accepts_nested_attributes_for :purchase_process_accreditation_creditors,
                                 :allow_destroy => true
 
+  delegate :judgment_form_item?, to: :licitation_process, allow_nil: true
+
   validates :licitation_process, :presence => true
 end

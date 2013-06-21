@@ -3,7 +3,11 @@
     <th><%= PurchaseProcessTradingItemBid.human_attribute_name :round %></th>
     <th><%= PurchaseProcessTradingItemBid.human_attribute_name :number %></th>
     <th><%= PurchaseProcessTradingItemBid.human_attribute_name :item_lot %></th>
-    <th><%= PurchaseProcessTradingItemBid.human_attribute_name :item %></th>
+
+    <% if resource.item? %>
+        <th><%= PurchaseProcessTradingItemBid.human_attribute_name :item %></th>
+    <% end %>
+
     <th><%= PurchaseProcessTradingItemBid.human_attribute_name :accreditation_creditor %></th>
     <th><%= PurchaseProcessTradingItemBid.human_attribute_name :accreditation_creditor_company_size %></th>
     <th><%= PurchaseProcessTradingItemBid.human_attribute_name :status %></th>
@@ -16,7 +20,7 @@
       <%= render 'historic_row',
         number:                 bid.number,
         round:                  bid.round,
-        lot:                    bid.item_item_lot,
+        lot:                    bid.decorator.lot,
         item:                   bid.item,
         creditor:               bid.accreditation_creditor,
         creditor_company_size:  bid.accreditation_creditor.company_size,

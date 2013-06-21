@@ -53,6 +53,10 @@ class PurchaseProcessCreditorProposal < Compras::Model
     where { purchase_process_item_id.eq(item_id) }
   }
 
+  scope :by_lot, lambda { |lot|
+    where { |proposal| proposal.lot.eq(lot) }
+  }
+
   scope :find_brothers, lambda { |creditor_proposal|
     where { purchase_process_item_id.eq(creditor_proposal.purchase_process_item_id) &
             lot.eq(creditor_proposal.lot) &

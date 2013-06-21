@@ -11,13 +11,14 @@ class PurchaseProcessTradingItem < Compras::Model
 
   has_many :bids, class_name: 'PurchaseProcessTradingItemBid',
     foreign_key: :item_id, dependent: :destroy, order: 'number DESC'
-  has_many :purchase_process_accreditation_creditors, through: :item
   has_many :ratification_items, class_name: 'LicitationProcessRatificationItem'
+  has_many :accreditation_creditors, through: :trading
 
   has_one :negotiation, class_name: 'PurchaseProcessTradingItemNegotiation',
     dependent: :restrict, inverse_of: :item
 
-  delegate :lot, :quantity, to: :item, allow_nil: true, prefix: true
+  delegate :lot, to: :item, allow_nil: true, prefix: true
+  delegate :lot?, :item?, :purchase_process_id, to: :trading, allow_nil: true
 
   validates :reduction_rate_value, numericality: { greater_than_or_equal_to: 0 }, on: :update
   validates :reduction_rate_percent, numericality: { greater_than_or_equal_to: 0 }, on: :update
@@ -28,9 +29,7 @@ class PurchaseProcessTradingItem < Compras::Model
     reject_if: proc { |attributes|  attributes[:amount].blank? || BigDecimal(attributes[:amount]) <= 0 }
 
   scope :trading_id, ->(trading_id) do
-    where { |query|
-      query.trading_id.eq(trading_id)
-    }
+    where { |query| query.trading_id.eq(trading_id) }
   end
 
   def self.creditor_winner_items(creditor_id, trading_id)
@@ -47,12 +46,20 @@ class PurchaseProcessTradingItem < Compras::Model
     item.to_s
   end
 
-  def creditors_ordered
-    purchase_process_accreditation_creditors.by_lowest_proposal(item.id)
+  def creditors_ordered(purchase_process_accreditation_creditor_repository = PurchaseProcessAccreditationCreditor)
+    if item?
+      accreditation_creditors.by_lowest_proposal(item.id)
+    else
+      purchase_process_accreditation_creditor_repository.by_lowest_proposal_on_lot(purchase_process_id, lot)
+    end
   end
 
-  def creditors_ordered_outer
-    purchase_process_accreditation_creditors.by_lowest_proposal_outer(item.id)
+  def creditors_ordered_outer(purchase_process_accreditation_creditor_repository = PurchaseProcessAccreditationCreditor)
+    if item?
+      accreditation_creditors.by_lowest_proposal_outer(item.id)
+    else
+      purchase_process_accreditation_creditor_repository.by_lowest_proposal_outer_on_lot(purchase_process_id, lot)
+    end
   end
 
   def creditors_selected
@@ -70,7 +77,11 @@ class PurchaseProcessTradingItem < Compras::Model
   def lowest_proposal
     return unless creditor_with_lowest_proposal
 
-    creditor_with_lowest_proposal.creditor_proposal_by_item(item)
+    if item?
+      creditor_with_lowest_proposal.creditor_proposal_by_item(purchase_process_id, item)
+    else
+      creditor_with_lowest_proposal.creditor_proposal_by_lot(purchase_process_id, lot)
+    end
   end
 
   def lowest_bid
@@ -111,10 +122,28 @@ class PurchaseProcessTradingItem < Compras::Model
   end
 
   def benefited_tie?
-    creditors_benefited.any?
+    return false unless accreditation_creditor_winner
+
+    !accreditation_creditor_winner.benefited? && creditors_benefited.any?
+  end
+
+  def item_or_lot
+    item || lot
   end
 
   private
+
+  def creditor_winner
+    TradingItemWinner.new(self).creditor
+  end
+
+  def accreditation_creditor_winner
+    return unless creditor_winner
+
+    creditor_winner.
+      purchase_process_accreditation_creditors.
+      purchase_process_id(purchase_process_id).first
+  end
 
   def minimum_amount_for_benefited(percent_rate = BigDecimal('5'))
     lowest_bid_or_proposal_amount + (lowest_bid_or_proposal_amount * (percent_rate / BigDecimal('100')))

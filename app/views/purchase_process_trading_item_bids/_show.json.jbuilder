@@ -7,7 +7,7 @@ if resource
   json.id                                  resource.id
   json.item                                resource.item.to_s
   json.item_id                             resource.item.id
-  json.lot                                 resource.item_item_lot
+  json.lot                                 resource.decorator.lot
   json.number                              resource.number
   json.percent                             resource.decorator.percent
   json.round                               resource.round

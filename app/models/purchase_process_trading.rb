@@ -3,8 +3,9 @@ class PurchaseProcessTrading < Compras::Model
 
   belongs_to :purchase_process, class_name: 'LicitationProcess'
 
-  has_many :purchase_process_accreditation_creditors, through: :purchase_process_accreditation
-  has_many :creditors, through: :purchase_process_accreditation_creditors
+  has_many :accreditation_creditors, through: :purchase_process_accreditation,
+    source: :purchase_process_accreditation_creditors
+  has_many :creditors, through: :accreditation_creditors
   has_many :items, class_name: 'PurchaseProcessTradingItem', foreign_key: :trading_id,
     order: :id
 
@@ -13,7 +14,7 @@ class PurchaseProcessTrading < Compras::Model
 
   accepts_nested_attributes_for :items, allow_destroy: true
 
-  delegate :kind, :kind_humanize, to: :judgment_form, allow_nil: true
+  delegate :kind, :kind_humanize, :item?, :lot?, to: :judgment_form, allow_nil: true
 
   validates :purchase_process, presence: true
 
@@ -31,8 +32,8 @@ class PurchaseProcessTrading < Compras::Model
     items.map { |item| item.lowest_bid_or_proposal_accreditation_creditor }.compact.uniq
   end
 
-  def creditors_winners
-    items.map { |item| TradingItemWinner.new(item).creditor }.compact.uniq
+  def creditors_winners(trading_item_winner = TradingItemWinner)
+    items.map { |item| trading_item_winner.new(item).creditor }.compact.uniq
   end
 
   def allow_negotiation?
