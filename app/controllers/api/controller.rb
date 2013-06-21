@@ -1,6 +1,6 @@
 module Api
   class Controller < ApplicationController
-    skip_before_filter :authenticate_user!
+    skip_before_filter :authenticate_user!, :verify_authenticity_token
     before_filter :authenticate_customer!
 
     respond_to :json

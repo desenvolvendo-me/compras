@@ -756,6 +756,6 @@ Compras::Application.routes.draw do
   end
 
   namespace :api do
-    resources :material_classes, :only => [:index, :show]
+    resources :material_classes
   end
 end
