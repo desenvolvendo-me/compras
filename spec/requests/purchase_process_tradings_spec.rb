@@ -456,18 +456,18 @@ feature "PurchaseProcessTradings" do
 
       within 'tbody tr:nth-child(3)' do
         expect(page).to have_content '3'
-        expect(page).to have_content 'IBM'
-        expect(page).to have_content 'Empresa de grande porte'
-        expect(page).to have_content '100,00'
-        expect(page).to have_content 'Sim'
-      end
-
-      within 'tbody tr:nth-child(4)' do
-        expect(page).to have_content '4'
         expect(page).to have_content 'Nobe'
         expect(page).to have_content 'Empresa de grande porte'
         expect(page).to have_content '110,00'
         expect(page).to have_content 'Não'
+      end
+
+      within 'tbody tr:nth-child(4)' do
+        expect(page).to have_content '4'
+        expect(page).to have_content 'IBM'
+        expect(page).to have_content 'Empresa de grande porte'
+        expect(page).to have_content '100,00'
+        expect(page).to have_content 'Sim'
       end
     end
 
