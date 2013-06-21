@@ -284,6 +284,28 @@ describe LicitationProcessDecorator do
     end
   end
 
+  describe '#disabled_trading_message' do
+    context 'there isnt any creditor proposal' do
+      before do
+        component.stub(creditor_proposals: [])
+
+        I18n.backend.store_translations 'pt-BR', licitation_process: {
+          messages: { disabled_trading_message: 'deve ter ao menos uma proposta' }
+        }
+      end
+
+      it 'returns the disabled message' do
+        expect(subject.disabled_trading_message).to eq 'deve ter ao menos uma proposta'
+      end
+    end
+
+    context 'there are creditor proposals' do
+      before { component.stub(creditor_proposals: [double(:creditor_proposals)]) }
+
+      it { expect(subject.disabled_trading_message).to be_nil }
+    end
+  end
+
   describe "#disabled_envelope_message" do
     before do
       I18n.backend.store_translations 'pt-BR', :licitation_process => {
