@@ -35,7 +35,7 @@ class PurchaseProcessTradingItem < Compras::Model
 
   def self.creditor_winner_items(creditor_id, trading_id)
     [].tap do |items|
-      scoped.trading_id(trading_id).each do |trading_item|
+      scoped.trading_id(trading_id).closed.each do |trading_item|
         items << trading_item if TradingItemWinner.new(trading_item).creditor.id == creditor_id
       end
     end
