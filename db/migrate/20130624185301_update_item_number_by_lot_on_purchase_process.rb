@@ -8,10 +8,14 @@ class UpdateItemNumberByLotOnPurchaseProcess < ActiveRecord::Migration
   private
 
   def next_item_number(item)
+    (max_item_number(item) || 0 ) + 1
+  end
+
+  def max_item_number(item)
     PurchaseProcessItem.where { |query|
       query.licitation_process_id.eq(item.licitation_process_id) &
       query.lot.eq(item.lot) }.
       order([:licitation_process_id, :lot]).
-      maximum(:item_number) + 1
+      maximum(:item_number)
   end
 end
