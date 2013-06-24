@@ -8,7 +8,8 @@
   <% end %>
 
   <% if f.object.persisted? && f.object.processing? %>
-    <%= button_tag 'Cancelar', :class => 'button negative', :name => 'commit', :value => 'cancel' %>
+    <%= link_to 'Cancelar', cancel_tce_export_monthly_monitoring_path(resource), method: :post,
+      class: 'button negative' %>
   <% end %>
 
   <%= f.button :back %>

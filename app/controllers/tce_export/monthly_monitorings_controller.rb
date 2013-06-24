@@ -14,16 +14,14 @@ class TceExport::MonthlyMonitoringsController < TceExport::BaseController
     end
   end
 
-  def update
-    if params[:commit] == 'cancel'
-      if cancel_resource
-        flash[:notice] = I18n.t("tce_export/monthly_monitoring.messages.cancelled")
-      else
-        flash[:alert] = I18n.t("tce_export/monthly_monitoring.messages.cant_cancel")
-      end
-
-      redirect_to edit_resource_path(resource)
+  def cancel
+    if cancel_resource
+      flash[:notice] = I18n.t("tce_export/monthly_monitoring.messages.cancelled")
+    else
+      flash[:alert] = I18n.t("tce_export/monthly_monitoring.messages.cant_cancel")
     end
+
+    redirect_to edit_resource_path(resource)
   end
 
   protected

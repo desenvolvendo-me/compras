@@ -572,6 +572,10 @@ Compras::Application.routes.draw do
   resource :prefecture, :except => :destroy
 
   resources :price_collections, :except => :destroy do
+    member do
+      post :classification
+    end
+
     collection do
       get :filter
       get :modal
@@ -740,6 +744,10 @@ Compras::Application.routes.draw do
 
   namespace :tce_export do
     resources :monthly_monitorings, :except => :destroy do
+      member do
+        post :cancel
+      end
+
       collection do
         get :filter
       end

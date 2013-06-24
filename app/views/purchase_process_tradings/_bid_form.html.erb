@@ -10,7 +10,7 @@
   <% end %>
 
   <div class="buttons">
-    <%= button_tag 'Ok', id: 'close_error_dialog', class: 'button' %>
+    <%= button_tag 'Ok', type: :button, id: 'close_error_dialog', class: 'button' %>
   </div>
 </div>
 
@@ -42,10 +42,12 @@
   </div>
 
   <div class="yui3-u-1-7 field-without-label">
-    <%= button_tag 'Gravar lance', class: 'button primary', id: 'make_bid', 'data-disabled' => make_bid_disabled_message(@next_bid) %>
+    <%= button_tag 'Gravar lance', type: :button, class: 'button primary',
+      id: 'make_bid', 'data-disabled' => make_bid_disabled_message(@next_bid) %>
   </div>
 
   <div class="yui3-u-1-7 field-without-label">
-    <%= button_tag 'Desfazer', class: 'button', id: 'undo_bid', 'data-disabled' => undo_bid_disabled_message(@historic) %>
+    <%= button_tag 'Desfazer', type: :button, class: 'button', id: 'undo_bid',
+      'data-disabled' => undo_bid_disabled_message(@historic) %>
   </div>
 </div>

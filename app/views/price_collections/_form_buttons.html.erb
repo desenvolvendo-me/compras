@@ -3,7 +3,8 @@
   <%= proposals_link %>
 
   <% if can?(:modify, main_controller_name) %>
-    <%= f.button :submit, 'Apurar' if f.object.persisted? %>
+    <%= link_to 'Apurar', classification_price_collection_path(resource),
+      method: :post, class: 'button primary' if f.object.persisted? %>
     <%= f.button :submit, 'data-disabled' => f.object.decorator.is_annulled_message %>
   <% end %>
 
