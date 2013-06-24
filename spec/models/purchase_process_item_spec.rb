@@ -26,7 +26,7 @@ describe PurchaseProcessItem do
   it { should delegate(:description).to(:material).allowing_nil(true) }
   it { should delegate(:direct_purchase?).to(:licitation_process).allowing_nil(true) }
 
-  it { should auto_increment(:item_number).by(:lot) }
+  it { should auto_increment(:item_number).by([:licitation_process_id, :lot]) }
 
   describe "creditor validation" do
     it 'validates presence when direct purchase' do

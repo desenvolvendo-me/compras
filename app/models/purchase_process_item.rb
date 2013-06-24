@@ -6,7 +6,7 @@ class PurchaseProcessItem < Compras::Model
 
   attr_modal :material, :quantity, :unit_price
 
-  auto_increment :item_number, by: :lot
+  auto_increment :item_number, by: [:licitation_process_id, :lot]
 
   belongs_to :material
   belongs_to :licitation_process
