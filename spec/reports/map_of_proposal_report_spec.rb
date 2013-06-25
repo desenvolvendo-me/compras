@@ -29,6 +29,11 @@ describe MapOfProposalReport do
       creditor: bidder_two, creditor_benefited: true)
   end
 
+  let(:item_one) { double('item_one', lot: 1) }
+  let(:item_two) { double('item_two', lot: 1) }
+
+  let(:items) { double('PurchaseProcessItem', lots: [1, 2, 3], by_lot: [item_one, item_two]) }
+
   let(:proposals) { [proposal_one, proposal_two] }
 
   subject do
@@ -67,6 +72,22 @@ describe MapOfProposalReport do
       licitation_process_repository.stub(:where).and_return proposals
 
       subject.stub(:average_total_price_item).and_return 10.98
+    end
+  end
+
+  describe '#lots' do
+    it 'return a array with lots' do
+      subject.stub(:items).and_return items
+
+      expect(subject.lots).to eq [1, 2, 3]
+    end
+  end
+
+  describe '#items_by_lot' do
+    it 'return a array of items by lots' do
+      subject.stub(:items).and_return items
+
+      expect(subject.items_by_lot(1)).to eq [item_one, item_two]
     end
   end
 end

@@ -22,4 +22,12 @@ class PurchaseProcessItemDecorator
   def quantity
     number_with_precision super if super
   end
+
+  def unit_price_with_currency
+    number_to_currency component.unit_price if component.unit_price
+  end
+
+  def total_price_with_currency
+    number_to_currency component.total_price if component.total_price
+  end
 end

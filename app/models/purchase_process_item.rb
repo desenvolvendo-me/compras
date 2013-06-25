@@ -31,13 +31,16 @@ class PurchaseProcessItem < Compras::Model
   orderize "id DESC"
   filterize
 
-
   scope :licitation_process_id, lambda { |licitation_process_id|
     where { |item| item.licitation_process_id.eq(licitation_process_id) }
   }
 
   scope :creditor_id, lambda { |creditor_id|
     where { |item| item.creditor_id.eq(creditor_id) }
+  }
+
+  scope :by_lot, lambda { |lot|
+    where { |item| item.lot.eq lot }
   }
 
   def self.lots
@@ -68,5 +71,9 @@ class PurchaseProcessItem < Compras::Model
 
   def winning_bid
     licitation_process_classifications.detect { |classification| classification.situation == SituationOfProposal::WON}
+  end
+
+  def total_price
+    unit_price * quantity
   end
 end

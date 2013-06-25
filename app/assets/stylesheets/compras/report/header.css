@@ -4,6 +4,7 @@
   padding: 10px;
   overflow: auto;
   zoom: 1;
+  height: 90px;
 }
 
 .prefecture-image {

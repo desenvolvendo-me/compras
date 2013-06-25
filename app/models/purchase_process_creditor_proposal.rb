@@ -41,6 +41,14 @@ class PurchaseProcessCreditorProposal < Compras::Model
   orderize :id
   filterize
 
+  scope :unit_price_equal, ->(price) {
+    where { unit_price.eq price }
+  }
+
+  scope :unit_price_greater_than, ->(price){
+    where { unit_price.gt price}
+  }
+
   scope :licitation_process_id, lambda { |licitation_process_id|
     where { |proposal| proposal.licitation_process_id.eq(licitation_process_id) }
   }

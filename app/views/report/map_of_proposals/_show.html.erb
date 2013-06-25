@@ -2,36 +2,8 @@
 <h3>Mapa Comparativo de Preços</h3>
 <h3><%= resource.licitation_process %></h3>
 
-<% resource.licitation_process.items.each do |item| %>
-  <table class="records <%= item.material.description.parameterize %>">
-    <thead>
-      <tr>
-        <td>Material/Serviço:<%= "#{item.lot} #{item.material}" %></td>
-        <td>Quantidade</td>
-        <td><%= number_with_delimiter item.quantity %></td>
-      </tr>
-
-      <tr>
-        <td>Fornecedor</td>
-        <td>Valor Unitário</td>
-        <td>Valor Total</td>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% resource.item_creditor_proposals(item).each do |creditor_proposal| %>
-        <tr class="<%= creditor_proposal.decorator.css_class %> <%= creditor_proposal.creditor_name.parameterize %>">
-          <td><%= "#{creditor_proposal.creditor_cnpj} - #{creditor_proposal.creditor_name}" %></td>
-          <td><%= creditor_proposal.decorator.unit_price_with_currency %></td>
-          <td><%= creditor_proposal.decorator.total_price_with_currency %></td>
-        </tr>
-      <% end %>
-
-      <tr class="average_price">
-        <td>Valor de referência</td>
-        <td><%= resource.decorator.average_unit_price_item item %></td>
-        <td><%= resource.decorator.average_total_price_item item %></td>
-      </tr>
-    </tbody>
-  </table>
+<% if resource.licitation_process.judgment_form_lot? %>
+  <%= render 'judgment_form_lot', resource: resource %>
+<% else %>
+  <%= render 'other_judgment_form', resource: resource %>
 <% end %>
