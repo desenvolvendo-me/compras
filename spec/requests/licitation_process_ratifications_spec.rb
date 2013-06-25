@@ -350,10 +350,11 @@ feature "LicitationProcessRatifications" do
 
     item_arame_farpado = PurchaseProcessItem.make!(:item_arame_farpado)
     item_arame         = PurchaseProcessItem.make!(:item_arame)
+    item               = PurchaseProcessItem.make!(:item)
 
     licitation = LicitationProcess.make!(:pregao_presencial,
       bidders: [],
-      items: [item_arame_farpado, item_arame])
+      items: [item_arame_farpado, item_arame, item])
 
     accreditation_sobrinho = PurchaseProcessAccreditationCreditor.make(:sobrinho_creditor,
       creditor: creditor_sobrinho)
@@ -373,6 +374,10 @@ feature "LicitationProcessRatifications" do
         licitation_process: licitation, creditor: creditor_sobrinho,
         item: item_arame, unit_price: 15.00)
 
+    PurchaseProcessCreditorProposal.make!(:proposta_arame,
+        licitation_process: licitation, creditor: creditor_sobrinho,
+        item: item, unit_price: 2.00)
+
     PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado,
         licitation_process: licitation, creditor: creditor_nohup,
         item: item_arame_farpado, unit_price: 9.00)
@@ -381,6 +386,10 @@ feature "LicitationProcessRatifications" do
         licitation_process: licitation, creditor: creditor_nohup,
         item: item_arame, unit_price: 5.00)
 
+     PurchaseProcessCreditorProposal.make!(:proposta_arame,
+        licitation_process: licitation, creditor: creditor_nohup,
+        item: item, unit_price: 15.00)
+
     trading = PurchaseProcessTrading.create!(purchase_process_id: licitation.id)
 
     trading_item_arame_farpado = PurchaseProcessTradingItem.create!(trading_id: trading.id,
@@ -388,6 +397,9 @@ feature "LicitationProcessRatifications" do
 
     trading_item_arame = PurchaseProcessTradingItem.create!(trading_id: trading.id,
       item_id: item_arame.id)
+
+    trading_item = PurchaseProcessTradingItem.create!(trading_id: trading.id,
+      item_id: item.id)
 
     accreditation_sobrinho = accreditation.purchase_process_accreditation_creditors.first
     accreditation_nohup    = accreditation.purchase_process_accreditation_creditors.last
@@ -400,8 +412,13 @@ feature "LicitationProcessRatifications" do
       purchase_process_accreditation_creditor_id: accreditation_sobrinho.id,
       amount: 0, round: 1, number: 1, status: TradingItemBidStatus::DECLINED)
 
+    PurchaseProcessTradingItemBid.create!(item_id: trading_item.id,
+      purchase_process_accreditation_creditor_id: accreditation_nohup.id,
+      amount: 0, round: 1, number: 1, status: TradingItemBidStatus::DECLINED)
+
     trading_item_arame_farpado.close!
     trading_item_arame.close!
+    trading_item.update_column :status, PurchaseProcessTradingItemStatus::FAILED
 
     Bidder.make!(:licitante, creditor: creditor_sobrinho, enabled: true,
       licitation_process: licitation)
@@ -448,6 +465,9 @@ feature "LicitationProcessRatifications" do
     expect(page).to have_content '2'
     expect(page).to have_content '3,00'
     expect(page).to have_content '6,00'
+
+    expect(page).to_not have_content '01.01.00001'
+    expect(page).to_not have_content 'Antivirus'
 
     check 'checkAll'
 
