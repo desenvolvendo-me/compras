@@ -184,8 +184,8 @@ feature "PurchaseSolicitations" do
     BudgetStructure.make!(:secretaria_de_desenvolvimento)
     Employee.make!(:wenderson)
     DeliveryLocation.make!(:health)
-    ExpenseNature.make!(:aposentadorias_reserva)
-    budget_allocation = BudgetAllocation.make!(:reparo_2011)
+    ExpenseNature.make!(:aposentadorias_reserva, year: 2012)
+    budget_allocation = BudgetAllocation.make!(:reparo_2011, year: 2012)
     Material.make!(:arame_farpado)
 
     navigate 'Processos de Compra > Solicitações de Compra'
@@ -669,7 +669,7 @@ feature "PurchaseSolicitations" do
     PurchaseSolicitation.make!(:reparo,
                                :items => [item],
                                :kind => PurchaseSolicitationKind::SERVICES)
-    budget_allocation = BudgetAllocation.make!(:alocacao)
+    budget_allocation = BudgetAllocation.make!(:alocacao, year: Date.current.year)
     Material.make!(:antivirus)
     Material.make!(:office, :material_type => MaterialType::SERVICE)
 

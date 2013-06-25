@@ -68,19 +68,49 @@ $(document).ready(function() {
 
   function setBudgetAllocationSource() {
     var url = Routes.budget_allocations,
-    budgetStructureId = $("#purchase_solicitation_budget_structure_id").val(),
-    params = {
-      budget_structure_id: budgetStructureId
-    }
+        budgetStructureId = $("#purchase_solicitation_budget_structure_id").val(),
+        year   = $("#purchase_solicitation_accounting_year").val(),
+        params = { by_year: year };
 
     if (budgetStructureId) {
-      url += "?" + jQuery.param(params);
+      params['budget_structure_id'] = budgetStructureId;
     }
 
-    $(".budget-allocation").data('source', url);
+    url += "?" + jQuery.param(params);
+
+    $("#purchase_solicitation_budget_allocation").data('source', url);
   }
 
+  function filterExpenseNatureSource(expenseNatureId) {
+    var url    = Routes.expense_natures,
+        year   = $("#purchase_solicitation_accounting_year").val(),
+        params = { by_year: year };
+
+    if (expenseNatureId) {
+      params['breakdown_of'] = expenseNatureId;
+    }
+
+    url += "?" + jQuery.param(params);
+
+    $("#purchase_solicitation_expense_nature").data('source', url);
+  }
+
+  $('#purchase_solicitation_budget_allocation_id').on("change", function(event, budgetAllocation) {
+    if (budgetAllocation) {
+      $('#purchase_solicitation_budget_allocation_amount').val(numberWithDelimiter(budgetAllocation.amount));
+      $('#purchase_solicitation_budget_allocation_expense_nature').val(budgetAllocation.expense_nature);
+      filterExpenseNatureSource(budgetAllocation.expense_nature_id);
+    } else {
+      $('#purchase_solicitation_budget_allocation_amount').val('0,00');
+      $('#purchase_solicitation_budget_allocation_expense_nature').val('');
+    }
+  });
+
   $('#purchase_solicitation_budget_structure_id').on("change", function(event, budgetStructure) {
+    setBudgetAllocationSource();
+  });
+
+  $('#purchase_solicitation_accounting_year').on("change", function(event, budgetStructure) {
     setBudgetAllocationSource();
   });
 
