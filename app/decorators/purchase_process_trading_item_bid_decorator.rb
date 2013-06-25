@@ -16,4 +16,10 @@ class PurchaseProcessTradingItemBidDecorator
   def lowest_bid_or_proposal_amount
     number_with_precision super
   end
+
+  def lot
+    return super if lot?
+
+    item_item_lot
+  end
 end

@@ -11,22 +11,25 @@ describe PurchaseProcessAccreditationCreditor do
 
   it { should have_many(:trading_item_bids).class_name('PurchaseProcessTradingItemBid').dependent(:restrict) }
 
-  it { should delegate(:personable_type_humanize).to(:creditor).allowing_nil(true).prefix(true) }
-  it { should delegate(:address).to(:creditor).allowing_nil(true).prefix(true) }
-  it { should delegate(:city).to(:creditor).allowing_nil(true).prefix(true) }
-  it { should delegate(:state).to(:creditor).allowing_nil(true).prefix(true) }
-  it { should delegate(:identity_document).to(:creditor).allowing_nil(true).prefix(true) }
-  it { should delegate(:neighborhood).to(:creditor).allowing_nil(true).prefix(true) }
-  it { should delegate(:zip_code).to(:creditor).allowing_nil(true).prefix(true) }
-  it { should delegate(:phone).to(:creditor).allowing_nil(true).prefix(true) }
-  it { should delegate(:person_email).to(:creditor).allowing_nil(true).prefix(true) }
-  it { should delegate(:company?).to(:creditor).allowing_nil(true).prefix(true) }
-  it { should delegate(:individual?).to(:creditor).allowing_nil(true).prefix(true) }
-  it { should delegate(:identity_document).to(:creditor_representative).allowing_nil(true).prefix(true) }
-  it { should delegate(:phone).to(:creditor_representative).allowing_nil(true).prefix(true) }
-  it { should delegate(:email).to(:creditor_representative).allowing_nil(true).prefix(true) }
-  it { should delegate(:identity_number).to(:creditor_representative).allowing_nil(true).prefix(true) }
-  it { should delegate(:benefited?).to(:company_size).allowing_nil(true) }
+  describe 'delegations' do
+    it { should delegate(:personable_type_humanize).to(:creditor).allowing_nil(true).prefix(true) }
+    it { should delegate(:address).to(:creditor).allowing_nil(true).prefix(true) }
+    it { should delegate(:city).to(:creditor).allowing_nil(true).prefix(true) }
+    it { should delegate(:state).to(:creditor).allowing_nil(true).prefix(true) }
+    it { should delegate(:identity_document).to(:creditor).allowing_nil(true).prefix(true) }
+    it { should delegate(:neighborhood).to(:creditor).allowing_nil(true).prefix(true) }
+    it { should delegate(:zip_code).to(:creditor).allowing_nil(true).prefix(true) }
+    it { should delegate(:phone).to(:creditor).allowing_nil(true).prefix(true) }
+    it { should delegate(:person_email).to(:creditor).allowing_nil(true).prefix(true) }
+    it { should delegate(:company?).to(:creditor).allowing_nil(true).prefix(true) }
+    it { should delegate(:individual?).to(:creditor).allowing_nil(true).prefix(true) }
+    it { should delegate(:proposal_by_lot).to(:creditor).allowing_nil(true).prefix(true) }
+    it { should delegate(:identity_document).to(:creditor_representative).allowing_nil(true).prefix(true) }
+    it { should delegate(:phone).to(:creditor_representative).allowing_nil(true).prefix(true) }
+    it { should delegate(:email).to(:creditor_representative).allowing_nil(true).prefix(true) }
+    it { should delegate(:identity_number).to(:creditor_representative).allowing_nil(true).prefix(true) }
+    it { should delegate(:benefited?).to(:company_size).allowing_nil(true) }
+  end
 
   describe "validations" do
     it { should validate_presence_of :creditor }

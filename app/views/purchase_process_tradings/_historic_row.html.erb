@@ -2,7 +2,11 @@
   <td><%= round %></td>
   <td><%= number %></td>
   <td><%= lot %></td>
-  <td><%= item %></td>
+
+  <% if resource.item? %>
+    <td><%= item %></td>
+  <% end %>
+
   <td><%= creditor %></td>
   <td><%= creditor_company_size %></td>
   <td><%= status %></td>

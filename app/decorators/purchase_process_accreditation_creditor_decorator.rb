@@ -8,18 +8,18 @@ class PurchaseProcessAccreditationCreditorDecorator
     super || 'Não possui representante'
   end
 
-  def unit_price_of_proposal_by_item(item)
-    return '-' unless creditor_proposal_by_item(item)
+  def unit_price_of_proposal(purchase_process_id, item_or_lot)
+    return '-' unless proposal(purchase_process_id, item_or_lot)
 
-    number_with_precision(creditor_proposal_by_item(item).unit_price)
+    number_with_precision proposal(purchase_process_id, item_or_lot).unit_price
   end
 
-  def selected?
-    I18n.t("#{allowed?}")
+  def selected?(purchase_process_id, item_or_lot)
+    I18n.t("#{allowed?(purchase_process_id, item_or_lot)}")
   end
 
-  def not_selected_class
-    return if allowed?
+  def not_selected_class(purchase_process_id, item_or_lot)
+    return if allowed?(purchase_process_id, item_or_lot)
     'not_selected'
   end
 
@@ -37,7 +37,21 @@ class PurchaseProcessAccreditationCreditorDecorator
 
   private
 
-  def allowed?
-    has_power_of_attorney? || creditor_individual?
+  def allowed?(purchase_process_id, item_or_lot)
+    (has_power_of_attorney? || creditor_individual?) && proposal_qualified?(purchase_process_id, item_or_lot)
+  end
+
+  def proposal_qualified?(purchase_process_id, item_or_lot)
+    return false unless proposal(purchase_process_id, item_or_lot)
+
+    proposal(purchase_process_id, item_or_lot).qualified?
+  end
+
+  def proposal(purchase_process_id, item_or_lot)
+    if judgment_form_item?
+      creditor_proposal_by_item(purchase_process_id, item_or_lot)
+    else
+      creditor_proposal_by_lot(purchase_process_id, item_or_lot)
+    end
   end
 end

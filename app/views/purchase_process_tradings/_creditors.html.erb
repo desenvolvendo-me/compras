@@ -16,10 +16,10 @@
         order: index + 1,
         creditor: accreditation_creditor,
         company_size: accreditation_creditor.company_size,
-        amount: accreditation_creditor.decorator.unit_price_of_proposal_by_item(@item.item),
+        amount: accreditation_creditor.decorator.unit_price_of_proposal(resource.purchase_process_id, @item.item_or_lot),
         percent: '-',
-        selected: accreditation_creditor.decorator.selected?,
-        not_selected_class: accreditation_creditor.decorator.not_selected_class %>
+        selected: accreditation_creditor.decorator.selected?(resource.purchase_process_id, @item.item_or_lot),
+        not_selected_class: accreditation_creditor.decorator.not_selected_class(resource.purchase_process_id, @item.item_or_lot) %>
     <% end %>
   </tbody>
 </table>

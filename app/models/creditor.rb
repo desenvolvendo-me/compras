@@ -190,8 +190,18 @@ class Creditor < Compras::Model
     user.present? && user.persisted?
   end
 
-  def proposal_by_item(item)
-    purchase_process_creditor_proposals.by_item_id(item.id).first
+  def proposal_by_item(purchase_process_id, item)
+    purchase_process_creditor_proposals.
+      by_item_id(item.id).
+      licitation_process_id(purchase_process_id).
+      first
+  end
+
+  def proposal_by_lot(purchase_process_id, lot)
+    purchase_process_creditor_proposals.
+      licitation_process_id(purchase_process_id).
+      by_lot(lot).
+      first
   end
 
   def first_representative_individual

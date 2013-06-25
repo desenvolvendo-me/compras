@@ -10,13 +10,17 @@ describe PurchaseProcessTradingItem do
   it { should belong_to :item }
 
   it { should have_many(:bids).dependent(:destroy) }
-  it { should have_many(:purchase_process_accreditation_creditors).through(:item) }
+  it { should have_many(:accreditation_creditors).through(:trading) }
   it { should have_many(:ratification_items).class_name('LicitationProcessRatificationItem') }
 
   it { should have_one(:negotiation).dependent(:restrict) }
 
-  it { should delegate(:lot).to(:item).allowing_nil(true).prefix(true) }
-  it { should delegate(:quantity).to(:item).allowing_nil(true).prefix(true) }
+  describe 'delegates' do
+    it { should delegate(:lot).to(:item).allowing_nil(true).prefix(true) }
+    it { should delegate(:lot?).to(:trading).allowing_nil(true) }
+    it { should delegate(:item?).to(:trading).allowing_nil(true) }
+    it { should delegate(:purchase_process_id).to(:trading).allowing_nil(true) }
+  end
 
   describe 'validations' do
     it 'cannot have 2 kind of reductions' do
@@ -104,7 +108,24 @@ describe PurchaseProcessTradingItem do
     end
   end
 
+  describe '#last_bid_with_proposal' do
+    it 'should return the last bid with proposal' do
+      bids = double(:bids)
+
+      subject.stub(bids: bids)
+
+      bids.should_receive(:with_proposal).and_return(bids)
+      bids.should_receive(:reorder).with(:id).and_return(['bid1', 'bid2'])
+
+      expect(subject.last_bid_with_proposal).to eq 'bid2'
+    end
+  end
+
   describe '#lowest_proposal' do
+    before do
+      subject.stub(purchase_process_id: 50)
+    end
+
     context 'when creditor_with_lowest_proposal is nil' do
       before do
         subject.stub(creditor_with_lowest_proposal: nil)
@@ -115,20 +136,50 @@ describe PurchaseProcessTradingItem do
       end
     end
 
-    context 'when creditor_with_lowest_proposal is not nil' do
-      let(:creditor) { double(:creditor) }
-      let(:proposal) { double(:proposal) }
-      let(:item) { double(:item) }
-
+    context 'when judgment_form by item' do
       before do
-        subject.stub(creditor_with_lowest_proposal: creditor)
-        subject.stub(item: item)
+        subject.stub item?: true
       end
 
-      it 'should return the lowest proposal' do
-        creditor.should_receive(:creditor_proposal_by_item).with(item).and_return(proposal)
+      context 'when creditor_with_lowest_proposal is not nil' do
+        let(:creditor) { double(:creditor) }
+        let(:proposal) { double(:proposal) }
+        let(:item) { double(:item) }
+        let(:accreditation_creditor_resource) { double(:accreditation_creditor_resource) }
 
-        expect(subject.lowest_proposal).to eq proposal
+        before do
+          subject.stub(creditor_with_lowest_proposal: creditor)
+          subject.stub(item: item)
+        end
+
+        it 'should return the lowest proposal' do
+          creditor.should_receive(:creditor_proposal_by_item).with(50, item).and_return(proposal)
+
+          expect(subject.lowest_proposal).to eq proposal
+        end
+      end
+
+      context 'when judgment_form not by item' do
+        before do
+          subject.stub item?: false
+        end
+
+        context 'when creditor_with_lowest_proposal is not nil' do
+          let(:creditor) { double(:creditor) }
+          let(:proposal) { double(:proposal) }
+          let(:accreditation_creditor_resource) { double(:accreditation_creditor_resource) }
+
+          before do
+            subject.stub(creditor_with_lowest_proposal: creditor)
+            subject.stub(lot: 1112)
+          end
+
+          it 'should return the lowest proposal' do
+            creditor.should_receive(:creditor_proposal_by_lot).with(50, 1112).and_return(proposal)
+
+            expect(subject.lowest_proposal).to eq proposal
+          end
+        end
       end
     end
   end
@@ -145,16 +196,74 @@ describe PurchaseProcessTradingItem do
   end
 
   describe '#creditors_ordered' do
-    it 'should return all creditors ordered' do
-      item = double(:item, id: 4)
+    let(:accreditation_creditors_repository) { double(:accreditation_creditors_repository) }
 
-      subject.stub(item: item)
-      accreditation_creditors = double(:accreditation_creditors)
+    context 'when judgment_form by item' do
+      before do
+        subject.stub(item?: true)
+      end
 
-      subject.should_receive(:purchase_process_accreditation_creditors).and_return(accreditation_creditors)
-      accreditation_creditors.should_receive(:by_lowest_proposal).with(4).and_return(['creditor1', 'creditor2'])
+      it 'should return all creditors ordered' do
+        item = double(:item, id: 4)
 
-      expect(subject.creditors_ordered).to eq ['creditor1', 'creditor2']
+        subject.stub(item: item)
+        accreditation_creditors = double(:accreditation_creditors)
+
+        subject.should_receive(:accreditation_creditors).and_return(accreditation_creditors)
+        accreditation_creditors.should_receive(:by_lowest_proposal).with(4).and_return(['creditor1', 'creditor2'])
+
+        expect(subject.creditors_ordered(accreditation_creditors_repository)).to eq ['creditor1', 'creditor2']
+      end
+    end
+
+    context 'when judgment_form not by item' do
+      before do
+        subject.stub(item?: false)
+      end
+
+      it 'should return all creditors ordered' do
+        subject.stub(lot: 1133, purchase_process_id: 55)
+
+        accreditation_creditors_repository.should_receive(:by_lowest_proposal_on_lot).with(55, 1133).and_return(['creditor1', 'creditor2'])
+
+        expect(subject.creditors_ordered(accreditation_creditors_repository)).to eq ['creditor1', 'creditor2']
+      end
+    end
+  end
+
+  describe '#creditors_ordered_outer' do
+    let(:accreditation_creditors_repository) { double(:accreditation_creditors_repository) }
+
+    context 'when judgment_form by item' do
+      before do
+        subject.stub(item?: true)
+      end
+
+      it 'should return all creditors ordered' do
+        item = double(:item, id: 4)
+
+        subject.stub(item: item)
+        accreditation_creditors = double(:accreditation_creditors)
+
+        subject.should_receive(:accreditation_creditors).and_return(accreditation_creditors)
+        accreditation_creditors.should_receive(:by_lowest_proposal_outer).with(4).and_return(['creditor1', 'creditor2'])
+
+        expect(subject.creditors_ordered_outer(accreditation_creditors_repository)).to eq ['creditor1', 'creditor2']
+      end
+    end
+
+    context 'when judgment_form not by item' do
+      before do
+        subject.stub(item?: false)
+      end
+
+      it 'should return all creditors ordered' do
+        subject.stub(lot: 1133, purchase_process_id: 55)
+
+        accreditation_creditors_repository.should_receive(:by_lowest_proposal_outer_on_lot).with(55, 1133).and_return(['creditor1', 'creditor2'])
+
+        expect(subject.creditors_ordered_outer(accreditation_creditors_repository)).to eq ['creditor1', 'creditor2']
+      end
     end
   end
 
@@ -225,6 +334,135 @@ describe PurchaseProcessTradingItem do
 
       it "should return lowest_proposal's unit_price" do
         expect(subject.lowest_bid_or_proposal_amount).to eq 16.0
+      end
+    end
+  end
+
+  describe '#lowest_bid_or_proposal_accreditation_creditor' do
+    context 'when has last_bid' do
+      let(:lowest_bid) { double(:lowest_bid, accreditation_creditor: 'creditor') }
+
+      before do
+        subject.stub(lowest_bid: lowest_bid)
+      end
+
+      it "should return lowest_bid's amount" do
+        expect(subject.lowest_bid_or_proposal_accreditation_creditor).to eq 'creditor'
+      end
+    end
+
+    context 'when has not last_bid' do
+      before do
+        subject.stub(creditor_with_lowest_proposal: 'creditor2')
+      end
+
+      it "should return lowest_proposal's unit_price" do
+        expect(subject.lowest_bid_or_proposal_accreditation_creditor).to eq 'creditor2'
+      end
+    end
+  end
+
+  describe '#creditors_benefited' do
+    let(:creditors_selected) { double(:creditors_selected) }
+
+    it 'should return all unique benefited creditors' do
+      subject.stub(
+        creditors_selected: creditors_selected,
+        minimum_amount_for_benefited: 10)
+
+      creditors_selected.should_receive(:benefited).and_return creditors_selected
+      creditors_selected.should_receive(:less_or_equal_to_trading_bid_value).with(10).and_return ['creditor', 'creditor']
+
+      expect(subject.creditors_benefited).to eq ['creditor']
+    end
+  end
+
+  describe '#close!' do
+    it 'should update status to closed' do
+      subject.should_receive(:update_column).with(:status, PurchaseProcessTradingItemStatus::CLOSED)
+
+      subject.close!
+    end
+  end
+
+  describe '#pending!' do
+    it 'should update status to pending' do
+      subject.should_receive(:update_column).with(:status, PurchaseProcessTradingItemStatus::PENDING)
+
+      subject.pending!
+    end
+  end
+
+  describe '#benefited_tie?' do
+    let(:creditor) { double(:creditor) }
+
+    before do
+      subject.stub(accreditation_creditor_winner: creditor)
+    end
+
+    context 'when winner is not benefited' do
+      before do
+        creditor.stub(benefited?: false)
+      end
+
+      context 'when has benefited creditors' do
+        before do
+          subject.stub(creditors_benefited: ['creditor'])
+        end
+
+        it { expect(subject.benefited_tie?).to be_true }
+      end
+
+      context 'when has not benefited creditors' do
+        before do
+          subject.stub(creditors_benefited: [])
+        end
+
+        it { expect(subject.benefited_tie?).to be_false }
+      end
+    end
+
+    context 'when winner is benefited' do
+      before do
+        creditor.stub(benefited?: true)
+      end
+
+      context 'when has benefited creditors' do
+        before do
+          subject.stub(creditors_benefited: ['creditor'])
+        end
+
+        it { expect(subject.benefited_tie?).to be_false }
+      end
+
+      context 'when has not benefited creditors' do
+        before do
+          subject.stub(creditors_benefited: [])
+        end
+
+        it { expect(subject.benefited_tie?).to be_false }
+      end
+    end
+  end
+
+  describe '#item_or_lot' do
+    context 'when has an item' do
+      before do
+        subject.stub(item: 'item')
+      end
+
+      it 'should return the item' do
+        expect(subject.item_or_lot).to eq 'item'
+      end
+    end
+
+    context 'when does not have an item but have a lot' do
+      before do
+        subject.stub(item: nil, lot: 'lot')
+      end
+
+      it 'should return the lot' do
+        expect(subject.item_or_lot).to eq 'lot'
       end
     end
   end

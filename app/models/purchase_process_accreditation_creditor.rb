@@ -14,11 +14,12 @@ class PurchaseProcessAccreditationCreditor < Compras::Model
 
   delegate :personable_type_humanize, :address, :city, :state, :identity_document,
            :neighborhood, :zip_code, :phone, :person_email, :individual?, :company?,
-           :proposal_by_item,
+           :proposal_by_item, :proposal_by_lot,
            :to => :creditor, :allow_nil => true, :prefix => true
   delegate :identity_document, :phone, :email, :identity_number,
            :to => :creditor_representative, :allow_nil => true, :prefix => true
   delegate :benefited?, to: :company_size, allow_nil: true
+  delegate :judgment_form_item?, to: :purchase_process_accreditation, allow_nil: true
 
   validates :kind, :presence => true, :if => :creditor_representative_present?
   validates :creditor, :purchase_process_accreditation, :presence => true
@@ -36,8 +37,7 @@ class PurchaseProcessAccreditationCreditor < Compras::Model
     where {
       creditor.purchase_process_creditor_proposals.purchase_process_item_id.eq(item_id) &
       creditor.purchase_process_creditor_proposals.disqualified.eq(false)
-    }.
-    order('compras_purchase_process_creditor_proposals.ranking DESC')
+    }.order('compras_purchase_process_creditor_proposals.ranking DESC')
   }
 
   scope :by_lowest_proposal_outer, lambda { |item_id|
@@ -46,8 +46,30 @@ class PurchaseProcessAccreditationCreditor < Compras::Model
       (creditor.purchase_process_creditor_proposals.purchase_process_item_id.eq(item_id) &
       creditor.purchase_process_creditor_proposals.disqualified.eq(false) ) |
       creditor.purchase_process_creditor_proposals.id.eq(nil)
-    }.
-    order('compras_purchase_process_creditor_proposals.ranking DESC')
+    }.order('compras_purchase_process_creditor_proposals.ranking DESC')
+  }
+
+  scope :by_lowest_proposal_on_lot, lambda { |licitation_process_id, lot|
+    joins { creditor.purchase_process_creditor_proposals }.
+    joins { purchase_process_accreditation }.
+    where {
+      purchase_process_accreditation.licitation_process_id.eq(licitation_process_id) &
+      creditor.purchase_process_creditor_proposals.lot.eq(lot) &
+      creditor.purchase_process_creditor_proposals.disqualified.eq(false) &
+      creditor.purchase_process_creditor_proposals.licitation_process_id.eq(licitation_process_id)
+    }.order('compras_purchase_process_creditor_proposals.ranking DESC')
+  }
+
+  scope :by_lowest_proposal_outer_on_lot, lambda { |licitation_process_id, lot|
+    joins { creditor.purchase_process_creditor_proposals.outer }.
+    joins { purchase_process_accreditation }.
+    where {
+      purchase_process_accreditation.licitation_process_id.eq(licitation_process_id) &
+      (creditor.purchase_process_creditor_proposals.lot.eq(lot) &
+       creditor.purchase_process_creditor_proposals.disqualified.eq(false) &
+       creditor.purchase_process_creditor_proposals.licitation_process_id.eq(licitation_process_id)
+      )| creditor.purchase_process_creditor_proposals.id.eq(nil)
+    }.order('compras_purchase_process_creditor_proposals.ranking DESC')
   }
 
   scope :benefited, lambda {
@@ -61,6 +83,11 @@ class PurchaseProcessAccreditationCreditor < Compras::Model
     joins { trading_item_bids }.
     where { trading_item_bids.amount.lteq(value) }
   }
+
+  scope :purchase_process_id, ->(purchase_process_id) do
+    joins { purchase_process_accreditation }.
+    where { purchase_process_accreditation.licitation_process_id.eq(purchase_process_id) }
+  end
 
   def to_s
     creditor.to_s

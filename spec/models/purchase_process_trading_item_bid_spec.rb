@@ -14,7 +14,12 @@ describe PurchaseProcessTradingItemBid do
     it { should delegate(:reduction_rate_value).to(:item).allowing_nil(true) }
     it { should delegate(:reduction_rate_percent).to(:item).allowing_nil(true) }
     it { should delegate(:lowest_bid_or_proposal_amount).to(:item).allowing_nil(true) }
+    it { should delegate(:lowest_bid_or_proposal_accreditation_creditor).to(:item).allowing_nil(true) }
+    it { should delegate(:lot).to(:item).allowing_nil(true) }
+    it { should delegate(:lot?).to(:item).allowing_nil(true) }
+    it { should delegate(:item?).to(:item).allowing_nil(true) }
     it { should delegate(:item_lot).to(:item).allowing_nil(true).prefix(true) }
+    it { should delegate(:benefited?).to(:accreditation_creditor).allowing_nil(true).prefix(true) }
   end
 
   context 'validations' do

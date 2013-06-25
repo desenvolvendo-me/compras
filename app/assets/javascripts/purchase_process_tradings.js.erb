@@ -1,6 +1,6 @@
 <%# encoding: utf-8 %>
 $(document).ready(function() {
-  $('input.item_chooser:first').attr('checked', true);
+  $('input.item_chooser:first').attr('checked', true).trigger('change');
 
   function allowNewBid(allowed) {
     if (allowed) {
@@ -25,7 +25,7 @@ $(document).ready(function() {
   function updateBenefitedBidLink(itemId) {
     var url = $('a#benefited_bid').data('url');
 
-    url = $.param({item_id: itemId});
+    url += '?' + $.param({item_id: itemId});
 
     $('a#benefited_bid').attr('href', url);
   }
@@ -289,7 +289,7 @@ $(document).ready(function() {
   });
 
   $('.item_chooser').on('change', function() {
-    var itemId = $(this).closest('td').siblings('td.item').data('id');
+    var itemId = $(this).closest('td').data('id');
 
     $('#item_id').val(itemId);
 

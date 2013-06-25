@@ -1,4 +1,4 @@
-<table id="lots" class="records">
+<table id="items" class="records">
   <thead>
     <th></th>
     <th>Lote</th>
@@ -7,8 +7,11 @@
     <th>Melhor Proposta</th>
     <th>Fornecedor Proposta</th>
     <th>Status</th>
-    <th>Histórico</th>
   </thead>
-</table>
 
-<%= render 'creditors' %>
+   <tbody>
+    <% resource.items.each_with_index do |item, index| %>
+      <%= render 'lots', item: item, index: index %>
+    <% end %>
+  </tbody>
+</table>

@@ -213,9 +213,34 @@ describe Creditor do
       purchase_process_creditor_proposals.
         should_receive(:by_item_id).
         with(5).
+        and_return(purchase_process_creditor_proposals)
+
+      purchase_process_creditor_proposals.
+        should_receive(:licitation_process_id).
+        with(1).
         and_return(['proposal'])
 
-      expect(subject.proposal_by_item(item)).to eq 'proposal'
+      expect(subject.proposal_by_item(1, item)).to eq 'proposal'
+    end
+  end
+
+  describe '#proposal_by_lot' do
+    let(:purchase_process_creditor_proposals) { double(:purchase_process_creditor_proposals) }
+
+    it 'should return the proposal for a given item' do
+      subject.stub(purchase_process_creditor_proposals: purchase_process_creditor_proposals)
+
+      purchase_process_creditor_proposals.
+        should_receive(:licitation_process_id).
+        with(1).
+        and_return(purchase_process_creditor_proposals)
+
+      purchase_process_creditor_proposals.
+        should_receive(:by_lot).
+        with(5).
+        and_return(['proposal'])
+
+      expect(subject.proposal_by_lot(1, 5)).to eq 'proposal'
     end
   end
 end

@@ -31,7 +31,6 @@ class PurchaseProcessItem < Compras::Model
   orderize "id DESC"
   filterize
 
-  scope :lots, lambda { pluck(:lot).uniq }
 
   scope :licitation_process_id, lambda { |licitation_process_id|
     where { |item| item.licitation_process_id.eq(licitation_process_id) }
@@ -40,6 +39,10 @@ class PurchaseProcessItem < Compras::Model
   scope :creditor_id, lambda { |creditor_id|
     where { |item| item.creditor_id.eq(creditor_id) }
   }
+
+  def self.lots
+    pluck(:lot).uniq
+  end
 
   def to_s
     material.to_s

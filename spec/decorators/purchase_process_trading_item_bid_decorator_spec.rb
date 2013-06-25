@@ -45,4 +45,30 @@ describe PurchaseProcessTradingItemBidDecorator do
       end
     end
   end
+
+  describe '#lot' do
+    context 'when judgment_form is by lot' do
+      before do
+        component.stub lot?: true
+      end
+
+      it 'should return lot' do
+        component.should_receive(:lot).and_return('lot')
+
+        expect(subject.lot).to eq 'lot'
+      end
+    end
+
+    context 'when judgment_form is not by lot' do
+      before do
+        component.stub lot?: false
+      end
+
+      it 'should return the item_lot from item' do
+        subject.should_receive(:item_item_lot).and_return('lot')
+
+        expect(subject.lot).to eq 'lot'
+      end
+    end
+  end
 end
