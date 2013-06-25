@@ -2,7 +2,8 @@
   <%= render 'bidder_documents/form', :f => d %>
 <% end %>
 
-<%= button_tag 'Adicionar Documento', class: "button affirmative add_bidder_document add-margin-bottom",
+<%= button_tag 'Adicionar Documento', type: :button,
+  class: "button affirmative add_bidder_document add-margin-bottom",
   'data-disabled' => f.object.decorator.cant_save_or_destroy_message %>
 
 <div id="bidder_documents">

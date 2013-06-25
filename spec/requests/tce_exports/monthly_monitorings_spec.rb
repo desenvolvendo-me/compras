@@ -89,10 +89,10 @@ feature "Monthly Monitoring TCE File" do
     expect(page).to have_field "Situação", with: "Em processamento"
     expect(page).not_to have_button "Gerar arquivo"
 
-    click_button "Cancelar"
+    click_link "Cancelar"
 
     expect(page).to have_notice "Geração do arquivo cancelada"
     expect(page).to have_field "Situação", with: "Cancelado"
-    expect(page).not_to have_button "Cancelar"
+    expect(page).not_to have_link "Cancelar"
   end
 end

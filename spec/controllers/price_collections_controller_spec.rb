@@ -114,6 +114,28 @@ describe PriceCollectionsController do
         expect(response.body).to match /Você não tem acesso a essa página/
       end
     end
+  end
+
+  describe 'POST #classification' do
+    let :price_collection do
+      double('PriceCollection',
+             :id => 1,
+             :code => 3,
+             :year => 2013,
+             :all_price_collection_classifications => price_collection_classifications,
+             :type_of_calculation => PriceCollectionTypeOfCalculation::LOWEST_GLOBAL_PRICE,
+             :annulled? => false)
+    end
+
+    let :price_collection_classifications do
+      [double('PriceCollectionClassification', :classifiable_id => 1, :classifiable_type => 'PriceCollection', :classification => 1),
+       double('PriceCollectionClassification', :classifiable_id => 1, :classifiable_type => 'PriceCollection', :classification => 2)]
+    end
+
+    before do
+      PriceCollection.stub(:find).and_return price_collection
+      price_collection.stub(:localized).and_return price_collection
+    end
 
     it 'delete classifications e call classification generator' do
       PriceCollection.stub(:find).and_return(price_collection)
@@ -122,7 +144,7 @@ describe PriceCollectionsController do
 
       PriceCollectionClassificationGenerator.any_instance.should_receive(:generate!)
 
-      put :update, :id => price_collection.id, :commit => 'Apurar'
+      post :classification, :id => price_collection.id
 
       expect(response).to redirect_to(price_collection_path(price_collection))
     end

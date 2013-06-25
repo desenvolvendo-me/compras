@@ -1,6 +1,6 @@
 class PriceCollectionsController < CrudController
   actions :all, :except => :destroy
-  before_filter :should_not_be_annuled!, :only => :update
+  before_filter :should_not_be_annuled!, :only => [:update, :classification]
 
   def new
     object = build_resource
@@ -11,22 +11,18 @@ class PriceCollectionsController < CrudController
     super
   end
 
-  def update
-    if params[:commit] == 'Apurar'
-      generator = PriceCollectionClassificationGenerator.new(resource)
-
-      resource.transaction do
-        generator.generate!
-      end
-
-      redirect_to price_collection_path(resource)
-    else
-      super
-    end
-  end
-
   def show
     render :layout => 'report'
+  end
+
+  def classification
+    generator = PriceCollectionClassificationGenerator.new(resource)
+
+    resource.transaction do
+      generator.generate!
+    end
+
+    redirect_to price_collection_path(resource)
   end
 
   protected

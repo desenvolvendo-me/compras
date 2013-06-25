@@ -80,7 +80,7 @@ feature "PriceCollections" do
 
     click_link 'Criar Coleta de Preços'
 
-    expect(page).to_not have_button 'Apurar'
+    expect(page).to_not have_link 'Apurar'
     expect(page).to_not have_link 'Relatório'
 
     within_tab 'Principal' do
@@ -531,7 +531,7 @@ feature "PriceCollections" do
       page.find('a').click
     end
 
-    click_button 'Apurar'
+    click_link 'Apurar'
 
     expect(page).to have_content 'QUADRO COMPARATIVO DE PREÇOS DA COLETA DE PREÇO 1/2012'
 
@@ -607,7 +607,7 @@ feature "PriceCollections" do
       page.find('a').click
     end
 
-    click_button 'Apurar'
+    click_link 'Apurar'
 
     expect(page).to have_content 'QUADRO COMPARATIVO DE PREÇOS DA COLETA DE PREÇO 1/2012'
 
@@ -655,7 +655,7 @@ feature "PriceCollections" do
       page.find('a').click
     end
 
-    click_button 'Apurar'
+    click_link 'Apurar'
 
     expect(page).to have_content 'QUADRO COMPARATIVO DE PREÇOS DA COLETA DE PREÇO 1/2012'
 
@@ -723,7 +723,7 @@ feature "PriceCollections" do
       page.find('a').click
     end
 
-    click_button 'Apurar'
+    click_link 'Apurar'
 
     expect(page).to have_content 'QUADRO COMPARATIVO DE PREÇOS DA COLETA DE PREÇO 1/2012'
 
@@ -771,7 +771,7 @@ feature "PriceCollections" do
       page.find('a').click
     end
 
-    click_button 'Apurar'
+    click_link 'Apurar'
 
     expect(page).to have_content 'QUADRO COMPARATIVO DE PREÇOS DA COLETA DE PREÇO 1/2012'
 
@@ -841,7 +841,7 @@ feature "PriceCollections" do
       page.find('a').click
     end
 
-    click_button 'Apurar'
+    click_link 'Apurar'
 
     expect(page).to have_content 'QUADRO COMPARATIVO DE PREÇOS DA COLETA DE PREÇO 1/2012'
 

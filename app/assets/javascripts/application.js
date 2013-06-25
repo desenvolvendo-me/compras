@@ -38,3 +38,17 @@ $(".modal-finder .modal input.modal").live("change", function(event, record) {
 
   $(this).val('');
 });
+
+/* Desabilita inputs de submit após serem clicados.
+ * Previne que sejam feitos mais de um request ao clicar mais de uma vez enquanto
+ * a pagina ainda não redirecionou.
+*/
+$(document).on('click', ':submit', function(event) {
+  event.preventDefault();
+
+  $(this).attr('disabled', true);
+
+  $(this).closest('form').submit();
+
+  return false;
+});

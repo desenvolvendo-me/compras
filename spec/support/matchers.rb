@@ -60,7 +60,7 @@ module Matchers
 
   matcher :have_readonly_field do |field|
     match do |page|
-      page.find_field(field)[:readonly].should eq 'readonly'
+      expect(page.find_field(field)[:readonly]).to eq 'readonly'
     end
 
     failure_message_for_should do |page|
@@ -74,7 +74,7 @@ module Matchers
 
   matcher :have_disabled_button do |field|
     match do |page|
-      page.find_button(field)[:disabled].should eq 'disabled'
+      expect(page.find_button(field)[:disabled]).to eq 'disabled'
     end
 
     failure_message_for_should do |page|
@@ -88,7 +88,7 @@ module Matchers
 
   matcher :have_notice do |notice|
     match do |page|
-      page.should have_css(".notice", :text => notice)
+      expect(page).to have_css(".notice", :text => notice)
     end
 
     failure_message_for_should do |page|
@@ -102,7 +102,7 @@ module Matchers
 
   matcher :have_alert do |alert|
     match do |page|
-      page.should have_css(".alert", :text => alert)
+       expect(page).to have_css(".alert", :text => alert)
     end
 
     failure_message_for_should do |page|
@@ -116,7 +116,7 @@ module Matchers
 
   matcher :be_on_tab do |tab|
     match do |page|
-      page.find('.ui-tabs .ui-tabs-active').should have_link tab
+      expect(page.find('.ui-tabs .ui-tabs-active')).to have_link tab
     end
 
     failure_message_for_should do |page|
