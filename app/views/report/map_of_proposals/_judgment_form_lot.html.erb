@@ -1,0 +1,46 @@
+<% resource.lots.each do |lot| %>
+  <h2>Lote: <%= lot%></h2>
+
+  <h1>Itens</h1>
+
+  <table class="records items">
+    <thead>
+      <tr>
+        <td>Material/Serviço</td>
+        <td>Quantidade</td>
+        <td>Valor unitário</td>
+        <td>Valor total</td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% resource.items_by_lot(lot).each do |item| %>
+        <tr>
+          <td><%= item.material %></td>
+          <td><%= item.quantity %></td>
+          <td><%= item.decorator.unit_price_with_currency %></td>
+          <td><%= item.decorator.total_price_with_currency %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <h1>Propostas</h1>
+  <table class="records proposals">
+    <thead>
+      <tr>
+        <td>Fornecedor</td>
+        <td>Valor</td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% resource.lot_creditor_proposal(lot).each do |creditor_proposal| %>
+        <tr class="<%= creditor_proposal.decorator.css_class %>">
+          <td><%= creditor_proposal.creditor %></td>
+          <td><%= creditor_proposal.decorator.unit_price_with_currency %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

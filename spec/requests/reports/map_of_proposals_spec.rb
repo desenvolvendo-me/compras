@@ -210,6 +210,80 @@ feature 'Report::MapOfProposals' do
     end
   end
 
+  scenario 'should map of proposals order by creditor_name when judgment form is by lot' do
+    creditor_sobrinho = Creditor.make!(:sobrinho)
+    creditor_wenderson = Creditor.make!(:wenderson_sa)
+
+    item = PurchaseProcessItem.make!(:item, lot: 1)
+    item_arame = PurchaseProcessItem.make!(:item_arame, lot: 1)
+
+    purchase_process = LicitationProcess.make!(:pregao_presencial,
+      purchase_process_accreditation: PurchaseProcessAccreditation.make(:general_accreditation),
+      items: [item, item_arame], judgment_form: JudgmentForm.make!(:por_lote_com_menor_preco))
+
+    PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado,
+      licitation_process: purchase_process,
+      creditor: creditor_wenderson,
+      lot: 1,
+      item: nil)
+
+    PurchaseProcessCreditorProposal.make!(:proposta_arame,
+      licitation_process: purchase_process,
+      creditor: creditor_sobrinho,
+      lot: 1,
+      item: nil)
+
+    navigate 'Processos de Compra > Processos de Compras'
+
+    click_link "Limpar Filtro"
+
+    within_records do
+      click_link '1/2012'
+    end
+
+    click_link 'Propostas'
+    click_link 'Mapa de Propostas'
+
+    select 'Ordem alfabética', :from => 'Ordem'
+
+    click_button 'Gerar Mapa de Proposta'
+
+    expect(page).to have_content 'Belo Horizonte'
+    expect(page).to have_content 'Mapa Comparativo de Preços'
+    expect(page).to have_content '1/2012 - Pregão 1'
+    expect(page).to have_content 'Lote: 1'
+
+    within 'table.items' do
+      within 'tbody' do
+        within 'tr:nth-child(1)' do
+          expect(page).to have_content 'Antivirus'
+          expect(page).to have_content '2'
+          expect(page).to have_content 'R$ 10,00'
+          expect(page).to have_content 'R$ 20,00'
+        end
+
+        within 'tr:nth-child(2)' do
+          expect(page).to have_content 'Arame comum'
+          expect(page).to have_content '1'
+          expect(page).to have_content 'R$ 10,00'
+          expect(page).to have_content 'R$ 10,00'
+        end
+      end
+    end
+
+    within 'table.proposals' do
+      within 'tr.winner' do
+        expect(page).to have_content 'Gabriel Sobrinho'
+        expect(page).to have_content 'R$ 2,99'
+      end
+
+      within 'tr.lost' do
+        expect(page).to have_content 'Wenderson Malheiros'
+        expect(page).to have_content 'R$ 4,99'
+      end
+    end
+  end
+
   def make_dependencies!
     creditor_sobrinho = Creditor.make!(:sobrinho)
     creditor_wenderson = Creditor.make!(:wenderson_sa)

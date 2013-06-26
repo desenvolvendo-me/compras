@@ -13,7 +13,7 @@ class MapOfProposalReport < ActiveRelatus::Base
   end
 
   def item_creditor_proposals(item)
-    records.where { purchase_process_item_id.eq item.id }
+    records.by_item_id(item.id)
   end
 
   def average_unit_price_item(item)
@@ -24,7 +24,23 @@ class MapOfProposalReport < ActiveRelatus::Base
     average_unit_price_item(item) * item.quantity
   end
 
+  def lot_creditor_proposal(lot)
+    records.by_lot(lot)
+  end
+
+  def lots
+    items.lots
+  end
+
+  def items_by_lot(lot)
+    items.by_lot(lot)
+  end
+
   protected
+
+  def items
+    licitation_process.items
+  end
 
   def licitation_process_repository
     @licitation_process_repository ||= LicitationProcess

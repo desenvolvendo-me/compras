@@ -2,6 +2,35 @@
 require 'spec_helper'
 
 describe PurchaseProcessCreditorProposal do
+  let(:bidder_nohup) do
+    Bidder.make!(:licitante_sobrinho, enabled: true, habilitation_date: Date.current,
+      creditor: Creditor.make!(:nohup))
+  end
+
+  let(:bidder_ibm) do
+    Bidder.make!(:licitante, enabled: true, habilitation_date: Date.current,
+      creditor: Creditor.make!(:ibm))
+  end
+
+  let(:licitation_process) do
+    LicitationProcess.make!(:pregao_presencial,
+      purchase_process_accreditation: PurchaseProcessAccreditation.make(:general_accreditation),
+      judgment_form: JudgmentForm.make!(:por_item_com_melhor_tecnica),
+      bidders: [bidder_nohup, bidder_ibm])
+  end
+
+  let(:proposta_arame_ibm) do
+    PurchaseProcessCreditorProposal.make!(:proposta_arame,
+      licitation_process: licitation_process, creditor: bidder_ibm.creditor,
+      unit_price: 100.00)
+  end
+
+  let(:proposta_arame_nohup) do
+    PurchaseProcessCreditorProposal.make!(:proposta_arame,
+      licitation_process: licitation_process, creditor: bidder_nohup.creditor,
+      unit_price: 105.00)
+  end
+
   describe '.best_proposal_for' do
     let(:bidder_sobrinho) do
       Bidder.make!(:licitante_sobrinho, enabled: true, habilitation_date: Date.current)
@@ -75,36 +104,21 @@ describe PurchaseProcessCreditorProposal do
     end
   end
 
+  describe '#unit_price_equal' do
+    it 'return proposals with equals unit_price' do
+      expect(PurchaseProcessCreditorProposal.unit_price_equal(105.00)).to include(proposta_arame_nohup)
+      expect(PurchaseProcessCreditorProposal.unit_price_equal(105.00)).to_not include(proposta_arame_ibm)
+    end
+  end
+
+  describe '#unit_price_greater_than' do
+    it 'return proposals with unit_price greater_than 102.00' do
+      expect(PurchaseProcessCreditorProposal.unit_price_greater_than(102.00)).to include(proposta_arame_nohup)
+      expect(PurchaseProcessCreditorProposal.unit_price_greater_than(102.00)).to_not include(proposta_arame_ibm)
+    end
+  end
+
   describe '#benefited_unit_price' do
-    let(:bidder_nohup) do
-      Bidder.make!(:licitante_sobrinho, enabled: true, habilitation_date: Date.current,
-        creditor: Creditor.make!(:nohup))
-    end
-
-    let(:bidder_ibm) do
-      Bidder.make!(:licitante, enabled: true, habilitation_date: Date.current,
-        creditor: Creditor.make!(:ibm))
-    end
-
-    let(:licitation_process) do
-      LicitationProcess.make!(:pregao_presencial,
-        purchase_process_accreditation: PurchaseProcessAccreditation.make(:general_accreditation),
-        judgment_form: JudgmentForm.make!(:por_item_com_melhor_tecnica),
-        bidders: [bidder_nohup, bidder_ibm])
-    end
-
-    let(:proposta_arame_ibm) do
-      PurchaseProcessCreditorProposal.make!(:proposta_arame,
-        licitation_process: licitation_process, creditor: bidder_ibm.creditor,
-        unit_price: 100.00)
-    end
-
-    let(:proposta_arame_nohup) do
-      PurchaseProcessCreditorProposal.make!(:proposta_arame,
-        licitation_process: licitation_process, creditor: bidder_nohup.creditor,
-        unit_price: 105.00)
-    end
-
     context 'proposal creditor is not benefited' do
       it 'returns the current proposal unit price' do
         expect(bidder_ibm.creditor.benefited).to be_false
@@ -138,4 +152,5 @@ describe PurchaseProcessCreditorProposal do
       end
     end
   end
+
 end

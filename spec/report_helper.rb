@@ -4,6 +4,7 @@ require 'active_relatus'
 
 # I18n
 require 'i18n'
+require 'i18n_alchemy'
 
 I18n.load_path += Dir['config/locales/*.yml']
 I18n.default_locale = 'pt-BR'

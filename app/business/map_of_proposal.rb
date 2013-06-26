@@ -32,16 +32,8 @@ class MapOfProposal
 
   attr_accessor :proposal, :proposal_repository
 
-  def other_proposals
-    proposal_repository.where { |query|
-      query.purchase_process_item_id.eq(proposal.item.id) &
-      query.creditor_id.not_eq(proposal.creditor) }
-  end
-
   def proposals
-    proposal_repository.where { |query|
-      query.purchase_process_item_id.eq(proposal.item.id) &
-      query.unit_price.gt(0.0) }.order( :unit_price )
+    proposals_by_item_or_lot.unit_price_greater_than(0.0).order(:unit_price)
   end
 
   def lowest_proposal
@@ -49,9 +41,16 @@ class MapOfProposal
   end
 
   def proposals_with_lowest_unit_price
-    proposal_repository.where { |query|
-      query.purchase_process_item_id.eq(proposal.item.id) &
-      query.unit_price.eq(lowest_proposal.unit_price) }
+    proposals_by_item_or_lot.unit_price_equal(lowest_proposal.unit_price)
+  end
+
+  def proposals_by_item_or_lot
+    if proposal.licitation_process.judgment_form_lot?
+      proposal_repository.licitation_process_id(proposal.licitation_process.id)
+        .by_lot(proposal.lot)
+    else
+      proposal_repository.by_item_id(proposal.item.id)
+    end
   end
 
   def value_lowest_proposal
