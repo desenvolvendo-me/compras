@@ -1,6 +1,9 @@
 <div class="buttons">
   <%= count_link %>
-  <%= proposals_link %>
+  <% if f.object.persisted? %>
+    <%= link_to('Propostas', price_collection_price_collection_proposals_path(resource),
+      class: "button primary") %>
+  <% end %>
 
   <% if can?(:modify, main_controller_name) %>
     <%= link_to 'Apurar', classification_price_collection_path(resource),
