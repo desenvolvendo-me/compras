@@ -40,7 +40,7 @@ describe LicitationProcessRatificationsHelper do
         end
 
         it "should return the realignment_prices' index path" do
-          helper.should_receive(:realigment_prices_path).and_return('realignment_prices_index')
+          helper.should_receive(:realignment_prices_path).and_return('realignment_prices_index')
 
           expect(helper.creditor_proposals_helper_path(ratification)).to eq 'realignment_prices_index'
         end

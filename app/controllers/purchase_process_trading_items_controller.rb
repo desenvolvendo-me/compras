@@ -42,7 +42,9 @@ class PurchaseProcessTradingItemsController < CrudController
   end
 
   def creditor_winner_items
-    @winners = PurchaseProcessTradingItem.creditor_winner_items(params[:creditor_id].to_i, params[:trading_id].to_i)
+    @winners = PurchaseProcessTradingItem.
+      trading_id(params[:trading_id].to_i).
+      creditor_winner_items(params[:creditor_id].to_i)
   end
 
   private

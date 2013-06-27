@@ -9,6 +9,8 @@ describe PurchaseProcessCreditorProposal do
   it { should belong_to :licitation_process }
   it { should belong_to(:item).class_name('PurchaseProcessItem') }
 
+  it { should have_many(:bidders).through(:licitation_process) }
+
   it { should have_one(:judgment_form).through(:licitation_process) }
   it { should have_one(:licitation_process_ratifications).through(:licitation_process) }
   it { should have_one(:material).through(:item) }

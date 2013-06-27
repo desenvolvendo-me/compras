@@ -1,0 +1,15 @@
+pt-BR:
+  activerecord:
+    models:
+      realignment_price_item:
+        one: "Item do Realinhamento de Preço"
+        other: "Itens do Realinhamento de Preço"
+
+    attributes:
+      realignment_price_item:
+        realignment_price: "Realinhamento de preço"
+        item: "Item"
+        price: "Valor"
+        brand: "Marca"
+        quantity: "Quantidade"
+        delivery_date: "Data de entrega"

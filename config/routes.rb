@@ -600,7 +600,7 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :realigment_prices do
+  resources :realignment_prices do
     collection do
       get :filter
       get :modal

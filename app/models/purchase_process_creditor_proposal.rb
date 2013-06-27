@@ -1,9 +1,7 @@
 class PurchaseProcessCreditorProposal < Compras::Model
   attr_accessible :creditor_id, :brand, :unit_price, :old_unit_price,
     :item_id, :delivery_date, :licitation_process_id, :lot, :ranking,
-    :realigment_prices_attributes, :purchase_process_item_id
-
-  attr_accessor :difference_price
+    :purchase_process_item_id
 
   belongs_to :creditor
   belongs_to :licitation_process
@@ -13,10 +11,7 @@ class PurchaseProcessCreditorProposal < Compras::Model
   has_one :material, through: :item
   has_one :licitation_process_ratifications, through: :licitation_process
 
-  has_many :realigment_prices, dependent: :destroy
   has_many :bidders, through: :licitation_process
-
-  accepts_nested_attributes_for :realigment_prices, allow_destroy: true
 
   delegate :code, :description, :reference_unit,
     to: :material, prefix: true, allow_nil: true
@@ -84,7 +79,7 @@ class PurchaseProcessCreditorProposal < Compras::Model
     where { disqualified.eq(false) }
   }
 
-  scope :winning_proposals, where { ranking.eq 1 }.order { creditor_id }
+  scope :winning_proposals, lambda { where { ranking.eq 1 }.order { creditor_id } }
 
   scope :by_ratification_month_and_year, lambda { |month, year|
     joins { licitation_process_ratifications }.

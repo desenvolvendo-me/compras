@@ -46,7 +46,7 @@ class Creditor < Compras::Model
   has_many :purchase_process_accreditation_creditors, :dependent => :restrict
   has_many :purchase_process_items, :dependent => :restrict
   has_many :purchase_process_creditor_proposals, dependent: :restrict
-  has_many :realigment_prices, through: :purchase_process_creditor_proposals
+  has_many :realignment_prices, dependent: :restrict
   has_many :proposal_disqualifications, class_name: 'PurchaseProcessCreditorDisqualification', dependent: :restrict
   has_many :licitation_process_ratifications, dependent: :restrict
   has_many :licitation_process_ratification_items, through: :licitation_process_ratifications
@@ -100,6 +100,13 @@ class Creditor < Compras::Model
   scope :by_id, lambda { |id|
     where { |creditor| creditor.id.eq(id) }
   }
+
+  scope :accreditation_purchase_process_id, ->(purchase_process_id) do
+    joins { purchase_process_accreditation_creditors.purchase_process_accreditation }.
+    where {
+      purchase_process_accreditation_creditors.purchase_process_accreditation.licitation_process_id.eq(purchase_process_id)
+    }
+  end
 
   scope :enabled_by_licitation, lambda { | licitation_process_id |
     joins { bidders }.
@@ -167,6 +174,22 @@ class Creditor < Compras::Model
 
     scoped.where("compras_creditors.id in (?)", creditor_ids)
   }
+
+  scope :winners, ->(purchase_process) do
+    query = scoped.enabled_by_licitation(purchase_process.id)
+
+    if purchase_process.licitation?
+      if purchase_process.trading?
+        query = scoped.
+          accreditation_purchase_process_id(purchase_process.id).
+          won_calculation_for_trading(purchase_process.id)
+      else
+        query = query.won_calculation(purchase_process.id)
+      end
+    end
+
+    query
+  end
 
   def self.filter(params)
     query = scoped
