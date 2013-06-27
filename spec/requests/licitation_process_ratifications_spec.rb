@@ -76,7 +76,7 @@ feature "LicitationProcessRatifications" do
     expect(page).to have_notice 'Homologação e Adjudicação de Processo de Compra editada com sucesso.'
 
     within_records do
-      click_link '1 - Processo de Compra 2/2013 - Concorrência 1'
+      click_link '2/2013 - Concorrência 1'
     end
 
     expect(page).to have_field 'Processo de compra', :with => '2/2013 - Concorrência 1'
@@ -173,7 +173,7 @@ feature "LicitationProcessRatifications" do
     expect(page).to have_notice 'Homologação e Adjudicação de Processo de Compra editada com sucesso.'
 
     within_records do
-      click_link '1 - Processo de Compra 2/2013 - Concorrência 1'
+      click_link '2/2013 - Concorrência 1'
     end
 
     expect(page).to have_field 'Processo de compra', :with => '2/2013 - Concorrência 1'
@@ -271,7 +271,7 @@ feature "LicitationProcessRatifications" do
     click_link 'Adjudicação/Homologação'
 
     within_records do
-      click_link '1 - Processo de Compra 2/2013 - Concorrência 1'
+      click_link '2/2013 - Concorrência 1'
     end
 
     click_link 'Imprimir termo'

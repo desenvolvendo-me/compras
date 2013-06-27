@@ -61,4 +61,16 @@ describe LicitationProcessRatificationDecorator do
       end
     end
   end
+
+  context 'with attr_header' do
+    it 'should have headers' do
+      expect(described_class.headers?).to be_true
+    end
+
+    it 'should have licitation_process, creditor and ratification_date' do
+      expect(described_class.header_attributes).to include :licitation_process
+      expect(described_class.header_attributes).to include :creditor
+      expect(described_class.header_attributes).to include :ratification_date
+    end
+  end
 end
