@@ -321,44 +321,10 @@ feature "PurchaseSolicitations" do
     end
   end
 
-  scenario 'should have at least one budget allocation and one item' do
-    navigate 'Processos de Compra > Solicitações de Compra'
-
-    click_link 'Criar Solicitação de Compra'
-
-    click_button 'Salvar'
-
-    expect(page).to have_content 'é necessário cadastrar pelo menos uma dotação'
-
-    within_tab 'Itens' do
-      expect(page).to have_content 'é necessário cadastrar pelo menos um item'
-    end
-  end
-
-  scenario 'should validate presence of budget allocations and items when editing' do
+  scenario 'should validate presence of items when editing' do
     PurchaseSolicitation.make!(:reparo)
 
     navigate 'Processos de Compra > Solicitações de Compra'
-
-    click_link "Limpar Filtro"
-
-    within_records do
-      page.find('a').click
-    end
-
-    within_tab 'Dotações orçamentárias' do
-      within_records do
-        click_link 'Remover'
-      end
-    end
-
-    click_button 'Salvar'
-
-    expect(page).to_not have_notice 'Solicitação de Compra 1/2012 editada com sucesso.'
-
-    expect(page).to have_content 'é necessário cadastrar pelo menos uma dotação'
-
-    click_link 'Voltar'
 
     click_link "Limpar Filtro"
 

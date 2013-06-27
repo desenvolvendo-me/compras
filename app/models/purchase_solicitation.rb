@@ -43,7 +43,6 @@ class PurchaseSolicitation < Compras::Model
   validates :accounting_year, :numericality => true, :mask => '9999', :allow_blank => true
   validates :purchase_solicitation_budget_allocations, :no_duplication => :budget_allocation_id
   validates :items, :no_duplication => :material_id
-  validate :must_have_at_least_one_budget_allocation
   validate :must_have_at_least_one_item
   validate :validate_budget_structure_and_materials
   validate :validate_liberated_status
@@ -146,12 +145,6 @@ class PurchaseSolicitation < Compras::Model
   end
 
   protected
-
-  def must_have_at_least_one_budget_allocation
-    unless purchase_solicitation_budget_allocations?
-      errors.add(:base, :must_have_at_least_one_budget_allocation)
-    end
-  end
 
   def must_have_at_least_one_item
     unless items?
