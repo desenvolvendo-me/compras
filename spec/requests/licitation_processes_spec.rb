@@ -193,8 +193,6 @@ feature "LicitationProcesses" do
     expect(page).to have_notice "Processo de Compra 1/#{Date.current.year} criado com sucesso."
 
     within_tab 'Principal' do
-      expect(page).to have_disabled_field 'Processo'
-
       expect(page).to have_field 'Processo', :with => '1'
 
       expect(page).to have_select 'Modalidade', :selected => 'Concorrência'
@@ -2144,5 +2142,70 @@ feature "LicitationProcesses" do
         end
       end
     end
+  end
+
+  scenario 'should update process in licitation process' do
+    LicitationProcess.make!(:pregao_presencial, year: 2013)
+
+    navigate 'Processos de Compra > Processos de Compras'
+
+    click_link 'Criar Processo de Compra'
+
+    within_tab 'Principal' do
+      choose 'Processo licitatório'
+
+      select 'Compras e serviços', :from => 'Tipo de objeto'
+      select 'Concorrência', :from => 'Modalidade'
+      fill_in 'Objeto do processo de compra', :with => 'Licitação para compra de carteiras'
+
+      check 'Registro de preço'
+      select 'Por Item com Menor Preço', :from =>'Forma de julgamento'
+      select 'Empreitada integral', :from => 'Forma de execução'
+      select 'Fiança bancária', :from => 'Tipo de garantia'
+      fill_modal 'Índice de reajuste', :with => 'XPTO'
+      fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
+      fill_in 'Valor da caução', :with => '50,00'
+      fill_modal 'Unidade responsável pela execução', with: 'Secretaria de Educação', field: 'Descrição'
+    end
+
+    within_tab 'Prazos' do
+      fill_in 'Data da disponibilidade', :with => I18n.l(Date.current)
+      fill_modal 'Contato para informações', :with => '958473', :field => 'Matrícula'
+
+      fill_in 'Término do recebimento dos envelopes', :with => I18n.l(Date.current)
+      fill_in 'Hora do recebimento', :with => '14:00'
+
+      fill_in 'Validade da proposta', :with => '5'
+      select 'dia/dias', :from => 'Período da validade da proposta'
+
+      fill_in 'Prazo de entrega', :with => '1'
+      select 'ano/anos', :from => 'Período do prazo de entrega'
+    end
+
+    within_tab "Itens" do
+      fill_in 'Lote', :with => '2234'
+
+      fill_with_autocomplete 'Material', :with => 'Antivirus'
+
+      fill_in 'Quantidade', :with => '2'
+      fill_in 'Valor unitário máximo', :with => '10,00'
+      fill_in 'Informações complementares', :with => 'Produto antivirus avast'
+
+      click_button 'Adicionar'
+    end
+
+    click_button 'Salvar'
+
+    fill_in 'Processo', with: '1'
+
+    click_button 'Salvar'
+
+    expect(page).to have_content 'já está em uso'
+
+    fill_in 'Processo', with: '123'
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice "Processo de Compra 123/#{Date.current.year} editado com sucesso."
   end
 end

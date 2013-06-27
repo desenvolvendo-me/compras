@@ -65,11 +65,12 @@ describe TceExport::MG::MonthlyMonitoring::ContractGenerator do
 
         contract = Contract.make!(:primeiro_contrato, signature_date: signature_date,
           end_date: end_date, licitation_process: licitation_process,
-          creditors: [creditor_sobrinho, creditor_wenderson],
-          contract_termination: ContractTermination.make!(:contrato_rescindido))
+          creditors: [creditor_sobrinho, creditor_wenderson])
+
+        ContractTermination.make!(:contrato_rescindido, contract: contract)
 
         Pledge.make!(:empenho_em_quinze_dias, emission_date: signature_date,
-          contract: contract, capability: capability)
+          contract: contract, capability: capability, licitation_process: licitation_process)
 
         described_class.generate_file(monthly_monitoring)
 
@@ -102,11 +103,12 @@ describe TceExport::MG::MonthlyMonitoring::ContractGenerator do
 
         contract = Contract.make!(:primeiro_contrato, signature_date: signature_date,
           end_date: end_date, licitation_process: licitation_process,
-          creditors: [creditor_sobrinho],
-          contract_termination: ContractTermination.make!(:contrato_rescindido))
+          creditors: [creditor_sobrinho])
+
+        ContractTermination.make!(:contrato_rescindido, contract: contract)
 
         Pledge.make!(:empenho_em_quinze_dias, emission_date: signature_date,
-          contract: contract, capability: capability)
+          contract: contract, capability: capability, licitation_process: licitation_process)
 
         described_class.generate_file(monthly_monitoring)
 

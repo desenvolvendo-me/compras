@@ -33,7 +33,7 @@ describe TceExport::MG::MonthlyMonitoring::BiddingAuthorizationGenerator do
 
     let :licitation_process do
       licitation_process = LicitationProcess.make!(:processo_licitatorio_computador,
-        bidders: [bidder])
+        process: 3, bidders: [bidder])
     end
 
     let :licitation_process_two do
@@ -107,8 +107,8 @@ describe TceExport::MG::MonthlyMonitoring::BiddingAuthorizationGenerator do
       expect(csv).to eq "10;98;98029;2012;1;2;00000000999962;Nohup; ; ;29062011;099901; ; ; ;PR; ; ; ; ; ; ; ; ; ;20052013;2;2\n" +
                         "11;98;98029;2012;1;6;00000000999962;1;27056534147;Pedro dos Santos;1\n"+
                         "10;98;98029;2013;2;1;00315198737;Gabriel Sobrinho; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ;20052013;2;2\n"+
-                        "10;98;98029;2013;2;2;00000000999962;Nohup; ; ;29062011;099901; ; ; ;PR; ; ; ; ; ; ; ; ; ;20052013;2;2\n" +
-                        "11;98;98029;2013;2;6;00000000999962;1;27056534147;Pedro dos Santos;1"
+                        "10;98;98029;2013;3;2;00000000999962;Nohup; ; ;29062011;099901; ; ; ;PR; ; ; ; ; ; ; ; ; ;20052013;2;2\n" +
+                        "11;98;98029;2013;3;6;00000000999962;1;27056534147;Pedro dos Santos;1"
 
     end
   end

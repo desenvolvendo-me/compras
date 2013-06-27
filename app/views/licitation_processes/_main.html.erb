@@ -7,7 +7,7 @@
 
 <div class="yui3-g">
   <div class="yui3-u-1-4">
-    <%= f.input :process, :disabled => true %>
+    <%= f.input :process, :disabled => !f.object.persisted? %>
   </div>
 
   <div class="yui3-u-1-4">
