@@ -9,6 +9,7 @@ require 'app/models/budget_structure_responsible'
 require 'app/models/price_collection'
 require 'app/models/legal_analysis_appraisal'
 require 'app/models/process_responsible'
+require 'app/models/price_collection_proposal'
 
 describe Employee do
   it { should belong_to :individual }
@@ -22,6 +23,7 @@ describe Employee do
   it { should have_many(:price_collections).dependent(:restrict) }
   it { should have_many(:legal_analysis_appraisals).dependent(:restrict) }
   it { should have_many(:process_responsibles).dependent(:restrict) }
+  it { should have_many(:price_collection_proposals).dependent(:restrict) }
 
   it { should have_one(:street).through(:individual) }
   it { should have_one(:neighborhood).through(:individual) }
