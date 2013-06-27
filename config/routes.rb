@@ -445,6 +445,8 @@ Compras::Application.routes.draw do
 
   resources :purchase_process_proposals
 
+  resources :purchase_process_creditor_proposals
+
   resources :creditor_proposal_benefited_tieds, only: [:edit, :update]
 
   resources :purchase_process_proposal_tiebreaks, only: [:edit, :update]

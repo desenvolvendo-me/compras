@@ -65,7 +65,7 @@ describe LicitationProcessRatificationsHelper do
       before { ratification.stub(licitation_process_trading?: false) }
 
       it 'returns purchase_process_creditor_proposals_path' do
-        helper.should_receive(:purchase_process_proposals_path).and_return 'proposal_path'
+        helper.should_receive(:purchase_process_creditor_proposals_path).and_return 'proposal_path'
 
         expect(helper.send(:trading_or_proposals_path, ratification)).to eq 'proposal_path'
       end

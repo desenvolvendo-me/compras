@@ -5,14 +5,8 @@ class PurchaseProcessProposalsController < CrudController
   before_filter :load_licitation_process, only: [:index, :new]
   before_filter :load_creditor, except: [:index]
 
-  has_scope :licitation_process_id, allow_blank: true
-  has_scope :creditor_id, allow_blank: true
-
   def index
-    respond_to do |format|
-      format.json { @creditor_proposals = apply_scopes(PurchaseProcessCreditorProposal).all }
-      format.html { @creditors = @licitation_process.creditors_enabled.includes(:purchase_process_creditor_proposals) }
-    end
+    @creditors = @licitation_process.creditors_enabled.includes(:purchase_process_creditor_proposals)
   end
 
   def new
