@@ -1,5 +1,5 @@
 # encoding: utf-8
-module PurchaseProcessCreditorProposalsHelper
+module PurchaseProcessProposalsHelper
   def title
     "Proposta Comercial Processo #{@licitation_process.to_s}"
   end
@@ -21,7 +21,7 @@ module PurchaseProcessCreditorProposalsHelper
   end
 
   def update_path
-    url_for(controller: :purchase_process_creditor_proposals, action: :update, id: licitation_process_object.id)
+    url_for(controller: :purchase_process_proposals, action: :update, id: licitation_process_object.id)
   end
 
   def creditor_proposals_collection
@@ -31,10 +31,10 @@ module PurchaseProcessCreditorProposalsHelper
   def view_or_edit_creditor_proposal(creditor)
     if @licitation_process.proposals_of_creditor(creditor).empty?
       link_to 'Cadastrar propostas',
-        new_purchase_process_creditor_proposal_path(licitation_process_id: @licitation_process.id, creditor_id: creditor.id)
+        new_purchase_process_proposal_path(licitation_process_id: @licitation_process.id, creditor_id: creditor.id)
     else
       link_to 'Editar propostas',
-        edit_purchase_process_creditor_proposal_path(@licitation_process, creditor_id: creditor.id)
+        edit_purchase_process_proposal_path(@licitation_process, creditor_id: creditor.id)
     end
   end
 

@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
 
-feature 'PurchaseProcessCreditorProposals' do
+feature 'PurchaseProcessProposals' do
   let(:current_user) { User.make!(:sobrinho_as_admin_and_employee) }
 
   background do
@@ -9,7 +9,7 @@ feature 'PurchaseProcessCreditorProposals' do
     sign_in
   end
 
-  scenario 'create and update item creditor proposals' do
+  scenario 'create and update item proposals' do
     LicitationProcess.make!(:pregao_presencial,
       purchase_process_accreditation: PurchaseProcessAccreditation.make(:general_accreditation),
       judgment_form: JudgmentForm.make!(:por_item_com_melhor_tecnica))
@@ -149,7 +149,7 @@ feature 'PurchaseProcessCreditorProposals' do
     expect(page).to_not have_disabled_element 'Lances', reason: 'deve ter ao menos uma proposta'
   end
 
-  scenario 'create and update lot creditor proposals' do
+  scenario 'create and update lot proposals' do
     LicitationProcess.make!(:pregao_presencial,
       purchase_process_accreditation: PurchaseProcessAccreditation.make(:general_accreditation),
       judgment_form: JudgmentForm.make!(:por_lote_com_melhor_tecnica),
@@ -305,7 +305,7 @@ feature 'PurchaseProcessCreditorProposals' do
     end
   end
 
-  scenario 'create and update global creditor proposals' do
+  scenario 'create and update global proposals' do
     LicitationProcess.make!(:pregao_presencial,
       purchase_process_accreditation: PurchaseProcessAccreditation.make(:general_accreditation),
       judgment_form: JudgmentForm.make!(:global_com_menor_preco),

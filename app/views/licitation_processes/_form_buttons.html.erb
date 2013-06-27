@@ -22,7 +22,7 @@
       <% end %>
 
       <% if f.object.licitation? %>
-        <%= link_to('Propostas', purchase_process_creditor_proposals_path(licitation_process_id: resource),
+        <%= link_to('Propostas', purchase_process_proposals_path(licitation_process_id: resource),
           class: "button primary #{f.object.decorator.has_records_class(f.object.creditor_proposals)}",
           'data-disabled' => f.object.decorator.must_have_creditors_and_items) %>
       <% end %>

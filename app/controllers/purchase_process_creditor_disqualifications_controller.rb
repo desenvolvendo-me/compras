@@ -22,6 +22,6 @@ class PurchaseProcessCreditorDisqualificationsController < CrudController
   private
 
   def creditor_proposals_path
-    purchase_process_creditor_proposals_path(licitation_process_id: resource.licitation_process_id)
+    purchase_process_proposals_path(licitation_process_id: resource.licitation_process_id)
   end
 end

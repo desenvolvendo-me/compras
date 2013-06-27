@@ -1,5 +1,5 @@
 <div class="buttons">
   <%= f.button :submit if can?(:modify, main_controller_name) %>
 
-  <%= f.button :back, href: purchase_process_creditor_proposals_path(licitation_process_id: f.object.licitation_process_id) %>
+  <%= f.button :back, href: purchase_process_proposals_path(licitation_process_id: f.object.licitation_process_id) %>
 </div>

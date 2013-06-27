@@ -1,5 +1,5 @@
 # encoding: utf-8
-class PurchaseProcessCreditorProposalsController < CrudController
+class PurchaseProcessProposalsController < CrudController
   defaults resource_class: LicitationProcess
 
   before_filter :load_licitation_process, only: [:index, :new]
@@ -25,7 +25,7 @@ class PurchaseProcessCreditorProposalsController < CrudController
 
   def update
     update! do |success, failure|
-      success.html { redirect_to purchase_process_creditor_proposals_path(licitation_process_id: resource.id) }
+      success.html { redirect_to purchase_process_proposals_path(licitation_process_id: resource.id) }
     end
   end
 

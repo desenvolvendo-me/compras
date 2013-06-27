@@ -3,7 +3,7 @@ class PurchaseProcessProposalTiebreaksController < CrudController
 
   def update
     update! do |success, failure|
-      success.html { redirect_to purchase_process_creditor_proposals_path(licitation_process_id: resource.id) }
+      success.html { redirect_to purchase_process_proposals_path(licitation_process_id: resource.id) }
     end
   end
 end

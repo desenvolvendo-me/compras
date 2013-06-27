@@ -443,7 +443,7 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :purchase_process_creditor_proposals
+  resources :purchase_process_proposals
 
   resources :creditor_proposal_benefited_tieds, only: [:edit, :update]
 

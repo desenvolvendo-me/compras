@@ -15,7 +15,7 @@ module LicitationProcessRatificationsHelper
     if ratification.licitation_process_trading?
       creditor_winner_items_purchase_process_trading_items_path
     else
-      purchase_process_creditor_proposals_path
+      purchase_process_proposals_path
     end
   end
 end

@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
 
-describe PurchaseProcessCreditorProposalsHelper do
+describe PurchaseProcessProposalsHelper do
   let(:licitation_process) { double(:licitation_process, to_s: 'Proc. Licitatório', id: 13) }
   let(:creditor)           { double(:creditor, to_s: 'Credor', id: 12) }
 
@@ -52,7 +52,7 @@ describe PurchaseProcessCreditorProposalsHelper do
     before { helper.stub(licitation_process_object: licitation_process) }
 
     it 'returns the path to update action on creditor proposals controller' do
-      expect(helper.update_path).to eq "/purchase_process_creditor_proposals/13"
+      expect(helper.update_path).to eq "/purchase_process_proposals/13"
     end
   end
 
@@ -90,7 +90,7 @@ describe PurchaseProcessCreditorProposalsHelper do
 
       it 'returns a link to new proposals' do
         expect(helper.view_or_edit_creditor_proposal(creditor)).to eq link_to 'Cadastrar propostas',
-          new_purchase_process_creditor_proposal_path(licitation_process_id: 13, creditor_id: 12)
+          new_purchase_process_proposal_path(licitation_process_id: 13, creditor_id: 12)
       end
     end
 
@@ -102,7 +102,7 @@ describe PurchaseProcessCreditorProposalsHelper do
 
       it 'returns a link to edit proposals' do
         expect(helper.view_or_edit_creditor_proposal(creditor)).to eq link_to 'Editar propostas',
-          edit_purchase_process_creditor_proposal_path(id: 13, creditor_id: 12)
+          edit_purchase_process_proposal_path(id: 13, creditor_id: 12)
       end
     end
   end

@@ -198,19 +198,8 @@ pt-BR:
     tce_specification_capabilities:
       <<: *female
 
-    purchase_process_creditor_proposals: &purchase_process_creditor_proposals
+    purchase_process_proposals: &purchase_process_proposals
       <<: *female
-      batch_update:
-        notice: "%{resource_name} editada com sucesso"
-
-    purchase_process_item_creditor_proposals:
-      <<: *purchase_process_creditor_proposals
-
-    purchase_process_lot_creditor_proposals:
-      <<: *purchase_process_creditor_proposals
-
-    purchase_process_global_creditor_proposals:
-      <<: *purchase_process_creditor_proposals
 
     purchase_process_creditor_disqualifications:
       <<: *female
