@@ -15,7 +15,12 @@ PriceCollection.blueprint(:coleta_de_precos) do
   expiration { Date.tomorrow }
   status { PriceCollectionStatus::ACTIVE }
   price_collection_lots { [PriceCollectionLot.make!(:lote_da_coleta)] }
-  price_collection_proposals { [PriceCollectionProposal.make!(:proposta_de_coleta_de_precos, :price_collection => object)] }
+  price_collection_proposals { [
+    PriceCollectionProposal.make!(:proposta_de_coleta_de_precos, price_collection: object),
+    PriceCollectionProposal.make!(:sobrinho_sa_proposta, price_collection: object),
+    PriceCollectionProposal.make!(:sobrinho_sa_proposta, price_collection: object,
+                                    creditor: Creditor.make!(:ibm, user: User.make!(:geraldi, login: 'alovisk', email: 'alovisk@gmail.com')))
+  ] }
 end
 
 PriceCollection.blueprint(:coleta_de_precos_anulada) do
@@ -38,7 +43,7 @@ PriceCollection.blueprint(:coleta_de_precos_anulada) do
   price_collection_proposals { [PriceCollectionProposal.make!(:proposta_de_coleta_de_precos, :price_collection => object, :status => PriceCollectionStatus::ANNULLED)] }
 end
 
-PriceCollection.blueprint(:coleta_de_precos_com_2_propostas) do
+PriceCollection.blueprint(:coleta_de_precos_com_3_propostas) do
   type_of_calculation { PriceCollectionTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM }
   code { 1 }
   year { 2012 }
@@ -55,7 +60,11 @@ PriceCollection.blueprint(:coleta_de_precos_com_2_propostas) do
   expiration { Date.tomorrow }
   status { PriceCollectionStatus::ACTIVE }
   price_collection_lots { [PriceCollectionLot.make!(:lote_da_coleta)] }
-  price_collection_proposals { [PriceCollectionProposal.make!(:proposta_de_coleta_de_precos, :price_collection => object), PriceCollectionProposal.make!(:sobrinho_sa_proposta_without_user, :price_collection => object)] }
+  price_collection_proposals { [
+    PriceCollectionProposal.make!(:proposta_de_coleta_de_precos, :price_collection => object),
+    PriceCollectionProposal.make!(:sobrinho_sa_proposta_without_user, :price_collection => object),
+    PriceCollectionProposal.make!(:sobrinho_sa_proposta, price_collection: object)
+   ] }
 end
 
 PriceCollection.blueprint(:coleta_de_precos_com_2_lotes) do
@@ -76,6 +85,12 @@ PriceCollection.blueprint(:coleta_de_precos_com_2_lotes) do
   status { PriceCollectionStatus::ACTIVE }
   price_collection_lots { [PriceCollectionLot.make!(:lote_da_coleta, :price_collection => object),
                            PriceCollectionLot.make!(:arames, :price_collection => object)] }
+  price_collection_proposals { [
+    PriceCollectionProposal.make!(:proposta_de_coleta_de_precos, price_collection: object),
+    PriceCollectionProposal.make!(:sobrinho_sa_proposta, price_collection: object),
+    PriceCollectionProposal.make!(:sobrinho_sa_proposta, price_collection: object,
+      creditor: Creditor.make!(:ibm, user: User.make!(:geraldi, login: 'alovisk', email: 'alovisk@gmail.com')))
+  ] }
 end
 
 PriceCollection.blueprint(:coleta_de_precos_com_2_itens_no_mesmo_lote) do
@@ -95,4 +110,10 @@ PriceCollection.blueprint(:coleta_de_precos_com_2_itens_no_mesmo_lote) do
   expiration { Date.tomorrow }
   status { PriceCollectionStatus::ACTIVE }
   price_collection_lots { [PriceCollectionLot.make!(:lote_da_coleta_com_2_itens, :price_collection => object)] }
+  price_collection_proposals { [
+    PriceCollectionProposal.make!(:proposta_de_coleta_de_precos, price_collection: object),
+    PriceCollectionProposal.make!(:sobrinho_sa_proposta, :price_collection => object),
+    PriceCollectionProposal.make!(:sobrinho_sa_proposta, price_collection: object,
+                                    creditor: Creditor.make!(:ibm, user: User.make!(:geraldi, login: 'alovisk', email: 'alovisk@gmail.com')))
+  ] }
 end

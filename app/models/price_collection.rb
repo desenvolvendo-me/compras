@@ -39,6 +39,7 @@ class PriceCollection < Compras::Model
   accepts_nested_attributes_for :price_collection_lots, :allow_destroy => true
   accepts_nested_attributes_for :price_collection_proposals, :allow_destroy => true
 
+  validate :validate_quantity_of_creditors
   validates :year, :date, :delivery_location, :employee, :presence => true
   validates :payment_method, :object_description, :expiration, :presence => true
   validates :period, :period_unit, :proposal_validity, :proposal_validity_unit, :presence => true
@@ -85,6 +86,16 @@ class PriceCollection < Compras::Model
   end
 
   protected
+
+  def proposals_count
+    self.price_collection_proposals.reject(&:marked_for_destruction?).count
+  end
+
+  def validate_quantity_of_creditors
+    unless proposals_count >= 3
+      errors.add(:base, :must_have_at_least_three_creditors)
+    end
+  end
 
   def generate_proposal_items
     PriceCollectionProposalUpdater.new(self).update!

@@ -26,7 +26,9 @@ class PriceCollectionClassificationGenerator
 
       if classifications.first.disqualified?
         classification = classifications.reject(&:disqualified?).first
-        classification.update_column(:classification, 1)
+        if classification
+          classification.update_column(:classification, 1)
+        end
       end
     end
   end
