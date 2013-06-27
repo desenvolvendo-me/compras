@@ -43,8 +43,11 @@ describe LicitationProcessRatification do
     end
 
     let :licitation_process do
-      double(:to_s => '1/2012', creditors: [creditor_with_licitation_process], licitation?: true,
-            judgment_commission_advice: nil)
+      double(:to_s => '1/2012',
+             creditors: [creditor_with_licitation_process],
+             licitation?: true,
+             judgment_commission_advice: nil,
+             proposal_envelope_opening_date: [])
     end
 
     before do
@@ -69,7 +72,9 @@ describe LicitationProcessRatification do
   end
 
   describe 'judgment_comisson_advice validate' do
-    let(:licitation_process) { double(:licitation_procss, to_s: '1/2013') }
+    let(:licitation_process) do
+      double(:licitation_process, to_s: '1/2013', proposal_envelope_opening_date: [])
+    end
 
     before do
       subject.stub(licitation_process: licitation_process)
