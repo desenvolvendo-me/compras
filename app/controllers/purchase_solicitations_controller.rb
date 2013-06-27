@@ -1,5 +1,7 @@
 class PurchaseSolicitationsController < CrudController
-  has_scope :term, :allow_blank => true
+  has_scope :term, allow_blank: true
+  has_scope :without_price_collection, type: :boolean
+  has_scope :without_purchase_process, type: :boolean
   has_scope :by_material_id
   has_scope :except_ids, :type => :array
   has_scope :can_be_grouped, :type => :boolean

@@ -1042,6 +1042,30 @@ feature "PriceCollections" do
     end
   end
 
+  scenario 'filter purchase solicitation without price_collection and licitation process' do
+    licitation_process = LicitationProcess.make!(:pregao_presencial)
+    price_collection = PriceCollection.make!(:coleta_de_precos)
+    PurchaseSolicitation.make!(:reparo_liberado, accounting_year: 2013, licitation_processes: [licitation_process],
+      service_status: PurchaseSolicitationServiceStatus::LIBERATED,
+      responsible: Employee.make!(:sobrinho))
+    PurchaseSolicitation.make!(:reparo_2013, service_status: PurchaseSolicitationServiceStatus::LIBERATED,
+      responsible: Employee.make!(:wenderson))
+    PurchaseSolicitation.make!(:reparo, accounting_year: 2013, price_collections: [price_collection], responsible: Employee.make!(:wenderson,
+      individual: Person.make!(:joao_da_silva).personable, registration: "12345678"))
+
+    navigate 'Processos de Compra > Coletas de Preços'
+
+    click_link 'Criar Coleta de Preços'
+
+    within_tab 'Solicitações de compras' do
+      within_autocomplete 'Solicitações de compra', with: 'Secretaria' do
+        expect(page).to_not have_content '1/2013'
+        expect(page).to have_content '2/2013'
+        expect(page).to_not have_content '3/2013'
+      end
+    end
+  end
+
   def make_proposals_dependencies!(price_collection)
     proposal_1 = PriceCollectionProposal.make!(:proposta_de_coleta_de_precos, :price_collection => price_collection)
     proposal_2 = PriceCollectionProposal.make!(:sobrinho_sa_proposta, :price_collection => price_collection)

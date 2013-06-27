@@ -64,6 +64,16 @@ class PurchaseSolicitation < Compras::Model
     }.uniq
   }
 
+  scope :without_price_collection, lambda {
+    joins { price_collections.outer }.
+    where { compras_price_collections_purchase_solicitations.price_collection_id.eq(nil) }
+  }
+
+  scope :without_purchase_process, lambda {
+    joins { licitation_processes.outer }.
+    where { licitation_processes.id.eq(nil) }
+  }
+
   scope :term, lambda { |q|
     joins { budget_structure.outer }.
     where {
