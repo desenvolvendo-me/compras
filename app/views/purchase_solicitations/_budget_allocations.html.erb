@@ -2,29 +2,3 @@
     :data_disabled => f.object.decorator.is_annulled_message,
     columns: [:budget_allocation, :budget_allocation_expense_nature, :expense_nature,
               :budget_allocation_amount, :estimated_value]%>
-
-<script>
-  function filterc_expense_nature_source(expenseNatureId) {
-    var url = "<%= expense_natures_path %>",
-        params = {
-          breakdown_of: expenseNatureId
-        }
-
-    if (expenseNatureId) {
-      url += "?" + jQuery.param(params);
-    }
-
-    $("#purchase_solicitation_expense_nature").data('source', url);
-  }
-
-  $('#purchase_solicitation_budget_allocation_id').on("change", function(event, budgetAllocation) {
-    if (budgetAllocation) {
-      $('#purchase_solicitation_budget_allocation_amount').val(numberWithDelimiter(budgetAllocation.amount));
-      $('#purchase_solicitation_budget_allocation_expense_nature').val(budgetAllocation.expense_nature);
-      filterc_expense_nature_source(budgetAllocation.expense_nature_id);
-    } else {
-      $('#purchase_solicitation_budget_allocation_amount').val('0,00');
-      $('#purchase_solicitation_budget_allocation_expense_nature').val('');
-    }
-  });
-</script>
