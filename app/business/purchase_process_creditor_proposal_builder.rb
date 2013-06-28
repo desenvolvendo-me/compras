@@ -1,10 +1,8 @@
 class PurchaseProcessCreditorProposalBuilder
-  attr_accessor :licitation_process, :creditor, :kind
-
   def initialize(licitation_process, creditor)
-    self.licitation_process = licitation_process
-    self.creditor           = creditor
-    self.kind               = licitation_process.judgment_form_kind
+    @licitation_process = licitation_process
+    @creditor           = creditor
+    @kind               = licitation_process.judgment_form_kind
   end
 
   def self.build_proposals(*attributes)
@@ -21,6 +19,8 @@ class PurchaseProcessCreditorProposalBuilder
 
   private
 
+  attr_reader :licitation_process, :creditor, :kind
+
   def each_object
     send(kind).each do |item|
       yield item
@@ -31,8 +31,8 @@ class PurchaseProcessCreditorProposalBuilder
     creditor_proposal = licitation_process.creditor_proposals.build
     creditor_proposal.creditor_id = creditor.id
 
-    creditor_proposal.purchase_process_item_id = item.id if kind == JudgmentFormKind::ITEM
-    creditor_proposal.lot = item                         if kind == JudgmentFormKind::LOT
+    creditor_proposal.purchase_process_item_id = item.id if licitation_process.judgment_form_item?
+    creditor_proposal.lot = item                         if licitation_process.judgment_form_lot?
 
     creditor_proposal
   end

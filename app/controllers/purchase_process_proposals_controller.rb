@@ -6,11 +6,11 @@ class PurchaseProcessProposalsController < CrudController
   before_filter :load_creditor, except: [:index]
 
   def index
-    @creditors = @licitation_process.creditors_enabled.includes(:purchase_process_creditor_proposals)
+    @creditors = resource.creditors_enabled.includes(:purchase_process_creditor_proposals)
   end
 
   def new
-    @proposals = PurchaseProcessCreditorProposalBuilder.build_proposals(@licitation_process, @creditor)
+    @proposals = PurchaseProcessCreditorProposalBuilder.build_proposals(resource, @creditor)
   end
 
   def edit
@@ -26,7 +26,7 @@ class PurchaseProcessProposalsController < CrudController
   private
 
   def load_licitation_process
-    @licitation_process = LicitationProcess.find(params[:licitation_process_id])
+    set_resource_ivar LicitationProcess.find(params[:licitation_process_id])
   end
 
   def load_creditor

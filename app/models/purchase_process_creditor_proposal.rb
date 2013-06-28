@@ -29,8 +29,8 @@ class PurchaseProcessCreditorProposal < Compras::Model
 
   validates :creditor, :licitation_process, :unit_price, presence: true
   validates :lot, :ranking, numericality: { allow_blank: true }
-  validates :unit_price, numericality: { greater_than: 0, if: :validate_unit_price? }
-  validates :brand, presence: true, if: :validate_brand_presence?
+  validates :unit_price, numericality: { greater_than: 0, if: :should_validate_unit_price? }
+  validates :brand, presence: true, if: :should_validate_brand_presence?
   validates :ranking, presence: true, if: :ranking_changed?
 
   validate :unit_price_is_lower_than_best_proposal, if: :benefited_tied?
@@ -195,12 +195,12 @@ class PurchaseProcessCreditorProposal < Compras::Model
 
   private
 
-  def validate_brand_presence?
+  def should_validate_brand_presence?
     return false unless item?
     (unit_price || 0) > 0
   end
 
-  def validate_unit_price?
+  def should_validate_unit_price?
     return false unless item?
     brand.present?
   end

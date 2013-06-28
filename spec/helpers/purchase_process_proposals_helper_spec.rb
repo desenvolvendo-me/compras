@@ -2,12 +2,14 @@
 require 'spec_helper'
 
 describe PurchaseProcessProposalsHelper do
-  let(:licitation_process) { double(:licitation_process, to_s: 'Proc. Licitatório', id: 13) }
-  let(:creditor)           { double(:creditor, to_s: 'Credor', id: 12) }
+  let(:resource) { double(:licitation_process, to_s: 'Proc. Licitatório', id: 13) }
+  let(:creditor) { double(:creditor, to_s: 'Credor', id: 12) }
+
+  before do
+    helper.stub(resource: resource)
+  end
 
   describe '#title' do
-    before { assign(:licitation_process, licitation_process) }
-
     it 'returns the index title' do
       expect(helper.title).to eq "Proposta Comercial Processo Proc. Licitatório"
     end
@@ -28,7 +30,6 @@ describe PurchaseProcessProposalsHelper do
   describe '#subtitle' do
     before do
       assign(:creditor, creditor)
-      helper.stub(licitation_process_object: licitation_process)
     end
 
     it 'returns the edit layout title' do
@@ -37,22 +38,12 @@ describe PurchaseProcessProposalsHelper do
   end
 
   describe '#form_partial' do
-    before { helper.stub(licitation_process_object: licitation_process) }
-
     it 'returns the form based on licitation process judgment form kind' do
-      licitation_process.stub(judgment_form_kind: :item)
+      resource.stub(judgment_form_kind: :item)
       expect(helper.form_partial).to eq "form_item"
 
-      licitation_process.stub(judgment_form_kind: :lot)
+      resource.stub(judgment_form_kind: :lot)
       expect(helper.form_partial).to eq "form_lot"
-    end
-  end
-
-  describe '#update_path' do
-    before { helper.stub(licitation_process_object: licitation_process) }
-
-    it 'returns the path to update action on creditor proposals controller' do
-      expect(helper.update_path).to eq "/purchase_process_proposals/13"
     end
   end
 
@@ -83,10 +74,8 @@ describe PurchaseProcessProposalsHelper do
   end
 
   describe '#view_or_edit_creditor_proposal' do
-    before { assign(:licitation_process, licitation_process) }
-
     context 'when there are no creditor proposals' do
-      before { licitation_process.stub(proposals_of_creditor: []) }
+      before { resource.stub(proposals_of_creditor: []) }
 
       it 'returns a link to new proposals' do
         expect(helper.view_or_edit_creditor_proposal(creditor)).to eq link_to 'Cadastrar propostas',
@@ -96,8 +85,8 @@ describe PurchaseProcessProposalsHelper do
 
     context 'when there are creditor proposals' do
       before do
-        licitation_process.stub(proposals_of_creditor: [double(:proposals)])
-        licitation_process.stub(to_s: 13)
+        resource.stub(proposals_of_creditor: [double(:proposals)])
+        resource.stub(to_s: 13)
       end
 
       it 'returns a link to edit proposals' do
@@ -108,10 +97,8 @@ describe PurchaseProcessProposalsHelper do
   end
 
   describe '#link_to_disqualify_creditor_proposal' do
-    before { assign(:licitation_process, licitation_process) }
-
     context 'when there are no creditor proposals' do
-      before { licitation_process.stub(proposals_of_creditor: []) }
+      before { resource.stub(proposals_of_creditor: []) }
 
       it 'returns a message with no proposal' do
         expect(helper.link_to_disqualify_creditor_proposal(creditor)).to eq 'Nenhuma proposta cadastrada'
@@ -120,8 +107,8 @@ describe PurchaseProcessProposalsHelper do
 
     context 'when there are creditor proposals' do
       before do
-        licitation_process.stub(proposals_of_creditor: [double(:proposals)])
-        licitation_process.stub(to_s: 13)
+        resource.stub(proposals_of_creditor: [double(:proposals)])
+        resource.stub(to_s: 13)
         helper.stub(disqualify_creditor_proposal_path: 'disqualify_path')
       end
 

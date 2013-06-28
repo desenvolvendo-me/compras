@@ -217,21 +217,21 @@ describe PurchaseProcessCreditorProposal do
     end
   end
 
-  describe '#validate_brand_presence?' do
+  describe '#should_validate_brand_presence?' do
     it 'returns true if judgment form is item' do
       subject.stub(item?: true)
       subject.stub(unit_price: 10)
 
-      expect(subject.send(:validate_brand_presence?)).to be_true
+      expect(subject.send(:should_validate_brand_presence?)).to be_true
     end
 
     it 'returns true if unit price is greater than 0' do
       subject.stub(item?: true)
       subject.stub(unit_price: nil)
-      expect(subject.send(:validate_brand_presence?)).to be_false
+      expect(subject.send(:should_validate_brand_presence?)).to be_false
 
       subject.stub(unit_price: 10)
-      expect(subject.send(:validate_brand_presence?)).to be_true
+      expect(subject.send(:should_validate_brand_presence?)).to be_true
     end
   end
 
