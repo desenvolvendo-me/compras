@@ -1,6 +1,6 @@
 pt-BR:
   enumerations:
-    material_type:
+    "unico_api/resources/compras/enumerations/material_type":
       service: "Serviço"
       consumption: "Material de consumo"
       asset: "Bem patrimonial"

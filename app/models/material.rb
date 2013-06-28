@@ -7,7 +7,8 @@ class Material < Compras::Model
 
   attr_modal :description, :material_type
 
-  has_enumeration_for :material_type, :create_helpers => true, :create_scopes => true
+  has_enumeration_for :material_type, :with => UnicoAPI::Resources::Compras::Enumerations::MaterialType,
+                      :create_helpers => true, :create_scopes => true
 
   belongs_to :material_class
   belongs_to :reference_unit

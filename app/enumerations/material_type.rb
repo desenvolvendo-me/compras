@@ -1,3 +1,2 @@
-class MaterialType < EnumerateIt::Base
-  associate_values :asset, :consumption, :service
+class MaterialType < UnicoAPI::Resources::Compras::Enumerations::MaterialType
 end
