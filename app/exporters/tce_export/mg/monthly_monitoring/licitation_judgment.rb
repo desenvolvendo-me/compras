@@ -45,7 +45,7 @@ module TceExport::MG
         lots_global = PurchaseProcessCreditorProposal.by_ratification_month_and_year(
           monthly_monitoring.month, monthly_monitoring.year).judgment_by_lot_or_global
 
-        lots_global = lots_global.flat_map(&:realigment_prices)
+        lots_global = lots_global.flat_map(&:realignment_prices)
 
         [items + lots_global].flatten.sort_by(&:licitation_process_id)
       end

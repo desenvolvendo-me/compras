@@ -72,7 +72,7 @@ describe TceExport::MG::MonthlyMonitoring::LicitationJudgmentGenerator do
     end
 
     context "with price realignment" do
-      it "generates a CSV file with realigment_prices data" do
+      it "generates a CSV file with realignment_prices data" do
         FactoryGirl.create(:extended_prefecture, prefecture: prefecture)
 
         creditor = Creditor.make!(:wenderson_sa)
