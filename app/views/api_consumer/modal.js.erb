@@ -1,0 +1,10 @@
+(function () {
+  var records = $('#<%= resource_instance_name %>_records'),
+      content = records.closest('.ui-dialog-content');
+
+  records.html('<%= escape_javascript render('modal_list') %>');
+
+  // scroll content to records
+  // note 13px currently means 1em
+  content.animate({scrollTop: records.offset().top - content.offset().top + content.scrollTop() - 13});
+})();

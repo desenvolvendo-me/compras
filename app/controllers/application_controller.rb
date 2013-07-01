@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   before_filter :handle_action_mailer
   before_filter :authenticate_user!
   before_filter :check_concurrent_session
+  before_filter :set_customer_to_api_resources
 
   rescue_from CanCan::Unauthorized, :with => :unauthorized
   rescue_from Exceptions::Unauthorized, :with => :unauthorized
@@ -79,5 +80,9 @@ class ApplicationController < ActionController::Base
 
   def user_already_logged_in?
     current_user && !(session[:login_token] == current_user.login_token)
+  end
+
+  def set_customer_to_api_resources
+    UnicoAPI::Consumer.set_customer current_customer
   end
 end
