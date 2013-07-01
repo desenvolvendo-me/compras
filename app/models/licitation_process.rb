@@ -20,12 +20,12 @@ class LicitationProcess < Compras::Model
                   :budget_allocations_total_value, :total_value_of_items,
                   :creditor_proposals_attributes, :tied_creditor_proposals_attributes,
                   :execution_unit_responsible_id, :process_responsibles_attributes,
-                  :justification, :justification_and_legal
+                  :justification, :justification_and_legal, :process
 
   auto_increment :process, :by => :year
   auto_increment :modality_number, :by => [:year, :modality, :type_of_removal]
 
-  attr_readonly :process, :year, :modality_number
+  attr_readonly :year, :modality_number
 
   attr_modal :process, :year, :process_date
 
@@ -109,6 +109,7 @@ class LicitationProcess < Compras::Model
   validates :goal, :licensor_rights_and_liabilities, :licensee_rights_and_liabilities,
             :presence => true, :if => :concessions_or_permits?
   validates :type_of_removal, :justification, :justification_and_legal, :presence => true, :if => :direct_purchase?
+  validates :process, uniqueness: { scope: :year }
   validates :tied_creditor_proposals, no_duplication: {
     with: :ranking,
     allow_nil: true,

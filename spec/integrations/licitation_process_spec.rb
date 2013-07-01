@@ -13,6 +13,12 @@ describe LicitationProcess do
     expect(licitation_2013_2.process).to eq 2
   end
 
+  context 'uniqueness validations' do
+    before { LicitationProcess.make!(:processo_licitatorio, process_date: Date.current) }
+
+    it { should validate_uniqueness_of(:process).scoped_to(:year) }
+  end
+
   it 'auto increment modality_number by year and modality' do
     licitation_2012 = LicitationProcess.make!(:processo_licitatorio, :year => 2012, :process => nil)
     expect(licitation_2012.modality_number).to eq 1
