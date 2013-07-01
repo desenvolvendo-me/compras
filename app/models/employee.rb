@@ -14,6 +14,7 @@ class Employee < Compras::Model
   has_many :price_collections, dependent: :restrict
   has_many :legal_analysis_appraisals, foreign_key: :responsible_id, dependent: :restrict
   has_many :process_responsibles, dependent: :restrict
+  has_many :price_collection_proposals, dependent: :restrict
 
   has_one :street, through: :individual
   has_one :neighborhood, through: :individual

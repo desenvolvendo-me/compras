@@ -8,9 +8,8 @@ describe PriceCollectionProposalsController do
   end
 
   describe "PUT 'update'" do
-    let :proposal do
-      double('Proposal')
-    end
+    let(:proposal)      { double('Proposal') }
+    let(:authenticable) { Employee.new }
 
     before do
       PriceCollectionProposal.stub(:find).and_return proposal
@@ -25,10 +24,14 @@ describe PriceCollectionProposalsController do
       expect(response.body).to match /Você não tem acesso a essa página/
     end
 
-    it 'should be acessible when the user has acess' do
+    it 'should be accessible when the user has access' do
       proposal.stub(:localized).and_return proposal
-      proposal.stub(:update_attributes)
+      controller.stub(employee?: true)
+      controller.stub(authenticable: authenticable)
+
       proposal.should_receive(:editable_by?).and_return true
+      proposal.should_receive(:employee=).with authenticable
+      proposal.should_receive(:update_attributes)
 
       put :update, :id => 1
 

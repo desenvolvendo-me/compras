@@ -3,6 +3,7 @@ class PriceCollectionProposal < Compras::Model
 
   belongs_to :price_collection
   belongs_to :creditor
+  belongs_to :employee
 
   has_many :items, :class_name => 'PriceCollectionProposalItem', :dependent => :destroy, :order => :unit_price
   has_many :price_collection_classifications, :dependent => :destroy, :order => :id
@@ -87,7 +88,7 @@ class PriceCollectionProposal < Compras::Model
   end
 
   def editable_by?(user)
-    creditor == user.authenticable
+    creditor == user.authenticable || user.authenticable.is_a?(Employee)
   end
 
   def annul!

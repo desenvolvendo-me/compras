@@ -18,4 +18,14 @@ class PriceCollectionProposalsController < CrudController
   def must_be_editable_by_current_user!
     raise Exceptions::Unauthorized unless resource.editable_by?(current_user)
   end
+
+  def update_resource(object, attributes)
+    object.employee = authenticable if authenticable.is_a?(Employee)
+
+    super
+  end
+
+  def authenticable
+    current_user.authenticable
+  end
 end

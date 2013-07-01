@@ -5,10 +5,12 @@ require 'app/models/price_collection_proposal_item'
 require 'lib/annullable'
 require 'app/models/resource_annul'
 require 'app/models/price_collection_classification'
+require 'app/models/employee'
 
 describe PriceCollectionProposal do
   it { should belong_to :price_collection }
   it { should belong_to :creditor }
+  it { should belong_to :employee }
 
   it { should have_many :items }
   it { should have_many :price_collection_classifications }
@@ -87,22 +89,25 @@ describe PriceCollectionProposal do
   end
 
   describe '#editable_by?' do
-    let :creditor do
-      double('creditor')
-    end
+    let(:creditor) { double :creditor }
+    let(:employee) { Employee.new }
 
-    before do
-      subject.stub(:creditor).and_return creditor
-    end
+    before { subject.stub(creditor: creditor) }
 
-    it 'should be true when the creditor is the given user' do
-      user = double('User', :authenticable => creditor)
+    it 'is true when the creditor is the given user' do
+      user = double('User', authenticable: creditor)
 
       expect(subject.editable_by?(user)).to be_true
     end
 
-    it 'should not be true for when the creditor is not the given user' do
-      user = double('User', :authenticable => double)
+    it 'is true when the given user is a employee' do
+      user = double('User', authenticable: employee)
+
+      expect(subject.editable_by?(user)).to be_true
+    end
+
+    it 'is false when the creditor or employee is not the given user' do
+      user = double('User', authenticable: double)
 
       expect(subject.editable_by?(user)).to be_false
     end
