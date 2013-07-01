@@ -77,11 +77,11 @@ module TceExport::MG
       end
 
       def vl_unitario(proposal)
-        realigment?(proposal) ? proposal.price : proposal.unit_price
+        realignment?(proposal) ? proposal.price : proposal.unit_price
       end
 
-      def realigment?(proposal)
-        proposal.is_a? RealigmentPrice
+      def realignment?(proposal)
+        proposal.is_a? RealignmentPrice
       end
 
       def lot_number(proposal)

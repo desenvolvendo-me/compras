@@ -97,7 +97,7 @@ describe TceExport::MG::MonthlyMonitoring::LicitationJudgmentGenerator do
           creditor: bidder.creditor,
           ratification_date: Date.new(2013, 5, 23))
 
-        RealigmentPrice.make!(:realinhamento, proposal: proposal, item: item)
+        RealignmentPrice.make!(:realinhamento, proposal: proposal, item: item)
 
         described_class.generate_file(monthly_monitoring)
 
