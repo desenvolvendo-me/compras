@@ -37,6 +37,10 @@ class BudgetStructure < Accounting::Model
                   order { parent.code }.
                   order { code }
 
+  scope :term, lambda { |q|
+    where { full_code.like("%#{q}%") | description.like("#{q}%") }
+  }
+
   filterize
 
   def self.order_by_level
