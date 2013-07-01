@@ -87,17 +87,28 @@ describe TceExport::MG::MonthlyMonitoring::LicitationJudgmentGenerator do
         PurchaseProcessAccreditation.make!(:general_accreditation,
           licitation_process: licitation_process)
 
-        item = PurchaseProcessItem.make!(:item_arame_farpado)
+        item = PurchaseProcessItem.make!(:item_arame_farpado, quantity: 1)
 
         proposal = PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado,
-          licitation_process: licitation_process, unit_price: 9.99)
+          licitation_process: licitation_process,
+          creditor: creditor,
+          unit_price: 9.99)
 
         LicitationProcessRatification.make!(:processo_licitatorio_computador,
           licitation_process: bidder.licitation_process,
-          creditor: bidder.creditor,
+          creditor: creditor,
           ratification_date: Date.new(2013, 5, 23))
 
-        RealignmentPrice.make!(:realinhamento, proposal: proposal, item: item)
+        realignment = RealignmentPrice.make(:realinhamento,
+                              purchase_process: licitation_process,
+                              creditor: creditor,
+                              lot: nil)
+
+        realignment.items.build(
+          purchase_process_item_id: item.id,
+          price: 9.99)
+
+        realignment.save!
 
         described_class.generate_file(monthly_monitoring)
 
@@ -105,7 +116,7 @@ describe TceExport::MG::MonthlyMonitoring::LicitationJudgmentGenerator do
 
         csv = File.read('tmp/JULGLIC.csv', encoding: 'ISO-8859-1')
 
-        reg_10_1 = "10;98;98029;2012;1;1;00315198737;#{item.lot};#{item.item_number};Arame farpado;9,9900;1,0000;UN"
+        reg_10_1 = "10;98;98029;2012;1;1;00314951334;#{item.lot};#{item.item_number};Arame farpado;9,9900;1,0000;UN"
         reg_30_1 = "30;98;98029;2012;1;#{current_date};2;2"
 
         expect(csv).to eq [reg_10_1, reg_30_1].join("\n")

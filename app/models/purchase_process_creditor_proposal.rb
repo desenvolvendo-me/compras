@@ -188,6 +188,16 @@ class PurchaseProcessCreditorProposal < Compras::Model
     }
   end
 
+  def realignment_items(realignment_price_repository = RealignmentPrice)
+    return [] if judgment_form.item?
+
+    realignment_price_repository.
+      purchase_process_id(licitation_process_id).
+      creditor_id(creditor_id).
+      lot(lot).
+      flat_map(&:items)
+  end
+
   private
 
   def should_validate_brand_presence?
