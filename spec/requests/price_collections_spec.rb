@@ -180,11 +180,7 @@ feature "PriceCollections" do
 
     expect(page).to have_notice 'Coleta de Preços 1/2012 criada com sucesso.'
 
-    click_link "Limpar Filtro"
-
-    within_records do
-      page.find('a').click
-    end
+    expect(page).to have_title 'Editar Coleta de Preços'
 
     within_tab 'Principal' do
       expect(page).to have_disabled_field 'Número'
@@ -330,11 +326,7 @@ feature "PriceCollections" do
 
     expect(page).to have_notice 'Coleta de Preços 1/2012 editada com sucesso.'
 
-    click_link "Limpar Filtro"
-
-    within_records do
-      page.find('a').click
-    end
+    expect(page).to have_title 'Editar Coleta de Preços'
 
     within_tab 'Principal' do
       expect(page).to have_disabled_field 'Número'
@@ -493,12 +485,7 @@ feature "PriceCollections" do
     click_button 'Salvar'
 
     expect(page).to have_notice 'Coleta de Preços 1/2012 editada com sucesso.'
-
-    click_link "Limpar Filtro"
-
-    within_records do
-      page.find('a').click
-    end
+    expect(page).to have_title 'Editar Coleta de Preços'
 
     within_tab 'Lotes de itens' do
       expect(page).to have_field 'Lote', :with => '10256987'
@@ -531,11 +518,9 @@ feature "PriceCollections" do
 
     click_button 'Salvar'
 
-    click_link "Limpar Filtro"
+    expect(page).to have_notice 'Coleta de Preços 1/2012 editada com sucesso.'
 
-    within_records do
-      page.find('a').click
-    end
+    expect(page).to have_title 'Editar Coleta de Preços'
 
     within_tab 'Lotes de itens' do
       expect(page).to_not have_field 'Observações', :with => 'lote da coleta'

@@ -35,24 +35,26 @@ describe PriceCollectionsController do
     end
 
     describe 'successfull' do
-      before do
-        PriceCollection.any_instance.should_receive(:save).and_return true
-      end
-
       it 'should generate the users for the creditors' do
+        resource = double(:resource, to_param: "10", code: "1", year: "2013")
+
         CreditorUserCreator.any_instance.should_receive(:generate)
+        PriceCollection.any_instance.should_receive(:save).and_return true
+
+        controller.should_receive(:resource).at_least(1).times.and_return(resource)
 
         post :create
       end
     end
 
     describe 'unsuccessful' do
-      before do
-        PriceCollection.any_instance.should_receive(:save).and_return false
-      end
-
       it 'should generate the users for the creditors' do
+        resource = double(:resource, to_param: "10", code: "1", year: "2013")
+
         CreditorUserCreator.any_instance.should_not_receive(:generate)
+        PriceCollection.any_instance.should_receive(:save).and_return false
+
+        controller.should_receive(:resource).at_least(1).times.and_return(resource)
 
         post :create
       end
@@ -83,6 +85,7 @@ describe PriceCollectionsController do
     describe 'successful update' do
       before do
         price_collection.stub(:update_attributes).and_return true
+        price_collection.stub(:errors).and_return []
       end
 
       it 'should generate users for any creditor' do
@@ -95,6 +98,7 @@ describe PriceCollectionsController do
     describe 'unsuccessful update' do
       before do
         price_collection.stub(:update_attributes).and_return false
+        price_collection.stub(:errors).and_return [double(:errors)]
       end
 
       it 'should not generate users for any creditor' do

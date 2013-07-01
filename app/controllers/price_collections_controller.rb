@@ -2,6 +2,12 @@ class PriceCollectionsController < CrudController
   actions :all, :except => :destroy
   before_filter :should_not_be_annuled!, :only => [:update, :classification]
 
+  def create
+    create! do |success, failure|
+      success.html { redirect_to edit_price_collection_path(resource) }
+    end
+  end
+
   def new
     object = build_resource
     object.date = Date.current
@@ -13,6 +19,12 @@ class PriceCollectionsController < CrudController
 
   def show
     render :layout => 'report'
+  end
+
+  def update
+    update! do |success, failure|
+      success.html { redirect_to edit_price_collection_path(resource) }
+    end
   end
 
   def classification
