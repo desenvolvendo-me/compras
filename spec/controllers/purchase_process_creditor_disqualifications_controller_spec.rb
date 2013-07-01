@@ -4,7 +4,6 @@ require 'spec_helper'
 describe PurchaseProcessCreditorDisqualificationsController do
   let(:licitation_process) { LicitationProcess.new }
   let(:creditor)           { Creditor.new }
-  let(:path_generator)     { double(:path_generator) }
   let(:resource)           { double(:resource, licitation_process: 1) }
   let(:localized_resource) { double(:localized_resource, licitation_process: 1) }
 
@@ -15,7 +14,6 @@ describe PurchaseProcessCreditorDisqualificationsController do
     PurchaseProcessCreditorDisqualification.stub(:find).and_return resource
     LicitationProcess.stub(:find).and_return licitation_process
     Creditor.stub(:find).and_return creditor
-    PurchaseProcessCreditorProposalPathGenerator.stub(:new).and_return path_generator
   end
 
   describe 'GET new' do
@@ -32,7 +30,7 @@ describe PurchaseProcessCreditorDisqualificationsController do
       it 'should redirect to creditors proposals' do
         resource.stub(:save).and_return true
         resource.stub(:errors).and_return []
-        path_generator.stub(:proposals_path).and_return 'proposals_path'
+        subject.stub(:creditor_proposals_path).and_return 'proposals_path'
         post :create
 
         expect(response).to redirect_to('proposals_path')
@@ -66,7 +64,7 @@ describe PurchaseProcessCreditorDisqualificationsController do
       it 'should redirect to creditors proposals' do
         localized_resource.stub(:update_attributes).and_return true
         resource.stub(:errors).and_return []
-        path_generator.stub(:proposals_path).and_return 'proposals_path'
+        subject.stub(:creditor_proposals_path).and_return 'proposals_path'
         put :update, id: 1
 
         expect(response).to redirect_to 'proposals_path'

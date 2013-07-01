@@ -1,2 +1,0 @@
-class PurchaseProcessLotCreditorProposalsController < PurchaseProcessCreditorProposalsController
-end

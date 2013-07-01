@@ -1,20 +1,21 @@
 <h2 id="title">
-  <%= resource.decorator.creditors_title %>
+  <%= title %>
 </h2>
 
 <div class="actions">
   <ul>
     <li>
-      <%= link_to 'Mapa de Propostas', new_report_map_of_proposal_path(licitation_process_id: @licitation_process) unless @creditors.empty? %>
+      <%= link_to 'Mapa de Propostas',
+        new_report_map_of_proposal_path(licitation_process_id: resource) unless @creditors.empty? %>
     </li>
-    <% if @licitation_process.tied_creditor_proposals.any? %>
+    <% if resource.tied_creditor_proposals.any? %>
       <li>
         <%= link_to 'Desempatar propostas',
-          edit_purchase_process_proposal_tiebreak_path(@licitation_process) %>
+          edit_purchase_process_proposal_tiebreak_path(resource) %>
       </li>
     <% end %>
     <li>
-      <%= link_to 'Voltar ao processo de compra', edit_licitation_process_path(@licitation_process) %>
+      <%= link_to 'Voltar ao processo de compra', edit_licitation_process_path(resource) %>
     </li>
   </ul>
 </div>

@@ -33,4 +33,12 @@ $(document).ready(function() {
     totalPriceInput.val(totalPrice);
     totalPriceInput.trigger('change');
   });
+
+  $("div.lots div.total_price").on('keyup', function() {
+    calculateTotalValue();
+  });
+
+  $("div.global div.total_price").on('keyup', function() {
+    calculateTotalValue();
+  });
 });

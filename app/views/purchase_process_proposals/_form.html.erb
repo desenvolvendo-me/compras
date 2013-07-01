@@ -1,0 +1,17 @@
+<%= f.input :creditor_id, as: :hidden, fake: true,
+  input_html: { name: :creditor_id, value: @creditor.id } %>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-4" id="total_value">
+    <%= f.input :creditor_proposal_total_value, fake: true, required: false, disabled: true,
+      input_html: { value: '0,00', 'data-decimal' => true, class: :numeric } %>
+  </div>
+</div>
+
+<div id="purchase_process_creditor_proposals">
+  <%= f.association :creditor_proposals, collection: creditor_proposals_collection do |c| %>
+    <%= c.input :creditor_id, as: :hidden %>
+
+    <%= render form_partial, :f => c %>
+  <% end %>
+</div>

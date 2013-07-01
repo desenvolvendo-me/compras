@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
 
-feature 'PurchaseProcessCreditorProposals' do
+feature 'PurchaseProcessProposals' do
   let(:current_user) { User.make!(:sobrinho_as_admin_and_employee) }
 
   background do
@@ -9,7 +9,7 @@ feature 'PurchaseProcessCreditorProposals' do
     sign_in
   end
 
-  scenario 'create and update item creditor proposals' do
+  scenario 'create and update item proposals' do
     LicitationProcess.make!(:pregao_presencial,
       purchase_process_accreditation: PurchaseProcessAccreditation.make(:general_accreditation),
       judgment_form: JudgmentForm.make!(:por_item_com_melhor_tecnica))
@@ -61,6 +61,7 @@ feature 'PurchaseProcessCreditorProposals' do
     expect(page).to have_disabled_field 'Quantidade', with: '2'
     expect(page).to have_disabled_field 'Preço total', with: '0,00'
 
+    fill_in 'Prazo de entrega', with: '10/05/2013'
     fill_in 'Preço unitário', with: '50,20'
 
     expect(page).to have_disabled_field 'Valor total da proposta', with: '100,40'
@@ -72,11 +73,32 @@ feature 'PurchaseProcessCreditorProposals' do
     expect(page).to have_content 'não pode ficar em branco'
 
     fill_in 'Marca', with: 'Tabajara'
-    fill_in 'Prazo de entrega', with: '10/05/2013'
+    fill_in 'Preço unitário', with: '0,00'
 
     click_button 'Salvar'
 
-    expect(page).to have_content 'Proposta Comercial criada com sucesso'
+    expect(page).to have_field 'Preço unitário', with: '0,00'
+    expect(page).to have_content 'deve ser maior que 0'
+
+    fill_in 'Marca', with: ''
+
+    click_button 'Salvar'
+
+    expect(page).to have_content 'Proposta Comercial editada com sucesso'
+
+    within_records do
+      within 'tbody tr:first' do
+        click_link 'Editar propostas'
+      end
+    end
+
+    fill_in 'Prazo de entrega', with: '10/05/2013'
+    fill_in 'Preço unitário', with: '50,20'
+    fill_in 'Marca', with: 'Tabajara'
+
+    click_button 'Salvar'
+
+    expect(page).to have_content 'Proposta Comercial editada com sucesso'
 
     within_records do
       expect(page).to have_content 'Fornecedor'
@@ -127,12 +149,15 @@ feature 'PurchaseProcessCreditorProposals' do
     expect(page).to_not have_disabled_element 'Lances', reason: 'deve ter ao menos uma proposta'
   end
 
-  scenario 'create and update lot creditor proposals' do
+  scenario 'create and update lot proposals' do
     LicitationProcess.make!(:pregao_presencial,
       purchase_process_accreditation: PurchaseProcessAccreditation.make(:general_accreditation),
       judgment_form: JudgmentForm.make!(:por_lote_com_melhor_tecnica),
       items: [PurchaseProcessItem.make!(:item), PurchaseProcessItem.make!(:item_arame, lot: 10),
               PurchaseProcessItem.make!(:item_arame_farpado)] )
+
+    first_lot_div = '//*[@id="purchase_process_creditor_proposals"]/div[2]'
+    last_lot_div = '//*[@id="purchase_process_creditor_proposals"]/div[4]'
 
     navigate 'Processos de Compra > Processos de Compras'
 
@@ -172,29 +197,29 @@ feature 'PurchaseProcessCreditorProposals' do
 
     expect(page).to have_disabled_field 'Valor total da proposta', with: '0,00'
 
-    within 'div.lots:first' do
+    within :xpath, first_lot_div do
       expect(page).to have_disabled_field 'Lote', with: '2050'
       expect(page).to have_field 'Preço unitário', with: '0,00'
     end
 
-    within 'div.lots:last' do
+    within :xpath, last_lot_div do
       expect(page).to have_disabled_field 'Lote', with: '10'
       expect(page).to have_field 'Preço unitário', with: '0,00'
     end
 
-    within 'div.lots:first' do
+    within :xpath, first_lot_div do
       fill_in 'Preço unitário', with: '50,20'
     end
 
     expect(page).to have_disabled_field 'Valor total da proposta', with: '50,20'
 
-    within 'div.lots:last' do
+    within :xpath, last_lot_div do
       fill_in 'Preço unitário', with: ''
     end
 
     click_button 'Salvar'
 
-    within 'div.lots:last' do
+    within :xpath, last_lot_div do
       expect(page).to have_field 'Preço unitário', with: ''
       expect(page).to have_content 'não pode ficar em branco'
       fill_in 'Preço unitário', with: '100,00'
@@ -204,7 +229,7 @@ feature 'PurchaseProcessCreditorProposals' do
 
     click_button 'Salvar'
 
-    expect(page).to have_content 'Proposta Comercial criada com sucesso'
+    expect(page).to have_content 'Proposta Comercial editada com sucesso'
 
     within_records do
       expect(page).to have_content 'Fornecedor'
@@ -232,12 +257,12 @@ feature 'PurchaseProcessCreditorProposals' do
 
     expect(page).to have_disabled_field 'Valor total da proposta', with: '150,20'
 
-    within 'div.lots:first' do
+    within :xpath, first_lot_div do
       expect(page).to have_disabled_field 'Lote', with: '2050'
       expect(page).to have_field 'Preço unitário', with: '50,20'
     end
 
-    within 'div.lots:last' do
+    within :xpath, last_lot_div do
       expect(page).to have_disabled_field 'Lote', with: '10'
       expect(page).to have_field 'Preço unitário', with: '100,00'
       fill_in 'Preço unitário', with: ''
@@ -245,7 +270,7 @@ feature 'PurchaseProcessCreditorProposals' do
 
     click_button 'Salvar'
 
-    within 'div.lots:last' do
+    within :xpath, last_lot_div do
       expect(page).to have_field 'Preço unitário', with: ''
       expect(page).to have_content 'não pode ficar em branco'
       fill_in 'Preço unitário', with: '100,00'
@@ -269,23 +294,25 @@ feature 'PurchaseProcessCreditorProposals' do
 
     expect(page).to have_disabled_field 'Valor total da proposta', with: '0,00'
 
-    within 'div.lots:first' do
+    within :xpath, first_lot_div do
       expect(page).to have_disabled_field 'Lote', with: '2050'
       expect(page).to have_field 'Preço unitário', with: '0,00'
     end
 
-    within 'div.lots:last' do
+    within :xpath, last_lot_div do
       expect(page).to have_disabled_field 'Lote', with: '10'
       expect(page).to have_field 'Preço unitário', with: '0,00'
     end
   end
 
-  scenario 'create and update global creditor proposals' do
+  scenario 'create and update global proposals' do
     LicitationProcess.make!(:pregao_presencial,
       purchase_process_accreditation: PurchaseProcessAccreditation.make(:general_accreditation),
       judgment_form: JudgmentForm.make!(:global_com_menor_preco),
       items: [PurchaseProcessItem.make!(:item), PurchaseProcessItem.make!(:item_arame, lot: 10),
               PurchaseProcessItem.make!(:item_arame_farpado)])
+
+    global_div = '//*[@id="purchase_process_creditor_proposals"]/div[2]'
 
     navigate 'Processos de Compra > Processos de Compras'
 
@@ -323,14 +350,14 @@ feature 'PurchaseProcessCreditorProposals' do
 
     expect(page).to have_content 'Criar Proposta Comercial'
 
-    within 'div.lots:first' do
+    within :xpath, global_div do
       expect(page).to have_field 'Valor total da proposta', with: '0,00'
       fill_in 'Valor total da proposta', with: '50,20'
     end
 
     click_button 'Salvar'
 
-    expect(page).to have_content 'Proposta Comercial criada com sucesso'
+    expect(page).to have_content 'Proposta Comercial editada com sucesso'
 
     within_records do
       expect(page).to have_content 'Fornecedor'
@@ -354,7 +381,7 @@ feature 'PurchaseProcessCreditorProposals' do
       end
     end
 
-    within 'div.lots:first' do
+    within :xpath, global_div do
       expect(page).to have_field 'Valor total da proposta', with: '50,20'
     end
 
@@ -366,7 +393,7 @@ feature 'PurchaseProcessCreditorProposals' do
       end
     end
 
-    within 'div.lots:first' do
+    within :xpath, global_div do
       expect(page).to have_field 'Valor total da proposta', with: '0,00'
     end
   end
@@ -407,7 +434,7 @@ feature 'PurchaseProcessCreditorProposals' do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Proposta Comercial criada com sucesso'
+    expect(page).to have_notice 'Proposta Comercial editada com sucesso'
 
     within_records do
       within 'tbody tr:last' do
@@ -421,7 +448,7 @@ feature 'PurchaseProcessCreditorProposals' do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Proposta Comercial criada com sucesso'
+    expect(page).to have_notice 'Proposta Comercial editada com sucesso'
 
     click_link "Desempatar propostas"
 
