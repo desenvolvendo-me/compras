@@ -21,6 +21,6 @@ class PurchaseSolicitationItemDecorator
   end
 
   def material_type_filter
-    services? ? MaterialType::SERVICE : nil
+    services? ? ::MaterialType::SERVICE : nil
   end
 end

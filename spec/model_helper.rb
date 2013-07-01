@@ -52,17 +52,6 @@ Dir['app/validators/*.rb'].each do |file|
   require File.expand_path(file)
 end
 
-# EnumerateIt
-require 'enumerate_it'
-
-class ActiveRecord::Base
-  extend EnumerateIt
-end
-
-Dir['app/enumerations/*.rb'].each do |file|
-  require File.expand_path(file)
-end
-
 # AwesomeNestedNet
 require 'awesome_nested_set'
 
@@ -94,8 +83,20 @@ end
 # Unico
 require 'unico/engine'
 require 'unico/model'
+require 'unico-api'
 require 'persona'
 require 'inscriptio_cursualis'
+
+# EnumerateIt
+require 'enumerate_it'
+
+class ActiveRecord::Base
+  extend EnumerateIt
+end
+
+Dir['app/enumerations/*.rb'].each do |file|
+  require File.expand_path(file)
+end
 
 # Compras Model
 require 'compras'

@@ -1,4 +1,5 @@
 #encoding: utf-8
+require 'unico-api'
 require 'exporter_helper'
 require 'app/exporters/tce_export/mg/casters/date_caster'
 

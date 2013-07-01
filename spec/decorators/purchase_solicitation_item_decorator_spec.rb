@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'decorator_helper'
 require 'enumerate_it'
+require 'unico-api'
 require 'app/enumerations/material_type'
 require 'app/decorators/purchase_solicitation_item_decorator'
 
