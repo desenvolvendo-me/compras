@@ -84,13 +84,19 @@ class LicitationProcessDecorator
   end
 
   def enabled_realignment_price?
-    bidders.each do |bidder|
-      if proposals_of_creditor(bidder.creditor).empty?
-        return false
+    return false unless licitation?
+
+    if trading?
+      return false if trading.blank? || !trading.allow_negotiation?
+    else
+      bidders.each do |bidder|
+        if proposals_of_creditor(bidder.creditor).empty?
+          return false
+        end
       end
     end
 
-    licitation? && (judgment_form_global? || judgment_form_lot?)
+    judgment_form_global? || judgment_form_lot?
   end
 
   def code_and_year

@@ -9,7 +9,6 @@ pt-BR:
       purchase_process_creditor_proposal:
         brand: "Marca"
         creditor: "Credor"
-        creditor_proposal_total_value: "Valor total da proposta"
         delivery_date: "Prazo de entrega"
         item_lot: "Lote"
         lot: "Lote"
@@ -19,6 +18,5 @@ pt-BR:
         total_price: "Preço total"
         unit_price: "Preço unitário"
         ranking: "Posição"
-        difference_price: "Diferença"
         material_fake: "Material"
         old_unit_price: "Proposta antiga"

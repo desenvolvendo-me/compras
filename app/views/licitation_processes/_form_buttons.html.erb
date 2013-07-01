@@ -29,8 +29,8 @@
 
       <% unless f.object.trading? %>
         <% if f.object.decorator.enabled_realignment_price? %>
-          <%= link_to('Realinhamento de preço', realigment_prices_path(purchase_process_id: resource),
-            class: "button primary #{f.object.decorator.has_records_class(f.object.realigment_prices)}",
+          <%= link_to('Realinhamento de preço', realignment_prices_path(purchase_process_id: resource.id),
+            class: "button primary #{f.object.decorator.has_records_class(f.object.realignment_prices)}",
             'data-disabled' => f.object.decorator.must_have_creditors_and_items) %>
         <% end %>
       <% end %>
@@ -55,8 +55,8 @@
           'data-disabled' => f.object.decorator.must_have_published_edital_or_direct_purchase) %>
 
         <% if f.object.decorator.enabled_realignment_price? %>
-          <%= link_to('Realinhamento de preço', realigment_prices_path(purchase_process_id: resource),
-            class: "button primary #{f.object.decorator.has_records_class(f.object.realigment_prices)}",
+          <%= link_to('Realinhamento de preço', realignment_prices_path(purchase_process_id: resource.id),
+            class: "button primary #{f.object.decorator.has_records_class(f.object.realignment_prices)}",
             'data-disabled' => f.object.decorator.must_have_creditors_and_items) %>
         <% end %>
       <% end %>

@@ -466,4 +466,26 @@ describe PurchaseProcessTradingItem do
       end
     end
   end
+
+  describe '#creditor_winner' do
+    let(:trading_item_winner) { double(:trading_item_winner) }
+
+    it 'should return the creditor who wins the item' do
+      trading_item_winner.should_receive(:new).with(subject).and_return trading_item_winner
+      trading_item_winner.should_receive(:creditor).and_return 'creditor'
+
+      expect(subject.creditor_winner(trading_item_winner)).to eq 'creditor'
+    end
+  end
+
+  describe '#amount_winner' do
+    let(:trading_item_winner) { double(:trading_item_winner) }
+
+    it 'should return the creditor who wins the item' do
+      trading_item_winner.should_receive(:new).with(subject).and_return trading_item_winner
+      trading_item_winner.should_receive(:amount).and_return 100
+
+      expect(subject.amount_winner(trading_item_winner)).to eq 100
+    end
+  end
 end

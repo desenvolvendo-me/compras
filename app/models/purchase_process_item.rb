@@ -23,7 +23,7 @@ class PurchaseProcessItem < Compras::Model
   accepts_nested_attributes_for :creditor_proposals
 
   delegate :reference_unit, :description, :code, :to => :material, :allow_nil => true
-  delegate :direct_purchase?, :to => :licitation_process, :allow_nil => true
+  delegate :direct_purchase?, :judgment_form_item?, :to => :licitation_process, :allow_nil => true
 
   validates :material, :quantity, :lot, :presence => true
   validates :creditor, presence: true, if: :direct_purchase?
@@ -39,8 +39,8 @@ class PurchaseProcessItem < Compras::Model
     where { |item| item.creditor_id.eq(creditor_id) }
   }
 
-  scope :by_lot, lambda { |lot|
-    where { |item| item.lot.eq lot }
+  scope :lot, lambda { |lot|
+    where { |item| item.lot.eq(lot) }
   }
 
   def self.lots
@@ -75,5 +75,9 @@ class PurchaseProcessItem < Compras::Model
 
   def total_price
     unit_price * quantity
+  end
+
+  def creditor_winner(purchase_process_item_winner = PurchaseProcessItemWinner)
+    purchase_process_item_winner.winner(self)
   end
 end

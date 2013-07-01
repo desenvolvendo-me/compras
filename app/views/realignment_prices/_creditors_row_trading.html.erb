@@ -1,0 +1,12 @@
+<% trading_items(@purchase_process, creditor).each do |item| %>
+  <tr>
+    <td><%= creditor.to_s %></td>
+    <td><%= creditor.person_email %></td>
+    <td><%= item.lot %></td>
+
+    <td>
+      <%= link_to realignment_link_title(@purchase_process.id, creditor.id, item.lot),
+        realignment_path_helper(@purchase_process.id, creditor.id, item.lot) %>
+    </td>
+  </tr>
+<% end %>

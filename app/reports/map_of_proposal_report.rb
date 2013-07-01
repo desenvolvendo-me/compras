@@ -33,7 +33,7 @@ class MapOfProposalReport < ActiveRelatus::Base
   end
 
   def items_by_lot(lot)
-    items.by_lot(lot)
+    items.lot(lot)
   end
 
   protected

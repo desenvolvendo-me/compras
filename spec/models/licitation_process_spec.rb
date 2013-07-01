@@ -27,6 +27,7 @@ require 'app/models/purchase_process_creditor_proposal'
 require 'app/models/purchase_process_creditor_disqualification'
 require 'app/models/purchase_process_trading'
 require 'app/models/process_responsible'
+require 'app/models/realignment_price'
 require 'app/business/purchase_process_proposal_envelope_opening_date_calculator'
 
 describe LicitationProcess do
@@ -85,7 +86,7 @@ describe LicitationProcess do
   it { should have_many(:budget_allocations).through(:purchase_process_budget_allocations) }
   it { should have_many(:creditor_proposals) }
   it { should have_many(:tied_creditor_proposals) }
-  it { should have_many(:realigment_prices).through(:creditor_proposals) }
+  it { should have_many(:realignment_prices) }
   it { should have_many(:items_creditors).through(:items) }
   it { should have_many(:creditor_disqualifications).dependent(:restrict) }
   it { should have_many(:process_responsibles).dependent(:restrict) }

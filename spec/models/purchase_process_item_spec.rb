@@ -25,6 +25,7 @@ describe PurchaseProcessItem do
   it { should delegate(:reference_unit).to(:material).allowing_nil(true) }
   it { should delegate(:description).to(:material).allowing_nil(true) }
   it { should delegate(:direct_purchase?).to(:licitation_process).allowing_nil(true) }
+  it { should delegate(:judgment_form_item?).to(:licitation_process).allowing_nil(true) }
 
   it { should auto_increment(:item_number).by([:licitation_process_id, :lot]) }
 
@@ -101,7 +102,7 @@ describe PurchaseProcessItem do
     end
   end
 
-  context "#winning_bid" do
+  describe "#winning_bid" do
     it 'returns the classification that has won the bid' do
       classification_1 = double(:classification, situation: SituationOfProposal::LOST)
       classification_2 = double(:classification, situation: SituationOfProposal::WON)
@@ -109,6 +110,16 @@ describe PurchaseProcessItem do
       subject.stub(licitation_process_classifications: [classification_1, classification_2])
 
       expect(subject.winning_bid).to eq classification_2
+    end
+  end
+
+  describe '#creditor_winner' do
+    let(:purchase_process_item_winner) { double(:purchase_process_item_winner) }
+
+    it 'should return the credito winner for item' do
+      purchase_process_item_winner.should_receive(:winner).with(subject).and_return 'creditor'
+
+      expect(subject.creditor_winner(purchase_process_item_winner)).to eq 'creditor'
     end
   end
 end

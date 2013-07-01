@@ -1,0 +1,38 @@
+<h2 id="title">
+  Realinhamento de preço
+</h2>
+
+<div id="subtitle">
+  <%= @purchase_process.to_s %>
+</div>
+
+<div class="actions">
+  <ul>
+    <li>
+      <%= link_to 'Voltar ao processo de compra', edit_licitation_process_path(@purchase_process) %>
+    </li>
+  </ul>
+</div>
+
+<table class="records">
+  <thead>
+    <tr>
+      <th><%= LicitationProcess.human_attribute_name :creditor %></th>
+      <th><%= LicitationProcess.human_attribute_name :creditor_email %></th>
+
+      <% if @purchase_process.judgment_form_lot? %>
+        <th>Lote</th>
+      <% end %>
+
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% if @purchase_process.trading? %>
+      <%= render partial: 'creditors_row_trading', collection: @creditors, as: :creditor %>
+    <% else %>
+      <%= render partial: "creditors_row_#{@purchase_process.judgment_form_kind}", collection: @creditors, as: :creditor %>
+    <% end %>
+  </tbody>
+</table>

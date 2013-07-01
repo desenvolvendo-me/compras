@@ -32,9 +32,22 @@ class PurchaseProcessTradingItem < Compras::Model
     where { |query| query.trading_id.eq(trading_id) }
   end
 
-  def self.creditor_winner_items(creditor_id, trading_id)
+  scope :lot, ->(lot) do
+    where { |query| query.lot.eq(lot) }
+  end
+
+  scope :item_id, ->(item_id) do
+    where { |query| query.item_id.eq(item_id) }
+  end
+
+  scope :purchase_process_id, ->(purchase_process_id) do
+    joins { trading }.
+    where { trading.purchase_process_id.eq(purchase_process_id) }
+  end
+
+  def self.creditor_winner_items(creditor_id)
     [].tap do |items|
-      scoped.trading_id(trading_id).closed.each do |trading_item|
+      scoped.closed.each do |trading_item|
         items << trading_item if TradingItemWinner.new(trading_item).creditor.id == creditor_id
       end
     end
@@ -131,11 +144,15 @@ class PurchaseProcessTradingItem < Compras::Model
     item || lot
   end
 
-  private
-
-  def creditor_winner
-    TradingItemWinner.new(self).creditor
+  def creditor_winner(trading_item_winner = TradingItemWinner)
+    trading_item_winner.new(self).creditor
   end
+
+  def amount_winner(trading_item_winner = TradingItemWinner)
+    trading_item_winner.new(self).amount
+  end
+
+  private
 
   def accreditation_creditor_winner
     return unless creditor_winner

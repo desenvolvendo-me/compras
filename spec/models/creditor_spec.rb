@@ -22,7 +22,7 @@ require 'app/models/purchase_process_accreditation_creditor'
 require 'app/models/purchase_process_item'
 require 'app/models/purchase_process_creditor_proposal'
 require 'app/models/purchase_process_creditor_disqualification'
-require 'app/models/realigment_price'
+require 'app/models/realignment_price'
 
 describe Creditor do
   describe 'default values' do
@@ -56,7 +56,7 @@ describe Creditor do
   it { should have_many(:purchase_process_accreditation_creditors).dependent(:restrict) }
   it { should have_many(:purchase_process_items).dependent(:restrict) }
   it { should have_many(:purchase_process_creditor_proposals).dependent(:restrict) }
-  it { should have_many(:realigment_prices).through(:purchase_process_creditor_proposals) }
+  it { should have_many(:realignment_prices).dependent(:restrict) }
   it { should have_many(:proposal_disqualifications).dependent(:restrict) }
   it { should have_many(:licitation_process_ratifications).dependent(:restrict) }
 

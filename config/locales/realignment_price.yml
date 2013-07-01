@@ -1,0 +1,14 @@
+pt-BR:
+  activerecord:
+    models:
+      realignment_price:
+        one: "Realinhamento de Preço"
+        other: "Realinhamento de Preços"
+
+    attributes:
+      realignment_price:
+        creditor: "Fornecedor"
+        lot: "Lote"
+        purchase_process: "Processo de compra"
+        total_value: 'Valor total da proposta/lance'
+        difference_price: 'Diferença'

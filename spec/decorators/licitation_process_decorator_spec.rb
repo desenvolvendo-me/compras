@@ -427,4 +427,161 @@ describe LicitationProcessDecorator do
       end
     end
   end
+
+  describe '#enabled_realignment_price?' do
+    context 'when is a trading' do
+      before do
+        component.stub(trading?: true)
+        component.stub(licitation?: true)
+      end
+
+      context 'when not allow negotiation' do
+        let(:trading) { double(:trading) }
+
+        before do
+          component.stub(trading: trading)
+          trading.stub(allow_negotiation?: false)
+        end
+
+        it { expect(subject.enabled_realignment_price?).to be_false }
+      end
+
+      context 'when allow negotiation' do
+        let(:trading) { double(:trading) }
+
+        before do
+          component.stub(trading: trading)
+          trading.stub(allow_negotiation?: true)
+        end
+
+        context 'when judgment_form is global' do
+          before do
+            component.stub(judgment_form_global?: true)
+            component.stub(judgment_form_lot?: false)
+          end
+
+          it { expect(subject.enabled_realignment_price?).to be_true }
+        end
+
+        context 'when judgment_form is lot' do
+          before do
+            component.stub(judgment_form_global?: false)
+            component.stub(judgment_form_lot?: true)
+          end
+
+          it { expect(subject.enabled_realignment_price?).to be_true }
+        end
+
+        context 'when judgment_form is not global neigher lot' do
+          before do
+            component.stub(judgment_form_global?: false)
+            component.stub(judgment_form_lot?: false)
+          end
+
+          it { expect(subject.enabled_realignment_price?).to be_false }
+        end
+      end
+    end
+
+    context 'when is not a trading' do
+      let(:bidder1) { double(:bidder1, creditor: 'creditor1') }
+      let(:bidder2) { double(:bidder2, creditor: 'creditor2') }
+
+      before do
+        component.stub(bidders: [bidder1, bidder2])
+        component.stub(trading?: false)
+      end
+
+      context 'when is a licitation' do
+        before do
+          component.stub(licitation?: true)
+        end
+
+        context 'all creditors have proposal' do
+          context 'when judgment_form is global' do
+            before do
+              component.stub(judgment_form_global?: true)
+              component.stub(judgment_form_lot?: false)
+            end
+
+            it 'should be true' do
+              component.should_receive(:proposals_of_creditor).with('creditor1').and_return(['proposal1'])
+              component.should_receive(:proposals_of_creditor).with('creditor2').and_return(['proposal2'])
+
+              expect(subject.enabled_realignment_price?).to be_true
+            end
+          end
+
+          context 'when judgment_form is lot' do
+            before do
+              component.stub(judgment_form_global?: false)
+              component.stub(judgment_form_lot?: true)
+            end
+
+            it 'should be true' do
+              component.should_receive(:proposals_of_creditor).with('creditor1').and_return(['proposal1'])
+              component.should_receive(:proposals_of_creditor).with('creditor2').and_return(['proposal2'])
+
+              expect(subject.enabled_realignment_price?).to be_true
+            end
+          end
+
+          context 'when judgment_form is not global neigher lot' do
+            before do
+              component.stub(judgment_form_global?: false)
+              component.stub(judgment_form_lot?: false)
+            end
+
+            it 'should be false' do
+              component.should_receive(:proposals_of_creditor).with('creditor1').and_return(['proposal1'])
+              component.should_receive(:proposals_of_creditor).with('creditor2').and_return(['proposal2'])
+
+              expect(subject.enabled_realignment_price?).to be_false
+            end
+          end
+        end
+
+        context 'not all creditors have proposals' do
+          it 'should be false' do
+            component.should_receive(:proposals_of_creditor).with('creditor1').and_return([])
+
+            expect(subject.enabled_realignment_price?).to be_false
+          end
+        end
+      end
+
+      context 'when not a licitation' do
+        before do
+          component.stub(licitation?: false)
+        end
+
+        context 'when judgment_form is global' do
+          before do
+            component.stub(judgment_form_global?: true)
+            component.stub(judgment_form_lot?: false)
+          end
+
+          it { expect(subject.enabled_realignment_price?).to be_false }
+        end
+
+        context 'when judgment_form is lot' do
+          before do
+            component.stub(judgment_form_global?: false)
+            component.stub(judgment_form_lot?: true)
+          end
+
+          it { expect(subject.enabled_realignment_price?).to be_false }
+        end
+
+        context 'when judgment_form is not global neigher lot' do
+          before do
+            component.stub(judgment_form_global?: false)
+            component.stub(judgment_form_lot?: false)
+          end
+
+          it { expect(subject.enabled_realignment_price?).to be_false }
+        end
+      end
+    end
+  end
 end
