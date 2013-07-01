@@ -11,24 +11,7 @@ class BudgetStructureLevel < Accounting::Model
   orderize :level
   filterize
 
-  scope :configuration_id, lambda { |configuration_id| where {
-     budget_structure_configuration_id.eq(configuration_id) }
-  }
-
   def to_s
     "#{level} - #{description}"
-  end
-
-  def mask
-    '9' * digits
-  end
-
-  def upper_budget_structure_level
-    return nil if level == 1
-    upper_level_number = level.pred
-
-    BudgetStructureLevel.where {
-      budget_structure_configuration_id.eq( my{budget_structure_configuration_id} ) &
-      level.eq(upper_level_number) }.first
   end
 end
