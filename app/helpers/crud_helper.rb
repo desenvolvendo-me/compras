@@ -106,7 +106,7 @@ module CrudHelper
   end
 
   def index_list_partial
-    if resource_class.decorated? && resource_class.decorator.respond_to?(:headers?) && resource_class.decorator.headers?
+    if resource_class.respond_to?(:decorated?) && resource_class.decorated? && resource_class.decorator.respond_to?(:headers?) && resource_class.decorator.headers?
       'list_with_header'
     else
       'list'
