@@ -40,7 +40,6 @@ class Pledge < Accounting::Model
   delegate :amount, :to => :reserve_fund, :allow_nil => true, :prefix => true
   delegate :amount, :balance, :expense_nature, :expense_nature_id,
            :to => :budget_allocation, :allow_nil => true, :prefix => true
-  delegate :entity, :to => :descriptor, :allow_nil => true
   delegate :expense_nature_expense_nature, :expense_nature_kind, :to => :budget_allocation, :allow_nil => true
   delegate :advance_or_subsidy_or_agreement?, :to => :pledge_category, :allow_nil => true
 

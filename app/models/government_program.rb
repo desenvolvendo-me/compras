@@ -5,7 +5,6 @@ class GovernmentProgram < Accounting::Model
 
   attr_modal :code, :program_kind_id, :title, :macro_objective_id
 
-  belongs_to :entity
   belongs_to :program_kind
   belongs_to :macro_objective
   belongs_to :responsible, :class_name => "BudgetStructure", :foreign_key => "budget_structure_id"

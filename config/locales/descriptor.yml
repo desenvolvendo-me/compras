@@ -7,7 +7,6 @@ pt-BR:
 
     attributes:
       descriptor:
-        entity: "Entidade"
         period: "Exercício"
         year: "Ano do exercício"
         month: "Mês do exercício"

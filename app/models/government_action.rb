@@ -3,7 +3,6 @@ class GovernmentAction < Accounting::Model
 
   attr_modal :code, :title, :description, :action_type, :budget_type
 
-  belongs_to :entity
   belongs_to :product
   belongs_to :reference_unit
 

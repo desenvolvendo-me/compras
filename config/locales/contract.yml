@@ -24,7 +24,6 @@ pt-BR:
         direct_purchase: 'Compra direta'
         dissemination_source: 'Local de publicação'
         end_date: "Data de validade"
-        entity: "Entidade"
         execution_type: "Forma de execução"
         guarantee_value: 'Valor da garantia'
         kind: "Tipo"

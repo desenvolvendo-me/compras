@@ -7,7 +7,6 @@ class Capability < Accounting::Model
   has_enumeration_for :status, :create_helpers => true
   has_enumeration_for :source
 
-  belongs_to :entity
   belongs_to :capability_destination
   belongs_to :tce_specification_capability
 

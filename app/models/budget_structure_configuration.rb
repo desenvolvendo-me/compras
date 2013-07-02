@@ -2,7 +2,6 @@ class BudgetStructureConfiguration < Accounting::Model
   attr_modal :description, :entity_id, :regulatory_act_id
 
   belongs_to :regulatory_act
-  belongs_to :entity
 
   has_many :budget_structure_levels, :order => 'level asc', :dependent => :destroy, :order => :id
   has_many :budget_structures, :dependent => :restrict

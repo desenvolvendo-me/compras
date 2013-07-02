@@ -9,7 +9,6 @@ feature "BudgetStructureConfigurations" do
   scenario 'create a new budget_structure_configuration' do
     pending "this test will be removed when there is integration with the accounting system"
 
-    Entity.make!(:detran)
     RegulatoryAct.make!(:sopa)
 
     navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Configurações de Estrutura Orçamentária'

@@ -7,7 +7,6 @@ pt-BR:
 
     attributes:
       budget_structure_configuration:
-        entity: "Entidade"
         regulatory_act: "Ato regulamentador"
         description: "Descrição"
         mask: "Máscara"

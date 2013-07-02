@@ -1,7 +1,5 @@
 class Descriptor < Accounting::Model
-  attr_modal :entity, :year
-
-  belongs_to :entity
+  attr_modal :year
 
   has_many :budget_allocations, :dependent => :restrict
   has_many :extra_credits, :dependent => :restrict
@@ -23,8 +21,6 @@ class Descriptor < Accounting::Model
   has_many :extra_budget_pledge_payments, :through => :extra_budget_pledges
   has_many :extra_budget_pledge_reversals, :through => :extra_budget_pledges
 
-  delegate :state_acronym, :to => :entity, :allow_nil => true
-
   localize :period, :using => MonthAndYearParser
 
   orderize :period
@@ -38,10 +34,6 @@ class Descriptor < Accounting::Model
 
   def self.by_year(value)
     where(:year => value)
-  end
-
-  def to_s
-    "#{entity} - #{year}"
   end
 
   def period=(value)

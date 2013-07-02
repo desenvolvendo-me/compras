@@ -3,8 +3,6 @@ class Subfunction < Accounting::Model
 
   attr_readonly :entity_id
 
-  belongs_to :entity
-
   has_many :budget_allocations, :dependent => :restrict
 
   with_options :allow_blank => true do |allowing_blank|

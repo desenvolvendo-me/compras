@@ -44,7 +44,6 @@ feature "Contracts" do
   end
 
   scenario 'create, update and destroy a new contract' do
-    Entity.make!(:detran)
     LicitationProcess.make!(:processo_licitatorio)
     DisseminationSource.make!(:jornal_municipal)
     Creditor.make!(:sobrinho)

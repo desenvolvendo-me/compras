@@ -8,7 +8,6 @@ class BudgetStructure < Accounting::Model
 
   has_one :address, :as => :addressable, :dependent => :destroy
 
-  has_many :entity, :dependent => :restrict
   has_many :signatures, :dependent => :restrict
   has_many :budget_allocations, :dependent => :restrict
   has_many :budget_structure_responsibles, :dependent => :destroy, :order => :id
