@@ -199,7 +199,7 @@ class LicitationProcess < Compras::Model
   end
 
   def to_s
-    "#{process}/#{year} - #{modality_humanize || type_of_removal_humanize} #{modality_number}"
+    "#{process}/#{year} - #{modality_or_type_of_removal_humanized} #{modality_number}"
   end
 
   def modality_or_type_of_removal
@@ -402,5 +402,9 @@ class LicitationProcess < Compras::Model
 
   def update_purchase_solicitation_to_liberated(purchase_solicitation)
     purchase_solicitation.liberate! if valid?
+  end
+
+  def modality_or_type_of_removal_humanized
+    modality_humanize || type_of_removal_humanize
   end
 end
