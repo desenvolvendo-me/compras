@@ -343,6 +343,7 @@ pt-BR:
         taken: "já está em uso"
         record_invalid: "A validação falhou: %{errors}"
         cant_be_destroyed: "Este registro não pôde ser apagado pois há outros cadastros que dependem dele"
+        cant_be_updated: "Este registro não pode ser atualizado, pois há outros cadastrados relacionados a ele"
         <<: *errors_messages
 
       full_messages:

@@ -1,8 +1,10 @@
 <div class="buttons">
-  <%= f.button :submit if can?(:modify, main_controller_name) %>
+  <% if can?(:modify, main_controller_name) %>
+    <%= f.button :submit, data_disabled: not_updatable_message  %>
+  <% end %>
   <%= f.button :back %>
 
   <% if f.object.persisted? && can?(:destroy, main_controller_name) %>
-    <%= f.button :destroy %>
+    <%= f.button :destroy, 'data-disabled' => not_destroyable_message %>
   <% end %>
 </div>

@@ -1,0 +1,38 @@
+# encoding: UTF-8
+
+require 'model_helper'
+
+class User < Accounting::Model
+  validates :name, :login, :cant_be_updated => true
+  validates :profile_id, :cant_be_updated => true, :if => :confirmed?
+
+  def confirmed?
+    false
+  end
+end
+
+describe "CantBeUpdatedValidator" do
+  before do
+    user.stub(:persisted?).and_return(true)
+  end
+
+  let(:user) { User.new }
+
+  it "should validate name and login" do
+    user.name = "Francisco"
+    user.login = "chico"
+
+    user.valid?
+
+    expect(user.errors[:name]).to include("não pode ser atualizado")
+    expect(user.errors[:login]).to include("não pode ser atualizado")
+  end
+
+  it "should not validate profile_id" do
+    user.profile_id = 1
+
+    user.valid?
+
+    expect(user.errors[:profile_id]).to_not include("não pode ser atualizado")
+  end
+end
