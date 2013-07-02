@@ -15,7 +15,9 @@
   </div>
 
   <div class="yui3-u-1-3">
-    <%= f.input :execution_unit_responsible, modal_url: modal_budget_structures_path(by_year: f.object.year || Date.current.year) %>
+    <%= f.input :execution_unit_responsible, as: :auto_complete, fake: true,
+      source_path: budget_structures_path(by_year: f.object.year || Date.current.year),
+      input_html: { value: f.object.execution_unit_responsible } %>
   </div>
 </div>
 

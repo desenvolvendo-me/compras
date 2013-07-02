@@ -62,7 +62,7 @@ feature "LicitationProcesses" do
       fill_modal 'Índice de reajuste', :with => 'XPTO'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Valor da caução', :with => '50,00'
-      fill_modal 'Unidade responsável pela execução', with: 'Secretaria de Educação', field: 'Descrição'
+      fill_with_autocomplete 'Unidade responsável pela execução', with: 'Secretaria de Educação'
     end
 
     within_tab 'Prazos' do
@@ -2165,7 +2165,7 @@ feature "LicitationProcesses" do
       fill_modal 'Índice de reajuste', :with => 'XPTO'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Valor da caução', :with => '50,00'
-      fill_modal 'Unidade responsável pela execução', with: 'Secretaria de Educação', field: 'Descrição'
+      fill_with_autocomplete 'Unidade responsável pela execução', with: 'Secretaria de Educação'
     end
 
     within_tab 'Prazos' do
