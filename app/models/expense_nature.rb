@@ -51,47 +51,7 @@ class ExpenseNature < Accounting::Model
     by_year(year).by_expense_nature(code)
   }
 
-  def parent_code
-    return nil unless code.parent.present?
-
-    code.parent_with_mask(mask)
-  end
-
-  def code
-    ResourceCode.new(expense_nature)
-  end
-
   def to_s
     "#{expense_nature} - #{description}"
-  end
-
-  def updateable?
-    ExpenseNature.reflect_on_all_associations(:has_many).map(&:name).reject {
-      |name| self.send(name).empty?
-    }.empty?
-  end
-
-  protected
-
-  def set_parent
-    self.parent = if parent_code.present?
-                    ExpenseNature.by_year_and_code(year, parent_code).first
-                  end
-  end
-
-  def mask
-    '9.9.99.99.99'
-  end
-
-  def must_have_parent
-    return unless parent_code.present?
-
-    if parent.blank?
-      errors.add(:expense_nature, :dont_have_superior_code_level, :code => parent_code)
-    end
-  end
-
-  def self.value_or_nil(param)
-    param == '0' ? nil : param
   end
 end

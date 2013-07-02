@@ -13,5 +13,4 @@ class BudgetStructureResponsible < Accounting::Model
       Status::INACTIVE
     end
   end
-
 end
