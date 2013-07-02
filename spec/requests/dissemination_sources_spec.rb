@@ -52,11 +52,7 @@ feature "DisseminationSources" do
 
     click_link 'Jornal Oficial do Bairro'
 
-    click_link 'Apagar'
-
-    expect(page).to_not have_notice 'Meio de Divulgação apagada com sucesso.'
-
-    expect(page).to have_alert 'Meio de Divulgação não pode ser apagada.'
+    expect(page).to have_disabled_element 'Apagar', :reason => 'Este registro não pôde ser apagado pois há outros cadastros que dependem dele'
   end
 
   scenario 'index with columns at the index' do

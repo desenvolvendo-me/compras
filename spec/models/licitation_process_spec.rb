@@ -496,8 +496,8 @@ describe LicitationProcess do
   it { should_not allow_value('201').for(:year) }
   it { should_not allow_value('a201').for(:year) }
 
-  it "validate attribute changes if not updatable" do
-    subject.stub(:updatable? => false)
+  it "validate attribute changes if not updateable" do
+    subject.stub(:updateable? => false)
     subject.year = 2014
 
     subject.valid?
@@ -564,13 +564,13 @@ describe LicitationProcess do
     end
   end
 
-  describe "#updatable" do
+  describe "#updateable" do
 
     let(:ratifications) { double(:empty? => true) }
 
     let(:publications) do
       double(:empty? => true,
-             :current_updatable? => true)
+             :current_updateable? => true)
     end
 
     before do
@@ -582,33 +582,28 @@ describe LicitationProcess do
     it "returns true if it's a new record" do
       subject.stub(:new_record? => true)
 
-      expect(subject).to be_updatable
+      expect(subject).to be_updateable
     end
 
     it "returns true if there are no ratifications" do
       ratifications.stub(:empty? => true)
+      publications.stub(:current_updateable? => true)
 
-      expect(subject).to be_updatable
+      expect(subject).to be_updateable
     end
 
-    it "returns true if there are no publications" do
-      publications.stub(:empty? => true)
+    it "returns true if publications are updateable" do
+      publications.stub(:current_updateable? => true)
 
-      expect(subject).to be_updatable
-    end
-
-    it "returns true if publications are updatable" do
-      publications.stub(:current_updatable? => true)
-
-      expect(subject).to be_updatable
+      expect(subject).to be_updateable
     end
 
     it "returns false otherwise" do
-      publications.stub(:current_updatable? => false,
+      publications.stub(:current_updateable? => false,
                         :empty? => false)
       ratifications.stub(:empty? => false)
 
-      expect(subject).not_to be_updatable
+      expect(subject).not_to be_updateable
     end
   end
 

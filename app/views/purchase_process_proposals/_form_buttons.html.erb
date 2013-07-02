@@ -1,6 +1,6 @@
 <div class="buttons">
   <% if can?(:modify, main_controller_name) %>
-    <%= f.button :submit, 'data-disabled' => f.object.decorator.not_updatable_message %>
+    <%= f.button :submit, 'data-disabled' => not_updateable_message %>
   <% end %>
 
   <%= f.button :back, href:  purchase_process_proposals_path(licitation_process_id: resource.id) %>

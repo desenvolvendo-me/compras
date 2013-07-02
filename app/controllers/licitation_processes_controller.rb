@@ -62,9 +62,4 @@ class LicitationProcessesController < CrudController
       super
     end
   end
-
-  def update_resource(object, attributes)
-    return unless object.updatable?
-    super
-  end
 end

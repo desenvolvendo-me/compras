@@ -46,4 +46,14 @@ module LicitationProcessesHelper
       end
     end
   end
+
+  def not_updateable_message
+    return if (resource.updateable? && resource.persisted?)
+
+    if !resource.publications.current_updateable?
+      t('licitation_process.messages.no_one_publication_with_valid_type', :publication_of => resource.publications.current.publication_of_humanize)
+    elsif resource.licitation_process_ratifications.any?
+      t('licitation_process.messages.has_already_a_ratification')
+    end
+  end
 end

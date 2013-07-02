@@ -54,11 +54,7 @@ feature "DocumentTypes" do
 
     click_link 'Fiscal'
 
-    click_link 'Apagar'
-
-    expect(page).to_not have_notice 'Tipo de Documento apagado com sucesso.'
-
-    expect(page).to have_alert 'Tipo de Documento não pode ser apagado.'
+    expect(page).to have_disabled_element 'Apagar', :reason => 'Este registro não pôde ser apagado pois há outros cadastros que dependem dele'
   end
 
   scenario 'index with columns at the index' do

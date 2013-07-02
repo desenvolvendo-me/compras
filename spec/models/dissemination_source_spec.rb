@@ -12,24 +12,4 @@ describe DisseminationSource do
 
   it { should validate_presence_of :description }
   it { should validate_presence_of :communication_source }
-
-  context "with regulatory_acts" do
-    let :regulatory_acts do
-      [ double('regulatory_act') ]
-    end
-
-    it "should not destroy if has association with regulatory_acts" do
-      subject.stub(:regulatory_acts => regulatory_acts)
-
-      subject.run_callbacks(:destroy)
-
-      expect(subject.errors[:base]).to include "Este registro não pôde ser apagado pois há outros cadastros que dependem dele"
-    end
-  end
-
-  it "should destroy if does not have relationship with regulatory_acts" do
-    subject.run_callbacks(:destroy)
-
-    expect(subject.errors[:base]).to_not include "Este registro não pôde ser apagado pois há outros cadastros que dependem dele"
-  end
 end
