@@ -333,7 +333,7 @@ describe PurchaseProcessTradingItem do
       trading_item = PurchaseProcessTradingItem.create!(trading_id: trading.id,
         item_id: item.id)
 
-      LicitationProcess.make!(:processo_licitatorio)
+      LicitationProcess.make!(:processo_licitatorio, process: 2)
 
       expect(described_class.purchase_process_id(licitation.id)).to include(trading_item_arame_farpado, trading_item_arame, trading_item)
     end

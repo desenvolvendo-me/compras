@@ -5,7 +5,7 @@ module LicitationProcessRatificationsHelper
     if ratification.judgment_form_item?
       trading_or_proposals_path(ratification)
     else
-      realignment_prices_path
+      realignment_prices_path(purchase_process_id: ratification.licitation_process_id)
     end
   end
 

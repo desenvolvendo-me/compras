@@ -12,9 +12,9 @@ module TceExport::MG
           {
             tipo_registro: 10,
             cod_orgao: monthly_monitoring.organ_code,
-            cod_unidade_sub: budget_structure_code(proposal.licitation_process_execution_unit_responsible),
-            exercicio_licitacao: proposal.licitation_process_year,
-            nro_processo_licitatorio: proposal.licitation_process_process.to_s,
+            cod_unidade_sub: budget_structure_code(proposal),
+            exercicio_licitacao: year(proposal),
+            nro_processo_licitatorio: process(proposal).to_s,
             tp_documento: tp_documento(proposal.creditor),
             nro_documento: only_numbers(proposal.creditor_identity_document),
             nro_lote: lot_number(proposal),
@@ -23,7 +23,7 @@ module TceExport::MG
             vl_unitario: vl_unitario(proposal),
             quantidade: quantidade(proposal.item),
             unidade: proposal.material_reference_unit,
-            judgment_date_detail: generate_judment_date_detail(proposal.licitation_process)
+            judgment_date_detail: generate_judment_date_detail(purchase_process(proposal))
           }
         end
 
@@ -45,9 +45,9 @@ module TceExport::MG
         lots_global = PurchaseProcessCreditorProposal.by_ratification_month_and_year(
           monthly_monitoring.month, monthly_monitoring.year).judgment_by_lot_or_global
 
-        lots_global = lots_global.flat_map(&:realignment_prices)
+        lots_global = lots_global.flat_map(&:realignment_items)
 
-        [items + lots_global].flatten.sort_by(&:licitation_process_id)
+        [items + lots_global].flatten.sort_by { |proposal| purchase_process_id(proposal) }
       end
 
       def generate_judment_date_detail(licitation_process)
@@ -72,8 +72,8 @@ module TceExport::MG
         item.material.control_amount ? item.quantity : 1
       end
 
-      def budget_structure_code(budget)
-        Formatters::BudgetStructureCodeFormatter.new(monthly_monitoring.organ_code, budget)
+      def budget_structure_code(proposal)
+        Formatters::BudgetStructureCodeFormatter.new(monthly_monitoring.organ_code, execution_unit_responsible(proposal))
       end
 
       def vl_unitario(proposal)
@@ -81,11 +81,31 @@ module TceExport::MG
       end
 
       def realignment?(proposal)
-        proposal.is_a? RealignmentPrice
+        proposal.is_a? RealignmentPriceItem
       end
 
       def lot_number(proposal)
         proposal.lot || proposal.item.lot
+      end
+
+      def year(proposal)
+        realignment?(proposal) ? proposal.purchase_process_year : proposal.licitation_process_year
+      end
+
+      def execution_unit_responsible(proposal)
+        realignment?(proposal) ? proposal.purchase_process_execution_unit_responsible : proposal.licitation_process_execution_unit_responsible
+      end
+
+      def process(proposal)
+        realignment?(proposal) ? proposal.purchase_process_process : proposal.licitation_process_process
+      end
+
+      def purchase_process(proposal)
+        realignment?(proposal) ? proposal.purchase_process : proposal.licitation_process
+      end
+
+      def purchase_process_id(proposal)
+        realignment?(proposal) ? proposal.purchase_process.id : proposal.licitation_process_id
       end
     end
 
