@@ -82,9 +82,6 @@ pt-BR:
     dissemination_sources:
       <<: *female
 
-    entities:
-      <<: *female
-
     expense_natures:
       <<: *female
 
