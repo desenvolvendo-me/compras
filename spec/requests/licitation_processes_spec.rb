@@ -113,6 +113,8 @@ feature "LicitationProcesses" do
     within_tab 'Orçamento' do
       expect(page).to have_disabled_field 'Valor total dos itens', :with => '20,00'
 
+      fill_in 'Ano da dotação', with: '2013'
+
       fill_with_autocomplete 'Dotação orçamentária', :with => 'Aposentadorias'
 
       expect(page).to have_field 'Natureza da despesa', :with => '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
@@ -236,6 +238,7 @@ feature "LicitationProcesses" do
 
     within_tab 'Orçamento' do
       expect(page).to have_disabled_field 'Valor total das dotações', with: '270,00'
+      expect(page).to have_field 'Ano da dotação', with: '2013'
 
       within_records do
         expect(page).to have_content 'Dotação'

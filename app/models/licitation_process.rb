@@ -1,7 +1,7 @@
 class LicitationProcess < Compras::Model
   attr_accessible :payment_method_id, :type_of_purchase,
                   :year, :process_date,:readjustment_index_id, :caution_value,
-                  :envelope_delivery_date,
+                  :envelope_delivery_date, :budget_allocation_year,
                   :envelope_delivery_time, :proposal_envelope_opening_date,
                   :proposal_envelope_opening_time, :document_type_ids,
                   :period, :period_unit, :expiration, :expiration_unit,
