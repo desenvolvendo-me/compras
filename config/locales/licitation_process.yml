@@ -75,6 +75,7 @@ pt-BR:
         execution_unit_responsible: "Unidade responsável pela execução"
         justification: "Justificativa da escolha"
         justification_and_legal: "Justificativa e fundamentação legal"
+        budget_allocation_year: "Ano da dotação"
 
   licitation_process:
     messages:
