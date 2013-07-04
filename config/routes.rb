@@ -738,5 +738,6 @@ Compras::Application.routes.draw do
     resources :materials, :only => [:index, :show]
     resources :material_classes
     resources :purchase_processes, only: [:index, :show]
+    resources :contracts, only: [:index, :show]
   end
 end
