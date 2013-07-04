@@ -17,7 +17,7 @@ class PurchaseProcessTradingItem < Compras::Model
   has_one :negotiation, class_name: 'PurchaseProcessTradingItemNegotiation',
     dependent: :restrict, inverse_of: :item
 
-  delegate :lot, to: :item, allow_nil: true, prefix: true
+  delegate :lot, :quantity, to: :item, allow_nil: true, prefix: true
   delegate :lot?, :item?, :purchase_process_id, to: :trading, allow_nil: true
 
   validates :reduction_rate_value, numericality: { greater_than_or_equal_to: 0 }, on: :update
