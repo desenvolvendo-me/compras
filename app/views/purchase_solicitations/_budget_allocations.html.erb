@@ -1,4 +1,5 @@
 <%= f.input :purchase_solicitation_budget_allocations, as: :nested_grid,
-    :data_disabled => f.object.decorator.is_annulled_message,
+  data_disabled: f.object.decorator.is_annulled_message,
+  source_path: budget_allocations_path(by_year: (f.object.accounting_year || Date.current.year)),
     columns: [:budget_allocation, :budget_allocation_expense_nature, :expense_nature,
               :budget_allocation_amount, :estimated_value]%>
