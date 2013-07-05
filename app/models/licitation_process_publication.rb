@@ -19,7 +19,7 @@ class LicitationProcessPublication < Compras::Model
     where { publication_date.lteq(Date.current) }.order { publication_date }.last
   end
 
-  def self.current_updatable?
+  def self.current_updateable?
     current.nil? || current.updatable?
   end
 

@@ -11,8 +11,6 @@ class DocumentType < Compras::Model
   validates :description, :uniqueness => { :allow_blank => true }
   validates :validity, :numericality => { :allow_blank => true }
 
-  before_destroy :validate_licitation_process_relationship
-
   orderize :description
   filterize
 
@@ -20,13 +18,7 @@ class DocumentType < Compras::Model
     description
   end
 
-  protected
-
-  def validate_licitation_process_relationship
-    return unless licitation_processes.any?
-
-    errors.add(:base, :cant_be_destroyed)
-
-    false
+  def destroyable?
+    licitation_processes.empty?
   end
 end

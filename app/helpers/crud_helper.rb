@@ -128,4 +128,16 @@ module CrudHelper
   def state_format(state)
     StatePreposition.new(state).format
   end
+
+  def not_updateable_message
+    return if ((resource.updateable? && resource.persisted?) || resource.new_record?)
+
+    I18n.t("activerecord.errors.messages.cant_be_updated")
+  end
+
+  def not_destroyable_message
+    return if resource.destroyable?
+
+    I18n.t("activerecord.errors.messages.cant_be_destroyed")
+  end
 end

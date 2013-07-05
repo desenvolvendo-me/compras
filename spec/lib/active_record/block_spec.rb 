@@ -1,0 +1,57 @@
+# encoding: UTF-8
+
+require 'spec_helper'
+
+describe ActiveRecord::Block do
+  let!(:user) do
+    User.make!(:sobrinho)
+  end
+
+  after do
+    Machinist::Caching::Shop.instance.reset!
+  end
+
+  it "does not permit destroy a record if not destroyable" do
+    user.stub(:destroyable?).and_return(false)
+
+    expect do
+      user.destroy
+    end.to_not change(User, :count)
+
+    expect(user.errors[:base]).to include("Não pode ser apagado.")
+  end
+
+  it "does not permit to updade the attributes if not updateable" do
+    user.stub(:updateable?).and_return(false)
+
+    user.name = "Francisco"
+    user.login = "chico"
+
+    user.valid?
+
+    expect(user.errors[:name]).to include("não pode ser atualizado")
+    expect(user.errors[:login]).to include("não pode ser atualizado")
+  end
+
+  it "permits destroy a record" do
+    user.stub(:destroyable?).and_return(true)
+
+    expect do
+      user.destroy
+    end.to change(User, :count)
+
+    expect(user.errors[:base]).to_not include("Não pode ser apagado.")
+  end
+
+  it "permits to updade the attributes" do
+    user.stub(:updateable?).and_return(true)
+
+    user.name = "Francisco"
+    user.login = "chico"
+
+    user.valid?
+
+    expect(user.errors[:name]).to_not include("não pode ser atualizado")
+    expect(user.errors[:login]).to_not include("não pode ser atualizado")
+  end
+end

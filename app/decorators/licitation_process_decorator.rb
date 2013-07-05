@@ -41,18 +41,6 @@ class LicitationProcessDecorator
     t('licitation_process.messages.disabled_trading_message')
   end
 
-  def not_updatable_message
-    return if updatable?
-
-    if !publications.current_updatable?
-      t('licitation_process.messages.no_one_publication_with_valid_type', :publication_of => current_publication_of)
-    elsif licitation_process_ratifications.any?
-      t('licitation_process.messages.has_already_a_ratification')
-    elsif publications.any?
-      t('licitation_process.messages.has_already_a_publications')
-    end
-  end
-
   def disabled_envelope_message
     return if last_publication_date
 

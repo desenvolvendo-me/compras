@@ -116,7 +116,7 @@
 
   filterJudgmentForm();
 
-  <% unless resource.updatable? %>
+  <% unless resource.updateable? %>
     $(function(){
       $('form.licitation_process [data-disabled]').on('click', function(event){
         event.stopImmediatePropagation();

@@ -54,14 +54,6 @@ describe LicitationProcessesController do
         licitation_process.stub(:all_licitation_process_classifications => licitation_process_classifications)
       end
 
-      it 'should not update any field when publication not allow update licitation process' do
-        LicitationProcess.any_instance.stub(:updatable?).and_return(false)
-
-        put :update, :id => licitation_process.to_param, :licitation_process => { :description => "Descrição do objeto" }
-
-        expect(assigns(:licitation_process).description).to eq 'Licitação para compra de carteiras'
-      end
-
       it 'should redirect to administrative process edit page after update' do
         put :update, :id => licitation_process.id, :licitation_process => {}
 

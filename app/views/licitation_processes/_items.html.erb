@@ -56,7 +56,7 @@
            :class => 'button add-nested-record field-without-label',
            'data-template' => 'licitation_process_items_template',
            'data-records' => 'items-records',
-           'data-disabled' => f.object.decorator.not_updatable_message %>
+           'data-disabled' => not_updateable_message %>
       </div>
     </div>
   </div>
@@ -92,7 +92,7 @@
             unit_price: number_with_precision(p.object.unit_price),
             estimated_total_price: number_with_precision(p.object.estimated_total_price),
             additional_information: p.object.additional_information,
-            data_disabled: f.object.decorator.not_updatable_message,
+            data_disabled: not_updateable_message,
             f: p %>
       <% end %>
     </tbody>

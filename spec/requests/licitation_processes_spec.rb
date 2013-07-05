@@ -651,6 +651,7 @@ feature "LicitationProcesses" do
 
   scenario 'cannot show update and nested buttons when the publication is (extension, edital, edital_rectification)' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_publicacao_cancelada)
+    LicitationProcessPublication.make!(:publicacao_de_cancelamento, licitation_process: licitation_process)
 
     navigate 'Processos de Compra > Processos de Compras'
 

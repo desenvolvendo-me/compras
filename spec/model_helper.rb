@@ -19,6 +19,7 @@ require 'spec/support/delegate_matcher'
 require 'lib/active_record/filters/base'
 require 'lib/active_record/filters/filter'
 require 'lib/active_record/filter'
+require 'lib/active_record/block'
 
 class ActiveRecord::Base
   include ActiveRecord::Filter
