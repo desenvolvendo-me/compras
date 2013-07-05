@@ -23,7 +23,7 @@ module Api
       if material_class.save
         render :json => material_class
       else
-        render :json => { :errors => material_class.errors.full_messages }
+        render :json => { :errors => material_class.errors.full_messages }, :status => :unprocessable_entity
       end
     end
 
@@ -33,7 +33,7 @@ module Api
       if material_class.update_attributes(params[:material_class])
         render :json => material_class
       else
-        render :json => { :errors => material_class.errors.full_messages }
+        render :json => { :errors => material_class.errors.full_messages }, :status => :unprocessable_entity
       end
     end
 
@@ -43,7 +43,7 @@ module Api
       if material_class.destroy
         render :json => material_class
       else
-        render :json => { :errors => material_class.errors.full_messages }
+        render :json => { :errors => material_class.errors.full_messages }, :status => :unprocessable_entity
       end
     end
 
@@ -53,6 +53,7 @@ module Api
       material_class = MaterialClass.find(params[:id])
       material_class = material_class.parent if params[:parent]
       material_class = material_class.decorator.filled_masked_number.to_json if params[:filled_masked_number]
+      material_class = material_class.decorator.last_level_class_number.to_json if params[:last_level_class_number]
 
       material_class
     end
