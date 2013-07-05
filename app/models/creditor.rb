@@ -121,10 +121,10 @@ class Creditor < Compras::Model
     }.uniq
   }
 
-  scope :enabled_or_benefited, -> do
+  scope :enabled_or_benefited_by_purchase_process_id, -> purchase_process_id  do
     joins { bidders.creditor.person.personable(Company).outer.company_size.outer.extended_company_size.outer }.
     where {
-      bidders.enabled.eq('t') | compras_extended_company_sizes.benefited.eq(true)
+      (bidders.licitation_process_id.eq(purchase_process_id) & bidders.enabled.eq('t')) | compras_extended_company_sizes.benefited.eq(true)
     }.uniq
   end
 

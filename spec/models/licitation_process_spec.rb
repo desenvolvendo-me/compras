@@ -342,7 +342,7 @@ describe LicitationProcess do
 
         it 'should return the creditors scoped by enabled_or_benefited' do
           subject.should_receive(:creditors).and_return creditors
-          creditors.should_receive(:enabled_or_benefited).and_return ['creditor']
+          creditors.should_receive(:enabled_or_benefited_by_purchase_process_id).and_return ['creditor']
 
           expect(subject.creditors_enabled).to eq ['creditor']
         end
