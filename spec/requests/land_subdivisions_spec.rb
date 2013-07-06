@@ -6,7 +6,7 @@ feature "LandSubdivisions" do
     sign_in
   end
 
-  scenario 'create, update and destroy a new land subdivision' do
+  scenario 'create, update and destroy a new land subdivision', :only_monday do
     navigate 'Geral > Parâmetros > Endereços > Loteamentos'
 
     click_link 'Criar Loteamento'

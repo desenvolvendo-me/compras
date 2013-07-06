@@ -6,7 +6,7 @@ feature "Streets" do
     sign_in
   end
 
-  scenario 'create a new street, update and destroy an existing' do
+  scenario 'create a new street, update and destroy an existing', :only_monday do
     navigate 'Geral > Parâmetros > Endereços > Logradouros'
 
     click_link 'Criar Logradouro'

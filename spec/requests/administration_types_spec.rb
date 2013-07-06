@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
 
-feature "AdministrationTypes" do
+feature "AdministrationTypes", :only_monday do
   background do
     sign_in
   end

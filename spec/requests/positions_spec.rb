@@ -6,7 +6,7 @@ feature "Positions" do
     sign_in
   end
 
-  scenario 'create a new position, update and destroy an existing' do
+  scenario 'create a new position, update and destroy an existing', :only_monday do
     navigate 'Geral > Usuários > Cargos'
 
     click_link 'Criar Cargo'

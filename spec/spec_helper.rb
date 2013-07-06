@@ -47,6 +47,12 @@ RSpec.configure do |config|
   # mark test like intermittent
   config.filter_run_excluding :intermittent => true
 
+  config.treat_symbols_as_metadata_keys_with_true_values = true
+
+  unless Date.current.monday?
+    config.filter_run_excluding only_monday: true
+  end
+
   config.include FactoryGirl::Preload::Helpers
 
   config.before(:suite) do

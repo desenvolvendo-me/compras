@@ -6,7 +6,7 @@ feature "Neighborhoods" do
     sign_in
   end
 
-  scenario 'create, update and destroy a new neighborhood' do
+  scenario 'create, update and destroy a new neighborhood', :only_monday do
     navigate 'Geral > Parâmetros > Endereços > Bairros'
 
     click_link 'Criar Bairro'

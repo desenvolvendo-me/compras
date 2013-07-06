@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
 
-feature 'Account' do
+feature 'Account', :only_monday do
   let(:current_user) { User.make!(:sobrinho) }
 
   background do
