@@ -529,9 +529,9 @@ Compras::Application.routes.draw do
 
   resources :pledge_liquidation_annuls, :except => [:destroy, :update]
 
-  get "modal/pledge_liquidations", :as => "modal_pledge_liquidations"
+  get "pledge_liquidations/modal", :as => "modal_pledge_liquidations"
 
-  get "modal/pledges", :as => "modal_pledges"
+  get "pledges/modal", :as => "modal_pledges"
 
   resources :positions do
     collection do

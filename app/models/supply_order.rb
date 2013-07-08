@@ -1,9 +1,10 @@
 class SupplyOrder < Compras::Model
   attr_accessible :licitation_process_id, :creditor_id, :authorization_date,
-    :items_attributes, :year
+    :items_attributes, :year, :pledge_id
 
   belongs_to :licitation_process
   belongs_to :creditor
+  belongs_to :pledge
 
   has_many :items, class_name: 'SupplyOrderItem', dependent: :destroy
 

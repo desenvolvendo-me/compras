@@ -34,6 +34,8 @@ feature "SupplyOrder" do
       licitation_process: licitation_process,
       licitation_process_ratification_items: [ratification_item_1, ratification_item_2])
 
+    Pledge.make!(:empenho_em_quinze_dias)
+
     first_div_path = '//*[@id="supply_order_items"]/div[1]'
     last_div_path  = '//*[@id="supply_order_items"]/div[2]'
 
@@ -73,6 +75,11 @@ feature "SupplyOrder" do
       expect(page).to have_disabled_field 'Qtde já autorizada', with: '0'
       expect(page).to have_disabled_field 'Saldo', with: '2'
       expect(page).to have_field 'Qtde a autorizar', with: ''
+    end
+
+    within_modal 'Empenho' do
+      click_button 'Pesquisar'
+      click_record 'Wenderson Malheiros'
     end
 
     click_button 'Salvar'

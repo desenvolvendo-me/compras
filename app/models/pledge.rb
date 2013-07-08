@@ -4,8 +4,8 @@ class Pledge < Accounting::Model
 
   attr_accessor :licitation, :process, :item_replicated_value, :parcel_replicated_value
 
-  attr_modal :year, :code, :emission_date, :management_unit_id,
-             :budget_allocation_id, :creditor_id, :precatory_id
+  attr_modal :year, :code, :emission_date,
+             :budget_allocation_id, :creditor_id
 
   has_enumeration_for :material_kind
 
@@ -27,9 +27,7 @@ class Pledge < Accounting::Model
 
   has_many :pledge_items, :dependent => :destroy, :inverse_of => :pledge, :order => :id
   has_many :pledge_cancellations, :dependent => :restrict
-  has_many :pledge_liquidations, :dependent => :restrict
-  has_many :pledge_liquidation_parcels, :through => :pledge_liquidations
-  has_many :payments, :through => :pledge_liquidation_parcels
+  has_many :supply_orders, dependent: :restrict
 
   accepts_nested_attributes_for :pledge_items, :allow_destroy => true
 

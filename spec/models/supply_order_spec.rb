@@ -6,6 +6,7 @@ require 'app/models/supply_order_item'
 describe SupplyOrder do
   it { should belong_to :creditor }
   it { should belong_to :licitation_process }
+  it { should belong_to :pledge }
 
   it { should have_many(:items).class_name('SupplyOrderItem').dependent(:destroy) }
 
