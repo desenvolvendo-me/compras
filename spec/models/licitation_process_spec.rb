@@ -119,6 +119,8 @@ describe LicitationProcess do
   it { should_not validate_presence_of :licensor_rights_and_liabilities }
   it { should_not validate_presence_of :licensee_rights_and_liabilities }
 
+  it { should validate_numericality_of :budget_allocation_year }
+
   it { should delegate(:lot?).to(:judgment_form).allowing_nil(true).prefix(true) }
   it { should delegate(:item?).to(:judgment_form).allowing_nil(true).prefix(true) }
   it { should delegate(:global?).to(:judgment_form).allowing_nil(true).prefix(true) }
@@ -163,6 +165,17 @@ describe LicitationProcess do
       it 'returns number and modality' do
         expect(subject.modality_or_type_of_removal).to eql '1 - Afastamento'
       end
+    end
+  end
+
+  context 'validations' do
+    it 'should not allow year greater than to budget_allocation_year' do
+      subject.year = 2013
+      subject.budget_allocation_year = 2012
+
+      subject.valid?
+
+      expect(subject.errors[:budget_allocation_year]).to include('deve ser maior ou igual a 2013')
     end
   end
 
