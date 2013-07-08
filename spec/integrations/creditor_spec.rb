@@ -35,12 +35,13 @@ describe Creditor do
     end
   end
 
-  describe '.enabled_or_benefited' do
+  describe '.enabled_or_benefited_by_purchase_process_id' do
     it 'should list only creditors benefited or enabled' do
       ibm       = Creditor.make!(:ibm)
       wenderson = Creditor.make!(:wenderson_sa)
       nobe      = Creditor.make!(:nobe)
       nohup     = Creditor.make!(:nohup)
+
       licitation_process = LicitationProcess.make!(:processo_licitatorio_canetas,
         bidders: [
           Bidder.make!(:licitante, creditor: wenderson, proposals: [], documents: [], enabled: true),
@@ -49,8 +50,20 @@ describe Creditor do
           Bidder.make!(:me_pregao, creditor: nohup, proposals: [], documents: [], enabled: false)
         ])
 
-      expect(described_class.enabled_or_benefited).to include(wenderson, nobe, nohup)
-      expect(described_class.enabled_or_benefited).to_not include(ibm)
+      licitation_process_2 = LicitationProcess.make!(:processo_licitatorio_canetas,
+        process: 3,
+        bidders: [
+          Bidder.make!(:licitante, creditor: wenderson, proposals: [], documents: [], enabled: false, protocol: '1234567'),
+          Bidder.make!(:licitante_sobrinho, creditor: ibm, proposals: [], documents: [], enabled: false, protocol: '1234567'),
+          Bidder.make!(:me_pregao, creditor: nobe, proposals: [], documents: [], enabled: true, protocol: '1234567'),
+          Bidder.make!(:me_pregao, creditor: nohup, proposals: [], documents: [], enabled: false, protocol: '1234567')
+        ])
+
+      expect(described_class.enabled_or_benefited_by_purchase_process_id(licitation_process.id)).to include(wenderson, nobe, nohup)
+      expect(described_class.enabled_or_benefited_by_purchase_process_id(licitation_process.id)).to_not include(ibm)
+
+      expect(described_class.enabled_or_benefited_by_purchase_process_id(licitation_process_2.id)).to include(nobe, nohup)
+      expect(described_class.enabled_or_benefited_by_purchase_process_id(licitation_process_2.id)).to_not include(ibm, wenderson)
     end
   end
 

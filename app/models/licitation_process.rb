@@ -220,7 +220,7 @@ class LicitationProcess < Compras::Model
   def creditors_enabled
     return creditors if trading?
 
-    creditors.enabled_or_benefited
+    creditors.enabled_or_benefited_by_purchase_process_id(self.id)
   end
 
   def update_status(status)
