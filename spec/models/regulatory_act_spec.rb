@@ -15,8 +15,6 @@ describe RegulatoryAct do
     it { should have_many(:budget_structure_responsibles).dependent(:restrict) }
     it { should have_many(:agreements).dependent(:restrict) }
     it { should have_many(:children).dependent(:restrict) }
-
-    it { should have_and_belong_to_many :dissemination_sources}
   end
 
   context 'Delegations' do
