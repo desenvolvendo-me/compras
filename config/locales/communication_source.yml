@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      communication_source:
+        one: "Tipo do Meio de Divulgação"
+        other: "Tipos do Meio de Divulgação"
+
+    attributes:
+      communication_source:
+        description: "Descrição"
