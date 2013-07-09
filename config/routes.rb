@@ -55,6 +55,12 @@ Compras::Application.routes.draw do
     end
   end
 
+  resources :accounting_accounts, only: [:index, :modal] do
+    collection do
+      get :modal
+    end
+  end
+
   resources :addresses
 
   resources :regulatory_acts do
