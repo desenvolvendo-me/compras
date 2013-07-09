@@ -19,7 +19,6 @@ class RegulatoryAct < Compras::Model
 
   has_many :budget_structure_configurations, :dependent => :restrict
   has_many :budget_structure_responsibles, :dependent => :restrict
-  has_many :agreements, :dependent => :restrict
   has_many :children, :class_name => 'RegulatoryAct', :foreign_key => :parent_id, :dependent => :restrict
 
   delegate :classification_law?, :regulatory_act_type_budget_change?, :regulatory_act_type_loa?, :to => :parent, :prefix => true, :allow_nil => true
