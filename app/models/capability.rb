@@ -13,7 +13,6 @@ class Capability < Accounting::Model
   has_many :budget_allocation_capabilities, :dependent => :restrict
   has_many :budget_allocations, :through => :budget_allocation_capabilities
   has_many :extra_credit_moviment_types, :dependent => :restrict
-  has_many :bank_account_capabilities, :dependent => :restrict
   has_many :pledges, :dependent => :restrict
 
   has_one :capability_source, :through => :tce_specification_capability
