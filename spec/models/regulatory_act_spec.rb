@@ -10,7 +10,6 @@ describe RegulatoryAct do
   context 'Relationships' do
     it { should belong_to :parent }
 
-    it { should have_many(:expense_natures).dependent(:restrict) }
     it { should have_many(:budget_structure_configurations).dependent(:restrict) }
     it { should have_many(:budget_structure_responsibles).dependent(:restrict) }
     it { should have_many(:agreements).dependent(:restrict) }

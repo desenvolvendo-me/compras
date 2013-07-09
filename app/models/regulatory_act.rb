@@ -17,7 +17,6 @@ class RegulatoryAct < Compras::Model
 
   belongs_to :parent, :class_name => 'RegulatoryAct'
 
-  has_many :expense_natures, :dependent => :restrict
   has_many :budget_structure_configurations, :dependent => :restrict
   has_many :budget_structure_responsibles, :dependent => :restrict
   has_many :agreements, :dependent => :restrict
