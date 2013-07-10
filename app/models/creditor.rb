@@ -41,7 +41,6 @@ class Creditor < Compras::Model
   has_many :regularization_or_administrative_sanctions, :inverse_of => :creditor, :dependent => :destroy
   has_many :representative_people, :through => :representatives, :source => :representative_person
   has_many :representatives, :class_name => 'CreditorRepresentative', :dependent => :destroy, :order => :id
-  has_many :reserve_funds, :dependent => :restrict
   has_many :purchase_process_accreditation_creditors, :dependent => :restrict
   has_many :purchase_process_items, :dependent => :restrict
   has_many :purchase_process_creditor_proposals, dependent: :restrict

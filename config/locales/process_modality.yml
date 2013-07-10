@@ -1,0 +1,10 @@
+pt-BR:
+  enumerations:
+    "unico_api/resources/contabilidade/enumerations/process_modality":
+      no_or_dispensing_by_value: "Não ou dispensa por valor (art. 24, I e II da Lei 8.666/93)"
+      licitation: "Licitação"
+      exemption_or_unenforceability: "Dispensa ou Inexigibilidade"
+      adherence_to_statement_of_price: "Adesão à ata de registro de preços"
+      licitation_realized_by_another_entity: "Licitação realizada por outro órgão ou entidade"
+      exemption_or_unenforceability_realized_by_another_entity: "Dispensa ou Inexigibilidade realizada por outro órgão ou entidade"
+      licitation_regime_differentiated_public_procurement: "Licitação - Regime Diferenciado de Contratações Públicas – RDC, conforme Lei nº 12.462/2011"

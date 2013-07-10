@@ -171,9 +171,6 @@ pt-BR:
     reference_units:
       <<: *female
 
-    reserve_funds:
-      <<: *female
-
     revenue_natures:
       <<: *female
 
