@@ -321,7 +321,7 @@ describe Creditor do
 
           LicitationProcess.make!(:processo_licitatorio)
 
-          expect(described_class.winners(licitation)).to eq [creditor_wenderson, creditor_sobrinho]
+          expect(described_class.winners(licitation)).to include(creditor_wenderson, creditor_sobrinho)
         end
       end
     end
