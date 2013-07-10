@@ -8,6 +8,7 @@ describe PurchaseProcessTrading do
   it { should have_many(:items) }
   it { should have_many(:accreditation_creditors).through(:purchase_process_accreditation) }
   it { should have_many(:creditors).through(:accreditation_creditors) }
+  it { should have_many(:items_bids).through(:items) }
 
   it { should have_one(:judgment_form).through(:purchase_process) }
   it { should have_one(:purchase_process_accreditation).through(:purchase_process) }

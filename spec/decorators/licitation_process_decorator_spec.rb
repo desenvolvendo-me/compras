@@ -275,6 +275,38 @@ describe LicitationProcessDecorator do
     end
   end
 
+  describe '#must_have_trading' do
+    let(:trading) { double('trading') }
+
+    before do
+      I18n.backend.store_translations 'pt-BR', licitation_process: {
+        messages: {
+          must_have_trading: 'deve ter lances'
+        }
+      }
+    end
+
+    context 'when trading is nil?' do
+      before do
+        component.stub(:trading).and_return nil
+      end
+
+      it 'return a message' do
+        expect(subject.must_have_trading).to eq 'deve ter lances'
+      end
+    end
+
+    context 'when trading is not nil' do
+      before do
+        component.stub(:trading).and_return trading
+      end
+
+      it 'return nil' do
+        expect(subject.must_have_trading).to be_nil
+      end
+    end
+  end
+
   describe '#proposals_total_price' do
     it 'returns the localized proposals total price' do
       creditor = double(:creditor)

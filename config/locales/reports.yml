@@ -14,3 +14,7 @@ pt-BR:
       one: "ATA do processo de compra pregão"
       other: "ATA do processo de compra pregão"
 
+  map_of_bid_reports:
+    map_of_bid_report:
+      one: "Mapa de lance"
+      other: "Mapas de lances"

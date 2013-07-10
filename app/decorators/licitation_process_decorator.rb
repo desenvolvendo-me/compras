@@ -65,6 +65,12 @@ class LicitationProcessDecorator
     end
   end
 
+  def must_have_trading
+    return unless component.trading.nil?
+
+    t("licitation_process.messages.must_have_trading")
+  end
+
   def disabled_negotiation_message
     return if trading_allow_negotiation?
 
