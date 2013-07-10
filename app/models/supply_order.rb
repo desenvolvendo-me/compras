@@ -4,7 +4,6 @@ class SupplyOrder < Compras::Model
 
   belongs_to :licitation_process
   belongs_to :creditor
-  belongs_to :pledge
 
   has_many :items, class_name: 'SupplyOrderItem', dependent: :destroy
 
@@ -17,4 +16,8 @@ class SupplyOrder < Compras::Model
 
   orderize "id DESC"
   filterize
+
+  def pledge
+    @pledge ||= Pledge.find(pledge_id) if pledge_id
+  end
 end

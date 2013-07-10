@@ -7,6 +7,7 @@ class ContractDecorator
   attr_header :contract_number, :year, :publication_date
 
   def all_pledges_total_value
-    number_to_currency super if super
+    return number_to_currency super if component.persisted? && super
+    number_to_currency 0.0
   end
 end

@@ -2,8 +2,23 @@
 require 'spec_helper'
 
 feature "Contracts" do
+  let :pledge do
+    Pledge.new(id: 1, value: 9.99, description: 'Empenho 1',
+      year: 2013, to_s: 1, emission_date: "2013-01-01")
+  end
+
+  let :pledge_two do
+    Pledge.new(id: 2, value: 15.99, description: 'Empenho 2',
+      year: 2012, to_s: 2, emission_date: "2012-01-01")
+  end
+
   background do
     sign_in
+
+    UnicoAPI::Resources::Contabilidade::Pledge.stub(:all).and_return([pledge, pledge_two])
+
+    UnicoAPI::Resources::Contabilidade::Pledge.stub(:find).with(1).and_return(pledge)
+    UnicoAPI::Resources::Contabilidade::Pledge.stub(:find).with(2).and_return(pledge_two)
   end
 
   scenario 'picking a licitation process' do
@@ -181,9 +196,7 @@ feature "Contracts" do
   end
 
   scenario 'show pledges' do
-    Pledge.make!(:empenho_em_quinze_dias)
-    Pledge.make!(:founded_debt)
-
+    Contract.make!(:primeiro_contrato)
     navigate 'Instrumentos Contratuais > Contratos'
 
     click_link "Limpar Filtro"
@@ -195,8 +208,10 @@ feature "Contracts" do
     click_link 'Empenhos'
 
     expect(page).to have_content '9,99'
-    expect(page).to have_content I18n.l(Date.current + 15.days)
-    expect(page).to have_content '19,98'
+    expect(page).to have_content '01/01/2013'
+    expect(page).to have_content '15,99'
+    expect(page).to have_content '01/01/2012'
+    expect(page).to have_content '25,98'
   end
 
   scenario 'add contract additives' do

@@ -1,3 +1,2 @@
-class PledgesController < CrudController
-  actions :all, :except => [:update, :destroy]
+class PledgesController < ApiConsumerController
 end

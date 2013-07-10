@@ -29,8 +29,6 @@ describe Contract do
   it { should belong_to :lawyer }
   it { should have_many(:delivery_schedules).dependent(:destroy).order(:sequence) }
   it { should have_many(:occurrence_contractual_historics).dependent(:restrict) }
-  it { should have_many(:pledges).dependent(:restrict) }
-  it { should have_many(:founded_debt_pledges).dependent(:restrict) }
   it { should have_many(:additives).dependent(:restrict) }
   it { should have_one(:contract_termination).dependent(:restrict) }
   it { should have_and_belong_to_many(:creditors).order(:id) }
@@ -39,8 +37,6 @@ describe Contract do
     subject.contract_number = '001'
     expect(subject.to_s).to eq '001'
   end
-
-  it { should have_many(:pledges).dependent(:restrict) }
 
   it { should delegate(:modality_humanize).to(:licitation_process).allowing_nil(true).prefix(true) }
   it { should delegate(:type_of_removal_humanize).to(:licitation_process).allowing_nil(true).prefix(true) }

@@ -6,16 +6,18 @@ describe ContractDecorator do
   context '#all_pledges_total_value' do
     context 'when do not have all_pledges_total_value' do
       before do
+        component.stub(:persisted?).and_return false
         component.stub(:all_pledges_total_value).and_return(nil)
       end
 
       it 'should be nil' do
-        expect(subject.all_pledges_total_value).to be_nil
+        expect(subject.all_pledges_total_value).to eq 'R$ 0,00'
       end
     end
 
     context 'when have all_pledges_total_value' do
       before do
+        component.stub(:persisted?).and_return true
         component.stub(:all_pledges_total_value).and_return(100.0)
       end
 
