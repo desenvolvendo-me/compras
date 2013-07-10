@@ -1,5 +1,5 @@
 ManagementUnit.blueprint(:unidade_central) do
-  descriptor { Descriptor.make!(:detran_2012) }
+  descriptor_id { 1 }
   description { "Unidade Central" }
   acronym { "UGC" }
   status { Status::ACTIVE }

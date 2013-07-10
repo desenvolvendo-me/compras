@@ -1,17 +1,18 @@
 pt-BR:
-  activerecord:
+  activemodel:
     models:
-      descriptor:
+      "unico_api/resources/contabilidade/descriptor":
         one: "Descritor"
         other: "Descritores"
 
     attributes:
-      descriptor:
+      "unico_api/resources/contabilidade/descriptor":
         period: "Exercício"
         year: "Ano do exercício"
         month: "Mês do exercício"
+        entity: "Entidade"
 
   simple_form:
     hints:
-      descriptor:
+      "unico_api/resources/contabilidade/descriptor":
         period: "Exemplo: 10/2012"

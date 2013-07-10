@@ -3,14 +3,16 @@ class ManagementUnit < Compras::Model
 
   has_enumeration_for :status, :create_helpers => true
 
-  belongs_to :descriptor
-
   has_many :pledges, :dependent => :restrict
 
-  validates :descriptor, :description, :acronym, :status, :presence => true
+  validates :descriptor_id, :description, :acronym, :status, :presence => true
 
   orderize :description
   filterize
+
+  def descriptor
+    @descriptor ||= Descriptor.find(descriptor_id) if descriptor_id
+  end
 
   def to_s
     description

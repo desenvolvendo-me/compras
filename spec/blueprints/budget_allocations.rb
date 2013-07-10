@@ -1,6 +1,6 @@
 # encoding: utf-8
 BudgetAllocation.blueprint(:alocacao) do
-  descriptor { Descriptor.make!(:detran_2012) }
+  descriptor_id { 1 }
   code { 1 }
   budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
   function { Function.make!(:administracao) }
@@ -23,7 +23,7 @@ BudgetAllocation.blueprint(:alocacao) do
 end
 
 BudgetAllocation.blueprint(:alocacao_extra) do
-  descriptor { Descriptor.make!(:detran_2011) }
+  descriptor_id { 1 }
   code { 1 }
   budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
   function { Function.make!(:administracao) }
@@ -45,7 +45,7 @@ BudgetAllocation.blueprint(:alocacao_extra) do
 end
 
 BudgetAllocation.blueprint(:reparo_2011) do
-  descriptor { Descriptor.make!(:secretaria_de_educacao_2011) }
+  descriptor_id { 1 }
   code { 1 }
   budget_structure { BudgetStructure.make!(:secretaria_de_desenvolvimento) }
   function { Function.make!(:administracao) }

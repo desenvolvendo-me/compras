@@ -1,5 +1,5 @@
 Pledge.blueprint(:empenho_em_quinze_dias) do
-  descriptor { Descriptor.make!(:detran_2012) }
+  descriptor_id { 1 }
   reserve_fund { ReserveFund.make!(:detran_2012) }
   management_unit { ManagementUnit.make!(:unidade_central) }
   emission_date { Date.current + 15.days }
@@ -16,7 +16,7 @@ Pledge.blueprint(:empenho_em_quinze_dias) do
 end
 
 Pledge.blueprint(:founded_debt) do
-  descriptor { Descriptor.make!(:detran_2012) }
+  descriptor_id { 1 }
   reserve_fund { ReserveFund.make!(:detran_2012) }
   management_unit { ManagementUnit.make!(:unidade_central) }
   emission_date { Date.current + 15.days }
