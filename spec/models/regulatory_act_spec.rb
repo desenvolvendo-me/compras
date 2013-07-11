@@ -1,5 +1,6 @@
 # encoding: utf-8
 require 'model_helper'
+require 'app/models/unico/regulatory_act'
 require 'app/models/regulatory_act'
 require 'app/models/expense_nature'
 require 'app/models/budget_structure_configuration'
@@ -8,15 +9,9 @@ require 'app/models/agreement'
 
 describe RegulatoryAct do
   context 'Relationships' do
-    it { should belong_to :parent }
-
-    it { should have_many(:expense_natures).dependent(:restrict) }
     it { should have_many(:budget_structure_configurations).dependent(:restrict) }
     it { should have_many(:budget_structure_responsibles).dependent(:restrict) }
-    it { should have_many(:agreements).dependent(:restrict) }
-    it { should have_many(:children).dependent(:restrict) }
-
-    it { should have_and_belong_to_many :dissemination_sources}
+    it { should have_and_belong_to_many(:dissemination_sources) }
   end
 
   context 'Delegations' do

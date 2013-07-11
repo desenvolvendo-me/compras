@@ -1,6 +1,5 @@
 require 'model_helper'
 require 'app/models/contract'
-require 'app/models/dissemination_source'
 require 'app/models/contract_termination'
 require 'lib/annullable'
 require 'app/models/resource_annul'

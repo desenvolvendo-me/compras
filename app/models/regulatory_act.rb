@@ -1,12 +1,5 @@
 # encoding: utf-8
-class RegulatoryAct < Compras::Model
-  attr_accessible :act_number, :regulatory_act_type, :creation_date,
-                  :publication_date, :vigor_date, :end_date, :content,
-                  :signature_date, :dissemination_source_ids, :article_number,
-                  :article_description, :classification, :parent_id,
-                  :budget_change_decree_type, :origin, :budget_change_law_type,
-                  :authorized_value, :additional_percent
-
+class RegulatoryAct < Unico::RegulatoryAct
   attr_modal :act_number, :regulatory_act_type
 
   has_enumeration_for :classification, :with => RegulatoryActClassification, :create_helpers => { :prefix => true }
@@ -15,15 +8,10 @@ class RegulatoryAct < Compras::Model
   has_enumeration_for :budget_change_law_type
   has_enumeration_for :regulatory_act_type, :create_helpers => { :prefix => true }
 
-  belongs_to :parent, :class_name => 'RegulatoryAct'
-
-  has_and_belongs_to_many :dissemination_sources, :join_table => :compras_dissemination_sources_compras_regulatory_acts
-
-  has_many :expense_natures, :dependent => :restrict
   has_many :budget_structure_configurations, :dependent => :restrict
   has_many :budget_structure_responsibles, :dependent => :restrict
-  has_many :agreements, :dependent => :restrict
-  has_many :children, :class_name => 'RegulatoryAct', :foreign_key => :parent_id, :dependent => :restrict
+
+  has_and_belongs_to_many :dissemination_sources, join_table: :unico_dissemination_sources_unico_regulatory_acts
 
   delegate :classification_law?, :regulatory_act_type_budget_change?, :regulatory_act_type_loa?, :to => :parent, :prefix => true, :allow_nil => true
 

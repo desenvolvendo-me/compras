@@ -2,7 +2,6 @@
 require 'model_helper'
 require 'app/models/contract'
 require 'app/models/pledge'
-require 'app/models/dissemination_source'
 require 'app/models/persona/person'
 require 'app/models/person'
 require 'app/models/creditor'
