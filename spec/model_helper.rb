@@ -127,3 +127,5 @@ require 'app/models/unico/prefecture'
 require 'app/models/prefecture'
 
 require 'activerecord-postgres-hstore'
+
+require 'lib/belongs_to_resource'
