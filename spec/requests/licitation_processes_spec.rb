@@ -44,7 +44,6 @@ feature "LicitationProcesses" do
 
     within_tab 'Principal' do
       expect(page).to have_disabled_field 'Status'
-      expect(page).to have_disabled_field 'Processo'
       expect(page).to have_disabled_field 'Nº do afastamento'
 
       choose 'Processo licitatório'
@@ -2211,5 +2210,214 @@ feature "LicitationProcesses" do
     click_button 'Salvar'
 
     expect(page).to have_notice "Processo de Compra 123/#{Date.current.year} editado com sucesso."
+  end
+
+  scenario 'should auto_increment process in licitation_process when process is blank' do
+    LicitationProcess.make!(:pregao_presencial, year: 2013)
+    PaymentMethod.make!(:dinheiro)
+    DocumentType.make!(:fiscal)
+    DocumentType.make!(:oficial)
+    JudgmentForm.make!(:por_item_com_menor_preco)
+    BudgetAllocation.make!(:alocacao, year: 2013)
+    BudgetAllocation.make!(:reparo_2011, year: 2013, expense_nature: ExpenseNature.make!(:aplicacoes_diretas))
+    Material.make!(:antivirus)
+    Material.make!(:arame_farpado)
+    Indexer.make!(:xpto)
+    ExpenseNature.make!(:aposentadorias_rpps, :year => Date.current.year)
+    ExpenseNature.make!(:compra_de_material, :year => Date.current.year, parent: ExpenseNature.make!(:aplicacoes_diretas))
+
+    navigate 'Processos de Compra > Processos de Compras'
+
+    click_link 'Criar Processo de Compra'
+
+    expect(page).to have_content "Criar Processo"
+
+    within_tab 'Principal' do
+      choose 'Processo licitatório'
+
+      select 'Compras e serviços', :from => 'Tipo de objeto'
+      select 'Concorrência', :from => 'Modalidade'
+      fill_in 'Objeto do processo de compra', :with => 'Licitação para compra de carteiras'
+
+      check 'Registro de preço'
+      select 'Por Item com Menor Preço', :from =>'Forma de julgamento'
+      select 'Empreitada integral', :from => 'Forma de execução'
+      select 'Fiança bancária', :from => 'Tipo de garantia'
+
+      fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
+    end
+
+    within_tab 'Prazos' do
+      fill_in 'Data da disponibilidade', :with => I18n.l(Date.current)
+      fill_modal 'Contato para informações', :with => '958473', :field => 'Matrícula'
+
+      fill_in 'Término do recebimento dos envelopes', :with => I18n.l(Date.current)
+      fill_in 'Hora do recebimento', :with => '14:00'
+
+      fill_in 'Validade da proposta', :with => '5'
+      select 'dia/dias', :from => 'Período da validade da proposta'
+
+      fill_in 'Prazo de entrega', :with => '1'
+      select 'ano/anos', :from => 'Período do prazo de entrega'
+    end
+
+    within_tab "Itens" do
+      fill_in 'Lote', :with => '2234'
+
+      fill_with_autocomplete 'Material', :with => 'Antivirus'
+
+      fill_in 'Quantidade', :with => '2'
+      fill_in 'Valor unitário máximo', :with => '10,00'
+      fill_in 'Informações complementares', :with => 'Produto antivirus avast'
+
+      click_button 'Adicionar'
+    end
+
+    within_tab 'Orçamento' do
+      fill_in 'Ano da dotação', with: '2013'
+
+      fill_with_autocomplete 'Dotação orçamentária', :with => 'Aposentadorias'
+
+      fill_with_autocomplete 'Desdobramento', :with => '3.1'
+
+      fill_in 'Valor previsto', :with => '20,00'
+
+      click_button 'Adicionar'
+
+      fill_with_autocomplete 'Dotação orçamentária', :with => 'Aplicações'
+
+      fill_with_autocomplete 'Desdobramento', :with => '3.0'
+
+      fill_in 'Valor previsto', :with => '250,00'
+
+      click_button 'Adicionar'
+    end
+
+    within_tab 'Documentos' do
+      fill_modal 'Tipo de documento', :with => 'Fiscal', :field => 'Descrição'
+    end
+
+    within_tab 'Receita' do
+      fill_in 'Prazo da concessão', :with => '1'
+      select 'ano/anos', :from => 'Unidade do prazo da concessão'
+
+      expect(page).to_not have_field 'Valor da oferta mínima para alienações'
+      expect(page).to_not have_field 'Meta'
+      expect(page).to_not have_field 'Direitos e obrigações do concedente'
+      expect(page).to_not have_field 'Diretos e obrigações do concedido'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice "Processo de Compra 2/#{Date.current.year} criado com sucesso."
+
+    within_tab 'Principal' do
+      expect(page).to have_field 'Processo', :with => '2'
+    end
+  end
+
+  scenario 'should not auto_increment process in licitation_process when process is not blank' do
+    PaymentMethod.make!(:dinheiro)
+    DocumentType.make!(:fiscal)
+    DocumentType.make!(:oficial)
+    JudgmentForm.make!(:por_item_com_menor_preco)
+    BudgetAllocation.make!(:alocacao, year: 2013)
+    BudgetAllocation.make!(:reparo_2011, year: 2013, expense_nature: ExpenseNature.make!(:aplicacoes_diretas))
+    Material.make!(:antivirus)
+    Material.make!(:arame_farpado)
+    Indexer.make!(:xpto)
+    ExpenseNature.make!(:aposentadorias_rpps, :year => Date.current.year)
+    ExpenseNature.make!(:compra_de_material, :year => Date.current.year, parent: ExpenseNature.make!(:aplicacoes_diretas))
+
+    navigate 'Processos de Compra > Processos de Compras'
+
+    click_link 'Criar Processo de Compra'
+
+    expect(page).to have_content "Criar Processo"
+
+    within_tab 'Principal' do
+      choose 'Processo licitatório'
+
+      fill_in 'Processo', with: '3'
+
+      select 'Compras e serviços', :from => 'Tipo de objeto'
+      select 'Concorrência', :from => 'Modalidade'
+      fill_in 'Objeto do processo de compra', :with => 'Licitação para compra de carteiras'
+
+      check 'Registro de preço'
+      select 'Por Item com Menor Preço', :from =>'Forma de julgamento'
+      select 'Empreitada integral', :from => 'Forma de execução'
+      select 'Fiança bancária', :from => 'Tipo de garantia'
+
+      fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
+    end
+
+    within_tab 'Prazos' do
+      fill_in 'Data da disponibilidade', :with => I18n.l(Date.current)
+      fill_modal 'Contato para informações', :with => '958473', :field => 'Matrícula'
+
+      fill_in 'Término do recebimento dos envelopes', :with => I18n.l(Date.current)
+      fill_in 'Hora do recebimento', :with => '14:00'
+
+      fill_in 'Validade da proposta', :with => '5'
+      select 'dia/dias', :from => 'Período da validade da proposta'
+
+      fill_in 'Prazo de entrega', :with => '1'
+      select 'ano/anos', :from => 'Período do prazo de entrega'
+    end
+
+    within_tab "Itens" do
+      fill_in 'Lote', :with => '2234'
+
+      fill_with_autocomplete 'Material', :with => 'Antivirus'
+
+      fill_in 'Quantidade', :with => '2'
+      fill_in 'Valor unitário máximo', :with => '10,00'
+      fill_in 'Informações complementares', :with => 'Produto antivirus avast'
+
+      click_button 'Adicionar'
+    end
+
+    within_tab 'Orçamento' do
+      fill_in 'Ano da dotação', with: '2013'
+
+      fill_with_autocomplete 'Dotação orçamentária', :with => 'Aposentadorias'
+
+      fill_with_autocomplete 'Desdobramento', :with => '3.1'
+
+      fill_in 'Valor previsto', :with => '20,00'
+
+      click_button 'Adicionar'
+
+      fill_with_autocomplete 'Dotação orçamentária', :with => 'Aplicações'
+
+      fill_with_autocomplete 'Desdobramento', :with => '3.0'
+
+      fill_in 'Valor previsto', :with => '250,00'
+
+      click_button 'Adicionar'
+    end
+
+    within_tab 'Documentos' do
+      fill_modal 'Tipo de documento', :with => 'Fiscal', :field => 'Descrição'
+    end
+
+    within_tab 'Receita' do
+      fill_in 'Prazo da concessão', :with => '1'
+      select 'ano/anos', :from => 'Unidade do prazo da concessão'
+
+      expect(page).to_not have_field 'Valor da oferta mínima para alienações'
+      expect(page).to_not have_field 'Meta'
+      expect(page).to_not have_field 'Direitos e obrigações do concedente'
+      expect(page).to_not have_field 'Diretos e obrigações do concedido'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice "Processo de Compra 3/#{Date.current.year} criado com sucesso."
+
+    within_tab 'Principal' do
+      expect(page).to have_field 'Processo', :with => '3'
+    end
   end
 end
