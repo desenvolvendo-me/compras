@@ -1,3 +1,3 @@
-class DescriptorsController < CrudController
+class DescriptorsController < ApiConsumerController
   actions :only => :modal
 end
