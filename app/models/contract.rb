@@ -30,9 +30,7 @@ class Contract < Compras::Model
 
   has_many :additives, class_name: 'ContractAdditive', dependent: :restrict
   has_many :delivery_schedules, :dependent => :destroy, :order => :sequence
-  has_many :founded_debt_pledges, :class_name => 'Pledge', :dependent => :restrict, :foreign_key => 'founded_debt_contract_id'
   has_many :occurrence_contractual_historics, :dependent => :restrict
-  has_many :pledges, :dependent => :restrict
   has_many :ratifications, through: :licitation_process, source: :licitation_process_ratifications
   has_many :ratifications_items, through: :ratifications, source: :licitation_process_ratification_items
 
@@ -86,6 +84,15 @@ class Contract < Compras::Model
 
   def self.next_sequential(year)
     self.where { self.year.eq year }.size + 1
+  end
+
+  def pledges
+    Pledge.all(params: { by_contract_id: id,
+      includes: [:capability, budget_allocation: { include: :expense_nature}] }) || []
+  end
+
+  def founded_debt_pledges
+    Pledge.all(params: { by_founded_debt_contract_id: id }) || []
   end
 
   def all_pledges

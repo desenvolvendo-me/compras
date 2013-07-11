@@ -71,7 +71,6 @@ describe LicitationProcess do
   it { should have_many(:bidders).dependent(:destroy).order(:id) }
   it { should have_many(:licitation_process_impugnments).dependent(:restrict).order(:id) }
   it { should have_many(:licitation_process_appeals).dependent(:restrict) }
-  it { should have_many(:pledges).dependent(:restrict) }
   it { should have_many(:license_creditors).dependent(:restrict).through(:bidders) }
   it { should have_many(:accreditation_creditors).through(:purchase_process_accreditation) }
   it { should have_many(:reserve_funds).dependent(:restrict) }

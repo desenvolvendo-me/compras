@@ -20,6 +20,12 @@
   <div class="yui3-u-1-5">
     <%= f.input :authorization_date %>
   </div>
+
+  <div class="yui3-u-1-5">
+    <%= f.input :pledge, as: :modal, modal_url: modal_pledges_path,
+      hidden_field: :pledge_id %>
+    <%= f.error :pledge_id %>
+  </div>
 </div>
 
 <div id="supply_order_items">

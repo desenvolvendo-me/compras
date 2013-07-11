@@ -2,8 +2,23 @@
 require 'spec_helper'
 
 feature "SupplyOrder" do
+  let :pledge do
+    Pledge.new(id: 1, value: 9.99, description: 'Empenho 1',
+      year: 2013, to_s: 1)
+  end
+
+  let :pledge_two do
+    Pledge.new(id: 2, value: 15.99, description: 'Empenho 2',
+      year: 2012, to_s: 2)
+  end
+
   background do
     sign_in
+
+    UnicoAPI::Resources::Contabilidade::Pledge.stub(:fetch).and_return([pledge, pledge_two])
+
+    UnicoAPI::Resources::Contabilidade::Pledge.stub(:find).with(1).and_return(pledge)
+    UnicoAPI::Resources::Contabilidade::Pledge.stub(:find).with(2).and_return(pledge_two)
   end
 
   scenario 'create a new supply order, update and destroy an existing' do
@@ -33,6 +48,7 @@ feature "SupplyOrder" do
       creditor: wenderson,
       licitation_process: licitation_process,
       licitation_process_ratification_items: [ratification_item_1, ratification_item_2])
+
 
     first_div_path = '//*[@id="supply_order_items"]/div[1]'
     last_div_path  = '//*[@id="supply_order_items"]/div[2]'
@@ -73,6 +89,11 @@ feature "SupplyOrder" do
       expect(page).to have_disabled_field 'Qtde já autorizada', with: '0'
       expect(page).to have_disabled_field 'Saldo', with: '2'
       expect(page).to have_field 'Qtde a autorizar', with: ''
+    end
+
+    within_modal 'Empenho' do
+      click_button 'Pesquisar'
+      click_record '2013'
     end
 
     click_button 'Salvar'
@@ -145,6 +166,7 @@ feature "SupplyOrder" do
 
     expect(page).to have_field 'Fornecedor', with: 'Wenderson Malheiros'
     expect(page).to have_field 'Data da autorização', with: '15/12/2013'
+    expect(page).to have_field 'Empenho', with: '1'
     expect(page).to have_disabled_field 'Modalidade', with: '1 - Concorrência'
 
     within :xpath, first_div_path do

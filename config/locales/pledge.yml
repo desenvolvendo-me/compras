@@ -1,39 +1,17 @@
 pt-BR:
-  activerecord:
+  activemodel:
     models:
-      pledge:
+      "unico_api/resources/contabilidade/pledge":
         one: "Empenho"
         other: "Empenhos"
 
     attributes:
-      pledge:
+      "unico_api/resources/contabilidade/pledge":
         descriptor: "Descritor"
-        reserve_fund: "Reserva de dotação"
-        reserve_fund_value: "Saldo reserva"
-        management_unit: "Unidade gestora"
         emission_date: "Data de emissão"
-        budget_allocation: "Dotação"
-        value: "Valor"
-        item_replicated_value: "Valor"
-        parcel_replicated_value: "Valor"
-        pledge_parcels_sum: "Valor total das parcelas"
-        material_kind: "Tipo de bem"
-        pledge_category: "Categoria"
-        budget_allocation_real_amount: "Saldo da dotação"
-        budget_allocation_function: "Função"
-        budget_allocation_subfunction: "Subfunção"
-        budget_allocation_government_program: "Programa"
-        budget_allocation_government_action: "Ação"
-        budget_allocation_budget_structure: "Solicitante"
-        budget_allocation_expense_nature: "Natureza da despesa"
-        pledge_historic: "Histórico"
-        modality: "Modalidade"
-        licitation_process: "Processo de compra"
-        contract: "Contrato"
-        contract_signature_date: "Data do contrato"
-        description: "Objeto"
-        creditor: "Fornecedor"
-        founded_debt_contract: "Contrato de dívida"
-        items_total_value: "Valor total dos itens"
-        code: "Código"
-        expense_nature: "Desdobramento"
+        budget_allocation_id: "Dotação"
+        year: "Ano"
+        code: 'Código'
+        management_unit_id: "Unidade gestora"
+        precatory_id: "Precatório"
+        creditor_id: "Fornecedor"

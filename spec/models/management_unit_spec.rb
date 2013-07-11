@@ -15,8 +15,6 @@ describe ManagementUnit do
   it { should validate_presence_of(:acronym) }
   it { should validate_presence_of(:status) }
 
-  it { should have_many(:pledges).dependent(:restrict) }
-
   describe '#descriptor' do
     before do
       subject.descriptor_id = 1

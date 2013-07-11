@@ -67,10 +67,30 @@ describe TceExport::MG::MonthlyMonitoring::ContractGenerator do
           end_date: end_date, licitation_process: licitation_process,
           creditors: [creditor_sobrinho, creditor_wenderson])
 
-        ContractTermination.make!(:contrato_rescindido, contract: contract)
+        expense_nature = ExpenseNature.make!(:vencimento_e_salarios)
 
-        Pledge.make!(:empenho_em_quinze_dias, emission_date: signature_date,
-          contract: contract, capability: capability, licitation_process: licitation_process)
+        budget_allocation = BudgetAllocation.make!(:alocacao)
+
+        pledge = Pledge.new(
+          id: 1, value: 9.99, description: 'Empenho 1', year: 2013, to_s: 1,
+          emission_date: signature_date,
+          capability_id: capability.id,
+          licitation_process: licitation_process,
+          contract: contract,
+          expense_nature: expense_nature,
+          expense_nature_expense_nature: budget_allocation.expense_nature.expense_nature,
+          function_code: budget_allocation.function_code,
+          subfunction_code: budget_allocation.subfunction_code,
+          government_program_code: budget_allocation.government_program_code,
+          government_action_code: budget_allocation.government_action_code,
+          capability_source_code: capability.capability_source_code)
+
+        UnicoAPI::Resources::Contabilidade::Pledge.stub(:all)
+          .with(params: {by_contract_id: contract.id,
+            includes: [:capability, budget_allocation: { include: :expense_nature }]})
+          .and_return([pledge])
+
+        ContractTermination.make!(:contrato_rescindido, contract: contract)
 
         described_class.generate_file(monthly_monitoring)
 
@@ -107,8 +127,28 @@ describe TceExport::MG::MonthlyMonitoring::ContractGenerator do
 
         ContractTermination.make!(:contrato_rescindido, contract: contract)
 
-        Pledge.make!(:empenho_em_quinze_dias, emission_date: signature_date,
-          contract: contract, capability: capability, licitation_process: licitation_process)
+        expense_nature = ExpenseNature.make!(:vencimento_e_salarios)
+
+        budget_allocation = BudgetAllocation.make!(:alocacao)
+
+        pledge = Pledge.new(
+          id: 1, value: 9.99, description: 'Empenho 1', year: 2013, to_s: 1,
+          emission_date: signature_date,
+          capability_id: capability.id,
+          licitation_process: licitation_process,
+          contract: contract,
+          expense_nature: expense_nature,
+          expense_nature_expense_nature: budget_allocation.expense_nature.expense_nature,
+          function_code: budget_allocation.function_code,
+          subfunction_code: budget_allocation.subfunction_code,
+          government_program_code: budget_allocation.government_program_code,
+          government_action_code: budget_allocation.government_action_code,
+          capability_source_code: capability.capability_source_code)
+
+        UnicoAPI::Resources::Contabilidade::Pledge.stub(:all)
+          .with(params: {by_contract_id: contract.id,
+            includes: [:capability, budget_allocation: { include: :expense_nature }]})
+          .and_return([pledge])
 
         described_class.generate_file(monthly_monitoring)
 

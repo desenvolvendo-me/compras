@@ -57,7 +57,6 @@ class LicitationProcess < Compras::Model
   has_many :bidders, :dependent => :destroy, :order => :id
   has_many :licitation_process_impugnments, :dependent => :restrict, :order => :id
   has_many :licitation_process_appeals, :dependent => :restrict
-  has_many :pledges, :dependent => :restrict
   has_many :licitation_notices, :dependent => :destroy
   has_many :reserve_funds, :dependent => :restrict
   has_many :licitation_process_ratifications, :dependent => :restrict, :order => :id

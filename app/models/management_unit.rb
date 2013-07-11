@@ -3,8 +3,6 @@ class ManagementUnit < Compras::Model
 
   has_enumeration_for :status, :create_helpers => true
 
-  has_many :pledges, :dependent => :restrict
-
   validates :descriptor_id, :description, :acronym, :status, :presence => true
 
   orderize :description
