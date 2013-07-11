@@ -6,7 +6,6 @@ BudgetStructure.blueprint(:secretaria_de_educacao) do
   description { 'Secretaria de Educação' }
   kind { BudgetStructureKind::SYNTHETIC }
   acronym { 'SEMUEDU' }
-  administration_type { AdministrationType.make!(:publica) }
   performance_field { 'Desenvolvimento Educacional' }
   address { Address.make!(:general) }
   budget_structure_responsibles { [BudgetStructureResponsible.make!(:sobrinho)] }
@@ -20,7 +19,6 @@ BudgetStructure.blueprint(:secretaria_de_desenvolvimento) do
   description { 'Secretaria de Desenvolvimento' }
   kind { BudgetStructureKind::SYNTHETIC }
   acronym { 'SEMUDES' }
-  administration_type { AdministrationType.make!(:publica) }
   performance_field { 'Desenvolvimento Educacional' }
   address { Address.make!(:general) }
   budget_structure_responsibles { [BudgetStructureResponsible.make!(:sobrinho)] }
@@ -35,7 +33,6 @@ BudgetStructure.blueprint(:secretaria_de_educacao_com_dois_responsaveis) do
   description { 'Secretaria de Educação com dois responsaveis' }
   kind { BudgetStructureKind::SYNTHETIC }
   acronym { 'SEMUEDU' }
-  administration_type { AdministrationType.make!(:publica) }
   performance_field { 'Desenvolvimento Educacional' }
   address { Address.make!(:general) }
   budget_structure_responsibles { [

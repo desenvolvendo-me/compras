@@ -2,7 +2,6 @@ class BudgetStructure < Accounting::Model
   attr_modal :full_code, :description, :budget_structure_level_id, :kind
 
   belongs_to :budget_structure_configuration
-  belongs_to :administration_type
   belongs_to :budget_structure_level
   belongs_to :parent, :class_name => 'BudgetStructure'
 

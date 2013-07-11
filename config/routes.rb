@@ -65,13 +65,6 @@ Compras::Application.routes.draw do
     get 'modal_info', :on => :member
   end
 
-  resources :administration_types do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
   resources :purchase_process_items do
     collection do
       get :modal

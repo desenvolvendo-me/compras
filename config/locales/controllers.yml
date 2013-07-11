@@ -1,7 +1,6 @@
 pt-BR:
   controllers: &controllers
     addresses: "Endereços"
-    administration_types: "Tipos de Administração"
     agencies: "Agências"
     bank_accounts: "Contas Bancárias"
     banks: "Bancos"

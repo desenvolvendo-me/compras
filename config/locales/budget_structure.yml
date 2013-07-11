@@ -8,7 +8,6 @@ pt-BR:
     attributes:
       budget_structure:
         acronym: "Sigla"
-        administration_type: "Tipo de administração"
         budget_structure: "Estrutura orçamentária"
         budget_structure_configuration: "Configuração de estrutura orçamentária"
         budget_structure_level: "Nível"
