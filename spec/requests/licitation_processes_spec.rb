@@ -615,6 +615,7 @@ feature "LicitationProcesses" do
   end
 
   scenario 'change document types to ensure that the changes are reflected on bidder documents' do
+    pending 'this functionly will be implement'
     LicitationProcess.make!(:processo_licitatorio_computador)
     DocumentType.make!(:oficial)
 
@@ -833,6 +834,8 @@ feature "LicitationProcesses" do
 
   scenario "allowing changes to licitation process after ratification" do
     LicitationProcessRatification.make!(:processo_licitatorio_computador)
+    BudgetAllocation.make!(:alocacao, year: 2013)
+    BudgetAllocation.make!(:reparo_2011, year: 2013, expense_nature: ExpenseNature.make!(:aplicacoes_diretas))
 
     navigate 'Processos de Compra > Processos de Compras'
 
@@ -842,12 +845,34 @@ feature "LicitationProcesses" do
       click_link "2/2013"
     end
 
-    within_tab "Principal" do
-      expect(page).to have_disabled_field "Forma de julgamento"
-      expect(page).to have_disabled_field "Índice de reajuste"
+    within_tab 'Orçamento' do
+      fill_with_autocomplete 'Dotação orçamentária', with: 'Aplicações Diretas'
+      fill_in 'Valor previsto', with: '300,00'
+
+      click_button 'Adicionar'
+
+      within_records do
+        within 'tbody .nested-record:last' do
+          expect(page).to have_content '1 - Aplicações Diretas'
+          expect(page).to have_content '3.1.90.00.00 - Aplicações Diretas'
+          expect(page).to have_content '3.000,00'
+          expect(page).to have_content '300,00'
+        end
+      end
     end
 
-    expect(page).to have_disabled_element 'Salvar', :reason => 'já foi homologado. Não pode ser alterado'
+    click_button 'Salvar'
+
+    within_tab 'Orçamento' do
+      within_records do
+        within 'tbody .nested-record:last' do
+          expect(page).to have_content '1 - 3.1.90.00.00 - Aplicações Diretas'
+          expect(page).to have_content '3.1.90.00.00 - Aplicações Diretas'
+          expect(page).to have_content '3.000,00'
+          expect(page).to have_content '300,00'
+        end
+      end
+    end
   end
 
   scenario 'index with columns at the index' do

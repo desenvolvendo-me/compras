@@ -116,13 +116,22 @@
 
   filterJudgmentForm();
 
-  <% unless resource.updateable? %>
+  <% unless resource.updateable? && resource.licitation_process_ratifications.empty? %>
     $(function(){
       $('form.licitation_process [data-disabled]').on('click', function(event){
         event.stopImmediatePropagation();
         return false;
       });
       $('form.licitation_process :input').not('[data-disabled]').attr('disabled', true);
+      $('#licitation_process_budget_allocation').removeAttr('disabled');
+      $('#licitation_process_purchase_process_budget_allocation_value').removeAttr('disabled');
+      $('#purchase_process_budget_allocations_button').removeAttr('disabled');
+      $('#licitation_process_submit').removeAttr('disabled');
+      $('form input[name="authenticity_token"]').removeAttr('disabled');
+      $('form input[name="_method"]').removeAttr('disabled');
+      $('form input[name="licitation_process_nested_grid_[id]"]').removeAttr('disabled');
+      $('#licitation_process_expense_nature').removeAttr('disabled');
+      $('#licitation_process_expense_nature_id').removeAttr('disabled');
     });
   <% end %>
 </script>

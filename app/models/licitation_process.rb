@@ -164,7 +164,6 @@ class LicitationProcess < Compras::Model
       }
   end
 
-  before_update :assign_bidders_documents
   before_save :calculate_total_value_of_items, :calculate_budget_allocations_total_value
 
   orderize "id DESC"
@@ -235,7 +234,7 @@ class LicitationProcess < Compras::Model
   end
 
   def updateable?
-    new_record? || (licitation_process_ratifications.empty? && publications.current_updateable?)
+    new_record? || publications.current_updateable?
   end
 
   def all_licitation_process_classifications
