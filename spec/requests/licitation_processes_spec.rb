@@ -2446,4 +2446,34 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Processo', :with => '3'
     end
   end
+
+  scenario 'should filter auto_complete in budget_allocation by budget_allocation_year' do
+    LicitationProcess.make!(:processo_licitatorio, purchase_process_budget_allocations: [])
+    BudgetAllocation.make!(:alocacao, year: 2014)
+    BudgetAllocation.make!(:reparo_2011, year: 2013, expense_nature: ExpenseNature.make(:aplicacoes_diretas) )
+
+    navigate 'Processos de Compra > Processos de Compras'
+
+    click_link 'Limpar Filtro'
+
+    within_records do
+      click_link '1/2012'
+    end
+
+    within_tab 'Orçamento' do
+      fill_in 'Ano da dotação', with: '2014'
+
+      within_autocomplete 'Dotação orçamentária', with: 'A' do
+        expect(page).to have_content '1 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+        expect(page).to_not have_content '1 - Aplicações Diretas'
+      end
+
+      fill_in 'Ano da dotação', with: '2013'
+
+      within_autocomplete 'Dotação orçamentária', with: 'A' do
+        expect(page).to_not have_content '1 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+        expect(page).to have_content '1 - Aplicações Diretas'
+      end
+    end
+  end
 end
