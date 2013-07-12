@@ -6,8 +6,21 @@ feature 'PurchaseSolicitationAnnul' do
     User.make!(:sobrinho_as_admin_and_employee)
   end
 
+  let :budget_structure do
+    BudgetStructure.new(
+      id: 1,
+      code: '1',
+      full_code: '1',
+      tce_code: '051',
+      description: 'Secretaria de Desenvolvimento',
+      acronym: 'SEMUEDU',
+      performance_field: 'Desenvolvimento Educacional')
+  end
+
   background do
     sign_in
+
+    BudgetStructure.stub(:find).with(1).and_return(budget_structure)
   end
 
   scenario 'should not have a annul link when was creating a new solicitation' do

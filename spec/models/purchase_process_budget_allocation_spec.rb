@@ -12,5 +12,6 @@ describe PurchaseProcessBudgetAllocation do
   it { should validate_presence_of :value }
 
   it { should delegate(:expense_nature).to(:budget_allocation).allowing_nil(true).prefix(true) }
+  it { should delegate(:expense_nature_id).to(:budget_allocation).allowing_nil(true).prefix(true) }
   it { should delegate(:amount).to(:budget_allocation).allowing_nil(true).prefix(true) }
 end

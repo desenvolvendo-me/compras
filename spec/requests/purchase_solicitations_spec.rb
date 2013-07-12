@@ -6,12 +6,38 @@ feature "PurchaseSolicitations" do
     User.make!(:sobrinho_as_admin_and_employee)
   end
 
+  let :budget_structure do
+    BudgetStructure.new(
+      id: 1,
+      code: '1',
+      full_code: '1',
+      tce_code: '051',
+      description: 'Secretaria de Educação',
+      acronym: 'SEMUEDU',
+      performance_field: 'Desenvolvimento Educacional')
+  end
+
+  let :budget_structure_parent do
+    BudgetStructure.new(
+      id: 2,
+      code: '2',
+      tce_code: '051',
+      description: 'Secretaria de Desenvolvimento',
+      acronym: 'SEMUEDU',
+      performance_field: 'Desenvolvimento Educacional')
+  end
+
   background do
+    BudgetStructure.stub(:find).with(1).and_return(budget_structure)
+    BudgetStructure.stub(:find).with(2).and_return(budget_structure_parent)
+    BudgetStructure.stub(:all).and_return([budget_structure])
+
     sign_in
   end
 
   scenario 'create a new purchase_solicitation' do
-    BudgetStructure.make!(:secretaria_de_educacao)
+    BudgetStructure.stub(:all).and_return([budget_structure])
+
     Employee.make!(:sobrinho)
     DeliveryLocation.make!(:education)
     budget_allocation = BudgetAllocation.make!(:alocacao)
@@ -180,8 +206,8 @@ feature "PurchaseSolicitations" do
   end
 
   scenario 'update an existent purchase_solicitation' do
+    BudgetStructure.stub(:all).and_return([budget_structure])
     PurchaseSolicitation.make!(:reparo)
-    BudgetStructure.make!(:secretaria_de_desenvolvimento)
     Employee.make!(:wenderson)
     DeliveryLocation.make!(:health)
     ExpenseNature.make!(:aposentadorias_reserva, year: 2012)
@@ -204,7 +230,7 @@ feature "PurchaseSolicitations" do
     within_tab 'Principal' do
       fill_in 'Data da solicitação', :with => '01/02/2013'
       fill_modal 'Responsável pela solicitação', :with => '12903412', :field => 'Matrícula'
-      fill_modal 'Solicitante', :with => 'Secretaria de Desenvolvimento', :field => 'Descrição'
+      fill_modal 'Solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_in 'Justificativa da solicitação', :with => 'Novas mesas'
       fill_modal 'Local para entrega', :with => 'Secretaria da Saúde', :field => "Descrição"
       select 'Produtos', :from => 'Tipo de solicitação'
@@ -256,7 +282,7 @@ feature "PurchaseSolicitations" do
         click_link "Remover"
       end
 
-      fill_with_autocomplete 'Dotação', :with => 'Aposentadorias'
+      fill_with_autocomplete 'Dotação orçamentária', :with => 'Aposentadorias'
       fill_with_autocomplete 'Desdobramento', :with => 'Reserva'
 
       click_button "Adicionar"
@@ -265,7 +291,7 @@ feature "PurchaseSolicitations" do
         expect(page).to have_content '1 - 3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
         expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
         expect(page).to have_content '3.1.90.01.02 - Aposentadorias Custeadas com Recursos da Reserva Remunerada'
-        expect(page).to have_content '3.000,00'
+        expect(page).to have_content '500,00'
       end
     end
 
@@ -278,7 +304,7 @@ feature "PurchaseSolicitations" do
       expect(page).to have_disabled_field 'Ano', :with => '2012'
       expect(page).to have_field 'Data da solicitação', :with => '01/02/2013'
       expect(page).to have_field 'Responsável pela solicitação', :with => 'Wenderson Malheiros'
-      expect(page).to have_field 'Solicitante', :with => '1.29 - Secretaria de Desenvolvimento'
+      expect(page).to have_field 'Solicitante', :with => '1 - Secretaria de Educação'
       expect(page).to have_field 'Justificativa da solicitação', :with => 'Novas mesas'
       expect(page).to have_field 'Local para entrega', :with => 'Secretaria da Saúde'
       expect(page).to have_select 'Tipo de solicitação', :selected => 'Produtos'
@@ -316,7 +342,7 @@ feature "PurchaseSolicitations" do
         expect(page).to have_content '1 - 3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
         expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
         expect(page).to have_content '3.1.90.01.02 - Aposentadorias Custeadas com Recursos da Reserva Remunerada'
-        expect(page).to have_content '3.000,00'
+        expect(page).to have_content '500,00'
       end
     end
   end
@@ -396,7 +422,6 @@ feature "PurchaseSolicitations" do
 
   scenario 'create a new purchase_solicitation with the same accouting year the code should be increased by 1' do
     PurchaseSolicitation.make!(:reparo)
-    BudgetStructure.make!(:secretaria_de_educacao)
     Employee.make!(:sobrinho)
     DeliveryLocation.make!(:education)
     budget_allocation = BudgetAllocation.make!(:alocacao)

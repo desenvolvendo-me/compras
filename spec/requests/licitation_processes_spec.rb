@@ -4,6 +4,28 @@ require 'spec_helper'
 feature "LicitationProcesses" do
   let(:current_user) { User.make!(:sobrinho_as_admin_and_employee) }
 
+  let :budget_structure do
+    BudgetStructure.new(
+      id: 1,
+      code: '1',
+      full_code: '1',
+      tce_code: '051',
+      description: 'Secretaria de Educação',
+      acronym: 'SEMUEDU',
+      performance_field: 'Desenvolvimento Educacional')
+  end
+
+  let :budget_structure_parent do
+    BudgetStructure.new(
+      id: 2,
+      code: '2',
+      full_code: '2',
+      tce_code: '051',
+      description: 'Secretaria de Desenvolvimento',
+      acronym: 'SEMUEDU',
+      performance_field: 'Desenvolvimento Educacional')
+  end
+
   background do
     create_roles ['judgment_forms',
                   'payment_methods',
@@ -14,6 +36,10 @@ feature "LicitationProcesses" do
                   'purchase_solicitations']
 
     Prefecture.make!(:belo_horizonte)
+
+    BudgetStructure.stub(:find).with(1).and_return(budget_structure)
+    BudgetStructure.stub(:find).with(2).and_return(budget_structure_parent)
+    BudgetStructure.stub(:all).and_return([budget_structure])
 
     sign_in
   end
@@ -1632,14 +1658,14 @@ feature "LicitationProcesses" do
     PurchaseSolicitation.make!(:reparo_2013, :accounting_year => Date.current.year, :code => '2',
                                :delivery_location => DeliveryLocation.make!(:health),
                                :responsible => Employee.make!(:wenderson),
-                               budget_structure: BudgetStructure.make!(:secretaria_de_desenvolvimento))
+                               :budget_structure_id => 2)
 
     navigate 'Processos de Compra > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
     within_tab "Solicitantes" do
-      fill_with_autocomplete 'Solicitações de compra', :with => 'Secretaria de Educação'
+      fill_with_autocomplete 'Solicitações de compra', :with => '1'
 
       within_records do
         expect(page).to have_content 'Código'
@@ -1680,7 +1706,7 @@ feature "LicitationProcesses" do
 
         within 'tbody tr:last-child' do
           expect(page).to have_content '2/2013'
-          expect(page).to have_content '1.29 - Secretaria de Desenvolvimento'
+          expect(page).to have_content '2 - Secretaria de Desenvolvimento'
           expect(page).to have_content 'Wenderson Malheiros'
         end
       end

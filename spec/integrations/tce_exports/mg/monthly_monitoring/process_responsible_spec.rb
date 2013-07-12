@@ -40,7 +40,31 @@ describe TceExport::MG::MonthlyMonitoring::ProcessResponsibleGenerator do
           content: 'ementa 2'))
     end
 
+    let :budget_structure_parent do
+      BudgetStructure.new(
+        id: 2,
+        code: '1',
+        tce_code: '051',
+        description: 'Secretaria de Educação',
+        acronym: 'SEMUEDU',
+        performance_field: 'Desenvolvimento Educacional')
+    end
+
+    let :budget_structure do
+      BudgetStructure.new(
+        id: 1,
+        parent_id: 2,
+        code: '29',
+        tce_code: '051',
+        description: 'Secretaria de Desenvolvimento',
+        acronym: 'SEMUEDU',
+        performance_field: 'Desenvolvimento Educacional')
+    end
+
     it "generates a CSV file with the required data" do
+      BudgetStructure.should_receive(:find).at_least(1).times.with(2).and_return(budget_structure_parent)
+      BudgetStructure.should_receive(:find).at_least(1).times.with(1).and_return(budget_structure)
+
       FactoryGirl.create(:extended_prefecture, prefecture: prefecture)
 
       Employee.make!(:sobrinho, individual: person_pedro.personable, registration: "112323")

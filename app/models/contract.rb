@@ -1,4 +1,6 @@
 class Contract < Compras::Model
+  include BelongsToResource
+
   attr_accessible :year, :contract_number, :sequential_number, :publication_date,
                   :lawyer_code, :contract_file, :signature_date, :end_date,
                   :description, :kind, :content, :contract_value,
@@ -21,12 +23,13 @@ class Contract < Compras::Model
   has_enumeration_for :contract_guarantees
   has_enumeration_for :execution_type, :create_helpers => true
 
-  belongs_to :budget_structure
   belongs_to :budget_structure_responsible, :class_name => 'Employee'
   belongs_to :contract_type
   belongs_to :dissemination_source
   belongs_to :lawyer, :class_name => 'Employee'
   belongs_to :licitation_process
+
+  belongs_to_resource :budget_structure
 
   has_many :additives, class_name: 'ContractAdditive', dependent: :restrict
   has_many :delivery_schedules, :dependent => :destroy, :order => :sequence
@@ -50,7 +53,7 @@ class Contract < Compras::Model
   validates :sequential_number, :year, :contract_number, :publication_date,
     :dissemination_source, :content, :creditor_ids, :contract_type,
     :contract_value, :contract_validity, :signature_date, :start_date,
-    :end_date, :budget_structure, :budget_structure_responsible, :kind,
+    :end_date, :budget_structure_id, :budget_structure_responsible, :kind,
     :default_fine, :penalty_fine, :presence => true
   validates :parent, :presence => true, :if => :amendment?
   validates :end_date, :timeliness => {

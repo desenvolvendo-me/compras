@@ -1,5 +1,6 @@
 # encoding: utf-8
 require 'model_helper'
+require 'app/models/budget_structure'
 require 'app/models/contract'
 require 'app/models/pledge'
 require 'app/models/persona/person'
@@ -7,7 +8,6 @@ require 'app/models/person'
 require 'app/models/creditor'
 require 'app/models/contract_type'
 require 'app/models/licitation_process'
-require 'app/models/budget_structure'
 require 'app/models/employee'
 require 'app/models/delivery_schedule'
 require 'app/models/occurrence_contractual_historic'
@@ -24,7 +24,6 @@ describe Contract do
   it { should belong_to :dissemination_source }
   it { should belong_to :contract_type }
   it { should belong_to :licitation_process }
-  it { should belong_to :budget_structure }
   it { should belong_to :budget_structure_responsible }
   it { should belong_to :lawyer }
   it { should have_many(:delivery_schedules).dependent(:destroy).order(:sequence) }
@@ -53,7 +52,7 @@ describe Contract do
   it { should validate_presence_of :signature_date }
   it { should validate_presence_of :start_date }
   it { should validate_presence_of :end_date }
-  it { should validate_presence_of :budget_structure }
+  it { should validate_presence_of :budget_structure_id }
   it { should validate_presence_of :budget_structure_responsible }
   it { should validate_presence_of :kind }
   it { should validate_presence_of :contract_type }

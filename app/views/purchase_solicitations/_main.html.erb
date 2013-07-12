@@ -14,7 +14,7 @@
 
 <div class="yui3-g">
   <div class="yui3-u-1-2">
-    <%= f.input :budget_structure, :disabled => f.object.annulled? %>
+    <%= f.input :budget_structure, as: :modal, hidden_field: :budget_structure_id, :disabled => f.object.annulled? %>
   </div>
 
   <div class="yui3-u-1-2">

@@ -14,7 +14,7 @@ Contract.blueprint(:primeiro_contrato) do
   contract_value { 1000 }
   contract_validity { 12 }
   subcontracting { true }
-  budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
+  budget_structure_id { 1 }
   budget_structure_responsible { Employee.make!(:wenderson) }
   lawyer { Employee.make!(:wenderson) }
   lawyer_code { '5678' }
@@ -39,7 +39,7 @@ Contract.blueprint(:contrato_detran) do
   contract_validity { 12 }
   dissemination_source { DisseminationSource.make!(:jornal_municipal) }
   subcontracting { true }
-  budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
+  budget_structure_id { 1 }
   budget_structure_responsible { Employee.make!(:wenderson) }
   lawyer { Employee.make!(:wenderson) }
   lawyer_code { '5678' }

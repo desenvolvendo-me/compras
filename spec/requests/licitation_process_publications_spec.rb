@@ -4,9 +4,22 @@ require 'spec_helper'
 feature "LicitationProcessPublications" do
   let(:current_user) { User.make!(:sobrinho) }
 
+  let :budget_structure do
+    BudgetStructure.new(
+      id: 1,
+      parent_id: 2,
+      code: '29',
+      tce_code: '051',
+      description: 'Secretaria de Desenvolvimento',
+      acronym: 'SEMUEDU',
+      performance_field: 'Desenvolvimento Educacional')
+  end
+
   background do
     create_roles ['licitation_processes']
     sign_in
+
+    BudgetStructure.stub(:find).with(1).and_return(budget_structure)
   end
 
   scenario 'index should have link to back to licitation_process and create a new publication' do

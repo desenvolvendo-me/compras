@@ -5,7 +5,6 @@ describe LegalAnalysisAppraisal do
   it { should belong_to :responsible }
   it { should belong_to :licitation_process }
 
-  it { should have_one(:execution_unit_responsible).through(:licitation_process) }
   it { should have_many(:licitation_process_ratifications).through(:licitation_process) }
 
   it { should validate_presence_of(:licitation_process) }
@@ -14,6 +13,7 @@ describe LegalAnalysisAppraisal do
   it { should validate_presence_of(:appraisal_expedition_date) }
   it { should validate_presence_of(:responsible)}
 
+  it { should delegate(:execution_unit_responsible).to(:licitation_process).allowing_nil(true) }
   it { should delegate(:year).to(:licitation_process).allowing_nil(true) }
   it { should delegate(:process).to(:licitation_process).allowing_nil(true) }
   it { should delegate(:modality).to(:licitation_process).allowing_nil(true) }

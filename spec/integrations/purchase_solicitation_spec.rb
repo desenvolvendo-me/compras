@@ -7,6 +7,7 @@ describe PurchaseSolicitation do
     let(:purchase_solicitation_two) { PurchaseSolicitation.make!(:reparo_liberado) }
 
     it 'return all purchase_solicitations without price_collections' do
+      BudgetStructure.stub(:find).with(1)
       expect(PurchaseSolicitation.without_price_collection).to eq [purchase_solicitation_two]
     end
   end
@@ -17,6 +18,7 @@ describe PurchaseSolicitation do
     let(:purchase_solicitation_two) { PurchaseSolicitation.make!(:reparo_liberado) }
 
     it 'return all purchase_solicitations without licitation_processes' do
+      BudgetStructure.stub(:find).with(1)
       expect(PurchaseSolicitation.without_purchase_process).to eq [purchase_solicitation_two]
     end
   end

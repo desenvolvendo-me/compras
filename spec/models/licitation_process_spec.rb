@@ -3,6 +3,7 @@ require 'model_helper'
 require 'lib/signable'
 require 'app/models/persona/person'
 require 'app/models/person'
+require 'app/models/budget_structure'
 require 'app/models/licitation_process'
 require 'app/models/payment_method'
 require 'app/models/purchase_process_budget_allocation'
@@ -62,7 +63,6 @@ describe LicitationProcess do
   it { should belong_to :judgment_form }
   it { should belong_to :payment_method }
   it { should belong_to :readjustment_index }
-  it { should belong_to :execution_unit_responsible  }
 
   it { should have_and_belong_to_many(:document_types) }
   it { should have_and_belong_to_many(:purchase_solicitations) }

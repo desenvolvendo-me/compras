@@ -2,7 +2,7 @@
 BudgetAllocation.blueprint(:alocacao) do
   descriptor_id { 1 }
   code { 1 }
-  budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
+  budget_structure_id { 1 }
   function { Function.make!(:administracao) }
   subfunction { Subfunction.make!(:geral) }
   government_program { GovernmentProgram.make!(:habitacao) }
@@ -25,7 +25,7 @@ end
 BudgetAllocation.blueprint(:alocacao_extra) do
   descriptor_id { 1 }
   code { 1 }
-  budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
+  budget_structure_id { 1 }
   function { Function.make!(:administracao) }
   subfunction { Subfunction.make!(:geral) }
   government_program { GovernmentProgram.make!(:habitacao) }
@@ -47,7 +47,7 @@ end
 BudgetAllocation.blueprint(:reparo_2011) do
   descriptor_id { 1 }
   code { 1 }
-  budget_structure { BudgetStructure.make!(:secretaria_de_desenvolvimento) }
+  budget_structure_id { 1 }
   function { Function.make!(:administracao) }
   subfunction { Subfunction.make!(:supervisor) }
   government_program { GovernmentProgram.make!(:educacao) }

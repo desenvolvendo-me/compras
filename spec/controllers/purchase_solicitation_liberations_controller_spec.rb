@@ -10,6 +10,7 @@ describe PurchaseSolicitationLiberationsController do
     controller.stub(:current_user).and_return(current_user)
     controller.stub(:authenticate_user!)
     controller.stub(:authorize_resource!)
+    BudgetStructure.stub(:find).with(1)
   end
 
   context "with purchase_solicitation GET#new" do

@@ -4,6 +4,17 @@ require 'spec_helper'
 feature "Bidders" do
   let(:current_user) { User.make!(:sobrinho) }
 
+  let :budget_structure do
+    BudgetStructure.new(
+      id: 1,
+      parent_id: 2,
+      code: '29',
+      tce_code: '051',
+      description: 'Secretaria de Desenvolvimento',
+      acronym: 'SEMUEDU',
+      performance_field: 'Desenvolvimento Educacional')
+  end
+
   background do
     create_roles ['licitation_processes',
                   'people',
@@ -13,6 +24,8 @@ feature "Bidders" do
   end
 
   scenario 'accessing the bidders and return to licitation process edit page' do
+    BudgetStructure.should_receive(:find).at_least(1).times.with(1).and_return(budget_structure)
+
     LicitationProcess.make!(:processo_licitatorio_computador)
 
     navigate 'Processos de Compra > Processos de Compras'
@@ -31,6 +44,8 @@ feature "Bidders" do
   end
 
   scenario 'creating, updating, destroy a new bidder' do
+    BudgetStructure.should_receive(:find).at_least(1).times.with(1).and_return(budget_structure)
+
     LicitationProcess.make!(:processo_licitatorio_computador,
       :modality => Modality::INVITATION,
       :judgment_form => JudgmentForm.make!(:global_com_menor_preco),
@@ -189,6 +204,8 @@ feature "Bidders" do
   end
 
   scenario 'when is not invited should disable and clear date, protocol fields' do
+    BudgetStructure.should_receive(:find).at_least(1).times.with(1).and_return(budget_structure)
+
     LicitationProcess.make!(:processo_licitatorio_computador,
       :modality => Modality::INVITATION,
       :judgment_form => JudgmentForm.make!(:global_com_menor_preco))
@@ -243,6 +260,8 @@ feature "Bidders" do
   end
 
   scenario 'showing some items without lot on proposals' do
+    BudgetStructure.should_receive(:find).at_least(1).times.with(1).and_return(budget_structure)
+
     LicitationProcess.make!(:processo_licitatorio_canetas_sem_lote)
 
     navigate 'Processos de Compra > Processos de Compras'
@@ -272,6 +291,8 @@ feature "Bidders" do
   end
 
   scenario 'create bidder link does show when envelope opening date is today' do
+    BudgetStructure.should_receive(:find).at_least(1).times.with(1).and_return(budget_structure)
+
     LicitationProcess.make!(:processo_licitatorio_computador)
     Creditor.make!(:sobrinho_sa)
 
@@ -289,6 +310,7 @@ feature "Bidders" do
   end
 
   scenario "index should have title Habilitaçãos do Processo de Compra 1/2013" do
+    BudgetStructure.should_receive(:find).at_least(1).times.with(1).and_return(budget_structure)
     LicitationProcess.make!(:processo_licitatorio_computador)
 
     navigate 'Processos de Compra > Processos de Compras'
@@ -303,6 +325,7 @@ feature "Bidders" do
   end
 
   scenario "edit should have title Editar Habilitação do Processo de Compra 2/2013" do
+    BudgetStructure.should_receive(:find).at_least(1).times.with(1).and_return(budget_structure)
     LicitationProcess.make!(:processo_licitatorio_computador)
 
     navigate 'Processos de Compra > Processos de Compras'
@@ -321,6 +344,7 @@ feature "Bidders" do
   end
 
   scenario "new should have title Nova Habilitação do Processo de Compra 2/2013" do
+    BudgetStructure.should_receive(:find).at_least(1).times.with(1).and_return(budget_structure)
     LicitationProcess.make!(:processo_licitatorio_computador)
 
     navigate 'Processos de Compra > Processos de Compras'
@@ -337,6 +361,7 @@ feature "Bidders" do
   end
 
  scenario 'should have field technical_score when licitation kind is technical_and_price' do
+    BudgetStructure.should_receive(:find).at_least(1).times.with(1).and_return(budget_structure)
     LicitationProcess.make!(:apuracao_melhor_tecnica_e_preco)
 
     navigate 'Processos de Compra > Processos de Compras'
@@ -357,6 +382,7 @@ feature "Bidders" do
   end
 
   scenario 'should have field technical_score when licitation kind is best_technique' do
+    BudgetStructure.should_receive(:find).at_least(1).times.with(1).and_return(budget_structure)
     LicitationProcess.make!(:apuracao_global, :judgment_form => JudgmentForm.make!(:por_item_com_melhor_tecnica))
 
     navigate 'Processos de Compra > Processos de Compras'
@@ -377,6 +403,7 @@ feature "Bidders" do
   end
 
   scenario 'should not have field technical_score when licitation kind is not(best_technique, technical_and_price)' do
+    BudgetStructure.should_receive(:find).at_least(1).times.with(1).and_return(budget_structure)
     LicitationProcess.make!(:processo_licitatorio_fornecedores, :proposal_envelope_opening_date => I18n.l(Date.current))
 
     navigate 'Processos de Compra > Processos de Compras'
@@ -397,6 +424,7 @@ feature "Bidders" do
   end
 
   scenario 'Bidders cant be changed when the licitation process has a ratification' do
+    BudgetStructure.should_receive(:find).at_least(1).times.with(1).and_return(budget_structure)
     licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
     Creditor.make!(:sobrinho_sa)
     Person.make!(:wenderson)
