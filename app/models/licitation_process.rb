@@ -328,13 +328,6 @@ class LicitationProcess < Compras::Model
     Modality.available_for_licitation_process_classification.include?(modality)
   end
 
-  def assign_bidders_documents
-    bidders.each do |bidder|
-      bidder.assign_document_types
-      bidder.save!
-    end
-  end
-
   def calculate_total_value_of_items
     return unless items
 

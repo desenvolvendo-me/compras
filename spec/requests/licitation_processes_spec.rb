@@ -615,7 +615,6 @@ feature "LicitationProcesses" do
   end
 
   scenario 'change document types to ensure that the changes are reflected on bidder documents' do
-    pending 'this functionly will be implement'
     LicitationProcess.make!(:processo_licitatorio_computador)
     DocumentType.make!(:oficial)
 

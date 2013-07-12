@@ -24,6 +24,7 @@ module Compras
       #{config.root}/app/decorators
       #{config.root}/app/enumerations
       #{config.root}/app/importers
+      #{config.root}/app/observers
       #{config.root}/app/reports
       #{config.root}/app/validators
       #{config.root}/app/tce_exports
@@ -38,7 +39,7 @@ module Compras
     # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
 
     # Activate observers that should always be running.
-    # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
+    config.active_record.observers = :purchase_process_document_observer
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
