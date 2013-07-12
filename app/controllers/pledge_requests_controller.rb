@@ -1,0 +1,2 @@
+class PledgeRequestsController < CrudController
+end

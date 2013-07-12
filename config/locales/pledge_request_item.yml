@@ -1,0 +1,16 @@
+pt-BR:
+  activerecord:
+    models:
+      pledge_request_item:
+        one: "Item"
+        other: "Itens"
+
+    attributes:
+      pledge_request_item:
+        accounting_cost_center: 'Centro de custo'
+        purchase_process_item: "Item"
+        purchase_process_item_lot: "Lote"
+        purchase_process_item_item_number: "Número do item"
+        purchase_process_item_additional_information: "Observação"
+        quantity: "Quantidade a empenhar"
+        ratification_item_unit_price: "Valor unitário"

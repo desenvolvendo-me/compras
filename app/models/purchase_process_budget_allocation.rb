@@ -21,9 +21,10 @@ class PurchaseProcessBudgetAllocation < Compras::Model
   def budget_allocation_params
     { includes: [
         :expense_nature,
-        :budget_structure,
+        budget_structure: { except: :custom_data },
         budget_allocation_capabilities: { include: [:capability, :budget_allocation] }],
       methods: [
+        :balance,
         :amount,
         :budget_structure_structure_sequence,
         :expense_nature_expense_nature,

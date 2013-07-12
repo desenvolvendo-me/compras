@@ -19,11 +19,13 @@ class PurchaseProcessItem < Compras::Model
   has_many :purchase_process_accreditation_creditors, through: :purchase_process_accreditation
 
   has_one  :purchase_process_accreditation, through: :licitation_process
+  has_one  :ratification_item, class_name: 'LicitationProcessRatificationItem', dependent: :restrict
 
   accepts_nested_attributes_for :creditor_proposals
 
   delegate :reference_unit, :description, :code, :to => :material, :allow_nil => true
   delegate :direct_purchase?, :judgment_form_item?, :to => :licitation_process, :allow_nil => true
+  delegate :unit_price, to: :ratification_item, allow_nil: true, prefix: true
 
   validates :material, :quantity, :lot, :presence => true
   validates :creditor, presence: true, if: :direct_purchase?
@@ -42,6 +44,11 @@ class PurchaseProcessItem < Compras::Model
   scope :lot, lambda { |lot|
     where { |item| item.lot.eq(lot) }
   }
+
+  scope :ratification_creditor_id, ->(creditor_id) do
+    joins { ratification_item.creditor }.
+    where { ratification_item.creditor.id.eq(creditor_id) }
+  end
 
   def self.lots
     pluck(:lot).uniq
