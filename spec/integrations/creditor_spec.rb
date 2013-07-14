@@ -285,13 +285,15 @@ describe Creditor do
           LicitationProcess.make!(:processo_licitatorio)
 
           expect(described_class.winners(licitation)).to include(creditor_sobrinho, creditor_nohup)
+          expect(described_class.winners(licitation)).to_not include(creditor_wenderson)
         end
       end
 
       context 'when is not a licitation' do
         it 'should return the winners' do
-          creditor_sobrinho = Creditor.make!(:sobrinho_sa)
-          creditor_wenderson = Creditor.make!(:wenderson_sa)
+          creditor_sobrinho   = Creditor.make!(:sobrinho_sa)
+          creditor_wenderson  = Creditor.make!(:wenderson_sa)
+          creditor_nohup      = Creditor.make!(:nohup)
 
           item_arame_farpado = PurchaseProcessItem.make!(:item_arame_farpado, creditor: creditor_sobrinho)
           item_arame         = PurchaseProcessItem.make!(:item_arame, creditor: creditor_wenderson)
@@ -300,6 +302,7 @@ describe Creditor do
             items: [item_arame_farpado, item_arame],
             bidders: [
               Bidder.make!(:licitante, creditor: creditor_sobrinho, enabled: true),
+              Bidder.make!(:licitante, creditor: creditor_nohup, enabled: false),
               Bidder.make!(:licitante, creditor: creditor_wenderson, enabled: true)
             ])
 
@@ -319,9 +322,18 @@ describe Creditor do
             licitation_process: licitation, creditor: creditor_wenderson,
             item: item_arame, unit_price: 99.00)
 
+          PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado,
+            licitation_process: licitation, creditor: creditor_nohup,
+            item: item_arame_farpado, unit_price: 120.00)
+
+          PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado,
+            licitation_process: licitation, creditor: creditor_nohup,
+            item: item_arame, unit_price: 120.00)
+
           LicitationProcess.make!(:processo_licitatorio)
 
           expect(described_class.winners(licitation)).to include(creditor_wenderson, creditor_sobrinho)
+          expect(described_class.winners(licitation)).to_not include(creditor_nohup)
         end
       end
     end
