@@ -15,11 +15,13 @@ feature 'Report::MapOfProposals' do
 
   background do
     Prefecture.make!(:belo_horizonte)
-    BudgetStructure.stub(:find).with(1).and_return(budget_structure)
+    BudgetStructure.stub(:find).and_return(budget_structure)
     sign_in
 
     ExpenseNature.stub(:all)
     ExpenseNature.stub(:find)
+    BudgetAllocation.stub(:all)
+    BudgetAllocation.stub(:find)
   end
 
   scenario 'should map of proposals order by creditor_name' do

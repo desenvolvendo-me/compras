@@ -11,7 +11,6 @@ class Capability < Accounting::Model
   belongs_to :tce_specification_capability
 
   has_many :budget_allocation_capabilities, :dependent => :restrict
-  has_many :budget_allocations, :through => :budget_allocation_capabilities
   has_many :extra_credit_moviment_types, :dependent => :restrict
   has_many :pledges, :dependent => :restrict
 
@@ -79,6 +78,12 @@ class Capability < Accounting::Model
     return '-' if pledged_amount(period).zero?
 
     (deficit_profit(period) * 100.0) / pledged_amount(period)
+  end
+
+  def budget_allocations
+    return unless budget_allocation_capabilities
+
+    budget_allocation_capabilities.map(&:budget_allocation)
   end
 
   def to_s

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe PurchaseSolicitationsController do
   before do
     sign_in User.make!(:sobrinho_as_admin_and_employee)
-    BudgetStructure.stub(:find).with(1)
+    BudgetStructure.stub(:find)
   end
 
   context 'GET #new' do

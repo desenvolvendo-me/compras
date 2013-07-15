@@ -63,6 +63,43 @@ feature "LicitationProcesses" do
       year: 2012)
   end
 
+  let :budget_allocation do
+    BudgetAllocation.new(
+      id: 1,
+      code: 123,
+      budget_structure: budget_structure,
+      expense_nature: aposentadorias_reserva_reformas,
+      budget_allocation_capabilities: [BudgetAllocationCapability.make!(:generic, budget_allocation_id: 1)],
+      year: 2013,
+      amount: 500.0,
+      to_s: "123 - #{aposentadorias_reserva_reformas.expense_nature} - #{aposentadorias_reserva_reformas.description}"
+    )
+  end
+
+  let :another_budget_allocation do
+    BudgetAllocation.new(
+      id: 2,
+      code: 456,
+      budget_structure: budget_structure,
+      expense_nature: aplicacoes_diretas,
+      budget_allocation_capabilities: [BudgetAllocationCapability.make!(:generic, budget_allocation_id: 1)],
+      year: 2013,
+      amount: 3000.0,
+      to_s: "456 - #{aplicacoes_diretas.expense_nature} - #{aplicacoes_diretas.description}"
+    )
+  end
+
+  let :budget_allocation_params do
+    { params: { includes: [:expense_nature, :budget_structure, { budget_allocation_capabilities: {
+      include: [:capability, :budget_allocation]}}], methods: [:amount, :budget_structure_structure_sequence,
+      :expense_nature_expense_nature, :function_code, :subfunction_code, :government_program_code,
+      :government_action_code, :government_action_action_type]}}
+  end
+
+  let :another_budget_allocation_params do
+    { params: { includes: :expense_nature, methods: :amount } }
+  end
+
   background do
     create_roles ['judgment_forms',
                   'payment_methods',
@@ -74,18 +111,21 @@ feature "LicitationProcesses" do
 
     Prefecture.make!(:belo_horizonte)
 
-    BudgetStructure.stub(:find).with(1).and_return(budget_structure)
-    BudgetStructure.stub(:find).with(2).and_return(budget_structure_parent)
+    BudgetStructure.stub(:find).with(1, params: {}).and_return(budget_structure)
+    BudgetStructure.stub(:find).with(2, params: {}).and_return(budget_structure_parent)
     BudgetStructure.stub(:all).and_return([budget_structure])
 
     sign_in
 
-    ExpenseNature.stub(:all)
-    ExpenseNature.stub(:find)
-    ExpenseNature.stub(:find).with(1).and_return aposentadorias_reserva_reformas
-    ExpenseNature.stub(:find).with(2).and_return aposentadorias_rpps
-    ExpenseNature.stub(:find).with(3).and_return compra_de_material
-    ExpenseNature.stub(:find).with(4).and_return aplicacoes_diretas
+    ExpenseNature.stub(:find).with(1, params: {}).and_return aposentadorias_reserva_reformas
+    ExpenseNature.stub(:find).with(2, params: {}).and_return aposentadorias_rpps
+    ExpenseNature.stub(:find).with(3, params: {}).and_return compra_de_material
+    ExpenseNature.stub(:find).with(4, params: {}).and_return aplicacoes_diretas
+    ExpenseNature.stub(:all).and_return [aposentadorias_reserva_reformas, aposentadorias_rpps, compra_de_material, aplicacoes_diretas]
+
+    BudgetAllocation.stub(:find).with(1, budget_allocation_params).and_return(budget_allocation)
+    BudgetAllocation.stub(:find).with(2, budget_allocation_params).and_return(another_budget_allocation)
+    BudgetAllocation.stub(:all).and_return([budget_allocation, another_budget_allocation])
   end
 
   scenario 'create and update a licitation_process' do
@@ -93,8 +133,6 @@ feature "LicitationProcesses" do
     DocumentType.make!(:fiscal)
     DocumentType.make!(:oficial)
     JudgmentForm.make!(:por_item_com_menor_preco)
-    BudgetAllocation.make!(:alocacao, year: 2013, code: '123')
-    BudgetAllocation.make!(:reparo_2011, year: 2013, expense_nature_id: 4, code: '456')
     Material.make!(:antivirus)
     Material.make!(:arame_farpado)
     Indexer.make!(:xpto)
@@ -102,6 +140,9 @@ feature "LicitationProcesses" do
     ExpenseNature.should_receive(:all).and_return [aposentadorias_rpps]
     ExpenseNature.should_receive(:all).and_return [compra_de_material]
     ExpenseNature.should_receive(:all).and_return [aposentadorias_rpps]
+
+    BudgetAllocation.should_receive(:all).and_return [budget_allocation]
+    BudgetAllocation.should_receive(:all).and_return [another_budget_allocation]
 
     navigate 'Processos de Compra > Processos de Compras'
 
@@ -193,7 +234,7 @@ feature "LicitationProcesses" do
 
       fill_with_autocomplete 'Desdobramento', :with => '3.1'
 
-      expect(page).to have_field '', :with => '3.1.90.01.01 - Aposentadorias Custeadas com Recursos do RPPS'
+      expect(page).to have_field 'Desdobramento', :with => '3.1.90.01.01 - Aposentadorias Custeadas com Recursos do RPPS'
 
       fill_in 'Valor previsto', :with => '20,00'
 
@@ -222,7 +263,7 @@ feature "LicitationProcesses" do
 
       fill_with_autocomplete 'Desdobramento', :with => '3.0'
 
-      expect(page).to have_field '', :with => '3.0.10.01.11 - Compra de Material'
+      expect(page).to have_field 'Desdobramento', :with => '3.0.10.01.11 - Compra de Material'
 
       fill_in 'Valor previsto', :with => '250,00'
 
@@ -465,7 +506,7 @@ feature "LicitationProcesses" do
 
       fill_with_autocomplete 'Desdobramento', :with => '3.1'
 
-      expect(page).to have_field '', :with => '3.1.90.01.01 - Aposentadorias Custeadas com Recursos do RPPS'
+      expect(page).to have_field 'Desdobramento', :with => '3.1.90.01.01 - Aposentadorias Custeadas com Recursos do RPPS'
 
       fill_in 'Valor previsto', :with => '20,00'
 
@@ -565,7 +606,6 @@ feature "LicitationProcesses" do
   scenario 'changing judgment form' do
     PaymentMethod.make!(:dinheiro)
     DocumentType.make!(:fiscal)
-    BudgetAllocation.make!(:alocacao)
     Material.make!(:antivirus)
     Indexer.make!(:xpto)
     JudgmentForm.make!(:por_lote_com_melhor_tecnica)
@@ -597,7 +637,6 @@ feature "LicitationProcesses" do
     DocumentType.make!(:oficial)
     Material.make!(:arame_farpado)
     Indexer.make!(:selic)
-    BudgetAllocation.make!(:alocacao)
 
     navigate 'Processos de Compra > Processos de Compras'
 
@@ -776,7 +815,6 @@ feature "LicitationProcesses" do
   scenario 'create a new licitation_process with envelope opening date today' do
     PaymentMethod.make!(:dinheiro)
     DocumentType.make!(:fiscal)
-    BudgetAllocation.make!(:alocacao)
     Material.make!(:antivirus)
     Indexer.make!(:xpto)
 
@@ -878,8 +916,7 @@ feature "LicitationProcesses" do
 
   scenario "allowing changes to licitation process after ratification" do
     LicitationProcessRatification.make!(:processo_licitatorio_computador)
-    BudgetAllocation.make!(:alocacao, year: 2013)
-    BudgetAllocation.make!(:reparo_2011, year: 2013, expense_nature_id: 4, code: 4)
+    BudgetAllocation.should_receive(:all).and_return [another_budget_allocation]
 
     navigate 'Processos de Compra > Processos de Compras'
 
@@ -890,14 +927,14 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Orçamento' do
-      fill_with_autocomplete 'Dotação orçamentária', with: '4'
+      fill_with_autocomplete 'Dotação orçamentária', with: '456'
       fill_in 'Valor previsto', with: '300,00'
 
       click_button 'Adicionar'
 
       within_records do
         within 'tbody .nested-record:last' do
-          expect(page).to have_content '4 - Aplicações Diretas'
+          expect(page).to have_content '456 - Aplicações Diretas'
           expect(page).to have_content '3.1.90.00.00 - Aplicações Diretas'
           expect(page).to have_content '3.000,00'
           expect(page).to have_content '300,00'
@@ -910,7 +947,7 @@ feature "LicitationProcesses" do
     within_tab 'Orçamento' do
       within_records do
         within 'tbody .nested-record:last' do
-          expect(page).to have_content '4 - 3.1.90.00.00 - Aplicações Diretas'
+          expect(page).to have_content '456 - 3.1.90.00.00 - Aplicações Diretas'
           expect(page).to have_content '3.1.90.00.00 - Aplicações Diretas'
           expect(page).to have_content '3.000,00'
           expect(page).to have_content '300,00'
@@ -1080,9 +1117,10 @@ feature "LicitationProcesses" do
     PaymentMethod.make!(:dinheiro)
     DocumentType.make!(:fiscal)
     JudgmentForm.make!(:por_item_com_menor_preco)
-    BudgetAllocation.make!(:alocacao)
     Material.make!(:antivirus)
     Indexer.make!(:xpto)
+
+    BudgetAllocation.stub(:find).with(1, another_budget_allocation_params).and_return(budget_allocation)
 
     navigate 'Processos de Compra > Processos de Compras'
 
@@ -1161,7 +1199,7 @@ feature "LicitationProcesses" do
         expect(page).to have_content 'Valor previsto'
 
         within 'tbody tr' do
-          expect(page).to have_content '1 - 3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+          expect(page).to have_content '123 - 3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
           expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
           expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
           expect(page).to have_content '500,00'
@@ -1215,7 +1253,7 @@ feature "LicitationProcesses" do
         expect(page).to have_content 'Valor previsto'
 
         within 'tbody tr' do
-          expect(page).to have_content '1 - 3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+          expect(page).to have_content '123 - 3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
           expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
           expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
           expect(page).to have_content '500,00'
@@ -1473,10 +1511,11 @@ feature "LicitationProcesses" do
     PaymentMethod.make!(:dinheiro)
     DocumentType.make!(:fiscal)
     JudgmentForm.make!(:por_item_com_menor_preco)
-    BudgetAllocation.make!(:alocacao)
     Material.make!(:antivirus)
     Indexer.make!(:xpto)
     Creditor.make!(:sobrinho)
+
+    BudgetAllocation.stub(:find).with(1, another_budget_allocation_params).and_return(budget_allocation)
 
     navigate 'Processos de Compra > Processos de Compras'
 
@@ -1623,10 +1662,11 @@ feature "LicitationProcesses" do
     PaymentMethod.make!(:dinheiro)
     DocumentType.make!(:fiscal)
     JudgmentForm.make!(:por_item_com_menor_preco)
-    BudgetAllocation.make!(:alocacao)
     Material.make!(:antivirus)
     Indexer.make!(:xpto)
     Creditor.make!(:sobrinho)
+
+    BudgetAllocation.stub(:find).with(1, another_budget_allocation_params).and_return(budget_allocation)
 
     navigate 'Processos de Compra > Processos de Compras'
 
@@ -1697,7 +1737,7 @@ feature "LicitationProcesses" do
         expect(page).to have_content 'Valor previsto'
 
         within 'tbody tr' do
-          expect(page).to have_content '1 - 3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+          expect(page).to have_content '123 - 3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
           expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
           expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
           expect(page).to have_content '500,00'
@@ -1728,6 +1768,8 @@ feature "LicitationProcesses" do
                                :delivery_location => DeliveryLocation.make!(:health),
                                :responsible => Employee.make!(:wenderson),
                                :budget_structure_id => 2)
+
+    BudgetAllocation.stub(:find).with(1, another_budget_allocation_params).and_return(budget_allocation)
 
     navigate 'Processos de Compra > Processos de Compras'
 
@@ -1887,9 +1929,10 @@ feature "LicitationProcesses" do
     PaymentMethod.make!(:dinheiro)
     DocumentType.make!(:fiscal)
     JudgmentForm.make!(:por_item_com_menor_preco)
-    BudgetAllocation.make!(:alocacao)
     Material.make!(:antivirus)
     Indexer.make!(:xpto)
+
+    BudgetAllocation.stub(:find).with(1, another_budget_allocation_params).and_return(budget_allocation)
 
     navigate 'Processos de Compra > Processos de Compras'
 
@@ -2026,7 +2069,7 @@ feature "LicitationProcesses" do
         expect(page).to have_content 'Valor previsto'
 
         within 'tbody tr' do
-          expect(page).to have_content '1 - 3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+          expect(page).to have_content '123 - 3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
           expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
           expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
           expect(page).to have_content '500,00'
@@ -2313,14 +2356,15 @@ feature "LicitationProcesses" do
     DocumentType.make!(:fiscal)
     DocumentType.make!(:oficial)
     JudgmentForm.make!(:por_item_com_menor_preco)
-    BudgetAllocation.make!(:alocacao, year: 2013, code: '123')
-    BudgetAllocation.make!(:reparo_2011, year: 2013, expense_nature_id: 4, code: '456')
     Material.make!(:antivirus)
     Material.make!(:arame_farpado)
     Indexer.make!(:xpto)
 
     ExpenseNature.should_receive(:all).and_return [aposentadorias_rpps]
     ExpenseNature.should_receive(:all).and_return [compra_de_material]
+
+    BudgetAllocation.should_receive(:all).and_return [budget_allocation]
+    BudgetAllocation.should_receive(:all).and_return [another_budget_allocation]
 
     navigate 'Processos de Compra > Processos de Compras'
 
@@ -2417,14 +2461,15 @@ feature "LicitationProcesses" do
     DocumentType.make!(:fiscal)
     DocumentType.make!(:oficial)
     JudgmentForm.make!(:por_item_com_menor_preco)
-    BudgetAllocation.make!(:alocacao, year: 2013, code: '123')
-    BudgetAllocation.make!(:reparo_2011, year: 2013, expense_nature_id: 4, code: '456')
     Material.make!(:antivirus)
     Material.make!(:arame_farpado)
     Indexer.make!(:xpto)
 
     ExpenseNature.should_receive(:all).and_return [aposentadorias_rpps]
     ExpenseNature.should_receive(:all).and_return [compra_de_material]
+
+    BudgetAllocation.should_receive(:all).and_return [budget_allocation]
+    BudgetAllocation.should_receive(:all).and_return [another_budget_allocation]
 
     navigate 'Processos de Compra > Processos de Compras'
 
@@ -2520,8 +2565,10 @@ feature "LicitationProcesses" do
 
   scenario 'should filter auto_complete in budget_allocation by budget_allocation_year' do
     LicitationProcess.make!(:processo_licitatorio, purchase_process_budget_allocations: [])
-    BudgetAllocation.make!(:alocacao, year: 2014)
-    BudgetAllocation.make!(:reparo_2011, year: 2013, expense_nature_id: 4)
+
+    budget_allocation.year = 2014
+    BudgetAllocation.should_receive(:all).and_return [budget_allocation]
+    BudgetAllocation.should_receive(:all).and_return [another_budget_allocation]
 
     navigate 'Processos de Compra > Processos de Compras'
 
@@ -2534,16 +2581,16 @@ feature "LicitationProcesses" do
     within_tab 'Orçamento' do
       fill_in 'Ano da dotação', with: '2014'
 
-      within_autocomplete 'Dotação orçamentária', with: '1' do
-        expect(page).to have_content '1 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
-        expect(page).to_not have_content '1 - Aplicações Diretas'
+      within_autocomplete 'Dotação orçamentária', with: 'A' do
+        expect(page).to have_content '123 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+        expect(page).to_not have_content '456 - Aplicações Diretas'
       end
 
       fill_in 'Ano da dotação', with: '2013'
 
-      within_autocomplete 'Dotação orçamentária', with: '1' do
-        expect(page).to_not have_content '1 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
-        expect(page).to have_content '1 - Aplicações Diretas'
+      within_autocomplete 'Dotação orçamentária', with: 'A' do
+        expect(page).to_not have_content '123 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+        expect(page).to have_content '456 - Aplicações Diretas'
       end
     end
   end

@@ -25,7 +25,6 @@ describe PurchaseSolicitation do
 
   it { should have_and_belong_to_many(:licitation_processes) }
   it { should have_and_belong_to_many(:price_collections) }
-  it { should have_many(:budget_allocations).dependent(:restrict) }
   it { should have_many(:purchase_solicitation_budget_allocations).dependent(:destroy).order(:id) }
   it { should have_many(:items).dependent(:restrict)}
   it { should have_many(:purchase_solicitation_liberations).dependent(:destroy).order(:sequence) }
@@ -260,6 +259,34 @@ describe PurchaseSolicitation do
       ])
 
       expect(subject.total_items_value).to eq 45
+    end
+  end
+
+  describe '#budget_allocations' do
+    before do
+      subject.stub :purchase_solicitation_budget_allocations => [purchase_solicitation_budget_allocation]
+    end
+
+    let :purchase_solicitation_budget_allocation do
+      double(:purchase_solicitation_budget_allocation, :budget_allocation => budget_allocation)
+    end
+
+    let :budget_allocation do
+      double(:budget_allocation)
+    end
+
+    it 'delegates to purchase_solicitation_budget_allocations' do
+      expect(subject.budget_allocations).to eq [budget_allocation]
+    end
+
+    context 'when purchase_solicitation_budget_allocations is nil' do
+      before do
+        subject.stub :purchase_solicitation_budget_allocations => nil
+      end
+
+      it 'returns nil' do
+        expect(subject.budget_allocations).to be_nil
+      end
     end
   end
 end

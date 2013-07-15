@@ -1,5 +1,7 @@
-class BudgetAllocationsController < CrudController
-  has_scope :term, allow_blank: true
-  has_scope :by_year
-  has_scope :budget_structure_id
+class BudgetAllocationsController < ApiConsumerController
+  private
+
+  def fetch_params
+    super.merge(includes: :expense_nature)
+  end
 end

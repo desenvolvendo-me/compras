@@ -27,12 +27,14 @@ feature "PurchaseProcessTradings" do
                   'purchase_solicitations']
 
     Prefecture.make!(:belo_horizonte)
-    BudgetStructure.stub(:find).with(1).and_return(budget_structure)
+    BudgetStructure.stub(:find).and_return(budget_structure)
 
     sign_in
 
     ExpenseNature.stub(:all)
     ExpenseNature.stub(:find)
+    BudgetAllocation.stub(:all)
+    BudgetAllocation.stub(:find)
   end
 
   scenario 'create a trading by item' do

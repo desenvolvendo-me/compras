@@ -5,7 +5,7 @@ describe LicitationProcessesController do
   before do
     controller.stub(:authenticate_user!)
     controller.stub(:authorize_resource!)
-    BudgetStructure.stub(:find).with(1).and_return
+    BudgetStructure.stub(:find)
   end
 
   describe "GET #new" do

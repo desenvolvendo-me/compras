@@ -3,8 +3,6 @@ class Subfunction < Accounting::Model
 
   attr_readonly :entity_id
 
-  has_many :budget_allocations, :dependent => :restrict
-
   with_options :allow_blank => true do |allowing_blank|
     allowing_blank.validates :code, :numericality => true
     allowing_blank.validates :code, :description, :uniqueness => true

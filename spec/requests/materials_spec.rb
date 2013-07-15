@@ -6,7 +6,7 @@ feature "Materials" do
     sign_in
 
     ExpenseNature.stub(:all).and_return [expense_nature]
-    ExpenseNature.stub(:find).with(1).and_return expense_nature
+    ExpenseNature.stub(:find).with(1, params: {}).and_return expense_nature
   end
 
   let(:expense_nature) do

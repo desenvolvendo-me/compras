@@ -16,13 +16,15 @@ feature "PurchaseSolicitationLiberations" do
   end
 
   background do
-    BudgetStructure.stub(:find).with(1).and_return(budget_structure)
+    BudgetStructure.stub(:find).and_return(budget_structure)
 
     create_roles ['purchase_solicitations', 'employees']
     sign_in
 
     ExpenseNature.stub(:all)
     ExpenseNature.stub(:find)
+    BudgetAllocation.stub(:all)
+    BudgetAllocation.stub(:find)
   end
 
   scenario 'create a new purchase_solicitation_liberation' do
