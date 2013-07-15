@@ -16,6 +16,9 @@ feature 'Report::MapOfBids' do
   background do
     BudgetStructure.stub(:find).with(1).and_return(budget_structure)
     sign_in
+
+    ExpenseNature.stub(:all)
+    ExpenseNature.stub(:find)
   end
 
   scenario 'should map of bids' do

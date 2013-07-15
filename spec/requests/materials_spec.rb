@@ -4,11 +4,22 @@ require 'spec_helper'
 feature "Materials" do
   background do
     sign_in
+
+    ExpenseNature.stub(:all).and_return [expense_nature]
+    ExpenseNature.stub(:find).with(1).and_return expense_nature
+  end
+
+  let(:expense_nature) do
+    ExpenseNature.new(
+      id: 1,
+      regulatory_act_id: 1,
+      expense_nature: '3.0.10.01.12',
+      kind: 'analytical',
+      description: 'Vencimentos e Salários',
+      docket: 'Registra o valor das despesas com vencimentos')
   end
 
   scenario 'create a new material, update and destroy an existing' do
-    make_dependencies!
-
     navigate 'Comum > Cadastrais > Materiais > Materiais'
     click_link 'Criar Material'
 
@@ -78,8 +89,6 @@ feature "Materials" do
   end
 
   scenario 'generate code' do
-    make_dependencies!
-
     navigate 'Comum > Cadastrais > Materiais > Materiais'
 
     click_link 'Criar Material'
@@ -131,8 +140,6 @@ feature "Materials" do
   end
 
   it 'should not have the class disabled when editing material' do
-    make_dependencies!
-
     Material.make!(:antivirus)
 
     navigate 'Comum > Cadastrais > Materiais > Materiais'
@@ -143,8 +150,6 @@ feature "Materials" do
   end
 
   it 'should not have the expense economic classification disabled when editing material' do
-    make_dependencies!
-
     Material.make!(:antivirus)
 
     navigate 'Comum > Cadastrais > Materiais > Materiais'
@@ -181,8 +186,6 @@ feature "Materials" do
   end
 
   scenario 'does not show material classes with child' do
-    make_dependencies!
-
     FactoryGirl.create(:material_class,
       :masked_number => "01.32.15.000.000", :description => 'Antivirus')
 
@@ -197,8 +200,6 @@ feature "Materials" do
   end
 
   scenario 'uncheck control_amount when material_type is not service' do
-    make_dependencies!
-
     navigate 'Comum > Cadastrais > Materiais > Materiais'
 
     click_link 'Criar Material'
@@ -267,9 +268,5 @@ feature "Materials" do
     expect(page).to_not have_link 'Esconder estoque'
 
     expect(page).to_not have_css '#stock' # A tabela do stoque deve estar invisível
-  end
-
-  def make_dependencies!
-    ExpenseNature.make!(:vencimento_e_salarios)
   end
 end

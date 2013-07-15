@@ -34,6 +34,7 @@ describe TceExport::MG::MonthlyMonitoring::DirectPurchaseGenerator do
 
     let(:emissao_edital) { StageProcess.make!(:emissao_edital, description: "Cotação de preços", type_of_purchase: PurchaseProcessTypeOfPurchase::DIRECT_PURCHASE) }
     let(:sobrinho) { Employee.make!(:sobrinho) }
+    let(:expense_nature) { double(:expense_nature, id: 1, expense_nature: '3.1.90.01.01') }
 
     it "generates a CSV file with the required data" do
       BudgetStructure.should_receive(:find).at_least(1).times.with(2).and_return(budget_structure_parent)
@@ -54,7 +55,10 @@ describe TceExport::MG::MonthlyMonitoring::DirectPurchaseGenerator do
 
       budget_allocation = BudgetAllocation.make!(:alocacao,
         budget_allocation_capabilities: [],
-        budget_structure: budget_structure)
+        budget_structure: budget_structure,
+        expense_nature_id: 1)
+
+      ExpenseNature.stub(:find).and_return(expense_nature)
 
       budget_allocation_capability = BudgetAllocationCapability.make!(:generic,
         amount: 500.8,
@@ -104,7 +108,6 @@ describe TceExport::MG::MonthlyMonitoring::DirectPurchaseGenerator do
         prefecture: prefecture,
         month: 5,
         year: 2013)
-
 
       tce_specification_capability = TceSpecificationCapability.make!(:ampliacao)
 

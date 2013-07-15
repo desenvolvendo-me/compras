@@ -45,6 +45,8 @@ describe TceExport::MG::MonthlyMonitoring::PurchaseOpeningGenerator do
         performance_field: 'Desenvolvimento Educacional')
     end
 
+    let(:expense_nature) { double(:expense_nature, id: 1, expense_nature: '3.1.90.01.01') }
+
     it "generates a CSV file with the required data" do
       BudgetStructure.should_receive(:find).at_least(1).times.with(2).and_return(budget_structure_parent)
       BudgetStructure.should_receive(:find).at_least(1).times.with(1).and_return(budget_structure)
@@ -58,7 +60,8 @@ describe TceExport::MG::MonthlyMonitoring::PurchaseOpeningGenerator do
 
       budget_allocation = BudgetAllocation.make!(:alocacao,
         budget_allocation_capabilities: [],
-        budget_structure: budget_structure)
+        budget_structure: budget_structure,
+        expense_nature_id: 1)
 
       budget_allocation_capability = BudgetAllocationCapability.make!(:generic,
         amount: 500.8,
@@ -77,6 +80,8 @@ describe TceExport::MG::MonthlyMonitoring::PurchaseOpeningGenerator do
       ratification = LicitationProcessRatification.make!(:processo_licitatorio_computador,
         licitation_process: licitation,
         ratification_date: Date.new(2013, 5, 23))
+
+      ExpenseNature.stub(:find).and_return(expense_nature)
 
       described_class.generate_file(monthly_monitoring)
 

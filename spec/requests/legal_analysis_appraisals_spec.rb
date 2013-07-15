@@ -17,6 +17,9 @@ feature "LegalAnalysisAppraisals" do
     sign_in
 
     BudgetStructure.stub(:find).with(1).and_return(budget_structure)
+
+    ExpenseNature.stub(:all)
+    ExpenseNature.stub(:find)
   end
 
   scenario 'create a new legal_analysis_appraisal, update and destroy an existing' do

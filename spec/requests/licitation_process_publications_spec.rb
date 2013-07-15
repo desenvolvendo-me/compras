@@ -20,6 +20,9 @@ feature "LicitationProcessPublications" do
     sign_in
 
     BudgetStructure.stub(:find).with(1).and_return(budget_structure)
+
+    ExpenseNature.stub(:all)
+    ExpenseNature.stub(:find)
   end
 
   scenario 'index should have link to back to licitation_process and create a new publication' do

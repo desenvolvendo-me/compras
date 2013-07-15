@@ -21,7 +21,6 @@ describe Material do
     expect(subject.to_s).to eq '01 - Manga'
   end
 
-  it { should belong_to :expense_nature }
   it { should have_many(:purchase_process_items).dependent(:restrict) }
   it { should have_many(:purchase_solicitation_items).dependent(:restrict) }
   it { should have_many(:price_collection_lot_items).dependent(:restrict) }

@@ -33,6 +33,31 @@ feature "PurchaseSolicitations" do
     BudgetStructure.stub(:all).and_return([budget_structure])
 
     sign_in
+
+    ExpenseNature.stub(:all).and_return [aposentadorias_rpps]
+    ExpenseNature.stub(:find).with(1).and_return aposentadorias_rpps
+    ExpenseNature.stub(:find).with(2).and_return aposentadorias_reserva_reformas
+  end
+
+  let(:aposentadorias_rpps) do
+    ExpenseNature.new(
+      id: 1, year: 2012, regulatory_act_id: 1, expense_nature: '3.1.90.01.01',
+      kind: 'analytical', description: 'Aposentadorias Custeadas com Recursos do RPPS',
+      docket: 'Registra o valor das despesas com vencimentos', parent_id: 2)
+  end
+
+  let(:aposentadorias_reserva_reformas) do
+    ExpenseNature.new(
+      id: 2, year: 2012, expense_nature: '3.1.90.01.00', kind: 'sinthetic',
+      description: 'Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares',
+      docket: 'Registra o valor das despesas com aposentadorias, reserva e reformas')
+  end
+
+  let(:aposentadorias_reserva) do
+    ExpenseNature.new(
+      id: 1, regulatory_act_id: 1, expense_nature: '3.1.90.01.02',kind: 'analytical',
+      description: 'Aposentadorias Custeadas com Recursos da Reserva Remunerada',
+      year: 2012)
   end
 
   scenario 'create a new purchase_solicitation' do
@@ -40,8 +65,7 @@ feature "PurchaseSolicitations" do
 
     Employee.make!(:sobrinho)
     DeliveryLocation.make!(:education)
-    budget_allocation = BudgetAllocation.make!(:alocacao)
-    ExpenseNature.make!(:aposentadorias_rpps)
+    budget_allocation = BudgetAllocation.make!(:alocacao, code: '123', expense_nature_id: 2)
     Material.make!(:antivirus, :material_type => MaterialType::ASSET)
     Material.make!(:office, :material_type => MaterialType::ASSET)
 
@@ -120,14 +144,13 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Dotações orçamentárias' do
-      click_button "Adicionar"
+     click_button "Adicionar"
 
-      expect(page).to_not have_css '.nested-record'
-
-      fill_with_autocomplete 'Dotação', :with => 'Aposentadorias'
+     expect(page).to_not have_css '.nested-record'
+      fill_with_autocomplete 'Dotação', :with => '123'
       fill_with_autocomplete 'Desdobramento', :with => 'Aposentadorias'
 
-      expect(page).to have_field 'Natureza da despesa',:with => '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+      expect(page).to have_field 'Natureza da despesa', :with => '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
       expect(page).to have_field 'Saldo da dotação',:with => '500,00'
 
       fill_in 'Valor estimado', :with => '100,00'
@@ -135,7 +158,7 @@ feature "PurchaseSolicitations" do
       click_button "Adicionar"
 
       within_records do
-        expect(page).to have_content '1 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+        expect(page).to have_content '123 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
         expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
         expect(page).to have_content '3.1.90.01.01 - Aposentadorias Custeadas com Recursos do RPPS'
         expect(page).to have_content '500,00'
@@ -143,13 +166,14 @@ feature "PurchaseSolicitations" do
       end
 
       # Não pode adicionar 2 dotações iguais
-      fill_with_autocomplete 'Dotação', :with => 'Aposentadorias'
+      fill_with_autocomplete 'Dotação', :with => '123'
 
       click_button "Adicionar"
 
       within_records do
         expect(page).to have_css '.nested-record', :count => 1
       end
+
     end
 
     click_button 'Salvar'
@@ -196,7 +220,7 @@ feature "PurchaseSolicitations" do
 
     within_tab 'Dotações orçamentárias' do
       within_records do
-        expect(page).to have_content '1 - 3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+        expect(page).to have_content '123 - 3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
         expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
         expect(page).to have_content '3.1.90.01.01 - Aposentadorias Custeadas com Recursos do RPPS'
         expect(page).to have_content '500,00'
@@ -210,9 +234,12 @@ feature "PurchaseSolicitations" do
     PurchaseSolicitation.make!(:reparo)
     Employee.make!(:wenderson)
     DeliveryLocation.make!(:health)
-    ExpenseNature.make!(:aposentadorias_reserva, year: 2012)
-    budget_allocation = BudgetAllocation.make!(:reparo_2011, year: 2012)
+    budget_allocation = BudgetAllocation.make!(:reparo_2011, year: 2012, code: '123', expense_nature_id: 2)
     Material.make!(:arame_farpado)
+
+    ExpenseNature.stub(:all).and_return [aposentadorias_reserva]
+    ExpenseNature.stub(:find).with(1).and_return aposentadorias_reserva
+    ExpenseNature.stub(:find).with(2).and_return aposentadorias_reserva_reformas
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
@@ -282,13 +309,13 @@ feature "PurchaseSolicitations" do
         click_link "Remover"
       end
 
-      fill_with_autocomplete 'Dotação orçamentária', :with => 'Aposentadorias'
+      fill_with_autocomplete 'Dotação', :with => '123'
       fill_with_autocomplete 'Desdobramento', :with => 'Reserva'
 
       click_button "Adicionar"
 
       within_records do
-        expect(page).to have_content '1 - 3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+        expect(page).to have_content '123 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
         expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
         expect(page).to have_content '3.1.90.01.02 - Aposentadorias Custeadas com Recursos da Reserva Remunerada'
         expect(page).to have_content '500,00'
@@ -339,10 +366,10 @@ feature "PurchaseSolicitations" do
       expect(page).to have_css('.records .record', :count => 1)
 
       within_records do
-        expect(page).to have_content '1 - 3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+        expect(page).to have_content '123 - 3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
         expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
         expect(page).to have_content '3.1.90.01.02 - Aposentadorias Custeadas com Recursos da Reserva Remunerada'
-        expect(page).to have_content '500,00'
+        expect(page).to have_content '3.000,00'
       end
     end
   end
@@ -424,7 +451,7 @@ feature "PurchaseSolicitations" do
     PurchaseSolicitation.make!(:reparo)
     Employee.make!(:sobrinho)
     DeliveryLocation.make!(:education)
-    budget_allocation = BudgetAllocation.make!(:alocacao)
+    budget_allocation = BudgetAllocation.make!(:alocacao, code: '123')
     Material.make!(:office, :material_type => MaterialType::ASSET)
 
     navigate 'Processos de Compra > Solicitações de Compra'
@@ -453,7 +480,7 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Dotações orçamentárias' do
-      fill_with_autocomplete 'Dotação', :with => 'Aposentadorias'
+      fill_with_autocomplete 'Dotação', :with => '123'
 
       click_button "Adicionar"
     end
@@ -526,7 +553,11 @@ feature "PurchaseSolicitations" do
   end
 
   scenario 'create a new purchase_solicitation with same budget_structure and material' do
-    purchase_solicitation = PurchaseSolicitation.make!(:reparo)
+    purchase_solicitation = PurchaseSolicitation.make!(:reparo,
+      purchase_solicitation_budget_allocations: [
+        PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria,
+          budget_allocation: BudgetAllocation.make!(:alocacao, code: '123'))])
+
     Employee.make!(:sobrinho)
     DeliveryLocation.make!(:education)
 
@@ -556,7 +587,7 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Dotações orçamentárias' do
-      fill_with_autocomplete 'Dotação', :with => 'Aposentadorias'
+      fill_with_autocomplete 'Dotação', :with => '123'
 
       click_button "Adicionar"
     end
@@ -660,7 +691,7 @@ feature "PurchaseSolicitations" do
     PurchaseSolicitation.make!(:reparo,
                                :items => [item],
                                :kind => PurchaseSolicitationKind::SERVICES)
-    budget_allocation = BudgetAllocation.make!(:alocacao, year: Date.current.year)
+    budget_allocation = BudgetAllocation.make!(:alocacao, year: Date.current.year, code: '123')
     Material.make!(:antivirus)
     Material.make!(:office, :material_type => MaterialType::SERVICE)
 
@@ -677,7 +708,7 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab "Dotações orçamentárias" do
-      fill_with_autocomplete 'Dotação', :with => 'Aposentadorias'
+      fill_with_autocomplete 'Dotação', :with => '123'
 
       click_button "Adicionar"
     end

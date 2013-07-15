@@ -20,6 +20,9 @@ feature "PurchaseSolicitationLiberations" do
 
     create_roles ['purchase_solicitations', 'employees']
     sign_in
+
+    ExpenseNature.stub(:all)
+    ExpenseNature.stub(:find)
   end
 
   scenario 'create a new purchase_solicitation_liberation' do

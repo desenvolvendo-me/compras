@@ -35,4 +35,5 @@
   </div>
 </div>
 
-<%= f.input :expense_nature %>
+<%= f.input :expense_nature, as: :modal, hidden_field: :expense_nature_id %>
+<%= f.error :expense_nature_id %>

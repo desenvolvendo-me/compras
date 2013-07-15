@@ -2,7 +2,7 @@
 PurchaseSolicitationBudgetAllocation.blueprint(:alocacao_primaria) do
   budget_allocation { BudgetAllocation.make!(:alocacao) }
   estimated_value { 20.0 }
-  expense_nature { ExpenseNature.make!(:aposentadorias_rpps)}
+  expense_nature_id { 1 }
   blocked { false }
 end
 
