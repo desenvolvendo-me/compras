@@ -1,25 +1,31 @@
 pt-BR:
-  activerecord:
+  activemodel:
     models:
-      reserve_fund:
+      "unico_api/resources/contabilidade/reserve_fund":
         one: "Reserva de Dotação"
         other: "Reservas de Dotação"
 
     attributes:
-      reserve_fund:
-        descriptor: "Descritor"
+      "unico_api/resources/contabilidade/reserve_fund":
+        amount: "Valor da reserva"
+        amount_with_currency: "Valor da reserva"
+        balance: "Saldo"
+        value: "Valor"
+        balance_with_currency: "Saldo"
         budget_allocation: "Dotação orçamentária"
         budget_allocation_amount: "Saldo orçamentário"
-        budget_allocation_reserved_value: "Valor reservado"
-        value: "Valor"
-        modality: "Modalidade"
+        budget_allocation_balance: "Saldo orçamentário"
+        budget_allocation_reserved_value: "Valor reservado da dotação"
         creditor: "Favorecido"
         date: "Data"
-        reason: "Motivo"
+        descriptor: "Descritor"
         licitation_process: "Processo de compra"
+        modality: "Modalidade"
+        reason: "Motivo"
+        reserve_allocation_type: "Tipo"
 
   simple_form:
     hints:
-      reserve_fund:
+      "unico_api/resources/contabilidade/reserve_fund":
         licitation: 'Exemplo: "39/2011"'
         process: 'Exemplo: "39/2011"'

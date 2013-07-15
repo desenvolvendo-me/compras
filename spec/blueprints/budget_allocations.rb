@@ -18,7 +18,6 @@ BudgetAllocation.blueprint(:alocacao) do
   date { Date.current }
   budget_allocation_capabilities { [BudgetAllocationCapability.make!(:generic, amount: 500.0, budget_allocation: object)] }
   kind { BudgetAllocationKind::DIVIDE }
-  reserve_funds { [ReserveFund.make!(:detran_2011, :budget_allocation => object)] }
   year { 2012 }
 end
 

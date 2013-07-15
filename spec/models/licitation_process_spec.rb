@@ -19,7 +19,6 @@ require 'app/models/pledge'
 require 'app/models/judgment_commission_advice'
 require 'app/models/creditor'
 require 'app/models/licitation_notice'
-require 'app/models/reserve_fund'
 require 'app/models/indexer'
 require 'app/models/purchase_solicitation_item'
 require 'app/models/legal_analysis_appraisal'
@@ -73,7 +72,6 @@ describe LicitationProcess do
   it { should have_many(:licitation_process_appeals).dependent(:restrict) }
   it { should have_many(:license_creditors).dependent(:restrict).through(:bidders) }
   it { should have_many(:accreditation_creditors).through(:purchase_process_accreditation) }
-  it { should have_many(:reserve_funds).dependent(:restrict) }
   it { should have_many(:licitation_process_ratifications).dependent(:restrict) }
   it { should have_many(:ratifications_items).through(:licitation_process_ratifications) }
   it { should have_many(:licitation_process_ratification_creditors).through(:licitation_process_ratifications).order(:id) }

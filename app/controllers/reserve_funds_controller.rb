@@ -1,3 +1,3 @@
-class ReserveFundsController < CrudController
+class ReserveFundsController < ApiConsumerController
   actions :modal
 end
