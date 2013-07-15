@@ -50,6 +50,18 @@ $(document).ready(function() {
     }
   };
 
+  function setBudgetAllocationSource() {
+    var url = Routes.budget_allocations,
+        year   = $("#licitation_process_budget_allocation_year").val(),
+        params = { by_year: year };
+
+    if (year){
+      url += "?" + jQuery.param(params);
+    }
+
+    $("#licitation_process_budget_allocation").data('source', url);
+  }
+
   function toogleVisibilityFieldsToTrading() {
     if (($('#licitation_process_modality').val() == '<%= Modality::TRADING %>')) {
       $('.field-to-trading').removeClass('hidden');
@@ -59,6 +71,10 @@ $(document).ready(function() {
       $('.not-fields-to-trading').removeClass('hidden');
     }
   };
+
+  $('#licitation_process_budget_allocation_year').on('change', function(){
+    setBudgetAllocationSource();
+  });
 
   $('input[name="licitation_process[type_of_purchase]"]').change(function(){
     organizesModalities();
@@ -74,4 +90,5 @@ $(document).ready(function() {
   organizesModalities();
   toogleVisibilityFieldsToTrading();
   toogleVisibilityFieldsToTradingAndConcurrence();
+  setBudgetAllocationSource();
 });
