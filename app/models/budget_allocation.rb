@@ -6,7 +6,8 @@ class BudgetAllocation < Accounting::Model
   belongs_to :subfunction
   belongs_to :government_program
   belongs_to :government_action
-  belongs_to :expense_nature
+
+  belongs_to_resource :expense_nature
 
   belongs_to_resource :budget_structure
 
@@ -31,8 +32,7 @@ class BudgetAllocation < Accounting::Model
   orderize :code
 
   scope :term, lambda { |q|
-    joins { expense_nature }.
-    where { code.eq("#{q}")  | expense_nature.description.like("%#{q}%") }
+    where { code.eq("#{q}") }
   }
 
   scope :by_year, ->(year) { where(year: year) if year.present? }

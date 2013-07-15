@@ -21,7 +21,10 @@ feature "Bidders" do
                   'creditors',
                   'purchase_process_items']
     sign_in
-  end
+
+    ExpenseNature.stub(:all)
+    ExpenseNature.stub(:find)
+ end
 
   scenario 'accessing the bidders and return to licitation process edit page' do
     BudgetStructure.should_receive(:find).at_least(1).times.with(1).and_return(budget_structure)

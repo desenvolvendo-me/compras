@@ -21,6 +21,9 @@ feature "JudgmentCommissionAdvices" do
     sign_in
 
     BudgetStructure.stub(:find).with(1).and_return(budget_structure)
+
+    ExpenseNature.stub(:all)
+    ExpenseNature.stub(:find)
   end
 
   scenario 'create, update and destroy a new judgment_commission_advice' do

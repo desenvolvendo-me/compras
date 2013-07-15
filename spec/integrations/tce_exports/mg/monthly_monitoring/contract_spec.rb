@@ -73,6 +73,8 @@ describe TceExport::MG::MonthlyMonitoring::ContractGenerator do
 
 
     context "with two or more creditors" do
+      let(:expense_nature) { double(:expense_nature, id: 1, expense_nature: '3.1.90.01.01') }
+
       it "generates a CSV file with the required data" do
         FactoryGirl.create(:extended_prefecture, prefecture: prefecture)
 
@@ -89,9 +91,8 @@ describe TceExport::MG::MonthlyMonitoring::ContractGenerator do
           end_date: end_date, licitation_process: licitation_process,
           creditors: [creditor_sobrinho, creditor_wenderson])
 
-        expense_nature = ExpenseNature.make!(:vencimento_e_salarios)
-
         budget_allocation = BudgetAllocation.make!(:alocacao)
+        budget_allocation.stub(:expense_nature).and_return(expense_nature)
 
         pledge = Pledge.new(
           id: 1, value: 9.99, description: 'Empenho 1', year: 2013, to_s: 1,
@@ -108,8 +109,7 @@ describe TceExport::MG::MonthlyMonitoring::ContractGenerator do
           capability_source_code: capability.capability_source_code)
 
         UnicoAPI::Resources::Contabilidade::Pledge.stub(:all)
-          .with(params: {by_contract_id: contract.id,
-            includes: [:capability, budget_allocation: { include: :expense_nature }]})
+          .with(params: {by_contract_id: contract.id, includes: [:capability, budget_allocation: { include: :expense_nature }]})
           .and_return([pledge])
 
         ContractTermination.make!(:contrato_rescindido, contract: contract)
@@ -134,6 +134,8 @@ describe TceExport::MG::MonthlyMonitoring::ContractGenerator do
     end
 
     context "with only one creditor" do
+      let(:expense_nature) { double(:expense_nature, id: 1, expense_nature: '3.1.90.01.01') }
+
       it "generates a CSV file with the required data" do
         FactoryGirl.create(:extended_prefecture, prefecture: prefecture)
 
@@ -152,9 +154,8 @@ describe TceExport::MG::MonthlyMonitoring::ContractGenerator do
 
         ContractTermination.make!(:contrato_rescindido, contract: contract)
 
-        expense_nature = ExpenseNature.make!(:vencimento_e_salarios)
-
         budget_allocation = BudgetAllocation.make!(:alocacao)
+        budget_allocation.stub(:expense_nature).and_return(expense_nature)
 
         pledge = Pledge.new(
           id: 1, value: 9.99, description: 'Empenho 1', year: 2013, to_s: 1,

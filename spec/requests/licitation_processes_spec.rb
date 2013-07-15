@@ -26,6 +26,43 @@ feature "LicitationProcesses" do
       performance_field: 'Desenvolvimento Educacional')
   end
 
+  let(:aposentadorias_reserva_reformas) do
+    ExpenseNature.new(
+      id: 1,
+      expense_nature: '3.1.90.01.00',
+      kind: 'synthetic',
+      description: 'Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares',
+      year: 2012)
+  end
+
+  let(:aposentadorias_rpps) do
+    ExpenseNature.new(
+      id: 2,
+      expense_nature: '3.1.90.01.01',
+      kind: 'analytical',
+      description: 'Aposentadorias Custeadas com Recursos do RPPS',
+      year: Date.current.year)
+  end
+
+  let(:compra_de_material) do
+    ExpenseNature.new(
+      id: 3,
+      expense_nature: '3.0.10.01.11',
+      kind: 'analytical',
+      description: 'Compra de Material',
+      year: Date.current.year,
+      parent_id: 1)
+  end
+
+  let(:aplicacoes_diretas) do
+    ExpenseNature.new(
+      id: 4,
+      expense_nature: '3.1.90.00.00',
+      kind: 'both',
+      description: 'Aplicações Diretas',
+      year: 2012)
+  end
+
   background do
     create_roles ['judgment_forms',
                   'payment_methods',
@@ -42,6 +79,13 @@ feature "LicitationProcesses" do
     BudgetStructure.stub(:all).and_return([budget_structure])
 
     sign_in
+
+    ExpenseNature.stub(:all)
+    ExpenseNature.stub(:find)
+    ExpenseNature.stub(:find).with(1).and_return aposentadorias_reserva_reformas
+    ExpenseNature.stub(:find).with(2).and_return aposentadorias_rpps
+    ExpenseNature.stub(:find).with(3).and_return compra_de_material
+    ExpenseNature.stub(:find).with(4).and_return aplicacoes_diretas
   end
 
   scenario 'create and update a licitation_process' do
@@ -49,13 +93,15 @@ feature "LicitationProcesses" do
     DocumentType.make!(:fiscal)
     DocumentType.make!(:oficial)
     JudgmentForm.make!(:por_item_com_menor_preco)
-    BudgetAllocation.make!(:alocacao, year: 2013)
-    BudgetAllocation.make!(:reparo_2011, year: 2013, expense_nature: ExpenseNature.make!(:aplicacoes_diretas))
+    BudgetAllocation.make!(:alocacao, year: 2013, code: '123')
+    BudgetAllocation.make!(:reparo_2011, year: 2013, expense_nature_id: 4, code: '456')
     Material.make!(:antivirus)
     Material.make!(:arame_farpado)
     Indexer.make!(:xpto)
-    ExpenseNature.make!(:aposentadorias_rpps, :year => Date.current.year)
-    ExpenseNature.make!(:compra_de_material, :year => Date.current.year, parent: ExpenseNature.make!(:aplicacoes_diretas))
+
+    ExpenseNature.should_receive(:all).and_return [aposentadorias_rpps]
+    ExpenseNature.should_receive(:all).and_return [compra_de_material]
+    ExpenseNature.should_receive(:all).and_return [aposentadorias_rpps]
 
     navigate 'Processos de Compra > Processos de Compras'
 
@@ -140,7 +186,7 @@ feature "LicitationProcesses" do
 
       fill_in 'Ano da dotação', with: '2013'
 
-      fill_with_autocomplete 'Dotação orçamentária', :with => 'Aposentadorias'
+      fill_with_autocomplete 'Dotação orçamentária', :with => '123'
 
       expect(page).to have_field 'Natureza da despesa', :with => '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
       expect(page).to have_field 'Saldo da dotação', :with => '500,00'
@@ -161,7 +207,7 @@ feature "LicitationProcesses" do
         expect(page).to have_content 'Valor previsto'
 
         within 'tbody tr' do
-          expect(page).to have_content '1 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+          expect(page).to have_content '123 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
           expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
           expect(page).to have_content '3.1.90.01.01 - Aposentadorias Custeadas com Recursos do RPPS'
           expect(page).to have_content '500,00'
@@ -169,7 +215,7 @@ feature "LicitationProcesses" do
         end
       end
 
-      fill_with_autocomplete 'Dotação orçamentária', :with => 'Aplicações'
+      fill_with_autocomplete 'Dotação orçamentária', :with => '456'
 
       expect(page).to have_field 'Natureza da despesa', :with => '3.1.90.00.00 - Aplicações Diretas'
       expect(page).to have_field 'Saldo da dotação', :with => '3.000,00'
@@ -190,7 +236,7 @@ feature "LicitationProcesses" do
         expect(page).to have_content 'Valor previsto'
 
         within 'tbody tr:last' do
-          expect(page).to have_content '1 - Aplicações Diretas'
+          expect(page).to have_content '456 - Aplicações Diretas'
           expect(page).to have_content '3.1.90.00.00 - Aplicações Diretas'
           expect(page).to have_content '3.0.10.01.11 - Compra de Material'
           expect(page).to have_content '3.000,00'
@@ -273,7 +319,7 @@ feature "LicitationProcesses" do
         expect(page).to have_content 'Valor previsto'
 
         within 'tbody tr' do
-          expect(page).to have_content '1 - 3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+          expect(page).to have_content '123 - 3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
           expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
           expect(page).to have_content '3.1.90.01.01 - Aposentadorias Custeadas com Recursos do RPPS'
           expect(page).to have_content '500,00'
@@ -281,7 +327,7 @@ feature "LicitationProcesses" do
         end
 
         within 'tbody tr:last' do
-          expect(page).to have_content '1 - 3.1.90.00.00 - Aplicações Diretas'
+          expect(page).to have_content '456 - 3.1.90.00.00 - Aplicações Diretas'
           expect(page).to have_content '3.1.90.00.00 - Aplicações Diretas'
           expect(page).to have_content '3.0.10.01.11 - Compra de Material'
           expect(page).to have_content '3.000,00'
@@ -389,7 +435,7 @@ feature "LicitationProcesses" do
         end
       end
 
-      expect(page).to have_field 'Dotação orçamentária', with: '1 - 3.1.90.00.00 - Aplicações Diretas'
+      expect(page).to have_field 'Dotação orçamentária', with: '456 - 3.1.90.00.00 - Aplicações Diretas'
       expect(page).to have_field 'Natureza da despesa', with: '3.1.90.00.00 - Aplicações Diretas'
       expect(page).to have_field 'Desdobramento', with: '3.0.10.01.11 - Compra de Material'
       expect(page).to have_field 'Saldo da dotação', with: '3.000,00'
@@ -401,7 +447,7 @@ feature "LicitationProcesses" do
 
       within_records do
         within 'tbody .nested-record:last' do
-          expect(page).to have_content '1 - 3.1.90.00.00 - Aplicações Diretas'
+          expect(page).to have_content '456 - 3.1.90.00.00 - Aplicações Diretas'
           expect(page).to have_content '3.1.90.00.00 - Aplicações Diretas'
           expect(page).to have_content '3.0.10.01.11 - Compra de Material'
           expect(page).to have_content '3.000,00'
@@ -411,7 +457,7 @@ feature "LicitationProcesses" do
 
       expect(page).to have_disabled_field 'Valor total das dotações', :with => '300,00'
 
-      fill_with_autocomplete 'Dotação orçamentária', :with => 'Aposentadorias'
+      fill_with_autocomplete 'Dotação orçamentária', :with => '123'
 
       expect(page).to have_field 'Natureza da despesa', :with => '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
 
@@ -492,7 +538,7 @@ feature "LicitationProcesses" do
         expect(page).to have_content 'Valor previsto'
 
         within 'tbody tr:first' do
-          expect(page).to have_content '1 - 3.1.90.00.00 - Aplicações Diretas'
+          expect(page).to have_content '456 - 3.1.90.00.00 - Aplicações Diretas'
           expect(page).to have_content '3.1.90.00.00 - Aplicações Diretas'
           expect(page).to have_content '3.0.10.01.11 - Compra de Material'
           expect(page).to have_content '3.000,00'
@@ -500,7 +546,7 @@ feature "LicitationProcesses" do
         end
 
         within 'tbody tr:last' do
-          expect(page).to have_content '1 - 3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+          expect(page).to have_content '123 - 3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
           expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
           expect(page).to have_content '3.1.90.01.01 - Aposentadorias Custeadas com Recursos do RPPS'
           expect(page).to have_content '500,00'
@@ -524,7 +570,6 @@ feature "LicitationProcesses" do
     Indexer.make!(:xpto)
     JudgmentForm.make!(:por_lote_com_melhor_tecnica)
     JudgmentForm.make!(:por_item_com_menor_preco)
-    ExpenseNature.make!(:aposentadorias_rpps, :year => Date.current.year)
 
     navigate 'Processos de Compra > Processos de Compras'
 
@@ -1094,7 +1139,7 @@ feature "LicitationProcesses" do
         within 'tbody tr' do
           expect(page).to have_content '1 - 3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
           expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
-          expect(page).to have_content '3.1.90.01.01 - Aposentadorias Custeadas com Recursos do RPPS'
+          expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
           expect(page).to have_content '500,00'
           expect(page).to have_content '20,00'
         end
@@ -1148,7 +1193,7 @@ feature "LicitationProcesses" do
         within 'tbody tr' do
           expect(page).to have_content '1 - 3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
           expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
-          expect(page).to have_content '3.1.90.01.01 - Aposentadorias Custeadas com Recursos do RPPS'
+          expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
           expect(page).to have_content '500,00'
           expect(page).to have_content '20,00'
         end
@@ -1630,7 +1675,7 @@ feature "LicitationProcesses" do
         within 'tbody tr' do
           expect(page).to have_content '1 - 3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
           expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
-          expect(page).to have_content '3.1.90.01.01 - Aposentadorias Custeadas com Recursos do RPPS'
+          expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
           expect(page).to have_content '500,00'
           expect(page).to have_content '20,00'
         end
@@ -1959,7 +2004,7 @@ feature "LicitationProcesses" do
         within 'tbody tr' do
           expect(page).to have_content '1 - 3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
           expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
-          expect(page).to have_content '3.1.90.01.01 - Aposentadorias Custeadas com Recursos do RPPS'
+          expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
           expect(page).to have_content '500,00'
           expect(page).to have_content '20,00'
         end
@@ -2244,13 +2289,14 @@ feature "LicitationProcesses" do
     DocumentType.make!(:fiscal)
     DocumentType.make!(:oficial)
     JudgmentForm.make!(:por_item_com_menor_preco)
-    BudgetAllocation.make!(:alocacao, year: 2013)
-    BudgetAllocation.make!(:reparo_2011, year: 2013, expense_nature: ExpenseNature.make!(:aplicacoes_diretas))
+    BudgetAllocation.make!(:alocacao, year: 2013, code: '123')
+    BudgetAllocation.make!(:reparo_2011, year: 2013, expense_nature_id: 4, code: '456')
     Material.make!(:antivirus)
     Material.make!(:arame_farpado)
     Indexer.make!(:xpto)
-    ExpenseNature.make!(:aposentadorias_rpps, :year => Date.current.year)
-    ExpenseNature.make!(:compra_de_material, :year => Date.current.year, parent: ExpenseNature.make!(:aplicacoes_diretas))
+
+    ExpenseNature.should_receive(:all).and_return [aposentadorias_rpps]
+    ExpenseNature.should_receive(:all).and_return [compra_de_material]
 
     navigate 'Processos de Compra > Processos de Compras'
 
@@ -2302,7 +2348,7 @@ feature "LicitationProcesses" do
     within_tab 'Orçamento' do
       fill_in 'Ano da dotação', with: '2013'
 
-      fill_with_autocomplete 'Dotação orçamentária', :with => 'Aposentadorias'
+      fill_with_autocomplete 'Dotação orçamentária', :with => '123'
 
       fill_with_autocomplete 'Desdobramento', :with => '3.1'
 
@@ -2310,7 +2356,7 @@ feature "LicitationProcesses" do
 
       click_button 'Adicionar'
 
-      fill_with_autocomplete 'Dotação orçamentária', :with => 'Aplicações'
+      fill_with_autocomplete 'Dotação orçamentária', :with => '456'
 
       fill_with_autocomplete 'Desdobramento', :with => '3.0'
 
@@ -2347,13 +2393,14 @@ feature "LicitationProcesses" do
     DocumentType.make!(:fiscal)
     DocumentType.make!(:oficial)
     JudgmentForm.make!(:por_item_com_menor_preco)
-    BudgetAllocation.make!(:alocacao, year: 2013)
-    BudgetAllocation.make!(:reparo_2011, year: 2013, expense_nature: ExpenseNature.make!(:aplicacoes_diretas))
+    BudgetAllocation.make!(:alocacao, year: 2013, code: '123')
+    BudgetAllocation.make!(:reparo_2011, year: 2013, expense_nature_id: 4, code: '456')
     Material.make!(:antivirus)
     Material.make!(:arame_farpado)
     Indexer.make!(:xpto)
-    ExpenseNature.make!(:aposentadorias_rpps, :year => Date.current.year)
-    ExpenseNature.make!(:compra_de_material, :year => Date.current.year, parent: ExpenseNature.make!(:aplicacoes_diretas))
+
+    ExpenseNature.should_receive(:all).and_return [aposentadorias_rpps]
+    ExpenseNature.should_receive(:all).and_return [compra_de_material]
 
     navigate 'Processos de Compra > Processos de Compras'
 
@@ -2407,7 +2454,7 @@ feature "LicitationProcesses" do
     within_tab 'Orçamento' do
       fill_in 'Ano da dotação', with: '2013'
 
-      fill_with_autocomplete 'Dotação orçamentária', :with => 'Aposentadorias'
+      fill_with_autocomplete 'Dotação orçamentária', :with => '123'
 
       fill_with_autocomplete 'Desdobramento', :with => '3.1'
 
@@ -2415,7 +2462,7 @@ feature "LicitationProcesses" do
 
       click_button 'Adicionar'
 
-      fill_with_autocomplete 'Dotação orçamentária', :with => 'Aplicações'
+      fill_with_autocomplete 'Dotação orçamentária', :with => '456'
 
       fill_with_autocomplete 'Desdobramento', :with => '3.0'
 

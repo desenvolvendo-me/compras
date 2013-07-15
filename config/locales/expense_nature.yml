@@ -1,12 +1,12 @@
 pt-BR:
-  activerecord:
+  activemodel:
     models:
-      expense_nature:
+      unico_api/resources/contabilidade/expense_nature:
         one: "Natureza da Despesa"
         other: "Naturezas das Despesas"
 
     attributes:
-      expense_nature:
+      unico_api/resources/contabilidade/expense_nature:
         descriptor: "Descritor"
         regulatory_act: "Ato regulamentador"
         expense_nature: "Natureza da despesa"

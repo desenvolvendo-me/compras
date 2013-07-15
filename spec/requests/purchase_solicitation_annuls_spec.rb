@@ -21,6 +21,9 @@ feature 'PurchaseSolicitationAnnul' do
     sign_in
 
     BudgetStructure.stub(:find).with(1).and_return(budget_structure)
+
+    ExpenseNature.stub(:all)
+    ExpenseNature.stub(:find)
   end
 
   scenario 'should not have a annul link when was creating a new solicitation' do

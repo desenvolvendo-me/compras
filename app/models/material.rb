@@ -1,4 +1,6 @@
 class Material < Compras::Model
+  include BelongsToResource
+
   attr_accessible :code, :material_class_id, :description, :detailed_description,
                   :reference_unit_id, :manufacturer, :material_type, :combustible,
                   :expense_nature_id, :active, :control_amount
@@ -12,7 +14,8 @@ class Material < Compras::Model
 
   belongs_to :material_class
   belongs_to :reference_unit
-  belongs_to :expense_nature
+
+  belongs_to_resource :expense_nature
 
   has_many :purchase_process_items, :dependent => :restrict
   has_many :purchase_solicitation_items, :dependent => :restrict

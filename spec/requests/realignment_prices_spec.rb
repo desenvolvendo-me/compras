@@ -16,6 +16,9 @@ feature "RealignmentPrices" do
   background do
     BudgetStructure.stub(:find).with(1).and_return(budget_structure)
     sign_in
+
+    ExpenseNature.stub(:all)
+    ExpenseNature.stub(:find)
   end
 
   scenario 'create a new realignment_price by lot' do

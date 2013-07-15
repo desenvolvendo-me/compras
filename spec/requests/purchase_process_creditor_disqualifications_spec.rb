@@ -19,6 +19,9 @@ feature 'PurchaseProcessCreditorDisqualifications' do
     Prefecture.make!(:belo_horizonte)
     BudgetStructure.stub(:find).with(1).and_return(budget_structure)
     sign_in
+
+    ExpenseNature.stub(:all)
+    ExpenseNature.stub(:find)
   end
 
   scenario 'create and update a creditor disqualification of items' do

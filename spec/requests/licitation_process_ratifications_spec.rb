@@ -17,6 +17,9 @@ feature "LicitationProcessRatifications" do
     sign_in
 
     BudgetStructure.stub(:find).with(1).and_return(budget_structure)
+
+    ExpenseNature.stub(:all)
+    ExpenseNature.stub(:find)
   end
 
   scenario 'creating and updating a ratification to licitation process' do
@@ -274,6 +277,13 @@ feature "LicitationProcessRatifications" do
     LicitationProcessRatification.make!(:processo_licitatorio_computador)
     PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado, licitation_process: licitation, ranking: 1)
     SignatureConfiguration.make!(:homologacao_e_adjudicao_do_processo_licitatorio)
+
+    aposentadorias_reserva_reformas = ExpenseNature.new(
+      id: 2, year: 2012, expense_nature: '3.1.90.01.00', kind: 'sinthetic',
+      description: 'Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares',
+      docket: 'Registra o valor das despesas com aposentadorias, reserva e reformas')
+
+    ExpenseNature.stub(:find).and_return aposentadorias_reserva_reformas
 
     navigate 'Processos de Compra > Processos de Compras'
 

@@ -7,7 +7,7 @@ BudgetAllocation.blueprint(:alocacao) do
   subfunction { Subfunction.make!(:geral) }
   government_program { GovernmentProgram.make!(:habitacao) }
   government_action { GovernmentAction.make!(:governamental) }
-  expense_nature { ExpenseNature.make!(:aposentadorias_reserva_reformas) }
+  expense_nature_id { 1 }
   debt_type { DebtType::NOTHING }
   refinancing { true }
   health { false }
@@ -30,7 +30,7 @@ BudgetAllocation.blueprint(:alocacao_extra) do
   subfunction { Subfunction.make!(:geral) }
   government_program { GovernmentProgram.make!(:habitacao) }
   government_action { GovernmentAction.make!(:governamental) }
-  expense_nature { ExpenseNature.make!(:aposentadorias_reserva_reformas) }
+  expense_nature_id { 1 }
   debt_type { DebtType::NOTHING }
   refinancing { true }
   health { false }
@@ -52,7 +52,7 @@ BudgetAllocation.blueprint(:reparo_2011) do
   subfunction { Subfunction.make!(:supervisor) }
   government_program { GovernmentProgram.make!(:educacao) }
   government_action { GovernmentAction.make!(:nacional) }
-  expense_nature { ExpenseNature.make!(:aposentadorias_reserva_reformas) }
+  expense_nature_id { 1 }
   debt_type { DebtType::NOTHING }
   refinancing { true }
   health { false }

@@ -18,6 +18,9 @@ feature "PriceCollections" do
     BudgetStructure.stub(:find).with(1).and_return(budget_structure)
 
     sign_in
+
+    ExpenseNature.stub(:all)
+    ExpenseNature.stub(:find)
   end
 
   scenario 'can not create a new price collection when no set the creditor email' do

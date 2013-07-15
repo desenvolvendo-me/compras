@@ -8,7 +8,7 @@ Material.blueprint(:antivirus) do
   manufacturer { "Plantador" }
   combustible { false }
   material_type { MaterialType::CONSUMPTION }
-  expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
+  expense_nature_id { 1 }
 end
 
 Material.blueprint(:office) do
@@ -20,7 +20,7 @@ Material.blueprint(:office) do
   manufacturer { "MS" }
   combustible { false }
   material_type { MaterialType::CONSUMPTION }
-  expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
+  expense_nature_id { 1 }
 end
 
 Material.blueprint(:arame_farpado) do
@@ -32,7 +32,7 @@ Material.blueprint(:arame_farpado) do
   manufacturer { "Moveis" }
   combustible { false }
   material_type { MaterialType::CONSUMPTION }
-  expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
+  expense_nature_id { 1 }
 end
 
 Material.blueprint(:arame_comum) do
@@ -43,7 +43,7 @@ Material.blueprint(:arame_comum) do
   reference_unit { ::FactoryGirl::Preload.factories['ReferenceUnit'][:unidade] }
   combustible { false }
   material_type { MaterialType::CONSUMPTION }
-  expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
+  expense_nature_id { 1 }
 end
 
 Material.blueprint(:manutencao) do
@@ -53,5 +53,5 @@ Material.blueprint(:manutencao) do
   detailed_description { "Manutenção de Computadores" }
   reference_unit { ::FactoryGirl::Preload.factories['ReferenceUnit'][:unidade] }
   material_type { MaterialType::SERVICE }
-  expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
+  expense_nature_id { 1 }
 end

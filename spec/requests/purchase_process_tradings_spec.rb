@@ -30,6 +30,9 @@ feature "PurchaseProcessTradings" do
     BudgetStructure.stub(:find).with(1).and_return(budget_structure)
 
     sign_in
+
+    ExpenseNature.stub(:all)
+    ExpenseNature.stub(:find)
   end
 
   scenario 'create a trading by item' do

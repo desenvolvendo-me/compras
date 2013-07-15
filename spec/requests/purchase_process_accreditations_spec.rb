@@ -20,6 +20,9 @@ feature "PurchaseProcessAccreditation" do
 
     create_roles ['licitation_processes']
     sign_in
+
+    ExpenseNature.stub(:all)
+    ExpenseNature.stub(:find)
   end
 
   scenario 'create, update and remove accreditance', intermittent: true do
