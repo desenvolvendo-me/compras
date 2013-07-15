@@ -12,6 +12,17 @@ feature "Contracts" do
       year: 2012, to_s: 2, emission_date: "2012-01-01")
   end
 
+  let :budget_structure do
+    BudgetStructure.new(
+      id: 1,
+      code: '29',
+      full_code: '1',
+      tce_code: '051',
+      description: 'Secretaria de Educação',
+      acronym: 'SEMUEDU',
+      performance_field: 'Desenvolvimento Educacional')
+  end
+
   background do
     sign_in
 
@@ -19,6 +30,8 @@ feature "Contracts" do
 
     UnicoAPI::Resources::Contabilidade::Pledge.stub(:find).with(1).and_return(pledge)
     UnicoAPI::Resources::Contabilidade::Pledge.stub(:find).with(2).and_return(pledge_two)
+    BudgetStructure.stub(:find).with(1).and_return(budget_structure)
+    BudgetStructure.stub(:all).and_return([budget_structure])
   end
 
   scenario 'picking a licitation process' do
@@ -62,7 +75,6 @@ feature "Contracts" do
     LicitationProcess.make!(:processo_licitatorio)
     DisseminationSource.make!(:jornal_municipal)
     Creditor.make!(:sobrinho)
-    BudgetStructure.make!(:secretaria_de_educacao)
     Employee.make!(:wenderson)
     ContractType.make!(:trainees)
 

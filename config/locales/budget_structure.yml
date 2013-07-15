@@ -1,5 +1,5 @@
 pt-BR:
-  activerecord:
+  activemodel:
     models:
       budget_structure:
         one: "Estrutura Orçamentária"
@@ -13,6 +13,7 @@ pt-BR:
         budget_structure_configuration: "Configuração de estrutura orçamentária"
         budget_structure_level: "Nível"
         code: "Código"
+        full_code: "Código"
         description: "Descrição"
         kind: "Tipo"
         parent: "Estrutura orçamentária superior"

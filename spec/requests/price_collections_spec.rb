@@ -2,8 +2,20 @@
 require 'spec_helper'
 
 feature "PriceCollections" do
+  let :budget_structure do
+    BudgetStructure.new(
+      id: 1,
+      code: '1',
+      full_code: '1',
+      tce_code: '051',
+      description: 'Secretaria de Educação',
+      acronym: 'SEMUEDU',
+      performance_field: 'Desenvolvimento Educacional')
+  end
+
   background do
     Prefecture.make!(:belo_horizonte)
+    BudgetStructure.stub(:find).with(1).and_return(budget_structure)
 
     sign_in
   end

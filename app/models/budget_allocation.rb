@@ -1,11 +1,14 @@
 class BudgetAllocation < Accounting::Model
+  include BelongsToResource
+
   belongs_to :descriptor
-  belongs_to :budget_structure
   belongs_to :function
   belongs_to :subfunction
   belongs_to :government_program
   belongs_to :government_action
   belongs_to :expense_nature
+
+  belongs_to_resource :budget_structure
 
   has_many :pledges, :dependent => :restrict
   has_many :reserve_funds, :dependent => :restrict

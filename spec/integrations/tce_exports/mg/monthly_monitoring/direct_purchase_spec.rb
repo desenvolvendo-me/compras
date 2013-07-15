@@ -2,6 +2,27 @@
 require 'spec_helper'
 
 describe TceExport::MG::MonthlyMonitoring::DirectPurchaseGenerator do
+  let :budget_structure_parent do
+    BudgetStructure.new(
+      id: 2,
+      code: '1',
+      tce_code: '051',
+      description: 'Secretaria de Educação',
+      acronym: 'SEMUEDU',
+      performance_field: 'Desenvolvimento Educacional')
+  end
+
+  let :budget_structure do
+    BudgetStructure.new(
+      id: 1,
+      parent_id: 2,
+      code: '29',
+      tce_code: '051',
+      description: 'Secretaria de Desenvolvimento',
+      acronym: 'SEMUEDU',
+      performance_field: 'Desenvolvimento Educacional')
+  end
+
   describe "#generate_file" do
     before do
       FileUtils.rm_f('tmp/DISPENSA.csv')
@@ -15,6 +36,9 @@ describe TceExport::MG::MonthlyMonitoring::DirectPurchaseGenerator do
     let(:sobrinho) { Employee.make!(:sobrinho) }
 
     it "generates a CSV file with the required data" do
+      BudgetStructure.should_receive(:find).at_least(1).times.with(2).and_return(budget_structure_parent)
+      BudgetStructure.should_receive(:find).at_least(1).times.with(1).and_return(budget_structure)
+
       prefecture = Prefecture.make!(:belo_horizonte)
       FactoryGirl.create(:extended_prefecture, prefecture: prefecture)
 
@@ -23,13 +47,10 @@ describe TceExport::MG::MonthlyMonitoring::DirectPurchaseGenerator do
         month: 5,
         year: 2013)
 
-
       tce_specification_capability = TceSpecificationCapability.make!(:ampliacao)
 
       capability = Capability.make!(:reforma,
         tce_specification_capability: tce_specification_capability)
-
-      budget_structure = BudgetStructure.make!(:secretaria_de_desenvolvimento)
 
       budget_allocation = BudgetAllocation.make!(:alocacao,
         budget_allocation_capabilities: [],
@@ -89,8 +110,6 @@ describe TceExport::MG::MonthlyMonitoring::DirectPurchaseGenerator do
 
       capability = Capability.make!(:reforma,
         tce_specification_capability: tce_specification_capability)
-
-      budget_structure = BudgetStructure.make!(:secretaria_de_desenvolvimento)
 
       budget_allocation = BudgetAllocation.make!(:alocacao,
         budget_allocation_capabilities: [],

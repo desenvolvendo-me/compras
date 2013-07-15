@@ -14,6 +14,17 @@ feature "OccurrenceContractualHistorics" do
       year: 2012, to_s: 2, emission_date: "2012-01-01")
   end
 
+  let :budget_structure do
+    BudgetStructure.new(
+      id: 1,
+      code: '1',
+      full_code: '1',
+      tce_code: '051',
+      description: 'Secretaria de Desenvolvimento',
+      acronym: 'SEMUEDU',
+      performance_field: 'Desenvolvimento Educacional')
+  end
+
   background do
     create_roles ['contracts']
     sign_in
@@ -22,6 +33,7 @@ feature "OccurrenceContractualHistorics" do
 
     UnicoAPI::Resources::Contabilidade::Pledge.stub(:find).with(1).and_return(pledge)
     UnicoAPI::Resources::Contabilidade::Pledge.stub(:find).with(2).and_return(pledge_two)
+    BudgetStructure.stub(:find).with(1).and_return(budget_structure)
   end
 
   scenario 'create a new occurrence_contractual_historic, update and destroy an existing' do

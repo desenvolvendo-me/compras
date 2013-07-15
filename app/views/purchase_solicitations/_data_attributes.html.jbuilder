@@ -11,7 +11,7 @@ builder resource, json do
     json.id                   budget_allocation.id
     json.to_s                 budget_allocation.to_s
     json.budget_allocation_id budget_allocation.budget_allocation_id
-    json.expense_nature       budget_allocation.budget_allocation.expense_nature.to_s
+    json.expense_nature       budget_allocation.budget_allocation_expense_nature.to_s
     json.amount               budget_allocation.budget_allocation.amount.to_f
   end
 

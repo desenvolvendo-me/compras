@@ -2,8 +2,21 @@
 require 'spec_helper'
 
 feature "LicitationProcessRatifications" do
+  let :budget_structure do
+    BudgetStructure.new(
+      id: 1,
+      parent_id: 2,
+      code: '29',
+      tce_code: '051',
+      description: 'Secretaria de Desenvolvimento',
+      acronym: 'SEMUEDU',
+      performance_field: 'Desenvolvimento Educacional')
+  end
+
   background do
     sign_in
+
+    BudgetStructure.stub(:find).with(1).and_return(budget_structure)
   end
 
   scenario 'creating and updating a ratification to licitation process' do

@@ -6,8 +6,6 @@ class LegalAnalysisAppraisal < Compras::Model
   belongs_to :licitation_process
   belongs_to :responsible, :class_name => "Employee"
 
-  has_one :execution_unit_responsible, through: :licitation_process
-
   has_many :licitation_process_ratifications, through: :licitation_process
 
   has_enumeration_for :appraisal_type, create_helpers: { prefix: true }
@@ -18,6 +16,7 @@ class LegalAnalysisAppraisal < Compras::Model
   validates :licitation_process, :appraisal_type, :reference,
             :appraisal_expedition_date, :responsible, :presence => true
 
+  delegate :execution_unit_responsible, to: :licitation_process, allow_nil: true
   delegate :year, :process, :modality, :description,
     :to => :licitation_process, :allow_nil => true
   delegate :cpf, :name, :street_name, :neighborhood_name, :city_tce_mg_code,

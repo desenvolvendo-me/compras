@@ -1,4 +1,6 @@
 class LicitationProcess < Compras::Model
+  include BelongsToResource
+
   attr_accessible :payment_method_id, :type_of_purchase,
                   :year, :process_date,:readjustment_index_id, :caution_value,
                   :envelope_delivery_date, :budget_allocation_year,
@@ -46,7 +48,8 @@ class LicitationProcess < Compras::Model
   belongs_to :payment_method
   belongs_to :readjustment_index, :class_name => 'Indexer'
   belongs_to :index_update_rate, :class_name => 'Indexer'
-  belongs_to :execution_unit_responsible, class_name: 'BudgetStructure'
+
+  belongs_to_resource :execution_unit_responsible, resource_class: BudgetStructure
 
   has_and_belongs_to_many :document_types, :join_table => :compras_document_types_compras_licitation_processes
   has_and_belongs_to_many :purchase_solicitations, :join_table => :compras_licitation_processes_purchase_solicitations,

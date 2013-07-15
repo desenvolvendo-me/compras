@@ -2,6 +2,7 @@
 require 'model_helper'
 require 'lib/annullable'
 require 'lib/signable'
+require 'app/models/budget_structure'
 require 'app/models/purchase_solicitation_budget_allocation'
 require 'app/models/purchase_solicitation_item'
 require 'app/models/budget_allocation'
@@ -32,7 +33,6 @@ describe PurchaseSolicitation do
   it { should belong_to :responsible }
   it { should belong_to :delivery_location }
   it { should belong_to :liberator }
-  it { should belong_to :budget_structure }
 
   it { should auto_increment(:code).by(:accounting_year) }
 

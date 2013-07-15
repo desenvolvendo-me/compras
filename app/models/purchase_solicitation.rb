@@ -1,4 +1,6 @@
 class PurchaseSolicitation < Compras::Model
+  include BelongsToResource
+
   attr_accessible :accounting_year, :request_date, :responsible_id, :kind,
                   :delivery_location_id, :general_observations, :justification,
                   :purchase_solicitation_budget_allocations_attributes,
@@ -17,7 +19,8 @@ class PurchaseSolicitation < Compras::Model
   belongs_to :responsible, :class_name => 'Employee', :foreign_key => 'responsible_id'
   belongs_to :delivery_location
   belongs_to :liberator, :class_name => 'Employee', :foreign_key => 'liberator_id'
-  belongs_to :budget_structure
+
+  belongs_to_resource :budget_structure
 
   has_and_belongs_to_many :licitation_processes, :join_table => :compras_licitation_processes_purchase_solicitations
 
@@ -47,6 +50,8 @@ class PurchaseSolicitation < Compras::Model
   validate :validate_budget_structure_and_materials
   validate :validate_liberated_status
 
+  before_save :set_budget_structure_description
+
   orderize "id DESC"
   filterize
 
@@ -74,13 +79,12 @@ class PurchaseSolicitation < Compras::Model
   }
 
   scope :term, lambda { |q|
-    joins { budget_structure.outer }.
     where {
       accounting_year.eq(Date.current.year) &
       (service_status.in [
         PurchaseSolicitationServiceStatus::LIBERATED,
         PurchaseSolicitationServiceStatus::PARTIALLY_FULFILLED ]) &
-      ((code.eq(q) & code.not_eq(0)) | budget_structure.description.like("#{q}%")
+      ((code.eq(q) & code.not_eq(0)) | budget_structure_description.like("#{q}%")
       )
     }
   }
@@ -156,6 +160,10 @@ class PurchaseSolicitation < Compras::Model
 
   protected
 
+  def set_budget_structure_description
+    self.budget_structure_description = budget_structure.present? ? budget_structure.description : ''
+  end
+
   def must_have_at_least_one_item
     unless items?
       errors.add(:items, :must_have_at_least_one_item)
@@ -179,7 +187,7 @@ class PurchaseSolicitation < Compras::Model
     items.each do |item|
       if materials_of_other_peding_purchase_solicitation.include?(item.material)
         errors.add(:base, :already_exists_a_pending_purchase_solicitation_with_this_budget_structure_and_material,
-                   :budget_structure => budget_structure, :material => item.material)
+                   :budget_structure => budget_structure(false), :material => item.material)
       end
     end
   end
