@@ -1,0 +1,12 @@
+pt-BR:
+  activemodel:
+    models:
+      accounting_cost_center:
+        one: "Centro de Custo"
+        other: "Centros de Custos"
+
+    attributes:
+      accounting_cost_center:
+        accounting_cost_center_setting: "Configuração de  Centro de Custo"
+        code: "Código"
+        name: "Nome"
