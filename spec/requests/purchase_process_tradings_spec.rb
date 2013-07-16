@@ -71,7 +71,7 @@ feature "PurchaseProcessTradings" do
     click_link 'Propostas'
 
     within_records do
-      within 'tbody tr:nth-child(1)' do
+      within 'tbody tr:nth-child(2)' do
         expect(page).to have_content 'Wenderson Malheiros'
 
         click_link 'Cadastrar propostas'
@@ -741,7 +741,7 @@ feature "PurchaseProcessTradings" do
     click_link 'Propostas'
 
     within_records do
-      within 'tbody tr:nth-child(1)' do
+      within 'tbody tr:nth-child(2)' do
         expect(page).to have_content 'Wenderson Malheiros'
 
         click_link 'Cadastrar propostas'
@@ -763,7 +763,7 @@ feature "PurchaseProcessTradings" do
     expect(page).to have_notice 'Proposta Comercial editada com sucesso'
 
     within_records do
-      within 'tbody tr:nth-child(2)' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_content 'Gabriel Sobrinho'
 
         click_link 'Cadastrar propostas'
@@ -919,7 +919,7 @@ feature "PurchaseProcessTradings" do
     click_link 'Propostas'
 
     within_records do
-      within 'tbody tr:nth-child(1)' do
+      within 'tbody tr:nth-child(2)' do
         expect(page).to have_content 'Wenderson Malheiros'
 
         click_link 'Cadastrar propostas'
@@ -941,7 +941,7 @@ feature "PurchaseProcessTradings" do
     expect(page).to have_notice 'Proposta Comercial editada com sucesso'
 
     within_records do
-      within 'tbody tr:nth-child(2)' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_content 'Gabriel Sobrinho'
 
         click_link 'Cadastrar propostas'
@@ -1125,7 +1125,7 @@ feature "PurchaseProcessTradings" do
     click_link 'Propostas'
 
     within_records do
-      within 'tbody tr:nth-child(1)' do
+      within 'tbody tr:nth-child(2)' do
         expect(page).to have_content 'Wenderson Malheiros'
 
         click_link 'Cadastrar propostas'
@@ -1147,7 +1147,7 @@ feature "PurchaseProcessTradings" do
     expect(page).to have_notice 'Proposta Comercial editada com sucesso'
 
     within_records do
-      within 'tbody tr:nth-child(2)' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_content 'Gabriel Sobrinho'
 
         click_link 'Cadastrar propostas'
