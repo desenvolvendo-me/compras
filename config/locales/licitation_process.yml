@@ -76,6 +76,7 @@ pt-BR:
         justification: "Justificativa da escolha"
         justification_and_legal: "Justificativa e fundamentação legal"
         budget_allocation_year: "Ano da dotação"
+        to_s: "Processo de compra"
 
   licitation_process:
     messages:

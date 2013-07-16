@@ -1,0 +1,48 @@
+$(document).ready(function() {
+
+  function postDataError(response) {
+    var errors = $.parseJSON(response.responseText).errors.base;
+
+    alertErrors(errors);
+  }
+
+  function postDataSuccess(response) {
+    console.log(response);
+  }
+
+  function postData() {
+    var reserveFund = { reserve_fund: buildReserveFund() };
+
+    $.ajax({
+      type: 'POST',
+      url: Routes.reserve_funds,
+      data: reserveFund,
+      dataType: 'json',
+      success: postDataSuccess,
+      error: postDataError
+    });
+  };
+
+  $('button#reserve_fund_create').on("click", function(event) {
+    event.preventDefault();
+
+    postData();
+  });
+
+  function buildReserveFund() {
+    reserveFund = {};
+
+    reserveFund['budget_allocation_id'] = 1; //$("#licitation_process_budget_allocation").val();
+    //reserveFund[reserve_fund_amount] = parsePtBrFloat($("#licitation_process_budget_allocation_value").val() || '0');
+    reserveFund['amount'] = $("#licitation_process_budget_allocation_value").val();
+    reserveFund['licitation_process_id'] = $("licitation_process_id").val();
+    reserveFund['date'] = "2013-07-01";
+    reserveFund['descriptor_id'] = 2;
+
+    return reserveFund;
+  }
+
+  function alertErrors(errors) {
+    alert(errors.join("\n"));
+  }
+ });

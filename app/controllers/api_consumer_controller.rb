@@ -1,4 +1,6 @@
 class ApiConsumerController < CrudController
+  before_filter :load_site
+
   def modal
     set_resource_ivar(resource_class)
 
@@ -19,5 +21,9 @@ class ApiConsumerController < CrudController
 
   def fetch_params
     params
+  end
+
+  def load_site
+    resource_class.site
   end
 end
