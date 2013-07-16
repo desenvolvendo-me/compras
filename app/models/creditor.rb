@@ -187,7 +187,7 @@ class Creditor < Compras::Model
       end
     end
 
-    query
+    query.order(:id)
   end
 
   def self.filter(params)

@@ -22,8 +22,8 @@ feature "RealignmentPrices" do
   end
 
   scenario 'create a new realignment_price by lot' do
-    creditor_nohup = Creditor.make!(:nohup)
     creditor_ibm   = Creditor.make!(:ibm)
+    creditor_nohup = Creditor.make!(:nohup)
 
     antivirus     = PurchaseProcessItem.make(:item, lot: 1010)
     arame         = PurchaseProcessItem.make!(:item_arame, lot: 50)
@@ -310,6 +310,9 @@ feature "RealignmentPrices" do
   end
 
   scenario 'create a new realignment_price for trading' do
+    ibm_creditor  = Creditor.make!(:ibm)
+    nobe_creditor = Creditor.make!(:nobe)
+
     antivirus     = PurchaseProcessItem.make(:item, lot: 1010)
     arame         = PurchaseProcessItem.make!(:item_arame, lot: 50)
     arame_farpado = PurchaseProcessItem.make!(:item_arame_farpado, lot: 50)
@@ -323,12 +326,12 @@ feature "RealignmentPrices" do
       licitation_process: purchase_process,
       purchase_process_accreditation_creditors: [])
 
-    ibm = PurchaseProcessAccreditationCreditor.make!(:sobrinho_creditor,
-      creditor: Creditor.make!(:ibm),
+    nobe = PurchaseProcessAccreditationCreditor.make!(:sobrinho_creditor,
+      creditor: nobe_creditor,
       purchase_process_accreditation: accreditation,
       has_power_of_attorney: true)
-    nobe = PurchaseProcessAccreditationCreditor.make!(:sobrinho_creditor,
-      creditor: Creditor.make!(:nobe),
+    ibm = PurchaseProcessAccreditationCreditor.make!(:sobrinho_creditor,
+      creditor: ibm_creditor,
       purchase_process_accreditation: accreditation,
       has_power_of_attorney: true)
 
