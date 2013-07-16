@@ -879,7 +879,7 @@ feature "LicitationProcesses" do
   scenario "allowing changes to licitation process after ratification" do
     LicitationProcessRatification.make!(:processo_licitatorio_computador)
     BudgetAllocation.make!(:alocacao, year: 2013)
-    BudgetAllocation.make!(:reparo_2011, year: 2013, expense_nature: ExpenseNature.make!(:aplicacoes_diretas))
+    BudgetAllocation.make!(:reparo_2011, year: 2013, expense_nature_id: 4, code: 4)
 
     navigate 'Processos de Compra > Processos de Compras'
 
@@ -890,14 +890,14 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Orçamento' do
-      fill_with_autocomplete 'Dotação orçamentária', with: 'Aplicações Diretas'
+      fill_with_autocomplete 'Dotação orçamentária', with: '4'
       fill_in 'Valor previsto', with: '300,00'
 
       click_button 'Adicionar'
 
       within_records do
         within 'tbody .nested-record:last' do
-          expect(page).to have_content '1 - Aplicações Diretas'
+          expect(page).to have_content '4 - Aplicações Diretas'
           expect(page).to have_content '3.1.90.00.00 - Aplicações Diretas'
           expect(page).to have_content '3.000,00'
           expect(page).to have_content '300,00'
@@ -910,7 +910,7 @@ feature "LicitationProcesses" do
     within_tab 'Orçamento' do
       within_records do
         within 'tbody .nested-record:last' do
-          expect(page).to have_content '1 - 3.1.90.00.00 - Aplicações Diretas'
+          expect(page).to have_content '4 - 3.1.90.00.00 - Aplicações Diretas'
           expect(page).to have_content '3.1.90.00.00 - Aplicações Diretas'
           expect(page).to have_content '3.000,00'
           expect(page).to have_content '300,00'
@@ -2521,7 +2521,7 @@ feature "LicitationProcesses" do
   scenario 'should filter auto_complete in budget_allocation by budget_allocation_year' do
     LicitationProcess.make!(:processo_licitatorio, purchase_process_budget_allocations: [])
     BudgetAllocation.make!(:alocacao, year: 2014)
-    BudgetAllocation.make!(:reparo_2011, year: 2013, expense_nature: ExpenseNature.make(:aplicacoes_diretas) )
+    BudgetAllocation.make!(:reparo_2011, year: 2013, expense_nature_id: 4)
 
     navigate 'Processos de Compra > Processos de Compras'
 
@@ -2534,14 +2534,14 @@ feature "LicitationProcesses" do
     within_tab 'Orçamento' do
       fill_in 'Ano da dotação', with: '2014'
 
-      within_autocomplete 'Dotação orçamentária', with: 'A' do
+      within_autocomplete 'Dotação orçamentária', with: '1' do
         expect(page).to have_content '1 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
         expect(page).to_not have_content '1 - Aplicações Diretas'
       end
 
       fill_in 'Ano da dotação', with: '2013'
 
-      within_autocomplete 'Dotação orçamentária', with: 'A' do
+      within_autocomplete 'Dotação orçamentária', with: '1' do
         expect(page).to_not have_content '1 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
         expect(page).to have_content '1 - Aplicações Diretas'
       end
