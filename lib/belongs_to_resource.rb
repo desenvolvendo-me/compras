@@ -12,12 +12,23 @@
 #   include BelongsToResource
 #
 #   belongs_to_resource :budget_structure
+#   belongs_to_resource :budget_allocation
+#
+#   private
+#
+#   def budget_allocation_params
+#     { includes: :expense_nature, methods: :amount }
+#   end
 # end
 #
 # c = Contract.last
 #
 # c.budget_structure_id
 # => 3
+# c.buget_allocation.expense_nature.id
+# => 1
+# c.buget_allocation.amount
+# => 500.0
 #
 # c.budget_structure
 # => consulta faz find na API
@@ -55,7 +66,7 @@ module BelongsToResource
           if use_cache
             #{resource_name}_cached
           else
-            #{resource_class}.find(#{resource_id})
+            #{resource_class}.find(#{resource_id}, params: #{resource_name}_params)
           end
         end
 
@@ -78,11 +89,15 @@ module BelongsToResource
 
         def #{resource_name}_cached
           if old_#{resource_id} != #{resource_id}
-            self.#{resource_name}_cache = #{resource_class}.find(#{resource_id})
+            self.#{resource_name}_cache = #{resource_class}.find(#{resource_id}, params: #{resource_name}_params)
             self.old_#{resource_id} = #{resource_id}
           end
 
           #{resource_name}_cache
+        end
+
+        def #{resource_name}_params
+          {}
         end
       }
     end
