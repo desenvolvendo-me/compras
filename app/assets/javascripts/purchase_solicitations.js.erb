@@ -87,7 +87,7 @@ $(document).ready(function() {
         params = { by_year: year };
 
     if (expenseNatureId) {
-      params['breakdown_of'] = expenseNatureId;
+      params['by_parent_id'] = expenseNatureId;
     }
 
     url += "?" + jQuery.param(params);
