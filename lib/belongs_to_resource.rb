@@ -55,9 +55,7 @@ module BelongsToResource
       resource_class = options.fetch(:resource_class) { resource_name.to_s.camelize.constantize }
       resource_id    = options.fetch(:resource_id, "#{resource_name}_id")
 
-      if self.superclass <= Compras::Model
-        create_reflection :belongs_to, resource_name, {}, self
-      end
+      create_reflection :belongs_to, resource_name, { foreign_key: resource_id }, self
 
       class_eval %{
         def #{resource_name}(use_cache = true)
