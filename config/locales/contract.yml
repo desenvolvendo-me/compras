@@ -26,7 +26,6 @@ pt-BR:
         end_date: "Data de validade"
         execution_type: "Forma de execução"
         guarantee_value: 'Valor da garantia'
-        kind: "Tipo"
         lawyer: 'Advogado responsável pela gestão do contrato'
         lawyer_code: 'O.A.B. do advogado responsável'
         licitation_process: 'Processo de compra'

@@ -54,27 +54,12 @@ describe Contract do
   it { should validate_presence_of :end_date }
   it { should validate_presence_of :budget_structure_id }
   it { should validate_presence_of :budget_structure_responsible }
-  it { should validate_presence_of :kind }
   it { should validate_presence_of :contract_type }
   it { should validate_presence_of :penalty_fine }
   it { should validate_presence_of :default_fine }
 
   it { should allow_value('2012').for(:year) }
   it { should_not allow_value('201a').for(:year) }
-
-  describe 'validating parent' do
-    it 'should be required when the kind is amendment' do
-      subject.stub(:amendment?).and_return true
-
-      expect(subject).to validate_presence_of :parent
-    end
-
-    it 'should not be required when the kind is not amendment' do
-      subject.stub(:amendment?).and_return false
-
-      expect(subject).not_to validate_presence_of :parent
-    end
-  end
 
   context 'validating date' do
     before do
