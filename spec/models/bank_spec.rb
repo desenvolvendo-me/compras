@@ -1,7 +1,6 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/bank'
-require 'app/models/agency'
 
 describe Bank do
   it "return the name of the banck when it call to_s" do
@@ -17,9 +16,6 @@ describe Bank do
     subject.code = '87ITAU'
     expect(subject.errors[:code]).to_not include "é muito longo (máximo: 5 caracteres)"
   end
-
-  it { should have_many :agencies }
-  it { should have_many(:bank_accounts).through(:agencies) }
 
   it { should validate_presence_of :name }
   it { should validate_presence_of :code }
