@@ -77,7 +77,7 @@ $(document).ready(function() {
   $('#licitation_process_budget_allocation_id').on('change', function(event, budgetAllocation) {
     var url    = Routes.expense_natures,
         year   = $('#licitation_process_year').val(),
-        params = { breakdown_of: budgetAllocation.expense_nature_id, by_year: year };
+        params = { by_parent_id: budgetAllocation.expense_nature_id, by_year: year };
 
     $('#licitation_process_budget_allocation_amount').val(numberWithDelimiter(parseFloat(budgetAllocation.amount)));
     $('#licitation_process_budget_allocation_expense_nature').val(budgetAllocation.expense_nature);
