@@ -5,8 +5,6 @@ class Agency < Compras::Model
 
   belongs_to :bank
 
-  has_many :bank_accounts, :dependent => :restrict
-
   validates :name, :number, :digit, :bank, :presence => true
   validates :email, :mail => true, :allow_blank => true
   validates :phone, :fax, :mask => "(99) 9999-9999", :allow_blank => true
