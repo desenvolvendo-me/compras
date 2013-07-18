@@ -2,7 +2,7 @@
 require 'model_helper'
 require 'app/models/bidder_document'
 require 'app/models/bidder'
-require 'app/models/document_type'
+require 'app/models/unico/document_type'
 
 describe BidderDocument do
   it { should belong_to :bidder }
