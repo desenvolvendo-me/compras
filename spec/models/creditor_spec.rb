@@ -4,16 +4,19 @@ require 'lib/signable'
 require 'app/models/persona/person'
 require 'app/models/person'
 require 'app/models/unico/cnae'
-require 'app/models/cnae'
-require 'app/models/creditor'
+require 'app/models/unico/creditor_document'
 require 'app/models/creditor_document'
-require 'app/models/creditor_representative'
+require 'app/models/cnae'
+require 'app/models/persona/creditor'
+require 'app/models/creditor'
+require 'app/models/unico/creditor_representative'
+require 'app/models/unico/document_type'
 require 'app/models/document_type'
-require 'app/models/creditor_secondary_cnae'
+require 'app/models/unico/creditor_secondary_cnae'
 require 'app/models/creditor_material'
-require 'app/models/creditor_balance'
-require 'app/models/regularization_or_administrative_sanction'
-require 'app/models/registration_cadastral_certificate'
+require 'app/models/unico/creditor_balance'
+require 'app/models/unico/regularization_or_administrative_sanction'
+require 'app/models/unico/registration_cadastral_certificate'
 require 'app/models/bidder'
 require 'app/models/licitation_process'
 require 'app/models/licitation_process_ratification'
@@ -22,6 +25,7 @@ require 'app/models/purchase_process_item'
 require 'app/models/purchase_process_creditor_proposal'
 require 'app/models/purchase_process_creditor_disqualification'
 require 'app/models/realignment_price'
+require 'app/models/creditor_representative'
 
 describe Creditor do
   describe 'default values' do
@@ -34,22 +38,9 @@ describe Creditor do
     end
   end
 
-  it { should belong_to :person }
-  it { should belong_to :occupation_classification }
-  it { should belong_to :main_cnae }
-
-  it { should have_many :creditor_secondary_cnaes }
-  it { should have_many(:cnaes).through(:creditor_secondary_cnaes) }
-  it { should have_many(:documents) }
-  it { should have_many(:document_types).through(:documents) }
-  it { should have_many(:representatives) }
   it { should have_many(:representative_people).through(:representatives) }
   it { should have_many(:materials).through(:creditor_materials) }
   it { should have_many(:creditor_materials).dependent(:destroy) }
-  it { should have_many(:accounts).dependent(:destroy) }
-  it { should have_many(:creditor_balances).dependent(:destroy) }
-  it { should have_many(:regularization_or_administrative_sanctions).dependent(:destroy) }
-  it { should have_many(:registration_cadastral_certificates).dependent(:destroy) }
   it { should have_many(:bidders).dependent(:restrict) }
   it { should have_many(:licitation_processes).dependent(:restrict).through(:bidders) }
   it { should have_many(:purchase_process_accreditation_creditors).dependent(:restrict) }
