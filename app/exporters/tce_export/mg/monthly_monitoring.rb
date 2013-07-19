@@ -164,15 +164,15 @@ module TceExport::MG
       end
 
       def generate_data
-        begin
+        #begin
           data_generator.generate_data.map do |data|
             formats.map do |format|
               send(format, data)
             end.compact.join("\n")
           end.join("\n")
-        rescue TceExport::MG::Exceptions::InvalidData => e
-          raise e.class, "#{acronym} - #{e.message}"
-        end
+        #rescue TceExport::MG::Exceptions::InvalidData => e
+        #  raise e.class, "#{acronym} - #{e.message}"
+        #end
       end
     end
   end

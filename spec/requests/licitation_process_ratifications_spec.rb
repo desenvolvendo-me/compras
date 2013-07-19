@@ -289,7 +289,10 @@ feature "LicitationProcessRatifications" do
       id: 2, budget_structure: budget_structure,
       expense_nature: aposentadorias_reserva_reformas,
       budget_allocation_capabilities: [
-        BudgetAllocationCapability.make!(:generic, amount: 500.0, budget_allocation_id: 1)],
+        {
+          amount: 500.0, budget_allocation_id: 1
+        }
+      ],
       to_s: "1 - #{aposentadorias_reserva_reformas.expense_nature} - #{aposentadorias_reserva_reformas.description}")
 
     ExpenseNature.stub(:find).and_return aposentadorias_reserva_reformas

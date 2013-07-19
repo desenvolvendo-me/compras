@@ -69,7 +69,11 @@ feature "LicitationProcesses" do
       code: 123,
       budget_structure: budget_structure,
       expense_nature: aposentadorias_reserva_reformas,
-      budget_allocation_capabilities: [BudgetAllocationCapability.make!(:generic, budget_allocation_id: 1)],
+      budget_allocation_capabilities: [
+        { amount: 500,
+          budget_allocation_id: 1
+        }
+      ],
       year: 2013,
       amount: 500.0,
       to_s: "123 - #{aposentadorias_reserva_reformas.expense_nature} - #{aposentadorias_reserva_reformas.description}"
@@ -82,7 +86,11 @@ feature "LicitationProcesses" do
       code: 456,
       budget_structure: budget_structure,
       expense_nature: aplicacoes_diretas,
-      budget_allocation_capabilities: [BudgetAllocationCapability.make!(:generic, budget_allocation_id: 1)],
+      budget_allocation_capabilities: [
+        { amount: 500,
+          budget_allocation_id: 1
+        }
+      ],
       year: 2013,
       amount: 3000.0,
       to_s: "456 - #{aplicacoes_diretas.expense_nature} - #{aplicacoes_diretas.description}"
@@ -1113,7 +1121,6 @@ feature "LicitationProcesses" do
   scenario 'budget allocations should be fulfilled automatically when fulfill purchase_solicitation' do
     PurchaseSolicitation.make!(:reparo_liberado, :accounting_year => Date.current.year)
     Employee.make!(:sobrinho)
-    Capability.make!(:reforma)
     PaymentMethod.make!(:dinheiro)
     DocumentType.make!(:fiscal)
     JudgmentForm.make!(:por_item_com_menor_preco)
@@ -1507,7 +1514,6 @@ feature "LicitationProcesses" do
   scenario 'items can be removed and added individually or with purchase solicitation' do
     PurchaseSolicitation.make!(:reparo_liberado, :accounting_year => Date.current.year)
     Employee.make!(:sobrinho)
-    Capability.make!(:reforma)
     PaymentMethod.make!(:dinheiro)
     DocumentType.make!(:fiscal)
     JudgmentForm.make!(:por_item_com_menor_preco)
@@ -1658,7 +1664,6 @@ feature "LicitationProcesses" do
   scenario 'items can be removed and added individually or with purchase solicitation' do
     PurchaseSolicitation.make!(:reparo_liberado, :accounting_year => Date.current.year)
     Employee.make!(:sobrinho)
-    Capability.make!(:reforma)
     PaymentMethod.make!(:dinheiro)
     DocumentType.make!(:fiscal)
     JudgmentForm.make!(:por_item_com_menor_preco)
@@ -1925,7 +1930,6 @@ feature "LicitationProcesses" do
   scenario 'purchase solicitation changes its status when associated with licitation process' do
     PurchaseSolicitation.make!(:reparo_liberado, :accounting_year => Date.current.year)
     Employee.make!(:sobrinho)
-    Capability.make!(:reforma)
     PaymentMethod.make!(:dinheiro)
     DocumentType.make!(:fiscal)
     JudgmentForm.make!(:por_item_com_menor_preco)

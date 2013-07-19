@@ -37,7 +37,7 @@ feature "PurchaseSolicitations" do
       government_program_code: '003',
       government_action_code: '003',
       expense_nature: aposentadorias_reserva_reformas,
-      budget_allocation_capabilities: [BudgetAllocationCapability.make!(:generic, budget_allocation_id: 1)],
+      budget_allocation_capabilities: [amount: 500.00, budget_allocation_id: 1],
       amount: 500.0,
       year: 2012,
       to_s: "123 - #{aposentadorias_reserva_reformas.expense_nature} - #{aposentadorias_reserva_reformas.description}"
