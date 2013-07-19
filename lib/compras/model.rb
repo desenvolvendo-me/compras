@@ -4,6 +4,7 @@ class Compras::Model < ActiveRecord::Base
 
   def as_json(options = {})
     options[:methods] = Array(options[:methods]) << :to_s
+    options[:except]  = Array(options[:except]) << :custom_data
 
     super
   end
