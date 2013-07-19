@@ -312,7 +312,7 @@ GEM
       railties (~> 3.2.0)
       rmagick (= 2.13.2)
       validates_timeliness (~> 3.0.11)
-    unico-api (0.0.12)
+    unico-api (0.0.14)
       activeresource (~> 3.2.13)
       activesupport (~> 3.2.13)
       enumerate_it (~> 1.0.3)
@@ -387,7 +387,7 @@ DEPENDENCIES
   typecaster (= 0.0.2)!
   uglifier (= 2.1.1)
   unico (= 6.2.0)
-  unico-api
+  unico-api (= 0.0.14)
   unico-assets (= 1.4.1)
   unicorn (= 4.6.2)
   validates_timeliness (= 3.0.14)

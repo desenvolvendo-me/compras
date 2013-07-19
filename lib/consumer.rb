@@ -6,12 +6,7 @@ require 'active_resource/parser'
 module UnicoAPI
   class Consumer
     include ActiveResource::Reflection
-    include ActiveResource::Parser
     include ActiveResource::Localize
-
-    def load(attributes, remove_root = false)
-      super.parse_attributes!
-    end
 
     # Apesar de isso já estar sendo incluido nos métodos de classe do Reflection
     # existe este mesmo método criado no UnicoAPI::Consumer que retorna uma array

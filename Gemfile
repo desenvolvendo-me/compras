@@ -15,7 +15,7 @@ gem 'activerecord-postgres-hstore', '0.6.0'
 
 gem 'unico', '6.2.0'
 gem 'unico-assets', '1.4.1'
-gem 'unico-api'
+gem 'unico-api', '0.0.14'
 gem 'devise', '2.2.4'
 gem 'cancan', :git => 'git://github.com/ryanb/cancan.git', :branch => '2.0'
 gem 'quaestio', '0.1.1'
