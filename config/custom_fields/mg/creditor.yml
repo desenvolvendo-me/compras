@@ -1,0 +1,15 @@
+custom_fields:
+  mg:
+    creditor:
+      "Objeto social do credor":
+        data_type: "string"
+        required: false
+      "Número do Registro CVM":
+        data_type: "string"
+        required: false
+      "Data do registro CVM":
+        data_type: "date"
+        required: false
+      "Número do Registro no Cartório de Registro, títulos e documentos":
+        data_type: "string"
+        required: false

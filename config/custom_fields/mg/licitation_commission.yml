@@ -1,0 +1,10 @@
+custom_fields:
+  mg:
+    licitation_commission:
+      "Classificação TCE/MG":
+        data_type: "select"
+        required: false
+        options:
+          "01": "01 - Nenhum"
+          "02": "02 - Portaria"
+          "03": "03 - Decreto"
