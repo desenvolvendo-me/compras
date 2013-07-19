@@ -1,45 +1,169 @@
 $(document).ready(function() {
 
-  function postDataError(response) {
-    var errors = $.parseJSON(response.responseText).errors.base;
+  $("#licitation_process_reserve_fund_total_value").val(sumReserveFundAmount());
 
-    alertErrors(errors);
+  function sumReserveFundAmount() {
+    var collection = $("#records-tbody tr td.amount"),
+        total      = 0.0;
+
+    total = _.reduce(collection, function(memo, num) {
+      var amount = parsePtBrFloat($(num).html());
+
+      return memo + amount;
+    }, 0);
+
+    return numberWithDelimiter(total);
+  }
+
+  // CALLBACKS
+  function postDataError(response, textStatus) {
+    if (response.status === 422) {
+      var errors = $.parseJSON(response.responseText).errors.base;
+      alertErrors(errors);
+    } else {
+      alert("Problema ao buscar dados do servidor remoto...");
+    }
   }
 
   function postDataSuccess(response) {
-    console.log(response);
+    hideCancelButton();
+    renderReserveFundsGrid();
+    resetForm();
+
+    alert("Reserva de Dotação criada com sucesso...");
   }
 
-  function postData() {
-    var reserveFund = { reserve_fund: buildReserveFund() };
+  function putDataSuccess(response) {
+    hideCancelButton();
+    renderReserveFundsGrid();
+    resetForm();
 
-    $.ajax({
-      type: 'POST',
-      url: Routes.reserve_funds,
-      data: reserveFund,
-      dataType: 'json',
-      success: postDataSuccess,
-      error: postDataError
+    alert("Reserva de Dotação editada com sucesso...");
+  }
+
+  function postDataBeforeSend() {
+    disableBlockButton();
+  }
+
+  function postDataComplete() {
+    enableBlockButton();
+  }
+
+  function renderReserveFundsGrid() {
+    $.get(reserveFundsGridRoute(), function(data) {
+      $("#records-tbody").html(data);
+      sumReserveFundAmount();
     });
+  }
+
+  function submitData(method) {
+    var reserveFund = { reserve_fund: buildReserveFund() };
+    var id = reserveFund.reserve_fund.id;
+
+    if (_.isEmpty(id)) {
+      ajax(Routes.reserve_funds, 'POST', reserveFund, postDataSuccess);
+    } else {
+      ajax(updateReserveFundRoute(id), 'PUT', reserveFund, putDataSuccess);
+    }
   };
 
-  $('button#reserve_fund_create').on("click", function(event) {
-    event.preventDefault();
-
-    postData();
-  });
+  function ajax(url, type, data, success) {
+    $.ajax({
+      type: type,
+      url: url,
+      data: data,
+      dataType: 'json',
+      beforeSend: postDataBeforeSend,
+      success: success,
+      error: postDataError,
+      complete: postDataComplete
+    });
+  }
 
   function buildReserveFund() {
     reserveFund = {};
 
-    reserveFund['budget_allocation_id'] = 1; //$("#licitation_process_budget_allocation").val();
-    //reserveFund[reserve_fund_amount] = parsePtBrFloat($("#licitation_process_budget_allocation_value").val() || '0');
-    reserveFund['amount'] = $("#licitation_process_budget_allocation_value").val();
-    reserveFund['licitation_process_id'] = $("licitation_process_id").val();
-    reserveFund['date'] = "2013-07-01";
-    reserveFund['descriptor_id'] = 2;
+    reserveFund['id']                   = $("#reserve_fund_id").val();
+    reserveFund['date']                 = $("#licitation_process_date").val();
+    reserveFund['amount']               = $("#licitation_process_amount").val();
+    reserveFund['descriptor_id']        = $("#licitation_process_descriptor_id").val();
+    reserveFund['budget_allocation_id'] = $("#licitation_process_budget_allocation_id").val();
+    reserveFund['purchase_process_id']  = $("#licitation_process_id").val();
 
     return reserveFund;
+  }
+
+  $('button#reserve_fund_create').on("click", function(event) {
+    event.preventDefault();
+
+    submitData();
+  });
+
+  $('button#reserve_fund_cancel').on("click", function(event) {
+    event.preventDefault();
+
+    resetForm();
+  });
+
+  $('a.edit_reserve_fund_button').on("click", function(event) {
+    dataDiv = $(this).next("div.form_fields");
+
+    buildFormFromGrid(dataDiv);
+  });
+
+  function buildFormFromGrid(dataDiv) {
+    $("#reserve_fund_id").val(dataDiv.find('.reserve_fund_id').val());
+    $("#licitation_process_descriptor").val(dataDiv.find('.descriptor').val());
+    $("#licitation_process_descriptor_id").val(dataDiv.find('.descriptor_id').val());
+    $("#licitation_process_budget_allocation").val(dataDiv.find('.budget_allocation').val());
+    $("#licitation_process_budget_allocation_id").val(dataDiv.find('.budget_allocation_id').val());
+    $("#licitation_process_date").val(dataDiv.find('.date').val());
+    $("#licitation_process_amount").val(dataDiv.find('.amount').val());
+
+    showCancelButton();
+  }
+
+  function resetForm() {
+    $("#reserve_fund_id").val('');
+    $("#licitation_process_descriptor").val('');
+    $("#licitation_process_descriptor_id").val('');
+    $("#licitation_process_budget_allocation").val('');
+    $("#licitation_process_budget_allocation_id").val('');
+    $("#licitation_process_date").val('');
+    $("#licitation_process_amount").val('');
+
+    hideCancelButton();
+    enableBlockButton();
+  }
+
+  function disableBlockButton() {
+    button = $('button#reserve_fund_create');
+
+    button.attr('disabled', true);
+    button.text('Aguarde...');
+  }
+
+  function enableBlockButton() {
+    button = $('button#reserve_fund_create');
+
+    button.attr('disabled', false);
+    button.text('Bloquear');
+  }
+
+  function showCancelButton() {
+    $("#reserve_fund_cancel").removeClass("hidden");
+  }
+
+  function hideCancelButton() {
+    $("#reserve_fund_cancel").addClass("hidden");
+  }
+
+  function reserveFundsGridRoute() {
+    return Routes.reserve_funds_grid.replace(":id", $("#licitation_process_id").val());
+  }
+
+  function updateReserveFundRoute(id) {
+    return Routes.reserve_funds + '/' + id
   }
 
   function alertErrors(errors) {

@@ -647,6 +647,10 @@ Compras::Application.routes.draw do
       get :filter
       get :modal
     end
+
+    member do
+      get :reserve_funds_grid
+    end
   end
 
   resources :reserve_funds do

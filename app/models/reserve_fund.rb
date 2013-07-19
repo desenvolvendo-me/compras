@@ -12,4 +12,9 @@ class ReserveFund < UnicoAPI::Resources::Contabilidade::ReserveFund
     date :date
     decimal :amount
   end
+
+  def self.by_purchase_process_id(id)
+    self.all(params: { by_purchase_process_id: id,
+      methods: [:budget_allocation_to_s, :balance, :descriptor_to_s] })
+  end
 end

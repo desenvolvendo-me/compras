@@ -19,6 +19,10 @@ class ApiConsumerController < CrudController
     end
   end
 
+  def update_resource(object, attributes)
+    object.update_attributes(*attributes)
+  end
+
   def fetch_params
     params
   end
