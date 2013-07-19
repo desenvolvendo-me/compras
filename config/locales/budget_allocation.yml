@@ -1,5 +1,5 @@
 pt-BR:
-  activerecord:
+  activemodel:
     models:
       budget_allocation:
         one: "Dotação Orçamentária"
@@ -9,6 +9,8 @@ pt-BR:
       budget_allocation:
         alienation_appeal: "Recurso alienação"
         amount: "Valor"
+        balance_with_currency: "Saldo da dotação"
+        budget_allocation_type: "Tipo de dotação"
         budget_structure: "Solicitante"
         capability: "Recurso"
         code: "Código"
@@ -28,3 +30,5 @@ pt-BR:
         personal: "Pessoal"
         refinancing: "Refinanciamento"
         subfunction: "Subfunção"
+        year: "Ano"
+        months_sum: "Soma dos meses"

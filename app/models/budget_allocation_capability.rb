@@ -1,6 +1,7 @@
 class BudgetAllocationCapability < Accounting::Model
-  belongs_to :budget_allocation
+  include BelongsToResource
+
   belongs_to :capability
 
-  delegate :amount_can_be_updated?, :to => :budget_allocation, :allow_nil => true
+  belongs_to_resource :budget_allocation
 end

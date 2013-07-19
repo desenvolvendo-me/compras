@@ -30,7 +30,7 @@ feature "Contracts" do
 
     UnicoAPI::Resources::Contabilidade::Pledge.stub(:find).with(1).and_return(pledge)
     UnicoAPI::Resources::Contabilidade::Pledge.stub(:find).with(2).and_return(pledge_two)
-    BudgetStructure.stub(:find).with(1).and_return(budget_structure)
+    BudgetStructure.stub(:find).and_return(budget_structure)
     BudgetStructure.stub(:all).and_return([budget_structure])
   end
 

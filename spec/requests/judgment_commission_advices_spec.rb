@@ -20,10 +20,12 @@ feature "JudgmentCommissionAdvices" do
                   'licitation_commissions', 'individuals']
     sign_in
 
-    BudgetStructure.stub(:find).with(1).and_return(budget_structure)
+    BudgetStructure.stub(:find).and_return(budget_structure)
 
     ExpenseNature.stub(:all)
     ExpenseNature.stub(:find)
+    BudgetAllocation.stub(:all)
+    BudgetAllocation.stub(:find)
   end
 
   scenario 'create, update and destroy a new judgment_commission_advice' do

@@ -26,6 +26,8 @@ describe TceExport::MG::MonthlyMonitoring::ContractGenerator do
   describe "#generate_file" do
     before do
       FileUtils.rm_f('tmp/CONTRATO.csv')
+
+      BudgetAllocation.stub(:find).and_return(budget_allocation)
     end
 
     after do
@@ -71,10 +73,23 @@ describe TceExport::MG::MonthlyMonitoring::ContractGenerator do
         licitation_process_ratification_items: [])
     end
 
+    let :budget_allocation do
+      BudgetAllocation.new(
+        id: 1,
+        budget_structure: budget_structure,
+        function_code: '04',
+        subfunction_code: '01',
+        government_program_code: '003',
+        government_action_code: '003',
+        expense_nature: expense_nature
+      )
+    end
+
+    let :expense_nature do
+      ExpenseNature.new(id: 1, expense_nature: '3.1.90.01.01')
+    end
 
     context "with two or more creditors" do
-      let(:expense_nature) { double(:expense_nature, id: 1, expense_nature: '3.1.90.01.01') }
-
       it "generates a CSV file with the required data" do
         FactoryGirl.create(:extended_prefecture, prefecture: prefecture)
 
@@ -90,9 +105,6 @@ describe TceExport::MG::MonthlyMonitoring::ContractGenerator do
         contract = Contract.make!(:primeiro_contrato, signature_date: signature_date,
           end_date: end_date, licitation_process: licitation_process,
           creditors: [creditor_sobrinho, creditor_wenderson])
-
-        budget_allocation = BudgetAllocation.make!(:alocacao)
-        budget_allocation.stub(:expense_nature).and_return(expense_nature)
 
         pledge = Pledge.new(
           id: 1, value: 9.99, description: 'Empenho 1', year: 2013, to_s: 1,
@@ -114,8 +126,8 @@ describe TceExport::MG::MonthlyMonitoring::ContractGenerator do
 
         ContractTermination.make!(:contrato_rescindido, contract: contract)
 
-        BudgetStructure.should_receive(:find).at_least(1).times.with(2).and_return(budget_structure_parent)
-        BudgetStructure.should_receive(:find).at_least(1).times.with(1).and_return(budget_structure)
+        BudgetStructure.should_receive(:find).at_least(1).times.with(2, params: {}).and_return(budget_structure_parent)
+        BudgetStructure.should_receive(:find).at_least(1).times.with(1, params: {}).and_return(budget_structure)
 
         described_class.generate_file(monthly_monitoring)
 
@@ -134,8 +146,6 @@ describe TceExport::MG::MonthlyMonitoring::ContractGenerator do
     end
 
     context "with only one creditor" do
-      let(:expense_nature) { double(:expense_nature, id: 1, expense_nature: '3.1.90.01.01') }
-
       it "generates a CSV file with the required data" do
         FactoryGirl.create(:extended_prefecture, prefecture: prefecture)
 
@@ -153,9 +163,6 @@ describe TceExport::MG::MonthlyMonitoring::ContractGenerator do
           creditors: [creditor_sobrinho])
 
         ContractTermination.make!(:contrato_rescindido, contract: contract)
-
-        budget_allocation = BudgetAllocation.make!(:alocacao)
-        budget_allocation.stub(:expense_nature).and_return(expense_nature)
 
         pledge = Pledge.new(
           id: 1, value: 9.99, description: 'Empenho 1', year: 2013, to_s: 1,
@@ -176,8 +183,8 @@ describe TceExport::MG::MonthlyMonitoring::ContractGenerator do
             includes: [:capability, budget_allocation: { include: :expense_nature }]})
           .and_return([pledge])
 
-        BudgetStructure.should_receive(:find).at_least(1).times.with(2).and_return(budget_structure_parent)
-        BudgetStructure.should_receive(:find).at_least(1).times.with(1).and_return(budget_structure)
+        BudgetStructure.should_receive(:find).at_least(1).times.with(2, params: {}).and_return(budget_structure_parent)
+        BudgetStructure.should_receive(:find).at_least(1).times.with(1, params: {}).and_return(budget_structure)
 
         described_class.generate_file(monthly_monitoring)
 

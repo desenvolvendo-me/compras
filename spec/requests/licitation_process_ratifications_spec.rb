@@ -16,10 +16,12 @@ feature "LicitationProcessRatifications" do
   background do
     sign_in
 
-    BudgetStructure.stub(:find).with(1).and_return(budget_structure)
+    BudgetStructure.stub(:find).and_return(budget_structure)
 
     ExpenseNature.stub(:all)
     ExpenseNature.stub(:find)
+    BudgetAllocation.stub(:all)
+    BudgetAllocation.stub(:find)
   end
 
   scenario 'creating and updating a ratification to licitation process' do
@@ -283,7 +285,15 @@ feature "LicitationProcessRatifications" do
       description: 'Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares',
       docket: 'Registra o valor das despesas com aposentadorias, reserva e reformas')
 
+    budget_allocation = BudgetAllocation.new(
+      id: 2, budget_structure: budget_structure,
+      expense_nature: aposentadorias_reserva_reformas,
+      budget_allocation_capabilities: [
+        BudgetAllocationCapability.make!(:generic, amount: 500.0, budget_allocation_id: 1)],
+      to_s: "1 - #{aposentadorias_reserva_reformas.expense_nature} - #{aposentadorias_reserva_reformas.description}")
+
     ExpenseNature.stub(:find).and_return aposentadorias_reserva_reformas
+    BudgetAllocation.stub(:find).and_return budget_allocation
 
     navigate 'Processos de Compra > Processos de Compras'
 

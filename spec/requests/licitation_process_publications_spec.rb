@@ -19,10 +19,12 @@ feature "LicitationProcessPublications" do
     create_roles ['licitation_processes']
     sign_in
 
-    BudgetStructure.stub(:find).with(1).and_return(budget_structure)
+    BudgetStructure.stub(:find).and_return(budget_structure)
 
     ExpenseNature.stub(:all)
     ExpenseNature.stub(:find)
+    BudgetAllocation.stub(:all)
+    BudgetAllocation.stub(:find)
   end
 
   scenario 'index should have link to back to licitation_process and create a new publication' do

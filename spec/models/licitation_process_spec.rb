@@ -80,7 +80,6 @@ describe LicitationProcess do
   it { should have_many(:items).dependent(:restrict)}
   it { should have_many(:materials).through(:items) }
   it { should have_many(:legal_analysis_appraisals).dependent(:restrict) }
-  it { should have_many(:budget_allocations).through(:purchase_process_budget_allocations) }
   it { should have_many(:creditor_proposals) }
   it { should have_many(:tied_creditor_proposals) }
   it { should have_many(:realignment_prices) }
@@ -953,6 +952,58 @@ describe LicitationProcess do
       publications.should_receive(:edital).and_return ['edital']
 
       expect(subject.published_editals).to eq ['edital']
+    end
+  end
+
+  describe '#budget_allocations' do
+    before do
+      subject.stub :purchase_process_budget_allocations => [purchase_process_budget_allocation]
+    end
+
+    let :purchase_process_budget_allocation do
+      double(:purchase_process_budget_allocation, :budget_allocation => budget_allocation)
+    end
+
+    let :budget_allocation do
+      double(:budget_allocation)
+    end
+
+    it 'delegates to purchase_process_budget_allocations' do
+      expect(subject.budget_allocations).to eq [budget_allocation]
+    end
+
+    context 'when purchase_process_budget_allocations is nil' do
+      before do
+        subject.stub :purchase_process_budget_allocations => nil
+      end
+
+      it 'returns nil' do
+        expect(subject.budget_allocations).to be_nil
+      end
+    end
+  end
+
+  describe '#budget_allocation_capabilities' do
+    before do
+      subject.stub :budget_allocations => [budget_allocation]
+    end
+
+    let :budget_allocation do
+      double(:budget_allocation_capabilities => [])
+    end
+
+    it 'delegates to budget_allocations' do
+      expect(subject.budget_allocation_capabilities).to eq []
+    end
+
+    context 'when budget_allocations is nil' do
+      before do
+        subject.stub :budget_allocations => nil
+      end
+
+      it 'returns nil' do
+        expect(subject.budget_allocation_capabilities).to be_nil
+      end
     end
   end
 end

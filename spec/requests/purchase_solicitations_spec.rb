@@ -27,16 +27,36 @@ feature "PurchaseSolicitations" do
       performance_field: 'Desenvolvimento Educacional')
   end
 
+  let :budget_allocation do
+    BudgetAllocation.new(
+      id: 1,
+      code: 123,
+      budget_structure: budget_structure,
+      function_code: '04',
+      subfunction_code: '01',
+      government_program_code: '003',
+      government_action_code: '003',
+      expense_nature: aposentadorias_reserva_reformas,
+      budget_allocation_capabilities: [BudgetAllocationCapability.make!(:generic, budget_allocation_id: 1)],
+      amount: 500.0,
+      year: 2012,
+      to_s: "123 - #{aposentadorias_reserva_reformas.expense_nature} - #{aposentadorias_reserva_reformas.description}"
+    )
+  end
+
   background do
-    BudgetStructure.stub(:find).with(1).and_return(budget_structure)
-    BudgetStructure.stub(:find).with(2).and_return(budget_structure_parent)
+    BudgetStructure.stub(:find).with(1, params: {}).and_return(budget_structure)
+    BudgetStructure.stub(:find).with(2, params: {}).and_return(budget_structure_parent)
     BudgetStructure.stub(:all).and_return([budget_structure])
 
     sign_in
 
-    ExpenseNature.stub(:all).and_return [aposentadorias_rpps]
-    ExpenseNature.stub(:find).with(1).and_return aposentadorias_rpps
-    ExpenseNature.stub(:find).with(2).and_return aposentadorias_reserva_reformas
+    ExpenseNature.stub(:find).with(1, params: {}).and_return aposentadorias_rpps
+    ExpenseNature.stub(:find).with(2, params: {}).and_return aposentadorias_reserva_reformas
+    ExpenseNature.stub(:all).and_return [aposentadorias_rpps, aposentadorias_reserva_reformas]
+
+    BudgetAllocation.stub(:find).and_return(budget_allocation)
+    BudgetAllocation.stub(:all).and_return([budget_allocation])
   end
 
   let(:aposentadorias_rpps) do
@@ -55,17 +75,15 @@ feature "PurchaseSolicitations" do
 
   let(:aposentadorias_reserva) do
     ExpenseNature.new(
-      id: 1, regulatory_act_id: 1, expense_nature: '3.1.90.01.02',kind: 'analytical',
+      id: 3, regulatory_act_id: 1, expense_nature: '3.1.90.01.02', kind: 'analytical',
       description: 'Aposentadorias Custeadas com Recursos da Reserva Remunerada',
       year: 2012)
   end
 
   scenario 'create a new purchase_solicitation' do
     BudgetStructure.stub(:all).and_return([budget_structure])
-
     Employee.make!(:sobrinho)
     DeliveryLocation.make!(:education)
-    budget_allocation = BudgetAllocation.make!(:alocacao, code: '123', expense_nature_id: 2)
     Material.make!(:antivirus, :material_type => MaterialType::ASSET)
     Material.make!(:office, :material_type => MaterialType::ASSET)
 
@@ -234,12 +252,10 @@ feature "PurchaseSolicitations" do
     PurchaseSolicitation.make!(:reparo)
     Employee.make!(:wenderson)
     DeliveryLocation.make!(:health)
-    budget_allocation = BudgetAllocation.make!(:reparo_2011, year: 2012, code: '123', expense_nature_id: 2)
     Material.make!(:arame_farpado)
-
     ExpenseNature.stub(:all).and_return [aposentadorias_reserva]
-    ExpenseNature.stub(:find).with(1).and_return aposentadorias_reserva
-    ExpenseNature.stub(:find).with(2).and_return aposentadorias_reserva_reformas
+    ExpenseNature.stub(:find).with(3, params: {}).and_return aposentadorias_reserva
+    ExpenseNature.stub(:find).with(2, params: {}).and_return aposentadorias_reserva_reformas
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
@@ -369,7 +385,7 @@ feature "PurchaseSolicitations" do
         expect(page).to have_content '123 - 3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
         expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
         expect(page).to have_content '3.1.90.01.02 - Aposentadorias Custeadas com Recursos da Reserva Remunerada'
-        expect(page).to have_content '3.000,00'
+        expect(page).to have_content '500,00'
       end
     end
   end
@@ -451,7 +467,6 @@ feature "PurchaseSolicitations" do
     PurchaseSolicitation.make!(:reparo)
     Employee.make!(:sobrinho)
     DeliveryLocation.make!(:education)
-    budget_allocation = BudgetAllocation.make!(:alocacao, code: '123')
     Material.make!(:office, :material_type => MaterialType::ASSET)
 
     navigate 'Processos de Compra > Solicitações de Compra'
@@ -556,7 +571,7 @@ feature "PurchaseSolicitations" do
     purchase_solicitation = PurchaseSolicitation.make!(:reparo,
       purchase_solicitation_budget_allocations: [
         PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria,
-          budget_allocation: BudgetAllocation.make!(:alocacao, code: '123'))])
+          budget_allocation_id: budget_allocation.id)])
 
     Employee.make!(:sobrinho)
     DeliveryLocation.make!(:education)
@@ -691,7 +706,6 @@ feature "PurchaseSolicitations" do
     PurchaseSolicitation.make!(:reparo,
                                :items => [item],
                                :kind => PurchaseSolicitationKind::SERVICES)
-    budget_allocation = BudgetAllocation.make!(:alocacao, year: Date.current.year, code: '123')
     Material.make!(:antivirus)
     Material.make!(:office, :material_type => MaterialType::SERVICE)
 
@@ -773,9 +787,6 @@ feature "PurchaseSolicitations" do
 
   scenario 'fill automatically budget structure from budget allocation' do
     pending 'quando rodo o teste sozinho ele passa e se rodo tudo falha' do
-      BudgetAllocation.make!(:alocacao)
-      BudgetAllocation.make!(:reparo_2011)
-
       navigate 'Processos de Compra > Solicitações de Compra'
 
       click_link 'Criar Solicitação de Compra'

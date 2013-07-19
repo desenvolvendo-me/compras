@@ -6,8 +6,6 @@ class GovernmentAction < Accounting::Model
   belongs_to :product
   belongs_to :reference_unit
 
-  has_many :budget_allocations, :dependent => :restrict
-
   orderize :code
 
   def self.filter(params)

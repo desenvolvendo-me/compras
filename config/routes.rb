@@ -154,7 +154,7 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :budget_allocations do
+  resources :budget_allocations, :only => [:index, :show]  do
     collection do
       get :filter
       get :modal

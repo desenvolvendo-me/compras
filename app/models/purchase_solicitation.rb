@@ -28,8 +28,6 @@ class PurchaseSolicitation < Compras::Model
            :inverse_of => :purchase_solicitation, :order => :id
   has_many :items, :class_name => 'PurchaseSolicitationItem', :dependent => :restrict,
            :inverse_of => :purchase_solicitation,:order => :id
-  has_many :budget_allocations, :through => :purchase_solicitation_budget_allocations,
-           :dependent => :restrict
   has_many :purchase_solicitation_liberations, :dependent => :destroy, :order => :sequence, :inverse_of => :purchase_solicitation
 
   has_one  :annul, :class_name => 'ResourceAnnul', :as => :annullable, :dependent => :destroy
@@ -156,6 +154,12 @@ class PurchaseSolicitation < Compras::Model
     return false unless active_purchase_solicitation_liberation
 
     active_purchase_solicitation_liberation.liberated?
+  end
+
+  def budget_allocations
+    return unless purchase_solicitation_budget_allocations
+
+    purchase_solicitation_budget_allocations.map(&:budget_allocation)
   end
 
   protected

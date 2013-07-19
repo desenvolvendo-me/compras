@@ -67,8 +67,6 @@ class LicitationProcess < Compras::Model
   has_many :classifications, :through => :bidders, :class_name => 'LicitationProcessClassification',
            :source => :licitation_process_classifications
   has_many :purchase_process_budget_allocations, :dependent => :destroy, :order => :id
-  has_many :budget_allocations, :through => :purchase_process_budget_allocations
-  has_many :budget_allocation_capabilities, through: :budget_allocations
   has_many :items, :class_name => 'PurchaseProcessItem', :dependent => :restrict,
            :order => :id, :inverse_of => :licitation_process
   has_many :materials, :through => :items
@@ -319,6 +317,18 @@ class LicitationProcess < Compras::Model
 
   def published_editals
     publications.edital
+  end
+
+  def budget_allocations
+    return unless purchase_process_budget_allocations
+
+    purchase_process_budget_allocations.map(&:budget_allocation)
+  end
+
+  def budget_allocation_capabilities
+    return unless budget_allocations
+
+    budget_allocations.map(&:budget_allocation_capabilities).flatten
   end
 
   protected

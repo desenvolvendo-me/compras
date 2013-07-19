@@ -67,8 +67,8 @@ describe TceExport::MG::MonthlyMonitoring::LicitationRatificationGenerator do
     end
 
     it "generates a CSV file with the required data" do
-      BudgetStructure.should_receive(:find).at_least(1).times.with(2).and_return(budget_structure_parent)
-      BudgetStructure.should_receive(:find).at_least(1).times.with(1).and_return(budget_structure)
+      BudgetStructure.should_receive(:find).at_least(1).times.with(2, params: {}).and_return(budget_structure_parent)
+      BudgetStructure.should_receive(:find).at_least(1).times.with(1, params: {}).and_return(budget_structure)
 
       FactoryGirl.create(:extended_prefecture, prefecture: prefecture)
 

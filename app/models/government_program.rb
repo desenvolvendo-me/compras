@@ -10,8 +10,6 @@ class GovernmentProgram < Accounting::Model
   belongs_to :responsible, :class_name => "BudgetStructure", :foreign_key => "budget_structure_id"
   belongs_to :person
 
-  has_many :budget_allocations, :dependent => :restrict
-
   has_and_belongs_to_many :budget_structures, :join_table => :accounting_budget_structures_government_programs
   has_and_belongs_to_many :target_audiences, :join_table => :accounting_government_programs_target_audiences
 

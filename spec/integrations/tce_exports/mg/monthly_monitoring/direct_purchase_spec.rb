@@ -34,11 +34,14 @@ describe TceExport::MG::MonthlyMonitoring::DirectPurchaseGenerator do
 
     let(:emissao_edital) { StageProcess.make!(:emissao_edital, description: "Cotação de preços", type_of_purchase: PurchaseProcessTypeOfPurchase::DIRECT_PURCHASE) }
     let(:sobrinho) { Employee.make!(:sobrinho) }
-    let(:expense_nature) { double(:expense_nature, id: 1, expense_nature: '3.1.90.01.01') }
+
+    let :expense_nature do
+      ExpenseNature.new(id: 1, expense_nature: '3.1.90.01.01')
+    end
 
     it "generates a CSV file with the required data" do
-      BudgetStructure.should_receive(:find).at_least(1).times.with(2).and_return(budget_structure_parent)
-      BudgetStructure.should_receive(:find).at_least(1).times.with(1).and_return(budget_structure)
+      BudgetStructure.should_receive(:find).at_least(1).times.with(2, params: {}).and_return(budget_structure_parent)
+      BudgetStructure.should_receive(:find).at_least(1).times.with(1, params: {}).and_return(budget_structure)
 
       prefecture = Prefecture.make!(:belo_horizonte)
       FactoryGirl.create(:extended_prefecture, prefecture: prefecture)
@@ -53,20 +56,25 @@ describe TceExport::MG::MonthlyMonitoring::DirectPurchaseGenerator do
       capability = Capability.make!(:reforma,
         tce_specification_capability: tce_specification_capability)
 
-      budget_allocation = BudgetAllocation.make!(:alocacao,
-        budget_allocation_capabilities: [],
-        budget_structure: budget_structure,
-        expense_nature_id: 1)
-
       ExpenseNature.stub(:find).and_return(expense_nature)
 
-      budget_allocation_capability = BudgetAllocationCapability.make!(:generic,
-        amount: 500.8,
-        budget_allocation: budget_allocation,
-        capability: capability)
+      budget_allocation = BudgetAllocation.new(
+        id: 1,
+        code: 1,
+        budget_structure: budget_structure,
+        function_code: '04',
+        subfunction_code: '01',
+        government_program_code: '003',
+        government_action_code: '003',
+        expense_nature_expense_nature: expense_nature.expense_nature,
+        budget_allocation_capabilities: [BudgetAllocationCapability.make!(:generic, budget_allocation_id: 1, capability: capability)],
+        amount: 500.8
+      )
+
+      BudgetAllocation.stub(:find).and_return(budget_allocation)
 
       purchase_process_budget_allocation = PurchaseProcessBudgetAllocation.make!(:alocacao_com_itens,
-        budget_allocation: budget_allocation)
+        budget_allocation_id: budget_allocation.id)
 
       creditor = Creditor.make!(:wenderson_sa)
       item = PurchaseProcessItem.make!(:item, creditor: creditor)
@@ -114,17 +122,15 @@ describe TceExport::MG::MonthlyMonitoring::DirectPurchaseGenerator do
       capability = Capability.make!(:reforma,
         tce_specification_capability: tce_specification_capability)
 
-      budget_allocation = BudgetAllocation.make!(:alocacao,
-        budget_allocation_capabilities: [],
-        budget_structure: budget_structure)
+      budget_allocation = BudgetAllocation.new(
+        id: 1,
+        budget_allocation_capabilities: [BudgetAllocationCapability.make!(:generic, budget_allocation_id: 1, capability: capability)]
+      )
 
-      budget_allocation_capability = BudgetAllocationCapability.make!(:generic,
-        amount: 500.8,
-        budget_allocation: budget_allocation,
-        capability: capability)
+      BudgetAllocation.stub(:find).and_return(budget_allocation)
 
-      purchase_process_budget_allocation = PurchaseProcessBudgetAllocation.make!(:alocacao_com_itens,
-        budget_allocation: budget_allocation)
+      purchase_process_budget_allocation = PurchaseProcessBudgetAllocation.make(:alocacao_com_itens,
+        budget_allocation_id: budget_allocation.id)
 
       creditor = Creditor.make!(:wenderson_sa)
       item = PurchaseProcessItem.make!(:item, creditor: creditor)

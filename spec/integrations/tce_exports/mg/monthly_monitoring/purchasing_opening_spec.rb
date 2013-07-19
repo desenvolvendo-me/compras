@@ -45,11 +45,13 @@ describe TceExport::MG::MonthlyMonitoring::PurchaseOpeningGenerator do
         performance_field: 'Desenvolvimento Educacional')
     end
 
-    let(:expense_nature) { double(:expense_nature, id: 1, expense_nature: '3.1.90.01.01') }
+    let :expense_nature do
+      ExpenseNature.new(id: 1, expense_nature: '3.1.90.01.01')
+    end
 
     it "generates a CSV file with the required data" do
-      BudgetStructure.should_receive(:find).at_least(1).times.with(2).and_return(budget_structure_parent)
-      BudgetStructure.should_receive(:find).at_least(1).times.with(1).and_return(budget_structure)
+      BudgetStructure.should_receive(:find).at_least(1).times.with(2, params: {}).and_return(budget_structure_parent)
+      BudgetStructure.should_receive(:find).at_least(1).times.with(1, params: {}).and_return(budget_structure)
 
       FactoryGirl.create(:extended_prefecture, prefecture: prefecture)
 
@@ -58,18 +60,21 @@ describe TceExport::MG::MonthlyMonitoring::PurchaseOpeningGenerator do
       capability = Capability.make!(:reforma,
         tce_specification_capability: tce_specification_capability)
 
-      budget_allocation = BudgetAllocation.make!(:alocacao,
-        budget_allocation_capabilities: [],
+      budget_allocation = BudgetAllocation.new(
+        id: 1,
+        code: 1,
         budget_structure: budget_structure,
-        expense_nature_id: 1)
+        function_code: '04',
+        subfunction_code: '01',
+        government_program_code: '003',
+        government_action_code: '003',
+        expense_nature_expense_nature: expense_nature.expense_nature,
+        budget_allocation_capabilities: [BudgetAllocationCapability.make!(:generic, budget_allocation_id: 1, capability: capability)],
+        amount: 500.8
+      )
 
-      budget_allocation_capability = BudgetAllocationCapability.make!(:generic,
-        amount: 500.8,
-        budget_allocation: budget_allocation,
-        capability: capability)
-
-      purchase_process_budget_allocation = PurchaseProcessBudgetAllocation.make!(:alocacao_com_itens,
-        budget_allocation: budget_allocation)
+      purchase_process_budget_allocation = PurchaseProcessBudgetAllocation.make(:alocacao_com_itens,
+        budget_allocation_id: budget_allocation.id)
 
       licitation = LicitationProcess.make!(:processo_licitatorio_computador,
         purchase_process_budget_allocations: [purchase_process_budget_allocation],
@@ -77,11 +82,12 @@ describe TceExport::MG::MonthlyMonitoring::PurchaseOpeningGenerator do
 
       item = licitation.items.first
 
-      ratification = LicitationProcessRatification.make!(:processo_licitatorio_computador,
+      LicitationProcessRatification.make!(:processo_licitatorio_computador,
         licitation_process: licitation,
         ratification_date: Date.new(2013, 5, 23))
 
       ExpenseNature.stub(:find).and_return(expense_nature)
+      BudgetAllocation.stub(:find).and_return(budget_allocation)
 
       described_class.generate_file(monthly_monitoring)
 

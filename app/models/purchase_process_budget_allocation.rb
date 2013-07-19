@@ -7,12 +7,30 @@ class PurchaseProcessBudgetAllocation < Compras::Model
   attr_modal :material, :quantity, :unit_price
 
   belongs_to :licitation_process
-  belongs_to :budget_allocation
 
   belongs_to_resource :expense_nature
+  belongs_to_resource :budget_allocation
 
   delegate :expense_nature, :expense_nature_id, :amount,
            :to => :budget_allocation, :allow_nil => true, :prefix => true
 
-  validates :budget_allocation, :value, :presence => true
+  validates :budget_allocation_id, :value, :presence => true
+
+  private
+
+  def budget_allocation_params
+    { includes: [
+        :expense_nature,
+        :budget_structure,
+        budget_allocation_capabilities: { include: [:capability, :budget_allocation] }],
+      methods: [
+        :amount,
+        :budget_structure_structure_sequence,
+        :expense_nature_expense_nature,
+        :function_code,
+        :subfunction_code,
+        :government_program_code,
+        :government_action_code,
+        :government_action_action_type] }
+  end
 end

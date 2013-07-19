@@ -46,7 +46,12 @@ module Matchers
       field = page.find_field(field)
 
       expect(field.value).to eq options[:with] if options && options[:with]
-      expect(field[:disabled]).to eq 'disabled'
+
+      if page.driver.class == Capybara::Selenium::Driver
+        expect(field[:disabled]).to be_true
+      else
+        expect(field[:disabled]).to eq 'disabled'
+      end
     end
 
     failure_message_for_should do |page|
@@ -60,7 +65,13 @@ module Matchers
 
   matcher :have_readonly_field do |field|
     match do |page|
-      expect(page.find_field(field)[:readonly]).to eq 'readonly'
+      field = page.find_field(field)
+
+      if page.driver.class == Capybara::Selenium::Driver
+        expect(field[:readonly]).to be_true
+      else
+        expect(field[:readonly]).to eq 'readonly'
+      end
     end
 
     failure_message_for_should do |page|
@@ -74,7 +85,13 @@ module Matchers
 
   matcher :have_disabled_button do |field|
     match do |page|
-      expect(page.find_button(field)[:disabled]).to eq 'disabled'
+      button = page.find_button(field)
+
+      if page.driver.class == Capybara::Selenium::Driver
+        expect(button[:disabled]).to be_true
+      else
+        expect(button[:disabled]).to eq 'disabled'
+      end
     end
 
     failure_message_for_should do |page|

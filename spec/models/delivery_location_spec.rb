@@ -1,5 +1,7 @@
 require 'model_helper'
 require 'app/models/expense_nature'
+require 'app/models/budget_structure'
+require 'app/models/budget_allocation'
 require 'app/models/delivery_location'
 require 'app/models/purchase_solicitation_budget_allocation'
 require 'app/models/purchase_solicitation'
