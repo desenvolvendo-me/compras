@@ -2,7 +2,7 @@
 source 'http://rubygems.org'
 source 'https://SEqawpNNEx65yrzYS9p8@gem.fury.io/me/'
 
-ruby "1.9.3"
+ruby "2.0.0"
 
 gem 'rails', '3.2.13'
 gem 'unicorn', '4.6.2'
