@@ -65,6 +65,7 @@ group :development, :test do
   gem "factory_girl_rails", "~> 4.2.1"
   gem 'postgres-copy', '~> 0.5.8'
   gem 'pry', '0.9.12'
+  gem 'pry-remote'
   gem 'rspec-rails', '2.12.0'
 end
 
