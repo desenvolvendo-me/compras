@@ -15,6 +15,7 @@ class ReserveFund < UnicoAPI::Resources::Contabilidade::ReserveFund
 
   def self.by_purchase_process_id(id)
     self.all(params: { by_purchase_process_id: id,
-      methods: [:budget_allocation_to_s, :balance, :descriptor_to_s] })
+      methods: :balance,
+      includes: { descriptor: { methods: :to_s } } })
   end
 end

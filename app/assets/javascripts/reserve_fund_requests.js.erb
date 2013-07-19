@@ -79,7 +79,9 @@ $(document).ready(function() {
       complete: postDataComplete
     });
   }
+  //
 
+  // FORM FUNCTIONS
   function buildReserveFund() {
     reserveFund = {};
 
@@ -87,7 +89,7 @@ $(document).ready(function() {
     reserveFund['date']                 = $("#licitation_process_date").val();
     reserveFund['amount']               = $("#licitation_process_amount").val();
     reserveFund['descriptor_id']        = $("#licitation_process_descriptor_id").val();
-    reserveFund['budget_allocation_id'] = $("#licitation_process_budget_allocation_id").val();
+    reserveFund['budget_allocation_id'] = $("#licitation_process_budget_allocations").val();
     reserveFund['purchase_process_id']  = $("#licitation_process_id").val();
 
     return reserveFund;
@@ -96,7 +98,7 @@ $(document).ready(function() {
   $('button#reserve_fund_create').on("click", function(event) {
     event.preventDefault();
 
-    submitData();
+    validateFormData() ? submitData() : false
   });
 
   $('button#reserve_fund_cancel').on("click", function(event) {
@@ -115,8 +117,7 @@ $(document).ready(function() {
     $("#reserve_fund_id").val(dataDiv.find('.reserve_fund_id').val());
     $("#licitation_process_descriptor").val(dataDiv.find('.descriptor').val());
     $("#licitation_process_descriptor_id").val(dataDiv.find('.descriptor_id').val());
-    $("#licitation_process_budget_allocation").val(dataDiv.find('.budget_allocation').val());
-    $("#licitation_process_budget_allocation_id").val(dataDiv.find('.budget_allocation_id').val());
+    $("#licitation_process_budget_allocations").val(dataDiv.find('.budget_allocation_id').val());
     $("#licitation_process_date").val(dataDiv.find('.date').val());
     $("#licitation_process_amount").val(dataDiv.find('.amount').val());
 
@@ -127,8 +128,7 @@ $(document).ready(function() {
     $("#reserve_fund_id").val('');
     $("#licitation_process_descriptor").val('');
     $("#licitation_process_descriptor_id").val('');
-    $("#licitation_process_budget_allocation").val('');
-    $("#licitation_process_budget_allocation_id").val('');
+    $("#licitation_process_budget_allocations").val('');
     $("#licitation_process_date").val('');
     $("#licitation_process_amount").val('');
 
@@ -136,6 +136,17 @@ $(document).ready(function() {
     enableBlockButton();
   }
 
+  function validateFormData() {
+    var descriptorId        = $("#licitation_process_descriptor_id").val();
+
+    if (_.isEmpty(descriptorId)) {
+      return formError("Descritor não pode ficar em branco...");
+    }
+
+    return true;
+  }
+
+  // HELPER FUNCTIONS
   function disableBlockButton() {
     button = $('button#reserve_fund_create');
 
@@ -164,6 +175,12 @@ $(document).ready(function() {
 
   function updateReserveFundRoute(id) {
     return Routes.reserve_funds + '/' + id
+  }
+
+  function formError(message) {
+    alert(message);
+
+    return false;
   }
 
   function alertErrors(errors) {
