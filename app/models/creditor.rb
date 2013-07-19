@@ -70,7 +70,7 @@ class Creditor < Persona::Creditor
   scope :without_direct_purchase_ratification, lambda { |licitation_process_id|
     creditor_ids = LicitationProcess.find(licitation_process_id).licitation_process_ratification_creditor_ids
 
-    scoped.select { 'compras_creditors.*, unico_people.name' }.
+    scoped.select { 'unico_creditors.*, unico_people.name' }.
     joins { purchase_process_items.licitation_process.licitation_process_ratifications.outer }.
     joins { person }.
     where {
@@ -87,7 +87,7 @@ class Creditor < Persona::Creditor
   scope :without_licitation_ratification, lambda { |licitation_process_id|
     creditor_ids = LicitationProcess.find(licitation_process_id).licitation_process_ratification_creditor_ids
 
-    scoped.select { 'compras_creditors.*, unico_people.name' }.
+    scoped.select { 'unico_creditors.*, unico_people.name' }.
     joins { bidders.licitation_process.licitation_process_ratifications.outer }.
     joins { person }.
     where {
@@ -102,7 +102,7 @@ class Creditor < Persona::Creditor
       query.bidders.licitation_process.creditor_proposals.licitation_process_id.eq(licitation_process_id) &
       query.bidders.licitation_process.creditor_proposals.ranking.eq(1)
     }.
-    where { '"compras_creditors".id = "compras_purchase_process_creditor_proposals".creditor_id' }.
+    where { '"unico_creditors".id = "compras_purchase_process_creditor_proposals".creditor_id' }.
     uniq
   }
 
@@ -111,7 +111,7 @@ class Creditor < Persona::Creditor
       TradingItemWinner.new(item).creditor.id
     }
 
-    scoped.where("compras_creditors.id in (?)", creditor_ids)
+    scoped.where("unico_creditors.id in (?)", creditor_ids)
   }
 
   scope :winners, ->(purchase_process) do
