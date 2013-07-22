@@ -58,10 +58,6 @@ describe TceExport::MG::MonthlyMonitoring::ContractGenerator do
         bidders: [Bidder.make!(:licitante)])
     end
 
-    let(:capability) do
-      Capability.make!(:reforma, capability_source: CapabilitySource.make!(:imposto))
-    end
-
     let(:creditor_proposal) do
       PurchaseProcessCreditorProposal.make!(:proposta_arame, licitation_process: licitation_process)
     end
@@ -109,7 +105,7 @@ describe TceExport::MG::MonthlyMonitoring::ContractGenerator do
         pledge = Pledge.new(
           id: 1, value: 9.99, description: 'Empenho 1', year: 2013, to_s: 1,
           emission_date: signature_date,
-          capability_id: capability.id,
+          capability: 1,
           licitation_process: licitation_process,
           contract: contract,
           expense_nature: expense_nature,
@@ -118,7 +114,7 @@ describe TceExport::MG::MonthlyMonitoring::ContractGenerator do
           subfunction_code: budget_allocation.subfunction_code,
           government_program_code: budget_allocation.government_program_code,
           government_action_code: budget_allocation.government_action_code,
-          capability_source_code: capability.capability_source_code)
+          capability_source_code: '001')
 
         UnicoAPI::Resources::Contabilidade::Pledge.stub(:all)
           .with(params: {by_contract_id: contract.id, includes: [:capability, budget_allocation: { include: :expense_nature }]})
@@ -167,7 +163,7 @@ describe TceExport::MG::MonthlyMonitoring::ContractGenerator do
         pledge = Pledge.new(
           id: 1, value: 9.99, description: 'Empenho 1', year: 2013, to_s: 1,
           emission_date: signature_date,
-          capability_id: capability.id,
+          capability_id: 1,
           licitation_process: licitation_process,
           contract: contract,
           expense_nature: expense_nature,
@@ -176,7 +172,7 @@ describe TceExport::MG::MonthlyMonitoring::ContractGenerator do
           subfunction_code: budget_allocation.subfunction_code,
           government_program_code: budget_allocation.government_program_code,
           government_action_code: budget_allocation.government_action_code,
-          capability_source_code: capability.capability_source_code)
+          capability_source_code: "001")
 
         UnicoAPI::Resources::Contabilidade::Pledge.stub(:all)
           .with(params: {by_contract_id: contract.id,

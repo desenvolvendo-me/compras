@@ -339,8 +339,6 @@ Compras::Application.routes.draw do
 
   get "functions/modal", :as => :modal_functions
 
-  get "government_actions/modal", :as => :modal_government_actions
-
   get "government_programs/modal", :as => :modal_government_programs
 
   get "individuals/modal", :as => :modal_individuals

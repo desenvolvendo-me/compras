@@ -51,24 +51,20 @@ describe TceExport::MG::MonthlyMonitoring::DirectPurchaseGenerator do
         month: 5,
         year: 2013)
 
-      tce_specification_capability = TceSpecificationCapability.make!(:ampliacao)
-
-      capability = Capability.make!(:reforma,
-        tce_specification_capability: tce_specification_capability)
-
       ExpenseNature.stub(:find).and_return(expense_nature)
 
       budget_allocation = BudgetAllocation.new(
         id: 1,
         code: 1,
-        budget_structure: budget_structure,
-        function_code: '04',
-        subfunction_code: '01',
-        government_program_code: '003',
-        government_action_code: '003',
-        expense_nature_expense_nature: expense_nature.expense_nature,
-        budget_allocation_capabilities: [BudgetAllocationCapability.make!(:generic, budget_allocation_id: 1, capability: capability)],
-        amount: 500.8
+        budget_allocation_capabilities: [
+          { amount: 500.00,
+            budget_allocation: {
+              budget_structure: budget_structure, function_code: "04", subfunction_code: "01",
+              government_program_code: "003", government_action_code: "003",
+              expense_nature_expense_nature: expense_nature.expense_nature, amount: 500.8 },
+            capability: { capability_source_code: "001"}
+          }
+        ]
       )
 
       BudgetAllocation.stub(:find).and_return(budget_allocation)
@@ -117,14 +113,9 @@ describe TceExport::MG::MonthlyMonitoring::DirectPurchaseGenerator do
         month: 5,
         year: 2013)
 
-      tce_specification_capability = TceSpecificationCapability.make!(:ampliacao)
-
-      capability = Capability.make!(:reforma,
-        tce_specification_capability: tce_specification_capability)
-
       budget_allocation = BudgetAllocation.new(
         id: 1,
-        budget_allocation_capabilities: [BudgetAllocationCapability.make!(:generic, budget_allocation_id: 1, capability: capability)]
+        budget_allocation_capabilities: [{amount: 500, budget_allocation_id: 1, capability: "123"}]
       )
 
       BudgetAllocation.stub(:find).and_return(budget_allocation)
