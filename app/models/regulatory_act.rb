@@ -8,9 +8,6 @@ class RegulatoryAct < Unico::RegulatoryAct
   has_enumeration_for :budget_change_law_type
   has_enumeration_for :regulatory_act_type, :create_helpers => { :prefix => true }
 
-  has_many :budget_structure_configurations, :dependent => :restrict
-  has_many :budget_structure_responsibles, :dependent => :restrict
-
   has_and_belongs_to_many :dissemination_sources, join_table: :unico_dissemination_sources_unico_regulatory_acts
 
   delegate :classification_law?, :regulatory_act_type_budget_change?, :regulatory_act_type_loa?, :to => :parent, :prefix => true, :allow_nil => true

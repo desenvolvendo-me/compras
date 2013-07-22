@@ -1,2 +1,0 @@
-class BudgetStructureConfigurationsController < CrudController
-end

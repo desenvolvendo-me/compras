@@ -9,7 +9,6 @@ feature "BudgetStructure" do
   scenario 'create a new budget structure' do
     pending "this test will be removed when there is integration with the accounting system"
 
-    BudgetStructureConfiguration.make!(:detran_sopa)
     AdministrationType.make!(:publica)
     Address.make!(:general)
     Employee.make!(:sobrinho)
@@ -204,7 +203,6 @@ feature "BudgetStructure" do
     pending "this test will be removed when there is integration with the accounting system"
 
     BudgetStructure.make!(:secretaria_de_educacao)
-    BudgetStructureConfiguration.make!(:detran_sopa)
     AdministrationType.make!(:publica)
     Address.make!(:general)
     Employee.make!(:sobrinho)
@@ -257,7 +255,6 @@ feature "BudgetStructure" do
     pending "this test will be removed when there is integration with the accounting system"
 
     BudgetStructure.make!(:secretaria_de_educacao)
-    BudgetStructureConfiguration.make!(:secretaria_de_educacao)
 
     navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentárias'
 
