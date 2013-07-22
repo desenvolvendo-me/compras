@@ -13,12 +13,8 @@
 </div>
 
 <div class="yui3-g">
-  <div class='yui3-u-1-5'>
-    <%= f.input :kind %>
-  </div>
-
   <div class="yui3-u-1-2">
-    <%= f.input :parent, :disabled => !f.object.amendment? %>
+    <%= f.input :parent %>
   </div>
 </div>
 
@@ -151,10 +147,6 @@
     $('#contract_execution_type_humanize').val('');
     $('#contract_contract_guarantees_humanize').val('');
   };
-
-  $('#contract_kind').change(function (e) {
-    $('#contract_parent').attr('disabled', $(this).val() != '<%= ContractKind::AMENDMENT %>');
-  });
 
   $('form').on('change', '#contract_licitation_process_id', function (event, licitationProcess) {
 

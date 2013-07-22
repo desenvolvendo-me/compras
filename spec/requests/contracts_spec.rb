@@ -56,21 +56,6 @@ feature "Contracts" do
     expect(page).to have_field 'Processo de compra', :with => ''
   end
 
-  scenario 'selecting a amendment contract, submeting with error, the main contract should still enabled' do
-    navigate 'Instrumentos Contratuais > Contratos'
-
-    click_link 'Criar Contrato'
-
-    expect(page).to have_disabled_field 'Contrato principal'
-    select 'Aditivo', :from => 'Tipo'
-    expect(page).to_not have_disabled_field 'Contrato principal'
-
-    click_button 'Salvar'
-
-    expect(page).to have_select 'Tipo', :selected => 'Aditivo'
-    expect(page).to_not have_disabled_field 'Contrato principal'
-  end
-
   scenario 'create, update and destroy a new contract' do
     LicitationProcess.make!(:processo_licitatorio)
     DisseminationSource.make!(:jornal_municipal)
@@ -84,13 +69,9 @@ feature "Contracts" do
 
     expect(page).to have_field 'Ano do contrato', :with => "#{Date.current.year}"
     expect(page).to have_disabled_field 'Número sequencial'
-    expect(page).to have_disabled_field 'Contrato principal'
-    expect(page).to have_disabled_field 'Modalidade'
-
-    select 'Aditivo', :from => 'Tipo'
     expect(page).to_not have_disabled_field 'Contrato principal'
-    select 'Contrato principal', :from => 'Tipo'
-    expect(page).to have_disabled_field 'Contrato principal'
+    expect(page).to have_disabled_field 'Modalidade'
+    expect(page).to have_field 'Contrato principal'
 
     fill_in 'Ano do contrato', :with => '2012'
     expect(page).to have_field 'Número sequencial', :with => '1'

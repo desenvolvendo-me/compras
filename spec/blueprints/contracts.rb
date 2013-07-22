@@ -6,7 +6,6 @@ Contract.blueprint(:primeiro_contrato) do
   signature_date { Date.new(2012, 2, 23) }
   end_date { Date.new(2012, 2, 24) }
   description { "Objeto" }
-  kind { ContractKind::MAIN }
   licitation_process { LicitationProcess.make!(:processo_licitatorio) }
   contract_type { ContractType.make!(:management) }
   dissemination_source { DisseminationSource.make!(:jornal_municipal) }
@@ -32,7 +31,6 @@ Contract.blueprint(:contrato_detran) do
   signature_date { Date.new(2012, 2, 23) }
   end_date { Date.new(2013, 2, 23) }
   description { "Contrato" }
-  kind { ContractKind::MAIN }
   contract_type { ContractType.make!(:founded) }
   creditors { [Creditor.make!(:sobrinho)] }
   contract_value { 1000 }
