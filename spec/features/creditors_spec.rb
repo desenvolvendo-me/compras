@@ -49,15 +49,17 @@ feature "Creditors" do
   end
 
   scenario 'show main tab to special entry when have custom data' do
-    prefecture = Prefecture.make!(:belo_horizonte)
-    Customization.make!(:campo_string, :state => prefecture.state)
+    prefecture = Prefecture.make!(:belo_horizonte_mg)
 
     navigate 'Comum > Pessoas > Credores'
 
     click_link 'Criar Credor'
 
     within_tab 'Principal' do
-      fill_in 'Nome de um campo', :with => 'Foo'
+      fill_in 'Objeto social do credor', :with => 'Foo'
+      fill_in 'Número do Registro CVM', :with => 'Foo'
+      fill_in 'Data do registro CVM', :with => 'Foo'
+      fill_in 'Número do Registro no Cartório de Registro, títulos e documentos', :with => 'Foo'
     end
   end
 
