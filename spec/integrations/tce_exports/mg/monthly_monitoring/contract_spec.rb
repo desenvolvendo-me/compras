@@ -69,20 +69,18 @@ describe TceExport::MG::MonthlyMonitoring::ContractGenerator do
         licitation_process_ratification_items: [])
     end
 
+    let :expense_nature do
+      ExpenseNature.new(id: 1, expense_nature: '3.1.90.01.01')
+    end
+
     let :budget_allocation do
       BudgetAllocation.new(
         id: 1,
-        budget_structure: budget_structure,
         function_code: '04',
         subfunction_code: '01',
         government_program_code: '003',
-        government_action_code: '003',
-        expense_nature: expense_nature
+        government_action_code: '003'
       )
-    end
-
-    let :expense_nature do
-      ExpenseNature.new(id: 1, expense_nature: '3.1.90.01.01')
     end
 
     context "with two or more creditors" do
@@ -101,6 +99,9 @@ describe TceExport::MG::MonthlyMonitoring::ContractGenerator do
         contract = Contract.make!(:primeiro_contrato, signature_date: signature_date,
           end_date: end_date, licitation_process: licitation_process,
           creditors: [creditor_sobrinho, creditor_wenderson])
+
+        budget_allocation.expense_nature = expense_nature
+        budget_allocation.budget_structure = budget_structure
 
         pledge = Pledge.new(
           id: 1, value: 9.99, description: 'Empenho 1', year: 2013, to_s: 1,
@@ -159,6 +160,9 @@ describe TceExport::MG::MonthlyMonitoring::ContractGenerator do
           creditors: [creditor_sobrinho])
 
         ContractTermination.make!(:contrato_rescindido, contract: contract)
+
+        budget_allocation.expense_nature = expense_nature
+        budget_allocation.budget_structure = budget_structure
 
         pledge = Pledge.new(
           id: 1, value: 9.99, description: 'Empenho 1', year: 2013, to_s: 1,
