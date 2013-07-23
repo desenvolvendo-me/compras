@@ -4,6 +4,8 @@ require 'exporter_helper'
 require 'app/exporters/tce_export/mg/casters/date_caster'
 
 describe TceExport::MG::Casters::DateCaster do
+  let(:generator) { double(:generator) }
+
   it "returns the date in the DDMMYYYY format" do
     expect(described_class.call(Date.new(2012, 1, 1), {})).to eq "01012012"
   end
@@ -13,14 +15,12 @@ describe TceExport::MG::Casters::DateCaster do
   end
 
   it "validates presence of required attributes" do
-    options = { :required => true, :attribute => "data" }
+    options = { required: true, attribute: "data", generator: generator }
 
-    expect do
-      expect(described_class.call(nil, options))
-    end.to raise_error(TceExport::MG::Exceptions::InvalidData, "data não pode ficar em branco.")
+    generator.should_receive(:add_error).with "#{options[:attribute]} não pode ficar em branco."
+    expect(described_class.call(nil, options))
 
-    expect do
-      expect(described_class.call(' ', options))
-    end.to raise_error(TceExport::MG::Exceptions::InvalidData, "data não pode ficar em branco.")
+    generator.should_receive(:add_error).with "#{options[:attribute]} não pode ficar em branco."
+    expect(described_class.call(' ', options))
   end
 end

@@ -56,31 +56,22 @@ describe TceExport::MonthlyMonitoring do
 
       expect(subject.status).to eq MonthlyMonitoringStatus::PROCESSED
     end
-  end
-
-  describe "#set_errors" do
-    let(:exception) { double(message: "message", backtrace: "backtrace") }
-
-    before do
-      subject.stub(save!: true)
-    end
 
     it "changes the status to Processed with errors" do
-      subject.set_errors(exception)
+      subject.stub(save!: true)
+      subject.error_message = 'foo'
+
+      subject.set_file(double)
 
       expect(subject.status).to eq MonthlyMonitoringStatus::PROCESSED_WITH_ERRORS
     end
+  end
 
-    it "sets the processing errors attributes" do
-      subject.set_errors(exception)
-
-      expect(subject.processing_errors).to eq "backtrace"
-    end
-
+  describe "#set_errors" do
     it "sets the error message attributes" do
-      subject.set_errors(exception)
+      subject.should_receive(:update_column).with(:error_message, "message")
 
-      expect(subject.error_message).to eq "message"
+      subject.set_errors("message")
     end
   end
 

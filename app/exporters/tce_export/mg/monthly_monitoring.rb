@@ -16,7 +16,18 @@ module TceExport::MG
       end
 
       def generate_zip_file
-        generators = generator_classes.map { |generator| generator.generate_file }
+        errors = []
+
+        generators = generator_classes.map do |generator|
+          generator_file = generator.generate_file
+          errors = errors + generator.errors
+
+          generator_file
+        end
+
+        unless errors.empty?
+          monthly_monitoring.set_errors(errors.join("\n"))
+        end
 
         FileUtils.rm_f(zipfile_name)
 
@@ -34,7 +45,7 @@ module TceExport::MG
       attr_reader :prefecture, :date, :city_code, :monthly_monitoring
 
       def generator_classes
-        csv_files.map do |file|
+        generators = csv_files.map do |file|
           self.class.module_eval("#{file.classify}Generator").new(monthly_monitoring)
         end
       end
@@ -97,6 +108,22 @@ module TceExport::MG
         end
 
         filename
+      end
+
+      def errors
+        @errors ||= []
+      end
+
+      def add_error(error)
+        errors << "#{error_header} - #{error}"
+      end
+
+      def lines
+        @lines ||= []
+      end
+
+      def error_header
+        "#{acronym} [linha: #{lines.size + 1}]"
       end
 
       private
@@ -164,15 +191,39 @@ module TceExport::MG
       end
 
       def generate_data
-        begin
-          data_generator.generate_data.map do |data|
-            formats.map do |format|
-              send(format, data)
-            end.compact.join("\n")
-          end.join("\n")
-        rescue TceExport::MG::Exceptions::InvalidData => e
-          raise e.class, "#{acronym} - #{e.message}"
+        @lines = []
+        @errors = []
+
+        data_generator.generate_data.each do |data|
+          formats.each do |format|
+            send(format, data)
+          end
         end
+
+        lines.compact.join("\n")
+      end
+    end
+
+    class FormatterBase
+      include Typecaster
+
+      def self.separator
+        ";"
+      end
+
+      def initialize(data, generator = nil)
+        @generator = generator
+
+        super(data)
+      end
+
+      private
+
+      def typecasted_attribute(options)
+        options[:generator] = @generator
+
+        klass = options[:caster]
+        klass.call(options[:value], options)
       end
     end
   end

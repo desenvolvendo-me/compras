@@ -20,11 +20,7 @@ module TceExport::MG
       end
     end
 
-    class RegulatoryActFormatter
-      include Typecaster
-
-      output_separator ";"
-
+    class RegulatoryActFormatter < FormatterBase
       attribute :cod_orgao, position: 0, size: 2, min_size: 2, required: true,
                 caster: Casters::TextCaster
       attribute :tipo_decreto, position: 1, size: 1, min_size: 1, required: true,
@@ -47,7 +43,7 @@ module TceExport::MG
       private
 
       def format_data(data)
-        formatter.new(data).to_s
+        lines << formatter.new(data, self).to_s
       end
     end
   end

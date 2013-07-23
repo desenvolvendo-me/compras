@@ -20,7 +20,16 @@ describe TceExport::MonthlyMonitoringWorker do
   let(:monthly_monitoring) do
     FactoryGirl.create(:monthly_monitoring,
       customer: customer,
-      prefecture: prefecture)
+      prefecture: prefecture
+    )
+  end
+
+  let(:monthly_monitoring_with_errors) do
+    FactoryGirl.create(:monthly_monitoring,
+      customer: customer,
+      prefecture: prefecture,
+      error_message: 'erro message'
+    )
   end
 
   before do
@@ -45,11 +54,8 @@ describe TceExport::MonthlyMonitoringWorker do
   end
 
   it "sets the monitoring status as 'processed with errors' if an error occur" do
-    TceExport::MG::MonthlyMonitoring.stub(:generate_zip_file).
-      and_raise(TceExport::MG::Exceptions::InvalidData, "Test error")
+    subject.perform(customer.id, monthly_monitoring_with_errors.id)
 
-    subject.perform(customer.id, monthly_monitoring.id)
-
-    expect(monthly_monitoring.reload.status).to eq MonthlyMonitoringStatus::PROCESSED_WITH_ERRORS
+    expect(monthly_monitoring_with_errors.reload.status).to eq MonthlyMonitoringStatus::PROCESSED_WITH_ERRORS
   end
 end

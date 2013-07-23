@@ -72,11 +72,7 @@ module TceExport::MG
       end
     end
 
-    class LicitationRatificationFormatter
-      include Typecaster
-
-      output_separator ";"
-
+    class LicitationRatificationFormatter < FormatterBase
       attribute :tipo_registro,            position: 0, size: 2, min_size: 2, required: true, caster: Casters::IntegerCaster
       attribute :cod_orgao,                position: 1, size: 2, min_size: 2, required: true, caster: Casters::TextCaster
       attribute :cod_unidade_sub,          position: 2, multiple_size: [5, 8], required: false, caster: Casters::TextCaster
@@ -91,11 +87,7 @@ module TceExport::MG
       attribute :vl_homologado,            position: 11, size: 13, min_size: 1, required: true, precision: 4, caster: Casters::PrecisionCaster
     end
 
-    class RatificationDateDetailFormatter
-      include Typecaster
-
-      output_separator ";"
-
+    class RatificationDateDetailFormatter < FormatterBase
       attribute :tipo_registro,            position: 0, size: 2, min_size: 2, required: true, caster: Casters::IntegerCaster
       attribute :cod_orgao,                position: 1, size: 2, min_size: 2, required: true, caster: Casters::TextCaster
       attribute :cod_unidade_sub,          position: 2, multiple_size: [5, 8], required: false, caster: Casters::TextCaster
@@ -116,13 +108,11 @@ module TceExport::MG
       private
 
       def format_licitation_ratification(data)
-        licitation_ratification_formatter.new(
-          data.except(:ratification_date_detail)
-        ).to_s
+        lines << licitation_ratification_formatter.new(data.except(:ratification_date_detail), self).to_s
       end
 
       def format_ratification_date_detail(data)
-        ratification_date_detail_formatter.new(data[:ratification_date_detail]).to_s
+        lines << ratification_date_detail_formatter.new(data[:ratification_date_detail], self).to_s
       end
     end
   end

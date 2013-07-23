@@ -144,10 +144,7 @@ module TceExport::MG
       end
     end
 
-    class BiddingAuthorizationFormatter
-      include Typecaster
-
-      output_separator ";"
+    class BiddingAuthorizationFormatter < FormatterBase
 
       attribute :tipo_registro, position: 0, size: 2, min_size: 2, required: true, caster: Casters::IntegerCaster
       attribute :cod_orgao, position: 1, size: 2, min_size: 2, required: true, caster: Casters::TextCaster
@@ -179,10 +176,7 @@ module TceExport::MG
       attribute :renuncia_recurso, position: 27, size: 1, min_size: 1, required: true, caster: Casters::IntegerCaster
     end
 
-    class PartnerFormatter
-      include Typecaster
-
-      output_separator ";"
+    class PartnerFormatter < FormatterBase
 
       attribute :tipo_registro, position: 0, size: 2, min_size: 2, required: true, caster: Casters::IntegerCaster
       attribute :cod_orgao, position: 1, size: 2, min_size: 2, required: true, caster: Casters::TextCaster
@@ -209,17 +203,17 @@ module TceExport::MG
       private
 
       def format_bidder(data)
-        bidder_formatter.new(data.except(:partners)).to_s
+        lines << bidder_formatter.new(data.except(:partners), self).to_s
       end
 
       def format_partners(data)
         return unless data[:partners]
 
-        data[:partners].map { |partner_data| format_partner(partner_data) }.compact.join("\n")
+        data[:partners].each { |partner_data| format_partner(partner_data) }
       end
 
       def format_partner(partner_data)
-        partner_formatter.new(partner_data).to_s
+        lines << partner_formatter.new(partner_data, self).to_s
       end
     end
   end

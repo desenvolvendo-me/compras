@@ -165,11 +165,7 @@ module TceExport::MG
       end
     end
 
-    class ProcessResponsibleFormatter
-      include Typecaster
-
-      output_separator ";"
-
+    class ProcessResponsibleFormatter < FormatterBase
       attribute :tipo_registro, position: 0, size: 2, min_size: 2, required: true, caster: Casters::IntegerCaster
       attribute :cod_orgao, position: 1, size: 2, min_size: 2, required: true, caster: Casters::TextCaster
       attribute :cod_unidade_sub, position: 2, multiple_size: [5, 8], required: false, caster: Casters::TextCaster
@@ -187,11 +183,7 @@ module TceExport::MG
       attribute :email, position: 14, size: 50, min_size: 1, required: true, caster: Casters::TextCaster
     end
 
-    class LicitationCommissionMemberFormatter
-      include Typecaster
-
-      output_separator ";"
-
+    class LicitationCommissionMemberFormatter < FormatterBase
       attribute :tipo_registro, position: 0, size: 2, min_size: 2, required: true, caster: Casters::IntegerCaster
       attribute :cod_orgao, position: 1, size: 2, min_size: 2, required: true, caster: Casters::TextCaster
       attribute :cod_unidade_sub, position: 2, multiple_size: [5, 8], required: false, caster: Casters::TextCaster
@@ -228,17 +220,17 @@ module TceExport::MG
       private
 
       def format_responsible(data)
-        responsible_formatter.new(data.except(:members)).to_s
+        lines << responsible_formatter.new(data.except(:members), self).to_s
       end
 
       def format_members(data)
         return unless data[:members]
 
-        data[:members].map { |member| format_member(member) }.compact.join("\n")
+        data[:members].each { |member| format_member(member) }
       end
 
       def format_member(member)
-        member_formatter.new(member).to_s
+        lines << member_formatter.new(member, self).to_s
       end
     end
   end

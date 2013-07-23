@@ -5,11 +5,7 @@ class TceExport::MonthlyMonitoringWorker
     using_connection_for(customer_id) do
       monthly_monitoring = TceExport::MonthlyMonitoring.find(monthly_monitoring_id)
 
-      begin
-        monthly_monitoring.set_file File.open(TceExport::MG::MonthlyMonitoring.generate_zip_file(monthly_monitoring))
-      rescue TceExport::MG::Exceptions::InvalidData => e
-        monthly_monitoring.set_errors(e)
-      end
+      monthly_monitoring.set_file File.open(TceExport::MG::MonthlyMonitoring.generate_zip_file(monthly_monitoring))
     end
   end
 

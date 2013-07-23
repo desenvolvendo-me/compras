@@ -37,11 +37,11 @@ describe TceExport::MG::MonthlyMonitoring::ProcessResponsibleGenerator do
 
       data.should_receive(:except).with(:members).and_return(data)
 
-      responsible_formatter.should_receive(:new).with(data).and_return(responsible_formatter)
+      responsible_formatter.should_receive(:new).with(data, subject).and_return(responsible_formatter)
       responsible_formatter.should_receive(:to_s)
 
       data.should_receive(:[]).with(:members).twice.and_return([member])
-      member_formatter.should_receive(:new).with(member).and_return(member_formatter)
+      member_formatter.should_receive(:new).with(member, subject).and_return(member_formatter)
       member_formatter.should_receive(:to_s)
       subject.generate_file
     end
