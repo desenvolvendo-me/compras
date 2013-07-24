@@ -1,0 +1,11 @@
+pt-BR:
+  activemodel:
+    attributes:
+      purchase_process_ratifications_by_period_report:
+        type_of_purchase: "Tipo de compra"
+        object_type: "Tipo de objeto"
+        modality: "Modalidade"
+        creditor: "Fornecedor"
+        start_date: "Data homologação inicial"
+        end_date: "Data homologação final"
+        type_of_removal: "Tipo do afastamento"

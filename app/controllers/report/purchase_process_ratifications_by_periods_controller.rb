@@ -1,0 +1,3 @@
+class Report::PurchaseProcessRatificationsByPeriodsController < Report::BaseController
+  report_class PurchaseProcessRatificationsByPeriodReport, :repository => PurchaseProcessRatificationsByPeriodSearcher
+end

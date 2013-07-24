@@ -1,0 +1,33 @@
+<h1>
+  Relatório de compras homologadas por período
+</h1>
+
+<table class="records">
+  <thead>
+    <tr>
+      <th>Ano do processo</th>
+      <th>Número do processo</th>
+      <th>Tipo de compra</th>
+      <th>Modalidade/Afastamento</th>
+      <th>Fornecedor</th>
+      <th>Valor</th>
+      <th>Data da adjudicação</th>
+      <th>Data da homologação</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% resource.records.each do |record| %>
+      <tr>
+        <td><%= record.licitation_process_year %></td>
+        <td><%= record.licitation_process_process %></td>
+        <td><%= record.licitation_process_type_of_purchase_humanize %></td>
+        <td><%= record.decorator.modality_or_type_of_removal %></td>
+        <td><%= record.creditor %></td>
+        <td><%= record.decorator.creditor_proposals_total_value %></td>
+        <td><%= record.decorator.adjudication_date %></td>
+        <td><%= record.decorator.ratification_date %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

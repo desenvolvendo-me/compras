@@ -22,6 +22,8 @@ class LicitationProcessRatification < Compras::Model
     :to => :licitation_process, :prefix => true, :allow_nil => true
   delegate :item?, to: :judgment_form, allow_nil: true, prefix: true
   delegate :process_responsibles, to: :licitation_process, allow_nil: true
+  delegate :year, :process, :type_of_purchase_humanize, :modality_humanize, :type_of_removal_humanize,
+    :licitation?, to: :licitation_process, allow_nil: true, prefix: true
 
   validates :licitation_process, :creditor, :presence => true
   validates :adjudication_date, :ratification_date, :presence => true
@@ -55,6 +57,10 @@ class LicitationProcessRatification < Compras::Model
                  :licitation_process => licitation_process,
                  :creditor => creditor.to_s)
     end
+  end
+
+  def creditor_proposals_total_value
+    creditor_proposals.creditor_id(creditor_id).sum {|proposal| proposal.unit_price * proposal.item_quantity}
   end
 
   def proposals_total_value

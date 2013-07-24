@@ -70,3 +70,6 @@ menu:
 
   - "Prestação de Contas":
     - tce_export_monthly_monitorings
+
+  - "Relatórios":
+    - report_purchase_process_ratifications_by_periods

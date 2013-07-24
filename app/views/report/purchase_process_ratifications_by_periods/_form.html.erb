@@ -1,0 +1,75 @@
+<div class="yui3-g">
+  <div class="yui3-u-1-3">
+    <%= f.input :type_of_purchase, :include_blank => true %>
+  </div>
+
+  <div class="yui3-u-1-3">
+    <%= f.input :object_type, :include_blank => true %>
+  </div>
+
+  <div class="yui3-u-1-3">
+    <%= f.input :modality, :include_blank => true, wrapper_class: 'modality' %>
+    <%= f.input :type_of_removal, :include_blank => true, wrapper_class: 'type_of_removal' %>
+  </div>
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-1">
+    <%= f.input :creditor, as: :modal, data_url: modal_creditors_url, hidden_field: :creditor_id %>
+  </div>
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-4">
+    <%= f.input :start_date, as: :date %>
+  </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :end_date, as: :date %>
+  </div>
+</div>
+
+<script type="text/javascript">
+  visibilityTypeOfRemovalOrModality('');
+  $('#purchase_process_ratifications_by_period_report_type_of_purchase').on('change', function(){
+    visibilityTypeOfRemovalOrModality($(this).val());
+  });
+
+  $('#purchase_process_ratifications_by_period_report_object_type').on('change', function(){
+    filterModalities($(this).val());
+  });
+
+  function visibilityTypeOfRemovalOrModality(type_of_purchase){
+    if (type_of_purchase == "licitation"){
+      $('.type_of_removal').addClass('hidden');
+      $('.modality').removeClass('hidden');
+    } else{
+      $('.type_of_removal').removeClass('hidden');
+      $('.modality').addClass('hidden');
+    }
+  }
+
+  function filterModalities(objectType) {
+    var modalitiesByObjectType = <%= Modality.by_object_type.to_json.html_safe %>,
+        validGroup             = _(modalitiesByObjectType[objectType]),
+        currentModality        = $("#current_modality_id").val();
+
+    $("#purchase_process_ratifications_by_period_report_modality").empty();
+
+    $("#purchase_process_ratifications_by_period_report_modality").append(function() {
+      return $("<option>").text('').val('');
+    });
+
+    if (!validGroup.isUndefined() && !validGroup.isEmpty()){
+      validGroup.each(function(modality) {
+        $("#purchase_process_ratifications_by_period_report_modality").append(function() {
+          if (modality[1] == currentModality) {
+            return $("<option>").text(modality[0]).val(modality[1]).attr('selected', 'selected');
+          } else {
+            return $("<option>").text(modality[0]).val(modality[1]);
+          }
+        });
+      });
+    }
+  }
+</script>
