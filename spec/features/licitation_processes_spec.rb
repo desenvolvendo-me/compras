@@ -67,15 +67,13 @@ feature "LicitationProcesses" do
     BudgetAllocation.new(
       id: 1,
       code: 123,
-      budget_structure: budget_structure,
-      expense_nature: aposentadorias_reserva_reformas,
       budget_allocation_capabilities: [
         { amount: 500,
           budget_allocation_id: 1
         }
       ],
       year: 2013,
-      amount: 500.0,
+      balance: 500.0,
       to_s: "123 - #{aposentadorias_reserva_reformas.expense_nature} - #{aposentadorias_reserva_reformas.description}"
     )
   end
@@ -84,15 +82,13 @@ feature "LicitationProcesses" do
     BudgetAllocation.new(
       id: 2,
       code: 456,
-      budget_structure: budget_structure,
-      expense_nature: aplicacoes_diretas,
       budget_allocation_capabilities: [
         { amount: 500,
           budget_allocation_id: 1
         }
       ],
       year: 2013,
-      amount: 3000.0,
+      balance: 3000.0,
       to_s: "456 - #{aplicacoes_diretas.expense_nature} - #{aplicacoes_diretas.description}"
     )
   end
@@ -101,11 +97,11 @@ feature "LicitationProcesses" do
     { params: { includes: [:expense_nature, budget_structure: { except: :custom_data }, budget_allocation_capabilities: {
       include: [:capability, :budget_allocation]}], methods: [:balance, :amount, :budget_structure_structure_sequence,
       :expense_nature_expense_nature, :function_code, :subfunction_code, :government_program_code,
-      :government_action_code, :government_action_action_type]}}
+      :government_action_code, :government_action_action_type, :balance]}}
   end
 
   let :another_budget_allocation_params do
-    { params: { includes: :expense_nature, methods: :amount } }
+    { params: { includes: :expense_nature, methods: :balance } }
   end
 
   background do
@@ -130,6 +126,12 @@ feature "LicitationProcesses" do
     ExpenseNature.stub(:find).with(3, params: {}).and_return compra_de_material
     ExpenseNature.stub(:find).with(4, params: {}).and_return aplicacoes_diretas
     ExpenseNature.stub(:all).and_return [aposentadorias_reserva_reformas, aposentadorias_rpps, compra_de_material, aplicacoes_diretas]
+
+    budget_allocation.budget_structure = budget_structure
+    budget_allocation.expense_nature   = aposentadorias_reserva_reformas
+
+    another_budget_allocation.budget_structure = budget_structure
+    another_budget_allocation.expense_nature   = aplicacoes_diretas
 
     BudgetAllocation.stub(:find).with(1, budget_allocation_params).and_return(budget_allocation)
     BudgetAllocation.stub(:find).with(2, budget_allocation_params).and_return(another_budget_allocation)

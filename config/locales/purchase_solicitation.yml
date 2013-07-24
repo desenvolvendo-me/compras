@@ -13,7 +13,7 @@ pt-BR:
         responsible: "Responsável pela solicitação"
         justification: "Justificativa da solicitação"
         budget_allocation: "Dotação orçamentária"
-        budget_allocation_amount: "Saldo da dotação"
+        budget_allocation_balance: "Saldo da dotação"
         delivery_location: "Local para entrega"
         kind: "Tipo de solicitação"
         general_observations: "Observações gerais"

@@ -8,7 +8,7 @@ pt-BR:
     attributes:
       purchase_solicitation_budget_allocation:
         budget_allocation: "Dotação"
-        budget_allocation_amount: "Saldo da dotação"
+        budget_allocation_balance: "Saldo da dotação"
         budget_allocation_expense_nature: "Natureza da despesa"
         blocked: "Bloquear"
         estimated_value: "Valor estimado"

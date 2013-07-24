@@ -25,7 +25,7 @@ $(document).ready(function() {
           budget_allocation_expense_nature: budgetAllocation.budget_allocation_expense_nature,
           expense_nature: budgetAllocation.expense_nature,
           expense_nature_id: budgetAllocation.expense_nature_id,
-          budget_allocation_amount: numberWithDelimiter(budgetAllocation.amount),
+          budget_allocation_balance: numberWithDelimiter(budgetAllocation.balance),
           value: numberWithDelimiter(budgetAllocation.estimated_value)
         };
 
@@ -79,7 +79,7 @@ $(document).ready(function() {
         year   = $('#licitation_process_year').val(),
         params = { by_parent_id: budgetAllocation.expense_nature_id, by_year: year };
 
-    $('#licitation_process_budget_allocation_amount').val(numberWithDelimiter(parseFloat(budgetAllocation.amount)));
+    $('#licitation_process_budget_allocation_balance').val(numberWithDelimiter(parseFloat(budgetAllocation.balance)));
     $('#licitation_process_budget_allocation_expense_nature').val(budgetAllocation.expense_nature);
     $('#budget_allocation_expense_nature_id').val(budgetAllocation.expense_nature_id);
 

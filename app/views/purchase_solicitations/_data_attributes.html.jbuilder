@@ -12,7 +12,7 @@ builder resource, json do
     json.to_s                 budget_allocation.to_s
     json.budget_allocation_id budget_allocation.budget_allocation_id
     json.expense_nature       budget_allocation.budget_allocation_expense_nature.to_s
-    json.amount               budget_allocation.budget_allocation.amount.to_f
+    json.balance              budget_allocation.budget_allocation.balance.to_f
   end
 
   json.items resource.items do |item|

@@ -3,24 +3,24 @@ require 'decorator_helper'
 require 'app/decorators/purchase_process_budget_allocation_decorator'
 
 describe PurchaseProcessBudgetAllocationDecorator do
-  context '#budget_allocation_amount' do
-    context 'when do not have budget_allocation_amount' do
+  context '#budget_allocation_balance' do
+    context 'when do not have budget_allocation_balance' do
       before do
-        component.stub(:budget_allocation_amount).and_return(nil)
+        component.stub(:budget_allocation_balance).and_return(nil)
       end
 
       it 'should be nil' do
-        expect(subject.budget_allocation_amount).to be_nil
+        expect(subject.budget_allocation_balance).to be_nil
       end
     end
 
-    context 'when have budget_allocation_amount' do
+    context 'when have budget_allocation_balance' do
       before do
-        component.stub(:budget_allocation_amount).and_return(10)
+        component.stub(:budget_allocation_balance).and_return(10)
       end
 
-      it 'should return budget_allocation_amount' do
-        expect(subject.budget_allocation_amount).to eq "10,00"
+      it 'should return budget_allocation_balance' do
+        expect(subject.budget_allocation_balance).to eq "10,00"
       end
     end
   end

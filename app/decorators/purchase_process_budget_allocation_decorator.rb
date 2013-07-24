@@ -3,7 +3,7 @@ class PurchaseProcessBudgetAllocationDecorator
   include Decore::Proxy
   include ActionView::Helpers::NumberHelper
 
-  def budget_allocation_amount
+  def budget_allocation_balance
     number_with_precision super if super
   end
 
