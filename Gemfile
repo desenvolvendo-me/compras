@@ -69,10 +69,10 @@ group :development, :test do
 end
 
 group :test do
-  gem 'capybara', '1.1.2'
+  gem 'capybara', '2.1.0'
   gem 'machinist', '2.0'
   gem 'machinist-caching', '0.0.1'
-  gem 'poltergeist', '0.7.0'
+  gem 'poltergeist', '1.3.0'
   gem 'selenium-webdriver', '~> 2.33.0'
   gem 'shoulda-matchers', '2.2.0'
   gem 'simplecov', :require => false
