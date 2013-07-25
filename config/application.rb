@@ -91,6 +91,7 @@ module Compras
       'creditor_proposal_benefited_tieds.js',
       'employees.js',
       'licitation_processes.js',
+      'pledge_requests.js',
       'purchase_process_accreditations.js',
       'purchase_process_creditor_disqualifications.js',
       'purchase_process_proposals.js',

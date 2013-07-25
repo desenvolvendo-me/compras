@@ -71,6 +71,10 @@ class Contract < Compras::Model
     where { signature_date.in(date_range) }
   }
 
+  scope :purchase_process_id, ->(purchase_process_id) do
+    where { |query| query.licitation_process_id.eq(purchase_process_id) }
+  end
+
   def to_s
     contract_number
   end

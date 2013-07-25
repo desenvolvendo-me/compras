@@ -5,6 +5,7 @@ require 'app/models/licitation_process_classification'
 require 'app/models/bidder_proposal'
 require 'app/models/purchase_process_creditor_proposal'
 require 'app/models/purchase_process_trading_item_bid'
+require 'app/models/licitation_process_ratification_item'
 
 describe PurchaseProcessItem do
   it { should validate_presence_of :material }
@@ -21,6 +22,7 @@ describe PurchaseProcessItem do
   it { should have_many(:purchase_process_accreditation_creditors) }
 
   it { should have_one(:purchase_process_accreditation) }
+  it { should have_one(:ratification_item).dependent(:restrict) }
 
   it { should delegate(:reference_unit).to(:material).allowing_nil(true) }
   it { should delegate(:description).to(:material).allowing_nil(true) }

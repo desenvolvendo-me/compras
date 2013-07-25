@@ -1,0 +1,31 @@
+pt-BR:
+  activemodel:
+    models:
+      accounting_account:
+        one: "Conta Contábil"
+        other: "Contas Contábeis"
+
+    attributes:
+      accounting_account:
+        account_plan_configuration: "Configuração de plano de contas"
+        bank_account: "Conta bancária"
+        bookkeeping: "Escrituração"
+        checking_account: "Conta corrente"
+        child_code: "Conta contábil"
+        code: "Conta contábil"
+        contract: "Contrato"
+        debt_type: "Tipo de dívida"
+        balance: 'Saldo'
+        title: "Título"
+        function: "Função"
+        movimentation_kind: "Tipo de movimentação"
+        nature_balance: "Natureza do saldo"
+        nature_balance_variation: "Variação na natureza do saldo"
+        nature_information: "Natureza da informação"
+        parent: 'Conta superior'
+        regulatory_act: "Ato regulamentador"
+        retention_kind: 'Tipo de retenção'
+        retention_subtype: 'Subtipo de retenção'
+        surplus_indicator: "Indicador de superávit financeiro"
+        title: "Título"
+        with_bank_account: "Conta bancária?"

@@ -52,6 +52,12 @@ module Api
              :json   => { :message => "Record not found" }
     end
 
+    # 422
+    def unprocessable_entity(resource)
+      render :status => :unprocessable_entity,
+             :json => { errors: resource.errors.full_messages }
+    end
+
     # 500
     def internal_server_error(exception)
       if Rails.application.config.consider_all_requests_local

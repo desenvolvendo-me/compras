@@ -11,6 +11,7 @@ builder resource, json do
   json.process_date                    resource.process_date
   json.proposal_envelope_opening_date  resource.proposal_envelope_opening_date
   json.proposal_envelope_opening_time  resource.decorator.proposal_envelope_opening_time
+  json.budget_allocations_ids          resource.budget_allocations_ids
 
   json.items resource.items do |item|
     json.id                   item.id

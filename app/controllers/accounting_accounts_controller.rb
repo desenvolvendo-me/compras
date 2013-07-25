@@ -1,0 +1,2 @@
+class AccountingAccountsController < ApiConsumerController
+end

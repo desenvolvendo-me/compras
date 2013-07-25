@@ -17,9 +17,9 @@ describe PurchaseProcessBudgetAllocation do
 
   it 'should belong to resource budget_allocation' do
     budget_allocation = BudgetAllocation.new(id: 2)
-    params = { params: { includes: [:expense_nature, :budget_structure, {
-      budget_allocation_capabilities: { include: [:capability, :budget_allocation]}}],
-      methods: [:amount, :budget_structure_structure_sequence, :expense_nature_expense_nature,
+    params = { params: { includes: [:expense_nature, budget_structure: { except: :custom_data },
+      budget_allocation_capabilities: { include: [:capability, :budget_allocation]}],
+      methods: [:balance, :amount, :budget_structure_structure_sequence, :expense_nature_expense_nature,
       :function_code, :subfunction_code, :government_program_code, :government_action_code,
       :government_action_action_type]}}
 

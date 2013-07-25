@@ -55,6 +55,18 @@ Compras::Application.routes.draw do
     end
   end
 
+  resources :accounting_cost_centers, only: [:index, :modal] do
+    collection do
+      get :modal
+    end
+  end
+
+  resources :accounting_accounts, only: [:index, :modal] do
+    collection do
+      get :modal
+    end
+  end
+
   resources :addresses
 
   resources :regulatory_acts do
@@ -503,6 +515,13 @@ Compras::Application.routes.draw do
     get 'modal_info', :on => :member
   end
 
+  resources :pledge_requests do
+    collection do
+      get :modal
+      get :filter
+    end
+  end
+
   resources :occurrence_contractual_historics do
     collection do
       get :filter
@@ -735,5 +754,6 @@ Compras::Application.routes.draw do
     resources :material_classes
     resources :purchase_processes, only: [:index, :show]
     resources :contracts, only: [:index, :show]
+    resources :pledge_requests, only: [:index, :show, :update]
   end
 end

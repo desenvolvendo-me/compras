@@ -1,0 +1,24 @@
+pt-BR:
+  activerecord:
+    models:
+      pledge_request:
+        one: "Pedido de Empenho"
+        other: "Pedidos de Empenho"
+
+    attributes:
+      pledge_request:
+        accounting_account: 'Conta patrimonial'
+        amount: "Valor do empenho"
+        budget_allocation: "Dotação"
+        budget_allocation_balance: "Saldo da dotação"
+        contract: "Contrato"
+        creditor: "Credor"
+        descriptor: "Descritor"
+        emission_date: "Data de emissão"
+        expense_nature: "Desdobramento"
+        historic_complement: "Histórico"
+        item_replicated_value: "Valor do empenho"
+        items_total_value: "Valor total dos itens"
+        purchase_process: 'Processo de Compra'
+        reserve_fund: "Reserva de dotação"
+        reserve_fund_amount: "Saldo reserva"

@@ -1,6 +1,7 @@
 class ContractsController < CrudController
   has_scope :founded, :type => :boolean
   has_scope :management, :type => :boolean
+  has_scope :purchase_process_id, allow_blank: true
 
   def new
     object = build_resource

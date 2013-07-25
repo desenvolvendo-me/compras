@@ -130,14 +130,18 @@ module CrudHelper
   end
 
   def not_updateable_message
-    return if ((resource.updateable? && resource.persisted?) || resource.new_record?)
+    return unless resource.respond_to?(:updateable?)
 
-    I18n.t("activerecord.errors.messages.cant_be_updated")
+    unless (resource.updateable? && resource.persisted?) || resource.new_record?
+      I18n.t("activerecord.errors.messages.cant_be_updated")
+    end
   end
 
   def not_destroyable_message
-    return if resource.destroyable?
+    return unless resource.respond_to?(:destroyable?)
 
-    I18n.t("activerecord.errors.messages.cant_be_destroyed")
+    unless resource.destroyable?
+      I18n.t("activerecord.errors.messages.cant_be_destroyed")
+    end
   end
 end

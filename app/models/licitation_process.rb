@@ -83,6 +83,7 @@ class LicitationProcess < Compras::Model
   has_many :trading_items, through: :trading, source: :items, order: :id
   has_many :trading_item_bids, through: :trading_items, source: :bids, order: :id
   has_many :trading_item_negotiations, through: :trading_items, source: :negotiation, order: :id
+  has_many :contracts, dependent: :restrict
 
   has_one :judgment_commission_advice, :dependent => :restrict
   has_one :purchase_process_accreditation, :dependent => :restrict
@@ -196,6 +197,10 @@ class LicitationProcess < Compras::Model
   scope :not_removal_by_limit, -> do
     where { type_of_removal.not_eq TypeOfRemoval::REMOVAL_BY_LIMIT }
   end
+
+  scope :ratified, lambda {
+    joins { licitation_process_ratifications }
+  }
 
   def to_s
     "#{process}/#{year} - #{modality_or_type_of_removal_humanized} #{modality_number}"
@@ -317,6 +322,12 @@ class LicitationProcess < Compras::Model
 
   def published_editals
     publications.edital
+  end
+
+  def budget_allocations_ids
+    return [] unless purchase_process_budget_allocations
+
+    purchase_process_budget_allocations.map(&:budget_allocation_id)
   end
 
   def budget_allocations
