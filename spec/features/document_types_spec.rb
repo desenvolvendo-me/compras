@@ -6,7 +6,7 @@ feature "DocumentTypes" do
     sign_in
   end
 
-  scenario 'create, update and destroy a new document_type', :only_monday do
+  scenario 'create, update and destroy a new document_type' do
     navigate 'Comum > Tipos de Documento'
 
     click_link 'Criar Tipo de Documento'

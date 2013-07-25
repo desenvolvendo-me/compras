@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
 
-feature "Banks", :only_monday do
+feature "Banks" do
   background do
     sign_in
   end

@@ -6,7 +6,7 @@ feature "Indexers" do
     sign_in
   end
 
-  scenario 'create, update and destroy a new indexer', :only_monday do
+  scenario 'create, update and destroy a new indexer' do
     Currency.make!(:real)
 
     navigate 'Comum > Cadastrais > Indexadores'

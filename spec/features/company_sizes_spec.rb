@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
 
-feature "CompanySizes", :only_monday do
+feature "CompanySizes" do
   background do
     sign_in
   end

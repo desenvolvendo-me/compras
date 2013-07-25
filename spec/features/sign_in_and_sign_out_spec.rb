@@ -6,7 +6,7 @@ feature "SignInAndSignOut" do
     User.make!(:sobrinho_as_admin)
   end
 
-  scenario 'sign in with invalid credentials', :only_monday do
+  scenario 'sign in with invalid credentials' do
     visit root_path
 
     fill_in 'Login', :with => 'gabriel.sobrinho'

@@ -6,7 +6,7 @@ feature "Users" do
     sign_in
   end
 
-  scenario 'create a new user, update and destroyer user an existent', :only_monday do
+  scenario 'create a new user, update and destroyer user an existent' do
     Employee.make!(:wenderson)
 
     navigate 'Geral > Usuários > Usuários'

@@ -6,7 +6,7 @@ feature "PaymentMethods" do
     sign_in
   end
 
-  scenario 'create a new payment_method, update and destroy an existing', :only_monday do
+  scenario 'create a new payment_method, update and destroy an existing' do
     navigate 'Comum > Formas de Pagamento'
 
     click_link 'Criar Forma de Pagamento'

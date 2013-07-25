@@ -6,7 +6,7 @@ feature "Currencies" do
     sign_in
   end
 
-  scenario 'create,update and destroy a new currency', :only_monday do
+  scenario 'create,update and destroy a new currency' do
     navigate 'Comum > Cadastrais > Moedas'
 
     click_link 'Criar Moeda'

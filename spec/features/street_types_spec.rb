@@ -6,7 +6,7 @@ feature "StreetTypes" do
     sign_in
   end
 
-  scenario 'create a new street type, update and destroy an existing', :only_monday do
+  scenario 'create a new street type, update and destroy an existing' do
     navigate 'Geral > Parâmetros > Endereços > Tipos de Logradouros'
 
     click_link 'Criar Tipo de Logradouro'

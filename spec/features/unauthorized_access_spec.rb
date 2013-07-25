@@ -10,7 +10,7 @@ feature "UnauthorizedAccess" do
     sign_in
   end
 
-  scenario 'access a page without authorization', :only_monday do
+  scenario 'access a page without authorization' do
     visit users_path
 
     expect(page).to have_content 'Você não tem acesso a essa página!'

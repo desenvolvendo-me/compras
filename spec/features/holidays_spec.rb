@@ -6,7 +6,7 @@ feature "Holidays" do
     sign_in
   end
 
-  scenario 'create, update and destroy a new holiday', :only_monday do
+  scenario 'create, update and destroy a new holiday' do
     navigate 'Comum > Cadastrais > Feriados'
 
     click_link 'Criar Feriado'
