@@ -4,7 +4,7 @@ source 'https://SEqawpNNEx65yrzYS9p8@gem.fury.io/me/'
 
 ruby "2.0.0"
 
-gem 'rails', '3.2.13'
+gem 'rails', '3.2.14'
 gem 'unicorn', '4.6.2'
 gem 'sidekiq', '2.12.4'
 
