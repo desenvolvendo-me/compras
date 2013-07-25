@@ -281,11 +281,7 @@ module TceExport::MG
       end
     end
 
-    class PurchaseFormatter
-      include Typecaster
-
-      output_separator ";"
-
+    class PurchaseFormatter < FormatterBase
       attribute :tipo_registro, position: 0, size: 2, min_size: 2, required: true, caster: Casters::IntegerCaster
       attribute :cod_orgao_resp, position: 1, size: 2, min_size: 2, required: true, caster: Casters::TextCaster
       attribute :cod_unidade_sub_resp, position: 2, multiple_size: [5, 8], required: false, caster: Casters::TextCaster
@@ -315,11 +311,7 @@ module TceExport::MG
       attribute :desconto_tabela, position: 26, size: 1, min_size: 1, required: true, caster: Casters::IntegerCaster
     end
 
-    class BudgetDetailFormatter
-      include Typecaster
-
-      output_separator ";"
-
+    class BudgetDetailFormatter < FormatterBase
       attribute :tipo_registro, position: 0, size: 2, min_size: 2, required: true, caster: Casters::IntegerCaster
       attribute :cod_orgao_resp, position: 1, size: 2, min_size: 2, required: true, caster: Casters::TextCaster
       attribute :cod_unidade_sub_resp, position: 2, multiple_size: [5, 8], required: false, caster: Casters::TextCaster
@@ -335,11 +327,7 @@ module TceExport::MG
       attribute :vl_min_alien_bens, position: 12, size: 13, min_size: 1, required: true, caster: Casters::DecimalCaster
     end
 
-    class ResourceDetailFormatter
-      include Typecaster
-
-      output_separator ";"
-
+    class ResourceDetailFormatter < FormatterBase
       attribute :tipo_registro, position: 0, size: 2, min_size: 2, required: true, caster: Casters::IntegerCaster
       attribute :cod_orgao_resp, position: 1, size: 2, min_size: 2, required: true, caster: Casters::TextCaster
       attribute :cod_unidade_sub_resp, position: 2, multiple_size: [5, 8], required: false, caster: Casters::TextCaster
@@ -369,23 +357,23 @@ module TceExport::MG
       private
 
       def format_purchase(data)
-        purchase_formatter.new(data.except(:capabilities, :budget_allocations)).to_s
+        lines << purchase_formatter.new(data.except(:capabilities, :budget_allocations), self).to_s
       end
 
       def format_budget_details(data)
         return unless data[:budget_allocations]
 
-        data[:budget_allocations].map { |budget_data|
-          budget_detail_formatter.new(budget_data).to_s
-        }.compact.join("\n")
+        data[:budget_allocations].each do |budget_data|
+          lines << budget_detail_formatter.new(budget_data, self).to_s
+        end
       end
 
       def format_resource_details(data)
         return unless data[:capabilities]
 
-        data[:capabilities].map { |capability_data|
-          resource_detail_formatter.new(capability_data).to_s
-        }.compact.join("\n")
+        data[:capabilities].each do |capability_data|
+          lines << resource_detail_formatter.new(capability_data, self).to_s
+        end
       end
     end
   end

@@ -151,11 +151,7 @@ module TceExport::MG
       end
     end
 
-    class LicitationJudgmentFormatter
-      include Typecaster
-
-      output_separator ";"
-
+    class LicitationJudgmentFormatter < FormatterBase
       attribute :tipo_registro,            position: 0, size: 2, min_size: 2, required: true, caster: Casters::IntegerCaster
       attribute :cod_orgao,                position: 1, size: 2, min_size: 2, required: true, caster: Casters::TextCaster
       attribute :cod_unidade_sub,          position: 2, multiple_size: [5, 8], required: false, caster: Casters::TextCaster
@@ -171,11 +167,7 @@ module TceExport::MG
       attribute :unidade,                  position: 12, size: 50, min_size: 1, required: true, caster: Casters::TextCaster
     end
 
-    class JudgmentDateDetailFormatter
-      include Typecaster
-
-      output_separator ";"
-
+    class JudgmentDateDetailFormatter < FormatterBase
       attribute :tipo_registro,            position: 0, size: 2, min_size: 2, required: true, caster: Casters::IntegerCaster
       attribute :cod_orgao,                position: 1, size: 2, min_size: 2, required: true, caster: Casters::TextCaster
       attribute :cod_unidade_sub,          position: 2, multiple_size: [5, 8], required: false, caster: Casters::TextCaster
@@ -197,13 +189,13 @@ module TceExport::MG
       private
 
       def format_licitation_judgment(data)
-        licitation_judgment_formatter.new(data.except(:judgment_date_detail)).to_s
+        lines << licitation_judgment_formatter.new(data.except(:judgment_date_detail), self).to_s
       end
 
       def format_judgment_date_detail(data)
         return unless data[:judgment_date_detail]
 
-        judgment_date_detail_formatter.new(data[:judgment_date_detail]).to_s
+        lines << judgment_date_detail_formatter.new(data[:judgment_date_detail], self).to_s
       end
     end
   end

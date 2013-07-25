@@ -40,15 +40,13 @@ class TceExport::MonthlyMonitoring < Compras::Model
     Date.new(year, month)
   end
 
-  def set_errors(exception)
-    processed_with_errors!
-    self.error_message = exception.message
-    self.processing_errors = exception.backtrace
-    save!
+  def set_errors(error_messages)
+    update_column :error_message, error_messages
   end
 
   def set_file(file)
-    processed!
+    set_status
+
     self.file = file
     save!
   end
@@ -58,6 +56,10 @@ class TceExport::MonthlyMonitoring < Compras::Model
   end
 
   protected
+
+  def set_status
+    error_message.blank? ? processed! : processed_with_errors!
+  end
 
   def remove_empty_values_from_only_files
     self.only_files.reject!(&:blank?)

@@ -14,7 +14,7 @@ module TceExport::MG
       private
 
       def format_data(data)
-        ''
+        lines << ''
       end
     end
   end

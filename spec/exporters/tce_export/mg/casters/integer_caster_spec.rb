@@ -1,18 +1,22 @@
 #encoding: utf-8
+require 'unico-api'
 require 'exporter_helper'
 require 'app/exporters/tce_export/mg/casters/integer_caster'
 
 describe TceExport::MG::Casters::IntegerCaster do
+  let(:generator) { double(:generator) }
+
   it "returns the value in the string format" do
     result = TceExport::MG::Casters::IntegerCaster.call(10, {})
     expect(result).to eq "10"
   end
 
-  it "raises an error if the integer has more digits than it should" do
-    options = { size: 2, :attribute => "number" }
-    expect {
-      TceExport::MG::Casters::IntegerCaster.call(100, options)
-    }.to raise_error(TceExport::MG::Exceptions::InvalidData, "number muito longo.")
+  it "add an error if the integer has more digits than it should" do
+    options = { size: 2, attribute: "number", generator: generator }
+
+    generator.should_receive(:add_error).with "#{options[:attribute]} muito longo."
+
+    TceExport::MG::Casters::IntegerCaster.call(100, options)
   end
 
   it "completes value min size with zeroes" do
@@ -28,14 +32,12 @@ describe TceExport::MG::Casters::IntegerCaster do
   end
 
   it "validates presence of required attributes" do
-    options = { required: true, :attribute => "number" }
+    options = { required: true, attribute: "number", generator: generator }
 
-    expect {
-      TceExport::MG::Casters::IntegerCaster.call(nil, options)
-    }.to raise_error(TceExport::MG::Exceptions::InvalidData, "number não pode ficar em branco.")
+    generator.should_receive(:add_error).with "#{options[:attribute]} não pode ficar em branco."
+    TceExport::MG::Casters::IntegerCaster.call(nil, options)
 
-    expect {
-      TceExport::MG::Casters::IntegerCaster.call(' ', options)
-    }.to raise_error(TceExport::MG::Exceptions::InvalidData, "number não pode ficar em branco.")
+    generator.should_receive(:add_error).with "#{options[:attribute]} não pode ficar em branco."
+    TceExport::MG::Casters::IntegerCaster.call(' ', options)
   end
 end

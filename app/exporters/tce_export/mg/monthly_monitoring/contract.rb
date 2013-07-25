@@ -383,11 +383,7 @@ module TceExport::MG
 
     ### FORMATERS
 
-    class ContractHeaderFormatter # Registro 10
-      include Typecaster
-
-      output_separator ";"
-
+    class ContractHeaderFormatter < FormatterBase # Registro 10
       attribute :tipo_registro, position: 0, size: 2, min_size:  2, required: true, caster: Casters::IntegerCaster
       attribute :cod_contrato, position: 1, size: 15, required: true, caster: Casters::IntegerCaster
       attribute :cod_orgao, position: 2, size: 2, min_size:  2, required: true, caster: Casters::TextCaster
@@ -419,11 +415,7 @@ module TceExport::MG
       attribute :veiculo_divulgacao, position: 28, size: 50, required: true, caster: Casters::TextCaster
     end
 
-    class ContractItemDetailFormatter # Registro 11
-      include Typecaster
-
-      output_separator ";"
-
+    class ContractItemDetailFormatter < FormatterBase # Registro 11
       attribute :tipo_registro,    position: 0, size: 2, min_size: 2, required: true, caster: Casters::IntegerCaster
       attribute :cod_contrato,     position: 1, size: 15, required: true, caster: Casters::IntegerCaster
       attribute :descricao_item,   position: 2, size: 250, required: true, caster: Casters::TextCaster
@@ -432,11 +424,7 @@ module TceExport::MG
       attribute :vl_unitario_item, position: 5, size: 13, required: true, precision: 4, caster: Casters::PrecisionCaster
     end
 
-    class ContractPledgeItemFormatter # Registro 12
-      include Typecaster
-
-      output_separator ";"
-
+    class ContractPledgeItemFormatter < FormatterBase # Registro 12
       attribute :tipo_registro, position: 0, size: 2, min_size: 2, required:  true, caster: Casters::IntegerCaster
       attribute :cod_contrato, position: 1, size: 15, required:  true, caster: Casters::IntegerCaster
       attribute :cod_orgao, position: 2, size: 2, min_size: 2, required:  true, caster: Casters::TextCaster
@@ -450,11 +438,7 @@ module TceExport::MG
       attribute :cod_fonte_recursos, position: 10, size: 3, min_size: 3, required:  true, caster: Casters::IntegerCaster
     end
 
-    class ContractCreditorItemFormatter # Registro 13
-      include Typecaster
-
-      output_separator ";"
-
+    class ContractCreditorItemFormatter < FormatterBase # Registro 13
       attribute :tipo_registro, position: 0, size: 2, min_size: 2, required: true, caster: Casters::IntegerCaster
       attribute :cod_contrato, position: 1, size: 15, required: true, caster: Casters::IntegerCaster
       attribute :tipo_documento, position: 2, size: 1, min_size: 1, required: true, caster: Casters::IntegerCaster
@@ -462,11 +446,7 @@ module TceExport::MG
       attribute :nome_credor, position: 4, size: 120, required: true, caster: Casters::TextCaster
     end
 
-    class ContractAdditiveItemFormatter #Registro 20
-      include Typecaster
-
-      output_separator ";"
-
+    class ContractAdditiveItemFormatter < FormatterBase #Registro 20
       attribute :tipo_registro, position: 0, size:  2, min_size: 2, required: true, caster: Casters::IntegerCaster
       attribute :cod_aditivo, position: 1, size:  15, required: true, caster: Casters::IntegerCaster
       attribute :cod_orgao, position: 2, size:  2, min_size: 2, required: true, caster: Casters::TextCaster
@@ -484,11 +464,7 @@ module TceExport::MG
       attribute :veiculo_divulgacao, position: 14, size:  50, required: true, caster: Casters::TextCaster
     end
 
-    class ContractAdditiveItemDetailFormatter # Registro 21
-      include Typecaster
-
-      output_separator ";"
-
+    class ContractAdditiveItemDetailFormatter < FormatterBase # Registro 21
       attribute :tipo_registro,    position: 0, size: 2, min_size: 2, required: true, caster: Casters::IntegerCaster
       attribute :cod_aditivo,      position: 1, size: 15, required: true, caster: Casters::IntegerCaster
       attribute :descricao_item,   position: 2, size: 150, required: true, caster: Casters::TextCaster
@@ -497,11 +473,7 @@ module TceExport::MG
       attribute :vl_unitario_item, position: 5, size: 13, required: true, precision: 4, caster: Casters::PrecisionCaster
     end
 
-    class ContractTerminationItemFormatter #Registro 40
-      include Typecaster
-
-      output_separator ";"
-
+    class ContractTerminationItemFormatter < FormatterBase #Registro 40
       attribute :tipo_registro, position: 0, size:  2, min_size: 2, required: true, caster: Casters::IntegerCaster
       attribute :cod_orgao, position: 1, size:  2, min_size: 2, required: true, caster: Casters::TextCaster
       attribute :cod_unidade_orcamentaria, position: 2, size:  8, min_size: 5, required: false, caster: Casters::TextCaster
@@ -536,37 +508,43 @@ module TceExport::MG
         data = data.except(:contract_item_detail, :contract_pledge_item, :creditor_item,
           :additive_item, :additive_item_detail, :termination_item)
 
-        contract_header_formatter.new(data).to_s
+        lines << contract_header_formatter.new(data, self).to_s
       end
 
       def format_contract_item_detail(data)
         return unless data[:contract_item_detail].present?
-        contract_item_detail_formatter.new(data[:contract_item_detail]).to_s
+
+        lines << contract_item_detail_formatter.new(data[:contract_item_detail], self).to_s
       end
 
       def format_pledge_item(data)
         return unless data[:contract_pledge_item].present?
-        contract_pledge_item_formatter.new(data[:contract_pledge_item]).to_s
+
+        lines << contract_pledge_item_formatter.new(data[:contract_pledge_item], self).to_s
       end
 
       def format_contract_creditor_item(data)
         return unless data[:creditor_item].present?
-        contract_creditor_item_formatter.new(data[:creditor_item]).to_s
+
+        lines << contract_creditor_item_formatter.new(data[:creditor_item], self).to_s
       end
 
       def format_contract_additive_item(data)
         return unless data[:additive_item].present?
-        contract_additive_item_formatter.new(data[:additive_item]).to_s
+
+        lines << contract_additive_item_formatter.new(data[:additive_item], self).to_s
       end
 
       def format_contract_additive_item_details(data)
         return unless data[:creditor_item_detail].present?
-        contract_additive_item_details_formatter.new(data[:additive_item_detail]).to_s
+
+        lines << contract_additive_item_details_formatter.new(data[:additive_item_detail], self).to_s
       end
 
       def format_contract_termination_item(data)
         return unless data[:termination_item].present?
-        contract_termination_item_formatter.new(data[:termination_item]).to_s
+
+        lines << contract_termination_item_formatter.new(data[:termination_item], self).to_s
       end
     end
   end

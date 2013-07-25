@@ -339,11 +339,7 @@ module TceExport::MG
       end
     end
 
-    class ContractedCreditorFormatter
-      include Typecaster
-
-      output_separator ";"
-
+    class ContractedCreditorFormatter < FormatterBase
       attribute :tipo_registro, position: 0, size: 2, min_size: 2, required: true, caster: Casters::IntegerCaster
       attribute :cod_orgao_resp, position: 1, size: 2, min_size: 2, required: true, caster: Casters::TextCaster
       attribute :cod_unidade_sub_resp, position: 2, multiple_size: [5, 8], required: false, caster: Casters::TextCaster
@@ -370,11 +366,7 @@ module TceExport::MG
       attribute :vlr_item, position: 23, size: 13, min_size: 1, precision: 4, required: true, caster: Casters::PrecisionCaster
     end
 
-    class CapabilityFormatter
-      include Typecaster
-
-      output_separator ";"
-
+    class CapabilityFormatter < FormatterBase
       attribute :tipo_registro, position: 0, size: 2, min_size: 2, required: true, caster: Casters::IntegerCaster
       attribute :cod_orgao_resp, position: 1, size: 2, min_size: 2, required: true, caster: Casters::TextCaster
       attribute :cod_unidade_sub_resp, position: 2, multiple_size: [5, 8], required: false, caster: Casters::TextCaster
@@ -393,11 +385,7 @@ module TceExport::MG
       attribute :vl_recurso, position: 15, size: 13,  required: true, caster: Casters::DecimalCaster
     end
 
-    class ProcessItemFormatter
-      include Typecaster
-
-      output_separator ";"
-
+    class ProcessItemFormatter < FormatterBase
       attribute :tipo_registro, position: 0, size: 2, min_size: 2, required: true, caster: Casters::IntegerCaster
       attribute :cod_orgao_resp, position: 1, size: 2, min_size: 2, required: true, caster: Casters::TextCaster
       attribute :cod_unidade_sub_resp, position: 2, multiple_size: [5, 8], required: false, caster: Casters::TextCaster
@@ -410,11 +398,7 @@ module TceExport::MG
       attribute :vl_cot_precos_unitatio, position: 9, size: 13, min_size: 1, precision: 4, required: true, caster: Casters::PrecisionCaster
     end
 
-    class ProcessResponsibleExemptFormatter
-      include Typecaster
-
-      output_separator ";"
-
+    class ProcessResponsibleExemptFormatter < FormatterBase
       attribute :tipo_registro, position: 0, size: 2, min_size: 2, required: true, caster: Casters::IntegerCaster
       attribute :cod_orgao_resp, position: 1, size: 2, min_size: 2, required: true, caster: Casters::TextCaster
       attribute :cod_unidade_sub_resp, position: 2, multiple_size: [5, 8], required: false, caster: Casters::TextCaster
@@ -433,11 +417,7 @@ module TceExport::MG
       attribute :email, position: 15, size: 50, min_size: 1, required: true, caster: Casters::TextCaster
     end
 
-    class DirectPurchaseFormatter
-      include Typecaster
-
-      output_separator ";"
-
+    class DirectPurchaseFormatter < FormatterBase
       attribute :tipo_registro, position: 0, size: 2, min_size: 2, required: true, caster: Casters::IntegerCaster
       attribute :cod_orgao_resp, position: 1, size: 2, min_size: 2, required: true, caster: Casters::TextCaster
       attribute :cod_unidade_sub_resp, position: 2, multiple_size: [5, 8], required: false, caster: Casters::TextCaster
@@ -470,39 +450,39 @@ module TceExport::MG
       def format_direct_purchase(data)
         direct_purchase_data = data.except(:responsibles, :items, :capabilities, :creditors)
 
-        direct_purchase_formatter.new(direct_purchase_data).to_s
+        lines << direct_purchase_formatter.new(direct_purchase_data, self).to_s
       end
 
       def format_process_responsible_exempts(data)
         return unless data[:responsibles]
 
-        data[:responsibles].map { |responsible_data|
-          process_responsible_exempt_formatter.new(responsible_data).to_s
-        }.compact.join("\n")
+        data[:responsibles].each { |responsible_data|
+          lines << process_responsible_exempt_formatter.new(responsible_data, self).to_s
+        }
       end
 
       def format_process_items(data)
         return unless data[:items]
 
-        data[:items].map { |item_data|
-          process_item_formatter.new(item_data).to_s
-        }.compact.join("\n")
+        data[:items].each { |item_data|
+          lines << process_item_formatter.new(item_data, self).to_s
+        }
       end
 
       def format_capabilities(data)
         return unless data[:capabilities]
 
-        data[:capabilities].map { |capability_data|
-          capability_formatter.new(capability_data).to_s
-        }.compact.join("\n")
+        data[:capabilities].each { |capability_data|
+          lines << capability_formatter.new(capability_data, self).to_s
+        }
       end
 
       def format_contracted_creditors(data)
         return unless data[:creditors]
 
-        data[:creditors].map { |item_data|
-          contracted_creditor_formatter.new(item_data).to_s
-        }.compact.join("\n")
+        data[:creditors].each { |item_data|
+          lines << contracted_creditor_formatter.new(item_data, self).to_s
+        }
       end
     end
   end
