@@ -46,18 +46,18 @@ feature "PurchaseProcessTradings" do
       licitation_process: purchase_process,
       purchase_process_accreditation_creditors: [])
 
-    sobrinho = PurchaseProcessAccreditationCreditor.make!(:sobrinho_creditor,
+    PurchaseProcessAccreditationCreditor.make!(:sobrinho_creditor,
       purchase_process_accreditation: accreditation,
       has_power_of_attorney: true)
-    wenderson = PurchaseProcessAccreditationCreditor.make!(:wenderson_creditor,
+    PurchaseProcessAccreditationCreditor.make!(:wenderson_creditor,
       company_size: CompanySize.make!(:micro_empresa),
       purchase_process_accreditation: accreditation,
       has_power_of_attorney: true)
-    ibm = PurchaseProcessAccreditationCreditor.make!(:sobrinho_creditor,
+    PurchaseProcessAccreditationCreditor.make!(:sobrinho_creditor,
       creditor: Creditor.make!(:ibm),
       purchase_process_accreditation: accreditation,
       has_power_of_attorney: true)
-    nobe = PurchaseProcessAccreditationCreditor.make!(:sobrinho_creditor,
+    PurchaseProcessAccreditationCreditor.make!(:sobrinho_creditor,
       creditor: Creditor.make!(:nobe),
       purchase_process_accreditation: accreditation,
       has_power_of_attorney: false)
@@ -145,7 +145,7 @@ feature "PurchaseProcessTradings" do
     expect(page).to have_title 'Lances do Processo 1/2012 - Pregão 1'
 
     within 'table#items' do
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_checked_field 'item_chooser'
 
         expect(page).to have_content '2050'
@@ -155,7 +155,7 @@ feature "PurchaseProcessTradings" do
         expect(page).to have_content 'Wenderson Malheiros'
       end
 
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         expect(page).to_not have_checked_field 'item_chooser'
 
         expect(page).to have_content '2050'
@@ -234,7 +234,7 @@ feature "PurchaseProcessTradings" do
     within 'table#historic' do
       expect(page).to have_css('tbody tr', count: 1)
 
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_content '1'
         expect(page).to have_content '2050'
         expect(page).to have_content '02.02.00001 - Arame farpado'
@@ -247,7 +247,7 @@ feature "PurchaseProcessTradings" do
     end
 
     within 'table#items' do
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_content '2050'
         expect(page).to have_content '02.02.00001 - Arame farpado'
         expect(page).to have_content '99,00'
@@ -294,7 +294,7 @@ feature "PurchaseProcessTradings" do
     end
 
     within 'table#items' do
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_content '2050'
         expect(page).to have_content '02.02.00001 - Arame farpado'
         expect(page).to have_content '98,00'
@@ -353,7 +353,7 @@ feature "PurchaseProcessTradings" do
     end
 
     within 'table#items' do
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_content '2050'
         expect(page).to have_content '02.02.00001 - Arame farpado'
         expect(page).to have_content '98,00'
@@ -368,7 +368,7 @@ feature "PurchaseProcessTradings" do
     expect(page).to have_button 'Desfazer'
     expect(page).to_not have_disabled_element 'Desfazer', reason: 'não há lance para ser desfeito'
 
-    fill_in 'Valor', with: '0,00'
+    fill_in 'Valor', with: '0,00', disabled: true
 
     click_button 'Gravar lance'
 
@@ -413,7 +413,7 @@ feature "PurchaseProcessTradings" do
     end
 
     within 'table#items' do
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_content '2050'
         expect(page).to have_content '02.02.00001 - Arame farpado'
         expect(page).to have_content '98,00'
@@ -424,7 +424,7 @@ feature "PurchaseProcessTradings" do
     end
 
     within 'table#items' do
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_content '2050'
         expect(page).to have_content '02.02.00001 - Arame farpado'
         expect(page).to have_content '98,00'
@@ -445,7 +445,7 @@ feature "PurchaseProcessTradings" do
 
     # Próximo item
     within 'table#items' do
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         choose 'item_chooser'
       end
     end
@@ -510,7 +510,7 @@ feature "PurchaseProcessTradings" do
     end
 
     within 'table#items' do
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         expect(page).to have_content '2050'
         expect(page).to have_content '02.02.00002 - Arame comum'
         expect(page).to have_content '-'
@@ -558,7 +558,7 @@ feature "PurchaseProcessTradings" do
     end
 
     within 'table#items' do
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         expect(page).to have_content '2050'
         expect(page).to have_content '02.02.00002 - Arame comum'
         expect(page).to have_content '97,99'
@@ -587,7 +587,7 @@ feature "PurchaseProcessTradings" do
     end
 
     within 'table#items' do
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         expect(page).to have_content '2050'
         expect(page).to have_content '02.02.00002 - Arame comum'
         expect(page).to have_content '-'
@@ -635,7 +635,7 @@ feature "PurchaseProcessTradings" do
     end
 
     within 'table#items' do
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         expect(page).to have_content '2050'
         expect(page).to have_content '02.02.00002 - Arame comum'
         expect(page).to have_content '90,00'
@@ -695,7 +695,7 @@ feature "PurchaseProcessTradings" do
     end
 
     within 'table#items' do
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         expect(page).to have_content '2050'
         expect(page).to have_content '02.02.00002 - Arame comum'
         expect(page).to have_content '90,00'
@@ -720,14 +720,14 @@ feature "PurchaseProcessTradings" do
       licitation_process: purchase_process,
       purchase_process_accreditation_creditors: [])
 
-    sobrinho = PurchaseProcessAccreditationCreditor.make!(:sobrinho_creditor,
+    PurchaseProcessAccreditationCreditor.make!(:sobrinho_creditor,
       purchase_process_accreditation: accreditation,
       has_power_of_attorney: true)
-    wenderson = PurchaseProcessAccreditationCreditor.make!(:wenderson_creditor,
+    PurchaseProcessAccreditationCreditor.make!(:wenderson_creditor,
       company_size: CompanySize.make!(:micro_empresa),
       purchase_process_accreditation: accreditation,
       has_power_of_attorney: true)
-    ibm = PurchaseProcessAccreditationCreditor.make!(:sobrinho_creditor,
+    PurchaseProcessAccreditationCreditor.make!(:sobrinho_creditor,
       creditor: Creditor.make!(:ibm),
       purchase_process_accreditation: accreditation,
       has_power_of_attorney: true)
@@ -830,7 +830,7 @@ feature "PurchaseProcessTradings" do
     expect(page).to have_title 'Lances do Processo 1/2012 - Pregão 1'
 
     within 'table#items' do
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_checked_field 'item_chooser'
 
         expect(page).to have_content '2050'
@@ -840,7 +840,7 @@ feature "PurchaseProcessTradings" do
         expect(page).to have_content 'Wenderson Malheiros'
       end
 
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         expect(page).to_not have_checked_field 'item_chooser'
 
         expect(page).to have_content '2050'
@@ -898,14 +898,14 @@ feature "PurchaseProcessTradings" do
       licitation_process: purchase_process,
       purchase_process_accreditation_creditors: [])
 
-    sobrinho = PurchaseProcessAccreditationCreditor.make!(:sobrinho_creditor,
+    PurchaseProcessAccreditationCreditor.make!(:sobrinho_creditor,
       purchase_process_accreditation: accreditation,
       has_power_of_attorney: true)
-    wenderson = PurchaseProcessAccreditationCreditor.make!(:wenderson_creditor,
+    PurchaseProcessAccreditationCreditor.make!(:wenderson_creditor,
       company_size: CompanySize.make!(:micro_empresa),
       purchase_process_accreditation: accreditation,
       has_power_of_attorney: true)
-    ibm = PurchaseProcessAccreditationCreditor.make!(:sobrinho_creditor,
+    PurchaseProcessAccreditationCreditor.make!(:sobrinho_creditor,
       creditor: Creditor.make!(:ibm),
       purchase_process_accreditation: accreditation,
       has_power_of_attorney: true)
@@ -1008,7 +1008,7 @@ feature "PurchaseProcessTradings" do
     expect(page).to have_title 'Lances do Processo 1/2012 - Pregão 1'
 
     within 'table#items' do
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_checked_field 'item_chooser'
 
         expect(page).to have_content '2050'
@@ -1018,7 +1018,7 @@ feature "PurchaseProcessTradings" do
         expect(page).to have_content 'Wenderson Malheiros'
       end
 
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         expect(page).to_not have_checked_field 'item_chooser'
 
         expect(page).to have_content '2050'
@@ -1104,14 +1104,14 @@ feature "PurchaseProcessTradings" do
       licitation_process: purchase_process,
       purchase_process_accreditation_creditors: [])
 
-    sobrinho = PurchaseProcessAccreditationCreditor.make!(:sobrinho_creditor,
+    PurchaseProcessAccreditationCreditor.make!(:sobrinho_creditor,
       purchase_process_accreditation: accreditation,
       has_power_of_attorney: true)
-    wenderson = PurchaseProcessAccreditationCreditor.make!(:wenderson_creditor,
+    PurchaseProcessAccreditationCreditor.make!(:wenderson_creditor,
       company_size: CompanySize.make!(:micro_empresa),
       purchase_process_accreditation: accreditation,
       has_power_of_attorney: true)
-    ibm = PurchaseProcessAccreditationCreditor.make!(:sobrinho_creditor,
+    PurchaseProcessAccreditationCreditor.make!(:sobrinho_creditor,
       creditor: Creditor.make!(:ibm),
       purchase_process_accreditation: accreditation,
       has_power_of_attorney: true)
@@ -1214,7 +1214,7 @@ feature "PurchaseProcessTradings" do
     expect(page).to have_title 'Lances do Processo 1/2012 - Pregão 1'
 
     within 'table#items' do
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_checked_field 'item_chooser'
 
         expect(page).to have_content '2050'
@@ -1224,7 +1224,7 @@ feature "PurchaseProcessTradings" do
         expect(page).to have_content 'Wenderson Malheiros'
       end
 
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         expect(page).to_not have_checked_field 'item_chooser'
 
         expect(page).to have_content '2050'
@@ -1290,7 +1290,7 @@ feature "PurchaseProcessTradings" do
 
     # Próximo item
     within 'table#items' do
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         choose 'item_chooser'
       end
     end
@@ -1302,7 +1302,7 @@ feature "PurchaseProcessTradings" do
 
     # Item anterior
     within 'table#items' do
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         choose 'item_chooser'
       end
     end
@@ -1327,7 +1327,7 @@ feature "PurchaseProcessTradings" do
       licitation_process: purchase_process,
       purchase_process_accreditation_creditors: [])
 
-    sobrinho = PurchaseProcessAccreditationCreditor.make!(:sobrinho_creditor,
+    PurchaseProcessAccreditationCreditor.make!(:sobrinho_creditor,
       purchase_process_accreditation: accreditation,
       has_power_of_attorney: true)
     wenderson = PurchaseProcessAccreditationCreditor.make!(:wenderson_creditor,
@@ -1407,7 +1407,7 @@ feature "PurchaseProcessTradings" do
     expect(page).to have_title 'Lances do Processo 1/2012 - Pregão 1'
 
     within 'table#items' do
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_checked_field 'item_chooser'
 
         expect(page).to have_content '10'
@@ -1416,7 +1416,7 @@ feature "PurchaseProcessTradings" do
         expect(page).to have_content 'Wenderson Malheiros'
       end
 
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         expect(page).to_not have_checked_field 'item_chooser'
 
         expect(page).to have_content '15'
@@ -1494,7 +1494,7 @@ feature "PurchaseProcessTradings" do
     within 'table#historic' do
       expect(page).to have_css('tbody tr', count: 1)
 
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_content '1'
         expect(page).to have_content '10'
         expect(page).to have_content 'IBM'
@@ -1506,7 +1506,7 @@ feature "PurchaseProcessTradings" do
     end
 
     within 'table#items' do
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_content '10'
         expect(page).to have_content '99,00'
         expect(page).to have_content 'IBM'
@@ -1550,7 +1550,7 @@ feature "PurchaseProcessTradings" do
     end
 
     within 'table#items' do
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_content '10'
         expect(page).to have_content '98,00'
         expect(page).to have_content 'Wenderson Malheiros'
@@ -1605,7 +1605,7 @@ feature "PurchaseProcessTradings" do
     end
 
     within 'table#items' do
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_content '10'
         expect(page).to have_content '98,00'
         expect(page).to have_content 'Wenderson Malheiros'
@@ -1619,7 +1619,7 @@ feature "PurchaseProcessTradings" do
     expect(page).to have_button 'Desfazer'
     expect(page).to_not have_disabled_element 'Desfazer', reason: 'não há lance para ser desfeito'
 
-    fill_in 'Valor', with: '0,00'
+    fill_in 'Valor', with: '0,00', disabled: true
 
     click_button 'Gravar lance'
 
@@ -1661,7 +1661,7 @@ feature "PurchaseProcessTradings" do
     end
 
     within 'table#items' do
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_content '10'
         expect(page).to have_content '98,00'
         expect(page).to have_content 'Wenderson Malheiros'
@@ -1681,7 +1681,7 @@ feature "PurchaseProcessTradings" do
 
     # Próximo lote
     within 'table#items' do
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         choose 'item_chooser'
       end
     end
@@ -1745,7 +1745,7 @@ feature "PurchaseProcessTradings" do
     end
 
     within 'table#items' do
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         expect(page).to have_content '15'
         expect(page).to have_content '98,00'
         expect(page).to have_content 'Wenderson Malheiros'
@@ -1790,7 +1790,7 @@ feature "PurchaseProcessTradings" do
     end
 
     within 'table#items' do
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         expect(page).to have_content '15'
         expect(page).to have_content '97,99'
         expect(page).to have_content 'IBM'
@@ -1817,7 +1817,7 @@ feature "PurchaseProcessTradings" do
     end
 
     within 'table#items' do
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         expect(page).to have_content '15'
         expect(page).to have_content '98,00'
         expect(page).to have_content 'Wenderson Malheiros'
@@ -1861,7 +1861,7 @@ feature "PurchaseProcessTradings" do
     end
 
     within 'table#items' do
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         expect(page).to have_content '15'
         expect(page).to have_content '90,00'
         expect(page).to have_content 'IBM'
@@ -1917,7 +1917,7 @@ feature "PurchaseProcessTradings" do
     end
 
     within 'table#items' do
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         expect(page).to have_content '15'
         expect(page).to have_content '90,00'
         expect(page).to have_content 'IBM'

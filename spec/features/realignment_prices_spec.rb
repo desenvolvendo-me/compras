@@ -65,21 +65,21 @@ feature "RealignmentPrices" do
         expect(page).to have_content 'Lote'
       end
 
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_content 'IBM'
         expect(page).to have_content 'ibm@gmail.com'
         expect(page).to have_content '50'
         expect(page).to have_content 'Criar realinhamento de preço'
       end
 
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         expect(page).to have_content 'Nohup'
         expect(page).to have_content 'wenderson@gmail.com'
         expect(page).to have_content '1010'
         expect(page).to have_content 'Criar realinhamento de preço'
       end
 
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         click_link 'Criar realinhamento de preço'
       end
     end
@@ -87,7 +87,7 @@ feature "RealignmentPrices" do
     expect(page).to have_field "Valor total da proposta/lance", with: "200,00", disabled: true
     expect(page).to have_field "Diferença", with: "200,00", disabled: true
 
-    within '#items .nested-realignment_price_items:first' do
+    within '#items .nested-realignment_price_items:nth-child(1)' do
       expect(page).to have_field 'Item', with: '02.02.00002 - Arame comum', disabled: true
       expect(page).to have_field 'Quantidade', with: '1', disabled: true
 
@@ -96,7 +96,7 @@ feature "RealignmentPrices" do
       fill_in 'Data de entrega', with: '21/10/2013'
     end
 
-    within '#items .nested-realignment_price_items:last' do
+    within '#items .nested-realignment_price_items:nth-last-child(1)' do
       expect(page).to have_field 'Item', with: '02.02.00001 - Arame farpado', disabled: true
       expect(page).to have_field 'Quantidade', with: '2', disabled: true
 
@@ -110,13 +110,13 @@ feature "RealignmentPrices" do
     expect(page).to have_notice 'Realinhamento de Preço criado com sucesso.'
 
     within_records do
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_content 'IBM'
         expect(page).to have_content '50'
         expect(page).to have_content 'Editar realinhamento de preço'
       end
 
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         expect(page).to have_content 'Nohup'
         expect(page).to have_content '1010'
 
@@ -127,7 +127,7 @@ feature "RealignmentPrices" do
     expect(page).to have_field "Valor total da proposta/lance", with: "100,00", disabled: true
     expect(page).to have_field "Diferença", with: "100,00", disabled: true
 
-    within '#items .nested-realignment_price_items:first' do
+    within '#items .nested-realignment_price_items:nth-child(1)' do
       expect(page).to have_field 'Item', with: '01.01.00001 - Antivirus', disabled: true
       expect(page).to have_field 'Quantidade', with: '2', disabled: true
 
@@ -141,13 +141,13 @@ feature "RealignmentPrices" do
     expect(page).to have_notice 'Realinhamento de Preço criado com sucesso.'
 
      within_records do
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_content 'IBM'
         expect(page).to have_content '50'
         expect(page).to have_content 'Editar realinhamento de preço'
       end
 
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         expect(page).to have_content 'Nohup'
         expect(page).to have_content '1010'
 
@@ -158,7 +158,7 @@ feature "RealignmentPrices" do
     expect(page).to have_field "Valor total da proposta/lance", with: "100,00", disabled: true
     expect(page).to have_field "Diferença", with: "0,00", disabled: true
 
-    within '#items .nested-realignment_price_items:first' do
+    within '#items .nested-realignment_price_items:nth-child(1)' do
       expect(page).to have_field 'Item', with: '01.01.00001 - Antivirus', disabled: true
       expect(page).to have_field 'Quantidade', with: '2', disabled: true
 
@@ -174,7 +174,7 @@ feature "RealignmentPrices" do
     expect(page).to have_notice 'Realinhamento de Preço editado com sucesso.'
 
     within_records do
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         expect(page).to have_content 'Nohup'
         expect(page).to have_content '1010'
 
@@ -185,7 +185,7 @@ feature "RealignmentPrices" do
     expect(page).to have_field "Valor total da proposta/lance", with: "100,00", disabled: true
     expect(page).to have_field "Diferença", with: "0,00", disabled: true
 
-    within '#items .nested-realignment_price_items:first' do
+    within '#items .nested-realignment_price_items:nth-child(1)' do
       expect(page).to have_field 'Item', with: '01.01.00001 - Antivirus', disabled: true
       expect(page).to have_field 'Quantidade', with: '2', disabled: true
 
@@ -234,7 +234,7 @@ feature "RealignmentPrices" do
         expect(page).to_not have_content 'Lote'
       end
 
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_content 'Nohup'
         expect(page).to have_content 'wenderson@gmail.com'
         expect(page).to have_content 'Criar realinhamento de preço'
@@ -278,7 +278,7 @@ feature "RealignmentPrices" do
     expect(page).to have_notice 'Realinhamento de Preço criado com sucesso.'
 
     within_records do
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         click_link 'Editar realinhamento de preço'
       end
     end
@@ -391,20 +391,20 @@ feature "RealignmentPrices" do
         expect(page).to have_content 'Lote'
       end
 
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_content 'IBM'
         expect(page).to have_content 'ibm@gmail.com'
         expect(page).to have_content '50'
         expect(page).to have_content 'Criar realinhamento de preço'
       end
 
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         expect(page).to have_content 'Nobe'
         expect(page).to have_content '1010'
         expect(page).to have_content 'Criar realinhamento de preço'
       end
 
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         click_link 'Criar realinhamento de preço'
       end
     end
@@ -412,7 +412,7 @@ feature "RealignmentPrices" do
     expect(page).to have_field "Valor total da proposta/lance", with: "200,00", disabled: true
     expect(page).to have_field "Diferença", with: "200,00", disabled: true
 
-    within '#items .nested-realignment_price_items:first' do
+    within '#items .nested-realignment_price_items:nth-child(1)' do
       expect(page).to have_field 'Item', with: '02.02.00002 - Arame comum', disabled: true
       expect(page).to have_field 'Quantidade', with: '1', disabled: true
 
@@ -421,7 +421,7 @@ feature "RealignmentPrices" do
       fill_in 'Data de entrega', with: '21/10/2013'
     end
 
-    within '#items .nested-realignment_price_items:last' do
+    within '#items .nested-realignment_price_items:nth-last-child(1)' do
       expect(page).to have_field 'Item', with: '02.02.00001 - Arame farpado', disabled: true
       expect(page).to have_field 'Quantidade', with: '2', disabled: true
 
@@ -435,13 +435,13 @@ feature "RealignmentPrices" do
     expect(page).to have_notice 'Realinhamento de Preço criado com sucesso.'
 
     within_records do
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_content 'IBM'
         expect(page).to have_content '50'
         expect(page).to have_content 'Editar realinhamento de preço'
       end
 
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         expect(page).to have_content 'Nobe'
         expect(page).to have_content '1010'
 
@@ -452,7 +452,7 @@ feature "RealignmentPrices" do
     expect(page).to have_field "Valor total da proposta/lance", with: "100,00", disabled: true
     expect(page).to have_field "Diferença", with: "100,00", disabled: true
 
-    within '#items .nested-realignment_price_items:first' do
+    within '#items .nested-realignment_price_items:nth-child(1)' do
       expect(page).to have_field 'Item', with: '01.01.00001 - Antivirus', disabled: true
       expect(page).to have_field 'Quantidade', with: '2', disabled: true
 
@@ -466,13 +466,13 @@ feature "RealignmentPrices" do
     expect(page).to have_notice 'Realinhamento de Preço criado com sucesso.'
 
      within_records do
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_content 'IBM'
         expect(page).to have_content '50'
         expect(page).to have_content 'Editar realinhamento de preço'
       end
 
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         expect(page).to have_content 'Nobe'
         expect(page).to have_content '1010'
 
@@ -483,7 +483,7 @@ feature "RealignmentPrices" do
     expect(page).to have_field "Valor total da proposta/lance", with: "100,00", disabled: true
     expect(page).to have_field "Diferença", with: "0,00", disabled: true
 
-    within '#items .nested-realignment_price_items:first' do
+    within '#items .nested-realignment_price_items:nth-child(1)' do
       expect(page).to have_field 'Item', with: '01.01.00001 - Antivirus', disabled: true
       expect(page).to have_field 'Quantidade', with: '2', disabled: true
 
@@ -499,7 +499,7 @@ feature "RealignmentPrices" do
     expect(page).to have_notice 'Realinhamento de Preço editado com sucesso.'
 
     within_records do
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         expect(page).to have_content 'Nobe'
         expect(page).to have_content '1010'
 
@@ -510,7 +510,7 @@ feature "RealignmentPrices" do
     expect(page).to have_field "Valor total da proposta/lance", with: "100,00", disabled: true
     expect(page).to have_field "Diferença", with: "0,00", disabled: true
 
-    within '#items .nested-realignment_price_items:first' do
+    within '#items .nested-realignment_price_items:nth-child(1)' do
       expect(page).to have_field 'Item', with: '01.01.00001 - Antivirus', disabled: true
       expect(page).to have_field 'Quantidade', with: '2', disabled: true
 

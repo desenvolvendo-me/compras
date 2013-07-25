@@ -53,14 +53,10 @@ feature 'PriceCollectionAnnuls' do
     click_on 'Anulação'
 
     expect(page).to have_content 'Anulação da Coleta de Preço 1/2012'
-    expect(page).to have_field 'Responsável', disabled: true
-    expect(page).to have_field 'Responsável', :with => 'Wenderson Malheiros'
-    expect(page).to have_field 'Data', disabled: true
-    expect(page).to have_field 'Data', :with => I18n.l(Date.current)
-    expect(page).to have_field 'Justificativa', disabled: true
-    expect(page).to have_field 'Justificativa', :with => 'Something'
-    expect(page).to have_field 'Tipo da anulação', disabled: true
-    expect(page).to have_select 'Tipo da anulação', :selected => 'Anulação'
+    expect(page).to have_field 'Responsável', :with => 'Wenderson Malheiros', disabled: true
+    expect(page).to have_field 'Data', :with => I18n.l(Date.current), disabled: true
+    expect(page).to have_field 'Justificativa', :with => 'Something', disabled: true
+    expect(page).to have_select 'Tipo da anulação', :selected => 'Anulação', disabled: true
 
     expect(page).to_not have_link 'Apagar'
     expect(page).to_not have_button 'Salvar'

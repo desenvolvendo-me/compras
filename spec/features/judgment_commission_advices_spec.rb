@@ -49,27 +49,20 @@ feature "JudgmentCommissionAdvices" do
       fill_modal 'Comissão julgadora', :with => '20/03/2012', :field => 'Data da nomeação'
 
       # testing delegated president name from licitation commission
-      expect(page).to have_field 'Presidente da comissão', disabled: true
-      expect(page).to have_field 'Presidente da comissão', :with => 'Wenderson Malheiros'
+      expect(page).to have_field 'Presidente da comissão', :with => 'Wenderson Malheiros', disabled: true
     end
 
     within_tab 'Membros' do
       # Verifying member that comes from Licitation Commission
-      expect(page).to have_field 'Membro', disabled: true
-      expect(page).to have_field 'CPF', disabled: true
-      expect(page).to have_field 'Função', disabled: true
-      expect(page).to have_field 'Natureza do cargo', disabled: true
-      expect(page).to have_field 'Matrícula', disabled: true
-
-      expect(page).to have_field 'Membro', :with => 'Wenderson Malheiros'
-      expect(page).to have_field 'CPF', :with => '003.149.513-34'
-      expect(page).to have_field 'Função', :with => 'Presidente'
-      expect(page).to have_field 'Natureza do cargo', :with => 'Servidor efetivo'
-      expect(page).to have_field 'Matrícula', :with => '38'
+      expect(page).to have_field 'Membro', :with => 'Wenderson Malheiros', disabled: true
+      expect(page).to have_field 'CPF', :with => '003.149.513-34', disabled: true
+      expect(page).to have_field 'Função', :with => 'Presidente', disabled: true
+      expect(page).to have_field 'Natureza do cargo', :with => 'Servidor efetivo', disabled: true
+      expect(page).to have_field 'Matrícula', :with => '38', disabled: true
 
       click_button 'Adicionar Membro'
 
-      within '.member:first' do
+      within '.member:nth-child(1)' do
         fill_modal 'Membro', :with => 'Gabriel Sobrinho'
         select 'Presidente', :from => 'Função'
         select 'Servidor efetivo', :from => 'Natureza do cargo'
@@ -95,27 +88,21 @@ feature "JudgmentCommissionAdvices" do
     click_link 'Pareceres da comissão julgadora'
 
     within_tab 'Principal' do
-      expect(page).to have_field 'Número da ata', :with => '1'
+      expect(page).to have_field 'Número da ata', :with => '1', disabled: true
       expect(page).to have_field 'Ano', :with => '2012'
       expect(page).to have_field 'Comissão julgadora', :with => licitation_commission.to_s
-      expect(page).to have_field 'Presidente da comissão', :with => 'Wenderson Malheiros'
+      expect(page).to have_field 'Presidente da comissão', :with => 'Wenderson Malheiros', disabled: true
     end
 
     within_tab 'Membros' do
       # Verifying member that comes from Licitation Commission
-      expect(page).to have_field 'Membro', disabled: true
-      expect(page).to have_field 'CPF', disabled: true
-      expect(page).to have_field 'Função', disabled: true
-      expect(page).to have_field 'Natureza do cargo', disabled: true
-      expect(page).to have_field 'Matrícula', disabled: true
+      expect(page).to have_field 'Membro', :with => 'Wenderson Malheiros', disabled: true
+      expect(page).to have_field 'CPF', :with => '003.149.513-34', disabled: true
+      expect(page).to have_field 'Função', :with => 'Presidente', disabled: true
+      expect(page).to have_field 'Natureza do cargo', :with => 'Servidor efetivo', disabled: true
+      expect(page).to have_field 'Matrícula', :with => '38', disabled: true
 
-      expect(page).to have_field 'Membro', :with => 'Wenderson Malheiros'
-      expect(page).to have_field 'CPF', :with => '003.149.513-34'
-      expect(page).to have_field 'Função', :with => 'Presidente'
-      expect(page).to have_field 'Natureza do cargo', :with => 'Servidor efetivo'
-      expect(page).to have_field 'Matrícula', :with => '38'
-
-      within '.member:last' do
+      within '.member:nth-last-child(1)' do
         expect(page).to have_field 'Membro', :with => 'Gabriel Sobrinho'
         expect(page).to have_select 'Função', :selected => 'Presidente'
         expect(page).to have_select 'Natureza do cargo', :selected => 'Servidor efetivo'
@@ -140,9 +127,9 @@ feature "JudgmentCommissionAdvices" do
     end
 
     within_tab 'Membros' do
-      expect(page).to have_field 'Membro', :with => 'Wenderson Malheiros'
+      expect(page).to have_field 'Membro', :with => 'Wenderson Malheiros', disabled: true
 
-      within '.member:last' do
+      within '.member:nth-last-child(1)' do
         expect(page).to have_field 'Membro', :with => 'Gabriel Sobrinho'
 
         click_button 'Remover'
@@ -167,14 +154,14 @@ feature "JudgmentCommissionAdvices" do
     click_link 'Pareceres da comissão julgadora'
 
     within_tab 'Principal' do
-      expect(page).to have_field 'Número da ata', :with => '1'
+      expect(page).to have_field 'Número da ata', :with => '1', disabled: true
       expect(page).to have_field 'Ano', :with => '2013'
       expect(page).to have_field 'Comissão julgadora', :with => licitation_commission.to_s
     end
 
     within_tab 'Membros' do
       expect(page).to_not have_field 'Membro', :with => 'Gabriel Sobrinho'
-      expect(page).to have_field 'Membro', :with => 'Wenderson Malheiros'
+      expect(page).to have_field 'Membro', :with => 'Wenderson Malheiros', disabled: true
     end
 
     within_tab 'Parecer' do
@@ -208,12 +195,10 @@ feature "JudgmentCommissionAdvices" do
 
       fill_modal 'Membro', :with => 'Wenderson Malheiros'
 
-      expect(page).to have_field 'CPF', disabled: true
-      expect(page).to have_field 'CPF', :with => '003.149.513-34'
+      expect(page).to have_field 'CPF', :with => '003.149.513-34', disabled: true
 
       clear_modal 'Membro'
-      expect(page).to have_field 'CPF', disabled: true
-      expect(page).to have_field 'CPF', :with => ''
+      expect(page).to have_field 'CPF', :with => '', disabled: true
     end
   end
 

@@ -36,7 +36,7 @@ feature "LicitationProcessAppeals" do
     expect(page).to have_field 'Data do recurso', :with => I18n.l(Date.new(2012, 3, 20))
     expect(page).to have_select 'Referente ao', :selected => 'Edital'
     expect(page).to have_field 'Autor', :with => 'Gabriel Sobrinho'
-    expect(page).to have_field 'Objeto do Processo', :with => 'Licitação para compra de carteiras'
+    expect(page).to have_field 'Objeto do Processo', :with => 'Licitação para compra de carteiras', disabled: true
     expect(page).to have_field 'Nova data da abertura dos envelopes', :with => I18n.l(Date.tomorrow)
     expect(page).to have_field 'Nova hora da abertura dos envelopes', :with => '15:30'
     expect(page).to have_field 'Motivo fundamentado do recurso', :with => 'Interposição de recurso licitatório'
@@ -62,7 +62,7 @@ feature "LicitationProcessAppeals" do
     expect(page).to have_field 'Data do recurso', :with => I18n.l(Date.new(2012, 3, 20))
     expect(page).to have_select 'Referente ao', :selected => 'Revogação'
     expect(page).to have_field 'Autor', :with => 'Gabriel Sobrinho'
-    expect(page).to have_field 'Objeto do Processo', :with => 'Licitação para compra de carteiras'
+    expect(page).to have_field 'Objeto do Processo', :with => 'Licitação para compra de carteiras', disabled: true
     expect(page).to have_field 'Nova data da abertura dos envelopes', :with => I18n.l(Date.tomorrow + 2)
     expect(page).to have_field 'Nova hora da abertura dos envelopes', :with => '16:00'
     expect(page).to have_field 'Motivo fundamentado do recurso', :with => 'Interposição de recurso licitatório do computador'

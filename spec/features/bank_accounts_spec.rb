@@ -13,21 +13,21 @@ feature "BankAccounts" do
 
     within_tab 'Principal' do
       expect(page).to have_field 'Status', disabled: true
-      expect(page).to have_select 'Status', :selected => 'Ativo'
+      expect(page).to have_select 'Status', :selected => 'Ativo', disabled: true
       select 'Aplicação', :from => 'Tipo'
       fill_in 'Descrição', :with => 'IPTU'
       fill_modal 'Banco', :with => 'Itaú'
 
       within_modal 'Agência' do
-        expect(page).to have_field 'Banco', :with => 'Itaú'
+        expect(page).to have_field 'Banco', :with => 'Itaú', disabled: true
 
         fill_in 'Nome', :with => 'Agência Itaú'
         click_button 'Pesquisar'
 
         click_record 'Agência Itaú'
       end
-      expect(page).to have_field 'Número da agência', :with => '10009'
-      expect(page).to have_field 'Dígito da agência', :with => '1'
+      expect(page).to have_field 'Número da agência', :with => '10009', disabled: true
+      expect(page).to have_field 'Dígito da agência', :with => '1', disabled: true
 
       fill_in 'Número da conta corrente', :with => '1111113'
       fill_in 'Dígito da conta corrente', :with => '1'
@@ -44,8 +44,8 @@ feature "BankAccounts" do
       expect(page).to have_select 'Tipo', :selected => 'Aplicação'
       expect(page).to have_field 'Descrição', :with => 'IPTU'
       expect(page).to have_field 'Agência', :with => 'Agência Itaú'
-      expect(page).to have_field 'Número da agência', :with => '10009'
-      expect(page).to have_field 'Dígito da agência', :with => '1'
+      expect(page).to have_field 'Número da agência', :with => '10009', disabled: true
+      expect(page).to have_field 'Dígito da agência', :with => '1', disabled: true
       expect(page).to have_field 'Número da conta corrente', :with => '1111113'
       expect(page).to have_field 'Dígito da conta corrente', :with => '1'
     end
@@ -87,15 +87,15 @@ feature "BankAccounts" do
     within_tab 'Principal' do
       fill_modal 'Agência', :with => 'Agência Itaú'
 
-      expect(page).to have_field 'Número da agência', :with => '10009'
-      expect(page).to have_field 'Dígito da agência', :with => '1'
+      expect(page).to have_field 'Número da agência', :with => '10009', disabled: true
+      expect(page).to have_field 'Dígito da agência', :with => '1', disabled: true
     end
 
     clear_modal 'Agência'
 
     within_tab 'Principal' do
-      expect(page).to have_field 'Número da agência', :with => ''
-      expect(page).to have_field 'Dígito da agência', :with => ''
+      expect(page).to have_field 'Número da agência', :with => '', disabled: true
+      expect(page).to have_field 'Dígito da agência', :with => '', disabled: true
     end
   end
 

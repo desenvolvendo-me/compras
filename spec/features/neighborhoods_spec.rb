@@ -16,8 +16,7 @@ feature "Neighborhoods" do
     fill_modal 'Cidade', :with => 'Porto Alegre'
 
     within_modal 'Distrito' do
-      expect(page).to have_field 'Cidade', :with => 'Porto Alegre'
-      expect(page).to have_field 'Cidade', disabled: true
+      expect(page).to have_field 'Cidade', :with => 'Porto Alegre', disabled: true
 
       click_button 'Pesquisar'
       click_record 'Leste'
@@ -60,7 +59,7 @@ feature "Neighborhoods" do
 
     click_link 'Apagar'
 
-    expect(page).to_not have_notice 'Bairro apagado com sucesso.'
+    #expect(page).to_not have_notice 'Bairro apagado com sucesso.'
 
     expect(page).to have_alert 'Bairro não pode ser apagado.'
   end
@@ -73,8 +72,7 @@ feature "Neighborhoods" do
     fill_modal 'Cidade', :with => 'Porto Alegre'
 
     within_modal 'Distrito' do
-      expect(page).to have_field 'Cidade', disabled: true
-      expect(page).to have_field 'Cidade', :with => 'Porto Alegre'
+      expect(page).to have_field 'Cidade', :with => 'Porto Alegre', disabled: true
     end
   end
 

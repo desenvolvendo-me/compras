@@ -20,7 +20,7 @@ feature "Employees" do
 
     fill_modal 'Cargo', :with => 'Gerente'
     fill_in 'Matrícula', :with => '958473'
-    fill_in 'Telefone', :with => '(33) 3333-3333'
+    expect(page).to have_field 'Telefone', :with => '(33) 3333-3333', disabled: true
 
     click_button 'Salvar'
 

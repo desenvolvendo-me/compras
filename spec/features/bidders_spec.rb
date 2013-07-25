@@ -74,8 +74,8 @@ feature "Bidders" do
 
     click_link 'Criar Habilitação'
 
-    expect(page).to have_field 'Processo de compra', :with => '2/2013 - Convite 1'
-    expect(page).to have_field 'Data do processo de compra', :with => '20/03/2013'
+    expect(page).to have_field 'Processo de compra', :with => '2/2013 - Convite 1', disabled: true
+    expect(page).to have_field 'Data do processo de compra', :with => '20/03/2013', disabled: true
 
     fill_modal 'Fornecedor', :with => 'Gabriel Sobrinho'
 
@@ -90,8 +90,7 @@ feature "Bidders" do
 
     within_tab 'Documentos' do
       # testing that document type from licitation process are automaticaly included in bidder
-      expect(page).to have_field 'Documento', disabled: true
-      expect(page).to have_field 'Documento', :with => 'Fiscal'
+      expect(page).to have_field 'Documento', :with => 'Fiscal', disabled: true
 
       fill_in 'Número/certidão', :with => '222222'
       fill_in 'Data de emissão', :with => I18n.l(Date.current)
@@ -116,8 +115,8 @@ feature "Bidders" do
       click_link 'Gabriel Sobrinho'
     end
 
-    expect(page).to have_field 'Processo de compra', :with => '2/2013 - Convite 1'
-    expect(page).to have_field 'Data do processo de compra', :with => '20/03/2013'
+    expect(page).to have_field 'Processo de compra', :with => '2/2013 - Convite 1', disabled: true
+    expect(page).to have_field 'Data do processo de compra', :with => '20/03/2013', disabled: true
     expect(page).to have_field 'Fornecedor', :with => 'Gabriel Sobrinho'
     expect(page).to have_field 'Protocolo', :with => '123456'
     expect(page).to have_field 'Data do protocolo', :with => I18n.l(Date.current)
@@ -128,7 +127,7 @@ feature "Bidders" do
     expect(page).to have_field 'Data da habilitação', :with => I18n.l(Date.current)
 
     within_tab 'Documentos' do
-      expect(page).to have_field 'Documento', :with => 'Fiscal'
+      expect(page).to have_field 'Documento', :with => 'Fiscal', disabled: true
       expect(page).to have_field 'Número/certidão', :with => '222222'
       expect(page).to have_field 'Data de emissão', :with => I18n.l(Date.current)
       expect(page).to have_field 'Validade', :with => I18n.l(Date.tomorrow + 5.days)
@@ -141,8 +140,8 @@ feature "Bidders" do
       end
     end
 
-    expect(page).to have_field 'Processo de compra', :with => '2/2013 - Convite 1'
-    expect(page).to have_field 'Data do processo de compra', :with => '20/03/2013'
+    expect(page).to have_field 'Processo de compra', :with => '2/2013 - Convite 1', disabled: true
+    expect(page).to have_field 'Data do processo de compra', :with => '20/03/2013', disabled: true
 
     fill_modal 'Fornecedor', :with => 'Gabriel Sobrinho'
 
@@ -172,8 +171,8 @@ feature "Bidders" do
       click_link 'Gabriel Sobrinho'
     end
 
-    expect(page).to have_field 'Processo de compra', :with => '2/2013 - Convite 1'
-    expect(page).to have_field 'Data do processo de compra', :with => '20/03/2013'
+    expect(page).to have_field 'Processo de compra', :with => '2/2013 - Convite 1', disabled: true
+    expect(page).to have_field 'Data do processo de compra', :with => '20/03/2013', disabled: true
 
     expect(page).to have_field 'Fornecedor', :with => 'Gabriel Sobrinho'
     expect(page).to have_field 'Protocolo', :with => '111111'
@@ -185,7 +184,7 @@ feature "Bidders" do
     expect(page).to have_field 'Data da habilitação', ''
 
     within_tab 'Documentos' do
-      expect(page).to have_field 'Documento', :with => 'Fiscal'
+      expect(page).to have_field 'Documento', :with => 'Fiscal', disabled: true
       expect(page).to have_field 'Número/certidão', :with => '333333'
       expect(page).to have_field 'Data de emissão', :with => I18n.l(Date.yesterday)
       expect(page).to have_field 'Validade', :with => I18n.l(Date.tomorrow + 6.days)
@@ -237,14 +236,10 @@ feature "Bidders" do
 
     uncheck 'Convidado'
 
-    expect(page).to have_field 'Protocolo', disabled: true
-    expect(page).to have_field 'Data do protocolo', disabled: true
-    expect(page).to have_field 'Data do recebimento', disabled: true
-
     expect(page).to_not have_checked_field 'Convidado'
-    expect(page).to have_field 'Protocolo', :with => ''
-    expect(page).to have_field 'Data do protocolo', :with => ''
-    expect(page).to have_field 'Data do recebimento', :with => ''
+    expect(page).to have_field 'Protocolo', :with => '', disabled: true
+    expect(page).to have_field 'Data do protocolo', :with => '', disabled: true
+    expect(page).to have_field 'Data do recebimento', :with => '', disabled: true
 
     click_button 'Salvar'
 
@@ -255,13 +250,9 @@ feature "Bidders" do
     end
 
     expect(page).to_not have_checked_field 'Convidado'
-    expect(page).to have_field 'Protocolo', :with => ''
-    expect(page).to have_field 'Data do protocolo', :with => ''
-    expect(page).to have_field 'Data do recebimento', :with => ''
-
-    expect(page).to have_field 'Protocolo', disabled: true
-    expect(page).to have_field 'Data do protocolo', disabled: true
-    expect(page).to have_field 'Data do recebimento', disabled: true
+    expect(page).to have_field 'Protocolo', :with => '', disabled: true
+    expect(page).to have_field 'Data do protocolo', :with => '', disabled: true
+    expect(page).to have_field 'Data do recebimento', :with => '', disabled: true
   end
 
   scenario 'showing some items without lot on proposals' do
@@ -281,8 +272,8 @@ feature "Bidders" do
       click_link 'Wenderson Malheiros'
     end
 
-    expect(page).to have_field 'Processo de compra', :with => '2/2013 - Convite 1'
-    expect(page).to have_field 'Data do processo de compra', :with => '20/03/2013'
+    expect(page).to have_field 'Processo de compra', :with => '2/2013 - Convite 1', disabled: true
+    expect(page).to have_field 'Data do processo de compra', :with => '20/03/2013', disabled: true
     expect(page).to have_field 'Fornecedor', :with => 'Wenderson Malheiros'
     expect(page).to have_field 'Protocolo', :with => '123456'
 

@@ -47,7 +47,7 @@ feature "LegalAnalysisAppraisals" do
     fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
 
     expect(page).to have_field 'Número', :with => 'MG16236013'
-    expect(page).to have_select 'Orgão expedidor', :with => 'SSP'
+    expect(page).to have_select 'Orgão expedidor', :selected => 'SSP'
 
     click_button 'Salvar'
 
@@ -56,7 +56,7 @@ feature "LegalAnalysisAppraisals" do
     click_link '1/2012'
 
     expect(page).to have_checked_field 'Laudo jurídico'
-    expect(page).to have_select 'Referência', :with => 'Edital'
+    expect(page).to have_select 'Referência', :selected => 'Edital'
     expect(page).to have_field 'Data de expedição do laudo', :with => '27/03/2013'
     expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
 
@@ -74,11 +74,11 @@ feature "LegalAnalysisAppraisals" do
     click_link '1/2012'
 
     expect(page).to have_checked_field 'Laudo técnico'
-    expect(page).to have_select 'Referência', :with => 'Outros'
+    expect(page).to have_select 'Referência', :selected => 'Outros'
     expect(page).to have_field 'Data de expedição do laudo', :with => '30/03/2013'
     expect(page).to have_field 'Responsável', :with => 'Wenderson Malheiros'
     expect(page).to have_field 'Número', :with => '9223356'
-    expect(page).to have_select 'Orgão expedidor', :with => 'Conselho Regional de Medicina Veterinária'
+    expect(page).to have_select 'Orgão expedidor', :selected => 'Conselho Regional de Medicina Veterinária'
 
     click_link 'Apagar'
 

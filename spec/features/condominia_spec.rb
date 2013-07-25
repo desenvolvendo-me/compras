@@ -47,7 +47,7 @@ feature "Condominia" do
       expect(page).to have_content 'Nome'
       expect(page).to have_content 'Tipo de condomínio'
 
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         expect(page).to have_content 'Tambuata'
         expect(page).to have_content 'Vertical'
       end

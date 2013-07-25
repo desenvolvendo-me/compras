@@ -39,7 +39,7 @@ feature "PurchaseSolicitationLiberations" do
       page.find('a').click
     end
 
-    expect(page).to have_select 'Status de atendimento', :selected => 'Pendente'
+    expect(page).to have_select 'Status de atendimento', :selected => 'Pendente', disabled: true
 
     # button liberate can be seen when purchase_solicitation is pending
     click_link 'Liberações'
@@ -66,7 +66,7 @@ feature "PurchaseSolicitationLiberations" do
 
     click_link 'Voltar para a Solicitação de Compra'
 
-    expect(page).to have_select 'Status de atendimento', :selected => 'Liberada'
+    expect(page).to have_select 'Status de atendimento', :selected => 'Liberada', disabled: true
 
     click_link 'Liberações'
 
@@ -96,9 +96,9 @@ feature "PurchaseSolicitationLiberations" do
     expect(page).to have_field 'Status de atendimento', disabled: true
 
     expect(page).to have_content 'Editar Liberação 1 da Solicitação de Compra 1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
-    expect(page).to have_field 'Justificativa', :with => 'Compra justificada'
-    expect(page).to have_field 'Data', :with => I18n.l(Date.current)
-    expect(page).to have_field 'Responsável', :with => 'Wenderson Malheiros'
-    expect(page).to have_field 'Sequência', :with => '1'
+    expect(page).to have_field 'Justificativa', :with => 'Compra justificada', disabled: true
+    expect(page).to have_field 'Data', :with => I18n.l(Date.current), disabled: true
+    expect(page).to have_field 'Responsável', :with => 'Wenderson Malheiros', disabled: true
+    expect(page).to have_field 'Sequência', :with => '1', disabled: true
   end
 end

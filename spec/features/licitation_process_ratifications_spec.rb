@@ -69,12 +69,11 @@ feature "LicitationProcessRatifications" do
       click_link '1'
     end
 
-    expect(page).to have_field 'Processo de compra', disabled: true
-    expect(page).to have_field 'Processo de compra', :with => '2/2013 - Concorrência 1'
+    expect(page).to have_field 'Processo de compra', :with => '2/2013 - Concorrência 1', disabled: true
     expect(page).to have_field 'Participante vencedor', :with => 'Gabriel Sobrinho'
     expect(page).to have_field 'Data de homologação', :with => I18n.l(Date.current)
     expect(page).to have_field 'Data de adjudicação', :with => I18n.l(Date.current)
-    expect(page).to have_field 'Sequência', :with => '1'
+    expect(page).to have_field 'Sequência', :with => '1', disabled: true
 
     expect(page).to have_content 'Arame comum'
     expect(page).to have_content 'Arame farpado'
@@ -97,7 +96,7 @@ feature "LicitationProcessRatifications" do
       click_link '2/2013 - Concorrência 1'
     end
 
-    expect(page).to have_field 'Processo de compra', :with => '2/2013 - Concorrência 1'
+    expect(page).to have_field 'Processo de compra', :with => '2/2013 - Concorrência 1', disabled: true
     expect(page).to have_field 'Participante vencedor', :with => 'Gabriel Sobrinho'
     expect(page).to have_field 'Data de homologação', :with => I18n.l(Date.tomorrow)
     expect(page).to have_field 'Data de adjudicação', :with => I18n.l(Date.tomorrow)
@@ -164,12 +163,11 @@ feature "LicitationProcessRatifications" do
       click_link '1'
     end
 
-    expect(page).to have_field 'Processo de compra', disabled: true
-    expect(page).to have_field 'Processo de compra', :with => '2/2013 - Concorrência 1'
+    expect(page).to have_field 'Processo de compra', :with => '2/2013 - Concorrência 1', disabled: true
     expect(page).to have_field 'Participante vencedor', :with => 'Gabriel Sobrinho'
     expect(page).to have_field 'Data de homologação', :with => I18n.l(Date.current)
     expect(page).to have_field 'Data de adjudicação', :with => I18n.l(Date.current)
-    expect(page).to have_field 'Sequência', :with => '1'
+    expect(page).to have_field 'Sequência', :with => '1', disabled: true
 
     expect(page).to have_content 'Arame comum'
     expect(page).to have_content 'Arame farpado'
@@ -194,7 +192,7 @@ feature "LicitationProcessRatifications" do
       click_link '2/2013 - Concorrência 1'
     end
 
-    expect(page).to have_field 'Processo de compra', :with => '2/2013 - Concorrência 1'
+    expect(page).to have_field 'Processo de compra', :with => '2/2013 - Concorrência 1', disabled: true
     expect(page).to have_field 'Participante vencedor', :with => 'Gabriel Sobrinho'
     expect(page).to have_field 'Data de homologação', :with => I18n.l(Date.tomorrow)
     expect(page).to have_field 'Data de adjudicação', :with => I18n.l(Date.tomorrow)
@@ -254,7 +252,7 @@ feature "LicitationProcessRatifications" do
 
     click_link 'Criar Homologação e Adjudicação de Processo de Compra'
 
-    fill_modal 'Processo de compra', :with => '2013', :field => 'Ano'
+    expect(page).to have_field 'Processo de compra', with: '2/2013 - Concorrência 1', disabled: true
 
     within_modal 'Participante vencedor' do
       click_button 'Pesquisar'

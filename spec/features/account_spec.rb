@@ -18,7 +18,7 @@ feature 'Account' do
 
     expect(page).to have_notice 'Usuário editado com sucesso.'
 
-    expect(page).to have_field 'Nome', :with => 'Gabriel Sobrinho'
+    expect(page).to have_field 'Nome', :with => 'Gabriel Sobrinho', disabled: true
     expect(page).to have_field 'Login', :with => 'sobrinho.campos.gabriel'
     expect(page).to have_field 'E-mail', :with => 'sobrinho.gabriel@gmail.com'
   end

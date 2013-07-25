@@ -127,7 +127,7 @@ feature "LicitationProcessPublications" do
   end
 
   scenario 'should javascript when licitation_process is direct_purchase publication_of is default confirmation' do
-    licitation = LicitationProcess.make!(:compra_direta,
+    LicitationProcess.make!(:compra_direta,
       type_of_purchase: PurchaseProcessTypeOfPurchase::DIRECT_PURCHASE,
       justification: 'Justificativa',
       type_of_removal: TypeOfRemoval::REMOVAL_JUSTIFIED,
@@ -150,7 +150,7 @@ feature "LicitationProcessPublications" do
 
     fill_in 'Nome do veículo de comunicação', with:'veículo'
     fill_in 'Data da publicação', with: I18n.l(Date.current)
-    select 'Internet', form: 'Tipo de circulação do veículo de comunicação'
+    select 'Internet', from: 'Tipo de circulação do veículo de comunicação'
 
     click_button 'Salvar'
     click_link 'veículo'
@@ -178,7 +178,7 @@ feature "LicitationProcessPublications" do
 
     expect(page).to have_content "Criar Publicação para o Processo de Compra #{licitation_process}"
 
-    expect(page).to have_select 'Publicação do(a)', options: ['Cancelamento', 'Homologação', 'Outros', 'Prorrogação',
+    expect(page).to have_select 'Publicação do(a)', options: ['', 'Cancelamento', 'Homologação', 'Outros', 'Prorrogação',
                                                               'Ratificação', 'Retificação do edital', 'Vencedores']
   end
 

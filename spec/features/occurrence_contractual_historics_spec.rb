@@ -62,7 +62,7 @@ feature "OccurrenceContractualHistorics" do
 
     click_link '1'
 
-    expect(page).to have_field 'Sequência', :with => '1'
+    expect(page).to have_field 'Sequência', :with => '1', disabled: true
     expect(page).to have_field 'Data da ocorrência', :with => '01/07/2012'
     expect(page).to have_field 'Observações', :with => 'divergência contratual'
     expect(page).to have_select 'Tipo de alteração', :selected => 'Bilateral'

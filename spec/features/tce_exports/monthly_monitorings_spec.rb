@@ -18,7 +18,7 @@ feature "Monthly Monitoring TCE File" do
 
     click_link "Gerar Acompanhamento Mensal"
 
-    select "Janeiro", on: "Mês da prestação de contas"
+    select "Janeiro", from: "Mês da prestação de contas"
 
     expect(page).to have_checked_field 'Marcar todos'
 
@@ -68,31 +68,29 @@ feature "Monthly Monitoring TCE File" do
 
     expect(page).to_not have_field "Marcar todos", visible: true
 
-    expect(page).to have_checked_field "ABERLIC - Abertura da Licitação"
-    expect(page).to have_checked_field "CONTRATOS - Contratos"
-    expect(page).to have_checked_field "DISPENSA - Dispensa ou Inexigibilidade"
-    expect(page).to have_checked_field "HABLIC - Habilitação da Licitação"
-    expect(page).to have_checked_field "HOMOLIC - Homologação da Licitação"
-    expect(page).to have_checked_field "JULGLIC - Julgamento da Licitação"
-    expect(page).to have_checked_field "PARELIC - Parecer da Licitação"
-    expect(page).to have_checked_field "REGADESAO - Adesão a Registro de Preços"
-    expect(page).to have_checked_field "REGLIC - Decreto Municipal Regulamentador do Pregão / Registro de Preços"
-    expect(page).to have_checked_field "RESPLIC - Responsáveis pela Licitação"
+    expect(page).to have_field "ABERLIC - Abertura da Licitação", checked: true, disabled: true
+    expect(page).to have_field "CONTRATOS - Contratos", checked: true, disabled: true
+    expect(page).to have_field "DISPENSA - Dispensa ou Inexigibilidade", checked: true, disabled: true
+    expect(page).to have_field "HABLIC - Habilitação da Licitação", checked: true, disabled: true
+    expect(page).to have_field "HOMOLIC - Homologação da Licitação", checked: true, disabled: true
+    expect(page).to have_field "JULGLIC - Julgamento da Licitação", checked: true, disabled: true
+    expect(page).to have_field "PARELIC - Parecer da Licitação", checked: true, disabled: true
+    expect(page).to have_field "REGADESAO - Adesão a Registro de Preços", checked: true, disabled: true
+    expect(page).to have_field "REGLIC - Decreto Municipal Regulamentador do Pregão / Registro de Preços", checked: true, disabled: true
+    expect(page).to have_field "RESPLIC - Responsáveis pela Licitação", checked: true, disabled: true
 
     expect(page).to have_notice "Arquivo encaminhado para geração"
     expect(page).to have_content "Acompanhamento Mensal"
-    expect(page).to have_field "Mês da prestação de contas", disabled: true
-    expect(page).to have_select 'Mês da prestação de contas', selected: "Janeiro"
+    expect(page).to have_select 'Mês da prestação de contas', selected: "Janeiro", disabled: true
     expect(page).to have_field "Ano da prestação de contas", with: "2013", disabled: true
-    expect(page).to have_field "Código de controle externo da remessa", with: "20130000000000000001"
-    expect(page).to have_field "Situação", disabled: true
-    expect(page).to have_field "Situação", with: "Em processamento"
+    expect(page).to have_field "Código de controle externo da remessa", with: "20130000000000000001", disabled: true
+    expect(page).to have_field "Situação", with: "Em processamento", disabled: true
     expect(page).not_to have_button "Gerar arquivo"
 
     click_link "Cancelar"
 
     expect(page).to have_notice "Geração do arquivo cancelada"
-    expect(page).to have_field "Situação", with: "Cancelado"
+    expect(page).to have_field "Situação", with: "Cancelado", disabled: true
     expect(page).not_to have_link "Cancelar"
   end
 end

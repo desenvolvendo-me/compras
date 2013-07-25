@@ -22,8 +22,7 @@ feature "LicitationCommissions" do
 
       expect(page).to have_field 'Ato regulamentador', :with => 'LDO 1234'
 
-      expect(page).to have_field 'Data da publicação do ato', disabled: true
-      expect(page).to have_field 'Data da publicação do ato', :with => '02/01/2012'
+      expect(page).to have_field 'Data da publicação do ato', :with => '02/01/2012', disabled: true
 
       fill_in 'Data da nomeação', :with => '20/03/2012'
       fill_in 'Data da expiração', :with => '22/03/2012'
@@ -82,8 +81,7 @@ feature "LicitationCommissions" do
 
       expect(page).to have_field 'Ato regulamentador', :with => 'LDO 1234'
 
-      expect(page).to have_field 'Data da publicação do ato', disabled: true
-      expect(page).to have_field 'Data da publicação do ato', :with => '02/01/2012'
+      expect(page).to have_field 'Data da publicação do ato', :with => '02/01/2012', disabled: true
 
       fill_in 'Data da nomeação', :with => '20/03/2014'
       fill_in 'Data da expiração', :with => '22/03/2014'
@@ -101,7 +99,7 @@ feature "LicitationCommissions" do
     end
 
     within_tab 'Membros' do
-      within '.member:first' do
+      within '.member:nth-child(1)' do
         fill_modal 'Membro', :with => 'Wenderson Malheiros'
         fill_in 'Matrícula', :with => '123456'
         select 'Presidente', :from => 'Função'
@@ -161,12 +159,12 @@ feature "LicitationCommissions" do
       select 'Pregão', :from => 'Tipo de comissão'
 
       expect(page).to have_field 'Ato regulamentador', :with => 'LDO 1234'
-      expect(page).to have_field 'Data da publicação do ato', :with => '02/01/2012'
+      expect(page).to have_field 'Data da publicação do ato', :with => '02/01/2012', disabled: true
 
       clear_modal 'Ato regulamentador'
 
       expect(page).to have_field 'Ato regulamentador', :with => ''
-      expect(page).to have_field 'Data da publicação do ato', :with => ''
+      expect(page).to have_field 'Data da publicação do ato', :with => '', disabled: true
     end
   end
 
@@ -182,12 +180,11 @@ feature "LicitationCommissions" do
 
       fill_modal 'Autoridade', :with => 'Wenderson Malheiros'
 
-      expect(page).to have_field 'CPF', disabled: true
-      expect(page).to have_field 'CPF', :with => '003.149.513-34'
+      expect(page).to have_field 'CPF', :with => '003.149.513-34', disabled: true
 
       clear_modal 'Autoridade'
-      expect(page).to have_field 'CPF', disabled: true
-      expect(page).to have_field 'CPF', :with => ''
+
+      expect(page).to have_field 'CPF', :with => '', disabled: true
     end
 
     within_tab 'Membros' do
@@ -195,12 +192,10 @@ feature "LicitationCommissions" do
 
       fill_modal 'Membro', :with => 'Wenderson Malheiros'
 
-      expect(page).to have_field 'CPF', disabled: true
-      expect(page).to have_field 'CPF', :with => '003.149.513-34'
+      expect(page).to have_field 'CPF', :with => '003.149.513-34', disabled: true
 
       clear_modal 'Membro'
-      expect(page).to have_field 'CPF', disabled: true
-      expect(page).to have_field 'CPF', :with => ''
+      expect(page).to have_field 'CPF', :with => '', disabled: true
     end
   end
 
@@ -258,8 +253,7 @@ feature "LicitationCommissions" do
 
     within_tab 'Responsáveis' do
       expect(page).to have_select 'Cargo', :selected => 'Prefeito municipal'
-      expect(page).to have_field 'Registro da classe', disabled: true
-      expect(page).to have_field 'Registro da classe', :with => ''
+      expect(page).to have_field 'Registro da classe', :with => '', disabled: true
     end
   end
 
@@ -290,8 +284,7 @@ feature "LicitationCommissions" do
 
       expect(page).to have_field 'Ato regulamentador', :with => 'LDO 1234'
 
-      expect(page).to have_field 'Data da publicação do ato', disabled: true
-      expect(page).to have_field 'Data da publicação do ato', :with => '02/01/2012'
+      expect(page).to have_field 'Data da publicação do ato', :with => '02/01/2012', disabled: true
 
       fill_in 'Data da nomeação', :with => '20/03/2012'
       fill_in 'Data da expiração', :with => '22/03/2012'

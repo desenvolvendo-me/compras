@@ -39,7 +39,7 @@ feature "Addresses" do
     fill_modal 'Logradouro', :with => 'Amazonas'
     fill_modal 'Bairro', :with => 'Portugal'
 
-    expect(page).to have_field 'Cidade', :with => 'Porto Alegre'
-    expect(page).to have_field 'Estado', :with => 'Rio Grande do Sul'
+    expect(page).to have_field 'Cidade', :with => 'Porto Alegre', disabled: true
+    expect(page).to have_field 'Estado', :with => 'Rio Grande do Sul', disabled: true
   end
 end

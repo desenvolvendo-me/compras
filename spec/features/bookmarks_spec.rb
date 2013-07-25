@@ -40,7 +40,7 @@ feature 'Bookmarks' do
 
     click_link 'Editar'
 
-    expect(page).to have_select 'Cadastros', :value => ['Usuários', 'Perfis']
+    expect(page).to have_select 'Cadastros', :selected => ['Usuários', 'Perfis']
 
     click_link 'Voltar'
 
@@ -58,7 +58,7 @@ feature 'Bookmarks' do
 
     click_link 'Editar'
 
-    expect(page).to have_select 'Cadastros', :value => ['Usuários']
+    expect(page).to have_select 'Cadastros', :selected => 'Perfis'
 
     select 'Agências', :from => 'Cadastros'
     unselect 'Perfis', :from => 'Cadastros'

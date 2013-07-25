@@ -57,6 +57,9 @@ feature "Streets" do
 
     click_link 'Criar Logradouro'
 
+    expect(page).to have_field 'Bairro', disabled: true
+
+    fill_modal 'Cidade', :with => 'Belo Horizonte'
     fill_modal 'Bairro', :with => 'Centro'
 
     expect(page).to have_content 'Centro'

@@ -54,7 +54,7 @@ feature "Banks" do
       expect(page).to have_content 'Código'
       expect(page).to have_content 'Sigla'
 
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         expect(page).to have_content 'Santander'
         expect(page).to have_content '33'
         expect(page).to have_content 'ST'

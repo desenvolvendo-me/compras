@@ -50,19 +50,19 @@ feature 'PurchaseProcessProposals' do
       expect(page).to have_content 'Email'
       expect(page).to have_content 'Propostas'
 
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_content 'Gabriel Sobrinho'
         expect(page).to have_content 'gabriel.sobrinho@gmail.com'
         expect(page).to have_content 'Cadastrar propostas'
       end
 
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         expect(page).to have_content 'Wenderson Malheiros'
         expect(page).to have_content 'wenderson.malheiros@gmail.com'
         expect(page).to have_content 'Cadastrar propostas'
       end
 
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         click_link 'Cadastrar propostas'
       end
     end
@@ -104,7 +104,7 @@ feature 'PurchaseProcessProposals' do
     expect(page).to have_content 'Proposta Comercial editada com sucesso'
 
     within_records do
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         click_link 'Editar propostas'
       end
     end
@@ -122,19 +122,19 @@ feature 'PurchaseProcessProposals' do
       expect(page).to have_content 'Email'
       expect(page).to have_content 'Propostas'
 
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_content 'Gabriel Sobrinho'
         expect(page).to have_content 'gabriel.sobrinho@gmail.com'
         expect(page).to have_content 'Editar propostas'
       end
 
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         expect(page).to have_content 'Wenderson Malheiros'
         expect(page).to have_content 'wenderson.malheiros@gmail.com'
         expect(page).to have_content 'Cadastrar propostas'
       end
 
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         click_link 'Editar propostas'
       end
     end
@@ -193,19 +193,19 @@ feature 'PurchaseProcessProposals' do
       expect(page).to have_content 'Email'
       expect(page).to have_content 'Propostas'
 
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_content 'Gabriel Sobrinho'
         expect(page).to have_content 'gabriel.sobrinho@gmail.com'
         expect(page).to have_content 'Cadastrar propostas'
       end
 
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         expect(page).to have_content 'Wenderson Malheiros'
         expect(page).to have_content 'wenderson.malheiros@gmail.com'
         expect(page).to have_content 'Cadastrar propostas'
       end
 
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         click_link 'Cadastrar propostas'
       end
     end
@@ -253,19 +253,19 @@ feature 'PurchaseProcessProposals' do
       expect(page).to have_content 'Email'
       expect(page).to have_content 'Propostas'
 
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_content 'Gabriel Sobrinho'
         expect(page).to have_content 'gabriel.sobrinho@gmail.com'
         expect(page).to have_content 'Editar propostas'
       end
 
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         expect(page).to have_content 'Wenderson Malheiros'
         expect(page).to have_content 'wenderson.malheiros@gmail.com'
         expect(page).to have_content 'Cadastrar propostas'
       end
 
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         click_link 'Editar propostas'
       end
     end
@@ -298,7 +298,7 @@ feature 'PurchaseProcessProposals' do
     expect(page).to have_content 'Proposta Comercial editada com sucesso'
 
     within_records do
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         expect(page).to have_content 'Wenderson Malheiros'
         expect(page).to have_content 'wenderson.malheiros@gmail.com'
         expect(page).to have_content 'Cadastrar propostas'
@@ -348,19 +348,19 @@ feature 'PurchaseProcessProposals' do
       expect(page).to have_content 'Email'
       expect(page).to have_content 'Propostas'
 
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_content 'Gabriel Sobrinho'
         expect(page).to have_content 'gabriel.sobrinho@gmail.com'
         expect(page).to have_content 'Cadastrar propostas'
       end
 
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         expect(page).to have_content 'Wenderson Malheiros'
         expect(page).to have_content 'wenderson.malheiros@gmail.com'
         expect(page).to have_content 'Cadastrar propostas'
       end
 
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         click_link 'Cadastrar propostas'
       end
     end
@@ -381,19 +381,19 @@ feature 'PurchaseProcessProposals' do
       expect(page).to have_content 'Email'
       expect(page).to have_content 'Propostas'
 
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_content 'Gabriel Sobrinho'
         expect(page).to have_content 'gabriel.sobrinho@gmail.com'
         expect(page).to have_content 'Editar propostas'
       end
 
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         expect(page).to have_content 'Wenderson Malheiros'
         expect(page).to have_content 'wenderson.malheiros@gmail.com'
         expect(page).to have_content 'Cadastrar propostas'
       end
 
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         click_link 'Editar propostas'
       end
     end
@@ -405,7 +405,7 @@ feature 'PurchaseProcessProposals' do
     click_link "Voltar"
 
     within_records do
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         click_link 'Cadastrar propostas'
       end
     end
@@ -427,6 +427,9 @@ feature 'PurchaseProcessProposals' do
       bidders: bidders,
       judgment_form: JudgmentForm.make!(:por_item_com_melhor_tecnica))
 
+    first_creditor = '//*[@id="tied_creditor_proposals"]/div[2]/div'
+    last_creditor  = '//*[@id="tied_creditor_proposals"]/div[3]/div'
+
     navigate 'Processos de Compra > Processos de Compras'
 
     click_link "Limpar Filtro"
@@ -440,7 +443,7 @@ feature 'PurchaseProcessProposals' do
     expect(page).to have_title 'Proposta Comercial Processo 1/2012 - Pregão 1'
 
     within_records do
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         click_link 'Cadastrar propostas'
       end
     end
@@ -454,7 +457,7 @@ feature 'PurchaseProcessProposals' do
     expect(page).to have_notice 'Proposta Comercial editada com sucesso'
 
     within_records do
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         click_link 'Cadastrar propostas'
       end
     end
@@ -475,13 +478,13 @@ feature 'PurchaseProcessProposals' do
     within 'div#tied_creditor_proposals' do
       expect(page).to have_field 'Item/Lote', with: '01.01.00001 - Antivirus', disabled: true
 
-      within 'div.creditor_proposal_rankings' do
+      within :xpath, first_creditor do
         expect(page).to have_field 'Credor', with: 'Gabriel Sobrinho', disabled: true
         expect(page).to have_field 'Preço unitário', with: '50,20', disabled: true
         expect(page).to have_select 'Posição', options: ['1', '2'], selected: '1'
       end
 
-      within 'div.creditor_proposal_rankings:last' do
+      within :xpath, last_creditor do
         expect(page).to have_field 'Credor', with: 'Wenderson Malheiros', disabled: true
         expect(page).to have_field 'Preço unitário', with: '50,20', disabled: true
         expect(page).to have_select 'Posição', options: ['1', '2'], selected: '1'
@@ -503,7 +506,7 @@ feature 'PurchaseProcessProposals' do
     expect(page).to have_notice 'Desempate editado com sucesso'
 
     within_records do
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         click_link 'Editar propostas'
       end
     end

@@ -23,12 +23,12 @@ feature "DeliveryLocations" do
     fill_modal 'Condomínio', :with => 'Parque das Flores'
     fill_modal 'Loteamento', :with => 'Solar da Serra'
 
-    expect(page).to have_field "Cidade", :with => 'Curitiba'
-    expect(page).to have_field "Distrito", :with => ''
+    expect(page).to have_field "Cidade", :with => 'Curitiba', disabled: true
+    expect(page).to have_field "Distrito", :with => '', disabled: true
 
     fill_in 'CEP', :with => '88900-000'
 
-    expect(page).to have_field "Estado", :with => 'Paraná'
+    expect(page).to have_field "Estado", :with => 'Paraná', disabled: true
 
     click_button 'Salvar'
 
@@ -45,9 +45,9 @@ feature "DeliveryLocations" do
     expect(page).to have_field 'Bairro', :with => 'São Francisco'
     expect(page).to have_field 'Condomínio', :with => 'Parque das Flores'
     expect(page).to have_field 'Loteamento', :with => 'Solar da Serra'
-    expect(page).to have_field "Cidade", :with => 'Curitiba'
+    expect(page).to have_field "Cidade", :with => 'Curitiba', disabled: true
     expect(page).to have_field 'CEP', :with => '88900-000'
-    expect(page).to have_field "Estado", :with => 'Paraná'
+    expect(page).to have_field "Estado", :with => 'Paraná', disabled: true
 
     fill_in 'Descrição', :with => 'Secretaria da Saúde'
     fill_modal 'Logradouro', :with => 'Girassol'
@@ -59,11 +59,11 @@ feature "DeliveryLocations" do
     fill_modal 'Condomínio', :with => 'Parque das Flores'
     fill_modal 'Loteamento', :with => 'Solar da Serra'
 
-    expect(page).to have_field "Cidade", :with => 'Curitiba'
+    expect(page).to have_field "Cidade", :with => 'Curitiba', disabled: true
 
     fill_in 'CEP', :with => '88900-000'
 
-    expect(page).to have_field "Estado", :with => 'Paraná'
+    expect(page).to have_field "Estado", :with => 'Paraná', disabled: true
 
     click_button 'Salvar'
 
@@ -80,9 +80,9 @@ feature "DeliveryLocations" do
     expect(page).to have_field 'Bairro', :with => 'São Francisco'
     expect(page).to have_field 'Condomínio', :with => 'Parque das Flores'
     expect(page).to have_field 'Loteamento', :with => 'Solar da Serra'
-    expect(page).to have_field "Cidade", :with => 'Curitiba'
+    expect(page).to have_field "Cidade", :with => 'Curitiba', disabled: true
     expect(page).to have_field 'CEP', :with => '88900-000'
-    expect(page).to have_field "Estado", :with => 'Paraná'
+    expect(page).to have_field "Estado", :with => 'Paraná', disabled: true
 
     click_link 'Apagar'
 

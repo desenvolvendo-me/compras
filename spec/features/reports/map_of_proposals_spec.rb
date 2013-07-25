@@ -65,7 +65,7 @@ feature 'Report::MapOfProposals' do
           expect(page).to have_content 'R$ 9,98'
         end
 
-        within 'tr:last' do
+        within 'tr:nth-last-child(1)' do
           expect(page).to have_content 'Valor de referência'
           expect(page).to have_content 'R$ 10,00'
           expect(page).to have_content 'R$ 20,00'
@@ -93,7 +93,7 @@ feature 'Report::MapOfProposals' do
           expect(page).to have_content 'R$ 4,99'
         end
 
-        within 'tr:last' do
+        within 'tr:nth-last-child(1)' do
           expect(page).to have_content 'Valor de referência'
           expect(page).to have_content 'R$ 10,00'
           expect(page).to have_content 'R$ 10,00'

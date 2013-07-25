@@ -60,9 +60,9 @@ feature 'ContractTerminationAnnuls' do
 
     expect(page).to have_content "Anulação da Rescisão Contratual 1/2012"
 
-    expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
-    expect(page).to have_field 'Data', :with => '28/06/2012'
-    expect(page).to have_field 'Justificativa', :with => 'Anulação da rescisão do contrato'
+    expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho', disabled: true
+    expect(page).to have_field 'Data', :with => '28/06/2012', disabled: true
+    expect(page).to have_field 'Justificativa', :with => 'Anulação da rescisão do contrato', disabled: true
   end
 
   scenario 'a contract termination annul should have all fields disabled' do
@@ -80,14 +80,11 @@ feature 'ContractTerminationAnnuls' do
 
     expect(page).to have_content "Anulação da Rescisão Contratual 1/2012"
 
-    expect(page).to have_field 'Responsável', disabled: true
-    expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
+    expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho', disabled: true
 
-    expect(page).to have_field 'Data', disabled: true
-    expect(page).to have_field 'Data', :with => '28/06/2012'
+    expect(page).to have_field 'Data', :with => '28/06/2012', disabled: true
 
-    expect(page).to have_field 'Justificativa', disabled: true
-    expect(page).to have_field 'Justificativa', :with => 'Rescisão Anulada'
+    expect(page).to have_field 'Justificativa', :with => 'Rescisão Anulada', disabled: true
 
     expect(page).to_not have_button 'Salvar'
     expect(page).to_not have_link 'Apagar'

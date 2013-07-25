@@ -93,10 +93,10 @@ feature 'PurchaseSolicitationAnnul' do
 
     click_button 'Salvar'
 
-    expect(page).to have_content 'Anulação de Recurso criada com sucesso.'
+    expect(page).to have_notice 'Anulação de Recurso criada com sucesso.'
 
     expect(page).to have_title "Editar Solicitação de Compra"
-    expect(page).to have_select 'Status de atendimento', :selected => 'Anulada'
+    expect(page).to have_select 'Status de atendimento', :selected => 'Anulada', disabled: true
 
     within_tab 'Principal' do
       expect(page).to have_field 'Ano', disabled: true
@@ -142,14 +142,11 @@ feature 'PurchaseSolicitationAnnul' do
 
     click_link 'Anulação'
 
-    expect(page).to have_field 'Responsável', disabled: true
-    expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
+    expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho', disabled: true
 
-    expect(page).to have_field 'Data', disabled: true
-    expect(page).to have_field 'Data', :with => '10/06/2012'
+    expect(page).to have_field 'Data', :with => '10/06/2012', disabled: true
 
-    expect(page).to have_field 'Justificativa', disabled: true
-    expect(page).to have_field 'Justificativa', :with => 'Foo Bar'
+    expect(page).to have_field 'Justificativa', :with => 'Foo Bar', disabled: true
 
     expect(page).to_not have_button 'Salvar'
     expect(page).to_not have_link 'Apagar'

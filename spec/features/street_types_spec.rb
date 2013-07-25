@@ -49,7 +49,7 @@ feature "StreetTypes" do
       expect(page).to have_content 'Nome'
       expect(page).to have_content 'Sigla'
 
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_content 'Avenida'
         expect(page).to have_content 'AVE'
       end

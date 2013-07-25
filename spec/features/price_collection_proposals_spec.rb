@@ -149,20 +149,15 @@ feature "PriceCollectionProposals" do
 
       expect(page).to have_content 'Proposta do Fornecedor Gabriel Sobrinho para a Coleta de Preço 1/2012'
 
-      expect(page).to have_field 'Coleta de preços', disabled: true
-      expect(page).to have_field 'Coleta de preços', :with => '1/2012'
+      expect(page).to have_field 'Coleta de preços', :with => '1/2012', disabled: true
 
-      expect(page).to have_field 'Data de início', disabled: true
-      expect(page).to have_field 'Data de início', :with => I18n.l(Date.current)
+      expect(page).to have_field 'Data de início', :with => I18n.l(Date.current), disabled: true
 
-      expect(page).to have_field 'Prazo de entrega', disabled: true
-      expect(page).to have_field 'Prazo de entrega', :with => '1 ano/anos'
+      expect(page).to have_field 'Prazo de entrega', :with => '1 ano/anos', disabled: true
 
-      expect(page).to have_field 'Fornecedor', disabled: true
-      expect(page).to have_field 'Fornecedor', :with => 'Gabriel Sobrinho'
+      expect(page).to have_field 'Fornecedor', :with => 'Gabriel Sobrinho', disabled: true
 
-      expect(page).to have_field 'Status', disabled: true
-      expect(page).to have_select 'Status', :selected => 'Ativo'
+      expect(page).to have_select 'Status', :selected => 'Ativo', disabled: true
 
       expect(page).to have_field 'Valor unitário'
       expect(page).to have_field 'Valor total', disabled: true
@@ -184,8 +179,8 @@ feature "PriceCollectionProposals" do
 
       fill_in 'Valor unitário', :with => '50,00'
 
-      expect(page).to have_field 'Valor total', :with => '500,00'
-      expect(page).to have_field 'Valor total do lote', :with => '500,00'
+      expect(page).to have_field 'Valor total', :with => '500,00', disabled: true
+      expect(page).to have_field 'Valor total do lote', :with => '500,00', disabled: true
 
       expect(page).to_not have_link 'Anular'
 
@@ -196,9 +191,9 @@ feature "PriceCollectionProposals" do
       click_link '1/2012'
 
       expect(page).to have_field 'Valor unitário', :with => '50,00'
-      expect(page).to have_field 'Valor total', :with => '500,00'
-      expect(page).to have_field 'Valor total do lote', :with => '500,00'
-      expect(page).to have_field 'Quantidade', :with => '10'
+      expect(page).to have_field 'Valor total', :with => '500,00', disabled: true
+      expect(page).to have_field 'Valor total do lote', :with => '500,00', disabled: true
+      expect(page).to have_field 'Quantidade', :with => '10', disabled: true
     end
 
     scenario "I can not update other's proposals" do

@@ -151,7 +151,7 @@ feature "PurchaseProcessAccreditation" do
     end
 
     within_records do
-      within '.record:first' do
+      within '.record:nth-child(1)' do
         click_link 'Remover'
       end
     end
@@ -327,6 +327,9 @@ feature "PurchaseProcessAccreditation" do
     sobrinho = Creditor.make!(:sobrinho)
     nobe = Creditor.make!(:nobe)
 
+    first_table_body = '//*[@id="content"]/table[1]/tbody'
+    last_table_body  = '//*[@id="content"]/table[2]/tbody'
+
     representative = CreditorRepresentative.make!(:representante_sobrinho,
       :representative_person => Person.make!(:joao_da_silva),
       :creditor => nobe)
@@ -355,7 +358,7 @@ feature "PurchaseProcessAccreditation" do
     click_link 'Credenciamento'
     click_link 'Relatório'
 
-    within 'table.creditor:first' do
+    within :xpath, first_table_body do
       expect(page).to have_content 'Gabriel Sobrinho'
       expect(page).to have_content '003.151.987-37'
       expect(page).to have_content 'Rua Girassol, 9874 - São Francisco'
@@ -367,7 +370,7 @@ feature "PurchaseProcessAccreditation" do
       expect(page).to have_content 'Não possui representante'
     end
 
-    within 'table.creditor:last' do
+    within :xpath, last_table_body do
       expect(page).to have_content 'Nobe'
       expect(page).to have_content '76.238.594/0001-35'
       expect(page).to have_content 'Rua Girassol, 9874 - São Francisco'

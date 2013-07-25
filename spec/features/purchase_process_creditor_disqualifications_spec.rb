@@ -54,7 +54,7 @@ feature 'PurchaseProcessCreditorDisqualifications' do
       expect(page).to have_content 'Desclassificar'
       expect(page).to have_content 'Desclassificada?'
 
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_content 'Gabriel Sobrinho'
         expect(page).to have_content 'gabriel.sobrinho@gmail.com'
         expect(page).to have_content 'Editar propostas'
@@ -62,7 +62,7 @@ feature 'PurchaseProcessCreditorDisqualifications' do
         expect(page).to have_content 'Não'
       end
 
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         expect(page).to have_content 'Wenderson Malheiros'
         expect(page).to have_content 'wenderson.malheiros@gmail.com'
         expect(page).to have_content 'Cadastrar propostas'
@@ -70,7 +70,7 @@ feature 'PurchaseProcessCreditorDisqualifications' do
         expect(page).to have_content 'Não'
       end
 
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         click_link 'Desclassificar propostas'
       end
     end
@@ -81,7 +81,7 @@ feature 'PurchaseProcessCreditorDisqualifications' do
     expect(page).to have_field 'Motivo', with: ''
     expect(page).to have_field 'Toda proposta'
     expect(page).to have_field 'Itens da proposta'
-    expect(page).to have_field 'Valor total da proposta', with: '12,97'
+    expect(page).to have_field 'Valor total da proposta', with: '12,97', disabled: true
 
     within_records do
       expect(page).to have_content 'Lote'
@@ -93,7 +93,7 @@ feature 'PurchaseProcessCreditorDisqualifications' do
       expect(page).to have_content 'Valor total'
       expect(page).to have_content 'Selecionar'
 
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_content '2050'
         expect(page).to have_content '1'
         expect(page).to have_content '02.02.00001 - Arame farpado'
@@ -103,7 +103,7 @@ feature 'PurchaseProcessCreditorDisqualifications' do
         expect(page).to have_content '9,98'
       end
 
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         expect(page).to have_content '2050'
         expect(page).to have_content '2'
         expect(page).to have_content '02.02.00002 - Arame comum'
@@ -119,7 +119,7 @@ feature 'PurchaseProcessCreditorDisqualifications' do
     choose 'Itens da proposta'
 
     within_records do
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         check 'purchase_process_creditor_disqualification[proposal_item_ids][]'
       end
     end
@@ -129,7 +129,7 @@ feature 'PurchaseProcessCreditorDisqualifications' do
     expect(page).to have_content 'Desclassificação de Proposta de Credor criada com sucesso'
 
     within_records do
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_content 'Parcialmente'
         click_link 'Desclassificar propostas'
       end
@@ -139,14 +139,14 @@ feature 'PurchaseProcessCreditorDisqualifications' do
 
     expect(page).to have_field 'Motivo', with: 'Motivo para desclassificação'
     expect(page).to have_checked_field 'Itens da proposta'
-    expect(page).to have_field 'Valor total da proposta', with: '12,97'
+    expect(page).to have_field 'Valor total da proposta', with: '12,97', disabled: true
 
     within_records do
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_checked_field 'purchase_process_creditor_disqualification[proposal_item_ids][]'
       end
 
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         expect(page).to_not have_checked_field 'purchase_process_creditor_disqualification[proposal_item_ids][]'
       end
     end
@@ -154,11 +154,11 @@ feature 'PurchaseProcessCreditorDisqualifications' do
     choose 'Toda proposta'
 
     within_records do
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_checked_field 'purchase_process_creditor_disqualification[proposal_item_ids][]'
       end
 
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         expect(page).to have_checked_field 'purchase_process_creditor_disqualification[proposal_item_ids][]'
       end
     end
@@ -168,7 +168,7 @@ feature 'PurchaseProcessCreditorDisqualifications' do
     expect(page).to have_content 'Desclassificação de Proposta de Credor editada com sucesso'
 
     within_records do
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_content 'Totalmente'
         click_link 'Desclassificar propostas'
       end
@@ -178,14 +178,14 @@ feature 'PurchaseProcessCreditorDisqualifications' do
 
     expect(page).to have_field 'Motivo', with: 'Motivo para desclassificação'
     expect(page).to have_checked_field 'Toda proposta'
-    expect(page).to have_field 'Valor total da proposta', with: '12,97'
+    expect(page).to have_field 'Valor total da proposta', with: '12,97', disabled: true
 
     within_records do
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_checked_field 'purchase_process_creditor_disqualification[proposal_item_ids][]'
       end
 
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         expect(page).to have_checked_field 'purchase_process_creditor_disqualification[proposal_item_ids][]'
       end
     end
@@ -224,7 +224,7 @@ feature 'PurchaseProcessCreditorDisqualifications' do
       expect(page).to have_content 'Desclassificar'
       expect(page).to have_content 'Desclassificada?'
 
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_content 'Gabriel Sobrinho'
         expect(page).to have_content 'gabriel.sobrinho@gmail.com'
         expect(page).to have_content 'Editar propostas'
@@ -232,7 +232,7 @@ feature 'PurchaseProcessCreditorDisqualifications' do
         expect(page).to have_content 'Não'
       end
 
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         expect(page).to have_content 'Wenderson Malheiros'
         expect(page).to have_content 'wenderson.malheiros@gmail.com'
         expect(page).to have_content 'Cadastrar propostas'
@@ -240,7 +240,7 @@ feature 'PurchaseProcessCreditorDisqualifications' do
         expect(page).to have_content 'Não'
       end
 
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         click_link 'Desclassificar propostas'
       end
     end
@@ -251,19 +251,19 @@ feature 'PurchaseProcessCreditorDisqualifications' do
     expect(page).to have_field 'Motivo', with: ''
     expect(page).to have_field 'Toda proposta'
     expect(page).to have_field 'Lotes da proposta'
-    expect(page).to have_field 'Valor total da proposta', with: '7,98'
+    expect(page).to have_field 'Valor total da proposta', with: '7,98', disabled: true
 
     within_records do
       expect(page).to have_content 'Lote'
       expect(page).to have_content 'Valor total'
       expect(page).to have_content 'Selecionar'
 
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_content '2050'
         expect(page).to have_content '4,99'
       end
 
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         expect(page).to have_content '1025'
         expect(page).to have_content '2,99'
       end
@@ -274,7 +274,7 @@ feature 'PurchaseProcessCreditorDisqualifications' do
     choose 'Lotes da proposta'
 
     within_records do
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         check 'purchase_process_creditor_disqualification[proposal_item_ids][]'
       end
     end
@@ -284,7 +284,7 @@ feature 'PurchaseProcessCreditorDisqualifications' do
     expect(page).to have_content 'Desclassificação de Proposta de Credor criada com sucesso'
 
     within_records do
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_content 'Parcialmente'
         click_link 'Desclassificar propostas'
       end
@@ -294,14 +294,14 @@ feature 'PurchaseProcessCreditorDisqualifications' do
 
     expect(page).to have_field 'Motivo', with: 'Motivo para desclassificação'
     expect(page).to have_checked_field 'Lotes da proposta'
-    expect(page).to have_field 'Valor total da proposta', with: '7,98'
+    expect(page).to have_field 'Valor total da proposta', with: '7,98', disabled: true
 
     within_records do
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_checked_field 'purchase_process_creditor_disqualification[proposal_item_ids][]'
       end
 
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         expect(page).to_not have_checked_field 'purchase_process_creditor_disqualification[proposal_item_ids][]'
       end
     end
@@ -309,11 +309,11 @@ feature 'PurchaseProcessCreditorDisqualifications' do
     choose 'Toda proposta'
 
     within_records do
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_checked_field 'purchase_process_creditor_disqualification[proposal_item_ids][]'
       end
 
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         expect(page).to have_checked_field 'purchase_process_creditor_disqualification[proposal_item_ids][]'
       end
     end
@@ -323,7 +323,7 @@ feature 'PurchaseProcessCreditorDisqualifications' do
     expect(page).to have_content 'Desclassificação de Proposta de Credor editada com sucesso'
 
     within_records do
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_content 'Totalmente'
         click_link 'Desclassificar propostas'
       end
@@ -333,7 +333,7 @@ feature 'PurchaseProcessCreditorDisqualifications' do
 
     expect(page).to have_field 'Motivo', with: 'Motivo para desclassificação'
     expect(page).to have_checked_field 'Toda proposta'
-    expect(page).to have_field 'Valor total da proposta', with: '7,98'
+    expect(page).to have_field 'Valor total da proposta', with: '7,98', disabled: true
   end
 
   scenario 'create and update a global creditor disqualification' do
@@ -365,7 +365,7 @@ feature 'PurchaseProcessCreditorDisqualifications' do
       expect(page).to have_content 'Desclassificar'
       expect(page).to have_content 'Desclassificada?'
 
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_content 'Gabriel Sobrinho'
         expect(page).to have_content 'gabriel.sobrinho@gmail.com'
         expect(page).to have_content 'Editar propostas'
@@ -373,7 +373,7 @@ feature 'PurchaseProcessCreditorDisqualifications' do
         expect(page).to have_content 'Não'
       end
 
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         expect(page).to have_content 'Wenderson Malheiros'
         expect(page).to have_content 'wenderson.malheiros@gmail.com'
         expect(page).to have_content 'Cadastrar propostas'
@@ -381,7 +381,7 @@ feature 'PurchaseProcessCreditorDisqualifications' do
         expect(page).to have_content 'Não'
       end
 
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         click_link 'Desclassificar propostas'
       end
     end
@@ -390,7 +390,7 @@ feature 'PurchaseProcessCreditorDisqualifications' do
 
     expect(page).to have_field 'Data de desclassificação', with: I18n.l(Date.current)
     expect(page).to have_field 'Motivo', with: ''
-    expect(page).to have_field 'Valor total da proposta', with: '1.100,00'
+    expect(page).to have_field 'Valor total da proposta', with: '1.100,00', disabled: true
     expect(page).to_not have_field 'Toda proposta'
 
     fill_in 'Motivo', with: 'Motivo para desclassificação'
@@ -399,7 +399,7 @@ feature 'PurchaseProcessCreditorDisqualifications' do
       expect(page).to have_content 'Valor total'
       expect(page).to have_content 'Selecionar'
 
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_content '1.100,00'
         check 'purchase_process_creditor_disqualification[proposal_item_ids][]'
       end
@@ -410,7 +410,7 @@ feature 'PurchaseProcessCreditorDisqualifications' do
     expect(page).to have_content 'Desclassificação de Proposta de Credor criada com sucesso'
 
     within_records do
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_content 'Totalmente'
         click_link 'Desclassificar propostas'
       end
@@ -420,7 +420,7 @@ feature 'PurchaseProcessCreditorDisqualifications' do
 
     expect(page).to have_field 'Motivo', with: 'Motivo para desclassificação'
     expect(page).to_not have_checked_field 'Toda proposta'
-    expect(page).to have_field 'Valor total da proposta', with: '1.100,00'
+    expect(page).to have_field 'Valor total da proposta', with: '1.100,00', disabled: true
 
     click_button 'Salvar'
 
@@ -455,7 +455,7 @@ feature 'PurchaseProcessCreditorDisqualifications' do
       expect(page).to have_content 'Desclassificar'
       expect(page).to have_content 'Desclassificada?'
 
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_content 'Gabriel Sobrinho'
         expect(page).to have_content 'gabriel.sobrinho@gmail.com'
         expect(page).to have_content 'Editar propostas'
@@ -463,7 +463,7 @@ feature 'PurchaseProcessCreditorDisqualifications' do
         expect(page).to have_content 'Não'
       end
 
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         expect(page).to have_content 'Wenderson Malheiros'
         expect(page).to have_content 'wenderson.malheiros@gmail.com'
         expect(page).to have_content 'Cadastrar propostas'
@@ -471,17 +471,17 @@ feature 'PurchaseProcessCreditorDisqualifications' do
         expect(page).to have_content 'Não'
       end
 
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         click_link 'Desclassificar propostas'
       end
     end
 
     within_records do
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to_not have_checked_field 'purchase_process_creditor_disqualification[proposal_item_ids][]'
       end
 
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         expect(page).to_not have_checked_field 'purchase_process_creditor_disqualification[proposal_item_ids][]'
       end
     end
@@ -489,11 +489,11 @@ feature 'PurchaseProcessCreditorDisqualifications' do
     choose 'Toda proposta'
 
     within_records do
-      within 'tbody tr:first' do
+      within 'tbody tr:nth-child(1)' do
         expect(page).to have_checked_field 'purchase_process_creditor_disqualification[proposal_item_ids][]'
       end
 
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         expect(page).to have_checked_field 'purchase_process_creditor_disqualification[proposal_item_ids][]'
         uncheck 'purchase_process_creditor_disqualification[proposal_item_ids][]'
       end
@@ -502,7 +502,7 @@ feature 'PurchaseProcessCreditorDisqualifications' do
     expect(page).to have_checked_field 'Itens da proposta'
 
     within_records do
-      within 'tbody tr:last' do
+      within 'tbody tr:nth-last-child(1)' do
         check 'purchase_process_creditor_disqualification[proposal_item_ids][]'
       end
     end

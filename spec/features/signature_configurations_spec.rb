@@ -19,6 +19,7 @@ feature "SignatureConfigurations" do
     click_button 'Adicionar Assinatura'
 
     fill_in 'Ordem', :with => '1'
+
     within_modal 'Assinatura' do
       fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
       click_button 'Pesquisar'
@@ -35,8 +36,7 @@ feature "SignatureConfigurations" do
     expect(page).to have_select 'Relatório', :selected => 'Autorizações de Fornecimento'
     expect(page).to have_field 'Assinatura', :with => 'Gabriel Sobrinho'
     expect(page).to have_field 'Ordem', :with => '1'
-    expect(page).to have_field 'Cargo', disabled: true
-    expect(page).to have_field 'Cargo', :with => 'Gerente'
+    expect(page).to have_field 'Cargo', :with => 'Gerente', disabled: true
 
     fill_in 'Ordem', :with => '2'
     within_modal 'Assinatura' do
@@ -74,7 +74,8 @@ feature "SignatureConfigurations" do
     click_link 'Criar Configuração de Assinatura'
 
     expect(page).to have_css '#signature_configuration_report option', :count => 3
-    expect(page).to have_select 'Relatório', :options => ['']
+    expect(page).to have_select 'Relatório', selected: '',
+      :options => ['', 'Certificados de Registro Cadastral', 'Homologações e Adjudicações de Processos de Compras']
   end
 
   scenario 'should have only availables reports when edit' do
@@ -85,7 +86,9 @@ feature "SignatureConfigurations" do
     click_link 'Autorizações de Fornecimento'
 
     expect(page).to have_css '#signature_configuration_report option', :count => 4
-    expect(page).to have_select 'Relatório', :options => ['', 'Autorizações de Fornecimento', 'Certificados de Registro Cadastral']
+    expect(page).to have_select 'Relatório', :options => ['', 'Autorizações de Fornecimento',
+                                                          'Homologações e Adjudicações de Processos de Compras',
+                                                          'Certificados de Registro Cadastral']
   end
 
   scenario 'when fill signature should fill position' do
@@ -104,8 +107,7 @@ feature "SignatureConfigurations" do
       click_record 'Gerente'
     end
 
-    expect(page).to have_field 'Cargo', disabled: true
-    expect(page).to have_field 'Cargo', :with => 'Gerente'
+    expect(page).to have_field 'Cargo', :with => 'Gerente', disabled: true
 
     clear_modal 'Assinatura'
 

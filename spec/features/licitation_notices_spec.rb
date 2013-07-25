@@ -18,9 +18,9 @@ feature "LicitationNotices" do
     fill_modal 'Processo de compra', :with => '2012', :field => 'Ano'
 
     expect(page).to have_field 'Processo de compra', :with => '1/2012 - Concorrência 1'
-    expect(page).to have_field 'Modalidade', :with => 'Concorrência'
-    expect(page).to have_field 'Data do processo', :with => '19/03/2012'
-    expect(page).to have_field 'Objeto da licitação', :with => 'Licitação para compra de carteiras'
+    expect(page).to have_field 'Modalidade', :with => 'Concorrência', disabled: true
+    expect(page).to have_field 'Data do processo', :with => '19/03/2012', disabled: true
+    expect(page).to have_field 'Objeto da licitação', :with => 'Licitação para compra de carteiras', disabled: true
 
     fill_in 'Data do aviso', :with => '05/04/2012'
     fill_in 'Observações gerais', :with => 'Aviso de processo'
@@ -34,11 +34,11 @@ feature "LicitationNotices" do
     end
 
     expect(page).to have_field 'Processo de compra', :with => '1/2012 - Concorrência 1'
-    expect(page).to have_field 'Número do aviso', :with => '1'
+    expect(page).to have_field 'Número do aviso', :with => '1', disabled: true
     expect(page).to have_field 'Data do aviso', :with => '05/04/2012'
-    expect(page).to have_field 'Modalidade', :with => 'Concorrência'
-    expect(page).to have_field 'Data do processo', :with => '19/03/2012'
-    expect(page).to have_field 'Objeto da licitação', :with => 'Licitação para compra de carteiras'
+    expect(page).to have_field 'Modalidade', :with => 'Concorrência', disabled: true
+    expect(page).to have_field 'Data do processo', :with => '19/03/2012', disabled: true
+    expect(page).to have_field 'Objeto da licitação', :with => 'Licitação para compra de carteiras', disabled: true
     expect(page).to have_field 'Observações gerais', :with => 'Aviso de processo'
 
     fill_in 'Data do aviso', :with => '06/04/2012'
@@ -53,11 +53,11 @@ feature "LicitationNotices" do
     end
 
     expect(page).to have_field 'Processo de compra', :with => '1/2012 - Concorrência 1'
-    expect(page).to have_field 'Número do aviso', :with => '1'
+    expect(page).to have_field 'Número do aviso', :with => '1', disabled: true
     expect(page).to have_field 'Data do aviso', :with => '06/04/2012'
-    expect(page).to have_field 'Modalidade', :with => 'Concorrência'
-    expect(page).to have_field 'Data do processo', :with => '19/03/2012'
-    expect(page).to have_field 'Objeto da licitação', :with => 'Licitação para compra de carteiras'
+    expect(page).to have_field 'Modalidade', :with => 'Concorrência', disabled: true
+    expect(page).to have_field 'Data do processo', :with => '19/03/2012', disabled: true
+    expect(page).to have_field 'Objeto da licitação', :with => 'Licitação para compra de carteiras', disabled: true
     expect(page).to have_field 'Observações gerais', :with => 'Novo aviso de processo, continuação.'
 
     click_link 'Apagar'
@@ -89,11 +89,11 @@ feature "LicitationNotices" do
     end
 
     expect(page).to have_field 'Processo de compra', :with => '2/2013 - Concorrência 1'
-    expect(page).to have_field 'Número do aviso', :with => '1'
+    expect(page).to have_field 'Número do aviso', :with => '1', disabled: true
     expect(page).to have_field 'Data do aviso', :with => '07/04/2012'
-    expect(page).to have_field 'Modalidade', :with => 'Concorrência'
-    expect(page).to have_field 'Data do processo', :with => '20/03/2013'
-    expect(page).to have_field 'Objeto da licitação', :with => 'Licitação para compra de carteiras'
+    expect(page).to have_field 'Modalidade', :with => 'Concorrência', disabled: true
+    expect(page).to have_field 'Data do processo', :with => '20/03/2013', disabled: true
+    expect(page).to have_field 'Objeto da licitação', :with => 'Licitação para compra de carteiras', disabled: true
     expect(page).to have_field 'Observações gerais', :with => 'Aviso de processo 3'
   end
 
@@ -117,11 +117,11 @@ feature "LicitationNotices" do
     end
 
     expect(page).to have_field 'Processo de compra', :with => '1/2012 - Concorrência 1'
-    expect(page).to have_field 'Número do aviso', :with => '2'
+    expect(page).to have_field 'Número do aviso', :with => '2', disabled: true
     expect(page).to have_field 'Data do aviso', :with => '06/04/2012'
-    expect(page).to have_field 'Modalidade', :with => 'Concorrência'
-    expect(page).to have_field 'Data do processo', :with => '19/03/2012'
-    expect(page).to have_field 'Objeto da licitação', :with => 'Licitação para compra de carteiras'
+    expect(page).to have_field 'Modalidade', :with => 'Concorrência', disabled: true
+    expect(page).to have_field 'Data do processo', :with => '19/03/2012', disabled: true
+    expect(page).to have_field 'Objeto da licitação', :with => 'Licitação para compra de carteiras', disabled: true
     expect(page).to have_field 'Observações gerais', :with => 'Aviso de processo 2'
   end
 
@@ -137,8 +137,8 @@ feature "LicitationNotices" do
     clear_modal 'Processo de compra'
 
     expect(page).to have_field 'Processo de compra', :with => ''
-    expect(page).to have_field 'Modalidade', :with => ''
-    expect(page).to have_field 'Data do processo', :with => ''
-    expect(page).to have_field 'Objeto da licitação', :with => ''
+    expect(page).to have_field 'Modalidade', :with => '', disabled: true
+    expect(page).to have_field 'Data do processo', :with => '', disabled: true
+    expect(page).to have_field 'Objeto da licitação', :with => '', disabled: true
   end
 end

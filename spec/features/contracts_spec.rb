@@ -44,15 +44,14 @@ feature "Contracts" do
     fill_modal 'Processo de compra', :field => 'Ano', :with => '2012'
 
     expect(page).to have_field 'Objeto do contrato', :with => 'Licitação para compra de carteiras'
-    expect(page).to have_field 'Modalidade', disabled: true
-    expect(page).to have_field 'Modalidade', :with => 'Concorrência'
+    expect(page).to have_field 'Modalidade', :with => 'Concorrência', disabled: true
     expect(page).to have_select 'Forma de execução', :selected => 'Empreitada integral'
     expect(page).to have_select 'Garantias do contrato', :selected => 'Fiança bancária'
 
     clear_modal 'Processo de compra'
-    expect(page).to have_field 'Modalidade', :with => ''
-    expect(page).to have_select 'Forma de execução', :with => ''
-    expect(page).to have_select 'Garantias do contrato', :with => ''
+    expect(page).to have_field 'Modalidade', :with => '', disabled: true
+    expect(page).to have_select 'Forma de execução', :selected => ''
+    expect(page).to have_select 'Garantias do contrato', :selected => ''
     expect(page).to have_field 'Processo de compra', :with => ''
   end
 
@@ -74,7 +73,7 @@ feature "Contracts" do
     expect(page).to have_field 'Contrato principal'
 
     fill_in 'Ano do contrato', :with => '2012'
-    expect(page).to have_field 'Número sequencial', :with => '1'
+    expect(page).to have_field 'Número sequencial', :with => '1', disabled: true
 
     fill_modal 'Local de publicação', :with => 'Jornal Oficial do Município', :field => 'Descrição'
 
@@ -123,7 +122,7 @@ feature "Contracts" do
       page.find('a').click
     end
 
-    expect(page).to have_field 'Número sequencial', :with => '1'
+    expect(page).to have_field 'Número sequencial', :with => '1', disabled: true
     expect(page).to have_field 'Ano do contrato', :with => '2012'
     expect(page).to have_field 'Número do contrato', :with => '001'
     expect(page).to have_field 'Data de publicação', :with => '10/01/2012'
@@ -144,7 +143,7 @@ feature "Contracts" do
     end
 
     expect(page).to have_select 'Subcontratação', :selected => 'Sim'
-    expect(page).to have_field 'Modalidade', :with => 'Concorrência'
+    expect(page).to have_field 'Modalidade', :with => 'Concorrência', disabled: true
     expect(page).to have_field 'Unidade responsável', :with => '1 - Secretaria de Educação'
     expect(page).to have_field 'Pessoa responsável', :with => 'Wenderson Malheiros'
     expect(page).to have_field 'Advogado responsável pela gestão do contrato', :with => 'Wenderson Malheiros'
@@ -220,7 +219,7 @@ feature "Contracts" do
 
     within '#additives' do
       expect(page).to have_field 'Número', with: '666'
-      expect(page).to have_select 'Tipo', with: 'Outros'
+      expect(page).to have_select 'Tipo', selected: 'Outros'
       expect(page).to have_field 'Data da assinatura', with: '13/10/2013'
       expect(page).to have_field 'Data de publicação', with: '13/10/2013'
       expect(page).to have_field 'Meio de divulgação', with: 'Jornal Oficial do Município'
@@ -229,7 +228,7 @@ feature "Contracts" do
 
     click_link 'Adicionar Aditivo'
 
-    within '.nested-additives:last' do
+    within '.nested-additives:nth-last-child(1)' do
       select 'Prorrogação de Prazo', from: 'Tipo'
       expect(page).to have_field 'Data de término'
       expect(page).not_to have_field 'Valor'
@@ -261,7 +260,7 @@ feature "Contracts" do
 
     within '#additives' do
       expect(page).to have_field 'Número', with: '666'
-      expect(page).to have_select 'Tipo', with: 'Outros'
+      expect(page).to have_select 'Tipo', selected: 'Outros'
       expect(page).to have_field 'Data da assinatura', with: '13/10/2013'
       expect(page).to have_field 'Data de publicação', with: '13/10/2013'
       expect(page).to have_field 'Meio de divulgação', with: 'Jornal Oficial do Município'
@@ -289,8 +288,8 @@ feature "Contracts" do
 
     click_button 'Adicionar Cronograma de Entrega'
 
-    within '.nested-delivery-schedule:last' do
-      expect(page).to have_field 'Sequência', :with => '2'
+    within '.nested-delivery-schedule:nth-last-child(1)' do
+      expect(page).to have_field 'Sequência', :with => '2', disabled: true
 
       fill_in 'Data de entrega', :with => '10/01/2012'
       select 'Vencido', :from => 'Status'

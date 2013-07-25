@@ -51,11 +51,9 @@ feature 'ContractTerminations' do
 
     expect(page).to have_field 'Status', disabled: true
 
-    expect(page).to have_field 'Número da rescisão', disabled: true
-    expect(page).to have_field 'Número da rescisão', :with => '1'
+    expect(page).to have_field 'Número da rescisão', :with => '1', disabled: true
 
-    expect(page).to have_field 'Ano', disabled: true
-    expect(page).to have_field 'Ano', :with => "#{Date.current.year}"
+    expect(page).to have_field 'Ano', :with => "#{Date.current.year}", disabled: true
 
     fill_in 'Motivo da rescisão', :with => 'Foo Bar'
     fill_in 'Data do termo', :with => '15/06/2012'
@@ -68,19 +66,17 @@ feature 'ContractTerminations' do
 
     click_button 'Salvar'
 
-    expect(page).to have_content 'Rescisão Contratual criada com sucesso.'
+    expect(page).to have_notice 'Rescisão Contratual criada com sucesso.'
 
     click_link 'Rescisão'
 
-    expect(page).to have_content "Editar Rescisão 1/#{Date.current.year} do Contrato 001"
+    expect(page).to have_title "Editar Rescisão 1/#{Date.current.year} do Contrato 001"
 
     expect(page).to have_link 'Anular'
 
-    expect(page).to have_field 'Número da rescisão', disabled: true
-    expect(page).to have_field 'Número da rescisão', :with => '1'
+    expect(page).to have_field 'Número da rescisão', :with => '1', disabled: true
 
-    expect(page).to have_field 'Ano', disabled: true
-    expect(page).to have_field 'Ano', :with => "#{Date.current.year}"
+    expect(page).to have_field 'Ano', :with => "#{Date.current.year}", disabled: true
 
     expect(page).to have_field 'Motivo da rescisão', :with => 'Foo Bar'
     expect(page).to have_field 'Data do termo', :with => '15/06/2012'

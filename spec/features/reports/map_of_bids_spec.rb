@@ -222,12 +222,12 @@ feature 'Report::MapOfBids' do
     end
 
     within 'table.proposals_2' do
-      within 'tr.draw:last' do
+      within 'tr.draw:nth-last-child(1)' do
         expect(page).to have_content 'Gabriel Sobrinho'
         expect(page).to have_content 'R$ 4,99'
       end
 
-      within 'tr.draw:first' do
+      within 'tr.draw:nth-child(1)' do
         expect(page).to have_content 'Nohup'
         expect(page).to have_content 'R$ 4,99'
       end

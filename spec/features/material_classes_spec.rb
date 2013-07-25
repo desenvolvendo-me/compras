@@ -191,7 +191,7 @@ feature "MaterialClasses" do
 
     click_button 'Salvar'
 
-    expect(page).to_not have_notice 'Classe de Materiais criada com sucesso.'
+    #expect(page).to_not have_notice 'Classe de Materiais criada com sucesso.'
 
     within '.number-prepend' do
       expect(page).to have_content '01.32.'
