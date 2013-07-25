@@ -23,7 +23,7 @@ feature "BudgetStructure" do
 
       within_modal 'Nível' do
         expect(page).to have_field 'Configuração de estrutura orçamentária', :with => 'Configuração do Detran'
-        expect(page).to have_disabled_field 'Configuração de estrutura orçamentária'
+        expect(page).to have_field 'Configuração de estrutura orçamentária', disabled: true
         click_button 'Pesquisar'
         click_record 'Orgão'
       end
@@ -102,7 +102,7 @@ feature "BudgetStructure" do
       fill_modal 'Configuração de estrutura orçamentária', :with => 'Configuração do Detran', :field => 'Descrição'
       within_modal 'Nível' do
         expect(page).to have_field 'Configuração de estrutura orçamentária', :with => 'Configuração do Detran'
-        expect(page).to have_disabled_field 'Configuração de estrutura orçamentária'
+        expect(page).to have_field 'Configuração de estrutura orçamentária', disabled: true
         click_button 'Pesquisar'
         click_record 'Orgão'
       end
@@ -195,7 +195,7 @@ feature "BudgetStructure" do
 
     click_button 'Salvar'
 
-    expect(page).to have_disabled_field 'Código'
+    expect(page).to have_field 'Código', disabled: true
     expect(page).to have_field 'Código', :with => ''
   end
 
@@ -217,7 +217,7 @@ feature "BudgetStructure" do
 
       within_modal 'Nível' do
         expect(page).to have_field 'Configuração de estrutura orçamentária', :with => 'Configuração do Detran'
-        expect(page).to have_disabled_field 'Configuração de estrutura orçamentária'
+        expect(page).to have_field 'Configuração de estrutura orçamentária', disabled: true
         click_button 'Pesquisar'
         click_record 'Orgão'
       end
@@ -289,16 +289,16 @@ feature "BudgetStructure" do
 
       within_modal 'Nível' do
         expect(page).to have_field 'Configuração de estrutura orçamentária', :with => 'Configuração do Detran'
-        expect(page).to have_disabled_field 'Configuração de estrutura orçamentária'
+        expect(page).to have_field 'Configuração de estrutura orçamentária', disabled: true
         click_button 'Pesquisar'
         click_record 'Unidade'
       end
 
       within_modal 'Estrutura orçamentária superior' do
         expect(page).to have_field 'Configuração de estrutura orçamentária', :with => 'Configuração do Detran'
-        expect(page).to have_disabled_field 'Configuração de estrutura orçamentária'
+        expect(page).to have_field 'Configuração de estrutura orçamentária', disabled: true
         expect(page).to have_field 'Nível', :with => '1 - Orgão'
-        expect(page).to have_disabled_field 'Nível'
+        expect(page).to have_field 'Nível', disabled: true
 
         click_button 'Pesquisar'
 
@@ -382,11 +382,11 @@ feature "BudgetStructure" do
     click_link 'Secretaria de Educação'
 
     within_tab 'Responsáveis' do
-      expect(page).to have_disabled_field 'Responsável'
-      expect(page).to have_disabled_field 'Ato regulamentador'
-      expect(page).to have_disabled_field 'Data de início'
-      expect(page).to have_disabled_field 'Data de término'
-      expect(page).to have_disabled_field 'Status'
+      expect(page).to have_field 'Responsável', disabled: true
+      expect(page).to have_field 'Ato regulamentador', disabled: true
+      expect(page).to have_field 'Data de início', disabled: true
+      expect(page).to have_field 'Data de término', disabled: true
+      expect(page).to have_field 'Status', disabled: true
 
       expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
       expect(page).to have_field 'Ato regulamentador', :with => 'Lei 1234'

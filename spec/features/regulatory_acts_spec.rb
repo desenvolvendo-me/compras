@@ -38,12 +38,12 @@ feature "RegulatoryActs" do
       select 'Lei', :from => 'Classificação'
       expect(page).to have_field 'Valor autorizado'
       expect(page).to have_field 'Percentual de suplementação'
-      expect(page).to have_disabled_field 'Percentual utilizado'
+      expect(page).to have_field 'Percentual utilizado', disabled: true
 
       select 'LOA', :from => 'Tipo'
       expect(page).to have_field 'Valor autorizado'
       expect(page).to have_field 'Percentual de suplementação'
-      expect(page).to have_disabled_field 'Percentual utilizado'
+      expect(page).to have_field 'Percentual utilizado', disabled: true
 
       select 'Alteração Orçamentária', :from => 'Tipo'
       select 'Decreto', :from => 'Classificação'
@@ -294,7 +294,7 @@ feature "RegulatoryActs" do
 
       expect(page).to have_field 'Valor autorizado'
       expect(page).to have_field 'Percentual de suplementação'
-      expect(page).to have_disabled_field 'Percentual utilizado'
+      expect(page).to have_field 'Percentual utilizado', disabled: true
 
       fill_in 'Valor autorizado', :with => '1,00'
       fill_in 'Percentual de suplementação', :with => '1,00'

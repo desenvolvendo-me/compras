@@ -22,7 +22,7 @@ feature "LicitationCommissions" do
 
       expect(page).to have_field 'Ato regulamentador', :with => 'LDO 1234'
 
-      expect(page).to have_disabled_field 'Data da publicação do ato'
+      expect(page).to have_field 'Data da publicação do ato', disabled: true
       expect(page).to have_field 'Data da publicação do ato', :with => '02/01/2012'
 
       fill_in 'Data da nomeação', :with => '20/03/2012'
@@ -82,7 +82,7 @@ feature "LicitationCommissions" do
 
       expect(page).to have_field 'Ato regulamentador', :with => 'LDO 1234'
 
-      expect(page).to have_disabled_field 'Data da publicação do ato'
+      expect(page).to have_field 'Data da publicação do ato', disabled: true
       expect(page).to have_field 'Data da publicação do ato', :with => '02/01/2012'
 
       fill_in 'Data da nomeação', :with => '20/03/2014'
@@ -182,11 +182,11 @@ feature "LicitationCommissions" do
 
       fill_modal 'Autoridade', :with => 'Wenderson Malheiros'
 
-      expect(page).to have_disabled_field 'CPF'
+      expect(page).to have_field 'CPF', disabled: true
       expect(page).to have_field 'CPF', :with => '003.149.513-34'
 
       clear_modal 'Autoridade'
-      expect(page).to have_disabled_field 'CPF'
+      expect(page).to have_field 'CPF', disabled: true
       expect(page).to have_field 'CPF', :with => ''
     end
 
@@ -195,11 +195,11 @@ feature "LicitationCommissions" do
 
       fill_modal 'Membro', :with => 'Wenderson Malheiros'
 
-      expect(page).to have_disabled_field 'CPF'
+      expect(page).to have_field 'CPF', disabled: true
       expect(page).to have_field 'CPF', :with => '003.149.513-34'
 
       clear_modal 'Membro'
-      expect(page).to have_disabled_field 'CPF'
+      expect(page).to have_field 'CPF', disabled: true
       expect(page).to have_field 'CPF', :with => ''
     end
   end
@@ -213,22 +213,22 @@ feature "LicitationCommissions" do
       click_button 'Adicionar Responsável'
 
       select 'Prefeito municipal', :from => 'Cargo'
-      expect(page).to have_disabled_field 'Registro da classe'
+      expect(page).to have_field 'Registro da classe', disabled: true
 
       select 'Secretário de finanças', :from => 'Cargo'
-      expect(page).to have_disabled_field 'Registro da classe'
+      expect(page).to have_field 'Registro da classe', disabled: true
 
       select 'Secretário de administração', :from => 'Cargo'
-      expect(page).to have_disabled_field 'Registro da classe'
+      expect(page).to have_field 'Registro da classe', disabled: true
 
       select 'Diretor de compras e licitações', :from => 'Cargo'
-      expect(page).to have_disabled_field 'Registro da classe'
+      expect(page).to have_field 'Registro da classe', disabled: true
 
       select 'Chefe do setor de compras e licitações', :from => 'Cargo'
-      expect(page).to have_disabled_field 'Registro da classe'
+      expect(page).to have_field 'Registro da classe', disabled: true
 
       select 'Advogado', :from => 'Cargo'
-      expect(page).to_not have_disabled_field 'Registro da classe'
+      expect(page).to_not have_field 'Registro da classe', disabled: true
     end
   end
 
@@ -258,7 +258,7 @@ feature "LicitationCommissions" do
 
     within_tab 'Responsáveis' do
       expect(page).to have_select 'Cargo', :selected => 'Prefeito municipal'
-      expect(page).to have_disabled_field 'Registro da classe'
+      expect(page).to have_field 'Registro da classe', disabled: true
       expect(page).to have_field 'Registro da classe', :with => ''
     end
   end
@@ -290,7 +290,7 @@ feature "LicitationCommissions" do
 
       expect(page).to have_field 'Ato regulamentador', :with => 'LDO 1234'
 
-      expect(page).to have_disabled_field 'Data da publicação do ato'
+      expect(page).to have_field 'Data da publicação do ato', disabled: true
       expect(page).to have_field 'Data da publicação do ato', :with => '02/01/2012'
 
       fill_in 'Data da nomeação', :with => '20/03/2012'

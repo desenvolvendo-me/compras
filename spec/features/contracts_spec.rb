@@ -44,7 +44,7 @@ feature "Contracts" do
     fill_modal 'Processo de compra', :field => 'Ano', :with => '2012'
 
     expect(page).to have_field 'Objeto do contrato', :with => 'Licitação para compra de carteiras'
-    expect(page).to have_disabled_field 'Modalidade'
+    expect(page).to have_field 'Modalidade', disabled: true
     expect(page).to have_field 'Modalidade', :with => 'Concorrência'
     expect(page).to have_select 'Forma de execução', :selected => 'Empreitada integral'
     expect(page).to have_select 'Garantias do contrato', :selected => 'Fiança bancária'
@@ -68,9 +68,9 @@ feature "Contracts" do
     click_link 'Criar Contrato'
 
     expect(page).to have_field 'Ano do contrato', :with => "#{Date.current.year}"
-    expect(page).to have_disabled_field 'Número sequencial'
-    expect(page).to_not have_disabled_field 'Contrato principal'
-    expect(page).to have_disabled_field 'Modalidade'
+    expect(page).to have_field 'Número sequencial', disabled: true
+    expect(page).to_not have_field 'Contrato principal', disabled: true
+    expect(page).to have_field 'Modalidade', disabled: true
     expect(page).to have_field 'Contrato principal'
 
     fill_in 'Ano do contrato', :with => '2012'

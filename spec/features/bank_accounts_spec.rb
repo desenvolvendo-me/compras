@@ -12,7 +12,7 @@ feature "BankAccounts", :only_monday do
     click_link 'Criar Conta Bancária'
 
     within_tab 'Principal' do
-      expect(page).to have_disabled_field 'Status'
+      expect(page).to have_field 'Status', disabled: true
       expect(page).to have_select 'Status', :selected => 'Ativo'
       select 'Aplicação', :from => 'Tipo'
       fill_in 'Descrição', :with => 'IPTU'

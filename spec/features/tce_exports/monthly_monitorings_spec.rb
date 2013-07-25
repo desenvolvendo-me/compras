@@ -23,7 +23,7 @@ feature "Monthly Monitoring TCE File" do
     expect(page).to have_checked_field 'Marcar todos'
 
     expect(page).to have_field "Ano da prestação de contas", with: "#{Date.current.year}"
-    expect(page).to have_disabled_field "Código de controle externo da remessa"
+    expect(page).to have_field "Código de controle externo da remessa", disabled: true
     expect(page).to have_content "Arquivos a serem gerados"
     expect(page).to have_content "ABERLIC - Abertura da Licitação"
     expect(page).to have_content "CONTRATOS - Contratos"
@@ -81,11 +81,11 @@ feature "Monthly Monitoring TCE File" do
 
     expect(page).to have_notice "Arquivo encaminhado para geração"
     expect(page).to have_content "Acompanhamento Mensal"
-    expect(page).to have_disabled_field "Mês da prestação de contas"
+    expect(page).to have_field "Mês da prestação de contas", disabled: true
     expect(page).to have_select 'Mês da prestação de contas', selected: "Janeiro"
-    expect(page).to have_disabled_field "Ano da prestação de contas", with: "2013"
+    expect(page).to have_field "Ano da prestação de contas", with: "2013", disabled: true
     expect(page).to have_field "Código de controle externo da remessa", with: "20130000000000000001"
-    expect(page).to have_disabled_field "Situação"
+    expect(page).to have_field "Situação", disabled: true
     expect(page).to have_field "Situação", with: "Em processamento"
     expect(page).not_to have_button "Gerar arquivo"
 

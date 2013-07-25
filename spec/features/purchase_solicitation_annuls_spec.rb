@@ -99,23 +99,23 @@ feature 'PurchaseSolicitationAnnul' do
     expect(page).to have_select 'Status de atendimento', :selected => 'Anulada'
 
     within_tab 'Principal' do
-      expect(page).to have_disabled_field 'Ano'
-      expect(page).to have_disabled_field 'Data da solicitação'
-      expect(page).to have_disabled_field 'Solicitante'
-      expect(page).to have_disabled_field 'Responsável pela solicitação'
-      expect(page).to have_disabled_field 'Justificativa da solicitação'
-      expect(page).to have_disabled_field 'Local para entrega'
-      expect(page).to have_disabled_field 'Tipo de solicitação'
-      expect(page).to have_disabled_field 'Observações gerais'
-      expect(page).to have_disabled_field 'Status de atendimento'
-      expect(page).to have_disabled_field 'Liberação'
-      expect(page).to have_disabled_field 'Por'
-      expect(page).to have_disabled_field 'Observações do atendimento'
-      expect(page).to have_disabled_field 'Justificativa para não atendimento'
+      expect(page).to have_field 'Ano', disabled: true
+      expect(page).to have_field 'Data da solicitação', disabled: true
+      expect(page).to have_field 'Solicitante', disabled: true
+      expect(page).to have_field 'Responsável pela solicitação', disabled: true
+      expect(page).to have_field 'Justificativa da solicitação', disabled: true
+      expect(page).to have_field 'Local para entrega', disabled: true
+      expect(page).to have_field 'Tipo de solicitação', disabled: true
+      expect(page).to have_field 'Observações gerais', disabled: true
+      expect(page).to have_field 'Status de atendimento', disabled: true
+      expect(page).to have_field 'Liberação', disabled: true
+      expect(page).to have_field 'Por', disabled: true
+      expect(page).to have_field 'Observações do atendimento', disabled: true
+      expect(page).to have_field 'Justificativa para não atendimento', disabled: true
     end
 
     within_tab 'Itens' do
-      expect(page).to have_disabled_field 'Valor total dos itens'
+      expect(page).to have_field 'Valor total dos itens', disabled: true
     end
 
     within_tab 'Itens' do
@@ -129,7 +129,7 @@ feature 'PurchaseSolicitationAnnul' do
     end
 
     within_tab 'Dotações orçamentárias' do
-      expect(page).to have_disabled_field 'Dotação'
+      expect(page).to have_field 'Dotação', disabled: true
 
       within_records do
         expect(page).to have_disabled_element 'Remover',
@@ -142,13 +142,13 @@ feature 'PurchaseSolicitationAnnul' do
 
     click_link 'Anulação'
 
-    expect(page).to have_disabled_field 'Responsável'
+    expect(page).to have_field 'Responsável', disabled: true
     expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
 
-    expect(page).to have_disabled_field 'Data'
+    expect(page).to have_field 'Data', disabled: true
     expect(page).to have_field 'Data', :with => '10/06/2012'
 
-    expect(page).to have_disabled_field 'Justificativa'
+    expect(page).to have_field 'Justificativa', disabled: true
     expect(page).to have_field 'Justificativa', :with => 'Foo Bar'
 
     expect(page).to_not have_button 'Salvar'

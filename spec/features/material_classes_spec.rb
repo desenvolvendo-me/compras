@@ -131,10 +131,10 @@ feature "MaterialClasses" do
     expect(page).to_not have_button 'Salvar'
     expect(page).to_not have_link 'Apagar'
 
-    expect(page).to have_disabled_field 'Classe superior', :with => '01.32 - Software'
-    expect(page).to have_disabled_field 'Código', :with => '15'
-    expect(page).to have_disabled_field 'Descrição', :with => 'Software'
-    expect(page).to have_disabled_field 'Detalhamento', :with => 'Softwares de computador'
+    expect(page).to have_field 'Classe superior', :with => '01.32 - Software', disabled: true
+    expect(page).to have_field 'Código', :with => '15', disabled: true
+    expect(page).to have_field 'Descrição', :with => 'Software', disabled: true
+    expect(page).to have_field 'Detalhamento', :with => 'Softwares de computador', disabled: true
   end
 
   scenario 'filter and modal can search class_number with dot' do

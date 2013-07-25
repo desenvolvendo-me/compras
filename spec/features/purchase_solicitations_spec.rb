@@ -94,12 +94,12 @@ feature "PurchaseSolicitations" do
     click_link 'Criar Solicitação de Compra'
 
     within_tab 'Principal' do
-      expect(page).to have_disabled_field 'Código'
-      expect(page).to have_disabled_field 'Liberação'
-      expect(page).to have_disabled_field 'Por'
-      expect(page).to have_disabled_field 'Observações do atendimento'
-      expect(page).to have_disabled_field 'Justificativa para não atendimento'
-      expect(page).to have_disabled_field 'Status de atendimento'
+      expect(page).to have_field 'Código', disabled: true
+      expect(page).to have_field 'Liberação', disabled: true
+      expect(page).to have_field 'Por', disabled: true
+      expect(page).to have_field 'Observações do atendimento', disabled: true
+      expect(page).to have_field 'Justificativa para não atendimento', disabled: true
+      expect(page).to have_field 'Status de atendimento', disabled: true
 
       fill_in 'Ano', :with => '2012'
       fill_in 'Data da solicitação', :with => '01/02/2012'
@@ -115,30 +115,30 @@ feature "PurchaseSolicitations" do
       fill_with_autocomplete 'Material', :with => 'Antivirus'
 
       # getting data from modal
-      expect(page).to have_disabled_field 'Unidade', :with => 'UN'
+      expect(page).to have_field 'Unidade', :with => 'UN', disabled: true
 
       fill_in 'Marca/Referência', :with => 'Norton'
       fill_in 'Quantidade', :with => '2,22'
       fill_in 'Valor unitário', :with => '0,22'
 
       # asserting calculated total price of the item
-      expect(page).to have_disabled_field 'Valor total', :with => '0,49'
+      expect(page).to have_field 'Valor total', :with => '0,49', disabled: true
 
       click_button 'Adicionar'
 
       fill_with_autocomplete 'Material', :with => 'Office'
 
       # getting data from modal
-      expect(page).to have_disabled_field 'Unidade', :with => 'UN'
+      expect(page).to have_field 'Unidade', :with => 'UN', disabled: true
 
       fill_in 'Marca/Referência', :with => 'MS Office'
       fill_in 'Quantidade', :with => '0,12'
       fill_in 'Valor unitário', :with => '121,22'
 
       # asserting calculated unit price of the item
-      expect(page).to have_disabled_field 'Valor total', :with => '14,55'
+      expect(page).to have_field 'Valor total', :with => '14,55', disabled: true
 
-      expect(page).to have_disabled_field 'Valor total dos itens', :with => '15,04'
+      expect(page).to have_field 'Valor total dos itens', :with => '15,04', disabled: true
 
       click_button 'Adicionar'
 
@@ -215,7 +215,7 @@ feature "PurchaseSolicitations" do
 
     within_tab 'Itens' do
 
-      expect(page).to have_disabled_field 'Valor total dos itens', :with => '15,04'
+      expect(page).to have_field 'Valor total dos itens', :with => '15,04', disabled: true
 
       within_records do
         expect(page).to have_content '01.01.00001 - Antivirus'
@@ -268,7 +268,7 @@ feature "PurchaseSolicitations" do
     expect(page).to have_subtitle '1/2012'
 
     expect(page).to_not have_link 'Apagar'
-    expect(page).to have_disabled_field 'Ano'
+    expect(page).to have_field 'Ano', disabled: true
 
     within_tab 'Principal' do
       fill_in 'Data da solicitação', :with => '01/02/2013'
@@ -284,16 +284,16 @@ feature "PurchaseSolicitations" do
       fill_with_autocomplete 'Material', :with => 'Arame farpado'
 
       # getting data from modal
-      expect(page).to have_disabled_field 'Unidade', :with => 'UN'
+      expect(page).to have_field 'Unidade', :with => 'UN', disabled: true
 
       fill_in 'Marca/Referência', :with => 'Ferro SA'
       fill_in 'Quantidade', :with => '200,00'
       fill_in 'Valor unitário', :with => '25,00'
 
       # asserting calculated unit price of the item
-      expect(page).to have_disabled_field 'Valor total', :with => '5.000,00'
+      expect(page).to have_field 'Valor total', :with => '5.000,00', disabled: true
 
-      expect(page).to have_disabled_field 'Valor total dos itens', :with => '5.600,00'
+      expect(page).to have_field 'Valor total dos itens', :with => '5.600,00', disabled: true
 
       click_button 'Adicionar'
 
@@ -317,7 +317,7 @@ feature "PurchaseSolicitations" do
         end
       end
 
-      expect(page).to have_disabled_field 'Valor total dos itens', :with => '5.600,00'
+      expect(page).to have_field 'Valor total dos itens', :with => '5.600,00', disabled: true
     end
 
     within_tab 'Dotações orçamentárias' do
@@ -344,7 +344,7 @@ feature "PurchaseSolicitations" do
 
     within_tab 'Principal' do
       expect(page).to have_field 'Código', :with => '1'
-      expect(page).to have_disabled_field 'Ano', :with => '2012'
+      expect(page).to have_field 'Ano', :with => '2012', disabled: true
       expect(page).to have_field 'Data da solicitação', :with => '01/02/2013'
       expect(page).to have_field 'Responsável pela solicitação', :with => 'Wenderson Malheiros'
       expect(page).to have_field 'Solicitante', :with => '1 - Secretaria de Educação'
@@ -375,7 +375,7 @@ feature "PurchaseSolicitations" do
         end
       end
 
-      expect(page).to have_disabled_field 'Valor total dos itens', :with => '5.600,00'
+      expect(page).to have_field 'Valor total dos itens', :with => '5.600,00', disabled: true
     end
 
     within_tab 'Dotações orçamentárias' do
@@ -431,13 +431,13 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Itens' do
-      expect(page).to have_disabled_field 'Valor total dos itens'
+      expect(page).to have_field 'Valor total dos itens', disabled: true
 
       fill_with_autocomplete 'Material', :with => 'Antivirus'
       fill_in 'Quantidade', :with => '3,00'
       fill_in 'Valor unitário', :with => '10,00'
 
-      expect(page).to have_disabled_field 'Valor total', :with => '30,00'
+      expect(page).to have_field 'Valor total', :with => '30,00', disabled: true
 
       click_button 'Adicionar'
 
@@ -832,14 +832,14 @@ feature "PurchaseSolicitations" do
       fill_with_autocomplete 'Material', :with => 'Antivirus'
 
       # getting data from modal
-      expect(page).to have_disabled_field 'Unidade', :with => 'UN'
+      expect(page).to have_field 'Unidade', :with => 'UN', disabled: true
 
       fill_in 'Marca/Referência', :with => 'Norton'
       fill_in 'Quantidade', :with => '3,50'
       fill_in 'Valor unitário', :with => '200,00'
 
       # asserting calculated total price of the item
-      expect(page).to have_disabled_field 'Valor total', :with => '700,00'
+      expect(page).to have_field 'Valor total', :with => '700,00', disabled: true
 
       click_button 'Adicionar'
 

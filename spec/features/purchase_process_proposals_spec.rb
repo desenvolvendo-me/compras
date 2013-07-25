@@ -70,19 +70,19 @@ feature 'PurchaseProcessProposals' do
     expect(page).to have_content 'Criar Proposta Comercial'
     expect(page).to have_content 'Fornecedor Gabriel Sobrinho - Processo 1/2012 - Pregão 1'
 
-    expect(page).to have_disabled_field 'Valor total da proposta', with: '0,00'
-    expect(page).to have_disabled_field 'Lote', with: '2050'
-    expect(page).to have_disabled_field 'Item', with: '1'
-    expect(page).to have_disabled_field 'Material', with: '01.01.00001 - Antivirus'
-    expect(page).to have_disabled_field 'Unidade', with: 'UN'
-    expect(page).to have_disabled_field 'Quantidade', with: '2'
-    expect(page).to have_disabled_field 'Preço total', with: '0,00'
+    expect(page).to have_field 'Valor total da proposta', with: '0,00', disabled: true
+    expect(page).to have_field 'Lote', with: '2050', disabled: true
+    expect(page).to have_field 'Item', with: '1', disabled: true
+    expect(page).to have_field 'Material', with: '01.01.00001 - Antivirus', disabled: true
+    expect(page).to have_field 'Unidade', with: 'UN', disabled: true
+    expect(page).to have_field 'Quantidade', with: '2', disabled: true
+    expect(page).to have_field 'Preço total', with: '0,00', disabled: true
 
     fill_in 'Prazo de entrega', with: '10/05/2013'
     fill_in 'Preço unitário', with: '50,20'
 
-    expect(page).to have_disabled_field 'Valor total da proposta', with: '100,40'
-    expect(page).to have_disabled_field 'Preço total', with: '100,40'
+    expect(page).to have_field 'Valor total da proposta', with: '100,40', disabled: true
+    expect(page).to have_field 'Preço total', with: '100,40', disabled: true
 
     click_button 'Salvar'
 
@@ -142,14 +142,14 @@ feature 'PurchaseProcessProposals' do
     expect(page).to have_content 'Editar Proposta Comercial'
     expect(page).to have_content 'Fornecedor Gabriel Sobrinho - Processo 1/2012 - Pregão 1'
 
-    expect(page).to have_disabled_field 'Valor total da proposta', with: '100,40'
-    expect(page).to have_disabled_field 'Lote', with: '2050'
-    expect(page).to have_disabled_field 'Item', with: '1'
-    expect(page).to have_disabled_field 'Material', with: '01.01.00001 - Antivirus'
-    expect(page).to have_disabled_field 'Unidade', with: 'UN'
-    expect(page).to have_disabled_field 'Quantidade', with: '2'
-    expect(page).to have_disabled_field 'Preço total', with: '100,40'
-    expect(page).to have_disabled_field 'Valor total da proposta', with: '100,40'
+    expect(page).to have_field 'Valor total da proposta', with: '100,40', disabled: true
+    expect(page).to have_field 'Lote', with: '2050', disabled: true
+    expect(page).to have_field 'Item', with: '1', disabled: true
+    expect(page).to have_field 'Material', with: '01.01.00001 - Antivirus', disabled: true
+    expect(page).to have_field 'Unidade', with: 'UN', disabled: true
+    expect(page).to have_field 'Quantidade', with: '2', disabled: true
+    expect(page).to have_field 'Preço total', with: '100,40', disabled: true
+    expect(page).to have_field 'Valor total da proposta', with: '100,40', disabled: true
 
     expect(page).to have_field 'Marca', with: 'Tabajara'
     expect(page).to have_field 'Prazo de entrega', with: '10/05/2013'
@@ -212,15 +212,15 @@ feature 'PurchaseProcessProposals' do
 
     expect(page).to have_content 'Criar Proposta Comercial'
 
-    expect(page).to have_disabled_field 'Valor total da proposta', with: '0,00'
+    expect(page).to have_field 'Valor total da proposta', with: '0,00', disabled: true
 
     within :xpath, first_lot_div do
-      expect(page).to have_disabled_field 'Lote', with: '2050'
+      expect(page).to have_field 'Lote', with: '2050', disabled: true
       expect(page).to have_field 'Preço unitário', with: '0,00'
     end
 
     within :xpath, last_lot_div do
-      expect(page).to have_disabled_field 'Lote', with: '10'
+      expect(page).to have_field 'Lote', with: '10', disabled: true
       expect(page).to have_field 'Preço unitário', with: '0,00'
     end
 
@@ -228,7 +228,7 @@ feature 'PurchaseProcessProposals' do
       fill_in 'Preço unitário', with: '50,20'
     end
 
-    expect(page).to have_disabled_field 'Valor total da proposta', with: '50,20'
+    expect(page).to have_field 'Valor total da proposta', with: '50,20', disabled: true
 
     within :xpath, last_lot_div do
       fill_in 'Preço unitário', with: ''
@@ -242,7 +242,7 @@ feature 'PurchaseProcessProposals' do
       fill_in 'Preço unitário', with: '100,00'
     end
 
-    expect(page).to have_disabled_field 'Valor total da proposta', with: '150,20'
+    expect(page).to have_field 'Valor total da proposta', with: '150,20', disabled: true
 
     click_button 'Salvar'
 
@@ -272,15 +272,15 @@ feature 'PurchaseProcessProposals' do
 
     expect(page).to have_content 'Editar Proposta Comercial'
 
-    expect(page).to have_disabled_field 'Valor total da proposta', with: '150,20'
+    expect(page).to have_field 'Valor total da proposta', with: '150,20', disabled: true
 
     within :xpath, first_lot_div do
-      expect(page).to have_disabled_field 'Lote', with: '2050'
+      expect(page).to have_field 'Lote', with: '2050', disabled: true
       expect(page).to have_field 'Preço unitário', with: '50,20'
     end
 
     within :xpath, last_lot_div do
-      expect(page).to have_disabled_field 'Lote', with: '10'
+      expect(page).to have_field 'Lote', with: '10', disabled: true
       expect(page).to have_field 'Preço unitário', with: '100,00'
       fill_in 'Preço unitário', with: ''
     end
@@ -309,15 +309,15 @@ feature 'PurchaseProcessProposals' do
 
     expect(page).to have_content 'Criar Proposta Comercial'
 
-    expect(page).to have_disabled_field 'Valor total da proposta', with: '0,00'
+    expect(page).to have_field 'Valor total da proposta', with: '0,00', disabled: true
 
     within :xpath, first_lot_div do
-      expect(page).to have_disabled_field 'Lote', with: '2050'
+      expect(page).to have_field 'Lote', with: '2050', disabled: true
       expect(page).to have_field 'Preço unitário', with: '0,00'
     end
 
     within :xpath, last_lot_div do
-      expect(page).to have_disabled_field 'Lote', with: '10'
+      expect(page).to have_field 'Lote', with: '10', disabled: true
       expect(page).to have_field 'Preço unitário', with: '0,00'
     end
   end
@@ -473,17 +473,17 @@ feature 'PurchaseProcessProposals' do
     expect(page).to have_subtitle '1/2012 - Pregão 1'
 
     within 'div#tied_creditor_proposals' do
-      expect(page).to have_disabled_field 'Item/Lote', with: '01.01.00001 - Antivirus'
+      expect(page).to have_field 'Item/Lote', with: '01.01.00001 - Antivirus', disabled: true
 
       within 'div.creditor_proposal_rankings' do
-        expect(page).to have_disabled_field 'Credor', with: 'Gabriel Sobrinho'
-        expect(page).to have_disabled_field 'Preço unitário', with: '50,20'
+        expect(page).to have_field 'Credor', with: 'Gabriel Sobrinho', disabled: true
+        expect(page).to have_field 'Preço unitário', with: '50,20', disabled: true
         expect(page).to have_select 'Posição', options: ['1', '2'], selected: '1'
       end
 
       within 'div.creditor_proposal_rankings:last' do
-        expect(page).to have_disabled_field 'Credor', with: 'Wenderson Malheiros'
-        expect(page).to have_disabled_field 'Preço unitário', with: '50,20'
+        expect(page).to have_field 'Credor', with: 'Wenderson Malheiros', disabled: true
+        expect(page).to have_field 'Preço unitário', with: '50,20', disabled: true
         expect(page).to have_select 'Posição', options: ['1', '2'], selected: '1'
       end
     end

@@ -49,17 +49,17 @@ feature "JudgmentCommissionAdvices" do
       fill_modal 'Comissão julgadora', :with => '20/03/2012', :field => 'Data da nomeação'
 
       # testing delegated president name from licitation commission
-      expect(page).to have_disabled_field 'Presidente da comissão'
+      expect(page).to have_field 'Presidente da comissão', disabled: true
       expect(page).to have_field 'Presidente da comissão', :with => 'Wenderson Malheiros'
     end
 
     within_tab 'Membros' do
       # Verifying member that comes from Licitation Commission
-      expect(page).to have_disabled_field 'Membro'
-      expect(page).to have_disabled_field 'CPF'
-      expect(page).to have_disabled_field 'Função'
-      expect(page).to have_disabled_field 'Natureza do cargo'
-      expect(page).to have_disabled_field 'Matrícula'
+      expect(page).to have_field 'Membro', disabled: true
+      expect(page).to have_field 'CPF', disabled: true
+      expect(page).to have_field 'Função', disabled: true
+      expect(page).to have_field 'Natureza do cargo', disabled: true
+      expect(page).to have_field 'Matrícula', disabled: true
 
       expect(page).to have_field 'Membro', :with => 'Wenderson Malheiros'
       expect(page).to have_field 'CPF', :with => '003.149.513-34'
@@ -103,11 +103,11 @@ feature "JudgmentCommissionAdvices" do
 
     within_tab 'Membros' do
       # Verifying member that comes from Licitation Commission
-      expect(page).to have_disabled_field 'Membro'
-      expect(page).to have_disabled_field 'CPF'
-      expect(page).to have_disabled_field 'Função'
-      expect(page).to have_disabled_field 'Natureza do cargo'
-      expect(page).to have_disabled_field 'Matrícula'
+      expect(page).to have_field 'Membro', disabled: true
+      expect(page).to have_field 'CPF', disabled: true
+      expect(page).to have_field 'Função', disabled: true
+      expect(page).to have_field 'Natureza do cargo', disabled: true
+      expect(page).to have_field 'Matrícula', disabled: true
 
       expect(page).to have_field 'Membro', :with => 'Wenderson Malheiros'
       expect(page).to have_field 'CPF', :with => '003.149.513-34'
@@ -208,11 +208,11 @@ feature "JudgmentCommissionAdvices" do
 
       fill_modal 'Membro', :with => 'Wenderson Malheiros'
 
-      expect(page).to have_disabled_field 'CPF'
+      expect(page).to have_field 'CPF', disabled: true
       expect(page).to have_field 'CPF', :with => '003.149.513-34'
 
       clear_modal 'Membro'
-      expect(page).to have_disabled_field 'CPF'
+      expect(page).to have_field 'CPF', disabled: true
       expect(page).to have_field 'CPF', :with => ''
     end
   end

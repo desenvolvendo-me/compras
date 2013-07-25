@@ -69,25 +69,25 @@ feature "SupplyOrder" do
       click_record 'Wenderson Malheiros'
     end
 
-    expect(page).to have_disabled_field 'Modalidade', with: '1 - Concorrência'
+    expect(page).to have_field 'Modalidade', with: '1 - Concorrência', disabled: true
 
     fill_in 'Data da autorização', with: I18n.l(Date.new(2013, 12, 13))
 
     within :xpath, first_div_path do
-      expect(page).to have_disabled_field 'Material', with: '02.02.00002 - Arame comum'
-      expect(page).to have_disabled_field 'Unidade', with: 'UN'
-      expect(page).to have_disabled_field 'Valor', with: '2,99'
-      expect(page).to have_disabled_field 'Valor já autorizado', with: '0,00'
-      expect(page).to have_disabled_field 'Saldo', with: '2,99'
+      expect(page).to have_field 'Material', with: '02.02.00002 - Arame comum', disabled: true
+      expect(page).to have_field 'Unidade', with: 'UN', disabled: true
+      expect(page).to have_field 'Valor', with: '2,99', disabled: true
+      expect(page).to have_field 'Valor já autorizado', with: '0,00', disabled: true
+      expect(page).to have_field 'Saldo', with: '2,99', disabled: true
       expect(page).to have_field 'Valor a autorizar', with: ''
     end
 
     within :xpath, last_div_path do
-      expect(page).to have_disabled_field 'Material', with: '02.02.00001 - Arame farpado'
-      expect(page).to have_disabled_field 'Unidade', with: 'UN'
-      expect(page).to have_disabled_field 'Quantidade', with: '2'
-      expect(page).to have_disabled_field 'Qtde já autorizada', with: '0'
-      expect(page).to have_disabled_field 'Saldo', with: '2'
+      expect(page).to have_field 'Material', with: '02.02.00001 - Arame farpado', disabled: true
+      expect(page).to have_field 'Unidade', with: 'UN', disabled: true
+      expect(page).to have_field 'Quantidade', with: '2', disabled: true
+      expect(page).to have_field 'Qtde já autorizada', with: '0', disabled: true
+      expect(page).to have_field 'Saldo', with: '2', disabled: true
       expect(page).to have_field 'Qtde a autorizar', with: ''
     end
 
@@ -131,24 +131,24 @@ feature "SupplyOrder" do
     click_link 'Wenderson Malheiros'
 
     expect(page).to have_field 'Fornecedor', with: 'Wenderson Malheiros'
-    expect(page).to have_disabled_field 'Modalidade', with: '1 - Concorrência'
+    expect(page).to have_field 'Modalidade', with: '1 - Concorrência', disabled: true
     expect(page).to have_field 'Data da autorização', with: '13/12/2013'
 
     within :xpath, first_div_path do
-      expect(page).to have_disabled_field 'Material', with: '02.02.00002 - Arame comum'
-      expect(page).to have_disabled_field 'Unidade', with: 'UN'
-      expect(page).to have_disabled_field 'Valor', with: '2,99'
-      expect(page).to have_disabled_field 'Valor já autorizado', with: '2,99'
-      expect(page).to have_disabled_field 'Saldo', with: '0,00'
+      expect(page).to have_field 'Material', with: '02.02.00002 - Arame comum', disabled: true
+      expect(page).to have_field 'Unidade', with: 'UN', disabled: true
+      expect(page).to have_field 'Valor', with: '2,99', disabled: true
+      expect(page).to have_field 'Valor já autorizado', with: '2,99', disabled: true
+      expect(page).to have_field 'Saldo', with: '0,00', disabled: true
       expect(page).to have_field 'Valor a autorizar', with: '2,99'
     end
 
     within :xpath, last_div_path do
-      expect(page).to have_disabled_field 'Material', with: '02.02.00001 - Arame farpado'
-      expect(page).to have_disabled_field 'Unidade', with: 'UN'
-      expect(page).to have_disabled_field 'Quantidade', with: '2'
-      expect(page).to have_disabled_field 'Qtde já autorizada', with: '2'
-      expect(page).to have_disabled_field 'Saldo', with: '0'
+      expect(page).to have_field 'Material', with: '02.02.00001 - Arame farpado', disabled: true
+      expect(page).to have_field 'Unidade', with: 'UN', disabled: true
+      expect(page).to have_field 'Quantidade', with: '2', disabled: true
+      expect(page).to have_field 'Qtde já autorizada', with: '2', disabled: true
+      expect(page).to have_field 'Saldo', with: '0', disabled: true
       expect(page).to have_field 'Qtde a autorizar', with: '2'
     end
 
@@ -167,23 +167,23 @@ feature "SupplyOrder" do
     expect(page).to have_field 'Fornecedor', with: 'Wenderson Malheiros'
     expect(page).to have_field 'Data da autorização', with: '15/12/2013'
     expect(page).to have_field 'Empenho', with: '1'
-    expect(page).to have_disabled_field 'Modalidade', with: '1 - Concorrência'
+    expect(page).to have_field 'Modalidade', with: '1 - Concorrência', disabled: true
 
     within :xpath, first_div_path do
-      expect(page).to have_disabled_field 'Material', with: '02.02.00002 - Arame comum'
-      expect(page).to have_disabled_field 'Unidade', with: 'UN'
-      expect(page).to have_disabled_field 'Valor', with: '2,99'
-      expect(page).to have_disabled_field 'Valor já autorizado', with: '2,99'
-      expect(page).to have_disabled_field 'Saldo', with: '0,00'
+      expect(page).to have_field 'Material', with: '02.02.00002 - Arame comum', disabled: true
+      expect(page).to have_field 'Unidade', with: 'UN', disabled: true
+      expect(page).to have_field 'Valor', with: '2,99', disabled: true
+      expect(page).to have_field 'Valor já autorizado', with: '2,99', disabled: true
+      expect(page).to have_field 'Saldo', with: '0,00', disabled: true
       expect(page).to have_field 'Valor a autorizar', with: '2,99'
     end
 
     within :xpath, last_div_path do
-      expect(page).to have_disabled_field 'Material', with: '02.02.00001 - Arame farpado'
-      expect(page).to have_disabled_field 'Unidade', with: 'UN'
-      expect(page).to have_disabled_field 'Quantidade', with: '2'
-      expect(page).to have_disabled_field 'Qtde já autorizada', with: '1'
-      expect(page).to have_disabled_field 'Saldo', with: '1'
+      expect(page).to have_field 'Material', with: '02.02.00001 - Arame farpado', disabled: true
+      expect(page).to have_field 'Unidade', with: 'UN', disabled: true
+      expect(page).to have_field 'Quantidade', with: '2', disabled: true
+      expect(page).to have_field 'Qtde já autorizada', with: '1', disabled: true
+      expect(page).to have_field 'Saldo', with: '1', disabled: true
       expect(page).to have_field 'Qtde a autorizar', with: '1'
     end
 

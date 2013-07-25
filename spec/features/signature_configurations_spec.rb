@@ -35,7 +35,7 @@ feature "SignatureConfigurations" do
     expect(page).to have_select 'Relatório', :selected => 'Autorizações de Fornecimento'
     expect(page).to have_field 'Assinatura', :with => 'Gabriel Sobrinho'
     expect(page).to have_field 'Ordem', :with => '1'
-    expect(page).to have_disabled_field 'Cargo'
+    expect(page).to have_field 'Cargo', disabled: true
     expect(page).to have_field 'Cargo', :with => 'Gerente'
 
     fill_in 'Ordem', :with => '2'
@@ -54,7 +54,7 @@ feature "SignatureConfigurations" do
 
     expect(page).to have_select 'Relatório', :selected => 'Autorizações de Fornecimento'
     expect(page).to have_field 'Assinatura', :with => 'Wenderson Malheiros'
-    expect(page).to have_disabled_field 'Cargo'
+    expect(page).to have_field 'Cargo', disabled: true
     expect(page).to have_field 'Ordem', :with => '2'
 
     click_link 'Apagar'
@@ -104,7 +104,7 @@ feature "SignatureConfigurations" do
       click_record 'Gerente'
     end
 
-    expect(page).to have_disabled_field 'Cargo'
+    expect(page).to have_field 'Cargo', disabled: true
     expect(page).to have_field 'Cargo', :with => 'Gerente'
 
     clear_modal 'Assinatura'

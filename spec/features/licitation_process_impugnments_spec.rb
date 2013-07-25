@@ -41,9 +41,9 @@ feature "LicitationProcessImpugnments" do
     expect(page).to have_field 'Autor', :with => 'Gabriel Sobrinho'
     expect(page).to have_field 'Motivo fundamentado da impugnação', :with => 'Não há a necessidade de comprar cadeiras.'
     expect(page).to have_select 'Situação', :selected => 'Pendente'
-    expect(page).to have_disabled_field 'Data do julgamento'
+    expect(page).to have_field 'Data do julgamento', disabled: true
     expect(page).to have_field 'Data do julgamento', :with => ''
-    expect(page).to have_disabled_field 'Observação'
+    expect(page).to have_field 'Observação', disabled: true
     expect(page).to have_field 'Observação', :with => ''
     expect(page).to have_field 'Data do recebimento dos envelopes', :with => I18n.l(Date.current)
     expect(page).to have_field 'Hora do recebimento', :with => '14:00'
@@ -67,9 +67,9 @@ feature "LicitationProcessImpugnments" do
     expect(page).to have_select 'Referente ao', :selected => 'Edital'
     expect(page).to have_field 'Autor', :with => 'Gabriel Sobrinho'
     expect(page).to have_field 'Motivo fundamentado da impugnação', :with => 'Não há a necessidade de comprar cadeiras e mesas.'
-    expect(page).to have_disabled_field 'Data do julgamento'
+    expect(page).to have_field 'Data do julgamento', disabled: true
     expect(page).to have_field 'Data do julgamento', :with => ''
-    expect(page).to have_disabled_field 'Observação'
+    expect(page).to have_field 'Observação', disabled: true
     expect(page).to have_field 'Observação', :with => ''
     expect(page).to have_field 'Data do recebimento dos envelopes', :with => I18n.l(Date.current)
     expect(page).to have_field 'Hora do recebimento', :with => '14:00'
@@ -86,17 +86,17 @@ feature "LicitationProcessImpugnments" do
       click_link '1/2012 - Concorrência 1 - 01/04/2012'
     end
 
-    expect(page).to have_disabled_field 'Processo de compra'
-    expect(page).to have_disabled_field 'Data da impugnação'
-    expect(page).to have_disabled_field 'Referente ao'
-    expect(page).to have_disabled_field 'Autor'
-    expect(page).to have_disabled_field 'Motivo fundamentado da impugnação'
-    expect(page).to have_disabled_field 'Data do julgamento'
-    expect(page).to have_disabled_field 'Observação'
-    expect(page).to have_disabled_field 'Data do recebimento dos envelopes'
-    expect(page).to have_disabled_field 'Hora do recebimento'
-    expect(page).to have_disabled_field 'Abertura das propostas'
-    expect(page).to have_disabled_field 'Hora da abertura'
+    expect(page).to have_field 'Processo de compra', disabled: true
+    expect(page).to have_field 'Data da impugnação', disabled: true
+    expect(page).to have_field 'Referente ao', disabled: true
+    expect(page).to have_field 'Autor', disabled: true
+    expect(page).to have_field 'Motivo fundamentado da impugnação', disabled: true
+    expect(page).to have_field 'Data do julgamento', disabled: true
+    expect(page).to have_field 'Observação', disabled: true
+    expect(page).to have_field 'Data do recebimento dos envelopes', disabled: true
+    expect(page).to have_field 'Hora do recebimento', disabled: true
+    expect(page).to have_field 'Abertura das propostas', disabled: true
+    expect(page).to have_field 'Hora da abertura', disabled: true
 
     expect(page).to have_disabled_element 'Salvar', :reason => 'permitido alterar somente em situação pendente'
   end

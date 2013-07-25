@@ -84,12 +84,12 @@ feature "RealignmentPrices" do
       end
     end
 
-    expect(page).to have_disabled_field "Valor total da proposta/lance", with: "200,00"
-    expect(page).to have_disabled_field "Diferença", with: "200,00"
+    expect(page).to have_field "Valor total da proposta/lance", with: "200,00", disabled: true
+    expect(page).to have_field "Diferença", with: "200,00", disabled: true
 
     within '#items .nested-realignment_price_items:first' do
-      expect(page).to have_disabled_field 'Item', with: '02.02.00002 - Arame comum'
-      expect(page).to have_disabled_field 'Quantidade', with: '1'
+      expect(page).to have_field 'Item', with: '02.02.00002 - Arame comum', disabled: true
+      expect(page).to have_field 'Quantidade', with: '1', disabled: true
 
       fill_in 'Marca', with: 'Comum'
       fill_in 'Valor', with: '100,00'
@@ -97,8 +97,8 @@ feature "RealignmentPrices" do
     end
 
     within '#items .nested-realignment_price_items:last' do
-      expect(page).to have_disabled_field 'Item', with: '02.02.00001 - Arame farpado'
-      expect(page).to have_disabled_field 'Quantidade', with: '2'
+      expect(page).to have_field 'Item', with: '02.02.00001 - Arame farpado', disabled: true
+      expect(page).to have_field 'Quantidade', with: '2', disabled: true
 
       fill_in 'Marca', with: 'Farpado'
       fill_in 'Valor', with: '50,00'
@@ -124,12 +124,12 @@ feature "RealignmentPrices" do
       end
     end
 
-    expect(page).to have_disabled_field "Valor total da proposta/lance", with: "100,00"
-    expect(page).to have_disabled_field "Diferença", with: "100,00"
+    expect(page).to have_field "Valor total da proposta/lance", with: "100,00", disabled: true
+    expect(page).to have_field "Diferença", with: "100,00", disabled: true
 
     within '#items .nested-realignment_price_items:first' do
-      expect(page).to have_disabled_field 'Item', with: '01.01.00001 - Antivirus'
-      expect(page).to have_disabled_field 'Quantidade', with: '2'
+      expect(page).to have_field 'Item', with: '01.01.00001 - Antivirus', disabled: true
+      expect(page).to have_field 'Quantidade', with: '2', disabled: true
 
       fill_in 'Marca', with: 'Antivirus'
       fill_in 'Valor', with: '50,00'
@@ -155,12 +155,12 @@ feature "RealignmentPrices" do
       end
     end
 
-    expect(page).to have_disabled_field "Valor total da proposta/lance", with: "100,00"
-    expect(page).to have_disabled_field "Diferença", with: "0,00"
+    expect(page).to have_field "Valor total da proposta/lance", with: "100,00", disabled: true
+    expect(page).to have_field "Diferença", with: "0,00", disabled: true
 
     within '#items .nested-realignment_price_items:first' do
-      expect(page).to have_disabled_field 'Item', with: '01.01.00001 - Antivirus'
-      expect(page).to have_disabled_field 'Quantidade', with: '2'
+      expect(page).to have_field 'Item', with: '01.01.00001 - Antivirus', disabled: true
+      expect(page).to have_field 'Quantidade', with: '2', disabled: true
 
       expect(page).to have_field 'Marca', with: 'Antivirus'
       expect(page).to have_field 'Valor', with: '50,00'
@@ -182,12 +182,12 @@ feature "RealignmentPrices" do
       end
     end
 
-    expect(page).to have_disabled_field "Valor total da proposta/lance", with: "100,00"
-    expect(page).to have_disabled_field "Diferença", with: "0,00"
+    expect(page).to have_field "Valor total da proposta/lance", with: "100,00", disabled: true
+    expect(page).to have_field "Diferença", with: "0,00", disabled: true
 
     within '#items .nested-realignment_price_items:first' do
-      expect(page).to have_disabled_field 'Item', with: '01.01.00001 - Antivirus'
-      expect(page).to have_disabled_field 'Quantidade', with: '2'
+      expect(page).to have_field 'Item', with: '01.01.00001 - Antivirus', disabled: true
+      expect(page).to have_field 'Quantidade', with: '2', disabled: true
 
       expect(page).to have_field 'Marca', with: 'Antivirus'
       expect(page).to have_field 'Valor', with: '50,00'
@@ -243,12 +243,12 @@ feature "RealignmentPrices" do
       end
     end
 
-    expect(page).to have_disabled_field "Valor total da proposta/lance", with: "300,00"
-    expect(page).to have_disabled_field "Diferença", with: "300,00"
+    expect(page).to have_field "Valor total da proposta/lance", with: "300,00", disabled: true
+    expect(page).to have_field "Diferença", with: "300,00", disabled: true
 
     within '#items .nested-realignment_price_items:nth-child(1)' do
-      expect(page).to have_disabled_field 'Item', with: '02.02.00002 - Arame comum'
-      expect(page).to have_disabled_field 'Quantidade', with: '1'
+      expect(page).to have_field 'Item', with: '02.02.00002 - Arame comum', disabled: true
+      expect(page).to have_field 'Quantidade', with: '1', disabled: true
 
       fill_in 'Marca', with: 'Comum'
       fill_in 'Valor', with: '100,00'
@@ -256,8 +256,8 @@ feature "RealignmentPrices" do
     end
 
     within '#items .nested-realignment_price_items:nth-child(2)' do
-      expect(page).to have_disabled_field 'Item', with: '02.02.00001 - Arame farpado'
-      expect(page).to have_disabled_field 'Quantidade', with: '2'
+      expect(page).to have_field 'Item', with: '02.02.00001 - Arame farpado', disabled: true
+      expect(page).to have_field 'Quantidade', with: '2', disabled: true
 
       fill_in 'Marca', with: 'Farpado'
       fill_in 'Valor', with: '50,00'
@@ -265,8 +265,8 @@ feature "RealignmentPrices" do
     end
 
     within '#items .nested-realignment_price_items:nth-child(3)' do
-      expect(page).to have_disabled_field 'Item', with: '01.01.00001 - Antivirus'
-      expect(page).to have_disabled_field 'Quantidade', with: '2'
+      expect(page).to have_field 'Item', with: '01.01.00001 - Antivirus', disabled: true
+      expect(page).to have_field 'Quantidade', with: '2', disabled: true
 
       fill_in 'Marca', with: 'Antivirus'
       fill_in 'Valor', with: '50,00'
@@ -284,8 +284,8 @@ feature "RealignmentPrices" do
     end
 
     within '#items .nested-realignment_price_items:nth-child(1)' do
-      expect(page).to have_disabled_field 'Item', with: '02.02.00002 - Arame comum'
-      expect(page).to have_disabled_field 'Quantidade', with: '1'
+      expect(page).to have_field 'Item', with: '02.02.00002 - Arame comum', disabled: true
+      expect(page).to have_field 'Quantidade', with: '1', disabled: true
 
       expect(page).to have_field 'Marca', with: 'Comum'
       expect(page).to have_field 'Valor', with: '100,00'
@@ -293,8 +293,8 @@ feature "RealignmentPrices" do
     end
 
     within '#items .nested-realignment_price_items:nth-child(2)' do
-      expect(page).to have_disabled_field 'Item', with: '02.02.00001 - Arame farpado'
-      expect(page).to have_disabled_field 'Quantidade', with: '2'
+      expect(page).to have_field 'Item', with: '02.02.00001 - Arame farpado', disabled: true
+      expect(page).to have_field 'Quantidade', with: '2', disabled: true
 
       expect(page).to have_field 'Marca', with: 'Farpado'
       expect(page).to have_field 'Valor', with: '50,00'
@@ -302,8 +302,8 @@ feature "RealignmentPrices" do
     end
 
     within '#items .nested-realignment_price_items:nth-child(3)' do
-      expect(page).to have_disabled_field 'Item', with: '01.01.00001 - Antivirus'
-      expect(page).to have_disabled_field 'Quantidade', with: '2'
+      expect(page).to have_field 'Item', with: '01.01.00001 - Antivirus', disabled: true
+      expect(page).to have_field 'Quantidade', with: '2', disabled: true
 
       expect(page).to have_field 'Marca', with: 'Antivirus'
       expect(page).to have_field 'Valor', with: '50,00'
@@ -409,12 +409,12 @@ feature "RealignmentPrices" do
       end
     end
 
-    expect(page).to have_disabled_field "Valor total da proposta/lance", with: "200,00"
-    expect(page).to have_disabled_field "Diferença", with: "200,00"
+    expect(page).to have_field "Valor total da proposta/lance", with: "200,00", disabled: true
+    expect(page).to have_field "Diferença", with: "200,00", disabled: true
 
     within '#items .nested-realignment_price_items:first' do
-      expect(page).to have_disabled_field 'Item', with: '02.02.00002 - Arame comum'
-      expect(page).to have_disabled_field 'Quantidade', with: '1'
+      expect(page).to have_field 'Item', with: '02.02.00002 - Arame comum', disabled: true
+      expect(page).to have_field 'Quantidade', with: '1', disabled: true
 
       fill_in 'Marca', with: 'Comum'
       fill_in 'Valor', with: '100,00'
@@ -422,8 +422,8 @@ feature "RealignmentPrices" do
     end
 
     within '#items .nested-realignment_price_items:last' do
-      expect(page).to have_disabled_field 'Item', with: '02.02.00001 - Arame farpado'
-      expect(page).to have_disabled_field 'Quantidade', with: '2'
+      expect(page).to have_field 'Item', with: '02.02.00001 - Arame farpado', disabled: true
+      expect(page).to have_field 'Quantidade', with: '2', disabled: true
 
       fill_in 'Marca', with: 'Farpado'
       fill_in 'Valor', with: '50,00'
@@ -449,12 +449,12 @@ feature "RealignmentPrices" do
       end
     end
 
-    expect(page).to have_disabled_field "Valor total da proposta/lance", with: "100,00"
-    expect(page).to have_disabled_field "Diferença", with: "100,00"
+    expect(page).to have_field "Valor total da proposta/lance", with: "100,00", disabled: true
+    expect(page).to have_field "Diferença", with: "100,00", disabled: true
 
     within '#items .nested-realignment_price_items:first' do
-      expect(page).to have_disabled_field 'Item', with: '01.01.00001 - Antivirus'
-      expect(page).to have_disabled_field 'Quantidade', with: '2'
+      expect(page).to have_field 'Item', with: '01.01.00001 - Antivirus', disabled: true
+      expect(page).to have_field 'Quantidade', with: '2', disabled: true
 
       fill_in 'Marca', with: 'Antivirus'
       fill_in 'Valor', with: '50,00'
@@ -480,12 +480,12 @@ feature "RealignmentPrices" do
       end
     end
 
-    expect(page).to have_disabled_field "Valor total da proposta/lance", with: "100,00"
-    expect(page).to have_disabled_field "Diferença", with: "0,00"
+    expect(page).to have_field "Valor total da proposta/lance", with: "100,00", disabled: true
+    expect(page).to have_field "Diferença", with: "0,00", disabled: true
 
     within '#items .nested-realignment_price_items:first' do
-      expect(page).to have_disabled_field 'Item', with: '01.01.00001 - Antivirus'
-      expect(page).to have_disabled_field 'Quantidade', with: '2'
+      expect(page).to have_field 'Item', with: '01.01.00001 - Antivirus', disabled: true
+      expect(page).to have_field 'Quantidade', with: '2', disabled: true
 
       expect(page).to have_field 'Marca', with: 'Antivirus'
       expect(page).to have_field 'Valor', with: '50,00'
@@ -507,12 +507,12 @@ feature "RealignmentPrices" do
       end
     end
 
-    expect(page).to have_disabled_field "Valor total da proposta/lance", with: "100,00"
-    expect(page).to have_disabled_field "Diferença", with: "0,00"
+    expect(page).to have_field "Valor total da proposta/lance", with: "100,00", disabled: true
+    expect(page).to have_field "Diferença", with: "0,00", disabled: true
 
     within '#items .nested-realignment_price_items:first' do
-      expect(page).to have_disabled_field 'Item', with: '01.01.00001 - Antivirus'
-      expect(page).to have_disabled_field 'Quantidade', with: '2'
+      expect(page).to have_field 'Item', with: '01.01.00001 - Antivirus', disabled: true
+      expect(page).to have_field 'Quantidade', with: '2', disabled: true
 
       expect(page).to have_field 'Marca', with: 'Antivirus'
       expect(page).to have_field 'Valor', with: '50,00'

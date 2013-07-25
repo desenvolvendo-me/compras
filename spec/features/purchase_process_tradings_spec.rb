@@ -202,8 +202,8 @@ feature "PurchaseProcessTradings" do
       end
     end
 
-    expect(page).to have_disabled_field 'Etapa', with: "1"
-    expect(page).to have_disabled_field 'Fornecedor', with: "IBM"
+    expect(page).to have_field 'Etapa', with: "1", disabled: true
+    expect(page).to have_field 'Fornecedor', with: "IBM", disabled: true
     expect(page).to have_button 'Gravar lance'
     expect(page).to have_disabled_element 'Desfazer', reason: 'não há lance para ser desfeito'
 
@@ -219,8 +219,8 @@ feature "PurchaseProcessTradings" do
 
     click_button 'Ok'
 
-    expect(page).to have_disabled_field 'Etapa', with: "1"
-    expect(page).to have_disabled_field 'Fornecedor', with: "IBM"
+    expect(page).to have_field 'Etapa', with: "1", disabled: true
+    expect(page).to have_field 'Fornecedor', with: "IBM", disabled: true
     expect(page).to have_button 'Gravar lance'
 
     within 'table#historic' do
@@ -257,8 +257,8 @@ feature "PurchaseProcessTradings" do
       end
     end
 
-    expect(page).to have_disabled_field 'Etapa', with: "1"
-    expect(page).to have_disabled_field 'Fornecedor', with: "Wenderson Malheiros"
+    expect(page).to have_field 'Etapa', with: "1", disabled: true
+    expect(page).to have_field 'Fornecedor', with: "Wenderson Malheiros", disabled: true
     expect(page).to have_button 'Desfazer'
     expect(page).to_not have_disabled_element 'Desfazer', reason: 'não há lance para ser desfeito'
 
@@ -304,8 +304,8 @@ feature "PurchaseProcessTradings" do
       end
     end
 
-    expect(page).to have_disabled_field 'Etapa', with: "2"
-    expect(page).to have_disabled_field 'Fornecedor', with: "IBM"
+    expect(page).to have_field 'Etapa', with: "2", disabled: true
+    expect(page).to have_field 'Fornecedor', with: "IBM", disabled: true
     expect(page).to have_button 'Desfazer'
     expect(page).to_not have_disabled_element 'Desfazer', reason: 'não há lance para ser desfeito'
 
@@ -363,8 +363,8 @@ feature "PurchaseProcessTradings" do
       end
     end
 
-    expect(page).to have_disabled_field 'Etapa', with: ""
-    expect(page).to have_disabled_field 'Fornecedor', with: ""
+    expect(page).to have_field 'Etapa', with: "", disabled: true
+    expect(page).to have_field 'Fornecedor', with: "", disabled: true
     expect(page).to have_button 'Desfazer'
     expect(page).to_not have_disabled_element 'Desfazer', reason: 'não há lance para ser desfeito'
 
@@ -434,9 +434,9 @@ feature "PurchaseProcessTradings" do
       end
     end
 
-    expect(page).to have_disabled_field 'Etapa', with: ""
-    expect(page).to have_disabled_field 'Fornecedor', with: ""
-    expect(page).to have_disabled_field 'Valor', with: "0,00"
+    expect(page).to have_field 'Etapa', with: "", disabled: true
+    expect(page).to have_field 'Fornecedor', with: "", disabled: true
+    expect(page).to have_field 'Valor', with: "0,00", disabled: true
     expect(page).to have_button 'Desfazer'
     expect(page).to_not have_disabled_element 'Desfazer', reason: 'não há lance para ser desfeito'
     expect(page).to have_disabled_element 'Gravar lance', reason: 'todos os lances já foram efetuados'
@@ -484,8 +484,8 @@ feature "PurchaseProcessTradings" do
       end
     end
 
-    expect(page).to have_disabled_field 'Etapa', with: "1"
-    expect(page).to have_disabled_field 'Fornecedor', with: "Wenderson Malheiros"
+    expect(page).to have_field 'Etapa', with: "1", disabled: true
+    expect(page).to have_field 'Fornecedor', with: "Wenderson Malheiros", disabled: true
     expect(page).to have_button 'Desfazer'
     expect(page).to have_disabled_element 'Desfazer', reason: 'não há lance para ser desfeito'
 
@@ -520,8 +520,8 @@ feature "PurchaseProcessTradings" do
       end
     end
 
-    expect(page).to have_disabled_field 'Etapa', with: "1"
-    expect(page).to have_disabled_field 'Fornecedor', with: "IBM"
+    expect(page).to have_field 'Etapa', with: "1", disabled: true
+    expect(page).to have_field 'Fornecedor', with: "IBM", disabled: true
     expect(page).to have_button 'Desfazer'
     expect(page).to_not have_disabled_element 'Desfazer', reason: 'não há lance para ser desfeito'
 
@@ -597,8 +597,8 @@ feature "PurchaseProcessTradings" do
       end
     end
 
-    expect(page).to have_disabled_field 'Etapa', with: "1"
-    expect(page).to have_disabled_field 'Fornecedor', with: "IBM"
+    expect(page).to have_field 'Etapa', with: "1", disabled: true
+    expect(page).to have_field 'Fornecedor', with: "IBM", disabled: true
     expect(page).to have_button 'Desfazer'
     expect(page).to_not have_disabled_element 'Desfazer', reason: 'não há lance para ser desfeito'
 
@@ -645,8 +645,8 @@ feature "PurchaseProcessTradings" do
       end
     end
 
-    expect(page).to have_disabled_field 'Etapa', with: "2"
-    expect(page).to have_disabled_field 'Fornecedor', with: "Wenderson Malheiros"
+    expect(page).to have_field 'Etapa', with: "2", disabled: true
+    expect(page).to have_field 'Fornecedor', with: "Wenderson Malheiros", disabled: true
     expect(page).to have_button 'Desfazer'
     expect(page).to_not have_disabled_element 'Desfazer', reason: 'não há lance para ser desfeito'
 
@@ -705,8 +705,8 @@ feature "PurchaseProcessTradings" do
       end
     end
 
-    expect(page).to have_disabled_field 'Etapa', with: ""
-    expect(page).to have_disabled_field 'Fornecedor', with: ""
+    expect(page).to have_field 'Etapa', with: "", disabled: true
+    expect(page).to have_field 'Fornecedor', with: "", disabled: true
     expect(page).to_not have_disabled_element 'Desfazer', reason: 'não há lance para ser desfeito'
     expect(page).to have_disabled_element 'Gravar lance', reason: 'todos os lances já foram efetuados'
   end
@@ -871,8 +871,8 @@ feature "PurchaseProcessTradings" do
       end
     end
 
-    expect(page).to have_disabled_field 'Etapa', with: "1"
-    expect(page).to have_disabled_field 'Fornecedor', with: "Gabriel Sobrinho"
+    expect(page).to have_field 'Etapa', with: "1", disabled: true
+    expect(page).to have_field 'Fornecedor', with: "Gabriel Sobrinho", disabled: true
     expect(page).to have_disabled_element 'Desfazer', reason: 'não há lance para ser desfeito'
 
     fill_in 'Valor', with: '0,00'
@@ -883,8 +883,8 @@ feature "PurchaseProcessTradings" do
       expect(page).to have_css('tbody tr', count: 1)
     end
 
-    expect(page).to have_disabled_field 'Etapa', with: ""
-    expect(page).to have_disabled_field 'Fornecedor', with: ""
+    expect(page).to have_field 'Etapa', with: "", disabled: true
+    expect(page).to have_field 'Fornecedor', with: "", disabled: true
     expect(page).to_not have_disabled_element 'Desfazer', reason: 'não há lance para ser desfeito'
     expect(page).to have_disabled_element 'Gravar lance', reason: 'todos os lances já foram efetuados'
   end
@@ -1049,8 +1049,8 @@ feature "PurchaseProcessTradings" do
       end
     end
 
-    expect(page).to have_disabled_field 'Etapa', with: "1"
-    expect(page).to have_disabled_field 'Fornecedor', with: "Gabriel Sobrinho"
+    expect(page).to have_field 'Etapa', with: "1", disabled: true
+    expect(page).to have_field 'Fornecedor', with: "Gabriel Sobrinho", disabled: true
     expect(page).to have_disabled_element 'Desfazer', reason: 'não há lance para ser desfeito'
     expect(page).to have_field 'Valor', with: "99,99"
 
@@ -1090,8 +1090,8 @@ feature "PurchaseProcessTradings" do
       end
     end
 
-    expect(page).to have_disabled_field 'Etapa', with: "1"
-    expect(page).to have_disabled_field 'Fornecedor', with: "Wenderson Malheiros"
+    expect(page).to have_field 'Etapa', with: "1", disabled: true
+    expect(page).to have_field 'Fornecedor', with: "Wenderson Malheiros", disabled: true
     expect(page).to have_field 'Valor', with: "80,00"
   end
 
@@ -1255,8 +1255,8 @@ feature "PurchaseProcessTradings" do
       end
     end
 
-    expect(page).to have_disabled_field 'Etapa', with: "1"
-    expect(page).to have_disabled_field 'Fornecedor', with: "Gabriel Sobrinho"
+    expect(page).to have_field 'Etapa', with: "1", disabled: true
+    expect(page).to have_field 'Fornecedor', with: "Gabriel Sobrinho", disabled: true
     expect(page).to have_disabled_element 'Desfazer', reason: 'não há lance para ser desfeito'
     expect(page).to have_field 'Valor', with: "99,99"
 
@@ -1284,8 +1284,8 @@ feature "PurchaseProcessTradings" do
       end
     end
 
-    expect(page).to have_disabled_field 'Etapa', with: "1"
-    expect(page).to have_disabled_field 'Fornecedor', with: "Wenderson Malheiros"
+    expect(page).to have_field 'Etapa', with: "1", disabled: true
+    expect(page).to have_field 'Fornecedor', with: "Wenderson Malheiros", disabled: true
     expect(page).to have_field 'Valor', with: "90,25"
 
     # Próximo item
@@ -1310,8 +1310,8 @@ feature "PurchaseProcessTradings" do
     expect(page).to have_field 'Decréscimo em valor', with: '0,00'
     expect(page).to have_field 'Decréscimo em percentual', with: '5,00'
 
-    expect(page).to have_disabled_field 'Etapa', with: "1"
-    expect(page).to have_disabled_field 'Fornecedor', with: "Wenderson Malheiros"
+    expect(page).to have_field 'Etapa', with: "1", disabled: true
+    expect(page).to have_field 'Fornecedor', with: "Wenderson Malheiros", disabled: true
     expect(page).to have_field 'Valor', with: "90,25"
   end
 
@@ -1462,8 +1462,8 @@ feature "PurchaseProcessTradings" do
       end
     end
 
-    expect(page).to have_disabled_field 'Etapa', with: "1"
-    expect(page).to have_disabled_field 'Fornecedor', with: "IBM"
+    expect(page).to have_field 'Etapa', with: "1", disabled: true
+    expect(page).to have_field 'Fornecedor', with: "IBM", disabled: true
     expect(page).to have_button 'Gravar lance'
     expect(page).to have_disabled_element 'Desfazer', reason: 'não há lance para ser desfeito'
 
@@ -1479,8 +1479,8 @@ feature "PurchaseProcessTradings" do
 
     click_button 'Ok'
 
-    expect(page).to have_disabled_field 'Etapa', with: "1"
-    expect(page).to have_disabled_field 'Fornecedor', with: "IBM"
+    expect(page).to have_field 'Etapa', with: "1", disabled: true
+    expect(page).to have_field 'Fornecedor', with: "IBM", disabled: true
     expect(page).to have_button 'Gravar lance'
 
     within 'table#historic' do
@@ -1515,8 +1515,8 @@ feature "PurchaseProcessTradings" do
       end
     end
 
-    expect(page).to have_disabled_field 'Etapa', with: "1"
-    expect(page).to have_disabled_field 'Fornecedor', with: "Wenderson Malheiros"
+    expect(page).to have_field 'Etapa', with: "1", disabled: true
+    expect(page).to have_field 'Fornecedor', with: "Wenderson Malheiros", disabled: true
     expect(page).to have_button 'Desfazer'
     expect(page).to_not have_disabled_element 'Desfazer', reason: 'não há lance para ser desfeito'
 
@@ -1559,8 +1559,8 @@ feature "PurchaseProcessTradings" do
       end
     end
 
-    expect(page).to have_disabled_field 'Etapa', with: "2"
-    expect(page).to have_disabled_field 'Fornecedor', with: "IBM"
+    expect(page).to have_field 'Etapa', with: "2", disabled: true
+    expect(page).to have_field 'Fornecedor', with: "IBM", disabled: true
     expect(page).to have_button 'Desfazer'
     expect(page).to_not have_disabled_element 'Desfazer', reason: 'não há lance para ser desfeito'
 
@@ -1614,8 +1614,8 @@ feature "PurchaseProcessTradings" do
       end
     end
 
-    expect(page).to have_disabled_field 'Etapa', with: ""
-    expect(page).to have_disabled_field 'Fornecedor', with: ""
+    expect(page).to have_field 'Etapa', with: "", disabled: true
+    expect(page).to have_field 'Fornecedor', with: "", disabled: true
     expect(page).to have_button 'Desfazer'
     expect(page).to_not have_disabled_element 'Desfazer', reason: 'não há lance para ser desfeito'
 
@@ -1670,9 +1670,9 @@ feature "PurchaseProcessTradings" do
       end
     end
 
-    expect(page).to have_disabled_field 'Etapa', with: ""
-    expect(page).to have_disabled_field 'Fornecedor', with: ""
-    expect(page).to have_disabled_field 'Valor', with: "0,00"
+    expect(page).to have_field 'Etapa', with: "", disabled: true
+    expect(page).to have_field 'Fornecedor', with: "", disabled: true
+    expect(page).to have_field 'Valor', with: "0,00", disabled: true
     expect(page).to have_button 'Desfazer'
     expect(page).to_not have_disabled_element 'Desfazer', reason: 'não há lance para ser desfeito'
     expect(page).to have_disabled_element 'Gravar lance', reason: 'todos os lances já foram efetuados'
@@ -1720,8 +1720,8 @@ feature "PurchaseProcessTradings" do
       end
     end
 
-    expect(page).to have_disabled_field 'Etapa', with: "1"
-    expect(page).to have_disabled_field 'Fornecedor', with: "Wenderson Malheiros"
+    expect(page).to have_field 'Etapa', with: "1", disabled: true
+    expect(page).to have_field 'Fornecedor', with: "Wenderson Malheiros", disabled: true
     expect(page).to have_button 'Desfazer'
     expect(page).to have_disabled_element 'Desfazer', reason: 'não há lance para ser desfeito'
 
@@ -1754,8 +1754,8 @@ feature "PurchaseProcessTradings" do
       end
     end
 
-    expect(page).to have_disabled_field 'Etapa', with: "1"
-    expect(page).to have_disabled_field 'Fornecedor', with: "IBM"
+    expect(page).to have_field 'Etapa', with: "1", disabled: true
+    expect(page).to have_field 'Fornecedor', with: "IBM", disabled: true
     expect(page).to have_button 'Desfazer'
     expect(page).to_not have_disabled_element 'Desfazer', reason: 'não há lance para ser desfeito'
 
@@ -1826,8 +1826,8 @@ feature "PurchaseProcessTradings" do
       end
     end
 
-    expect(page).to have_disabled_field 'Etapa', with: "1"
-    expect(page).to have_disabled_field 'Fornecedor', with: "IBM"
+    expect(page).to have_field 'Etapa', with: "1", disabled: true
+    expect(page).to have_field 'Fornecedor', with: "IBM", disabled: true
     expect(page).to have_button 'Desfazer'
     expect(page).to_not have_disabled_element 'Desfazer', reason: 'não há lance para ser desfeito'
 
@@ -1870,8 +1870,8 @@ feature "PurchaseProcessTradings" do
       end
     end
 
-    expect(page).to have_disabled_field 'Etapa', with: "2"
-    expect(page).to have_disabled_field 'Fornecedor', with: "Wenderson Malheiros"
+    expect(page).to have_field 'Etapa', with: "2", disabled: true
+    expect(page).to have_field 'Fornecedor', with: "Wenderson Malheiros", disabled: true
     expect(page).to have_button 'Desfazer'
     expect(page).to_not have_disabled_element 'Desfazer', reason: 'não há lance para ser desfeito'
 
@@ -1926,8 +1926,8 @@ feature "PurchaseProcessTradings" do
       end
     end
 
-    expect(page).to have_disabled_field 'Etapa', with: ""
-    expect(page).to have_disabled_field 'Fornecedor', with: ""
+    expect(page).to have_field 'Etapa', with: "", disabled: true
+    expect(page).to have_field 'Fornecedor', with: "", disabled: true
     expect(page).to_not have_disabled_element 'Desfazer', reason: 'não há lance para ser desfeito'
     expect(page).to have_disabled_element 'Gravar lance', reason: 'todos os lances já foram efetuados'
   end

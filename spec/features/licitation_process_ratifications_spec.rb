@@ -46,7 +46,7 @@ feature "LicitationProcessRatifications" do
     click_link 'Adjudicação/Homologação'
     click_link 'Criar Homologação e Adjudicação de Processo de Compra'
 
-    expect(page).to have_disabled_field 'Processo de compra'
+    expect(page).to have_field 'Processo de compra', disabled: true
 
     within_modal 'Participante vencedor' do
       click_button 'Pesquisar'
@@ -69,7 +69,7 @@ feature "LicitationProcessRatifications" do
       click_link '1'
     end
 
-    expect(page).to have_disabled_field 'Processo de compra'
+    expect(page).to have_field 'Processo de compra', disabled: true
     expect(page).to have_field 'Processo de compra', :with => '2/2013 - Concorrência 1'
     expect(page).to have_field 'Participante vencedor', :with => 'Gabriel Sobrinho'
     expect(page).to have_field 'Data de homologação', :with => I18n.l(Date.current)
@@ -84,7 +84,7 @@ feature "LicitationProcessRatifications" do
 
     expect(page).to have_checked_field bidder_checkbok_html_name(0)
 
-    expect(page).to have_disabled_field 'Processo de compra'
+    expect(page).to have_field 'Processo de compra', disabled: true
 
     fill_in 'Data de homologação', :with => "#{I18n.l(Date.tomorrow)}"
     fill_in 'Data de adjudicação', :with => "#{I18n.l(Date.tomorrow)}"
@@ -139,7 +139,7 @@ feature "LicitationProcessRatifications" do
     click_link 'Adjudicação/Homologação'
     click_link 'Criar Homologação e Adjudicação de Processo de Compra'
 
-    expect(page).to have_disabled_field 'Processo de compra'
+    expect(page).to have_field 'Processo de compra', disabled: true
 
     within_modal 'Participante vencedor' do
       click_button 'Pesquisar'
@@ -164,7 +164,7 @@ feature "LicitationProcessRatifications" do
       click_link '1'
     end
 
-    expect(page).to have_disabled_field 'Processo de compra'
+    expect(page).to have_field 'Processo de compra', disabled: true
     expect(page).to have_field 'Processo de compra', :with => '2/2013 - Concorrência 1'
     expect(page).to have_field 'Participante vencedor', :with => 'Gabriel Sobrinho'
     expect(page).to have_field 'Data de homologação', :with => I18n.l(Date.current)
@@ -181,7 +181,7 @@ feature "LicitationProcessRatifications" do
 
     expect(page).to have_checked_field bidder_checkbok_html_name(0)
 
-    expect(page).to have_disabled_field 'Processo de compra'
+    expect(page).to have_field 'Processo de compra', disabled: true
 
     fill_in 'Data de homologação', :with => "#{I18n.l(Date.tomorrow)}"
     fill_in 'Data de adjudicação', :with => "#{I18n.l(Date.tomorrow)}"
@@ -212,7 +212,7 @@ feature "LicitationProcessRatifications" do
 
     click_link 'Criar Homologação e Adjudicação de Processo de Compra'
 
-    expect(page).to have_disabled_field 'Processo de compra'
+    expect(page).to have_field 'Processo de compra', disabled: true
 
     within_modal 'Participante vencedor' do
       click_button 'Pesquisar'
@@ -477,7 +477,7 @@ feature "LicitationProcessRatifications" do
     click_link 'Adjudicação/Homologação'
     click_link 'Criar Homologação e Adjudicação de Processo de Compra'
 
-    expect(page).to have_disabled_field 'Processo de compra'
+    expect(page).to have_field 'Processo de compra', disabled: true
 
     within_modal 'Participante vencedor' do
       click_button 'Pesquisar'

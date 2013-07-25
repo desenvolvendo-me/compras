@@ -164,12 +164,12 @@ feature "LicitationProcesses" do
     expect(page).to_not have_button 'Apurar'
 
     within_tab 'Principal' do
-      expect(page).to have_disabled_field 'Status'
-      expect(page).to have_disabled_field 'Nº do afastamento'
+      expect(page).to have_field 'Status', disabled: true
+      expect(page).to have_field 'Nº do afastamento', disabled: true
 
       choose 'Processo licitatório'
 
-      expect(page).to have_disabled_field 'Modalidade'
+      expect(page).to have_field 'Modalidade', disabled: true
 
       select 'Compras e serviços', :from => 'Tipo de objeto'
       select 'Concorrência', :from => 'Modalidade'
@@ -231,7 +231,7 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Orçamento' do
-      expect(page).to have_disabled_field 'Valor total dos itens', :with => '20,00'
+      expect(page).to have_field 'Valor total dos itens', :with => '20,00', disabled: true
 
       fill_in 'Ano da dotação', with: '2013'
 
@@ -293,7 +293,7 @@ feature "LicitationProcesses" do
         end
       end
 
-      expect(page).to have_disabled_field 'Valor total das dotações', with: '270,00'
+      expect(page).to have_field 'Valor total das dotações', with: '270,00', disabled: true
     end
 
     within_tab 'Documentos' do
@@ -318,7 +318,7 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Processo', :with => '1'
 
       expect(page).to have_select 'Modalidade', :selected => 'Concorrência'
-      expect(page).to have_disabled_field 'Nº da modalidade', :with => '1'
+      expect(page).to have_field 'Nº da modalidade', :with => '1', disabled: true
       expect(page).to have_select 'Tipo de objeto', :selected => 'Compras e serviços'
       expect(page).to have_select 'Forma de julgamento', :selected => 'Por Item com Menor Preço'
       expect(page).to have_field 'Objeto do processo de compra', :with => 'Licitação para compra de carteiras'
@@ -357,7 +357,7 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Orçamento' do
-      expect(page).to have_disabled_field 'Valor total das dotações', with: '270,00'
+      expect(page).to have_field 'Valor total das dotações', with: '270,00', disabled: true
       expect(page).to have_field 'Ano da dotação', with: '2013'
 
       within_records do
@@ -471,8 +471,8 @@ feature "LicitationProcesses" do
     end
 
     within_tab "Orçamento" do
-      expect(page).to have_disabled_field 'Valor total dos itens', :with => '84,00'
-      expect(page).to have_disabled_field 'Valor total das dotações', :with => '270,00'
+      expect(page).to have_field 'Valor total dos itens', :with => '84,00', disabled: true
+      expect(page).to have_field 'Valor total das dotações', :with => '270,00', disabled: true
 
       within_records do
         within 'tbody .nested-record:first' do
@@ -504,7 +504,7 @@ feature "LicitationProcesses" do
         end
       end
 
-      expect(page).to have_disabled_field 'Valor total das dotações', :with => '300,00'
+      expect(page).to have_field 'Valor total das dotações', :with => '300,00', disabled: true
 
       fill_with_autocomplete 'Dotação orçamentária', :with => '123'
 
@@ -520,7 +520,7 @@ feature "LicitationProcesses" do
 
       click_button 'Adicionar'
 
-      expect(page).to have_disabled_field 'Valor total das dotações', :with => '320,00'
+      expect(page).to have_field 'Valor total das dotações', :with => '320,00', disabled: true
     end
 
     click_button 'Salvar'
@@ -576,8 +576,8 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Orçamento' do
-      expect(page).to have_disabled_field 'Valor total dos itens', :with => '84,00'
-      expect(page).to have_disabled_field 'Valor total das dotações', :with => '320,00'
+      expect(page).to have_field 'Valor total dos itens', :with => '84,00', disabled: true
+      expect(page).to have_field 'Valor total das dotações', :with => '320,00', disabled: true
 
       within_records do
         expect(page).to have_content 'Dotação'
@@ -1140,7 +1140,7 @@ feature "LicitationProcesses" do
     expect(page).to_not have_button 'Apurar'
 
     within_tab 'Principal' do
-      expect(page).to have_disabled_field 'Status'
+      expect(page).to have_field 'Status', disabled: true
     end
 
     within_tab 'Principal' do
@@ -1195,8 +1195,8 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Orçamento' do
-      expect(page).to have_disabled_field 'Valor total dos itens', :with => '600,00'
-      expect(page).to have_disabled_field 'Valor total das dotações', :with => '20,00'
+      expect(page).to have_field 'Valor total dos itens', :with => '600,00', disabled: true
+      expect(page).to have_field 'Valor total das dotações', :with => '20,00', disabled: true
 
       within_records do
         expect(page).to have_content 'Dotação'
@@ -1249,8 +1249,8 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Orçamento' do
-      expect(page).to have_disabled_field 'Valor total dos itens', :with => '600,00'
-      expect(page).to have_disabled_field 'Valor total das dotações', :with => '20,00'
+      expect(page).to have_field 'Valor total dos itens', :with => '600,00', disabled: true
+      expect(page).to have_field 'Valor total das dotações', :with => '20,00', disabled: true
 
       within_records do
         expect(page).to have_content 'Dotação'
@@ -1731,8 +1731,8 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Orçamento' do
-      expect(page).to have_disabled_field 'Valor total dos itens', :with => '600,00'
-      expect(page).to have_disabled_field 'Valor total das dotações', :with => '20,00'
+      expect(page).to have_field 'Valor total dos itens', :with => '600,00', disabled: true
+      expect(page).to have_field 'Valor total das dotações', :with => '20,00', disabled: true
 
       within_records do
         expect(page).to have_content 'Dotação'
@@ -1949,7 +1949,7 @@ feature "LicitationProcesses" do
     expect(page).to_not have_button 'Apurar'
 
     within_tab 'Principal' do
-      expect(page).to have_disabled_field 'Status'
+      expect(page).to have_field 'Status', disabled: true
     end
 
     within_tab 'Principal' do
@@ -2007,7 +2007,7 @@ feature "LicitationProcesses" do
     expect(page).to_not have_button 'Apurar'
 
     within_tab 'Principal' do
-      expect(page).to have_disabled_field 'Status'
+      expect(page).to have_field 'Status', disabled: true
     end
 
     within_tab 'Principal' do
@@ -2062,8 +2062,8 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Orçamento' do
-      expect(page).to have_disabled_field 'Valor total dos itens', :with => '600,00'
-      expect(page).to have_disabled_field 'Valor total das dotações', :with => '20,00'
+      expect(page).to have_field 'Valor total dos itens', :with => '600,00', disabled: true
+      expect(page).to have_field 'Valor total das dotações', :with => '20,00', disabled: true
 
       within_records do
         expect(page).to have_content 'Dotação'

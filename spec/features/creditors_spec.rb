@@ -96,15 +96,15 @@ feature "Creditors" do
     within_tab 'Principal' do
       fill_modal 'Pessoa física ou jurídica', :with => 'Ibrama'
 
-      expect(page).to have_disabled_field 'Porte da empresa'
+      expect(page).to have_field 'Porte da empresa', disabled: true
       expect(page).to have_field 'Porte da empresa', :with => 'Microempresa'
-      expect(page).to have_disabled_field 'Optante pelo simples'
+      expect(page).to have_field 'Optante pelo simples', disabled: true
       expect(page).to have_checked_field 'Optante pelo simples'
-      expect(page).to have_disabled_field 'Natureza jurídica'
+      expect(page).to have_field 'Natureza jurídica', disabled: true
       expect(page).to have_field 'Natureza jurídica', :with => 'Administração Pública'
-      expect(page).to have_disabled_field 'Número do registro na junta comercial'
+      expect(page).to have_field 'Número do registro na junta comercial', disabled: true
       expect(page).to have_field 'Número do registro na junta comercial', :with => '099901'
-      expect(page).to have_disabled_field 'Data do registro na junta comercial'
+      expect(page).to have_field 'Data do registro na junta comercial', disabled: true
       expect(page).to have_field 'Data do registro na junta comercial', :with => '29/06/2011'
       expect(page).to have_select 'Órgão responsável pelo registro'
 
@@ -162,7 +162,7 @@ feature "Creditors" do
       fill_modal 'Banco', :with => 'Itaú'
 
       within_modal 'Agência' do
-        expect(page).to have_disabled_field 'Banco'
+        expect(page).to have_field 'Banco', disabled: true
         expect(page).to have_field 'Banco', :with => 'Itaú'
 
         fill_in 'Nome', :with => 'Agência Itaú'
@@ -208,15 +208,15 @@ feature "Creditors" do
     expect(page).to have_field 'Pessoa física ou jurídica', :with => 'Ibrama'
 
     within_tab 'Principal' do
-      expect(page).to have_disabled_field 'Porte da empresa'
+      expect(page).to have_field 'Porte da empresa', disabled: true
       expect(page).to have_field 'Porte da empresa', :with => 'Microempresa'
-      expect(page).to have_disabled_field 'Optante pelo simples'
+      expect(page).to have_field 'Optante pelo simples', disabled: true
       expect(page).to have_checked_field 'Optante pelo simples'
-      expect(page).to have_disabled_field 'Natureza jurídica'
+      expect(page).to have_field 'Natureza jurídica', disabled: true
       expect(page).to have_field 'Natureza jurídica', :with => 'Administração Pública'
-      expect(page).to have_disabled_field 'Número do registro na junta comercial'
+      expect(page).to have_field 'Número do registro na junta comercial', disabled: true
       expect(page).to have_field 'Número do registro na junta comercial', :with => '099901'
-      expect(page).to have_disabled_field 'Data do registro na junta comercial'
+      expect(page).to have_field 'Data do registro na junta comercial', disabled: true
       expect(page).to have_field 'Data do registro na junta comercial', :with => '29/06/2011'
       expect(page).to_not have_field 'PIS/PASEP'
       expect(page).to have_select 'Órgão responsável pelo registro', selected: 'Junta comercial'
@@ -303,7 +303,7 @@ feature "Creditors" do
       fill_modal 'Banco', :with => 'Itaú'
 
       within_modal 'Agência' do
-        expect(page).to have_disabled_field 'Banco'
+        expect(page).to have_field 'Banco', disabled: true
         expect(page).to have_field 'Banco', :with => 'Itaú'
 
         fill_in 'Nome', :with => 'Agência Itaú'
@@ -599,15 +599,15 @@ feature "Creditors" do
     click_link 'Nohup'
 
     within_tab 'Principal' do
-      expect(page).to have_disabled_field 'Porte da empresa'
+      expect(page).to have_field 'Porte da empresa', disabled: true
       expect(page).to have_field 'Porte da empresa', :with => 'Microempresa'
-      expect(page).to have_disabled_field 'Optante pelo simples'
+      expect(page).to have_field 'Optante pelo simples', disabled: true
       expect(page).to_not have_checked_field 'Optante pelo simples'
-      expect(page).to have_disabled_field 'Natureza jurídica'
+      expect(page).to have_field 'Natureza jurídica', disabled: true
       expect(page).to have_field 'Natureza jurídica', :with => 'Administração Pública'
-      expect(page).to have_disabled_field 'Número do registro na junta comercial'
+      expect(page).to have_field 'Número do registro na junta comercial', disabled: true
       expect(page).to have_field 'Número do registro na junta comercial', :with => '099901'
-      expect(page).to have_disabled_field 'Data do registro na junta comercial'
+      expect(page).to have_field 'Data do registro na junta comercial', disabled: true
       expect(page).to have_field 'Data do registro na junta comercial', :with => '29/06/2011'
     end
 
@@ -671,7 +671,7 @@ feature "Creditors" do
       fill_modal 'Banco', :with => 'Santander'
 
       within_modal 'Agência' do
-        expect(page).to have_disabled_field 'Banco'
+        expect(page).to have_field 'Banco', disabled: true
         expect(page).to have_field 'Banco', :with => 'Santander'
 
         fill_in 'Nome', :with => 'Agência Santander'
@@ -725,15 +725,15 @@ feature "Creditors" do
     expect(page).to have_field 'Pessoa física ou jurídica', :with => 'Nohup'
 
     within_tab 'Principal' do
-      expect(page).to have_disabled_field 'Porte da empresa'
+      expect(page).to have_field 'Porte da empresa', disabled: true
       expect(page).to have_field 'Porte da empresa', :with => 'Microempresa'
-      expect(page).to have_disabled_field 'Optante pelo simples'
+      expect(page).to have_field 'Optante pelo simples', disabled: true
       expect(page).to_not have_checked_field 'Optante pelo simples'
-      expect(page).to have_disabled_field 'Natureza jurídica'
+      expect(page).to have_field 'Natureza jurídica', disabled: true
       expect(page).to have_field 'Natureza jurídica', :with => 'Administração Pública'
-      expect(page).to have_disabled_field 'Número do registro na junta comercial'
+      expect(page).to have_field 'Número do registro na junta comercial', disabled: true
       expect(page).to have_field 'Número do registro na junta comercial', :with => '099901'
-      expect(page).to have_disabled_field 'Data do registro na junta comercial'
+      expect(page).to have_field 'Data do registro na junta comercial', disabled: true
       expect(page).to have_field 'Data do registro na junta comercial', :with => '29/06/2011'
     end
 
@@ -833,7 +833,7 @@ feature "Creditors" do
       fill_modal 'Banco', :with => 'Santander'
 
       within_modal 'Agência' do
-        expect(page).to have_disabled_field 'Banco'
+        expect(page).to have_field 'Banco', disabled: true
         expect(page).to have_field 'Banco', :with => 'Santander'
 
         fill_in 'Nome', :with => 'Agência Santander'
@@ -964,7 +964,7 @@ feature "Creditors" do
 
     click_link 'Mateus Lorandi'
 
-    expect(page).to have_disabled_field 'Pessoa física ou jurídica'
+    expect(page).to have_field 'Pessoa física ou jurídica', disabled: true
 
     click_button 'Salvar'
 

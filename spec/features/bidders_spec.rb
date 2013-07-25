@@ -90,7 +90,7 @@ feature "Bidders" do
 
     within_tab 'Documentos' do
       # testing that document type from licitation process are automaticaly included in bidder
-      expect(page).to have_disabled_field 'Documento'
+      expect(page).to have_field 'Documento', disabled: true
       expect(page).to have_field 'Documento', :with => 'Fiscal'
 
       fill_in 'Número/certidão', :with => '222222'
@@ -231,15 +231,15 @@ feature "Bidders" do
     expect(page).to have_field 'Data do protocolo', :with => I18n.l(Date.current)
     expect(page).to have_field 'Data do recebimento', :with => I18n.l(Date.tomorrow)
 
-    expect(page).to_not have_disabled_field 'Protocolo'
-    expect(page).to_not have_disabled_field 'Data do protocolo'
-    expect(page).to_not have_disabled_field 'Data do recebimento'
+    expect(page).to_not have_field 'Protocolo', disabled: true
+    expect(page).to_not have_field 'Data do protocolo', disabled: true
+    expect(page).to_not have_field 'Data do recebimento', disabled: true
 
     uncheck 'Convidado'
 
-    expect(page).to have_disabled_field 'Protocolo'
-    expect(page).to have_disabled_field 'Data do protocolo'
-    expect(page).to have_disabled_field 'Data do recebimento'
+    expect(page).to have_field 'Protocolo', disabled: true
+    expect(page).to have_field 'Data do protocolo', disabled: true
+    expect(page).to have_field 'Data do recebimento', disabled: true
 
     expect(page).to_not have_checked_field 'Convidado'
     expect(page).to have_field 'Protocolo', :with => ''
@@ -259,9 +259,9 @@ feature "Bidders" do
     expect(page).to have_field 'Data do protocolo', :with => ''
     expect(page).to have_field 'Data do recebimento', :with => ''
 
-    expect(page).to have_disabled_field 'Protocolo'
-    expect(page).to have_disabled_field 'Data do protocolo'
-    expect(page).to have_disabled_field 'Data do recebimento'
+    expect(page).to have_field 'Protocolo', disabled: true
+    expect(page).to have_field 'Data do protocolo', disabled: true
+    expect(page).to have_field 'Data do recebimento', disabled: true
   end
 
   scenario 'showing some items without lot on proposals' do
@@ -453,15 +453,15 @@ feature "Bidders" do
     expect(page).to have_disabled_element 'Salvar',
                     :reason => 'não pode ser alterado pois o processo de compra possui homologação'
 
-    expect(page).to have_disabled_field 'Processo de compra'
-    expect(page).to have_disabled_field 'Data do processo de compra'
-    expect(page).to have_disabled_field 'Fornecedor'
+    expect(page).to have_field 'Processo de compra', disabled: true
+    expect(page).to have_field 'Data do processo de compra', disabled: true
+    expect(page).to have_field 'Fornecedor', disabled: true
 
     within_tab 'Documentos' do
-      expect(page).to have_disabled_field 'Documento'
-      expect(page).to have_disabled_field 'Número/certidão'
-      expect(page).to have_disabled_field 'Data de emissão'
-      expect(page).to have_disabled_field 'Validade'
+      expect(page).to have_field 'Documento', disabled: true
+      expect(page).to have_field 'Número/certidão', disabled: true
+      expect(page).to have_field 'Data de emissão', disabled: true
+      expect(page).to have_field 'Validade', disabled: true
     end
   end
 end

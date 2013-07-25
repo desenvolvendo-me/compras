@@ -17,7 +17,7 @@ feature "Neighborhoods" do
 
     within_modal 'Distrito' do
       expect(page).to have_field 'Cidade', :with => 'Porto Alegre'
-      expect(page).to have_disabled_field 'Cidade'
+      expect(page).to have_field 'Cidade', disabled: true
 
       click_button 'Pesquisar'
       click_record 'Leste'
@@ -73,7 +73,7 @@ feature "Neighborhoods" do
     fill_modal 'Cidade', :with => 'Porto Alegre'
 
     within_modal 'Distrito' do
-      expect(page).to have_disabled_field 'Cidade'
+      expect(page).to have_field 'Cidade', disabled: true
       expect(page).to have_field 'Cidade', :with => 'Porto Alegre'
     end
   end

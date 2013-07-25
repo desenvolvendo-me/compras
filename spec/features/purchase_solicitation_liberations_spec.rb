@@ -48,7 +48,7 @@ feature "PurchaseSolicitationLiberations" do
 
     click_link 'Criar Liberação de Solicitação de Compra'
 
-    expect(page).to_not have_disabled_field 'Responsável'
+    expect(page).to_not have_field 'Responsável', disabled: true
 
     expect(page).to have_content 'Criar Liberação para a Solicitação de Compra 1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
 
@@ -90,10 +90,10 @@ feature "PurchaseSolicitationLiberations" do
       page.find('a').click
     end
 
-    expect(page).to have_disabled_field 'Justificativa'
-    expect(page).to have_disabled_field 'Data'
-    expect(page).to have_disabled_field 'Responsável'
-    expect(page).to have_disabled_field 'Status de atendimento'
+    expect(page).to have_field 'Justificativa', disabled: true
+    expect(page).to have_field 'Data', disabled: true
+    expect(page).to have_field 'Responsável', disabled: true
+    expect(page).to have_field 'Status de atendimento', disabled: true
 
     expect(page).to have_content 'Editar Liberação 1 da Solicitação de Compra 1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
     expect(page).to have_field 'Justificativa', :with => 'Compra justificada'

@@ -60,11 +60,11 @@ feature 'PriceCollectionProposalAnnul' do
     click_on 'Anulação'
 
     expect(page).to have_content 'Anulação da Proposta de Wenderson Malheiros para a Coleta de Preço 1/2012'
-    expect(page).to have_disabled_field 'Responsável'
+    expect(page).to have_field 'Responsável', disabled: true
     expect(page).to have_field 'Responsável', :with => 'Wenderson Malheiros'
-    expect(page).to have_disabled_field 'Data'
+    expect(page).to have_field 'Data', disabled: true
     expect(page).to have_field 'Data', :with => I18n.l(Date.current)
-    expect(page).to have_disabled_field 'Justificativa'
+    expect(page).to have_field 'Justificativa', disabled: true
     expect(page).to have_field 'Justificativa', :with => 'Something'
 
     expect(page).to_not have_link 'Apagar'

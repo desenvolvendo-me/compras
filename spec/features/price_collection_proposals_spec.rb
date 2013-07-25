@@ -73,15 +73,15 @@ feature "PriceCollectionProposals" do
 
       click_link '1/2012'
 
-      expect(page).to have_disabled_field 'Valor total'
-      expect(page).to have_disabled_field 'Valor total do lote'
-      expect(page).to have_disabled_field 'Status'
+      expect(page).to have_field 'Valor total', disabled: true
+      expect(page).to have_field 'Valor total do lote', disabled: true
+      expect(page).to have_field 'Status', disabled: true
 
       expect(page).to_not have_disabled_element 'Salvar', :reason => 'somente o fornecedor da proposta tem autorização para editar'
       expect(page).to have_link 'Anular'
 
       fill_in 'Valor unitário', with: '0,90'
-      expect(page).to have_disabled_field 'Valor total', with: '9,00'
+      expect(page).to have_field 'Valor total', with: '9,00', disabled: true
 
       click_button "Salvar"
 
@@ -94,7 +94,7 @@ feature "PriceCollectionProposals" do
       end
 
       expect(page).to have_field 'Valor unitário', with: '0,90'
-      expect(page).to have_disabled_field 'Valor total', with: '9,00'
+      expect(page).to have_field 'Valor total', with: '9,00', disabled: true
     end
 
     scenario 'show columns at the index' do
@@ -149,24 +149,24 @@ feature "PriceCollectionProposals" do
 
       expect(page).to have_content 'Proposta do Fornecedor Gabriel Sobrinho para a Coleta de Preço 1/2012'
 
-      expect(page).to have_disabled_field 'Coleta de preços'
+      expect(page).to have_field 'Coleta de preços', disabled: true
       expect(page).to have_field 'Coleta de preços', :with => '1/2012'
 
-      expect(page).to have_disabled_field 'Data de início'
+      expect(page).to have_field 'Data de início', disabled: true
       expect(page).to have_field 'Data de início', :with => I18n.l(Date.current)
 
-      expect(page).to have_disabled_field 'Prazo de entrega'
+      expect(page).to have_field 'Prazo de entrega', disabled: true
       expect(page).to have_field 'Prazo de entrega', :with => '1 ano/anos'
 
-      expect(page).to have_disabled_field 'Fornecedor'
+      expect(page).to have_field 'Fornecedor', disabled: true
       expect(page).to have_field 'Fornecedor', :with => 'Gabriel Sobrinho'
 
-      expect(page).to have_disabled_field 'Status'
+      expect(page).to have_field 'Status', disabled: true
       expect(page).to have_select 'Status', :selected => 'Ativo'
 
       expect(page).to have_field 'Valor unitário'
-      expect(page).to have_disabled_field 'Valor total'
-      expect(page).to have_disabled_field 'Valor total do lote'
+      expect(page).to have_field 'Valor total', disabled: true
+      expect(page).to have_field 'Valor total do lote', disabled: true
 
       click_link 'Voltar'
 

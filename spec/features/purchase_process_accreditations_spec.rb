@@ -52,7 +52,7 @@ feature "PurchaseProcessAccreditation" do
 
     fill_with_autocomplete 'Fornecedor', :with => 'Gabriel'
 
-    expect(page).to have_disabled_field 'Tipo de pessoa', :with => 'Pessoa física'
+    expect(page).to have_field 'Tipo de pessoa', :with => 'Pessoa física', disabled: true
     expect(page).to have_select 'Porte', :selected => ''
 
     select 'Empresa de grande porte', :from => 'Porte'
@@ -68,7 +68,7 @@ feature "PurchaseProcessAccreditation" do
 
     fill_with_autocomplete 'Fornecedor', :with => 'Gabriel'
 
-    expect(page).to have_disabled_field 'Tipo de pessoa', :with => 'Pessoa física'
+    expect(page).to have_field 'Tipo de pessoa', :with => 'Pessoa física', disabled: true
     expect(page).to have_select 'Porte', :selected => ''
 
     select 'Empresa de grande porte', :from => 'Porte'
@@ -98,7 +98,7 @@ feature "PurchaseProcessAccreditation" do
 
     fill_with_autocomplete 'Fornecedor', :with => 'Nobe'
 
-    expect(page).to have_disabled_field 'Tipo de pessoa', :with => 'Pessoa jurídica'
+    expect(page).to have_field 'Tipo de pessoa', :with => 'Pessoa jurídica', disabled: true
     expect(page).to have_select 'Porte', :selected => 'Microempresa'
 
     select 'Joao da Silva', :from => 'Representante'
@@ -246,7 +246,7 @@ feature "PurchaseProcessAccreditation" do
 
     fill_with_autocomplete 'Fornecedor', :with => 'Nohup'
 
-    expect(page).to have_disabled_field 'Tipo de pessoa', :with => 'Pessoa jurídica'
+    expect(page).to have_field 'Tipo de pessoa', :with => 'Pessoa jurídica', disabled: true
     expect(page).to have_select 'Porte', :selected => 'Microempresa'
 
     select 'Wenderson Malheiros', :from => 'Representante'
@@ -274,7 +274,7 @@ feature "PurchaseProcessAccreditation" do
 
     fill_with_autocomplete 'Fornecedor', :with => 'Gabriel'
 
-    expect(page).to have_disabled_field 'Tipo de pessoa', :with => 'Pessoa física'
+    expect(page).to have_field 'Tipo de pessoa', :with => 'Pessoa física', disabled: true
     select 'Empresa de grande porte', :from => 'Porte'
 
     click_button 'Adicionar'
@@ -311,13 +311,13 @@ feature "PurchaseProcessAccreditation" do
 
     select '', from: 'Representante'
 
-    expect(page).to have_disabled_field 'Tipo', :with => ''
-    expect(page).to have_disabled_field 'Procurador'
+    expect(page).to have_field 'Tipo', :with => '', disabled: true
+    expect(page).to have_field 'Procurador', disabled: true
 
     select 'Wenderson', from: 'Representante'
 
-    expect(page).to_not have_disabled_field 'Tipo', :with => ''
-    expect(page).to_not have_disabled_field 'Procurador'
+    expect(page).to_not have_field 'Tipo', :with => '', disabled: true
+    expect(page).to_not have_field 'Procurador', disabled: true
 
   end
 

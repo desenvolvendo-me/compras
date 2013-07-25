@@ -14,7 +14,7 @@ feature "ProcessResponsibles" do
     click_link 'Criar responsável'
 
     within 'div.nested-process_responsibles:first' do
-      expect(page).to have_disabled_field 'Etapas do Processo', with: 'Emissão do edital'
+      expect(page).to have_field 'Etapas do Processo', with: 'Emissão do edital', disabled: true
       expect(page).to_not have_button 'Remover'
 
       fill_modal 'Funcionário', :with => '958473', :field => 'Matrícula'
@@ -28,7 +28,7 @@ feature "ProcessResponsibles" do
 
     within 'div.nested-process_responsibles:first' do
       expect(page).to have_field 'Funcionário', :with => 'Gabriel Sobrinho'
-      expect(page).to have_disabled_field 'Etapas do Processo', with: 'Emissão do edital'
+      expect(page).to have_field 'Etapas do Processo', with: 'Emissão do edital', disabled: true
       expect(page).to_not have_button 'Remover'
 
       fill_modal 'Funcionário', :with => '12903412', :field => 'Matrícula'
@@ -50,7 +50,7 @@ feature "ProcessResponsibles" do
     end
 
     within 'div.nested-process_responsibles:last' do
-      expect(page).to have_disabled_field 'Etapas do Processo', with: 'Emissão do edital'
+      expect(page).to have_field 'Etapas do Processo', with: 'Emissão do edital', disabled: true
       expect(page).to_not have_button 'Remover'
     end
 
@@ -61,7 +61,7 @@ feature "ProcessResponsibles" do
     click_link 'Editar responsável'
 
     within 'div.nested-process_responsibles:first' do
-      expect(page).to have_disabled_field 'Etapas do Processo', with: 'Emissão do edital'
+      expect(page).to have_field 'Etapas do Processo', with: 'Emissão do edital', disabled: true
       expect(page).to_not have_button 'Remover'
     end
 
@@ -79,7 +79,7 @@ feature "ProcessResponsibles" do
     click_link 'Editar responsável'
 
     within 'div.nested-process_responsibles:last' do
-      expect(page).to have_disabled_field 'Etapas do Processo', :with => 'Emissão do edital'
+      expect(page).to have_field 'Etapas do Processo', :with => 'Emissão do edital', disabled: true
       expect(page).to have_field 'Funcionário', :with => 'Wenderson Malheiros'
       expect(page).to_not have_button 'Remover'
     end

@@ -12,7 +12,7 @@ feature "Addresses", :only_monday do
 
     navigate 'Geral > Parâmetros > Organização'
 
-    expect(page).to have_disabled_field "Bairro"
+    expect(page).to have_field "Bairro", disabled: true
 
     fill_modal 'Logradouro', :with => 'Amazonas'
 
@@ -34,7 +34,7 @@ feature "Addresses", :only_monday do
 
     navigate 'Geral > Parâmetros > Organização'
 
-    expect(page).to have_disabled_field "Bairro"
+    expect(page).to have_field "Bairro", disabled: true
 
     fill_modal 'Logradouro', :with => 'Amazonas'
     fill_modal 'Bairro', :with => 'Portugal'

@@ -15,8 +15,8 @@ feature "Employees" do
 
     fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
 
-    expect(page).to have_disabled_field 'E-mail', :with => 'gabriel.sobrinho@gmail.com'
-    expect(page).to have_disabled_field 'Telefone', :with => '(33) 3333-3333'
+    expect(page).to have_field 'E-mail', :with => 'gabriel.sobrinho@gmail.com', disabled: true
+    expect(page).to have_field 'Telefone', :with => '(33) 3333-3333', disabled: true
 
     fill_modal 'Cargo', :with => 'Gerente'
     fill_in 'Matrícula', :with => '958473'
@@ -34,8 +34,8 @@ feature "Employees" do
     expect(page).to have_field 'Cargo', :with => 'Gerente'
     expect(page).to have_field 'Matrícula', :with => '958473'
 
-    expect(page).to have_disabled_field 'E-mail', :with => 'gabriel.sobrinho@gmail.com'
-    expect(page).to have_disabled_field 'Telefone', :with => '(33) 3333-3333'
+    expect(page).to have_field 'E-mail', :with => 'gabriel.sobrinho@gmail.com', disabled: true
+    expect(page).to have_field 'Telefone', :with => '(33) 3333-3333', disabled: true
 
     fill_in 'Matrícula', :with => '123456'
 
@@ -49,8 +49,8 @@ feature "Employees" do
     expect(page).to have_field 'Cargo', :with => 'Gerente'
     expect(page).to have_field 'Matrícula', :with => '123456'
 
-    expect(page).to have_disabled_field 'E-mail', :with => 'gabriel.sobrinho@gmail.com'
-    expect(page).to have_disabled_field 'Telefone', :with => '(33) 3333-3333'
+    expect(page).to have_field 'E-mail', :with => 'gabriel.sobrinho@gmail.com', disabled: true
+    expect(page).to have_field 'Telefone', :with => '(33) 3333-3333', disabled: true
 
     click_link 'Apagar'
 
@@ -88,7 +88,7 @@ feature "Employees" do
     click_link 'Gabriel Sobrinho'
 
     expect(page).to have_field 'E-mail', :with => 'gabriel.sobrinho@gmail.com'
-    expect(page).to have_disabled_field 'Telefone', :with => '(33) 3333-3333'
+    expect(page).to have_field 'Telefone', :with => '(33) 3333-3333', disabled: true
   end
 
   scenario 'Employee with email persisted in individual' do
@@ -98,7 +98,7 @@ feature "Employees" do
 
     click_link 'Gabriel Sobrinho'
 
-    expect(page).to have_disabled_field 'E-mail', :with => 'gabriel.sobrinho@gmail.com'
-    expect(page).to have_disabled_field 'Telefone', :with => '(33) 3333-3333'
+    expect(page).to have_field 'E-mail', :with => 'gabriel.sobrinho@gmail.com', disabled: true
+    expect(page).to have_field 'Telefone', :with => '(33) 3333-3333', disabled: true
   end
 end

@@ -37,8 +37,8 @@ feature "PriceCollections" do
     click_link 'Criar Coleta de Preços'
 
     within_tab 'Principal' do
-      expect(page).to have_disabled_field 'Número'
-      expect(page).to have_disabled_field 'Status'
+      expect(page).to have_field 'Número', disabled: true
+      expect(page).to have_field 'Status', disabled: true
       expect(page).to have_select 'Status', :selected => 'Ativo'
 
       fill_in 'Ano', :with => '2012'
@@ -67,7 +67,7 @@ feature "PriceCollections" do
       fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
 
       # testing fill reference unit with javascript
-      expect(page).to have_disabled_field 'Unidade'
+      expect(page).to have_field 'Unidade', disabled: true
       expect(page).to have_field 'Unidade', :with => 'UN'
 
       fill_in 'Marca', :with => 'Norton'
@@ -104,8 +104,8 @@ feature "PriceCollections" do
     expect(page).to_not have_link 'Relatório'
 
     within_tab 'Principal' do
-      expect(page).to have_disabled_field 'Número'
-      expect(page).to have_disabled_field 'Status'
+      expect(page).to have_field 'Número', disabled: true
+      expect(page).to have_field 'Status', disabled: true
       expect(page).to have_select 'Status', :selected => 'Ativo'
 
       fill_in 'Ano', :with => '2012'
@@ -150,7 +150,7 @@ feature "PriceCollections" do
       fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
 
       # testing fill reference unit with javascript
-      expect(page).to have_disabled_field 'Unidade'
+      expect(page).to have_field 'Unidade', disabled: true
       expect(page).to have_field 'Unidade', :with => 'UN'
 
       fill_in 'Marca', :with => 'Norton'
@@ -200,7 +200,7 @@ feature "PriceCollections" do
     expect(page).to have_title 'Editar Coleta de Preços'
 
     within_tab 'Principal' do
-      expect(page).to have_disabled_field 'Número'
+      expect(page).to have_field 'Número', disabled: true
       expect(page).to have_field 'Número', :with => '1'
       expect(page).to have_select 'Status', :selected => 'Ativo'
 
@@ -237,7 +237,7 @@ feature "PriceCollections" do
       expect(page).to have_field 'Observações', :with => 'lote 1'
       expect(page).to have_field 'Lote', :with => '31011020'
       expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
-      expect(page).to have_disabled_field 'Unidade'
+      expect(page).to have_field 'Unidade', disabled: true
       expect(page).to have_field 'Unidade', :with => 'UN'
       expect(page).to have_field 'Marca', :with => 'Norton'
       expect(page).to have_field 'Quantidade', :with => '10'
@@ -267,7 +267,7 @@ feature "PriceCollections" do
     click_link 'Propostas'
 
     click_link '1/2012'
-    expect(page).to have_disabled_field 'Status'
+    expect(page).to have_field 'Status', disabled: true
     expect(page).to have_select 'Status', :selected => ''
   end
 
@@ -346,7 +346,7 @@ feature "PriceCollections" do
     expect(page).to have_title 'Editar Coleta de Preços'
 
     within_tab 'Principal' do
-      expect(page).to have_disabled_field 'Número'
+      expect(page).to have_field 'Número', disabled: true
       expect(page).to have_field 'Número', :with => '1'
       expect(page).to have_select 'Status', :selected => 'Ativo'
 
@@ -368,7 +368,7 @@ feature "PriceCollections" do
       expect(page).to have_field 'Observações', :with => 'lote 2'
       expect(page).to have_field 'Lote', :with => '311012501'
       expect(page).to have_field 'Material', :with => '02.02.00001 - Arame farpado'
-      expect(page).to have_disabled_field 'Unidade'
+      expect(page).to have_field 'Unidade', disabled: true
       expect(page).to have_field 'Unidade', :with => 'UN'
       expect(page).to have_field 'Marca', :with => 'Aço inox'
       expect(page).to have_field 'Quantidade', :with => '100'
@@ -960,7 +960,7 @@ feature "PriceCollections" do
     within_tab 'Fornecedores' do
       fill_with_autocomplete 'Fornecedor', :with => 'Wenderson Malheiros'
 
-      expect(page).to have_disabled_field 'Email'
+      expect(page).to have_field 'Email', disabled: true
       expect(page).to have_field 'Email', :with => 'wenderson.malheiros@gmail.com'
     end
   end
@@ -1028,8 +1028,8 @@ feature "PriceCollections" do
     click_link 'Criar Coleta de Preços'
 
     within_tab 'Principal' do
-      expect(page).to have_disabled_field 'Número'
-      expect(page).to have_disabled_field 'Status'
+      expect(page).to have_field 'Número', disabled: true
+      expect(page).to have_field 'Status', disabled: true
       expect(page).to have_select 'Status', :selected => 'Ativo'
 
       fill_in 'Ano', :with => '2012'
@@ -1058,7 +1058,7 @@ feature "PriceCollections" do
       fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
 
       # testing fill reference unit with javascript
-      expect(page).to have_disabled_field 'Unidade'
+      expect(page).to have_field 'Unidade', disabled: true
       expect(page).to have_field 'Unidade', :with => 'UN'
 
       fill_in 'Marca', :with => 'Norton'

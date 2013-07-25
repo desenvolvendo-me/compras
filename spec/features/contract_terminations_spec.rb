@@ -49,12 +49,12 @@ feature 'ContractTerminations' do
 
     expect(page).to have_content 'Criar nova Rescisão Contratual para Contrato 001'
 
-    expect(page).to have_disabled_field 'Status'
+    expect(page).to have_field 'Status', disabled: true
 
-    expect(page).to have_disabled_field 'Número da rescisão'
+    expect(page).to have_field 'Número da rescisão', disabled: true
     expect(page).to have_field 'Número da rescisão', :with => '1'
 
-    expect(page).to have_disabled_field 'Ano'
+    expect(page).to have_field 'Ano', disabled: true
     expect(page).to have_field 'Ano', :with => "#{Date.current.year}"
 
     fill_in 'Motivo da rescisão', :with => 'Foo Bar'
@@ -76,10 +76,10 @@ feature 'ContractTerminations' do
 
     expect(page).to have_link 'Anular'
 
-    expect(page).to have_disabled_field 'Número da rescisão'
+    expect(page).to have_field 'Número da rescisão', disabled: true
     expect(page).to have_field 'Número da rescisão', :with => '1'
 
-    expect(page).to have_disabled_field 'Ano'
+    expect(page).to have_field 'Ano', disabled: true
     expect(page).to have_field 'Ano', :with => "#{Date.current.year}"
 
     expect(page).to have_field 'Motivo da rescisão', :with => 'Foo Bar'
@@ -99,7 +99,7 @@ feature 'ContractTerminations' do
 
     click_link 'Rescisão'
 
-    expect(page).to have_disabled_field 'Status'
+    expect(page).to have_field 'Status', disabled: true
 
     fill_in 'Motivo da rescisão', :with => 'Motivo vai aqui'
 
@@ -123,15 +123,15 @@ feature 'ContractTerminations' do
 
     click_link 'Rescisão'
 
-    expect(page).to have_disabled_field 'Número da rescisão'
-    expect(page).to have_disabled_field 'Ano'
-    expect(page).to have_disabled_field 'Motivo da rescisão'
-    expect(page).to have_disabled_field 'Data do termo'
-    expect(page).to have_disabled_field 'Data da rescisão'
-    expect(page).to have_disabled_field 'Data da publicação'
-    expect(page).to have_disabled_field 'Local da publicação'
-    expect(page).to have_disabled_field 'Valor da multa'
-    expect(page).to have_disabled_field 'Valor da indenização'
+    expect(page).to have_field 'Número da rescisão', disabled: true
+    expect(page).to have_field 'Ano', disabled: true
+    expect(page).to have_field 'Motivo da rescisão', disabled: true
+    expect(page).to have_field 'Data do termo', disabled: true
+    expect(page).to have_field 'Data da rescisão', disabled: true
+    expect(page).to have_field 'Data da publicação', disabled: true
+    expect(page).to have_field 'Local da publicação', disabled: true
+    expect(page).to have_field 'Valor da multa', disabled: true
+    expect(page).to have_field 'Valor da indenização', disabled: true
 
     expect(page).to_not have_link 'Anular'
     expect(page).to have_disabled_element 'Salvar', :reason => 'não é permitido alterar rescisão anulada'

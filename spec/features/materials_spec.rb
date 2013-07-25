@@ -146,7 +146,7 @@ feature "Materials" do
 
     click_link 'Antivirus'
 
-    expect(page).to_not have_disabled_field 'Classe'
+    expect(page).to_not have_field 'Classe', disabled: true
   end
 
   it 'should not have the expense economic classification disabled when editing material' do
@@ -156,7 +156,7 @@ feature "Materials" do
 
     click_link 'Antivirus'
 
-    expect(page).to_not have_disabled_field 'Natureza da despesa'
+    expect(page).to_not have_field 'Natureza da despesa', disabled: true
   end
 
   scenario "provides a filter by material_type" do
