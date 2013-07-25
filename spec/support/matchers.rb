@@ -189,5 +189,5 @@ module Matchers
 end
 
 RSpec.configure do |config|
-  config.include Matchers, :type => :request
+  config.include Matchers, :type => :feature
 end

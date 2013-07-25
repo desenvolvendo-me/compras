@@ -182,5 +182,5 @@ module Helpers
 end
 
 RSpec.configure do |config|
-  config.include Helpers, :type => :request
+  config.include Helpers, :type => :feature
 end

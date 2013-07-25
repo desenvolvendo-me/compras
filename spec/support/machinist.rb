@@ -8,4 +8,8 @@ RSpec.configure do |config|
   config.after(:each, :type => :request) do
     Machinist::Caching::Shop.instance.reset!
   end
+
+  config.after(:each, :type => :feature) do
+    Machinist::Caching::Shop.instance.reset!
+  end
 end
