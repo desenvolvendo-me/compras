@@ -65,6 +65,6 @@
 
 <div class="yui3-g">
   <div class="yui3-u-1-2">
-    <%= f.input :expense_nature %>
+    <%= f.input :expense_nature, modal_url: modal_expense_natures_path(by_parent_id: f.object.budget_allocation_expense_nature_id) %>
   </div>
 </div>
