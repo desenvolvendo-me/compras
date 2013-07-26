@@ -21,7 +21,7 @@ describe PurchaseProcessBudgetAllocation do
       budget_allocation_capabilities: { include: [:capability, :budget_allocation]}],
       methods: [:balance, :amount, :budget_structure_structure_sequence, :expense_nature_expense_nature,
       :function_code, :subfunction_code, :government_program_code, :government_action_code,
-      :government_action_action_type]}}
+      :government_action_action_type, :balance]}}
 
     subject.budget_allocation_id = 2
 

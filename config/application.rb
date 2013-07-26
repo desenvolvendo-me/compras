@@ -98,6 +98,7 @@ module Compras
       'purchase_process_tradings.js',
       'purchase_process_tradings_negotiations.js',
       'purchase_solicitations.js',
+      'reserve_fund_requests.js',
       'supply_orders.js'
     ]
 

@@ -11,7 +11,7 @@ class PurchaseSolicitationBudgetAllocation < Compras::Model
 
   delegate :annulled?, :services?, :to => :purchase_solicitation, :allow_nil => true
   delegate :to_s, :to => :budget_allocation, :allow_nil => true
-  delegate :expense_nature, :amount, :to => :budget_allocation, :allow_nil => true,
+  delegate :expense_nature, :balance, :to => :budget_allocation, :allow_nil => true,
            :prefix => true
 
   validates :budget_allocation_id, :presence => true
@@ -19,6 +19,6 @@ class PurchaseSolicitationBudgetAllocation < Compras::Model
   private
 
   def budget_allocation_params
-    { includes: :expense_nature, methods: :amount }
+    { includes: :expense_nature, methods: :balance }
   end
 end

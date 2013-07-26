@@ -31,14 +31,12 @@ feature "PurchaseSolicitations" do
     BudgetAllocation.new(
       id: 1,
       code: 123,
-      budget_structure: budget_structure,
       function_code: '04',
       subfunction_code: '01',
       government_program_code: '003',
       government_action_code: '003',
-      expense_nature: aposentadorias_reserva_reformas,
       budget_allocation_capabilities: [amount: 500.00, budget_allocation_id: 1],
-      amount: 500.0,
+      balance: 500.0,
       year: 2012,
       to_s: "123 - #{aposentadorias_reserva_reformas.expense_nature} - #{aposentadorias_reserva_reformas.description}"
     )
@@ -54,6 +52,9 @@ feature "PurchaseSolicitations" do
     ExpenseNature.stub(:find).with(1, params: {}).and_return aposentadorias_rpps
     ExpenseNature.stub(:find).with(2, params: {}).and_return aposentadorias_reserva_reformas
     ExpenseNature.stub(:all).and_return [aposentadorias_rpps, aposentadorias_reserva_reformas]
+
+    budget_allocation.budget_structure = budget_structure
+    budget_allocation.expense_nature   = aposentadorias_reserva_reformas
 
     BudgetAllocation.stub(:find).and_return(budget_allocation)
     BudgetAllocation.stub(:all).and_return([budget_allocation])

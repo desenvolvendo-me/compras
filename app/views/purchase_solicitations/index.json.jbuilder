@@ -16,7 +16,7 @@ json.array!(collection) do |obj|
     json.budget_allocation_expense_nature_id psba.budget_allocation_expense_nature.try(:id)
     json.expense_nature                      psba.expense_nature.to_s
     json.expense_nature_id                   psba.expense_nature_id.to_s
-    json.amount                              psba.budget_allocation_amount.to_f
+    json.balance                             psba.budget_allocation_balance.to_f
     json.estimated_value                     psba.estimated_value.to_f
   end
 

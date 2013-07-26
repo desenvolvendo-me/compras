@@ -62,6 +62,7 @@ menu:
     - licitation_process_impugnments
     - licitation_process_appeals
     - process_responsibles
+    - reserve_fund_requests
 
   - "Instrumentos Contratuais":
     - contracts

@@ -60,7 +60,7 @@ pt-BR:
         budget_allocation: "Dotação orçamentária"
         expense_nature: "Desdobramento"
         budget_allocation_expense_nature: "Natureza da despesa"
-        budget_allocation_amount: "Saldo da dotação"
+        budget_allocation_balance: "Saldo da dotação"
         purchase_process_budget_allocation_value: "Valor previsto"
         lot: "Lote"
         quantity: "Quantidade"
@@ -76,6 +76,7 @@ pt-BR:
         justification: "Justificativa da escolha"
         justification_and_legal: "Justificativa e fundamentação legal"
         budget_allocation_year: "Ano da dotação"
+        to_s: "Processo de compra"
 
   licitation_process:
     messages:

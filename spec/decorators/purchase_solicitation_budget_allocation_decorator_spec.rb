@@ -11,11 +11,11 @@ describe PurchaseSolicitationBudgetAllocationDecorator do
     end
   end
 
-  describe '#budget_allocation_amount' do
+  describe '#budget_allocation_balance' do
     it 'should return the number with precision' do
-      component.stub(:budget_allocation_amount => 10)
+      component.stub(:budget_allocation_balance => 10)
 
-      expect(subject.budget_allocation_amount).to eq '10,00'
+      expect(subject.budget_allocation_balance).to eq '10,00'
     end
   end
 end

@@ -87,3 +87,7 @@ table.records tr.not_selected td {
   background-color: #ffede5;
   color: #ff100e;
 }
+
+div.inline_buttons {
+  padding-top: 27px;
+}

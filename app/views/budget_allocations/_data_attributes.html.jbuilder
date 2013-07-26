@@ -1,7 +1,7 @@
 builder resource, json do
   json.to_s                          resource.to_s
   json.real_amount                   number_with_precision resource.real_amount
-  json.amount                        resource.amount
+  json.balance                       resource.balance
   json.function                      resource.function.to_s
   json.subfunction                   resource.subfunction.to_s
   json.government_program            resource.government_program.to_s

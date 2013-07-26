@@ -1,4 +1,6 @@
 class ApiConsumerController < CrudController
+  before_filter :load_site
+
   def modal
     set_resource_ivar(resource_class)
 
@@ -17,7 +19,15 @@ class ApiConsumerController < CrudController
     end
   end
 
+  def update_resource(object, attributes)
+    object.update_attributes(*attributes)
+  end
+
   def fetch_params
     params
+  end
+
+  def load_site
+    resource_class.site
   end
 end

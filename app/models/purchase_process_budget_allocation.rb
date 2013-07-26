@@ -11,7 +11,7 @@ class PurchaseProcessBudgetAllocation < Compras::Model
   belongs_to_resource :expense_nature
   belongs_to_resource :budget_allocation
 
-  delegate :expense_nature, :expense_nature_id, :amount,
+  delegate :expense_nature, :expense_nature_id, :amount, :balance,
            :to => :budget_allocation, :allow_nil => true, :prefix => true
 
   validates :budget_allocation_id, :value, :presence => true
@@ -32,6 +32,7 @@ class PurchaseProcessBudgetAllocation < Compras::Model
         :subfunction_code,
         :government_program_code,
         :government_action_code,
-        :government_action_action_type] }
+        :government_action_action_type,
+        :balance] }
   end
 end

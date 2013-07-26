@@ -1,4 +1,4 @@
 <%= f.input :purchase_solicitation_budget_allocations, as: :nested_grid,
     :data_disabled => f.object.decorator.is_annulled_message,
     columns: [:budget_allocation, :budget_allocation_expense_nature,
-              :expense_nature, :budget_allocation_amount, :estimated_value]%>
+              :expense_nature, :budget_allocation_balance, :estimated_value]%>

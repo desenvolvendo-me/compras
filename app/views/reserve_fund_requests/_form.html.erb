@@ -1,0 +1,64 @@
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :to_s, disabled: true %>
+    <%= f.input :id, as: :hidden %>
+    <%= hidden_field_tag :reserve_fund_id %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :descriptor, as: :modal, fake: true, required: true, label: 'Descritor' %>
+  </div>
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-3">
+    <%= f.input :budget_allocations, required: true, as: :select, label: 'Dotação Orçamentária',
+      collection: budget_allocation_for_select(resource) %>
+  </div>
+
+  <div class="yui3-u-1-6">
+    <%= f.input :date, as: :fake, required: true, label: 'Data',
+      input_html: { 'data-datepicker' => true } %>
+  </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :amount, as: :fake, required: true, label: 'Valor da reserva',
+      input_html: { 'data-decimal' => true, class: :decimal } %>
+  </div>
+
+  <div class="yui3-u-1-4 inline_buttons">
+    <%= button_tag "Bloquear", type: :button, class: 'button primary', id: :reserve_fund_create %>
+    <%= button_tag "Cancelar", type: :button, class: 'button primary hidden', id: :reserve_fund_cancel %>
+  </div>
+</div>
+
+<table class="records">
+  <thead>
+    <tr>
+      <th>Cód. Reserva</th>
+      <th>Dotação</th>
+      <th>Valor a Reservar</th>
+      <th>Saldo da Reserva</th>
+      <th>Data da Reserva</th>
+      <th>Editar</th>
+    </tr>
+  </thead>
+
+  <tbody id="records-tbody">
+    <%= render partial: 'grid', collection: ReserveFund.by_purchase_process_id(resource.id),
+      as: :reserve_fund %>
+  </tbody>
+</table>
+
+<div class="right">
+  <div class="yui3-u-1-4 right">
+    <%= f.input :reserve_fund_total_value, as: :fake, disabled: true,
+      label: 'Valor total reservado', input_html: { 'data-decimal' => true, class: :decimal } %>
+  </div>
+</div>
+
+<div class="right">
+  <div class="yui3-u-1-4 right">
+    <%= f.input :budget_allocations_total_value, disabled: true %>
+  </div>
+</div>

@@ -642,7 +642,23 @@ Compras::Application.routes.draw do
     end
   end
 
-  get 'reserve_funds/modal', :as => :modal_reserve_funds
+  resources :reserve_fund_requests do
+    collection do
+      get :filter
+      get :modal
+    end
+
+    member do
+      get :reserve_funds_grid
+    end
+  end
+
+  resources :reserve_funds do
+    collection do
+      get :modal
+    end
+  end
+
   get 'revenue_rubrics/modal', :as => :modal_revenue_rubrics
   get 'revenue_sources/modal', :as => :modal_revenue_sources
   get 'revenue_subcategories/modal', :as => :modal_revenue_subcategories

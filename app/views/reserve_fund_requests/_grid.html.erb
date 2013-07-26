@@ -1,0 +1,30 @@
+<tr>
+  <td><%= reserve_fund.id %></td>
+  <td><%= reserve_fund.budget_allocation.to_s %></td>
+  <td class="amount"><%= number_with_precision reserve_fund.amount %></td>
+  <td><%= number_with_precision reserve_fund.balance %></td>
+  <td><%= l(reserve_fund.date) %></td>
+  <td>
+    <%= link_to "Editar", '#', class: :edit_reserve_fund_button %>
+
+    <div class="form_fields">
+      <%= hidden_field_tag :reserve_fund_id, reserve_fund.id,
+        id: nil, class: :reserve_fund_id %>
+
+      <%= hidden_field_tag :budget_allocation_id, reserve_fund.budget_allocation_id,
+        id: nil, class: :budget_allocation_id %>
+
+      <%= hidden_field_tag :descriptor_id, reserve_fund.descriptor_id,
+        id: nil, class: :descriptor_id %>
+
+      <%= hidden_field_tag :descriptor, reserve_fund.descriptor.attributes[:to_s],
+        id: nil, class: :descriptor %>
+
+      <%= hidden_field_tag :date, l(reserve_fund.date),
+        id: nil, class: :date %>
+
+      <%= hidden_field_tag :amount, number_with_precision(reserve_fund.amount),
+        id: nil, class: :amount %>
+    </div>
+  </td>
+</tr>

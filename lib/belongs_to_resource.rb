@@ -69,15 +69,19 @@ module BelongsToResource
         end
 
         def #{resource_name}=(new_resource)
-          self.#{resource_id}     = new_resource.id
-          self.old_#{resource_id} = #{resource_id}
-          self.#{resource_name}_cache   = new_resource
+          self.#{resource_id}         = new_resource.id
+          self.old_#{resource_id}     = #{resource_id}
+          self.#{resource_name}_cache = new_resource
         end
 
         def #{resource_id}=(new_id)
           self.old_#{resource_id} = #{resource_id}
 
-          super
+          if self.class.superclass <= ActiveResource::Base
+            self.attributes[:#{resource_id}] = new_id
+          else
+            super
+          end
         end
 
         private

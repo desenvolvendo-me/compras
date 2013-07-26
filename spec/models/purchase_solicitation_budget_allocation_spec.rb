@@ -13,7 +13,7 @@ describe PurchaseSolicitationBudgetAllocation do
 
   it { should delegate(:services?).to(:purchase_solicitation).allowing_nil(true) }
   it { should delegate(:expense_nature).to(:budget_allocation).allowing_nil(true).prefix(true) }
-  it { should delegate(:amount).to(:budget_allocation).allowing_nil(true).prefix(true) }
+  it { should delegate(:balance).to(:budget_allocation).allowing_nil(true).prefix(true) }
 
   it { should validate_presence_of :budget_allocation_id }
 
@@ -25,7 +25,7 @@ describe PurchaseSolicitationBudgetAllocation do
 
   it 'should belong to resource budget_allocation' do
     budget_allocation = BudgetAllocation.new(id: 2)
-    params = { params: { includes: :expense_nature, methods: :amount} }
+    params = { params: { includes: :expense_nature, methods: :balance} }
 
     subject.budget_allocation_id = 2
 
