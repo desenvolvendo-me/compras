@@ -330,6 +330,7 @@ pt-BR:
       only_one_reduction_allowed: "não pode ser usado ao mesmo tempo que o decréscimo em percentual"
       unit_price_should_be_lower_than_old_unit_price: "deve ser menor que o valor da melhor proposta"
       the_sum_of_item_prices_should_be_equal_to_proposal: "a soma do valor dos itens deve ser igual ao valor total da proposta/lance"
+      must_not_be_greater_than_one_creditor: "não pode ter mais de um fornecedor quando o contrato não for Consórcio/Convênio"
 
   activerecord:
     errors:

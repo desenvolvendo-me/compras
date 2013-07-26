@@ -10,7 +10,7 @@ class Contract < Compras::Model
                   :licitation_process_id, :start_date,
                   :budget_structure_id, :budget_structure_responsible_id,
                   :lawyer_id, :parent_id, :additives_attributes, :penalty_fine,
-                  :default_fine, :execution_type, :contract_guarantees
+                  :default_fine, :execution_type, :contract_guarantees, :consortium_agreement
 
   attr_modal :year, :contract_number, :sequential_number, :signature_date
 
@@ -60,7 +60,7 @@ class Contract < Compras::Model
     :after_message => :end_date_should_be_after_signature_date
   }, :allow_blank => true
 
-  validate :presence_of_at_least_one_creditor
+  validate :presence_of_at_least_one_creditor, :must_not_be_greater_than_one_creditor
 
   orderize "id DESC"
   filterize
@@ -120,5 +120,11 @@ class Contract < Compras::Model
 
   def presence_of_at_least_one_creditor
     errors.add(:creditors, :blank) if creditors.empty?
+  end
+
+  def must_not_be_greater_than_one_creditor
+    return if consortium_agreement
+
+    errors.add(:creditors, :must_not_be_greater_than_one_creditor) if creditor_ids.count > 1
   end
 end
