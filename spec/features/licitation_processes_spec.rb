@@ -1990,7 +1990,7 @@ feature "LicitationProcesses" do
 
     click_button 'Salvar'
 
-    #expect(page).to_not have_notice 'Processo de Compra 1/2012 criado com sucesso.'
+    expect(page).to have_no_notice 'Processo de Compra 1/2012 criado com sucesso.'
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
@@ -2133,7 +2133,7 @@ feature "LicitationProcesses" do
 
     click_button 'Salvar'
 
-    #expect(page).to_not have_notice 'Processo de Compra 1/2012 editado com sucesso.'
+    expect(page).to have_no_notice 'Processo de Compra 1/2012 editado com sucesso.'
 
     within_tab 'Solicitantes' do
       within_records do

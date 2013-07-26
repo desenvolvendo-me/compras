@@ -1073,7 +1073,7 @@ feature "PriceCollections" do
 
     click_button 'Salvar'
 
-    #expect(page).to_not have_notice 'Coleta de Preços 1/2012 criada com sucesso.'
+    expect(page).to have_no_notice 'Coleta de Preços 1/2012 criada com sucesso.'
 
     within_tab 'Fornecedores' do
       expect(page).to have_content 'E-mail já está em uso'

@@ -95,6 +95,20 @@ module Matchers
     end
   end
 
+  matcher :have_no_notice do |notice|
+    match do |page|
+      expect(page).to have_no_css(".notice", :text => notice)
+    end
+
+    failure_message_for_should do |page|
+      "expected #{page.text.inspect} not to have notice #{notice.inspect}"
+    end
+
+    failure_message_for_should_not do |page|
+      "expected #{page.text.inspect} to have notice #{notice.inspect}"
+    end
+  end
+
   matcher :have_alert do |alert|
     match do |page|
        expect(page).to have_css(".alert", :text => alert)

@@ -98,7 +98,7 @@ feature "SupplyOrder" do
 
     click_button 'Salvar'
 
-    #expect(page).to_not have_notice 'Ordem de Fornecimento criada com sucesso.'
+    expect(page).to have_no_notice 'Ordem de Fornecimento criada com sucesso.'
 
     within :xpath, first_div_path do
       expect(page).to have_content 'não é um número'
@@ -112,7 +112,7 @@ feature "SupplyOrder" do
 
     click_button 'Salvar'
 
-    #expect(page).to_not have_notice 'Ordem de Fornecimento criada com sucesso.'
+    expect(page).to have_no_notice 'Ordem de Fornecimento criada com sucesso.'
 
     within :xpath, first_div_path do
       expect(page).to have_content 'deve ser menor ou igual a 2,99'

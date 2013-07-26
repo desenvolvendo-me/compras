@@ -647,7 +647,7 @@ feature "PurchaseSolicitations" do
 
     click_button 'Salvar'
 
-    #expect(page).to_not have_notice 'Solicitação de Compra 1/2012 criada com sucesso.'
+    expect(page).to have_no_notice 'Solicitação de Compra 1/2012 criada com sucesso.'
 
     expect(page).to have_content "já existe uma solicitação de compra pendente para este solicitante (1 - Secretaria de Educação) e material (01.01.00001 - Antivirus)"
   end
