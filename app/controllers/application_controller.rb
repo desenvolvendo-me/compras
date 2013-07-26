@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
 
     pdf_instance = PDFKit.new render_to_string(:partial => partial_name, :locals => locals)
 
-    if Rails.env.production? || Rails.env.staging? || Rails.env.training?
+    if Rails.production_way?
       pdf_instance.stylesheets += options.fetch(:stylesheets, ["#{root_url_for_pdf}/compras/assets/report.css"])
     end
 

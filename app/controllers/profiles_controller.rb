@@ -26,6 +26,6 @@ class ProfilesController < CrudController
   end
 
   def use_cache?
-    Rails.env.production? || Rails.env.training? || Rails.env.staging?
+    Rails.production_way?
   end
 end
