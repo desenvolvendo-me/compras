@@ -25,7 +25,6 @@ menu:
     - auxiliary:
       - licitation_commissions
       - judgment_forms
-      - legal_references
     - cadastral:
       - banks:
         - agencies
