@@ -61,6 +61,18 @@ $(document).ready(function () {
     $('#pledge_request_budget_allocation').data('source', url);
   }
 
+  function setExpenseNatureModalUrl(parent_id) {
+    var url = Routes.modal_expense_natures,
+        params = {
+          by_parent_id: parent_id
+        };
+
+    url += '?' + $.param(params);
+
+    $('#pledge_request_expense_nature').data('modal-url', url);
+  }
+
+
   $('form#new_pledge_request').on('keyup', '.quantity', function() {
     sumTotalItems();
   });
@@ -97,6 +109,8 @@ $(document).ready(function () {
     }
 
     $('#pledge_request_budget_allocation_balance').val(budget_allocation.balance);
+
+    setExpenseNatureModalUrl(budget_allocation.expense_nature_id);
   });
 
   $('#items').on('nestedForm:afterAdd', function() {
