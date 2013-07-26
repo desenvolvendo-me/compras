@@ -33,6 +33,7 @@ end
 Capybara.configure do |config|
   config.default_driver = ENV['SELENIUM'] ? :selenium : :poltergeist
   config.ignore_hidden_elements = true
+  config.match = :prefer_exact
 end
 
 Capybara.register_driver :selenium do |app|

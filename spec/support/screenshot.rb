@@ -17,13 +17,13 @@ module RSpec
 
         @exception ||= exception
 
-        screenshot if screenshot_on_errors? && is_metadata_type_request?
+        screenshot if screenshot_on_errors? && is_metadata_type_feature?
       end
 
       private
 
-      def is_metadata_type_request?
-        @metadata[:type] == :request
+      def is_metadata_type_feature?
+        @metadata[:type] == :feature
       end
 
       def screenshot_full_path

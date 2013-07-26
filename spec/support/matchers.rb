@@ -41,28 +41,6 @@ module Matchers
     end
   end
 
-  matcher :have_disabled_field do |field, options|
-    match do |page|
-      field = page.find_field(field)
-
-      expect(field.value).to eq options[:with] if options && options[:with]
-
-      if page.driver.class == Capybara::Selenium::Driver
-        expect(field[:disabled]).to be_true
-      else
-        expect(field[:disabled]).to eq 'disabled'
-      end
-    end
-
-    failure_message_for_should do |page|
-      "expected #{page.text.inspect} to have disabled field #{field.inspect}"
-    end
-
-    failure_message_for_should_not do |page|
-      "expected #{page.text.inspect} not to have disabled field #{field.inspect}"
-    end
-  end
-
   matcher :have_readonly_field do |field|
     match do |page|
       field = page.find_field(field)
@@ -114,6 +92,20 @@ module Matchers
 
     failure_message_for_should_not do |page|
       "expected #{page.text.inspect} not to have notice #{notice.inspect}"
+    end
+  end
+
+  matcher :have_no_notice do |notice|
+    match do |page|
+      expect(page).to have_no_css(".notice", :text => notice)
+    end
+
+    failure_message_for_should do |page|
+      "expected #{page.text.inspect} not to have notice #{notice.inspect}"
+    end
+
+    failure_message_for_should_not do |page|
+      "expected #{page.text.inspect} to have notice #{notice.inspect}"
     end
   end
 
@@ -189,5 +181,5 @@ module Matchers
 end
 
 RSpec.configure do |config|
-  config.include Matchers, :type => :request
+  config.include Matchers, :type => :feature
 end
