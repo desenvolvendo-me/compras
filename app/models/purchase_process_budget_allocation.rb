@@ -22,7 +22,11 @@ class PurchaseProcessBudgetAllocation < Compras::Model
     { includes: [
         :expense_nature,
         budget_structure: { except: :custom_data },
-        budget_allocation_capabilities: { include: [:capability, :budget_allocation] }],
+        budget_allocation_capabilities: { include: [
+          :capability,
+          budget_allocation: { include: :budget_structure }
+        ] }
+      ],
       methods: [
         :balance,
         :amount,
