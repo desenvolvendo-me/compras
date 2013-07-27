@@ -11,6 +11,12 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
+module Rails
+  def self.production_way?
+    env.production? || env.staging? || env.training?
+  end
+end
+
 module Compras
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.

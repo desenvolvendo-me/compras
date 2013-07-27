@@ -194,10 +194,15 @@ module TceExport::MG
         @lines = []
         @errors = []
 
-        data_generator.generate_data.each do |data|
-          formats.each do |format|
-            send(format, data)
+        begin
+          data_generator.generate_data.each do |data|
+            formats.each do |format|
+              send(format, data)
+            end
           end
+        rescue Exception => e
+          Raven.capture_exception(e) if Rails.production_way?
+          add_error "gerou erro interno!"
         end
 
         lines.compact.join("\n")
