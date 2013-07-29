@@ -2,6 +2,8 @@ class RemoveCreditorDependencies < ActiveRecord::Migration
   def change
     remove_table :compras_agreement_participants
     remove_table :compras_pledge_liquidation_parcels
+    remove_table :contabilidade_fiscal_note_items
+    remove_table :contabilidade_fiscal_notes
     remove_table :compras_pledge_liquidations
     remove_table :compras_pledge_items
     remove_table :compras_pledge_cancellations
