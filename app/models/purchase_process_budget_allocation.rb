@@ -19,20 +19,44 @@ class PurchaseProcessBudgetAllocation < Compras::Model
   private
 
   def budget_allocation_params
-    { includes: [
+    {
+      includes: [
         :expense_nature,
-        budget_structure: { except: :custom_data },
-        budget_allocation_capabilities: { include: [:capability, :budget_allocation] }],
+        {
+          budget_structure: { except: :custom_data },
+          budget_allocation_capabilities: { include: {
+            capability: {
+              only: :id,
+              methods: [
+                :capability_source_code
+              ]
+            },
+            budget_allocation: {
+              include: {
+                budget_structure: {
+                  methods: [
+                    :structure_sequence
+                  ]
+                }
+              },
+              methods: [
+                :expense_nature_expense_nature,
+                :function_code,
+                :subfunction_code,
+                :government_program_code,
+                :government_action_code,
+                :government_action_action_type,
+                :amount
+              ]
+            }
+          }}
+        }
+      ],
       methods: [
         :balance,
         :amount,
         :budget_structure_structure_sequence,
-        :expense_nature_expense_nature,
-        :function_code,
-        :subfunction_code,
-        :government_program_code,
-        :government_action_code,
-        :government_action_action_type,
-        :balance] }
+      ]
+    }
   end
 end
