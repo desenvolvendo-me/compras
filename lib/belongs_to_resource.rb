@@ -57,7 +57,7 @@ module BelongsToResource
 
       create_reflection :belongs_to, resource_name, { foreign_key: resource_id }, self
 
-      class_eval %{
+      self.send(:class_eval, <<-eoruby, __FILE__, __LINE__ + 1)
         def #{resource_name}(use_cache = true)
           return unless #{resource_id}
 
@@ -69,7 +69,7 @@ module BelongsToResource
         end
 
         def #{resource_name}=(new_resource)
-          self.#{resource_id}         = new_resource.id
+          self.#{resource_id}         = new_resource.try(:id)
           self.old_#{resource_id}     = #{resource_id}
           self.#{resource_name}_cache = new_resource
         end
@@ -90,9 +90,13 @@ module BelongsToResource
         attr_accessor :#{resource_name}_cache
 
         def #{resource_name}_cached
-          if old_#{resource_id} != #{resource_id}
-            self.#{resource_name}_cache = #{resource_class}.find(#{resource_id}, params: #{resource_name}_params)
-            self.old_#{resource_id} = #{resource_id}
+          if #{resource_id}
+            if old_#{resource_id} != #{resource_id}
+              self.#{resource_name}_cache = #{resource_class}.find(#{resource_id}, params: #{resource_name}_params)
+              self.old_#{resource_id} = #{resource_id}
+            end
+          else
+            self.#{resource_name}_cache = nil
           end
 
           #{resource_name}_cache
@@ -101,7 +105,7 @@ module BelongsToResource
         def #{resource_name}_params
           {}
         end
-      }
+      eoruby
     end
   end
 end
