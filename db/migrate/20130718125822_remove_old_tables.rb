@@ -8,6 +8,12 @@ class RemoveOldTables < ActiveRecord::Migration
     remove_table :compras_tax_revenue_closings
     remove_table :compras_tax_revenues
     remove_table :compras_pledge_liquidation_parcel_payers
+    remove_table :compras_payment_reversal_closings
+    remove_table :compras_pledge_liquidation_parcel_payment_reversals
+    remove_table :compras_pledge_liquidation_parcel_payment_closings
+    remove_table :compras_pledge_liquidation_parcel_retentions
+    remove_table :compras_pledge_liquidation_parcel_payments
+    remove_table :compras_pledge_liquidation_parcels
     remove_table :compras_bank_reconciliation_items
     remove_table :compras_extra_budget_pledge_payments
     remove_table :compras_bank_transfer_closings
