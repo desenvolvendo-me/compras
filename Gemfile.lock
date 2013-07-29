@@ -387,7 +387,7 @@ DEPENDENCIES
   typecaster (= 0.0.2)!
   uglifier (= 2.1.1)
   unico (= 6.2.0)
-  unico-api (= 0.0.10)
+  unico-api
   unico-assets (= 1.4.1)
   unicorn (= 4.6.2)
   validates_timeliness (= 3.0.14)
