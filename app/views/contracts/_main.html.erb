@@ -38,6 +38,8 @@
 
 <%= f.input :content %>
 
+<%= f.input :licitation_process %>
+
 <%= f.input :creditors %>
 
 <div class="yui3-g">
@@ -96,7 +98,6 @@
   </div>
 </div>
 
-<%= f.input :licitation_process %>
 
 <div class='yui3-g'>
   <div class='yui3-u-1-2'>
@@ -156,8 +157,17 @@
       $('#contract_modality_humanize').val(licitationProcess.modality_humanize);
       $('#contract_execution_type').val(licitationProcess.execution_type);
       $('#contract_contract_guarantees').val(licitationProcess.contract_guarantees);
+
+      var urlModal = "<%= modal_creditors_path %>?", params = { by_ratification_and_licitation_process_id: licitationProcess.id }
+
+      urlModal += jQuery.param(params);
+
+      $('#contract_creditor').data("modal-url", urlModal);
     } else {
       clearModalityExecutionType();
+      var urlModal = "<%= modal_creditors_path %>"
+
+      $('#contract_creditor').data("modal-url", urlModal);
     }
   });
 
