@@ -56,9 +56,10 @@ group :assets do
 end
 
 group :production, :training, :staging do
-  gem 'sentry-raven', '0.4.8'
   gem 'dalli', '2.6.4'
 end
+
+gem 'sentry-raven', '0.4.8'
 
 group :development, :test do
   gem "factory_girl-preload", :git => 'git://github.com/MarceloCajueiro/factory_girl-preload.git'
