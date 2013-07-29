@@ -41,18 +41,32 @@ $(document).ready(function() {
     alert("Reserva de Dotação editada com sucesso...");
   }
 
+  function unblockBudgetDataSuccess(response) {
+    renderReserveFundsGrid();
+
+    alert("Desbloqueio criado com sucesso...");
+
+    hideUnblockDiv();
+    showReserveFundForm();
+
+    $("#licitation_process_unblock_amount").val('');
+    $("#reserve_fund_id").val('');
+  }
+
   function postDataBeforeSend() {
     disableBlockButton();
+    disableUnblockButton();
   }
 
   function postDataComplete() {
     enableBlockButton();
+    enableUnblockButton();
   }
 
   function renderReserveFundsGrid() {
     $.get(reserveFundsGridRoute(), function(data) {
       $("#records-tbody").html(data);
-      sumReserveFundAmount();
+      $("#licitation_process_reserve_fund_total_value").val(sumReserveFundAmount());
     });
   }
 
@@ -67,6 +81,12 @@ $(document).ready(function() {
     }
   };
 
+  function submitUnblockData() {
+    var unblockBudget = { unblock_budget: buildUnblockBudget() };
+
+    ajax(Routes.unblock_budgets, 'POST', unblockBudget, unblockBudgetDataSuccess);
+  }
+
   function ajax(url, type, data, success) {
     $.ajax({
       type: type,
@@ -79,11 +99,10 @@ $(document).ready(function() {
       complete: postDataComplete
     });
   }
-  //
 
   // FORM FUNCTIONS
   function buildReserveFund() {
-    reserveFund = {};
+    var reserveFund = {};
 
     reserveFund['id']                   = $("#reserve_fund_id").val();
     reserveFund['date']                 = $("#licitation_process_date").val();
@@ -95,23 +114,53 @@ $(document).ready(function() {
     return reserveFund;
   }
 
+  function buildUnblockBudget() {
+    var unblockBudget = {};
+
+    unblockBudget['reserve_fund_id'] = $("#reserve_fund_id").val();
+    unblockBudget['amount']          = $("#licitation_process_unblock_amount").val();
+
+    return unblockBudget;
+  }
+
   $('button#reserve_fund_create').on("click", function(event) {
     event.preventDefault();
 
     validateFormData() ? submitData() : false
   });
 
-  $('button#reserve_fund_cancel').on("click", function(event) {
+
+  $('button#reserve_fund_unblock').on("click", function(event) {
     event.preventDefault();
 
-    resetForm();
+    validateUnblockFormData() ? submitUnblockData() : false
   });
 
-  $('a.edit_reserve_fund_button').on("click", function(event) {
+  $('button#reserve_fund_unblock_cancel').on("click", function(event) {
+    event.preventDefault();
+
+    hideUnblockDiv();
+    showReserveFundForm();
+
+    $("#licitation_process_unblock_amount").val('');
+    $("#reserve_fund_id").val('');
+  });
+
+  $("table.records").on("click", "a.unblock_reserve_fund_button", function(event) {
+    showUnblockDiv();
+    hideReserveFundForm();
+
     dataDiv = $(this).next("div.form_fields");
 
-    buildFormFromGrid(dataDiv);
+    buildUnblockFormFromGrid(dataDiv);
+
+    //buildFormFromGrid(dataDiv);
   });
+
+  function buildUnblockFormFromGrid(dataDiv) {
+    $("#reserve_fund_id").val(dataDiv.find('.reserve_fund_id').val());
+    $("#licitation_process_reserve_fund").val(dataDiv.find('.reserve_fund_to_s').val());
+  }
 
   function buildFormFromGrid(dataDiv) {
     $("#reserve_fund_id").val(dataDiv.find('.reserve_fund_id').val());
@@ -137,18 +186,45 @@ $(document).ready(function() {
   }
 
   function validateFormData() {
-    var descriptorId        = $("#licitation_process_descriptor_id").val();
+    if (allInputsFilled()) {
+      return true
+    } else {
+      return formError("Preencha todos os campos obrigatórios...");
+    }
+  }
 
-    if (_.isEmpty(descriptorId)) {
-      return formError("Descritor não pode ficar em branco...");
+  function validateUnblockFormData() {
+    var amount = $("#licitation_process_unblock_amount").val();
+
+    if (_.isEmpty(amount)) {
+      return formError("Preencha o valor de desbloqueio...");
     }
 
-    return true;
+    return true
+  }
+
+  function allInputsFilled() {
+    var inputs  = $("div#reserve_fund_fields :input.required");
+
+    var emptyValues = _.filter(inputs, function(el) {
+      val = $(el).val();
+
+      return _.isEmpty(val);
+    });
+
+    return _.isEmpty(emptyValues);
   }
 
   // HELPER FUNCTIONS
   function disableBlockButton() {
     button = $('button#reserve_fund_create');
+
+    button.attr('disabled', true);
+    button.text('Aguarde...');
+  }
+
+  function disableUnblockButton() {
+    button = $('button#reserve_fund_unblock');
 
     button.attr('disabled', true);
     button.text('Aguarde...');
@@ -161,12 +237,35 @@ $(document).ready(function() {
     button.text('Bloquear');
   }
 
+  function enableUnblockButton() {
+    button = $('button#reserve_fund_unblock');
+
+    button.attr('disabled', false);
+    button.text('Desbloquear');
+  }
+
   function showCancelButton() {
     $("#reserve_fund_cancel").removeClass("hidden");
   }
 
   function hideCancelButton() {
     $("#reserve_fund_cancel").addClass("hidden");
+  }
+
+  function showUnblockDiv() {
+    $("div#unblock_reserve_fund_fields").removeClass("hidden");
+  }
+
+  function hideUnblockDiv() {
+    $("div#unblock_reserve_fund_fields").addClass("hidden");
+  }
+
+  function hideReserveFundForm() {
+    $("#reserve_fund_fields").addClass("hidden");
+  }
+
+  function showReserveFundForm() {
+    $("#reserve_fund_fields").removeClass("hidden");
   }
 
   function reserveFundsGridRoute() {
