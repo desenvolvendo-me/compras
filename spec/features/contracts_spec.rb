@@ -369,4 +369,46 @@ feature "Contracts" do
       end
     end
   end
+
+  scenario 'should filter creditor by licitation process when licitation process is not nil' do
+    creditor_nohup = Creditor.make!(:nohup)
+    creditor_sobrinho = Creditor.make!(:sobrinho_sa)
+
+    purchase_process_one = LicitationProcess.make(:processo_licitatorio)
+
+    Bidder.make!(:licitante, creditor: creditor_sobrinho, enabled: true, licitation_process: purchase_process_one)
+    Bidder.make!(:licitante, creditor: creditor_nohup, enabled: true, licitation_process: purchase_process_one)
+
+    JudgmentCommissionAdvice.make!(:parecer, licitation_process: purchase_process_one)
+
+    FactoryGirl.create(:process_responsible, licitation_process: purchase_process_one,
+      stage_process: StageProcess.make(:emissao_edital))
+
+    LicitationProcessRatification.make!(:processo_licitatorio_computador, licitation_process: purchase_process_one,
+      creditor: creditor_sobrinho, ratification_date: "2013-01-31".to_date, adjudication_date: "2013-01-31".to_date)
+
+    navigate 'Instrumentos Contratuais > Contratos'
+
+    click_link 'Criar Contrato'
+
+    fill_modal 'Processo de compra', with: '2012', field: 'Ano'
+
+    within_modal 'Fornecedor' do
+      click_button 'Pesquisar'
+
+      expect(page).to have_content 'Gabriel Sobrinho'
+      expect(page).to_not have_content 'Nohup'
+
+      click_link 'Voltar'
+    end
+
+    clear_modal 'Processo de compra'
+
+    within_modal 'Fornecedor' do
+      click_button 'Pesquisar'
+
+      expect(page).to have_content 'Gabriel Sobrinho'
+      expect(page).to have_content 'Nohup'
+    end
+  end
 end
