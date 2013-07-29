@@ -1,2 +1,0 @@
-class DocumentTypesController < CrudController
-end

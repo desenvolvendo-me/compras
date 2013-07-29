@@ -71,16 +71,8 @@ describe TceExport::MG::MonthlyMonitoring::BiddingAuthorizationGenerator do
       BudgetStructure.should_receive(:find).at_least(1).times.with(2, params:{}).and_return(budget_structure_parent)
       BudgetStructure.should_receive(:find).at_least(1).times.with(1, params:{}).and_return(budget_structure)
 
-      prefecture = Prefecture.make!(:belo_horizonte)
+      prefecture = Prefecture.make!(:belo_horizonte_mg)
       FactoryGirl.create(:extended_prefecture, prefecture: prefecture)
-
-      Customization.make!(:campo_string,
-        state: ::FactoryGirl::Preload.factories['State'][:pr],
-        data: [
-          CustomizationData.make(:string, data: 'Objeto social do credor'),
-          CustomizationData.make(:string, data: 'Numero do registro CVM'),
-          CustomizationData.make(:string, data: 'Data do registro CVM')
-      ])
 
       JudgmentCommissionAdvice.make!(:parecer, licitation_process: licitation_process_two)
       JudgmentCommissionAdvice.make!(:parecer, licitation_process: licitation_process_three)

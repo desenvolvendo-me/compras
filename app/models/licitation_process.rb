@@ -51,7 +51,7 @@ class LicitationProcess < Compras::Model
 
   belongs_to_resource :execution_unit_responsible, resource_class: BudgetStructure
 
-  has_and_belongs_to_many :document_types, :join_table => :compras_document_types_compras_licitation_processes
+  has_and_belongs_to_many :document_types, :join_table => :compras_licitation_processes_unico_document_types
   has_and_belongs_to_many :purchase_solicitations, :join_table => :compras_licitation_processes_purchase_solicitations,
                           :before_add => :update_purchase_solicitation_to_purchase_process,
                           :before_remove => :update_purchase_solicitation_to_liberated

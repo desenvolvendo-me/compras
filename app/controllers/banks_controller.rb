@@ -1,2 +1,0 @@
-class BanksController < CrudController
-end

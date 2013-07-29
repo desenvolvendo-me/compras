@@ -1,6 +1,6 @@
 # encoding: utf-8
 class LicitationCommission < Compras::Model
-  include CustomData
+  include Unico::CustomData
   reload_custom_data
 
   attr_accessible :commission_type, :nomination_date, :expiration_date,

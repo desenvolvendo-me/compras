@@ -30,3 +30,14 @@ Address.blueprint(:education) do
   number { 3524 }
   addressable { nil }
 end
+
+Address.blueprint(:apto_bh) do
+  neighborhood { ::FactoryGirl::Preload.factories['Neighborhood'][:centro_bh] }
+  street { Street.make!(:cristiano_machado) }
+  land_subdivision { ::FactoryGirl::Preload.factories['LandSubdivision'][:solar_da_serra] }
+  condominium { ::FactoryGirl::Preload.factories['Condominium'][:parque_das_flores] }
+  complement { "Apto 34" }
+  zip_code { "33400-500" }
+  number { 9874 }
+  addressable { nil }
+end
