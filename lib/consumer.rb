@@ -1,11 +1,13 @@
 require 'active_resource/reflection'
 require 'active_resource/associations'
+require 'active_resource/localize'
 require 'active_resource/parser'
 
 module UnicoAPI
   class Consumer
     include ActiveResource::Reflection
     include ActiveResource::Parser
+    include ActiveResource::Localize
 
     def load(attributes, remove_root = false)
       super.parse_attributes!
