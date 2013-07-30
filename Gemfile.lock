@@ -292,7 +292,7 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     tzinfo (0.3.37)
-    uglifier (2.1.1)
+    uglifier (2.1.2)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
     unico (6.2.2)
@@ -385,7 +385,7 @@ DEPENDENCIES
   squeel
   strong_parameters (= 0.2.1)
   typecaster (= 0.0.2)!
-  uglifier (= 2.1.1)
+  uglifier
   unico (= 6.2.2)
   unico-api
   unico-assets

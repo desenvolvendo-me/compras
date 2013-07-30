@@ -52,7 +52,7 @@ gem 'decore', :git => 'git://github.com/sobrinho/decore.git'
 gem 'strong_parameters', '0.2.1'
 
 group :assets do
-  gem 'uglifier', '2.1.1'
+  gem 'uglifier'
 end
 
 group :production, :training, :staging do
