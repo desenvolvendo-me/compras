@@ -45,16 +45,12 @@ module RSpec
         RSpec.configuration.screenshot_folder
       end
 
-      def full_screenshot?
-        RSpec.configuration.screenshot_full
-      end
-
       def screenshot_on_errors?
         RSpec.configuration.screenshot_on_errors
       end
 
       def screenshot
-        Capybara.current_session.driver.render(screenshot_full_path, :full => full_screenshot?)
+        Capybara.save_screenshot screenshot_full_path
       end
     end
   end
