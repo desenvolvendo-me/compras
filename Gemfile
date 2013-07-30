@@ -41,7 +41,7 @@ gem 'rubyzip', '0.9.9'
 gem 'inherited_resources', '1.4.0'
 gem 'has_scope', '0.5.1'
 gem 'responders', '0.9.3'
-gem 'jbuilder', '1.4.2'
+gem 'jbuilder'
 
 gem 'foreigner', '1.4.1'
 gem 'i18n_alchemy', :git => 'git://github.com/carlosantoniodasilva/i18n_alchemy.git'
