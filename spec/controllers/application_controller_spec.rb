@@ -36,16 +36,4 @@ describe ApplicationController do
 
     subject.current_prefecture
   end
-
-  describe '#render_to_pdf' do
-    it 'should render_partial to pdf' do
-      subject.should_receive(:render_to_string).
-              with(:partial => 'partial', :locals => { :resource => true }).
-              and_return('html')
-
-      PDFKit.any_instance.should_receive(:to_pdf).and_return('PDF')
-
-      expect(subject.render_to_pdf('partial', :locals => { :resource => true })).to eq 'PDF'
-    end
-  end
 end
