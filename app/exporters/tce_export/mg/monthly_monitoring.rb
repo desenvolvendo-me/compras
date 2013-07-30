@@ -201,7 +201,7 @@ module TceExport::MG
             end
           end
         rescue Exception => e
-          Raven.capture_exception(e) if Rails.production_way?
+          Raven.capture_exception(e)
           add_error "gerou erro interno!"
         end
 
