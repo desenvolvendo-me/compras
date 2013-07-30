@@ -319,7 +319,7 @@ GEM
       i18n (~> 0.6.1)
       kaminari (~> 0.14.1)
       rails (~> 3.2.13)
-    unico-assets (1.4.1)
+    unico-assets (1.5.1)
       actionpack (~> 3.2.0)
       railties (~> 3.2.0)
     unicorn (4.6.3)
@@ -387,8 +387,8 @@ DEPENDENCIES
   typecaster (= 0.0.2)!
   uglifier (= 2.1.1)
   unico (= 6.2.2)
-  unico-api (= 0.0.14)
-  unico-assets (= 1.4.1)
+  unico-api
+  unico-assets
   unicorn
   validates_timeliness (= 3.0.14)
   wkhtmltopdf-binary (= 0.9.9.1)
