@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 source 'https://SEqawpNNEx65yrzYS9p8@gem.fury.io/me/'
 
 ruby "2.0.0"
@@ -59,7 +59,7 @@ group :production, :training, :staging do
   gem 'dalli', '2.6.4'
 end
 
-gem 'sentry-raven', '0.4.8'
+gem 'sentry-raven'
 
 group :development, :test do
   gem "factory_girl-preload", :git => 'git://github.com/MarceloCajueiro/factory_girl-preload.git'

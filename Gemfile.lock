@@ -40,7 +40,7 @@ GIT
       activesupport (~> 3.2.0)
 
 GEM
-  remote: http://rubygems.org/
+  remote: https://rubygems.org/
   remote: https://SEqawpNNEx65yrzYS9p8@gem.fury.io/me/
   specs:
     actionmailer (3.2.14)
@@ -123,8 +123,8 @@ GEM
     factory_girl_rails (4.2.1)
       factory_girl (~> 4.2.0)
       railties (>= 3.0.0)
-    faraday (0.8.7)
-      multipart-post (~> 1.1)
+    faraday (0.8.8)
+      multipart-post (~> 1.2.0)
     faye-websocket (0.4.7)
       eventmachine (>= 0.12.0)
     ffi (1.9.0)
@@ -250,10 +250,9 @@ GEM
       multi_json (~> 1.0)
       rubyzip
       websocket (~> 1.0.4)
-    sentry-raven (0.4.8)
+    sentry-raven (0.6.0)
       faraday (>= 0.7.6)
       hashie (>= 1.1.0)
-      multi_json (~> 1.0)
       uuidtools
     shoulda-matchers (2.2.0)
       activesupport (>= 3.0.0)
@@ -377,7 +376,7 @@ DEPENDENCIES
   rspec-rails (= 2.12.0)
   rubyzip (= 0.9.9)
   selenium-webdriver (~> 2.33.0)
-  sentry-raven (= 0.4.8)
+  sentry-raven
   shoulda-matchers (= 2.2.0)
   sidekiq
   simple_form (= 2.1.0)
