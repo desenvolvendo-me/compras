@@ -27,7 +27,7 @@ gem 'simple_form', '2.1.0'
 gem 'kaminari', '0.14.1'
 
 gem 'squeel'
-gem 'carrierwave', '0.8.0'
+gem 'carrierwave'
 gem 'awesome_nested_set', '2.1.3'
 
 gem 'mail_validator', '0.2.0'
