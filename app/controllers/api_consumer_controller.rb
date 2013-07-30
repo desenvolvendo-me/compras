@@ -15,12 +15,12 @@ class ApiConsumerController < CrudController
 
   def effectively_build_resource
     end_of_association_chain.send(method_for_build).tap do |object|
-      return object.class.new(*resource_params)
+      return object.class.new.localized(*resource_params).parse_attributes!
     end
   end
 
   def update_resource(object, attributes)
-    object.update_attributes(*attributes)
+    object.localized.update_attributes(*attributes)
   end
 
   def fetch_params
