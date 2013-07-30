@@ -27,7 +27,7 @@ GIT
 
 GIT
   remote: git://github.com/ryanb/cancan.git
-  revision: ccd24ab30fdd0b48ac0ad71080445f5366788208
+  revision: e6bf4c8d12dca316eb4f0923ca30b6d3dfedb7ae
   branch: 2.0
   specs:
     cancan (2.0.0.alpha)
