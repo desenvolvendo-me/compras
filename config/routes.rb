@@ -233,6 +233,13 @@ Compras::Application.routes.draw do
     end
   end
 
+  resources :contract_additives do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :contracts do
     resources :delivery_schedules
 

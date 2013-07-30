@@ -2,8 +2,8 @@ pt-BR:
   activerecord:
     models:
       contract_additive:
-        one: "Aditivo"
-        other: "Aditivos"
+        one: "Aditivo/Apostilamento"
+        other: "Aditivos/Apostilamentos"
 
     attributes:
       contract_additive:

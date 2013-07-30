@@ -1,43 +1,36 @@
-<div class="nested-additives">
-  <%= f.input :id, as: 'hidden' %>
-  <%= f.input :_destroy, as: 'hidden', input_html: { class: 'destroy' } %>
+<%= f.input :contract_id, as: 'hidden' %>
 
-  <div class="yui3-g" style="padding: 10px;">
-    <div class="yui3-u-1-8">
-      <%= f.input :number %>
-    </div>
+<div class="yui3-g">
+  <div class="yui3-u-1-8">
+    <%= f.input :number %>
+  </div>
 
-    <div class="yui3-u-1-5">
-      <%= f.input :additive_type, input_html: { class: 'additive_type' } %>
-    </div>
+  <div class="yui3-u-1-5">
+    <%= f.input :additive_type, input_html: { class: 'additive_type' } %>
+  </div>
 
-    <div class="yui3-u-1-5">
-      <%= f.input :signature_date %>
-    </div>
+  <div class="yui3-u-1-5">
+    <%= f.input :signature_date %>
+  </div>
 
-    <div class="yui3-u-1-5">
-      <%= f.input :publication_date %>
-    </div>
+  <div class="yui3-u-1-5">
+    <%= f.input :publication_date %>
+  </div>
 
-    <div class="yui3-u-1-4">
-      <%= f.input :dissemination_source %>
-    </div>
+  <div class="yui3-u-1-4">
+    <%= f.input :dissemination_source %>
+  </div>
 
-    <div class="yui3-u-1-2" style="padding-left: 0;">
-      <%= f.input :observation %>
-    </div>
+  <div class="yui3-u-1-2" style="padding-left: 0;">
+    <%= f.input :observation %>
+  </div>
 
-    <div class="yui3-u-1-8 value">
-      <%= f.input :value %>
-    </div>
+  <div class="yui3-u-1-8 value">
+    <%= f.input :value %>
+  </div>
 
-    <div class="yui3-u-1-6 end_date" style="display: none;">
-      <%= f.input :end_date %>
-    </div>
-
-    <div class="yui3-u-1-6" style="padding-top: 27px;">
-      <input type="button" class="button negative remove-additives" value="Remover">
-    </div>
+  <div class="yui3-u-1-6 end_date" style="display: none;">
+    <%= f.input :end_date %>
   </div>
 </div>
 
