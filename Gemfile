@@ -19,7 +19,7 @@ gem 'unico-api'
 gem 'devise', '2.2.4'
 gem 'cancan', :git => 'git://github.com/ryanb/cancan.git', :branch => '2.0'
 gem 'quaestio', '0.1.1'
-gem 'active_relatus', '0.1.1'
+gem 'active_relatus'
 
 gem 'wkhtmltopdf-binary', '0.9.9.1'
 gem 'simple_form', '2.1.0'

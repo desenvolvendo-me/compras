@@ -50,7 +50,7 @@ GEM
       rack-cache (~> 1.2)
       rack-test (~> 0.6.1)
       sprockets (~> 2.2.1)
-    active_relatus (0.1.1)
+    active_relatus (0.2.1)
       activemodel (>= 3.2.8)
       activesupport (>= 3.2.8)
       rake (~> 10.0)
@@ -333,7 +333,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  active_relatus (= 0.1.1)
+  active_relatus
   activerecord-connections (= 0.0.3)
   activerecord-postgres-hstore (= 0.6.0)
   awesome_nested_set (= 2.1.3)
