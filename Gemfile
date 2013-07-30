@@ -43,7 +43,7 @@ gem 'has_scope', '0.5.1'
 gem 'responders', '0.9.3'
 gem 'jbuilder'
 
-gem 'foreigner', '1.4.1'
+gem 'foreigner'
 gem 'i18n_alchemy', :git => 'git://github.com/carlosantoniodasilva/i18n_alchemy.git'
 
 gem 'enumerate_it', '1.0.3'
