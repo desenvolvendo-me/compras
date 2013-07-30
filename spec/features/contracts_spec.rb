@@ -221,12 +221,14 @@ feature "Contracts" do
 
     click_link 'Criar Aditivo'
 
+    choose 'Apostilamento'
     fill_in 'Número', with: '666'
     select 'Outros', from: 'Tipo'
     fill_in 'Data da assinatura', with: '13/10/2013'
     fill_in 'Data de publicação', with: '13/10/2013'
     fill_modal 'Meio de divulgação', with: 'Jornal Oficial do Município', field: 'Descrição'
     fill_in 'Observações', with: 'aditivo 1'
+    fill_in 'Descrição', with: 'Descrição do aditivo 1'
 
     click_button 'Salvar'
 
@@ -242,7 +244,9 @@ feature "Contracts" do
     expect(page).to have_field 'Data de publicação', with: '13/10/2013'
     expect(page).to have_field 'Meio de divulgação', with: 'Jornal Oficial do Município'
     expect(page).to have_field 'Observações', with: 'aditivo 1'
+    expect(page).to have_field 'Descrição', with: 'Descrição do aditivo 1'
 
+    choose 'Aditivo'
     fill_in 'Número', with: '667'
     select 'Reajuste', from: 'Tipo'
     fill_in 'Data da assinatura', with: '13/11/2013'
