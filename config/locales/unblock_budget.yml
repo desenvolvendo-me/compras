@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      unblock_budget:
+        one: "Desbloqueio de Dotação"
+        other: "Desbloqueio de Dotações"
+
+    attributes:
+      unblock_budget:
+        amount: "Valor do desbloqueio"
+        reserve_fund: "Reserva de dotação"

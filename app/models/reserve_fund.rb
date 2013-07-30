@@ -1,6 +1,7 @@
 class ReserveFund < UnicoAPI::Resources::Contabilidade::ReserveFund
   include ActiveResource::Associations
   include BelongsToResource
+  include I18n::Alchemy
 
   attr_modal :date, :budget_allocation_id, force: true
 

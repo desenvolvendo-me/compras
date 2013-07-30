@@ -102,25 +102,21 @@ $(document).ready(function() {
 
   // FORM FUNCTIONS
   function buildReserveFund() {
-    var reserveFund = {};
-
-    reserveFund['id']                   = $("#reserve_fund_id").val();
-    reserveFund['date']                 = $("#licitation_process_date").val();
-    reserveFund['amount']               = $("#licitation_process_amount").val();
-    reserveFund['descriptor_id']        = $("#licitation_process_descriptor_id").val();
-    reserveFund['budget_allocation_id'] = $("#licitation_process_budget_allocations").val();
-    reserveFund['purchase_process_id']  = $("#licitation_process_id").val();
-
-    return reserveFund;
+    return {
+      id:                   $("#reserve_fund_id").val(),
+      date:                 $("#licitation_process_date").val(),
+      amount:               $("#licitation_process_amount").val(),
+      descriptor_id:        $("#licitation_process_descriptor_id").val(),
+      budget_allocation_id: $("#licitation_process_budget_allocations").val(),
+      purchase_process_id:  $("#licitation_process_id").val()
+    };
   }
 
   function buildUnblockBudget() {
-    var unblockBudget = {};
-
-    unblockBudget['reserve_fund_id'] = $("#reserve_fund_id").val();
-    unblockBudget['amount']          = $("#licitation_process_unblock_amount").val();
-
-    return unblockBudget;
+    return {
+      reserve_fund_id: $("#reserve_fund_id").val(),
+      amount:          $("#licitation_process_unblock_amount").val()
+    };
   }
 
   $('button#reserve_fund_create').on("click", function(event) {
