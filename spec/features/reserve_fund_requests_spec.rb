@@ -11,7 +11,7 @@ feature "ReserveFundRequests" do
 
     LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Processos de Compra > Reserva de Dotações'
+    navigate 'Instrumentos Contratuais > Reserva de Dotações'
 
     click_link "Limpar Filtro"
 
