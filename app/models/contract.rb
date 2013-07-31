@@ -60,7 +60,8 @@ class Contract < Compras::Model
     :after_message => :end_date_should_be_after_signature_date
   }, :allow_blank => true
 
-  validate :presence_of_at_least_one_creditor, :must_not_be_greater_than_one_creditor
+  validate :presence_of_at_least_one_creditor
+  validate :must_not_be_greater_than_one_creditor, unless: :consortium_agreement?
 
   orderize "id DESC"
   filterize
@@ -123,8 +124,6 @@ class Contract < Compras::Model
   end
 
   def must_not_be_greater_than_one_creditor
-    return if consortium_agreement
-
     errors.add(:creditors, :must_not_be_greater_than_one_creditor) if creditor_ids.count > 1
   end
 end
