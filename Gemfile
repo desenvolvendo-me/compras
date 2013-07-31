@@ -13,7 +13,7 @@ gem 'pg'
 gem 'activerecord-connections', '0.0.3'
 gem 'activerecord-postgres-hstore', '0.6.0'
 
-gem 'unico', '6.2.2'
+gem 'unico', '6.2.3'
 gem 'unico-assets'
 gem 'unico-api'
 gem 'devise', '2.2.4'
