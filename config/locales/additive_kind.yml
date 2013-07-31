@@ -1,0 +1,5 @@
+pt-BR:
+  enumerations:
+    additive_kind:
+      additive: "Aditivo"
+      addition: "Apostilamento"

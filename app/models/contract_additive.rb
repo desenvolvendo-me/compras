@@ -1,9 +1,10 @@
 class ContractAdditive < Compras::Model
   attr_accessible :number, :additive_type, :signature_date, :end_date,
                   :publication_date, :dissemination_source_id, :value,
-                  :observation
+                  :observation, :contract_id, :additive_kind, :description
 
   has_enumeration_for :additive_type, with: UnicoAPI::Resources::Compras::Enumerations::ContractAdditiveType
+  has_enumeration_for :additive_kind
 
   validates :number, :additive_type, :signature_date, :publication_date,
             :dissemination_source, presence: true
@@ -13,6 +14,13 @@ class ContractAdditive < Compras::Model
 
   belongs_to :contract
   belongs_to :dissemination_source
+
+  scope :by_contract_id, -> (contract_id) do
+    where { |query| query.contract_id.eq contract_id }
+  end
+
+  orderize "id"
+  filterize
 
   private
 
