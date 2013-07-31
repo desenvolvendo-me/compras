@@ -1,7 +1,7 @@
 # encoding: utf-8
 require "spec_helper"
 
-describe "API::MaterialClass", :api do
+describe Api::MaterialClassesController do
   def get_material_classes(params={})
     get api_material_classes_url, params, {"x-unico-api-customer-secret-token" => "1234"}
   end
