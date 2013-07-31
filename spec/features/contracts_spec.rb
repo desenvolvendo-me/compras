@@ -411,4 +411,58 @@ feature "Contracts" do
       expect(page).to have_content 'Nohup'
     end
   end
+
+  scenario 'should disabled creditor when contract has one creditor and contract is not consortium_agreement' do
+    Creditor.make!(:sobrinho_sa)
+    Creditor.make!(:nohup)
+    Contract.make!(:primeiro_contrato)
+
+    navigate 'Instrumentos Contratuais > Contratos'
+
+    click_link 'Limpar Filtro'
+
+    click_link '001'
+
+    expect(page).to have_field 'Fornecedor', disabled: true
+
+    check 'Consórcio/Convênio'
+
+    expect(page).to_not have_field 'Fornecedor', disabled: true
+
+    fill_modal 'Fornecedor', with: 'Nohup'
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Contrato editado com sucesso.'
+
+    click_link 'Limpar Filtro'
+    click_link '001'
+
+    within 'tbody.contract_creditor_records' do
+      expect(page).to have_content 'Nohup'
+      expect(page).to have_content 'Gabriel Sobrinho'
+    end
+
+    click_link 'Voltar'
+
+    click_link 'Criar Contrato'
+
+    expect(page).to_not have_field 'Fornecedor', disabled: true
+
+    fill_modal 'Fornecedor', with: 'Gabriel Sobrinho'
+
+    expect(page).to have_field 'Fornecedor', disabled: true
+
+    check 'Consórcio/Convênio'
+
+    fill_modal 'Fornecedor', with: 'Nohup'
+
+    uncheck 'Consórcio/Convênio'
+
+    expect(page).to have_field 'Fornecedor', disabled: true
+
+    click_button 'Salvar'
+
+    expect(page).to have_content 'não pode ter mais de um fornecedor quando o contrato não for Consórcio/Convênio'
+  end
 end

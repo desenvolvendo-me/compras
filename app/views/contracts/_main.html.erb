@@ -12,6 +12,8 @@
   </div>
 </div>
 
+<%= f.input :consortium_agreement %>
+
 <div class="yui3-g">
   <div class="yui3-u-1-2">
     <%= f.input :parent %>
@@ -151,7 +153,6 @@
   };
 
   $('form').on('change', '#contract_licitation_process_id', function (event, licitationProcess) {
-
     if (licitationProcess) {
       $('#contract_content').val(licitationProcess.description);
       $('#contract_modality_humanize').val(licitationProcess.modality_humanize);

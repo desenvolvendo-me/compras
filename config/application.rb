@@ -95,6 +95,7 @@ module Compras
       # javascript files
       'bidders.js',
       'creditor_proposal_benefited_tieds.js',
+      'contracts.js',
       'employees.js',
       'licitation_processes.js',
       'pledge_requests.js',

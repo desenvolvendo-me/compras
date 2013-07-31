@@ -98,7 +98,7 @@ describe TceExport::MG::MonthlyMonitoring::ContractGenerator do
 
         contract = Contract.make!(:primeiro_contrato, signature_date: signature_date,
           end_date: end_date, licitation_process: licitation_process,
-          creditors: [creditor_sobrinho, creditor_wenderson])
+          creditors: [creditor_sobrinho, creditor_wenderson], consortium_agreement: true)
 
         budget_allocation.expense_nature = expense_nature
         budget_allocation.budget_structure = budget_structure
