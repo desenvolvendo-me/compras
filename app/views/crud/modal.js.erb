@@ -7,4 +7,5 @@
   // scroll content to records
   // note 13px currently means 1em
   content.animate({scrollTop: records.offset().top - content.offset().top + content.scrollTop() - 13});
+  $('#filter_submit').removeAttr('disabled');
 })();

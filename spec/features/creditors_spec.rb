@@ -1066,4 +1066,26 @@ feature "Creditors" do
       end
     end
   end
+
+  scenario 'should remove disabled in button search modal after searcher' do
+    Creditor.make!(:sobrinho_sa)
+    Creditor.make!(:nohup)
+    Creditor.make!(:wenderson_sa)
+
+    navigate 'Comum > Pessoas > Credores'
+
+    click_link 'Criar Credor'
+
+    within_modal 'Pessoa física ou jurídica' do
+      click_button 'Pesquisar'
+
+      within_records do
+        expect(page).to have_content 'Gabriel Sobrinho'
+        expect(page).to have_content 'Nohup'
+        expect(page).to have_content 'Wenderson Malheiros'
+      end
+
+      expect(page).to_not have_disabled_button 'Pesquisar'
+    end
+  end
 end
