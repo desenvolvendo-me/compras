@@ -4,12 +4,15 @@
   <td class="amount"><%= number_with_precision reserve_fund.amount %></td>
   <td><%= number_with_precision reserve_fund.balance %></td>
   <td><%= l(reserve_fund.date) %></td>
-  <td>
-    <%= link_to "Editar", '#', class: :edit_reserve_fund_button %>
+  <td class="actions">
+    <%= link_to "Desbloquear", '#title', class: :unblock_reserve_fund_button %>
 
     <div class="form_fields">
       <%= hidden_field_tag :reserve_fund_id, reserve_fund.id,
         id: nil, class: :reserve_fund_id %>
+
+      <%= hidden_field_tag :reserve_fund_id, reserve_fund.to_s,
+        id: nil, class: :reserve_fund_to_s %>
 
       <%= hidden_field_tag :budget_allocation_id, reserve_fund.budget_allocation_id,
         id: nil, class: :budget_allocation_id %>

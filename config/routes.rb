@@ -737,6 +737,8 @@ Compras::Application.routes.draw do
     end
   end
 
+  resources :unblock_budgets
+
   resources :users do
     collection do
       get :filter

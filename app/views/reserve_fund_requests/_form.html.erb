@@ -1,4 +1,4 @@
-<div class="yui3-g">
+<div class="yui3-g" id="reserve_fund_fields">
   <div class="yui3-u-1-2">
     <%= f.input :to_s, disabled: true %>
     <%= f.input :id, as: :hidden %>
@@ -8,10 +8,8 @@
   <div class="yui3-u-1-2">
     <%= f.input :descriptor, as: :modal, fake: true, required: true, label: 'Descritor' %>
   </div>
-</div>
 
-<div class="yui3-g">
-  <div class="yui3-u-1-3">
+  <div class="yui3-u-1-2">
     <%= f.input :budget_allocations, required: true, as: :select, label: 'Dotação Orçamentária',
       collection: budget_allocation_for_select(resource) %>
   </div>
@@ -21,14 +19,29 @@
       input_html: { 'data-datepicker' => true } %>
   </div>
 
-  <div class="yui3-u-1-4">
+  <div class="yui3-u-1-5">
     <%= f.input :amount, as: :fake, required: true, label: 'Valor da reserva',
       input_html: { 'data-decimal' => true, class: :decimal } %>
   </div>
 
-  <div class="yui3-u-1-4 inline_buttons">
+  <div class="yui3-u-1-8 inline_buttons">
     <%= button_tag "Bloquear", type: :button, class: 'button primary', id: :reserve_fund_create %>
-    <%= button_tag "Cancelar", type: :button, class: 'button primary hidden', id: :reserve_fund_cancel %>
+  </div>
+</div>
+
+<div class="yui3-g hidden" id="unblock_reserve_fund_fields">
+  <div class="yui3-u-1-2">
+    <%= f.input :reserve_fund, as: :fake, disabled: true, label: 'Reserva de dotação' %>
+  </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :unblock_amount, as: :fake, required: true, label: 'Valor desbloqueio',
+      input_html: { 'data-decimal' => true, class: :decimal } %>
+  </div>
+
+  <div class="yui3-u-1-4 inline_buttons">
+    <%= button_tag "Desbloquear", type: :button, class: 'button primary', id: :reserve_fund_unblock %>
+    <%= button_tag "Cancelar", type: :button, class: 'button primary', id: :reserve_fund_unblock_cancel %>
   </div>
 </div>
 
@@ -40,7 +53,7 @@
       <th>Valor a Reservar</th>
       <th>Saldo da Reserva</th>
       <th>Data da Reserva</th>
-      <th>Editar</th>
+      <th>Desbloquear</th>
     </tr>
   </thead>
 
