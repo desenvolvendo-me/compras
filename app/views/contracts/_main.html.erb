@@ -144,10 +144,6 @@
 </div>
 
 <script>
-  var quantityCreditors = $('tbody.contract_creditor_records > tr').length;
-
-  disabledOrEnabledCreditor();
-
   var clearModalityExecutionType = function() {
     $('#contract_modality_humanize').val('');
     $('#contract_execution_type').val('');
@@ -157,7 +153,6 @@
   };
 
   $('form').on('change', '#contract_licitation_process_id', function (event, licitationProcess) {
-
     if (licitationProcess) {
       $('#contract_content').val(licitationProcess.description);
       $('#contract_modality_humanize').val(licitationProcess.modality_humanize);
@@ -182,21 +177,4 @@
       $('#contract_sequential_number').val(data.sequential);
     });
   });
-
-  $('form').on('change','#contract_creditor', function(event){
-    quantityCreditors =+ 1;
-    disabledOrEnabledCreditor();
-  });
-
-  $('form').on('change', '#contract_consortium_agreement', function(){
-    disabledOrEnabledCreditor();
-  });
-
-  function disabledOrEnabledCreditor(){
-    if(!$('#contract_consortium_agreement').is(':checked') && quantityCreditors > 0 ){
-      $('#contract_creditor').attr('disabled','disabled');
-    }else{
-      $('#contract_creditor').removeAttr('disabled');
-    }
-  }
 </script>

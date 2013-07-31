@@ -11,6 +11,7 @@ pt-BR:
         budget_structure_responsible: 'Pessoa responsável'
         cancellation_date: 'Data de cancelamento'
         cancellation_reason: 'Motivo do cancelamento'
+        consortium_agreement: "Consórcio/Convênio"
         content: 'Objeto do contrato'
         contract_file: 'Contrato'
         contract_guarantees: 'Garantias do contrato'
@@ -20,6 +21,7 @@ pt-BR:
         contract_value: 'Valor do contrato'
         creditors: 'Fornecedores'
         creditor: 'Fornecedor'
+        default_fine: "Multa inadimplemento"
         description: "Observações gerais"
         direct_purchase: 'Compra direta'
         dissemination_source: 'Local de publicação'
@@ -31,12 +33,10 @@ pt-BR:
         licitation_process: 'Processo de compra'
         modality_humanize: 'Modalidade'
         parent: 'Contrato principal'
+        penalty_fine: "Multa rescisória"
         publication_date: 'Data de publicação'
         sequential_number: 'Número sequencial'
         signature_date: "Data da assinatura"
         subcontracting: 'Subcontratação'
         start_date: "Início da vigência"
         year: "Ano do contrato"
-        penalty_fine: "Multa rescisória"
-        default_fine: "Multa inadimplemento"
-        consortium_agreement: "Consórcio/Convênio"
