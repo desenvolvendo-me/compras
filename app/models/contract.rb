@@ -19,7 +19,7 @@ class Contract < Compras::Model
   acts_as_nested_set
   mount_uploader :contract_file, UnicoUploader
 
-  has_enumeration_for :contract_guarantees
+  has_enumeration_for :contract_guarantees, :with => UnicoAPI::Resources::Compras::Enumerations::ContractGuarantees
   has_enumeration_for :execution_type, :create_helpers => true
 
   belongs_to :budget_structure_responsible, :class_name => 'Employee'
@@ -69,6 +69,10 @@ class Contract < Compras::Model
   scope :management, joins { contract_type }.where { contract_type.service_goal.eq(ServiceGoal::CONTRACT_MANAGEMENT) }
   scope :by_signature_date, lambda { |date_range|
     where { signature_date.in(date_range) }
+  }
+
+  scope :by_signature_period, lambda { |started_at, ended_at|
+    where { signature_date.gteq(started_at) & signature_date.lteq(ended_at) }
   }
 
   scope :purchase_process_id, ->(purchase_process_id) do
