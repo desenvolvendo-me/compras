@@ -66,7 +66,7 @@ group :development, :test do
   gem 'postgres-copy', '~> 0.5.8'
   gem 'pry'
   gem 'pry-remote'
-  gem 'rspec-rails', '2.12.0'
+  gem 'rspec-rails'
 end
 
 group :test do
