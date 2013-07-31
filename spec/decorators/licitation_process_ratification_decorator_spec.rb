@@ -33,6 +33,26 @@ describe LicitationProcessRatificationDecorator do
     expect(subject.proposals_total_value).to eq "5.480,90"
   end
 
+  describe '#modality_or_type_of_removal' do
+    context "when licitatio process is licitation" do
+      it "should return modality_humanize" do
+        component.stub(:licitation_process_licitation?).and_return true
+        component.stub(:licitation_process_modality_humanize).and_return 'Convite'
+
+        expect(subject.modality_or_type_of_removal).to eq 'Convite'
+      end
+    end
+
+    context "when licitatio process is direct_purchase" do
+      it "should return type_of_removal_humanize" do
+        component.stub(:licitation_process_licitation?).and_return false
+        component.stub(:licitation_process_type_of_removal_humanize).and_return 'Dispensa por limite'
+
+        expect(subject.modality_or_type_of_removal).to eq 'Dispensa por limite'
+      end
+    end
+  end
+
   describe '#save_disabled_message' do
     before do
       I18n.backend.store_translations 'pt-BR',

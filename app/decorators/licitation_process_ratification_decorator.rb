@@ -25,4 +25,14 @@ class LicitationProcessRatificationDecorator
       I18n.t 'licitation_process_ratification.messages.cant_save_without_responsibles'
     end
   end
+
+  def creditor_proposals_total_value
+    number_with_precision super if super
+  end
+
+  def modality_or_type_of_removal
+    return licitation_process_modality_humanize if licitation_process_licitation?
+
+    licitation_process_type_of_removal_humanize
+  end
 end

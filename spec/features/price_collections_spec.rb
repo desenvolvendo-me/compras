@@ -99,7 +99,9 @@ feature "PriceCollections" do
     click_link 'Criar Coleta de Preços'
 
     expect(page).to_not have_link 'Apurar'
-    expect(page).to_not have_link 'Relatório'
+    within '.buttons' do
+      expect(page).to_not have_link 'Relatório'
+    end
 
     within_tab 'Principal' do
       expect(page).to have_field 'Número', disabled: true

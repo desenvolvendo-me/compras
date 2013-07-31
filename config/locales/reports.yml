@@ -18,3 +18,7 @@ pt-BR:
     map_of_bid_report:
       one: "Mapa de lance"
       other: "Mapas de lances"
+  purchase_process_ratifications_by_period_reports:
+    purchase_process_ratifications_by_period_report:
+      one: 'Relatório de compras homologadas por período'
+      other: 'Relatório de compras homologadas por período'
