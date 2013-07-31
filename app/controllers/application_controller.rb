@@ -22,18 +22,6 @@ class ApplicationController < ActionController::Base
     @current_customer ||= CustomerFinder.current(request)
   end
 
-  def render_to_pdf(partial_name, options = {})
-    locals = options.fetch(:locals, {})
-
-    pdf_instance = PDFKit.new render_to_string(:partial => partial_name, :locals => locals)
-
-    if Rails.production_way?
-      pdf_instance.stylesheets += options.fetch(:stylesheets, ["#{root_url_for_pdf}/compras/assets/report.css"])
-    end
-
-    pdf_instance.to_pdf
-  end
-
   protected
 
   def root_url_for_pdf
