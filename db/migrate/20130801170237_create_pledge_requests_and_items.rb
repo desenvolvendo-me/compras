@@ -1,6 +1,15 @@
 class CreatePledgeRequestsAndItems < ActiveRecord::Migration
   def change
-    create_table :compras_pledge_requests do |t|
+    create_table :compras_pledge_request_items, force: true do |t|
+      t.integer :pledge_request_id
+      t.integer :purchase_process_item_id
+      t.integer :accounting_cost_center_id
+      t.integer :quantity
+
+      t.timestamps
+    end
+
+    create_table :compras_pledge_requests, force: true do |t|
       t.integer :descriptor_id
       t.integer :budget_allocation_id
       t.integer :expense_nature_id
@@ -12,15 +21,6 @@ class CreatePledgeRequestsAndItems < ActiveRecord::Migration
       t.decimal :amount, precision: 10, scale: 2
       t.text    :historic_complement
       t.date    :emission_date
-
-      t.timestamps
-    end
-
-    create_table :compras_pledge_request_items do |t|
-      t.integer :pledge_request_id
-      t.integer :purchase_process_item_id
-      t.integer :accounting_cost_center_id
-      t.integer :quantity
 
       t.timestamps
     end
