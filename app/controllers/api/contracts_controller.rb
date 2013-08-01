@@ -4,16 +4,16 @@ module Api
 
     #GET /api/contracts
     def index
-      contracts = apply_scopes(Contract).all
+      contracts = apply_scopes(Contract).limit(params[:limit]).offset(params[:offset]).all
 
-      render :json => contracts.to_json(include: params[:includes], methods: params[:methods])
+      render :json => ContractProvider.build_array(contracts)
     end
 
     #GET /api/contract/:id
     def show
       contract = Contract.find(params[:id])
 
-      render json: contract
+      render json: ContractProvider.new(contract)
     end
   end
 end
