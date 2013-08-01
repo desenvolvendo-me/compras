@@ -118,6 +118,12 @@ module TceExport::MG
         errors << "#{error_header} - #{error}"
       end
 
+      def add_error_description(description)
+        return unless description
+
+        errors << "#{description}\n"
+      end
+
       def lines
         @lines ||= []
       end
@@ -212,20 +218,26 @@ module TceExport::MG
     class FormatterBase
       include Typecaster
 
+      attr_reader :data
+
       def self.separator
         ";"
       end
 
       def initialize(data, generator = nil)
         @generator = generator
+        @data = data
 
         super(data)
       end
+
+      def error_description(attribute, error_type); end
 
       private
 
       def typecasted_attribute(options)
         options[:generator] = @generator
+        options[:formatter] = self
 
         klass = options[:caster]
         klass.call(options[:value], options)

@@ -5,6 +5,7 @@ require 'app/exporters/tce_export/mg/casters/integer_caster'
 
 describe TceExport::MG::Casters::IntegerCaster do
   let(:generator) { double(:generator) }
+  let(:formatter) { double(:formatter) }
 
   it "returns the value in the string format" do
     result = TceExport::MG::Casters::IntegerCaster.call(10, {})
@@ -12,8 +13,10 @@ describe TceExport::MG::Casters::IntegerCaster do
   end
 
   it "add an error if the integer has more digits than it should" do
-    options = { size: 2, attribute: "number", generator: generator }
+    options = { size: 2, attribute: "number", generator: generator, formatter: formatter }
 
+    formatter.should_receive(:error_description).with('number', :size)
+    generator.should_receive(:add_error_description)
     generator.should_receive(:add_error).with "#{options[:attribute]} muito longo."
 
     TceExport::MG::Casters::IntegerCaster.call(100, options)
@@ -32,11 +35,15 @@ describe TceExport::MG::Casters::IntegerCaster do
   end
 
   it "validates presence of required attributes" do
-    options = { required: true, attribute: "number", generator: generator }
+    options = { required: true, attribute: "number", generator: generator, formatter: formatter }
 
+    formatter.should_receive(:error_description).with('number', :required)
+    generator.should_receive(:add_error_description)
     generator.should_receive(:add_error).with "#{options[:attribute]} não pode ficar em branco."
     TceExport::MG::Casters::IntegerCaster.call(nil, options)
 
+    formatter.should_receive(:error_description).with('number', :required)
+    generator.should_receive(:add_error_description)
     generator.should_receive(:add_error).with "#{options[:attribute]} não pode ficar em branco."
     TceExport::MG::Casters::IntegerCaster.call(' ', options)
   end

@@ -145,7 +145,6 @@ module TceExport::MG
     end
 
     class BiddingAuthorizationFormatter < FormatterBase
-
       attribute :tipo_registro, position: 0, size: 2, min_size: 2, required: true, caster: Casters::IntegerCaster
       attribute :cod_orgao, position: 1, size: 2, min_size: 2, required: true, caster: Casters::TextCaster
       attribute :cod_unidade_sub, position: 2, multiple_size: [5, 8], required: false, caster: Casters::TextCaster
@@ -174,10 +173,18 @@ module TceExport::MG
       attribute :dt_habilitacao, position: 25, size: 8, min_size: 8, required: true, caster: Casters::DateCaster
       attribute :presenca_licitantes, position: 26, size: 1, min_size: 1, required: true, caster: Casters::IntegerCaster
       attribute :renuncia_recurso, position: 27, size: 1, min_size: 1, required: true, caster: Casters::IntegerCaster
+
+      def error_description(attribute, error_type)
+        [
+          "tipo_registro: #{data[:tipo_registro]}",
+          "nro_processo_licitatorio: #{data[:nro_processo_licitatorio]}",
+          "exercicio_licitacao: #{data[:exercicio_licitacao]}",
+          "#{attribute}: #{data[attribute]}"
+        ].join("\n")
+      end
     end
 
     class PartnerFormatter < FormatterBase
-
       attribute :tipo_registro, position: 0, size: 2, min_size: 2, required: true, caster: Casters::IntegerCaster
       attribute :cod_orgao, position: 1, size: 2, min_size: 2, required: true, caster: Casters::TextCaster
       attribute :cod_unidade_sub, position: 2, multiple_size: [5, 8], required: false, caster: Casters::TextCaster
@@ -189,6 +196,15 @@ module TceExport::MG
       attribute :nro_documento_socio, position: 8, size: 14, min_size: 1, required: true, caster: Casters::TextCaster
       attribute :nome_socio, position: 9, size: 120, min_size: 1, required: true, caster: Casters::TextCaster
       attribute :tipo_participacao, position: 10, size: 1, min_size: 1, required: true, caster: Casters::IntegerCaster
+
+      def error_description(attribute, error_type)
+        [
+          "tipo_registro: #{data[:tipo_registro]}",
+          "nro_processo_licitatorio: #{data[:nro_processo_licitatorio]}",
+          "exercicio_licitacao: #{data[:exercicio_licitacao]}",
+          "#{attribute}: #{data[attribute]}"
+        ].join("\n")
+      end
     end
 
 
