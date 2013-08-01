@@ -207,8 +207,13 @@ module TceExport::MG
             end
           end
         rescue Exception => e
-          Raven.capture_exception(e)
           add_error "gerou erro interno!"
+
+          if Rails.env.development? || Rails.env.test?
+            raise e
+          else
+            Raven.capture_exception(e)
+          end
         end
 
         lines.compact.join("\n")
