@@ -45,7 +45,7 @@ module TceExport::MG
       attr_reader :prefecture, :date, :city_code, :monthly_monitoring
 
       def generator_classes
-        generators = csv_files.map do |file|
+        csv_files.map do |file|
           self.class.module_eval("#{file.classify}Generator").new(monthly_monitoring)
         end
       end
