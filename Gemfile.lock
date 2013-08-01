@@ -119,6 +119,7 @@ GEM
     factory_girl_rails (4.2.1)
       factory_girl (~> 4.2.0)
       railties (>= 3.0.0)
+    fakeweb (1.3.0)
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
     faye-websocket (0.4.7)
@@ -324,6 +325,7 @@ GEM
     validates_timeliness (3.0.14)
       timeliness (~> 0.3.6)
     warden (1.2.3)
+    vcr (2.5.0)
       rack (>= 1.0)
     websocket (1.0.7)
     wkhtmltopdf-binary (0.9.9.1)
@@ -350,6 +352,7 @@ DEPENDENCIES
   enumerate_it (= 1.0.3)
   factory_girl-preload!
   factory_girl_rails (~> 4.2.1)
+  fakeweb
   foreigner
   has_scope (= 0.5.1)
   i18n_alchemy!
@@ -384,4 +387,5 @@ DEPENDENCIES
   unico-assets
   unicorn
   validates_timeliness (= 3.0.14)
+  vcr (= 2.5.0)
   wkhtmltopdf-binary (= 0.9.9.1)

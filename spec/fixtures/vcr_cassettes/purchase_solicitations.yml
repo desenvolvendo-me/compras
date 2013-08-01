@@ -1,0 +1,582 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://contabil.dev/api/budget_structures.json?action=modal&commit=Pesquisar&controller=budget_structures&filter%5Bbudget_structure_level_id%5D=&filter%5Bdescription%5D=Secretaria+de+Educa%C3%A7%C3%A3o&filter%5Bfull_code%5D=&filter%5Bkind%5D=&utf8=%E2%9C%93
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - application/json
+      x-unico-api-customer-secret-token:
+      - '1234'
+      accept-encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-type:
+      - application/json; charset=utf-8
+      x-ua-compatible:
+      - IE=Edge
+      etag:
+      - '"9da3c166a59f5e043faa79ed751ab511"'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - 48e86a633aea5d0c1a1b14cf56dc5352
+      x-runtime:
+      - '0.518956'
+      date:
+      - Fri, 02 Aug 2013 11:50:33 GMT
+      connection:
+      - close
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        W3siYWNyb255bSI6IlNFTVVFRFUiLCJhZG1pbmlzdHJhdGlvbl90eXBlX2lk
+        IjoxLCJidWRnZXRfc3RydWN0dXJlX2NvbmZpZ3VyYXRpb25faWQiOjIsImJ1
+        ZGdldF9zdHJ1Y3R1cmVfbGV2ZWxfaWQiOjEsImNvZGUiOiI5IiwiY3JlYXRl
+        ZF9hdCI6IjIwMTMtMDgtMDJUMDg6MDc6NTYtMDM6MDAiLCJkZXNjcmlwdGlv
+        biI6IlNlY3JldGFyaWEgZGUgRWR1Y2HDp8OjbyIsImZ1bGxfY29kZSI6Ijki
+        LCJpZCI6Miwia2luZCI6ImFuYWx5dGljYWwiLCJwYXJlbnRfaWQiOm51bGws
+        InBlcmZvcm1hbmNlX2ZpZWxkIjoiRGVzZW52b2x2aW1lbnRvIEVkdWNhY2lv
+        bmFsIiwidGNlX2NvZGUiOiIwNTEiLCJ1cGRhdGVkX2F0IjoiMjAxMy0wOC0w
+        MlQwODowNzo1Ni0wMzowMCIsInRvX3MiOiI5IC0gU2VjcmV0YXJpYSBkZSBF
+        ZHVjYcOnw6NvIn1d
+    http_version: '1.1'
+  recorded_at: Fri, 02 Aug 2013 11:50:33 GMT
+- request:
+    method: get
+    uri: http://contabil.dev/api/budget_allocations.json?action=index&budget_structure_id=2&by_year=2012&controller=budget_allocations&includes=expense_nature&limit=10&methods=balance&term=Aplica%C3%A7%C3%B5es+Diretas
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - application/json
+      x-unico-api-customer-secret-token:
+      - '1234'
+      accept-encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-type:
+      - application/json; charset=utf-8
+      x-ua-compatible:
+      - IE=Edge
+      etag:
+      - '"2372fd7307f2d4673d10ee2013a432c4"'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - ab13fd9ed97b85df4b405b7c0db4aec2
+      x-runtime:
+      - '0.709351'
+      date:
+      - Fri, 02 Aug 2013 11:50:36 GMT
+      connection:
+      - close
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        W3siYWxpZW5hdGlvbl9hcHBlYWwiOmZhbHNlLCJidWRnZXRfYWxsb2NhdGlv
+        bl90eXBlX2lkIjoxLCJidWRnZXRfc3RydWN0dXJlX2lkIjoyLCJjb2RlIjox
+        LCJjcmVhdGVkX2F0IjoiMjAxMy0wOC0wMlQwODowODowMS0wMzowMCIsImRh
+        dGUiOiIyMDEyLTEwLTAxIiwiZGVidF90eXBlIjoiY29udHJhY3QiLCJkZXNj
+        cmlwdG9yX2lkIjoxLCJlZHVjYXRpb24iOmZhbHNlLCJleHBlbnNlX25hdHVy
+        ZV9pZCI6MywiZm9yZXNpZ2h0IjpmYWxzZSwiZnVuY3Rpb25faWQiOjEsImdv
+        dmVybm1lbnRfYWN0aW9uX2lkIjoxLCJnb3Zlcm5tZW50X3Byb2dyYW1faWQi
+        OjEsImhlYWx0aCI6ZmFsc2UsImlkIjoxLCJraW5kIjoiZGl2aWRlIiwibW9u
+        dGhzX3ZhbHVlcyI6eyIxIjoiNTAwLDAwIiwiMiI6IjAsMDAiLCIzIjoiMCww
+        MCIsIjQiOiIwLDAwIiwiNSI6IjAsMDAiLCI2IjoiMCwwMCIsIjciOiIwLDAw
+        IiwiOCI6IjAsMDAiLCI5IjoiMCwwMCIsIjEwIjoiMCwwMCIsIjExIjoiMCww
+        MCIsIjEyIjoiMCwwMCJ9LCJwZXJzb25hbCI6ZmFsc2UsInJlZmluYW5jaW5n
+        Ijp0cnVlLCJzdWJmdW5jdGlvbl9pZCI6MSwidXBkYXRlZF9hdCI6IjIwMTMt
+        MDgtMDJUMDg6MDg6MDEtMDM6MDAiLCJ2YWx1ZSI6bnVsbCwieWVhciI6MjAx
+        MiwiYmFsYW5jZSI6IjUwMC4wIiwidG9fcyI6IjEgLSAzLjEuOTAuMDAuMDAg
+        LSBBcGxpY2HDp8O1ZXMgRGlyZXRhcyIsImV4cGVuc2VfbmF0dXJlIjp7ImNy
+        ZWF0ZWRfYXQiOiIyMDEzLTA4LTAyVDA4OjA3OjU3LTAzOjAwIiwiZGVzY3Jp
+        cHRpb24iOiJBcGxpY2HDp8O1ZXMgRGlyZXRhcyIsImRvY2tldCI6IlJlZ2lz
+        dHJhIG8gdmFsb3IgZGFzIGFwbGljYcOnw7VlcyBkaXJldGFzIiwiZXhwZW5z
+        ZV9uYXR1cmUiOiIzLjEuOTAuMDAuMDAiLCJpZCI6Mywia2luZCI6ImJvdGgi
+        LCJwYXJlbnRfaWQiOjIsInJlZ3VsYXRvcnlfYWN0X2lkIjoyLCJ1cGRhdGVk
+        X2F0IjoiMjAxMy0wOC0wMlQwODowNzo1Ny0wMzowMCIsInllYXIiOjIwMTJ9
+        fV0=
+    http_version: '1.1'
+  recorded_at: Fri, 02 Aug 2013 11:50:36 GMT
+- request:
+    method: get
+    uri: http://contabil.dev/api/expense_natures/3.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - application/json
+      x-unico-api-customer-secret-token:
+      - '1234'
+      accept-encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-type:
+      - application/json; charset=utf-8
+      x-ua-compatible:
+      - IE=Edge
+      etag:
+      - '"8df1829ecdb9ee207b6082ce0c7d1fb3"'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - 09276f57667be23e07b3b7c7c3b540c5
+      x-runtime:
+      - '0.040727'
+      date:
+      - Fri, 02 Aug 2013 11:50:36 GMT
+      connection:
+      - close
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJjcmVhdGVkX2F0IjoiMjAxMy0wOC0wMlQwODowNzo1Ny0wMzowMCIsImRl
+        c2NyaXB0aW9uIjoiQXBsaWNhw6fDtWVzIERpcmV0YXMiLCJkb2NrZXQiOiJS
+        ZWdpc3RyYSBvIHZhbG9yIGRhcyBhcGxpY2HDp8O1ZXMgZGlyZXRhcyIsImV4
+        cGVuc2VfbmF0dXJlIjoiMy4xLjkwLjAwLjAwIiwiaWQiOjMsImtpbmQiOiJi
+        b3RoIiwicGFyZW50X2lkIjoyLCJyZWd1bGF0b3J5X2FjdF9pZCI6MiwidXBk
+        YXRlZF9hdCI6IjIwMTMtMDgtMDJUMDg6MDc6NTctMDM6MDAiLCJ5ZWFyIjoy
+        MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
+        YXMifQ==
+    http_version: '1.1'
+  recorded_at: Fri, 02 Aug 2013 11:50:36 GMT
+- request:
+    method: get
+    uri: http://contabil.dev/api/expense_natures.json?action=index&by_parent_id=3&by_year=2012&controller=expense_natures&limit=10&term=Aposentadorias
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - application/json
+      x-unico-api-customer-secret-token:
+      - '1234'
+      accept-encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-type:
+      - application/json; charset=utf-8
+      x-ua-compatible:
+      - IE=Edge
+      etag:
+      - '"b08ca370e583d25e49155cf828dcd835"'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - b2b229fa017e2608579f94c472b68d3a
+      x-runtime:
+      - '0.075588'
+      date:
+      - Fri, 02 Aug 2013 11:50:36 GMT
+      connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '[{"created_at":"2013-08-02T08:08:08-03:00","description":"Aposentadorias
+        do RPPS, Reserva Remunerada e Reformas dos Militares","docket":"Registra o
+        valor das despesas com aposentadorias, reserva e reformas","expense_nature":"3.1.90.01.00","id":4,"kind":"synthetic","parent_id":3,"regulatory_act_id":1,"updated_at":"2013-08-02T08:08:08-03:00","year":2012,"to_s":"3.1.90.01.00
+        - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares"}]'
+    http_version: '1.1'
+  recorded_at: Fri, 02 Aug 2013 11:50:36 GMT
+- request:
+    method: get
+    uri: http://contabil.dev/api/budget_allocations.json?action=index&budget_structure_id=2&by_year=2012&controller=budget_allocations&includes=expense_nature&limit=10&methods=balance&term=Aplica%C3%A7%C3%B5es+Diretas
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - application/json
+      x-unico-api-customer-secret-token:
+      - '1234'
+      accept-encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-type:
+      - application/json; charset=utf-8
+      x-ua-compatible:
+      - IE=Edge
+      etag:
+      - '"2372fd7307f2d4673d10ee2013a432c4"'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - 1b4ff2703af88d6cc9f72e27c09d0cc9
+      x-runtime:
+      - '0.090271'
+      date:
+      - Fri, 02 Aug 2013 11:50:37 GMT
+      connection:
+      - close
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        W3siYWxpZW5hdGlvbl9hcHBlYWwiOmZhbHNlLCJidWRnZXRfYWxsb2NhdGlv
+        bl90eXBlX2lkIjoxLCJidWRnZXRfc3RydWN0dXJlX2lkIjoyLCJjb2RlIjox
+        LCJjcmVhdGVkX2F0IjoiMjAxMy0wOC0wMlQwODowODowMS0wMzowMCIsImRh
+        dGUiOiIyMDEyLTEwLTAxIiwiZGVidF90eXBlIjoiY29udHJhY3QiLCJkZXNj
+        cmlwdG9yX2lkIjoxLCJlZHVjYXRpb24iOmZhbHNlLCJleHBlbnNlX25hdHVy
+        ZV9pZCI6MywiZm9yZXNpZ2h0IjpmYWxzZSwiZnVuY3Rpb25faWQiOjEsImdv
+        dmVybm1lbnRfYWN0aW9uX2lkIjoxLCJnb3Zlcm5tZW50X3Byb2dyYW1faWQi
+        OjEsImhlYWx0aCI6ZmFsc2UsImlkIjoxLCJraW5kIjoiZGl2aWRlIiwibW9u
+        dGhzX3ZhbHVlcyI6eyIxIjoiNTAwLDAwIiwiMiI6IjAsMDAiLCIzIjoiMCww
+        MCIsIjQiOiIwLDAwIiwiNSI6IjAsMDAiLCI2IjoiMCwwMCIsIjciOiIwLDAw
+        IiwiOCI6IjAsMDAiLCI5IjoiMCwwMCIsIjEwIjoiMCwwMCIsIjExIjoiMCww
+        MCIsIjEyIjoiMCwwMCJ9LCJwZXJzb25hbCI6ZmFsc2UsInJlZmluYW5jaW5n
+        Ijp0cnVlLCJzdWJmdW5jdGlvbl9pZCI6MSwidXBkYXRlZF9hdCI6IjIwMTMt
+        MDgtMDJUMDg6MDg6MDEtMDM6MDAiLCJ2YWx1ZSI6bnVsbCwieWVhciI6MjAx
+        MiwiYmFsYW5jZSI6IjUwMC4wIiwidG9fcyI6IjEgLSAzLjEuOTAuMDAuMDAg
+        LSBBcGxpY2HDp8O1ZXMgRGlyZXRhcyIsImV4cGVuc2VfbmF0dXJlIjp7ImNy
+        ZWF0ZWRfYXQiOiIyMDEzLTA4LTAyVDA4OjA3OjU3LTAzOjAwIiwiZGVzY3Jp
+        cHRpb24iOiJBcGxpY2HDp8O1ZXMgRGlyZXRhcyIsImRvY2tldCI6IlJlZ2lz
+        dHJhIG8gdmFsb3IgZGFzIGFwbGljYcOnw7VlcyBkaXJldGFzIiwiZXhwZW5z
+        ZV9uYXR1cmUiOiIzLjEuOTAuMDAuMDAiLCJpZCI6Mywia2luZCI6ImJvdGgi
+        LCJwYXJlbnRfaWQiOjIsInJlZ3VsYXRvcnlfYWN0X2lkIjoyLCJ1cGRhdGVk
+        X2F0IjoiMjAxMy0wOC0wMlQwODowNzo1Ny0wMzowMCIsInllYXIiOjIwMTJ9
+        fV0=
+    http_version: '1.1'
+  recorded_at: Fri, 02 Aug 2013 11:50:37 GMT
+- request:
+    method: get
+    uri: http://contabil.dev/api/expense_natures/3.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - application/json
+      x-unico-api-customer-secret-token:
+      - '1234'
+      accept-encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-type:
+      - application/json; charset=utf-8
+      x-ua-compatible:
+      - IE=Edge
+      etag:
+      - '"8df1829ecdb9ee207b6082ce0c7d1fb3"'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - 1745416118d01d5a6dbe17ef31b3272f
+      x-runtime:
+      - '0.165828'
+      date:
+      - Fri, 02 Aug 2013 11:50:37 GMT
+      connection:
+      - close
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJjcmVhdGVkX2F0IjoiMjAxMy0wOC0wMlQwODowNzo1Ny0wMzowMCIsImRl
+        c2NyaXB0aW9uIjoiQXBsaWNhw6fDtWVzIERpcmV0YXMiLCJkb2NrZXQiOiJS
+        ZWdpc3RyYSBvIHZhbG9yIGRhcyBhcGxpY2HDp8O1ZXMgZGlyZXRhcyIsImV4
+        cGVuc2VfbmF0dXJlIjoiMy4xLjkwLjAwLjAwIiwiaWQiOjMsImtpbmQiOiJi
+        b3RoIiwicGFyZW50X2lkIjoyLCJyZWd1bGF0b3J5X2FjdF9pZCI6MiwidXBk
+        YXRlZF9hdCI6IjIwMTMtMDgtMDJUMDg6MDc6NTctMDM6MDAiLCJ5ZWFyIjoy
+        MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
+        YXMifQ==
+    http_version: '1.1'
+  recorded_at: Fri, 02 Aug 2013 11:50:37 GMT
+- request:
+    method: get
+    uri: http://contabil.dev/api/budget_structures/2.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - application/json
+      x-unico-api-customer-secret-token:
+      - '1234'
+      accept-encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-type:
+      - application/json; charset=utf-8
+      x-ua-compatible:
+      - IE=Edge
+      etag:
+      - '"4aec6114f52073737820d550d31bece6"'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - 9037933b13170da47435bfa1fcdfedd0
+      x-runtime:
+      - '0.084257'
+      date:
+      - Fri, 02 Aug 2013 11:50:38 GMT
+      connection:
+      - close
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJhY3JvbnltIjoiU0VNVUVEVSIsImFkbWluaXN0cmF0aW9uX3R5cGVfaWQi
+        OjEsImJ1ZGdldF9zdHJ1Y3R1cmVfY29uZmlndXJhdGlvbl9pZCI6MiwiYnVk
+        Z2V0X3N0cnVjdHVyZV9sZXZlbF9pZCI6MSwiY29kZSI6IjkiLCJjcmVhdGVk
+        X2F0IjoiMjAxMy0wOC0wMlQwODowNzo1Ni0wMzowMCIsImRlc2NyaXB0aW9u
+        IjoiU2VjcmV0YXJpYSBkZSBFZHVjYcOnw6NvIiwiZnVsbF9jb2RlIjoiOSIs
+        ImlkIjoyLCJraW5kIjoiYW5hbHl0aWNhbCIsInBhcmVudF9pZCI6bnVsbCwi
+        cGVyZm9ybWFuY2VfZmllbGQiOiJEZXNlbnZvbHZpbWVudG8gRWR1Y2FjaW9u
+        YWwiLCJ0Y2VfY29kZSI6IjA1MSIsInVwZGF0ZWRfYXQiOiIyMDEzLTA4LTAy
+        VDA4OjA3OjU2LTAzOjAwIiwidG9fcyI6IjkgLSBTZWNyZXRhcmlhIGRlIEVk
+        dWNhw6fDo28ifQ==
+    http_version: '1.1'
+  recorded_at: Fri, 02 Aug 2013 11:50:38 GMT
+- request:
+    method: get
+    uri: http://contabil.dev/api/budget_structures/2.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - application/json
+      x-unico-api-customer-secret-token:
+      - '1234'
+      accept-encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-type:
+      - application/json; charset=utf-8
+      x-ua-compatible:
+      - IE=Edge
+      etag:
+      - '"4aec6114f52073737820d550d31bece6"'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - de36da40582c19cb6b6d5294ede725f9
+      x-runtime:
+      - '0.041898'
+      date:
+      - Fri, 02 Aug 2013 11:50:38 GMT
+      connection:
+      - close
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJhY3JvbnltIjoiU0VNVUVEVSIsImFkbWluaXN0cmF0aW9uX3R5cGVfaWQi
+        OjEsImJ1ZGdldF9zdHJ1Y3R1cmVfY29uZmlndXJhdGlvbl9pZCI6MiwiYnVk
+        Z2V0X3N0cnVjdHVyZV9sZXZlbF9pZCI6MSwiY29kZSI6IjkiLCJjcmVhdGVk
+        X2F0IjoiMjAxMy0wOC0wMlQwODowNzo1Ni0wMzowMCIsImRlc2NyaXB0aW9u
+        IjoiU2VjcmV0YXJpYSBkZSBFZHVjYcOnw6NvIiwiZnVsbF9jb2RlIjoiOSIs
+        ImlkIjoyLCJraW5kIjoiYW5hbHl0aWNhbCIsInBhcmVudF9pZCI6bnVsbCwi
+        cGVyZm9ybWFuY2VfZmllbGQiOiJEZXNlbnZvbHZpbWVudG8gRWR1Y2FjaW9u
+        YWwiLCJ0Y2VfY29kZSI6IjA1MSIsInVwZGF0ZWRfYXQiOiIyMDEzLTA4LTAy
+        VDA4OjA3OjU2LTAzOjAwIiwidG9fcyI6IjkgLSBTZWNyZXRhcmlhIGRlIEVk
+        dWNhw6fDo28ifQ==
+    http_version: '1.1'
+  recorded_at: Fri, 02 Aug 2013 11:50:38 GMT
+- request:
+    method: get
+    uri: http://contabil.dev/api/budget_allocations/1.json?includes=expense_nature&methods=balance
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - application/json
+      x-unico-api-customer-secret-token:
+      - '1234'
+      accept-encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-type:
+      - application/json; charset=utf-8
+      x-ua-compatible:
+      - IE=Edge
+      etag:
+      - '"54e5f7bee368c44ad7e1ed14f806899d"'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - 8f2ca2063e786b27b83c9fcefd6f4d18
+      x-runtime:
+      - '0.110423'
+      date:
+      - Fri, 02 Aug 2013 11:50:38 GMT
+      connection:
+      - close
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJhbGllbmF0aW9uX2FwcGVhbCI6ZmFsc2UsImJ1ZGdldF9hbGxvY2F0aW9u
+        X3R5cGVfaWQiOjEsImJ1ZGdldF9zdHJ1Y3R1cmVfaWQiOjIsImNvZGUiOjEs
+        ImNyZWF0ZWRfYXQiOiIyMDEzLTA4LTAyVDA4OjA4OjAxLTAzOjAwIiwiZGF0
+        ZSI6IjIwMTItMTAtMDEiLCJkZWJ0X3R5cGUiOiJjb250cmFjdCIsImRlc2Ny
+        aXB0b3JfaWQiOjEsImVkdWNhdGlvbiI6ZmFsc2UsImV4cGVuc2VfbmF0dXJl
+        X2lkIjozLCJmb3Jlc2lnaHQiOmZhbHNlLCJmdW5jdGlvbl9pZCI6MSwiZ292
+        ZXJubWVudF9hY3Rpb25faWQiOjEsImdvdmVybm1lbnRfcHJvZ3JhbV9pZCI6
+        MSwiaGVhbHRoIjpmYWxzZSwiaWQiOjEsImtpbmQiOiJkaXZpZGUiLCJtb250
+        aHNfdmFsdWVzIjp7IjEiOiI1MDAsMDAiLCIyIjoiMCwwMCIsIjMiOiIwLDAw
+        IiwiNCI6IjAsMDAiLCI1IjoiMCwwMCIsIjYiOiIwLDAwIiwiNyI6IjAsMDAi
+        LCI4IjoiMCwwMCIsIjkiOiIwLDAwIiwiMTAiOiIwLDAwIiwiMTEiOiIwLDAw
+        IiwiMTIiOiIwLDAwIn0sInBlcnNvbmFsIjpmYWxzZSwicmVmaW5hbmNpbmci
+        OnRydWUsInN1YmZ1bmN0aW9uX2lkIjoxLCJ1cGRhdGVkX2F0IjoiMjAxMy0w
+        OC0wMlQwODowODowMS0wMzowMCIsInZhbHVlIjpudWxsLCJ5ZWFyIjoyMDEy
+        LCJiYWxhbmNlIjoiNTAwLjAiLCJ0b19zIjoiMSAtIDMuMS45MC4wMC4wMCAt
+        IEFwbGljYcOnw7VlcyBEaXJldGFzIiwiZXhwZW5zZV9uYXR1cmUiOnsiY3Jl
+        YXRlZF9hdCI6IjIwMTMtMDgtMDJUMDg6MDc6NTctMDM6MDAiLCJkZXNjcmlw
+        dGlvbiI6IkFwbGljYcOnw7VlcyBEaXJldGFzIiwiZG9ja2V0IjoiUmVnaXN0
+        cmEgbyB2YWxvciBkYXMgYXBsaWNhw6fDtWVzIGRpcmV0YXMiLCJleHBlbnNl
+        X25hdHVyZSI6IjMuMS45MC4wMC4wMCIsImlkIjozLCJraW5kIjoiYm90aCIs
+        InBhcmVudF9pZCI6MiwicmVndWxhdG9yeV9hY3RfaWQiOjIsInVwZGF0ZWRf
+        YXQiOiIyMDEzLTA4LTAyVDA4OjA3OjU3LTAzOjAwIiwieWVhciI6MjAxMn19
+    http_version: '1.1'
+  recorded_at: Fri, 02 Aug 2013 11:50:38 GMT
+- request:
+    method: get
+    uri: http://contabil.dev/api/expense_natures/3.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - application/json
+      x-unico-api-customer-secret-token:
+      - '1234'
+      accept-encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-type:
+      - application/json; charset=utf-8
+      x-ua-compatible:
+      - IE=Edge
+      etag:
+      - '"8df1829ecdb9ee207b6082ce0c7d1fb3"'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - 70aafd773e62a940516c6fdd8d139b4d
+      x-runtime:
+      - '0.040584'
+      date:
+      - Fri, 02 Aug 2013 11:50:38 GMT
+      connection:
+      - close
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJjcmVhdGVkX2F0IjoiMjAxMy0wOC0wMlQwODowNzo1Ny0wMzowMCIsImRl
+        c2NyaXB0aW9uIjoiQXBsaWNhw6fDtWVzIERpcmV0YXMiLCJkb2NrZXQiOiJS
+        ZWdpc3RyYSBvIHZhbG9yIGRhcyBhcGxpY2HDp8O1ZXMgZGlyZXRhcyIsImV4
+        cGVuc2VfbmF0dXJlIjoiMy4xLjkwLjAwLjAwIiwiaWQiOjMsImtpbmQiOiJi
+        b3RoIiwicGFyZW50X2lkIjoyLCJyZWd1bGF0b3J5X2FjdF9pZCI6MiwidXBk
+        YXRlZF9hdCI6IjIwMTMtMDgtMDJUMDg6MDc6NTctMDM6MDAiLCJ5ZWFyIjoy
+        MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
+        YXMifQ==
+    http_version: '1.1'
+  recorded_at: Fri, 02 Aug 2013 11:50:38 GMT
+- request:
+    method: get
+    uri: http://contabil.dev/api/expense_natures/4.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - application/json
+      x-unico-api-customer-secret-token:
+      - '1234'
+      accept-encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-type:
+      - application/json; charset=utf-8
+      x-ua-compatible:
+      - IE=Edge
+      etag:
+      - '"29e523faa1360548aa384c7204f89644"'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - cbd1d9399e4f30ef3b7008fd9ce0822b
+      x-runtime:
+      - '0.041495'
+      date:
+      - Fri, 02 Aug 2013 11:50:38 GMT
+      connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '{"created_at":"2013-08-02T08:08:08-03:00","description":"Aposentadorias
+        do RPPS, Reserva Remunerada e Reformas dos Militares","docket":"Registra o
+        valor das despesas com aposentadorias, reserva e reformas","expense_nature":"3.1.90.01.00","id":4,"kind":"synthetic","parent_id":3,"regulatory_act_id":1,"updated_at":"2013-08-02T08:08:08-03:00","year":2012,"to_s":"3.1.90.01.00
+        - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares"}'
+    http_version: '1.1'
+  recorded_at: Fri, 02 Aug 2013 11:50:38 GMT
+recorded_with: VCR 2.5.0

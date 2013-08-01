@@ -77,4 +77,6 @@ group :test do
   gem 'selenium-webdriver', '~> 2.33.0'
   gem 'shoulda-matchers', '2.2.0'
   gem 'simplecov', :require => false
+  gem 'vcr', '=2.5.0'
+  gem 'fakeweb'
 end
