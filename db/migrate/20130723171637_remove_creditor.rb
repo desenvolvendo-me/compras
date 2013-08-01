@@ -13,6 +13,7 @@ class RemoveCreditor < ActiveRecord::Migration
     remove_table :compras_pledge_liquidations
     remove_table :compras_pledge_items
     remove_table :compras_pledge_cancellations
+    remove_table :compras_pledge_requests
     remove_table :compras_pledges
     remove_table :compras_extra_budget_pledge_items
     remove_table :compras_extra_budget_pledges
