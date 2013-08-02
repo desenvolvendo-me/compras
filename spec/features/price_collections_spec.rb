@@ -2,27 +2,17 @@
 require 'spec_helper'
 
 feature "PriceCollections" do
-  let :budget_structure do
-    BudgetStructure.new(
-      id: 1,
-      code: '1',
-      full_code: '1',
-      tce_code: '051',
-      description: 'Secretaria de Educação',
-      acronym: 'SEMUEDU',
-      performance_field: 'Desenvolvimento Educacional')
+  before(:all) do
+    VCR.insert_cassette('price_collections', allow_playback_repeats: true)
+  end
+
+  after(:all) do
+    VCR.eject_cassette
   end
 
   background do
     Prefecture.make!(:belo_horizonte)
-    BudgetStructure.stub(:find).and_return(budget_structure)
-
     sign_in
-
-    ExpenseNature.stub(:all)
-    ExpenseNature.stub(:find)
-    BudgetAllocation.stub(:all)
-    BudgetAllocation.stub(:find)
   end
 
   scenario 'can not create a new price collection when no set the creditor email' do
@@ -86,7 +76,7 @@ feature "PriceCollections" do
     Creditor.make!(:mateus)
     Creditor.make!(:ibm)
 
-    PurchaseSolicitation.make!(:reparo_liberado, accounting_year: Date.current.year)
+    PurchaseSolicitation.make!(:reparo_liberado, accounting_year: Date.current.year, budget_structure_id: 2)
 
     navigate 'Processos de Compra > Coletas de Preços'
 
@@ -117,7 +107,7 @@ feature "PriceCollections" do
     end
 
      within_tab "Solicitações de compras" do
-      fill_with_autocomplete 'Solicitações de compra', with: '1'
+      fill_with_autocomplete 'Solicitações de compra', with: 'Secretaria'
 
       within_records do
         expect(page).to have_content 'Código'
@@ -126,7 +116,7 @@ feature "PriceCollections" do
 
         within 'tbody tr' do
           expect(page).to have_content '1/2013'
-          expect(page).to have_content '1 - Secretaria de Educação'
+          expect(page).to have_content '9 - Secretaria de Educação'
           expect(page).to have_content 'Gabriel Sobrinho'
         end
       end
@@ -212,7 +202,7 @@ feature "PriceCollections" do
 
         within 'tbody tr' do
           expect(page).to have_content '1/2013'
-          expect(page).to have_content '1 - Secretaria de Educação'
+          expect(page).to have_content '9 - Secretaria de Educação'
           expect(page).to have_content 'Gabriel Sobrinho'
         end
       end
@@ -923,7 +913,7 @@ feature "PriceCollections" do
       service_status: PurchaseSolicitationServiceStatus::LIBERATED,
       responsible: Employee.make!(:sobrinho))
     PurchaseSolicitation.make!(:reparo_2013, service_status: PurchaseSolicitationServiceStatus::LIBERATED,
-      responsible: Employee.make!(:wenderson))
+      responsible: Employee.make!(:wenderson), budget_structure_id: 2)
     PurchaseSolicitation.make!(:reparo, accounting_year: 2013, price_collections: [price_collection], responsible: Employee.make!(:wenderson,
       individual: Person.make!(:joao_da_silva).personable, registration: "12345678"))
 
