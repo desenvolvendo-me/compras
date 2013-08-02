@@ -2,11 +2,11 @@
 require 'spec_helper'
 
 feature "PurchaseSolicitations" do
-  before do
+  before(:all) do
     VCR.insert_cassette('purchase_solicitations', allow_playback_repeats: true)
   end
 
-  after do
+  after(:all) do
     VCR.eject_cassette
   end
 
@@ -262,15 +262,15 @@ feature "PurchaseSolicitations" do
         click_link "Remover"
       end
 
-      fill_with_autocomplete 'Dotação', :with => '123'
+      fill_with_autocomplete 'Dotação', :with => 'Aplicações Diretas'
       fill_with_autocomplete 'Desdobramento', :with => 'Reserva'
 
       click_button "Adicionar"
 
       within_records do
-        expect(page).to have_content '123 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+        expect(page).to have_content '1 - Aplicações Diretas'
+        expect(page).to have_content '3.1.90.00.00 - Aplicações Diretas'
         expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
-        expect(page).to have_content '3.1.90.01.02 - Aposentadorias Custeadas com Recursos da Reserva Remunerada'
         expect(page).to have_content '500,00'
       end
     end
@@ -284,7 +284,7 @@ feature "PurchaseSolicitations" do
       expect(page).to have_field 'Ano', :with => '2012', disabled: true
       expect(page).to have_field 'Data da solicitação', :with => '01/02/2013'
       expect(page).to have_field 'Responsável pela solicitação', :with => 'Wenderson Malheiros'
-      expect(page).to have_field 'Solicitante', :with => '1 - Secretaria de Educação'
+      expect(page).to have_field 'Solicitante', :with => '9 - Secretaria de Educação'
       expect(page).to have_field 'Justificativa da solicitação', :with => 'Novas mesas'
       expect(page).to have_field 'Local para entrega', :with => 'Secretaria da Saúde'
       expect(page).to have_select 'Tipo de solicitação', :selected => 'Produtos'
@@ -319,9 +319,9 @@ feature "PurchaseSolicitations" do
       expect(page).to have_css('.records .record', :count => 1)
 
       within_records do
-        expect(page).to have_content '123 - 3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+        expect(page).to have_content '1 - 3.1.90.00.00 - Aplicações Diretas'
+        expect(page).to have_content '3.1.90.00.00 - Aplicações Diretas'
         expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
-        expect(page).to have_content '3.1.90.01.02 - Aposentadorias Custeadas com Recursos da Reserva Remunerada'
         expect(page).to have_content '500,00'
       end
     end
@@ -432,7 +432,7 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Dotações orçamentárias' do
-      fill_with_autocomplete 'Dotação', :with => '123'
+      fill_with_autocomplete 'Dotação', :with => 'Aplicações Diretas'
 
       click_button "Adicionar"
     end
@@ -446,7 +446,7 @@ feature "PurchaseSolicitations" do
       expect(page).to have_field 'Ano', :with => '2012', disabled: true
       expect(page).to have_field 'Data da solicitação', :with => '01/02/2012'
       expect(page).to have_field 'Responsável pela solicitação', :with => 'Gabriel Sobrinho'
-      expect(page).to have_field 'Solicitante', :with => '1 - Secretaria de Educação'
+      expect(page).to have_field 'Solicitante', :with => '9 - Secretaria de Educação'
       expect(page).to have_field 'Justificativa da solicitação', :with => 'Novas cadeiras'
       expect(page).to have_field 'Local para entrega', :with => 'Secretaria da Educação'
       expect(page).to have_select 'Tipo de solicitação', :selected => 'Bens'
@@ -469,7 +469,7 @@ feature "PurchaseSolicitations" do
 
     within_tab 'Dotações orçamentárias' do
       within_records do
-        expect(page).to have_content budget_allocation.to_s
+        expect(page).to have_content "Aplicações Diretas"
       end
     end
   end
@@ -505,10 +505,10 @@ feature "PurchaseSolicitations" do
   end
 
   scenario 'create a new purchase_solicitation with same budget_structure and material' do
-    PurchaseSolicitation.make!(:reparo,
+    PurchaseSolicitation.make!(:reparo, budget_structure_id: 2,
       purchase_solicitation_budget_allocations: [
         PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria,
-          budget_allocation_id: 1)])
+          budget_allocation_id: 2)])
 
     Employee.make!(:sobrinho)
     DeliveryLocation.make!(:education)
@@ -539,16 +539,16 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Dotações orçamentárias' do
-      fill_with_autocomplete 'Dotação', :with => '123'
+      fill_with_autocomplete 'Dotação', :with => 'Aplicações Diretas'
 
       click_button "Adicionar"
     end
 
     click_button 'Salvar'
 
-    # expect(page).to_not have_notice 'Solicitação de Compra 1/2012 criada com sucesso.'
+    expect(page).to have_no_notice 'Solicitação de Compra 2/2012 criada com sucesso.'
 
-    expect(page).to have_content "já existe uma solicitação de compra pendente para este solicitante (1 - Secretaria de Educação) e material (01.01.00001 - Antivirus)"
+    expect(page).to have_content "já existe uma solicitação de compra pendente para este solicitante (9 - Secretaria de Educação) e material (01.01.00001 - Antivirus)"
   end
 
   scenario 'update a purchase_solicitation with same budget_structure and material' do
@@ -585,7 +585,7 @@ feature "PurchaseSolicitations" do
 
     expect(page).to have_no_notice 'Solicitação de Compra 1/2012 criada com sucesso.'
 
-    expect(page).to have_content "já existe uma solicitação de compra pendente para este solicitante (1 - Secretaria de Educação) e material (01.01.00001 - Antivirus)"
+    expect(page).to have_content "já existe uma solicitação de compra pendente para este solicitante (1 - Detran) e material (01.01.00001 - Antivirus)"
   end
 
   scenario 'provide purchase solicitation search by code and responsible' do
@@ -631,7 +631,7 @@ feature "PurchaseSolicitations" do
 
       within 'tbody tr' do
         expect(page).to have_content '1/2012'
-        expect(page).to have_content '1 - Secretaria de Educação'
+        expect(page).to have_content '1 - Detran'
         expect(page).to have_content 'Gabriel Sobrinho'
         expect(page).to have_content 'Pendente'
       end
@@ -659,7 +659,7 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab "Dotações orçamentárias" do
-      fill_with_autocomplete 'Dotação', :with => '123'
+      fill_with_autocomplete 'Dotação', :with => 'Aplicações Diretas'
 
       click_button "Adicionar"
     end
