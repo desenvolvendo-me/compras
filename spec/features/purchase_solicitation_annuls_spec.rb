@@ -2,30 +2,20 @@
 require 'spec_helper'
 
 feature 'PurchaseSolicitationAnnul' do
+  before(:all) do
+    VCR.insert_cassette('purchase_solicitation_annuls', allow_playback_repeats: true)
+  end
+
+  after(:all) do
+    VCR.eject_cassette
+  end
+
   let :current_user do
     User.make!(:sobrinho_as_admin_and_employee)
   end
 
-  let :budget_structure do
-    BudgetStructure.new(
-      id: 1,
-      code: '1',
-      full_code: '1',
-      tce_code: '051',
-      description: 'Secretaria de Desenvolvimento',
-      acronym: 'SEMUEDU',
-      performance_field: 'Desenvolvimento Educacional')
-  end
-
   background do
     sign_in
-
-    BudgetStructure.stub(:find).and_return(budget_structure)
-
-    ExpenseNature.stub(:all)
-    ExpenseNature.stub(:find)
-    BudgetAllocation.stub(:all)
-    BudgetAllocation.stub(:find)
   end
 
   scenario 'should not have a annul link when was creating a new solicitation' do
