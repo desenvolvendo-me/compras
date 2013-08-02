@@ -2,26 +2,16 @@
 require 'spec_helper'
 
 feature "LegalAnalysisAppraisals" do
-  let :budget_structure do
-    BudgetStructure.new(
-      id: 1,
-      code: '1',
-      full_code: '1',
-      tce_code: '051',
-      description: 'Secretaria de Desenvolvimento',
-      acronym: 'SEMUEDU',
-      performance_field: 'Desenvolvimento Educacional')
+  before(:all) do
+    VCR.insert_cassette('legal_analysis_appraisals', allow_playback_repeats: true)
+  end
+
+  after(:all) do
+    VCR.eject_cassette
   end
 
   background do
     sign_in
-
-    BudgetStructure.stub(:find).and_return(budget_structure)
-
-    ExpenseNature.stub(:all)
-    ExpenseNature.stub(:find)
-    BudgetAllocation.stub(:all)
-    BudgetAllocation.stub(:find)
   end
 
   scenario 'create a new legal_analysis_appraisal, update and destroy an existing' do
