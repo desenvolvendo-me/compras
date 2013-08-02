@@ -45,7 +45,7 @@ module TceExport::MG
       attr_reader :prefecture, :date, :city_code, :monthly_monitoring
 
       def generator_classes
-        generators = csv_files.map do |file|
+        csv_files.map do |file|
           self.class.module_eval("#{file.classify}Generator").new(monthly_monitoring)
         end
       end
@@ -116,6 +116,12 @@ module TceExport::MG
 
       def add_error(error)
         errors << "#{error_header} - #{error}"
+      end
+
+      def add_error_description(description)
+        return unless description
+
+        errors << "#{description}\n"
       end
 
       def lines
@@ -201,8 +207,13 @@ module TceExport::MG
             end
           end
         rescue Exception => e
-          Raven.capture_exception(e)
           add_error "gerou erro interno!"
+
+          if Rails.env.development? || Rails.env.test?
+            raise e
+          else
+            Raven.capture_exception(e)
+          end
         end
 
         lines.compact.join("\n")
@@ -212,20 +223,26 @@ module TceExport::MG
     class FormatterBase
       include Typecaster
 
+      attr_reader :data
+
       def self.separator
         ";"
       end
 
       def initialize(data, generator = nil)
         @generator = generator
+        @data = data
 
         super(data)
       end
+
+      def error_description(attribute, error_type); end
 
       private
 
       def typecasted_attribute(options)
         options[:generator] = @generator
+        options[:formatter] = self
 
         klass = options[:caster]
         klass.call(options[:value], options)

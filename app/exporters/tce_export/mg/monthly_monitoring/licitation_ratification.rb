@@ -85,6 +85,15 @@ module TceExport::MG
       attribute :dsc_produto_servico,      position: 9, size: 250, min_size: 1, required: true, caster: Casters::TextCaster
       attribute :quantidade,               position: 10, size: 13, min_size: 1, required: true, precision: 4, caster: Casters::PrecisionCaster
       attribute :vl_homologado,            position: 11, size: 13, min_size: 1, required: true, precision: 4, caster: Casters::PrecisionCaster
+
+      def error_description(attribute, error_type)
+        [
+          "tipo_registro: #{data[:tipo_registro]}",
+          "nro_processo_licitatorio: #{data[:nro_processo_licitatorio]}",
+          "exercicio_licitacao: #{data[:exercicio_licitacao]}",
+          "#{attribute}: #{data[attribute]}"
+        ].join("\n")
+      end
     end
 
     class RatificationDateDetailFormatter < FormatterBase
@@ -95,6 +104,15 @@ module TceExport::MG
       attribute :nro_processo_licitatorio, position: 4, size: 12, min_size: 1, required: true, caster: Casters::TextCaster
       attribute :dt_homologacao,           position: 5, size: 8, required: true, caster: Casters::DateCaster
       attribute :dt_adjuticacao,           position: 6, size: 8, required: true, caster: Casters::DateCaster
+
+      def error_description(attribute, error_type)
+        [
+          "tipo_registro: #{data[:tipo_registro]}",
+          "nro_processo_licitatorio: #{data[:nro_processo_licitatorio]}",
+          "exercicio_licitacao: #{data[:exercicio_licitacao]}",
+          "#{attribute}: #{data[attribute]}"
+        ].join("\n")
+      end
     end
 
     class LicitationRatificationGenerator < GeneratorBase
