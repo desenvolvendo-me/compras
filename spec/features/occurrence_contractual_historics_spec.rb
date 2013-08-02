@@ -4,36 +4,17 @@ require 'spec_helper'
 feature "OccurrenceContractualHistorics" do
   let(:current_user) { User.make!(:sobrinho) }
 
-  let :pledge do
-    UnicoAPI::Resources::Contabilidade::Pledge.new(id: 1, value: 9.99, description: 'Empenho 1',
-      year: 2013, to_s: 1, emission_date: "2013-01-01")
+  before(:all) do
+    VCR.insert_cassette('occurrence_contractual_historics', allow_playback_repeats: true)
   end
 
-  let :pledge_two do
-    UnicoAPI::Resources::Contabilidade::Pledge.new(id: 2, value: 15.99, description: 'Empenho 2',
-      year: 2012, to_s: 2, emission_date: "2012-01-01")
-  end
-
-  let :budget_structure do
-    BudgetStructure.new(
-      id: 1,
-      code: '1',
-      full_code: '1',
-      tce_code: '051',
-      description: 'Secretaria de Desenvolvimento',
-      acronym: 'SEMUEDU',
-      performance_field: 'Desenvolvimento Educacional')
+  after(:all) do
+    VCR.eject_cassette
   end
 
   background do
     create_roles ['contracts']
     sign_in
-
-    UnicoAPI::Resources::Contabilidade::Pledge.stub(:all).and_return([pledge, pledge_two])
-
-    UnicoAPI::Resources::Contabilidade::Pledge.stub(:find).with(1).and_return(pledge)
-    UnicoAPI::Resources::Contabilidade::Pledge.stub(:find).with(2).and_return(pledge_two)
-    BudgetStructure.stub(:find).and_return(budget_structure)
   end
 
   scenario 'create a new occurrence_contractual_historic, update and destroy an existing' do

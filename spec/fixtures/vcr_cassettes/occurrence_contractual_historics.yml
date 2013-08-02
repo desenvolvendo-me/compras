@@ -1,0 +1,292 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://contabil.dev/api/budget_structures/1.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - application/json
+      x-unico-api-customer-secret-token:
+      - '1234'
+      accept-encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-type:
+      - application/json; charset=utf-8
+      x-ua-compatible:
+      - IE=Edge
+      etag:
+      - '"8412141a24f5d33e522a8221802bc001"'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - 918c2f8974a038798b659e683c11da8e
+      x-runtime:
+      - '0.076983'
+      date:
+      - Fri, 02 Aug 2013 13:51:15 GMT
+      connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '{"acronym":"SEMUEDU","administration_type_id":1,"budget_structure_configuration_id":1,"budget_structure_level_id":1,"code":"1","created_at":"2013-08-01T18:53:23-03:00","description":"Detran","full_code":"1","id":1,"kind":"analytical","parent_id":null,"performance_field":"Desenvolvimento
+        Educacional","tce_code":"051","updated_at":"2013-08-01T18:53:23-03:00","to_s":"1
+        - Detran"}'
+    http_version: '1.1'
+  recorded_at: Fri, 02 Aug 2013 13:51:15 GMT
+- request:
+    method: get
+    uri: http://contabil.dev/api/pledges.json?by_contract_id=10&includes%5B%5D=capability&includes%5B%5D%5Bbudget_allocation%5D%5Binclude%5D=expense_nature
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - application/json
+      x-unico-api-customer-secret-token:
+      - '1234'
+      accept-encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-type:
+      - application/json; charset=utf-8
+      x-ua-compatible:
+      - IE=Edge
+      etag:
+      - '"d751713988987e9331980363e24189ce"'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - 04db9623427d64c16b1ac720b9e27c57
+      x-runtime:
+      - '0.611071'
+      date:
+      - Fri, 02 Aug 2013 13:51:15 GMT
+      connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '[]'
+    http_version: '1.1'
+  recorded_at: Fri, 02 Aug 2013 13:51:15 GMT
+- request:
+    method: get
+    uri: http://contabil.dev/api/pledges.json?by_founded_debt_contract_id=10
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - application/json
+      x-unico-api-customer-secret-token:
+      - '1234'
+      accept-encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-type:
+      - application/json; charset=utf-8
+      x-ua-compatible:
+      - IE=Edge
+      etag:
+      - '"d751713988987e9331980363e24189ce"'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - 01b28b1fa6ec9acbbf3d181173101f03
+      x-runtime:
+      - '0.100898'
+      date:
+      - Fri, 02 Aug 2013 13:51:15 GMT
+      connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '[]'
+    http_version: '1.1'
+  recorded_at: Fri, 02 Aug 2013 13:51:15 GMT
+- request:
+    method: get
+    uri: http://contabil.dev/api/pledges.json?by_contract_id=10&includes%5B%5D=capability&includes%5B%5D%5Bbudget_allocation%5D%5Binclude%5D=expense_nature
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - application/json
+      x-unico-api-customer-secret-token:
+      - '1234'
+      accept-encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-type:
+      - application/json; charset=utf-8
+      x-ua-compatible:
+      - IE=Edge
+      etag:
+      - '"d751713988987e9331980363e24189ce"'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - bff5d4787be8e1ce7ef6449ebe4bd317
+      x-runtime:
+      - '0.060951'
+      date:
+      - Fri, 02 Aug 2013 13:51:16 GMT
+      connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '[]'
+    http_version: '1.1'
+  recorded_at: Fri, 02 Aug 2013 13:51:16 GMT
+- request:
+    method: get
+    uri: http://contabil.dev/api/pledges.json?by_founded_debt_contract_id=10
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - application/json
+      x-unico-api-customer-secret-token:
+      - '1234'
+      accept-encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-type:
+      - application/json; charset=utf-8
+      x-ua-compatible:
+      - IE=Edge
+      etag:
+      - '"d751713988987e9331980363e24189ce"'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - b1f3903dbbd117f0188c151d54a1b6f8
+      x-runtime:
+      - '0.053180'
+      date:
+      - Fri, 02 Aug 2013 13:51:16 GMT
+      connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '[]'
+    http_version: '1.1'
+  recorded_at: Fri, 02 Aug 2013 13:51:16 GMT
+- request:
+    method: get
+    uri: http://contabil.dev/api/pledges.json?by_contract_id=10&includes%5B%5D=capability&includes%5B%5D%5Bbudget_allocation%5D%5Binclude%5D=expense_nature
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - application/json
+      x-unico-api-customer-secret-token:
+      - '1234'
+      accept-encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-type:
+      - application/json; charset=utf-8
+      x-ua-compatible:
+      - IE=Edge
+      etag:
+      - '"d751713988987e9331980363e24189ce"'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - e23359455dc914e6f1f65c33906b5c70
+      x-runtime:
+      - '0.057054'
+      date:
+      - Fri, 02 Aug 2013 13:51:16 GMT
+      connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '[]'
+    http_version: '1.1'
+  recorded_at: Fri, 02 Aug 2013 13:51:16 GMT
+- request:
+    method: get
+    uri: http://contabil.dev/api/pledges.json?by_founded_debt_contract_id=10
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - application/json
+      x-unico-api-customer-secret-token:
+      - '1234'
+      accept-encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-type:
+      - application/json; charset=utf-8
+      x-ua-compatible:
+      - IE=Edge
+      etag:
+      - '"d751713988987e9331980363e24189ce"'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - ab254ad24c134d11dcc7263896dcc2ca
+      x-runtime:
+      - '0.047954'
+      date:
+      - Fri, 02 Aug 2013 13:51:16 GMT
+      connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '[]'
+    http_version: '1.1'
+  recorded_at: Fri, 02 Aug 2013 13:51:16 GMT
+recorded_with: VCR 2.5.0
