@@ -2,29 +2,19 @@
 require 'spec_helper'
 
 feature "PurchaseSolicitationLiberations" do
-  let(:current_user) { User.make!(:sobrinho) }
-
-  let :budget_structure do
-    BudgetStructure.new(
-      id: 1,
-      code: '1',
-      full_code: '1',
-      tce_code: '051',
-      description: 'Secretaria de Educação',
-      acronym: 'SEMUEDU',
-      performance_field: 'Desenvolvimento Educacional')
+  before(:all) do
+    VCR.insert_cassette('purchase_solicitation_liberations', allow_playback_repeats: true)
   end
 
-  background do
-    BudgetStructure.stub(:find).and_return(budget_structure)
+  after(:all) do
+    VCR.eject_cassette
+  end
 
+  let(:current_user) { User.make!(:sobrinho) }
+
+  background do
     create_roles ['purchase_solicitations', 'employees']
     sign_in
-
-    ExpenseNature.stub(:all)
-    ExpenseNature.stub(:find)
-    BudgetAllocation.stub(:all)
-    BudgetAllocation.stub(:find)
   end
 
   scenario 'create a new purchase_solicitation_liberation' do
@@ -44,13 +34,13 @@ feature "PurchaseSolicitationLiberations" do
     # button liberate can be seen when purchase_solicitation is pending
     click_link 'Liberações'
 
-    expect(page).to have_content 'Liberações da Solicitação de Compra 1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
+    expect(page).to have_content 'Liberações da Solicitação de Compra 1/2012 1 - Detran - RESP: Gabriel Sobrinho'
 
     click_link 'Criar Liberação de Solicitação de Compra'
 
     expect(page).to_not have_field 'Responsável', disabled: true
 
-    expect(page).to have_content 'Criar Liberação para a Solicitação de Compra 1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
+    expect(page).to have_content 'Criar Liberação para a Solicitação de Compra 1/2012 1 - Detran - RESP: Gabriel Sobrinho'
 
     expect(page).to have_field 'Data', :with => I18n.l(Date.current)
     expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
@@ -95,7 +85,7 @@ feature "PurchaseSolicitationLiberations" do
     expect(page).to have_field 'Responsável', disabled: true
     expect(page).to have_field 'Status de atendimento', disabled: true
 
-    expect(page).to have_content 'Editar Liberação 1 da Solicitação de Compra 1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
+    expect(page).to have_content 'Editar Liberação 1 da Solicitação de Compra 1/2012 1 - Detran - RESP: Gabriel Sobrinho'
     expect(page).to have_field 'Justificativa', :with => 'Compra justificada', disabled: true
     expect(page).to have_field 'Data', :with => I18n.l(Date.current), disabled: true
     expect(page).to have_field 'Responsável', :with => 'Wenderson Malheiros', disabled: true
