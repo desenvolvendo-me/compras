@@ -3,7 +3,7 @@ module FactoryGirl
     def self.clean(*names)
       query = case ActiveRecord::Base.connection.adapter_name
               when "SQLite"     then "DELETE FROM %s"
-              when "PostgreSQL" then "TRUNCATE TABLE %s CASCADE"
+              when "PostgreSQL" then "TRUNCATE TABLE %s RESTART IDENTITY CASCADE"
               else "TRUNCATE TABLE %s"
               end
 
