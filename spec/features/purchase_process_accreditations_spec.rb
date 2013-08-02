@@ -2,29 +2,19 @@
 require 'spec_helper'
 
 feature "PurchaseProcessAccreditation" do
-  let(:current_user) { User.make!(:sobrinho_as_admin_and_employee) }
-
-  let :budget_structure do
-    BudgetStructure.new(
-      id: 1,
-      code: '1',
-      full_code: '1',
-      tce_code: '051',
-      description: 'Secretaria de Desenvolvimento',
-      acronym: 'SEMUEDU',
-      performance_field: 'Desenvolvimento Educacional')
+  before(:all) do
+    VCR.insert_cassette('purchase_process_accreditations', allow_playback_repeats: true)
   end
 
-  background do
-    BudgetStructure.stub(:find).and_return(budget_structure)
+  after(:all) do
+    VCR.eject_cassette
+  end
 
+  let(:current_user) { User.make!(:sobrinho_as_admin_and_employee) }
+
+  background do
     create_roles ['licitation_processes']
     sign_in
-
-    ExpenseNature.stub(:all)
-    ExpenseNature.stub(:find)
-    BudgetAllocation.stub(:all)
-    BudgetAllocation.stub(:find)
   end
 
   scenario 'create, update and remove accreditance', intermittent: true do
