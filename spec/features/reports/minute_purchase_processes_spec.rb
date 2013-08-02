@@ -2,25 +2,16 @@
 require 'spec_helper'
 
 feature 'Report::MinutePurchaseProcesses' do
-  let :budget_structure do
-    BudgetStructure.new(
-      id: 1,
-      code: '1',
-      full_code: '1',
-      tce_code: '051',
-      description: 'Secretaria de Desenvolvimento',
-      acronym: 'SEMUEDU',
-      performance_field: 'Desenvolvimento Educacional')
+  before(:all) do
+    VCR.insert_cassette('minute_purchase_processes', allow_playback_repeats: true)
+  end
+
+  after(:all) do
+    VCR.eject_cassette
   end
 
   background do
-    BudgetStructure.stub(:find).and_return(budget_structure)
     sign_in
-
-    ExpenseNature.stub(:all)
-    ExpenseNature.stub(:find)
-    BudgetAllocation.stub(:all)
-    BudgetAllocation.stub(:find)
   end
 
   context 'with a purchase_process as licitation_process' do
