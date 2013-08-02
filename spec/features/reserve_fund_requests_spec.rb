@@ -14,8 +14,8 @@ feature "ReserveFundRequests" do
     navigate 'Instrumentos Contratuais > Reserva de Dotações'
 
     click_link "Limpar Filtro"
+    expect(page).to have_title 'Reserva de Dotação dos Processos de Compras'
 
-    expect(page).to have_content 'Reserva de Dotação dos Processos de Compras'
 
     within_records do
       click_link 'Editar Reserva de dotação'
