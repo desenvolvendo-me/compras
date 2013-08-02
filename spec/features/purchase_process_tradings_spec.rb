@@ -2,20 +2,17 @@
 require 'spec_helper'
 
 feature "PurchaseProcessTradings" do
+  before(:all) do
+    VCR.insert_cassette('purchase_process_tradings', allow_playback_repeats: true)
+  end
+
+  after(:all) do
+    VCR.eject_cassette
+  end
+
   let(:current_user)       { User.make!(:sobrinho_as_admin_and_employee) }
   let(:first_proposal_div) { '//*[@id="purchase_process_creditor_proposals"]/div[2]' }
   let(:last_proposal_div)  { '//*[@id="purchase_process_creditor_proposals"]/div[4]' }
-
-  let :budget_structure do
-    BudgetStructure.new(
-      id: 1,
-      code: '1',
-      full_code: '1',
-      tce_code: '051',
-      description: 'Secretaria de Desenvolvimento',
-      acronym: 'SEMUEDU',
-      performance_field: 'Desenvolvimento Educacional')
-  end
 
   background do
     create_roles ['judgment_forms',
@@ -27,14 +24,8 @@ feature "PurchaseProcessTradings" do
                   'purchase_solicitations']
 
     Prefecture.make!(:belo_horizonte)
-    BudgetStructure.stub(:find).and_return(budget_structure)
 
     sign_in
-
-    ExpenseNature.stub(:all)
-    ExpenseNature.stub(:find)
-    BudgetAllocation.stub(:all)
-    BudgetAllocation.stub(:find)
   end
 
   scenario 'create a trading by item' do
