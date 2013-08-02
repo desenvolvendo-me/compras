@@ -5,4 +5,5 @@ json.array!(collection) do |obj|
   json.balance           obj.balance.to_f
   json.expense_nature    obj.expense_nature.to_s
   json.expense_nature_id obj.expense_nature_id
+  json.descriptor_id     obj.descriptor_id
 end

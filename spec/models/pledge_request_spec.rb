@@ -1,6 +1,8 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/descriptor'
+require 'app/models/expense_nature'
+require 'app/models/budget_structure'
 require 'app/models/accounting_account'
 require 'app/models/budget_allocation'
 require 'app/models/expense_nature'
@@ -32,6 +34,7 @@ describe PledgeRequest do
   describe 'delegations' do
     it { should delegate(:expense_nature).to(:budget_allocation).allowing_nil(true).prefix(true) }
     it { should delegate(:balance).to(:budget_allocation).allowing_nil(true).prefix(true) }
+    it { should delegate(:descriptor_id).to(:budget_allocation).allowing_nil(true).prefix(true) }
     it { should delegate(:amount).to(:reserve_fund).allowing_nil(true).prefix(true) }
   end
 
