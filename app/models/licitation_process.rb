@@ -199,7 +199,7 @@ class LicitationProcess < Compras::Model
   end
 
   scope :ratified, lambda {
-    joins { licitation_process_ratifications }
+    joins { licitation_process_ratifications }.uniq
   }
 
   def to_s
