@@ -2,6 +2,8 @@ $(document).ready(function() {
 
   $("#licitation_process_reserve_fund_total_value").val(sumReserveFundAmount());
 
+  setLicitationProcessAmount();
+
   function sumReserveFundAmount() {
     var collection = $("#records-tbody tr td.amount"),
         total      = 0.0;
@@ -152,6 +154,16 @@ $(document).ready(function() {
 
     //buildFormFromGrid(dataDiv);
   });
+
+  $("#licitation_process_budget_allocations").on('change', function() {
+    setLicitationProcessAmount();
+  });
+
+  function setLicitationProcessAmount() {
+    var amount = $("#licitation_process_budget_allocations > option:selected").data('amount');
+
+    $('#licitation_process_amount').val(amount);
+  }
 
   function buildUnblockFormFromGrid(dataDiv) {
     $("#reserve_fund_id").val(dataDiv.find('.reserve_fund_id').val());

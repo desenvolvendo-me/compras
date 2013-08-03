@@ -20,5 +20,8 @@ feature "ReserveFundRequests" do
     within_records do
       click_link 'Editar Reserva de dotação'
     end
+
+    # TODO: assim que acabar os testes com VCR isso vai ter que ser testado
+    # expect(page).to have_field 'Valor da reserva', with: '300,00'
   end
 end
