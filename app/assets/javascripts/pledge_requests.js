@@ -109,6 +109,7 @@ $(document).ready(function () {
     }
 
     $('#pledge_request_budget_allocation_balance').val(budget_allocation.balance);
+    $('#pledge_request_descriptor_id').val(budget_allocation.descriptor_id);
 
     setExpenseNatureModalUrl(budget_allocation.expense_nature_id);
   });
