@@ -10,7 +10,7 @@
     <% collection.each do |resource| %>
       <tr id="<%= dom_id resource %>">
         <td><%= resource.to_s %></td>
-        <td><%= link_to("Editar Reserva de dotação", edit_reserve_fund_request_path(resource.id)) %></td>
+        <td><%= link_to "Editar Reserva de Dotação", edit_reserve_fund_request_path(resource.id)  %></td>
       </tr>
     <% end %>
   </tbody>
