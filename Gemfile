@@ -78,6 +78,6 @@ group :test do
   gem 'shoulda-matchers', '2.2.0'
   gem 'simplecov', :require => false
   gem 'vcr', '=2.5.0'
-  gem 'webmock'
+  gem 'fakeweb'
   gem 'timecop'
 end
