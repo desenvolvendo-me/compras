@@ -1,7 +1,7 @@
 #encoding: utf-8
 require 'spec_helper'
 
-feature 'PurchaseSolicitationAnnul' do
+feature 'PurchaseSolicitationAnnul, :vcr' do
   before(:all) do
     VCR.insert_cassette('purchase_solicitation_annuls', allow_playback_repeats: true)
   end

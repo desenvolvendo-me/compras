@@ -1,7 +1,7 @@
 #encoding: utf-8
 require 'spec_helper'
 
-feature 'Report::MapOfProposals' do
+feature 'Report::MapOfProposals', :vcr do
   before(:all) do
     VCR.insert_cassette('map_of_proposals', allow_playback_repeats: true)
   end

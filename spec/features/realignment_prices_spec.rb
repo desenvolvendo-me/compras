@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
 
-feature "RealignmentPrices" do
+feature "RealignmentPrices", :vcr do
   before(:all) do
     VCR.insert_cassette('realignment_prices', allow_playback_repeats: true)
   end

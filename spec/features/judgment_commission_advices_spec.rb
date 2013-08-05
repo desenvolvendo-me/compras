@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
 
-feature "JudgmentCommissionAdvices" do
+feature "JudgmentCommissionAdvices", :vcr do
   let(:current_user) { User.make!(:sobrinho) }
 
   before(:all) do

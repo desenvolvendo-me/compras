@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
 
-feature "PurchaseProcessAccreditation" do
+feature "PurchaseProcessAccreditation", :vcr do
   before(:all) do
     VCR.insert_cassette('purchase_process_accreditations', allow_playback_repeats: true)
   end

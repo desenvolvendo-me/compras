@@ -1,7 +1,7 @@
 #encoding: utf-8
 require 'spec_helper'
 
-feature 'Report::MinutePurchaseProcesses' do
+feature 'Report::MinutePurchaseProcesses', :vcr do
   before(:all) do
     VCR.insert_cassette('minute_purchase_processes', allow_playback_repeats: true)
   end

@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
 
-feature "OccurrenceContractualHistorics" do
+feature "OccurrenceContractualHistorics", :vcr do
   let(:current_user) { User.make!(:sobrinho) }
 
   before(:all) do
