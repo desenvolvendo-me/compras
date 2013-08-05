@@ -3,10 +3,7 @@
     <%= f.input :to_s, disabled: true %>
     <%= f.input :id, as: :hidden %>
     <%= hidden_field_tag :reserve_fund_id %>
-  </div>
-
-  <div class="yui3-u-1-2">
-    <%= f.input :descriptor, as: :modal, fake: true, required: true, label: 'Descritor' %>
+    <%= hidden_field_tag :descriptor_id %>
   </div>
 
   <div class="yui3-u-1-2">

@@ -3,6 +3,7 @@ $(document).ready(function() {
   $("#licitation_process_reserve_fund_total_value").val(sumReserveFundAmount());
 
   setLicitationProcessAmount();
+  setDescriptorId();
 
   function sumReserveFundAmount() {
     var collection = $("#records-tbody tr td.amount"),
@@ -108,7 +109,7 @@ $(document).ready(function() {
       id:                   $("#reserve_fund_id").val(),
       date:                 $("#licitation_process_date").val(),
       amount:               $("#licitation_process_amount").val(),
-      descriptor_id:        $("#licitation_process_descriptor_id").val(),
+      descriptor_id:        $("#descriptor_id").val(),
       budget_allocation_id: $("#licitation_process_budget_allocations").val(),
       purchase_process_id:  $("#licitation_process_id").val()
     };
@@ -157,7 +158,14 @@ $(document).ready(function() {
 
   $("#licitation_process_budget_allocations").on('change', function() {
     setLicitationProcessAmount();
+    setDescriptorId();
   });
+
+  function setDescriptorId() {
+    var descriptor_id = $("#licitation_process_budget_allocations > option:selected").data('descriptor_id');
+
+    $('#descriptor_id').val(descriptor_id);
+  }
 
   function setLicitationProcessAmount() {
     var amount = $("#licitation_process_budget_allocations > option:selected").data('amount');
@@ -172,8 +180,7 @@ $(document).ready(function() {
 
   function buildFormFromGrid(dataDiv) {
     $("#reserve_fund_id").val(dataDiv.find('.reserve_fund_id').val());
-    $("#licitation_process_descriptor").val(dataDiv.find('.descriptor').val());
-    $("#licitation_process_descriptor_id").val(dataDiv.find('.descriptor_id').val());
+    $("#descriptor_id").val(dataDiv.find('.descriptor_id').val());
     $("#licitation_process_budget_allocations").val(dataDiv.find('.budget_allocation_id').val());
     $("#licitation_process_date").val(dataDiv.find('.date').val());
     $("#licitation_process_amount").val(dataDiv.find('.amount').val());
@@ -183,8 +190,7 @@ $(document).ready(function() {
 
   function resetForm() {
     $("#reserve_fund_id").val('');
-    $("#licitation_process_descriptor").val('');
-    $("#licitation_process_descriptor_id").val('');
+    $("#descriptor_id").val('');
     $("#licitation_process_budget_allocations").val('');
     $("#licitation_process_date").val('');
     $("#licitation_process_amount").val('');
