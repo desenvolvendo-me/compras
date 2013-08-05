@@ -35,7 +35,7 @@ describe SimpleMenu, :type => :acceptance do
   end
 
   let :menu do
-    subject.render
+    Capybara.string subject.render
   end
 
   before do
