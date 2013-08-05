@@ -11,7 +11,7 @@ class PurchaseProcessBudgetAllocation < Compras::Model
   belongs_to_resource :expense_nature
   belongs_to_resource :budget_allocation
 
-  delegate :expense_nature, :expense_nature_id, :amount, :balance,
+  delegate :expense_nature, :expense_nature_id, :amount, :balance, :descriptor_id,
            :to => :budget_allocation, :allow_nil => true, :prefix => true
 
   validates :budget_allocation_id, :value, :presence => true

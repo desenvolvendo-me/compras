@@ -15,6 +15,7 @@ describe PurchaseProcessBudgetAllocation do
   it { should delegate(:expense_nature).to(:budget_allocation).allowing_nil(true).prefix(true) }
   it { should delegate(:expense_nature_id).to(:budget_allocation).allowing_nil(true).prefix(true) }
   it { should delegate(:amount).to(:budget_allocation).allowing_nil(true).prefix(true) }
+  it { should delegate(:descriptor_id).to(:budget_allocation).allowing_nil(true).prefix(true) }
 
   it 'should belong to resource budget_allocation' do
     budget_allocation = BudgetAllocation.new(id: 2)

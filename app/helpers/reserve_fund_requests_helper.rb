@@ -9,7 +9,10 @@ module ReserveFundRequestsHelper
       [
         purchase_process_budget_allocation.budget_allocation,
         purchase_process_budget_allocation.budget_allocation_id,
-        { 'data-amount' => number_with_precision(purchase_process_budget_allocation.value) }
+        {
+          'data-amount' => number_with_precision(purchase_process_budget_allocation.value),
+          'data-descriptor_id' => purchase_process_budget_allocation.budget_allocation_descriptor_id
+        }
       ]
     end
   end
