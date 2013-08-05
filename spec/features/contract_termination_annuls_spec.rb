@@ -1,35 +1,17 @@
 #encoding: utf-8
 require 'spec_helper'
 
-feature 'ContractTerminationAnnuls' do
-  let :pledge do
-    Pledge.new(id: 1, value: 9.99, description: 'Empenho 1',
-      year: 2013, to_s: 1, emission_date: "2013-01-01")
+feature 'ContractTerminationAnnuls', :vcr do
+  before(:all) do
+    VCR.insert_cassette('contract_termination_annuls', allow_playback_repeats: true)
   end
 
-  let :pledge_two do
-    Pledge.new(id: 2, value: 15.99, description: 'Empenho 2',
-      year: 2012, to_s: 2, emission_date: "2012-01-01")
-  end
-
-  let :budget_structure do
-    BudgetStructure.new(
-      id: 1,
-      code: '29',
-      tce_code: '051',
-      description: 'Secretaria de Desenvolvimento',
-      acronym: 'SEMUEDU',
-      performance_field: 'Desenvolvimento Educacional')
+  after(:all) do
+    VCR.eject_cassette
   end
 
   background do
     sign_in
-
-    UnicoAPI::Resources::Contabilidade::Pledge.stub(:all).and_return([pledge, pledge_two])
-
-    UnicoAPI::Resources::Contabilidade::Pledge.stub(:find).with(1).and_return(pledge)
-    UnicoAPI::Resources::Contabilidade::Pledge.stub(:find).with(2).and_return(pledge_two)
-    BudgetStructure.stub(:find).and_return(budget_structure)
   end
 
   scenario 'create a contract termination annulment' do

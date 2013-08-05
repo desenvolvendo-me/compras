@@ -25,24 +25,24 @@ http_interactions:
       x-ua-compatible:
       - IE=Edge
       etag:
-      - '"c27632bd8c9e4f1632a4cc0758f9e51a"'
+      - '"e5038fcabe03a8557f18dabc428e2d2a"'
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 6b15eddcbc4372de876e209f85f06737
+      - 441891e31d3212263a5d0bf7591f90bb
       x-runtime:
-      - '0.940312'
+      - '0.089099'
       date:
-      - Fri, 02 Aug 2013 20:29:22 GMT
+      - Mon, 05 Aug 2013 19:14:39 GMT
       connection:
       - close
     body:
       encoding: UTF-8
-      string: '{"acronym":"SEMUEDU","administration_type_id":1,"budget_structure_configuration_id":1,"budget_structure_level_id":1,"code":"1","created_at":"2013-08-01T14:39:16-03:00","description":"Detran","full_code":"1","id":1,"kind":"analytical","parent_id":null,"performance_field":"Desenvolvimento
-        Educacional","tce_code":"051","updated_at":"2013-08-01T14:39:16-03:00","to_s":"1
+      string: '{"acronym":"SEMUEDU","administration_type_id":1,"budget_structure_configuration_id":1,"budget_structure_level_id":1,"code":"1","created_at":"2013-08-05T11:23:41-03:00","description":"Detran","full_code":"1","id":1,"kind":"analytical","parent_id":null,"performance_field":"Desenvolvimento
+        Educacional","tce_code":"051","updated_at":"2013-08-05T11:23:41-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Fri, 02 Aug 2013 20:29:22 GMT
+  recorded_at: Mon, 05 Aug 2013 19:14:39 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations/1.json?includes%5B%5D=expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Binclude%5D%5Bbudget_structure%5D%5Bmethods%5D%5B%5D=structure_sequence&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=expense_nature_expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=function_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=subfunction_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_program_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_action_type&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=amount&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bmethods%5D%5B%5D=capability_source_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bonly%5D=id&includes%5B%5D%5Bbudget_structure%5D%5Bexcept%5D=custom_data&methods%5B%5D=balance&methods%5B%5D=amount&methods%5B%5D=budget_structure_structure_sequence
@@ -68,15 +68,15 @@ http_interactions:
       x-ua-compatible:
       - IE=Edge
       etag:
-      - '"1dd703bcf381b315bb80dd0691dd5dbc"'
+      - '"c05d41999fd474767996482d45d001e4"'
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 2f0d32867fc26a87ab4502b14aa8cc80
+      - dcf17cf207cc443011d32967f8d25006
       x-runtime:
-      - '1.108713'
+      - '0.088147'
       date:
-      - Fri, 02 Aug 2013 20:29:24 GMT
+      - Mon, 05 Aug 2013 19:14:40 GMT
       connection:
       - close
     body:
@@ -84,7 +84,7 @@ http_interactions:
       string: !binary |-
         eyJhbGllbmF0aW9uX2FwcGVhbCI6ZmFsc2UsImJ1ZGdldF9hbGxvY2F0aW9u
         X3R5cGVfaWQiOjEsImJ1ZGdldF9zdHJ1Y3R1cmVfaWQiOjIsImNvZGUiOjEs
-        ImNyZWF0ZWRfYXQiOiIyMDEzLTA4LTAxVDE0OjM5OjE3LTAzOjAwIiwiZGF0
+        ImNyZWF0ZWRfYXQiOiIyMDEzLTA4LTA1VDExOjIzOjQ2LTAzOjAwIiwiZGF0
         ZSI6IjIwMTItMTAtMDEiLCJkZWJ0X3R5cGUiOiJjb250cmFjdCIsImRlc2Ny
         aXB0b3JfaWQiOjEsImVkdWNhdGlvbiI6ZmFsc2UsImV4cGVuc2VfbmF0dXJl
         X2lkIjozLCJmb3Jlc2lnaHQiOmZhbHNlLCJmdW5jdGlvbl9pZCI6MSwiZ292
@@ -95,33 +95,33 @@ http_interactions:
         LCI4IjoiMCwwMCIsIjkiOiIwLDAwIiwiMTAiOiIwLDAwIiwiMTEiOiIwLDAw
         IiwiMTIiOiIwLDAwIn0sInBlcnNvbmFsIjpmYWxzZSwicmVmaW5hbmNpbmci
         OnRydWUsInN1YmZ1bmN0aW9uX2lkIjoxLCJ1cGRhdGVkX2F0IjoiMjAxMy0w
-        OC0wMVQxNDozOToxNy0wMzowMCIsInZhbHVlIjpudWxsLCJ5ZWFyIjoyMDEy
-        LCJiYWxhbmNlIjoiNTAwLjAiLCJhbW91bnQiOiI1MDAuMCIsImJ1ZGdldF9z
+        OC0wNVQxMToyMzo0Ni0wMzowMCIsInZhbHVlIjpudWxsLCJ5ZWFyIjoyMDEy
+        LCJiYWxhbmNlIjoiNDg5LjUiLCJhbW91bnQiOiI1MDAuMCIsImJ1ZGdldF9z
         dHJ1Y3R1cmVfc3RydWN0dXJlX3NlcXVlbmNlIjpbeyJhY3JvbnltIjoiU0VN
         VUVEVSIsImFkbWluaXN0cmF0aW9uX3R5cGVfaWQiOjEsImJ1ZGdldF9zdHJ1
         Y3R1cmVfY29uZmlndXJhdGlvbl9pZCI6MiwiYnVkZ2V0X3N0cnVjdHVyZV9s
         ZXZlbF9pZCI6MSwiY29kZSI6IjkiLCJjcmVhdGVkX2F0IjoiMjAxMy0wOC0w
-        MVQxNDozOToxNi0wMzowMCIsImRlc2NyaXB0aW9uIjoiU2VjcmV0YXJpYSBk
+        NVQxMToyMzo0Mi0wMzowMCIsImRlc2NyaXB0aW9uIjoiU2VjcmV0YXJpYSBk
         ZSBFZHVjYcOnw6NvIiwiZnVsbF9jb2RlIjoiOSIsImlkIjoyLCJraW5kIjoi
         YW5hbHl0aWNhbCIsInBhcmVudF9pZCI6bnVsbCwicGVyZm9ybWFuY2VfZmll
         bGQiOiJEZXNlbnZvbHZpbWVudG8gRWR1Y2FjaW9uYWwiLCJ0Y2VfY29kZSI6
-        IjA1MSIsInVwZGF0ZWRfYXQiOiIyMDEzLTA4LTAxVDE0OjM5OjE2LTAzOjAw
+        IjA1MSIsInVwZGF0ZWRfYXQiOiIyMDEzLTA4LTA1VDExOjIzOjQyLTAzOjAw
         IiwidG9fcyI6IjkgLSBTZWNyZXRhcmlhIGRlIEVkdWNhw6fDo28ifV0sInRv
         X3MiOiIxIC0gMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0YXMi
-        LCJleHBlbnNlX25hdHVyZSI6eyJjcmVhdGVkX2F0IjoiMjAxMy0wOC0wMVQx
-        NDozOToxNy0wMzowMCIsImRlc2NyaXB0aW9uIjoiQXBsaWNhw6fDtWVzIERp
+        LCJleHBlbnNlX25hdHVyZSI6eyJjcmVhdGVkX2F0IjoiMjAxMy0wOC0wNVQx
+        MToyMzo0My0wMzowMCIsImRlc2NyaXB0aW9uIjoiQXBsaWNhw6fDtWVzIERp
         cmV0YXMiLCJkb2NrZXQiOiJSZWdpc3RyYSBvIHZhbG9yIGRhcyBhcGxpY2HD
         p8O1ZXMgZGlyZXRhcyIsImV4cGVuc2VfbmF0dXJlIjoiMy4xLjkwLjAwLjAw
         IiwiaWQiOjMsImtpbmQiOiJib3RoIiwicGFyZW50X2lkIjoyLCJyZWd1bGF0
-        b3J5X2FjdF9pZCI6MiwidXBkYXRlZF9hdCI6IjIwMTMtMDgtMDFUMTQ6Mzk6
-        MTctMDM6MDAiLCJ5ZWFyIjoyMDEyfSwiYnVkZ2V0X2FsbG9jYXRpb25fY2Fw
+        b3J5X2FjdF9pZCI6MiwidXBkYXRlZF9hdCI6IjIwMTMtMDgtMDVUMTE6MjM6
+        NDMtMDM6MDAiLCJ5ZWFyIjoyMDEyfSwiYnVkZ2V0X2FsbG9jYXRpb25fY2Fw
         YWJpbGl0aWVzIjpbeyJhbW91bnQiOiI1MDAuMCIsImJ1ZGdldF9hbGxvY2F0
         aW9uX2lkIjoxLCJjYXBhYmlsaXR5X2lkIjoxLCJjcmVhdGVkX2F0IjoiMjAx
-        My0wOC0wMVQxNDozOToxNy0wMzowMCIsImlkIjoxLCJ1cGRhdGVkX2F0Ijoi
-        MjAxMy0wOC0wMVQxNDozOToxNy0wMzowMCIsImJ1ZGdldF9hbGxvY2F0aW9u
+        My0wOC0wNVQxMToyMzo0Ni0wMzowMCIsImlkIjoxLCJ1cGRhdGVkX2F0Ijoi
+        MjAxMy0wOC0wNVQxMToyMzo0Ni0wMzowMCIsImJ1ZGdldF9hbGxvY2F0aW9u
         Ijp7ImFsaWVuYXRpb25fYXBwZWFsIjpmYWxzZSwiYnVkZ2V0X2FsbG9jYXRp
         b25fdHlwZV9pZCI6MSwiYnVkZ2V0X3N0cnVjdHVyZV9pZCI6MiwiY29kZSI6
-        MSwiY3JlYXRlZF9hdCI6IjIwMTMtMDgtMDFUMTQ6Mzk6MTctMDM6MDAiLCJk
+        MSwiY3JlYXRlZF9hdCI6IjIwMTMtMDgtMDVUMTE6MjM6NDYtMDM6MDAiLCJk
         YXRlIjoiMjAxMi0xMC0wMSIsImRlYnRfdHlwZSI6ImNvbnRyYWN0IiwiZGVz
         Y3JpcHRvcl9pZCI6MSwiZWR1Y2F0aW9uIjpmYWxzZSwiZXhwZW5zZV9uYXR1
         cmVfaWQiOjMsImZvcmVzaWdodCI6ZmFsc2UsImZ1bmN0aW9uX2lkIjoxLCJn
@@ -132,7 +132,7 @@ http_interactions:
         MCIsIjgiOiIwLDAwIiwiOSI6IjAsMDAiLCIxMCI6IjAsMDAiLCIxMSI6IjAs
         MDAiLCIxMiI6IjAsMDAifSwicGVyc29uYWwiOmZhbHNlLCJyZWZpbmFuY2lu
         ZyI6dHJ1ZSwic3ViZnVuY3Rpb25faWQiOjEsInVwZGF0ZWRfYXQiOiIyMDEz
-        LTA4LTAxVDE0OjM5OjE3LTAzOjAwIiwidmFsdWUiOm51bGwsInllYXIiOjIw
+        LTA4LTA1VDExOjIzOjQ2LTAzOjAwIiwidmFsdWUiOm51bGwsInllYXIiOjIw
         MTIsImV4cGVuc2VfbmF0dXJlX2V4cGVuc2VfbmF0dXJlIjoiMy4xLjkwLjAw
         LjAwIiwiZnVuY3Rpb25fY29kZSI6IjA0Iiwic3ViZnVuY3Rpb25fY29kZSI6
         IjAxIiwiZ292ZXJubWVudF9wcm9ncmFtX2NvZGUiOiIwMDAxIiwiZ292ZXJu
@@ -141,25 +141,25 @@ http_interactions:
         dXJlIjp7ImFjcm9ueW0iOiJTRU1VRURVIiwiYWRtaW5pc3RyYXRpb25fdHlw
         ZV9pZCI6MSwiYnVkZ2V0X3N0cnVjdHVyZV9jb25maWd1cmF0aW9uX2lkIjoy
         LCJidWRnZXRfc3RydWN0dXJlX2xldmVsX2lkIjoxLCJjb2RlIjoiOSIsImNy
-        ZWF0ZWRfYXQiOiIyMDEzLTA4LTAxVDE0OjM5OjE2LTAzOjAwIiwiY3VzdG9t
+        ZWF0ZWRfYXQiOiIyMDEzLTA4LTA1VDExOjIzOjQyLTAzOjAwIiwiY3VzdG9t
         X2RhdGEiOnt9LCJkZXNjcmlwdGlvbiI6IlNlY3JldGFyaWEgZGUgRWR1Y2HD
         p8OjbyIsImZ1bGxfY29kZSI6IjkiLCJpZCI6Miwia2luZCI6ImFuYWx5dGlj
         YWwiLCJwYXJlbnRfaWQiOm51bGwsInBlcmZvcm1hbmNlX2ZpZWxkIjoiRGVz
         ZW52b2x2aW1lbnRvIEVkdWNhY2lvbmFsIiwidGNlX2NvZGUiOiIwNTEiLCJ1
-        cGRhdGVkX2F0IjoiMjAxMy0wOC0wMVQxNDozOToxNi0wMzowMCIsInN0cnVj
+        cGRhdGVkX2F0IjoiMjAxMy0wOC0wNVQxMToyMzo0Mi0wMzowMCIsInN0cnVj
         dHVyZV9zZXF1ZW5jZSI6W3siYWNyb255bSI6IlNFTVVFRFUiLCJhZG1pbmlz
         dHJhdGlvbl90eXBlX2lkIjoxLCJidWRnZXRfc3RydWN0dXJlX2NvbmZpZ3Vy
         YXRpb25faWQiOjIsImJ1ZGdldF9zdHJ1Y3R1cmVfbGV2ZWxfaWQiOjEsImNv
-        ZGUiOiI5IiwiY3JlYXRlZF9hdCI6IjIwMTMtMDgtMDFUMTQ6Mzk6MTYtMDM6
+        ZGUiOiI5IiwiY3JlYXRlZF9hdCI6IjIwMTMtMDgtMDVUMTE6MjM6NDItMDM6
         MDAiLCJkZXNjcmlwdGlvbiI6IlNlY3JldGFyaWEgZGUgRWR1Y2HDp8OjbyIs
         ImZ1bGxfY29kZSI6IjkiLCJpZCI6Miwia2luZCI6ImFuYWx5dGljYWwiLCJw
         YXJlbnRfaWQiOm51bGwsInBlcmZvcm1hbmNlX2ZpZWxkIjoiRGVzZW52b2x2
         aW1lbnRvIEVkdWNhY2lvbmFsIiwidGNlX2NvZGUiOiIwNTEiLCJ1cGRhdGVk
-        X2F0IjoiMjAxMy0wOC0wMVQxNDozOToxNi0wMzowMCIsInRvX3MiOiI5IC0g
+        X2F0IjoiMjAxMy0wOC0wNVQxMToyMzo0Mi0wMzowMCIsInRvX3MiOiI5IC0g
         U2VjcmV0YXJpYSBkZSBFZHVjYcOnw6NvIn1dfX0sImNhcGFiaWxpdHkiOnsi
         aWQiOjEsImNhcGFiaWxpdHlfc291cmNlX2NvZGUiOjF9fV19
     http_version: '1.1'
-  recorded_at: Fri, 02 Aug 2013 20:29:24 GMT
+  recorded_at: Mon, 05 Aug 2013 19:14:40 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -185,30 +185,30 @@ http_interactions:
       x-ua-compatible:
       - IE=Edge
       etag:
-      - '"4f4f80f286ea987c8362cc42dc98a68a"'
+      - '"f0d3c0d8dbade2dee75d3d62b63b9579"'
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 19a4dc0c3173159c4e58d150480e1de6
+      - a78df7d86547361a7d07b31caa81d56f
       x-runtime:
-      - '0.028715'
+      - '0.036651'
       date:
-      - Fri, 02 Aug 2013 20:29:24 GMT
+      - Mon, 05 Aug 2013 19:14:40 GMT
       connection:
       - close
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        eyJjcmVhdGVkX2F0IjoiMjAxMy0wOC0wMVQxNDozOToxNy0wMzowMCIsImRl
+        eyJjcmVhdGVkX2F0IjoiMjAxMy0wOC0wNVQxMToyMzo0My0wMzowMCIsImRl
         c2NyaXB0aW9uIjoiQXBsaWNhw6fDtWVzIERpcmV0YXMiLCJkb2NrZXQiOiJS
         ZWdpc3RyYSBvIHZhbG9yIGRhcyBhcGxpY2HDp8O1ZXMgZGlyZXRhcyIsImV4
         cGVuc2VfbmF0dXJlIjoiMy4xLjkwLjAwLjAwIiwiaWQiOjMsImtpbmQiOiJi
         b3RoIiwicGFyZW50X2lkIjoyLCJyZWd1bGF0b3J5X2FjdF9pZCI6MiwidXBk
-        YXRlZF9hdCI6IjIwMTMtMDgtMDFUMTQ6Mzk6MTctMDM6MDAiLCJ5ZWFyIjoy
+        YXRlZF9hdCI6IjIwMTMtMDgtMDVUMTE6MjM6NDMtMDM6MDAiLCJ5ZWFyIjoy
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Fri, 02 Aug 2013 20:29:24 GMT
+  recorded_at: Mon, 05 Aug 2013 19:14:40 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -234,24 +234,24 @@ http_interactions:
       x-ua-compatible:
       - IE=Edge
       etag:
-      - '"c27632bd8c9e4f1632a4cc0758f9e51a"'
+      - '"e5038fcabe03a8557f18dabc428e2d2a"'
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 4fdd66ab10265f276455bcc1c9efefe6
+      - 4ed10ab6eb1c55711dfc39e9dbaa96c8
       x-runtime:
-      - '0.029668'
+      - '0.036536'
       date:
-      - Fri, 02 Aug 2013 20:29:27 GMT
+      - Mon, 05 Aug 2013 19:14:45 GMT
       connection:
       - close
     body:
       encoding: UTF-8
-      string: '{"acronym":"SEMUEDU","administration_type_id":1,"budget_structure_configuration_id":1,"budget_structure_level_id":1,"code":"1","created_at":"2013-08-01T14:39:16-03:00","description":"Detran","full_code":"1","id":1,"kind":"analytical","parent_id":null,"performance_field":"Desenvolvimento
-        Educacional","tce_code":"051","updated_at":"2013-08-01T14:39:16-03:00","to_s":"1
+      string: '{"acronym":"SEMUEDU","administration_type_id":1,"budget_structure_configuration_id":1,"budget_structure_level_id":1,"code":"1","created_at":"2013-08-05T11:23:41-03:00","description":"Detran","full_code":"1","id":1,"kind":"analytical","parent_id":null,"performance_field":"Desenvolvimento
+        Educacional","tce_code":"051","updated_at":"2013-08-05T11:23:41-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Fri, 02 Aug 2013 20:29:27 GMT
+  recorded_at: Mon, 05 Aug 2013 19:14:45 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations/1.json?includes%5B%5D=expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Binclude%5D%5Bbudget_structure%5D%5Bmethods%5D%5B%5D=structure_sequence&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=expense_nature_expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=function_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=subfunction_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_program_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_action_type&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=amount&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bmethods%5D%5B%5D=capability_source_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bonly%5D=id&includes%5B%5D%5Bbudget_structure%5D%5Bexcept%5D=custom_data&methods%5B%5D=balance&methods%5B%5D=amount&methods%5B%5D=budget_structure_structure_sequence
@@ -277,15 +277,15 @@ http_interactions:
       x-ua-compatible:
       - IE=Edge
       etag:
-      - '"1dd703bcf381b315bb80dd0691dd5dbc"'
+      - '"c05d41999fd474767996482d45d001e4"'
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 529c0ff403b2372dc151a23c7c7a88b0
+      - 719cbe1fa977b4bcc6b29d1effbbe2bf
       x-runtime:
-      - '0.063831'
+      - '0.082121'
       date:
-      - Fri, 02 Aug 2013 20:29:28 GMT
+      - Mon, 05 Aug 2013 19:14:45 GMT
       connection:
       - close
     body:
@@ -293,7 +293,7 @@ http_interactions:
       string: !binary |-
         eyJhbGllbmF0aW9uX2FwcGVhbCI6ZmFsc2UsImJ1ZGdldF9hbGxvY2F0aW9u
         X3R5cGVfaWQiOjEsImJ1ZGdldF9zdHJ1Y3R1cmVfaWQiOjIsImNvZGUiOjEs
-        ImNyZWF0ZWRfYXQiOiIyMDEzLTA4LTAxVDE0OjM5OjE3LTAzOjAwIiwiZGF0
+        ImNyZWF0ZWRfYXQiOiIyMDEzLTA4LTA1VDExOjIzOjQ2LTAzOjAwIiwiZGF0
         ZSI6IjIwMTItMTAtMDEiLCJkZWJ0X3R5cGUiOiJjb250cmFjdCIsImRlc2Ny
         aXB0b3JfaWQiOjEsImVkdWNhdGlvbiI6ZmFsc2UsImV4cGVuc2VfbmF0dXJl
         X2lkIjozLCJmb3Jlc2lnaHQiOmZhbHNlLCJmdW5jdGlvbl9pZCI6MSwiZ292
@@ -304,33 +304,33 @@ http_interactions:
         LCI4IjoiMCwwMCIsIjkiOiIwLDAwIiwiMTAiOiIwLDAwIiwiMTEiOiIwLDAw
         IiwiMTIiOiIwLDAwIn0sInBlcnNvbmFsIjpmYWxzZSwicmVmaW5hbmNpbmci
         OnRydWUsInN1YmZ1bmN0aW9uX2lkIjoxLCJ1cGRhdGVkX2F0IjoiMjAxMy0w
-        OC0wMVQxNDozOToxNy0wMzowMCIsInZhbHVlIjpudWxsLCJ5ZWFyIjoyMDEy
-        LCJiYWxhbmNlIjoiNTAwLjAiLCJhbW91bnQiOiI1MDAuMCIsImJ1ZGdldF9z
+        OC0wNVQxMToyMzo0Ni0wMzowMCIsInZhbHVlIjpudWxsLCJ5ZWFyIjoyMDEy
+        LCJiYWxhbmNlIjoiNDg5LjUiLCJhbW91bnQiOiI1MDAuMCIsImJ1ZGdldF9z
         dHJ1Y3R1cmVfc3RydWN0dXJlX3NlcXVlbmNlIjpbeyJhY3JvbnltIjoiU0VN
         VUVEVSIsImFkbWluaXN0cmF0aW9uX3R5cGVfaWQiOjEsImJ1ZGdldF9zdHJ1
         Y3R1cmVfY29uZmlndXJhdGlvbl9pZCI6MiwiYnVkZ2V0X3N0cnVjdHVyZV9s
         ZXZlbF9pZCI6MSwiY29kZSI6IjkiLCJjcmVhdGVkX2F0IjoiMjAxMy0wOC0w
-        MVQxNDozOToxNi0wMzowMCIsImRlc2NyaXB0aW9uIjoiU2VjcmV0YXJpYSBk
+        NVQxMToyMzo0Mi0wMzowMCIsImRlc2NyaXB0aW9uIjoiU2VjcmV0YXJpYSBk
         ZSBFZHVjYcOnw6NvIiwiZnVsbF9jb2RlIjoiOSIsImlkIjoyLCJraW5kIjoi
         YW5hbHl0aWNhbCIsInBhcmVudF9pZCI6bnVsbCwicGVyZm9ybWFuY2VfZmll
         bGQiOiJEZXNlbnZvbHZpbWVudG8gRWR1Y2FjaW9uYWwiLCJ0Y2VfY29kZSI6
-        IjA1MSIsInVwZGF0ZWRfYXQiOiIyMDEzLTA4LTAxVDE0OjM5OjE2LTAzOjAw
+        IjA1MSIsInVwZGF0ZWRfYXQiOiIyMDEzLTA4LTA1VDExOjIzOjQyLTAzOjAw
         IiwidG9fcyI6IjkgLSBTZWNyZXRhcmlhIGRlIEVkdWNhw6fDo28ifV0sInRv
         X3MiOiIxIC0gMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0YXMi
-        LCJleHBlbnNlX25hdHVyZSI6eyJjcmVhdGVkX2F0IjoiMjAxMy0wOC0wMVQx
-        NDozOToxNy0wMzowMCIsImRlc2NyaXB0aW9uIjoiQXBsaWNhw6fDtWVzIERp
+        LCJleHBlbnNlX25hdHVyZSI6eyJjcmVhdGVkX2F0IjoiMjAxMy0wOC0wNVQx
+        MToyMzo0My0wMzowMCIsImRlc2NyaXB0aW9uIjoiQXBsaWNhw6fDtWVzIERp
         cmV0YXMiLCJkb2NrZXQiOiJSZWdpc3RyYSBvIHZhbG9yIGRhcyBhcGxpY2HD
         p8O1ZXMgZGlyZXRhcyIsImV4cGVuc2VfbmF0dXJlIjoiMy4xLjkwLjAwLjAw
         IiwiaWQiOjMsImtpbmQiOiJib3RoIiwicGFyZW50X2lkIjoyLCJyZWd1bGF0
-        b3J5X2FjdF9pZCI6MiwidXBkYXRlZF9hdCI6IjIwMTMtMDgtMDFUMTQ6Mzk6
-        MTctMDM6MDAiLCJ5ZWFyIjoyMDEyfSwiYnVkZ2V0X2FsbG9jYXRpb25fY2Fw
+        b3J5X2FjdF9pZCI6MiwidXBkYXRlZF9hdCI6IjIwMTMtMDgtMDVUMTE6MjM6
+        NDMtMDM6MDAiLCJ5ZWFyIjoyMDEyfSwiYnVkZ2V0X2FsbG9jYXRpb25fY2Fw
         YWJpbGl0aWVzIjpbeyJhbW91bnQiOiI1MDAuMCIsImJ1ZGdldF9hbGxvY2F0
         aW9uX2lkIjoxLCJjYXBhYmlsaXR5X2lkIjoxLCJjcmVhdGVkX2F0IjoiMjAx
-        My0wOC0wMVQxNDozOToxNy0wMzowMCIsImlkIjoxLCJ1cGRhdGVkX2F0Ijoi
-        MjAxMy0wOC0wMVQxNDozOToxNy0wMzowMCIsImJ1ZGdldF9hbGxvY2F0aW9u
+        My0wOC0wNVQxMToyMzo0Ni0wMzowMCIsImlkIjoxLCJ1cGRhdGVkX2F0Ijoi
+        MjAxMy0wOC0wNVQxMToyMzo0Ni0wMzowMCIsImJ1ZGdldF9hbGxvY2F0aW9u
         Ijp7ImFsaWVuYXRpb25fYXBwZWFsIjpmYWxzZSwiYnVkZ2V0X2FsbG9jYXRp
         b25fdHlwZV9pZCI6MSwiYnVkZ2V0X3N0cnVjdHVyZV9pZCI6MiwiY29kZSI6
-        MSwiY3JlYXRlZF9hdCI6IjIwMTMtMDgtMDFUMTQ6Mzk6MTctMDM6MDAiLCJk
+        MSwiY3JlYXRlZF9hdCI6IjIwMTMtMDgtMDVUMTE6MjM6NDYtMDM6MDAiLCJk
         YXRlIjoiMjAxMi0xMC0wMSIsImRlYnRfdHlwZSI6ImNvbnRyYWN0IiwiZGVz
         Y3JpcHRvcl9pZCI6MSwiZWR1Y2F0aW9uIjpmYWxzZSwiZXhwZW5zZV9uYXR1
         cmVfaWQiOjMsImZvcmVzaWdodCI6ZmFsc2UsImZ1bmN0aW9uX2lkIjoxLCJn
@@ -341,7 +341,7 @@ http_interactions:
         MCIsIjgiOiIwLDAwIiwiOSI6IjAsMDAiLCIxMCI6IjAsMDAiLCIxMSI6IjAs
         MDAiLCIxMiI6IjAsMDAifSwicGVyc29uYWwiOmZhbHNlLCJyZWZpbmFuY2lu
         ZyI6dHJ1ZSwic3ViZnVuY3Rpb25faWQiOjEsInVwZGF0ZWRfYXQiOiIyMDEz
-        LTA4LTAxVDE0OjM5OjE3LTAzOjAwIiwidmFsdWUiOm51bGwsInllYXIiOjIw
+        LTA4LTA1VDExOjIzOjQ2LTAzOjAwIiwidmFsdWUiOm51bGwsInllYXIiOjIw
         MTIsImV4cGVuc2VfbmF0dXJlX2V4cGVuc2VfbmF0dXJlIjoiMy4xLjkwLjAw
         LjAwIiwiZnVuY3Rpb25fY29kZSI6IjA0Iiwic3ViZnVuY3Rpb25fY29kZSI6
         IjAxIiwiZ292ZXJubWVudF9wcm9ncmFtX2NvZGUiOiIwMDAxIiwiZ292ZXJu
@@ -350,25 +350,25 @@ http_interactions:
         dXJlIjp7ImFjcm9ueW0iOiJTRU1VRURVIiwiYWRtaW5pc3RyYXRpb25fdHlw
         ZV9pZCI6MSwiYnVkZ2V0X3N0cnVjdHVyZV9jb25maWd1cmF0aW9uX2lkIjoy
         LCJidWRnZXRfc3RydWN0dXJlX2xldmVsX2lkIjoxLCJjb2RlIjoiOSIsImNy
-        ZWF0ZWRfYXQiOiIyMDEzLTA4LTAxVDE0OjM5OjE2LTAzOjAwIiwiY3VzdG9t
+        ZWF0ZWRfYXQiOiIyMDEzLTA4LTA1VDExOjIzOjQyLTAzOjAwIiwiY3VzdG9t
         X2RhdGEiOnt9LCJkZXNjcmlwdGlvbiI6IlNlY3JldGFyaWEgZGUgRWR1Y2HD
         p8OjbyIsImZ1bGxfY29kZSI6IjkiLCJpZCI6Miwia2luZCI6ImFuYWx5dGlj
         YWwiLCJwYXJlbnRfaWQiOm51bGwsInBlcmZvcm1hbmNlX2ZpZWxkIjoiRGVz
         ZW52b2x2aW1lbnRvIEVkdWNhY2lvbmFsIiwidGNlX2NvZGUiOiIwNTEiLCJ1
-        cGRhdGVkX2F0IjoiMjAxMy0wOC0wMVQxNDozOToxNi0wMzowMCIsInN0cnVj
+        cGRhdGVkX2F0IjoiMjAxMy0wOC0wNVQxMToyMzo0Mi0wMzowMCIsInN0cnVj
         dHVyZV9zZXF1ZW5jZSI6W3siYWNyb255bSI6IlNFTVVFRFUiLCJhZG1pbmlz
         dHJhdGlvbl90eXBlX2lkIjoxLCJidWRnZXRfc3RydWN0dXJlX2NvbmZpZ3Vy
         YXRpb25faWQiOjIsImJ1ZGdldF9zdHJ1Y3R1cmVfbGV2ZWxfaWQiOjEsImNv
-        ZGUiOiI5IiwiY3JlYXRlZF9hdCI6IjIwMTMtMDgtMDFUMTQ6Mzk6MTYtMDM6
+        ZGUiOiI5IiwiY3JlYXRlZF9hdCI6IjIwMTMtMDgtMDVUMTE6MjM6NDItMDM6
         MDAiLCJkZXNjcmlwdGlvbiI6IlNlY3JldGFyaWEgZGUgRWR1Y2HDp8OjbyIs
         ImZ1bGxfY29kZSI6IjkiLCJpZCI6Miwia2luZCI6ImFuYWx5dGljYWwiLCJw
         YXJlbnRfaWQiOm51bGwsInBlcmZvcm1hbmNlX2ZpZWxkIjoiRGVzZW52b2x2
         aW1lbnRvIEVkdWNhY2lvbmFsIiwidGNlX2NvZGUiOiIwNTEiLCJ1cGRhdGVk
-        X2F0IjoiMjAxMy0wOC0wMVQxNDozOToxNi0wMzowMCIsInRvX3MiOiI5IC0g
+        X2F0IjoiMjAxMy0wOC0wNVQxMToyMzo0Mi0wMzowMCIsInRvX3MiOiI5IC0g
         U2VjcmV0YXJpYSBkZSBFZHVjYcOnw6NvIn1dfX0sImNhcGFiaWxpdHkiOnsi
         aWQiOjEsImNhcGFiaWxpdHlfc291cmNlX2NvZGUiOjF9fV19
     http_version: '1.1'
-  recorded_at: Fri, 02 Aug 2013 20:29:28 GMT
+  recorded_at: Mon, 05 Aug 2013 19:14:45 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -394,28 +394,28 @@ http_interactions:
       x-ua-compatible:
       - IE=Edge
       etag:
-      - '"4f4f80f286ea987c8362cc42dc98a68a"'
+      - '"f0d3c0d8dbade2dee75d3d62b63b9579"'
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - ac54b9e01cf58736b938ef37d02e499c
+      - 005f130a7a681769d206800374b755db
       x-runtime:
-      - '0.029943'
+      - '0.037297'
       date:
-      - Fri, 02 Aug 2013 20:29:28 GMT
+      - Mon, 05 Aug 2013 19:14:45 GMT
       connection:
       - close
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        eyJjcmVhdGVkX2F0IjoiMjAxMy0wOC0wMVQxNDozOToxNy0wMzowMCIsImRl
+        eyJjcmVhdGVkX2F0IjoiMjAxMy0wOC0wNVQxMToyMzo0My0wMzowMCIsImRl
         c2NyaXB0aW9uIjoiQXBsaWNhw6fDtWVzIERpcmV0YXMiLCJkb2NrZXQiOiJS
         ZWdpc3RyYSBvIHZhbG9yIGRhcyBhcGxpY2HDp8O1ZXMgZGlyZXRhcyIsImV4
         cGVuc2VfbmF0dXJlIjoiMy4xLjkwLjAwLjAwIiwiaWQiOjMsImtpbmQiOiJi
         b3RoIiwicGFyZW50X2lkIjoyLCJyZWd1bGF0b3J5X2FjdF9pZCI6MiwidXBk
-        YXRlZF9hdCI6IjIwMTMtMDgtMDFUMTQ6Mzk6MTctMDM6MDAiLCJ5ZWFyIjoy
+        YXRlZF9hdCI6IjIwMTMtMDgtMDVUMTE6MjM6NDMtMDM6MDAiLCJ5ZWFyIjoy
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Fri, 02 Aug 2013 20:29:28 GMT
+  recorded_at: Mon, 05 Aug 2013 19:14:45 GMT
 recorded_with: VCR 2.5.0
