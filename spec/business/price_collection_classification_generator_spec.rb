@@ -74,7 +74,7 @@ describe PriceCollectionClassificationGenerator do
 
       proposal.should_receive(:classification_by_item).with(proposal_item).and_return(1)
 
-      proposal_item.should_receive(:price_collection_lot_item).and_return(item)
+      proposal_item.should_receive(:price_collection_item).and_return(item)
 
       price_collection_classification_repository.should_receive(:create!)
 
@@ -96,6 +96,8 @@ describe PriceCollectionClassificationGenerator do
 
       proposal.should_receive(:classification_by_lot).with(lot).and_return(1)
       proposal.should_receive(:item_total_value_by_lot).with(lot).and_return(100)
+      proposal.should_receive(:price_collection_lots).and_return [lot]
+      proposal.should_receive(:price_collection).and_return price_collection
 
       price_collection_classification_repository.should_receive(:create!)
 

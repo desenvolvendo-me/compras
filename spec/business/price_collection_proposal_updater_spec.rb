@@ -23,7 +23,7 @@ describe PriceCollectionProposalUpdater do
     end
 
     it 'check all items on the proposals and create the ones with no exists' do
-      proposal_item_repository.should_receive(:create!).with(:price_collection_proposal_id => 1, :price_collection_lot_item_id => 2)
+      proposal_item_repository.should_receive(:create!).with(:price_collection_proposal_id => 1, :price_collection_item_id => 2)
 
       subject.update!
     end

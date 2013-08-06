@@ -14,7 +14,7 @@ PriceCollection.blueprint(:coleta_de_precos) do
   proposal_validity_unit { PeriodUnit::YEAR }
   expiration { Date.tomorrow }
   status { PriceCollectionStatus::ACTIVE }
-  price_collection_lots { [PriceCollectionLot.make!(:lote_da_coleta)] }
+  items { [PriceCollectionItem.make!(:item_da_coleta)] }
   price_collection_proposals { [
     PriceCollectionProposal.make!(:proposta_de_coleta_de_precos, price_collection: object),
     PriceCollectionProposal.make!(:sobrinho_sa_proposta, price_collection: object),
@@ -39,7 +39,7 @@ PriceCollection.blueprint(:coleta_de_precos_anulada) do
   proposal_validity_unit { PeriodUnit::YEAR }
   expiration { Date.tomorrow }
   status { PriceCollectionStatus::ANNULLED }
-  price_collection_lots { [PriceCollectionLot.make!(:lote_da_coleta)] }
+  items { [PriceCollectionItem.make!(:item_da_coleta)] }
   price_collection_proposals { [PriceCollectionProposal.make!(:proposta_de_coleta_de_precos, :price_collection => object, :status => PriceCollectionStatus::ANNULLED)] }
 end
 
@@ -59,7 +59,7 @@ PriceCollection.blueprint(:coleta_de_precos_com_3_propostas) do
   proposal_validity_unit { PeriodUnit::YEAR }
   expiration { Date.tomorrow }
   status { PriceCollectionStatus::ACTIVE }
-  price_collection_lots { [PriceCollectionLot.make!(:lote_da_coleta)] }
+  items { [PriceCollectionItem.make!(:item_da_coleta)] }
   price_collection_proposals { [
     PriceCollectionProposal.make!(:proposta_de_coleta_de_precos, :price_collection => object),
     PriceCollectionProposal.make!(:sobrinho_sa_proposta_without_user, :price_collection => object),
@@ -83,8 +83,7 @@ PriceCollection.blueprint(:coleta_de_precos_com_2_lotes) do
   proposal_validity_unit { PeriodUnit::YEAR }
   expiration { Date.tomorrow }
   status { PriceCollectionStatus::ACTIVE }
-  price_collection_lots { [PriceCollectionLot.make!(:lote_da_coleta, :price_collection => object),
-                           PriceCollectionLot.make!(:arames, :price_collection => object)] }
+  items { [PriceCollectionItem.make!(:item_da_coleta, lot: 1), PriceCollectionItem.make!(:arame, lot: 2)] }
   price_collection_proposals { [
     PriceCollectionProposal.make!(:proposta_de_coleta_de_precos, price_collection: object),
     PriceCollectionProposal.make!(:sobrinho_sa_proposta, price_collection: object),
@@ -109,7 +108,7 @@ PriceCollection.blueprint(:coleta_de_precos_com_2_itens_no_mesmo_lote) do
   proposal_validity_unit { PeriodUnit::YEAR }
   expiration { Date.tomorrow }
   status { PriceCollectionStatus::ACTIVE }
-  price_collection_lots { [PriceCollectionLot.make!(:lote_da_coleta_com_2_itens, :price_collection => object)] }
+  items { [PriceCollectionItem.make!(:item_da_coleta), PriceCollectionItem.make!(:office)] }
   price_collection_proposals { [
     PriceCollectionProposal.make!(:proposta_de_coleta_de_precos, price_collection: object),
     PriceCollectionProposal.make!(:sobrinho_sa_proposta, :price_collection => object),

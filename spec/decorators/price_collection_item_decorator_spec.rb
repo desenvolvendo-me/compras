@@ -1,8 +1,8 @@
 # encoding: utf-8
 require 'decorator_helper'
-require 'app/decorators/price_collection_lot_item_decorator'
+require 'app/decorators/price_collection_item_decorator'
 
-describe PriceCollectionLotItemDecorator do
+describe PriceCollectionItemDecorator do
   context '#unit_price_by_proposal' do
     context 'when have unit_price_by_proposal' do
       before do

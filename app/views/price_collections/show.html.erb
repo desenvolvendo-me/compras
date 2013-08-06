@@ -7,19 +7,25 @@
 
   <table class="records">
     <thead>
-      <th><%= Material.human_attribute_name :description %></th>
-      <th><%= Material.human_attribute_name :reference_unit %></th>
-      <th><%= PriceCollectionLotItem.human_attribute_name :brand %></th>
-      <th><%= PriceCollectionLotItem.human_attribute_name :quantity %></th>
-      <th><%= PriceCollectionProposalItem.human_attribute_name :unit_price %></th>
-      <th><%= PriceCollectionClassification.human_attribute_name :total_value %></th>
-      <th><%= PriceCollectionClassification.human_attribute_name :winner %></th>
+      <% if resource.lowest_price_by_lot? %>
+        <th><%= PriceCollectionItem.human_attribute_name :lot %></th>
+        <th class="right"><%= PriceCollectionClassification.human_attribute_name :total_value %></th>
+        <th><%= PriceCollectionClassification.human_attribute_name :winner %></th>
+      <% else %>
+        <th><%= Material.human_attribute_name :description %></th>
+        <th><%= Material.human_attribute_name :description %></th>
+        <th><%= Material.human_attribute_name :reference_unit %></th>
+        <th><%= PriceCollectionItem.human_attribute_name :brand %></th>
+        <th><%= PriceCollectionItem.human_attribute_name :quantity %></th>
+        <th><%= PriceCollectionProposalItem.human_attribute_name :unit_price %></th>
+        <th><%= PriceCollectionClassification.human_attribute_name :total_value %></th>
+        <th><%= PriceCollectionClassification.human_attribute_name :winner %></th>
+      <% end %>
     </thead>
 
     <tbody>
-      <% classifications.each_with_index do |classification, index| %>
-        <%= render resource.type_of_calculation, :classification => classification, :index => index %>
-      <% end %>
+      <%= render resource.type_of_calculation, resource: resource, proposal: proposal,
+        classifications: classifications %>
     </tbody>
   </table>
 <% end %>

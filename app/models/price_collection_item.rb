@@ -1,7 +1,7 @@
-class PriceCollectionLotItem < Compras::Model
-  attr_accessible :price_collection_lot_id, :material_id, :brand, :quantity, :lot
+class PriceCollectionItem < Compras::Model
+  attr_accessible :price_collection_id, :material_id, :brand, :quantity, :lot
 
-  belongs_to :price_collection_lot
+  belongs_to :price_collection
   belongs_to :material
 
   has_many :price_collection_proposal_items, :dependent => :destroy
@@ -16,8 +16,12 @@ class PriceCollectionLotItem < Compras::Model
   validates :lot, :material, :quantity, :presence => true
   validates :quantity, :numericality => { :greater_than_or_equal_to => 1 }
 
+  def self.lots
+    pluck(:lot).uniq
+  end
+
   def unit_price_by_proposal(proposal)
-    proposal.items.select { |item| item.price_collection_lot_item == self }.first.unit_price
+    proposal.items.select { |item| item.price_collection_item == self }.first.unit_price
   end
 
   def total_value_by_proposal(proposal)

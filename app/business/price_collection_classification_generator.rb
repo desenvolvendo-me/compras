@@ -40,7 +40,7 @@ class PriceCollectionClassificationGenerator
         :total_value => proposal_item.unit_price * proposal_item.quantity,
         :classification => proposal.classification_by_item(proposal_item),
         :price_collection_proposal => proposal_item.price_collection_proposal,
-        :classifiable => proposal_item.price_collection_lot_item
+        :classifiable => proposal_item.price_collection_item
       )
     end
   end
@@ -55,12 +55,13 @@ class PriceCollectionClassificationGenerator
   end
 
   def lowest_price_by_lot(proposal)
-    price_collection_lots_with_items.each do |lot|
+    proposal.price_collection_lots.each do |lot|
       price_collection_classification_repository.create!(
         :total_value => proposal.item_total_value_by_lot(lot),
         :classification => proposal.classification_by_lot(lot),
         :price_collection_proposal => proposal,
-        :classifiable => lot
+        :classifiable => proposal.price_collection,
+        :lot => lot
       )
     end
   end
