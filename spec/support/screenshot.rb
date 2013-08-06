@@ -50,7 +50,7 @@ module RSpec
       end
 
       def screenshot
-        Capybara.save_screenshot screenshot_full_path
+        Capybara.save_screenshot screenshot_full_path, full: true
       end
     end
   end
