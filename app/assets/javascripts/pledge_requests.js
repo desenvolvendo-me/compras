@@ -72,6 +72,36 @@ $(document).ready(function () {
     $('#pledge_request_expense_nature').data('modal-url', url);
   }
 
+  function setReserveFunds() {
+    var url = Routes.reserve_funds,
+        params = {
+          by_purchase_process_id: $('#pledge_request_purchase_process_id').val(),
+          without_pledge: true
+        },
+        request = $.ajax({
+          url: url,
+          data: params,
+          dataType: 'json',
+        });
+
+    request.done(function(data) {
+      $('#pledge_request_reserve_fund_id').html('');
+
+      _(data).each(function(reserve_fund) {
+        $('#pledge_request_reserve_fund_id').append(function() {
+          return $('<option>').text(reserve_fund.label)
+                              .val(reserve_fund.id)
+                              .data('amount', reserve_fund.amount);
+        });
+      });
+
+      $('#pledge_request_reserve_fund_id').trigger('change');
+    });
+
+    request.fail(function(jqXHR, textStatus, errorThrown) {
+      $('#pledge_request_reserve_fund_id').html('');
+    });
+  }
 
   $('form#new_pledge_request').on('keyup', '.quantity', function() {
     sumTotalItems();
@@ -82,25 +112,26 @@ $(document).ready(function () {
   });
 
   $('#pledge_request_purchase_process_id').on('change', function(event, purchase_process) {
+    if (!purchase_process) {
+      purchase_process = {};
+    }
+
     setCreditorModalUrl();
     setContractModalUrl();
     setItemModalUrl();
 
-    if (purchase_process) {
-      setBudgetAllocationSource(purchase_process.budget_allocations_ids);
-    }
+    setBudgetAllocationSource(purchase_process.budget_allocations_ids);
+    setReserveFunds();
   });
 
   $('#pledge_request_creditor_id').on('change', function() {
     setItemModalUrl();
   });
 
-  $('#pledge_request_reserve_fund_id').on('change', function(event, reserve_fund) {
-    if (!reserve_fund) {
-      reserve_fund = {};
-    }
+  $('#pledge_request_reserve_fund_id').on('change', function() {
+    var option = $(this).find('option:selected');
 
-    $('#pledge_request_reserve_fund_amount').val(reserve_fund.amount);
+    $('#pledge_request_reserve_fund_amount').val(option.data('amount'));
   });
 
   $('#pledge_request_budget_allocation_id').on('change', function(event, budget_allocation) {

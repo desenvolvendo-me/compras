@@ -21,4 +21,5 @@ pt-BR:
         items_total_value: "Valor total dos itens"
         purchase_process: 'Processo de Compra'
         reserve_fund: "Reserva de dotação"
+        reserve_fund_id: "Reserva de dotação"
         reserve_fund_amount: "Saldo reserva"

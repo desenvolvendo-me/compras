@@ -4,6 +4,9 @@ require 'lib/signable'
 require 'app/models/persona/person'
 require 'app/models/person'
 require 'app/models/budget_structure'
+require 'app/models/expense_nature'
+require 'app/models/budget_allocation'
+require 'app/models/budget_structure'
 require 'app/models/licitation_process'
 require 'app/models/payment_method'
 require 'app/models/purchase_process_budget_allocation'
@@ -1003,6 +1006,17 @@ describe LicitationProcess do
       it 'returns nil' do
         expect(subject.budget_allocation_capabilities).to be_nil
       end
+    end
+  end
+
+  describe '#reserve_funds_available' do
+    it 'should return the reserve funds for the purchase_process without pledge' do
+      subject.id = 5
+      repository = double(:reserve_fund_repository)
+
+      repository.should_receive(:all).with(params: { by_purchase_process_id: 5, without_pledge: true })
+
+      subject.reserve_funds_available(repository)
     end
   end
 end

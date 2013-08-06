@@ -22,12 +22,46 @@ describe PledgeRequest do
     it { should validate_presence_of :descriptor_id }
     it { should validate_presence_of :budget_allocation_id }
     it { should validate_presence_of :accounting_account_id }
-    it { should validate_presence_of :contract }
-    it { should validate_presence_of :reserve_fund_id }
     it { should validate_presence_of :purchase_process }
     it { should validate_presence_of :creditor }
     it { should validate_presence_of :amount }
     it { should validate_presence_of :emission_date }
+
+    describe 'reserve_fund' do
+      let(:purchase_process) { double(:purchase_process) }
+
+      context 'when purchase_process is empty' do
+        it 'should not validate reserve_fund' do
+          subject.valid?
+
+          expect(subject.errors[:reserve_fund]).to be_empty
+        end
+      end
+
+      context 'when purchase_process does not have reserve_funds_available' do
+        it 'should not validate reserve_fund' do
+          subject.stub(purchase_process: purchase_process)
+
+          purchase_process.should_receive(:reserve_funds_available).and_return([])
+
+          subject.valid?
+
+          expect(subject.errors[:reserve_fund]).to be_empty
+        end
+      end
+
+      context 'when purchase_process have reserve_funds_available' do
+        it 'should validate reserve_fund presence' do
+          subject.stub(purchase_process: purchase_process)
+
+          purchase_process.should_receive(:reserve_funds_available).and_return(['reserve_fund'])
+
+          subject.valid?
+
+          expect(subject.errors[:reserve_fund]).to include('não pode ficar em branco')
+        end
+      end
+    end
   end
 
   describe 'delegations' do

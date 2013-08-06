@@ -342,6 +342,14 @@ class LicitationProcess < Compras::Model
     budget_allocations.map(&:budget_allocation_capabilities).flatten
   end
 
+  def reserve_funds_available(repository = ReserveFund)
+    repository.all(
+      params: {
+        by_purchase_process_id: id,
+        without_pledge: true
+      })
+  end
+
   protected
 
   def available_for_licitation_process_classification?
