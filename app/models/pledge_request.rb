@@ -3,7 +3,7 @@ class PledgeRequest < Compras::Model
 
   attr_accessible :descriptor_id, :budget_allocation_id, :expense_nature_id,
     :accounting_account_id, :contract_id, :reserve_fund_id, :purchase_process_id,
-    :creditor_id, :amount, :historic_complement, :emission_date,
+    :creditor_id, :amount, :emission_date,
     :items_attributes
 
   belongs_to :purchase_process, class_name: 'LicitationProcess'
@@ -26,7 +26,7 @@ class PledgeRequest < Compras::Model
 
   validates :descriptor_id, :budget_allocation_id, :accounting_account_id,
     :contract, :reserve_fund_id, :purchase_process, :creditor, :amount,
-    :historic_complement, :emission_date, presence: true
+    :emission_date, presence: true
 
   accepts_nested_attributes_for :items, allow_destroy: true
 
