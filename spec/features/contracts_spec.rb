@@ -2,36 +2,16 @@
 require 'spec_helper'
 
 feature "Contracts" do
-  let :pledge do
-    Pledge.new(id: 1, value: 9.99, description: 'Empenho 1',
-      year: 2013, to_s: 1, emission_date: "2013-01-01")
+  before(:all) do
+    VCR.insert_cassette('contracts', allow_playback_repeats: true)
   end
 
-  let :pledge_two do
-    Pledge.new(id: 2, value: 15.99, description: 'Empenho 2',
-      year: 2012, to_s: 2, emission_date: "2012-01-01")
-  end
-
-  let :budget_structure do
-    BudgetStructure.new(
-      id: 1,
-      code: '29',
-      full_code: '1',
-      tce_code: '051',
-      description: 'Secretaria de Educação',
-      acronym: 'SEMUEDU',
-      performance_field: 'Desenvolvimento Educacional')
+  after(:all) do
+    VCR.eject_cassette
   end
 
   background do
     sign_in
-
-    UnicoAPI::Resources::Contabilidade::Pledge.stub(:all).and_return([pledge, pledge_two])
-
-    UnicoAPI::Resources::Contabilidade::Pledge.stub(:find).with(1).and_return(pledge)
-    UnicoAPI::Resources::Contabilidade::Pledge.stub(:find).with(2).and_return(pledge_two)
-    BudgetStructure.stub(:find).and_return(budget_structure)
-    BudgetStructure.stub(:all).and_return([budget_structure])
   end
 
   scenario 'picking a licitation process' do
@@ -143,7 +123,7 @@ feature "Contracts" do
 
     expect(page).to have_select 'Subcontratação', :selected => 'Sim'
     expect(page).to have_field 'Modalidade', :with => 'Concorrência', disabled: true
-    expect(page).to have_field 'Unidade responsável', :with => '1 - Secretaria de Educação'
+    expect(page).to have_field 'Unidade responsável', :with => '9 - Secretaria de Educação'
     expect(page).to have_field 'Pessoa responsável', :with => 'Wenderson Malheiros'
     expect(page).to have_field 'Advogado responsável pela gestão do contrato', :with => 'Wenderson Malheiros'
     expect(page).to have_field 'O.A.B. do advogado responsável', :with => '5678'
@@ -199,9 +179,9 @@ feature "Contracts" do
     click_link 'Empenhos'
 
     expect(page).to have_content '9,99'
-    expect(page).to have_content '01/01/2013'
+    expect(page).to have_content '10/10/2012'
     expect(page).to have_content '15,99'
-    expect(page).to have_content '01/01/2012'
+    expect(page).to have_content '31/10/2012'
     expect(page).to have_content '25,98'
   end
 

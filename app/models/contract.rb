@@ -110,7 +110,7 @@ class Contract < Compras::Model
   end
 
   def all_pledges_total_value
-    all_pledges.sum(&:value)
+    all_pledges.sum(&:amount)
   end
 
   def allow_termination?
