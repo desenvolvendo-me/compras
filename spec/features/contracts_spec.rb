@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
 
-feature "Contracts" do
+feature "Contracts", :vcr do
   before(:all) do
     VCR.insert_cassette('contracts', allow_playback_repeats: true)
   end
