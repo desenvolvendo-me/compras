@@ -12,7 +12,7 @@ describe BidderCreditorCreator do
     end
 
     context 'when direct purchase' do
-      let(:item_one) { double('PurchaseProcessItem', id: 1, creditor: creditor_one) }
+      let(:item_one) { double('PurchaseProcessItem', id: 1, creditor: creditor_one, creditor_id: creditor_one.id) }
 
       before do
         purchase_process.stub(
