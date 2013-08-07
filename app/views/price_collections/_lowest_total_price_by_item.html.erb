@@ -1,10 +1,11 @@
-<tr class="<%= "classification-#{classification.classification}-#{index}" %>">
-  <td><%= classification.description %></td>
-  <td><%= classification.reference_unit %></td>
-  <td><%= classification.brand %></td>
-  <td align="right"><%= classification.quantity %></td>
-  <td align="right"><%= classification.decorator.unit_value %></td>
-  <td align="right"><%= classification.decorator.total_value %></td>
-  <td><%= classification.decorator.classification %></td>
-</tr>
-
+<% classifications.each_with_index do |classification, index| %>
+  <tr class="<%= "classification-#{classification.classification}-#{index}" %>">
+    <td><%= classification.description %></td>
+    <td><%= classification.reference_unit %></td>
+    <td><%= classification.brand %></td>
+    <td align="right"><%= classification.quantity %></td>
+    <td align="right"><%= classification.decorator.unit_value %></td>
+    <td align="right"><%= classification.decorator.total_value %></td>
+    <td><%= classification.decorator.classification %></td>
+  </tr>
+<% end %>

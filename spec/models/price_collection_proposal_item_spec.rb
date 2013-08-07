@@ -4,8 +4,9 @@ require 'app/models/price_collection_proposal_item'
 
 describe PriceCollectionProposalItem do
   it { should belong_to :price_collection_proposal }
-  it { should belong_to :price_collection_lot_item }
-  it { should have_one(:price_collection_lot).through(:price_collection_lot_item) }
+  it { should belong_to :price_collection_item }
+
+  it { should have_one(:price_collection).through(:price_collection_proposal) }
 
   it 'should return 0 as the total price default value' do
     expect(subject.total_price).to eq 0

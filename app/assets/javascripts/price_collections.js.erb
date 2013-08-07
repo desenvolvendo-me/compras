@@ -1,0 +1,34 @@
+$(document).ready(function() {
+  $('form.price_collection').on('change', '.material', function (event, material) {
+    if (material) {
+      $(this).closest('.item').find('.reference-unit').val(material.reference_unit);
+    }
+  });
+
+  $('#price_collection_material_id').on('change', function (event, material) {
+    $('#price_collection_reference_unit').val('');
+
+    if (material) {
+      $('#price_collection_reference_unit').val(material.reference_unit);
+    }
+  });
+
+  $('#price_collection_creditor_id').on('change', function (event, creditor) {
+    if(creditor){
+      $('#price_collection_email').val(creditor.email || creditor.person_email);
+
+      if ($('#price_collection_email').val() == ""){
+        $('#price_collection_email').removeAttr('disabled');
+      }
+    }
+  });
+
+  $('#price_collection_creditor_id').on('change', function (event, creditor) {
+    var emailInput = $('.nested-fields').find('input[name="price_collection[email]"]');
+    emailInput.val(creditor.email || creditor.person_email);
+
+    if(creditor.email){
+      emailInput.attr('disabled', true);
+    }
+  });
+});

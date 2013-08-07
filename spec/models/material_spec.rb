@@ -1,10 +1,12 @@
 # encoding: utf-8
 require 'model_helper'
+require 'app/models/expense_nature'
+require 'app/models/budget_structure'
 require 'app/models/material'
 require 'app/models/purchase_solicitation_item'
 require 'app/models/purchase_solicitation'
 require 'app/models/purchase_process_item'
-require 'app/models/price_collection_lot_item'
+require 'app/models/price_collection_item'
 require 'app/models/creditor_material'
 require 'app/models/materials_control'
 
@@ -23,7 +25,7 @@ describe Material do
 
   it { should have_many(:purchase_process_items).dependent(:restrict) }
   it { should have_many(:purchase_solicitation_items).dependent(:restrict) }
-  it { should have_many(:price_collection_lot_items).dependent(:restrict) }
+  it { should have_many(:price_collection_items).dependent(:restrict) }
   it { should have_many(:creditor_materials).dependent(:restrict) }
   it { should have_many(:purchase_solicitations).through(:purchase_solicitation_items).dependent(:restrict) }
   it { should have_many(:purchase_solicitation_budget_allocations).through(:purchase_solicitations).dependent(:restrict) }

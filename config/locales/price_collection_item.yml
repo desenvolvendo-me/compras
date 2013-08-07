@@ -1,12 +1,12 @@
 pt-BR:
   activerecord:
     models:
-      price_collection_lot_item:
+      price_collection_item:
         one: "Item"
         other: "Itens"
 
     attributes:
-      price_collection_lot_item:
+      price_collection_item:
         brand: "Marca"
         lot: "Lote"
         lot_number: "Número do item"

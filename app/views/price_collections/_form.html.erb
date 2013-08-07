@@ -9,7 +9,7 @@
     </li>
 
     <li>
-      <a href="#lots">Lotes de itens</a>
+      <a href="#items">Itens</a>
     </li>
 
     <li>
@@ -25,19 +25,11 @@
     <%= render 'purchase_solicitations', f: f %>
   </div>
 
-  <div id="lots">
-    <%= render 'lots', f: f %>
+  <div id="items">
+    <%= render 'items', f: f %>
   </div>
 
   <div id="creditors">
     <%= render 'creditors', f: f %>
   </div>
 </div>
-
-<script>
-  $('form.price_collection').on('change', '.material', function (event, material) {
-    if (material) {
-      $(this).closest('.item').find('.reference-unit').val(material.reference_unit);
-    }
-  });
-</script>

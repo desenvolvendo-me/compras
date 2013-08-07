@@ -1,11 +1,11 @@
 # encoding: utf-8
 require 'model_helper'
-require 'app/models/price_collection_lot_item'
+require 'app/models/price_collection_item'
 require 'app/models/price_collection_proposal_item'
 require 'app/models/price_collection_classification'
 
-describe PriceCollectionLotItem do
-  it { should belong_to :price_collection_lot }
+describe PriceCollectionItem do
+  it { should belong_to :price_collection }
   it { should belong_to :material }
   it { should have_many(:price_collection_proposal_items).dependent(:destroy) }
   it { should have_many(:price_collection_classifications).dependent(:destroy) }
@@ -26,7 +26,7 @@ describe PriceCollectionLotItem do
     end
 
     let :price_collection_proposal_item do
-      double('PriceCollectionProposalItem', :id => 1, :price_collection_lot_item => subject, :unit_price => 10)
+      double('PriceCollectionProposalItem', :id => 1, :price_collection_item => subject, :unit_price => 10)
     end
 
     let :price_collection do

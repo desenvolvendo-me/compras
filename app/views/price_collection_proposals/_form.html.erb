@@ -21,13 +21,13 @@
   <ul>
     <% f.object.price_collection_lots.each_with_index do |lot, index| %>
       <li>
-        <%= link_to "Lote #{index.succ}", "#lot#{lot.id}" %>
+        <%= link_to "Lote #{index.succ}", "#lot#{lot}" %>
       </li>
     <% end %>
   </ul>
 
   <% f.object.price_collection_lots.each do |lot| %>
-    <div id="lot<%= lot.id %>" class="licitation-process-lot container">
+    <div id="lot<%= lot %>" class="licitation-process-lot container">
 
       <div class="yui3-g">
         <div class="yui3-u-1-2">

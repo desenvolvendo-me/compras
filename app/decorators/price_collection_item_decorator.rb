@@ -1,5 +1,5 @@
 # encoding: utf-8
-class PriceCollectionLotItemDecorator
+class PriceCollectionItemDecorator
   include Decore
   include Decore::Proxy
   include ActionView::Helpers::NumberHelper

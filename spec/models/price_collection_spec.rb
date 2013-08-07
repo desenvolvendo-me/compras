@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/price_collection'
-require 'app/models/price_collection_lot'
+require 'app/models/price_collection_item'
 require 'app/models/price_collection_proposal'
 require 'lib/annullable'
 require 'app/models/price_collection_annul'
@@ -12,11 +12,12 @@ describe PriceCollection do
     it { should belong_to :delivery_location }
     it { should belong_to :employee }
     it { should belong_to :payment_method }
-    it { should have_one(:annul) }
-    it { should have_many :price_collection_lots }
+
+    it { should have_one :annul }
+
+    it { should have_many :items }
     it { should have_many(:price_collection_proposals).dependent(:destroy).order(:id) }
     it { should have_many(:creditors).through(:price_collection_proposals) }
-    it { should have_many(:items).through(:price_collection_lots) }
     it { should have_many(:price_collection_classifications).dependent(:destroy) }
     it { should have_and_belong_to_many(:purchase_solicitations) }
   end
@@ -95,19 +96,6 @@ describe PriceCollection do
     end
   end
 
-  context 'lots with items' do
-    let :lot_with_items do
-      [double("PriceCollectionLot", :items => [double("PriceCollectionLotItem")]),
-       double("PriceCollectionLot", :items => [])]
-    end
-
-    it 'should filter lots with items' do
-      subject.should_receive(:price_collection_lots).and_return(lot_with_items)
-
-      expect(subject.price_collection_lots_with_items.size).to eq 1
-    end
-  end
-
   describe "#validate_quantity_of_creditors" do
     it "when returns 2 creditors" do
       subject.stub(:proposals_count).and_return(2)
@@ -122,5 +110,23 @@ describe PriceCollection do
 
       expect(subject.errors[:base]).to_not include "deve ter no mínimo três fornecedores"
     end
+  end
+
+  it 'should have at least one item' do
+    expect(subject.items).to be_empty
+
+    subject.valid?
+
+    expect(subject.errors[:items]).to include 'é necessário cadastrar pelo menos um item'
+  end
+
+  it 'should have at least one item without considering the marked for destruction ones' do
+    item_marked_for_destruction = double('item', :material_id => 1, :marked_for_destruction? => true)
+
+    subject.stub(:items).and_return([item_marked_for_destruction])
+
+    subject.valid?
+
+    expect(subject.errors[:items]).to include 'é necessário cadastrar pelo menos um item'
   end
 end

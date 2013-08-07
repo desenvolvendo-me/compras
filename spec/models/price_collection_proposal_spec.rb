@@ -63,16 +63,23 @@ describe PriceCollectionProposal do
   end
 
   context 'items by lot' do
+    let(:price_collection_item_1) { double(:price_collection_item, lot: 'lot 1') }
+    let(:price_collection_item_2) { double(:price_collection_item, lot: 'lot 2') }
+    let(:price_collection_item_3) { double(:price_collection_item, lot: 'lot 1') }
+
     let(:item_1) do
-      double('item 1', :price_collection_lot => 'lot 1', :total_price => 10)
+      double('item 1', :lot => 'lot 1', :total_price => 10,
+        price_collection_item: price_collection_item_1)
     end
 
     let(:item_2) do
-      double('item 2', :price_collection_lot => 'lot 2', :total_price => 20)
+      double('item 2', :lot => 'lot 2', :total_price => 20,
+        price_collection_item: price_collection_item_2)
     end
 
     let(:item_3) do
-      double('item 3', :price_collection_lot => 'lot 1', :total_price => 40)
+      double('item 3', :lot => 'lot 1', :total_price => 40,
+        price_collection_item: price_collection_item_3)
     end
 
     it 'should return the items by lot' do

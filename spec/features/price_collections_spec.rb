@@ -55,21 +55,15 @@ feature "PriceCollections" do
       fill_in 'Observações', :with => 'observacoes da coleta'
     end
 
-    within_tab 'Lotes de itens' do
-      click_button 'Adicionar Lote'
-
-      fill_in 'Observações', :with => 'lote 1'
-
-      click_button 'Adicionar Item'
-
+    within_tab 'Itens' do
+      fill_with_autocomplete 'Material', :with => 'Antivirus'
+      fill_in 'Marca/Referência', :with => 'Norton'
+      fill_in 'Quantidade', :with => '10'
       fill_in 'Lote', :with => '3110122013'
-      fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
 
-      # testing fill reference unit with javascript
       expect(page).to have_field 'Unidade', :with => 'UN', disabled: true
 
-      fill_in 'Marca', :with => 'Norton'
-      fill_in 'Quantidade', :with => '10'
+      click_button 'Adicionar'
     end
 
     within_tab 'Fornecedores' do
@@ -138,21 +132,15 @@ feature "PriceCollections" do
       end
     end
 
-    within_tab 'Lotes de itens' do
-      click_button 'Adicionar Lote'
-
-      fill_in 'Observações', :with => 'lote 1'
-
-      click_button 'Adicionar Item'
-
-      fill_in 'Lote', :with => '31011020'
-      fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
-
-      # testing fill reference unit with javascript
-      expect(page).to have_field 'Unidade', :with => 'UN', disabled: true
-
+    within_tab 'Itens' do
+      fill_with_autocomplete 'Material', :with => 'Antivirus'
       fill_in 'Marca', :with => 'Norton'
       fill_in 'Quantidade', :with => '10'
+      fill_in 'Lote', :with => '31011020'
+
+      expect(page).to have_field 'Unidade', :with => 'UN', disabled: true
+
+      click_button 'Adicionar'
     end
 
     within_tab 'Fornecedores' do
@@ -230,13 +218,14 @@ feature "PriceCollections" do
       end
     end
 
-    within_tab 'Lotes de itens' do
-      expect(page).to have_field 'Observações', :with => 'lote 1'
-      expect(page).to have_field 'Lote', :with => '31011020'
-      expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
-      expect(page).to have_field 'Unidade', :with => 'UN', disabled: true
-      expect(page).to have_field 'Marca', :with => 'Norton'
-      expect(page).to have_field 'Quantidade', :with => '10'
+    within_tab 'Itens' do
+      within_records do
+        expect(page).to have_content '01.01.00001 - Antivirus'
+        expect(page).to have_content 'UN'
+        expect(page).to have_content 'Norton'
+        expect(page).to have_content '31011020'
+        expect(page).to have_content '10'
+      end
     end
 
     within_tab 'Fornecedores' do
@@ -298,19 +287,13 @@ feature "PriceCollections" do
       fill_in 'Observações', :with => 'novo observacoes da coleta'
     end
 
-    within_tab 'Lotes de itens' do
-      click_button 'Adicionar Lote'
+    within_tab 'Itens' do
+      fill_with_autocomplete 'Material', :with => 'Arame farpado'
+      fill_in 'Lote', :with => '311012501'
+      fill_in 'Marca', :with => 'Aço inox'
+      fill_in 'Quantidade', :with => '100'
 
-      within '.price-collection-lot:nth-last-child(1)' do
-        fill_in 'Observações', :with => 'lote 2'
-
-        click_button 'Adicionar Item'
-
-        fill_in 'Lote', :with => '311012501'
-        fill_modal 'Material', :with => 'Arame farpado', :field => 'Descrição'
-        fill_in 'Marca', :with => 'Aço inox'
-        fill_in 'Quantidade', :with => '100'
-      end
+      click_button 'Adicionar'
     end
 
     within_tab 'Fornecedores' do
@@ -358,13 +341,14 @@ feature "PriceCollections" do
       expect(page).to have_field 'Observações', :with => 'novo observacoes da coleta'
     end
 
-    within_tab 'Lotes de itens' do
-      expect(page).to have_field 'Observações', :with => 'lote 2'
-      expect(page).to have_field 'Lote', :with => '311012501'
-      expect(page).to have_field 'Material', :with => '02.02.00001 - Arame farpado'
-      expect(page).to have_field 'Unidade', :with => 'UN', disabled: true
-      expect(page).to have_field 'Marca', :with => 'Aço inox'
-      expect(page).to have_field 'Quantidade', :with => '100'
+    within_tab 'Itens' do
+      within_records do
+        expect(page).to have_content '311012501'
+        expect(page).to have_content '02.02.00001 - Arame farpado'
+        expect(page).to have_content 'UN'
+        expect(page).to have_content 'Aço inox'
+        expect(page).to have_content '100'
+      end
     end
 
     within_tab 'Fornecedores' do
@@ -413,12 +397,6 @@ feature "PriceCollections" do
       fill_in 'Observações', :with => 'observacoes da coleta'
     end
 
-    within_tab 'Lotes de itens' do
-      click_button 'Adicionar Lote'
-
-      fill_in 'Observações', :with => 'lote 2'
-    end
-
     within_tab 'Fornecedores' do
       fill_with_autocomplete 'Fornecedor', :with => 'Wen'
       expect(page).to have_field 'Email', :with => 'wenderson.malheiros@gmail.com'
@@ -438,7 +416,7 @@ feature "PriceCollections" do
 
     click_button 'Salvar'
 
-    within_tab 'Lotes de itens' do
+    within_tab 'Itens' do
       expect(page).to have_content 'é necessário cadastrar pelo menos um item'
     end
   end
@@ -454,13 +432,15 @@ feature "PriceCollections" do
       page.find('a').click
     end
 
-    within_tab 'Lotes de itens' do
-      click_button 'Remover Item'
+    within_tab 'Itens' do
+      within_records do
+        click_link 'Remover'
+      end
     end
 
     click_button 'Salvar'
 
-    within_tab 'Lotes de itens' do
+    within_tab 'Itens' do
       expect(page).to have_content 'é necessário cadastrar pelo menos um item'
     end
   end
@@ -477,19 +457,21 @@ feature "PriceCollections" do
       page.find('a').click
     end
 
-    within_tab 'Lotes de itens' do
-      expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
-      expect(page).to have_field 'Marca', :with => 'Norton'
-      expect(page).to have_field 'Quantidade', :with => '10'
+    within_tab 'Itens' do
+      within_records do
+        expect(page).to have_content '01.01.00001 - Antivirus'
+        expect(page).to have_content 'Norton'
+        expect(page).to have_content '10'
 
-      click_button 'Remover Item'
+        click_link 'Remover'
+      end
 
-      click_button 'Adicionar Item'
-
+      fill_with_autocomplete 'Material', :with => 'Arame farpado'
       fill_in 'Lote', :with => '10256987'
-      fill_modal 'Material', :with => 'Arame farpado', :field => 'Descrição'
       fill_in 'Marca', :with => 'Aço inox'
       fill_in 'Quantidade', :with => '100'
+
+      click_button 'Adicionar'
     end
 
     click_button 'Salvar'
@@ -497,78 +479,16 @@ feature "PriceCollections" do
     expect(page).to have_notice 'Coleta de Preços 1/2012 editada com sucesso.'
     expect(page).to have_title 'Editar Coleta de Preços'
 
-    within_tab 'Lotes de itens' do
-      expect(page).to have_field 'Lote', :with => '10256987'
-      expect(page).to have_field 'Material', :with => '02.02.00001 - Arame farpado'
-      expect(page).to have_field 'Marca', :with => 'Aço inox'
-      expect(page).to have_field 'Quantidade', :with => '100'
+    within_tab 'Itens' do
+      within_records do
+        expect(page).to have_content '10256987'
+        expect(page).to have_content '02.02.00001 - Arame farpado'
+        expect(page).to have_content 'Aço inox'
+        expect(page).to have_content '100'
 
-      expect(page).to_not have_field 'Material', :with => '01.01.00001 - Antivirus'
-      expect(page).to_not have_field 'Marca', :with => 'Norton'
-      expect(page).to_not have_field 'Quantidade', :with => '10'
-    end
-  end
-
-  scenario 'removing a lot' do
-    PriceCollection.make!(:coleta_de_precos)
-
-    navigate 'Processos de Compra > Coletas de Preços'
-
-    click_link "Limpar Filtro"
-
-    within_records do
-      page.find('a').click
-    end
-
-    within_tab 'Lotes de itens' do
-      expect(page).to have_field 'Observações', :with => 'lote da coleta'
-
-      click_button 'Remover Lote'
-    end
-
-    click_button 'Salvar'
-
-    expect(page).to have_notice 'Coleta de Preços 1/2012 editada com sucesso.'
-
-    expect(page).to have_title 'Editar Coleta de Preços'
-
-    within_tab 'Lotes de itens' do
-      expect(page).to_not have_field 'Observações', :with => 'lote da coleta'
-    end
-  end
-
-  scenario 'showing numberd labels on each lot' do
-    price_collection = PriceCollection.make!(:coleta_de_precos)
-
-    navigate 'Processos de Compra > Coletas de Preços'
-
-    click_link "Limpar Filtro"
-
-    within_records do
-      page.find('a').click
-    end
-
-    within_tab 'Lotes de itens' do
-      expect(page).to have_content 'Lote 1'
-      expect(page).to_not have_content 'Lote 2'
-
-      click_button 'Adicionar Lote'
-
-      expect(page).to have_content 'Lote 1'
-      expect(page).to have_content 'Lote 2'
-
-      click_button 'Adicionar Lote'
-
-      expect(page).to have_content 'Lote 1'
-      expect(page).to have_content 'Lote 2'
-      expect(page).to have_content 'Lote 3'
-
-      # removing the first lot to se that it re-order all the others
-      click_button 'Remover Lote'
-
-      expect(page).to have_content 'Lote 1'
-      expect(page).to have_content 'Lote 2'
-      expect(page).to_not have_content 'Lote 3'
+        expect(page).to_not have_content '01.01.00001 - Antivirus'
+        expect(page).to_not have_content 'Norton'
+      end
     end
   end
 
@@ -625,20 +545,20 @@ feature "PriceCollections" do
 
     PriceCollectionProposalItem.make!(:wenderson_antivirus,
                                       :price_collection_proposal => proposal_1,
-                                      :price_collection_lot_item => price_collection.items.first,
+                                      :price_collection_item => price_collection.items.first,
                                       :unit_price => 0)
     PriceCollectionProposalItem.make!(:wenderson_arame,
                                       :price_collection_proposal => proposal_1,
-                                      :price_collection_lot_item => price_collection.items.second,
+                                      :price_collection_item => price_collection.items.second,
                                       :unit_price => 3)
 
     PriceCollectionProposalItem.make!(:sobrinho_antivirus,
                                       :price_collection_proposal => proposal_2,
-                                      :price_collection_lot_item => price_collection.items.first,
+                                      :price_collection_item => price_collection.items.first,
                                       :unit_price => 50)
     PriceCollectionProposalItem.make!(:sobrinho_arame,
                                       :price_collection_proposal => proposal_2,
-                                      :price_collection_lot_item => price_collection.items.second,
+                                      :price_collection_item => price_collection.items.second,
                                       :unit_price => 2)
 
     navigate 'Processos de Compra > Coletas de Preços'
@@ -671,9 +591,10 @@ feature "PriceCollections" do
   end
 
   scenario 'calc by lowest_price_by_lot' do
-    price_collection = PriceCollection.make!(:coleta_de_precos_com_2_lotes, :type_of_calculation => PriceCollectionTypeOfCalculation::LOWEST_PRICE_BY_LOT)
+    price_collection = PriceCollection.make!(:coleta_de_precos_com_2_lotes,
+      type_of_calculation: PriceCollectionTypeOfCalculation::LOWEST_PRICE_BY_LOT)
 
-    make_proposals_dependencies!(price_collection)
+    update_proposal_items!
 
     navigate 'Processos de Compra > Coletas de Preços'
 
@@ -691,99 +612,62 @@ feature "PriceCollections" do
 
     expect(page).to have_content 'Wenderson Malheiros'
 
-    within '.classification--1-0-0' do
-      expect(page).to have_content 'Antivirus'
-      expect(page).to have_content '0,00'
-      expect(page).to have_content '0,00'
-      expect(page).to have_content 'Não'
-    end
+    within :xpath, '//*[@id="content"]/table[1]' do
+      expect(page).to have_content 'Lote'
+      expect(page).to have_content 'Valor Total'
+      expect(page).to have_content 'Vencedor'
 
-    within '.classification--1-1-0' do
-      expect(page).to have_content 'Arame comum'
-      expect(page).to have_content '0,00'
-      expect(page).to have_content '0,00'
-      expect(page).to have_content 'Não'
+      within :xpath, '//*[@id="content"]/table[1]/tbody/tr[1]' do
+        expect(page).to have_content '1'
+        expect(page).to have_content '0,00'
+        expect(page).to have_content 'Não'
+      end
+
+      within :xpath, '//*[@id="content"]/table[1]/tbody/tr[2]' do
+        expect(page).to have_content '2'
+        expect(page).to have_content '300,00'
+        expect(page).to have_content 'Sim'
+      end
     end
 
     expect(page).to have_content 'Gabriel Sobrinho'
 
-    within '.classification--1-0-0' do
-      expect(page).to have_content 'Antivirus'
-      expect(page).to have_content '0,00'
-      expect(page).to have_content '0,00'
-      expect(page).to have_content 'Não'
-    end
+    within :xpath, '//*[@id="content"]/table[2]' do
+      expect(page).to have_content 'Lote'
+      expect(page).to have_content 'Valor Total'
+      expect(page).to have_content 'Vencedor'
 
-    within '.classification--1-1-0' do
-      expect(page).to have_content 'Arame comum'
-      expect(page).to have_content '0,00'
-      expect(page).to have_content '0,00'
-      expect(page).to have_content 'Não'
+      within :xpath, '//*[@id="content"]/table[2]/tbody/tr[1]' do
+        expect(page).to have_content '1'
+        expect(page).to have_content '30,00'
+        expect(page).to have_content 'Não'
+      end
+
+      within :xpath, '//*[@id="content"]/table[2]/tbody/tr[2]' do
+        expect(page).to have_content '2'
+        expect(page).to have_content '900,00'
+        expect(page).to have_content 'Não'
+      end
     end
 
     expect(page).to have_content 'IBM'
 
-    within '.classification--1-0-0' do
-      expect(page).to have_content 'Antivirus'
-      expect(page).to have_content '0,00'
-      expect(page).to have_content '0,00'
-      expect(page).to have_content 'Não'
-    end
+    within :xpath, '//*[@id="content"]/table[3]' do
+      expect(page).to have_content 'Lote'
+      expect(page).to have_content 'Valor Total'
+      expect(page).to have_content 'Vencedor'
 
-    within '.classification--1-1-0' do
-      expect(page).to have_content 'Arame comum'
-      expect(page).to have_content '0,00'
-      expect(page).to have_content '0,00'
-      expect(page).to have_content 'Não'
-    end
-  end
+      within :xpath, '//*[@id="content"]/table[3]/tbody/tr[1]' do
+        expect(page).to have_content '1'
+        expect(page).to have_content '60,00'
+        expect(page).to have_content 'Não'
+      end
 
-  scenario 'calc by lowest_price_by_lot with item zero' do
-    price_collection = PriceCollection.make!(:coleta_de_precos_com_2_itens_no_mesmo_lote, :type_of_calculation => PriceCollectionTypeOfCalculation::LOWEST_PRICE_BY_LOT)
-    proposal_1 = PriceCollectionProposal.make!(:proposta_de_coleta_de_precos, :price_collection => price_collection)
-    proposal_2 = PriceCollectionProposal.make!(:sobrinho_sa_proposta, price_collection: price_collection,
-                   creditor: Creditor.make(:sobrinho_sa, accounts: [ CreditorBankAccount.make(:conta_2, number: '000103') ] ))
-
-    PriceCollectionProposalItem.make!(:wenderson_antivirus,
-                                      :price_collection_proposal => proposal_1,
-                                      :price_collection_lot_item => price_collection.items.first,
-                                      :unit_price => 0)
-    PriceCollectionProposalItem.make!(:wenderson_office,
-                                      :price_collection_proposal => proposal_1,
-                                      :price_collection_lot_item => price_collection.items.second)
-
-    PriceCollectionProposalItem.make!(:sobrinho_antivirus,
-                                      :price_collection_proposal => proposal_2,
-                                      :price_collection_lot_item => price_collection.items.first,
-                                      :unit_price => 30)
-    PriceCollectionProposalItem.make!(:sobrinho_office,
-                                      :price_collection_proposal => proposal_2,
-                                      :price_collection_lot_item => price_collection.items.second)
-
-    navigate 'Processos de Compra > Coletas de Preços'
-
-    click_link "Limpar Filtro"
-
-    within_records do
-      page.find('a').click
-    end
-
-    click_link 'Apurar'
-
-    expect(page).to have_content 'QUADRO COMPARATIVO DE PREÇOS DA COLETA DE PREÇO 1/2012'
-
-    expect(page).to have_content 'Apuração: Menor preço por lote'
-
-    within '.classification-1-0-0' do
-      expect(page).to have_content 'Antivirus'
-      expect(page).to have_content '30,00'
-      expect(page).to have_content 'Sim'
-    end
-
-    within 'tr.classification-1-0-1' do
-      expect(page).to have_content 'Office'
-      expect(page).to have_content '5,00'
-      expect(page).to have_content 'Sim'
+      within :xpath, '//*[@id="content"]/table[3]/tbody/tr[2]' do
+        expect(page).to have_content '2'
+        expect(page).to have_content '1.500,00'
+        expect(page).to have_content 'Não'
+      end
     end
   end
 
@@ -795,23 +679,23 @@ feature "PriceCollections" do
 
     PriceCollectionProposalItem.make!(:wenderson_antivirus,
                                       :price_collection_proposal => proposal_1,
-                                      :price_collection_lot_item => price_collection.items.first,
+                                      :price_collection_item => price_collection.items.first,
                                       :unit_price => 0)
     PriceCollectionProposalItem.make!(:wenderson_arame,
                                       :price_collection_proposal => proposal_1,
-                                      :price_collection_lot_item => price_collection.items.second,
+                                      :price_collection_item => price_collection.items.second,
                                       :unit_price => 3)
 
     PriceCollectionProposalItem.make!(:sobrinho_antivirus,
                                       :price_collection_proposal => proposal_2,
-                                      :price_collection_lot_item => price_collection.items.first,
+                                      :price_collection_item => price_collection.items.first,
                                       :unit_price => 50)
     PriceCollectionProposalItem.make!(:sobrinho_arame,
                                       :price_collection_proposal => proposal_2,
-                                      :price_collection_lot_item => price_collection.items.second,
+                                      :price_collection_item => price_collection.items.second,
                                       :unit_price => 2)
 
-    #make_proposals_dependencies!(price_collection)
+    make_proposals_dependencies!(price_collection)
 
     navigate 'Processos de Compra > Coletas de Preços'
 
@@ -852,20 +736,20 @@ feature "PriceCollections" do
 
     PriceCollectionProposalItem.make!(:wenderson_antivirus,
                                       :price_collection_proposal => proposal_1,
-                                      :price_collection_lot_item => price_collection.items.first,
+                                      :price_collection_item => price_collection.items.first,
                                       :unit_price => 0)
     PriceCollectionProposalItem.make!(:wenderson_arame,
                                       :price_collection_proposal => proposal_1,
-                                      :price_collection_lot_item => price_collection.items.second,
+                                      :price_collection_item => price_collection.items.second,
                                       :unit_price => 10)
 
     PriceCollectionProposalItem.make!(:sobrinho_antivirus,
                                       :price_collection_proposal => proposal_2,
-                                      :price_collection_lot_item => price_collection.items.first,
+                                      :price_collection_item => price_collection.items.first,
                                       :unit_price => 10)
     PriceCollectionProposalItem.make!(:sobrinho_arame,
                                       :price_collection_proposal => proposal_2,
-                                      :price_collection_lot_item => price_collection.items.second,
+                                      :price_collection_item => price_collection.items.second,
                                       :unit_price => 10)
 
     navigate 'Processos de Compra > Coletas de Preços'
@@ -896,50 +780,6 @@ feature "PriceCollections" do
       expect(page).to have_content 'Arame comum'
       expect(page).to have_content '10,00'
       expect(page).to have_content 'Sim'
-    end
-  end
-
-  scenario 'showing numbered labels on each item' do
-    PriceCollection.make!(:coleta_de_precos)
-
-    navigate 'Processos de Compra > Coletas de Preços'
-
-    click_link "Limpar Filtro"
-
-    within_records do
-      page.find('a').click
-    end
-
-    within_tab 'Lotes de itens' do
-      expect(page).to have_content 'Item 1'
-      expect(page).to_not have_content 'Item 2'
-
-      click_button 'Adicionar Item'
-
-      expect(page).to have_content 'Item 1'
-      expect(page).to have_content 'Item 2'
-
-      click_button 'Adicionar Item'
-
-      expect(page).to have_content 'Item 1'
-      expect(page).to have_content 'Item 2'
-      expect(page).to have_content 'Item 3'
-
-      # removing the first item to se that it re-order all the others
-      click_button 'Remover Item'
-
-      expect(page).to have_content 'Item 1'
-      expect(page).to have_content 'Item 2'
-      expect(page).to_not have_content 'Item 3'
-
-      # adding another lot to see that its items are numbered independently of the first lot
-      click_button 'Adicionar Lote'
-
-      within '.price-collection-lot:nth-last-child(1)' do
-        click_button 'Adicionar Item'
-
-        expect(page).to have_content 'Item 1'
-      end
     end
   end
 
@@ -1038,21 +878,15 @@ feature "PriceCollections" do
       fill_in 'Observações', :with => 'observacoes da coleta'
     end
 
-    within_tab 'Lotes de itens' do
-      click_button 'Adicionar Lote'
-
-      fill_in 'Observações', :with => 'lote 1'
-
-      click_button 'Adicionar Item'
-
+    within_tab 'Itens' do
+      fill_with_autocomplete 'Material', :with => 'Antivirus'
       fill_in 'Lote', :with => '1'
-      fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
-
-      # testing fill reference unit with javascript
-      expect(page).to have_field 'Unidade', :with => 'UN', disabled: true
-
       fill_in 'Marca', :with => 'Norton'
       fill_in 'Quantidade', :with => '10'
+
+      expect(page).to have_field 'Unidade', :with => 'UN', disabled: true
+
+      click_button 'Adicionar'
     end
 
     within_tab 'Fornecedores' do
@@ -1106,16 +940,23 @@ feature "PriceCollections" do
     end
   end
 
+  def update_proposal_items!
+    PriceCollectionProposalItem.all.each_with_index do |proposal_item, index|
+      proposal_item.unit_price = 1.5 * index
+      proposal_item.save!
+    end
+  end
+
   def make_proposals_dependencies!(price_collection)
     PriceCollectionProposalItem.make!(:wenderson_antivirus,
                                       :price_collection_proposal => price_collection.price_collection_proposals.first,
-                                      :price_collection_lot_item => price_collection.items.first)
+                                      :price_collection_item => price_collection.items.first)
     PriceCollectionProposalItem.make!(:wenderson_arame,
                                       :price_collection_proposal => price_collection.price_collection_proposals.first,
-                                      :price_collection_lot_item => price_collection.items.second)
-
+                                      :price_collection_item => price_collection.items.second)
     PriceCollectionProposalItem.make!(:sobrinho_antivirus,
                                       :price_collection_proposal => price_collection.price_collection_proposals.second,
-                                      :price_collection_lot_item => price_collection.items.first)
+                                      :price_collection_item => price_collection.items.first)
+
   end
 end

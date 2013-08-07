@@ -26,6 +26,11 @@ pt-BR:
         creditor: "Fornecedor"
         creditor_user_email: "Email"
         purchase_solicitations: "Solicitações de compra"
+        material: "Material"
+        brand: "Marca/Referência"
+        quantity: "Quantidade"
+        lot: "Lote"
+        reference_unit: "Unidade"
 
   price_collection:
     messages:

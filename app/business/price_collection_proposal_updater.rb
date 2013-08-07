@@ -28,7 +28,7 @@ class PriceCollectionProposalUpdater
   def create_proposal_item(proposal, item)
     return if have_proposal_item?(proposal, item)
     @proposal_item_repository.create!(:price_collection_proposal_id => proposal.id,
-                                  :price_collection_lot_item_id => item.id)
+                                  :price_collection_item_id => item.id)
   end
 
   def have_proposal_item?(proposal, item)

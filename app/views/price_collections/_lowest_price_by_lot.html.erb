@@ -1,11 +1,9 @@
-<% classification.items.each_with_index do |item, i| %>
-  <tr class="<%= "classification-#{classification.classification}-#{index}-#{i}" %>">
-    <td><%= item.description %></td>
-    <td><%= item.reference_unit %></td>
-    <td><%= item.brand %></td>
-    <td align="right"><%= item.quantity %></td>
-    <td align="right"><%= item.decorator.unit_price_by_proposal(classification.price_collection_proposal) %></td>
-    <td align="right"><%= item.decorator.total_value_by_proposal(classification.price_collection_proposal) %></td>
-    <td><%= classification.decorator.classification %></td>
-  </tr>
+<% resource.lots.each_with_index do |lot, index| %>
+  <% PriceCollectionClassification.by_lot(lot).by_price_collection_proposal(proposal.id).each_with_index do |classification, i| %>
+   <tr class="<%= "classification-#{classification.classification}-#{index}-#{i}" %>">
+     <td><%= lot %></td>
+     <td align="right"><%= classification.decorator.total_value %></td>
+     <td><%= classification.decorator.classification %></td>
+   </tr>
+  <% end %>
 <% end %>
