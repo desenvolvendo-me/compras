@@ -25,8 +25,8 @@ class PledgeRequest < Compras::Model
   delegate :budget_allocations_ids, to: :purchase_process, allow_nil: true, prefix: true
 
   validates :descriptor_id, :budget_allocation_id, :accounting_account_id,
-    :contract, :reserve_fund_id, :purchase_process, :creditor, :amount,
-    :emission_date, presence: true
+    :purchase_process, :creditor, :amount, :emission_date, presence: true
+  validate :require_reserve_fund_id
 
   accepts_nested_attributes_for :items, allow_destroy: true
 
@@ -45,5 +45,13 @@ class PledgeRequest < Compras::Model
 
   def budget_allocation_params
     { :methods => [:real_amount, :reserved_value, :balance] }
+  end
+
+  def require_reserve_fund_id
+    return unless purchase_process
+
+    if purchase_process && purchase_process.reserve_funds_available.any?
+      errors.add :reserve_fund, :blank
+    end
   end
 end
