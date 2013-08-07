@@ -30,13 +30,17 @@ class BidderCreditorCreator
   def create_bidders_for_direct_purchase
     return unless purchase_process.direct_purchase?
 
-    items.each  do |item|
-      bidders.create!(licitation_process_id: purchase_process.id, creditor_id: item.creditor.id)
+    creditor_ids.each  do |creditor_id|
+      bidders.create!(licitation_process_id: purchase_process.id, creditor_id: creditor_id)
     end
   end
 
   def items
     purchase_process.items
+  end
+
+  def creditor_ids
+    items.map(&:creditor_id).uniq
   end
 
   def bidders
