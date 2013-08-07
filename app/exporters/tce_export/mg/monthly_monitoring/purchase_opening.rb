@@ -309,6 +309,15 @@ module TceExport::MG
       attribute :forma_pagamento, position: 24, size: 80, min_size: 1, required: true, caster: Casters::TextCaster
       attribute :criterio_aceitabilidade, position: 25, size: 80, min_size: 1, required: false, caster: Casters::TextCaster
       attribute :desconto_tabela, position: 26, size: 1, min_size: 1, required: true, caster: Casters::IntegerCaster
+
+      def error_description(attribute, error_type)
+        [
+          "tipo_registro: #{data[:tipo_registro]}",
+          "nro_processo_licitatorio: #{data[:nro_processo_licitatorio]}",
+          "exercicio_licitacao: #{data[:exercicio_licitacao]}",
+          "#{attribute}: #{data[attribute]}"
+        ].join("\n")
+      end
     end
 
     class BudgetDetailFormatter < FormatterBase
@@ -325,6 +334,15 @@ module TceExport::MG
       attribute :quantidade, position: 10, size: 13, min_size: 1, precision: 4, required: true, caster: Casters::PrecisionCaster
       attribute :unidade, position: 11, size: 50, min_size: 1, required: true, caster: Casters::TextCaster
       attribute :vl_min_alien_bens, position: 12, size: 13, min_size: 1, required: true, caster: Casters::DecimalCaster
+
+      def error_description(attribute, error_type)
+        [
+          "tipo_registro: #{data[:tipo_registro]}",
+          "nro_processo_licitatorio: #{data[:nro_processo_licitatorio]}",
+          "exercicio_licitacao: #{data[:exercicio_licitacao]}",
+          "#{attribute}: #{data[attribute]}"
+        ].join("\n")
+      end
     end
 
     class ResourceDetailFormatter < FormatterBase
@@ -343,6 +361,15 @@ module TceExport::MG
       attribute :elemento_despesa, position: 12, size: 6, min_size: 6, required: true, caster: Casters::IntegerCaster
       attribute :cod_font_recursos, position: 13, size: 3, min_size: 3, required: true, caster: Casters::IntegerCaster
       attribute :vl_recurso, position: 14, size: 13, min_size: 1, required: true, caster: Casters::DecimalCaster
+
+      def error_description(attribute, error_type)
+        [
+          "tipo_registro: #{data[:tipo_registro]}",
+          "nro_processo_licitatorio: #{data[:nro_processo_licitatorio]}",
+          "exercicio_licitacao: #{data[:exercicio_licitacao]}",
+          "#{attribute}: #{data[attribute]}"
+        ].join("\n")
+      end
     end
 
     class PurchaseOpeningGenerator < GeneratorBase

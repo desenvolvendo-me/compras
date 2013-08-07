@@ -165,6 +165,15 @@ module TceExport::MG
       attribute :vl_unitario,              position: 10, size: 13, min_size: 1, required: true, precision: 4, caster: Casters::PrecisionCaster
       attribute :quantidade,               position: 11, size: 13, min_size: 1, required: true, precision: 4, caster: Casters::PrecisionCaster
       attribute :unidade,                  position: 12, size: 50, min_size: 1, required: true, caster: Casters::TextCaster
+
+      def error_description(attribute, error_type)
+        [
+          "tipo_registro: #{data[:tipo_registro]}",
+          "nro_processo_licitatorio: #{data[:nro_processo_licitatorio]}",
+          "exercicio_licitacao: #{data[:exercicio_licitacao]}",
+          "#{attribute}: #{data[attribute]}"
+        ].join("\n")
+      end
     end
 
     class JudgmentDateDetailFormatter < FormatterBase
@@ -176,6 +185,15 @@ module TceExport::MG
       attribute :dt_julgamento,            position: 5, size: 8, required: true, caster: Casters::DateCaster
       attribute :presenca_licitantes,      position: 6, size: 1, required: true, caster: Casters::IntegerCaster
       attribute :renuncia_recurso,         position: 7, size: 1, required: true, caster: Casters::IntegerCaster
+
+      def error_description(attribute, error_type)
+        [
+          "tipo_registro: #{data[:tipo_registro]}",
+          "nro_processo_licitatorio: #{data[:nro_processo_licitatorio]}",
+          "exercicio_licitacao: #{data[:exercicio_licitacao]}",
+          "#{attribute}: #{data[attribute]}"
+        ].join("\n")
+      end
     end
 
     class LicitationJudgmentGenerator < GeneratorBase
