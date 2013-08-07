@@ -98,7 +98,7 @@
       <% resource.proposals.each do |proposal| %>
       <tr>
         <td><%= proposal.lot %></td>
-        <td><%= proposal.item %></td>
+        <td><%= proposal.material %></td>
         <td><%= number_to_currency proposal.unit_price %></td>
         <td><%= proposal.creditor %></td>
       </tr>
@@ -127,7 +127,7 @@
       <% resource.creditor_winner.each do |proposal| %>
       <tr>
         <td><%= proposal.lot %></td>
-        <td><%= proposal.item %></td>
+        <td><%= proposal.material %></td>
         <td><%= number_to_currency proposal.unit_price %></td>
         <td><%= proposal.creditor %></td>
       </tr>
