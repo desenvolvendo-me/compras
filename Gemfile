@@ -29,7 +29,6 @@ gem 'squeel'
 gem 'carrierwave'
 gem 'awesome_nested_set', '2.1.3'
 
-gem 'mail_validator', '0.2.0'
 gem 'cnpj_validator', '0.3.1'
 gem 'cpf_validator', '0.2.0'
 gem 'mask_validator', '0.2.1'
