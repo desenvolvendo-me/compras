@@ -12,7 +12,7 @@ class CreateSupplyOrderItems < ActiveRecord::Migration
       column: :licitation_process_ratification_item_id, name: 'cmp_lct_prc_rat_itm_ratification_item_fk'
 
     add_index :compras_supply_order_items, :supply_order_id
-    add_index :compras_supply_order_items, :licitation_process_ratification_item_id, 
+    add_index :compras_supply_order_items, :licitation_process_ratification_item_id,
       name: :index_sup_ord_itm_on_licitation_process_ratification_item_id
   end
 end
