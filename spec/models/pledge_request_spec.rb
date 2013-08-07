@@ -27,7 +27,6 @@ describe PledgeRequest do
     it { should validate_presence_of :purchase_process }
     it { should validate_presence_of :creditor }
     it { should validate_presence_of :amount }
-    it { should validate_presence_of :historic_complement }
     it { should validate_presence_of :emission_date }
   end
 
