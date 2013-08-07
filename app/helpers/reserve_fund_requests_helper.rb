@@ -4,6 +4,10 @@ module ReserveFundRequestsHelper
     "Editar Reserva de Dotação"
   end
 
+  def reserve_fund_action(resource)
+    resource.reserve_funds.empty? ? 'Criar' : 'Editar'
+  end
+
   def budget_allocation_for_select(resource)
     resource.purchase_process_budget_allocations.map do |purchase_process_budget_allocation|
       [

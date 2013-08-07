@@ -982,6 +982,21 @@ describe LicitationProcess do
     end
   end
 
+  describe '#reserve_funds' do
+    let(:repository) { double(:reserve_fund_repository) }
+
+    it "should return all purchase_process's reserve_funds" do
+      subject.id = 55
+
+      repository.
+        should_receive(:all).
+        with(params: { by_purchase_process_id: 55} ).
+        and_return(['reserve_fund'])
+
+      expect(subject.reserve_funds(repository)).to eq ['reserve_fund']
+    end
+  end
+
   describe '#budget_allocation_capabilities' do
     before do
       subject.stub :budget_allocations => [budget_allocation]

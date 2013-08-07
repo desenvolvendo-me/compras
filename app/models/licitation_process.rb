@@ -336,6 +336,10 @@ class LicitationProcess < Compras::Model
     purchase_process_budget_allocations.map(&:budget_allocation)
   end
 
+  def reserve_funds(repository = ReserveFund)
+    repository.all(params: { by_purchase_process_id: id })
+  end
+
   def budget_allocation_capabilities
     return unless budget_allocations
 
