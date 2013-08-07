@@ -181,6 +181,15 @@ module TceExport::MG
       attribute :cep_logra, position: 12, size: 8, min_size: 8, required: true, caster: Casters::IntegerCaster
       attribute :telefone, position: 13, size: 10, min_size: 10, required: true, caster: Casters::IntegerCaster
       attribute :email, position: 14, size: 50, min_size: 1, required: true, caster: Casters::TextCaster
+
+      def error_description(attribute, error_type)
+        [
+          "tipo_registro: #{data[:tipo_registro]}",
+          "nro_processo_licitatorio: #{data[:nro_processo_licitatorio]}",
+          "exercicio_licitacao: #{data[:exercicio_licitacao]}",
+          "#{attribute}: #{data[attribute]}"
+        ].join("\n")
+      end
     end
 
     class LicitationCommissionMemberFormatter < FormatterBase
@@ -207,6 +216,15 @@ module TceExport::MG
       attribute :cep_logra, position: 20, size: 8, min_size: 8, required: true, caster: Casters::IntegerCaster
       attribute :telefone, position: 21, size: 10, min_size: 10, required: true, caster: Casters::IntegerCaster
       attribute :email, position: 22, size: 50, min_size: 1, required: true, caster: Casters::TextCaster
+
+      def error_description(attribute, error_type)
+        [
+          "tipo_registro: #{data[:tipo_registro]}",
+          "nro_processo_licitatorio: #{data[:nro_processo_licitatorio]}",
+          "exercicio_licitacao: #{data[:exercicio_licitacao]}",
+          "#{attribute}: #{data[attribute]}"
+        ].join("\n")
+      end
     end
 
     class ProcessResponsibleGenerator < GeneratorBase

@@ -364,6 +364,15 @@ module TceExport::MG
       attribute :nro_item, position: 21, size: 4, min_size: 1, required: true, caster: Casters::IntegerCaster
       attribute :quantidade, position: 22, size: 13, min_size: 1, precision: 4, required: true, caster: Casters::PrecisionCaster
       attribute :vlr_item, position: 23, size: 13, min_size: 1, precision: 4, required: true, caster: Casters::PrecisionCaster
+
+      def error_description(attribute, error_type)
+        [
+          "tipo_registro: #{data[:tipo_registro]}",
+          "nro_processo: #{data[:nro_processo]}",
+          "exercicio_processo: #{data[:exercicio_processo]}",
+          "#{attribute}: #{data[attribute]}"
+        ].join("\n")
+      end
     end
 
     class CapabilityFormatter < FormatterBase
@@ -383,6 +392,15 @@ module TceExport::MG
       attribute :elemento_despesa, position: 13, size: 6, min_size: 6, required: true, caster: Casters::IntegerCaster
       attribute :cod_font_recursos, position: 14, size: 3, min_size: 3, required: true, caster: Casters::IntegerCaster
       attribute :vl_recurso, position: 15, size: 13,  required: true, caster: Casters::DecimalCaster
+
+      def error_description(attribute, error_type)
+        [
+          "tipo_registro: #{data[:tipo_registro]}",
+          "nro_processo: #{data[:nro_processo]}",
+          "exercicio_processo: #{data[:exercicio_processo]}",
+          "#{attribute}: #{data[attribute]}"
+        ].join("\n")
+      end
     end
 
     class ProcessItemFormatter < FormatterBase
@@ -396,6 +414,15 @@ module TceExport::MG
       attribute :nro_item, position: 7, size: 4, min_size: 1, required: true, caster: Casters::IntegerCaster
       attribute :dsc_item, position: 8, size: 250, min_size: 1, required: true, caster: Casters::TextCaster
       attribute :vl_cot_precos_unitatio, position: 9, size: 13, min_size: 1, precision: 4, required: true, caster: Casters::PrecisionCaster
+
+      def error_description(attribute, error_type)
+        [
+          "tipo_registro: #{data[:tipo_registro]}",
+          "nro_processo: #{data[:nro_processo]}",
+          "exercicio_processo: #{data[:exercicio_processo]}",
+          "#{attribute}: #{data[attribute]}"
+        ].join("\n")
+      end
     end
 
     class ProcessResponsibleExemptFormatter < FormatterBase
@@ -415,6 +442,15 @@ module TceExport::MG
       attribute :cep_logra, position: 13, size: 8, min_size: 8, required: true, caster: Casters::IntegerCaster
       attribute :telefone, position: 14, size: 10, min_size: 10, required: true, caster: Casters::IntegerCaster
       attribute :email, position: 15, size: 50, min_size: 1, required: true, caster: Casters::TextCaster
+
+      def error_description(attribute, error_type)
+        [
+          "tipo_registro: #{data[:tipo_registro]}",
+          "nro_processo: #{data[:nro_processo]}",
+          "exercicio_processo: #{data[:exercicio_processo]}",
+          "#{attribute}: #{data[attribute]}"
+        ].join("\n")
+      end
     end
 
     class DirectPurchaseFormatter < FormatterBase
@@ -431,6 +467,15 @@ module TceExport::MG
       attribute :razao, position: 10, size: 250, min_size: 1, required: true, caster: Casters::TextCaster
       attribute :dt_publicacao_termo_ratificacao, position: 11, size: 8, min_size: 8, required: true, caster: Casters::DateCaster
       attribute :veiculo_publicacao, position: 12, size: 50, min_size: 1, required: true, caster: Casters::TextCaster
+
+      def error_description(attribute, error_type)
+        [
+          "tipo_registro: #{data[:tipo_registro]}",
+          "nro_processo: #{data[:nro_processo]}",
+          "exercicio_processo: #{data[:exercicio_processo]}",
+          "#{attribute}: #{data[attribute]}"
+        ].join("\n")
+      end
     end
 
     class DirectPurchaseGenerator < GeneratorBase

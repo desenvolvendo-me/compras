@@ -413,6 +413,14 @@ module TceExport::MG
       attribute :cpf_signatario_contratante, position: 26, size: 11, min_size:  11, required: true, caster: Casters::TextCaster
       attribute :dt_publicacao, position: 27, size: 8, min_size:  8, required: true, caster: Casters::DateCaster
       attribute :veiculo_divulgacao, position: 28, size: 50, required: true, caster: Casters::TextCaster
+
+      def error_description(attribute, error_type)
+        [
+          "tipo_registro: #{data[:tipo_registro]}",
+          "cod_contrato: #{data[:cod_contrato]}",
+          "#{attribute}: #{data[attribute]}"
+        ].join("\n")
+      end
     end
 
     class ContractItemDetailFormatter < FormatterBase # Registro 11
@@ -422,6 +430,14 @@ module TceExport::MG
       attribute :quantidade_item,  position: 3, size: 13, required: true, precision: 4, caster: Casters::PrecisionCaster
       attribute :unidade,          position: 4, size: 50, required: true, caster: Casters::TextCaster
       attribute :vl_unitario_item, position: 5, size: 13, required: true, precision: 4, caster: Casters::PrecisionCaster
+
+      def error_description(attribute, error_type)
+        [
+          "tipo_registro: #{data[:tipo_registro]}",
+          "cod_contrato: #{data[:cod_contrato]}",
+          "#{attribute}: #{data[attribute]}"
+        ].join("\n")
+      end
     end
 
     class ContractPledgeItemFormatter < FormatterBase # Registro 12
@@ -436,6 +452,14 @@ module TceExport::MG
       attribute :cod_subacao, position: 8, size: 1, min_size: 1, required:  false, caster: Casters::IntegerCaster
       attribute :elemento_despesa, position: 9, size: 6, min_size: 6, required:  true, caster: Casters::IntegerCaster
       attribute :cod_fonte_recursos, position: 10, size: 3, min_size: 3, required:  true, caster: Casters::IntegerCaster
+
+      def error_description(attribute, error_type)
+        [
+          "tipo_registro: #{data[:tipo_registro]}",
+          "cod_contrato: #{data[:cod_contrato]}",
+          "#{attribute}: #{data[attribute]}"
+        ].join("\n")
+      end
     end
 
     class ContractCreditorItemFormatter < FormatterBase # Registro 13
@@ -444,6 +468,14 @@ module TceExport::MG
       attribute :tipo_documento, position: 2, size: 1, min_size: 1, required: true, caster: Casters::IntegerCaster
       attribute :nro_documento, position: 3, size: 14, min_size: 11, required: true, caster: Casters::TextCaster
       attribute :nome_credor, position: 4, size: 120, required: true, caster: Casters::TextCaster
+
+      def error_description(attribute, error_type)
+        [
+          "tipo_registro: #{data[:tipo_registro]}",
+          "cod_contrato: #{data[:cod_contrato]}",
+          "#{attribute}: #{data[attribute]}"
+        ].join("\n")
+      end
     end
 
     class ContractAdditiveItemFormatter < FormatterBase #Registro 20
@@ -462,6 +494,15 @@ module TceExport::MG
       attribute :valor_atualizado_contrato, position: 12, size:  13, required: true, caster: Casters::DecimalCaster
       attribute :dt_publicacao, position: 13, size:  8, min_size: 8, required: true, caster: Casters::DateCaster
       attribute :veiculo_divulgacao, position: 14, size:  50, required: true, caster: Casters::TextCaster
+
+      def error_description(attribute, error_type)
+        [
+          "tipo_registro: #{data[:tipo_registro]}",
+          "cod_aditivo: #{data[:cod_aditivo]}",
+          "nro_contrato: #{data[:nro_contrato]}",
+          "#{attribute}: #{data[attribute]}"
+        ].join("\n")
+      end
     end
 
     class ContractAdditiveItemDetailFormatter < FormatterBase # Registro 21
@@ -471,6 +512,14 @@ module TceExport::MG
       attribute :quantidade_item,  position: 3, size: 13, required: true, precision: 4, caster: Casters::PrecisionCaster
       attribute :unidade,          position: 4, size: 50, required: true, caster: Casters::TextCaster
       attribute :vl_unitario_item, position: 5, size: 13, required: true, precision: 4, caster: Casters::PrecisionCaster
+
+      def error_description(attribute, error_type)
+        [
+          "tipo_registro: #{data[:tipo_registro]}",
+          "cod_aditivo: #{data[:cod_aditivo]}",
+          "#{attribute}: #{data[attribute]}"
+        ].join("\n")
+      end
     end
 
     class ContractTerminationItemFormatter < FormatterBase #Registro 40
@@ -481,6 +530,14 @@ module TceExport::MG
       attribute :dt_assinatura_contrato_original, position: 4, size:  8, min_size: 8, required: true, caster: Casters::DateCaster
       attribute :dt_rescisao, position: 6, size:  8, min_size: 8, required: true, caster: Casters::DateCaster
       attribute :vl_cancelamento_contrato, position: 7, size:  13, required: true, caster: Casters::DecimalCaster
+
+      def error_description(attribute, error_type)
+        [
+          "tipo_registro: #{data[:tipo_registro]}",
+          "nro_contrato: #{data[:nro_contrato]}",
+          "#{attribute}: #{data[attribute]}"
+        ].join("\n")
+      end
     end
 
     class ContractGenerator < GeneratorBase

@@ -81,6 +81,14 @@ module TceExport::MG
                 caster: Casters::IntegerCaster
       attribute :email, position: 14, size: 50, min_size: 1, required: true,
                 caster: Casters::TextCaster
+
+      def error_description(attribute, error_type)
+        [
+          "nro_processo_licitatorio: #{data[:nro_processo_licitatorio]}",
+          "exercicio_licitacao: #{data[:exercicio_licitacao]}",
+          "#{attribute}: #{data[attribute]}"
+        ].join("\n")
+      end
     end
 
     class LegalAnalysisAppraisalGenerator < GeneratorBase

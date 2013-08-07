@@ -31,6 +31,14 @@ module TceExport::MG
                 required: true, caster: Casters::DateCaster
       attribute :data_publicacao_decreto_municipal, position: 4, size: 8,
                 min_size: 8, required: true, caster: Casters::DateCaster
+
+      def error_description(attribute, error_type)
+        [
+          "cod_orgao: #{data[:cod_orgao]}",
+          "tipo_decreto: #{data[:tipo_decreto]}",
+          "#{attribute}: #{data[attribute]}"
+        ].join("\n")
+      end
     end
 
     class RegulatoryActGenerator < GeneratorBase
