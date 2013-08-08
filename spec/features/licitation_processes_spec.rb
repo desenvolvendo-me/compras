@@ -448,6 +448,10 @@ feature "LicitationProcesses" do
 
     within_tab 'Prazos' do
       fill_in 'Data da expedição', :with => '32/12/2012'
+
+      # Precisa perder o foco pra disparar a mensagem de dada inválida
+      # por isso preenchi outro campo
+      fill_in 'Prazo de entrega', with: '10'
       expect(page).to have_content "data inválida"
     end
 

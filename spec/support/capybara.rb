@@ -1,5 +1,4 @@
 require 'capybara/rspec'
-require 'capybara/poltergeist'
 
 module Capybara
   class Session
@@ -31,7 +30,7 @@ module Capybara
 end
 
 Capybara.configure do |config|
-  config.default_driver = ENV['SELENIUM'] ? :selenium : :poltergeist
+  config.default_driver = ENV['SELENIUM'] ? :selenium : :webkit
   config.ignore_hidden_elements = true
   config.match = :prefer_exact
 end

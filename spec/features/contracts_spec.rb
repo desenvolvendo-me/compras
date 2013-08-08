@@ -73,7 +73,6 @@ feature "Contracts" do
     expect(page).to have_field 'Contrato principal'
 
     fill_in 'Ano do contrato', :with => '2012'
-    expect(page).to have_field 'Número sequencial', :with => '1', disabled: true
 
     fill_modal 'Local de publicação', :with => 'Jornal Oficial do Município', :field => 'Descrição'
 
