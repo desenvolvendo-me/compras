@@ -67,6 +67,8 @@ class PriceCollectionProposal < Compras::Model
   def classification_by_item(proposal_item)
     proposal_items = PriceCollectionProposalItem.by_item_order_by_unit_price(proposal_item.price_collection_item)
 
+    return if proposal_items.empty?
+
     classification = proposal_items.index(proposal_item).succ
     classification = -1 if proposal_item.unit_price <= 0
     classification
