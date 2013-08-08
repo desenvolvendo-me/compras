@@ -1,9 +1,7 @@
 class LicitationProcessesController < CrudController
   actions :all, :except => [ :destroy ]
 
-  has_scope :with_price_registrations, :type => :boolean
   has_scope :by_modality_type
-  has_scope :without_trading
   has_scope :trading, :type => :boolean
   has_scope :published_edital, :type => :boolean
   has_scope :by_ratification_and_year
@@ -24,20 +22,8 @@ class LicitationProcessesController < CrudController
   end
 
   def update
-    if params[:commit] == 'Apurar'
-      resource.transaction do
-        PurchaseProcessClassificationGenerator.new(resource).generate!
-
-        PurchaseProcessClassificationBiddersVerifier.new(resource).verify!
-
-        PurchaseProcessClassificationSituationGenerator.new(resource).generate!
-      end
-
-      redirect_to licitation_process_path(resource)
-    else
-      update! do |success, failure|
-        success.html { redirect_to edit_licitation_process_path(resource) }
-      end
+    update! do |success, failure|
+      success.html { redirect_to edit_licitation_process_path(resource) }
     end
   end
 

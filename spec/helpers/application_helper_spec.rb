@@ -70,10 +70,4 @@ describe ApplicationHelper do
       expect(helper.data_disabled_attribute(data_disabled)).to eq(' data-disabled="some message"')
     end
   end
-
-  context '#numeric_position' do
-    it 'should return internationalized placing' do
-      expect(helper.numeric_position(2)).to eq '2º lugar'
-    end
-  end
 end

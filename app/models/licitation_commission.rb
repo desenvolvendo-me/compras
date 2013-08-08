@@ -39,14 +39,6 @@ class LicitationCommission < Compras::Model
   orderize "id DESC"
   filterize
 
-  def self.not_expired
-    where { expiration_date >= Date.current }
-  end
-
-  def self.not_exonerated
-    where { exoneration_date.eq(nil) }
-  end
-
   def to_s
     "#{description} - Tipo: #{commission_type_humanize} - Data de Nomeação: #{I18n.l(nomination_date)}"
   end
@@ -62,10 +54,6 @@ class LicitationCommission < Compras::Model
 
   def expired?(base_date=Date.current)
     expiration_date < base_date
-  end
-
-  def exonerated?
-    exoneration_date.present?
   end
 
   protected

@@ -167,13 +167,6 @@ class LicitationProcess < Compras::Model
   orderize "id DESC"
   filterize
 
-  scope :with_price_registrations, where { price_registration.eq true }
-
-  scope :without_trading, lambda { |except_id|
-    joins { trading.outer }.
-    where { |licitation| licitation.trading.id.eq(nil) | licitation.id.eq(except_id) }
-  }
-
   scope :published_edital, lambda {
     joins { publications }.where {
       publications.publication_of.eq PublicationOf::EDITAL

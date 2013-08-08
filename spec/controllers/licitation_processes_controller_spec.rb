@@ -59,18 +59,6 @@ describe LicitationProcessesController do
 
         expect(response).to redirect_to(edit_licitation_process_path(licitation_process))
       end
-
-      it 'delete classifications and call classification generator' do
-        LicitationProcess.stub(:find).and_return(licitation_process)
-        licitation_process.should_receive(:transaction).and_yield
-
-        PurchaseProcessClassificationSituationGenerator.any_instance.should_receive(:generate!)
-        PurchaseProcessClassificationBiddersVerifier.any_instance.should_receive(:verify!)
-
-        put :update, :id => licitation_process.id, :commit => 'Apurar'
-
-        expect(response).to redirect_to(licitation_process_path(licitation_process))
-      end
     end
   end
 
