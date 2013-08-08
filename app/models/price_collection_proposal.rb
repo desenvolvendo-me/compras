@@ -17,7 +17,7 @@ class PriceCollectionProposal < Compras::Model
   accepts_nested_attributes_for :items, :allow_destroy => true
 
   validates :creditor, :presence => true
-  validate :must_have_a_valid_creditor_user
+  validate :must_have_a_valid_creditor_user, if: :user
 
   orderize "id DESC"
   filterize
@@ -97,8 +97,8 @@ class PriceCollectionProposal < Compras::Model
   protected
 
   def must_have_a_valid_creditor_user
-    return if !user || user.valid?
+    return if (user.valid? && user.confirmed?) || !user.confirmed?
 
-    errors[:user_attributes] << user.errors.full_messages
+    errors.add(:base, user.errors.full_messages)
   end
 end
