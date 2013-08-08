@@ -109,7 +109,7 @@ feature "PurchaseSolicitations", :vcr do
 
       expect(page).to have_field 'Natureza da despesa', :with => '3.1.90.00.00 - Aplicações Diretas',
         disabled: true
-      expect(page).to have_field 'Saldo da dotação',:with => '489,50', disabled: true
+      expect(page).to have_field 'Saldo da dotação',:with => '-10,50', disabled: true
 
       fill_in 'Valor estimado', :with => '100,00'
 
@@ -119,7 +119,7 @@ feature "PurchaseSolicitations", :vcr do
         expect(page).to have_content '1 - Aplicações Diretas'
         expect(page).to have_content '3.1.90.00.00 - Aplicações Diretas'
         expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
-        expect(page).to have_content '489,50'
+        expect(page).to have_content '-10,50'
         expect(page).to have_content '100,00'
       end
 
@@ -181,7 +181,7 @@ feature "PurchaseSolicitations", :vcr do
         expect(page).to have_content '1 - 3.1.90.00.00 - Aplicações Diretas'
         expect(page).to have_content '3.1.90.00.00 - Aplicações Diretas'
         expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
-        expect(page).to have_content '489,50'
+        expect(page).to have_content '-10,50'
         expect(page).to have_content '100,00'
       end
     end
@@ -270,7 +270,7 @@ feature "PurchaseSolicitations", :vcr do
         expect(page).to have_content '1 - Aplicações Diretas'
         expect(page).to have_content '3.1.90.00.00 - Aplicações Diretas'
         expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
-        expect(page).to have_content '489,50'
+        expect(page).to have_content '-10,50'
       end
     end
 
@@ -321,7 +321,7 @@ feature "PurchaseSolicitations", :vcr do
         expect(page).to have_content '1 - 3.1.90.00.00 - Aplicações Diretas'
         expect(page).to have_content '3.1.90.00.00 - Aplicações Diretas'
         expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
-        expect(page).to have_content '489,50'
+        expect(page).to have_content '-10,50'
       end
     end
   end
@@ -638,6 +638,7 @@ feature "PurchaseSolicitations", :vcr do
   end
 
   scenario "purchase of services" do
+    Timecop.travel(Date.new(2012, 10, 10))
     item = PurchaseSolicitationItem.make!(:item, :material => Material.make!(:manutencao))
     PurchaseSolicitation.make!(:reparo,
                                :items => [item],
@@ -676,6 +677,7 @@ feature "PurchaseSolicitations", :vcr do
         expect(page).to have_content 'Manutenção de Computadores'
       end
     end
+    Timecop.return
   end
 
   scenario 'should not allow duplicated materials' do

@@ -178,11 +178,11 @@ feature "Contracts", :vcr do
 
     click_link 'Empenhos'
 
-    expect(page).to have_content '9,99'
-    expect(page).to have_content '10/10/2012'
-    expect(page).to have_content '15,99'
-    expect(page).to have_content '31/10/2012'
-    expect(page).to have_content '25,98'
+    expect(page).to have_content '300,00'
+    expect(page).to have_content '01/10/2012'
+    expect(page).to have_content '100,00'
+    expect(page).to have_content '01/10/2012'
+    expect(page).to have_content '400,00'
   end
 
   scenario 'add contract additives' do

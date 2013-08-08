@@ -25,24 +25,24 @@ http_interactions:
       x-ua-compatible:
       - IE=Edge
       etag:
-      - '"c27632bd8c9e4f1632a4cc0758f9e51a"'
+      - '"cce7d98c49b5cbbcaccaa9de68b20e86"'
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 71cc8a0062fb44cbf73d426950978786
+      - 393fa73aed50c32b8c267030d9a329f4
       x-runtime:
-      - '3.130083'
+      - '0.027802'
       date:
-      - Fri, 02 Aug 2013 21:20:24 GMT
+      - Thu, 08 Aug 2013 14:40:24 GMT
       connection:
       - close
     body:
       encoding: UTF-8
-      string: '{"acronym":"SEMUEDU","administration_type_id":1,"budget_structure_configuration_id":1,"budget_structure_level_id":1,"code":"1","created_at":"2013-08-01T14:39:16-03:00","description":"Detran","full_code":"1","id":1,"kind":"analytical","parent_id":null,"performance_field":"Desenvolvimento
-        Educacional","tce_code":"051","updated_at":"2013-08-01T14:39:16-03:00","to_s":"1
+      string: '{"acronym":"SEMUEDU","administration_type_id":1,"budget_structure_configuration_id":1,"budget_structure_level_id":1,"code":"1","created_at":"2013-08-06T18:05:38-03:00","description":"Detran","full_code":"1","id":1,"kind":"analytical","parent_id":null,"performance_field":"Desenvolvimento
+        Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Fri, 02 Aug 2013 21:20:24 GMT
+  recorded_at: Thu, 08 Aug 2013 14:40:24 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -68,24 +68,24 @@ http_interactions:
       x-ua-compatible:
       - IE=Edge
       etag:
-      - '"c27632bd8c9e4f1632a4cc0758f9e51a"'
+      - '"cce7d98c49b5cbbcaccaa9de68b20e86"'
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 6515b290790a3d063ba649f1595c2354
+      - b5cf90e593203c8da364586c080bd0b2
       x-runtime:
-      - '0.038570'
+      - '0.026565'
       date:
-      - Fri, 02 Aug 2013 21:20:25 GMT
+      - Thu, 08 Aug 2013 14:40:24 GMT
       connection:
       - close
     body:
       encoding: UTF-8
-      string: '{"acronym":"SEMUEDU","administration_type_id":1,"budget_structure_configuration_id":1,"budget_structure_level_id":1,"code":"1","created_at":"2013-08-01T14:39:16-03:00","description":"Detran","full_code":"1","id":1,"kind":"analytical","parent_id":null,"performance_field":"Desenvolvimento
-        Educacional","tce_code":"051","updated_at":"2013-08-01T14:39:16-03:00","to_s":"1
+      string: '{"acronym":"SEMUEDU","administration_type_id":1,"budget_structure_configuration_id":1,"budget_structure_level_id":1,"code":"1","created_at":"2013-08-06T18:05:38-03:00","description":"Detran","full_code":"1","id":1,"kind":"analytical","parent_id":null,"performance_field":"Desenvolvimento
+        Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Fri, 02 Aug 2013 21:20:25 GMT
+  recorded_at: Thu, 08 Aug 2013 14:40:24 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -111,24 +111,24 @@ http_interactions:
       x-ua-compatible:
       - IE=Edge
       etag:
-      - '"c27632bd8c9e4f1632a4cc0758f9e51a"'
+      - '"cce7d98c49b5cbbcaccaa9de68b20e86"'
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 70f2ae1177e93b6bd949823815be6dbe
+      - 75536a7854299ed31bd6e7e839f38a08
       x-runtime:
-      - '0.023306'
+      - '0.027779'
       date:
-      - Fri, 02 Aug 2013 21:20:25 GMT
+      - Thu, 08 Aug 2013 14:40:24 GMT
       connection:
       - close
     body:
       encoding: UTF-8
-      string: '{"acronym":"SEMUEDU","administration_type_id":1,"budget_structure_configuration_id":1,"budget_structure_level_id":1,"code":"1","created_at":"2013-08-01T14:39:16-03:00","description":"Detran","full_code":"1","id":1,"kind":"analytical","parent_id":null,"performance_field":"Desenvolvimento
-        Educacional","tce_code":"051","updated_at":"2013-08-01T14:39:16-03:00","to_s":"1
+      string: '{"acronym":"SEMUEDU","administration_type_id":1,"budget_structure_configuration_id":1,"budget_structure_level_id":1,"code":"1","created_at":"2013-08-06T18:05:38-03:00","description":"Detran","full_code":"1","id":1,"kind":"analytical","parent_id":null,"performance_field":"Desenvolvimento
+        Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Fri, 02 Aug 2013 21:20:25 GMT
+  recorded_at: Thu, 08 Aug 2013 14:40:24 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations/1.json?includes=expense_nature&methods=balance
@@ -154,15 +154,15 @@ http_interactions:
       x-ua-compatible:
       - IE=Edge
       etag:
-      - '"0f6f64ce7cf1c818c910e3bee0a30f11"'
+      - '"3f1305e4fe9fe490291eb31e2f0dba16"'
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - b217516c0112d109d5f395e62aaf9bfb
+      - 1c06e72c87723c82bb14a9760b81ed4b
       x-runtime:
-      - '1.875972'
+      - '0.042409'
       date:
-      - Fri, 02 Aug 2013 21:20:27 GMT
+      - Thu, 08 Aug 2013 14:40:24 GMT
       connection:
       - close
     body:
@@ -170,7 +170,7 @@ http_interactions:
       string: !binary |-
         eyJhbGllbmF0aW9uX2FwcGVhbCI6ZmFsc2UsImJ1ZGdldF9hbGxvY2F0aW9u
         X3R5cGVfaWQiOjEsImJ1ZGdldF9zdHJ1Y3R1cmVfaWQiOjIsImNvZGUiOjEs
-        ImNyZWF0ZWRfYXQiOiIyMDEzLTA4LTAxVDE0OjM5OjE3LTAzOjAwIiwiZGF0
+        ImNyZWF0ZWRfYXQiOiIyMDEzLTA4LTA2VDE4OjA1OjQwLTAzOjAwIiwiZGF0
         ZSI6IjIwMTItMTAtMDEiLCJkZWJ0X3R5cGUiOiJjb250cmFjdCIsImRlc2Ny
         aXB0b3JfaWQiOjEsImVkdWNhdGlvbiI6ZmFsc2UsImV4cGVuc2VfbmF0dXJl
         X2lkIjozLCJmb3Jlc2lnaHQiOmZhbHNlLCJmdW5jdGlvbl9pZCI6MSwiZ292
@@ -181,17 +181,17 @@ http_interactions:
         LCI4IjoiMCwwMCIsIjkiOiIwLDAwIiwiMTAiOiIwLDAwIiwiMTEiOiIwLDAw
         IiwiMTIiOiIwLDAwIn0sInBlcnNvbmFsIjpmYWxzZSwicmVmaW5hbmNpbmci
         OnRydWUsInN1YmZ1bmN0aW9uX2lkIjoxLCJ1cGRhdGVkX2F0IjoiMjAxMy0w
-        OC0wMVQxNDozOToxNy0wMzowMCIsInZhbHVlIjpudWxsLCJ5ZWFyIjoyMDEy
-        LCJiYWxhbmNlIjoiNTAwLjAiLCJ0b19zIjoiMSAtIDMuMS45MC4wMC4wMCAt
+        OC0wNlQxODowNTo0MC0wMzowMCIsInZhbHVlIjpudWxsLCJ5ZWFyIjoyMDEy
+        LCJiYWxhbmNlIjoiLTEwLjUiLCJ0b19zIjoiMSAtIDMuMS45MC4wMC4wMCAt
         IEFwbGljYcOnw7VlcyBEaXJldGFzIiwiZXhwZW5zZV9uYXR1cmUiOnsiY3Jl
-        YXRlZF9hdCI6IjIwMTMtMDgtMDFUMTQ6Mzk6MTctMDM6MDAiLCJkZXNjcmlw
+        YXRlZF9hdCI6IjIwMTMtMDgtMDZUMTg6MDU6MzktMDM6MDAiLCJkZXNjcmlw
         dGlvbiI6IkFwbGljYcOnw7VlcyBEaXJldGFzIiwiZG9ja2V0IjoiUmVnaXN0
         cmEgbyB2YWxvciBkYXMgYXBsaWNhw6fDtWVzIGRpcmV0YXMiLCJleHBlbnNl
         X25hdHVyZSI6IjMuMS45MC4wMC4wMCIsImlkIjozLCJraW5kIjoiYm90aCIs
         InBhcmVudF9pZCI6MiwicmVndWxhdG9yeV9hY3RfaWQiOjIsInVwZGF0ZWRf
-        YXQiOiIyMDEzLTA4LTAxVDE0OjM5OjE3LTAzOjAwIiwieWVhciI6MjAxMn19
+        YXQiOiIyMDEzLTA4LTA2VDE4OjA1OjM5LTAzOjAwIiwieWVhciI6MjAxMn19
     http_version: '1.1'
-  recorded_at: Fri, 02 Aug 2013 21:20:27 GMT
+  recorded_at: Thu, 08 Aug 2013 14:40:24 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -217,30 +217,30 @@ http_interactions:
       x-ua-compatible:
       - IE=Edge
       etag:
-      - '"4f4f80f286ea987c8362cc42dc98a68a"'
+      - '"8e82f452ff616e2f4ce94a77ee473a34"'
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 3b43e977c946884a4f93d84d1c8e152a
+      - d9fa47b6ca0c830ece774205771f2ffa
       x-runtime:
-      - '0.067238'
+      - '0.027168'
       date:
-      - Fri, 02 Aug 2013 21:20:27 GMT
+      - Thu, 08 Aug 2013 14:40:24 GMT
       connection:
       - close
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        eyJjcmVhdGVkX2F0IjoiMjAxMy0wOC0wMVQxNDozOToxNy0wMzowMCIsImRl
+        eyJjcmVhdGVkX2F0IjoiMjAxMy0wOC0wNlQxODowNTozOS0wMzowMCIsImRl
         c2NyaXB0aW9uIjoiQXBsaWNhw6fDtWVzIERpcmV0YXMiLCJkb2NrZXQiOiJS
         ZWdpc3RyYSBvIHZhbG9yIGRhcyBhcGxpY2HDp8O1ZXMgZGlyZXRhcyIsImV4
         cGVuc2VfbmF0dXJlIjoiMy4xLjkwLjAwLjAwIiwiaWQiOjMsImtpbmQiOiJi
         b3RoIiwicGFyZW50X2lkIjoyLCJyZWd1bGF0b3J5X2FjdF9pZCI6MiwidXBk
-        YXRlZF9hdCI6IjIwMTMtMDgtMDFUMTQ6Mzk6MTctMDM6MDAiLCJ5ZWFyIjoy
+        YXRlZF9hdCI6IjIwMTMtMDgtMDZUMTg6MDU6MzktMDM6MDAiLCJ5ZWFyIjoy
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Fri, 02 Aug 2013 21:20:27 GMT
+  recorded_at: Thu, 08 Aug 2013 14:40:24 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/1.json
@@ -266,24 +266,24 @@ http_interactions:
       x-ua-compatible:
       - IE=Edge
       etag:
-      - '"596684e690127083a0c7b67b83d6e821"'
+      - '"96175f2142e903582d144b4dcb92b997"'
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 8aa731abfbf898ba2190d6a643a93d7d
+      - f69643b58af1c1db8576e49c20e23be0
       x-runtime:
-      - '0.033848'
+      - '0.028117'
       date:
-      - Fri, 02 Aug 2013 21:20:27 GMT
+      - Thu, 08 Aug 2013 14:40:24 GMT
       connection:
       - close
     body:
       encoding: UTF-8
-      string: '{"created_at":"2013-08-01T14:39:17-03:00","description":"Despesas Correntes","docket":"Registra
-        o valor das despesas","expense_nature":"3.0.00.00.00","id":1,"kind":"synthetic","parent_id":null,"regulatory_act_id":1,"updated_at":"2013-08-01T14:39:17-03:00","year":2012,"to_s":"3.0.00.00.00
+      string: '{"created_at":"2013-08-06T18:05:39-03:00","description":"Despesas Correntes","docket":"Registra
+        o valor das despesas","expense_nature":"3.0.00.00.00","id":1,"kind":"synthetic","parent_id":null,"regulatory_act_id":1,"updated_at":"2013-08-06T18:05:39-03:00","year":2012,"to_s":"3.0.00.00.00
         - Despesas Correntes"}'
     http_version: '1.1'
-  recorded_at: Fri, 02 Aug 2013 21:20:27 GMT
+  recorded_at: Thu, 08 Aug 2013 14:40:24 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -309,24 +309,24 @@ http_interactions:
       x-ua-compatible:
       - IE=Edge
       etag:
-      - '"c27632bd8c9e4f1632a4cc0758f9e51a"'
+      - '"cce7d98c49b5cbbcaccaa9de68b20e86"'
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - de160ca78172602c61af0566ea20f90a
+      - 20c50db820df129bead2fb5f0225648f
       x-runtime:
-      - '0.027156'
+      - '0.088652'
       date:
-      - Fri, 02 Aug 2013 21:20:28 GMT
+      - Thu, 08 Aug 2013 14:40:25 GMT
       connection:
       - close
     body:
       encoding: UTF-8
-      string: '{"acronym":"SEMUEDU","administration_type_id":1,"budget_structure_configuration_id":1,"budget_structure_level_id":1,"code":"1","created_at":"2013-08-01T14:39:16-03:00","description":"Detran","full_code":"1","id":1,"kind":"analytical","parent_id":null,"performance_field":"Desenvolvimento
-        Educacional","tce_code":"051","updated_at":"2013-08-01T14:39:16-03:00","to_s":"1
+      string: '{"acronym":"SEMUEDU","administration_type_id":1,"budget_structure_configuration_id":1,"budget_structure_level_id":1,"code":"1","created_at":"2013-08-06T18:05:38-03:00","description":"Detran","full_code":"1","id":1,"kind":"analytical","parent_id":null,"performance_field":"Desenvolvimento
+        Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Fri, 02 Aug 2013 21:20:28 GMT
+  recorded_at: Thu, 08 Aug 2013 14:40:25 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -352,24 +352,24 @@ http_interactions:
       x-ua-compatible:
       - IE=Edge
       etag:
-      - '"c27632bd8c9e4f1632a4cc0758f9e51a"'
+      - '"cce7d98c49b5cbbcaccaa9de68b20e86"'
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - b050c045153d5a9be7f085a7c16c1626
+      - 11ba143147a9e602a09a4807e5fd7618
       x-runtime:
-      - '0.023908'
+      - '0.026051'
       date:
-      - Fri, 02 Aug 2013 21:20:28 GMT
+      - Thu, 08 Aug 2013 14:40:25 GMT
       connection:
       - close
     body:
       encoding: UTF-8
-      string: '{"acronym":"SEMUEDU","administration_type_id":1,"budget_structure_configuration_id":1,"budget_structure_level_id":1,"code":"1","created_at":"2013-08-01T14:39:16-03:00","description":"Detran","full_code":"1","id":1,"kind":"analytical","parent_id":null,"performance_field":"Desenvolvimento
-        Educacional","tce_code":"051","updated_at":"2013-08-01T14:39:16-03:00","to_s":"1
+      string: '{"acronym":"SEMUEDU","administration_type_id":1,"budget_structure_configuration_id":1,"budget_structure_level_id":1,"code":"1","created_at":"2013-08-06T18:05:38-03:00","description":"Detran","full_code":"1","id":1,"kind":"analytical","parent_id":null,"performance_field":"Desenvolvimento
+        Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Fri, 02 Aug 2013 21:20:28 GMT
+  recorded_at: Thu, 08 Aug 2013 14:40:25 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -395,24 +395,24 @@ http_interactions:
       x-ua-compatible:
       - IE=Edge
       etag:
-      - '"c27632bd8c9e4f1632a4cc0758f9e51a"'
+      - '"cce7d98c49b5cbbcaccaa9de68b20e86"'
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - fd5e737abc32d78f06cb406f2ac4f914
+      - 232a0457276232df40b705faa98e4c9c
       x-runtime:
-      - '0.026241'
+      - '0.027208'
       date:
-      - Fri, 02 Aug 2013 21:20:30 GMT
+      - Thu, 08 Aug 2013 14:40:26 GMT
       connection:
       - close
     body:
       encoding: UTF-8
-      string: '{"acronym":"SEMUEDU","administration_type_id":1,"budget_structure_configuration_id":1,"budget_structure_level_id":1,"code":"1","created_at":"2013-08-01T14:39:16-03:00","description":"Detran","full_code":"1","id":1,"kind":"analytical","parent_id":null,"performance_field":"Desenvolvimento
-        Educacional","tce_code":"051","updated_at":"2013-08-01T14:39:16-03:00","to_s":"1
+      string: '{"acronym":"SEMUEDU","administration_type_id":1,"budget_structure_configuration_id":1,"budget_structure_level_id":1,"code":"1","created_at":"2013-08-06T18:05:38-03:00","description":"Detran","full_code":"1","id":1,"kind":"analytical","parent_id":null,"performance_field":"Desenvolvimento
+        Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Fri, 02 Aug 2013 21:20:30 GMT
+  recorded_at: Thu, 08 Aug 2013 14:40:26 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -438,24 +438,24 @@ http_interactions:
       x-ua-compatible:
       - IE=Edge
       etag:
-      - '"c27632bd8c9e4f1632a4cc0758f9e51a"'
+      - '"cce7d98c49b5cbbcaccaa9de68b20e86"'
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - d4d8f933032c9d4fd6d461bd84db11da
+      - 00a5651c0ba73df460f52581d8b1b60f
       x-runtime:
-      - '0.023577'
+      - '0.025739'
       date:
-      - Fri, 02 Aug 2013 21:20:30 GMT
+      - Thu, 08 Aug 2013 14:40:26 GMT
       connection:
       - close
     body:
       encoding: UTF-8
-      string: '{"acronym":"SEMUEDU","administration_type_id":1,"budget_structure_configuration_id":1,"budget_structure_level_id":1,"code":"1","created_at":"2013-08-01T14:39:16-03:00","description":"Detran","full_code":"1","id":1,"kind":"analytical","parent_id":null,"performance_field":"Desenvolvimento
-        Educacional","tce_code":"051","updated_at":"2013-08-01T14:39:16-03:00","to_s":"1
+      string: '{"acronym":"SEMUEDU","administration_type_id":1,"budget_structure_configuration_id":1,"budget_structure_level_id":1,"code":"1","created_at":"2013-08-06T18:05:38-03:00","description":"Detran","full_code":"1","id":1,"kind":"analytical","parent_id":null,"performance_field":"Desenvolvimento
+        Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Fri, 02 Aug 2013 21:20:30 GMT
+  recorded_at: Thu, 08 Aug 2013 14:40:26 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations/1.json?includes=expense_nature&methods=balance
@@ -481,15 +481,15 @@ http_interactions:
       x-ua-compatible:
       - IE=Edge
       etag:
-      - '"0f6f64ce7cf1c818c910e3bee0a30f11"'
+      - '"3f1305e4fe9fe490291eb31e2f0dba16"'
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 0f441519952324a0b32099ece09305a1
+      - b21af7985ee16b54ac99f19ff295522e
       x-runtime:
-      - '0.046449'
+      - '0.042869'
       date:
-      - Fri, 02 Aug 2013 21:20:30 GMT
+      - Thu, 08 Aug 2013 14:40:26 GMT
       connection:
       - close
     body:
@@ -497,7 +497,7 @@ http_interactions:
       string: !binary |-
         eyJhbGllbmF0aW9uX2FwcGVhbCI6ZmFsc2UsImJ1ZGdldF9hbGxvY2F0aW9u
         X3R5cGVfaWQiOjEsImJ1ZGdldF9zdHJ1Y3R1cmVfaWQiOjIsImNvZGUiOjEs
-        ImNyZWF0ZWRfYXQiOiIyMDEzLTA4LTAxVDE0OjM5OjE3LTAzOjAwIiwiZGF0
+        ImNyZWF0ZWRfYXQiOiIyMDEzLTA4LTA2VDE4OjA1OjQwLTAzOjAwIiwiZGF0
         ZSI6IjIwMTItMTAtMDEiLCJkZWJ0X3R5cGUiOiJjb250cmFjdCIsImRlc2Ny
         aXB0b3JfaWQiOjEsImVkdWNhdGlvbiI6ZmFsc2UsImV4cGVuc2VfbmF0dXJl
         X2lkIjozLCJmb3Jlc2lnaHQiOmZhbHNlLCJmdW5jdGlvbl9pZCI6MSwiZ292
@@ -508,17 +508,17 @@ http_interactions:
         LCI4IjoiMCwwMCIsIjkiOiIwLDAwIiwiMTAiOiIwLDAwIiwiMTEiOiIwLDAw
         IiwiMTIiOiIwLDAwIn0sInBlcnNvbmFsIjpmYWxzZSwicmVmaW5hbmNpbmci
         OnRydWUsInN1YmZ1bmN0aW9uX2lkIjoxLCJ1cGRhdGVkX2F0IjoiMjAxMy0w
-        OC0wMVQxNDozOToxNy0wMzowMCIsInZhbHVlIjpudWxsLCJ5ZWFyIjoyMDEy
-        LCJiYWxhbmNlIjoiNTAwLjAiLCJ0b19zIjoiMSAtIDMuMS45MC4wMC4wMCAt
+        OC0wNlQxODowNTo0MC0wMzowMCIsInZhbHVlIjpudWxsLCJ5ZWFyIjoyMDEy
+        LCJiYWxhbmNlIjoiLTEwLjUiLCJ0b19zIjoiMSAtIDMuMS45MC4wMC4wMCAt
         IEFwbGljYcOnw7VlcyBEaXJldGFzIiwiZXhwZW5zZV9uYXR1cmUiOnsiY3Jl
-        YXRlZF9hdCI6IjIwMTMtMDgtMDFUMTQ6Mzk6MTctMDM6MDAiLCJkZXNjcmlw
+        YXRlZF9hdCI6IjIwMTMtMDgtMDZUMTg6MDU6MzktMDM6MDAiLCJkZXNjcmlw
         dGlvbiI6IkFwbGljYcOnw7VlcyBEaXJldGFzIiwiZG9ja2V0IjoiUmVnaXN0
         cmEgbyB2YWxvciBkYXMgYXBsaWNhw6fDtWVzIGRpcmV0YXMiLCJleHBlbnNl
         X25hdHVyZSI6IjMuMS45MC4wMC4wMCIsImlkIjozLCJraW5kIjoiYm90aCIs
         InBhcmVudF9pZCI6MiwicmVndWxhdG9yeV9hY3RfaWQiOjIsInVwZGF0ZWRf
-        YXQiOiIyMDEzLTA4LTAxVDE0OjM5OjE3LTAzOjAwIiwieWVhciI6MjAxMn19
+        YXQiOiIyMDEzLTA4LTA2VDE4OjA1OjM5LTAzOjAwIiwieWVhciI6MjAxMn19
     http_version: '1.1'
-  recorded_at: Fri, 02 Aug 2013 21:20:30 GMT
+  recorded_at: Thu, 08 Aug 2013 14:40:26 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -544,30 +544,30 @@ http_interactions:
       x-ua-compatible:
       - IE=Edge
       etag:
-      - '"4f4f80f286ea987c8362cc42dc98a68a"'
+      - '"8e82f452ff616e2f4ce94a77ee473a34"'
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 3d4d4cb9e304dea783f1368a1ed0efa8
+      - 26289e7e875802b36c5dd448922bad4c
       x-runtime:
-      - '0.023779'
+      - '0.026855'
       date:
-      - Fri, 02 Aug 2013 21:20:30 GMT
+      - Thu, 08 Aug 2013 14:40:26 GMT
       connection:
       - close
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        eyJjcmVhdGVkX2F0IjoiMjAxMy0wOC0wMVQxNDozOToxNy0wMzowMCIsImRl
+        eyJjcmVhdGVkX2F0IjoiMjAxMy0wOC0wNlQxODowNTozOS0wMzowMCIsImRl
         c2NyaXB0aW9uIjoiQXBsaWNhw6fDtWVzIERpcmV0YXMiLCJkb2NrZXQiOiJS
         ZWdpc3RyYSBvIHZhbG9yIGRhcyBhcGxpY2HDp8O1ZXMgZGlyZXRhcyIsImV4
         cGVuc2VfbmF0dXJlIjoiMy4xLjkwLjAwLjAwIiwiaWQiOjMsImtpbmQiOiJi
         b3RoIiwicGFyZW50X2lkIjoyLCJyZWd1bGF0b3J5X2FjdF9pZCI6MiwidXBk
-        YXRlZF9hdCI6IjIwMTMtMDgtMDFUMTQ6Mzk6MTctMDM6MDAiLCJ5ZWFyIjoy
+        YXRlZF9hdCI6IjIwMTMtMDgtMDZUMTg6MDU6MzktMDM6MDAiLCJ5ZWFyIjoy
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Fri, 02 Aug 2013 21:20:30 GMT
+  recorded_at: Thu, 08 Aug 2013 14:40:26 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/1.json
@@ -593,24 +593,24 @@ http_interactions:
       x-ua-compatible:
       - IE=Edge
       etag:
-      - '"596684e690127083a0c7b67b83d6e821"'
+      - '"96175f2142e903582d144b4dcb92b997"'
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 9e6067726f614df4c43d82bd1ace8701
+      - 2915ddcd7379442db6cb8216b998dde0
       x-runtime:
-      - '0.027077'
+      - '0.027230'
       date:
-      - Fri, 02 Aug 2013 21:20:30 GMT
+      - Thu, 08 Aug 2013 14:40:26 GMT
       connection:
       - close
     body:
       encoding: UTF-8
-      string: '{"created_at":"2013-08-01T14:39:17-03:00","description":"Despesas Correntes","docket":"Registra
-        o valor das despesas","expense_nature":"3.0.00.00.00","id":1,"kind":"synthetic","parent_id":null,"regulatory_act_id":1,"updated_at":"2013-08-01T14:39:17-03:00","year":2012,"to_s":"3.0.00.00.00
+      string: '{"created_at":"2013-08-06T18:05:39-03:00","description":"Despesas Correntes","docket":"Registra
+        o valor das despesas","expense_nature":"3.0.00.00.00","id":1,"kind":"synthetic","parent_id":null,"regulatory_act_id":1,"updated_at":"2013-08-06T18:05:39-03:00","year":2012,"to_s":"3.0.00.00.00
         - Despesas Correntes"}'
     http_version: '1.1'
-  recorded_at: Fri, 02 Aug 2013 21:20:30 GMT
+  recorded_at: Thu, 08 Aug 2013 14:40:26 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -636,24 +636,24 @@ http_interactions:
       x-ua-compatible:
       - IE=Edge
       etag:
-      - '"c27632bd8c9e4f1632a4cc0758f9e51a"'
+      - '"cce7d98c49b5cbbcaccaa9de68b20e86"'
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 61de7f0d048c304750bc58b15cd0d579
+      - 6e049a15e5ba749790ad4ad6a5139825
       x-runtime:
-      - '0.023160'
+      - '0.026192'
       date:
-      - Fri, 02 Aug 2013 21:20:33 GMT
+      - Thu, 08 Aug 2013 14:40:29 GMT
       connection:
       - close
     body:
       encoding: UTF-8
-      string: '{"acronym":"SEMUEDU","administration_type_id":1,"budget_structure_configuration_id":1,"budget_structure_level_id":1,"code":"1","created_at":"2013-08-01T14:39:16-03:00","description":"Detran","full_code":"1","id":1,"kind":"analytical","parent_id":null,"performance_field":"Desenvolvimento
-        Educacional","tce_code":"051","updated_at":"2013-08-01T14:39:16-03:00","to_s":"1
+      string: '{"acronym":"SEMUEDU","administration_type_id":1,"budget_structure_configuration_id":1,"budget_structure_level_id":1,"code":"1","created_at":"2013-08-06T18:05:38-03:00","description":"Detran","full_code":"1","id":1,"kind":"analytical","parent_id":null,"performance_field":"Desenvolvimento
+        Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Fri, 02 Aug 2013 21:20:33 GMT
+  recorded_at: Thu, 08 Aug 2013 14:40:29 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -679,24 +679,24 @@ http_interactions:
       x-ua-compatible:
       - IE=Edge
       etag:
-      - '"c27632bd8c9e4f1632a4cc0758f9e51a"'
+      - '"cce7d98c49b5cbbcaccaa9de68b20e86"'
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - d26f01213f34c03c19e9d91106c6827d
+      - d210323c0c395d4f9e9175c22388c0a8
       x-runtime:
-      - '0.023064'
+      - '0.025270'
       date:
-      - Fri, 02 Aug 2013 21:20:33 GMT
+      - Thu, 08 Aug 2013 14:40:29 GMT
       connection:
       - close
     body:
       encoding: UTF-8
-      string: '{"acronym":"SEMUEDU","administration_type_id":1,"budget_structure_configuration_id":1,"budget_structure_level_id":1,"code":"1","created_at":"2013-08-01T14:39:16-03:00","description":"Detran","full_code":"1","id":1,"kind":"analytical","parent_id":null,"performance_field":"Desenvolvimento
-        Educacional","tce_code":"051","updated_at":"2013-08-01T14:39:16-03:00","to_s":"1
+      string: '{"acronym":"SEMUEDU","administration_type_id":1,"budget_structure_configuration_id":1,"budget_structure_level_id":1,"code":"1","created_at":"2013-08-06T18:05:38-03:00","description":"Detran","full_code":"1","id":1,"kind":"analytical","parent_id":null,"performance_field":"Desenvolvimento
+        Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Fri, 02 Aug 2013 21:20:33 GMT
+  recorded_at: Thu, 08 Aug 2013 14:40:29 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -722,24 +722,24 @@ http_interactions:
       x-ua-compatible:
       - IE=Edge
       etag:
-      - '"c27632bd8c9e4f1632a4cc0758f9e51a"'
+      - '"cce7d98c49b5cbbcaccaa9de68b20e86"'
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 2b48868af64315d850c60763d0398e44
+      - 51406b6c063f3cb0f9e872a4bb233d0c
       x-runtime:
-      - '0.023659'
+      - '0.027203'
       date:
-      - Fri, 02 Aug 2013 21:20:33 GMT
+      - Thu, 08 Aug 2013 14:40:29 GMT
       connection:
       - close
     body:
       encoding: UTF-8
-      string: '{"acronym":"SEMUEDU","administration_type_id":1,"budget_structure_configuration_id":1,"budget_structure_level_id":1,"code":"1","created_at":"2013-08-01T14:39:16-03:00","description":"Detran","full_code":"1","id":1,"kind":"analytical","parent_id":null,"performance_field":"Desenvolvimento
-        Educacional","tce_code":"051","updated_at":"2013-08-01T14:39:16-03:00","to_s":"1
+      string: '{"acronym":"SEMUEDU","administration_type_id":1,"budget_structure_configuration_id":1,"budget_structure_level_id":1,"code":"1","created_at":"2013-08-06T18:05:38-03:00","description":"Detran","full_code":"1","id":1,"kind":"analytical","parent_id":null,"performance_field":"Desenvolvimento
+        Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Fri, 02 Aug 2013 21:20:33 GMT
+  recorded_at: Thu, 08 Aug 2013 14:40:29 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations/1.json?includes=expense_nature&methods=balance
@@ -765,15 +765,15 @@ http_interactions:
       x-ua-compatible:
       - IE=Edge
       etag:
-      - '"0f6f64ce7cf1c818c910e3bee0a30f11"'
+      - '"3f1305e4fe9fe490291eb31e2f0dba16"'
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - e9b8afe109df358d8bb43b89135566a1
+      - 7bd8593241c35f68ef7d74ae62eb5d8b
       x-runtime:
-      - '0.035545'
+      - '0.044138'
       date:
-      - Fri, 02 Aug 2013 21:20:34 GMT
+      - Thu, 08 Aug 2013 14:40:30 GMT
       connection:
       - close
     body:
@@ -781,7 +781,7 @@ http_interactions:
       string: !binary |-
         eyJhbGllbmF0aW9uX2FwcGVhbCI6ZmFsc2UsImJ1ZGdldF9hbGxvY2F0aW9u
         X3R5cGVfaWQiOjEsImJ1ZGdldF9zdHJ1Y3R1cmVfaWQiOjIsImNvZGUiOjEs
-        ImNyZWF0ZWRfYXQiOiIyMDEzLTA4LTAxVDE0OjM5OjE3LTAzOjAwIiwiZGF0
+        ImNyZWF0ZWRfYXQiOiIyMDEzLTA4LTA2VDE4OjA1OjQwLTAzOjAwIiwiZGF0
         ZSI6IjIwMTItMTAtMDEiLCJkZWJ0X3R5cGUiOiJjb250cmFjdCIsImRlc2Ny
         aXB0b3JfaWQiOjEsImVkdWNhdGlvbiI6ZmFsc2UsImV4cGVuc2VfbmF0dXJl
         X2lkIjozLCJmb3Jlc2lnaHQiOmZhbHNlLCJmdW5jdGlvbl9pZCI6MSwiZ292
@@ -792,17 +792,17 @@ http_interactions:
         LCI4IjoiMCwwMCIsIjkiOiIwLDAwIiwiMTAiOiIwLDAwIiwiMTEiOiIwLDAw
         IiwiMTIiOiIwLDAwIn0sInBlcnNvbmFsIjpmYWxzZSwicmVmaW5hbmNpbmci
         OnRydWUsInN1YmZ1bmN0aW9uX2lkIjoxLCJ1cGRhdGVkX2F0IjoiMjAxMy0w
-        OC0wMVQxNDozOToxNy0wMzowMCIsInZhbHVlIjpudWxsLCJ5ZWFyIjoyMDEy
-        LCJiYWxhbmNlIjoiNTAwLjAiLCJ0b19zIjoiMSAtIDMuMS45MC4wMC4wMCAt
+        OC0wNlQxODowNTo0MC0wMzowMCIsInZhbHVlIjpudWxsLCJ5ZWFyIjoyMDEy
+        LCJiYWxhbmNlIjoiLTEwLjUiLCJ0b19zIjoiMSAtIDMuMS45MC4wMC4wMCAt
         IEFwbGljYcOnw7VlcyBEaXJldGFzIiwiZXhwZW5zZV9uYXR1cmUiOnsiY3Jl
-        YXRlZF9hdCI6IjIwMTMtMDgtMDFUMTQ6Mzk6MTctMDM6MDAiLCJkZXNjcmlw
+        YXRlZF9hdCI6IjIwMTMtMDgtMDZUMTg6MDU6MzktMDM6MDAiLCJkZXNjcmlw
         dGlvbiI6IkFwbGljYcOnw7VlcyBEaXJldGFzIiwiZG9ja2V0IjoiUmVnaXN0
         cmEgbyB2YWxvciBkYXMgYXBsaWNhw6fDtWVzIGRpcmV0YXMiLCJleHBlbnNl
         X25hdHVyZSI6IjMuMS45MC4wMC4wMCIsImlkIjozLCJraW5kIjoiYm90aCIs
         InBhcmVudF9pZCI6MiwicmVndWxhdG9yeV9hY3RfaWQiOjIsInVwZGF0ZWRf
-        YXQiOiIyMDEzLTA4LTAxVDE0OjM5OjE3LTAzOjAwIiwieWVhciI6MjAxMn19
+        YXQiOiIyMDEzLTA4LTA2VDE4OjA1OjM5LTAzOjAwIiwieWVhciI6MjAxMn19
     http_version: '1.1'
-  recorded_at: Fri, 02 Aug 2013 21:20:34 GMT
+  recorded_at: Thu, 08 Aug 2013 14:40:30 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -828,30 +828,30 @@ http_interactions:
       x-ua-compatible:
       - IE=Edge
       etag:
-      - '"4f4f80f286ea987c8362cc42dc98a68a"'
+      - '"8e82f452ff616e2f4ce94a77ee473a34"'
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 96481a92b53bdfbeb59673ad7e760aed
+      - e8fbc1204d8e6139944d6568cc96a3d7
       x-runtime:
-      - '0.025021'
+      - '0.026497'
       date:
-      - Fri, 02 Aug 2013 21:20:34 GMT
+      - Thu, 08 Aug 2013 14:40:30 GMT
       connection:
       - close
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        eyJjcmVhdGVkX2F0IjoiMjAxMy0wOC0wMVQxNDozOToxNy0wMzowMCIsImRl
+        eyJjcmVhdGVkX2F0IjoiMjAxMy0wOC0wNlQxODowNTozOS0wMzowMCIsImRl
         c2NyaXB0aW9uIjoiQXBsaWNhw6fDtWVzIERpcmV0YXMiLCJkb2NrZXQiOiJS
         ZWdpc3RyYSBvIHZhbG9yIGRhcyBhcGxpY2HDp8O1ZXMgZGlyZXRhcyIsImV4
         cGVuc2VfbmF0dXJlIjoiMy4xLjkwLjAwLjAwIiwiaWQiOjMsImtpbmQiOiJi
         b3RoIiwicGFyZW50X2lkIjoyLCJyZWd1bGF0b3J5X2FjdF9pZCI6MiwidXBk
-        YXRlZF9hdCI6IjIwMTMtMDgtMDFUMTQ6Mzk6MTctMDM6MDAiLCJ5ZWFyIjoy
+        YXRlZF9hdCI6IjIwMTMtMDgtMDZUMTg6MDU6MzktMDM6MDAiLCJ5ZWFyIjoy
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Fri, 02 Aug 2013 21:20:34 GMT
+  recorded_at: Thu, 08 Aug 2013 14:40:30 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/1.json
@@ -877,24 +877,24 @@ http_interactions:
       x-ua-compatible:
       - IE=Edge
       etag:
-      - '"596684e690127083a0c7b67b83d6e821"'
+      - '"96175f2142e903582d144b4dcb92b997"'
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 2e51fb52a10cccaec1848a6ba3fe2297
+      - 12d87d3295e1d2f2ae4e04afe7133b45
       x-runtime:
-      - '0.025867'
+      - '0.026258'
       date:
-      - Fri, 02 Aug 2013 21:20:34 GMT
+      - Thu, 08 Aug 2013 14:40:30 GMT
       connection:
       - close
     body:
       encoding: UTF-8
-      string: '{"created_at":"2013-08-01T14:39:17-03:00","description":"Despesas Correntes","docket":"Registra
-        o valor das despesas","expense_nature":"3.0.00.00.00","id":1,"kind":"synthetic","parent_id":null,"regulatory_act_id":1,"updated_at":"2013-08-01T14:39:17-03:00","year":2012,"to_s":"3.0.00.00.00
+      string: '{"created_at":"2013-08-06T18:05:39-03:00","description":"Despesas Correntes","docket":"Registra
+        o valor das despesas","expense_nature":"3.0.00.00.00","id":1,"kind":"synthetic","parent_id":null,"regulatory_act_id":1,"updated_at":"2013-08-06T18:05:39-03:00","year":2012,"to_s":"3.0.00.00.00
         - Despesas Correntes"}'
     http_version: '1.1'
-  recorded_at: Fri, 02 Aug 2013 21:20:34 GMT
+  recorded_at: Thu, 08 Aug 2013 14:40:30 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -920,24 +920,24 @@ http_interactions:
       x-ua-compatible:
       - IE=Edge
       etag:
-      - '"c27632bd8c9e4f1632a4cc0758f9e51a"'
+      - '"cce7d98c49b5cbbcaccaa9de68b20e86"'
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 8c90ec0d63ed485345871cc3c48cef64
+      - bfc3cc36fcebc2f492cf5768e87e2e11
       x-runtime:
-      - '0.023141'
+      - '0.025583'
       date:
-      - Fri, 02 Aug 2013 21:20:34 GMT
+      - Thu, 08 Aug 2013 14:40:30 GMT
       connection:
       - close
     body:
       encoding: UTF-8
-      string: '{"acronym":"SEMUEDU","administration_type_id":1,"budget_structure_configuration_id":1,"budget_structure_level_id":1,"code":"1","created_at":"2013-08-01T14:39:16-03:00","description":"Detran","full_code":"1","id":1,"kind":"analytical","parent_id":null,"performance_field":"Desenvolvimento
-        Educacional","tce_code":"051","updated_at":"2013-08-01T14:39:16-03:00","to_s":"1
+      string: '{"acronym":"SEMUEDU","administration_type_id":1,"budget_structure_configuration_id":1,"budget_structure_level_id":1,"code":"1","created_at":"2013-08-06T18:05:38-03:00","description":"Detran","full_code":"1","id":1,"kind":"analytical","parent_id":null,"performance_field":"Desenvolvimento
+        Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Fri, 02 Aug 2013 21:20:34 GMT
+  recorded_at: Thu, 08 Aug 2013 14:40:30 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -963,24 +963,24 @@ http_interactions:
       x-ua-compatible:
       - IE=Edge
       etag:
-      - '"c27632bd8c9e4f1632a4cc0758f9e51a"'
+      - '"cce7d98c49b5cbbcaccaa9de68b20e86"'
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 90828c0a0f571b1188386d0f28c94dc1
+      - bfaac04070be3f39d52e1f296dd5e3f8
       x-runtime:
-      - '0.023259'
+      - '0.027680'
       date:
-      - Fri, 02 Aug 2013 21:20:35 GMT
+      - Thu, 08 Aug 2013 14:40:30 GMT
       connection:
       - close
     body:
       encoding: UTF-8
-      string: '{"acronym":"SEMUEDU","administration_type_id":1,"budget_structure_configuration_id":1,"budget_structure_level_id":1,"code":"1","created_at":"2013-08-01T14:39:16-03:00","description":"Detran","full_code":"1","id":1,"kind":"analytical","parent_id":null,"performance_field":"Desenvolvimento
-        Educacional","tce_code":"051","updated_at":"2013-08-01T14:39:16-03:00","to_s":"1
+      string: '{"acronym":"SEMUEDU","administration_type_id":1,"budget_structure_configuration_id":1,"budget_structure_level_id":1,"code":"1","created_at":"2013-08-06T18:05:38-03:00","description":"Detran","full_code":"1","id":1,"kind":"analytical","parent_id":null,"performance_field":"Desenvolvimento
+        Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Fri, 02 Aug 2013 21:20:35 GMT
+  recorded_at: Thu, 08 Aug 2013 14:40:30 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations/1.json?includes=expense_nature&methods=balance
@@ -1006,15 +1006,15 @@ http_interactions:
       x-ua-compatible:
       - IE=Edge
       etag:
-      - '"0f6f64ce7cf1c818c910e3bee0a30f11"'
+      - '"3f1305e4fe9fe490291eb31e2f0dba16"'
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - b130f8a7b360c2fa328be6e45feba48f
+      - 0e2ef5a63b5e6b25f561148da1d39fd5
       x-runtime:
-      - '0.036842'
+      - '0.040921'
       date:
-      - Fri, 02 Aug 2013 21:20:35 GMT
+      - Thu, 08 Aug 2013 14:40:30 GMT
       connection:
       - close
     body:
@@ -1022,7 +1022,7 @@ http_interactions:
       string: !binary |-
         eyJhbGllbmF0aW9uX2FwcGVhbCI6ZmFsc2UsImJ1ZGdldF9hbGxvY2F0aW9u
         X3R5cGVfaWQiOjEsImJ1ZGdldF9zdHJ1Y3R1cmVfaWQiOjIsImNvZGUiOjEs
-        ImNyZWF0ZWRfYXQiOiIyMDEzLTA4LTAxVDE0OjM5OjE3LTAzOjAwIiwiZGF0
+        ImNyZWF0ZWRfYXQiOiIyMDEzLTA4LTA2VDE4OjA1OjQwLTAzOjAwIiwiZGF0
         ZSI6IjIwMTItMTAtMDEiLCJkZWJ0X3R5cGUiOiJjb250cmFjdCIsImRlc2Ny
         aXB0b3JfaWQiOjEsImVkdWNhdGlvbiI6ZmFsc2UsImV4cGVuc2VfbmF0dXJl
         X2lkIjozLCJmb3Jlc2lnaHQiOmZhbHNlLCJmdW5jdGlvbl9pZCI6MSwiZ292
@@ -1033,17 +1033,17 @@ http_interactions:
         LCI4IjoiMCwwMCIsIjkiOiIwLDAwIiwiMTAiOiIwLDAwIiwiMTEiOiIwLDAw
         IiwiMTIiOiIwLDAwIn0sInBlcnNvbmFsIjpmYWxzZSwicmVmaW5hbmNpbmci
         OnRydWUsInN1YmZ1bmN0aW9uX2lkIjoxLCJ1cGRhdGVkX2F0IjoiMjAxMy0w
-        OC0wMVQxNDozOToxNy0wMzowMCIsInZhbHVlIjpudWxsLCJ5ZWFyIjoyMDEy
-        LCJiYWxhbmNlIjoiNTAwLjAiLCJ0b19zIjoiMSAtIDMuMS45MC4wMC4wMCAt
+        OC0wNlQxODowNTo0MC0wMzowMCIsInZhbHVlIjpudWxsLCJ5ZWFyIjoyMDEy
+        LCJiYWxhbmNlIjoiLTEwLjUiLCJ0b19zIjoiMSAtIDMuMS45MC4wMC4wMCAt
         IEFwbGljYcOnw7VlcyBEaXJldGFzIiwiZXhwZW5zZV9uYXR1cmUiOnsiY3Jl
-        YXRlZF9hdCI6IjIwMTMtMDgtMDFUMTQ6Mzk6MTctMDM6MDAiLCJkZXNjcmlw
+        YXRlZF9hdCI6IjIwMTMtMDgtMDZUMTg6MDU6MzktMDM6MDAiLCJkZXNjcmlw
         dGlvbiI6IkFwbGljYcOnw7VlcyBEaXJldGFzIiwiZG9ja2V0IjoiUmVnaXN0
         cmEgbyB2YWxvciBkYXMgYXBsaWNhw6fDtWVzIGRpcmV0YXMiLCJleHBlbnNl
         X25hdHVyZSI6IjMuMS45MC4wMC4wMCIsImlkIjozLCJraW5kIjoiYm90aCIs
         InBhcmVudF9pZCI6MiwicmVndWxhdG9yeV9hY3RfaWQiOjIsInVwZGF0ZWRf
-        YXQiOiIyMDEzLTA4LTAxVDE0OjM5OjE3LTAzOjAwIiwieWVhciI6MjAxMn19
+        YXQiOiIyMDEzLTA4LTA2VDE4OjA1OjM5LTAzOjAwIiwieWVhciI6MjAxMn19
     http_version: '1.1'
-  recorded_at: Fri, 02 Aug 2013 21:20:35 GMT
+  recorded_at: Thu, 08 Aug 2013 14:40:30 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -1069,30 +1069,30 @@ http_interactions:
       x-ua-compatible:
       - IE=Edge
       etag:
-      - '"4f4f80f286ea987c8362cc42dc98a68a"'
+      - '"8e82f452ff616e2f4ce94a77ee473a34"'
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 366183309a3a9d52772a02195f407fad
+      - 9601c92c7e15925fbe2262532572c17b
       x-runtime:
-      - '0.023392'
+      - '0.026296'
       date:
-      - Fri, 02 Aug 2013 21:20:35 GMT
+      - Thu, 08 Aug 2013 14:40:30 GMT
       connection:
       - close
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        eyJjcmVhdGVkX2F0IjoiMjAxMy0wOC0wMVQxNDozOToxNy0wMzowMCIsImRl
+        eyJjcmVhdGVkX2F0IjoiMjAxMy0wOC0wNlQxODowNTozOS0wMzowMCIsImRl
         c2NyaXB0aW9uIjoiQXBsaWNhw6fDtWVzIERpcmV0YXMiLCJkb2NrZXQiOiJS
         ZWdpc3RyYSBvIHZhbG9yIGRhcyBhcGxpY2HDp8O1ZXMgZGlyZXRhcyIsImV4
         cGVuc2VfbmF0dXJlIjoiMy4xLjkwLjAwLjAwIiwiaWQiOjMsImtpbmQiOiJi
         b3RoIiwicGFyZW50X2lkIjoyLCJyZWd1bGF0b3J5X2FjdF9pZCI6MiwidXBk
-        YXRlZF9hdCI6IjIwMTMtMDgtMDFUMTQ6Mzk6MTctMDM6MDAiLCJ5ZWFyIjoy
+        YXRlZF9hdCI6IjIwMTMtMDgtMDZUMTg6MDU6MzktMDM6MDAiLCJ5ZWFyIjoy
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Fri, 02 Aug 2013 21:20:35 GMT
+  recorded_at: Thu, 08 Aug 2013 14:40:30 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/1.json
@@ -1118,24 +1118,24 @@ http_interactions:
       x-ua-compatible:
       - IE=Edge
       etag:
-      - '"596684e690127083a0c7b67b83d6e821"'
+      - '"96175f2142e903582d144b4dcb92b997"'
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 24dcb2072a8983481993ac222631ede0
+      - 79ca267f344a6c2c0255e1416297ffbd
       x-runtime:
-      - '0.022844'
+      - '0.025462'
       date:
-      - Fri, 02 Aug 2013 21:20:35 GMT
+      - Thu, 08 Aug 2013 14:40:30 GMT
       connection:
       - close
     body:
       encoding: UTF-8
-      string: '{"created_at":"2013-08-01T14:39:17-03:00","description":"Despesas Correntes","docket":"Registra
-        o valor das despesas","expense_nature":"3.0.00.00.00","id":1,"kind":"synthetic","parent_id":null,"regulatory_act_id":1,"updated_at":"2013-08-01T14:39:17-03:00","year":2012,"to_s":"3.0.00.00.00
+      string: '{"created_at":"2013-08-06T18:05:39-03:00","description":"Despesas Correntes","docket":"Registra
+        o valor das despesas","expense_nature":"3.0.00.00.00","id":1,"kind":"synthetic","parent_id":null,"regulatory_act_id":1,"updated_at":"2013-08-06T18:05:39-03:00","year":2012,"to_s":"3.0.00.00.00
         - Despesas Correntes"}'
     http_version: '1.1'
-  recorded_at: Fri, 02 Aug 2013 21:20:35 GMT
+  recorded_at: Thu, 08 Aug 2013 14:40:30 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -1161,22 +1161,22 @@ http_interactions:
       x-ua-compatible:
       - IE=Edge
       etag:
-      - '"c27632bd8c9e4f1632a4cc0758f9e51a"'
+      - '"cce7d98c49b5cbbcaccaa9de68b20e86"'
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - a5ac5f009d1109379f737393c29e57c9
+      - 7a500a92c8554001c269aa37fd9821dc
       x-runtime:
-      - '0.024884'
+      - '0.028413'
       date:
-      - Fri, 02 Aug 2013 21:20:43 GMT
+      - Thu, 08 Aug 2013 14:40:39 GMT
       connection:
       - close
     body:
       encoding: UTF-8
-      string: '{"acronym":"SEMUEDU","administration_type_id":1,"budget_structure_configuration_id":1,"budget_structure_level_id":1,"code":"1","created_at":"2013-08-01T14:39:16-03:00","description":"Detran","full_code":"1","id":1,"kind":"analytical","parent_id":null,"performance_field":"Desenvolvimento
-        Educacional","tce_code":"051","updated_at":"2013-08-01T14:39:16-03:00","to_s":"1
+      string: '{"acronym":"SEMUEDU","administration_type_id":1,"budget_structure_configuration_id":1,"budget_structure_level_id":1,"code":"1","created_at":"2013-08-06T18:05:38-03:00","description":"Detran","full_code":"1","id":1,"kind":"analytical","parent_id":null,"performance_field":"Desenvolvimento
+        Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Fri, 02 Aug 2013 21:20:43 GMT
+  recorded_at: Thu, 08 Aug 2013 14:40:39 GMT
 recorded_with: VCR 2.5.0

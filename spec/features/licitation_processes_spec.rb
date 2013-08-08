@@ -123,7 +123,7 @@ feature "LicitationProcesses", :vcr do
 
       expect(page).to have_field 'Natureza da despesa', :with => '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares',
         disabled: true
-      expect(page).to have_field 'Saldo da dotação', :with => '500,00', disabled: true
+      expect(page).to have_field 'Saldo da dotação', :with => '100,00', disabled: true
 
       fill_with_autocomplete 'Desdobramento', :with => '3.1'
 
@@ -144,7 +144,7 @@ feature "LicitationProcesses", :vcr do
           expect(page).to have_content '11 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
           expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
           expect(page).to have_content '3.1.90.01.01 - Aposentadorias Custeadas com Recursos do RPPS'
-          expect(page).to have_content '500,00'
+          expect(page).to have_content '100,00'
           expect(page).to have_content '20,00'
         end
       end
@@ -256,7 +256,7 @@ feature "LicitationProcesses", :vcr do
           expect(page).to have_content '11 - 3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
           expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
           expect(page).to have_content '3.1.90.01.01 - Aposentadorias Custeadas com Recursos do RPPS'
-          expect(page).to have_content '500,00'
+          expect(page).to have_content '100,00'
           expect(page).to have_content '20,00'
         end
 
@@ -401,7 +401,7 @@ feature "LicitationProcesses", :vcr do
         :with => '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares',
         disabled: true
 
-      expect(page).to have_field 'Saldo da dotação', :with => '500,00', disabled: true
+      expect(page).to have_field 'Saldo da dotação', :with => '100,00', disabled: true
 
       fill_with_autocomplete 'Desdobramento', :with => '3.1'
 
@@ -489,7 +489,7 @@ feature "LicitationProcesses", :vcr do
           expect(page).to have_content '11 - 3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
           expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
           expect(page).to have_content '3.1.90.01.01 - Aposentadorias Custeadas com Recursos do RPPS'
-          expect(page).to have_content '500,00'
+          expect(page).to have_content '100,00'
           expect(page).to have_content '20,00'
         end
       end

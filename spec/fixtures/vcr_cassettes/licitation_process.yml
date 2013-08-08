@@ -29,11 +29,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 09ceb50e28eb076c88a9e4408cb3a50b
+      - 80640db4a826cfb9bf0ada106e12a4eb
       x-runtime:
-      - '0.029556'
+      - '0.028844'
       date:
-      - Wed, 07 Aug 2013 20:51:26 GMT
+      - Thu, 08 Aug 2013 14:34:25 GMT
       connection:
       - close
     body:
@@ -76,20 +76,20 @@ http_interactions:
       x-ua-compatible:
       - IE=Edge
       etag:
-      - '"03d1443ad98bce70ccfe001f7ede5e6d"'
+      - '"e421879b038cb862990d7853e2820fa5"'
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - de27fdb4d9bdfbfc44883271f260c01d
+      - 6023af65a7960c25f6e57cf44e3b5b42
       x-runtime:
-      - '0.040714'
+      - '0.051978'
       date:
-      - Wed, 07 Aug 2013 20:51:27 GMT
+      - Thu, 08 Aug 2013 14:34:26 GMT
       connection:
       - close
     body:
       encoding: UTF-8
-      string: '[{"alienation_appeal":false,"budget_allocation_type_id":1,"budget_structure_id":2,"code":11,"created_at":"2013-08-07T14:44:23-03:00","date":"2012-10-01","debt_type":"contract","descriptor_id":1,"education":false,"expense_nature_id":6,"foresight":false,"function_id":1,"government_action_id":1,"government_program_id":1,"health":false,"id":3,"kind":"divide","months_values":{"1":"500,00","2":"0,00","3":"0,00","4":"0,00","5":"0,00","6":"0,00","7":"0,00","8":"0,00","9":"0,00","10":"0,00","11":"0,00","12":"0,00"},"personal":false,"refinancing":true,"subfunction_id":1,"updated_at":"2013-08-07T14:44:23-03:00","value":null,"year":2012,"balance":"500.0","to_s":"11
+      string: '[{"alienation_appeal":false,"budget_allocation_type_id":1,"budget_structure_id":2,"code":11,"created_at":"2013-08-07T14:44:23-03:00","date":"2012-10-01","debt_type":"contract","descriptor_id":1,"education":false,"expense_nature_id":6,"foresight":false,"function_id":1,"government_action_id":1,"government_program_id":1,"health":false,"id":3,"kind":"divide","months_values":{"1":"500,00","2":"0,00","3":"0,00","4":"0,00","5":"0,00","6":"0,00","7":"0,00","8":"0,00","9":"0,00","10":"0,00","11":"0,00","12":"0,00"},"personal":false,"refinancing":true,"subfunction_id":1,"updated_at":"2013-08-07T14:44:23-03:00","value":null,"year":2012,"balance":"100.0","to_s":"11
         - 3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos
         Militares","expense_nature":{"created_at":"2013-08-07T14:18:22-03:00","description":"Aposentadorias
         do RPPS, Reserva Remunerada e Reformas dos Militares","docket":"Registra o
@@ -125,11 +125,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - e3af7c21bc0f0a840da5109b219a32be
+      - 8bc0b6d47ebdfa7682f9ca4389a0a942
       x-runtime:
-      - '0.033305'
+      - '0.028692'
       date:
-      - Wed, 07 Aug 2013 20:51:27 GMT
+      - Thu, 08 Aug 2013 14:34:26 GMT
       connection:
       - close
     body:
@@ -169,11 +169,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 57b88098821e2ce49a79513dfd166576
+      - 01ac113ce78c009f02eb3122cd018b85
       x-runtime:
-      - '0.031034'
+      - '0.093984'
       date:
-      - Wed, 07 Aug 2013 20:51:27 GMT
+      - Thu, 08 Aug 2013 14:34:26 GMT
       connection:
       - close
     body:
@@ -183,7 +183,7 @@ http_interactions:
         aposentadorias","expense_nature":"3.1.90.01.01","id":7,"kind":"analytical","parent_id":6,"regulatory_act_id":1,"updated_at":"2013-08-07T14:19:17-03:00","year":2012,"to_s":"3.1.90.01.01
         - Aposentadorias Custeadas com Recursos do RPPS"}]'
     http_version: '1.1'
-  recorded_at: Wed, 10 Oct 2012 03:00:03 GMT
+  recorded_at: Wed, 10 Oct 2012 03:00:02 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations.json?action=index&by_year=2012&controller=budget_allocations&includes=expense_nature&limit=10&methods=balance&term=Aplica%C3%A7%C3%B5es+Diretas
@@ -213,11 +213,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 84b0ab0ae5f07e8a420b19a4661c91a1
+      - 5f08a2eda6cbd16e525bff1c11dfaa6c
       x-runtime:
-      - '0.050275'
+      - '0.048372'
       date:
-      - Wed, 07 Aug 2013 20:51:27 GMT
+      - Thu, 08 Aug 2013 14:34:27 GMT
       connection:
       - close
     body:
@@ -247,7 +247,7 @@ http_interactions:
         X2F0IjoiMjAxMy0wOC0wNlQxODowNTozOS0wMzowMCIsInllYXIiOjIwMTJ9
         fV0=
     http_version: '1.1'
-  recorded_at: Wed, 10 Oct 2012 03:00:03 GMT
+  recorded_at: Wed, 10 Oct 2012 03:00:02 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -277,11 +277,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 59fdb41c1942cb82c9c52ba066f8da5c
+      - 4fa6a9af8401907dc329741c86cacf67
       x-runtime:
-      - '0.033968'
+      - '0.032911'
       date:
-      - Wed, 07 Aug 2013 20:51:27 GMT
+      - Thu, 08 Aug 2013 14:34:27 GMT
       connection:
       - close
     body:
@@ -326,11 +326,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 392db63392c0a6fefd09786a7aefb6a7
+      - 7617da1755801ace6773b2eb13a60acb
       x-runtime:
-      - '0.034765'
+      - '0.037313'
       date:
-      - Wed, 07 Aug 2013 20:51:28 GMT
+      - Thu, 08 Aug 2013 14:34:27 GMT
       connection:
       - close
     body:
@@ -370,11 +370,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - fc9bc463eb59d2c39723dc1717c3574b
+      - 7bb946a28dc0cd3df13b5f9e95e3cd73
       x-runtime:
-      - '0.025017'
+      - '0.025723'
       date:
-      - Wed, 07 Aug 2013 20:51:28 GMT
+      - Thu, 08 Aug 2013 14:34:27 GMT
       connection:
       - close
     body:
@@ -391,7 +391,7 @@ http_interactions:
         VDE4OjA1OjM4LTAzOjAwIiwidG9fcyI6IjkgLSBTZWNyZXRhcmlhIGRlIEVk
         dWNhw6fDo28ifQ==
     http_version: '1.1'
-  recorded_at: Wed, 10 Oct 2012 03:00:04 GMT
+  recorded_at: Wed, 10 Oct 2012 03:00:03 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations/3.json?includes%5B%5D=expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Binclude%5D%5Bbudget_structure%5D%5Bmethods%5D%5B%5D=structure_sequence&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=expense_nature_expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=function_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=subfunction_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_program_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_action_type&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=amount&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bmethods%5D%5B%5D=capability_source_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bonly%5D=id&includes%5B%5D%5Bbudget_structure%5D%5Bexcept%5D=custom_data&methods%5B%5D=balance&methods%5B%5D=amount&methods%5B%5D=budget_structure_structure_sequence
@@ -417,15 +417,15 @@ http_interactions:
       x-ua-compatible:
       - IE=Edge
       etag:
-      - '"dd224bf2c56b7d81750bb710e98d4c83"'
+      - '"46d9e945a59b5f99fd881dfceb6c9276"'
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - c2d9064707e9a908196e483cf5c5d61d
+      - 7d0165be819151b09f9b3241584135ca
       x-runtime:
-      - '0.052896'
+      - '0.062337'
       date:
-      - Wed, 07 Aug 2013 20:51:29 GMT
+      - Thu, 08 Aug 2013 14:34:28 GMT
       connection:
       - close
     body:
@@ -445,7 +445,7 @@ http_interactions:
         MCIsIjEyIjoiMCwwMCJ9LCJwZXJzb25hbCI6ZmFsc2UsInJlZmluYW5jaW5n
         Ijp0cnVlLCJzdWJmdW5jdGlvbl9pZCI6MSwidXBkYXRlZF9hdCI6IjIwMTMt
         MDgtMDdUMTQ6NDQ6MjMtMDM6MDAiLCJ2YWx1ZSI6bnVsbCwieWVhciI6MjAx
-        MiwiYmFsYW5jZSI6IjUwMC4wIiwiYW1vdW50IjoiNTAwLjAiLCJidWRnZXRf
+        MiwiYmFsYW5jZSI6IjEwMC4wIiwiYW1vdW50IjoiNTAwLjAiLCJidWRnZXRf
         c3RydWN0dXJlX3N0cnVjdHVyZV9zZXF1ZW5jZSI6W3siYWNyb255bSI6IlNF
         TVVFRFUiLCJhZG1pbmlzdHJhdGlvbl90eXBlX2lkIjoxLCJidWRnZXRfc3Ry
         dWN0dXJlX2NvbmZpZ3VyYXRpb25faWQiOjIsImJ1ZGdldF9zdHJ1Y3R1cmVf
@@ -511,7 +511,7 @@ http_interactions:
         YXJpYSBkZSBFZHVjYcOnw6NvIn1dfX0sImNhcGFiaWxpdHkiOnsiaWQiOjEs
         ImNhcGFiaWxpdHlfc291cmNlX2NvZGUiOjF9fV19
     http_version: '1.1'
-  recorded_at: Wed, 10 Oct 2012 03:00:04 GMT
+  recorded_at: Wed, 10 Oct 2012 03:00:03 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/6.json
@@ -541,11 +541,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 8863261c9f9e4ca9411da386ab927eff
+      - b2aca5c2cbcd89bd406c5c530c125085
       x-runtime:
-      - '0.024714'
+      - '0.025502'
       date:
-      - Wed, 07 Aug 2013 20:51:29 GMT
+      - Thu, 08 Aug 2013 14:34:28 GMT
       connection:
       - close
     body:
@@ -555,7 +555,7 @@ http_interactions:
         valor das despesas com aposentadorias, reserva e reformas","expense_nature":"3.1.90.01.00","id":6,"kind":"synthetic","parent_id":3,"regulatory_act_id":1,"updated_at":"2013-08-07T14:18:22-03:00","year":2012,"to_s":"3.1.90.01.00
         - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares"}'
     http_version: '1.1'
-  recorded_at: Wed, 10 Oct 2012 03:00:04 GMT
+  recorded_at: Wed, 10 Oct 2012 03:00:03 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/7.json
@@ -585,11 +585,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - ea6ebbbe56fba7c4b501b31df3a773c2
+      - d9d852eec0fac265a979a3281fd769d0
       x-runtime:
-      - '0.025155'
+      - '0.024705'
       date:
-      - Wed, 07 Aug 2013 20:51:29 GMT
+      - Thu, 08 Aug 2013 14:34:28 GMT
       connection:
       - close
     body:
@@ -599,7 +599,7 @@ http_interactions:
         aposentadorias","expense_nature":"3.1.90.01.01","id":7,"kind":"analytical","parent_id":6,"regulatory_act_id":1,"updated_at":"2013-08-07T14:19:17-03:00","year":2012,"to_s":"3.1.90.01.01
         - Aposentadorias Custeadas com Recursos do RPPS"}'
     http_version: '1.1'
-  recorded_at: Wed, 10 Oct 2012 03:00:04 GMT
+  recorded_at: Wed, 10 Oct 2012 03:00:03 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations/1.json?includes%5B%5D=expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Binclude%5D%5Bbudget_structure%5D%5Bmethods%5D%5B%5D=structure_sequence&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=expense_nature_expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=function_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=subfunction_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_program_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_action_type&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=amount&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bmethods%5D%5B%5D=capability_source_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bonly%5D=id&includes%5B%5D%5Bbudget_structure%5D%5Bexcept%5D=custom_data&methods%5B%5D=balance&methods%5B%5D=amount&methods%5B%5D=budget_structure_structure_sequence
@@ -629,11 +629,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - b866292cfd7ffd4c0a6adc5b0cd375db
+      - 4360494c45c61d21a05c7de7d57a158e
       x-runtime:
-      - '0.043993'
+      - '0.046458'
       date:
-      - Wed, 07 Aug 2013 20:51:29 GMT
+      - Thu, 08 Aug 2013 14:34:28 GMT
       connection:
       - close
     body:
@@ -704,11 +704,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - fc5e5cd6fba41ad2d9739ebe5216f182
+      - dcb869b34226b6b464dcb95742afcd2a
       x-runtime:
-      - '0.025889'
+      - '0.025293'
       date:
-      - Wed, 07 Aug 2013 20:51:29 GMT
+      - Thu, 08 Aug 2013 14:34:28 GMT
       connection:
       - close
     body:
@@ -753,11 +753,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 5ffda6ebe211b7cd7252fa20dc8186f8
+      - 1ad20c7b3fbc54945c58c7a84d9594dc
       x-runtime:
-      - '0.025824'
+      - '0.026008'
       date:
-      - Wed, 07 Aug 2013 20:51:29 GMT
+      - Thu, 08 Aug 2013 14:34:28 GMT
       connection:
       - close
     body:
@@ -793,20 +793,20 @@ http_interactions:
       x-ua-compatible:
       - IE=Edge
       etag:
-      - '"03d1443ad98bce70ccfe001f7ede5e6d"'
+      - '"e421879b038cb862990d7853e2820fa5"'
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 79837120157f93e978ca4f3818df952c
+      - 39fe7508ef85dbb219394722c7f4462f
       x-runtime:
-      - '0.048990'
+      - '0.051783'
       date:
-      - Wed, 07 Aug 2013 20:51:33 GMT
+      - Thu, 08 Aug 2013 14:34:33 GMT
       connection:
       - close
     body:
       encoding: UTF-8
-      string: '[{"alienation_appeal":false,"budget_allocation_type_id":1,"budget_structure_id":2,"code":11,"created_at":"2013-08-07T14:44:23-03:00","date":"2012-10-01","debt_type":"contract","descriptor_id":1,"education":false,"expense_nature_id":6,"foresight":false,"function_id":1,"government_action_id":1,"government_program_id":1,"health":false,"id":3,"kind":"divide","months_values":{"1":"500,00","2":"0,00","3":"0,00","4":"0,00","5":"0,00","6":"0,00","7":"0,00","8":"0,00","9":"0,00","10":"0,00","11":"0,00","12":"0,00"},"personal":false,"refinancing":true,"subfunction_id":1,"updated_at":"2013-08-07T14:44:23-03:00","value":null,"year":2012,"balance":"500.0","to_s":"11
+      string: '[{"alienation_appeal":false,"budget_allocation_type_id":1,"budget_structure_id":2,"code":11,"created_at":"2013-08-07T14:44:23-03:00","date":"2012-10-01","debt_type":"contract","descriptor_id":1,"education":false,"expense_nature_id":6,"foresight":false,"function_id":1,"government_action_id":1,"government_program_id":1,"health":false,"id":3,"kind":"divide","months_values":{"1":"500,00","2":"0,00","3":"0,00","4":"0,00","5":"0,00","6":"0,00","7":"0,00","8":"0,00","9":"0,00","10":"0,00","11":"0,00","12":"0,00"},"personal":false,"refinancing":true,"subfunction_id":1,"updated_at":"2013-08-07T14:44:23-03:00","value":null,"year":2012,"balance":"100.0","to_s":"11
         - 3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos
         Militares","expense_nature":{"created_at":"2013-08-07T14:18:22-03:00","description":"Aposentadorias
         do RPPS, Reserva Remunerada e Reformas dos Militares","docket":"Registra o
@@ -842,11 +842,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - fadd6e370a57f01d34a85e43c88a791b
+      - 07a190beb88699cea0f851c221d760f6
       x-runtime:
-      - '0.032481'
+      - '0.031807'
       date:
-      - Wed, 07 Aug 2013 20:51:33 GMT
+      - Thu, 08 Aug 2013 14:34:33 GMT
       connection:
       - close
     body:
@@ -856,7 +856,7 @@ http_interactions:
         valor das despesas com aposentadorias, reserva e reformas","expense_nature":"3.1.90.01.00","id":6,"kind":"synthetic","parent_id":3,"regulatory_act_id":1,"updated_at":"2013-08-07T14:18:22-03:00","year":2012,"to_s":"3.1.90.01.00
         - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares"}'
     http_version: '1.1'
-  recorded_at: Wed, 10 Oct 2012 03:00:09 GMT
+  recorded_at: Wed, 10 Oct 2012 03:00:08 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures.json?action=index&by_parent_id=6&by_year=2012&controller=expense_natures&limit=10&term=3.1
@@ -886,11 +886,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - d00a4c21794b4cbd84c8d3af25314cb3
+      - 36e6c735205e8ba6e316b86d14cf49ba
       x-runtime:
-      - '0.027209'
+      - '0.026793'
       date:
-      - Wed, 07 Aug 2013 20:51:33 GMT
+      - Thu, 08 Aug 2013 14:34:33 GMT
       connection:
       - close
     body:
@@ -930,11 +930,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 5906a04648f5be81dd1e08e7cf802458
+      - a031785b2d4d14fee13323f2874fb86a
       x-runtime:
-      - '0.043383'
+      - '0.050243'
       date:
-      - Wed, 07 Aug 2013 20:51:34 GMT
+      - Thu, 08 Aug 2013 14:34:33 GMT
       connection:
       - close
     body:
@@ -1005,11 +1005,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 7bd236676f1f912dd921c447c99bef49
+      - 3281055d87663a8447ed4ff66fbef20d
       x-runtime:
-      - '0.024938'
+      - '0.025404'
       date:
-      - Wed, 07 Aug 2013 20:51:34 GMT
+      - Thu, 08 Aug 2013 14:34:33 GMT
       connection:
       - close
     body:
@@ -1054,11 +1054,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 0a0ecc01dc0e7fb0a531f3b2a0218a06
+      - 19a8582b7d6c006f74ec56d2fc410290
       x-runtime:
-      - '0.024821'
+      - '0.026820'
       date:
-      - Wed, 07 Aug 2013 20:51:34 GMT
+      - Thu, 08 Aug 2013 14:34:33 GMT
       connection:
       - close
     body:
@@ -1094,15 +1094,15 @@ http_interactions:
       x-ua-compatible:
       - IE=Edge
       etag:
-      - '"dd224bf2c56b7d81750bb710e98d4c83"'
+      - '"46d9e945a59b5f99fd881dfceb6c9276"'
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 3d5dda26a4fcb894edb2d5a9b94ed876
+      - 686c06a7318378ff389efa69193ccc7e
       x-runtime:
-      - '0.059825'
+      - '0.063049'
       date:
-      - Wed, 07 Aug 2013 20:51:34 GMT
+      - Thu, 08 Aug 2013 14:34:33 GMT
       connection:
       - close
     body:
@@ -1122,7 +1122,7 @@ http_interactions:
         MCIsIjEyIjoiMCwwMCJ9LCJwZXJzb25hbCI6ZmFsc2UsInJlZmluYW5jaW5n
         Ijp0cnVlLCJzdWJmdW5jdGlvbl9pZCI6MSwidXBkYXRlZF9hdCI6IjIwMTMt
         MDgtMDdUMTQ6NDQ6MjMtMDM6MDAiLCJ2YWx1ZSI6bnVsbCwieWVhciI6MjAx
-        MiwiYmFsYW5jZSI6IjUwMC4wIiwiYW1vdW50IjoiNTAwLjAiLCJidWRnZXRf
+        MiwiYmFsYW5jZSI6IjEwMC4wIiwiYW1vdW50IjoiNTAwLjAiLCJidWRnZXRf
         c3RydWN0dXJlX3N0cnVjdHVyZV9zZXF1ZW5jZSI6W3siYWNyb255bSI6IlNF
         TVVFRFUiLCJhZG1pbmlzdHJhdGlvbl90eXBlX2lkIjoxLCJidWRnZXRfc3Ry
         dWN0dXJlX2NvbmZpZ3VyYXRpb25faWQiOjIsImJ1ZGdldF9zdHJ1Y3R1cmVf
@@ -1218,11 +1218,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - c8ade148661ffe1fe6b85707ec18de7c
+      - c69f16d45f98e2a294152f670e93d92a
       x-runtime:
-      - '0.025506'
+      - '0.027066'
       date:
-      - Wed, 07 Aug 2013 20:51:34 GMT
+      - Thu, 08 Aug 2013 14:34:33 GMT
       connection:
       - close
     body:
@@ -1262,11 +1262,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 89aac96f7a43663d608075a810ad98cb
+      - 9fce5d1d743ea431287c94fe0d5e0429
       x-runtime:
-      - '0.024961'
+      - '0.026493'
       date:
-      - Wed, 07 Aug 2013 20:51:34 GMT
+      - Thu, 08 Aug 2013 14:34:33 GMT
       connection:
       - close
     body:
@@ -1306,11 +1306,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 95b13bfbf1ab4e8b7a7085ce64d3522e
+      - 031f3a601a10b8d35d8719aa44d48807
       x-runtime:
-      - '0.025080'
+      - '0.026014'
       date:
-      - Wed, 07 Aug 2013 20:51:37 GMT
+      - Thu, 08 Aug 2013 14:34:36 GMT
       connection:
       - close
     body:
@@ -1319,7 +1319,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:51:37 GMT
+  recorded_at: Thu, 08 Aug 2013 14:34:36 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations/1.json?includes%5B%5D=expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Binclude%5D%5Bbudget_structure%5D%5Bmethods%5D%5B%5D=structure_sequence&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=expense_nature_expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=function_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=subfunction_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_program_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_action_type&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=amount&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bmethods%5D%5B%5D=capability_source_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bonly%5D=id&includes%5B%5D%5Bbudget_structure%5D%5Bexcept%5D=custom_data&methods%5B%5D=balance&methods%5B%5D=amount&methods%5B%5D=budget_structure_structure_sequence
@@ -1349,11 +1349,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 0554866128c859c973e6b7467fe402c4
+      - 6c759ea5d73c1df05c7e4cc44ba0a07f
       x-runtime:
-      - '0.044967'
+      - '0.048369'
       date:
-      - Wed, 07 Aug 2013 20:51:37 GMT
+      - Thu, 08 Aug 2013 14:34:36 GMT
       connection:
       - close
     body:
@@ -1394,7 +1394,7 @@ http_interactions:
         MDAiLCJ5ZWFyIjoyMDEyfSwiYnVkZ2V0X2FsbG9jYXRpb25fY2FwYWJpbGl0
         aWVzIjpbXX0=
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:51:37 GMT
+  recorded_at: Thu, 08 Aug 2013 14:34:36 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -1424,11 +1424,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 63be0fa6e92fea4f3dd87ce6694e4547
+      - 3751d27b2d629d667979d2e17ab6b9da
       x-runtime:
-      - '0.025241'
+      - '0.025569'
       date:
-      - Wed, 07 Aug 2013 20:51:37 GMT
+      - Thu, 08 Aug 2013 14:34:37 GMT
       connection:
       - close
     body:
@@ -1443,7 +1443,7 @@ http_interactions:
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:51:37 GMT
+  recorded_at: Thu, 08 Aug 2013 14:34:37 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -1473,11 +1473,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 3daa4e9517460e16da07ee90c830a946
+      - 13be2d009cf86d20d9ec34d47e3502c1
       x-runtime:
-      - '0.025230'
+      - '0.027849'
       date:
-      - Wed, 07 Aug 2013 20:51:38 GMT
+      - Thu, 08 Aug 2013 14:34:37 GMT
       connection:
       - close
     body:
@@ -1486,7 +1486,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:51:38 GMT
+  recorded_at: Thu, 08 Aug 2013 14:34:37 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations/1.json?includes%5B%5D=expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Binclude%5D%5Bbudget_structure%5D%5Bmethods%5D%5B%5D=structure_sequence&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=expense_nature_expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=function_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=subfunction_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_program_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_action_type&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=amount&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bmethods%5D%5B%5D=capability_source_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bonly%5D=id&includes%5B%5D%5Bbudget_structure%5D%5Bexcept%5D=custom_data&methods%5B%5D=balance&methods%5B%5D=amount&methods%5B%5D=budget_structure_structure_sequence
@@ -1516,11 +1516,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - c8e737c98e76cb5632b3aad5a607ec14
+      - fdc29d22946d13d61734a1a23de4d33d
       x-runtime:
-      - '0.045293'
+      - '0.045425'
       date:
-      - Wed, 07 Aug 2013 20:51:38 GMT
+      - Thu, 08 Aug 2013 14:34:38 GMT
       connection:
       - close
     body:
@@ -1561,7 +1561,7 @@ http_interactions:
         MDAiLCJ5ZWFyIjoyMDEyfSwiYnVkZ2V0X2FsbG9jYXRpb25fY2FwYWJpbGl0
         aWVzIjpbXX0=
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:51:38 GMT
+  recorded_at: Thu, 08 Aug 2013 14:34:38 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -1591,11 +1591,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 96fd9c9b6c922472951c4a3d3e528766
+      - e0920a57a7466aa038b9abddc6144ae0
       x-runtime:
-      - '0.025261'
+      - '0.026632'
       date:
-      - Wed, 07 Aug 2013 20:51:38 GMT
+      - Thu, 08 Aug 2013 14:34:38 GMT
       connection:
       - close
     body:
@@ -1610,7 +1610,7 @@ http_interactions:
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:51:38 GMT
+  recorded_at: Thu, 08 Aug 2013 14:34:38 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -1640,11 +1640,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - e65f63320c999b7cb73a88da736956c1
+      - e9633d6235ca78b8b2c85b0b03002d8b
       x-runtime:
-      - '0.027547'
+      - '0.026861'
       date:
-      - Wed, 07 Aug 2013 20:51:42 GMT
+      - Thu, 08 Aug 2013 14:34:41 GMT
       connection:
       - close
     body:
@@ -1653,7 +1653,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:51:42 GMT
+  recorded_at: Thu, 08 Aug 2013 14:34:41 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations/1.json?includes%5B%5D=expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Binclude%5D%5Bbudget_structure%5D%5Bmethods%5D%5B%5D=structure_sequence&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=expense_nature_expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=function_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=subfunction_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_program_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_action_type&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=amount&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bmethods%5D%5B%5D=capability_source_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bonly%5D=id&includes%5B%5D%5Bbudget_structure%5D%5Bexcept%5D=custom_data&methods%5B%5D=balance&methods%5B%5D=amount&methods%5B%5D=budget_structure_structure_sequence
@@ -1683,11 +1683,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - dfe69879266abd9a4e172b8c5cb1c88a
+      - 9027cd28010ddb1b384ccee70985e829
       x-runtime:
-      - '0.086141'
+      - '0.044758'
       date:
-      - Wed, 07 Aug 2013 20:51:42 GMT
+      - Thu, 08 Aug 2013 14:34:41 GMT
       connection:
       - close
     body:
@@ -1728,7 +1728,7 @@ http_interactions:
         MDAiLCJ5ZWFyIjoyMDEyfSwiYnVkZ2V0X2FsbG9jYXRpb25fY2FwYWJpbGl0
         aWVzIjpbXX0=
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:51:42 GMT
+  recorded_at: Thu, 08 Aug 2013 14:34:41 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -1758,11 +1758,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - d9044253666a7d8f9886c9dd9cd86ed5
+      - 7b2b9efe5809ec953340a9bc60b558f4
       x-runtime:
-      - '0.026124'
+      - '0.025307'
       date:
-      - Wed, 07 Aug 2013 20:51:42 GMT
+      - Thu, 08 Aug 2013 14:34:41 GMT
       connection:
       - close
     body:
@@ -1777,7 +1777,7 @@ http_interactions:
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:51:42 GMT
+  recorded_at: Thu, 08 Aug 2013 14:34:41 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -1807,11 +1807,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 7efa09936ea0fbc648da503d235bd726
+      - 55fc41e9e825a51162c9a4ebc8ac7025
       x-runtime:
-      - '0.025018'
+      - '0.026190'
       date:
-      - Wed, 07 Aug 2013 20:51:43 GMT
+      - Thu, 08 Aug 2013 14:34:42 GMT
       connection:
       - close
     body:
@@ -1820,7 +1820,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:51:43 GMT
+  recorded_at: Thu, 08 Aug 2013 14:34:42 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations/1.json?includes%5B%5D=expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Binclude%5D%5Bbudget_structure%5D%5Bmethods%5D%5B%5D=structure_sequence&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=expense_nature_expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=function_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=subfunction_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_program_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_action_type&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=amount&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bmethods%5D%5B%5D=capability_source_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bonly%5D=id&includes%5B%5D%5Bbudget_structure%5D%5Bexcept%5D=custom_data&methods%5B%5D=balance&methods%5B%5D=amount&methods%5B%5D=budget_structure_structure_sequence
@@ -1850,11 +1850,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 92dcba9aead591bae59de7ff70f43cfd
+      - afd76cb08ab8eb2818c77330f768ad5e
       x-runtime:
-      - '0.049443'
+      - '0.045580'
       date:
-      - Wed, 07 Aug 2013 20:51:43 GMT
+      - Thu, 08 Aug 2013 14:34:42 GMT
       connection:
       - close
     body:
@@ -1895,7 +1895,7 @@ http_interactions:
         MDAiLCJ5ZWFyIjoyMDEyfSwiYnVkZ2V0X2FsbG9jYXRpb25fY2FwYWJpbGl0
         aWVzIjpbXX0=
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:51:43 GMT
+  recorded_at: Thu, 08 Aug 2013 14:34:42 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -1925,11 +1925,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - f78a45a8b9e81b0991a49ed77439bebd
+      - ffd0cafdb6d77754a4fd56002d74088d
       x-runtime:
-      - '0.025371'
+      - '0.026754'
       date:
-      - Wed, 07 Aug 2013 20:51:43 GMT
+      - Thu, 08 Aug 2013 14:34:42 GMT
       connection:
       - close
     body:
@@ -1944,7 +1944,7 @@ http_interactions:
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:51:43 GMT
+  recorded_at: Thu, 08 Aug 2013 14:34:42 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations/1.json?includes%5B%5D=expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Binclude%5D%5Bbudget_structure%5D%5Bmethods%5D%5B%5D=structure_sequence&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=expense_nature_expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=function_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=subfunction_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_program_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_action_type&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=amount&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bmethods%5D%5B%5D=capability_source_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bonly%5D=id&includes%5B%5D%5Bbudget_structure%5D%5Bexcept%5D=custom_data&methods%5B%5D=balance&methods%5B%5D=amount&methods%5B%5D=budget_structure_structure_sequence
@@ -1974,11 +1974,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 23911cafa0addde64a01aa591fe2ae6b
+      - 5745e22c84feef2f0ed254cdb7f23aa5
       x-runtime:
-      - '0.042035'
+      - '0.047705'
       date:
-      - Wed, 07 Aug 2013 20:51:44 GMT
+      - Thu, 08 Aug 2013 14:34:43 GMT
       connection:
       - close
     body:
@@ -2019,7 +2019,7 @@ http_interactions:
         MDAiLCJ5ZWFyIjoyMDEyfSwiYnVkZ2V0X2FsbG9jYXRpb25fY2FwYWJpbGl0
         aWVzIjpbXX0=
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:51:44 GMT
+  recorded_at: Thu, 08 Aug 2013 14:34:43 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -2049,11 +2049,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 7bcc44c22828e7606fed65e7c6625ee1
+      - 8fa6ddb0e2ce34ca4b041d8ada6bfea6
       x-runtime:
-      - '0.025422'
+      - '0.026515'
       date:
-      - Wed, 07 Aug 2013 20:51:44 GMT
+      - Thu, 08 Aug 2013 14:34:43 GMT
       connection:
       - close
     body:
@@ -2068,7 +2068,7 @@ http_interactions:
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:51:44 GMT
+  recorded_at: Thu, 08 Aug 2013 14:34:43 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -2098,11 +2098,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 753a4c1c0e606c235dbae6c285e76126
+      - f3f8e8816cfb0616989455cc31fa88f9
       x-runtime:
-      - '0.024639'
+      - '0.092500'
       date:
-      - Wed, 07 Aug 2013 20:51:46 GMT
+      - Thu, 08 Aug 2013 14:34:45 GMT
       connection:
       - close
     body:
@@ -2111,7 +2111,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:51:46 GMT
+  recorded_at: Thu, 08 Aug 2013 14:34:45 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations/1.json?includes%5B%5D=expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Binclude%5D%5Bbudget_structure%5D%5Bmethods%5D%5B%5D=structure_sequence&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=expense_nature_expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=function_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=subfunction_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_program_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_action_type&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=amount&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bmethods%5D%5B%5D=capability_source_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bonly%5D=id&includes%5B%5D%5Bbudget_structure%5D%5Bexcept%5D=custom_data&methods%5B%5D=balance&methods%5B%5D=amount&methods%5B%5D=budget_structure_structure_sequence
@@ -2141,11 +2141,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 441997ddcfa121751e9080b5f2dc9b4f
+      - fe64cbe833a71ea89f0997b8a2f58114
       x-runtime:
-      - '0.042855'
+      - '0.047143'
       date:
-      - Wed, 07 Aug 2013 20:51:46 GMT
+      - Thu, 08 Aug 2013 14:34:45 GMT
       connection:
       - close
     body:
@@ -2186,7 +2186,7 @@ http_interactions:
         MDAiLCJ5ZWFyIjoyMDEyfSwiYnVkZ2V0X2FsbG9jYXRpb25fY2FwYWJpbGl0
         aWVzIjpbXX0=
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:51:46 GMT
+  recorded_at: Thu, 08 Aug 2013 14:34:45 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -2216,11 +2216,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - a21cbb49b4bd98f2f46c849425193475
+      - 6cc579e26b08625f3bed382a2d05f8a3
       x-runtime:
-      - '0.027443'
+      - '0.027252'
       date:
-      - Wed, 07 Aug 2013 20:51:46 GMT
+      - Thu, 08 Aug 2013 14:34:45 GMT
       connection:
       - close
     body:
@@ -2235,7 +2235,7 @@ http_interactions:
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:51:46 GMT
+  recorded_at: Thu, 08 Aug 2013 14:34:45 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -2265,11 +2265,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 604a7c66e559f9d14bb122f96db0a8b6
+      - 55f2fd1c9800247ea63f8bd3f0ae664f
       x-runtime:
-      - '0.030863'
+      - '0.026067'
       date:
-      - Wed, 07 Aug 2013 20:51:47 GMT
+      - Thu, 08 Aug 2013 14:34:46 GMT
       connection:
       - close
     body:
@@ -2278,7 +2278,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:51:47 GMT
+  recorded_at: Thu, 08 Aug 2013 14:34:46 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations/1.json?includes%5B%5D=expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Binclude%5D%5Bbudget_structure%5D%5Bmethods%5D%5B%5D=structure_sequence&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=expense_nature_expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=function_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=subfunction_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_program_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_action_type&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=amount&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bmethods%5D%5B%5D=capability_source_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bonly%5D=id&includes%5B%5D%5Bbudget_structure%5D%5Bexcept%5D=custom_data&methods%5B%5D=balance&methods%5B%5D=amount&methods%5B%5D=budget_structure_structure_sequence
@@ -2308,11 +2308,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 34d1d562a6972929d38810bf147f6bf9
+      - 950e937bd824cd59d9cd05c5fa1cd204
       x-runtime:
-      - '0.053823'
+      - '0.048431'
       date:
-      - Wed, 07 Aug 2013 20:51:48 GMT
+      - Thu, 08 Aug 2013 14:34:46 GMT
       connection:
       - close
     body:
@@ -2353,7 +2353,7 @@ http_interactions:
         MDAiLCJ5ZWFyIjoyMDEyfSwiYnVkZ2V0X2FsbG9jYXRpb25fY2FwYWJpbGl0
         aWVzIjpbXX0=
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:51:48 GMT
+  recorded_at: Thu, 08 Aug 2013 14:34:46 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -2383,11 +2383,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 653af564297ed80029c687406f98af2f
+      - 3e789bfa18de0684efd590f1c58dc46e
       x-runtime:
-      - '0.029949'
+      - '0.027309'
       date:
-      - Wed, 07 Aug 2013 20:51:48 GMT
+      - Thu, 08 Aug 2013 14:34:46 GMT
       connection:
       - close
     body:
@@ -2402,7 +2402,7 @@ http_interactions:
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:51:48 GMT
+  recorded_at: Thu, 08 Aug 2013 14:34:46 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -2432,11 +2432,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - a31c6e418b02a5539d5266ea82d4a168
+      - 2aec4386746c89ff2894d4a75a1321eb
       x-runtime:
-      - '0.036051'
+      - '0.026507'
       date:
-      - Wed, 07 Aug 2013 20:51:59 GMT
+      - Thu, 08 Aug 2013 14:34:57 GMT
       connection:
       - close
     body:
@@ -2445,7 +2445,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:51:59 GMT
+  recorded_at: Thu, 08 Aug 2013 14:34:57 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations/1.json?includes%5B%5D=expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Binclude%5D%5Bbudget_structure%5D%5Bmethods%5D%5B%5D=structure_sequence&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=expense_nature_expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=function_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=subfunction_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_program_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_action_type&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=amount&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bmethods%5D%5B%5D=capability_source_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bonly%5D=id&includes%5B%5D%5Bbudget_structure%5D%5Bexcept%5D=custom_data&methods%5B%5D=balance&methods%5B%5D=amount&methods%5B%5D=budget_structure_structure_sequence
@@ -2475,11 +2475,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - a2ad3a3b9f59ac7d4e987848fe4fac92
+      - b40b5ad4d4335b63c781be8fa3a118ac
       x-runtime:
-      - '0.043009'
+      - '0.046353'
       date:
-      - Wed, 07 Aug 2013 20:51:59 GMT
+      - Thu, 08 Aug 2013 14:34:57 GMT
       connection:
       - close
     body:
@@ -2520,7 +2520,7 @@ http_interactions:
         MDAiLCJ5ZWFyIjoyMDEyfSwiYnVkZ2V0X2FsbG9jYXRpb25fY2FwYWJpbGl0
         aWVzIjpbXX0=
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:51:59 GMT
+  recorded_at: Thu, 08 Aug 2013 14:34:57 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -2550,11 +2550,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 2c28cfc05efeafc377c2d329205234c7
+      - 53f6f606d27e3e014fd21a154bfa495b
       x-runtime:
-      - '0.025759'
+      - '0.025314'
       date:
-      - Wed, 07 Aug 2013 20:51:59 GMT
+      - Thu, 08 Aug 2013 14:34:57 GMT
       connection:
       - close
     body:
@@ -2569,7 +2569,7 @@ http_interactions:
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:51:59 GMT
+  recorded_at: Thu, 08 Aug 2013 14:34:57 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -2599,11 +2599,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 0f21499e17aa1e7528defbcb19a38122
+      - 323b90f7bbedef4b6ba5f144bfcebc3b
       x-runtime:
-      - '0.027200'
+      - '0.026211'
       date:
-      - Wed, 07 Aug 2013 20:52:04 GMT
+      - Thu, 08 Aug 2013 14:35:02 GMT
       connection:
       - close
     body:
@@ -2612,7 +2612,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:04 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:02 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations/1.json?includes%5B%5D=expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Binclude%5D%5Bbudget_structure%5D%5Bmethods%5D%5B%5D=structure_sequence&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=expense_nature_expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=function_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=subfunction_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_program_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_action_type&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=amount&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bmethods%5D%5B%5D=capability_source_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bonly%5D=id&includes%5B%5D%5Bbudget_structure%5D%5Bexcept%5D=custom_data&methods%5B%5D=balance&methods%5B%5D=amount&methods%5B%5D=budget_structure_structure_sequence
@@ -2642,11 +2642,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - c05eed778a5ff8c6e9681e31666e2c6f
+      - 732d29ac075622bcd3b33f28935fbe4f
       x-runtime:
-      - '0.045370'
+      - '0.046464'
       date:
-      - Wed, 07 Aug 2013 20:52:04 GMT
+      - Thu, 08 Aug 2013 14:35:03 GMT
       connection:
       - close
     body:
@@ -2687,7 +2687,7 @@ http_interactions:
         MDAiLCJ5ZWFyIjoyMDEyfSwiYnVkZ2V0X2FsbG9jYXRpb25fY2FwYWJpbGl0
         aWVzIjpbXX0=
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:04 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:03 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -2717,11 +2717,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 5cc141116c4f73da3f5258625a410821
+      - 0bfe933bacffa25a141706236edc444a
       x-runtime:
-      - '0.027747'
+      - '0.025369'
       date:
-      - Wed, 07 Aug 2013 20:52:04 GMT
+      - Thu, 08 Aug 2013 14:35:03 GMT
       connection:
       - close
     body:
@@ -2736,7 +2736,7 @@ http_interactions:
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:04 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:03 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -2766,11 +2766,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 69fa065990a01ba35e4e8cf3d00497d2
+      - 4bb2660c622de87c41f4ab30a68e1838
       x-runtime:
-      - '0.028232'
+      - '0.025865'
       date:
-      - Wed, 07 Aug 2013 20:52:07 GMT
+      - Thu, 08 Aug 2013 14:35:06 GMT
       connection:
       - close
     body:
@@ -2779,7 +2779,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:07 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:06 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations/1.json?includes%5B%5D=expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Binclude%5D%5Bbudget_structure%5D%5Bmethods%5D%5B%5D=structure_sequence&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=expense_nature_expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=function_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=subfunction_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_program_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_action_type&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=amount&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bmethods%5D%5B%5D=capability_source_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bonly%5D=id&includes%5B%5D%5Bbudget_structure%5D%5Bexcept%5D=custom_data&methods%5B%5D=balance&methods%5B%5D=amount&methods%5B%5D=budget_structure_structure_sequence
@@ -2809,11 +2809,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 82569e1fbda929eee5fa0a3cc7dc67b6
+      - a9b3ac5f2f535d1abac864f4611106e9
       x-runtime:
-      - '0.058919'
+      - '0.044325'
       date:
-      - Wed, 07 Aug 2013 20:52:08 GMT
+      - Thu, 08 Aug 2013 14:35:06 GMT
       connection:
       - close
     body:
@@ -2854,7 +2854,7 @@ http_interactions:
         MDAiLCJ5ZWFyIjoyMDEyfSwiYnVkZ2V0X2FsbG9jYXRpb25fY2FwYWJpbGl0
         aWVzIjpbXX0=
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:08 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:06 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -2884,11 +2884,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - bcfae8838e38531260cfeebc9438dd03
+      - a45bd687bc28b24bf7a31fd0b2186338
       x-runtime:
-      - '0.031986'
+      - '0.027693'
       date:
-      - Wed, 07 Aug 2013 20:52:08 GMT
+      - Thu, 08 Aug 2013 14:35:06 GMT
       connection:
       - close
     body:
@@ -2903,7 +2903,7 @@ http_interactions:
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:08 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:06 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -2933,11 +2933,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - aa7a4e69573a0a3ccdd562f3e2aa51d4
+      - e63cdab4d3e52b65ed24ed88fac91bd0
       x-runtime:
-      - '0.025685'
+      - '0.025529'
       date:
-      - Wed, 07 Aug 2013 20:52:10 GMT
+      - Thu, 08 Aug 2013 14:35:08 GMT
       connection:
       - close
     body:
@@ -2946,7 +2946,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:10 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:08 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations/1.json?includes%5B%5D=expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Binclude%5D%5Bbudget_structure%5D%5Bmethods%5D%5B%5D=structure_sequence&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=expense_nature_expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=function_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=subfunction_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_program_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_action_type&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=amount&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bmethods%5D%5B%5D=capability_source_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bonly%5D=id&includes%5B%5D%5Bbudget_structure%5D%5Bexcept%5D=custom_data&methods%5B%5D=balance&methods%5B%5D=amount&methods%5B%5D=budget_structure_structure_sequence
@@ -2976,11 +2976,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - af77902402c895a26027bd8ddb4a7e85
+      - ba91bfdc60e3cb704e9d72d950dee37f
       x-runtime:
-      - '0.046868'
+      - '0.050677'
       date:
-      - Wed, 07 Aug 2013 20:52:10 GMT
+      - Thu, 08 Aug 2013 14:35:08 GMT
       connection:
       - close
     body:
@@ -3021,7 +3021,7 @@ http_interactions:
         MDAiLCJ5ZWFyIjoyMDEyfSwiYnVkZ2V0X2FsbG9jYXRpb25fY2FwYWJpbGl0
         aWVzIjpbXX0=
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:10 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:08 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -3051,11 +3051,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 754707407e9779a94c20459ed7b7bef5
+      - ea6d966acb6825e64d7fc0868d7efc01
       x-runtime:
-      - '0.024815'
+      - '0.026917'
       date:
-      - Wed, 07 Aug 2013 20:52:10 GMT
+      - Thu, 08 Aug 2013 14:35:08 GMT
       connection:
       - close
     body:
@@ -3070,7 +3070,7 @@ http_interactions:
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:10 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:08 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations.json?action=index&controller=budget_allocations&includes=expense_nature&limit=10&methods=balance&term=Aplica%C3%A7%C3%B5es+Diretas
@@ -3100,11 +3100,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 8fb0f548fa905d469088670bf01d1bb9
+      - 2599ff7111a48a55f5cbab362d8125c5
       x-runtime:
-      - '0.043362'
+      - '0.042410'
       date:
-      - Wed, 07 Aug 2013 20:52:10 GMT
+      - Thu, 08 Aug 2013 14:35:08 GMT
       connection:
       - close
     body:
@@ -3134,7 +3134,7 @@ http_interactions:
         X2F0IjoiMjAxMy0wOC0wNlQxODowNTozOS0wMzowMCIsInllYXIiOjIwMTJ9
         fV0=
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:10 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:08 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -3164,11 +3164,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 7c0b8598d4b36c50d84b5fe4be81ae50
+      - 6cc404d823add7d506038801ca618f9b
       x-runtime:
-      - '0.030719'
+      - '0.029349'
       date:
-      - Wed, 07 Aug 2013 20:52:10 GMT
+      - Thu, 08 Aug 2013 14:35:08 GMT
       connection:
       - close
     body:
@@ -3183,7 +3183,7 @@ http_interactions:
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:10 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:08 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -3213,11 +3213,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 914bab5d1893e605d013ceafc5955205
+      - b156b677cfd3e3fc3a0447888b05b00a
       x-runtime:
-      - '0.025483'
+      - '0.025192'
       date:
-      - Wed, 07 Aug 2013 20:52:11 GMT
+      - Thu, 08 Aug 2013 14:35:09 GMT
       connection:
       - close
     body:
@@ -3226,7 +3226,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:11 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:09 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations/1.json?includes%5B%5D=expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Binclude%5D%5Bbudget_structure%5D%5Bmethods%5D%5B%5D=structure_sequence&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=expense_nature_expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=function_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=subfunction_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_program_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_action_type&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=amount&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bmethods%5D%5B%5D=capability_source_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bonly%5D=id&includes%5B%5D%5Bbudget_structure%5D%5Bexcept%5D=custom_data&methods%5B%5D=balance&methods%5B%5D=amount&methods%5B%5D=budget_structure_structure_sequence
@@ -3256,11 +3256,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 1aa3cb7248406d825763ca6f4660fd20
+      - f2b49eb0dd12013fd37e6dd479b82108
       x-runtime:
-      - '0.045001'
+      - '0.045750'
       date:
-      - Wed, 07 Aug 2013 20:52:11 GMT
+      - Thu, 08 Aug 2013 14:35:09 GMT
       connection:
       - close
     body:
@@ -3301,7 +3301,7 @@ http_interactions:
         MDAiLCJ5ZWFyIjoyMDEyfSwiYnVkZ2V0X2FsbG9jYXRpb25fY2FwYWJpbGl0
         aWVzIjpbXX0=
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:11 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:09 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -3331,11 +3331,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 5d53204915a7aaa9913ba9bc34e5b4d0
+      - 74cec3c90d32a5a5a0e18a097ecb4b07
       x-runtime:
-      - '0.026263'
+      - '0.025491'
       date:
-      - Wed, 07 Aug 2013 20:52:11 GMT
+      - Thu, 08 Aug 2013 14:35:09 GMT
       connection:
       - close
     body:
@@ -3350,7 +3350,7 @@ http_interactions:
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:11 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:09 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations/1.json?includes%5B%5D=expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Binclude%5D%5Bbudget_structure%5D%5Bmethods%5D%5B%5D=structure_sequence&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=expense_nature_expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=function_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=subfunction_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_program_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_action_type&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=amount&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bmethods%5D%5B%5D=capability_source_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bonly%5D=id&includes%5B%5D%5Bbudget_structure%5D%5Bexcept%5D=custom_data&methods%5B%5D=balance&methods%5B%5D=amount&methods%5B%5D=budget_structure_structure_sequence
@@ -3380,11 +3380,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 66cd1a00fa14df91debeb555c4666e06
+      - d95c6757ba87344b798bf04769a0d582
       x-runtime:
-      - '0.044622'
+      - '0.044948'
       date:
-      - Wed, 07 Aug 2013 20:52:11 GMT
+      - Thu, 08 Aug 2013 14:35:09 GMT
       connection:
       - close
     body:
@@ -3425,7 +3425,7 @@ http_interactions:
         MDAiLCJ5ZWFyIjoyMDEyfSwiYnVkZ2V0X2FsbG9jYXRpb25fY2FwYWJpbGl0
         aWVzIjpbXX0=
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:11 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:09 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -3455,11 +3455,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - f0a793659ada51004d7b79eb4a5554fc
+      - bdf17683896b8426a00e6e70e5f9d620
       x-runtime:
-      - '0.024476'
+      - '0.027449'
       date:
-      - Wed, 07 Aug 2013 20:52:11 GMT
+      - Thu, 08 Aug 2013 14:35:09 GMT
       connection:
       - close
     body:
@@ -3474,7 +3474,7 @@ http_interactions:
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:11 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:09 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -3504,11 +3504,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 035cc7181d9bb3c1e929a299f45c0924
+      - 0145ca913db33fce8bd7dc7a9dbecd5e
       x-runtime:
-      - '0.027074'
+      - '0.025677'
       date:
-      - Wed, 07 Aug 2013 20:52:13 GMT
+      - Thu, 08 Aug 2013 14:35:11 GMT
       connection:
       - close
     body:
@@ -3517,7 +3517,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:13 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:11 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations/1.json?includes%5B%5D=expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Binclude%5D%5Bbudget_structure%5D%5Bmethods%5D%5B%5D=structure_sequence&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=expense_nature_expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=function_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=subfunction_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_program_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_action_type&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=amount&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bmethods%5D%5B%5D=capability_source_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bonly%5D=id&includes%5B%5D%5Bbudget_structure%5D%5Bexcept%5D=custom_data&methods%5B%5D=balance&methods%5B%5D=amount&methods%5B%5D=budget_structure_structure_sequence
@@ -3547,11 +3547,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 7ea6e0b40a180bd8d66d9237a3933811
+      - 7be70506d5cf952b6902f813f2dc9462
       x-runtime:
-      - '0.047863'
+      - '0.048297'
       date:
-      - Wed, 07 Aug 2013 20:52:13 GMT
+      - Thu, 08 Aug 2013 14:35:11 GMT
       connection:
       - close
     body:
@@ -3592,7 +3592,7 @@ http_interactions:
         MDAiLCJ5ZWFyIjoyMDEyfSwiYnVkZ2V0X2FsbG9jYXRpb25fY2FwYWJpbGl0
         aWVzIjpbXX0=
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:13 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:11 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -3622,11 +3622,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 07cb06bf2dd4a2269857f72cd7eeecf4
+      - d34f7f3f49a4ff9b3591ae5607d1dc7e
       x-runtime:
-      - '0.025256'
+      - '0.027623'
       date:
-      - Wed, 07 Aug 2013 20:52:13 GMT
+      - Thu, 08 Aug 2013 14:35:11 GMT
       connection:
       - close
     body:
@@ -3641,7 +3641,7 @@ http_interactions:
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:13 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:11 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -3671,11 +3671,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - ee6a77726e58ca0dde8faf11fadf5e98
+      - 06e909abc56627cae55064a92adb2dfe
       x-runtime:
-      - '0.024838'
+      - '0.028646'
       date:
-      - Wed, 07 Aug 2013 20:52:19 GMT
+      - Thu, 08 Aug 2013 14:35:16 GMT
       connection:
       - close
     body:
@@ -3684,7 +3684,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:19 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:16 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -3714,11 +3714,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - cd698929fd969a02076c0bae46da7f87
+      - 968da63ca7a917daddd407e826fd6bb7
       x-runtime:
-      - '0.032869'
+      - '0.028851'
       date:
-      - Wed, 07 Aug 2013 20:52:20 GMT
+      - Thu, 08 Aug 2013 14:35:18 GMT
       connection:
       - close
     body:
@@ -3727,7 +3727,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:20 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:18 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations/1.json?includes=expense_nature&methods=balance
@@ -3757,11 +3757,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 9f27e6bb3da2146e03298e5cf75181a4
+      - d8cbc3f27b334bbe7ef549d7df077707
       x-runtime:
-      - '0.046357'
+      - '0.048619'
       date:
-      - Wed, 07 Aug 2013 20:52:20 GMT
+      - Thu, 08 Aug 2013 14:35:18 GMT
       connection:
       - close
     body:
@@ -3790,7 +3790,7 @@ http_interactions:
         InBhcmVudF9pZCI6MiwicmVndWxhdG9yeV9hY3RfaWQiOjIsInVwZGF0ZWRf
         YXQiOiIyMDEzLTA4LTA2VDE4OjA1OjM5LTAzOjAwIiwieWVhciI6MjAxMn19
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:20 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:18 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -3820,11 +3820,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - d800e41f03d2d848c5b5db20342a18db
+      - e75b15d98ff32f2f8a9ad34e95435104
       x-runtime:
-      - '0.025462'
+      - '0.032436'
       date:
-      - Wed, 07 Aug 2013 20:52:20 GMT
+      - Thu, 08 Aug 2013 14:35:18 GMT
       connection:
       - close
     body:
@@ -3839,7 +3839,7 @@ http_interactions:
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:20 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:18 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/1.json
@@ -3869,11 +3869,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 21e712f373b80a2ac648697db8bacda1
+      - c7c97f1ea88cbb12c01369427eeb22b1
       x-runtime:
-      - '0.067965'
+      - '0.027774'
       date:
-      - Wed, 07 Aug 2013 20:52:20 GMT
+      - Thu, 08 Aug 2013 14:35:18 GMT
       connection:
       - close
     body:
@@ -3882,7 +3882,7 @@ http_interactions:
         o valor das despesas","expense_nature":"3.0.00.00.00","id":1,"kind":"synthetic","parent_id":null,"regulatory_act_id":1,"updated_at":"2013-08-06T18:05:39-03:00","year":2012,"to_s":"3.0.00.00.00
         - Despesas Correntes"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:20 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:18 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -3912,11 +3912,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 3e2dea97cf0380c4a496ac5f2af8fbdf
+      - c95ab8d4de77dfa0ffe5a8d5cf757843
       x-runtime:
-      - '0.024867'
+      - '0.029157'
       date:
-      - Wed, 07 Aug 2013 20:52:21 GMT
+      - Thu, 08 Aug 2013 14:35:19 GMT
       connection:
       - close
     body:
@@ -3925,7 +3925,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:21 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:19 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations/1.json?includes%5B%5D=expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Binclude%5D%5Bbudget_structure%5D%5Bmethods%5D%5B%5D=structure_sequence&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=expense_nature_expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=function_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=subfunction_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_program_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_action_type&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=amount&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bmethods%5D%5B%5D=capability_source_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bonly%5D=id&includes%5B%5D%5Bbudget_structure%5D%5Bexcept%5D=custom_data&methods%5B%5D=balance&methods%5B%5D=amount&methods%5B%5D=budget_structure_structure_sequence
@@ -3955,11 +3955,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 91fb005703896b6b9e91c8aefdec9208
+      - 688bf494a52c4b3124622a29a289e329
       x-runtime:
-      - '0.044894'
+      - '0.129756'
       date:
-      - Wed, 07 Aug 2013 20:52:21 GMT
+      - Thu, 08 Aug 2013 14:35:19 GMT
       connection:
       - close
     body:
@@ -4000,7 +4000,7 @@ http_interactions:
         MDAiLCJ5ZWFyIjoyMDEyfSwiYnVkZ2V0X2FsbG9jYXRpb25fY2FwYWJpbGl0
         aWVzIjpbXX0=
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:21 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:19 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -4030,11 +4030,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - f31146a031efceeec96272d3419da0d6
+      - b45e204c4ba305e6555ba060bec960f9
       x-runtime:
-      - '0.025112'
+      - '0.032938'
       date:
-      - Wed, 07 Aug 2013 20:52:21 GMT
+      - Thu, 08 Aug 2013 14:35:19 GMT
       connection:
       - close
     body:
@@ -4049,7 +4049,7 @@ http_interactions:
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:21 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:19 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/1.json
@@ -4079,11 +4079,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 99b745f9dcefc80a1cda24a1a6b59171
+      - cc0b32dfc409a4dc0c732138b16f00be
       x-runtime:
-      - '0.025713'
+      - '0.033275'
       date:
-      - Wed, 07 Aug 2013 20:52:21 GMT
+      - Thu, 08 Aug 2013 14:35:19 GMT
       connection:
       - close
     body:
@@ -4092,7 +4092,7 @@ http_interactions:
         o valor das despesas","expense_nature":"3.0.00.00.00","id":1,"kind":"synthetic","parent_id":null,"regulatory_act_id":1,"updated_at":"2013-08-06T18:05:39-03:00","year":2012,"to_s":"3.0.00.00.00
         - Despesas Correntes"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:21 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:19 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -4122,11 +4122,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - ca4f2fbf0caa69adb14bb6cf175a761d
+      - 612b1d7fbc72e2a5644563e8bf0a7922
       x-runtime:
-      - '0.024658'
+      - '0.035235'
       date:
-      - Wed, 07 Aug 2013 20:52:22 GMT
+      - Thu, 08 Aug 2013 14:35:20 GMT
       connection:
       - close
     body:
@@ -4135,7 +4135,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:22 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:20 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -4165,11 +4165,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - d0317b45a14f785aa31979b000b38c3f
+      - 851d563374da14645b8b98a27a650670
       x-runtime:
-      - '0.025572'
+      - '0.027370'
       date:
-      - Wed, 07 Aug 2013 20:52:22 GMT
+      - Thu, 08 Aug 2013 14:35:20 GMT
       connection:
       - close
     body:
@@ -4178,7 +4178,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:22 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:20 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -4208,11 +4208,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 12a72e9de47eb9c80d2940aa7f304b2f
+      - e4504522abd99e3bbbc28c0bbcd65785
       x-runtime:
-      - '0.029907'
+      - '0.027415'
       date:
-      - Wed, 07 Aug 2013 20:52:22 GMT
+      - Thu, 08 Aug 2013 14:35:20 GMT
       connection:
       - close
     body:
@@ -4221,7 +4221,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:22 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:20 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations/1.json?includes=expense_nature&methods=balance
@@ -4251,11 +4251,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 6ec0f8803e70ee8608fb754e78af9f0f
+      - ebd33ec12376db36996f61bd235673d7
       x-runtime:
-      - '0.049035'
+      - '0.043597'
       date:
-      - Wed, 07 Aug 2013 20:52:23 GMT
+      - Thu, 08 Aug 2013 14:35:21 GMT
       connection:
       - close
     body:
@@ -4284,7 +4284,7 @@ http_interactions:
         InBhcmVudF9pZCI6MiwicmVndWxhdG9yeV9hY3RfaWQiOjIsInVwZGF0ZWRf
         YXQiOiIyMDEzLTA4LTA2VDE4OjA1OjM5LTAzOjAwIiwieWVhciI6MjAxMn19
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:23 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:21 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -4314,11 +4314,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - a0edb9072dde4b149815b75a92d2cbf0
+      - 04ac6d228091271d2f07947736798e2c
       x-runtime:
-      - '0.030771'
+      - '0.026158'
       date:
-      - Wed, 07 Aug 2013 20:52:23 GMT
+      - Thu, 08 Aug 2013 14:35:21 GMT
       connection:
       - close
     body:
@@ -4333,7 +4333,7 @@ http_interactions:
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:23 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:21 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/1.json
@@ -4363,11 +4363,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 7c9d61774292db9947de2d5d74318283
+      - 7538691dc50845143ffdc037f3b6affa
       x-runtime:
-      - '0.030342'
+      - '0.026577'
       date:
-      - Wed, 07 Aug 2013 20:52:23 GMT
+      - Thu, 08 Aug 2013 14:35:21 GMT
       connection:
       - close
     body:
@@ -4376,7 +4376,7 @@ http_interactions:
         o valor das despesas","expense_nature":"3.0.00.00.00","id":1,"kind":"synthetic","parent_id":null,"regulatory_act_id":1,"updated_at":"2013-08-06T18:05:39-03:00","year":2012,"to_s":"3.0.00.00.00
         - Despesas Correntes"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:23 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:21 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -4406,11 +4406,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 206edf679566fadbe1e3910d4d6b9ad0
+      - df674858a33450d275424638b4004e37
       x-runtime:
-      - '0.030619'
+      - '0.027421'
       date:
-      - Wed, 07 Aug 2013 20:52:33 GMT
+      - Thu, 08 Aug 2013 14:35:30 GMT
       connection:
       - close
     body:
@@ -4419,7 +4419,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:33 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:30 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -4449,11 +4449,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 27ab8fb54ecc9e9221256e25826e78e1
+      - b06e23c62547f7ffb576c70853497811
       x-runtime:
-      - '0.025899'
+      - '0.027180'
       date:
-      - Wed, 07 Aug 2013 20:52:35 GMT
+      - Thu, 08 Aug 2013 14:35:32 GMT
       connection:
       - close
     body:
@@ -4462,7 +4462,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:35 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:32 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations/1.json?includes=expense_nature&methods=balance
@@ -4492,11 +4492,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 4ad8c4d0c26e00e60720c9ba5446b06c
+      - 78cbab1390d10be999add48ae13e1663
       x-runtime:
-      - '0.045700'
+      - '0.047228'
       date:
-      - Wed, 07 Aug 2013 20:52:35 GMT
+      - Thu, 08 Aug 2013 14:35:32 GMT
       connection:
       - close
     body:
@@ -4525,7 +4525,7 @@ http_interactions:
         InBhcmVudF9pZCI6MiwicmVndWxhdG9yeV9hY3RfaWQiOjIsInVwZGF0ZWRf
         YXQiOiIyMDEzLTA4LTA2VDE4OjA1OjM5LTAzOjAwIiwieWVhciI6MjAxMn19
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:35 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:32 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -4555,11 +4555,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - d4a5f6441ab78b7c68043374f31f9d8b
+      - df5ec68157e29d19e693887bac8780e9
       x-runtime:
-      - '0.027396'
+      - '0.031245'
       date:
-      - Wed, 07 Aug 2013 20:52:35 GMT
+      - Thu, 08 Aug 2013 14:35:32 GMT
       connection:
       - close
     body:
@@ -4574,7 +4574,7 @@ http_interactions:
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:35 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:32 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/1.json
@@ -4604,11 +4604,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 172a50e5606fd5d7d4b05ec38ea079ff
+      - 8888455f7cce0cf222183ea513ca018e
       x-runtime:
-      - '0.025234'
+      - '0.025843'
       date:
-      - Wed, 07 Aug 2013 20:52:35 GMT
+      - Thu, 08 Aug 2013 14:35:32 GMT
       connection:
       - close
     body:
@@ -4617,7 +4617,7 @@ http_interactions:
         o valor das despesas","expense_nature":"3.0.00.00.00","id":1,"kind":"synthetic","parent_id":null,"regulatory_act_id":1,"updated_at":"2013-08-06T18:05:39-03:00","year":2012,"to_s":"3.0.00.00.00
         - Despesas Correntes"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:35 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:32 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -4647,11 +4647,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 188d832f8e21b4695956da4eababc783
+      - 0b91e1007785fac3c1128e8d983d9c4a
       x-runtime:
-      - '0.026036'
+      - '0.026056'
       date:
-      - Wed, 07 Aug 2013 20:52:35 GMT
+      - Thu, 08 Aug 2013 14:35:32 GMT
       connection:
       - close
     body:
@@ -4660,7 +4660,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:35 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:32 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations/1.json?includes%5B%5D=expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Binclude%5D%5Bbudget_structure%5D%5Bmethods%5D%5B%5D=structure_sequence&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=expense_nature_expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=function_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=subfunction_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_program_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_action_type&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=amount&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bmethods%5D%5B%5D=capability_source_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bonly%5D=id&includes%5B%5D%5Bbudget_structure%5D%5Bexcept%5D=custom_data&methods%5B%5D=balance&methods%5B%5D=amount&methods%5B%5D=budget_structure_structure_sequence
@@ -4690,11 +4690,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - dfbbe1616b1667dbc669ee203c6d1db0
+      - 458f16ef37d89a3021a847b8923393b0
       x-runtime:
-      - '0.042178'
+      - '0.046134'
       date:
-      - Wed, 07 Aug 2013 20:52:36 GMT
+      - Thu, 08 Aug 2013 14:35:33 GMT
       connection:
       - close
     body:
@@ -4735,7 +4735,7 @@ http_interactions:
         MDAiLCJ5ZWFyIjoyMDEyfSwiYnVkZ2V0X2FsbG9jYXRpb25fY2FwYWJpbGl0
         aWVzIjpbXX0=
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:36 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:33 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -4765,11 +4765,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 2f7861d59a91e88e1cffc5374706b921
+      - 58a0b73ae95bd8d9f8f7a113facbb5b7
       x-runtime:
-      - '0.024644'
+      - '0.026089'
       date:
-      - Wed, 07 Aug 2013 20:52:36 GMT
+      - Thu, 08 Aug 2013 14:35:33 GMT
       connection:
       - close
     body:
@@ -4784,7 +4784,7 @@ http_interactions:
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:36 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:33 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/1.json
@@ -4814,11 +4814,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 7f4bb8b9bac37f2ebb4911591fd14382
+      - 1d116b3abe20f2686c52637962ffff98
       x-runtime:
-      - '0.025376'
+      - '0.025980'
       date:
-      - Wed, 07 Aug 2013 20:52:36 GMT
+      - Thu, 08 Aug 2013 14:35:33 GMT
       connection:
       - close
     body:
@@ -4827,7 +4827,7 @@ http_interactions:
         o valor das despesas","expense_nature":"3.0.00.00.00","id":1,"kind":"synthetic","parent_id":null,"regulatory_act_id":1,"updated_at":"2013-08-06T18:05:39-03:00","year":2012,"to_s":"3.0.00.00.00
         - Despesas Correntes"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:36 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:33 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -4857,11 +4857,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - b90fe980895dc396f480e0ade60e72b3
+      - 9359b307f25d65879fb902986393b214
       x-runtime:
-      - '0.025314'
+      - '0.027713'
       date:
-      - Wed, 07 Aug 2013 20:52:36 GMT
+      - Thu, 08 Aug 2013 14:35:33 GMT
       connection:
       - close
     body:
@@ -4870,7 +4870,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:36 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:33 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations/1.json?includes%5B%5D=expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Binclude%5D%5Bbudget_structure%5D%5Bmethods%5D%5B%5D=structure_sequence&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=expense_nature_expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=function_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=subfunction_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_program_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_action_type&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=amount&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bmethods%5D%5B%5D=capability_source_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bonly%5D=id&includes%5B%5D%5Bbudget_structure%5D%5Bexcept%5D=custom_data&methods%5B%5D=balance&methods%5B%5D=amount&methods%5B%5D=budget_structure_structure_sequence
@@ -4900,11 +4900,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 7cc49a797a5e9fc65f8235b943be541a
+      - a94e682cf78bf9f9a90d3d7879682dc1
       x-runtime:
-      - '0.046272'
+      - '0.051096'
       date:
-      - Wed, 07 Aug 2013 20:52:36 GMT
+      - Thu, 08 Aug 2013 14:35:34 GMT
       connection:
       - close
     body:
@@ -4945,7 +4945,7 @@ http_interactions:
         MDAiLCJ5ZWFyIjoyMDEyfSwiYnVkZ2V0X2FsbG9jYXRpb25fY2FwYWJpbGl0
         aWVzIjpbXX0=
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:36 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:34 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -4975,11 +4975,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - b20e7369340ca5f557ce2952e9add0fc
+      - 7d7eac67633282a8d843a467d9492227
       x-runtime:
-      - '0.025130'
+      - '0.029665'
       date:
-      - Wed, 07 Aug 2013 20:52:36 GMT
+      - Thu, 08 Aug 2013 14:35:34 GMT
       connection:
       - close
     body:
@@ -4994,7 +4994,7 @@ http_interactions:
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:36 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:34 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/1.json
@@ -5024,11 +5024,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - af3a9ade5335a62ab48a1de479b813d1
+      - 630732ad1cc67af041c2a84b2e64d137
       x-runtime:
-      - '0.028604'
+      - '0.031023'
       date:
-      - Wed, 07 Aug 2013 20:52:36 GMT
+      - Thu, 08 Aug 2013 14:35:34 GMT
       connection:
       - close
     body:
@@ -5037,7 +5037,7 @@ http_interactions:
         o valor das despesas","expense_nature":"3.0.00.00.00","id":1,"kind":"synthetic","parent_id":null,"regulatory_act_id":1,"updated_at":"2013-08-06T18:05:39-03:00","year":2012,"to_s":"3.0.00.00.00
         - Despesas Correntes"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:36 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:34 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -5067,11 +5067,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 44eb22cc6cf911305835c4fc40759c51
+      - 2bfc8e260b1bbabfeb49cfe3973306d8
       x-runtime:
-      - '0.025304'
+      - '0.032175'
       date:
-      - Wed, 07 Aug 2013 20:52:37 GMT
+      - Thu, 08 Aug 2013 14:35:34 GMT
       connection:
       - close
     body:
@@ -5080,7 +5080,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:37 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:34 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations/1.json?includes%5B%5D=expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Binclude%5D%5Bbudget_structure%5D%5Bmethods%5D%5B%5D=structure_sequence&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=expense_nature_expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=function_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=subfunction_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_program_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_action_type&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=amount&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bmethods%5D%5B%5D=capability_source_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bonly%5D=id&includes%5B%5D%5Bbudget_structure%5D%5Bexcept%5D=custom_data&methods%5B%5D=balance&methods%5B%5D=amount&methods%5B%5D=budget_structure_structure_sequence
@@ -5110,11 +5110,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 17f4a4fa3e3471841b7442dc8dc7cc93
+      - 0d38046adeea3bd65d33ca531e93335a
       x-runtime:
-      - '0.053976'
+      - '0.046732'
       date:
-      - Wed, 07 Aug 2013 20:52:37 GMT
+      - Thu, 08 Aug 2013 14:35:35 GMT
       connection:
       - close
     body:
@@ -5155,7 +5155,7 @@ http_interactions:
         MDAiLCJ5ZWFyIjoyMDEyfSwiYnVkZ2V0X2FsbG9jYXRpb25fY2FwYWJpbGl0
         aWVzIjpbXX0=
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:37 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:35 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -5185,11 +5185,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 8a220ebb3a6c57ef1dbbe825e63b9ba3
+      - a91d48351f25ecdabe5ae4ffef634ff0
       x-runtime:
-      - '0.029074'
+      - '0.026614'
       date:
-      - Wed, 07 Aug 2013 20:52:37 GMT
+      - Thu, 08 Aug 2013 14:35:35 GMT
       connection:
       - close
     body:
@@ -5204,7 +5204,7 @@ http_interactions:
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:37 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:35 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/1.json
@@ -5234,11 +5234,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - c64ad6aeb021559e359e5b951ec9a2ec
+      - 1502a5ccdd3e0fe8bbfd634d381efe57
       x-runtime:
-      - '0.030876'
+      - '0.026086'
       date:
-      - Wed, 07 Aug 2013 20:52:37 GMT
+      - Thu, 08 Aug 2013 14:35:35 GMT
       connection:
       - close
     body:
@@ -5247,7 +5247,7 @@ http_interactions:
         o valor das despesas","expense_nature":"3.0.00.00.00","id":1,"kind":"synthetic","parent_id":null,"regulatory_act_id":1,"updated_at":"2013-08-06T18:05:39-03:00","year":2012,"to_s":"3.0.00.00.00
         - Despesas Correntes"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:37 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:35 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -5277,11 +5277,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - e7e682dd25f1237834afd3a8aa70d162
+      - c2595be5d8df08d7e9b13e42befe1158
       x-runtime:
-      - '0.025986'
+      - '0.031396'
       date:
-      - Wed, 07 Aug 2013 20:52:38 GMT
+      - Thu, 08 Aug 2013 14:35:36 GMT
       connection:
       - close
     body:
@@ -5290,7 +5290,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:38 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:36 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -5320,11 +5320,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 99bb42d182ca603b86c4b7dd3795d59c
+      - 3ee5de65a1fbb2aa6af2441debb68fb1
       x-runtime:
-      - '0.025434'
+      - '0.027015'
       date:
-      - Wed, 07 Aug 2013 20:52:40 GMT
+      - Thu, 08 Aug 2013 14:35:37 GMT
       connection:
       - close
     body:
@@ -5333,7 +5333,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:40 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:37 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations/1.json?includes=expense_nature&methods=balance
@@ -5363,11 +5363,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 358ebf3eec16fdc4105570d6c212f814
+      - 70e97c309d2fef39c7fe94bf37a95831
       x-runtime:
-      - '0.046266'
+      - '0.051003'
       date:
-      - Wed, 07 Aug 2013 20:52:40 GMT
+      - Thu, 08 Aug 2013 14:35:37 GMT
       connection:
       - close
     body:
@@ -5396,7 +5396,7 @@ http_interactions:
         InBhcmVudF9pZCI6MiwicmVndWxhdG9yeV9hY3RfaWQiOjIsInVwZGF0ZWRf
         YXQiOiIyMDEzLTA4LTA2VDE4OjA1OjM5LTAzOjAwIiwieWVhciI6MjAxMn19
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:40 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:37 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -5426,11 +5426,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 1668b7d6f24ef04f63920798d8354328
+      - c71f72ff8078a549666cb66a3bd06050
       x-runtime:
-      - '0.026887'
+      - '0.030316'
       date:
-      - Wed, 07 Aug 2013 20:52:40 GMT
+      - Thu, 08 Aug 2013 14:35:37 GMT
       connection:
       - close
     body:
@@ -5445,7 +5445,7 @@ http_interactions:
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:40 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:37 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/1.json
@@ -5475,11 +5475,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - ad45c86923ee1dc0dfdbbe6d86b83bcc
+      - 0c28b19b02304557f0a9b0de0dcae510
       x-runtime:
-      - '0.025029'
+      - '0.026620'
       date:
-      - Wed, 07 Aug 2013 20:52:40 GMT
+      - Thu, 08 Aug 2013 14:35:37 GMT
       connection:
       - close
     body:
@@ -5488,7 +5488,7 @@ http_interactions:
         o valor das despesas","expense_nature":"3.0.00.00.00","id":1,"kind":"synthetic","parent_id":null,"regulatory_act_id":1,"updated_at":"2013-08-06T18:05:39-03:00","year":2012,"to_s":"3.0.00.00.00
         - Despesas Correntes"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:40 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:37 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -5518,11 +5518,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - db64e7bf88820a9f303dfe8a08e5f688
+      - c13b118eb5118c9f4104f5965881fd77
       x-runtime:
-      - '0.026195'
+      - '0.026952'
       date:
-      - Wed, 07 Aug 2013 20:52:41 GMT
+      - Thu, 08 Aug 2013 14:35:38 GMT
       connection:
       - close
     body:
@@ -5531,7 +5531,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:41 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:38 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations/1.json?includes%5B%5D=expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Binclude%5D%5Bbudget_structure%5D%5Bmethods%5D%5B%5D=structure_sequence&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=expense_nature_expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=function_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=subfunction_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_program_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_action_type&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=amount&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bmethods%5D%5B%5D=capability_source_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bonly%5D=id&includes%5B%5D%5Bbudget_structure%5D%5Bexcept%5D=custom_data&methods%5B%5D=balance&methods%5B%5D=amount&methods%5B%5D=budget_structure_structure_sequence
@@ -5561,11 +5561,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 0e831f5f82b08ff963cc4b844a531fe6
+      - 9c222fd4c9943605528d510e60abab92
       x-runtime:
-      - '0.042827'
+      - '0.048580'
       date:
-      - Wed, 07 Aug 2013 20:52:41 GMT
+      - Thu, 08 Aug 2013 14:35:38 GMT
       connection:
       - close
     body:
@@ -5606,7 +5606,7 @@ http_interactions:
         MDAiLCJ5ZWFyIjoyMDEyfSwiYnVkZ2V0X2FsbG9jYXRpb25fY2FwYWJpbGl0
         aWVzIjpbXX0=
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:41 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:38 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -5636,11 +5636,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - ef5fd6755ec30dc71df95c2f3f0d51fd
+      - 8e46847b5e7bbf2010d584a8b7bfbdfa
       x-runtime:
-      - '0.025140'
+      - '0.027325'
       date:
-      - Wed, 07 Aug 2013 20:52:41 GMT
+      - Thu, 08 Aug 2013 14:35:38 GMT
       connection:
       - close
     body:
@@ -5655,7 +5655,7 @@ http_interactions:
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:41 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:38 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/1.json
@@ -5685,11 +5685,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 5a6f8f6744c376a64aa1395432e58f6f
+      - b6eb5eb24db7c0fdb256f7acd5673312
       x-runtime:
-      - '0.026052'
+      - '0.026084'
       date:
-      - Wed, 07 Aug 2013 20:52:41 GMT
+      - Thu, 08 Aug 2013 14:35:38 GMT
       connection:
       - close
     body:
@@ -5698,7 +5698,7 @@ http_interactions:
         o valor das despesas","expense_nature":"3.0.00.00.00","id":1,"kind":"synthetic","parent_id":null,"regulatory_act_id":1,"updated_at":"2013-08-06T18:05:39-03:00","year":2012,"to_s":"3.0.00.00.00
         - Despesas Correntes"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:41 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:38 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -5728,11 +5728,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 96dc4902f93fd7d075373e9b7eeae04e
+      - 89df0dcf364bcadf4d7f6ce6eb3463ad
       x-runtime:
-      - '0.026311'
+      - '0.026313'
       date:
-      - Wed, 07 Aug 2013 20:52:42 GMT
+      - Thu, 08 Aug 2013 14:35:39 GMT
       connection:
       - close
     body:
@@ -5741,7 +5741,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:42 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:39 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/2.json
@@ -5771,11 +5771,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 68f411211ed24eff58f619ed9bc2c812
+      - 5905f594b0dad2b58a49b5e19a229235
       x-runtime:
-      - '0.025726'
+      - '0.026600'
       date:
-      - Wed, 07 Aug 2013 20:52:42 GMT
+      - Thu, 08 Aug 2013 14:35:39 GMT
       connection:
       - close
     body:
@@ -5792,7 +5792,7 @@ http_interactions:
         VDE4OjA1OjM4LTAzOjAwIiwidG9fcyI6IjkgLSBTZWNyZXRhcmlhIGRlIEVk
         dWNhw6fDo28ifQ==
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:42 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:39 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -5822,11 +5822,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 5b9aac3d4d96b027f5e832dba842cae9
+      - 65c5ba1b2c35637032a0643c28a5c1eb
       x-runtime:
-      - '0.031535'
+      - '0.390827'
       date:
-      - Wed, 07 Aug 2013 20:52:43 GMT
+      - Thu, 08 Aug 2013 14:35:40 GMT
       connection:
       - close
     body:
@@ -5835,7 +5835,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:43 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:40 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations/1.json?includes=expense_nature&methods=balance
@@ -5865,11 +5865,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 9b68cded36e249980183ae4940382055
+      - 7cf03887f1428e7b41319f6e2607fb16
       x-runtime:
-      - '0.051937'
+      - '0.047532'
       date:
-      - Wed, 07 Aug 2013 20:52:43 GMT
+      - Thu, 08 Aug 2013 14:35:41 GMT
       connection:
       - close
     body:
@@ -5898,7 +5898,7 @@ http_interactions:
         InBhcmVudF9pZCI6MiwicmVndWxhdG9yeV9hY3RfaWQiOjIsInVwZGF0ZWRf
         YXQiOiIyMDEzLTA4LTA2VDE4OjA1OjM5LTAzOjAwIiwieWVhciI6MjAxMn19
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:43 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:41 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -5928,11 +5928,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 21525506b8a3aa1d2c1335a0691a1035
+      - a4663516f5e1b93f841ed3470683c106
       x-runtime:
-      - '0.029595'
+      - '0.025949'
       date:
-      - Wed, 07 Aug 2013 20:52:43 GMT
+      - Thu, 08 Aug 2013 14:35:41 GMT
       connection:
       - close
     body:
@@ -5947,7 +5947,7 @@ http_interactions:
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:43 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:41 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/2.json
@@ -5977,11 +5977,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - bb5e0ba31a1969a8fbda0cd254c0c3b1
+      - 3c8f7a447a38f049acba4ec2531ad2c3
       x-runtime:
-      - '0.068648'
+      - '0.026852'
       date:
-      - Wed, 07 Aug 2013 20:52:43 GMT
+      - Thu, 08 Aug 2013 14:35:41 GMT
       connection:
       - close
     body:
@@ -5998,7 +5998,7 @@ http_interactions:
         VDE4OjA1OjM4LTAzOjAwIiwidG9fcyI6IjkgLSBTZWNyZXRhcmlhIGRlIEVk
         dWNhw6fDo28ifQ==
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:43 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:41 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations/1.json?includes=expense_nature&methods=balance
@@ -6028,11 +6028,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 758164755f17aec995d367663e0381e9
+      - b9085959c6ea03ded66cfb525d136b17
       x-runtime:
-      - '0.042045'
+      - '0.046002'
       date:
-      - Wed, 07 Aug 2013 20:52:43 GMT
+      - Thu, 08 Aug 2013 14:35:41 GMT
       connection:
       - close
     body:
@@ -6061,7 +6061,7 @@ http_interactions:
         InBhcmVudF9pZCI6MiwicmVndWxhdG9yeV9hY3RfaWQiOjIsInVwZGF0ZWRf
         YXQiOiIyMDEzLTA4LTA2VDE4OjA1OjM5LTAzOjAwIiwieWVhciI6MjAxMn19
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:43 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:41 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -6091,11 +6091,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 527abe4ce310b8211045d8004cdb9ec5
+      - cecfd944ed2e3ee02837a8efa8216906
       x-runtime:
-      - '0.032521'
+      - '0.027598'
       date:
-      - Wed, 07 Aug 2013 20:52:44 GMT
+      - Thu, 08 Aug 2013 14:35:41 GMT
       connection:
       - close
     body:
@@ -6110,7 +6110,7 @@ http_interactions:
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:44 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:41 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -6140,11 +6140,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 6b8c1ff896728c39ecb13cc5ede593c5
+      - a6db577a2f20f6efd6a1a5ec6fcfc385
       x-runtime:
-      - '0.028712'
+      - '0.027418'
       date:
-      - Wed, 07 Aug 2013 20:52:45 GMT
+      - Thu, 08 Aug 2013 14:35:42 GMT
       connection:
       - close
     body:
@@ -6153,7 +6153,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:45 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:42 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations/1.json?includes%5B%5D=expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Binclude%5D%5Bbudget_structure%5D%5Bmethods%5D%5B%5D=structure_sequence&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=expense_nature_expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=function_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=subfunction_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_program_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_action_type&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=amount&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bmethods%5D%5B%5D=capability_source_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bonly%5D=id&includes%5B%5D%5Bbudget_structure%5D%5Bexcept%5D=custom_data&methods%5B%5D=balance&methods%5B%5D=amount&methods%5B%5D=budget_structure_structure_sequence
@@ -6183,11 +6183,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 86d694aea795537e8ea5a95dfc879601
+      - 85e26443e2db6d52aa94b53806f667e2
       x-runtime:
-      - '0.049469'
+      - '0.046780'
       date:
-      - Wed, 07 Aug 2013 20:52:45 GMT
+      - Thu, 08 Aug 2013 14:35:42 GMT
       connection:
       - close
     body:
@@ -6228,7 +6228,7 @@ http_interactions:
         MDAiLCJ5ZWFyIjoyMDEyfSwiYnVkZ2V0X2FsbG9jYXRpb25fY2FwYWJpbGl0
         aWVzIjpbXX0=
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:45 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:42 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -6258,11 +6258,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 0bde5913da289ed37eb242bf21c99eb4
+      - e241747c83e421d2072be1008828cd19
       x-runtime:
-      - '0.025579'
+      - '0.027475'
       date:
-      - Wed, 07 Aug 2013 20:52:45 GMT
+      - Thu, 08 Aug 2013 14:35:42 GMT
       connection:
       - close
     body:
@@ -6277,7 +6277,7 @@ http_interactions:
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:45 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:42 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -6307,11 +6307,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - f68f81821754b489b6f106eb79ee55f0
+      - e636df1b0595e40581517a5d3f7e3f2c
       x-runtime:
-      - '0.025075'
+      - '0.026214'
       date:
-      - Wed, 07 Aug 2013 20:52:48 GMT
+      - Thu, 08 Aug 2013 14:35:45 GMT
       connection:
       - close
     body:
@@ -6320,7 +6320,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:48 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:45 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -6350,11 +6350,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 71c742a8ced68182ae7f53b496c6c8d9
+      - aedaf0f8edd81a4ce54e59d111e74f0f
       x-runtime:
-      - '0.025088'
+      - '0.029427'
       date:
-      - Wed, 07 Aug 2013 20:52:49 GMT
+      - Thu, 08 Aug 2013 14:35:45 GMT
       connection:
       - close
     body:
@@ -6363,7 +6363,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:49 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:45 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations/1.json?includes%5B%5D=expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Binclude%5D%5Bbudget_structure%5D%5Bmethods%5D%5B%5D=structure_sequence&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=expense_nature_expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=function_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=subfunction_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_program_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_action_type&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=amount&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bmethods%5D%5B%5D=capability_source_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bonly%5D=id&includes%5B%5D%5Bbudget_structure%5D%5Bexcept%5D=custom_data&methods%5B%5D=balance&methods%5B%5D=amount&methods%5B%5D=budget_structure_structure_sequence
@@ -6393,11 +6393,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 853957f2d1d744b46711315bac2bb58c
+      - faf43b64c852e3f16fee855a482ff632
       x-runtime:
-      - '0.044646'
+      - '0.047483'
       date:
-      - Wed, 07 Aug 2013 20:52:49 GMT
+      - Thu, 08 Aug 2013 14:35:45 GMT
       connection:
       - close
     body:
@@ -6438,7 +6438,7 @@ http_interactions:
         MDAiLCJ5ZWFyIjoyMDEyfSwiYnVkZ2V0X2FsbG9jYXRpb25fY2FwYWJpbGl0
         aWVzIjpbXX0=
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:49 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:45 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -6468,11 +6468,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 0640df26e20ccb1ce86e2cef04d0e0e7
+      - 2c71491daaf4012b2898dda102a4fa60
       x-runtime:
-      - '0.024548'
+      - '0.028908'
       date:
-      - Wed, 07 Aug 2013 20:52:49 GMT
+      - Thu, 08 Aug 2013 14:35:45 GMT
       connection:
       - close
     body:
@@ -6487,7 +6487,7 @@ http_interactions:
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:49 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:45 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -6517,11 +6517,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 567f20a174a48c0cf44d3ea9ffa1b9f9
+      - fd798eea0caf0b1892c9fc6d92e69324
       x-runtime:
-      - '0.025700'
+      - '0.026110'
       date:
-      - Wed, 07 Aug 2013 20:52:51 GMT
+      - Thu, 08 Aug 2013 14:35:48 GMT
       connection:
       - close
     body:
@@ -6530,7 +6530,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:51 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:48 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations/1.json?includes%5B%5D=expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Binclude%5D%5Bbudget_structure%5D%5Bmethods%5D%5B%5D=structure_sequence&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=expense_nature_expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=function_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=subfunction_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_program_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_action_type&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=amount&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bmethods%5D%5B%5D=capability_source_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bonly%5D=id&includes%5B%5D%5Bbudget_structure%5D%5Bexcept%5D=custom_data&methods%5B%5D=balance&methods%5B%5D=amount&methods%5B%5D=budget_structure_structure_sequence
@@ -6560,11 +6560,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - ef239d18113d48bdedb1bda82affb6e5
+      - 4cec9272b10f351f3cc118f3782f7963
       x-runtime:
-      - '0.043031'
+      - '0.047879'
       date:
-      - Wed, 07 Aug 2013 20:52:51 GMT
+      - Thu, 08 Aug 2013 14:35:48 GMT
       connection:
       - close
     body:
@@ -6605,7 +6605,7 @@ http_interactions:
         MDAiLCJ5ZWFyIjoyMDEyfSwiYnVkZ2V0X2FsbG9jYXRpb25fY2FwYWJpbGl0
         aWVzIjpbXX0=
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:51 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:48 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -6635,11 +6635,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 51e43a605a3d078a620c70f9fd58b166
+      - d29dcf08353cd2af9f0cf23947332e99
       x-runtime:
-      - '0.024212'
+      - '0.026709'
       date:
-      - Wed, 07 Aug 2013 20:52:51 GMT
+      - Thu, 08 Aug 2013 14:35:48 GMT
       connection:
       - close
     body:
@@ -6654,7 +6654,7 @@ http_interactions:
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:51 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:48 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations/1.json?includes%5B%5D=expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Binclude%5D%5Bbudget_structure%5D%5Bmethods%5D%5B%5D=structure_sequence&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=expense_nature_expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=function_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=subfunction_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_program_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_action_type&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=amount&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bmethods%5D%5B%5D=capability_source_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bonly%5D=id&includes%5B%5D%5Bbudget_structure%5D%5Bexcept%5D=custom_data&methods%5B%5D=balance&methods%5B%5D=amount&methods%5B%5D=budget_structure_structure_sequence
@@ -6684,11 +6684,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - c3a4312c46a25e45e0025b95cd4bd658
+      - da8d7b7d0d4ae941dd967170097b245b
       x-runtime:
-      - '0.043281'
+      - '0.047441'
       date:
-      - Wed, 07 Aug 2013 20:52:54 GMT
+      - Thu, 08 Aug 2013 14:35:51 GMT
       connection:
       - close
     body:
@@ -6729,7 +6729,7 @@ http_interactions:
         MDAiLCJ5ZWFyIjoyMDEyfSwiYnVkZ2V0X2FsbG9jYXRpb25fY2FwYWJpbGl0
         aWVzIjpbXX0=
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:54 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:51 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -6759,11 +6759,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 00a347dc4b60b73ec4da8dc8432a5e41
+      - 36a2c0aca172f414b38d41520fbbfff9
       x-runtime:
-      - '0.025106'
+      - '0.027705'
       date:
-      - Wed, 07 Aug 2013 20:52:54 GMT
+      - Thu, 08 Aug 2013 14:35:51 GMT
       connection:
       - close
     body:
@@ -6778,7 +6778,7 @@ http_interactions:
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:54 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:51 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -6808,11 +6808,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - b2bf3dbd82485c163dd9068b2118ac92
+      - 95a159199369199c7bb5589675163814
       x-runtime:
-      - '0.024844'
+      - '0.028514'
       date:
-      - Wed, 07 Aug 2013 20:52:55 GMT
+      - Thu, 08 Aug 2013 14:35:52 GMT
       connection:
       - close
     body:
@@ -6821,7 +6821,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:55 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:52 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -6851,11 +6851,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 0178b39db5564b8695e878de4b8f8466
+      - 8174abb99569f254fd6b3898382b99a2
       x-runtime:
-      - '0.025581'
+      - '0.027056'
       date:
-      - Wed, 07 Aug 2013 20:52:57 GMT
+      - Thu, 08 Aug 2013 14:35:53 GMT
       connection:
       - close
     body:
@@ -6864,7 +6864,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:57 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:53 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations/1.json?includes=expense_nature&methods=balance
@@ -6894,11 +6894,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 7607f9098d1b5b30506aac410ddf21ab
+      - 3c43f667febc4fdaffbce3a4e233311e
       x-runtime:
-      - '0.042462'
+      - '0.046007'
       date:
-      - Wed, 07 Aug 2013 20:52:57 GMT
+      - Thu, 08 Aug 2013 14:35:53 GMT
       connection:
       - close
     body:
@@ -6927,7 +6927,7 @@ http_interactions:
         InBhcmVudF9pZCI6MiwicmVndWxhdG9yeV9hY3RfaWQiOjIsInVwZGF0ZWRf
         YXQiOiIyMDEzLTA4LTA2VDE4OjA1OjM5LTAzOjAwIiwieWVhciI6MjAxMn19
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:57 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:53 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -6957,11 +6957,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 41d1c63be954e4578c084d5c37b8c233
+      - cb7cbc8c75e253be1ce2359cdd32f94a
       x-runtime:
-      - '0.026067'
+      - '0.030860'
       date:
-      - Wed, 07 Aug 2013 20:52:57 GMT
+      - Thu, 08 Aug 2013 14:35:53 GMT
       connection:
       - close
     body:
@@ -6976,7 +6976,7 @@ http_interactions:
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:57 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:53 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/1.json
@@ -7006,11 +7006,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - adf550193af22520e8436d321ca38e5d
+      - 251c51277c1bfe7cd5874a9f4c6a2eed
       x-runtime:
-      - '0.025311'
+      - '0.028132'
       date:
-      - Wed, 07 Aug 2013 20:52:57 GMT
+      - Thu, 08 Aug 2013 14:35:54 GMT
       connection:
       - close
     body:
@@ -7019,7 +7019,7 @@ http_interactions:
         o valor das despesas","expense_nature":"3.0.00.00.00","id":1,"kind":"synthetic","parent_id":null,"regulatory_act_id":1,"updated_at":"2013-08-06T18:05:39-03:00","year":2012,"to_s":"3.0.00.00.00
         - Despesas Correntes"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:57 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:54 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -7049,11 +7049,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - f1883796d005260051551ed72c9a483a
+      - 6b8f20cc5e8d1b129427ae2a83446e6e
       x-runtime:
-      - '0.026270'
+      - '0.026056'
       date:
-      - Wed, 07 Aug 2013 20:52:57 GMT
+      - Thu, 08 Aug 2013 14:35:54 GMT
       connection:
       - close
     body:
@@ -7062,7 +7062,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:57 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:54 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations/1.json?includes%5B%5D=expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Binclude%5D%5Bbudget_structure%5D%5Bmethods%5D%5B%5D=structure_sequence&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=expense_nature_expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=function_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=subfunction_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_program_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_action_type&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=amount&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bmethods%5D%5B%5D=capability_source_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bonly%5D=id&includes%5B%5D%5Bbudget_structure%5D%5Bexcept%5D=custom_data&methods%5B%5D=balance&methods%5B%5D=amount&methods%5B%5D=budget_structure_structure_sequence
@@ -7092,11 +7092,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - a98c03dc1367a4b7a99d052fab480e56
+      - f5ded65acaa78f5d3afe748654a7f893
       x-runtime:
-      - '0.042795'
+      - '0.047218'
       date:
-      - Wed, 07 Aug 2013 20:52:57 GMT
+      - Thu, 08 Aug 2013 14:35:54 GMT
       connection:
       - close
     body:
@@ -7137,7 +7137,7 @@ http_interactions:
         MDAiLCJ5ZWFyIjoyMDEyfSwiYnVkZ2V0X2FsbG9jYXRpb25fY2FwYWJpbGl0
         aWVzIjpbXX0=
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:57 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:54 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -7167,11 +7167,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 9b200b5b4205ffbca67bccb6f1968d5c
+      - 911a89217a58ec65cfcb48628afdb654
       x-runtime:
-      - '0.025281'
+      - '0.027920'
       date:
-      - Wed, 07 Aug 2013 20:52:57 GMT
+      - Thu, 08 Aug 2013 14:35:54 GMT
       connection:
       - close
     body:
@@ -7186,7 +7186,7 @@ http_interactions:
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:57 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:54 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/1.json
@@ -7216,11 +7216,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - d8d923ef4997a887745c1a760c9083cf
+      - eccbf81b2a55d349dadff383848d312e
       x-runtime:
-      - '0.026373'
+      - '0.027453'
       date:
-      - Wed, 07 Aug 2013 20:52:57 GMT
+      - Thu, 08 Aug 2013 14:35:54 GMT
       connection:
       - close
     body:
@@ -7229,7 +7229,7 @@ http_interactions:
         o valor das despesas","expense_nature":"3.0.00.00.00","id":1,"kind":"synthetic","parent_id":null,"regulatory_act_id":1,"updated_at":"2013-08-06T18:05:39-03:00","year":2012,"to_s":"3.0.00.00.00
         - Despesas Correntes"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:57 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:54 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -7259,11 +7259,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - e93f029c4549c2c745835842a1724965
+      - 1f3dd6c2c8756f2413ecf41c696bb563
       x-runtime:
-      - '0.031456'
+      - '0.027903'
       date:
-      - Wed, 07 Aug 2013 20:52:58 GMT
+      - Thu, 08 Aug 2013 14:35:55 GMT
       connection:
       - close
     body:
@@ -7272,7 +7272,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:58 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:55 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -7302,11 +7302,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 36b81edc981a322d0a0bf6cb9e112812
+      - 9f0dabdefd2a2e075090684628d1c417
       x-runtime:
-      - '0.028258'
+      - '0.027026'
       date:
-      - Wed, 07 Aug 2013 20:52:59 GMT
+      - Thu, 08 Aug 2013 14:35:56 GMT
       connection:
       - close
     body:
@@ -7315,7 +7315,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:59 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:56 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations/1.json?includes=expense_nature&methods=balance
@@ -7345,11 +7345,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - f4f822b0f195f2712a60c190ae8ee7e9
+      - b623cd5c9c4d80bab25420ab33d585f1
       x-runtime:
-      - '0.044335'
+      - '0.047782'
       date:
-      - Wed, 07 Aug 2013 20:52:59 GMT
+      - Thu, 08 Aug 2013 14:35:56 GMT
       connection:
       - close
     body:
@@ -7378,7 +7378,7 @@ http_interactions:
         InBhcmVudF9pZCI6MiwicmVndWxhdG9yeV9hY3RfaWQiOjIsInVwZGF0ZWRf
         YXQiOiIyMDEzLTA4LTA2VDE4OjA1OjM5LTAzOjAwIiwieWVhciI6MjAxMn19
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:59 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:56 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -7408,11 +7408,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 62904a2c2177d43493a9728e04acb5a9
+      - 092b920f2a917b66cd832a83b6502704
       x-runtime:
-      - '0.024841'
+      - '0.030077'
       date:
-      - Wed, 07 Aug 2013 20:52:59 GMT
+      - Thu, 08 Aug 2013 14:35:56 GMT
       connection:
       - close
     body:
@@ -7427,7 +7427,7 @@ http_interactions:
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:52:59 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:56 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/1.json
@@ -7457,11 +7457,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 0dc3548f8fa5870eb0c8208afff6f7d2
+      - 8c477129f70447e6191aa7f98e667a30
       x-runtime:
-      - '0.083704'
+      - '0.027622'
       date:
-      - Wed, 07 Aug 2013 20:53:00 GMT
+      - Thu, 08 Aug 2013 14:35:56 GMT
       connection:
       - close
     body:
@@ -7470,7 +7470,7 @@ http_interactions:
         o valor das despesas","expense_nature":"3.0.00.00.00","id":1,"kind":"synthetic","parent_id":null,"regulatory_act_id":1,"updated_at":"2013-08-06T18:05:39-03:00","year":2012,"to_s":"3.0.00.00.00
         - Despesas Correntes"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:53:00 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:56 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -7500,11 +7500,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 96bb6e007e6ece1ca056a8dd2ae477ac
+      - 0c30721e16fc26891276c38e2137ae48
       x-runtime:
-      - '0.025650'
+      - '0.027784'
       date:
-      - Wed, 07 Aug 2013 20:53:00 GMT
+      - Thu, 08 Aug 2013 14:35:57 GMT
       connection:
       - close
     body:
@@ -7513,7 +7513,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:53:00 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:57 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations/1.json?includes%5B%5D=expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Binclude%5D%5Bbudget_structure%5D%5Bmethods%5D%5B%5D=structure_sequence&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=expense_nature_expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=function_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=subfunction_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_program_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_action_type&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=amount&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bmethods%5D%5B%5D=capability_source_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bonly%5D=id&includes%5B%5D%5Bbudget_structure%5D%5Bexcept%5D=custom_data&methods%5B%5D=balance&methods%5B%5D=amount&methods%5B%5D=budget_structure_structure_sequence
@@ -7543,11 +7543,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 7e10c3075c76a091a6e18beab9e6977a
+      - 0e0086996b57851160317f64fd932b56
       x-runtime:
-      - '0.042394'
+      - '0.050175'
       date:
-      - Wed, 07 Aug 2013 20:53:01 GMT
+      - Thu, 08 Aug 2013 14:35:57 GMT
       connection:
       - close
     body:
@@ -7588,7 +7588,7 @@ http_interactions:
         MDAiLCJ5ZWFyIjoyMDEyfSwiYnVkZ2V0X2FsbG9jYXRpb25fY2FwYWJpbGl0
         aWVzIjpbXX0=
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:53:01 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:57 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -7618,11 +7618,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - b92889ab31cea0ad0e1b51794a2e4144
+      - 42b451c83f762419175c45a8b39661d3
       x-runtime:
-      - '0.026066'
+      - '0.026633'
       date:
-      - Wed, 07 Aug 2013 20:53:01 GMT
+      - Thu, 08 Aug 2013 14:35:57 GMT
       connection:
       - close
     body:
@@ -7637,7 +7637,7 @@ http_interactions:
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:53:01 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:57 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/1.json
@@ -7667,11 +7667,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 98769981ad034cbe81be6dfc4a47a525
+      - 76ac515888b5854bb88ffc68a16b0c92
       x-runtime:
-      - '0.025909'
+      - '0.088313'
       date:
-      - Wed, 07 Aug 2013 20:53:01 GMT
+      - Thu, 08 Aug 2013 14:35:57 GMT
       connection:
       - close
     body:
@@ -7680,7 +7680,7 @@ http_interactions:
         o valor das despesas","expense_nature":"3.0.00.00.00","id":1,"kind":"synthetic","parent_id":null,"regulatory_act_id":1,"updated_at":"2013-08-06T18:05:39-03:00","year":2012,"to_s":"3.0.00.00.00
         - Despesas Correntes"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:53:01 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:57 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -7710,11 +7710,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 8c33d2b2c682d000d3dd67ce0cdf446a
+      - a6a65a9efb2616a0c16ba6b24b7eb10e
       x-runtime:
-      - '0.061388'
+      - '0.025822'
       date:
-      - Wed, 07 Aug 2013 20:53:01 GMT
+      - Thu, 08 Aug 2013 14:35:58 GMT
       connection:
       - close
     body:
@@ -7723,7 +7723,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:53:01 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:58 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -7753,11 +7753,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 3664f260ac7176ab2b949252a2064f71
+      - 933fc60896d25351ee01f99caf70d385
       x-runtime:
-      - '0.026659'
+      - '0.026984'
       date:
-      - Wed, 07 Aug 2013 20:53:02 GMT
+      - Thu, 08 Aug 2013 14:35:58 GMT
       connection:
       - close
     body:
@@ -7766,7 +7766,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:53:02 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:58 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations/1.json?includes%5B%5D=expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Binclude%5D%5Bbudget_structure%5D%5Bmethods%5D%5B%5D=structure_sequence&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=expense_nature_expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=function_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=subfunction_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_program_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_action_type&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=amount&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bmethods%5D%5B%5D=capability_source_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bonly%5D=id&includes%5B%5D%5Bbudget_structure%5D%5Bexcept%5D=custom_data&methods%5B%5D=balance&methods%5B%5D=amount&methods%5B%5D=budget_structure_structure_sequence
@@ -7796,11 +7796,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 733ac6367a4db95380f865ea43226bf7
+      - 1005e552ff1415b620cedb8b27eac498
       x-runtime:
-      - '0.052081'
+      - '0.047590'
       date:
-      - Wed, 07 Aug 2013 20:53:02 GMT
+      - Thu, 08 Aug 2013 14:35:59 GMT
       connection:
       - close
     body:
@@ -7841,7 +7841,7 @@ http_interactions:
         MDAiLCJ5ZWFyIjoyMDEyfSwiYnVkZ2V0X2FsbG9jYXRpb25fY2FwYWJpbGl0
         aWVzIjpbXX0=
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:53:02 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:59 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -7871,11 +7871,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - e7e4eb3daa4afb4a830e99779fd62937
+      - 3b4258abb3506e87064ac1e2653bfd70
       x-runtime:
-      - '0.026202'
+      - '0.024951'
       date:
-      - Wed, 07 Aug 2013 20:53:02 GMT
+      - Thu, 08 Aug 2013 14:35:59 GMT
       connection:
       - close
     body:
@@ -7890,7 +7890,7 @@ http_interactions:
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:53:02 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:59 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/1.json
@@ -7920,11 +7920,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 1a730cd8005079d1f9b0631d134b9dc0
+      - 689090faee7c5df062f768af46ee830f
       x-runtime:
-      - '0.032169'
+      - '0.027554'
       date:
-      - Wed, 07 Aug 2013 20:53:02 GMT
+      - Thu, 08 Aug 2013 14:35:59 GMT
       connection:
       - close
     body:
@@ -7933,7 +7933,7 @@ http_interactions:
         o valor das despesas","expense_nature":"3.0.00.00.00","id":1,"kind":"synthetic","parent_id":null,"regulatory_act_id":1,"updated_at":"2013-08-06T18:05:39-03:00","year":2012,"to_s":"3.0.00.00.00
         - Despesas Correntes"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:53:02 GMT
+  recorded_at: Thu, 08 Aug 2013 14:35:59 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -7963,11 +7963,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 5c64886ec9ce86f853e35505fa7a5c16
+      - 6a700a1e1fc000d90a01a806279beada
       x-runtime:
-      - '0.026038'
+      - '0.025206'
       date:
-      - Wed, 07 Aug 2013 20:53:03 GMT
+      - Thu, 08 Aug 2013 14:36:00 GMT
       connection:
       - close
     body:
@@ -7976,7 +7976,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:53:03 GMT
+  recorded_at: Thu, 08 Aug 2013 14:36:00 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -8006,11 +8006,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - e366ae193ed88e07bb94b8b5f558d8f2
+      - 2bca3f97b4f6b91b90687ff7b0ed553d
       x-runtime:
-      - '0.026736'
+      - '0.027104'
       date:
-      - Wed, 07 Aug 2013 20:53:04 GMT
+      - Thu, 08 Aug 2013 14:36:00 GMT
       connection:
       - close
     body:
@@ -8019,7 +8019,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:53:04 GMT
+  recorded_at: Thu, 08 Aug 2013 14:36:00 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations/1.json?includes%5B%5D=expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Binclude%5D%5Bbudget_structure%5D%5Bmethods%5D%5B%5D=structure_sequence&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=expense_nature_expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=function_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=subfunction_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_program_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_action_type&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=amount&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bmethods%5D%5B%5D=capability_source_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bonly%5D=id&includes%5B%5D%5Bbudget_structure%5D%5Bexcept%5D=custom_data&methods%5B%5D=balance&methods%5B%5D=amount&methods%5B%5D=budget_structure_structure_sequence
@@ -8049,11 +8049,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 120174df0fdf096d2a9d2e25d460a958
+      - 91043c3273dd66fce744f5d864d56e4b
       x-runtime:
-      - '0.081521'
+      - '0.048476'
       date:
-      - Wed, 07 Aug 2013 20:53:04 GMT
+      - Thu, 08 Aug 2013 14:36:00 GMT
       connection:
       - close
     body:
@@ -8094,7 +8094,7 @@ http_interactions:
         MDAiLCJ5ZWFyIjoyMDEyfSwiYnVkZ2V0X2FsbG9jYXRpb25fY2FwYWJpbGl0
         aWVzIjpbXX0=
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:53:04 GMT
+  recorded_at: Thu, 08 Aug 2013 14:36:00 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -8124,11 +8124,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 01df3a8f8d3cd039a0948e4edecfe088
+      - 35611b88068f0b111d37519d22295aff
       x-runtime:
-      - '0.025202'
+      - '0.025195'
       date:
-      - Wed, 07 Aug 2013 20:53:04 GMT
+      - Thu, 08 Aug 2013 14:36:00 GMT
       connection:
       - close
     body:
@@ -8143,7 +8143,7 @@ http_interactions:
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:53:04 GMT
+  recorded_at: Thu, 08 Aug 2013 14:36:00 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/1.json
@@ -8173,11 +8173,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - c139cad50021879e64c52d3e9ab4ae38
+      - c055a1467b88a3a16002a647a7aed146
       x-runtime:
-      - '0.025509'
+      - '0.024256'
       date:
-      - Wed, 07 Aug 2013 20:53:04 GMT
+      - Thu, 08 Aug 2013 14:36:00 GMT
       connection:
       - close
     body:
@@ -8186,7 +8186,7 @@ http_interactions:
         o valor das despesas","expense_nature":"3.0.00.00.00","id":1,"kind":"synthetic","parent_id":null,"regulatory_act_id":1,"updated_at":"2013-08-06T18:05:39-03:00","year":2012,"to_s":"3.0.00.00.00
         - Despesas Correntes"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:53:04 GMT
+  recorded_at: Thu, 08 Aug 2013 14:36:00 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations/1.json?includes%5B%5D=expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Binclude%5D%5Bbudget_structure%5D%5Bmethods%5D%5B%5D=structure_sequence&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=expense_nature_expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=function_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=subfunction_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_program_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_action_type&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=amount&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bmethods%5D%5B%5D=capability_source_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bonly%5D=id&includes%5B%5D%5Bbudget_structure%5D%5Bexcept%5D=custom_data&methods%5B%5D=balance&methods%5B%5D=amount&methods%5B%5D=budget_structure_structure_sequence
@@ -8216,11 +8216,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - e7c68d6ec8e48cadf2f5c8286d49e124
+      - 34177baa4791f6fdb80b10260b568c43
       x-runtime:
-      - '0.044444'
+      - '0.043517'
       date:
-      - Wed, 07 Aug 2013 20:53:05 GMT
+      - Thu, 08 Aug 2013 14:36:01 GMT
       connection:
       - close
     body:
@@ -8261,7 +8261,7 @@ http_interactions:
         MDAiLCJ5ZWFyIjoyMDEyfSwiYnVkZ2V0X2FsbG9jYXRpb25fY2FwYWJpbGl0
         aWVzIjpbXX0=
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:53:05 GMT
+  recorded_at: Thu, 08 Aug 2013 14:36:01 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -8291,11 +8291,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 33a2110a7c5eb794876985f7056e9597
+      - 3e462c283abf590533748f9bba5f4f1b
       x-runtime:
-      - '0.024686'
+      - '0.025812'
       date:
-      - Wed, 07 Aug 2013 20:53:05 GMT
+      - Thu, 08 Aug 2013 14:36:01 GMT
       connection:
       - close
     body:
@@ -8310,7 +8310,7 @@ http_interactions:
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:53:05 GMT
+  recorded_at: Thu, 08 Aug 2013 14:36:01 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/1.json
@@ -8340,11 +8340,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - e4f9b76f9d2a21af6a440a84acdb1300
+      - d453fcf3445e78c660e74b8d72a8ccb1
       x-runtime:
-      - '0.026704'
+      - '0.024872'
       date:
-      - Wed, 07 Aug 2013 20:53:05 GMT
+      - Thu, 08 Aug 2013 14:36:01 GMT
       connection:
       - close
     body:
@@ -8353,7 +8353,7 @@ http_interactions:
         o valor das despesas","expense_nature":"3.0.00.00.00","id":1,"kind":"synthetic","parent_id":null,"regulatory_act_id":1,"updated_at":"2013-08-06T18:05:39-03:00","year":2012,"to_s":"3.0.00.00.00
         - Despesas Correntes"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:53:05 GMT
+  recorded_at: Thu, 08 Aug 2013 14:36:01 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -8383,11 +8383,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 116c15a9717fa8b1dffe9782c759d690
+      - 2a17091378a9315cb279ca28b32fd47a
       x-runtime:
-      - '0.030570'
+      - '0.025632'
       date:
-      - Wed, 07 Aug 2013 20:53:06 GMT
+      - Thu, 08 Aug 2013 14:36:01 GMT
       connection:
       - close
     body:
@@ -8396,7 +8396,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:53:06 GMT
+  recorded_at: Thu, 08 Aug 2013 14:36:01 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -8426,11 +8426,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 9eb1aa68b4b3be5aea5432f3a7c0b187
+      - 75fee6eb12b24d184847da05f8748af4
       x-runtime:
-      - '0.024891'
+      - '0.026854'
       date:
-      - Wed, 07 Aug 2013 20:53:07 GMT
+      - Thu, 08 Aug 2013 14:36:03 GMT
       connection:
       - close
     body:
@@ -8439,7 +8439,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:53:07 GMT
+  recorded_at: Thu, 08 Aug 2013 14:36:03 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations/1.json?includes%5B%5D=expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Binclude%5D%5Bbudget_structure%5D%5Bmethods%5D%5B%5D=structure_sequence&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=expense_nature_expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=function_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=subfunction_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_program_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_action_type&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=amount&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bmethods%5D%5B%5D=capability_source_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bonly%5D=id&includes%5B%5D%5Bbudget_structure%5D%5Bexcept%5D=custom_data&methods%5B%5D=balance&methods%5B%5D=amount&methods%5B%5D=budget_structure_structure_sequence
@@ -8469,11 +8469,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 00af9c1cdafcab39f7090e3188971b2e
+      - e94ca2894c8df64498d8b66438a60b90
       x-runtime:
-      - '0.044578'
+      - '0.048009'
       date:
-      - Wed, 07 Aug 2013 20:53:07 GMT
+      - Thu, 08 Aug 2013 14:36:03 GMT
       connection:
       - close
     body:
@@ -8514,7 +8514,7 @@ http_interactions:
         MDAiLCJ5ZWFyIjoyMDEyfSwiYnVkZ2V0X2FsbG9jYXRpb25fY2FwYWJpbGl0
         aWVzIjpbXX0=
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:53:07 GMT
+  recorded_at: Thu, 08 Aug 2013 14:36:03 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -8544,11 +8544,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 255304f03fd5fae375e4ec8c73e47f83
+      - 27f57d1867833985c7f8b5d6c42cd79f
       x-runtime:
-      - '0.025883'
+      - '0.027985'
       date:
-      - Wed, 07 Aug 2013 20:53:07 GMT
+      - Thu, 08 Aug 2013 14:36:03 GMT
       connection:
       - close
     body:
@@ -8563,7 +8563,7 @@ http_interactions:
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:53:07 GMT
+  recorded_at: Thu, 08 Aug 2013 14:36:03 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -8593,11 +8593,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - bc5a8d60d676ecd5a42e54af4fccfcfd
+      - 28e42292f65f2025e8fb781fbfb3d719
       x-runtime:
-      - '0.024921'
+      - '0.027289'
       date:
-      - Wed, 07 Aug 2013 20:53:10 GMT
+      - Thu, 08 Aug 2013 14:36:06 GMT
       connection:
       - close
     body:
@@ -8606,7 +8606,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:53:10 GMT
+  recorded_at: Thu, 08 Aug 2013 14:36:06 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations/1.json?includes%5B%5D=expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Binclude%5D%5Bbudget_structure%5D%5Bmethods%5D%5B%5D=structure_sequence&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=expense_nature_expense_nature&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=function_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=subfunction_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_program_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=government_action_action_type&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bbudget_allocation%5D%5Bmethods%5D%5B%5D=amount&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bmethods%5D%5B%5D=capability_source_code&includes%5B%5D%5Bbudget_allocation_capabilities%5D%5Binclude%5D%5Bcapability%5D%5Bonly%5D=id&includes%5B%5D%5Bbudget_structure%5D%5Bexcept%5D=custom_data&methods%5B%5D=balance&methods%5B%5D=amount&methods%5B%5D=budget_structure_structure_sequence
@@ -8636,11 +8636,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 87c579f05a39106feffe62bccf29992a
+      - 057df02b6747e201f97d00177b250484
       x-runtime:
-      - '0.046813'
+      - '0.045541'
       date:
-      - Wed, 07 Aug 2013 20:53:10 GMT
+      - Thu, 08 Aug 2013 14:36:06 GMT
       connection:
       - close
     body:
@@ -8681,7 +8681,7 @@ http_interactions:
         MDAiLCJ5ZWFyIjoyMDEyfSwiYnVkZ2V0X2FsbG9jYXRpb25fY2FwYWJpbGl0
         aWVzIjpbXX0=
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:53:10 GMT
+  recorded_at: Thu, 08 Aug 2013 14:36:06 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -8711,11 +8711,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - fd5d76e4f37d4bbc357ec6b5b1a72fb3
+      - f8342d26b49eaf026c57851c181cd4ce
       x-runtime:
-      - '0.025909'
+      - '0.027025'
       date:
-      - Wed, 07 Aug 2013 20:53:10 GMT
+      - Thu, 08 Aug 2013 14:36:06 GMT
       connection:
       - close
     body:
@@ -8730,7 +8730,7 @@ http_interactions:
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:53:10 GMT
+  recorded_at: Thu, 08 Aug 2013 14:36:06 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures.json?action=index&by_year=2012&controller=budget_structures&limit=10&term=Secretaria+de+Educa%C3%A7%C3%A3o
@@ -8760,11 +8760,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 5a3a28681b9b70cfdeae3e482a38347c
+      - 08aca6275d0daa9af3e1f0ce5e791951
       x-runtime:
-      - '0.027843'
+      - '0.030459'
       date:
-      - Wed, 07 Aug 2013 20:53:16 GMT
+      - Thu, 08 Aug 2013 14:36:12 GMT
       connection:
       - close
     body:
@@ -8811,11 +8811,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 9044057407d3d7c8713413e53d22eb64
+      - aec29ee441bb616ba5da73bdfa8bd6dd
       x-runtime:
-      - '0.025751'
+      - '0.026975'
       date:
-      - Wed, 07 Aug 2013 20:53:16 GMT
+      - Thu, 08 Aug 2013 14:36:12 GMT
       connection:
       - close
     body:
@@ -8858,20 +8858,20 @@ http_interactions:
       x-ua-compatible:
       - IE=Edge
       etag:
-      - '"03d1443ad98bce70ccfe001f7ede5e6d"'
+      - '"e421879b038cb862990d7853e2820fa5"'
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 15ca5b23bcda7ab9f3102865844c8984
+      - a5308b11063b5329baad8602b0583acb
       x-runtime:
-      - '0.040523'
+      - '0.055812'
       date:
-      - Wed, 07 Aug 2013 20:53:21 GMT
+      - Thu, 08 Aug 2013 14:36:17 GMT
       connection:
       - close
     body:
       encoding: UTF-8
-      string: '[{"alienation_appeal":false,"budget_allocation_type_id":1,"budget_structure_id":2,"code":11,"created_at":"2013-08-07T14:44:23-03:00","date":"2012-10-01","debt_type":"contract","descriptor_id":1,"education":false,"expense_nature_id":6,"foresight":false,"function_id":1,"government_action_id":1,"government_program_id":1,"health":false,"id":3,"kind":"divide","months_values":{"1":"500,00","2":"0,00","3":"0,00","4":"0,00","5":"0,00","6":"0,00","7":"0,00","8":"0,00","9":"0,00","10":"0,00","11":"0,00","12":"0,00"},"personal":false,"refinancing":true,"subfunction_id":1,"updated_at":"2013-08-07T14:44:23-03:00","value":null,"year":2012,"balance":"500.0","to_s":"11
+      string: '[{"alienation_appeal":false,"budget_allocation_type_id":1,"budget_structure_id":2,"code":11,"created_at":"2013-08-07T14:44:23-03:00","date":"2012-10-01","debt_type":"contract","descriptor_id":1,"education":false,"expense_nature_id":6,"foresight":false,"function_id":1,"government_action_id":1,"government_program_id":1,"health":false,"id":3,"kind":"divide","months_values":{"1":"500,00","2":"0,00","3":"0,00","4":"0,00","5":"0,00","6":"0,00","7":"0,00","8":"0,00","9":"0,00","10":"0,00","11":"0,00","12":"0,00"},"personal":false,"refinancing":true,"subfunction_id":1,"updated_at":"2013-08-07T14:44:23-03:00","value":null,"year":2012,"balance":"100.0","to_s":"11
         - 3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos
         Militares","expense_nature":{"created_at":"2013-08-07T14:18:22-03:00","description":"Aposentadorias
         do RPPS, Reserva Remunerada e Reformas dos Militares","docket":"Registra o
@@ -8907,11 +8907,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - c70450aaab63c64ea60ac7a62a4b39e1
+      - 312333491e7d8977090c666ad6c0bc8d
       x-runtime:
-      - '0.024945'
+      - '0.028028'
       date:
-      - Wed, 07 Aug 2013 20:53:21 GMT
+      - Thu, 08 Aug 2013 14:36:17 GMT
       connection:
       - close
     body:
@@ -8951,11 +8951,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - e93b4f829c939ffb4212fb44c2d6ff6d
+      - cc0a25b0a1723e1bec352c55c927402a
       x-runtime:
-      - '0.026688'
+      - '0.029444'
       date:
-      - Wed, 07 Aug 2013 20:53:21 GMT
+      - Thu, 08 Aug 2013 14:36:17 GMT
       connection:
       - close
     body:
@@ -8995,11 +8995,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 04caf66e9bf357bf70c9885f87514828
+      - f3767fca9188e787de9c51918f168c49
       x-runtime:
-      - '0.043628'
+      - '0.049359'
       date:
-      - Wed, 07 Aug 2013 20:53:21 GMT
+      - Thu, 08 Aug 2013 14:36:17 GMT
       connection:
       - close
     body:
@@ -9029,7 +9029,7 @@ http_interactions:
         X2F0IjoiMjAxMy0wOC0wNlQxODowNTozOS0wMzowMCIsInllYXIiOjIwMTJ9
         fV0=
     http_version: '1.1'
-  recorded_at: Wed, 10 Oct 2012 03:00:03 GMT
+  recorded_at: Wed, 10 Oct 2012 03:00:02 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -9059,11 +9059,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - b701dd4376cb849d6ce3ddd9e200c08a
+      - 02ab015b3888420d6a4ea0676750e8ed
       x-runtime:
-      - '0.031180'
+      - '0.032800'
       date:
-      - Wed, 07 Aug 2013 20:53:21 GMT
+      - Thu, 08 Aug 2013 14:36:17 GMT
       connection:
       - close
     body:
@@ -9108,11 +9108,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 8584ce8a6c0219690b49587782aa798c
+      - 308533cc0b79914afe8352134f047d9b
       x-runtime:
-      - '0.032620'
+      - '0.034698'
       date:
-      - Wed, 07 Aug 2013 20:53:22 GMT
+      - Thu, 08 Aug 2013 14:36:17 GMT
       connection:
       - close
     body:
@@ -9148,15 +9148,15 @@ http_interactions:
       x-ua-compatible:
       - IE=Edge
       etag:
-      - '"dd224bf2c56b7d81750bb710e98d4c83"'
+      - '"46d9e945a59b5f99fd881dfceb6c9276"'
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 698b8dbfe264c1207afdae5dd862e4d5
+      - 16dc10b9299d77f9737a6236ca0a9994
       x-runtime:
-      - '0.055555'
+      - '0.066354'
       date:
-      - Wed, 07 Aug 2013 20:53:22 GMT
+      - Thu, 08 Aug 2013 14:36:18 GMT
       connection:
       - close
     body:
@@ -9176,7 +9176,7 @@ http_interactions:
         MCIsIjEyIjoiMCwwMCJ9LCJwZXJzb25hbCI6ZmFsc2UsInJlZmluYW5jaW5n
         Ijp0cnVlLCJzdWJmdW5jdGlvbl9pZCI6MSwidXBkYXRlZF9hdCI6IjIwMTMt
         MDgtMDdUMTQ6NDQ6MjMtMDM6MDAiLCJ2YWx1ZSI6bnVsbCwieWVhciI6MjAx
-        MiwiYmFsYW5jZSI6IjUwMC4wIiwiYW1vdW50IjoiNTAwLjAiLCJidWRnZXRf
+        MiwiYmFsYW5jZSI6IjEwMC4wIiwiYW1vdW50IjoiNTAwLjAiLCJidWRnZXRf
         c3RydWN0dXJlX3N0cnVjdHVyZV9zZXF1ZW5jZSI6W3siYWNyb255bSI6IlNF
         TVVFRFUiLCJhZG1pbmlzdHJhdGlvbl90eXBlX2lkIjoxLCJidWRnZXRfc3Ry
         dWN0dXJlX2NvbmZpZ3VyYXRpb25faWQiOjIsImJ1ZGdldF9zdHJ1Y3R1cmVf
@@ -9272,11 +9272,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - b7304cb30a9dc08aa8f1d9da8d940c98
+      - 06ff3d2874f1697a9c6a619ca203869c
       x-runtime:
-      - '0.025075'
+      - '0.026892'
       date:
-      - Wed, 07 Aug 2013 20:53:22 GMT
+      - Thu, 08 Aug 2013 14:36:18 GMT
       connection:
       - close
     body:
@@ -9316,11 +9316,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - fc0dda055b95e5cde66489730ff9bee9
+      - 4e5227415018b8555a25300f937cce3f
       x-runtime:
-      - '0.025547'
+      - '0.027202'
       date:
-      - Wed, 07 Aug 2013 20:53:22 GMT
+      - Thu, 08 Aug 2013 14:36:18 GMT
       connection:
       - close
     body:
@@ -9360,11 +9360,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 3d11449e35ab9eefeb3bc6304ba3bcab
+      - f786d2b2de5961b0b19138906be4ffd9
       x-runtime:
-      - '0.057726'
+      - '0.047084'
       date:
-      - Wed, 07 Aug 2013 20:53:22 GMT
+      - Thu, 08 Aug 2013 14:36:18 GMT
       connection:
       - close
     body:
@@ -9435,11 +9435,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 08665f06fc9d8c979e309c38c0aefdfb
+      - 4a5187ba15c124ca419ca71b6bb40538
       x-runtime:
-      - '0.027905'
+      - '0.027069'
       date:
-      - Wed, 07 Aug 2013 20:53:22 GMT
+      - Thu, 08 Aug 2013 14:36:18 GMT
       connection:
       - close
     body:
@@ -9454,7 +9454,7 @@ http_interactions:
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Wed, 10 Oct 2012 03:00:04 GMT
+  recorded_at: Wed, 10 Oct 2012 03:00:03 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/7.json
@@ -9484,11 +9484,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - c4bff3a4940eabc5109a67104288ec43
+      - a5029182d7583ddd587b5859646adb74
       x-runtime:
-      - '0.030333'
+      - '0.026138'
       date:
-      - Wed, 07 Aug 2013 20:53:22 GMT
+      - Thu, 08 Aug 2013 14:36:18 GMT
       connection:
       - close
     body:
@@ -9498,7 +9498,7 @@ http_interactions:
         aposentadorias","expense_nature":"3.1.90.01.01","id":7,"kind":"analytical","parent_id":6,"regulatory_act_id":1,"updated_at":"2013-08-07T14:19:17-03:00","year":2012,"to_s":"3.1.90.01.01
         - Aposentadorias Custeadas com Recursos do RPPS"}'
     http_version: '1.1'
-  recorded_at: Wed, 10 Oct 2012 03:00:04 GMT
+  recorded_at: Wed, 10 Oct 2012 03:00:03 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations.json?action=index&by_year=2012&controller=budget_allocations&includes=expense_nature&limit=10&methods=balance&term=Aposentadorias
@@ -9524,26 +9524,26 @@ http_interactions:
       x-ua-compatible:
       - IE=Edge
       etag:
-      - '"03d1443ad98bce70ccfe001f7ede5e6d"'
+      - '"e421879b038cb862990d7853e2820fa5"'
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 8cc1c4c7225f30942c40021416637f6e
+      - aa2c219b3e1dc765da3de6220593bef8
       x-runtime:
-      - '0.040539'
+      - '0.115342'
       date:
-      - Wed, 07 Aug 2013 20:53:25 GMT
+      - Thu, 08 Aug 2013 14:36:21 GMT
       connection:
       - close
     body:
       encoding: UTF-8
-      string: '[{"alienation_appeal":false,"budget_allocation_type_id":1,"budget_structure_id":2,"code":11,"created_at":"2013-08-07T14:44:23-03:00","date":"2012-10-01","debt_type":"contract","descriptor_id":1,"education":false,"expense_nature_id":6,"foresight":false,"function_id":1,"government_action_id":1,"government_program_id":1,"health":false,"id":3,"kind":"divide","months_values":{"1":"500,00","2":"0,00","3":"0,00","4":"0,00","5":"0,00","6":"0,00","7":"0,00","8":"0,00","9":"0,00","10":"0,00","11":"0,00","12":"0,00"},"personal":false,"refinancing":true,"subfunction_id":1,"updated_at":"2013-08-07T14:44:23-03:00","value":null,"year":2012,"balance":"500.0","to_s":"11
+      string: '[{"alienation_appeal":false,"budget_allocation_type_id":1,"budget_structure_id":2,"code":11,"created_at":"2013-08-07T14:44:23-03:00","date":"2012-10-01","debt_type":"contract","descriptor_id":1,"education":false,"expense_nature_id":6,"foresight":false,"function_id":1,"government_action_id":1,"government_program_id":1,"health":false,"id":3,"kind":"divide","months_values":{"1":"500,00","2":"0,00","3":"0,00","4":"0,00","5":"0,00","6":"0,00","7":"0,00","8":"0,00","9":"0,00","10":"0,00","11":"0,00","12":"0,00"},"personal":false,"refinancing":true,"subfunction_id":1,"updated_at":"2013-08-07T14:44:23-03:00","value":null,"year":2012,"balance":"100.0","to_s":"11
         - 3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos
         Militares","expense_nature":{"created_at":"2013-08-07T14:18:22-03:00","description":"Aposentadorias
         do RPPS, Reserva Remunerada e Reformas dos Militares","docket":"Registra o
         valor das despesas com aposentadorias, reserva e reformas","expense_nature":"3.1.90.01.00","id":6,"kind":"synthetic","parent_id":3,"regulatory_act_id":1,"updated_at":"2013-08-07T14:18:22-03:00","year":2012}}]'
     http_version: '1.1'
-  recorded_at: Wed, 10 Oct 2012 03:00:01 GMT
+  recorded_at: Wed, 10 Oct 2012 03:00:02 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/6.json
@@ -9573,11 +9573,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 8f7add7990fc09e0ab2e094c4df496ac
+      - 936366ab87e32889492f4d8c6cbc9698
       x-runtime:
-      - '0.028124'
+      - '0.029963'
       date:
-      - Wed, 07 Aug 2013 20:53:25 GMT
+      - Thu, 08 Aug 2013 14:36:21 GMT
       connection:
       - close
     body:
@@ -9587,7 +9587,7 @@ http_interactions:
         valor das despesas com aposentadorias, reserva e reformas","expense_nature":"3.1.90.01.00","id":6,"kind":"synthetic","parent_id":3,"regulatory_act_id":1,"updated_at":"2013-08-07T14:18:22-03:00","year":2012,"to_s":"3.1.90.01.00
         - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares"}'
     http_version: '1.1'
-  recorded_at: Wed, 10 Oct 2012 03:00:01 GMT
+  recorded_at: Wed, 10 Oct 2012 03:00:02 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures.json?action=index&by_parent_id=6&by_year=2012&controller=expense_natures&limit=10&term=3.1
@@ -9617,11 +9617,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 64de85ed56883f9c9ffb71464041300d
+      - 3ff6f7bf9eaab97f8d3a0fb2f2d8f1c4
       x-runtime:
-      - '0.026178'
+      - '0.027855'
       date:
-      - Wed, 07 Aug 2013 20:53:25 GMT
+      - Thu, 08 Aug 2013 14:36:21 GMT
       connection:
       - close
     body:
@@ -9661,11 +9661,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 377086895044de4c65e9bcc78bcacfbf
+      - 50d20a6c5e5caf691777ad425ce5e173
       x-runtime:
-      - '0.043347'
+      - '0.047506'
       date:
-      - Wed, 07 Aug 2013 20:53:26 GMT
+      - Thu, 08 Aug 2013 14:36:21 GMT
       connection:
       - close
     body:
@@ -9725,11 +9725,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - ecab8808904821aed542e23489c83026
+      - a21937d3c69c31765d3f0a001bf1b1fe
       x-runtime:
-      - '0.032301'
+      - '0.034542'
       date:
-      - Wed, 07 Aug 2013 20:53:26 GMT
+      - Thu, 08 Aug 2013 14:36:21 GMT
       connection:
       - close
     body:
@@ -9774,11 +9774,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 5028d1955a5a924f147af5cfccc7e361
+      - 73c7c44462a0043eabaa0f32149de158
       x-runtime:
-      - '0.032780'
+      - '0.036802'
       date:
-      - Wed, 07 Aug 2013 20:53:26 GMT
+      - Thu, 08 Aug 2013 14:36:21 GMT
       connection:
       - close
     body:
@@ -9814,15 +9814,15 @@ http_interactions:
       x-ua-compatible:
       - IE=Edge
       etag:
-      - '"dd224bf2c56b7d81750bb710e98d4c83"'
+      - '"46d9e945a59b5f99fd881dfceb6c9276"'
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 5b221c9f0746c1ea2ab607b3a6925ac3
+      - 94ab26689df4b1266edaaaf77f5d699c
       x-runtime:
-      - '0.052482'
+      - '0.063934'
       date:
-      - Wed, 07 Aug 2013 20:53:26 GMT
+      - Thu, 08 Aug 2013 14:36:22 GMT
       connection:
       - close
     body:
@@ -9842,7 +9842,7 @@ http_interactions:
         MCIsIjEyIjoiMCwwMCJ9LCJwZXJzb25hbCI6ZmFsc2UsInJlZmluYW5jaW5n
         Ijp0cnVlLCJzdWJmdW5jdGlvbl9pZCI6MSwidXBkYXRlZF9hdCI6IjIwMTMt
         MDgtMDdUMTQ6NDQ6MjMtMDM6MDAiLCJ2YWx1ZSI6bnVsbCwieWVhciI6MjAx
-        MiwiYmFsYW5jZSI6IjUwMC4wIiwiYW1vdW50IjoiNTAwLjAiLCJidWRnZXRf
+        MiwiYmFsYW5jZSI6IjEwMC4wIiwiYW1vdW50IjoiNTAwLjAiLCJidWRnZXRf
         c3RydWN0dXJlX3N0cnVjdHVyZV9zZXF1ZW5jZSI6W3siYWNyb255bSI6IlNF
         TVVFRFUiLCJhZG1pbmlzdHJhdGlvbl90eXBlX2lkIjoxLCJidWRnZXRfc3Ry
         dWN0dXJlX2NvbmZpZ3VyYXRpb25faWQiOjIsImJ1ZGdldF9zdHJ1Y3R1cmVf
@@ -9938,11 +9938,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 057c1289382b6beef7062aa62c4fa394
+      - 4aaab6c1c0aea48b222677a2bdb6b7f0
       x-runtime:
-      - '0.025117'
+      - '0.027026'
       date:
-      - Wed, 07 Aug 2013 20:53:26 GMT
+      - Thu, 08 Aug 2013 14:36:22 GMT
       connection:
       - close
     body:
@@ -9982,11 +9982,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 184967a45485262dc3deb3645a9726e9
+      - 16d358f203ca73962afac57f33f015b9
       x-runtime:
-      - '0.032531'
+      - '0.026419'
       date:
-      - Wed, 07 Aug 2013 20:53:26 GMT
+      - Thu, 08 Aug 2013 14:36:22 GMT
       connection:
       - close
     body:
@@ -10026,11 +10026,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 93f1ac848b636aa36ec57bc5a688bfc3
+      - eb816da021a1e1c3c70eb9cd4b42f225
       x-runtime:
-      - '0.044550'
+      - '0.046639'
       date:
-      - Wed, 07 Aug 2013 20:53:26 GMT
+      - Thu, 08 Aug 2013 14:36:22 GMT
       connection:
       - close
     body:
@@ -10101,11 +10101,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 7471b61a530b66bda28a58c531c84b97
+      - 50dc906a9e7f7d221f98de9e7ac10ceb
       x-runtime:
-      - '0.025361'
+      - '0.026471'
       date:
-      - Wed, 07 Aug 2013 20:53:27 GMT
+      - Thu, 08 Aug 2013 14:36:22 GMT
       connection:
       - close
     body:
@@ -10150,11 +10150,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 072f2325a29ffffabb2ce5309c331095
+      - f3b83d20cd7833af85493d00f746a482
       x-runtime:
-      - '0.025801'
+      - '0.026757'
       date:
-      - Wed, 07 Aug 2013 20:53:27 GMT
+      - Thu, 08 Aug 2013 14:36:22 GMT
       connection:
       - close
     body:
@@ -10194,11 +10194,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 23aea39cc03c4f4cb4214dcbd26589d3
+      - b51e65ee46b4e84503243d7653e27c22
       x-runtime:
-      - '0.069233'
+      - '0.027159'
       date:
-      - Wed, 07 Aug 2013 20:53:28 GMT
+      - Thu, 08 Aug 2013 14:36:23 GMT
       connection:
       - close
     body:
@@ -10207,7 +10207,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:53:28 GMT
+  recorded_at: Thu, 08 Aug 2013 14:36:23 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations.json?action=index&by_year=2013&controller=budget_allocations&includes=expense_nature&limit=10&methods=balance&term=A
@@ -10237,18 +10237,18 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 4a70c89f1bcae1703ea4bfbdcab50f21
+      - 1bf5a2947227a7bc2403b461665590e4
       x-runtime:
-      - '0.041668'
+      - '0.038691'
       date:
-      - Wed, 07 Aug 2013 20:53:29 GMT
+      - Thu, 08 Aug 2013 14:36:24 GMT
       connection:
       - close
     body:
       encoding: UTF-8
       string: '[]'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:53:29 GMT
+  recorded_at: Thu, 08 Aug 2013 14:36:24 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_allocations.json?action=index&by_year=2012&controller=budget_allocations&includes=expense_nature&limit=10&methods=balance&term=A
@@ -10274,15 +10274,15 @@ http_interactions:
       x-ua-compatible:
       - IE=Edge
       etag:
-      - '"cc02ef95dbd7301733f317c767e00cca"'
+      - '"386065464d53c7bd947995cbdbe7da8c"'
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 88a92be6ab8056b77a6f1ec2b6b9ba78
+      - 7d8951e92fbf9388d2087956a67d6580
       x-runtime:
-      - '0.060329'
+      - '0.073152'
       date:
-      - Wed, 07 Aug 2013 20:53:29 GMT
+      - Thu, 08 Aug 2013 14:36:24 GMT
       connection:
       - close
     body:
@@ -10324,7 +10324,7 @@ http_interactions:
         LDAwIiwiMTIiOiIwLDAwIn0sInBlcnNvbmFsIjpmYWxzZSwicmVmaW5hbmNp
         bmciOnRydWUsInN1YmZ1bmN0aW9uX2lkIjoxLCJ1cGRhdGVkX2F0IjoiMjAx
         My0wOC0wN1QxNDo0NDoyMy0wMzowMCIsInZhbHVlIjpudWxsLCJ5ZWFyIjoy
-        MDEyLCJiYWxhbmNlIjoiNTAwLjAiLCJ0b19zIjoiMTEgLSAzLjEuOTAuMDEu
+        MDEyLCJiYWxhbmNlIjoiMTAwLjAiLCJ0b19zIjoiMTEgLSAzLjEuOTAuMDEu
         MDAgLSBBcG9zZW50YWRvcmlhcyBkbyBSUFBTLCBSZXNlcnZhIFJlbXVuZXJh
         ZGEgZSBSZWZvcm1hcyBkb3MgTWlsaXRhcmVzIiwiZXhwZW5zZV9uYXR1cmUi
         OnsiY3JlYXRlZF9hdCI6IjIwMTMtMDgtMDdUMTQ6MTg6MjItMDM6MDAiLCJk
@@ -10336,7 +10336,7 @@ http_interactions:
         bnRfaWQiOjMsInJlZ3VsYXRvcnlfYWN0X2lkIjoxLCJ1cGRhdGVkX2F0Ijoi
         MjAxMy0wOC0wN1QxNDoxODoyMi0wMzowMCIsInllYXIiOjIwMTJ9fV0=
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:53:29 GMT
+  recorded_at: Thu, 08 Aug 2013 14:36:24 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/3.json
@@ -10366,11 +10366,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - fd2e7b5a8fe7d0179e28d0b17c2d9c36
+      - 3fcf88755495830eb0f91502003ae869
       x-runtime:
-      - '0.025777'
+      - '0.026851'
       date:
-      - Wed, 07 Aug 2013 20:53:29 GMT
+      - Thu, 08 Aug 2013 14:36:24 GMT
       connection:
       - close
     body:
@@ -10385,7 +10385,7 @@ http_interactions:
         MDEyLCJ0b19zIjoiMy4xLjkwLjAwLjAwIC0gQXBsaWNhw6fDtWVzIERpcmV0
         YXMifQ==
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:53:29 GMT
+  recorded_at: Thu, 08 Aug 2013 14:36:24 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/expense_natures/6.json
@@ -10415,11 +10415,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - a24705514b2522e564c1b0a8f7b126b2
+      - bfe116d8255aaea96b48311684570344
       x-runtime:
-      - '0.028653'
+      - '0.027957'
       date:
-      - Wed, 07 Aug 2013 20:53:29 GMT
+      - Thu, 08 Aug 2013 14:36:24 GMT
       connection:
       - close
     body:
@@ -10429,5 +10429,5 @@ http_interactions:
         valor das despesas com aposentadorias, reserva e reformas","expense_nature":"3.1.90.01.00","id":6,"kind":"synthetic","parent_id":3,"regulatory_act_id":1,"updated_at":"2013-08-07T14:18:22-03:00","year":2012,"to_s":"3.1.90.01.00
         - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares"}'
     http_version: '1.1'
-  recorded_at: Wed, 07 Aug 2013 20:53:29 GMT
+  recorded_at: Thu, 08 Aug 2013 14:36:24 GMT
 recorded_with: VCR 2.5.0
