@@ -57,7 +57,9 @@ class PriceCollectionProposal < Compras::Model
   end
 
   def classification_by_lot(lot)
-    items_with_creditor = PriceCollectionProposalItem.by_lot_item_order_by_unit_price(lot)
+    items_with_creditor = PriceCollectionProposalItem.by_lot_item_order_by_unit_price(lot).reload
+
+    return unless items_with_creditor.any?
 
     classification = items_with_creditor.index { |item| item.creditor_id.to_i == creditor_id.to_i }.succ
     classification = -1 if has_item_with_unit_price_equals_zero(lot)
