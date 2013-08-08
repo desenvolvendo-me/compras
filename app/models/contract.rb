@@ -98,7 +98,14 @@ class Contract < Compras::Model
 
   def pledges
     Pledge.all(params: { by_contract_id: id,
-      includes: [:capability, budget_allocation: { include: :expense_nature}] }) || []
+      methods: [:expense_nature_expense_nature,
+        :function_code,
+        :subfunction_code,
+        :government_program_code,
+        :government_action_code,
+        :capability_source_code],
+      includes: [:capability,
+        budget_allocation: { include: :expense_nature }] }) || []
   end
 
   def founded_debt_pledges

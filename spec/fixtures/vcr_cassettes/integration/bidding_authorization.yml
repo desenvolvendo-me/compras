@@ -29,11 +29,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 72a8f0fb5196af20f80670073db26ab0
+      - 3f69732c5b0037d55783018cfa06baf3
       x-runtime:
-      - '0.146620'
+      - '0.051935'
       date:
-      - Thu, 08 Aug 2013 19:15:07 GMT
+      - Fri, 09 Aug 2013 11:55:54 GMT
       connection:
       - close
     body:
@@ -42,7 +42,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Thu, 08 Aug 2013 19:15:07 GMT
+  recorded_at: Fri, 09 Aug 2013 11:55:54 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -72,11 +72,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - b10d3657963c0fac095839a0131f58a9
+      - 5f30b03e69a96c18a2e256513b1ad870
       x-runtime:
-      - '0.061802'
+      - '0.086677'
       date:
-      - Thu, 08 Aug 2013 19:15:07 GMT
+      - Fri, 09 Aug 2013 11:55:54 GMT
       connection:
       - close
     body:
@@ -85,7 +85,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Thu, 08 Aug 2013 19:15:07 GMT
+  recorded_at: Fri, 09 Aug 2013 11:55:54 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/1.json
@@ -115,11 +115,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - ab99773a5e05a669275534263fc148b0
+      - c0261ad3c7bb39737f6d500f0d1e9bb8
       x-runtime:
-      - '0.055954'
+      - '0.083418'
       date:
-      - Thu, 08 Aug 2013 19:15:07 GMT
+      - Fri, 09 Aug 2013 11:55:55 GMT
       connection:
       - close
     body:
@@ -128,7 +128,7 @@ http_interactions:
         Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
         - Detran"}'
     http_version: '1.1'
-  recorded_at: Thu, 08 Aug 2013 19:15:07 GMT
+  recorded_at: Fri, 09 Aug 2013 11:55:55 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/2.json
@@ -158,11 +158,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 6d3ea2b2d38dde2f5268db21d2eb2664
+      - 99322727cea28187cced3ecd3c1bb446
       x-runtime:
-      - '0.054168'
+      - '0.075789'
       date:
-      - Thu, 08 Aug 2013 19:15:07 GMT
+      - Fri, 09 Aug 2013 11:55:55 GMT
       connection:
       - close
     body:
@@ -179,7 +179,7 @@ http_interactions:
         VDE4OjA1OjM4LTAzOjAwIiwidG9fcyI6IjkgLSBTZWNyZXRhcmlhIGRlIEVk
         dWNhw6fDo28ifQ==
     http_version: '1.1'
-  recorded_at: Thu, 08 Aug 2013 19:15:07 GMT
+  recorded_at: Fri, 09 Aug 2013 11:55:55 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/2.json
@@ -209,11 +209,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - a05c6def5c66d4d88acfe3a39432fe64
+      - c2bdec06dc25ffb3c01289a60047e172
       x-runtime:
-      - '0.049286'
+      - '0.075405'
       date:
-      - Thu, 08 Aug 2013 19:15:07 GMT
+      - Fri, 09 Aug 2013 11:55:55 GMT
       connection:
       - close
     body:
@@ -230,7 +230,7 @@ http_interactions:
         VDE4OjA1OjM4LTAzOjAwIiwidG9fcyI6IjkgLSBTZWNyZXRhcmlhIGRlIEVk
         dWNhw6fDo28ifQ==
     http_version: '1.1'
-  recorded_at: Thu, 08 Aug 2013 19:15:07 GMT
+  recorded_at: Fri, 09 Aug 2013 11:55:55 GMT
 - request:
     method: get
     uri: http://contabil.dev/api/budget_structures/2.json
@@ -260,11 +260,11 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - fba4ab6bee47ec6b2a9eeb900680fd2c
+      - b3f33d5f32d309b36f3f2d3bde219118
       x-runtime:
-      - '0.051123'
+      - '0.099742'
       date:
-      - Thu, 08 Aug 2013 19:15:07 GMT
+      - Fri, 09 Aug 2013 11:55:55 GMT
       connection:
       - close
     body:
@@ -281,5 +281,5 @@ http_interactions:
         VDE4OjA1OjM4LTAzOjAwIiwidG9fcyI6IjkgLSBTZWNyZXRhcmlhIGRlIEVk
         dWNhw6fDo28ifQ==
     http_version: '1.1'
-  recorded_at: Thu, 08 Aug 2013 19:15:07 GMT
+  recorded_at: Fri, 09 Aug 2013 11:55:55 GMT
 recorded_with: VCR 2.5.0

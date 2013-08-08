@@ -2,37 +2,25 @@
 require 'spec_helper'
 
 describe TceExport::MG::MonthlyMonitoring::ContractGenerator do
-  let :budget_structure_parent do
-    BudgetStructure.new(
-      id: 2,
-      code: '1',
-      tce_code: '051',
-      description: 'Secretaria de Educação',
-      acronym: 'SEMUEDU',
-      performance_field: 'Desenvolvimento Educacional')
+  before(:all) do
+    UnicoAPI::Consumer.set_customer customer
+    VCR.insert_cassette('integration/contract', allow_playback_repeats: true)
   end
 
-  let :budget_structure do
-    BudgetStructure.new(
-      id: 1,
-      parent_id: 2,
-      code: '29',
-      tce_code: '051',
-      description: 'Secretaria de Desenvolvimento',
-      acronym: 'SEMUEDU',
-      performance_field: 'Desenvolvimento Educacional')
+  after(:all) do
+    VCR.eject_cassette
   end
 
+  let(:customer) { create(:customer, domain: 'compras.dev', name: 'Compras Dev') }
   describe "#generate_file" do
     before do
       FileUtils.rm_f('tmp/CONTRATO.csv')
-
-      BudgetAllocation.stub(:find).and_return(budget_allocation)
     end
 
     after do
       FileUtils.rm_f('tmp/CONTRATO.csv')
     end
+
 
     let(:signature_date) { Date.new 2013, 5, 15 }
     let(:end_date)       { Date.new 2013, 5, 30 }
@@ -69,20 +57,6 @@ describe TceExport::MG::MonthlyMonitoring::ContractGenerator do
         licitation_process_ratification_items: [])
     end
 
-    let :expense_nature do
-      ExpenseNature.new(id: 1, expense_nature: '3.1.90.01.01')
-    end
-
-    let :budget_allocation do
-      BudgetAllocation.new(
-        id: 1,
-        function_code: '04',
-        subfunction_code: '01',
-        government_program_code: '003',
-        government_action_code: '003'
-      )
-    end
-
     context "with two or more creditors" do
       it "generates a CSV file with the required data" do
         FactoryGirl.create(:extended_prefecture, prefecture: prefecture)
@@ -100,43 +74,19 @@ describe TceExport::MG::MonthlyMonitoring::ContractGenerator do
           end_date: end_date, licitation_process: licitation_process,
           creditors: [creditor_sobrinho, creditor_wenderson], consortium_agreement: true)
 
-        budget_allocation.expense_nature = expense_nature
-        budget_allocation.budget_structure = budget_structure
-
-        pledge = Pledge.new(
-          id: 1, value: 9.99, description: 'Empenho 1', year: 2013, to_s: 1,
-          emission_date: signature_date,
-          capability: 1,
-          licitation_process: licitation_process,
-          contract: contract,
-          expense_nature: expense_nature,
-          expense_nature_expense_nature: budget_allocation.expense_nature.expense_nature,
-          function_code: budget_allocation.function_code,
-          subfunction_code: budget_allocation.subfunction_code,
-          government_program_code: budget_allocation.government_program_code,
-          government_action_code: budget_allocation.government_action_code,
-          capability_source_code: '001')
-
-        UnicoAPI::Resources::Contabilidade::Pledge.stub(:all)
-          .with(params: {by_contract_id: contract.id, includes: [:capability, budget_allocation: { include: :expense_nature }]})
-          .and_return([pledge])
-
         ContractTermination.make!(:contrato_rescindido, contract: contract)
-
-        BudgetStructure.should_receive(:find).at_least(1).times.with(2, params: {}).and_return(budget_structure_parent)
-        BudgetStructure.should_receive(:find).at_least(1).times.with(1, params: {}).and_return(budget_structure)
 
         described_class.generate_file(monthly_monitoring)
 
         csv = File.read('tmp/CONTRATO.csv', encoding: 'ISO-8859-1')
 
-        reg_10   =  "10;#{contract.id};98;98029;001;#{signature_date_format}; ; ; ; ; ;1;2012;2;Objeto;1;09012012;30052013;100000;Empreitada integral; ; ;"
+        reg_10   =  "10;#{contract.id};98;98001;001;#{signature_date_format}; ; ; ; ; ;1;2012;2;Objeto;1;09012012;30052013;100000;Empreitada integral; ; ;"
         reg_10   << "Multa rescisória;Multa inadimplemento;4;Wenderson Malheiros;00314951334;10012012;Jornal Oficial do Município"
         reg_11   =  "11;#{contract.id};Arame comum;1,0000;UN;2,9900"
-        reg_12   =  "12;#{contract.id};98;98029;04;001;0003;0003; ;319001;001"
+        reg_12   =  "12;#{contract.id};98;98001;04;001;0001;0001; ;319001;001"
         reg_13_1 =  "13;#{contract.id};1;00314951334;Wenderson Malheiros"
         reg_13_2 =  "13;#{contract.id};1;00315198737;Gabriel Sobrinho"
-        reg_40   =  "40;98;98029;001;15052013;#{current_date};150000"
+        reg_40   =  "40;98;98001;001;15052013;#{current_date};150000"
 
         expect(csv).to eq [reg_10, reg_11, reg_12, reg_13_1, reg_13_2, reg_40].join("\n")
       end
@@ -161,40 +111,15 @@ describe TceExport::MG::MonthlyMonitoring::ContractGenerator do
 
         ContractTermination.make!(:contrato_rescindido, contract: contract)
 
-        budget_allocation.expense_nature = expense_nature
-        budget_allocation.budget_structure = budget_structure
-
-        pledge = Pledge.new(
-          id: 1, value: 9.99, description: 'Empenho 1', year: 2013, to_s: 1,
-          emission_date: signature_date,
-          capability_id: 1,
-          licitation_process: licitation_process,
-          contract: contract,
-          expense_nature: expense_nature,
-          expense_nature_expense_nature: budget_allocation.expense_nature.expense_nature,
-          function_code: budget_allocation.function_code,
-          subfunction_code: budget_allocation.subfunction_code,
-          government_program_code: budget_allocation.government_program_code,
-          government_action_code: budget_allocation.government_action_code,
-          capability_source_code: "001")
-
-        UnicoAPI::Resources::Contabilidade::Pledge.stub(:all)
-          .with(params: {by_contract_id: contract.id,
-            includes: [:capability, budget_allocation: { include: :expense_nature }]})
-          .and_return([pledge])
-
-        BudgetStructure.should_receive(:find).at_least(1).times.with(2, params: {}).and_return(budget_structure_parent)
-        BudgetStructure.should_receive(:find).at_least(1).times.with(1, params: {}).and_return(budget_structure)
-
         described_class.generate_file(monthly_monitoring)
 
         csv = File.read('tmp/CONTRATO.csv', encoding: 'ISO-8859-1')
 
-        reg_10   =  "10;#{contract.id};98;98029;001;#{signature_date_format};Gabriel Sobrinho;1;00315198737;Gabriel Sobrinho; ;1;2012;2;Objeto;1;09012012;30052013;100000;Empreitada integral; ; ;"
+        reg_10   =  "10;#{contract.id};98;98001;001;#{signature_date_format};Gabriel Sobrinho;1;00315198737;Gabriel Sobrinho; ;1;2012;2;Objeto;1;09012012;30052013;100000;Empreitada integral; ; ;"
         reg_10   << "Multa rescisória;Multa inadimplemento;4;Wenderson Malheiros;00314951334;10012012;Jornal Oficial do Município"
         reg_11   =  "11;#{contract.id};Arame comum;1,0000;UN;2,9900"
-        reg_12   =  "12;#{contract.id};98;98029;04;001;0003;0003; ;319001;001"
-        reg_40   =  "40;98;98029;001;15052013;#{current_date};150000"
+        reg_12   =  "12;#{contract.id};98;98001;04;001;0001;0001; ;319001;001"
+        reg_40   =  "40;98;98001;001;15052013;#{current_date};150000"
 
         expect(csv).to eq [reg_10, reg_11, reg_12, reg_40].join("\n")
       end

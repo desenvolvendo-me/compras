@@ -1,0 +1,375 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://contabil.dev/api/budget_structures/1.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - application/json
+      x-unico-api-customer-secret-token:
+      - '1234'
+      accept-encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-type:
+      - application/json; charset=utf-8
+      x-ua-compatible:
+      - IE=Edge
+      etag:
+      - '"793a967dacd1e19ef32bc2e67cdd5f2d"'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - cfe4a6b2cbef43228e1f06f6a42d6376
+      x-runtime:
+      - '0.039742'
+      date:
+      - Fri, 09 Aug 2013 12:17:23 GMT
+      connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '{"acronym":"SEMUEDU","administration_type_id":1,"budget_structure_configuration_id":1,"budget_structure_level_id":1,"code":"1","created_at":"2013-08-06T18:05:38-03:00","description":"Detran","full_code":"1","id":1,"kind":"analytical","parent_id":2,"performance_field":"Desenvolvimento
+        Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
+        - Detran"}'
+    http_version: '1.1'
+  recorded_at: Fri, 09 Aug 2013 12:17:23 GMT
+- request:
+    method: get
+    uri: http://contabil.dev/api/pledges.json?by_contract_id=3&includes%5B%5D=capability&includes%5B%5D%5Bbudget_allocation%5D%5Binclude%5D=expense_nature&methods%5B%5D=expense_nature_expense_nature&methods%5B%5D=function_code&methods%5B%5D=subfunction_code&methods%5B%5D=government_program_code&methods%5B%5D=government_action_code&methods%5B%5D=capability_source_code
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - application/json
+      x-unico-api-customer-secret-token:
+      - '1234'
+      accept-encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-type:
+      - application/json; charset=utf-8
+      x-ua-compatible:
+      - IE=Edge
+      etag:
+      - '"2463dfcc437957847591885ed7b49a9d"'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - 509d8227cdde67d264b96d0b8cf06506
+      x-runtime:
+      - '0.165738'
+      date:
+      - Fri, 09 Aug 2013 12:17:23 GMT
+      connection:
+      - close
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        W3siYWNjb3VudGluZ19hY2NvdW50X2lkIjpudWxsLCJhbW91bnQiOiIxMDAu
+        MCIsImJ1ZGdldF9hbGxvY2F0aW9uX2lkIjozLCJjYXBhYmlsaXR5X2lkIjox
+        LCJjb2RlIjo4LCJjb250cmFjdF9pZCI6MywiY29udHJhY3RfeWVhciI6IjIw
+        MTIiLCJjcmVhdGVkX2F0IjoiMjAxMy0wOC0wOFQxNzo1NDo1OC0wMzowMCIs
+        ImNyZWRpdG9yX2lkIjoxLCJkZXNjcmlwdG9yX2lkIjoxLCJlbWlzc2lvbl9k
+        YXRlIjoiMjAxMi0xMC0wMSIsImV4cGVuc2Vfa2luZF9pZCI6bnVsbCwiZXhw
+        ZW5zZV9uYXR1cmVfaWQiOjcsImZvdW5kZWRfZGVidF9jb250cmFjdF9pZCI6
+        MSwiaWQiOjgsImluaXRpYWxfdmFsdWVfbm90X3Byb2Nlc3NlZCI6IjAuMCIs
+        ImluaXRpYWxfdmFsdWVfcHJvY2Vzc2VkIjoiMC4wIiwibGVmdG92ZXJfcGxl
+        ZGdlIjpmYWxzZSwibGljaXRhdGlvbl9wcm9jZXNzX2lkIjpudWxsLCJtYWlu
+        X3BsZWRnZV9pZCI6bnVsbCwicGxlZGdlX2NhdGVnb3J5X2lkIjpudWxsLCJw
+        bGVkZ2VfbW9kYWxpdHkiOiIxIiwicHJlY2F0b3J5X2lkIjpudWxsLCJwdXJj
+        aGFzZV9wcm9jZXNzX2lkIjpudWxsLCJwdXJjaGFzZV9wcm9jZXNzX3llYXIi
+        Om51bGwsInJlc2VydmVfZnVuZF9pZCI6bnVsbCwic3BlY2lhbF9pbnNjcmlw
+        dGlvbl9pZCI6bnVsbCwidHlwZV9vZl93b3JrIjpudWxsLCJ1cGRhdGVkX2F0
+        IjoiMjAxMy0wOC0wOFQxNzo1NDo1OC0wMzowMCIsIndvcmtfcmVnaXN0cmF0
+        aW9uX251bWJlcl9pbnNzIjpudWxsLCJ5ZWFyIjoyMDEyLCJleHBlbnNlX25h
+        dHVyZV9leHBlbnNlX25hdHVyZSI6IjMuMS45MC4wMS4wMSIsImZ1bmN0aW9u
+        X2NvZGUiOiIwNCIsInN1YmZ1bmN0aW9uX2NvZGUiOiIwMSIsImdvdmVybm1l
+        bnRfcHJvZ3JhbV9jb2RlIjoiMDAwMSIsImdvdmVybm1lbnRfYWN0aW9uX2Nv
+        ZGUiOiIwMDAxIiwiY2FwYWJpbGl0eV9zb3VyY2VfY29kZSI6MSwidG9fcyI6
+        IjgiLCJjYXBhYmlsaXR5Ijp7ImNhcGFiaWxpdHlfZGVzdGluYXRpb25faWQi
+        Om51bGwsImNyZWF0ZWRfYXQiOiIyMDEzLTA4LTA2VDE4OjA1OjM5LTAzOjAw
+        IiwiZGVzY3JpcHRpb24iOiJSZWZvcm1hIGUgQW1wbGlhw6fDo28iLCJlbnRp
+        dHlfaWQiOjEsImdvYWwiOiJPdGltaXphciBvIGF0ZW5kaW1lbnRvIGEgdG9k
+        b3MiLCJpZCI6MSwia2luZCI6Im9yZGluYXJ5Iiwic291cmNlIjpudWxsLCJz
+        dGF0dXMiOiJhY3RpdmUiLCJ0Y2Vfc3BlY2lmaWNhdGlvbl9jYXBhYmlsaXR5
+        X2lkIjoxLCJ1cGRhdGVkX2F0IjoiMjAxMy0wOC0wNlQxODowNTozOS0wMzow
+        MCIsInllYXIiOjIwMTJ9LCJidWRnZXRfYWxsb2NhdGlvbiI6eyJhbGllbmF0
+        aW9uX2FwcGVhbCI6ZmFsc2UsImJ1ZGdldF9hbGxvY2F0aW9uX3R5cGVfaWQi
+        OjEsImJ1ZGdldF9zdHJ1Y3R1cmVfaWQiOjIsImNvZGUiOjExLCJjcmVhdGVk
+        X2F0IjoiMjAxMy0wOC0wN1QxNDo0NDoyMy0wMzowMCIsImRhdGUiOiIyMDEy
+        LTEwLTAxIiwiZGVidF90eXBlIjoiY29udHJhY3QiLCJkZXNjcmlwdG9yX2lk
+        IjoxLCJlZHVjYXRpb24iOmZhbHNlLCJleHBlbnNlX25hdHVyZV9pZCI6Niwi
+        Zm9yZXNpZ2h0IjpmYWxzZSwiZnVuY3Rpb25faWQiOjEsImdvdmVybm1lbnRf
+        YWN0aW9uX2lkIjoxLCJnb3Zlcm5tZW50X3Byb2dyYW1faWQiOjEsImhlYWx0
+        aCI6ZmFsc2UsImlkIjozLCJraW5kIjoiZGl2aWRlIiwibW9udGhzX3ZhbHVl
+        cyI6eyIxIjoiNTAwLDAwIiwiMiI6IjAsMDAiLCIzIjoiMCwwMCIsIjQiOiIw
+        LDAwIiwiNSI6IjAsMDAiLCI2IjoiMCwwMCIsIjciOiIwLDAwIiwiOCI6IjAs
+        MDAiLCI5IjoiMCwwMCIsIjEwIjoiMCwwMCIsIjExIjoiMCwwMCIsIjEyIjoi
+        MCwwMCJ9LCJwZXJzb25hbCI6ZmFsc2UsInJlZmluYW5jaW5nIjp0cnVlLCJz
+        dWJmdW5jdGlvbl9pZCI6MSwidXBkYXRlZF9hdCI6IjIwMTMtMDgtMDdUMTQ6
+        NDQ6MjMtMDM6MDAiLCJ2YWx1ZSI6bnVsbCwieWVhciI6MjAxMiwiZXhwZW5z
+        ZV9uYXR1cmUiOnsiY3JlYXRlZF9hdCI6IjIwMTMtMDgtMDdUMTQ6MTg6MjIt
+        MDM6MDAiLCJkZXNjcmlwdGlvbiI6IkFwb3NlbnRhZG9yaWFzIGRvIFJQUFMs
+        IFJlc2VydmEgUmVtdW5lcmFkYSBlIFJlZm9ybWFzIGRvcyBNaWxpdGFyZXMi
+        LCJkb2NrZXQiOiJSZWdpc3RyYSBvIHZhbG9yIGRhcyBkZXNwZXNhcyBjb20g
+        YXBvc2VudGFkb3JpYXMsIHJlc2VydmEgZSByZWZvcm1hcyIsImV4cGVuc2Vf
+        bmF0dXJlIjoiMy4xLjkwLjAxLjAwIiwiaWQiOjYsImtpbmQiOiJzeW50aGV0
+        aWMiLCJwYXJlbnRfaWQiOjMsInJlZ3VsYXRvcnlfYWN0X2lkIjoxLCJ1cGRh
+        dGVkX2F0IjoiMjAxMy0wOC0wN1QxNDoxODoyMi0wMzowMCIsInllYXIiOjIw
+        MTJ9fX1d
+    http_version: '1.1'
+  recorded_at: Fri, 09 Aug 2013 12:17:23 GMT
+- request:
+    method: get
+    uri: http://contabil.dev/api/budget_structures/2.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - application/json
+      x-unico-api-customer-secret-token:
+      - '1234'
+      accept-encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-type:
+      - application/json; charset=utf-8
+      x-ua-compatible:
+      - IE=Edge
+      etag:
+      - '"dd8f7e5d7017858559d987e965c4189d"'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - 927fcd508d07ddbbdcd5ad79ff342a3a
+      x-runtime:
+      - '0.038005'
+      date:
+      - Fri, 09 Aug 2013 12:17:23 GMT
+      connection:
+      - close
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJhY3JvbnltIjoiU0VNVUVEVSIsImFkbWluaXN0cmF0aW9uX3R5cGVfaWQi
+        OjEsImJ1ZGdldF9zdHJ1Y3R1cmVfY29uZmlndXJhdGlvbl9pZCI6MiwiYnVk
+        Z2V0X3N0cnVjdHVyZV9sZXZlbF9pZCI6MSwiY29kZSI6IjkiLCJjcmVhdGVk
+        X2F0IjoiMjAxMy0wOC0wNlQxODowNTozOC0wMzowMCIsImRlc2NyaXB0aW9u
+        IjoiU2VjcmV0YXJpYSBkZSBFZHVjYcOnw6NvIiwiZnVsbF9jb2RlIjoiOSIs
+        ImlkIjoyLCJraW5kIjoiYW5hbHl0aWNhbCIsInBhcmVudF9pZCI6bnVsbCwi
+        cGVyZm9ybWFuY2VfZmllbGQiOiJEZXNlbnZvbHZpbWVudG8gRWR1Y2FjaW9u
+        YWwiLCJ0Y2VfY29kZSI6IjA1MSIsInVwZGF0ZWRfYXQiOiIyMDEzLTA4LTA2
+        VDE4OjA1OjM4LTAzOjAwIiwidG9fcyI6IjkgLSBTZWNyZXRhcmlhIGRlIEVk
+        dWNhw6fDo28ifQ==
+    http_version: '1.1'
+  recorded_at: Fri, 09 Aug 2013 12:17:23 GMT
+- request:
+    method: get
+    uri: http://contabil.dev/api/budget_structures/1.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - application/json
+      x-unico-api-customer-secret-token:
+      - '1234'
+      accept-encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-type:
+      - application/json; charset=utf-8
+      x-ua-compatible:
+      - IE=Edge
+      etag:
+      - '"793a967dacd1e19ef32bc2e67cdd5f2d"'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - 2035d3a54adf4f9ccf256fa2c93b18d0
+      x-runtime:
+      - '0.046690'
+      date:
+      - Fri, 09 Aug 2013 12:17:26 GMT
+      connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '{"acronym":"SEMUEDU","administration_type_id":1,"budget_structure_configuration_id":1,"budget_structure_level_id":1,"code":"1","created_at":"2013-08-06T18:05:38-03:00","description":"Detran","full_code":"1","id":1,"kind":"analytical","parent_id":2,"performance_field":"Desenvolvimento
+        Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
+        - Detran"}'
+    http_version: '1.1'
+  recorded_at: Fri, 09 Aug 2013 12:17:26 GMT
+- request:
+    method: get
+    uri: http://contabil.dev/api/pledges.json?by_contract_id=4&includes%5B%5D=capability&includes%5B%5D%5Bbudget_allocation%5D%5Binclude%5D=expense_nature&methods%5B%5D=expense_nature_expense_nature&methods%5B%5D=function_code&methods%5B%5D=subfunction_code&methods%5B%5D=government_program_code&methods%5B%5D=government_action_code&methods%5B%5D=capability_source_code
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - application/json
+      x-unico-api-customer-secret-token:
+      - '1234'
+      accept-encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-type:
+      - application/json; charset=utf-8
+      x-ua-compatible:
+      - IE=Edge
+      etag:
+      - '"94be6c7d7f3c6f676c4a7e582ad1489e"'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - ee2d29eb8438e1942170a74f20a80bd3
+      x-runtime:
+      - '0.077795'
+      date:
+      - Fri, 09 Aug 2013 12:17:26 GMT
+      connection:
+      - close
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        W3siYWNjb3VudGluZ19hY2NvdW50X2lkIjpudWxsLCJhbW91bnQiOiIxMDAu
+        MCIsImJ1ZGdldF9hbGxvY2F0aW9uX2lkIjo0LCJjYXBhYmlsaXR5X2lkIjox
+        LCJjb2RlIjo5LCJjb250cmFjdF9pZCI6NCwiY29udHJhY3RfeWVhciI6IjIw
+        MTIiLCJjcmVhdGVkX2F0IjoiMjAxMy0wOC0wOFQxODoxMDo1Ni0wMzowMCIs
+        ImNyZWRpdG9yX2lkIjoxLCJkZXNjcmlwdG9yX2lkIjoxLCJlbWlzc2lvbl9k
+        YXRlIjoiMjAxMi0xMC0wMSIsImV4cGVuc2Vfa2luZF9pZCI6bnVsbCwiZXhw
+        ZW5zZV9uYXR1cmVfaWQiOjYsImZvdW5kZWRfZGVidF9jb250cmFjdF9pZCI6
+        MiwiaWQiOjksImluaXRpYWxfdmFsdWVfbm90X3Byb2Nlc3NlZCI6IjAuMCIs
+        ImluaXRpYWxfdmFsdWVfcHJvY2Vzc2VkIjoiMC4wIiwibGVmdG92ZXJfcGxl
+        ZGdlIjpmYWxzZSwibGljaXRhdGlvbl9wcm9jZXNzX2lkIjpudWxsLCJtYWlu
+        X3BsZWRnZV9pZCI6bnVsbCwicGxlZGdlX2NhdGVnb3J5X2lkIjpudWxsLCJw
+        bGVkZ2VfbW9kYWxpdHkiOiIxIiwicHJlY2F0b3J5X2lkIjpudWxsLCJwdXJj
+        aGFzZV9wcm9jZXNzX2lkIjoyLCJwdXJjaGFzZV9wcm9jZXNzX3llYXIiOm51
+        bGwsInJlc2VydmVfZnVuZF9pZCI6Miwic3BlY2lhbF9pbnNjcmlwdGlvbl9p
+        ZCI6bnVsbCwidHlwZV9vZl93b3JrIjpudWxsLCJ1cGRhdGVkX2F0IjoiMjAx
+        My0wOC0wOFQxODoxMDo1Ni0wMzowMCIsIndvcmtfcmVnaXN0cmF0aW9uX251
+        bWJlcl9pbnNzIjpudWxsLCJ5ZWFyIjoyMDEyLCJleHBlbnNlX25hdHVyZV9l
+        eHBlbnNlX25hdHVyZSI6IjMuMS45MC4wMS4wMCIsImZ1bmN0aW9uX2NvZGUi
+        OiIwNCIsInN1YmZ1bmN0aW9uX2NvZGUiOiIwMSIsImdvdmVybm1lbnRfcHJv
+        Z3JhbV9jb2RlIjoiMDAwMSIsImdvdmVybm1lbnRfYWN0aW9uX2NvZGUiOiIw
+        MDAxIiwiY2FwYWJpbGl0eV9zb3VyY2VfY29kZSI6MSwidG9fcyI6IjkiLCJj
+        YXBhYmlsaXR5Ijp7ImNhcGFiaWxpdHlfZGVzdGluYXRpb25faWQiOm51bGws
+        ImNyZWF0ZWRfYXQiOiIyMDEzLTA4LTA2VDE4OjA1OjM5LTAzOjAwIiwiZGVz
+        Y3JpcHRpb24iOiJSZWZvcm1hIGUgQW1wbGlhw6fDo28iLCJlbnRpdHlfaWQi
+        OjEsImdvYWwiOiJPdGltaXphciBvIGF0ZW5kaW1lbnRvIGEgdG9kb3MiLCJp
+        ZCI6MSwia2luZCI6Im9yZGluYXJ5Iiwic291cmNlIjpudWxsLCJzdGF0dXMi
+        OiJhY3RpdmUiLCJ0Y2Vfc3BlY2lmaWNhdGlvbl9jYXBhYmlsaXR5X2lkIjox
+        LCJ1cGRhdGVkX2F0IjoiMjAxMy0wOC0wNlQxODowNTozOS0wMzowMCIsInll
+        YXIiOjIwMTJ9LCJidWRnZXRfYWxsb2NhdGlvbiI6eyJhbGllbmF0aW9uX2Fw
+        cGVhbCI6ZmFsc2UsImJ1ZGdldF9hbGxvY2F0aW9uX3R5cGVfaWQiOjEsImJ1
+        ZGdldF9zdHJ1Y3R1cmVfaWQiOjIsImNvZGUiOjEyLCJjcmVhdGVkX2F0Ijoi
+        MjAxMy0wOC0wOFQxODowOTowMC0wMzowMCIsImRhdGUiOiIyMDEyLTEwLTAx
+        IiwiZGVidF90eXBlIjoiY29udHJhY3QiLCJkZXNjcmlwdG9yX2lkIjoxLCJl
+        ZHVjYXRpb24iOmZhbHNlLCJleHBlbnNlX25hdHVyZV9pZCI6MywiZm9yZXNp
+        Z2h0IjpmYWxzZSwiZnVuY3Rpb25faWQiOjEsImdvdmVybm1lbnRfYWN0aW9u
+        X2lkIjoxLCJnb3Zlcm5tZW50X3Byb2dyYW1faWQiOjEsImhlYWx0aCI6ZmFs
+        c2UsImlkIjo0LCJraW5kIjoiZGl2aWRlIiwibW9udGhzX3ZhbHVlcyI6eyIx
+        IjoiODMsMzMiLCIyIjoiODMsMzMiLCIzIjoiODMsMzMiLCI0IjoiODMsMzMi
+        LCI1IjoiODMsMzMiLCI2IjoiODMsMzMiLCI3IjoiODMsMzMiLCI4IjoiODMs
+        MzMiLCI5IjoiODMsMzMiLCIxMCI6IjgzLDMzIiwiMTEiOiI4MywzMyIsIjEy
+        IjoiODMsMzcifSwicGVyc29uYWwiOmZhbHNlLCJyZWZpbmFuY2luZyI6ZmFs
+        c2UsInN1YmZ1bmN0aW9uX2lkIjoxLCJ1cGRhdGVkX2F0IjoiMjAxMy0wOC0w
+        OFQxODowOTowMC0wMzowMCIsInZhbHVlIjpudWxsLCJ5ZWFyIjoyMDEyLCJl
+        eHBlbnNlX25hdHVyZSI6eyJjcmVhdGVkX2F0IjoiMjAxMy0wOC0wNlQxODow
+        NTozOS0wMzowMCIsImRlc2NyaXB0aW9uIjoiQXBsaWNhw6fDtWVzIERpcmV0
+        YXMiLCJkb2NrZXQiOiJSZWdpc3RyYSBvIHZhbG9yIGRhcyBhcGxpY2HDp8O1
+        ZXMgZGlyZXRhcyIsImV4cGVuc2VfbmF0dXJlIjoiMy4xLjkwLjAwLjAwIiwi
+        aWQiOjMsImtpbmQiOiJib3RoIiwicGFyZW50X2lkIjoyLCJyZWd1bGF0b3J5
+        X2FjdF9pZCI6MiwidXBkYXRlZF9hdCI6IjIwMTMtMDgtMDZUMTg6MDU6Mzkt
+        MDM6MDAiLCJ5ZWFyIjoyMDEyfX19XQ==
+    http_version: '1.1'
+  recorded_at: Fri, 09 Aug 2013 12:17:26 GMT
+- request:
+    method: get
+    uri: http://contabil.dev/api/budget_structures/2.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - application/json
+      x-unico-api-customer-secret-token:
+      - '1234'
+      accept-encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-type:
+      - application/json; charset=utf-8
+      x-ua-compatible:
+      - IE=Edge
+      etag:
+      - '"dd8f7e5d7017858559d987e965c4189d"'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - 1fe70707dfe8d5615ba8070e9c80baf2
+      x-runtime:
+      - '0.063780'
+      date:
+      - Fri, 09 Aug 2013 12:17:26 GMT
+      connection:
+      - close
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJhY3JvbnltIjoiU0VNVUVEVSIsImFkbWluaXN0cmF0aW9uX3R5cGVfaWQi
+        OjEsImJ1ZGdldF9zdHJ1Y3R1cmVfY29uZmlndXJhdGlvbl9pZCI6MiwiYnVk
+        Z2V0X3N0cnVjdHVyZV9sZXZlbF9pZCI6MSwiY29kZSI6IjkiLCJjcmVhdGVk
+        X2F0IjoiMjAxMy0wOC0wNlQxODowNTozOC0wMzowMCIsImRlc2NyaXB0aW9u
+        IjoiU2VjcmV0YXJpYSBkZSBFZHVjYcOnw6NvIiwiZnVsbF9jb2RlIjoiOSIs
+        ImlkIjoyLCJraW5kIjoiYW5hbHl0aWNhbCIsInBhcmVudF9pZCI6bnVsbCwi
+        cGVyZm9ybWFuY2VfZmllbGQiOiJEZXNlbnZvbHZpbWVudG8gRWR1Y2FjaW9u
+        YWwiLCJ0Y2VfY29kZSI6IjA1MSIsInVwZGF0ZWRfYXQiOiIyMDEzLTA4LTA2
+        VDE4OjA1OjM4LTAzOjAwIiwidG9fcyI6IjkgLSBTZWNyZXRhcmlhIGRlIEVk
+        dWNhw6fDo28ifQ==
+    http_version: '1.1'
+  recorded_at: Fri, 09 Aug 2013 12:17:26 GMT
+recorded_with: VCR 2.5.0
