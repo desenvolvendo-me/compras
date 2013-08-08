@@ -929,7 +929,7 @@ feature "Creditors" do
       expect(page).to have_field 'Tipo', :with => 'Sanção administrativa', disabled: true
       expect(page).to have_field 'Motivo', :with => 'Advertência por desistência parcial da proposta devidamente justificada'
 
-      fill_in 'Motivo', :with => ''
+      clear_modal 'Motivo'
 
       expect(page).to have_field 'Tipo', :with => '', disabled: true
     end
