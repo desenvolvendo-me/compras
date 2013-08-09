@@ -1,0 +1,141 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://contabil.dev/api/budget_structures/1.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - application/json
+      x-unico-api-customer-secret-token:
+      - '1234'
+      accept-encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-type:
+      - application/json; charset=utf-8
+      x-ua-compatible:
+      - IE=Edge
+      etag:
+      - '"793a967dacd1e19ef32bc2e67cdd5f2d"'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - 39fedfb3088fe8611a270f05ea9f9f3f
+      x-runtime:
+      - '1.649606'
+      date:
+      - Fri, 09 Aug 2013 13:36:17 GMT
+      connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '{"acronym":"SEMUEDU","administration_type_id":1,"budget_structure_configuration_id":1,"budget_structure_level_id":1,"code":"1","created_at":"2013-08-06T18:05:38-03:00","description":"Detran","full_code":"1","id":1,"kind":"analytical","parent_id":2,"performance_field":"Desenvolvimento
+        Educacional","tce_code":"051","updated_at":"2013-08-06T18:05:38-03:00","to_s":"1
+        - Detran"}'
+    http_version: '1.1'
+  recorded_at: Fri, 09 Aug 2013 13:36:17 GMT
+- request:
+    method: get
+    uri: http://contabil.dev/api/budget_structures/2.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - application/json
+      x-unico-api-customer-secret-token:
+      - '1234'
+      accept-encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-type:
+      - application/json; charset=utf-8
+      x-ua-compatible:
+      - IE=Edge
+      etag:
+      - '"d7bb059f1bb3bdada2b41e6d584c0aea"'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - e885a4a6e047f6e2f9cca8292a1f0a90
+      x-runtime:
+      - '0.159600'
+      date:
+      - Fri, 09 Aug 2013 13:36:17 GMT
+      connection:
+      - close
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJhY3JvbnltIjoiU0VNVUVEVSIsImFkbWluaXN0cmF0aW9uX3R5cGVfaWQi
+        OjEsImJ1ZGdldF9zdHJ1Y3R1cmVfY29uZmlndXJhdGlvbl9pZCI6MiwiYnVk
+        Z2V0X3N0cnVjdHVyZV9sZXZlbF9pZCI6MSwiY29kZSI6IjkiLCJjcmVhdGVk
+        X2F0IjoiMjAxMy0wOC0wNlQxODowNTozOC0wMzowMCIsImRlc2NyaXB0aW9u
+        IjoiU2VjcmV0YXJpYSBkZSBFZHVjYcOnw6NvIiwiZnVsbF9jb2RlIjoiOSIs
+        ImlkIjoyLCJraW5kIjoiYW5hbHl0aWNhbCIsInBhcmVudF9pZCI6MywicGVy
+        Zm9ybWFuY2VfZmllbGQiOiJEZXNlbnZvbHZpbWVudG8gRWR1Y2FjaW9uYWwi
+        LCJ0Y2VfY29kZSI6IjA1MSIsInVwZGF0ZWRfYXQiOiIyMDEzLTA4LTA2VDE4
+        OjA1OjM4LTAzOjAwIiwidG9fcyI6IjkgLSBTZWNyZXRhcmlhIGRlIEVkdWNh
+        w6fDo28ifQ==
+    http_version: '1.1'
+  recorded_at: Fri, 09 Aug 2013 13:36:17 GMT
+- request:
+    method: get
+    uri: http://contabil.dev/api/budget_structures/3.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - application/json
+      x-unico-api-customer-secret-token:
+      - '1234'
+      accept-encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-type:
+      - application/json; charset=utf-8
+      x-ua-compatible:
+      - IE=Edge
+      etag:
+      - '"01be0dff8e5741bfb63ef6c74c04491e"'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - a18cca199a2527980afe814858bbb8d1
+      x-runtime:
+      - '0.042464'
+      date:
+      - Fri, 09 Aug 2013 13:36:17 GMT
+      connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '{"acronym":"SEMUDES","administration_type_id":1,"budget_structure_configuration_id":2,"budget_structure_level_id":1,"code":"29","created_at":"2013-08-09T07:00:09-03:00","description":"Secretaria
+        de Desenvolvimento","full_code":"29","id":3,"kind":"synthetic","parent_id":null,"performance_field":"Desenvolvimento
+        Educacional","tce_code":"051","updated_at":"2013-08-09T07:00:09-03:00","to_s":"29
+        - Secretaria de Desenvolvimento"}'
+    http_version: '1.1'
+  recorded_at: Fri, 09 Aug 2013 13:36:17 GMT
+recorded_with: VCR 2.5.0
