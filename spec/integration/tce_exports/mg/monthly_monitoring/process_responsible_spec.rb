@@ -5,10 +5,12 @@ describe TceExport::MG::MonthlyMonitoring::ProcessResponsibleGenerator do
   describe "#generate_file" do
     before do
       FileUtils.rm_f('tmp/RESPLIC.csv')
+      VCR.insert_cassette('integration/process_responsible', allow_playback_repeats: true)
     end
 
     after do
       FileUtils.rm_f('tmp/RESPLIC.csv')
+      VCR.eject_cassette
     end
 
     let :prefecture do
@@ -40,31 +42,7 @@ describe TceExport::MG::MonthlyMonitoring::ProcessResponsibleGenerator do
           content: 'ementa 2'))
     end
 
-    let :budget_structure_parent do
-      BudgetStructure.new(
-        id: 2,
-        code: '1',
-        tce_code: '051',
-        description: 'Secretaria de Educação',
-        acronym: 'SEMUEDU',
-        performance_field: 'Desenvolvimento Educacional')
-    end
-
-    let :budget_structure do
-      BudgetStructure.new(
-        id: 1,
-        parent_id: 2,
-        code: '29',
-        tce_code: '051',
-        description: 'Secretaria de Desenvolvimento',
-        acronym: 'SEMUEDU',
-        performance_field: 'Desenvolvimento Educacional')
-    end
-
     it "generates a CSV file with the required data" do
-      BudgetStructure.should_receive(:find).at_least(1).times.with(2, params: {}).and_return(budget_structure_parent)
-      BudgetStructure.should_receive(:find).at_least(1).times.with(1, params: {}).and_return(budget_structure)
-
       FactoryGirl.create(:extended_prefecture, prefecture: prefecture)
 
       Employee.make!(:sobrinho, individual: person_pedro.personable, registration: "112323")
@@ -102,11 +80,11 @@ describe TceExport::MG::MonthlyMonitoring::ProcessResponsibleGenerator do
 
       csv = File.read('tmp/RESPLIC.csv', encoding: 'ISO-8859-1')
 
-      expect(csv).to eq "10;98;98029;2012;1;2;00315198737;Gabriel Sobrinho;Girassol;São Francisco;1;PR;33400500;3333333333;gabriel.sobrinho@gmail.com\n" +
-                        "20;98;98029;2012;1;2;1;1212;20032012;03012012;09012012;00314951334;Wenderson Malheiros;3;Gerente;1;Girassol;São Francisco;1;PR;33400500;3333333333;wenderson.malheiros@gmail.com\n" +
-                        "10;98;98029;2012;2;2;00314951334;Wenderson Malheiros;Girassol;São Francisco;1;PR;33400500;3333333333;wenderson.malheiros@gmail.com\n" +
-                        "20;98;98029;2012;2;1;1;1213;20032012;03012012;09012012;20653801440;Joao da Silva;6;Gerente;1;Girassol;São Francisco;1;PR;33400500;3333333333;joao.da.silva@gmail.com\n" +
-                        "20;98;98029;2012;2;1;1;1213;20032012;03012012;09012012;27056534147;Pedro dos Santos;2;Gerente;1;Girassol;São Francisco;1;PR;33400500;3333333333;pedro.dos.santos@gmail.com"
+      expect(csv).to eq "10;98;98009001;2012;1;2;00315198737;Gabriel Sobrinho;Girassol;São Francisco;1;PR;33400500;3333333333;gabriel.sobrinho@gmail.com\n" +
+                        "20;98;98009001;2012;1;2;1;1212;20032012;03012012;09012012;00314951334;Wenderson Malheiros;3;Gerente;1;Girassol;São Francisco;1;PR;33400500;3333333333;wenderson.malheiros@gmail.com\n" +
+                        "10;98;98009001;2012;2;2;00314951334;Wenderson Malheiros;Girassol;São Francisco;1;PR;33400500;3333333333;wenderson.malheiros@gmail.com\n" +
+                        "20;98;98009001;2012;2;1;1;1213;20032012;03012012;09012012;20653801440;Joao da Silva;6;Gerente;1;Girassol;São Francisco;1;PR;33400500;3333333333;joao.da.silva@gmail.com\n" +
+                        "20;98;98009001;2012;2;1;1;1213;20032012;03012012;09012012;27056534147;Pedro dos Santos;2;Gerente;1;Girassol;São Francisco;1;PR;33400500;3333333333;pedro.dos.santos@gmail.com"
     end
   end
 end
