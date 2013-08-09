@@ -2,25 +2,12 @@
 require 'spec_helper'
 
 describe TceExport::MG::MonthlyMonitoring::LicitationJudgmentGenerator do
-  let :budget_structure_parent do
-    BudgetStructure.new(
-      id: 2,
-      code: '1',
-      tce_code: '051',
-      description: 'Secretaria de Educação',
-      acronym: 'SEMUEDU',
-      performance_field: 'Desenvolvimento Educacional')
+  before(:all) do
+    VCR.insert_cassette('integration/licitation_judgment', allow_playback_repeats: true)
   end
 
-  let :budget_structure do
-    BudgetStructure.new(
-      id: 1,
-      parent_id: 2,
-      code: '29',
-      tce_code: '051',
-      description: 'Secretaria de Desenvolvimento',
-      acronym: 'SEMUEDU',
-      performance_field: 'Desenvolvimento Educacional')
+  after(:all) do
+    VCR.eject_cassette
   end
 
   describe "#generate_file" do
@@ -47,9 +34,6 @@ describe TceExport::MG::MonthlyMonitoring::LicitationJudgmentGenerator do
 
     context 'with creditor proposals' do
       it "generates a CSV file with the required data" do
-        BudgetStructure.should_receive(:find).at_least(1).times.with(2, params: {}).and_return(budget_structure_parent)
-        BudgetStructure.should_receive(:find).at_least(1).times.with(1, params: {}).and_return(budget_structure)
-
         FactoryGirl.create(:extended_prefecture, prefecture: prefecture)
 
         creditor = Creditor.make!(:wenderson_sa)
@@ -87,9 +71,9 @@ describe TceExport::MG::MonthlyMonitoring::LicitationJudgmentGenerator do
 
         csv = File.read('tmp/JULGLIC.csv', encoding: 'ISO-8859-1')
 
-        reg_10_1 = "10;98;98029;2012;1;1;00315198737;#{item.lot};#{item.item_number};Arame farpado;4,9900;1,0000;UN"
-        reg_10_2 = "10;98;98029;2012;1;1;00315198737;#{item.lot};#{item_2.item_number};Arame comum;2,9900;1,0000;UN"
-        reg_30 = "30;98;98029;2012;1;#{current_date};2;2"
+        reg_10_1 = "10;98;98009001;2012;1;1;00315198737;#{item.lot};#{item.item_number};Arame farpado;4,9900;1,0000;UN"
+        reg_10_2 = "10;98;98009001;2012;1;1;00315198737;#{item.lot};#{item_2.item_number};Arame comum;2,9900;1,0000;UN"
+        reg_30 = "30;98;98009001;2012;1;#{current_date};2;2"
 
         expect(csv).to eq [reg_10_1,  reg_10_2, reg_30].join("\n")
       end
@@ -97,9 +81,6 @@ describe TceExport::MG::MonthlyMonitoring::LicitationJudgmentGenerator do
 
     context "with price realignment" do
       it "generates a CSV file with realignment_prices data" do
-        BudgetStructure.should_receive(:find).at_least(1).times.with(2, params: {}).and_return(budget_structure_parent)
-        BudgetStructure.should_receive(:find).at_least(1).times.with(1, params: {}).and_return(budget_structure)
-
         FactoryGirl.create(:extended_prefecture, prefecture: prefecture)
 
         creditor = Creditor.make!(:wenderson_sa)
@@ -143,8 +124,8 @@ describe TceExport::MG::MonthlyMonitoring::LicitationJudgmentGenerator do
 
         csv = File.read('tmp/JULGLIC.csv', encoding: 'ISO-8859-1')
 
-        reg_10_1 = "10;98;98029;2012;1;1;00314951334;#{item.lot};#{item.item_number};Arame farpado;9,9900;1,0000;UN"
-        reg_30_1 = "30;98;98029;2012;1;#{current_date};2;2"
+        reg_10_1 = "10;98;98009001;2012;1;1;00314951334;#{item.lot};#{item.item_number};Arame farpado;9,9900;1,0000;UN"
+        reg_30_1 = "30;98;98009001;2012;1;#{current_date};2;2"
 
         expect(csv).to eq [reg_10_1, reg_30_1].join("\n")
       end
