@@ -1,6 +1,7 @@
 require 'unit_helper'
 require 'active_model'
 require 'active_relatus'
+require 'enumerate_it'
 
 # I18n
 require 'i18n'

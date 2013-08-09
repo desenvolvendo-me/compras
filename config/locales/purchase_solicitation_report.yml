@@ -1,0 +1,9 @@
+pt-BR:
+  activemodel:
+    attributes:
+      purchase_solicitation_report:
+        budget_structure: "Solicitante"
+        kind: "Tipo"
+        material: "Produto"
+        start_date: "Data inicial"
+        end_date: "Data final"
