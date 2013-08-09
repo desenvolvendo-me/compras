@@ -1,5 +1,6 @@
 class PriceCollectionProposal < Compras::Model
-  attr_accessible :creditor_id, :items_attributes, :status, :user_attributes
+  attr_accessible :creditor_id, :items_attributes, :status, :email_invitation,
+    :user_attributes
 
   belongs_to :price_collection
   belongs_to :creditor
@@ -21,6 +22,8 @@ class PriceCollectionProposal < Compras::Model
 
   orderize "id DESC"
   filterize
+
+  scope :not_invited, lambda { where { email_invitation.eq(false) } }
 
   def self.destroy_all_classifications
     classifications.destroy_all
