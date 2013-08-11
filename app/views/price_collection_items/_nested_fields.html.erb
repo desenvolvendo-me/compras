@@ -1,6 +1,7 @@
 <div class="yui3-g">
   <div class="yui3-u-3-5">
-    <%= f.input :material, :as => :auto_complete, :fake => true, required: true %>
+    <%= f.input :material, :as => :auto_complete, :fake => true, required: true,
+      'data-hidden-field-class' => 'unique' %>
   </div>
 
   <div class="yui3-u-1-8">
@@ -14,7 +15,8 @@
   </div>
 
   <div class="yui3-u-1-6">
-    <%= f.input :quantity, :as => :fake, required: true, :input_html => { :class => 'numeric' } %>
+    <%= f.input :quantity, :as => :fake, required: true,
+      :input_html => { :class => 'numeric', 'data-numeric' => true } %>
   </div>
 
   <div class="yui3-u-1-6">

@@ -1,4 +1,45 @@
 $(document).ready(function() {
+
+  function hasItemAlreadyAdded(item) {
+    var added = false;
+
+    $("#price_collection_items_records input.material_id").each(function() {
+      if ($(this).val() == item.material_id) {
+        added = true;
+        return added;
+      }
+    });
+
+    return added;
+  }
+
+  function renderItem(item) {
+    var itemBinds = {
+      uuid: _.uniqueId('fresh-'),
+      id: '',
+      material_id: item.material_id,
+      material: item.material_description,
+      reference_unit: item.reference_unit,
+      brand: item.brand,
+      quantity: numberWithDelimiter(item.quantity),
+      lot: '1'
+    };
+
+    var data = $('#price_collection_items_template').mustache(itemBinds);
+
+    $('#price_collection_items_records tbody').append(data).trigger("nestedGrid:afterAdd");
+  }
+
+  function mergeItem(item) {
+    var material       = $('#price_collection_items_records input.material_id[value="' + item.material_id + '"]'),
+        record         = material.closest('.nested-record'),
+        itemQuantity   = new BigNumber(parsePtBrFloat(record.find('input.quantity').val())),
+        totalQuantity  = numberWithDelimiter(parseFloat(itemQuantity.add(item.quantity)));
+
+    record.find('input.quantity').val(totalQuantity);
+    record.find('td.quantity').text(totalQuantity);
+  }
+
   $('form.price_collection').on('change', '.material', function (event, material) {
     if (material) {
       $(this).closest('.item').find('.reference-unit').val(material.reference_unit);
@@ -31,4 +72,19 @@ $(document).ready(function() {
       emailInput.attr('disabled', true);
     }
   });
+
+  $("#price_collection_purchase_solicitations_id").on("change", function(event, purchaseSolicitation) {
+    if (!purchaseSolicitation) {
+      purchaseSolicitation = {};
+    }
+
+    $.each(purchaseSolicitation.items, function(i, item) {
+      if (hasItemAlreadyAdded(item)) {
+        mergeItem(item);
+      } else {
+        renderItem(item);
+      }
+    });
+  });
+
 });

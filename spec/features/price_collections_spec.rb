@@ -133,6 +133,10 @@ feature "PriceCollections" do
     end
 
     within_tab 'Itens' do
+      within_records do
+        click_link "Remover"
+      end
+
       fill_with_autocomplete 'Material', :with => 'Antivirus'
       fill_in 'Marca', :with => 'Norton'
       fill_in 'Quantidade', :with => '10'
@@ -936,6 +940,75 @@ feature "PriceCollections" do
         expect(page).to_not have_content '1/2013'
         expect(page).to have_content '2/2013'
         expect(page).to_not have_content '3/2013'
+      end
+    end
+  end
+
+  scenario 'adding a purchase solicitation fill the items tab' do
+    PurchaseSolicitation.make!(:reparo_liberado, :accounting_year => 2013,
+                               :purchase_solicitation_budget_allocations => [PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria_office)],
+                               :items => [PurchaseSolicitationItem.make!(:office), PurchaseSolicitationItem.make!(:arame_farpado_2)])
+
+    PurchaseSolicitation.make!(:reparo_2013, :accounting_year => 2013, :code => '2',
+                               :delivery_location => DeliveryLocation.make!(:health),
+                               :responsible => Employee.make!(:wenderson),
+                               :budget_structure_id => 2)
+
+    navigate 'Processos de Compra > Coletas de Preços'
+
+    click_link 'Criar Coleta de Preços'
+
+    within_tab 'Solicitações de compras' do
+      fill_with_autocomplete 'Solicitações de compra', with: '2/2013'
+
+      within_records do
+        expect(page).to have_content '2/2013'
+        expect(page).to have_content '1 - Secretaria de Educação'
+        expect(page).to have_content 'Wenderson Malheiros'
+      end
+    end
+
+    within_tab 'Itens' do
+      within_records do
+        expect(page).to have_content '02.02.00001 - Arame farpado'
+        expect(page).to have_content 'UN'
+        expect(page).to have_content 'Arame'
+        expect(page).to have_content '99,00'
+        expect(page).to have_content '1'
+      end
+    end
+
+    within_tab 'Solicitações de compras' do
+      fill_with_autocomplete 'Solicitações de compra', with: '1/2013'
+
+      within :xpath, '//*[@id="purchase_solicitations"]/table/tbody/tr[1]' do
+        expect(page).to have_content '2/2013'
+        expect(page).to have_content '1 - Secretaria de Educação'
+        expect(page).to have_content 'Wenderson Malheiros'
+      end
+
+      within :xpath, '//*[@id="purchase_solicitations"]/table/tbody/tr[2]' do
+        expect(page).to have_content '1/2013'
+        expect(page).to have_content '1 - Secretaria de Educação'
+        expect(page).to have_content 'Gabriel Sobrinho'
+      end
+    end
+
+    within_tab 'Itens' do
+      within :xpath, '//*[@id="price_collection_items_records"]/tbody/tr[1]' do
+        expect(page).to have_content '02.02.00001 - Arame farpado'
+        expect(page).to have_content 'UN'
+        expect(page).to have_content 'Arame'
+        expect(page).to have_content '109,00'
+        expect(page).to have_content '1'
+      end
+
+      within :xpath, '//*[@id="price_collection_items_records"]/tbody/tr[2]' do
+        expect(page).to have_content '01.01.00002 - Office'
+        expect(page).to have_content 'UN'
+        expect(page).to have_content 'Office'
+        expect(page).to have_content '3,00'
+        expect(page).to have_content '1'
       end
     end
   end
