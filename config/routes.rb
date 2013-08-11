@@ -768,7 +768,9 @@ Compras::Application.routes.draw do
     scope :only => [:index, :new, :show] do
       resources :map_of_proposals
       resources :purchase_process_ratifications_by_periods
+      resources :purchase_solicitations
     end
+
     match 'map_of_bids/:licitation_process_id' => 'map_of_bids#show', as: :map_of_bids
     match 'minute_purchase_processes/:licitation_process_id' => 'minute_purchase_processes#show', as: :minute_purchase_processes
     match 'minute_purchase_process_tradings/:licitation_process_id' => 'minute_purchase_process_tradings#show',

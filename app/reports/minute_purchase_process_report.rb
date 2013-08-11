@@ -92,4 +92,3 @@ class MinutePurchaseProcessReport < ActiveRelatus::Base
     { :licitation_process => licitation_process_id }
   end
 end
-

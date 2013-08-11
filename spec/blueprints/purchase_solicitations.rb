@@ -1,4 +1,3 @@
-# encoding: utf-8
 PurchaseSolicitation.blueprint(:reparo) do
   accounting_year { 2012 }
   request_date { Date.new(2012, 1, 31) }
@@ -15,7 +14,7 @@ PurchaseSolicitation.blueprint(:reparo) do
   purchase_solicitation_budget_allocations {
     [PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria)]
   }
-  items { [PurchaseSolicitationItem.make!(:item)] }
+  items { [PurchaseSolicitationItem.make!(:item, purchase_solicitation: object)] }
   budget_structure_id { 1 }
 end
 
@@ -35,7 +34,7 @@ PurchaseSolicitation.blueprint(:reparo_liberado) do
   purchase_solicitation_budget_allocations {
     [PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria)]
   }
-  items { [PurchaseSolicitationItem.make!(:item)] }
+  items { [PurchaseSolicitationItem.make!(:item, purchase_solicitation: object)] }
   budget_structure_id { 1 }
   purchase_solicitation_liberations { [PurchaseSolicitationLiberation.make(:reparo)] }
 end
@@ -56,7 +55,7 @@ PurchaseSolicitation.blueprint(:reparo_2013) do
   purchase_solicitation_budget_allocations {
     [PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria_2013)]
   }
-  items { [PurchaseSolicitationItem.make!(:arame_farpado)] }
+  items { [PurchaseSolicitationItem.make!(:arame_farpado, purchase_solicitation: object)] }
   budget_structure_id { 1 }
   purchase_solicitation_liberations { [PurchaseSolicitationLiberation.make!(:reparo, :purchase_solicitation => object)] }
 end
@@ -77,7 +76,7 @@ PurchaseSolicitation.blueprint(:reparo_desenvolvimento) do
   purchase_solicitation_budget_allocations {
     [PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria)]
   }
-  items { [PurchaseSolicitationItem.make!(:item)] }
+  items { [PurchaseSolicitationItem.make!(:item, purchase_solicitation: object)] }
   budget_structure_id { 1 }
 end
 
@@ -98,7 +97,7 @@ PurchaseSolicitation.blueprint(:reparo_office) do
     [PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria_office)]
   }
   items {
-    [PurchaseSolicitationItem.make!(:office), PurchaseSolicitationItem.make!(:arame_farpado)]
+    [PurchaseSolicitationItem.make!(:office, purchase_solicitation: object), PurchaseSolicitationItem.make!(:arame_farpado, purchase_solicitation: object)]
   }
   budget_structure_id { 1 }
 end
