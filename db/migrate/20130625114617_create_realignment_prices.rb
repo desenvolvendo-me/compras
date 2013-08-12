@@ -1,6 +1,6 @@
 class CreateRealignmentPrices < ActiveRecord::Migration
   def change
-    create_table :compras_realignment_prices do |t|
+    create_table :compras_realignment_prices, force: true do |t|
       t.integer :purchase_process_id
       t.integer :creditor_id
       t.integer :lot
