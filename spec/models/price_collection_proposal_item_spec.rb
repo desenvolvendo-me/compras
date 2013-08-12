@@ -8,6 +8,15 @@ describe PriceCollectionProposalItem do
 
   it { should have_one(:price_collection).through(:price_collection_proposal) }
 
+  it { should delegate(:material).to(:price_collection_item).allowing_nil true }
+  it { should delegate(:brand).to(:price_collection_item).allowing_nil true }
+  it { should delegate(:reference_unit).to(:price_collection_item).allowing_nil true }
+  it { should delegate(:quantity).to(:price_collection_item).allowing_nil true }
+  it { should delegate(:lot).to(:price_collection_item).allowing_nil true }
+  it { should delegate(:creditor).to(:price_collection_proposal).allowing_nil true }
+  it { should delegate(:editable_by?).to(:price_collection_proposal).allowing_nil true }
+  it { should delegate(:price_collection).to(:price_collection_proposal).allowing_nil true }
+
   it 'should return 0 as the total price default value' do
     expect(subject.total_price).to eq 0
   end

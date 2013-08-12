@@ -35,3 +35,4 @@ pt-BR:
   price_collection:
     messages:
       is_annulled: "não é permitido alterar coleta anulada"
+      must_have_proposals: "precisa de propostas cadastradas"

@@ -772,6 +772,9 @@ Compras::Application.routes.draw do
     end
 
     match 'map_of_bids/:licitation_process_id' => 'map_of_bids#show', as: :map_of_bids
+
+    match 'map_of_prices/:id' => 'map_of_prices#show', as: :map_of_prices
+
     match 'minute_purchase_processes/:licitation_process_id' => 'minute_purchase_processes#show', as: :minute_purchase_processes
     match 'minute_purchase_process_tradings/:licitation_process_id' => 'minute_purchase_process_tradings#show',
       as: :minute_purchase_process_tradings

@@ -78,6 +78,7 @@ pt-BR:
     report_minute_purchase_process_tradings: "minute_purchase_process_tradings"
     report_minute_purchase_processes: "minute_purchase_processes"
     report_map_of_bids: "Mapa de Lances"
+    report_map_of_prices: "Mapa de Preços"
     report_map_of_proposals: "Mapa de Propostas"
     reserve_fund_requests: "Reserva de Dotações"
 

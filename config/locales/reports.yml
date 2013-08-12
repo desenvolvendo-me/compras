@@ -19,6 +19,11 @@ pt-BR:
       one: "Mapa de lance"
       other: "Mapas de lances"
 
+  map_of_price_reports:
+    map_of_price_report:
+      one: "Mapa de preço"
+      other: "Mapas de preços"
+
   purchase_process_ratifications_by_period_reports:
     purchase_process_ratifications_by_period_report:
       one: 'Relatório de compras homologadas por período'
