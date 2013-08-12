@@ -123,7 +123,7 @@ feature "LicitationProcesses", :vcr do
 
       expect(page).to have_field 'Natureza da despesa', :with => '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares',
         disabled: true
-      expect(page).to have_field 'Saldo da dotação', :with => '100,00', disabled: true
+      expect(page).to have_field 'Saldo da dotação', :with => '0,00', disabled: true
 
       fill_with_autocomplete 'Desdobramento', :with => '3.1'
 
@@ -144,7 +144,7 @@ feature "LicitationProcesses", :vcr do
           expect(page).to have_content '11 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
           expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
           expect(page).to have_content '3.1.90.01.01 - Aposentadorias Custeadas com Recursos do RPPS'
-          expect(page).to have_content '100,00'
+          expect(page).to have_content '0,00'
           expect(page).to have_content '20,00'
         end
       end
@@ -152,11 +152,11 @@ feature "LicitationProcesses", :vcr do
       fill_with_autocomplete 'Dotação orçamentária', :with => 'Aplicações Diretas'
 
       expect(page).to have_field 'Natureza da despesa', :with => '3.1.90.00.00 - Aplicações Diretas', disabled: true
-      expect(page).to have_field 'Saldo da dotação', :with => '-10,50', disabled: true
+      expect(page).to have_field 'Saldo da dotação', :with => '0,00', disabled: true
 
       fill_with_autocomplete 'Desdobramento', :with => '3.1'
 
-      expect(page).to have_field 'Desdobramento', :with => '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+      expect(page).to have_field 'Desdobramento', :with => '3.1.90.01.01 - Aposentadorias Custeadas com Recursos do RPPS'
 
       fill_in 'Valor previsto', :with => '250,00'
 
@@ -170,10 +170,10 @@ feature "LicitationProcesses", :vcr do
         expect(page).to have_content 'Valor previsto'
 
         within 'tbody tr:nth-last-child(1)' do
-          expect(page).to have_content '1 - Aplicações Diretas'
+          expect(page).to have_content '12 - Aplicações Diretas'
           expect(page).to have_content '3.1.90.00.00 - Aplicações Diretas'
-          expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
-          expect(page).to have_content '-10,50'
+          expect(page).to have_content '3.1.90.01.01 - Aposentadorias Custeadas com Recursos do RPPS'
+          expect(page).to have_content '0,00'
           expect(page).to have_content '250,00'
         end
       end
@@ -256,15 +256,15 @@ feature "LicitationProcesses", :vcr do
           expect(page).to have_content '11 - 3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
           expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
           expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
-          expect(page).to have_content '100,00'
+          expect(page).to have_content '0,00'
           expect(page).to have_content '20,00'
         end
 
         within 'tbody tr:nth-last-child(1)' do
-          expect(page).to have_content '1 - 3.1.90.00.00 - Aplicações Diretas'
+          expect(page).to have_content '12 - 3.1.90.00.00 - Aplicações Diretas'
           expect(page).to have_content '3.1.90.00.00 - Aplicações Diretas'
-          expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
-          expect(page).to have_content '-10,50'
+          expect(page).to have_content '3.1.90.01.01 - Aposentadorias Custeadas com Recursos do RPPS'
+          expect(page).to have_content '0,00'
           expect(page).to have_content '250,00'
         end
       end
@@ -373,10 +373,10 @@ feature "LicitationProcesses", :vcr do
         end
       end
 
-      expect(page).to have_field 'Dotação orçamentária', with: '1 - 3.1.90.00.00 - Aplicações Diretas'
+      expect(page).to have_field 'Dotação orçamentária', with: '12 - 3.1.90.00.00 - Aplicações Diretas'
       expect(page).to have_field 'Natureza da despesa', with: '3.1.90.00.00 - Aplicações Diretas', disabled: true
-      expect(page).to have_field 'Desdobramento', with: '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
-      expect(page).to have_field 'Saldo da dotação', with: '-10,50', disabled: true
+      expect(page).to have_field 'Desdobramento', with: '3.1.90.01.01 - Aposentadorias Custeadas com Recursos do RPPS'
+      expect(page).to have_field 'Saldo da dotação', with: '0,00', disabled: true
       expect(page).to have_field 'Valor previsto', with: '250,00'
 
       fill_in 'Valor previsto', with: '300,00'
@@ -385,23 +385,23 @@ feature "LicitationProcesses", :vcr do
 
       within_records do
         within 'tbody .nested-record:nth-last-child(1)' do
-          expect(page).to have_content '1 - 3.1.90.00.00 - Aplicações Diretas'
+          expect(page).to have_content '12 - 3.1.90.00.00 - Aplicações Diretas'
           expect(page).to have_content '3.1.90.00.00 - Aplicações Diretas'
-          expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
-          expect(page).to have_content '-10,50'
+          expect(page).to have_content '3.1.90.01.01 - Aposentadorias Custeadas com Recursos do RPPS'
+          expect(page).to have_content '0,00'
           expect(page).to have_content '300,00'
         end
       end
 
       expect(page).to have_field 'Valor total das dotações', :with => '300,00', disabled: true
 
-      fill_with_autocomplete 'Dotação orçamentária', :with => 'Aposentadorias'
+      fill_with_autocomplete 'Dotação orçamentária', :with => 'Aposentadorias do RPPS'
 
       expect(page).to have_field 'Natureza da despesa',
         :with => '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares',
         disabled: true
 
-      expect(page).to have_field 'Saldo da dotação', :with => '100,00', disabled: true
+      expect(page).to have_field 'Saldo da dotação', :with => '0,00', disabled: true
 
       fill_with_autocomplete 'Desdobramento', :with => '3.1'
 
@@ -478,10 +478,10 @@ feature "LicitationProcesses", :vcr do
         expect(page).to have_content 'Valor previsto'
 
         within 'tbody tr:nth-child(1)' do
-          expect(page).to have_content '1 - 3.1.90.00.00 - Aplicações Diretas'
+          expect(page).to have_content '12 - 3.1.90.00.00 - Aplicações Diretas'
           expect(page).to have_content '3.1.90.00.00 - Aplicações Diretas'
-          expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
-          expect(page).to have_content '-10,50'
+          expect(page).to have_content '3.1.90.01.01 - Aposentadorias Custeadas com Recursos do RPPS'
+          expect(page).to have_content '0,00'
           expect(page).to have_content '300,00'
         end
 
@@ -489,7 +489,7 @@ feature "LicitationProcesses", :vcr do
           expect(page).to have_content '11 - 3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
           expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
           expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
-          expect(page).to have_content '100,00'
+          expect(page).to have_content '0,00'
           expect(page).to have_content '20,00'
         end
       end
@@ -835,9 +835,9 @@ feature "LicitationProcesses", :vcr do
 
       within_records do
         within 'tbody .nested-record:nth-last-child(1)' do
-          expect(page).to have_content '1 - Aplicações Diretas'
+          expect(page).to have_content '12 - Aplicações Diretas'
           expect(page).to have_content '3.1.90.00.00 - Aplicações Diretas'
-          expect(page).to have_content '-10,50'
+          expect(page).to have_content '0,00'
           expect(page).to have_content '300,00'
         end
       end
@@ -848,9 +848,9 @@ feature "LicitationProcesses", :vcr do
     within_tab 'Orçamento' do
       within_records do
         within 'tbody .nested-record:nth-last-child(1)' do
-          expect(page).to have_content '1 - 3.1.90.00.00 - Aplicações Diretas'
+          expect(page).to have_content '12 - 3.1.90.00.00 - Aplicações Diretas'
           expect(page).to have_content '3.1.90.00.00 - Aplicações Diretas'
-          expect(page).to have_content '-10,50'
+          expect(page).to have_content '0,00'
           expect(page).to have_content '300,00'
         end
       end
@@ -1100,7 +1100,7 @@ feature "LicitationProcesses", :vcr do
           expect(page).to have_content '1 - 3.1.90.00.00 - Aplicações Diretas'
           expect(page).to have_content '3.1.90.00.00 - Aplicações Diretas'
           expect(page).to have_content '3.0.00.00.00 - Despesas Correntes'
-          expect(page).to have_content '-10,50'
+          expect(page).to have_content '989,50'
           expect(page).to have_content '20,00'
         end
       end
@@ -1154,7 +1154,7 @@ feature "LicitationProcesses", :vcr do
           expect(page).to have_content '1 - 3.1.90.00.00 - Aplicações Diretas'
           expect(page).to have_content '3.1.90.00.00 - Aplicações Diretas'
           expect(page).to have_content '3.0.00.00.00 - Despesas Correntes'
-          expect(page).to have_content '-10,50'
+          expect(page).to have_content '989,50'
           expect(page).to have_content '20,00'
         end
       end
@@ -1632,7 +1632,7 @@ feature "LicitationProcesses", :vcr do
           expect(page).to have_content '1 - 3.1.90.00.00 - Aplicações Diretas'
           expect(page).to have_content '3.1.90.00.00 - Aplicações Diretas'
           expect(page).to have_content '3.0.00.00.00 - Despesas Correntes'
-          expect(page).to have_content '-10,50'
+          expect(page).to have_content '989,50'
           expect(page).to have_content '20,00'
         end
       end
@@ -1959,7 +1959,7 @@ feature "LicitationProcesses", :vcr do
           expect(page).to have_content '1 - 3.1.90.00.00 - Aplicações Diretas'
           expect(page).to have_content '3.1.90.00.00 - Aplicações Diretas'
           expect(page).to have_content '3.0.00.00.00 - Despesas Correntes'
-          expect(page).to have_content '-10,50'
+          expect(page).to have_content '989,50'
           expect(page).to have_content '20,00'
         end
       end
@@ -2459,14 +2459,14 @@ feature "LicitationProcesses", :vcr do
       fill_in 'Ano da dotação', with: '2013'
 
       within_autocomplete 'Dotação orçamentária', with: 'A' do
-        expect(page).to_not have_content '1 - Aplicações Diretas'
+        expect(page).to_not have_content '12 - Aplicações Diretas'
         expect(page).to_not have_content '11 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
       end
 
       fill_in 'Ano da dotação', with: '2012'
 
       within_autocomplete 'Dotação orçamentária', with: 'A' do
-        expect(page).to have_content '1 - Aplicações Diretas'
+        expect(page).to have_content '12 - Aplicações Diretas'
         expect(page).to have_content '11 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
       end
     end

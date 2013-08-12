@@ -109,17 +109,17 @@ feature "PurchaseSolicitations", :vcr do
 
       expect(page).to have_field 'Natureza da despesa', :with => '3.1.90.00.00 - Aplicações Diretas',
         disabled: true
-      expect(page).to have_field 'Saldo da dotação',:with => '-10,50', disabled: true
+      expect(page).to have_field 'Saldo da dotação',:with => '0,00', disabled: true
 
       fill_in 'Valor estimado', :with => '100,00'
 
       click_button "Adicionar"
 
       within_records do
-        expect(page).to have_content '1 - Aplicações Diretas'
+        expect(page).to have_content '12 - Aplicações Diretas'
         expect(page).to have_content '3.1.90.00.00 - Aplicações Diretas'
         expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
-        expect(page).to have_content '-10,50'
+        expect(page).to have_content '0,00'
         expect(page).to have_content '100,00'
       end
 
@@ -178,10 +178,10 @@ feature "PurchaseSolicitations", :vcr do
 
     within_tab 'Dotações orçamentárias' do
       within_records do
-        expect(page).to have_content '1 - 3.1.90.00.00 - Aplicações Diretas'
+        expect(page).to have_content '12 - 3.1.90.00.00 - Aplicações Diretas'
         expect(page).to have_content '3.1.90.00.00 - Aplicações Diretas'
         expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
-        expect(page).to have_content '-10,50'
+        expect(page).to have_content '0,00'
         expect(page).to have_content '100,00'
       end
     end
@@ -267,10 +267,10 @@ feature "PurchaseSolicitations", :vcr do
       click_button "Adicionar"
 
       within_records do
-        expect(page).to have_content '1 - Aplicações Diretas'
+        expect(page).to have_content '12 - Aplicações Diretas'
         expect(page).to have_content '3.1.90.00.00 - Aplicações Diretas'
         expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
-        expect(page).to have_content '-10,50'
+        expect(page).to have_content '0,00'
       end
     end
 
@@ -318,10 +318,10 @@ feature "PurchaseSolicitations", :vcr do
       expect(page).to have_css('.records .record', :count => 1)
 
       within_records do
-        expect(page).to have_content '1 - 3.1.90.00.00 - Aplicações Diretas'
+        expect(page).to have_content '12 - 3.1.90.00.00 - Aplicações Diretas'
         expect(page).to have_content '3.1.90.00.00 - Aplicações Diretas'
         expect(page).to have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
-        expect(page).to have_content '-10,50'
+        expect(page).to have_content '0,00'
       end
     end
   end
