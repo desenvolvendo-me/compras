@@ -1,6 +1,8 @@
 class BudgetStructure < UnicoAPI::Resources::Contabilidade::BudgetStructure
   include BelongsToResource
 
+  attr_modal :code, :description, :kind, force: true
+
   belongs_to_resource :parent, resource_class: BudgetStructure
 
   def to_s
