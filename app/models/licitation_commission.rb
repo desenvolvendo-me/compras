@@ -1,4 +1,3 @@
-# encoding: utf-8
 class LicitationCommission < Compras::Model
   include Unico::CustomData
   reload_custom_data
