@@ -80,7 +80,7 @@ $(document).ready(function() {
     }
   };
 
-  $('#licitation_process_budget_allocation_year').on('change', function(){
+  $('form.licitation_process').on('change', '#licitation_process_budget_allocation_year', function(){
     setBudgetAllocationSource();
   });
 
