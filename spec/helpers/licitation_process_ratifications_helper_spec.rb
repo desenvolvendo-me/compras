@@ -39,11 +39,11 @@ describe LicitationProcessRatificationsHelper do
           ratification.stub(judgment_form_item?: false)
         end
 
-        it "should return the realignment_prices' index path" do
+        it "should return the realignment_price_items' index path" do
           ratification.stub(licitation_process_id: 10)
-          helper.should_receive(:realignment_prices_path).with(purchase_process_id: 10).and_return('realignment_prices_index')
+          helper.should_receive(:realignment_price_items_path).with(purchase_process_id: 10).and_return('realignment_price_items_index')
 
-          expect(helper.creditor_proposals_helper_path(ratification)).to eq 'realignment_prices_index'
+          expect(helper.creditor_proposals_helper_path(ratification)).to eq 'realignment_price_items_index'
         end
       end
     end

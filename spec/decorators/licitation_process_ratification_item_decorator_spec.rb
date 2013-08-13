@@ -69,6 +69,28 @@ describe LicitationProcessRatificationItemDecorator do
     end
   end
 
+  describe '#realignment_price_item_id_or_mustache_variable' do
+    context 'when component has a realignment_price_item_id' do
+      before do
+        component.stub(:realignment_price_item_id => 10)
+      end
+
+      it 'should return the purchase_process_creditor_proposal_id' do
+        expect(subject.realignment_price_item_id_or_mustache_variable).to eq 10
+      end
+    end
+
+    context "when component's realignment_price_item_id is nil" do
+      before do
+        component.stub(:realignment_price_item_id => nil)
+      end
+
+      it 'should return the {{realignment_price_item_id}}' do
+        expect(subject.realignment_price_item_id_or_mustache_variable).to eq '{{realignment_price_item_id}}'
+      end
+    end
+  end
+
   describe '#code_or_mustache_variable' do
     context 'when component has a code' do
       before do

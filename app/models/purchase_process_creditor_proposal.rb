@@ -188,14 +188,13 @@ class PurchaseProcessCreditorProposal < Compras::Model
     }
   end
 
-  def realignment_items(realignment_price_repository = RealignmentPrice)
+  def realignment_items(realignment_price_item_repository = RealignmentPriceItem)
     return [] if judgment_form.item?
 
-    realignment_price_repository.
+    realignment_price_item_repository.
       purchase_process_id(licitation_process_id).
       creditor_id(creditor_id).
-      lot(lot).
-      flat_map(&:items)
+      lot(lot)
   end
 
   private

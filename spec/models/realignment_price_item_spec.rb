@@ -11,6 +11,8 @@ describe RealignmentPriceItem do
   it { should have_one(:material).through :item }
   it { should have_one(:purchase_process).through :realignment_price }
 
+  it { should have_many(:creditor_proposals).through :purchase_process }
+
   describe 'delegates' do
     it { should delegate(:judgment_form_lot?).to(:purchase_process).allowing_nil(true) }
     it { should delegate(:year).to(:purchase_process).allowing_nil(true).prefix(true) }
@@ -18,6 +20,8 @@ describe RealignmentPriceItem do
     it { should delegate(:process).to(:purchase_process).allowing_nil(true).prefix(true) }
     it { should delegate(:identity_document).to(:creditor).allowing_nil(true).prefix(true) }
     it { should delegate(:reference_unit).to(:material).allowing_nil(true).prefix(true) }
+    it { should delegate(:code).to(:material).allowing_nil(true).prefix(true) }
+    it { should delegate(:description).to(:material).allowing_nil(true).prefix(true) }
     it { should delegate(:lot).to(:item).allowing_nil(true) }
   end
 

@@ -25,6 +25,7 @@ class RealignmentPrice < Compras::Model
   scope :lot, ->(lot) do
     where { |query| query.lot.eq lot }
   end
+  orderize :id
 
   def purchase_process_items
     if judgment_form_lot?

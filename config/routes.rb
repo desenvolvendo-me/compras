@@ -621,6 +621,8 @@ Compras::Application.routes.draw do
     end
   end
 
+  resources :realignment_price_items, only: :index
+
   resources :reference_units do
     collection do
       get :modal

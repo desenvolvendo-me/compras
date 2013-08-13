@@ -33,6 +33,10 @@ class LicitationProcessRatificationItemDecorator
     purchase_process_item_id || "{{purchase_process_item_id}}"
   end
 
+  def realignment_price_item_id_or_mustache_variable
+    realignment_price_item_id || "{{realignment_price_item_id}}"
+  end
+
   def code_or_mustache_variable
     code || "{{code}}"
   end
