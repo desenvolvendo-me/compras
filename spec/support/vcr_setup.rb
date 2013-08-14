@@ -5,8 +5,16 @@ VCR.configure do |c|
   c.hook_into :fakeweb
   c.debug_logger = File.open("#{Rails.root}/log/vcr.log", "w")
 
+  c.default_cassette_options = {
+    allow_playback_repeats: true,
+    record: :all,
+    serialize_with: :json
+  }
+
   c.ignore_request do |request|
     uri = URI(request.uri)
     (uri.port != 8081 && uri.host == "localhost") || (uri.host == "127.0.0.1")
   end
+
+  c.configure_rspec_metadata!
 end
