@@ -4,6 +4,8 @@ class Report::BaseController < ApplicationController
   include ActiveRelatus::Controller
 
   before_filter :authorize_resource!
+  before_filter :set_pagination, only: :new
+  before_filter :disable_pagination, only: :show
 
   def index
     redirect_to controller: controller_name, action: :new
@@ -11,6 +13,8 @@ class Report::BaseController < ApplicationController
 
   def new
     @report = report_instance
+
+    @report.valid? if @report.searched?
   end
 
   def show
@@ -23,6 +27,22 @@ class Report::BaseController < ApplicationController
   end
 
   protected
+
+  def page
+    params[:page] || 1
+  end
+
+  def per
+    params[:per] || 10
+  end
+
+  def set_pagination
+    report_instance.paginate(page, per)
+  end
+
+  def disable_pagination
+    report_instance.disable_pagination
+  end
 
   def authorized_resource!
     authorize! action_name, "report#{controller_name}"

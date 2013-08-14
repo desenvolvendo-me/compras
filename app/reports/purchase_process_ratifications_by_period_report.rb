@@ -1,5 +1,4 @@
-class PurchaseProcessRatificationsByPeriodReport < ActiveRelatus::Base
-  extend EnumerateIt
+class PurchaseProcessRatificationsByPeriodReport < Report
   attr_accessor :type_of_purchase, :object_type, :modality, :creditor_id, :creditor,
                 :start_date, :end_date, :type_of_removal
 

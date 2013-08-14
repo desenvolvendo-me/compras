@@ -33,30 +33,30 @@ feature 'Report::MapOfPrices' do
 
     expect(page).to have_content "Lote: 1 - 01.01.00001 - Antivirus - Quantidade: 3"
 
-    within :xpath, '//*[@id="content"]/table[1]' do
+    within :xpath, '//*[@id="content"]/div/table[1]' do
       expect(page).to have_content 'Fornecedor'
       expect(page).to have_content 'Valor unitário'
       expect(page).to have_content 'Valor total'
 
-      within :xpath, '//*[@id="content"]/table[1]/tbody/tr[1]' do
+      within :xpath, '//*[@id="content"]/div/table[1]/tbody/tr[1]' do
         expect(page).to have_content '003.149.513-34 - Wenderson Malheiros'
         expect(page).to have_content 'R$ 1,25'
         expect(page).to have_content 'R$ 12,50'
       end
 
-      within :xpath, '//*[@id="content"]/table[1]/tbody/tr[2]' do
+      within :xpath, '//*[@id="content"]/div/table[1]/tbody/tr[2]' do
         expect(page).to have_content '003.151.987-37 - Gabriel Sobrinho'
         expect(page).to have_content 'R$ 3,75'
         expect(page).to have_content 'R$ 37,50'
       end
 
-      within :xpath, '//*[@id="content"]/table[1]/tbody/tr[3]' do
+      within :xpath, '//*[@id="content"]/div/table[1]/tbody/tr[3]' do
         expect(page).to have_content '85.113.468/0001-45 - IBM'
         expect(page).to have_content 'R$ 6,25'
         expect(page).to have_content 'R$ 62,50'
       end
 
-      within :xpath, '//*[@id="content"]/table[1]/tfoot/tr' do
+      within :xpath, '//*[@id="content"]/div/table[1]/tfoot/tr' do
         expect(page).to have_content 'Preço médio'
         expect(page).to have_content 'R$ 3,75'
         expect(page).to have_content 'R$ 37,50'
@@ -65,30 +65,30 @@ feature 'Report::MapOfPrices' do
 
     expect(page).to have_content "Lote: 2 - 02.02.00002 - Arame comum - Quantidade: 3"
 
-    within :xpath, '//*[@id="content"]/table[2]' do
+    within :xpath, '//*[@id="content"]/div/table[2]' do
       expect(page).to have_content 'Fornecedor'
       expect(page).to have_content 'Valor unitário'
       expect(page).to have_content 'Valor total'
 
-      within :xpath, '//*[@id="content"]/table[2]/tbody/tr[1]' do
+      within :xpath, '//*[@id="content"]/div/table[2]/tbody/tr[1]' do
         expect(page).to have_content '003.149.513-34 - Wenderson Malheiros'
         expect(page).to have_content 'R$ 2,50'
         expect(page).to have_content 'R$ 500,00'
       end
 
-      within :xpath, '//*[@id="content"]/table[2]/tbody/tr[2]' do
+      within :xpath, '//*[@id="content"]/div/table[2]/tbody/tr[2]' do
         expect(page).to have_content '003.151.987-37 - Gabriel Sobrinho'
         expect(page).to have_content 'R$ 5,00'
         expect(page).to have_content 'R$ 1.000,00'
       end
 
-      within :xpath, '//*[@id="content"]/table[2]/tbody/tr[3]' do
+      within :xpath, '//*[@id="content"]/div/table[2]/tbody/tr[3]' do
         expect(page).to have_content '85.113.468/0001-45 - IBM'
         expect(page).to have_content 'R$ 7,50'
         expect(page).to have_content 'R$ 1.500,00'
       end
 
-      within :xpath, '//*[@id="content"]/table[2]/tfoot/tr' do
+      within :xpath, '//*[@id="content"]/div/table[2]/tfoot/tr' do
         expect(page).to have_content 'Preço médio'
         expect(page).to have_content 'R$ 5,00'
         expect(page).to have_content 'R$ 1.000,00'

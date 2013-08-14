@@ -1,5 +1,4 @@
-class MapOfProposalReport < ActiveRelatus::Base
-  extend EnumerateIt
+class MapOfProposalReport < Report
   include Decore::Infection
 
   attr_accessor :order, :licitation_process_id

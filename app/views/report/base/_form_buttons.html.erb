@@ -1,3 +1,10 @@
 <div class="buttons">
   <%= f.button :submit, "Gerar #{t("#{@report.class.to_s.tableize}.#{@report}.one")}" %>
+
+  <% if @report.valid? && @report.render_list? %>
+    <%= link_to 'Imprimir',
+      url_for(controller: controller_name, action: :show, id: :report,
+        params: { "#{controller_name.singularize}_report" => params["#{controller_name.singularize}_report"] }),
+      class: 'button primary'%>
+  <% end %>
 </div>

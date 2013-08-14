@@ -1,1 +1,20 @@
-<%= render 'show', :resource => @report %>
+<% if @report.render_list? %>
+  <h1><%= t "#{@report.class.to_s.tableize}.#{@report}.one" %></h1>
+
+  <div class="filters">
+    <h2>Filtros utilizados</h2>
+
+    <% @report.send(:normalize_attributes).each do |param, value| %>
+      <p>
+        <%= I18n.t(param, scope: [:activemodel, :attributes, @report.class.to_s.underscore]) %>:
+        <%= @report.parse_filter param, value %>
+      </p>
+    <% end %>
+  </div>
+<% end %>
+
+<hr />
+
+<div class="report-records">
+  <%= render 'show', :resource => @report %>
+</div>
