@@ -50,8 +50,10 @@ class PledgeRequest < Compras::Model
   def require_reserve_fund_id
     return unless purchase_process
 
-    if purchase_process && purchase_process.reserve_funds_available.any?
-      errors.add :reserve_fund, :blank
+    available_ids = purchase_process.reserve_funds_available.map(&:id)
+
+    if purchase_process.reserve_funds_available.any? && !available_ids.include?(reserve_fund_id)
+      errors.add :reserve_fund_id, :blank
     end
   end
 end
