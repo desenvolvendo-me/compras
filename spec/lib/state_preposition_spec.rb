@@ -1,4 +1,3 @@
-#encoding: utf-8
 require 'unit_helper'
 require 'active_support/core_ext'
 require 'lib/state_preposition'

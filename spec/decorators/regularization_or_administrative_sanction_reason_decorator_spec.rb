@@ -1,4 +1,3 @@
-# encoding: utf-8
 require 'decorator_helper'
 require 'app/decorators/regularization_or_administrative_sanction_reason_decorator'
 

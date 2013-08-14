@@ -1,4 +1,3 @@
-# encoding: utf-8
 class PurchaseProcessTradingItemsController < CrudController
   actions :next_bid, :creditor_list, :undo_last_bid
 

@@ -1,4 +1,3 @@
-# encoding: utf-8
 # load unit helper
 require 'unit_helper'
 

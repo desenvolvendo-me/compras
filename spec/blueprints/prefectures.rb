@@ -1,4 +1,3 @@
-# encoding: utf-8
 Prefecture.blueprint(:belo_horizonte) do
   name { "Belo Horizonte" }
   cnpj { "48.021.328/0001-10" }

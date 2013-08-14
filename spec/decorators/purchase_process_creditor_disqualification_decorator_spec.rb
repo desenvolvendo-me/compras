@@ -1,4 +1,3 @@
-# encoding: utf-8
 require 'decorator_helper'
 require 'enumerate_it'
 require 'app/enumerations/purchase_process_creditor_disqualification_kind'

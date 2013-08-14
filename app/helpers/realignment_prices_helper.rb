@@ -1,4 +1,3 @@
-# encoding: utf-8
 module RealignmentPricesHelper
   def proposals(purchase_process, creditor)
     PurchaseProcessCreditorProposal.

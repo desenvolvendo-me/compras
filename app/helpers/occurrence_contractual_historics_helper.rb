@@ -1,4 +1,3 @@
-# encoding:utf-8
 module OccurrenceContractualHistoricsHelper
   def new_title
     "Criar nova ocorrência para o contrato #{resource.contract}"

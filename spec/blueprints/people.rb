@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 Person.blueprint(:sobrinho) do
   name   { "Gabriel Sobrinho" }
   phone  { '(33) 3333-3333' }

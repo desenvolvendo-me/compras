@@ -1,4 +1,3 @@
-# encoding: utf-8
 class BidderDecorator
   include Decore
   include Decore::Proxy

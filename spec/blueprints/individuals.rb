@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 Individual.blueprint(:sobrinho) do
   cpf       { '003.151.987-37' }
   mother    { 'Helena Maria' }

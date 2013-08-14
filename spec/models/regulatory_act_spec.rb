@@ -1,4 +1,3 @@
-# encoding: utf-8
 require 'model_helper'
 require 'app/models/unico/regulatory_act'
 require 'app/models/regulatory_act'

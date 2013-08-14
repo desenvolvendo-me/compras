@@ -1,4 +1,3 @@
-# encoding: utf-8
 require 'model_helper'
 require 'app/models/descriptor'
 require 'app/models/expense_nature'

@@ -1,9 +1,8 @@
-# encoding: utf-8
 require 'model_helper'
 require 'app/models/contract_additive'
 
 describe ContractAdditive do
-  it { should belong_to :contract } 
+  it { should belong_to :contract }
 
   it { should validate_presence_of(:number) }
   it { should validate_presence_of(:additive_type) }

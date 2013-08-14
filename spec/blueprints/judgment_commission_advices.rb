@@ -1,4 +1,3 @@
-#encoding: utf-8
 JudgmentCommissionAdvice.blueprint(:parecer) do
   licitation_process { LicitationProcess.make!(:processo_licitatorio) }
   licitation_commission { LicitationCommission.make!(:comissao) }

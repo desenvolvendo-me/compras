@@ -1,4 +1,3 @@
-# encoding: utf-8
 require 'importer_helper'
 
 namespace :import do

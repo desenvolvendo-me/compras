@@ -1,4 +1,3 @@
-# encoding: utf-8
 BankAccount.blueprint(:itau_tributos) do
   description { "Itaú Tributos" }
   agency { ::FactoryGirl::Preload.factories['Agency'][:itau] }

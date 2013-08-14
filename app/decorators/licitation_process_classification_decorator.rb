@@ -1,4 +1,3 @@
-# encoding: utf-8
 class LicitationProcessClassificationDecorator
   include Decore
   include Decore::Proxy

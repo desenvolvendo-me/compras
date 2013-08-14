@@ -1,4 +1,3 @@
-#encoding: utf-8
 class StatePreposition
   def initialize(name)
     @name = name.mb_chars.upcase

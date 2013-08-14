@@ -1,4 +1,3 @@
-# encoding: utf-8
 class MigrateAccounting < ActiveRecord::Migration
   def change
     if Rails.env.development? || Rails.env.test?

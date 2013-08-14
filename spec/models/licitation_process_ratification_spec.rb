@@ -1,4 +1,3 @@
-# encoding: utf-8
 require 'model_helper'
 require 'lib/signable'
 require 'app/models/licitation_process'

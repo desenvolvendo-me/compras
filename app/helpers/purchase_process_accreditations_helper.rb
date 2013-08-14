@@ -1,4 +1,3 @@
-# encoding: utf-8
 module PurchaseProcessAccreditationsHelper
   def accreditation_path
     resource.persisted? ? purchase_process_accreditation_path : '#'

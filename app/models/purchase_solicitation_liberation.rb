@@ -1,4 +1,3 @@
-# encoding: utf-8
 class PurchaseSolicitationLiberation < Compras::Model
   attr_accessible :date, :justification, :responsible_id,
                   :purchase_solicitation_id, :service_status

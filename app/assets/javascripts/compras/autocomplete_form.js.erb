@@ -1,5 +1,3 @@
-<%# encoding: utf-8 %>
-
 function addRecordToGrid(record, input) {
   if (!canInsertRecord(record, input)) {
     alert("<%= I18n.t('errors.messages.record_already_exists') %>");

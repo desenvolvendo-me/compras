@@ -1,4 +1,3 @@
-# encoding: utf-8
 class RenameExpenseNaturesTable < ActiveRecord::Migration
   class RegulatoryAct < Compras::Model; end
 

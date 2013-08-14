@@ -1,4 +1,3 @@
-# encoding: utf-8
 module PurchaseProcessCreditorDisqualificationsHelper
   def new_title
     "Desclassificar fornecedor #{resource.creditor} - Processo #{resource.licitation_process}"

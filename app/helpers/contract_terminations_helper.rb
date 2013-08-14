@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 module ContractTerminationsHelper
   def new_title
     "Criar nova Rescisão Contratual para Contrato #{resource.contract}"

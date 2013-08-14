@@ -1,4 +1,3 @@
-# encoding: utf-8
 module ResourceAnnulsHelper
   def new_title
     "Anular #{parent_model_name_translation} #{resource}"

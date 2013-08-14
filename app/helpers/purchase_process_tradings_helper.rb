@@ -1,4 +1,3 @@
-# encoding: utf-8
 module PurchaseProcessTradingsHelper
   def make_bid_disabled_message(next_bid)
     t('purchase_process_trading.messages.make_bid_disabled_message') if next_bid.blank?

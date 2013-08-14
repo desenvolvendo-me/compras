@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 Company.blueprint(:nohup) do
   cnpj { "00.000.000/9999-62" }
   legal_nature { LegalNature.make!(:administracao_publica) }

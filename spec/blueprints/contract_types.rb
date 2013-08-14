@@ -1,4 +1,3 @@
-# encoding: utf-8
 ContractType.blueprint(:trainees) do
   tce_code { 123 }
   description { 'Contratação de estagiários' }

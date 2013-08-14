@@ -1,4 +1,3 @@
-# encoding: utf-8
 LicitationProcessImpugnment.blueprint(:proibido_cadeiras) do
   licitation_process { LicitationProcess.make!(:processo_licitatorio) }
   impugnment_date { Date.new(2012, 4, 1) }

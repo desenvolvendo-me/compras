@@ -1,4 +1,3 @@
-# encoding: utf-8
 FactoryGirl.preload do
   factory(:customer)                { create(:customer) }
   factory(:customer)                { create(:customer, :domain => 'test.host', :name => 'Semaphore') }

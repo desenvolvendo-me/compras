@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 module JudgmentCommissionAdvicesHelper
   def new_title
     "#{t("#{controller_name}.new", :resource => singular, :cascade => true)} para o Processo de Compra #{resource.licitation_process}"

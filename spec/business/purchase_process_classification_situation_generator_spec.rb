@@ -1,4 +1,3 @@
-#encoding: utf-8
 require 'unit_helper'
 require 'active_support/core_ext/module/delegation'
 require 'app/business/purchase_process_classification_value'

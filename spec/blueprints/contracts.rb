@@ -1,4 +1,3 @@
-# encoding: utf-8
 Contract.blueprint(:primeiro_contrato) do
   sequential_number { 1 }
   year { 2012 }

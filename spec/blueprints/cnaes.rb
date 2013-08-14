@@ -1,4 +1,3 @@
-# encoding: utf-8
 Cnae.blueprint(:aluguel) do
   code { "7739099" }
   name { "Aluguel de outras máquinas" }

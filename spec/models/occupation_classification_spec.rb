@@ -1,4 +1,3 @@
-# encoding: utf-8
 require 'model_helper'
 require 'app/models/unico/occupation_classification'
 require 'app/models/occupation_classification'

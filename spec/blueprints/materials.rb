@@ -1,4 +1,3 @@
-#encoding: utf-8
 Material.blueprint(:antivirus) do
   material_class { ::FactoryGirl::Preload.factories['MaterialClass'][:software] }
   code { "01.01.00001" }

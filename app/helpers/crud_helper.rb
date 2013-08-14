@@ -1,4 +1,3 @@
-#encoding: utf-8
 module CrudHelper
   def plural(class_name = resource_class)
     class_name.model_name.human(:count => 'many')

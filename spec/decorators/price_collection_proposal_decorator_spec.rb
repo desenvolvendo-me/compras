@@ -1,4 +1,3 @@
-# encoding: UTF-8
 require 'decorator_helper'
 require 'app/decorators/price_collection_proposal_decorator'
 

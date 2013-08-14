@@ -1,4 +1,3 @@
-# encoding: utf-8
 ActiveRecord::Base.transaction do
   Customer.create!(:name => "Desenvolvimento", :domain => "0.0.0.0", :database => Customer.connection_config)
 

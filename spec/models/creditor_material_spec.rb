@@ -1,4 +1,3 @@
-# encoding: utf-8
 require 'model_helper'
 require 'app/models/creditor_material'
 require 'app/models/creditor'

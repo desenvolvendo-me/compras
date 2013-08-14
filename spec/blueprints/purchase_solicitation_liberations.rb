@@ -1,4 +1,3 @@
-# encoding: utf-8
 PurchaseSolicitationLiberation.blueprint(:reparo) do
   date { Date.current }
   responsible { Employee.make!(:sobrinho) }

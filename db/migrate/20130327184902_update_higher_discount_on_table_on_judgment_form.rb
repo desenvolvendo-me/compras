@@ -1,4 +1,3 @@
-# encoding: utf-8
 class UpdateHigherDiscountOnTableOnJudgmentForm < ActiveRecord::Migration
   def change
     execute <<-SQL

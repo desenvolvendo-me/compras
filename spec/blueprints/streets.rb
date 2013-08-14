@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 Street.blueprint(:amazonas) do
   name        { "Amazonas" }
   street_type { ::FactoryGirl::Preload.factories['StreetType'][:avenida] }

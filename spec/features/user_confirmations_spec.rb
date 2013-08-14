@@ -1,4 +1,3 @@
-#encoding: utf-8
 require 'spec_helper'
 
 feature 'A user confirming your account' do
