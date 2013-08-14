@@ -7,7 +7,7 @@ VCR.configure do |c|
 
   c.default_cassette_options = {
     allow_playback_repeats: true,
-    record: :all,
+    record: :new_episodes,
     serialize_with: :json
   }
 
