@@ -1,15 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
 
-feature 'PurchaseProcessCreditorDisqualifications', :vcr do
-  before(:all) do
-    VCR.insert_cassette('purchase_process_creditor_disqualifications', allow_playback_repeats: true)
-  end
-
-  after(:all) do
-    VCR.eject_cassette
-  end
-
+feature 'PurchaseProcessCreditorDisqualifications', vcr: { cassette_name: :purchase_process_creditor_disqualifications } do
   let(:current_user) { User.make!(:sobrinho_as_admin_and_employee) }
 
   background do

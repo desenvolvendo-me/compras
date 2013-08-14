@@ -1,15 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
 
-feature "PurchaseProcessAccreditation", :vcr do
-  before(:all) do
-    VCR.insert_cassette('purchase_process_accreditations', allow_playback_repeats: true)
-  end
-
-  after(:all) do
-    VCR.eject_cassette
-  end
-
+feature "PurchaseProcessAccreditation", vcr: { cassette_name: :purchase_process_accreditations } do
   let(:current_user) { User.make!(:sobrinho_as_admin_and_employee) }
 
   background do

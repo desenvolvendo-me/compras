@@ -1,15 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
 
-feature "LicitationProcessPublications", :vcr do
-  before(:all) do
-    VCR.insert_cassette('licitation_process_publications', allow_playback_repeats: true)
-  end
-
-  after(:all) do
-    VCR.eject_cassette
-  end
-
+feature "LicitationProcessPublications", vcr: { cassette_name: :licitation_process_publications } do
   let(:current_user) { User.make!(:sobrinho) }
 
   background do

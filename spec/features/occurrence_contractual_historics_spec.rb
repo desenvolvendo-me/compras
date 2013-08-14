@@ -1,16 +1,8 @@
 # encoding: utf-8
 require 'spec_helper'
 
-feature "OccurrenceContractualHistorics", :vcr do
+feature "OccurrenceContractualHistorics", vcr: { cassette_name: :occurrence_contractual_historics } do
   let(:current_user) { User.make!(:sobrinho) }
-
-  before(:all) do
-    VCR.insert_cassette('occurrence_contractual_historics', allow_playback_repeats: true)
-  end
-
-  after(:all) do
-    VCR.eject_cassette
-  end
 
   background do
     create_roles ['contracts']

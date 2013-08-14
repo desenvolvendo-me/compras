@@ -1,15 +1,7 @@
 #encoding: utf-8
 require 'spec_helper'
 
-feature 'ContractTerminationAnnuls', :vcr do
-  before(:all) do
-    VCR.insert_cassette('contract_termination_annuls', allow_playback_repeats: true)
-  end
-
-  after(:all) do
-    VCR.eject_cassette
-  end
-
+feature 'ContractTerminationAnnuls', vcr: { cassette_name: :contract_termination_annuls } do
   background do
     sign_in
   end

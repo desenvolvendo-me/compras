@@ -1,16 +1,8 @@
 # encoding: utf-8
 require 'spec_helper'
 
-feature "JudgmentCommissionAdvices", :vcr do
+feature "JudgmentCommissionAdvices", vcr: { cassette_name: :judgment_commission_advices } do
   let(:current_user) { User.make!(:sobrinho) }
-
-  before(:all) do
-    VCR.insert_cassette('judgment_commission_advices', allow_playback_repeats: true)
-  end
-
-  after(:all) do
-    VCR.eject_cassette
-  end
 
   background do
     create_roles ['licitation_processes',

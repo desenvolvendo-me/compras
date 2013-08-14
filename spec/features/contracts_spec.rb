@@ -1,15 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
 
-feature "Contracts", :vcr do
-  before(:all) do
-    VCR.insert_cassette('contracts', allow_playback_repeats: true)
-  end
-
-  after(:all) do
-    VCR.eject_cassette
-  end
-
+feature "Contracts", vcr: { cassette_name: :contracts } do
   background do
     sign_in
   end

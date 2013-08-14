@@ -1,15 +1,7 @@
 #encoding: utf-8
 require 'spec_helper'
 
-feature 'Report::MapOfProposals', :vcr do
-  before(:all) do
-    VCR.insert_cassette('map_of_proposals', allow_playback_repeats: true)
-  end
-
-  after(:all) do
-    VCR.eject_cassette
-  end
-
+feature 'Report::MapOfProposals', vcr: { cassette_name: :map_of_proposals } do
   background do
     Prefecture.make!(:belo_horizonte)
 

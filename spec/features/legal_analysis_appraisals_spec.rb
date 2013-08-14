@@ -1,15 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
 
-feature "LegalAnalysisAppraisals", :vcr do
-  before(:all) do
-    VCR.insert_cassette('legal_analysis_appraisals', allow_playback_repeats: true)
-  end
-
-  after(:all) do
-    VCR.eject_cassette
-  end
-
+feature "LegalAnalysisAppraisals", vcr: { cassette_name: :legal_analysis_appraisals }  do
   background do
     sign_in
   end

@@ -1,16 +1,8 @@
 # encoding: utf-8
 require 'spec_helper'
 
-feature "LicitationProcesses", :vcr do
+feature "LicitationProcesses", vcr: { cassette_name: :licitation_process } do
   let(:current_user) { User.make!(:sobrinho_as_admin_and_employee) }
-
-  before(:all) do
-    VCR.insert_cassette('licitation_process', allow_playback_repeats: true)
-  end
-
-  after(:all) do
-    VCR.eject_cassette
-  end
 
   background do
     create_roles ['judgment_forms',
@@ -2445,7 +2437,6 @@ feature "LicitationProcesses", :vcr do
   end
 
   scenario 'should filter auto_complete in budget_allocation by budget_allocation_year' do
-    pending 'this test is not working, but in browser is all ok'
     LicitationProcess.make!(:processo_licitatorio, purchase_process_budget_allocations: [])
 
     navigate 'Processos de Compra > Processos de Compras'
@@ -2459,14 +2450,14 @@ feature "LicitationProcesses", :vcr do
     within_tab 'Orçamento' do
       fill_in 'Ano da dotação', with: '2013'
 
-      within_autocomplete 'Dotação orçamentária', with: 'A' do
+      within_autocomplete 'Dotação orçamentária', with: 'Ap' do
         expect(page).to_not have_content '12 - Aplicações Diretas'
         expect(page).to_not have_content '11 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
       end
 
       fill_in 'Ano da dotação', with: '2012'
 
-      within_autocomplete 'Dotação orçamentária', with: 'A' do
+      within_autocomplete 'Dotação orçamentária', with: 'Ap' do
         expect(page).to have_content '12 - Aplicações Diretas'
         expect(page).to have_content '11 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
       end

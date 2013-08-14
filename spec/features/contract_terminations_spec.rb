@@ -1,16 +1,8 @@
 #encoding: utf-8
 require 'spec_helper'
 
-feature 'ContractTerminations', :vcr do
+feature 'ContractTerminations', vcr: { cassette_name: :contract_terminations } do
   let(:current_user) { User.make!(:sobrinho) }
-
-  before(:all) do
-    VCR.insert_cassette('contract_terminations', allow_playback_repeats: true)
-  end
-
-  after(:all) do
-    VCR.eject_cassette
-  end
 
   background do
     create_roles ['dissemination_sources', 'contracts', 'contract_termination_annuls']
