@@ -36,6 +36,50 @@ describe LicitationProcessDecorator do
     end
   end
 
+  context '#proposal_envelope_opening_date' do
+    context 'when do not have proposal_envelope_opening_date' do
+      before do
+        component.stub(:proposal_envelope_opening_date).and_return(nil)
+      end
+
+      it 'should be nil' do
+        expect(subject.proposal_envelope_opening_date).to be_nil
+      end
+    end
+
+    context 'when have proposal_envelope_opening_date' do
+      before do
+        component.stub(:proposal_envelope_opening_date).and_return(Date.new(2013,01,01))
+      end
+
+      it 'should localize proposal_envelope_opening_date' do
+        expect(subject.proposal_envelope_opening_date).to eq '01/01/2013'
+      end
+    end
+  end
+
+  context '#budget_allocations_total_value' do
+    context 'when do not have budget_allocations_total_value' do
+      before do
+        component.stub(:budget_allocations_total_value).and_return(nil)
+      end
+
+      it 'should be nil' do
+        expect(subject.budget_allocations_total_value).to be_nil
+      end
+    end
+
+    context 'when have budget_allocations_total_value' do
+      before do
+        component.stub(:budget_allocations_total_value).and_return(10.50)
+      end
+
+      it 'should localize budget_allocations_total_value' do
+        expect(subject.budget_allocations_total_value).to eq '10,50'
+      end
+    end
+  end
+
   context '#proposal_envelope_opening_time' do
     context 'when do not have proposal_envelope_opening_time' do
       before do

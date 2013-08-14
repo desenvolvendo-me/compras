@@ -1,0 +1,9 @@
+pt-BR:
+  activemodel:
+    attributes:
+      bidding_schedule_report:
+        object_type: "Tipo de objeto"
+        modality: "Modalidade"
+        start_date: "Data do julgamento inicial"
+        end_date: "Data do julgamento final"
+        licitation_commission: 'Comissão de licitação'

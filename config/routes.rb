@@ -768,6 +768,7 @@ Compras::Application.routes.draw do
 
   namespace :report do
     scope :only => [:index, :new, :show] do
+      resources :bidding_schedules
       resources :map_of_proposals
       resources :purchase_process_ratifications_by_periods
       resources :purchase_solicitations

@@ -28,6 +28,14 @@ class LicitationProcessDecorator
     localize(super, :format => :hour) if super
   end
 
+  def proposal_envelope_opening_date
+    localize(super) if super
+  end
+
+  def budget_allocations_total_value
+    number_with_precision super if super
+  end
+
   def all_licitation_process_classifications_groupped
     all_licitation_process_classifications.group_by(&:bidder).each do |bidder, classifications|
       classifications.sort_by!(&:classifiable_id)

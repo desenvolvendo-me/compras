@@ -1,4 +1,9 @@
 pt-BR:
+  bidding_schedule_reports:
+    bidding_schedule_report:
+      one: "Relatório de agendas de licitação"
+      other: "Relatório de agendas de licitação"
+
   map_of_proposal_reports:
     map_of_proposal_report:
       one: "Mapa de Proposta"
