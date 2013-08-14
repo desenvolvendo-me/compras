@@ -1,16 +1,14 @@
 #encoding: utf-8
 require 'spec_helper'
 
-describe TceExport::MG::MonthlyMonitoring::LegalAnalysisAppraisalGenerator do
+describe TceExport::MG::MonthlyMonitoring::LegalAnalysisAppraisalGenerator, vcr: { cassette_name: 'integration/legal_analysis_appraisal' } do
   describe "#generate_file" do
     before do
       FileUtils.rm_f('tmp/PARELIC.csv')
-      VCR.insert_cassette('integration/legal_analysis_appraisal', allow_playback_repeats: true)
     end
 
     after do
       FileUtils.rm_f('tmp/PARELIC.csv')
-      VCR.eject_cassette
     end
 
     let :prefecture do

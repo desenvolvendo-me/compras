@@ -1,17 +1,15 @@
 #encoding: utf-8
 require 'spec_helper'
 
-describe TceExport::MG::MonthlyMonitoring::BiddingAuthorizationGenerator do
+describe TceExport::MG::MonthlyMonitoring::BiddingAuthorizationGenerator, vcr: { cassette_name: 'integration/bidding_authorization' } do
   describe "#generate_file" do
     before do
       UnicoAPI::Consumer.set_customer customer
       FileUtils.rm_f('tmp/HABLIC.csv')
-      VCR.insert_cassette('integration/bidding_authorization', allow_playback_repeats: true)
     end
 
     after do
       FileUtils.rm_f('tmp/HABLIC.csv')
-      VCR.eject_cassette
     end
 
     let(:customer) { create(:customer, domain: 'compras.dev', name: 'Compras Dev') }
@@ -101,11 +99,11 @@ describe TceExport::MG::MonthlyMonitoring::BiddingAuthorizationGenerator do
 
       csv = File.read('tmp/HABLIC.csv', encoding: 'ISO-8859-1')
 
-      expect(csv).to eq "10;98;98001;2012;1;2;00000000999962;Nohup; ; ;29062011;099901; ; ; ;PR; ; ; ; ; ; ; ; ; ;20052013;2;2\n" +
-                        "11;98;98001;2012;1;6;00000000999962;1;27056534147;Pedro dos Santos;1\n"+
-                        "10;98;98001;2013;2;1;00315198737;Gabriel Sobrinho; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ;20052013;2;2\n"+
-                        "10;98;98001;2013;3;2;00000000999962;Nohup; ; ;29062011;099901; ; ; ;PR; ; ; ; ; ; ; ; ; ;20052013;2;2\n" +
-                        "11;98;98001;2013;3;6;00000000999962;1;27056534147;Pedro dos Santos;1"
+      expect(csv).to eq "10;98;98009001;2012;1;2;00000000999962;Nohup; ; ;29062011;099901; ; ; ;PR; ; ; ; ; ; ; ; ; ;20052013;2;2\n" +
+                        "11;98;98009001;2012;1;6;00000000999962;1;27056534147;Pedro dos Santos;1\n"+
+                        "10;98;98009001;2013;2;1;00315198737;Gabriel Sobrinho; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ;20052013;2;2\n"+
+                        "10;98;98009001;2013;3;2;00000000999962;Nohup; ; ;29062011;099901; ; ; ;PR; ; ; ; ; ; ; ; ; ;20052013;2;2\n" +
+                        "11;98;98009001;2013;3;6;00000000999962;1;27056534147;Pedro dos Santos;1"
 
     end
   end

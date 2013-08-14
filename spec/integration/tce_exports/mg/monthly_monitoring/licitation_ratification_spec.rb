@@ -1,16 +1,14 @@
 #encoding: utf-8
 require 'spec_helper'
 
-describe TceExport::MG::MonthlyMonitoring::LicitationRatificationGenerator do
+describe TceExport::MG::MonthlyMonitoring::LicitationRatificationGenerator, vcr: { cassette_name: 'integration/licitation_ratification' } do
   describe "#generate_file" do
     before do
       FileUtils.rm_f('tmp/HOMOLIC.csv')
-      VCR.insert_cassette('integration/licitation_ratification', allow_playback_repeats: true)
     end
 
     after do
       FileUtils.rm_f('tmp/HOMOLIC.csv')
-      VCR.eject_cassette
     end
 
     let :prefecture do

@@ -1,16 +1,14 @@
 #encoding: utf-8
 require 'spec_helper'
 
-describe TceExport::MG::MonthlyMonitoring::PurchaseOpeningGenerator do
+describe TceExport::MG::MonthlyMonitoring::PurchaseOpeningGenerator, vcr: { cassette_name: 'integration/purchasing_opening' } do
   describe "#generate_file" do
     before do
       FileUtils.rm_f('tmp/ABERLIC.csv')
-      VCR.insert_cassette('integration/purchasing_opening', allow_playback_repeats: true)
     end
 
     after do
       FileUtils.rm_f('tmp/ABERLIC.csv')
-      VCR.eject_cassette
     end
 
     let :prefecture do

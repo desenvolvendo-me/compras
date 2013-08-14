@@ -1,15 +1,7 @@
 #encoding: utf-8
 require 'spec_helper'
 
-describe TceExport::MG::MonthlyMonitoring::LicitationJudgmentGenerator do
-  before(:all) do
-    VCR.insert_cassette('integration/licitation_judgment', allow_playback_repeats: true)
-  end
-
-  after(:all) do
-    VCR.eject_cassette
-  end
-
+describe TceExport::MG::MonthlyMonitoring::LicitationJudgmentGenerator, vcr: { cassette_name: 'integration/licitation_judgment' } do
   describe "#generate_file" do
     before do
       FileUtils.rm_f('tmp/JULGLIC.csv')

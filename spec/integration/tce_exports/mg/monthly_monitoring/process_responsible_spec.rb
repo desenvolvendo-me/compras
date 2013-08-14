@@ -1,16 +1,14 @@
 #encoding: utf-8
 require 'spec_helper'
 
-describe TceExport::MG::MonthlyMonitoring::ProcessResponsibleGenerator do
+describe TceExport::MG::MonthlyMonitoring::ProcessResponsibleGenerator, vcr: { cassette_name: 'integration/process_responsible' } do
   describe "#generate_file" do
     before do
       FileUtils.rm_f('tmp/RESPLIC.csv')
-      VCR.insert_cassette('integration/process_responsible', allow_playback_repeats: true)
     end
 
     after do
       FileUtils.rm_f('tmp/RESPLIC.csv')
-      VCR.eject_cassette
     end
 
     let :prefecture do
