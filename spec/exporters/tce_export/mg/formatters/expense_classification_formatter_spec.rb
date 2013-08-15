@@ -1,4 +1,3 @@
-# encoding: utf-8
 require 'exporter_helper'
 require 'app/exporters/tce_export/mg/formatters/expense_classification_formatter'
 

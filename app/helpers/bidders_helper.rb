@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 module BiddersHelper
   def new_title
     "#{t("#{controller_name}.new", :resource => singular, :cascade => true)} no Processo de Compra #{resource.licitation_process}"

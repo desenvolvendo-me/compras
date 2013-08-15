@@ -1,4 +1,3 @@
-# encoding: utf-8
 require 'model_helper'
 require 'app/models/inscriptio_cursualis/street_type'
 require 'app/models/inscriptio_cursualis/street'

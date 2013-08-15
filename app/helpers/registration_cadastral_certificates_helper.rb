@@ -1,4 +1,3 @@
-# encoding: utf-8
 module RegistrationCadastralCertificatesHelper
   def new_title
     "#{t("#{controller_name}.new", :resource => singular, :cascade => true)} para o Credor #{resource.creditor}"

@@ -1,4 +1,3 @@
-# encoding: utf-8
 module TceExport::MG
   module MonthlyMonitoring
     class ContractedCreditorDataGenerator < DataGeneratorBase

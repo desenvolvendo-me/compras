@@ -1,4 +1,3 @@
-# encoding: utf-8
 module PurchaseProcessProposalsHelper
   def title
     "Proposta Comercial Processo #{resource.to_s}"

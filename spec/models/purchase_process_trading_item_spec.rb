@@ -1,4 +1,3 @@
-# encoding: utf-8
 require 'model_helper'
 require 'app/models/purchase_process_trading_item'
 require 'app/models/purchase_process_trading_item_bid'

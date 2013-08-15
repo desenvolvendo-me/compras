@@ -1,4 +1,3 @@
-# encoding: utf-8
 PurchaseProcessItem.blueprint(:item) do
   material { Material.make!(:antivirus) }
   lot { 2050 }

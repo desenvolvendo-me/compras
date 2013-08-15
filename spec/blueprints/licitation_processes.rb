@@ -1,4 +1,3 @@
-# encoding: utf-8
 LicitationProcess.blueprint(:processo_licitatorio) do
   type_of_purchase { PurchaseProcessTypeOfPurchase::LICITATION }
   process { 1 }

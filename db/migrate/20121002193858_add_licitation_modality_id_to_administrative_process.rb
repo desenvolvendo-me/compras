@@ -1,4 +1,3 @@
-#encoding: utf-8
 class AddLicitationModalityIdToAdministrativeProcess < ActiveRecord::Migration
   class AdministrativeProcess < Compras::Model; end
   class LegalTextNature < Compras::Model; end

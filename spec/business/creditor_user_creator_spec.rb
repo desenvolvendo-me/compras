@@ -1,4 +1,3 @@
-#encoding: utf-8
 require 'unit_helper'
 require 'enumerate_it'
 require 'app/enumerations/authenticable_type'

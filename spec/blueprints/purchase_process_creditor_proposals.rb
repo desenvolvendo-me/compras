@@ -1,4 +1,3 @@
-# encoding: utf-8
 PurchaseProcessCreditorProposal.blueprint(:proposta_arame_farpado) do
   creditor           { Creditor.make!(:sobrinho_sa) }
   item               { PurchaseProcessItem.make!(:item_arame_farpado) }

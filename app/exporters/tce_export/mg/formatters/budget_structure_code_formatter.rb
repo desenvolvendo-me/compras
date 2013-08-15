@@ -1,4 +1,3 @@
-# encoding: utf-8
 module TceExport::MG
   module Formatters
     class BudgetStructureCodeFormatter

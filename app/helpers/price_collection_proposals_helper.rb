@@ -1,4 +1,3 @@
-#encoding: utf-8
 module PriceCollectionProposalsHelper
   def proposals_list_header(parent)
     title = PriceCollectionProposal.model_name.human(:count => 'many')

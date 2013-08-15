@@ -21,20 +21,30 @@ describe CreditorProvider do
     describe '#to_json' do
       context 'without options' do
         it 'should return only fields/methods specified on provide' do
-          expect(subject.to_json).to eq "{\"id\":#{sobrinho.id},\"name\":\"my_name\",\"to_s\":\"Gabriel Sobrinho\"}"
+          data = JSON.parse(subject.to_json).symbolize_keys!
+
+          expect(data).to eq({
+            id: sobrinho.id,
+            name: "my_name",
+            to_s: "Gabriel Sobrinho"
+          })
         end
       end
 
       context 'with options only' do
         context 'with only one only options not being an array' do
           it 'should return only fields/methods specified on provide and limited by only' do
-            expect(subject.to_json(only: :id)).to eq "{\"id\":#{sobrinho.id}}"
+            data = JSON.parse(subject.to_json(only: :id)).symbolize_keys!
+
+            expect(data).to eq({ id: sobrinho.id })
           end
         end
 
         context 'with options being an array' do
           it 'should return only fields/methods specified on provide and limited by only' do
-            expect(subject.to_json(only: [:id, :name])).to eq "{\"id\":#{sobrinho.id},\"name\":\"my_name\"}"
+            data = JSON.parse(subject.to_json(only: [:id, :name])).symbolize_keys!
+
+            expect(data).to eq({ id: sobrinho.id, name: "my_name" })
           end
         end
       end

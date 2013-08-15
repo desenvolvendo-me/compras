@@ -1,4 +1,3 @@
-# encoding: utf-8
 class PurchaseProcessCreditorDisqualificationsController < CrudController
   def new
     object = build_resource

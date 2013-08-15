@@ -1,4 +1,3 @@
-# encoding: utf-8
 LegalNature.blueprint(:administracao_publica) do
   code  { "100" }
   name  { "Administração Pública" }

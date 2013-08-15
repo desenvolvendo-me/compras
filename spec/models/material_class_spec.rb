@@ -1,4 +1,3 @@
-# encoding: utf-8
 require 'model_helper'
 require 'app/models/material_class'
 require 'app/models/material'

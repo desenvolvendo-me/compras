@@ -1,4 +1,3 @@
-# encoding: utf-8
 class RegulatoryAct < Unico::RegulatoryAct
   attr_modal :act_number, :regulatory_act_type
 

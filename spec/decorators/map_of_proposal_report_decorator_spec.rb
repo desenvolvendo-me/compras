@@ -1,4 +1,3 @@
-# encoding: utf-8
 require 'decorator_helper'
 require 'app/decorators/map_of_proposal_report_decorator'
 

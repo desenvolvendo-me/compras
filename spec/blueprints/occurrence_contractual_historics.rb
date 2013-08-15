@@ -1,4 +1,3 @@
-# encoding: utf-8
 OccurrenceContractualHistoric.blueprint(:example) do
   contract { Contract.make!(:primeiro_contrato) }
   occurrence_contractual_historic_type { OccurrenceContractualHistoricType::OTHERS }

@@ -1,4 +1,3 @@
-#encoding: utf-8
 class TceExport::MonthlyMonitoringsController < TceExport::BaseController
   def new
     object = build_resource

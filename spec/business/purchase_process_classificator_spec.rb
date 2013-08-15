@@ -1,4 +1,3 @@
-#encoding: utf-8
 require 'unit_helper'
 require 'app/business/purchase_process_classificator'
 

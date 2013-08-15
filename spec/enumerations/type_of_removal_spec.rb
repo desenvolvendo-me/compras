@@ -1,4 +1,3 @@
-# encoding: utf-8
 require 'enumeration_helper'
 require 'app/enumerations/type_of_removal'
 

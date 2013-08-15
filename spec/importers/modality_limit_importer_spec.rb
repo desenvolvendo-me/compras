@@ -1,4 +1,3 @@
-# encoding: utf-8
 require 'importer_helper'
 require 'app/importers/modality_limit_importer'
 

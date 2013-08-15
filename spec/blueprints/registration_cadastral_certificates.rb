@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 RegistrationCadastralCertificate.blueprint(:crc) do
   fiscal_year { 2012 }
   specification { "Especificação do certificado do registro cadastral" }

@@ -1,4 +1,3 @@
-# encoding: utf-8
 require 'model_helper'
 require 'app/models/licitation_commission_responsible'
 require 'app/models/licitation_commission'

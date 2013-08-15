@@ -1,4 +1,3 @@
-# encoding: utf-8
 PurchaseProcessBudgetAllocation.blueprint(:alocacao) do
   budget_allocation_id { 1 }
   value { 20.0 }

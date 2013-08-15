@@ -1,4 +1,3 @@
-# encoding: utf-8
 require 'model_helper'
 require 'app/models/accounting_cost_center'
 require 'app/models/pledge_request_item'

@@ -1,4 +1,3 @@
-# encoding: utf-8
 require 'model_helper'
 require 'app/models/payment_method'
 require 'app/models/licitation_process'

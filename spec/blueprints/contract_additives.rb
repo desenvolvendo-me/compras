@@ -1,4 +1,3 @@
-# encoding: utf-8
 ContractAdditive.blueprint(:aditivo) do
   number { "666" }
   additive_type { ContractAdditiveType::OTHERS }

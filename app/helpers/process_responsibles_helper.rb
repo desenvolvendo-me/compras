@@ -1,4 +1,3 @@
-#encoding: utf-8
 module ProcessResponsiblesHelper
   def link_create_or_edit(purchase_process)
     if purchase_process.process_responsibles.empty?

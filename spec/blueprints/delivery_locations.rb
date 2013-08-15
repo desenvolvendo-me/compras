@@ -1,4 +1,3 @@
-# encoding: utf-8
 DeliveryLocation.blueprint(:education) do
   description { "Secretaria da Educação" }
   address { Address.make(:education) }

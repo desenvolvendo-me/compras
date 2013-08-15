@@ -1,4 +1,3 @@
-# encoding: utf-8
 class PurchaseProcessClassificationGenerator
   attr_accessor :purchase_process, :classification_repository, :proposal_repository
 

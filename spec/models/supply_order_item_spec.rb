@@ -1,4 +1,3 @@
-# encoding: utf-8
 require 'model_helper'
 require 'app/models/supply_order_item'
 require 'app/models/licitation_process_ratification_item'

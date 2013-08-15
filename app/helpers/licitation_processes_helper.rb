@@ -1,4 +1,3 @@
-# encoding: utf-8
 module LicitationProcessesHelper
   def classification_link
     return unless resource.persisted?

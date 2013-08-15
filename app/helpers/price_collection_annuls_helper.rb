@@ -1,4 +1,3 @@
-# encoding: utf-8
 module PriceCollectionAnnulsHelper
   def new_title
    "Anular Coleta de Preço #{resource.price_collection}"

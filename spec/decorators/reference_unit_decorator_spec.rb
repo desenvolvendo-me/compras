@@ -1,4 +1,3 @@
-# encoding: utf-8
 require 'decorator_helper'
 require 'app/decorators/reference_unit_decorator'
 

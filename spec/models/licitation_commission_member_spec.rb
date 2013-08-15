@@ -1,4 +1,3 @@
-# encoding: utf-8
 require 'model_helper'
 require 'app/models/licitation_commission_member'
 require 'app/models/judgment_commission_advice_member'

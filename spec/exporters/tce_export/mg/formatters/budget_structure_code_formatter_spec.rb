@@ -1,4 +1,3 @@
-# encoding: utf-8
 require 'exporter_helper'
 require 'app/exporters/tce_export/mg/formatters/budget_structure_code_formatter'
 

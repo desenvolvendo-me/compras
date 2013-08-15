@@ -1,4 +1,3 @@
-# encoding: utf-8
 require 'model_helper'
 require 'app/models/budget_structure'
 require 'app/models/expense_nature'

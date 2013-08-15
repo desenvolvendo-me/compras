@@ -1,4 +1,3 @@
-# encoding: utf-8
 class PurchaseProcessProposalsController < CrudController
   defaults resource_class: LicitationProcess
 

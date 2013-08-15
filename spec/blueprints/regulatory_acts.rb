@@ -1,4 +1,3 @@
-# encoding: utf-8
 RegulatoryAct.blueprint(:sopa) do
   act_number { "1234" }
   regulatory_act_type { RegulatoryActType::LDO }
