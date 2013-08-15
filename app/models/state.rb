@@ -3,8 +3,4 @@ class State < InscriptioCursualis::State
 
   filterize
   orderize
-
-  def self.id_by_acronym!(acronym)
-    find_by_acronym!(acronym).id
-  end
 end

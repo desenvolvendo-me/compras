@@ -24,10 +24,6 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def root_url_for_pdf
-    "#{request.protocol}#{current_customer.domain}"
-  end
-
   def layout_by_user
     if current_user && current_user.creditor?
       'creditor'

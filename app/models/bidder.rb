@@ -59,8 +59,6 @@ class Bidder < Compras::Model
   orderize "id DESC"
   filterize
 
-  scope :exclude_ids, lambda { |ids|  where { id.not_in(ids) } }
-
   scope :by_ratification_month_and_year, lambda { |month, year|
     joins { licitation_process_ratifications }.
     where(%{
@@ -184,10 +182,6 @@ class Bidder < Compras::Model
     if licitation_process_ratification?
       errors.add(:base, :cannot_be_changed_when_the_licitation_process_has_a_ratification, :licitation_process => licitation_process)
     end
-  end
-
-  def classification_percent(first_place_amount, current_amount)
-    ((current_amount - first_place_amount) / first_place_amount) * BigDecimal(100)
   end
 
   def clear_invited_data

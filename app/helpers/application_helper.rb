@@ -17,20 +17,8 @@ module ApplicationHelper
     SimpleMenu.new(self, &block).render
   end
 
-  def area_field(value)
-    "#{number_with_precision(value)} m2"
-  end
-
-  def numeric_position(value)
-    I18n.t "number.placing", :count => value
-  end
-
   def smart_report_path
     url_for :controller => controller_name, :action => :show, :id => 'report', :only_path => true
-  end
-
-  def smart_tce_export_path
-    url_for :controller => controller_name, :action => :show, :id => 'tce_exports', :only_path => true
   end
 
   def custom_fields(form)

@@ -15,11 +15,6 @@ module LicitationProcessesHelper
     end
   end
 
-  def proposals_path
-    link = "creditors_purchase_process_#{resource.judgment_form.kind}_creditor_proposals_path"
-    send(link, licitation_process_id: resource)
-  end
-
   def trading_path_helper
     if resource.has_trading?
       bids_purchase_process_trading_path(resource.trading)

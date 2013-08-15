@@ -358,7 +358,6 @@ DEPENDENCIES
   kaminari (= 0.14.1)
   machinist (= 2.0)
   machinist-caching (= 0.0.1)
-  mail_validator (= 0.2.0)
   mask_validator (= 0.2.1)
   pg
   postgres-copy (~> 0.5.8)
