@@ -1,28 +1,6 @@
 require 'spec_helper'
 
-describe TceExport::MG::MonthlyMonitoring::LicitationRatificationGenerator do
-  let :budget_structure_parent do
-    BudgetStructure.new(
-      id: 2,
-      code: '1',
-      tce_code: '051',
-      description: 'Secretaria de Educação',
-      acronym: 'SEMUEDU',
-      performance_field: 'Desenvolvimento Educacional')
-  end
-
-  let :budget_structure do
-    BudgetStructure.new(
-      id: 1,
-      parent_id: 2,
-      code: '29',
-      tce_code: '051',
-      description: 'Secretaria de Desenvolvimento',
-      acronym: 'SEMUEDU',
-      performance_field: 'Desenvolvimento Educacional')
-  end
-
-
+describe TceExport::MG::MonthlyMonitoring::LicitationRatificationGenerator, vcr: { cassette_name: 'integration/licitation_ratification' } do
   describe "#generate_file" do
     before do
       FileUtils.rm_f('tmp/HOMOLIC.csv')
@@ -66,9 +44,6 @@ describe TceExport::MG::MonthlyMonitoring::LicitationRatificationGenerator do
     end
 
     it "generates a CSV file with the required data" do
-      BudgetStructure.should_receive(:find).at_least(1).times.with(2, params: {}).and_return(budget_structure_parent)
-      BudgetStructure.should_receive(:find).at_least(1).times.with(1, params: {}).and_return(budget_structure)
-
       FactoryGirl.create(:extended_prefecture, prefecture: prefecture)
 
       JudgmentCommissionAdvice.make!(:parecer, licitation_process: licitation_process)
@@ -95,10 +70,10 @@ describe TceExport::MG::MonthlyMonitoring::LicitationRatificationGenerator do
 
       csv = File.read('tmp/HOMOLIC.csv', encoding: 'ISO-8859-1')
 
-      reg_10_1 = "10;98;98029;2012;1;1;00315198737;2050;#{arame_farpado.item_number};Arame farpado;1,0000;4,9900"
-      reg_30_1 = "30;98;98029;2012;1;#{current_date};#{current_date}"
-      reg_10_2 = "10;98;98029;2012;1;1;00315198737;2050;#{arame_comum.item_number};Arame comum;1,0000;2,9900"
-      reg_30_2 = "30;98;98029;2012;1;#{current_date};#{current_date}"
+      reg_10_1 = "10;98;98009001;2012;1;1;00315198737;2050;#{arame_farpado.item_number};Arame farpado;1,0000;4,9900"
+      reg_30_1 = "30;98;98009001;2012;1;#{current_date};#{current_date}"
+      reg_10_2 = "10;98;98009001;2012;1;1;00315198737;2050;#{arame_comum.item_number};Arame comum;1,0000;2,9900"
+      reg_30_2 = "30;98;98009001;2012;1;#{current_date};#{current_date}"
 
       expect(csv).to eq [reg_10_1, reg_30_1, reg_10_2, reg_30_2].join("\n")
     end

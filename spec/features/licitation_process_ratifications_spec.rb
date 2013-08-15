@@ -1,26 +1,8 @@
 require 'spec_helper'
 
-feature "LicitationProcessRatifications" do
-  let :budget_structure do
-    BudgetStructure.new(
-      id: 1,
-      parent_id: 2,
-      code: '29',
-      tce_code: '051',
-      description: 'Secretaria de Desenvolvimento',
-      acronym: 'SEMUEDU',
-      performance_field: 'Desenvolvimento Educacional')
-  end
-
+feature "LicitationProcessRatifications", vcr: { cassette_name: :licitation_process_ratifications } do
   background do
     sign_in
-
-    BudgetStructure.stub(:find).and_return(budget_structure)
-
-    ExpenseNature.stub(:all)
-    ExpenseNature.stub(:find)
-    BudgetAllocation.stub(:all)
-    BudgetAllocation.stub(:find)
   end
 
   scenario 'creating and updating a ratification to licitation process by item' do
@@ -943,24 +925,6 @@ feature "LicitationProcessRatifications" do
     PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado, licitation_process: licitation, ranking: 1)
     SignatureConfiguration.make!(:homologacao_e_adjudicao_do_processo_licitatorio)
 
-    aposentadorias_reserva_reformas = ExpenseNature.new(
-      id: 2, year: 2012, expense_nature: '3.1.90.01.00', kind: 'sinthetic',
-      description: 'Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares',
-      docket: 'Registra o valor das despesas com aposentadorias, reserva e reformas')
-
-    budget_allocation = BudgetAllocation.new(
-      id: 2, budget_structure: budget_structure,
-      expense_nature: aposentadorias_reserva_reformas,
-      budget_allocation_capabilities: [
-        {
-          amount: 500.0, budget_allocation_id: 1
-        }
-      ],
-      to_s: "1 - #{aposentadorias_reserva_reformas.expense_nature} - #{aposentadorias_reserva_reformas.description}")
-
-    ExpenseNature.stub(:find).and_return aposentadorias_reserva_reformas
-    BudgetAllocation.stub(:find).and_return budget_allocation
-
     navigate 'Processos de Compra > Processos de Compras'
 
     within_records do
@@ -986,7 +950,7 @@ feature "LicitationProcessRatifications" do
     expect(page).to have_content '-'
     expect(page).to have_content '4,99'
     expect(page).to have_content '9,98'
-    expect(page).to have_content '1 - 3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+    expect(page).to have_content '1 - 3.1.90.00.00 - Aplicações Diretas'
     expect(page).to have_content 'Supervisor'
     expect(page).to have_content 'Wenderson Malheiros'
     expect(page).to have_content 'Gerente'

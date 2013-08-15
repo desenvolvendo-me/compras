@@ -67,6 +67,11 @@ class ApplicationController < ActionController::Base
   end
 
   def set_customer_to_api_resources
-    UnicoAPI::Consumer.set_customer current_customer
+    if Rails.env.test?
+      customer = OpenStruct.new(:domain => 'compras.dev', :secret_token => current_customer.secret_token)
+      UnicoAPI::Consumer.set_customer customer
+    else
+      UnicoAPI::Consumer.set_customer current_customer
+    end
   end
 end

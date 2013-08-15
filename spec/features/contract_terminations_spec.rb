@@ -1,37 +1,11 @@
 require 'spec_helper'
 
-feature 'ContractTerminations' do
+feature 'ContractTerminations', vcr: { cassette_name: :contract_terminations } do
   let(:current_user) { User.make!(:sobrinho) }
-
-  let :pledge do
-    UnicoAPI::Resources::Contabilidade::Pledge.new(id: 1, value: 9.99, description: 'Empenho 1',
-      year: 2013, to_s: 1, emission_date: "2013-01-01")
-  end
-
-  let :budget_structure do
-    BudgetStructure.new(
-      id: 1,
-      code: '29',
-      tce_code: '051',
-      description: 'Secretaria de Desenvolvimento',
-      acronym: 'SEMUEDU',
-      performance_field: 'Desenvolvimento Educacional')
-  end
-
-  let :pledge_two do
-    UnicoAPI::Resources::Contabilidade::Pledge.new(id: 2, value: 15.99, description: 'Empenho 2',
-      year: 2012, to_s: 2, emission_date: "2012-01-01")
-  end
 
   background do
     create_roles ['dissemination_sources', 'contracts', 'contract_termination_annuls']
     sign_in
-
-    UnicoAPI::Resources::Contabilidade::Pledge.stub(:all).and_return([pledge, pledge_two])
-
-    UnicoAPI::Resources::Contabilidade::Pledge.stub(:find).with(1).and_return(pledge)
-    UnicoAPI::Resources::Contabilidade::Pledge.stub(:find).with(2).and_return(pledge_two)
-    BudgetStructure.stub(:find).and_return(budget_structure)
   end
 
   scenario 'creating and updating the terminations of a contract' do

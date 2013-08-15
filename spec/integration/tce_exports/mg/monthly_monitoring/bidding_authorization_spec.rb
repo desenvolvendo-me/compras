@@ -1,14 +1,17 @@
 require 'spec_helper'
 
-describe TceExport::MG::MonthlyMonitoring::BiddingAuthorizationGenerator do
+describe TceExport::MG::MonthlyMonitoring::BiddingAuthorizationGenerator, vcr: { cassette_name: 'integration/bidding_authorization' } do
   describe "#generate_file" do
     before do
+      UnicoAPI::Consumer.set_customer customer
       FileUtils.rm_f('tmp/HABLIC.csv')
     end
 
     after do
       FileUtils.rm_f('tmp/HABLIC.csv')
     end
+
+    let(:customer) { create(:customer, domain: 'compras.dev', name: 'Compras Dev') }
 
     let :creditor do
       Creditor.make!(:nohup)
@@ -45,31 +48,7 @@ describe TceExport::MG::MonthlyMonitoring::BiddingAuthorizationGenerator do
         bidders: [bidder_pf])
     end
 
-    let :budget_structure_parent do
-      BudgetStructure.new(
-        id: 2,
-        code: '1',
-        tce_code: '051',
-        description: 'Secretaria de Educação',
-        acronym: 'SEMUEDU',
-        performance_field: 'Desenvolvimento Educacional')
-    end
-
-    let :budget_structure do
-      BudgetStructure.new(
-        id: 1,
-        parent_id: 2,
-        code: '29',
-        tce_code: '051',
-        description: 'Secretaria de Desenvolvimento',
-        acronym: 'SEMUEDU',
-        performance_field: 'Desenvolvimento Educacional')
-    end
-
     it "generates a CSV file with the required data" do
-      BudgetStructure.should_receive(:find).at_least(1).times.with(2, params:{}).and_return(budget_structure_parent)
-      BudgetStructure.should_receive(:find).at_least(1).times.with(1, params:{}).and_return(budget_structure)
-
       prefecture = Prefecture.make!(:belo_horizonte_mg)
       FactoryGirl.create(:extended_prefecture, prefecture: prefecture)
 
@@ -119,11 +98,11 @@ describe TceExport::MG::MonthlyMonitoring::BiddingAuthorizationGenerator do
 
       csv = File.read('tmp/HABLIC.csv', encoding: 'ISO-8859-1')
 
-      expect(csv).to eq "10;98;98029;2012;1;2;00000000999962;Nohup; ; ;29062011;099901; ; ; ;PR; ; ; ; ; ; ; ; ; ;20052013;2;2\n" +
-                        "11;98;98029;2012;1;6;00000000999962;1;27056534147;Pedro dos Santos;1\n"+
-                        "10;98;98029;2013;2;1;00315198737;Gabriel Sobrinho; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ;20052013;2;2\n"+
-                        "10;98;98029;2013;3;2;00000000999962;Nohup; ; ;29062011;099901; ; ; ;PR; ; ; ; ; ; ; ; ; ;20052013;2;2\n" +
-                        "11;98;98029;2013;3;6;00000000999962;1;27056534147;Pedro dos Santos;1"
+      expect(csv).to eq "10;98;98009001;2012;1;2;00000000999962;Nohup; ; ;29062011;099901; ; ; ;PR; ; ; ; ; ; ; ; ; ;20052013;2;2\n" +
+                        "11;98;98009001;2012;1;6;00000000999962;1;27056534147;Pedro dos Santos;1\n"+
+                        "10;98;98009001;2013;2;1;00315198737;Gabriel Sobrinho; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ;20052013;2;2\n"+
+                        "10;98;98009001;2013;3;2;00000000999962;Nohup; ; ;29062011;099901; ; ; ;PR; ; ; ; ; ; ; ; ; ;20052013;2;2\n" +
+                        "11;98;98009001;2013;3;6;00000000999962;1;27056534147;Pedro dos Santos;1"
 
     end
   end

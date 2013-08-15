@@ -1,25 +1,8 @@
 require 'spec_helper'
 
-feature 'Report::MinutePurchaseProcessTradings' do
-  let :budget_structure do
-    BudgetStructure.new(
-      id: 1,
-      code: '1',
-      full_code: '1',
-      tce_code: '051',
-      description: 'Secretaria de Desenvolvimento',
-      acronym: 'SEMUEDU',
-      performance_field: 'Desenvolvimento Educacional')
-  end
-
+feature 'Report::MinutePurchaseProcessTradings', vcr: { cassette_name: :minute_purchase_process_tradings } do
   background do
-    BudgetStructure.stub(:find).and_return(budget_structure)
     sign_in
-
-    ExpenseNature.stub(:all)
-    ExpenseNature.stub(:find)
-    BudgetAllocation.stub(:all)
-    BudgetAllocation.stub(:find)
   end
 
   scenario 'should minute purchase process' do

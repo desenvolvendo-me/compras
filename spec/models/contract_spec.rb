@@ -141,7 +141,7 @@ describe Contract do
     end
 
     it 'should return pledges total value with founded debt pledges on all_pledges_total_value' do
-      subject.stub(:all_pledges => [double(:value => 100), double(:value => 50)])
+      subject.stub(:all_pledges => [double(:amount => 100), double(:amount => 50)])
 
       expect(subject.all_pledges_total_value).to eq 150
     end

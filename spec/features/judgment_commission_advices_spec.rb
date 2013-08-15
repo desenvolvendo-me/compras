@@ -1,30 +1,12 @@
 require 'spec_helper'
 
-feature "JudgmentCommissionAdvices" do
+feature "JudgmentCommissionAdvices", vcr: { cassette_name: :judgment_commission_advices } do
   let(:current_user) { User.make!(:sobrinho) }
-
-  let :budget_structure do
-    BudgetStructure.new(
-      id: 1,
-      code: '1',
-      full_code: '1',
-      tce_code: '051',
-      description: 'Secretaria de Desenvolvimento',
-      acronym: 'SEMUEDU',
-      performance_field: 'Desenvolvimento Educacional')
-  end
 
   background do
     create_roles ['licitation_processes',
                   'licitation_commissions', 'individuals']
     sign_in
-
-    BudgetStructure.stub(:find).and_return(budget_structure)
-
-    ExpenseNature.stub(:all)
-    ExpenseNature.stub(:find)
-    BudgetAllocation.stub(:all)
-    BudgetAllocation.stub(:find)
   end
 
   scenario 'create, update and destroy a new judgment_commission_advice' do

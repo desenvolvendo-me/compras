@@ -1,25 +1,8 @@
 require 'spec_helper'
 
-feature "RealignmentPrices" do
-  let :budget_structure do
-    BudgetStructure.new(
-      id: 1,
-      code: '1',
-      full_code: '1',
-      tce_code: '051',
-      description: 'Secretaria de Desenvolvimento',
-      acronym: 'SEMUEDU',
-      performance_field: 'Desenvolvimento Educacional')
-  end
-
+feature "RealignmentPrices", vcr: { cassette_name: :realignment_prices } do
   background do
-    BudgetStructure.stub(:find).and_return(budget_structure)
     sign_in
-
-    ExpenseNature.stub(:all)
-    ExpenseNature.stub(:find)
-    BudgetAllocation.stub(:all)
-    BudgetAllocation.stub(:find)
   end
 
   scenario 'create a new realignment_price by lot' do
