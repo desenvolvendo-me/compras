@@ -21,7 +21,7 @@ feature 'Report::PurchaseSolicitations' do
     PurchaseSolicitation.make!(:reparo)
     PurchaseSolicitation.make!(:reparo_office, budget_structure_id: 2)
 
-    navigate 'Relatórios > Relatório de Solicitações Emitidas'
+    navigate 'Relatórios > Solicitações emitidas'
 
     click_button 'Filtrar'
 
