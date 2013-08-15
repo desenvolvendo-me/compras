@@ -86,6 +86,7 @@ describe MapOfProposalReport do
   describe '#items_by_lot' do
     it 'return a array of items by lots' do
       subject.stub(:items).and_return items
+      items.should_receive(:lot).with(1).and_return [item_one, item_two]
 
       expect(subject.items_by_lot(1)).to eq [item_one, item_two]
     end

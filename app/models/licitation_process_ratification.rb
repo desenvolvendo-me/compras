@@ -71,6 +71,10 @@ class LicitationProcessRatification < Compras::Model
     BigDecimal(total || 0)
   end
 
+  def has_realignment_price?
+    !judgment_form_item?
+  end
+
   private
 
   def without_judgment_commission_advice

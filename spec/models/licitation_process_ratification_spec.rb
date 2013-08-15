@@ -1,6 +1,6 @@
-# encoding: utf-8
 require 'model_helper'
 require 'lib/signable'
+require 'app/models/budget_structure'
 require 'app/models/licitation_process'
 require 'app/models/licitation_process_ratification'
 require 'app/models/licitation_process_ratification_item'
@@ -150,6 +150,24 @@ describe LicitationProcessRatification do
         subject.valid?
 
         expect(subject.errors[:licitation_process_ratification_items]).to_not include('é necessário cadastrar pelo menos um item')
+      end
+    end
+  end
+
+  describe '#has_realignment_price?' do
+    context 'when judgment_form is by item' do
+      it 'should be false' do
+        subject.stub judgment_form_item?: true
+
+        expect(subject.has_realignment_price?).to be_false
+      end
+    end
+
+    context 'when judgment_form is not by item' do
+      it 'should be true' do
+        subject.stub judgment_form_item?: false
+
+        expect(subject.has_realignment_price?).to be_true
       end
     end
   end

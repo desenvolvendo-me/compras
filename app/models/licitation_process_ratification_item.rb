@@ -1,11 +1,13 @@
 class LicitationProcessRatificationItem < Compras::Model
   attr_accessible :licitation_process_ratification_id, :purchase_process_creditor_proposal_id,
-    :ratificated, :purchase_process_item_id, :purchase_process_trading_item_id
+    :ratificated, :purchase_process_item_id, :purchase_process_trading_item_id,
+    :realignment_price_item_id
 
   belongs_to :licitation_process_ratification
   belongs_to :purchase_process_creditor_proposal
   belongs_to :purchase_process_trading_item
   belongs_to :purchase_process_item
+  belongs_to :realignment_price_item
 
   has_one :licitation_process, through: :purchase_process_creditor_proposal
   has_one :creditor, through: :licitation_process_ratification
@@ -20,6 +22,8 @@ class LicitationProcessRatificationItem < Compras::Model
     to: :licitation_process, allow_nil: true, prefix: true
   delegate :material, :quantity, :lot, to: :item, allow_nil: true
   delegate :control_amount?, to: :material, allow_nil: true
+  delegate :price, :total_price, to: :realignment_price_item, allow_nil: true, prefix: true
+  delegate :has_realignment_price?, to: :licitation_process_ratification, allow_nil: true
 
   scope :creditor_id, ->(creditor_id) do
     joins { licitation_process_ratification }.
@@ -37,15 +41,15 @@ class LicitationProcessRatificationItem < Compras::Model
   filterize
 
   def unit_price
-    creditor_proposal_unit_price || trading_item_unit_price || purchase_process_item_unit_price
+    realignment_price_item_price || trading_item_unit_price ||  creditor_proposal_unit_price || purchase_process_item_unit_price
   end
 
   def total_price
-    creditor_proposal_total_price || trading_item_total_price || purchase_process_total_price
+    realignment_price_item_total_price || trading_item_total_price || creditor_proposal_total_price || purchase_process_total_price
   end
 
   def item
-    creditor_proposal_item || trading_item || purchase_process_item
+    trading_item  || creditor_proposal_item || purchase_process_item
   end
 
   def authorized_quantity

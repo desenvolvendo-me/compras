@@ -10,6 +10,8 @@ class RealignmentPriceItem < Compras::Model
   has_one :material, through: :item
   has_one :purchase_process, through: :realignment_price
 
+  has_many :creditor_proposals, through: :purchase_process
+
   validates :price, presence: true
 
   delegate :judgment_form_lot?,
@@ -18,12 +20,27 @@ class RealignmentPriceItem < Compras::Model
     to: :purchase_process, allow_nil: true, prefix: true
   delegate :identity_document,
     to: :creditor, allow_nil: true, prefix: true
-  delegate :reference_unit,
+  delegate :reference_unit, :code, :description,
     to: :material, allow_nil: true, prefix: true
   delegate :lot,
     to: :item, allow_nil: true
 
   orderize :id
+
+  scope :purchase_process_id, ->(purchase_process_id) do
+    joins { realignment_price }.
+    where { realignment_price.purchase_process_id.eq purchase_process_id }
+  end
+
+  scope :creditor_id, ->(creditor_id) do
+    joins { realignment_price }.
+    where { realignment_price.creditor_id.eq creditor_id }
+  end
+
+  scope :lot, ->(lot) do
+    joins { realignment_price }.
+    where { realignment_price.lot.eq lot }
+  end
 
   def total_price
     quantity * price

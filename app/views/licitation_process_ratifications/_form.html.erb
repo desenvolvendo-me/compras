@@ -85,7 +85,6 @@
       $.each(proposals, function() {
         item = $('#item-template').mustache({
           uuid_item: _.uniqueId('fresh-'),
-          purchase_process_creditor_proposal_id:  this.id,
           purchase_process_item_id:               this.purchase_process_item_id,
           purchase_process_trading_item_id:       this.trading_item_id,
           code:                                   this.code,
@@ -93,7 +92,13 @@
           quantity:                               this.quantity,
           unit_price:                             this.unit_price,
           reference_unit:                         this.reference_unit,
-          total_price:                            this.total_price
+          total_price:                            this.total_price,
+
+          <% if resource.has_realignment_price? %>
+            realignment_price_item_id: this.id
+          <% else %>
+            purchase_process_creditor_proposal_id:  this.id
+          <% end %>
         });
 
         $('#ratification_items').prepend(item);

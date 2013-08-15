@@ -1,4 +1,3 @@
-# encoding: utf-8
 LicitationCommission.blueprint(:comissao) do
   regulatory_act { RegulatoryAct.make!(:sopa) }
   commission_type { CommissionType::PERMANENT }
