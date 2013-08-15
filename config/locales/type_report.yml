@@ -1,0 +1,5 @@
+pt-BR:
+  enumerations:
+    type_report:
+      analytical: "Analítico"
+      synthetic: 'Sintético'

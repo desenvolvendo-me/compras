@@ -17,7 +17,7 @@ class PurchaseSolicitationSearcher
 
   def material_id(id)
     joins { items }.
-    where { material_id.eq(id) }
+    where { items.material_id.eq(id) }
   end
 
   def between_dates(dates_range)

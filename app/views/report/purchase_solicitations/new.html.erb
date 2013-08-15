@@ -5,18 +5,11 @@
 <%= render 'form_wrapper' %>
 
 <div class="field-without-label">
-  <table class="records">
-    <thead>
-      <tr>
-        <th>Solicitante</th>
-        <th>Produto</th>
-        <th>Quantidade</th>
-        <th>Total</th>
-      </tr>
-    </thead>
+  <%= render 'actions' %>
 
-    <tbody>
-      <%= render 'records', report: @report %>
-    </tbody>
-  </table>
+  <% if @report.analytical? || @report.type_report.nil? %>
+    <%= render 'report_analytical', report: @report %>
+  <% else %>
+    <%= render 'records', report: @report %>
+  <% end %>
 </div>
