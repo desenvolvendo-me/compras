@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 describe TceExport::MG::MonthlyMonitoring::PurchaseOpeningGenerator, vcr: { cassette_name: 'integration/purchasing_opening' } do
+  let(:customer) { double(:customer, domain: 'compras.dev', secret_token: '1234') }
+
+  before do
+    UnicoAPI::Consumer.set_customer customer
+  end
+
   describe "#generate_file" do
     before do
       FileUtils.rm_f('tmp/ABERLIC.csv')

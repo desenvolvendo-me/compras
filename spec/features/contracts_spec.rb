@@ -157,7 +157,7 @@ feature "Contracts", vcr: { cassette_name: :contracts } do
     expect(page).to_not have_content '24/02/2012'
   end
 
-  scenario 'show pledges' do
+  scenario 'show pledges', :reset_ids do
     Contract.make!(:primeiro_contrato)
     navigate 'Instrumentos Contratuais > Contratos'
 
@@ -169,11 +169,9 @@ feature "Contracts", vcr: { cassette_name: :contracts } do
 
     click_link 'Empenhos'
 
-    expect(page).to have_content '300,00'
+    expect(page).to have_content '8'
     expect(page).to have_content '01/10/2012'
     expect(page).to have_content '100,00'
-    expect(page).to have_content '01/10/2012'
-    expect(page).to have_content '400,00'
   end
 
   scenario 'add contract additives' do

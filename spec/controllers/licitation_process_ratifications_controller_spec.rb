@@ -1,8 +1,12 @@
 require 'spec_helper'
 
-describe LicitationProcessRatificationsController do
+describe LicitationProcessRatificationsController, vcr: { cassette_name: 'controllers/licitation_process_ratifications' } do
+  let(:customer) { double(:customer, domain: 'compras.dev', secret_token: '1234') }
+
   before do
     sign_in User.make!(:sobrinho_as_admin_and_employee)
+
+    UnicoAPI::Consumer.set_customer customer
   end
 
   it 'uses current date as default value for date fields' do

@@ -66,6 +66,11 @@ RSpec.configure do |config|
     ActiveRecord::Base.shared_connection = ActiveRecord::Base.connection
   end
 
+  config.before(:each, :reset_ids) do
+    FactoryGirl::Preload.clean
+    FactoryGirl::Preload.run
+  end
+
   config.before(:each) do
     FactoryGirl::Preload.reload_factories
   end

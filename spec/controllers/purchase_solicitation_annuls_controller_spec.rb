@@ -1,9 +1,13 @@
 require 'spec_helper'
 
-describe PurchaseSolicitationAnnulsController do
+describe PurchaseSolicitationAnnulsController, vcr: { cassette_name: 'controllers/purchase_solicitation_annuls' } do
+  let(:customer) { double(:customer, domain: 'compras.dev', secret_token: '1234') }
+
   before do
     sign_in User.make!(:sobrinho_as_admin_and_employee)
     BudgetStructure.stub(:find)
+
+    UnicoAPI::Consumer.set_customer customer
   end
 
   describe 'GET #new' do

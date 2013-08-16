@@ -944,7 +944,7 @@ feature "PriceCollections", vcr: { cassette_name: :price_collections } do
 
       within_records do
         expect(page).to have_content '2/2013'
-        expect(page).to have_content '1 - Secretaria de Educação'
+        expect(page).to have_content '9 - Secretaria de Educação'
         expect(page).to have_content 'Wenderson Malheiros'
       end
     end
@@ -964,13 +964,13 @@ feature "PriceCollections", vcr: { cassette_name: :price_collections } do
 
       within :xpath, '//*[@id="purchase_solicitations"]/table/tbody/tr[1]' do
         expect(page).to have_content '2/2013'
-        expect(page).to have_content '1 - Secretaria de Educação'
+        expect(page).to have_content '9 - Secretaria de Educação'
         expect(page).to have_content 'Wenderson Malheiros'
       end
 
       within :xpath, '//*[@id="purchase_solicitations"]/table/tbody/tr[2]' do
         expect(page).to have_content '1/2013'
-        expect(page).to have_content '1 - Secretaria de Educação'
+        expect(page).to have_content '1 - Detran'
         expect(page).to have_content 'Gabriel Sobrinho'
       end
     end

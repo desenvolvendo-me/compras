@@ -1,9 +1,13 @@
 require 'spec_helper'
 
-describe ContractTerminationsController do
+describe ContractTerminationsController, vcr: { cassette_name: 'controllers/contract_terminations' } do
+  let(:customer) { double(:customer, domain: 'compras.dev', secret_token: '1234') }
+
   before do
     controller.stub(:authenticate_user!)
     controller.stub(:authorize_resource!)
+
+    UnicoAPI::Consumer.set_customer customer
   end
 
   context 'with contract_termination' do

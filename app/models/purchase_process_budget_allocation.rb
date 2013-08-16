@@ -16,6 +16,11 @@ class PurchaseProcessBudgetAllocation < Compras::Model
 
   validates :budget_allocation_id, :value, :presence => true
 
+  validate :validate_budget_allocation, on: :update,
+    if: :budget_allocation_id_changed?
+
+  before_destroy :block_when_budget_allocation_used
+
   private
 
   def budget_allocation_params
@@ -58,5 +63,23 @@ class PurchaseProcessBudgetAllocation < Compras::Model
         :budget_structure_structure_sequence,
       ]
     }
+  end
+
+  def validate_budget_allocation
+    return unless old_budget_allocation_id.present?
+
+    budget_allocation_old = BudgetAllocation.find old_budget_allocation_id
+
+    if !budget_allocation_old.can_be_used?(licitation_process)
+      errors.add :budget_allocation, :already_reserved_or_pledged
+    end
+  end
+
+  def block_when_budget_allocation_used
+    if budget_allocation_id && !budget_allocation(false).can_be_used?(licitation_process)
+      errors.add :budget_allocation, :already_reserved_or_pledged
+    end
+
+    errors.blank?
   end
 end

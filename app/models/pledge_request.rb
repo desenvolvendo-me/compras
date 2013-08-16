@@ -33,6 +33,14 @@ class PledgeRequest < Compras::Model
   orderize :id
   filterize
 
+  scope :by_budget_allocation_id, ->(budget_allocation_id) do
+    where { |query| query.budget_allocation_id.eq(budget_allocation_id)}
+  end
+
+  scope :by_purchase_process_id, ->(purchase_process_id) do
+    where { |query| query.purchase_process_id.eq(purchase_process_id)}
+  end
+
   def to_s
     "#{creditor} - #{purchase_process}"
   end

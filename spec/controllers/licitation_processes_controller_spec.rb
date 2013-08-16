@@ -1,10 +1,14 @@
 require 'spec_helper'
 
-describe LicitationProcessesController do
+describe LicitationProcessesController, vcr: { cassette_name: 'controllers/licitation_processes' } do
+  let(:customer) { double(:customer, domain: 'compras.dev', secret_token: '1234') }
+
   before do
     controller.stub(:authenticate_user!)
     controller.stub(:authorize_resource!)
     BudgetStructure.stub(:find)
+
+    UnicoAPI::Consumer.set_customer customer
   end
 
   describe "GET #new" do
