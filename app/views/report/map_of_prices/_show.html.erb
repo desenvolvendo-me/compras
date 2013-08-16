@@ -1,0 +1,35 @@
+<h1>
+  <p>Mapa Comparativo de Preços</p>
+  <p>Coleta de Preço <%= resource.price_collection %></p>
+</h1>
+
+<% resource.item_proposals_grouped_by_lot.each do |lot, proposal_items| %>
+
+  <h2><%= resource.decorator.lot_header(lot, proposal_items) %></h2>
+
+  <table class="records">
+    <thead>
+      <td>Fornecedor</td>
+      <td>Valor unitário</td>
+      <td>Valor total</td>
+    </thead>
+
+    <tbody>
+      <% proposal_items.each do |item| %>
+        <tr>
+          <td><%= resource.decorator.creditor_data(item.creditor) %></td>
+          <td><%= resource.decorator.item_unit_price(item) %></td>
+          <td><%= resource.decorator.item_total_price(item) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+
+    <tfoot>
+      <tr>
+        <td colspan="1">Preço médio</td>
+        <td><%= resource.decorator.item_average_unit_price(proposal_items) %></td>
+        <td><%= resource.decorator.item_average_total_price(proposal_items) %></td>
+      </tr>
+    </tfoot>
+  </table>
+<% end %>

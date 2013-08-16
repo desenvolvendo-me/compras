@@ -8,8 +8,10 @@ class PriceCollectionProposalItem < Compras::Model
 
   has_one :price_collection, through: :price_collection_proposal
 
-  delegate :material, :brand, :reference_unit, :quantity, :to => :price_collection_item, :allow_nil => true
-  delegate :creditor, :editable_by?, :price_collection, :to => :price_collection_proposal, :allow_nil => true
+  delegate :material, :brand, :reference_unit, :quantity, :lot,
+    to: :price_collection_item, allow_nil: true
+  delegate :creditor, :editable_by?, :price_collection,
+    to: :price_collection_proposal, allow_nil: true
 
   scope :by_lot, lambda { |lot|
     joins { price_collection_item }.

@@ -26,4 +26,10 @@ class PriceCollectionDecorator
   def subtitle
     code_and_year
   end
+
+  def must_have_proposals
+    return if component.price_collection_proposals.any?
+
+    t("price_collection.messages.must_have_proposals")
+  end
 end
