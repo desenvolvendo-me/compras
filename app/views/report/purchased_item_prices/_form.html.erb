@@ -1,0 +1,43 @@
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :licitation_process, as: :modal, data_url: modal_licitation_processes_url,
+      hidden_field: :licitation_process_id %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :creditor, as: :modal, data_url: modal_creditors_url, hidden_field: :creditor_id %>
+  </div>
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :material, as: :modal, data_url: modal_materials_url, hidden_field: :material_id %>
+  </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :start_date, as: :date %>
+  </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :end_date, as: :date %>
+  </div>
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-4">
+    <%= f.input :type_of_purchase, :include_blank => true %>
+  </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :modality, :include_blank => true %>
+  </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :grouping, include_blank: false %>
+  </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :ignore_items_not_adjudicated, disabled: true, as: :boolean, checked_value: "true", unchecked_value: "false",
+      input_html: { checked: true } %>
+  </div>
+</div>

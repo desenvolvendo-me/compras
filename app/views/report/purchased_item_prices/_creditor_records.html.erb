@@ -1,0 +1,45 @@
+<% report.records.group_by { |r| report.group_by_creditor r }.each do |creditor, items| %>
+  <div class="field-without-label">
+    <table class="records">
+      <thead>
+        <th>Fornecedor</th>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td><%= creditor %></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="records">
+      <thead>
+        <th>Processo de compra</th>
+      </thead>
+
+      <tbody>
+        <% items.group_by { |i| report.send :group_by_licitation, i }.each do |licitation_process, items| %>
+          <tr>
+            <td><%= licitation_process %></td>
+          </tr>
+      </tbody>
+    </table>
+
+    <table class="records">
+      <thead>
+        <th>Item</th>
+        <th>Valor Unitário</th>
+      </thead>
+
+      <tbody>
+        <% items.each do |item| %>
+          <tr>
+            <td><%= item.material %></td>
+            <td><%= number_to_currency item.unit_price %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <% end %>
+  </div>
+<% end %>

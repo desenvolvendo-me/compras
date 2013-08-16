@@ -1,0 +1,17 @@
+pt-BR:
+  activemodel:
+    attributes:
+      purchased_item_price_report:
+        licitation_process: "Processo de compra"
+        licitation_process_id: "Processo de compra"
+        creditor: "Fornecedor"
+        creditor_id: "Fornecedor"
+        material: "Material"
+        material_id: "Material"
+        type_of_purchase: "Tipo de compra"
+        modality: "Modalidade"
+        start_date: "Data inicial"
+        end_date: "Data final"
+        grouping: "Agrupamento"
+        ignore_items_not_adjudicated: "Ignorar itens não adjudicados"
+        between_dates: "Período"

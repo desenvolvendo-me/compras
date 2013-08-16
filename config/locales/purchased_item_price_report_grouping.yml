@@ -1,0 +1,6 @@
+pt-BR:
+  enumerations:
+    purchased_item_price_report_grouping:
+      licitation: "Processo"
+      creditor: "Fornecedor"
+      material: "Material"

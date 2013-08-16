@@ -771,6 +771,7 @@ Compras::Application.routes.draw do
       resources :map_of_proposals
       resources :purchase_process_ratifications_by_periods
       resources :purchase_solicitations
+      resources :purchased_item_prices
     end
 
     match 'map_of_bids/:licitation_process_id' => 'map_of_bids#show', as: :map_of_bids
