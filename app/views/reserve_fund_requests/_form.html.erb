@@ -7,8 +7,8 @@
   </div>
 
   <div class="yui3-u-1-2">
-    <%= f.input :budget_allocations, required: true, as: :select, label: 'Dotação Orçamentária',
-      collection: budget_allocation_for_select(resource) %>
+    <label class="select required" for="licitation_process_budget_allocations">Dotação Orçamentária <abbr title="obrigatório">*</abbr></label>
+    <%= select(:licitation_process, :budget_allocations, budget_allocation_for_select(resource)) %>
   </div>
 
   <div class="yui3-u-1-6">
