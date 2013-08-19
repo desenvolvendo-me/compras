@@ -2,9 +2,12 @@ pt-BR:
   activemodel:
     attributes:
       purchase_solicitation_report:
+        between_dates: 'Período'
         budget_structure: "Solicitante"
+        budget_structure_id: "Solicitante"
+        end_date: "Data final"
         kind: "Tipo"
         material: "Produto"
-        start_date: "Data inicial"
-        end_date: "Data final"
         type_report: 'Tipo de relatório'
+        start_date: "Data inicial"
+        status: "Status"

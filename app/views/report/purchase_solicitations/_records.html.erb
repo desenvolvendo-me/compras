@@ -11,7 +11,7 @@
   <tbody>
     <% report.records_grouped.each do |record| %>
     <tr>
-      <td><%= record.budget_structure %></td>
+      <td><%= report.record_budget_structure record %></td>
       <td><%= report.item(record) %></td>
       <td><%= number_with_precision record.quantity %></td>
       <td><%= number_with_precision record.total %></td>

@@ -10,14 +10,13 @@ class PurchaseSolicitationReport < Report
 
   def records_grouped
     records.
-      joins { items.material }.
-      select { sum(items.quantity).as(:quantity) }.
-      select { sum(items.quantity * items.unit_price).as(:total) }.
-      select { budget_structure_id }.
-      select { items.material_id }.
-      group { budget_structure_id }.
-      group { items.material_id }.
-      order("budget_structure_id, material_id")
+      joins { purchase_solicitation }.
+      select { sum(quantity).as(:quantity) }.
+      select { sum(quantity * unit_price).as(:total) }.
+      select { purchase_solicitation.budget_structure_id }.
+      select { material_id }.
+      group { purchase_solicitation.budget_structure_id }.
+      group { material_id }
   end
 
   def item(record, material_repository = Material)
@@ -25,9 +24,25 @@ class PurchaseSolicitationReport < Report
   end
 
   def record_code_year(record, purchase_solicitation_repository = PurchaseSolicitation)
-    purchase_solicitation = purchase_solicitation_repository.find(record.id)
+    purchase_solicitation = purchase_solicitation_repository.find(record.purchase_solicitation_id)
 
     "#{purchase_solicitation.code}/#{purchase_solicitation.accounting_year}"
+  end
+
+  def record_budget_structure(record, budget_strucure_repository = BudgetStructure)
+    budget_strucure_repository.find record.budget_structure_id
+  end
+
+  def render_list?
+    true
+  end
+
+  def start_date
+    @start_date ||= I18n.l(Date.today.at_beginning_of_month)
+  end
+
+  def end_date
+    @end_date ||= I18n.l(Date.today.at_end_of_month)
   end
 
   private

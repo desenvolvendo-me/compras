@@ -1,8 +1,4 @@
-<h1>
-  Relatório de Agenda de Licitações
-</h1>
-
-<% if @report.analytical? || @report.type_report.nil? %>
+<% if @report.type_report.nil? || @report.analytical? %>
   <%= render 'report_analytical', report: @report %>
 <% else %>
   <%= render 'records', report: @report %>

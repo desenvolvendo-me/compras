@@ -12,6 +12,8 @@ class PurchaseSolicitationItem < Compras::Model
   delegate :annulled?, :services?,
            :to => :purchase_solicitation,
            :allow_nil => true
+  delegate :budget_structure, to: :purchase_solicitation,
+           prefix: true, allow_nil: true
 
   validates :material, :quantity, :presence => true
   validates :material_id, :uniqueness => { :scope => :purchase_solicitation_id }, :allow_nil => true
