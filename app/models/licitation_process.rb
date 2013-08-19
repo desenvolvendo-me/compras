@@ -126,6 +126,7 @@ class LicitationProcess < Compras::Model
   validate :validate_updates, :unless => :updateable?
   validate :validate_proposal_envelope_opening_date, :on => :update, :if => :licitation?
   validate :validate_the_year_to_processe_date_are_the_same, :on => :update
+  validate :validate_budget_allocations_destruction
 
   with_options :allow_blank => true do |allowing_blank|
     allowing_blank.validates :year, :mask => "9999"
@@ -373,6 +374,20 @@ class LicitationProcess < Compras::Model
     if bidders.any? && !edital_published? && licitation?
       errors.add(:base, :inclusion_of_bidders_before_edital_publication)
     end
+  end
+
+  def validate_budget_allocations_destruction
+    error = false
+
+    purchase_process_budget_allocations.select(&:marked_for_destruction?).each do |pp_budget_allocation|
+      unless pp_budget_allocation.budget_allocation(false).can_be_used?(self)
+        errors.add :base, :budget_allocation_cannot_be_destroyed, budget_allocation: pp_budget_allocation.budget_allocation(false)
+
+        error = true
+      end
+    end
+
+    purchase_process_budget_allocations.reload if error # Limpa os marked_for_destruction
   end
 
   def validate_proposal_envelope_opening_date

@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 describe TceExport::MG::MonthlyMonitoring::DirectPurchaseGenerator, vcr: { cassette_name: 'integration/direct_purchase' } do
+  let(:customer) { double(:customer, domain: 'compras.dev', secret_token: '1234') }
+
+  before do
+    UnicoAPI::Consumer.set_customer customer
+  end
+
   describe "#generate_file" do
     before do
       FileUtils.rm_f('tmp/DISPENSA.csv')

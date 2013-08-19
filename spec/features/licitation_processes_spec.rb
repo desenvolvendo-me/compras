@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature "LicitationProcesses", vcr: { cassette_name: :licitation_process } do
+feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
   let(:current_user) { User.make!(:sobrinho_as_admin_and_employee) }
 
   background do
@@ -1023,9 +1023,7 @@ feature "LicitationProcesses", vcr: { cassette_name: :licitation_process } do
 
     within_tab 'Principal' do
       expect(page).to have_field 'Status', disabled: true
-    end
 
-    within_tab 'Principal' do
       choose 'Processo licitatório'
 
       select 'Compras e serviços', :from => 'Tipo de objeto'
@@ -2436,32 +2434,168 @@ feature "LicitationProcesses", vcr: { cassette_name: :licitation_process } do
   end
 
   scenario 'should filter auto_complete in budget_allocation by budget_allocation_year' do
-    pending 'this test is not working, but in browser is all ok' do
-      LicitationProcess.make!(:processo_licitatorio, purchase_process_budget_allocations: [])
+    pending 'this test is not working, but in browser is all ok'
 
-      navigate 'Processos de Compra > Processos de Compras'
+    LicitationProcess.make!(:processo_licitatorio, purchase_process_budget_allocations: [])
 
-      click_link 'Limpar Filtro'
+    navigate 'Processos de Compra > Processos de Compras'
 
-      within_records do
-        click_link '1/2012'
+    click_link 'Limpar Filtro'
+
+    within_records do
+      click_link '1/2012'
+    end
+
+    within_tab 'Orçamento' do
+      fill_in 'Ano da dotação', with: '2013'
+
+      within_autocomplete 'Dotação orçamentária', with: 'Ap' do
+        expect(page).to_not have_content '12 - Aplicações Diretas'
+        expect(page).to_not have_content '11 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
       end
 
-      within_tab 'Orçamento' do
-        fill_in 'Ano da dotação', with: '2013'
+      fill_in 'Ano da dotação', with: '2012'
 
-        within_autocomplete 'Dotação orçamentária', with: 'Ap' do
-          expect(page).to_not have_content '12 - Aplicações Diretas'
-          expect(page).to_not have_content '11 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
-        end
-
-        fill_in 'Ano da dotação', with: '2012'
-
-        within_autocomplete 'Dotação orçamentária', with: 'Ap' do
-          expect(page).to have_content '12 - Aplicações Diretas'
-          expect(page).to have_content '11 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
-        end
+      within_autocomplete 'Dotação orçamentária', with: 'Ap' do
+        expect(page).to have_content '12 - Aplicações Diretas'
+        expect(page).to have_content '11 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
       end
     end
+  end
+
+  scenario 'cannot allow remove budget_allocation that cannot be used by reserve_fund', :reset_ids do
+    Timecop.travel(Date.new(2013, 3, 25))
+
+    creditor = Creditor.make!(:wenderson_sa)
+    bidder = Bidder.make!(:licitante, creditor: creditor)
+
+    LicitationProcess.make!(:processo_licitatorio_computador,
+      process: 102,
+      purchase_process_budget_allocations: [PurchaseProcessBudgetAllocation.make!(:alocacao, budget_allocation_id: 6)],
+      bidders: [bidder])
+
+    navigate 'Processos de Compra > Processos de Compras'
+
+    click_link 'Limpar Filtro'
+
+    within_records do
+      click_link '102/2013'
+    end
+
+    within_tab 'Orçamento' do
+      within_records do
+        click_link 'Remover'
+      end
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_content 'Dotação 13 - 3.0.00.00.00 - Despesas Correntes não pode ser apagada pois já está em uso'
+
+    Timecop.return
+  end
+
+  scenario 'cannot allow remove budget_allocation that cannot be used by pledge', :reset_ids do
+    Timecop.travel(Date.new(2013, 3, 25))
+
+    creditor = Creditor.make!(:wenderson_sa)
+    bidder = Bidder.make!(:licitante, creditor: creditor)
+
+    LicitationProcess.make!(:processo_licitatorio_computador,
+      process: 102,
+      purchase_process_budget_allocations: [PurchaseProcessBudgetAllocation.make!(:alocacao, budget_allocation_id: 7)],
+      bidders: [bidder])
+
+    navigate 'Processos de Compra > Processos de Compras'
+
+    click_link 'Limpar Filtro'
+
+    within_records do
+      click_link '102/2013'
+    end
+
+    within_tab 'Orçamento' do
+      within_records do
+        click_link 'Remover'
+      end
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_content 'Dotação 14 - 3.1.00.00.00 - Pessoal e Encargos Sociais não pode ser apagada pois já está em uso'
+
+    Timecop.return
+  end
+
+  scenario 'cannot allow change budget_allocation that cannot be used by reserve_fund', :reset_ids do
+    Timecop.travel(Date.new(2013, 3, 25))
+
+    creditor = Creditor.make!(:wenderson_sa)
+    bidder = Bidder.make!(:licitante, creditor: creditor)
+
+    LicitationProcess.make!(:processo_licitatorio_computador,
+      process: 102,
+      purchase_process_budget_allocations: [PurchaseProcessBudgetAllocation.make!(:alocacao, budget_allocation_id: 6)],
+      bidders: [bidder])
+
+    navigate 'Processos de Compra > Processos de Compras'
+
+    click_link 'Limpar Filtro'
+
+    within_records do
+      click_link '102/2013'
+    end
+
+    within_tab 'Orçamento' do
+      within_records do
+        click_link 'Editar'
+      end
+
+      fill_with_autocomplete 'Dotação orçamentária', :with => 'Aposentadorias'
+
+      click_button 'Adicionar'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_content 'Dotação orçamentária já está reservada ou empenhada'
+
+    Timecop.return
+  end
+
+  scenario 'cannot allow change budget_allocation that cannot be used by pledge', :reset_ids do
+    Timecop.travel(Date.new(2013, 3, 25))
+
+    creditor = Creditor.make!(:wenderson_sa)
+    bidder = Bidder.make!(:licitante, creditor: creditor)
+
+    LicitationProcess.make!(:processo_licitatorio_computador,
+      process: 102,
+      purchase_process_budget_allocations: [PurchaseProcessBudgetAllocation.make!(:alocacao, budget_allocation_id: 7)],
+      bidders: [bidder])
+
+    navigate 'Processos de Compra > Processos de Compras'
+
+    click_link 'Limpar Filtro'
+
+    within_records do
+      click_link '102/2013'
+    end
+
+    within_tab 'Orçamento' do
+      within_records do
+        click_link 'Editar'
+      end
+
+      fill_with_autocomplete 'Dotação orçamentária', :with => 'Aposentadorias'
+
+      click_button 'Adicionar'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_content 'Dotação orçamentária já está reservada ou empenhada'
+
+    Timecop.return
   end
 end

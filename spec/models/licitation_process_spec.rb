@@ -2,6 +2,7 @@ require 'model_helper'
 require 'lib/signable'
 require 'app/models/persona/person'
 require 'app/models/person'
+require 'app/models/persona/creditor'
 require 'app/models/budget_structure'
 require 'app/models/expense_nature'
 require 'app/models/budget_allocation'
@@ -1031,6 +1032,52 @@ describe LicitationProcess do
       repository.should_receive(:all).with(params: { by_purchase_process_id: 5, without_pledge: true })
 
       subject.reserve_funds_available(repository)
+    end
+  end
+
+  describe 'validate_budget_allocations_destruction' do
+    context 'when has budget_allocations marked_for_destruction' do
+      let(:purchase_process_budget_allocations) { double(:purchase_process_budget_allocations) }
+      let(:budget_allocation) { double(:budget_allocation, to_s: 'allocation') }
+
+      let :purchase_process_budget_allocation do
+        double(:purchase_process_budget_allocation,
+          budget_allocation: budget_allocation)
+      end
+
+      context 'when budget_allocation can be used' do
+        it 'should verify all budget_allocation marked for destruction and do nothing' do
+          budget_allocation.stub(can_be_used?: true)
+          subject.stub(purchase_process_budget_allocations: purchase_process_budget_allocations)
+
+          purchase_process_budget_allocations.
+            stub(:select).
+            and_return([purchase_process_budget_allocation])
+
+          purchase_process_budget_allocations.should_not_receive(:reload)
+
+          subject.valid?
+
+          expect(subject.errors[:base]).to_not include('Dotação allocation não pode ser apagada pois já está em uso')
+        end
+      end
+
+      context 'when budget_allocation cannot be used' do
+        it 'should verify all budget_allocation marked for destruction and add an error' do
+          budget_allocation.stub(can_be_used?: false)
+          subject.stub(purchase_process_budget_allocations: purchase_process_budget_allocations)
+
+          purchase_process_budget_allocations.
+            stub(:select).
+            and_return([purchase_process_budget_allocation])
+
+          purchase_process_budget_allocations.should_receive(:reload)
+
+          subject.valid?
+
+          expect(subject.errors[:base]).to include('Dotação allocation não pode ser apagada pois já está em uso')
+        end
+      end
     end
   end
 end

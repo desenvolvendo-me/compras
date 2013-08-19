@@ -21,7 +21,7 @@
   <div class="yui3-g">
     <div class="yui3-u-1-4">
       <%= f.input :ratification_item_unit_price, disabled: true,
-        :input_html => { :class => 'unit_price numeric' } %>
+        :input_html => { :class => 'unit_price numeric', value: number_with_precision(f.object.ratification_item_unit_price) } %>
     </div>
 
     <div class="yui3-u-1-4">

@@ -3,13 +3,17 @@ require 'spec_helper'
 class TestAnnulsController < ResourceAnnulsController
 end
 
-describe TestAnnulsController do
+describe TestAnnulsController, vcr: { cassette_name: 'controllers/resource_annuls' } do
+  let(:customer) { double(:customer, domain: 'compras.dev', secret_token: '1234') }
+
   let(:resource_annul) do
     double(:resource_annul, :date= => true, :employee= => true)
   end
 
   before do
     sign_in User.make!(:sobrinho_as_admin_and_employee)
+
+    UnicoAPI::Consumer.set_customer customer
 
     Rails.application.routes.draw do
       resources :test_annuls

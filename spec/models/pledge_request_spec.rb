@@ -33,7 +33,7 @@ describe PledgeRequest do
         it 'should not validate reserve_fund' do
           subject.valid?
 
-          expect(subject.errors[:reserve_fund]).to be_empty
+          expect(subject.errors[:reserve_fund_id]).to be_empty
         end
       end
 
@@ -41,23 +41,45 @@ describe PledgeRequest do
         it 'should not validate reserve_fund' do
           subject.stub(purchase_process: purchase_process)
 
-          purchase_process.should_receive(:reserve_funds_available).and_return([])
+          purchase_process.stub(:reserve_funds_available).and_return([])
 
           subject.valid?
 
-          expect(subject.errors[:reserve_fund]).to be_empty
+          expect(subject.errors[:reserve_fund_id]).to be_empty
         end
       end
 
       context 'when purchase_process have reserve_funds_available' do
-        it 'should validate reserve_fund presence' do
-          subject.stub(purchase_process: purchase_process)
+        context 'when reserve_fund_id id different from purchase_process' do
+          it 'should validate reserve_fund presence' do
+            subject.reserve_fund_id = 15
 
-          purchase_process.should_receive(:reserve_funds_available).and_return(['reserve_fund'])
+            reserve_fund = double(:reserve_fund, id: 10)
 
-          subject.valid?
+            subject.stub(purchase_process: purchase_process)
 
-          expect(subject.errors[:reserve_fund]).to include('não pode ficar em branco')
+            purchase_process.stub(:reserve_funds_available).and_return([reserve_fund])
+
+            subject.valid?
+
+            expect(subject.errors[:reserve_fund_id]).to include('não pode ficar em branco')
+          end
+        end
+
+        context 'when reserve_fund_id id equal to purchase_process' do
+          it 'should validate reserve_fund presence' do
+            subject.reserve_fund_id = 10
+
+            reserve_fund = double(:reserve_fund, id: 10)
+
+            subject.stub(purchase_process: purchase_process)
+
+            purchase_process.stub(:reserve_funds_available).and_return([reserve_fund])
+
+            subject.valid?
+
+            expect(subject.errors[:reserve_fund_id]).to_not include('não pode ficar em branco')
+          end
         end
       end
     end

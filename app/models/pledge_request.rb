@@ -33,6 +33,14 @@ class PledgeRequest < Compras::Model
   orderize :id
   filterize
 
+  scope :by_budget_allocation_id, ->(budget_allocation_id) do
+    where { |query| query.budget_allocation_id.eq(budget_allocation_id)}
+  end
+
+  scope :by_purchase_process_id, ->(purchase_process_id) do
+    where { |query| query.purchase_process_id.eq(purchase_process_id)}
+  end
+
   def to_s
     "#{creditor} - #{purchase_process}"
   end
@@ -50,8 +58,10 @@ class PledgeRequest < Compras::Model
   def require_reserve_fund_id
     return unless purchase_process
 
-    if purchase_process && purchase_process.reserve_funds_available.any?
-      errors.add :reserve_fund, :blank
+    available_ids = purchase_process.reserve_funds_available.map(&:id)
+
+    if purchase_process.reserve_funds_available.any? && !available_ids.include?(reserve_fund_id)
+      errors.add :reserve_fund_id, :blank
     end
   end
 end

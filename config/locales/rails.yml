@@ -331,6 +331,8 @@ pt-BR:
       unit_price_should_be_lower_than_old_unit_price: "deve ser menor que o valor da melhor proposta"
       the_sum_of_item_prices_should_be_equal_to_proposal: "a soma do valor dos itens deve ser igual ao valor total da proposta/lance"
       must_not_be_greater_than_one_creditor: "não pode ter mais de um fornecedor quando o contrato não for Consórcio/Convênio"
+      budget_allocation_cannot_be_destroyed: "Dotação %{budget_allocation} não pode ser apagada pois já está em uso"
+      already_reserved_or_pledged: "já está reservada ou empenhada"
 
   activerecord:
     errors:
