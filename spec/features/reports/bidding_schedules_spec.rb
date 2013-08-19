@@ -14,7 +14,7 @@ feature 'Report::BiddingSchedules' do
     fill_in 'Data do julgamento inicial', with: '01/07/2013'
     fill_in 'Data do julgamento final', with: I18n.l(Date.current)
 
-    click_button 'Filtrar'
+    click_button 'Gerar Relatório de agendas de licitação'
 
     within_records do
       expect(page).to_not have_content '10/06/2013'
@@ -23,8 +23,7 @@ feature 'Report::BiddingSchedules' do
       within 'tbody tr:nth-child(1)' do
         expect(page).to have_content '10/07/2013'
         expect(page).to have_content '14:00'
-        expect(page).to have_content '2013'
-        expect(page).to have_content '2'
+        expect(page).to have_content '2/2013'
         expect(page).to have_content 'Convite'
         expect(page).to have_content 'Licitação para compra de carteiras'
         expect(page).to have_content '20,00'
@@ -33,8 +32,7 @@ feature 'Report::BiddingSchedules' do
       within 'tbody tr:nth-child(2)' do
         expect(page).to have_content '10/08/2013'
         expect(page).to have_content '14:00'
-        expect(page).to have_content '2013'
-        expect(page).to have_content '2'
+        expect(page).to have_content '3/2013'
         expect(page).to have_content 'Concorrência'
         expect(page).to have_content 'Licitação para compra de carteiras'
         expect(page).to have_content '20,00'
@@ -51,14 +49,13 @@ feature 'Report::BiddingSchedules' do
     fill_in 'Data do julgamento inicial', with: '01/01/2011'
     fill_in 'Data do julgamento final', with: I18n.l(Date.current)
 
-    click_button 'Filtrar'
+    click_button 'Gerar Relatório de agendas de licitação'
 
     within_records do
       within 'tbody tr:nth-child(1)' do
         expect(page).to have_content '10/07/2013'
         expect(page).to have_content '14:00'
-        expect(page).to have_content '2013'
-        expect(page).to have_content '2'
+        expect(page).to have_content '2/2013'
         expect(page).to have_content 'Convite'
         expect(page).to have_content 'Licitação para compra de carteiras'
         expect(page).to have_content '20,00'
@@ -67,8 +64,7 @@ feature 'Report::BiddingSchedules' do
       within 'tbody tr:nth-child(2)' do
         expect(page).to have_content '10/08/2013'
         expect(page).to have_content '14:00'
-        expect(page).to have_content '2013'
-        expect(page).to have_content '2'
+        expect(page).to have_content '3/2013'
         expect(page).to have_content 'Concorrência'
         expect(page).to have_content 'Licitação para compra de carteiras'
         expect(page).to have_content '20,00'
@@ -77,8 +73,7 @@ feature 'Report::BiddingSchedules' do
       within 'tbody tr:nth-child(3)' do
         expect(page).to have_content '01/01/2013'
         expect(page).to have_content '14:00'
-        expect(page).to have_content '2013'
-        expect(page).to have_content '2'
+        expect(page).to have_content '4/2013'
         expect(page).to have_content 'Convite'
         expect(page).to have_content 'Licitação para compra de carteiras'
         expect(page).to have_content '30,00'
@@ -96,14 +91,13 @@ feature 'Report::BiddingSchedules' do
     fill_in 'Data do julgamento inicial', with: '01/01/2011'
     fill_in 'Data do julgamento final', with: I18n.l(Date.current)
 
-    click_button 'Filtrar'
+    click_button 'Gerar Relatório de agendas de licitação'
 
     within_records do
       within 'tbody tr:nth-child(1)' do
         expect(page).to have_content '10/07/2013'
         expect(page).to have_content '14:00'
-        expect(page).to have_content '2013'
-        expect(page).to have_content '2'
+        expect(page).to have_content '2/2013'
         expect(page).to have_content 'Convite'
         expect(page).to have_content 'Licitação para compra de carteiras'
         expect(page).to have_content '20,00'
@@ -112,8 +106,7 @@ feature 'Report::BiddingSchedules' do
       within 'tbody tr:nth-child(2)' do
         expect(page).to have_content '01/01/2013'
         expect(page).to have_content '14:00'
-        expect(page).to have_content '2013'
-        expect(page).to have_content '2'
+        expect(page).to have_content '4/2013'
         expect(page).to have_content 'Convite'
         expect(page).to have_content 'Licitação para compra de carteiras'
         expect(page).to have_content '30,00'
@@ -130,7 +123,7 @@ feature 'Report::BiddingSchedules' do
     fill_in 'Data do julgamento inicial', with: '01/07/2012'
     fill_in 'Data do julgamento final', with: I18n.l(Date.current)
 
-    click_button 'Filtrar'
+    click_button 'Gerar Relatório de agendas de licitação'
 
     within_records do
       expect(page).to_not have_content '10/06/2013'
@@ -139,8 +132,7 @@ feature 'Report::BiddingSchedules' do
       within 'tbody tr:nth-child(1)' do
         expect(page).to have_content '10/08/2013'
         expect(page).to have_content '14:00'
-        expect(page).to have_content '2013'
-        expect(page).to have_content '2'
+        expect(page).to have_content '3/2013'
         expect(page).to have_content 'Concorrência'
         expect(page).to have_content 'Licitação para compra de carteiras'
         expect(page).to have_content '20,00'
@@ -149,8 +141,7 @@ feature 'Report::BiddingSchedules' do
       within 'tbody tr:nth-child(2)' do
         expect(page).to have_content '01/01/2013'
         expect(page).to have_content '14:00'
-        expect(page).to have_content '2013'
-        expect(page).to have_content '2'
+        expect(page).to have_content '4/2013'
         expect(page).to have_content 'Convite'
         expect(page).to have_content 'Licitação para compra de carteiras'
         expect(page).to have_content '30,00'
@@ -163,31 +154,22 @@ feature 'Report::BiddingSchedules' do
 
     navigate 'Relatórios > Agendas de Licitações'
 
+    select 'Compras e serviços', from: 'Tipo de objeto'
+    select 'Convite', from: 'Modalidade'
     fill_modal 'Comissão de licitação', with: 'Comissão para pregão presencial', field: 'Descrição e finalidade da comissão'
     fill_in 'Data do julgamento inicial', with: '01/07/2012'
     fill_in 'Data do julgamento final', with: I18n.l(Date.current)
 
-    click_button 'Filtrar'
+    click_button 'Gerar Relatório de agendas de licitação'
 
     within_records do
       expect(page).to_not have_content '10/06/2013'
       expect(page).to_not have_content '10/07/2013'
 
       within 'tbody tr:nth-child(1)' do
-        expect(page).to have_content '10/08/2013'
-        expect(page).to have_content '14:00'
-        expect(page).to have_content '2013'
-        expect(page).to have_content '2'
-        expect(page).to have_content 'Concorrência'
-        expect(page).to have_content 'Licitação para compra de carteiras'
-        expect(page).to have_content '20,00'
-      end
-
-      within 'tbody tr:nth-child(2)' do
         expect(page).to have_content '01/01/2013'
         expect(page).to have_content '14:00'
-        expect(page).to have_content '2013'
-        expect(page).to have_content '2'
+        expect(page).to have_content '4/2013'
         expect(page).to have_content 'Convite'
         expect(page).to have_content 'Licitação para compra de carteiras'
         expect(page).to have_content '30,00'
@@ -196,27 +178,24 @@ feature 'Report::BiddingSchedules' do
 
     click_link 'Imprimir'
 
-    expect(page).to have_content 'Relatório de Agenda de Licitações'
+    expect(page).to have_content 'Relatório de agendas de licitação'
+
+    within '.filters' do
+      expect(page).to have_content 'Filtros'
+      expect(page).to have_content 'Tipo de objeto: Compras e serviços'
+      expect(page).to have_content 'Modalidade: Convite'
+      expect(page).to have_content 'Comissão de licitação: Comissão para pregão presencial'
+      expect(page).to have_content "Período: 01/07/2012 até #{I18n.l Date.current}"
+    end
 
     within_records do
       expect(page).to_not have_content '10/06/2013'
       expect(page).to_not have_content '10/07/2013'
 
       within 'tbody tr:nth-child(1)' do
-        expect(page).to have_content '10/08/2013'
-        expect(page).to have_content '14:00'
-        expect(page).to have_content '2013'
-        expect(page).to have_content '2'
-        expect(page).to have_content 'Concorrência'
-        expect(page).to have_content 'Licitação para compra de carteiras'
-        expect(page).to have_content '20,00'
-      end
-
-      within 'tbody tr:nth-child(2)' do
         expect(page).to have_content '01/01/2013'
         expect(page).to have_content '14:00'
-        expect(page).to have_content '2013'
-        expect(page).to have_content '2'
+        expect(page).to have_content '4/2013'
         expect(page).to have_content 'Convite'
         expect(page).to have_content 'Licitação para compra de carteiras'
         expect(page).to have_content '30,00'

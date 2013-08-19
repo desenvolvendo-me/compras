@@ -18,6 +18,7 @@ class BiddingScheduleSearcher
   end
 
   def between_dates(dates_range)
-    where { proposal_envelope_opening_date.in(dates_range) & type_of_purchase.eq('licitation') }
+    where { proposal_envelope_opening_date.in(dates_range) & type_of_purchase.eq(PurchaseProcessTypeOfPurchase::LICITATION) }.
+    order { id }
   end
 end

@@ -3,7 +3,6 @@
     <tr>
       <th>Data do Julgamento</th>
       <th>Hora</th>
-      <th>Ano Processo</th>
       <th>N˚ Processo</th>
       <th>Modalidade</th>
       <th>Objeto</th>
@@ -16,8 +15,7 @@
       <tr>
         <td><%= record.decorator.proposal_envelope_opening_date %></td>
         <td><%= record.decorator.proposal_envelope_opening_time %></td>
-        <td><%= record.year %></td>
-        <td><%= record.process %></td>
+        <td><%= "#{record.process}/#{record.year}" %></td>
         <td><%= record.modality_humanize %></td>
         <td><%= record.description %></td>
         <td><%= record.decorator.budget_allocations_total_value %></td>
