@@ -110,13 +110,15 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
 
       fill_in 'Ano da dotação', with: '2012'
 
+      page.execute_script %{ $("input[id$=licitation_process_budget_allocation_year]").trigger("change") }
+
       fill_with_autocomplete 'Dotação orçamentária', :with => 'Aposentadorias'
 
       expect(page).to have_field 'Natureza da despesa', :with => '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares',
         disabled: true
       expect(page).to have_field 'Saldo da dotação', :with => '0,00', disabled: true
 
-      fill_with_autocomplete 'Desdobramento', :with => '3.1'
+      fill_with_autocomplete 'Desdobramento', :with => '3.1.90.01.01'
 
       expect(page).to have_field 'Desdobramento', :with => '3.1.90.01.01 - Aposentadorias Custeadas com Recursos do RPPS'
 
@@ -394,7 +396,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
 
       expect(page).to have_field 'Saldo da dotação', :with => '0,00', disabled: true
 
-      fill_with_autocomplete 'Desdobramento', :with => '3.1'
+      fill_with_autocomplete 'Desdobramento', :with => '3.1.90.01.01'
 
       expect(page).to have_field 'Desdobramento', :with => '3.1.90.01.01 - Aposentadorias Custeadas com Recursos do RPPS'
 
@@ -819,7 +821,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
     end
 
     within_tab 'Orçamento' do
-      fill_with_autocomplete 'Dotação orçamentária', with: 'Aplicações Diretas'
+      fill_with_autocomplete 'Dotação orçamentária', with: '12 - Aplicações'
       fill_in 'Valor previsto', with: '300,00'
 
       click_button 'Adicionar'
@@ -2288,6 +2290,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
 
     within_tab 'Orçamento' do
       fill_in 'Ano da dotação', with: '2012'
+      page.execute_script %{ $("input[id$=licitation_process_budget_allocation_year]").trigger("change") }
 
       fill_with_autocomplete 'Dotação orçamentária', :with => 'Aposentadorias'
 
@@ -2391,6 +2394,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
 
     within_tab 'Orçamento' do
       fill_in 'Ano da dotação', with: '2012'
+      page.execute_script %{ $("input[id$=licitation_process_budget_allocation_year]").trigger("change") }
 
       fill_with_autocomplete 'Dotação orçamentária', :with => 'Aposentadorias'
 
@@ -2434,8 +2438,6 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
   end
 
   scenario 'should filter auto_complete in budget_allocation by budget_allocation_year' do
-    pending 'this test is not working, but in browser is all ok'
-
     LicitationProcess.make!(:processo_licitatorio, purchase_process_budget_allocations: [])
 
     navigate 'Processos de Compra > Processos de Compras'
@@ -2448,6 +2450,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
 
     within_tab 'Orçamento' do
       fill_in 'Ano da dotação', with: '2013'
+      page.execute_script %{ $("input[id$=licitation_process_budget_allocation_year]").trigger("change") }
 
       within_autocomplete 'Dotação orçamentária', with: 'Ap' do
         expect(page).to_not have_content '12 - Aplicações Diretas'
@@ -2455,6 +2458,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
       end
 
       fill_in 'Ano da dotação', with: '2012'
+      page.execute_script %{ $("input[id$=licitation_process_budget_allocation_year]").trigger("change") }
 
       within_autocomplete 'Dotação orçamentária', with: 'Ap' do
         expect(page).to have_content '12 - Aplicações Diretas'
@@ -2551,6 +2555,9 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
         click_link 'Editar'
       end
 
+      fill_in 'Ano da dotação', with: '2012'
+      page.execute_script %{ $("input[id$=licitation_process_budget_allocation_year]").trigger("change") }
+
       fill_with_autocomplete 'Dotação orçamentária', :with => 'Aposentadorias'
 
       click_button 'Adicionar'
@@ -2587,6 +2594,9 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
         click_link 'Editar'
       end
 
+      fill_in 'Ano da dotação', with: '2012'
+      page.execute_script %{ $("input[id$=licitation_process_budget_allocation_year]").trigger("change") }
+
       fill_with_autocomplete 'Dotação orçamentária', :with => 'Aposentadorias'
 
       click_button 'Adicionar'
@@ -2597,5 +2607,25 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
     expect(page).to have_content 'Dotação orçamentária já está reservada ou empenhada'
 
     Timecop.return
+  end
+
+  scenario 'should enable budget_allocation when budget_allocation_year is change' do
+    navigate 'Processos de Compra > Processos de Compras'
+
+    click_link 'Criar Processo de Compra'
+
+    within_tab 'Orçamento' do
+      expect(page).to have_field 'Dotação orçamentária', disabled: true
+
+      fill_in 'Ano da dotação', with: '2012'
+      page.execute_script %{ $("input[id$=licitation_process_budget_allocation_year]").trigger("change") }
+
+      expect(page).to have_field 'Dotação orçamentária', disabled: false
+
+      fill_in 'Ano da dotação', with: ''
+      page.execute_script %{ $("input[id$=licitation_process_budget_allocation_year]").trigger("change") }
+
+      expect(page).to have_field 'Dotação orçamentária', disabled: true
+    end
   end
 end

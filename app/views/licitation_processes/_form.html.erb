@@ -92,6 +92,14 @@
     $('#licitation_process_modality').removeAttr("disabled");
   }
 
+  function disableBudgetAllocation(){
+    $('#licitation_process_budget_allocation').attr('disabled', 'disabled');
+  }
+
+  function enableBudgetAllocation(){
+    $('#licitation_process_budget_allocation').removeAttr('disabled');
+  }
+
   $('#licitation_process_modality, #licitation_process_price_registration').on('change', function() {
     filterJudgmentForm();
   });
@@ -115,6 +123,17 @@
   }
 
   filterJudgmentForm();
+  if ($('#licitation_process_budget_allocation_year').val() == ''){
+    disableBudgetAllocation();
+  }
+
+  $('form.licitation_process').on('change', '#licitation_process_budget_allocation_year', function(){
+    if ($('#licitation_process_budget_allocation_year').val() == ''){
+      disableBudgetAllocation();
+    }else{
+      enableBudgetAllocation();
+    }
+  });
 
   <% unless resource.updateable? && resource.licitation_process_ratifications.empty? %>
     $(function(){
