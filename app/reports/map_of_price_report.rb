@@ -1,4 +1,4 @@
-class MapOfPriceReport < ActiveRelatus::Base
+class MapOfPriceReport < Report
   include Decore::Infection
 
   attr_accessor :price_collection_id

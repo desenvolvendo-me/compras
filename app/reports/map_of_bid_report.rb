@@ -1,4 +1,4 @@
-class MapOfBidReport < ActiveRelatus::Base
+class MapOfBidReport < Report
   include Decore::Infection
 
   attr_accessor :licitation_process_id

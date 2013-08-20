@@ -1,4 +1,4 @@
-class MinutePurchaseProcessTradingReport < ActiveRelatus::Base
+class MinutePurchaseProcessTradingReport < Report
   attr_accessor :licitation_process_id
 
   def licitation_process

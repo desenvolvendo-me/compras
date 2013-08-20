@@ -17,8 +17,10 @@ module ApplicationHelper
     SimpleMenu.new(self, &block).render
   end
 
-  def smart_report_path
-    url_for :controller => controller_name, :action => :show, :id => 'report', :only_path => true
+  def smart_report_path(report)
+    action = report.render_list? ? :new : :show
+
+    url_for :controller => controller_name, :action => action, :id => 'report', :only_path => true
   end
 
   def custom_fields(form)
