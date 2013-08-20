@@ -142,7 +142,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
         end
       end
 
-      fill_with_autocomplete 'Dotação orçamentária', :with => 'Aplicações Diretas'
+      fill_with_autocomplete 'Dotação orçamentária', :with => '12 - Aplicações'
 
       expect(page).to have_field 'Natureza da despesa', :with => '3.1.90.00.00 - Aplicações Diretas', disabled: true
       expect(page).to have_field 'Saldo da dotação', :with => '0,00', disabled: true
@@ -845,6 +845,22 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
           expect(page).to have_content '3.1.90.00.00 - Aplicações Diretas'
           expect(page).to have_content '0,00'
           expect(page).to have_content '300,00'
+
+          click_link 'Remover'
+        end
+      end
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Processo de Compra 2/2013 editado com sucesso.'
+
+    within_tab 'Orçamento' do
+      within_records do
+        within 'tbody .nested-record:nth-last-child(1)' do
+          expect(page).to_not have_content '11 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+          expect(page).to_not have_content '3.1.90.01.00 - Aposentadorias do RPPS, Reserva Remunerada e Reformas dos Militares'
+          expect(page).to_not have_content '300,00'
         end
       end
     end
