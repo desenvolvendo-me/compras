@@ -74,5 +74,14 @@
     $('.advice').addClass('hidden');
   <% else %>
     $('.advice').removeClass('hidden');
+    $('#judgment_commission_advice_judgment_start_date').requiredField(true);
+    $('#judgment_commission_advice_judgment_start_time').requiredField(true);
+    $('#judgment_commission_advice_judgment_end_date').requiredField(true);
+    $('#judgment_commission_advice_judgment_end_time').requiredField(true);
+    $('#judgment_commission_advice_judgment_start_time').requiredField(true);
+    $('#judgment_commission_advice_companies_minutes').requiredField(true);
+    $('#judgment_commission_advice_companies_documentation_minutes').requiredField(true);
+    $('#judgment_commission_advice_justification_minutes').requiredField(true);
+    $('#judgment_commission_advice_judgment_minutes').requiredField(true);
   <% end %>
 </script>
