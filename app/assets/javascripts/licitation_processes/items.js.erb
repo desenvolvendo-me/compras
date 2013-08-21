@@ -1,16 +1,41 @@
 $(document).ready(function() {
+  function isDirectPurchase() {
+    return $('#licitation_process_type_of_purchase_direct_purchase').is(':checked');
+  }
+
+  function importPurchaseSolicitationAveragePrice() {
+    var checked = $('#licitation_process_purchase_solicitation_import_option_average_price').is(':checked');
+
+    return (isDirectPurchase() && checked);
+  }
+
+  function importPurchaseSolicitationWinners() {
+    var checked = $('#licitation_process_purchase_solicitation_import_option_winners').is(':checked');
+
+    return (isDirectPurchase() && checked);
+  }
+
   function blockMaterial() {
-    var isDirectPurchase = $('#licitation_process_type_of_purchase_direct_purchase').is(':checked'),
-        typeOfRemoval = $('#licitation_process_type_of_removal').val(),
+    var typeOfRemoval = $('#licitation_process_type_of_removal').val(),
         allowedTypeOfRemoval = <%= TypeOfRemoval.allow_duplicated_items.to_json %>;
 
-   if (isDirectPurchase && (allowedTypeOfRemoval.indexOf(typeOfRemoval) >= 0)) {
+   if (isDirectPurchase() && (allowedTypeOfRemoval.indexOf(typeOfRemoval) >= 0)) {
      $('#licitation_process_material_id').removeClass('unique');
    } else {
      if ( !$('#licitation_process_material_id').hasClass('unique') ) {
        $('#licitation_process_material_id').addClass('unique');
      }
    }
+  }
+
+  function showOrHidePurchaseSolicitationOptions() {
+    var div = $("div#purchase_solicitation_import_options");
+
+    if (isDirectPurchase()) {
+      div.removeClass('hidden');
+    } else {
+      div.addClass('hidden');
+    }
   }
 
   function hasItemAlreadyAdded(item) {
@@ -32,7 +57,7 @@ $(document).ready(function() {
         itemQuantity   = new BigNumber(parsePtBrFloat( record.find('input.item-quantity').val() )),
         itemTotalValue = new BigNumber(parsePtBrFloat( record.find('input.item-total-value').val() )),
         totalQuantity  = numberWithDelimiter(parseFloat( itemQuantity.add(item.quantity) )),
-        totalValue     = numberWithDelimiter(parseFloat( itemTotalValue.add(item.estimated_total_price) ));
+        totalValue     = numberWithDelimiter(parseFloat( itemTotalValue.add(itemEstimatedTotalPrice(item)) ));
 
     record.find('input.item-quantity').val(totalQuantity);
     record.find('td.item-quantity').text(totalQuantity);
@@ -45,25 +70,43 @@ $(document).ready(function() {
     var itemBinds = {
       uuid: _.uniqueId('fresh-'),
       id: '',
-      creditor: '',
-      creditor_id: '',
+      creditor: (item.proposal_winner || ''),
+      creditor_id: (item.proposal_winner_id || ''),
       lot: '1',
       material_id: item.material_id,
       material: item.material_description,
       reference_unit: item.reference_unit,
       quantity: numberWithDelimiter(item.quantity),
-      unit_price: numberWithDelimiter(item.unit_price),
-      estimated_total_price: numberWithDelimiter(item.estimated_total_price)
+      unit_price: numberWithDelimiter(itemUnitPrice(item)),
+      estimated_total_price: numberWithDelimiter(itemEstimatedTotalPrice(item))
     };
 
     $('#items-records tbody').append( $('#licitation_process_items_template').mustache(itemBinds) )
                              .trigger("nestedGrid:afterAdd");
   }
 
-  function showHideCreditor() {
-    var isDirectPurchase = $('#licitation_process_type_of_purchase_direct_purchase').is(':checked');
+  function itemUnitPrice(item) {
+    if (importPurchaseSolicitationAveragePrice()) {
+      return item.average_proposal_unit_price;
+    } else if (importPurchaseSolicitationWinners()) {
+      return item.proposal_unit_price_winner;
+    } else {
+      return item.unit_price;
+    }
+  }
 
-    if ( isDirectPurchase ) {
+  function itemEstimatedTotalPrice(item) {
+    if (importPurchaseSolicitationAveragePrice()) {
+      return item.average_proposal_total_price;
+    } else if (importPurchaseSolicitationWinners()) {
+      return item.proposal_total_price_winner;
+    } else {
+      return item.estimated_total_price;
+    }
+  }
+
+  function showHideCreditor() {
+    if ( isDirectPurchase() ) {
       $('.item-creditor').removeClass('hidden');
       $('.justification').removeClass('hidden');
       $('#licitation_process_justification').addClass('required');
@@ -131,6 +174,11 @@ $(document).ready(function() {
 
   $('#licitation_process_type_of_purchase_direct_purchase, #licitation_process_type_of_removal').on('change', function() {
     blockMaterial();
+    showOrHidePurchaseSolicitationOptions();
+  });
+
+  $('#licitation_process_type_of_purchase_licitation').on('change', function() {
+    showOrHidePurchaseSolicitationOptions();
   });
 
   if ( $("#licitation_process_purchase_solicitation_id").val() ) {

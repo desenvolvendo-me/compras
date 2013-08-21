@@ -22,7 +22,8 @@ class LicitationProcess < Compras::Model
                   :budget_allocations_total_value, :total_value_of_items,
                   :creditor_proposals_attributes, :tied_creditor_proposals_attributes,
                   :execution_unit_responsible_id, :process_responsibles_attributes,
-                  :justification, :justification_and_legal, :process
+                  :justification, :justification_and_legal, :process,
+                  :purchase_solicitation_import_option
 
   auto_increment :process, :by => :year
   auto_increment :modality_number, :by => [:year, :modality, :type_of_removal]
@@ -42,6 +43,7 @@ class LicitationProcess < Compras::Model
   has_enumeration_for :type_of_purchase, :with => PurchaseProcessTypeOfPurchase,
     :create_helpers => true, create_scopes: true
   has_enumeration_for :type_of_removal, create_helpers: { prefix: true }
+  has_enumeration_for :purchase_solicitation_import_option
 
   belongs_to :contact, :class_name => 'Employee'
   belongs_to :judgment_form

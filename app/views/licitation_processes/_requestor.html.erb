@@ -5,6 +5,13 @@
   </div>
 </div>
 
+<div class="yui3-g hidden" id="purchase_solicitation_import_options">
+  <div class="yui3-u-1-2">
+    <%= f.input :purchase_solicitation_import_option, as: :radio_buttons, label: '',
+      item_wrapper_class: :inline, collection: PurchaseSolicitationImportOption.to_a %>
+  </div>
+</div>
+
 <input type="hidden" name="<%= f.sanitized_object_name %>[purchase_solicitation_ids][]" />
 
 <table class="records">

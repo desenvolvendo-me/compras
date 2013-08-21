@@ -1,0 +1,5 @@
+pt-BR:
+  enumerations:
+    purchase_solicitation_import_option:
+      average_price: "Importar preço médio"
+      winners: "Importar vencedores"

@@ -18,6 +18,11 @@ class PriceCollectionProposalItem < Compras::Model
     where { price_collection_item.lot.eq(lot) }
   }
 
+  scope :ranked_by_unit_price, lambda {
+    where { unit_price.gt(0) }.
+    order { unit_price }
+  }
+
   def total_price
     unit_price * (quantity || BigDecimal(0))
   end

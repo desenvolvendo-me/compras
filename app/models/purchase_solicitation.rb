@@ -30,6 +30,9 @@ class PurchaseSolicitation < Compras::Model
            :inverse_of => :purchase_solicitation,:order => :id
   has_many :purchase_solicitation_liberations, :dependent => :destroy, :order => :sequence, :inverse_of => :purchase_solicitation
 
+  has_many :price_collection_items, through: :price_collections, source: :items
+  has_many :price_collection_proposal_items, through: :price_collection_items
+
   has_one  :annul, :class_name => 'ResourceAnnul', :as => :annullable, :dependent => :destroy
 
   has_and_belongs_to_many :price_collections, join_table: :compras_price_collections_purchase_solicitations

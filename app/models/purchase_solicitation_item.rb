@@ -7,6 +7,11 @@ class PurchaseSolicitationItem < Compras::Model
   belongs_to :purchase_solicitation
   belongs_to :material
 
+  has_many :price_collection_proposal_items, through: :purchase_solicitation,
+    conditions: proc {
+      "compras_price_collection_items.material_id = #{self.material_id} and
+       compras_price_collection_proposal_items.unit_price > 0" }
+
   delegate :reference_unit, :material_characteristic,
            :to => :material, :allow_nil => true
   delegate :annulled?, :services?,
@@ -32,7 +37,31 @@ class PurchaseSolicitationItem < Compras::Model
     estimated_total_price.round(2)
   end
 
+  def average_proposal_item_price
+    @average_proposal_item_price ||= price_collection_proposal_items.average(:unit_price)
+  end
+
+  def average_proposal_total_price
+    (quantity || BigDecimal(0)) * (average_proposal_item_price || BigDecimal(0))
+  end
+
+  def proposal_total_price_winner
+    (quantity || BigDecimal(0)) * (proposal_unit_price_winner || BigDecimal(0))
+  end
+
+  def proposal_unit_price_winner
+    price_collection_proposal_winner.try(:unit_price)
+  end
+
+  def proposal_creditor_winner
+    price_collection_proposal_winner.try(:creditor)
+  end
+
   private
+
+  def price_collection_proposal_winner
+    price_collection_proposal_items.ranked_by_unit_price.first
+  end
 
   def validate_material_characteristic
     return unless material
