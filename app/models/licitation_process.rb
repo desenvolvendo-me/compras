@@ -127,6 +127,7 @@ class LicitationProcess < Compras::Model
   validate :validate_proposal_envelope_opening_date, :on => :update, :if => :licitation?
   validate :validate_the_year_to_processe_date_are_the_same, :on => :update
   validate :validate_budget_allocations_destruction
+  validate :validate_total_items
 
   with_options :allow_blank => true do |allowing_blank|
     allowing_blank.validates :year, :mask => "9999"
@@ -368,6 +369,28 @@ class LicitationProcess < Compras::Model
     return unless purchase_process_budget_allocations.any?
 
     self.budget_allocations_total_value = purchase_process_budget_allocations.reject(&:marked_for_destruction?).sum(&:value)
+  end
+
+  def validate_total_items
+    limit = ModalityLimitChooser.limit(self)
+
+    if limit
+      items.reject(&:marked_for_destruction?).group_by(&:material_class).each do |material_class, grouped_items|
+        if grouped_items.sum(&:estimated_total_price) > limit
+          message = :licitation_process_material_class_reach_to_the_limit
+          modality_type = modality_humanize
+
+          if direct_purchase?
+            message = :direct_purchase_material_class_reach_to_the_limit
+            modality_type = type_of_removal_humanize
+          end
+
+          errors.add :base, message,
+            material_class: material_class, modality: modality_type,
+            limit: ::I18n::Alchemy::NumericParser.localize(limit)
+        end
+      end
+    end
   end
 
   def validate_the_year_to_processe_date_are_the_same

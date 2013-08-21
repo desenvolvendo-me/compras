@@ -201,4 +201,237 @@ describe LicitationProcess do
       expect(LicitationProcess.by_type_of_purchase(PurchaseProcessTypeOfPurchase::LICITATION)).to include(licitation_process)
     end
   end
+
+  describe 'material class limit validation' do
+    before do
+      ModalityLimit.create!(
+        without_bidding: 8000.0,
+        invitation_letter: 80000.0,
+        taken_price: 650000.0,
+        public_competition: 99999999.99,
+        work_without_bidding: 15000.0,
+        work_invitation_letter: 150000.0,
+        work_taken_price: 1500000.0,
+        work_public_competition: 9999999.99)
+    end
+
+    context 'when is a direct_purchase' do
+      context 'when is removal_by_limit' do
+        context 'when object_type is purchase_and_services' do
+          it 'should get an error' do
+            item1 = PurchaseProcessItem.make(:item_arame,
+              quantity: 1000, unit_price: 7.0, creditor: Creditor.make!(:sobrinho))
+
+            item2 = PurchaseProcessItem.make(:item_arame_farpado,
+              quantity: 1000, unit_price: 1.2, creditor: Creditor.make!(:sobrinho))
+
+            purchase_process = LicitationProcess.make(:compra_direta,
+              type_of_removal: TypeOfRemoval::REMOVAL_BY_LIMIT,
+              object_type: PurchaseProcessObjectType::PURCHASE_AND_SERVICES,
+              items: [item1, item2])
+
+            purchase_process.valid?
+
+            expect(purchase_process.errors[:base]).to include('A classe 02.44.65.430.000 - Arames está ultrapassando o limite do tipo de afastamento Dispensa por limite (R$ 8.000,00)')
+          end
+        end
+
+        context 'when is construction_and_engineering_services' do
+          it 'should get an error' do
+            item1 = PurchaseProcessItem.make(:item_arame,
+              quantity: 1000, unit_price: 10.0, creditor: Creditor.make!(:sobrinho))
+
+            item2 = PurchaseProcessItem.make(:item_arame_farpado,
+              quantity: 1000, unit_price: 5.2, creditor: Creditor.make!(:sobrinho))
+
+            purchase_process = LicitationProcess.make(:compra_direta,
+              type_of_removal: TypeOfRemoval::REMOVAL_BY_LIMIT,
+              object_type: PurchaseProcessObjectType::CONSTRUCTION_AND_ENGINEERING_SERVICES,
+              items: [item1, item2])
+
+            purchase_process.valid?
+
+            expect(purchase_process.errors[:base]).to include('A classe 02.44.65.430.000 - Arames está ultrapassando o limite do tipo de afastamento Dispensa por limite (R$ 15.000,00)')
+          end
+        end
+
+        context 'when is not purchase_and_services neither construction_and_engineering_services' do
+          it 'should not get an error' do
+            item1 = PurchaseProcessItem.make(:item_arame,
+              quantity: 1000, unit_price: 100.0, creditor: Creditor.make!(:sobrinho))
+
+            item2 = PurchaseProcessItem.make(:item_arame_farpado,
+              quantity: 1000, unit_price: 10.2, creditor: Creditor.make!(:sobrinho))
+
+            purchase_process = LicitationProcess.make(:compra_direta,
+              type_of_removal: TypeOfRemoval::REMOVAL_BY_LIMIT,
+              object_type: PurchaseProcessObjectType::CONCESSIONS,
+              items: [item1, item2])
+
+            purchase_process.valid?
+
+            expect(purchase_process.errors[:base]).to be_empty
+          end
+        end
+      end
+
+      context 'when is not removal_by_limit' do
+        it 'should not get an error' do
+          item1 = PurchaseProcessItem.make(:item_arame,
+            quantity: 1000, unit_price: 100.0, creditor: Creditor.make!(:sobrinho))
+
+          item2 = PurchaseProcessItem.make(:item_arame_farpado,
+            quantity: 1000, unit_price: 10.2, creditor: Creditor.make!(:sobrinho))
+
+          purchase_process = LicitationProcess.make(:compra_direta,
+            type_of_removal: TypeOfRemoval::REMOVAL_JUSTIFIED,
+            object_type: PurchaseProcessObjectType::CONSTRUCTION_AND_ENGINEERING_SERVICES,
+            items: [item1, item2])
+
+          purchase_process.valid?
+
+          expect(purchase_process.errors[:base]).to be_empty
+        end
+      end
+    end
+
+    context 'when is a licitation' do
+      context 'when is an invitation' do
+        context 'when is purchase_and_services' do
+          it 'should get an error' do
+            item1 = PurchaseProcessItem.make(:item_arame,
+              quantity: 10000, unit_price: 7.0)
+
+            item2 = PurchaseProcessItem.make(:item_arame_farpado,
+              quantity: 10000, unit_price: 1.2)
+
+            purchase_process = LicitationProcess.make(:processo_licitatorio_computador,
+              modality: Modality::INVITATION,
+              object_type: PurchaseProcessObjectType::PURCHASE_AND_SERVICES,
+              items: [item1, item2])
+
+            purchase_process.valid?
+
+            expect(purchase_process.errors[:base]).to include('A classe 02.44.65.430.000 - Arames está ultrapassando o limite da modalidade Convite (R$ 80.000,00)')
+          end
+        end
+
+        context 'when is construction_and_engineering_services' do
+          it 'should get an error' do
+            item1 = PurchaseProcessItem.make(:item_arame,
+              quantity: 10000, unit_price: 10.0)
+
+            item2 = PurchaseProcessItem.make(:item_arame_farpado,
+              quantity: 10000, unit_price: 5.2)
+
+            purchase_process = LicitationProcess.make(:processo_licitatorio_computador,
+              modality: Modality::INVITATION,
+              object_type: PurchaseProcessObjectType::CONSTRUCTION_AND_ENGINEERING_SERVICES,
+              items: [item1, item2])
+
+            purchase_process.valid?
+
+            expect(purchase_process.errors[:base]).to include('A classe 02.44.65.430.000 - Arames está ultrapassando o limite da modalidade Convite (R$ 150.000,00)')
+          end
+        end
+
+        context 'when is not construction_and_engineering_services neither purchase_and_services' do
+          it 'should not get an error' do
+            item1 = PurchaseProcessItem.make(:item_arame,
+              quantity: 10000, unit_price: 10.0)
+
+            item2 = PurchaseProcessItem.make(:item_arame_farpado,
+              quantity: 10000, unit_price: 5.2)
+
+            purchase_process = LicitationProcess.make(:processo_licitatorio_computador,
+              modality: Modality::INVITATION,
+              object_type: PurchaseProcessObjectType::DISPOSALS_OF_ASSETS,
+              items: [item1, item2])
+
+            purchase_process.valid?
+
+            expect(purchase_process.errors[:base]).to be_empty
+          end
+        end
+      end
+
+      context 'when is an taken_price' do
+        context 'when is purchase_and_services' do
+          it 'should get an error' do
+            item1 = PurchaseProcessItem.make(:item_arame,
+              quantity: 10000, unit_price: 60.0)
+
+            item2 = PurchaseProcessItem.make(:item_arame_farpado,
+              quantity: 10000, unit_price: 5.2)
+
+            purchase_process = LicitationProcess.make(:processo_licitatorio_computador,
+              modality: Modality::TAKEN_PRICE,
+              object_type: PurchaseProcessObjectType::PURCHASE_AND_SERVICES,
+              items: [item1, item2])
+
+            purchase_process.valid?
+
+            expect(purchase_process.errors[:base]).to include('A classe 02.44.65.430.000 - Arames está ultrapassando o limite da modalidade Tomada de Preço (R$ 650.000,00)')
+          end
+        end
+
+        context 'when is construction_and_engineering_services' do
+          it 'should get an error' do
+            item1 = PurchaseProcessItem.make(:item_arame,
+              quantity: 100000, unit_price: 10.0)
+
+            item2 = PurchaseProcessItem.make(:item_arame_farpado,
+              quantity: 100000, unit_price: 5.1)
+
+            purchase_process = LicitationProcess.make(:processo_licitatorio_computador,
+              modality: Modality::TAKEN_PRICE,
+              object_type: PurchaseProcessObjectType::CONSTRUCTION_AND_ENGINEERING_SERVICES,
+              items: [item1, item2])
+
+            purchase_process.valid?
+
+            expect(purchase_process.errors[:base]).to include('A classe 02.44.65.430.000 - Arames está ultrapassando o limite da modalidade Tomada de Preço (R$ 1.500.000,00)')
+          end
+        end
+
+        context 'when is not construction_and_engineering_services neither purchase_and_services' do
+          it 'should not get an error' do
+            item1 = PurchaseProcessItem.make(:item_arame,
+              quantity: 100000, unit_price: 100.0)
+
+            item2 = PurchaseProcessItem.make(:item_arame_farpado,
+              quantity: 100000, unit_price: 50.2)
+
+            purchase_process = LicitationProcess.make(:processo_licitatorio_computador,
+              modality: Modality::TAKEN_PRICE,
+              object_type: PurchaseProcessObjectType::DISPOSALS_OF_ASSETS,
+              items: [item1, item2])
+
+            purchase_process.valid?
+
+            expect(purchase_process.errors[:base]).to be_empty
+          end
+        end
+      end
+
+      context 'when is not an taken_price neither invitation' do
+        it 'should not get an error' do
+          item1 = PurchaseProcessItem.make(:item_arame,
+            quantity: 100000, unit_price: 100.0)
+
+          item2 = PurchaseProcessItem.make(:item_arame_farpado,
+            quantity: 100000, unit_price: 50.2)
+
+          purchase_process = LicitationProcess.make(:processo_licitatorio_computador,
+            modality: Modality::TRADING,
+            object_type: PurchaseProcessObjectType::PURCHASE_AND_SERVICES,
+            items: [item1, item2])
+
+          purchase_process.valid?
+
+          expect(purchase_process.errors[:base]).to be_empty
+        end
+      end
+    end
+  end
 end

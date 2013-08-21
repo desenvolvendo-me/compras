@@ -31,7 +31,9 @@ require 'app/models/purchase_process_creditor_disqualification'
 require 'app/models/purchase_process_trading'
 require 'app/models/process_responsible'
 require 'app/models/realignment_price'
+require 'app/models/modality_limit'
 require 'app/business/purchase_process_proposal_envelope_opening_date_calculator'
+require 'app/business/modality_limit_chooser'
 
 describe LicitationProcess do
   let(:current_prefecture) { double(:current_prefecture) }
