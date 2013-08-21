@@ -23,6 +23,8 @@ feature "Prefecture" do
     fill_in 'Tipo do órgão', with: "02"
     check 'Permitir inserir processos passados?'
 
+    expect(page).to have_checked_field 'Controla fracionamento?'
+
     click_button 'Salvar'
 
     expect(page).to have_notice 'Organização criada com sucesso.'
@@ -39,6 +41,7 @@ feature "Prefecture" do
     expect(page).to have_field 'Código do órgão', :with => '98'
     expect(page).to have_field 'Tipo do órgão', :with => '02'
     expect(page).to have_checked_field 'Permitir inserir processos passados?'
+    expect(page).to have_checked_field 'Controla fracionamento?'
 
     fill_in 'Nome', :with => 'Prefeitura Municipal de Toledo'
     fill_in 'Telefone', :with => '(45) 3378-1785'
@@ -47,6 +50,7 @@ feature "Prefecture" do
     fill_in 'Responsável', :with => 'Prefeito de Toledo'
     attach_file 'Logo', "#{Rails.root}/spec/fixtures/example_of_image.gif"
     check 'Permitir inserir processos passados?'
+    uncheck 'Controla fracionamento?'
 
     click_button 'Salvar'
 
@@ -64,6 +68,7 @@ feature "Prefecture" do
     expect(page).to have_field 'E-mail', :with => 'toledo@toledo.com.br'
     expect(page).to have_field 'Responsável', :with => 'Prefeito de Toledo'
     expect(page).to have_checked_field 'Permitir inserir processos passados?'
+    expect(page).to have_unchecked_field 'Controla fracionamento?'
 
     uncheck 'Permitir inserir processos passados?'
 

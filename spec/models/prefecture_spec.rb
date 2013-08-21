@@ -13,4 +13,5 @@ describe Prefecture do
   it { should delegate(:tce_mg_code).to(:city).allowing_nil(true) }
   it { should delegate(:organ_code).to(:extended_prefecture).allowing_nil(true) }
   it { should delegate(:organ_kind).to(:extended_prefecture).allowing_nil(true) }
+  it { should delegate(:control_fractionation).to(:extended_prefecture).allowing_nil(true) }
 end

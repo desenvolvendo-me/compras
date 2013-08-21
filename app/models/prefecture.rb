@@ -12,7 +12,8 @@ class Prefecture < Unico::Prefecture
   delegate :city, :state, :to => :address, :allow_nil => true
   delegate :id, :to => :state, :allow_nil => true, :prefix => true
   delegate :tce_mg_code, to: :city, allow_nil: true
-  delegate :organ_code, :organ_kind, to: :extended_prefecture, allow_nil: true
+  delegate :organ_code, :organ_kind, :control_fractionation,
+    to: :extended_prefecture, allow_nil: true
 
   filterize
   orderize

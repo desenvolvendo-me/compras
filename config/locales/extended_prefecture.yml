@@ -9,3 +9,4 @@ pt-BR:
       extended_prefecture:
         organ_code: "Código do órgão"
         organ_kind: "Tipo do órgão"
+        control_fractionation: "Controla fracionamento?"
