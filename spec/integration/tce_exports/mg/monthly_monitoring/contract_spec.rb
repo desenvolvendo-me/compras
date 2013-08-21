@@ -41,6 +41,12 @@ describe TceExport::MG::MonthlyMonitoring::ContractGenerator, vcr: { cassette_na
         bidders: [Bidder.make!(:licitante)])
     end
 
+    let(:direct_purchase) do
+      LicitationProcess.make!(:compra_direta,
+        type_of_removal: TypeOfRemoval::REMOVAL_BY_LIMIT,
+        bidders: [])
+    end
+
     let(:creditor_proposal) do
       PurchaseProcessCreditorProposal.make!(:proposta_arame, licitation_process: licitation_process)
     end
@@ -67,6 +73,10 @@ describe TceExport::MG::MonthlyMonitoring::ContractGenerator, vcr: { cassette_na
 
         contract = Contract.make!(:primeiro_contrato, signature_date: signature_date,
           end_date: end_date, licitation_process: licitation_process,
+          creditors: [creditor_sobrinho, creditor_wenderson], consortium_agreement: true)
+
+        contract_two = Contract.make!(:primeiro_contrato, signature_date: signature_date,
+          end_date: end_date, licitation_process: direct_purchase,
           creditors: [creditor_sobrinho, creditor_wenderson], consortium_agreement: true)
 
         ContractTermination.make!(:contrato_rescindido, contract: contract)

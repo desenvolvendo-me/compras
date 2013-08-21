@@ -47,6 +47,7 @@ module TceExport::MG
 
       def query
         Contract.by_signature_date(monthly_monitoring.date.beginning_of_month..monthly_monitoring.date.end_of_month)
+          .except_by_type_of_removal(TypeOfRemoval::REMOVAL_BY_LIMIT)
           .order(:id)
       end
 
