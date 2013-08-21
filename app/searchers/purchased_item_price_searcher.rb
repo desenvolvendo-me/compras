@@ -4,8 +4,8 @@ class PurchasedItemPriceSearcher
   repository LicitationProcessRatificationItem
 
   def licitation_process_id(licitation_process_id)
-    joins { licitation_process }.
-    where { licitation_process.id.eq(licitation_process_id) }
+    joins { licitation_process_ratification.licitation_process }.
+    where { licitation_process_ratification.licitation_process_id.eq(licitation_process_id) }
   end
 
   def material_id(id)
@@ -19,13 +19,13 @@ class PurchasedItemPriceSearcher
   end
 
   def type_of_purchase(purchase)
-    joins { licitation_process }.
-    where { licitation_process.type_of_purchase.eq purchase }
+    joins { licitation_process_ratification.licitation_process }.
+    where { licitation_process_ratification.licitation_process.type_of_purchase.eq purchase }
   end
 
   def modality(modality_param)
-    joins { licitation_process }.
-    where { licitation_process.modality.eq modality_param }
+    joins { licitation_process_ratification.licitation_process }.
+    where { licitation_process_ratification.licitation_process.modality.eq modality_param }
   end
 
   def between_dates(dates_range)

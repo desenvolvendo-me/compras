@@ -30,6 +30,14 @@ class PurchasedItemPriceReport < Report
     true
   end
 
+  def start_date
+    @start_date ||= I18n.l(Date.today.at_beginning_of_month)
+  end
+
+  def end_date
+    @end_date ||= I18n.l(Date.today.at_end_of_month)
+  end
+
   private
 
   def normalize_attributes
