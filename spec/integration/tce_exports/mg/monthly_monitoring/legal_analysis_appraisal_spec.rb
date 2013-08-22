@@ -32,6 +32,10 @@ describe TceExport::MG::MonthlyMonitoring::LegalAnalysisAppraisalGenerator, vcr:
       LicitationProcess.make!(:processo_licitatorio_computador)
     end
 
+    let :direct_purchase do
+      LicitationProcess.make!(:compra_direta, process: 1)
+    end
+
     let(:sobrinho) { Employee.make!(:sobrinho) }
     let(:wenderson) { Employee.make!(:wenderson) }
     let(:emissao_edital) { StageProcess.make!(:emissao_edital) }
@@ -46,8 +50,22 @@ describe TceExport::MG::MonthlyMonitoring::LegalAnalysisAppraisalGenerator, vcr:
         adjudication_date: Date.new(2013, 5, 13)
       )
 
+      LicitationProcessRatification.make!(:processo_licitatorio_computador,
+        licitation_process: direct_purchase,
+        ratification_date: Date.new(2013, 5, 13),
+        adjudication_date: Date.new(2013, 5, 13)
+      )
+
       LegalAnalysisAppraisal.create!(
         licitation_process_id: licitation_process.id,
+        responsible_id: sobrinho.id,
+        appraisal_expedition_date: Date.new(2013, 5, 13),
+        appraisal_type: AppraisalType::TECHNICAL,
+        reference: AppraisalReference::DRAFT
+      )
+
+      LegalAnalysisAppraisal.create!(
+        licitation_process_id: direct_purchase.id,
         responsible_id: sobrinho.id,
         appraisal_expedition_date: Date.new(2013, 5, 13),
         appraisal_type: AppraisalType::TECHNICAL,

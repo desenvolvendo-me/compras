@@ -26,7 +26,7 @@ module TceExport::MG
       private
 
       def query
-        LegalAnalysisAppraisal.
+        LegalAnalysisAppraisal.by_licitation.
           by_ratification_month_and_year(monthly_monitoring.month, monthly_monitoring.year).
           uniq
       end
