@@ -45,7 +45,7 @@ class Contract < Compras::Model
 
   delegate :execution_type_humanize, :contract_guarantees_humanize, :contract_guarantees,
     :to => :licitation_process, :allow_nil => true
-  delegate :modality_humanize, :process, :execution_unit_responsible, :year, :type_of_removal_humanize,
+  delegate :budget_allocations_ids, :modality_humanize, :process, :execution_unit_responsible, :year, :type_of_removal_humanize,
     :to => :licitation_process, :allow_nil => true, :prefix => true
 
   validates :year, :mask => "9999", :allow_blank => true

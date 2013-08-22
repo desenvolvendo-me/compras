@@ -37,6 +37,7 @@ describe Contract do
     expect(subject.to_s).to eq '001'
   end
 
+  it { should delegate(:budget_allocations_ids).to(:licitation_process).allowing_nil(true).prefix(true) }
   it { should delegate(:modality_humanize).to(:licitation_process).allowing_nil(true).prefix(true) }
   it { should delegate(:type_of_removal_humanize).to(:licitation_process).allowing_nil(true).prefix(true) }
 
