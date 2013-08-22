@@ -37,6 +37,18 @@ class LicitationProcessRatificationItem < Compras::Model
 
   scope :by_ratificated, -> { where { ratificated.eq(true) } }
 
+  scope :by_licitation, -> { joins { licitation_process }.
+    where { licitation_process.type_of_purchase.eq(PurchaseProcessTypeOfPurchase::LICITATION)}
+  }
+
+  scope :by_ratification_month_and_year, lambda { |month, year|
+    joins { licitation_process_ratification }.
+    where(%{
+      extract(month from compras_licitation_process_ratifications.ratification_date) = ? AND
+      extract(year from compras_licitation_process_ratifications.ratification_date) = ?},
+      month, year)
+  }
+
   orderize "id DESC"
   filterize
 
