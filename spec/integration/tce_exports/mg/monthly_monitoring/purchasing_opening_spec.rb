@@ -39,10 +39,17 @@ describe TceExport::MG::MonthlyMonitoring::PurchaseOpeningGenerator, vcr: { cass
         purchase_process_budget_allocations: [purchase_process_budget_allocation],
         authorization_envelope_opening_date: Date.new(2013, 5, 20))
 
+      direct_purchase = LicitationProcess.make!(:compra_direta, process: 1,
+        authorization_envelope_opening_date: Date.new(2013, 5, 20))
+
       item = licitation.items.first
 
       LicitationProcessRatification.make!(:processo_licitatorio_computador,
         licitation_process: licitation,
+        ratification_date: Date.new(2013, 5, 23))
+
+      LicitationProcessRatification.make!(:processo_licitatorio_computador,
+        licitation_process: direct_purchase,
         ratification_date: Date.new(2013, 5, 23))
 
       described_class.generate_file(monthly_monitoring)

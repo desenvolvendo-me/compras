@@ -192,6 +192,10 @@ class LicitationProcess < Compras::Model
     where { type_of_removal.not_eq TypeOfRemoval::REMOVAL_BY_LIMIT }
   end
 
+  scope :by_type_of_purchase, -> (type_of_purchase) do
+    where { |query| query.type_of_purchase.eq type_of_purchase }
+  end
+
   scope :ratified, lambda {
     joins { licitation_process_ratifications }.uniq
   }
