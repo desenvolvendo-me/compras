@@ -209,6 +209,10 @@ class LicitationProcess < Compras::Model
     "#{modality_number} - #{modality_humanize || type_of_removal_humanize}"
   end
 
+  def modality_or_type_of_removal_humanized
+    modality_humanize || type_of_removal_humanize
+  end
+
   def creditors
     if direct_purchase?
       items_creditors
@@ -464,9 +468,5 @@ class LicitationProcess < Compras::Model
 
   def update_purchase_solicitation_to_liberated(purchase_solicitation)
     purchase_solicitation.liberate! if valid?
-  end
-
-  def modality_or_type_of_removal_humanized
-    modality_humanize || type_of_removal_humanize
   end
 end

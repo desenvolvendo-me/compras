@@ -343,7 +343,7 @@ feature 'Report::PurchasedItemPrices' do
 
     within 'table.records:nth-child(2)' do
       expect(page).to have_content 'Processo de compra'
-      expect(page).to have_content '2/2013 - Concorrência 1'
+      expect(page).to have_content '2/2013 - Dispensa justificadas 1'
     end
 
     within 'table.records:nth-child(3)' do
@@ -370,7 +370,7 @@ feature 'Report::PurchasedItemPrices' do
 
     within '.report-records' do
       expect(page).to have_content 'Wenderson Malheiros'
-      expect(page).to have_content '2/2013 - Concorrência 1'
+      expect(page).to have_content '2/2013 - Dispensa justificadas 1'
 
       within 'tbody tr:nth-child(1)' do
         expect(page).to have_content '01.01.00001 - Antivirus'
