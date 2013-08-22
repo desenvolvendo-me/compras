@@ -34,13 +34,19 @@ describe TceExport::MG::MonthlyMonitoring::LicitationJudgmentGenerator, vcr: { c
         FactoryGirl.create(:extended_prefecture, prefecture: prefecture)
 
         creditor = Creditor.make!(:wenderson_sa)
+        creditor_sobrinho = Creditor.make!(:sobrinho_sa)
 
         bidder = Bidder.make(:licitante, creditor: creditor)
+        bidder_sobrinho = Bidder.make(:licitante, creditor: creditor_sobrinho)
 
         licitation_process = LicitationProcess.make(:pregao_presencial,
           bidders: [bidder])
 
+        direct_purchase = LicitationProcess.make(:compra_direta,
+          bidders: [bidder_sobrinho])
+
         JudgmentCommissionAdvice.make!(:parecer, licitation_process: licitation_process)
+        JudgmentCommissionAdvice.make!(:parecer, licitation_process: direct_purchase)
 
         PurchaseProcessAccreditation.make!(:general_accreditation,
           licitation_process: licitation_process)
@@ -49,6 +55,10 @@ describe TceExport::MG::MonthlyMonitoring::LicitationJudgmentGenerator, vcr: { c
 
         proposal = PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado,
           licitation_process: licitation_process,
+          item: item)
+
+        PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado,
+          licitation_process: direct_purchase,
           item: item)
 
         item_2 = PurchaseProcessItem.make!(:item_arame)

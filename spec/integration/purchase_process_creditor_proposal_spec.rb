@@ -18,6 +18,10 @@ describe PurchaseProcessCreditorProposal do
       bidders: [bidder_nohup, bidder_ibm])
   end
 
+  let :direct_purchase do
+    LicitationProcess.make!(:compra_direta, bidders: [bidder_nohup, bidder_ibm])
+  end
+
   let(:proposta_arame_ibm) do
     PurchaseProcessCreditorProposal.make!(:proposta_arame,
       licitation_process: licitation_process, creditor: bidder_ibm.creditor,
@@ -27,6 +31,12 @@ describe PurchaseProcessCreditorProposal do
   let(:proposta_arame_nohup) do
     PurchaseProcessCreditorProposal.make!(:proposta_arame,
       licitation_process: licitation_process, creditor: bidder_nohup.creditor,
+      unit_price: 105.00)
+  end
+
+  let(:proposta_arame_nohup_direct_purchase) do
+    PurchaseProcessCreditorProposal.make!(:proposta_arame,
+      licitation_process: direct_purchase, creditor: bidder_nohup.creditor,
       unit_price: 105.00)
   end
 
@@ -152,4 +162,10 @@ describe PurchaseProcessCreditorProposal do
     end
   end
 
+  describe '#by_licitation' do
+    it 'should return all proposals by licitation' do
+      expect(PurchaseProcessCreditorProposal.by_licitation).to include(proposta_arame_nohup, proposta_arame_ibm)
+      expect(PurchaseProcessCreditorProposal.by_licitation).to_not include(proposta_arame_nohup_direct_purchase)
+    end
+  end
 end
