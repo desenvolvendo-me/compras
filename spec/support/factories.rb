@@ -65,6 +65,17 @@ FactoryGirl.define do
     has_children false
   end
 
+  factory :modality_limit do
+    without_bidding 8000.0
+    invitation_letter 80000.0
+    taken_price 650000.0
+    public_competition 99999999.99
+    work_without_bidding 15000.0
+    work_invitation_letter 150000.0
+    work_taken_price 1500000.0
+    work_public_competition 9999999.99
+  end
+
   factory :street_type do
     acronym 'RUA'
     name    'Rua'
