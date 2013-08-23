@@ -32,6 +32,7 @@ require 'app/models/purchase_process_trading'
 require 'app/models/process_responsible'
 require 'app/models/realignment_price'
 require 'app/models/modality_limit'
+require 'app/models/purchase_process_fractionation'
 require 'app/business/purchase_process_proposal_envelope_opening_date_calculator'
 require 'app/business/modality_limit_chooser'
 
@@ -93,6 +94,7 @@ describe LicitationProcess do
   it { should have_many(:trading_items).through(:trading) }
   it { should have_many(:trading_item_bids).through(:trading_items) }
   it { should have_many(:trading_item_negotiations).through(:trading_items) }
+  it { should have_many(:fractionations).dependent(:destroy) }
 
   it { should have_one(:judgment_commission_advice).dependent(:restrict) }
   it { should have_one(:purchase_process_accreditation).dependent(:restrict) }
@@ -1080,6 +1082,18 @@ describe LicitationProcess do
           expect(subject.errors[:base]).to include('Dotação allocation não pode ser apagada pois já está em uso')
         end
       end
+    end
+  end
+
+  describe '#destroy_fractionations!' do
+    it 'should destroy all fractionations' do
+      fractionations = double(:fractionations)
+
+      subject.stub(fractionations: fractionations)
+
+      fractionations.should_receive(:destroy_all)
+
+      subject.destroy_fractionations!
     end
   end
 end

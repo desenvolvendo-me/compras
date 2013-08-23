@@ -335,6 +335,9 @@ pt-BR:
       already_reserved_or_pledged: "já está reservada ou empenhada"
       licitation_process_material_class_reach_to_the_limit: "A classe %{material_class} está ultrapassando o limite da modalidade %{modality} (R$ %{limit})"
       direct_purchase_material_class_reach_to_the_limit: "A classe %{material_class} está ultrapassando o limite do tipo de afastamento %{modality} (R$ %{limit})"
+      fractionation_warning_message:
+        one: "O material %{materials} está caracterizando possível fracionamento."
+        other: "Os materiais %{materials} estão caracterizando possível fracionamento."
 
   activerecord:
     errors:

@@ -46,7 +46,35 @@ class LicitationProcessesController < CrudController
       object.year = object.process_date_year
       object.status = PurchaseProcessStatus::WAITING_FOR_OPEN
 
-      super
+      if super
+        PurchaseProcessFractionationCreator.create!(object)
+
+        fractionation_warning(object)
+
+        true
+      end
+    end
+  end
+
+  def update_resource(object, attributes)
+    if super
+      object.transaction do
+        PurchaseProcessFractionationCreator.create!(object)
+
+        fractionation_warning(object)
+
+        return true
+      end
+    end
+
+    false
+  end
+
+  def fractionation_warning(object)
+    warning = PurchaseProcessFractionationWarning.message(object)
+
+    if warning
+      flash[:alert] = warning
     end
   end
 end

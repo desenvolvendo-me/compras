@@ -1,0 +1,15 @@
+pt-BR:
+  activerecord:
+    models:
+      purchase_process_fractionation:
+        one: "Controle de Fracionamento de Despesa"
+        other: "Controle de Fracionamentos de Despesas"
+
+    attributes:
+      purchase_process_fractionation:
+        material_class: "Classe de material"
+        modality: "Modalidade"
+        object_type: "Tipo do objeto"
+        purchase_process: "Processo de compra"
+        type_of_removal: "Tipo do afastamento"
+        year: "Ano"

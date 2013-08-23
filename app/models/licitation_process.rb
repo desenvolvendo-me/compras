@@ -84,6 +84,8 @@ class LicitationProcess < Compras::Model
   has_many :trading_item_bids, through: :trading_items, source: :bids, order: :id
   has_many :trading_item_negotiations, through: :trading_items, source: :negotiation, order: :id
   has_many :contracts, dependent: :restrict
+  has_many :fractionations, class_name: 'PurchaseProcessFractionation', dependent: :destroy,
+    foreign_key: :purchase_process_id
 
   has_one :judgment_commission_advice, :dependent => :restrict
   has_one :purchase_process_accreditation, :dependent => :restrict
@@ -355,6 +357,10 @@ class LicitationProcess < Compras::Model
         by_purchase_process_id: id,
         without_pledge: true
       })
+  end
+
+  def destroy_fractionations!
+    fractionations.destroy_all
   end
 
   protected
