@@ -33,3 +33,8 @@ pt-BR:
     purchase_solicitation_report:
       one: 'Relatório de solicitação de compra emitida'
       one: 'Relatório de solicitações de compras emitidas'
+
+  purchased_item_price_reports:
+    purchased_item_price_report:
+      one: 'Relatório de valor praticado por item'
+      one: 'Relatório de valores praticados por itens'

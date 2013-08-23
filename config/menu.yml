@@ -74,3 +74,4 @@ menu:
   - "Relatórios":
     - report_purchase_process_ratifications_by_periods
     - report_purchase_solicitations
+    - report_purchased_item_prices

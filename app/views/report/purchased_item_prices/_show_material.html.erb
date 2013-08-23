@@ -1,0 +1,23 @@
+<% resource.records.group_by { |r| resource.group_by_material r }.each do |material, items| %>
+  <h2><%= material %></h2>
+
+  <% items.group_by { |i| resource.group_by_licitation i }.each do |licitation, items| %>
+    <h3><%= licitation %></h3>
+
+    <table class="records">
+      <thead>
+        <th>Fornecedor</th>
+        <th>Valor Unitário</th>
+      </thead>
+
+      <tbody>
+        <% items.each do |item| %>
+          <tr>
+            <td><%= item.creditor %></td>
+            <td><%= number_to_currency item.unit_price %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+<% end %>
