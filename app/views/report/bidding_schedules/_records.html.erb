@@ -1,0 +1,25 @@
+<table class="records">
+  <thead>
+    <tr>
+      <th>Data do Julgamento</th>
+      <th>Hora</th>
+      <th>N˚ Processo</th>
+      <th>Modalidade</th>
+      <th>Objeto</th>
+      <th>Cotação Global do Processo</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% report.records.each do |record| %>
+      <tr>
+        <td><%= record.decorator.proposal_envelope_opening_date %></td>
+        <td><%= record.decorator.proposal_envelope_opening_time %></td>
+        <td><%= "#{record.process}/#{record.year}" %></td>
+        <td><%= record.modality_humanize %></td>
+        <td><%= record.description %></td>
+        <td><%= record.decorator.budget_allocations_total_value %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

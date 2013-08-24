@@ -93,6 +93,7 @@ module Compras
 
       # javascript files
       'bidders.js',
+      'bidding_schedules.js',
       'contracts.js',
       'creditor_proposal_benefited_tieds.js',
       'employees.js',

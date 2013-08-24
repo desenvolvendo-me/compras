@@ -1,0 +1,29 @@
+$(document).ready(function() {
+  $('#bidding_schedule_report_object_type').on('change', function(){
+    filterModalities($(this).val());
+  });
+
+  function filterModalities(objectType) {
+    var modalitiesByObjectType = <%= Modality.by_object_type.to_json.html_safe %>,
+    validGroup             = _(modalitiesByObjectType[objectType]),
+    currentModality        = $("#current_modality_id").val();
+
+    $("#bidding_schedule_report_modality").empty();
+
+    $("#bidding_schedule_report_modality").append(function() {
+      return $("<option>").text('').val('');
+    });
+
+    if (!validGroup.isUndefined() && !validGroup.isEmpty()){
+      validGroup.each(function(modality) {
+        $("#bidding_schedule_report_modality").append(function() {
+          if (modality[1] == currentModality) {
+            return $("<option>").text(modality[0]).val(modality[1]).attr('selected', 'selected');
+          } else {
+            return $("<option>").text(modality[0]).val(modality[1]);
+          }
+        });
+      });
+    }
+  }
+});
