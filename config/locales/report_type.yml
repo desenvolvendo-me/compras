@@ -1,5 +1,5 @@
 pt-BR:
   enumerations:
-    type_report:
+    report_type:
       analytical: "Analítico"
       synthetic: 'Sintético'

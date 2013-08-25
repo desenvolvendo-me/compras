@@ -1,12 +1,12 @@
 class PurchaseSolicitationReport < Report
   attr_accessor :budget_structure, :budget_structure_id, :kind, :status, :material,
-    :material_id, :start_date, :end_date, :type_report
+    :material_id, :start_date, :end_date, :report_type
 
   has_enumeration_for :kind, :with => PurchaseSolicitationKind
   has_enumeration_for :status, :with => PurchaseSolicitationServiceStatus
-  has_enumeration_for :type_report, create_helpers: true
+  has_enumeration_for :report_type, create_helpers: true
 
-  validates :start_date, :end_date, :type_report, :presence => true
+  validates :start_date, :end_date, :report_type, :presence => true
 
   def records_grouped
     records.
