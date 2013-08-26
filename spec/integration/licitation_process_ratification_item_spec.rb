@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe LicitationProcessRatificationItem do
-  describe '#by_licitation' do
+  describe '#type_of_purchase_licitation' do
     it 'should return all proposals by licitation' do
       licitation_process = LicitationProcess.make!(:processo_licitatorio)
       direct_purchase = LicitationProcess.make!(:compra_direta)
@@ -29,8 +29,8 @@ describe LicitationProcessRatificationItem do
         licitation_process_ratification: ratification_direct_purchase,
         purchase_process_creditor_proposal: proposal_arame_farpado_direct_purchase)
 
-      expect(LicitationProcessRatificationItem.by_licitation).to include(ratification_item)
-      expect(LicitationProcessRatificationItem.by_licitation).to_not include(ratification_item_two)
+      expect(LicitationProcessRatificationItem.type_of_purchase_licitation).to include(ratification_item)
+      expect(LicitationProcessRatificationItem.type_of_purchase_licitation).to_not include(ratification_item_two)
     end
   end
 end

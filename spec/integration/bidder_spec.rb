@@ -18,7 +18,7 @@ describe Bidder do
     end
   end
 
-  describe '.by_licitation' do
+  describe '.type_of_purchase_licitation' do
     it 'should return only bidders in licitation' do
       licitation_process = LicitationProcess.make!(:processo_licitatorio)
       direct_purchase = LicitationProcess.make!(:compra_direta)
@@ -28,8 +28,8 @@ describe Bidder do
       licitante_com_proposta_3 = Bidder.make!(:licitante_com_proposta_3, licitation_process: direct_purchase)
       me_pregao = Bidder.make!(:me_pregao, licitation_process: licitation_process)
 
-      expect(Bidder.by_licitation).to include(licitante, me_pregao)
-      expect(Bidder.by_licitation).to_not include(licitante_sobrinho, licitante_com_proposta_3)
+      expect(Bidder.type_of_purchase_licitation).to include(licitante, me_pregao)
+      expect(Bidder.type_of_purchase_licitation).to_not include(licitante_sobrinho, licitante_com_proposta_3)
     end
   end
 

@@ -37,7 +37,7 @@ class LicitationProcessRatificationItem < Compras::Model
 
   scope :by_ratificated, -> { where { ratificated.eq(true) } }
 
-  scope :by_licitation, -> { joins { licitation_process }.
+  scope :type_of_purchase_licitation, -> { joins { licitation_process }.
     where { licitation_process.type_of_purchase.eq(PurchaseProcessTypeOfPurchase::LICITATION)}
   }
 

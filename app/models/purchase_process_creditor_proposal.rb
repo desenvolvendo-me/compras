@@ -48,8 +48,9 @@ class PurchaseProcessCreditorProposal < Compras::Model
     where { |proposal| proposal.licitation_process_id.eq(licitation_process_id) }
   }
 
-  scope :by_licitation, joins { licitation_process }.
+  scope :type_of_purchase_licitation, -> { joins { licitation_process }.
     where { licitation_process.type_of_purchase.eq(PurchaseProcessTypeOfPurchase::LICITATION) }
+  }
 
   scope :creditor_id, lambda { |creditor_id|
     where { |proposal| proposal.creditor_id.eq(creditor_id) }

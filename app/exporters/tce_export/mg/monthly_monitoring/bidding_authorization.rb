@@ -90,7 +90,7 @@ module TceExport::MG
       private
 
       def query
-        Bidder.by_licitation.enabled.by_ratification_month_and_year(monthly_monitoring.month, monthly_monitoring.year).order(:id).uniq
+        Bidder.type_of_purchase_licitation.enabled.by_ratification_month_and_year(monthly_monitoring.month, monthly_monitoring.year).order(:id).uniq
       end
 
       def generate_parners(bidder)

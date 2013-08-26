@@ -22,7 +22,7 @@ describe LegalAnalysisAppraisal do
         reference: AppraisalReference::DRAFT
       )
 
-    expect(LegalAnalysisAppraisal.by_licitation).to include(legal_analysis_appraisal)
-    expect(LegalAnalysisAppraisal.by_licitation).to_not include(legal_analysis_appraisal_two)
+    expect(LegalAnalysisAppraisal.type_of_purchase_licitation).to include(legal_analysis_appraisal)
+    expect(LegalAnalysisAppraisal.type_of_purchase_licitation).to_not include(legal_analysis_appraisal_two)
   end
 end

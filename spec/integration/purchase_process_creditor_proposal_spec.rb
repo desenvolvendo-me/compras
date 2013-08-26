@@ -162,10 +162,10 @@ describe PurchaseProcessCreditorProposal do
     end
   end
 
-  describe '#by_licitation' do
+  describe '#type_of_purchase_licitation' do
     it 'should return all proposals by licitation' do
-      expect(PurchaseProcessCreditorProposal.by_licitation).to include(proposta_arame_nohup, proposta_arame_ibm)
-      expect(PurchaseProcessCreditorProposal.by_licitation).to_not include(proposta_arame_nohup_direct_purchase)
+      expect(PurchaseProcessCreditorProposal.type_of_purchase_licitation).to include(proposta_arame_nohup, proposta_arame_ibm)
+      expect(PurchaseProcessCreditorProposal.type_of_purchase_licitation).to_not include(proposta_arame_nohup_direct_purchase)
     end
   end
 end

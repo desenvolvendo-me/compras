@@ -80,7 +80,7 @@ class Contract < Compras::Model
     where { |query| query.licitation_process_id.eq(purchase_process_id) }
   end
 
-  scope :except_by_type_of_removal, ->(type_of_removal) do
+  scope :except_type_of_removal, ->(type_of_removal) do
     joins { licitation_process }.
     where { licitation_process.type_of_removal.not_eq(type_of_removal) |
       licitation_process.type_of_removal.eq(nil)

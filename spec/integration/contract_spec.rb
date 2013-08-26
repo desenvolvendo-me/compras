@@ -12,8 +12,8 @@ describe Contract do
 
       contract_two = Contract.make!(:primeiro_contrato, licitation_process: direct_purchase)
 
-      expect(Contract.except_by_type_of_removal(TypeOfRemoval::REMOVAL_BY_LIMIT)).to include(contract_one)
-      expect(Contract.except_by_type_of_removal(TypeOfRemoval::REMOVAL_BY_LIMIT)).to_not include(contract_two)
+      expect(Contract.except_type_of_removal(TypeOfRemoval::REMOVAL_BY_LIMIT)).to include(contract_one)
+      expect(Contract.except_type_of_removal(TypeOfRemoval::REMOVAL_BY_LIMIT)).to_not include(contract_two)
     end
   end
 end

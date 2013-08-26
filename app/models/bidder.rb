@@ -83,8 +83,9 @@ class Bidder < Compras::Model
     uniq
   }
 
-  scope :by_licitation, joins { licitation_process }.
+  scope :type_of_purchase_licitation, -> { joins { licitation_process }.
     where { licitation_process.type_of_purchase.eq(PurchaseProcessTypeOfPurchase::LICITATION) }
+  }
 
   def destroy_all_classifications
     licitation_process_classifications.destroy_all

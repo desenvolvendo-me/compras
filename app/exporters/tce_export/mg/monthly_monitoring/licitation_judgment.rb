@@ -39,10 +39,10 @@ module TceExport::MG
       attr_reader :last_process
 
       def query
-        items = PurchaseProcessCreditorProposal.by_licitation.by_ratification_month_and_year(
+        items = PurchaseProcessCreditorProposal.type_of_purchase_licitation.by_ratification_month_and_year(
           monthly_monitoring.month, monthly_monitoring.year).judgment_by_item.order(:id)
 
-        lots_global = PurchaseProcessCreditorProposal.by_licitation.by_ratification_month_and_year(
+        lots_global = PurchaseProcessCreditorProposal.type_of_purchase_licitation.by_ratification_month_and_year(
           monthly_monitoring.month, monthly_monitoring.year).judgment_by_lot_or_global
 
         lots_global = lots_global.flat_map(&:realignment_items)
