@@ -142,7 +142,7 @@ feature 'Report::PurchaseSolicitations', vcr: {cassette_name: 'report_purchase_s
     click_button 'Gerar Relatório de solicitações de compras emitidas'
 
     within_records do
-      within 'tbody tr:nth-child(1)' do
+      within 'tbody tr', text: '2/2012' do
         expect(page).to have_content '2/2012'
         expect(page).to have_content '1 - Detran'
         expect(page).to have_content '01.01.00001 - Antivirus'
@@ -150,7 +150,7 @@ feature 'Report::PurchaseSolicitations', vcr: {cassette_name: 'report_purchase_s
         expect(page).to have_content '600,00'
       end
 
-      within 'tbody tr:nth-child(2)' do
+      within 'tbody tr', text: '1/2012' do
         expect(page).to have_content '1/2012'
         expect(page).to have_content '1 - Detran'
         expect(page).to have_content '01.01.00001 - Antivirus'
