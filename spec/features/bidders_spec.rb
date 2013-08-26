@@ -421,4 +421,31 @@ feature "Bidders", vcr: { cassette_name: :bidders } do
       expect(page).to have_field 'Validade', disabled: true
     end
   end
+
+  scenario "enable the licitation_process when enable a bidder" do
+    LicitationProcess.make!(:processo_licitatorio_computador,
+      status: PurchaseProcessStatus::WAITING_FOR_OPEN)
+
+    navigate 'Processos de Compra > Processos de Compras'
+
+    within_records do
+      click_link '2/2013'
+    end
+
+    expect(page).to have_select 'Status', selected: 'Aguardando Abertura', disabled: true
+
+    click_link 'Habilitação'
+
+    within_records do
+      click_link 'Wenderson Malheiros'
+    end
+
+    check 'Habilitado'
+
+    click_button 'Salvar'
+
+    click_link 'Voltar ao processo de compra'
+
+    expect(page).to have_select 'Status', selected: 'Em andamento', disabled: true
+  end
 end

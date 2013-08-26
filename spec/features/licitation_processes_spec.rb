@@ -1058,7 +1058,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
     end
 
     within_tab "Solicitantes" do
-      fill_with_autocomplete 'Solicitações de compra', :with => '1'
+      fill_with_autocomplete 'Solicitações de compra', :with => '1/2013'
 
       within_records do
         expect(page).to have_content 'Código'

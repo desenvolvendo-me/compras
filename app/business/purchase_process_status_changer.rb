@@ -4,12 +4,18 @@ class PurchaseProcessStatusChanger
   end
 
   def in_progress!
-    return if @purchase_process.in_progress?
+    return if purchase_process.in_progress?
 
-    @purchase_process.update_status(PurchaseProcessStatus::IN_PROGRESS)
+    if enabled_bidders?
+      purchase_process.update_status(PurchaseProcessStatus::IN_PROGRESS)
+    end
   end
 
   private
 
   attr_reader :purchase_process
+
+  def enabled_bidders?
+    purchase_process.bidders.enabled.any?
+  end
 end
