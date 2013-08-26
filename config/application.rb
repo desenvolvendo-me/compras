@@ -30,6 +30,7 @@ module Compras
       #{config.root}/app/importers
       #{config.root}/app/observers
       #{config.root}/app/reports
+      #{config.root}/app/reports/concerns
       #{config.root}/app/validators
       #{config.root}/app/tce_exports
       #{config.root}/app/workers
