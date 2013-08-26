@@ -22,7 +22,7 @@ class MaterialCodeGenerator
 
   def next_code
     code = if previous_material
-             previous_material.code.gsub("#{material_class.class_number}.", '').to_i + 1
+             previous_material.code.gsub("#{material_class.masked_number}.", '').to_i + 1
            else
              1
            end
@@ -31,7 +31,10 @@ class MaterialCodeGenerator
   end
 
   def previous_material
-   @previous_material ||= material_repository.last_by_material_class_and_group(:material_class_id => material_class.id)
+   @previous_material ||= material_repository.
+     by_material_class_id(material_class.id).
+     reorder(:code).
+     last
   end
 
   def materials_code_can_changed?
