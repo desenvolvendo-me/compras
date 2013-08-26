@@ -7,7 +7,12 @@ describe ContractProvider do
   let(:contract) do
     Contract.make!(:primeiro_contrato,
       consortium_agreement: true,
-      creditors: [sobrinho, wenderson])
+      creditors: [sobrinho, wenderson],
+      licitation_process: licitation_process)
+  end
+
+  let(:licitation_process) do
+    LicitationProcess.make!(:processo_licitatorio)
   end
 
   subject do
@@ -17,13 +22,23 @@ describe ContractProvider do
   describe 'providing data' do
     it { should provide :id }
     it { should provide :to_s }
+    it { should provide :budget_allocations }
     it { should provide :creditors }
+    it { should provide :licitation_process_id }
+    it { should provide :licitation_process_year }
     it { should provide :contract_number }
     it { should provide :signature_date }
+    it { should provide :year }
+  end
+
+  describe '#budget_allocations' do
+    it 'should return the ids of related budget allocations through licitation process' do
+      expect(subject.budget_allocations).to eq licitation_process.budget_allocations_ids
+    end
   end
 
   describe '#creditors' do
-    it 'should return the ids of related creditors' do
+    it "should return the ids of related creditors" do
       expect(subject.creditors).to eq [sobrinho.id, wenderson.id]
     end
   end
@@ -31,6 +46,18 @@ describe ContractProvider do
   describe '#id' do
     it "should return the contract's id" do
       expect(subject.id).to eq contract.id
+    end
+  end
+
+  describe '#licitation_process_id' do
+    it "should return the licitatiion process's id" do
+      expect(subject.licitation_process_id).to eq licitation_process.id
+    end
+  end
+
+  describe '#licitation_process_year' do
+    it "should return the licitatiion process's year" do
+      expect(subject.licitation_process_year).to eq licitation_process.year
     end
   end
 
