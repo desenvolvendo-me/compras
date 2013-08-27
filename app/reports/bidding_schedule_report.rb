@@ -1,6 +1,8 @@
 class BiddingScheduleReport < Report
-  attr_accessor :object_type, :modality, :start_date, :end_date,
-    :licitation_commission_id, :licitation_commission
+  include StartEndDatesRange
+
+  attr_accessor :object_type, :modality,  :licitation_commission_id,
+    :licitation_commission
 
   validates :start_date, :end_date, presence: true
 
@@ -9,14 +11,6 @@ class BiddingScheduleReport < Report
 
   def render_list?
     true
-  end
-
-  def start_date
-    @start_date ||=  I18n.l(Date.today.at_beginning_of_month)
-  end
-
-  def end_date
-    @end_date ||=  I18n.l(Date.today.at_end_of_month)
   end
 
   protected

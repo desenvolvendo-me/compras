@@ -1,5 +1,7 @@
 class PurchasedItemPriceReport < Report
-  attr_accessor :type_of_purchase, :modality, :start_date, :end_date, :creditor_id, :creditor,
+  include StartEndDatesRange
+
+  attr_accessor :type_of_purchase, :modality, :creditor_id, :creditor,
     :licitation_process_id, :licitation_process, :material_id, :material,
     :ignore_items_not_adjudicated, :grouping
 
@@ -7,8 +9,6 @@ class PurchasedItemPriceReport < Report
   has_enumeration_for :type_of_purchase, with: PurchaseProcessTypeOfPurchase,
     create_helpers: true, create_scopes: true
   has_enumeration_for :grouping, with: PurchasedItemPriceReportGrouping
-
-  validates :start_date, :end_date, presence: true
 
   def records
     super.order { 'id' }
@@ -28,14 +28,6 @@ class PurchasedItemPriceReport < Report
 
   def render_list?
     true
-  end
-
-  def start_date
-    @start_date ||= I18n.l(Date.today.at_beginning_of_month)
-  end
-
-  def end_date
-    @end_date ||= I18n.l(Date.today.at_end_of_month)
   end
 
   private
