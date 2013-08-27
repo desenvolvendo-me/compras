@@ -18,6 +18,21 @@ describe Bidder do
     end
   end
 
+  describe '.type_of_purchase_licitation' do
+    it 'should return only bidders in licitation' do
+      licitation_process = LicitationProcess.make!(:processo_licitatorio)
+      direct_purchase = LicitationProcess.make!(:compra_direta)
+
+      licitante = Bidder.make!(:licitante, licitation_process: licitation_process)
+      licitante_sobrinho = Bidder.make!(:licitante_sobrinho, licitation_process: direct_purchase)
+      licitante_com_proposta_3 = Bidder.make!(:licitante_com_proposta_3, licitation_process: direct_purchase)
+      me_pregao = Bidder.make!(:me_pregao, licitation_process: licitation_process)
+
+      expect(Bidder.type_of_purchase_licitation).to include(licitante, me_pregao)
+      expect(Bidder.type_of_purchase_licitation).to_not include(licitante_sobrinho, licitante_com_proposta_3)
+    end
+  end
+
   context 'callbacks' do
     describe '#update_proposal_ranking' do
       let(:bidder) do

@@ -33,6 +33,10 @@ class LegalAnalysisAppraisal < Compras::Model
         month, year)
   }
 
+  scope :type_of_purchase_licitation, -> { joins { licitation_process }.
+    where { licitation_process.type_of_purchase.eq(PurchaseProcessTypeOfPurchase::LICITATION) }
+  }
+
   def process_and_year
     "#{process}/#{year}"
   end

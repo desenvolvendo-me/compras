@@ -24,7 +24,8 @@ module TceExport::MG
       private
 
       def query
-        LicitationProcessRatificationItem.order(:id)
+        LicitationProcessRatificationItem.type_of_purchase_licitation.by_ratification_month_and_year(
+          monthly_monitoring.month, monthly_monitoring.year).order(:id)
       end
 
       def tp_documento(creditor)

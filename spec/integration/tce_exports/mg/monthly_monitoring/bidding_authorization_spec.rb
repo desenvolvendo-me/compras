@@ -33,6 +33,10 @@ describe TceExport::MG::MonthlyMonitoring::BiddingAuthorizationGenerator, vcr: {
       Bidder.make!(:licitante_sobrinho, creditor: creditor_pf, protocol: "654321")
     end
 
+    let :bidder_four do
+      Bidder.make!(:licitante, creditor: creditor, protocol: "162534")
+    end
+
     let :licitation_process do
       licitation_process = LicitationProcess.make!(:processo_licitatorio_computador,
         process: 3, bidders: [bidder])
@@ -46,6 +50,11 @@ describe TceExport::MG::MonthlyMonitoring::BiddingAuthorizationGenerator, vcr: {
     let :licitation_process_three do
       licitation_process_three = LicitationProcess.make!(:processo_licitatorio_canetas,
         bidders: [bidder_pf])
+    end
+
+    let :licitation_process_four do
+      LicitationProcess.make!(:compra_direta,
+        bidders: [bidder_four])
     end
 
     it "generates a CSV file with the required data" do

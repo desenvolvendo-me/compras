@@ -143,8 +143,8 @@ module TceExport::MG
       private
 
       def query
-        LicitationProcess.by_ratification_month_and_year(
-          monthly_monitoring.month, monthly_monitoring.year)
+        LicitationProcess.by_type_of_purchase(PurchaseProcessTypeOfPurchase::LICITATION)
+          .by_ratification_month_and_year(monthly_monitoring.month, monthly_monitoring.year)
       end
 
       def execution_unit_responsible_code(budget)

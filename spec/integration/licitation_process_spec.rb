@@ -192,4 +192,13 @@ describe LicitationProcess do
       expect(direct_purchase.errors[:items]).to include "O material para o fornecedor já está em uso"
     end
   end
+
+  describe '.by_type_of_purchase' do
+    it 'should return all licitation_process by type_of_purchase' do
+      licitation_process = LicitationProcess.make!(:processo_licitatorio)
+      direct_purchase = LicitationProcess.make!(:compra_direta)
+
+      expect(LicitationProcess.by_type_of_purchase(PurchaseProcessTypeOfPurchase::LICITATION)).to include(licitation_process)
+    end
+  end
 end

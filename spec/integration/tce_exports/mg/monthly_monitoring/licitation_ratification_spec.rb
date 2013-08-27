@@ -24,7 +24,8 @@ describe TceExport::MG::MonthlyMonitoring::LicitationRatificationGenerator, vcr:
     let(:monthly_monitoring) do
       FactoryGirl.create(:monthly_monitoring,
         prefecture: prefecture,
-        year: 2013,
+        year: Date.today.year,
+        month: Date.today.month,
         city_code: "51234")
     end
 
@@ -32,9 +33,18 @@ describe TceExport::MG::MonthlyMonitoring::LicitationRatificationGenerator, vcr:
       LicitationProcess.make!(:pregao_presencial)
     end
 
+    let(:direct_purchase) do
+      LicitationProcess.make!(:compra_direta)
+    end
+
     let(:creditor_proposal_arame_farpado) do
       PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado,
         licitation_process: licitation_process)
+    end
+
+    let(:creditor_proposal_arame_farpado_direct_purchase) do
+      PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado,
+        licitation_process: direct_purchase)
     end
 
     let(:creditor_proposal_arame) do
@@ -42,11 +52,24 @@ describe TceExport::MG::MonthlyMonitoring::LicitationRatificationGenerator, vcr:
         licitation_process: licitation_process)
     end
 
+    let(:creditor_sobrinho) do
+      Creditor.make!(:sobrinho_sa)
+    end
+
     let(:licitation_process_ratification) do
       LicitationProcessRatification.make(:processo_licitatorio_computador,
-        creditor: Creditor.make!(:sobrinho_sa),
+        creditor: creditor_sobrinho,
         licitation_process: licitation_process,
-        licitation_process_ratification_items: [])
+        licitation_process_ratification_items: [],
+        ratification_date: Date.current)
+    end
+
+    let(:ratification_direct_purchase) do
+      LicitationProcessRatification.make(:processo_licitatorio_computador,
+        creditor: creditor_sobrinho,
+        licitation_process: direct_purchase,
+        licitation_process_ratification_items: [],
+        ratification_date: Date.current)
     end
 
     it "generates a CSV file with the required data" do
@@ -67,6 +90,10 @@ describe TceExport::MG::MonthlyMonitoring::LicitationRatificationGenerator, vcr:
       LicitationProcessRatificationItem.make!(:item, ratificated: true,
         licitation_process_ratification: licitation_process_ratification,
         purchase_process_creditor_proposal: creditor_proposal_arame)
+
+      LicitationProcessRatificationItem.make!(:item, ratificated: true,
+        licitation_process_ratification: ratification_direct_purchase,
+        purchase_process_creditor_proposal: creditor_proposal_arame_farpado_direct_purchase)
 
       current_date     = Date.current.strftime('%d%m%Y')
       arame_farpado = creditor_proposal_arame_farpado.item
