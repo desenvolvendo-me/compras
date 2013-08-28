@@ -40,26 +40,23 @@ class Material < Compras::Model
     where { code.like("#{q}%") | description.like("#{q}%") }
   }
 
-  def self.last_by_material_class_and_group(params = {})
-    record = scoped
-    record = record.where { material_class_id.eq(params.fetch(:material_class_id)) }
-    record = record.order { code }.last
-    record
+  scope :by_material_class_id, ->(material_class_id) do
+    where { |query| query.material_class_id.eq(material_class_id) }
   end
 
-  def self.by_pending_purchase_solicitation_budget_structure_id(budget_structure_id)
+  scope :by_pending_purchase_solicitation_budget_structure_id, ->(budget_structure_id) do
     joins { purchase_solicitation_items.purchase_solicitation }.
-    where do
+    where {
       purchase_solicitation_items.purchase_solicitation.budget_structure_id.eq(budget_structure_id) &
       purchase_solicitation_items.purchase_solicitation.service_status.eq(PurchaseSolicitationServiceStatus::PENDING)
-    end
+    }
   end
 
-  def self.not_purchase_solicitation(purchase_solicitation_id)
+  scope :not_purchase_solicitation, ->(purchase_solicitation_id) do
     joins { purchase_solicitation_items }.
-    where do
+    where {
       purchase_solicitation_items.purchase_solicitation_id.not_eq(purchase_solicitation_id)
-    end
+    }
   end
 
   def to_s
