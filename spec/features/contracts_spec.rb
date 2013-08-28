@@ -169,7 +169,7 @@ feature "Contracts", vcr: { cassette_name: :contracts } do
 
     click_link 'Empenhos'
 
-    expect(page).to have_content '8'
+    expect(page).to have_content '10'
     expect(page).to have_content '01/10/2012'
     expect(page).to have_content '100,00'
   end

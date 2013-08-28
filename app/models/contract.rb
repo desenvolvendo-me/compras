@@ -104,19 +104,11 @@ class Contract < Compras::Model
   end
 
   def pledges
-    Pledge.all(params: { by_contract_id: id,
-      methods: [:expense_nature_expense_nature,
-        :function_code,
-        :subfunction_code,
-        :government_program_code,
-        :government_action_code,
-        :capability_source_code],
-      includes: [:capability,
-        budget_allocation: { include: :expense_nature }] }) || []
+    Pledge.all(params: { by_contract_id: id })
   end
 
   def founded_debt_pledges
-    Pledge.all(params: { by_founded_debt_contract_id: id }) || []
+    Pledge.all(params: { by_founded_debt_contract_id: id })
   end
 
   def all_pledges
