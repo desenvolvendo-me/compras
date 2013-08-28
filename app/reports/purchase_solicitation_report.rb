@@ -1,4 +1,6 @@
 class PurchaseSolicitationReport < Report
+  include StartEndDatesRange
+
   attr_accessor :budget_structure, :budget_structure_id, :kind, :status, :material,
     :material_id, :start_date, :end_date, :report_type
 
@@ -6,7 +8,7 @@ class PurchaseSolicitationReport < Report
   has_enumeration_for :status, :with => PurchaseSolicitationServiceStatus
   has_enumeration_for :report_type, create_helpers: true
 
-  validates :start_date, :end_date, :report_type, :presence => true
+  validates :report_type, :presence => true
 
   def records_grouped
     records.
@@ -35,14 +37,6 @@ class PurchaseSolicitationReport < Report
 
   def render_list?
     true
-  end
-
-  def start_date
-    @start_date ||= I18n.l(Date.today.at_beginning_of_month)
-  end
-
-  def end_date
-    @end_date ||= I18n.l(Date.today.at_end_of_month)
   end
 
   private

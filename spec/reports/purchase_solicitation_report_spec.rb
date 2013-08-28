@@ -1,4 +1,5 @@
 require 'report_helper'
+require 'enumerate_it'
 require 'app/enumerations/purchase_solicitation_kind'
 require 'app/enumerations/report_type'
 require 'app/enumerations/purchase_solicitation_service_status'
@@ -11,9 +12,9 @@ describe PurchaseSolicitationReport do
     described_class.new(repository)
   end
 
+  it { should validate_presence_of :report_type }
   it { should validate_presence_of :start_date }
   it { should validate_presence_of :end_date }
-  it { should validate_presence_of :report_type }
 
   it 'allows render data as list' do
     expect(subject.render_list?).to be_true
