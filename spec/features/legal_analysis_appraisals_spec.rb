@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature "LegalAnalysisAppraisals", :intermittent, vcr: { cassette_name: :legal_analysis_appraisals }  do
+feature "LegalAnalysisAppraisals", vcr: { cassette_name: :legal_analysis_appraisals }  do
   background do
     sign_in
   end

@@ -5,8 +5,7 @@ feature "LandSubdivisions" do
     sign_in
   end
 
-
-  scenario 'create, update and destroy a new land subdivision', :intermittent do
+  scenario 'create, update and destroy a new land subdivision' do
     navigate 'Geral > Parâmetros > Endereços > Loteamentos'
 
     click_link 'Criar Loteamento'
@@ -37,7 +36,7 @@ feature "LandSubdivisions" do
     expect(page).to_not have_content 'Monte Verde'
   end
 
-  scenario 'index with columns at the index', :intermittent do
+  scenario 'index with columns at the index' do
     navigate 'Geral > Parâmetros > Endereços > Loteamentos'
 
     within_records do
