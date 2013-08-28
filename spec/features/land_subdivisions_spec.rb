@@ -6,8 +6,6 @@ feature "LandSubdivisions" do
   end
 
   scenario 'create, update and destroy a new land subdivision' do
-    pending 'ci execution expired'
-
     navigate 'Geral > Parâmetros > Endereços > Loteamentos'
 
     click_link 'Criar Loteamento'
@@ -39,8 +37,6 @@ feature "LandSubdivisions" do
   end
 
   scenario 'index with columns at the index' do
-    pending 'ci execution expired'
-
     navigate 'Geral > Parâmetros > Endereços > Loteamentos'
 
     within_records do
