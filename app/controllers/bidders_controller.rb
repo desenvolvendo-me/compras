@@ -71,6 +71,14 @@ class BiddersController < CrudController
     end
   end
 
+  def update_resource(object, attrubutes)
+    object.transaction do
+      if super
+        PurchaseProcessStatusChanger.new(object.licitation_process).in_progress!
+      end
+    end
+  end
+
   def block_changes_when_have_ratifications
     return unless parent.ratification?
 
