@@ -1,0 +1,2 @@
+class PledgeItemsController < ApiConsumerController
+end

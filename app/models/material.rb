@@ -68,4 +68,8 @@ class Material < Compras::Model
 
     material_class.to_s
   end
+
+  def service_without_quantity?
+    service? && !control_amount?
+  end
 end

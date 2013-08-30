@@ -3,19 +3,19 @@ require 'app/decorators/supply_order_item_decorator'
 
 describe SupplyOrderItemDecorator do
   describe '#nested_form_path' do
-    context 'when item has control amount' do
-      before { component.stub(control_amount?: true) }
+    context 'when item has service_without_quantity' do
+      before { component.stub(service_without_quantity?: true) }
 
-      it 'renders quantity form template' do
-        expect(subject.nested_form_path).to eq 'supply_order_items/form_quantity'
+      it 'renders values form template' do
+        expect(subject.nested_form_path).to eq 'supply_order_items/form_value'
       end
     end
 
-    context 'when item doesnt have control amount' do
-      before { component.stub(control_amount?: false) }
+    context 'when item doesnt have service_without_quantity' do
+      before { component.stub(service_without_quantity?: false) }
 
-      it 'render values form template' do
-        expect(subject.nested_form_path).to eq 'supply_order_items/form_value'
+      it 'render quantity form template' do
+        expect(subject.nested_form_path).to eq 'supply_order_items/form_quantity'
       end
     end
   end

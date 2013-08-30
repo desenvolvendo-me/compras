@@ -72,4 +72,32 @@ describe Material do
       end
     end
   end
+
+  describe '#service_without_quantity?' do
+    context 'when service' do
+      before do
+        subject.stub(service?: true)
+      end
+
+      context 'with control_amount' do
+        before do
+          subject.stub(control_amount?: true)
+        end
+
+        it 'should be false' do
+          expect(subject.service_without_quantity?).to be_false
+        end
+      end
+
+      context 'without control_amount' do
+        before do
+          subject.stub(control_amount?: false)
+        end
+
+        it 'should be true' do
+          expect(subject.service_without_quantity?).to be_true
+        end
+      end
+    end
+  end
 end

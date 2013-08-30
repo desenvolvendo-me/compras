@@ -1,20 +1,20 @@
 <div class="supply_order_item">
   <%= render partial: 'supply_order_items/common_fields', locals: { f: f,
-    ratification_item_id: ratification_item_id, material: material,
+    pledge_item_id: pledge_item_id, material: material,
     reference_unit: reference_unit }
   %>
 
   <div class="yui3-g">
     <div class="yui3-u-1-8">
-      <%= f.input :quantity, disabled: true, input_html: { value: quantity } %>
+      <%= f.input :quantity, disabled: true, input_html: { value: quantity, class: 'numeric' } %>
     </div>
 
     <div class="yui3-u-1-6">
-      <%= f.input :authorized_quantity, disabled: true, input_html: { value: authorized_quantity }  %>
+      <%= f.input :authorized_quantity, disabled: true, input_html: { value: authorized_quantity, class: 'numeric' }  %>
     </div>
 
     <div class="yui3-u-1-6">
-      <%= f.input :balance, disabled: true, input_html: { value: balance }  %>
+      <%= f.input :balance, disabled: true, input_html: { value: balance, class: 'numeric' }  %>
     </div>
 
     <div class="yui3-u-1-6">

@@ -548,11 +548,13 @@ Compras::Application.routes.draw do
 
   get "pledge_liquidations/modal", :as => "modal_pledge_liquidations"
 
-  resources :pledges, only: [:modal] do
+  resources :pledges, only: [:modal, :index] do
     collection do
       get :modal
     end
   end
+
+  resources :pledge_items, only: :index
 
   resources :positions do
     collection do

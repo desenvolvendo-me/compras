@@ -1,18 +1,15 @@
 require 'model_helper'
+require 'app/models/pledge_item'
 require 'app/models/supply_order_item'
-require 'app/models/licitation_process_ratification_item'
 
 describe SupplyOrderItem do
   it { should belong_to :supply_order }
-  it { should belong_to :licitation_process_ratification_item }
 
-  it { should delegate(:material).to(:licitation_process_ratification_item).allowing_nil(true) }
-  it { should delegate(:reference_unit).to(:licitation_process_ratification_item).allowing_nil(true) }
-  it { should delegate(:unit_price).to(:licitation_process_ratification_item).allowing_nil(true) }
-  it { should delegate(:total_price).to(:licitation_process_ratification_item).allowing_nil(true) }
-  it { should delegate(:supply_order_item_balance).to(:licitation_process_ratification_item).allowing_nil(true) }
-  it { should delegate(:supply_order_item_value_balance).to(:licitation_process_ratification_item).allowing_nil(true) }
-  it { should delegate(:control_amount?).to(:material).allowing_nil true }
+  it { should delegate(:material).to(:pledge_item).allowing_nil(true) }
+  it { should delegate(:unit_price).to(:pledge_item).allowing_nil(true) }
+  it { should delegate(:estimated_total_price).to(:pledge_item).allowing_nil(true).prefix(true) }
+  it { should delegate(:service_without_quantity?).to(:material).allowing_nil true }
+  it { should delegate(:reference_unit).to(:material).allowing_nil(true) }
 
   context 'validations' do
     before do
@@ -48,24 +45,24 @@ describe SupplyOrderItem do
   end
 
   describe "#quantity" do
-    let(:licitation_process_ratification_item) { double :licitation_process_ratification_item }
+    let(:pledge_item) { double :pledge_item }
 
-    it 'tries to return licitation_process_ratification_item quantity' do
-      subject.stub(licitation_process_ratification_item: licitation_process_ratification_item)
-      licitation_process_ratification_item.should_receive(:try).with :quantity
+    it 'tries to return pledge_item quantity' do
+      subject.stub(pledge_item: pledge_item)
+      pledge_item.should_receive(:quantity).and_return(0)
 
-      subject.quantity
+      expect(subject.quantity).to eq 0
     end
   end
 
   describe '#value' do
-    let(:licitation_process_ratification_item) { double :licitation_process_ratification_item }
+    let(:pledge_item) { double :pledge_item }
 
-    it 'tries to return licitation_process_ratification_item value' do
-      subject.stub(licitation_process_ratification_item: licitation_process_ratification_item)
-      licitation_process_ratification_item.should_receive(:try).with :unit_price
+    it 'tries to return pledge_item value' do
+      subject.stub(pledge_item: pledge_item)
+      pledge_item.should_receive(:unit_price).and_return(44.4)
 
-      subject.value
+      expect(subject.value).to eq 44.4
     end
   end
 
@@ -100,6 +97,28 @@ describe SupplyOrderItem do
       subject.valid?
 
       expect(subject.errors[:authorization_value]).to include("deve ser menor ou igual a 4,00")
+    end
+  end
+
+  describe '#total_price' do
+    context 'when pledge_item_estimated_total_price is nil' do
+      before do
+        subject.stub(pledge_item_estimated_total_price: nil)
+      end
+
+      it 'should return 0' do
+        expect(subject.total_price).to eq 0
+      end
+    end
+
+    context 'when pledge_item_estimated_total_price is not nil' do
+      before do
+        subject.stub(pledge_item_estimated_total_price: 50)
+      end
+
+      it 'should return the pledge_item_estimated_total_price' do
+        expect(subject.total_price).to eq 50
+      end
     end
   end
 end

@@ -1,56 +1,30 @@
 require 'spec_helper'
 
-feature "SupplyOrder" do
-  let :pledge do
-    Pledge.new(id: 1, value: 9.99, description: 'Empenho 1',
-      year: 2013, to_s: 1)
-  end
-
-  let :pledge_two do
-    Pledge.new(id: 2, value: 15.99, description: 'Empenho 2',
-      year: 2012, to_s: 2)
-  end
-
+feature "SupplyOrder", vcr: { cassette_name: 'supply_order' } do
   background do
     sign_in
-
-    UnicoAPI::Resources::Contabilidade::Pledge.stub(:fetch).and_return([pledge, pledge_two])
-
-    UnicoAPI::Resources::Contabilidade::Pledge.stub(:find).with(1).and_return(pledge)
-    UnicoAPI::Resources::Contabilidade::Pledge.stub(:find).with(2).and_return(pledge_two)
   end
 
-  scenario 'create a new supply order, update and destroy an existing' do
+  scenario 'create a new supply order, update and destroy an existing', :reset_ids do
     wenderson = Creditor.make!(:wenderson_sa)
 
     licitation_process = LicitationProcess.make!(:processo_licitatorio_computador,
-      items: [PurchaseProcessItem.make!(:item_arame_farpado),
-        PurchaseProcessItem.make!(:item_arame)])
+      items: [PurchaseProcessItem.make!(:item_arame_farpado)])
 
     licitation_process.items.first.material.update_attribute(:control_amount, true)
 
     proposal_1 = PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado,
       licitation_process: licitation_process, creditor: wenderson)
 
-    proposal_2 = PurchaseProcessCreditorProposal.make!(:proposta_arame,
-      licitation_process: licitation_process, creditor: wenderson)
-
     ratification_item_1 = LicitationProcessRatificationItem.make!(:item,
       licitation_process_ratification: nil,
       purchase_process_creditor_proposal: proposal_1)
 
-    ratification_item_2 = LicitationProcessRatificationItem.make!(:item,
-      licitation_process_ratification: nil,
-      purchase_process_creditor_proposal: proposal_2)
-
     LicitationProcessRatification.make!(:processo_licitatorio_computador,
       creditor: wenderson,
       licitation_process: licitation_process,
-      licitation_process_ratification_items: [ratification_item_1, ratification_item_2])
+      licitation_process_ratification_items: [ratification_item_1])
 
-
-    first_div_path = '//*[@id="supply_order_items"]/div[1]'
-    last_div_path  = '//*[@id="supply_order_items"]/div[2]'
 
     navigate 'Instrumentos Contratuais > Ordem de Fornecimento'
 
@@ -72,55 +46,34 @@ feature "SupplyOrder" do
 
     fill_in 'Data da autorização', with: I18n.l(Date.new(2013, 12, 13))
 
-    within :xpath, first_div_path do
-      expect(page).to have_field 'Material', with: '02.02.00002 - Arame comum', disabled: true
-      expect(page).to have_field 'Unidade', with: 'UN', disabled: true
-      expect(page).to have_field 'Valor', with: '2,99', disabled: true
-      expect(page).to have_field 'Valor já autorizado', with: '0,00', disabled: true
-      expect(page).to have_field 'Saldo', with: '2,99', disabled: true
-      expect(page).to have_field 'Valor a autorizar', with: ''
-    end
+    fill_with_autocomplete 'Empenho', with: '10'
 
-    within :xpath, last_div_path do
+    within 'div .supply_order_item:nth-child(1)' do
       expect(page).to have_field 'Material', with: '02.02.00001 - Arame farpado', disabled: true
       expect(page).to have_field 'Unidade', with: 'UN', disabled: true
-      expect(page).to have_field 'Quantidade', with: '2', disabled: true
+      expect(page).to have_field 'Quantidade', with: '10000', disabled: true
       expect(page).to have_field 'Qtde já autorizada', with: '0', disabled: true
-      expect(page).to have_field 'Saldo', with: '2', disabled: true
+      expect(page).to have_field 'Saldo', with: '10000', disabled: true
       expect(page).to have_field 'Qtde a autorizar', with: ''
     end
 
-    within_modal 'Empenho' do
-      click_button 'Pesquisar'
-      click_record '2013'
+    click_button 'Salvar'
+
+    expect(page).to have_no_notice 'Ordem de Fornecimento criada com sucesso.'
+
+    within 'div .supply_order_item:nth-child(1)' do
+      expect(page).to have_content 'não é um número'
+
+      fill_in 'Qtde a autorizar', with: '10001'
     end
 
     click_button 'Salvar'
 
     expect(page).to have_no_notice 'Ordem de Fornecimento criada com sucesso.'
 
-    within :xpath, first_div_path do
-      expect(page).to have_content 'não é um número'
-      fill_in 'Valor a autorizar', with: '3,99'
-    end
-
-    within :xpath, last_div_path do
-      expect(page).to have_content 'não é um número'
-      fill_in 'Qtde a autorizar', with: '5'
-    end
-
-    click_button 'Salvar'
-
-    expect(page).to have_no_notice 'Ordem de Fornecimento criada com sucesso.'
-
-    within :xpath, first_div_path do
-      expect(page).to have_content 'deve ser menor ou igual a 2,99'
-      fill_in 'Valor a autorizar', with: '2,99'
-    end
-
-    within :xpath, last_div_path do
-      expect(page).to have_content 'deve ser menor ou igual a 2'
-      fill_in 'Qtde a autorizar', with: '2'
+    within 'div .supply_order_item:nth-child(1)' do
+      expect(page).to have_content 'deve ser menor ou igual a 10000'
+      fill_in 'Qtde a autorizar', with: '9000'
     end
 
     click_button 'Salvar'
@@ -129,32 +82,26 @@ feature "SupplyOrder" do
 
     click_link 'Wenderson Malheiros'
 
+    expect(page).to have_field 'Ano', with: '2013'
+    expect(page).to have_field 'Processo de compra', with: '2/2013 - Concorrência 1'
     expect(page).to have_field 'Fornecedor', with: 'Wenderson Malheiros'
     expect(page).to have_field 'Modalidade', with: '1 - Concorrência', disabled: true
     expect(page).to have_field 'Data da autorização', with: '13/12/2013'
+    expect(page).to have_field 'Empenho', with: '10'
 
-    within :xpath, first_div_path do
-      expect(page).to have_field 'Material', with: '02.02.00002 - Arame comum', disabled: true
-      expect(page).to have_field 'Unidade', with: 'UN', disabled: true
-      expect(page).to have_field 'Valor', with: '2,99', disabled: true
-      expect(page).to have_field 'Valor já autorizado', with: '2,99', disabled: true
-      expect(page).to have_field 'Saldo', with: '0,00', disabled: true
-      expect(page).to have_field 'Valor a autorizar', with: '2,99'
-    end
-
-    within :xpath, last_div_path do
+    within 'div .supply_order_item:nth-child(1)' do
       expect(page).to have_field 'Material', with: '02.02.00001 - Arame farpado', disabled: true
       expect(page).to have_field 'Unidade', with: 'UN', disabled: true
-      expect(page).to have_field 'Quantidade', with: '2', disabled: true
-      expect(page).to have_field 'Qtde já autorizada', with: '2', disabled: true
-      expect(page).to have_field 'Saldo', with: '0', disabled: true
-      expect(page).to have_field 'Qtde a autorizar', with: '2'
+      expect(page).to have_field 'Quantidade', with: '10000', disabled: true
+      expect(page).to have_field 'Qtde já autorizada', with: '9000', disabled: true
+      expect(page).to have_field 'Saldo', with: '1000', disabled: true
+      expect(page).to have_field 'Qtde a autorizar', with: '9000'
     end
 
     fill_in 'Data da autorização', with: I18n.l(Date.new(2013, 12, 15))
 
-    within :xpath, last_div_path do
-      fill_in 'Qtde a autorizar', with: '1'
+    within 'div .supply_order_item:nth-child(1)' do
+      fill_in 'Qtde a autorizar', with: '2000'
     end
 
     click_button 'Salvar'
@@ -163,27 +110,20 @@ feature "SupplyOrder" do
 
     click_link 'Wenderson Malheiros'
 
+    expect(page).to have_field 'Ano', with: '2013'
+    expect(page).to have_field 'Processo de compra', with: '2/2013 - Concorrência 1'
     expect(page).to have_field 'Fornecedor', with: 'Wenderson Malheiros'
     expect(page).to have_field 'Data da autorização', with: '15/12/2013'
-    expect(page).to have_field 'Empenho', with: '1'
     expect(page).to have_field 'Modalidade', with: '1 - Concorrência', disabled: true
+    expect(page).to have_field 'Empenho', with: '10'
 
-    within :xpath, first_div_path do
-      expect(page).to have_field 'Material', with: '02.02.00002 - Arame comum', disabled: true
-      expect(page).to have_field 'Unidade', with: 'UN', disabled: true
-      expect(page).to have_field 'Valor', with: '2,99', disabled: true
-      expect(page).to have_field 'Valor já autorizado', with: '2,99', disabled: true
-      expect(page).to have_field 'Saldo', with: '0,00', disabled: true
-      expect(page).to have_field 'Valor a autorizar', with: '2,99'
-    end
-
-    within :xpath, last_div_path do
+    within 'div .supply_order_item:nth-child(1)' do
       expect(page).to have_field 'Material', with: '02.02.00001 - Arame farpado', disabled: true
       expect(page).to have_field 'Unidade', with: 'UN', disabled: true
-      expect(page).to have_field 'Quantidade', with: '2', disabled: true
-      expect(page).to have_field 'Qtde já autorizada', with: '1', disabled: true
-      expect(page).to have_field 'Saldo', with: '1', disabled: true
-      expect(page).to have_field 'Qtde a autorizar', with: '1'
+      expect(page).to have_field 'Quantidade', with: '10000', disabled: true
+      expect(page).to have_field 'Qtde já autorizada', with: '2000', disabled: true
+      expect(page).to have_field 'Saldo', with: '8000', disabled: true
+      expect(page).to have_field 'Qtde a autorizar', with: '2000'
     end
 
     click_link 'Apagar'

@@ -3,7 +3,7 @@ class SupplyOrderItemDecorator
   include ActionView::Helpers::NumberHelper
 
   def nested_form_path
-    context = component.control_amount? ? 'quantity' : 'value'
+    context = component.service_without_quantity? ? 'value' : 'quantity'
 
     "supply_order_items/form_#{context}"
   end
