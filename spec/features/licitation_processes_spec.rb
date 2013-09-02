@@ -2644,4 +2644,124 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
       expect(page).to have_field 'Dotação orçamentária', disabled: true
     end
   end
+
+  scenario 'warn when has as material_class fractionation' do
+    Timecop.travel(Date.new(2012, 10, 10))
+    PaymentMethod.make!(:dinheiro)
+    DocumentType.make!(:fiscal)
+    DocumentType.make!(:oficial)
+    JudgmentForm.make!(:por_item_com_menor_preco)
+    Indexer.make!(:xpto)
+
+    licitation = LicitationProcess.make!(:processo_licitatorio_computador,
+      year: 2012, process_date: Date.current)
+    ratification = LicitationProcessRatification.make!(:processo_licitatorio_computador,
+     licitation_process: licitation)
+
+    PurchaseProcessFractionationCreator.create!(ratification.licitation_process)
+
+    navigate 'Processos de Compra > Processos de Compras'
+
+    click_link 'Criar Processo de Compra'
+
+    within_tab 'Principal' do
+      choose 'Processo licitatório'
+
+      select 'Compras e serviços', from: 'Tipo de objeto'
+      select 'Empreitada integral', :from => 'Forma de execução'
+      select 'Convite', from: 'Modalidade'
+      fill_in 'Objeto do processo de compra', with: 'Licitação para compra de carteiras'
+
+      select 'Por Item com Menor Preço', from: 'Forma de julgamento'
+      select 'Fiança bancária', from: 'Tipo de garantia'
+      fill_modal 'Índice de reajuste', with: 'XPTO'
+      fill_modal 'Forma de pagamento', with: 'Dinheiro', field: 'Descrição'
+      fill_in 'Valor da caução', with: '50,00'
+      fill_with_autocomplete 'Unidade responsável pela execução', with: 'Secretaria de Educação'
+    end
+
+    within_tab 'Prazos' do
+      fill_in 'Data da disponibilidade', :with => I18n.l(Date.current)
+      fill_modal 'Contato para informações', :with => '958473', :field => 'Matrícula'
+
+      fill_in 'Término do recebimento dos envelopes', :with => I18n.l(Date.current)
+      fill_in 'Hora do recebimento', :with => '14:00'
+
+      fill_in 'Validade da proposta', :with => '5'
+      select 'dia/dias', :from => 'Período da validade da proposta'
+
+      fill_in 'Prazo de entrega', :with => '1'
+      select 'ano/anos', :from => 'Período do prazo de entrega'
+    end
+
+    within_tab "Itens" do
+      fill_in 'Lote', :with => '2234'
+
+      fill_with_autocomplete 'Material', :with => 'Antivirus'
+
+      fill_in 'Quantidade', :with => '10000'
+      fill_in 'Valor unitário máximo', :with => '8,00'
+      fill_in 'Informações complementares', :with => 'Produto antivirus avast'
+
+      # asserting calculated total price of the item
+      expect(page).to have_field 'Valor total', :with => '80.000,00'
+
+      click_button 'Adicionar'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice "Processo de Compra 3/#{Date.current.year} criado com sucesso."
+    expect(page).to have_content "O material 01.01.00001 - Antivirus está caracterizando possível fracionamento."
+
+    within_tab 'Principal' do
+      expect(page).to have_field 'Processo', :with => '3'
+
+      expect(page).to have_select 'Modalidade', :selected => 'Convite', disabled: true
+      expect(page).to have_field 'Nº da modalidade', :with => '1', disabled: true
+      expect(page).to have_select 'Tipo de objeto', :selected => 'Compras e serviços', disabled: true
+      expect(page).to have_select 'Forma de julgamento', :selected => 'Por Item com Menor Preço', disabled: true
+      expect(page).to have_field 'Objeto do processo de compra', :with => 'Licitação para compra de carteiras'
+
+      expect(page).to have_select 'Forma de execução', :selected => 'Empreitada integral'
+      expect(page).to have_select 'Tipo de garantia', :selected => 'Fiança bancária'
+      expect(page).to have_field 'Índice de reajuste', :with => 'XPTO'
+      expect(page).to have_field 'Forma de pagamento', :with => 'Dinheiro'
+      expect(page).to have_field 'Valor da caução', :with => '50,00'
+      expect(page).to have_field 'Unidade responsável pela execução', with: '9 - Secretaria de Educação'
+    end
+
+    within_tab 'Prazos' do
+      expect(page).to have_readonly_field 'Abertura das propostas'
+      expect(page).to have_readonly_field 'Hora da abertura'
+
+      expect(page).to have_field 'Data da expedição', :with => I18n.l(Date.current)
+      expect(page).to have_field 'Data da disponibilidade', :with => I18n.l(Date.current)
+      expect(page).to have_field 'Contato para informações', :with => 'Gabriel Sobrinho'
+
+      expect(page).to have_field 'Término do recebimento dos envelopes', :with => I18n.l(Date.current)
+      expect(page).to have_field 'Hora do recebimento', :with => '14:00'
+
+      expect(page).to have_field 'Abertura das propostas', :with => ''
+      expect(page).to have_field 'Hora da abertura', :with => ''
+
+      expect(page).to have_field 'Validade da proposta', :with => '5'
+      expect(page).to have_select 'Período da validade da proposta', :selected => 'dia/dias'
+      expect(page).to have_field 'Prazo de entrega', :with => '1'
+      expect(page).to have_select 'Período do prazo de entrega', :selected => 'ano/anos'
+    end
+
+    within_tab "Itens" do
+      within_records do
+        expect(page).to have_content '2234'
+        expect(page).to have_content '01.01.00001 - Antivirus'
+        expect(page).to have_content 'UN'
+        expect(page).to have_content '10.000'
+        expect(page).to have_content '8,00'
+        expect(page).to have_content '80.000,00'
+      end
+    end
+
+    Timecop.return
+  end
 end

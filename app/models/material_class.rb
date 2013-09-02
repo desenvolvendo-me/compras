@@ -7,6 +7,7 @@ class MaterialClass < Compras::Model
   attr_modal :class_number, :description
 
   has_many :materials, :dependent => :restrict
+  has_many :purchase_process_fractionations, dependent: :restrict
 
   validates :description, :masked_number, :presence => true
   validates :class_number, :uniqueness => { :allow_blank => true }

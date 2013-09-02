@@ -684,7 +684,6 @@ LicitationProcess.blueprint(:compra_direta) do
   process { 2 }
   protocol { '00089/2012' }
   object_type { PurchaseProcessObjectType::PURCHASE_AND_SERVICES }
-  modality { Modality::CONCURRENCE }
   judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
   description { 'Licitação para compra de carteiras' }
   purchase_process_budget_allocations { [PurchaseProcessBudgetAllocation.make!(:alocacao_com_itens)] }

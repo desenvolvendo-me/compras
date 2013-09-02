@@ -47,4 +47,5 @@ FactoryGirl.preload do
   factory(:grave) { create :risk_degree, level: '3', name: 'Grave'}
 
   factory(:general)                 { create :warehouse }
+  factory(:modality_limit) { create :modality_limit }
 end

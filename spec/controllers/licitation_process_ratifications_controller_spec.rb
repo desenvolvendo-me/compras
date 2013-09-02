@@ -33,9 +33,30 @@ describe LicitationProcessRatificationsController, vcr: { cassette_name: 'contro
 
       LicitationProcessRatification.any_instance.should_receive(:save).and_return(true)
       LicitationProcess.any_instance.should_receive(:update_status).with(PurchaseProcessStatus::APPROVED)
+      PurchaseProcessFractionationCreator.should_receive(:create!).with(licitation_process)
 
       post :create, :licitation_process_ratification => {
         :licitation_process_id => licitation_process.id }
+    end
+  end
+
+  describe 'PUT #update' do
+    it "should create the fractionation" do
+      ratification = LicitationProcessRatification.make!(:processo_licitatorio_computador)
+
+      PurchaseProcessFractionationCreator.should_receive(:create!).with(ratification.licitation_process)
+
+      put :update, id: ratification.id, licitation_process_ratification: {}
+    end
+  end
+
+  describe 'DELETE #destroy' do
+    it "should create the fractionation" do
+      ratification = LicitationProcessRatification.make!(:processo_licitatorio_computador)
+
+      PurchaseProcessFractionationCreator.should_receive(:create!).with(ratification.licitation_process)
+
+      delete :destroy, id: ratification.id
     end
   end
 end

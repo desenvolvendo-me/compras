@@ -7,6 +7,7 @@ describe LicitationProcessesController, vcr: { cassette_name: 'controllers/licit
     controller.stub(:authenticate_user!)
     controller.stub(:authorize_resource!)
     BudgetStructure.stub(:find)
+    Prefecture.make!(:belo_horizonte)
 
     UnicoAPI::Consumer.set_customer customer
   end
@@ -37,6 +38,15 @@ describe LicitationProcessesController, vcr: { cassette_name: 'controllers/licit
 
       expect(assigns(:licitation_process).status).to eq PurchaseProcessStatus::WAITING_FOR_OPEN
     end
+
+    it 'should create the fractionation' do
+      LicitationProcess.any_instance.should_receive(:transaction).and_yield
+      LicitationProcess.any_instance.should_receive(:save).and_return true
+      LicitationProcess.any_instance.stub(:id).and_return 1
+      PurchaseProcessFractionationCreator.should_receive(:create!)
+
+      post :create, licitation_process: { id: 1 }
+    end
   end
 
   describe 'PUT #update' do
@@ -62,6 +72,12 @@ describe LicitationProcessesController, vcr: { cassette_name: 'controllers/licit
         put :update, :id => licitation_process.id, :licitation_process => {}
 
         expect(response).to redirect_to(edit_licitation_process_path(licitation_process))
+      end
+
+      it 'should create the fractionation' do
+        PurchaseProcessFractionationCreator.should_receive(:create!).with(licitation_process)
+
+        put :update, :id => licitation_process.id, :licitation_process => {}
       end
     end
   end

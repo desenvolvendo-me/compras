@@ -807,10 +807,10 @@ feature "LicitationProcessRatifications", vcr: { cassette_name: :licitation_proc
     expect(page).to have_notice 'Homologação e Adjudicação de Processo de Compra criada com sucesso.'
 
     within_records do
-      click_link '1'
+      click_link '2/2013 - Dispensa justificadas 1'
     end
 
-    expect(page).to have_field 'Processo de compra', :with => '2/2013 - Concorrência 1', disabled: true
+    expect(page).to have_field 'Processo de compra', :with => '2/2013 - Dispensa justificadas 1', disabled: true
     expect(page).to have_field 'Participante vencedor', :with => 'Gabriel Sobrinho'
     expect(page).to have_field 'Data de homologação', :with => I18n.l(Date.current)
     expect(page).to have_field 'Data de adjudicação', :with => I18n.l(Date.current)
@@ -836,10 +836,10 @@ feature "LicitationProcessRatifications", vcr: { cassette_name: :licitation_proc
     expect(page).to have_notice 'Homologação e Adjudicação de Processo de Compra editada com sucesso.'
 
     within_records do
-      click_link '2/2013 - Concorrência 1'
+      click_link '2/2013 - Dispensa justificadas 1'
     end
 
-    expect(page).to have_field 'Processo de compra', :with => '2/2013 - Concorrência 1', disabled: true
+    expect(page).to have_field 'Processo de compra', :with => '2/2013 - Dispensa justificadas 1', disabled: true
     expect(page).to have_field 'Participante vencedor', :with => 'Gabriel Sobrinho'
     expect(page).to have_field 'Data de homologação', :with => I18n.l(Date.tomorrow)
     expect(page).to have_field 'Data de adjudicação', :with => I18n.l(Date.tomorrow)

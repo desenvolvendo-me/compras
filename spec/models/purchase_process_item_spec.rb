@@ -22,11 +22,14 @@ describe PurchaseProcessItem do
 
   it { should have_one(:purchase_process_accreditation) }
   it { should have_one(:ratification_item).dependent(:restrict) }
+  it { should have_one(:material_class) }
 
   it { should delegate(:reference_unit).to(:material).allowing_nil(true) }
   it { should delegate(:description).to(:material).allowing_nil(true) }
   it { should delegate(:direct_purchase?).to(:licitation_process).allowing_nil(true) }
   it { should delegate(:judgment_form_item?).to(:licitation_process).allowing_nil(true) }
+  it { should delegate(:unit_price).to(:ratification_item).allowing_nil(true).prefix(true) }
+  it { should delegate(:total_price).to(:ratification_item).allowing_nil(true).prefix(true) }
 
   it { should auto_increment(:item_number).by([:licitation_process_id, :lot]) }
 

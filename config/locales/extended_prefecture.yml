@@ -7,5 +7,6 @@ pt-BR:
 
     attributes:
       extended_prefecture:
+        control_fractionation: "Controla fracionamento?"
         organ_code: "Código do órgão"
         organ_kind: "Tipo do órgão"
