@@ -15,7 +15,7 @@ feature 'Report::PurchaseSolicitations', vcr: {cassette_name: 'report_purchase_s
 
     select 'Analítico', from: 'Tipo de relatório'
 
-    click_button 'Gerar Relatório de solicitações de compras emitidas'
+    click_button 'Gerar Relatório de solicitação de compra emitida'
 
     within_records do
       within 'tbody tr:nth-child(1)' do
@@ -70,7 +70,7 @@ feature 'Report::PurchaseSolicitations', vcr: {cassette_name: 'report_purchase_s
 
     select 'Sintético', from: 'Tipo de relatório'
 
-    click_button 'Gerar Relatório de solicitações de compras emitidas'
+    click_button 'Gerar Relatório de solicitação de compra emitida'
 
     within_records do
       within 'tbody tr:nth-child(1)' do
@@ -114,7 +114,7 @@ feature 'Report::PurchaseSolicitations', vcr: {cassette_name: 'report_purchase_s
 
     select 'Sintético', from: 'Tipo de relatório'
 
-    click_button 'Gerar Relatório de solicitações de compras emitidas'
+    click_button 'Gerar Relatório de solicitação de compra emitida'
 
     within_records do
       within 'tbody tr:nth-child(1)' do
@@ -139,7 +139,7 @@ feature 'Report::PurchaseSolicitations', vcr: {cassette_name: 'report_purchase_s
 
     select 'Analítico', from: 'Tipo de relatório'
 
-    click_button 'Gerar Relatório de solicitações de compras emitidas'
+    click_button 'Gerar Relatório de solicitação de compra emitida'
 
     within_records do
       within 'tbody tr', text: '2/2012' do
@@ -173,7 +173,7 @@ feature 'Report::PurchaseSolicitations', vcr: {cassette_name: 'report_purchase_s
 
     select 'Analítico', from: 'Tipo de relatório'
 
-    click_button 'Gerar Relatório de solicitações de compras emitidas'
+    click_button 'Gerar Relatório de solicitação de compra emitida'
 
     within_records do
       within 'tbody tr:nth-child(1)' do
@@ -216,7 +216,7 @@ feature 'Report::PurchaseSolicitations', vcr: {cassette_name: 'report_purchase_s
 
     select 'Sintético', from: 'Tipo de relatório'
 
-    click_button 'Gerar Relatório de solicitações de compras emitidas'
+    click_button 'Gerar Relatório de solicitação de compra emitida'
 
     within_records do
       within 'tbody tr:nth-child(1)' do
@@ -249,7 +249,7 @@ feature 'Report::PurchaseSolicitations', vcr: {cassette_name: 'report_purchase_s
     select 'Liberada', from: 'Status'
     select 'Sintético', from: 'Tipo de relatório'
 
-    click_button 'Gerar Relatório de solicitações de compras emitidas'
+    click_button 'Gerar Relatório de solicitação de compra emitida'
 
     within_records do
       within 'tbody tr:nth-child(1)' do
@@ -272,7 +272,7 @@ feature 'Report::PurchaseSolicitations', vcr: {cassette_name: 'report_purchase_s
     select 'Liberada', from: 'Status'
     select 'Analítico', from: 'Tipo de relatório'
 
-    click_button 'Gerar Relatório de solicitações de compras emitidas'
+    click_button 'Gerar Relatório de solicitação de compra emitida'
 
     within_records do
       within 'tbody tr:nth-child(1)' do
@@ -296,7 +296,7 @@ feature 'Report::PurchaseSolicitations', vcr: {cassette_name: 'report_purchase_s
 
       select 'Analítico', from: 'Tipo de relatório'
 
-      click_button 'Gerar Relatório de solicitações de compras emitidas'
+      click_button 'Gerar Relatório de solicitação de compra emitida'
 
       within_records do
         within 'tbody tr:nth-child(1)' do
@@ -397,7 +397,7 @@ feature 'Report::PurchaseSolicitations', vcr: {cassette_name: 'report_purchase_s
       fill_with_autocomplete 'Solicitante', with: 'Secretaria de Educação'
       select 'Sintético', from: 'Tipo de relatório'
 
-      click_button 'Gerar Relatório de solicitações de compras emitidas'
+      click_button 'Gerar Relatório de solicitação de compra emitida'
 
       within_records do
         within 'tbody tr:nth-child(1)' do
