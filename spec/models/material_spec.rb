@@ -29,6 +29,7 @@ describe Material do
   it { should have_many(:purchase_solicitations).through(:purchase_solicitation_items).dependent(:restrict) }
   it { should have_many(:purchase_solicitation_budget_allocations).through(:purchase_solicitations).dependent(:restrict) }
   it { should have_many(:materials_controls).dependent(:destroy) }
+  it { should have_many(:licitation_processes).through(:purchase_process_items) }
 
   it { should validate_presence_of :material_class }
   it { should validate_presence_of :code }
