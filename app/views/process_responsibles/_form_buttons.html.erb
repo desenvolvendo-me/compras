@@ -1,6 +1,6 @@
 <div class="buttons">
   <% if can?(:modify, main_controller_name) %>
-    <%= f.button :submit, 'data-disabled' => not_updateable_message  %>
+    <%= f.button :submit  %>
   <% end %>
 
   <%= f.button :back %>
