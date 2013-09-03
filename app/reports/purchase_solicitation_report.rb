@@ -1,26 +1,42 @@
 class PurchaseSolicitationReport < Report
+  include StartEndDatesRange
+
   attr_accessor :budget_structure, :budget_structure_id, :kind, :status, :material,
-    :material_id, :start_date, :end_date
+    :material_id, :start_date, :end_date, :report_type
 
   has_enumeration_for :kind, :with => PurchaseSolicitationKind
   has_enumeration_for :status, :with => PurchaseSolicitationServiceStatus
+  has_enumeration_for :report_type, create_helpers: true
 
-  validates :start_date, :end_date, :presence => true
+  validates :report_type, :presence => true
 
-  def records
-    super.
-      joins { items.material }.
-      select { sum(items.quantity).as(:quantity) }.
-      select { sum(items.quantity * items.unit_price).as(:total) }.
-      select { budget_structure_id }.
-      select { items.material_id }.
-      group { budget_structure_id }.
-      group { items.material_id }.
-      order("budget_structure_id, material_id")
+  def records_grouped
+    records.
+      joins { purchase_solicitation }.
+      select { sum(quantity).as(:quantity) }.
+      select { sum(quantity * unit_price).as(:total) }.
+      select { purchase_solicitation.budget_structure_id }.
+      select { material_id }.
+      group { purchase_solicitation.budget_structure_id }.
+      group { material_id }
   end
 
   def item(record, material_repository = Material)
     material_repository.find record.material_id
+  end
+
+  def record_code_year(record, purchase_solicitation_repository = PurchaseSolicitation)
+    purchase_solicitation = purchase_solicitation_repository.find(record.purchase_solicitation_id)
+
+    "#{purchase_solicitation.code}/#{purchase_solicitation.accounting_year}"
+  end
+
+  def record_budget_structure(record, budget_strucure_repository = BudgetStructure)
+    budget_strucure_repository.find record.budget_structure_id
+  end
+
+  def render_list?
+    true
   end
 
   private

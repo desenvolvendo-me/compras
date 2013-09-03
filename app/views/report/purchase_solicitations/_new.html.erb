@@ -1,0 +1,7 @@
+<div class="field-without-label">
+  <% if @report.report_type.nil? || @report.analytical? %>
+    <%= render 'report_analytical', report: @report %>
+  <% else %>
+    <%= render 'records', report: @report %>
+  <% end %>
+</div>

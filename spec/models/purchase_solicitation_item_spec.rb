@@ -21,6 +21,7 @@ describe PurchaseSolicitationItem do
   end
 
   it { should delegate(:services?).to(:purchase_solicitation).allowing_nil(true) }
+  it { should delegate(:budget_structure).to(:purchase_solicitation).allowing_nil(true).prefix(true) }
   it { should delegate(:material_characteristic).to(:material).allowing_nil(true) }
 
   it 'should calculate total price' do

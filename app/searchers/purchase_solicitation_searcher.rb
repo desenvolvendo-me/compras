@@ -1,26 +1,30 @@
 class PurchaseSolicitationSearcher
   include Quaestio
 
-  repository PurchaseSolicitation
+  repository PurchaseSolicitationItem
 
   def budget_structure_id(id)
-    where { budget_structure_id.eq(id) }
+    joins { purchase_solicitation }.
+    where { purchase_solicitation.budget_structure_id.eq(id) }
   end
 
   def kind(selected_kind)
-    where { kind.eq(selected_kind) }
+    joins { purchase_solicitation }.
+    where { purchase_solicitation.kind.eq(selected_kind) }
   end
 
   def status(selected_status)
-    where { service_status.eq(selected_status) }
+    joins { purchase_solicitation }.
+    where { purchase_solicitation.service_status.eq(selected_status) }
   end
 
   def material_id(id)
-    joins { items }.
     where { material_id.eq(id) }
   end
 
   def between_dates(dates_range)
-    where { request_date.in dates_range }
+    joins { purchase_solicitation }.
+    where { purchase_solicitation.request_date.in dates_range }.
+    order { 'budget_structure_id, material_id' }
   end
 end
