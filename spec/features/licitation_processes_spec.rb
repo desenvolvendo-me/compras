@@ -1366,12 +1366,31 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
       expect(page).to_not have_css '.justification'
     end
 
+    within_tab 'Solicitantes' do
+      expect(page).to_not have_field 'Importar vencedores'
+      expect(page).to_not have_field 'Importar preço médio'
+    end
+
     within_tab 'Principal' do
       choose 'Compra direta'
     end
 
     within_tab 'Itens' do
       expect(page).to have_css '.justification'
+    end
+
+    within_tab 'Solicitantes' do
+      expect(page).to have_field 'Importar vencedores'
+      expect(page).to have_field 'Importar preço médio', checked: true
+    end
+
+     within_tab 'Principal' do
+      choose 'Processo licitatório'
+    end
+
+    within_tab 'Solicitantes' do
+      expect(page).to_not have_field 'Importar vencedores'
+      expect(page).to_not have_field 'Importar preço médio'
     end
   end
 
@@ -2763,5 +2782,185 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
     end
 
     Timecop.return
+  end
+
+  scenario 'fills average unit price of purchase solicitation price collection proposal items when option is selected' do
+    price_collection = PriceCollection.make!(:coleta_de_precos_com_2_lotes, type_of_calculation: PriceCollectionTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM)
+    PurchaseSolicitation.make!(:reparo_liberado, :accounting_year => Date.current.year, price_collections: [price_collection])
+    proposal_1 = PriceCollectionProposal.make!(:proposta_de_coleta_de_precos, price_collection: price_collection)
+    proposal_2 = PriceCollectionProposal.make!(:sobrinho_sa_proposta, price_collection: price_collection,
+                   creditor: Creditor.make(:sobrinho_sa, accounts: [ CreditorBankAccount.make(:conta_2, number: '000103') ] ))
+    proposal_3 = PriceCollectionProposal.make!(:sobrinho_sa_proposta_without_user, price_collection: price_collection)
+
+    PriceCollectionProposalItem.destroy_all
+
+    PriceCollectionProposalItem.make!(:wenderson_antivirus,
+      price_collection_proposal: proposal_1,
+      price_collection_item: price_collection.items.first,
+      unit_price: 10.00)
+
+    PriceCollectionProposalItem.make!(:sobrinho_antivirus,
+      price_collection_proposal: proposal_2,
+      price_collection_item: price_collection.items.first,
+      unit_price: 13.50)
+
+    PriceCollectionProposalItem.make!(:sobrinho_antivirus,
+      price_collection_proposal: proposal_3,
+      price_collection_item: price_collection.items.first,
+      unit_price: 0)
+
+    navigate 'Processos de Compra > Processos de Compras'
+
+    click_link 'Criar Processo de Compra'
+
+    within_tab 'Principal' do
+      choose 'Compra direta'
+    end
+
+    within_tab 'Solicitantes' do
+      choose 'Importar preço médio'
+
+      fill_with_autocomplete 'Solicitações de compra', with: '1/2013'
+
+      within_records do
+        expect(page).to have_content '1/2013'
+        expect(page).to have_content '1 - Detran'
+        expect(page).to have_content 'Gabriel Sobrinho'
+      end
+    end
+
+    within_tab 'Itens / Justificativa' do
+      within_records do
+        expect(page).to have_content '1'
+        expect(page).to have_content '01.01.00001 - Antivirus'
+        expect(page).to have_content 'UN'
+        expect(page).to have_content '3,00'
+        expect(page).to have_content '11,75'
+        expect(page).to have_content '35,25'
+      end
+    end
+  end
+
+  scenario 'doesnt fill average unit price of purchase solicitation price collection proposal items when there isnt any registered price collection' do
+    price_collection = PriceCollection.make!(:coleta_de_precos_com_2_lotes, type_of_calculation: PriceCollectionTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM)
+    PurchaseSolicitation.make!(:reparo_liberado, :accounting_year => Date.current.year, price_collections: [price_collection])
+
+    navigate 'Processos de Compra > Processos de Compras'
+
+    click_link 'Criar Processo de Compra'
+
+    within_tab 'Principal' do
+      choose 'Compra direta'
+    end
+
+    within_tab 'Solicitantes' do
+      choose 'Importar preço médio'
+
+      fill_with_autocomplete 'Solicitações de compra', with: '1/2013'
+
+      within_records do
+        expect(page).to have_content '1/2013'
+        expect(page).to have_content '1 - Detran'
+        expect(page).to have_content 'Gabriel Sobrinho'
+      end
+    end
+
+    within_tab 'Itens / Justificativa' do
+      within_records do
+        expect(page).to have_content '1'
+        expect(page).to have_content '01.01.00001 - Antivirus'
+        expect(page).to have_content 'UN'
+        expect(page).to have_content '3,00'
+        expect(page).to have_content '0,00'
+      end
+    end
+  end
+
+  scenario 'fills creditor and unit price of best purchase solicitation price collection proposal item when option is selected' do
+    price_collection = PriceCollection.make!(:coleta_de_precos_com_2_lotes, type_of_calculation: PriceCollectionTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM)
+    PurchaseSolicitation.make!(:reparo_liberado, :accounting_year => Date.current.year, price_collections: [price_collection])
+    proposal_1 = PriceCollectionProposal.make!(:proposta_de_coleta_de_precos, price_collection: price_collection)
+    proposal_2 = PriceCollectionProposal.make!(:sobrinho_sa_proposta, price_collection: price_collection,
+                   creditor: Creditor.make(:sobrinho_sa, accounts: [ CreditorBankAccount.make(:conta_2, number: '000103') ] ))
+
+    PriceCollectionProposalItem.destroy_all
+
+    PriceCollectionProposalItem.make!(:wenderson_antivirus,
+                                      :price_collection_proposal => proposal_1,
+                                      :price_collection_item => price_collection.items.first,
+                                      :unit_price => 15.00)
+    PriceCollectionProposalItem.make!(:sobrinho_antivirus,
+                                      :price_collection_proposal => proposal_2,
+                                      :price_collection_item => price_collection.items.first,
+                                      :unit_price => 13.50)
+
+    navigate 'Processos de Compra > Processos de Compras'
+
+    click_link 'Criar Processo de Compra'
+
+    within_tab 'Principal' do
+      choose 'Compra direta'
+    end
+
+    within_tab 'Solicitantes' do
+      choose 'Importar vencedores'
+
+      fill_with_autocomplete 'Solicitações de compra', with: '1/2013'
+
+      within_records do
+        expect(page).to have_content '1/2013'
+        expect(page).to have_content '1 - Detran'
+        expect(page).to have_content 'Gabriel Sobrinho'
+      end
+    end
+
+    within_tab 'Itens / Justificativa' do
+      within_records do
+        expect(page).to have_content '1'
+        expect(page).to have_content '01.01.00001 - Antivirus'
+        expect(page).to have_content 'UN'
+        expect(page).to have_content 'Gabriel Sobrinho'
+        expect(page).to have_content '3,00'
+        expect(page).to have_content '13,50'
+        expect(page).to have_content '40,50'
+      end
+    end
+  end
+
+  scenario 'doesnt fill winner creditor of purchase solicitation price collection proposal items when there isnt any registered price collection' do
+    price_collection = PriceCollection.make!(:coleta_de_precos_com_2_lotes, type_of_calculation: PriceCollectionTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM)
+    PurchaseSolicitation.make!(:reparo_liberado, :accounting_year => Date.current.year, price_collections: [price_collection])
+
+    navigate 'Processos de Compra > Processos de Compras'
+
+    click_link 'Criar Processo de Compra'
+
+    within_tab 'Principal' do
+      choose 'Compra direta'
+    end
+
+    within_tab 'Solicitantes' do
+      choose 'Importar vencedores'
+
+      fill_with_autocomplete 'Solicitações de compra', with: '1/2013'
+
+      within_records do
+        expect(page).to have_content '1/2013'
+        expect(page).to have_content '1 - Detran'
+        expect(page).to have_content 'Gabriel Sobrinho'
+      end
+    end
+
+    within_tab 'Itens / Justificativa' do
+      within_records do
+        expect(page).to have_content '1'
+        expect(page).to have_content '01.01.00001 - Antivirus'
+        expect(page).to have_content 'UN'
+        expect(page).to have_content '0,00'
+        expect(page).to have_content '3,00'
+
+        expect(page).to_not have_content 'Gabriel Sobrinho'
+      end
+    end
   end
 end

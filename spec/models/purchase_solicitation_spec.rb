@@ -2,6 +2,8 @@ require 'model_helper'
 require 'lib/annullable'
 require 'lib/signable'
 require 'app/models/budget_structure'
+require 'app/models/expense_nature'
+require 'app/models/budget_allocation'
 require 'app/models/purchase_solicitation_budget_allocation'
 require 'app/models/purchase_solicitation_item'
 require 'app/models/budget_allocation'
@@ -27,6 +29,8 @@ describe PurchaseSolicitation do
   it { should have_many(:purchase_solicitation_budget_allocations).dependent(:destroy).order(:id) }
   it { should have_many(:items).dependent(:restrict)}
   it { should have_many(:purchase_solicitation_liberations).dependent(:destroy).order(:sequence) }
+  it { should have_many(:price_collection_items).through(:price_collections) }
+  it { should have_many(:price_collection_proposal_items).through(:price_collection_items) }
   it { should have_one(:annul).dependent(:destroy) }
   it { should belong_to :responsible }
   it { should belong_to :delivery_location }

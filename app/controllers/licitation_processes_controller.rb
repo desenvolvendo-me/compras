@@ -11,6 +11,7 @@ class LicitationProcessesController < CrudController
     object = build_resource
     object.process_date = Date.current
     object.status = PurchaseProcessStatus::WAITING_FOR_OPEN
+    object.purchase_solicitation_import_option = PurchaseSolicitationImportOption::AVERAGE_PRICE
 
     super
   end

@@ -24,6 +24,12 @@ describe LicitationProcessesController, vcr: { cassette_name: 'controllers/licit
 
       expect(assigns(:licitation_process).status).to eq PurchaseProcessStatus::WAITING_FOR_OPEN
     end
+
+    it 'uses average_price default value for purchase solicitation import option' do
+      get :new
+
+      expect(assigns(:licitation_process).purchase_solicitation_import_option).to eq PurchaseSolicitationImportOption::AVERAGE_PRICE
+    end
   end
 
   describe 'POST #create' do
