@@ -15,10 +15,9 @@
     $.ajax({
       url: url,
       data: params,
-      cache: false,
       dataType: 'json',
       method: 'GET',
       success: callback
     });
-  }
+  };
 }(jQuery));
