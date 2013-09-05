@@ -4,8 +4,8 @@ require 'app/models/supply_order_item'
 
 describe SupplyOrderItem do
   it { should belong_to :supply_order }
+  it { should belong_to :material }
 
-  it { should delegate(:material).to(:pledge_item).allowing_nil(true) }
   it { should delegate(:unit_price).to(:pledge_item).allowing_nil(true) }
   it { should delegate(:estimated_total_price).to(:pledge_item).allowing_nil(true).prefix(true) }
   it { should delegate(:service_without_quantity?).to(:material).allowing_nil true }

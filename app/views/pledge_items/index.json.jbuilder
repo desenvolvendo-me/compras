@@ -3,6 +3,7 @@ json.array!(collection) do |obj|
   json.value                     obj.to_s
   json.label                     obj.to_s
   json.material                  obj.material.to_s
+  json.material_id               obj.material.id
   json.balance                   obj.supply_order_item_balance
   json.value_balance             number_with_precision obj.supply_order_item_value_balance
   json.reference_unit            obj.reference_unit.to_s
