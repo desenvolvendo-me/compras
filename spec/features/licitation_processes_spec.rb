@@ -21,7 +21,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
     Timecop.return
   end
 
-  scenario 'create and update a licitation_process' do
+  scenario 'create and update a licitation_process', :reset_ids do
     Timecop.travel(Date.new(2012, 10, 10))
     PaymentMethod.make!(:dinheiro)
     DocumentType.make!(:fiscal)
@@ -812,7 +812,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
     expect(page).to have_content "Habilitações do Processo de Compra 1/2012"
   end
 
-  scenario "allowing changes to licitation process after ratification" do
+  scenario "allowing changes to licitation process after ratification", :reset_ids do
     LicitationProcessRatification.make!(:processo_licitatorio_computador)
 
     navigate 'Processos de Compra > Processos de Compras'
