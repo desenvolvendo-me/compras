@@ -23,6 +23,14 @@ class MaterialsController < CrudController
 
     MaterialCodeGenerator.new(object).generate!
 
-    super
+    if super
+      object.transaction do
+        MaterialClassFractionationUpdater.update(object.reload)
+      end
+
+      return true
+    end
+
+    false
   end
 end

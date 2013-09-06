@@ -1,14 +1,18 @@
 class SupplyOrderItem < Compras::Model
+  include BelongsToResource
+
   attr_accessible :authorization_quantity, :authorization_value,
-    :licitation_process_ratification_item_id, :supply_order_id
+    :pledge_item_id, :supply_order_id, :material_id
 
   belongs_to :supply_order
-  belongs_to :licitation_process_ratification_item
+  belongs_to :material
 
-  delegate :material, :reference_unit, :unit_price, :total_price,
-    :supply_order_item_balance, :supply_order_item_value_balance,
-    to: :licitation_process_ratification_item, allow_nil: true
-  delegate :control_amount?, to: :material, allow_nil: true
+  belongs_to_resource :pledge_item
+
+  delegate :unit_price, to: :pledge_item, allow_nil: true
+  delegate :quantity, :estimated_total_price,
+    to: :pledge_item, allow_nil: true, prefix: true
+  delegate :service_without_quantity?, :reference_unit, to: :material, allow_nil: true
 
   validates :authorization_value,    numericality: { greater_than: 0 }, unless: :authorization_quantity
   validates :authorization_quantity, numericality: { greater_than: 0 }, unless: :authorization_value
@@ -19,24 +23,28 @@ class SupplyOrderItem < Compras::Model
   orderize "id DESC"
   filterize
 
+  scope :by_pledge_item_id, ->(pledge_item_id) do
+    where { |query| query.pledge_item_id.eq(pledge_item_id) }
+  end
+
   def authorized_quantity
     SupplyOrderItem.where { |query|
-      query.licitation_process_ratification_item_id.eq(licitation_process_ratification_item_id)
+      query.pledge_item_id.eq(pledge_item_id)
     }.sum(:authorization_quantity) || 0
   end
 
   def authorized_value
     SupplyOrderItem.where { |query|
-      query.licitation_process_ratification_item_id.eq(licitation_process_ratification_item_id)
+      query.pledge_item_id.eq(pledge_item_id)
     }.sum(:authorization_value) || 0
   end
 
   def quantity
-    licitation_process_ratification_item.try(:quantity).to_i
+    pledge_item_quantity.to_i
   end
 
   def value
-    licitation_process_ratification_item.try(:unit_price).to_f
+    BigDecimal("#{unit_price}")
   end
 
   def balance
@@ -45,6 +53,22 @@ class SupplyOrderItem < Compras::Model
 
   def value_balance
     value - authorized_value
+  end
+
+  def total_price
+    BigDecimal("#{pledge_item_estimated_total_price}")
+  end
+
+  def supply_order_item_balance
+    item = pledge_item(false)
+
+    item ? item.supply_order_item_balance : 0
+  end
+
+  def supply_order_item_value_balance
+    item = pledge_item(false)
+
+    item ? item.supply_order_item_value_balance : 0
   end
 
   private
@@ -67,7 +91,7 @@ class SupplyOrderItem < Compras::Model
   end
 
   def real_authorization_value
-    authorization_value - (old_authorization_value || 0)
+    authorization_value - old_authorization_value
   end
 
   def authorization_value_limit(numeric_parser = ::I18n::Alchemy::NumericParser)

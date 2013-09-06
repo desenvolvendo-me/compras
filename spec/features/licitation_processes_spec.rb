@@ -17,7 +17,11 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
     sign_in
   end
 
-  scenario 'create and update a licitation_process' do
+  after do
+    Timecop.return
+  end
+
+  scenario 'create and update a licitation_process', :reset_ids do
     Timecop.travel(Date.new(2012, 10, 10))
     PaymentMethod.make!(:dinheiro)
     DocumentType.make!(:fiscal)
@@ -493,7 +497,6 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
 
       expect(page).to have_content 'Oficial'
     end
-    Timecop.return
   end
 
   scenario 'changing judgment form' do
@@ -809,7 +812,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
     expect(page).to have_content "Habilitações do Processo de Compra 1/2012"
   end
 
-  scenario "allowing changes to licitation process after ratification" do
+  scenario "allowing changes to licitation process after ratification", :reset_ids do
     LicitationProcessRatification.make!(:processo_licitatorio_computador)
 
     navigate 'Processos de Compra > Processos de Compras'
@@ -2262,7 +2265,6 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
     click_button 'Salvar'
 
     expect(page).to have_notice "Processo de Compra 123/#{Date.current.year} editado com sucesso."
-    Timecop.return
   end
 
   scenario 'should auto_increment process in licitation_process when process is blank' do
@@ -2365,7 +2367,6 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
     within_tab 'Principal' do
       expect(page).to have_field 'Processo', :with => '2'
     end
-    Timecop.return
   end
 
   scenario 'should not auto_increment process in licitation_process when process is not blank' do
@@ -2469,7 +2470,6 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
     within_tab 'Principal' do
       expect(page).to have_field 'Processo', :with => '3'
     end
-    Timecop.return
   end
 
   scenario 'should filter auto_complete in budget_allocation by budget_allocation_year' do
@@ -2530,8 +2530,6 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
     click_button 'Salvar'
 
     expect(page).to have_content 'Dotação 13 - 3.0.00.00.00 - Despesas Correntes não pode ser apagada pois já está em uso'
-
-    Timecop.return
   end
 
   scenario 'cannot allow remove budget_allocation that cannot be used by pledge', :reset_ids do
@@ -2562,8 +2560,6 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
     click_button 'Salvar'
 
     expect(page).to have_content 'Dotação 14 - 3.1.00.00.00 - Pessoal e Encargos Sociais não pode ser apagada pois já está em uso'
-
-    Timecop.return
   end
 
   scenario 'cannot allow change budget_allocation that cannot be used by reserve_fund', :reset_ids do
@@ -2601,8 +2597,6 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
     click_button 'Salvar'
 
     expect(page).to have_content 'Dotação orçamentária já está reservada ou empenhada'
-
-    Timecop.return
   end
 
   scenario 'cannot allow change budget_allocation that cannot be used by pledge', :reset_ids do
@@ -2640,8 +2634,6 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
     click_button 'Salvar'
 
     expect(page).to have_content 'Dotação orçamentária já está reservada ou empenhada'
-
-    Timecop.return
   end
 
   scenario 'should enable budget_allocation when budget_allocation_year is change' do
@@ -2780,8 +2772,6 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
         expect(page).to have_content '80.000,00'
       end
     end
-
-    Timecop.return
   end
 
   scenario 'fills average unit price of purchase solicitation price collection proposal items when option is selected' do

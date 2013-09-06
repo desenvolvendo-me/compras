@@ -29,6 +29,7 @@ describe Material do
   it { should have_many(:purchase_solicitations).through(:purchase_solicitation_items).dependent(:restrict) }
   it { should have_many(:purchase_solicitation_budget_allocations).through(:purchase_solicitations).dependent(:restrict) }
   it { should have_many(:materials_controls).dependent(:destroy) }
+  it { should have_many(:licitation_processes).through(:purchase_process_items) }
 
   it { should validate_presence_of :material_class }
   it { should validate_presence_of :code }
@@ -69,6 +70,34 @@ describe Material do
     context 'when does not have a material_class' do
       it 'should returns the material_class to_s' do
         expect(subject.autocomplete_material_class).to eq ''
+      end
+    end
+  end
+
+  describe '#service_without_quantity?' do
+    context 'when service' do
+      before do
+        subject.stub(service?: true)
+      end
+
+      context 'with control_amount' do
+        before do
+          subject.stub(control_amount?: true)
+        end
+
+        it 'should be false' do
+          expect(subject.service_without_quantity?).to be_false
+        end
+      end
+
+      context 'without control_amount' do
+        before do
+          subject.stub(control_amount?: false)
+        end
+
+        it 'should be true' do
+          expect(subject.service_without_quantity?).to be_true
+        end
       end
     end
   end

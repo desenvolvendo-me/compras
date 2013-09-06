@@ -1,9 +1,10 @@
 <%= f.input :supply_order_id, as: :hidden %>
-<%= f.input :licitation_process_ratification_item_id, as: :hidden, input_html: { value: ratification_item_id } %>
+<%= f.input :material_id, as: :hidden, input_html: { value: material_id } %>
+<%= f.input :pledge_item_id, as: :hidden, input_html: { value: pledge_item_id } %>
 
 <div class="yui3-g">
   <div class="yui3-u-7-8">
-    <%= f.input :material, disabled: true, input_html: { value: material }  %>
+    <%= f.input :material, as: :string, disabled: true, input_html: { value: material } %>
   </div>
 
   <div class="yui3-u-1-8">

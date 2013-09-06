@@ -20,40 +20,50 @@ function setModalUrlToCreditor() {
   $('#supply_order_creditor').data('modal-url', urlModal);
 }
 
-function getRatificationItems(licitationProcessId) {
-  var ratificationItemsUrl = Routes.licitation_process_ratification_items,
+function setPledgeSource() {
+  var url = Routes.pledges,
       params = {
-        licitation_process_id: licitationProcessId,
-        creditor_id: $("#supply_order_creditor_id").val()
+        by_purchase_process_id: $('#supply_order_licitation_process_id').val()
       };
 
-  $.getIndex(ratificationItemsUrl, params, function(ratification_items) {
-    fillSupplyOrderQuantities(ratification_items);
+  url += "?" + $.param(params);
+  $('#supply_order_pledge').data('source', url);
+}
+
+function getPledgeItems(pledgeId) {
+  var pledgeItemsUrl = Routes.pledge_items,
+      params = {
+        by_pledge_id: pledgeId
+      };
+
+  $.getIndex(pledgeItemsUrl, params, function(pledge_items) {
+    fillSupplyOrderQuantities(pledge_items);
   });
 }
 
-function fillSupplyOrderQuantities(ratification_items) {
+function fillSupplyOrderQuantities(pledge_items) {
   var target           = $('div#supply_order_items'),
       templateValue    = $('#supply_order_items_value_template'),
       templateQuantity = $('#supply_order_items_quantity_template');
 
   target.empty();
 
-  _.each(ratification_items, function(ratification_item) {
+  _.each(pledge_items, function(pledge_item) {
     var defaults = { uuid_item: _.uniqueId('fresh-') };
-    var options  = $.extend({}, defaults, ratification_item);
+    var options  = $.extend({}, defaults, pledge_item);
 
-    if (ratification_item.control_amount) {
-      target.append(templateQuantity.mustache(options));
-    } else {
+    if (pledge_item.service_without_quantity) {
       target.append(templateValue.mustache(options));
-    };
+    } else {
+      target.append(templateQuantity.mustache(options));
+    }
   });
 }
 
 $(document).ready(function() {
   setModalUrlToLicitationProcess();
   setModalUrlToCreditor();
+  setPledgeSource();
 
   $('form.supply_order').on('change', '#supply_order_year', function() {
     setModalUrlToLicitationProcess();
@@ -61,6 +71,7 @@ $(document).ready(function() {
 
   $('form.supply_order').on('change', '#supply_order_licitation_process_id', function() {
     setModalUrlToCreditor();
+    setPledgeSource();
   });
 
   $('#supply_order_licitation_process').on('change', function (event, licitation_process) {
@@ -71,9 +82,9 @@ $(document).ready(function() {
     }
   });
 
-  $('#supply_order_creditor_id').on('change', function (event, creditor) {
-    if(creditor){
-      getRatificationItems($('#supply_order_licitation_process_id').val());
+  $('#supply_order_pledge_id').on('change', function (event, pledge) {
+    if(pledge){
+      getPledgeItems(pledge.id);
     }
   });
 });

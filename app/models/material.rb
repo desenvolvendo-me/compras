@@ -24,6 +24,7 @@ class Material < Compras::Model
   has_many :purchase_solicitations, :through => :purchase_solicitation_items, :dependent => :restrict
   has_many :purchase_solicitation_budget_allocations, :through => :purchase_solicitations, :dependent => :restrict
   has_many :materials_controls, :dependent => :destroy, :inverse_of => :material, :order => :id
+  has_many :licitation_processes, through: :purchase_process_items
 
   validates :material_class, :reference_unit, :material_type, :detailed_description, :presence => true
   validates :code, :description, :presence => true, :uniqueness => { :allow_blank => true }
@@ -67,5 +68,9 @@ class Material < Compras::Model
     return '' unless material_class.present?
 
     material_class.to_s
+  end
+
+  def service_without_quantity?
+    service? && !control_amount?
   end
 end
