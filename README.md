@@ -1,4 +1,4 @@
-# Compras e Licitações ![](https://semaphoreapp.com/api/v1/projects/d906cde0e497abf23305c0150b4a771f1f0b4c6c/831/badge.png)
+# Compras e Licitações [![Build Status](https://semaphoreapp.com/api/v1/projects/d1bc23d2-a867-42ac-8ece-5ac722284c8a/176777/badge.png)](https://semaphoreapp.com/integragrp/compras)
 
 Gestão de compras e licitações do município.
 
