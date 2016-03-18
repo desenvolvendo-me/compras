@@ -1,17 +1,32 @@
-development:
+default: &default
   adapter: postgresql
   encoding: unicode
-  database: compras_development
   pool: 5
+
+production: &production
+  <<: *default
+  database: <%= ENV['RDS_DB_NAME'] %>
+  username: <%= ENV['RDS_USERNAME'] %>
+  password: <%= ENV['RDS_PASSWORD'] %>
+  host: <%= ENV['RDS_HOSTNAME'] %>
+  port: <%= ENV['RDS_PORT'] %>
+
+staging:
+  <<: *production
+
+training:
+  <<: *production
+
+development:
+  <<: *default
+  database: compras_development
   min_messages: warning
   username: compras
   password: compras
 
 test:
-  adapter: postgresql
-  encoding: unicode
+  <<: *default
   database: compras_test
-  pool: 5
   min_messages: warning
   username: compras
   password: compras
