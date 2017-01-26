@@ -66,6 +66,10 @@ RSpec.configure do |config|
     ActiveRecord::Base.shared_connection = ActiveRecord::Base.connection
   end
 
+  config.before(:each, type: :feature) do
+    Timecop.travel(Time.local(2013, 9, 05, 10, 00, 00))
+  end
+
   config.before(:each, :reset_ids) do
     FactoryGirl::Preload.clean
     FactoryGirl::Preload.run
