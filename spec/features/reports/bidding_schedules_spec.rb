@@ -2,10 +2,6 @@
 require 'spec_helper'
 
 feature 'Report::BiddingSchedules' do
-  background do
-    sign_in
-  end
-
   scenario 'viewing the all licitation process filter by date of trial' do
     make_dependencies!
 
@@ -322,5 +318,7 @@ feature 'Report::BiddingSchedules' do
       creditor: creditor_wenderson, ratification_date: "2013-04-30".to_date, adjudication_date: "2013-04-30".to_date)
 
     Timecop.return
+
+    sign_in
   end
 end
