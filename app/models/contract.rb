@@ -62,6 +62,7 @@ class Contract < Compras::Model
 
   validate :presence_of_at_least_one_creditor
   validate :must_not_be_greater_than_one_creditor, unless: :consortium_agreement?
+  validate :check_budget_structure, on: :create
 
   orderize "id DESC"
   filterize
@@ -131,5 +132,10 @@ class Contract < Compras::Model
 
   def must_not_be_greater_than_one_creditor
     errors.add(:creditors, :must_not_be_greater_than_one_creditor) if creditor_ids.count > 1
+  end
+
+  def check_budget_structure
+    return if budget_structure_id.present?
+    errors.add(:budget_structure, :blank) if budget_structure.blank?
   end
 end
