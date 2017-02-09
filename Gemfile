@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 source 'https://rubygems.org'
 
-ruby "2.0.0"
+ruby '2.0.0'
 
 gem 'rails', '3.2.14'
 gem 'unicorn'
@@ -57,9 +57,9 @@ end
 
 group :production, :training, :staging do
   gem 'dalli', '2.6.4'
+  gem 'newrelic_rpm'
+  gem 'sentry-raven'
 end
-
-gem 'sentry-raven'
 
 group :development, :test do
   gem "factory_girl-preload", :git => 'git://github.com/MarceloCajueiro/factory_girl-preload.git'
