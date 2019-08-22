@@ -1,0 +1,14 @@
+pt-BR:
+  activerecord:
+    models:
+      demand:
+        one: "Demanda"
+        other: "Demandas"
+
+    attributes:
+      demand:
+        year: "Ano"
+        description: "Descrição"
+        observation: "Observação"
+        initial_date: "Data Inicial"
+        final_date: "Data Final"

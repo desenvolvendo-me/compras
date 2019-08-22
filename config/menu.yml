@@ -61,6 +61,10 @@ menu:
     - licitation_process_impugnments
     - licitation_process_appeals
     - process_responsibles
+    - demand_management:
+      # - demand
+      # - purchase_solicitations
+      - demands
 
   - "Instrumentos Contratuais":
     - contracts

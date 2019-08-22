@@ -1,0 +1,6 @@
+pt-BR:
+  enumerations:
+    demand_status:
+      sent: "Enviado"
+      received: "Recebido"
+      finished: "Finalizado"
