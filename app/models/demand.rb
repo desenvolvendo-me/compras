@@ -1,6 +1,9 @@
 class Demand < Compras::Model
   attr_accessible :description, :final_date, :initial_date,
-    :observation, :status, :year
+    :observation, :status, :year,:demand_batches_attributes
+
+  has_many :demand_batches, class_name: 'DemandBatch', :order => :id,dependent: :destroy
+  accepts_nested_attributes_for :demand_batches, allow_destroy: true
 
   has_enumeration_for :status, :with => DemandStatus, :create_helpers => true
 
