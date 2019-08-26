@@ -1,6 +1,7 @@
 pt-BR:
   enumerations:
     demand_status:
+      created: "Criado"
       sent: "Enviado"
       received: "Recebido"
       finished: "Finalizado"

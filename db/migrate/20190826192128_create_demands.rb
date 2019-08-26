@@ -6,7 +6,7 @@ class CreateDemands < ActiveRecord::Migration
       t.text :observation
       t.date :initial_date
       t.date :final_date
-      t.string :status
+      t.string :status, :default => 'created' 
 
       t.timestamps
     end

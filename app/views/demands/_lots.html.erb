@@ -1,1 +1,15 @@
-<%= f.input :demand_batches, as: :nested_grid, columns: [:description] %>
+<p>
+  <input type="button" class="button affirmative add-demand-batch" value="Adicionar">
+</p>
+
+<div id="demand-batch" data-nested-form="demand-batch" data-append-item=false>
+  <%= f.association :demand_batches, :collection => localized(f.object.demand_batches) do |p| %>
+    <%= render 'demand_batches/form', :f => p %>
+  <% end %>
+</div>
+
+<%= mustache 'demand-batch-template' do %>
+  <%= f.association :demand_batches_attributes, :collection => f.object.demand_batches.build, :index => '{{uuid-demand-batch}}' do |p| %>
+    <%= render 'demand_batches/form', :f => p %>
+  <% end %>
+<% end %>

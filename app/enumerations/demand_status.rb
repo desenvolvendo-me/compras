@@ -1,3 +1,3 @@
 class DemandStatus < EnumerateIt::Base
-  associate_values :sent, :received, :finished  
+  associate_values :created, :sent, :received, :finished
 end
