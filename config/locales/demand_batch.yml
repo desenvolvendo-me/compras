@@ -7,4 +7,4 @@ pt-BR:
 
     attributes:
       demand_batch:
-        name: "Nome"
+        description: "Descrição"
