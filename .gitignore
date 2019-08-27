@@ -24,6 +24,7 @@ Gemfile.local.lock
 coverage
 dump.rdb
 
+
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
