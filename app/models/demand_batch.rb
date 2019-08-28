@@ -4,4 +4,5 @@ class DemandBatch < Compras::Model
 
   has_many :batch_material, class_name: 'BatchMaterial', :order => :id,dependent: :destroy
 
+  validates :description, presence: true
 end
