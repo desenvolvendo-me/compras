@@ -8,7 +8,7 @@ pt-BR:
     attributes:
       demand:
         year: "Ano"
-        description: "Descrição"
+        name: "Nome"
         observation: "Observação"
         initial_date: "Data Inicial"
         final_date: "Data Final"

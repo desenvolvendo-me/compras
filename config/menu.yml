@@ -62,9 +62,9 @@ menu:
     - licitation_process_appeals
     - process_responsibles
     - demand_management:
-      # - demand
-      # - purchase_solicitations
       - demands
+      - demand_batches
+      - batch_materials
 
   - "Instrumentos Contratuais":
     - contracts

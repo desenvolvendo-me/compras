@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      batch_material:
+        one: "Material"
+        other: "Materiais"
+
+    attributes:
+      batch_material:
+        name: "Nome"
+        demand_batch: "Lote"
