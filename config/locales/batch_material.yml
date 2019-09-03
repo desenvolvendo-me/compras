@@ -2,10 +2,10 @@ pt-BR:
   activerecord:
     models:
       batch_material:
-        one: "Material"
-        other: "Materiais"
+        one: "Lote/Material"
+        other: "Lotes/Materiais"
 
     attributes:
       batch_material:
-        name: "Nome"
         demand_batch: "Lote"
+        material: "Material"

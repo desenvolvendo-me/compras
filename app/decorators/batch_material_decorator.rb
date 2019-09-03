@@ -3,5 +3,5 @@ class BatchMaterialDecorator
   include Decore::Proxy
   include Decore::Header
 
-  attr_header :name , :demand_batch
+  attr_header :demand_batch, :material
 end
