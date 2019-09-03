@@ -274,7 +274,7 @@ Compras::Application.routes.draw do
       get :modal
     end
   end
-
+  
   resources :contract_types do
     collection do
       get :filter
