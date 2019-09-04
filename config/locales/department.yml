@@ -1,0 +1,15 @@
+pt-BR:
+  activerecord:
+    models:
+      department:
+        one: "Departamento"
+        other: "Departamentos"
+
+    attributes:
+      department:
+        classification: "Tipo"
+        display_number: "Número"
+        name: "Nome"
+        number: "Número"
+        masked_number: "Número"
+        parent: "Departamento superior"

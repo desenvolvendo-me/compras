@@ -44,4 +44,10 @@ class Department < Compras::Model
     "#{masked_number} - #{name}"
   end
 
+  # *********************            **********************
+  # add because of materials_class exemple
+  # def splitted_masked_number_filled
+  #   splitted_masked_number.select { |level| level.to_i > 0 }
+  # end
+
 end

@@ -1,0 +1,9 @@
+pt-BR:
+  activerecord:
+    models:
+      department_person:
+        one: "Pessoa"
+
+    attributes:
+      department_person:
+        person: "Pessoa"

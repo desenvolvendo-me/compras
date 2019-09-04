@@ -568,6 +568,7 @@ Compras::Application.routes.draw do
       get :filter
       get :modal
     end
+    resources :department_people, except: [:edit, :update]
   end
 
   resource :prefecture, :except => :destroy

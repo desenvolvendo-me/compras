@@ -1,15 +1,22 @@
 <div class="yui3-g">
   <div class="yui3-u-2-3">
-    <%#= f.input :parent, as: :auto_complete, source_path: departments_path,
+  <%#= f.input :parent %>
+    <%#= f.input :parent, as: :auto_complete, source_path: departments_path ,
       input_html: {
         "data-parent-masked-number" => resource.decorator.parent_masked_number(true),
         "data-number-without-parent" => resource.decorator.number_without_parent
       }
     %>
+
+    <%= f.input :parent, :as => :auto_complete,
+                :source_path => departments_path,
+                :hidden_field => 'parent', :max_results => 20,
+                :input_html => { 'data-hidden-field-value-attribute' => 'filled_mask' } %>
+
   </div>
 
   <div class="yui3-u-1-3">
-    <%#= f.input :display_number, input_html: { class: 'span2', maxlength: 5 },
+    <%= f.input :display_number, input_html: { class: 'span2', maxlength: 5 },
       wrapper_html: { class: 'input-prepend number-prepend' } %>
     <%= f.input :number, as: :hidden %>
   </div>
@@ -24,3 +31,53 @@
     <%= f.input :classification %>
   </div>
 </div>
+
+<script>
+  // $('#department_parent').on('change', function(event, department){
+  //   $("#prepended-input").remove();
+  //
+  //   if (department) {
+  //     $("#department_mask").val(department.masked_number);
+  //     $("#department_display_number").attr("data-mask", department.child_mask);
+  //     $("#department_display_number").before(function() {
+  //       var text = department.filled_mask + '.';
+  //       return $("<span>").text(text).addClass('add-on').attr("id", "prepended-input");
+  //     });
+  //   } else {
+  //     $("#department_mask").val('');
+  //     $("#department_display_number").removeData("mask");
+  //   }
+  // });
+  //
+  // $('#department_display_number').focusin(function() {
+  //   if ($('#department_parent').val() == "") {
+  //     $("#prepended-input").remove();
+  //     $(this).attr("data-mask", "99");
+  //   }
+  // });
+
+  (function() {
+
+    console.log("teste");
+    console.log('<%= resource.decorator.masked_to_s %>');
+    // console.log("<%#= resource.id %>");
+    // $("#department_parent").val('<%#= resource.id %>');
+
+
+
+    // $("#department_parent").val('<%#= resource.decorator.persisted_parent_masked_number %>');
+    // $("#department_display_number").val('<%#= resource.decorator.number_without_parent %>');
+    // $("#department_display_number").data("mask", "<%#= resource.decorator.child_mask %>");
+    // // $("#department_parent").val("<%#= resource.decorator.persisted_masked_to_s %>");
+    //
+    // $("#department_display_number").before(function() {
+    //   // return $("<span>").text('<%#= resource.decorator.persisted_parent_masked_number(true) %>').addClass('add-on').attr("id", "prepended-input");
+    // });
+    //
+    // // unless f.object.editable?
+    // <% if 2==3 %>
+    //   // $("form :input").attr('disabled', true);
+    // <% end %>
+
+  })();
+</script>
