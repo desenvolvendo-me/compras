@@ -35,6 +35,7 @@ module Compras
       #{config.root}/app/tce_exports
       #{config.root}/app/workers
       #{config.root}/app/providers
+      #{config.root}/app/models/concerns
     )
 
     # Custom route files you want to be loaded.

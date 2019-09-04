@@ -15,6 +15,9 @@ menu:
         - signature_configurations
         - signatures
 
+    - department:
+      - departments
+
     - users:
       - positions
       - employees

@@ -1,0 +1,26 @@
+<div class="yui3-g">
+  <div class="yui3-u-2-3">
+    <%#= f.input :parent, as: :auto_complete, source_path: departments_path,
+      input_html: {
+        "data-parent-masked-number" => resource.decorator.parent_masked_number(true),
+        "data-number-without-parent" => resource.decorator.number_without_parent
+      }
+    %>
+  </div>
+
+  <div class="yui3-u-1-3">
+    <%#= f.input :display_number, input_html: { class: 'span2', maxlength: 5 },
+      wrapper_html: { class: 'input-prepend number-prepend' } %>
+    <%= f.input :number, as: :hidden %>
+  </div>
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :name %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :classification %>
+  </div>
+</div>
