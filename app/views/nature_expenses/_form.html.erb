@@ -1,11 +1,21 @@
-<div class="yui3-g">
+<div class="tabs">
+  <ul>
+    <li>
+      <a href="#main">Principal</a>
+    </li>
 
-  <div class="yui3-u-1-2">
-    <%= f.input :description %>
+    <li>
+      <a href="#splits">Desdobramento</a>
+    </li>
+
+  </ul>
+
+  <div id="main">
+    <%= render 'main', f: f %>
   </div>
 
-  <div class="yui3-u-1-6">
-    <%= f.input :nature %>
+  <div id="splits">
+    <%= render 'split', f: f %>
   </div>
 
 </div>

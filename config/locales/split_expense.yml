@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      split_expense:
+        one: "Desdobramento da Natureza de Despesa"
+        other: "Desdobramento da Natureza de Despesas"
+
+    attributes:
+      split_expense:
+        code: "Código"
+        description: "Descrição"
+        function_account: "Função Conta"
