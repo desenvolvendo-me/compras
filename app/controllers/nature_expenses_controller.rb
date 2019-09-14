@@ -1,0 +1,3 @@
+class NatureExpensesController < CrudController
+
+end

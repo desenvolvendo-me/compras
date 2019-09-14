@@ -748,6 +748,13 @@ Compras::Application.routes.draw do
     end
   end
 
+  resources :nature_expenses do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :unblock_budgets
 
   resources :users do

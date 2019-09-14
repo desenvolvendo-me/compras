@@ -20,6 +20,8 @@ menu:
       - employees
       - profiles
       - users
+    - expense:
+      - nature_expenses
 
   - commom:
     - auxiliary:
