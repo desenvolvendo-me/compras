@@ -1,17 +1,22 @@
 class DepartmentsController < CrudController
-  has_scope :synthetic, type: :boolean
-  has_scope :analytical, type: :boolean
-  has_scope :term
+  has_scope :term, :allow_blank => true
+  has_scope :limit
+  has_scope :without_children, :type => :boolean
 
-  # def create
-  #   create! { edit_resource_path(resource) }
-  # end
+  before_filter :block_when_not_editable, :only => [:update, :destroy]
 
   def new
     object = build_resource
-    # object.mask_number = '99.99.99.999.999'
 
     super
+  end
+
+  private
+
+  def block_when_not_editable
+    return if resource.editable?
+
+    raise Exceptions::Unauthorized
   end
 
 end

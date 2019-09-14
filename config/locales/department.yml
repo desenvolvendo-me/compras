@@ -7,9 +7,8 @@ pt-BR:
 
     attributes:
       department:
-        classification: "Tipo"
-        display_number: "Número"
-        name: "Nome"
-        number: "Número"
-        masked_number: "Número"
-        parent: "Departamento superior"
+        parent_class_number: "Departamento Superior"
+        number: "Código"
+        description: "Descrição"
+        type: "Tipo"
+        filled_masked_number_without_end_dot: "Código"

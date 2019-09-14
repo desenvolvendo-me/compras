@@ -1,53 +1,139 @@
-# class Department < Compras::Model
-#   attr_accessible :classification, :lft, :masked_number, :name, :number, :parent_id, :rgt
-# end
-
 class Department < Compras::Model
-  include NestedSetNumberMethods
-  acts_as_nested_set
+  attr_accessible :description, :parent_class_number, :number,
+                  :parent_number, :mask, :masked_number, :imported,:type
 
-  attr_accessible :name, :classification, :parent_id, :number, :display_number,:masked_number
+  attr_accessor :parent_class_number, :number, :parent_number
 
+  attr_modal :class_number, :description
 
-  attr_modal :name, :classification, :parent_id, :masked_number
+  has_enumeration_for :type, :with => DepartmentType, :create_helpers => true
 
-  attr_protected :lft, :rgt, :parent, :entity
+  has_many :departments, :dependent => :restrict
 
-  attr_accessor :display_number
+  validates :description, :masked_number, :presence => true
+  validates :class_number, :uniqueness => { :allow_blank => true }
+  validates :number, :numericality => { :allow_blank => true }
+  validates :class_number, :numericality => { :greater_than => 0 }
 
-  has_many :department_people, dependent: :destroy
+  before_validation :create_masked_number
+  before_validation :fill_class_number
+  after_save :update_parent_children
+  after_destroy :update_parent_children
 
-  accepts_nested_attributes_for :department_people, allow_destroy: true
-
-  has_enumeration_for :classification, with: LevelOfLegalNature, create_helpers: true
-
-  validates :name, :classification, :display_number, presence: true
-
+  orderize :description
   filterize
 
-  scope :ordered, -> { order("string_to_array(masked_number, '.', '')::int[]") }
+  scope :term, lambda { |q|
+    where {
+      (class_number.like("#{q.gsub('.','')}%") | description.like("#{q}%")) }
+  }
 
-  scope :term, ->(q) do
-    where(arel_table[:name].matches("%#{q}%")).
-      merge_or(
-        where(arel_table[:masked_number].matches("#{q}%"))
-      ).
-      merge_or(
-        where(arel_table[:name].matches("#{q.upcase}%"))
-      )
-  end
+  scope :limit, lambda { |q| limit(q) }
 
-  scope :synthetic, -> { where(classification: LevelOfLegalNature::SYNTHETIC) }
-  scope :analytical, -> { where(classification: LevelOfLegalNature::ANALYTICAL) }
+  scope :without_children, lambda {
+    where { has_children.eq(false) }
+  }
 
   def to_s
-    "#{masked_number} - #{name}"
+    "#{masked_number} - #{description}"
   end
 
-  # *********************            **********************
-  # add because of materials_class exemple
-  # def splitted_masked_number_filled
-  #   splitted_masked_number.select { |level| level.to_i > 0 }
-  # end
+  def parent
+    self.class.find_by_class_number(raw_parent_class_number)
+  end
 
+  def editable?
+    new_record? || !imported?
+  end
+
+  def children
+    return [] if class_number_level == levels
+
+    self.class.where { |department|
+      department.class_number.like("#{raw_class_number}%") &
+          department.id.not_eq(id)
+    }
+  end
+
+  def class_number_level
+    splitted_masked_number_filled.size
+  end
+
+  def levels
+    mask.split('.').size
+  end
+
+  def update_has_children
+    update_column(:has_children, children.any?)
+  end
+
+  private
+
+  def cannot_change_masked_number_when_has_materials
+    return unless department.any?
+
+    if masked_number_changed?
+      errors.add(:number, :cannot_be_changed_when_has_materials)
+    end
+  end
+
+  def not_allow_creation_when_parent_has_materials
+    return unless parent.present? && parent.materials.any?
+
+    errors.add(:parent_class_number, :materials_class_with_material_cannot_has_children)
+  end
+
+  def update_parent_children
+    if parent.present?
+      parent.update_has_children
+    end
+
+    nil
+  end
+
+  def raw_parent_class_number
+    return '' if splitted_masked_number_filled.empty?
+
+    splitted_masked_number_filled[0,class_number_level-1].join.ljust(mask_size, '0')
+  end
+
+  def splitted_masked_number
+    return [] unless masked_number.present?
+
+    masked_number.split('.')
+  end
+
+  def splitted_masked_number_filled
+    splitted_masked_number.select { |level| level.to_i > 0 }
+  end
+
+  def fill_class_number
+    return unless masked_number.present?
+
+    self.class_number = masked_number.gsub('.', '')
+  end
+
+  def raw_class_number
+    splitted_masked_number_filled.join
+  end
+
+  def create_masked_number
+    return unless parent_number && number
+
+    if parent_number.present?
+      self.masked_number = [parent_number, number].join('.')
+    else
+      self.masked_number = number
+    end
+
+    mask.split('.').each_with_index do |level, index|
+      unless splitted_masked_number[index]
+        self.masked_number += '.' + '0' * level.size
+      end
+    end
+  end
+
+  def mask_size
+    mask.gsub('.', '').size
+  end
 end
