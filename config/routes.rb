@@ -563,12 +563,19 @@ Compras::Application.routes.draw do
     end
   end
 
+  get 'departments/modal', :as => :modal_departments
   resources :departments do
     collection do
       get :filter
       get :modal
     end
-    resources :department_people, except: [:edit, :update]
+  end
+
+  resources :department_people do
+    collection do
+      get :filter
+      get :modal
+    end
   end
 
   resource :prefecture, :except => :destroy

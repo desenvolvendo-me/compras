@@ -2,8 +2,10 @@ pt-BR:
   activerecord:
     models:
       department_person:
-        one: "Pessoa"
+        one: "Solicitante"
+        other: "Solicitantes"
 
     attributes:
       department_person:
-        person: "Pessoa"
+        person: "Solicitante"
+        department: "Departamento"

@@ -12,3 +12,4 @@ pt-BR:
         description: "Descrição"
         status: "Tipo"
         filled_masked_number_without_end_dot: "Código"
+        class_number: "Código"

@@ -1,9 +1,0 @@
-var flash = new NestedRemote.Views.Flashes();
-
-<% unless resource.persisted? %>
-  flash.renderNotice("<%= flash[:notice] %>", 5000);
-
-  $("#records-wrap").trigger("recordsChange", "<%= j render_nested_remote_collection parent: parent, resource: resource, updateable: false %>");
-<% else %>
-  flash.renderAlert("<%= flash[:alert] %> <br /> <%= resource.errors.full_messages.to_sentence %>", 10000);
-<% end %>

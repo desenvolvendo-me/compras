@@ -1,4 +1,0 @@
-<%= simple_form_for [parent, resource.localized], remote: true do |f| %>
-  <%= render "#{resource.class.to_s.underscore.pluralize}/form", f: f, parent: parent, resource: resource %>
-  <%= render local_assigns[:remote_buttons_partial] || "nested_remote/remote_buttons", f: f %>
-<% end %>

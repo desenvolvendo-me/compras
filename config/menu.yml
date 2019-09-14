@@ -17,6 +17,7 @@ menu:
 
     - department:
       - departments
+      - department_people
 
     - users:
       - positions
