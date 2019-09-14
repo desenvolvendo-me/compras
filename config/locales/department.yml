@@ -10,5 +10,5 @@ pt-BR:
         parent_class_number: "Departamento Superior"
         number: "Código"
         description: "Descrição"
-        type: "Tipo"
+        status: "Tipo"
         filled_masked_number_without_end_dot: "Código"

@@ -1,12 +1,12 @@
 class Department < Compras::Model
   attr_accessible :description, :parent_class_number, :number,
-                  :parent_number, :mask, :masked_number, :imported,:type
+                  :parent_number, :mask, :masked_number, :imported,:status
 
   attr_accessor :parent_class_number, :number, :parent_number
 
   attr_modal :class_number, :description
 
-  has_enumeration_for :type, :with => DepartmentType, :create_helpers => true
+  has_enumeration_for :status, :with => DepartmentStatus, :create_helpers => true
 
   has_many :departments, :dependent => :restrict
 

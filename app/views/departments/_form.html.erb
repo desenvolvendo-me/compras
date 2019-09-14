@@ -22,7 +22,7 @@
   </div>
 
   <div class="yui3-u-1-3">
-    <%= f.input :type %>
+    <%= f.input :status %>
   </div>
 </div>
 
@@ -42,4 +42,21 @@
             $("#department_number").removeData("mask");
         }
     });
+
+    (function() {
+        console.log('<%= resource.decorator.masked_to_s %>');
+        $("#department_parent_number").val('<%= resource.decorator.persisted_parent_masked_number %>');
+        $("#department_number").val('<%= resource.decorator.last_level_class_number %>');
+        $("#department_number").data("mask", "<%= resource.decorator.child_mask %>");
+        $("#department_parent_class_number").val("<%= resource.decorator.persisted_masked_to_s %>");
+
+        $("#department_number").before(function() {
+            return $("<span>").text('<%= resource.decorator.persisted_parent_masked_number(true) %>').addClass('add-on').attr("id", "prepended-input");
+        });
+
+        <% unless f.object.editable? %>
+        $("form :input").attr('disabled', true);
+        <% end %>
+    })();
+
 </script>
