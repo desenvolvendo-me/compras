@@ -586,6 +586,21 @@ Compras::Application.routes.draw do
     end
   end
 
+  get 'departments/modal', :as => :modal_departments
+  resources :departments do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
+  resources :department_people do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resource :prefecture, :except => :destroy
 
   resources :price_collections, :except => :destroy do
