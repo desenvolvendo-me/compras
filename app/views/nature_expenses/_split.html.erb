@@ -1,17 +1,34 @@
-<div id='split-expense'>
-  <div id="split-expenses" data-nested-form="split-expenses">
-    <p>
-      <input type="button" class="button affirmative add-split-expenses" value="Adicionar">
-    </p>
 
-    <%= f.association :split_expenses, collection: localized(f.object.split_expenses) do |a| %>
-      <%= render 'split_expenses/form', f: a %>
-    <% end %>
+<p>
+  <input type="button" class="button affirmative add-split-expense" value="Adicionar">
+</p>
 
-    <%= mustache 'split-expenses-template' do %>
-      <%= f.association :split_expenses_attributes, collection: f.object.split_expenses.build.localized, index: "{{uuid-split-expenses}}" do |split_expense| %>
-        <%= render 'split_expenses/form', f: split_expense %>
-      <% end %>
-    <% end %>
-  </div>
+<div id="split-expense" data-nested-form="split-expense" data-append-item=false>
+  <%= f.association :split_expenses, :collection => localized(f.object.split_expenses) do |p| %>
+    <%= render 'split_expenses/form', :f => p %>
+  <% end %>
 </div>
+
+<%= mustache 'split-expense-template' do %>
+  <%= f.association :split_expenses_attributes, :collection => f.object.split_expenses.build, :index => '{{uuid-split-expense}}' do |p| %>
+    <%= render 'split_expenses/form', :f => p %>
+  <% end %>
+<% end %>
+
+<!--<div id='split-expense'>-->
+<!--  <div id="split-expenses" data-nested-form="split-expenses">-->
+<!--    <p>-->
+<!--      <input type="button" class="button affirmative add-split-expenses" value="Adicionar">-->
+<!--    </p>-->
+
+    <%#= f.association :split_expenses, collection: localized(f.object.split_expenses) do |a| %>
+      <%#= render 'split_expenses/form', f: a %>
+    <%# end %>
+
+    <%#= mustache 'split-expenses-template' do %>
+      <%#= f.association :split_expenses, collection: f.object.split_expenses.build.localized, index: "{{uuid-split-expenses}}" do |split_expense| %>
+        <%#= render 'split_expenses/form', f: split_expense %>
+      <%# end %>
+    <%# end %>
+<!--  </div>-->
+<!--</div>-->
