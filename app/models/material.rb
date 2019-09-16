@@ -1,4 +1,4 @@
-class Material < Compras::Model
+class Material < Unico::Model
   include BelongsToResource
 
   attr_accessible :code, :material_class_id, :description, :detailed_description,

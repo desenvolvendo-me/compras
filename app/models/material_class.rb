@@ -1,4 +1,4 @@
-class MaterialClass < Compras::Model
+class MaterialClass < Unico::Model
   attr_accessible :description, :details, :parent_class_number, :number,
                   :parent_number, :mask, :masked_number, :imported
 
@@ -7,7 +7,7 @@ class MaterialClass < Compras::Model
   attr_modal :class_number, :description
 
   has_many :materials, :dependent => :restrict
-  has_many :purchase_process_fractionations, dependent: :restrict
+  # has_many :purchase_process_fractionations, dependent: :restrict
 
   validates :description, :masked_number, :presence => true
   validates :class_number, :uniqueness => { :allow_blank => true }
