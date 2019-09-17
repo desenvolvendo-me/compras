@@ -1,4 +1,8 @@
-<%= f.input :mask, :as => :hidden %>
+<div class="yui3-g">
+  <div class="yui3-u-1-3">
+    <%= f.input :mask %>
+  </div>
+</div>
 
 <div class="yui3-g">
   <div class="yui3-u-2-3">
@@ -16,6 +20,9 @@
 
 <%= f.input :description %>
 <%= f.input :details %>
+
+<%= f.input :tce_code %>
+
 
 <script>
   $('#material_class_parent_number').on('change', function(event, materialClass){

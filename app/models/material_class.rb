@@ -1,6 +1,6 @@
 class MaterialClass < Unico::Model
   attr_accessible :description, :details, :parent_class_number, :number,
-                  :parent_number, :mask, :masked_number, :imported
+                  :parent_number, :mask, :masked_number, :imported, :tce_code
 
   attr_accessor :parent_class_number, :number, :parent_number
 
@@ -8,6 +8,8 @@ class MaterialClass < Unico::Model
 
   has_many :materials, :dependent => :restrict
   # has_many :purchase_process_fractionations, dependent: :restrict
+
+  validates :mask,format: { with:  /^[9.]{1,45}$/i }
 
   validates :description, :masked_number, :presence => true
   validates :class_number, :uniqueness => { :allow_blank => true }
