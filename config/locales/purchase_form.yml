@@ -7,5 +7,5 @@ pt-BR:
 
     attributes:
       purchase_form:
-        number: "Número"
+        name: "Número da Ficha"
         budget_allocation: "Dotação Orçametária"

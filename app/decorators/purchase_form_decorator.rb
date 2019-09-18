@@ -3,5 +3,5 @@ class PurchaseFormDecorator
   include Decore::Proxy
   include Decore::Header
 
-  attr_header :number,:budget_allocation
+  attr_header :name,:budget_allocation
 end

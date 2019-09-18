@@ -1,9 +1,7 @@
 class PurchaseFormsController < CrudController
+  def new
+    object = build_resource
 
-
-  # def new
-  #   object = build_resource
-  #
-  #   super
-  # end
+    super
+  end
 end

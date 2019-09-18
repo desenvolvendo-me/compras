@@ -1,8 +1,8 @@
 class PurchaseForm < Compras::Model
-  attr_accessible :budget_allocation, :number
-
-  attr_modal :budget_allocation, :number
+  attr_accessible :budget_allocation, :name
 
   orderize
   filterize
+
+  validates :name,:budget_allocation,presence:true
 end

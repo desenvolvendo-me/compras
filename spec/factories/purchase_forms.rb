@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :purchase_form do
-    number "MyString"
+    name "MyString"
     budget_allocation "MyString"
   end
 end
