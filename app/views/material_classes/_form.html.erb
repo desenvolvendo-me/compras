@@ -42,6 +42,7 @@
   });
 
   (function() {
+    console.log('<%= resource.decorator.masked_to_s %>');
     $("#material_class_parent_number").val('<%= resource.decorator.persisted_parent_masked_number %>');
     $("#material_class_number").val('<%= resource.decorator.last_level_class_number %>');
     $("#material_class_number").data("mask", "<%= resource.decorator.child_mask %>");

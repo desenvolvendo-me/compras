@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      department_person:
+        one: "Solicitante"
+        other: "Solicitantes"
+
+    attributes:
+      department_person:
+        person: "Solicitante"
+        department: "Departamento"
