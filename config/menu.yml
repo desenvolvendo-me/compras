@@ -52,6 +52,7 @@ menu:
     - delivery_locations
     - payment_methods
     - contract_types
+    - purchase_forms
 
   - purchasing_processes:
     - purchase_solicitations

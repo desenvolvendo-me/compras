@@ -55,6 +55,13 @@ Compras::Application.routes.draw do
     end
   end
 
+  resources :purchase_forms do
+    collection do
+      get :modal
+      get :filter
+    end
+  end
+
   resources :accounting_cost_centers, only: [:index, :modal] do
     collection do
       get :modal
