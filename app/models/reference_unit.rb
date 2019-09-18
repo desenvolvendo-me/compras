@@ -1,4 +1,5 @@
-class ReferenceUnit < Unico::Model
+# class ReferenceUnit < Unico::Model
+class ReferenceUnit < Compras::Model
   attr_accessible :name, :acronym
 
   has_many :materials, :dependent => :restrict
