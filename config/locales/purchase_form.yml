@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      purchase_form:
+        one: "Ficha de Compra"
+        other: "Fichas de Compras"
+
+    attributes:
+      purchase_form:
+        name: "Número da Ficha"
+        budget_allocation: "Dotação Orçametária"
