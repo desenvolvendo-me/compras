@@ -1,34 +1,37 @@
-class Material < Compras::Model
+class Material < Unico::Model
   include BelongsToResource
 
   attr_accessible :code, :material_class_id, :description, :detailed_description,
-                  :reference_unit_id, :manufacturer, :material_type, :combustible,
-                  :expense_nature_id, :active, :control_amount
+                  :reference_unit_id, :manufacturer, :material_classification, :combustible,
+                  :expense_nature_id, :active, :control_amount, :medicine
 
   attr_writer :autocomplete_material_class
 
-  attr_modal :description, :material_type
-
-  has_enumeration_for :material_type, :with => UnicoAPI::Resources::Compras::Enumerations::MaterialType,
-                      :create_helpers => true, :create_scopes => true
+  attr_modal :description, :material_classification
+  has_enumeration_for :material_classification, :with => MaterialClassification, :create_helpers => true
 
   belongs_to :material_class
   belongs_to :reference_unit
 
-  belongs_to_resource :expense_nature
+  validates :description,
+            :reference_unit,
+            :detailed_description,
+            :material_classification,:presence => true
 
-  has_many :purchase_process_items, :dependent => :restrict
-  has_many :purchase_solicitation_items, :dependent => :restrict
-  has_many :price_collection_items, :dependent => :restrict
-  has_many :creditor_materials, :dependent => :restrict
-  has_many :purchase_solicitations, :through => :purchase_solicitation_items, :dependent => :restrict
-  has_many :purchase_solicitation_budget_allocations, :through => :purchase_solicitations, :dependent => :restrict
-  has_many :materials_controls, :dependent => :destroy, :inverse_of => :material, :order => :id
-  has_many :licitation_processes, through: :purchase_process_items
+  # belongs_to_resource :expense_nature
 
-  validates :material_class, :reference_unit, :material_type, :detailed_description, :presence => true
-  validates :code, :description, :presence => true, :uniqueness => { :allow_blank => true }
-  validates :control_amount, :inclusion => { :in => [true, false] }
+  # has_many :purchase_process_items, :dependent => :restrict
+  # has_many :purchase_solicitation_items, :dependent => :restrict
+  # has_many :price_collection_items, :dependent => :restrict
+  # has_many :creditor_materials, :dependent => :restrict
+  # has_many :purchase_solicitations, :through => :purchase_solicitation_items, :dependent => :restrict
+  # has_many :purchase_solicitation_budget_allocations, :through => :purchase_solicitations, :dependent => :restrict
+  # has_many :materials_controls, :dependent => :destroy, :inverse_of => :material, :order => :id
+  # has_many :licitation_processeslicitation_processes, through: :purchase_process_items
+
+  # validates :material_class, :reference_unit, :material_type, :detailed_description, :presence => true
+  # validates :code, :description, :presence => true, :uniqueness => { :allow_blank => true }
+  # validates :control_amount, :inclusion => { :in => [true, false] }
 
   orderize :description
   filterize

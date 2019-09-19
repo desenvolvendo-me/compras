@@ -1,0 +1,6 @@
+pt-BR:
+  enumerations:
+    material_classification:
+      consumption: "Consumo"
+      patrimonial: "Patrimonial"
+      service: "Serviço"
