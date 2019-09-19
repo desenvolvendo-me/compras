@@ -259,6 +259,29 @@ Compras::Application.routes.draw do
 
   resources :contract_termination_annuls, :only => [:new, :create, :edit, :update]
 
+  get 'demands/modal', :as => :modal_demands
+  resources :demands do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
+  get 'demand_batches/modal', :as => :modal_demand_batches
+  resources :demand_batches do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
+  resources :batch_materials do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+  
   resources :contract_types do
     collection do
       get :filter
@@ -564,6 +587,21 @@ Compras::Application.routes.draw do
   resources :pledge_items, only: :index
 
   resources :positions do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
+  get 'departments/modal', :as => :modal_departments
+  resources :departments do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
+  resources :department_people do
     collection do
       get :filter
       get :modal
