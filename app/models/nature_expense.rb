@@ -6,14 +6,9 @@ class NatureExpense < Compras::Model
   accepts_nested_attributes_for :split_expenses, allow_destroy: true
 
   validates :description, :nature, presence: true, uniqueness:true
-  validates_format_of :nature, :with => /^[0-9.&]*\z/
 
   orderize "created_at"
   filterize
 
-
-  # def to_s
-  #   "#{description}"
-  # end
 
 end
