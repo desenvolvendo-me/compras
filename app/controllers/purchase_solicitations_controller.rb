@@ -11,7 +11,7 @@ class PurchaseSolicitationsController < CrudController
     object.service_status = PurchaseSolicitationServiceStatus::PENDING
     object.request_date = Date.current
     object.accounting_year = Date.current.year
-    object.responsible = current_user.authenticable
+    # object.responsible = current_user.authenticable
 
     super
   end
@@ -20,17 +20,19 @@ class PurchaseSolicitationsController < CrudController
     object = build_resource
     object.service_status = PurchaseSolicitationServiceStatus::PENDING
 
-    create! do |success, failure|
-      success.html { redirect_to edit_resource_path }
-    end
+    # create! do |success, failure|
+    #   success.html { redirect_to edit_resource_path }
+    # end
+    super
   end
 
   def update
     raise Exceptions::Unauthorized unless resource.editable?
 
-    update! do |success, failure|
-      success.html { redirect_to edit_resource_path }
-    end
+    # update! do |success, failure|
+    #   success.html { redirect_to edit_resource_path }
+    # end
+    super
   end
 
   protected

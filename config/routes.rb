@@ -813,6 +813,7 @@ Compras::Application.routes.draw do
   resources :users do
     collection do
       get :filter
+      get :modal
     end
   end
 

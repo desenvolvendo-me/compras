@@ -4,7 +4,8 @@ class PurchaseSolicitation < Compras::Model
   attr_accessible :accounting_year, :request_date, :responsible_id, :kind,
                   :delivery_location_id, :general_observations, :justification,
                   :purchase_solicitation_budget_allocations_attributes,
-                  :items_attributes, :budget_structure_id
+                  :items_attributes, :budget_structure_id,
+                  :user_id,:department_id
 
   attr_readonly :code
 
@@ -16,6 +17,8 @@ class PurchaseSolicitation < Compras::Model
   has_enumeration_for :service_status, :with => PurchaseSolicitationServiceStatus,
                       :create_helpers => true, :create_scopes => true
 
+  belongs_to :user, :class_name => 'User', :foreign_key => 'user_id'
+  belongs_to :department, :class_name => 'Department', :foreign_key => 'department_id'
   belongs_to :responsible, :class_name => 'Employee', :foreign_key => 'responsible_id'
   belongs_to :delivery_location
   belongs_to :liberator, :class_name => 'Employee', :foreign_key => 'liberator_id'
@@ -42,14 +45,14 @@ class PurchaseSolicitation < Compras::Model
 
   delegate :authorized?, :to => :direct_purchase, :prefix => true, :allow_nil => true
 
-  validates :request_date, :responsible, :delivery_location, :presence => true
-  validates :accounting_year, :kind, :delivery_location, :presence => true
-  validates :accounting_year, :numericality => true, :mask => '9999', :allow_blank => true
-  validates :purchase_solicitation_budget_allocations, :no_duplication => :budget_allocation_id
-  validates :items, :no_duplication => :material_id
-  validate :must_have_at_least_one_item
-  validate :validate_budget_structure_and_materials
-  validate :validate_liberated_status
+  # validates :request_date, :responsible, :delivery_location, :presence => true
+  # validates :accounting_year, :kind, :delivery_location, :presence => true
+  # validates :accounting_year, :numericality => true, :mask => '9999', :allow_blank => true
+  # validates :purchase_solicitation_budget_allocations, :no_duplication => :budget_allocation_id
+  # validates :items, :no_duplication => :material_id
+  # validate :must_have_at_least_one_item
+  # validate :validate_budget_structure_and_materials
+  # validate :validate_liberated_status
 
   before_save :set_budget_structure_description
 

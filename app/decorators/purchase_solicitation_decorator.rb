@@ -6,7 +6,7 @@ class PurchaseSolicitationDecorator
   include ActionView::Helpers::NumberHelper
   include ActionView::Helpers::TranslationHelper
 
-  attr_header :code_and_year, :budget_structure, :responsible, :service_status
+  attr_header :code_and_year, :department, :user, :service_status
 
   def quantity_by_material(material_id)
     number_with_precision super if super
