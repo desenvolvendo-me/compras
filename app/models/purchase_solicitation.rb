@@ -17,6 +17,8 @@ class PurchaseSolicitation < Compras::Model
   has_enumeration_for :service_status, :with => PurchaseSolicitationServiceStatus,
                       :create_helpers => true, :create_scopes => true
 
+  has_and_belongs_to_many :materials, :class_name => '::Material', :join_table => :compras_purchase_solicitation_materials
+
   belongs_to :user, :class_name => 'User', :foreign_key => 'user_id'
   belongs_to :department, :class_name => 'Department', :foreign_key => 'department_id'
   belongs_to :responsible, :class_name => 'Employee', :foreign_key => 'responsible_id'

@@ -18,7 +18,13 @@
   </div>
 
   <div id="items-tab">
-    <%= render 'items', :f => f %>
+    <%#= render 'items', :f => f %>
+
+    <div class="modal-finder" >
+      <%#= f.input :material, :as => :modal , :url => modal_materials_path() %>
+      <%#= f.input :materials, :as => :modal , :url => modal_material_path() %>
+    </div>
+
   </div>
 
   <div id="budget-allocations">
