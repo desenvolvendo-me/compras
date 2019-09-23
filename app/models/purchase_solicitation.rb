@@ -1,12 +1,19 @@
 class PurchaseSolicitation < Compras::Model
   include BelongsToResource
 
+  # attr_accessible :accounting_year, :request_date, :responsible_id, :kind,
+  #                 :delivery_location_id, :general_observations, :justification,
+  #                 :purchase_solicitation_budget_allocations_attributes,
+  #                 :items_attributes, :budget_structure_id,
+  #                 :user_id,:department_id,:material_ids
+
   attr_accessible :accounting_year, :request_date, :responsible_id, :kind,
                   :delivery_location_id, :general_observations, :justification,
                   :purchase_solicitation_budget_allocations_attributes,
                   :items_attributes, :budget_structure_id,
                   :user_id,:department_id
 
+  # attr_accessor :material
   attr_readonly :code
 
   auto_increment :code, :by => :accounting_year
@@ -16,8 +23,6 @@ class PurchaseSolicitation < Compras::Model
   has_enumeration_for :kind, :with => PurchaseSolicitationKind, :create_helpers => true
   has_enumeration_for :service_status, :with => PurchaseSolicitationServiceStatus,
                       :create_helpers => true, :create_scopes => true
-
-  has_and_belongs_to_many :materials, :class_name => '::Material', :join_table => :compras_purchase_solicitation_materials
 
   belongs_to :user, :class_name => 'User', :foreign_key => 'user_id'
   belongs_to :department, :class_name => 'Department', :foreign_key => 'department_id'

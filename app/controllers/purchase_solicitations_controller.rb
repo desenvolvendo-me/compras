@@ -20,6 +20,7 @@ class PurchaseSolicitationsController < CrudController
     object = build_resource
     object.service_status = PurchaseSolicitationServiceStatus::PENDING
 
+
     # create! do |success, failure|
     #   success.html { redirect_to edit_resource_path }
     # end
