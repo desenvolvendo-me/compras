@@ -39,21 +39,21 @@ class PriceCollection < Compras::Model
   accepts_nested_attributes_for :items, :allow_destroy => true
   accepts_nested_attributes_for :price_collection_proposals, :allow_destroy => true
 
-  validate :validate_quantity_of_creditors
-  validate :must_have_at_least_one_item
-
-  validates :items, :no_duplication => :material_id
-  validates :year, :date, :delivery_location, :employee, :presence => true
-  validates :payment_method, :object_description, :expiration, :presence => true
-  validates :period, :period_unit, :proposal_validity, :proposal_validity_unit, :presence => true
-  validates :type_of_calculation, :presence => true
-  validates :year, :mask => "9999"
-  validates :date, :expiration,
-    :timeliness => {
-      :on_or_after => :today,
-      :on_or_after_message => :should_be_on_or_after_today,
-      :type => :date
-    }, :on => :create
+  # validate :validate_quantity_of_creditors
+  # validate :must_have_at_least_one_item
+  #
+  # validates :items, :no_duplication => :material_id
+  # validates :year, :date, :delivery_location, :employee, :presence => true
+  # validates :payment_method, :object_description, :expiration, :presence => true
+  # validates :period, :period_unit, :proposal_validity, :proposal_validity_unit, :presence => true
+  # validates :type_of_calculation, :presence => true
+  # validates :year, :mask => "9999"
+  # validates :date, :expiration,
+  #   :timeliness => {
+  #     :on_or_after => :today,
+  #     :on_or_after_message => :should_be_on_or_after_today,
+  #     :type => :date
+  #   }, :on => :create
 
   after_save :generate_proposal_items
 
