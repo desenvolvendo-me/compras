@@ -29,6 +29,7 @@ pt-BR:
         code: "Código"
         quantity_by_material: 'Quantidade'
         purchase_solicitation: 'Solicitação de compra'
+        purchase_form: 'Ficha de compra'
         code_and_year: "Código/Ano"
         budget_allocations: "Dotação"
         expense_nature: "Desdobramento"
