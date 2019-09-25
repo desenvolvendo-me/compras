@@ -1,5 +1,5 @@
 class PurchaseForm < Compras::Model
-  attr_accessible :budget_allocation, :name
+  attr_accessible :budget_allocation, :name,:opening_balance
 
   orderize
   filterize

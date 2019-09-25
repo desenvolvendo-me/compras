@@ -9,3 +9,4 @@ pt-BR:
       purchase_form:
         name: "Número da Ficha"
         budget_allocation: "Dotação Orçametária"
+        opening_balance: "Saldo Inicial"
