@@ -1,0 +1,6 @@
+<%#= f.input :purchase_form, :as => :auto_complete, :fake => true, :required => true,
+                'data-hidden-field-class' => 'unique',
+      :input_html => { "data-disabled" => true } %>
+
+<%= f.input :purchase_forms, as: :nested_grid, data_disabled: f.object.decorator.is_annulled_message,
+            columns: [:purchase_form] %>

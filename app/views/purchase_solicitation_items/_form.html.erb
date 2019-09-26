@@ -1,10 +1,10 @@
 <div class="item nested">
-  <%= f.input :id, :as => 'hidden' %>
-  <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
+  <%#= f.input :id, :as => 'hidden' %>
+  <%#= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
 
   <div class="yui3-g">
     <div class="yui3-u-7-8">
-      <%= f.input :material, :label => f.object.decorator.material_label, :disabled => f.object.annulled?,
+      <%#= f.input :material, :label => f.object.decorator.material_label, :disabled => f.object.annulled?,
         :modal_url => modal_materials_path(:by_material_type => f.object.decorator.material_type_filter,
                                            :locked_fields => [:material_material_type] ),
         :input_html => { :class => 'material' }
@@ -13,30 +13,30 @@
   </div>
 
   <div class="yui3-g">
-    <div class="yui3-u-1-4">
-      <%= f.input :brand, :disabled => f.object.annulled? %>
-    </div>
+<!--    <div class="yui3-u-1-4">-->
+      <%#= f.input :brand, :disabled => f.object.annulled? %>
+<!--    </div>-->
 
-    <div class="yui3-u-1-8">
-      <%= f.input :reference_unit, :disabled => true, :input_html => { :class => 'reference-unit' } %>
-    </div>
+<!--    <div class="yui3-u-1-8">-->
+      <%#= f.input :reference_unit, :disabled => true, :input_html => { :class => 'reference-unit' } %>
+<!--    </div>-->
 
-    <div class="yui3-u-1-6">
-      <%= f.input :quantity, :input_html => { :class => 'item-quantity' }, :disabled => f.object.annulled? %>
-    </div>
+<!--    <div class="yui3-u-1-6">-->
+      <%#= f.input :quantity, :input_html => { :class => 'item-quantity' }, :disabled => f.object.annulled? %>
+<!--    </div>-->
 
-    <div class="yui3-u-1-6">
-      <%= f.input :unit_price, :input_html => { :class => 'item-unit-price' }, :disabled => f.object.annulled? %>
-    </div>
+<!--    <div class="yui3-u-1-6">-->
+      <%#= f.input :unit_price, :input_html => { :class => 'item-unit-price' }, :disabled => f.object.annulled? %>
+<!--    </div>-->
 
-    <div class="yui3-u-1-6">
-      <%= f.input :estimated_total_price, :input_html => { :class => 'item-price', 'data-decimal' => true, :value => f.object.decorator.estimated_total_price }, :disabled => true %>
-    </div>
-  </div>
+<!--    <div class="yui3-u-1-6">-->
+      <%#= f.input :estimated_total_price, :input_html => { :class => 'item-price', 'data-decimal' => true, :value => f.object.decorator.estimated_total_price }, :disabled => true %>
+<!--    </div>-->
+<!--  </div>-->
 
-  <div class="yui3-g">
-    <p class="yui3-u">
-      <input type="button" class="button negative remove-item"<%= data_disabled_attribute(data_disabled) %> value="Remover Item">
-    </p>
+<!--  <div class="yui3-g">-->
+<!--    <p class="yui3-u">-->
+<!--      <input type="button" class="button negative remove-item"<%#= data_disabled_attribute(data_disabled) %> value="Remover Item">-->
+<!--    </p>-->
   </div>
 </div>

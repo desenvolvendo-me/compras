@@ -4,7 +4,7 @@ class PurchaseForm < Compras::Model
   orderize
   filterize
 
-  validates :name,:budget_allocation,presence:true
+  validates :name,:budget_allocation, presence:true
 
   def to_s
     "#{name} - #{budget_allocation }"

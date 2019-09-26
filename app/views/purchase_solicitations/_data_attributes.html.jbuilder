@@ -25,4 +25,10 @@ builder resource, json do
     json.unit_price            item.unit_price.to_f
     json.estimated_total_price item.estimated_total_price.to_f
   end
+
+  json.purchase_forms resource.purchase_forms do |item|
+    json.id                    item.id
+    json.purchase_form_item         item.purchase_form_item_id
+  end
+
 end
