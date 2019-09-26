@@ -17,7 +17,6 @@ class PurchaseSolicitation < Compras::Model
   has_enumeration_for :service_status, :with => PurchaseSolicitationServiceStatus,
                       :create_helpers => true, :create_scopes => true
 
-  # belongs_to :purchase_form, :class_name => 'PurchaseForm', :foreign_key => 'purchase_form_id'
   belongs_to :user, :class_name => 'User', :foreign_key => 'user_id'
   belongs_to :department, :class_name => 'Department', :foreign_key => 'department_id'
   belongs_to :responsible, :class_name => 'Employee', :foreign_key => 'responsible_id'
@@ -28,11 +27,8 @@ class PurchaseSolicitation < Compras::Model
 
   has_many :items, :class_name => 'PurchaseSolicitationItem', :dependent => :restrict,
            :inverse_of => :purchase_solicitation,:order => :id
-  # has_many :purchase_forms, :class_name => 'PurchaseFormItem', :dependent => :restrict,
-  #          :inverse_of => :purchase_solicitation,:order => :id
   has_many :purchase_form_items, :dependent => :restrict,
            :inverse_of => :purchase_solicitation,:order => :id
-
 
   has_and_belongs_to_many :licitation_processes, :join_table => :compras_licitation_processes_purchase_solicitations
 
@@ -70,24 +66,11 @@ class PurchaseSolicitation < Compras::Model
   scope :by_material_id, lambda { |material_id|
     joins { items }.where { items.material_id.eq(material_id) }
   }
-  # try
-  scope :by_purchase_form_id, lambda { |purchase_form_id|
-    joins { purchase_forms }.
-        where { purchase_forms.purchase_form_id.
-            eq(purchase_form_id) }
-  }
-
 
   scope :by_material, lambda { |material_ids|
     joins { items }.
         where { |purchase| purchase.items.material_id.in(material_ids) }
   }
-  # try
-  # scope :by_purchase_form, lambda { |purchase_form_ids|
-  #   joins { purchase_forms }.
-  #       where { |purchase| purchase.purchase_forms.purchase_form_id.in(purchase_form_ids) }
-  # }
-
 
   scope :except_ids, lambda { |ids| where { id.not_in(ids) } }
 
