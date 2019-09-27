@@ -4,4 +4,5 @@ class RegulatoryActType < EnumerateIt::Base
                    :ldo,:loa,:ppa,
                    :regulamentation_of_price_registration,
                    :regulamentation_of_trading
+  
 end
