@@ -20,6 +20,7 @@ pt-BR:
         contact: "Contato para informações"
         contract_guarantees: 'Tipo de garantia'
         description: "Objeto do processo de compra"
+        department: "Departamento"
         document_types: "Tipo de documento"
         envelope_delivery_date: "Término do recebimento dos envelopes"
         envelope_delivery_time: "Hora do recebimento"
@@ -72,7 +73,6 @@ pt-BR:
         creditor: "Fornecedor"
         creditor_email: "Email"
         creditor_proposal_total_value: "Valor total da proposta"
-        execution_unit_responsible: "Unidade responsável pela execução"
         justification: "Justificativa da escolha"
         justification_and_legal: "Justificativa e fundamentação legal"
         budget_allocation_year: "Ano da dotação"

@@ -21,9 +21,10 @@ class LicitationProcess < Compras::Model
                   :closing_of_accreditation_time, :purchase_solicitation_ids,
                   :budget_allocations_total_value, :total_value_of_items,
                   :creditor_proposals_attributes, :tied_creditor_proposals_attributes,
-                  :execution_unit_responsible_id, :process_responsibles_attributes,
+                  :process_responsibles_attributes,
                   :justification, :justification_and_legal, :process,
-                  :purchase_solicitation_import_option
+                  :purchase_solicitation_import_option,
+                  :department_id
 
   auto_increment :process, :by => :year
   auto_increment :modality_number, :by => [:year, :modality, :type_of_removal]
@@ -45,13 +46,12 @@ class LicitationProcess < Compras::Model
   has_enumeration_for :type_of_removal, create_helpers: { prefix: true }
   has_enumeration_for :purchase_solicitation_import_option
 
+  belongs_to :department
   belongs_to :contact, :class_name => 'Employee'
   belongs_to :judgment_form
   belongs_to :payment_method
   belongs_to :readjustment_index, :class_name => 'Indexer'
   belongs_to :index_update_rate, :class_name => 'Indexer'
-
-  belongs_to_resource :execution_unit_responsible, resource_class: BudgetStructure
 
   has_and_belongs_to_many :document_types, :join_table => :compras_licitation_processes_unico_document_types
   has_and_belongs_to_many :purchase_solicitations, :join_table => :compras_licitation_processes_purchase_solicitations,
