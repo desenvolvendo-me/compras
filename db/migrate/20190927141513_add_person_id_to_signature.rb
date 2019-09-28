@@ -4,7 +4,6 @@ class AddPersonIdToSignature < ActiveRecord::Migration
                :integer
 
     add_index :compras_signatures, :person_id
-    add_foreign_key :compras_signatures, :unico_people,
-                    column: :person_id
+
   end
 end
