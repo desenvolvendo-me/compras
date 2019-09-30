@@ -24,6 +24,8 @@ menu:
       - employees
       - profiles
       - users
+    - expense:
+      - nature_expenses
 
   - commom:
     - auxiliary:
@@ -56,6 +58,7 @@ menu:
     - delivery_locations
     - payment_methods
     - contract_types
+    - purchase_forms
 
   - purchasing_processes:
     - purchase_solicitations
@@ -65,6 +68,10 @@ menu:
     - licitation_process_impugnments
     - licitation_process_appeals
     - process_responsibles
+    - demand_management:
+      - demands
+      - demand_batches
+      - batch_materials
 
   - "Instrumentos Contratuais":
     - contracts

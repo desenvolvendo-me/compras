@@ -55,6 +55,13 @@ Compras::Application.routes.draw do
     end
   end
 
+  resources :purchase_forms do
+    collection do
+      get :modal
+      get :filter
+    end
+  end
+
   resources :accounting_cost_centers, only: [:index, :modal] do
     collection do
       get :modal
@@ -252,6 +259,29 @@ Compras::Application.routes.draw do
 
   resources :contract_termination_annuls, :only => [:new, :create, :edit, :update]
 
+  get 'demands/modal', :as => :modal_demands
+  resources :demands do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
+  get 'demand_batches/modal', :as => :modal_demand_batches
+  resources :demand_batches do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
+  resources :batch_materials do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+  
   resources :contract_types do
     collection do
       get :filter
@@ -763,11 +793,27 @@ Compras::Application.routes.draw do
     end
   end
 
+  resources :nature_expenses do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
+  # get "split_expenses/modal", :as => :modal_esplit_expenses
+  # resources :esplit_expenses do
+  #   collection do
+  #     get :filter
+  #     get :modal
+  #   end
+  # end
+
   resources :unblock_budgets
 
   resources :users do
     collection do
       get :filter
+      get :modal
     end
   end
 

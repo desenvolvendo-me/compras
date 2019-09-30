@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      nature_expense:
+        one: Natureza da Despesa
+        other: Natureza das Depesas
+
+    attributes:
+      nature_expense:
+        description: "Descrição"
+        nature: "Natureza"

@@ -1,0 +1,17 @@
+<div id='split-expense'>
+  <div id="split-expenses" data-nested-form="split-expenses">
+    <p>
+      <input type="button" class="button affirmative add-split-expenses" value="Adicionar">
+    </p>
+
+    <%= f.association :split_expenses, collection: localized(f.object.split_expenses) do |a| %>
+      <%= render 'split_expenses/form', f: a %>
+    <% end %>
+
+    <%= mustache 'split-expenses-template' do %>
+      <%= f.association :split_expenses, collection: f.object.split_expenses.build.localized, index: "{{uuid-split-expenses}}" do |split_expense| %>
+        <%= render 'split_expenses/form', f: split_expense %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

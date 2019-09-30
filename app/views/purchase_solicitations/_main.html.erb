@@ -14,11 +14,19 @@
 
 <div class="yui3-g">
   <div class="yui3-u-1-2">
-    <%= f.input :budget_structure, as: :modal, hidden_field: :budget_structure_id, :disabled => f.object.annulled? %>
+    <%= f.input :department %>
   </div>
 
-  <div class="yui3-u-1-2">
-    <%= f.input :responsible, :disabled => f.object.annulled? %>
+  <div class='yui3-u-1-2'>
+    <% if f.object.id.nil? %>
+      <p class="input string">
+        <label class="string required control-label">Solicitante</label>
+        <input class="string required" type="text" value="<%= current_user %>" disabled>
+        <input class="string required" type="hidden" name="purchase_solicitation[user_id]" value="<%= current_user.id %>">
+      </p>
+    <% else f.object.annulled? %>
+      <%= f.input :user, :disabled => true %>
+    <% end %>
   </div>
 </div>
 

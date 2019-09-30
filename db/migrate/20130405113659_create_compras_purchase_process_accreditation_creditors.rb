@@ -25,7 +25,7 @@ class CreateComprasPurchaseProcessAccreditationCreditors < ActiveRecord::Migrati
                     :column => :creditor_id, :name => :cppa_creditor_fk
     add_foreign_key :compras_purchase_process_accreditation_creditors, :unico_company_sizes,
                     :column => :company_size_id, :name => :cppa_company_size_fk
-    add_foreign_key :compras_purchase_process_accreditation_creditors, :compras_creditor_representatives,
-                    :column => :creditor_representative_id, :name => :cppa_creditor_representatice_fk
+    #add_foreign_key :compras_purchase_process_accreditation_creditors, :compras_creditor_representatives,
+    #               :column => :creditor_representative_id, :name => :cppa_creditor_representatice_fk
   end
 end

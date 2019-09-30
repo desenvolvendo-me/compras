@@ -104,34 +104,34 @@ class LicitationProcess < Compras::Model
            :lowest_price?, :higher_discount_on_lot?, :higher_discount_on_item?,
            :to => :judgment_form, :allow_nil => true, :prefix => true
 
-  validates :process_date, :period, :contract_guarantees, :type_of_purchase,
-            :period_unit, :payment_method,
-            :year, :execution_type, :object_type, :description, :notice_availability_date,
-            :presence => true
-  validates :envelope_delivery_date, :envelope_delivery_time, :expiration, :expiration_unit,
-            :modality, :judgment_form_id, :presence => true, :if => :licitation?
-  validates :goal, :licensor_rights_and_liabilities, :licensee_rights_and_liabilities,
-            :presence => true, :if => :concessions_or_permits?
-  validates :type_of_removal, :justification, :justification_and_legal, :presence => true, :if => :direct_purchase?
-  validates :process, uniqueness: { scope: :year }
-  validates :budget_allocation_year, numericality: { greater_than_or_equal_to: :year }, allow_blank: true
-  validates :tied_creditor_proposals, no_duplication: {
-    with: :ranking,
-    allow_nil: true,
-    scope: [:licitation_process_id, :purchase_process_item_id, :lot],
-    if_condition: lambda { |creditor_proposal| creditor_proposal.ranking > 0 }
-  }
-  validates :items, no_duplication: {
-    with: :material_id,
-    scope: [:creditor_id],
-    message: :material_cannot_be_duplicated_by_creditor
-  }
-  validate :validate_bidders_before_edital_publication
-  validate :validate_updates, :unless => :updateable?
-  validate :validate_proposal_envelope_opening_date, :on => :update, :if => :licitation?
-  validate :validate_the_year_to_processe_date_are_the_same, :on => :update
-  validate :validate_budget_allocations_destruction
-  validate :validate_total_items
+  # validates :process_date, :period, :contract_guarantees, :type_of_purchase,
+  #           :period_unit, :payment_method,
+  #           :year, :execution_type, :object_type, :description, :notice_availability_date,
+  #           :presence => true
+  # validates :envelope_delivery_date, :envelope_delivery_time, :expiration, :expiration_unit,
+  #           :modality, :judgment_form_id, :presence => true, :if => :licitation?
+  # validates :goal, :licensor_rights_and_liabilities, :licensee_rights_and_liabilities,
+  #           :presence => true, :if => :concessions_or_permits?
+  # validates :type_of_removal, :justification, :justification_and_legal, :presence => true, :if => :direct_purchase?
+  # validates :process, uniqueness: { scope: :year }
+  # validates :budget_allocation_year, numericality: { greater_than_or_equal_to: :year }, allow_blank: true
+  # validates :tied_creditor_proposals, no_duplication: {
+  #   with: :ranking,
+  #   allow_nil: true,
+  #   scope: [:licitation_process_id, :purchase_process_item_id, :lot],
+  #   if_condition: lambda { |creditor_proposal| creditor_proposal.ranking > 0 }
+  # }
+  # validates :items, no_duplication: {
+  #   with: :material_id,
+  #   scope: [:creditor_id],
+  #   message: :material_cannot_be_duplicated_by_creditor
+  # }
+  # validate :validate_bidders_before_edital_publication
+  # validate :validate_updates, :unless => :updateable?
+  # validate :validate_proposal_envelope_opening_date, :on => :update, :if => :licitation?
+  # validate :validate_the_year_to_processe_date_are_the_same, :on => :update
+  # validate :validate_budget_allocations_destruction
+  # validate :validate_total_items
 
   with_options :allow_blank => true do |allowing_blank|
     allowing_blank.validates :year, :mask => "9999"

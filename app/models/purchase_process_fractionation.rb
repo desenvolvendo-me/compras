@@ -5,10 +5,10 @@ class PurchaseProcessFractionation < Compras::Model
   belongs_to :material_class
   belongs_to :purchase_process, class_name: 'LicitationProcess'
 
-  validates :year, :material_class, :purchase_process, :value, :object_type,
-    presence: true
-  validates :type_of_removal, presence: true, unless: :modality
-  validates :modality, presence: true, unless: :type_of_removal
+  # validates :year, :material_class, :purchase_process, :value, :object_type,
+  #   presence: true
+  # validates :type_of_removal, presence: true, unless: :modality
+  # validates :modality, presence: true, unless: :type_of_removal
 
   orderize :id
   filterize

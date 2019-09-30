@@ -1,0 +1,2 @@
+class BatchMaterialsController < CrudController
+end

@@ -1,0 +1,22 @@
+<fieldset class='nested-split-expenses'>
+  <div class="yui3-g">
+    <div class="yui3-u-1-2">
+      <%= f.input :code %>
+    </div>
+
+    <div class="yui3-u-1-2">
+      <%= f.input :description %>
+    </div>
+
+  </div>
+
+
+<%= f.input :function_account %>
+
+
+  <p>
+    <input type="button" class="button negative remove-split-expenses" value="Remover">
+    <%= f.input :_destroy, as: 'hidden', input_html: { class: 'destroy' } %>
+  </p>
+
+</fieldset>

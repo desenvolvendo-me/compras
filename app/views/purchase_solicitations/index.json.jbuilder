@@ -36,4 +36,10 @@ json.array!(collection) do |obj|
     json.proposal_unit_price_winner   item.proposal_unit_price_winner.to_f
     json.proposal_total_price_winner  item.proposal_total_price_winner.to_f
   end
+
+  json.items obj.purchase_forms do |purchase_form|
+    json.id                           purchase_form.id
+    json.purchase_form_id             purchase_form.purchase_form_id
+    json.purchase_form_description    purchase_form.purchase_form.to_s
+  end
 end

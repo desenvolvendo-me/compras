@@ -1,4 +1,18 @@
-<%= f.input :active %>
+<div class="yui3-g">
+  <div class="yui3-u-1-6">
+    <%= f.input :code %>
+  </div>
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :active %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :medicine %>
+  </div>
+</div>
 
 <%= f.input :autocomplete_material_class, :as => :auto_complete,
             :source_path => material_classes_path(:without_children => true),
@@ -21,12 +35,13 @@
 
 <div class="yui3-g">
   <div class="yui3-u-1-2">
-    <%= f.input :material_type %>
+    <%= f.input :material_classification %>
   </div>
 
   <div class="yui3-u-1-2">
     <%= f.input :combustible %>
   </div>
+
 </div>
 
 <div class="yui3-g control-amount">
@@ -34,6 +49,3 @@
     <%= f.input :control_amount %>
   </div>
 </div>
-
-<%= f.input :expense_nature, as: :modal, hidden_field: :expense_nature_id %>
-<%= f.error :expense_nature_id %>

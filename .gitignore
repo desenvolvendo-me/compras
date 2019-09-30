@@ -23,6 +23,8 @@ Gemfile.local.lock
 .pryrc
 coverage
 dump.rdb
+.idea
+
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
