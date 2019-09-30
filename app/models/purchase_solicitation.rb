@@ -6,7 +6,6 @@ class PurchaseSolicitation < Compras::Model
                   :purchase_solicitation_budget_allocations_attributes,
                   :items_attributes, :budget_structure_id,
                   :user_id,:department_id,
-                  :purchase_form_items_attributes,
                   :purchase_form_id
 
   attr_readonly :code
@@ -30,8 +29,6 @@ class PurchaseSolicitation < Compras::Model
 
   has_many :items, :class_name => 'PurchaseSolicitationItem', :dependent => :restrict,
            :inverse_of => :purchase_solicitation,:order => :id
-  # has_many :purchase_form_items, :dependent => :restrict,
-  #          :inverse_of => :purchase_solicitation,:order => :id
 
   has_and_belongs_to_many :licitation_processes, :join_table => :compras_licitation_processes_purchase_solicitations
 
@@ -56,7 +53,7 @@ class PurchaseSolicitation < Compras::Model
   # validates :accounting_year, :kind, :delivery_location, :presence => true
   # validates :accounting_year, :numericality => true, :mask => '9999', :allow_blank => true
   # validates :purchase_solicitation_budget_allocations, :no_duplication => :budget_allocation_id
-  # validates :items, :no_duplication => :material_id
+  validates :items, :no_duplication => :material_id
   # validate :must_have_at_least_one_item
   # validate :validate_budget_structure_and_materials
   # validate :validate_liberated_status
