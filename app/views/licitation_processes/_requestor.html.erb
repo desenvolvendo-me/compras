@@ -14,7 +14,7 @@
 
 <input type="hidden" name="<%= f.sanitized_object_name %>[purchase_solicitation_ids][]" />
 
-<table class="records">
+<table class="records" id="table_requestor">
   <thead>
     <tr>
       <th><%= PurchaseSolicitation.human_attribute_name :code %></th>
@@ -47,3 +47,11 @@
                :f => f, :data_disabled => nil %>
   <% end %>
 <% end %>
+
+<script>
+$(function() {
+    $("body").click(function(){
+       $("#licitation_process_purchase_solicitations").val('');
+    });
+});
+</script>

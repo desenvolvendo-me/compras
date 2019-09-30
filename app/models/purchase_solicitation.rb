@@ -30,8 +30,8 @@ class PurchaseSolicitation < Compras::Model
 
   has_many :items, :class_name => 'PurchaseSolicitationItem', :dependent => :restrict,
            :inverse_of => :purchase_solicitation,:order => :id
-  has_many :purchase_form_items, :dependent => :restrict,
-           :inverse_of => :purchase_solicitation,:order => :id
+  # has_many :purchase_form_items, :dependent => :restrict,
+  #          :inverse_of => :purchase_solicitation,:order => :id
 
   has_and_belongs_to_many :licitation_processes, :join_table => :compras_licitation_processes_purchase_solicitations
 
@@ -48,7 +48,7 @@ class PurchaseSolicitation < Compras::Model
 
   accepts_nested_attributes_for :purchase_solicitation_budget_allocations, :allow_destroy => true
   accepts_nested_attributes_for :items, :allow_destroy => true
-  accepts_nested_attributes_for :purchase_form_items, :allow_destroy => true
+  # accepts_nested_attributes_for :purchase_form_items, :allow_destroy => true
 
   delegate :authorized?, :to => :direct_purchase, :prefix => true, :allow_nil => true
 
@@ -61,7 +61,7 @@ class PurchaseSolicitation < Compras::Model
   # validate :validate_budget_structure_and_materials
   # validate :validate_liberated_status
 
-  before_save :set_budget_structure_description
+  # before_save :set_budget_structure_description
 
   orderize "id DESC"
   filterize
