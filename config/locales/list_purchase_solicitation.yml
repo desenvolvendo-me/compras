@@ -1,0 +1,15 @@
+pt-BR:
+  activerecord:
+    models:
+      list_purchase_solicitation:
+        one: "Lista de Solicitação de Compra"
+        other: "Lista de Solicitações de Compras"
+
+    attributes:
+      list_purchase_solicitation:
+        balance: "Saldo"
+        consumed_value: "Valor Consumido"
+        expected_value: "Valor Previsto"
+        resource_source: "Fonte do Recurso"
+        licitation_process: "Processo de Licitação"
+        purchase_solicitation: "Processo de Compra"

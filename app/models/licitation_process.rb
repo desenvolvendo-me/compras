@@ -18,13 +18,14 @@ class LicitationProcess < Compras::Model
                   :concession_period_unit, :goal, :licensor_rights_and_liabilities,
                   :licensee_rights_and_liabilities, :authorization_envelope_opening_date,
                   :authorization_envelope_opening_time, :closing_of_accreditation_date,
-                  :closing_of_accreditation_time, :purchase_solicitation_ids,
+                  :closing_of_accreditation_time,
                   :budget_allocations_total_value, :total_value_of_items,
                   :creditor_proposals_attributes, :tied_creditor_proposals_attributes,
                   :process_responsibles_attributes,
                   :justification, :justification_and_legal, :process,
-                  :purchase_solicitation_import_option,
-                  :department_id
+                  :purchase_solicitation_import_option,:department_id,
+                  # :purchase_solicitation_ids
+                  :purchase_solicitations_attributes
 
   auto_increment :process, :by => :year
   auto_increment :modality_number, :by => [:year, :modality, :type_of_removal]
@@ -54,9 +55,14 @@ class LicitationProcess < Compras::Model
   belongs_to :index_update_rate, :class_name => 'Indexer'
 
   has_and_belongs_to_many :document_types, :join_table => :compras_licitation_processes_unico_document_types
-  has_and_belongs_to_many :purchase_solicitations, :join_table => :compras_licitation_processes_purchase_solicitations,
-                          :before_add => :update_purchase_solicitation_to_purchase_process,
-                          :before_remove => :update_purchase_solicitation_to_liberated
+  has_many :purchase_solicitations, class_name: 'ListPurchaseSolicitation', dependent: :destroy, order: :id
+
+  # has_and_belongs_to_many :purchase_solicitations, :join_table => :compras_licitation_processes_purchase_solicitations,
+  #                         :before_add => :update_purchase_solicitation_to_purchase_process,
+  #                         :before_remove => :update_purchase_solicitation_to_liberated
+
+  accepts_nested_attributes_for :purchase_solicitations,
+                                :allow_destroy => true
 
   has_many :publications, class_name: 'LicitationProcessPublication', dependent: :destroy, order: :id
   has_many :bidders, :dependent => :destroy, :order => :id
@@ -104,7 +110,7 @@ class LicitationProcess < Compras::Model
            :lowest_price?, :higher_discount_on_lot?, :higher_discount_on_item?,
            :to => :judgment_form, :allow_nil => true, :prefix => true
 
-  validates :purchase_solicitations, presence: true
+  # validates :purchase_solicitations, presence: true
   validates :process_date, :period, :contract_guarantees, :type_of_purchase,
             :period_unit, :payment_method,
             :year, :execution_type, :object_type, :description, :notice_availability_date,
