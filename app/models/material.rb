@@ -21,10 +21,10 @@ class Material < Unico::Model
   # belongs_to_resource :expense_nature
 
   # has_many :purchase_process_items, :dependent => :restrict
-  # has_many :purchase_solicitation_items, :dependent => :restrict
+  has_many :purchase_solicitation_items, :dependent => :restrict
   # has_many :price_collection_items, :dependent => :restrict
   # has_many :creditor_materials, :dependent => :restrict
-  # has_many :purchase_solicitations, :through => :purchase_solicitation_items, :dependent => :restrict
+  has_many :purchase_solicitations, :through => :purchase_solicitation_items, :dependent => :restrict
   # has_many :purchase_solicitation_budget_allocations, :through => :purchase_solicitations, :dependent => :restrict
   # has_many :materials_controls, :dependent => :destroy, :inverse_of => :material, :order => :id
   # has_many :licitation_processeslicitation_processes, through: :purchase_process_items

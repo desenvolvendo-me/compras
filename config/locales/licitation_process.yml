@@ -20,6 +20,7 @@ pt-BR:
         contact: "Contato para informações"
         contract_guarantees: 'Tipo de garantia'
         description: "Objeto do processo de compra"
+        department: "Departamento"
         document_types: "Tipo de documento"
         envelope_delivery_date: "Término do recebimento dos envelopes"
         envelope_delivery_time: "Hora do recebimento"
@@ -30,7 +31,7 @@ pt-BR:
         goal: "Meta"
         index_update_rate: "Índice de atualização"
         eletronic_trading: "Pregão eletrônico"
-        judgment_form_id: "Forma de julgamento"
+        judgment_form: "Forma de julgamento"
         licensee_rights_and_liabilities: "Diretos e obrigações do concedido"
         licensor_rights_and_liabilities: "Direitos e obrigações do concedente"
         minimum_bid_to_disposal: "Valor da oferta mínima para alienações"
@@ -72,11 +73,16 @@ pt-BR:
         creditor: "Fornecedor"
         creditor_email: "Email"
         creditor_proposal_total_value: "Valor total da proposta"
-        execution_unit_responsible: "Unidade responsável pela execução"
         justification: "Justificativa da escolha"
         justification_and_legal: "Justificativa e fundamentação legal"
         budget_allocation_year: "Ano da dotação"
         to_s: "Processo de compra"
+        balance: "Saldo"
+        consumed_value: "Valor Consumido"
+        expected_value: "Valor Previsto"
+        resource_source: "Fonte do Recurso"
+        licitation_process: "Processo de Licitação"
+        purchase_solicitation: "Solicitação de Compra"
 
   licitation_process:
     messages:

@@ -3,8 +3,6 @@ class PurchaseSolicitationsController < CrudController
   has_scope :without_price_collection, type: :boolean
   has_scope :without_purchase_process, type: :boolean
   has_scope :by_material_id
-  # try
-  # has_scope :by_purchase_form_id
   has_scope :except_ids, :type => :array
   has_scope :can_be_grouped, :type => :boolean
 
@@ -21,7 +19,6 @@ class PurchaseSolicitationsController < CrudController
   def create
     object = build_resource
     object.service_status = PurchaseSolicitationServiceStatus::PENDING
-
 
     # create! do |success, failure|
     #   success.html { redirect_to edit_resource_path }
