@@ -18,12 +18,14 @@ class LicitationProcess < Compras::Model
                   :concession_period_unit, :goal, :licensor_rights_and_liabilities,
                   :licensee_rights_and_liabilities, :authorization_envelope_opening_date,
                   :authorization_envelope_opening_time, :closing_of_accreditation_date,
-                  :closing_of_accreditation_time, :purchase_solicitation_ids,
+                  :closing_of_accreditation_time,
                   :budget_allocations_total_value, :total_value_of_items,
                   :creditor_proposals_attributes, :tied_creditor_proposals_attributes,
-                  :execution_unit_responsible_id, :process_responsibles_attributes,
+                  :process_responsibles_attributes,
                   :justification, :justification_and_legal, :process,
-                  :purchase_solicitation_import_option
+                  :purchase_solicitation_import_option,:department_id,
+                  # :purchase_solicitation_ids
+                  :purchase_solicitations_attributes
 
   auto_increment :process, :by => :year
   auto_increment :modality_number, :by => [:year, :modality, :type_of_removal]
@@ -45,18 +47,22 @@ class LicitationProcess < Compras::Model
   has_enumeration_for :type_of_removal, create_helpers: { prefix: true }
   has_enumeration_for :purchase_solicitation_import_option
 
+  belongs_to :department
   belongs_to :contact, :class_name => 'Employee'
   belongs_to :judgment_form
   belongs_to :payment_method
   belongs_to :readjustment_index, :class_name => 'Indexer'
   belongs_to :index_update_rate, :class_name => 'Indexer'
 
-  belongs_to_resource :execution_unit_responsible, resource_class: BudgetStructure
-
   has_and_belongs_to_many :document_types, :join_table => :compras_licitation_processes_unico_document_types
-  has_and_belongs_to_many :purchase_solicitations, :join_table => :compras_licitation_processes_purchase_solicitations,
-                          :before_add => :update_purchase_solicitation_to_purchase_process,
-                          :before_remove => :update_purchase_solicitation_to_liberated
+  has_many :purchase_solicitations, class_name: 'ListPurchaseSolicitation', dependent: :destroy, order: :id
+
+  # has_and_belongs_to_many :purchase_solicitations, :join_table => :compras_licitation_processes_purchase_solicitations,
+  #                         :before_add => :update_purchase_solicitation_to_purchase_process,
+  #                         :before_remove => :update_purchase_solicitation_to_liberated
+
+  accepts_nested_attributes_for :purchase_solicitations,
+                                :allow_destroy => true
 
   has_many :publications, class_name: 'LicitationProcessPublication', dependent: :destroy, order: :id
   has_many :bidders, :dependent => :destroy, :order => :id
@@ -104,34 +110,35 @@ class LicitationProcess < Compras::Model
            :lowest_price?, :higher_discount_on_lot?, :higher_discount_on_item?,
            :to => :judgment_form, :allow_nil => true, :prefix => true
 
-  # validates :process_date, :period, :contract_guarantees, :type_of_purchase,
-  #           :period_unit, :payment_method,
-  #           :year, :execution_type, :object_type, :description, :notice_availability_date,
-  #           :presence => true
+  # validates :purchase_solicitations, presence: true
+  validates :process_date, :period, :contract_guarantees, :type_of_purchase,
+            :period_unit, :payment_method,
+            :year, :execution_type, :object_type, :description, :notice_availability_date,
+            :presence => true
   # validates :envelope_delivery_date, :envelope_delivery_time, :expiration, :expiration_unit,
   #           :modality, :judgment_form_id, :presence => true, :if => :licitation?
-  # validates :goal, :licensor_rights_and_liabilities, :licensee_rights_and_liabilities,
-  #           :presence => true, :if => :concessions_or_permits?
-  # validates :type_of_removal, :justification, :justification_and_legal, :presence => true, :if => :direct_purchase?
-  # validates :process, uniqueness: { scope: :year }
-  # validates :budget_allocation_year, numericality: { greater_than_or_equal_to: :year }, allow_blank: true
-  # validates :tied_creditor_proposals, no_duplication: {
-  #   with: :ranking,
-  #   allow_nil: true,
-  #   scope: [:licitation_process_id, :purchase_process_item_id, :lot],
-  #   if_condition: lambda { |creditor_proposal| creditor_proposal.ranking > 0 }
-  # }
-  # validates :items, no_duplication: {
-  #   with: :material_id,
-  #   scope: [:creditor_id],
-  #   message: :material_cannot_be_duplicated_by_creditor
-  # }
-  # validate :validate_bidders_before_edital_publication
-  # validate :validate_updates, :unless => :updateable?
-  # validate :validate_proposal_envelope_opening_date, :on => :update, :if => :licitation?
-  # validate :validate_the_year_to_processe_date_are_the_same, :on => :update
-  # validate :validate_budget_allocations_destruction
-  # validate :validate_total_items
+  validates :goal, :licensor_rights_and_liabilities, :licensee_rights_and_liabilities,
+            :presence => true, :if => :concessions_or_permits?
+  validates :type_of_removal, :justification, :justification_and_legal, :presence => true, :if => :direct_purchase?
+  validates :process, uniqueness: { scope: :year }
+  validates :budget_allocation_year, numericality: { greater_than_or_equal_to: :year }, allow_blank: true
+  validates :tied_creditor_proposals, no_duplication: {
+    with: :ranking,
+    allow_nil: true,
+    scope: [:licitation_process_id, :purchase_process_item_id, :lot],
+    if_condition: lambda { |creditor_proposal| creditor_proposal.ranking > 0 }
+  }
+  validates :items, no_duplication: {
+    with: :material_id,
+    scope: [:creditor_id],
+    message: :material_cannot_be_duplicated_by_creditor
+  }
+  validate :validate_bidders_before_edital_publication
+  validate :validate_updates, :unless => :updateable?
+  validate :validate_proposal_envelope_opening_date, :on => :update, :if => :licitation?
+  validate :validate_the_year_to_processe_date_are_the_same, :on => :update
+  validate :validate_budget_allocations_destruction
+  validate :validate_total_items
 
   with_options :allow_blank => true do |allowing_blank|
     allowing_blank.validates :year, :mask => "9999"
