@@ -3,8 +3,8 @@ json.array!(collection) do |obj|
   json.value             obj.to_s
   json.label             obj.to_s
   json.code_and_year     obj.decorator.code_and_year
-  json.budget_structure  obj.budget_structure.to_s
-  json.responsible       obj.responsible.to_s
+  json.department        obj.department.to_s
+  json.user              obj.user.to_s
   json.total_items_value obj.total_items_value.to_f
 
   json.budget_allocations obj.purchase_solicitation_budget_allocations do |psba|

@@ -27,7 +27,7 @@ builder resource, json do
   end
 
   json.purchase_forms resource.purchase_forms do |item|
-    json.id                    item.id
+    json.id                         item.id
     json.purchase_form_item         item.purchase_form_item_id
   end
 
