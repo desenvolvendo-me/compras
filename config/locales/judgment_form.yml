@@ -10,3 +10,4 @@ pt-BR:
         description: "Descrição"
         kind: "Tipo de julgamento"
         licitation_kind: "Tipo de licitação"
+        enabled: "Habilitar"
