@@ -115,8 +115,8 @@ class LicitationProcess < Compras::Model
             :period_unit, :payment_method,
             :year, :execution_type, :object_type, :description, :notice_availability_date,
             :presence => true
-  # validates :envelope_delivery_date, :envelope_delivery_time, :expiration, :expiration_unit,
-  #           :modality, :judgment_form_id, :presence => true, :if => :licitation?
+  validates :envelope_delivery_date, :envelope_delivery_time, :expiration, :expiration_unit,
+            :modality, :judgment_form_id, :presence => true, :if => :licitation?
   validates :goal, :licensor_rights_and_liabilities, :licensee_rights_and_liabilities,
             :presence => true, :if => :concessions_or_permits?
   validates :type_of_removal, :justification, :justification_and_legal, :presence => true, :if => :direct_purchase?
