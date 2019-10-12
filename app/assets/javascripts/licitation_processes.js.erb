@@ -99,4 +99,71 @@ $(document).ready(function() {
   toogleVisibilityFieldsToTrading();
   toogleVisibilityFieldsToTradingAndConcurrence();
   setBudgetAllocationSource();
+
+//   *************** inicio  ***************
+
+//    adiciona os itens de acordo com a solicitação de compra adicionada
+//    (aba solicitante)
+
+    function hasItemAlreadyAdded(item) {
+        var added = false;
+
+        $("#licitation_process_items_records input.material_id").each(function() {
+            if ($(this).val() == item.material_id) {
+                added = true;
+                return added;
+            }
+        });
+
+        return added;
+    }
+
+    function mergeItem(item) {
+        var material       = $('#price_collection_items_records input.material_id[value="' + item.material_id + '"]'),
+            record         = material.closest('.nested-record'),
+            itemQuantity   = new BigNumber(parsePtBrFloat(record.find('input.quantity').val())),
+            totalQuantity  = numberWithDelimiter(parseFloat(itemQuantity.add(item.quantity)));
+
+        record.find('input.quantity').val(totalQuantity);
+        record.find('td.quantity').text(totalQuantity);
+    }
+
+    function renderItem(item) {
+
+        var itemBinds = {
+            uuid: _.uniqueId('fresh-'),
+            id: '',
+            material_id: item.material_id,
+            material: item.material_description,
+            reference_unit: item.reference_unit,
+            brand: item.brand,
+            quantity: numberWithDelimiter(item.quantity),
+            lot: '1',
+            unit_price: numberWithDelimiter(item.unit_price),
+            estimated_total_price:
+                numberWithDelimiter(item.quantity * item.unit_price)
+        };
+
+        var data = $('#licitation_process_items_template').mustache(itemBinds);
+
+        $('#items-records tbody').append(data).trigger("nestedGrid:afterAdd");
+    }
+
+  $("#licitation_process_purchase_solicitation_id").on("change", function(event, purchaseSolicitation) {
+
+    if (!purchaseSolicitation) {
+      purchaseSolicitation = {};
+    }
+
+    $.each(purchaseSolicitation.items, function(i, item) {
+      if (hasItemAlreadyAdded(item)) {
+        mergeItem(item);
+      } else {
+        renderItem(item);
+      }
+    });
+
+  });
+//   *************** fim  ***************
+
 });

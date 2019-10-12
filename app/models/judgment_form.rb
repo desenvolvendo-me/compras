@@ -16,7 +16,7 @@ class JudgmentForm < Compras::Model
   filterize
 
   def to_s
-    description
+    "#{description}"
   end
 
 end
