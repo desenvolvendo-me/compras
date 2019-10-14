@@ -129,7 +129,6 @@ $(document).ready(function() {
     }
 
     function renderItem(item) {
-
         var itemBinds = {
             uuid: _.uniqueId('fresh-'),
             id: '',
@@ -137,11 +136,12 @@ $(document).ready(function() {
             material: item.material_description,
             reference_unit: item.reference_unit,
             brand: item.brand,
-            quantity: numberWithDelimiter(item.quantity),
+            quantity: item.quantity,
             lot: '1',
-            unit_price: numberWithDelimiter(item.unit_price),
+            unit_price: item.unit_price,
+
             estimated_total_price:
-                numberWithDelimiter(item.quantity * item.unit_price)
+                item.quantity * item.unit_price
         };
 
         var data = $('#licitation_process_items_template').mustache(itemBinds);
