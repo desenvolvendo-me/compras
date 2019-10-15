@@ -1,4 +1,4 @@
-<%= f.input :purchase_solicitation, :as => :auto_complete, :fake => true,
+<%= f.input :purchase_solicitation,:required => true, :as => :auto_complete, :fake => true,
             'data-hidden-field-class' => 'unique',:input_html => {} %>
 
 <div class="yui3-g">
@@ -13,8 +13,29 @@
   </div>
 
   <div class="yui3-u-1-3">
-    <%= f.input :resource_source, :as => :fake,
-                :input_html => { 'data-decimal' => true, :value => '0,00', 'data-precision' => 2, :maxlength => 15, :class => 'numeric' } %>
+    <%= f.input :resource_source, :as => :fake %>
   </div>
 
 </div>
+
+<script>
+
+    function convert(number){
+        if(number.split('.')[1].length == 1){
+            number += '0';
+        }
+        return number.replace('.',',');
+    }
+
+    $(function() {
+        $('#list_purchase_solicitations_records .edit-nested-record').click(function(){
+            setTimeout(function(){
+                consumed_value = $('#licitation_process_consumed_value').val();
+                expected_value = $('#licitation_process_expected_value').val();
+                $('#licitation_process_consumed_value').val(convert(consumed_value));
+                $('#licitation_process_expected_value').val(convert(expected_value));
+            }, 100);
+        });
+    });
+
+</script>
