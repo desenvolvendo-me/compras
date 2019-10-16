@@ -23,7 +23,7 @@ class BidderCreditorCreator
     return unless purchase_process.trading?
 
     trading_items.each do |item|
-      bidders.create!(licitation_process_id: purchase_process.id, creditor_id: trading_item_winner_creditor_id(item))
+      bidders.create(licitation_process_id: purchase_process.id, creditor_id: trading_item_winner_creditor_id(item))
     end
   end
 
@@ -31,7 +31,7 @@ class BidderCreditorCreator
     return unless purchase_process.direct_purchase?
 
     creditor_ids.each  do |creditor_id|
-      bidders.create!(licitation_process_id: purchase_process.id, creditor_id: creditor_id)
+      bidders.create(licitation_process_id: purchase_process.id, creditor_id: creditor_id)
     end
   end
 
