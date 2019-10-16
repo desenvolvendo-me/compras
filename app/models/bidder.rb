@@ -40,7 +40,7 @@ class Bidder < Compras::Model
   validates :creditor, :presence => true
   validates :protocol, :protocol_date, :receipt_date, :presence => true, :if => :invited
   validates :creditor_id, :uniqueness => { :scope => :licitation_process_id, :allow_blank => true }
-  validates :technical_score, :presence => :validate_technical_score?
+  validates :technical_score, :presence => true, if: :validate_technical_score?
   validates :documents, no_duplication: :document_type_id
   validate :block_licitation_process_with_ratification
 
