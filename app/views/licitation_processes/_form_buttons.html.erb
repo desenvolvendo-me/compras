@@ -55,7 +55,7 @@
       <% if f.object.trading? %>
         <%= link_to('Habilitação', bidders_path(:licitation_process_id => resource.id),
           class: "button primary #{f.object.decorator.has_records_class(f.object.bidders)}",
-          'data-disabled' => f.object.decorator.must_have_published_edital_or_direct_purchase) %>
+          'data-disabled' => f.object.decorator.must_have_published_edital_or_direct_purchase_or_disabled_negotiation_message) %>
 
         <% if f.object.decorator.enabled_realignment_price? %>
           <%= link_to('Realinhamento de preço', realignment_prices_path(purchase_process_id: resource.id),
