@@ -66,6 +66,11 @@ class LicitationProcessDecorator
     end
   end
 
+  def must_have_published_edital_or_direct_purchase_or_disabled_negotiation_message
+    must_have_published_edital_or_direct_purchase
+    disabled_negotiation_message
+  end
+
   def must_have_published_edital_or_direct_purchase
     unless edital_published? || direct_purchase?
       t("licitation_process.messages.must_be_included_after_edital_publication")
@@ -134,7 +139,7 @@ class LicitationProcessDecorator
 
   def material_unique_class
     return '' if direct_purchase? && (type_of_removal_dispensation_justified_accreditation? ||
-                                      type_of_removal_unenforceability_accreditation?)
+        type_of_removal_unenforceability_accreditation?)
 
     'unique'
   end

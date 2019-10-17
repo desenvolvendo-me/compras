@@ -23,7 +23,7 @@ class PurchaseProcessFractionationCreator
   attr_reader :purchase_process, :repository
 
   def fill_fractionation(item)
-    fractionation = make_fractionation(item.material_class)
+    fractionation = make_fractionation(item.material)
 
     if fractionation.new_record?
       fractionation.object_type     = purchase_process.object_type
