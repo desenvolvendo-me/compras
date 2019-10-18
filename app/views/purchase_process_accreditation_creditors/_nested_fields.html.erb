@@ -45,7 +45,7 @@
 
   <div class="yui3-u-1-4 field-without-label">
     <label class="boolean checkbox optional" for="has_power_of_attorney">
-      <%= check_box_tag :has_power_of_attorney, "1", false, :name => 'purchase_process_accreditation[has_power_of_attorney]',
+      <%= check_box_tag :has_power_of_attorney, "1", true, :name => 'purchase_process_accreditation[has_power_of_attorney]',
           :id => 'purchase_process_accreditation_has_power_of_attorney' %>
       <%= PurchaseProcessAccreditationCreditor.human_attribute_name :has_power_of_attorney %>
     </label>

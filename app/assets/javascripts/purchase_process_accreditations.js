@@ -1,5 +1,7 @@
 $(document).ready(function() {
+
   function fillCreditorRepresentative(representatives) {
+
     $('#creditor_representative_id').empty();
 
     $('#creditor_representative_id').append(function() {
@@ -31,9 +33,7 @@ $(document).ready(function() {
       dataType: 'json',
       success: function(creditors) {
         var creditor = creditors[0];
-
         fillCreditorRepresentative(creditor.representatives);
-
         $('#purchase_process_accreditation_personable_type').val(creditor.personable_type);
         $('#creditor_representative_id').val(representativeId);
       }
@@ -54,6 +54,8 @@ $(document).ready(function() {
     fillCreditorRepresentative(creditor.representatives);
 
     kindRequired(false);
+    $('#creditor_representative_id').requiredField(true);
+    $('#creditor_representative_id').addClass('required');
   });
 
   $("#creditor_representative_id").on("change", function() {
@@ -61,7 +63,7 @@ $(document).ready(function() {
   });
 
   $("#purchase_process_accreditation_creditors_records").on('nestedGrid:afterAdd', function() {
-    kindRequired(false);
+    kindRequired(true);
   });
 
   $('#company_size_id').on('change', function() {
@@ -82,7 +84,7 @@ $(document).ready(function() {
 
   $('.edit-nested-record').on('click', function() {
     var creditorId = $(this).closest('tr').find('.creditor_id').val(),
-        representativeId = $(this).closest('tr').find('.creditor_representative_id').val();
+    representativeId = $(this).closest('tr').find('.creditor_representative_id').val();
 
     getCreditorData(creditorId, representativeId);
   });
