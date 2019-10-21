@@ -1,9 +1,13 @@
 class UsersController < CrudController
-  protected
 
-  def create_resource(object)
-    object.confirm! if super
+  def create
+    @user = build_resource
+    @user.skip_confirmation! if @user.password.present?
+
+    create! { collection_path }
   end
+
+  protected
 
   def end_of_association_chain
     User.employee
