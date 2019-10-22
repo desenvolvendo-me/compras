@@ -1,6 +1,9 @@
 $(document).ready(function() {
 
-  function fillCreditorRepresentative(representatives) {
+    $("#purchase_process_accreditation_has_power_of_attorney").prop( "checked", true );
+    $("#purchase_process_accreditation_has_power_of_attorney").prop("disabled", true);
+
+    function fillCreditorRepresentative(representatives) {
 
     $('#creditor_representative_id').empty();
 
