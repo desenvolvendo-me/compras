@@ -29,11 +29,13 @@
     </label>
 
     <%= select_tag :creditor_representative_id, options_for_select([]),
-        :include_blank => true, :name => 'purchase_process_accreditation[creditor_representative_id]' %>
+                   :include_blank => true, :name => 'purchase_process_accreditation[creditor_representative_id]' %>
 
     <%= hidden_field_tag :creditor_representative, nil, name: 'purchase_process_accreditation[creditor_representative]' %>
   </div>
+</div>
 
+<div class="yui3-g">
   <div class="yui3-u-1-4">
     <label for="kind">
       <%= PurchaseProcessAccreditationCreditor.human_attribute_name :kind %>
@@ -52,19 +54,4 @@
   </div>
 </div>
 
-<script>
-  enabledFieldsRepresentative();
-  function enabledFieldsRepresentative(){
-    if ($("#creditor_representative_id").val() == ""){
-      $("#kind").attr('disabled',true);
-      $("#purchase_process_accreditation_has_power_of_attorney").attr('disabled',true);
-    }else{
-      $("#kind").removeAttr('disabled');
-      $("#purchase_process_accreditation_has_power_of_attorney").removeAttr('disabled');
-    }
-  }
 
-  $("#creditor_representative_id").on('change', function(){
-    enabledFieldsRepresentative();
-  });
-</script>
