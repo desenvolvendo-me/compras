@@ -30,6 +30,7 @@ class Creditor < Persona::Creditor
   validates :documents, :no_duplication => :document_type_id
   validate :person_in_representatives
   validate :secondary_cnae_in_main_cnae
+  validate :representatives?
 
   before_save :clean_fields_when_is_no_autonomous
 
@@ -133,6 +134,12 @@ class Creditor < Persona::Creditor
     query.order(:id)
   end
 
+  def representatives?
+    if self.representatives.blank?
+      errors.add(:representatives,:blank)
+    end
+  end
+  
   def proposal_by_item(purchase_process_id, item)
     purchase_process_creditor_proposals.
       by_item_id(item.id).
