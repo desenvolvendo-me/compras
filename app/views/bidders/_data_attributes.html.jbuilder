@@ -1,6 +1,7 @@
 builder resource, json do
   json.id                   resource.id
   json.creditor_id          resource.creditor_id
+  json.id                   resource.decorator.by_licitation_process
 
   json.proposals resource.creditor_proposals do |proposal|
     json.id                 proposal.id

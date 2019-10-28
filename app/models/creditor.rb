@@ -34,9 +34,13 @@ class Creditor < Persona::Creditor
 
   before_save :clean_fields_when_is_no_autonomous
 
+  scope :by_licitation_process, lambda { |q|
+
+  }
+
   scope :term, lambda { |q|
     joins { person }.
-    where { person.name.like("#{q}%") }
+        where { person.name.like("#{q}%") }
   }
 
   scope :by_id, lambda { |id|

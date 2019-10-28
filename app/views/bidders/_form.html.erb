@@ -10,7 +10,9 @@
 
 <div class="yui3-g">
   <div class="yui3-u-1">
-    <%= f.input :creditor %>
+      <%= f.input :creditor, as: :auto_complete, required: true,
+                  hidden_field: :creditor_id,
+                  source_path: creditors_path(by_licitation_process: f.object.decorator.by_licitation_process ) %>
   </div>
 </div>
 
