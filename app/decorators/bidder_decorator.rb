@@ -7,6 +7,11 @@ class BidderDecorator
 
   attr_header :creditor, :enabled
 
+  def by_licitation_process
+    # na modalidade pregão só pode ser adicionado os credores credenciados
+    licitation_process_id if licitation_process.modality_number == 6
+  end
+
   def process_date
     localize component.licitation_process_process_date if component.licitation_process_process_date
   end
