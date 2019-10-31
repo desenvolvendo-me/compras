@@ -21,6 +21,6 @@ builder resource, json do
     json.reference_unit       item.reference_unit
     json.quantity             item.decorator.quantity
     json.unit_price           item.decorator.unit_price
-    json.detailed_description item.material.detailed_description
+    json.detailed_description item.material ? item.material.detailed_description : nil
   end
 end
