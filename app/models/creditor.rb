@@ -139,7 +139,7 @@ class Creditor < Persona::Creditor
   end
 
   def representatives?
-    if self.representatives.blank?
+    if self.representative_people.blank?
       errors.add(:representatives,:blank)
     end
   end
