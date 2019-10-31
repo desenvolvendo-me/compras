@@ -52,9 +52,7 @@ class MinutePurchaseProcessTradingReport < Report
   end
 
   def bids
-    return [] if licitation_process.trading_item_bids.nil?
-
-    bids_creditor_ids ratification_creditor_ids
+    return licitation_process.trading_item_bids.nil? ? [] : licitation_process.trading_item_bids
   end
 
   def auctioneer
