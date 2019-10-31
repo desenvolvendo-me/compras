@@ -7,8 +7,7 @@ class Contract < Compras::Model
                   :guarantee_value, :contract_validity, :subcontracting,
                   :cancellation_date, :cancellation_reason, :delivery_schedules_attributes,
                   :dissemination_source_id, :creditor_ids, :contract_type_id,
-                  :licitation_process_id, :start_date,
-                  :budget_structure_id, :budget_structure_responsible_id,
+                  :licitation_process_id, :start_date, :budget_structure_responsible_id,
                   :lawyer_id, :parent_id, :additives_attributes, :penalty_fine,
                   :default_fine, :execution_type, :contract_guarantees, :consortium_agreement, :department_id
 
@@ -50,11 +49,11 @@ class Contract < Compras::Model
            :to => :licitation_process, :allow_nil => true, :prefix => true
 
   validates :year, :mask => "9999", :allow_blank => true
-  validates :sequential_number, :year, :contract_number, :publication_date,
-    :dissemination_source, :content, :creditor_ids, :contract_type,
-    :contract_value, :contract_validity, :signature_date, :start_date,
-    :end_date, :budget_structure_id, :budget_structure_responsible,
-    :default_fine, :penalty_fine, :presence => true
+  validates :year, :contract_number, :publication_date,
+            :dissemination_source, :content, :creditor_ids, :contract_type,
+            :contract_value, :contract_validity, :signature_date, :start_date,
+            :end_date, :budget_structure_responsible,
+            :default_fine, :penalty_fine, :presence => true
   validates :end_date, :timeliness => {
       :after => :signature_date,
       :type => :date,
@@ -63,7 +62,6 @@ class Contract < Compras::Model
 
   validate :presence_of_at_least_one_creditor
   validate :must_not_be_greater_than_one_creditor, unless: :consortium_agreement?
-  validate :check_budget_structure, on: :create
 
   orderize "id DESC"
   filterize
@@ -135,8 +133,4 @@ class Contract < Compras::Model
     errors.add(:creditors, :must_not_be_greater_than_one_creditor) if creditor_ids.count > 1
   end
 
-  def check_budget_structure
-    return if budget_structure_id.present?
-    errors.add(:budget_structure, :blank) if budget_structure.blank?
-  end
 end
