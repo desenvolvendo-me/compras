@@ -7,10 +7,9 @@ class Contract < Compras::Model
                   :guarantee_value, :contract_validity, :subcontracting,
                   :cancellation_date, :cancellation_reason, :delivery_schedules_attributes,
                   :dissemination_source_id, :creditor_ids, :contract_type_id,
-                  :licitation_process_id, :start_date,
-                  :budget_structure_id, :budget_structure_responsible_id,
+                  :licitation_process_id, :start_date, :budget_structure_responsible_id,
                   :lawyer_id, :parent_id, :additives_attributes, :penalty_fine,
-                  :default_fine, :execution_type, :contract_guarantees, :consortium_agreement
+                  :default_fine, :execution_type, :contract_guarantees, :consortium_agreement, :department_id
 
   attr_modal :year, :contract_number, :sequential_number, :signature_date
 
@@ -22,6 +21,7 @@ class Contract < Compras::Model
   has_enumeration_for :contract_guarantees, :with => UnicoAPI::Resources::Compras::Enumerations::ContractGuarantees
   has_enumeration_for :execution_type, :create_helpers => true
 
+  belongs_to :department
   belongs_to :budget_structure_responsible, :class_name => 'Employee'
   belongs_to :contract_type
   belongs_to :dissemination_source
@@ -44,48 +44,47 @@ class Contract < Compras::Model
   accepts_nested_attributes_for :delivery_schedules, :allow_destroy => true
 
   delegate :execution_type_humanize, :contract_guarantees_humanize, :contract_guarantees,
-    :to => :licitation_process, :allow_nil => true
+           :to => :licitation_process, :allow_nil => true
   delegate :budget_allocations_ids, :modality_humanize, :process, :execution_unit_responsible, :year, :type_of_removal_humanize,
-    :to => :licitation_process, :allow_nil => true, :prefix => true
+           :to => :licitation_process, :allow_nil => true, :prefix => true
 
   validates :year, :mask => "9999", :allow_blank => true
-  validates :sequential_number, :year, :contract_number, :publication_date,
-    :dissemination_source, :content, :creditor_ids, :contract_type,
-    :contract_value, :contract_validity, :signature_date, :start_date,
-    :end_date, :budget_structure_id, :budget_structure_responsible,
-    :default_fine, :penalty_fine, :presence => true
+  validates :year, :contract_number, :publication_date,
+            :dissemination_source, :content, :creditor_ids, :contract_type,
+            :contract_value, :contract_validity, :signature_date, :start_date,
+            :end_date, :budget_structure_responsible,
+            :default_fine, :penalty_fine, :presence => true
   validates :end_date, :timeliness => {
-    :after => :signature_date,
-    :type => :date,
-    :after_message => :end_date_should_be_after_signature_date
+      :after => :signature_date,
+      :type => :date,
+      :after_message => :end_date_should_be_after_signature_date
   }, :allow_blank => true
 
   validate :presence_of_at_least_one_creditor
   validate :must_not_be_greater_than_one_creditor, unless: :consortium_agreement?
-  validate :check_budget_structure, on: :create
 
   orderize "id DESC"
   filterize
 
-  scope :founded, joins { contract_type }.where { contract_type.service_goal.eq(ServiceGoal::FOUNDED) }
-  scope :management, joins { contract_type }.where { contract_type.service_goal.eq(ServiceGoal::CONTRACT_MANAGEMENT) }
-  scope :by_signature_date, lambda { |date_range|
-    where { signature_date.in(date_range) }
+  scope :founded, joins {contract_type}.where {contract_type.service_goal.eq(ServiceGoal::FOUNDED)}
+  scope :management, joins {contract_type}.where {contract_type.service_goal.eq(ServiceGoal::CONTRACT_MANAGEMENT)}
+  scope :by_signature_date, lambda {|date_range|
+    where {signature_date.in(date_range)}
   }
 
-  scope :by_signature_period, lambda { |started_at, ended_at|
-    where { signature_date.gteq(started_at) & signature_date.lteq(ended_at) }
+  scope :by_signature_period, lambda {|started_at, ended_at|
+    where {signature_date.gteq(started_at) & signature_date.lteq(ended_at)}
   }
 
   scope :purchase_process_id, ->(purchase_process_id) do
-    where { |query| query.licitation_process_id.eq(purchase_process_id) }
+    where {|query| query.licitation_process_id.eq(purchase_process_id)}
   end
 
   scope :except_type_of_removal, ->(type_of_removal) do
-    joins { licitation_process }.
-    where { licitation_process.type_of_removal.not_eq(type_of_removal) |
-      licitation_process.type_of_removal.eq(nil)
-     }
+    joins {licitation_process}.
+        where {licitation_process.type_of_removal.not_eq(type_of_removal) |
+            licitation_process.type_of_removal.eq(nil)
+        }
   end
 
   def to_s
@@ -101,15 +100,15 @@ class Contract < Compras::Model
   end
 
   def self.next_sequential(year)
-    self.where { self.year.eq year }.size + 1
+    self.where {self.year.eq year}.size + 1
   end
 
   def pledges
-    Pledge.all(params: { by_contract_id: id })
+    Pledge.all(params: {by_contract_id: id})
   end
 
   def founded_debt_pledges
-    Pledge.all(params: { by_founded_debt_contract_id: id })
+    Pledge.all(params: {by_founded_debt_contract_id: id})
   end
 
   def all_pledges
@@ -134,8 +133,4 @@ class Contract < Compras::Model
     errors.add(:creditors, :must_not_be_greater_than_one_creditor) if creditor_ids.count > 1
   end
 
-  def check_budget_structure
-    return if budget_structure_id.present?
-    errors.add(:budget_structure, :blank) if budget_structure.blank?
-  end
 end

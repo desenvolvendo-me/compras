@@ -32,7 +32,7 @@ class LicitationProcess < Compras::Model
 
   attr_readonly :year, :modality_number
 
-  attr_modal :process, :year, :process_date
+  attr_modal :process, :year, :process_date, :status
 
   has_enumeration_for :concession_period_unit, :with => PeriodUnit
   has_enumeration_for :contract_guarantees, :with => UnicoAPI::Resources::Compras::Enumerations::ContractGuarantees
