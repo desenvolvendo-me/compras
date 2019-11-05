@@ -1,4 +1,4 @@
-<tr class="record nested-record item-record">
+<tr class="record nested-record item-record" id="material-id-<%= material_id %>">
   <td><%= lot %></td>
 
   <td><%= material %></td>
@@ -9,7 +9,7 @@
 
   <td class="item-quantity"><%= quantity %></td>
 
-  <td><%= unit_price %></td>
+  <td class='item-unit-price'><%= unit_price %></td>
 
   <td class="item-total-value"><%= estimated_total_price %></td>
 
@@ -24,7 +24,7 @@
     <%= f.input :creditor_id, as: :hidden, input_html: { value: creditor_id, class: 'creditor-id' } %>
     <%= f.input :creditor, as: :hidden, input_html: { value: creditor } %>
     <%= f.input :quantity, as: :hidden, input_html: { value: quantity, class: 'item-quantity' } %>
-    <%= f.input :unit_price, as: :hidden, input_html: { value: unit_price } %>
+    <%= f.input :unit_price, as: :hidden, input_html: { value: unit_price, class: 'item-unit-price' } %>
     <%= f.input :additional_information, as: :hidden, input_html: { value: additional_information } %>
     <%= f.input :estimated_total_price, as: :hidden, input_html: { value: estimated_total_price, class: 'item-total-value' } %>
     <%= f.input :id, as: :hidden, input_html: { value: id } %>
