@@ -108,7 +108,7 @@ $(document).ready(function() {
     function hasItemAlreadyAdded(item) {
         var added = false;
 
-        $("#licitation_process_items_records input.material_id").each(function() {
+        $("table#items-records input.material-id").each(function() {
             if ($(this).val() == item.material_id) {
                 added = true;
                 return added;
@@ -119,13 +119,22 @@ $(document).ready(function() {
     }
 
     function mergeItem(item) {
-        var material       = $('#price_collection_items_records input.material_id[value="' + item.material_id + '"]'),
-            record         = material.closest('.nested-record'),
-            itemQuantity   = new BigNumber(parsePtBrFloat(record.find('input.quantity').val())),
-            totalQuantity  = numberWithDelimiter(parseFloat(itemQuantity.add(item.quantity)));
 
-        record.find('input.quantity').val(totalQuantity);
-        record.find('td.quantity').text(totalQuantity);
+        var record         = $('tr#material-id-'+item.material_id),
+            totalQuantity  = parsePtBrFloat(record.find('input.item-quantity').val())+item.quantity,
+            itemUnitPrice  = (parseFloat(record.find('input.item-unit-price').val())+item.unit_price)/2,
+            itemtotalValue = numberWithDelimiter(itemUnitPrice*totalQuantity);
+
+
+        record.find("td.item-quantity").text(totalQuantity);
+        record.find('input.item-quantity').val(totalQuantity);
+
+        record.find("td.item-unit-price").text(itemUnitPrice);
+        record.find('input.item-unit-price').val(itemUnitPrice);
+
+        record.find("td.item-total-value").text(itemtotalValue);
+        record.find('input.item-total-value').val(itemtotalValue);
+
     }
 
     function renderItem(item) {
