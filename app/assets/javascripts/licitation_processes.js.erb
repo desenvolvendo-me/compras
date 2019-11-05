@@ -108,7 +108,7 @@ $(document).ready(function() {
     function hasItemAlreadyAdded(item) {
         var added = false;
 
-        $("#licitation_process_items_records input.material_id").each(function() {
+        $("table#items-records input.material-id").each(function() {
             if ($(this).val() == item.material_id) {
                 added = true;
                 return added;
