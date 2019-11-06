@@ -1,8 +1,7 @@
 module ActiveRecord
   module GracefulRestrict
     def destroy
-      #FIXME: Analisar o real impacto desse problema!!!
-      # super
+      super
     rescue ActiveRecord::DeleteRestrictionError
       errors.add(:base, :cant_be_destroyed)
       false
