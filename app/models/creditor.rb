@@ -169,6 +169,13 @@ class Creditor < Persona::Creditor
     representative_people.joins { personable(Individual) }.first
   end
 
+  def destroy
+#    super
+  rescue ActiveRecord::DeleteRestrictionError
+    errors.add(:base, :cant_be_destroyed)
+    false
+  end
+
   protected
 
   def clean_fields_when_is_no_autonomous
