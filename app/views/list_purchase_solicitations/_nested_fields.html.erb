@@ -20,14 +20,26 @@
 
 <script>
 
+    // esse js ta resolvendo um bug que deu na aplicação,
+    //     a mascara com pra numbem (ex.:1.200,00) não estava funcionando
+    // como deveria, como tambem o update pois estava acrescentando
+    // uma casa decimal a mais (salvava 1 e para o banco aumentava
+    // um 0 em todo update), esse correção é feita no model
+    // list_purchase_solicitation,linha 11
     function convert(number){
-        if(number.split('.')[1].length == 1){
-            number += '0';
-        }
-        return number.replace('.',',');
+        return (Number(number)).toLocaleString("pt-BR", {
+            minimumFractionDigits: 2,maximumFractionDigits: 2
+        });
     }
 
     $(function() {
+
+        $("#list_purchase_solicitations_records tbody tr td").each(function() {
+            if ( $(this).attr('class') == "consumed_value" || $(this).attr('class') == "expected_value"){
+                $(this).text((convert($(this).text())));
+            }
+        });
+
         $('#list_purchase_solicitations_records .edit-nested-record').click(function(){
             setTimeout(function(){
                 consumed_value = $('#licitation_process_consumed_value').val();

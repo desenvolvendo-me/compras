@@ -19,8 +19,10 @@ class PledgeRequest < Compras::Model
   has_many :items, class_name: 'PledgeRequestItem', inverse_of: :pledge_request,
     dependent: :destroy
 
-  delegate :expense_nature, :expense_nature_id, :balance, :descriptor_id,
-    to: :budget_allocation, allow_nil: true, prefix: true
+  delegate :expense_nature_id, :balance, :descriptor_id,
+           to: :budget_allocation, allow_nil: true, prefix: true
+  # delegate :expense_nature, :expense_nature_id, :balance, :descriptor_id,
+  #   to: :budget_allocation, allow_nil: true, prefix: true
   delegate :amount, to: :reserve_fund, allow_nil: true, prefix: true
   delegate :budget_allocations_ids, to: :purchase_process, allow_nil: true, prefix: true
 

@@ -8,4 +8,11 @@ class ListPurchaseSolicitation < Compras::Model
   orderize "id DESC"
   filterize
 
+  before_save :ajuste, :unless => :new_record?
+
+  def ajuste
+    self.consumed_value /= 10 if self.consumed_value_was * 10 == self.consumed_value
+    self.expected_value /= 10 if self.expected_value_was * 10 == self.expected_value
+  end
+
 end

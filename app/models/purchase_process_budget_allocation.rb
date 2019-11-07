@@ -1,25 +1,29 @@
 class PurchaseProcessBudgetAllocation < Compras::Model
   include BelongsToResource
 
-  attr_accessible :licitation_process_id, :budget_allocation_id, :value,
-                  :expense_nature_id
+  attr_accessible :licitation_process_id,
+                  # :budget_allocation_id, old version
+                  # :expense_nature_id, old version
+                  :value,:split_expense_id,
+                  :budget_allocation
 
   attr_modal :material, :quantity, :unit_price
 
+  belongs_to :split_expense
   belongs_to :licitation_process
 
-  belongs_to_resource :expense_nature
-  belongs_to_resource :budget_allocation
+  # belongs_to_resource :expense_nature
+  # belongs_to_resource :budget_allocation
 
   delegate :expense_nature, :expense_nature_id, :amount, :balance, :descriptor_id,
            :to => :budget_allocation, :allow_nil => true, :prefix => true
 
-  validates :budget_allocation_id, :value, :presence => true
+  # validates :budget_allocation_id, :value, :presence => true
+  #
+  # validate :validate_budget_allocation, on: :update,
+  #   if: :budget_allocation_id_changed?
 
-  validate :validate_budget_allocation, on: :update,
-    if: :budget_allocation_id_changed?
-
-  before_destroy :block_when_budget_allocation_used
+  # before_destroy :block_when_budget_allocation_used
 
   private
 
