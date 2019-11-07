@@ -10,5 +10,12 @@ class NatureExpense < Compras::Model
   orderize "created_at"
   filterize
 
+  scope :term, lambda { |q|
+    where { description.like("#{q}%") }
+  }
+
+  def to_s
+    description
+  end
 
 end

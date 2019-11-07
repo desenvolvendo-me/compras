@@ -8,6 +8,7 @@ pt-BR:
     attributes:
       purchase_process_budget_allocation:
         budget_allocation: "Dotação orçamentária"
+        split_expense: "Desdobramento"
         budget_allocation_description: "Dotação orçamentária"
         budget_allocation_expense_nature: "Natureza da despesa"
         budget_allocation_balance: "Saldo da dotação"

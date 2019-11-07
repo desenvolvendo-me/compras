@@ -6,4 +6,14 @@ class SplitExpense < Compras::Model
 
   orderize :id
   filterize
+
+
+  scope :term, lambda { |q|
+    where { description.like("#{q}%") }
+  }
+
+  def to_s
+    "#{nature_expense} - #{description}"
+  end
+
 end
