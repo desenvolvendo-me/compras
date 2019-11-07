@@ -114,7 +114,7 @@ class LicitationProcessDecorator
   end
 
   def budget_allocations
-    component.budget_allocations.uniq.join(', ')
+    # component.budget_allocations.uniq.join(', ')
   end
 
   def type_of_calculation

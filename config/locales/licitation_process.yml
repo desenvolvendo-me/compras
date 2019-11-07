@@ -52,6 +52,7 @@ pt-BR:
         purchase_solicitations: "Solicitações de compra"
         ratification_date: "Data da homologação"
         readjustment_index: "Índice de reajuste"
+        split_expense: "Desdobramento"
         stage_of_bids_date: "Data da fase de lances"
         stage_of_bids_time: "Hora da fase de lances"
         total_value_of_items: "Valor total dos itens"
@@ -83,6 +84,7 @@ pt-BR:
         resource_source: "Fonte do Recurso"
         licitation_process: "Processo de Licitação"
         purchase_solicitation: "Solicitação de Compra"
+        value: "Valor previsto"
 
   licitation_process:
     messages:

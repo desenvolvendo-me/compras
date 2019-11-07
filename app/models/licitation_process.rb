@@ -110,7 +110,6 @@ class LicitationProcess < Compras::Model
            :lowest_price?, :higher_discount_on_lot?, :higher_discount_on_item?,
            :to => :judgment_form, :allow_nil => true, :prefix => true
 
-  # validates :purchase_solicitations, presence: true
   validates :process_date, :period, :contract_guarantees, :type_of_purchase,
             :period_unit, :payment_method,
             :year, :execution_type, :object_type, :description, :notice_availability_date,
@@ -137,8 +136,9 @@ class LicitationProcess < Compras::Model
   validate :validate_updates, :unless => :updateable?
   validate :validate_proposal_envelope_opening_date, :on => :update, :if => :licitation?
   validate :validate_the_year_to_processe_date_are_the_same, :on => :update
-  validate :validate_budget_allocations_destruction
+  # validate :validate_budget_allocations_destruction
   validate :validate_total_items
+  validate :purchase_solicitations_blank?
 
   with_options :allow_blank => true do |allowing_blank|
     allowing_blank.validates :year, :mask => "9999"
@@ -214,6 +214,10 @@ class LicitationProcess < Compras::Model
 
   def to_s
     "#{process}/#{year} - #{modality_or_type_of_removal_humanized} #{modality_number}"
+  end
+
+  def purchase_solicitations_blank?
+    errors.add(:purchase_solicitations, :blank) if purchase_solicitations.blank?
   end
 
   def modality_or_type_of_removal

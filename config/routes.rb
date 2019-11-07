@@ -798,6 +798,7 @@ Compras::Application.routes.draw do
     end
   end
 
+  get 'nature_expenses/modal', :as => :modal_nature_expenses
   resources :nature_expenses do
     collection do
       get :filter
@@ -806,12 +807,12 @@ Compras::Application.routes.draw do
   end
 
   # get "split_expenses/modal", :as => :modal_esplit_expenses
-  # resources :esplit_expenses do
-  #   collection do
-  #     get :filter
-  #     get :modal
-  #   end
-  # end
+  resources :split_expenses do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
 
   resources :unblock_budgets
 
