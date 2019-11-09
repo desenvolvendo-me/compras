@@ -1,0 +1,20 @@
+<%= f.input :purchase_process, modal_url: modal_licitation_processes_path() %>
+
+<div class="" id="div_purchase_solicitation">
+  <%= f.input :purchase_solicitations,as: :nested_grid,
+              columns: [:purchase_solicitation] %>
+</div>
+
+<script>
+    $(function() {
+        if ($('input[name="pledge_request[purchase_process]"]').val()==""){
+            $('#div_purchase_solicitation').hide();
+        }
+
+        $('input[name="pledge_request[purchase_process]"]').change(function(){
+            $('#div_purchase_solicitation').show();
+        });
+    });
+</script>
+
+
