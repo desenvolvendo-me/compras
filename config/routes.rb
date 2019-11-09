@@ -649,6 +649,7 @@ Compras::Application.routes.draw do
 
   resources :purchase_process_accreditations, :only => [:new, :create, :edit, :update, :show]
 
+  get 'purchase_solicitations/modal', :as => :modal_purchase_solicitations
   resources :purchase_solicitations, :except => :destroy do
     collection do
       get :filter
