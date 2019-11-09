@@ -5,7 +5,7 @@ class PurchaseSolicitationsController < CrudController
   has_scope :by_material_id
   has_scope :except_ids, :type => :array
   has_scope :can_be_grouped, :type => :boolean
-  # has_scope :by_licitation_process
+  has_scope :by_licitation_process
 
   def new
     object = build_resource
@@ -39,10 +39,10 @@ class PurchaseSolicitationsController < CrudController
   protected
 
   def default_filters
-    { :accounting_year => lambda { Date.current.year } }
+    {:accounting_year => lambda {Date.current.year}}
   end
 
   def interpolation_options
-    { :resource_name => "#{resource_class.model_name.human} #{resource.code}/#{resource.accounting_year}" }
+    {:resource_name => "#{resource_class.model_name.human} #{resource.code}/#{resource.accounting_year}"}
   end
 end
