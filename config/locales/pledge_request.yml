@@ -20,6 +20,7 @@ pt-BR:
         item_replicated_value: "Valor do empenho"
         items_total_value: "Valor total dos itens"
         purchase_process: 'Processo de Compra'
+        purchase_solicitation: 'Solicitação de Compra'
         reserve_fund: "Reserva de dotação"
         reserve_fund_id: "Reserva de dotação"
         reserve_fund_amount: "Saldo reserva"

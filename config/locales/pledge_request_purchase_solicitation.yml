@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      pledge_request_purchase_solicitation:
+        one: "Pedido de Empenho"
+        other: "Pedidos de Empenho"
+
+    attributes:
+      pledge_request_purchase_solicitation:
+        purchase_solicitation: 'Solicitação de Compra'
