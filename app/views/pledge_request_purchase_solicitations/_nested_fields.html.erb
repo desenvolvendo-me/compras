@@ -1,9 +1,0 @@
-<%= f.input :purchase_solicitation, :required => true,
-            source_path: purchase_solicitations_path(by_licitation_process: f.object.purchase_process_id),
-            :as => :auto_complete, :fake => true,
-            'data-hidden-field-class' => 'unique', :input_html => {} %>
-
-<script>
-
-
-</script>

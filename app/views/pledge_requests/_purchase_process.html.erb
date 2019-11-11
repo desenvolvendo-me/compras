@@ -1,42 +1,4 @@
 <%= f.input :purchase_process, modal_url: modal_licitation_processes_path(),
             :disabled => !f.object.purchase_process.nil? %>
 
-<div class="yui3-u-1-3" style="margin-bottom: 20px;">
-    <%= f.button :submit, 'data-disabled' => not_updateable_message ,
-                 :class => 'pledge-request-submit-show-children' %>
-</div>
-
-<div class="" id="div_purchase_solicitation">
-  <%= f.input :purchase_solicitations,as: :nested_grid,
-              columns: [:purchase_solicitation] %>
-</div>
-
-<script>
-    $(function() {
-        // inicio do bloco ,usado para ocultar os filhos do processo de compra
-        var input_pledge_request = $('input[name="pledge_request[purchase_process]"]');
-        var class_btn_pledge_request = $(".pledge-request-submit-show-children");
-
-        if (input_pledge_request.val()==""){
-            $('#div_purchase_solicitation').hide();
-            class_btn_pledge_request.val('Solicitações de Compra');
-            class_btn_pledge_request.attr('disabled',true);
-            class_btn_pledge_request.attr('title','Escolha um processo de compra!');
-            class_btn_pledge_request.attr('class','button pledge-request-submit-show-children');
-        }else{
-            $('#div_purchase_solicitation').show();
-            class_btn_pledge_request.hide();
-        }
-
-        input_pledge_request.change(function(){
-            if (input_pledge_request.val()=="") {
-                $(".pledge-request-submit-show-children").attr('disabled',true);
-            }else{
-                $(".pledge-request-submit-show-children").attr('disabled',false);
-            }
-        });
-        // fim do bloco
-    });
-</script>
-
 
