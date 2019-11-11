@@ -58,6 +58,7 @@ class PurchaseSolicitation < Compras::Model
   # validate :must_have_at_least_one_item
   # validate :validate_budget_structure_and_materials
   # validate :validate_liberated_status
+  validate :items_blank?
 
   # before_save :set_budget_structure_description
 
@@ -178,6 +179,10 @@ class PurchaseSolicitation < Compras::Model
   end
 
   protected
+
+  def items_blank?
+    errors.add(:items, :blank) if items.blank?
+  end
 
   def set_budget_structure_description
     self.budget_structure_description = budget_structure.present? ? budget_structure.description : ''
