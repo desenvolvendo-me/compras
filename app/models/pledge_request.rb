@@ -57,7 +57,7 @@ class PledgeRequest < Compras::Model
   end
 
   def items_total_value
-    items.sum(&:estimated_total_price)
+    # items.sum(&:estimated_total_price)
   end
 
   private
