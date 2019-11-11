@@ -5,7 +5,8 @@ class PledgeRequest < Compras::Model
     :accounting_account_id, :contract_id, :reserve_fund_id, :purchase_process_id,
     :creditor_id, :amount, :emission_date,
     :items_attributes,
-    :purchase_solicitations_attributes
+    :purchase_solicitations_attributes,
+    :budget_allocation
 
 
 
@@ -20,15 +21,15 @@ class PledgeRequest < Compras::Model
 
   belongs_to_resource :descriptor
   belongs_to_resource :accounting_account
-  belongs_to_resource :budget_allocation
+  # belongs_to_resource :budget_allocation
   belongs_to_resource :expense_nature
   belongs_to_resource :reserve_fund
 
   has_many :items, class_name: 'PledgeRequestItem', inverse_of: :pledge_request,
     dependent: :destroy
 
-  delegate :expense_nature_id, :balance, :descriptor_id,
-           to: :budget_allocation, allow_nil: true, prefix: true
+  # delegate :expense_nature_id, :balance, :descriptor_id,
+  #          to: :budget_allocation, allow_nil: true, prefix: true
   # delegate :expense_nature, :expense_nature_id, :balance, :descriptor_id,
   #   to: :budget_allocation, allow_nil: true, prefix: true
   delegate :amount, to: :reserve_fund, allow_nil: true, prefix: true
@@ -43,9 +44,9 @@ class PledgeRequest < Compras::Model
   orderize :id
   filterize
 
-  scope :by_budget_allocation_id, ->(budget_allocation_id) do
-    where { |query| query.budget_allocation_id.eq(budget_allocation_id)}
-  end
+  # scope :by_budget_allocation_id, ->(budget_allocation_id) do
+  #   where { |query| query.budget_allocation_id.eq(budget_allocation_id)}
+  # end
 
   scope :by_purchase_process_id, ->(purchase_process_id) do
     where { |query| query.purchase_process_id.eq(purchase_process_id)}

@@ -15,24 +15,25 @@
 </div>
 
 <div class="yui3-g">
-  <div class="yui3-u-1-3">
-    <%= f.input :budget_allocation, as: :auto_complete, required: true,
+  <div class="yui3-u-1-2">
+    <%= f.input :budget_allocation %>
+    <%#= f.input :budget_allocation, as: :auto_complete, required: true,
       hidden_field: :budget_allocation_id,
       source_path: budget_allocations_path(by_ids: f.object.purchase_process_budget_allocations_ids) %>
   </div>
 
-  <div class="yui3-u-1-3">
-    <%= f.input :budget_allocation_balance, disabled: true,
+<!--  <div class="yui3-u-1-3">-->
+    <%#= f.input :budget_allocation_balance, disabled: true,
       input_html: { value: number_with_precision(f.object.budget_allocation_balance), class: "numeric" } %>
 
-    <%= f.input :descriptor_id, as: :hidden, input_html: { value: f.object.budget_allocation_descriptor_id } %>
-  </div>
+    <%#= f.input :descriptor_id, as: :hidden, input_html: { value: f.object.budget_allocation_descriptor_id } %>
+<!--  </div>-->
 
 <!--  <div class="yui3-u-1-2">-->
     <%#= f.input :reserve_fund_id, as: :select, collection: reserve_funds(f.object.purchase_process) %>
 <!--  </div>-->
 
-  <div class="yui3-u-1-3">
+  <div class="yui3-u-1-2">
     <%= f.input :reserve_fund_amount, disabled: true,
                 input_html: { value: number_with_precision(f.object.reserve_fund_amount), class: "numeric" } %>
   </div>
