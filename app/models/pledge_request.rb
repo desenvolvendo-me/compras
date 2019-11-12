@@ -2,17 +2,19 @@ class PledgeRequest < Compras::Model
   include BelongsToResource
 
   attr_accessible :descriptor_id, :budget_allocation_id, :expense_nature_id,
-    :accounting_account_id, :contract_id, :reserve_fund_id, :purchase_process_id,
-    :creditor_id, :amount, :emission_date,
-    :items_attributes,
-    :purchase_solicitations_attributes,
-    :budget_allocation
-
+                  :accounting_account_id, :contract_id, :reserve_fund_id, :purchase_process_id,
+                  :creditor_id, :amount, :emission_date,
+                  :items_attributes,
+                  :purchase_solicitations_attributes,
+                  :budget_allocation
 
 
   has_many :purchase_solicitations, class_name: 'PledgeRequestPurchaseSolicitation',
            dependent: :destroy, order: :id
-  accepts_nested_attributes_for :purchase_solicitations,
+  has_many :items, class_name: 'PledgeRequestItem', :dependent => :restrict,
+           :order => :id, inverse_of: :pledge_request
+
+  accepts_nested_attributes_for :purchase_solicitations, :items,
                                 :allow_destroy => true
 
   belongs_to :purchase_process, class_name: 'LicitationProcess'
@@ -25,8 +27,6 @@ class PledgeRequest < Compras::Model
   belongs_to_resource :expense_nature
   belongs_to_resource :reserve_fund
 
-  has_many :items, class_name: 'PledgeRequestItem', inverse_of: :pledge_request,
-    dependent: :destroy
 
   # delegate :expense_nature_id, :balance, :descriptor_id,
   #          to: :budget_allocation, allow_nil: true, prefix: true
@@ -49,7 +49,7 @@ class PledgeRequest < Compras::Model
   # end
 
   scope :by_purchase_process_id, ->(purchase_process_id) do
-    where { |query| query.purchase_process_id.eq(purchase_process_id)}
+    where {|query| query.purchase_process_id.eq(purchase_process_id)}
   end
 
   def to_s

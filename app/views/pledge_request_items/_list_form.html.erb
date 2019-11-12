@@ -1,9 +1,9 @@
 <tr class="record nested-record item-record" id="material-id-<%= material_id %>">
+  <td><%= id %></td>
   <td><%= material %></td>
   <td><%= quantity %></td>
   <td>
     <%= link_to 'Editar', '#', class: 'edit-nested-record' %>
-    <%#= link_to 'Editar', '#', class: 'edit-nested-record', 'data-disabled' => data_disabled %>
   </td>
 
   <td>
@@ -14,28 +14,5 @@
     <%= f.input :_destroy, as: :hidden, input_html: { class: 'destroy' } %>
 
     <%= link_to 'Remover', '#', class: 'remove-nested-record' %>
-    <%#= link_to 'Remover', '#', class: 'remove-nested-record', 'data-disabled' => data_disabled %>
   </td>
 </tr>
-
-
-
-<!--<tr class="record document-type">-->
-<!--  <td class='id'>-->
-    <%#= id %>
-<!--  </td>-->
-<!--  <td>-->
-    <%#= material %>
-<!--  </td>-->
-<!--  <td>-->
-    <%#= quantity %>
-<!--  </td>-->
-<!--  <td>-->
-    <%#= unit_price %>
-<!--  </td>-->
-<!--  <td>-->
-<!--    <input id="<%#= f.sanitized_object_name %>_purchase_process_items_record_<%#= id %>_id" type="hidden" name="<%#= f.sanitized_object_name %>[purchase_process_item_ids][]" value="<%#= id %>" />-->
-    <%#= button_tag 'Remover', :type => :button,  :class => 'button negative modal-finder-remove' %>
-    <%#= button_tag 'Remover', :type => :button,  :class => 'button negative modal-finder-remove' if f.object.licitation_process_updatable? %>
-<!--  </td>-->
-<!--</tr>-->
