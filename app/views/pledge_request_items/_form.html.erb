@@ -1,0 +1,20 @@
+<tr class="record nested-record item-record" id="material-id-<%= material_id %>">
+  <td><%= material %></td>
+  <td><%= quantity %></td>
+  <td><%= purchase_solicitation %></td>
+  <td>
+    <%= link_to 'Editar', '#', class: 'edit-nested-record' %>
+  </td>
+
+  <td>
+    <%= f.input :material_id, as: :hidden, input_html: { value: material_id, class: 'material-id' } %>
+    <%= f.input :material, as: :hidden, input_html: { value: material } %>
+    <%= f.input :quantity, as: :hidden, input_html: { value: quantity, class: 'item-quantity' } %>
+    <%= f.input :purchase_solicitation_id, as: :hidden, input_html: { value: purchase_solicitation_id, class: 'purchase-  solicitation-id' } %>
+    <%= f.input :purchase_solicitation, as: :hidden, input_html: { value: purchase_solicitation } %>
+    <%= f.input :id, as: :hidden, input_html: { value: id } %>
+    <%= f.input :_destroy, as: :hidden, input_html: { class: 'destroy' } %>
+
+    <%= link_to 'Remover', '#', class: 'remove-nested-record' %>
+  </td>
+</tr>
