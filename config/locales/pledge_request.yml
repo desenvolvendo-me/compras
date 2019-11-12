@@ -24,3 +24,5 @@ pt-BR:
         reserve_fund: "Reserva de dotação"
         reserve_fund_id: "Reserva de dotação"
         reserve_fund_amount: "Saldo reserva"
+        material: "Item"
+        quantity: "Quantidade"

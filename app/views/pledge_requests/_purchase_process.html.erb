@@ -5,14 +5,17 @@
   <%= hidden_field_tag :item_id, nil, :name => 'licitation_process_item[id]' %>
 
   <div class="yui3-g">
-    <div class="yui3-u-3-4">
+    <div class="yui3-u-1-2">
       <%= f.input :material, :as => :auto_complete, :fake => true, :required => true %>
     </div>
 
-    <div class="yui3-u-1-6">
-      <%= f.input :quantity, :as => :fake, :required => true,
-                  :input_html => {'data-numeric' => true, :maxlength => 15, :class => 'numeric integer'} %>
+    <div class="yui3-u-1-2">
+      <%= f.input :quantity, :as => :fake, :required => true,:input_html => {'data-numeric' => true, :maxlength => 15, :class => 'numeric integer'} %>
     </div>
+<!--    <div class="yui3-u-1-2">-->
+      <%#= f.input :purchase_solicitation, :as => :auto_complete, :fake => true, :required => true %>
+<!--    </div>-->
+
   </div>
   <div class="yui3-u-1-6">
     <%= button_tag 'Adicionar', type: :button,
@@ -28,8 +31,8 @@
 <table id="items-records" class="records">
   <thead>
   <tr>
-    <th><%= PurchaseProcessItem.human_attribute_name :id %></th>
-    <th><%= PurchaseProcessItem.human_attribute_name :material %></th>
+    <th> Item </th>
+<!--    <th><%#= PurchaseProcessItem.human_attribute_name :material %></th>-->
     <th><%= PurchaseProcessItem.human_attribute_name :quantity %></th>
     <th></th>
     <th></th>
