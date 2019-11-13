@@ -5,7 +5,7 @@ class PurchaseSolicitation < Compras::Model
                   :delivery_location_id, :general_observations, :justification,
                   :purchase_solicitation_budget_allocations_attributes,
                   :items_attributes, :budget_structure_id,
-                  :user_id,:department_id,
+                  :user_id, :department_id,
                   :purchase_form_id
 
   attr_readonly :code
@@ -28,7 +28,7 @@ class PurchaseSolicitation < Compras::Model
   belongs_to_resource :budget_structure
 
   has_many :items, :class_name => 'PurchaseSolicitationItem', :dependent => :restrict,
-           :inverse_of => :purchase_solicitation,:order => :id
+           :inverse_of => :purchase_solicitation, :order => :id
 
   has_and_belongs_to_many :licitation_processes, :join_table => :compras_licitation_processes_purchase_solicitations
 
@@ -38,8 +38,9 @@ class PurchaseSolicitation < Compras::Model
 
   has_many :price_collection_items, through: :price_collections, source: :items
   has_many :price_collection_proposal_items, through: :price_collection_items
+  has_many :list_purchase_solicitations
 
-  has_one  :annul, :class_name => 'ResourceAnnul', :as => :annullable, :dependent => :destroy
+  has_one :annul, :class_name => 'ResourceAnnul', :as => :annullable, :dependent => :destroy
 
   has_and_belongs_to_many :price_collections, join_table: :compras_price_collections_purchase_solicitations
 
@@ -57,54 +58,54 @@ class PurchaseSolicitation < Compras::Model
   # validate :must_have_at_least_one_item
   # validate :validate_budget_structure_and_materials
   # validate :validate_liberated_status
+  validate :items_blank?
 
   # before_save :set_budget_structure_description
 
   orderize "id DESC"
   filterize
 
-  scope :by_material_id, lambda { |material_id|
-    joins { items }.where { items.material_id.eq(material_id) }
+  scope :by_licitation_process, lambda {|purchase_process_id|
+    joins(list_purchase_solicitations: [:licitation_process]).where("compras_licitation_processes.id = ?", purchase_process_id)
   }
 
-  scope :by_material, lambda { |material_ids|
-    joins { items }.
-        where { |purchase| purchase.items.material_id.in(material_ids) }
+  scope :by_material_id, lambda {|material_id|
+    joins {items}.where {items.material_id.eq(material_id)}
   }
 
-  scope :except_ids, lambda { |ids| where { id.not_in(ids) } }
+  scope :by_material, lambda {|material_ids|
+    joins {items}.
+        where {|purchase| purchase.items.material_id.in(material_ids)}
+  }
+
+  scope :except_ids, lambda {|ids| where {id.not_in(ids)}}
 
   scope :can_be_grouped, lambda {
-    where { service_status.in [
-      PurchaseSolicitationServiceStatus::LIBERATED,
-      PurchaseSolicitationServiceStatus::PARTIALLY_FULFILLED ]
+    where {service_status.in [
+                                 PurchaseSolicitationServiceStatus::LIBERATED,
+                                 PurchaseSolicitationServiceStatus::PARTIALLY_FULFILLED]
     }.uniq
   }
 
   scope :without_price_collection, lambda {
-    joins { price_collections.outer }.
-    where { compras_price_collections_purchase_solicitations.price_collection_id.eq(nil) }
+    joins {price_collections.outer}.
+        where {compras_price_collections_purchase_solicitations.price_collection_id.eq(nil)}
   }
 
   scope :without_purchase_process, lambda {
-    joins { licitation_processes.outer }.
-    where { licitation_processes.id.eq(nil) }
+    joins {licitation_processes.outer}.
+        where {licitation_processes.id.eq(nil)}
   }
 
-  scope :term, lambda { |q|
+  scope :term, lambda {|q|
     where {
       accounting_year.eq(Date.current.year) &
+          (service_status.in [
+                                 PurchaseSolicitationServiceStatus::LIBERATED,
+                                 PurchaseSolicitationServiceStatus::PARTIALLY_FULFILLED]) &
           ((code.eq(q) & code.not_eq(0)) | budget_structure_description.like("#{q}%")
           )
     }
-    # where {
-    #   accounting_year.eq(Date.current.year) &
-    #   (service_status.in [
-    #     PurchaseSolicitationServiceStatus::LIBERATED,
-    #     PurchaseSolicitationServiceStatus::PARTIALLY_FULFILLED ]) &
-    #   ((code.eq(q) & code.not_eq(0)) | budget_structure_description.like("#{q}%")
-    #   )
-    # }
   }
 
   def to_s
@@ -124,9 +125,9 @@ class PurchaseSolicitation < Compras::Model
   end
 
   def quantity_by_material(material_id)
-    PurchaseSolicitation.joins { items }.
-      where { |purchase| purchase.items.material_id.eq(material_id) &
-                         purchase.id.eq( self.id ) }.sum(:quantity)
+    PurchaseSolicitation.joins {items}.
+        where {|purchase| purchase.items.material_id.eq(material_id) &
+            purchase.id.eq(self.id)}.sum(:quantity)
   end
 
   def editable?
@@ -178,6 +179,10 @@ class PurchaseSolicitation < Compras::Model
   end
 
   protected
+
+  def items_blank?
+    errors.add(:items, :blank) if items.blank?
+  end
 
   def set_budget_structure_description
     self.budget_structure_description = budget_structure.present? ? budget_structure.description : ''

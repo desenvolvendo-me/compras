@@ -1,0 +1,70 @@
+<h1>ORDEM DE FORNECIMENTO</h1>
+
+<div style="text-align: justify">
+  <span>
+    <p>
+      CONTRATANTE: <%= resource.prefecture %>
+    </p>
+  </span>
+</div>
+<div style="text-align: justify">
+  <span>
+    <p>
+      CONTRATADA: <%= resource.creditor %>
+    </p>
+  </span>
+</div>
+<div style="text-align: justify">
+  <span>
+    <p>
+      CERTAME: <%= resource.licitation_process %>
+    </p>
+  </span>
+</div>
+<div style="text-align: justify">
+  <span>
+    <p>
+      PROCESSO: <%= "#{resource.licitation_process.process}/#{resource.licitation_process.year}" %>
+    </p>
+  </span>
+</div>
+<div style="text-align: justify">
+  <span>
+    <p>
+      OBJETO: <%= resource.licitation_process.description %>
+    </p>
+  </span>
+</div>
+
+<br>
+<br>
+<br>
+<p>
+<h2>ITENS DA ORDEM DE FORNECIMENTO</h2>
+<div>
+  <table class="records">
+    <thead>
+    <tr>
+      <th>ITEM</th>
+      <th>QUANTIDADE</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>01.00.00.000.000.01323</td>
+      <td>6,00</td>
+    </tr>
+    <tr>
+      <td>01.00.00.000.000.01531</td>
+      <td>25,00</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</p>
+<br><br><br><br><br><br>
+<div class="signature" style="text-align: center">
+  <p>
+  <hr>
+  FUNCIONÁRIO <br><br><br><br><br><br>
+</div>

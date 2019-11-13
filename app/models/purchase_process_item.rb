@@ -29,7 +29,7 @@ class PurchaseProcessItem < Compras::Model
   delegate :unit_price, :total_price, to: :ratification_item, allow_nil: true, prefix: true
 
   validates :material, :quantity, :lot, :presence => true
-  validates :creditor, presence: true, if: :direct_purchase?
+  # validates :creditor, presence: true, if: :direct_purchase?
 
   orderize "id DESC"
   filterize

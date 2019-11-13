@@ -1,4 +1,6 @@
 <div class="buttons">
+
+  <%= link_to('Imprimir', report_supply_orders_path(resource.id), class: "button primary") %>
   <%= f.button :submit if can?(:modify, main_controller_name) %>
   <%= f.button :back %>
 

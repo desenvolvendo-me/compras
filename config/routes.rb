@@ -40,7 +40,7 @@ Compras::Application.routes.draw do
   end
 
   # Keep routes sorted alphabetically
-  devise_for :users, :controllers => { :confirmations => 'confirmations', :sessions => 'sessions' }
+  devise_for :users, :controllers => {:confirmations => 'confirmations', :sessions => 'sessions'}
 
   devise_scope :user do
     put '/confirm' => 'confirmations#confirm'
@@ -98,8 +98,8 @@ Compras::Application.routes.draw do
 
   resources :purchase_process_trading_items, only: [:creditor_list, :next_bid, :undo_last_bid, :update] do
     member do
-      get  :creditor_list
-      get  :next_bid
+      get :creditor_list
+      get :next_bid
       post :undo_last_bid
     end
 
@@ -173,7 +173,7 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :budget_allocations, :only => [:index, :show]  do
+  resources :budget_allocations, :only => [:index, :show] do
     collection do
       get :filter
       get :modal
@@ -205,12 +205,12 @@ Compras::Application.routes.draw do
   get 'budget_structure_levels/modal', :as => :modal_budget_structure_levels
 
   resources :capabilities, :except => [:new, :edit, :update, :destroy] do
-   collection do
-     get :filter
-     get :modal
-   end
-   get 'modal_info', :on => :member
- end
+    collection do
+      get :filter
+      get :modal
+    end
+    get 'modal_info', :on => :member
+  end
 
   resources :capability_allocation_details do
     collection do
@@ -281,7 +281,7 @@ Compras::Application.routes.draw do
       get :modal
     end
   end
-  
+
   resources :contract_types do
     collection do
       get :filter
@@ -649,6 +649,7 @@ Compras::Application.routes.draw do
 
   resources :purchase_process_accreditations, :only => [:new, :create, :edit, :update, :show]
 
+  get 'purchase_solicitations/modal', :as => :modal_purchase_solicitations
   resources :purchase_solicitations, :except => :destroy do
     collection do
       get :filter
@@ -850,7 +851,9 @@ Compras::Application.routes.draw do
 
     match 'minute_purchase_processes/:licitation_process_id' => 'minute_purchase_processes#show', as: :minute_purchase_processes
     match 'minute_purchase_process_tradings/:licitation_process_id' => 'minute_purchase_process_tradings#show',
-      as: :minute_purchase_process_tradings
+          as: :minute_purchase_process_tradings
+
+    match 'supply_orders/:supply_order_id' => 'supply_orders#show', as: :supply_orders
   end
 
   namespace :api do

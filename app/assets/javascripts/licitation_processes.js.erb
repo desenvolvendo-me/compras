@@ -143,7 +143,9 @@ $(document).ready(function() {
             id: '',
             material_id: item.material_id,
             material: item.material_description,
-            reference_unit: item.reference_unit,
+            creditor_id: '',
+            creditor: '',
+            reference_unit: item.reference_unit.acronym,
             brand: item.brand,
             quantity: item.quantity,
             lot: '1',
@@ -173,6 +175,7 @@ $(document).ready(function() {
     });
 
   });
+
 //   *************** fim  ***************
 
 });

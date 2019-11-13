@@ -15,5 +15,6 @@ pt-BR:
         reference_unit: "Unidade"
         unit_price: "Valor unitário máximo"
         creditor: "Fornecedor"
-        material: "Material"
+        material: "Item"
         unit_value: 'Valor unitário'
+        purchase_solicitation: 'Solicitação de Compra'
