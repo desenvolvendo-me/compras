@@ -88,3 +88,4 @@ menu:
     - report_purchase_solicitations
     - report_purchased_item_prices
     - report_materials
+    - report_contracts

@@ -44,6 +44,11 @@ pt-BR:
       one: 'Relatório de Material'
       other: 'Relatório de Materiais'
 
+  contract_reports:
+    contract_report:
+      one: 'Relatório de Contrato'
+      other: 'Relatório de Contrato'
+
   purchased_item_price_reports:
     purchased_item_price_report:
       one: 'Relatório de valor praticado por item'

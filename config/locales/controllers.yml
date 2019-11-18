@@ -69,6 +69,7 @@ pt-BR:
     report_purchase_solicitations: "Solicitações emitidas"
     report_purchased_item_prices: "Valores Praticados por Item"
     report_materials: "Materiais"
+    report_contracts: "Contratos"
     signature_configurations: "Configurações de Assinatura"
     signatures: "Assinaturas"
     street_types: "Tipos de Logradouros"
