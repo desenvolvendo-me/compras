@@ -1,0 +1,61 @@
+<div>
+  <table class="records">
+    <thead>
+    <tr  style="text-align: center;">
+      <td width="60%"> RELATÓRIO DE CONTRATOS </td>
+      <td width="20%"> <%= Time.new.strftime("%d/%m/%Y") %> </td>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+</div>
+
+<div style="text-align: justify">
+
+</div>
+
+<br>
+
+
+<div>
+  <table class="records">
+    <thead>
+    <tr>
+      <th>NÚMERO</th>
+      <th>ANO</th>
+      <th>FORNECEDOR</th>
+      <th>DATA DE PUBLICAÇÃO</th>
+      <th>DATA DE VALIDADE</th>
+      <th>OBJETO</th>
+      <th>VALOR DO CONTRATO</th>
+      <th>MODALIDADE</th>
+      <th>DATA DA ASSINATURA</th>
+      <th>DATA DE VALIDADE</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <%
+      def date_mask(d)
+        return d.strftime("%d/%m/%Y") unless d.nil?
+      end
+    %>
+    <% @contract.each do |contract| %>
+      <tr>
+        <td><%= contract.contract_number %></td>
+        <td><%= contract.year %></td>
+        <td><%= contract.creditors.first %></td>
+        <td><%= date_mask(contract.publication_date) %></td>
+        <td><%= contract.contract_validity %></td>
+        <td><%= contract.content %></td>
+        <td><%= contract.decorator.contract_value %></td>
+        <td><%= contract.modality_humanize %></td>
+        <td><%= date_mask(contract.start_date) %></td>
+        <td><%= date_mask(contract.end_date) %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
