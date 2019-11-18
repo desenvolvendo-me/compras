@@ -20,12 +20,12 @@ class Report::ContractsController < Report::BaseController
     if contract_report_params[:creditor_id].nil?
       @contract = Contract.includes(:creditors).
           where(contract_report_params.except!(:contract_number,:content,:creditor_id)).
-          where('content LIKE ?', "%#{contract_report_params[:content]}%").
+          where('LOWER( content ) LIKE ?', "%#{contract_report_params[:content].downcase}%").
           where('contract_number LIKE ?', "%#{contract_report_params[:contract_number]}%")
     else
       @contract = Contract.includes(:creditors).
           where(contract_report_params.except!(:contract_number,:content,:creditor_id)).
-          where('content LIKE ?', "%#{contract_report_params[:content]}%").
+          where('LOWER( content ) LIKE ?', "%#{contract_report_params[:content].downcase}%").
           where('contract_number LIKE ?', "%#{contract_report_params[:contract_number]}%").
           where("unico_creditors.id = ?",contract_report_params[:creditor_id])
 
