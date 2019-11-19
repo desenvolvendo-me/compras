@@ -26,6 +26,7 @@ menu:
       - users
     - expense:
       - nature_expenses
+      - expense_functions
 
   - commom:
     - auxiliary:

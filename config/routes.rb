@@ -807,7 +807,13 @@ Compras::Application.routes.draw do
     end
   end
 
-  # get "split_expenses/modal", :as => :modal_esplit_expenses
+  resources :expense_functions do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :split_expenses do
     collection do
       get :filter
