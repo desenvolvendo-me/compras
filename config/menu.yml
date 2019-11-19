@@ -27,6 +27,7 @@ menu:
     - expense:
       - nature_expenses
       - expense_functions
+      - expense_sub_functions
       - resource_sources
       - purchase_forms
       - organs
