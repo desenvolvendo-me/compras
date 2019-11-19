@@ -27,6 +27,7 @@ menu:
     - expense:
       - nature_expenses
       - expense_functions
+      - resource_sources
 
   - commom:
     - auxiliary:

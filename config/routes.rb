@@ -814,6 +814,13 @@ Compras::Application.routes.draw do
     end
   end
 
+  resources :resource_sources do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :split_expenses do
     collection do
       get :filter
