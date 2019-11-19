@@ -1,0 +1,5 @@
+pt-BR:
+  enumerations:
+    organ_category:
+      shynthetic: "Sintético"
+      analytical: "Analítico"

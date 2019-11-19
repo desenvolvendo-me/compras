@@ -29,6 +29,7 @@ menu:
       - expense_functions
       - resource_sources
       - purchase_forms
+      - organs
 
   - commom:
     - auxiliary:
