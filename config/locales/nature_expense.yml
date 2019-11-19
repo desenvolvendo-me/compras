@@ -9,3 +9,4 @@ pt-BR:
       nature_expense:
         description: "Descrição"
         nature: "Natureza"
+        year: "Ano"
