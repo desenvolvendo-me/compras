@@ -807,6 +807,12 @@ Compras::Application.routes.draw do
     end
   end
 
+  resources :project_activities do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
 
   resources :project_activities do
     collection do
