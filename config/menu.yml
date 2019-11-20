@@ -24,6 +24,7 @@ menu:
       - employees
       - profiles
       - users
+    - project_activities
     - expense:
         - programs
     - expense_setting:
