@@ -807,6 +807,13 @@ Compras::Application.routes.draw do
     end
   end
 
+  resources :purchasing_units do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :expense_sub_functions do
     collection do
       get :filter

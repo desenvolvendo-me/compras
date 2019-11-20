@@ -1,0 +1,5 @@
+pt-BR:
+  enumerations:
+    purchasing_unit_situation:
+      active: "Ativada"
+      disabled: "Desativada"
