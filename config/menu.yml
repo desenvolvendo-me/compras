@@ -24,6 +24,7 @@ menu:
       - employees
       - profiles
       - users
+    - project_activities
     - expense:
       - nature_expenses
       - expense_functions
