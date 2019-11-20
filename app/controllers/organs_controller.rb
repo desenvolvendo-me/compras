@@ -1,0 +1,3 @@
+class OrgansController < CrudController
+
+end

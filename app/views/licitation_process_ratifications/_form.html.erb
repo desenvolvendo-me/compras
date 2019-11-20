@@ -95,7 +95,7 @@
           total_price:                            this.total_price,
 
           <% if resource.has_realignment_price? %>
-            realignment_price_item_id: this.id
+            realignment_price_item_id: this.id,
           <% else %>
             purchase_process_creditor_proposal_id:  this.id
           <% end %>
@@ -127,7 +127,7 @@
             <% else %>
               won_calculation: licitationProcessId,
             <% end %>
-            without_licitation_ratification: licitationProcessId
+            without_licitation_ratification: licitationProcessId,
           <% else %>
             without_direct_purchase_ratification: licitationProcessId
           <% end %>

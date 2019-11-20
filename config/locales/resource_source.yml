@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      resource_source:
+        one: "Fonte de Recurso"
+        other: "Fonte de Recursos"
+
+    attributes:
+      resource_source:
+        name: "Descrição"
+        code: "Código"
+        year: "Ano"
+        number_convention: "Número do Convênio"

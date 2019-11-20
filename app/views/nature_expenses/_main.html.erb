@@ -4,8 +4,18 @@
     <%= f.input :description %>
   </div>
 
-  <div class="yui3-u-1-2">
-    <%= f.input :nature %>
+  <div class="yui3-u-1-4">
+    <%= f.input :nature,:input_html => {:class=>'mask-natureza'} %>
+  </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :year %>
   </div>
 
 </div>
+
+<script>
+$(function(){
+  $('.mask-natureza').mask('?9.9.99.99.99.99.99');
+});
+</script>

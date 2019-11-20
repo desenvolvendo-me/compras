@@ -26,6 +26,12 @@ menu:
       - users
     - expense:
       - nature_expenses
+      - expense_functions
+      - expense_sub_functions
+      - resource_sources
+      - purchase_forms
+      - organs
+      - purchasing_units
 
   - commom:
     - auxiliary:
@@ -58,20 +64,21 @@ menu:
     - delivery_locations
     - payment_methods
     - contract_types
-    - purchase_forms
 
+  - purchase_demands:
+      - purchase_solicitations
+      - price_collections
+      - demand_management:
+          - demands
+        #      - demand_batches
+        #      - batch_materials
   - purchasing_processes:
-    - purchase_solicitations
-    - price_collections
     - licitation_processes
     - licitation_notices
     - licitation_process_impugnments
     - licitation_process_appeals
     - process_responsibles
-    - demand_management:
-      - demands
-      - demand_batches
-      - batch_materials
+
 
   - "Instrumentos Contratuais":
     - contracts
@@ -87,3 +94,5 @@ menu:
     - report_purchase_process_ratifications_by_periods
     - report_purchase_solicitations
     - report_purchased_item_prices
+    - report_materials
+    - report_contracts

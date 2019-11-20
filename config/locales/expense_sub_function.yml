@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      expense_sub_function:
+        one: Subfunção
+        other: Subfunções
+
+    attributes:
+      expense_sub_function:
+        name: "Descrição"
+        code: "Código"

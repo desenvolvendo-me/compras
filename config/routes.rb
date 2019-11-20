@@ -807,7 +807,41 @@ Compras::Application.routes.draw do
     end
   end
 
-  # get "split_expenses/modal", :as => :modal_esplit_expenses
+  resources :purchasing_units do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
+  resources :expense_sub_functions do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
+  resources :expense_functions do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
+  resources :organs do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
+  resources :resource_sources do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :split_expenses do
     collection do
       get :filter
@@ -843,6 +877,8 @@ Compras::Application.routes.draw do
       resources :purchase_process_ratifications_by_periods
       resources :purchase_solicitations
       resources :purchased_item_prices
+      resources :materials
+      resources :contracts
     end
 
     match 'map_of_bids/:licitation_process_id' => 'map_of_bids#show', as: :map_of_bids

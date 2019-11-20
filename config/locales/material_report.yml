@@ -1,0 +1,10 @@
+pt-BR:
+  activemodel:
+    attributes:
+      material_report:
+        description: "Descrição"
+        medicine: "Medicamento"
+        material_class: "Classe"
+        material_classification: "Tipo do Material"
+        combustible: "Combustível"
+        active: "Ativo"

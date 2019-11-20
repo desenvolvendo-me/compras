@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      expense_function:
+        one: Função
+        other: Funções
+
+    attributes:
+      expense_function:
+        name: "Descrição"
+        code: "Código"
