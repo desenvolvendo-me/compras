@@ -25,6 +25,8 @@ menu:
       - profiles
       - users
     - expense:
+        - programs
+    - expense_setting:
       - nature_expenses
       - expense_functions
       - expense_sub_functions
