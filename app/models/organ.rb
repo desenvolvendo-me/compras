@@ -10,7 +10,7 @@ class Organ < Compras::Model
   filterize
 
   def to_s
-    name
+    code
   end
 
 end
