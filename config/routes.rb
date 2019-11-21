@@ -828,6 +828,13 @@ Compras::Application.routes.draw do
     end
   end
 
+  resources :expenses do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :programs do
     collection do
       get :filter

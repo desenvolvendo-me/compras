@@ -27,6 +27,7 @@ menu:
     - project_activities
     - expense:
         - programs
+        - expenses
     - expense_setting:
       - nature_expenses
       - expense_functions
