@@ -24,7 +24,7 @@ class Expense < Compras::Model
   filterize
 
   def to_s
-    destiny
+    "#{destiny}"
   end
 
   def is_child?

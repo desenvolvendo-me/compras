@@ -1,13 +1,15 @@
 class PurchaseForm < Compras::Model
-  attr_accessible :budget_allocation, :name,:opening_balance
+  belongs_to :expense
+
+  attr_accessible :name,:expense_id
 
   orderize
   filterize
 
-  validates :name,:budget_allocation, presence:true
+  validates :name, presence:true
 
   def to_s
-    "#{name} - #{budget_allocation }"
+    "#{name}"
   end
 
 end
