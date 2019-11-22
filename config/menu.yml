@@ -25,10 +25,9 @@ menu:
       - profiles
       - users
     - project_activities
-    - expense:
-        - programs
-        - expenses
+    - expenses
     - expense_setting:
+      - programs
       - nature_expenses
       - expense_functions
       - expense_sub_functions
