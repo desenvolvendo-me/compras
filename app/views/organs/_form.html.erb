@@ -23,7 +23,7 @@
 
 <script>
     $("#organ_category").on("change", function() {
-      mask = $("#organ_category").val()=='analytical' ? '99':'99.999';
+      mask = $("#organ_category").val()=='analytical' ? '99.999':'99';
       $('#organ_code').mask(mask);
     });
 </script>
