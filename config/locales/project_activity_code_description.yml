@@ -1,6 +1,6 @@
 pt-BR:
   enumerations:
-    project_activity_name:
+    project_activity_code_description:
       project: 'Projeto'
       activity: 'Atividade'
       special_operation: 'Operações Especiais'

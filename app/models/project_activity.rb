@@ -1,10 +1,12 @@
 class ProjectActivity < Compras::Model
-  attr_accessible :name, :code, :code_sub_project_activity, :destiny, :year
+  attr_accessible :name, :code, :code_sub_project_activity,
+                  :destiny,:code_description, :year
 
-  has_enumeration_for :name, :with => ProjectActivityName
+  has_enumeration_for :code_description, :with => ProjectActivityCodeDescription
 
   before_save :set_name
   validates :code,:destiny, presence: true
+  validates :year, :mask => "9999", :allow_blank => true
 
   orderize "id DESC"
   filterize
@@ -12,11 +14,11 @@ class ProjectActivity < Compras::Model
   def set_name
     destiny = self.destiny
     if destiny == 0
-      self.name = 'special_operation'
+      self.code_description = 'special_operation'
     elsif destiny % 2 == 0
-      self.name = 'activity'
+      self.code_description = 'activity'
     elsif destiny % 2 != 0
-      self.name = 'project'
+      self.code_description = 'project'
     end
   end
 
