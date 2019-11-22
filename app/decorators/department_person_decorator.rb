@@ -3,6 +3,6 @@ class DepartmentPersonDecorator
   include Decore::Proxy
   include Decore::Header
 
-  attr_header :person, :department
+  attr_header :department,:user
 
 end

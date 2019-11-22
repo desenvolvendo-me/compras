@@ -7,5 +7,5 @@ pt-BR:
 
     attributes:
       department_person:
-        person: "Solicitante"
+        user: "Usuário"
         department: "Departamento"
