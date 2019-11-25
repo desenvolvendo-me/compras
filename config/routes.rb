@@ -275,13 +275,6 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :batch_materials do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
   resources :contract_types do
     collection do
       get :filter
