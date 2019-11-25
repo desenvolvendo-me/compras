@@ -1,34 +1,11 @@
-<div class="yui3-g">
-  <div class="yui3-u-1-2">
-    <%= f.input :authenticable, :as => :modal, :modal_url => modal_employees_path, :input_html => { "data-hidden-field-id" => "user_authenticable_id"}, :hidden_field => false %>
-    <%= f.input :authenticable_id, :as => :hidden %>
-  </div>
+<div class="tabs" id="licitation_process">
 
-  <div class="yui3-u-1-2">
-    <%= f.input :login %>
-  </div>
-</div>
+  <ul>
+    <li><a href="#tab-main">Principal</a></li>
+    <li><a href="#tab-purchasing-unit">Unidades de Compra Permitida</a></li>
+  </ul>
 
-<div class="yui3-g">
-  <div class="yui3-u-1-2">
-    <%= f.input :email %>
-  </div>
+  <div id="tab-main"><%= render 'main', :f => f %></div>
+  <div id="tab-purchasing-unit"><%= render 'purchasing_units', :f => f %></div>
 
-  <div class="yui3-u-1-2">
-    <div class="yui3-g">
-      <div class="yui3-u-1-2">
-        <%= f.input :password, :required => resource.password_required? %>
-      </div>
-
-      <div class="yui3-u-1-2">
-        <%= f.input :password_confirmation, :required => resource.password_required? %>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="yui3-g">
-  <div class="yui3-u-1-2">
-    <%= f.input :profile %>
-  </div>
 </div>
