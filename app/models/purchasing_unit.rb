@@ -7,7 +7,7 @@ class PurchasingUnit < Compras::Model
   has_enumeration_for :situation, :with => PurchasingUnitSituation, :create_helpers => true
 
   validates :code, :name, presence: true
-  validates :code, :name,uniqueness: true, if: :unique_situation_active?
+  validates :code,uniqueness: true, if: :unique_situation_active?
   validates :code, :mask => "9999"
 
   def to_s
