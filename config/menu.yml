@@ -79,8 +79,6 @@ menu:
         - price_collections
         - demand_management:
           - demands
-          #      - demand_batches
-          #      - batch_materials
 
   - "Instrumentos Contratuais":
     - contracts

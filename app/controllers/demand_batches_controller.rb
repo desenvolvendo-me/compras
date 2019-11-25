@@ -1,2 +1,0 @@
-class DemandBatchesController < CrudController
-end
