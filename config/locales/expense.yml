@@ -12,10 +12,10 @@ pt-BR:
         organ: "Orgão"
         year: "Ano"
         purchasing_unit: "Unidade de Compra"
-        expense_function: "Funções"
-        expense_sub_function: "Subfunções"
+        expense_function: "Função"
+        expense_sub_function: "Subfunção"
         program: "Programa"
-        project_activity: "Porjeto Atividade"
+        project_activity: "Projeto Atividade"
         nature_expense: "Natureza da Despensa"
         resource_source: 'Fonte de Recurso'
-        unity: 'Unidade'
+        unity: 'Orgão/Unidade'

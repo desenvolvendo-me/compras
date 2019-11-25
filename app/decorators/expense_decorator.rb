@@ -3,6 +3,6 @@ class ExpenseDecorator
   include Decore::Proxy
   include Decore::Header
 
-  attr_header :destiny,:organ,:project_activity,
-              :destine_type,:year
+  attr_header :year,:organ,:unity,:expense_function,
+              :expense_sub_function
 end
