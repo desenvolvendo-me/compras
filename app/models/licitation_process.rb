@@ -137,7 +137,7 @@ class LicitationProcess < Compras::Model
   validate :validate_proposal_envelope_opening_date, :on => :update, :if => :licitation?
   validate :validate_the_year_to_processe_date_are_the_same, :on => :update
   validate :validate_total_items
-  # validate :purchase_solicitations_blank?
+  validate :purchase_solicitations_blank?
 
   with_options :allow_blank => true do |allowing_blank|
     allowing_blank.validates :year, :mask => "9999"
