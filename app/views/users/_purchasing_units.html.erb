@@ -1,6 +1,6 @@
 <div class="yui3-g modal-finder">
   <div class="yui3-u-1-2">
-    <%= f.association :user_purchasing_units, :as => :modal,
+    <%= f.association :purchasing_units, :as => :modal,
                       :hidden_field => false,
                       :input_html => { :value => nil },
                       :modal_url => modal_purchasing_units_path %>
@@ -26,7 +26,6 @@
   <tbody class="<%= f.sanitized_object_name %>_purchasing_units_records">
   <% f.object.purchasing_units.each do |purchasing_unit| %>
     <%= render 'purchasing_units/list_form', :name => purchasing_unit.name, :id => purchasing_unit.id, :code => purchasing_unit.code, :f => f %>
-    <%#= render 'materials/list_form', :description => material.description, :id => material.id, :code => material.code, :f => f %>
   <% end %>
   </tbody>
 </table>
@@ -36,9 +35,3 @@
     <%= render 'purchasing_units/list_form', :name => '{{name}}', :id => '{{id}}', :code => '{{code}}', :f => f %>
   <% end %>
 <% end %>
-
-<%#= mustache "#{f.sanitized_object_name}_materials_template" do %>
-  <%#= f.association :materials, :collection => f.object.materials.build do |p| %>
-    <%#= render 'materials/list_form', :description => '{{description}}', :id => '{{id}}', :code => '{{code}}', :f => f %>
-  <%# end %>
-<%# end %>
