@@ -1,0 +1,21 @@
+pt-BR:
+  activerecord:
+    models:
+      expense:
+        one: "Despesa"
+        other: "Despesas"
+
+    attributes:
+      expense:
+        destiny: "Destino"
+        destine_type: "Tipo do Destino"
+        organ: "Orgão"
+        year: "Ano"
+        purchasing_unit: "Unidade de Compra"
+        expense_function: "Função"
+        expense_sub_function: "Subfunção"
+        program: "Programa"
+        project_activity: "Projeto Atividade"
+        nature_expense: "Natureza da Despensa"
+        resource_source: 'Fonte de Recurso'
+        unity: 'Orgão/Unidade'

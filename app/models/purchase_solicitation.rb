@@ -99,13 +99,17 @@ class PurchaseSolicitation < Compras::Model
 
   scope :term, lambda {|q|
     where {
-      accounting_year.eq(Date.current.year) &
-          (service_status.in [
-                                 PurchaseSolicitationServiceStatus::LIBERATED,
-                                 PurchaseSolicitationServiceStatus::PARTIALLY_FULFILLED]) &
           ((code.eq(q) & code.not_eq(0)) | budget_structure_description.like("#{q}%")
           )
     }
+    # where {
+    #   accounting_year.eq(Date.current.year) &
+    #       (service_status.in [
+    #                              PurchaseSolicitationServiceStatus::LIBERATED,
+    #                              PurchaseSolicitationServiceStatus::PARTIALLY_FULFILLED]) &
+    #       ((code.eq(q) & code.not_eq(0)) | budget_structure_description.like("#{q}%")
+    #       )
+    # }
   }
 
   def to_s

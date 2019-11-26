@@ -8,5 +8,4 @@ pt-BR:
     attributes:
       purchase_form:
         name: "Número da Ficha"
-        budget_allocation: "Dotação Orçametária"
-        opening_balance: "Saldo Inicial"
+        expense: "Despesa"

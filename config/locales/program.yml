@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      program:
+        one: "Programa"
+        other: "Programas"
+
+    attributes:
+      program:
+        code: "Código"
+        name: "Descrição"

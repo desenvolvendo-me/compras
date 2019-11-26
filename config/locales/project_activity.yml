@@ -1,0 +1,15 @@
+pt-BR:
+  activerecord:
+    models:
+      project_activity:
+        one: "Projeto Atividade"
+        other: "Projetos Atividade"
+
+    attributes:
+      project_activity:
+        name: "Descrição"
+        code: "Código"
+        code_description: "Categoria"
+        code_sub_project_activity: "Subprojeto Atividade"
+        destiny: "Destino"
+        year: "Ano"

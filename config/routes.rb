@@ -267,21 +267,6 @@ Compras::Application.routes.draw do
     end
   end
 
-  get 'demand_batches/modal', :as => :modal_demand_batches
-  resources :demand_batches do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
-  resources :batch_materials do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
   resources :contract_types do
     collection do
       get :filter
@@ -807,7 +792,35 @@ Compras::Application.routes.draw do
     end
   end
 
+  resources :project_activities do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
+  resources :project_activities do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :purchasing_units do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
+  resources :expenses do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
+  resources :programs do
     collection do
       get :filter
       get :modal

@@ -1,0 +1,34 @@
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :authenticable, :as => :modal, :modal_url => modal_employees_path, :input_html => { "data-hidden-field-id" => "user_authenticable_id"}, :hidden_field => false %>
+    <%= f.input :authenticable_id, :as => :hidden %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :login %>
+  </div>
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :email %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <div class="yui3-g">
+      <div class="yui3-u-1-2">
+        <%= f.input :password, :required => resource.password_required? %>
+      </div>
+
+      <div class="yui3-u-1-2">
+        <%= f.input :password_confirmation, :required => resource.password_required? %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :profile %>
+  </div>
+</div>
