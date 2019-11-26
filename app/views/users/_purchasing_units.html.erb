@@ -1,9 +1,8 @@
 <div class="yui3-g modal-finder">
   <div class="yui3-u-1-2">
-    <%= f.association :purchasing_units, :as => :modal,
-                      :hidden_field => false,
-                      :input_html => { :value => nil },
-                      :modal_url => modal_purchasing_units_path %>
+    <%= f.association :purchasing_units, :as => :modal,:hidden_field => false,
+                      :input_html => { :value => nil },:modal_url =>
+                      modal_purchasing_units_path(:by_situation =>'active')%>
   </div>
 </div>
 
