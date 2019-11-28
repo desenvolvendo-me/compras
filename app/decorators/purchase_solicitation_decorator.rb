@@ -8,6 +8,10 @@ class PurchaseSolicitationDecorator
 
   attr_header :code_and_year, :department, :user, :service_status
 
+  def expense
+    "#{self.purchase_form.expense}"
+  end
+
   def quantity_by_material(material_id)
     number_with_precision super if super
   end

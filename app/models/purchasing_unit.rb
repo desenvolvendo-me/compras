@@ -16,7 +16,7 @@ class PurchasingUnit < Compras::Model
   }
 
   def to_s
-    name
+    "#{code}: #{name}"
   end
 
   def unique_situation_active?

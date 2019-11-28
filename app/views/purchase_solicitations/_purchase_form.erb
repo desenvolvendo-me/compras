@@ -1,0 +1,26 @@
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :purchase_form %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <div>
+      <label class=""> Despesa </label>
+      <input class="string"
+             disabled="disabled" id="purchase_solicitation_expense_id"
+             value="<%= f.object.decorator.expense %>" >
+    </div>
+  </div>
+
+</div>
+
+<script>
+    $("#purchase_solicitation_purchase_form_id").on("change", function(event, purchaseForm) {
+        expense = $("#purchase_solicitation_expense_id");
+        if(!purchaseForm){
+            expense.val('');
+        }else{
+            expense.val(purchaseForm.expense.to_s);
+        }
+    });
+</script>

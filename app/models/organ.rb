@@ -20,7 +20,7 @@ class Organ < Compras::Model
   end
 
   def to_s
-    code
+    "#{code}"
   end
 
 end
