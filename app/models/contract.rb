@@ -120,7 +120,7 @@ class Contract < Compras::Model
   end
 
   def allow_termination?
-    contract_termination.blank?
+    # contract_termination.blank?
   end
 
   private
