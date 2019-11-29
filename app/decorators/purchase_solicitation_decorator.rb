@@ -9,7 +9,35 @@ class PurchaseSolicitationDecorator
   attr_header :code_and_year, :department, :user, :service_status
 
   def expense
-    "#{self.purchase_form.expense}"
+    self.purchase_form.nil? || self.purchase_form.expense.nil? ? '':"#{self.purchase_form.expense}"
+  end
+
+  def organ
+    self.purchase_form.nil? || self.purchase_form.organ.nil? ? '':"#{self.purchase_form.organ}"
+  end
+
+  def unity
+    self.purchase_form.nil? || self.purchase_form.unity.nil? ? '':"#{self.purchase_form.unity}"
+  end
+
+  def reference_expense
+    self.purchase_form.nil? ? '':"#{self.purchase_form.reference_expense}"
+  end
+
+  def description_project_activity
+    self.purchase_form.nil? ? '':"#{self.purchase_form.description_project_activity}"
+  end
+
+  def nature_expense
+    self.purchase_form.nil? || self.purchase_form.expense.nil? || self.purchase_form.expense.nature_expense.nil? ? '':"#{self.purchase_form.expense.nature_expense.nature}"
+  end
+
+  def resource_source
+    self.purchase_form.nil? || self.purchase_form.expense.nil? || self.purchase_form.expense.resource_source.nil? ? '':"#{self.purchase_form.expense.resource_source.to_s}"
+  end
+
+  def description_resource_source
+    self.purchase_form.nil? || self.purchase_form.expense.nil?  || self.purchase_form.expense.resource_source.nil? ? '':"#{self.purchase_form.expense.resource_source.name}"
   end
 
   def quantity_by_material(material_id)

@@ -12,4 +12,32 @@ class PurchaseForm < Compras::Model
     "#{name}"
   end
 
+  def organ
+    self.expense.nil? || self.expense.organ.nil? ? '':"#{self.expense.organ.to_s}"
+  end
+
+  def unity
+    self.expense.nil? || self.expense.unity.nil? ? '':"#{self.expense.unity.to_s}"
+  end
+
+  def reference_expense
+    self.expense.nil? ? '':"#{self.expense.expense_function.nil? ? '':self.expense.expense_function.to_s}.#{self.expense.expense_sub_function.nil? ? '':self.expense.expense_sub_function.to_s}.#{self.expense.program.nil? ? '':self.expense.program.to_s}.#{self.expense.project_activity.nil? ? '':self.expense.project_activity.to_s}"
+  end
+
+  def description_project_activity
+    self.expense.nil? || self.expense.project_activity.nil? ? '':"#{self.expense.project_activity.name}"
+  end
+
+  def nature_expense
+    self.expense.nil? || self.expense.nature_expense.nil? ? '':"#{self.expense.nature_expense.to_s}"
+  end
+
+  def resource_source
+    self.expense.nil? || self.expense.resource_source.nil? ? '':"#{self.expense.resource_source.to_s}"
+  end
+
+  def description_resource_source
+    self.expense.nil? || self.expense.resource_source.nil? ? '':"#{self.expense.resource_source.name}"
+  end
+
 end

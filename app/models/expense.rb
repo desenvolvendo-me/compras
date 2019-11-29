@@ -16,6 +16,7 @@ class Expense < Compras::Model
 
   has_enumeration_for :destine_type, :with => ExpenseDestineType
 
+  validate :organ,:unity,presence:true
   validate :is_child?
   validates :year,:mask => '9999',
             numericality: {
