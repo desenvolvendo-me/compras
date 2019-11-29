@@ -67,18 +67,18 @@ menu:
     - delivery_locations
     - payment_methods
     - contract_types
+  - purchase:
+    - purchase_solicitations
+    - price_collections
+    - demand_management:
+      - demands
 
-  - purchasing_processes:
+  - processes:
     - licitation_processes
     - licitation_notices
     - licitation_process_impugnments
     - licitation_process_appeals
     - process_responsibles
-    - purchase_demands:
-        - purchase_solicitations
-        - price_collections
-        - demand_management:
-          - demands
 
   - "Instrumentos Contratuais":
     - contracts
