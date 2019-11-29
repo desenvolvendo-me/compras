@@ -17,6 +17,12 @@ class Expense < Compras::Model
   has_enumeration_for :destine_type, :with => ExpenseDestineType
 
   validate :is_child?
+  validates :year,:mask => '9999',
+            numericality: {
+                only_integer: true,
+                greater_than_or_equal_to: 1990,
+                less_than_or_equal_to: Date.today.year+5
+            }
 
   before_save :set_destine_type
 
