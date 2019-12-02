@@ -10,8 +10,13 @@ class PurchasingUnit < Compras::Model
   validates :code,uniqueness: true, if: :unique_situation_active?
   validates :code, :mask => "9999"
 
+  scope :by_situation, lambda { |q|
+    where {
+      (situation.eq(q)) }
+  }
+
   def to_s
-    name
+    "#{code}: #{name}"
   end
 
   def unique_situation_active?

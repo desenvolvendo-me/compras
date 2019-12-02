@@ -5,6 +5,7 @@ class ProjectActivity < Compras::Model
   has_enumeration_for :code_description, :with => ProjectActivityCodeDescription
 
   before_save :set_name
+  validates :code,:name,uniqueness: true
   validates :code,:destiny, presence: true
   validates :year, :mask => "9999", :allow_blank => true
 

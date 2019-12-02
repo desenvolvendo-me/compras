@@ -24,7 +24,6 @@ class LicitationProcess < Compras::Model
                   :process_responsibles_attributes,
                   :justification, :justification_and_legal, :process,
                   :purchase_solicitation_import_option,:department_id,
-                  # :purchase_solicitation_ids
                   :purchase_solicitations_attributes
 
   auto_increment :process, :by => :year
@@ -137,7 +136,7 @@ class LicitationProcess < Compras::Model
   validate :validate_proposal_envelope_opening_date, :on => :update, :if => :licitation?
   validate :validate_the_year_to_processe_date_are_the_same, :on => :update
   validate :validate_total_items
-  # validate :purchase_solicitations_blank?
+  validate :purchase_solicitations_blank?
 
   with_options :allow_blank => true do |allowing_blank|
     allowing_blank.validates :year, :mask => "9999"
@@ -342,7 +341,7 @@ class LicitationProcess < Compras::Model
   def budget_allocations_ids
     return [] unless purchase_process_budget_allocations
 
-    purchase_process_budget_allocations.map(&:budget_allocation_id)
+    # purchase_process_budget_allocations.map(&:budget_allocation_id)
   end
 
   def budget_allocations

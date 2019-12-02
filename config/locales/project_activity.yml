@@ -8,8 +8,8 @@ pt-BR:
     attributes:
       project_activity:
         name: "Descrição"
-        code: "Código"
+        code: "Projeto Atividade"
         code_description: "Categoria"
-        code_sub_project_activity: "Subprojeto Atividade"
+        code_sub_project_activity: "Código do Subprojeto Atividade"
         destiny: "Destino"
         year: "Ano"

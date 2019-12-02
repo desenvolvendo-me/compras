@@ -8,7 +8,7 @@ class Program < Compras::Model
   filterize
 
   def to_s
-    name
+    "#{code}"
   end
 
 end

@@ -41,6 +41,8 @@ pt-BR:
         quantity: "Quantidade"
         unit_price: "Valor unitário"
         estimated_total_price: "Valor total"
+        model_request: "Solicitação Modelo"
+        attendant_status: "Status de Atendimento"
 
   purchase_solicitation:
     messages:

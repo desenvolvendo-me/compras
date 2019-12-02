@@ -6,7 +6,7 @@ class PurchaseSolicitation < Compras::Model
                   :purchase_solicitation_budget_allocations_attributes,
                   :items_attributes, :budget_structure_id,
                   :user_id, :department_id,
-                  :purchase_form_id
+                  :purchase_form_id,:attendant_status,:model_request
 
   attr_readonly :code
 
@@ -14,6 +14,7 @@ class PurchaseSolicitation < Compras::Model
 
   attr_modal :code, :accounting_year, :kind, :delivery_location_id, :budget_structure_id, :responsible_id
 
+  has_enumeration_for :attendant_status, :with => PurchaseSolicitationAttendantStatus, :create_helpers => true
   has_enumeration_for :kind, :with => PurchaseSolicitationKind, :create_helpers => true
   has_enumeration_for :service_status, :with => PurchaseSolicitationServiceStatus,
                       :create_helpers => true, :create_scopes => true
