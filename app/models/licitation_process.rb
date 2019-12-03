@@ -208,6 +208,18 @@ class LicitationProcess < Compras::Model
     joins { licitation_process_ratifications }.uniq
   }
 
+  def get_items_amount
+    val=0
+    self.items.each do |item|
+      val += item.unit_price*item.quantity
+    end
+    val
+  end
+
+  def get_number_with_precision(val)
+    val
+  end
+
   def to_s
     "#{process}/#{year} - #{modality_or_type_of_removal_humanized} #{modality_number}"
   end
