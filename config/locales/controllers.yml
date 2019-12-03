@@ -76,6 +76,7 @@ pt-BR:
     report_purchase_solicitations: "Solicitações emitidas"
     report_purchased_item_prices: "Valores Praticados por Item"
     report_materials: "Materiais"
+    report_licitation_processes: "Processos de Compra"
     report_contracts: "Contratos"
     resource_sources: "Fonte de Recursos"
     signature_configurations: "Configurações de Assinatura"
