@@ -144,6 +144,14 @@ class LicitationProcessDecorator
     'unique'
   end
 
+  def get_number_with_precision(val)
+    number_with_precision super if super
+  end
+
+  def get_items_amount
+    number_with_precision super if super
+  end
+
   private
 
   def current_publication_of
