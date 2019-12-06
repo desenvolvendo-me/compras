@@ -6,6 +6,7 @@ class PurchaseSolicitationsController < CrudController
   has_scope :except_ids, :type => :array
   has_scope :can_be_grouped, :type => :boolean
   has_scope :by_licitation_process
+  has_scope :by_model_request
 
   def new
     object = build_resource

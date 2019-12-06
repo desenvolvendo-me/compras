@@ -1,7 +1,8 @@
 class Demand < Compras::Model
   attr_accessible  :name,:final_date, :initial_date,
-    :observation, :status, :year,:purchasing_unit_id
+    :observation, :status, :year,:purchasing_unit_id,:purchase_solicitation_id
 
+  belongs_to :purchase_solicitation
   belongs_to :purchasing_unit
   has_many :demand_batches, class_name: 'DemandBatch', :order => :id,dependent: :destroy
 

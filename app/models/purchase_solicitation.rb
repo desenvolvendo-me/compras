@@ -70,6 +70,10 @@ class PurchaseSolicitation < Compras::Model
     joins(list_purchase_solicitations: [:licitation_process]).where("compras_licitation_processes.id = ?", purchase_process_id)
   }
 
+  scope :by_model_request, lambda {|type|
+    where {model_request.eq(type)}
+  }
+
   scope :by_material_id, lambda {|material_id|
     joins {items}.where {items.material_id.eq(material_id)}
   }
