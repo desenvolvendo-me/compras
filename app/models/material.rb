@@ -36,6 +36,12 @@ class Material < Unico::Model
   orderize :description
   filterize
 
+  has_many :items, class_name: 'PurchaseProcessItem'
+
+  scope :by_licitation_process, lambda {|licitation_process_id|
+    joins(items: [:licitation_process]).where("compras_licitation_processes.id = ?", licitation_process_id)
+  }
+
   scope :by_material_type, lambda { |material_type|
     where { |material| material.material_type.eq(material_type) }
   }
@@ -43,6 +49,10 @@ class Material < Unico::Model
   scope :term, lambda { |q|
     where { code.like("#{q}%") | description.like("#{q}%") }
   }
+
+  # scope :by_licitation_process, ->(licitation_process_id) do
+  #   where { |query| query.licitation_process_id.eq(licitation_process_id) }
+  # end
 
   scope :by_material_class_id, ->(material_class_id) do
     where { |query| query.material_class_id.eq(material_class_id) }

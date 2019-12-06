@@ -82,6 +82,12 @@ pt-BR:
         licitation_process: "Processo de Licitação"
         purchase_solicitation: "Solicitação de Compra"
         value: "Valor previsto"
+        concurrence: 'Concorrência'
+        taken_price: 'Tomada de Preço'
+        invitation:  'Convite'
+        competition: 'Concurso'
+        auction:     'Leilão'
+        trading:     'Pregão'
 
   licitation_process:
     messages:

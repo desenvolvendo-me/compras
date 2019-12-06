@@ -18,7 +18,9 @@ class Report::MaterialsController < Report::BaseController
   def get_material
     @material = Material.
         where(material_report_params.except!(:description)).
-        where(' LOWER( description ) LIKE ?', "%#{material_report_params[:description].downcase}%")
+        where(' LOWER( description ) LIKE ?',
+              "%#{material_report_params[:description].downcase unless
+                  material_report_params[:description].nil? }%")
   end
 
   def material_report_params

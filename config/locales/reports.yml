@@ -49,6 +49,11 @@ pt-BR:
       one: 'Relatório de Contrato'
       other: 'Relatório de Contrato'
 
+  licitation_process_reports:
+    licitation_process_report:
+      one: 'Processo de Compra'
+      other: 'Processos de Compra'
+
   purchased_item_price_reports:
     purchased_item_price_report:
       one: 'Relatório de valor praticado por item'

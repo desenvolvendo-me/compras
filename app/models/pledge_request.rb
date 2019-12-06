@@ -6,7 +6,7 @@ class PledgeRequest < Compras::Model
                   :creditor_id, :amount, :emission_date,
                   :items_attributes,
                   :purchase_solicitations_attributes,
-                  :budget_allocation
+                  :budget_allocation,:expense_id
 
 
   has_many :purchase_solicitations, class_name: 'PledgeRequestPurchaseSolicitation',
@@ -20,6 +20,7 @@ class PledgeRequest < Compras::Model
   belongs_to :purchase_process, class_name: 'LicitationProcess'
   belongs_to :contract
   belongs_to :creditor
+  belongs_to :expense
 
   belongs_to_resource :descriptor
   belongs_to_resource :accounting_account
@@ -50,6 +51,23 @@ class PledgeRequest < Compras::Model
 
   scope :by_purchase_process_id, ->(purchase_process_id) do
     where {|query| query.purchase_process_id.eq(purchase_process_id)}
+  end
+
+  before_save :set_amount
+
+  def set_amount
+    self.amount = 0
+    unless self.purchase_process.nil?
+      self.items.each do |item|
+        @pu_pr = PurchaseProcessItem.where(
+            material_id:item.material_id,
+            licitation_process_id:self.purchase_process.id
+        )
+        if @pu_pr.count==1
+          self.amount += item.quantity * @pu_pr[0].unit_price
+        end
+      end
+    end
   end
 
   def to_s
