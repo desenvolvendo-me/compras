@@ -6,6 +6,7 @@ builder resource, json do
   json.budget_structure       resource.budget_structure, :id, :to_s if resource.budget_structure
   json.responsible            resource.responsible, :id, :to_s if resource.responsible
   json.delivery_location      resource.delivery_location, :id, :to_s if resource.delivery_location
+  json.purchase_form          resource.purchase_form.to_s if resource.purchase_form
 
   json.budget_allocations resource.purchase_solicitation_budget_allocations do |budget_allocation|
     json.id                   budget_allocation.id
@@ -20,15 +21,10 @@ builder resource, json do
     json.material_id           item.material_id
     json.material_description  item.material.to_s
     json.brand                 item.brand
-    json.reference_unit        item.reference_unit.acronym
+    json.reference_unit        item.reference_unit.acronym if item.reference_unit
     json.quantity              item.quantity.to_f
     json.unit_price            item.unit_price.to_f
     json.estimated_total_price item.estimated_total_price.to_f
-  end
-
-  json.purchase_forms resource.purchase_forms do |item|
-    json.id                         item.id
-    json.purchase_form_item         item.purchase_form_item_id
   end
 
 end
