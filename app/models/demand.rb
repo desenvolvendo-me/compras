@@ -6,7 +6,6 @@ class Demand < Compras::Model
 
   belongs_to :purchase_solicitation, :dependent => :destroy
   belongs_to :purchasing_unit, :dependent => :destroy
-  has_many :demand_batches, class_name: 'DemandBatch', :order => :id,dependent: :destroy
 
   has_many :demand_departments, :dependent => :destroy
   has_many :departments, :through => :demand_departments, :order => :id
