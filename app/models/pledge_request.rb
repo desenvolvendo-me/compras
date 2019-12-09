@@ -71,7 +71,7 @@ class PledgeRequest < Compras::Model
   end
 
   def to_s
-    "#{creditor} - #{purchase_process}"
+    "#{self.contract.creditors.first unless self.contract.nil? || self.contract.creditors.blank? } - #{purchase_process}"
   end
 
   def items_total_value
