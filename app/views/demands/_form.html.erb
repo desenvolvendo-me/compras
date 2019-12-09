@@ -1,31 +1,9 @@
-<div class="yui3-g">
-  <div class="yui3-u-1-3">
-    <%= f.input :year %>
-  </div>
+<div class="tabs" id="licitation_process">
+  <ul>
+    <li><a href="#tab-main">Principal</a></li>
+    <li><a href="#tab-departments">Departamentos</a></li>
+  </ul>
 
-  <div class="yui3-u-1-3">
-    <%= f.input :name %>
-  </div>
-
-  <div class="yui3-u-1-3">
-    <%= f.input :purchasing_unit, :as => :modal,:hidden_field => false,
-                :modal_url =>
-                modal_purchasing_units_path(:by_situation => 'active')%>
-  </div>
-</div>
-
-<%= f.input :observation %>
-
-<div class="yui3-g">
-  <div class="yui3-u-1-3">
-    <%= f.input :status, :disabled => true %>
-  </div>
-
-  <div class="yui3-u-1-3">
-    <%= f.input :initial_date %>
-  </div>
-
-  <div class="yui3-u-1-3">
-    <%= f.input :final_date %>
-  </div>
+  <div id="tab-main"><%= render 'main', :f => f %></div>
+  <div id="tab-departments"><%= render 'departments', :f => f %></div>
 </div>

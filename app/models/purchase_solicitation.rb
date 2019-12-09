@@ -39,7 +39,7 @@ class PurchaseSolicitation < Compras::Model
 
   has_many :price_collection_items, through: :price_collections, source: :items
   has_many :price_collection_proposal_items, through: :price_collection_items
-  has_many :list_purchase_solicitations
+  has_many :list_purchase_solicitations, :dependent => :destroy
 
   has_one :annul, :class_name => 'ResourceAnnul', :as => :annullable, :dependent => :destroy
 
@@ -59,7 +59,7 @@ class PurchaseSolicitation < Compras::Model
   # validate :must_have_at_least_one_item
   # validate :validate_budget_structure_and_materials
   # validate :validate_liberated_status
-  validate :items_blank?
+  # validate :items_blank?
 
   # before_save :set_budget_structure_description
 
@@ -68,6 +68,10 @@ class PurchaseSolicitation < Compras::Model
 
   scope :by_licitation_process, lambda {|purchase_process_id|
     joins(list_purchase_solicitations: [:licitation_process]).where("compras_licitation_processes.id = ?", purchase_process_id)
+  }
+
+  scope :by_model_request, lambda {|type|
+    where {model_request.eq(type)}
   }
 
   scope :by_material_id, lambda {|material_id|
