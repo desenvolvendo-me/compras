@@ -4,6 +4,8 @@
   </td>
   <td>
     <input id="<%= f.sanitized_object_name %>_departments_record_<%= id %>_id" type="hidden" name="<%= f.sanitized_object_name %>[department_ids][]" value="<%= id %>" />
-    <button class="button negative modal-finder-remove">Remover</button>
+    <% unless f.object.persisted? %>
+      <button class="button negative modal-finder-remove">Remover</button>
+    <% end %>
   </td>
 </tr>
