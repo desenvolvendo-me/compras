@@ -12,7 +12,7 @@ class PurchaseSolicitation < Compras::Model
 
   auto_increment :code, :by => :accounting_year
 
-  attr_modal :code, :accounting_year, :kind, :delivery_location_id, :budget_structure_id, :responsible_id
+  attr_modal :code, :department_id, :accounting_year, :kind, :delivery_location_id, :budget_structure_id, :responsible_id
 
   has_enumeration_for :attendant_status, :with => PurchaseSolicitationAttendantStatus, :create_helpers => true
   has_enumeration_for :kind, :with => PurchaseSolicitationKind, :create_helpers => true
@@ -87,8 +87,8 @@ class PurchaseSolicitation < Compras::Model
 
   scope :can_be_grouped, lambda {
     where {service_status.in [
-                                 PurchaseSolicitationServiceStatus::LIBERATED,
-                                 PurchaseSolicitationServiceStatus::PARTIALLY_FULFILLED]
+      PurchaseSolicitationServiceStatus::LIBERATED,
+      PurchaseSolicitationServiceStatus::PARTIALLY_FULFILLED]
     }.uniq
   }
 
@@ -104,8 +104,8 @@ class PurchaseSolicitation < Compras::Model
 
   scope :term, lambda {|q|
     where {
-          ((code.eq(q) & code.not_eq(0)) | budget_structure_description.like("#{q}%")
-          )
+      ((code.eq(q) & code.not_eq(0)) | budget_structure_description.like("#{q}%")
+      )
     }
     # where {
     #   accounting_year.eq(Date.current.year) &
