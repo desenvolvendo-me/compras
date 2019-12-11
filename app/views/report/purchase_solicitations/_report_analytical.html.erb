@@ -13,7 +13,7 @@
     <% report.records.each do |record| %>
       <tr>
         <td><%= report.record_code_year(record) %></td>
-        <td><%= record.purchase_solicitation_budget_structure %></td>
+        <td><%= record.purchase_solicitation.user %></td>
         <td><%= record.material %></td>
         <td><%= number_with_precision record.quantity %></td>
         <td><%= record.decorator.estimated_total_price %></td>
