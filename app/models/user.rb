@@ -3,7 +3,7 @@ class User < Compras::Model
   attr_accessible :authenticable_id, :authenticable_type,
                   :purchasing_unit_ids
 
-  attr_modal :email
+  attr_modal :login,:email
 
   devise :database_authenticatable, :recoverable, :validatable, :confirmable,
          :timeoutable

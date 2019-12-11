@@ -8,6 +8,10 @@ class PurchaseSolicitationsController < CrudController
   has_scope :by_licitation_process
   has_scope :by_model_request
 
+  def index
+    @purchase_solicitations = filter_by_department(collection)
+  end
+
   def new
     object = build_resource
     object.service_status = PurchaseSolicitationServiceStatus::PENDING
@@ -38,6 +42,11 @@ class PurchaseSolicitationsController < CrudController
   end
 
   protected
+
+  def filter_by_department(collection)
+    departments = DepartmentPerson.where(user_id:current_user.id).pluck(:department_id)
+    collection.where("department_id IN (?) ",departments)
+  end
 
   def default_filters
     {:accounting_year => lambda {Date.current.year}}
