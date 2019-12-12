@@ -18,7 +18,7 @@ class Material < Unico::Model
             :detailed_description,
             :material_classification,:presence => true
 
-  # belongs_to_resource :expense_nature
+  after_validation :set_code
 
   # has_many :purchase_process_items, :dependent => :restrict
   has_many :purchase_solicitation_items, :dependent => :restrict
@@ -71,6 +71,10 @@ class Material < Unico::Model
     where {
       purchase_solicitation_items.purchase_solicitation_id.not_eq(purchase_solicitation_id)
     }
+  end
+
+  def set_code
+    self.code = Material.last.nil? ? "1": (Material.last.id+1)
   end
 
   def to_s
