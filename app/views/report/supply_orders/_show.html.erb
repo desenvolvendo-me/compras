@@ -3,35 +3,35 @@
 <div style="text-align: justify">
   <span>
     <p>
-      CONTRATANTE: <%= resource.prefecture %>
+      <b> CONTRATANTE: </b> <%= resource.prefecture %>
     </p>
   </span>
 </div>
 <div style="text-align: justify">
   <span>
     <p>
-      CONTRATADA: <%= resource.creditor %>
+      <b> CONTRATADA: </b> <%= resource.creditor %>
     </p>
   </span>
 </div>
 <div style="text-align: justify">
   <span>
     <p>
-      CERTAME: <%= resource.licitation_process %>
+      <b> CERTAME: </b>  <%= resource.licitation_process %>
     </p>
   </span>
 </div>
 <div style="text-align: justify">
   <span>
     <p>
-      PROCESSO: <%= "#{resource.licitation_process.process}/#{resource.licitation_process.year}" %>
+      <b> PROCESSO: </b>  <%= "#{resource.licitation_process.process}/#{resource.licitation_process.year}" %>
     </p>
   </span>
 </div>
 <div style="text-align: justify">
   <span>
     <p>
-      OBJETO: <%= resource.licitation_process.description %>
+      <b> OBJETO: </b> <%= resource.licitation_process.description %>
     </p>
   </span>
 </div>
@@ -40,7 +40,7 @@
 <br>
 <br>
 <p>
-<h2>ITENS DA ORDEM DE FORNECIMENTO</h2>
+<h2> <b> ITENS DA ORDEM DE FORNECIMENTO </b> </h2>
 <div>
   <table class="records">
     <thead>
@@ -62,6 +62,30 @@
   </table>
 </div>
 </p>
+
+<div style="text-align: justify">
+  <span>
+    <p>
+      <b> PRAZO: </b> <%= resource.licitation_process.period %> <%= resource.licitation_process.period_unit_humanize %>
+    </p>
+  </span>
+</div>
+
+<div style="text-align: justify">
+  <span>
+    <p>
+      <b> LOCAL DE ENTREGA: </b> <%= resource.get_delivery_location %>
+    </p>
+  </span>
+</div>
+
+<div style="text-align: justify">
+  <span>
+    <p>
+      <b> <h2> <%= resource.prefecture.titleize() %> </b>
+    </p>
+  </span>
+</div>
 <br><br><br><br><br><br>
 <div class="signature" style="text-align: center">
   <p>
