@@ -22,8 +22,7 @@
   </div>
 
   <div class="yui3-u-1-4">
-    <%= f.input :purchase_solicitation,
-        :modal_url => modal_purchase_solicitations_path(:by_licitation_process => 18) %>
+    <%= f.input :purchase_solicitation , :disabled=> f.object.licitation_process.nil? %>
   </div>
 
   <div class="yui3-u-1-4">
