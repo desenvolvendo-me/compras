@@ -1,13 +1,23 @@
-function setModalUrlToLicitationProcess() {
-  var urlModal = Routes.modal_licitation_processes,
-      params = {
-        by_ratification_and_year: $('#supply_order_year').val(),
-        licitation_process: { year: $('#supply_order_year').val() },
-        locked_fields: ['year']
-      };
+function setModalUrlToPurchaseSolicitation() {
+    var urlModal = Routes.modal_purchase_solicitations,
+        params = {
+            by_licitation_process: $('#supply_order_licitation_process_id').val()
+        };
 
-  urlModal += "?" + $.param(params);
-  $('#supply_order_licitation_process').data('modal-url', urlModal);
+    urlModal += "?" + $.param(params);
+    $('#supply_order_purchase_solicitation').data('modal-url', urlModal);
+}
+
+function setModalUrlToLicitationProcess() {
+    var urlModal = Routes.modal_licitation_processes,
+        params = {
+            by_ratification_and_year: $('#supply_order_year').val(),
+            licitation_process: { year: $('#supply_order_year').val() },
+            locked_fields: ['year']
+        };
+
+    urlModal += "?" + $.param(params);
+    $('#supply_order_licitation_process').data('modal-url', urlModal);
 }
 
 function setModalUrlToCreditor() {
@@ -64,6 +74,7 @@ $(document).ready(function() {
   setModalUrlToLicitationProcess();
   setModalUrlToCreditor();
   setPledgeSource();
+  setModalUrlToPurchaseSolicitation();
 
   $('form.supply_order').on('change', '#supply_order_year', function() {
     setModalUrlToLicitationProcess();
@@ -72,13 +83,15 @@ $(document).ready(function() {
   $('form.supply_order').on('change', '#supply_order_licitation_process_id', function() {
     setModalUrlToCreditor();
     setPledgeSource();
+    setModalUrlToPurchaseSolicitation();
   });
 
   $('#supply_order_licitation_process').on('change', function (event, licitation_process) {
     if(licitation_process){
       $("#supply_order_modality_or_type_of_removal").val(licitation_process.modality_or_type_of_removal);
+      $("#supply_order_purchase_solicitation").attr('disabled',false);
     } else {
-      $("#supply_order_modality_or_type_of_removal, #supply_order_creditor").val('');
+      $("#supply_order_modality_or_type_of_removal, #supply_order_creditor,#supply_order_purchase_solicitation_id").val('');
     }
   });
 
