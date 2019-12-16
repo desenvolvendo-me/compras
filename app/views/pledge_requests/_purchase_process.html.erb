@@ -77,35 +77,9 @@
 </div>
 
 <script>
-  // function limpar(){
-  //  $('#teste').empty();
-  // }
-  //
-  // function put(){
-  //     $('#teste').append('<div class="input auto_complete required pledge_request_material">\n' +
-  //         '        <label class="auto_complete required" for="pledge_request_material">\n' +
-  //         '          Item </label>\n' +
-  //         '        <input class="string auto_complete required"\n' +
-  //         '               data-auto-complete="true" data-clear-input="false"\n' +
-  //         '               data-hidden-field-class=""\n' +
-  //         '               data-hidden-field-id="pledge_request_material_id"\n' +
-  //         '               data-hidden-field-value-attribute="id" data-max-results="10"\n' +
-  //         '               data-min-length="1"\n' +
-  //         '               data-source="/materials?by_licitation_process=15"\n' +
-  //         '               id="pledge_request_material" name="pledge_request[material]"\n' +
-  //         '               type="text">\n' +
-  //         '        <input class="" id="pledge_request_material_id"\n' +
-  //         '               name="pledge_request[material_id]" type="hidden"></div>');
-  // }
 
   $(function() {
 
-        // $("#pledge_request_material_id").on("change", function(event, material) {
-        //     debugger;
-        //     if (!material) {
-        //         material = {};
-        //     }
-        // });
 
         // inicio do bloco ,usado para ocultar os filhos do processo de compra
         var input_pledge_request = $('input[name="pledge_request[purchase_process]"]');

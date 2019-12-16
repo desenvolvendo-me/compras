@@ -13,7 +13,7 @@ class SupplyOrder < Compras::Model
   delegate :modality_number, :modality_humanize, :type_of_removal_humanize,
     to: :licitation_process, allow_nil: true
 
-  validates :authorization_date, :creditor, :licitation_process, presence: true
+  # validates :authorization_date, :creditor, :licitation_process, presence: true
 
   orderize "id DESC"
   filterize

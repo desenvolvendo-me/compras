@@ -1,24 +1,24 @@
 class SupplyOrderItem < Compras::Model
-  include BelongsToResource
+  # include BelongsToResource
 
   attr_accessible :authorization_quantity, :authorization_value,
-    :pledge_item_id, :supply_order_id, :material_id
+    :pledge_item_id, :supply_order_id, :material_id,:quantity
 
   belongs_to :supply_order
   belongs_to :material
 
-  belongs_to_resource :pledge_item
+  # belongs_to_resource :pledge_item
 
-  delegate :unit_price, to: :pledge_item, allow_nil: true
-  delegate :quantity, :estimated_total_price,
-    to: :pledge_item, allow_nil: true, prefix: true
+  # delegate :unit_price, to: :pledge_item, allow_nil: true
+  # delegate :quantity, :estimated_total_price,
+  #   to: :pledge_item, allow_nil: true, prefix: true
   delegate :service_without_quantity?, :reference_unit, to: :material, allow_nil: true
 
-  validates :authorization_value,    numericality: { greater_than: 0 }, unless: :authorization_quantity
-  validates :authorization_quantity, numericality: { greater_than: 0 }, unless: :authorization_value
-
-  validate :authorization_quantity_should_be_lower_than_quantity
-  validate :authorization_value_should_be_lower_than_value, if: :authorization_value_changed?
+  # validates :authorization_value,    numericality: { greater_than: 0 }, unless: :authorization_quantity
+  # validates :authorization_quantity, numericality: { greater_than: 0 }, unless: :authorization_value
+  #
+  # validate :authorization_quantity_should_be_lower_than_quantity
+  # validate :authorization_value_should_be_lower_than_value, if: :authorization_value_changed?
 
   orderize "id DESC"
   filterize
@@ -39,9 +39,9 @@ class SupplyOrderItem < Compras::Model
     }.sum(:authorization_value) || 0
   end
 
-  def quantity
-    pledge_item_quantity.to_i
-  end
+  # def quantity
+  #   pledge_item_quantity.to_i
+  # end
 
   def value
     BigDecimal("#{unit_price}")
