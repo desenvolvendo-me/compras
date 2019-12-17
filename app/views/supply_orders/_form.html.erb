@@ -4,7 +4,7 @@
   </div>
 
   <div class="yui3-u-1-2">
-    <%= f.input :licitation_process %>
+    <%= f.input :licitation_process, :required => true %>
   </div>
 
   <div class="yui3-u-1-3">
@@ -38,12 +38,11 @@
     <%= hidden_field_tag :item_id, nil, :name => 'supply_order_item[id]' %>
 
     <div class="yui3-g">
-      <div class="yui3-u-1-3">
+      <div class="yui3-u-1-2">
         <%= f.input :material, :as => :auto_complete, :fake => true,
-                    :source_path => materials_path(),:required => true %>
+                    :source_path => materials_path(:by_licitation_process => f.object.licitation_process),:required => true %>
       </div>
-
-      <div class="yui3-u-1-3">
+      <div class="yui3-u-1-2">
         <%= f.input :quantity, :as => :fake, :required => true %>
       </div>
 
@@ -74,7 +73,7 @@
                  id: p.object.id,
                  material: p.object.material,
                  material_id: p.object.material_id,
-                 quantity: number_with_precision(p.object.quantity),
+                 quantity: p.object.quantity,
                  f: p %>
     <% end %>
     </tbody>
