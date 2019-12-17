@@ -35,14 +35,14 @@
 <div style="text-align: justify">
   <span>
     <p>
-      <b> PROCESSO: </b>  <%= "#{resource.licitation_process.process}/#{resource.licitation_process.year}" %>
+      <b> PROCESSO: </b>  <%= "#{resource.licitation_process.process}/#{resource.licitation_process.year}" unless resource.licitation_process.nil? %>
     </p>
   </span>
 </div>
 <div style="text-align: justify">
   <span>
     <p>
-      <b> OBJETO: </b> <%= resource.licitation_process.description %>
+      <b> OBJETO: </b> <%= resource.licitation_process.description unless resource.licitation_process.nil? %>
     </p>
   </span>
 </div>
@@ -61,14 +61,12 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-      <td>01.00.00.000.000.01323</td>
-      <td>6,00</td>
-    </tr>
-    <tr>
-      <td>01.00.00.000.000.01531</td>
-      <td>25,00</td>
-    </tr>
+    <% resource.supply_order.items.each do |item| %>
+      <tr>
+        <td><%= item.material %></td>
+        <td><%= item.quantity %></td>
+      </tr>
+    <% end %>
     </tbody>
   </table>
 </div>
@@ -77,7 +75,7 @@
 <div style="text-align: justify">
   <span>
     <p>
-      <b> PRAZO: </b> <%= resource.licitation_process.period %> <%= resource.licitation_process.period_unit_humanize %>
+      <b> PRAZO: </b> <%= resource.licitation_process.period resource.licitation_process.period_unit_humanize unless resource.licitation_process.nil?%>
     </p>
   </span>
 </div>
@@ -85,7 +83,7 @@
 <div style="text-align: justify">
   <span>
     <p>
-      <b> LOCAL DE ENTREGA: </b> <%= resource.get_delivery_location %>
+      <b> LOCAL DE ENTREGA: </b> <%= resource.get_delivery_location unless resource.licitation_process.nil? %>
     </p>
   </span>
 </div>

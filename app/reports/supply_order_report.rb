@@ -5,12 +5,16 @@ class SupplyOrderReport < Report
     SupplyOrder.find(self.supply_order_id.to_i)
   end
 
+  def items
+    SupplyOrder.find(self.supply_order_id.to_i).items
+  end
+
   def prefecture
     Prefecture.last.name
   end
 
   def creditor
-    supply_order.creditor.person.name
+    supply_order.creditor.person.name unless supply_order.creditor.nil? || supply_order.creditor.person?
   end
 
   def get_delivery_location
