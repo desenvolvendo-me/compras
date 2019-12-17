@@ -1,6 +1,6 @@
 class SupplyOrder < Compras::Model
   attr_accessible :licitation_process_id, :creditor_id, :authorization_date,
-    :items_attributes, :year, :pledge_id,:purchase_solicitation_id
+    :items_attributes, :year, :pledge_id,:purchase_solicitation_id,:updatabled
 
   belongs_to :purchase_solicitation
   belongs_to :licitation_process
