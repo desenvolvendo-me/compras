@@ -25,7 +25,7 @@ class SupplyOrder < Compras::Model
   end
 
   def calc_items_quantity(licitation_process)
-    response = {message: "", total: 0, balance: 0}
+    response = {}
     unless licitation_process.nil?
       self.items.each do |item|
         quantity_autorized = LicitationProcess.find(licitation_process.id).items.where(material_id: item.material_id)
