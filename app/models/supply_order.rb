@@ -40,7 +40,7 @@ class SupplyOrder < Compras::Model
     quantity_autorized = LicitationProcess.find(licitation_process.id).items.where(material_id: material.id)
     quantity_autorized = quantity_autorized.empty? ? 0 : quantity_autorized[0].quantity
     supply_orders = SupplyOrder.where(licitation_process_id: licitation_process.id)
-    supply_orders = supply_orders.where("compras_supply_orders.id != #{supply_order.id}") if supply_order.id
+    supply_orders = supply_orders.where("compras_supply_orders.id != #{supply_order.id}") if supply_order.try(:id)
     quantity_delivered = supply_orders.joins(:items).sum(:quantity).to_f
 
     if quantity_autorized - (quantity_delivered + quantity.to_i) < 0
