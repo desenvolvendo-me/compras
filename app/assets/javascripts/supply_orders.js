@@ -92,7 +92,7 @@ function setMaterialTotalAndBalance() {
     var quantity = $('#supply_order_quantity').val()
     var supply_order_id = $(window.location.href.split("/")).get(-2)
 
-    if (licitation_process_id && material_id) {
+    if (licitation_process_id && material_id && quantity) {
         $.ajax({
             url: Routes.licitation_process_material_total_balance,
             data: {

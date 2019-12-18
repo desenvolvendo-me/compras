@@ -38,7 +38,7 @@ class LicitationProcessesController < CrudController
     material = Material.find(params[:material_id])
     supply_order = SupplyOrder.find(params[:supply_order_id]) if params[:supply_order_id].to_i > 0
 
-    response = SupplyOrder.total_balance(licitation_process, material, quantity, supply_order) if quantity.present?
+    response = SupplyOrder.total_balance(licitation_process, material, quantity, supply_order)
 
     render :json => {total: response["total"], balance: response["balance"]}
   end
