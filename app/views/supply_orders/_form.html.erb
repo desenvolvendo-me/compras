@@ -26,9 +26,6 @@
     <%= f.input :authorization_date, :disabled => f.object.updatabled %>
   </div>
 
-  <div class="yui3-u-1-4">
-    <%= f.input :purchase_solicitation, :disabled => f.object.licitation_process.nil? || f.object.updatabled %>
-  </div>
 
   <div class="yui3-u-1-4">
     <%= f.input :pledge, :disabled => f.object.updatabled %>
@@ -38,7 +35,17 @@
   </div>
 </div>
 
-
+<div class="yui3-g">
+  <div class="yui3-u-1-4">
+    <%= f.input :purchase_solicitation, :disabled => f.object.licitation_process.nil? || f.object.updatabled %>
+  </div>
+  <div class="yui3-u-1-4">
+    <div class="input integer ">
+      <label class="numeric integer ">Departamento</label>
+      <input class="string integer" type="text" id="purchase_solicitation_department" value="<%= f.object.purchase_solicitation.department if f.object.purchase_solicitation %>" disabled>
+    </div>
+  </div>
+</div>
 
 <div id="supply_order_items">
 
