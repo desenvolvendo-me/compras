@@ -35,7 +35,8 @@ class SupplyOrder < Compras::Model
         quantity_delivered = supply_orders.joins(:items).sum(:quantity).to_f
 
         if quantity_autorized - (quantity_delivered + item.quantity) < 0
-          response["message"] = ("#{item.material.description} (#{quantity_autorized - quantity_delivered})")
+          message = ("#{item.material.description} (#{quantity_autorized - quantity_delivered})")
+          response["message"] = response["message"].present? ? response["message"].concat(", ").concat(message) : message
         end
         response["total"] = quantity_autorized
         response["balance"] = quantity_autorized - quantity_delivered
