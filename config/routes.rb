@@ -645,6 +645,8 @@ Compras::Application.routes.draw do
     get 'modal_info', :on => :member
   end
 
+  get 'purchase_solicitation/department' => 'purchase_solicitations#department', as: :purchase_solicitation_department
+
   resources :purchase_solicitation_annuls, :only => [:new, :create, :edit, :update]
 
   resources :purchase_solicitation_liberations, :only => [:index, :new, :create, :edit] do

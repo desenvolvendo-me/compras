@@ -41,15 +41,19 @@ class PurchaseSolicitationsController < CrudController
     super
   end
 
+  def department
+    render :json => {description: PurchaseSolicitation.find(params['purchase_solicitation_id']).department.to_s}
+  end
+
   protected
 
   def filter_by_department(collection)
-    departments = DepartmentPerson.where(user_id:current_user.id).pluck(:department_id)
-    collection.where("department_id IN (?) ",departments)
+    departments = DepartmentPerson.where(user_id: current_user.id).pluck(:department_id)
+    collection.where("department_id IN (?) ", departments)
   end
 
   def default_filters
-    {:accounting_year => lambda {Date.current.year}}
+    {:accounting_year => lambda { Date.current.year }}
   end
 
   def interpolation_options
