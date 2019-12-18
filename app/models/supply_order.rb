@@ -32,13 +32,7 @@ class SupplyOrder < Compras::Model
         quantity_autorized = quantity_autorized.empty? ? 0 : quantity_autorized[0].quantity
         supply_orders = SupplyOrder.where(licitation_process_id: licitation_process.id)
 
-        quantity_delivered = 0
-        supply_orders.each do |supply_order|
-          supply_order_item = SupplyOrderItem.where(supply_order_id: supply_order.id, material_id: item.material_id)
-          supply_order_item = supply_order_item.where("supply_order_id != #{self.id}") unless self.id.nil?
-          supply_order_item = supply_order_item.empty? ? 0 : supply_order_item[0].quantity
-          quantity_delivered += supply_order_item
-        end
+        quantity_delivered = supply_orders.joins(:items).sum(:quantity).to_f
 
         if quantity_autorized - (quantity_delivered + item.quantity) < 0
           response["message"] = ("#{item.material.description} (#{quantity_autorized - quantity_delivered})")
