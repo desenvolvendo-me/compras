@@ -70,6 +70,22 @@ function fillSupplyOrderQuantities(pledge_items) {
     });
 }
 
+function setDepartment() {
+    var purchase_solicitation_id = $('#supply_order_purchase_solicitation_id').val()
+
+    if (purchase_solicitation_id) {
+        $.ajax({
+            url: Routes.purchase_solicitation_department,
+            data: {purchase_solicitation_id: purchase_solicitation_id},
+            dataType: 'json',
+            type: 'GET',
+            success: function (data) {
+                $('#purchase_solicitation_department').val(data["description"]);
+            }
+        });
+    }
+}
+
 function setMaterialTotalAndBalance() {
     var licitation_process_id = $('#supply_order_licitation_process_id').val()
     var material_id = $('#supply_order_material_id').val()
@@ -79,7 +95,12 @@ function setMaterialTotalAndBalance() {
     if (licitation_process_id && material_id) {
         $.ajax({
             url: Routes.licitation_process_material_total_balance,
-            data: {licitation_process_id: licitation_process_id, material_id: material_id, quantity: quantity, supply_order_id: supply_order_id},
+            data: {
+                licitation_process_id: licitation_process_id,
+                material_id: material_id,
+                quantity: quantity,
+                supply_order_id: supply_order_id
+            },
             dataType: 'json',
             type: 'POST',
             success: function (data) {
@@ -100,6 +121,10 @@ $(document).ready(function () {
 
     $('form.supply_order').on('change', '#supply_order_year', function () {
         setModalUrlToLicitationProcess();
+    });
+
+    $('form.supply_order').on('change', '#supply_order_purchase_solicitation_id', function () {
+        setDepartment();
     });
 
     $('form.supply_order').on('change', '#supply_order_quantity', function () {
