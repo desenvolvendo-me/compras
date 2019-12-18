@@ -1,14 +1,14 @@
 <div class="yui3-g">
   <div class="yui3-u-1-8">
-    <%= f.input :year ,:disabled => f.object.updatabled %>
+    <%= f.input :year, :disabled => f.object.updatabled %>
   </div>
 
   <div class="yui3-u-1-2">
-    <%= f.input :licitation_process, :required => true ,:disabled => f.object.updatabled %>
+    <%= f.input :licitation_process, :required => true, :disabled => f.object.updatabled %>
   </div>
 
   <div class="yui3-u-1-3">
-    <%= f.input :creditor,:disabled => f.object.updatabled %>
+    <%= f.input :creditor, :disabled => f.object.updatabled %>
   </div>
 </div>
 
@@ -19,15 +19,15 @@
 
   <div class="yui3-u-1-4">
     <%= f.input :modality_or_type_of_removal, as: :fake, disabled: true,
-        input_html: { value: f.object.decorator.modality_or_type_of_removal } %>
+                input_html: {value: f.object.decorator.modality_or_type_of_removal} %>
   </div>
 
   <div class="yui3-u-1-4">
-    <%= f.input :authorization_date,:disabled => f.object.updatabled %>
+    <%= f.input :authorization_date, :disabled => f.object.updatabled %>
   </div>
 
   <div class="yui3-u-1-4">
-    <%= f.input :purchase_solicitation , :disabled=> f.object.licitation_process.nil? || f.object.updatabled %>
+    <%= f.input :purchase_solicitation, :disabled => f.object.licitation_process.nil? || f.object.updatabled %>
   </div>
 
   <div class="yui3-u-1-4">
@@ -38,6 +38,8 @@
   </div>
 </div>
 
+
+
 <div id="supply_order_items">
 
   <div class="nested-fields add-margin-bottom">
@@ -46,12 +48,13 @@
     <div class="yui3-g">
       <div class="yui3-u-1-2">
         <%= f.input :material, :as => :auto_complete, :fake => true,
-                    :source_path => materials_path(:by_licitation_process => f.object.licitation_process),:required => true %>
+                    :source_path => materials_path(:by_licitation_process => f.object.licitation_process), :required => true %>
       </div>
       <div class="yui3-u-1-2">
         <%= f.input :quantity, :as => :fake, :required => true %>
       </div>
     </div>
+
     <div class="yui3-u-1-6">
       <%= button_tag 'Adicionar', type: :button,
                      :class => 'button add-nested-record field-without-label',
@@ -61,6 +64,20 @@
     </div>
   </div>
 
+  <div class="yui3-g">
+    <div class="yui3-u-1-4">
+      <div class="input integer purchase_solicitation_total">
+        <label class="numeric integer " for="purchase_solicitation_total">Total de Materiais</label>
+        <input class="string integer" id="purchase_solicitation_total" type="text" disabled>
+      </div>
+    </div>
+    <div class="yui3-u-1-4">
+      <div class="input integer purchase_solicitation_balance">
+        <label class="numeric integer " for="purchase_solicitation_balance">Saldo de Materiais</label>
+        <input class="string integer" id="purchase_solicitation_balance" type="text" disabled>
+      </div>
+    </div>
+  </div>
   <%= f.error :items %>
 
   <table id="items-records" class="records">
@@ -98,7 +115,7 @@
 
 <script>
     $(function () {
-        $(".close").click(function(){
+        $(".close").click(function () {
             $("#supply_order_updatabled").prop('checked', true);
         });
     });
