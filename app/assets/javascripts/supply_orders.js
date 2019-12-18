@@ -73,19 +73,18 @@ function fillSupplyOrderQuantities(pledge_items) {
 function setMaterialTotalAndBalance() {
     var licitation_process_id = $('#supply_order_licitation_process_id').val()
     var material_id = $('#supply_order_material_id').val()
-
-    $.ajax({
-        url: Routes.licitation_process_material_total_balance,
-        data: {licitation_process_id: licitation_process_id, material_id: material_id},
-        dataType: 'json',
-        type: 'POST',
-        success: function (data) {
-            console.log(data)
-            $('#purchase_solicitation_total').val(data["total"]);
-            $('#purchase_solicitation_balance').val(data["balance"]);
-        }
-    });
-
+    if (licitation_process_id && material_id) {
+        $.ajax({
+            url: Routes.licitation_process_material_total_balance,
+            data: {licitation_process_id: licitation_process_id, material_id: material_id},
+            dataType: 'json',
+            type: 'POST',
+            success: function (data) {
+                $('#purchase_solicitation_total').val(data["total"]);
+                $('#purchase_solicitation_balance').val(data["balance"]);
+            }
+        });
+    }
 }
 
 $(document).ready(function () {
