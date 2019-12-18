@@ -459,6 +459,8 @@ Compras::Application.routes.draw do
     end
   end
 
+  post 'licitation_process/material_total_balance' => 'licitation_processes#material_total_balance', as: :licitation_process_material_total_balance
+
   resources :process_responsibles do
     collection do
       get :filter

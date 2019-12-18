@@ -1,5 +1,5 @@
 class LicitationProcessesController < CrudController
-  actions :all, :except => [ :destroy ]
+  actions :all, :except => [:destroy]
 
   has_scope :by_modality_type
   has_scope :trading, :type => :boolean
@@ -32,14 +32,20 @@ class LicitationProcessesController < CrudController
     render :layout => 'report'
   end
 
+  def material_total_balance
+    response = SupplyOrder.find(2).calc_items_quantity(LicitationProcess.find(params[:licitation_process_id]))
+
+    render :json => {total: response["total"], balance: response["balance"]}
+  end
+
   protected
 
   def default_filters
-    { :year => lambda { Date.current.year } }
+    {:year => lambda { Date.current.year }}
   end
 
   def interpolation_options
-    { :resource_name => "#{resource_class.model_name.human} #{resource.process}/#{resource.year}" }
+    {:resource_name => "#{resource_class.model_name.human} #{resource.process}/#{resource.year}"}
   end
 
   def create_resource(object)
