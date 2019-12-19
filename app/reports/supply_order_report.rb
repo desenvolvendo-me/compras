@@ -14,7 +14,7 @@ class SupplyOrderReport < Report
   end
 
   def creditor
-    supply_order.creditor.person.name unless supply_order.creditor.nil? || supply_order.creditor.person?
+    supply_order.creditor.person.name unless supply_order.creditor.nil? || supply_order.creditor.person.nil?
   end
 
   def get_delivery_location
