@@ -25,7 +25,7 @@ class SupplyOrder < Compras::Model
   end
 
   def calc_items_quantity(licitation_process)
-    message = nil
+    message = ""
     unless licitation_process.nil?
       self.items.each do |item|
         response = SupplyOrder.total_balance(licitation_process, item.material, item.quantity, self)
@@ -41,9 +41,9 @@ class SupplyOrder < Compras::Model
     quantity_autorized = quantity_autorized.empty? ? 0 : quantity_autorized[0].quantity
     supply_orders = SupplyOrder.where(licitation_process_id: licitation_process.id)
     supply_orders = supply_orders.where("compras_supply_orders.id != #{supply_order.id}") if supply_order.try(:id)
-    quantity_delivered = supply_orders.joins(:items).sum(:quantity).to_f
+    quantity_delivered = supply_orders.joins(:items).where("compras_supply_order_items.material_id = ?", material.id).sum(:quantity).to_f
 
-    if quantity_autorized - (quantity_delivered + quantity.to_i) < 0
+    if (quantity_autorized - (quantity_delivered + quantity.to_i)) < 0
       response["message"] = ("#{material.description} (#{quantity_autorized - quantity_delivered})")
     end
 
