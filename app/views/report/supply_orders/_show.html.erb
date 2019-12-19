@@ -1,37 +1,48 @@
-<h1>ORDEM DE FORNECIMENTO</h1>
+<div>
+  <table style="border: none;" class="records">
+    <thead>
+    <tr style="text-align: center;border: none;">
+      <td width="90%"> <h1> <b> ORDEM DE FORNECIMENTO </b> </h1> </td>
+      <td width="10%"> <%= Time.new.strftime("%d/%m/%Y") %> </td>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+</div>
 
 <div style="text-align: justify">
   <span>
     <p>
-      CONTRATANTE: <%= resource.prefecture %>
+      <b> CONTRATANTE: </b> <%= resource.prefecture %>
     </p>
   </span>
 </div>
 <div style="text-align: justify">
   <span>
     <p>
-      CONTRATADA: <%= resource.creditor %>
+      <b> CONTRATADA: </b> <%= resource.creditor %>
     </p>
   </span>
 </div>
 <div style="text-align: justify">
   <span>
     <p>
-      CERTAME: <%= resource.licitation_process %>
+      <b> CERTAME: </b>  <%= resource.licitation_process %>
     </p>
   </span>
 </div>
 <div style="text-align: justify">
   <span>
     <p>
-      PROCESSO: <%= "#{resource.licitation_process.process}/#{resource.licitation_process.year}" %>
+      <b> PROCESSO: </b>  <%= "#{resource.licitation_process.process}/#{resource.licitation_process.year}" unless resource.licitation_process.nil? %>
     </p>
   </span>
 </div>
 <div style="text-align: justify">
   <span>
     <p>
-      OBJETO: <%= resource.licitation_process.description %>
+      <b> OBJETO: </b> <%= resource.licitation_process.description unless resource.licitation_process.nil? %>
     </p>
   </span>
 </div>
@@ -40,7 +51,7 @@
 <br>
 <br>
 <p>
-<h2>ITENS DA ORDEM DE FORNECIMENTO</h2>
+<h2> <b> ITENS DA ORDEM DE FORNECIMENTO </b> </h2>
 <div>
   <table class="records">
     <thead>
@@ -50,18 +61,40 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-      <td>01.00.00.000.000.01323</td>
-      <td>6,00</td>
-    </tr>
-    <tr>
-      <td>01.00.00.000.000.01531</td>
-      <td>25,00</td>
-    </tr>
+    <% resource.supply_order.items.each do |item| %>
+      <tr>
+        <td><%= item.material %></td>
+        <td><%= item.quantity %></td>
+      </tr>
+    <% end %>
     </tbody>
   </table>
 </div>
 </p>
+
+<div style="text-align: justify">
+  <span>
+    <p>
+      <b> PRAZO: </b> <%= resource.licitation_process.period resource.licitation_process.period_unit_humanize unless resource.licitation_process.nil?%>
+    </p>
+  </span>
+</div>
+
+<div style="text-align: justify">
+  <span>
+    <p>
+      <b> LOCAL DE ENTREGA: </b> <%= resource.get_delivery_location unless resource.licitation_process.nil? %>
+    </p>
+  </span>
+</div>
+
+<div style="text-align: justify">
+  <span>
+    <p>
+      <b> <h2> <%= resource.prefecture.titleize() %> </b>
+    </p>
+  </span>
+</div>
 <br><br><br><br><br><br>
 <div class="signature" style="text-align: center">
   <p>

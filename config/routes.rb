@@ -459,6 +459,8 @@ Compras::Application.routes.draw do
     end
   end
 
+  post 'licitation_process/material_total_balance' => 'licitation_processes#material_total_balance', as: :licitation_process_material_total_balance
+
   resources :process_responsibles do
     collection do
       get :filter
@@ -642,6 +644,8 @@ Compras::Application.routes.draw do
     end
     get 'modal_info', :on => :member
   end
+
+  get 'purchase_solicitation/department' => 'purchase_solicitations#department', as: :purchase_solicitation_department
 
   resources :purchase_solicitation_annuls, :only => [:new, :create, :edit, :update]
 

@@ -35,7 +35,7 @@
       <tr>
         <td><%= material.description %></td>
         <td><%= material.material_class %></td>
-        <td><%= Material.human_attribute_name(material.material_classification) %></td>
+        <td><%= material.material_classification_humanize %></td>
         <td><%= material.combustible ? 'Sim':'Não' %></td>
         <td><%= material.medicine ? 'Sim':'Não' %></td>
         <td><%= material.active ? 'Ativo':'Inativo' %></td>

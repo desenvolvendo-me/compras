@@ -1,21 +1,23 @@
 class SupplyOrderItem < Compras::Model
-  include BelongsToResource
+  # include BelongsToResource
 
   attr_accessible :authorization_quantity, :authorization_value,
-    :pledge_item_id, :supply_order_id, :material_id
+                  :pledge_item_id, :supply_order_id, :material_id, :quantity, :balance
+
+  attr :balance
 
   belongs_to :supply_order
   belongs_to :material
 
-  belongs_to_resource :pledge_item
+  belongs_to :pledge_item
 
   delegate :unit_price, to: :pledge_item, allow_nil: true
-  delegate :quantity, :estimated_total_price,
-    to: :pledge_item, allow_nil: true, prefix: true
+  delegate :quantity, :balance, :estimated_total_price,
+           to: :pledge_item, allow_nil: true, prefix: true
   delegate :service_without_quantity?, :reference_unit, to: :material, allow_nil: true
 
-  validates :authorization_value,    numericality: { greater_than: 0 }, unless: :authorization_quantity
-  validates :authorization_quantity, numericality: { greater_than: 0 }, unless: :authorization_value
+  #validates :authorization_value, numericality: {greater_than: 0}, unless: :authorization_quantity
+  #validates :authorization_quantity, numericality: {greater_than: 0}, unless: :authorization_value
 
   validate :authorization_quantity_should_be_lower_than_quantity
   validate :authorization_value_should_be_lower_than_value, if: :authorization_value_changed?
@@ -39,16 +41,8 @@ class SupplyOrderItem < Compras::Model
     }.sum(:authorization_value) || 0
   end
 
-  def quantity
-    pledge_item_quantity.to_i
-  end
-
   def value
     BigDecimal("#{unit_price}")
-  end
-
-  def balance
-    quantity - authorized_quantity
   end
 
   def value_balance
@@ -76,7 +70,7 @@ class SupplyOrderItem < Compras::Model
   def authorization_quantity_should_be_lower_than_quantity
     if real_authorization_quantity > supply_order_item_balance.to_i
       errors.add(:authorization_quantity, :less_than_or_equal_to,
-        count: supply_order_item_balance.to_i + authorization_quantity_was.to_i)
+                 count: supply_order_item_balance.to_i + authorization_quantity_was.to_i)
     end
   end
 
