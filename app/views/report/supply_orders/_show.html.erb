@@ -75,7 +75,7 @@
 <div style="text-align: justify">
   <span>
     <p>
-      <b> PRAZO: </b> <%= resource.licitation_process.period resource.licitation_process.period_unit_humanize unless resource.licitation_process.nil?%>
+      <b> PRAZO: </b> <%= resource.licitation_process.period  unless resource.licitation_process.nil? %> <%= resource.licitation_process.period_unit_humanize unless resource.licitation_process.nil? %>
     </p>
   </span>
 </div>
