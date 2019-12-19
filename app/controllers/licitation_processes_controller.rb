@@ -7,6 +7,10 @@ class LicitationProcessesController < CrudController
   has_scope :by_ratification_and_year
   has_scope :ratified, type: :boolean
 
+  def index
+    @licitation_processes = filter_by_purchasing_unit(collection)
+  end
+
   def new
     object = build_resource
     object.process_date = Date.current
@@ -50,6 +54,11 @@ class LicitationProcessesController < CrudController
   end
 
   protected
+
+  def filter_by_purchasing_unit(collection)
+    purchasing_units = UserPurchasingUnit.where(user_id:current_user.id).pluck(:purchasing_unit_id)
+    collection.where("purchasing_unit_id IN (?) ", purchasing_units)
+  end
 
   def interpolation_options
     {:resource_name => "#{resource_class.model_name.human} #{resource.process}/#{resource.year}"}
