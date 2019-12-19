@@ -36,9 +36,10 @@ class LicitationProcessesController < CrudController
     quantity = params["quantity"]
     licitation_process = LicitationProcess.find(params[:licitation_process_id])
     material = Material.find(params[:material_id])
+    purchase_solicitation = PurchaseSolicitation.find(params[:purchase_solicitation_id])
     supply_order = SupplyOrder.find(params[:supply_order_id]) if params[:supply_order_id].to_i > 0
 
-    response = SupplyOrder.total_balance(licitation_process, material, quantity, supply_order)
+    response = SupplyOrder.total_balance(licitation_process, purchase_solicitation, material, quantity, supply_order)
 
     render :json => {total: response["total"], balance: response["balance"]}
   end
@@ -49,6 +50,7 @@ class LicitationProcessesController < CrudController
   end
 
   protected
+
   def interpolation_options
     {:resource_name => "#{resource_class.model_name.human} #{resource.process}/#{resource.year}"}
   end
