@@ -104,8 +104,7 @@ function setMaterialTotalAndBalance() {
             dataType: 'json',
             type: 'POST',
             success: function (data) {
-                $('#purchase_solicitation_total').val(data["total"]);
-                $('#purchase_solicitation_balance').val(data["balance"]);
+                $('#supply_order_balance').val(data["balance"]);
             }
         });
     }

@@ -2,7 +2,9 @@ class SupplyOrderItem < Compras::Model
   # include BelongsToResource
 
   attr_accessible :authorization_quantity, :authorization_value,
-                  :pledge_item_id, :supply_order_id, :material_id, :quantity
+                  :pledge_item_id, :supply_order_id, :material_id, :quantity, :balance
+
+  attr :balance
 
   belongs_to :supply_order
   belongs_to :material
@@ -10,7 +12,7 @@ class SupplyOrderItem < Compras::Model
   belongs_to :pledge_item
 
   delegate :unit_price, to: :pledge_item, allow_nil: true
-  delegate :quantity, :estimated_total_price,
+  delegate :quantity, :balance, :estimated_total_price,
            to: :pledge_item, allow_nil: true, prefix: true
   delegate :service_without_quantity?, :reference_unit, to: :material, allow_nil: true
 
@@ -41,10 +43,6 @@ class SupplyOrderItem < Compras::Model
 
   def value
     BigDecimal("#{unit_price}")
-  end
-
-  def balance
-    quantity - authorized_quantity
   end
 
   def value_balance
