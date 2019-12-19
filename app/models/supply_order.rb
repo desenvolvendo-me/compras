@@ -1,7 +1,9 @@
 class SupplyOrder < Compras::Model
   attr_accessible :licitation_process_id, :creditor_id, :authorization_date,
-                  :items_attributes, :year, :pledge_id, :purchase_solicitation_id, :updatabled
+                  :items_attributes, :year, :pledge_id, :purchase_solicitation_id,
+                  :updatabled,:contract_id
 
+  belongs_to :contract
   belongs_to :purchase_solicitation
   belongs_to :licitation_process
   belongs_to :creditor
@@ -13,7 +15,7 @@ class SupplyOrder < Compras::Model
   delegate :modality_number, :modality_humanize, :type_of_removal_humanize,
            to: :licitation_process, allow_nil: true
 
-  validates :authorization_date, :creditor, :purchase_solicitation, :licitation_process, presence: true
+  validates :authorization_date, :contract, :purchase_solicitation, :licitation_process, presence: true
   validate :items_quantity_permitted
 
   orderize "id DESC"
