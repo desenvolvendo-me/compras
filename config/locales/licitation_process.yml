@@ -19,7 +19,7 @@ pt-BR:
         contact: "Contato para informações"
         contract_guarantees: 'Tipo de garantia'
         description: "Objeto do processo de compra"
-        department: "Departamento"
+        purchasing_unit: "Unidade de Compra"
         document_types: "Tipo de documento"
         envelope_delivery_date: "Término do recebimento dos envelopes"
         envelope_delivery_time: "Hora do recebimento"
