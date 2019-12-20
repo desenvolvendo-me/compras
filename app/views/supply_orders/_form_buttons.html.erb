@@ -1,11 +1,11 @@
 <div class="buttons">
   <%= link_to('Imprimir', report_supply_orders_path(resource.id), class: "button primary") unless resource.id.nil? %>
   <% if f.object.updatabled %>
-    <%= f.button :submit, 'data-disabled' => "Desabilitado",class: 'close' if can?(:modify, main_controller_name) %>
     <%= f.button :submit, 'data-disabled' => "Desabilitado" if can?(:modify, main_controller_name) %>
+    <%= f.button :submit, 'data-disabled' => "Desabilitado",class: 'supply_order_submit_close' if can?(:modify, main_controller_name) %>
   <% else %>
-    <%= f.button :submit,class: 'close' if can?(:modify, main_controller_name) %>
     <%= f.button :submit if can?(:modify, main_controller_name) %>
+    <%= f.button :submit,class: 'supply_order_submit_close' if can?(:modify, main_controller_name) %>
   <% end %>
 
   <%= f.button :back %>
@@ -17,6 +17,6 @@
 
 <script>
     $(function () {
-        $(".close").val("Fechar");
+        $(".supply_order_submit_close").val("Fechar");
     });
 </script>

@@ -157,4 +157,29 @@ $(document).ready(function () {
             getPledgeItems(pledge.id);
         }
     });
+
+    if($("#supply_order_updatabled").prop("checked")){
+        $(".edit-nested-record").attr('class',"edit-nested-record hidden")
+        $(".remove-nested-record").attr('class',"remove-nested-record hidden")
+    }
+
+    if($("#supply_order_number_nf").val()==""){
+        $(".supply_order_submit_close").attr('data-disabled',"Desabilitado" );
+    }
+
+    $("#supply_order_contract_id").on("change", function(event, contract) {
+        $("#supply_order_creditor").val(contract ? contract.creditor:'');
+    });
+
+    $(".supply_order_submit_close").click(function () {
+        $("#supply_order_updatabled").prop('checked', true);
+    });
+
+    $("#supply_order_number_nf").on("change", function() {
+        if($("#supply_order_number_nf").val()==""){
+            $(".supply_order_submit_close").attr('data-disabled',"Desabilitado" );
+        }else{
+            $(".supply_order_submit_close").removeAttr('data-disabled');
+        }
+    });
 });
