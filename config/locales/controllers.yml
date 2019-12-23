@@ -83,6 +83,7 @@ pt-BR:
     signatures: "Assinaturas"
     street_types: "Tipos de Logradouros"
     streets: "Logradouros"
+    supply_requests: "Pedido de Fornecimento"
     supply_orders: "Ordem de Fornecimento"
     tce_export_monthly_monitorings: "SICOM - Acompanhamento Mensal"
     users: "Usuários"

@@ -1,0 +1,2 @@
+class SupplyRequestsController < CrudController
+end
