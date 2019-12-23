@@ -3,6 +3,8 @@ class SupplyRequest < Compras::Model
                   :items_attributes, :year, :pledge_id, :purchase_solicitation_id,
                   :updatabled, :contract_id, :supply_request_status
 
+  attr_modal :licitation_process_id, :creditor_id, :year, :authorization_date, :pledge
+
   belongs_to :contract
   belongs_to :purchase_solicitation
   belongs_to :licitation_process
@@ -22,6 +24,10 @@ class SupplyRequest < Compras::Model
 
   orderize "id DESC"
   filterize
+
+  def to_s
+    "#{contract} - #{licitation_process}"
+  end
 
   before_create :set_status_sent
 
