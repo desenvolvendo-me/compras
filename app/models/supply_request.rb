@@ -1,7 +1,7 @@
 class SupplyRequest < Compras::Model
   attr_accessible :licitation_process_id, :creditor_id, :authorization_date,
                   :items_attributes, :year, :pledge_id, :purchase_solicitation_id,
-                  :updatabled,:contract_id
+                  :updatabled, :contract_id, :supply_request_status
 
   belongs_to :contract
   belongs_to :purchase_solicitation
@@ -12,6 +12,8 @@ class SupplyRequest < Compras::Model
 
   accepts_nested_attributes_for :items, allow_destroy: true
 
+  has_enumeration_for :supply_request_status, :with => SupplyRequestStatus, :create_helpers => true
+
   delegate :modality_number, :modality_humanize, :type_of_removal_humanize,
            to: :licitation_process, allow_nil: true
 
@@ -20,6 +22,8 @@ class SupplyRequest < Compras::Model
 
   orderize "id DESC"
   filterize
+
+  before_create :set_status_sent
 
   def items_quantity_permitted
     message = calc_items_quantity(self.licitation_process, self.purchase_solicitation)
@@ -67,5 +71,9 @@ class SupplyRequest < Compras::Model
     quantity_purchase_solicitation = licitation_process.purchase_solicitations.where(purchase_solicitation_id: purchase_solicitation.id).first.purchase_solicitation.items.where(material_id: material.id).sum(:quantity).to_i
 
     return quantity_purchase_solicitation
+  end
+
+  def set_status_sent
+    supply_request_status = SupplyRequestStatus::SENT
   end
 end
