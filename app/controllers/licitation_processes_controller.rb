@@ -22,13 +22,13 @@ class LicitationProcessesController < CrudController
 
   def create
     create! do |success, failure|
-      success.html { redirect_to edit_licitation_process_path(resource) }
+      success.html {redirect_to edit_licitation_process_path(resource)}
     end
   end
 
   def update
     update! do |success, failure|
-      success.html { redirect_to edit_licitation_process_path(resource) }
+      success.html {redirect_to edit_licitation_process_path(resource)}
     end
   end
 
@@ -41,22 +41,22 @@ class LicitationProcessesController < CrudController
     licitation_process = LicitationProcess.find(params[:licitation_process_id])
     material = Material.find(params[:material_id])
     purchase_solicitation = PurchaseSolicitation.find(params[:purchase_solicitation_id])
-    supply_order = SupplyOrder.find(params[:supply_order_id]) if params[:supply_order_id].to_i > 0
 
-    response = SupplyOrder.total_balance(licitation_process, purchase_solicitation, material, quantity, supply_order)
+    response = supply_order(licitation_process, material, purchase_solicitation, quantity) if params[:supply_order_id].present?
+    response = supply_request(licitation_process, material, purchase_solicitation, quantity) if params[:supply_request_id].present?
 
     render :json => {total: response["total"], balance: response["balance"]}
   end
 
 
   def default_filters
-    {:year => lambda { Date.current.year }}
+    {:year => lambda {Date.current.year}}
   end
 
   protected
 
   def filter_by_purchasing_unit(collection)
-    purchasing_units = UserPurchasingUnit.where(user_id:current_user.id).pluck(:purchasing_unit_id)
+    purchasing_units = UserPurchasingUnit.where(user_id: current_user.id).pluck(:purchasing_unit_id)
     collection.where("purchasing_unit_id IN (?) ", purchasing_units)
   end
 
@@ -99,5 +99,19 @@ class LicitationProcessesController < CrudController
     if warning
       flash[:alert] = warning
     end
+  end
+
+  private
+
+  def supply_order(licitation_process, material, purchase_solicitation, quantity)
+    supply_order = SupplyOrder.find(params[:supply_order_id]) if params[:supply_order_id].to_i > 0
+
+    response = SupplyOrder.total_balance(licitation_process, purchase_solicitation, material, quantity, supply_order)
+  end
+
+  def supply_request(licitation_process, material, purchase_solicitation, quantity)
+    supply_request = SupplyRequest.find(params[:supply_request_id]) if params[:supply_request_id].to_i > 0
+
+    response = SupplyRequest.total_balance(licitation_process, purchase_solicitation, material, quantity, supply_request)
   end
 end
