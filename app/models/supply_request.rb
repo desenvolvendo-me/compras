@@ -1,6 +1,7 @@
 class SupplyRequest < Compras::Model
-  attr_accessible :authorization_date, :contract_id, :creditor_id, :licitation_process_id,
-                  :pledge_id, :purchase_solicitation_id, :updatabled, :year
+  attr_accessible :licitation_process_id, :creditor_id, :authorization_date,
+                  :items_attributes, :year, :pledge_id, :purchase_solicitation_id,
+                  :updatabled,:contract_id
 
   belongs_to :contract
   belongs_to :purchase_solicitation
