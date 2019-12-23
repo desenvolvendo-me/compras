@@ -22,6 +22,8 @@ class SupplyOrder < Compras::Model
   orderize "id DESC"
   filterize
 
+  before_update :change_status_in_service
+
   def items_quantity_permitted
     message = calc_items_quantity(self.licitation_process, self.purchase_solicitation)
     errors.add(:items, "Quantidade solicitada indisponível. Quantidades disponíveis: #{message}") if message.present?
@@ -68,5 +70,9 @@ class SupplyOrder < Compras::Model
     quantity_purchase_solicitation = licitation_process.purchase_solicitations.where(purchase_solicitation_id: purchase_solicitation.id).first.purchase_solicitation.items.where(material_id: material.id).sum(:quantity).to_i
 
     return quantity_purchase_solicitation
+  end
+
+  def change_status_in_service
+    self.supply_request.update_attribute(:supply_request_status, SupplyRequestStatus::IN_SERVICE)
   end
 end
