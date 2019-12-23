@@ -3,7 +3,7 @@ class SupplyRequestDecorator
   include Decore::Proxy
   include Decore::Header
 
-  attr_header :creditor, :authorization_date, :licitation_process
+  attr_header :creditor, :authorization_date, :licitation_process, :supply_request_status
 
   def creditor
     self.contract.nil? || self.contract.creditors.blank? || self.contract.creditors.first.person.nil? ? '' : self.contract.creditors.first.person.name
