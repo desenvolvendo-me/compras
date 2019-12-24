@@ -112,6 +112,43 @@ function setMaterialTotalAndBalance() {
     }
 }
 
+function hasItemAlreadyAdded(item) {
+    var added = false;
+    $("table#items-records input.material-id").each(function () {
+        if ($(this).val() == item.material_id) {
+            added = true;
+            return added;
+        }
+    });
+    return added;
+}
+
+function mergeItem(item) {
+    var record = $('tr#material-id-' + item.material_id);
+    var quantity = record.find('input.quantity').val();
+    var totalQuantity = parsePtBrFloat(quantity) + item.quantity;
+
+    record.find("td.quantity").text(totalQuantity);
+    record.find('input.quantity').val(totalQuantity);
+
+}
+
+function renderItem(item) {
+    var itemBinds = {
+        uuid: _.uniqueId('fresh-'),
+        id: '',
+        material_id: item.material_id,
+        material: item.material,
+        quantity: item.quantity
+
+    };
+
+    var data = $('#licitation_process_items_template').mustache(itemBinds);
+
+    $('#items-records tbody').append(data).trigger("nestedGrid:afterAdd");
+}
+
+
 $(document).ready(function () {
     setModalUrlToLicitationProcess();
     setModalUrlToCreditor();
@@ -158,28 +195,65 @@ $(document).ready(function () {
         }
     });
 
-    if($("#supply_order_updatabled").prop("checked")){
-        $(".edit-nested-record").attr('class',"edit-nested-record hidden")
-        $(".remove-nested-record").attr('class',"remove-nested-record hidden")
+    if ($("#supply_order_updatabled").prop("checked")) {
+        $(".edit-nested-record").attr('class', "edit-nested-record hidden")
+        $(".remove-nested-record").attr('class', "remove-nested-record hidden")
     }
 
-    if($("#supply_order_number_nf").val()==""){
-        $(".supply_order_submit_close").attr('data-disabled',"Desabilitado" );
+    if ($("#supply_order_number_nf").val() == "") {
+        $(".supply_order_submit_close").attr('data-disabled', "Desabilitado");
     }
 
-    $("#supply_order_contract_id").on("change", function(event, contract) {
-        $("#supply_order_creditor").val(contract ? contract.creditor:'');
+    $("#supply_order_contract_id").on("change", function (event, contract) {
+        $("#supply_order_creditor").val(contract ? contract.creditor : '');
     });
 
     $(".supply_order_submit_close").click(function () {
         $("#supply_order_updatabled").prop('checked', true);
     });
 
-    $("#supply_order_number_nf").on("change", function() {
-        if($("#supply_order_number_nf").val()==""){
-            $(".supply_order_submit_close").attr('data-disabled',"Desabilitado" );
-        }else{
+    $("#supply_order_number_nf").on("change", function () {
+        if ($("#supply_order_number_nf").val() == "") {
+            $(".supply_order_submit_close").attr('data-disabled', "Desabilitado");
+        } else {
             $(".supply_order_submit_close").removeAttr('data-disabled');
         }
     });
+
+    $("#supply_order_supply_request_id").on("change", function (event, supplyRequest) {
+
+        // Adicionar aqui a API
+        supplyRequest = {
+            id: 4,
+            description: "10001 - 3333/2019 - Pregão 6",
+            items: [
+                {
+                    id: 1,
+                    material_id: 8,
+                    material: "9 - Balde",
+                    quantity: 1
+                },
+                {
+                    id: 2,
+                    material_id: 8,
+                    material: "9 - Balde",
+                    quantity: 4
+                },
+            ]
+        }
+
+        if (!supplyRequest) {
+            supplyRequest = {};
+        }
+
+        $.each(supplyRequest.items, function (i, item) {
+            if (hasItemAlreadyAdded(item)) {
+                mergeItem(item);
+            } else {
+                renderItem(item);
+            }
+        });
+
+    });
+
 });
