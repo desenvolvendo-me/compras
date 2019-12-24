@@ -144,6 +144,7 @@ Compras::Application.routes.draw do
       get :filter
     end
   end
+  match 'api/supply_requests/show' => 'supply_requests#api_show', as: :supply_requests_api_show
 
 
   resources :banks do

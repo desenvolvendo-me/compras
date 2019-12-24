@@ -138,7 +138,7 @@ function renderItem(item) {
         uuid: _.uniqueId('fresh-'),
         id: '',
         material_id: item.material_id,
-        material: item.material,
+        material: item.material.code + " - " + item.material.description,
         quantity: item.quantity
 
     };
@@ -222,35 +222,20 @@ $(document).ready(function () {
 
     $("#supply_order_supply_request_id").on("change", function (event, supplyRequest) {
 
-        // Adicionar aqui a API
-        supplyRequest = {
-            id: 4,
-            description: "10001 - 3333/2019 - Pregão 6",
-            items: [
-                {
-                    id: 1,
-                    material_id: 8,
-                    material: "9 - Balde",
-                    quantity: 1
-                },
-                {
-                    id: 2,
-                    material_id: 8,
-                    material: "9 - Balde",
-                    quantity: 4
-                },
-            ]
-        }
-
-        if (!supplyRequest) {
-            supplyRequest = {};
-        }
-
-        $.each(supplyRequest.items, function (i, item) {
-            if (hasItemAlreadyAdded(item)) {
-                mergeItem(item);
-            } else {
-                renderItem(item);
+        $.ajax({
+            url: Routes.supply_requests_api_show,
+            data: {supply_request_id: supplyRequest.id},
+            dataType: 'json',
+            type: 'POST',
+            success: function (data) {
+                console.log(data)
+                $.each(data.items, function (i, item) {
+                    if (hasItemAlreadyAdded(item)) {
+                        mergeItem(item);
+                    } else {
+                        renderItem(item);
+                    }
+                });
             }
         });
 
