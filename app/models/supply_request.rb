@@ -76,6 +76,6 @@ class SupplyRequest < Compras::Model
   end
 
   def set_status_sent
-    supply_request_status = SupplyRequestStatus::SENT
+    self.supply_request_status = SupplyRequestStatus::SENT
   end
 end
