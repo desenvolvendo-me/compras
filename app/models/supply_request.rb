@@ -1,9 +1,9 @@
 class SupplyRequest < Compras::Model
   attr_accessible :licitation_process_id, :creditor_id, :authorization_date,
-                  :items_attributes, :year, :pledge_id, :purchase_solicitation_id,
+                  :items_attributes, :year, :purchase_solicitation_id,
                   :updatabled, :contract_id, :supply_request_status
 
-  attr_modal :licitation_process_id, :creditor_id, :year, :authorization_date, :pledge
+  attr_modal :licitation_process_id, :creditor_id, :year, :authorization_date
 
   belongs_to :contract
   belongs_to :purchase_solicitation
@@ -63,10 +63,6 @@ class SupplyRequest < Compras::Model
     response["total"] = quantity_autorized
     response["balance"] = quantity_autorized - quantity_delivered
     response
-  end
-
-  def pledge
-    @pledge ||= Pledge.find(pledge_id) if pledge_id
   end
 
   private
