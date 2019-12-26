@@ -41,9 +41,10 @@ class LicitationProcessesController < CrudController
     licitation_process = LicitationProcess.find(params[:licitation_process_id])
     material = Material.find(params[:material_id])
     purchase_solicitation = PurchaseSolicitation.find(params[:purchase_solicitation_id])
+    contract = Contract.find(params[:contract_id])
 
-    response = supply_order(licitation_process, material, purchase_solicitation, quantity) if params[:supply_order_id].present?
-    response = supply_request(licitation_process, material, purchase_solicitation, quantity) if params[:supply_request_id].present?
+    response = supply_order(licitation_process, material, purchase_solicitation, quantity, contract) if params[:supply_order_id].present?
+    response = supply_request(licitation_process, material, purchase_solicitation, quantity, contract) if params[:supply_request_id].present?
 
     render :json => {total: response["total"], balance: response["balance"]}
   end
@@ -103,15 +104,15 @@ class LicitationProcessesController < CrudController
 
   private
 
-  def supply_order(licitation_process, material, purchase_solicitation, quantity)
+  def supply_order(licitation_process, material, purchase_solicitation, quantity, contract)
     supply_order = SupplyOrder.find(params[:supply_order_id]) if params[:supply_order_id].to_i > 0
 
-    response = SupplyOrder.total_balance(licitation_process, purchase_solicitation, material, quantity, supply_order)
+    response = SupplyOrder.total_balance(licitation_process, purchase_solicitation, material, quantity, supply_order, contract)
   end
 
-  def supply_request(licitation_process, material, purchase_solicitation, quantity)
+  def supply_request(licitation_process, material, purchase_solicitation, quantity, contract)
     supply_request = SupplyRequest.find(params[:supply_request_id]) if params[:supply_request_id].to_i > 0
 
-    response = SupplyRequest.total_balance(licitation_process, purchase_solicitation, material, quantity, supply_request)
+    response = SupplyRequest.total_balance(licitation_process, purchase_solicitation, material, quantity, supply_request, contract)
   end
 end

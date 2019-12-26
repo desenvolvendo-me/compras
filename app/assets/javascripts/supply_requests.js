@@ -90,8 +90,9 @@ function setMaterialTotalAndBalance() {
     var licitation_process_id = $('#supply_request_licitation_process_id').val()
     var material_id = $('#supply_request_material_id').val()
     var purchase_solicitation_id = $('#supply_request_purchase_solicitation_id').val()
-    var quantity = $('#supply_request_quantity').val()
+    var contract_id = $('#supply_request_contract_id').val()
     var supply_request_id = $(window.location.href.split("/")).get(-2)
+    var quantity = $('#supply_request_quantity').val()
 
     if (licitation_process_id && purchase_solicitation_id && material_id && quantity) {
         $.ajax({
@@ -99,9 +100,10 @@ function setMaterialTotalAndBalance() {
             data: {
                 licitation_process_id: licitation_process_id,
                 material_id: material_id,
-                quantity: quantity,
+                purchase_solicitation_id: purchase_solicitation_id,
                 supply_request_id: supply_request_id,
-                purchase_solicitation_id: purchase_solicitation_id
+                contract_id: contract_id,
+                quantity: quantity
             },
             dataType: 'json',
             type: 'POST',

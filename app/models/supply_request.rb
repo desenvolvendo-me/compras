@@ -40,17 +40,17 @@ class SupplyRequest < Compras::Model
     message = ""
     unless licitation_process.nil?
       self.items.each do |item|
-        response = SupplyRequest.total_balance(licitation_process, purchase_solicitation, item.material, item.quantity, self)
+        response = SupplyRequest.total_balance(licitation_process, purchase_solicitation, item.material, item.quantity, self, self.contract)
         message = message.present? ? message.concat(", ").concat(response["message"]) : response["message"]
       end
     end
     message
   end
 
-  def self.total_balance(licitation_process, purchase_solicitation, material, quantity, supply_request = nil)
+  def self.total_balance(licitation_process, purchase_solicitation, material, quantity, supply_request = nil, contract)
     response = {}
 
-    quantity_autorized = quantity_autorized(licitation_process, purchase_solicitation, material)
+    quantity_autorized = quantity_autorized(licitation_process, purchase_solicitation, material, contract)
 
     supply_requests = SupplyRequest.where(licitation_process_id: licitation_process.id)
     supply_requests = supply_requests.where("compras_supply_requests.id != #{supply_request.id}") if supply_request.try(:id)
@@ -67,12 +67,15 @@ class SupplyRequest < Compras::Model
 
   private
 
-  def self.quantity_autorized(licitation_process, purchase_solicitation, material)
+  def self.quantity_autorized(licitation_process, purchase_solicitation, material, contract)
     licitation_process = LicitationProcess.find(licitation_process.id)
-    quantity_licitation_process = licitation_process.items.where(material_id: material.id).sum(:quantity)
-    quantity_purchase_solicitation = licitation_process.purchase_solicitations.where(purchase_solicitation_id: purchase_solicitation.id).first.purchase_solicitation.items.where(material_id: material.id).sum(:quantity).to_i
-
-    return quantity_purchase_solicitation
+    if contract.balance_control_type.eql? "contract"
+      quantity_licitation_process = licitation_process.items.where(material_id: material.id).sum(:quantity).to_i
+      return quantity_licitation_process
+    else
+      quantity_purchase_solicitation = licitation_process.purchase_solicitations.where(purchase_solicitation_id: purchase_solicitation.id).first.purchase_solicitation.items.where(material_id: material.id).sum(:quantity).to_i
+      return quantity_purchase_solicitation
+    end
   end
 
   def set_status_sent
