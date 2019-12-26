@@ -49,23 +49,7 @@ class SupplyRequest < Compras::Model
     message
   end
 
-  def self.total_balance(licitation_process, purchase_solicitation, material, quantity, supply_request = nil, contract)
-    response = {}
 
-    quantity_autorized = quantity_autorized(licitation_process, purchase_solicitation, material, contract)
-
-    supply_requests = SupplyRequest.where(licitation_process_id: licitation_process.id)
-    supply_requests = supply_requests.where("compras_supply_requests.id != #{supply_request.id}") if supply_request.try(:id)
-    quantity_delivered = supply_requests.joins(:items).where("compras_supply_request_items.material_id = ?", material.id).sum(:quantity).to_f
-
-    if (quantity_autorized - (quantity_delivered + quantity.to_i)) < 0
-      response["message"] = ("#{material.description} (#{quantity_autorized - quantity_delivered})")
-    end
-
-    response["total"] = quantity_autorized
-    response["balance"] = quantity_autorized - quantity_delivered
-    response
-  end
 
   private
 
