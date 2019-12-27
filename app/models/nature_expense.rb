@@ -6,6 +6,7 @@ class NatureExpense < Compras::Model
   accepts_nested_attributes_for :split_expenses, allow_destroy: true
 
   validates :description, :nature, presence: true, uniqueness:true
+  validates :year, :mask => "9999", :allow_blank => true
 
   orderize "created_at"
   filterize

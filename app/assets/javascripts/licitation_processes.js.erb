@@ -105,16 +105,23 @@ $(document).ready(function() {
 //    adiciona os itens de acordo com a solicitação de compra adicionada
 //    (aba solicitante)
 
+    function money_en(value) {
+        return parseFloat(value.replace('.','').replace(',','.').
+          toLocaleString('en', {minimumFractionDigits: 2}))
+    }
+
+    function money_pt(value) {
+      return value.toLocaleString('pt-BR', {minimumFractionDigits: 2});
+    }
+
     function hasItemAlreadyAdded(item) {
         var added = false;
-
         $("table#items-records input.material-id").each(function() {
             if ($(this).val() == item.material_id) {
                 added = true;
                 return added;
             }
         });
-
         return added;
     }
 
@@ -122,9 +129,9 @@ $(document).ready(function() {
 
         var record         = $('tr#material-id-'+item.material_id),
             totalQuantity  = parsePtBrFloat(record.find('input.item-quantity').val())+item.quantity,
-            itemUnitPrice  = (parseFloat(record.find('input.item-unit-price').val())+item.unit_price)/2,
-            itemtotalValue = numberWithDelimiter(itemUnitPrice*totalQuantity);
-
+            itemUnitPrice  = (money_en(record.find('input.item-unit-price').val())+item.unit_price)/2,
+            itemtotalValue = money_pt(numberWithDelimiter(itemUnitPrice*totalQuantity));
+            itemUnitPrice = money_pt(itemUnitPrice);
 
         record.find("td.item-quantity").text(totalQuantity);
         record.find('input.item-quantity').val(totalQuantity);
@@ -143,14 +150,15 @@ $(document).ready(function() {
             id: '',
             material_id: item.material_id,
             material: item.material_description,
+            creditor_id: '',
+            creditor: '',
             reference_unit: item.reference_unit,
             brand: item.brand,
             quantity: item.quantity,
             lot: '1',
-            unit_price: item.unit_price,
-
             estimated_total_price:
-                item.quantity * item.unit_price
+                money_pt(item.quantity * item.unit_price),
+            unit_price: money_pt(item.unit_price)
         };
 
         var data = $('#licitation_process_items_template').mustache(itemBinds);
@@ -173,6 +181,7 @@ $(document).ready(function() {
     });
 
   });
+
 //   *************** fim  ***************
 
 });

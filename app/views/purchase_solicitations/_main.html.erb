@@ -3,21 +3,25 @@
     <%= f.input :code, :disabled => true %>
   </div>
 
-  <div class="yui3-u-1-8">
+  <div class="yui3-u-1-6">
     <%= f.input :accounting_year, :disabled => f.object.persisted? %>
   </div>
 
-  <div class="yui3-u-1-6">
+  <div class="yui3-u-1-4">
     <%= f.input :request_date, :disabled => f.object.annulled? %>
   </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :attendant_status %>
+  </div>
+
 </div>
 
 <div class="yui3-g">
   <div class="yui3-u-1-2">
     <%= f.input :department %>
   </div>
-
-  <div class='yui3-u-1-2'>
+  <div class='yui3-u-1-4'>
     <% if f.object.id.nil? %>
       <p class="input string">
         <label class="string required control-label">Solicitante</label>
@@ -27,6 +31,9 @@
     <% else f.object.annulled? %>
       <%= f.input :user, :disabled => true %>
     <% end %>
+  </div>
+  <div class="yui3-u-1-4" style="margin-top: 4%" >
+    <%= f.input :model_request %>
   </div>
 </div>
 

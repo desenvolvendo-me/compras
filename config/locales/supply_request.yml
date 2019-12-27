@@ -1,0 +1,20 @@
+pt-BR:
+  activerecord:
+    models:
+      supply_request:
+        one: "Pedido de Fornecimento"
+        other: "Pedidos de Fornecimento"
+
+    attributes:
+      supply_request:
+        authorization_date: "Data da autorização"
+        creditor: "Fornecedor"
+        licitation_process: "Processo de compra"
+        modality_or_type_of_removal: "Modalidade"
+        year: "Ano"
+        pledge: "Empenho"
+        purchase_solicitation: "Solicitação de Compra"
+        quantity: "Quantidade"
+        contract: "Contrato"
+        number_nf: "Número NF"
+        supply_request_status: "Situação"

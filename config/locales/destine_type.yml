@@ -1,0 +1,6 @@
+pt-BR:
+  enumerations:
+    expense_destine_type:
+      project: 'Projeto'
+      activity: 'Atividade'
+      special_operation: 'Operações Especiais'

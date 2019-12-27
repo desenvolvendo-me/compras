@@ -1,0 +1,14 @@
+pt-BR:
+  activerecord:
+    models:
+      purchasing_unit:
+        one: "Unidade de Compra"
+        other: "Unidades de Compra"
+
+    attributes:
+      purchasing_unit:
+        name: "Descrição"
+        code: "Código"
+        cnpj: "CNPJ"
+        situation: "Situação"
+        starting: "A partir de"

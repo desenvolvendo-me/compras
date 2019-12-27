@@ -40,7 +40,7 @@ Compras::Application.routes.draw do
   end
 
   # Keep routes sorted alphabetically
-  devise_for :users, :controllers => { :confirmations => 'confirmations', :sessions => 'sessions' }
+  devise_for :users, :controllers => {:confirmations => 'confirmations', :sessions => 'sessions'}
 
   devise_scope :user do
     put '/confirm' => 'confirmations#confirm'
@@ -98,8 +98,8 @@ Compras::Application.routes.draw do
 
   resources :purchase_process_trading_items, only: [:creditor_list, :next_bid, :undo_last_bid, :update] do
     member do
-      get  :creditor_list
-      get  :next_bid
+      get :creditor_list
+      get :next_bid
       post :undo_last_bid
     end
 
@@ -138,6 +138,15 @@ Compras::Application.routes.draw do
     end
   end
 
+  resources :supply_requests do
+    collection do
+      get :modal
+      get :filter
+    end
+  end
+  match 'api/supply_requests/show' => 'supply_requests#api_show', as: :supply_requests_api_show
+
+
   resources :banks do
     collection do
       get :modal
@@ -173,7 +182,7 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :budget_allocations, :only => [:index, :show]  do
+  resources :budget_allocations, :only => [:index, :show] do
     collection do
       get :filter
       get :modal
@@ -205,12 +214,12 @@ Compras::Application.routes.draw do
   get 'budget_structure_levels/modal', :as => :modal_budget_structure_levels
 
   resources :capabilities, :except => [:new, :edit, :update, :destroy] do
-   collection do
-     get :filter
-     get :modal
-   end
-   get 'modal_info', :on => :member
- end
+    collection do
+      get :filter
+      get :modal
+    end
+    get 'modal_info', :on => :member
+  end
 
   resources :capability_allocation_details do
     collection do
@@ -267,21 +276,6 @@ Compras::Application.routes.draw do
     end
   end
 
-  get 'demand_batches/modal', :as => :modal_demand_batches
-  resources :demand_batches do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
-  resources :batch_materials do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-  
   resources :contract_types do
     collection do
       get :filter
@@ -474,6 +468,8 @@ Compras::Application.routes.draw do
     end
   end
 
+  post 'licitation_process/material_total_balance' => 'licitation_processes#material_total_balance', as: :licitation_process_material_total_balance
+
   resources :process_responsibles do
     collection do
       get :filter
@@ -649,6 +645,7 @@ Compras::Application.routes.draw do
 
   resources :purchase_process_accreditations, :only => [:new, :create, :edit, :update, :show]
 
+  get 'purchase_solicitations/modal', :as => :modal_purchase_solicitations
   resources :purchase_solicitations, :except => :destroy do
     collection do
       get :filter
@@ -656,6 +653,8 @@ Compras::Application.routes.draw do
     end
     get 'modal_info', :on => :member
   end
+
+  get 'purchase_solicitation/department' => 'purchase_solicitations#department', as: :purchase_solicitation_department
 
   resources :purchase_solicitation_annuls, :only => [:new, :create, :edit, :update]
 
@@ -806,7 +805,69 @@ Compras::Application.routes.draw do
     end
   end
 
-  # get "split_expenses/modal", :as => :modal_esplit_expenses
+  resources :project_activities do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
+  resources :project_activities do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
+  resources :purchasing_units do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
+  resources :expenses do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
+  resources :programs do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
+  resources :expense_sub_functions do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
+  resources :expense_functions do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
+  resources :organs do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
+  resources :resource_sources do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :split_expenses do
     collection do
       get :filter
@@ -842,6 +903,9 @@ Compras::Application.routes.draw do
       resources :purchase_process_ratifications_by_periods
       resources :purchase_solicitations
       resources :purchased_item_prices
+      resources :materials
+      resources :contracts
+      resources :licitation_processes
     end
 
     match 'map_of_bids/:licitation_process_id' => 'map_of_bids#show', as: :map_of_bids
@@ -850,7 +914,10 @@ Compras::Application.routes.draw do
 
     match 'minute_purchase_processes/:licitation_process_id' => 'minute_purchase_processes#show', as: :minute_purchase_processes
     match 'minute_purchase_process_tradings/:licitation_process_id' => 'minute_purchase_process_tradings#show',
-      as: :minute_purchase_process_tradings
+          as: :minute_purchase_process_tradings
+
+    match 'supply_orders/:supply_order_id' => 'supply_orders#show', as: :supply_orders
+    match 'supply_requests/:supply_request_id' => 'supply_requests#show', as: :supply_requests
   end
 
   namespace :api do

@@ -1,0 +1,3 @@
+class ExpenseSubFunctionsController < CrudController
+
+end

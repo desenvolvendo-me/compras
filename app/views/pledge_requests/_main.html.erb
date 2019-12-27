@@ -1,67 +1,75 @@
 <div class="yui3-g">
-  <div class="yui3-u-1-6">
-    <%= f.input :emission_date, as: :date %>
-  </div>
-</div>
 
-<div class="yui3-g">
-  <div class="yui3-u-1-2">
-    <%= f.input :purchase_process, modal_url: modal_licitation_processes_path(ratified: true) %>
-  </div>
-</div>
-
-<div class="yui3-g">
-  <div class="yui3-u-1-2">
+  <div class="yui3-u-1-3">
     <%= f.input :contract, modal_url: modal_contracts_path(purchase_process_id: f.object.purchase_process_id) %>
   </div>
-</div>
 
-<div class="yui3-g">
-  <div class="yui3-u-1-2">
-    <%= f.input :creditor, modal_url: modal_creditors_path(by_ratification_and_licitation_process_id: f.object.purchase_process_id) %>
+  <div class="yui3-u-1-3">
+
+    <div>
+      <label>Credor</label>
+      <input id="pledge_request_creditor_show" value="<%=f.object.decorator.creditor %>" class="string" disabled="disabled" type="text">
+    </div>
+    <%#= f.input :creditor, modal_url: modal_creditors_path(by_ratification_and_licitation_process_id: f.object.purchase_process_id) %>
   </div>
+  <div class="yui3-u-1-3">
+    <%= f.input :emission_date, as: :date %>
+  </div>
+
 </div>
 
 <div class="yui3-g">
   <div class="yui3-u-1-2">
-    <%= f.input :budget_allocation, as: :auto_complete, required: true,
+    <%= f.input :budget_allocation %>
+    <%#= f.input :budget_allocation, as: :auto_complete, required: true,
       hidden_field: :budget_allocation_id,
       source_path: budget_allocations_path(by_ids: f.object.purchase_process_budget_allocations_ids) %>
   </div>
 
-  <div class="yui3-u-1-4">
-    <%= f.input :budget_allocation_balance, disabled: true,
+  <!--  <div class="yui3-u-1-3">-->
+  <%#= f.input :budget_allocation_balance, disabled: true,
       input_html: { value: number_with_precision(f.object.budget_allocation_balance), class: "numeric" } %>
 
-    <%= f.input :descriptor_id, as: :hidden, input_html: { value: f.object.budget_allocation_descriptor_id } %>
-  </div>
-</div>
+  <%#= f.input :descriptor_id, as: :hidden, input_html: { value: f.object.budget_allocation_descriptor_id } %>
+  <!--  </div>-->
 
-<div class="yui3-g">
+  <!--  <div class="yui3-u-1-2">-->
+  <%#= f.input :reserve_fund_id, as: :select, collection: reserve_funds(f.object.purchase_process) %>
+  <!--  </div>-->
+
   <div class="yui3-u-1-2">
-    <%= f.input :reserve_fund_id, as: :select, collection: reserve_funds(f.object.purchase_process) %>
-  </div>
-
-  <div class="yui3-u-1-4">
     <%= f.input :reserve_fund_amount, disabled: true,
-      input_html: { value: number_with_precision(f.object.reserve_fund_amount), class: "numeric" } %>
+                input_html: { value: number_with_precision(f.object.reserve_fund_amount), class: "numeric" } %>
   </div>
-</div>
+<!--  <div class="yui3-u-1-2">-->
+    <%#= f.input :accounting_account, as: :modal, modal_url: modal_accounting_accounts_path, hidden_field: :accounting_account_id %>
+<!--  </div>-->
 
-<div class="yui3-g">
-  <div class="yui3-u-1-2">
-    <%= f.input :accounting_account, as: :modal, modal_url: modal_accounting_accounts_path, hidden_field: :accounting_account_id %>
-  </div>
-</div>
-
-<div class="yui3-g">
-  <div class="yui3-u-1-4">
-    <%= f.input :amount, input_html: { value: number_with_precision(f.object.amount) } %>
-  </div>
-</div>
-
-<div class="yui3-g">
-  <div class="yui3-u-1-2">
+  <!--  <div class="yui3-u-1-2">-->
     <%#= f.input :expense_nature, modal_url: modal_expense_natures_path(by_parent_id: f.object.budget_allocation_expense_nature_id) %>
+<!--  </div>-->
+
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :amount, disabled: true, input_html: { value: number_with_precision(f.object.amount) } %>
+  </div>
+  <div class="yui3-u-1-2">
+    <%= f.input :expense %>
   </div>
 </div>
+
+<script>
+
+$(function () {
+  $("#pledge_request_contract_id").on("change", function(event, contract) {
+      if(!contract){
+          $("#pledge_request_creditor_show").val('');
+      }else{
+          $("#pledge_request_creditor_show").val(contract.creditor);
+      }
+  });
+});
+
+</script>

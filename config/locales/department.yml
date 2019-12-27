@@ -7,9 +7,5 @@ pt-BR:
 
     attributes:
       department:
-        parent_class_number: "Departamento Superior"
-        number: "Código"
         description: "Descrição"
-        status: "Tipo"
-        filled_masked_number_without_end_dot: "Código"
-        class_number: "Código"
+        purchasing_unit: "Unidade de Compra"

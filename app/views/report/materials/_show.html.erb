@@ -1,0 +1,46 @@
+<div>
+  <table class="records">
+    <thead>
+    <tr  style="text-align: center;">
+      <td width="60%"> RELATÓRIO DE MATERIAIS </td>
+      <td width="20%"> <%= Time.new.strftime("%d/%m/%Y") %> </td>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+</div>
+
+<div style="text-align: justify">
+
+</div>
+
+<br>
+
+
+<div>
+  <table class="records">
+    <thead>
+    <tr>
+      <th>DESCRIÇÃO</th>
+      <th>CLASSE</th>
+      <th>TIPO</th>
+      <th>MEDICAMENTO</th>
+      <th>COMBUSTÍVEL</th>
+      <th>SITUAÇÃO</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @material.each do |material| %>
+      <tr>
+        <td><%= material.description %></td>
+        <td><%= material.material_class %></td>
+        <td><%= material.material_classification_humanize %></td>
+        <td><%= material.combustible ? 'Sim':'Não' %></td>
+        <td><%= material.medicine ? 'Sim':'Não' %></td>
+        <td><%= material.active ? 'Ativo':'Inativo' %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

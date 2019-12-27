@@ -1,10 +1,18 @@
 class Demand < Compras::Model
   attr_accessible  :name,:final_date, :initial_date,
-    :observation, :status, :year
+    :observation, :status, :year,:purchasing_unit_id,
+                   :purchase_solicitation_id,
+                   :department_ids
 
-  has_many :demand_batches, class_name: 'DemandBatch', :order => :id,dependent: :destroy
+  belongs_to :purchase_solicitation, :dependent => :destroy
+  belongs_to :purchasing_unit, :dependent => :destroy
+
+  has_many :demand_departments, :dependent => :destroy
+  has_many :departments, :through => :demand_departments, :order => :id
 
   has_enumeration_for :status, :with => DemandStatus, :create_helpers => true
+
+  after_validation :create_purchase_solicitations, :if => :new_record?
 
   validates :year,:name, presence: true
   validates :year,:mask => '9999',
@@ -16,6 +24,29 @@ class Demand < Compras::Model
 
   orderize "created_at"
   filterize
+
+  def create_purchase_solicitations
+    code_maximum = PurchaseSolicitation.maximum('code')
+    code_maximum = code_maximum.nil? ? 0:code_maximum + 1
+
+    unless self.purchase_solicitation.nil?
+      self.departments.each  do |department|
+        pur_sol = PurchaseSolicitation.new(self.purchase_solicitation.attributes)
+        pur_sol.id = nil
+        pur_sol.code = code_maximum
+        pur_sol.department_id = department.id
+        pur_sol.model_request = false
+        pur_sol.service_status = PurchaseSolicitationServiceStatus::PENDING
+        code_maximum += 1
+
+        self.purchase_solicitation.items.each  do |item|
+          pur_sol.items.build(material_id:item.material_id)
+        end
+
+        @status = pur_sol.save(validate:false)
+      end
+    end
+  end
 
   def to_s
     "#{name}"

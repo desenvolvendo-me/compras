@@ -5,6 +5,12 @@ class PurchaseSolicitationsController < CrudController
   has_scope :by_material_id
   has_scope :except_ids, :type => :array
   has_scope :can_be_grouped, :type => :boolean
+  has_scope :by_licitation_process
+  has_scope :by_model_request
+
+  def index
+    @purchase_solicitations = filter_by_department(collection)
+  end
 
   def new
     object = build_resource
@@ -35,13 +41,22 @@ class PurchaseSolicitationsController < CrudController
     super
   end
 
+  def department
+    render :json => {description: PurchaseSolicitation.find(params['purchase_solicitation_id']).department.to_s}
+  end
+
   protected
 
+  def filter_by_department(collection)
+    departments = DepartmentPerson.where(user_id: current_user.id).pluck(:department_id)
+    collection.where("department_id IN (?) ", departments)
+  end
+
   def default_filters
-    { :accounting_year => lambda { Date.current.year } }
+    {:accounting_year => lambda { Date.current.year }}
   end
 
   def interpolation_options
-    { :resource_name => "#{resource_class.model_name.human} #{resource.code}/#{resource.accounting_year}" }
+    {:resource_name => "#{resource_class.model_name.human} #{resource.code}/#{resource.accounting_year}"}
   end
 end

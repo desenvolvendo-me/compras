@@ -13,6 +13,7 @@ pt-BR:
         password_confirmation: "Confirme a senha"
         profile: "Perfil"
         authenticable: "Funcionário"
+        purchasing_units: "Unidade de Compra"
 
   simple_form:
     hints:

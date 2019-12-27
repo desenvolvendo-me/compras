@@ -1,0 +1,3 @@
+class ProjectActivitiesController < CrudController
+
+end

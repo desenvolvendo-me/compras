@@ -23,9 +23,8 @@ class LicitationProcess < Compras::Model
                   :creditor_proposals_attributes, :tied_creditor_proposals_attributes,
                   :process_responsibles_attributes,
                   :justification, :justification_and_legal, :process,
-                  :purchase_solicitation_import_option,:department_id,
-                  # :purchase_solicitation_ids
-                  :purchase_solicitations_attributes
+                  :purchase_solicitation_import_option,
+                  :purchase_solicitations_attributes, :purchasing_unit_id
 
   auto_increment :process, :by => :year
   auto_increment :modality_number, :by => [:year, :modality, :type_of_removal]
@@ -47,7 +46,7 @@ class LicitationProcess < Compras::Model
   has_enumeration_for :type_of_removal, create_helpers: { prefix: true }
   has_enumeration_for :purchase_solicitation_import_option
 
-  belongs_to :department
+  belongs_to :purchasing_unit
   belongs_to :contact, :class_name => 'Employee'
   belongs_to :judgment_form
   belongs_to :payment_method
@@ -136,7 +135,6 @@ class LicitationProcess < Compras::Model
   validate :validate_updates, :unless => :updateable?
   validate :validate_proposal_envelope_opening_date, :on => :update, :if => :licitation?
   validate :validate_the_year_to_processe_date_are_the_same, :on => :update
-  # validate :validate_budget_allocations_destruction
   validate :validate_total_items
   validate :purchase_solicitations_blank?
 
@@ -175,8 +173,6 @@ class LicitationProcess < Compras::Model
       }
   end
 
-  before_save :calculate_total_value_of_items, :calculate_budget_allocations_total_value
-
   orderize "id DESC"
   filterize
 
@@ -211,6 +207,18 @@ class LicitationProcess < Compras::Model
   scope :ratified, lambda {
     joins { licitation_process_ratifications }.uniq
   }
+
+  def get_items_amount
+    val=0
+    self.items.each do |item|
+      val += item.unit_price*item.quantity
+    end
+    val
+  end
+
+  def get_number_with_precision(val)
+    val
+  end
 
   def to_s
     "#{process}/#{year} - #{modality_or_type_of_removal_humanized} #{modality_number}"
@@ -345,7 +353,7 @@ class LicitationProcess < Compras::Model
   def budget_allocations_ids
     return [] unless purchase_process_budget_allocations
 
-    purchase_process_budget_allocations.map(&:budget_allocation_id)
+    # purchase_process_budget_allocations.map(&:budget_allocation_id)
   end
 
   def budget_allocations

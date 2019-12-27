@@ -9,7 +9,8 @@ class Contract < Compras::Model
                   :dissemination_source_id, :creditor_ids, :contract_type_id,
                   :licitation_process_id, :start_date, :budget_structure_responsible_id,
                   :lawyer_id, :parent_id, :additives_attributes, :penalty_fine,
-                  :default_fine, :execution_type, :contract_guarantees, :consortium_agreement, :department_id
+                  :default_fine, :execution_type, :contract_guarantees,
+                  :consortium_agreement, :department_id,:balance_control_type
 
   attr_modal :year, :contract_number, :sequential_number, :signature_date
 
@@ -20,6 +21,8 @@ class Contract < Compras::Model
 
   has_enumeration_for :contract_guarantees, :with => UnicoAPI::Resources::Compras::Enumerations::ContractGuarantees
   has_enumeration_for :execution_type, :create_helpers => true
+  has_enumeration_for :balance_control_type,
+                      :with => ContractBalanceControlType, :create_helpers => true
 
   belongs_to :department
   belongs_to :budget_structure_responsible, :class_name => 'Employee'
@@ -120,7 +123,7 @@ class Contract < Compras::Model
   end
 
   def allow_termination?
-    contract_termination.blank?
+    # contract_termination.blank?
   end
 
   private

@@ -1,0 +1,78 @@
+<div class="yui3-g">
+
+  <div class="yui3-u-1-4">
+    <%= f.input :year %>
+  </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :organ %>
+  </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :unity %>
+  </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :purchasing_unit %>
+  </div>
+
+</div>
+
+<div class="yui3-g">
+
+  <div class="yui3-u-1-4">
+    <%= f.input :expense_function %>
+  </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :expense_sub_function %>
+  </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :program %>
+  </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :destiny %>
+  </div>
+
+</div>
+
+<div class="yui3-g">
+
+  <div class="yui3-u-1-4">
+    <%= f.input :destine_type , :disabled => true %>
+  </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :project_activity %>
+  </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :nature_expense, :as => :auto_complete,
+                :hidden_field => :nature_expense_id,
+                :required => true %>
+  </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :resource_source %>
+  </div>
+
+</div>
+
+<script>
+    $(function () {
+        $("#expense_destiny").blur(function(){
+            destiny = $("#expense_destiny").val();
+            var name;
+            if(destiny == 0){
+                name = "special_operation";
+            }else if(destiny % 2 == 0){
+                name = "activity";
+            }else{
+                name = "project";
+            }
+            $("#expense_destine_type").val(name);
+        });
+    });
+</script>

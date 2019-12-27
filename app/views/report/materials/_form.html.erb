@@ -1,0 +1,36 @@
+<div class="yui3-g">
+
+  <div class="yui3-u-1-3">
+    <%= f.input :description, :include_blank => true %>
+  </div>
+
+  <div class="yui3-u-1-3">
+    <%= f.input :material_class, :as => :auto_complete,
+                :source_path => material_classes_path(:without_children => true),
+                :hidden_field => :material_class_id, :max_results => 20 %>
+  </div>
+
+  <div class="yui3-u-1-3">
+    <%= f.input :material_classification, :include_blank => true %>
+  </div>
+
+</div>
+
+<div class="yui3-g">
+
+  <div class="yui3-u-1-3">
+    <%= f.input :combustible,as: :boolean, checked_value: "true",
+                unchecked_value: "false" , :include_blank => true %>
+  </div>
+
+  <div class="yui3-u-1-3">
+    <%= f.input :medicine,as: :boolean, checked_value: "true",
+                unchecked_value: "false" , :include_blank => true %>
+  </div>
+
+  <div class="yui3-u-1-3">
+    <%= f.input :active,as: :boolean, checked_value: "true",
+                unchecked_value: "false" , :include_blank => true %>
+  </div>
+
+</div>

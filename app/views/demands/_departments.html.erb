@@ -1,0 +1,51 @@
+<div class="yui3-g ">
+  <div class="yui3-u-1-2" >
+    <%= f.input :purchase_solicitation,
+                modal_url: modal_purchase_solicitations_path(by_model_request:true),
+                :disabled => f.object.persisted? %>
+  </div>
+  <div class="yui3-u-1-2 modal-finder">
+    <%= f.association :departments, :as => :modal,:hidden_field => false,
+                      :input_html => { :value => nil },:modal_url =>
+                      modal_departments_path(:by_situation =>'active'),
+        :disabled => f.object.purchase_solicitation.nil? || f.object.persisted? %>
+  </div>
+</div>
+
+<input type="hidden" name="<%= f.sanitized_object_name %>[department_ids][]" />
+
+<table class="records">
+  <thead>
+  <tr>
+    <th>
+      <%= Department.human_attribute_name :description %>
+    </th>
+
+    <th>
+    </th>
+  </tr>
+  </thead>
+
+  <tbody class="<%= f.sanitized_object_name %>_departments_records">
+  <% f.object.departments.each do |department| %>
+    <%= render 'departments/list_form', :description => department.description, :id => department.id, :f => f %>
+  <% end %>
+  </tbody>
+
+</table>
+
+<%= mustache "#{f.sanitized_object_name}_departments_template" do %>
+  <%= f.association :departments, :collection => f.object.departments.build do |p| %>
+    <%= render 'departments/list_form', :id => '{{id}}', :description => '{{description}}', :f => f %>
+  <% end %>
+<% end %>
+
+<script>
+  $(function () {
+      $("#demand_purchase_solicitation").on("change", function(event, purchaseSolicitation) {
+        if(purchaseSolicitation){
+            $("#demand_departments").prop('disabled',false);
+        }
+      });
+  });
+</script>

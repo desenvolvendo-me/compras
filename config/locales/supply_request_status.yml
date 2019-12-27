@@ -1,0 +1,6 @@
+pt-BR:
+  enumerations:
+    supply_request_status:
+     sent: "Enviado"
+     in_service: "Em Atendimento"
+     delivered: "Entregue"

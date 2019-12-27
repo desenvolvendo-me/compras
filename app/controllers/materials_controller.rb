@@ -1,5 +1,6 @@
 class MaterialsController < CrudController
   has_scope :term, :allow_blank => true
+  has_scope :by_licitation_process, :allow_blank => true
 
   # def create
   #   object = build_resource

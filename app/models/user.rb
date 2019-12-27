@@ -1,11 +1,15 @@
 class User < Compras::Model
   attr_accessible :email, :login, :profile_id, :password, :password_confirmation
-  attr_accessible :authenticable_id, :authenticable_type
+  attr_accessible :authenticable_id, :authenticable_type,
+                  :purchasing_unit_ids
 
-  attr_modal :email
+  attr_modal :login,:email
 
   devise :database_authenticatable, :recoverable, :validatable, :confirmable,
          :timeoutable
+
+  has_many :user_purchasing_units, :dependent => :destroy, :inverse_of => :user
+  has_many :purchasing_units, :through => :user_purchasing_units, :order => :id
 
   has_enumeration_for :authenticable_type, :with => AuthenticableType,
                       :create_helpers => true, :create_scopes => true
