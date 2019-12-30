@@ -918,6 +918,9 @@ Compras::Application.routes.draw do
 
     match 'supply_orders/:supply_order_id' => 'supply_orders#show', as: :supply_orders
     match 'supply_requests/:supply_request_id' => 'supply_requests#show', as: :supply_requests
+
+    match 'licitation_process/balance/new' => 'licitation_process_balance#new', as: :licitation_process_balance_new
+    match 'licitation_process/balance' => 'licitation_process_balance#show', as: :licitation_process_balance
   end
 
   namespace :api do
