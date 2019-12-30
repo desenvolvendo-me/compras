@@ -23,8 +23,8 @@ class LicitationProcess < Compras::Model
                   :creditor_proposals_attributes, :tied_creditor_proposals_attributes,
                   :process_responsibles_attributes,
                   :justification, :justification_and_legal, :process,
-                  :purchase_solicitation_import_option,:department_id,
-                  :purchase_solicitations_attributes
+                  :purchase_solicitation_import_option,
+                  :purchase_solicitations_attributes, :purchasing_unit_id
 
   auto_increment :process, :by => :year
   auto_increment :modality_number, :by => [:year, :modality, :type_of_removal]
@@ -46,7 +46,7 @@ class LicitationProcess < Compras::Model
   has_enumeration_for :type_of_removal, create_helpers: { prefix: true }
   has_enumeration_for :purchase_solicitation_import_option
 
-  belongs_to :department
+  belongs_to :purchasing_unit
   belongs_to :contact, :class_name => 'Employee'
   belongs_to :judgment_form
   belongs_to :payment_method

@@ -1,12 +1,12 @@
 pt-BR:
   activerecord:
     models:
-      supply_order:
-        one: "Ordem de Fornecimento"
-        other: "Ordem de Fornecimento"
+      supply_request:
+        one: "Pedido de Fornecimento"
+        other: "Pedidos de Fornecimento"
 
     attributes:
-      supply_order:
+      supply_request:
         authorization_date: "Data da autorização"
         creditor: "Fornecedor"
         licitation_process: "Processo de compra"
@@ -17,4 +17,4 @@ pt-BR:
         quantity: "Quantidade"
         contract: "Contrato"
         number_nf: "Número NF"
-        supply_request: "Pedido de Fornecimento"
+        supply_request_status: "Situação"

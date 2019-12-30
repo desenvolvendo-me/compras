@@ -83,7 +83,9 @@ menu:
   - "Instrumentos Contratuais":
     - contracts
     - pledge_requests
-    - supply_orders
+    - "Fornecimento":
+      - supply_requests
+      - supply_orders
     - reserve_fund_requests
 
   - "Prestação de Contas":

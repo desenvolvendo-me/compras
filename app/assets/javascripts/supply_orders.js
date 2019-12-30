@@ -90,8 +90,9 @@ function setMaterialTotalAndBalance() {
     var licitation_process_id = $('#supply_order_licitation_process_id').val()
     var material_id = $('#supply_order_material_id').val()
     var purchase_solicitation_id = $('#supply_order_purchase_solicitation_id').val()
-    var quantity = $('#supply_order_quantity').val()
+    var contract_id = $('#supply_order_contract_id').val()
     var supply_order_id = $(window.location.href.split("/")).get(-2)
+    var quantity = $('#supply_order_quantity').val()
 
     if (licitation_process_id && purchase_solicitation_id && material_id && quantity) {
         $.ajax({
@@ -99,9 +100,10 @@ function setMaterialTotalAndBalance() {
             data: {
                 licitation_process_id: licitation_process_id,
                 material_id: material_id,
-                quantity: quantity,
+                purchase_solicitation_id: purchase_solicitation_id,
                 supply_order_id: supply_order_id,
-                purchase_solicitation_id: purchase_solicitation_id
+                contract_id: contract_id,
+                quantity: quantity
             },
             dataType: 'json',
             type: 'POST',
@@ -111,6 +113,43 @@ function setMaterialTotalAndBalance() {
         });
     }
 }
+
+function hasItemAlreadyAdded(item) {
+    var added = false;
+    $("table#items-records input.material-id").each(function () {
+        if ($(this).val() == item.material_id) {
+            added = true;
+            return added;
+        }
+    });
+    return added;
+}
+
+function mergeItem(item) {
+    var record = $('tr#material-id-' + item.material_id);
+    var quantity = record.find('input.quantity').val();
+    var totalQuantity = parsePtBrFloat(quantity) + item.quantity;
+
+    record.find("td.quantity").text(totalQuantity);
+    record.find('input.quantity').val(totalQuantity);
+
+}
+
+function renderItem(item) {
+    var itemBinds = {
+        uuid: _.uniqueId('fresh-'),
+        id: '',
+        material_id: item.material_id,
+        material: item.material.code + " - " + item.material.description,
+        quantity: item.quantity
+
+    };
+
+    var data = $('#licitation_process_items_template').mustache(itemBinds);
+
+    $('#items-records tbody').append(data).trigger("nestedGrid:afterAdd");
+}
+
 
 $(document).ready(function () {
     setModalUrlToLicitationProcess();
@@ -157,4 +196,51 @@ $(document).ready(function () {
             getPledgeItems(pledge.id);
         }
     });
+
+    if ($("#supply_order_updatabled").prop("checked")) {
+        $(".edit-nested-record").attr('class', "edit-nested-record hidden")
+        $(".remove-nested-record").attr('class', "remove-nested-record hidden")
+    }
+
+    if ($("#supply_order_number_nf").val() == "") {
+        $(".supply_order_submit_close").attr('data-disabled', "Desabilitado");
+    }
+
+    $("#supply_order_contract_id").on("change", function (event, contract) {
+        $("#supply_order_creditor").val(contract ? contract.creditor : '');
+    });
+
+    $(".supply_order_submit_close").click(function () {
+        $("#supply_order_updatabled").prop('checked', true);
+    });
+
+    $("#supply_order_number_nf").on("change", function () {
+        if ($("#supply_order_number_nf").val() == "") {
+            $(".supply_order_submit_close").attr('data-disabled', "Desabilitado");
+        } else {
+            $(".supply_order_submit_close").removeAttr('data-disabled');
+        }
+    });
+
+    $("#supply_order_supply_request_id").on("change", function (event, supplyRequest) {
+
+        $.ajax({
+            url: Routes.supply_requests_api_show,
+            data: {supply_request_id: supplyRequest.id},
+            dataType: 'json',
+            type: 'POST',
+            success: function (data) {
+                console.log(data)
+                $.each(data.items, function (i, item) {
+                    if (hasItemAlreadyAdded(item)) {
+                        mergeItem(item);
+                    } else {
+                        renderItem(item);
+                    }
+                });
+            }
+        });
+
+    });
+
 });

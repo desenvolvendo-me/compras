@@ -1,0 +1,5 @@
+pt-BR:
+  enumerations:
+    contract_balance_control_type:
+      solicitation: "Solicitação"
+      contract: "Contrato"

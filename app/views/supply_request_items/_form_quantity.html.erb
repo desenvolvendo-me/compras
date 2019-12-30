@@ -1,0 +1,20 @@
+<div class="supply_request_item">
+
+  <div class="yui3-g">
+    <div class="yui3-u-1-8">
+      <%= f.input :quantity, disabled: true, input_html: { value: quantity, class: 'numeric' } %>
+    </div>
+
+    <div class="yui3-u-1-6">
+      <%= f.input :authorized_quantity, disabled: true, input_html: { value: authorized_quantity, class: 'numeric' }  %>
+    </div>
+
+    <div class="yui3-u-1-6">
+      <%= f.input :balance, disabled: true, input_html: { value: balance, class: 'numeric' }  %>
+    </div>
+
+    <div class="yui3-u-1-6">
+      <%= f.input :authorization_quantity %>
+    </div>
+  </div>
+</div>

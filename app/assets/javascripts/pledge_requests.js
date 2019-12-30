@@ -121,7 +121,7 @@ $(document).ready(function () {
     setItemModalUrl();
 
     setBudgetAllocationSource(purchase_process.budget_allocations_ids);
-    setReserveFunds();
+    // setReserveFunds();
   });
 
   $('#pledge_request_creditor_id').on('change', function() {

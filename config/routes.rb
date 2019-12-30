@@ -138,6 +138,15 @@ Compras::Application.routes.draw do
     end
   end
 
+  resources :supply_requests do
+    collection do
+      get :modal
+      get :filter
+    end
+  end
+  match 'api/supply_requests/show' => 'supply_requests#api_show', as: :supply_requests_api_show
+
+
   resources :banks do
     collection do
       get :modal
@@ -908,6 +917,7 @@ Compras::Application.routes.draw do
           as: :minute_purchase_process_tradings
 
     match 'supply_orders/:supply_order_id' => 'supply_orders#show', as: :supply_orders
+    match 'supply_requests/:supply_request_id' => 'supply_requests#show', as: :supply_requests
   end
 
   namespace :api do

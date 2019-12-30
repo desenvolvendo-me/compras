@@ -109,7 +109,8 @@ module Compras
       'purchase_process_tradings_negotiations.js',
       'purchase_solicitations.js',
       'reserve_fund_requests.js',
-      'supply_orders.js'
+      'supply_orders.js',
+      'supply_requests.js'
     ]
 
     config.generators do |g|
