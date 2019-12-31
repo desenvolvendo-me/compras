@@ -1,0 +1,87 @@
+<div>
+  <table style="border: none;" class="records">
+    <thead>
+    <tr style="text-align: center;border: none;">
+      <td><h1><b> PEDIDO DE FORNECIMENTO - NÚMERO <%= resource.number %> </b></h1></td>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+</div>
+
+<div style="text-align: justify">
+  <span>
+    <p>
+      <b> DEPARTAMENTO: </b> <%= resource.department %>
+    </p>
+  </span>
+</div>
+<div style="text-align: justify">
+  <span>
+    <p>
+      <b> SOLICITANTE: </b> <%= resource.department_ṕerson %>
+    </p>
+  </span>
+</div>
+<div style="text-align: justify">
+  <span>
+    <p>
+      <b> CERTAME: </b>  <%= resource.licitation_process %>
+    </p>
+  </span>
+</div>
+<div style="text-align: justify">
+  <span>
+    <p>
+      <b> PROCESSO: </b>  <%= "#{resource.licitation_process.process}/#{resource.licitation_process.year}" unless resource.licitation_process.nil? %>
+    </p>
+  </span>
+</div>
+<div style="text-align: justify">
+  <span>
+    <p>
+      <b> OBJETO: </b> <%= resource.licitation_process.description unless resource.licitation_process.nil? %>
+    </p>
+  </span>
+</div>
+
+<br>
+<br>
+<br>
+<p>
+<h2><b> ITENS DA PEDIDO DE FORNECIMENTO </b></h2>
+<div>
+  <table class="records">
+    <thead>
+    <tr>
+      <th>ITEM</th>
+      <th>QUANTIDADE</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% resource.supply_request.items.each do |item| %>
+      <tr>
+        <td><%= item.material %></td>
+        <td><%= item.quantity %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+</p>
+
+
+<div style="text-align: justify">
+  <span>
+    <p>
+      <b> <h2> <%= resource.prefecture.titleize() %>, <%= l(Date.today, format: :long) %> </h2></b>
+    </p>
+  </span>
+</div>
+<br><br><br><br><br><br>
+<div class="signature" style="text-align: center">
+  <p>
+  <hr>
+  FUNCIONÁRIO <br><br><br><br><br><br>
+</div>
