@@ -1,5 +1,6 @@
 class SupplyOrder < Compras::Model
   include MaterialBalance
+  include NumberSupply
 
   attr_accessible :licitation_process_id, :creditor_id, :authorization_date,
                   :items_attributes, :year, :pledge_id, :purchase_solicitation_id,
@@ -43,4 +44,6 @@ class SupplyOrder < Compras::Model
       self.supply_request.update_attribute(:supply_request_status, status)
     end
   end
+
+
 end
