@@ -7,6 +7,7 @@ pt-BR:
 
     attributes:
       supply_request:
+        number: "Número"
         authorization_date: "Data da autorização"
         creditor: "Fornecedor"
         licitation_process: "Processo de compra"
