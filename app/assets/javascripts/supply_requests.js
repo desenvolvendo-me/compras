@@ -8,18 +8,6 @@ function setModalUrlToPurchaseSolicitation() {
     $('#supply_request_purchase_solicitation').data('modal-url', urlModal);
 }
 
-function setModalUrlToLicitationProcess() {
-    var urlModal = Routes.modal_licitation_processes,
-        params = {
-            by_ratification_and_year: $('#supply_request_year').val(),
-            licitation_process: {year: $('#supply_request_year').val()},
-            locked_fields: ['year']
-        };
-
-    urlModal += "?" + $.param(params);
-    $('#supply_request_licitation_process').data('modal-url', urlModal);
-}
-
 function setModalUrlToCreditor() {
     var urlModal = Routes.modal_creditors,
         params = {
@@ -115,16 +103,10 @@ function setMaterialTotalAndBalance() {
 }
 
 $(document).ready(function () {
-    setModalUrlToLicitationProcess();
     setModalUrlToCreditor();
     setPledgeSource();
     setModalUrlToPurchaseSolicitation();
     setMaterialTotalAndBalance();
-
-
-    $('form.supply_request').on('change', '#supply_request_year', function () {
-        setModalUrlToLicitationProcess();
-    });
 
     $('form.supply_request').on('change', '#supply_request_purchase_solicitation_id', function () {
         setDepartment();
