@@ -49,7 +49,7 @@ class PurchaseSolicitationsController < CrudController
 
   def filter_by_department(collection)
     departments = DepartmentPerson.where(user_id: current_user.id).pluck(:department_id)
-    collection.where("department_id IN (?) ", departments)
+    collection.where("compras_purchase_solicitations.department_id IN (?) ", departments)
   end
 
   def default_filters
