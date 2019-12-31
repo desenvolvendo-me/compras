@@ -1,13 +1,17 @@
 <div class="yui3-g">
-  <div class="yui3-u-1-3">
-    <%= f.input :year, :disabled => f.object.updatabled %>
+  <div class="yui3-u-1-4">
+    <%= f.input :number, :disabled => true %>
   </div>
 
-  <div class="yui3-u-1-3">
+  <div class="yui3-u-1-4">
+    <%= f.input :year, :disabled => f.object.year.present? %>
+  </div>
+
+  <div class="yui3-u-1-4">
     <%= f.input :licitation_process, :required => true, :disabled => f.object.updatabled %>
   </div>
 
-  <div class="yui3-u-1-3">
+  <div class="yui3-u-1-4">
     <%= f.input :modality_or_type_of_removal, as: :fake, disabled: true,
                 input_html: {value: f.object.decorator.modality_or_type_of_removal} %>
   </div>
@@ -24,9 +28,6 @@
 
   <div class="yui3-u-1-4">
     <%= f.input :pledge, :disabled => f.object.updatabled %>
-    <%#= f.input :pledge, as: :auto_complete, source_path: pledges_path,
-      hidden_field: :pledge_id %>
-    <%#= f.error :pledge_id %>
   </div>
 
   <div class="yui3-u-1-4">
