@@ -7,8 +7,10 @@ module NumberSupply
     validates :year, presence: true
 
     def set_number
+      klass = self.class.name
+
       number = 0
-      so = SupplyOrder.maximum(:number, conditions: ["compras_supply_orders.year = #{self.year}"])
+      so = klass.classify.constantize.maximum(:number, conditions: ["compras_#{klass.pluralize.underscore}.year = #{self.year}"])
       if so.present?
         number = so
       end

@@ -1,5 +1,6 @@
 class SupplyRequest < Compras::Model
   include MaterialBalance
+  include NumberSupply
 
   attr_accessible :licitation_process_id, :creditor_id, :authorization_date,
                   :items_attributes, :year, :purchase_solicitation_id,

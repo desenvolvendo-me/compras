@@ -1,9 +1,13 @@
 <div class="yui3-g">
   <div class="yui3-u-1-4">
-    <%= f.input :year, :disabled => f.object.updatabled %>
+    <%= f.input :number, :disabled => true %>
   </div>
 
-  <div class="yui3-u-1-2">
+  <div class="yui3-u-1-4">
+    <%= f.input :year, :disabled => f.object.year.present? %>
+  </div>
+
+  <div class="yui3-u-1-4">
     <%= f.input :licitation_process, :required => true, :disabled => f.object.updatabled %>
   </div>
 
