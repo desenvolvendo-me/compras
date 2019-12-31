@@ -1,5 +1,6 @@
 class SupplyRequestReport < Report
-  attr_accessor :supply_request_id
+
+  attr_accessor :supply_request_id, :current_user_id
 
   def supply_request
     SupplyRequest.find(self.supply_request_id.to_i)
@@ -13,8 +14,20 @@ class SupplyRequestReport < Report
     Prefecture.last.name
   end
 
+  def department
+    supply_request.purchase_solicitation.department
+  end
+
+  def department_ṕerson
+    User.find(self.current_user_id.to_i).name
+  end
+
   def creditor
     supply_request.creditor.person.name unless supply_request.creditor.nil? || supply_request.creditor.person.nil?
+  end
+
+  def number
+    supply_request.number
   end
 
   def get_delivery_location
