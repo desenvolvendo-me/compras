@@ -17,6 +17,10 @@ class SupplyOrderReport < Report
     supply_order.creditor.person.name unless supply_order.creditor.nil? || supply_order.creditor.person.nil?
   end
 
+  def number
+    supply_order.number
+  end
+
   def get_delivery_location
     if supply_order.licitation_process.purchase_solicitations.blank? || supply_order.licitation_process.purchase_solicitations.first.purchase_solicitation.delivery_location.nil?
       "Não Informado"
