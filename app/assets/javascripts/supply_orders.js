@@ -152,7 +152,7 @@ function renderItem(item) {
 
 
 $(document).ready(function () {
-    setModalUrlToLicitationProcess();
+    // setModalUrlToLicitationProcess();
     setModalUrlToCreditor();
     setPledgeSource();
     setModalUrlToPurchaseSolicitation();
@@ -160,7 +160,7 @@ $(document).ready(function () {
 
 
     $('form.supply_order').on('change', '#supply_order_year', function () {
-        setModalUrlToLicitationProcess();
+        // setModalUrlToLicitationProcess();
     });
 
     $('form.supply_order').on('change', '#supply_order_purchase_solicitation_id', function () {
