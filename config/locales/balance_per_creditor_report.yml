@@ -1,7 +1,7 @@
 pt-BR:
   activemodel:
     attributes:
-      licitation_process_balance_report:
+      balance_per_creditor_report:
         licitation_process: "Processo de Compra"
         creditor: "Fornecedor"
         department: "Departamento"

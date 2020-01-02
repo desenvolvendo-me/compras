@@ -77,7 +77,7 @@ pt-BR:
     report_purchased_item_prices: "Valores Praticados por Item"
     report_materials: "Materiais"
     report_licitation_processes: "Processos de Compra"
-    report_licitation_process_balance_new: "Relatório de Saldo"
+    report_balance_per_creditor_new: "Relatório de Saldo por Fornecedor"
     report_contracts: "Contratos"
     resource_sources: "Fonte de Recursos"
     signature_configurations: "Configurações de Assinatura"

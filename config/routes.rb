@@ -919,8 +919,8 @@ Compras::Application.routes.draw do
     match 'supply_orders/:supply_order_id' => 'supply_orders#show', as: :supply_orders
     match 'supply_requests/:supply_request_id' => 'supply_requests#show', as: :supply_requests
 
-    match 'licitation_process/balance/new' => 'licitation_process_balance#new', as: :licitation_process_balance_new
-    match 'licitation_process/balance' => 'licitation_process_balance#show', as: :licitation_process_balance
+    match 'balance_per_creditor/new' => 'balance_per_creditor#new', as: :balance_per_creditor_new
+    match 'balance_per_creditor' => 'balance_per_creditor#show', as: :balance_per_creditor
   end
 
   namespace :api do

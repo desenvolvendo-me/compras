@@ -54,10 +54,10 @@ pt-BR:
       one: 'Processo de Compra'
       other: 'Processos de Compra'
 
-  licitation_process_balance_reports:
-    licitation_process_balance_report:
-      one: 'Relatório de Saldo'
-      other: 'Relatório de Saldo'
+  balance_per_creditor_reports:
+    balance_per_creditor_report:
+      one: 'Relatório de Saldo por Fornecedor'
+      other: 'Relatório de Saldo por Fornecedor'
 
   purchased_item_price_reports:
     purchased_item_price_report:

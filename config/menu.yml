@@ -99,4 +99,4 @@ menu:
     - report_materials
     - report_contracts
     - report_licitation_processes
-    - report_licitation_process_balance_new
+    - report_balance_per_creditor_new
