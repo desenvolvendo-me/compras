@@ -921,6 +921,9 @@ Compras::Application.routes.draw do
 
     match 'balance_per_creditor/new' => 'balance_per_creditor#new', as: :balance_per_creditor_new
     match 'balance_per_creditor' => 'balance_per_creditor#show', as: :balance_per_creditor
+
+    match 'balance_per_process_and_contract/new' => 'balance_per_process_and_contract#new', as: :balance_per_process_and_contract_new
+    match 'balance_per_process_and_contract' => 'balance_per_process_and_contract#show', as: :balance_per_process_and_contract
   end
 
   namespace :api do
