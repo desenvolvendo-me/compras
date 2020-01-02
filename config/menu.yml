@@ -101,3 +101,4 @@ menu:
     - report_licitation_processes
     - report_balance_per_creditor_new
     - report_balance_per_process_and_contract_new
+    - report_total_products_purchase_new

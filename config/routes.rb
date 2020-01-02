@@ -924,6 +924,9 @@ Compras::Application.routes.draw do
 
     match 'balance_per_process_and_contract/new' => 'balance_per_process_and_contract#new', as: :balance_per_process_and_contract_new
     match 'balance_per_process_and_contract' => 'balance_per_process_and_contract#show', as: :balance_per_process_and_contract
+
+    match 'total_products_purchase/new' => 'total_products_purchase#new', as: :total_products_purchase_new
+    match 'total_products_purchase' => 'total_products_purchase#show', as: :total_products_purchase
   end
 
   namespace :api do

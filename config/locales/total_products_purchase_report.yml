@@ -1,0 +1,9 @@
+pt-BR:
+  activemodel:
+    attributes:
+      total_products_purchase_report:
+        licitation_process: "Processo de Compra"
+        creditor: "Fornecedor"
+        modality: "Modalidade"
+        period: "Intervalo"
+        unidade: "Orgão Solicitante"
