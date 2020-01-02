@@ -69,6 +69,11 @@ pt-BR:
       one: 'Relatório de Total de Produtos Comprados'
       other: 'Relatório de Total de Produtos Comprados'
 
+  total_purchase_per_element_and_nature_reports:
+    total_purchase_per_element_and_nature_report:
+      one: 'Relatório de Total de Compras por Elemento e Natureza'
+      other: 'Relatório de Total de Compras por Elemento e Natureza'
+
   purchased_item_price_reports:
     purchased_item_price_report:
       one: 'Relatório de valor praticado por item'

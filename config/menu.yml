@@ -102,3 +102,4 @@ menu:
     - report_balance_per_creditor_new
     - report_balance_per_process_and_contract_new
     - report_total_products_purchase_new
+    - report_total_purchase_per_element_and_nature_new

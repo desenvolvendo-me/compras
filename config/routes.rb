@@ -927,6 +927,9 @@ Compras::Application.routes.draw do
 
     match 'total_products_purchase/new' => 'total_products_purchase#new', as: :total_products_purchase_new
     match 'total_products_purchase' => 'total_products_purchase#show', as: :total_products_purchase
+
+    match 'total_purchase_per_element_and_nature/new' => 'total_purchase_per_element_and_nature#new', as: :total_purchase_per_element_and_nature_new
+    match 'total_purchase_per_element_and_nature' => 'total_purchase_per_element_and_nature#show', as: :total_purchase_per_element_and_nature
   end
 
   namespace :api do
