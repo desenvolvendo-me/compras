@@ -7,12 +7,8 @@
 <div>
   <table class="records">
     <thead>
-    <tr  style="text-align: center;">
-      <td width="15%"> </td>
-      <td width="55%"> RELATÓRIO DE PROCESSOS DE COMPRA </td>
-      <td width="30%">
-        <%= "De #{@process_date_start} a #{@process_date_end}"%>
-      </td>
+    <tr style="text-align: center;">
+      <td> RELATÓRIO DE SALDO POR FORNECEDOR</td>
     </tr>
     </thead>
     <tbody>
@@ -26,40 +22,66 @@
 
 <br>
 
-
-<div>
-  <table class="records">
-    <thead>
-    <tr>
-      <th>FORNECEDOR</th>
-      <th>CPF/CNPJ</th>
-      <th>PROCESSO DE COMPRA</th>
-      <th>MODALIDADE</th>
-      <th>OBJETO</th>
-      <th>HOMOLOGAÇÃO</th>
-      <th>DISPONIBILIDADE</th>
-      <th>ADQUIRIDO</th>
-    </tr>
-    </thead>
-    <tbody>
-    <% @total = 0 %>
-    <% @licitation_processes.each do |licitation_process| %>
-      <% @total += licitation_process.get_items_amount %>
-      <tr>
-        <td><%= licitation_process.creditors.first %></td>
-        <td><%= licitation_process.creditors.first.nil? ? '':licitation_process.creditors.first.person.cpf_cnpj %></td>
-        <td><%= "#{licitation_process.process}/#{licitation_process.year}" %></td>
-        <td><%= licitation_process.modality == '' || licitation_process.modality.nil? ? '' : LicitationProcess.human_attribute_name(licitation_process.modality) %></td>
-        <td><%= licitation_process.description %></td>
-        <td><%= date_mask(licitation_process.process_date) %></td>
-        <td><%= date_mask(licitation_process.notice_availability_date) %></td>
-        <td><%= licitation_process.decorator.get_items_amount %></td>
-      </tr>
-    <% end %>
-      <td colspan="6"></td>
-      <td><h2><b>Total</b></h2></td>
-      <td><%= @licitation_processes.first.nil? ? '0,00' : @licitation_processes.first.decorator.get_number_with_precision(@total)  %></td>
-    </tr>
-    </tbody>
-  </table>
-</div>
+<% @creditors.uniq.each do |creditor| %>
+  <div style="text-align: justify">
+  <span>
+    <p>
+      <b> FORNECEDOR: </b> <%= creditor.to_s %>
+    </p>
+  </span>
+  </div>
+  <% total_c_l = 0 %>
+  <% total_c_f = 0 %>
+  <% creditor.contracts.each do |contract| %>
+    <div style="text-align: justify">
+  <span>
+    <p>
+      <b> PROCESSO: </b> <%= contract.licitation_process.to_s %>
+      <b> CONTRATO: </b> <%= contract.to_s %>
+      <b> PRAZO DE VALIDADE: </b> <%= l(contract.end_date, format: :long) %>
+    </p>
+  </span>
+    </div>
+    <p>
+    <div>
+      <table class="records">
+        <thead>
+        <tr>
+          <th>MATERIAL</th>
+          <th>QUANTIDADE LICITADA</th>
+          <th>QUANTIDADE FORNECIDA</th>
+          <th>SALDO</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% total_i_l = 0 %>
+        <% total_i_f = 0 %>
+        <% contract.licitation_process.items.each do |item| %>
+          <% balance = SupplyOrder.total_balance(contract.licitation_process, SupplyOrder.where(contract_id: contract.id).first.purchase_solicitation, item.material, item.quantity, SupplyOrder.where(contract_id: contract.id).first, contract) %>
+          <% total_i_l += item.quantity %>
+          <% total_i_f += balance["total"] %>
+          <% total_c_l += item.quantity %>
+          <% total_c_f += balance["total"] %>
+          <tr>
+            <td><%= item.material %></td>
+            <td><%= item.quantity %></td>
+            <td><%= balance["total"] %></td>
+            <td><%= balance["balance"] %></td>
+          </tr>
+        <% end %>
+        </tbody>
+        <td colspan="1"></td>
+        <td><h2><b>Total Licitado: <%= total_i_l %></b></h2></td>
+        <td><h2><b>Total Fornecido: <%= total_i_f %></b></h2></td>
+        <td colspan="1"></td>
+      </table>
+    </div>
+    </p>
+  <% end %>
+  <span>
+    <p>
+      <b> Total Licitado: </b> <%= total_c_l %>
+      <b> Total Fornecido: </b> <%= total_c_f %>
+    </p>
+  </span>
+<% end %>

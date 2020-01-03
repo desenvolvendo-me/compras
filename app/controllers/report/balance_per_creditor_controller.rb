@@ -2,7 +2,7 @@ class Report::BalancePerCreditorController < Report::BaseController
   report_class BalancePerCreditorReport, :repository => BalancePerCreditorSearcher
 
   def show
-    @licitation_processes = get_balance_per_creditor
+    @creditors = get_balance_per_creditor
 
     @report = report_instance
 
@@ -16,12 +16,11 @@ class Report::BalancePerCreditorController < Report::BaseController
   private
 
   def get_balance_per_creditor
-
-    @licitation_processes = LicitationProcess.
-        where(balance_per_creditor_report_params.except!(:creditor_id))
+    @creditors = Creditor.joins(:contracts).
+        where(id: balance_per_creditor_report_params["creditor_id"]).where("compras_contracts.licitation_process_id = #{balance_per_creditor_report_params["licitation_process_id"]}")
   end
 
   def balance_per_creditor_report_params
-    @params = params.require(:balance_per_creditor_report).permit(:process, :creditor_id)
+    @params = params.require(:balance_per_creditor_report).permit(:licitation_process_id, :creditor_id)
   end
 end
