@@ -657,6 +657,7 @@ Compras::Application.routes.draw do
   end
 
   get 'purchase_solicitation/department' => 'purchase_solicitations#department', as: :purchase_solicitation_department
+  get 'purchase_solicitation/balance' => 'purchase_solicitations#balance', as: :purchase_solicitation_balance
 
   resources :purchase_solicitation_annuls, :only => [:new, :create, :edit, :update]
 

@@ -121,8 +121,34 @@ function setCreditor() {
     }
 }
 
+function setPurchaseSolicitationBalance() {
+    var purchase_process_id = $('#pledge_request_purchase_process_id').val()
+    var purchase_solicitation_id = $('#pledge_request_purchase_solicitation_id').val()
+
+    if (purchase_solicitation_id) {
+        $.ajax({
+            url: Routes.purchase_solicitation_balance,
+            data: {
+                purchase_solicitation_id: purchase_solicitation_id,
+                purchase_process_id: purchase_process_id
+            },
+            dataType: 'json',
+            type: 'GET',
+            success: function (data) {
+                $('#pledge_request_purchase_solicitation_balance').val(data["balance"]);
+
+            }
+        });
+    }
+}
+
 $(document).ready(function () {
     setCreditor();
+    setPurchaseSolicitationBalance();
+
+    $('#pledge_request_purchase_solicitation_id').on('change', function () {
+        setPurchaseSolicitationBalance();
+    });
 
     $('#pledge_request_contract_id').on('change', function () {
         setCreditor();
