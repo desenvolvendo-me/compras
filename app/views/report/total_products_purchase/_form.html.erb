@@ -1,0 +1,22 @@
+<div class="yui3-g">
+  <div class="yui3-u-1-3">
+    <%= f.input :licitation_process, as: :modal, data_url: modal_licitation_processes_url,
+                hidden_field: :licitation_process_id, :include_blank => true %>
+  </div>
+
+  <div class="yui3-u-1-3">
+    <%= f.input :creditor, as: :modal, data_url: modal_creditors_url,
+                hidden_field: :creditor_id, :include_blank => true %>
+  </div>
+
+  <div class="yui3-u-1-3">
+    <%= f.input :department, as: :modal, data_url: modal_departments_url,
+                hidden_field: :department_id, :include_blank => true %>
+  </div>
+</div>
+
+<script>
+    $(function () {
+        $('#new_total_products_purchase_report')[0].reset();
+    });
+</script>
