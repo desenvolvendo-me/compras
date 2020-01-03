@@ -20,6 +20,12 @@ class ContractsController < CrudController
     end
   end
 
+  def plegde_request
+    contract = Contract.find(params["contract_id"])
+
+    render :json => {creditor: contract.creditors.first.person.name, balance: "100", value: contract.contract_value}
+  end
+
   protected
 
   def default_filters

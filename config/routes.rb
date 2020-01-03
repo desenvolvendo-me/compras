@@ -266,6 +266,8 @@ Compras::Application.routes.draw do
     end
   end
 
+  post 'contract/plegde_request' => 'contracts#plegde_request', as: :contracts_plegde_request
+
   resources :contract_termination_annuls, :only => [:new, :create, :edit, :update]
 
   get 'demands/modal', :as => :modal_demands
