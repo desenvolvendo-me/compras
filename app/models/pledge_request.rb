@@ -53,22 +53,22 @@ class PledgeRequest < Compras::Model
     where {|query| query.purchase_process_id.eq(purchase_process_id)}
   end
 
-  before_save :set_amount
-
-  def set_amount
-    self.amount = 0
-    unless self.purchase_process.nil?
-      self.items.each do |item|
-        @pu_pr = PurchaseProcessItem.where(
-            material_id:item.material_id,
-            licitation_process_id:self.purchase_process.id
-        )
-        if @pu_pr.count==1
-          self.amount += item.quantity * @pu_pr[0].unit_price
-        end
-      end
-    end
-  end
+  # before_save :set_amount
+  #
+  # def set_amount
+  #   self.amount = 0
+  #   unless self.purchase_process.nil?
+  #     self.items.each do |item|
+  #       @pu_pr = PurchaseProcessItem.where(
+  #           material_id:item.material_id,
+  #           licitation_process_id:self.purchase_process.id
+  #       )
+  #       if @pu_pr.count==1
+  #         self.amount += item.quantity * @pu_pr[0].unit_price
+  #       end
+  #     end
+  #   end
+  # end
 
   def to_s
     "#{self.contract.creditors.first unless self.contract.nil? || self.contract.creditors.blank? } - #{purchase_process}"

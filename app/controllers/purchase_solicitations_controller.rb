@@ -45,15 +45,25 @@ class PurchaseSolicitationsController < CrudController
     render :json => {description: PurchaseSolicitation.find(params['purchase_solicitation_id']).department.to_s}
   end
 
+  def balance
+    purchase_solicitation = LicitationProcess.find(params["purchase_process_id"]).purchase_solicitations.where(purchase_solicitation_id: params["purchase_solicitation_id"]).first
+    pledge_requests = PledgeRequest.joins(:items).where("compras_pledge_request_items.purchase_solicitation_id = #{params["purchase_solicitation_id"]}")
+
+    total_expected_value = purchase_solicitation.expected_value
+    total_pledge = pledge_requests.sum(:amount)
+
+    render :json => {balance: total_expected_value - total_pledge}
+  end
+
   protected
 
   def filter_by_department(collection)
     departments = DepartmentPerson.where(user_id: current_user.id).pluck(:department_id)
-    collection.where("department_id IN (?) ", departments)
+    collection.where("compras_purchase_solicitations.department_id IN (?) ", departments)
   end
 
   def default_filters
-    {:accounting_year => lambda { Date.current.year }}
+    {:accounting_year => lambda {Date.current.year}}
   end
 
   def interpolation_options

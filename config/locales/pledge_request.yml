@@ -8,22 +8,22 @@ pt-BR:
     attributes:
       pledge_request:
         accounting_account: 'Conta patrimonial'
-        amount: "Valor do empenho"
+        amount: "Valor do Empenho"
         budget_allocation: "Dotação"
-        budget_allocation_balance: "Saldo da dotação"
+        budget_allocation_balance: "Saldo da Dotação"
         contract: "Contrato"
         creditor: "Credor"
         descriptor: "Descritor"
-        emission_date: "Data de emissão"
+        emission_date: "Data de Emissão"
         expense_nature: "Desdobramento"
         historic_complement: "Histórico"
-        item_replicated_value: "Valor do empenho"
+        item_replicated_value: "Valor do Empenho"
         items_total_value: "Valor total dos itens"
         purchase_process: 'Processo de Compra'
         purchase_solicitation: 'Solicitação de Compra'
         reserve_fund: "Reserva de dotação"
         reserve_fund_id: "Reserva de dotação"
-        reserve_fund_amount: "Saldo reserva"
+        reserve_fund_amount: "Saldo Reserva"
         material: "Item"
         quantity: "Quantidade"
         expense: "Despesa"
