@@ -155,7 +155,7 @@ $(document).ready(function () {
     $('#pledge_request_reserve_fund_id').on('change', function () {
         var option = $(this).find('option:selected');
 
-        $('#pledge_request_reserve_fund_amount').val(option.data('amount'));
+        // $('#pledge_request_reserve_fund_amount').val(option.data('amount'));
     });
 
     $('#pledge_request_budget_allocation_id').on('change', function (event, budget_allocation) {
