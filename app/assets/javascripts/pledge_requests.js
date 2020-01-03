@@ -115,6 +115,7 @@ function setCreditor() {
             success: function (data) {
                 $('#pledge_request_creditor_show').val(data["creditor"]);
                 $('#pledge_request_balance_show').val(data["balance"]);
+                $('#pledge_request_value_show').val(data["value"]);
             }
         });
     }

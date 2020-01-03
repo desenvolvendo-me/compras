@@ -15,7 +15,7 @@ class ContractsController < CrudController
 
     respond_to do |format|
       format.json do
-        render :json => { :sequential => Contract.next_sequential(params[:year]) }
+        render :json => {:sequential => Contract.next_sequential(params[:year])}
       end
     end
   end
@@ -23,13 +23,17 @@ class ContractsController < CrudController
   def plegde_request
     contract = Contract.find(params["contract_id"])
 
-    render :json => {creditor: contract.creditors.first.person.name, balance: "100", value: contract.contract_value}
+    plegde_request_total = PledgeRequest.where(contract_id: params["contract_id"]).sum(:amount)
+
+    balance = contract.contract_value - plegde_request_total
+
+    render :json => {creditor: contract.creditors.first.person.name, balance: balance, value: contract.contract_value}
   end
 
   protected
 
   def default_filters
-    { :year => lambda { Date.current.year } }
+    {:year => lambda {Date.current.year}}
   end
 
   def create_resource(object)
