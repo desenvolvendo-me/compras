@@ -16,12 +16,16 @@ class Report::TotalProductsPurchaseController < Report::BaseController
   private
 
   def get_total_products_purchase
+    @creditor = total_products_purchase_report_params["creditor_id"]
+    @material = total_products_purchase_report_params["material_id"]
 
-    @licitation_processes = LicitationProcess.
-        where(total_products_purchase_report_params.except!(:creditor_id))
+    @creditors = Creditor.joins(licitation_process_ratification_items: :purchase_process_item)
+    @creditors = @creditors.where(id: @creditor) if @creditor.present?
+    @creditors = @creditors.where("compras_purchase_process_items.material_id = #{@material}") if @material.present?
+    @creditors
   end
 
   def total_products_purchase_report_params
-    @params = params.require(:total_products_purchase_report).permit(:process, :creditor_id)
+    @params = params.require(:total_products_purchase_report).permit(:material_id, :creditor_id)
   end
 end
