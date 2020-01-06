@@ -1,12 +1,18 @@
 module Report::BalanceHelper
 
   def self.get_balance(contract, item)
-    supple_order = SupplyOrder.where(contract_id: contract.id).first
-    if supple_order
-      balance = SupplyOrder.total_balance(contract.licitation_process, supple_order.purchase_solicitation, item.material, item.quantity, supple_order, contract)
-    else
-      balance = {"total" => 0, "balance" => item.quantity}
-    end
+    balance = {"total" => 0, "balance" => 0}
+
+    supply_orders = SupplyOrder.joins(:contract, :items)
+    supply_orders = supply_orders.where("compras_supply_order_items.material_id = #{item.material.id}")
+    supply_orders = supply_orders.where(contract_id: contract.id)
+
+
+    total = supply_orders.sum(:quantity) if supply_orders.any?
+
+    balance["total"] = total.to_i
+    balance["balance"] = item.quantity - total.to_i
+
     balance
   end
 
