@@ -32,7 +32,7 @@
   </div>
   <% total_c_l = 0 %>
   <% total_c_f = 0 %>
-  <% BalanceHelper.get_contracts(licitation_process, @contract, @creditor).each do |contract| %>
+  <% Report::BalancePerProcessAndContractHelper.get_contracts(licitation_process, @contract, @creditor).each do |contract| %>
     <div style="text-align: justify">
   <span>
     <p>
@@ -57,7 +57,7 @@
         <% total_i_l = 0 %>
         <% total_i_f = 0 %>
         <% contract.licitation_process.items.each do |item| %>
-          <% balance = BalanceHelper.get_balance(contract, item) %>
+          <% balance = Report::BalanceHelper.get_balance(contract, item) %>
           <% total_i_l += item.quantity %>
           <% total_i_f += balance["total"] %>
           <% total_c_l += item.quantity %>

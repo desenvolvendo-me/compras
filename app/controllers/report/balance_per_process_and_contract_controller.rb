@@ -1,5 +1,7 @@
 class Report::BalancePerProcessAndContractController < Report::BaseController
-  include BalanceHelper
+  include Report::BalanceHelper
+  include Report::BalancePerProcessAndContractHelper
+
   report_class BalancePerProcessAndContractReport, :repository => BalancePerProcessAndContractSearcher
 
   def show
