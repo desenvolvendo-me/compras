@@ -7,12 +7,8 @@
 <div>
   <table class="records">
     <thead>
-    <tr  style="text-align: center;">
-      <td width="15%"> </td>
-      <td width="55%"> RELATÓRIO DE PROCESSOS DE COMPRA </td>
-      <td width="30%">
-        <%= "De #{@process_date_start} a #{@process_date_end}"%>
-      </td>
+    <tr style="text-align: center;">
+      <td> RELATÓRIO DE TOTAL DE COMPRAS POR ELEMENTO E NATUREZA</td>
     </tr>
     </thead>
     <tbody>
@@ -31,35 +27,23 @@
   <table class="records">
     <thead>
     <tr>
-      <th>FORNECEDOR</th>
-      <th>CPF/CNPJ</th>
-      <th>PROCESSO DE COMPRA</th>
-      <th>MODALIDADE</th>
-      <th>OBJETO</th>
-      <th>HOMOLOGAÇÃO</th>
-      <th>DISPONIBILIDADE</th>
-      <th>ADQUIRIDO</th>
+      <th>PRODUTO</th>
+      <th>ELEMENTO</th>
+      <th>NATUREZA</th>
+      <th>VALOR</th>
     </tr>
     </thead>
     <tbody>
     <% @total = 0 %>
-    <% @licitation_processes.each do |licitation_process| %>
-      <% @total += licitation_process.get_items_amount %>
+    <% @materiais.each do |material| %>
       <tr>
-        <td><%= licitation_process.creditors.first %></td>
-        <td><%= licitation_process.creditors.first.nil? ? '':licitation_process.creditors.first.person.cpf_cnpj %></td>
-        <td><%= "#{licitation_process.process}/#{licitation_process.year}" %></td>
-        <td><%= licitation_process.modality == '' || licitation_process.modality.nil? ? '' : LicitationProcess.human_attribute_name(licitation_process.modality) %></td>
-        <td><%= licitation_process.description %></td>
-        <td><%= date_mask(licitation_process.process_date) %></td>
-        <td><%= date_mask(licitation_process.notice_availability_date) %></td>
-        <td><%= licitation_process.decorator.get_items_amount %></td>
+        <td width="30%"><%= material.to_s %></td>
+        <td><%= %></td>
+        <td><%= material.purchase_solicitation_items.first.purchase_solicitation.purchase_form.expense.nature_expense %></td>
+        <td width="10%"><%= material.purchase_process_items.first.unit_price %></td>
+
       </tr>
     <% end %>
-      <td colspan="6"></td>
-      <td><h2><b>Total</b></h2></td>
-      <td><%= @licitation_processes.first.nil? ? '0,00' : @licitation_processes.first.decorator.get_number_with_precision(@total)  %></td>
-    </tr>
     </tbody>
   </table>
 </div>

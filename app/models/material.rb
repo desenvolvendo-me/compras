@@ -20,7 +20,7 @@ class Material < Unico::Model
 
   after_validation :set_code
 
-  # has_many :purchase_process_items, :dependent => :restrict
+  has_many :purchase_process_items, :dependent => :restrict
   has_many :purchase_solicitation_items, :dependent => :restrict
   # has_many :price_collection_items, :dependent => :restrict
   # has_many :creditor_materials, :dependent => :restrict
@@ -50,9 +50,9 @@ class Material < Unico::Model
     where { code.like("#{q}%") | description.like("#{q}%") }
   }
 
-  # scope :by_licitation_process, ->(licitation_process_id) do
-  #   where { |query| query.licitation_process_id.eq(licitation_process_id) }
-  # end
+  scope :by_licitation_process_status, ->(status) do
+    joins(items: [:licitation_process]).where("compras_licitation_processes.status = '#{status}'").uniq
+  end
 
   scope :by_material_class_id, ->(material_class_id) do
     where { |query| query.material_class_id.eq(material_class_id) }
