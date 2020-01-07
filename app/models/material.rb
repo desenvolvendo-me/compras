@@ -20,7 +20,7 @@ class Material < Unico::Model
 
   after_validation :set_code
 
-  # has_many :purchase_process_items, :dependent => :restrict
+  has_many :purchase_process_items, :dependent => :restrict
   has_many :purchase_solicitation_items, :dependent => :restrict
   # has_many :price_collection_items, :dependent => :restrict
   # has_many :creditor_materials, :dependent => :restrict
