@@ -16,12 +16,13 @@ class Report::TotalPurchasePerElementAndNatureController < Report::BaseControlle
   private
 
   def get_total_purchase_per_element_and_nature
-
-    @licitation_processes = LicitationProcess.
-        where(total_purchase_per_element_and_nature_report_params.except!(:creditor_id))
+    nature_expense_id = total_purchase_per_element_and_nature_report_params["nature_expense_id"]
+    @materiais = Material.joins(purchase_solicitation_items: [purchase_solicitation: [purchase_form: [expense: :nature_expense]]])
+    @materiais = @materiais.where("compras_expenses.nature_expense_id = #{nature_expense_id}") if nature_expense_id.present?
+    @materiais
   end
 
   def total_purchase_per_element_and_nature_report_params
-    @params = params.require(:total_purchase_per_element_and_nature_report).permit(:process, :creditor_id)
+    @params = params.require(:total_purchase_per_element_and_nature_report).permit(:nature_expense_id)
   end
 end
