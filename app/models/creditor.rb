@@ -35,88 +35,96 @@ class Creditor < Persona::Creditor
 
   before_save :clean_fields_when_is_no_autonomous
 
-  scope :by_licitation_process, lambda { |q|
+  scope :by_licitation_process, lambda {|q|
 
   }
 
-  scope :term, lambda { |q|
-    joins { person }.
-        where { person.name.like("#{q}%") }
+  scope :by_purchasing_unit, lambda {|q|
+    department_ids = DepartmentPerson.where(user_id: q).pluck(:department_id)
+    purchasing_unit_ids = Department.where(id: department_ids).pluck(:purchasing_unit_id)
+    licitation_process_ids = LicitationProcess.where(purchasing_unit_id: purchasing_unit_ids).pluck(:id)
+    creditor_ids = Contract.joins(:creditors).where(licitation_process_id: licitation_process_ids).pluck("compras_contracts_unico_creditors.creditor_id").uniq
+    where(id: creditor_ids)
   }
 
-  scope :by_id, lambda { |id|
-    where { |creditor| creditor.id.eq(id) }
+  scope :term, lambda {|q|
+    joins {person}.
+        where {person.name.like("#{q}%")}
+  }
+
+  scope :by_id, lambda {|id|
+    where {|creditor| creditor.id.eq(id)}
   }
 
   scope :accreditation_purchase_process_id, ->(purchase_process_id) do
-    joins { purchase_process_accreditation_creditors.purchase_process_accreditation }.
-    where {
-      purchase_process_accreditation_creditors.purchase_process_accreditation.licitation_process_id.eq(purchase_process_id)
-    }
+    joins {purchase_process_accreditation_creditors.purchase_process_accreditation}.
+        where {
+          purchase_process_accreditation_creditors.purchase_process_accreditation.licitation_process_id.eq(purchase_process_id)
+        }
   end
 
-  scope :enabled_by_licitation, lambda { | licitation_process_id |
-    joins { bidders }.
-    where { (bidders.licitation_process_id.eq licitation_process_id) & (bidders.enabled.eq 't') }
+  scope :enabled_by_licitation, lambda {|licitation_process_id|
+    joins {bidders}.
+        where {(bidders.licitation_process_id.eq licitation_process_id) & (bidders.enabled.eq 't')}
   }
 
   scope :winner_without_disqualifications, -> {
-    joins { purchase_process_creditor_proposals }.
-    where {
-      (purchase_process_creditor_proposals.ranking.eq 1) &
-      (purchase_process_creditor_proposals.disqualified.not_eq 't')
-    }.uniq
+    joins {purchase_process_creditor_proposals}.
+        where {
+          (purchase_process_creditor_proposals.ranking.eq 1) &
+              (purchase_process_creditor_proposals.disqualified.not_eq 't')
+        }.uniq
   }
 
-  scope :enabled_or_benefited_by_purchase_process_id, -> purchase_process_id  do
-    joins { bidders.creditor.person.personable(Company).outer.company_size.outer.extended_company_size.outer }.
-    where {
-      (bidders.enabled.eq('t') | compras_extended_company_sizes.benefited.eq(true)) &
-      bidders.licitation_process_id.eq(purchase_process_id)
-    }.uniq
+  scope :enabled_or_benefited_by_purchase_process_id, -> purchase_process_id do
+    joins {bidders.creditor.person.personable(Company).outer.company_size.outer.extended_company_size.outer}.
+        where {
+          (bidders.enabled.eq('t') | compras_extended_company_sizes.benefited.eq(true)) &
+              bidders.licitation_process_id.eq(purchase_process_id)
+        }.uniq
   end
 
-  scope :without_direct_purchase_ratification, lambda { |licitation_process_id|
+  scope :without_direct_purchase_ratification, lambda {|licitation_process_id|
     creditor_ids = LicitationProcess.find(licitation_process_id).licitation_process_ratification_creditor_ids
 
-    scoped.select { 'unico_creditors.*, unico_people.name' }.
-    joins { purchase_process_items.licitation_process.licitation_process_ratifications.outer }.
-    joins { person }.
-    where {
-      purchase_process_items.licitation_process_id.eq(licitation_process_id) &
-      purchase_process_items.creditor_id.not_in(creditor_ids)
-    }.uniq
+    scoped.select {'unico_creditors.*, unico_people.name'}.
+        joins {purchase_process_items.licitation_process.licitation_process_ratifications.outer}.
+        joins {person}.
+        where {
+          purchase_process_items.licitation_process_id.eq(licitation_process_id) &
+              purchase_process_items.creditor_id.not_in(creditor_ids)
+        }.uniq
   }
 
   scope :by_ratification_and_licitation_process_id, ->(licitation_process_id) do
-    joins { licitation_process_ratifications }.
-    where { |query| query.licitation_process_ratifications.licitation_process_id.eq(licitation_process_id) }
+    joins {licitation_process_ratifications}.
+        where {|query| query.licitation_process_ratifications.licitation_process_id.eq(licitation_process_id)}
   end
 
-  scope :without_licitation_ratification, lambda { |licitation_process_id|
+  scope :without_licitation_ratification, lambda {|licitation_process_id|
     creditor_ids = LicitationProcess.find(licitation_process_id).licitation_process_ratification_creditor_ids
 
-    scoped.select { 'unico_creditors.*, unico_people.name' }.
-    joins { bidders.licitation_process.licitation_process_ratifications.outer }.
-    joins { person }.
-    where {
-      bidders.licitation_process_id.eq(licitation_process_id) &
-      bidders.creditor_id.not_in(creditor_ids)
-    }.uniq
+    scoped.select {'unico_creditors.*, unico_people.name'}.
+        joins {bidders.licitation_process.licitation_process_ratifications.outer}.
+        joins {person}.
+        where {
+          bidders.licitation_process_id.eq(licitation_process_id) &
+              bidders.creditor_id.not_in(creditor_ids)
+        }.uniq
   }
 
-  scope :won_calculation, lambda { |licitation_process_id|
-    joins { bidders.licitation_process.creditor_proposals }.
-    where { |query|
-      query.bidders.licitation_process.creditor_proposals.licitation_process_id.eq(licitation_process_id) &
-      query.bidders.licitation_process.creditor_proposals.ranking.eq(1)
-    }.
-    where { '"unico_creditors".id = "compras_purchase_process_creditor_proposals".creditor_id' }.
-    uniq
+  scope :won_calculation, lambda {|licitation_process_id|
+    joins {bidders.licitation_process.creditor_proposals}.
+        where {|query|
+          query.bidders.licitation_process.creditor_proposals.licitation_process_id.eq(licitation_process_id) &
+              query.bidders.licitation_process.creditor_proposals.ranking.eq(1)
+        }.
+        where {'"unico_creditors".id = "compras_purchase_process_creditor_proposals".creditor_id'}.
+        uniq
   }
 
-  scope :won_calculation_for_trading, lambda{ |licitation_process_id|
-    creditor_ids = LicitationProcess.find(licitation_process_id).trading_items.map { |item|
+  scope :won_calculation_for_trading, lambda {|licitation_process_id|
+    creditor_ids = LicitationProcess.find(licitation_process_id).trading_items.map {|item|
       TradingItemWinner.new(item).creditor.id
     }
 
@@ -129,8 +137,8 @@ class Creditor < Persona::Creditor
     if purchase_process.licitation?
       if purchase_process.trading?
         query = scoped.
-          accreditation_purchase_process_id(purchase_process.id).
-          won_calculation_for_trading(purchase_process.id)
+            accreditation_purchase_process_id(purchase_process.id).
+            won_calculation_for_trading(purchase_process.id)
       else
         query = query.won_calculation(purchase_process.id)
       end
@@ -141,32 +149,32 @@ class Creditor < Persona::Creditor
 
   def representatives?
     if self.representative_people.blank?
-      errors.add(:representatives,:blank)
+      errors.add(:representatives, :blank)
     end
   end
 
   def licitation_processes?
     if self.licitation_processes.where(status: ["in_progress", "waiting_for_open"]).any?
-      errors.add(:representatives,"Não poder ser alterado, pois existem licitações com o status Em Andamento ou Aguardando Abertura com o credor")
+      errors.add(:representatives, "Não poder ser alterado, pois existem licitações com o status Em Andamento ou Aguardando Abertura com o credor")
     end
   end
 
   def proposal_by_item(purchase_process_id, item)
     purchase_process_creditor_proposals.
-      by_item_id(item.id).
-      licitation_process_id(purchase_process_id).
-      first
+        by_item_id(item.id).
+        licitation_process_id(purchase_process_id).
+        first
   end
 
   def proposal_by_lot(purchase_process_id, lot)
     purchase_process_creditor_proposals.
-      licitation_process_id(purchase_process_id).
-      by_lot(lot).
-      first
+        licitation_process_id(purchase_process_id).
+        by_lot(lot).
+        first
   end
 
   def first_representative_individual
-    representative_people.joins { personable(Individual) }.first
+    representative_people.joins {personable(Individual)}.first
   end
 
   def destroy

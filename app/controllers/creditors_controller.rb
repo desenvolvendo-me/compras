@@ -8,4 +8,6 @@ class CreditorsController < CrudController
   has_scope :without_licitation_ratification, allow_blank: true
   has_scope :enabled_by_licitation, allow_blank: true
   has_scope :by_ratification_and_licitation_process_id, allow_blank: true
+  has_scope :by_purchasing_unit, :allow_blank => true
+
 end

@@ -1,0 +1,49 @@
+<%
+  def date_mask(d)
+    return d.strftime("%d/%m/%Y") unless d.nil?
+  end
+%>
+
+<div>
+  <table class="records">
+    <thead>
+    <tr style="text-align: center;">
+      <td> RELATÓRIO DE TOTAL DE COMPRAS POR ELEMENTO E NATUREZA</td>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+</div>
+
+<div style="text-align: justify">
+
+</div>
+
+<br>
+
+
+<div>
+  <table class="records">
+    <thead>
+    <tr>
+      <th>PRODUTO</th>
+      <th>ELEMENTO</th>
+      <th>NATUREZA</th>
+      <th>VALOR</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @total = 0 %>
+    <% @materiais.each do |material| %>
+      <tr>
+        <td width="30%"><%= material.to_s %></td>
+        <td><%= %></td>
+        <td><%= material.purchase_solicitation_items.first.purchase_solicitation.purchase_form.expense.nature_expense %></td>
+        <td width="10%"><%= material.purchase_process_items.first.unit_price %></td>
+
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,71 @@
+<%
+  def date_mask(d)
+    return d.strftime("%d/%m/%Y") unless d.nil?
+  end
+%>
+
+<div>
+  <table class="records">
+    <thead>
+    <tr style="text-align: center;">
+      <td> RELATÓRIO DE TOTAL DE PRODUTOS COMPRADOS</td>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+</div>
+
+<div style="text-align: justify">
+
+</div>
+
+<br>
+<% total_c_p = 0 %>
+
+<% @creditors.uniq.each do |creditor| %>
+  <div style="text-align: justify">
+  <span>
+    <p>
+      <b> FORNECEDOR: </b> <%= creditor.to_s %>
+    </p>
+  </span>
+  </div>
+  <div style="text-align: justify">
+  </div>
+  <p>
+  <div>
+    <table class="records">
+      <thead>
+      <tr>
+        <th width="50%">MATERIAL</th>
+        <th width="50%">VALOR</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% total_i_p = 0 %>
+      <% Report::TotalProductsPurchaseHelper.get_items(creditor, @material).each do |item| %>
+
+        <% total_c_p += item.unit_price %>
+        <% total_i_p += item.unit_price %>
+        <tr>
+          <td><%= item.material %></td>
+          <td><%= item.unit_price %></td>
+        </tr>
+      <% end %>
+      </tbody>
+      <td colspan="1"></td>
+      <td><h2><b>Total: <%= total_i_p %></b></h2></td>
+    </table>
+  </div>
+  </p>
+
+<% end %>
+<span>
+    <p>
+      <b> TOTAL: </b> <%= total_c_p %>
+    </p>
+  </span>
+<br>
+<br>
+<br>

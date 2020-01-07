@@ -266,6 +266,8 @@ Compras::Application.routes.draw do
     end
   end
 
+  post 'contract/plegde_request' => 'contracts#plegde_request', as: :contracts_plegde_request
+
   resources :contract_termination_annuls, :only => [:new, :create, :edit, :update]
 
   get 'demands/modal', :as => :modal_demands
@@ -655,6 +657,7 @@ Compras::Application.routes.draw do
   end
 
   get 'purchase_solicitation/department' => 'purchase_solicitations#department', as: :purchase_solicitation_department
+  get 'purchase_solicitation/balance' => 'purchase_solicitations#balance', as: :purchase_solicitation_balance
 
   resources :purchase_solicitation_annuls, :only => [:new, :create, :edit, :update]
 
@@ -918,6 +921,18 @@ Compras::Application.routes.draw do
 
     match 'supply_orders/:supply_order_id' => 'supply_orders#show', as: :supply_orders
     match 'supply_requests/:supply_request_id' => 'supply_requests#show', as: :supply_requests
+
+    match 'balance_per_creditor/new' => 'balance_per_creditor#new', as: :balance_per_creditor_new
+    match 'balance_per_creditor' => 'balance_per_creditor#show', as: :balance_per_creditor
+
+    match 'balance_per_process_and_contract/new' => 'balance_per_process_and_contract#new', as: :balance_per_process_and_contract_new
+    match 'balance_per_process_and_contract' => 'balance_per_process_and_contract#show', as: :balance_per_process_and_contract
+
+    match 'total_products_purchase/new' => 'total_products_purchase#new', as: :total_products_purchase_new
+    match 'total_products_purchase' => 'total_products_purchase#show', as: :total_products_purchase
+
+    match 'total_purchase_per_element_and_nature/new' => 'total_purchase_per_element_and_nature#new', as: :total_purchase_per_element_and_nature_new
+    match 'total_purchase_per_element_and_nature' => 'total_purchase_per_element_and_nature#show', as: :total_purchase_per_element_and_nature
   end
 
   namespace :api do

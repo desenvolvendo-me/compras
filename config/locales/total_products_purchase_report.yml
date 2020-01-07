@@ -1,0 +1,7 @@
+pt-BR:
+  activemodel:
+    attributes:
+      total_products_purchase_report:
+        material: "Material"
+        creditor: "Fornecedor"
+        period: "Intervalo"

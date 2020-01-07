@@ -1,0 +1,5 @@
+pt-BR:
+  activemodel:
+    attributes:
+      total_purchase_per_element_and_nature_report:
+        nature_expense: "Natureza de Despesa"
