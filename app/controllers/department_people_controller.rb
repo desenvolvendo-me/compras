@@ -1,3 +1,0 @@
-class DepartmentPeopleController < CrudController
-
-end
