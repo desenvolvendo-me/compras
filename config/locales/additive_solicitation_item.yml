@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      additive_solicitation_item:
+        one: "Solicitação de Aditivo"
+        other: "Solicitações de Aditivos"
+
+    attributes:
+      additive_solicitation_item:
+        material: "Material"
+        quantidade: "Quantidade"
