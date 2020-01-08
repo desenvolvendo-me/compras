@@ -23,7 +23,7 @@
     <div class="yui3-u-1-6">
       <%= button_tag 'Adicionar', type: :button,
                      :class => 'button add-nested-record field-without-label',
-                     'data-template' => 'licitation_process_items_template',
+                     'data-template' => 'supply_order_items_template',
                      'data-records' => 'items-records',
                      'data-disabled' => not_updateable_message %>
     </div>
@@ -52,7 +52,7 @@
     </tbody>
   </table>
 
-  <%= mustache "licitation_process_items_template" do %>
+  <%= mustache "supply_order_items_template" do %>
     <%= f.association :items_attributes, :collection => f.object.items.build, :index => '{{uuid}}' do |p| %>
       <%= render 'supply_order_items/form',
                  id: '{{id}}',
