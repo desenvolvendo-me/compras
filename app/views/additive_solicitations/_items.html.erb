@@ -9,19 +9,18 @@
                     :source_path => materials_path,
                     :required => true %>
       </div>
+    </div>
+    <div class="yui3-g">
+      <div class="yui3-u-1-4">
+        <%= f.input :quantity, :as => :fake, :required => true %>
+      </div>
+      <div class="yui3-u-1-4">
+        <%= f.input :value, :as => :fake, :required => true %>
+      </div>
       <div class="yui3-u-1-8">
         <div class="input fake required additive_solicitation_balance">
           <label class="fake required" for="additive_solicitation_balance">Margem</label>
           <input class="string fake required" id="additive_solicitation_balance" name="additive_solicitation[balance]" type="text" readonly>
-        </div>
-      </div>
-      <div class="yui3-u-1-4">
-        <%= f.input :quantity, :as => :fake, :required => true %>
-      </div>
-      <div class="yui3-u-1-8">
-        <div class="input fake required additive_solicitation_value">
-          <label class="fake required" for="additive_solicitation_value">Valor</label>
-          <input class="string fake required" id="additive_solicitation_value" name="additive_solicitation[value]" type="text" readonly>
         </div>
       </div>
     </div>
@@ -42,6 +41,7 @@
     <tr>
       <th><%= AdditiveSolicitationItem.human_attribute_name :material %></th>
       <th><%= AdditiveSolicitationItem.human_attribute_name :quantity %></th>
+      <th><%= AdditiveSolicitationItem.human_attribute_name :value %></th>
       <th></th>
       <th></th>
     </tr>
@@ -53,6 +53,7 @@
                  material: p.object.material,
                  material_id: p.object.material_id,
                  quantity: p.object.quantity,
+                 value: p.object.value,
                  f: p %>
     <% end %>
     </tbody>
@@ -65,6 +66,7 @@
                  material: '{{material}}',
                  material_id: '{{material_id}}',
                  quantity: '{{quantity}}',
+                 value: '{{value}}',
                  f: p %>
     <% end %>
   <% end %>

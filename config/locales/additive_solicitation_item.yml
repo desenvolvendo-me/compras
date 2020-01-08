@@ -8,4 +8,5 @@ pt-BR:
     attributes:
       additive_solicitation_item:
         material: "Material"
-        quantidade: "Quantidade"
+        quantity: "Quantidade"
+        value: "Valor"

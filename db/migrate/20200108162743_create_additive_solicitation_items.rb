@@ -2,6 +2,7 @@ class CreateAdditiveSolicitationItems < ActiveRecord::Migration
   def change
     create_table :compras_additive_solicitation_items do |t|
       t.integer :quantity
+      t.decimal :value
       t.references :material
       t.references :additive_solicitation
 
