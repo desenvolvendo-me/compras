@@ -20,6 +20,11 @@ class Department < Compras::Model
 
   scope :limit, lambda {|q| limit(q)}
 
+  scope :by_purchasing_unit_for_licitation_process, ->(licitation_process_id) do
+    purchasing_unit_id = LicitationProcess.find(licitation_process_id).purchasing_unit.id
+    where {|query| query.purchasing_unit_id.eq(purchasing_unit_id)}
+  end
+
   def to_s
     "#{description}"
   end

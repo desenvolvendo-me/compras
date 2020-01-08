@@ -8,6 +8,22 @@ function setModalUrlToCreditor() {
     $('#additive_solicitation_creditor').data('modal-url', urlModal);
 }
 
+function setModalUrlToDepartment() {
+    console.log("Aqui")
+    var urlModal = Routes.modal_departments,
+        params = {
+            by_purchasing_unit_for_licitation_process: $('#additive_solicitation_licitation_process_id').val()
+        };
+
+    urlModal += "?" + $.param(params);
+    $('#additive_solicitation_department').data('modal-url', urlModal);
+}
+
+function licitationProcessId() {
+    $("#additive_solicitation_creditor").attr("disabled", false);
+    $("#additive_solicitation_department").attr("disabled", false);
+}
+
 function setMaterialMarginBalance() {
     var material_id = $('#additive_solicitation_material_id').val()
     var licitation_process_id = $('#additive_solicitation_licitation_process_id').val()
@@ -34,6 +50,7 @@ function setMaterialMarginBalance() {
 
 $(document).ready(function () {
     setModalUrlToCreditor();
+    setModalUrlToDepartment();
 
     setMaterialMarginBalance();
 
@@ -43,6 +60,8 @@ $(document).ready(function () {
 
     $('form.additive_solicitation').on('change', '#additive_solicitation_licitation_process_id', function () {
         setModalUrlToCreditor();
+        setModalUrlToDepartment();
+        licitationProcessId();
     });
 
 });
