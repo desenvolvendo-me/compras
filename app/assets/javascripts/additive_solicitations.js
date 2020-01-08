@@ -16,7 +16,7 @@ function setMaterialMarginBalance() {
             dataType: 'json',
             type: 'POST',
             success: function (data) {
-                $('#additive_solicitation_balance').val(data["balance"]);
+                $('#additive_solicitation_balance').val(data["balance"] + "%");
             }
         });
     }
