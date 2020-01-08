@@ -7,6 +7,9 @@ class AdditiveSolicitation < Compras::Model
   belongs_to :department
   belongs_to :licitation_process
 
+  delegate :modality_number, :modality_humanize, :type_of_removal_humanize,
+           to: :licitation_process, allow_nil: true
+
   orderize "id DESC"
   filterize
 end
