@@ -604,13 +604,6 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :department_people do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
   resource :prefecture, :except => :destroy
 
   resources :price_collections, :except => :destroy do
