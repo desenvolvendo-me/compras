@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      invoice:
+        one: "Nota Fiscal"
+        other: "Notas Fiscais"
+
+    attributes:
+      invoice:
+        number: "Número"
