@@ -1,3 +1,13 @@
+function setModalUrlToCreditor() {
+    var urlModal = Routes.modal_creditors,
+        params = {
+            by_ratification_and_licitation_process_id: $('#additive_solicitation_licitation_process_id').val()
+        };
+
+    urlModal += "?" + $.param(params);
+    $('#additive_solicitation_creditor').data('modal-url', urlModal);
+}
+
 function setMaterialMarginBalance() {
     var material_id = $('#additive_solicitation_material_id').val()
     var licitation_process_id = $('#additive_solicitation_licitation_process_id').val()
@@ -23,10 +33,16 @@ function setMaterialMarginBalance() {
 }
 
 $(document).ready(function () {
+    setModalUrlToCreditor();
+
     setMaterialMarginBalance();
 
     $('form.additive_solicitation').on('change', '#additive_solicitation_licitation_process_id, #additive_solicitation_material_id, #additive_solicitation_quantity, #additive_solicitation_value', function () {
         setMaterialMarginBalance();
+    });
+
+    $('form.additive_solicitation').on('change', '#additive_solicitation_licitation_process_id', function () {
+        setModalUrlToCreditor();
     });
 
 });
