@@ -1,0 +1,15 @@
+pt-BR:
+  activerecord:
+    models:
+      additive_solicitation:
+        one: "Solicitação de Aditivo"
+        other: "Solicitações de Aditivos"
+
+    attributes:
+      additive_solicitation:
+        number: "Número"
+        creditor: "Fornecedor"
+        licitation_process: "Processo de Compra"
+        department: "Departamento"
+        modality_or_type_of_removal: "Modalidade"
+        year: "Ano"
