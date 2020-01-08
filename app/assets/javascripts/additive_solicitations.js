@@ -9,7 +9,6 @@ function setModalUrlToCreditor() {
 }
 
 function setModalUrlToDepartment() {
-    console.log("Aqui")
     var urlModal = Routes.modal_departments,
         params = {
             by_purchasing_unit_for_licitation_process: $('#additive_solicitation_licitation_process_id').val()
@@ -19,9 +18,23 @@ function setModalUrlToDepartment() {
     $('#additive_solicitation_department').data('modal-url', urlModal);
 }
 
-function licitationProcessId() {
+function setModalUrlToMaterial() {
+    var urlSource = Routes.materials,
+        params = {
+            by_licitation_process: $('#additive_solicitation_licitation_process_id').val()
+        };
+
+    urlSource += "?" + $.param(params);
+    console.log(urlSource)
+    $('#additive_solicitation_material').attr('data-source', urlSource);
+}
+
+function enableAfterlicitationProcessId() {
     $("#additive_solicitation_creditor").attr("disabled", false);
     $("#additive_solicitation_department").attr("disabled", false);
+    $("#additive_solicitation_material").attr("disabled", false);
+    $("#additive_solicitation_quantity").attr("disabled", false);
+    $("#additive_solicitation_value").attr("disabled", false);
 }
 
 function setMaterialMarginBalance() {
@@ -51,7 +64,6 @@ function setMaterialMarginBalance() {
 $(document).ready(function () {
     setModalUrlToCreditor();
     setModalUrlToDepartment();
-
     setMaterialMarginBalance();
 
     $('form.additive_solicitation').on('change', '#additive_solicitation_licitation_process_id, #additive_solicitation_material_id, #additive_solicitation_quantity, #additive_solicitation_value', function () {
@@ -61,7 +73,8 @@ $(document).ready(function () {
     $('form.additive_solicitation').on('change', '#additive_solicitation_licitation_process_id', function () {
         setModalUrlToCreditor();
         setModalUrlToDepartment();
-        licitationProcessId();
+        enableAfterlicitationProcessId();
+        setModalUrlToMaterial();
     });
 
 });

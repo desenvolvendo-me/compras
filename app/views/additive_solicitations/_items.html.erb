@@ -7,15 +7,15 @@
       <div class="yui3-u-1-2">
         <%= f.input :material, :as => :auto_complete, :fake => true,
                     :source_path => materials_path,
-                    :required => true %>
+                    :required => true , disabled: true%>
       </div>
     </div>
     <div class="yui3-g">
       <div class="yui3-u-1-4">
-        <%= f.input :quantity, :as => :fake, :required => true %>
+        <%= f.input :quantity, :as => :fake, :required => true, disabled: true %>
       </div>
       <div class="yui3-u-1-4">
-        <%= f.input :value, :as => :fake, :required => true %>
+        <%= f.input :value, :as => :fake, :required => true, disabled: true %>
       </div>
       <div class="yui3-u-1-8">
         <div class="input fake required additive_solicitation_balance">
