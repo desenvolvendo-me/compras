@@ -4,6 +4,8 @@ class Department < Compras::Model
 
   attr_accessible :description, :purchasing_unit_id, :department_people_attributes
 
+  attr_modal :description, :purchasing_unit_id
+
   validates :description, :presence => true
 
   accepts_nested_attributes_for :department_people, allow_destroy: true
