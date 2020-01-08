@@ -263,6 +263,8 @@ Compras::Application.routes.draw do
     end
   end
 
+  post 'additive_solicitation/margin' => 'additive_solicitations#margin', as: :additive_solicitation_material_margin
+
   resources :contracts do
     resources :delivery_schedules
 
