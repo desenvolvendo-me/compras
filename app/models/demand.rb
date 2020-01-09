@@ -9,10 +9,11 @@ class Demand < Compras::Model
 
   has_many :demand_departments, :dependent => :destroy
   has_many :departments, :through => :demand_departments, :order => :id
+  has_many :purchase_solicitations
 
   has_enumeration_for :status, :with => DemandStatus, :create_helpers => true
 
-  after_validation :create_purchase_solicitations, :if => :new_record?
+  after_create :create_purchase_solicitations
 
   validates :year,:name, presence: true
   validates :year,:mask => '9999',
@@ -35,6 +36,7 @@ class Demand < Compras::Model
         pur_sol.id = nil
         pur_sol.code = code_maximum
         pur_sol.department_id = department.id
+        pur_sol.demand_id = self.id
         pur_sol.model_request = false
         pur_sol.service_status = PurchaseSolicitationServiceStatus::PENDING
         code_maximum += 1
