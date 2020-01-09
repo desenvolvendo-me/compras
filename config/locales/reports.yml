@@ -64,6 +64,11 @@ pt-BR:
       one: 'Relatório de Saldo por Processo e Contrato'
       other: 'Relatório de Saldo por Processo e Contrato'
 
+  extract_consumption_per_process_reports:
+    extract_consumption_per_process_report:
+      one: 'Extrato de Consumo de Materiais por Processo'
+      other: 'Extrato de Consumo de Materiais por Processo'
+
   total_products_purchase_reports:
     total_products_purchase_report:
       one: 'Relatório de Total de Produtos Comprados'
