@@ -16,4 +16,8 @@ module Report::BalanceHelper
     balance
   end
 
+  def self.get_quantity_item_licitation(licitation_process, material)
+    licitation_process.items.where(material_id: material.id).last.quantity
+  end
+
 end
