@@ -930,6 +930,9 @@ Compras::Application.routes.draw do
     match 'balance_per_process_and_contract/new' => 'balance_per_process_and_contract#new', as: :balance_per_process_and_contract_new
     match 'balance_per_process_and_contract' => 'balance_per_process_and_contract#show', as: :balance_per_process_and_contract
 
+    match 'extract_consumption_per_process/new' => 'extract_consumption_per_process#new', as: :extract_consumption_per_process_new
+    match 'extract_consumption_per_process' => 'extract_consumption_per_process#show', as: :extract_consumption_per_process
+
     match 'total_products_purchase/new' => 'total_products_purchase#new', as: :total_products_purchase_new
     match 'total_products_purchase' => 'total_products_purchase#show', as: :total_products_purchase
 

@@ -38,6 +38,10 @@ class SupplyOrder < Compras::Model
     @pledge ||= Pledge.find(pledge_id) if pledge_id
   end
 
+  def to_s
+    "#{number} - #{I18n.l(authorization_date)}"
+  end
+
   private
 
   def change_status_in_service
