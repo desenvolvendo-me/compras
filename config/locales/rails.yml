@@ -312,6 +312,7 @@ pt-BR:
       date_range_taken_for_signature: "intervalo de data já está contida em outra assinatura"
       trading_item_has_not_a_winner: "o item do pregão não possui um vencedor"
       not_yet_liberated: "ainda não foi liberada"
+      not_allow_release_without_purchase_form: "não é possível a liberação sem ficha de compra"
       must_have_a_winner_bidder: "não tem uma habilitação vencedora"
       already_in_use_for_this_licitation_kind: "já possui uma forma de julgamento com esse tipo de julgamento e tipo de licitação"
       cannot_be_changed_when_closed_or_started: "não pode ser alterado quando o item já estiver em andamento ou fechado"
