@@ -4,12 +4,16 @@
       <a href="#main">Principal</a>
     </li>
 
-    <li>
-      <a href="#pledges">Empenhos</a>
-    </li>
+    <!--    <li>-->
+    <!--      <a href="#pledges">Empenhos</a>-->
+    <!--    </li>-->
 
     <li>
       <a href="#schedules">Cronogramas de entrega</a>
+    </li>
+
+    <li>
+      <a href="#supply_orders">Ordens de Fornecimento</a>
     </li>
   </ul>
 
@@ -24,15 +28,20 @@
   <div id="schedules">
     <%= render 'delivery_schedules', :f => f %>
   </div>
+
+  <div id="supply_orders">
+    <%= render 'supply_orders', :f => f %>
+  </div>
+
 </div>
 
 <script>
-  function fillSequence() {
-    $('div.nested-delivery-schedule .destroy[value=false]').each(function(index, item){
-      $(this).parents('.nested-delivery-schedule').find('.auto_sequence').val(index + 1);
-    });
-  }
+    function fillSequence() {
+        $('div.nested-delivery-schedule .destroy[value=false]').each(function (index, item) {
+            $(this).parents('.nested-delivery-schedule').find('.auto_sequence').val(index + 1);
+        });
+    }
 
-  $('form.contract').on('click', '.remove_item', fillSequence);
-  $('form.contract').on('nestedForm:afterAdd', fillSequence);
+    $('form.contract').on('click', '.remove_item', fillSequence);
+    $('form.contract').on('nestedForm:afterAdd', fillSequence);
 </script>
