@@ -30,11 +30,22 @@ function setModalUrlToMaterial() {
 }
 
 function enableAfterlicitationProcessId() {
-    $("#additive_solicitation_creditor").attr("disabled", false);
-    $("#additive_solicitation_department").attr("disabled", false);
-    $("#additive_solicitation_material").attr("disabled", false);
-    $("#additive_solicitation_quantity").attr("disabled", false);
-    $("#additive_solicitation_value").attr("disabled", false);
+    var licitation_process_id = $('#additive_solicitation_licitation_process_id').val()
+
+    if (licitation_process_id) {
+        $("#additive_solicitation_creditor").attr("disabled", false);
+        $("#additive_solicitation_department").attr("disabled", false);
+        $("#additive_solicitation_material").attr("disabled", false);
+        $("#additive_solicitation_quantity").attr("disabled", false);
+        $("#additive_solicitation_value").attr("disabled", false);
+    } else {
+        $("#additive_solicitation_creditor").attr("disabled", true);
+        $("#additive_solicitation_department").attr("disabled", true);
+        $("#additive_solicitation_material").attr("disabled", true);
+        $("#additive_solicitation_quantity").attr("disabled", true);
+        $("#additive_solicitation_value").attr("disabled", true);
+    }
+
 }
 
 function setMaterialMarginBalance() {
