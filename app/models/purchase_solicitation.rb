@@ -6,7 +6,7 @@ class PurchaseSolicitation < Compras::Model
                   :purchase_solicitation_budget_allocations_attributes,
                   :items_attributes, :budget_structure_id,
                   :user_id, :department_id,
-                  :purchase_form_id,:attendant_status,:model_request
+                  :purchase_form_id, :attendant_status, :model_request, :demand_id
 
   attr_readonly :code
 
@@ -25,6 +25,7 @@ class PurchaseSolicitation < Compras::Model
   belongs_to :responsible, :class_name => 'Employee', :foreign_key => 'responsible_id'
   belongs_to :delivery_location
   belongs_to :liberator, :class_name => 'Employee', :foreign_key => 'liberator_id'
+  belongs_to :demand
 
   belongs_to_resource :budget_structure
 
@@ -87,8 +88,8 @@ class PurchaseSolicitation < Compras::Model
 
   scope :can_be_grouped, lambda {
     where {service_status.in [
-      PurchaseSolicitationServiceStatus::LIBERATED,
-      PurchaseSolicitationServiceStatus::PARTIALLY_FULFILLED]
+                                 PurchaseSolicitationServiceStatus::LIBERATED,
+                                 PurchaseSolicitationServiceStatus::PARTIALLY_FULFILLED]
     }.uniq
   }
 
