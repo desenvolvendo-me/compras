@@ -4,7 +4,7 @@ class Department < Compras::Model
 
   attr_accessible :description, :purchasing_unit_id, :department_people_attributes
 
-  attr_modal :description, :purchasing_unit_id
+  attr_modal :description
 
   validates :description, :presence => true
 
