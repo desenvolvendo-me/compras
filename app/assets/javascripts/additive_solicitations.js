@@ -76,6 +76,7 @@ $(document).ready(function () {
     setModalUrlToCreditor();
     setModalUrlToDepartment();
     setMaterialMarginBalance();
+    enableAfterlicitationProcessId();
 
     $('form.additive_solicitation').on('change', '#additive_solicitation_licitation_process_id, #additive_solicitation_material_id, #additive_solicitation_quantity, #additive_solicitation_value', function () {
         setMaterialMarginBalance();
