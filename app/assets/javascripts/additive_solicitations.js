@@ -75,6 +75,7 @@ function setMaterialMarginBalance() {
 $(document).ready(function () {
     setModalUrlToCreditor();
     setModalUrlToDepartment();
+    setModalUrlToMaterial();
     setMaterialMarginBalance();
     enableAfterlicitationProcessId();
 
