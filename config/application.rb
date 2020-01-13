@@ -111,7 +111,8 @@ module Compras
       'reserve_fund_requests.js',
       'supply_orders.js',
       'supply_requests.js',
-      'additive_solicitations.js'
+      'additive_solicitations.js',
+      'expenses.js'
     ]
 
     config.generators do |g|

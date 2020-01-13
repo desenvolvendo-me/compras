@@ -4,7 +4,7 @@ class Organ < Compras::Model
   has_enumeration_for :category, :with => OrganCategory, :create_helpers => true
   has_enumeration_for :organ_type, :with => OrganType, :create_helpers => true
 
-  validates :name, :code, presence: true, uniqueness:true
+  validates :name, :code, presence: true, uniqueness: true
   validates :category, presence: true
   validates :year, :mask => "9999", :allow_blank => true
   before_save :code_category
@@ -13,19 +13,24 @@ class Organ < Compras::Model
   orderize "created_at"
   filterize
 
+  scope :by_organ_type, lambda {|organ_type|
+    where {|organ| organ.organ_type.eq(organ_type)}
+  }
+
+
   def code_category
     if self.category == 'analytical'
-      errors.add(:code, :wrong_length, :count=> 5) unless self.code.length == 6
+      errors.add(:code, :wrong_length, :count => 5) unless self.code.length == 6
     else
-      errors.add(:code, :wrong_length, :count=> 2) unless self.code.length == 2
+      errors.add(:code, :wrong_length, :count => 2) unless self.code.length == 2
     end
   end
 
   def code_organ_type
     if self.organ_type == 'unity'
-      errors.add(:code, :wrong_length, :count=> 5) unless self.code.length == 6
+      errors.add(:code, :wrong_length, :count => 5) unless self.code.length == 6
     else
-      errors.add(:code, :wrong_length, :count=> 2) unless self.code.length == 2
+      errors.add(:code, :wrong_length, :count => 2) unless self.code.length == 2
     end
   end
 
