@@ -61,14 +61,13 @@
           </thead>
           <tbody>
           <% supply_order.items.each do |item| %>
-            <% balance = Report::BalanceHelper.get_balance(contract, item) %>
-            <% total_c_l += balance["total"] %>
+            <% total_c_l += Report::BalanceHelper.get_balance(contract, item) %>
             <% total_c_f += item.quantity %>
             <tr>
               <td><%= item.material %></td>
               <td><%= Report::BalanceHelper.get_quantity_item_licitation(contract.licitation_process, item.material) %></td>
-              <td><%= balance["total"] %></td>
-              <td><%= balance["balance"] %></td>
+              <td><%= item.quantity %></td>
+              <td><%= Report::BalanceHelper.get_balance(contract, item) %></td>
             </tr>
           <% end %>
           </tbody>
