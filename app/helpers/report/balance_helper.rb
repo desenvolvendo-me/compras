@@ -20,4 +20,13 @@ module Report::BalanceHelper
     licitation_process.items.where(material_id: material.id).last.quantity
   end
 
+  def self.get_quantity_bid(licitation_process)
+    material_ids = []
+    licitation_process.supply_orders.each do |supply_order|
+      material_ids = supply_order.items.pluck(:material_id)
+    end
+
+    licitation_process.items.where(material_id: material_ids.uniq).sum(:quantity)
+  end
+
 end
