@@ -82,4 +82,9 @@ pt-BR:
   purchased_item_price_reports:
     purchased_item_price_report:
       one: 'Relatório de valor praticado por item'
-      one: 'Relatório de valores praticados por itens'
+      other: 'Relatório de valores praticados por itens'
+
+  department_request_reports:
+    department_request_report:
+      one: 'Relatório de Solicitante'
+      other: 'Relatório de Solicitantes'
