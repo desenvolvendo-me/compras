@@ -17,7 +17,6 @@ menu:
 
     - department:
       - departments
-      - department_people
 
     - users:
       - positions
@@ -82,6 +81,7 @@ menu:
 
   - "Instrumentos Contratuais":
     - contracts
+    - additive_solicitations
     - pledge_requests
     - "Fornecimento":
       - supply_requests
@@ -103,3 +103,4 @@ menu:
     - report_balance_per_process_and_contract_new
     - report_total_products_purchase_new
     - report_total_purchase_per_element_and_nature_new
+    - report_extract_consumption_per_process_new

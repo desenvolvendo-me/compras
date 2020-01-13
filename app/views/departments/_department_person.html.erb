@@ -1,0 +1,53 @@
+<div id="department_people">
+
+  <div class="nested-fields add-margin-bottom">
+    <%= hidden_field_tag :department_people_id, nil, :name => 'department_people[id]' %>
+
+    <div class="yui3-g">
+      <div class="yui3-u-1-3">
+        <%= f.input :user, :as => :auto_complete, :fake => true,
+                    :source_path => users_path,
+                    :required => true %>
+      </div>
+    </div>
+
+    <div class="yui3-u-1-6">
+      <%= button_tag 'Adicionar', type: :button,
+                     :class => 'button add-nested-record field-without-label',
+                     'data-template' => 'department_people_template',
+                     'data-records' => 'department_people-records',
+                     'data-disabled' => not_updateable_message %>
+    </div>
+  </div>
+
+  <%= f.error :department_people %>
+
+  <table id="department_people-records" class="records">
+    <thead>
+    <tr>
+      <th><%= Department.human_attribute_name :user %></th>
+      <th></th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <%= f.association :department_people, :collection => localized(f.object.department_people) do |p| %>
+      <%= render 'department_people/form',
+                 id: p.object.id,
+                 user: p.object.user,
+                 user_id: p.object.user_id,
+                 f: p %>
+    <% end %>
+    </tbody>
+  </table>
+
+  <%= mustache "department_people_template" do %>
+    <%= f.association :department_people_attributes, :collection => f.object.department_people.build, :index => '{{uuid}}' do |p| %>
+      <%= render 'department_people/form',
+                 id: '{{id}}',
+                 user: '{{user}}',
+                 user_id: '{{user_id}}',
+                 f: p %>
+    <% end %>
+  <% end %>
+</div>

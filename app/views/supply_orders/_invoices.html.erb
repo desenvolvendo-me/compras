@@ -1,0 +1,49 @@
+<div id="supply_order_invoices">
+
+  <div class="nested-fields add-margin-bottom">
+    <%= hidden_field_tag :invoice_id, nil, :name => 'supply_order_invoice[id]' %>
+
+    <div class="yui3-g">
+      <div class="yui3-u-1-3">
+        <%= f.input :number, :as => :fake, :required => true %>
+      </div>
+    </div>
+
+    <div class="yui3-u-1-6">
+      <%= button_tag 'Adicionar', type: :button,
+                     :class => 'button add-nested-record field-without-label',
+                     'data-template' => 'supply_order_invoices_template',
+                     'data-records' => 'invoices-records',
+                     'data-disabled' => not_updateable_message %>
+    </div>
+  </div>
+
+  <%= f.error :invoices %>
+
+  <table id="invoices-records" class="records">
+    <thead>
+    <tr>
+      <th><%= Invoice.human_attribute_name :number %></th>
+      <th></th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <%= f.association :invoices, :collection => localized(f.object.invoices) do |p| %>
+      <%= render 'supply_order_invoices/form',
+                 id: p.object.id,
+                 number: p.object.number,
+                 f: p %>
+    <% end %>
+    </tbody>
+  </table>
+
+  <%= mustache "supply_order_invoices_template" do %>
+    <%= f.association :invoices_attributes, :collection => f.object.invoices.build, :index => '{{uuid}}' do |p| %>
+      <%= render 'supply_order_invoices/form',
+                 id: '{{id}}',
+                 number: '{{number}}',
+                 f: p %>
+    <% end %>
+  <% end %>
+</div>

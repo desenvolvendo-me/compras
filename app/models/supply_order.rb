@@ -3,8 +3,8 @@ class SupplyOrder < Compras::Model
   include NumberSupply
 
   attr_accessible :licitation_process_id, :creditor_id, :authorization_date,
-                  :items_attributes, :year, :pledge_id, :purchase_solicitation_id,
-                  :updatabled, :contract_id, :number_nf, :supply_request_id
+                  :items_attributes, :invoices_attributes, :year, :pledge_id, :purchase_solicitation_id,
+                  :updatabled, :contract_id, :supply_request_id
 
   belongs_to :contract
   belongs_to :purchase_solicitation
@@ -13,8 +13,10 @@ class SupplyOrder < Compras::Model
   belongs_to :supply_request
 
   has_many :items, class_name: 'SupplyOrderItem', dependent: :destroy
+  has_many :invoices, dependent: :destroy
 
   accepts_nested_attributes_for :items, allow_destroy: true
+  accepts_nested_attributes_for :invoices, allow_destroy: true
 
   delegate :modality_number, :modality_humanize, :type_of_removal_humanize,
            to: :licitation_process, allow_nil: true
@@ -34,6 +36,10 @@ class SupplyOrder < Compras::Model
 
   def pledge
     @pledge ||= Pledge.find(pledge_id) if pledge_id
+  end
+
+  def to_s
+    "#{number} - #{I18n.l(authorization_date)}"
   end
 
   private

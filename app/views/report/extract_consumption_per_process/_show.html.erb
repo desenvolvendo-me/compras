@@ -1,0 +1,93 @@
+<%
+  def date_mask(d)
+    return d.strftime("%d/%m/%Y") unless d.nil?
+  end
+%>
+
+<div>
+  <table class="records">
+    <thead>
+    <tr style="text-align: center;">
+      <td>EXTRATO DE CONSUMO DE MATERIAIS POR PROCESSO</td>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+</div>
+
+<div style="text-align: justify">
+
+</div>
+
+<br>
+
+<% @licitation_processes.uniq.each do |licitation_process| %>
+  <div style="text-align: justify; margin-left: 10px">
+  <span>
+    <p>
+      <b> PROCESSO: </b> <%= licitation_process.to_s %>
+    </p>
+  </span>
+  </div>
+  <% total_c_l = 0 %>
+  <% total_c_f = 0 %>
+  <% Report::ExtractConsumptionPerProcessHelper.get_contracts(licitation_process, @contract).each do |contract| %>
+    <div style="text-align: justify; margin-left: 20px">
+  <span>
+    <p>
+      <b> CONTRATO: </b> <%= contract.to_s %>
+    </p>
+  </span>
+    </div>
+    <% contract.supply_orders.each do |supply_order| %>
+      <div style="text-align: justify; margin-left: 30px">
+        <span>
+          <p>
+            <b> ORDEM DE FORNECIMENTO: </b> <%= supply_order.to_s %>
+          </p>
+        </span>
+      </div>
+      <p>
+      <div>
+        <table class="records" style="margin-left: 30px">
+          <thead>
+          <tr>
+            <th>MATERIAL</th>
+            <th>QUANTIDADE LICITADA</th>
+            <th>QUANTIDADE FORNECIDA</th>
+            <th>SALDO</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% total_i_l = 0 %>
+          <% total_i_f = 0 %>
+          <% supply_order.items.each do |item| %>
+            <% balance = Report::BalanceHelper.get_balance(contract, item) %>
+            <% total_i_l += Report::BalanceHelper.get_quantity_item_licitation(contract.licitation_process, item.material) %>
+            <% total_i_f += balance["total"] %>
+            <% total_c_l += item.quantity %>
+            <% total_c_f += balance["total"] %>
+            <tr>
+              <td><%= item.material %></td>
+              <td><%= Report::BalanceHelper.get_quantity_item_licitation(contract.licitation_process, item.material) %></td>
+              <td><%= balance["total"] %></td>
+              <td><%= balance["balance"] %></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+      </p>
+    <% end %>
+  <% end %>
+  <span>
+    <p>
+      <b> TOTAL LICITADO: </b> <%= total_c_l %>
+      <b> TOTAL FORNECIDO: </b> <%= total_c_f %>
+    </p>
+  </span>
+  <br>
+  <br>
+  <br>
+<% end %>

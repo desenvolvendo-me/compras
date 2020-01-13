@@ -56,6 +56,10 @@ class PurchaseSolicitationDecorator
     t('purchase_solicitation.messages.is_annulled') if annulled?
   end
 
+  def licitation_process_started
+    t('purchase_solicitation.messages.licitation_process_started') if self.list_purchase_solicitations.any?
+  end
+
   def not_persisted_message
     t('purchase_solicitation.messages.not_persisted') unless persisted?
   end

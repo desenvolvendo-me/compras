@@ -1,9 +1,15 @@
-<div class="yui3-g">
-    <div class="yui3-u-1-2">
-        <%= f.input :department %>
-    </div>
+<tr class="record nested-record item-record" id="user-id-<%= user_id %>">
+    <td><%= user %></td>
+    <td>
+        <%= link_to 'Editar', '#', class: 'edit-nested-record' %>
+    </td>
 
-    <div class="yui3-u-1-2">
-        <%= f.input :user %>
-    </div>
-</div>
+    <td>
+        <%= f.input :user_id, as: :hidden, input_html: { value: user_id, class: 'user-id' } %>
+        <%= f.input :user, as: :hidden, input_html: { value: user } %>
+        <%= f.input :id, as: :hidden, input_html: { value: id } %>
+        <%= f.input :_destroy, as: :hidden, input_html: { class: 'destroy' } %>
+
+        <%= link_to 'Remover', '#', class: 'remove-nested-record' %>
+    </td>
+</tr>

@@ -1,0 +1,36 @@
+<table class="records">
+  <thead>
+  <tr>
+    <th>
+      <%= PurchaseSolicitation.human_attribute_name :code %>
+    </th>
+    <th>
+      <%= PurchaseSolicitation.human_attribute_name :department %>
+    </th>
+    <th>
+      <%= PurchaseSolicitation.human_attribute_name :user %>
+    </th>
+    <th>
+      <%= PurchaseSolicitation.human_attribute_name :service_status %>
+    </th>
+    <th>
+      <%= PurchaseSolicitation.human_attribute_name :total_items_value %>
+    </th>
+    <th>
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <% f.object.purchase_solicitations.each do |purchase_solicitation| %>
+    <tr>
+      <td><%= purchase_solicitation.code %></td>
+      <td><%= purchase_solicitation.department %></td>
+      <td><%= purchase_solicitation.user %></td>
+      <td><%= PurchaseSolicitationServiceStatus.t(purchase_solicitation.service_status) %></td>
+      <td><%= number_to_currency(purchase_solicitation.total_items_value)%></td>
+      <td><%= link_to "Visualizar", edit_purchase_solicitation_path(purchase_solicitation) %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+

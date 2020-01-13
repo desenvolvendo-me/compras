@@ -12,6 +12,8 @@ class PurchaseSolicitationLiberation < Compras::Model
             :purchase_solicitation, :presence => true
   validates :date, :timeliness => { :type => :date }, :allow_blank => true
 
+  validate :not_allow_release_without_purchase_form
+
   auto_increment :sequence, :by => :purchase_solicitation_id
 
   orderize :justification
@@ -19,5 +21,12 @@ class PurchaseSolicitationLiberation < Compras::Model
 
   def to_s
     sequence.to_s
+  end
+
+  private
+  def not_allow_release_without_purchase_form
+    if self.service_status.eql?("liberated") && self.purchase_solicitation.purchase_form.nil?
+      errors.add(:base, :not_allow_release_without_purchase_form)
+    end
   end
 end

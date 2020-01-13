@@ -9,3 +9,4 @@ pt-BR:
       department:
         description: "Descrição"
         purchasing_unit: "Unidade de Compra"
+        user: "Usuário"
