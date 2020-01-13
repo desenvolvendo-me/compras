@@ -1,3 +1,5 @@
+<%= f.input :demand_id, as: :hidden %>
+
 <div id="item-tab">
   <div class="yui3-g">
     <div class="yui3-u-1-3">
@@ -6,6 +8,6 @@
     </div>
   </div>
 
-  <%= f.input :items, as: :nested_grid, data_disabled: (f.object.decorator.is_annulled_message or f.object.decorator.licitation_process_started or f.object.decorator.linked_demand),
+  <%= f.input :items, as: :nested_grid, data_disabled: (f.object.decorator.is_annulled_message or f.object.decorator.licitation_process_started),
               columns: [:material, :reference_unit, :brand, :quantity, :unit_price, :estimated_total_price] %>
 </div>
