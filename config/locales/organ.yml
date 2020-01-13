@@ -2,13 +2,14 @@ pt-BR:
   activerecord:
     models:
       organ:
-        one: "Órgão"
-        other: "Órgãos"
+        one: "Órgão/Unidade"
+        other: "Órgãos/Unidades"
 
     attributes:
       organ:
         name: "Descrição"
-        category: "Tipo"
+        category: "Categoria"
+        organ_type: "Tipo"
         code: "Código"
         initial: "Sigla"
         year: "Ano"

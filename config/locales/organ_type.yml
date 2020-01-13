@@ -1,0 +1,5 @@
+pt-BR:
+  enumerations:
+    organ_type:
+      organ: "Orgão"
+      unity: "Unidade"
