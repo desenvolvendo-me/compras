@@ -52,3 +52,4 @@ pt-BR:
       not_persisted: "salve a solicitação primeiro"
       disabled_materials: "Escolha um tipo de solicitação primeiro"
       licitation_process_started: "já existe um processo de compra e não pode ser editada"
+      linked_demand: "existe uma demanda vinculada e não pode ser cadastrado"
