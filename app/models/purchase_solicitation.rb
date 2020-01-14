@@ -5,8 +5,8 @@ class PurchaseSolicitation < Compras::Model
                   :delivery_location_id, :general_observations, :justification,
                   :purchase_solicitation_budget_allocations_attributes,
                   :items_attributes, :budget_structure_id,
-                  :user_id, :department_id,
-                  :purchase_form_id, :attendant_status, :model_request, :demand_id
+                  :user_id, :department_id, :purchase_form_id, :attendant_status,
+                  :model_request, :demand_id, :purchase_forms_attributes
 
   attr_readonly :code
 
@@ -31,6 +31,8 @@ class PurchaseSolicitation < Compras::Model
 
   has_many :items, :class_name => 'PurchaseSolicitationItem', :dependent => :restrict,
            :inverse_of => :purchase_solicitation, :order => :id
+  has_many :purchase_forms, :class_name => 'PurchaseSolicitationPurchaseForm', :dependent => :restrict,
+           :inverse_of => :purchase_solicitation, :order => :id
 
   has_and_belongs_to_many :licitation_processes, :join_table => :compras_licitation_processes_purchase_solicitations
 
@@ -48,6 +50,7 @@ class PurchaseSolicitation < Compras::Model
 
   accepts_nested_attributes_for :purchase_solicitation_budget_allocations, :allow_destroy => true
   accepts_nested_attributes_for :items, :allow_destroy => true
+  accepts_nested_attributes_for :purchase_forms, :allow_destroy => true
   # accepts_nested_attributes_for :purchase_form_items, :allow_destroy => true
 
   delegate :authorized?, :to => :direct_purchase, :prefix => true, :allow_nil => true

@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      purchase_solicitation_purchase_form:
+        one: "Ficha de Compra"
+        other: "Fichas de Compra"
+
+    attributes:
+      purchase_solicitation_purchase_form:
+        purchase_solicitation: "Solicitação de Compra"
+        purchase_form: "Ficha de Compra"
