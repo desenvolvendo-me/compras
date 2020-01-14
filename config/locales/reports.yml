@@ -88,3 +88,8 @@ pt-BR:
     department_request_report:
       one: 'Relatório de Solicitante'
       other: 'Relatório de Solicitantes'
+
+  pledge_request_reports:
+    pledge_request_report:
+      one: 'Relatório de Pedido de Empenho'
+      other: 'Relatório de Pedidos de Empenho'
