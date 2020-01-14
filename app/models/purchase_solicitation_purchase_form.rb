@@ -4,4 +4,6 @@ class PurchaseSolicitationPurchaseForm < Compras::Model
   belongs_to :purchase_solicitation
   belongs_to :purchase_form
 
+  validates :purchase_form_id, :presence => true
+
 end
