@@ -1,3 +1,14 @@
+function setModalUrlToPurchaseForm() {
+    var urlModal = Routes.modal_purchase_forms,
+        params = {
+            by_purchase_solicitation: $('#supply_order_purchase_solicitation_id').val()
+        };
+
+    urlModal += "?" + $.param(params);
+    console.log(urlModal)
+    $('#supply_order_purchase_form').data('modal-url', urlModal);
+}
+
 function setModalUrlToPurchaseSolicitation() {
     var urlModal = Routes.modal_purchase_solicitations,
         params = {
@@ -140,6 +151,7 @@ function renderItem(item) {
 
 
 $(document).ready(function () {
+    setModalUrlToPurchaseForm();
     setModalUrlToCreditor();
     setPledgeSource();
     setModalUrlToPurchaseSolicitation();
@@ -147,6 +159,7 @@ $(document).ready(function () {
 
     $('form.supply_order').on('change', '#supply_order_purchase_solicitation_id', function () {
         setDepartment();
+        setModalUrlToPurchaseForm();
     });
 
     $('form.supply_order').on('change', '#supply_order_quantity', function () {

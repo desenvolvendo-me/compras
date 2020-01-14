@@ -1,158 +1,179 @@
-$(document).ready(function() {
+function onlyEditWithDemand() {
+    var demand_id = $('#purchase_solicitation_demand_id').val();
 
-  function calculateItemsTotalValue() {
-    var total = new BigNumber(0),
-        value;
+    if (demand_id) {
+        $('#purchase_solicitation_material').attr('disabled', true);
+        $('#purchase_solicitation_brand').attr('disabled', true);
+        $('#purchase_solicitation_unit_price').attr('disabled', true);
+        $('#purchase_solicitation_items_button').attr('data-disabled', "existe demanda vinculada");
+        $('.remove-nested-record').attr('data-disabled', "existe demanda vinculada");
 
-    $('.nested-record:visible').find('.input.purchase_solicitation_items_estimated_total_price :input').each(function() {
-      value = $(this).attr('value');
+        $('.edit-nested-record').on("click", function () {
+            console.log("Clicado")
+            $('#purchase_solicitation_items_button').removeAttr('data-disabled');
+        });
+    }
+}
 
-      if (value) {
-        total = total.add(parsePtBrFloat(value));
-      }
+$(document).ready(function () {
+    onlyEditWithDemand()
+
+    $("#purchase_solicitation_items_button").on("click", function () {
+        $('.remove-nested-record').attr('data-disabled', "existe demanda vinculada");
+    });
+    function calculateItemsTotalValue() {
+        var total = new BigNumber(0),
+            value;
+
+        $('.nested-record:visible').find('.input.purchase_solicitation_items_estimated_total_price :input').each(function () {
+            value = $(this).attr('value');
+
+            if (value) {
+                total = total.add(parsePtBrFloat(value));
+            }
+        });
+
+        return total
+    }
+
+    function refreshItemsTotalValue(itemsTotalValue) {
+        $('#purchase_solicitation_total_items_value').val(numberWithDelimiter(parseFloat(itemsTotalValue)));
+    }
+
+    function materialType() {
+        var materialType,
+            purchaseSolicitationKind = $('#purchase_solicitation_kind').val();
+
+        switch (purchaseSolicitationKind) {
+            case "<%= PurchaseSolicitationKind::SERVICES %>" :
+                materialType = "<%= MaterialType::SERVICE %>";
+                break;
+            case "<%= PurchaseSolicitationKind::PRODUCTS %>" :
+                materialType = "<%= MaterialType::CONSUMPTION %>";
+                break;
+            case "<%= PurchaseSolicitationKind::GOODS %>" :
+                materialType = "<%= MaterialType::ASSET %>";
+                break;
+        }
+
+        return materialType;
+    }
+
+    function setMaterialSource() {
+        var url = Routes.materials,
+            params = {
+                by_material_type: materialType()
+            };
+
+        url += "?" + jQuery.param(params);
+        $("#purchase_solicitation_material").data('source', url);
+    }
+
+    function materialOrService() {
+        var materialOrService,
+            purchaseSolicitationKind = $('#purchase_solicitation_kind').val();
+
+        if (purchaseSolicitationKind === "<%= PurchaseSolicitationKind::SERVICES %>") {
+            materialOrService = "Serviço";
+        } else {
+            materialOrService = "Material";
+        }
+
+        return materialOrService;
+    }
+
+    function setMaterialLabel() {
+        $("#purchase_solicitation_material").prev("label").text(materialOrService());
+        $("#purchase_solicitation_material").requiredField(false);
+        $("#purchase_solicitation_material").requiredField(true);
+    }
+
+    function setBudgetAllocationSource() {
+        var url = Routes.budget_allocations,
+            budgetStructureId = $("#purchase_solicitation_budget_structure_id").val(),
+            year = $("#purchase_solicitation_accounting_year").val(),
+            params = {by_year: year};
+
+        if (budgetStructureId) {
+            params['budget_structure_id'] = budgetStructureId;
+        }
+
+        url += "?" + jQuery.param(params);
+
+        $("#purchase_solicitation_budget_allocation").data('source', url);
+    }
+
+    function filterExpenseNatureSource(expenseNatureId) {
+        var url = Routes.expense_natures,
+            year = $("#purchase_solicitation_accounting_year").val(),
+            params = {by_year: year};
+
+        if (expenseNatureId) {
+            params['by_parent_id'] = expenseNatureId;
+        }
+
+        url += "?" + jQuery.param(params);
+
+        $("#purchase_solicitation_expense_nature").data('source', url);
+    }
+
+    $('#purchase_solicitation_budget_allocation_id').on("change", function (event, budgetAllocation) {
+        if (budgetAllocation) {
+            $('#purchase_solicitation_budget_allocation_balance').val(numberWithDelimiter(budgetAllocation.balance));
+            $('#purchase_solicitation_budget_allocation_expense_nature').val(budgetAllocation.expense_nature);
+            filterExpenseNatureSource(budgetAllocation.expense_nature_id);
+        } else {
+            $('#purchase_solicitation_budget_allocation_balance').val('0,00');
+            $('#purchase_solicitation_budget_allocation_expense_nature').val('');
+        }
     });
 
-    return total
-  }
+    $('#purchase_solicitation_budget_structure_id').on("change", function (event, budgetStructure) {
+        setBudgetAllocationSource();
+    });
 
-  function refreshItemsTotalValue(itemsTotalValue) {
-    $('#purchase_solicitation_total_items_value').val(numberWithDelimiter(parseFloat(itemsTotalValue)));
-  }
+    $('#purchase_solicitation_accounting_year').on("change", function (event, budgetStructure) {
+        setBudgetAllocationSource();
+    });
 
-  function materialType() {
-    var materialType,
-        purchaseSolicitationKind = $('#purchase_solicitation_kind').val();
+    $('form.purchase_solicitation').on('keyup', '#purchase_solicitation_quantity, #purchase_solicitation_unit_price', function () {
+        var itemQuantity = new BigNumber(parsePtBrFloat($('#purchase_solicitation_quantity').val() || '0')),
+            itemUnitPrice = new BigNumber(parsePtBrFloat($('#purchase_solicitation_unit_price').val() || '0')),
+            total = itemUnitPrice.multiply(itemQuantity);
 
-    switch (purchaseSolicitationKind) {
-      case "<%= PurchaseSolicitationKind::SERVICES %>" :
-        materialType = "<%= MaterialType::SERVICE %>";
-        break;
-      case "<%= PurchaseSolicitationKind::PRODUCTS %>" :
-        materialType = "<%= MaterialType::CONSUMPTION %>";
-        break;
-      case "<%= PurchaseSolicitationKind::GOODS %>" :
-        materialType = "<%= MaterialType::ASSET %>";
-        break;
-    }
+        $('#purchase_solicitation_estimated_total_price').val(numberWithDelimiter(parseFloat(total)));
 
-    return materialType;
-  }
+        total = total.add(calculateItemsTotalValue());
 
-  function setMaterialSource(){
-    var url = Routes.materials,
-    params = {
-      by_material_type: materialType()
-    };
+        refreshItemsTotalValue(total);
+    });
 
-    url += "?" + jQuery.param(params);
-    $("#purchase_solicitation_material").data('source', url);
-  }
+    $('#purchase_solicitation_material_id').on('change', function (event, material) {
+        $('#purchase_solicitation_reference_unit').val('');
 
-  function materialOrService() {
-    var materialOrService,
-        purchaseSolicitationKind = $('#purchase_solicitation_kind').val();
+        if (material) {
+            $('#purchase_solicitation_reference_unit').val(material.reference_unit);
+        }
+    });
 
-    if (purchaseSolicitationKind === "<%= PurchaseSolicitationKind::SERVICES %>") {
-      materialOrService = "Serviço";
-    } else {
-      materialOrService = "Material";
-    }
+    $('#purchase_solicitation_kind').on('change', function () {
+        setMaterialLabel();
+        setMaterialSource();
+    });
 
-    return materialOrService;
-  }
+    $('#purchase_solicitation_budget_structure_id').on('change', function () {
+        setBudgetAllocationSource();
+    });
 
-  function setMaterialLabel() {
-    $("#purchase_solicitation_material").prev("label").text(materialOrService());
-    $("#purchase_solicitation_material").requiredField(false);
-    $("#purchase_solicitation_material").requiredField(true);
-  }
+    $('#purchase_solicitation_items_records').on('nestedGrid:AfterAdd', function () {
+        refreshItemsTotalValue(calculateItemsTotalValue());
+    });
 
-  function setBudgetAllocationSource() {
-    var url = Routes.budget_allocations,
-        budgetStructureId = $("#purchase_solicitation_budget_structure_id").val(),
-        year   = $("#purchase_solicitation_accounting_year").val(),
-        params = { by_year: year };
+    $('#purchase_solicitation_items_records').on('nestedGrid:afterRemove', function () {
+        refreshItemsTotalValue(calculateItemsTotalValue());
+    });
 
-    if (budgetStructureId) {
-      params['budget_structure_id'] = budgetStructureId;
-    }
-
-    url += "?" + jQuery.param(params);
-
-    $("#purchase_solicitation_budget_allocation").data('source', url);
-  }
-
-  function filterExpenseNatureSource(expenseNatureId) {
-    var url    = Routes.expense_natures,
-        year   = $("#purchase_solicitation_accounting_year").val(),
-        params = { by_year: year };
-
-    if (expenseNatureId) {
-      params['by_parent_id'] = expenseNatureId;
-    }
-
-    url += "?" + jQuery.param(params);
-
-    $("#purchase_solicitation_expense_nature").data('source', url);
-  }
-
-  $('#purchase_solicitation_budget_allocation_id').on("change", function(event, budgetAllocation) {
-    if (budgetAllocation) {
-      $('#purchase_solicitation_budget_allocation_balance').val(numberWithDelimiter(budgetAllocation.balance));
-      $('#purchase_solicitation_budget_allocation_expense_nature').val(budgetAllocation.expense_nature);
-      filterExpenseNatureSource(budgetAllocation.expense_nature_id);
-    } else {
-      $('#purchase_solicitation_budget_allocation_balance').val('0,00');
-      $('#purchase_solicitation_budget_allocation_expense_nature').val('');
-    }
-  });
-
-  $('#purchase_solicitation_budget_structure_id').on("change", function(event, budgetStructure) {
-    setBudgetAllocationSource();
-  });
-
-  $('#purchase_solicitation_accounting_year').on("change", function(event, budgetStructure) {
-    setBudgetAllocationSource();
-  });
-
-  $('form.purchase_solicitation').on('keyup', '#purchase_solicitation_quantity, #purchase_solicitation_unit_price', function() {
-    var itemQuantity = new BigNumber(parsePtBrFloat($('#purchase_solicitation_quantity').val() || '0')),
-        itemUnitPrice = new BigNumber(parsePtBrFloat($('#purchase_solicitation_unit_price').val() || '0')),
-        total = itemUnitPrice.multiply(itemQuantity);
-
-    $('#purchase_solicitation_estimated_total_price').val( numberWithDelimiter(parseFloat(total)) );
-
-    total = total.add( calculateItemsTotalValue() );
-
-    refreshItemsTotalValue(total);
-  });
-
-  $('#purchase_solicitation_material_id').on('change', function (event, material) {
-    $('#purchase_solicitation_reference_unit').val('');
-
-    if (material) {
-      $('#purchase_solicitation_reference_unit').val(material.reference_unit);
-    }
-  });
-
-  $('#purchase_solicitation_kind').on('change', function() {
     setMaterialLabel();
     setMaterialSource();
-  });
-
-  $('#purchase_solicitation_budget_structure_id').on('change', function() {
     setBudgetAllocationSource();
-  });
-
-  $('#purchase_solicitation_items_records').on('nestedGrid:AfterAdd', function() {
-    refreshItemsTotalValue( calculateItemsTotalValue() );
-  });
-
-  $('#purchase_solicitation_items_records').on('nestedGrid:afterRemove', function() {
-    refreshItemsTotalValue( calculateItemsTotalValue() );
-  });
-
-  setMaterialLabel();
-  setMaterialSource();
-  setBudgetAllocationSource();
 });

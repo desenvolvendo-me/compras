@@ -39,7 +39,7 @@
       <tr>
         <td width="30%"><%= material.to_s %></td>
         <td><%= %></td>
-        <td><%= material.purchase_solicitation_items.first.purchase_solicitation.purchase_form.expense.nature_expense %></td>
+        <td><%= Report::TotalPurchasePerElementAndNatureHelper.get_expense(material) %></td>
         <td width="10%"><%= material.purchase_process_items.first.unit_price %></td>
 
       </tr>

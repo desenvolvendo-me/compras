@@ -4,13 +4,14 @@ class SupplyOrder < Compras::Model
 
   attr_accessible :licitation_process_id, :creditor_id, :authorization_date,
                   :items_attributes, :invoices_attributes, :year, :pledge_id, :purchase_solicitation_id,
-                  :updatabled, :contract_id, :supply_request_id
+                  :updatabled, :contract_id, :supply_request_id, :purchase_form_id
 
   belongs_to :contract
   belongs_to :purchase_solicitation
   belongs_to :licitation_process
   belongs_to :creditor
   belongs_to :supply_request
+  belongs_to :purchase_form
 
   has_many :items, class_name: 'SupplyOrderItem', dependent: :destroy
   has_many :invoices, dependent: :destroy

@@ -60,19 +60,14 @@
           </tr>
           </thead>
           <tbody>
-          <% total_i_l = 0 %>
-          <% total_i_f = 0 %>
           <% supply_order.items.each do |item| %>
-            <% balance = Report::BalanceHelper.get_balance(contract, item) %>
-            <% total_i_l += Report::BalanceHelper.get_quantity_item_licitation(contract.licitation_process, item.material) %>
-            <% total_i_f += balance["total"] %>
-            <% total_c_l += item.quantity %>
-            <% total_c_f += balance["total"] %>
+            <% total_c_l += Report::BalanceHelper.get_balance(contract, item) %>
+            <% total_c_f += item.quantity %>
             <tr>
               <td><%= item.material %></td>
               <td><%= Report::BalanceHelper.get_quantity_item_licitation(contract.licitation_process, item.material) %></td>
-              <td><%= balance["total"] %></td>
-              <td><%= balance["balance"] %></td>
+              <td><%= item.quantity %></td>
+              <td><%= Report::BalanceHelper.get_balance(contract, item) %></td>
             </tr>
           <% end %>
           </tbody>
@@ -83,7 +78,7 @@
   <% end %>
   <span>
     <p>
-      <b> TOTAL LICITADO: </b> <%= total_c_l %>
+      <b> TOTAL LICITADO: </b> <%= Report::BalanceHelper.get_quantity_bid(licitation_process) %>
       <b> TOTAL FORNECIDO: </b> <%= total_c_f %>
     </p>
   </span>

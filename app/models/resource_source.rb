@@ -3,7 +3,8 @@ class ResourceSource < Compras::Model
 
   validates :code, :name, presence: true, uniqueness:true
   validates :year, presence: true, :mask => "9999", :allow_blank => true
-  validates :code, :mask => "999", :allow_blank => true
+  validates :code, :mask => "9999", :allow_blank => true
+  validates :number_convention, :mask => "999999999", :allow_blank => true
 
   orderize "created_at"
   filterize
