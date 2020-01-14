@@ -6,7 +6,7 @@ class PurchaseSolicitationDecorator
   include ActionView::Helpers::NumberHelper
   include ActionView::Helpers::TranslationHelper
 
-  attr_header :code_and_year, :department, :user, :service_status
+  attr_header :code_and_year, :department, :user, :service_status, :purchase_form
 
   def expense
     self.purchase_form.nil? || self.purchase_form.expense.nil? ? '':"#{self.purchase_form.expense}"
