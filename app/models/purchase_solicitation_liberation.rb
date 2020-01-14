@@ -10,7 +10,7 @@ class PurchaseSolicitationLiberation < Compras::Model
 
   validates :date, :justification, :responsible, :service_status,
             :purchase_solicitation, :presence => true
-  validates :date, :timeliness => { :type => :date }, :allow_blank => true
+  validates :date, :timeliness => {:type => :date}, :allow_blank => true
 
   validate :not_allow_release_without_purchase_form
 
@@ -24,8 +24,9 @@ class PurchaseSolicitationLiberation < Compras::Model
   end
 
   private
+
   def not_allow_release_without_purchase_form
-    if self.service_status.eql?("liberated") && self.purchase_solicitation.purchase_form.nil?
+    if self.service_status.eql?("liberated") && self.purchase_solicitation.purchase_forms.any?
       errors.add(:base, :not_allow_release_without_purchase_form)
     end
   end
