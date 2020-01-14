@@ -5,7 +5,7 @@ class PurchaseSolicitation < Compras::Model
                   :delivery_location_id, :general_observations, :justification,
                   :purchase_solicitation_budget_allocations_attributes,
                   :items_attributes, :budget_structure_id,
-                  :user_id, :department_id, :purchase_form_id, :attendant_status,
+                  :user_id, :department_id, :attendant_status,
                   :model_request, :demand_id, :purchase_forms_attributes
 
   attr_readonly :code
@@ -19,7 +19,6 @@ class PurchaseSolicitation < Compras::Model
   has_enumeration_for :service_status, :with => PurchaseSolicitationServiceStatus,
                       :create_helpers => true, :create_scopes => true
 
-  belongs_to :purchase_form
   belongs_to :user, :class_name => 'User', :foreign_key => 'user_id'
   belongs_to :department, :class_name => 'Department', :foreign_key => 'department_id'
   belongs_to :responsible, :class_name => 'Employee', :foreign_key => 'responsible_id'
