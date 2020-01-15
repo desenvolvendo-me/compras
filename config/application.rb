@@ -112,7 +112,8 @@ module Compras
       'supply_orders.js',
       'supply_requests.js',
       'additive_solicitations.js',
-      'expenses.js'
+      'expenses.js',
+      'modal_filter.js'
     ]
 
     config.generators do |g|

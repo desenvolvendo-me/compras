@@ -6,6 +6,7 @@ class LicitationProcessesController < CrudController
   has_scope :published_edital, :type => :boolean
   has_scope :by_ratification_and_year
   has_scope :ratified, type: :boolean
+  has_scope :by_contract
 
   def index
     @licitation_processes = filter_by_purchasing_unit(collection)
