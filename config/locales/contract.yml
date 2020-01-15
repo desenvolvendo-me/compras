@@ -7,38 +7,38 @@ pt-BR:
 
     attributes:
       contract:
-        department: 'Unidade responsável'
-        budget_structure: 'Unidade responsável'
-        budget_structure_responsible: 'Pessoa responsável'
-        cancellation_date: 'Data de cancelamento'
-        cancellation_reason: 'Motivo do cancelamento'
+        department: 'Unidade Responsável'
+        budget_structure: 'Unidade Responsável'
+        budget_structure_responsible: 'Pessoa Responsável'
+        cancellation_date: 'Data de Cancelamento'
+        cancellation_reason: 'Motivo do Cancelamento'
         consortium_agreement: "Consórcio/Convênio"
-        content: 'Objeto do contrato'
+        content: 'Objeto do Contrato'
         contract_file: 'Contrato'
-        contract_guarantees: 'Garantias do contrato'
-        contract_number: "Número do contrato"
-        contract_type: 'Tipo de contrato'
-        contract_validity: 'Validade do contrato'
-        contract_value: 'Valor do contrato'
+        contract_guarantees: 'Garantias do Contrato'
+        contract_number: "Número do Contrato"
+        contract_type: 'Tipo de Contrato'
+        contract_validity: 'Validade do Contrato'
+        contract_value: 'Valor do Contrato'
         creditors: 'Fornecedores'
         creditor: 'Fornecedor'
-        default_fine: "Multa inadimplemento"
-        description: "Observações gerais"
-        direct_purchase: 'Compra direta'
-        dissemination_source: 'Local de publicação'
-        end_date: "Data de validade"
-        execution_type: "Forma de execução"
-        guarantee_value: 'Valor da garantia'
-        lawyer: 'Advogado responsável pela gestão do contrato'
-        lawyer_code: 'O.A.B. do advogado responsável'
-        licitation_process: 'Processo de compra'
+        default_fine: "Multa Inadimplemento"
+        description: "Observações Gerais"
+        direct_purchase: 'Compra Direta'
+        dissemination_source: 'Local de Publicação'
+        end_date: "Data de Validade"
+        execution_type: "Forma de Execução"
+        guarantee_value: 'Valor da Garantia'
+        lawyer: 'Advogado Responsável pela Gestão do Contrato'
+        lawyer_code: 'O.A.B. do Advogado Responsável'
+        licitation_process: 'Processo de Compra'
         modality_humanize: 'Modalidade'
-        parent: 'Contrato principal'
-        penalty_fine: "Multa rescisória"
-        publication_date: 'Data de publicação'
-        sequential_number: 'Número sequencial'
-        signature_date: "Data da assinatura"
+        parent: 'Contrato Principal'
+        penalty_fine: "Multa Rescisória"
+        publication_date: 'Data de Publicação'
+        sequential_number: 'Número Sequencial'
+        signature_date: "Data da Assinatura"
         subcontracting: 'Subcontratação'
-        start_date: "Início da vigência"
-        year: "Ano do contrato"
+        start_date: "Início da Vigência"
+        year: "Ano do Contrato"
         balance_control_type: "Controle de Saldo"
