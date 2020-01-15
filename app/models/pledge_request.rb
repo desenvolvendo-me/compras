@@ -4,9 +4,8 @@ class PledgeRequest < Compras::Model
   attr_accessible :descriptor_id, :budget_allocation_id, :expense_nature_id,
                   :accounting_account_id, :contract_id, :reserve_fund_id, :purchase_process_id,
                   :creditor_id, :amount, :emission_date,
-                  :items_attributes,
-                  :purchase_solicitations_attributes,
-                  :budget_allocation, :expense_id
+                  :items_attributes, :purchase_solicitation_id,
+                  :budget_allocation, :expense_id, :purchase_form_id
 
 
   has_many :purchase_solicitations, class_name: 'PledgeRequestPurchaseSolicitation',
@@ -22,6 +21,7 @@ class PledgeRequest < Compras::Model
   belongs_to :creditor
   belongs_to :expense
   belongs_to :purchase_solicitation
+  belongs_to :purchase_form
 
   #TODO: Remover os comentários
   belongs_to_resource :descriptor
