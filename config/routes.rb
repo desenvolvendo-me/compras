@@ -276,6 +276,7 @@ Compras::Application.routes.draw do
   end
 
   post 'contract/plegde_request' => 'contracts#plegde_request', as: :contracts_plegde_request
+  post 'contract/licitation_process' => 'contracts#licitation_process', as: :contracts_licitation_process
 
   resources :contract_termination_annuls, :only => [:new, :create, :edit, :update]
 

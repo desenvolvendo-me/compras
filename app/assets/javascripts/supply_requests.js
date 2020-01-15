@@ -1,13 +1,10 @@
+//= require modal_filter
+
 function setModalUrlToPurchaseSolicitation() {
-    var urlModal = Routes.modal_purchase_solicitations,
-        params = {
-            by_licitation_process: $('#supply_request_licitation_process_id').val()
-        };
-
-    urlModal += "?" + $.param(params);
-    $('#supply_request_purchase_solicitation').data('modal-url', urlModal);
+    var selector_licitation_process_id = '#supply_request_licitation_process_id'
+    var selector_purchase_solicitation_modal = '#supply_request_purchase_solicitation'
+    setModalUrlToPurchaseSolicitationByLicitationProcess(selector_licitation_process_id, selector_purchase_solicitation_modal)
 }
-
 function setModalUrlToCreditor() {
     var urlModal = Routes.modal_creditors,
         params = {

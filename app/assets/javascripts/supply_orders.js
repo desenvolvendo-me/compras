@@ -1,3 +1,12 @@
+//= require modal_filter
+
+function setModalUrlToPurchaseSolicitation() {
+    var selector_licitation_process_id = '#supply_order_licitation_process_id'
+    var selector_purchase_solicitation_modal = '#supply_order_purchase_solicitation'
+
+    setModalUrlToPurchaseSolicitationByLicitationProcess(selector_licitation_process_id, selector_purchase_solicitation_modal)
+}
+
 function setModalUrlToPurchaseForm() {
     var urlModal = Routes.modal_purchase_forms,
         params = {
@@ -7,16 +16,6 @@ function setModalUrlToPurchaseForm() {
     urlModal += "?" + $.param(params);
     console.log(urlModal)
     $('#supply_order_purchase_form').data('modal-url', urlModal);
-}
-
-function setModalUrlToPurchaseSolicitation() {
-    var urlModal = Routes.modal_purchase_solicitations,
-        params = {
-            by_licitation_process: $('#supply_order_licitation_process_id').val()
-        };
-
-    urlModal += "?" + $.param(params);
-    $('#supply_order_purchase_solicitation').data('modal-url', urlModal);
 }
 
 function setModalUrlToCreditor() {

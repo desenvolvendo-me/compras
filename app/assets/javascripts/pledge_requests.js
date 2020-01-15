@@ -1,3 +1,5 @@
+//= require modal_filter
+
 function sumTotalItems() {
     var unit_price, quantity, total = 0;
 
@@ -71,37 +73,6 @@ function setExpenseNatureModalUrl(parent_id) {
     $('#pledge_request_expense_nature').data('modal-url', url);
 }
 
-function setReserveFunds() {
-    var url = Routes.reserve_funds,
-        params = {
-            by_purchase_process_id: $('#pledge_request_purchase_process_id').val(),
-            without_pledge: true
-        },
-        request = $.ajax({
-            url: url,
-            data: params,
-            dataType: 'json',
-        });
-
-    request.done(function (data) {
-        $('#pledge_request_reserve_fund_id').html('');
-
-        _(data).each(function (reserve_fund) {
-            $('#pledge_request_reserve_fund_id').append(function () {
-                return $('<option>').text(reserve_fund.label)
-                    .val(reserve_fund.id)
-                    .data('amount', reserve_fund.amount);
-            });
-        });
-
-        $('#pledge_request_reserve_fund_id').trigger('change');
-    });
-
-    request.fail(function (jqXHR, textStatus, errorThrown) {
-        $('#pledge_request_reserve_fund_id').html('');
-    });
-}
-
 function setCreditor() {
     var contract_id = $('#pledge_request_contract_id').val()
     if (contract_id) {
@@ -114,8 +85,8 @@ function setCreditor() {
             type: 'POST',
             success: function (data) {
                 $('#pledge_request_creditor_show').val(data["creditor"]);
-                $('#pledge_request_balance_show').val(data["balance"]);
-                $('#pledge_request_value_show').val(data["value"]);
+                $('#pledge_request_balance_show').val("R$ " + data["balance"]);
+                $('#pledge_request_value_show').val("R$ " + data["value"]);
             }
         });
     }
@@ -142,9 +113,37 @@ function setPurchaseSolicitationBalance() {
     }
 }
 
+function setLicitationProcesso() {
+    var contract_id = $('#pledge_request_contract_id').val()
+    if (contract_id) {
+        $.ajax({
+            url: Routes.contracts_licitation_process,
+            data: {
+                contract_id: contract_id
+            },
+            dataType: 'json',
+            type: 'POST',
+            success: function (data) {
+                $('#pledge_request_purchase_process_id').val(data["licitation_process"]["id"]);
+                $('#pledge_request_purchase_process').val(data["licitation_process"]["description"]);
+            }
+        });
+    }
+
+
+}
+
+function setModalUrlToPurchaseSolicitation() {
+    var selector_licitation_process_id = '#pledge_request_purchase_process_id'
+    var selector_purchase_solicitation_modal = '#pledge_request_purchase_solicitation'
+    setModalUrlToPurchaseSolicitationByLicitationProcess(selector_licitation_process_id, selector_purchase_solicitation_modal)
+}
+
 $(document).ready(function () {
     setCreditor();
     setPurchaseSolicitationBalance();
+    setLicitationProcesso();
+    setModalUrlToPurchaseSolicitation();
 
     $('#pledge_request_purchase_solicitation_id').on('change', function () {
         setPurchaseSolicitationBalance();
@@ -152,6 +151,8 @@ $(document).ready(function () {
 
     $('#pledge_request_contract_id').on('change', function () {
         setCreditor();
+        setLicitationProcesso();
+        setModalUrlToPurchaseSolicitation();
     });
 
     $('form#new_pledge_request').on('keyup', '.quantity', function () {
