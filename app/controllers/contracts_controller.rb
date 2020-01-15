@@ -30,15 +30,6 @@ class ContractsController < CrudController
     render :json => {creditor: contract.creditors.first.person.name, balance: balance, value: contract.contract_value}
   end
 
-  def licitation_process
-    contract = Contract.find(params["contract_id"])
-
-    licitation_process_id = contract.licitation_process.id
-    licitation_process = contract.licitation_process.to_s
-
-    render :json => {licitation_process: {id: licitation_process_id, description: licitation_process}}
-  end
-
   protected
 
   def default_filters
