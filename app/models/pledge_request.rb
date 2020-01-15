@@ -6,22 +6,24 @@ class PledgeRequest < Compras::Model
                   :creditor_id, :amount, :emission_date,
                   :items_attributes,
                   :purchase_solicitations_attributes,
-                  :budget_allocation,:expense_id
+                  :budget_allocation, :expense_id
 
 
   has_many :purchase_solicitations, class_name: 'PledgeRequestPurchaseSolicitation',
-           dependent: :destroy, order: :id
+           dependent: :destroy, order: :id #TODO: Remover
   has_many :items, class_name: 'PledgeRequestItem', :dependent => :restrict,
-           :order => :id, inverse_of: :pledge_request
+           :order => :id, inverse_of: :pledge_request #TODO: Remover
 
   accepts_nested_attributes_for :purchase_solicitations, :items,
-                                :allow_destroy => true
+                                :allow_destroy => true #TODO: Remover
 
-  belongs_to :purchase_process, class_name: 'LicitationProcess'
+  belongs_to :purchase_process, class_name: 'LicitationProcess' #TODO: Usar o nome do modal original
   belongs_to :contract
   belongs_to :creditor
   belongs_to :expense
+  belongs_to :purchase_solicitation
 
+  #TODO: Remover os comentários
   belongs_to_resource :descriptor
   belongs_to_resource :accounting_account
   # belongs_to_resource :budget_allocation
