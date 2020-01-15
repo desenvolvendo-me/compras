@@ -38,6 +38,7 @@ class PledgeRequest < Compras::Model
   delegate :amount, to: :reserve_fund, allow_nil: true, prefix: true
   delegate :budget_allocations_ids, to: :purchase_process, allow_nil: true, prefix: true
 
+  validates_presence_of :purchase_process, :purchase_solicitation, :purchase_form
   # validates :descriptor_id, :budget_allocation_id, :accounting_account_id,
   #   :purchase_process, :creditor, :amount, :emission_date, presence: true
   # validate :require_reserve_fund_id
