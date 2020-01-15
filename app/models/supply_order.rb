@@ -40,7 +40,7 @@ class SupplyOrder < Compras::Model
   end
 
   def to_s
-    "#{number} - #{I18n.l(authorization_date)}"
+    "#{number}/#{year}"
   end
 
   private
