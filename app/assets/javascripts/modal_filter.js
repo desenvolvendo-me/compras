@@ -1,12 +1,33 @@
-function setModalUrlToPurchaseSolicitationByLicitationProcess(selector_licitation_process_id, selector_purchase_solicitation_modal) {
+function setModalUrlToPurchaseSolicitationByLicitationProcess(selector_id, selector_modal) {
+    var value = $(selector_id).val();
     var urlModal = Routes.modal_purchase_solicitations,
         params = {
-            by_licitation_process: $(selector_licitation_process_id).val()
+            by_licitation_process: value
         };
 
     urlModal += "?" + $.param(params);
-    console.log(urlModal)
-    console.log(selector_licitation_process_id)
-    console.log(selector_purchase_solicitation_modal)
-    $(selector_purchase_solicitation_modal).data('modal-url', urlModal);
+    $(selector_modal).data('modal-url', urlModal);
 }
+
+function setModalUrlToPurchaseFormByPurchaseSolicitation(selector_id, selector_modal) {
+    var value = $(selector_id).val();
+    var urlModal = Routes.modal_purchase_forms,
+        params = {
+            by_purchase_solicitation: value
+        };
+
+    urlModal += "?" + $.param(params);
+    $(selector_modal).data('modal-url', urlModal);
+}
+
+function setModalUrlToLicitationProcessByContract(selector_id, selector_modal) {
+    var value = $(selector_id).val();
+    var urlModal = Routes.modal_licitation_processes,
+        params = {
+            by_contract: value
+        };
+
+    urlModal += "?" + $.param(params);
+    $(selector_modal).data('modal-url', urlModal);
+}
+
