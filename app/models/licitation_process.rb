@@ -177,6 +177,10 @@ class LicitationProcess < Compras::Model
   orderize "id DESC"
   filterize
 
+  scope :term, lambda {|q|
+    where("process::text LIKE ?","%#{q}%")
+  }
+
   scope :published_edital, lambda {
     joins { publications }.where {
       publications.publication_of.eq PublicationOf::EDITAL
