@@ -14,7 +14,6 @@ function setModalUrlToPurchaseForm() {
         };
 
     urlModal += "?" + $.param(params);
-    console.log(urlModal)
     $('#supply_order_purchase_form').data('modal-url', urlModal);
 }
 
@@ -196,9 +195,7 @@ $(document).ready(function () {
         $(".remove-nested-record").attr('class', "remove-nested-record hidden")
     }
 
-    if ($("#supply_order_number_nf").val() == "") {
-        $(".supply_order_submit_close").attr('data-disabled', "Desabilitado");
-    }
+    $(".supply_order_submit_close").attr('data-disabled', "Desabilitado");
 
     $("#supply_order_contract_id").on("change", function (event, contract) {
         $("#supply_order_creditor").val(contract ? contract.creditor : '');
@@ -208,10 +205,8 @@ $(document).ready(function () {
         $("#supply_order_updatabled").prop('checked', true);
     });
 
-    $("#supply_order_number_nf").on("change", function () {
-        if ($("#supply_order_number_nf").val() == "") {
-            $(".supply_order_submit_close").attr('data-disabled', "Desabilitado");
-        } else {
+    $("#supply_order_invoices_adicionar").on("click", function () {
+        if (!$('#supply_order_updatabled').is(':checked')) {
             $(".supply_order_submit_close").removeAttr('data-disabled');
         }
     });

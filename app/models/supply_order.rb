@@ -4,7 +4,7 @@ class SupplyOrder < Compras::Model
 
   attr_accessible :licitation_process_id, :creditor_id, :authorization_date,
                   :items_attributes, :invoices_attributes, :year, :pledge_id, :purchase_solicitation_id,
-                  :updatabled, :contract_id, :supply_request_id, :purchase_form_id
+                  :updatabled, :contract_id, :supply_request_id, :purchase_form_id, :observation
 
   belongs_to :contract
   belongs_to :purchase_solicitation
