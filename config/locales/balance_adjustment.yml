@@ -11,3 +11,6 @@ pt-BR:
         licitation_process: "Processo de Licitação"
         purchase_solicitation: "Solicitação de Compra"
         contract: "Contrato"
+        quantity: "Quantidade"
+        material: "Material"
+        quantity_new: "Nova Quantidade"
