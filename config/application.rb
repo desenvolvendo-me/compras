@@ -113,6 +113,7 @@ module Compras
       'supply_requests.js',
       'additive_solicitations.js',
       'expenses.js',
+      'balance_adjustments.js',
       'modal_filter.js'
     ]
 
