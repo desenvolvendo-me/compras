@@ -43,6 +43,7 @@ pt-BR:
         estimated_total_price: "Valor Total"
         model_request: "Solicitação Modelo"
         attendant_status: "Status de Atendimento"
+        lot: "Lote"
 
   purchase_solicitation:
     messages:
