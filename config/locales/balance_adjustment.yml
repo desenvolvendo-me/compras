@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      balance_adjustment:
+        one: "Ajuste de Saldo"
+        other: "Ajuste de Saldos"
+
+    attributes:
+      balance_adjustment:
+        observation: "Observação"
+        licitation_process: "Processo de Licitação"
+        purchase_solicitation: "Solicitação de Compra"
+        contract: "Contrato"
