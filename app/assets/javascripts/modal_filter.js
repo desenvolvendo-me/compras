@@ -31,3 +31,14 @@ function setModalUrlToLicitationProcessByContract(selector_id, selector_modal) {
     $(selector_modal).data('modal-url', urlModal);
 }
 
+function setModalUrlToContractByPurchaseSolicitation(selector_id, selector_modal) {
+    var value = $(selector_id).val();
+    var urlModal = Routes.modal_contracts,
+        params = {
+            purchase_process_id: value
+        };
+
+    urlModal += "?" + $.param(params);
+    console.log(urlModal)
+    $(selector_modal).data('modal-url', urlModal);
+}
