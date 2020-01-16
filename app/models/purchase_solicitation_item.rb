@@ -1,6 +1,6 @@
 class PurchaseSolicitationItem < Compras::Model
   attr_accessible :purchase_solicitation_id, :material_id,
-                  :brand, :quantity, :unit_price
+                  :brand, :quantity, :unit_price, :lot
 
   attr_accessor :order
 
