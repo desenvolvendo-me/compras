@@ -40,7 +40,7 @@ class SupplyOrder < Compras::Model
   end
 
   def to_s
-    "#{number}/#{year}"
+    "#{number}"
   end
 
   private
