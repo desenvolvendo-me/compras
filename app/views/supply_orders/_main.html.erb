@@ -1,3 +1,4 @@
+
 <div class="yui3-g">
   <div class="yui3-u-1-4">
     <%= f.input :number, :disabled => true %>
@@ -46,10 +47,10 @@
 
 <div class="yui3-g">
   <div class="yui3-u-1-4">
-    <%= f.input :purchase_solicitation, :disabled => f.object.licitation_process.nil? || f.object.updatabled %>
+    <%= f.input :purchase_solicitation, :disabled =>  f.object.updatabled %>
   </div>
   <div class="yui3-u-1-4">
-    <%= f.input :purchase_form, :disabled => f.object.licitation_process.nil? || f.object.updatabled %>
+    <%= f.input :purchase_form, :disabled => f.object.updatabled %>
   </div>
 
   <div class="yui3-u-1-4">
