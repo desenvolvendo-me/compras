@@ -1,0 +1,54 @@
+<div id="supply_order_requests">
+
+  <div class="nested-fields add-margin-bottom">
+    <%= hidden_field_tag :supply_request_id, nil, :name => 'supply_order_request[id]' %>
+
+    <div class="yui3-g">
+      <div class="yui3-u-1-3">
+        <%= f.input :supply_request, :as => :auto_complete, :fake => true,
+                    :source_path => supply_requests_path,
+                    :required => true, :disabled => f.object.updatabled %>
+      </div>
+    </div>
+
+    <div class="yui3-u-1-6">
+      <%= button_tag 'Adicionar', type: :button,
+                     'data-template' => 'supply_order_requests_template',
+                     'data-records' => 'supply_order_requests-records',
+                     'data-disabled' => not_updateable_message,
+                     :id => "supply_order_requests_adicionar",
+                     :class => 'button add-nested-record field-without-label' %>
+    </div>
+  </div>
+
+  <%= f.error :supply_requests %>
+
+  <table id="supply_order_requests-records" class="records">
+    <thead>
+    <tr>
+      <th><%= SupplyOrder.human_attribute_name :supply_request %></th>
+      <th></th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <%= f.association :supply_requests, :collection => localized(f.object.supply_requests) do |p| %>
+      <%= render 'supply_order_requests/form',
+                 id: p.object.id,
+                 supply_request: p.object.supply_request,
+                 supply_request_id: p.object.supply_request_id,
+                 f: p %>
+    <% end %>
+    </tbody>
+  </table>
+
+  <%= mustache "supply_order_requests_template" do %>
+    <%= f.association :supply_requests_attributes, :collection => f.object.supply_requests.build, :index => '{{uuid}}' do |p| %>
+      <%= render 'supply_order_requests/form',
+                 id: '{{id}}',
+                 supply_request: '{{supply_request}}',
+                 supply_request_id: '{{supply_request_id}}',
+                 f: p %>
+    <% end %>
+  <% end %>
+</div>
