@@ -663,6 +663,8 @@ Compras::Application.routes.draw do
     get 'modal_info', :on => :member
   end
 
+  match 'api/purchase_solicitations/show' => 'purchase_solicitations#api_show', as: :purchase_solicitations_api_show
+
   get 'purchase_solicitation/department' => 'purchase_solicitations#department', as: :purchase_solicitation_department
   get 'purchase_solicitation/balance' => 'purchase_solicitations#balance', as: :purchase_solicitation_balance
 

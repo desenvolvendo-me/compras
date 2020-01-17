@@ -52,12 +52,11 @@ function mergeItem(item) {
 }
 
 function renderItem(item) {
-    console.log(item.material)
     var itemBinds = {
         uuid: _.uniqueId('fresh-'),
         id: '',
         material_id: item.material_id,
-        material: item.material_description,
+        material: item.material.code + " - " + item.material.description,
         quantity: item.quantity,
         quantity_new: 0
     };
@@ -67,11 +66,32 @@ function renderItem(item) {
     $('#items-records tbody').append(data).trigger("nestedGrid:afterAdd");
 }
 
+function loadItem() {
+    var purchase_solicitation_id = $("#balance_adjustment_purchase_solicitation_id").val();
+
+    $.ajax({
+        url: Routes.purchase_solicitations_api_show,
+        data: {purchase_solicitation_id: purchase_solicitation_id},
+        dataType: 'json',
+        type: 'POST',
+        success: function (data) {
+            $.each(data.items, function (i, item) {
+                if (hasItemAlreadyAdded(item)) {
+                    // mergeItem(item);
+                } else {
+                    renderItem(item);
+                }
+            });
+        }
+    });
+}
+
 $(document).ready(function () {
     disablePurchaseSolicitation();
     setModalUrlToPurchaseSolicitation();
     disableContract();
     setModalUrlToContractByLicitationProcess();
+    loadItem();
 
     $('#balance_adjustment_licitation_process_id').on('change', function () {
         disablePurchaseSolicitation();
@@ -81,19 +101,7 @@ $(document).ready(function () {
     });
 
 
-    $("#balance_adjustment_purchase_solicitation_id").on("change", function (event, purchaseSolicitation) {
-
-        if (!purchaseSolicitation) {
-            purchaseSolicitation = {};
-        }
-        console.log(purchaseSolicitation)
-        $.each(purchaseSolicitation.items, function (i, item) {
-            if (hasItemAlreadyAdded(item)) {
-                mergeItem(item);
-            } else {
-                renderItem(item);
-            }
-        });
-
+    $("#balance_adjustment_purchase_solicitation_id").on("change", function () {
+        loadItem();
     });
 });

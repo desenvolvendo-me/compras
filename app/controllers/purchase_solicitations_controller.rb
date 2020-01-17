@@ -55,6 +55,12 @@ class PurchaseSolicitationsController < CrudController
     render :json => {balance: total_expected_value - total_pledge}
   end
 
+  def api_show
+    purchase_solicitation = PurchaseSolicitation.find(params["purchase_solicitation_id"])
+
+    render :json => purchase_solicitation.to_json(include: {items: {include: :material}})
+  end
+
   protected
 
   def filter_by_department(collection)
