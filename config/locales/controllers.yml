@@ -84,6 +84,8 @@ pt-BR:
     report_total_products_purchase_new: "Relatório de Total de Produtos Comprados"
     report_total_purchase_per_element_and_nature_new: "Relatório de Total de Compras por Elemento e Natureza"
     report_contracts: "Contratos"
+    report_department_requests: "Solicitantes"
+    report_pledge_requests: "Relatório de Pedido de Empenho"
     resource_sources: "Fonte de Recursos"
     signature_configurations: "Configurações de Assinatura"
     signatures: "Assinaturas"

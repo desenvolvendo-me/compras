@@ -1,0 +1,9 @@
+pt-BR:
+  activemodel:
+    attributes:
+      pledge_request_report:
+        emission_date: "Data de Emissão"
+        purchase_process: "Processo de Compra"
+        modality: "Modalidade"
+        contract: "Contrato"
+        year: "Ano do Contrato"

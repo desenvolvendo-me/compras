@@ -916,6 +916,8 @@ Compras::Application.routes.draw do
       resources :materials
       resources :contracts
       resources :licitation_processes
+      resources :department_requests
+      resources :pledge_requests
     end
 
     match 'map_of_bids/:licitation_process_id' => 'map_of_bids#show', as: :map_of_bids
