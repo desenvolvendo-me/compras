@@ -21,7 +21,9 @@
 </div>
 
 <br>
-
+<% total_bid_per_licitation_process = 0 %>
+<% total_provided_per_contract = 0 %>
+<% total_balance_per_material = 0 %>
 <% @licitation_processes.uniq.each do |licitation_process| %>
   <div style="text-align: justify; margin-left: 10px">
   <span>
@@ -30,8 +32,6 @@
     </p>
   </span>
   </div>
-  <% total_c_l = 0 %>
-  <% total_c_f = 0 %>
   <% Report::ExtractConsumptionPerProcessHelper.get_contracts(licitation_process, @contract).each do |contract| %>
     <div style="text-align: justify; margin-left: 20px">
   <span>
@@ -53,16 +53,16 @@
         <table class="records" style="margin-left: 30px">
           <thead>
           <tr>
-            <th>MATERIAL</th>
-            <th>QUANTIDADE LICITADA</th>
-            <th>QUANTIDADE FORNECIDA</th>
-            <th>SALDO</th>
+            <th width="50%">MATERIAL</th>
+            <th width="20%">QUANTIDADE LICITADA</th>
+            <th width="20%">QUANTIDADE FORNECIDA</th>
+            <th width="10%">SALDO ATUAL</th>
           </tr>
           </thead>
           <tbody>
           <% supply_order.items.each do |item| %>
-            <% total_c_l += Report::BalanceHelper.get_balance(contract, item) %>
-            <% total_c_f += item.quantity %>
+            <% total_balance_per_material += Report::BalanceHelper.get_balance(contract, item) %>
+            <% total_provided_per_contract += item.quantity %>
             <tr>
               <td><%= item.material %></td>
               <td><%= Report::BalanceHelper.get_quantity_item_licitation(contract.licitation_process, item.material) %></td>
@@ -74,15 +74,16 @@
         </table>
       </div>
       </p>
+      <% total_bid_per_licitation_process += Report::BalanceHelper.get_quantity_bid(licitation_process, supply_order) %>
     <% end %>
   <% end %>
-  <span>
-    <p>
-      <b> TOTAL LICITADO: </b> <%= Report::BalanceHelper.get_quantity_bid(licitation_process) %>
-      <b> TOTAL FORNECIDO: </b> <%= total_c_f %>
-    </p>
-  </span>
-  <br>
-  <br>
-  <br>
 <% end %>
+<br>
+<br>
+<span>
+  <p>
+    <b> TOTAL LICITADO: </b> <%= total_bid_per_licitation_process %>
+    <b> TOTAL FORNECIDO: </b> <%= total_provided_per_contract %>
+    <b> TOTAL SALDO: </b> <%= total_balance_per_material %>
+  </p>
+</span>

@@ -2,13 +2,13 @@ class LicitationProcess < Compras::Model
   include BelongsToResource
 
   attr_accessible :payment_method_id, :type_of_purchase,
-                  :year, :process_date,:readjustment_index_id, :caution_value,
+                  :year, :process_date, :readjustment_index_id, :caution_value,
                   :envelope_delivery_date, :budget_allocation_year,
                   :envelope_delivery_time, :proposal_envelope_opening_date,
                   :proposal_envelope_opening_time, :document_type_ids,
                   :period, :period_unit, :expiration, :expiration_unit,
                   :judgment_form_id, :execution_type,
-                  :price_registration, :status,:object_type, :date,
+                  :price_registration, :status, :object_type, :date,
                   :protocol, :modality, :description,
                   :purchase_process_budget_allocations_attributes,
                   :contract_guarantees, :extension_clause, :index_update_rate_id,
@@ -39,11 +39,11 @@ class LicitationProcess < Compras::Model
   has_enumeration_for :expiration_unit, :with => PeriodUnit
   has_enumeration_for :modality, :create_helpers => true, :create_scopes => true
   has_enumeration_for :object_type, :with => PurchaseProcessObjectType, :create_helpers => true
-  has_enumeration_for :period_unit, :with => PeriodUnit, create_helpers: { prefix: true }
+  has_enumeration_for :period_unit, :with => PeriodUnit, create_helpers: {prefix: true}
   has_enumeration_for :status, :with => PurchaseProcessStatus, :create_helpers => true
   has_enumeration_for :type_of_purchase, :with => PurchaseProcessTypeOfPurchase,
-    :create_helpers => true, create_scopes: true
-  has_enumeration_for :type_of_removal, create_helpers: { prefix: true }
+                      :create_helpers => true, create_scopes: true
+  has_enumeration_for :type_of_removal, create_helpers: {prefix: true}
   has_enumeration_for :purchase_solicitation_import_option
 
   belongs_to :purchasing_unit
@@ -83,7 +83,7 @@ class LicitationProcess < Compras::Model
   has_many :creditor_proposals, class_name: 'PurchaseProcessCreditorProposal', order: :id
   has_many :realignment_prices, dependent: :restrict, foreign_key: :purchase_process_id
   has_many :tied_creditor_proposals, class_name: 'PurchaseProcessCreditorProposal',
-           conditions: { tied: true }, order: 'ranking, creditor_id, purchase_process_item_id, lot'
+           conditions: {tied: true}, order: 'ranking, creditor_id, purchase_process_item_id, lot'
   has_many :items_creditors, through: :items, source: :creditor, order: :id
   has_many :creditor_disqualifications, class_name: 'PurchaseProcessCreditorDisqualification', dependent: :restrict
   has_many :process_responsibles, :dependent => :restrict
@@ -93,12 +93,12 @@ class LicitationProcess < Compras::Model
   has_many :contracts, dependent: :restrict
   has_many :supply_orders, dependent: :restrict
   has_many :fractionations, class_name: 'PurchaseProcessFractionation', dependent: :destroy,
-    foreign_key: :purchase_process_id
+           foreign_key: :purchase_process_id
 
   has_one :judgment_commission_advice, :dependent => :restrict
   has_one :purchase_process_accreditation, :dependent => :restrict
   has_one :trading, class_name: 'PurchaseProcessTrading', :dependent => :restrict,
-    foreign_key: :purchase_process_id
+          foreign_key: :purchase_process_id
 
   accepts_nested_attributes_for :purchase_process_budget_allocations, :items, :creditor_proposals,
                                 :process_responsibles, :tied_creditor_proposals, allow_destroy: true
@@ -119,18 +119,18 @@ class LicitationProcess < Compras::Model
   validates :goal, :licensor_rights_and_liabilities, :licensee_rights_and_liabilities,
             :presence => true, :if => :concessions_or_permits?
   validates :type_of_removal, :justification, :justification_and_legal, :presence => true, :if => :direct_purchase?
-  validates :process, uniqueness: { scope: :year }
-  validates :budget_allocation_year, numericality: { greater_than_or_equal_to: :year }, allow_blank: true
+  validates :process, uniqueness: {scope: :year}
+  validates :budget_allocation_year, numericality: {greater_than_or_equal_to: :year}, allow_blank: true
   validates :tied_creditor_proposals, no_duplication: {
-    with: :ranking,
-    allow_nil: true,
-    scope: [:licitation_process_id, :purchase_process_item_id, :lot],
-    if_condition: lambda { |creditor_proposal| creditor_proposal.ranking > 0 }
+      with: :ranking,
+      allow_nil: true,
+      scope: [:licitation_process_id, :purchase_process_item_id, :lot],
+      if_condition: lambda {|creditor_proposal| creditor_proposal.ranking > 0}
   }
   validates :items, no_duplication: {
-    with: :material_id,
-    scope: [:creditor_id],
-    message: :material_cannot_be_duplicated_by_creditor
+      with: :material_id,
+      scope: [:creditor_id],
+      message: :material_cannot_be_duplicated_by_creditor
   }
   validate :validate_bidders_before_edital_publication
   validate :validate_updates, :unless => :updateable?
@@ -142,36 +142,36 @@ class LicitationProcess < Compras::Model
   with_options :allow_blank => true do |allowing_blank|
     allowing_blank.validates :year, :mask => "9999"
     allowing_blank.validates :envelope_delivery_date,
-      :timeliness => {
-        :on_or_after => :today,
-        :on_or_after_message => :should_be_on_or_after_today,
-        :type => :date,
-        :on => :create,
-        :unless => :allow_insert_past_processes?
-      }
+                             :timeliness => {
+                                 :on_or_after => :today,
+                                 :on_or_after_message => :should_be_on_or_after_today,
+                                 :type => :date,
+                                 :on => :create,
+                                 :unless => :allow_insert_past_processes?
+                             }
     allowing_blank.validates :proposal_envelope_opening_date,
-      timeliness: {
-        on_or_after: :proposal_envelope_opening_date_limit,
-        type: :date,
-        on: :update,
-        if: :licitation?
-      }
+                             timeliness: {
+                                 on_or_after: :proposal_envelope_opening_date_limit,
+                                 type: :date,
+                                 on: :update,
+                                 if: :licitation?
+                             }
     allowing_blank.validates :proposal_envelope_opening_date,
-      :timeliness => {
-        :on_or_after => :envelope_delivery_date,
-        :on_or_after_message => :should_be_on_or_after_envelope_delivery_date,
-        :type => :date,
-        :on => :create
-      }
+                             :timeliness => {
+                                 :on_or_after => :envelope_delivery_date,
+                                 :on_or_after_message => :should_be_on_or_after_envelope_delivery_date,
+                                 :type => :date,
+                                 :on => :create
+                             }
     allowing_blank.validates :envelope_delivery_time, :proposal_envelope_opening_time,
-      :timeliness => {
-        :type => :time,
-        :on => :update
-      }
+                             :timeliness => {
+                                 :type => :time,
+                                 :on => :update
+                             }
     allowing_blank.validates :stage_of_bids_time,
-      :timeliness => {
-        :type => :time
-      }
+                             :timeliness => {
+                                 :type => :time
+                             }
   end
 
   orderize "id DESC"
@@ -182,41 +182,47 @@ class LicitationProcess < Compras::Model
   }
 
   scope :published_edital, lambda {
-    joins { publications }.where {
+    joins {publications}.where {
       publications.publication_of.eq PublicationOf::EDITAL
     }
   }
 
-  scope :by_ratification_month_and_year, lambda { |month, year|
-    joins { licitation_process_ratifications }.
-      where(%{
+  scope :by_ratification_month_and_year, lambda {|month, year|
+    joins {licitation_process_ratifications}.
+        where(%{
         extract(month from compras_licitation_process_ratifications.ratification_date) = ? AND
         extract(year from compras_licitation_process_ratifications.ratification_date) = ?},
-        month, year)
+              month, year)
   }
 
-  scope :by_ratification_and_year, lambda { |year|
-    joins { licitation_process_ratifications }.
-    where(%{
+  scope :by_ratification_and_year, lambda {|year|
+    joins {licitation_process_ratifications}.
+        where(%{
       extract(year from compras_licitation_process_ratifications.ratification_date) = ?}, year)
   }
 
+  scope :by_contract, lambda {|contract_id|
+    joins {contracts}.where {
+      contracts.id.eq contract_id
+    }
+  }
+
   scope :not_removal_by_limit, -> do
-    where { type_of_removal.not_eq TypeOfRemoval::REMOVAL_BY_LIMIT }
+    where {type_of_removal.not_eq TypeOfRemoval::REMOVAL_BY_LIMIT}
   end
 
   scope :by_type_of_purchase, -> (type_of_purchase) do
-    where { |query| query.type_of_purchase.eq type_of_purchase }
+    where {|query| query.type_of_purchase.eq type_of_purchase}
   end
 
   scope :ratified, lambda {
-    joins { licitation_process_ratifications }.uniq
+    joins {licitation_process_ratifications}.uniq
   }
 
   def get_items_amount
-    val=0
+    val = 0
     self.items.each do |item|
-      val += item.unit_price*item.quantity
+      val += item.unit_price * item.quantity
     end
     val
   end
@@ -283,7 +289,7 @@ class LicitationProcess < Compras::Model
   end
 
   def winning_bid
-    all_licitation_process_classifications.detect { |classification| classification.situation == SituationOfProposal::WON}
+    all_licitation_process_classifications.detect {|classification| classification.situation == SituationOfProposal::WON}
   end
 
   def edital_published?
@@ -368,7 +374,7 @@ class LicitationProcess < Compras::Model
   end
 
   def reserve_funds(repository = ReserveFund)
-    repository.all(params: { by_purchase_process_id: id })
+    repository.all(params: {by_purchase_process_id: id})
   end
 
   def budget_allocation_capabilities
@@ -379,10 +385,10 @@ class LicitationProcess < Compras::Model
 
   def reserve_funds_available(repository = ReserveFund)
     repository.all(
-      params: {
-        by_purchase_process_id: id,
-        without_pledge: true
-      })
+        params: {
+            by_purchase_process_id: id,
+            without_pledge: true
+        })
   end
 
   def destroy_fractionations!
@@ -422,8 +428,8 @@ class LicitationProcess < Compras::Model
           end
 
           errors.add :base, message,
-            material_class: material_class, modality: modality_type,
-            limit: ::I18n::Alchemy::NumericParser.localize(limit)
+                     material_class: material_class, modality: modality_type,
+                     limit: ::I18n::Alchemy::NumericParser.localize(limit)
         end
       end
     end

@@ -279,6 +279,8 @@ Compras::Application.routes.draw do
 
   resources :contract_termination_annuls, :only => [:new, :create, :edit, :update]
 
+  resources :balance_adjustments
+
   get 'demands/modal', :as => :modal_demands
   resources :demands do
     collection do
@@ -286,6 +288,9 @@ Compras::Application.routes.draw do
       get :modal
     end
   end
+
+  match 'api/demands/show' => 'demands#api_show', as: :demands_api_show
+
 
   resources :contract_types do
     collection do

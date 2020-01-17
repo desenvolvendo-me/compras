@@ -1,3 +1,12 @@
+//= require modal_filter
+
+function setModalUrlToPurchaseSolicitation() {
+    var selector_licitation_process_id = '#supply_order_licitation_process_id'
+    var selector_purchase_solicitation_modal = '#supply_order_purchase_solicitation'
+
+    setModalUrlToPurchaseSolicitationByLicitationProcess(selector_licitation_process_id, selector_purchase_solicitation_modal)
+}
+
 function setModalUrlToPurchaseForm() {
     var urlModal = Routes.modal_purchase_forms,
         params = {
@@ -5,18 +14,7 @@ function setModalUrlToPurchaseForm() {
         };
 
     urlModal += "?" + $.param(params);
-    console.log(urlModal)
     $('#supply_order_purchase_form').data('modal-url', urlModal);
-}
-
-function setModalUrlToPurchaseSolicitation() {
-    var urlModal = Routes.modal_purchase_solicitations,
-        params = {
-            by_licitation_process: $('#supply_order_licitation_process_id').val()
-        };
-
-    urlModal += "?" + $.param(params);
-    $('#supply_order_purchase_solicitation').data('modal-url', urlModal);
 }
 
 function setModalUrlToCreditor() {
@@ -197,9 +195,7 @@ $(document).ready(function () {
         $(".remove-nested-record").attr('class', "remove-nested-record hidden")
     }
 
-    if ($("#supply_order_number_nf").val() == "") {
-        $(".supply_order_submit_close").attr('data-disabled', "Desabilitado");
-    }
+    $(".supply_order_submit_close").attr('data-disabled', "Desabilitado");
 
     $("#supply_order_contract_id").on("change", function (event, contract) {
         $("#supply_order_creditor").val(contract ? contract.creditor : '');
@@ -209,10 +205,8 @@ $(document).ready(function () {
         $("#supply_order_updatabled").prop('checked', true);
     });
 
-    $("#supply_order_number_nf").on("change", function () {
-        if ($("#supply_order_number_nf").val() == "") {
-            $(".supply_order_submit_close").attr('data-disabled', "Desabilitado");
-        } else {
+    $("#supply_order_invoices_adicionar").on("click", function () {
+        if (!$('#supply_order_updatabled').is(':checked')) {
             $(".supply_order_submit_close").removeAttr('data-disabled');
         }
     });

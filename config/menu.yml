@@ -81,6 +81,7 @@ menu:
 
   - "Instrumentos Contratuais":
     - contracts
+    - balance_adjustments
     - additive_solicitations
     - pledge_requests
     - "Fornecimento":

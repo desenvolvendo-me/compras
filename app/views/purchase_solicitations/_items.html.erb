@@ -9,5 +9,5 @@
   </div>
 
   <%= f.input :items, as: :nested_grid, data_disabled: (f.object.decorator.is_annulled_message or f.object.decorator.licitation_process_started),
-              columns: [:material, :reference_unit, :brand, :quantity, :unit_price, :estimated_total_price] %>
+              columns: [:material, :lot, :reference_unit, :brand, :quantity, :unit_price, :estimated_total_price] %>
 </div>

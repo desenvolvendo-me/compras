@@ -1,9 +1,11 @@
 <div class="yui3-g">
   <div class="yui3-u-3-5">
     <%= f.input :material, :as => :auto_complete, :fake => true, :required => true,
-      'data-hidden-field-class' => 'unique', :input_html => { "data-disabled" => f.object.decorator.disabled_materials, :readonly => f.object.kind.blank? } %>
+                'data-hidden-field-class' => 'unique', :input_html => {"data-disabled" => f.object.decorator.disabled_materials, :readonly => f.object.kind.blank?} %>
   </div>
-
+  <div class="yui3-u-1-8">
+    <%= f.input :lot, :as => :fake %>
+  </div>
   <div class="yui3-u-1-8">
     <%= f.input :reference_unit, :as => :fake, :disabled => true %>
   </div>
@@ -16,16 +18,16 @@
 
   <div class="yui3-u-1-6">
     <%= f.input :quantity, :as => :fake, :required => true,
-      :input_html => { 'data-decimal' => true, :value => '0,00', 'data-precision' => 2, :maxlength => 15, :class => 'numeric' } %>
+                :input_html => {'data-decimal' => true, :value => '0,00', 'data-precision' => 2, :maxlength => 15, :class => 'numeric'} %>
   </div>
 
   <div class="yui3-u-1-6">
     <%= f.input :unit_price, :as => :fake,
-      :input_html => { 'data-decimal' => true, :value => '0,00', 'data-precision' => 2, :maxlength => 15, :class => 'numeric' } %>
+                :input_html => {'data-decimal' => true, :value => '0,00', 'data-precision' => 2, :maxlength => 15, :class => 'numeric'} %>
   </div>
 
   <div class="yui3-u-1-6">
     <%= f.input :estimated_total_price, :as => :fake, :disabled => true,
-      :input_html => { 'data-decimal' => true, :value => '0,00', 'data-precision' => 2, :maxlength => 15, :class => 'numeric' } %>
+                :input_html => {'data-decimal' => true, :value => '0,00', 'data-precision' => 2, :maxlength => 15, :class => 'numeric'} %>
   </div>
 </div>
