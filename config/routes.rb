@@ -289,6 +289,9 @@ Compras::Application.routes.draw do
     end
   end
 
+  match 'api/demands/show' => 'demands#api_show', as: :demands_api_show
+
+
   resources :contract_types do
     collection do
       get :filter
