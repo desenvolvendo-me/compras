@@ -22,11 +22,8 @@ module Report::BalanceHelper
     quantity_provided.to_i
   end
 
-  def self.get_quantity_bid(licitation_process, supply_order)
-    supply_order_material_ids = supply_order.items.pluck(:material_id)
-    licitation_process_material_ids = licitation_process.items.where(material_id: supply_order_material_ids).pluck(:material_id)
-
-    licitation_process.items.where(material_id: licitation_process_material_ids.uniq).sum(:quantity)
+  def self.get_quantity_bid(licitation_process, material_ids)
+    licitation_process.items.where(material_id: material_ids.uniq).sum(:quantity)
   end
 
 end
