@@ -1,0 +1,44 @@
+<div>
+  <table class="records">
+    <thead>
+    <tr  style="text-align: center;">
+      <td width="60%"> RELATÓRIO DE PEDIDOS DE EMPENHO </td>
+      <td width="20%"> <%= Time.new.strftime("%d/%m/%Y") %> </td>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+</div>
+
+<div style="text-align: justify">
+
+</div>
+
+<br>
+
+
+<div>
+  <table class="records">
+    <thead>
+    <tr>
+      <th>EMISSÃO</th>
+      <th>NÚMERO DO PROCESSO</th>
+      <th>MODALIDADE</th>
+      <th>CONTRATO</th>
+      <th>ANO DO CONTRATO</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @pledge_request.each do |pledge_request| %>
+      <tr>
+        <td><%= l(pledge_request.emission_date) unless pledge_request.emission_date.nil? %></td>
+        <td><%= pledge_request.purchase_process unless pledge_request.purchase_process.nil? %></td>
+        <td><%= pledge_request.purchase_process.modality_humanize unless pledge_request.purchase_process.nil? %></td>
+        <td><%= pledge_request.contract.to_s %></td>
+        <td><%= pledge_request.contract.year unless pledge_request.contract.nil? %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

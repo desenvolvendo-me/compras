@@ -1,0 +1,43 @@
+<div>
+  <table class="records">
+    <thead>
+    <tr  style="text-align: center;">
+      <td width="60%"> RELATÓRIO DE SOLICITANTES </td>
+      <td width="20%"> <%= Time.new.strftime("%d/%m/%Y") %> </td>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+</div>
+
+<div style="text-align: justify">
+
+</div>
+
+<br>
+<% @departments.each do |department| %>
+  <div>
+    <table class="records">
+      <thead>
+      <tr>
+        <th style="text-align: center;"> <%= department.description %> </th>
+      </tr>
+      </thead>
+      <tbody>
+
+      <% if department.department_people.empty? %>
+        <tr>
+          <td style="text-align: center;"> Não possui solicitantes !</td>
+        </tr>
+      <% end %>
+
+      <% department.department_people.each do |department_people| %>
+        <tr>
+          <td > <%= department_people.user %> </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
