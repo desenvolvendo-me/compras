@@ -121,7 +121,7 @@ class PurchaseSolicitation < Compras::Model
   }
 
   def to_s
-    "#{code}/#{accounting_year} #{budget_structure} - RESP: #{responsible}"
+    "#{code}/#{accounting_year}"
   end
 
   def can_be_grouped?
