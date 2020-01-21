@@ -178,7 +178,7 @@ class LicitationProcess < Compras::Model
   filterize
 
   scope :term, lambda {|q|
-    where("process::text LIKE ?","%#{q}%")
+    where("process::text LIKE ?", "%#{q}%")
   }
 
   scope :published_edital, lambda {
@@ -199,6 +199,12 @@ class LicitationProcess < Compras::Model
     joins {licitation_process_ratifications}.
         where(%{
       extract(year from compras_licitation_process_ratifications.ratification_date) = ?}, year)
+  }
+
+  scope :by_creditor, lambda {|creditor_id|
+    joins {creditor_proposals}.where {
+      creditor_proposals.creditor_id.eq creditor_id
+    }.uniq
   }
 
   scope :by_contract, lambda {|contract_id|
