@@ -11,6 +11,7 @@
 //= require compras/nested_grid
 //= require compras/index_json
 //= require reports/balance_per_creditor
+//= require reports/balance_per_process_and_contract
 
 
 $(".clear").live('click', function() {
