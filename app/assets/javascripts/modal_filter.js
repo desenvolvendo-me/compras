@@ -1,3 +1,39 @@
+function setModalUrlToCreditorByContract(selector_id, selector_modal) {
+    var value = $(selector_id).val();
+    var urlModal = Routes.modal_creditors,
+        params = {
+            by_contract: value
+        };
+
+    urlModal += "?" + $.param(params);
+    $(selector_modal).data('modal-url', urlModal);
+}
+
+function setModalUrlToCreditorByPurchasingUnit(selector_id, selector_modal) {
+    var value = $(selector_id).val();
+    var urlModal = Routes.modal_creditors,
+        params = {
+            by_purchasing_unit: value
+        };
+
+    urlModal += "?" + $.param(params);
+    console.log(value)
+    console.log(urlModal)
+
+    $(selector_modal).data('modal-url', urlModal);
+}
+
+function setModalUrlToCreditorByLicitationProcess(selector_id, selector_modal) {
+    var value = $(selector_id).val();
+    var urlModal = Routes.modal_creditors,
+        params = {
+            by_ratification_and_licitation_process_id: value
+        };
+
+    urlModal += "?" + $.param(params);
+    $(selector_modal).data('modal-url', urlModal);
+}
+
 function setModalUrlToPurchaseSolicitationByLicitationProcess(selector_id, selector_modal) {
     var value = $(selector_id).val();
     var urlModal = Routes.modal_purchase_solicitations,
