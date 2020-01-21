@@ -213,30 +213,33 @@ $(document).ready(function () {
     });
 
     $("#supply_order_requests_adicionar").on("click", function () {
-        var supply_request_ids = []
-        $("table#supply_order_requests-records input.supply_request-id").each(function () {
-            supply_request_ids.push($(this).val())
-        });
+        setTimeout(function () {
+            var supply_request_ids = []
 
-        $.ajax({
-            url: Routes.supply_requests_api_show,
-            data: {supply_request_ids: supply_request_ids},
-            dataType: 'json',
-            type: 'POST',
-            success: function (data) {
-                $.each(data, function (i, supply_request) {
-                    $.each(supply_request.items, function (i, item) {
-                        console.log(item)
-                        if (hasItemAlreadyAdded(item)) {
-                            mergeItem(item);
-                        } else {
-                            renderItem(item);
-                        }
+            $("table#supply_order_requests-records input.supply_request-id").each(function () {
+                supply_request_ids.push($(this).val())
+            });
+
+            $.ajax({
+                url: Routes.supply_requests_api_show,
+                data: {supply_request_ids: supply_request_ids},
+                dataType: 'json',
+                type: 'POST',
+                success: function (data) {
+                    $.each(data, function (i, supply_request) {
+                        $.each(supply_request.items, function (i, item) {
+                            if (hasItemAlreadyAdded(item)) {
+                                mergeItem(item);
+                            } else {
+                                renderItem(item);
+                            }
+                        });
                     });
-                });
 
-            }
-        });
+                }
+            });
+        }, 1000);
+
 
     });
 
