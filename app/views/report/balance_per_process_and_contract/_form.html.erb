@@ -11,9 +11,8 @@
 
 
   <div class="yui3-u-1-3">
-    <%= f.input :creditor, as: :auto_complete, required: true,
-                hidden_field: :creditor_id,
-                source_path: creditors_path(by_purchasing_unit: current_user.id) %>
+    <%= f.input :creditor, as: :modal, data_url: modal_creditors_path,
+                hidden_field: :creditor_id, :include_blank => true %>
   </div>
 
 </div>

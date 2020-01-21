@@ -5,7 +5,7 @@ class SupplyRequestsController < CrudController
   end
 
   def api_show
-    supply_request = SupplyRequest.find(params["supply_request_id"])
+    supply_request = SupplyRequest.where(id: params["supply_request_ids"])
     render :json => supply_request.to_json(include: {items: {include: :material}})
   end
 

@@ -7,6 +7,7 @@ class LicitationProcessesController < CrudController
   has_scope :by_ratification_and_year
   has_scope :ratified, type: :boolean
   has_scope :by_contract
+  has_scope :by_creditor
   has_scope :term, :allow_blank => true
 
   def index

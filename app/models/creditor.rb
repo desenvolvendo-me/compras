@@ -35,15 +35,12 @@ class Creditor < Persona::Creditor
 
   before_save :clean_fields_when_is_no_autonomous
 
-  scope :by_licitation_process, lambda {|q|
-
-  }
-
   scope :by_purchasing_unit, lambda {|q|
     department_ids = DepartmentPerson.where(user_id: q).pluck(:department_id)
     purchasing_unit_ids = Department.where(id: department_ids).pluck(:purchasing_unit_id)
     licitation_process_ids = LicitationProcess.where(purchasing_unit_id: purchasing_unit_ids).pluck(:id)
     creditor_ids = Contract.joins(:creditors).where(licitation_process_id: licitation_process_ids).pluck("compras_contracts_unico_creditors.creditor_id").uniq
+
     where(id: creditor_ids)
   }
 
@@ -54,6 +51,11 @@ class Creditor < Persona::Creditor
 
   scope :by_id, lambda {|id|
     where {|creditor| creditor.id.eq(id)}
+  }
+
+  scope :by_contract, lambda {|contract_id|
+    joins {contracts}.
+        where {compras_contracts_unico_creditors.contract_id.eq(contract_id)}
   }
 
   scope :accreditation_purchase_process_id, ->(purchase_process_id) do

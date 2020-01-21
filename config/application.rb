@@ -114,7 +114,8 @@ module Compras
       'additive_solicitations.js',
       'expenses.js',
       'balance_adjustments.js',
-      'modal_filter.js'
+      'modal_filter.js',
+      'reports/balance_per_creditor'
     ]
 
     config.generators do |g|
