@@ -20,6 +20,28 @@ function setModalUrlToPurchaseFormByPurchaseSolicitation(selector_id, selector_m
     $(selector_modal).data('modal-url', urlModal);
 }
 
+function setModalUrlToLicitationProcessByCreditor(selector_id, selector_modal) {
+    var value = $(selector_id).val();
+    var urlModal = Routes.modal_licitation_processes,
+        params = {
+            by_creditor: value
+        };
+
+    urlModal += "?" + $.param(params);
+    $(selector_modal).data('modal-url', urlModal);
+}
+
+function setModalUrlToDepartmentByCreditor(selector_id, selector_modal) {
+    var value = $(selector_id).val();
+    var urlModal = Routes.modal_departments,
+        params = {
+            by_creditor: value
+        };
+
+    urlModal += "?" + $.param(params);
+    $(selector_modal).data('modal-url', urlModal);
+}
+
 function setModalUrlToLicitationProcessByContract(selector_id, selector_modal) {
     var value = $(selector_id).val();
     var urlModal = Routes.modal_licitation_processes,

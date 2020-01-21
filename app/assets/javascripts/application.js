@@ -10,6 +10,8 @@
 //= require compras/autocomplete_form
 //= require compras/nested_grid
 //= require compras/index_json
+//= require reports/balance_per_creditor
+
 
 $(".clear").live('click', function() {
   $(this).closest(".modal-finder").find("input.modal").val("");
