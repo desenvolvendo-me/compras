@@ -17,7 +17,6 @@ class Expense < Compras::Model
   has_enumeration_for :destine_type, :with => ExpenseDestineType
 
   validate :organ, :unity, presence: true
-  validate :is_child?
   validates :year, :mask => '9999',
             numericality: {
                 only_integer: true,
@@ -32,12 +31,6 @@ class Expense < Compras::Model
 
   def to_s
     "#{organ} - #{unity}"
-  end
-
-  def is_child?
-    if self.organ.to_s != self.unity.to_s[0...2] && !self.unity.nil?
-      errors.add(:unity, :should_belongs_to_expense)
-    end
   end
 
   def set_destine_type

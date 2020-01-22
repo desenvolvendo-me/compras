@@ -106,7 +106,9 @@ $(function () {
 
         records.find(':input[name*="[' + name + ']"]').each(function() {
           if ($(this).val() == value) {
-            unique = false;
+              unique = false;
+          }else {
+              unique = true;
           }
         });
       }

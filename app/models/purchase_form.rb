@@ -15,6 +15,10 @@ class PurchaseForm < Compras::Model
     "#{name}"
   end
 
+  scope :term, lambda {|q|
+    where {name.like("%#{q}%")}
+  }
+
   scope :by_purchase_solicitation, lambda {|purchase_solicitation_id|
     joins {purchase_solicitations}.
         where {(purchase_solicitations.purchase_solicitation_id.eq purchase_solicitation_id)}

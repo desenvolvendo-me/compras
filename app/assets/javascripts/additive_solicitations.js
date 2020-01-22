@@ -25,7 +25,7 @@ function setModalUrlToMaterial() {
         };
 
     urlSource += "?" + $.param(params);
-    console.log(urlSource)
+
     $('#additive_solicitation_material').attr('data-source', urlSource);
 }
 
