@@ -7,7 +7,6 @@ class Organ < Compras::Model
   validates :name, :code, presence: true, uniqueness: true
   validates :category, presence: true
   validates :year, :mask => "9999", :allow_blank => true
-  before_save :code_category
   before_save :code_organ_type
 
   orderize "created_at"
@@ -17,14 +16,6 @@ class Organ < Compras::Model
     where {|organ| organ.organ_type.eq(organ_type)}
   }
 
-
-  def code_category
-    if self.category == 'analytical'
-      errors.add(:code, :wrong_length, :count => 5) unless self.code.length == 6
-    else
-      errors.add(:code, :wrong_length, :count => 2) unless self.code.length == 2
-    end
-  end
 
   def code_organ_type
     if self.organ_type == 'unity'
