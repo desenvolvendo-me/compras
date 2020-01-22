@@ -148,8 +148,20 @@ function renderItem(item) {
     $('#items-records tbody').append(data).trigger("nestedGrid:afterAdd");
 }
 
+function setModalUrlToLiciationProccessByStatus(selector_modal) {
+    var urlModal = Routes.modal_licitation_processes,
+        params = {
+            by_status: "approved"
+        };
+
+    urlModal += "?" + $.param(params);
+
+    console.log(urlModal)
+    $(selector_modal).data('modal-url', urlModal);
+}
 
 $(document).ready(function () {
+    setModalUrlToLiciationProccessByStatus("#supply_order_licitation_process");
     setModalUrlToPurchaseForm();
     setModalUrlToCreditor();
     setPledgeSource();

@@ -9,6 +9,7 @@ class LicitationProcessesController < CrudController
   has_scope :by_contract
   has_scope :by_creditor
   has_scope :term, :allow_blank => true
+  has_scope :by_status, :allow_blank => true
 
   def index
     @licitation_processes = filter_by_purchasing_unit(collection)

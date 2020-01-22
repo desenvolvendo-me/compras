@@ -1,4 +1,3 @@
-
 <div class="yui3-g">
   <div class="yui3-u-1-4">
     <%= f.input :number, :disabled => true %>
@@ -9,7 +8,9 @@
   </div>
 
   <div class="yui3-u-1-4">
-    <%= f.input :licitation_process, :required => true, :disabled => f.object.updatabled %>
+    <%= f.input :licitation_process, as: :modal,
+                data_url: modal_licitation_processes_url(by_status: "approved"),
+                hidden_field: :licitation_process_id %>
   </div>
 
   <div class="yui3-u-1-4">
@@ -47,7 +48,7 @@
 
 <div class="yui3-g">
   <div class="yui3-u-1-4">
-    <%= f.input :purchase_solicitation, :disabled =>  f.object.updatabled %>
+    <%= f.input :purchase_solicitation, :disabled => f.object.updatabled %>
   </div>
   <div class="yui3-u-1-4">
     <%= f.input :purchase_form, :disabled => f.object.updatabled %>
