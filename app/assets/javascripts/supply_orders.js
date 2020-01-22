@@ -86,13 +86,13 @@ function setDepartment() {
 
 function setMaterialTotalAndBalance() {
     var licitation_process_id = $('#supply_order_licitation_process_id').val()
-    var material_id = $('#supply_order_material_id').val()
     var purchase_solicitation_id = $('#supply_order_purchase_solicitation_id').val()
     var contract_id = $('#supply_order_contract_id').val()
     var supply_order_id = $(window.location.href.split("/")).get(-2)
+    var material_id = $('#supply_order_material_id').val()
     var quantity = $('#supply_order_quantity').val()
 
-    if (licitation_process_id && purchase_solicitation_id && material_id && quantity) {
+    if (licitation_process_id && purchase_solicitation_id && contract_id && supply_order_id && material_id && quantity) {
         $.ajax({
             url: Routes.licitation_process_material_total_balance,
             data: {
@@ -170,6 +170,16 @@ function setModalUrlToContract() {
     $('#supply_order_contract').data('modal-url', urlModal);
 }
 
+function setModalUrlToMaterial() {
+    var urlSource = Routes.materials,
+        params = {
+            by_licitation_process: $('#supply_order_licitation_process_id').val()
+        };
+
+    urlSource += "?" + $.param(params);
+
+    $('#supply_order_material').attr('data-source', urlSource);
+}
 
 $(document).ready(function () {
     setModalUrlToLiciationProccessByStatus("#supply_order_licitation_process");
@@ -179,8 +189,11 @@ $(document).ready(function () {
     setModalUrlToPurchaseSolicitation();
     setMaterialTotalAndBalance();
     setModalUrlToContract();
+    setModalUrlToMaterial();
     disableWhenSelected("#supply_order_licitation_process_id", "#supply_order_contract")
     disableWhenSelected("#supply_order_licitation_process_id", "#supply_order_purchase_solicitation")
+    // disableWhenSelected("#supply_order_contract_id", "#supply_order_material")
+    // disableWhenSelected("#supply_order_contract_id", "#supply_order_quantity")
 
     $('form.supply_order').on('change', '#supply_order_purchase_solicitation_id', function () {
         setDepartment();
@@ -201,6 +214,7 @@ $(document).ready(function () {
         setModalUrlToPurchaseSolicitation();
         setMaterialTotalAndBalance();
         setModalUrlToContract();
+        setModalUrlToMaterial();
     });
 
     $('#supply_order_licitation_process').on('change', function (event, licitation_process) {
