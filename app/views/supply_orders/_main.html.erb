@@ -9,7 +9,7 @@
 
   <div class="yui3-u-1-4">
     <%= f.input :licitation_process, as: :modal,
-                data_url: modal_licitation_processes_url(by_status: "approved"),
+                data_url: modal_licitation_processes_url,
                 hidden_field: :licitation_process_id %>
   </div>
 
@@ -33,7 +33,8 @@
   </div>
 
   <div class="yui3-u-1-4">
-    <%= f.input :contract, :disabled => f.object.updatabled %>
+    <%= f.input :contract, as: :modal, data_url: modal_contracts_url,
+                hidden_field: :contract_id %>
   </div>
 
   <div class="yui3-u-1-4">

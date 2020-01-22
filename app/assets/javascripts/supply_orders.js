@@ -1,4 +1,5 @@
 //= require modal_filter
+//= require input
 
 function setModalUrlToPurchaseSolicitation() {
     var selector_licitation_process_id = '#supply_order_licitation_process_id'
@@ -156,9 +157,19 @@ function setModalUrlToLiciationProccessByStatus(selector_modal) {
 
     urlModal += "?" + $.param(params);
 
-    console.log(urlModal)
     $(selector_modal).data('modal-url', urlModal);
 }
+
+function setModalUrlToContract() {
+    var urlModal = Routes.modal_contracts,
+        params = {
+            purchase_process_id: $('#supply_order_licitation_process_id').val()
+        };
+
+    urlModal += "?" + $.param(params);
+    $('#supply_order_contract').data('modal-url', urlModal);
+}
+
 
 $(document).ready(function () {
     setModalUrlToLiciationProccessByStatus("#supply_order_licitation_process");
@@ -167,6 +178,9 @@ $(document).ready(function () {
     setPledgeSource();
     setModalUrlToPurchaseSolicitation();
     setMaterialTotalAndBalance();
+    setModalUrlToContract();
+    disableWhenSelected("#supply_order_licitation_process_id", "#supply_order_contract")
+    disableWhenSelected("#supply_order_licitation_process_id", "#supply_order_purchase_solicitation")
 
     $('form.supply_order').on('change', '#supply_order_purchase_solicitation_id', function () {
         setDepartment();
@@ -186,6 +200,7 @@ $(document).ready(function () {
         setPledgeSource();
         setModalUrlToPurchaseSolicitation();
         setMaterialTotalAndBalance();
+        setModalUrlToContract();
     });
 
     $('#supply_order_licitation_process').on('change', function (event, licitation_process) {
