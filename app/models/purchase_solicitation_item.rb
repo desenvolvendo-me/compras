@@ -21,7 +21,6 @@ class PurchaseSolicitationItem < Compras::Model
            prefix: true, allow_nil: true
 
   validates :material, :quantity, :presence => true
-  validates :material_id, :uniqueness => { :scope => :purchase_solicitation_id }, :allow_nil => true
   validate :validate_material_characteristic, :if => :services?
 
   scope :by_material, lambda { |material_ids|

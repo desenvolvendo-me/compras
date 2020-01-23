@@ -8,13 +8,13 @@
   <div class="nested-fields add-margin-bottom">
     <%= hidden_field_tag :item_id, nil, :name => 'licitation_process_item[id]' %>
     <div class="yui3-g">
-      <div class="yui3-u-1-8">
-        <%= f.input :lot, :as => :fake, :required => true %>
-      </div>
-
       <div class="yui3-u-3-4">
         <%= f.input :material, :as => :auto_complete, :fake => true, :required => true,
-          'data-hidden-field-class' => f.object.decorator.material_unique_class %>
+                    'data-hidden-field-class' => f.object.decorator.material_unique_class %>
+      </div>
+
+      <div class="yui3-u-1-8">
+        <%= f.input :lot, :as => :fake, :required => true, :input_html => {class: 'unique'} %>
       </div>
 
       <div class="yui3-u-1-8">
@@ -23,17 +23,17 @@
 
       <div class="yui3-u-1-6">
         <%= f.input :quantity, :as => :fake, :required => true,
-          :input_html => { 'data-numeric' => true, :maxlength => 15, :class => 'numeric integer' } %>
+                    :input_html => {'data-numeric' => true, :maxlength => 15, :class => 'numeric integer'} %>
       </div>
 
       <div class="yui3-u-1-4">
         <%= f.input :unit_price, :as => :fake,
-          :input_html => { 'data-decimal' => true, :value => '0,00', 'data-precision' => 2, :maxlength => 15, :class => 'numeric' } %>
+                    :input_html => {'data-decimal' => true, :value => '0,00', 'data-precision' => 2, :maxlength => 15, :class => 'numeric'} %>
       </div>
 
       <div class="yui3-u-1-4">
         <%= f.input :estimated_total_price, :as => :fake,
-          :input_html => { 'data-decimal' => true, :value => '0,00', 'data-precision' => 2, :maxlength => 15, :class => 'numeric' } %>
+                    :input_html => {'data-decimal' => true, :value => '0,00', 'data-precision' => 2, :maxlength => 15, :class => 'numeric'} %>
       </div>
     </div>
 
@@ -48,15 +48,15 @@
         <%= label_tag :additional_information, PurchaseProcessItem.human_attribute_name(:additional_information) %>
 
         <%= text_area_tag :additional_information, nil, rows: 20, cols: 40,
-          name: "licitation_process[additional_information]", class: "text" %>
+                          name: "licitation_process[additional_information]", class: "text" %>
       </div>
 
       <div class="yui3-u-1-6">
-         <%= button_tag 'Adicionar', type: :button,
-           :class => 'button add-nested-record field-without-label',
-           'data-template' => 'licitation_process_items_template',
-           'data-records' => 'items-records',
-           'data-disabled' => not_updateable_message %>
+        <%= button_tag 'Adicionar', type: :button,
+                       :class => 'button add-nested-record field-without-label',
+                       'data-template' => 'licitation_process_items_template',
+                       'data-records' => 'items-records',
+                       'data-disabled' => not_updateable_message %>
       </div>
     </div>
   </div>
@@ -65,36 +65,36 @@
 
   <table id="items-records" class="records">
     <thead>
-      <tr>
-        <th><%= PurchaseProcessItem.human_attribute_name :lot %></th>
-        <th><%= PurchaseProcessItem.human_attribute_name :material %></th>
-        <th class="item-creditor hidden"><%= PurchaseProcessItem.human_attribute_name :creditor %></th>
-        <th><%= PurchaseProcessItem.human_attribute_name :reference_unit %></th>
-        <th><%= PurchaseProcessItem.human_attribute_name :quantity %></th>
-        <th>Valor unitário</th>
-        <th><%= PurchaseProcessItem.human_attribute_name :estimated_total_price %></th>
-        <th></th>
-        <th></th>
-      </tr>
+    <tr>
+      <th><%= PurchaseProcessItem.human_attribute_name :lot %></th>
+      <th><%= PurchaseProcessItem.human_attribute_name :material %></th>
+      <th class="item-creditor hidden"><%= PurchaseProcessItem.human_attribute_name :creditor %></th>
+      <th><%= PurchaseProcessItem.human_attribute_name :reference_unit %></th>
+      <th><%= PurchaseProcessItem.human_attribute_name :quantity %></th>
+      <th>Valor unitário</th>
+      <th><%= PurchaseProcessItem.human_attribute_name :estimated_total_price %></th>
+      <th></th>
+      <th></th>
+    </tr>
     </thead>
 
     <tbody>
-      <%= f.association :items, :collection => localized(f.object.items) do |p| %>
-        <%= render 'purchase_process_items/licitation_process_list_form',
-            id: p.object.id,
-            lot: p.object.lot,
-            material: p.object.material,
-            material_id: p.object.material_id,
-            creditor: p.object.creditor,
-            creditor_id: p.object.creditor_id,
-            reference_unit: p.object.reference_unit,
-            quantity: number_with_precision(p.object.quantity),
-            unit_price: number_with_precision(p.object.unit_price),
-            estimated_total_price: number_with_precision(p.object.estimated_total_price),
-            additional_information: p.object.additional_information,
-            data_disabled: not_updateable_message,
-            f: p %>
-      <% end %>
+    <%= f.association :items, :collection => localized(f.object.items) do |p| %>
+      <%= render 'purchase_process_items/licitation_process_list_form',
+                 id: p.object.id,
+                 lot: p.object.lot,
+                 material: p.object.material,
+                 material_id: p.object.material_id,
+                 creditor: p.object.creditor,
+                 creditor_id: p.object.creditor_id,
+                 reference_unit: p.object.reference_unit,
+                 quantity: number_with_precision(p.object.quantity),
+                 unit_price: number_with_precision(p.object.unit_price),
+                 estimated_total_price: number_with_precision(p.object.estimated_total_price),
+                 additional_information: p.object.additional_information,
+                 data_disabled: not_updateable_message,
+                 f: p %>
+    <% end %>
     </tbody>
   </table>
 

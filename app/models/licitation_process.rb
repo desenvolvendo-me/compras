@@ -187,6 +187,11 @@ class LicitationProcess < Compras::Model
     }
   }
 
+  scope :by_status, lambda {|status|
+    where {|query| query.status.eq status}
+  }
+
+
   scope :by_ratification_month_and_year, lambda {|month, year|
     joins {licitation_process_ratifications}.
         where(%{

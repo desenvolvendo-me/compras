@@ -17,8 +17,6 @@ function setModalUrlToCreditorByPurchasingUnit(selector_id, selector_modal) {
         };
 
     urlModal += "?" + $.param(params);
-    console.log(value)
-    console.log(urlModal)
 
     $(selector_modal).data('modal-url', urlModal);
 }
