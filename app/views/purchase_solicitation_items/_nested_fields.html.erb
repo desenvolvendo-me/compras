@@ -4,8 +4,7 @@
                 'data-hidden-field-class' => 'unique', :input_html => {"data-disabled" => f.object.decorator.disabled_materials, :readonly => f.object.kind.blank?} %>
   </div>
   <div class="yui3-u-1-8">
-    <%= f.input :lot, :as => :fake, :required => true,
-                :input_html => {class: 'unique'} %>
+    <%= f.input :lot, :as => :fake, :required => true %>
   </div>
   <div class="yui3-u-1-8">
     <%= f.input :reference_unit, :as => :fake, :disabled => true %>
