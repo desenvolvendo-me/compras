@@ -9,7 +9,7 @@ namespace :db do
     ActiveRecord::Migrator.migrate(migrations_paths, version)
 
     if Rails.env != 'development' && Rails.env != 'test'
-      Customer.where("domain LIKE '%portoseguro%'").find_each do |customer|
+      Customer.where("domain LIKE '%portoseguro-ba.nobe-treino.com.br%'").find_each do |customer|
       # Customer.where(:disabled => false).find_each do |customer|
         puts "migrating customer #{customer.domain}" if verbose
 
