@@ -1,0 +1,55 @@
+<div class="yui3-g">
+  <div class="yui3-u-1-4">
+    <%= f.input :number, :disabled => true %>
+  </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :year, :disabled => f.object.year.present? %>
+  </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :licitation_process, :required => true, :disabled => f.object.updatabled %>
+  </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :modality_or_type_of_removal, as: :fake, disabled: true,
+                input_html: {value: f.object.decorator.modality_or_type_of_removal} %>
+  </div>
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-4 hidden">
+    <%= f.input :updatabled %>
+  </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :authorization_date, :disabled => f.object.updatabled %>
+  </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :contract, :disabled => f.object.updatabled %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <div>
+      <label> Fornecedor </label>
+      <input class="string" disabled id="supply_request_creditor"
+             value="<%= f.object.decorator.creditor %>" size="30" type="text">
+    </div>
+  </div>
+
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-4">
+    <%= f.input :purchase_solicitation, :disabled => f.object.licitation_process.nil? || f.object.updatabled %>
+  </div>
+
+  <div class="yui3-u-3-4">
+    <div class="input integer">
+      <label class="numeric integer ">Departamento</label>
+      <input class="string integer" type="text" id="purchase_solicitation_department" value="<%= f.object.purchase_solicitation.department if f.object.purchase_solicitation %>" disabled>
+    </div>
+  </div>
+
+</div>
