@@ -14,6 +14,7 @@ class SupplyRequest < Compras::Model
   belongs_to :creditor
 
   has_many :items, class_name: 'SupplyRequestItem', dependent: :destroy
+  has_many :supply_orders
 
   accepts_nested_attributes_for :items, allow_destroy: true
 
@@ -49,7 +50,6 @@ class SupplyRequest < Compras::Model
     end
     message
   end
-
 
 
   private
