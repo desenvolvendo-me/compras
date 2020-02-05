@@ -138,6 +138,18 @@ Compras::Application.routes.draw do
     end
   end
 
+  namespace :generator do
+    resources :generator_supply_orders, :except => :destroy do
+      member do
+        post :cancel
+      end
+
+      collection do
+        get :filter
+      end
+    end
+  end
+
   resources :supply_requests do
     collection do
       get :modal

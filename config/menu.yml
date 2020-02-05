@@ -86,6 +86,7 @@ menu:
     - pledge_requests
     - "Fornecimento":
       - supply_requests
+      - generator_generator_supply_orders
       - supply_orders
     - reserve_fund_requests
 
