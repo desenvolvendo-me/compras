@@ -4,6 +4,8 @@
   </div>
 </div>
 
+<%= render "supply_requests", f: f %>
+
 <% if f.object.processed_with_errors? %>
   <%= f.input :error_message, disabled: true %>
 <% end %>
