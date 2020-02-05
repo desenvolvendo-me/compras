@@ -1,0 +1,16 @@
+<div class="buttons">
+  <% if f.object.new_record? %>
+    <%= f.button :submit, "Gerar arquivo" %>
+  <% end %>
+
+  <% if f.object.processed? || f.object.processed_with_errors? %>
+    <%= relative_link_to "Download do arquivo", f.object.file_url, :class => "button primary" %>
+  <% end %>
+
+  <% if f.object.persisted? && f.object.processing? %>
+    <%= link_to 'Cancelar', cancel_tce_export_monthly_monitoring_path(resource), method: :post,
+      class: 'button negative' %>
+  <% end %>
+
+  <%= f.button :back %>
+</div>
