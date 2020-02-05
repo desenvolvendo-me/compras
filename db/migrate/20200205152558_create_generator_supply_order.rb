@@ -5,7 +5,6 @@ class CreateGeneratorSupplyOrder < ActiveRecord::Migration
       t.integer :prefecture_id
       t.integer :control_code
       t.integer :city_code
-      t.string  :supply_request_ids
       t.string  :status
       t.string  :job_id
       t.string  :file

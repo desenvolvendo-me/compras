@@ -10,6 +10,7 @@ pt-BR:
         control_code: "Código de controle externo da remessa"
         error_message: "Mensagem de erro"
         status_humanize: "Situação"
+        supply_request: "Pedido de Fornecimento"
 
   generator/generator_supply_order:
     messages:

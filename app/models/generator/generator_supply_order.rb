@@ -1,5 +1,5 @@
 class Generator::GeneratorSupplyOrder < Compras::Model
-  attr_accessible :supply_request_ids, :control_code
+  attr_accessible :supply_requests_attributes, :control_code
 
   attr_modal :control_code
 
@@ -14,6 +14,10 @@ class Generator::GeneratorSupplyOrder < Compras::Model
 
   belongs_to :customer
   belongs_to :prefecture
+
+  has_many :supply_requests, class_name: "GeneratorSupplyOrderRequests", dependent: :destroy
+
+  accepts_nested_attributes_for :supply_requests, allow_destroy: true
 
   delegate :organ_code, :organ_kind, to: :prefecture, allow_nil: true
 
