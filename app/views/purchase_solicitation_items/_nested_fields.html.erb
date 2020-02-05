@@ -1,7 +1,7 @@
 <div class="yui3-g">
   <div class="yui3-u-3-5">
     <%= f.input :material, :as => :auto_complete, :fake => true, :required => true,
-                'data-hidden-field-class' => 'unique', :input_html => {"data-disabled" => f.object.decorator.disabled_materials, :readonly => f.object.kind.blank?} %>
+                :input_html => {"data-disabled" => f.object.decorator.disabled_materials, :readonly => f.object.kind.blank?} %>
   </div>
   <div class="yui3-u-1-8">
     <%= f.input :lot, :as => :fake, :required => true %>

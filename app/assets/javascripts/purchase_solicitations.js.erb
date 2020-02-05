@@ -20,6 +20,7 @@ $(document).ready(function () {
     $("#purchase_solicitation_items_button").on("click", function () {
         $('.remove-nested-record').attr('data-disabled', "existe demanda vinculada");
     });
+
     function calculateItemsTotalValue() {
         var total = new BigNumber(0),
             value;
@@ -175,4 +176,40 @@ $(document).ready(function () {
     setMaterialLabel();
     setMaterialSource();
     setBudgetAllocationSource();
+
+    $("#purchase_solicitation_items_button").click(function () {
+
+        material = $('#purchase_solicitation_material').val();
+        lote = $('#purchase_solicitation_lot').val();
+
+        list_material_lote = []
+        if ($('.nested-record').length != 0) {
+            var row = null
+            $('table#purchase_solicitation_items_records tr').each(function (i) {
+                row = $(this)
+                var row_material = null;
+                var row_lote = null;
+                $(this).find("td").each(function (i) {
+                    if (i == 0) {
+                        row_material = $(this).text().trim();
+                    } else if (i == 1) {
+                        row_lote = $(this).text().trim();
+                    } else {
+                        return false;
+                    }
+                })
+                list_material_lote.push(row_material + ":" + row_lote);
+            })
+
+            list_material_lote.forEach(function (i) {
+                if (material + ":" + lote == i) {
+                    alert("<%= I18n.t('errors.messages.record_already_exists') %>");
+                    setTimeout(function () {
+                        $('table#purchase_solicitation_items_records tr:last').remove();
+                    }, 100);
+                }
+            })
+
+        }
+    });
 });

@@ -42,7 +42,7 @@ class Demand < Compras::Model
         code_maximum += 1
 
         self.purchase_solicitation.items.each  do |item|
-          pur_sol.items.build(material_id:item.material_id)
+          pur_sol.items.build(material_id:item.material_id, lot:  item.lot)
         end
 
         @status = pur_sol.save(validate:false)

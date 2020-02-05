@@ -6,6 +6,9 @@ class SupplyOrder < Compras::Model
                   :items_attributes, :invoices_attributes, :supply_requests_attributes,
                   :pledge_id, :purchase_solicitation_id, :contract_id, :purchase_form_id
 
+  has_enumeration_for :order_status, :with => SupplyOrderStatus,
+                      :create_helpers => true, :create_scopes => true
+
   belongs_to :contract
   belongs_to :purchase_solicitation
   belongs_to :licitation_process
@@ -42,6 +45,10 @@ class SupplyOrder < Compras::Model
 
   def to_s
     "#{number}"
+  end
+
+  def open?
+    [SupplyOrderStatus::SENT, SupplyOrderStatus::PARTIALLY_ANSWERED, SupplyOrderStatus::PENDING_DELIVERY].include? self.order_status
   end
 
   private
