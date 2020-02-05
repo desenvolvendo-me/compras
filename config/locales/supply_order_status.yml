@@ -1,0 +1,8 @@
+pt-BR:
+  enumerations:
+    supply_order_status:
+      sent: "Enviada"
+      partially_answered: "Parcialmente Atendida"
+      fully_serviced: "Totalmente Atendida"
+      pending_delivery: "No Aguardo do Fornecimento"
+
