@@ -7,13 +7,13 @@ pt-BR:
 
     attributes:
       generator/generator_supply_order:
-        control_code: "Código de controle externo da remessa"
+        control_code: "Pedidos de Fornecimentos Gerados"
         error_message: "Mensagem de erro"
         status_humanize: "Situação"
         supply_request: "Pedido de Fornecimento"
 
   generator/generator_supply_order:
     messages:
-      success: "Arquivo encaminhado para geração"
-      cancelled: "Geração do arquivo cancelada"
-      cant_cancel: "Geração não pode ser cancelada pois já foi processada"
+      success: "Geração Solicitada"
+      cancelled: "Geração Cancelada"
+      cant_cancel: "Geração não pode ser Cancelada pois Ordem de Fornecimento já foi alterada"

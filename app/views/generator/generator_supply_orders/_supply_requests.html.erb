@@ -16,7 +16,7 @@
       <%= button_tag 'Adicionar', type: :button,
                      'data-template' => 'supply_order_requests_template',
                      'data-records' => 'supply_order_requests-records',
-                     'data-disabled' => !f.object.new_record?,
+                     'data-disabled' => (f.object.new_record? ? nil : "não pode mais adicionar"),
                      :id => "supply_order_requests_adicionar",
                      :class => 'button add-nested-record field-without-label' %>
     </div>

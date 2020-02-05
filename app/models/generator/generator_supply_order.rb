@@ -24,10 +24,10 @@ class Generator::GeneratorSupplyOrder < Compras::Model
   orderize 'id DESC'
   filterize
 
-  def control_code
-    return if read_attribute(:control_code).blank?
+ after_create :set_control_code
 
-    read_attribute(:control_code).to_s.rjust(16, "0")
+  def set_control_code
+    self.update_column("control_code", self.created_at.strftime("%y%m%d%H%M"))
   end
 
   def date
@@ -50,6 +50,7 @@ class Generator::GeneratorSupplyOrder < Compras::Model
   end
 
   protected
+
   def set_status
     error_message.blank? ? processed! : processed_with_errors!
   end
