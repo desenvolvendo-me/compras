@@ -54,4 +54,14 @@
 
 </div>
 
+<div class="yui3-g">
+  <div class="yui3-u-1-7">
+    <%= f.input :supply_request_file %>
+  </div>
+
+  <div class="yui3-u-1-7">
+    <%= link_to f.object.supply_request_file_identifier, f.object.supply_request_file_url, :target => '_blank' if f.object.supply_request_file? %>
+  </div>
+</div>
+
 <%= f.input :justification %>
