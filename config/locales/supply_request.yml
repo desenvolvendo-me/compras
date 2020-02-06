@@ -8,9 +8,9 @@ pt-BR:
     attributes:
       supply_request:
         number: "Número"
-        authorization_date: "Data da autorização"
+        authorization_date: "Data da Autorização"
         creditor: "Fornecedor"
-        licitation_process: "Processo de compra"
+        licitation_process: "Processo de Compra"
         modality_or_type_of_removal: "Modalidade"
         year: "Ano"
         pledge: "Empenho"
