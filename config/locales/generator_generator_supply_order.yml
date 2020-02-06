@@ -1,0 +1,19 @@
+pt-BR:
+  activerecord:
+    models:
+      generator/generator_supply_order:
+        one: "Gerador de Ordem de Fornecimento"
+        other: "Gerador de Ordem de Fornecimentos"
+
+    attributes:
+      generator/generator_supply_order:
+        control_code: "Pedidos de Fornecimentos Gerados"
+        error_message: "Mensagem de erro"
+        status_humanize: "Situação"
+        supply_request: "Pedido de Fornecimento"
+
+  generator/generator_supply_order:
+    messages:
+      success: "Geração Solicitada"
+      cancelled: "Geração Cancelada"
+      cant_cancel: "Geração não pode ser Cancelada pois Ordem de Fornecimento já foi alterada"
