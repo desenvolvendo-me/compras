@@ -12,5 +12,6 @@ permissions:
     purchase_process_tradings: licitation_processes
     purchase_process_trading_item_bids: licitation_processes
     purchase_solicitation_liberations: purchase_solicitations
+    supply_request_deferrings: supply_requests
     registration_cadastral_certificates: creditors
     purchase_process_creditor_disqualifications: licitation_processes
