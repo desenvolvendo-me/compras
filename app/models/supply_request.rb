@@ -4,7 +4,7 @@ class SupplyRequest < Compras::Model
 
   attr_accessible :licitation_process_id, :creditor_id, :authorization_date,
                   :items_attributes, :year, :purchase_solicitation_id,
-                  :updatabled, :contract_id, :supply_request_status
+                  :updatabled, :contract_id, :supply_request_status, :justification
 
   attr_modal :licitation_process_id, :creditor_id, :year, :authorization_date
 
