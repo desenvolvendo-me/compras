@@ -1,0 +1,7 @@
+<div class="buttons">
+  <% if can?(:modify, main_controller_name) && f.object.new_record? %>
+    <%= f.button :submit %>
+  <% end %>
+
+  <%= f.button :back, :href => supply_request_deferrings_path(:supply_request_id => f.object.supply_request_id) %>
+</div>

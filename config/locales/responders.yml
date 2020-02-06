@@ -165,6 +165,11 @@ pt-BR:
       create:
         notice: "Solicitação de Compras liberada com sucesso"
 
+    supply_request_deferrings:
+      <<: *female
+      create:
+        notice: "Pedido de Fornecimento liberado com sucesso"
+
     reference_units:
       <<: *female
 

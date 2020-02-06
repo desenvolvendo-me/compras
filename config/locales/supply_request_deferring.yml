@@ -1,0 +1,15 @@
+pt-BR:
+  activerecord:
+    models:
+      supply_request_deferring:
+        one: "Liberação de Pedido de Fornecimento"
+        other: "Liberações de Pedidos de Fornecimento"
+
+    attributes:
+      supply_request_deferring:
+        date: "Data"
+        justification: "Justificativa"
+        supply_request: "Pedido de Fornecimento"
+        responsible: "Responsável"
+        service_status: "Status de atendimento"
+        sequence: "Sequência"
