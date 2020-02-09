@@ -95,6 +95,11 @@ class PurchaseSolicitation < Compras::Model
     }.uniq
   }
 
+  scope :only_user_access, lambda {|user_id|
+    joins {department.department_people.outer}.
+        where {compras_department_people.user_id.eq(user_id)}
+  }
+
   scope :without_price_collection, lambda {
     joins {price_collections.outer}.
         where {compras_price_collections_purchase_solicitations.price_collection_id.eq(nil)}
