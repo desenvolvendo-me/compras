@@ -20,6 +20,7 @@ class Material < Unico::Model
             :material_classification,:presence => true
 
   after_validation :set_code
+  before_create :origin_source_default
 
   has_many :purchase_process_items, :dependent => :restrict
   has_many :purchase_solicitation_items, :dependent => :restrict
@@ -90,5 +91,9 @@ class Material < Unico::Model
 
   def service_without_quantity?
     service? && !control_amount?
+  end
+
+  def origin_source_default
+    self.origin_source = MaterialOriginSource::COMPRAS
   end
 end
