@@ -88,6 +88,8 @@ class PurchaseSolicitation < Compras::Model
 
   scope :except_ids, lambda {|ids| where {id.not_in(ids)}}
 
+  scope :not_demand, lambda {where {demand_id.eq(nil)}}
+
   scope :can_be_grouped, lambda {
     where {service_status.in [
                                  PurchaseSolicitationServiceStatus::LIBERATED,
