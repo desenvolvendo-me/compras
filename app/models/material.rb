@@ -3,7 +3,7 @@ class Material < Unico::Model
 
   attr_accessible :code, :material_class_id, :description, :detailed_description,
                   :reference_unit_id, :manufacturer, :material_classification, :combustible,
-                  :expense_nature_id, :active, :control_amount, :medicine
+                  :expense_nature_id, :active, :control_amount, :medicine, :origin_source
 
   attr_writer :autocomplete_material_class
 
