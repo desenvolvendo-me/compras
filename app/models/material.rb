@@ -1,14 +1,17 @@
 class Material < Unico::Model
   include BelongsToResource
 
+  default_scope where(origin_source: "compras")
+
   attr_accessible :code, :material_class_id, :description, :detailed_description,
                   :reference_unit_id, :manufacturer, :material_classification, :combustible,
-                  :expense_nature_id, :active, :control_amount, :medicine
+                  :expense_nature_id, :active, :control_amount, :medicine, :origin_source
 
   attr_writer :autocomplete_material_class
 
   attr_modal :description, :material_classification
   has_enumeration_for :material_classification, :with => MaterialClassification, :create_helpers => true
+  has_enumeration_for :origin_source, :with => MaterialOriginSource, :create_helpers => true
 
   belongs_to :material_class
   belongs_to :reference_unit
@@ -19,6 +22,7 @@ class Material < Unico::Model
             :material_classification,:presence => true
 
   after_validation :set_code
+  before_create :origin_source_default
 
   has_many :purchase_process_items, :dependent => :restrict
   has_many :purchase_solicitation_items, :dependent => :restrict
@@ -89,5 +93,9 @@ class Material < Unico::Model
 
   def service_without_quantity?
     service? && !control_amount?
+  end
+
+  def origin_source_default
+    self.origin_source = MaterialOriginSource::COMPRAS
   end
 end
