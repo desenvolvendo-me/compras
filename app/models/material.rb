@@ -1,6 +1,8 @@
 class Material < Unico::Model
   include BelongsToResource
 
+  default_scope where(origin_source: "compras")
+
   attr_accessible :code, :material_class_id, :description, :detailed_description,
                   :reference_unit_id, :manufacturer, :material_classification, :combustible,
                   :expense_nature_id, :active, :control_amount, :medicine, :origin_source
