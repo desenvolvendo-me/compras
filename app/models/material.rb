@@ -78,7 +78,7 @@ class Material < Unico::Model
   end
 
   def set_code
-    self.code = Material.last.nil? ? "1": (Material.last.id+1)
+    self.code = Material.unscoped.last.nil? ? "1": (Material.unscoped.last.id+1)
   end
 
   def to_s
