@@ -1,4 +1,4 @@
-class GeneratorSupplyOrderRequests < Compras::Model
+class GeneratorSupplyOrderRequest < Compras::Model
   attr_accessible :generator_supply_order_id, :supply_request_id
 
   belongs_to :generator_supply_order

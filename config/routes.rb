@@ -144,6 +144,12 @@ Compras::Application.routes.draw do
         post :cancel
       end
 
+      if Rails.env.development?
+        member do
+          get :without_sidekiq
+        end
+      end
+
       collection do
         get :filter
       end

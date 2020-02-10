@@ -2,6 +2,7 @@ class SupplyRequestDecorator
   include Decore
   include Decore::Proxy
   include Decore::Header
+  include ActionView::Helpers::TranslationHelper
 
   attr_header :creditor, :authorization_date, :licitation_process, :supply_request_status
 
