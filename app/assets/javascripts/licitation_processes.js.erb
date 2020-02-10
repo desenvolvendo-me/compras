@@ -226,6 +226,29 @@ $(document).ready(function () {
         $('#items-records tbody').append(data).trigger("nestedGrid:afterAdd");
     }
 
+    $("#licitation_process_demand_id").on("change", function (event, demand) {
+
+        if (!demand) {
+            demand = {};
+        }
+
+        $.each(demand.purchaseSolicitations, function (i, purchaseSolicitation) {
+
+            if (!purchaseSolicitation) {
+                purchaseSolicitation = {};
+            }
+
+            $.each(purchaseSolicitation.items, function (i, item) {
+                if (hasItemAlreadyAdded(item)) {
+                    mergeItem(item);
+                } else {
+                    renderItem(item);
+                }
+            });
+        });
+
+    });
+
     $("#licitation_process_purchase_solicitation_id").on("change", function (event, purchaseSolicitation) {
 
         if (!purchaseSolicitation) {
