@@ -8,6 +8,7 @@ pt-BR:
     attributes:
       generator/generator_supply_order:
         control_code: "Pedidos de Fornecimentos Gerados"
+        user: "Usuário"
         error_message: "Mensagem de erro"
         status_humanize: "Situação"
         supply_request: "Pedido de Fornecimento"
