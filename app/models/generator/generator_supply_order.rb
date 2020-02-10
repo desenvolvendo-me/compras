@@ -39,10 +39,10 @@ class Generator::GeneratorSupplyOrder < Compras::Model
     update_column :error_message, error_messages
   end
 
-  def set_file(file)
+  def create_supply_orders
     set_status
 
-    self.file = file
+
     save!
   end
 
