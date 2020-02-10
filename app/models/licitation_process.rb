@@ -110,7 +110,7 @@ class LicitationProcess < Compras::Model
            :lowest_price?, :higher_discount_on_lot?, :higher_discount_on_item?,
            :to => :judgment_form, :allow_nil => true, :prefix => true
 
-  validates :process_date, :period, :contract_guarantees, :type_of_purchase,
+  validates :process_date, :period, :contract_guarantees, :type_of_purchase, :purchasing_unit,
             :period_unit, :payment_method,
             :year, :execution_type, :object_type, :description, :notice_availability_date,
             :presence => true
