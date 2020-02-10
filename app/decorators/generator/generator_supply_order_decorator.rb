@@ -3,5 +3,5 @@ class Generator::GeneratorSupplyOrderDecorator
   include Decore::Proxy
   include Decore::Header
 
-  attr_header :control_code
+  attr_header :control_code, :user
 end
