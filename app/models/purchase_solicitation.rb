@@ -6,13 +6,13 @@ class PurchaseSolicitation < Compras::Model
                   :purchase_solicitation_budget_allocations_attributes,
                   :items_attributes, :budget_structure_id,
                   :user_id, :department_id, :attendant_status,
-                  :model_request, :demand_id, :purchase_forms_attributes
+                  :model_request, :demand_id, :purchase_forms_attributes, :service_status
 
   attr_readonly :code
 
   auto_increment :code, :by => :accounting_year
 
-  attr_modal :code, :department_id, :accounting_year, :kind, :delivery_location_id, :budget_structure_id, :responsible_id
+  attr_modal :code, :department_id, :accounting_year, :kind, :delivery_location_id, :budget_structure_id, :responsible_id, :service_status
 
   has_enumeration_for :attendant_status, :with => PurchaseSolicitationAttendantStatus, :create_helpers => true
   has_enumeration_for :kind, :with => PurchaseSolicitationKind, :create_helpers => true
