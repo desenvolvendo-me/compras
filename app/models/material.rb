@@ -1,14 +1,17 @@
 class Material < Unico::Model
   include BelongsToResource
 
+  default_scope where(origin_source: "compras")
+
   attr_accessible :code, :material_class_id, :description, :detailed_description,
                   :reference_unit_id, :manufacturer, :material_classification, :combustible,
-                  :expense_nature_id, :active, :control_amount, :medicine
+                  :expense_nature_id, :active, :control_amount, :medicine, :origin_source
 
   attr_writer :autocomplete_material_class
 
   attr_modal :description, :material_classification
   has_enumeration_for :material_classification, :with => MaterialClassification, :create_helpers => true
+  has_enumeration_for :origin_source, :with => MaterialOriginSource, :create_helpers => true
 
   belongs_to :material_class
   belongs_to :reference_unit
@@ -16,9 +19,10 @@ class Material < Unico::Model
   validates :description,
             :reference_unit,
             :detailed_description,
-            :material_classification,:presence => true
+            :material_classification, :presence => true
 
   after_validation :set_code
+  before_create :origin_source_default
 
   has_many :purchase_process_items, :dependent => :restrict
   has_many :purchase_solicitation_items, :dependent => :restrict
@@ -42,12 +46,12 @@ class Material < Unico::Model
     joins(items: [:licitation_process]).where("compras_licitation_processes.id = ?", licitation_process_id)
   }
 
-  scope :by_material_type, lambda { |material_type|
-    where { |material| material.material_type.eq(material_type) }
+  scope :by_material_type, lambda {|material_type|
+    where {|material| material.material_type.eq(material_type)}
   }
 
-  scope :term, lambda { |q|
-    where { code.like("#{q}%") | description.like("#{q}%") }
+  scope :term, lambda {|q|
+    where {code.like("#{q}%") | description.like("#{q}%")}
   }
 
   scope :by_licitation_process_status, ->(status) do
@@ -55,26 +59,26 @@ class Material < Unico::Model
   end
 
   scope :by_material_class_id, ->(material_class_id) do
-    where { |query| query.material_class_id.eq(material_class_id) }
+    where {|query| query.material_class_id.eq(material_class_id)}
   end
 
   scope :by_pending_purchase_solicitation_budget_structure_id, ->(budget_structure_id) do
-    joins { purchase_solicitation_items.purchase_solicitation }.
-    where {
-      purchase_solicitation_items.purchase_solicitation.budget_structure_id.eq(budget_structure_id) &
-      purchase_solicitation_items.purchase_solicitation.service_status.eq(PurchaseSolicitationServiceStatus::PENDING)
-    }
+    joins {purchase_solicitation_items.purchase_solicitation}.
+        where {
+          purchase_solicitation_items.purchase_solicitation.budget_structure_id.eq(budget_structure_id) &
+              purchase_solicitation_items.purchase_solicitation.service_status.eq(PurchaseSolicitationServiceStatus::PENDING)
+        }
   end
 
   scope :not_purchase_solicitation, ->(purchase_solicitation_id) do
-    joins { purchase_solicitation_items }.
-    where {
-      purchase_solicitation_items.purchase_solicitation_id.not_eq(purchase_solicitation_id)
-    }
+    joins {purchase_solicitation_items}.
+        where {
+          purchase_solicitation_items.purchase_solicitation_id.not_eq(purchase_solicitation_id)
+        }
   end
 
   def set_code
-    self.code = Material.last.nil? ? "1": (Material.last.id+1)
+    self.code = Material.unscoped.last.nil? ? "1" : (Material.unscoped.last.id + 1)
   end
 
   def to_s
@@ -89,5 +93,9 @@ class Material < Unico::Model
 
   def service_without_quantity?
     service? && !control_amount?
+  end
+
+  def origin_source_default
+    self.origin_source = MaterialOriginSource::COMPRAS
   end
 end

@@ -6,13 +6,13 @@ class PurchaseSolicitation < Compras::Model
                   :purchase_solicitation_budget_allocations_attributes,
                   :items_attributes, :budget_structure_id,
                   :user_id, :department_id, :attendant_status,
-                  :model_request, :demand_id, :purchase_forms_attributes
+                  :model_request, :demand_id, :purchase_forms_attributes, :service_status
 
   attr_readonly :code
 
   auto_increment :code, :by => :accounting_year
 
-  attr_modal :code, :department_id, :accounting_year, :kind, :delivery_location_id, :budget_structure_id, :responsible_id
+  attr_modal :code, :department_id, :accounting_year, :kind, :delivery_location_id, :budget_structure_id, :responsible_id, :service_status
 
   has_enumeration_for :attendant_status, :with => PurchaseSolicitationAttendantStatus, :create_helpers => true
   has_enumeration_for :kind, :with => PurchaseSolicitationKind, :create_helpers => true
@@ -88,11 +88,18 @@ class PurchaseSolicitation < Compras::Model
 
   scope :except_ids, lambda {|ids| where {id.not_in(ids)}}
 
+  scope :not_demand, lambda {where {demand_id.eq(nil)}}
+
   scope :can_be_grouped, lambda {
     where {service_status.in [
                                  PurchaseSolicitationServiceStatus::LIBERATED,
                                  PurchaseSolicitationServiceStatus::PARTIALLY_FULFILLED]
     }.uniq
+  }
+
+  scope :only_user_access, lambda {|user_id|
+    joins {department.department_people.outer}.
+        where {compras_department_people.user_id.eq(user_id)}
   }
 
   scope :without_price_collection, lambda {

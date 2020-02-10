@@ -9,7 +9,7 @@ class PurchaseSolicitationsController < CrudController
   has_scope :by_model_request
 
   def index
-    @purchase_solicitations = filter_by_department(collection)
+    @purchase_solicitations = filter_by_department(collection).not_demand
   end
 
   def new
@@ -63,6 +63,7 @@ class PurchaseSolicitationsController < CrudController
 
   protected
 
+  #TODO: Refatorar: mover para scope
   def filter_by_department(collection)
     departments = DepartmentPerson.where(user_id: current_user.id).pluck(:department_id)
     collection.where("compras_purchase_solicitations.department_id IN (?) ", departments)

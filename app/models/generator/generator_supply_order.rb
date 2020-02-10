@@ -1,5 +1,5 @@
 class Generator::GeneratorSupplyOrder < Compras::Model
-  attr_accessible :supply_requests_attributes, :control_code
+  attr_accessible :supply_requests_attributes, :control_code, :user_id
 
   attr_modal :control_code
 
@@ -14,6 +14,7 @@ class Generator::GeneratorSupplyOrder < Compras::Model
 
   belongs_to :customer
   belongs_to :prefecture
+  belongs_to :user
 
   has_many :supply_requests, class_name: "GeneratorSupplyOrderRequests", dependent: :destroy
 
