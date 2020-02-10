@@ -1,5 +1,6 @@
 class Generator::GeneratorSupplyOrdersWorker
   include Sidekiq::Worker
+  include CustomerHandleConnection
 
   def perform(customer_id, generetor_id)
     using_connection_for(customer_id) do
@@ -8,7 +9,4 @@ class Generator::GeneratorSupplyOrdersWorker
     end
   end
 
-  def using_connection_for(customer_id, &block)
-    Customer.find(customer_id).using_connection(&block)
-  end
 end
