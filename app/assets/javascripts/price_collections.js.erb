@@ -1,91 +1,90 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
-  function hasItemAlreadyAdded(item) {
-    var added = false;
+    function hasItemAlreadyAdded(item) {
+        var added = false;
 
-    $("#price_collection_items_records input.material_id").each(function() {
-      if ($(this).val() == item.material_id) {
-        added = true;
+        $("#price_collection_items_records input.material_id").each(function () {
+            if ($(this).val() == item.material_id) {
+                added = true;
+                return added;
+            }
+        });
+
         return added;
-      }
+    }
+
+    function renderItem(item) {
+        var itemBinds = {
+            uuid: _.uniqueId('fresh-'),
+            id: '',
+            material_id: item.material_id,
+            material: item.material_description,
+            reference_unit: item.reference_unit,
+            brand: item.brand,
+            quantity: numberWithDelimiter(item.quantity),
+            lot: '1'
+        };
+
+        var data = $('#price_collection_items_template').mustache(itemBinds);
+
+        $('#price_collection_items_records tbody').append(data).trigger("nestedGrid:afterAdd");
+    }
+
+    function mergeItem(item) {
+        var material = $('#price_collection_items_records input.material_id[value="' + item.material_id + '"]'),
+            record = material.closest('.nested-record'),
+            itemQuantity = new BigNumber(parsePtBrFloat(record.find('input.quantity').val())),
+            totalQuantity = numberWithDelimiter(parseFloat(itemQuantity.add(item.quantity)));
+
+        record.find('input.quantity').val(totalQuantity);
+        record.find('td.quantity').text(totalQuantity);
+    }
+
+    $('form.price_collection').on('change', '.material', function (event, material) {
+        if (material) {
+            $(this).closest('.item').find('.reference-unit').val(material.reference_unit);
+        }
     });
 
-    return added;
-  }
+    $('#price_collection_material_id').on('change', function (event, material) {
+        $('#price_collection_reference_unit').val('');
 
-  function renderItem(item) {
-    var itemBinds = {
-      uuid: _.uniqueId('fresh-'),
-      id: '',
-      material_id: item.material_id,
-      material: item.material_description,
-      reference_unit: item.reference_unit,
-      brand: item.brand,
-      quantity: numberWithDelimiter(item.quantity),
-      lot: '1'
-    };
-
-    var data = $('#price_collection_items_template').mustache(itemBinds);
-
-    $('#price_collection_items_records tbody').append(data).trigger("nestedGrid:afterAdd");
-  }
-
-  function mergeItem(item) {
-    var material       = $('#price_collection_items_records input.material_id[value="' + item.material_id + '"]'),
-        record         = material.closest('.nested-record'),
-        itemQuantity   = new BigNumber(parsePtBrFloat(record.find('input.quantity').val())),
-        totalQuantity  = numberWithDelimiter(parseFloat(itemQuantity.add(item.quantity)));
-
-    record.find('input.quantity').val(totalQuantity);
-    record.find('td.quantity').text(totalQuantity);
-  }
-
-  $('form.price_collection').on('change', '.material', function (event, material) {
-    if (material) {
-      $(this).closest('.item').find('.reference-unit').val(material.reference_unit);
-    }
-  });
-
-  $('#price_collection_material_id').on('change', function (event, material) {
-    $('#price_collection_reference_unit').val('');
-
-    if (material) {
-      $('#price_collection_reference_unit').val(material.reference_unit);
-    }
-  });
-
-  $('#price_collection_creditor_id').on('change', function (event, creditor) {
-    if(creditor){
-      $('#price_collection_email').val(creditor.email || creditor.person_email);
-
-      if ($('#price_collection_email').val() == ""){
-        $('#price_collection_email').removeAttr('disabled');
-      }
-    }
-  });
-
-  $('#price_collection_creditor_id').on('change', function (event, creditor) {
-    var emailInput = $('.nested-fields').find('input[name="price_collection[email]"]');
-    emailInput.val(creditor.email || creditor.person_email);
-
-    if(creditor.email){
-      emailInput.attr('disabled', true);
-    }
-  });
-
-  $("#price_collection_purchase_solicitations_id").on("change", function(event, purchaseSolicitation) {
-
-    if (!purchaseSolicitation) {
-      purchaseSolicitation = {};
-    }
-
-    $.each(purchaseSolicitation.items, function(i, item) {
-      if (hasItemAlreadyAdded(item)) {
-        mergeItem(item);
-      } else {
-        renderItem(item);
-      }
+        if (material) {
+            $('#price_collection_reference_unit').val(material.reference_unit);
+        }
     });
-  });
 
+    $('#price_collection_creditor_id').on('change', function (event, creditor) {
+        if (creditor) {
+            $('#price_collection_email').val(creditor.email || creditor.person_email);
+
+            if ($('#price_collection_email').val() == "") {
+                $('#price_collection_email').removeAttr('disabled');
+            }
+        }
+    });
+
+    $('#price_collection_creditor_id').on('change', function (event, creditor) {
+        var emailInput = $('.nested-fields').find('input[name="price_collection[email]"]');
+        emailInput.val(creditor.email || creditor.person_email);
+
+        if (creditor.email) {
+            emailInput.attr('disabled', true);
+        }
+    });
+
+    $("#price_collection_purchase_solicitations_id").on("change", function (event, purchaseSolicitation) {
+
+        if (!purchaseSolicitation) {
+            purchaseSolicitation = {};
+        }
+
+        $.each(purchaseSolicitation.items, function (i, item) {
+            if (hasItemAlreadyAdded(item)) {
+                mergeItem(item);
+            } else {
+                renderItem(item);
+            }
+        });
+    });
 });
