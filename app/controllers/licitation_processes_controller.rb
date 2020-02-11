@@ -1,5 +1,6 @@
 class LicitationProcessesController < CrudController
   actions :all, :except => [:destroy]
+  before_filter :with_access, only: [:index, :modal]
 
   has_scope :by_modality_type
   has_scope :trading, :type => :boolean
@@ -10,10 +11,6 @@ class LicitationProcessesController < CrudController
   has_scope :by_creditor
   has_scope :term, :allow_blank => true
   has_scope :by_status, :allow_blank => true
-
-  def index
-    @licitation_processes = filter_by_purchasing_unit(collection)
-  end
 
   def new
     object = build_resource
@@ -107,6 +104,10 @@ class LicitationProcessesController < CrudController
   end
 
   private
+
+  def with_access
+    @licitation_processes = filter_by_purchasing_unit(collection)
+  end
 
   def supply_order(licitation_process, material, purchase_solicitation, quantity, contract)
     supply_order = SupplyOrder.find(params[:supply_order_id]) if params[:supply_order_id].to_i > 0
