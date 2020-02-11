@@ -31,6 +31,7 @@ pt-BR:
         quantity: "Quantidade"
         lot: "Lote"
         reference_unit: "Unidade"
+        demand: "Demanda"
 
   price_collection:
     messages:
