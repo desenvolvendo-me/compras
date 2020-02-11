@@ -1,14 +1,21 @@
 <div class="yui3-g">
   <div class="yui3-u-1-4">
+    <%= f.input :licitation_process, :required => true, :disabled => f.object.updatabled %>
+  </div>
+  <div class="yui3-u-3-4  ">
+    <div class="input text">
+      <label class="text ">Objeto</label>
+      <textarea class="string text" cols="20" rows="50" type="text" id="licitation_process_object" value="<%= f.object.purchase_solicitation.department if f.object.purchase_solicitation %>" disabled> </textarea>
+    </div>
+  </div>
+</div>
+<div class="yui3-g">
+  <div class="yui3-u-1-4">
     <%= f.input :number, :disabled => true %>
   </div>
 
   <div class="yui3-u-1-4">
     <%= f.input :year, :disabled => f.object.year.present? %>
-  </div>
-
-  <div class="yui3-u-1-4">
-    <%= f.input :licitation_process, :required => true, :disabled => f.object.updatabled %>
   </div>
 
   <div class="yui3-u-1-4">
