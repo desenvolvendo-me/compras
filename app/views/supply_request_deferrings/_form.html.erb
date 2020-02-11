@@ -18,8 +18,7 @@
   </div>
 
   <div class="yui3-u-1-4">
-    <%= f.input :service_status, :collection => SupplyRequestServiceStatus.liberation_availables,
-          :disabled => f.object.persisted? %>
+    <%= f.input :service_status, :disabled => f.object.persisted? %>
   </div>
 </div>
 
