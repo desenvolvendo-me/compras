@@ -2,8 +2,8 @@ pt-BR:
   activerecord:
     models:
       supply_request_deferring:
-        one: "Liberação de Pedido de Fornecimento"
-        other: "Liberações de Pedidos de Fornecimento"
+        one: "Atendimento de Pedido de Fornecimento"
+        other: "Atendimentos de Pedidos de Fornecimento"
 
     attributes:
       supply_request_deferring:
