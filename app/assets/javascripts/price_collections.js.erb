@@ -1,5 +1,44 @@
 $(document).ready(function () {
 
+    function hasPurchaseSolicitationAlreadyAdded(purchase_solicitation) {
+        var added = false;
+        $("table#list_purchase_solicitations_records input.purchase_solicitation_id").each(function () {
+            if ($(this).val() == purchase_solicitation.id) {
+                added = true;
+                return added;
+            }
+        });
+        return added;
+    }
+
+    function mergePurchaseSolicitation(purchase_solicitation) {
+
+        var record = $('tr#purchase_solicitation-id-' + purchase_solicitation.id);
+
+        record.find("td.code_and_year").text("0,00");
+        record.find('input.code_and_year').val("0,00");
+
+        record.find("td.budget_structure").text("0,00");
+        record.find('input.budget_structure').val("0,00");
+
+    }
+
+    function renderPurchaseSolicitation(purchase_solicitation) {
+        var purchaseSolicitationBinds = {
+            uuid: _.uniqueId('fresh-'),
+            id: '',
+            code_and_year: purchase_solicitation.code + "/" + purchase_solicitation.accounting_year,
+            budget_structure: purchase_solicitation.department,
+            responsible: purchase_solicitation.user,
+            description: purchase_solicitation.description
+        };
+
+        var data = $('#price_collection_purchase_solicitations_template').mustache(purchaseSolicitationBinds);
+
+        $('#table_price_collection_purchase_solicitations_records tbody').append(data).trigger("nestedGrid:afterAdd");
+
+    }
+
     function hasItemAlreadyAdded(item) {
         var added = false;
 
@@ -110,4 +149,25 @@ $(document).ready(function () {
         });
 
     });
+
+    $("#price_collection_demand_id").on("change", function (event, Demand) {
+
+        $.ajax({
+            url: Routes.demands_api_show,
+            data: {demand_id: Demand.id},
+            dataType: 'json',
+            type: 'POST',
+            success: function (data) {
+                $.each(data.purchase_solicitations, function (i, purchase_solicitation) {
+                    if (hasPurchaseSolicitationAlreadyAdded(purchase_solicitation)) {
+                        mergePurchaseSolicitation(purchase_solicitation);
+                    } else {
+                        renderPurchaseSolicitation(purchase_solicitation);
+                    }
+                });
+            }
+        });
+
+    });
+
 });
