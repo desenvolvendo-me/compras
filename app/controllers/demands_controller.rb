@@ -9,7 +9,7 @@ class DemandsController < CrudController
   def api_show
     demand = Demand.find(params["demand_id"])
 
-    render :json => demand.to_json(include: :purchase_solicitations)
+    render :json => demand.to_json(include: {purchase_solicitations: {include: [:department, :user]}})
   end
 
 end

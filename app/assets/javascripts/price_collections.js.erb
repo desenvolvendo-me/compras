@@ -28,9 +28,8 @@ $(document).ready(function () {
             uuid: _.uniqueId('fresh-'),
             id: '',
             code_and_year: purchase_solicitation.code + "/" + purchase_solicitation.accounting_year,
-            budget_structure: purchase_solicitation.department,
-            responsible: purchase_solicitation.user,
-            description: purchase_solicitation.description
+            department: purchase_solicitation.department.description,
+            user: purchase_solicitation.user.name
         };
 
         var data = $('#price_collection_purchase_solicitations_template').mustache(purchaseSolicitationBinds);
