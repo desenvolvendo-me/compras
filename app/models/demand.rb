@@ -26,6 +26,13 @@ class Demand < Compras::Model
   orderize "created_at"
   filterize
 
+  scope :term, lambda {|q|
+    where {
+      ((name.like("%#{q}%"))
+      )
+    }
+  }
+
   def create_purchase_solicitations
     code_maximum = PurchaseSolicitation.maximum('code')
     code_maximum = code_maximum.nil? ? 0:code_maximum + 1

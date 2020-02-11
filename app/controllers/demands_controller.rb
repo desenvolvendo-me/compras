@@ -1,4 +1,6 @@
 class DemandsController < CrudController
+  has_scope :term, allow_blank: true
+
   def new
     object = build_resource
     object.status = DemandStatus::CREATED
