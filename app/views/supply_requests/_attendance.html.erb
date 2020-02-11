@@ -1,0 +1,32 @@
+<table class="records">
+  <thead>
+  <tr>
+    <th>
+      <%= SupplyRequestDeferring.human_attribute_name :sequence %>
+    </th>
+    <th>
+      <%= SupplyRequestDeferring.human_attribute_name :date %>
+    </th>
+    <th>
+      <%= SupplyRequestDeferring.human_attribute_name :responsible %>
+    </th>
+    <th>
+      <%= SupplyRequestDeferring.human_attribute_name :service_status %>
+    </th>
+    <th>
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <% f.object.supply_request_deferrings.each do |supply_request_deferring| %>
+    <tr>
+      <td><%= supply_request_deferring.sequence %></td>
+      <td><%= supply_request_deferring.date %></td>
+      <td><%= supply_request_deferring.responsible %></td>
+      <td><%= SupplyRequestServiceStatus.t(supply_request_deferring.service_status) %></td>
+      <td><%= link_to "Visualizar", edit_supply_request_deferring_path(supply_request_deferring) %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
