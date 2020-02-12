@@ -6,3 +6,5 @@ pt-BR:
       rejected: "Indeferido"
       partially_answered: "Atendido Parcialmente"
       fully_serviced: "Atendido Totalmente"
+      doubts: "Dúvida"
+      adjusted: "Ajustado"

@@ -1,4 +1,16 @@
 class SupplyRequestServiceStatus < EnumerateIt::Base
-  associate_values :order_in_analysis, :returned_for_adjustment, :rejected, :partially_answered, :fully_serviced
+  associate_values :order_in_analysis,
+                   :returned_for_adjustment,
+                   :rejected,
+                   :partially_answered,
+                   :fully_serviced,
+                   :doubts,
+                   :adjusted
+
+  def self.non_buyer_user
+    to_a.select do |item|
+      [DOUBTS, ADJUSTED].include?(item[1])
+    end
+  end
 
 end
