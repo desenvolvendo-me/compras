@@ -3,7 +3,7 @@ class Generator::GeneratorSupplyOrder < Compras::Model
 
   attr_modal :control_code
 
-  has_enumeration_for :status, :with => MonthlyMonitoringStatus,
+  has_enumeration_for :status, :with => GeneratorSupplyOrderStatus,
                       :create_helpers => true
 
   mount_uploader :file, MonthlyMonitoringFileUploader do
@@ -40,41 +40,51 @@ class Generator::GeneratorSupplyOrder < Compras::Model
   end
 
   def create_supply_orders
+    errors = []
+
     supply_requests.each do |generate_supply_request|
 
       generate_supply_request.supply_request.licitation_process.licitation_process_ratifications.each do |creditor_winner|
 
         contract = Contract.joins(:creditors).
             where(licitation_process_id: generate_supply_request.supply_request.licitation_process_id).
-            where("compras_contracts_unico_creditors.creditor_id = ?", creditor_winner.id).
+            where("compras_contracts_unico_creditors.creditor_id = ?", creditor_winner.creditor.id).
             last
 
-        supply_order = SupplyOrder.create!(
-            authorization_date: Date.today,
-            year: generate_supply_request.supply_request.year,
-            licitation_process_id: generate_supply_request.supply_request.licitation_process_id,
-            contract_id: contract.id,
-            purchase_solicitation_id: generate_supply_request.supply_request.purchase_solicitation_id,
-            order_status: SupplyOrderStatus::SENT
-        )
-
-        SupplyOrderRequests.create(supply_order_id: supply_order.id, supply_request_id: generate_supply_request.supply_request.id)
+        if contract
+          create_supple_order(contract, generate_supply_request)
+        end
       end
 
     end
 
+    set_errors(errors.join("\n"))
     set_status
     save!
   end
 
   def cancel!
-    update_attribute :status, MonthlyMonitoringStatus::CANCELLED
+    update_attribute :status, GeneratorSupplyOrderStatus::CANCELLED
   end
 
   protected
 
   def set_status
     error_message.blank? ? processed! : processed_with_errors!
+  end
+
+  private
+
+  def create_supple_order(contract, generate_supply_request)
+    supply_order = SupplyOrder.create!(
+        authorization_date: Date.today,
+        year: generate_supply_request.supply_request.year,
+        licitation_process_id: generate_supply_request.supply_request.licitation_process_id,
+        contract_id: contract.id,
+        purchase_solicitation_id: generate_supply_request.supply_request.purchase_solicitation_id
+    )
+
+    SupplyOrderRequests.create(supply_order_id: supply_order.id, supply_request_id: generate_supply_request.supply_request.id)
   end
 
 end

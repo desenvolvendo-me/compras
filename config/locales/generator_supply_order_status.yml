@@ -1,0 +1,7 @@
+pt-BR:
+  enumerations:
+    generator_supply_order_status:
+      processing: "Em processamento"
+      processed: "Processado"
+      cancelled: "Cancelado"
+      without_contract: "Fornecedor sem Contrato"
