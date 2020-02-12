@@ -136,14 +136,18 @@ $(document).ready(function () {
     });
 
     $('#supply_request_licitation_process_id').ready(function () {
-            $.ajax({
-                url: Routes.licitation_processes + "/" + "34.json",
-                dataType: 'json',
-                type: 'GET',
-                success: function (data) {
-                    $("#licitation_process_object").val(data["description"])
-                }
-            });
+            var licitation_process_id = $("#supply_request_licitation_process_id").val()
+
+            if (licitation_process_id) {
+                $.ajax({
+                    url: Routes.licitation_processes + "/" + licitation_process_id + ".json",
+                    dataType: 'json',
+                    type: 'GET',
+                    success: function (data) {
+                        $("#licitation_process_object").val(data["description"])
+                    }
+                });
+            }
         }
     )
 
