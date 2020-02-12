@@ -43,22 +43,21 @@ class Generator::GeneratorSupplyOrder < Compras::Model
     errors = []
 
     supply_requests.each do |generate_supply_request|
-
-      generate_supply_request.supply_request.licitation_process.licitation_process_ratifications.each do |creditor_winner|
-
-        contract = Contract.joins(:creditors).
-            where(licitation_process_id: generate_supply_request.supply_request.licitation_process_id).
-            where("compras_contracts_unico_creditors.creditor_id = ?", creditor_winner.creditor.id).
-            last
-
-        if contract
-          create_supple_order(contract, generate_supply_request)
-        else
-          errors.push("Fornecerdor #{creditor_winner.creditor.name} sem contrato")
-          errors.push("Fornecerdor #{creditor_winner.creditor.name} sem contrato")
+      if SupplyOrder.joins(:supply_requests).where("compras_supply_order_requests.supply_request_id = ?", generate_supply_request.supply_request.id).any?
+        errors.push("Pedido de Fornecimento #{generate_supply_request.supply_request.to_s} já contem Ordem de Fornecimento")
+      else
+        generate_supply_request.supply_request.licitation_process.licitation_process_ratifications.each do |creditor_winner|
+          contract = Contract.joins(:creditors).
+              where(licitation_process_id: generate_supply_request.supply_request.licitation_process_id).
+              where("compras_contracts_unico_creditors.creditor_id = ?", creditor_winner.creditor.id).
+              last
+          if contract
+            create_supple_order(contract, generate_supply_request)
+          else
+            errors.push("Fornecerdor #{creditor_winner.creditor.name} sem contrato")
+          end
         end
       end
-
     end
 
     set_errors(errors.join("<br/>"))
