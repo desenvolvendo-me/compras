@@ -1,12 +1,12 @@
 pt-BR:
   activerecord:
     models:
-      supply_request_deferring:
+      supply_request_attendance:
         one: "Atendimento de Pedido de Fornecimento"
         other: "Atendimentos de Pedidos de Fornecimento"
 
     attributes:
-      supply_request_deferring:
+      supply_request_attendance:
         date: "Data"
         justification: "Justificativa"
         supply_request: "Pedido de Fornecimento"

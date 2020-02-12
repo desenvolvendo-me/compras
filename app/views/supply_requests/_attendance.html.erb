@@ -2,29 +2,29 @@
   <thead>
   <tr>
     <th>
-      <%= SupplyRequestDeferring.human_attribute_name :sequence %>
+      <%= SupplyRequestAttendance.human_attribute_name :sequence %>
     </th>
     <th>
-      <%= SupplyRequestDeferring.human_attribute_name :date %>
+      <%= SupplyRequestAttendance.human_attribute_name :date %>
     </th>
     <th>
-      <%= SupplyRequestDeferring.human_attribute_name :responsible %>
+      <%= SupplyRequestAttendance.human_attribute_name :responsible %>
     </th>
     <th>
-      <%= SupplyRequestDeferring.human_attribute_name :service_status %>
+      <%= SupplyRequestAttendance.human_attribute_name :service_status %>
     </th>
     <th>
     </th>
   </tr>
   </thead>
   <tbody>
-  <% f.object.supply_request_deferrings.each do |supply_request_deferring| %>
+  <% f.object.supply_request_attendances.each do |supply_request_attendance| %>
     <tr>
-      <td><%= supply_request_deferring.sequence %></td>
-      <td><%= supply_request_deferring.date %></td>
-      <td><%= supply_request_deferring.responsible %></td>
-      <td><%= SupplyRequestServiceStatus.t(supply_request_deferring.service_status) %></td>
-      <td><%= link_to "Visualizar", edit_supply_request_deferring_path(supply_request_deferring) %></td>
+      <td><%= supply_request_attendance.sequence %></td>
+      <td><%= supply_request_attendance.date %></td>
+      <td><%= supply_request_attendance.responsible %></td>
+      <td><%= SupplyRequestServiceStatus.t(supply_request_attendance.service_status) %></td>
+      <td><%= link_to "Visualizar", edit_supply_request_attendance_path(supply_request_attendance) %></td>
     </tr>
   <% end %>
   </tbody>

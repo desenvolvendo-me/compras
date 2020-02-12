@@ -1,4 +1,4 @@
-class SupplyRequestDeferringDecorator
+class SupplyRequestAttendanceDecorator
   include Decore
   include Decore::Proxy
   include Decore::Header

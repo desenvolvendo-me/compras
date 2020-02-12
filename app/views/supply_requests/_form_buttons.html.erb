@@ -8,7 +8,7 @@
     <%= f.button :submit, class: 'supply_request_submit_close' if can?(:modify, main_controller_name) %>
   <% end %>
 
-  <%= link_to 'Atendimento', supply_request_deferrings_path(:supply_request_id => resource.id), 'data-disabled' => f.object.decorator.not_persisted_message,  :class => 'button primary' %>
+  <%= link_to 'Atendimento', supply_request_attendances_path(:supply_request_id => resource.id), 'data-disabled' => f.object.decorator.not_persisted_message,  :class => 'button primary' %>
   <%= f.button :back %>
 
   <% if f.object.persisted? && can?(:destroy, main_controller_name) %>
