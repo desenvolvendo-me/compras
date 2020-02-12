@@ -18,13 +18,13 @@
   </tr>
   </thead>
   <tbody>
-  <% f.object.supply_orders.each do |supply_order| %>
+  <% f.object.supply_orders.each do |supply_order_request| %>
     <tr>
-      <td><%= supply_order.number %></td>
-      <td><%= supply_order.decorator.creditor %></td>
-      <td><%= supply_order.authorization_date %></td>
-      <td><%= supply_order.licitation_process %></td>
-      <td><%= link_to "Visualizar", edit_supply_order_path(supply_order) %></td>
+      <td><%= supply_order_request.supply_order.number %></td>
+      <td><%= supply_order_request.supply_order.decorator.creditor %></td>
+      <td><%= supply_order_request.supply_order.authorization_date %></td>
+      <td><%= supply_order_request.supply_order.licitation_process %></td>
+      <td><%= link_to "Visualizar", edit_supply_order_path(supply_order_request.supply_order) %></td>
     </tr>
   <% end %>
   </tbody>
