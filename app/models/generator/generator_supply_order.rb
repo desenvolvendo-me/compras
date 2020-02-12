@@ -52,7 +52,7 @@ class Generator::GeneratorSupplyOrder < Compras::Model
               where("compras_contracts_unico_creditors.creditor_id = ?", creditor_winner.creditor.id).
               last
           if contract
-            create_supple_order(contract, generate_supply_request)
+            create_supple_order(contract, generate_supply_request, creditor_winner)
           else
             errors.push("Fornecerdor #{creditor_winner.creditor.name} sem contrato")
           end
@@ -77,7 +77,7 @@ class Generator::GeneratorSupplyOrder < Compras::Model
 
   private
 
-  def create_supple_order(contract, generate_supply_request)
+  def create_supple_order(contract, generate_supply_request, creditor_winner)
     supply_order = SupplyOrder.create!(
         authorization_date: Date.today,
         year: generate_supply_request.supply_request.year,
@@ -85,6 +85,10 @@ class Generator::GeneratorSupplyOrder < Compras::Model
         contract_id: contract.id,
         purchase_solicitation_id: generate_supply_request.supply_request.purchase_solicitation_id
     )
+
+    creditor_winner.licitation_process_ratification_items.each do |item|
+      SupplyOrderItem.create(supply_order_id: supply_order.id, material_id: item.material.id, quantity: item.quantity)
+    end
 
     SupplyOrderRequests.create(supply_order_id: supply_order.id, supply_request_id: generate_supply_request.supply_request.id)
   end
