@@ -21,3 +21,4 @@ pt-BR:
         supply_request_status: "Situação"
         justification: "Justificativa"
         supply_request_file: "Documento"
+        status_last_attendance: "Status do Último Atendimento"
