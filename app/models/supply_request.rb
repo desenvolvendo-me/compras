@@ -17,7 +17,7 @@ class SupplyRequest < Compras::Model
 
   has_many :items, class_name: 'SupplyRequestItem', dependent: :destroy
   has_many :supply_orders, class_name: "SupplyOrderRequests"
-  has_many :supply_request_deferrings, :dependent => :destroy, :order => :sequence, :inverse_of => :supply_request
+  has_many :supply_request_attendances, :dependent => :destroy, :order => :sequence, :inverse_of => :supply_request
 
   accepts_nested_attributes_for :items, allow_destroy: true
 
