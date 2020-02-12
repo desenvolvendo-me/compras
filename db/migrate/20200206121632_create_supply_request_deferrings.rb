@@ -1,6 +1,6 @@
-class CreateSupplyRequestAttendances < ActiveRecord::Migration
+class CreateSupplyRequestDeferrings < ActiveRecord::Migration
   def change
-    create_table :compras_supply_request_attendances do |t|
+    create_table :compras_supply_request_deferrings do |t|
       t.text :justification
       t.date :date
       t.integer :supply_request_id
