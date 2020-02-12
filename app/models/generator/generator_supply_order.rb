@@ -53,12 +53,15 @@ class Generator::GeneratorSupplyOrder < Compras::Model
 
         if contract
           create_supple_order(contract, generate_supply_request)
+        else
+          errors.push("Fornecerdor #{creditor_winner.creditor.name} sem contrato")
+          errors.push("Fornecerdor #{creditor_winner.creditor.name} sem contrato")
         end
       end
 
     end
 
-    set_errors(errors.join("\n"))
+    set_errors(errors.join("<br/>"))
     set_status
     save!
   end

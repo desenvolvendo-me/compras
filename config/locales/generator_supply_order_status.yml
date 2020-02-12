@@ -4,4 +4,4 @@ pt-BR:
       processing: "Em processamento"
       processed: "Processado"
       cancelled: "Cancelado"
-      without_contract: "Fornecedor sem Contrato"
+      processed_with_errors: "Processado com Erro"

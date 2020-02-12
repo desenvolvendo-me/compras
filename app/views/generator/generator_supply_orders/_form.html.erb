@@ -1,4 +1,4 @@
-<%= f.input :user_id, as: :hidden, input_html: { value: current_user.id, class: 'user-id' } %>
+<%= f.input :user_id, as: :hidden, input_html: {value: current_user.id, class: 'user-id'} %>
 
 <div class="yui3-g">
   <div class="yui3-u-1-3">
@@ -8,6 +8,9 @@
 
 <%= render "supply_requests", f: f %>
 
-<% if f.object.processed_with_errors? %>
-  <%= f.input :error_message, disabled: true %>
-<% end %>
+<div class="field_with_errors">
+  <h4>Erros do Processamento</h4>
+  <% if f.object.processed_with_errors? %>
+    <p class="error"> <%= f.object.error_message.html_safe %></p>
+  <% end %>
+</div>
