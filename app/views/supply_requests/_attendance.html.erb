@@ -2,9 +2,6 @@
   <thead>
   <tr>
     <th>
-      <%= SupplyRequestAttendance.human_attribute_name :sequence %>
-    </th>
-    <th>
       <%= SupplyRequestAttendance.human_attribute_name :date %>
     </th>
     <th>
@@ -20,8 +17,7 @@
   <tbody>
   <% f.object.supply_request_attendances.each do |supply_request_attendance| %>
     <tr>
-      <td><%= supply_request_attendance.sequence %></td>
-      <td><%= supply_request_attendance.date %></td>
+      <td><%= l(supply_request_attendance.date, format: :short) %></td>
       <td><%= supply_request_attendance.responsible %></td>
       <td><%= SupplyRequestServiceStatus.t(supply_request_attendance.service_status) %></td>
       <td><%= link_to "Visualizar", edit_supply_request_attendance_path(supply_request_attendance) %></td>
