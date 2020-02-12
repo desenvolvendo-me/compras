@@ -5,7 +5,7 @@ class SupplyRequestDecorator
   include ActionView::Helpers::NumberHelper
   include ActionView::Helpers::TranslationHelper
 
-  attr_header :creditor, :authorization_date, :licitation_process, :supply_request_status
+  attr_header :creditor, :authorization_date, :licitation_process, :status_last_attendance
 
   def creditor
     self.contract.nil? || self.contract.creditors.blank? || self.contract.creditors.first.person.nil? ? '' : self.contract.creditors.first.person.name
@@ -17,5 +17,12 @@ class SupplyRequestDecorator
 
   def not_persisted_message
     t('purchase_solicitation.messages.not_persisted') unless persisted?
+  end
+
+  def status_last_attendance
+    attendances = component.supply_request_attendances
+    if attendances.any?
+      SupplyRequestServiceStatus.t(attendances.last.service_status)
+    end
   end
 end

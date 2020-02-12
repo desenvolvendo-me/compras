@@ -25,6 +25,20 @@
 </div>
 
 <div class="yui3-g">
+  <div class="yui3-u-1-4">
+    <%= f.input :contract, :disabled => f.object.updatabled %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <div>
+      <label> Fornecedor </label>
+      <input class="string" disabled id="supply_request_creditor"
+             value="<%= f.object.decorator.creditor %>" size="30" type="text">
+    </div>
+  </div>
+</div>
+
+<div class="yui3-g">
   <div class="yui3-u-1-4 hidden">
     <%= f.input :updatabled %>
   </div>
