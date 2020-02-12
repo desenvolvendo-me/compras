@@ -32,7 +32,8 @@ class SupplyOrder < Compras::Model
   orderize "id DESC"
   filterize
 
-  # before_update :change_status_in_service
+  after_create :set_status_defaut
+  before_update :change_status_in_service
 
   def items_quantity_permitted
     message = calc_items_quantity(self.licitation_process, self.purchase_solicitation)
@@ -52,6 +53,10 @@ class SupplyOrder < Compras::Model
   end
 
   private
+
+  def set_status_defaut
+    update_column("order_status", SupplyOrderStatus::SENT)
+  end
 
   def change_status_in_service
     if self.supply_request.any?
