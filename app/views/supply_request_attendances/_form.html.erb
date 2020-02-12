@@ -1,0 +1,35 @@
+<%= render "crud/form_base_erros", f: f %>
+
+<%= f.input :supply_request_id, :as => :hidden %>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-8">
+    <%= f.input :sequence, :disabled => true %>
+  </div>
+
+  <div class="yui3-u-1-6">
+    <%= f.input :date, :disabled => f.object.persisted? %>
+  </div>
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :responsible, :disabled => f.object.persisted? %>
+  </div>
+
+  <% if current_user.purchasing_units.any? %>
+    <div class="yui3-u-1-4">
+      <%= f.input :service_status, :disabled => f.object.persisted? %>
+    </div>
+  <% else %>
+    <div class="yui3-u-1-4">
+      <%= f.input :service_status, :collection => SupplyRequestServiceStatus.non_buyer_user, :disabled => f.object.persisted? %>
+    </div>
+  <% end %>
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :justification, :disabled => f.object.persisted? %>
+  </div>
+</div>

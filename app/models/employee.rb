@@ -9,7 +9,7 @@ class Employee < Compras::Model
   has_many :purchase_solicitations_with_liberator, class_name: 'PurchaseSolicitation', foreign_key: :liberator_id, dependent: :restrict
   has_many :purchase_solicitations_with_responsible, class_name: 'PurchaseSolicitation', foreign_key: :responsible_id, dependent: :restrict
   has_many :purchase_solicitation_liberations, foreign_key: :responsible_id, dependent: :restrict
-  has_many :supply_request_deferrings, foreign_key: :responsible_id, dependent: :restrict
+  has_many :supply_request_attendances, foreign_key: :responsible_id, dependent: :restrict
   has_many :licitation_processes_with_contact, class_name: 'LicitationProcess', foreign_key: :contact_id, dependent: :restrict
   has_many :price_collections, dependent: :restrict
   has_many :legal_analysis_appraisals, foreign_key: :responsible_id, dependent: :restrict

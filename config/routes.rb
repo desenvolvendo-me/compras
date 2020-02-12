@@ -158,7 +158,7 @@ Compras::Application.routes.draw do
   end
   match 'api/supply_requests/show' => 'supply_requests#api_show', as: :supply_requests_api_show
 
-  resources :supply_request_deferrings, :only => [:index, :new, :create, :edit] do
+  resources :supply_request_attendances, :only => [:index, :new, :create, :edit] do
     collection do
       get :filter
       get :modal

@@ -1,4 +1,4 @@
-class SupplyRequestDeferring < Compras::Model
+class SupplyRequestAttendance < Compras::Model
   attr_accessible :date, :justification, :responsible_id,
                   :supply_request_id, :service_status
 
