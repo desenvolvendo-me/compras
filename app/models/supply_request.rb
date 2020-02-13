@@ -4,9 +4,11 @@ class SupplyRequest < Compras::Model
 
   attr_accessible :licitation_process_id, :creditor_id, :authorization_date,
                   :items_attributes, :year, :purchase_solicitation_id,
-                  :updatabled, :contract_id, :supply_request_status
+                  :updatabled, :contract_id, :supply_request_status, :justification, :supply_request_file
 
   attr_modal :licitation_process_id, :creditor_id, :year, :authorization_date
+
+  mount_uploader :supply_request_file, UnicoUploader
 
   belongs_to :contract
   belongs_to :purchase_solicitation
@@ -14,8 +16,8 @@ class SupplyRequest < Compras::Model
   belongs_to :creditor
 
   has_many :items, class_name: 'SupplyRequestItem', dependent: :destroy
-  has_many :supply_orders
-  has_many :supply_request_deferrings, :dependent => :destroy, :order => :sequence, :inverse_of => :supply_request
+  has_many :supply_orders, class_name: "SupplyOrderRequests"
+  has_many :supply_request_attendances, :dependent => :destroy, :order => :sequence, :inverse_of => :supply_request
 
   accepts_nested_attributes_for :items, allow_destroy: true
 

@@ -43,6 +43,28 @@ function setModalUrlToPurchaseSolicitationByLicitationProcess(selector_id, selec
     $(selector_modal).data('modal-url', urlModal);
 }
 
+function setModalUrlToMaterialByLicitationProcess(selector_id, selector_modal) {
+    var value = $(selector_id).val();
+    var urlModal = Routes.modal_materials,
+        params = {
+            by_licitation_process: value
+        };
+
+    urlModal += "?" + $.param(params);not_persisted_message
+    $(selector_modal).data('modal-url', urlModal);
+}
+
+function setSourceToMaterialByLicitationProcess(selector_id, selector_modal) {
+    var value = $(selector_id).val();
+    var urlModal = Routes.materials,
+        params = {
+            by_licitation_process: value
+        };
+
+    urlModal += "?" + $.param(params);
+    $(selector_modal).data('source', urlModal);
+}
+
 function setModalUrlToPurchaseFormByPurchaseSolicitation(selector_id, selector_modal) {
     var value = $(selector_id).val();
     var urlModal = Routes.modal_purchase_forms,

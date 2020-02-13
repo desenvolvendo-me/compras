@@ -1,10 +1,18 @@
 //= require modal_filter
+//= require input
 
 function setModalUrlToPurchaseSolicitation() {
-    var selector_licitation_process_id = '#supply_request_licitation_process_id'
-    var selector_purchase_solicitation_modal = '#supply_request_purchase_solicitation'
-    setModalUrlToPurchaseSolicitationByLicitationProcess(selector_licitation_process_id, selector_purchase_solicitation_modal)
+    var selector_id = '#supply_request_licitation_process_id'
+    var selector_modal = '#supply_request_purchase_solicitation'
+    setModalUrlToPurchaseSolicitationByLicitationProcess(selector_id, selector_modal)
 }
+
+function setModalUrlToMaterial() {
+    var selector_id = '#supply_request_licitation_process_id'
+    var selector_modal = '#supply_request_material'
+    setSourceToMaterialByLicitationProcess(selector_id, selector_modal)
+}
+
 function setModalUrlToCreditor() {
     var urlModal = Routes.modal_creditors,
         params = {
@@ -105,8 +113,11 @@ $(document).ready(function () {
     setModalUrlToPurchaseSolicitation();
     setMaterialTotalAndBalance();
 
+    disableWhenSelected("#supply_request_purchase_solicitation_id", "#supply_request_material")
+
     $('form.supply_request').on('change', '#supply_request_purchase_solicitation_id', function () {
         setDepartment();
+        setModalUrlToMaterial();
     });
 
     $('form.supply_request').on('change', '#supply_request_quantity', function () {
@@ -124,8 +135,25 @@ $(document).ready(function () {
         setMaterialTotalAndBalance();
     });
 
-    $('#supply_request_licitation_process').on('change', function (event, licitation_process) {
+    $('#supply_request_licitation_process_id').ready(function () {
+            var licitation_process_id = $("#supply_request_licitation_process_id").val()
+
+            if (licitation_process_id) {
+                $.ajax({
+                    url: Routes.licitation_processes + "/" + licitation_process_id + ".json",
+                    dataType: 'json',
+                    type: 'GET',
+                    success: function (data) {
+                        $("#licitation_process_object").val(data["description"])
+                    }
+                });
+            }
+        }
+    )
+
+    $('#supply_request_licitation_process_id').on('change', function (event, licitation_process) {
         if (licitation_process) {
+            $("#licitation_process_object").val(licitation_process.description)
             $("#supply_request_modality_or_type_of_removal").val(licitation_process.modality_or_type_of_removal);
             $("#supply_request_purchase_solicitation").attr('disabled', false);
         } else {
@@ -139,27 +167,27 @@ $(document).ready(function () {
         }
     });
 
-    if($("#supply_request_updatabled").prop("checked")){
-        $(".edit-nested-record").attr('class',"edit-nested-record hidden")
-        $(".remove-nested-record").attr('class',"remove-nested-record hidden")
+    if ($("#supply_request_updatabled").prop("checked")) {
+        $(".edit-nested-record").attr('class', "edit-nested-record hidden")
+        $(".remove-nested-record").attr('class', "remove-nested-record hidden")
     }
 
-    if($("#supply_request_number_nf").val()==""){
-        $(".supply_request_submit_close").attr('data-disabled',"Desabilitado" );
+    if ($("#supply_request_number_nf").val() == "") {
+        $(".supply_request_submit_close").attr('data-disabled', "Desabilitado");
     }
 
-    $("#supply_request_contract_id").on("change", function(event, contract) {
-        $("#supply_request_creditor").val(contract ? contract.creditor:'');
+    $("#supply_request_contract_id").on("change", function (event, contract) {
+        $("#supply_request_creditor").val(contract ? contract.creditor : '');
     });
 
     $(".supply_request_submit_close").click(function () {
         $("#supply_request_updatabled").prop('checked', true);
     });
 
-    $("#supply_request_number_nf").on("change", function() {
-        if($("#supply_request_number_nf").val()==""){
-            $(".supply_request_submit_close").attr('data-disabled',"Desabilitado" );
-        }else{
+    $("#supply_request_number_nf").on("change", function () {
+        if ($("#supply_request_number_nf").val() == "") {
+            $(".supply_request_submit_close").attr('data-disabled', "Desabilitado");
+        } else {
             $(".supply_request_submit_close").removeAttr('data-disabled');
         }
     });

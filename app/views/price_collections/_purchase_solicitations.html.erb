@@ -1,33 +1,36 @@
-<div class="yui3-g autocomplete-finder">
-  <div class="yui3-u-2-3">
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :demand, :as => :auto_complete, :fake => true %>
+  </div>
+  <div class="yui3-u-1-2">
     <%= f.input :purchase_solicitations, as: :auto_complete, clear_input: true,
                 fake: true, 'data-hidden-field-class' => 'autocomplete-form-input',
                 source_path: purchase_solicitations_path(without_price_collection: true, without_purchase_process: true) %>
   </div>
 </div>
 
-<input type="hidden" name="<%= f.sanitized_object_name %>[purchase_solicitation_ids][]" />
+<input type="hidden" name="<%= f.sanitized_object_name %>[purchase_solicitation_ids][]"/>
 
-<table class="records">
+<table class="records" id="table_price_collection_purchase_solicitations_records">
   <thead>
-    <tr>
-      <th><%= PurchaseSolicitation.human_attribute_name :code %></th>
-      <th><%= PurchaseSolicitation.human_attribute_name :department %></th>
-      <th><%= PurchaseSolicitation.human_attribute_name :user %></th>
-      <th></th>
-    </tr>
+  <tr>
+    <th><%= PurchaseSolicitation.human_attribute_name :code %></th>
+    <th><%= PurchaseSolicitation.human_attribute_name :department %></th>
+    <th><%= PurchaseSolicitation.human_attribute_name :user %></th>
+    <th></th>
+  </tr>
   </thead>
 
   <tbody class="<%= f.sanitized_object_name %>_purchase_solicitations_records">
-    <% f.object.purchase_solicitations.each do |purchase_solicitation| %>
-      <%= render 'purchase_solicitations/price_collections_list_form',
-                 id: purchase_solicitation.id,
-                 code_and_year: purchase_solicitation.decorator.code_and_year,
-                 budget_structure: purchase_solicitation.department,
-                 responsible: purchase_solicitation.user,
-                 description: purchase_solicitation.to_s,
-                 f: f %>
-    <% end %>
+  <% f.object.purchase_solicitations.each do |purchase_solicitation| %>
+    <%= render 'purchase_solicitations/price_collections_list_form',
+               id: purchase_solicitation.id,
+               code_and_year: purchase_solicitation.decorator.code_and_year,
+               budget_structure: purchase_solicitation.department,
+               responsible: purchase_solicitation.user,
+               description: purchase_solicitation.to_s,
+               f: f %>
+  <% end %>
   </tbody>
 </table>
 

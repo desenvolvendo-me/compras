@@ -1,11 +1,16 @@
 class SupplyRequestServiceStatus < EnumerateIt::Base
-  associate_values :pending, :liberated, :not_liberated, :attended,
-                   :annulled, :returned, :partially_fulfilled,
-                   :in_purchase_process
+  associate_values :order_in_analysis,
+                   :returned_for_adjustment,
+                   :rejected,
+                   :partially_answered,
+                   :fully_serviced,
+                   :doubts,
+                   :adjusted
 
-  def self.liberation_availables
+  def self.non_buyer_user
     to_a.select do |item|
-      [LIBERATED,  NOT_LIBERATED, RETURNED].include?(item[1])
+      [DOUBTS, ADJUSTED].include?(item[1])
     end
   end
+
 end

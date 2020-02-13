@@ -1,0 +1,36 @@
+<table class="records">
+  <thead>
+  <tr>
+    <th>
+      <%= SupplyOrder.human_attribute_name :number %>
+    </th>
+    <th>
+      <%= SupplyOrder.human_attribute_name :creditor %>
+    </th>
+    <th>
+      <%= SupplyOrder.human_attribute_name :authorization_date %>
+    </th>
+    <th>
+      <%= SupplyOrder.human_attribute_name :licitation_process %>
+    </th>
+    <th>
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <% f.object.supply_requests.each do |generator_supply_request| %>
+    <% if generator_supply_request.supply_request %>
+      <% generator_supply_request.supply_request.supply_orders.each do |supply_order_request| %>
+        <tr>
+          <td><%= supply_order_request.supply_order.number %></td>
+          <td><%= supply_order_request.supply_order.decorator.creditor %></td>
+          <td><%= supply_order_request.supply_order.authorization_date %></td>
+          <td><%= supply_order_request.supply_order.licitation_process %></td>
+          <td><%= link_to "Visualizar", edit_supply_order_path(supply_order_request.supply_order) %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  <% end %>
+  </tbody>
+</table>
+

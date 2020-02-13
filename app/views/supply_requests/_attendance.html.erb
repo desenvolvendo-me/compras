@@ -1,0 +1,28 @@
+<table class="records">
+  <thead>
+  <tr>
+    <th>
+      <%= SupplyRequestAttendance.human_attribute_name :date %>
+    </th>
+    <th>
+      <%= SupplyRequestAttendance.human_attribute_name :responsible %>
+    </th>
+    <th>
+      <%= SupplyRequestAttendance.human_attribute_name :service_status %>
+    </th>
+    <th>
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <% f.object.supply_request_attendances.each do |supply_request_attendance| %>
+    <tr>
+      <td><%= l(supply_request_attendance.date, format: :short) %></td>
+      <td><%= supply_request_attendance.responsible %></td>
+      <td><%= SupplyRequestServiceStatus.t(supply_request_attendance.service_status) %></td>
+      <td><%= link_to "Visualizar", edit_supply_request_attendance_path(supply_request_attendance) %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+

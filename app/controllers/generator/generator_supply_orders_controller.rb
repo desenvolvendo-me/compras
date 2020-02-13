@@ -21,6 +21,12 @@ class Generator::GeneratorSupplyOrdersController < Generator::BaseController
     redirect_to edit_resource_path(resource)
   end
 
+  def without_sidekiq
+    generetor = Generator::GeneratorSupplyOrder.find(params[:id])
+    generetor.create_supply_orders
+    redirect_to edit_resource_path(resource)
+  end
+
   protected
 
   def create_resource(object)
