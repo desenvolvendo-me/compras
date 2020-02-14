@@ -68,22 +68,23 @@ function renderItem(item) {
 
 function loadItem() {
     var purchase_solicitation_id = $("#balance_adjustment_purchase_solicitation_id").val();
-
-    $.ajax({
-        url: Routes.purchase_solicitations_api_show,
-        data: {purchase_solicitation_id: purchase_solicitation_id},
-        dataType: 'json',
-        type: 'POST',
-        success: function (data) {
-            $.each(data.items, function (i, item) {
-                if (hasItemAlreadyAdded(item)) {
-                    // mergeItem(item);
-                } else {
-                    renderItem(item);
-                }
-            });
-        }
-    });
+    if(purchase_solicitation_id){
+        $.ajax({
+            url: Routes.purchase_solicitations_api_show,
+            data: {purchase_solicitation_id: purchase_solicitation_id},
+            dataType: 'json',
+            type: 'POST',
+            success: function (data) {
+                $.each(data.items, function (i, item) {
+                    if (hasItemAlreadyAdded(item)) {
+                        // mergeItem(item);
+                    } else {
+                        renderItem(item);
+                    }
+                });
+            }
+        });
+    }
 }
 
 $(document).ready(function () {
