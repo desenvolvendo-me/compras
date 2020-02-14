@@ -59,7 +59,7 @@ class SupplyOrder < Compras::Model
   end
 
   def change_status_in_service
-    if self.supply_request.any?
+    if defined? self.supply_request && self.supply_request.any?
       self.updatabled? ? status = SupplyRequestStatus::DELIVERED : status = SupplyRequestStatus::IN_SERVICE
       self.supply_requests.each do |supply_order_request|
         supply_order_request.supply_request.update_attribute(:supply_request_status, status)
