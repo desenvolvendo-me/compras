@@ -4,7 +4,8 @@ class SupplyOrder < Compras::Model
 
   attr_accessible :licitation_process_id, :creditor_id, :authorization_date, :year, :observation, :updatabled,
                   :items_attributes, :invoices_attributes, :supply_requests_attributes,
-                  :pledge_id, :purchase_solicitation_id, :contract_id, :purchase_form_id
+                  :pledge_id, :purchase_solicitation_id, :contract_id,
+                  :purchase_form_id,:release_date,:invoice_date,:value
 
   has_enumeration_for :order_status, :with => SupplyOrderStatus,
                       :create_helpers => true, :create_scopes => true

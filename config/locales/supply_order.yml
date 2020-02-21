@@ -22,3 +22,6 @@ pt-BR:
         purchase_form: "Ficha de Compra"
         observation: "Observação"
         order_status: "Situação"
+        release_date: "Data de Lançamento"
+        invoice_date: "Data da Nota"
+        value: "Valor"
