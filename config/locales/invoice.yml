@@ -8,3 +8,6 @@ pt-BR:
     attributes:
       invoice:
         number: "Número"
+        release_date: "Data de Lançamento"
+        date: "Data da Nota"
+        value: "Valor"
