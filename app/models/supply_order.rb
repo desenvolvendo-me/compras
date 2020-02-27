@@ -5,7 +5,7 @@ class SupplyOrder < Compras::Model
   attr_accessible :licitation_process_id, :creditor_id, :authorization_date, :year, :observation, :updatabled,
                   :items_attributes, :invoices_attributes, :supply_requests_attributes,
                   :pledge_id, :purchase_solicitation_id, :contract_id,
-                  :purchase_form_id,:release_date,:invoice_date,:value
+                  :purchase_form_id
 
   has_enumeration_for :order_status, :with => SupplyOrderStatus,
                       :create_helpers => true, :create_scopes => true
@@ -17,7 +17,7 @@ class SupplyOrder < Compras::Model
   belongs_to :purchase_form
 
   has_many :items, class_name: 'SupplyOrderItem', dependent: :destroy
-  has_many :invoices, dependent: :destroy
+  has_many :invoices, class_name: 'Invoice', dependent: :destroy
   has_many :supply_requests, class_name: "SupplyOrderRequests", dependent: :destroy
 
   accepts_nested_attributes_for :items, allow_destroy: true
@@ -27,8 +27,8 @@ class SupplyOrder < Compras::Model
   delegate :modality_number, :modality_humanize, :type_of_removal_humanize,
            to: :licitation_process, allow_nil: true
 
-  validates :authorization_date, :contract, :purchase_solicitation, :licitation_process, presence: true
-  validate :items_quantity_permitted
+  # validates :authorization_date, :contract, :purchase_solicitation, :licitation_process, presence: true
+  # validate :items_quantity_permitted
 
   orderize "id DESC"
   filterize

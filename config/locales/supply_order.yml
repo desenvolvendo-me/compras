@@ -23,5 +23,5 @@ pt-BR:
         observation: "Observação"
         order_status: "Situação"
         release_date: "Data de Lançamento"
-        invoice_date: "Data da Nota"
+        date: "Data da Nota"
         value: "Valor"

@@ -1,11 +1,17 @@
-<tr class="record nested-record item-record" id="number-id-<%= number %>">
+<tr class="record nested-record invoice-record" id="number-id-<%= number %>">
   <td class="number"><%= number %></td>
+  <td class="date"><%= date %></td>
+  <td class="release_date"><%= release_date %></td>
+  <td class="value"><%= value %></td>
   <td>
     <%= link_to 'Editar', '#', class: 'edit-nested-record' %>
   </td>
 
   <td>
     <%= f.input :number, as: :hidden, input_html: { value: number, class: 'number' } %>
+    <%= f.input :date, as: :hidden, input_html: { value: date, class: 'decimal' } %>
+    <%= f.input :release_date, as: :hidden, input_html: { value: release_date, class: 'decimal' } %>
+    <%= f.input :value, as: :hidden, input_html: { value: value, class: 'decimal' } %>
     <%= f.input :id, as: :hidden, input_html: { value: id } %>
     <%= f.input :_destroy, as: :hidden, input_html: { class: 'destroy' } %>
 
