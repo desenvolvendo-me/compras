@@ -1,5 +1,10 @@
 module Report::BalanceHelper
 
+  def self.get_licitation_processes_ratifications(licitation_processes, creditor)
+    lic_pro = LicitationProcessRatification.where(licitation_process_id:licitation_processes,creditor_id:creditor)[0]
+    LicitationProcessRatificationItem.where(licitation_process_ratification_id:lic_pro.id)
+  end
+
   def self.get_balance(contract, item)
     supply_orders = SupplyOrder.joins(:contract, :items)
     supply_orders = supply_orders.where("compras_supply_order_items.material_id = #{item.material.id}")
