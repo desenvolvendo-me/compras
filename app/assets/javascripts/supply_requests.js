@@ -124,6 +124,14 @@ $(document).ready(function () {
         setMaterialTotalAndBalance();
     });
 
+    $('form.supply_request').on('change', '#supply_request_licitation_process_id', function () {
+        if($('#supply_request_licitation_process_id').val() != ''){
+            $('#supply_request_contract').removeAttr('disabled');
+        }else{
+            $('#supply_request_contract').attr('disabled','disabled');
+        }
+    });
+
     $('form.supply_request').on('change', '#supply_request_material_id', function () {
         setMaterialTotalAndBalance();
     });
