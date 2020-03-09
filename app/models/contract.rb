@@ -12,7 +12,8 @@ class Contract < Compras::Model
                   :default_fine, :execution_type, :contract_guarantees,
                   :consortium_agreement, :department_id,:balance_control_type
 
-  attr_modal :year, :contract_number, :sequential_number, :signature_date
+  attr_modal :year, :contract_number, :sequential_number,
+             :signature_date,:creditor
 
   attr_accessor :creditor
 
