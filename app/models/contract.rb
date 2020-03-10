@@ -92,6 +92,10 @@ class Contract < Compras::Model
         }
   end
 
+  def creditor
+    self.creditors.last
+  end
+
   def to_s
     contract_number
   end
