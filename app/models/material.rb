@@ -54,6 +54,13 @@ class Material < Unico::Model
     where {code.like("#{q}%") | description.like("#{q}%")}
   }
 
+  has_many :items_supply_orders, class_name: 'SupplyOrderItem'
+
+  scope :by_supply_order, lambda {|supply_order_id|
+    joins(items_supply_orders: [:supply_order]).
+        where("compras_supply_orders.id in (#{supply_order_id})")
+  }
+
   scope :by_licitation_process_status, ->(status) do
     joins(items: [:licitation_process]).where("compras_licitation_processes.status = '#{status}'").uniq
   end
