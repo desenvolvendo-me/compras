@@ -1,7 +1,7 @@
 class User < Compras::Model
   attr_accessible :email, :login, :profile_id, :password, :password_confirmation
   attr_accessible :authenticable_id, :authenticable_type,
-                  :purchasing_unit_ids,:administrator
+                  :purchasing_unit_ids,:administrator,:activated
 
   attr_modal :login,:email
 

@@ -14,6 +14,7 @@ pt-BR:
         profile: "Perfil"
         authenticable: "Funcionário"
         purchasing_units: "Unidade de Compra"
+        activated: "Ativo"
 
   simple_form:
     hints:
