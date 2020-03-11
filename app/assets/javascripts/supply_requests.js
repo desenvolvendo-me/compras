@@ -1,6 +1,14 @@
 //= require modal_filter
 //= require input
 
+function setModalUrlToContract() {
+    var selector_modal = '#supply_request_contract';
+    params = {
+        purchase_process_id: $('#supply_request_licitation_process_id').val()
+    };
+    setModalUrl(selector_modal,'contracts',params);
+}
+
 function setModalUrlToPurchaseSolicitation() {
     var selector_id = '#supply_request_licitation_process_id'
     var selector_modal = '#supply_request_purchase_solicitation'
@@ -108,6 +116,7 @@ function setMaterialTotalAndBalance() {
 }
 
 $(document).ready(function () {
+    setModalUrlToContract();
     setModalUrlToCreditor();
     setPledgeSource();
     setModalUrlToPurchaseSolicitation();
@@ -137,6 +146,7 @@ $(document).ready(function () {
     });
 
     $('form.supply_request').on('change', '#supply_request_licitation_process_id', function () {
+        setModalUrlToContract();
         setModalUrlToCreditor();
         setPledgeSource();
         setModalUrlToPurchaseSolicitation();
