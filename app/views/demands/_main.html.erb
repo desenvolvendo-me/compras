@@ -1,29 +1,29 @@
 <div class="yui3-g">
   <div class="yui3-u-1-3">
-    <%= f.input :year %>
+    <%= f.input :year , :disabled => f.object.persisted? %>
   </div>
 
   <div class="yui3-u-1-3">
-    <%= f.input :name %>
+    <%= f.input :name , :disabled => f.object.persisted? %>
   </div>
 
   <div class="yui3-u-1-3">
     <%= f.input :purchasing_unit, :as => :modal,:hidden_field => false,
-                :modal_url =>
-                    modal_purchasing_units_path(:by_situation => 'active')%>
+      :modal_url =>modal_purchasing_units_path(:by_situation => 'active'),
+      :disabled => f.object.persisted? %>
   </div>
 
 </div>
 
-<%= f.input :observation %>
+<%= f.input :observation , :disabled => f.object.persisted? %>
 
 <div class="yui3-g">
 
   <div class="yui3-u-1-3">
-    <%= f.input :initial_date %>
+    <%= f.input :initial_date , :disabled => f.object.persisted? %>
   </div>
   <div class="yui3-u-1-3">
-    <%= f.input :final_date %>
+    <%= f.input :final_date , :disabled => f.object.persisted? %>
   </div>
 
   <div class="yui3-u-1-3">
