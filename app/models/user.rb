@@ -1,7 +1,7 @@
 class User < Compras::Model
   attr_accessible :email, :login, :profile_id, :password, :password_confirmation
   attr_accessible :authenticable_id, :authenticable_type,
-                  :purchasing_unit_ids
+                  :purchasing_unit_ids,:administrator
 
   attr_modal :login,:email
 
@@ -21,7 +21,6 @@ class User < Compras::Model
 
   has_many :roles, :through => :profile
 
-  delegate :name, :to => :authenticable, :allow_nil => true
   delegate :updated_at, :to => :profile, :allow_nil => true, :prefix => true
 
   validates :login, :presence => true, :unless => lambda { |u| !u.persisted? && u.creditor? }
@@ -31,9 +30,19 @@ class User < Compras::Model
   validates :login, :uniqueness => true, :format => /\A[a-z0-9.]+\z/i, :allow_blank => true
 
   before_create :skip_confirmation!, :if => :administrator?
+  after_validation :set_profile_admin
+  after_validation :set_name
 
   filterize
   orderize
+
+  def set_name
+    self.name = self.authenticable.name unless self.authenticable.nil?
+  end
+
+  def set_profile_admin
+      self.administrator = true if self.profile == 'Administrador'
+  end
 
   def password_required?
     return persisted? && !confirmed? if creditor?
