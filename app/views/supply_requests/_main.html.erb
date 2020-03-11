@@ -1,4 +1,6 @@
 <div class="yui3-g">
+
+  <input class id="current_user" value="<%=current_user.id %>" hidden >
   <div class="yui3-u-1-4">
     <%= f.input :licitation_process, :required => true, :disabled => f.object.updatabled %>
   </div>
