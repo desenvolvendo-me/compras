@@ -10,9 +10,12 @@ function setModalUrlToContract() {
 }
 
 function setModalUrlToPurchaseSolicitation() {
-    var selector_id = '#supply_request_licitation_process_id'
-    var selector_modal = '#supply_request_purchase_solicitation'
-    setModalUrlToPurchaseSolicitationByLicitationProcess(selector_id, selector_modal)
+    var selector_modal = '#supply_request_purchase_solicitation';
+    params = {
+      by_licitation_process: $('#supply_request_licitation_process_id').val(),
+      by_deparment_permited: $('#current_user').val()
+    };
+    setModalUrl(selector_modal,'purchase_solicitations',params);
 }
 
 function setModalUrlToMaterial() {
