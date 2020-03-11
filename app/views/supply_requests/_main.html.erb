@@ -26,9 +26,10 @@
 
 <div class="yui3-g">
   <div class="yui3-u-1-4">
-    <%= f.input :contract, :disabled => f.object.updatabled %>
+    <%= f.input :contract,
+      modal_url: modal_contracts_path(purchase_process_id:f.object.licitation_process),
+      :disabled => f.object.updatabled || !f.object.persisted? %>
   </div>
-
   <div class="yui3-u-1-2">
     <div>
       <label> Fornecedor </label>
@@ -71,3 +72,7 @@
 </div>
 
 <%= f.input :justification %>
+
+<script>
+
+</script>

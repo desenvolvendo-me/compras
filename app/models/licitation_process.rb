@@ -31,7 +31,7 @@ class LicitationProcess < Compras::Model
 
   attr_readonly :year, :modality_number
 
-  attr_modal :process, :year, :process_date, :status
+  attr_modal :process, :year, :process_date, :status, :description
 
   has_enumeration_for :concession_period_unit, :with => PeriodUnit
   has_enumeration_for :contract_guarantees, :with => UnicoAPI::Resources::Compras::Enumerations::ContractGuarantees
@@ -188,7 +188,7 @@ class LicitationProcess < Compras::Model
   }
 
   scope :by_status, lambda {|status|
-    where {|query| query.status.eq status}
+    # where {|query| query.status.eq status}
   }
 
 
