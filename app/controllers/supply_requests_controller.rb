@@ -1,4 +1,10 @@
 class SupplyRequestsController < CrudController
+  def new
+    object = build_resource
+    object.user = current_user
+
+    super
+  end
 
   def index
     @supply_requests = filter_by_department(collection)
