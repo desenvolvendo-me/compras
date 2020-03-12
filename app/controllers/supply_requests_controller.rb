@@ -7,7 +7,7 @@ class SupplyRequestsController < CrudController
   end
 
   def index
-    @supply_requests = filter_by_department(collection)
+    @supply_requests = filters(collection)
   end
 
   def api_show
@@ -17,8 +17,17 @@ class SupplyRequestsController < CrudController
 
   protected
 
-  def filter_by_department(collection)
-    departments = DepartmentPerson.where(user_id: current_user.id).pluck(:department_id)
-    collection.joins(:purchase_solicitation).where("compras_purchase_solicitations.department_id IN (?) ", departments)
+  def filters(collection)
+    purchasing_units = UserPurchasingUnit.joins(:user).
+      joins(:purchasing_unit).where("compras_user_purchasing_units.user_id=#{current_user.id}").
+        pluck('compras_user_purchasing_units.purchasing_unit_id')
+    if purchasing_units.empty?
+      departments = DepartmentPerson.where(user_id: current_user.id).pluck(:department_id)
+      collection.joins(:purchase_solicitation).where("compras_purchase_solicitations.department_id IN (?) ", departments)
+    else
+      departments = Department.where('purchasing_unit_id in (?)',purchasing_units).pluck(:id)
+      collection.joins(:purchase_solicitation).where("compras_purchase_solicitations.department_id IN (?) ", departments)
+    end
   end
+
 end
