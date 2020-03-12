@@ -9,6 +9,10 @@ class SupplyOrderDecorator
     self.contract.nil? || self.contract.creditors.blank? || self.contract.creditors.first.person.nil? ? '' : self.contract.creditors.first.person.name
   end
 
+  def creditor_id
+    self.contract.nil? || self.contract.creditors.blank? || self.contract.creditors.first.person.nil? ? '' : self.contract.creditors.first.id
+  end
+
   def modality_or_type_of_removal
     "#{component.modality_number} - #{component.modality_humanize || component.type_of_removal_humanize}"
   end
