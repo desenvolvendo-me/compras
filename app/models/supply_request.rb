@@ -24,7 +24,7 @@ class SupplyRequest < Compras::Model
   accepts_nested_attributes_for :items, allow_destroy: true
 
   has_enumeration_for :supply_request_status, :with => SupplyRequestStatus, :create_helpers => true
-  #
+
   delegate :modality_number, :modality_humanize, :type_of_removal_humanize,
            to: :licitation_process, allow_nil: true
 
