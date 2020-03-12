@@ -80,9 +80,11 @@ class Contract < Compras::Model
   scope :by_signature_period, lambda {|started_at, ended_at|
     where {signature_date.gteq(started_at) & signature_date.lteq(ended_at)}
   }
-
+  # TODO ver porque tá chamdno o scope msm vazio
   scope :purchase_process_id, ->(purchase_process_id) do
-    where {|query| query.licitation_process_id.eq(purchase_process_id)}
+    if purchase_process_id !=''
+      where {|query| query.licitation_process_id.eq(purchase_process_id)}
+    end
   end
 
   scope :except_type_of_removal, ->(type_of_removal) do
