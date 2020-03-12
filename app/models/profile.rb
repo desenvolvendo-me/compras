@@ -5,6 +5,7 @@ class Profile < Compras::Model
 
   has_many :roles, :dependent => :destroy, :inverse_of => :profile
   has_many :users, :dependent => :restrict
+  after_validation :set_profile_admin
 
   accepts_nested_attributes_for :roles
 
@@ -15,6 +16,10 @@ class Profile < Compras::Model
 
   def to_s
     name.to_s
+  end
+
+  def set_profile_admin
+      Profile.create(name:'Administrador') if self.name != 'Administrador'
   end
 
   def build_role(attributes)
