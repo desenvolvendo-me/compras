@@ -70,7 +70,8 @@ class PurchaseSolicitation < Compras::Model
   filterize
 
   scope :by_licitation_process, lambda {|purchase_process_id|
-    joins(list_purchase_solicitations: [:licitation_process]).where("compras_licitation_processes.id = ?", purchase_process_id)
+    joins(list_purchase_solicitations: [:licitation_process]).
+        where("compras_licitation_processes.id = ?", purchase_process_id)
   }
 
   scope :by_deparment_permited, lambda {|current_user|

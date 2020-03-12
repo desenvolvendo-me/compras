@@ -198,7 +198,8 @@ $(document).ready(function () {
     }
 
     $("#supply_request_contract_id").on("change", function (event, contract) {
-        $("#supply_request_creditor").val(contract ? contract.creditor : '');
+        $("#supply_request_creditor").val(contract ? contract.creditor:'');
+        $("#supply_request_creditor_id").val(contract ? contract.id:'');
     });
 
     $(".supply_request_submit_close").click(function () {

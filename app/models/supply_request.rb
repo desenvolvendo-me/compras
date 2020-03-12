@@ -4,7 +4,8 @@ class SupplyRequest < Compras::Model
 
   attr_accessible :licitation_process_id, :creditor_id, :authorization_date,
                   :items_attributes, :year, :purchase_solicitation_id,
-                  :updatabled, :contract_id, :supply_request_status, :justification, :supply_request_file
+                  :updatabled, :contract_id, :supply_request_status,
+                  :justification, :supply_request_file,:user_id
 
   attr_modal :licitation_process_id, :creditor_id, :year, :authorization_date
 
@@ -14,6 +15,7 @@ class SupplyRequest < Compras::Model
   belongs_to :purchase_solicitation
   belongs_to :licitation_process
   belongs_to :creditor
+  belongs_to :user
 
   has_many :items, class_name: 'SupplyRequestItem', dependent: :destroy
   has_many :supply_orders, class_name: "SupplyOrderRequests"
@@ -22,12 +24,12 @@ class SupplyRequest < Compras::Model
   accepts_nested_attributes_for :items, allow_destroy: true
 
   has_enumeration_for :supply_request_status, :with => SupplyRequestStatus, :create_helpers => true
-
+  #
   delegate :modality_number, :modality_humanize, :type_of_removal_humanize,
            to: :licitation_process, allow_nil: true
 
-  validates :authorization_date, :contract, :purchase_solicitation, :licitation_process, presence: true
-  validate :items_quantity_permitted
+  # validates :authorization_date, :contract, :purchase_solicitation, :licitation_process, presence: true
+  # validate :items_quantity_permitted
 
   orderize "id DESC"
   filterize
