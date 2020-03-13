@@ -913,6 +913,13 @@ Compras::Application.routes.draw do
 
   resources :unblock_budgets
 
+  resources :supply_order_managements do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :users do
     collection do
       get :filter
