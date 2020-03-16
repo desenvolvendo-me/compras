@@ -1,10 +1,21 @@
 //= require modal_filter
 //= require input
 
+function setModalUrlToContract() {
+    var selector_modal = '#supply_request_contract';
+    params = {
+        purchase_process_id: $('#supply_request_licitation_process_id').val()
+    };
+    setModalUrl(selector_modal,'contracts',params);
+}
+
 function setModalUrlToPurchaseSolicitation() {
-    var selector_id = '#supply_request_licitation_process_id'
-    var selector_modal = '#supply_request_purchase_solicitation'
-    setModalUrlToPurchaseSolicitationByLicitationProcess(selector_id, selector_modal)
+    var selector_modal = '#supply_request_purchase_solicitation';
+    params = {
+      by_licitation_process: $('#supply_request_licitation_process_id').val(),
+      by_deparment_permited: $('#current_user').val()
+    };
+    setModalUrl(selector_modal,'purchase_solicitations',params);
 }
 
 function setModalUrlToMaterial() {
@@ -108,6 +119,7 @@ function setMaterialTotalAndBalance() {
 }
 
 $(document).ready(function () {
+    setModalUrlToContract();
     setModalUrlToCreditor();
     setPledgeSource();
     setModalUrlToPurchaseSolicitation();
@@ -137,6 +149,7 @@ $(document).ready(function () {
     });
 
     $('form.supply_request').on('change', '#supply_request_licitation_process_id', function () {
+        setModalUrlToContract();
         setModalUrlToCreditor();
         setPledgeSource();
         setModalUrlToPurchaseSolicitation();
@@ -185,7 +198,8 @@ $(document).ready(function () {
     }
 
     $("#supply_request_contract_id").on("change", function (event, contract) {
-        $("#supply_request_creditor").val(contract ? contract.creditor : '');
+        $("#supply_request_creditor").val(contract ? contract.creditor:'');
+        $("#supply_request_creditor_id").val(contract ? contract.id:'');
     });
 
     $(".supply_request_submit_close").click(function () {

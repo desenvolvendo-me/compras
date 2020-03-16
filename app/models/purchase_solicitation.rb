@@ -70,7 +70,15 @@ class PurchaseSolicitation < Compras::Model
   filterize
 
   scope :by_licitation_process, lambda {|purchase_process_id|
-    joins(list_purchase_solicitations: [:licitation_process]).where("compras_licitation_processes.id = ?", purchase_process_id)
+    joins(list_purchase_solicitations: [:licitation_process]).
+        where("compras_licitation_processes.id = ?", purchase_process_id)
+  }
+
+  scope :by_deparment_permited, lambda {|current_user|
+    departments = DepartmentPerson.where(user_id: current_user).pluck(:department_id)
+    unless departments.empty?
+        where("compras_purchase_solicitations.department_id = ?", departments[0])
+    end
   }
 
   scope :by_model_request, lambda {|type|

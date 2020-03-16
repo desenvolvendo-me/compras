@@ -1,3 +1,8 @@
+function setModalUrl(selector_modal,controller,params) {
+    var urlModal = Routes['modal_'+controller], params ;
+    $(selector_modal).data('modal-url', urlModal += "?" + $.param(params) );
+}
+
 function setModalUrlToCreditorByContract(selector_id, selector_modal) {
     var value = $(selector_id).val();
     var urlModal = Routes.modal_creditors,

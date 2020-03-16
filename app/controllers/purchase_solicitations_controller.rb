@@ -7,6 +7,7 @@ class PurchaseSolicitationsController < CrudController
   has_scope :can_be_grouped, :type => :boolean
   has_scope :by_licitation_process
   has_scope :by_model_request
+  has_scope :by_deparment_permited
 
   def index
     @purchase_solicitations = filter_by_department(collection).not_demand
