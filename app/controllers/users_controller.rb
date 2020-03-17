@@ -1,4 +1,5 @@
 class UsersController < CrudController
+  has_scope :term, :allow_blank => true
 
   def create
     @user = build_resource
@@ -7,9 +8,12 @@ class UsersController < CrudController
     create! { collection_path }
   end
 
-  protected
+  # protected
+  #
+  # TODO comentado porque não tava permitindo a busca pelo scope term
+  # verificar impacto
+  # def end_of_association_chain
+  #   User.employee
+  # end
 
-  def end_of_association_chain
-    User.employee
-  end
 end
