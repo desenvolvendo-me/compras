@@ -1,0 +1,92 @@
+<h2 id="title">
+  <%= I18n.translate("controllers.#{controller_name}") %>
+</h2>
+
+<div class="grid-container" >
+  <div class="grid-item" style="background-color: #0e0393;" >
+    <%= @groups['new'].nil? ? 0:@groups['new'] %>
+    <br>
+    <label> NOVO </label>
+    <%= link_to '', supply_order_managements_path(:status => 'new') %>
+  </div>
+  <div class="grid-item" style="background-color: #d24d14;">
+    <%= @groups['order_in_analysis'].nil? ? 0:@groups['order_in_analysis'] %>
+    <br>
+    <label> EM ANÁLISE FINANCEIRA </label>
+    <%= link_to '', supply_order_managements_path(:status => 'order_in_analysis') %>
+  </div>
+  <div class="grid-item" style="background-color: #ba8418;">
+    <%= @groups['doubts'].nil? ? 0:@groups['doubts'] %>
+    <br>
+    <label> DÚVIDA </label>
+    <%= link_to '', supply_order_managements_path(:status => 'doubts') %>
+  </div>
+  <div class="grid-item" style="background-color: #696976;">
+    <%= @groups['order_in_analysis'].nil? ? 0:@groups['order_in_analysis'] %>
+    <br>
+    <label> EM ANÁLISE </label>
+    <%= link_to '', supply_order_managements_path(:status => 'order_in_analysis') %>
+  </div>
+  <div class="grid-item" style="background-color: #2b2b2b;">
+    <%= @groups['returned_for_adjustment'].nil? ? 0:@groups['returned_for_adjustment'] %>
+    <br>
+    <label> DEVOLVIDO PARA AJUSTE </label>
+    <%= link_to '', supply_order_managements_path(:status => 'returned_for_adjustment') %>
+  </div>
+  <div class="grid-item" style="background-color: #4872ff;">
+    <%= @groups['adjusted'].nil? ? 0:@groups['adjusted'] %>
+    <br>
+    <label> AJUSTADO </label>
+    <%= link_to '', supply_order_managements_path(:status => 'adjusted') %>
+  </div>
+  <div class="grid-item" style="background-color: #1bd756;">
+    <%= @groups['partially_answered'].nil? ? 0:@groups['partially_answered'] %>
+    <br>
+    <label> ATENDIDO PARCIALMENTE </label>
+    <%= link_to '', supply_order_managements_path(:status => 'partially_answered') %>
+  </div>
+  <div class="grid-item" style="background-color: red;">
+    <%= @groups['fully_serviced'].nil? ? 0:@groups['fully_serviced'] %>
+    <br>
+    <label> ATENDIDO TOTALMENTE </label>
+    <%= link_to '', supply_order_managements_path(:status => 'fully_serviced') %>
+  </div>
+  <div class="grid-item" style="background-color: #36783b;">
+    <%= @groups['rejected'].nil? ? 0:@groups['rejected'] %>
+    <br>
+    <label> INDEFERIDO </label>
+    <%= link_to '', supply_order_managements_path(:status => 'rejected') %>
+  </div>
+</div>
+
+<script>
+    $(function () {
+        $(".grid-item").click(function () {
+            $('.grid-item a')[$('.grid-item').index(this)].click();
+        });
+    });
+</script>
+
+<style>
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: 33.3% 33.3% 33.3%;
+    padding: 10px;
+  }
+
+  .grid-item {
+    border: 5px solid white;
+    padding: 20px;
+    font-size: 30px;
+    color: white;
+    text-align: center;
+  }
+
+  .grid-item label{
+    font-size: 15px;
+    text-align: center;
+  }
+
+</style>
+
