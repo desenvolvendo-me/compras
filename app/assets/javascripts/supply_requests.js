@@ -12,8 +12,8 @@ function setModalUrlToContract() {
 function setModalUrlToPurchaseSolicitation() {
     var selector_modal = '#supply_request_purchase_solicitation';
     params = {
-      by_licitation_process: $('#supply_request_licitation_process_id').val(),
-      by_deparment_permited: $('#current_user').val()
+        by_licitation_process: $('#supply_request_licitation_process_id').val(),
+        by_deparment_permited: $('#current_user').val()
     };
     setModalUrl(selector_modal,'purchase_solicitations',params);
 }
@@ -99,36 +99,54 @@ function setMaterialTotalAndBalance() {
     var quantity = $('#supply_request_quantity').val()
 
     if (licitation_process_id && purchase_solicitation_id && material_id && quantity) {
-        // $.ajax({
-        //     url: Routes.licitation_process_material_total_balance,
-        //     data: {
-        //         licitation_process_id: licitation_process_id,
-        //         material_id: material_id,
-        //         purchase_solicitation_id: purchase_solicitation_id,
-        //         supply_request_id: supply_request_id,
-        //         contract_id: contract_id,
-        //         quantity: quantity
-        //     },
-        //     dataType: 'json',
-        //     type: 'POST',
-        //     success: function (data) {
-        //         $('#supply_request_balance').val(data["balance"]);
-        //     },
-        //     error: function(XMLHttpRequest, textStatus, errorThrown) {
-        //         console.log("Error: " + errorThrown);
-        //     }
-        // });
+        $.ajax({
+            url: Routes.licitation_process_material_total_balance,
+            data: {
+                licitation_process_id: licitation_process_id,
+                material_id: material_id,
+                purchase_solicitation_id: purchase_solicitation_id,
+                supply_request_id: supply_request_id,
+                contract_id: contract_id,
+                quantity: quantity
+            },
+            dataType: 'json',
+            type: 'POST',
+            success: function (data) {
+                $('#supply_request_balance').val(data["balance"]);
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+            }
+        });
     }
 }
 
 $(document).ready(function () {
+
     setModalUrlToContract();
     setModalUrlToCreditor();
     setPledgeSource();
     setModalUrlToPurchaseSolicitation();
     setMaterialTotalAndBalance();
 
-    disableWhenSelected("#supply_request_purchase_solicitation_id", "#supply_request_material")
+    $('#supply_request_contract_id').on('change', function (event, contract) {
+        contract_id = $('#supply_request_contract_id').val();
+        purchase_solicitation_id = $('#supply_request_purchase_solicitation_id').val();
+        if (contract && contract_id!='' && purchase_solicitation_id!='') {
+            $("#supply_request_material").attr('disabled', false);
+        } else {
+            $("#supply_request_material").attr('disabled', true);
+        }
+    });
+
+    $('#supply_request_purchase_solicitation_id').on('change', function (event, purchase_solicitation) {
+        contract_id = $('#supply_request_contract_id').val();
+        purchase_solicitation_id = $('#supply_request_purchase_solicitation_id').val();
+        if (purchase_solicitation && contract_id!='' && purchase_solicitation_id!='') {
+            $("#supply_request_material").attr('disabled', false);
+        } else {
+            $("#supply_request_material").attr('disabled', true);
+        }
+    });
 
     $('form.supply_request').on('change', '#supply_request_purchase_solicitation_id', function () {
         setDepartment();
