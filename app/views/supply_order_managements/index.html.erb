@@ -1,0 +1,28 @@
+<h2 id="title" >
+  <%= I18n.translate("controllers.#{controller_name}") %>
+</h2>
+
+<table class="records">
+  <thead>
+  <tr>
+    <th><%= SupplyRequest.human_attribute_name :creditor %></th>
+    <th><%= SupplyRequest.human_attribute_name :authorization_date %></th>
+    <th><%= SupplyRequest.human_attribute_name :licitation_process %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @sr.each do |resource| %>
+    <tr id="<%= dom_id resource %>">
+      <td>
+        <p><%= link_to resource, edit_supply_request_path(resource) %></p>
+      </td>
+      <td>
+        <p><%= resource.authorization_date %></p>
+      </td>
+      <td>
+        <p><%= resource.licitation_process %></p>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

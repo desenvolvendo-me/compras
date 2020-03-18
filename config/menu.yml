@@ -80,6 +80,7 @@ menu:
     - process_responsibles
 
   - "Instrumentos Contratuais":
+    - supply_order_managements
     - contracts
     - balance_adjustments
     - additive_solicitations
@@ -94,7 +95,6 @@ menu:
     - tce_export_monthly_monitorings
 
   - "Relatórios":
-    - supply_order_managements
     - report_bidding_schedules
     - report_purchase_process_ratifications_by_periods
     - report_purchase_solicitations
