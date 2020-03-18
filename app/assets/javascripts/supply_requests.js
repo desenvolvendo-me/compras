@@ -99,22 +99,25 @@ function setMaterialTotalAndBalance() {
     var quantity = $('#supply_request_quantity').val()
 
     if (licitation_process_id && purchase_solicitation_id && material_id && quantity) {
-        $.ajax({
-            url: Routes.licitation_process_material_total_balance,
-            data: {
-                licitation_process_id: licitation_process_id,
-                material_id: material_id,
-                purchase_solicitation_id: purchase_solicitation_id,
-                supply_request_id: supply_request_id,
-                contract_id: contract_id,
-                quantity: quantity
-            },
-            dataType: 'json',
-            type: 'POST',
-            success: function (data) {
-                $('#supply_request_balance').val(data["balance"]);
-            }
-        });
+        // $.ajax({
+        //     url: Routes.licitation_process_material_total_balance,
+        //     data: {
+        //         licitation_process_id: licitation_process_id,
+        //         material_id: material_id,
+        //         purchase_solicitation_id: purchase_solicitation_id,
+        //         supply_request_id: supply_request_id,
+        //         contract_id: contract_id,
+        //         quantity: quantity
+        //     },
+        //     dataType: 'json',
+        //     type: 'POST',
+        //     success: function (data) {
+        //         $('#supply_request_balance').val(data["balance"]);
+        //     },
+        //     error: function(XMLHttpRequest, textStatus, errorThrown) {
+        //         console.log("Error: " + errorThrown);
+        //     }
+        // });
     }
 }
 
