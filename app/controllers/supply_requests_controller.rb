@@ -7,7 +7,8 @@ class SupplyRequestsController < CrudController
   end
 
   def index
-    @supply_requests = filters(collection)
+    @supply_requests = filters(collection) if params[:suplly_requests].nil?
+    @supply_requests = SupplyRequest.where("id in (?)",params[:suplly_requests]) unless params[:suplly_requests].nil?
   end
 
   def api_show

@@ -1,6 +1,7 @@
 class SupplyRequestServiceStatus < EnumerateIt::Base
   associate_values :new,
                    :order_in_analysis,
+                   :order_in_financial_analysis,
                    :returned_for_adjustment,
                    :rejected,
                    :partially_answered,

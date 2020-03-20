@@ -1,32 +1,28 @@
-class SupplyOrderManagementsController < ApplicationController
+class SupplyRequestManagementsController < ApplicationController
   has_scope :page, :default => 1, :only => [:index, :modal], :unless => :disable_pagination?
   has_scope :per, :default => 10, :only => [:index, :modal], :unless => :disable_pagination?
 
   def index
-    redirect_to new_supply_order_management_path if params[:suplly_requests].nil?
-
-    @sr = SupplyRequest.where("id in (?)",params[:suplly_requests])
-  end
-
-  def new
-    get_sypply_request
+    get_supply_request
   end
 
   private
 
-  def get_sypply_request
-    @quantidade = {"new"=>0,"order_in_analysis"=>0,"returned_for_adjustment"=>0,"rejected"=>0,
+  def get_supply_request
+    @quantity = {"new"=>0,"order_in_analysis"=>0,"order_in_financial_analysis"=>0,"returned_for_adjustment"=>0,"rejected"=>0,
                    "partially_answered"=>0,"fully_serviced"=>0,"doubts"=>0,"adjusted"=>0}
-    @suplly_requests = {"new"=>[],"order_in_analysis"=>[],"returned_for_adjustment"=>[],
+    @suplly_requests = {"new"=>[],"order_in_analysis"=>[],"order_in_financial_analysis"=>[],"returned_for_adjustment"=>[],
                         "rejected"=>[],"partially_answered"=>[],"fully_serviced"=>[],
                         "doubts"=>[],"adjusted"=>[]}
 
     sr = SupplyRequest.all
     sr.each do |item|
       unless item.supply_request_attendances.last.nil?
-        @quantidade["#{item.supply_request_attendances.last.service_status}"] += 1
+        @quantity["#{item.supply_request_attendances.last.service_status}"] += 1
         @suplly_requests["#{item.supply_request_attendances.last.service_status}"].push(item.id)
       end
+      @quantity["new"] += 1 if item.supply_request_attendances.count == 0
+      @suplly_requests["new"].push(item.id) if item.supply_request_attendances.count == 0
     end
   end
 end
