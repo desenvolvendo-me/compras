@@ -57,6 +57,10 @@ class User < Compras::Model
     administrator? || creditor?
   end
 
+  scope :term, lambda {|q|
+    where {login.like("%#{q}%")}
+  }
+
   protected
 
   def email_required?
@@ -66,4 +70,5 @@ class User < Compras::Model
   def send_on_create_confirmation_instructions
     super unless creditor?
   end
+
 end
