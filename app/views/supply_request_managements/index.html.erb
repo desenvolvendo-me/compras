@@ -1,0 +1,111 @@
+<h2 id="title" style="margin-left: 14px;">
+  <%= I18n.translate("controllers.#{controller_name}") %>
+</h2>
+
+<div class="grid-container" >
+
+  <div class="grid-item" style="background-color: #9DC3E6;" >
+    <%= @quantity['new'] %>
+    <br>
+    <label><%= (I18n.t 'view.attributes.supply_request_management.new').upcase %></label>
+    <%= link_to '', supply_request_managements_path() if @suplly_requests['new'].empty?%>
+    <%= link_to '', supply_requests_path(:suplly_requests => @suplly_requests['new']), :target => '_blank' unless @suplly_requests['new'].empty?%>
+  </div>
+
+  <div class="grid-item" style="background-color: #2E75B5;">
+    <%= @quantity['doubts'] %>
+    <br>
+    <label><%= (I18n.t 'view.attributes.supply_request_management.doubts').mb_chars.upcase %></label>
+    <%= link_to '', supply_request_managements_path() if @suplly_requests['doubts'].empty?%>
+    <%= link_to '', supply_requests_path(:suplly_requests => @suplly_requests['doubts']), :target => '_blank' unless @suplly_requests['doubts'].empty?%>
+  </div>
+
+  <div class="grid-item" style="background-color: #1F4E79;">
+    <%= @quantity['order_in_analysis'] %>
+    <br>
+    <label><%= (I18n.t 'view.attributes.supply_request_management.order_in_analysis').mb_chars.upcase %></label>
+    <%= link_to '', supply_request_managements_path() if @suplly_requests['order_in_analysis'].empty?%>
+    <%= link_to '', supply_requests_path(:suplly_requests => @suplly_requests['order_in_analysis']), :target => '_blank' unless @suplly_requests['order_in_analysis'].empty? %>
+  </div>
+
+  <div class="grid-item" style="background-color: #BFBFBF;">
+    <%= @quantity['order_in_financial_analysis'] %>
+    <br>
+    <label><%= (I18n.t 'view.attributes.supply_request_management.order_in_financial_analysis').mb_chars.upcase %></label>
+    <%= link_to '', supply_request_managements_path() if @suplly_requests['order_in_financial_analysis'].empty? %>
+    <%= link_to '', supply_requests_path(:suplly_requests => @suplly_requests['order_in_financial_analysis']), :target => '_blank' unless @suplly_requests['order_in_financial_analysis'].empty? %>
+  </div>
+
+  <div class="grid-item" style="background-color: #A6A6A6;">
+    <%= @quantity['returned_for_adjustment'] %>
+    <br>
+    <label><%= (I18n.t 'view.attributes.supply_request_management.returned_for_adjustment').mb_chars.upcase %></label>
+    <%= link_to '', supply_request_managements_path() if @suplly_requests['returned_for_adjustment'].empty?%>
+    <%= link_to '', supply_requests_path(:suplly_requests => @suplly_requests['returned_for_adjustment']), :target => '_blank' unless @suplly_requests['returned_for_adjustment'].empty?%>
+  </div>
+
+  <div class="grid-item" style="background-color: #7F7F7F;">
+    <%= @quantity['adjusted'] %>
+    <br>
+    <label><%= (I18n.t 'view.attributes.supply_request_management.adjusted').mb_chars.upcase %></label>
+    <%= link_to '', supply_request_managements_path() if @suplly_requests['adjusted'].empty?%>
+    <%= link_to '', supply_requests_path(:suplly_requests => @suplly_requests['adjusted']), :target => '_blank' unless @suplly_requests['adjusted'].empty?%>
+  </div>
+
+  <div class="grid-item" style="background-color: #C02E21;">
+    <%= @quantity['rejected'] %>
+    <br>
+    <label><%= (I18n.t 'view.attributes.supply_request_management.rejected').mb_chars.upcase %></label>
+    <%= link_to '', supply_request_managements_path() if @suplly_requests['rejected'].empty?%>
+    <%= link_to '', supply_requests_path(:suplly_requests => @suplly_requests['rejected']), :target => '_blank' unless @suplly_requests['rejected'].empty?%>
+  </div>
+
+  <div class="grid-item" style="background-color: #548235;">
+    <%= @quantity['partially_answered'] %>
+    <br>
+    <label><%= (I18n.t 'view.attributes.supply_request_management.partially_answered').mb_chars.upcase %></label>
+    <%= link_to '', supply_request_managements_path() if @suplly_requests['partially_answered'].empty?%>
+    <%= link_to '', supply_requests_path(:suplly_requests => @suplly_requests['partially_answered']), :target => '_blank' unless @suplly_requests['partially_answered'].empty?%>
+  </div>
+
+  <div class="grid-item" style="background-color: #385723;">
+    <%= @quantity['fully_serviced'] %>
+    <br>
+    <label><%= (I18n.t 'view.attributes.supply_request_management.fully_serviced').mb_chars.upcase %></label>
+    <%= link_to '', supply_request_managements_path() if @suplly_requests['fully_serviced'].empty?%>
+    <%= link_to '', supply_requests_path(:suplly_requests => @suplly_requests['fully_serviced']), :target => '_blank' unless @suplly_requests['fully_serviced'].empty?%>
+  </div>
+
+</div>
+
+<script>
+    $(function () {
+        $(".grid-item").click(function () {
+            $('.grid-item a')[$('.grid-item').index(this)].click();
+        });
+    });
+</script>
+
+<style>
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: 33.3% 33.3% 33.3%;
+    padding: 10px;
+  }
+
+  .grid-item {
+    border: 5px solid white;
+    padding: 20px;
+    font-size: 30px;
+    color: white;
+    text-align: center;
+  }
+
+  .grid-item label{
+    font-size: 15px;
+    text-align: center;
+  }
+
+</style>
+

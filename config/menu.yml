@@ -80,6 +80,7 @@ menu:
     - process_responsibles
 
   - "Instrumentos Contratuais":
+    - supply_request_managements
     - contracts
     - balance_adjustments
     - additive_solicitations

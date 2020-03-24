@@ -1,7 +1,9 @@
 pt-BR:
   enumerations:
     supply_request_service_status:
+      new: "Novo"
       order_in_analysis: "Pedido em Análise"
+      order_in_financial_analysis: "Pedido em Análise Financeira"
       returned_for_adjustment: "Devolvido para Ajuste"
       rejected: "Indeferido"
       partially_answered: "Atendido Parcialmente"
