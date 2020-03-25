@@ -58,7 +58,7 @@ class LicitationProcessesController < CrudController
   protected
 
   def filter_by_purchasing_unit(collection)
-    return collection if params[:filter][:purchasing_unit].nil?
+    return collection if !params[:filter].nil? && params[:filter][:purchasing_unit].nil?
 
     purchasing_units = UserPurchasingUnit.where(user_id: current_user.id).pluck(:purchasing_unit_id)
     collection.where("purchasing_unit_id IN (?) ", purchasing_units)
