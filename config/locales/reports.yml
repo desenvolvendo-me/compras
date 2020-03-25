@@ -93,3 +93,8 @@ pt-BR:
     pledge_request_report:
       one: 'Relatório de Pedido de Empenho'
       other: 'Relatório de Pedidos de Empenho'
+
+  balance_per_process_and_supplier_reports:
+    balance_per_process_and_supplier_report:
+      one: 'Relatório de Saldo por Processo e Fornecedor'
+      other: 'Relatório de Saldos por Processo e Fornecedor'

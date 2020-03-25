@@ -1,0 +1,20 @@
+pt-BR:
+  view:
+    controller:
+      report_balance_per_process_and_suppliers:
+        one: "Relatório de Saldo por Fornecedor"
+        other: "Relatório de Saldo por Fornecedores"
+
+    attributes:
+      report_balance_per_process_and_suppliers:
+        creditor: "Fornecedor"
+        licitation_process: "Processo"
+        supply_order: "Ordem de Fornecimento"
+        contract: "Contrato"
+        end_date: "Prazo de Validade"
+        material: "Material"
+        quantity_licitationed: "Quantidade Licitada"
+        quantity_supplied: "Quantidade Fornecidade"
+        current_balance: "Saldo Atual"
+        total_licitationed: "Total Licitado"
+        total_supplied: "Total Fornecido"

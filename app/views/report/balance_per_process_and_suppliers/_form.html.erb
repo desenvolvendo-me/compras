@@ -1,0 +1,52 @@
+<div class="yui3-g">
+  <div class="yui3-u-1-3">
+    <%= f.input :creditor, as: :modal, data_url: modal_creditors_url,
+                hidden_field: :creditor_id, :include_blank => true %>
+  </div>
+
+  <div class="yui3-u-1-3">
+    <%= f.input :licitation_process, as: :modal, data_url: modal_licitation_processes_url,
+                hidden_field: :licitation_process_id, :include_blank => true %>
+  </div>
+
+  <div class="yui3-u-1-3">
+    <%= f.input :purchase_solicitation, as: :modal, data_url: modal_purchase_solicitations_url,
+                hidden_field: :purchase_solicitation_id, :include_blank => true %>
+  </div>
+
+</div>
+
+<script>
+    function setModalUrlToCreditor() {
+        var selector_modal = '#balance_per_process_and_supplier_report_creditor'
+        var controller = "creditors"
+        params = {
+            by_purchasing_unit: $('#current_user_id').val()
+        };
+        setModalUrl(selector_modal,controller,params);
+    }
+
+    function setModalUrlToLicitationProcess() {
+        var selector_modal = '#balance_per_process_and_supplier_report_licitation_process'
+        var controller = "licitation_processes"
+        params = {
+            by_creditor: $('#balance_per_process_and_supplier_report_creditor_id').val()
+        };
+        setModalUrl(selector_modal,controller,params);
+    }
+
+    $(function () {
+        //= require modal_filter
+
+        setModalUrlToCreditor();
+        setModalUrlToLicitationProcess();
+
+        select_id = '#balance_per_creditor_report_creditor_id';
+        select_input = '#balance_per_creditor_report_licitation_process_id';
+        disableWhenSelected(select_id,select_input);
+
+        $('#new_balance_per_process_and_supplier_report')[0].reset();
+    });
+
+</script>
+

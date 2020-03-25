@@ -948,6 +948,7 @@ Compras::Application.routes.draw do
       resources :purchase_solicitations
       resources :purchased_item_prices
       resources :materials
+      resources :balance_per_process_and_suppliers
       resources :contracts
       resources :licitation_processes
       resources :department_requests
