@@ -5,6 +5,10 @@ class SupplyOrderDecorator
 
   attr_header :creditor, :authorization_date, :licitation_process, :order_status
 
+  def licitation_process_description
+    self.licitation_process.description unless self.licitation_process.nil?
+  end
+
   def creditor
     self.contract.nil? || self.contract.creditors.blank? || self.contract.creditors.first.person.nil? ? '' : self.contract.creditors.first.person.name
   end
