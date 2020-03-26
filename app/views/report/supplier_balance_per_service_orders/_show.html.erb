@@ -27,7 +27,13 @@
   </div>
   <% total_c_l = 0 %>
   <% total_c_f = 0 %>
-  <% contract.supply_orders.each do |supply_order| %>
+  <% unless @supply_order.nil? %>
+    <% @supply_orders =  SupplyOrder.where(id:@supply_order,contract_id:contract.id) %>
+  <% else %>
+      <% @supply_orders = contract.supply_orders %>
+  <% end %>
+
+  <% @supply_orders.each do |supply_order| %>
     <div style="text-align: justify">
       <span>
         <p>
@@ -54,16 +60,16 @@
           <% total_i_l = 0 %>
           <% total_i_f = 0 %>
           <% supply_order.items.each do |item| %>
-            <% total = Report::BalanceHelper.get_quantity_item_supply_order(contract, item.material) %>
-            <% balance = Report::BalanceHelper.get_balance(contract, item) %>
-            <% total_i_l += item.quantity %>
-            <% total_i_f += total %>
-            <% total_c_l += item.quantity %>
-            <% total_c_f += total %>
+            <% total_f = Report::BalanceHelper.get_quantity_item_supply_order_by_params(contract, {material_id:item.material.id,supply_order_id:supply_order.id}) %>
+            <% balance = Report::BalanceHelper.get_balance_by_prams(contract, {material_id:item.material.id,supply_order_id:supply_order.id} ) %>
+            <% total_i_l += total_f %>
+            <% total_i_f += item.quantity %>
+            <% total_c_l += total_f%>
+            <% total_c_f += item.quantity %>
             <tr>
               <td><%= item.material %></td>
+              <td><%= total_f %></td>
               <td><%= item.quantity %></td>
-              <td><%= total %></td>
               <td><%= balance %></td>
             </tr>
           <% end %>

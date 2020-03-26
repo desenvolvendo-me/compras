@@ -4,4 +4,4 @@ pt-BR:
       supplier_balance_per_service_order_report:
         creditor: "Fornecedor"
         licitation_process: "Processo de Compra"
-        purchase_solicitation: "Solicitação de Compra"
+        supply_order: "Ordem de Fornecimento"
