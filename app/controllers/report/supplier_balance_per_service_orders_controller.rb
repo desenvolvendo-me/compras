@@ -1,6 +1,6 @@
-class Report::BalancePerProcessAndSuppliersController < Report::BaseController
+class Report::SupplierBalancePerServiceOrdersController < Report::BaseController
 
-  report_class BalancePerProcessAndSupplierReport, :repository => BalancePerProcessAndSupplierSearcher
+  report_class SupplierBalancePerServiceOrderReport, :repository => SupplierBalancePerServiceOrderSearcher
 
   def show
     @creditors = get_balance_per_process_and_supplier

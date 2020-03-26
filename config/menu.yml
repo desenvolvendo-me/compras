@@ -95,7 +95,7 @@ menu:
     - tce_export_monthly_monitorings
 
   - "Relatórios":
-    - report_balance_per_process_and_suppliers
+    - report_supplier_balance_per_service_orders
     - report_bidding_schedules
     - report_purchase_process_ratifications_by_periods
     - report_purchase_solicitations

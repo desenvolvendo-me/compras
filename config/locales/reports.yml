@@ -94,7 +94,7 @@ pt-BR:
       one: 'Relatório de Pedido de Empenho'
       other: 'Relatório de Pedidos de Empenho'
 
-  balance_per_process_and_supplier_reports:
-    balance_per_process_and_supplier_report:
-      one: 'Relatório de Saldo por Processo e Fornecedor'
-      other: 'Relatório de Saldos por Processo e Fornecedor'
+  supplier_balance_per_service_order_reports:
+    supplier_balance_per_service_order_report:
+      one: 'Relatório de Saldo Fornecedor por Ordem de Serviço'
+      other: 'Relatório de Saldos Fornecedor por Ordem de Serviço'

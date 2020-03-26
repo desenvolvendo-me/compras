@@ -1,0 +1,3 @@
+class SupplierBalancePerServiceOrderSearcher
+  include Quaestio
+end

@@ -1,4 +1,4 @@
-class BalancePerProcessAndSupplierReport < Report
+class SupplierBalancePerServiceOrderReport < Report
 
   attr_accessor :creditor_id,:licitation_process_id,
                 :creditor,:licitation_process,

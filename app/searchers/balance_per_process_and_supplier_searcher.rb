@@ -1,3 +1,0 @@
-class BalancePerProcessAndSupplierSearcher
-  include Quaestio
-end

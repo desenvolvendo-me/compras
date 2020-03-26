@@ -1,12 +1,12 @@
 pt-BR:
   view:
     controller:
-      report_balance_per_process_and_suppliers:
-        one: "Relatório de Saldo por Fornecedor"
-        other: "Relatório de Saldo por Fornecedores"
+      report_supplier_balance_per_service_orders:
+        one: "Relatório de Saldo Fornecedor por Ordem de Serviço"
+        other: "Relatório de Saldos Fornecedor por Ordem de Serviço"
 
     attributes:
-      report_balance_per_process_and_suppliers:
+      report_supplier_balance_per_service_orders:
         creditor: "Fornecedor"
         licitation_process: "Processo"
         supply_order: "Ordem de Fornecimento"
