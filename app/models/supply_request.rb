@@ -7,7 +7,7 @@ class SupplyRequest < Compras::Model
                   :updatabled, :contract_id, :supply_request_status,
                   :justification, :supply_request_file,:user_id
 
-  attr_modal :number, :creditor_id, :authorization_date,:licitation_process_id, :user, :purchase_solicitation
+  attr_modal :number, :creditor_id, :authorization_date, :licitation_process_id, :user, :purchase_solicitation
 
   mount_uploader :supply_request_file, UnicoUploader
 
