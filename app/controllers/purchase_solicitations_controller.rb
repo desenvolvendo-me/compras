@@ -8,9 +8,9 @@ class PurchaseSolicitationsController < CrudController
   has_scope :by_licitation_process
   has_scope :by_model_request
   has_scope :by_deparment_permited
-
-  def index
-    @purchase_solicitations = filter_by_department(collection).not_demand
+  has_scope :not_demand, type: :boolean, default: true, only: [:index]
+  has_scope :by_deparment, type: :boolean, default: true, only: [:index] do |controller, scope|
+    scope.by_deparment(controller.current_user.id)
   end
 
   def new
@@ -63,12 +63,6 @@ class PurchaseSolicitationsController < CrudController
   end
 
   protected
-
-  #TODO: Refatorar: mover para scope
-  def filter_by_department(collection)
-    departments = DepartmentPerson.where(user_id: current_user.id).pluck(:department_id)
-    collection.where("compras_purchase_solicitations.department_id IN (?) ", departments)
-  end
 
   def default_filters
     {:accounting_year => lambda {Date.current.year}}

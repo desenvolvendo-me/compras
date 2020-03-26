@@ -69,6 +69,13 @@ class PurchaseSolicitation < Compras::Model
   orderize "id DESC"
   filterize
 
+  scope :by_deparment, lambda {|current_user|
+    use_pur_uni = UserPurchasingUnit.where(user_id:current_user).pluck(:purchasing_unit_id)
+    departments = Department.where("compras_departments.purchasing_unit_id in (?)",use_pur_uni).pluck(:id)
+
+    where { self.department_id.in departments }
+  }
+
   scope :by_licitation_process, lambda {|purchase_process_id|
     joins(list_purchase_solicitations: [:licitation_process]).
         where("compras_licitation_processes.id = ?", purchase_process_id)
