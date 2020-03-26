@@ -7,7 +7,7 @@ class SupplyRequest < Compras::Model
                   :updatabled, :contract_id, :supply_request_status,
                   :justification, :supply_request_file,:user_id
 
-  attr_modal :licitation_process_id, :creditor_id, :year, :authorization_date
+  attr_modal :number, :creditor_id, :authorization_date,:licitation_process_id, :user, :purchase_solicitation
 
   mount_uploader :supply_request_file, UnicoUploader
 
@@ -33,6 +33,10 @@ class SupplyRequest < Compras::Model
 
   orderize "id DESC"
   filterize
+
+  scope :by_purchase_solicitation, lambda {|purchase_solicitation|
+    where { purchase_solicitation_id.in purchase_solicitation }
+  }
 
   def to_s
     "#{contract} - #{licitation_process}"
