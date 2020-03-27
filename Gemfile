@@ -69,6 +69,9 @@ group :development, :test do
   gem 'rspec-rails'
   gem "better_errors"
   gem "binding_of_caller"
+  gem 'minitest'
+  gem 'minitest-reporters'
+  gem 'test-unit'
 end
 
 group :test do
