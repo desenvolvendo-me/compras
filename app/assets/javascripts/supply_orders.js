@@ -2,10 +2,15 @@
 //= require input
 
 function setModalUrlToPurchaseSolicitation() {
-    var selector_licitation_process_id = '#supply_order_licitation_process_id'
-    var selector_purchase_solicitation_modal = '#supply_order_purchase_solicitation'
 
-    setModalUrlToPurchaseSolicitationByLicitationProcess(selector_licitation_process_id, selector_purchase_solicitation_modal)
+    var selector_modal = '#supply_order_purchase_solicitation';
+    var lic_pro = $('#supply_order_licitation_process_id').val();
+
+    params = {
+        by_department_user_access_and_licitation_process: lic_pro+","+$('#current_user_id').val()
+    };
+
+    setModalUrl(selector_modal,'purchase_solicitations',params);
 }
 
 function setModalUrlToPurchaseForm() {
