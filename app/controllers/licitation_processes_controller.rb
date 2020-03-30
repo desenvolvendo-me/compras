@@ -1,6 +1,6 @@
 class LicitationProcessesController < CrudController
   actions :all, :except => [:destroy]
-  before_filter :with_access, only: [:index]
+  before_filter :with_access, only: [:index, :modal]
 
   has_scope :by_modality_type
   has_scope :trading, :type => :boolean
@@ -11,7 +11,6 @@ class LicitationProcessesController < CrudController
   has_scope :by_creditor
   has_scope :term, :allow_blank => true
   has_scope :by_status, :allow_blank => true
-  has_scope :by_purchasing_unit, :allow_blank => true
 
   def new
     object = build_resource

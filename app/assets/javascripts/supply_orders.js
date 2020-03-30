@@ -134,6 +134,7 @@ function mergeItem(item) {
 }
 
 function renderItem(item) {
+
     var itemBinds = {
         uuid: _.uniqueId('fresh-'),
         id: '',
@@ -144,25 +145,19 @@ function renderItem(item) {
     };
 
     var data = $('#supply_order_items_template').mustache(itemBinds);
+
     $('#items-records tbody').append(data).trigger("nestedGrid:afterAdd");
 }
 
-function setModalUrlToSupplyRequest() {
-    var selector_modal = '#supply_order_supply_request';
-    params = {
-        by_purchase_solicitation: $('#supply_order_purchase_solicitation_id').val()
-    };
+function setModalUrlToLiciationProccessByStatus(selector_modal) {
+    var urlModal = Routes.modal_licitation_processes,
+        params = {
+            by_status: "approved"
+        };
 
-    setModalUrl(selector_modal,'supply_requests',params);
-}
-function setModalUrlToLiciationProccess() {
-    var selector_modal = '#supply_order_licitation_process';
-    params = {
-        by_status: "approved",
-        by_purchasing_unit: $('#current_user_id').val()
-    };
+    urlModal += "?" + $.param(params);
 
-    setModalUrl(selector_modal,'licitation_processes',params);
+    $(selector_modal).data('modal-url', urlModal);
 }
 
 function setModalUrlToContract() {
@@ -187,8 +182,7 @@ function setModalUrlToMaterial() {
 }
 
 $(document).ready(function () {
-    setModalUrlToSupplyRequest();
-    setModalUrlToLiciationProccess();
+    setModalUrlToLiciationProccessByStatus("#supply_order_licitation_process");
     setModalUrlToPurchaseForm();
     setModalUrlToCreditor();
     setPledgeSource();
@@ -196,8 +190,10 @@ $(document).ready(function () {
     setMaterialTotalAndBalance();
     setModalUrlToContract();
     setModalUrlToMaterial();
-    disableWhenSelected("#supply_order_licitation_process_id", "#supply_order_contract");
-    disableWhenSelected("#supply_order_licitation_process_id", "#supply_order_purchase_solicitation");
+    disableWhenSelected("#supply_order_licitation_process_id", "#supply_order_contract")
+    disableWhenSelected("#supply_order_licitation_process_id", "#supply_order_purchase_solicitation")
+    // disableWhenSelected("#supply_order_contract_id", "#supply_order_material")
+    // disableWhenSelected("#supply_order_contract_id", "#supply_order_quantity")
 
     $('form.supply_order').on('change', '#supply_order_purchase_solicitation_id', function () {
         setDepartment();
@@ -222,9 +218,7 @@ $(document).ready(function () {
     });
 
     $('#supply_order_licitation_process').on('change', function (event, licitation_process) {
-
         if (licitation_process) {
-            $("#supply_order_licitation_process_description").val(licitation_process.description);
             $("#supply_order_modality_or_type_of_removal").val(licitation_process.modality_or_type_of_removal);
             $("#supply_order_purchase_solicitation").attr('disabled', false);
         } else {
