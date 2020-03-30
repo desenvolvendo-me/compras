@@ -3,14 +3,7 @@
   <div class="nested-fields add-margin-bottom">
     <%= hidden_field_tag :supply_request_id, nil, :name => 'supply_order_request[id]' %>
 
-    <div class="yui3-g">
-      <div class="yui3-u-1-3">
-        <%= f.input :supply_request, :as => :auto_complete, :fake => true,
-                    'data-hidden-field-class' => 'unique',
-                    :source_path => supply_requests_path,
-                    :required => true, :disabled => f.object.updatabled %>
-      </div>
-    </div>
+    <%= f.input :supply_request, :as => :modal, :fake => true, :disabled => f.object.updatabled %>
 
     <div class="yui3-u-1-6">
       <%= button_tag 'Adicionar', type: :button,

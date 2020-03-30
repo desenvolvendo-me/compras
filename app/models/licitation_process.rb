@@ -181,16 +181,21 @@ class LicitationProcess < Compras::Model
     where("process::text LIKE ?", "%#{q}%")
   }
 
+  scope :by_purchasing_unit, lambda {|current_user|
+    purchasing_units = UserPurchasingUnit.where(user_id: current_user).pluck(:purchasing_unit_id)
+
+    where { purchasing_unit_id.in purchasing_units }
+  }
+
   scope :published_edital, lambda {
     joins {publications}.where {
       publications.publication_of.eq PublicationOf::EDITAL
     }
   }
 
-  scope :by_status, lambda {|status|
-    # where {|query| query.status.eq status}
+  scope :by_status, lambda {|type_status|
+    where { status.eq type_status }
   }
-
 
   scope :by_ratification_month_and_year, lambda {|month, year|
     joins {licitation_process_ratifications}.
