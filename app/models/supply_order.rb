@@ -27,7 +27,7 @@ class SupplyOrder < Compras::Model
   delegate :modality_number, :modality_humanize, :type_of_removal_humanize,
            to: :licitation_process, allow_nil: true
 
-  # validates :authorization_date, :contract, :purchase_solicitation, :licitation_process, presence: true
+  validates :authorization_date, :contract, :purchase_solicitation, :licitation_process, presence: true
   # validate :items_quantity_permitted
 
   orderize "id DESC"
@@ -67,6 +67,5 @@ class SupplyOrder < Compras::Model
       end
     end
   end
-
 
 end
