@@ -15,7 +15,10 @@ class SupplyRequestManagementsController < ApplicationController
                         "rejected"=>[],"partially_answered"=>[],"fully_serviced"=>[],
                         "doubts"=>[],"adjusted"=>[]}
 
-    sr = SupplyRequest.all
+    sr = SupplyRequest.
+        where("purchase_solicitation_id in (?) or user_id = ? ",
+              get_purchase_solicitation,current_user.id )
+
     sr.each do |item|
       unless item.supply_request_attendances.last.nil?
         @quantity["#{item.supply_request_attendances.last.service_status}"] += 1
@@ -25,4 +28,11 @@ class SupplyRequestManagementsController < ApplicationController
       @suplly_requests["new"].push(item.id) if item.supply_request_attendances.count == 0
     end
   end
+
+  def get_purchase_solicitation
+    use_pur_uni = UserPurchasingUnit.where(user_id:current_user.id).pluck(:purchasing_unit_id)
+    departments = Department.where("compras_departments.purchasing_unit_id in (?)",use_pur_uni).pluck(:id)
+    PurchaseSolicitation.where("department_id in (?)",departments).pluck(:id)
+  end
+
 end
