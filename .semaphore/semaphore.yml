@@ -25,8 +25,8 @@ blocks:
           - sudo apt-get install -y g++ qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
           - bundle install --deployment --path vendor/bundle
           - sem-service start postgres 11
-          - psql -U postgres -h localhost -c "CREATE USER tributario WITH PASSWORD 'tributario';"
-          - psql -U postgres -h localhost -c "ALTER USER tributario WITH SUPERUSER;"
+          - psql -U postgres -h localhost -c "CREATE USER compras WITH PASSWORD 'compras';"
+          - psql -U postgres -h localhost -c "ALTER USER compras WITH SUPERUSER;"
           - cp config/database.sample.yml config/database.yml
           - 'bundle exec rake db:create'
           - 'bundle exec rake db:migrate'
@@ -49,21 +49,21 @@ blocks:
         commands:
           - checkout
           - cache restore
+          - sem-version ruby 2.3.8
+          - sudo apt-get install -y g++ qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
+          - bundle install --deployment --path vendor/bundle
           - sem-service start postgres 11
           - psql -U postgres -h localhost -c "CREATE USER compras WITH PASSWORD 'compras';"
           - psql -U postgres -h localhost -c "ALTER USER compras WITH SUPERUSER;"
-          - sem-version ruby 2.3.8
-          - bundle install --deployment --path vendor/bundle
           - cp config/database.sample.yml config/database.yml
           - 'bundle exec rake db:create'
           - 'bundle exec rake db:migrate'
+          - cache store
       env_vars:
         - name: RAILS_ENV
           value: 'true'
         - name: DATABASE_URL
           value: 'postgresql://compras:compras@0.0.0.0:5432/compras_test'
-    skip:
-      when: 'true'
   - name: test unit priority 3
     dependencies:
       - test unit priority 2
@@ -108,16 +108,16 @@ blocks:
         commands:
           - checkout
           - cache restore
+          - sem-version ruby 2.3.8
+          - sudo apt-get install -y g++ qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
+          - bundle install --deployment --path vendor/bundle
           - sem-service start postgres 11
           - psql -U postgres -h localhost -c "CREATE USER compras WITH PASSWORD 'compras';"
           - psql -U postgres -h localhost -c "ALTER USER compras WITH SUPERUSER;"
-          - sem-version ruby 2.3.8
-          - bundle install --deployment --path vendor/bundle
           - cp config/database.sample.yml config/database.yml
           - 'bundle exec rake db:create'
           - 'bundle exec rake db:migrate'
-    skip:
-      when: 'true'
+          - cache store
   - name: test feature priority 1
     dependencies:
       - test unit priority 3
@@ -135,16 +135,16 @@ blocks:
         commands:
           - checkout
           - cache restore
+          - sem-version ruby 2.3.8
+          - sudo apt-get install -y g++ qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
+          - bundle install --deployment --path vendor/bundle
           - sem-service start postgres 11
           - psql -U postgres -h localhost -c "CREATE USER compras WITH PASSWORD 'compras';"
           - psql -U postgres -h localhost -c "ALTER USER compras WITH SUPERUSER;"
-          - sem-version ruby 2.3.8
-          - bundle install --deployment --path vendor/bundle
           - cp config/database.sample.yml config/database.yml
           - 'bundle exec rake db:create'
           - 'bundle exec rake db:migrate'
-    skip:
-      when: 'true'
+          - cache store
   - name: test integration
     dependencies:
       - test feature priotiry 2
@@ -162,16 +162,16 @@ blocks:
         commands:
           - checkout
           - cache restore
+          - sem-version ruby 2.3.8
+          - sudo apt-get install -y g++ qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
+          - bundle install --deployment --path vendor/bundle
           - sem-service start postgres 11
           - psql -U postgres -h localhost -c "CREATE USER compras WITH PASSWORD 'compras';"
           - psql -U postgres -h localhost -c "ALTER USER compras WITH SUPERUSER;"
-          - sem-version ruby 2.3.8
-          - bundle install --deployment --path vendor/bundle
           - cp config/database.sample.yml config/database.yml
           - 'bundle exec rake db:create'
           - 'bundle exec rake db:migrate'
-    skip:
-      when: 'true'
+          - cache store
   - name: test feature priotiry 2
     dependencies:
       - test feature priority 1
@@ -189,15 +189,15 @@ blocks:
         commands:
           - checkout
           - cache restore
+          - sem-version ruby 2.3.8
+          - sudo apt-get install -y g++ qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
+          - bundle install --deployment --path vendor/bundle
           - sem-service start postgres 11
           - psql -U postgres -h localhost -c "CREATE USER compras WITH PASSWORD 'compras';"
           - psql -U postgres -h localhost -c "ALTER USER compras WITH SUPERUSER;"
-          - sem-version ruby 2.3.8
-          - bundle install --deployment --path vendor/bundle
           - cp config/database.sample.yml config/database.yml
           - 'bundle exec rake db:create'
           - 'bundle exec rake db:migrate'
-    skip:
-      when: 'true'
+          - cache store
 execution_time_limit:
   minutes: 3
