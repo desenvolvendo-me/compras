@@ -232,4 +232,5 @@ blocks:
           - checkout
           - cache restore
           - sem-version ruby 2.3.8
+          - sudo apt-get install -y g++ qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
           - bundle install --deployment --path vendor/bundle
