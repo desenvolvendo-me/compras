@@ -5,25 +5,8 @@ agent:
     type: e1-standard-2
     os_image: ubuntu1804
 blocks:
-  - name: pre
-    dependencies: []
-    task:
-      env_vars:
-        - name: RAILS_ENV
-          value: test
-        - name: DATABASE_URL
-          value: 'postgresql://compras:compras@0.0.0.0:5432/compras_test'
-      jobs:
-        - name: libs
-          commands:
-            - checkout
-            - cache restore
-            - sem-version ruby 2.3.8
-            - sudo apt-get install -y g++ qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
-            - cache store
   - name: build
-    dependencies:
-      - pre
+    dependencies: []
     task:
       jobs:
         - name: bundle
@@ -31,6 +14,7 @@ blocks:
             - checkout
             - cache restore
             - sem-version ruby 2.3.8
+            - sudo apt-get install -y g++ qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
             - bundle install --deployment --path vendor/bundle
             - cache store
       env_vars:
@@ -129,7 +113,6 @@ blocks:
         - name: spec/mailers
           commands:
             - bundle exec rspec spec/mailers
-
       env_vars:
         - name: RAILS_ENV
           value: 'true'
