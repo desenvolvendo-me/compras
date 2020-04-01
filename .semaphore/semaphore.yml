@@ -1,26 +1,245 @@
 version: v1.0
-name: Test MyApp
+name: Test Business
 agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu1804
-
 blocks:
-  - name: Test
+  - name: pre
+    dependencies: []
     task:
       env_vars:
-        - name: DATABASE_URL
-          value: "postgresql://postgres:@0.0.0.0:5432/myapp_test"
         - name: RAILS_ENV
           value: test
+        - name: DATABASE_URL
+          value: 'postgresql://tributario:tributario@0.0.0.0:5432/tributario_test'
       jobs:
-      - name: Test
+        - name: libs
+          commands:
+            - checkout
+            - cache restore
+            - sem-version ruby 2.3.8
+            - sudo apt-get install -y g++ qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
+            - cache store
+  - name: build
+    dependencies:
+      - pre
+    task:
+      jobs:
+        - name: bundle
+          commands:
+            - checkout
+            - cache restore
+            - sem-version ruby 2.3.8
+            - bundle install --deployment --path vendor/bundle
+            - cache store
+      env_vars:
+        - name: RAILS_ENV
+          value: test
+  - name: test unit priority 1
+    dependencies:
+      - database
+    task:
+      jobs:
+        - name: spec/business
+          commands:
+            - bundle exec rspec spec/business
+      env_vars:
+        - name: RAILS_ENV
+          value: test
+        - name: DATABASE_URL
+          value: 'postgresql://tributario:tributario@0.0.0.0:5432/tributario_test'
+      prologue:
         commands:
           - checkout
-          - sem-service start postgres 11
-          - sem-version ruby 2.6.5
           - cache restore
+          - sem-service start postgres 11
+          - psql -U postgres -h localhost -c "CREATE USER tributario WITH PASSWORD 'tributario';"
+          - psql -U postgres -h localhost -c "ALTER USER tributario WITH SUPERUSER;"
+          - sem-version ruby 2.3.8
           - bundle install --deployment --path vendor/bundle
-          - cache store
-          - bundle exec rake db:setup
-          - bundle exec rspec
+          - cp config/database.sample.yml config/database.yml
+          - 'bundle exec rake db:create'
+          - 'bundle exec rake db:migrate'
+  - name: test unit priority 2
+    dependencies:
+      - test unit priority 1
+    task:
+      jobs:
+        - name: spec/models
+          commands:
+            - bundle exec rspec spec/models
+        - name: spec/views
+          commands:
+            - bundle exec rspec spec/views
+        - name: spec/controllers
+          commands:
+            - bundle exec rspec spec/controllers
+      prologue:
+        commands:
+          - checkout
+          - cache restore
+          - sem-service start postgres 11
+          - psql -U postgres -h localhost -c "CREATE USER tributario WITH PASSWORD 'tributario';"
+          - psql -U postgres -h localhost -c "ALTER USER tributario WITH SUPERUSER;"
+          - sem-version ruby 2.3.8
+          - bundle install --deployment --path vendor/bundle
+          - cp config/database.sample.yml config/database.yml
+          - 'bundle exec rake db:create'
+          - 'bundle exec rake db:migrate'
+      env_vars:
+        - name: RAILS_ENV
+          value: 'true'
+        - name: DATABASE_URL
+          value: 'postgresql://tributario:tributario@0.0.0.0:5432/tributario_test'
+    skip:
+      when: 'true'
+  - name: test unit priority 3
+    dependencies:
+      - test unit priority 2
+    task:
+      jobs:
+        - name: spec/processors
+          commands:
+            - bundle exec rspec spec/processors
+        - name: spec/workers
+          commands:
+            - bundle exec rspec spec/workers
+        - name: spec/reports
+          commands:
+            - bundle exec rspec spec/reports
+        - name: spec/importers
+          commands:
+            - bundle exec rspec spec/importers
+        - name: spec/exporters
+          commands:
+            - bundle exec rspec spec/exporters
+        - name: spec/enumerations
+          commands:
+            - bundle exec rspec spec/enumerations
+        - name: spec/decorators
+          commands:
+            - bundle exec rspec spec/decorators
+        - name: spec/helpers
+          commands:
+            - bundle exec rspec spec/helpers
+      env_vars:
+        - name: RAILS_ENV
+          value: 'true'
+        - name: DATABASE_URL
+          value: 'postgresql://tributario:tributario@0.0.0.0:5432/tributario_test'
+      prologue:
+        commands:
+          - checkout
+          - cache restore
+          - sem-service start postgres 11
+          - psql -U postgres -h localhost -c "CREATE USER tributario WITH PASSWORD 'tributario';"
+          - psql -U postgres -h localhost -c "ALTER USER tributario WITH SUPERUSER;"
+          - sem-version ruby 2.3.8
+          - bundle install --deployment --path vendor/bundle
+          - cp config/database.sample.yml config/database.yml
+          - 'bundle exec rake db:create'
+          - 'bundle exec rake db:migrate'
+    skip:
+      when: 'true'
+  - name: test feature priority 1
+    dependencies:
+      - test unit priority 3
+    task:
+      jobs:
+        - name: spec/features
+          commands:
+            - 'bundle exec rspec spec/features/[a-m]* --seed 410'
+      env_vars:
+        - name: RAILS_ENV
+          value: 'true'
+        - name: DATABASE_URL
+          value: 'postgresql://tributario:tributario@0.0.0.0:5432/tributario_test'
+      prologue:
+        commands:
+          - checkout
+          - cache restore
+          - sem-service start postgres 11
+          - psql -U postgres -h localhost -c "CREATE USER tributario WITH PASSWORD 'tributario';"
+          - psql -U postgres -h localhost -c "ALTER USER tributario WITH SUPERUSER;"
+          - sem-version ruby 2.3.8
+          - bundle install --deployment --path vendor/bundle
+          - cp config/database.sample.yml config/database.yml
+          - 'bundle exec rake db:create'
+          - 'bundle exec rake db:migrate'
+    skip:
+      when: 'true'
+  - name: test integration
+    dependencies:
+      - test feature priotiry 2
+    task:
+      jobs:
+        - name: spec/integration
+          commands:
+            - bundle exec rspec spec/integration
+      env_vars:
+        - name: RAILS_ENV
+          value: 'true'
+        - name: DATABASE_URL
+          value: 'postgresql://tributario:tributario@0.0.0.0:5432/tributario_test'
+      prologue:
+        commands:
+          - checkout
+          - cache restore
+          - sem-service start postgres 11
+          - psql -U postgres -h localhost -c "CREATE USER tributario WITH PASSWORD 'tributario';"
+          - psql -U postgres -h localhost -c "ALTER USER tributario WITH SUPERUSER;"
+          - sem-version ruby 2.3.8
+          - bundle install --deployment --path vendor/bundle
+          - cp config/database.sample.yml config/database.yml
+          - 'bundle exec rake db:create'
+          - 'bundle exec rake db:migrate'
+    skip:
+      when: 'true'
+  - name: test feature priotiry 2
+    dependencies:
+      - test feature priority 1
+    task:
+      jobs:
+        - name: spec/features
+          commands:
+            - 'bundle exec rspec spec/features/[n-z]* --seed 46119'
+      env_vars:
+        - name: RAILS_ENV
+          value: 'true'
+        - name: DATABASE_URL
+          value: 'postgresql://tributario:tributario@0.0.0.0:5432/tributario_test'
+      prologue:
+        commands:
+          - checkout
+          - cache restore
+          - sem-service start postgres 11
+          - psql -U postgres -h localhost -c "CREATE USER tributario WITH PASSWORD 'tributario';"
+          - psql -U postgres -h localhost -c "ALTER USER tributario WITH SUPERUSER;"
+          - sem-version ruby 2.3.8
+          - bundle install --deployment --path vendor/bundle
+          - cp config/database.sample.yml config/database.yml
+          - 'bundle exec rake db:create'
+          - 'bundle exec rake db:migrate'
+    skip:
+      when: 'true'
+  - name: database
+    dependencies:
+      - build
+    task:
+      jobs:
+        - name: migration
+          commands:
+            - sem-service start postgres 11
+            - psql -U postgres -h localhost -c "CREATE USER tributario WITH PASSWORD 'tributario';"
+            - psql -U postgres -h localhost -c "ALTER USER tributario WITH SUPERUSER;"
+            - cp config/database.sample.yml config/database.yml
+            - 'bundle exec rake db:create'
+            - 'bundle exec rake db:migrate'
+            - cache store
+      prologue:
+        commands:
+          - checkout
+          - cache restore
+          - sem-version ruby 2.3.8
+          - bundle install --deployment --path vendor/bundle
