@@ -69,6 +69,22 @@ class PurchaseSolicitation < Compras::Model
   orderize "id DESC"
   filterize
 
+  scope :by_department_user_access_and_licitation_process, lambda {|params|
+
+    if params.split(",").size == 2
+      user = params.split(",")[1]
+      use_pur_uni = UserPurchasingUnit.where(user_id:user).pluck(:purchasing_unit_id)
+
+      departments = Department.where("compras_departments.purchasing_unit_id in (?)",use_pur_uni).pluck(:id)
+
+      purchase_process_id =  params.split(",")[0]
+      where("compras_purchase_solicitations.department_id in (?)", departments).
+      joins(list_purchase_solicitations: [:licitation_process]).
+          where("compras_licitation_processes.id = ?", purchase_process_id)
+
+    end
+  }
+
   scope :by_deparment, lambda {|current_user|
     use_pur_uni = UserPurchasingUnit.where(user_id:current_user).pluck(:purchasing_unit_id)
     departments = Department.where("compras_departments.purchasing_unit_id in (?)",use_pur_uni).pluck(:id)

@@ -1,4 +1,7 @@
 class SupplyRequestsController < CrudController
+  has_scope :by_purchase_solicitation
+  has_scope :by_creditor
+
   def new
     object = build_resource
     object.user = current_user
