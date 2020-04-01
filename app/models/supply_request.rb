@@ -34,6 +34,10 @@ class SupplyRequest < Compras::Model
   orderize "id DESC"
   filterize
 
+  scope :by_purchase_solicitation, lambda {|purchase_solicitation|
+    where { purchase_solicitation_id.in purchase_solicitation }
+  }
+
   def to_s
     "#{contract} - #{licitation_process}"
   end
