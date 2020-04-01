@@ -5,24 +5,8 @@ agent:
     type: e1-standard-2
     os_image: ubuntu1804
 blocks:
-  - name: build
-    dependencies: []
-    task:
-      jobs:
-        - name: bundle
-          commands:
-            - checkout
-            - cache restore
-            - sem-version ruby 2.3.8
-            - sudo apt-get install -y g++ qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
-            - bundle install --deployment --path vendor/bundle
-            - cache store
-      env_vars:
-        - name: RAILS_ENV
-          value: test
   - name: test unit priority 1
-    dependencies:
-      - database
+    dependencies: []
     task:
       jobs:
         - name: spec/business
@@ -45,6 +29,7 @@ blocks:
           - cp config/database.sample.yml config/database.yml
           - 'bundle exec rake db:create'
           - 'bundle exec rake db:migrate'
+          - cache store
   - name: test unit priority 2
     dependencies:
       - test unit priority 1
@@ -213,24 +198,3 @@ blocks:
           - 'bundle exec rake db:migrate'
     skip:
       when: 'true'
-  - name: database
-    dependencies:
-      - build
-    task:
-      jobs:
-        - name: migration
-          commands:
-            - sem-service start postgres 11
-            - psql -U postgres -h localhost -c "CREATE USER compras WITH PASSWORD 'compras';"
-            - psql -U postgres -h localhost -c "ALTER USER compras WITH SUPERUSER;"
-            - cp config/database.sample.yml config/database.yml
-            - 'bundle exec rake db:create'
-            - 'bundle exec rake db:migrate'
-            - cache store
-      prologue:
-        commands:
-          - checkout
-          - cache restore
-          - sem-version ruby 2.3.8
-          - sudo apt-get install -y g++ qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
-          - bundle install --deployment --path vendor/bundle
