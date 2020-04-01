@@ -126,8 +126,8 @@ blocks:
         - name: spec/lib
           commands:
             - bundle exec rspec spec/lib
-          - name: spec/mailers
-            commands:
+        - name: spec/mailers
+          commands:
             - bundle exec rspec spec/mailers
 
       env_vars:
