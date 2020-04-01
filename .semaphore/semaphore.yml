@@ -12,7 +12,7 @@ blocks:
         - name: RAILS_ENV
           value: test
         - name: DATABASE_URL
-          value: 'postgresql://tributario:tributario@0.0.0.0:5432/tributario_test'
+          value: 'postgresql://compras:compras@0.0.0.0:5432/compras_test'
       jobs:
         - name: libs
           commands:
@@ -48,14 +48,14 @@ blocks:
         - name: RAILS_ENV
           value: test
         - name: DATABASE_URL
-          value: 'postgresql://tributario:tributario@0.0.0.0:5432/tributario_test'
+          value: 'postgresql://compras:compras@0.0.0.0:5432/compras_test'
       prologue:
         commands:
           - checkout
           - cache restore
           - sem-service start postgres 11
-          - psql -U postgres -h localhost -c "CREATE USER tributario WITH PASSWORD 'tributario';"
-          - psql -U postgres -h localhost -c "ALTER USER tributario WITH SUPERUSER;"
+          - psql -U postgres -h localhost -c "CREATE USER compras WITH PASSWORD 'compras';"
+          - psql -U postgres -h localhost -c "ALTER USER compras WITH SUPERUSER;"
           - sem-version ruby 2.3.8
           - bundle install --deployment --path vendor/bundle
           - cp config/database.sample.yml config/database.yml
@@ -80,8 +80,8 @@ blocks:
           - checkout
           - cache restore
           - sem-service start postgres 11
-          - psql -U postgres -h localhost -c "CREATE USER tributario WITH PASSWORD 'tributario';"
-          - psql -U postgres -h localhost -c "ALTER USER tributario WITH SUPERUSER;"
+          - psql -U postgres -h localhost -c "CREATE USER compras WITH PASSWORD 'compras';"
+          - psql -U postgres -h localhost -c "ALTER USER compras WITH SUPERUSER;"
           - sem-version ruby 2.3.8
           - bundle install --deployment --path vendor/bundle
           - cp config/database.sample.yml config/database.yml
@@ -91,7 +91,7 @@ blocks:
         - name: RAILS_ENV
           value: 'true'
         - name: DATABASE_URL
-          value: 'postgresql://tributario:tributario@0.0.0.0:5432/tributario_test'
+          value: 'postgresql://compras:compras@0.0.0.0:5432/compras_test'
     skip:
       when: 'true'
   - name: test unit priority 3
@@ -134,14 +134,14 @@ blocks:
         - name: RAILS_ENV
           value: 'true'
         - name: DATABASE_URL
-          value: 'postgresql://tributario:tributario@0.0.0.0:5432/tributario_test'
+          value: 'postgresql://compras:compras@0.0.0.0:5432/compras_test'
       prologue:
         commands:
           - checkout
           - cache restore
           - sem-service start postgres 11
-          - psql -U postgres -h localhost -c "CREATE USER tributario WITH PASSWORD 'tributario';"
-          - psql -U postgres -h localhost -c "ALTER USER tributario WITH SUPERUSER;"
+          - psql -U postgres -h localhost -c "CREATE USER compras WITH PASSWORD 'compras';"
+          - psql -U postgres -h localhost -c "ALTER USER compras WITH SUPERUSER;"
           - sem-version ruby 2.3.8
           - bundle install --deployment --path vendor/bundle
           - cp config/database.sample.yml config/database.yml
@@ -161,14 +161,14 @@ blocks:
         - name: RAILS_ENV
           value: 'true'
         - name: DATABASE_URL
-          value: 'postgresql://tributario:tributario@0.0.0.0:5432/tributario_test'
+          value: 'postgresql://compras:compras@0.0.0.0:5432/compras_test'
       prologue:
         commands:
           - checkout
           - cache restore
           - sem-service start postgres 11
-          - psql -U postgres -h localhost -c "CREATE USER tributario WITH PASSWORD 'tributario';"
-          - psql -U postgres -h localhost -c "ALTER USER tributario WITH SUPERUSER;"
+          - psql -U postgres -h localhost -c "CREATE USER compras WITH PASSWORD 'compras';"
+          - psql -U postgres -h localhost -c "ALTER USER compras WITH SUPERUSER;"
           - sem-version ruby 2.3.8
           - bundle install --deployment --path vendor/bundle
           - cp config/database.sample.yml config/database.yml
@@ -188,14 +188,14 @@ blocks:
         - name: RAILS_ENV
           value: 'true'
         - name: DATABASE_URL
-          value: 'postgresql://tributario:tributario@0.0.0.0:5432/tributario_test'
+          value: 'postgresql://compras:compras@0.0.0.0:5432/compras_test'
       prologue:
         commands:
           - checkout
           - cache restore
           - sem-service start postgres 11
-          - psql -U postgres -h localhost -c "CREATE USER tributario WITH PASSWORD 'tributario';"
-          - psql -U postgres -h localhost -c "ALTER USER tributario WITH SUPERUSER;"
+          - psql -U postgres -h localhost -c "CREATE USER compras WITH PASSWORD 'compras';"
+          - psql -U postgres -h localhost -c "ALTER USER compras WITH SUPERUSER;"
           - sem-version ruby 2.3.8
           - bundle install --deployment --path vendor/bundle
           - cp config/database.sample.yml config/database.yml
@@ -215,14 +215,14 @@ blocks:
         - name: RAILS_ENV
           value: 'true'
         - name: DATABASE_URL
-          value: 'postgresql://tributario:tributario@0.0.0.0:5432/tributario_test'
+          value: 'postgresql://compras:compras@0.0.0.0:5432/compras_test'
       prologue:
         commands:
           - checkout
           - cache restore
           - sem-service start postgres 11
-          - psql -U postgres -h localhost -c "CREATE USER tributario WITH PASSWORD 'tributario';"
-          - psql -U postgres -h localhost -c "ALTER USER tributario WITH SUPERUSER;"
+          - psql -U postgres -h localhost -c "CREATE USER compras WITH PASSWORD 'compras';"
+          - psql -U postgres -h localhost -c "ALTER USER compras WITH SUPERUSER;"
           - sem-version ruby 2.3.8
           - bundle install --deployment --path vendor/bundle
           - cp config/database.sample.yml config/database.yml
@@ -238,8 +238,8 @@ blocks:
         - name: migration
           commands:
             - sem-service start postgres 11
-            - psql -U postgres -h localhost -c "CREATE USER tributario WITH PASSWORD 'tributario';"
-            - psql -U postgres -h localhost -c "ALTER USER tributario WITH SUPERUSER;"
+            - psql -U postgres -h localhost -c "CREATE USER compras WITH PASSWORD 'compras';"
+            - psql -U postgres -h localhost -c "ALTER USER compras WITH SUPERUSER;"
             - cp config/database.sample.yml config/database.yml
             - 'bundle exec rake db:create'
             - 'bundle exec rake db:migrate'
