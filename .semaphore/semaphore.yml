@@ -21,11 +21,12 @@ blocks:
         commands:
           - checkout
           - cache restore
-          - sem-service start postgres 11
-          - psql -U postgres -h localhost -c "CREATE USER compras WITH PASSWORD 'compras';"
-          - psql -U postgres -h localhost -c "ALTER USER compras WITH SUPERUSER;"
           - sem-version ruby 2.3.8
+          - sudo apt-get install -y g++ qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
           - bundle install --deployment --path vendor/bundle
+          - sem-service start postgres 11
+          - psql -U postgres -h localhost -c "CREATE USER tributario WITH PASSWORD 'tributario';"
+          - psql -U postgres -h localhost -c "ALTER USER tributario WITH SUPERUSER;"
           - cp config/database.sample.yml config/database.yml
           - 'bundle exec rake db:create'
           - 'bundle exec rake db:migrate'
@@ -198,3 +199,5 @@ blocks:
           - 'bundle exec rake db:migrate'
     skip:
       when: 'true'
+execution_time_limit:
+  minutes: 3
