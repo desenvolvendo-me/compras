@@ -123,6 +123,13 @@ blocks:
         - name: spec/helpers
           commands:
             - bundle exec rspec spec/helpers
+        - name: spec/lib
+          commands:
+            - bundle exec rspec spec/lib
+          - name: spec/mailers
+            commands:
+            - bundle exec rspec spec/mailers
+
       env_vars:
         - name: RAILS_ENV
           value: 'true'
