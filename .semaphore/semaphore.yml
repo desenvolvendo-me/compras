@@ -9,29 +9,17 @@ blocks:
     dependencies: []
     task:
       jobs:
-        - name: spec/business
+        - name: spec/primary
           commands:
             - bundle exec rspec spec/business --format progress
-        - name: spec/models
-          commands:
             - bundle exec rspec spec/models --format progress
-        - name: spec/controllers
-          commands:
             - bundle exec rspec spec/controllers --format progress
-        - name: spec/workers
+        - name: spec/secondary
           commands:
             - bundle exec rspec spec/workers --format progress
-        - name: spec/reports
-          commands:
             - bundle exec rspec spec/reports --format progress
-        - name: spec/decorators
-          commands:
             - bundle exec rspec spec/decorators --format progress
-        - name: spec/helpers
-          commands:
             - bundle exec rspec spec/helpers --format progress
-        - name: spec/integration
-          commands:
             - bundle exec rspec spec/integration --format progress
       env_vars:
         - name: RAILS_ENV
@@ -58,26 +46,16 @@ blocks:
     dependencies: []
     task:
       jobs:
-        - name: 'spec/features/[a-c]'
+        - name: 'spec/features/[a-i]'
           commands:
             - 'bundle exec rspec spec/features/[a-c]* --format progress'
-        - name: 'spec/features/[d-f]'
-          commands:
             - 'bundle exec rspec spec/features/[d-f]* --format progress'
-        - name: 'spec/features/[g-i]'
-          commands:
             - 'bundle exec rspec spec/features/[g-i]* --format progress'
-        - name: 'spec/features/[j-m]'
+        - name: 'spec/features/[j-z]'
           commands:
             - 'bundle exec rspec spec/features/[j-m]* --format progress'
-        - name: 'spec/features/[n-p]'
-          commands:
             - 'bundle exec rspec spec/features/[n-p]* --format progress'
-        - name: 'spec/features/[q-s]'
-          commands:
             - 'bundle exec rspec spec/features/[q-s]* --format progress'
-        - name: 'spec/features/[t-z]'
-          commands:
             - 'bundle exec rspec spec/features/[t-z]* --format progress'
       env_vars:
         - name: RAILS_ENV
