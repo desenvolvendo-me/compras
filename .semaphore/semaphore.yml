@@ -6,8 +6,7 @@ agent:
     os_image: ubuntu1804
 blocks:
   - name: test unit priority 1
-    dependencies:
-      - test feature priority 1
+    dependencies: []
     task:
       jobs:
         - name: spec/business
@@ -34,6 +33,7 @@ blocks:
           - cache store
   - name: test unit priority 2
     dependencies:
+      - test feature priority 1
       - test unit priority 1
     task:
       jobs:
@@ -158,4 +158,4 @@ blocks:
           - 'bundle exec rake db:migrate'
           - cache store
 execution_time_limit:
-  minutes: 3
+  minutes: 15
