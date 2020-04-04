@@ -6,12 +6,13 @@ agent:
     os_image: ubuntu1804
 blocks:
   - name: test unit priority 1
-    dependencies: []
+    dependencies:
+      - test feature priority 1
     task:
       jobs:
         - name: spec/business
           commands:
-            - bundle exec rspec spec/business
+            - bundle exec rspec spec/business --format progress
       env_vars:
         - name: RAILS_ENV
           value: test
@@ -38,13 +39,13 @@ blocks:
       jobs:
         - name: spec/models
           commands:
-            - bundle exec rspec spec/models
+            - bundle exec rspec spec/models --format progress
         - name: spec/views
           commands:
-            - bundle exec rspec spec/views
+            - bundle exec rspec spec/views --format progress
         - name: spec/controllers
           commands:
-            - bundle exec rspec spec/controllers
+            - bundle exec rspec spec/controllers --format progress
       prologue:
         commands:
           - checkout
@@ -69,36 +70,21 @@ blocks:
       - test unit priority 2
     task:
       jobs:
-        - name: spec/processors
-          commands:
-            - bundle exec rspec spec/processors
         - name: spec/workers
           commands:
-            - bundle exec rspec spec/workers
+            - bundle exec rspec spec/workers --format progress
         - name: spec/reports
           commands:
-            - bundle exec rspec spec/reports
-        - name: spec/importers
-          commands:
-            - bundle exec rspec spec/importers
-        - name: spec/exporters
-          commands:
-            - bundle exec rspec spec/exporters
+            - bundle exec rspec spec/reports --format progress
         - name: spec/enumerations
           commands:
-            - bundle exec rspec spec/enumerations
+            - bundle exec rspec spec/enumerations --format progress
         - name: spec/decorators
           commands:
-            - bundle exec rspec spec/decorators
+            - bundle exec rspec spec/decorators --format progress
         - name: spec/helpers
           commands:
-            - bundle exec rspec spec/helpers
-        - name: spec/lib
-          commands:
-            - bundle exec rspec spec/lib
-        - name: spec/mailers
-          commands:
-            - bundle exec rspec spec/mailers
+            - bundle exec rspec spec/helpers --format progress
       env_vars:
         - name: RAILS_ENV
           value: 'true'
@@ -119,13 +105,12 @@ blocks:
           - 'bundle exec rake db:migrate'
           - cache store
   - name: test feature priority 1
-    dependencies:
-      - test unit priority 3
+    dependencies: []
     task:
       jobs:
-        - name: spec/features
+        - name: 'spec/features/[a-c]'
           commands:
-            - 'bundle exec rspec spec/features/[a-m]* --seed 410'
+            - 'bundle exec rspec spec/features/[a-c]* --format progress'
       env_vars:
         - name: RAILS_ENV
           value: 'true'
@@ -147,39 +132,12 @@ blocks:
           - cache store
   - name: test integration
     dependencies:
-      - test feature priotiry 2
+      - test unit priority 3
     task:
       jobs:
         - name: spec/integration
           commands:
-            - bundle exec rspec spec/integration
-      env_vars:
-        - name: RAILS_ENV
-          value: 'true'
-        - name: DATABASE_URL
-          value: 'postgresql://compras:compras@0.0.0.0:5432/compras_test'
-      prologue:
-        commands:
-          - checkout
-          - cache restore
-          - sem-version ruby 2.3.8
-          - sudo apt-get install -y g++ qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
-          - bundle install --deployment --path vendor/bundle
-          - sem-service start postgres 11
-          - psql -U postgres -h localhost -c "CREATE USER compras WITH PASSWORD 'compras';"
-          - psql -U postgres -h localhost -c "ALTER USER compras WITH SUPERUSER;"
-          - cp config/database.sample.yml config/database.yml
-          - 'bundle exec rake db:create'
-          - 'bundle exec rake db:migrate'
-          - cache store
-  - name: test feature priotiry 2
-    dependencies:
-      - test feature priority 1
-    task:
-      jobs:
-        - name: spec/features
-          commands:
-            - 'bundle exec rspec spec/features/[n-z]* --seed 46119'
+            - bundle exec rspec spec/integration --format progress
       env_vars:
         - name: RAILS_ENV
           value: 'true'
