@@ -47,6 +47,11 @@ class SupplyRequest < Compras::Model
   end
 
   before_create :set_status_sent
+  before_save :set_creditor
+
+  def set_creditor
+    self.contract.nil? ? self.creditor = nil:self.creditor = self.contract.creditor
+  end
 
   def items_quantity_permitted
     message = calc_items_quantity(self.licitation_process, self.purchase_solicitation)
