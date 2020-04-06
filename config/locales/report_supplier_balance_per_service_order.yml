@@ -18,3 +18,4 @@ pt-BR:
         current_balance: "Saldo Atual"
         total_licitationed: "Total Licitado"
         total_supplied: "Total Fornecido"
+        message_return_without_data: "Não existe nenhum dado para estes filtros !"
