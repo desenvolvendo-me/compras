@@ -16,6 +16,16 @@
 
 <br>
 
+<% if @contracts.size == 0 %>
+<div style="text-align: center">
+  <span>
+    <p>
+      <b> <%= (I18n.t 'view.attributes.report_supplier_balance_per_service_orders.message_return_without_data').mb_chars.upcase %> </b>
+    </p>
+  </span>
+</div>
+<% end %>
+
 <% @contracts.each do |contract| %>
 
   <div style="text-align: justify">
