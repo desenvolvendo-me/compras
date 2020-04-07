@@ -37,8 +37,8 @@ namespace :structure do
       unless search_path.blank?
         search_path = search_path.split(',').map { |search_path_part| "--schema=#{Shellwords.escape(search_path_part.strip)}" }.join(' ')
       end
-      `pg_dump -i -s -x -O -f #{Shellwords.escape(filename)} #{search_path} #{Shellwords.escape(config['database'])}`
-      raise 'Error dumping database' if $CHILD_STATUS.exitstatus == 1
+      `pg_dump -s -x -O -f #{Shellwords.escape(filename)} #{search_path} #{Shellwords.escape(config['database'])}`
+      raise 'Error dumping database OW NO' if $CHILD_STATUS.exitstatus == 1
 
       File.open(filename, 'a') { |f| f << "SET search_path TO #{ActiveRecord::Base.connection.schema_search_path};\n\n" }
     when /sqlite/
