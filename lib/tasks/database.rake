@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+Rake::Task['structure:dump'].clear
 namespace :structure do
   desc 'Dump the database structure to db/structure.sql. Specify another file with DB_STRUCTURE=db/my_structure.sql'
   task dump: %i[environment load_config] do
