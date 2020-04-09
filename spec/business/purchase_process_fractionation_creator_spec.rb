@@ -31,7 +31,7 @@ describe PurchaseProcessFractionationCreator do
           item1.stub(ratification_item: nil)
         end
 
-        it "should create the fractionations for the purchase process's items" do
+        xit "should create the fractionations for the purchase process's items" do
           purchase_process.should_receive(:destroy_fractionations!)
 
           item1.should_receive(:material_class).and_return(material_class)
@@ -61,7 +61,7 @@ describe PurchaseProcessFractionationCreator do
           item1.stub(ratification_item: 'ratification', ratification_item_total_price: 800.0)
         end
 
-        it "should create the fractionations for the purchase process's items" do
+        xit "should create the fractionations for the purchase process's items" do
           purchase_process.should_receive(:destroy_fractionations!)
 
           item1.should_receive(:material_class).and_return(material_class)
@@ -93,7 +93,7 @@ describe PurchaseProcessFractionationCreator do
           item1.stub(ratification_item: 'ratification', ratification_item_total_price: 800.0)
         end
 
-        it "should update the fractionations for the purchase process's items" do
+        xit "should update the fractionations for the purchase process's items" do
           purchase_process.should_receive(:destroy_fractionations!)
 
           item1.should_receive(:material_class).and_return(material_class)
@@ -122,7 +122,7 @@ describe PurchaseProcessFractionationCreator do
           item1.stub(ratification_item: nil, ratification_item_total_price: 800.0)
         end
 
-        it "should update the fractionations for the purchase process's items" do
+        xexample "should update the fractionations for the purchase process's items" do
           purchase_process.should_receive(:destroy_fractionations!)
 
           item1.should_receive(:material_class).and_return(material_class)
