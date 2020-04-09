@@ -11,7 +11,7 @@ describe Cnae do
 
   it { should belong_to :risk_degree }
   it { should have_many(:creditors) }
-  # it { should have_many(:creditors_with_main_cnae) }
+  xit { should have_many(:creditors_with_main_cnae) }
 
   it { should validate_presence_of :name }
   it { should validate_presence_of :code }

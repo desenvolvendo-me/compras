@@ -1,6 +1,6 @@
 require 'model_helper'
 require 'app/models/precatory'
-require 'app/models/creditor'
+# require 'app/models/creditor'
 
 describe Precatory do
   it { should belong_to :creditor }
