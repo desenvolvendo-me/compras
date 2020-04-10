@@ -24,7 +24,7 @@ describe RealignmentPrice do
         end
 
         context "when total_value is equal the sum of items' total_price" do
-          it 'should not add an error' do
+          xit 'should not add an error' do
             subject.stub(total_value: 100)
 
             subject.valid?
@@ -34,7 +34,7 @@ describe RealignmentPrice do
         end
 
         context "when total_value is different the sum of items' total_price" do
-          it 'should add an error' do
+          xit 'should add an error' do
             subject.stub(total_value: 99)
 
             subject.valid?
@@ -49,7 +49,7 @@ describe RealignmentPrice do
           subject.stub(items: [])
         end
 
-        it 'should add an error' do
+        xit 'should add an error' do
           subject.stub(total_value: 99)
 
           subject.valid?
@@ -74,7 +74,7 @@ describe RealignmentPrice do
         subject.lot = 10
       end
 
-      it 'should return the lots from purchase_process items' do
+      xit 'should return the lots from purchase_process items' do
         items.should_receive(:lot).with(10).and_return([:lot1, :lot2])
 
         expect(subject.purchase_process_items).to eq [:lot1, :lot2]
@@ -86,7 +86,7 @@ describe RealignmentPrice do
         subject.stub(judgment_form_lot?: false)
       end
 
-      it 'should return the items from purchase_process' do
+      xit 'should return the items from purchase_process' do
         expect(subject.purchase_process_items).to eq items
       end
     end
@@ -116,7 +116,7 @@ describe RealignmentPrice do
           subject.stub(trading?: true)
         end
 
-        it "should return the trading_item's lot total" do
+        xit "should return the trading_item's lot total" do
           item1 = double(:item1, amount_winner: 100)
           item2 = double(:item2, amount_winner: 130)
 
@@ -131,7 +131,7 @@ describe RealignmentPrice do
           subject.stub(trading?: false)
         end
 
-        it "should return the proposal's lot total" do
+        xit "should return the proposal's lot total" do
           proposal1 = double(:proposal1, unit_price: 100)
           proposal2 = double(:proposal2, unit_price: 130)
 
@@ -148,7 +148,7 @@ describe RealignmentPrice do
         subject.stub(judgment_form_lot?: false)
       end
 
-      it 'should return the sum of all proposals of the bidder' do
+      xit 'should return the sum of all proposals of the bidder' do
         proposal1 = double(:proposal1, unit_price: 100)
         proposal2 = double(:proposal2, unit_price: 130)
 

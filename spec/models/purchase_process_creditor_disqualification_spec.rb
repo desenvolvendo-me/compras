@@ -32,7 +32,7 @@ describe PurchaseProcessCreditorDisqualification do
     context 'when find a record' do
       before { object.stub(:new_record?).and_return false }
 
-      it 'returns the record' do
+      xit 'returns the record' do
         result = subject.class.find_or_initialize(licitation_process, creditor)
         expect(result.new_record?).to be_false
       end
@@ -41,7 +41,7 @@ describe PurchaseProcessCreditorDisqualification do
     context "when there's not a record" do
       before { object.stub(:new_record?).and_return true }
 
-      it 'builds a new one' do
+      xit 'builds a new one' do
         result = subject.class.find_or_initialize(licitation_process, creditor)
         expect(result.new_record?).to be_true
       end
@@ -66,7 +66,7 @@ describe PurchaseProcessCreditorDisqualification do
         proposal.stub(:all_items_disqualified?).and_return true
       end
 
-      it 'returns :fully' do
+      xit 'returns :fully' do
         expect(subject.class.disqualification_status(1, 1)).to eql :fully
       end
     end
@@ -78,7 +78,7 @@ describe PurchaseProcessCreditorDisqualification do
         proposal.stub(:all_items_disqualified?).and_return false
       end
 
-      it 'returns :partially' do
+      xit 'returns :partially' do
         expect(subject.class.disqualification_status(1, 1)).to eql :partially
       end
     end
@@ -93,7 +93,7 @@ describe PurchaseProcessCreditorDisqualification do
       subject.stub(:creditor).and_return creditor
     end
 
-    it 'returns the items from the licitation process and creditor' do
+    xit 'returns the items from the licitation process and creditor' do
       licitation_process.should_receive(:proposals_of_creditor).with(creditor)
       subject.proposal_items
     end
@@ -108,7 +108,7 @@ describe PurchaseProcessCreditorDisqualification do
     context 'when can disqualify an item' do
       before { subject.stub(:disqualify_item?).and_return true }
 
-      it 'disqualifies an item when' do
+      xit 'disqualifies an item when' do
         item.should_receive(:qualify!)
         item.should_receive(:disqualify!)
         PurchaseProcessCreditorProposalRanking.should_receive(:rank!).with item
@@ -120,7 +120,7 @@ describe PurchaseProcessCreditorDisqualification do
     context "when an item can't be disqualified" do
       before { subject.stub(:disqualify_item?).and_return false }
 
-      it 'only qualifies an item' do
+      xit 'only qualifies an item' do
         item.should_receive(:qualify!)
         item.should_not_receive(:disqualify!)
         PurchaseProcessCreditorProposalRanking.should_receive(:rank!).with item
@@ -134,12 +134,12 @@ describe PurchaseProcessCreditorDisqualification do
     let(:item)     { double(:item, id: '1') }
     let(:item_ids) { double(:item_ids) }
 
-    it 'returns true when kind is total' do
+    xit 'returns true when kind is total' do
       subject.stub(:kind).and_return 'total'
       expect(subject.send(:disqualify_item?, item)).to be_true
     end
 
-    it 'returns true if the current item is selected' do
+    xit 'returns true if the current item is selected' do
       subject.stub(:kind).and_return nil
       subject.stub(:proposal_item_ids).and_return item_ids
       item_ids.should_receive(:include?).with("1").and_return true
@@ -156,7 +156,7 @@ describe PurchaseProcessCreditorDisqualification do
       subject.stub(:kind).and_return :total
     end
 
-    it 'adds error to kind unless it is total' do
+    xit 'adds error to kind unless it is total' do
       error.should_receive(:add).with(:kind, :should_be_total)
       subject.send :kind_should_be_total
     end

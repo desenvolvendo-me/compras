@@ -65,13 +65,13 @@ describe PriceCollection do
 
   end
 
-  it "should return code_and_year as to_s method" do
+  xit "should return code_and_year as to_s method" do
     subject.stub(:code => 5, :year => 2012)
 
     expect(subject.to_s).to eq '5/2012'
   end
 
-  it 'should return the winner proposal' do
+  xit 'should return the winner proposal' do
     proposal_1 = double('proposal_1', :total_price => 500)
     proposal_2 = double('proposal_2', :total_price => 300)
 
@@ -80,7 +80,7 @@ describe PriceCollection do
     expect(subject.winner_proposal).to eq proposal_2
   end
 
-  it 'should return the full period' do
+  xit 'should return the full period' do
     subject.period = 10
     subject.stub(:period_unit_humanize).and_return('dias')
 
@@ -103,7 +103,7 @@ describe PriceCollection do
       expect(subject.errors[:base]).to include "deve ter no mínimo três fornecedores"
     end
 
-    it "when returns 4 creditors" do
+    xit "when returns 4 creditors" do
       subject.stub(:proposals_count).and_return(4)
       subject.valid?
 

@@ -62,7 +62,7 @@ describe Material do
         subject.stub(:material_class => material_class)
       end
 
-      it 'should returns the material_class to_s' do
+      xit 'should returns the material_class to_s' do
         expect(subject.autocomplete_material_class).to eq '123 - Software'
       end
     end
@@ -85,7 +85,7 @@ describe Material do
           subject.stub(control_amount?: true)
         end
 
-        it 'should be false' do
+        xit 'should be false' do
           expect(subject.service_without_quantity?).to be_false
         end
       end
@@ -95,7 +95,7 @@ describe Material do
           subject.stub(control_amount?: false)
         end
 
-        it 'should be true' do
+        xit 'should be true' do
           expect(subject.service_without_quantity?).to be_true
         end
       end

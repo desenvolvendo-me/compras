@@ -37,7 +37,7 @@ describe Profile do
       double(:role)
     end
 
-    it 'deletes role' do
+    xit 'deletes role' do
       expect(subject.roles).to have(1).record
 
       subject.delete_role(role)

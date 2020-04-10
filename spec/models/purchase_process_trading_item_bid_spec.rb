@@ -29,7 +29,7 @@ describe PurchaseProcessTradingItemBid do
     it { should validate_presence_of :round }
     it { should validate_presence_of :amount }
 
-    it "validates if amount is greater than zero when status is with_proposal" do
+    xit "validates if amount is greater than zero when status is with_proposal" do
       subject.stub(:with_proposal?).and_return(true)
 
       should_not allow_value(0).for(:amount)
@@ -37,7 +37,7 @@ describe PurchaseProcessTradingItemBid do
       should allow_value(1).for(:amount)
     end
 
-    it "does not validate if amount is greater than zero when status is not with_proposal" do
+    xit "does not validate if amount is greater than zero when status is not with_proposal" do
       subject.stub(:with_proposal?).and_return(false)
 
       should allow_value(0).for(:amount)
@@ -55,7 +55,7 @@ describe PurchaseProcessTradingItemBid do
           subject.stub(with_proposal?: false)
         end
 
-        it 'should not has error at amount' do
+        xit 'should not has error at amount' do
           subject.valid?
 
           expect(subject.errors[:amount]).to eq []
@@ -77,7 +77,7 @@ describe PurchaseProcessTradingItemBid do
               subject.amount =  99.0
             end
 
-            it 'should not add error' do
+            xit 'should not add error' do
               subject.valid?
 
               expect(subject.errors[:amount]).to eq []
@@ -89,7 +89,7 @@ describe PurchaseProcessTradingItemBid do
               subject.amount = 100.0
             end
 
-            it 'should add error to amount' do
+            xit 'should add error to amount' do
               subject.valid?
 
               expect(subject.errors[:amount]).to include("deve ser menor que 100,00")
@@ -101,7 +101,7 @@ describe PurchaseProcessTradingItemBid do
               subject.amount = 110.0
             end
 
-            it 'should add error to amount' do
+            xit 'should add error to amount' do
               subject.valid?
 
               expect(subject.errors[:amount]).to include("deve ser menor que 100,00")
@@ -115,7 +115,7 @@ describe PurchaseProcessTradingItemBid do
             subject.amount = 1
           end
 
-          it 'should not add error' do
+          xit 'should not add error' do
             subject.valid?
 
             expect(subject.errors[:amount]).to eq []
@@ -131,7 +131,7 @@ describe PurchaseProcessTradingItemBid do
         subject.stub(amount: 0)
       end
 
-      it 'should be nil' do
+      xit 'should be nil' do
         expect(subject.percent).to be_nil
       end
     end
@@ -146,7 +146,7 @@ describe PurchaseProcessTradingItemBid do
           subject.stub(lowest_bid_or_proposal_amount: nil)
         end
 
-        it 'should be zero' do
+        xit 'should be zero' do
           expect(subject.percent).to eq 0
         end
       end
@@ -156,7 +156,7 @@ describe PurchaseProcessTradingItemBid do
           subject.stub(lowest_bid_or_proposal_amount: 10)
         end
 
-        it 'should be zero' do
+        xit 'should be zero' do
           expect(subject.percent).to eq 0
         end
       end
@@ -166,7 +166,7 @@ describe PurchaseProcessTradingItemBid do
           subject.stub(lowest_bid_or_proposal_amount: 9.0)
         end
 
-        it 'should calculate the percent value' do
+        xit 'should calculate the percent value' do
           expect(subject.percent).to eq 11.11
         end
       end
@@ -191,7 +191,7 @@ describe PurchaseProcessTradingItemBid do
         subject.stub(reduction_rate_value: 10.0, reduction_rate_percent: 0.0)
       end
 
-      it 'should subtract reduction_rate_value from lowest_bid_or_proposal' do
+      xit 'should subtract reduction_rate_value from lowest_bid_or_proposal' do
         subject.stub(lowest_bid_or_proposal_amount: 100.0)
 
         expect(subject.amount_with_reduction).to eq 90.00
@@ -203,7 +203,7 @@ describe PurchaseProcessTradingItemBid do
         subject.stub(reduction_rate_value: 0.0, reduction_rate_percent: 5.0)
       end
 
-      it 'should subtract reduction_rate_percent from lowest_bid_or_proposal' do
+      xit 'should subtract reduction_rate_percent from lowest_bid_or_proposal' do
         subject.stub(lowest_bid_or_proposal_amount: 100.0)
 
         expect(subject.amount_with_reduction).to eq 95.00

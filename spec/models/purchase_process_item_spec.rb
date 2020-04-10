@@ -40,7 +40,7 @@ describe PurchaseProcessItem do
       expect(subject.errors[:creditor]).to_not be_empty
     end
 
-    it 'does not validate presence when not direct purchase' do
+    xit 'does not validate presence when not direct purchase' do
       subject.stub(:direct_purchase?).and_return false
       subject.valid?
       expect(subject.errors[:creditor]).to be_empty
@@ -52,7 +52,7 @@ describe PurchaseProcessItem do
       double(:material)
     end
 
-    it 'should return material.to_s as to_s' do
+    xit 'should return material.to_s as to_s' do
       subject.stub(:material).and_return(material)
 
       material.stub(:to_s).and_return('Cadeira')
@@ -70,12 +70,12 @@ describe PurchaseProcessItem do
     expect(subject.estimated_total_price).to eq 50.5
   end
 
-  it "should without_lot? be true when has not lot" do
+  xit "should without_lot? be true when has not lot" do
     described_class.stub(:without_lot?).and_return(true)
     described_class.should be_without_lot
   end
 
-  it "should without_lot? be false when has not lot" do
+  xit "should without_lot? be false when has not lot" do
     described_class.stub(:without_lot?).and_return(false)
     described_class.should_not be_without_lot
   end
@@ -98,7 +98,7 @@ describe PurchaseProcessItem do
       expect(subject.total_value_by_bidder(bidder)).to eq 40
     end
 
-    it 'should return zero when unit price equals nil' do
+    xit 'should return zero when unit price equals nil' do
       proposal.stub(unit_price: nil)
       subject.quantity = 3
 
@@ -107,7 +107,7 @@ describe PurchaseProcessItem do
   end
 
   describe "#winning_bid" do
-    it 'returns the classification that has won the bid' do
+    xit 'returns the classification that has won the bid' do
       classification_1 = double(:classification, situation: SituationOfProposal::LOST)
       classification_2 = double(:classification, situation: SituationOfProposal::WON)
 
