@@ -1,8 +1,8 @@
 require 'model_helper'
 require 'lib/signable'
 require 'app/models/employee'
-require 'app/models/purchase_solicitation_budget_allocation'
-require 'app/models/purchase_solicitation'
+# require 'app/models/purchase_solicitation_budget_allocation'
+# require 'app/models/purchase_solicitation'
 require 'app/models/purchase_solicitation_liberation'
 require 'app/models/licitation_process'
 require 'app/models/price_collection'
@@ -14,8 +14,8 @@ describe Employee do
   it { should belong_to :individual }
   it { should belong_to :position }
 
-  it { should have_many(:purchase_solicitations_with_liberator).dependent(:restrict) }
-  it { should have_many(:purchase_solicitations_with_responsible).dependent(:restrict) }
+  # it { should have_many(:purchase_solicitations_with_liberator).dependent(:restrict) }
+  # it { should have_many(:purchase_solicitations_with_responsible).dependent(:restrict) }
   it { should have_many(:purchase_solicitation_liberations).dependent(:restrict) }
   it { should have_many(:licitation_processes_with_contact).dependent(:restrict) }
   it { should have_many(:price_collections).dependent(:restrict) }

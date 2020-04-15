@@ -1,6 +1,6 @@
 require 'model_helper'
 require 'app/models/creditor_material'
-require 'app/models/creditor'
+# require 'app/models/creditor'
 require 'app/models/expense_nature'
 require 'app/models/material'
 
