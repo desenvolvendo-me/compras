@@ -1,0 +1,21 @@
+pt-BR:
+  view:
+    controller:
+      report_supplier_balance_per_service_orders:
+        one: "Relatório de Saldo Fornecedor por Ordem de Serviço"
+        other: "Relatório de Saldos Fornecedor por Ordem de Serviço"
+
+    attributes:
+      report_supplier_balance_per_service_orders:
+        creditor: "Fornecedor"
+        licitation_process: "Processo"
+        supply_order: "Ordem de Fornecimento"
+        contract: "Contrato"
+        end_date: "Prazo de Validade"
+        material: "Material"
+        quantity_licitationed: "Quantidade Licitada"
+        quantity_supplied: "Quantidade Fornecidade"
+        current_balance: "Saldo Atual"
+        total_licitationed: "Total Licitado"
+        total_supplied: "Total Fornecido"
+        message_return_without_data: "Não existe nenhum dado para estes filtros !"

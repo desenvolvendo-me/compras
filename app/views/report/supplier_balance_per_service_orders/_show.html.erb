@@ -1,0 +1,104 @@
+<div>
+  <table class="records">
+    <thead>
+    <tr style="text-align: center;">
+      <td><%= (I18n.t 'view.controller.report_supplier_balance_per_service_orders.one').mb_chars.upcase %></td>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+</div>
+
+<div style="text-align: justify">
+
+</div>
+
+<br>
+
+<% if @contracts.size == 0 %>
+<div style="text-align: center">
+  <span>
+    <p>
+      <b> <%= (I18n.t 'view.attributes.report_supplier_balance_per_service_orders.message_return_without_data').mb_chars.upcase %> </b>
+    </p>
+  </span>
+</div>
+<% end %>
+
+<% @contracts.each do |contract| %>
+
+  <div style="text-align: justify">
+  <span>
+    <p>
+      <b> <%= (I18n.t 'view.attributes.report_supplier_balance_per_service_orders.creditor').mb_chars.upcase %> </b> <%= contract.creditors.first %>
+    </p>
+  </span>
+  </div>
+  <% total_c_l = 0 %>
+  <% total_c_f = 0 %>
+  <% unless @supply_order.nil? %>
+    <% @supply_orders =  SupplyOrder.where(id:@supply_order,contract_id:contract.id) %>
+  <% else %>
+      <% @supply_orders = contract.supply_orders %>
+  <% end %>
+
+  <% @supply_orders.each do |supply_order| %>
+    <div style="text-align: justify">
+      <span>
+        <p>
+          <b> <%= (I18n.t 'view.attributes.report_supplier_balance_per_service_orders.licitation_process').mb_chars.upcase %> </b> <%= contract.licitation_process.to_s %>
+          <b> <%= (I18n.t 'view.attributes.report_supplier_balance_per_service_orders.supply_order').mb_chars.upcase %> </b> <%= supply_order %>
+          <b> <%= (I18n.t 'view.attributes.report_supplier_balance_per_service_orders.contract').mb_chars.upcase %> </b> <%= contract.to_s %>
+          <b> <%= (I18n.t 'view.attributes.report_supplier_balance_per_service_orders.end_date').mb_chars.upcase %> </b> <%= l(contract.end_date, format: :long) %>
+        </p>
+      </span>
+    </div>
+    <p>
+      <div>
+        <table class="records">
+          <thead>
+          <tr>
+            <th width="50%"><%= (I18n.t 'view.attributes.report_supplier_balance_per_service_orders.material').mb_chars.upcase %></th>
+            <th width="20%"><%= (I18n.t 'view.attributes.report_supplier_balance_per_service_orders.quantity_licitationed').mb_chars.upcase %></th>
+            <th width="20%"><%= (I18n.t 'view.attributes.report_supplier_balance_per_service_orders.quantity_supplied').mb_chars.upcase %></th>
+            <th width="10%"><%= (I18n.t 'view.attributes.report_supplier_balance_per_service_orders.current_balance').mb_chars.upcase %></th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <% total_i_l = 0 %>
+          <% total_i_f = 0 %>
+          <% supply_order.items.each do |item| %>
+            <% total_f = Report::BalanceHelper.get_quantity_item_supply_order_by_params(contract, {material_id:item.material.id,supply_order_id:supply_order.id}) %>
+            <% balance = Report::BalanceHelper.get_balance_by_prams(contract, {material_id:item.material.id,supply_order_id:supply_order.id} ) %>
+            <% total_i_l += total_f %>
+            <% total_i_f += item.quantity %>
+            <% total_c_l += total_f%>
+            <% total_c_f += item.quantity %>
+            <tr>
+              <td><%= item.material %></td>
+              <td><%= total_f %></td>
+              <td><%= item.quantity %></td>
+              <td><%= balance %></td>
+            </tr>
+          <% end %>
+          </tbody>
+          <td colspan="1"></td>
+          <td><h2><b><%= (I18n.t 'view.attributes.report_supplier_balance_per_service_orders.total_licitationed') %>: <%= total_i_l %></b></h2></td>
+          <td><h2><b><%= (I18n.t 'view.attributes.report_supplier_balance_per_service_orders.total_supplied') %>: <%= total_i_f %></b></h2></td>
+          <td colspan="1"></td>
+        </table>
+      </div>
+    </p>
+  <% end %>
+    <span>
+      <p>
+        <b> <%= (I18n.t 'view.attributes.report_supplier_balance_per_service_orders.total_licitationed').mb_chars.upcase %>: </b> <%= total_c_l %>
+        <b> <%= (I18n.t 'view.attributes.report_supplier_balance_per_service_orders.total_supplied').mb_chars.upcase %>: </b> <%= total_c_f %>
+      </p>
+    </span>
+    <br>
+    <br>
+    <br>
+<% end %>

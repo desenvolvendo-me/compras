@@ -35,6 +35,19 @@ class SupplyOrder < Compras::Model
 
   after_create :set_status_defaut
   before_update :change_status_in_service
+  before_save :set_creditor
+
+  scope :by_purchasing_unit, lambda {|current_user|
+    use_pur_uni = UserPurchasingUnit.where(user_id:current_user).pluck(:purchasing_unit_id)
+    departments = Department.where("compras_departments.purchasing_unit_id in (?)",use_pur_uni).pluck(:id)
+    pur_sol = PurchaseSolicitation.where("department_id in (?)",departments).pluck(:id)
+
+    where { purchase_solicitation_id.in pur_sol }
+  }
+
+  def set_creditor
+    self.contract.nil? ? self.creditor=nil:self.creditor = self.contract.creditor
+  end
 
   def items_quantity_permitted
     message = calc_items_quantity(self.licitation_process, self.purchase_solicitation)

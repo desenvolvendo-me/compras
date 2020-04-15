@@ -1,0 +1,63 @@
+<div class="yui3-g">
+  <div class="yui3-u-1-3">
+    <%= f.input :creditor, as: :modal, data_url: modal_creditors_url,
+                hidden_field: :creditor_id, :include_blank => true %>
+  </div>
+
+  <div class="yui3-u-1-3">
+    <%= f.input :licitation_process, as: :modal, data_url: modal_licitation_processes_url,
+                hidden_field: :licitation_process_id, :include_blank => true %>
+  </div>
+
+  <div class="yui3-u-1-3">
+    <%= f.input :supply_order, as: :modal, data_url: modal_supply_orders_url,
+                hidden_field: :supply_order_id, :include_blank => true %>
+  </div>
+
+</div>
+
+<script>
+
+    function setModalUrlToCreditor() {
+        var selector_modal = '#supplier_balance_per_service_order_report_creditor'
+        var controller = "creditors"
+        params = {
+            by_purchasing_unit: $('#current_user_id').val()
+        }
+        setModalUrl(selector_modal,controller,params);
+    }
+
+    function setModalUrlToLicitationProcess() {
+        var selector_modal = '#supplier_balance_per_service_order_report_licitation_process'
+        var controller = "licitation_processes"
+        params = {
+            by_creditor: $('#supplier_balance_per_service_order_report_creditor_id').val()
+        };
+        setModalUrl(selector_modal,controller,params);
+    }
+
+    function setModalUrlToSupplyOrder() {
+        var selector_modal = '#supplier_balance_per_service_order_report_supply_order'
+        var controller = "supply_orders"
+        params = {
+            by_purchasing_unit: $('#current_user_id').val()
+        };
+        setModalUrl(selector_modal,controller,params);
+    }
+
+    $(function () {
+        //= require modal_filter
+
+        setModalUrlToCreditor();
+        setModalUrlToSupplyOrder();
+
+        $('form.supplier_balance_per_service_order_report').on('change', '#supplier_balance_per_service_order_report_creditor_id', function () {
+            setModalUrlToLicitationProcess();
+        });
+
+        $('#new_supplier_balance_per_service_order_report')[0].reset();
+
+    });
+
+</script>
+
