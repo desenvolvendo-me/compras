@@ -14,12 +14,17 @@ class SupplyRequestReport < Report
     Prefecture.last.name
   end
 
-  def department
-    supply_request.purchase_solicitation.department
+  def requesting_department
+    supply_request.department.to_s.mb_chars.upcase unless supply_request.department.nil?
   end
 
-  def department_ṕerson
-    User.find(self.current_user_id.to_i).name
+  def department
+    supply_request.purchase_solicitation.department unless supply_request.purchase_solicitation.nil?
+  end
+
+  def department_person
+    sp = SupplyRequest.find(self.supply_request_id.to_i)
+    sp.user.to_s.mb_chars.upcase unless sp.user.nil?
   end
 
   def creditor
