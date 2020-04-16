@@ -20,6 +20,13 @@ class Department < Compras::Model
 
   scope :limit, lambda {|q| limit(q)}
 
+  scope :by_user, ->(user_id) do
+    use_pur_uni = UserPurchasingUnit.where(user_id:user_id).pluck(:purchasing_unit_id)
+    departments = Department.where("compras_departments.purchasing_unit_id in (?)",use_pur_uni).pluck(:id)
+
+    where { self.id.in departments }
+  end
+
   scope :by_purchasing_unit_for_licitation_process, ->(licitation_process_id) do
     purchasing_unit_id = LicitationProcess.find(licitation_process_id).purchasing_unit.id
     where {|query| query.purchasing_unit_id.eq(purchasing_unit_id)}
