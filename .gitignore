@@ -24,7 +24,7 @@ Gemfile.local.lock
 coverage
 dump.rdb
 .idea
-
+vendor/bundle
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
