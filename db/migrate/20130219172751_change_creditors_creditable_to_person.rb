@@ -1,6 +1,6 @@
 class ChangeCreditorsCreditableToPerson < ActiveRecord::Migration
   def change
-    remove_index :compras_creditors, :column => [:creditable_id, :creditable_type]
+    # remove_index :compras_creditors, :column => [:creditable_id, :creditable_type]
 
     execute <<-SQL
     update
