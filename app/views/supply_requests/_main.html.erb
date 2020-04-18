@@ -24,8 +24,7 @@
                 input_html: {value: f.object.decorator.modality_or_type_of_removal} %>
   </div>
   <div class="yui3-u-1-4">
-    <%= f.input :user, :disabled => true %>
-    <input hidden name="supply_request[user_id]"  value="<%=current_user.id %>" hidden >
+    <%= f.input :user, :disabled => f.object.id.nil? %>
   </div>
 </div>
 
@@ -70,6 +69,8 @@
 
 </div>
 
+<%= f.input :department %>
+
 <div class="yui3-g">
   <div class="yui3-u-1-7">
     <%= f.input :supply_request_file %>
@@ -83,5 +84,10 @@
 <%= f.input :justification %>
 
 <script>
+  $(function () {
+    $("#supply_request_user").prop('readonly', <%= !f.object.id.nil? %>);
+    $("#supply_request_user_id").prop('readonly', <%= !f.object.id.nil? %>);
+  });
+  $("#supply_request_authorization_date").prop('readonly', false);
 
 </script>

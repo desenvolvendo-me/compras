@@ -5,12 +5,14 @@ class SupplyRequest < Compras::Model
   attr_accessible :licitation_process_id, :creditor_id, :authorization_date,
                   :items_attributes, :year, :purchase_solicitation_id,
                   :updatabled, :contract_id, :supply_request_status,
-                  :justification, :supply_request_file,:user_id
+                  :justification, :supply_request_file,:user_id,
+                  :department_id
 
   attr_modal :number, :creditor_id,:authorization_date, :licitation_process_id, :user, :purchase_solicitation_id
 
   mount_uploader :supply_request_file, UnicoUploader
 
+  belongs_to :department
   belongs_to :contract
   belongs_to :purchase_solicitation
   belongs_to :licitation_process

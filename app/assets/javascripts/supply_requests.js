@@ -1,6 +1,14 @@
 //= require modal_filter
 //= require input
 
+function setModalUrlToDepartment() {
+    var selector_modal = '#supply_request_department';
+    params = {
+        by_user: $('#current_user_id').val()
+    };
+    setModalUrl(selector_modal,'departments',params);
+}
+
 function setModalUrlToContract() {
     var selector_modal = '#supply_request_contract';
     params = {
@@ -121,7 +129,7 @@ function setMaterialTotalAndBalance() {
 }
 
 $(document).ready(function () {
-
+    setModalUrlToDepartment();
     setModalUrlToContract();
     setModalUrlToCreditor();
     setPledgeSource();
