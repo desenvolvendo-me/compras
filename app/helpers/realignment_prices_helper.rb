@@ -11,7 +11,7 @@ module RealignmentPricesHelper
     PurchaseProcessTradingItem.
       purchase_process_id(purchase_process.id).
       creditor_winner_items(creditor.id).
-      sort(&:lot)
+      sort_by(&:lot)
   end
 
   def items_or_build(realignment)
