@@ -1,5 +1,6 @@
 class SupplyRequestItem < Compras::Model
-  attr_accessible :authorization_quantity, :authorization_value, :material_id, :pledge_item_id, :quantity, :supply_request_id
+  attr_accessible :authorization_quantity, :authorization_value, :material_id,
+                  :pledge_item_id, :quantity,:requested_quantity, :supply_request_id
   attr :balance
 
   belongs_to :supply_request
