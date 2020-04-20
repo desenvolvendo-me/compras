@@ -75,6 +75,7 @@ GEM
     activesupport (3.2.22.5)
       i18n (~> 0.6, >= 0.6.4)
       multi_json (~> 1.0)
+    ansi (1.5.0)
     arel (3.0.3)
     awesome_nested_set (2.1.6)
       activerecord (>= 3.0.0)
@@ -171,6 +172,12 @@ GEM
       activerecord (>= 3.0)
     method_source (0.8.2)
     mime-types (1.25.1)
+    minitest (5.14.0)
+    minitest-reporters (1.4.2)
+      ansi
+      builder
+      minitest (>= 5.0)
+      ruby-progressbar
     multi_json (1.14.1)
     multipart-post (1.2.0)
     net-scp (1.2.1)
@@ -196,6 +203,7 @@ GEM
       responders
       rspec (~> 2.6)
       rspec-core (~> 2.6)
+    power_assert (1.1.7)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
@@ -253,6 +261,7 @@ GEM
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
     ruby-hmac (0.4.0)
+    ruby-progressbar (1.10.1)
     rubyzip (0.9.9)
     selenium-webdriver (2.33.0)
       childprocess (>= 0.2.5)
@@ -292,6 +301,8 @@ GEM
       actionpack (~> 3.0)
       activemodel (~> 3.0)
       railties (~> 3.0)
+    test-unit (3.3.5)
+      power_assert
     thor (1.0.1)
     tilt (1.4.1)
     timecop (0.6.2.2)
@@ -374,6 +385,8 @@ DEPENDENCIES
   machinist (= 2.0)
   machinist-caching (= 0.0.1)
   mask_validator (= 0.2.1)
+  minitest
+  minitest-reporters
   newrelic_rpm
   pg
   postgres-copy (= 0.5.5)
@@ -392,6 +405,7 @@ DEPENDENCIES
   simplecov
   squeel
   strong_parameters (= 0.2.1)
+  test-unit
   timecop
   typecaster (= 0.0.2)!
   uglifier

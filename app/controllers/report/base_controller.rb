@@ -45,6 +45,7 @@ class Report::BaseController < ApplicationController
   end
 
   def authorize_resource!
+    logger.debug "PROFILE: controller_name report_#{controller_name}"
     authorize! action_name, "report_#{controller_name}"
   end
 end
