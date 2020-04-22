@@ -17,13 +17,25 @@ class Ability
       can [:read, :update], :price_collection_proposals
     else
       user.roles.each do |role|
-        can role.permission.to_sym, role.controller.to_sym
+        controller_permission(role)
         authorize_dependencies(role.controller.to_sym)
       end
     end
   end
 
   private
+
+  def controller_permission(role)
+    logger = Rails.logger
+    logger.debug "PROFILE: role.controller #{role.controller}"
+    logger.debug "PROFILE: role.permission #{role.permission}"
+
+    if role.controller.include?("report_") && role.permission.eql?("read")
+      can :modify, role.controller.to_sym
+    else
+      can role.permission.to_sym, role.controller.to_sym
+    end
+  end
 
   def authorize_dependencies(controller)
     dependencies(controller).each do |dependency|

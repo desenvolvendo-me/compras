@@ -32,10 +32,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def authorize_resource!
-    authorize! action_name, controller_name
-  end
-
   def handle_customer(&block)
     customer = current_customer
     customer.using_connection(&block)

@@ -44,7 +44,8 @@ class Report::BaseController < ApplicationController
     report_instance.disable_pagination
   end
 
-  def authorized_resource!
-    authorize! action_name, "report#{controller_name}"
+  def authorize_resource!
+    logger.debug "PROFILE: controller_name report_#{controller_name}"
+    authorize! action_name, "report_#{controller_name}"
   end
 end
