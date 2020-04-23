@@ -258,4 +258,11 @@ $(document).ready(function () {
         $("#supply_request_quantity").attr('disabled', false);
         $("#supply_request_requested_quantity").attr('disabled', true);
     });
+
+    $(".add-nested-record").click(function() {
+        klass = $('#supply_request_quantity').attr('class').replace(" edit","");
+        $('#supply_request_quantity').attr('class',klass);
+        $("#supply_request_quantity").attr('disabled', true);
+        $("#supply_request_requested_quantity").attr('disabled', false);
+    });
 });
