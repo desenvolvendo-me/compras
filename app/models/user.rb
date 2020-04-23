@@ -24,7 +24,7 @@ class User < Compras::Model
   delegate :updated_at, :to => :profile, :allow_nil => true, :prefix => true
 
   validates :login, :presence => true, :unless => lambda { |u| !u.persisted? && u.creditor? }
-  validates :authenticable, :presence => true, :unless => :administrator?
+  validates :authenticable_id, :presence => true, :unless => :administrator?
   validates :authenticable_id, :uniqueness => { :scope => :authenticable_type }, :allow_blank => true
   validates :profile, :presence => true, :unless => :administrator_or_creditor?
   validates :login, :uniqueness => true, :format => /\A[a-z0-9.]+\z/i, :allow_blank => true
