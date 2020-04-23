@@ -45,8 +45,8 @@
     <thead>
     <tr>
       <th><%= SupplyRequestItem.human_attribute_name :material %></th>
-      <th><%= SupplyRequestItem.human_attribute_name :quantity %></th>
       <th><%= SupplyRequestItem.human_attribute_name :requested_quantity %></th>
+      <th><%= SupplyRequestItem.human_attribute_name :quantity %></th>
       <th></th>
       <th></th>
     </tr>
@@ -57,8 +57,8 @@
                  id: p.object.id,
                  material: p.object.material,
                  material_id: p.object.material_id,
-                 quantity: p.object.quantity,
                  requested_quantity: p.object.requested_quantity,
+                 quantity: p.object.quantity,
                  f: p %>
     <% end %>
     </tbody>
@@ -70,8 +70,8 @@
                  id: '{{id}}',
                  material: '{{material}}',
                  material_id: '{{material_id}}',
-                 quantity: '{{quantity}}',
                  requested_quantity: '{{requested_quantity}}',
+                 quantity: '{{quantity}}',
                  f: p %>
     <% end %>
   <% end %>

@@ -1,7 +1,7 @@
 <tr class="record nested-record item-record" id="material-id-<%= material_id %>">
   <td><%= material %></td>
-  <td><%= quantity %></td>
   <td><%= requested_quantity %></td>
+  <td><%= quantity %></td>
   <td>
     <%= link_to 'Editar', '#', class: 'edit-nested-record' %>
   </td>
@@ -9,8 +9,8 @@
   <td>
     <%= f.input :material_id, as: :hidden, input_html: { value: material_id, class: 'material-id' } %>
     <%= f.input :material, as: :hidden, input_html: { value: material } %>
-    <%= f.input :quantity, as: :hidden, input_html: { value: quantity, class: 'quantity' } %>
     <%= f.input :requested_quantity, as: :hidden, input_html: { value: requested_quantity, class: 'requested_quantity' } %>
+    <%= f.input :quantity, as: :hidden, input_html: { value: quantity, class: 'quantity' } %>
     <%= f.input :id, as: :hidden, input_html: { value: id } %>
     <%= f.input :_destroy, as: :hidden, input_html: { class: 'destroy' } %>
 
