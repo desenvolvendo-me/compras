@@ -99,12 +99,12 @@ function setDepartment() {
 }
 
 function setMaterialTotalAndBalance() {
-    var licitation_process_id = $('#supply_request_licitation_process_id').val()
-    var material_id = $('#supply_request_material_id').val()
-    var purchase_solicitation_id = $('#supply_request_purchase_solicitation_id').val()
-    var contract_id = $('#supply_request_contract_id').val()
-    var supply_request_id = $(window.location.href.split("/")).get(-2)
-    var quantity = $('#supply_request_quantity').val()
+    var licitation_process_id = $('#supply_request_licitation_process_id').val();
+    var material_id = $('#supply_request_material_id').val();
+    var purchase_solicitation_id = $('#supply_request_purchase_solicitation_id').val();
+    var contract_id = $('#supply_request_contract_id').val();
+    var supply_request_id = $(window.location.href.split("/")).get(-2);
+    var quantity = $('#supply_request_quantity').val();
 
     if (licitation_process_id && purchase_solicitation_id && material_id && quantity) {
         $.ajax({
@@ -162,6 +162,14 @@ $(document).ready(function () {
     });
 
     $('form.supply_request').on('change', '#supply_request_quantity', function () {
+        setMaterialTotalAndBalance();
+    });
+
+    $('form.supply_request').on('change', '#supply_request_requested_quantity', function () {
+        if(!$('#supply_request_quantity').attr('class').includes("edit")){
+            quantity = $('#supply_request_requested_quantity').val();
+            klass = $('#supply_request_quantity').val(quantity);
+        }
         setMaterialTotalAndBalance();
     });
 
@@ -241,5 +249,20 @@ $(document).ready(function () {
         } else {
             $(".supply_request_submit_close").removeAttr('data-disabled');
         }
+    });
+
+    $(".edit-nested-record").click(function() {
+        klass = $('#supply_request_quantity').attr('class');
+        $('#supply_request_quantity').attr('class',klass + ' edit');
+
+        $("#supply_request_quantity").attr('disabled', false);
+        $("#supply_request_requested_quantity").attr('disabled', true);
+    });
+
+    $(".add-nested-record").click(function() {
+        klass = $('#supply_request_quantity').attr('class').replace(" edit","");
+        $('#supply_request_quantity').attr('class',klass);
+        $("#supply_request_quantity").attr('disabled', true);
+        $("#supply_request_requested_quantity").attr('disabled', false);
     });
 });

@@ -12,6 +12,8 @@ class SupplyRequestsController < CrudController
   def index
     @supply_requests = filters(collection) if params[:suplly_requests].nil?
     @supply_requests = SupplyRequest.where("id in (?)",params[:suplly_requests]) unless params[:suplly_requests].nil?
+    @te='sad'
+    @gestor = gestor?
   end
 
   def api_show
@@ -20,6 +22,10 @@ class SupplyRequestsController < CrudController
   end
 
   protected
+
+  def gestor?
+    UserPurchasingUnit.where(user_id:current_user.id).count == 0 ? false:true
+  end
 
   def filters(collection)
     use_pur_uni = UserPurchasingUnit.where(user_id:current_user.id).pluck(:purchasing_unit_id)

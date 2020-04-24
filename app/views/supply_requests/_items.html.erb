@@ -3,17 +3,25 @@
   <div class="nested-fields add-margin-bottom">
     <%= hidden_field_tag :item_id, nil, :name => 'supply_request_item[id]' %>
 
+    <% if f.object.supply_orders.size == 0 %>
+       <%= f.input :material, :as => :auto_complete, :fake => true, :required => true,:disabled => true %>
+    <% else  %>
+       <%= f.input :material, :as => :auto_complete, :fake => true,
+       :source_path => materials_path(
+        :by_supply_order => f.object.supply_orders.map {|supply_order| supply_order['supply_order_id']}.join(', ')
+       ),
+       :required => true,:disabled => true %>
+    <% end  %>
+
     <div class="yui3-g">
       <div class="yui3-u-1-3">
-        <%= f.input :material, :as => :auto_complete, :fake => true,
-                    :source_path => materials_path(
-                        :by_supply_order => f.object.supply_orders.map {|supply_order| supply_order['supply_order_id']}.join(', ')),
-                    :required => true,:disabled => true %>
+        <%= f.input :requested_quantity, :as => :fake, :required => true %>
+      </div>
 
-      </div>
       <div class="yui3-u-1-3">
-        <%= f.input :quantity, :as => :fake, :required => true %>
+        <%= f.input :quantity, :as => :fake, :required => true, :disabled => true %>
       </div>
+
       <div class="yui3-u-1-3">
         <div class="input fake required supply_request_balance">
           <label class="fake required" for="supply_request_balance">Saldo</label>
@@ -37,6 +45,7 @@
     <thead>
     <tr>
       <th><%= SupplyRequestItem.human_attribute_name :material %></th>
+      <th><%= SupplyRequestItem.human_attribute_name :requested_quantity %></th>
       <th><%= SupplyRequestItem.human_attribute_name :quantity %></th>
       <th></th>
       <th></th>
@@ -48,6 +57,7 @@
                  id: p.object.id,
                  material: p.object.material,
                  material_id: p.object.material_id,
+                 requested_quantity: p.object.requested_quantity,
                  quantity: p.object.quantity,
                  f: p %>
     <% end %>
@@ -60,6 +70,7 @@
                  id: '{{id}}',
                  material: '{{material}}',
                  material_id: '{{material_id}}',
+                 requested_quantity: '{{requested_quantity}}',
                  quantity: '{{quantity}}',
                  f: p %>
     <% end %>

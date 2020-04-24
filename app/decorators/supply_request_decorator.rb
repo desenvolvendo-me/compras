@@ -5,10 +5,18 @@ class SupplyRequestDecorator
   include ActionView::Helpers::NumberHelper
   include ActionView::Helpers::TranslationHelper
 
-  attr_header :number,:user,:creditor, :authorization_date, :licitation_process, :status_last_attendance
+  if @gestor
+    attr_header :number,:user,:creditor,:department,:value,:authorization_date, :licitation_process, :status_last_attendance
+  else
+    attr_header :number,:user,:creditor,:authorization_date, :licitation_process, :status_last_attendance
+  end
 
   def creditor
     self.contract.nil? || self.contract.creditors.blank? || self.contract.creditors.first.person.nil? ? '' : self.contract.creditors.first.person.name
+  end
+
+  def value
+    number_with_precision self.get_value
   end
 
   def modality_or_type_of_removal

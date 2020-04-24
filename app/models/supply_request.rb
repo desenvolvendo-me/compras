@@ -51,6 +51,17 @@ class SupplyRequest < Compras::Model
   before_create :set_status_sent
   before_save :set_creditor
 
+  def get_value
+    value = 0
+    self.items.each do |item|
+      licitation_process_item = self.licitation_process.items.where(material_id:item.material_id)
+      if licitation_process_item.size != 0
+        value += licitation_process_item[0].unit_price * item.quantity
+      end
+    end
+    value
+  end
+
   def set_creditor
     self.contract.nil? ? self.creditor = nil:self.creditor = self.contract.creditor
   end
