@@ -88,6 +88,7 @@ pt-BR:
     report_department_requests: "Solicitantes"
     report_pledge_requests: "Relatório de Pedido de Empenho"
     report_supplier_balance_per_service_orders: "Relatório de Saldo Fornecedor por Ordem de Serviço"
+    report_supply_requests: "Relatório de Pedido de Fornecimento"
     resource_sources: "Fonte de Recursos"
     signature_configurations: "Configurações de Assinatura"
     signatures: "Assinaturas"
