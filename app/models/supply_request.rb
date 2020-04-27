@@ -53,10 +53,11 @@ class SupplyRequest < Compras::Model
 
   def get_value
     value = 0
+    realignment_price = RealignmentPrice.select(:id).find_by_purchase_process_id(self.licitation_process_id)
     self.items.each do |item|
-      licitation_process_item = self.licitation_process.items.where(material_id:item.material_id)
+      licitation_process_item = RealignmentPriceItem.joins(:material).where(realignment_price_id:realignment_price.id,material:{id:item.material_id})
       if licitation_process_item.size != 0
-        value += licitation_process_item[0].unit_price * item.quantity
+        value += licitation_process_item[0].price * item.quantity
       end
     end
     value
