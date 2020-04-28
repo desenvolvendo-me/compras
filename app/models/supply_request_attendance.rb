@@ -8,7 +8,7 @@ class SupplyRequestAttendance < Compras::Model
   belongs_to :responsible, :class_name => 'Employee', :foreign_key => :responsible_id
   belongs_to :supply_request
 
-  validates :date, :justification, :responsible, :service_status,
+  validates :date, :service_status,
             :supply_request, :presence => true
   validates :date, :timeliness => {:type => :date}, :allow_blank => true
 

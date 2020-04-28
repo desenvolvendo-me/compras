@@ -13,7 +13,9 @@ class SupplyRequestAttendancesController < CrudController
   end
 
   def create
-    create! {supply_request_attendances_path(:supply_request_id => @parent.id)}
+    create! do |success, failure|
+      success.html { redirect_to(edit_supply_request_path(@parent.id)) }
+    end
   end
 
   def begin_of_association_chain
