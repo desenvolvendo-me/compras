@@ -1,9 +1,9 @@
 class User < Compras::Model
   attr_accessible :email, :login, :profile_id, :password, :password_confirmation
   attr_accessible :authenticable_id, :authenticable_type,
-                  :purchasing_unit_ids,:administrator,:activated
+                  :purchasing_unit_ids, :administrator, :activated
 
-  attr_modal :login,:email
+  attr_modal :login, :email
 
   devise :database_authenticatable, :recoverable, :validatable, :confirmable,
          :timeoutable
@@ -25,13 +25,15 @@ class User < Compras::Model
 
   validates :login, :presence => true, :unless => lambda { |u| !u.persisted? && u.creditor? }
   validates :authenticable_id, :presence => true, :unless => :administrator?
-  validates :authenticable_id, :uniqueness => { :scope => :authenticable_type }, :allow_blank => true
+  validates :authenticable_id, :uniqueness => {:scope => :authenticable_type}, :allow_blank => true
   validates :profile, :presence => true, :unless => :administrator_or_creditor?
   validates :login, :uniqueness => true, :format => /\A[a-z0-9.]+\z/i, :allow_blank => true
 
   before_create :skip_confirmation!, :if => :administrator?
   after_validation :set_profile_admin
   after_validation :set_name
+
+  validate :authenticable_valid
 
   filterize
   orderize
@@ -41,7 +43,7 @@ class User < Compras::Model
   end
 
   def set_profile_admin
-      self.administrator = true if self.profile == 'Administrador'
+    self.administrator = true if self.profile == 'Administrador'
   end
 
   def password_required?
@@ -57,8 +59,8 @@ class User < Compras::Model
     administrator? || creditor?
   end
 
-  scope :term, lambda {|q|
-    where {login.like("%#{q}%")}
+  scope :term, lambda { |q|
+    where { login.like("%#{q}%") }
   }
 
   protected
@@ -69,6 +71,12 @@ class User < Compras::Model
 
   def send_on_create_confirmation_instructions
     super unless creditor?
+  end
+
+  def authenticable_valid
+    errors["authenticable_id"].each do |message|
+      errors.add(:authenticable, message)
+    end
   end
 
 end
