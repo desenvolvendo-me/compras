@@ -83,7 +83,7 @@ pt-BR:
     report_balance_per_process_and_contracts: "Relatório de Saldo por Processo e Contrato"
     report_extract_consumption_per_process_new: "Extrato de Consumo de Materias por Processo"
     report_total_products_purchases: "Relatório de Total de Produtos Comprados"
-    report_total_purchase_per_element_and_nature_new: "Relatório de Total de Compras por Elemento e Natureza"
+    report_total_purchase_per_element_and_natures: "Relatório de Total de Compras por Elemento e Natureza"
     report_contracts: "Contratos"
     report_department_requests: "Solicitantes"
     report_pledge_requests: "Relatório de Pedido de Empenho"
