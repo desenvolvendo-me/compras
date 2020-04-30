@@ -957,6 +957,7 @@ Compras::Application.routes.draw do
       resources :balance_per_process_and_contracts
       resources :total_products_purchases
       resources :total_purchase_per_element_and_natures
+      resources :extract_consumption_per_processes
     end
 
     match 'map_of_bids/:licitation_process_id' => 'map_of_bids#show', as: :map_of_bids
@@ -969,9 +970,6 @@ Compras::Application.routes.draw do
 
     match 'supply_orders/:supply_order_id' => 'supply_orders#show', as: :supply_orders
     match 'supply_requests/:supply_request_id' => 'supply_requests#show', as: :supply_requests
-
-    match 'extract_consumption_per_process/new' => 'extract_consumption_per_process#new', as: :extract_consumption_per_process_new
-    match 'extract_consumption_per_process' => 'extract_consumption_per_process#show', as: :extract_consumption_per_process
 
   end
 

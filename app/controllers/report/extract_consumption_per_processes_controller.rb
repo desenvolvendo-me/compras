@@ -1,4 +1,4 @@
-class Report::ExtractConsumptionPerProcessController < Report::BaseController
+class Report::ExtractConsumptionPerProcessesController < Report::BaseController
   include Report::BalanceHelper
   include Report::ExtractConsumptionPerProcessHelper
 
