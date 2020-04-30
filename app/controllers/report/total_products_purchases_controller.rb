@@ -1,4 +1,4 @@
-class Report::TotalProductsPurchaseController < Report::BaseController
+class Report::TotalProductsPurchasesController < Report::BaseController
   report_class TotalProductsPurchaseReport, :repository => TotalProductsPurchaseSearcher
 
   def show

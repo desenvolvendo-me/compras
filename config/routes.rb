@@ -955,6 +955,7 @@ Compras::Application.routes.draw do
       resources :pledge_requests
       resources :balance_per_creditors
       resources :balance_per_process_and_contracts
+      resources :total_products_purchases
     end
 
     match 'map_of_bids/:licitation_process_id' => 'map_of_bids#show', as: :map_of_bids
@@ -970,9 +971,6 @@ Compras::Application.routes.draw do
 
     match 'extract_consumption_per_process/new' => 'extract_consumption_per_process#new', as: :extract_consumption_per_process_new
     match 'extract_consumption_per_process' => 'extract_consumption_per_process#show', as: :extract_consumption_per_process
-
-    match 'total_products_purchase/new' => 'total_products_purchase#new', as: :total_products_purchase_new
-    match 'total_products_purchase' => 'total_products_purchase#show', as: :total_products_purchase
 
     match 'total_purchase_per_element_and_nature/new' => 'total_purchase_per_element_and_nature#new', as: :total_purchase_per_element_and_nature_new
     match 'total_purchase_per_element_and_nature' => 'total_purchase_per_element_and_nature#show', as: :total_purchase_per_element_and_nature
