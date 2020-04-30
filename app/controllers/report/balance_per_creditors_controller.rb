@@ -1,4 +1,4 @@
-class Report::BalancePerCreditorController < Report::BaseController
+class Report::BalancePerCreditorsController < Report::BaseController
   report_class BalancePerCreditorReport, :repository => BalancePerCreditorSearcher
 
   def show

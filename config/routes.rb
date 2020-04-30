@@ -953,6 +953,7 @@ Compras::Application.routes.draw do
       resources :licitation_processes
       resources :department_requests
       resources :pledge_requests
+      resources :balance_per_creditors
     end
 
     match 'map_of_bids/:licitation_process_id' => 'map_of_bids#show', as: :map_of_bids
@@ -966,8 +967,6 @@ Compras::Application.routes.draw do
     match 'supply_orders/:supply_order_id' => 'supply_orders#show', as: :supply_orders
     match 'supply_requests/:supply_request_id' => 'supply_requests#show', as: :supply_requests
 
-    match 'balance_per_creditor/new' => 'balance_per_creditor#new', as: :balance_per_creditor_new
-    match 'balance_per_creditor' => 'balance_per_creditor#show', as: :balance_per_creditor
 
     match 'balance_per_process_and_contract/new' => 'balance_per_process_and_contract#new', as: :balance_per_process_and_contract_new
     match 'balance_per_process_and_contract' => 'balance_per_process_and_contract#show', as: :balance_per_process_and_contract
