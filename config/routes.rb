@@ -953,6 +953,11 @@ Compras::Application.routes.draw do
       resources :licitation_processes
       resources :department_requests
       resources :pledge_requests
+      resources :balance_per_creditors
+      resources :balance_per_process_and_contracts
+      resources :total_products_purchases
+      resources :total_purchase_per_element_and_natures
+      resources :extract_consumption_per_processes
     end
 
     match 'map_of_bids/:licitation_process_id' => 'map_of_bids#show', as: :map_of_bids
@@ -966,20 +971,6 @@ Compras::Application.routes.draw do
     match 'supply_orders/:supply_order_id' => 'supply_orders#show', as: :supply_orders
     match 'supply_requests/:supply_request_id' => 'supply_requests#show', as: :supply_requests
 
-    match 'balance_per_creditor/new' => 'balance_per_creditor#new', as: :balance_per_creditor_new
-    match 'balance_per_creditor' => 'balance_per_creditor#show', as: :balance_per_creditor
-
-    match 'balance_per_process_and_contract/new' => 'balance_per_process_and_contract#new', as: :balance_per_process_and_contract_new
-    match 'balance_per_process_and_contract' => 'balance_per_process_and_contract#show', as: :balance_per_process_and_contract
-
-    match 'extract_consumption_per_process/new' => 'extract_consumption_per_process#new', as: :extract_consumption_per_process_new
-    match 'extract_consumption_per_process' => 'extract_consumption_per_process#show', as: :extract_consumption_per_process
-
-    match 'total_products_purchase/new' => 'total_products_purchase#new', as: :total_products_purchase_new
-    match 'total_products_purchase' => 'total_products_purchase#show', as: :total_products_purchase
-
-    match 'total_purchase_per_element_and_nature/new' => 'total_purchase_per_element_and_nature#new', as: :total_purchase_per_element_and_nature_new
-    match 'total_purchase_per_element_and_nature' => 'total_purchase_per_element_and_nature#show', as: :total_purchase_per_element_and_nature
   end
 
   namespace :api do

@@ -103,10 +103,10 @@ menu:
     - report_materials
     - report_contracts
     - report_licitation_processes
-    - report_balance_per_creditor_new
-    - report_balance_per_process_and_contract_new
-    - report_total_products_purchase_new
-    - report_total_purchase_per_element_and_nature_new
-    - report_extract_consumption_per_process_new
+    - report_balance_per_creditors
+    - report_balance_per_process_and_contracts
+    - report_total_products_purchases
+    - report_total_purchase_per_element_and_natures
+    - report_extract_consumption_per_processes
     - report_department_requests
     - report_pledge_requests

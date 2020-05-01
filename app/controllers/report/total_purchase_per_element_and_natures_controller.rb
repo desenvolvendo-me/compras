@@ -1,4 +1,4 @@
-class Report::TotalPurchasePerElementAndNatureController < Report::BaseController
+class Report::TotalPurchasePerElementAndNaturesController < Report::BaseController
   report_class TotalPurchasePerElementAndNatureReport, :repository => TotalPurchasePerElementAndNatureSearcher
 
   def show

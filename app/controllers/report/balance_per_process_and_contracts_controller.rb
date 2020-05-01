@@ -1,4 +1,4 @@
-class Report::BalancePerProcessAndContractController < Report::BaseController
+class Report::BalancePerProcessAndContractsController < Report::BaseController
   include Report::BalanceHelper
   include Report::BalancePerProcessAndContractHelper
 
