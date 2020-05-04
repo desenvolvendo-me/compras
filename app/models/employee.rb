@@ -22,7 +22,7 @@ class Employee < Compras::Model
   has_one :neighborhood, through: :individual
 
   delegate :to_s, :name, :number, :issuer, :cpf, :zip_code,
-    :city, :state, to: :individual, allow_nil: :true
+           :city, :state, to: :individual, allow_nil: :true
   delegate :email, :phone, to: :individual, allow_nil: :true, prefix: true
   delegate :name, to: :street, allow_nil: true, prefix: true
   delegate :name, to: :neighborhood, allow_nil: true, prefix: true
@@ -30,7 +30,7 @@ class Employee < Compras::Model
   delegate :acronym, to: :state, allow_nil: true, prefix: true
 
   validates :email, mail: true, allow_blank: true
-  validates :individual_id, :registration, uniqueness: { allow_blank: true }
+  validates :individual_id, :registration, uniqueness: {allow_blank: true}
   validates :individual, :registration, :position, presence: true
   validates :phone, mask: "(99) 9999-9999", allow_blank: true
 
