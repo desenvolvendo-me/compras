@@ -34,9 +34,17 @@ class Employee < Compras::Model
   validates :individual, :registration, :position, presence: true
   validates :phone, mask: "(99) 9999-9999", allow_blank: true
 
-  filterize
-
   scope :ordered, joins { individual }.order { individual.id }
+
+  def self.filter(params)
+    query = scoped.joins { individual.person }
+    query = query.where { email.eq(params[:email]) } if params[:email].present?
+    query = query.where { individual.person.name.like("%#{params[:name]}%") } if params[:name].present?
+    query = query.where { phone.eq(params[:phone]) } if params[:phone].present?
+    query = query.where { position_id.eq(params[:position_id]) } if params[:position_id].present?
+    query = query.where { registration.eq(params[:registration]) } if params[:registration].present?
+    query
+  end
 
   def email
     super || individual_email
