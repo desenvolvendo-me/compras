@@ -1,6 +1,8 @@
 class Employee < Compras::Model
   attr_accessible :email, :individual_id, :phone, :position_id, :registration
 
+  attr_modal :name, :email, :phone, :position_id, :registration
+
   belongs_to :individual
   belongs_to :position
 
