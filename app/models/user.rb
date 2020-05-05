@@ -77,6 +77,9 @@ class User < Compras::Model
     errors["authenticable_id"].each do |message|
       errors.add(:authenticable, message)
     end
+    errors["authenticable_type"].each do |message|
+      errors.add(:authenticable, message)
+    end
   end
 
 end

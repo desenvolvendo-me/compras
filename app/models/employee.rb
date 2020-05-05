@@ -1,6 +1,8 @@
 class Employee < Compras::Model
   attr_accessible :email, :individual_id, :phone, :position_id, :registration
 
+  attr_modal :name, :email, :phone, :position_id, :registration
+
   belongs_to :individual
   belongs_to :position
 
@@ -20,7 +22,7 @@ class Employee < Compras::Model
   has_one :neighborhood, through: :individual
 
   delegate :to_s, :name, :number, :issuer, :cpf, :zip_code,
-    :city, :state, to: :individual, allow_nil: :true
+           :city, :state, to: :individual, allow_nil: :true
   delegate :email, :phone, to: :individual, allow_nil: :true, prefix: true
   delegate :name, to: :street, allow_nil: true, prefix: true
   delegate :name, to: :neighborhood, allow_nil: true, prefix: true
@@ -28,13 +30,21 @@ class Employee < Compras::Model
   delegate :acronym, to: :state, allow_nil: true, prefix: true
 
   validates :email, mail: true, allow_blank: true
-  validates :individual_id, :registration, uniqueness: { allow_blank: true }
+  validates :individual_id, :registration, uniqueness: {allow_blank: true}
   validates :individual, :registration, :position, presence: true
   validates :phone, mask: "(99) 9999-9999", allow_blank: true
 
-  filterize
-
   scope :ordered, joins { individual }.order { individual.id }
+
+  def self.filter(params)
+    query = scoped.joins { individual.person }
+    query = query.where { email.eq(params[:email]) } if params[:email].present?
+    query = query.where { individual.person.name.like("%#{params[:name]}%") } if params[:name].present?
+    query = query.where { phone.eq(params[:phone]) } if params[:phone].present?
+    query = query.where { position_id.eq(params[:position_id]) } if params[:position_id].present?
+    query = query.where { registration.eq(params[:registration]) } if params[:registration].present?
+    query
+  end
 
   def email
     super || individual_email
