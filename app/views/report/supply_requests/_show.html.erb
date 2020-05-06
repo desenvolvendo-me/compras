@@ -92,3 +92,18 @@
   <hr>
   FUNCIONÁRIO <br><br><br><br><br><br>
 </div>
+
+
+<script>
+    console.log("Running")
+    var css = '@page { size: portrait; }',
+        head = document.head,
+        style = document.createElement('style');
+
+    style.type = 'text/css';
+    style.media = 'print';
+    style.appendChild(document.createTextNode(css));
+
+    head.appendChild(style)
+
+</script>
