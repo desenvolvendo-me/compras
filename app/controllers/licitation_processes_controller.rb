@@ -47,7 +47,7 @@ class LicitationProcessesController < CrudController
     response = supply_order(licitation_process, material, purchase_solicitation, quantity, contract) if params[:supply_order_id].present?
     response = supply_request(licitation_process, material, purchase_solicitation, quantity, contract) if params[:supply_request_id].present?
 
-    render :json => {total: response["total"], balance: response["balance"]}
+    render :json => {total: response["total"], balance: response["balance"], balance_unit: response["balance_unit"]}
   end
 
 

@@ -26,8 +26,11 @@ module MaterialBalance
         response["message"] = ("#{material.description} (#{quantity_autorized - quantity_delivered})")
       end
 
+      balance = ((quantity_autorized - quantity_delivered) * material.quantity_unit) - quantity.to_i
+
       response["total"] = quantity_autorized
-      response["balance"] = quantity_autorized - quantity_delivered
+      response["balance"] = balance
+      response["balance_unit"] = balance / material.quantity_unit
       response
     end
 
