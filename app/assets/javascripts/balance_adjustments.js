@@ -56,6 +56,7 @@ function renderItem(item) {
         uuid: _.uniqueId('fresh-'),
         id: '',
         material_id: item.material_id,
+        lot: item.lot,
         material: item.material.code + " - " + item.material.description,
         quantity: item.quantity,
         quantity_new: 0

@@ -205,6 +205,7 @@ $(document).ready(function () {
     }
 
     function renderItem(item) {
+        console.log(item)
         var itemBinds = {
             uuid: _.uniqueId('fresh-'),
             id: '',
@@ -215,7 +216,7 @@ $(document).ready(function () {
             reference_unit: item.reference_unit,
             brand: item.brand,
             quantity: item.quantity,
-            lot: '1',
+            lot: item.lot,
             estimated_total_price:
                 money_pt(item.quantity * item.unit_price),
             unit_price: money_pt(item.unit_price)
