@@ -18,9 +18,9 @@ module Compras
 
       def hidden_field
         if fake?
-          template.hidden_field_tag(hidden_field_name, nil, hidden_input_html_options)
+          template.hidden_field(object_name, hidden_field_name_option) if hidden_field_name_option
         else
-          @builder.hidden_field(hidden_field_name, hidden_input_html_options)
+          @builder.hidden_field(hidden_field_name_option) if hidden_field_name_option
         end
       end
 
@@ -79,11 +79,13 @@ module Compras
       end
 
       def hidden_field_name
-        options.fetch(:hidden_field, "#{sanitized_object_name}[#{attribute_name}_id]")
+        options.fetch(:hidden_field, attribute_name)
       end
 
       def hidden_field_id
-        [sanitized_object_name, index, hidden_field_name_option].compact.join('_') if hidden_field_name_option
+        option = hidden_field_name_option.to_sym
+
+        [sanitized_object_name, index, option].compact.join('_') if option
       end
 
       def hidden_field_value_attribute
