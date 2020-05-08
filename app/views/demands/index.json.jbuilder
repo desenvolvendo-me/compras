@@ -15,6 +15,7 @@ json.array!(collection) do |obj|
       json.id                           item.id
       json.material_id                  item.material_id
       json.material_description         item.material.to_s
+      json.lot                          item.lot
       json.brand                        item.brand
       json.quantity                     item.quantity.to_f
       json.unit_price                   item.unit_price.to_f

@@ -18,6 +18,7 @@ builder resource, json do
     json.id                   item.id
     json.material_id          item.material_id
     json.material_description item.material.to_s
+    json.lot                  item.lot
     json.reference_unit       item.reference_unit
     json.quantity             item.decorator.quantity
     json.unit_price           item.decorator.unit_price

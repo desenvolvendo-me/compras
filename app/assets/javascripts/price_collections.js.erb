@@ -60,7 +60,7 @@ $(document).ready(function () {
             reference_unit: item.reference_unit,
             brand: item.brand,
             quantity: numberWithDelimiter(item.quantity),
-            lot: '1'
+            lot: item.lot
         };
 
         var data = $('#price_collection_items_template').mustache(itemBinds);

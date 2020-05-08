@@ -144,7 +144,8 @@ function renderItem(item) {
         id: '',
         material_id: item.material_id,
         material: item.material.code + " - " + item.material.description,
-        quantity: item.quantity
+        quantity: item.quantity,
+        lot: item.lot
 
     };
 
