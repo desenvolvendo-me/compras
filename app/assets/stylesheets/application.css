@@ -91,3 +91,11 @@ table.records tr.not_selected td {
 div.inline_buttons {
   padding-top: 27px;
 }
+
+.simple_form select.select {
+    max-width: 910px;
+    width: 100%;
+    border: solid 1px #C7C7C7;
+    padding: 10px 5px;
+    height: 41px;
+}
