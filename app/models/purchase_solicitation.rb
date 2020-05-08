@@ -99,7 +99,9 @@ class PurchaseSolicitation < Compras::Model
 
   scope :by_deparment_permited, lambda {|current_user|
     departments = DepartmentPerson.where(user_id: current_user).pluck(:department_id)
-    where("compras_purchase_solicitations.department_id in (?)", departments )
+    unless departments.empty?
+        where("compras_purchase_solicitations.department_id = ?", departments[0])
+    end
   }
 
   scope :by_model_request, lambda {|type|
