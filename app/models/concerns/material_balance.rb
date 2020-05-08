@@ -20,22 +20,23 @@ module MaterialBalance
       klass = self.name
 
       quantity_autorized = quantity_autorized(licitation_process, purchase_solicitation, material, contract)
-      quantity_delivered = quantity_delivered(klass, licitation_process, material, object,purchase_solicitation)
+      quantity_delivered = quantity_delivered(klass, licitation_process, material, object, purchase_solicitation)
 
       if (quantity_autorized - (quantity_delivered + quantity.to_i)) < 0
         response["message"] = ("#{material.description} (#{quantity_autorized - quantity_delivered})")
       end
 
-      balance = ((quantity_autorized - quantity_delivered) * material.quantity_unit) - quantity.to_i
+      balance_unit = ((quantity_autorized - quantity_delivered) * material.quantity_unit) - quantity.to_i
+      balance = balance_unit / material.quantity_unit
 
       response["total"] = quantity_autorized
       response["balance"] = balance
-      response["balance_unit"] = balance / material.quantity_unit
+      response["balance_unit"] = balance_unit
       response
     end
 
-    def self.quantity_delivered(klass, licitation_process, material, object,purchase_solicitation)
-      objects = klass.classify.constantize.where(licitation_process_id: licitation_process.id,purchase_solicitation_id: purchase_solicitation.id)
+    def self.quantity_delivered(klass, licitation_process, material, object, purchase_solicitation)
+      objects = klass.classify.constantize.where(licitation_process_id: licitation_process.id, purchase_solicitation_id: purchase_solicitation.id)
       objects = objects.where("compras_#{klass.pluralize.underscore}.id != #{object.id} ") if object.try(:id)
       quantity_delivered = objects.joins(:items).where("compras_#{klass.underscore}_items.material_id = ?", material.id).sum(:quantity).to_f
       return quantity_delivered
