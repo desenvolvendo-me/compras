@@ -1,8 +1,6 @@
 class Person < Persona::Person
   attr_modal :name, :cpf, :cnpj
 
-  attr_accessor :responsible_id
-
   has_many :licitation_process_impugnments, dependent: :restrict
   has_many :licitation_process_appeals, dependent: :restrict
   has_many :partners, dependent: :destroy

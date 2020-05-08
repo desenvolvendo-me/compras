@@ -1,7 +1,4 @@
 class Company < Persona::Company
-
-  attr_accessor :responsible_id
-
   delegate :city, :zip_code, :to => :address, :allow_nil => true
 
   validate :at_least_one_partner

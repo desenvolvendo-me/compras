@@ -18,9 +18,9 @@ module Compras
 
       def hidden_field
         if fake?
-          template.hidden_field(object_name, hidden_field_name_option) if hidden_field_name_option
+          template.hidden_field_tag(hidden_field_name, nil, hidden_input_html_options)
         else
-          @builder.hidden_field(hidden_field_name_option) if hidden_field_name_option
+          @builder.hidden_field(hidden_field_name, hidden_input_html_options)
         end
       end
 
@@ -34,20 +34,20 @@ module Compras
 
       def hidden_input_html_options
         {
-            :class => options['data-hidden-field-class'] || ''
+          :class => options['data-hidden-field-class'] || ''
         }
       end
 
       def input_html_options
         super.tap do |options|
-          options['data-auto-complete'] = true
-          options['data-source'] ||= source_path
-          options['data-hidden-field-class'] ||= ''
-          options['data-hidden-field-id'] ||= hidden_field_id if hidden_field_id
-          options['data-hidden-field-value-attribute'] ||= hidden_field_value_attribute
-          options['data-max-results'] ||= max_results
-          options['data-min-length'] ||= min_length
-          options['data-clear-input'] ||= clear_input
+          options['data-auto-complete']                   = true
+          options['data-source']                        ||= source_path
+          options['data-hidden-field-class']            ||= ''
+          options['data-hidden-field-id']               ||= hidden_field_id if hidden_field_id
+          options['data-hidden-field-value-attribute']  ||= hidden_field_value_attribute
+          options['data-max-results']                   ||= max_results
+          options['data-min-length']                    ||= min_length
+          options['data-clear-input']                   ||= clear_input
         end
       end
 
@@ -74,22 +74,16 @@ module Compras
         name.to_s.underscore
       end
 
-      def model_attribute_name
-        object.send(model_name) ? object.send(model_name).class.name.underscore : attribute_name
-      end
-
       def hidden_field_name_option
-        options.fetch(:hidden_field, "#{model_attribute_name}_id")
+        options.fetch(:hidden_field, "#{attribute_name}_id")
       end
 
       def hidden_field_name
-        options.fetch(:hidden_field, model_attribute_name)
+        options.fetch(:hidden_field, "#{sanitized_object_name}[#{attribute_name}_id]")
       end
 
       def hidden_field_id
-        option = hidden_field_name_option.to_sym
-
-        [sanitized_object_name, index, option].compact.join('_') if option
+        [sanitized_object_name, index, hidden_field_name_option].compact.join('_') if hidden_field_name_option
       end
 
       def hidden_field_value_attribute
