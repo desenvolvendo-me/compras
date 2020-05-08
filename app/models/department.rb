@@ -21,10 +21,9 @@ class Department < Compras::Model
   scope :limit, lambda {|q| limit(q)}
 
   scope :by_user, ->(user_id) do
-    use_pur_uni = UserPurchasingUnit.where(user_id:user_id).pluck(:purchasing_unit_id)
-    departments = Department.where("compras_departments.purchasing_unit_id in (?)",use_pur_uni).pluck(:id)
+    department_ids = DepartmentPerson.where(user_id:user_id).pluck(:department_id)
 
-    where { self.id.in departments }
+    where { self.id.in department_ids }
   end
 
   scope :by_purchasing_unit_for_licitation_process, ->(licitation_process_id) do
