@@ -26,10 +26,6 @@ class Ability
   private
 
   def controller_permission(role)
-    logger = Rails.logger
-    logger.debug "PROFILE: role.controller #{role.controller}"
-    logger.debug "PROFILE: role.permission #{role.permission}"
-
     if role.controller.include?("report_") && role.permission.eql?("read")
       can :modify, role.controller.to_sym
     else
