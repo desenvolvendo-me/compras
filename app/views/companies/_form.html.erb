@@ -46,7 +46,7 @@
       </div>
 
       <%= c.input :legal_nature %>
-      <%= c.input :responsible, :as => :auto_complete, :fake => true,
+      <%= c.input :responsible, :as => :auto_complete,
                   'data-hidden-field-class' => 'unique',
                   :source_path => people_path,
                   :required => true %>
