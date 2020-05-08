@@ -1,6 +1,9 @@
 <%= a.input :addressable_id, :as => :hidden %>
 <%= a.input :addressable_type, :as => :hidden %>
-<%#= a.input :street, :hint => false %>
+<%= a.input :street, :as => :auto_complete, :fake => true,
+            'data-hidden-field-class' => 'unique',
+            :source_path => streets_path,
+            :required => true %>
 
 <div class="yui3-g">
   <div class="yui3-u-1-4">
@@ -24,7 +27,10 @@
 
 <div class="yui3-g">
   <div class="yui3-u-1-2">
-    <%#= a.input :neighborhood, :url => modal_neighborhoods_path(:street_id => a.object.street_id), :disabled => a.object.street.nil? %>
+    <%= a.input :neighborhood, :as => :auto_complete, :fake => true,
+                'data-hidden-field-class' => 'unique',
+                :source_path => neighborhoods_path,
+                :required => true %>
   </div>
 
   <div class="yui3-u-1-2">

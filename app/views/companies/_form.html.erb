@@ -46,7 +46,10 @@
       </div>
 
       <%= c.input :legal_nature %>
-      <%#= c.input :responsible %>
+      <%= c.input :responsible, :as => :auto_complete, :fake => true,
+                  'data-hidden-field-class' => 'unique',
+                  :source_path => people_path,
+                  :required => true %>
       <%= c.input :responsible_role %>
       <%= c.input :company_size %>
       <%= c.input :choose_simple %>
