@@ -11,11 +11,10 @@ module NumberSupply
 
       number = klass.classify.constantize.maximum(:number, conditions: ["compras_#{klass.pluralize.underscore}.year = '#{self.year}'"])
       if number.present?
-        self.number = number
+        self.number = "#{number.split("/").first.to_i + 1}/#{self.year}"
       else
         self.number = "1/#{self.year}"
       end
-
     end
   end
 end
