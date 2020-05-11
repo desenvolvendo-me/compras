@@ -32,6 +32,7 @@ class SupplyRequest < Compras::Model
 
   validates :authorization_date, :contract, :purchase_solicitation, :licitation_process, presence: true
   validate :items_quantity_permitted
+  validate :at_least_one_item
 
   orderize "id DESC"
   filterize
@@ -88,5 +89,9 @@ class SupplyRequest < Compras::Model
 
   def set_status_sent
     self.supply_request_status = SupplyRequestStatus::SENT
+  end
+
+  def at_least_one_item
+    errors.add(:items, :at_least_one_item) if items.empty?
   end
 end
