@@ -9,6 +9,10 @@ class Neighborhood < InscriptioCursualis::Neighborhood
   filterize
   orderize
 
+  scope :term, lambda {|q|
+    where {name.like("%#{q}%")}
+  }
+
   protected
 
   def validate_street_relationship

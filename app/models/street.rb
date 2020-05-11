@@ -15,5 +15,9 @@ class Street < InscriptioCursualis::Street
   filterize
   orderize
 
-  scope :neighborhood, ->(neighborhood) { joins(:neighborhoods).where('neighborhoods.id = ?', neighborhood) }
+  scope :neighborhood, lambda { |neighborhood| joins(:neighborhoods).where('neighborhoods.id = ?', neighborhood) }
+
+  scope :term, lambda {|q|
+    where {name.like("%#{q}%")}
+  }
 end

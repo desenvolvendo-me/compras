@@ -28,6 +28,10 @@ class Person < Persona::Person
     query
   end
 
+  scope :term, lambda {|q|
+    where {name.like("%#{q}%")}
+  }
+
   def self.search(options = {})
     query = scoped
     query = query.where { id.in_any options[:ids] } if options[:ids].present?
