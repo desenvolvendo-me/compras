@@ -89,5 +89,11 @@
             $('.remove-nested-record').removeAttr('href');
             $('.remove-nested-record').removeClass('remove-nested-record');
         }
+
+        $('.edit-nested-record').on("click", function () {
+            setTimeout(function () {
+                $("#supply_request_quantity").focus();
+            }, 100);
+        });
     })();
 </script>
