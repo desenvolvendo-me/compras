@@ -51,10 +51,6 @@ class LicitationProcessesController < CrudController
   end
 
 
-  def default_filters
-    {:year => lambda {Date.current.year}}
-  end
-
   protected
 
   def filter_by_purchasing_unit(collection)
