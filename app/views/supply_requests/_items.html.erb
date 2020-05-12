@@ -4,13 +4,13 @@
     <%= hidden_field_tag :item_id, nil, :name => 'supply_request_item[id]' %>
 
     <% if f.object.supply_orders.size == 0 %>
-      <%= f.input :material, :as => :auto_complete, :fake => true, :required => true, :disabled => true %>
+      <%= f.input :material, :as => :auto_complete, :fake => true, :required => true, :disabled => disabled_material(f.object) %>
     <% else %>
       <%= f.input :material, :as => :auto_complete, :fake => true,
                   :source_path => materials_path(
                       :by_supply_order => f.object.supply_orders.map { |supply_order| supply_order['supply_order_id'] }.join(', ')
                   ),
-                  :required => true, :disabled => true %>
+                  :required => true, :disabled => disabled_material(f.object) %>
     <% end %>
 
     <div class="yui3-g">
