@@ -61,10 +61,10 @@
 <div>
   <table class="records">
     <thead>
-    <tr>
-      <th>ITEM</th>
-      <th>QUANTIDADE</th>
-    </tr>
+      <tr>
+        <th>ITEM</th>
+        <th>QUANTIDADE</th>
+      </tr>
     </thead>
     <tbody>
     <% resource.supply_request.items.each do |item| %>
@@ -79,10 +79,10 @@
 </p>
 
 
-<div style="text-align: justify">
+<div >
   <span>
     <p>
-      <b> <h2> <%= resource.prefecture.titleize() %>, <%= l(Date.today, format: :long) %> </h2></b>
+      <b> <h2> <%= resource.prefecture.titleize() %>, <%= l(Date.today, format: :long) %> </h2> </b>
     </p>
   </span>
 </div>

@@ -9,12 +9,12 @@ module NumberSupply
     def set_number
       klass = self.class.name
 
-      number = 0
-      so = klass.classify.constantize.maximum(:number, conditions: ["compras_#{klass.pluralize.underscore}.year = '#{self.year}'"])
-      if so.present?
-        number = so
+      number = klass.classify.constantize.maximum(:number, conditions: ["compras_#{klass.pluralize.underscore}.year = '#{self.year}'"])
+      if number.present?
+        self.number = "#{number.split("/").first.to_i + 1}/#{self.year}"
+      else
+        self.number = "1/#{self.year}"
       end
-      self.number = "#{(number.to_i + 1)}/#{self.year}"
     end
   end
 end
