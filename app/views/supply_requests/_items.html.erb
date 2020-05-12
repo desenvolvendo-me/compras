@@ -4,14 +4,14 @@
     <%= hidden_field_tag :item_id, nil, :name => 'supply_request_item[id]' %>
 
     <% if f.object.supply_orders.size == 0 %>
-       <%= f.input :material, :as => :auto_complete, :fake => true, :required => true,:disabled => true %>
-    <% else  %>
-       <%= f.input :material, :as => :auto_complete, :fake => true,
-       :source_path => materials_path(
-        :by_supply_order => f.object.supply_orders.map {|supply_order| supply_order['supply_order_id']}.join(', ')
-       ),
-       :required => true,:disabled => true %>
-    <% end  %>
+      <%= f.input :material, :as => :auto_complete, :fake => true, :required => true, :disabled => disabled_material(f.object) %>
+    <% else %>
+      <%= f.input :material, :as => :auto_complete, :fake => true,
+                  :source_path => materials_path(
+                      :by_supply_order => f.object.supply_orders.map { |supply_order| supply_order['supply_order_id'] }.join(', ')
+                  ),
+                  :required => true, :disabled => disabled_material(f.object) %>
+    <% end %>
 
     <div class="yui3-g">
       <div class="yui3-u-1-3">
@@ -23,10 +23,11 @@
         <%= f.input :quantity, :as => :fake, :required => true, :disabled => true %>
       </div>
 
-      <div class="yui3-u-1-6">
-        <div class="input fake required supply_request_balance">
-          <label class="fake required" for="supply_request_balance">Saldo Contrato</label>
-          <input class="string fake required" id="supply_request_balance" name="supply_request[balance]" type="text" readonly>
+
+      <div class="yui3-u-1-3">
+        <div class="input fake supply_request_balance">
+          <label class="fake" for="supply_request_balance">Saldo</label>
+          <input class="string fake" id="supply_request_balance" name="supply_request[balance]" type="text" readonly>
         </div>
       </div>
 
@@ -43,7 +44,7 @@
                      :class => 'button add-nested-record field-without-label',
                      'data-template' => 'licitation_process_items_template',
                      'data-records' => 'items-records',
-                     'data-disabled' => not_updateable_message %>
+                     'data-disabled' => not_updateable_message, id: "add-material" %>
     </div>
   </div>
 
@@ -84,3 +85,24 @@
     <% end %>
   <% end %>
 </div>
+
+
+<script>
+    (function disabledNotUserCreated() {
+        var current_user = '<%= current_user.login %>';
+        var created_user = '<%= f.object.user.login %>';
+
+        if (current_user !== created_user) {
+            $('.add-nested-record').removeClass('add-nested-record');
+            $('.remove-nested-record').removeAttr('href');
+            $('.remove-nested-record').removeClass('remove-nested-record');
+        }
+
+        $('.edit-nested-record').on("click", function () {
+            setTimeout(function () {
+                $("#supply_request_quantity").focus();
+                $('#add-material').addClass('add-nested-record');
+            }, 100);
+        });
+    })();
+</script>

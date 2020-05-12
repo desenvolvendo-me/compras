@@ -226,6 +226,7 @@ pt-BR:
       cannot_be_greater_than_licitation_exemption: "não pode ser superior à dispensa de licitação"
       must_have_at_least_one_partner: "Pessoa jurídica selecionada na aba Principal. É necessário cadastrar pelo menos um sócio/responsável"
       at_least_one_partner: "deve haver ao menos um sócio"
+      at_least_one_item: "deve haver ao menos um item"
       must_have_at_least_one_budget_allocation: "é necessário cadastrar pelo menos uma dotação"
       must_have_at_least_one_item: "é necessário cadastrar pelo menos um item"
       should_be_at_least_one_item: "deve haver ao menos um item"
