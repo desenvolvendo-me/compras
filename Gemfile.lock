@@ -172,6 +172,8 @@ GEM
     mail (2.5.5)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    mail_validator (0.2.0)
+      activemodel (>= 3.0)
     mask_validator (0.2.1)
       activemodel (>= 3.0)
       activerecord (>= 3.0)
@@ -418,6 +420,7 @@ DEPENDENCIES
   kaminari (= 0.14.1)
   machinist (= 2.0)
   machinist-caching (= 0.0.1)
+  mail_validator (= 0.2.0)
   mask_validator (= 0.2.1)
   minitest
   minitest-reporters
