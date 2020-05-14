@@ -5,6 +5,8 @@ module Helpers
       user.confirm!
       user
     end
+
+    receiver.let!(:customer) { Customer.make!(:cliente) }
   end
 
   def sign_in
