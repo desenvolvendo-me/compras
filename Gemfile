@@ -76,6 +76,7 @@ group :development, :test do
   gem 'minitest-reporters'
   gem 'test-unit'
   gem 'rack-mini-profiler', '0.9.3'
+  gem 'syntax', '~> 1.2'
 end
 
 group :test do

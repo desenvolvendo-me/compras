@@ -337,6 +337,7 @@ GEM
       actionpack (~> 3.0)
       activemodel (~> 3.0)
       railties (~> 3.0)
+    syntax (1.2.2)
     test-unit (3.3.5)
       power_assert
     thor (1.0.1)
@@ -446,6 +447,7 @@ DEPENDENCIES
   simplecov
   squeel
   strong_parameters (= 0.2.1)
+  syntax (~> 1.2)
   test-unit
   timecop
   typecaster (= 0.0.2)!
