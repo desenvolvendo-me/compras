@@ -1,27 +1,36 @@
 <div class="buttons">
-  <%= link_to I18n.t("enumerations.supply_request_service_status.order_in_analysis"), supply_request_attendances_path(supply_request_attendance:{responsible_id:f.object.user_id, date:Date.today.to_s ,supply_request_id:f.object.id,service_status: 'order_in_analysis',justification:'Por favor analisar',responsible_id:current_user.authenticable.id}),:method=>:post, :class => 'button primary' if resource.id %>
-  <%= link_to I18n.t("enumerations.supply_request_service_status.order_in_financial_analysis"), supply_request_attendances_path(supply_request_attendance:{responsible_id:f.object.user_id, date:Date.today.to_s ,supply_request_id:f.object.id,service_status: 'order_in_financial_analysis',justification:'Por favor analisar',responsible_id:current_user.authenticable.id}),:method=>:post, :class => 'button primary' if resource.id %>
-  <%= link_to 'Liberado p/ Atendimento', supply_request_attendances_path(supply_request_attendance:{responsible_id:f.object.user_id, date:Date.today.to_s ,supply_request_id:f.object.id,service_status: 'new',justification:'Por favor analisar',responsible_id:current_user.authenticable.id}),:method=>:post, :class => "button primary" if resource.id %>
 
+  <% if @gestor %>
+    <% if f.object.persisted? && can?(:destroy, main_controller_name) %>
+      <%= f.button :destroy, style: 'float:none;' %>
+    <% end %>
+
+    <% if f.object.updatabled %>
+      <%= f.button :submit, 'data-disabled' => "Desabilitado", class: 'supply_request_submit_close' if can?(:modify, main_controller_name) %>
+    <% else %>
+      <%= f.button :submit, class: 'supply_request_submit_close', style: 'margin-top: 0%; margin-left: 0%;' if can?(:modify, main_controller_name) %>
+    <% end %>
+
+    <%= link_to I18n.t("enumerations.supply_request_service_status.order_in_analysis"), supply_request_attendances_path(supply_request_attendance:{responsible_id:f.object.user_id, date:Date.today.to_s ,supply_request_id:f.object.id,service_status: 'order_in_analysis',justification:'Por favor analisar',responsible_id:current_user.authenticable.id}),:method=>:post, :class => 'button primary' if resource.id %>
+    <%= link_to I18n.t("enumerations.supply_request_service_status.order_in_financial_analysis"), supply_request_attendances_path(supply_request_attendance:{responsible_id:f.object.user_id, date:Date.today.to_s ,supply_request_id:f.object.id,service_status: 'order_in_financial_analysis',justification:'Por favor analisar',responsible_id:current_user.authenticable.id}),:method=>:post, :class => 'button primary' if resource.id %>
+    <%= link_to 'Liberado p/ Atendimento', supply_request_attendances_path(supply_request_attendance:{responsible_id:f.object.user_id, date:Date.today.to_s ,supply_request_id:f.object.id,service_status: 'new',justification:'Por favor analisar',responsible_id:current_user.authenticable.id}),:method=>:post, :class => "button primary" if resource.id %>
+  <% end %>
   <%= link_to('Imprimir', report_supply_requests_path(resource.id), class: "button primary") unless resource.id.nil? %>
+
+  <%= link_to 'Atendimento', supply_request_attendances_path(:supply_request_id => resource.id), 'data-disabled' => f.object.decorator.not_persisted_message,  :class => 'button primary', style: 'margin-top: 1%;' %>
+
   <% if f.object.updatabled %>
     <%= f.button :submit, 'data-disabled' => "Desabilitado" if can?(:modify, main_controller_name) %>
-    <%= f.button :submit, 'data-disabled' => "Desabilitado", class: 'supply_request_submit_close' if can?(:modify, main_controller_name) %>
   <% else %>
     <%= f.button :submit if can?(:modify, main_controller_name) %>
-    <%= f.button :submit, class: 'supply_request_submit_close' if can?(:modify, main_controller_name) %>
   <% end %>
 
-  <%= link_to 'Atendimento', supply_request_attendances_path(:supply_request_id => resource.id), 'data-disabled' => f.object.decorator.not_persisted_message,  :class => 'button primary' %>
   <%= f.button :back %>
 
-  <% if f.object.persisted? && can?(:destroy, main_controller_name) %>
-    <%= f.button :destroy, style: 'margin-top: 1%; margin-left: 93%;' %>
-  <% end %>
 </div>
 
 <script>
     $(function () {
-        $(".supply_request_submit_close").val("Fechar");
+        $(".supply_request_submit_close").val("Encerrar Atendimento");
     });
 </script>

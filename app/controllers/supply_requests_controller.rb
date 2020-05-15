@@ -9,6 +9,10 @@ class SupplyRequestsController < CrudController
     super
   end
 
+  def edit
+    @gestor = gestor?
+  end
+
   def index
     @supply_requests = filters(collection) if params[:suplly_requests].nil?
     @supply_requests = SupplyRequest.where("id in (?)",params[:suplly_requests]) unless params[:suplly_requests].nil?
