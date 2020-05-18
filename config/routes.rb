@@ -517,7 +517,6 @@ Compras::Application.routes.draw do
   end
 
   post 'licitation_process/material_total_balance' => 'licitation_processes#material_total_balance', as: :licitation_process_material_total_balance
-  post 'supply_request/material_unit_value' => 'supply_requests#material_unit_value', as: :supply_request_material_unit_value
 
   resources :process_responsibles do
     collection do
