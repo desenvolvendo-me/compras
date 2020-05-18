@@ -9,6 +9,18 @@ class SupplyRequestsController < CrudController
     super
   end
 
+  def material_unit_value
+    # lici process, contract, material_id
+    lic_pro_id = params['licitation_process_id']
+    contract_id = params['contract_id']
+    material_id = params['material_id']
+
+    retorno = get_material_unit_value(lic_pro_id,contract_id,material_id)
+    # render :json => {total: 'total1', balance: 'balance1', balance_unit: 'balance_unit'}
+    # render :json => {retorno: 'total1'}
+    render :json => {retorno: retorno}
+  end
+
   def index
     @supply_requests = filters(collection) if params[:suplly_requests].nil?
     @supply_requests = SupplyRequest.where("id in (?)",params[:suplly_requests]) unless params[:suplly_requests].nil?
@@ -36,4 +48,15 @@ class SupplyRequestsController < CrudController
                      pur_sol,current_user.id )
   end
 
+  def get_material_unit_value(lic_pro_id,contract_id,material_id)
+
+    lpr = LicitationProcessRatification.joins("inner join compras_supply_requests on compras_supply_requests.creditor_id = compras_licitation_process_ratifications.creditor_id").where(licitation_process_id:lic_pro_id,compras_supply_requests:{contract_id:contract_id}).pluck(:id).uniq
+    sql =	"select material_id from public.compras_licitation_process_ratification_items ri inner join public.compras_realignment_price_items pi on ri.realignment_price_item_id = pi.id inner join public.compras_purchase_process_items cpi on cpi.id = ri.purchase_process_item_id where ri.licitation_process_ratification_id in (#{lpr.join(',')}) and cpi.material_id = #{material_id} ;"
+    records_array = ActiveRecord::Base.connection.execute(sql)
+    # material_ids = material_id
+    # records_array.ntuples.times { |index| material_ids << records_array[index]['material_id'] }
+
+    # Material.where("id.in (?)", material_ids)
+    records_array
+  end
 end

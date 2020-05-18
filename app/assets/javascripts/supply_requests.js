@@ -129,6 +129,46 @@ function setMaterialTotalAndBalance() {
     }
 }
 
+function setMaterialUnitValue() {
+    var licitation_process_id = $('#supply_request_licitation_process_id').val();
+    var material_id = $('#supply_request_material_id').val();
+    var purchase_solicitation_id = $('#supply_request_purchase_solicitation_id').val();
+    var contract_id = $('#supply_request_contract_id').val();
+    // var creditor_id = $('#supply_request_creditor_id').val();
+    var supply_request_id = $(window.location.href.split("/")).get(-2);
+    // var quantity = $('#supply_request_quantity').val();
+
+    console.log("licitation_process_id:" + licitation_process_id);
+    console.log("purchase_solicitation_id:" + purchase_solicitation_id);
+    console.log("material_id:" + material_id);
+    // console.log("creditor_id:" + creditor_id);
+
+    if (licitation_process_id && purchase_solicitation_id && material_id && contract_id) {
+        console.log('ajax');
+        $.ajax({
+            url: Routes.supply_request_material_unit_value,
+            data: {
+                licitation_process_id: licitation_process_id,
+                material_id: material_id,
+                purchase_solicitation_id: purchase_solicitation_id,
+                supply_request_id: supply_request_id,
+                // creditor_id: creditor_id
+                contract_id: contract_id
+                // quantity: quantity
+            },
+            dataType: 'json',
+            type: 'POST',
+            success: function (data) {
+                console.log(data);
+                // $('#supply_request_balance').val(data["balance"]);
+                // $('#supply_request_balance_unit').val(data["balance_unit"]);
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+            }
+        });
+    }
+}
+
 $(document).ready(function () {
     setModalUrlToDepartment();
     setModalUrlToContract();
@@ -184,6 +224,7 @@ $(document).ready(function () {
 
     $('form.supply_request').on('change', '#supply_request_material_id', function () {
         setMaterialTotalAndBalance();
+        setMaterialUnitValue();
     });
 
     $('form.supply_request').on('change', '#supply_request_licitation_process_id', function () {
