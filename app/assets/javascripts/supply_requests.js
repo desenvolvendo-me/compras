@@ -147,14 +147,7 @@ function setMaterialUnitValue() {
     var material_id = $('#supply_request_material_id').val();
     var purchase_solicitation_id = $('#supply_request_purchase_solicitation_id').val();
     var contract_id = $('#supply_request_contract_id').val();
-    // var creditor_id = $('#supply_request_creditor_id').val();
     var supply_request_id = $(window.location.href.split("/")).get(-2);
-    // var quantity = $('#supply_request_quantity').val();
-
-    console.log("licitation_process_id:" + licitation_process_id);
-    console.log("purchase_solicitation_id:" + purchase_solicitation_id);
-    console.log("material_id:" + material_id);
-    // console.log("creditor_id:" + creditor_id);
 
     if (licitation_process_id && purchase_solicitation_id && material_id && contract_id) {
         console.log('ajax');
@@ -165,16 +158,14 @@ function setMaterialUnitValue() {
                 material_id: material_id,
                 purchase_solicitation_id: purchase_solicitation_id,
                 supply_request_id: supply_request_id,
-                // creditor_id: creditor_id
                 contract_id: contract_id
-                // quantity: quantity
             },
             dataType: 'json',
             type: 'POST',
             success: function (data) {
-                console.log(data);
-                // $('#supply_request_balance').val(data["balance"]);
-                // $('#supply_request_balance_unit').val(data["balance_unit"]);
+                if(data['retorno'].length != 0){
+                    $('#supply_request_unit_value').val(parseInt(data['retorno'][0]["unit_price"]).toLocaleString('pt-br', {minimumFractionDigits: 2}));
+                }
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
             }
@@ -225,6 +216,12 @@ $(document).ready(function () {
             quantity = $('#supply_request_requested_quantity').val();
             klass = $('#supply_request_quantity').val(quantity);
         }
+
+        requested_quantity = $('#supply_request_requested_quantity').val();
+        unit_value = $('#supply_request_unit_value').val();
+        unit_value = unit_value.replace('.','').replace(',','.');
+        $('#supply_request_total_value').val((requested_quantity * unit_value).toLocaleString('pt-br', {minimumFractionDigits: 2}));
+
         setMaterialTotalAndBalance();
     });
 
