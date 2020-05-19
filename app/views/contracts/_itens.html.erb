@@ -11,8 +11,7 @@
   </thead>
 
   <tbody id="ratification_items">
-  <% f.object.try(:licitation_process).try(:licitation_process_ratifications).try(:each) do |ratification| %>
-    <% ratification.licitation_process_ratification_items.each do |item| %>
+  <% f.object.ratifications_items.try(:each) do |item| %>
       <tr class="ratification_item inherited nested">
         <td align="right"><%= item.decorator.code_or_mustache_variable %></td>
         <td class="description"><%= item.decorator.description_or_mustache_variable %></td>
@@ -21,7 +20,6 @@
         <td align="right"> <%= item.decorator.unit_price_or_mustache_variable %></td>
         <td align="right"> <%= item.decorator.total_price_or_mustache_variable %></td>
       </tr>
-    <% end %>
   <% end %>
   </tbody>
 </table>
