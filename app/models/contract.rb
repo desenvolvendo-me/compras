@@ -40,6 +40,7 @@ class Contract < Compras::Model
   has_many :ratifications, through: :licitation_process, source: :licitation_process_ratifications
   has_many :ratifications_items, through: :ratifications, source: :licitation_process_ratification_items
   has_many :supply_orders
+  has_many :contract_validations, :dependent => :destroy, :inverse_of => :contract
 
   has_and_belongs_to_many :creditors, join_table: :compras_contracts_unico_creditors, order: :id
 
