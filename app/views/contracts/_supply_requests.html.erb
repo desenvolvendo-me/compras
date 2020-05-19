@@ -1,0 +1,115 @@
+<% pendings = 0 %>
+<% answered = 0 %>
+<div id="record">
+  <table class="records">
+    <thead>
+    <tr>
+      <th>
+        <%= SupplyRequest.human_attribute_name :number %>
+      </th>
+      <th>
+        <%= "Departamento" %>
+      </th>
+      <th>
+        <%= "Data" %>
+      </th>
+      <th>
+        <%= "Quantidade" %>
+      </th>
+      <th>
+        <%= "Valor" %>
+      </th>
+      <th>
+        <%= "Situação" %>
+      </th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% f.object.supply_requests.pending.order("number asc").each do |supply_order| %>
+      <% pendings += sum_value_items_supply_order(supply_order) %>
+      <tr>
+        <td>
+          <%= supply_order.number %>
+        </td>
+        <td>
+          <%= supply_order.purchase_solicitation.department %>
+        </td>
+        <td>
+          <%= l(supply_order.authorization_date) %>
+        </td>
+        <td>
+          <%= supply_order.items.sum(:quantity) %>
+        </td>
+        <td>
+          <%= number_to_currency sum_value_items_supply_order(supply_order) %>
+        </td>
+        <td>
+          <%= supply_order.updatabled ? "Fechada" : "Aberta" %>
+        </td>
+        <td>
+          <%= link_to "Editar", edit_supply_request_path(supply_order), target: '_blank' %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+    <h1>Pedidos Pendentes Valor: <%= number_to_currency pendings %></h1>
+  </table>
+</div>
+
+<div id="record">
+  <table class="records">
+    <thead>
+    <tr>
+      <th>
+        <%= SupplyRequest.human_attribute_name :number %>
+      </th>
+      <th>
+        <%= "Departamento" %>
+      </th>
+      <th>
+        <%= "Data" %>
+      </th>
+      <th>
+        <%= "Quantidade" %>
+      </th>
+      <th>
+        <%= "Valor" %>
+      </th>
+      <th>
+        <%= "Situação" %>
+      </th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% f.object.supply_requests.answered.order("number asc").each do |supply_order| %>
+      <% answered += sum_value_items_supply_order(supply_order) %>
+      <tr>
+        <td>
+          <%= supply_order.number %>
+        </td>
+        <td>
+          <%= supply_order.purchase_solicitation.department %>
+        </td>
+        <td>
+          <%= l(supply_order.authorization_date) %>
+        </td>
+        <td>
+          <%= supply_order.items.sum(:quantity) %>
+        </td>
+        <td>
+          <%= number_to_currency sum_value_items_supply_order(supply_order) %>
+        </td>
+        <td>
+          <%= supply_order.updatabled ? "Fechada" : "Aberta" %>
+        </td>
+        <td>
+          <%= link_to "Editar", edit_supply_request_path(supply_order), target: '_blank' %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+    <h1>Pedidos Atendidos Valor: <%= number_to_currency answered %> </h1>
+  </table>
+</div>
