@@ -9,7 +9,7 @@ pt-BR:
       contract:
         department: 'Unidade Responsável'
         budget_structure: 'Unidade Responsável'
-        budget_structure_responsible: 'Pessoa Responsável'
+        budget_structure_responsible: 'Servidor Responsável pelo Contrato'
         cancellation_date: 'Data de Cancelamento'
         cancellation_reason: 'Motivo do Cancelamento'
         consortium_agreement: "Consórcio/Convênio"
