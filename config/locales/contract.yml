@@ -8,6 +8,7 @@ pt-BR:
     attributes:
       contract:
         department: 'Unidade Responsável'
+        purchasing_unit: 'Unidade Responsável'
         budget_structure: 'Unidade Responsável'
         budget_structure_responsible: 'Servidor Responsável pelo Contrato'
         cancellation_date: 'Data de Cancelamento'
