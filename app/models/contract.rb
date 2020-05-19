@@ -10,7 +10,7 @@ class Contract < Compras::Model
                   :licitation_process_id, :start_date, :budget_structure_responsible_id,
                   :lawyer_id, :parent_id, :additives_attributes, :penalty_fine,
                   :default_fine, :execution_type, :contract_guarantees,
-                  :consortium_agreement, :department_id,:balance_control_type
+                  :consortium_agreement, :department_id,:balance_control_type, :authorized_areas_attributes
 
   attr_modal :year, :contract_number, :sequential_number,
              :signature_date,:creditor
@@ -34,6 +34,7 @@ class Contract < Compras::Model
 
   belongs_to_resource :budget_structure
 
+  has_many :authorized_areas, class_name: 'ContractDepartments'
   has_many :additives, class_name: 'ContractAdditive', dependent: :restrict
   has_many :delivery_schedules, :dependent => :destroy, :order => :sequence
   has_many :occurrence_contractual_historics, :dependent => :restrict
@@ -47,6 +48,7 @@ class Contract < Compras::Model
 
   accepts_nested_attributes_for :additives, :allow_destroy => true
   accepts_nested_attributes_for :delivery_schedules, :allow_destroy => true
+  accepts_nested_attributes_for :authorized_areas, allow_destroy: true
 
   delegate :execution_type_humanize, :contract_guarantees_humanize, :contract_guarantees,
            :to => :licitation_process, :allow_nil => true
