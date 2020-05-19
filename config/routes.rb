@@ -518,6 +518,13 @@ Compras::Application.routes.draw do
 
   post 'licitation_process/material_total_balance' => 'licitation_processes#material_total_balance', as: :licitation_process_material_total_balance
 
+  resources :secretaries do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :process_responsibles do
     collection do
       get :filter
