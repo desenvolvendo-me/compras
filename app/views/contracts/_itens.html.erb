@@ -1,0 +1,27 @@
+<table class="records">
+  <thead>
+  <tr>
+    <th class="right"><%= Material.human_attribute_name :code %></th>
+    <th><%= Material.human_attribute_name :description %></th>
+    <th class="right"><%= Material.human_attribute_name :reference_unit %></th>
+    <th class="right"><%= BidderProposal.human_attribute_name :quantity %></th>
+    <th class="right"><%= BidderProposal.human_attribute_name :unit_price %></th>
+    <th class="right"><%= BidderProposal.human_attribute_name :total_price %></th>
+  </tr>
+  </thead>
+
+  <tbody id="ratification_items">
+  <% f.object.try(:licitation_process).try(:licitation_process_ratifications).try(:each) do |ratification| %>
+    <% ratification.licitation_process_ratification_items.each do |item| %>
+      <tr class="ratification_item inherited nested">
+        <td align="right"><%= item.decorator.code_or_mustache_variable %></td>
+        <td class="description"><%= item.decorator.description_or_mustache_variable %></td>
+        <td align="right"><%= item.decorator.reference_unit_or_mustache_variable %></td>
+        <td align="right"><%= item.decorator.quantity_or_mustache_variable %></td>
+        <td align="right"> <%= item.decorator.unit_price_or_mustache_variable %></td>
+        <td align="right"> <%= item.decorator.total_price_or_mustache_variable %></td>
+      </tr>
+    <% end %>
+  <% end %>
+  </tbody>
+</table>
