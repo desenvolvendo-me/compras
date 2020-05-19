@@ -1,0 +1,7 @@
+<div class="buttons">
+  <% if can?(:modify, main_controller_name) && f.object.new_record? %>
+    <%= f.button :submit %>
+  <% end %>
+
+  <%= f.button :back, :href => contract_validations_path(:contract_id => f.object.contract_id) %>
+</div>
