@@ -1,0 +1,22 @@
+<h2 style="text-align: center"><b> MATERIAIS DO FORNECEDOR <%= resource.creditor %> </b></h2>
+<div>
+  <table class="records">
+    <thead>
+      <tr>
+        <th>CÓDIGO</th>
+        <th>DESCRIÇÃO</th>
+        <th>DESCRIÇÃO DETALHADA</th>
+      </tr>
+    </thead>
+    <tbody>
+<% resource.materials.each do |item| %>
+      <tr>
+        <td><%= item.code %></td>
+        <td><%= item.description %></td>
+        <td><%= item.detailed_description %></td>
+      </tr>
+<% end %>
+    </tbody>
+  </table>
+</div>
+</p>

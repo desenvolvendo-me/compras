@@ -977,6 +977,7 @@ Compras::Application.routes.draw do
 
     match 'supply_orders/:supply_order_id' => 'supply_orders#show', as: :supply_orders
     match 'supply_requests/:supply_request_id' => 'supply_requests#show', as: :supply_requests
+    match 'creditor_materials/:supply_request_id' => 'creditor_materials#show', as: :creditor_materials
 
   end
 
