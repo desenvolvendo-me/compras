@@ -1,0 +1,28 @@
+<%= render "crud/form_base_erros", f: f %>
+
+<%= f.input :contract_id, :as => :hidden %>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-3">
+
+    <%= f.input :blocked, :as => :radio_buttons, :label => '',
+                :label_html => {:class => 'inline'}, :item_wrapper_class => 'inline',
+                :collection => [["Liberado", false], ["Bloqueado", true]] %>
+  </div>
+
+  <div class="yui3-u-1-6">
+    <%= f.input :date, :disabled => f.object.persisted? %>
+  </div>
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :responsible, :disabled => f.object.persisted? %>
+  </div>
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :observation, :disabled => f.object.persisted? %>
+  </div>
+</div>

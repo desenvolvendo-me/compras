@@ -1,0 +1,14 @@
+pt-BR:
+  activerecord:
+    models:
+      contract_validation:
+        one: "Liberação e Validação Contrato"
+        other: "Liberação e Validação de Contratos"
+
+    attributes:
+      contract_validation:
+        blocked: 'Liberado'
+        date: 'Data'
+        observation: 'Observação'
+        responsible: 'Responsável'
+        contract: 'Contrato'
