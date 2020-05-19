@@ -1,0 +1,3 @@
+class SecretariesController < CrudController
+
+end

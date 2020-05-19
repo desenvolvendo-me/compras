@@ -15,6 +15,7 @@ menu:
         - signature_configurations
         - signatures
 
+    - secretaries
     - department:
       - departments
 
