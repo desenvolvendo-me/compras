@@ -4,8 +4,9 @@ class Material < Unico::Model
   default_scope where(origin_source: "compras")
 
   attr_accessible :code, :material_class_id, :description, :detailed_description,
-                  :reference_unit_id, :manufacturer, :material_classification, :combustible,
-                  :expense_nature_id, :active, :control_amount, :medicine, :origin_source, :quantity_unit
+                  :reference_unit_id, :manufacturer, :material_classification,
+                  :combustible,:expense_nature_id, :active, :control_amount,
+                  :medicine,:origin_source,:quantity_unit,:split_expense_id
 
   attr_writer :autocomplete_material_class
 
@@ -13,6 +14,7 @@ class Material < Unico::Model
   has_enumeration_for :material_classification, :with => MaterialClassification, :create_helpers => true
   has_enumeration_for :origin_source, :with => MaterialOriginSource, :create_helpers => true
 
+  belongs_to :split_expense
   belongs_to :material_class
   belongs_to :reference_unit
 
