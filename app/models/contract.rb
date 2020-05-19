@@ -10,10 +10,10 @@ class Contract < Compras::Model
                   :licitation_process_id, :start_date, :budget_structure_responsible_id,
                   :lawyer_id, :parent_id, :additives_attributes, :penalty_fine,
                   :default_fine, :execution_type, :contract_guarantees,
-                  :consortium_agreement, :department_id,:balance_control_type
+                  :consortium_agreement, :department_id, :purchasing_unit_id, :balance_control_type
 
   attr_modal :year, :contract_number, :sequential_number,
-             :signature_date,:creditor
+             :signature_date, :creditor
 
   attr_accessor :creditor
 
@@ -26,6 +26,7 @@ class Contract < Compras::Model
                       :with => ContractBalanceControlType, :create_helpers => true
 
   belongs_to :department
+  belongs_to :purchasing_unit
   belongs_to :budget_structure_responsible, :class_name => 'Employee'
   belongs_to :contract_type
   belongs_to :dissemination_source
@@ -71,25 +72,25 @@ class Contract < Compras::Model
   orderize "id DESC"
   filterize
 
-  scope :founded, joins {contract_type}.where {contract_type.service_goal.eq(ServiceGoal::FOUNDED)}
-  scope :management, joins {contract_type}.where {contract_type.service_goal.eq(ServiceGoal::CONTRACT_MANAGEMENT)}
-  scope :by_signature_date, lambda {|date_range|
-    where {signature_date.in(date_range)}
+  scope :founded, joins { contract_type }.where { contract_type.service_goal.eq(ServiceGoal::FOUNDED) }
+  scope :management, joins { contract_type }.where { contract_type.service_goal.eq(ServiceGoal::CONTRACT_MANAGEMENT) }
+  scope :by_signature_date, lambda { |date_range|
+    where { signature_date.in(date_range) }
   }
 
-  scope :by_signature_period, lambda {|started_at, ended_at|
-    where {signature_date.gteq(started_at) & signature_date.lteq(ended_at)}
+  scope :by_signature_period, lambda { |started_at, ended_at|
+    where { signature_date.gteq(started_at) & signature_date.lteq(ended_at) }
   }
   # TODO ver porque tá chamdno o scope msm vazio
   scope :purchase_process_id, ->(purchase_process_id) do
-    if purchase_process_id !=''
-      where {|query| query.licitation_process_id.eq(purchase_process_id)}
+    if purchase_process_id != ''
+      where { |query| query.licitation_process_id.eq(purchase_process_id) }
     end
   end
 
   scope :except_type_of_removal, ->(type_of_removal) do
-    joins {licitation_process}.
-        where {licitation_process.type_of_removal.not_eq(type_of_removal) |
+    joins { licitation_process }.
+        where { licitation_process.type_of_removal.not_eq(type_of_removal) |
             licitation_process.type_of_removal.eq(nil)
         }
   end
@@ -111,7 +112,7 @@ class Contract < Compras::Model
   end
 
   def self.next_sequential(year)
-    self.where {self.year.eq year}.size + 1
+    self.where { self.year.eq year }.size + 1
   end
 
   def pledges
