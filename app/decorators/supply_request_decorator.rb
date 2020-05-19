@@ -11,6 +11,10 @@ class SupplyRequestDecorator
     self.contract.nil? || self.contract.creditors.blank? || self.contract.creditors.first.person.nil? ? '' : self.contract.creditors.first.person.name
   end
 
+  def creditor_id
+    self.contract.nil? || self.contract.creditors.blank? || self.contract.creditors.first.person.nil? ? '' : self.contract.creditors.first.id
+  end
+
   def value
     number_with_precision self.get_value
   end

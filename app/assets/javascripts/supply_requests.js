@@ -185,6 +185,7 @@ $(document).ready(function () {
             quantity = $('#supply_request_requested_quantity').val();
             klass = $('#supply_request_quantity').val(quantity);
         }
+
         setMaterialTotalAndBalance();
     });
 

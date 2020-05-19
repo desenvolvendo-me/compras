@@ -23,3 +23,5 @@ pt-BR:
         authorized_value: "Valor já autorizado"
         authorization_value: "Valor a autorizar"
         value_balance: "Saldo"
+        get_unit_price: "Valor Unitário"
+        total_value: "Valor Total"

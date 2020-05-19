@@ -23,11 +23,10 @@
         <%= f.input :quantity, :as => :fake, :required => true, :disabled => true %>
       </div>
 
-
       <div class="yui3-u-1-3">
         <div class="input fake supply_request_balance">
-          <label class="fake" for="supply_request_balance">Saldo</label>
-          <input class="string fake" id="supply_request_balance" name="supply_request[balance]" type="text" readonly>
+          <label class="fake" for="supply_request_balance">Valor Total</label>
+          <input class="string fake" id="supply_request_total_value" name="supply_request[balance2]" type="text" readonly>
         </div>
       </div>
 
@@ -56,6 +55,10 @@
       <th><%= SupplyRequestItem.human_attribute_name :material %></th>
       <th><%= SupplyRequestItem.human_attribute_name :requested_quantity %></th>
       <th><%= SupplyRequestItem.human_attribute_name :quantity %></th>
+      <% if @gestor %>
+        <th><%= SupplyRequestItem.human_attribute_name :get_unit_price %></th>
+        <th><%= SupplyRequestItem.human_attribute_name :total_value %></th>
+      <% end %>
       <th></th>
       <th></th>
     </tr>
@@ -68,6 +71,8 @@
                  material_id: p.object.material_id,
                  requested_quantity: p.object.requested_quantity,
                  quantity: p.object.quantity,
+                 get_unit_price: number_with_precision(p.object.get_unit_price),
+                 total_value: number_with_precision(p.object.get_unit_price * p.object.quantity),
                  f: p %>
     <% end %>
     </tbody>
@@ -80,6 +85,8 @@
                  material: '{{material}}',
                  material_id: '{{material_id}}',
                  requested_quantity: '{{requested_quantity}}',
+                 get_unit_price: '{{get_unit_price}}',
+                 total_value: '{{total_value}}',
                  quantity: '{{quantity}}',
                  f: p %>
     <% end %>

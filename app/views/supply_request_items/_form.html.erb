@@ -1,7 +1,11 @@
 <tr class="record nested-record item-record" id="material-id-<%= material_id %>">
   <td><%= material %></td>
   <td><%= requested_quantity %></td>
-  <td><%= quantity %></td>
+  <% if @gestor %>
+    <td><%= quantity %></td>
+    <td><%= get_unit_price %></td>
+  <% end %>
+  <td><%= total_value %></td>
   <td>
     <%= link_to 'Editar', '#', class: 'edit-nested-record' %>
   </td>
