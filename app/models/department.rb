@@ -1,15 +1,15 @@
 class Department < Compras::Model
-  belongs_to :purchasing_unit
-  has_many :department_people
-
-  attr_accessible :description, :purchasing_unit_id, :department_people_attributes
-
+  attr_accessible :description, :purchasing_unit_id,
+                  :department_people_attributes,:secretary_id
   attr_modal :description
+
+  belongs_to :purchasing_unit
+  belongs_to :secretary
+  has_many :department_people
 
   validates :description, :presence => true
 
   accepts_nested_attributes_for :department_people, allow_destroy: true
-
 
   orderize :description
   filterize
