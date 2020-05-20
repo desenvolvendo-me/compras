@@ -149,8 +149,9 @@ class Contract < Compras::Model
   end
 
   def answered
-    return [] if per_service_status.empty?
-    per_service_status["fully_serviced"] + per_service_status["partially_answered"]
+    status = per_service_status
+    return [] if status.empty?
+    status["fully_serviced"].to_a + status["partially_answered"].to_a
   end
 
   def pending
