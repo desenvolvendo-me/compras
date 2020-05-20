@@ -34,13 +34,14 @@ class Contract < Compras::Model
 
   belongs_to_resource :budget_structure
 
-  has_many :authorized_areas, class_name: 'ContractDepartments'
   has_many :additives, class_name: 'ContractAdditive', dependent: :restrict
   has_many :delivery_schedules, :dependent => :destroy, :order => :sequence
   has_many :occurrence_contractual_historics, :dependent => :restrict
   has_many :ratifications, through: :licitation_process, source: :licitation_process_ratifications
   has_many :ratifications_items, through: :ratifications, source: :licitation_process_ratification_items
   has_many :supply_orders
+  has_many :authorized_areas, :class_name => 'ContractDepartment', :dependent => :restrict,
+           :inverse_of => :contract, :order => :id
 
   has_and_belongs_to_many :creditors, join_table: :compras_contracts_unico_creditors, order: :id
 
