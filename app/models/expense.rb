@@ -27,15 +27,15 @@ class Expense < Compras::Model
   before_save :set_destine_type
 
   scope :term, lambda {|q|
-    joins { unity }.
-    where { unity.code.like("%#{q}%") }
+    joins { project_activity }.
+    where { project_activity.code.like("%#{q}%") }
   }
 
   orderize "id DESC"
   filterize
 
   def to_s
-    "#{organ} - #{unity}"
+    "Projeto Atividade: #{project_activity} e Fonte: #{resource_source}"
   end
 
   def set_destine_type
