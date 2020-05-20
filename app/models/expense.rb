@@ -26,6 +26,11 @@ class Expense < Compras::Model
 
   before_save :set_destine_type
 
+  scope :term, lambda {|q|
+    joins { unity }.
+    where { unity.code.like("%#{q}%") }
+  }
+
   orderize "id DESC"
   filterize
 
