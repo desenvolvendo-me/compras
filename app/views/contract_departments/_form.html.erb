@@ -1,0 +1,15 @@
+<tr class="record nested-record item-record" id="department-id-<%= department_id %>">
+  <td><%= department %></td>
+  <td>
+    <%= link_to 'Editar', '#', class: 'edit-nested-record' %>
+  </td>
+
+  <td>
+    <%= f.input :department_id, as: :hidden, input_html: { value: department_id, class: 'department-id' } %>
+    <%= f.input :department, as: :hidden, input_html: { value: department } %>
+    <%= f.input :id, as: :hidden, input_html: { value: id } %>
+    <%= f.input :_destroy, as: :hidden, input_html: { class: 'destroy' } %>
+
+    <%= link_to 'Remover', '#', class: 'remove-nested-record' %>
+  </td>
+</tr>

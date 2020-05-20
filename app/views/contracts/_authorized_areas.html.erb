@@ -1,0 +1,50 @@
+<div id="contract_departments">
+
+  <div class="nested-fields add-margin-bottom">
+    <%= hidden_field_tag :authorized_area_id, nil, :name => 'contract_department[id]' %>
+
+    <%= f.input :department, :as => :auto_complete, :fake => true,
+                'data-hidden-field-class' => 'unique',
+                :source_path => departments_path,
+                :required => true %>
+
+    <div class="yui3-u-1-6">
+      <%= button_tag 'Adicionar', type: :button,
+                     :class => 'button add-nested-record field-without-label',
+                     'data-template' => 'contract_departments_template',
+                     'data-records' => 'authorized_areas-records',
+                     'data-disabled' => not_updateable_message %>
+    </div>
+  </div>
+
+  <%= f.error :authorized_areas %>
+
+  <table id="authorized_areas-records" class="records">
+    <thead>
+    <tr>
+      <th><%= Contract.human_attribute_name :department %></th>
+      <th></th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <%= f.association :authorized_areas, :collection => localized(f.object.authorized_areas) do |p| %>
+      <%= render 'contract_departments/form',
+                 id: p.object.id,
+                 department: p.object.department,
+                 department_id: p.object.department_id,
+                 f: p %>
+    <% end %>
+    </tbody>
+  </table>
+
+  <%= mustache "contract_departments_template" do %>
+    <%= f.association :authorized_areas_attributes, :collection => f.object.authorized_areas.build, :index => '{{uuid}}' do |p| %>
+      <%= render 'contract_departments/form',
+                 id: '{{id}}',
+                 department: '{{department}}',
+                 department_id: '{{department_id}}',
+                 f: p %>
+    <% end %>
+  <% end %>
+</div>

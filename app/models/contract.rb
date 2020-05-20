@@ -10,7 +10,8 @@ class Contract < Compras::Model
                   :licitation_process_id, :start_date, :budget_structure_responsible_id,
                   :lawyer_id, :parent_id, :additives_attributes, :penalty_fine,
                   :default_fine, :execution_type, :contract_guarantees,
-                  :consortium_agreement, :department_id, :purchasing_unit_id, :balance_control_type
+                  :consortium_agreement, :department_id,:balance_control_type, :authorized_areas_attributes
+                  :purchasing_unit_id
 
   attr_modal :year, :contract_number, :sequential_number,
              :signature_date, :creditor
@@ -41,6 +42,8 @@ class Contract < Compras::Model
   has_many :ratifications, through: :licitation_process, source: :licitation_process_ratifications
   has_many :ratifications_items, through: :ratifications, source: :licitation_process_ratification_items
   has_many :supply_orders
+  has_many :authorized_areas, :class_name => 'ContractDepartment', :dependent => :restrict,
+           :inverse_of => :contract, :order => :id
   has_many :contract_validations, :dependent => :destroy, :inverse_of => :contract
   has_many :supply_requests
 
@@ -50,6 +53,7 @@ class Contract < Compras::Model
 
   accepts_nested_attributes_for :additives, :allow_destroy => true
   accepts_nested_attributes_for :delivery_schedules, :allow_destroy => true
+  accepts_nested_attributes_for :authorized_areas, allow_destroy: true
 
   delegate :execution_type_humanize, :contract_guarantees_humanize, :contract_guarantees,
            :to => :licitation_process, :allow_nil => true
