@@ -45,13 +45,6 @@ class SupplyRequest < Compras::Model
     where { purchase_solicitation_id.in purchase_solicitation }
   }
 
-  scope :answered, -> {
-    where { supply_request_status.in(["delivered", "in_service"]) }
-  }
-  scope :pending,  -> {
-    where { supply_request_status.in(["sent", "pending", "financial_analysis"]) }
-  }
-
   def to_s
     "#{contract} - #{licitation_process}"
   end

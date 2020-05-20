@@ -137,6 +137,30 @@ class Contract < Compras::Model
     # contract_termination.blank?
   end
 
+  def per_service_status
+    suplly_request_pending = {}
+    self.supply_requests.each do |supply_request|
+      unless supply_request.supply_request_attendances.last.nil?
+        suplly_request_pending[supply_request.supply_request_attendances.last.service_status] = [] unless suplly_request_pending.key? supply_request.supply_request_attendances.last.service_status
+        suplly_request_pending[supply_request.supply_request_attendances.last.service_status].push(supply_request.id)
+      end
+    end
+    suplly_request_pending
+  end
+
+  def answered
+    return [] if per_service_status.empty?
+    per_service_status["fully_serviced"] + per_service_status["partially_answered"]
+  end
+
+  def pending
+    service_status_all = []
+    per_service_status.each do |service_status|
+      service_status_all += service_status.last
+    end
+    service_status_all - answered
+  end
+
   private
 
   def presence_of_at_least_one_creditor
