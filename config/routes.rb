@@ -307,6 +307,13 @@ Compras::Application.routes.draw do
     end
   end
 
+  resources :contract_validations, :only => [:index, :new, :create, :edit] do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   post 'contract/plegde_request' => 'contracts#plegde_request', as: :contracts_plegde_request
 
   resources :contract_termination_annuls, :only => [:new, :create, :edit, :update]
@@ -977,6 +984,7 @@ Compras::Application.routes.draw do
 
     match 'supply_orders/:supply_order_id' => 'supply_orders#show', as: :supply_orders
     match 'supply_requests/:supply_request_id' => 'supply_requests#show', as: :supply_requests
+    match 'creditor_materials/:supply_request_id' => 'creditor_materials#show', as: :creditor_materials
 
   end
 

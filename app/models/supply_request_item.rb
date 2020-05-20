@@ -74,7 +74,7 @@ class SupplyRequestItem < Compras::Model
       material_id = get_material_unit_value(lic_pro_id,contract_id,material_id)
       if material_id.ntuples != 0
         quantity_unit = Material.find(material_id[0]['material_id']).quantity_unit
-        material_id[0]['unit_price'].to_f / quantity_unit
+        material_id[0]['unit_price'].to_f / quantity_unit.to_f
       end
     end
   end

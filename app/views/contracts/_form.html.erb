@@ -3,29 +3,25 @@
     <li>
       <a href="#main">Principal</a>
     </li>
-
-    <!--    <li>-->
-    <!--      <a href="#pledges">Empenhos</a>-->
-    <!--    </li>-->
-
     <li>
       <a href="#schedules">Cronogramas de entrega</a>
     </li>
-
     <li>
       <a href="#supply_orders">Ordens de Fornecimento</a>
     </li>
     <li>
       <a href="#authorized_areas">Departamentos</a>
     </li>
+    <li>
+      <a href="#itens">Itens do Objeto</a>
+    </li>
+    <li>
+      <a href="#supply_requests">Pedidos de Fornecimento</a>
+    </li>
   </ul>
 
   <div id="main">
     <%= render 'main', :f => f %>
-  </div>
-
-  <div id="pledges">
-    <%#= render 'pledges', :f => f %>
   </div>
 
   <div id="schedules">
@@ -38,6 +34,14 @@
 
   <div id="authorized_areas">
     <%= render 'authorized_areas', :f => f %>
+  </div>
+  
+  <div id="itens">
+    <%= render 'itens', :f => f %>
+  </div>
+
+  <div id="supply_requests">
+    <%= render 'supply_requests', :f => f %>
   </div>
 
 </div>
