@@ -8,47 +8,59 @@
         <%= SupplyRequest.human_attribute_name :number %>
       </th>
       <th>
-        <%= "Departamento" %>
+        <%= "Usuário" %>
       </th>
       <th>
-        <%= "Data" %>
+        <%= "Fornecedor" %>
       </th>
       <th>
-        <%= "Quantidade" %>
+        <%= "Local Solicitante" %>
       </th>
       <th>
         <%= "Valor" %>
       </th>
       <th>
-        <%= "Situação" %>
+        <%= "Data da Solicitação" %>
+      </th>
+      <th>
+        <%= "Processo de Compra" %>
+      </th>
+      <th>
+        <%= "Status do Último Atendimento" %>
       </th>
       <th></th>
     </tr>
     </thead>
     <tbody>
-    <% f.object.supply_requests.pending.order("number asc").each do |supply_order| %>
-      <% pendings += sum_value_items_supply_order(supply_order) %>
+    <% SupplyRequest.where(id: f.object.pending).order("number asc").each do |supply_request| %>
+      <% pendings += sum_value_items_supply_order(supply_request) %>
       <tr>
         <td>
-          <%= supply_order.number %>
+          <%= supply_request.number %>
         </td>
         <td>
-          <%= supply_order.purchase_solicitation.department %>
+          <%= supply_request.user %>
         </td>
         <td>
-          <%= l(supply_order.authorization_date) %>
+          <%= supply_request.creditor %>
         </td>
         <td>
-          <%= supply_order.items.sum(:quantity) %>
+          <%= supply_request.department %>
         </td>
         <td>
-          <%= number_to_currency sum_value_items_supply_order(supply_order) %>
+          <%= number_to_currency sum_value_items_supply_order(supply_request) %>
         </td>
         <td>
-          <%= supply_order.updatabled ? "Fechada" : "Aberta" %>
+          <%= l(supply_request.authorization_date) %>
         </td>
         <td>
-          <%= link_to "Editar", edit_supply_request_path(supply_order), target: '_blank' %>
+          <%= supply_request.licitation_process %>
+        </td>
+        <td>
+          <%= supply_request.decorator.status_last_attendance %>
+        </td>
+        <td>
+          <%= link_to "Editar", edit_supply_request_path(supply_request), target: '_blank' %>
         </td>
       </tr>
     <% end %>
@@ -65,47 +77,59 @@
         <%= SupplyRequest.human_attribute_name :number %>
       </th>
       <th>
-        <%= "Departamento" %>
+        <%= "Usuário" %>
       </th>
       <th>
-        <%= "Data" %>
+        <%= "Fornecedor" %>
       </th>
       <th>
-        <%= "Quantidade" %>
+        <%= "Local Solicitante" %>
       </th>
       <th>
         <%= "Valor" %>
       </th>
       <th>
-        <%= "Situação" %>
+        <%= "Data da Solicitação" %>
+      </th>
+      <th>
+        <%= "Processo de Compra" %>
+      </th>
+      <th>
+        <%= "Status do Último Atendimento" %>
       </th>
       <th></th>
     </tr>
     </thead>
     <tbody>
-    <% f.object.supply_requests.answered.order("number asc").each do |supply_order| %>
-      <% answered += sum_value_items_supply_order(supply_order) %>
+    <% SupplyRequest.where(id: f.object.answered).order("number asc").each do |supply_request| %>
+      <% answered += sum_value_items_supply_order(supply_request) %>
       <tr>
         <td>
-          <%= supply_order.number %>
+          <%= supply_request.number %>
         </td>
         <td>
-          <%= supply_order.purchase_solicitation.department %>
+          <%= supply_request.user %>
         </td>
         <td>
-          <%= l(supply_order.authorization_date) %>
+          <%= supply_request.creditor %>
         </td>
         <td>
-          <%= supply_order.items.sum(:quantity) %>
+          <%= supply_request.department %>
         </td>
         <td>
-          <%= number_to_currency sum_value_items_supply_order(supply_order) %>
+          <%= number_to_currency sum_value_items_supply_order(supply_request) %>
         </td>
         <td>
-          <%= supply_order.updatabled ? "Fechada" : "Aberta" %>
+          <%= l(supply_request.authorization_date) %>
         </td>
         <td>
-          <%= link_to "Editar", edit_supply_request_path(supply_order), target: '_blank' %>
+          <%= supply_request.licitation_process %>
+        </td>
+        <td>
+          <%= supply_request.decorator.status_last_attendance %>
+        </td>
+        <td>
+          <%= link_to "Editar", edit_supply_request_path(supply_request), target: '_blank' %>
         </td>
       </tr>
     <% end %>
