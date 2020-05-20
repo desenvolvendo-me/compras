@@ -42,6 +42,7 @@ class Contract < Compras::Model
   has_many :ratifications_items, through: :ratifications, source: :licitation_process_ratification_items
   has_many :supply_orders
   has_many :contract_validations, :dependent => :destroy, :inverse_of => :contract
+  has_many :supply_requests
 
   has_and_belongs_to_many :creditors, join_table: :compras_contracts_unico_creditors, order: :id
 
@@ -134,6 +135,31 @@ class Contract < Compras::Model
 
   def allow_termination?
     # contract_termination.blank?
+  end
+
+  def per_service_status
+    suplly_request_pending = {}
+    self.supply_requests.each do |supply_request|
+      unless supply_request.supply_request_attendances.last.nil?
+        suplly_request_pending[supply_request.supply_request_attendances.last.service_status] = [] unless suplly_request_pending.key? supply_request.supply_request_attendances.last.service_status
+        suplly_request_pending[supply_request.supply_request_attendances.last.service_status].push(supply_request.id)
+      end
+    end
+    suplly_request_pending
+  end
+
+  def answered
+    status = per_service_status
+    return [] if status.empty?
+    status["fully_serviced"].to_a + status["partially_answered"].to_a
+  end
+
+  def pending
+    service_status_all = []
+    per_service_status.each do |service_status|
+      service_status_all += service_status.last
+    end
+    service_status_all - answered
   end
 
   private
