@@ -3,6 +3,10 @@ class Secretary < Compras::Model
 
   belongs_to :employee
 
+  scope :term, lambda { |q|
+    where { name.like("%#{q}%") }
+  }
+
   orderize "id DESC"
   filterize
 
