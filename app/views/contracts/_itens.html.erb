@@ -11,7 +11,7 @@
   </thead>
 
   <tbody id="ratification_items">
-  <% f.object.ratifications_items.try(:each) do |item| %>
+  <% f.object.winning_items.try(:each) do |item| %>
       <tr class="ratification_item inherited nested">
         <td align="right"><%= item.decorator.code_or_mustache_variable %></td>
         <td class="description"><%= item.decorator.description_or_mustache_variable %></td>
