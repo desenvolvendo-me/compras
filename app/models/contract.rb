@@ -10,7 +10,7 @@ class Contract < Compras::Model
                   :licitation_process_id, :start_date, :budget_structure_responsible_id,
                   :lawyer_id, :parent_id, :additives_attributes, :penalty_fine,
                   :default_fine, :execution_type, :contract_guarantees,
-                  :consortium_agreement, :department_id,:balance_control_type, :authorized_areas_attributes,
+                  :consortium_agreement, :department_id, :balance_control_type, :authorized_areas_attributes,
                   :purchasing_unit_id, :financials_attributes
 
   attr_modal :year, :contract_number, :sequential_number,
@@ -102,6 +102,15 @@ class Contract < Compras::Model
         where { licitation_process.type_of_removal.not_eq(type_of_removal) |
             licitation_process.type_of_removal.eq(nil)
         }
+  end
+
+  def winning_items
+    licitation_process_id = self.licitation_process.id
+    creditor_ids = self.creditor_ids
+    LicitationProcessRatificationItem.
+        joins { licitation_process_ratification.licitation_process }.
+        where { licitation_process_ratification.licitation_process.id.eq(licitation_process_id) }.
+        where { licitation_process_ratification.creditor_id.in(creditor_ids) }
   end
 
   def creditor
