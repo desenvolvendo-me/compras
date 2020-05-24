@@ -1,20 +1,34 @@
 <fieldset>
-  <%= f.input :name %>
-
   <div class="yui3-g">
-    <div class="yui3-u-1-2">
-      <%= f.input :street_type %>
+    <div class="yui3-u-1-4">
+      <%= f.input :zip_code %>
+    </div>
+    <div class="yui3-u-3-4">
+      <%= f.input :city, modal_url: modal_cities_path(active: true) %>
+    </div>
+  </div>
+  <div class="yui3-g">
+    <div class="yui3-u-1-4">
+      <%= f.input :street_type, modal_url: modal_street_types_path(active: true) %>
     </div>
 
-    <div class="yui3-u-1-8">
-      <%= f.input :tax_zone %>
+    <div class="yui3-u-3-4">
+      <%= f.input :name %>
     </div>
   </div>
 
-  <%= f.input :city %>
+  
 
-  <div class="modal-finder" >
-    <%= f.input :neighborhood, :as => :modal , :url => modal_neighborhoods_path(:city_id => f.object.city_id), :hidden_field => false, :disabled => f.object.new_record? %>
+  <div class="yui3-g">
+    <div class="yui3-u-1-4">
+      <%= f.input :tax_zone %>
+    </div>
+
+    <div class="modal-finder yui3-u-3-4" >
+      <%= f.input :neighborhood, as: :modal ,
+        modal_url: modal_neighborhoods_path(city_id: f.object.city_id, active: true),
+        hidden_field: false, disabled: f.object.new_record? %>
+    </div>
   </div>
 
   <table class="records">
@@ -27,29 +41,116 @@
         </th>
       </tr>
     </thead>
+
     <tbody class="street_neighborhood_records">
       <% f.object.neighborhoods.each do |neighborhood| %>
-        <%= render 'neighborhood', :id => neighborhood.id, :name => neighborhood.name %>
+        <%= render 'neighborhood', id: neighborhood.id, name: neighborhood.name %>
       <% end %>
     </tbody>
   </table>
 
   <%= mustache "street_neighborhood_template" do %>
-    <%= render 'neighborhood', :id => '{{id}}', :name => '{{value}}' %>
+    <%= render 'neighborhood', id: '{{id}}', name: '{{value}}' %>
   <% end %>
 </fieldset>
 
 <script>
-  $('#street_city_id').change(function (e, city) {
-    var neighborhood = $('#street_neighborhood'),
-        neighborhood_id = $('#street_neighborhood_id');
+  $(document).ready(function(){
+    var i = 0;
 
-    if (city) {
-      neighborhood.attr('disabled', false).val("").data('modal-url', '<%= modal_neighborhoods_path %>?city_id=' + city.id);
-      neighborhood_id.attr('disabled', false).val("");
-    } else {
-      neighborhood.attr('disabled', true).val("").data('modal-url', '<%= modal_neighborhoods_path %>');
-      neighborhood_id.attr('disabled', true).val("");
-    }
-  });
+      $('#street_zip_code').change(function (event) {
+  
+      
+        var zip_code = this.value.replace('-', ''),
+            neighborhood = $('#street_neighborhood'),
+            neighborhood_id = $('#street_neighborhood_id'),
+            name = $('#street_name'),
+            street_type = $('#street_street_type'),
+            street_type_id = $('#street_street_type_id');
+
+        if (zip_code.length < 8) {
+          return;
+        };
+
+        $.ajax({
+          url: 'https://viacep.com.br/ws/' + zip_code + '/json/',
+          success: function(response) {
+            
+            if (response.logradouro == '') {
+              return;
+            };
+            var uf = response.uf;
+            var local = response.localidade;
+            var path  = "<%= by_name_and_state_cities_path%>"
+            
+            $.get(path+"?uf="+uf+"&local="+local, function(data){
+            
+              var city = $('#street_city'),
+                  cityId = $('#street_city_id');
+              var currentPrefectureCityName = data[0].name,
+                currentPrefectureCityId = data[0].id,
+                currentPrefectureStateId = data[0].state_id,
+                currentPrefectureState = response.uf,
+                cityName = currentPrefectureCityName + ' - ' + currentPrefectureState;      
+                
+                if (currentPrefectureCityId) {
+                  city.select('val', '');
+                  city.select('val', cityName);
+                  city.val(cityName);
+                  cityId.val(currentPrefectureCityId);
+                }
+                if (cityId.val() != '') {
+                  var neighborhood = $('#street_neighborhood'),
+                      neighborhood_id = $('#street_neighborhood_id');
+
+                  neighborhood.attr('disabled', false).val("").data('source', '<%= neighborhoods_path %>?city_id=' + cityId.val());
+                  neighborhood_id.attr('disabled', false).val("");
+                
+              $.get('<%= street_types_path %>?by_name=' + response.logradouro.split(' ')[0], function(data){
+                street_type_id.val(data[0].id);
+                street_type.select('val', data[0].name);
+                street_type.val(data[0].name);
+              }, 'json');
+
+                name.val(response.logradouro.split(' ').slice(1).join(' '));
+                var city = $('#street_city'),
+                  
+                      cityId = $('#street_city_id');
+                     
+             
+              
+              if (i == 0){
+                i++;
+                
+              $.get('<%= by_name_and_city_neighborhoods_path %>?name=' + response.bairro + "&city="+currentPrefectureCityId, function(data){
+                $(".street_neighborhood_records").append($("#street_neighborhood_template").mustache({
+                  id: data[0].id,
+                  value: data[0].name
+                }));
+              }, 'json');
+              
+              };
+        }
+            }, 'json');
+            
+            
+          
+          }
+        });
+      });
+
+      $('#street_city_id').change(function (e, city) {
+        var neighborhood = $('#street_neighborhood'),
+            neighborhood_id = $('#street_neighborhood_id');
+
+        if (city) {
+          neighborhood.attr('disabled', false).val("").data('modal-url', '<%= modal_neighborhoods_path(active: true) %>?city_id=' + city.id);
+          neighborhood_id.attr('disabled', false).val("");
+        } else {
+          neighborhood.attr('disabled', true).val("").data('modal-url', '<%= modal_neighborhoods_path(active: true) %>');
+          neighborhood_id.attr('disabled', true).val("");
+        }
+      });
+      $(".street_zip_code").append('<a target="_blank" href="http://www.buscacep.correios.com.br/sistemas/buscacep/">Buscar Cep</a>');
+ }); 
 </script>

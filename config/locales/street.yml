@@ -12,6 +12,7 @@ pt-BR:
         tax_zone: "Zona fiscal"
         neighborhood: "Bairro"
         city: "Cidade"
+        zip_code: "CEP"
 
   simple_form:
     hints:
