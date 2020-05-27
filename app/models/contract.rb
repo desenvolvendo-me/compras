@@ -11,7 +11,7 @@ class Contract < Compras::Model
                   :lawyer_id, :parent_id, :additives_attributes, :penalty_fine,
                   :default_fine, :execution_type, :contract_guarantees,
                   :consortium_agreement, :department_id, :balance_control_type, :authorized_areas_attributes,
-                  :purchasing_unit_id, :financials_attributes
+                  :purchasing_unit_id, :financials_attributes, :balance
 
   attr_modal :year, :contract_number, :sequential_number,
              :signature_date, :creditor

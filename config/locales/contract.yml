@@ -14,6 +14,7 @@ pt-BR:
         cancellation_date: 'Data de Cancelamento'
         cancellation_reason: 'Motivo do Cancelamento'
         consortium_agreement: "Consórcio/Convênio"
+        balance: "Saldo Contrato"
         content: 'Objeto do Contrato'
         contract_file: 'Contrato'
         contract_guarantees: 'Garantias do Contrato'
