@@ -6,7 +6,7 @@ class SupplyRequest < Compras::Model
                   :items_attributes, :year, :purchase_solicitation_id,
                   :updatabled, :contract_id, :supply_request_status,
                   :justification, :supply_request_file,:user_id,
-                  :department_id
+                  :department_id, :number
 
   attr_modal :number, :creditor_id,:authorization_date, :licitation_process_id, :user, :purchase_solicitation_id
 

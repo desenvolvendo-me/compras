@@ -2,7 +2,7 @@ module NumberSupply
   extend ActiveSupport::Concern
 
   included do
-    before_create :set_number
+    before_update :set_number
 
     validates :year, presence: true
 
@@ -11,9 +11,9 @@ module NumberSupply
 
       number = klass.classify.constantize.maximum(:number, conditions: ["compras_#{klass.pluralize.underscore}.year = '#{self.year}'"])
       if number.present?
-        self.number = "#{number.split("/").first.to_i + 1}/#{self.year}"
+        self.number = number + 1
       else
-        self.number = "1/#{self.year}"
+        self.number = 1
       end
     end
   end
