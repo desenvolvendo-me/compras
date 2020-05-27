@@ -6,7 +6,7 @@ class SupplyRequest < Compras::Model
                   :items_attributes, :year, :purchase_solicitation_id,
                   :updatabled, :contract_id, :supply_request_status,
                   :justification, :supply_request_file,:user_id,
-                  :department_id
+                  :department_id, :number_year
 
   attr_modal :number, :creditor_id,:authorization_date, :licitation_process_id, :user, :purchase_solicitation_id
 
@@ -54,12 +54,8 @@ class SupplyRequest < Compras::Model
 
   def get_value
     value = 0
-    realignment_price = RealignmentPrice.select(:id).find_by_purchase_process_id(self.licitation_process_id)
     self.items.each do |item|
-      licitation_process_item = RealignmentPriceItem.joins(:material).where(realignment_price_id:realignment_price.id,material:{id:item.material_id})
-      if licitation_process_item.size != 0
-        value += licitation_process_item[0].price * item.quantity
-      end
+      value += item.get_unit_price * item.quantity
     end
     value
   end

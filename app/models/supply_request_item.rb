@@ -1,6 +1,6 @@
 class SupplyRequestItem < Compras::Model
   attr_accessible :authorization_quantity, :authorization_value, :material_id,
-                  :pledge_item_id, :quantity,:requested_quantity, :supply_request_id
+                  :pledge_item_id, :quantity, :requested_quantity, :supply_request_id
   attr :balance, :balance_unit
   attr_accessor :get_unit_price
 
@@ -24,17 +24,17 @@ class SupplyRequestItem < Compras::Model
   filterize
 
   scope :by_pledge_item_id, ->(pledge_item_id) do
-    where {|query| query.pledge_item_id.eq(pledge_item_id)}
+    where { |query| query.pledge_item_id.eq(pledge_item_id) }
   end
 
   def authorized_quantity
-    SupplyOrderItem.where {|query|
+    SupplyOrderItem.where { |query|
       query.pledge_item_id.eq(pledge_item_id)
     }.sum(:authorization_quantity) || 0
   end
 
   def authorized_value
-    SupplyOrderItem.where {|query|
+    SupplyOrderItem.where { |query|
       query.pledge_item_id.eq(pledge_item_id)
     }.sum(:authorization_value) || 0
   end
@@ -63,27 +63,28 @@ class SupplyRequestItem < Compras::Model
     item ? item.supply_request_item_value_balance : 0
   end
 
-  private
-
   def get_unit_price
-    lic_pro_id = self.supply_request.licitation_process_id
-    contract_id = self.supply_request.contract_id
     material_id = self.material_id
+    supply_request_id = self.supply_request.id
+    creditor_id = self.supply_request.creditor.id
 
-    if lic_pro_id && contract_id && material_id
-      material_id = get_material_unit_value(lic_pro_id,contract_id,material_id)
-      if material_id.ntuples != 0
-        quantity_unit = Material.find(material_id[0]['material_id']).quantity_unit
-        material_id[0]['unit_price'].to_f / quantity_unit.to_f
-      end
+    if supply_request_id && creditor_id && material_id
+      material_unit_value = get_material_unit_value(supply_request_id, creditor_id, material_id)
+      quantity_unit = self.material.quantity_unit
+      material_unit_value.to_f * quantity_unit.to_f
     end
   end
 
-  def get_material_unit_value(lic_pro_id,contract_id,material_id)
-    lpr = LicitationProcessRatification.joins("inner join compras_supply_requests on compras_supply_requests.creditor_id = compras_licitation_process_ratifications.creditor_id").where(licitation_process_id:lic_pro_id,compras_supply_requests:{contract_id:contract_id}).pluck(:id).uniq
-    sql =	"select material_id,unit_price from public.compras_licitation_process_ratification_items ri inner join public.compras_realignment_price_items pi on ri.realignment_price_item_id = pi.id inner join public.compras_purchase_process_items cpi on cpi.id = ri.purchase_process_item_id where ri.licitation_process_ratification_id in (#{lpr.join(',')}) and cpi.material_id = #{material_id} ;"
-    records_array = ActiveRecord::Base.connection.execute(sql)
-    records_array
+  private
+
+  def get_material_unit_value(supply_request_id, creditor_id, material_id)
+    realignment_price_items = RealignmentPriceItem.joins { purchase_process.supply_requests }
+                                  .joins { creditor }
+                                  .joins { material }
+                                  .where { material.id.eq(material_id) }
+                                  .where { creditor.id.eq(creditor_id) }
+                                  .where { purchase_process.supply_requests.id.eq(supply_request_id) }
+    realignment_price_items.last.price
   end
 
   def authorization_quantity_should_be_lower_than_quantity

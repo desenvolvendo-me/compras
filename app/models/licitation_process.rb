@@ -91,6 +91,7 @@ class LicitationProcess < Compras::Model
   has_many :trading_item_bids, through: :trading_items, source: :bids, order: :id
   has_many :trading_item_negotiations, through: :trading_items, source: :negotiation, order: :id
   has_many :contracts, dependent: :restrict
+  has_many :supply_requests, dependent: :restrict
   has_many :supply_orders, dependent: :restrict
   has_many :fractionations, class_name: 'PurchaseProcessFractionation', dependent: :destroy,
            foreign_key: :purchase_process_id
