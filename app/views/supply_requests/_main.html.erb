@@ -1,6 +1,6 @@
 <div class="yui3-g">
 
-  <input class id="current_user" value="<%=current_user.id %>" hidden >
+  <input class id="current_user" value="<%= current_user.id %>" hidden>
   <div class="yui3-u-1-4">
     <%= f.input :licitation_process, :required => true, :disabled => f.object.updatabled %>
   </div>
@@ -13,7 +13,10 @@
 </div>
 <div class="yui3-g">
   <div class="yui3-u-1-4">
-    <%= f.input :number, :disabled => true %>
+    <div class="input integer optional disabled">
+      <label class="integer optional">Número</label>
+      <input class="numeric integer optional disabled" data-numeric="true" disabled="disabled" type="text" value="<%= "#{f.object.number }/#{f.object.year}" %>">
+    </div>
   </div>
 
   <div class="yui3-u-1-4">
@@ -44,7 +47,7 @@
   </div>
   <div class="yui3-u-1-5">
     <div>
-      <%= link_to 'Imprimir lista de materiais', report_creditor_materials_path(f.object.id),:style => 'margin-left:2%;margin-top:4%;position:absolute;' if f.object.id %>
+      <%= link_to 'Imprimir lista de materiais', report_creditor_materials_path(f.object.id), :style => 'margin-left:2%;margin-top:4%;position:absolute;' if f.object.id %>
     </div>
   </div>
   <div class="yui3-u-1-5">
@@ -89,10 +92,10 @@
 <%= f.input :justification %>
 
 <script>
-  $(function () {
-    $("#supply_request_user").prop('readonly', <%= !f.object.id.nil? %>);
-    $("#supply_request_user_id").prop('readonly', <%= !f.object.id.nil? %>);
-  });
-  $("#supply_request_authorization_date").prop('readonly', false);
+    $(function () {
+        $("#supply_request_user").prop('readonly', <%= !f.object.id.nil? %>);
+        $("#supply_request_user_id").prop('readonly', <%= !f.object.id.nil? %>);
+    });
+    $("#supply_request_authorization_date").prop('readonly', false);
 
 </script>

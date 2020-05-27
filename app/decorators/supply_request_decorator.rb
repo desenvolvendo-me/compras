@@ -5,7 +5,11 @@ class SupplyRequestDecorator
   include ActionView::Helpers::NumberHelper
   include ActionView::Helpers::TranslationHelper
 
-  attr_header :number,:user,:creditor,:department,:value,:authorization_date, :licitation_process, :status_last_attendance
+  attr_header :number_year, :user, :creditor, :department, :value, :authorization_date, :licitation_process, :status_last_attendance
+
+  def number_year
+    "#{number}/#{year}"
+  end
 
   def creditor
     self.contract.nil? || self.contract.creditors.blank? || self.contract.creditors.first.person.nil? ? '' : self.contract.creditors.first.person.name
