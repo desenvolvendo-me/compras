@@ -7,9 +7,6 @@
       <a href="#schedules">Cronogramas de entrega</a>
     </li>
     <li>
-      <a href="#supply_orders">Ordens de Fornecimento</a>
-    </li>
-    <li>
       <a href="#authorized_areas">Departamentos</a>
     </li>
     <li>
@@ -21,6 +18,9 @@
     <li>
       <a href="#financials">Dados Financeiros</a>
     </li>
+    <li>
+      <a href="#supply_orders">Ordens de Fornecimento</a>
+    </li>
   </ul>
 
   <div id="main">
@@ -29,10 +29,6 @@
 
   <div id="schedules">
     <%= render 'delivery_schedules', :f => f %>
-  </div>
-
-  <div id="supply_orders">
-    <%= render 'supply_orders', :f => f %>
   </div>
 
   <div id="authorized_areas">
@@ -49,6 +45,10 @@
 
   <div id="financials">
     <%= render 'financials', :f => f %>
+  </div>
+
+  <div id="supply_orders">
+    <%= render 'supply_orders', :f => f %>
   </div>
 
 </div>
