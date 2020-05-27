@@ -3,11 +3,20 @@
   <div class="nested-fields add-margin-bottom">
     <%= hidden_field_tag :authorized_area_id, nil, :name => 'contract_department[id]' %>
 
-    <%= f.input :department, :as => :auto_complete, :fake => true,
-                'data-hidden-field-class' => 'unique',
-                :source_path => departments_path,
-                :required => true %>
-
+    <div class="yui3-g">
+      <div class="yui3-u-1-2">
+        <%= f.input :secretary, :as => :auto_complete, :fake => true,
+                    'data-hidden-field-class' => 'unique',
+                    :source_path => secretaries_path,
+                    :required => true %>
+      </div>
+      <div class="yui3-u-1-2">
+        <%= f.input :department, :as => :auto_complete, :fake => true,
+                    'data-hidden-field-class' => 'unique',
+                    :source_path => departments_path,
+                    :required => true, disabled: true %>
+      </div>
+    </div>
     <div class="yui3-u-1-6">
       <%= button_tag 'Adicionar', type: :button,
                      :class => 'button add-nested-record field-without-label',
@@ -48,3 +57,20 @@
     <% end %>
   <% end %>
 </div>
+
+<script>
+    $('form').on('change', '#contract_secretary_id', function (event, contract_secretary) {
+        $("#contract_department").attr("disabled", false)
+        if (contract_secretary) {
+            var secretary_id = contract_secretary.id
+
+            var urlModal = "<%= departments_path %>?",
+                params = {by_secretary: secretary_id}
+
+            urlModal += jQuery.param(params);
+            console.log(urlModal)
+
+            $('#contract_department').attr("data-source", urlModal);
+        }
+    });
+</script>
