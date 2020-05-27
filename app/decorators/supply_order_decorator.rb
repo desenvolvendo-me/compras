@@ -3,7 +3,11 @@ class SupplyOrderDecorator
   include Decore::Proxy
   include Decore::Header
 
-  attr_header :creditor, :authorization_date, :licitation_process, :order_status
+  attr_header :number_year, :creditor, :authorization_date, :licitation_process, :order_status
+
+  def number_year
+    "#{self.number}/#{self.year}"
+  end
 
   def creditor
     self.contract.nil? || self.contract.creditors.blank? || self.contract.creditors.first.person.nil? ? '' : self.contract.creditors.first.person.name

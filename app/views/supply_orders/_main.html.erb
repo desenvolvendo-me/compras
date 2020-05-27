@@ -3,9 +3,12 @@
     <%= f.input :order_status, :disabled => true %>
   </div>
 </div>
-  <div class="yui3-g">
+<div class="yui3-g">
   <div class="yui3-u-1-4">
-    <%= f.input :number, :disabled => true %>
+    <div class="input integer optional disabled">
+      <label class="integer optional">Número</label>
+      <input class="numeric integer optional disabled" data-numeric="true" disabled="disabled" type="text" value="<%= "#{f.object.number }/#{f.object.year}" %>">
+    </div>
   </div>
 
   <div class="yui3-u-1-4">
