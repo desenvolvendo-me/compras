@@ -97,7 +97,7 @@
 <script>
     (function disabledNotUserCreated() {
         var current_user = '<%= current_user.login %>';
-        var created_user = '<%= f.object.user.login %>';
+        var created_user = '<%= f.object.user.try(:login) %>';
 
         if (current_user !== created_user) {
             $('.add-nested-record').removeClass('add-nested-record');
