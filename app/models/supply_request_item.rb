@@ -63,8 +63,6 @@ class SupplyRequestItem < Compras::Model
     item ? item.supply_request_item_value_balance : 0
   end
 
-  private
-
   def get_unit_price
     material_id = self.material_id
     supply_request_id = self.supply_request.id
@@ -73,9 +71,11 @@ class SupplyRequestItem < Compras::Model
     if supply_request_id && creditor_id && material_id
       material_unit_value = get_material_unit_value(supply_request_id, creditor_id, material_id)
       quantity_unit = self.material.quantity_unit
-      material_unit_value.to_f / quantity_unit.to_f
+      material_unit_value.to_f * quantity_unit.to_f
     end
   end
+
+  private
 
   def get_material_unit_value(supply_request_id, creditor_id, material_id)
     realignment_price_items = RealignmentPriceItem.joins { purchase_process.supply_requests }
