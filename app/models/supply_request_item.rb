@@ -1,6 +1,6 @@
 class SupplyRequestItem < Compras::Model
   attr_accessible :authorization_quantity, :authorization_value, :material_id,
-                  :pledge_item_id, :quantity,:requested_quantity, :supply_request_id
+                  :pledge_item_id, :quantity, :requested_quantity, :supply_request_id
   attr :balance, :balance_unit
   attr_accessor :get_unit_price
 
@@ -24,17 +24,17 @@ class SupplyRequestItem < Compras::Model
   filterize
 
   scope :by_pledge_item_id, ->(pledge_item_id) do
-    where {|query| query.pledge_item_id.eq(pledge_item_id)}
+    where { |query| query.pledge_item_id.eq(pledge_item_id) }
   end
 
   def authorized_quantity
-    SupplyOrderItem.where {|query|
+    SupplyOrderItem.where { |query|
       query.pledge_item_id.eq(pledge_item_id)
     }.sum(:authorization_quantity) || 0
   end
 
   def authorized_value
-    SupplyOrderItem.where {|query|
+    SupplyOrderItem.where { |query|
       query.pledge_item_id.eq(pledge_item_id)
     }.sum(:authorization_value) || 0
   end
@@ -78,7 +78,7 @@ class SupplyRequestItem < Compras::Model
   end
 
   def get_material_unit_value(supply_request_id, creditor_id, material_id)
-        realignment_price_items = RealignmentPriceItem.joins { purchase_process.supply_requests }
+    realignment_price_items = RealignmentPriceItem.joins { purchase_process.supply_requests }
                                   .joins { creditor }
                                   .joins { material }
                                   .where { material.id.eq(material_id) }
