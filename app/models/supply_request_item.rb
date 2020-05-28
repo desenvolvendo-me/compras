@@ -65,8 +65,8 @@ class SupplyRequestItem < Compras::Model
 
   def get_unit_price
     material_id = self.material_id
-    supply_request_id = self.supply_request.id
-    creditor_id = self.supply_request.creditor.id
+    supply_request_id = self.supply_request.try(:id)
+    creditor_id = self.supply_request.try(:creditor).try(:id)
 
     if supply_request_id && creditor_id && material_id
       material_unit_value = get_material_unit_value(supply_request_id, creditor_id, material_id)
