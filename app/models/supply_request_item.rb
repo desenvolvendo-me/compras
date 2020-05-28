@@ -84,7 +84,8 @@ class SupplyRequestItem < Compras::Model
                                   .where { material.id.eq(material_id) }
                                   .where { creditor.id.eq(creditor_id) }
                                   .where { purchase_process.supply_requests.id.eq(supply_request_id) }
-    realignment_price_items.last.price
+
+    realignment_price_items.last ? realignment_price_items.last.price : 0
   end
 
   def authorization_quantity_should_be_lower_than_quantity
