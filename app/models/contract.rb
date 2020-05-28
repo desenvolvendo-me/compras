@@ -137,6 +137,32 @@ class Contract < Compras::Model
     Pledge.all(params: {by_contract_id: id})
   end
 
+  def solicitations
+    licitation_process_id = self.licitation_process.id
+    creditor_id = self.creditor_ids.compact
+
+    material_ids = Material.joins { purchase_process_items.ratification_item.licitation_process_ratification.licitation_process }
+                       .joins { purchase_process_items.ratification_item.licitation_process_ratification.creditor }
+                       .where { purchase_process_items.ratification_item.licitation_process_ratification.licitation_process.id.eq(licitation_process_id) }
+                       .where { purchase_process_items.ratification_item.licitation_process_ratification.creditor.id.in(creditor_id) }.pluck(:id).uniq
+
+    purchase_solicitation_ids = PurchaseSolicitation.joins { list_purchase_solicitations.licitation_process }
+                                    .joins { items.material }
+                                    .where { list_purchase_solicitations.licitation_process.id.eq(licitation_process_id) }
+                                    .where { items.material.id.in(material_ids) }.pluck(:id).uniq
+
+    solicitation = {}
+    purchase_solicitation_ids.each do |solic|
+      solicitation = {solic => []}
+      material_ids.each do |material|
+        if PurchaseSolicitation.find(solic).items.pluck(:material_id).include? material
+          solicitation[solic].push(material)
+        end
+      end
+    end
+    solicitation
+  end
+
   def founded_debt_pledges
     Pledge.all(params: {by_founded_debt_contract_id: id})
   end
