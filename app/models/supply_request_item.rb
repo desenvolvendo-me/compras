@@ -71,7 +71,7 @@ class SupplyRequestItem < Compras::Model
     if supply_request_id && creditor_id && material_id
       material_unit_value = get_material_unit_value(supply_request_id, creditor_id, material_id)
       quantity_unit = self.material.quantity_unit
-      material_unit_value.to_f * quantity_unit.to_f
+      material_unit_value.to_f / quantity_unit.to_f
     end
   end
 
