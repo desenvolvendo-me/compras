@@ -17,12 +17,19 @@
                     :required => true, disabled: true %>
       </div>
     </div>
-    <div class="yui3-u-1-6">
-      <%= button_tag 'Adicionar', type: :button,
-                     :class => 'button add-nested-record field-without-label',
-                     'data-template' => 'contract_departments_template',
-                     'data-records' => 'authorized_areas-records',
-                     'data-disabled' => not_updateable_message %>
+    <div class="yui3-g">
+      <div class="yui3-u-1-6">
+        <%= button_tag 'Adicionar', type: :button,
+                       :class => 'button add-nested-record field-without-label',
+                       'data-template' => 'contract_departments_template',
+                       'data-records' => 'authorized_areas-records',
+                       'data-disabled' => not_updateable_message %>
+      </div>
+
+      <div class="yui3-u-1-2">
+        <%= button_tag 'Incluir Todos Departamentos', type: :button,
+                       :class => 'button field-without-label', id: "add_all_departments" %>
+      </div>
     </div>
   </div>
 
@@ -68,7 +75,6 @@
                 params = {by_secretary: secretary_id}
 
             urlModal += jQuery.param(params);
-            console.log(urlModal)
 
             $('#contract_department').attr("data-source", urlModal);
         }

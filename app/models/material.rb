@@ -17,6 +17,7 @@ class Material < Unico::Model
   belongs_to :split_expense
   belongs_to :material_class
   belongs_to :reference_unit
+  has_many :purchase_process_items
 
   validates :description,
             :reference_unit,
