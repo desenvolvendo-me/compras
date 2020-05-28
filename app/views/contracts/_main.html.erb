@@ -15,7 +15,14 @@
   </div>
 </div>
 
-<%= f.input :consortium_agreement %>
+<div class="yui3-g">
+  <div class='yui3-u-1-4'>
+    <%= f.input :consortium_agreement %>
+  </div>
+  <div class='yui3-u-1-4'>
+    <%= f.input :balance %>
+  </div>
+</div>
 
 <div class="yui3-g">
   <div class="yui3-u-1-2">
@@ -143,37 +150,38 @@
 <%= f.input :description %>
 
 <script>
-  var clearModalityExecutionType = function() {
-    $('#contract_modality_humanize').val('');
-    $('#contract_execution_type').val('');
-    $('#contract_execution_type_humanize').val('');
-    $('#contract_contract_guarantees').val('');
-    $('#contract_contract_guarantees_humanize').val('');
-  };
+    var clearModalityExecutionType = function () {
+        $('#contract_modality_humanize').val('');
+        $('#contract_execution_type').val('');
+        $('#contract_execution_type_humanize').val('');
+        $('#contract_contract_guarantees').val('');
+        $('#contract_contract_guarantees_humanize').val('');
+    };
 
-  $('form').on('change', '#contract_licitation_process_id', function (event, licitationProcess) {
-    if (licitationProcess) {
-      $('#contract_content').val(licitationProcess.description);
-      $('#contract_modality_humanize').val(licitationProcess.modality_humanize);
-      $('#contract_execution_type').val(licitationProcess.execution_type);
-      $('#contract_contract_guarantees').val(licitationProcess.contract_guarantees);
+    $('form').on('change', '#contract_licitation_process_id', function (event, licitationProcess) {
+        if (licitationProcess) {
+            $('#contract_content').val(licitationProcess.description);
+            $('#contract_modality_humanize').val(licitationProcess.modality_humanize);
+            $('#contract_execution_type').val(licitationProcess.execution_type);
+            $('#contract_contract_guarantees').val(licitationProcess.contract_guarantees);
 
-      var urlModal = "<%= modal_creditors_path %>?", params = { by_ratification_and_licitation_process_id: licitationProcess.id }
+            var urlModal = "<%= modal_creditors_path %>?",
+                params = {by_ratification_and_licitation_process_id: licitationProcess.id}
 
-      urlModal += jQuery.param(params);
+            urlModal += jQuery.param(params);
 
-      $('#contract_creditor').data("modal-url", urlModal);
-    } else {
-      clearModalityExecutionType();
-      var urlModal = "<%= modal_creditors_path %>"
+            $('#contract_creditor').data("modal-url", urlModal);
+        } else {
+            clearModalityExecutionType();
+            var urlModal = "<%= modal_creditors_path %>"
 
-      $('#contract_creditor').data("modal-url", urlModal);
-    }
-  });
-
-  $('form').on('change', '#contract_year, #contract_entity_id', function (event) {
-    $.getJSON('<%= next_sequential_contracts_path %>?year='+$('#contract_year').val()+'&entity_id='+$('#contract_entity_id').val(), function (data) {
-      $('#contract_sequential_number').val(data.sequential);
+            $('#contract_creditor').data("modal-url", urlModal);
+        }
     });
-  });
+
+    $('form').on('change', '#contract_year, #contract_entity_id', function (event) {
+        $.getJSON('<%= next_sequential_contracts_path %>?year=' + $('#contract_year').val() + '&entity_id=' + $('#contract_entity_id').val(), function (data) {
+            $('#contract_sequential_number').val(data.sequential);
+        });
+    });
 </script>

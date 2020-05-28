@@ -20,6 +20,10 @@ class Department < Compras::Model
 
   scope :limit, lambda {|q| limit(q)}
 
+  scope :by_secretary, ->(secretary) do
+      where { secretary_id.eq secretary }
+  end
+
   scope :by_user, ->(user_id) do
     department_ids = DepartmentPerson.where(user_id:user_id).pluck(:department_id)
 
