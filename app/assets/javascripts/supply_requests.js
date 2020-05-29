@@ -31,9 +31,10 @@ function setModalUrlToMaterial() {
 
     var licitation_process = $('#supply_request_licitation_process_id').val();
     var contract = $('#supply_request_contract_id').val();
+    var creditor = $('#supply_request_creditor_id').val();
     var urlModal = Routes.materials,
         params = {
-            material_of_supply_request: [licitation_process , contract]
+            material_of_supply_request: [licitation_process , contract, creditor]
         };
 
     if(licitation_process=='' || contract==''){
