@@ -11,6 +11,7 @@ class PurchaseProcessItem < Compras::Model
   belongs_to :material
   belongs_to :licitation_process
   belongs_to :creditor
+  has_many :licitation_process_ratification_items
 
   has_many :bidder_proposals
   has_many :licitation_process_classifications, :as => :classifiable, :dependent => :destroy
