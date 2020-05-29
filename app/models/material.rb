@@ -48,9 +48,12 @@ class Material < Unico::Model
   scope :material_of_supply_request, lambda {|params|
     licitation_process_id = params[0]
     contract_id = params[1]
+    creditor_id = params[2]
 
     material_ids =  Material.joins {purchase_process_items.licitation_process_ratification_items.licitation_process_ratification.licitation_process.contracts}.
+        joins {purchase_process_items.licitation_process_ratification_items.licitation_process_ratification.creditor}.
         where{purchase_process_items.licitation_process_ratification_items.licitation_process_ratification.licitation_process.id.eq(licitation_process_id)}.
+        where{purchase_process_items.licitation_process_ratification_items.licitation_process_ratification.creditor.id.eq(creditor_id)}.
         where{purchase_process_items.licitation_process_ratification_items.licitation_process_ratification.licitation_process.contracts.id.eq(contract_id)}.pluck(:id)
 
     where { id.in material_ids }

@@ -31,9 +31,10 @@ function setModalUrlToMaterial() {
 
     var licitation_process = $('#supply_request_licitation_process_id').val();
     var contract = $('#supply_request_contract_id').val();
+    var creditor = $('#supply_request_creditor_id').val();
     var urlModal = Routes.materials,
         params = {
-            material_of_supply_request: [licitation_process , contract]
+            material_of_supply_request: [licitation_process , contract, creditor]
         };
 
     if(licitation_process=='' || contract==''){
@@ -142,7 +143,21 @@ function setMaterialTotalAndBalance() {
     }
 }
 
+function setDisableMaterial(){
+    contract_id = $('#supply_request_contract_id').val();
+    purchase_solicitation_id = $('#supply_request_purchase_solicitation_id').val();
+
+    if (contract_id!='' && purchase_solicitation_id!='') {
+    console.log("material habilitado")
+        $("#supply_request_material").attr('disabled', false);
+    } else {
+        console.log("material não habilitado")
+        $("#supply_request_material").attr('disabled', true);
+    }
+}
+
 $(document).ready(function () {
+    setDisableMaterial();
     setModalUrlToDepartment();
     setModalUrlToContract();
     setModalUrlToCreditor();
@@ -152,13 +167,7 @@ $(document).ready(function () {
     setModalUrlToMaterial();
 
     $('#supply_request_contract_id').on('change', function (event, contract) {
-        contract_id = $('#supply_request_contract_id').val();
-        purchase_solicitation_id = $('#supply_request_purchase_solicitation_id').val();
-        if (contract && contract_id!='' && purchase_solicitation_id!='') {
-            $("#supply_request_material").attr('disabled', false);
-        } else {
-            $("#supply_request_material").attr('disabled', true);
-        }
+        setDisableMaterial();
     });
 
     $('#supply_request_purchase_solicitation_id').on('change', function (event, purchase_solicitation) {
