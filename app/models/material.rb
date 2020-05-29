@@ -46,11 +46,12 @@ class Material < Unico::Model
   has_many :items, class_name: 'PurchaseProcessItem'
 
   scope :material_of_supply_request, lambda {|params|
-    lpr = LicitationProcessRatification.joins("inner join compras_supply_requests on compras_supply_requests.creditor_id = compras_licitation_process_ratifications.creditor_id").where(licitation_process_id:params.split(',')[0],compras_supply_requests:{contract_id:params.split(',')[1]}).pluck(:id).uniq
-    sql =	"select material_id from public.compras_licitation_process_ratification_items ri inner join public.compras_realignment_price_items pi on ri.realignment_price_item_id = pi.id inner join public.compras_purchase_process_items cpi on cpi.id = ri.purchase_process_item_id where ri.licitation_process_ratification_id in (#{lpr.join(',')});"
-    records_array = ActiveRecord::Base.connection.execute(sql)
-    material_ids = []
-    records_array.ntuples.times { |index| material_ids << records_array[index]['material_id'] }
+    licitation_process_id = params[0]
+    contract_id = params[1]
+
+    material_ids =  Material.joins {purchase_process_items.licitation_process_ratification_items.licitation_process_ratification.licitation_process.contracts}.
+        where{purchase_process_items.licitation_process_ratification_items.licitation_process_ratification.licitation_process.id.eq(licitation_process_id)}.
+        where{purchase_process_items.licitation_process_ratification_items.licitation_process_ratification.licitation_process.contracts.id.eq(contract_id)}.pluck(:id)
 
     where { id.in material_ids }
   }
