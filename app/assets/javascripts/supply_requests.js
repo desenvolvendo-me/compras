@@ -33,7 +33,7 @@ function setModalUrlToMaterial() {
     var contract = $('#supply_request_contract_id').val();
     var urlModal = Routes.materials,
         params = {
-            material_of_supply_request: licitation_process+','+contract
+            material_of_supply_request: [licitation_process , contract]
         };
 
     if(licitation_process=='' || contract==''){

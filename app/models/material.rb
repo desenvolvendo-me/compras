@@ -46,8 +46,8 @@ class Material < Unico::Model
   has_many :items, class_name: 'PurchaseProcessItem'
 
   scope :material_of_supply_request, lambda {|params|
-    licitation_process_id = params.split(',')[0]
-    contract_id = params.split(',')[1]
+    licitation_process_id = params[0]
+    contract_id = params[1]
 
     material_ids =  Material.joins {purchase_process_items.licitation_process_ratification_items.licitation_process_ratification.licitation_process.contracts}.
         where{purchase_process_items.licitation_process_ratification_items.licitation_process_ratification.licitation_process.id.eq(licitation_process_id)}.
