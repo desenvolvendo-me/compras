@@ -71,8 +71,8 @@
                  material_id: p.object.material_id,
                  requested_quantity: p.object.requested_quantity,
                  quantity: p.object.quantity,
-                 get_unit_price: number_with_precision(p.object.get_unit_price),
-                 total_value: number_with_precision(p.object.get_unit_price * p.object.quantity),
+                 get_unit_price: number_with_precision(p.object.get_unit_price.to_f),
+                 total_value: number_with_precision(p.object.get_unit_price.to_f * p.object.quantity.to_f),
                  f: p %>
     <% end %>
     </tbody>
