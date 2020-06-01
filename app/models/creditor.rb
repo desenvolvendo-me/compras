@@ -2,6 +2,7 @@ class Creditor < Persona::Creditor
   reload_custom_data
 
   attr_accessible :material_ids, :representatives_attributes
+  attr_accessor :representative_person
 
   has_many :creditor_materials, :dependent => :destroy, :inverse_of => :creditor
   has_many :bidders, :dependent => :restrict
@@ -150,8 +151,8 @@ class Creditor < Persona::Creditor
   end
 
   def representatives?
-    if self.representative_people.blank?
-      errors.add(:representatives, :blank)
+    if self.representatives.blank?
+      errors.add(:representative_person, :blank)
     end
   end
 
