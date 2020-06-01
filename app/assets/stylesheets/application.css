@@ -11,6 +11,7 @@
  *= require compras/buttons
  *= require simple_form.auto_complete_input
  *= require bootstrap_prepend
+ *= require select2/select2
  */
 
 #container #header img {

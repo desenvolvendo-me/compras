@@ -245,6 +245,9 @@ GEM
       thor (>= 0.14.6, < 2.0)
     rainbow (3.0.0)
     rake (10.5.0)
+    rb-fsevent (0.10.4)
+    rb-inotify (0.10.1)
+      ffi (~> 1.0)
     rdoc (3.12.2)
       json (~> 1.4)
     redis (3.0.4)
@@ -280,6 +283,15 @@ GEM
     ruby-hmac (0.4.0)
     ruby-progressbar (1.10.1)
     rubyzip (0.9.9)
+    sass (3.7.4)
+      sass-listen (~> 4.0.0)
+    sass-listen (4.0.0)
+      rb-fsevent (~> 0.9, >= 0.9.4)
+      rb-inotify (~> 0.9, >= 0.9.7)
+    sass-rails (3.2.6)
+      railties (~> 3.2.0)
+      sass (>= 3.1.10)
+      tilt (~> 1.3)
     selenium-webdriver (2.33.0)
       childprocess (>= 0.2.5)
       multi_json (~> 1.0)
@@ -417,6 +429,7 @@ DEPENDENCIES
   rspec-rails
   rubocop
   rubyzip (= 0.9.9)
+  sass-rails
   selenium-webdriver (~> 2.33.0)
   sentry-raven
   shoulda-matchers (= 2.2.0)

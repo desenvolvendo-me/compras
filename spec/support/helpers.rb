@@ -179,6 +179,35 @@ module Helpers
   def close_dialog
     page.find(:xpath, '(//a[contains(@class, "ui-dialog-titlebar-close")])[last()]').click
   end
+
+  def fill_with_select2(locator, options)
+    within_select2(locator, options) do
+      within '.select2-result-selectable' do
+        page.find("div.select2-result-label", :text => options.fetch(:with)).click
+      end
+    end
+  end
+
+  def within_select2(locator, options)
+    expect(page).to have_field locator
+
+    field = page.find_field locator
+
+    # Open select2
+    page.execute_script %{ $("##{field[:id]}").parent().select2("open") }
+
+    expect(page).to have_xpath '//*[@id="select2-drop"]'
+
+    # Fill the select2 input to query database
+    page.execute_script %{ $('#select2-drop input').val("#{options.fetch(:with)}") }
+
+    # Query database with search terms
+    page.execute_script %{ $("##{field[:id]}").parent().select2("updateResults") }
+
+    within :xpath, '//*[@id="select2-drop"]' do
+      yield
+    end
+  end
 end
 
 RSpec.configure do |config|
