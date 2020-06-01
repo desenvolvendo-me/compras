@@ -145,17 +145,7 @@ class Contract < Compras::Model
 
     purchase_solicitation_ids = PurchaseSolicitation.with_materials_per_licitation(licitation_process_id, material_ids).pluck(:id).uniq
 
-    solicitation = {}
-    purchase_solicitation_ids.each do |solic|
-      hash = {solic => []}
-      material_ids.each do |material|
-        if PurchaseSolicitation.find(solic).items.pluck(:material_id).include? material
-          hash[solic].push(material)
-        end
-      end
-      solicitation.merge! hash
-    end
-    solicitation
+    group_purchase_solicitation_with_materials(material_ids, purchase_solicitation_ids)
   end
 
   def founded_debt_pledges
