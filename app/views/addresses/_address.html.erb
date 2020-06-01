@@ -29,10 +29,7 @@
 
 <div class="yui3-g">
   <div class="yui3-u-1-2">
-    <%= a.input :neighborhood, :as => :auto_complete,
-                'data-hidden-field-class' => 'unique',
-                :source_path => neighborhoods_path,
-                :required => true %>
+    <%= a.input :neighborhood, as: :select2 %>
   </div>
 
   <div class="yui3-u-1-2">
