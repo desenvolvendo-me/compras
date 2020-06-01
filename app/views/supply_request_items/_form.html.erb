@@ -3,7 +3,7 @@
   <td><%= requested_quantity %></td>
   <% if @gestor %>
     <td><%= quantity %></td>
-    <td><%= get_unit_price %></td>
+    <td><%= unit_value %></td>
   <% end %>
   <td><%= total_value %></td>
   <td>
@@ -11,12 +11,14 @@
   </td>
 
   <td>
-    <%= f.input :material_id, as: :hidden, input_html: { value: material_id, class: 'material-id' } %>
-    <%= f.input :material, as: :hidden, input_html: { value: material } %>
-    <%= f.input :requested_quantity, as: :hidden, input_html: { value: requested_quantity, class: 'requested_quantity' } %>
-    <%= f.input :quantity, as: :hidden, input_html: { value: quantity, class: 'quantity' } %>
-    <%= f.input :id, as: :hidden, input_html: { value: id } %>
-    <%= f.input :_destroy, as: :hidden, input_html: { class: 'destroy' } %>
+    <%= f.input :material_id, as: :hidden, input_html: {value: material_id, class: 'material-id'} %>
+    <%= f.input :material, as: :hidden, input_html: {value: material} %>
+    <%= f.input :requested_quantity, as: :hidden, input_html: {value: requested_quantity, class: 'requested_quantity'} %>
+    <% if @gestor %>
+      <%= f.input :quantity, as: :hidden, input_html: {value: quantity, class: 'quantity'} %>
+    <% end %>
+    <%= f.input :id, as: :hidden, input_html: {value: id} %>
+    <%= f.input :_destroy, as: :hidden, input_html: {class: 'destroy'} %>
 
     <%= link_to 'Remover', '#', class: 'remove-nested-record' %>
   </td>
