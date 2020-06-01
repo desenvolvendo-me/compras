@@ -156,6 +156,13 @@ class PurchaseSolicitation < Compras::Model
     # }
   }
 
+  scope :with_materials_per_licitation, ->(licitation_process_id, material_ids) do
+    joins { list_purchase_solicitations.licitation_process }
+        .joins { items.material }
+        .where { list_purchase_solicitations.licitation_process.id.eq(licitation_process_id) }
+        .where { items.material.id.in(material_ids) }
+  end
+
   def to_s
     "#{code}/#{accounting_year}"
   end
