@@ -10,7 +10,7 @@ pt-BR:
         name: "Nome"
         cnpj: "CNPJ"
         legal_nature: "Natureza jurídica"
-        responsible: "Pessoa responsável pela empresa"
+        person: "Pessoa responsável pela empresa"
         state_registration: "Inscrição estadual"
         uf_state_registration: "UF da Inscrição estadual"
         commercial_registration_number: "Número do registro na junta comercial"
