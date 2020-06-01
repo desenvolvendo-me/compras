@@ -143,10 +143,7 @@ class Contract < Compras::Model
 
     material_ids = Material.by_ratification(licitation_process_id, creditor_id).pluck(:id).uniq
 
-    purchase_solicitation_ids = PurchaseSolicitation.joins { list_purchase_solicitations.licitation_process }
-                                    .joins { items.material }
-                                    .where { list_purchase_solicitations.licitation_process.id.eq(licitation_process_id) }
-                                    .where { items.material.id.in(material_ids) }.pluck(:id).uniq
+    purchase_solicitation_ids = PurchaseSolicitation.with_materials_per_licitation(licitation_process_id, material_ids).pluck(:id).uniq
 
     solicitation = {}
     purchase_solicitation_ids.each do |solic|
