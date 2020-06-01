@@ -153,12 +153,13 @@ class Contract < Compras::Model
 
     solicitation = {}
     purchase_solicitation_ids.each do |solic|
-      solicitation = {solic => []}
+      hash = {solic => []}
       material_ids.each do |material|
         if PurchaseSolicitation.find(solic).items.pluck(:material_id).include? material
-          solicitation[solic].push(material)
+          hash[solic].push(material)
         end
       end
+      solicitation.merge! hash
     end
     solicitation
   end
