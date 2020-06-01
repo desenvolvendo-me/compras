@@ -141,10 +141,7 @@ class Contract < Compras::Model
     licitation_process_id = self.licitation_process.id
     creditor_id = self.creditor_ids.compact
 
-    material_ids = Material.joins { purchase_process_items.ratification_item.licitation_process_ratification.licitation_process }
-                       .joins { purchase_process_items.ratification_item.licitation_process_ratification.creditor }
-                       .where { purchase_process_items.ratification_item.licitation_process_ratification.licitation_process.id.eq(licitation_process_id) }
-                       .where { purchase_process_items.ratification_item.licitation_process_ratification.creditor.id.in(creditor_id) }.pluck(:id).uniq
+    material_ids = Material.by_ratification(licitation_process_id, creditor_id).pluck(:id).uniq
 
     purchase_solicitation_ids = PurchaseSolicitation.joins { list_purchase_solicitations.licitation_process }
                                     .joins { items.material }
@@ -206,6 +203,20 @@ class Contract < Compras::Model
   end
 
   private
+
+  def group_purchase_solicitation_with_materials(material_ids, purchase_solicitation_ids)
+    solicitation = {}
+    purchase_solicitation_ids.each do |solic|
+      hash = {solic => []}
+      material_ids.each do |material|
+        if PurchaseSolicitation.find(solic).items.pluck(:material_id).include? material
+          hash[solic].push(material)
+        end
+      end
+      solicitation.merge! hash
+    end
+    solicitation
+  end
 
   def presence_of_at_least_one_creditor
     errors.add(:creditors, :blank) if creditors.empty?

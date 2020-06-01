@@ -101,6 +101,14 @@ class Material < Unico::Model
         }
   end
 
+  scope :by_ratification, ->(licitation_process_id, creditor_id) do
+    joins { purchase_process_items.ratification_item.licitation_process_ratification.licitation_process }
+        .joins { purchase_process_items.ratification_item.licitation_process_ratification.creditor }
+        .where { purchase_process_items.ratification_item.licitation_process_ratification.licitation_process.id.eq(licitation_process_id) }
+        .where { purchase_process_items.ratification_item.licitation_process_ratification.creditor.id.in(creditor_id) }
+  end
+
+
   def set_code
     self.code = Material.unscoped.last.nil? ? "1" : (Material.unscoped.last.id + 1)
   end
