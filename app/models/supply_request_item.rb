@@ -69,15 +69,13 @@ class SupplyRequestItem < Compras::Model
     creditor_id = self.supply_request.try(:creditor).try(:id)
 
     if supply_request_id && creditor_id && material_id
-      material_unit_value = get_material_unit_value(supply_request_id, creditor_id, material_id)
+      material_unit_value = SupplyRequestItem.get_material_unit_value(supply_request_id, creditor_id, material_id)
       quantity_unit = self.material.quantity_unit
       material_unit_value.to_f / quantity_unit.to_f
     end
   end
 
-  private
-
-  def get_material_unit_value(supply_request_id, creditor_id, material_id)
+  def self.get_material_unit_value(supply_request_id, creditor_id, material_id)
     realignment_price_items = RealignmentPriceItem.joins { purchase_process.supply_requests }
                                   .joins { creditor }
                                   .joins { material }
@@ -85,7 +83,7 @@ class SupplyRequestItem < Compras::Model
                                   .where { creditor.id.eq(creditor_id) }
                                   .where { purchase_process.supply_requests.id.eq(supply_request_id) }
 
-    realignment_price_items.last ? realignment_price_items.last.price : 0
+    realignment_price_items.last ? realignment_price_items.last.price.to_f : 0
   end
 
   def authorization_quantity_should_be_lower_than_quantity

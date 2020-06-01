@@ -28,7 +28,7 @@ module MaterialBalance
 
       balance_unit = ((quantity_autorized - quantity_delivered).to_f * material.quantity_unit.to_f) - quantity.to_i
       balance = balance_unit.to_f / material.quantity_unit.to_f
-      value_unit = get_unit_price(object)
+      value_unit = get_unit_price(object, material)
 
       response["total"] = quantity_autorized
       response["value_unit"] = value_unit
@@ -55,12 +55,13 @@ module MaterialBalance
       end
     end
 
-    def self.get_unit_price(object)
-      items = SupplyRequestItem.where(supply_request_id: object.try(:id) ) if object
-      if items.any?
-        return items.last.get_unit_price
+    def self.get_unit_price(object, material)
+      unit_value = nil
+      unit_value = SupplyRequestItem.get_material_unit_value(object.id, object.creditor_id, material.id) if object.try(:id)
+      if unit_value
+        return unit_value
       else
-        0.0
+        return 0.0
       end
     end
 
