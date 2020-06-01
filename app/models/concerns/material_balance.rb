@@ -9,7 +9,7 @@ module MaterialBalance
       unless licitation_process.nil?
         self.items.each do |item|
           response = klass.classify.constantize.total_balance(licitation_process, purchase_solicitation, item.material, item.quantity, self, self.contract)
-          message = message.present? ? message.concat(", ").concat(response["message"]) : response["message"]
+          message = message.present? ? message.concat(", ").concat(response["message"].to_s) : response["message"].to_s
         end
       end
       message
