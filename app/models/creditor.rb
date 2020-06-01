@@ -1,7 +1,7 @@
 class Creditor < Persona::Creditor
   reload_custom_data
 
-  attr_accessible :material_ids
+  attr_accessible :material_ids, :representatives_attributes
 
   has_many :creditor_materials, :dependent => :destroy, :inverse_of => :creditor
   has_many :bidders, :dependent => :restrict

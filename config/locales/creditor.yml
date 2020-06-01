@@ -29,6 +29,7 @@ pt-BR:
         identity_document: "CPF / CNPJ"
         purchase_process_items: "Items"
         organ_responsible_for_registration: "Órgão responsável pelo registro"
+        representative_person: "Representante"
 
   creditor:
     messages:

@@ -620,6 +620,8 @@ Compras::Application.routes.draw do
     get 'modal_info', on: :member
   end
 
+  get "representative_people", to: "people#index", as: 'representative_people'
+
   resources :pledge_requests do
     collection do
       get :modal
