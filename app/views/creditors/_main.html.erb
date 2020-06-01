@@ -1,5 +1,5 @@
 <div class="input modal required">
-  <%= f.input :person, :disabled => f.object.persisted? %>
+  <%= f.input :person, as: :select2, :disabled => f.object.persisted? %>
   <%= link_to_modal_info :href => f.object.person %>
 </div>
 
