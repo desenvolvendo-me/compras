@@ -28,8 +28,10 @@ module MaterialBalance
 
       balance_unit = ((quantity_autorized - quantity_delivered).to_f * material.quantity_unit.to_f) - quantity.to_i
       balance = balance_unit.to_f / material.quantity_unit.to_f
+      value_unit = get_unit_price(object)
 
       response["total"] = quantity_autorized
+      response["value_unit"] = value_unit
       response["balance"] = balance
       response["balance_unit"] = balance_unit
       response
@@ -50,6 +52,15 @@ module MaterialBalance
       else
         quantity_purchase_solicitation = licitation_process.purchase_solicitations.where(purchase_solicitation_id: purchase_solicitation.id).first.purchase_solicitation.items.where(material_id: material.id).sum(:quantity).to_i
         return quantity_purchase_solicitation
+      end
+    end
+
+    def self.get_unit_price(object)
+      items = SupplyRequestItem.where(supply_request_id: object.try(:id) ) if object
+      if items.any?
+        return items.last.get_unit_price
+      else
+        0.0
       end
     end
 
