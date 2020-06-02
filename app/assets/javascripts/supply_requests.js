@@ -200,6 +200,10 @@ $(document).ready(function () {
             }
         }
 
+        setTimeout(function(){
+            $("#supply_request_total_value").val(quantity * $("#supply_request_unit_value").val());
+        }, 100);
+
         setMaterialTotalAndBalance();
     });
 
