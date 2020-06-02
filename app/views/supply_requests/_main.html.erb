@@ -40,7 +40,7 @@
       <label> Fornecedor </label>
       <input class="string" disabled id="supply_request_creditor"
              value="<%= f.object.decorator.creditor %>" size="30" type="text">
-      <input class="string" hidden id="supply_request_creditor_id"
+      <input class="string" hidden id="supply_request_creditor_id", name="supply_request[creditor_id]"
              value="<%= f.object.decorator.creditor_id unless f.object.decorator.creditor.nil? %>"
              size="30" type="text">
     </div>
@@ -72,6 +72,9 @@
     <div class="input integer">
       <label class="numeric integer ">Departamento</label>
       <input class="string integer" type="text" id="purchase_solicitation_department" value="<%= f.object.purchase_solicitation.department if f.object.purchase_solicitation %>" disabled>
+      <input class="string" hidden id="purchase_solicitation_department_id", name="supply_request[department_id]"
+             value="<%= f.object.purchase_solicitation.department.id if f.object.purchase_solicitation %>"
+             size="30" type="text">
     </div>
   </div>
 

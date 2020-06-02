@@ -1,7 +1,7 @@
 <tr class="record nested-record item-record" id="material-id-<%= material_id %>">
   <td><%= material %></td>
   <td><%= requested_quantity %></td>
-  <% if @gestor %>
+  <% if @hidden_field %>
     <td><%= quantity %></td>
     <td><%= unit_value %></td>
   <% end %>
@@ -14,7 +14,7 @@
     <%= f.input :material_id, as: :hidden, input_html: {value: material_id, class: 'material-id'} %>
     <%= f.input :material, as: :hidden, input_html: {value: material} %>
     <%= f.input :requested_quantity, as: :hidden, input_html: {value: requested_quantity, class: 'requested_quantity'} %>
-    <% if @gestor %>
+    <% if @hidden_field %>
       <%= f.input :quantity, as: :hidden, input_html: {value: quantity, class: 'quantity'} %>
     <% end %>
     <%= f.input :id, as: :hidden, input_html: {value: id} %>

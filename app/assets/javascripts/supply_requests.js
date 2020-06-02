@@ -261,7 +261,6 @@ $(document).ready(function () {
     }
 
     $("#supply_request_contract_id").on("change", function (event, contract) {
-        console.log(contract)
         $("#supply_request_creditor").val(contract ? contract.creditor:'');
         $("#supply_request_creditor_id").val(contract ? contract.creditor_id:'');
     });
