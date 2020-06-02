@@ -10,9 +10,6 @@
     <%= link_to 'Editar', '#', class: 'edit-nested-record' %>
   </td>
   <td>
-    <%= link_to 'Atender', '#', class: 'answer-nested-record' %>
-  </td>
-  <td>
     <%= f.input :material_id, as: :hidden, input_html: {value: material_id, class: 'material-id'} %>
     <%= f.input :material, as: :hidden, input_html: {value: material} %>
     <%= f.input :requested_quantity, as: :hidden, input_html: {value: requested_quantity, class: 'requested_quantity'} %>

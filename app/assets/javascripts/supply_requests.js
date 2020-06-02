@@ -191,7 +191,8 @@ $(document).ready(function () {
 
     $('form.supply_request').on('change', '#supply_request_requested_quantity', function () {
         if(!$('#supply_request_quantity').attr('class').includes("edit")){
-            klass = $('#supply_request_quantity').val(0);
+            quantity = $('#supply_request_requested_quantity').val();
+            klass = $('#supply_request_quantity').val(quantity);
         }
 
         setMaterialTotalAndBalance();
@@ -289,13 +290,5 @@ $(document).ready(function () {
         $('#supply_request_quantity').attr('class',klass);
         $("#supply_request_quantity").attr('disabled', true);
         $("#supply_request_requested_quantity").attr('disabled', false);
-    });
-
-    $(".answer-nested-record").click(function() {
-        tr = $(this).closest("tr")
-        value = tr.find("#answer-requested_quantity").text()
-
-        $("#answer-quantity").text(value);
-        tr.find(".quantity").val(value);
     });
 });
