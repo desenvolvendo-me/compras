@@ -191,8 +191,7 @@ $(document).ready(function () {
 
     $('form.supply_request').on('change', '#supply_request_requested_quantity', function () {
         if(!$('#supply_request_quantity').attr('class').includes("edit")){
-            quantity = $('#supply_request_requested_quantity').val();
-            klass = $('#supply_request_quantity').val(quantity);
+            klass = $('#supply_request_quantity').val(0);
         }
 
         setMaterialTotalAndBalance();

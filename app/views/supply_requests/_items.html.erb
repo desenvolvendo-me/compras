@@ -26,6 +26,10 @@
         Informar a quantidade solicitada em unidades
       </div>
 
+      <div class="yui3-u-1-6">
+        <%= f.input :quantity, :as => :fake, :required => true, :disabled => true %>
+      </div>
+
       <% if @hidden_field %>
 
         <div class="yui3-u-1-6">
@@ -33,10 +37,6 @@
             <label class="fake required" for="supply_request_balance_unit">Saldo Unitário</label>
             <input class="string fake required" id="supply_request_balance_unit" name="supply_request[balance_unit]" type="text" readonly>
           </div>
-        </div>
-
-        <div class="yui3-u-1-6">
-          <%= f.input :quantity, :as => :fake, :required => true, :disabled => true %>
         </div>
 
         <div class="yui3-u-1-6">
