@@ -290,4 +290,12 @@ $(document).ready(function () {
         $("#supply_request_quantity").attr('disabled', true);
         $("#supply_request_requested_quantity").attr('disabled', false);
     });
+
+    $(".answer-nested-record").click(function() {
+        tr = $(this).closest("tr")
+        value = tr.find("#answer-requested_quantity").text()
+
+        $("#answer-quantity").text(value);
+        tr.find(".quantity").val(value);
+    });
 });
