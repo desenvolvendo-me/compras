@@ -134,10 +134,8 @@ function setMaterialTotalAndBalance() {
             dataType: 'json',
             type: 'POST',
             success: function (data) {
-                console.log(data)
                 $('#supply_request_balance').val(data["balance"]);
                 $('#supply_request_unit_value').val(data["value_unit"]);
-                $('#supply_request_total_value').val(data["total"]);
                 $('#supply_request_balance_unit').val(data["balance_unit"]);
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -201,7 +199,7 @@ $(document).ready(function () {
         }
 
         setTimeout(function(){
-            $("#supply_request_total_value").val(quantity * $("#supply_request_unit_value").val());
+            $("#supply_request_total_value").val((quantity * $("#supply_request_unit_value").val()).toFixed(2));
         }, 100);
 
         setMaterialTotalAndBalance();
