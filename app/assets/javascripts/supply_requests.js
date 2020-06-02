@@ -192,7 +192,11 @@ $(document).ready(function () {
     $('form.supply_request').on('change', '#supply_request_requested_quantity', function () {
         if(!$('#supply_request_quantity').attr('class').includes("edit")){
             quantity = $('#supply_request_requested_quantity').val();
-            klass = $('#supply_request_quantity').val(quantity);
+            if ($('#supply_request_balance_unit').val() > 0){
+                klass = $('#supply_request_quantity').val(0);
+            }else{
+                klass = $('#supply_request_quantity').val(quantity);
+            }
         }
 
         setMaterialTotalAndBalance();
