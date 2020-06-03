@@ -1,12 +1,13 @@
 class SupplyRequestItem < Compras::Model
   attr_accessible :authorization_quantity, :authorization_value, :material_id,
-                  :pledge_item_id, :quantity, :requested_quantity, :supply_request_id
+                  :pledge_item_id, :quantity, :requested_quantity, :supply_request_id, :balance_contract
+
   attr :balance, :balance_unit
+
   attr_accessor :get_unit_price
 
   belongs_to :supply_request
   belongs_to :material
-
   belongs_to :pledge_item
 
   delegate :unit_price, to: :pledge_item, allow_nil: true
