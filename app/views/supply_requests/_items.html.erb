@@ -74,7 +74,9 @@
   <table id="items-records" class="records">
     <thead>
     <tr>
-      <th>Saldo de Contrato</th>
+      <% if @hidden_field %>
+        <th><%= SupplyRequestItem.human_attribute_name :balance_contract %></th>
+      <% end %>
       <th><%= SupplyRequestItem.human_attribute_name :material %></th>
       <th><%= SupplyRequestItem.human_attribute_name :requested_quantity %></th>
       <th><%= SupplyRequestItem.human_attribute_name :quantity %></th>
@@ -82,7 +84,6 @@
         <th><%= SupplyRequestItem.human_attribute_name :get_unit_price %></th>
         <th><%= SupplyRequestItem.human_attribute_name :total_value %></th>
       <% end %>
-      <th></th>
       <th></th>
       <th></th>
     </tr>

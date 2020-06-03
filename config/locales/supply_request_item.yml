@@ -25,3 +25,4 @@ pt-BR:
         value_balance: "Saldo"
         get_unit_price: "Valor Unitário"
         total_value: "Valor Total"
+        balance_contract: "Saldo Contrato"

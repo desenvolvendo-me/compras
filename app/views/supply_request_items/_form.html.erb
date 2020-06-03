@@ -1,5 +1,7 @@
 <tr class="record nested-record item-record" id="material-id-<%= material_id %>">
-  <td><%= check_box_tag("balance_contract", "t", balance_contract) %></td>
+  <% if @hidden_field %>
+    <td><%= check_box_tag("balance_contract", "t", balance_contract) %></td>
+  <% end %>
   <td><%= material %></td>
   <td id="answer-requested_quantity"><%= requested_quantity %></td>
   <td id="answer-quantity"><%= quantity %></td>
