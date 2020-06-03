@@ -155,6 +155,32 @@ function setDisableMaterial(){
     }
 }
 
+function setBalanceContract() {
+    $("#add-material").click(function () {
+        material_id = $("#supply_request_material_id").val()
+        contract_id = $("#supply_request_contract_id").val()
+        if (contract_id && material_id) {
+            $.ajax({
+                url: Routes.contract + "/" + contract_id + ".json",
+                dataType: 'json',
+                type: 'GET',
+                success: function (data) {
+                    $("#material-id-" + material_id).children().find("input[type='checkbox']").val(data["balance"])
+                    $("#material-id-" + material_id).children().find("input[type='checkbox']").attr('checked', data["balance"]);
+                }
+            });
+        }
+    });
+
+    $("input[type='checkbox']").change(function () {
+        if ($(this).is(':checked')) {
+            $(this).closest("tr").find(".supply_request_items_balance_contract").children().val("true")
+        } else {
+            $(this).closest("tr").find(".supply_request_items_balance_contract").children().val("false")
+        }
+    });
+}
+
 $(document).ready(function () {
     setDisableMaterial();
     setModalUrlToDepartment();
@@ -301,11 +327,5 @@ $(document).ready(function () {
         $("#supply_request_requested_quantity").attr('disabled', false);
     });
 
-    $("input[type='checkbox']").change(function () {
-        if ($(this).is(':checked')){
-            $(this).closest("tr").find(".supply_request_items_balance_contract").children().val("true")
-        } else {
-            $(this).closest("tr").find(".supply_request_items_balance_contract").children().val("false")
-        }
-    });
+    setBalanceContract();
 });
