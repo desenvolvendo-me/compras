@@ -220,7 +220,7 @@ class LicitationProcess < Compras::Model
   }
 
   scope :by_department, lambda {|department_id|
-    joins {contracts.authorized_areas.department}.where { contracts.authorized_areas.department.id.in department_id.delete("[]").split(",") }
+    joins {contracts.authorized_areas.department}.where { contracts.authorized_areas.department.id.in department_id.delete("[]").split(",") }.uniq
   }
 
   scope :not_removal_by_limit, -> do
