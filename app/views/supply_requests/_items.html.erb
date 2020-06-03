@@ -16,7 +16,6 @@
                       :required => true, :disabled => disabled_material(f.object) %>
         </div>
       <% end %>
-
     </div>
 
     <div class="yui3-g">
@@ -75,6 +74,7 @@
   <table id="items-records" class="records">
     <thead>
     <tr>
+      <th>Saldo de Contrato</th>
       <th><%= SupplyRequestItem.human_attribute_name :material %></th>
       <th><%= SupplyRequestItem.human_attribute_name :requested_quantity %></th>
       <th><%= SupplyRequestItem.human_attribute_name :quantity %></th>
@@ -91,6 +91,7 @@
     <%= f.association :items, :collection => localized(f.object.items) do |p| %>
       <%= render 'supply_request_items/form',
                  id: p.object.id,
+                 balance_contract: p.object.balance_contract,
                  material: p.object.material,
                  material_id: p.object.material_id,
                  requested_quantity: p.object.requested_quantity,
@@ -106,6 +107,7 @@
     <%= f.association :items_attributes, :collection => f.object.items.build, :index => '{{uuid}}' do |p| %>
       <%= render 'supply_request_items/form',
                  id: '{{id}}',
+                 balance_contract: '{{balance_contract}}',
                  material: '{{material}}',
                  material_id: '{{material_id}}',
                  requested_quantity: '{{requested_quantity}}',

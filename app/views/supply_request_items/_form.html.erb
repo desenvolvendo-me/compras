@@ -1,4 +1,5 @@
 <tr class="record nested-record item-record" id="material-id-<%= material_id %>">
+  <td><%= check_box_tag("balance_contract", "t", balance_contract) %></td>
   <td><%= material %></td>
   <td id="answer-requested_quantity"><%= requested_quantity %></td>
   <td id="answer-quantity"><%= quantity %></td>
@@ -12,6 +13,7 @@
   <td>
     <%= f.input :material_id, as: :hidden, input_html: {value: material_id, class: 'material-id'} %>
     <%= f.input :material, as: :hidden, input_html: {value: material} %>
+    <%= f.input :balance_contract, as: :hidden, input_html: {value: balance_contract} %>
     <%= f.input :requested_quantity, as: :hidden, input_html: {value: requested_quantity, class: 'requested_quantity'} %>
     <%= f.input :quantity, as: :hidden, input_html: {value: quantity, class: 'quantity'} %>
     <%= f.input :id, as: :hidden, input_html: {value: id} %>

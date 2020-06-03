@@ -300,4 +300,12 @@ $(document).ready(function () {
         $("#supply_request_quantity").attr('disabled', true);
         $("#supply_request_requested_quantity").attr('disabled', false);
     });
+
+    $("input[type='checkbox']").change(function () {
+        if ($(this).is(':checked')){
+            $(this).closest("tr").find(".supply_request_items_balance_contract").children().val("true")
+        } else {
+            $(this).closest("tr").find(".supply_request_items_balance_contract").children().val("false")
+        }
+    });
 });
