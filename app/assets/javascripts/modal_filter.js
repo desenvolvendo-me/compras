@@ -103,11 +103,11 @@ function setModalUrlToDepartmentByCreditor(selector_id, selector_modal) {
     $(selector_modal).data('modal-url', urlModal);
 }
 
-function setModalUrlToLicitationProcessByContract(selector_id, selector_modal) {
+function setModalUrlToLicitationProcessByDepartment(selector_id, selector_modal) {
     var value = $(selector_id).val();
     var urlModal = Routes.modal_licitation_processes,
         params = {
-            by_contract: value
+            by_department: value
         };
 
     urlModal += "?" + $.param(params);
