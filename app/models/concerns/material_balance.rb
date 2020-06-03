@@ -28,7 +28,7 @@ module MaterialBalance
 
       balance_unit = ((quantity_autorized - quantity_delivered).to_f * material.quantity_unit.to_f) - quantity.to_i
       balance = balance_unit.to_f / material.quantity_unit.to_f
-      value_unit = get_unit_price(object, material)
+      value_unit = get_unit_price(object, material) / material.quantity_unit.to_f
 
       response["total"] = quantity_autorized
       response["value_unit"] = value_unit

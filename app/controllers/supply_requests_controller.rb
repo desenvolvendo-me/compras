@@ -10,7 +10,7 @@ class SupplyRequestsController < CrudController
   end
 
   def edit
-    @gestor = gestor?
+    @hidden_field = supply_hidden_field?
   end
 
   def index
@@ -29,6 +29,11 @@ class SupplyRequestsController < CrudController
 
   def gestor?
     UserPurchasingUnit.where(user_id:current_user.id).count == 0 ? false:true
+  end
+
+  def supply_hidden_field?
+    purchasing_unit_ids = resource.try(:purchase_solicitation).try(:department).try(:purchasing_unit)
+    current_user.user_purchasing_units.where(purchasing_unit_id: [purchasing_unit_ids]).any?
   end
 
   def filters(collection)
