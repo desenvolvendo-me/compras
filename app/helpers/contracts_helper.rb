@@ -11,9 +11,12 @@ module ContractsHelper
     value = 0
 
     supply_order.items.each do |item|
-      item_value = supply_order.licitation_process.items.where(material_id: item.material_id).first.unit_price
+      licitation_process_items = supply_order.licitation_process.items.where(material_id: item.material_id)
+
+      item_value = licitation_process_items.first.unit_price if licitation_process_items.any?
       item_total = supply_order.items.where(material_id: item.material_id).sum(:quantity)
-      value += item_value * item_total
+
+      value += item_value.to_f * item_total.to_f
     end
 
     value
