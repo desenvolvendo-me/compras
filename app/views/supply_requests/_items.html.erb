@@ -5,11 +5,11 @@
       <%= hidden_field_tag :item_id, nil, :name => 'supply_request_item[id]' %>
       <% if f.object.supply_orders.size == 0 %>
         <div class="yui3-u-1-2">
-          <%= f.input :material, :as => :auto_complete, :fake => true, :required => true, :disabled => disabled_material(f.object) %>
+          <%= f.input :material, :as => :auto_complete, 'data-hidden-field-class' => 'unique', :fake => true, :required => true, :disabled => disabled_material(f.object) %>
         </div>
       <% else %>
         <div class="yui3-u-1-2">
-          <%= f.input :material, :as => :auto_complete, :fake => true,
+          <%= f.input :material, :as => :auto_complete, 'data-hidden-field-class' => 'unique', :fake => true,
                       :source_path => materials_path(
                           :by_supply_order => f.object.supply_orders.map { |supply_order| supply_order['supply_order_id'] }.join(', ')
                       ),
