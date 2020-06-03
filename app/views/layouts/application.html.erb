@@ -33,6 +33,7 @@
             <li>
               <%= link_to current_user, edit_account_path, :class => 'current_user' %>
               <input type="hidden" id="current_user_id" name="current_user_id" value="<%= current_user.id %>">
+              <input id="current_user_department_ids" type="hidden" value="<%= current_user.department_people.pluck(:department_id) %>" >
             </li>
 
             <% if current_prefecture %>
