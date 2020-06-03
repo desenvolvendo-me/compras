@@ -155,6 +155,17 @@ function setDisableMaterial(){
     }
 }
 
+function setModalUrlToLicitationProcess() {
+    var selector_id = '#current_user_department_ids'
+    var selector_modal = '#supply_request_licitation_process'
+
+    var id = $(selector_id).val();
+    if (id) {
+        setModalUrlToLicitationProcessByDepartment(selector_id, selector_modal)
+    }
+}
+
+
 $(document).ready(function () {
     setDisableMaterial();
     setModalUrlToDepartment();
@@ -164,6 +175,8 @@ $(document).ready(function () {
     setModalUrlToPurchaseSolicitation();
     setMaterialTotalAndBalance();
     setModalUrlToMaterial();
+
+    setModalUrlToLicitationProcess();
 
     $('#supply_request_contract_id').on('change', function (event, contract) {
         setDisableMaterial();
