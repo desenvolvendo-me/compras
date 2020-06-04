@@ -2,7 +2,7 @@
 <%= a.input :addressable_type, :as => :hidden %>
 
 <div class="yui3-g">
-  <div class="yui3-u-1-4">
+  <div class="yui3-u-1-2">
     <%= a.input :street, :as => :select2, :required => true %>
   </div>
 </div>
@@ -57,6 +57,7 @@
 
 <script>
     $("#<%= a.sanitized_object_name %>_street_id").change(function (event, street) {
+        console.log(street)
         if (street) {
             var modal_url = "<%= modal_neighborhoods_path %>?",
                 params = $.param({
