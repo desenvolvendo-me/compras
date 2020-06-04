@@ -37,12 +37,18 @@ class SupplyRequestsController < CrudController
   end
 
   def filters(collection)
-    use_pur_uni = UserPurchasingUnit.where(user_id:current_user.id).pluck(:purchasing_unit_id)
-    departments = Department.where("compras_departments.purchasing_unit_id in (?)",use_pur_uni).pluck(:id)
-    pur_sol = PurchaseSolicitation.where("department_id in (?)",departments).pluck(:id)
+    purchase_solicitation = get_purchase_solicitation_by_purchase_unit
 
     collection.where("purchase_solicitation_id in (?) or user_id = ? ",
-                     pur_sol,current_user.id )
+                     purchase_solicitation,current_user.id )
+  end
+
+  private
+
+  def get_purchase_solicitation_by_purchase_unit
+    use_pur_uni = UserPurchasingUnit.where(user_id: current_user.id).pluck(:purchasing_unit_id)
+    departments = Department.where("compras_departments.purchasing_unit_id in (?)", use_pur_uni).pluck(:id)
+    PurchaseSolicitation.where("department_id in (?)", departments).pluck(:id)
   end
 
 end

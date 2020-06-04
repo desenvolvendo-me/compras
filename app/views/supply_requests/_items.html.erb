@@ -5,18 +5,17 @@
       <%= hidden_field_tag :item_id, nil, :name => 'supply_request_item[id]' %>
       <% if f.object.supply_orders.size == 0 %>
         <div class="yui3-u-1-2">
-          <%= f.input :material, :as => :auto_complete, :fake => true, :required => true, :disabled => disabled_material(f.object) %>
+          <%= f.input :material, :as => :auto_complete, 'data-hidden-field-class' => 'unique', :fake => true, :required => true, :disabled => disabled_material(f.object) %>
         </div>
       <% else %>
         <div class="yui3-u-1-2">
-          <%= f.input :material, :as => :auto_complete, :fake => true,
+          <%= f.input :material, :as => :auto_complete, 'data-hidden-field-class' => 'unique', :fake => true,
                       :source_path => materials_path(
                           :by_supply_order => f.object.supply_orders.map { |supply_order| supply_order['supply_order_id'] }.join(', ')
                       ),
                       :required => true, :disabled => disabled_material(f.object) %>
         </div>
       <% end %>
-
     </div>
 
     <div class="yui3-g">
@@ -75,6 +74,9 @@
   <table id="items-records" class="records">
     <thead>
     <tr>
+      <% if @hidden_field %>
+        <th><%= SupplyRequestItem.human_attribute_name :balance_contract %></th>
+      <% end %>
       <th><%= SupplyRequestItem.human_attribute_name :material %></th>
       <th><%= SupplyRequestItem.human_attribute_name :requested_quantity %></th>
       <th><%= SupplyRequestItem.human_attribute_name :quantity %></th>
@@ -84,13 +86,13 @@
       <% end %>
       <th></th>
       <th></th>
-      <th></th>
     </tr>
     </thead>
     <tbody>
     <%= f.association :items, :collection => localized(f.object.items) do |p| %>
       <%= render 'supply_request_items/form',
                  id: p.object.id,
+                 balance_contract: p.object.balance_contract,
                  material: p.object.material,
                  material_id: p.object.material_id,
                  requested_quantity: p.object.requested_quantity,
@@ -106,6 +108,7 @@
     <%= f.association :items_attributes, :collection => f.object.items.build, :index => '{{uuid}}' do |p| %>
       <%= render 'supply_request_items/form',
                  id: '{{id}}',
+                 balance_contract: '{{balance_contract}}',
                  material: '{{material}}',
                  material_id: '{{material_id}}',
                  requested_quantity: '{{requested_quantity}}',
