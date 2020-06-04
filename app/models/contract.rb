@@ -105,7 +105,7 @@ class Contract < Compras::Model
   end
 
   def winning_items
-    licitation_process_id = self.licitation_process.id
+    licitation_process_id = self.try(:licitation_process).try(:id)
     creditor_ids = self.creditor_ids
     LicitationProcessRatificationItem.
         joins { licitation_process_ratification.licitation_process }.
@@ -138,7 +138,7 @@ class Contract < Compras::Model
   end
 
   def solicitations
-    licitation_process_id = self.licitation_process.id
+    licitation_process_id = self.try(:licitation_process).try(:id)
     creditor_id = self.creditor_ids.compact
 
     material_ids = Material.by_ratification(licitation_process_id, creditor_id).pluck(:id).uniq
