@@ -621,6 +621,7 @@ Compras::Application.routes.draw do
   end
 
   get "representative_people", to: "people#index", as: 'representative_people'
+  get "responsibles", to: "people#index", as: 'responsibles'
 
   resources :pledge_requests do
     collection do
