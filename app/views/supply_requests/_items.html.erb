@@ -52,6 +52,7 @@
             <input class="string fake" id="supply_request_unit_value" name="supply_request[unit_value]" type="text" readonly>
           </div>
         </div>
+      <% end %>
 
         <div class="yui3-u-1-6">
           <div class="input fake supply_request_total_value">
@@ -59,7 +60,6 @@
             <input class="string fake" id="supply_request_total_value" name="supply_request[total_value]" type="text" readonly>
           </div>
         </div>
-      <% end %>
     </div>
 
     <div class="yui3-u-1-6">
@@ -80,8 +80,8 @@
       <th><%= SupplyRequestItem.human_attribute_name :quantity %></th>
       <% if @hidden_field %>
         <th><%= SupplyRequestItem.human_attribute_name :get_unit_price %></th>
-        <th><%= SupplyRequestItem.human_attribute_name :total_value %></th>
       <% end %>
+        <th><%= SupplyRequestItem.human_attribute_name :total_value %></th>
       <th></th>
       <th></th>
       <th></th>
