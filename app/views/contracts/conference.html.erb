@@ -4,6 +4,58 @@
 
 <div style="text-align: left">
   <h2>CAPA DO CONTRATO</h2>
+  <p>
+    <strong>Ano do Contrato: </strong>
+    <%= @contract.year %>
+  </p>
+  <p>
+    <strong>Número do Contrato: </strong>
+    <%= @contract.contract_number %>
+  </p>
+  <p>
+    <strong>Objeto: </strong>
+    <%= @contract.content %>
+  </p>
+  <p>
+    <strong>Processo de Compra: </strong>
+    <%= @contract.licitation_process %>
+  </p>
+  <p>
+    <strong>Fornecedor: </strong>
+    <%= @contract.creditors.first %>
+  </p>
+  <p>
+    <strong>Tipo do Contrato: </strong>
+    <%= @contract.contract_type %>
+  </p>
+  <p>
+    <strong>Valor do Contrato: </strong>
+    <%= number_to_currency @contract.contract_value %>
+  </p>
+  <p>
+    <strong>Multa Inadimplemento: </strong>
+    <%= number_to_percentage @contract.default_fine %>
+  </p>
+  <p>
+    <strong>Multa Rescisória: </strong>
+    <%= number_to_percentage @contract.penalty_fine %>
+  </p>
+  <p>
+    <strong>Modalidade: </strong>
+    <%= @contract.modality_humanize %>
+  </p>
+  <p>
+    <strong>Unidade de Compra Responsável: </strong>
+    <%= @contract.purchasing_unit %>
+  </p>
+  <p>
+    <strong>Servidor Responsavel pelo Contrato na Unidade de Compras: </strong>
+    <%= @contract.budget_structure_responsible %>
+  </p>
+  <p>
+    <strong>Observações: </strong>
+    <%= @contract.description %>
+  </p>
 </div>
 <br>
 <div>
