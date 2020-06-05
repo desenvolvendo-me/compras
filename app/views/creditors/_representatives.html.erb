@@ -1,36 +1,47 @@
-<%= f.error :representatives %>
+<div id="supply_request_items">
 
-<div class="yui3-g modal-finder">
-  <div class="yui3-u-1-2">
-    <%= f.association :representative_people, :as => :modal, :hidden_field => false, :input_html => { :value => nil }, :modal_url => modal_people_path %>
+  <div class="nested-fields add-margin-bottom">
+    <%= hidden_field_tag :item_id, nil, :name => 'representative_person[id]' %>
+
+    <%= f.input :representative_person, :as => :auto_complete, :fake => true, :required => true %>
+
+    <div class="yui3-u-1-6">
+      <%= button_tag 'Adicionar', type: :button,
+                     :class => 'button add-nested-record field-without-label',
+                     'data-template' => 'representative_persons_template',
+                     'data-records' => 'items-records',
+                     'data-disabled' => not_updateable_message, id: "add-material" %>
+    </div>
   </div>
-</div>
 
-<input type="hidden" name="<%= f.sanitized_object_name %>[representative_ids][]" />
+  <%= f.error :items %>
 
-<table class="records">
-  <thead>
+  <table id="items-records" class="records">
+    <thead>
     <tr>
-      <th>
-        <%= Person.human_attribute_name :name %>
-      </th>
-      <th>
-        <%= Person.human_attribute_name :identity_document %>
-      </th>
-      <th>
-      </th>
+      <th><%= "Representante" %></th>
+      <th></th>
+      <th></th>
     </tr>
-  </thead>
-
-  <tbody class="<%= f.sanitized_object_name %>_representative_people_records">
-    <% f.object.representative_people.each do |representative| %>
-      <%= render 'creditor_representatives/list_form', :name => representative.name, :id => representative.id, :identity_document => representative.identity_document, :f => f %>
+    </thead>
+    <tbody>
+    <%= f.association :representatives, :collection => localized(f.object.representatives) do |p| %>
+      <%= render 'creditor_representatives/form',
+                 id: p.object.id,
+                 representative_person: p.object.representative_person,
+                 representative_person_id: p.object.representative_person_id,
+                 f: p %>
     <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
 
-<%= mustache "#{f.sanitized_object_name}_representative_people_template" do %>
-  <%= f.association :representative_people, :collection => f.object.representative_people.build do |p| %>
-    <%= render 'creditor_representatives/list_form', :name => '{{name}}', :id => '{{id}}', :identity_document => '{{identity_document}}', :f => f %>
+  <%= mustache "representative_persons_template" do %>
+    <%= f.association :representatives_attributes, :collection => f.object.representatives.build, :index => '{{uuid}}' do |p| %>
+      <%= render 'creditor_representatives/form',
+                 id: '{{id}}',
+                 representative_person: '{{representative_person}}',
+                 representative_person_id: '{{representative_person_id}}',
+                 f: p %>
+    <% end %>
   <% end %>
-<% end %>
+</div>

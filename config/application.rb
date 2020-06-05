@@ -115,7 +115,9 @@ module Compras
       'expenses.js',
       'balance_adjustments.js',
       'modal_filter.js',
-      'reports/balance_per_creditor'
+      'reports/balance_per_creditor',
+      "select2/select2.min",
+      "select2/select2_locale_pt-BR"
     ]
 
     config.generators do |g|

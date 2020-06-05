@@ -50,7 +50,9 @@ gem 'decore', :git => 'git://github.com/sobrinho/decore.git'
 
 gem 'strong_parameters', '0.2.1'
 gem 'rubocop'
+
 group :assets do
+  gem 'sass-rails'
   gem 'uglifier'
 end
 

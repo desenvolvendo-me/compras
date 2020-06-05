@@ -14,7 +14,7 @@ class Person < Persona::Person
   delegate :city, :zip_code, :state, to: :address, allow_nil: true
   delegate :benefited, to: :company_size, allow_nil: true
 
-  validates :address, presence: true
+  validate :address_required
 
   orderize
 
@@ -25,6 +25,16 @@ class Person < Persona::Person
     query = query.joins{ personable Company }.where{ personable(Company).cnpj == params[:cnpj] } unless params[:cnpj].blank?
     query
   end
+
+  def address_required
+    unless address.present?
+      errors.add(:base, "Endereço é obrigatório")
+    end
+  end
+
+  scope :term, lambda {|q|
+    where {name.like("%#{q}%")}
+  }
 
   def self.search(options = {})
     query = scoped

@@ -1,6 +1,11 @@
 <%= a.input :addressable_id, :as => :hidden %>
 <%= a.input :addressable_type, :as => :hidden %>
-<%= a.input :street, :hint => false %>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= a.input :street, :as => :select2, :required => true %>
+  </div>
+</div>
 
 <div class="yui3-g">
   <div class="yui3-u-1-4">
@@ -24,7 +29,7 @@
 
 <div class="yui3-g">
   <div class="yui3-u-1-2">
-    <%= a.input :neighborhood, :url => modal_neighborhoods_path(:street_id => a.object.street_id), :disabled => a.object.street.nil? %>
+    <%= a.input :neighborhood, as: :select2 %>
   </div>
 
   <div class="yui3-u-1-2">
@@ -51,36 +56,37 @@
 </div>
 
 <script>
-  $("#<%= a.sanitized_object_name %>_street_id").change(function (event, street) {
-    if (street) {
-      var modal_url = "<%= modal_neighborhoods_path %>?",
-        params = $.param({
-        street_id: street.id,
-        neighborhood: {
-          city:    street.city,
-          city_id: street.city_id
-        },
-        locked_fields: ["city"]
-      });
+    $("#<%= a.sanitized_object_name %>_street_id").change(function (event, street) {
+        console.log(street)
+        if (street) {
+            var modal_url = "<%= modal_neighborhoods_path %>?",
+                params = $.param({
+                    street_id: street.id,
+                    neighborhood: {
+                        city: street.city,
+                        city_id: street.city_id
+                    },
+                    locked_fields: ["city"]
+                });
 
-      modal_url += params;
+            modal_url += params;
 
-      $("#<%= a.sanitized_object_name %>_neighborhood").data("modal-url", modal_url).val("");
+            $("#<%= a.sanitized_object_name %>_neighborhood").data("modal-url", modal_url).val("");
 
-      $("#<%= a.sanitized_object_name %>_neighborhood_id").val("");
-    }
+            $("#<%= a.sanitized_object_name %>_neighborhood_id").val("");
+        }
 
-    if ($(this).val()) {
-      $("#<%= a.sanitized_object_name %>_neighborhood").attr("disabled", false);
-    } else {
-      $("#<%= a.sanitized_object_name %>_neighborhood").attr("disabled", true);
-    }
-  }).change();
+        if ($(this).val()) {
+            $("#<%= a.sanitized_object_name %>_neighborhood").attr("disabled", false);
+        } else {
+            $("#<%= a.sanitized_object_name %>_neighborhood").attr("disabled", true);
+        }
+    }).change();
 
-  $("#<%= a.sanitized_object_name %>_neighborhood_id").change(function (event, neighborhood) {
-    if (neighborhood) {
-      $("#<%= a.sanitized_object_name %>_city").val(neighborhood.city);
-      $("#<%= a.sanitized_object_name %>_state").val(neighborhood.state);
-    }
-  });
+    $("#<%= a.sanitized_object_name %>_neighborhood_id").change(function (event, neighborhood) {
+        if (neighborhood) {
+            $("#<%= a.sanitized_object_name %>_city").val(neighborhood.city);
+            $("#<%= a.sanitized_object_name %>_state").val(neighborhood.state);
+        }
+    });
 </script>
