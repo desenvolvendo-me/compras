@@ -299,7 +299,7 @@ Compras::Application.routes.draw do
 
   resources :contracts do
     resources :delivery_schedules
-
+    get :conference
     collection do
       get :filter
       get :modal

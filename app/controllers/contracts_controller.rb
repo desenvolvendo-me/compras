@@ -30,6 +30,9 @@ class ContractsController < CrudController
     render :json => {creditor: contract.creditors.first.person.name, balance: balance, value: contract.contract_value}
   end
 
+  def conference
+  end
+
   protected
 
   def default_filters
