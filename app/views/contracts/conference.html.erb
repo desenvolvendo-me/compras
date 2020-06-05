@@ -90,12 +90,10 @@
 
 <div>
   <h2>ITENS DO OBJETO</h2>
-
   <% total = 0 %>
   <% @contract.ratifications_items.group_by(&:lot).sort.each do |lot, ratifications_items| %>
     <table class="records">
       <h2>LOTE <%= lot %></h2>
-
       <thead>
       <tr>
         <th>Código</th>
@@ -116,6 +114,45 @@
           <td><%= ratifications_item.quantity %></td>
           <td width="10%"><%= number_to_currency ratifications_item.unit_price %></td>
           <td width="10%"><%= number_to_currency ratifications_item.total_price %></td>
+        </tr>
+      <% end %>
+      <tr>
+        <td colspan="5">TOTAL</td>
+        <td><%= number_to_currency total %></td>
+      </tr>
+  <% end %>
+  </tbody>
+  </table>
+</div>
+
+<div>
+  <h2>ITENS POR SECRETARIA / DEPARTAMENTO</h2>
+  <% total = 0 %>
+  <% @contract.ratifications_items.joins{licitation_process_ratification.licitation_process.purchase_solicitations.purchase_solicitation.department}.select("compras_licitation_process_ratification_items.id as id, compras_departments.description as department").group_by(&:department).sort.each do |department, ratifications_items| %>
+    <table class="records">
+      <h2>DEPARTAMENTO: <%= department %></h2>
+      <thead>
+      <tr>
+        <th>Código</th>
+        <th>Descrição</th>
+        <th>Unidade</th>
+        <th>Quantidade</th>
+        <th>Preço Unitário</th>
+        <th>Preço Total</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% ratifications_items.each do |ratifications_item| %>
+
+      <% item = LicitationProcessRatificationItem.find(ratifications_item.id) %>
+        <% total += item.total_price.to_f %>
+        <tr>
+          <td width="5%"><%= item.try(:material).try(:code) %></td>
+          <td><%= item.try(:material).try(:description) %></td>
+          <td><%= item.try(:material).try(:reference_unit).try(:acronym) %></td>
+          <td><%= item.quantity %></td>
+          <td width="10%"><%= number_to_currency item.unit_price %></td>
+          <td width="10%"><%= number_to_currency item.total_price %></td>
         </tr>
       <% end %>
       <tr>
