@@ -59,6 +59,7 @@
 </div>
 <br>
 <div>
+  <h2>DADOS FINANCEIROS</h2>
   <table class="records">
     <thead>
     <tr>
@@ -79,6 +80,10 @@
         <td><%= number_to_currency financial.value %></td>
       </tr>
     <% end %>
+    <tr>
+      <td colspan="4">TOTAL</td>
+      <td><%= number_to_currency @contract.financials.sum(:value) %></td>
+    </tr>
     </tbody>
   </table>
 </div>
