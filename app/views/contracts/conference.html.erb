@@ -1,0 +1,33 @@
+<div>
+  <h1> ESPELHO DE CONTRATO </h1>
+</div>
+
+<div style="text-align: left">
+  <h2>CAPA DO CONTRATO</h2>
+</div>
+<br>
+<div>
+  <table class="records">
+    <thead>
+    <tr>
+      <th>Secretário</th>
+      <th>Projeto Atividade (Código)</th>
+      <th>Natureza</th>
+      <th>Fonte</th>
+      <th>Valor</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @contract.financials.each do |financial| %>
+      <tr>
+        <td><%= financial.secretary %></td>
+        <td><%= financial.expense.project_activity.name %></td>
+        <td><%= financial.expense.nature_expense %></td>
+        <td><%= financial.expense.resource_source %></td>
+        <td><%= number_to_currency financial.value %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+

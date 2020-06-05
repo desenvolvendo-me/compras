@@ -3,6 +3,8 @@ class ContractsController < CrudController
   has_scope :management, :type => :boolean
   has_scope :purchase_process_id, allow_blank: true
 
+  layout "report", only: [:conference]
+
   def new
     object = build_resource
     object.year = Date.current.year
@@ -31,6 +33,7 @@ class ContractsController < CrudController
   end
 
   def conference
+    @contract = Contract.find(params[:contract_id])
   end
 
   protected
