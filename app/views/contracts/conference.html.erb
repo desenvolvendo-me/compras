@@ -88,3 +88,41 @@
   </table>
 </div>
 
+<div>
+  <h2>ITENS DO OBJETO</h2>
+
+  <% total = 0 %>
+  <% @contract.ratifications_items.group_by(&:lot).sort.each do |lot, ratifications_items| %>
+    <table class="records">
+      <h2>LOTE <%= lot %></h2>
+
+      <thead>
+      <tr>
+        <th>Código</th>
+        <th>Descrição</th>
+        <th>Unidade</th>
+        <th>Quantidade</th>
+        <th>Preço Unitário</th>
+        <th>Preço Total</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% ratifications_items.each do |ratifications_item| %>
+        <% total += ratifications_item.total_price %>
+        <tr>
+          <td width="5%"><%= ratifications_item.material.code %></td>
+          <td><%= ratifications_item.material.description %></td>
+          <td><%= ratifications_item.material.reference_unit.acronym %></td>
+          <td><%= ratifications_item.quantity %></td>
+          <td width="10%"><%= number_to_currency ratifications_item.unit_price %></td>
+          <td width="10%"><%= number_to_currency ratifications_item.total_price %></td>
+        </tr>
+      <% end %>
+      <tr>
+        <td colspan="5">TOTAL</td>
+        <td><%= number_to_currency total %></td>
+      </tr>
+  <% end %>
+  </tbody>
+  </table>
+</div>
