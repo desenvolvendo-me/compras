@@ -128,7 +128,8 @@
 <div>
   <h2>ITENS POR SECRETARIA / DEPARTAMENTO</h2>
   <% total = 0 %>
-  <% @contract.ratifications_items.joins{licitation_process_ratification.licitation_process.purchase_solicitations.purchase_solicitation.department}.select("compras_licitation_process_ratification_items.id as id, compras_departments.description as department").group_by(&:department).sort.each do |department, ratifications_items| %>
+  <% contract_id = @contract.id %>
+  <% PurchaseSolicitationItem.joins { purchase_solicitation.department }.joins { purchase_solicitation.list_purchase_solicitations.licitation_process.contracts }.where { purchase_solicitation.list_purchase_solicitations.licitation_process.contracts.id.eq( contract_id ) }.select("compras_purchase_solicitation_items.id as id, compras_departments.description as department").group_by(&:department).sort.each do |department, ratifications_items| %>
     <table class="records">
       <h2>DEPARTAMENTO: <%= department %></h2>
       <thead>
@@ -142,24 +143,23 @@
       </tr>
       </thead>
       <tbody>
-      <% ratifications_items.each do |ratifications_item| %>
-
-      <% item = LicitationProcessRatificationItem.find(ratifications_item.id) %>
-        <% total += item.total_price.to_f %>
+      <% purchase_solicitation_items.each do |purchase_solicitation_item| %>
+        <% item = PurchaseSolicitationItem.find(purchase_solicitation_item.id) %>
+        <%# total += item.total_price.to_f %>
         <tr>
           <td width="5%"><%= item.try(:material).try(:code) %></td>
           <td><%= item.try(:material).try(:description) %></td>
           <td><%= item.try(:material).try(:reference_unit).try(:acronym) %></td>
           <td><%= item.quantity %></td>
           <td width="10%"><%= number_to_currency item.unit_price %></td>
-          <td width="10%"><%= number_to_currency item.total_price %></td>
+          <!--          <td width="10%"><%#= number_to_currency item.total_price %></td>-->
         </tr>
       <% end %>
       <tr>
         <td colspan="5">TOTAL</td>
         <td><%= number_to_currency total %></td>
       </tr>
+      </tbody>
+    </table>
   <% end %>
-  </tbody>
-  </table>
 </div>
