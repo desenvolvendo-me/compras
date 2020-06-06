@@ -1,0 +1,170 @@
+<div>
+  <h1> ESPELHO DE CONTRATO </h1>
+</div>
+
+<div style="text-align: left">
+  <h2>CAPA DO CONTRATO</h2>
+  <p>
+    <strong>Ano do Contrato: </strong>
+    <%= @contract.year %>
+  </p>
+  <p>
+    <strong>Número do Contrato: </strong>
+    <%= @contract.contract_number %>
+  </p>
+  <p>
+    <strong>Objeto: </strong>
+    <%= @contract.content %>
+  </p>
+  <p>
+    <strong>Processo de Compra: </strong>
+    <%= @contract.licitation_process %>
+  </p>
+  <p>
+    <strong>Fornecedor: </strong>
+    <%= @contract.creditors.first %>
+  </p>
+  <p>
+    <strong>Tipo do Contrato: </strong>
+    <%= @contract.contract_type %>
+  </p>
+  <p>
+    <strong>Valor do Contrato: </strong>
+    <%= number_to_currency @contract.contract_value %>
+  </p>
+  <p>
+    <strong>Multa Inadimplemento: </strong>
+    <%= number_to_percentage @contract.default_fine %>
+  </p>
+  <p>
+    <strong>Multa Rescisória: </strong>
+    <%= number_to_percentage @contract.penalty_fine %>
+  </p>
+  <p>
+    <strong>Modalidade: </strong>
+    <%= @contract.modality_humanize %>
+  </p>
+  <p>
+    <strong>Unidade de Compra Responsável: </strong>
+    <%= @contract.purchasing_unit %>
+  </p>
+  <p>
+    <strong>Servidor Responsavel pelo Contrato na Unidade de Compras: </strong>
+    <%= @contract.budget_structure_responsible %>
+  </p>
+  <p>
+    <strong>Observações: </strong>
+    <%= @contract.description %>
+  </p>
+</div>
+<br>
+<div>
+  <h2>DADOS FINANCEIROS</h2>
+  <table class="records">
+    <thead>
+    <tr>
+      <th>Secretário</th>
+      <th>Projeto Atividade (Código)</th>
+      <th>Natureza</th>
+      <th>Fonte</th>
+      <th>Valor</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @contract.financials.each do |financial| %>
+      <tr>
+        <td><%= financial.secretary %></td>
+        <td><%= financial.expense.project_activity.name %></td>
+        <td><%= financial.expense.nature_expense %></td>
+        <td><%= financial.expense.resource_source %></td>
+        <td><%= number_to_currency financial.value %></td>
+      </tr>
+    <% end %>
+    <tr>
+      <td colspan="4">TOTAL</td>
+      <td><%= number_to_currency @contract.financials.sum(:value) %></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<div>
+  <h2>ITENS DO OBJETO</h2>
+  <% total = 0 %>
+  <% @contract.ratifications_items.group_by(&:lot).sort.each do |lot, ratifications_items| %>
+    <table class="records">
+      <h2>LOTE <%= lot %></h2>
+      <thead>
+      <tr>
+        <th>Código</th>
+        <th>Descrição</th>
+        <th>Unidade</th>
+        <th>Quantidade</th>
+        <th>Preço Unitário</th>
+        <th>Preço Total</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% ratifications_items.each do |ratifications_item| %>
+        <% total += ratifications_item.total_price %>
+        <tr>
+          <td width="5%"><%= ratifications_item.material.code %></td>
+          <td><%= ratifications_item.material.description %></td>
+          <td><%= ratifications_item.material.reference_unit.acronym %></td>
+          <td><%= ratifications_item.quantity %></td>
+          <td width="10%"><%= number_to_currency ratifications_item.unit_price %></td>
+          <td width="10%"><%= number_to_currency ratifications_item.total_price %></td>
+        </tr>
+      <% end %>
+      <tr>
+        <td colspan="5">TOTAL</td>
+        <td><%= number_to_currency total %></td>
+      </tr>
+  <% end %>
+  </tbody>
+  </table>
+</div>
+
+<div>
+  <h2>ITENS POR SECRETARIA / DEPARTAMENTO</h2>
+  <% total = 0 %>
+  <% contract_id = @contract.id %>
+  <%#TODO: Refatorar quando voltar aqui  %>
+  <% PurchaseSolicitationItem.joins { purchase_solicitation.department }.joins { purchase_solicitation.list_purchase_solicitations.licitation_process.contracts }.where { purchase_solicitation.list_purchase_solicitations.licitation_process.contracts.id.eq(contract_id) }.select("compras_purchase_solicitation_items.id as id, compras_departments.description as department").group_by(&:department).sort.each do |department, purchase_solicitation_items| %>
+    <table class="records">
+      <h2>DEPARTAMENTO: <%= department %></h2>
+      <thead>
+      <tr>
+        <th>Código</th>
+        <th>Descrição</th>
+        <th>Unidade</th>
+        <th>Quantidade</th>
+        <th>Preço Unitário</th>
+        <th>Preço Total</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% purchase_solicitation_items.each do |purchase_solicitation_item| %>
+        <% licitation_process_id = @contract.licitation_process.id %>
+        <% creditor_id = @contract.creditors.last.id %>
+        <% item = PurchaseSolicitationItem.find(purchase_solicitation_item.id) %>
+        <% ratifications_item = LicitationProcessRatificationItem.joins { purchase_process_item.material }.joins { licitation_process_ratification.licitation_process }.joins { licitation_process_ratification.creditor }.where { licitation_process_ratification.creditor.id.eq(creditor_id) }.where { licitation_process_ratification.licitation_process.id.eq(licitation_process_id) }.where { purchase_process_item.material.id.eq(item.material.id) }.last %>
+
+        <% total += ratifications_item.try(:total_price).to_f %>
+        <tr>
+          <td width="5%"><%= item.try(:material).try(:code) %></td>
+          <td><%= item.try(:material).try(:description) %></td>
+          <td><%= item.try(:material).try(:reference_unit).try(:acronym) %></td>
+          <td><%= item.quantity %></td>
+          <td width="10%"><%= number_to_currency ratifications_item.try(:unit_price) %></td>
+          <td width="10%"><%= number_to_currency ratifications_item.try(:total_price) %></td>
+        </tr>
+      <% end %>
+      <tr>
+        <td colspan="5">TOTAL</td>
+        <td><%= number_to_currency total %></td>
+      </tr>
+      </tbody>
+    </table>
+  <% end %>
+</div>

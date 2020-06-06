@@ -3,6 +3,8 @@ class ContractsController < CrudController
   has_scope :management, :type => :boolean
   has_scope :purchase_process_id, allow_blank: true
 
+  layout "report", only: [:conference]
+
   def new
     object = build_resource
     object.year = Date.current.year
@@ -28,6 +30,10 @@ class ContractsController < CrudController
     balance = contract.contract_value - plegde_request_total
 
     render :json => {creditor: contract.creditors.first.person.name, balance: balance, value: contract.contract_value}
+  end
+
+  def conference
+    @contract = Contract.find(params[:contract_id])
   end
 
   protected
