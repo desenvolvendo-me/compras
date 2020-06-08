@@ -344,7 +344,7 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :cities, only: :index do
+  resources :cities, only: %w[index show] do
     collection do
       get :modal
       get :by_name_and_state
@@ -620,8 +620,8 @@ Compras::Application.routes.draw do
     get 'modal_info', on: :member
   end
 
-  get "representative_people", to: "people#index", as: 'representative_people'
-  get "responsibles", to: "people#index", as: 'responsibles'
+  get 'representative_people', to: 'people#index', as: 'representative_people'
+  get 'responsibles', to: 'people#index', as: 'responsibles'
 
   resources :pledge_requests do
     collection do
