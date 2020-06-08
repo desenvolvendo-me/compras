@@ -7,7 +7,7 @@
         <%= f.input :person, label: "Sócio", as: :auto_complete, fake: true, 'data-hidden-field-class' => 'unique', :required => true %>
       </div>
       <div class="yui3-u-1-4">
-        <%= f.input :percentage, as: :fake, :required => true %>
+        <%= f.input :percentage,label: "Percentual", as: :fake, :required => true %>
       </div>
       <div class="yui3-u-1-3">
         <div class="input fake person_personable_attributes_society_kind">
@@ -47,7 +47,7 @@
                  person: p.object.person,
                  person_id: p.object.person_id,
                  percentage: p.object.percentage,
-                 society_kind: p.object.society_kind,
+                 society_kind: p.object.society_kind_humanize,
                  f: p %>
     <% end %>
     </tbody>
