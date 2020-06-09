@@ -3,7 +3,8 @@
 
 <div class="yui3-g">
   <div class="yui3-u-1-2">
-    <%= a.input :street, :as => :select2, :required => true %>
+    
+    <%= a.input :street, as: :auto_complete %>
   </div>
 </div>
 
@@ -29,7 +30,7 @@
 
 <div class="yui3-g">
   <div class="yui3-u-1-2">
-    <%= a.input :neighborhood, as: :select2 %>
+    <%= a.input :neighborhood, as: :auto_complete %>
   </div>
 
   <div class="yui3-u-1-2">
@@ -57,37 +58,42 @@
 
 
 <script>
-    $("#<%= a.sanitized_object_name %>_street_id").change(function (event, street) {
-        console.log(street)
-        if (street) {
-            var modal_url = "<%= modal_neighborhoods_path %>?",
-                params = $.param({
-                    street_id: street.id,
-                    neighborhood: {
-                        city: street.city,
-                        city_id: street.city_id
-                    },
-                    locked_fields: ["city"]
-                });
+    $("#<%= a.sanitized_object_name %>_street").on('change', function (event) {
+       var street_id = $("#<%= a.sanitized_object_name %>_street_id").val();
+        var street_url = "<%= streets_path%>"
 
-            modal_url += params;
+        $.get(street_url+'/'+street_id+'.json', function(event){
+          var street = event;
+            if (street) {
+                var modal_url = "<%= modal_neighborhoods_path %>?",
+                    params = $.param({
+                        street_id: street.id,
+                        neighborhood: {
+                            city: street.city,
+                            city_id: street.city_id
+                        },
+                        locked_fields: ["city"]
+                    });
 
-            $("#<%= a.sanitized_object_name %>_neighborhood").data("modal-url", modal_url).val("");
+                 var city_url = "<%= cities_path%>",
+                      city_id = street.city_id;
+                      $.get(city_url+'/'+city_id+'.json', function(event){
+                        var city = event["city"],
+                        state_acronym = event["state_acronym"];
+                          $("#<%= a.sanitized_object_name %>_city").val(city.name);
+                          $("#<%= a.sanitized_object_name %>_city_id").val(city.id);
+                          $("#<%= a.sanitized_object_name %>_state_id").val(city.state_id);
+                          $("#<%= a.sanitized_object_name %>_state").val(state_acronym);
 
-            $("#<%= a.sanitized_object_name %>_neighborhood_id").val("");
-        }
+                  });
 
-        if ($(this).val()) {
-            $("#<%= a.sanitized_object_name %>_neighborhood").attr("disabled", false);
-        } else {
-            $("#<%= a.sanitized_object_name %>_neighborhood").attr("disabled", true);
-        }
-    }).change();
 
-    $("#<%= a.sanitized_object_name %>_neighborhood_id").change(function (event, neighborhood) {
-        if (neighborhood) {
-            $("#<%= a.sanitized_object_name %>_city").val(neighborhood.city);
-            $("#<%= a.sanitized_object_name %>_state").val(neighborhood.state);
-        }
-    });
+
+            }
+
+            });
+
+
+          });
+
 </script>
