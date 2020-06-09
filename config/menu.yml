@@ -95,6 +95,9 @@ menu:
   - "Prestação de Contas":
     - tce_export_monthly_monitorings
 
+  - manager:
+
+
   - "Relatórios":
     - report_supplier_balance_per_service_orders
     - report_bidding_schedules
