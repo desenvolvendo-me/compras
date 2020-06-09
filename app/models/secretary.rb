@@ -7,11 +7,16 @@ class Secretary < Compras::Model
     where { name.like("%#{q}%") }
   }
 
+  scope :by_user, lambda { |current_user|
+    joins(employee:[:user]).where { compras_users.id.eq current_user }
+  }
+
   orderize "id DESC"
   filterize
 
   def to_s
     "#{name}"
   end
+
 
 end
