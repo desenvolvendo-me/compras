@@ -536,7 +536,11 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :secretary_settings
+  resources :secretary_settings do
+    member do
+      get :router
+    end
+  end
 
   resources :process_responsibles do
     collection do
