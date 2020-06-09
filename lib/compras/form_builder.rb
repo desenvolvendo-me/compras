@@ -86,6 +86,21 @@ module Compras
       template.link_to value, options.delete(:href), options
     end
 
+    def print_button(value = nil, options = {})
+      if value.is_a?(Hash)
+        options = value
+        value = nil
+      end
+
+      value ||= template.translate('.print', cascade: true)
+
+      options[:class]   = "#{options[:class].join(' ')} primary".strip
+      options[:href]  ||= template.resource_path
+      options[:id]    ||= "#{object_name}_print"
+
+      template.link_to value, options.delete(:href), options
+    end
+
     def back_button(value = nil, options = {})
       if value.is_a?(Hash)
         options = value
