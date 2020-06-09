@@ -540,6 +540,9 @@ Compras::Application.routes.draw do
     member do
       get :router
     end
+    collection do
+      get :signature_generate
+    end
   end
 
   resources :process_responsibles do

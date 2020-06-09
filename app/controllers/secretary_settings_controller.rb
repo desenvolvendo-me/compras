@@ -17,4 +17,9 @@ class SecretarySettingsController < CrudController
     end
   end
 
+  def signature_generate
+    digital_signature = Digest::MD5.hexdigest(params[:employee] + params[:secretary] + params[:signature])
+    render json: {digital_signature: digital_signature}
+  end
+
 end

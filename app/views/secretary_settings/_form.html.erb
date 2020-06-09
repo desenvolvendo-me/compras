@@ -1,28 +1,72 @@
 <div class="yui3-g">
   <div class="yui3-u-1">
-    <%= f.input :secretary, as: :string, input_html:{ value: f.object&.secretary&.name } %>
+    <%= f.input :secretary, input_html:{readonly: true} %>
   </div>
+</div>
 
+<div class="yui3-g">
   <div class="yui3-u-1">
-    <%= f.input :employee, as: :string, input_html:{ value: f.object&.employee&.name } %>
+    <%= f.input :employee, input_html:{readonly: true} %>
   </div>
 </div>
 
 <div class="yui3-g">
   <div class="yui3-u-1-3">
-    <%= f.input :digital_signature %>
+    <%= f.input :signature, as: :password, label: 'Assinatura &nbsp<span>8 carecteres</span>', input_html:{maxlength: 8} %>
   </div>
   <div class="yui3-u-1-3">
-    <%= f.input :digital_signature_confirmation, as: :fake %>
+    <%= f.input :signature_confirmation, as: :password, input_html:{maxlength: 8} %>
   </div>
 
   <div class="yui3-u-1-3">
-    <%= f.input :signature %>
+    <%= f.input :digital_signature, input_html:{readonly: true} %>
   </div>
 </div>
 
 <div class="yui3-g">
-  <div class="yui3-u-1-3">
+  <div class="yui3-u-1-2">
     <%= f.input :authorization_value %>
   </div>
 </div>
+
+<script>
+  var password = document.getElementById("secretary_setting_signature"),
+      confirm_password = document.getElementById("secretary_setting_signature_confirmation");
+
+  function check_lenght() {
+    if(password.value.length == 8 && confirm_password.value.length == 8){
+      validatePassword();
+    }
+  }
+  function validatePassword(){
+    if(password.value != confirm_password.value) {
+      if($(confirm_password).parent().find('.error').length <= 0){
+        $(confirm_password).parent().append(`<p class="error">as assinaturas devem ser iguais</p>`);
+      }
+      $("#secretary_setting_digital_signature").val();
+    } else {
+      $(confirm_password).parent().find('.error').remove();
+      generateSignature()
+    }
+  }
+
+  password.onchange = check_lenght;
+  confirm_password.onchange = check_lenght;
+
+  function generateSignature(){
+    var secretary  = $("#secretary_setting_secretary_id").val(),
+        employee = $("#secretary_setting_employee_id").val(),
+        signature = $("#secretary_setting_signature_confirmation").val();
+
+    $.get('<%= signature_generate_secretary_settings_path%>?employee='+employee+'&secretary='+secretary+'&signature='+signature, function(data){
+      $("#secretary_setting_digital_signature").val(data.digital_signature)
+    }, 'json');
+  }
+</script>
+
+<style>
+  .secretary_setting_signature span{
+    font-size: 13px;
+    color: darkgray;
+  }
+</style>
