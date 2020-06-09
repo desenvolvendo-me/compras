@@ -44,30 +44,46 @@
           <%= c.input :commercial_registration_date %>
         </div>
       </div>
-
-      <%= c.input :legal_nature %>
-      <%= c.input :responsible, as: :auto_complete, fake: true %> <%#FIXME: Não salva %>
-      <%= c.input :responsible_role %>
+      <div class="yui3-g">
+        <div class="yui3-u-1">
+            <%= c.input :legal_nature %>
+        </div>
+      </div>
+      <div class="yui3-g">
+        <div class="yui3-u-1-2">
+            <%= c.input :responsible, as: :auto_complete,
+                  hidden_field: :person_id,
+                  source_path: people_path(individual: true) %>
+        </div>
+        <div class="yui3-u-1-2">
+            <%= c.input :responsible_role %>
+        </div>
+      </div>
       <%= c.input :company_size %>
       <%= c.input :choose_simple %>
     </div>
 
     <div id="company_contact">
       <div class="yui3-g">
-        <div class="yui3-u-1-6">
+        <div class="yui3-u-1-4">
           <%= f.input :phone, :as => :string %>
         </div>
 
-        <div class="yui3-u-1-6">
+        <div class="yui3-u-1-4">
           <%= f.input :mobile, :as => :string %>
         </div>
-
-        <div class="yui3-u-1-6">
+        <div class="yui3-u-1-4">
           <%= f.input :fax, :as => :string %>
         </div>
       </div>
+      <div class="yui3-g">  
+        <div class="yui3-u-3-4">
+          <%= f.input :email %>
+        </div>
+        
+      </div>
 
-      <%= f.input :email %>
+     
     </div>
 
     <div id="company_address">
