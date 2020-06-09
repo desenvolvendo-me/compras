@@ -1,0 +1,3 @@
+class SecretarySettingsController < CrudController
+
+end
