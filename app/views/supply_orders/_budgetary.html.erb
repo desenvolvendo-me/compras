@@ -1,0 +1,30 @@
+<div class="yui3-g">
+  <div class="yui3-u-1-3">
+    <%= f.input :expense, :as => :auto_complete,
+                :source_path => expenses_path(:by_contract => f.object&.contract_id) %>
+  </div>
+
+  <div class="yui3-u-1-3">
+    <%= f.input :secretary, :as => :auto_complete,
+                :source_path => secretaries_path(:'by_contract_expense[expense]' => f.object.expense_id,
+                                                 :'by_contract_expense[contract]' => f.object.contract_id) %>
+  </div>
+
+  <div class="yui3-u-1-3">
+    <%= f.input :budgetary_value %>
+  </div>
+</div>
+
+<%if f.object.expense.present? %>
+  <div class="yui3-g">
+    <div class="yui3-u-1-3">
+      <%= f.input :project_activity, input_html:{ disabled: true } %>
+    </div>
+    <div class="yui3-u-1-3">
+      <%= f.input :nature_expense, input_html:{ disabled: true } %>
+    </div>
+    <div class="yui3-u-1-3">
+      <%= f.input :resource_source, input_html:{ disabled: true } %>
+    </div>
+  </div>
+<% end %>
