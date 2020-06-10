@@ -9,6 +9,8 @@ class Expense < Compras::Model
   belongs_to :nature_expense
   belongs_to :resource_source
 
+  has_many :contract_financials
+
   attr_accessible :destine_type, :destiny, :organ_id, :purchasing_unit_id,
                   :expense_function_id, :expense_sub_function_id, :program_id,
                   :project_activity_id, :nature_expense_id, :resource_source_id,
@@ -29,6 +31,11 @@ class Expense < Compras::Model
   scope :term, lambda {|q|
     joins { project_activity }.
     where { project_activity.code.like("%#{q}%") }
+  }
+
+  scope :by_contract, lambda {|q|
+    joins { contract_financials }.
+        where { contract_financials.contract_id.eq(q) }
   }
 
   orderize "id DESC"
