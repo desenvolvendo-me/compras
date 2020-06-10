@@ -4,8 +4,7 @@ class SupplyOrder < Compras::Model
 
   attr_accessible :licitation_process_id, :creditor_id, :authorization_date, :year, :observation, :updatabled,
                   :items_attributes, :invoices_attributes, :supply_requests_attributes,
-                  :pledge_id, :purchase_solicitation_id, :contract_id, :expense_id, :secretary_id
-                  :budgetary_value
+                  :pledge_id, :purchase_solicitation_id, :contract_id, :expense_id, :secretary_id, :budgetary_value
 
   has_enumeration_for :order_status, :with => SupplyOrderStatus,
                       :create_helpers => true, :create_scopes => true
@@ -29,7 +28,7 @@ class SupplyOrder < Compras::Model
   delegate :modality_number, :modality_humanize, :type_of_removal_humanize,
            to: :licitation_process, allow_nil: true
   delegate :project_activity, :nature_expense, :resource_source,
-           to: :expense, allow_nill: true
+           to: :expense, allow_nil: true
 
   validates :authorization_date, :contract, :purchase_solicitation, :licitation_process, presence: true
   # validate :items_quantity_permitted
