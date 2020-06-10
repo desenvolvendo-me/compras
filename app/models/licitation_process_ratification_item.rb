@@ -49,6 +49,35 @@ class LicitationProcessRatificationItem < Compras::Model
       month, year)
   }
 
+  scope :by_licitation_process_and_material, lambda { |licitation_process_id, material_id|
+    subquery = PurchaseProcessItem
+            .select(
+                "compras_purchase_process_items.id compras_item_id,
+                 compras_purchase_process_items.lot, compras_purchase_process_items.unit_price,
+                 compras_purchase_process_items.licitation_process_id,
+                 compras_purchase_process_items.quantity,
+                 unico_materials.id material_id,
+                 unico_materials.description,
+                 unico_materials.quantity_unit quantiade_caixa,
+                 unico_materials.split_expense_id")
+        .joins(:material)
+        .where(unico_materials: {id: material_id}).to_sql
+
+    select("mat.lot,
+          compras_realignment_price_items.price,
+          mat.licitation_process_id,
+          mat.unit_price valor_cotacao,
+          mat.material_id,
+          mat.description,
+          mat.quantity,
+          compras_licitation_process_ratifications.creditor_id")
+        .joins(:realignment_price_item )
+    .joins("INNER JOIN (#{subquery}) as mat
+            ON mat.compras_item_id = compras_realignment_price_items.purchase_process_item_id")
+    .joins(:licitation_process_ratification)
+    .where(mat: {licitation_process_id: licitation_process_id})
+  }
+
   orderize "id DESC"
   filterize
 
