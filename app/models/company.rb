@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Company < Persona::Company
-  delegate :city, :zip_code, :to => :address, :allow_nil => true
+  delegate :city, :zip_code, to: :address, allow_nil: true
 
   validate :at_least_one_partner
 

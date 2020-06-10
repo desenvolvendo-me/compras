@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Person < Persona::Person
   attr_modal :name, :cpf, :cnpj
 
@@ -20,20 +22,24 @@ class Person < Persona::Person
 
   def self.filter(params)
     query = scoped
-    query = query.where{ name.matches "#{params[:name]}%" } unless params[:name].blank?
-    query = query.joins{ personable Individual }.where{ personable(Individual).cpf == params[:cpf] } unless params[:cpf].blank?
-    query = query.joins{ personable Company }.where{ personable(Company).cnpj == params[:cnpj] } unless params[:cnpj].blank?
+    unless params[:name].blank?
+      query = query.where { name.matches "#{params[:name]}%" }
+    end
+    unless params[:cpf].blank?
+      query = query.joins { personable Individual }.where { personable(Individual).cpf == params[:cpf] }
+    end
+    unless params[:cnpj].blank?
+      query = query.joins { personable Company }.where { personable(Company).cnpj == params[:cnpj] }
+    end
     query
   end
 
   def address_required
-    unless address.present?
-      errors.add(:base, "Endereço é obrigatório")
-    end
+    errors.add(:base, 'Endereço é obrigatório') unless address.present?
   end
 
-  scope :term, lambda {|q|
-    where {name.like("%#{q}%")}
+  scope :term, lambda { |q|
+    where { name.like("%#{q}%") }
   }
 
   def self.search(options = {})
@@ -60,7 +66,9 @@ class Person < Persona::Person
   end
 
   def uf_state_registration
-    personable.uf_state_registration if personable.respond_to?(:uf_state_registration)
+    if personable.respond_to?(:uf_state_registration)
+      personable.uf_state_registration
+    end
   end
 
   def state_registration
@@ -80,11 +88,15 @@ class Person < Persona::Person
   end
 
   def commercial_registration_date
-    personable.commercial_registration_date if personable.respond_to?(:commercial_registration_date)
+    if personable.respond_to?(:commercial_registration_date)
+      personable.commercial_registration_date
+    end
   end
 
   def commercial_registration_number
-    personable.commercial_registration_number if personable.respond_to?(:commercial_registration_number)
+    if personable.respond_to?(:commercial_registration_number)
+      personable.commercial_registration_number
+    end
   end
 
   def identity_number

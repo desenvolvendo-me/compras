@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Compras
   module Inputs
     class AutoCompleteInput < SimpleForm::Inputs::Base
@@ -18,7 +20,8 @@ module Compras
 
       def hidden_field
         if fake?
-          template.hidden_field_tag(hidden_field_name, nil, hidden_input_html_options)
+          name = "#{sanitized_object_name}[#{hidden_field_name}]"
+          template.hidden_field_tag(name, nil, hidden_input_html_options)
         else
           @builder.hidden_field(hidden_field_name, hidden_input_html_options)
         end
@@ -29,25 +32,38 @@ module Compras
       end
 
       def input_html_classes
-        super.unshift("string")
+        super.unshift('string')
       end
 
       def hidden_input_html_options
         {
-          :class => options['data-hidden-field-class'] || ''
+          class: options.fetch('data-hidden-field-class', ''),
+          value: hidden_field_value,
+          disabled: disabled_hidden_field
         }
+      end
+
+      def disabled_hidden_field
+        if options.key?(:hidden_field_disabled)
+          options[:hidden_field_disabled]
+        elsif input_html_options.key?(:disabled)
+          input_html_options[:disabled]
+        else
+          false
+        end
       end
 
       def input_html_options
         super.tap do |options|
           options['data-auto-complete']                   = true
           options['data-source']                        ||= source_path
+          options['data-index-path']                    ||= source_path
           options['data-hidden-field-class']            ||= ''
-          options['data-hidden-field-id']               ||= hidden_field_id if hidden_field_id
-          options['data-hidden-field-value-attribute']  ||= hidden_field_value_attribute
-          options['data-max-results']                   ||= max_results
-          options['data-min-length']                    ||= min_length
-          options['data-clear-input']                   ||= clear_input
+          options['data-hidden-field-id'] ||= hidden_field_id if hidden_field_id
+          options['data-hidden-field-value-attribute'] ||= hidden_field_value_attribute
+          options['data-max-results'] ||= max_results
+          options['data-min-length'] ||= min_length
+          options['data-clear-input'] ||= clear_input
         end
       end
 
@@ -63,7 +79,7 @@ module Compras
         route = "#{model_name.pluralize}_path"
 
         unless template.respond_to?(route)
-          raise "Missing route for #{model_name.gsub(/_/, " ")} modal (#{route})"
+          raise "Missing route for #{model_name.gsub(/_/, ' ')} modal (#{route})"
         end
 
         template.send(route)
@@ -75,15 +91,25 @@ module Compras
       end
 
       def hidden_field_name_option
-        options.fetch(:hidden_field, "#{attribute_name}_id")
+        options.fetch(:hidden_field, "#{label_target}_id")
       end
 
       def hidden_field_name
-        options.fetch(:hidden_field, "#{sanitized_object_name}[#{attribute_name}_id]")
+        options.fetch(:hidden_field, "#{label_target}_id")
+      end
+
+      def hidden_field_value
+        options.fetch(:hidden_field_value, hidden_field_default_value)
+      end
+
+      def hidden_field_default_value
+        object.respond_to?(hidden_field_name) ? object.send(hidden_field_name) : ''
       end
 
       def hidden_field_id
-        [sanitized_object_name, index, hidden_field_name_option].compact.join('_') if hidden_field_name_option
+        if hidden_field_name_option
+          [sanitized_object_name, index, hidden_field_name_option].compact.join('_')
+        end
       end
 
       def hidden_field_value_attribute
@@ -107,7 +133,11 @@ module Compras
       end
 
       def sanitized_object_name
-        object_name.gsub(/\]\[|[^-a-zA-Z0-9:.]/, "_").sub(/_$/, "")
+        if object_name.is_a?(Symbol)
+          object_name.to_s
+        else
+          object_name.gsub(/\]\[|[^-a-zA-Z0-9:.]/, '_').sub(/_$/, '')
+        end
       end
     end
   end
