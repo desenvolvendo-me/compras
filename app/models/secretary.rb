@@ -9,10 +9,14 @@ class Secretary < Compras::Model
     where { name.like("%#{q}%") }
   }
 
+  scope :by_user, lambda { |current_user|
+    joins(employee:[:user]).where { compras_users.id.eq current_user }
+  }
+
   scope :by_contract_expense, lambda { |expense, contract|
     joins(:contract_financials).
         where { contract_financials.contract_id.eq(contract) ||
-                contract_financials.expense_id.eq(expense)}
+            contract_financials.expense_id.eq(expense)}
   }
 
   orderize "id DESC"
