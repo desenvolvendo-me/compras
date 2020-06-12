@@ -1,0 +1,84 @@
+<div class="nested-fields add-margin-bottom">
+  <%= hidden_field_tag :supply_budgetary_id, nil, :name => 'supply_order_budgetary[id]' %>
+  <div class="yui3-g">
+    <div class="yui3-u-1-3">
+      <%= f.input :expense, :as => :auto_complete, :fake => true, :required => true,
+                  :source_path => expenses_path(:by_contract => f.object&.contract_id) %>
+    </div>
+
+    <div class="yui3-u-1-3">
+      <%= f.input :secretary, :as => :auto_complete, :fake => true, :required => true,
+                  :source_path => secretaries_path %>
+    </div>
+
+    <div class="yui3-u-1-3">
+      <%= f.input :value, as: :fake, :required => true %>
+    </div>
+  </div>
+  <div class="yui3-u-1">
+    <%= button_tag 'Adicionar', type: :button,
+                   :class => 'button add-nested-record field-without-label',
+                   'data-template' => 'contract_financials_template',
+                   'data-records' => 'financials-records',
+                   'data-disabled' => not_updateable_message %>
+  </div>
+
+  <div class="hidden">
+    <%= f.input :project_activity, as: :fake, input_html:{ disabled: true } %>
+    <%= f.input :nature_expense, as: :fake, input_html:{ disabled: true } %>
+    <%= f.input :resource_source, as: :fake, input_html:{ disabled: true } %>
+  </div>
+</div>
+
+
+
+<%= f.error :financials %>
+
+<table id="financials-records" class="records">
+  <thead>
+  <tr>
+    <th><%= Contract.human_attribute_name :expense %></th>
+    <th><%= Contract.human_attribute_name :secretary %></th>
+    <th><%= Contract.human_attribute_name :project_activity %></th>
+    <th><%= Contract.human_attribute_name :nature_expense %></th>
+    <th><%= Contract.human_attribute_name :resource_source %></th>
+    <th><%= Contract.human_attribute_name :value %></th>
+    <th></th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <%= f.association :supply_budgetaries, :collection => localized(f.object.supply_budgetaries) do |p| %>
+    <%unless p.object.blank? %>
+      <%= render 'contract_financials/form',
+                 id: p.object.id,
+                 expense: p.object.expense,
+                 expense_id: p.object.expense_id,
+                 secretary: p.object.secretary,
+                 secretary_id: p.object.secretary_id,
+                 value: p.object.value,
+                 project_activity: "#{p.object.expense.project_activity.name} (#{p.object.expense.project_activity})",
+                 nature_expense: p.object.expense.nature_expense,
+                 resource_source: p.object.expense.resource_source,
+
+                 f: p %>
+    <% end %>
+  <% end %>
+  </tbody>
+</table>
+
+<%= mustache "contract_financials_template" do %>
+  <%= f.association :supply_budgetaries_attributes, :collection => f.object.supply_budgetaries.build, :index => '{{uuid}}' do |p| %>
+    <%= render 'contract_financials/form',
+               id: '{{id}}',
+               expense: '{{expense}}',
+               expense_id: '{{expense_id}}',
+               secretary: '{{secretary}}',
+               secretary_id: '{{secretary_id}}',
+               value: '{{value}}',
+               project_activity: '{{project_activity}}',
+               nature_expense: '{{nature_expense}}',
+               resource_source: '{{resource_source}}',
+               f: p %>
+  <% end %>
+<% end %>

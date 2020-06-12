@@ -297,4 +297,22 @@ $(document).ready(function () {
 
     });
 
+  $("#supply_order_contract_id").change(function () {
+    var contract_id = $(this).val();
+
+    var $input_complete = $(".supply_order_expense .ui-autocomplete-input");
+
+    $input_complete.attr('data-source', '/expenses?by_contract='+contract_id);
+  });
+
+  $("#supply_order_expense_id").change(function(){
+    debugger
+    var expense_id  = $(this).val(),
+        contract_id = $("#supply_order_contract_id").val();
+
+    var $input_complete = $(".supply_order_secretary .auto_complete");
+
+    $input_complete.attr('data-source', Routes.secretaries+'?by_contract_expense%5Bcontract%5D='+contract_id+'&by_contract_expense%5Bexpanse%5D='+expense_id);
+  });
+
 });
