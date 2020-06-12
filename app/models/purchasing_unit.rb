@@ -15,6 +15,12 @@ class PurchasingUnit < Compras::Model
       (situation.eq(q)) }
   }
 
+  scope :by_purchase_solicitation, ->(purchase_solicitation_id) do
+    result = PurchaseSolicitation
+                 .joins(:department).where(compras_purchase_solicitations: {id: purchase_solicitation_id}).last
+    where(id: result.department.purchasing_unit)
+  end
+
   def to_s
     "#{code}: #{name}"
   end
