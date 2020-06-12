@@ -1,5 +1,5 @@
 class PurchasingUnit < Compras::Model
-  attr_accessible :cnpj, :code, :name, :situation, :starting
+  attr_accessible :cnpj, :code, :name, :situation, :starting, :billing
 
   orderize "id DESC"
   filterize
