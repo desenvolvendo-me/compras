@@ -3,8 +3,8 @@ class SupplyOrder < Compras::Model
   include NumberSupply
 
   attr_accessible :licitation_process_id, :creditor_id, :authorization_date, :year, :observation, :updatabled,
-                  :items_attributes, :invoices_attributes, :supply_requests_attributes,
-                  :pledge_id, :purchase_solicitation_id, :contract_id, :expense_id, :secretary_id, :budgetary_value
+                  :items_attributes, :invoices_attributes, :supply_requests_attributes, :supply_budgetaries_attributes,
+                  :pledge_id, :purchase_solicitation_id, :contract_id
 
   has_enumeration_for :order_status, :with => SupplyOrderStatus,
                       :create_helpers => true, :create_scopes => true
@@ -14,21 +14,21 @@ class SupplyOrder < Compras::Model
   belongs_to :licitation_process
   belongs_to :creditor
   belongs_to :purchase_form
-  belongs_to :expense
-  belongs_to :secretary
 
   has_many :items, class_name: 'SupplyOrderItem', dependent: :destroy
   has_many :invoices, class_name: 'Invoice', dependent: :destroy
   has_many :supply_requests, class_name: "SupplyOrderRequests", dependent: :destroy
+  has_many :supply_budgetaries, class_name: "SupplyOrderBudgetary", :dependent => :restrict,
+           :inverse_of => :supply_order, :order => :id
 
   accepts_nested_attributes_for :items, allow_destroy: true
   accepts_nested_attributes_for :invoices, allow_destroy: true
   accepts_nested_attributes_for :supply_requests, allow_destroy: true
+  accepts_nested_attributes_for :supply_budgetaries, allow_destroy: true
+
 
   delegate :modality_number, :modality_humanize, :type_of_removal_humanize,
            to: :licitation_process, allow_nil: true
-  delegate :project_activity, :nature_expense, :resource_source,
-           to: :expense, allow_nil: true
 
   validates :authorization_date, :contract, :purchase_solicitation, :licitation_process, presence: true
   # validate :items_quantity_permitted

@@ -28,7 +28,4 @@ pt-BR:
         value: "Valor"
         expense: "Despesa"
         secretary: "Secretaria"
-        budgetary_value: "Valor do Orçamento"
-        project_activity: "Projeto Atividade"
-        nature_expense: "Natureza da Despesa"
-        resource_source: "Fonte"
+
