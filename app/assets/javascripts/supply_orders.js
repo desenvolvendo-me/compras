@@ -312,7 +312,7 @@ $(document).ready(function () {
 
     var $input_complete = $(".supply_order_secretary .auto_complete");
 
-    $input_complete.attr('data-source', '/secretaries?by_contract_expense%5Bcontract%5D='+contract_id+'&by_contract_expense%5Bexpanse%5D='+expense_id);
+    $input_complete.attr('data-source', Routes.secretaries+'?by_contract_expense%5Bcontract%5D='+contract_id+'&by_contract_expense%5Bexpanse%5D='+expense_id);
   });
 
 });
