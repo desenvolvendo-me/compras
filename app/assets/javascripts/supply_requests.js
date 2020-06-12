@@ -236,10 +236,15 @@ $(document).ready(function () {
         }
 
         setTimeout(function(){
-            if (Number(balance_unit) < 0 || balance_unit === ''){
+            if (Number(balance_unit) < 0 || balance_unit === '' || balance_unit === undefined){
                 klass = $('#supply_request_quantity').val(0);
             }
+
             $("#supply_request_total_value").val((quantity * $("#supply_request_unit_value").val()).toFixed(2));
+
+            if(isNaN($("#supply_request_total_value").val())){
+              $("#supply_request_total_value").val(0);
+            }
         }, 100);
 
         setMaterialTotalAndBalance();
