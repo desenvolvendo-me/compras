@@ -89,6 +89,25 @@ function setDepartment() {
     }
 }
 
+function setBilling(){
+  var purchase_solicitation_id = $('#supply_order_purchase_solicitation_id').val()
+
+  if (purchase_solicitation_id) {
+    $.ajax({
+      url: Routes.purchasing_units,
+      data: {by_purchase_solicitation: purchase_solicitation_id},
+      dataType: 'json',
+      type: 'GET',
+      success: function (data) {
+        $('#supply_order_observation').val(data[0]["billing"]);
+      },
+      error: function (XMLHttpRequest, textStatus, errorThrown){
+        console.log(textStatus)
+      }
+    });
+  }
+}
+
 function setMaterialTotalAndBalance() {
     var licitation_process_id = $('#supply_order_licitation_process_id').val()
     var purchase_solicitation_id = $('#supply_order_purchase_solicitation_id').val()
@@ -208,7 +227,8 @@ $(document).ready(function () {
     disableWhenSelected("#supply_order_licitation_process_id", "#supply_order_purchase_solicitation");
 
     $('form.supply_order').on('change', '#supply_order_purchase_solicitation_id', function () {
-        setDepartment();
+      setBilling();
+      setDepartment();
         setModalUrlToPurchaseForm();
     });
 
@@ -296,5 +316,22 @@ $(document).ready(function () {
 
 
     });
+
+  $("#supply_order_contract_id").change(function () {
+    var contract_id = $(this).val();
+
+    var $input_complete = $(".supply_order_expense .ui-autocomplete-input");
+
+    $input_complete.attr('data-source', '/expenses?by_contract='+contract_id);
+  });
+
+  $("#supply_order_expense_id").change(function(){
+    var expense_id  = $(this).val(),
+        contract_id = $("#supply_order_contract_id").val();
+
+    var $input_complete = $(".supply_order_secretary .auto_complete");
+
+    $input_complete.attr('data-source', Routes.secretaries+'?by_contract_expense%5Bcontract%5D='+contract_id+'&by_contract_expense%5Bexpanse%5D='+expense_id);
+  });
 
 });
