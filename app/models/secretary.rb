@@ -19,11 +19,13 @@ class Secretary < Compras::Model
             contract_financials.expense_id.eq(expense)}
   }
 
+
   orderize "id DESC"
   filterize
 
   def to_s
     "#{name}"
   end
+
 
 end

@@ -536,6 +536,15 @@ Compras::Application.routes.draw do
     end
   end
 
+  resources :secretary_settings do
+    member do
+      get :router
+    end
+    collection do
+      get :signature_generate
+    end
+  end
+
   resources :process_responsibles do
     collection do
       get :filter
