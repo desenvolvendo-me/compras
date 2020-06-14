@@ -10,6 +10,7 @@
     <div class="yui3-u-1-3">
       <%= f.input :secretary, :as => :auto_complete, :fake => true,
                   :source_path => secretaries_path,
+                  hidden_field: :secretary_id2,
                   :required => true %>
     </div>
     <div class="yui3-u-1-4">
@@ -64,7 +65,7 @@
                  expense: '{{expense}}',
                  expense_id: '{{expense_id}}',
                  secretary: '{{secretary}}',
-                 secretary_id: '{{secretary_id}}',
+                 secretary_id: '{{secretary_id2}}',
                  value: '{{value}}',
                  project_activity: '{{project_activity}}',
                  nature_expense: '{{nature_expense}}',
