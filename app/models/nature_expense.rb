@@ -1,5 +1,5 @@
 class NatureExpense < Compras::Model
-  attr_accessible :description, :nature, :split_expenses_attributes
+  attr_accessible :description, :nature, :split_expenses_attributes, :year
 
   attr_modal :description, :nature
   
