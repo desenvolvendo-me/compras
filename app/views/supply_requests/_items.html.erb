@@ -89,6 +89,7 @@
     </tr>
     </thead>
     <tbody>
+    <% sum_total_value = 0.0 %>
     <%= f.association :items, :collection => localized(f.object.items) do |p| %>
       <%= render 'supply_request_items/form',
                  id: p.object.id,
@@ -100,7 +101,18 @@
                  unit_value: number_with_precision(p.object.get_unit_price.to_f),
                  total_value: number_with_precision(p.object.get_unit_price.to_f * p.object.quantity.to_f),
                  f: p %>
+      <% sum_total_value += p.object.get_unit_price.to_f * p.object.quantity.to_f%>
     <% end %>
+    <tr>
+      <td>TOTAL</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td style="font-weight: bolder"><%= number_with_precision sum_total_value.round(2) %></td>
+      <td></td>
+      <td></td>
+    </tr>
     </tbody>
   </table>
 

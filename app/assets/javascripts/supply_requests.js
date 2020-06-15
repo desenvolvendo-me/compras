@@ -236,10 +236,15 @@ $(document).ready(function () {
         }
 
         setTimeout(function(){
-            if (Number(balance_unit) < 0){
+            if (Number(balance_unit) < 0 || balance_unit === '' || balance_unit === undefined){
                 klass = $('#supply_request_quantity').val(0);
             }
+
             $("#supply_request_total_value").val((quantity * $("#supply_request_unit_value").val()).toFixed(2));
+
+            if(isNaN($("#supply_request_total_value").val())){
+              $("#supply_request_total_value").val(0);
+            }
         }, 100);
 
         setMaterialTotalAndBalance();
@@ -255,6 +260,12 @@ $(document).ready(function () {
     });
 
     $('form.supply_request').on('change', '#supply_request_material_id', function () {
+        $('#supply_request_requested_quantity').val('');
+        $('#supply_request_quantity').val('');
+        $('#supply_request_balance_unit').val('');
+        $('#supply_request_balance').val('');
+        $('#supply_request_unit_value').val('');
+        $('#supply_request_total_value').val('');
         setMaterialTotalAndBalance();
     });
 
