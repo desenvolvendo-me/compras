@@ -118,34 +118,56 @@ function setMaterialTotalAndBalance() {
     var purchase_solicitation_id = $('#supply_request_purchase_solicitation_id').val();
     var contract_id = $('#supply_request_contract_id').val();
     var supply_request_id = $(window.location.href.split("/")).get(-2);
-    var quantity = $('#supply_request_quantity').val();
+    var quantity = $('#supply_request_requested_quantity').val();
 
     if (licitation_process_id && purchase_solicitation_id && material_id && quantity) {
-       return new Promise(resolve => {
-         $.ajax({
-           url: Routes.licitation_process_material_total_balance,
-           data: {
-             licitation_process_id: licitation_process_id,
-             material_id: material_id,
-             purchase_solicitation_id: purchase_solicitation_id,
-             supply_request_id: supply_request_id,
-             contract_id: contract_id,
-             quantity: quantity
-           },
-           dataType: 'json',
-           type: 'POST',
-           success: function (data) {
-             $('#supply_request_balance').val(data["balance"]);
-             $('#supply_request_unit_value').val(data["value_unit"]);
-             $('#supply_request_balance_unit').val(data["balance_unit"]);
-             resolve(true)
-           },
-           error: function (XMLHttpRequest, textStatus, errorThrown) {
-           }
-         });
-       })
-       }
+       $.ajax({
+         url: Routes.licitation_process_material_total_balance,
+         data: {
+           licitation_process_id: licitation_process_id,
+           material_id: material_id,
+           purchase_solicitation_id: purchase_solicitation_id,
+           supply_request_id: supply_request_id,
+           contract_id: contract_id,
+           quantity: quantity
+         },
+         dataType: 'json',
+         type: 'POST',
+         success: function (data) {
+           debugger
+           $('#supply_request_balance').val(data["balance"]);
+           $('#supply_request_unit_value').val(data["value_unit"]);
+           $('#supply_request_balance_unit').val(data["balance_unit"]);
+           fillTotalAndBalance();
+         },
+         error: function (XMLHttpRequest, textStatus, errorThrown) {
+           debugger
+         }
+       });
+     }
 
+}
+
+function fillTotalAndBalance(){
+  debugger
+  var quantity = 0;
+  var balance_unit = 0;
+
+  if(!$('#supply_request_quantity').attr('class').includes("edit")){
+    balance_unit = $('#supply_request_balance_unit').val();
+    quantity = $('#supply_request_requested_quantity').val();
+    $('#supply_request_quantity').val(quantity);
+  }
+
+  if (Number(balance_unit) < 0 || balance_unit === undefined){
+    klass = $('#supply_request_quantity').val(0);
+  }
+
+  $("#supply_request_total_value").val((quantity * $("#supply_request_unit_value").val()).toFixed(2));
+
+  if(isNaN($("#supply_request_total_value").val())){
+    $("#supply_request_total_value").val(0);
+  }
 }
 
 function setDisableMaterial(){
@@ -227,32 +249,12 @@ $(document).ready(function () {
 
     $('form.supply_request').on('change', '#supply_request_quantity', function () {
         setMaterialTotalAndBalance();
-    });
+    });    quantity = $('#supply_request_requested_quantity').val();
+    $('#supply_request_quantity').val(quantity);
 
     $('form.supply_request').on('change', '#supply_request_requested_quantity', async function () {
-      var quantity = 0;
-      var balance_unit = 0;
-
-      if(!$('#supply_request_quantity').attr('class').includes("edit")) {
-        quantity = $('#supply_request_requested_quantity').val();
-        $('#supply_request_quantity').val(quantity);
-      }
-
-      await setMaterialTotalAndBalance();
-
-      if(!$('#supply_request_quantity').attr('class').includes("edit")){
-          balance_unit = $('#supply_request_balance_unit').val();
-      }
-
-      if (Number(balance_unit) < 0 || balance_unit === undefined){
-          klass = $('#supply_request_quantity').val(0);
-      }
-
-      $("#supply_request_total_value").val((quantity * $("#supply_request_unit_value").val()).toFixed(2));
-
-      if(isNaN($("#supply_request_total_value").val())){
-        $("#supply_request_total_value").val(0);
-      }
+      debugger
+      setMaterialTotalAndBalance();
     });
 
     $('form.supply_request').on('change', '#supply_request_licitation_process_id', function () {
