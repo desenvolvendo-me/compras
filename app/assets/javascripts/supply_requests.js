@@ -151,7 +151,6 @@ function setMaterialTotalAndBalance() {
 function setDisableMaterial(){
     contract_id = $('#supply_request_contract_id').val();
     purchase_solicitation_id = $('#supply_request_purchase_solicitation_id').val();
-
     if (contract_id!='' && purchase_solicitation_id!='') {
         $("#supply_request_material").attr('disabled', false);
     } else {
@@ -195,14 +194,14 @@ function setModalUrlToLicitationProcess() {
     }
 }
 
-$(document).ready(async function () {
+$(document).ready(function () {
     setDisableMaterial();
     setModalUrlToDepartment();
     setModalUrlToContract();
     setModalUrlToCreditor();
     setPledgeSource();
     setModalUrlToPurchaseSolicitation();
-    await setMaterialTotalAndBalance();
+    setMaterialTotalAndBalance();
     setModalUrlToMaterial();
 
     setModalUrlToLicitationProcess();
@@ -233,7 +232,7 @@ $(document).ready(async function () {
     $('form.supply_request').on('change', '#supply_request_requested_quantity', async function () {
       var quantity = 0;
       var balance_unit = 0;
-
+debugger
       if(!$('#supply_request_quantity').attr('class').includes("edit")) {
         quantity = $('#supply_request_requested_quantity').val();
         $('#supply_request_quantity').val(quantity);
@@ -245,7 +244,7 @@ $(document).ready(async function () {
           balance_unit = $('#supply_request_balance_unit').val();
       }
 
-      if (Number(balance_unit) < 0 ){
+      if (Number(balance_unit) < 0 || balance_unit === undefined){
           klass = $('#supply_request_quantity').val(0);
       }
 
