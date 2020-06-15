@@ -91,7 +91,8 @@
 <div>
   <h2>ITENS DO OBJETO</h2>
   <% total = 0 %>
-  <% @contract.ratifications_items.group_by(&:lot).sort.each do |lot, ratifications_items| %>
+  <% items = @contract.ratifications_items.joins(creditor:[:contracts]).where(compras_contracts_unico_creditors:{contract_id:@contract.id}).group_by(&:lot).sort %>
+  <% items.each do |lot, ratifications_items| %>
     <table class="records">
       <h2>LOTE <%= lot %></h2>
       <thead>
@@ -126,7 +127,7 @@
 </div>
 
 <div>
-  <h2>ITENS POR SECRETARIA / DEPARTAMENTO</h2>
+  <h2>SALDO POR UNIDADE DE COMPRA / SECRETARIA</h2>
   <% total = 0 %>
   <% contract_id = @contract.id %>
   <%#TODO: Refatorar quando voltar aqui  %>
@@ -148,14 +149,19 @@
         <% licitation_process_id = @contract.licitation_process.id %>
         <% creditor_id = @contract.creditors.last.id %>
         <% item = PurchaseSolicitationItem.find(purchase_solicitation_item.id) %>
-        <% ratifications_item = LicitationProcessRatificationItem.joins { purchase_process_item.material }.joins { licitation_process_ratification.licitation_process }.joins { licitation_process_ratification.creditor }.where { licitation_process_ratification.creditor.id.eq(creditor_id) }.where { licitation_process_ratification.licitation_process.id.eq(licitation_process_id) }.where { purchase_process_item.material.id.eq(item.material.id) }.last %>
+        <% ratifications_item = LicitationProcessRatificationItem.joins { purchase_process_item.material }
+                                                                  .joins { licitation_process_ratification.licitation_process }
+                                                                  .joins { licitation_process_ratification.creditor }
+                                                                  .where { licitation_process_ratification.creditor.id.eq(creditor_id) }
+                                                                  .where { licitation_process_ratification.licitation_process.id.eq(licitation_process_id) }
+                                                                  .where { purchase_process_item.material.id.eq(item.material.id) }.last %>
 
         <% total += ratifications_item.try(:total_price).to_f %>
         <tr>
           <td width="5%"><%= item.try(:material).try(:code) %></td>
-          <td><%= item.try(:material).try(:description) %></td>
-          <td><%= item.try(:material).try(:reference_unit).try(:acronym) %></td>
-          <td><%= item.quantity %></td>
+          <td><%= ratifications_item.try(:material).try(:description) %></td>
+          <td><%= ratifications_item.try(:material).try(:reference_unit).try(:acronym) %></td>
+          <td><%= ratifications_item.quantity %></td>
           <td width="10%"><%= number_to_currency ratifications_item.try(:unit_price) %></td>
           <td width="10%"><%= number_to_currency ratifications_item.try(:total_price) %></td>
         </tr>
