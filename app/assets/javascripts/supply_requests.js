@@ -232,7 +232,7 @@ $(document).ready(function () {
     $('form.supply_request').on('change', '#supply_request_requested_quantity', async function () {
       var quantity = 0;
       var balance_unit = 0;
-debugger
+
       if(!$('#supply_request_quantity').attr('class').includes("edit")) {
         quantity = $('#supply_request_requested_quantity').val();
         $('#supply_request_quantity').val(quantity);
