@@ -1,8 +1,8 @@
-class AddActiveToSecretarySettings < ActiveRecord::Migration
+class AddColumnsToSecretarySettings < ActiveRecord::Migration
   def change
-    add_column :compras_secretary_settings, :start_date, :boolean
-    add_column :compras_secretary_settings, :end_date, :boolean
-    add_column :compras_secretary_settings, :concierge, :boolean
+    add_column :compras_secretary_settings, :start_date, :date
+    add_column :compras_secretary_settings, :end_date, :date
+    add_column :compras_secretary_settings, :concierge, :string
     add_column :compras_secretary_settings, :active, :boolean
 
     add_index :compras_secretary_settings, :secretary_id

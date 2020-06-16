@@ -1,6 +1,6 @@
 class SecretarySetting < Compras::Model
-  attr_accessible :secretary_id, :employee_id, :digital_signature,
-                  :signature, :authorization_value, :active
+  attr_accessible :secretary_id, :employee_id, :digital_signature, :signature,
+                  :authorization_value, :active, :start_date, :end_date, :concierge, :active
 
   belongs_to :secretary
   belongs_to :employee
