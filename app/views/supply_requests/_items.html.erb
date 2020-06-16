@@ -29,38 +29,35 @@
         <%= f.input :quantity, :as => :fake, :required => true, :disabled => true %>
       </div>
 
-      <% if @hidden_field %>
-
-        <div class="yui3-u-1-6">
-          <div class="input fake required supply_request_balance_unit">
-            <label class="fake required" for="supply_request_balance_unit">Saldo Unitário</label>
-            <input class="string fake required" id="supply_request_balance_unit" name="supply_request[balance_unit]" type="text" readonly>
-          </div>
+      <div class="yui3-u-1-6 h__field">
+        <div class="input fake required supply_request_balance_unit">
+          <label class="fake required" for="supply_request_balance_unit">Saldo Unitário</label>
+          <input class="string fake required" id="supply_request_balance_unit" name="supply_request[balance_unit]" type="text" readonly>
         </div>
+      </div>
 
-        <div class="yui3-u-1-6">
-          <div class="input fake supply_request_balance">
-            <label class="fake" for="supply_request_balance">Saldo do Contrato</label>
-            <input class="string fake" id="supply_request_balance" name="supply_request[balance]" type="text" readonly>
-          </div>
+      <div class="yui3-u-1-6 h__field">
+        <div class="input fake supply_request_balance">
+          <label class="fake" for="supply_request_balance">Saldo do Contrato</label>
+          <input class="string fake" id="supply_request_balance" name="supply_request[balance]" type="text" readonly>
         </div>
+      </div>
 
-        <div class="yui3-u-1-6">
-          <div class="input fake supply_request_unit_value">
-            <label class="fake" for="supply_request_unit_value">Valor Unitário</label>
-            <input class="string fake" id="supply_request_unit_value" name="supply_request[unit_value]" type="text" readonly>
-          </div>
+      <div class="yui3-u-1-6 h__field">
+        <div class="input fake supply_request_unit_value">
+          <label class="fake" for="supply_request_unit_value">Valor Unitário</label>
+          <input class="string fake" id="supply_request_unit_value" name="supply_request[unit_value]" type="text" readonly>
         </div>
-      <% end %>
+      </div>
 
-        <div class="yui3-u-1-6">
-          <div class="input fake supply_request_total_value">
-            <label class="fake" for="supply_request_total_value">Valor Total</label>
-            <input class="string fake" id="supply_request_total_value" name="supply_request[total_value]" type="text" readonly>
-          </div>
+
+      <div class="yui3-u-1-6">
+        <div class="input fake supply_request_total_value">
+          <label class="fake" for="supply_request_total_value">Valor Total</label>
+          <input class="string fake" id="supply_request_total_value" name="supply_request[total_value]" type="text" readonly>
         </div>
+      </div>
     </div>
-
     <div class="yui3-u-1-6">
       <%= button_tag 'Adicionar', type: :button,
                      :class => 'button add-nested-record field-without-label',
@@ -152,3 +149,11 @@
         });
     })();
 </script>
+
+<% unless @hidden_field %>
+  <style>
+    .h__field{
+      display: none;
+    }
+  </style>
+<%end %>
