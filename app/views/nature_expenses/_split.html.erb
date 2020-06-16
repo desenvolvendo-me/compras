@@ -9,7 +9,7 @@
     <% end %>
 
     <%= mustache 'split-expenses-template' do %>
-      <%= f.association :split_expenses, collection: f.object.split_expenses.build.localized, index: "{{uuid-split-expenses}}" do |split_expense| %>
+      <%= f.association :split_expenses_attributes, collection: f.object.split_expenses.build.localized, index: "{{uuid-split-expenses}}" do |split_expense| %>
         <%= render 'split_expenses/form', f: split_expense %>
       <% end %>
     <% end %>
