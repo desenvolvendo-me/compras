@@ -106,7 +106,7 @@
 <br>
 <br>
 <p>
-<h2><b> DADOS ORÇAMENTARIOS </b></h2>
+<h2><b> DADOS ORÇAMENTÁRIOS </b></h2>
 <div>
   <table class="records">
     <thead>
@@ -138,6 +138,14 @@
   <span>
     <p style="text-align: right">
       <b> <%= number_with_precision @total_budgetary %> </b>
+    </p>
+  </span>
+</div>
+
+<div style="text-align: justify">
+  <span>
+    <p>
+      <b> DADOS DE FATURAMENTO: </b> <%= resource.billing %>
     </p>
   </span>
 </div>

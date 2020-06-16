@@ -25,6 +25,10 @@ class SupplyOrderReport < Report
     supply_order.supply_budgetaries
   end
 
+  def billing
+    supply_order.licitation_process.purchasing_unit.billing
+  end
+
   def get_delivery_location
     if supply_order.licitation_process.purchase_solicitations.blank? || supply_order.licitation_process.purchase_solicitations.first.purchase_solicitation.delivery_location.nil?
       "Não Informado"
