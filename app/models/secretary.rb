@@ -8,6 +8,7 @@ class Secretary < Compras::Model
 
   accepts_nested_attributes_for :secretary_settings, :allow_destroy => true
 
+  validate :employees_actives
 
   scope :term, lambda { |q|
     where { name.like("%#{q}%") }
@@ -31,5 +32,11 @@ class Secretary < Compras::Model
     "#{name}"
   end
 
+  private
+
+  def employees_actives
+    return unless secretary_settings.any?{ |ss| ss.active }
+    errors.add(:secretary_settings, 'Pode haver somente um funcionario ativo')
+  end
 
 end
