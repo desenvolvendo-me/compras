@@ -8,6 +8,7 @@ class Department < Compras::Model
   has_many :department_people
 
   validates :description, :presence => true
+  validates :description, :uniqueness => {:case_sensitive => false}
 
   accepts_nested_attributes_for :department_people, allow_destroy: true
 
