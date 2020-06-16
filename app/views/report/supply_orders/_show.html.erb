@@ -101,6 +101,47 @@
     </p>
   </span>
 </div>
+
+<br>
+<br>
+<br>
+<p>
+<h2><b> DADOS ORÇAMENTARIOS </b></h2>
+<div>
+  <table class="records">
+    <thead>
+    <tr>
+      <th><%= Contract.human_attribute_name :secretary %></th>
+      <th><%= Contract.human_attribute_name :project_activity %></th>
+      <th><%= Contract.human_attribute_name :nature_expense %></th>
+      <th><%= Contract.human_attribute_name :resource_source %></th>
+      <th><%= Contract.human_attribute_name :value %></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @total_budgetary = 0 %>
+    <% resource.supply_budgetaries.each do |orcamentario| %>
+      <tr>
+        <td><%= orcamentario.secretary %></td>
+        <td><%="#{orcamentario.expense.project_activity.name} (#{orcamentario.expense.project_activity})" %></td>
+        <td><%= orcamentario.expense.nature_expense %></td>
+        <td><%= orcamentario.expense.resource_source %></td>
+        <td><%= orcamentario.value %></td>
+      </tr>
+      <% @total_budgetary += orcamentario.value  %>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+</p>
+<div >
+  <span>
+    <p style="text-align: right">
+      <b> <%= number_with_precision @total_budgetary %> </b>
+    </p>
+  </span>
+</div>
+
 <br><br><br><br><br><br>
 <div style="text-align: justify">
   <span>

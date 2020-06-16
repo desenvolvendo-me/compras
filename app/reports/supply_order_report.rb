@@ -21,6 +21,10 @@ class SupplyOrderReport < Report
     supply_order.number
   end
 
+  def supply_budgetaries
+    supply_order.supply_budgetaries
+  end
+
   def get_delivery_location
     if supply_order.licitation_process.purchase_solicitations.blank? || supply_order.licitation_process.purchase_solicitations.first.purchase_solicitation.delivery_location.nil?
       "Não Informado"
