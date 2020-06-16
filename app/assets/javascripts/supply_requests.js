@@ -148,21 +148,19 @@ function setMaterialTotalAndBalance() {
 function fillTotalAndBalance(){
   var quantity = 0;
   var balance_unit = 0;
+  var $resquest_quantity = $('#supply_request_quantity'),
+      $total_value = $("#supply_request_total_value");
 
-  if(!$('#supply_request_quantity').attr('class').includes("edit")){
+  if(!$resquest_quantity.attr('class').includes("edit")){
     balance_unit = $('#supply_request_balance_unit').val();
     quantity = $('#supply_request_requested_quantity').val();
-    $('#supply_request_quantity').val(quantity);
+    $resquest_quantity.val(quantity);
   }
 
-  if (Number(balance_unit) < 0 || balance_unit === undefined){
-    klass = $('#supply_request_quantity').val(0);
-  }
+  $total_value.val((quantity * $("#supply_request_unit_value").val()).toFixed(2));
 
-  $("#supply_request_total_value").val((quantity * $("#supply_request_unit_value").val()).toFixed(2));
-
-  if(isNaN($("#supply_request_total_value").val())){
-    $("#supply_request_total_value").val(0);
+  if(isNaN($total_value.val())){
+    $total_value.val(0);
   }
 }
 
@@ -180,15 +178,21 @@ function setDisableMaterial(){
 
 function setBalanceContract() {
   $("#add-material").click(function () {
-    material_id = $("#supply_request_material_id").val()
-    contract_id = $("#supply_request_contract_id").val()
+    material_id = $("#supply_request_material_id").val();
+    contract_id = $("#supply_request_contract_id").val();
+    var balance_unit = $('#supply_request_balance_unit').val();
+
     if (contract_id && material_id) {
+      if (Number(balance_unit) < 0 || balance_unit === undefined){
+        klass = $('#supply_request_quantity').val(0);
+      }
+
       $.ajax({
         url: Routes.contract + "/" + contract_id + ".json",
         dataType: 'json',
         type: 'GET',
         success: function (data) {
-          $("#material-id-" + material_id).children().find("input[type='checkbox']").val(data["balance"])
+          $("#material-id-" + material_id).children().find("input[type='checkbox']").val(data["balance"]);
           $("#material-id-" + material_id).children().find("input[type='checkbox']").attr('checked', data["balance"]);
         }
       });
