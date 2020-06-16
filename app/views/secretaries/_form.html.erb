@@ -1,22 +1,35 @@
-<div class="yui3-g">
-  <div class="yui3-u-1">
-    <%= f.input :name %>
-  </div>
-</div>
-<div id='secretary-setting'>
-  <div id="secretary-settings" data-nested-form="secretary-settings">
-    <p>
-      <input type="button" class="button affirmative add-secretary-settings" value="Adicionar">
-    </p>
-
-    <%= f.association :secretary_settings, collection: localized(f.object.secretary_settings) do |a| %>
-      <%= render 'secretary_settings/form_employees', f: a, secretary: f.object %>
+<div class="tabs">
+  <ul>
+    <li>
+      <a href="#secretary">Secretaria</a>
+    </li>
+    <% if f.object.persisted? %>
+      <li>
+        <a href="#employee">Funcionários</a>
+      </li>
     <% end %>
+  </ul>
 
-    <%= mustache 'secretary-settings-template' do %>
-      <%= f.association :secretary_settings_attributes, collection: f.object.secretary_settings.build.localized, index: "{{uuid-secretary-settings}}" do |secretary_settings| %>
-        <%= render 'secretary_settings/form_employees', f: secretary_settings, secretary: f.object %>
-      <% end %>
-    <% end %>
+  <div id="secretary">
+    <%= render 'secretary', :f => f %>
   </div>
+
+  <% if f.object.persisted? %>
+    <div id="employee">
+      <%= render 'employees', :f => f, secretary: f.object %>
+    </div>
+  <% end %>
 </div>
+
+<style>
+  .input.boolean{
+    padding-top: 40px;
+  }
+</style>
+
+<script>
+  $(document).on('click', ".act_field", function(){
+    $("[id$=active]").prop('checked', false);
+    $(this).prop('checked', true)
+  })
+</script>
