@@ -1011,4 +1011,8 @@ Compras::Application.routes.draw do
     resources :contracts, only: %i[index show]
     resources :pledge_requests, only: %i[index show update]
   end
+
+  namespace :dashboard do
+    resources :secretaries, only: :index
+  end
 end
