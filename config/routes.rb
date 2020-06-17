@@ -1013,6 +1013,10 @@ Compras::Application.routes.draw do
   end
 
   namespace :dashboard do
-    resources :secretaries, only: :index
+    resources :secretaries, only: :index do
+      collection do
+        get '/contracts', to:'secretaries#contracts', as: :contracts
+      end
+    end
   end
 end

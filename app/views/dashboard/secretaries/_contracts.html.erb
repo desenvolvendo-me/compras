@@ -18,7 +18,7 @@
     <span class="d-block">de 31 a 60</span>
   </div>
   <div class="text-center">
-    <%= button_tag "#{@contracts_periods[:until_30]}", type: 'button', class:'by_30 btn-fillter' %>
+    <%= button_tag "#{@contracts_periods[:until_30]}", type: 'button', class:'until_30 btn-fillter' %>
     <span class="d-block">até 30 dias</span>
   </div>
 </div>
@@ -26,60 +26,47 @@
 <div class="mt-2">
   <span class="title-table">Contratos com 30 dias para vencer</span>
 
-  <table class="records mt-1">
-    <tbody>
-    <% if @contracts.blank? %>
-      <tr>
-        <td>Não foram encontrados contratos para esse periodo</td>
-      </tr>
-    <% end %>
-    <% @contracts.each do |resource| %>
-      <tr id="<%= dom_id resource %>">
-        <td>
-          <p><%= link_to resource, edit_resource_path(resource) %></p>
-
-          <% if resource.decorated? && resource.decorator.respond_to?(:summary) %>
-            <p><%= resource.decorator.summary %></p>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-    </tbody>
-  </table>
+  <div id="contract_records">
+    <%= render 'contract_list' %>
+  </div>
 </div>
 
 
 <script>
   $('.by_121_150').click(function(){
+    $('.title-table').html('Contratos com 150 dias para vencer');
     getContracts(121, 150)
   });
   $('.by_91_120').click(function(){
+    $('.title-table').html('Contratos com 120 dias para vencer');
     getContracts(91, 120)
   });
   $('.by_61_90').click(function(){
+    $('.title-table').html('Contratos com 90 dias para vencer');
     getContracts(61, 90)
   });
   $('.by_31_60').click(function(){
+    $('.title-table').html('Contratos com 60 dias para vencer');
     getContracts(31, 60)
   });
   $('.until_30').click(function(){
+    $('.title-table').html('Contratos com 30 dias para vencer');
     getContracts(30)
   });
 
   function getContracts(date1, date2){
     var param = (date1 && date2) ? [date1, date2] : date1;
 
-    var url = Routes.contract,
+    var url = "/dashboard/secretaries/contracts",
         params = $.isArray(param) ? {between_days_finish: {started_at: param[0], ended_at: param[1]}} : {by_days_finish: param};
 
     url += "?" + $.param(params);
 
     $.ajax({
       url: url,
-      dataType: 'json',
+      dataType: 'script',
       type: 'GET',
       success: function (data) {
-        
       }
     });
   }
