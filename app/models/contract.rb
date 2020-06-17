@@ -87,6 +87,14 @@ class Contract < Compras::Model
     where { signature_date.in(date_range) }
   }
 
+  scope :by_days_finish, lambda{ |days = 30|
+    where {end_date.lteq(Date.today + days.to_i)}
+  }
+
+  scope :between_days_finish, lambda{ |start_at, end_at|
+    where { end_date.gteq(Date.today + start_at.to_i) & end_date.lteq(Date.today + end_at.to_i) }
+  }
+
   scope :by_signature_period, lambda { |started_at, ended_at|
     where { signature_date.gteq(started_at) & signature_date.lteq(ended_at) }
   }
@@ -146,6 +154,14 @@ class Contract < Compras::Model
     purchase_solicitation_ids = PurchaseSolicitation.with_materials_per_licitation(licitation_process_id, material_ids).pluck(:id).uniq
 
     group_purchase_solicitation_with_materials(material_ids, purchase_solicitation_ids)
+  end
+
+  def self.count_contracts_finishing
+    {'between_121_150': Contract.between_days_finish(121, 150).count,
+     'between_91_120': Contract.between_days_finish(91, 120).count,
+     'between_61_90': Contract.between_days_finish(61, 90).count,
+     'between_31_60': Contract.between_days_finish(61, 90).count,
+     'until_30': Contract.by_days_finish(30).count}
   end
 
   def founded_debt_pledges

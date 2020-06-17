@@ -15,8 +15,8 @@ module CrudHelper
     I18n.t("#{controller_name}.edit", :resource => singular, :cascade => true)
   end
 
-  def paginate
-    super collection if collection.respond_to?(:total_pages)
+  def paginate value = collection, options ={}
+    super value, options if value.respond_to?(:total_pages)
   end
 
   # Get modal attributes and intersect with +params[:attributes]+ if exists

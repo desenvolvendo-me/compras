@@ -1,0 +1,24 @@
+<table class="records mt-1">
+  <tbody id="records">
+  <% if @contracts.blank? %>
+    <tr>
+      <td>Não foram encontrados contratos para esse periodo</td>
+    </tr>
+  <% end %>
+  <% @contracts.each do |resource| %>
+    <tr>
+      <td>
+        <p><%= link_to edit_contract_path(resource) do%>
+            Contrato <%= resource.contract_number %> - Data fim <%= resource.end_date %> - Fornecedor <%= resource.creditor.person.name %>
+          <%end %>
+            </p>
+        <% if resource.decorated? && resource.decorator.respond_to?(:summary) %>
+          <p><%= resource.decorator.summary %></p>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= paginate @contracts, :params => { :controller => 'dashboard/secretaries', :action => 'contracts'}, remote: true %>
