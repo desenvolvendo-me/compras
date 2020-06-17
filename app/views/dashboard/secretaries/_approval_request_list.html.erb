@@ -10,7 +10,7 @@
   <% @approval_requests.each do |resource| %>
     <tr>
       <td>
-        <p><%= link_to edit_contract_path(resource) do%>
+        <p><%= link_to report_supply_requests_path(resource, approv: true, secretary_id: resource.department.secretary.id) do%>
             Pedido <%= "#{resource.number}/#{resource.year}" %> - <%= resource.department.description %> - Valor: <%= resource.get_value %>
           <%end %>
         </p>
