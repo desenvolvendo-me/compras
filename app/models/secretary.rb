@@ -35,7 +35,7 @@ class Secretary < Compras::Model
   private
 
   def employees_actives
-    return unless secretary_settings.any?{ |ss| ss.active }
+    return unless secretary_settings.where(active: true).count > 1
     errors.add(:secretary_settings, 'Pode haver somente um funcionario ativo')
   end
 

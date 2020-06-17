@@ -1,5 +1,6 @@
 <%= f.input :secretary_id, as: :hidden, input_html:{value: secretary.id} %>
 
+<%if secretary.id.present? %>
 <div class="yui3-g">
   <div class="yui3-u-1-2">
     <%= f.input :employee %>
@@ -20,4 +21,10 @@
     <%= f.input :active, input_html:{class:'act_field'}%>
   </div>
 </div>
-
+<% else %>
+  <div class="yui3-g">
+    <div class="yui3-u-1">
+      <%= f.input :employee %>
+    </div>
+  </div>
+<% end %>
