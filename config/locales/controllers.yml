@@ -23,6 +23,7 @@ pt-BR:
     delivery_locations: "Locais de Entrega"
     demand_batches: "Lotes"
     departments: "Departamentos"
+    dashboard_secretaries: "Contratos e Prazos"
     direct_purchases: "Compra Direta"
     dissemination_sources: "Meios de Divulgação"
     districts: "Distritos"
@@ -122,3 +123,4 @@ pt-BR:
     report_map_of_prices: "Mapa de Preços"
     report_map_of_proposals: "Mapa de Propostas"
     reserve_fund_requests: "Reserva de Dotações"
+

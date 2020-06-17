@@ -1,0 +1,73 @@
+<span class="text-15">Intervalo de dias para encerrar o contrato</span>
+
+<div class="d-flex justify-content-between mt-1">
+  <div class="text-center">
+    <%= button_tag "#{@contracts_periods[:between_121_150]}", type: 'button', class:'by_121_150 btn-fillter' %>
+    <span class="d-block">de 121 a 150</span>
+  </div>
+  <div class="text-center">
+    <%= button_tag "#{@contracts_periods[:between_91_120]}", type: 'button', class:'by_91_120 btn-fillter' %>
+    <span class="d-block">de 91 a 120</span>
+  </div>
+  <div class="text-center">
+    <%= button_tag "#{@contracts_periods[:between_61_90]}", type: 'button', class:'by_61_90 btn-fillter' %>
+    <span class="d-block">de 61 a 90</span>
+  </div>
+  <div class="text-center">
+    <%= button_tag "#{@contracts_periods[:between_31_60]}", type: 'button', class:'by_31_60 btn-fillter' %>
+    <span class="d-block">de 31 a 60</span>
+  </div>
+  <div class="text-center">
+    <%= button_tag "#{@contracts_periods[:until_30]}", type: 'button', class:'until_30 btn-fillter' %>
+    <span class="d-block">até 30 dias</span>
+  </div>
+</div>
+
+<div class="mt-2">
+  <span class="title-table">Contratos com 30 dias para vencer</span>
+
+  <div id="contract_records">
+    <%= render 'contract_list' %>
+  </div>
+</div>
+
+
+<script>
+  $('.by_121_150').click(function(){
+    $('.title-table').html('Contratos com 150 dias para vencer');
+    getContracts(121, 150)
+  });
+  $('.by_91_120').click(function(){
+    $('.title-table').html('Contratos com 120 dias para vencer');
+    getContracts(91, 120)
+  });
+  $('.by_61_90').click(function(){
+    $('.title-table').html('Contratos com 90 dias para vencer');
+    getContracts(61, 90)
+  });
+  $('.by_31_60').click(function(){
+    $('.title-table').html('Contratos com 60 dias para vencer');
+    getContracts(31, 60)
+  });
+  $('.until_30').click(function(){
+    $('.title-table').html('Contratos com 30 dias para vencer');
+    getContracts(30)
+  });
+
+  function getContracts(date1, date2){
+    var param = (date1 && date2) ? [date1, date2] : date1;
+
+    var url = Routes.contracts_dashboard_secretaries,
+        params = $.isArray(param) ? {between_days_finish: {started_at: param[0], ended_at: param[1]}} : {by_days_finish: param};
+
+    url += "?" + $.param(params);
+
+    $.ajax({
+      url: url,
+      dataType: 'script',
+      type: 'GET',
+      success: function (data) {
+      }
+    });
+  }
+</script>
