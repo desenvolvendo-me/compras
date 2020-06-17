@@ -5,8 +5,8 @@ class SupplyRequest < Compras::Model
   attr_accessible :licitation_process_id, :creditor_id, :authorization_date,
                   :items_attributes, :year, :purchase_solicitation_id,
                   :updatabled, :contract_id, :supply_request_status,
-                  :justification, :supply_request_file,:user_id,
-                  :department_id, :number_year
+                  :justification, :supply_request_file,:user_id, :signature_responsible_id,
+                  :department_id, :number_year, :secretary_signature, :signature_secretary_id
 
   attr_modal :number, :creditor_id,:authorization_date, :licitation_process_id, :user, :purchase_solicitation_id
 
@@ -18,6 +18,8 @@ class SupplyRequest < Compras::Model
   belongs_to :licitation_process
   belongs_to :creditor
   belongs_to :user
+  belongs_to :signature_secretary, class_name: 'Secretary'
+  belongs_to :signature_responsible, class_name: 'Employee'
 
   has_many :items, class_name: 'SupplyRequestItem', dependent: :destroy
   has_many :supply_orders, class_name: "SupplyOrderRequests"

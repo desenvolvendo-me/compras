@@ -8,7 +8,7 @@ class Report::SupplyRequestsController < Report::BaseController
     if @report.valid?
       render layout: 'report'
     else
-      render :new
+      render :news
     end
   end
 end
