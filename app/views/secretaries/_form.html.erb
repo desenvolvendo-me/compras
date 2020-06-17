@@ -1,9 +1,35 @@
-<div class="yui3-g">
-  <div class="yui3-u-1-2">
-    <%= f.input :name %>
+<div class="tabs">
+  <ul>
+    <li>
+      <a href="#secretary">Secretaria</a>
+    </li>
+    <% if f.object.persisted? %>
+      <li>
+        <a href="#employee">Funcionários</a>
+      </li>
+    <% end %>
+  </ul>
+
+  <div id="secretary">
+    <%= render 'secretary', :f => f %>
   </div>
 
-  <div class="yui3-u-1-2">
-    <%= f.input :employee %>
-  </div>
+  <% if f.object.persisted? %>
+    <div id="employee">
+      <%= render 'employees', :f => f, secretary: f.object %>
+    </div>
+  <% end %>
 </div>
+
+<style>
+  .input.boolean{
+    padding-top: 40px;
+  }
+</style>
+
+<script>
+  $(document).on('click', ".act_field", function(){
+    $("[id$=active]").prop('checked', false);
+    $(this).prop('checked', true)
+  })
+</script>
