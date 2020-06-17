@@ -1,0 +1,19 @@
+<div id='secretary-setting'>
+  <div id="secretary-settings" data-nested-form="secretary-settings">
+    <%= f.error :secretary_settings %>
+
+    <p>
+      <input type="button" class="button affirmative add-secretary-settings" value="Adicionar">
+    </p>
+
+    <%= f.association :secretary_settings, collection: localized(f.object.secretary_settings) do |a| %>
+      <%= render 'secretary_settings/form_employees', f: a, secretary: f.object %>
+    <% end %>
+
+    <%= mustache 'secretary-settings-template' do %>
+      <%= f.association :secretary_settings_attributes, collection: f.object.secretary_settings.build.localized, index: "{{uuid-secretary-settings}}" do |secretary_settings| %>
+        <%= render 'secretary_settings/form_employees', f: secretary_settings, secretary: f.object %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
