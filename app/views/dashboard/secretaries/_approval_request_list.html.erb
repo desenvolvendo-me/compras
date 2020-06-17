@@ -1,0 +1,23 @@
+<span class="text-15">Pedidos paara aprovar digitalmente</span>
+
+<table class="records mt-1">
+  <tbody id="records">
+  <% if @approval_requests.blank? %>
+    <tr>
+      <td>Não foram encontrados contratos para esse periodo</td>
+    </tr>
+  <% end %>
+  <% @approval_requests.each do |resource| %>
+    <tr>
+      <td>
+        <p><%= link_to edit_contract_path(resource) do%>
+            Pedido <%= "#{resource.number}/#{resource.year}" %> - <%= resource.department.description %> - Valor: <%= resource.get_value %>
+          <%end %>
+        </p>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= paginate @approval_requests, :params => { :controller => 'dashboard/approval_requests', :action => 'approval_requests'}, remote: true, :param_name => "page_approval"  %>
