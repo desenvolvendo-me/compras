@@ -15,8 +15,9 @@ class Dashboard::SecretariesController < CrudController
   end
 
   def approval_requests
+    employee = current_user.authenticable.id
     @approval_requests = SupplyRequest.joins{ supply_request_attendances.outer }.joins { department.secretary.secretary_settings }
-                             .where{ supply_request_attendances.id.eq(nil) }.where { compras_secretary_settings.employee_id.eq(current_user.authenticable.id) }.page(params[:page_approval]).per(5)
+                             .where{ supply_request_attendances.id.eq(nil) }.where { compras_secretary_settings.employee_id.eq(employee) }.page(params[:page_approval]).per(5)
   end
 
   private
