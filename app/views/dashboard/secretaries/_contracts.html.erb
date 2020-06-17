@@ -57,7 +57,7 @@
   function getContracts(date1, date2){
     var param = (date1 && date2) ? [date1, date2] : date1;
 
-    var url = "/dashboard/secretaries/contracts",
+    var url = Routes.contracts_dashboard_secretaries,
         params = $.isArray(param) ? {between_days_finish: {started_at: param[0], ended_at: param[1]}} : {by_days_finish: param};
 
     url += "?" + $.param(params);
