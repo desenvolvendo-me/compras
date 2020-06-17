@@ -4,14 +4,16 @@
 
 <div class="yui3-g">
   <div class="yui3-u-1-2">
-    <div class="contract_deadline">
+    <div class="card">
       <%= render 'contracts' %>
     </div>
   </div>
 
 
   <div class="yui3-u-1-2">
-
+    <div class="card approval_requests">
+      <%= render 'approval_request_list' %>
+    </div>
   </div>
 </div>
 
@@ -25,7 +27,7 @@
 </div>
 
 <style>
-  .contract_deadline{
+  .card{
     background-color: white;
   }
   .d-flex{
@@ -85,10 +87,10 @@
     font-weight: bold;
   }
 
-  .contract_deadline tr{
+  .card tr{
     font-size: 10px
   }
-  .contract_deadline{
+  .card{
     border: solid 1px #e4e3e3;
     padding: 5px;
   }
