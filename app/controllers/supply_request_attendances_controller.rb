@@ -37,7 +37,7 @@ class SupplyRequestAttendancesController < CrudController
     if secretary_id and @parent.present?
       @parent.signature_secretary_id = secretary_id
       @parent.signature_responsible_id = current_user.id
-      @parent.secretary_signature = SecretarySetting.where(secretary_id: secretary_id, employee_id: current_user.id ).last.signature
+      @parent.secretary_signature = SecretarySetting.where(secretary_id: secretary_id, employee_id: current_user.id ).last.digital_signature
       @parent.save
     end
   end
