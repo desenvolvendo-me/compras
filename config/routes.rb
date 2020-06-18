@@ -554,7 +554,8 @@ Compras::Application.routes.draw do
 
   resources :purchase_process_proposals
 
-  resources :purchase_process_creditor_proposals
+  resources :purchase_process_creditor_proposals, except: :destroy
+  delete "/purchase_process_creditor_proposals/", to: "purchase_process_creditor_proposals#destroy", as: :purchase_process_creditor_proposal
 
   resources :creditor_proposal_benefited_tieds, only: %i[edit update]
 
