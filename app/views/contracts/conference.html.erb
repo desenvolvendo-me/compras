@@ -127,9 +127,7 @@
 </div>
 <div>
   <h2>SALDO POR UNIDADE DE COMPRA / SECRETARIA</h2>
-  <% total = 0 %>
   <% contract_id = @contract.id %>
-  <% creditor_id = @contract.creditor.id %>
   <%#TODO: Refatorar quando voltar aqui  %>
   <% PurchaseSolicitationItem
          .joins { purchase_solicitation.department }
@@ -149,6 +147,7 @@
       </tr>
       </thead>
       <tbody>
+      <% total = 0 %>
       <% purchase_solicitation_items.each do |purchase_solicitation_item| %>
         <% licitation_process_id = @contract.licitation_process.id %>
         <% creditor_id = @contract.creditor.id %>
@@ -161,14 +160,14 @@
                                                                   .where { purchase_process_item.material.id.eq(item.material.id) }.last %>
 
         <% if ratifications_item %>
-          <% total += ratifications_item.try(:total_price).to_f %>
           <tr>
             <td width="5%"><%= item.try(:material).try(:code) %></td>
             <td><%= item.try(:material).try(:description) %></td>
             <td><%= item.try(:material).try(:reference_unit).try(:acronym) %></td>
             <td><%= item.quantity %></td>
             <td width="10%"><%= number_to_currency ratifications_item.try(:unit_price) %></td>
-            <td width="10%"><%= number_to_currency ratifications_item.try(:total_price) %></td>
+            <td width="10%"><%= number_to_currency item_total = (item.quantity.to_f*ratifications_item.try(:unit_price).to_f).round(2) %></td>
+            <% total += item_total %>
           </tr>
         <% end %>
       <% end %>
