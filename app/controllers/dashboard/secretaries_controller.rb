@@ -2,12 +2,11 @@ class Dashboard::SecretariesController < CrudController
   has_scope :between_days_finish, using: %i[started_at ended_at], :type => :hash
   has_scope :by_days_finish, allow_blank: true
 
+
   def index
     @contracts = Contract.by_days_finish(30).page(params[:page]).per(5)
     @contracts_periods = Contract.count_contracts_finishing
-    employee = current_user.authenticable.id
-    @approval_requests = SupplyRequest.joins{ supply_request_attendances.outer }.joins { department.secretary.secretary_settings }
-                           .where{ supply_request_attendances.id.eq(nil) }.where { compras_secretary_settings.employee_id.eq(employee) }.page(params[:page_approval]).per(5)
+    @approval_requests = SupplyRequest.to_secretary_approv(current_user.authenticable.id).page(params[:page_approval]).per(5)
   end
 
   def contracts
@@ -15,11 +14,7 @@ class Dashboard::SecretariesController < CrudController
   end
 
   def approval_requests
-    employee = current_user.authenticable.id
-    @approval_requests = SupplyRequest.joins{ supply_request_attendances.outer }.joins { department.secretary.secretary_settings }
-                             .where{ supply_request_attendances.id.eq(nil) }
-                             .where { supply_request_attendances.service_status.eq(SupplyRequestServiceStatus::ORDER_IN_ANALYSIS) }
-                             .where { compras_secretary_settings.employee_id.eq(employee) }.page(params[:page_approval]).per(5)
+    @approval_requests = SupplyRequest.to_secretary_approv(current_user.authenticable.id).page(params[:page_approval]).per(5)
   end
 
   private

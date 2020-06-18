@@ -47,6 +47,15 @@ class SupplyRequest < Compras::Model
     where { purchase_solicitation_id.in purchase_solicitation }
   }
 
+  scope :to_secretary_approv, lambda{|secretary_employ|
+    joins{ supply_request_attendances.outer }.joins { purchase_solicitation.department.secretary.secretary_settings }
+            .where { supply_request_attendances.service_status.eq(SupplyRequestServiceStatus::ORDER_IN_ANALYSIS) }
+            .where { compras_secretary_settings.employee_id.eq(secretary_employ) }.order{ number }
+            .group { compras_supply_request_attendances.service_status }
+            .group{ compras_supply_requests.number }
+            .group { compras_supply_requests.id }
+  }
+
   def to_s
     "#{contract} - #{licitation_process}"
   end
