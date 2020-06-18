@@ -46,6 +46,13 @@
       id: 'make_bid', 'data-disabled' => make_bid_disabled_message(@next_bid) %>
   </div>
 
+  <% if @creditors&.count == 1 %>
+    <div class="yui3-u-1-7 field-without-label">
+      <%= button_tag 'Encerrar', type: :button, class: 'button primary',
+                     id: 'finish_bid'%>
+    </div>
+  <% end %>
+
   <div class="yui3-u-1-7 field-without-label">
     <%= button_tag 'Desfazer', type: :button, class: 'button', id: 'undo_bid',
       'data-disabled' => undo_bid_disabled_message(@historic) %>
