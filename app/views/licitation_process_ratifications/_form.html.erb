@@ -41,9 +41,12 @@
   </thead>
 
   <tbody id="ratification_items">
+  <% total = 0 %>
     <%= f.association :licitation_process_ratification_items, :collection => localized(f.object.licitation_process_ratification_items) do |i| %>
       <%= render 'licitation_process_ratification_items/licitation_process_ratification_item', :f => i %>
+      <%= total += i.object.total_price || 0 %>
     <% end %>
+  <tr><td colspan="100" style="text-align: end; font-weight: bolder"><%= number_to_currency total %></td></tr>
   </tbody>
 </table>
 

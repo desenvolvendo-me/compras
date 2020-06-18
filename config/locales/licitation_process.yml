@@ -55,7 +55,7 @@ pt-BR:
         stage_of_bids_date: "Data da fase de lances"
         stage_of_bids_time: "Hora da fase de lances"
         type_of_purchase: "Tipo da compra"
-        type_of_removal: "Tipo de afastamento"
+        type_of_removal: "Tipo Modalidade"
         year: "Ano"
         budget_allocation: "Dotação orçamentária"
         expense_nature: "Desdobramento"

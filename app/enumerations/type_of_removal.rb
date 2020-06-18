@@ -5,7 +5,11 @@ class TypeOfRemoval < EnumerateIt::Base
                    :other_reasons_to_removal,
                    :unenforceability_accreditation,
                    :dispensation_justified_accreditation,
-                   :call
+                   :call,
+                   :concurrence,
+                   :trading,
+                   :outlet_price,
+                   :invitation
 
   def self.allow_duplicated_items
     [
