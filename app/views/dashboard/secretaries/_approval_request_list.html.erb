@@ -1,0 +1,23 @@
+<span class="text-15">Pedidos para aprovar digitalmente</span>
+
+<table class="records mt-1">
+  <tbody id="records">
+  <% if @approval_requests.blank? %>
+    <tr>
+      <td>Não foram encontrados contratos para esse periodo</td>
+    </tr>
+  <% end %>
+  <% @approval_requests.each do |resource| %>
+    <tr>
+      <td>
+        <p><%= link_to report_supply_requests_path(resource, approv: true, secretary_id: resource.purchase_solicitation&.department.secretary.id) do%>
+            Pedido <%= "#{resource.number}/#{resource.year}" %> - <%= resource.purchase_solicitation.department %> - Valor: <%= number_to_currency resource.get_value %>
+          <%end %>
+        </p>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= paginate @approval_requests, :params => { :controller => 'dashboard/secretaries', :action => 'approval_requests'}, remote: true, :param_name => "page_approval"  %>
