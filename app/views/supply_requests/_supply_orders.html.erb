@@ -1,5 +1,5 @@
 <% if f.object.updatabled && f.object.persisted? && @hidden_field%>
-  <button type='button' class="button primary" id="genSupllyOrder" style="float: right; margin-bottom: 1rem">Gerar Ordem de Fornecimento</button>
+  <button type='button' class="button primary" id="gen-suplly-order" style="float: right; margin-bottom: 1rem">Gerar Ordem de Fornecimento</button>
 <% end %>
 <table class="records">
   <thead>
@@ -32,3 +32,20 @@
   <% end %>
   </tbody>
 </table>
+
+<script>
+  $("#gen-suplly-order").click(function(){
+    var licitation_process = $('#supply_request_licitation_process_id').val(),
+        contract = $("#supply_request_contract_id").val(),
+        purchase_solicitation = $("#supply_request_purchase_solicitation_id").val(),
+        items = $(".material-id").map(function(){ return $(this).val() }).toArray().join(',');
+debugger
+    $("<form action="+ Routes.new_supply_order +" method='GET'/>")
+        .append($('<input type="hidden" name="supply_order[licitation_process_id]">').val(licitation_process))
+        .append($('<input type="hidden" name="supply_order[contract_id]">').val(contract))
+        .append($('<input type="hidden" name="supply_order[purchase_solicitation_id]">').val(purchase_solicitation))
+        .append($('<input type="hidden" name="supply_order[item_ids]">').val(items))
+        .appendTo($(document.body)) //it has to be added somewhere into the <body>
+        .submit();
+  })
+</script>
