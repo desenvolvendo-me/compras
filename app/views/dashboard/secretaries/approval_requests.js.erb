@@ -1,0 +1,6 @@
+(function () {
+  var records = $('#approval_requests');
+
+  records.html('<%= escape_javascript render('approval_request_list') %>');
+
+})();

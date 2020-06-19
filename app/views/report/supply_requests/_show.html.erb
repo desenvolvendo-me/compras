@@ -61,10 +61,10 @@
 <div>
   <table class="records">
     <thead>
-      <tr>
-        <th>ITEM</th>
-        <th>QUANTIDADE</th>
-      </tr>
+    <tr>
+      <th>ITEM</th>
+      <th>QUANTIDADE</th>
+    </tr>
     </thead>
     <tbody>
     <% resource.supply_request.items.each do |item| %>
@@ -93,17 +93,34 @@
   FUNCIONÁRIO <br><br><br><br><br><br>
 </div>
 
+<%if @report.approv === 'true' %>
+  <p class="right">
+    <% if Report::SupplyRequests.secretary_settings?(@report.secretary) == '' %>
+      <%= link_to "Aprovar", supply_request_attendances_path(supply_request_attendance:{responsible_id:@report.current_user_id, date:Date.today.to_s ,supply_request_id:@report.supply_request_id,service_status: 'new',justification:'Por favor analisar',responsible_id:current_user.authenticable.id},secretary: @report.secretary.id),:method=>:post, :class => "button primary" %>
+      <%= link_to I18n.t("enumerations.supply_request_service_status.order_in_financial_analysis"), supply_request_attendances_path(supply_request_attendance:{responsible_id:@report.current_user_id , date:Date.today.to_s ,supply_request_id:@report.supply_request_id, service_status: 'order_in_financial_analysis',justification:'Por favor analisar',responsible_id:current_user.authenticable.id},secretary: @report.secretary.id),:method=>:post, :class => 'button primary' %>
+    <% else %>
+      <span style="font-size: 15px; font-weight: bolder; color: red;"><%= Report::SupplyRequests.secretary_settings?(@report.secretary) %></span>
+    <%end %>
+  </p>
+<% end %>
 
 <script>
-    console.log("Running")
-    var css = '@page { size: portrait; }',
-        head = document.head,
-        style = document.createElement('style');
+  console.log("Running");
+  var css = '@page { size: portrait; }',
+      head = document.head,
+      style = document.createElement('style');
 
-    style.type = 'text/css';
-    style.media = 'print';
-    style.appendChild(document.createTextNode(css));
+  style.type = 'text/css';
+  style.media = 'print';
+  style.appendChild(document.createTextNode(css));
 
-    head.appendChild(style)
+  head.appendChild(style);
 
+  <% if @report.approv === 'true' %>
+  window.onload = function(){
+    var footer = document.getElementById('footer');
+    footer.style.display = "none";
+  };
+  <% end %>
 </script>
+

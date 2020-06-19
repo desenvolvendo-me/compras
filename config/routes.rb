@@ -1017,6 +1017,7 @@ Compras::Application.routes.draw do
     resources :secretaries, only: :index do
       collection do
         get '/contracts', to:'secretaries#contracts', as: :contracts
+        get '/approval_requests', to:'secretaries#approval_requests', as: :approval_requests
       end
     end
   end
