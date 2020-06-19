@@ -1,5 +1,5 @@
 class PurchaseProcessTradingItem < Compras::Model
-  attr_accessible :reduction_rate_value, :reduction_rate_percent, as: :trading_user
+  attr_accessible :reduction_rate_value, :reduction_rate_percent, :status, as: :trading_user
   attr_accessible :trading_id, :item_id, :lot, :bids_attributes, :negotiation_attributes,
     :status
 

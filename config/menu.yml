@@ -96,6 +96,7 @@ menu:
     - tce_export_monthly_monitorings
 
   - manager:
+      - secretary_settings
       - dashboard_secretaries
 
   - "Relatórios":

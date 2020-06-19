@@ -276,6 +276,42 @@ $(document).ready(function() {
     }
   });
 
+  $("button#finish_bid").on('click', function(event) {
+    event.preventDefault();
+    var itemId = $('input.item_chooser:checked').parent().attr('data-id');
+
+    var url = $('#persist_item_url').val(),
+        percentData = {
+          id: itemId,
+          _method: 'put',
+          purchase_process_trading_item: {
+            reduction_rate_value: "0,00",
+            reduction_rate_percent: "0,00",
+            status:"closed"
+          }
+        };
+
+    $.ajax({
+      url: url + itemId,
+      data: percentData,
+      type: 'POST',
+      dataType: 'json',
+      success: function(data) {
+        location.reload();
+      },
+
+      error: function(xhr) {
+        var errors = $.parseJSON(xhr.responseText).errors;
+
+        $('#reduction_rate_value').val('0,00'),
+            $('#reduction_rate_percent').val('0,00')
+
+        processPersistErrors(errors);
+      }
+    });
+
+  });
+
   $('button#undo_bid').on('click', function(event) {
     event.preventDefault();
 
