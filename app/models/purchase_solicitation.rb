@@ -1,5 +1,7 @@
 class PurchaseSolicitation < Compras::Model
   include BelongsToResource
+  include MaterialBalance
+
 
   attr_accessible :accounting_year, :request_date, :responsible_id, :kind,
                   :delivery_location_id, :general_observations, :justification,
