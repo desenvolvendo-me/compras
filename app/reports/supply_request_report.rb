@@ -1,6 +1,6 @@
 class SupplyRequestReport < Report
 
-  attr_accessor :supply_request_id, :current_user_id, :approv, :secretary_id
+  attr_accessor :supply_request_id, :current_user_id, :approv, :secretary
 
   def supply_request
     SupplyRequest.find(self.supply_request_id.to_i)
