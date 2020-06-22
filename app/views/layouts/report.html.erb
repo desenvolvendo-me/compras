@@ -10,6 +10,9 @@
     <%= stylesheet_link_tag 'report', :media => :all %>
     <%= stylesheet_link_tag 'compras/report', :media => :all %>
     <%= stylesheet_link_tag 'compras/table_size', :media => :all %>
+    <%= stylesheet_link_tag 'buttons', :media => :all  if @report&.approv === 'true'%>
+    <%= javascript_include_tag "application"  if @report&.approv === 'true'%>
+
     <link rel="shortcut icon" type="image/png" href="<%= image_path 'favicon.png' %>" />
   </head>
 

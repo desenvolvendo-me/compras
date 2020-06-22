@@ -93,9 +93,15 @@
   FUNCIONÁRIO <br><br><br><br><br><br>
 </div>
 
+<%if @report.approv === 'true' %>
+  <p class="right">
+    <%= link_to "Aprovar", supply_request_attendances_path(supply_request_attendance:{responsible_id:@report.current_user_id, date:Date.today.to_s ,supply_request_id:@report.supply_request_id,service_status: 'new',justification:'Por favor analisar',responsible_id:current_user.authenticable.id},secretary_id: @report.secretary_id),:method=>:post, :class => "button primary" %>
+    <%= link_to I18n.t("enumerations.supply_request_service_status.order_in_financial_analysis"), supply_request_attendances_path(supply_request_attendance:{responsible_id:@report.current_user_id , date:Date.today.to_s ,supply_request_id:@report.supply_request_id, service_status: 'order_in_financial_analysis',justification:'Por favor analisar',responsible_id:current_user.authenticable.id},secretary_id: @report.secretary_id),:method=>:post, :class => 'button primary' %>
+  </p>
+<% end %>
 
 <script>
-    console.log("Running")
+    console.log("Running");
     var css = '@page { size: portrait; }',
         head = document.head,
         style = document.createElement('style');
@@ -104,6 +110,13 @@
     style.media = 'print';
     style.appendChild(document.createTextNode(css));
 
-    head.appendChild(style)
+    head.appendChild(style);
 
+    <% if @report.approv === 'true' %>
+      window.onload = function(){
+        var footer = document.getElementById('footer');
+        footer.style.display = "none";
+      };
+    <% end %>
 </script>
+

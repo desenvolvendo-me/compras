@@ -27,3 +27,6 @@ pt-BR:
         user: "Usuário"
         department: "Local Solicitante"
         value: "Valor"
+        secretary_signature: "Assinatura do Secretário"
+        signature_responsible: "Responsavel Assinatura"
+        signature_secretary: "Secretaria"

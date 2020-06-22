@@ -5,8 +5,8 @@ class SupplyRequest < Compras::Model
   attr_accessible :licitation_process_id, :creditor_id, :authorization_date,
                   :items_attributes, :year, :purchase_solicitation_id,
                   :updatabled, :contract_id, :supply_request_status,
-                  :justification, :supply_request_file,:user_id,
-                  :department_id, :number_year
+                  :justification, :supply_request_file,:user_id, :signature_responsible_id,
+                  :department_id, :number_year, :secretary_signature, :signature_secretary_id
 
   attr_modal :number, :creditor_id,:authorization_date, :licitation_process_id, :user, :purchase_solicitation_id
 
@@ -18,6 +18,8 @@ class SupplyRequest < Compras::Model
   belongs_to :licitation_process
   belongs_to :creditor
   belongs_to :user
+  belongs_to :signature_secretary, class_name: 'Secretary'
+  belongs_to :signature_responsible, class_name: 'Employee'
 
   has_many :items, class_name: 'SupplyRequestItem', dependent: :destroy
   has_many :supply_orders, class_name: "SupplyOrderRequests"
@@ -43,6 +45,15 @@ class SupplyRequest < Compras::Model
 
   scope :by_purchase_solicitation, lambda {|purchase_solicitation|
     where { purchase_solicitation_id.in purchase_solicitation }
+  }
+
+  scope :to_secretary_approv, lambda{|secretary_employ|
+    joins{ supply_request_attendances.outer }.joins { purchase_solicitation.department.secretary.secretary_settings }
+            .where { supply_request_attendances.service_status.eq(SupplyRequestServiceStatus::ORDER_IN_ANALYSIS) }
+            .where { compras_secretary_settings.employee_id.eq(secretary_employ) }.order{ number }
+            .group { compras_supply_request_attendances.service_status }
+            .group{ compras_supply_requests.number }
+            .group { compras_supply_requests.id }
   }
 
   def to_s
