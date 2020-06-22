@@ -48,12 +48,17 @@ class SupplyRequest < Compras::Model
   }
 
   scope :to_secretary_approv, lambda{|secretary_employ|
-    joins{ supply_request_attendances.outer }.joins { purchase_solicitation.department.secretary.secretary_settings }
-            .where { supply_request_attendances.service_status.eq(SupplyRequestServiceStatus::ORDER_IN_ANALYSIS) }
-            .where { compras_secretary_settings.employee_id.eq(secretary_employ) }.order{ number }
-            .group { compras_supply_request_attendances.service_status }
-            .group{ compras_supply_requests.number }
-            .group { compras_supply_requests.id }
+    joins{ "LEFT JOIN (SELECT RANK() OVER (PARTITION BY supply_request_id ORDER BY updated_at DESC) r, *
+                FROM compras_supply_request_attendances
+                group by compras_supply_request_attendances.supply_request_id, compras_supply_request_attendances.id)
+                as compras_supply_request_attendances on compras_supply_request_attendances.supply_request_id = compras_supply_requests.id" }
+        .joins { purchase_solicitation.department.secretary.secretary_settings }
+        .where { compras_supply_request_attendances.service_status.eq(SupplyRequestServiceStatus::ORDER_IN_ANALYSIS) }
+        .where { compras_supply_request_attendances.r.eq(1) }
+        .where { compras_secretary_settings.employee_id.eq(secretary_employ) }.order{ number }
+        .group { compras_supply_request_attendances.service_status }
+        .group{ compras_supply_requests.number }
+        .group { compras_supply_requests.id }
   }
 
   def to_s

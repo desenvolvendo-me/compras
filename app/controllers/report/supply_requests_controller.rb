@@ -6,7 +6,8 @@ class Report::SupplyRequestsController < Report::BaseController
     @report.current_user_id = current_user.id
     @report.supply_request_id = params[:supply_request_id]
     @report.approv = params[:approv]
-    @report.secretary_id = params[:secretary_id]
+    @report.secretary = Secretary.find(params[:secretary_id]) if params[:secretary_id]
+
     if @report.valid?
       render layout: 'report'
     else
