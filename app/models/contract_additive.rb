@@ -15,6 +15,9 @@ class ContractAdditive < Compras::Model
   belongs_to :contract
   belongs_to :dissemination_source
 
+  after_create :set_contract_item_balance, if: :additive_kind?
+  before_update :get_contract_item_balance
+
   scope :by_contract_id, -> (contract_id) do
     where { |query| query.contract_id.eq contract_id }
   end
@@ -22,7 +25,38 @@ class ContractAdditive < Compras::Model
   orderize "id"
   filterize
 
+
+
   private
+  def additive_kind?
+    additive_kind == 'additive'
+  end
+
+  def set_contract_item_balance
+    contract_balance = ContractItemBalance.new
+    fill_contract_balance contract_balance
+  end
+
+  def get_contract_item_balance
+    if additive_kind_was == 'additive'
+      contract_balance = ContractItemBalance.where(movable_id: id, movable_type: self.class.name).last
+      if additive_kind == 'addition' and contract_balance
+        contract_balance.destroy
+      else
+        fill_contract_balance contract_balance
+      end
+    elsif additive_kind == 'additive' and contract_balance
+      set_contract_item_balance
+    end
+  end
+
+  def fill_contract_balance contract_balance
+    contract_balance.movable = self
+    contract_balance.contract_balance = true
+    contract_balance.quantity_type = QuantityType::POSITIVE_AMOUNT
+    contract_balance.save
+    contract_balance
+  end
 
   def value_is_to_be_mandatory
     if additive_type_is_valid_for_value? && value.blank?

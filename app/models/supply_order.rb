@@ -37,8 +37,10 @@ class SupplyOrder < Compras::Model
   filterize
 
   after_create :set_status_defaut
+  after_create :set_contract_item_balance
   before_update :change_status_in_service
   before_save :set_creditor
+
 
   scope :by_purchasing_unit, lambda {|current_user|
     use_pur_uni = UserPurchasingUnit.where(user_id:current_user).pluck(:purchasing_unit_id)
@@ -82,6 +84,14 @@ class SupplyOrder < Compras::Model
         supply_order_request.supply_request.update_attribute(:supply_request_status, status) if supply_order_request.supply_request
       end
     end
+  end
+
+  def set_contract_item_balance
+    contract_balance = ContractItemBalance.new
+    contract_balance.movable = self
+    contract_balance.contract_balance = true
+    contract_balance.quantity_type = QuantityType::NEGATIVE_AMOUNT
+    contract_balance.save
   end
 
 end
