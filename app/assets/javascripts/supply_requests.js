@@ -379,6 +379,25 @@ $(document).ready(function () {
         .appendTo($(document.body)) //it has to be added somewhere into the <body>
         .submit();
   });
+
+  $("#supply_request_department_id").change(function() {
+    if($(this).val() === ''){
+      return
+    }
+    $.ajax({
+      url: Routes.secretaries,
+      data: {by_department: $(this).val()},
+      dataType: 'json',
+      type: 'GET',
+      success: function (data) {
+        if(data.length <= 0){
+          return alert('Não existe secretaria cadastrada para o Local Solicitante.')
+        }
+        $('#supply_request_signature_secretary_id').val(data[0].id);
+        $('#supply_request_signature_secretary').val(data[0].to_s);
+      }
+    })
+  });
 });
 
 
