@@ -5,6 +5,7 @@ class Secretary < Compras::Model
 
   has_many :contract_financials
   has_many :secretary_settings
+  has_many :departments
 
   accepts_nested_attributes_for :secretary_settings, :allow_destroy => true
 
@@ -22,6 +23,10 @@ class Secretary < Compras::Model
     joins(:contract_financials).
         where { contract_financials.contract_id.eq(contract) ||
             contract_financials.expense_id.eq(expense)}
+  }
+
+  scope :by_department, lambda {|q|
+    joins{ departments }.where{ departments.id.eq(q) }.limit(1)
   }
 
 
