@@ -382,8 +382,11 @@ $(document).ready(function () {
 
   $("#supply_request_department_id").change(function() {
     if($(this).val() === ''){
+      $("#supply_request_signature_secretary_id").val('');
+      $("#supply_request_signature_secretary").val('');
       return
     }
+
     $.ajax({
       url: Routes.secretaries,
       data: {by_department: $(this).val()},
