@@ -9,7 +9,7 @@ pt-BR:
       supply_request:
         number_year: "Número"
         number: "Número"
-        authorization_date: "Data da Autorização"
+        authorization_date: "Data"
         creditor: "Fornecedor"
         licitation_process: "Processo de Compra"
         modality_or_type_of_removal: "Modalidade"
