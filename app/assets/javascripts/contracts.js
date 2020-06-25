@@ -73,4 +73,17 @@ $(document).ready(function () {
             );
         }
     });
-})
+
+  $("#contract_secretary_id2").change(function(){
+    var params = {},
+      url = Routes.expenses;
+
+    params = {
+      by_secretary: $(this).val()
+    };
+
+    url += "?" + $.param(params);
+
+    $("#contract_expense").attr('data-source', url);
+  });
+});
