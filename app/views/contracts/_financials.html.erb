@@ -3,14 +3,14 @@
   <div class="nested-fields add-margin-bottom">
     <%= hidden_field_tag :financial_id, nil, :name => 'contract_financial[id]' %>
     <div class="yui3-u-1-3">
-      <%= f.input :expense, :as => :auto_complete, :fake => true,
-                  :source_path => expenses_path,
-                  :required => true %>
-    </div>
-    <div class="yui3-u-1-3">
       <%= f.input :secretary, :as => :auto_complete, :fake => true,
                   :source_path => secretaries_path,
                   hidden_field: :secretary_id2,
+                  :required => true %>
+    </div>
+    <div class="yui3-u-1-3">
+      <%= f.input :expense, :as => :auto_complete, :fake => true,
+                  :source_path => expenses_path(by_secretary: nil),
                   :required => true %>
     </div>
     <div class="yui3-u-1-4">
@@ -52,7 +52,6 @@
                  project_activity: "#{p.object.expense.project_activity.name} (#{p.object.expense.project_activity})",
                  nature_expense: p.object.expense.nature_expense,
                  resource_source: p.object.expense.resource_source,
-
                  f: p %>
     <% end %>
     </tbody>
