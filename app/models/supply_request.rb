@@ -67,6 +67,7 @@ class SupplyRequest < Compras::Model
 
   before_create :set_status_sent
   before_save :set_creditor
+  # after_create :set_contract_item_balance
 
   def get_value
     value = 0
@@ -106,4 +107,12 @@ class SupplyRequest < Compras::Model
   def at_least_one_item
     errors.add(:items, :at_least_one_item) if items.empty?
   end
+
+  # def set_contract_item_balance
+  #   contract_balance = ContractItemBalance.new
+  #   contract_balance.movable = self
+  #   contract_balance.contract_balance = true
+  #   contract_balance.quantity_type = QuantityType::NEGATIVE_AMOUNT
+  #   contract_balance.save
+  # end
 end

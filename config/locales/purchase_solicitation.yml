@@ -30,6 +30,7 @@ pt-BR:
         quantity_by_material: 'Quantidade'
         purchase_solicitation: 'Solicitação de Compra'
         purchase_form: 'Ficha de Compra'
+        purchasing_unit: 'Unidade de Compra'
         code_and_year: "Código/Ano"
         budget_allocations: "Dotação"
         expense_nature: "Desdobramento"
@@ -44,6 +45,7 @@ pt-BR:
         model_request: "Solicitação Modelo"
         attendant_status: "Status de Atendimento"
         lot: "Lote"
+        secretary: "Secretaria"
 
   purchase_solicitation:
     messages:

@@ -1,7 +1,8 @@
 class Secretary < Compras::Model
-  attr_accessible :name, :employee_id, :secretary_settings, :secretary_settings_attributes
+  attr_accessible :name, :employee_id, :secretary_settings, :secretary_settings_attributes, :unit_id
 
   belongs_to :employee
+  belongs_to :unit, class_name: "Organ"
 
   has_many :contract_financials
   has_many :secretary_settings

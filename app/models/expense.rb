@@ -38,6 +38,12 @@ class Expense < Compras::Model
         where { contract_financials.contract_id.eq(q) }
   }
 
+  scope :by_secretary, lambda{|q|
+    purchasing_unit_ids = Department.joins{ purchasing_unit }.where { secretary_id.eq(q) }.pluck(:purchasing_unit_id)
+
+    joins{ purchasing_unit }.where { purchasing_unit_id.in(purchasing_unit_ids) }
+  }
+
   orderize "id DESC"
   filterize
 
