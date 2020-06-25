@@ -87,11 +87,18 @@ class SupplyOrder < Compras::Model
   end
 
   def set_contract_item_balance
-    contract_balance = ContractItemBalance.new
-    contract_balance.movable = self
-    contract_balance.contract_balance = true
-    contract_balance.quantity_type = QuantityType::NEGATIVE_AMOUNT
-    contract_balance.save
+    items.each do |item|
+      contract_balance = ContractItemBalance.new
+      contract_balance.movable = self
+      contract_balance.contract_balance = true
+      contract_balance.purchase_process_id = licitation_process_id
+      contract_balance.contract_id = contract_id
+      contract_balance.creditor_id = creditor_id
+      contract_balance.purchase_solicitation_id = purchase_solicitation_id
+      contract_balance.material_id = item.material_id
+      contract_balance.quantity = item.quantity
+      contract_balance.save
+    end
   end
 
 end
