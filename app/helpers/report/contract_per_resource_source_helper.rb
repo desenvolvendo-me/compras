@@ -13,4 +13,9 @@ module Report::ContractPerResourceSourceHelper
 
     value
   end
+
+  def self.get_supply_orders contract, financial
+    contract.supply_orders.joins{ purchase_solicitation }.joins{ purchase_solicitation.department }
+        .where{ purchase_solicitation.department.secretary_id.eq(financial.secretary_id) }
+  end
 end
