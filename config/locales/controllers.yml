@@ -91,7 +91,7 @@ pt-BR:
     report_department_requests: "Solicitantes"
     report_pledge_requests: "Relatório de Pedido de Empenho"
     report_supplier_balance_per_service_orders: "Relatório de Saldo Fornecedor por Ordem de Serviço"
-    report_supply_request_per_secretaries: "Relatório de Pedido de Fornecimento por Secretaria "
+    report_supply_request_per_secretaries: "Pedido de Fornecimento"
     report_supply_requests: "Relatório de Pedido de Fornecimento"
     resource_sources: "Fonte de Recursos"
     secretary_settings: "Configurações da Secretaria"
