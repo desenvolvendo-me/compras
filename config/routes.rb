@@ -990,6 +990,7 @@ Compras::Application.routes.draw do
       resources :total_products_purchases
       resources :total_purchase_per_element_and_natures
       resources :extract_consumption_per_processes
+      resources :contract_per_resource_sources
     end
 
     match 'map_of_bids/:licitation_process_id' => 'map_of_bids#show', as: :map_of_bids
