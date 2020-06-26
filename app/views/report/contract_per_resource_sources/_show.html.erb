@@ -25,40 +25,44 @@
 
 <br>
 
-<% @financials = @contract.financials if @financials.blank? %>
-<% @financials.each do |financial| %>
+
+
+<% @resource_sources.each do |resource_source| %>
+
   <div style="text-align: justify">
     <span>
-      <b> FONTE DE RECURSO: </b> <%= financial.expense.resource_source.to_s %></p>
+      <b> FONTE DE RECURSO: </b> <%= resource_source.to_s %>
     </span>
     <span>
-      <b> VALOR FONTE DE RECURSO: </b> <%= financial.expense.resource_source.to_s %></p>
+      <b> VALOR FONTE DE RECURSO: </b> <%=  %>
     </span>
   </div>
-  <% total_c_l = 0 %>
-  <% total_c_f = 0 %>
+
 
   <p>
-  <div>
+  <% # Peguei os financials de que estão na resource source atraves de expenses %>
+  <% @contract.financials.joins(:expense).where(compras_expenses:{resource_source_id: resource_source.id}).each do |financial| %>
     <table class="records">
       <tbody>
-      <tr>
-        <td>
-          <b>SECRETARIA:</b> <% %>
-        </td>
-      </tr>
-
+        <tr>
+          <td><b>SECRETARIA: </b> <%= financial.secretary.to_s %> </td>
+        </tr>
+        <tr>
+          <td><b>ORDEM DE FONECIMENTOS:</b></td>
+        </tr>
+      <% @contract.supply_orders.joins(purchase_solicitation:[:department]).where(compras_departments:{secretary_id: financial.secretary_id}).each do |supply_order| %>
+        <tr>
+          <td>SOLICITANTE: <%= supply_order.purchase_solicitation.department.to_s %></td>
+          <td>DATA <%= supply_order.authorization_date %></td>
+          <td><%= Report::ContractPerResourceSourceHelper.sum_value_items_supply_order(supply_order) %></td>
+        </tr>
+      <% end %>
       </tbody>
     </table>
-  </div>
+  <% end %>
+
   </p>
-<%# end %>
-  <span>
-    <p>
-      <b> TOTAL LICITADO: </b> <%= total_c_l %>
-      <b> TOTAL FORNECIDO: </b> <%= total_c_f %>
-    </p>
-  </span>
+
   <br>
   <br>
   <br>
