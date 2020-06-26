@@ -28,6 +28,12 @@ class SupplyRequestItem < Compras::Model
     where { |query| query.pledge_item_id.eq(pledge_item_id) }
   end
 
+  scope :by_material_id, lambda{|material|
+    unless material.blank?
+      where{ material_id.eq(material) }
+    end
+  }
+
   def authorized_quantity
     SupplyOrderItem.where { |query|
       query.pledge_item_id.eq(pledge_item_id)
