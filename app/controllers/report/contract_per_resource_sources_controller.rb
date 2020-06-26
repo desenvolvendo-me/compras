@@ -1,11 +1,11 @@
 class Report::ContractPerResourceSourcesController < Report::BaseController
+  include Report::ContractPerResourceSourceHelper
   report_class ContractPerResourceSourceReport, :repository => ContractPerResourceSourceSearcher
 
   def show
     @contract = Contract.find(contract_per_resource_source_params["contract_id"])
-    @financials = ContractFinancial.joins(:expense)
-        .where(contract_id: contract_per_resource_source_params["contract_id"])
-              .where(compras_expenses:{resource_source_id: contract_per_resource_source_params["resource_source_id"]})
+    @resource_sources = ResourceSource.joins(expenses:[:contract_financials])
+                           .where(compras_contract_financials:{contract_id:contract_per_resource_source_params["contract_id"]}).uniq(:id)
 
     @report = report_instance
 
