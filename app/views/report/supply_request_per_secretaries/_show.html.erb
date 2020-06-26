@@ -22,7 +22,7 @@
     <b> SECRETARIA: </b> <%= Secretary.find(ids[0]).to_s %>
   </span>
     <br>
-  <span>
+    <span>
     <b> DEPARTAMENTO: </b> <%= Department.find(ids[1]).to_s %>
   </span>
   </div>
@@ -63,14 +63,10 @@
     </table>
   </div>
   </p>
-<%# end %>
-  <span>
-    <p>
-      <b> TOTAL DAS SECRETARIAS: </b> <%= number_to_currency total_secretaries %>
-    </p>
-  </span>
-  <br>
-  <br>
-  <br>
 <% end %>
+<span>
+  <p>
+  <h1><b> TOTAL DOS PEDIDOS: </b> <%= number_to_currency total_secretaries %></h1>
+  </p>
+</span>
 
