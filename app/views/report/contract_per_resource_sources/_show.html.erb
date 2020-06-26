@@ -1,0 +1,65 @@
+<%
+  def date_mask(d)
+    return d.strftime("%d/%m/%Y") unless d.nil?
+  end
+%>
+
+<div>
+  <table class="records">
+    <thead>
+    <tr style="text-align: center;">
+      <td> GESTÂO FINANCEIRA DE CONTRATO POR FONTE DE RECURSO</td>
+    </tr>
+    <tr>
+      <td> CONTRATO: <%= @contract.to_s %> FORNECEDOR: <%= @contract.creditor %>  VALOR: <%= @contract.contract_value %></td>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+</div>
+
+<div style="text-align: justify">
+
+</div>
+
+<br>
+
+<% @financials = @contract.financials if @financials.blank? %>
+<% @financials.each do |financial| %>
+  <div style="text-align: justify">
+    <span>
+      <b> FONTE DE RECURSO: </b> <%= financial.expense.resource_source.to_s %></p>
+    </span>
+    <span>
+      <b> VALOR FONTE DE RECURSO: </b> <%= financial.expense.resource_source.to_s %></p>
+    </span>
+  </div>
+  <% total_c_l = 0 %>
+  <% total_c_f = 0 %>
+
+  <p>
+  <div>
+    <table class="records">
+      <tbody>
+      <tr>
+        <td>
+          <b>SECRETARIA:</b> <% %>
+        </td>
+      </tr>
+
+      </tbody>
+    </table>
+  </div>
+  </p>
+<%# end %>
+  <span>
+    <p>
+      <b> TOTAL LICITADO: </b> <%= total_c_l %>
+      <b> TOTAL FORNECIDO: </b> <%= total_c_f %>
+    </p>
+  </span>
+  <br>
+  <br>
+  <br>
+<% end %>
