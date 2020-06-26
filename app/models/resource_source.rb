@@ -9,6 +9,11 @@ class ResourceSource < Compras::Model
   orderize "created_at"
   filterize
 
+  scope :by_contract, lambda { |q|
+    ids = Expense.joins{ contract_financials }.where{ contract_financials.contract_id.eq(q) }.pluck(:resource_source_id)
+    where("id in (?)", ids)
+  }
+
   def to_s
     "#{code}"
   end
