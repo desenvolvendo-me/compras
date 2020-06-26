@@ -98,3 +98,9 @@ pt-BR:
     supplier_balance_per_service_order_report:
       one: 'Relatório de Saldo Fornecedor por Ordem de Serviço'
       other: 'Relatório de Saldos Fornecedor por Ordem de Serviço'
+
+  supply_request_per_secretary_reports:
+    supply_request_per_secretary_report:
+      one: 'Relatório de Pedido de Fornecimento'
+      other: 'Relatório de Pedidos de Fornecimento '
+
