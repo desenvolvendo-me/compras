@@ -12,9 +12,15 @@ class ResourceSource < Compras::Model
   filterize
 
   scope :by_contract, lambda { |q|
-    ids = Expense.joins{ contract_financials }.where{ contract_financials.contract_id.eq(q) }.pluck(:resource_source_id)
-    where("id in (?)", ids)
+    joins(expenses:[:contract_financials])
+        .where(compras_contract_financials:{contract_id: q})
   }
+  scope :by_id, lambda { |q|
+    unless q.blank?
+      where(id: q)
+    end
+  }
+
 
   def to_s
     "#{code}"
