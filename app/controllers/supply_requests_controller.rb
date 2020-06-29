@@ -39,7 +39,7 @@ class SupplyRequestsController < CrudController
   def filters(collection)
     purchase_solicitation = get_purchase_solicitation_by_purchase_unit
 
-    collection.where("purchase_solicitation_id in (?) or compras_purchase_solicitations.user_id = ? ",
+    collection.where("purchase_solicitation_id in (?) or compras_supply_requests.user_id = ? ",
                      purchase_solicitation,current_user.id )
   end
 
