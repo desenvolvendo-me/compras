@@ -1,11 +1,11 @@
 <div class="yui3-g">
   <div class="yui3-u-1-2">
-    <%= f.input :contract, as: :modal, modal_url: modal_contracts_url,
+    <%= f.input :contract, as: :modal, data_url: modal_contracts_url,
                 hidden_field: :contract_id, :include_blank => true %>
   </div>
 
   <div class="yui3-u-1-2">
-    <%= f.input :resource_source, as: :modal, modal_url: modal_resource_sources_url,
+    <%= f.input :resource_source, as: :modal, data_url: modal_resource_sources_url,
                 hidden_field: :resource_source_id, :include_blank => true %>
   </div>
 
