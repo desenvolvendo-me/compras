@@ -22,6 +22,8 @@ class SupplyRequest < Compras::Model
   belongs_to :signature_secretary, class_name: 'Secretary'
   belongs_to :signature_responsible, class_name: 'Employee'
 
+  has_one :secretary, class_name: 'Secretary', through: :department
+
   has_many :items, class_name: 'SupplyRequestItem', dependent: :destroy
   has_many :supply_orders, class_name: "SupplyOrderRequests"
   has_many :supply_request_attendances, :dependent => :destroy, :order => :sequence, :inverse_of => :supply_request
@@ -33,7 +35,7 @@ class SupplyRequest < Compras::Model
   delegate :modality_number, :modality_humanize, :type_of_removal_humanize,
            to: :licitation_process, allow_nil: true
 
-  has_one :secretary, class_name: 'Secretary', through: :department
+
 
   validates :authorization_date, :contract, :purchase_solicitation, :licitation_process, :department, presence: true
   validate :items_quantity_permitted
@@ -125,9 +127,9 @@ class SupplyRequest < Compras::Model
     query = query.where{ year.eq(params[:year]) } if params[:year].present?
     query = query.where{ creditor_id.eq(params[:creditor_id]) } if params[:creditor_id].present?
     query = query.where{ authorization_date.eq(params[:authorization_date]) } if params[:authorization_date].present?
-    query = query.where{ department.eq(params[:department_id]) } if params[:department_id].present?
+    query = query.where{ department_id.eq(params[:department_id]) } if params[:department_id].present?
     query = query.joins{ purchase_solicitation }.where{purchase_solicitation.department_id.eq(params[:purchase_department_id]) } if params[:purchase_department_id].present?
-    query = query.where{ secretary.id.eq(params[:secretary_id]) } if params[:secretary_id].present?
+    query = query.joins{ secretary }.where{ secretary.id.eq(params[:secretary_id]) } if params[:secretary_id].present?
 
     query
   end
