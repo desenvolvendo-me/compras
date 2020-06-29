@@ -33,7 +33,7 @@ class Secretary < Compras::Model
   scope :by_contract, lambda {|q|
     department_ids = ContractDepartment.joins(:department).where(contract_id: q).pluck(:department_id)
 
-    joins{ departments }.where{ departments.id.in(department_ids) }
+    joins{ departments }.where{ departments.id.in(department_ids) }&.uniq(:id)
   }
 
 
