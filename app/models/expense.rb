@@ -48,7 +48,7 @@ class Expense < Compras::Model
   filterize
 
   def to_s
-    "Projeto Atividade: #{project_activity} e Fonte: #{resource_source}"
+    "Projeto: #{project_activity} e Fonte: #{resource_source} e Natureza: #{nature_expense&.nature}"
   end
 
   def set_destine_type
