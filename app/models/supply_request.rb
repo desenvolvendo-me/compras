@@ -8,7 +8,8 @@ class SupplyRequest < Compras::Model
                   :justification, :supply_request_file,:user_id, :signature_responsible_id,
                   :department_id, :number_year, :secretary_signature, :signature_secretary_id
 
-  attr_modal :number, :creditor_id,:authorization_date, :licitation_process_id, :user, :purchase_solicitation_id
+  attr_modal :number, :creditor_id, :authorization_date, :department_id,  :secretary_id, :purchase_department_id
+  attr_accessor :secretary_id, :purchase_department_id
 
   mount_uploader :supply_request_file, UnicoUploader
 
@@ -31,6 +32,8 @@ class SupplyRequest < Compras::Model
 
   delegate :modality_number, :modality_humanize, :type_of_removal_humanize,
            to: :licitation_process, allow_nil: true
+
+  has_one :secretary, class_name: 'Secretary', through: :department
 
   validates :authorization_date, :contract, :purchase_solicitation, :licitation_process, :department, presence: true
   validate :items_quantity_permitted
@@ -109,10 +112,23 @@ class SupplyRequest < Compras::Model
   end
 
   # def set_contract_item_balance
-  #   contract_balance = ContractItemBalance.new
+  #   contract_balance = ContractItemBalance.newpurchase
   #   contract_balance.movable = self
   #   contract_balance.contract_balance = true
   #   contract_balance.quantity_type = QuantityType::NEGATIVE_AMOUNT
   #   contract_balance.save
   # end
+
+  def self.filter(params)
+    query = scoped
+    query = query.where{ number.eq(params[:number]) } if params[:number].present?
+    query = query.where{ year.eq(params[:year]) } if params[:year].present?
+    query = query.where{ creditor_id.eq(params[:creditor_id]) } if params[:creditor_id].present?
+    query = query.where{ authorization_date.eq(params[:authorization_date]) } if params[:authorization_date].present?
+    query = query.where{ department.eq(params[:department_id]) } if params[:department_id].present?
+    query = query.joins{ purchase_solicitation }.where{purchase_solicitation.department_id.eq(params[:purchase_department_id]) } if params[:purchase_department_id].present?
+    query = query.where{ secretary.id.eq(params[:secretary_id]) } if params[:secretary_id].present?
+
+    query
+  end
 end
