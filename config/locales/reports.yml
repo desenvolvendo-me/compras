@@ -104,3 +104,8 @@ pt-BR:
       one: 'Relatório de Pedido de Fornecimento'
       other: 'Relatório de Pedidos de Fornecimento '
 
+  contract_per_resource_source_reports:
+    contract_per_resource_source_report:
+      one: 'Relatório de Contrato por Fonte de Recurso'
+      other: 'Relatório de Contrato por Fonte de Recurso'
+
