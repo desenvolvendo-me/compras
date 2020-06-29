@@ -1,10 +1,16 @@
 class Secretary < Compras::Model
-  attr_accessible :name, :employee_id, :secretary_settings, :secretary_settings_attributes
+  attr_accessible :name, :secretary_settings, :secretary_settings_attributes
 
-  belongs_to :employee
+  attr_modal :name, :employee_id
+  #
+  attr_accessor :employee, :employee_id
 
   has_many :contract_financials
   has_many :secretary_settings
+  has_many :employees, through: :secretary_settings
+
+  # belongs_to :employee
+
 
   accepts_nested_attributes_for :secretary_settings, :allow_destroy => true
 
@@ -15,7 +21,7 @@ class Secretary < Compras::Model
   }
 
   scope :by_user, lambda { |current_user|
-    joins(employee:[:user]).where { compras_users.id.eq current_user }
+    joins(secretary_settings:[employee:[:user]]).where { compras_users.id.eq current_user }
   }
 
   scope :by_contract_expense, lambda { |expense, contract|
@@ -30,6 +36,18 @@ class Secretary < Compras::Model
 
   def to_s
     "#{name}"
+  end
+
+  def self.filter(params)
+    params[:employee_ids].delete('')
+    query = scoped.joins { secretary_settings.outer.employee.outer.individual.outer.person.outer }
+    query = query.select('compras_secretaries.id, compras_secretaries.name, unico_people.name as employee')
+    query = query.where{ secretary_settings.employee_id.in(params[:employee_ids]) } if params[:employee_ids].present?
+    query = query.where{ 'compras_secretaries.id = compras_secretary_settings.secretary_id' } if params[:employee_ids].present?
+    query = query.where { name.matches "#{params[:name]}%" } if params[:name].present?
+
+
+    query
   end
 
   private
