@@ -98,3 +98,8 @@ pt-BR:
     supplier_balance_per_service_order_report:
       one: 'Relatório de Saldo Fornecedor por Ordem de Serviço'
       other: 'Relatório de Saldos Fornecedor por Ordem de Serviço'
+
+  contract_per_resource_source_reports:
+    contract_per_resource_source_report:
+      one: 'Relatório de Contrato por Fonte de Recurso'
+      other: 'Relatório de Contrato por Fonte de Recurso'
