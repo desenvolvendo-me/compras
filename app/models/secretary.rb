@@ -46,7 +46,7 @@ class Secretary < Compras::Model
   end
 
   def self.filter(params)
-    params[:employee_ids].delete('')
+    params[:employee_ids]&.delete('')
     query = scoped.joins { secretary_settings.outer.employee.outer.individual.outer.person.outer }
     query = query.select('compras_secretaries.id, compras_secretaries.name, unico_people.name as employee')
     query = query.where{ secretary_settings.employee_id.in(params[:employee_ids]) } if params[:employee_ids].present?
