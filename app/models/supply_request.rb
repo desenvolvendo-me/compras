@@ -32,7 +32,7 @@ class SupplyRequest < Compras::Model
   delegate :modality_number, :modality_humanize, :type_of_removal_humanize,
            to: :licitation_process, allow_nil: true
 
-  validates :authorization_date, :contract, :purchase_solicitation, :licitation_process, presence: true
+  validates :authorization_date, :contract, :purchase_solicitation, :licitation_process, :department, presence: true
   validate :items_quantity_permitted
   validate :at_least_one_item
 
