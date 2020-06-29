@@ -20,10 +20,10 @@
     <div id="container">
       <% if current_prefecture %>
         <div id="header">
-          <p><%= prefecture_image %></p>
+          <p style="position: absolute"><%= prefecture_image %></p>
 
-          <h2><%= current_prefecture.name %> | CNPJ: <%= current_prefecture.cnpj %></h2>
-          <h3>E-mail: <%= current_prefecture.email %> | Telefone: <%= current_prefecture.phone %> | Fax: <%= current_prefecture.fax %></h3>
+          <h2 class="text-center"><%= current_prefecture.name %> | CNPJ: <%= current_prefecture.cnpj %></h2>
+          <h3 class="text-center">E-mail: <%= current_prefecture.email %> | Telefone: <%= current_prefecture.phone %> | Fax: <%= current_prefecture.fax %></h3>
         </div>
       <% end %>
 
