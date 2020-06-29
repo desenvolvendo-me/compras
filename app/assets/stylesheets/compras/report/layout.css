@@ -28,6 +28,10 @@ h1 {
   text-align: center;
 }
 
+.text-center{
+    text-align: center;
+}
+
 .margin-top {
   margin-top: 20px;
 }

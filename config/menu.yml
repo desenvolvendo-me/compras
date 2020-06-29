@@ -117,3 +117,5 @@ menu:
     - report_extract_consumption_per_processes
     - report_department_requests
     - report_pledge_requests
+    - "Financeiro":
+        - report_contract_per_resource_sources
