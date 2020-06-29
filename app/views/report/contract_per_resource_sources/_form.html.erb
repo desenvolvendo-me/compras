@@ -12,14 +12,22 @@
 </div>
 <script>
   $("#contract_per_resource_source_report_contract_id").change(function(){
-    url= Routes.modal_resource_sources
+    url= Routes.modal_resource_sources;
       var contract = $(this).val(),
       params = {by_contract: contract};
 
     if (contract) {
       url += "?" + jQuery.param(params);
-      $("#contract_per_resource_source_report_resource_source").attr('data-modal-url', url);
+      $("#contract_per_resource_source_report_resource_source").data('modal-url', url);
     }
 
+  })
+    $(function(){
+      if($("#contract_per_resource_source_report_contract_id").val() === ''){
+        $("#contract_per_resource_source_report_contract").val('');
+      }
+      if($('#contract_per_resource_source_report_resource_source_id').val() === ''){
+        $('#contract_per_resource_source_report_resource_source').val('');
+      }
   })
 </script>
