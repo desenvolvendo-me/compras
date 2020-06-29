@@ -7,12 +7,12 @@
 <div>
   <table class="records">
     <thead>
-    <tr style="text-align: center;">
-      <td> GESTÂO FINANCEIRA DE CONTRATO POR FONTE DE RECURSO</td>
+    <tr>
+      <td colspan="2" class="text-center"> GESTÂO FINANCEIRA DE CONTRATO POR FONTE DE RECURSO</td>
     </tr>
     <tr>
-      <td class="back-blue"> <b>CONTRATO:</b> <%= @contract.to_s %> &nbsp;&nbsp; <b>FORNECEDOR:</b> <%= @contract.creditor %>  VALOR: <%= @contract.contract_value %></td>
-      <td class="text-right back-blue"><b>VALOR TOTAL: <%= number_to_currency @contract.contract_value || 0 %> </b></td>
+      <td class="back-blue"> <b>CONTRATO:</b> <%= @contract.to_s %> &nbsp;&nbsp; <b>FORNECEDOR:</b> <%= @contract.creditor %></td>
+      <td class="text-right back-blue"><b>VALOR TOTAL: <%= number_to_currency @contract&.financials&.sum(:value) || 0 %> </b></td>
     </tr>
     </thead>
     <tbody>
@@ -29,20 +29,20 @@
 
 <% total_resource_sources = 0 %>
 <% @resource_sources.each do |resource_source| %>
-
+  <% financials = @contract.financials.joins(:expense).where(compras_expenses:{resource_source_id: resource_source.id}) %>
   <div class="box">
     <div class="box-header justify-between">
       <span>
         <b> FONTE DE RECURSO: </b> <%= resource_source.to_s %>
       </span>
         <span>
-        <b> VALOR FONTE DE RECURSO: </b> <%=  %>
+        <b> VALOR FONTE DE RECURSO: </b> <%= financials&.sum(&:value) %>
       </span>
     </div>
     <% total_resource_source = 0 %>
     <div class="box-body">
-      <% @contract.financials.joins(:expense).where(compras_expenses:{resource_source_id: resource_source.id}).each do |financial| %>
-        <table class="records">
+      <% financials&.each do |financial| %>
+        <table class="records" style="margin-bottom: 10px !important;">
           <thead>
             <tr>
               <th width="40%"><b>SECRETARIA: <%= financial.secretary.to_s %> </b></th>
@@ -75,7 +75,7 @@
             <td class="text-right"><b>SALDO</b></td>
             <td><%= number_to_currency financial.value - sub_total %></td>
           </tr>
-          <% total_resource_source = 0 %> <%# Provavelmente é uma soma com os valoraes acima %>
+          <% total_resource_source += financial.value - sub_total %> <%# Provavelmente é uma soma com os valoraes acima %>
           </tbody>
         </table>
 
