@@ -13,6 +13,9 @@ class PurchaseSolicitationsController < CrudController
   has_scope :by_deparment, type: :boolean, default: true, only: [:index] do |controller, scope|
     scope.by_deparment(controller.current_user.id)
   end
+  # has_scope :by_secretaries_permited, type: :boolean, default: true,  only: [:index] do |controller, scope|
+  #   scope.by_secretaries_permited(controller.current_user.id)
+  # end
 
   def new
     object = build_resource

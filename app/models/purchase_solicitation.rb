@@ -106,6 +106,11 @@ class PurchaseSolicitation < Compras::Model
     where("compras_purchase_solicitations.department_id in (?)", departments)
   }
 
+  scope :by_secretaries_permited, lambda{|current_user|
+    joins{ secretaries.secretary.departments.department_people }
+        .where{ secretaries.secretary.departments.department_people.user_id.eq(current_user) }
+  }
+
   scope :by_model_request, lambda {|type|
     where {model_request.eq(type)}
   }
