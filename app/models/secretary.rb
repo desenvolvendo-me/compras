@@ -3,8 +3,7 @@ class Secretary < Compras::Model
 
   attr_modal :name, :employee_id
   attr_accessor :employee, :employee_id
-
-  belongs_to :employee
+  
   belongs_to :unit, class_name: "Organ"
 
   has_many :contract_financials
