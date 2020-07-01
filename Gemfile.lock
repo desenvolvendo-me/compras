@@ -179,7 +179,7 @@ GEM
       activerecord (>= 3.0)
     method_source (0.8.2)
     mime-types (1.25.1)
-    minitest (5.14.0)
+    minitest (5.14.1)
     minitest-reporters (1.4.2)
       ansi
       builder
@@ -213,7 +213,7 @@ GEM
       responders
       rspec (~> 2.6)
       rspec-core (~> 2.6)
-    power_assert (1.1.7)
+    power_assert (1.2.0)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
@@ -338,7 +338,7 @@ GEM
       activemodel (~> 3.0)
       railties (~> 3.0)
     syntax (1.2.2)
-    test-unit (3.3.5)
+    test-unit (3.3.6)
       power_assert
     thor (1.0.1)
     tilt (1.4.1)
