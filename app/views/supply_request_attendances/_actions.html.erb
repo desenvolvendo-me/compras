@@ -1,7 +1,7 @@
 <div class="actions">
   <ul>
     <li>
-      <%= link_to 'Voltar para a Pedido de Fornecimento', edit_supply_request_path(@parent) %>
+      <%= link_to 'Voltar para a Pedido de Fornecimento', edit_supply_request_path(@parent),class: "button primary" %>
     </li>
     <li>
       <%= create_link(:supply_request_id => @parent.id) %>
