@@ -1,0 +1,33 @@
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :contract, as: :modal, data_url: modal_contracts_url,
+                hidden_field: :contract_id, :include_blank => true, required: true %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :resource_source, as: :modal, data_url: modal_resource_sources_url,
+                hidden_field: :resource_source_id, :include_blank => true %>
+  </div>
+
+</div>
+<script>
+  $("#contract_per_resource_source_report_contract_id").change(function(){
+    url= Routes.modal_resource_sources;
+      var contract = $(this).val(),
+      params = {by_contract: contract};
+
+    if (contract) {
+      url += "?" + jQuery.param(params);
+      $("#contract_per_resource_source_report_resource_source").data('modal-url', url);
+    }
+
+  })
+    $(function(){
+      if($("#contract_per_resource_source_report_contract_id").val() === ''){
+        $("#contract_per_resource_source_report_contract").val('');
+      }
+      if($('#contract_per_resource_source_report_resource_source_id').val() === ''){
+        $('#contract_per_resource_source_report_resource_source').val('');
+      }
+  })
+</script>

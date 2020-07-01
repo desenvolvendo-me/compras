@@ -100,6 +100,8 @@ menu:
       - dashboard_secretaries
 
   - "Relatórios":
+    - "Consumo":
+        - report_supply_request_per_secretaries
     - report_supplier_balance_per_service_orders
     - report_bidding_schedules
     - report_purchase_process_ratifications_by_periods
@@ -115,3 +117,5 @@ menu:
     - report_extract_consumption_per_processes
     - report_department_requests
     - report_pledge_requests
+    - "Financeiro":
+        - report_contract_per_resource_sources

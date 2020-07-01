@@ -1,0 +1,72 @@
+<div>
+  <table class="records">
+    <thead>
+    <tr style="text-align: center;">
+      <td> RELATÓRIO DE PEDIDO DE FORNECIMENTO POR SECRETARIA</td>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+</div>
+
+<div style="text-align: justify">
+
+</div>
+
+<br>
+<% total_secretaries = 0 %>
+<% @secretaries_departments&.each do |ids| %>
+  <div style="text-align: justify">
+  <span>
+    <b> SECRETARIA: </b> <%= Secretary.find(ids[0]).to_s %>
+  </span>
+    <br>
+    <span>
+    <b> DEPARTAMENTO: </b> <%= Department.find(ids[1]).to_s %>
+  </span>
+  </div>
+  <p>
+  <div>
+    <table class="records">
+      <thead>
+      <tr>
+        <th width="15%" style="text-align: center">NUMERO PEDIDO</th>
+        <th width="60%">MATERIAL</th>
+        <th width="5%" style="text-align: center">QUANTIDADE</th>
+        <th width="20%" style="text-align: center">VALOR</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% total_i = 0 %>
+      <% @supply_requests.where(department_id: ids[1])&.each do |supply_request| %>
+        <% SupplyRequestItem.joins(:supply_request).where(supply_request_id: supply_request).by_material_id(@report.material_id)&.each do |item| %>
+          <tr>
+            <td style="text-align: center"><%= supply_request.number %></td>
+            <td><%= item.material.to_s %></td>
+            <td style="text-align: center"><%= item.quantity %></td>
+            <td style="text-align: center"><%= number_to_currency item.get_unit_price.to_f * item.quantity.to_f  %></td>
+            <% total_i += item.get_unit_price.to_f * item.quantity.to_f %>
+          </tr>
+        <% end %>
+      <% end %>
+      <tr>
+        <td colspan="1"></td>
+        <td colspan="1"></td>
+        <td colspan="1"></td>
+        <td style="text-align: center"><h2><b><%= number_to_currency total_i %></b></h2></td>
+      </tr>
+      <% total_secretaries += total_i %>
+      </tbody>
+
+    </table>
+  </div>
+  </p>
+<% end %>
+<span>
+  <p>
+  <h1><b> TOTAL DOS PEDIDOS: </b> <%= number_to_currency total_secretaries %></h1>
+  </p>
+</span>
+
