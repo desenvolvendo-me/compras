@@ -103,19 +103,20 @@ menu:
     - "Consumo":
         - report_supply_request_per_secretaries
     - report_supplier_balance_per_service_orders
-    - report_bidding_schedules
-    - report_purchase_process_ratifications_by_periods
-    - report_purchase_solicitations
-    - report_purchased_item_prices
-    - report_materials
-    - report_contracts
-    - report_licitation_processes
     - report_balance_per_creditors
     - report_balance_per_process_and_contracts
     - report_total_products_purchases
-    - report_total_purchase_per_element_and_natures
     - report_extract_consumption_per_processes
-    - report_department_requests
-    - report_pledge_requests
     - "Financeiro":
         - report_contract_per_resource_sources
+    - "Gestão Financeira de Contrato":
+        - report_bidding_schedules
+        - report_purchase_process_ratifications_by_periods
+        - report_purchase_solicitations
+        - report_purchased_item_prices
+        - report_materials
+        - report_contracts
+        - report_licitation_processes
+        - report_department_requests
+        - report_pledge_requests
+        - report_total_purchase_per_element_and_natures
