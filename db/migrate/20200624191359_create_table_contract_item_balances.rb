@@ -9,7 +9,6 @@ class CreateTableContractItemBalances < ActiveRecord::Migration
       t.integer  "creditor_id"
       t.integer  "material_id"
       t.boolean  "contract_balance"
-      t.integer  "quantity"
       t.timestamps "created_at",       :null => false
     end
 
