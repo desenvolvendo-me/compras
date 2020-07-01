@@ -101,3 +101,20 @@ div.inline_buttons {
     padding: 10px 5px;
     height: 41px;
 }
+
+form.simple_form .ui-tabs ul {
+    background: #4a83c0;
+    background: -moz-linear-gradient(#4a83c0, #598ec5);
+    background: -webkit-linear-gradient(#4a83c0, #598ec5);
+    background: linear-gradient(#4a83c0, #598ec5);
+    margin-bottom: 0.5em;
+}
+form.simple_form .ui-tabs .ui-tabs-nav a {
+    color: #FFF;
+    display: block !important;
+    text-decoration: none;
+    text-transform: capitalize;
+}
+form.simple_form .ui-tabs li.ui-tabs-active a {
+    background: rgb(114, 146, 179);
+}
