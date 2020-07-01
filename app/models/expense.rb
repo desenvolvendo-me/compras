@@ -35,13 +35,13 @@ class Expense < Compras::Model
 
   scope :by_contract, lambda {|q|
     joins { contract_financials }.
-        where { contract_financials.contract_id.eq(q) }
+        where { contract_financials.contract_id.eq(q) }&.uniq(:id)
   }
 
   scope :by_secretary, lambda{|q|
     purchasing_unit_ids = Department.joins{ purchasing_unit }.where { secretary_id.eq(q) }.pluck(:purchasing_unit_id)
 
-    joins{ purchasing_unit }.where { purchasing_unit_id.in(purchasing_unit_ids) }
+    joins{ purchasing_unit }.where { purchasing_unit_id.in(purchasing_unit_ids) }&.uniq(:id)
   }
 
   orderize "id DESC"

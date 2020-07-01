@@ -36,6 +36,12 @@ class Secretary < Compras::Model
     joins{ departments }.where{ departments.id.eq(q) }.limit(1)
   }
 
+  scope :by_contract, lambda {|q|
+    department_ids = ContractDepartment.joins(:department).where(contract_id: q).pluck(:department_id)
+
+    joins{ departments }.where{ departments.id.in(department_ids) }&.uniq(:id)
+  }
+
 
   orderize "id DESC"
   filterize
