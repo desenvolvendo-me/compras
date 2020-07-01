@@ -69,9 +69,9 @@ module CrudHelper
     can?(:create, main_controller_name) && respond_to?("new_#{main_controller_name.singularize}_path")
   end
 
-  def create_link
+  def create_link(optional_params = {})
     link_to 'Cadastrar',
-            new_resource_path,
+            new_resource_path(optional_params||{}),
             class: "button primary",
             title: t("#{controller_name}.new", resource: singular, cascade: true)
   end
