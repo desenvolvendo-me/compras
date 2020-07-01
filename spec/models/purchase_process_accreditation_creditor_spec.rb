@@ -41,7 +41,7 @@ describe PurchaseProcessAccreditationCreditor do
         subject.stub(:creditor_company?).and_return(true)
       end
 
-      xit { should validate_presence_of :company_size }
+      it { should validate_presence_of :company_size }
     end
 
     context 'with creditor_representative' do
@@ -52,12 +52,12 @@ describe PurchaseProcessAccreditationCreditor do
         subject.stub(:creditor_representative => creditor_representative)
       end
 
-      xit { should validate_presence_of :kind }
+      it { should validate_presence_of :kind }
     end
   end
 
   describe 'to_s' do
-    xit 'should return the to_s of creditor' do
+    it 'should return the to_s of creditor' do
       subject.stub(creditor: double(:creditor, to_s: 'creditor 1'))
 
       expect(subject.to_s).to eq 'creditor 1'

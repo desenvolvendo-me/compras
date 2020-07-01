@@ -22,22 +22,22 @@ describe PriceCollection do
   end
 
   context 'validations' do
-    xit { should validate_presence_of :year }
-    xit { should validate_presence_of :date }
-    xit { should validate_presence_of :delivery_location }
-    xit { should validate_presence_of :employee }
-    xit { should validate_presence_of :payment_method }
-    xit { should validate_presence_of :period }
-    xit { should validate_presence_of :period_unit }
-    xit { should validate_presence_of :object_description }
-    xit { should validate_presence_of :expiration }
-    xit { should validate_presence_of :proposal_validity }
-    xit { should validate_presence_of :proposal_validity_unit }
-    xit { should validate_presence_of :type_of_calculation }
+    it { should validate_presence_of :year }
+    it { should validate_presence_of :date }
+    it { should validate_presence_of :delivery_location }
+    it { should validate_presence_of :employee }
+    it { should validate_presence_of :payment_method }
+    it { should validate_presence_of :period }
+    it { should validate_presence_of :period_unit }
+    it { should validate_presence_of :object_description }
+    it { should validate_presence_of :expiration }
+    it { should validate_presence_of :proposal_validity }
+    it { should validate_presence_of :proposal_validity_unit }
+    it { should validate_presence_of :type_of_calculation }
 
-    xit { should allow_value('2012').for(:year) }
-    xit { should_not allow_value('201').for(:year) }
-    xit { should_not allow_value('a201').for(:year) }
+    it { should allow_value('2012').for(:year) }
+    it { should_not allow_value('201').for(:year) }
+    it { should_not allow_value('a201').for(:year) }
 
     it { should auto_increment(:code).by(:year) }
 
@@ -46,7 +46,7 @@ describe PriceCollection do
 
       it { should allow_value(Date.tomorrow).for(:date) }
 
-      xit 'should not allow date before today' do
+      it 'should not allow date before today' do
         expect(subject).not_to allow_value(Date.yesterday).for(:date).
                                                       with_message("deve ser igual ou posterior a data atual (#{I18n.l(Date.current)})")
       end
@@ -57,7 +57,7 @@ describe PriceCollection do
 
       it { should allow_value(Date.tomorrow).for(:expiration) }
 
-      xit 'should not allow expiration before today' do
+      it 'should not allow expiration before today' do
         expect(subject).not_to allow_value(Date.yesterday).for(:expiration).
           with_message("deve ser igual ou posterior a data atual (#{I18n.l(Date.current)})")
       end
@@ -65,13 +65,13 @@ describe PriceCollection do
 
   end
 
-  xit "should return code_and_year as to_s method" do
+  it "should return code_and_year as to_s method" do
     subject.stub(:code => 5, :year => 2012)
 
     expect(subject.to_s).to eq '5/2012'
   end
 
-  xit 'should return the winner proposal' do
+  it 'should return the winner proposal' do
     proposal_1 = double('proposal_1', :total_price => 500)
     proposal_2 = double('proposal_2', :total_price => 300)
 
@@ -80,7 +80,7 @@ describe PriceCollection do
     expect(subject.winner_proposal).to eq proposal_2
   end
 
-  xit 'should return the full period' do
+  it 'should return the full period' do
     subject.period = 10
     subject.stub(:period_unit_humanize).and_return('dias')
 
@@ -96,14 +96,14 @@ describe PriceCollection do
   end
 
   describe "#validate_quantity_of_creditors" do
-    xit "when returns 2 creditors" do
+    it "when returns 2 creditors" do
       subject.stub(:proposals_count).and_return(2)
       subject.valid?
 
       expect(subject.errors[:base]).to include "deve ter no mínimo três fornecedores"
     end
 
-    xit "when returns 4 creditors" do
+    it "when returns 4 creditors" do
       subject.stub(:proposals_count).and_return(4)
       subject.valid?
 
@@ -111,7 +111,7 @@ describe PriceCollection do
     end
   end
 
-  xit 'should have at least one item' do
+  it 'should have at least one item' do
     expect(subject.items).to be_empty
 
     subject.valid?
@@ -119,7 +119,7 @@ describe PriceCollection do
     expect(subject.errors[:items]).to include 'é necessário cadastrar pelo menos um item'
   end
 
-  xit 'should have at least one item without considering the marked for destruction ones' do
+  it 'should have at least one item without considering the marked for destruction ones' do
     item_marked_for_destruction = double('item', :material_id => 1, :marked_for_destruction? => true)
 
     subject.stub(:items).and_return([item_marked_for_destruction])

@@ -17,7 +17,7 @@ describe SupplyOrderItem do
     end
 
     describe '#authorization_value' do
-      xit 'should be greater than 0' do
+      it 'should be greater than 0' do
         subject.authorization_value = 0
 
         expect(subject.valid?).to be_false
@@ -26,7 +26,7 @@ describe SupplyOrderItem do
     end
 
     describe '#authorization_quantity' do
-      xit 'should be greater than 0' do
+      it 'should be greater than 0' do
         subject.authorization_quantity = 0
 
         expect(subject.valid?).to be_false
@@ -36,7 +36,7 @@ describe SupplyOrderItem do
   end
 
   describe "#balance" do
-    xit "when quantity is greater than authorized balance is greater than zero" do
+    it "when quantity is greater than authorized balance is greater than zero" do
       subject.stub(:quantity).and_return(3)
       subject.stub(:authorized_quantity).and_return(1)
 
@@ -47,7 +47,7 @@ describe SupplyOrderItem do
   describe "#quantity" do
     let(:pledge_item) { double :pledge_item }
 
-    xit 'tries to return pledge_item quantity' do
+    it 'tries to return pledge_item quantity' do
       subject.stub(pledge_item: pledge_item)
       pledge_item.should_receive(:quantity).and_return(0)
 
@@ -58,7 +58,7 @@ describe SupplyOrderItem do
   describe '#value' do
     let(:pledge_item) { double :pledge_item }
 
-    xit 'tries to return pledge_item value' do
+    it 'tries to return pledge_item value' do
       subject.stub(pledge_item: pledge_item)
       pledge_item.should_receive(:unit_price).and_return(44.4)
 
@@ -72,12 +72,12 @@ describe SupplyOrderItem do
       subject.stub(:authorized_value).and_return 3
     end
 
-    xit 'returns the value - authorized value' do
+    it 'returns the value - authorized value' do
       expect(subject.value_balance).to eq 7
     end
   end
 
-  xit "#authorization_quantity_should_be_lower_than_quantity" do
+  it "#authorization_quantity_should_be_lower_than_quantity" do
     subject.stub(:real_authorization_quantity).and_return(4)
     subject.stub(:supply_order_item_balance).and_return(3)
 
@@ -93,7 +93,7 @@ describe SupplyOrderItem do
       subject.stub(authorization_value_limit: '4,00')
     end
 
-    xit 'sets an error if authorization_value is greater than value' do
+    it 'sets an error if authorization_value is greater than value' do
       subject.valid?
 
       expect(subject.errors[:authorization_value]).to include("deve ser menor ou igual a 4,00")
@@ -106,7 +106,7 @@ describe SupplyOrderItem do
         subject.stub(pledge_item_estimated_total_price: nil)
       end
 
-      xit 'should return 0' do
+      it 'should return 0' do
         expect(subject.total_price).to eq 0
       end
     end
@@ -116,7 +116,7 @@ describe SupplyOrderItem do
         subject.stub(pledge_item_estimated_total_price: 50)
       end
 
-      xit 'should return the pledge_item_estimated_total_price' do
+      it 'should return the pledge_item_estimated_total_price' do
         expect(subject.total_price).to eq 50
       end
     end

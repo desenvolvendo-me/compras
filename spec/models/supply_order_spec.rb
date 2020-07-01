@@ -1,4 +1,3 @@
-# require 'minitest/autorun'
 # require 'model_helper'
 # require 'app/models/supply_order'
 # require 'app/models/supply_order_item'

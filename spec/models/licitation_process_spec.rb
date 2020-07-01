@@ -69,7 +69,7 @@ describe LicitationProcess do
   it { should belong_to :payment_method }
   it { should belong_to :readjustment_index }
 
-  xit { should have_and_belong_to_many(:purchase_solicitations) }
+  it { should have_and_belong_to_many(:purchase_solicitations) }
   it { should have_many(:licitation_notices).dependent(:destroy) }
   it { should have_many(:publications).dependent(:destroy).order(:id) }
   it { should have_many(:bidders).dependent(:destroy).order(:id) }
@@ -81,7 +81,7 @@ describe LicitationProcess do
   it { should have_many(:ratifications_items).through(:licitation_process_ratifications) }
   it { should have_many(:licitation_process_ratification_creditors).through(:licitation_process_ratifications).order(:id) }
   it { should have_many(:classifications).through(:bidders) }
-  # it { should have_many(:purchase_process_budget_allocations).dependent(:destroy) }
+  it { should have_many(:purchase_process_budget_allocations).dependent(:destroy) }
   it { should have_many(:items).dependent(:restrict)}
   it { should have_many(:materials).through(:items) }
   it { should have_many(:legal_analysis_appraisals).dependent(:restrict) }
@@ -100,28 +100,28 @@ describe LicitationProcess do
   it { should have_one(:purchase_process_accreditation).dependent(:restrict) }
   it { should have_one(:trading).dependent(:restrict) }
 
-  xit { should validate_presence_of :contract_guarantees }
-  xit { should validate_presence_of :description }
-  xit { should validate_presence_of :execution_type }
-  xit { should validate_presence_of :object_type }
-  xit { should validate_presence_of :payment_method }
-  xit { should validate_presence_of :period }
-  xit { should validate_presence_of :period_unit }
-  xit { should validate_presence_of :process_date }
-  xit { should validate_presence_of :type_of_purchase }
-  xit { should validate_presence_of :year }
-  xit { should validate_duplication_of(:ranking).on(:tied_creditor_proposals) }
+  it { should validate_presence_of :contract_guarantees }
+  it { should validate_presence_of :description }
+  it { should validate_presence_of :execution_type }
+  it { should validate_presence_of :object_type }
+  it { should validate_presence_of :payment_method }
+  it { should validate_presence_of :period }
+  it { should validate_presence_of :period_unit }
+  it { should validate_presence_of :process_date }
+  it { should validate_presence_of :type_of_purchase }
+  it { should validate_presence_of :year }
+  it { should validate_duplication_of(:ranking).on(:tied_creditor_proposals) }
 
-  xit { should_not validate_presence_of :proposal_envelope_opening_date }
-  xit { should_not validate_presence_of :proposal_envelope_opening_time }
-  xit { should_not validate_presence_of :modality }
-  xit { should_not validate_presence_of :judgment_form_id }
-  xit { should_not validate_presence_of :type_of_removal }
-  xit { should_not validate_presence_of :goal }
-  xit { should_not validate_presence_of :licensor_rights_and_liabilities }
-  xit { should_not validate_presence_of :licensee_rights_and_liabilities }
+  it { should_not validate_presence_of :proposal_envelope_opening_date }
+  it { should_not validate_presence_of :proposal_envelope_opening_time }
+  it { should_not validate_presence_of :modality }
+  it { should_not validate_presence_of :judgment_form_id }
+  it { should_not validate_presence_of :type_of_removal }
+  it { should_not validate_presence_of :goal }
+  it { should_not validate_presence_of :licensor_rights_and_liabilities }
+  it { should_not validate_presence_of :licensee_rights_and_liabilities }
 
-  xit { should validate_numericality_of :budget_allocation_year }
+  it { should validate_numericality_of :budget_allocation_year }
 
   it { should delegate(:lot?).to(:judgment_form).allowing_nil(true).prefix(true) }
   it { should delegate(:item?).to(:judgment_form).allowing_nil(true).prefix(true) }
@@ -171,7 +171,7 @@ describe LicitationProcess do
   end
 
   context 'validations' do
-    xit 'should not allow year greater than to budget_allocation_year' do
+    it 'should not allow year greater than to budget_allocation_year' do
       subject.year = 2013
       subject.budget_allocation_year = 2012
 
@@ -186,12 +186,12 @@ describe LicitationProcess do
       subject.type_of_purchase = PurchaseProcessTypeOfPurchase::LICITATION
     end
 
-    xit { should validate_presence_of :modality }
-    xit { should validate_presence_of :judgment_form_id }
-    xit { should validate_presence_of :envelope_delivery_date }
-    xit { should validate_presence_of :envelope_delivery_time }
-    xit { should validate_presence_of :expiration }
-    xit { should validate_presence_of :expiration_unit }
+    it { should validate_presence_of :modality }
+    it { should validate_presence_of :judgment_form_id }
+    it { should validate_presence_of :envelope_delivery_date }
+    it { should validate_presence_of :envelope_delivery_time }
+    it { should validate_presence_of :expiration }
+    it { should validate_presence_of :expiration_unit }
   end
 
   context "when is a licitation" do
@@ -199,9 +199,9 @@ describe LicitationProcess do
       subject.object_type = PurchaseProcessObjectType::PERMITS
     end
 
-    xit { should validate_presence_of :goal }
-    xit { should validate_presence_of :licensor_rights_and_liabilities }
-    xit { should validate_presence_of :licensee_rights_and_liabilities }
+    it { should validate_presence_of :goal }
+    it { should validate_presence_of :licensor_rights_and_liabilities }
+    it { should validate_presence_of :licensee_rights_and_liabilities }
   end
 
   context "when is a direct purchase" do
@@ -209,9 +209,9 @@ describe LicitationProcess do
       subject.type_of_purchase = PurchaseProcessTypeOfPurchase::DIRECT_PURCHASE
     end
 
-    xit { should validate_presence_of :type_of_removal }
-    xit { should validate_presence_of :justification }
-    xit { should validate_presence_of :justification_and_legal }
+    it { should validate_presence_of :type_of_removal }
+    it { should validate_presence_of :justification }
+    it { should validate_presence_of :justification_and_legal }
   end
   #
   context "when updating a record" do
@@ -224,7 +224,7 @@ describe LicitationProcess do
         subject.stub(:validate_proposal_envelope_opening_date).and_return true
       end
 
-      xit { should allow_value("11:11").for(:proposal_envelope_opening_time) }
+      it { should allow_value("11:11").for(:proposal_envelope_opening_time) }
 
       describe 'proposal_envelope_opening_date' do
         before do
@@ -232,7 +232,7 @@ describe LicitationProcess do
         end
 
         context 'when proposal envelope opening date before calculated' do
-          xit "should have error" do
+          it "should have error" do
             subject.proposal_envelope_opening_date = Date.current
             subject.stub(last_publication_date: Date.current)
             subject.stub(:validation_context).and_return(:update)
@@ -250,7 +250,7 @@ describe LicitationProcess do
       end
 
         context 'when proposal envelope opening date on calculated' do
-          xit "should not have an error" do
+          it "should not have an error" do
             subject.proposal_envelope_opening_date = Date.current
             subject.stub(last_publication_date: Date.current)
             subject.stub(:validation_context).and_return(:update)
@@ -267,7 +267,7 @@ describe LicitationProcess do
         end
 
         context 'when proposal envelope opening date after calculated' do
-          xit "should not have an error" do
+          it "should not have an error" do
             subject.proposal_envelope_opening_date = Date.current
             subject.stub(last_publication_date: Date.current)
             subject.stub(:validation_context).and_return(:update)
@@ -372,7 +372,7 @@ describe LicitationProcess do
           subject.stub(:year => 2013)
         end
 
-        xit 'should be valid' do
+        it 'should be valid' do
           subject.valid?
 
           expect(subject.errors[:process_date]).to_not include('não pode trocar o ano da data de expedição')
@@ -385,7 +385,7 @@ describe LicitationProcess do
           subject.stub(:year => 2012)
         end
 
-        xit 'should not be valid' do
+        it 'should not be valid' do
           expect(subject).to_not be_valid
 
           expect(subject.errors[:process_date]).to include('não pode trocar o ano da data de expedição')
@@ -434,17 +434,17 @@ describe LicitationProcess do
       subject.type_of_purchase = PurchaseProcessTypeOfPurchase::LICITATION
     end
 
-    xit { should allow_value("11:11").for(:envelope_delivery_time) }
-    xit { should_not allow_value("44:11").for(:envelope_delivery_time) }
+    it { should allow_value("11:11").for(:envelope_delivery_time) }
+    it { should_not allow_value("44:11").for(:envelope_delivery_time) }
   end
 
   context 'when prefecture allow_insert_past_processes is true' do
     context 'validate envelope_delivery_date related with today' do
-      xit { should allow_value(Date.current).for(:envelope_delivery_date) }
+      it { should allow_value(Date.current).for(:envelope_delivery_date) }
 
-      xit { should allow_value(Date.tomorrow).for(:envelope_delivery_date) }
+      it { should allow_value(Date.tomorrow).for(:envelope_delivery_date) }
 
-      xit 'should allow envelope_delivery_date before today' do
+      it 'should allow envelope_delivery_date before today' do
         expect(subject).to allow_value(Date.yesterday).for(:envelope_delivery_date)
       end
     end
@@ -457,11 +457,11 @@ describe LicitationProcess do
     end
 
     context 'validate envelope_delivery_date related with today' do
-      xit { should allow_value(Date.current).for(:envelope_delivery_date) }
+      it { should allow_value(Date.current).for(:envelope_delivery_date) }
 
-      xit { should allow_value(Date.tomorrow).for(:envelope_delivery_date) }
+      it { should allow_value(Date.tomorrow).for(:envelope_delivery_date) }
 
-      xit 'should not allow envelope_delivery_date before today' do
+      it 'should not allow envelope_delivery_date before today' do
         expect(subject).not_to allow_value(Date.yesterday).for(:envelope_delivery_date).
                                                       with_message("deve ser igual ou posterior a data atual (#{I18n.l(Date.current)})")
       end
@@ -477,22 +477,22 @@ describe LicitationProcess do
       subject.stub(:envelope_delivery_date).and_return(envelope_delivery_date)
     end
 
-    xit 'should allow proposal_envelope_opening_date date after envelope_delivery_date' do
+    it 'should allow proposal_envelope_opening_date date after envelope_delivery_date' do
       expect(subject).to allow_value(Date.current + 15.days).for(:proposal_envelope_opening_date)
     end
 
-    xit 'should allow proposal_envelope_opening_date date equals to envelope_delivery_date' do
+    it 'should allow proposal_envelope_opening_date date equals to envelope_delivery_date' do
       expect(subject).to allow_value(envelope_delivery_date).for(:proposal_envelope_opening_date)
     end
 
-    xit 'should not allow proposal_envelope_opening_date date before envelope_delivery_date' do
+    it 'should not allow proposal_envelope_opening_date date before envelope_delivery_date' do
       expect(subject).not_to allow_value(Date.current).for(:proposal_envelope_opening_date).
                                                     with_message("deve ser igual ou posterior a data da entrega dos envelopes (#{I18n.l envelope_delivery_date})")
     end
   end
 
   context '#validate_bidders_before_edital_publication' do
-    xit "when bidders where added before publication and is a licitation" do
+    it "when bidders where added before publication and is a licitation" do
       subject.stub(:bidders => [double], licitation?: true )
 
       subject.valid?
@@ -500,7 +500,7 @@ describe LicitationProcess do
       expect(subject.errors[:base]).to include "Habilitações não podem ser incluídos antes da publicação do edital"
     end
 
-    xit "when bidders where added before publication and is a direct purchase" do
+    it "when bidders where added before publication and is a direct purchase" do
       subject.stub(:bidders => [double], licitation?: false )
 
       subject.valid?
@@ -509,11 +509,11 @@ describe LicitationProcess do
     end
   end
 
-  xit { should allow_value('2012').for(:year) }
-  xit { should_not allow_value('201').for(:year) }
-  xit { should_not allow_value('a201').for(:year) }
+  it { should allow_value('2012').for(:year) }
+  it { should_not allow_value('201').for(:year) }
+  it { should_not allow_value('a201').for(:year) }
 
-  xit "validate attribute changes if not updateable" do
+  it "validate attribute changes if not updateable" do
     subject.stub(:updateable? => false)
     subject.year = 2014
 
@@ -792,7 +792,7 @@ describe LicitationProcess do
               )
       end
 
-      xit "should return tota_value_of_items" do
+      it "should return tota_value_of_items" do
         subject.stub(:items).and_return(items)
 
         subject.run_callbacks(:save)
@@ -832,7 +832,7 @@ describe LicitationProcess do
               )
       end
 
-      xit "should return budget_allocations_total_value" do
+      it "should return budget_allocations_total_value" do
         subject.stub(:purchase_process_budget_allocations).and_return([budget_allocation1, budget_allocation2, budget_allocation3])
         subject.run_callbacks(:save)
 
@@ -1052,7 +1052,7 @@ describe LicitationProcess do
       end
 
       context 'when budget_allocation can be used' do
-        xit 'should verify all budget_allocation marked for destruction and do nothing' do
+        it 'should verify all budget_allocation marked for destruction and do nothing' do
           budget_allocation.stub(can_be_used?: true)
           subject.stub(purchase_process_budget_allocations: purchase_process_budget_allocations)
 
@@ -1069,7 +1069,7 @@ describe LicitationProcess do
       end
 
       context 'when budget_allocation cannot be used' do
-        xit 'should verify all budget_allocation marked for destruction and add an error' do
+        it 'should verify all budget_allocation marked for destruction and add an error' do
           budget_allocation.stub(can_be_used?: false)
           subject.stub(purchase_process_budget_allocations: purchase_process_budget_allocations)
 

@@ -20,7 +20,7 @@ describe PriceCollectionProposal do
   it { should delegate(:code).to(:price_collection).prefix(true).allowing_nil(true) }
   it { should delegate(:year).to(:price_collection).prefix(true).allowing_nil(true) }
 
-  xit 'should return price_colletion and creditor as to_s method' do
+  it 'should return price_colletion and creditor as to_s method' do
     subject.stub(:price_collection).and_return('Price Collection 1')
     subject.stub(:creditor).and_return('creditor 1')
 
@@ -38,7 +38,7 @@ describe PriceCollectionProposal do
         double('user')
       end
 
-      xit 'should return the user' do
+      it 'should return the user' do
         expect(subject.build_user).to eq user
       end
     end
@@ -53,7 +53,7 @@ describe PriceCollectionProposal do
         double('Creditor')
       end
 
-      xit 'delegates to the creditor to build the user' do
+      it 'delegates to the creditor to build the user' do
         creditor.should_receive(:build_user)
 
         subject.build_user
@@ -81,13 +81,13 @@ describe PriceCollectionProposal do
         price_collection_item: price_collection_item_3)
     end
 
-    xit 'should return the items by lot' do
+    it 'should return the items by lot' do
       subject.stub(:items).and_return([item_1, item_2, item_3])
 
       expect(subject.items_by_lot('lot 1')).to eq [item_1, item_3]
     end
 
-    xit 'should return the item total value by lot' do
+    it 'should return the item total value by lot' do
       subject.stub(:items).and_return([item_1, item_2, item_3])
 
       expect(subject.item_total_value_by_lot('lot 1')).to eq 50
@@ -100,19 +100,19 @@ describe PriceCollectionProposal do
 
     before { subject.stub(creditor: creditor) }
 
-    xit 'is true when the creditor is the given user' do
+    it 'is true when the creditor is the given user' do
       user = double('User', authenticable: creditor)
 
       expect(subject.editable_by?(user)).to be_true
     end
 
-    xit 'is true when the given user is a employee' do
+    it 'is true when the given user is a employee' do
       user = double('User', authenticable: employee)
 
       expect(subject.editable_by?(user)).to be_true
     end
 
-    xit 'is false when the creditor or employee is not the given user' do
+    it 'is false when the creditor or employee is not the given user' do
       user = double('User', authenticable: double)
 
       expect(subject.editable_by?(user)).to be_false
@@ -131,7 +131,7 @@ describe PriceCollectionProposal do
     expect(subject.total_price).to eq 0
   end
 
-  xit 'should return the total price' do
+  it 'should return the total price' do
     item_1 = double('item 1', :total_price => 300)
     item_2 = double('item 2', :total_price => 200)
 
@@ -141,13 +141,13 @@ describe PriceCollectionProposal do
   end
 
   context 'item with unit price equals zero' do
-    xit 'should return true' do
+    it 'should return true' do
       subject.stub(:items => double(:any_without_unit_price? => true))
 
       expect(subject.has_item_with_unit_price_equals_zero).to be true
     end
 
-    xit 'should return false' do
+    it 'should return false' do
       subject.stub(:items => double(:any_without_unit_price? => false))
 
       expect(subject.has_item_with_unit_price_equals_zero).to be false

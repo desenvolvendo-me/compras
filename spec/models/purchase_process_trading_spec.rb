@@ -27,7 +27,7 @@ describe PurchaseProcessTrading do
   describe '#to_s' do
     let(:purchase_process) { double(:purchase_process, to_s: 'my to s')}
 
-    xit "should return the purchase_process's to_s" do
+    it "should return the purchase_process's to_s" do
       subject.stub(purchase_process: purchase_process)
       expect(subject.to_s).to eq 'my to s'
     end
@@ -39,7 +39,7 @@ describe PurchaseProcessTrading do
     let(:item2) { double(:item2, lowest_bid_or_proposal_accreditation_creditor: accreditation_creditor) }
     let(:item3) { double(:item3, lowest_bid_or_proposal_accreditation_creditor: 'other') }
 
-    xit 'should return the items where the creditor wins' do
+    it 'should return the items where the creditor wins' do
       subject.stub(items: [item1, item2, item3])
       expect(subject.items_by_winner(accreditation_creditor)).to eq [item1, item2]
     end
@@ -50,7 +50,7 @@ describe PurchaseProcessTrading do
     let(:item2) { double(:item2, lowest_bid_or_proposal_accreditation_creditor: 'two') }
     let(:item3) { double(:item3, lowest_bid_or_proposal_accreditation_creditor: nil) }
 
-    xit 'should return the creditors with lowest proposal/bid by item' do
+    it 'should return the creditors with lowest proposal/bid by item' do
       subject.stub(items: [item1, item2, item3])
       expect(subject.creditors_with_lowest_proposal).to eq ['one', 'two']
     end
@@ -62,7 +62,7 @@ describe PurchaseProcessTrading do
     let(:item2) { double(:item2) }
     let(:item3) { double(:item3) }
 
-    xit 'should return the creditors who wins each item' do
+    it 'should return the creditors who wins each item' do
       subject.stub(items: [item1, item2, item3])
 
       trading_item_winner.should_receive(:new).with(item1).and_return(trading_item_winner)
@@ -89,7 +89,7 @@ describe PurchaseProcessTrading do
         items.stub(pending: [])
       end
 
-      xit { expect(subject.allow_negotiation?).to be_true }
+      it { expect(subject.allow_negotiation?).to be_true }
     end
 
     context 'when there is pending items' do
@@ -97,7 +97,7 @@ describe PurchaseProcessTrading do
         items.stub(pending: ['item'])
       end
 
-      xit { expect(subject.allow_negotiation?).to be_false }
+      it { expect(subject.allow_negotiation?).to be_false }
     end
   end
 end

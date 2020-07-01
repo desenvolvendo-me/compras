@@ -47,7 +47,7 @@ describe PurchaseProcessTradingItem do
       expect(subject.errors[:reduction_rate_value]).to_not include('não pode ser usado ao mesmo tempo que o decréscimo em percentual')
     end
 
-    xit 'should not allow a negative value for reduction_rato_value on update' do
+    it 'should not allow a negative value for reduction_rato_value on update' do
       subject.reduction_rate_value = -1
 
       subject.stub(:validation_context).and_return(:update)
@@ -57,7 +57,7 @@ describe PurchaseProcessTradingItem do
       expect(subject.errors[:reduction_rate_value]).to include('deve ser maior ou igual a 0')
     end
 
-    xit 'should not allow a negative value for reduction_rato_value on update' do
+    it 'should not allow a negative value for reduction_rato_value on update' do
       subject.reduction_rate_percent = -1
 
       subject.stub(:validation_context).and_return(:update)
@@ -86,7 +86,7 @@ describe PurchaseProcessTradingItem do
         subject.stub(item: item)
       end
 
-      xit 'should return the item to_s' do
+      it 'should return the item to_s' do
         item.should_receive(:to_s).and_return('item')
 
         expect(subject.to_s).to eq 'item'
@@ -95,7 +95,7 @@ describe PurchaseProcessTradingItem do
   end
 
   describe '#last_bid' do
-    xit 'should return the last given bid for the item' do
+    it 'should return the last given bid for the item' do
       bids = double(:bids)
 
       subject.stub(bids: bids)
@@ -108,7 +108,7 @@ describe PurchaseProcessTradingItem do
   end
 
   describe '#last_bid_with_proposal' do
-    xit 'should return the last bid with proposal' do
+    it 'should return the last bid with proposal' do
       bids = double(:bids)
 
       subject.stub(bids: bids)
@@ -130,7 +130,7 @@ describe PurchaseProcessTradingItem do
         subject.stub(creditor_with_lowest_proposal: nil)
       end
 
-      xit 'should return nil' do
+      it 'should return nil' do
         expect(subject.lowest_proposal).to be_nil
       end
     end
@@ -151,7 +151,7 @@ describe PurchaseProcessTradingItem do
           subject.stub(item: item)
         end
 
-        xit 'should return the lowest proposal' do
+        it 'should return the lowest proposal' do
           creditor.should_receive(:creditor_proposal_by_item).with(50, item).and_return(proposal)
 
           expect(subject.lowest_proposal).to eq proposal
@@ -173,7 +173,7 @@ describe PurchaseProcessTradingItem do
             subject.stub(lot: 1112)
           end
 
-          xit 'should return the lowest proposal' do
+          it 'should return the lowest proposal' do
             creditor.should_receive(:creditor_proposal_by_lot).with(50, 1112).and_return(proposal)
 
             expect(subject.lowest_proposal).to eq proposal
@@ -202,7 +202,7 @@ describe PurchaseProcessTradingItem do
         subject.stub(item?: true)
       end
 
-      xit 'should return all creditors ordered' do
+      it 'should return all creditors ordered' do
         item = double(:item, id: 4)
 
         subject.stub(item: item)
@@ -220,7 +220,7 @@ describe PurchaseProcessTradingItem do
         subject.stub(item?: false)
       end
 
-      xit 'should return all creditors ordered' do
+      it 'should return all creditors ordered' do
         subject.stub(lot: 1133, purchase_process_id: 55)
 
         accreditation_creditors_repository.should_receive(:by_lowest_proposal_on_lot).with(55, 1133).and_return(['creditor1', 'creditor2'])
@@ -238,7 +238,7 @@ describe PurchaseProcessTradingItem do
         subject.stub(item?: true)
       end
 
-      xit 'should return all creditors ordered' do
+      it 'should return all creditors ordered' do
         item = double(:item, id: 4)
 
         subject.stub(item: item)
@@ -256,7 +256,7 @@ describe PurchaseProcessTradingItem do
         subject.stub(item?: false)
       end
 
-      xit 'should return all creditors ordered' do
+      it 'should return all creditors ordered' do
         subject.stub(lot: 1133, purchase_process_id: 55)
 
         accreditation_creditors_repository.should_receive(:by_lowest_proposal_outer_on_lot).with(55, 1133).and_return(['creditor1', 'creditor2'])
@@ -269,7 +269,7 @@ describe PurchaseProcessTradingItem do
   describe '#bids_historic' do
     let(:bids) { double(:bids) }
 
-    xit 'should remove bidders without_proposals and filter by item' do
+    it 'should remove bidders without_proposals and filter by item' do
       subject.stub(bids: bids)
 
       bids.should_receive(:not_without_proposal).and_return(bids)
@@ -291,7 +291,7 @@ describe PurchaseProcessTradingItem do
         bids.stub(with_proposal: ['bid_lower', 'bid_higher'])
       end
 
-      xit 'should return the bid with proposal with lowest value' do
+      it 'should return the bid with proposal with lowest value' do
         expect(subject.lowest_bid).to eq 'bid_lower'
       end
     end
@@ -301,7 +301,7 @@ describe PurchaseProcessTradingItem do
         bids.stub(with_proposal: [])
       end
 
-      xit 'should return nil' do
+      it 'should return nil' do
         expect(subject.lowest_bid).to be_nil
       end
     end
@@ -319,7 +319,7 @@ describe PurchaseProcessTradingItem do
         subject.stub(lowest_bid: lowest_bid)
       end
 
-      xit "should return lowest_bid's amount" do
+      it "should return lowest_bid's amount" do
         expect(subject.lowest_bid_or_proposal_amount).to eq 10.0
       end
     end
@@ -331,7 +331,7 @@ describe PurchaseProcessTradingItem do
         subject.stub(lowest_proposal: lowest_proposal, last_bid: nil)
       end
 
-      xit "should return lowest_proposal's unit_price" do
+      it "should return lowest_proposal's unit_price" do
         expect(subject.lowest_bid_or_proposal_amount).to eq 16.0
       end
     end
@@ -345,7 +345,7 @@ describe PurchaseProcessTradingItem do
         subject.stub(lowest_bid: lowest_bid)
       end
 
-      xit "should return lowest_bid's amount" do
+      it "should return lowest_bid's amount" do
         expect(subject.lowest_bid_or_proposal_accreditation_creditor).to eq 'creditor'
       end
     end
@@ -355,7 +355,7 @@ describe PurchaseProcessTradingItem do
         subject.stub(creditor_with_lowest_proposal: 'creditor2')
       end
 
-      xit "should return lowest_proposal's unit_price" do
+      it "should return lowest_proposal's unit_price" do
         expect(subject.lowest_bid_or_proposal_accreditation_creditor).to eq 'creditor2'
       end
     end
@@ -364,7 +364,7 @@ describe PurchaseProcessTradingItem do
   describe '#creditors_benefited' do
     let(:creditors_selected) { double(:creditors_selected) }
 
-    xit 'should return all unique benefited creditors' do
+    it 'should return all unique benefited creditors' do
       subject.stub(
         creditors_selected: creditors_selected,
         minimum_amount_for_benefited: 10)
@@ -409,7 +409,7 @@ describe PurchaseProcessTradingItem do
           subject.stub(creditors_benefited: ['creditor'])
         end
 
-        xit { expect(subject.benefited_tie?).to be_true }
+        it { expect(subject.benefited_tie?).to be_true }
       end
 
       context 'when has not benefited creditors' do
@@ -417,7 +417,7 @@ describe PurchaseProcessTradingItem do
           subject.stub(creditors_benefited: [])
         end
 
-        xit { expect(subject.benefited_tie?).to be_false }
+        it { expect(subject.benefited_tie?).to be_false }
       end
     end
 
@@ -431,7 +431,7 @@ describe PurchaseProcessTradingItem do
           subject.stub(creditors_benefited: ['creditor'])
         end
 
-        xit { expect(subject.benefited_tie?).to be_false }
+        it { expect(subject.benefited_tie?).to be_false }
       end
 
       context 'when has not benefited creditors' do
@@ -439,7 +439,7 @@ describe PurchaseProcessTradingItem do
           subject.stub(creditors_benefited: [])
         end
 
-        xit { expect(subject.benefited_tie?).to be_false }
+        it { expect(subject.benefited_tie?).to be_false }
       end
     end
   end
@@ -450,7 +450,7 @@ describe PurchaseProcessTradingItem do
         subject.stub(item: 'item')
       end
 
-      xit 'should return the item' do
+      it 'should return the item' do
         expect(subject.item_or_lot).to eq 'item'
       end
     end
@@ -460,7 +460,7 @@ describe PurchaseProcessTradingItem do
         subject.stub(item: nil, lot: 'lot')
       end
 
-      xit 'should return the lot' do
+      it 'should return the lot' do
         expect(subject.item_or_lot).to eq 'lot'
       end
     end

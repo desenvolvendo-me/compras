@@ -63,7 +63,7 @@ describe ProcessResponsible do
       subject.stub(:stage_process_id_was).and_return 3
     end
 
-    xit 'returns true when imported and stage_process is changing' do
+    it 'returns true when imported and stage_process is changing' do
       expect(subject.send(:imported_and_changing_stage_process?)).to be_true
     end
   end
@@ -73,7 +73,7 @@ describe ProcessResponsible do
       subject.stub(:imported_and_changing_stage_process?).and_return true
     end
 
-    xit 'validates the stage process when it cannot be changed' do
+    it 'validates the stage process when it cannot be changed' do
       subject.send :cant_change_stage_process
       expect(subject.errors[:stage_process]).to include 'não pode ser modificado quando importado automaticamente'
     end

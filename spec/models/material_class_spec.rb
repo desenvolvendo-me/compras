@@ -6,7 +6,7 @@ require 'app/models/purchase_process_fractionation'
 
 describe MaterialClass do
   it { should have_many(:materials).dependent(:restrict) }
-  xit { should have_many(:purchase_process_fractionations).dependent(:restrict) }
+  it { should have_many(:purchase_process_fractionations).dependent(:restrict) }
 
   it { should validate_presence_of :masked_number }
   it { should validate_presence_of :description }
@@ -111,19 +111,19 @@ describe MaterialClass do
       subject.stub(:mask => '99.99.999')
     end
 
-    xit 'should returns 1 when the only filled level is the first' do
+    it 'should returns 1 when the only filled level is the first' do
       subject.masked_number = '10.00.000'
 
       expect(subject.class_number_level).to eq 1
     end
 
-    xit 'should returns 2 when filled until second level' do
+    it 'should returns 2 when filled until second level' do
       subject.masked_number = '10.53.000'
 
       expect(subject.class_number_level).to eq 2
     end
 
-    xit 'should returns 2 when filled until third and last level' do
+    it 'should returns 2 when filled until third and last level' do
       subject.masked_number = '10.53.111'
 
       expect(subject.class_number_level).to eq 3
@@ -136,7 +136,7 @@ describe MaterialClass do
         subject.stub(:new_record? => true)
       end
 
-      xit { expect(subject).to be_editable }
+      it { expect(subject).to be_editable }
     end
 
     context 'when not new record' do
@@ -149,7 +149,7 @@ describe MaterialClass do
           subject.imported = false
         end
 
-        xit { expect(subject).to be_editable }
+        it { expect(subject).to be_editable }
       end
 
       context 'when is imported' do
@@ -157,7 +157,7 @@ describe MaterialClass do
           subject.imported = true
         end
 
-        xit { expect(subject).to_not be_editable }
+        it { expect(subject).to_not be_editable }
       end
     end
   end
@@ -170,7 +170,7 @@ describe MaterialClass do
         subject.stub(:parent => parent)
       end
 
-      xit 'should be valid when parent has no materials' do
+      it 'should be valid when parent has no materials' do
         parent.stub(:materials => [])
 
         subject.valid?
@@ -178,7 +178,7 @@ describe MaterialClass do
         expect(subject.errors[:parent_class_number]).to_not include("classe com materiais associados não podem ser base para outras classes")
       end
 
-      xit 'should not be valid when parent has materials' do
+      it 'should not be valid when parent has materials' do
         parent.stub(:materials => ['material'])
 
         subject.valid?
@@ -202,7 +202,7 @@ describe MaterialClass do
         subject.stub(:materials => ['material'])
       end
 
-      xit 'should have errors when masked_number changed' do
+      it 'should have errors when masked_number changed' do
         subject.stub(:changed_attributes => { 'masked_number' => '10.1.11.222.000' })
         subject.stub(:validation_context).and_return(:update)
 
@@ -211,7 +211,7 @@ describe MaterialClass do
         expect(subject.errors[:number]).to include('não pode ser alterado quando houver materiais vinculados à classe')
       end
 
-      xit 'should not have errors when masked_number does not changed' do
+      it 'should not have errors when masked_number does not changed' do
         subject.stub(:validation_context).and_return(:update)
 
         subject.valid?
@@ -225,7 +225,7 @@ describe MaterialClass do
         subject.stub(:materials => [])
       end
 
-      xit 'should not have errors when masked_number changed' do
+      it 'should not have errors when masked_number changed' do
         subject.stub(:changed_attributes => { 'masked_number' => '10.1.11.222.000' })
         subject.stub(:validation_context).and_return(:update)
 
@@ -234,7 +234,7 @@ describe MaterialClass do
         expect(subject.errors[:number]).to_not include('não pode ser alterado quando houver materiais vinculados à classe')
       end
 
-      xit 'should not have errors when masked_number does not changed' do
+      it 'should not have errors when masked_number does not changed' do
         subject.stub(:validation_context).and_return(:update)
 
         subject.valid?

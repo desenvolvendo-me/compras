@@ -9,7 +9,7 @@ describe User do
     end
   end
 
-  xit "return login on to_s" do
+  it "return login on to_s" do
     subject.stub(:login).and_return('gabriel.sobrinho')
     expect(subject.to_s).to eq 'gabriel.sobrinho'
   end
@@ -37,19 +37,19 @@ describe User do
     expect(subject).to be_password_required
   end
 
-  xit 'requires login if the user is not an creditor' do
+  it 'requires login if the user is not an creditor' do
     subject.stub(:creditor?).and_return false
 
     subject.should validate_presence_of :login
   end
 
-  xit 'do not require login if the use is a creditor' do
+  it 'do not require login if the use is a creditor' do
     subject.stub(:creditor?).and_return true
 
     expect(subject).not_to validate_presence_of :login
   end
 
-  xit 'require the login for persisted users' do
+  it 'require the login for persisted users' do
     subject.stub(:persisted?).and_return true
 
     subject.should validate_presence_of :login
@@ -85,34 +85,34 @@ describe User do
 
   it { should validate_presence_of :login }
 
-  xit "shoud not validate presence of profile when user is an admin" do
+  it "shoud not validate presence of profile when user is an admin" do
     subject.stub(:administrator?).and_return(true)
     expect(subject).not_to validate_presence_of :profile
   end
 
-  xit "shoud validate presence of profile when user is not an admin" do
+  it "shoud validate presence of profile when user is not an admin" do
     subject.stub(:administrator?).and_return(false)
     subject.should validate_presence_of :profile
   end
 
-  xit "shoud validate presence of employee when user is not an admin" do
+  it "shoud validate presence of employee when user is not an admin" do
     subject.stub(:administrator?).and_return(false)
     subject.should validate_presence_of :authenticable
   end
 
-  xit 'should not validate presence of profile when user is a creditor' do
+  it 'should not validate presence of profile when user is a creditor' do
     subject.stub(:creditor?).and_return true
     expect(subject).not_to validate_presence_of :profile
   end
 
   describe '#administrator_or_creditor?' do
-    xit 'should be true when is a administrator?' do
+    it 'should be true when is a administrator?' do
       subject.stub(:administrator?).and_return true
 
       expect(subject).to be_administrator_or_creditor
     end
 
-    xit 'should be true when is a creditor?' do
+    it 'should be true when is a creditor?' do
       subject.stub(:creditor?).and_return true
 
       expect(subject).to be_administrator_or_creditor
@@ -135,7 +135,7 @@ describe User do
         subject.stub(:administrator?).and_return(true)
       end
 
-      xit 'should be confirmed' do
+      it 'should be confirmed' do
         subject.should_receive(:confirmed_at=).with(now.utc)
 
         subject.run_callbacks(:create)
@@ -145,7 +145,7 @@ describe User do
     context 'when is not an administrator' do
       before { subject.stub(:administrator?).and_return(false) }
 
-      xit 'should be not confirmed' do
+      it 'should be not confirmed' do
         subject.should_not_receive(:confirmed_at=)
 
         subject.run_callbacks(:create)

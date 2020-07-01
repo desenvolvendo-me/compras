@@ -1,4 +1,3 @@
-require 'minitest/autorun'
 require 'model_helper'
 require 'app/models/bidder_document'
 require 'app/models/bidder'
@@ -14,22 +13,22 @@ describe BidderDocument do
     context "with document_number filled" do
       before { subject.stub(:document_number).and_return('1') }
 
-      xit { should validate_presence_of :emission_date }
-      xit { should validate_presence_of :validity }
+      it { should validate_presence_of :emission_date }
+      it { should validate_presence_of :validity }
     end
 
     context "with document_number filled" do
       before { subject.stub(:emission_date).and_return(Date.current) }
 
-      xit { should validate_presence_of :document_number }
-      xit { should validate_presence_of :validity }
+      it { should validate_presence_of :document_number }
+      it { should validate_presence_of :validity }
     end
 
     context "with document_number filled" do
       before { subject.stub(:validity).and_return(Date.current) }
 
-      xit { should validate_presence_of :document_number }
-      xit { should validate_presence_of :emission_date }
+      it { should validate_presence_of :document_number }
+      it { should validate_presence_of :emission_date }
     end
   end
 
@@ -55,28 +54,28 @@ describe BidderDocument do
       Date.current + 10.days
     end
 
-    xit 'should allow validity date after emission_date' do
+    it 'should allow validity date after emission_date' do
       expect(subject).to allow_value(Date.current + 15.days).for(:validity)
     end
 
-    xit 'should allow validity date equals to emission_date' do
+    it 'should allow validity date equals to emission_date' do
       expect(subject).to allow_value(emission_date).for(:validity)
     end
 
-    xit 'should not allow validity date before emission_date' do
+    it 'should not allow validity date before emission_date' do
       expect(subject).not_to allow_value(Date.current).for(:validity).
                                                        with_message("deve ser igual ou posterior a data de emissão (#{I18n.l emission_date})")
     end
   end
 
   context '#expired' do
-    xit 'should return false' do
+    it 'should return false' do
       subject.stub(:validity => Date.new(4000, 1, 1))
 
       expect(subject.expired?).to be false
     end
 
-    xit 'should return true' do
+    it 'should return true' do
       subject.stub(:validity => Date.new(2000, 1, 1))
 
       expect(subject.expired?).to be true

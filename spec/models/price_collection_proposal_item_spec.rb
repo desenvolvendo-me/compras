@@ -25,7 +25,7 @@ describe PriceCollectionProposalItem do
   end
 
   describe '#total_price' do
-    xit 'when both values is filled' do
+    it 'when both values is filled' do
       subject.unit_price = 5
       subject.stub(:quantity).and_return(5)
 
@@ -38,14 +38,14 @@ describe PriceCollectionProposalItem do
       expect(subject.total_price).to eq 0.00
     end
 
-    xit 'when has quantity only' do
+    it 'when has quantity only' do
       subject.stub(:quantity).and_return(5)
 
       expect(subject.total_price).to eq 0.00
     end
   end
 
-  xit 'should return the total price with quantity and unit_price' do
+  it 'should return the total price with quantity and unit_price' do
     subject.stub(:quantity).and_return(5)
     subject.stub(:unit_price).and_return(10)
 

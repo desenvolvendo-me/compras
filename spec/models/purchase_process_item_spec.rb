@@ -34,13 +34,13 @@ describe PurchaseProcessItem do
   it { should auto_increment(:item_number).by([:licitation_process_id, :lot]) }
 
   describe "creditor validation" do
-    xit 'validates presence when direct purchase' do
+    it 'validates presence when direct purchase' do
       subject.stub(:direct_purchase?).and_return true
       subject.valid?
       expect(subject.errors[:creditor]).to_not be_empty
     end
 
-    xit 'does not validate presence when not direct purchase' do
+    it 'does not validate presence when not direct purchase' do
       subject.stub(:direct_purchase?).and_return false
       subject.valid?
       expect(subject.errors[:creditor]).to be_empty
@@ -52,7 +52,7 @@ describe PurchaseProcessItem do
       double(:material)
     end
 
-    xit 'should return material.to_s as to_s' do
+    it 'should return material.to_s as to_s' do
       subject.stub(:material).and_return(material)
 
       material.stub(:to_s).and_return('Cadeira')
@@ -70,12 +70,12 @@ describe PurchaseProcessItem do
     expect(subject.estimated_total_price).to eq 50.5
   end
 
-  xit "should without_lot? be true when has not lot" do
+  it "should without_lot? be true when has not lot" do
     described_class.stub(:without_lot?).and_return(true)
     described_class.should be_without_lot
   end
 
-  xit "should without_lot? be false when has not lot" do
+  it "should without_lot? be false when has not lot" do
     described_class.stub(:without_lot?).and_return(false)
     described_class.should_not be_without_lot
   end
@@ -98,7 +98,7 @@ describe PurchaseProcessItem do
       expect(subject.total_value_by_bidder(bidder)).to eq 40
     end
 
-    xit 'should return zero when unit price equals nil' do
+    it 'should return zero when unit price equals nil' do
       proposal.stub(unit_price: nil)
       subject.quantity = 3
 
@@ -107,7 +107,7 @@ describe PurchaseProcessItem do
   end
 
   describe "#winning_bid" do
-    xit 'returns the classification that has won the bid' do
+    it 'returns the classification that has won the bid' do
       classification_1 = double(:classification, situation: SituationOfProposal::LOST)
       classification_2 = double(:classification, situation: SituationOfProposal::WON)
 

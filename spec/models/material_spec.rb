@@ -24,21 +24,21 @@ describe Material do
 
   it { should have_many(:purchase_process_items).dependent(:restrict) }
   it { should have_many(:purchase_solicitation_items).dependent(:restrict) }
-  xit { should have_many(:price_collection_items).dependent(:restrict) }
-  xit { should have_many(:creditor_materials).dependent(:restrict) }
+  it { should have_many(:price_collection_items).dependent(:restrict) }
+  it { should have_many(:creditor_materials).dependent(:restrict) }
   it { should have_many(:purchase_solicitations).through(:purchase_solicitation_items).dependent(:restrict) }
-  xit { should have_many(:purchase_solicitation_budget_allocations).through(:purchase_solicitations).dependent(:restrict) }
-  xit { should have_many(:materials_controls).dependent(:destroy) }
-  xit { should have_many(:licitation_processes).through(:purchase_process_items) }
+  it { should have_many(:purchase_solicitation_budget_allocations).through(:purchase_solicitations).dependent(:restrict) }
+  it { should have_many(:materials_controls).dependent(:destroy) }
+  it { should have_many(:licitation_processes).through(:purchase_process_items) }
 
-  xit { should validate_presence_of :material_class }
-  xit { should validate_presence_of :code }
+  it { should validate_presence_of :material_class }
+  it { should validate_presence_of :code }
   it { should validate_presence_of :description }
   it { should validate_presence_of :detailed_description }
   it { should validate_presence_of :reference_unit }
-  xit { should validate_presence_of :material_type }
+  it { should validate_presence_of :material_type }
 
-  xit 'should ensure control_amount to be true or false' do
+  it 'should ensure control_amount to be true or false' do
     expect(subject).to allow_value(true).for(:control_amount)
     expect(subject).to allow_value(false).for(:control_amount)
     expect(subject).to_not allow_value(nil).for(:control_amount)
@@ -62,7 +62,7 @@ describe Material do
         subject.stub(:material_class => material_class)
       end
 
-      xit 'should returns the material_class to_s' do
+      it 'should returns the material_class to_s' do
         expect(subject.autocomplete_material_class).to eq '123 - Software'
       end
     end
@@ -85,7 +85,7 @@ describe Material do
           subject.stub(control_amount?: true)
         end
 
-        xit 'should be false' do
+        it 'should be false' do
           expect(subject.service_without_quantity?).to be_false
         end
       end
@@ -95,7 +95,7 @@ describe Material do
           subject.stub(control_amount?: false)
         end
 
-        xit 'should be true' do
+        it 'should be true' do
           expect(subject.service_without_quantity?).to be_true
         end
       end

@@ -17,19 +17,19 @@ describe ModalityLimit do
   it { should validate_presence_of :work_public_competition }
 
   context "limits of current" do
-    xit 'should return correctly the value for current_limit_material_or_service_without_bidding' do
+    it 'should return correctly the value for current_limit_material_or_service_without_bidding' do
       ModalityLimit.stub(:current).and_return(double(:without_bidding => 200.0))
 
       expect(ModalityLimit.current_limit_material_or_service_without_bidding).to eq 200.0
     end
 
-    xit 'should return correctly the value for current_limit_engineering_works_without_bidding' do
+    it 'should return correctly the value for current_limit_engineering_works_without_bidding' do
       ModalityLimit.stub(:current).and_return(double(:work_without_bidding => 300.0))
 
       expect(ModalityLimit.current_limit_engineering_works_without_bidding).to eq 300.0
     end
 
-    xit 'should return zero for current_limits when there is no current modality limit' do
+    it 'should return zero for current_limits when there is no current modality limit' do
       ModalityLimit.stub(:current).and_return(nil)
 
       expect(ModalityLimit.current_limit_material_or_service_without_bidding).to eq 0

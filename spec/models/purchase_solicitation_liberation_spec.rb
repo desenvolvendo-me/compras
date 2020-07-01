@@ -10,7 +10,7 @@ describe PurchaseSolicitationLiberation do
   it { should validate_presence_of :responsible }
   it { should validate_presence_of :service_status }
 
-  xit 'should validate #to_s' do
+  it 'should validate #to_s' do
     subject.stub(:sequence => 1)
     expect(subject.to_s).to eq '1'
   end

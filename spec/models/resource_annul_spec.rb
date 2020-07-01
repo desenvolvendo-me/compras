@@ -15,7 +15,7 @@ describe ResourceAnnul do
       double(:annullable, :annulled? => true)
     end
 
-    xit 'delegates to annullable' do
+    it 'delegates to annullable' do
       subject.stub(:annullable => annullable)
 
       expect(subject).to be_annulled
@@ -27,7 +27,7 @@ describe ResourceAnnul do
       double(:annullable)
     end
 
-    xit 'should return purchase_solicitation_ids if annullable respond_to? it' do
+    it 'should return purchase_solicitation_ids if annullable respond_to? it' do
       annullable.stub(:purchase_solicitation_ids).and_return([1, 2, 3])
 
       subject.stub(:annullable).and_return(annullable)
@@ -35,7 +35,7 @@ describe ResourceAnnul do
       expect(subject.purchase_solicitation_ids).to eq [1, 2, 3]
     end
 
-    xit 'should return nil if annullable does not respond_to? purchase_solicitation_ids' do
+    it 'should return nil if annullable does not respond_to? purchase_solicitation_ids' do
       subject.stub(:annullable).and_return(annullable)
 
       expect(subject.purchase_solicitation_ids).to eq nil

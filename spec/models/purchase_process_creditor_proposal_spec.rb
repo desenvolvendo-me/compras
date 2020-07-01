@@ -28,12 +28,12 @@ describe PurchaseProcessCreditorProposal do
           subject.stub(unit_price: 10)
         end
 
-        xit { should validate_presence_of :brand }
+        it { should validate_presence_of :brand }
       end
 
       context 'when licitaton process judgment form is not item' do
         before { subject.stub(:item?).and_return false }
-        xit { should_not validate_presence_of :brand }
+        it { should_not validate_presence_of :brand }
       end
     end
 
@@ -41,7 +41,7 @@ describe PurchaseProcessCreditorProposal do
       context 'brand is not nil' do
         before { subject.brand = 'Marca' }
 
-        xit 'validates unit price is greater than 0' do
+        it 'validates unit price is greater than 0' do
           subject.stub(item?: true)
 
           expect(subject.valid?).to be_false
@@ -52,7 +52,7 @@ describe PurchaseProcessCreditorProposal do
       context 'brand is nil' do
         before { subject.brand = nil }
 
-        xit 'does not validate unit price is greater than 0' do
+        it 'does not validate unit price is greater than 0' do
           subject.stub(item?: true)
           subject.valid?
 
@@ -80,7 +80,7 @@ describe PurchaseProcessCreditorProposal do
   it { should delegate(:process).to(:licitation_process).allowing_nil(true).prefix(true) }
 
   describe '#total_price' do
-    xit 'multiplies the unit_price with the item quantity' do
+    it 'multiplies the unit_price with the item quantity' do
       subject.stub(:item_quantity).and_return 3
       subject.unit_price = 1.99
       expect(subject.total_price).to eql 5.97
@@ -104,7 +104,7 @@ describe PurchaseProcessCreditorProposal do
   describe '#item?' do
     let(:judgment_form) { double :judgment_form, item?: true }
 
-    xit 'returns true when licitation_process process judgment form is item' do
+    it 'returns true when licitation_process process judgment form is item' do
       subject.stub(:judgment_form).and_return judgment_form
       expect(subject.item?).to be_true
     end
@@ -122,7 +122,7 @@ describe PurchaseProcessCreditorProposal do
     context 'when there is item' do
       before { subject.stub(:item).and_return 'item' }
 
-      xit 'returns item' do
+      it 'returns item' do
         expect(subject.item_or_lot_or_purchase_process).to eql 'item'
       end
     end
@@ -133,7 +133,7 @@ describe PurchaseProcessCreditorProposal do
         subject.stub(:lot).and_return 'lot'
       end
 
-      xit 'returns lot' do
+      it 'returns lot' do
         expect(subject.item_or_lot_or_purchase_process).to eql 'lot'
       end
     end
@@ -145,7 +145,7 @@ describe PurchaseProcessCreditorProposal do
         subject.stub(:licitation_process).and_return 'licitation_process'
       end
 
-      xit 'returns licitation process' do
+      it 'returns licitation process' do
         expect(subject.item_or_lot_or_purchase_process).to eql 'licitation_process'
       end
     end
@@ -160,7 +160,7 @@ describe PurchaseProcessCreditorProposal do
       subject.stub(:same_price_brothers).and_return same_price_brothers
     end
 
-    xit 'returns an array of available rankings for the proposal' do
+    it 'returns an array of available rankings for the proposal' do
       expect(subject.available_rankings).to eql [3, 4]
     end
   end
@@ -200,7 +200,7 @@ describe PurchaseProcessCreditorProposal do
       subject.stub(:should_reset_old_unit_price?).and_return true
     end
 
-    xit 'sets the old_unit_price to nil when updating' do
+    it 'sets the old_unit_price to nil when updating' do
       subject.should_receive(:write_attribute).with(:old_unit_price, nil)
       subject.run_callbacks(:update)
     end
@@ -213,21 +213,21 @@ describe PurchaseProcessCreditorProposal do
         subject.stub(:unit_price_changed?).and_return true
       end
 
-      xit 'returns true' do
+      it 'returns true' do
         expect(subject.send(:should_reset_old_unit_price?)).to be_true
       end
     end
   end
 
   describe '#should_validate_brand_presence?' do
-    xit 'returns true if judgment form is item' do
+    it 'returns true if judgment form is item' do
       subject.stub(item?: true)
       subject.stub(unit_price: 10)
 
       expect(subject.send(:should_validate_brand_presence?)).to be_true
     end
 
-    xit 'returns true if unit price is greater than 0' do
+    it 'returns true if unit price is greater than 0' do
       subject.stub(item?: true)
       subject.stub(unit_price: nil)
       expect(subject.send(:should_validate_brand_presence?)).to be_false
@@ -245,7 +245,7 @@ describe PurchaseProcessCreditorProposal do
 
       before { subject.tied = false }
 
-      xit 'returns false' do
+      it 'returns false' do
         expect(subject.benefited_tied?).to be_false
       end
     end
@@ -259,7 +259,7 @@ describe PurchaseProcessCreditorProposal do
         subject.stub(:benefited_unit_price).and_return 1.00
       end
 
-      xit 'returns false' do
+      it 'returns false' do
         expect(subject.benefited_tied?).to be_false
       end
     end
@@ -273,7 +273,7 @@ describe PurchaseProcessCreditorProposal do
         subject.stub(:benefited_unit_price).and_return 1.00
       end
 
-      xit 'returns true' do
+      it 'returns true' do
         expect(subject.benefited_tied?).to be_true
       end
     end

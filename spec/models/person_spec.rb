@@ -19,7 +19,7 @@ describe Person do
   it { should have_many(:bidders).through(:accredited_representatives) }
   it { should have_many(:accredited_representatives).dependent(:restrict) }
 
-  xit { should have_one(:creditor).dependent(:restrict) }
+  it { should have_one(:creditor).dependent(:restrict) }
   it { should have_one(:street).through(:address) }
   it { should have_one(:neighborhood).through(:address) }
 
@@ -39,12 +39,12 @@ describe Person do
     expect(subject.identity_document).to eq ''
   end
 
-  xit "should return cpf on identity document when personable respond_to cpf" do
+  it "should return cpf on identity document when personable respond_to cpf" do
     subject.stub(:cpf).and_return('059.894.946-10')
     expect(subject.identity_document).to eq '059.894.946-10'
   end
 
-  xit "should return cnpj on identity_document when personable respond_to cnpj" do
+  it "should return cnpj on identity_document when personable respond_to cnpj" do
     subject.stub(:cnpj).and_return('76.238.594/0001-35')
     expect(subject.identity_document).to eq '76.238.594/0001-35'
   end
@@ -59,77 +59,77 @@ describe Person do
     end
 
     describe '#company_size' do
-      xit 'should not return company_size if is not company' do
+      it 'should not return company_size if is not company' do
         expect(subject.company_size).to be_nil
       end
 
-      xit 'should return company_size if is company' do
+      it 'should return company_size if is company' do
         personable.stub(:company_size).and_return('company_size')
         expect(subject.company_size).to eq 'company_size'
       end
     end
 
     describe '#choose_simple' do
-      xit 'should not return choose_simple if is not company' do
+      it 'should not return choose_simple if is not company' do
         expect(subject.choose_simple).to be_nil
       end
 
-      xit 'should return choose_simple if is company' do
+      it 'should return choose_simple if is company' do
         personable.stub(:choose_simple).and_return(true)
         expect(subject.company_size).to be_false
       end
     end
 
     describe '#legal_nature' do
-      xit 'should not return legal_nature if is not company' do
+      it 'should not return legal_nature if is not company' do
         expect(subject.legal_nature).to be_nil
       end
 
-      xit 'should return legal_nature if is company' do
+      it 'should return legal_nature if is company' do
         personable.stub(:legal_nature).and_return('legal_nature')
         expect(subject.legal_nature).to eq 'legal_nature'
       end
     end
 
     describe '#commercial_registration_date' do
-      xit 'should not return commercial_registration_date if is not company' do
+      it 'should not return commercial_registration_date if is not company' do
         expect(subject.commercial_registration_date).to be_nil
       end
 
-      xit 'should return commercial_registration_date if is company' do
+      it 'should return commercial_registration_date if is company' do
         personable.stub(:commercial_registration_date).and_return('date')
         expect(subject.commercial_registration_date).to eq 'date'
       end
     end
 
     describe '#commercial_registration_number' do
-      xit 'should not return commercial_registration_number if is not company' do
+      it 'should not return commercial_registration_number if is not company' do
         expect(subject.commercial_registration_number).to be_nil
       end
 
-      xit 'should return commercial_registration_number if is company' do
+      it 'should return commercial_registration_number if is company' do
         personable.stub(:commercial_registration_number).and_return('1234')
         expect(subject.commercial_registration_number).to eq '1234'
       end
     end
 
     describe '#identity_number' do
-      xit 'should not return identity_number if is not individual' do
+      it 'should not return identity_number if is not individual' do
         expect(subject.identity_number).to be_nil
       end
 
-      xit 'should return identity_number if is individual' do
+      it 'should return identity_number if is individual' do
         personable.stub(number: '1111')
         expect(subject.identity_number).to eq '1111'
       end
     end
 
     describe '#company_partners' do
-      xit 'should return nill when does not respond to partners' do
+      it 'should return nill when does not respond to partners' do
         expect(subject.company_partners).to be_nil
       end
 
-      xit 'should return partners when respond to partners' do
+      it 'should return partners when respond to partners' do
         personable.stub(:partners).and_return('partners')
 
         expect(subject.company_partners).to eq 'partners'
@@ -138,7 +138,7 @@ describe Person do
   end
 
   context "#correspondence_address?" do
-    xit "should return true if has correspondence address" do
+    it "should return true if has correspondence address" do
       subject.stub_chain(:correspondence_address, :present?).and_return(true)
       expect(subject.correspondence_address?).to be_true
     end

@@ -10,7 +10,7 @@ describe OccupationClassification do
     expect(subject.to_s).to eq "#{subject.code} - #{subject.name}"
   end
 
-  xit { should have_many(:creditors).dependent(:restrict) }
+  it { should have_many(:creditors).dependent(:restrict) }
 
   it { should validate_presence_of :name }
   it { should validate_presence_of :code }

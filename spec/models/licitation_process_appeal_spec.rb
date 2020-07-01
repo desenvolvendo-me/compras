@@ -11,7 +11,7 @@ describe LicitationProcessAppeal do
            :to_s => '1/2013')
   end
 
-  xit 'should return licitation process and date as to_s method' do
+  it 'should return licitation process and date as to_s method' do
     subject.stub(:licitation_process).and_return licitation_process
     subject.appeal_date = Date.new(2013, 1, 1)
 
@@ -37,7 +37,7 @@ describe LicitationProcessAppeal do
       double('licitation_process', :process_date => Date.new(2012, 12, 13))
     end
 
-    xit 'be valid when appeal_date is after process_date' do
+    it 'be valid when appeal_date is after process_date' do
       expect(subject).to allow_value(Date.new(2012, 12, 20)).for(:appeal_date)
     end
 

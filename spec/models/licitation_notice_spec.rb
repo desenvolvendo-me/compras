@@ -13,7 +13,7 @@ describe LicitationNotice do
   it { should delegate(:year).to(:licitation_process).allowing_nil(true).prefix(true) }
   it { should delegate(:description).to(:licitation_process).allowing_nil(true).prefix(true) }
 
-  xit 'should return licitation process and date as to_s method' do
+  it 'should return licitation process and date as to_s method' do
     subject.licitation_process.stub(:to_s).and_return('1/2013')
     subject.date = Date.new(2012,1,1)
 
@@ -21,12 +21,12 @@ describe LicitationNotice do
   end
 
   context 'next_number' do
-    xit 'should return 1 as first licitation notice' do
+    it 'should return 1 as first licitation notice' do
       subject.stub(:last_number).and_return(0)
       expect(subject.next_number).to eq 1
     end
 
-    xit 'should return 2 as secondary licitation notice' do
+    it 'should return 2 as secondary licitation notice' do
       subject.stub(:last_number).and_return(1)
       expect(subject.next_number).to eq 2
     end

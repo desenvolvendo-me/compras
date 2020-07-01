@@ -26,7 +26,3 @@ SimpleCov.start 'rails' do
   add_group "Reports", "app/reports"
   add_group "Mailers", "app/mailers"
 end
-
-Dir[Rails.root.join('app/**/*.rb')].each do |file|
-  load file unless file.include? "purchase_process_trading_items_controller"
-end

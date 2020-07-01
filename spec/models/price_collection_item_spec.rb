@@ -45,7 +45,7 @@ describe PriceCollectionItem do
       expect(subject.total_value_by_proposal(proposal)).to eq 40
     end
 
-    xit 'should return zero when unit price equals nil' do
+    it 'should return zero when unit price equals nil' do
       price_collection_proposal_item.stub(:unit_price => nil)
       subject.quantity = 3
 
