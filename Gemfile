@@ -69,7 +69,7 @@ group :development, :test do
   gem 'postgres-copy', '= 0.5.5'
   gem 'pry'
   gem 'pry-remote'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '= 2.14.2'
   gem "better_errors"
   gem "binding_of_caller"
   gem 'minitest'
