@@ -1,0 +1,6 @@
+pt-BR:
+  activemodel:
+    attributes:
+      contract_per_resource_source_report:
+        contract: "Contrato"
+        resource_source: "Fonte de Recursos"

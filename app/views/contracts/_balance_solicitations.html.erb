@@ -14,11 +14,14 @@
     <tbody id="ratification_items">
     <% total = 0 %>
     <% solicitation[1].each do |material| %>
+      <% qtd = PurchaseSolicitationItem.joins { purchase_solicitation }.where { purchase_solicitation.id.eq(solicitation[0]) }.where { material_id.eq(material) }&.last&.quantity || 0 %>
+      <% balance = get_saldo_material(f.object.licitation_process, purchaseSolicitation, material, f.object) %>
+
       <tr class="ratification_item inherited nested">
         <td><%= Material.find(material).description %></td>
-        <td><%= get_saldo_material(f.object.licitation_process, purchaseSolicitation, Material.find(material), f.object) %></td>
+        <td><%= balance - qtd %></td>
         <td><%= price = LicitationProcessRatificationItem.by_licitation_process_and_material(f.object.licitation_process.id, material)&.last&.price || 0 %></td>
-        <td><%= qtd = PurchaseSolicitationItem.joins { purchase_solicitation }.where { purchase_solicitation.id.eq(solicitation[0]) }.where { material_id.eq(material) }&.last&.quantity || 0 %></td>
+        <td><%= qtd  %></td>
         <td><%= number_with_precision result = (price.to_f*qtd.to_f) %></td>
         <% total += result %>
       </tr>

@@ -35,20 +35,20 @@ class Expense < Compras::Model
 
   scope :by_contract, lambda {|q|
     joins { contract_financials }.
-        where { contract_financials.contract_id.eq(q) }
+        where { contract_financials.contract_id.eq(q) }&.uniq(:id)
   }
 
   scope :by_secretary, lambda{|q|
     purchasing_unit_ids = Department.joins{ purchasing_unit }.where { secretary_id.eq(q) }.pluck(:purchasing_unit_id)
 
-    joins{ purchasing_unit }.where { purchasing_unit_id.in(purchasing_unit_ids) }
+    joins{ purchasing_unit }.where { purchasing_unit_id.in(purchasing_unit_ids) }&.uniq(:id)
   }
 
   orderize "id DESC"
   filterize
 
   def to_s
-    "Projeto Atividade: #{project_activity} e Fonte: #{resource_source}"
+    "Projeto: #{project_activity} e Fonte: #{resource_source} e Natureza: #{nature_expense&.nature}"
   end
 
   def set_destine_type

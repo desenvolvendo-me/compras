@@ -66,6 +66,24 @@ class SupplyRequest < Compras::Model
         .group { compras_supply_requests.id }
   }
 
+  scope :by_contract, lambda{|contract|
+    unless contract.blank?
+      where(contract_id: contract)
+    end
+  }
+
+  scope :by_material, lambda{|material|
+    unless material.blank?
+      joins(:items).where(compras_supply_request_items:{material_id: material})
+    end
+  }
+
+  scope :by_secretary, lambda{|secretary|
+    unless secretary.blank?
+     joins(:department).where(compras_departments:{secretary_id: secretary})
+    end
+  }
+
   def to_s
     "#{contract} - #{licitation_process}"
   end

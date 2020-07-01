@@ -23,10 +23,7 @@ module ContractsHelper
   end
 
   def get_saldo_material licitation_process, purchase_solicitation, material, contract
-    quantity_autorized = PurchaseSolicitation.quantity_autorized(licitation_process, purchase_solicitation, material, contract) || 0
-    objects = PurchaseSolicitation.joins(:list_purchase_solicitations).where{ list_purchase_solicitations.licitation_process_id.eq(8) }.where{ list_purchase_solicitations.purchase_solicitation_id.not_eq(71) }
-    quantity_delivered = objects.joins(:items).where("compras_purchase_solicitation_items.material_id = ?", material.id).sum(:quantity).to_f || 0
-
-    quantity_autorized - quantity_delivered
+    ContractItemBalance.where(purchase_process_id: licitation_process, material_id: material,
+                              contract_id: contract, purchase_solicitation_id: purchase_solicitation).sum(:quantity)
   end
 end

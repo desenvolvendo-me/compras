@@ -2,13 +2,13 @@
   <%= hidden_field_tag :supply_budgetary_id, nil, :name => 'supply_order_budgetary[id]' %>
   <div class="yui3-g">
     <div class="yui3-u-1-3">
-      <%= f.input :expense, :as => :auto_complete, :fake => true, :required => true,
-                  :source_path => expenses_path(:by_contract => f.object&.contract_id) %>
+      <%= f.input :secretary, :as => :auto_complete ,:fake => true, :required => true,
+                  :source_path => secretaries_path(:by_contract => f.object&.contract_id ) %>
     </div>
 
     <div class="yui3-u-1-3">
-      <%= f.input :secretary, :as => :auto_complete, :fake => true, :required => true,
-                  :source_path => secretaries_path %>
+      <%= f.input :expense, :as => :auto_complete, :fake => true, :required => true,
+                  :source_path => expenses_path(:by_contract => f.object&.contract_id) %>
     </div>
 
     <div class="yui3-u-1-3">
