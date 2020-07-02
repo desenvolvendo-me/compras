@@ -109,5 +109,5 @@ profile:
     - report_supply_request_per_secretaries
     - report_supply_requests
   - "PREGÃO ELETRÔNICO":
-    -
+    - auction_creditors
 

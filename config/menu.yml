@@ -38,7 +38,7 @@ menu:
   - register:
       - employees
       - people
-      - creditors
+      - auction_creditors
       - positions
   - commom:
     - auxiliary:

@@ -972,6 +972,16 @@ Compras::Application.routes.draw do
     end
   end
 
+  namespace :auction do
+    resources :creditors do
+      collection do
+        get :filter
+        get :modal
+      end
+      get 'modal_info', on: :member
+    end
+  end
+
   namespace :report do
     scope only: %i[index new show] do
       resources :bidding_schedules
