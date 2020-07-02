@@ -980,6 +980,12 @@ Compras::Application.routes.draw do
       end
       get 'modal_info', on: :member
     end
+    resources :employees do
+      collection do
+        get :filter
+        get :modal
+      end
+    end
   end
 
   namespace :report do

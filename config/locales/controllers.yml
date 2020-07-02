@@ -106,6 +106,7 @@ pt-BR:
     tce_export_monthly_monitorings: "SICOM - Acompanhamento Mensal"
     users: "Usuários"
     auction_creditors: "Credores"
+    auction_employees: "Funcionários"
   menu:
     <<: *controllers
     auxiliary: "Auxiliar"

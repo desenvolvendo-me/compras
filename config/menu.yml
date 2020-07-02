@@ -36,9 +36,9 @@ menu:
       - nature_expenses
       - purchase_forms
   - register:
-      - employees
-      - people
+      - auction_employees
       - auction_creditors
+      - people
       - positions
   - commom:
     - auxiliary:

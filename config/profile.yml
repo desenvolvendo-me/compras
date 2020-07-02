@@ -110,4 +110,5 @@ profile:
     - report_supply_requests
   - "PREGÃO ELETRÔNICO":
     - auction_creditors
+    - auction_employees
 
