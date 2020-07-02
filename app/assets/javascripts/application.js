@@ -1,5 +1,7 @@
 //= require unico-assets
 //= require bignumber
+//= require profiles
+//= require jquery.ui.accordion
 //= require compras/simple_form.toogle_required_input
 //= require compras/simple_form.numeric_input
 //= require compras/currency_manipulation

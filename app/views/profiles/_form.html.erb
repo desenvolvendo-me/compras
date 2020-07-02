@@ -1,26 +1,42 @@
 <%= f.input :name %>
 
-<table class="records">
-  <thead>
-    <tr>
-      <th>Cadastro Geral</th>
-      <th class="small"></th>
-    </tr>
-  </thead>
+<fieldset>
+  <legend>Permissões</legend>
+  <div id="permissions-list">
+    <% @menus.each do |menu| %>
+      <a class='accord' href="#"><%= menu.keys.first %></a>
+      <div>
+        <%= grouped_fields_tag do %>
+          <table class="records">
+            <tbody>
 
-  <tbody>
-    <%= f.association :roles do |r| %>
-      <tr>
-        <td>
-          <%= r.object.controller_name %>
-        </td>
-        <td>
-          <%= r.hidden_field :id %>
-          <%= r.hidden_field :controller %>
+            <tr>
+              <td width='100px'>
+                <%= select_tag nil, options_for_select(Permission.ordered),
+                               include_blank: "Mudar para todos", class: "all_group" %>
+              </td>
+              <td class="all_group">
+                <b>Alterar todas as permissões do grupo <%= menu.keys.first %></b>
+              </td>
+            </tr>
 
-          <%= r.select :permission, Permission.to_a %>
-        </td>
-      </tr>
+            <%= f.association :roles, roles(f.object.roles, menu, menu.keys.first) do |r| %>
+              <tr class="<%= permission_class(r.object) %>">
+                <td width='100px'>
+                  <%= r.hidden_field :id %>
+                  <%= r.hidden_field :controller %>
+
+                  <%= r.select :permission, Permission.ordered %>
+                </td>
+                <td>
+                  <%= r.object.controller_name %>
+                </td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        <% end %>
+      </div>
     <% end %>
-  </tbody>
-</table>
+  </div>
+</fieldset>
