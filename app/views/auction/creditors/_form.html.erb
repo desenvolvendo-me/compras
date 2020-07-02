@@ -1,0 +1,159 @@
+<div id="creditor-tabs" class="tabs">
+  <ul>
+    <li id="tab-creditor-main">
+      <a href="#creditor-main">Principal</a>
+    </li>
+
+    <li id="tab-creditor-cnaes" class="company-field">
+      <a href="#creditor-cnaes">CNAEs</a>
+    </li>
+
+    <li id="tab-creditor-documents" class="company-field">
+      <a href="#creditor-documents">Documentos</a>
+    </li>
+
+    <li id="tab-creditor-materials">
+      <a href="#creditor-materials">Materiais</a>
+    </li>
+
+    <li id="tab-creditor-representatives" class="company-field">
+      <a href="#creditor-representatives">Representantes</a>
+    </li>
+
+    <li id="tab-creditor-accounts">
+      <a href="#creditor-accounts">Contas Bancárias</a>
+    </li>
+
+    <li id="tab-creditor-balance">
+      <a href="#creditor-balance">Balanço</a>
+    </li>
+
+    <li id="tab-creditor-regularization-or-administrative-sanctions">
+      <a href="#creditor-regularization-or-administrative-sanctions">Sanções Administrativas / Regularizações</a>
+    </li>
+  </ul>
+
+  <div id="creditor-main">
+    <%= render 'creditors/main', :f => f %>
+  </div>
+
+  <div id="creditor-cnaes">
+    <%= render 'creditors/cnaes', :f => f %>
+  </div>
+
+  <div id="creditor-documents">
+    <%= render 'creditors/documents', :f => f %>
+  </div>
+
+  <div id="creditor-materials">
+    <%= render 'creditors/materials', :f => f %>
+  </div>
+
+  <div id="creditor-representatives">
+    <%= render 'creditors/representatives', :f => f %>
+  </div>
+
+  <div id="creditor-accounts">
+    <%= render 'creditors/accounts', :f => f %>
+  </div>
+
+  <div id="creditor-balance">
+    <%= render 'creditors/balance', :f => f %>
+  </div>
+
+  <div id="creditor-regularization-or-administrative-sanctions">
+    <%= render 'creditors/regularization_or_administrative_sanctions', :f => f %>
+  </div>
+</div>
+
+<script>
+  function showCommonTabs() {
+    $('.individual-field, .company-field').hide();
+  };
+
+  function showOnlyIndividualFields(){
+    $('.company-field').hide();
+    $('.individual-field').show();
+  };
+
+  function showOnlyCompanyFields(){
+    $('.individual-field').hide();
+    $('.company-field').show();
+  };
+
+  function hideFields(){
+    switch ($('#creditor_personable_type').val()){
+      case 'Individual':
+        showOnlyIndividualFields();
+        break;
+      case 'Company':
+        showOnlyCompanyFields();
+        break;
+      default:
+        showCommonTabs();
+    }
+  };
+
+  $("#creditor_person_id").change( function(event, person) {
+    if (person) {
+      $(this).parent().parent().find('.modal_info a').attr('href', person.modal_info_url);
+
+      $('#creditor_personable_type').val(person.personable_type);
+
+      if (person.isCompany) {
+        $('#creditor_company_size').val(person.companySize);
+        $('#creditor_choose_simple').attr('checked', person.chooseSimple);
+        $('#creditor_legal_nature').val(person.legalNature);
+        $('#creditor_commercial_registration_number').val(person.commercialRegistrationNumber);
+        $('#creditor_commercial_registration_date').val(person.commercialRegistrationDate);
+      }
+    } else {
+      $('#creditor_personable_type').val('');
+    }
+
+    hideFields();
+  });
+
+  $('form.creditor').on('change', '.wrapper-creditor-account-bank input:hidden', function() {
+    var url = "<%= modal_agencies_path %>?",
+        params = {
+          locked_fields: ["bank"],
+          bank_id: $(this).val()
+        };
+
+    url += jQuery.param(params);
+
+    $(this).closest('.nested-bank-account').find('.creditor-account-agency').data('modal-url', url);
+  });
+
+  function setModalUrlToCnae(){
+    var mainCnaeId = $('#creditor_main_cnae_id').val();
+    var urlModal = $('#creditor_cnaes').data('modal-url');
+    urlModal += '&cnaes_remainder[]=' + mainCnaeId;
+
+    $('#creditor_cnaes').data('modal-url', urlModal);
+  };
+
+  $('#creditor_main_cnae_id').change(setModalUrlToCnae);
+
+  $('form.creditor').on('change', '.regularization-or-administrative-sanction-reason', function (event, sanctionReason) {
+    if (sanctionReason) {
+      $(this).closest('.regularization-or-administrative-sanction').find('.sanction-reason-description').val(sanctionReason.description);
+      $(this).closest('.regularization-or-administrative-sanction').find('.sanction-reason-type-humanize').val(sanctionReason.reason_type_humanize);
+    } else {
+      $(this).closest('.regularization-or-administrative-sanction').find('.sanction-reason-description').val('');
+      $(this).closest('.regularization-or-administrative-sanction').find('.sanction-reason-type-humanize').val('');
+    }
+  });
+
+  $('form.creditor').on('change', '.wrapper-regularization-or-administrative-sanction-reason input:hidden', function() {
+    if ( $(this).closest('.regularization-or-administrative-sanction').find('.sanction-reason-type-humanize').val() == 'Sanção administrativa' ) {
+      $(this).closest('.regularization-or-administrative-sanction').find('.sanction-suspended-until').requiredField(true);
+    } else {
+      $(this).closest('.regularization-or-administrative-sanction').find('.sanction-suspended-until').requiredField(false);
+    }
+  });
+
+  showCommonTabs();
+  hideFields();
+</script>
