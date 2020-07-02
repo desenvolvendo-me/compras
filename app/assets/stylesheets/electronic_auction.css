@@ -1,0 +1,127 @@
+/*
+ *= require unico-assets
+ *= require compras/content
+ *= require compras/sidebar
+ *= require compras/records
+ *= require compras/radio_button
+ *= require compras/table_size
+ *= require compras/error_base
+ *= require compras/simple_form
+ *= require compras/nested_grid
+ *= require compras/buttons
+ *= require simple_form.auto_complete_input
+ *= require bootstrap_prepend
+ *= require select2/select2
+ */
+
+#container {
+    width: 100%;
+    height: 100%;
+}
+
+#container #header img {
+    margin: 15px 0 0 15px;
+}
+
+#content {
+    background: #F9F9F9;
+}
+
+.nested-container, .simple_form fieldset.group .wrapper {
+    margin-bottom: 1.5em;
+}
+
+.nested-container .add-link-container {
+    text-align: right;
+    margin: 0 0 0.5em 0;
+    font-weight: bold;
+}
+
+.nested-container h3, .simple_form fieldset.group legend {
+    font-size: 170%;
+    margin: 0;
+}
+
+.nested-container .fields, .simple_form fieldset.group .wrapper {
+    background: #FFF;
+    border: solid 1px #e8eaee;
+}
+
+.nested-container .fields .nested, .simple_form fieldset.group .wrapper {
+    padding: 1.5em;
+}
+
+.nested-container p.button-container {
+    padding: 0;
+    margin: 0;
+}
+
+#subtitle {
+    margin-top: -3.3em;
+    margin-bottom: 2.1em;
+    font-size: 16px;
+    color: #448DD6;
+}
+
+.field-without-label {
+    margin-top: 28px;
+}
+
+.add-margin-bottom {
+    margin-bottom: 10px;
+}
+
+.collection-as-block .check-all {
+    margin-bottom: 10px;
+}
+
+.collection-as-block .nested-collection {
+    margin-left: 20px;
+}
+
+.collection-as-block span {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.collection-as-block span label {
+    vertical-align: bottom;
+    margin-left: 5px;
+}
+
+table.records tr.not_selected td {
+    background-color: #ffede5;
+    color: #ff100e;
+}
+
+div.inline_buttons {
+    padding-top: 27px;
+}
+
+.simple_form select.select {
+    max-width: 910px;
+    width: 100%;
+    border: solid 1px #C7C7C7;
+    background-color: #FFFFFF;
+    padding: 10px 5px;
+    height: 41px;
+}
+
+form.simple_form .ui-tabs ul {
+    background: #4a83c0;
+    background: -moz-linear-gradient(#4a83c0, #598ec5);
+    background: -webkit-linear-gradient(#4a83c0, #598ec5);
+    background: linear-gradient(#4a83c0, #598ec5);
+    margin-bottom: 0.5em;
+}
+
+form.simple_form .ui-tabs .ui-tabs-nav a {
+    color: #FFF;
+    display: block !important;
+    text-decoration: none;
+    text-transform: capitalize;
+}
+
+form.simple_form .ui-tabs li.ui-tabs-active a {
+    background: rgb(114, 146, 179);
+}
