@@ -986,6 +986,12 @@ Compras::Application.routes.draw do
         get :modal
       end
     end
+    resources :positions do
+      collection do
+        get :filter
+        get :modal
+      end
+    end
   end
 
   namespace :report do

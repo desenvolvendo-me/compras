@@ -111,4 +111,5 @@ profile:
   - "PREGÃO ELETRÔNICO":
     - auction_creditors
     - auction_employees
+    - auction_positions
 

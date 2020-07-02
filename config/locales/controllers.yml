@@ -107,6 +107,8 @@ pt-BR:
     users: "Usuários"
     auction_creditors: "Credores"
     auction_employees: "Funcionários"
+    auction_positions: "Cargos"
+
   menu:
     <<: *controllers
     auxiliary: "Auxiliar"
