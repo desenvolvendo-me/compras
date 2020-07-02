@@ -3,8 +3,7 @@ pt-BR:
     attributes:
       purchase_solicitation_report:
         between_dates: 'Período'
-        budget_structure: "Solicitante"
-        budget_structure_id: "Solicitante"
+        user: "Solicitante"
         end_date: "Data final"
         kind: "Tipo"
         material: "Produto"

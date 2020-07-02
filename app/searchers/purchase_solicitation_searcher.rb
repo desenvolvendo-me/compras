@@ -3,11 +3,6 @@ class PurchaseSolicitationSearcher
 
   repository PurchaseSolicitationItem
 
-  def budget_structure_id(id)
-    joins { purchase_solicitation }.
-    where { purchase_solicitation.budget_structure_id.eq(id) }
-  end
-
   def kind(selected_kind)
     joins { purchase_solicitation }.
     where { purchase_solicitation.kind.eq(selected_kind) }
@@ -25,6 +20,10 @@ class PurchaseSolicitationSearcher
   def between_dates(dates_range)
     joins { purchase_solicitation }.
     where { purchase_solicitation.request_date.in dates_range }.
-    order { 'budget_structure_id, material_id' }
+    order { 'user_id, material_id' }
+  end
+
+  def user_id(id)
+    joins{ purchase_solicitation }.where{ purchase_solicitation.user_id.eq(id) }
   end
 end
