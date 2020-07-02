@@ -109,6 +109,7 @@ menu:
       - report_extract_consumption_per_processes
     - "Financeiro":
       - report_contract_per_resource_sources
+#      - report_total_purchase_per_element_and_natures
     - report_bidding_schedules
     - report_purchase_process_ratifications_by_periods
     - report_purchase_solicitations
@@ -118,4 +119,4 @@ menu:
     - report_licitation_processes
     - report_department_requests
     - report_pledge_requests
-    - report_total_purchase_per_element_and_natures
+
