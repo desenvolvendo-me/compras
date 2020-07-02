@@ -118,6 +118,7 @@ pt-BR:
     department: "Departamento"
     parameters: "Parâmetros"
     processes: "Processos"
+    register: "Cadastro"
     purchase: "Compras"
     report_minute_purchase_process_tradings: "minute_purchase_process_tradings"
     report_minute_purchase_processes: "minute_purchase_processes"
