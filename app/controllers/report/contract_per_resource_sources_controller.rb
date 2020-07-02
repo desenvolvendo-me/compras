@@ -6,10 +6,6 @@ class Report::ContractPerResourceSourcesController < Report::BaseController
     @report = report_instance
 
     if @report.valid?
-      @contract = Contract.find(contract_per_resource_source_params["contract_id"])
-      @resource_sources = ResourceSource.by_contract(contract_per_resource_source_params["contract_id"])
-                              .by_id(contract_per_resource_source_params["resource_source_id"]).uniq(:id)
-
       render layout: 'report'
     else
       render :new
