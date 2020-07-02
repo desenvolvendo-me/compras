@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="robots" content="noindex,nofollow">
+    <meta charset="utf-8">
+    <%= csrf_meta_tag %>
+
+    <title>icompras</title>
+
+    <%= render 'layouts/javascript_routes' %>
+
+    <%= stylesheet_link_tag 'application' %>
+    <%= javascript_include_tag 'application' %>
+    <link rel="shortcut icon" type="image/png" href="<%= image_path 'favicon.png' %>" />
+  </head>
+
+  <body>
+    <div id="container">
+      <div id="header">
+        <h1><%= link_to image_tag('logo.png'), root_path %>(IPregão Eletrônico)</h1>
+        <div id="account">
+          <ul>
+            <li>
+              <%= link_to current_user, edit_account_path, :class => 'current_user' %>
+            </li>
+
+            <li>
+              <%= link_to t('logout'), destroy_user_session_path, :method => :delete %>
+            </li>
+          </ul>
+        </div>
+
+        <div id="menu">
+        </div>
+      </div>
+
+      <div id="flash">
+        <%= render 'layouts/flash' %>
+      </div>
+
+      <div id="content">
+        <div class="banner">
+          <%= prefecture_image %>
+        </div>
+        <% unless controller_name.eql? "bookmarks" %>
+          <%= yield %>
+        <% end %>
+      </div>
+    </div>
+  </body>
+</html>

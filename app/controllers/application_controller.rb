@@ -27,6 +27,8 @@ class ApplicationController < ActionController::Base
   def layout_by_user
     if current_user && current_user.creditor?
       'creditor'
+    elsif current_user && current_user.electronic_auction?
+      'electronic_auction'
     else
       'application'
     end
