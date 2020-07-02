@@ -9,7 +9,7 @@ class ProjectActivity < Compras::Model
   validates :code,:destiny, presence: true
   validates :year, :mask => "9999", :allow_blank => true
 
-  orderize "id DESC"
+  orderize "name ASC"
   filterize
 
   def set_name
