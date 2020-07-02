@@ -1,0 +1,51 @@
+#content .simple_form #permissions-list {
+  box-shadow: none;
+}
+#content .simple_form #permissions-list a.accord {
+  border-radius: 0px;
+  border: solid 1px #e2e5ea;
+  display: block;
+  font-weight: bold;
+  color: #969699;
+  background: #f6f6f6;
+  padding: 5px 10px;
+  text-decoration: none;
+}
+#content .simple_form #permissions-list a.accord:hover {
+  background: #989699;
+  color: #f6f6f6;
+}
+#content .simple_form table.records tr.deny td:nth-child(2) {
+  border-left: 4px solid #e77a7a;
+}
+#content .simple_form table.records tr.read td:nth-child(2) {
+  border-left: 4px solid #bbb;
+}
+#content .simple_form table.records tr.modify td:nth-child(2) {
+  border-left: 4px solid #4db0cd;
+}
+#content .simple_form table.records tr.access td:nth-child(2) {
+  border-left: 4px solid #94cb30;
+}
+#content .simple_form table.records td {
+  padding: 4px 6px 4px 4px;
+  color: #888;
+}
+#content .simple_form table.records td:nth-child(2) {
+  padding-left: 6px;
+}
+#content .simple_form table.records td.all_group {
+  color: #444;
+}
+
+.icon-plus {
+    background: url("/assets/sprite1.png") -78px -41px no-repeat !important;
+    padding: 0px 5px 0px 0px;
+    float: left;
+}
+
+.icon-minus {
+    background: url("/assets/sprite1.png") -58px -41px no-repeat !important;
+    padding: 0px 5px 0px 0px;
+    float: left;
+}
