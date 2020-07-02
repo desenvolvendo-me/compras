@@ -1,0 +1,14 @@
+profile:
+  - "CADASTRO":
+    - agencies
+  - "COMPRAS":
+    - price_collection_annuls
+  - "CONTRATOS":
+    - contract_termination_annuls
+  - "LICITAÇÃO":
+    - report_bidding_schedules
+  - "RELATÓRIO":
+    - report_purchase_process_ratifications_by_periods
+  - "PREGÃO ELETRÔNICO":
+    - reference_units
+
