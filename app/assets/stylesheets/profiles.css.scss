@@ -39,13 +39,13 @@
 }
 
 .icon-plus {
-    background: url("/assets/sprite1.png") -78px -41px no-repeat !important;
+    background: image_url("sprite1.png") -78px -41px no-repeat !important;
     padding: 0px 5px 0px 0px;
     float: left;
 }
 
 .icon-minus {
-    background: url("/assets/sprite1.png") -58px -41px no-repeat !important;
+    background: image_url("sprite1.png") -58px -41px no-repeat !important;
     padding: 0px 5px 0px 0px;
     float: left;
 }
