@@ -59,7 +59,7 @@ class LicitationProcessRatification < Compras::Model
   end
 
   def creditor_proposals_total_value
-    creditor_proposals.creditor_id(creditor_id).sum {|proposal| proposal.unit_price * proposal.item_quantity}
+    creditor_proposals.creditor_id(creditor_id).sum {|proposal| proposal.total_price }
   end
 
   def proposals_total_value
