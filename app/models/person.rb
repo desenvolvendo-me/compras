@@ -42,6 +42,14 @@ class Person < Persona::Person
     where { name.like("%#{q}%") }
   }
 
+  scope :by_legal_people, lambda{
+    where { personable_type.eq(PersonableType::COMPANY) }
+  }
+
+  scope :by_physical_people, lambda{
+    where { personable_type.eq(PersonableType::INDIVIDUAL) }
+  }
+
   def self.search(options = {})
     query = scoped
     query = query.where { id.in_any options[:ids] } if options[:ids].present?
