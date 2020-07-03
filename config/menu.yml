@@ -1,5 +1,5 @@
 menu:
-  - general:
+  - settings:
     - parameters:
       - prefecture
 
@@ -36,7 +36,7 @@ menu:
       - nature_expenses
       - purchase_forms
 
-  - commom:
+  - register:
     - cadastral:
       - banks:
         - agencies
@@ -51,7 +51,8 @@ menu:
       - holidays
 
     - people:
-      - people
+      - physical_people
+      - legal_people
       - creditors
       - auxiliary:
         - regularization_or_administrative_sanction_reasons
@@ -74,7 +75,7 @@ menu:
 
 
 
-  - processes:
+  - licitations:
     - licitation_processes
     - licitation_notices
     - licitation_commissions
@@ -83,7 +84,7 @@ menu:
     - licitation_process_appeals
     - process_responsibles
 
-  - "Instrumentos Contratuais":
+  - contracts:
     - supply_request_managements
     - contracts
     - balance_adjustments
