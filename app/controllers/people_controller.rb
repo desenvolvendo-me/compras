@@ -4,13 +4,11 @@ class PeopleController < CrudController
   has_scope :by_legal_people, type: :boolean
   has_scope :by_physical_people, type: :boolean
 
-  def index
-    super
-  end
-
   def new
+    person_type = Individual.new if params[:people] === 'true'
+    person_type = Company.new if params[:company] === 'true'
     object = build_resource
-    object.personable = Individual.new
+    object.personable = person_type
 
     super
   end
