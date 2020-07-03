@@ -38,34 +38,60 @@ module PeopleHelper
   end
 
   def page_title_plural
-    if params[:by_legal_people] === 'true'
+    if company?
       "Empresas"
-    elsif params[:by_physical_people] === 'true'
+    elsif individual?
       "Pessoas"
     end
   end
 
   def page_title_singular
-    if params[:company] === 'true'
+    if company?
       "Empresa"
-    elsif params[:people] === 'true'
+    elsif individual?
       "Pessoa"
     end
   end
+  def create_link(optional_params = {})
+    new_path = new_legal_people_path(optional_params||{}) if company?
+    new_path = new_physical_people_path(optional_params||{}) if individual?
+    link_to 'Cadastrar',
+            new_path,
+            class: "button primary",
+            title: t("#{controller_name}.new", resource: singular, cascade: true)
+  end
 
   def edit_link resource
-    if params[:by_legal_people] === 'true'
+    if company?
       edit_resource_path(resource, company: true )
-    elsif params[:by_physical_people] === 'true'
+    elsif individual?
       edit_resource_path(resource, people: true )
     end
   end
 
   def people_type
-    if params[:by_legal_people] === 'true'
+    if company?
       { company: true }
-    elsif params[:by_physical_people] === 'true'
+    elsif individual?
       { people: true }
     end
+  end
+
+  def filter_link
+    current_scopes[:personable_type] = PersonableType::COMPANY if company?
+    current_scopes[:personable_type] = PersonableType::INDIVIDUAL if individual?
+    link_to 'Busca avançada',
+            filter_resources_path(current_scopes),
+            class: 'button primary filter',
+            title: t("#{controller_name}.filter", resource: plural, cascade: true)
+
+  end
+
+  def company?
+    true if @person_type == PersonableType::COMPANY
+  end
+
+  def individual?
+    true if @person_type == PersonableType::INDIVIDUAL
   end
 end
