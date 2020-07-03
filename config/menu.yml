@@ -37,9 +37,6 @@ menu:
       - purchase_forms
 
   - commom:
-    - auxiliary:
-      - licitation_commissions
-      - judgment_forms
     - cadastral:
       - banks:
         - agencies
@@ -76,6 +73,8 @@ menu:
   - processes:
     - licitation_processes
     - licitation_notices
+    - licitation_commissions
+    - judgment_forms
     - licitation_process_impugnments
     - licitation_process_appeals
     - process_responsibles
