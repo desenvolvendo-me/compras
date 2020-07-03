@@ -64,11 +64,15 @@ menu:
     - delivery_locations
     - payment_methods
     - contract_types
+
   - purchase:
+    - "Gestão do Objeto":
     - purchase_solicitations
+    - demands
     - price_collections
-    - demand_management:
-      - demands
+
+
+
 
   - processes:
     - licitation_processes
