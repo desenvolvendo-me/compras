@@ -31,7 +31,13 @@
         </div>
 
         <div id="menu">
+          <ul>
+            <% cache menu_key do %>
+              <%= render_menu_action %>
+            <% end %>
+          </ul>
         </div>
+
       </div>
 
       <div id="flash">

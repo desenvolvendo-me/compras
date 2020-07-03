@@ -1,5 +1,6 @@
 module ApplicationHelper
   include MenuHelper
+  include MenuAuctionHelper
 
   def simple_form_for(object, *args, &block)
     options = args.extract_options!
