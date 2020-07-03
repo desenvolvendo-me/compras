@@ -23,7 +23,7 @@ class Person < Persona::Person
   def self.filter(params)
     query = scoped
     unless params[:name].blank?
-      query = query.where { name.matches "#{params[:name]}%" }
+      query = query.where { name.matches "%#{params[:name]}%" }
     end
     unless params[:cpf].blank?
       query = query.joins { personable Individual }.where { personable(Individual).cpf == params[:cpf] }
@@ -31,6 +31,10 @@ class Person < Persona::Person
     unless params[:cnpj].blank?
       query = query.joins { personable Company }.where { personable(Company).cnpj == params[:cnpj] }
     end
+    unless params[:personable_type].blank?
+      query = query.where { personable_type.eq(params[:personable_type]) }
+    end
+
     query
   end
 
