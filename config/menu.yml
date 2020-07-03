@@ -51,8 +51,8 @@ menu:
       - holidays
 
     - people:
-      - physical_people
-      - legal_people
+      - physical_peoples
+      - legal_peoples
       - creditors
       - auxiliary:
         - regularization_or_administrative_sanction_reasons
