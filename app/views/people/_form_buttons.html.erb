@@ -1,0 +1,15 @@
+<div class="buttons">
+  <% if can?(:modify, main_controller_name) %>
+    <%= f.button :submit, 'data-disabled' => not_updateable_message  %>
+  <% end %>
+
+  <% if company? %>
+    <%= link_to 'Voltar', legal_peoples_path, class: 'button secondary', id:'person_back' %>
+  <% elsif individual? %>
+    <%= link_to 'Voltar', physical_peoples_path, class: 'button secondary', id:'person_back' %>
+  <% end %>
+
+  <% if f.object.persisted? && can?(:destroy, main_controller_name) %>
+    <%= f.button :destroy, 'data-disabled' => not_destroyable_message %>
+  <% end %>
+</div>
