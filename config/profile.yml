@@ -55,6 +55,8 @@ profile:
     - document_types
     - purchasing_units
     - reference_units
+    - physical_peoples
+    - legal_peoples
     - users
   - "COMPRA":
     - price_collection_annuls
@@ -112,4 +114,5 @@ profile:
     - auction_creditors
     - auction_employees
     - auction_positions
+
 

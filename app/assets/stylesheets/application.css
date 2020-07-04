@@ -119,3 +119,7 @@ form.simple_form .ui-tabs .ui-tabs-nav a {
 form.simple_form .ui-tabs li.ui-tabs-active a {
     background: rgb(114, 146, 179);
 }
+#menu ul ul ul.right {
+    right: 103%;
+    left: -162% ! important;
+}
