@@ -14,7 +14,7 @@
           <label class="fake" for="person_personable_attributes_society_kind">Tipo de Sociedade</label>
           <%= select_tag :society_kind, options_for_select(SocietyKind.to_a),
                          include_blank: true, as: :fake, :required => true,
-                         class: 'required society_kind',
+                         class: 'required society_kind select',
                          name: "person_personable_attributes[society_kind][1][extended_partner_attributes][society_kind]" %>
         </div>
       </div>

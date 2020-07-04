@@ -629,6 +629,11 @@ Compras::Application.routes.draw do
     end
     get 'modal_info', on: :member
   end
+  get '/legal_peoples', to: 'people#index', as:"legal_peoples", by_legal_people: true
+  get '/legal_peoples/new', to: 'people#new', as:"new_legal_people", by_legal_people: true
+
+  get '/physical_peoples', to: 'people#index', as:"physical_peoples", by_physical_people: true
+  get '/physical_peoples/new', to: 'people#new', as:"new_physical_people", by_physical_people: true
 
   get 'representative_people', to: 'people#index', as: 'representative_people'
   get 'responsibles', to: 'people#index', as: 'responsibles'
@@ -968,6 +973,28 @@ Compras::Application.routes.draw do
 
       collection do
         get :filter
+      end
+    end
+  end
+
+  namespace :auction do
+    resources :creditors do
+      collection do
+        get :filter
+        get :modal
+      end
+      get 'modal_info', on: :member
+    end
+    resources :employees do
+      collection do
+        get :filter
+        get :modal
+      end
+    end
+    resources :positions do
+      collection do
+        get :filter
+        get :modal
       end
     end
   end

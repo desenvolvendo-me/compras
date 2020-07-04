@@ -55,6 +55,8 @@ profile:
     - document_types
     - purchasing_units
     - reference_units
+    - physical_peoples
+    - legal_peoples
     - users
   - "COMPRA":
     - price_collection_annuls
@@ -109,5 +111,8 @@ profile:
     - report_supply_request_per_secretaries
     - report_supply_requests
   - "PREGÃO ELETRÔNICO":
-    -
+    - auction_creditors
+    - auction_employees
+    - auction_positions
+
 

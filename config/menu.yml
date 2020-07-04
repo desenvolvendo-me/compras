@@ -1,5 +1,5 @@
 menu:
-  - general:
+  - settings:
     - parameters:
       - prefecture
 
@@ -35,7 +35,6 @@ menu:
       - programs
       - nature_expenses
       - purchase_forms
-
   - commom:
     - auxiliary:
       - licitation_commissions
@@ -54,7 +53,8 @@ menu:
       - holidays
 
     - people:
-      - people
+      - physical_peoples
+      - legal_peoples
       - creditors
       - auxiliary:
         - regularization_or_administrative_sanction_reasons
@@ -67,20 +67,26 @@ menu:
     - delivery_locations
     - payment_methods
     - contract_types
-  - purchase:
-    - purchase_solicitations
-    - price_collections
-    - demand_management:
-      - demands
 
-  - processes:
+  - purchase:
+    - "Gestão do Objeto":
+    - purchase_solicitations
+    - demands
+    - price_collections
+
+
+
+
+  - licitations:
     - licitation_processes
     - licitation_notices
+    - licitation_commissions
+    - judgment_forms
     - licitation_process_impugnments
     - licitation_process_appeals
     - process_responsibles
 
-  - "Instrumentos Contratuais":
+  - contracts:
     - supply_request_managements
     - contracts
     - balance_adjustments
@@ -109,6 +115,7 @@ menu:
       - report_extract_consumption_per_processes
     - "Financeiro":
       - report_contract_per_resource_sources
+#      - report_total_purchase_per_element_and_natures
     - report_bidding_schedules
     - report_purchase_process_ratifications_by_periods
     - report_purchase_solicitations
@@ -118,4 +125,4 @@ menu:
     - report_licitation_processes
     - report_department_requests
     - report_pledge_requests
-    - report_total_purchase_per_element_and_natures
+
