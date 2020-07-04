@@ -50,6 +50,12 @@ class SupplyOrder < Compras::Model
     where { purchase_solicitation_id.in pur_sol }
   }
 
+  scope :by_purchase_solicitation, lambda{|q|
+    unless q.blank?
+     where{ purchase_solicitation_id.eq(q) }
+    end
+  }
+
   def set_creditor
     self.contract.nil? ? self.creditor=nil:self.creditor = self.contract.creditor
   end
