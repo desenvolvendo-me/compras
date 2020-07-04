@@ -629,6 +629,8 @@ Compras::Application.routes.draw do
     end
     get 'modal_info', on: :member
   end
+  get '/people?legal=true', to: 'people#index', as:"legal_peoples"
+  get '/people?physical=true', to: 'people#index', as:"physical_peoples"
 
   get 'representative_people', to: 'people#index', as: 'representative_people'
   get 'responsibles', to: 'people#index', as: 'responsibles'
