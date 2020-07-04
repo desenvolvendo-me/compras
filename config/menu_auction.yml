@@ -1,0 +1,6 @@
+menu:
+  - register:
+      - auction_employees
+      - auction_creditors
+      - auction_positions
+      - people

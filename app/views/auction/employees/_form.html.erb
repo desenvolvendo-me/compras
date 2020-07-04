@@ -1,0 +1,20 @@
+<%= f.input :individual %>
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :position %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :registration %>
+  </div>
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :email, disabled: f.object.individual_email.present?, input_html: { value: f.object.email } %>
+  </div>
+
+  <div class="yui3-u-1-6">
+    <%= f.input :phone, as: :string, disabled: f.object.individual_phone.present?, input_html: { value: f.object.phone } %>
+  </div>
+</div>

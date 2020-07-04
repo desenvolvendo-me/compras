@@ -111,5 +111,8 @@ profile:
     - report_supply_request_per_secretaries
     - report_supply_requests
   - "PREGÃO ELETRÔNICO":
-    -
+    - auction_creditors
+    - auction_employees
+    - auction_positions
+
 

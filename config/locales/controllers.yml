@@ -107,6 +107,9 @@ pt-BR:
     supply_orders: "Ordem de Fornecimento"
     tce_export_monthly_monitorings: "SICOM - Acompanhamento Mensal"
     users: "Usuários"
+    auction_creditors: "Credores"
+    auction_employees: "Funcionários"
+    auction_positions: "Cargos"
 
   menu:
     <<: *controllers
