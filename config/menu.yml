@@ -35,8 +35,15 @@ menu:
       - programs
       - nature_expenses
       - purchase_forms
-
   - register:
+      - employees
+      - people
+      - creditors
+      - positions
+  - commom:
+    - auxiliary:
+      - licitation_commissions
+      - judgment_forms
     - cadastral:
       - banks:
         - agencies

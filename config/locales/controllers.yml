@@ -119,6 +119,8 @@ pt-BR:
     manager: "Gestão"
     department: "Departamento"
     parameters: "Parâmetros"
+    processes: "Processos"
+    register: "Cadastro"
     licitations:  "Licitações"
     purchase: "Compras"
     report_minute_purchase_process_tradings: "minute_purchase_process_tradings"
