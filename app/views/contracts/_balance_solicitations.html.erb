@@ -18,7 +18,7 @@
 
     <% solicitation[1].each do |materialId| %>
       <% balance = get_balance(f.object, materialId) %>
-      <% qtd_attended = get_quantity_item_supply_order(f.object.licitation_process, materialId) %>
+      <% qtd_attended = get_quantity_item_supply_order(f.object.licitation_process, materialId, purchaseSolicitation) %>
 
       <tr class="ratification_item inherited nested">
         <td class="description"><%= Material.find(materialId).description %></td>

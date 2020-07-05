@@ -34,8 +34,10 @@ module ContractsHelper
     balance
   end
 
-  def get_quantity_item_supply_order(contract, material_id)
-    quantity_provided = contract.supply_orders.joins(:items).where(" compras_supply_order_items.material_id = ?", material_id).sum("compras_supply_order_items.quantity")
+  def get_quantity_item_supply_order(contract, material_id, purchase_solicitation=nil)
+    quantity_provided = contract.supply_orders.joins(:items)
+    quantity_provided = quantity_provided.where('compras_supply_orders.purchase_solicitation_id = ?', purchase_solicitation.id) if purchase_solicitation.present?
+    quantity_provided = quantity_provided.where("compras_supply_order_items.material_id = ?", material_id).sum("compras_supply_order_items.quantity")
     quantity_provided.to_i
   end
 end
