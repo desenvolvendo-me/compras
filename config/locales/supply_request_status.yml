@@ -2,7 +2,9 @@ pt-BR:
   enumerations:
     supply_request_status:
      sent: "Enviado"
-     in_service: "Em Atendimento"
+     in_service: "Atendimento"
      delivered: "Entregue"
-     financial_analysis: "Em Análise Financeira"
+     finished: "Finalizado"
+     financial_analysis: "Análise Financeira"
+     secretary_analysis: "Análise Secretário(a)"
      pending: "Pendente"

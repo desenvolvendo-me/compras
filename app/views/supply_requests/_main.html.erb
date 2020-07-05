@@ -1,41 +1,53 @@
+<%= f.input :updatabled, as: :hidden %>
+<input class id="current_user" value="<%= current_user.id %>" type="hidden">
 <div class="yui3-g">
-
-  <input class id="current_user" value="<%= current_user.id %>" hidden>
-  <div class="yui3-u-1-4">
+  <div class="yui3-u-1-5">
+    <%= f.input :user, :disabled => f.object.id.nil? %>
+  </div>
+  <div class="yui3-u-1-5">
+    <%= f.input :authorization_date, :disabled => f.object.updatabled %>
+  </div>
+  <div class="yui3-u-1-5">
+    <%= f.input :supply_request_status %>
+  </div>
+  <div class="yui3-u-1-5">
     <%= f.input :licitation_process, :required => true, :disabled => f.object.updatabled %>
   </div>
-  <div class="yui3-u-3-4  ">
+  <div class="yui3-u-1-5">
+    <%= f.input :order_name %>
+  </div>
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-1 ">
     <div class="input text">
       <label class="text ">Objeto</label>
       <textarea class="string text" cols="20" rows="50" type="text" id="licitation_process_object" value="<%= f.object.purchase_solicitation.department if f.object.purchase_solicitation %>" disabled> </textarea>
     </div>
   </div>
 </div>
+
 <div class="yui3-g">
-  <div class="yui3-u-1-4">
+  <div class="yui3-u-1-3">
     <div class="input integer optional disabled">
       <label class="integer optional">Número</label>
       <input class="numeric integer optional disabled" data-numeric="true" disabled="disabled" type="text" value="<%= "#{f.object.number }/#{f.object.year}" %>">
     </div>
   </div>
 
-  <div class="yui3-u-1-4">
-    <%= f.input :year, :disabled => f.object.year.present? %>
+  <div class="yui3-u-1-3">
+    <%= f.input :year, :disabled => f.object.year.present?, input_html:{ value: Date.today.strftime("%d/%m/%Y") } %>
   </div>
-  <div class="yui3-u-1-4">
-    <%= f.input :modality_or_type_of_removal, as: :fake, disabled: true,
-                input_html: {value: f.object.decorator.modality_or_type_of_removal} %>
-  </div>
-  <div class="yui3-u-1-4">
-    <%= f.input :user, :disabled => f.object.id.nil? %>
-  </div>
-</div>
 
-<div class="yui3-g">
   <div class="yui3-u-1-3">
     <%= f.input :contract %>
   </div>
-  <div class="yui3-u-1-5">
+
+</div>
+
+<div class="yui3-g">
+
+  <div class="yui3-u-2-5">
     <div>
       <label> Fornecedor </label>
       <input class="string" disabled id="supply_request_creditor"
@@ -45,29 +57,20 @@
              size="30" type="text">
     </div>
   </div>
+
   <div class="yui3-u-1-5">
     <div>
       <%= link_to 'Imprimir lista de materiais', report_creditor_materials_path(f.object.id), :style => 'margin-left:2%;margin-top:4%;position:absolute;' if f.object.id %>
     </div>
   </div>
-  <div class="yui3-u-1-5">
-    <%= f.input :supply_request_status %>
-  </div>
-</div>
 
-<div class="yui3-g">
-  <div class="yui3-u-1-2">
-    <%= f.input :authorization_date, :disabled => f.object.updatabled %>
-  </div>
-
-  <div class="yui3-u-1-2">
+  <div class="yui3-u-2-5">
     <%= f.input :department, as: :modal, modal_url: modal_departments_path(by_user: f.object.user_id), hidden_field: :department_id %>
   </div>
 
-  <div class="yui3-u-1-4 hidden">
-    <%= f.input :updatabled %>
-  </div>
 </div>
+
+
 
 <div class="yui3-g">
   <div class="yui3-u-1-3">
@@ -119,3 +122,10 @@
     $("#supply_request_authorization_date").prop('readonly', false);
 
 </script>
+
+<style>
+  #licitation_process_object{
+    height: 38px;
+    font-size: 11px;
+  }
+</style>
