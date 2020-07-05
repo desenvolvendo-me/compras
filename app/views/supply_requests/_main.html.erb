@@ -1,5 +1,5 @@
 <div class="yui3-g">
-  <%= f.input :updatabled, input_html:{ class: "hidden" } %>
+  <%= f.input :updatabled, as: :hidden %>
   <input class id="current_user" value="<%= current_user.id %>" hidden>
   <div class="yui3-u-1-5">
     <%= f.input :user, :disabled => f.object.id.nil? %>
@@ -122,3 +122,10 @@
     $("#supply_request_authorization_date").prop('readonly', false);
 
 </script>
+
+<style>
+  #licitation_process_object{
+    height: 38px;
+    font-size: 11px;
+  }
+</style>
