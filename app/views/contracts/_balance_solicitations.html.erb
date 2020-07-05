@@ -17,13 +17,16 @@
     <% total = {'total': 0, 'total_qtd_soli': 0, 'total_qtd_attended': 0, 'total_attended': 0, 'balance': 0} %>
 
     <% solicitation[1].each do |materialId| %>
+      <% material = Material.find(materialId) %>
       <% balance = get_balance(f.object, materialId) %>
+      <% qtd = qtd_requested(solicitation[0], material) %>
       <% qtd_attended = get_quantity_item_supply_order(f.object.licitation_process, materialId, purchaseSolicitation) %>
+      <% price = material_vl_unitary(f.object.licitation_process, material) %>
 
       <tr class="ratification_item inherited nested">
-        <td class="description"><%= Material.find(materialId).description %></td>
-        <td><%= number_to_currency price = LicitationProcessRatificationItem.by_licitation_process_and_material(f.object.licitation_process.id, materialId)&.last&.price || 0 %></td>
-        <td><%= qtd = PurchaseSolicitationItem.joins { purchase_solicitation }.where { purchase_solicitation.id.eq(solicitation[0]) }.where { material_id.eq(materialId) }&.last&.quantity || 0  %></td>
+        <td class="description"><%= material.description %></td>
+        <td><%= number_to_currency price %></td>
+        <td><%= qtd  %></td>
         <td><%= number_with_precision result = (price.to_f*qtd.to_f) %></td>
         <td><%= qtd_attended %></td>
         <td><%= number_with_precision total_attended = qtd_attended * price.to_f %></td>
