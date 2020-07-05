@@ -4,3 +4,4 @@ pt-BR:
       extract_consumption_per_process_report:
         licitation_process: "Processo de Compra"
         contract: "Contrato"
+        purchase_solicitation: "Solicitação de Compra"
