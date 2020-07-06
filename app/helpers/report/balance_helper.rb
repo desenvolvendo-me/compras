@@ -41,8 +41,11 @@ module Report::BalanceHelper
     SupplyOrder.find(params[:supply_order_id]).purchase_solicitation.items.where(material_id:params[:material_id]).sum(:quantity).to_i
   end
 
-  def self.get_quantity_item_supply_order(contract, material)
-    quantity_provided = contract.supply_orders.joins(:items).where(" compras_supply_order_items.material_id = ?", material.id).sum("compras_supply_order_items.quantity")
+  def self.get_quantity_item_supply_order(contract, material, purchase_solicitation=nil)
+    quantity_provided = contract.supply_orders.joins(:items).where(" compras_supply_order_items.material_id = ?", material.id)
+    quantity_provided = quantity_provided.where('compras_supply_orders.purchase_solicitation_id = ?', purchase_solicitation) if purchase_solicitation
+    quantity_provided = quantity_provided.sum("compras_supply_order_items.quantity")
+
     quantity_provided.to_i
   end
 

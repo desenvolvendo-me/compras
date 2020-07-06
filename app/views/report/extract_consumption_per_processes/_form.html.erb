@@ -9,6 +9,11 @@
                 hidden_field: :contract_id, :include_blank => true %>
   </div>
 
+  <div class="yui3-u-1-3">
+    <%= f.input :purchase_solicitation, as: :modal, data_url: purchase_solicitations_url,
+                hidden_field: :purchase_solicitation_id, :include_blank => true %>
+  </div>
+
 </div>
 
 <script>

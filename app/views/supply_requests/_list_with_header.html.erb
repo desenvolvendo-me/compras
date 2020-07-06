@@ -2,9 +2,7 @@
   <thead>
     <tr>
       <% resource_class.decorator.header_attributes.each do |field| %>
-        <% if @gestor || (field.to_s !='department' && field.to_s !='value') %>
-          <th><%= resource_class.human_attribute_name field %></th>
-        <% end %>
+        <th><%= resource_class.human_attribute_name field %></th>
       <% end %>
     </tr>
   </thead>
@@ -13,15 +11,14 @@
     <% collection.each do |resource| %>
       <tr id="<%= dom_id resource %>">
         <% resource_class.decorator.header_attributes.each do |field| %>
-          <% if @gestor || (field.to_s !='department' && field.to_s !='value') %>
-            <td>
-              <% if resource_class.decorator.link?(field) %>
-                <%= link_to(formatted_attribute(resource.decorator, field), edit_resource_path(resource)) %>
-              <% else %>
-                <%= formatted_attribute(resource.decorator, field) %>
-              <% end %>
-            </td>
-          <% end %>
+          <td>
+            <% if resource_class.decorator.link?(field) %>
+              <%= link_to(formatted_attribute(resource.decorator, field), edit_resource_path(resource)) %>
+              <p><span style="color: #519AE4"><%= resource.order_name %></span></p>
+            <% else %>
+              <%= formatted_attribute(resource.decorator, field) %>
+            <% end %>
+          </td>
         <% end %>
       </tr>
     <% end %>
