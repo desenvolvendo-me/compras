@@ -114,6 +114,13 @@
 
 <%= f.input :justification %>
 
+<div class="yui3-g">
+  <h3 class="divider">Solicitações</h3>
+</div>
+
+<%= render 'items', :f => f %>
+
+
 <script>
     $(function () {
         $("#supply_request_user").prop('readonly', <%= !f.object.id.nil? %>);
@@ -127,5 +134,8 @@
   #licitation_process_object{
     height: 38px;
     font-size: 11px;
+  }
+  .supply_request_requested_quantity{
+    margin-bottom: 0 !important;
   }
 </style>
