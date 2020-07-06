@@ -21,10 +21,7 @@
 </div>
 
 <br>
-<% total_bid_per_licitation_process = 0 %>
-<% total_provided_per_contract = 0 %>
 <% total_balance_per_material = 0 %>
-<% material_ids = [] %>
 <% @licitation_processes.uniq.each do |licitation_process| %>
   <div style="text-align: justify; margin-left: 10px">
   <span>
@@ -46,7 +43,7 @@
       <div style="text-align: justify; margin-left: 20px">
       <span>
         <p>
-          <b> Solicitação de Compra: </b> <%= purchase_solicitation.to_s %> - <%= purchase_solicitation&.department&.description %>
+          <b> SOLICITAÇÃO DE COMPRA \ CONTROLE DE SALDO: </b> <%= purchase_solicitation.to_s %> - <%= purchase_solicitation&.department&.description %>
         </p>
       </span>
       </div>
@@ -73,21 +70,19 @@
             <% total_supply_order = 0 %>
             <% supply_order.items.joins(:material).each do |item| %>
               <% total_balance_per_material += Report::BalanceHelper.get_balance(contract, item) %>
-              <% qtd_requested = Report::BalanceHelper.qtd_requested(purchase_solicitation.id, item.material, licitation_process)%>
-              <% total_provided_per_contract += qtd_requested %>
-              <% material_ids.push(item.material_id) %>
+
               <tr>
                 <td><%= item.material %></td>
                 <td><%= number_to_currency vl_unitary = LicitationProcessRatificationItem.by_licitation_process_and_material(licitation_process.id, item.material_id)&.last&.price || 0  %></td>
-                <td><%= qtd_requested %></td>
-                <td><%= number_to_currency total = vl_unitary.to_f * (item.quantity || 0)%></td>
+                <td><%= item.quantity %></td>
+                <td><%= number_to_currency total = vl_unitary.to_f * (item.quantity  || 0)%></td>
               </tr>
             <% total_supply_order +=  total.to_f %>
             <% end %>
             <tr class="text-bold total-description">
               <td colspan="2"></td>
               <td>TOTAL</td>
-              <td><%= total_supply_order %></td>
+              <td><%= number_to_currency total_supply_order %></td>
             </tr>
             </tbody>
           </table>
@@ -119,14 +114,15 @@
           <% vl_total_attended = 0 %>
           <% vl_saldo = 0 %>
           <% vl_total_contract = 0 %>
-          <% licitation_process.items.each do |item| %>
+          <% contract&.winning_items&.each do |item| %>
+            <% qtd_licited = Report::BalanceHelper.qtd_requested(purchase_solicitation.id, item.material, licitation_process)%>
             <tr>
               <td><%= item.material %></td>
-              <td><%= number_to_currency vl_unitary = LicitationProcessRatificationItem.by_licitation_process_and_material(licitation_process.id, item.material_id)&.last&.price || 0 %></td>
-              <td><%= qtd_lic = Report::BalanceHelper.get_quantity_item_licitation(contract.licitation_process, item.material) %></td>
-              <td><%= number_to_currency vl_contract = vl_unitary.to_f * qtd_lic.to_f %></td>
-              <td><%= qtd_attended = Report::BalanceHelper.get_quantity_item_supply_order(contract, item.material, purchase_solicitation) || 0 %></td>
-              <td><%= qtd_saldo = Report::BalanceHelper.get_balance(contract, item) || 0 %></td>
+              <td><%= number_to_currency vl_unitary = LicitationProcessRatificationItem.by_licitation_process_and_material(licitation_process.id, item.material.id)&.last&.price || 0 %></td>
+              <td><%= qtd_licited %></td>
+              <td><%= number_to_currency vl_contract = vl_unitary.to_f * qtd_licited.to_f %></td>
+              <td><%= qtd_attended = Report::BalanceHelper.get_quantity_item_supply_order(contract, item.material, purchase_solicitation)  %></td>
+              <td><%= qtd_saldo = qtd_licited - qtd_attended %></td>
             </tr>
             <% vl_total_attended += vl_unitary.to_f * qtd_attended.to_f %>
             <% vl_saldo += vl_unitary.to_f * qtd_saldo.to_f %>
@@ -197,7 +193,6 @@
     </div>
     </p>
   <% end %>
-  <% total_bid_per_licitation_process += Report::BalanceHelper.get_quantity_bid(licitation_process, material_ids) %>
 <% end %>
 
 
