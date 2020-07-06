@@ -18,10 +18,10 @@
 
     <% solicitation[1].each do |materialId| %>
       <% material = Material.find(materialId) %>
-      <% balance = get_balance(f.object, materialId) %>
-      <% qtd = qtd_requested(solicitation[0], material) %>
+      <% qtd = qtd_requested(solicitation[0], material, f.object.licitation_process) %>
       <% qtd_attended = get_quantity_item_supply_order(f.object.licitation_process, materialId, purchaseSolicitation) %>
       <% price = material_vl_unitary(f.object.licitation_process, material) %>
+      <% balance = qtd - qtd_attended %>
 
       <tr class="ratification_item inherited nested">
         <td class="description"><%= material.description %></td>
