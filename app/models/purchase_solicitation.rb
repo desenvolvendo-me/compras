@@ -108,7 +108,7 @@ class PurchaseSolicitation < Compras::Model
 
   scope :by_secretaries_permited, lambda{|current_user|
     joins{ secretaries.secretary.departments.department_people }
-        .where{ secretaries.secretary.departments.department_people.user_id.eq(current_user) }
+        .where{ secretaries.secretary.departments.department_people.user_id.eq(current_user)}
   }
 
   scope :by_model_request, lambda {|type|
