@@ -73,12 +73,13 @@
             <% total_supply_order = 0 %>
             <% supply_order.items.joins(:material).each do |item| %>
               <% total_balance_per_material += Report::BalanceHelper.get_balance(contract, item) %>
-              <% total_provided_per_contract += item.quantity %>
+              <% qtd_requested = Report::BalanceHelper.qtd_requested(purchase_solicitation.id, item.material, licitation_process)%>
+              <% total_provided_per_contract += qtd_requested %>
               <% material_ids.push(item.material_id) %>
               <tr>
                 <td><%= item.material %></td>
                 <td><%= number_to_currency vl_unitary = LicitationProcessRatificationItem.by_licitation_process_and_material(licitation_process.id, item.material_id)&.last&.price || 0  %></td>
-                <td><%= item.quantity %></td>
+                <td><%= qtd_requested %></td>
                 <td><%= number_to_currency total = vl_unitary.to_f * (item.quantity || 0)%></td>
               </tr>
             <% total_supply_order +=  total.to_f %>

@@ -53,4 +53,15 @@ module Report::BalanceHelper
     licitation_process.items.where(material_id: material_ids.uniq).sum(:quantity)
   end
 
+  def self.qtd_requested p_solicitation_id, material, licitation_process
+    lots = PurchaseProcessItem.where { material_id.eq(material.id) }.where { licitation_process_id.eq(licitation_process) }.pluck(:lot)
+
+    qtd = PurchaseSolicitationItem.joins { purchase_solicitation }
+              .where { purchase_solicitation.id.eq(p_solicitation_id) }
+              .where { material_id.eq(material.id) }
+              .where { lot.in(lots) }&.last&.quantity
+
+    qtd || 0
+  end
+
 end
