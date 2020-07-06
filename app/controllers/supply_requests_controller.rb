@@ -5,6 +5,8 @@ class SupplyRequestsController < CrudController
   def new
     object = build_resource
     object.user = current_user
+    object.authorization_date = Date.today
+    object.year = Date.today.year
 
     super
   end

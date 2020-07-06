@@ -36,7 +36,7 @@
   </div>
 
   <div class="yui3-u-1-3">
-    <%= f.input :year, :disabled => f.object.year.present?, input_html:{ value: Date.today.strftime("%d/%m/%Y") } %>
+    <%= f.input :year, :disabled => (f.object.year.present? && f.object.persisted?) %>
   </div>
 
   <div class="yui3-u-1-3">
