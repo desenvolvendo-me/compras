@@ -20,7 +20,7 @@ pt-BR:
         requested_quantity: "Qnt Solicitada"
         contract: "Contrato"
         number_nf: "Número NF"
-        supply_request_status: "Situação"
+        supply_request_status: "Status do Pedido"
         justification: "Justificativa"
         supply_request_file: "Documento"
         status_last_attendance: "Status do Último Atendimento"
