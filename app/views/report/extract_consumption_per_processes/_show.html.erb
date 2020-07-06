@@ -79,7 +79,7 @@
                 <td><%= item.material %></td>
                 <td><%= number_to_currency vl_unitary = LicitationProcessRatificationItem.by_licitation_process_and_material(licitation_process.id, item.material_id)&.last&.price || 0  %></td>
                 <td><%= item.quantity %></td>
-                <td><%= number_to_currency total = vl_unitary * (item.quantity || 0)%></td>
+                <td><%= number_to_currency total = vl_unitary.to_f * (item.quantity || 0)%></td>
               </tr>
             <% total_supply_order +=  total.to_f %>
             <% end %>
@@ -207,11 +207,12 @@
 
 
   table.records th {
-    background: #c5dcf9;
+    background: #EEEEEE;
     border-bottom: solid 1px #E8EAEE;
     color: #555452;
     text-align: left;
   }
+
   tr.total-description td{
     background-color: #c5dcf9 !important;
   }
