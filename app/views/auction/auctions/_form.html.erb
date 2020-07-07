@@ -4,8 +4,8 @@
 <div class="dots text-center">
   <span class="step"></span>
   <span class="step"></span>
-  <span class="step"></span>
-  <span class="step"></span>
+<!--  <span class="step"></span>-->
+<!--  <span class="step"></span>-->
 </div>
 
 <!-- One "tab" for each step in the form: -->
@@ -66,17 +66,17 @@
 
 </div>
 
-<div class="tab">
+<!--<div class="tab">-->
 
-</div>
+<!--</div>-->
 
-<div class="tab">
+<!--<div class="tab">-->
 
-</div>
+<!--</div>-->
 
-<div class="d-flex justify-center">
+<div class="">
   <div style="overflow:auto;">
-    <div style="float:right;">
+    <div style="margin-right: 63px;float: right;">
       <button type="button" id="prevBtn" class="button primary" onclick="nextPrev(-1)">Voltar</button>
       <button type="button" id="nextBtn" class="button primary" onclick="nextPrev(1)">Próximo</button>
     </div>
@@ -170,6 +170,7 @@
   var currentTabTitle = ['Etapa 1 - Dados Principal','Teste'];
   showTab(currentTab);
 
+
   function showTab(n) {
     var tabs = $(".tab");
     tabs.eq(currentTab).css('display', 'block');
@@ -182,8 +183,13 @@
     }
     if (n === (tabs.length - 1)) {
       $("#nextBtn").html("Salvar");
+      $("#nextBtn").addClass("submit");
+      $("#nextBtn").bind("click", function(){
+        $("form.auction").submit();
+      })
     } else {
       $("#nextBtn").html("Próximo");
+      $("#nextBtn").removeClass("submit");
     }
 
     fixStepIndicator(n)
