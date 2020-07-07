@@ -29,7 +29,7 @@ h1 {
 }
 
 .text-center{
-    text-align: center;
+    text-align: center !important;
 }
 
 .margin-top {
