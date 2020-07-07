@@ -18,7 +18,6 @@
     },
 
     onSuccess: function(event, data) {
-      debugger
       window.location.replace(Routes.auction_auctions)
     },
 
