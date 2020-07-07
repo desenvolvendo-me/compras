@@ -1,7 +1,7 @@
 class Auction < Compras::Model
-  attr_modal :auction_type,:licitation_number,:process_number,:year,:dispute_type,
-             :judment_form,:covid_law,:purchase_value,:items_quantity,
-             :object,:object_management,:employee_id
+  attr_accessible :auction_type,:licitation_number,:process_number,:year,:dispute_type,
+                  :judment_form,:covid_law,:purchase_value,:items_quantity,
+                  :object,:object_management,:employee_id
 
   belongs_to :employee
 
@@ -9,6 +9,8 @@ class Auction < Compras::Model
   has_enumeration_for :dispute_type, :with => AuctionDisputeType
   has_enumeration_for :judment_form, :with => AuctionJudmentForm
 
-  orderize :description
+  validates :year, :mask => "9999", :allow_blank => true
+
+  orderize :id
   filterize
 end
