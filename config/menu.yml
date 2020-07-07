@@ -35,10 +35,7 @@ menu:
       - programs
       - nature_expenses
       - purchase_forms
-  - commom:
-    - auxiliary:
-      - licitation_commissions
-      - judgment_forms
+  - register:
     - cadastral:
       - banks:
         - agencies
