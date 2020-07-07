@@ -1,4 +1,4 @@
-<h1 class="text-center"><span id="step-title"></span></h1>
+<h1 class="text-center blue"><span id="step-title"></span></h1>
 
 <!-- Circles which indicates the steps of the form: -->
 <div class="dots text-center">
@@ -156,6 +156,13 @@
   .text-center{
     text-align:center;
   }
+  .blue{
+    color:#4c7baa;
+  }
+  #title{
+    color: #3f6e9d !important;
+    margin-left: 61px;
+  }
 </style>
 
 <script>
@@ -202,7 +209,7 @@
   function validateForm() {
     // This function deals with validation of the form fields
     var valid = true,
-        tabs = $("tab");
+      tabs = $("tab");
 
     //enviar via ajax o form aqui
 
