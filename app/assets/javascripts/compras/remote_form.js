@@ -11,7 +11,6 @@
     },
 
     addErrors: function (errors) {
-      debugger
       addErrorsToFields(errors, this.$el);
 
       this.addGenericErrors(errors);
@@ -54,18 +53,15 @@
     },
 
     onBefore: function () {
-      debugger
       this.setSavingLabelSubmit();
     },
 
     onComplete: function () {
       this.setSaveLabelSumbmit();
-      debugger
       window.opener.$(window.opener.document).trigger(this.eventName + ':ajax:complete');
     },
 
     onError: function (event, data) {
-      debugger
       this.setSaveLabelSumbmit();
 
       var errors = $.parseJSON(data.responseText).errors;
@@ -78,22 +74,18 @@
     },
 
     onSuccess: function(event, data) {
-      debugger
       window.opener.$(window.opener.document).trigger(this.eventName + ':ajax:success', data);
     },
 
     setSavingLabelSubmit: function() {
-      debugger
       this.$submit.val('Salvando...').attr('disabled', true);
     },
 
     setSaveLabelSumbmit: function() {
-      debugger
       this.$submit.val('Salvar').attr('disabled', false);
     },
 
     _fixMozillaScroll: function () {
-      debugger
       if ($.browser.mozilla && this.formRemote()) {
         $("#container").css({
           "overflow-y": "auto",

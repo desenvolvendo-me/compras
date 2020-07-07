@@ -1,15 +1,12 @@
 addErrorToField = function (error, selector) {
-  debugger
   $(selector).closest("div").addClass("field_with_errors").append($("<span/>").addClass("error").html(error));
 }
 
 removeErrorFromField = function (selector) {
-  debugger
   $(selector).closest("div").removeClass("field_with_errors").find("span.error").remove();
 }
 
 addErrorsToFields = function (errors, selector) {
-  debugger
   var preparedSelector;
 
   for (item in errors) {
@@ -24,7 +21,6 @@ addErrorsToFields = function (errors, selector) {
 }
 
 addErrorsToBase = function (errors, selector, baseTemplate, itemTemplate) {
-  debugger
   var errorBaseTemplate = $(baseTemplate.html()),
       errorItemTemplate = Handlebars.compile(itemTemplate.html()),
       params;
@@ -39,6 +35,5 @@ addErrorsToBase = function (errors, selector, baseTemplate, itemTemplate) {
 }
 
 clearBaseErrors = function (selector) {
-  debugger
   $(selector).find("div[class$='error_base']").remove();
 }
