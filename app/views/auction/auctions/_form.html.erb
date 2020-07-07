@@ -1,0 +1,44 @@
+<% f.input :auction_type, :as => :radio_buttons, :collection => AuctionType.to_a %>
+<div class="yui3-g">
+  <div class="yui3-u-2-5">
+    <% f.input :licitation_number %>
+  </div>
+  <div class="yui3-u-1-5">
+    <% f.input :year %>
+  </div>
+  <div class="yui3-u-1-5">
+    <% f.input :process_number %>
+  </div>
+</div>
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <% f.input :dispute_type %>
+  </div>
+  <div class="yui3-u-1-2">
+    <% f.input :judment_form %>
+  </div>
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <% f.input :covid_law %>
+  </div>
+  <div class="yui3-u-1-2">
+    <% f.input :purchase_value %>
+  </div>
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-1">
+    <% f.input :object %>
+  </div>
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <% f.input :object_management %>
+  </div>
+  <div class="yui3-u-1-2">
+    <% f.input :employee %>
+  </div>
+</div>
