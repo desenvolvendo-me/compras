@@ -1,0 +1,6 @@
+pt-BR:
+  enumerations:
+    auction_dispute_type:
+      open: 'Aberto'
+      open_closed: 'Aberto / Fechado'
+

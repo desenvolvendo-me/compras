@@ -1,0 +1,6 @@
+pt-BR:
+    enumerations:
+        auction_judment_form:
+            lowest_price: "Menor Preço"
+            biggest_discount: "Maior Desconto"
+

@@ -997,6 +997,8 @@ Compras::Application.routes.draw do
         get :modal
       end
     end
+
+    resources :auctions
   end
 
   namespace :report do

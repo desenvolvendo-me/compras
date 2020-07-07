@@ -1,5 +1,6 @@
 //= require unico-assets
 //= require bignumber
+//= require backbone
 //= require profiles
 //= require jquery.ui.accordion
 //= require compras/simple_form.toogle_required_input
@@ -11,7 +12,9 @@
 //= require compras/moment.min
 //= require compras/autocomplete_form
 //= require compras/nested_grid
+//= require compras/errors
 //= require compras/index_json
+//= require compras/init_backbone
 //= require reports/balance_per_creditor
 //= require reports/balance_per_process_and_contract
 //= require select2/select2.min

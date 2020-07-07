@@ -114,5 +114,6 @@ profile:
     - auction_creditors
     - auction_employees
     - auction_positions
+    - auction_auctions
 
 
