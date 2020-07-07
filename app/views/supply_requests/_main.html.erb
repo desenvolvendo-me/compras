@@ -1,10 +1,10 @@
 <%= f.input :updatabled, as: :hidden %>
 <input class id="current_user" value="<%= current_user.id %>" type="hidden">
 <div class="yui3-g">
-  <div class="yui3-u-1-5">
+  <div class="yui3-u-1-8">
     <%= f.input :user, :disabled => f.object.id.nil? %>
   </div>
-  <div class="yui3-u-1-5">
+  <div class="yui3-u-1-8">
     <%= f.input :authorization_date, :disabled => f.object.updatabled %>
   </div>
   <div class="yui3-u-1-5">
@@ -13,7 +13,7 @@
   <div class="yui3-u-1-5">
     <%= f.input :licitation_process, :required => true, :disabled => f.object.updatabled %>
   </div>
-  <div class="yui3-u-1-5">
+  <div class="yui3-u-7-12 cy">
     <%= f.input :order_name %>
   </div>
 </div>
@@ -47,9 +47,11 @@
 
 <div class="yui3-g">
 
-  <div class="yui3-u-2-5">
+  <div class="yui3-u-1-2">
     <div>
-      <label> Fornecedor </label>
+      <label class="print_list"> Fornecedor
+          <%= link_to 'Imprimir lista de materiais', report_creditor_materials_path(f.object.id) if f.object.id %>
+      </label>
       <input class="string" disabled id="supply_request_creditor"
              value="<%= f.object.decorator.creditor %>" size="30" type="text">
       <input class="string" hidden id="supply_request_creditor_id", name="supply_request[creditor_id]"
@@ -58,13 +60,7 @@
     </div>
   </div>
 
-  <div class="yui3-u-1-5">
-    <div>
-      <%= link_to 'Imprimir lista de materiais', report_creditor_materials_path(f.object.id), :style => 'margin-left:2%;margin-top:4%;position:absolute;' if f.object.id %>
-    </div>
-  </div>
-
-  <div class="yui3-u-2-5">
+  <div class="yui3-u-1-2">
     <%= f.input :department, as: :modal, modal_url: modal_departments_path(by_user: f.object.user_id), hidden_field: :department_id %>
   </div>
 
@@ -137,5 +133,12 @@
   }
   .supply_request_requested_quantity{
     margin-bottom: 0 !important;
+  }
+  .print_list{
+    display: flex !important;
+    justify-content: space-between;
+  }
+  .cy{
+    width: 35%;
   }
 </style>
