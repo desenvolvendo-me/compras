@@ -22,20 +22,38 @@ module ContractsHelper
     value
   end
 
-  def get_balance(contract, material_id)
-    supply_orders = SupplyOrder.joins(:contract, :items)
-    supply_orders = supply_orders.where("compras_supply_order_items.material_id = ?", material_id)
-    supply_orders = supply_orders.where(contract_id: contract.id)
+  # def get_balance(contract, material_id)
+  #   supply_orders = SupplyOrder.joins(:contract, :items)
+  #   supply_orders = supply_orders.where("compras_supply_order_items.material_id = ?", material_id)
+  #   supply_orders = supply_orders.where(contract_id: contract.id)
+  #
+  #   total_provided = 0
+  #   total_provided = supply_orders.sum(:quantity) if supply_orders.any?
+  #   total_bid = contract.licitation_process.items.where(material_id: material_id).sum(:quantity)
+  #
+  #   total_bid.to_i - total_provided.to_i
+  # end
 
-    total_provided = supply_orders.sum(:quantity) if supply_orders.any?
-    total_bid = contract.licitation_process.items.where(material_id: material_id).sum(:quantity)
-
-    balance = total_bid.to_i - total_provided.to_i
-    balance
+  def get_quantity_item_supply_order(contract, material_id, p_solicitation=nil)
+    quantity_provided = contract.supply_orders.joins(:items)
+    quantity_provided = quantity_provided.where('compras_supply_orders.purchase_solicitation_id = ?', p_solicitation.id) if p_solicitation.present?
+    quantity_provided = quantity_provided.where("compras_supply_order_items.material_id = ?", material_id).sum("compras_supply_order_items.quantity")
+    quantity_provided.to_i
   end
 
-  def get_quantity_item_supply_order(contract, material_id)
-    quantity_provided = contract.supply_orders.joins(:items).where(" compras_supply_order_items.material_id = ?", material_id).sum("compras_supply_order_items.quantity")
-    quantity_provided.to_i
+  def material_vl_unitary licitation_process, material
+    result = LicitationProcessRatificationItem.by_licitation_process_and_material(licitation_process.id, material.id)
+    result&.last&.price || 0
+  end
+
+  def qtd_requested p_solicitation_id, material, licitation_process
+    lots = PurchaseProcessItem.where { material_id.eq(material.id) }.where { licitation_process_id.eq(licitation_process) }.pluck(:lot)
+
+    qtd = PurchaseSolicitationItem.joins { purchase_solicitation }
+              .where { purchase_solicitation.id.eq(p_solicitation_id) }
+              .where { material_id.eq(material.id) }
+              .where { lot.in(lots) }&.last&.quantity
+
+    qtd || 0
   end
 end
