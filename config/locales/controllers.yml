@@ -110,6 +110,7 @@ pt-BR:
     auction_creditors: "Credores"
     auction_employees: "Funcionários"
     auction_positions: "Cargos"
+    auction_auctions: "Pregão Eletrônico"
 
   menu:
     <<: *controllers
