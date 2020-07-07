@@ -15,7 +15,7 @@
  */
 
 #container {
-    width: 100%;
+    width: 1024px;
     height: 100%;
 }
 
@@ -124,4 +124,34 @@ form.simple_form .ui-tabs .ui-tabs-nav a {
 
 form.simple_form .ui-tabs li.ui-tabs-active a {
     background: rgb(114, 146, 179);
+}
+
+fieldset {
+    border: 1px solid #D4DFF0;
+    padding: 5px 15px 5px 15px;
+    border-radius: 5px;
+    margin-top: 30px;
+    width: 80%;
+}
+
+fieldset legend {
+    padding: 0px 15px 0 15px;
+    display: block;
+    color: #666;
+}
+
+.d-flex{
+    display: flex;
+}
+
+.justify-center{
+    justify-content: center;
+}
+
+.pd-2{
+    padding: 2rem;
+}
+
+.text-center{
+    text-align:center;
 }
