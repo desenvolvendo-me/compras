@@ -9,7 +9,8 @@ class Auction < Compras::Model
   has_enumeration_for :dispute_type, :with => AuctionDisputeType
   has_enumeration_for :judment_form, :with => AuctionJudmentForm
 
-  validates :year, :mask => "9999", :allow_blank => true
+  validates :year, :mask => "9999", presence: true
+  validates :licitation_number, presence: true
 
   orderize :id
   filterize
