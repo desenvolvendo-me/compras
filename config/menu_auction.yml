@@ -1,7 +1,8 @@
 menu:
   - register:
+      - physical_peoples
+      - legal_peoples
       - auction_employees
       - auction_creditors
       - auction_positions
-      - people
       - auction_auctions
