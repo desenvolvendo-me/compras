@@ -1,0 +1,10 @@
+pt-BR:
+  enumerations:
+    object_status:
+      solicited: "Solicitado"
+      quoted: "Cotado"
+      licitation_in_progress: "Licitação em Andamento"
+      licitation_homologated: "Licitação Homologada"
+      formalized_contract: "Contrato Formalizado"
+      validated_contract: "Contrato Validado"
+      contract_released: "Contrato Liberado para Uso"

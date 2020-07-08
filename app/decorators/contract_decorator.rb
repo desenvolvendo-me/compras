@@ -4,7 +4,9 @@ class ContractDecorator
   include Decore::Header
   include ActionView::Helpers::NumberHelper
 
-  attr_header :contract_number, :year, :publication_date
+  attr_header :creditor,:start_date, :end_date, :contract_type, :purchasing_unit,
+              :contract_number, :year
+
 
   def all_pledges_total_value
     return number_to_currency super if component.persisted? && super
