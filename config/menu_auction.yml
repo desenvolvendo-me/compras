@@ -4,5 +4,7 @@ menu:
       - legal_peoples
       - auction_employees
       - auction_creditors
+      - "Gestão de Objeto":
+            - auction_management_objects
       - auction_positions
       - auction_auctions

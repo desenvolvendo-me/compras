@@ -111,6 +111,7 @@ pt-BR:
     auction_employees: "Funcionários"
     auction_positions: "Cargos"
     auction_auctions: "Pregão Eletrônico"
+    auction_management_objects: "Pré Objeto"
 
   menu:
     <<: *controllers
