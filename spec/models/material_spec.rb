@@ -31,17 +31,13 @@ describe Material do
   it { should have_many(:materials_controls).dependent(:destroy) }
   it { should have_many(:licitation_processes).through(:purchase_process_items) }
 
-  it { should validate_presence_of :material_class }
-  it { should validate_presence_of :code }
   it { should validate_presence_of :description }
   it { should validate_presence_of :detailed_description }
   it { should validate_presence_of :reference_unit }
-  it { should validate_presence_of :material_type }
 
   it 'should ensure control_amount to be true or false' do
     expect(subject).to allow_value(true).for(:control_amount)
     expect(subject).to allow_value(false).for(:control_amount)
-    expect(subject).to_not allow_value(nil).for(:control_amount)
   end
 
   it "should have false as the default value of combustible" do
