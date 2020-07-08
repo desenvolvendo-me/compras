@@ -138,7 +138,7 @@ h3.divider {
     background-color: #53c3c3 !important;
     color: white !important;
 }
-textarea.text{
-    height: 65px !important;
 
+.simple_form textarea.text {
+    height: 56px;
 }

@@ -61,3 +61,26 @@ $(document).on('click', ':submit', function(event) {
 
   return false;
 });
+
+/* Aumenta os campos text area conforme texto inserido */
+$(function(){
+  var txtAreas = document.querySelectorAll('textarea');
+
+  for(x=0;x<txtAreas.length;x++){
+    txtAreas[x].addEventListener('input', function(){
+      if(this.scrollHeight > this.offsetHeight && this.offsetHeight < 200){
+        this.style.height = this.scrollHeight + 'px'
+      }
+      if(this.scrollHeight < this.offsetHeight){
+        this.style.height = '56px';
+        this.style.height = this.scrollHeight + 'px';
+      }
+    });
+  }
+
+  $("textarea.text").each(function(){
+    var height = $(this).prop('scrollHeight');
+    $(this).css('height', height + 'px')
+  })
+
+});

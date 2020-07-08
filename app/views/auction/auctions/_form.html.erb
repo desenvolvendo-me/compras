@@ -50,7 +50,7 @@
 
       <div class="yui3-g">
         <div class="yui3-u-1-2">
-          <%= f.input :object_management %>
+          <%= f.input :object_management, input_html:{rows: 2} %>
         </div>
         <div class="yui3-u-1-2">
           <%= f.input :employee %>
@@ -170,19 +170,10 @@
   #auction_back{
     margin-right: 23%;
   }
+
 </style>
 
 <script>
-  // $(function(){
-  //   var txtAreas = document.querySelectorAll('textarea');
-  //   for(x=0;x<txtAreas.length;x++){
-  //     txtAreas[x].addEventListener('input', function(){
-  //       if(this.scrollHeight > this.offsetHeight) this.rows += 1;
-  //     });
-  //   }
-  // })
-
-
   var currentTab = 0;
   var currentTabTitle = ['Etapa 1 - Dados Principal','Teste'];
   showTab(currentTab);
