@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      management_object:
+        one: "Objeto"
+        other: "Objetos"
+
+    attributes:
+      management_object:
+        description: "Titulo do Objeto"
+        status: "Status"
+        object: "Objeto"
