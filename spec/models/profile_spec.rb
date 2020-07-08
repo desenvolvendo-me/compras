@@ -10,15 +10,6 @@ describe Profile do
 
   it { should validate_presence_of :name }
 
-  context '#build_role' do
-    it 'builds role' do
-      expect(subject.roles).to have(:no).records
-
-      subject.build_role(:controller => 'customers')
-      expect(subject.roles).to have(1).record
-    end
-  end
-
   it 'return name on to_s' do
     subject.name = 'management'
     expect(subject.to_s).to eq 'management'
