@@ -68,7 +68,7 @@ $(function(){
 
   for(x=0;x<txtAreas.length;x++){
     txtAreas[x].addEventListener('input', function(){
-      if(this.scrollHeight > this.offsetHeight && this.offsetHeight < 200){
+      if(this.scrollHeight > this.offsetHeight && this.offsetHeight < 400){
         this.style.height = this.scrollHeight + 'px'
       }
       if(this.scrollHeight < this.offsetHeight){
