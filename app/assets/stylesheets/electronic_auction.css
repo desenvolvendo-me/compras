@@ -127,6 +127,7 @@ form.simple_form .ui-tabs li.ui-tabs-active a {
 }
 
 
-.simple_form textarea.text {
-    height: 56px;
+textarea.text{
+    height: 65px !important;
+
 }
