@@ -4,13 +4,12 @@
 <div class="dots text-center">
   <span class="step"></span>
   <span class="step"></span>
-<!--  <span class="step"></span>-->
-<!--  <span class="step"></span>-->
+  <!--  <span class="step"></span>-->
+  <!--  <span class="step"></span>-->
 </div>
 
-<!-- One "tab" for each step in the form: -->
-<div class="tab">
-  <div class="d-flex justify-center">
+<div class="d-flex align-center flex-column">
+  <div class="tab d-flex justify-center">
     <fieldset class="pd-2">
       <%= f.input :auction_type, :as => :radio_buttons, :collection => AuctionType.to_a %>
       <div class="yui3-g">
@@ -36,7 +35,7 @@
 
       <div class="yui3-g">
         <div class="yui3-u-1-2">
-          <%= f.input :covid_law, :as => :radio_buttons, :collection =>[['Sim', 'true'],['Não','false']] %>
+          <%= f.input :covid_law, :as => :select, :collection =>[['Sim', 'true'],['Não','false']] %>
         </div>
         <div class="yui3-u-1-2">
           <%= f.input :purchase_value %>
@@ -59,40 +58,37 @@
       </div>
 
     </fieldset>
+
   </div>
-</div>
 
-<div class="tab">
+  <div class="tab">
 
-</div>
-
-<!--<div class="tab">-->
-
-<!--</div>-->
-
-<!--<div class="tab">-->
-
-<!--</div>-->
-
-<div class="">
-  <div style="overflow:auto;">
-    <div style="margin-right: 63px;float: right;">
+  </div>
+    <div>
       <button type="button" id="prevBtn" class="button primary" onclick="nextPrev(-1)">Voltar</button>
       <button type="button" id="nextBtn" class="button primary" onclick="nextPrev(1)">Próximo</button>
     </div>
-  </div>
 </div>
+<!--<div class="tab">-->
+
+<!--</div>-->
+
+<!--<div class="tab">-->
+
+<!--</div>-->
+
+
 
 
 
 <style>
   .auction_auction_type{
     display: grid;
-    grid-template-columns: 4fr 3fr 3fr;
+    grid-template-columns: 1.4fr 1.1fr 1fr 3fr;;
   }
   .auction_covid_law{
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-columns: 3fr 2fr;
     margin-top: 26px;
   }
 
@@ -145,8 +141,14 @@
     display: flex;
   }
 
+  .align-center{
+    align-items: center;
+  }
   .justify-center{
     justify-content: center;
+  }
+  .flex-column{
+    flex-direction: column;
   }
 
   .pd-2{
@@ -159,13 +161,28 @@
   .blue{
     color:#4c7baa;
   }
+
   #title{
     color: #3f6e9d !important;
-    margin-left: 61px;
+    margin-left: 22%;
+  }
+
+  #auction_back{
+    margin-right: 23%;
   }
 </style>
 
 <script>
+  // $(function(){
+  //   var txtAreas = document.querySelectorAll('textarea');
+  //   for(x=0;x<txtAreas.length;x++){
+  //     txtAreas[x].addEventListener('input', function(){
+  //       if(this.scrollHeight > this.offsetHeight) this.rows += 1;
+  //     });
+  //   }
+  // })
+
+
   var currentTab = 0;
   var currentTabTitle = ['Etapa 1 - Dados Principal','Teste'];
   showTab(currentTab);
@@ -173,7 +190,7 @@
 
   function showTab(n) {
     var tabs = $(".tab");
-    tabs.eq(currentTab).css('display', 'block');
+    tabs.eq(currentTab).css('display', 'flex');
     $("#step-title").html(currentTabTitle[n]);
     // ... and fix the Previous/Next buttons:
     if (n === 0) {
