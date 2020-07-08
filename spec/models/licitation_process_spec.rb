@@ -69,7 +69,7 @@ describe LicitationProcess do
   it { should belong_to :payment_method }
   it { should belong_to :readjustment_index }
 
-  it { should have_and_belong_to_many(:purchase_solicitations) }
+  it { should have_many(:purchase_solicitations) }
   it { should have_many(:licitation_notices).dependent(:destroy) }
   it { should have_many(:publications).dependent(:destroy).order(:id) }
   it { should have_many(:bidders).dependent(:destroy).order(:id) }
@@ -797,7 +797,7 @@ describe LicitationProcess do
 
         subject.run_callbacks(:save)
 
-        expect(subject.total_value_of_items).to eq 60
+        expect(subject.calculate_total_value_of_items.to_i).to eq 60
       end
     end
 
@@ -836,7 +836,7 @@ describe LicitationProcess do
         subject.stub(:purchase_process_budget_allocations).and_return([budget_allocation1, budget_allocation2, budget_allocation3])
         subject.run_callbacks(:save)
 
-        expect(subject.budget_allocations_total_value).to eq 10
+        expect(subject.calculate_budget_allocations_total_value.to_i).to eq 10
       end
     end
   end
@@ -1065,23 +1065,6 @@ describe LicitationProcess do
           subject.valid?
 
           expect(subject.errors[:base]).to_not include('Dotação allocation não pode ser apagada pois já está em uso')
-        end
-      end
-
-      context 'when budget_allocation cannot be used' do
-        it 'should verify all budget_allocation marked for destruction and add an error' do
-          budget_allocation.stub(can_be_used?: false)
-          subject.stub(purchase_process_budget_allocations: purchase_process_budget_allocations)
-
-          purchase_process_budget_allocations.
-            stub(:select).
-            and_return([purchase_process_budget_allocation])
-
-          purchase_process_budget_allocations.should_receive(:reload)
-
-          subject.valid?
-
-          expect(subject.errors[:base]).to include('Dotação allocation não pode ser apagada pois já está em uso')
         end
       end
     end
