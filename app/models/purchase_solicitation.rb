@@ -54,23 +54,10 @@ class PurchaseSolicitation < Compras::Model
   accepts_nested_attributes_for :items, :allow_destroy => true
   accepts_nested_attributes_for :purchase_forms, :allow_destroy => true
   accepts_nested_attributes_for :secretaries, :allow_destroy => true
-  # accepts_nested_attributes_for :purchase_form_items, :allow_destroy => true
 
   delegate :authorized?, :to => :direct_purchase, :prefix => true, :allow_nil => true
 
-  # validates :request_date, :responsible, :delivery_location, :presence => true
-  # validates :accounting_year, :kind, :delivery_location, :presence => true
-  # validates :accounting_year, :numericality => true, :mask => '9999', :allow_blank => true
-  # validates :purchase_solicitation_budget_allocations, :no_duplication => :budget_allocation_id
-  # validates :items, :no_duplication => :material_id
-  # validate :must_have_at_least_one_item
-  # validate :validate_budget_structure_and_materials
-  # validate :validate_liberated_status
-  # validate :items_blank?
-
-  # before_save :set_budget_structure_description
-
-  orderize "(case service_status when 'pending' then 1 end), request_date ASC"
+  orderize "id DESC"
   filterize
 
   scope :by_department_user_access_and_licitation_process, lambda {|params|
@@ -155,14 +142,6 @@ class PurchaseSolicitation < Compras::Model
       ((code.eq(q) & code.not_eq(0)) | budget_structure_description.like("#{q}%")
       )
     }
-    # where {
-    #   accounting_year.eq(Date.current.year) &
-    #       (service_status.in [
-    #                              PurchaseSolicitationServiceStatus::LIBERATED,
-    #                              PurchaseSolicitationServiceStatus::PARTIALLY_FULFILLED]) &
-    #       ((code.eq(q) & code.not_eq(0)) | budget_structure_description.like("#{q}%")
-    #       )
-    # }
   }
 
   scope :with_materials_per_licitation, ->(licitation_process_id, material_ids) do
@@ -280,9 +259,4 @@ class PurchaseSolicitation < Compras::Model
     end
   end
 
-  def validate_liberated_status
-    if !active_purchase_solicitation_liberation_liberated? && self.liberated?
-      errors.add(:service_status, :not_yet_liberated)
-    end
-  end
 end
