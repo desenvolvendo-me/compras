@@ -88,6 +88,10 @@ module CrudHelper
 
   end
 
+  def auction_filter?
+    respond_to?("filter_auction_#{controller_name}_path")
+  end
+
   def clear_filter_link
     link_to t("clear_filter"), collection_path(:clear_filters => true)
   end
