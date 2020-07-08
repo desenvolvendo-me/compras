@@ -49,6 +49,9 @@
     </tr>
     </tbody>
   </table>
+  <div class="text-end">
+  <%= link_to "Imprimir Extrato", new_report_extract_consumption_per_process_path(extract_consumption_per_process_report:{licitation_process_id: f.object.licitation_process_id, licitation_process: f.object.licitation_process.to_s,  contract_id: f.object.id, contract: f.object.to_s}), :class => 'button primary' if resource.id %>
+  </div>
 <% end %>
 
 <style>
@@ -58,4 +61,8 @@
   table.records td:not(.description){
     text-align: right !important;
   }
+  .text-end{
+    text-align: end;
+  }
 </style>
+

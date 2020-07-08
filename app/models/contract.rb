@@ -78,7 +78,6 @@ class Contract < Compras::Model
   validate :presence_of_at_least_one_creditor
   validate :must_not_be_greater_than_one_creditor, unless: :consortium_agreement?
 
-  orderize "id DESC"
   filterize
 
   scope :founded, joins { contract_type }.where { contract_type.service_goal.eq(ServiceGoal::FOUNDED) }
@@ -110,6 +109,10 @@ class Contract < Compras::Model
         where { licitation_process.type_of_removal.not_eq(type_of_removal) |
             licitation_process.type_of_removal.eq(nil)
         }
+  end
+
+  def self.ordered
+    order("ABS(end_date - '#{Date.today}'), unico_people.name ASC, contract_number DESC, year DESC, publication_date DESC ").joins(creditors:[:person])
   end
 
   def winning_items
@@ -228,5 +231,6 @@ class Contract < Compras::Model
   def must_not_be_greater_than_one_creditor
     errors.add(:creditors, :must_not_be_greater_than_one_creditor) if creditor_ids.count > 1
   end
+
 
 end

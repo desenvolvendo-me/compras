@@ -15,7 +15,7 @@
  */
 
 #container {
-    width: 1024px;
+    width: 100%;
     height: 100%;
 }
 
@@ -126,6 +126,8 @@ form.simple_form .ui-tabs li.ui-tabs-active a {
     background: rgb(114, 146, 179);
 }
 
+
 textarea.text{
     height: 65px !important;
+
 }
