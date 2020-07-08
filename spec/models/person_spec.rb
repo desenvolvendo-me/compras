@@ -23,8 +23,6 @@ describe Person do
   it { should have_one(:street).through(:address) }
   it { should have_one(:neighborhood).through(:address) }
 
-  it { should validate_presence_of(:address) }
-
   it { should delegate(:city).to(:address).allowing_nil(true) }
   it { should delegate(:state).to(:address).allowing_nil(true) }
   it { should delegate(:zip_code).to(:address).allowing_nil(true) }
