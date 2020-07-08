@@ -1,13 +1,25 @@
 <div class="yui3-g">
-  <div class="yui3-u-1-3">
+  <div class='yui3-u-1-3'>
+    <% if f.object.id.nil? %>
+      <p class="input string">
+        <label class="string required control-label">Solicitante</label>
+        <input class="string required" type="text" value="<%= current_user %>" disabled>
+        <input class="string required" type="hidden" name="purchase_solicitation[user_id]" value="<%= current_user.id %>">
+      </p>
+    <% else f.object.annulled? %>
+      <%= f.input :user, :disabled => true %>
+    <% end %>
+  </div>
+
+  <div class="yui3-u-1-8">
     <%= f.input :code, :disabled => true %>
   </div>
 
-  <div class="yui3-u-1-6">
+  <div class="yui3-u-1-8">
     <%= f.input :accounting_year, :disabled => f.object.persisted? %>
   </div>
 
-  <div class="yui3-u-1-4">
+  <div class="yui3-u-1-6">
     <%= f.input :request_date, :disabled => f.object.annulled? %>
   </div>
 
@@ -21,55 +33,48 @@
   <div class="yui3-u-1-4">
     <%= f.input :department %>
   </div>
+
   <div class="yui3-u-1-4">
     <%= f.input :purchasing_unit %>
   </div>
-  <div class='yui3-u-1-4'>
-    <% if f.object.id.nil? %>
-      <p class="input string">
-        <label class="string required control-label">Solicitante</label>
-        <input class="string required" type="text" value="<%= current_user %>" disabled>
-        <input class="string required" type="hidden" name="purchase_solicitation[user_id]" value="<%= current_user.id %>">
-      </p>
-    <% else f.object.annulled? %>
-      <%= f.input :user, :disabled => true %>
-    <% end %>
-  </div>
-  <div class="yui3-u-1-4" style="margin-top: 4%" >
-    <%= f.input :model_request %>
-  </div>
-</div>
 
-<%= f.input :justification, :disabled => f.object.annulled? %>
-
-<div class="yui3-g">
-  <div class="yui3-u-1-2">
-    <%= f.input :delivery_location, :disabled => f.object.annulled? %>
-  </div>
-
-  <div class="yui3-u-1-2">
+  <div class="yui3-u-1-4">
     <%= f.input :kind, :disabled => f.object.annulled? %>
   </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :delivery_location, :disabled => f.object.annulled? %>
+  </div>
 </div>
+
+<% unless f.object.persisted? %>
+  <!--  <div class="yui3-u-1-4" style="margin-top: 4%" >-->
+  <%= f.input :model_request %>
+  <!--  </div>-->
+<% end %>
+<%= f.input :justification, :disabled => f.object.annulled? %>
+
 
 <%= f.input :general_observations, :disabled => f.object.annulled? %>
 
-<div class="yui3-g">
-  <div class="yui3-u-1-3">
-    <%= f.input :service_status, :disabled => true %>
+<% if f.object.persisted? %>
+  <div class="yui3-g">
+    <div class="yui3-u-1-3">
+      <%= f.input :service_status, :disabled => true %>
+    </div>
+
+    <div class="yui3-u-1-3">
+      <%= f.input :liberation_date, :disabled => true %>
+    </div>
+
+    <div class="yui3-u-1-3">
+      <%= f.input :liberator, :disabled => true  %>
+    </div>
   </div>
 
-  <div class="yui3-u-1-3">
-    <%= f.input :liberation_date, :disabled => true %>
-  </div>
-
-  <div class="yui3-u-1-3">
-    <%= f.input :liberator, :disabled => true  %>
-  </div>
-</div>
-
-<%= f.input :service_observations, :disabled => true  %>
-<%= f.input :no_service_justification, :disabled => true  %>
+  <%= f.input :service_observations, :disabled => true  %>
+  <%= f.input :no_service_justification, :disabled => true  %>
+<% end %>
 
 <script>
   $('#purchase_solicitation_kind').change(function(){
