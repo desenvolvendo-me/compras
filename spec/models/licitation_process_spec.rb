@@ -262,6 +262,7 @@ describe LicitationProcess do
 
             subject.valid?
 
+            #TODO: depende de PO
             expect(subject.errors[:proposal_envelope_opening_date]).to_not include("deve ser em ou depois de #{I18n.l Date.current}")
           end
         end
@@ -279,6 +280,7 @@ describe LicitationProcess do
 
             subject.valid?
 
+            #TODO: depende de PO
             expect(subject.errors[:proposal_envelope_opening_date]).to_not include("deve ser em ou depois de #{I18n.l Date.yesterday}")
           end
         end
