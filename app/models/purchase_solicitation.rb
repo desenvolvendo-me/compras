@@ -70,7 +70,7 @@ class PurchaseSolicitation < Compras::Model
 
   # before_save :set_budget_structure_description
 
-  orderize "id DESC"
+  orderize "(case service_status when 'pending' then 1 end), request_date ASC"
   filterize
 
   scope :by_department_user_access_and_licitation_process, lambda {|params|
