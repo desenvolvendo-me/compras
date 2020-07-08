@@ -4,6 +4,12 @@ class Report::ExtractConsumptionPerProcessesController < Report::BaseController
 
   report_class ExtractConsumptionPerProcessReport, :repository => ExtractConsumptionPerProcessSearcher
 
+  def new
+    @report = report_instance
+
+    @report
+  end
+
   def show
     @licitation_processes = get_extract_consumption_per_process
 
