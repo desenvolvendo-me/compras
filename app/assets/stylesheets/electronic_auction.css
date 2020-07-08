@@ -15,7 +15,7 @@
  */
 
 #container {
-    width: 100%;
+    width: 1024px;
     height: 100%;
 }
 
@@ -125,3 +125,4 @@ form.simple_form .ui-tabs .ui-tabs-nav a {
 form.simple_form .ui-tabs li.ui-tabs-active a {
     background: rgb(114, 146, 179);
 }
+

@@ -1,0 +1,5 @@
+pt-BR:
+  enumerations:
+    auction_type:
+      price_register: "Sistema Registro de Preço"
+      traditional: "Tradicional"

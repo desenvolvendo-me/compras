@@ -1,5 +1,7 @@
 //= require unico-assets
 //= require bignumber
+//= require backbone
+//= require compras/init_backbone
 //= require compras/simple_form.toogle_required_input
 //= require compras/simple_form.numeric_input
 //= require compras/currency_manipulation
@@ -10,10 +12,13 @@
 //= require compras/autocomplete_form
 //= require compras/nested_grid
 //= require compras/index_json
+//= require compras/errors
 //= require reports/balance_per_creditor
 //= require reports/balance_per_process_and_contract
 //= require select2/select2.min
 //= require select2/select2_locale_pt-BR
+
+
 
 $(".clear").live('click', function() {
   $(this).closest(".modal-finder").find("input.modal").val("");

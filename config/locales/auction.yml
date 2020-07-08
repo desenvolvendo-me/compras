@@ -1,0 +1,21 @@
+pt-BR:
+  activerecord:
+    models:
+      auction:
+        one: "Pregão Eletrônico"
+        other: "Pregão Eletrônico"
+
+    attributes:
+      auction:
+        auction_type: "Característica do Pegrão Eletrônico"
+        licitation_number: "Número da Licitação"
+        process_number: "Número do Processo"
+        year: "Ano"
+        dispute_type: "Modo da Disputa"
+        judment_form: "Critério de Julgamento"
+        covid_law: "Utiliza Lei 13.979/2020 Art. 4º COVD19"
+        purchase_value: "Valor da Compra"
+        items_quantity: "Quantidade de Itens"
+        object: "Objeto"
+        object_management: "Gestão do Objeto"
+        employee: "Responsável"

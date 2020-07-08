@@ -1,0 +1,235 @@
+<h1 class="text-center blue"><span id="step-title"></span></h1>
+
+<!-- Circles which indicates the steps of the form: -->
+<div class="dots text-center">
+  <span class="step"></span>
+  <span class="step"></span>
+<!--  <span class="step"></span>-->
+<!--  <span class="step"></span>-->
+</div>
+
+<!-- One "tab" for each step in the form: -->
+<div class="tab">
+  <div class="d-flex justify-center">
+    <fieldset class="pd-2">
+      <%= f.input :auction_type, :as => :radio_buttons, :collection => AuctionType.to_a %>
+      <div class="yui3-g">
+        <div class="yui3-u-1-3">
+          <%= f.input :licitation_number %>
+        </div>
+        <div class="yui3-u-1-3">
+          <%= f.input :year %>
+        </div>
+        <div class="yui3-u-1-3">
+          <%= f.input :process_number %>
+        </div>
+      </div>
+
+      <div class="yui3-g">
+        <div class="yui3-u-1-2">
+          <%= f.input :dispute_type %>
+        </div>
+        <div class="yui3-u-1-2">
+          <%= f.input :judment_form %>
+        </div>
+      </div>
+
+      <div class="yui3-g">
+        <div class="yui3-u-1-2">
+          <%= f.input :covid_law, :as => :radio_buttons, :collection =>[['Sim', 'true'],['Não','false']] %>
+        </div>
+        <div class="yui3-u-1-2">
+          <%= f.input :purchase_value %>
+        </div>
+      </div>
+
+      <div class="yui3-g">
+        <div class="yui3-u-1">
+          <%= f.input :object %>
+        </div>
+      </div>
+
+      <div class="yui3-g">
+        <div class="yui3-u-1-2">
+          <%= f.input :object_management %>
+        </div>
+        <div class="yui3-u-1-2">
+          <%= f.input :employee %>
+        </div>
+      </div>
+
+    </fieldset>
+  </div>
+</div>
+
+<div class="tab">
+
+</div>
+
+<!--<div class="tab">-->
+
+<!--</div>-->
+
+<!--<div class="tab">-->
+
+<!--</div>-->
+
+<div class="">
+  <div style="overflow:auto;">
+    <div style="margin-right: 63px;float: right;">
+      <button type="button" id="prevBtn" class="button primary" onclick="nextPrev(-1)">Voltar</button>
+      <button type="button" id="nextBtn" class="button primary" onclick="nextPrev(1)">Próximo</button>
+    </div>
+  </div>
+</div>
+
+
+
+<style>
+  .auction_auction_type{
+    display: grid;
+    grid-template-columns: 4fr 3fr 3fr;
+  }
+  .auction_covid_law{
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    margin-top: 26px;
+  }
+
+  .simple_form .input {
+    margin-bottom: 1em !important;
+  }
+
+  /* Hide all steps by default: */
+  .tab {
+    display: none;
+  }
+
+  /* Make circles that indicate the steps of the form: */
+  .step {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbbbbb;
+    border: none;
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 0.5;
+  }
+
+  /* Mark the active step: */
+  .step.active {
+    opacity: 1;
+  }
+
+  /* Mark the steps that are finished and valid: */
+  .step.finish {
+    background-color: #4CAF50;
+  }
+
+  fieldset {
+    border: 1px solid #D4DFF0;
+    padding: 5px 15px 5px 15px;
+    border-radius: 5px;
+    margin-top: 30px;
+    width: 80%;
+  }
+
+  fieldset legend {
+    padding: 0px 15px 0 15px;
+    display: block;
+    color: #666;
+  }
+
+  .d-flex{
+    display: flex;
+  }
+
+  .justify-center{
+    justify-content: center;
+  }
+
+  .pd-2{
+    padding: 2rem;
+  }
+
+  .text-center{
+    text-align:center;
+  }
+  .blue{
+    color:#4c7baa;
+  }
+  #title{
+    color: #3f6e9d !important;
+    margin-left: 61px;
+  }
+</style>
+
+<script>
+  var currentTab = 0;
+  var currentTabTitle = ['Etapa 1 - Dados Principal','Teste'];
+  showTab(currentTab);
+
+
+  function showTab(n) {
+    var tabs = $(".tab");
+    tabs.eq(currentTab).css('display', 'block');
+    $("#step-title").html(currentTabTitle[n]);
+    // ... and fix the Previous/Next buttons:
+    if (n === 0) {
+      $("#prevBtn").css('display', "none")
+    } else {
+      $("#prevBtn").css('display', "inline")
+    }
+    if (n === (tabs.length - 1)) {
+      $("#nextBtn").html("Salvar");
+      $("#nextBtn").addClass("submit");
+      $("#nextBtn").bind("click", function(){
+        $("form.auction").submit();
+      })
+    } else {
+      $("#nextBtn").html("Próximo");
+      $("#nextBtn").removeClass("submit");
+    }
+
+    fixStepIndicator(n)
+  }
+
+  function nextPrev(n) {
+    // This function will figure out which tab to display
+    var tabs = $(".tab");
+
+    if (n == 1 && !validateForm()) return false;
+    tabs.eq(currentTab).css('display', 'none');
+    // Increase or decrease the current tab by 1:
+    currentTab = currentTab + n;
+    // if you have reached the end of the form... :
+    // if (currentTab >= tabs.length) {
+    //
+    //   document.getElementById("regForm").submit();
+    //   return false;
+    // }
+    showTab(currentTab);
+  }
+
+  function validateForm() {
+    // This function deals with validation of the form fields
+    var valid = true,
+      tabs = $("tab");
+
+    //enviar via ajax o form aqui
+
+    if (valid) {
+      $(".step").eq(currentTab).addClass("finish");
+    }
+    return valid;
+  }
+
+  function fixStepIndicator(n) {
+    // This function removes the "active" class of all steps...
+    var i, steps = $(".step");
+    steps.removeClass('active');
+    //... and adds the "active" class to the current step:
+    steps.eq(n).addClass('active')
+  }
+</script>
