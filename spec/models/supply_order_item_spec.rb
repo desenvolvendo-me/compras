@@ -11,50 +11,6 @@ describe SupplyOrderItem do
   it { should delegate(:service_without_quantity?).to(:material).allowing_nil true }
   it { should delegate(:reference_unit).to(:material).allowing_nil(true) }
 
-  context 'validations' do
-    before do
-      subject.stub(supply_order_item_value_balance: 0)
-    end
-
-    describe '#authorization_value' do
-      it 'should be greater than 0' do
-        subject.authorization_value = 0
-
-        expect(subject.valid?).to be_false
-        expect(subject.errors[:authorization_value]).to include("deve ser maior que 0")
-      end
-    end
-
-    describe '#authorization_quantity' do
-      it 'should be greater than 0' do
-        subject.authorization_quantity = 0
-
-        expect(subject.valid?).to be_false
-        expect(subject.errors[:authorization_quantity]).to include("deve ser maior que 0")
-      end
-    end
-  end
-
-  describe "#balance" do
-    it "when quantity is greater than authorized balance is greater than zero" do
-      subject.stub(:quantity).and_return(3)
-      subject.stub(:authorized_quantity).and_return(1)
-
-      expect(subject.balance).to eq 2
-    end
-  end
-
-  describe "#quantity" do
-    let(:pledge_item) { double :pledge_item }
-
-    it 'tries to return pledge_item quantity' do
-      subject.stub(pledge_item: pledge_item)
-      pledge_item.should_receive(:quantity).and_return(0)
-
-      expect(subject.quantity).to eq 0
-    end
-  end
-
   describe '#value' do
     let(:pledge_item) { double :pledge_item }
 
