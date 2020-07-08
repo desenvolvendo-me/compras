@@ -7,3 +7,7 @@
   height: 0px;
   display: none;
 }
+
+.simple_form textarea.text {
+    height: 56px;
+}
