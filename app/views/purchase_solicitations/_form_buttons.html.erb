@@ -5,6 +5,8 @@
     <%= f.button :submit, 'data-disabled' => f.object.decorator.not_editable_message %>
   <% end %>
 
-  <%= link_to 'Liberações', purchase_solicitation_liberations_path(:purchase_solicitation_id => resource.id), 'data-disabled' => f.object.decorator.not_persisted_message,  :class => 'button primary' %>
+  <% if f.object.persisted? %>
+    <%= link_to 'Liberações', purchase_solicitation_liberations_path(:purchase_solicitation_id => resource.id), 'data-disabled' => f.object.decorator.not_persisted_message,  :class => 'button primary' %>
+  <% end %>
   <%= f.button :back %>
 </div>
