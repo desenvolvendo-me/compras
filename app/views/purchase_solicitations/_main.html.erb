@@ -76,6 +76,12 @@
   <%= f.input :no_service_justification, :disabled => true  %>
 <% end %>
 
+<div class="yui3-g">
+  <h3 class="divider">Solicitações</h3>
+</div>
+
+<%= render 'items', :f => f %>
+
 <script>
   $('#purchase_solicitation_kind').change(function(){
     if (this.value.length > 0){
