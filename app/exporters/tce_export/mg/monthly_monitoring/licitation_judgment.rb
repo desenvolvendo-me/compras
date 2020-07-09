@@ -110,7 +110,6 @@ module TceExport::MG
         {
           tipo_registro: 30,
           cod_orgao: monthly_monitoring.organ_code,
-          cod_unidade_sub: budget_structure_code(purchase_process.execution_unit_responsible),
           exercicio_licitacao: purchase_process.year,
           nro_processo_licitatorio: purchase_process.process.to_s,
           dt_julgamento: purchase_process.proposal_envelope_opening_date,
