@@ -7,12 +7,6 @@ describe PurchaseSolicitationItem, vcr: { cassette_name: 'integration/purchase_s
 
   let(:customer) { create(:customer, domain: 'compras.dev', name: 'Compras Dev') }
 
-  describe 'validate uniqueness' do
-    before { PurchaseSolicitationItem.make!(:item) }
-
-    it { should validate_uniqueness_of(:material_id).scoped_to(:purchase_solicitation_id) }
-  end
-
   context 'associations' do
     describe '#price_collection_proposal_items' do
       let(:material_antivirus) do
