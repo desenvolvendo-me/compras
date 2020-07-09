@@ -90,4 +90,10 @@
       $('#purchase_solicitation_material').val('').attr('readonly', true).attr('data-disabled', '<%= f.object.decorator.disabled_materials %>');
     }
   });
+
+$(function(){
+    $("#add-button").append($(".add-nested-record"));
+    $(".add-nested-record").last().remove();
+  })
+
 </script>
