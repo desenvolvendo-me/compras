@@ -72,7 +72,6 @@ Creditor.blueprint(:nohup) do
   main_cnae { Cnae.make!(:varejo) }
   materials { [Material.make!(:antivirus), Material.make!(:arame_comum)] }
   person { Person.make!(:nohup) }
-  registration_cadastral_certificates { [RegistrationCadastralCertificate.make!(:crc, :creditor => object)] }
   regularization_or_administrative_sanctions { [RegularizationOrAdministrativeSanction.make!(:sancao_administrativa, :creditor => object)] }
   representatives { [CreditorRepresentative.make!(:representante_sobrinho)] }
   representative_people { [Person.make!(:sobrinho)] }
@@ -86,7 +85,6 @@ Creditor.blueprint(:nobe) do
   main_cnae { Cnae.make!(:varejo) }
   materials { [Material.make!(:antivirus), Material.make!(:arame_comum)] }
   person { Person.make!(:nobe) }
-  registration_cadastral_certificates { [RegistrationCadastralCertificate.make!(:crc, :creditor => object)] }
   regularization_or_administrative_sanctions { [RegularizationOrAdministrativeSanction.make!(:sancao_administrativa, :creditor => object)] }
   representatives { [CreditorRepresentative.make!(:representante_sobrinho)] }
   representative_people { [Person.make!(:sobrinho)] }
@@ -100,7 +98,6 @@ Creditor.blueprint(:ibm) do
   main_cnae { Cnae.make!(:varejo) }
   materials { [Material.make!(:antivirus), Material.make!(:arame_comum)] }
   person { Person.make!(:ibm) }
-  registration_cadastral_certificates { [RegistrationCadastralCertificate.make!(:crc, :creditor => object)] }
   regularization_or_administrative_sanctions { [RegularizationOrAdministrativeSanction.make!(:sancao_administrativa, :creditor => object)] }
   representatives { [CreditorRepresentative.make!(:representante_sobrinho)] }
   representative_people { [Person.make!(:sobrinho)] }
@@ -114,7 +111,6 @@ Creditor.blueprint(:mateus) do
   main_cnae { Cnae.make!(:varejo) }
   materials { [Material.make!(:antivirus), Material.make!(:arame_comum)] }
   person { Person.make!(:mateus) }
-  registration_cadastral_certificates { [RegistrationCadastralCertificate.make!(:crc, :creditor => object)] }
   regularization_or_administrative_sanctions { [RegularizationOrAdministrativeSanction.make!(:sancao_administrativa, :creditor => object)] }
   representatives { [CreditorRepresentative.make!(:representante_sobrinho)] }
   representative_people { [Person.make!(:sobrinho)] }
