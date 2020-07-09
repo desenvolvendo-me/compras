@@ -16,6 +16,6 @@ class CreateTableContractItemBalances < ActiveRecord::Migration
     add_foreign_key :compras_contract_item_balances, :compras_purchase_solicitations, column: :purchase_solicitation_id
     add_foreign_key :compras_contract_item_balances, :compras_contracts, column: :contract_id
     add_foreign_key :compras_contract_item_balances, :unico_creditors, column: :creditor_id
-    add_foreign_key :compras_contract_item_balances, :unico_materials, column: :material_id
+    # add_foreign_key :compras_contract_item_balances, :unico_materials, column: :material_id
   end
 end
