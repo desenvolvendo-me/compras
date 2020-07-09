@@ -18,7 +18,6 @@ describe LicitationProcessRatificationItem do
   it { should delegate(:control_amount?).to(:material).allowing_nil true }
   it { should delegate(:unit_price).to(:purchase_process_creditor_proposal).allowing_nil true }
   it { should delegate(:total_price).to(:purchase_process_creditor_proposal).allowing_nil true }
-  it { should delegate(:execution_unit_responsible).to(:licitation_process).allowing_nil(true).prefix(true) }
   it { should delegate(:year).to(:licitation_process).allowing_nil(true).prefix(true) }
   it { should delegate(:process).to(:licitation_process).allowing_nil(true).prefix(true) }
   it { should delegate(:identity_document).to(:creditor).allowing_nil(true).prefix(true) }

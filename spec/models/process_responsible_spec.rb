@@ -15,7 +15,6 @@ describe ProcessResponsible do
   it { should validate_presence_of :stage_process }
   it { should validate_presence_of :licitation_process }
 
-  it { should delegate(:execution_unit_responsible).to(:licitation_process).allowing_nil(true) }
   it { should delegate(:year).to(:licitation_process).allowing_nil(true).prefix(true) }
   it { should delegate(:process).to(:licitation_process).allowing_nil(true).prefix(true) }
   it { should delegate(:name).to(:street).allowing_nil(true).prefix(true) }
