@@ -12,7 +12,6 @@ module TceExport::MG
           {
             tipo_registro: 10,
             cod_orgao: monthly_monitoring.organ_code,
-            cod_unidade_sub: budget_structure_code(proposal),
             exercicio_licitacao: year(proposal),
             nro_processo_licitatorio: process(proposal).to_s,
             tp_documento: tp_documento(proposal.creditor),
@@ -72,10 +71,6 @@ module TceExport::MG
         item.material.control_amount ? item.quantity : 1
       end
 
-      def budget_structure_code(proposal)
-        Formatters::BudgetStructureCodeFormatter.new(monthly_monitoring.organ_code, execution_unit_responsible(proposal))
-      end
-
       def vl_unitario(proposal)
         realignment?(proposal) ? proposal.price : proposal.unit_price
       end
@@ -90,10 +85,6 @@ module TceExport::MG
 
       def year(proposal)
         realignment?(proposal) ? proposal.purchase_process_year : proposal.licitation_process_year
-      end
-
-      def execution_unit_responsible(proposal)
-        realignment?(proposal) ? proposal.purchase_process_execution_unit_responsible : proposal.licitation_process_execution_unit_responsible
       end
 
       def process(proposal)
