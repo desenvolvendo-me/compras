@@ -4,4 +4,11 @@
 
   <%= f.input :items, as: :nested_grid, data_disabled: (f.object.decorator.is_annulled_message or f.object.decorator.licitation_process_started),
               columns: [:material, :lot, :reference_unit, :brand, :quantity, :unit_price, :estimated_total_price] %>
+
+  <div class="d-flex justify-content-end">
+    <%= f.input :total_items_value, :disabled => true, wrapper_html:{ style: 'margin-bottom: 0 !important;'},
+                :input_html => {:value => number_with_precision(f.object.total_items_value), style:'width: 10em'} %>
+
+  </div>
+
 </div>
