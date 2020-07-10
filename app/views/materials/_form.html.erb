@@ -23,7 +23,43 @@
     }
   }
 
-  (function(){
+  $(function(){
     setControlAmount();
-  })();
+    writePhrase();
+
+    $("#material_quantity_unit, #material_output_reference_unit, #material_reference_unit").change(function(){
+      writePhrase()
+    })
+  });
+
+  function writePhrase(){
+    var qtd = $("#material_quantity_unit").val(),
+      output_unit = $("#material_output_reference_unit").val(),
+      purchase_unit = $("#material_reference_unit").val();
+
+    if(qtd && output_unit && purchase_unit ){
+      $(".describe").html('1 '+purchase_unit+' '+qtd+' '+output_unit);
+    }
+  }
 </script>
+
+<style>
+  .mt-checkbox{
+    margin-top: 2.3rem;
+  }
+
+  .pdl-3{
+    padding-left: 3rem;
+  }
+
+  .describe{
+    font-weight: bold;
+    color: #0075ff;
+    font-size: 15px;
+  }
+
+  .describe-m{
+    margin-bottom: 1rem;
+    margin-top: -16px;
+  }
+</style>
