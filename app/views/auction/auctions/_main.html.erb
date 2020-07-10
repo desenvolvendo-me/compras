@@ -1,0 +1,48 @@
+<fieldset class="pd-2">
+  <%= f.input :auction_type, :as => :radio_buttons, :collection => AuctionType.to_a, label_html:{class:'auction_type'} %>
+  <div class="yui3-g">
+    <div class="yui3-u-1-3">
+      <%= f.input :licitation_number %>
+    </div>
+    <div class="yui3-u-1-3">
+      <%= f.input :year %>
+    </div>
+    <div class="yui3-u-1-3">
+      <%= f.input :process_number %>
+    </div>
+  </div>
+
+  <div class="yui3-g">
+    <div class="yui3-u-1-2">
+      <%= f.input :dispute_type %>
+    </div>
+    <div class="yui3-u-1-2">
+      <%= f.input :judment_form %>
+    </div>
+  </div>
+
+  <div class="yui3-g">
+    <div class="yui3-u-1-2">
+      <%= f.input :covid_law, :as => :select, :collection =>[['Sim', 'true'],['Não','false']] %>
+    </div>
+    <div class="yui3-u-1-2">
+      <%= f.input :purchase_value %>
+    </div>
+  </div>
+
+  <div class="yui3-g">
+    <div class="yui3-u-1">
+      <%= f.input :object %>
+    </div>
+  </div>
+
+  <div class="yui3-g">
+    <div class="yui3-u-1-2">
+      <%= f.input :object_management, input_html:{rows: 2} %>
+    </div>
+    <div class="yui3-u-1-2">
+      <%= f.input :employee %>
+    </div>
+  </div>
+
+</fieldset>

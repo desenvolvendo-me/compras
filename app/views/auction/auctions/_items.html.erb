@@ -1,0 +1,13 @@
+<fieldset class="pd-2">
+    <div class="yui3-g">
+      <div class="yui3-u-1-2">
+        <%= f.input :purchase_solicitation, :as => :modal, 'data-hidden-field-class' => 'unique', :fake => true, :required => true %>
+      </div>
+      <div class="yui3-u-1-2">
+        <%= select_tag :kind, options_for_select(PurchaseSolicitationKind.to_a),
+                       include_blank: true, as: :fake, :required => true,
+                       class: 'required kind select'%>
+      </div>
+    </div>
+
+</fieldset>
