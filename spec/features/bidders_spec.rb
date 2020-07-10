@@ -56,7 +56,7 @@ feature "Bidders", vcr: { cassette_name: :bidders } do
     expect(page).to have_field 'Processo de compra', :with => '2/2013 - Convite 1', disabled: true
     expect(page).to have_field 'Data do processo de compra', :with => '20/03/2013', disabled: true
 
-    fill_modal 'Fornecedor', :with => 'Gabriel Sobrinho'
+    fill_with_autocomplete 'Fornecedor', :with => 'Gabriel Sobrinho'
 
     check 'Convidado'
     fill_in 'Protocolo', :with => '123456'
@@ -122,7 +122,7 @@ feature "Bidders", vcr: { cassette_name: :bidders } do
     expect(page).to have_field 'Processo de compra', :with => '2/2013 - Convite 1', disabled: true
     expect(page).to have_field 'Data do processo de compra', :with => '20/03/2013', disabled: true
 
-    fill_modal 'Fornecedor', :with => 'Gabriel Sobrinho'
+    fill_with_autocomplete 'Fornecedor', :with => 'Gabriel Sobrinho'
 
     check 'Convidado'
     fill_in 'Protocolo', :with => '111111'
