@@ -536,7 +536,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
 
     navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2012'
@@ -647,7 +647,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
 
     navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2012'
@@ -662,7 +662,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
 
     navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2012'
@@ -693,7 +693,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
 
     navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2012'
@@ -758,7 +758,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
 
     navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       expect(page).to have_css 'a', :count => 2
@@ -781,7 +781,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
 
     navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link "1/2012"
@@ -817,7 +817,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
 
     navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link "2/2013"
@@ -874,7 +874,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
 
     navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       expect(page).to have_content 'Processo/Ano'
@@ -898,7 +898,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
 
     navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2012'
@@ -906,7 +906,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
 
     click_link 'Voltar'
 
-    click_link "Limpar Filtro"
+    
 
     expect(page).to have_link '1/2012'
 
@@ -1187,7 +1187,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
 
     navigate 'Licitações > Solicitações de Compra'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2013'
@@ -1758,7 +1758,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
 
     navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2012'
@@ -1784,7 +1784,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
 
     navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     click_link '1/2012'
 
@@ -1792,7 +1792,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
 
     click_link 'Voltar'
 
-    click_link "Limpar Filtro"
+    
 
     click_link '2/2012'
 
@@ -1805,7 +1805,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
 
     navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
     click_link '1/2012'
 
     expect(page).to have_disabled_element "Propostas", :reason => "deve possuir credores e itens"
@@ -2097,7 +2097,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
 
     navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link "1/2012"

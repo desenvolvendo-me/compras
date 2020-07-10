@@ -13,7 +13,7 @@ feature "LicitationProcessPublications", vcr: { cassette_name: :licitation_proce
 
     navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2012'
@@ -31,7 +31,7 @@ feature "LicitationProcessPublications", vcr: { cassette_name: :licitation_proce
 
     navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2012'
@@ -91,7 +91,7 @@ feature "LicitationProcessPublications", vcr: { cassette_name: :licitation_proce
 
     navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2012'
@@ -117,7 +117,7 @@ feature "LicitationProcessPublications", vcr: { cassette_name: :licitation_proce
 
     navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '2/2013'
@@ -147,7 +147,7 @@ feature "LicitationProcessPublications", vcr: { cassette_name: :licitation_proce
 
     navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '2/2013'
@@ -170,7 +170,7 @@ feature "LicitationProcessPublications", vcr: { cassette_name: :licitation_proce
 
     navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2012'
@@ -206,7 +206,7 @@ feature "LicitationProcessPublications", vcr: { cassette_name: :licitation_proce
 
     click_link 'Voltar'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2012'

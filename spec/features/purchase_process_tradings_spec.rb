@@ -46,7 +46,7 @@ feature "PurchaseProcessTradings", vcr: { cassette_name: :purchase_process_tradi
 
     navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+
 
     within_records do
       click_link '1/2012'
@@ -716,7 +716,7 @@ feature "PurchaseProcessTradings", vcr: { cassette_name: :purchase_process_tradi
 
     navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2012'
@@ -894,7 +894,7 @@ feature "PurchaseProcessTradings", vcr: { cassette_name: :purchase_process_tradi
 
     navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2012'
@@ -1100,7 +1100,7 @@ feature "PurchaseProcessTradings", vcr: { cassette_name: :purchase_process_tradi
 
     navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2012'
@@ -1378,7 +1378,7 @@ feature "PurchaseProcessTradings", vcr: { cassette_name: :purchase_process_tradi
 
     navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2012'

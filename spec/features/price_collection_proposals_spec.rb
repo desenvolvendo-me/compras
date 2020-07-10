@@ -17,7 +17,7 @@ feature "PriceCollectionProposals" do
 
       navigate 'Licitações > Coletas de Preços'
 
-      click_link "Limpar Filtro"
+      
 
       click_link '1/2012'
 
@@ -32,7 +32,7 @@ feature "PriceCollectionProposals" do
 
       navigate 'Licitações > Coletas de Preços'
 
-      click_link "Limpar Filtro"
+      
 
       click_link '1/2012'
 
@@ -46,7 +46,7 @@ feature "PriceCollectionProposals" do
 
       navigate 'Licitações > Coletas de Preços'
 
-      click_link "Limpar Filtro"
+      
 
       click_link '1/2012'
 
@@ -64,7 +64,7 @@ feature "PriceCollectionProposals" do
 
       navigate 'Licitações > Coletas de Preços'
 
-      click_link "Limpar Filtro"
+      
 
       click_link '1/2012'
 
@@ -101,7 +101,7 @@ feature "PriceCollectionProposals" do
 
       navigate 'Licitações > Coletas de Preços'
 
-      click_link "Limpar Filtro"
+      
 
       click_link '1/2012'
 

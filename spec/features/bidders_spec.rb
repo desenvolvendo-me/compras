@@ -331,7 +331,7 @@ feature "Bidders", vcr: { cassette_name: :bidders } do
 
     navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2012'
@@ -351,7 +351,7 @@ feature "Bidders", vcr: { cassette_name: :bidders } do
 
     navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2012'
@@ -371,7 +371,7 @@ feature "Bidders", vcr: { cassette_name: :bidders } do
 
     navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2012'

@@ -15,7 +15,7 @@ feature "ReserveFundRequests" do
     expect(page).to have_title 'Reserva de Dotação dos Processos de Compras'
     expect(page).to have_link 'Filtrar Reserva de Dotação'
 
-    click_link "Limpar Filtro"
+    
 
 
     within_records do

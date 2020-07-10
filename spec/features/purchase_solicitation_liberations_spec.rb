@@ -14,7 +14,7 @@ feature "PurchaseSolicitationLiberations", vcr: { cassette_name: :purchase_solic
 
     navigate 'Licitações > Solicitações de Compra'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       page.find('a').click

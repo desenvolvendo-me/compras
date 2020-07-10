@@ -250,7 +250,7 @@ feature "PriceCollections", vcr: { cassette_name: :price_collections } do
 
     navigate 'Licitações > Coletas de Preços'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       page.find('a').click
@@ -346,7 +346,7 @@ feature "PriceCollections", vcr: { cassette_name: :price_collections } do
 
     navigate 'Licitações > Coletas de Preços'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       page.find('a').click
@@ -411,7 +411,7 @@ feature "PriceCollections", vcr: { cassette_name: :price_collections } do
 
     navigate 'Licitações > Coletas de Preços'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       page.find('a').click
@@ -436,7 +436,7 @@ feature "PriceCollections", vcr: { cassette_name: :price_collections } do
 
     navigate 'Licitações > Coletas de Preços'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       page.find('a').click
@@ -485,7 +485,7 @@ feature "PriceCollections", vcr: { cassette_name: :price_collections } do
 
     navigate 'Licitações > Coletas de Preços'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       page.find('a').click
@@ -548,7 +548,7 @@ feature "PriceCollections", vcr: { cassette_name: :price_collections } do
 
     navigate 'Licitações > Coletas de Preços'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       page.find('a').click
@@ -583,7 +583,7 @@ feature "PriceCollections", vcr: { cassette_name: :price_collections } do
 
     navigate 'Licitações > Coletas de Preços'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       page.find('a').click
@@ -684,7 +684,7 @@ feature "PriceCollections", vcr: { cassette_name: :price_collections } do
 
     navigate 'Licitações > Coletas de Preços'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       page.find('a').click
@@ -739,7 +739,7 @@ feature "PriceCollections", vcr: { cassette_name: :price_collections } do
 
     navigate 'Licitações > Coletas de Preços'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       page.find('a').click
@@ -795,7 +795,7 @@ feature "PriceCollections", vcr: { cassette_name: :price_collections } do
 
     navigate 'Licitações > Coletas de Preços'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       expect(page).to have_css('a', :count => 2)
@@ -817,7 +817,7 @@ feature "PriceCollections", vcr: { cassette_name: :price_collections } do
 
     navigate 'Licitações > Coletas de Preços'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       expect(page).to have_content 'Código/Ano'

@@ -86,7 +86,7 @@ feature "Contracts", vcr: { cassette_name: :contracts } do
 
     expect(page).to have_notice 'Contrato criado com sucesso.'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       page.find('a').click
@@ -161,7 +161,7 @@ feature "Contracts", vcr: { cassette_name: :contracts } do
     Contract.make!(:primeiro_contrato)
     navigate 'Contratos > Contratos'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '001'
@@ -251,7 +251,7 @@ feature "Contracts", vcr: { cassette_name: :contracts } do
 
     navigate 'Contratos > Contratos'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       page.find('a').click
@@ -277,7 +277,7 @@ feature "Contracts", vcr: { cassette_name: :contracts } do
 
     expect(page).to have_notice 'Contrato editado com sucesso.'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       page.find('a').click
@@ -299,7 +299,7 @@ feature "Contracts", vcr: { cassette_name: :contracts } do
 
     navigate 'Contratos > Contratos'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       page.find('a').click
@@ -313,7 +313,7 @@ feature "Contracts", vcr: { cassette_name: :contracts } do
 
     expect(page).to have_notice 'Contrato editado com sucesso.'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       page.find('a').click
@@ -332,7 +332,7 @@ feature "Contracts", vcr: { cassette_name: :contracts } do
 
     navigate 'Contratos > Contratos'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       expect(page).to have_content 'Número do contrato'

@@ -10,7 +10,7 @@ feature 'PriceCollectionAnnuls' do
 
     navigate 'Licitações > Coletas de Preços'
 
-    click_link "Limpar Filtro"
+    
 
     click_link '1/2012'
 
@@ -30,7 +30,7 @@ feature 'PriceCollectionAnnuls' do
 
     navigate 'Licitações > Coletas de Preços'
 
-    click_link "Limpar Filtro"
+    
 
     click_link '1/2012'
 

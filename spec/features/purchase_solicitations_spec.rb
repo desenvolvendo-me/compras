@@ -19,7 +19,7 @@ feature "PurchaseSolicitations", vcr: { cassette_name: :purchase_solicitations }
 
     navigate 'Licitações > Solicitações de Compra'
 
-    click_link "Limpar Filtro"
+    
 
     click_link 'Criar Solicitação de Compra'
 
@@ -186,7 +186,7 @@ feature "PurchaseSolicitations", vcr: { cassette_name: :purchase_solicitations }
 
     navigate 'Licitações > Solicitações de Compra'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       page.find('a').click
@@ -322,7 +322,7 @@ feature "PurchaseSolicitations", vcr: { cassette_name: :purchase_solicitations }
 
     navigate 'Licitações > Solicitações de Compra'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       page.find('a').click
@@ -469,7 +469,7 @@ feature "PurchaseSolicitations", vcr: { cassette_name: :purchase_solicitations }
 
     navigate 'Licitações > Solicitações de Compra'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       page.find('a').click
@@ -485,7 +485,7 @@ feature "PurchaseSolicitations", vcr: { cassette_name: :purchase_solicitations }
 
     navigate 'Licitações > Solicitações de Compra'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       page.find('a').click
@@ -549,7 +549,7 @@ feature "PurchaseSolicitations", vcr: { cassette_name: :purchase_solicitations }
 
     navigate 'Licitações > Solicitações de Compra'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link purchase_solicitation.decorator.code_and_year
@@ -611,7 +611,7 @@ feature "PurchaseSolicitations", vcr: { cassette_name: :purchase_solicitations }
 
     navigate 'Licitações > Solicitações de Compra'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       expect(page).to have_content 'Código/Ano'
@@ -657,7 +657,7 @@ feature "PurchaseSolicitations", vcr: { cassette_name: :purchase_solicitations }
 
     click_link "Voltar"
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link "1/2012"

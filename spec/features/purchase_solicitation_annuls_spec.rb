@@ -23,7 +23,7 @@ feature 'PurchaseSolicitationAnnul', vcr: { cassette_name: :purchase_solicitatio
 
     navigate 'Licitações > Solicitações de Compra'
 
-    click_link "Limpar Filtro"
+    
 
     click_link "#{solicitation.decorator.code_and_year}"
 
@@ -44,7 +44,7 @@ feature 'PurchaseSolicitationAnnul', vcr: { cassette_name: :purchase_solicitatio
 
     navigate 'Licitações > Solicitações de Compra'
 
-    click_link "Limpar Filtro"
+    
 
     click_link "#{purchase_solicitation.decorator.code_and_year}"
 
@@ -57,7 +57,7 @@ feature 'PurchaseSolicitationAnnul', vcr: { cassette_name: :purchase_solicitatio
 
     navigate 'Licitações > Solicitações de Compra'
 
-    click_link "Limpar Filtro"
+    
 
     click_link "#{solicitation.decorator.code_and_year}"
 

@@ -15,7 +15,7 @@ feature 'PurchaseProcessProposals', vcr: { cassette_name: :purchase_process_prop
 
     navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2012'
@@ -160,7 +160,7 @@ feature 'PurchaseProcessProposals', vcr: { cassette_name: :purchase_process_prop
 
     navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2012'
@@ -315,7 +315,7 @@ feature 'PurchaseProcessProposals', vcr: { cassette_name: :purchase_process_prop
 
     navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2012'
@@ -414,7 +414,7 @@ feature 'PurchaseProcessProposals', vcr: { cassette_name: :purchase_process_prop
 
     navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2012'

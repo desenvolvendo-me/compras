@@ -13,7 +13,7 @@ feature "OccurrenceContractualHistorics", vcr: { cassette_name: :occurrence_cont
 
     navigate 'Contratos > Contratos'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       page.find('a').click

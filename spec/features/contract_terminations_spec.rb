@@ -14,7 +14,7 @@ feature 'ContractTerminations', vcr: { cassette_name: :contract_terminations } d
 
     navigate 'Contratos > Contratos'
 
-    click_link "Limpar Filtro"
+    
 
     click_link '001'
 
@@ -86,7 +86,7 @@ feature 'ContractTerminations', vcr: { cassette_name: :contract_terminations } d
 
     navigate 'Contratos > Contratos'
 
-    click_link "Limpar Filtro"
+    
 
     click_link '001'
 

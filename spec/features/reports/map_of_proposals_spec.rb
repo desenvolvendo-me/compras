@@ -11,7 +11,7 @@ feature 'Report::MapOfProposals', vcr: { cassette_name: :map_of_proposals } do
     make_dependencies!
     navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2012'
@@ -89,7 +89,7 @@ feature 'Report::MapOfProposals', vcr: { cassette_name: :map_of_proposals } do
     make_dependencies!
     navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2012'
@@ -151,7 +151,7 @@ feature 'Report::MapOfProposals', vcr: { cassette_name: :map_of_proposals } do
     make_dependencies!
     navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2012'
@@ -235,7 +235,7 @@ feature 'Report::MapOfProposals', vcr: { cassette_name: :map_of_proposals } do
 
     navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2012'

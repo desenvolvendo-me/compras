@@ -18,7 +18,7 @@ feature 'Report::MapOfPrices' do
 
     navigate 'Licitações > Coletas de Preços'
 
-    click_link "Limpar Filtro"
+
 
     within_records do
       page.find('a').click

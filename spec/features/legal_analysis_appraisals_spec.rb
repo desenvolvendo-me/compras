@@ -12,7 +12,7 @@ feature "LegalAnalysisAppraisals", vcr: { cassette_name: :legal_analysis_apprais
 
     navigate 'Licitações > Processos de Compra'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2012'
