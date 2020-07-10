@@ -179,7 +179,7 @@ feature "Contracts", vcr: { cassette_name: :contracts } do
 
     navigate 'Contratos > Contratos'
 
-    click_link 'Limpar Filtro'
+
 
     within_records do
       page.find('a').click
@@ -397,7 +397,7 @@ feature "Contracts", vcr: { cassette_name: :contracts } do
 
     navigate 'Contratos > Contratos'
 
-    click_link 'Limpar Filtro'
+
 
     click_link '001'
 
@@ -413,7 +413,7 @@ feature "Contracts", vcr: { cassette_name: :contracts } do
 
     expect(page).to have_notice 'Contrato editado com sucesso.'
 
-    click_link 'Limpar Filtro'
+
     click_link '001'
 
     within 'tbody.contract_creditor_records' do

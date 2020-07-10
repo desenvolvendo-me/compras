@@ -10,7 +10,7 @@ feature 'Report::MapOfBids', vcr: { cassette_name: :map_of_bids } do
 
     navigate 'Licitações > Processos de Compras'
 
-    click_link 'Limpar Filtro'
+
 
     within_records do
       click_link '1/2012'
@@ -154,7 +154,7 @@ feature 'Report::MapOfBids', vcr: { cassette_name: :map_of_bids } do
 
     navigate 'Licitações > Processos de Compras'
 
-    click_link 'Limpar Filtro'
+
 
     within_records do
       click_link '1/2012'

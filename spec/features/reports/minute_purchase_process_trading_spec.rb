@@ -10,7 +10,7 @@ feature 'Report::MinutePurchaseProcessTradings', vcr: { cassette_name: :minute_p
 
     navigate 'Licitações > Processos de Compras'
 
-    click_link 'Limpar Filtro'
+
     click_link '1/2012'
 
     click_link 'Imprimir ATA'

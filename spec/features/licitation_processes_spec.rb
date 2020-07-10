@@ -600,7 +600,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
 
     navigate 'Licitações > Processos de Compras'
 
-    click_link 'Limpar Filtro'
+
 
     within_records do
       click_link '2/2013'
@@ -2023,7 +2023,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
 
     navigate 'Licitações > Processos de Compras'
 
-    click_link 'Limpar Filtro'
+
 
     within_records do
       click_link '1/2012'
@@ -2059,7 +2059,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
 
     navigate 'Licitações > Processos de Compras'
 
-    click_link 'Limpar Filtro'
+
 
     within_records do
       click_link '1/2012'
@@ -2477,7 +2477,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
 
     navigate 'Licitações > Processos de Compras'
 
-    click_link 'Limpar Filtro'
+
 
     within_records do
       click_link '1/2012'
@@ -2515,7 +2515,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
 
     navigate 'Licitações > Processos de Compras'
 
-    click_link 'Limpar Filtro'
+
 
     within_records do
       click_link '102/2013'
@@ -2545,7 +2545,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
 
     navigate 'Licitações > Processos de Compras'
 
-    click_link 'Limpar Filtro'
+
 
     within_records do
       click_link '102/2013'
@@ -2575,7 +2575,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
 
     navigate 'Licitações > Processos de Compras'
 
-    click_link 'Limpar Filtro'
+
 
     within_records do
       click_link '102/2013'
@@ -2612,7 +2612,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
 
     navigate 'Licitações > Processos de Compras'
 
-    click_link 'Limpar Filtro'
+
 
     within_records do
       click_link '102/2013'

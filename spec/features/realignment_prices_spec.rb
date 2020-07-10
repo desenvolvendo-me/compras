@@ -35,7 +35,7 @@ feature "RealignmentPrices", vcr: { cassette_name: :realignment_prices } do
 
     navigate 'Licitações > Processos de Compras'
 
-    click_link 'Limpar Filtro'
+
     click_link '1/2012'
 
     click_link 'Realinhamento de preço'
@@ -202,7 +202,7 @@ feature "RealignmentPrices", vcr: { cassette_name: :realignment_prices } do
 
     navigate 'Licitações > Processos de Compras'
 
-    click_link 'Limpar Filtro'
+
     click_link '1/2012'
 
     click_link 'Realinhamento de preço'
@@ -361,7 +361,7 @@ feature "RealignmentPrices", vcr: { cassette_name: :realignment_prices } do
 
     navigate 'Licitações > Processos de Compras'
 
-    click_link 'Limpar Filtro'
+
     click_link '1/2012'
 
     click_link 'Realinhamento de preço'
