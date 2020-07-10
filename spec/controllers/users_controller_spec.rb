@@ -51,14 +51,6 @@ describe UsersController do
 
       expect(response).to redirect_to(users_path)
     end
-
-    it 'when the user does no have Employee as authenticable type should not be destroyed' do
-      user = User.make!(:creditor_with_password)
-
-      assert_raise ActiveRecord::RecordNotFound do
-        delete :destroy, user.attributes
-      end
-    end
   end
 
   describe '#update' do
@@ -68,14 +60,6 @@ describe UsersController do
       put :update, user.attributes
 
       expect(response).to redirect_to(users_path)
-    end
-
-    it 'when the user does not have Employee as authenticable type should not be editable' do
-      user = User.make!(:creditor_with_password)
-
-      assert_raise ActiveRecord::RecordNotFound do
-        put :update, user.attributes
-      end
     end
   end
 end

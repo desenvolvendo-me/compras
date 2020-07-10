@@ -14,20 +14,9 @@ describe PurchaseSolicitationAnnulsController, vcr: { cassette_name: 'controller
     it 'should render new when it is not related to purchase process' do
       purchase_solicitation = PurchaseSolicitation.make!(:reparo_liberado)
 
-      get :new, :purchase_solicitation_id => purchase_solicitation.id
+      get :new, :annullable_id => purchase_solicitation.id
 
       expect(response.code).to eq '200'
-    end
-
-    it 'should raise exception when is related with a purchase process' do
-      purchase_solicitation = ListPurchaseSolicitation.make!(:principal)
-      LicitationProcess.make!(:processo_licitatorio,
-        purchase_solicitations: [purchase_solicitation])
-
-      get :new, :purchase_solicitation_id => purchase_solicitation.id
-
-      expect(response.code).to eq '401'
-      expect(response.body).to match(/Você não tem acesso a essa página/)
     end
   end
 
@@ -35,20 +24,9 @@ describe PurchaseSolicitationAnnulsController, vcr: { cassette_name: 'controller
     it 'should render create when it is not related to purchase process' do
       purchase_solicitation = PurchaseSolicitation.make!(:reparo_liberado)
 
-      post :create, :purchase_solicitation_id => purchase_solicitation.id
+      post :create, :annullable_id => purchase_solicitation.id
 
       expect(response.code).to eq '200'
-    end
-
-    it 'should raise exception when is related with a purchase process' do
-      purchase_solicitation = ListPurchaseSolicitation.make!(:principal)
-      LicitationProcess.make!(:processo_licitatorio,
-        purchase_solicitations: [purchase_solicitation])
-
-      post :create, :purchase_solicitation_id => purchase_solicitation.id
-
-      expect(response.code).to eq '401'
-      expect(response.body).to match(/Você não tem acesso a essa página/)
     end
   end
 end
