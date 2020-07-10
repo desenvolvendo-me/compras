@@ -64,23 +64,26 @@ $(document).on('click', ':submit', function(event) {
 
 /* Aumenta os campos text area conforme texto inserido */
 $(function(){
-  var txtAreas = document.querySelectorAll('textarea');
+  $(function() {
+    $("textarea").on('keyup paste', function() {
+      var $el = $(this),
+        offset = $el.innerHeight() - $el.height();
 
-  for(x=0;x<txtAreas.length;x++){
-    txtAreas[x].addEventListener('input', function(){
-      if(this.scrollHeight > this.offsetHeight && this.offsetHeight < 400){
-        this.style.height = this.scrollHeight + 'px'
-      }
-      if(this.scrollHeight < this.offsetHeight){
-        this.style.height = '56px';
-        this.style.height = this.scrollHeight + 'px';
+      if ($el.innerHeight() < this.scrollHeight && this.scrollHeight < 400) {
+        $el.height(this.scrollHeight - offset);
+      } else if(this.scrollHeight > 400) {
+        $el.height(1);
+        this.scrollHeight < 400 ? $el.height(this.scrollHeight) : $el.height(400)
+      }else{
+        $el.height(1);
+        $el.height(this.scrollHeight - offset);
       }
     });
-  }
+  });
 
   $("textarea.text").each(function(){
     var height = $(this).prop('scrollHeight');
-    $(this).css('height', height + 'px')
+    $(this).css('height', height+10 + 'px')
   })
 
 });
