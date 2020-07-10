@@ -14,7 +14,7 @@ describe PurchaseSolicitationAnnulsController, vcr: { cassette_name: 'controller
     it 'should render new when it is not related to purchase process' do
       purchase_solicitation = PurchaseSolicitation.make!(:reparo_liberado)
 
-      get :new, :annullable_id => purchase_solicitation.id
+      get :new, :purchase_solicitation_id => purchase_solicitation.id
 
       expect(response.code).to eq '200'
     end
@@ -24,7 +24,7 @@ describe PurchaseSolicitationAnnulsController, vcr: { cassette_name: 'controller
       LicitationProcess.make!(:processo_licitatorio,
         purchase_solicitations: [purchase_solicitation])
 
-      get :new, :annullable_id => purchase_solicitation.id
+      get :new, :purchase_solicitation_id => purchase_solicitation.id
 
       expect(response.code).to eq '401'
       expect(response.body).to match(/Você não tem acesso a essa página/)
@@ -35,7 +35,7 @@ describe PurchaseSolicitationAnnulsController, vcr: { cassette_name: 'controller
     it 'should render create when it is not related to purchase process' do
       purchase_solicitation = PurchaseSolicitation.make!(:reparo_liberado)
 
-      post :create, :annullable_id => purchase_solicitation.id
+      post :create, :purchase_solicitation_id => purchase_solicitation.id
 
       expect(response.code).to eq '200'
     end
@@ -45,7 +45,7 @@ describe PurchaseSolicitationAnnulsController, vcr: { cassette_name: 'controller
       LicitationProcess.make!(:processo_licitatorio,
         purchase_solicitations: [purchase_solicitation])
 
-      post :create, :annullable_id => purchase_solicitation.id
+      post :create, :purchase_solicitation_id => purchase_solicitation.id
 
       expect(response.code).to eq '401'
       expect(response.body).to match(/Você não tem acesso a essa página/)
