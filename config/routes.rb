@@ -56,6 +56,13 @@ Compras::Application.routes.draw do
     end
   end
 
+  resources :management_objects, controller: 'auction/management_objects' do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :purchase_forms do
     collection do
       get :modal
@@ -999,6 +1006,7 @@ Compras::Application.routes.draw do
     end
 
     resources :auctions
+
 
     resources :management_objects do
       collection do
