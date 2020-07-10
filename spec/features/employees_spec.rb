@@ -8,7 +8,7 @@ feature "Employees" do
   scenario 'create, update and destroy a new employee' do
     Person.make!(:sobrinho)
 
-    navigate 'Geral > Usuários > Funcionários'
+    navigate 'Configurações > Usuários > Funcionários'
 
     click_link 'Criar Funcionário'
 
@@ -64,7 +64,7 @@ feature "Employees" do
   scenario 'index with columns at the index' do
     Employee.make!(:sobrinho)
 
-    navigate 'Geral > Usuários > Funcionários'
+    navigate 'Configurações > Usuários > Funcionários'
 
     within_records do
       expect(page).to have_content 'Pessoa'
@@ -82,7 +82,7 @@ feature "Employees" do
   scenario 'Employee without email persisted in individual' do
     Employee.make!(:sobrinho, individual: Person.make!(:sobrinho_without_email).personable)
 
-    navigate 'Geral > Usuários > Funcionários'
+    navigate 'Configurações > Usuários > Funcionários'
 
     click_link 'Gabriel Sobrinho'
 
@@ -93,7 +93,7 @@ feature "Employees" do
   scenario 'Employee with email persisted in individual' do
     Employee.make!(:sobrinho)
 
-    navigate 'Geral > Usuários > Funcionários'
+    navigate 'Configurações > Usuários > Funcionários'
 
     click_link 'Gabriel Sobrinho'
 

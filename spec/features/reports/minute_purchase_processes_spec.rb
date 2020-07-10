@@ -40,7 +40,7 @@ feature 'Report::MinutePurchaseProcesses', vcr: { cassette_name: :minute_purchas
 
       JudgmentCommissionAdvice.make!(:parecer, licitation_process: purchase_process)
 
-      navigate 'Processos de Compra > Processos de Compras'
+      navigate 'Licitações > Processos de Compras'
 
       click_link 'Limpar Filtro'
       click_link '1/2012'
@@ -89,7 +89,7 @@ feature 'Report::MinutePurchaseProcesses', vcr: { cassette_name: :minute_purchas
 
       JudgmentCommissionAdvice.make!(:parecer, licitation_process: purchase_process)
 
-      navigate 'Processos de Compra > Processos de Compras'
+      navigate 'Licitações > Processos de Compras'
 
       click_link 'Limpar Filtro'
       click_link '2/2013'

@@ -9,7 +9,7 @@ feature "SignatureConfigurations" do
     Signature.make!(:gerente_sobrinho)
     Signature.make!(:supervisor_wenderson)
 
-    navigate 'Geral > Parâmetros > Assinaturas > Configurações de Assinatura'
+    navigate 'Configurações > Parâmetros > Assinaturas > Configurações de Assinatura'
 
     click_link 'Criar Configuração de Assinatura'
 
@@ -68,7 +68,7 @@ feature "SignatureConfigurations" do
   scenario 'should have only availables reports' do
     SignatureConfiguration.make!(:autorizacoes_de_fornecimento)
 
-    navigate 'Geral > Parâmetros > Assinaturas > Configurações de Assinatura'
+    navigate 'Configurações > Parâmetros > Assinaturas > Configurações de Assinatura'
 
     click_link 'Criar Configuração de Assinatura'
 
@@ -80,7 +80,7 @@ feature "SignatureConfigurations" do
   scenario 'should have only availables reports when edit' do
     SignatureConfiguration.make!(:autorizacoes_de_fornecimento)
 
-    navigate 'Geral > Parâmetros > Assinaturas > Configurações de Assinatura'
+    navigate 'Configurações > Parâmetros > Assinaturas > Configurações de Assinatura'
 
     click_link 'Autorizações de Fornecimento'
 
@@ -93,7 +93,7 @@ feature "SignatureConfigurations" do
   scenario 'when fill signature should fill position' do
     Signature.make!(:gerente_sobrinho)
 
-    navigate 'Geral > Parâmetros > Assinaturas > Configurações de Assinatura'
+    navigate 'Configurações > Parâmetros > Assinaturas > Configurações de Assinatura'
 
     click_link 'Criar Configuração de Assinatura'
 
@@ -117,7 +117,7 @@ feature "SignatureConfigurations" do
     SignatureConfiguration.make!(:autorizacoes_de_fornecimento)
     SignatureConfiguration.make!(:crc)
 
-    navigate 'Geral > Parâmetros > Assinaturas > Configurações de Assinatura'
+    navigate 'Configurações > Parâmetros > Assinaturas > Configurações de Assinatura'
 
     click_link 'Filtrar Configurações de Assinatura'
 
@@ -134,7 +134,7 @@ feature "SignatureConfigurations" do
   scenario 'index with columns at the index' do
     SignatureConfiguration.make!(:crc)
 
-    navigate 'Geral > Parâmetros > Assinaturas > Configurações de Assinatura'
+    navigate 'Configurações > Parâmetros > Assinaturas > Configurações de Assinatura'
 
     within_records do
       expect(page).to have_content 'Relatório'

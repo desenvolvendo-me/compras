@@ -13,7 +13,7 @@ feature 'PurchaseProcessProposals', vcr: { cassette_name: :purchase_process_prop
       purchase_process_accreditation: PurchaseProcessAccreditation.make(:general_accreditation),
       judgment_form: JudgmentForm.make!(:por_item_com_melhor_tecnica))
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -158,7 +158,7 @@ feature 'PurchaseProcessProposals', vcr: { cassette_name: :purchase_process_prop
     first_lot_div = '//*[@id="purchase_process_creditor_proposals"]/div[2]'
     last_lot_div = '//*[@id="purchase_process_creditor_proposals"]/div[4]'
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -313,7 +313,7 @@ feature 'PurchaseProcessProposals', vcr: { cassette_name: :purchase_process_prop
 
     global_div = '//*[@id="purchase_process_creditor_proposals"]/div[2]'
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -412,7 +412,7 @@ feature 'PurchaseProcessProposals', vcr: { cassette_name: :purchase_process_prop
     first_creditor = '//*[@id="tied_creditor_proposals"]/div[2]/div'
     last_creditor  = '//*[@id="tied_creditor_proposals"]/div[3]/div'
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link "Limpar Filtro"
 

@@ -6,7 +6,7 @@ feature "Condominia" do
   end
 
   scenario 'create, update and destroy a new condominium' do
-    navigate 'Geral > Parâmetros > Endereços > Condomínios'
+    navigate 'Configurações > Parâmetros > Endereços > Condomínios'
 
     click_link 'Criar Condomínio'
 
@@ -40,7 +40,7 @@ feature "Condominia" do
   end
 
   scenario 'index with columns at the index' do
-    navigate 'Geral > Parâmetros > Endereços > Condomínios'
+    navigate 'Configurações > Parâmetros > Endereços > Condomínios'
 
     within_records do
       expect(page).to have_content 'Nome'

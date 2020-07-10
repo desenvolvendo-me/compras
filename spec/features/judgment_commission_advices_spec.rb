@@ -15,7 +15,7 @@ feature "JudgmentCommissionAdvices", vcr: { cassette_name: :judgment_commission_
     Person.make!(:sobrinho)
     Person.make!(:wenderson)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -161,7 +161,7 @@ feature "JudgmentCommissionAdvices", vcr: { cassette_name: :judgment_commission_
     Person.make!(:wenderson)
     LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -187,7 +187,7 @@ feature "JudgmentCommissionAdvices", vcr: { cassette_name: :judgment_commission_
     LicitationProcess.make!(:compra_direta)
     LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -201,7 +201,7 @@ feature "JudgmentCommissionAdvices", vcr: { cassette_name: :judgment_commission_
       expect(page).to have_link 'Parecer'
     end
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -220,7 +220,7 @@ feature "JudgmentCommissionAdvices", vcr: { cassette_name: :judgment_commission_
     LicitationProcess.make!(:compra_direta)
     LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -234,7 +234,7 @@ feature "JudgmentCommissionAdvices", vcr: { cassette_name: :judgment_commission_
       expect(page).to have_link 'Parecer'
     end
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link "Limpar Filtro"
 

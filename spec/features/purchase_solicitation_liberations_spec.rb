@@ -12,7 +12,7 @@ feature "PurchaseSolicitationLiberations", vcr: { cassette_name: :purchase_solic
     PurchaseSolicitation.make!(:reparo)
     Employee.make!(:wenderson)
 
-    navigate 'Processos de Compra > Solicitações de Compra'
+    navigate 'Licitações > Solicitações de Compra'
 
     click_link "Limpar Filtro"
 

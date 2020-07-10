@@ -6,7 +6,7 @@ feature "Neighborhoods" do
   end
 
   scenario 'create, update and destroy a new neighborhood' do
-    navigate 'Geral > Parâmetros > Endereços > Bairros'
+    navigate 'Configurações > Parâmetros > Endereços > Bairros'
 
     click_link 'Criar Bairro'
 
@@ -52,7 +52,7 @@ feature "Neighborhoods" do
   scenario 'cannot destroy a neighborhood with streets' do
     Street.make!(:girassol)
 
-    navigate 'Geral > Parâmetros > Endereços > Bairros'
+    navigate 'Configurações > Parâmetros > Endereços > Bairros'
 
     click_link 'Centro'
 
@@ -64,7 +64,7 @@ feature "Neighborhoods" do
   end
 
   scenario 'should lock district by city' do
-    navigate 'Geral > Parâmetros > Endereços > Bairros'
+    navigate 'Configurações > Parâmetros > Endereços > Bairros'
 
     click_link 'Criar Bairro'
 
@@ -78,7 +78,7 @@ feature "Neighborhoods" do
   scenario 'should filter district by city' do
     FactoryGirl.create(:district, name: 'Centro', city: cities(:belo_horizonte))
 
-    navigate 'Geral > Parâmetros > Endereços > Bairros'
+    navigate 'Configurações > Parâmetros > Endereços > Bairros'
 
     click_link 'Criar Bairro'
 
@@ -94,7 +94,7 @@ feature "Neighborhoods" do
 
   scenario 'index with columns at the index' do
 
-    navigate 'Geral > Parâmetros > Endereços > Bairros'
+    navigate 'Configurações > Parâmetros > Endereços > Bairros'
 
     within_records do
       expect(page).to have_content 'Nome'

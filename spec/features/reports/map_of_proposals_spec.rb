@@ -9,7 +9,7 @@ feature 'Report::MapOfProposals', vcr: { cassette_name: :map_of_proposals } do
 
   scenario 'should map of proposals order by creditor_name' do
     make_dependencies!
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -87,7 +87,7 @@ feature 'Report::MapOfProposals', vcr: { cassette_name: :map_of_proposals } do
 
   scenario 'should map of proposals order by unit_price' do
     make_dependencies!
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -149,7 +149,7 @@ feature 'Report::MapOfProposals', vcr: { cassette_name: :map_of_proposals } do
 
   scenario 'should map of proposals order by unit_price desc' do
     make_dependencies!
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -233,7 +233,7 @@ feature 'Report::MapOfProposals', vcr: { cassette_name: :map_of_proposals } do
       lot: 1,
       item: nil)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link "Limpar Filtro"
 

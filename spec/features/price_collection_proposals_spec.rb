@@ -15,7 +15,7 @@ feature "PriceCollectionProposals" do
     scenario 'should not have a button to create a proposal' do
       PriceCollection.make!(:coleta_de_precos)
 
-      navigate 'Processos de Compra > Coletas de Preços'
+      navigate 'Licitações > Coletas de Preços'
 
       click_link "Limpar Filtro"
 
@@ -30,7 +30,7 @@ feature "PriceCollectionProposals" do
     scenario 'the proposal should be created automatically when the price collection is created' do
       PriceCollection.make!(:coleta_de_precos)
 
-      navigate 'Processos de Compra > Coletas de Preços'
+      navigate 'Licitações > Coletas de Preços'
 
       click_link "Limpar Filtro"
 
@@ -44,7 +44,7 @@ feature "PriceCollectionProposals" do
     scenario 'should not have a button to delete a proposal' do
       PriceCollection.make!(:coleta_de_precos)
 
-      navigate 'Processos de Compra > Coletas de Preços'
+      navigate 'Licitações > Coletas de Preços'
 
       click_link "Limpar Filtro"
 
@@ -62,7 +62,7 @@ feature "PriceCollectionProposals" do
     scenario 'editing proposal' do
       price_collection = PriceCollection.make!(:coleta_de_precos)
 
-      navigate 'Processos de Compra > Coletas de Preços'
+      navigate 'Licitações > Coletas de Preços'
 
       click_link "Limpar Filtro"
 
@@ -99,7 +99,7 @@ feature "PriceCollectionProposals" do
     scenario 'show columns at the index' do
       PriceCollection.make!(:coleta_de_precos)
 
-      navigate 'Processos de Compra > Coletas de Preços'
+      navigate 'Licitações > Coletas de Preços'
 
       click_link "Limpar Filtro"
 

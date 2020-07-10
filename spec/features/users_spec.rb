@@ -8,7 +8,7 @@ feature "Users" do
   scenario 'create a new user, update and destroyer user an existent' do
     Employee.make!(:wenderson)
 
-    navigate 'Geral > Usuários > Usuários'
+    navigate 'Configurações > Usuários > Usuários'
 
     click_link 'Criar Usuário'
 
@@ -58,7 +58,7 @@ feature "Users" do
   end
 
   scenario 'open the window to new perfil through the perfil modal' do
-    navigate 'Geral > Usuários > Usuários'
+    navigate 'Configurações > Usuários > Usuários'
 
     click_link 'Criar Usuário'
 
@@ -74,7 +74,7 @@ feature "Users" do
     User.make!(:sobrinho_as_admin)
     User.make!(:creditor_with_password)
 
-    navigate 'Geral > Usuários > Usuários'
+    navigate 'Configurações > Usuários > Usuários'
 
     within_records do
       expect(page).to have_link 'Wenderson Malheiros'
@@ -94,7 +94,7 @@ feature "Users" do
   scenario 'index with columns at the index' do
     User.make!(:wenderson)
 
-    navigate 'Geral > Usuários > Usuários'
+    navigate 'Configurações > Usuários > Usuários'
 
     within_records do
       expect(page).to have_content 'Funcionário'

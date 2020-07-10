@@ -6,7 +6,7 @@ feature "Agencies" do
   end
 
   scenario 'create, update and destroy a new agency' do
-    navigate 'Comum > Cadastrais > Bancos > Agências'
+    navigate 'Cadastro > Cadastrais > Bancos > Agências'
 
     click_link 'Criar Agência'
 
@@ -52,7 +52,7 @@ feature "Agencies" do
   end
 
   scenario 'index with columns at the index' do
-    navigate 'Comum > Cadastrais > Bancos > Agências'
+    navigate 'Cadastro > Cadastrais > Bancos > Agências'
 
     within_records do
       expect(page).to have_content 'Nome'

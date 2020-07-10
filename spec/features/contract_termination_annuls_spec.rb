@@ -9,7 +9,7 @@ feature 'ContractTerminationAnnuls', vcr: { cassette_name: :contract_termination
     ContractTermination.make!(:contrato_rescindido)
     Employee.make!(:sobrinho)
 
-    navigate 'Instrumentos Contratuais > Contratos'
+    navigate 'Contratos > Contratos'
 
     click_link "Limpar Filtro"
 
@@ -41,7 +41,7 @@ feature 'ContractTerminationAnnuls', vcr: { cassette_name: :contract_termination
   scenario 'a contract termination annul should have all fields disabled' do
     ResourceAnnul.make!(:rescisao_de_contrato_anulada)
 
-    navigate 'Instrumentos Contratuais > Contratos'
+    navigate 'Contratos > Contratos'
 
     click_link "Limpar Filtro"
 
@@ -66,7 +66,7 @@ feature 'ContractTerminationAnnuls', vcr: { cassette_name: :contract_termination
   scenario 'a contract termination annul cancel should back to contract termination' do
     ResourceAnnul.make!(:rescisao_de_contrato_anulada)
 
-    navigate 'Instrumentos Contratuais > Contratos'
+    navigate 'Contratos > Contratos'
 
     click_link "Limpar Filtro"
 

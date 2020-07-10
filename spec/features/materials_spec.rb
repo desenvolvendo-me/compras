@@ -19,7 +19,7 @@ feature "Materials" do
   end
 
   scenario 'create a new material, update and destroy an existing' do
-    navigate 'Comum > Cadastrais > Materiais > Materiais'
+    navigate 'Cadastro > Cadastrais > Materiais > Materiais'
     click_link 'Criar Material'
 
     expect(page).to have_checked_field 'Ativo'
@@ -88,7 +88,7 @@ feature "Materials" do
   end
 
   scenario 'generate code' do
-    navigate 'Comum > Cadastrais > Materiais > Materiais'
+    navigate 'Cadastro > Cadastrais > Materiais > Materiais'
 
     click_link 'Criar Material'
 
@@ -119,7 +119,7 @@ feature "Materials" do
   scenario 'should clean the unnecessary service depending on material type' do
     Material.make!(:antivirus)
 
-    navigate 'Comum > Cadastrais > Materiais > Materiais'
+    navigate 'Cadastro > Cadastrais > Materiais > Materiais'
 
     click_link 'Antivirus'
 
@@ -141,7 +141,7 @@ feature "Materials" do
   it 'should not have the class disabled when editing material' do
     Material.make!(:antivirus)
 
-    navigate 'Comum > Cadastrais > Materiais > Materiais'
+    navigate 'Cadastro > Cadastrais > Materiais > Materiais'
 
     click_link 'Antivirus'
 
@@ -151,7 +151,7 @@ feature "Materials" do
   it 'should not have the expense economic classification disabled when editing material' do
     Material.make!(:antivirus)
 
-    navigate 'Comum > Cadastrais > Materiais > Materiais'
+    navigate 'Cadastro > Cadastrais > Materiais > Materiais'
 
     click_link 'Antivirus'
 
@@ -159,7 +159,7 @@ feature "Materials" do
   end
 
   scenario "provides a filter by material_type" do
-    navigate 'Comum > Cadastrais > Materiais > Materiais'
+    navigate 'Cadastro > Cadastrais > Materiais > Materiais'
 
     click_link "Filtrar Materiais"
 
@@ -169,7 +169,7 @@ feature "Materials" do
   scenario 'index with columns at the index' do
     Material.make!(:antivirus)
 
-    navigate 'Comum > Cadastrais > Materiais > Materiais'
+    navigate 'Cadastro > Cadastrais > Materiais > Materiais'
 
     within_records do
       expect(page).to have_content 'Descrição'
@@ -188,7 +188,7 @@ feature "Materials" do
     FactoryGirl.create(:material_class,
       :masked_number => "01.32.15.000.000", :description => 'Antivirus')
 
-    navigate 'Comum > Cadastrais > Materiais > Materiais'
+    navigate 'Cadastro > Cadastrais > Materiais > Materiais'
 
     click_link 'Criar Material'
 
@@ -199,7 +199,7 @@ feature "Materials" do
   end
 
   scenario 'uncheck control_amount when material_type is not service' do
-    navigate 'Comum > Cadastrais > Materiais > Materiais'
+    navigate 'Cadastro > Cadastrais > Materiais > Materiais'
 
     click_link 'Criar Material'
 
@@ -225,7 +225,7 @@ feature "Materials" do
                            :material => material,
                            :replacement_quantity => 3)
 
-    navigate 'Comum > Cadastrais > Materiais > Materiais'
+    navigate 'Cadastro > Cadastrais > Materiais > Materiais'
 
     click_link 'Antivirus'
 

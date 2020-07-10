@@ -18,7 +18,7 @@ feature 'PurchaseProcessCreditorDisqualifications', vcr: { cassette_name: :purch
     PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado, licitation_process: licitation)
     PurchaseProcessCreditorProposal.make!(:proposta_arame, licitation_process: licitation)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -188,7 +188,7 @@ feature 'PurchaseProcessCreditorDisqualifications', vcr: { cassette_name: :purch
     PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado, licitation_process: licitation, item: nil, lot: 2050)
     PurchaseProcessCreditorProposal.make!(:proposta_arame, licitation_process: licitation, item: nil, lot: 1025)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -329,7 +329,7 @@ feature 'PurchaseProcessCreditorDisqualifications', vcr: { cassette_name: :purch
     PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado, licitation_process: licitation,
       item: nil, lot: nil, unit_price: 1100.00)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -419,7 +419,7 @@ feature 'PurchaseProcessCreditorDisqualifications', vcr: { cassette_name: :purch
     PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado, licitation_process: licitation)
     PurchaseProcessCreditorProposal.make!(:proposta_arame, licitation_process: licitation)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link "Limpar Filtro"
 

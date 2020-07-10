@@ -8,7 +8,7 @@ feature 'Report::MapOfBids', vcr: { cassette_name: :map_of_bids } do
   scenario 'should map of bids' do
     make_dependencies!
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link 'Limpar Filtro'
 
@@ -152,7 +152,7 @@ feature 'Report::MapOfBids', vcr: { cassette_name: :map_of_bids } do
   scenario 'should display map of bids and proposals by lot' do
     make_dependencies_bids_by_lot!
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link 'Limpar Filtro'
 

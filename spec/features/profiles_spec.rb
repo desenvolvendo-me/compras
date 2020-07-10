@@ -6,7 +6,7 @@ feature "Profiles" do
   end
 
   scenario 'create a new profile, update and destroy an existing' do
-    navigate 'Geral > Usuários > Perfis'
+    navigate 'Configurações > Usuários > Perfis'
 
     click_link 'Criar Perfil'
 
@@ -40,7 +40,7 @@ feature "Profiles" do
   end
 
   scenario 'index with columns at the index' do
-    navigate 'Geral > Usuários > Perfis'
+    navigate 'Configurações > Usuários > Perfis'
 
     within_records do
       expect(page).to have_content 'Nome'

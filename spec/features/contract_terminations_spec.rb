@@ -12,7 +12,7 @@ feature 'ContractTerminations', vcr: { cassette_name: :contract_terminations } d
     Contract.make!(:primeiro_contrato)
     DisseminationSource.make!(:jornal_bairro)
 
-    navigate 'Instrumentos Contratuais > Contratos'
+    navigate 'Contratos > Contratos'
 
     click_link "Limpar Filtro"
 
@@ -84,7 +84,7 @@ feature 'ContractTerminations', vcr: { cassette_name: :contract_terminations } d
   scenario 'contract termination annulled should have fields disabled' do
     ResourceAnnul.make!(:rescisao_de_contrato_anulada)
 
-    navigate 'Instrumentos Contratuais > Contratos'
+    navigate 'Contratos > Contratos'
 
     click_link "Limpar Filtro"
 

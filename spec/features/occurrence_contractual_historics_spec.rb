@@ -11,7 +11,7 @@ feature "OccurrenceContractualHistorics", vcr: { cassette_name: :occurrence_cont
   scenario 'create a new occurrence_contractual_historic, update and destroy an existing' do
     Contract.make!(:primeiro_contrato)
 
-    navigate 'Instrumentos Contratuais > Contratos'
+    navigate 'Contratos > Contratos'
 
     click_link "Limpar Filtro"
 

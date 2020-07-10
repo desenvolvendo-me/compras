@@ -8,7 +8,7 @@ feature "ReserveFundRequests" do
   scenario 'create a reserve fund request' do
     LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Instrumentos Contratuais > Reserva de Dotações'
+    navigate 'Contratos > Reserva de Dotações'
 
     pending 'Teste incompleto'
 

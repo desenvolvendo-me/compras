@@ -8,7 +8,7 @@ feature 'Report::PurchaseProcessRatificationsByPeriods' do
   scenario 'should display all licitation process ratifications' do
     make_dependencies!
 
-    navigate 'Relatórios > Compras homologadas por período'
+    navigate 'Relatórios > Compras Homologadas por Período'
 
     click_on 'Gerar Relatório de compras homologadas por período'
 
@@ -95,7 +95,7 @@ feature 'Report::PurchaseProcessRatificationsByPeriods' do
   scenario 'should display licitation process ratifications by type_of_purchase' do
     make_dependencies!
 
-    navigate 'Relatórios > Compras homologadas por período'
+    navigate 'Relatórios > Compras Homologadas por Período'
 
     select 'Compra direta', from: 'Tipo de compra'
 
@@ -142,7 +142,7 @@ feature 'Report::PurchaseProcessRatificationsByPeriods' do
   scenario 'should display licitation process ratifications by type_of_removal' do
     make_dependencies!
 
-    navigate 'Relatórios > Compras homologadas por período'
+    navigate 'Relatórios > Compras Homologadas por Período'
 
     select 'Compra direta', from: 'Tipo de compra'
     select 'Dispensa justificadas', from: 'Tipo do afastamento'
@@ -180,7 +180,7 @@ feature 'Report::PurchaseProcessRatificationsByPeriods' do
   scenario 'should display licitation process ratifications by modality' do
     make_dependencies!
 
-    navigate 'Relatórios > Compras homologadas por período'
+    navigate 'Relatórios > Compras Homologadas por Período'
 
     select 'Processo licitatório', from: 'Tipo de compra'
     select 'Convite', from: 'Modalidade'
@@ -218,7 +218,7 @@ feature 'Report::PurchaseProcessRatificationsByPeriods' do
   scenario 'should display licitation process ratifications by object_type' do
     make_dependencies!
 
-    navigate 'Relatórios > Compras homologadas por período'
+    navigate 'Relatórios > Compras Homologadas por Período'
 
     select 'Processo licitatório', from: 'Tipo de compra'
     select 'Compras e serviços'
@@ -266,7 +266,7 @@ feature 'Report::PurchaseProcessRatificationsByPeriods' do
   scenario 'should display licitation process ratifications by creditor' do
     make_dependencies!
 
-    navigate 'Relatórios > Compras homologadas por período'
+    navigate 'Relatórios > Compras Homologadas por Período'
 
     fill_modal 'Fornecedor', with: 'Gabriel Sobrinho'
 
@@ -293,7 +293,7 @@ feature 'Report::PurchaseProcessRatificationsByPeriods' do
   scenario 'should display licitation process ratifications by between_dates' do
     make_dependencies!
 
-    navigate 'Relatórios > Compras homologadas por período'
+    navigate 'Relatórios > Compras Homologadas por Período'
 
     fill_in 'Data homologação inicial', with: '30/03/2013'
     fill_in 'Data homologação final', with: I18n.l(Date.current)

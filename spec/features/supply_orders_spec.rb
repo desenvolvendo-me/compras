@@ -26,7 +26,7 @@ feature "SupplyOrder", vcr: { cassette_name: 'supply_order' } do
       licitation_process_ratification_items: [ratification_item_1])
 
 
-    navigate 'Instrumentos Contratuais > Ordem de Fornecimento'
+    navigate 'Contratos > Ordem de Fornecimento'
 
     click_link 'Criar Ordem de Fornecimento'
 

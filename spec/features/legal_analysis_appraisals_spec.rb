@@ -10,7 +10,7 @@ feature "LegalAnalysisAppraisals", vcr: { cassette_name: :legal_analysis_apprais
     Employee.make!(:sobrinho)
     Employee.make!(:wenderson)
 
-    navigate 'Processos de Compra > Processos de Compra'
+    navigate 'Licitações > Processos de Compra'
 
     click_link "Limpar Filtro"
 

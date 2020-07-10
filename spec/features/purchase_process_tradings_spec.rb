@@ -44,7 +44,7 @@ feature "PurchaseProcessTradings", vcr: { cassette_name: :purchase_process_tradi
       purchase_process_accreditation: accreditation,
       has_power_of_attorney: false)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -714,7 +714,7 @@ feature "PurchaseProcessTradings", vcr: { cassette_name: :purchase_process_tradi
       purchase_process_accreditation: accreditation,
       has_power_of_attorney: true)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -892,7 +892,7 @@ feature "PurchaseProcessTradings", vcr: { cassette_name: :purchase_process_tradi
       purchase_process_accreditation: accreditation,
       has_power_of_attorney: true)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -1098,7 +1098,7 @@ feature "PurchaseProcessTradings", vcr: { cassette_name: :purchase_process_tradi
       purchase_process_accreditation: accreditation,
       has_power_of_attorney: true)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link "Limpar Filtro"
 
@@ -1376,7 +1376,7 @@ feature "PurchaseProcessTradings", vcr: { cassette_name: :purchase_process_tradi
       creditor: ibm.creditor,
       unit_price: 100.0)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link "Limpar Filtro"
 
