@@ -19,5 +19,22 @@
 <script>
     $(function () {
         $('#new_extract_consumption_per_process_report')[0].reset();
+
+        $('#extract_consumption_per_process_report_licitation_process_id').change(function(){
+          var urlModal = Routes.modal_contracts,
+            params = {
+              purchase_process_id: $(this).val()
+            };
+          var urlModal2 = Routes.modal_purchase_solicitations,
+            params2 = {
+              by_licitation_process: $(this).val()
+            };
+
+          urlModal += "?" + $.param(params);
+          urlModal2 += "?" + $.param(params2);
+          $('#extract_consumption_per_process_report_contract').data('modal-url', urlModal);
+          $('#extract_consumption_per_process_report_purchase_solicitation').data('modal-url', urlModal2);
+        })
+
     });
 </script>
