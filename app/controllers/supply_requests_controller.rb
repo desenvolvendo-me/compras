@@ -1,6 +1,7 @@
 class SupplyRequestsController < CrudController
   has_scope :by_purchase_solicitation
   has_scope :by_creditor
+  has_scope :by_ids
 
   def new
     object = build_resource
@@ -16,10 +17,8 @@ class SupplyRequestsController < CrudController
   end
 
   def index
-    @supply_requests = filters(collection) if params[:suplly_requests].nil?
-    @supply_requests = SupplyRequest.where("id in (?)",params[:suplly_requests]) unless params[:suplly_requests].nil?
-
     @gestor = gestor?
+    super
   end
 
   def api_show
