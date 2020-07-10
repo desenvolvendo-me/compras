@@ -2,6 +2,7 @@
   <span><%= "Contrato: #{resource.contract_number} / #{resource.year}" %></span>
   <span class="subtitle"><%= resource.contract_type %></span>
   <span class="subtitle"><%= "Início da Vigência: #{resource.start_date} - Término da Vigência: #{resource.end_date}" %></span>
+  <span class="subtitle"><%= "Fornecedor: #{resource.creditor}" %></span>
 </h2>
 
 <%= render 'subtitle' %>
