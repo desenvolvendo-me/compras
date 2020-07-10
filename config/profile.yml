@@ -58,6 +58,7 @@ profile:
     - physical_peoples
     - legal_peoples
     - users
+    - management_objects
   - "COMPRA":
     - price_collection_annuls
     - price_collection_proposal_annuls
