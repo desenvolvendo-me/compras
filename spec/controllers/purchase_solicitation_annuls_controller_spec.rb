@@ -20,7 +20,7 @@ describe PurchaseSolicitationAnnulsController, vcr: { cassette_name: 'controller
     end
 
     it 'should raise exception when is related with a purchase process' do
-      purchase_solicitation = PurchaseSolicitation.make!(:reparo_liberado)
+      purchase_solicitation = ListPurchaseSolicitation.make!(:principal)
       LicitationProcess.make!(:processo_licitatorio,
         purchase_solicitations: [purchase_solicitation])
 
@@ -41,7 +41,7 @@ describe PurchaseSolicitationAnnulsController, vcr: { cassette_name: 'controller
     end
 
     it 'should raise exception when is related with a purchase process' do
-      purchase_solicitation = PurchaseSolicitation.make!(:reparo_liberado)
+      purchase_solicitation = ListPurchaseSolicitation.make!(:principal)
       LicitationProcess.make!(:processo_licitatorio,
         purchase_solicitations: [purchase_solicitation])
 
