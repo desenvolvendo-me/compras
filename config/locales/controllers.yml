@@ -47,6 +47,7 @@ pt-BR:
     licitation_processes: "Processos de Compras"
     material_classes: "Classes de Materiais"
     materials: "Materiais"
+    management_objects: "Objeto"
     nature_expenses: "Natureza da Despesa"
     neighborhoods: "Bairros"
     organs: "Órgão/Unidade"
@@ -111,7 +112,7 @@ pt-BR:
     auction_employees: "Funcionários"
     auction_positions: "Cargos"
     auction_auctions: "Pregão Eletrônico"
-    auction_management_objects: "Pré Objeto"
+    auction_management_objects: "Objeto"
 
   menu:
     <<: *controllers
