@@ -67,6 +67,7 @@ menu:
 
   - purchase:
     - "Gestão do Objeto":
+        - management_objects
     - purchase_solicitations
     - demands
     - price_collections
