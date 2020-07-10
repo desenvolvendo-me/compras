@@ -1,6 +1,7 @@
 /*
  *= require unico-assets
  *= require compras/content
+ *= require compras/commom
  *= require compras/sidebar
  *= require compras/records
  *= require compras/radio_button
@@ -126,8 +127,3 @@ form.simple_form .ui-tabs li.ui-tabs-active a {
     background: rgb(114, 146, 179);
 }
 
-
-textarea.text{
-    height: 65px !important;
-
-}

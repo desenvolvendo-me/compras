@@ -3,7 +3,7 @@ class ContractPerResourceSourceReport < Report
 
   def contracts
     if contract_id.present?
-      Contract.find(contract_id)
+      Contract.where(id: contract_id)
     else
       Contract.all
     end

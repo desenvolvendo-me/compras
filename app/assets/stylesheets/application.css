@@ -2,6 +2,7 @@
  *= require unico-assets
  *= require profiles
  *= require compras/content
+ *= require compras/commom
  *= require compras/sidebar
  *= require compras/records
  *= require compras/radio_button
@@ -139,6 +140,3 @@ h3.divider {
     color: white !important;
 }
 
-.simple_form textarea.text {
-    height: 56px;
-}

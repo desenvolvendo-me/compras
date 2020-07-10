@@ -13,7 +13,7 @@
   </tbody>
 </table>
 <% total_contracts = 0 %>
-<% @report.contracts.each do |contract| %>
+<% @report&.contracts&.each do |contract| %>
   <div style="margin-top: 5px">
     <table class="records">
       <thead>
@@ -29,8 +29,6 @@
 
   <br>
 
-
-
   <% resource_sources = @report.resource_sources(contract) %>
 
   <% if resource_sources.blank? %>
@@ -41,7 +39,7 @@
   <% end %>
 
   <% total_resource_sources = 0 %>
-  <% resource_sources.each do |resource_source| %>
+  <% resource_sources&.each do |resource_source| %>
     <% financials = contract.financials.joins(:expense).where(compras_expenses:{resource_source_id: resource_source.id}) %>
     <div class="box">
       <div class="box-header justify-between">

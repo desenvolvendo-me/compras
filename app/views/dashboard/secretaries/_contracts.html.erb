@@ -2,24 +2,24 @@
 
 <div class="d-flex justify-content-between mt-1">
   <div class="text-center">
-    <%= button_tag "#{@contracts_periods[:between_121_150]}", type: 'button', class:'by_121_150 btn-fillter' %>
-    <span class="d-block">de 121 a 150</span>
-  </div>
-  <div class="text-center">
-    <%= button_tag "#{@contracts_periods[:between_91_120]}", type: 'button', class:'by_91_120 btn-fillter' %>
-    <span class="d-block">de 91 a 120</span>
-  </div>
-  <div class="text-center">
-    <%= button_tag "#{@contracts_periods[:between_61_90]}", type: 'button', class:'by_61_90 btn-fillter' %>
-    <span class="d-block">de 61 a 90</span>
+    <%= button_tag "#{@contracts_periods[:until_30]}", type: 'button', class:'until_30 btn-fillter' %>
+    <span class="d-block">até 30 dias</span>
   </div>
   <div class="text-center">
     <%= button_tag "#{@contracts_periods[:between_31_60]}", type: 'button', class:'by_31_60 btn-fillter' %>
-    <span class="d-block">de 31 a 60</span>
+    <span class="d-block">de 31 a 60 dias</span>
   </div>
   <div class="text-center">
-    <%= button_tag "#{@contracts_periods[:until_30]}", type: 'button', class:'until_30 btn-fillter' %>
-    <span class="d-block">até 30 dias</span>
+    <%= button_tag "#{@contracts_periods[:between_61_90]}", type: 'button', class:'by_61_90 btn-fillter' %>
+    <span class="d-block">de 61 a 90 dias</span>
+  </div>
+  <div class="text-center">
+    <%= button_tag "#{@contracts_periods[:between_91_120]}", type: 'button', class:'by_91_120 btn-fillter' %>
+    <span class="d-block">de 91 a 120 dias</span>
+  </div>
+  <div class="text-center">
+    <%= button_tag "#{@contracts_periods[:between_121_150]}", type: 'button', class:'by_121_150 btn-fillter' %>
+    <span class="d-block">de 121 a 150 dias</span>
   </div>
 </div>
 
