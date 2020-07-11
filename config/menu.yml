@@ -2,7 +2,6 @@ menu:
   - settings:
     - parameters:
       - prefecture
-
       - addresses:
         - districts
         - neighborhoods
@@ -35,32 +34,29 @@ menu:
       - programs
       - nature_expenses
       - purchase_forms
-  - register:
-    - cadastral:
-      - banks:
-        - agencies
-        - banks
-        - bank_accounts
-      - materials:
-        - material_classes
-        - materials
-        - reference_units
-      - indexers
-      - currencies
-      - holidays
-
-    - people:
-      - physical_peoples
-      - legal_peoples
-      - creditors
-      - auxiliary:
-        - regularization_or_administrative_sanction_reasons
-        - company_sizes
+    - materials:
+      - material_classes
+      - reference_units
     - legislation:
       - dissemination_sources
       - communication_sources
       - regulatory_acts
+    - banks:
+      - agencies
+      - banks
+      - bank_accounts
     - document_types
+    - indexers
+    - currencies
+    - holidays
+    - regularization_or_administrative_sanction_reasons
+
+  - register:
+    - physical_peoples
+    - legal_peoples
+    - creditors
+    - company_sizes
+    - materials
     - delivery_locations
     - payment_methods
     - contract_types
