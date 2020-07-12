@@ -298,7 +298,8 @@ $(document).ready(function () {
       $("#supply_request_modality_or_type_of_removal").val(licitation_process.modality_or_type_of_removal);
       $("#supply_request_purchase_solicitation").attr('disabled', false);
     } else {
-      $("#supply_request_modality_or_type_of_removal, #supply_request_creditor,#supply_request_purchase_solicitation_id").val('');
+      $("#supply_request_modality_or_type_of_removal,#supply_request_purchase_solicitation_id").val('').trigger("change");
+      $("#supply_request_creditor_id,#supply_request_creditor").val('').trigger("change");
     }
   });
 
@@ -319,7 +320,7 @@ $(document).ready(function () {
 
   $("#supply_request_contract_id").on("change", function (event, contract) {
     $("#supply_request_creditor").val(contract ? contract.creditor:'');
-    $("#supply_request_creditor_id").val(contract ? contract.creditor_id:'');
+    $("#supply_request_creditor_id").val(contract ? contract.creditor_id:'').trigger("change");
   });
 
   $(".supply_request_submit_close").click(function () {
