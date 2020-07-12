@@ -64,7 +64,7 @@ class Contract < Compras::Model
            :to => :licitation_process, :allow_nil => true, :prefix => true
 
   validates :year, :mask => "9999", :allow_blank => true
-  validates :year, :contract_number, :publication_date,
+  validates :year, :contract_number, :publication_date, :creditor,
             :dissemination_source, :content, :creditor_ids, :contract_type,
             :contract_value, :contract_validity, :signature_date, :start_date,
             :end_date, :budget_structure_responsible,
@@ -225,11 +225,11 @@ class Contract < Compras::Model
   end
 
   def presence_of_at_least_one_creditor
-    errors.add(:creditors, :blank) if creditors.empty?
+    errors.add(:creditor, :blank) if creditors.empty?
   end
 
   def must_not_be_greater_than_one_creditor
-    errors.add(:creditors, :must_not_be_greater_than_one_creditor) if creditor_ids.count > 1
+    errors.add(:creditor, :must_not_be_greater_than_one_creditor) if creditor_ids.count > 1
   end
 
 
