@@ -1,0 +1,19 @@
+<h2 id="title">
+  <span><%= "PEDIDO DE FORNECIMENTO - NÚMERO: / CERTAME: #{resource.number }/#{resource.year} " %></span>
+  <span class="subtitle"><%= " #{resource.licitation_process.modality_or_type_of_removal_humanized} #{resource.licitation_process.modality_number} - #{resource.licitation_process.process}/#{resource.licitation_process.year}".upcase.tr('ã','Ã')%></span>
+  <span class="subtitle"><%= "DEPARTAMENTO: #{resource.department.secretary}"%></span>
+  <span class="subtitle"><%= "SOLICITANTE: #{resource.user} / LOCAL SOLICITANTE: #{resource.department}"%></span>
+</h2>
+
+<%= render 'subtitle' %>
+
+<%= render 'form_wrapper' %>
+
+<style>
+  h2 span{
+    display: block;
+  }
+  h2 span.subtitle{
+    font-size: 12px;
+  }
+</style>
