@@ -4,8 +4,8 @@ class ContractDecorator
   include Decore::Header
   include ActionView::Helpers::NumberHelper
 
-  attr_header :creditor,:start_date, :end_date, :contract_type, :purchasing_unit,
-              :contract_number, :year
+  attr_header :contract_number, :creditor,:start_date, :end_date, :contract_type,
+              :purchasing_unit, :year
 
 
   def all_pledges_total_value
