@@ -2,7 +2,7 @@
   <thead>
   <tr>
     <th class="right"><%= Material.human_attribute_name :code %></th>
-    <th><%= Material.human_attribute_name :description %></th>
+    <th width="40%"><%= Material.human_attribute_name :description %></th>
     <th class="right"><%= Material.human_attribute_name :reference_unit %></th>
     <th class="right"><%= BidderProposal.human_attribute_name :quantity %></th>
     <th class="right"><%= BidderProposal.human_attribute_name :unit_price %></th>
@@ -17,17 +17,17 @@
     <% total_quantity += item.decorator.quantity_or_mustache_variable %>
     <% total_price += item.decorator.total_price_or_mustache_variable.gsub(".", "").to_f %>
     <tr class="ratification_item inherited nested">
-      <td align="right"><%= item.decorator.code_or_mustache_variable %></td>
+      <td class="text-center description"><%= item.decorator.code_or_mustache_variable %></td>
       <td class="description"><%= item.decorator.description_or_mustache_variable %></td>
-      <td align="right"><%= item.decorator.reference_unit_or_mustache_variable %></td>
-      <td align="right"><%= item.decorator.quantity_or_mustache_variable %></td>
-      <td align="right"> <%= item.decorator.unit_price_or_mustache_variable %></td>
-      <td align="right"> <%= item.decorator.total_price_or_mustache_variable %></td>
+      <td class="text-center description"><%= item.decorator.reference_unit_or_mustache_variable %></td>
+      <td class="text-center description"><%= item.decorator.quantity_or_mustache_variable %></td>
+      <td> <%= number_to_currency item.decorator.unit_price_or_mustache_variable %></td>
+      <td> <%= number_to_currency item.decorator.total_price_or_mustache_variable %></td>
     </tr>
   <% end %>
   <tr>
     <td colspan="3"></td>
-    <td align="right"><%= total_quantity %></td>
+    <td class="text-center description"><%= total_quantity %></td>
     <td></td>
     <td align="right"><%= number_to_currency total_price, unit: "" %></td>
   </tr>
