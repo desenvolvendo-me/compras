@@ -84,6 +84,8 @@ class SupplyRequest < Compras::Model
     end
   }
 
+  scope :by_ids, lambda{|ids| where{ id.in(ids.split(',')) } }
+
   def to_s
     "#{contract} - #{licitation_process}"
   end

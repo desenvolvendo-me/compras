@@ -9,7 +9,7 @@
     <br>
     <label><%= (I18n.t 'view.attributes.supply_request_management.new').upcase %></label>
     <%= link_to '', supply_request_managements_path() if @suplly_requests['new'].empty?%>
-    <%= link_to '', supply_requests_path(:suplly_requests => @suplly_requests['new']), :target => '_blank' unless @suplly_requests['new'].empty?%>
+    <%= link_to '', supply_requests_path(:by_ids => @suplly_requests['new'].join(',')), :target => '_blank' unless @suplly_requests['new'].empty?%>
   </div>
 
   <div class="grid-item" style="background-color: #2E75B5;">
@@ -17,7 +17,7 @@
     <br>
     <label><%= (I18n.t 'view.attributes.supply_request_management.doubts').mb_chars.upcase %></label>
     <%= link_to '', supply_request_managements_path() if @suplly_requests['doubts'].empty?%>
-    <%= link_to '', supply_requests_path(:suplly_requests => @suplly_requests['doubts']), :target => '_blank' unless @suplly_requests['doubts'].empty?%>
+    <%= link_to '', supply_requests_path(:by_ids => @suplly_requests['doubts'].join(',')), :target => '_blank' unless @suplly_requests['doubts'].empty?%>
   </div>
 
   <div class="grid-item" style="background-color: #1F4E79;">
@@ -25,7 +25,7 @@
     <br>
     <label><%= (I18n.t 'view.attributes.supply_request_management.order_in_analysis').mb_chars.upcase %></label>
     <%= link_to '', supply_request_managements_path() if @suplly_requests['order_in_analysis'].empty?%>
-    <%= link_to '', supply_requests_path(:suplly_requests => @suplly_requests['order_in_analysis']), :target => '_blank' unless @suplly_requests['order_in_analysis'].empty? %>
+    <%= link_to '', supply_requests_path(:by_ids => @suplly_requests['order_in_analysis'].join(',')), :target => '_blank' unless @suplly_requests['order_in_analysis'].empty? %>
   </div>
 
   <div class="grid-item" style="background-color: #BFBFBF;">
@@ -33,7 +33,7 @@
     <br>
     <label><%= (I18n.t 'view.attributes.supply_request_management.order_in_financial_analysis').mb_chars.upcase %></label>
     <%= link_to '', supply_request_managements_path() if @suplly_requests['order_in_financial_analysis'].empty? %>
-    <%= link_to '', supply_requests_path(:suplly_requests => @suplly_requests['order_in_financial_analysis']), :target => '_blank' unless @suplly_requests['order_in_financial_analysis'].empty? %>
+    <%= link_to '', supply_requests_path(:by_ids => @suplly_requests['order_in_financial_analysis'].join(',')), :target => '_blank' unless @suplly_requests['order_in_financial_analysis'].empty? %>
   </div>
 
   <div class="grid-item" style="background-color: #A6A6A6;">
@@ -41,7 +41,7 @@
     <br>
     <label><%= (I18n.t 'view.attributes.supply_request_management.returned_for_adjustment').mb_chars.upcase %></label>
     <%= link_to '', supply_request_managements_path() if @suplly_requests['returned_for_adjustment'].empty?%>
-    <%= link_to '', supply_requests_path(:suplly_requests => @suplly_requests['returned_for_adjustment']), :target => '_blank' unless @suplly_requests['returned_for_adjustment'].empty?%>
+    <%= link_to '', supply_requests_path(:by_ids => @suplly_requests['returned_for_adjustment'].join(',')), :target => '_blank' unless @suplly_requests['returned_for_adjustment'].empty?%>
   </div>
 
   <div class="grid-item" style="background-color: #7F7F7F;">
@@ -49,7 +49,7 @@
     <br>
     <label><%= (I18n.t 'view.attributes.supply_request_management.adjusted').mb_chars.upcase %></label>
     <%= link_to '', supply_request_managements_path() if @suplly_requests['adjusted'].empty?%>
-    <%= link_to '', supply_requests_path(:suplly_requests => @suplly_requests['adjusted']), :target => '_blank' unless @suplly_requests['adjusted'].empty?%>
+    <%= link_to '', supply_requests_path(:by_ids => @suplly_requests['adjusted'].join(',')), :target => '_blank' unless @suplly_requests['adjusted'].empty?%>
   </div>
 
   <div class="grid-item" style="background-color: #C02E21;">
@@ -57,7 +57,7 @@
     <br>
     <label><%= (I18n.t 'view.attributes.supply_request_management.rejected').mb_chars.upcase %></label>
     <%= link_to '', supply_request_managements_path() if @suplly_requests['rejected'].empty?%>
-    <%= link_to '', supply_requests_path(:suplly_requests => @suplly_requests['rejected']), :target => '_blank' unless @suplly_requests['rejected'].empty?%>
+    <%= link_to '', supply_requests_path(:by_ids => @suplly_requests['rejected'].join(',')), :target => '_blank' unless @suplly_requests['rejected'].empty?%>
   </div>
 
   <div class="grid-item" style="background-color: #548235;">
@@ -65,7 +65,7 @@
     <br>
     <label><%= (I18n.t 'view.attributes.supply_request_management.partially_answered').mb_chars.upcase %></label>
     <%= link_to '', supply_request_managements_path() if @suplly_requests['partially_answered'].empty?%>
-    <%= link_to '', supply_requests_path(:suplly_requests => @suplly_requests['partially_answered']), :target => '_blank' unless @suplly_requests['partially_answered'].empty?%>
+    <%= link_to '', supply_requests_path(:by_ids => @suplly_requests['partially_answered'].join(',')), :target => '_blank' unless @suplly_requests['partially_answered'].empty?%>
   </div>
 
   <div class="grid-item" style="background-color: #385723;">
@@ -73,7 +73,7 @@
     <br>
     <label><%= (I18n.t 'view.attributes.supply_request_management.fully_serviced').mb_chars.upcase %></label>
     <%= link_to '', supply_request_managements_path() if @suplly_requests['fully_serviced'].empty?%>
-    <%= link_to '', supply_requests_path(:suplly_requests => @suplly_requests['fully_serviced']), :target => '_blank' unless @suplly_requests['fully_serviced'].empty?%>
+    <%= link_to '', supply_requests_path(:by_ids => @suplly_requests['fully_serviced'].join(',')), :target => '_blank' unless @suplly_requests['fully_serviced'].empty?%>
   </div>
 
 </div>
