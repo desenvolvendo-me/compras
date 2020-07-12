@@ -28,6 +28,9 @@
     <p>
       <b> PROCESSO: </b> <%= licitation_process.to_s %>
     </p>
+    <p>
+      <%= licitation_process.description %>
+    </p>
   </span>
   </div>
   <% Report::ExtractConsumptionPerProcessHelper.get_contracts(licitation_process, @contract).each do |contract| %>
@@ -35,6 +38,9 @@
       <span>
         <p>
           <b> CONTRATO: </b> <%= contract.to_s %>
+        </p>
+        <p>
+          <b> FORNECEDOR: </b> <%= contract.creditor %>
         </p>
       </span>
     </div>
