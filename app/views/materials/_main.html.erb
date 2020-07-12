@@ -2,15 +2,12 @@
   <div class="yui3-u-1-6">
     <%= f.input :code , :disabled => true %>
   </div>
-</div>
-
-<div class="yui3-g">
-  <div class="yui3-u-1-2">
-    <%= f.input :active %>
+  <div class="yui3-u-1-3">
+    <%= f.input :active, wrapper_html: { class:'mt-checkbox pdl-3' } %>
   </div>
 
-  <div class="yui3-u-1-2">
-    <%= f.input :medicine %>
+  <div class="yui3-u-1-3">
+    <%= f.input :medicine, wrapper_html: { class:'mt-checkbox' } %>
   </div>
 </div>
 
@@ -24,26 +21,33 @@
 <%= f.input :detailed_description %>
 
 <div class="yui3-g">
-  <div class="yui3-u-1-4">
-    <%= f.input :reference_unit %>
-  </div>
-
-  <div class="yui3-u-1-4">
+  <div class="yui3-u-1-3">
     <%= f.input :quantity_unit %>
   </div>
 
-  <div class="yui3-u-1-2">
-    <%= f.input :manufacturer %>
+  <div class="yui3-u-1-3">
+    <%= f.input :output_reference_unit %>
+  </div>
+
+  <div class="yui3-u-1-3">
+    <%= f.input :reference_unit %>
   </div>
 </div>
 
+<div class="describe-m text-center">
+  <span class="describe"></span>
+</div>
+
 <div class="yui3-g">
-  <div class="yui3-u-1-2">
+  <div class="yui3-u-2-5">
+    <%= f.input :manufacturer %>
+  </div>
+  <div class="yui3-u-2-5">
     <%= f.input :material_classification %>
   </div>
 
-  <div class="yui3-u-1-2">
-    <%= f.input :combustible %>
+  <div class="yui3-u-1-5">
+    <%= f.input :combustible, wrapper_html:{ class:'mt-checkbox pdl-3' } %>
   </div>
 </div>
 
