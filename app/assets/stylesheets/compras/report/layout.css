@@ -9,6 +9,9 @@
     display: block;
     page-break-before: always;
   }
+  .print_link{
+    display: none;
+  }
 }
 
 .table-border {
