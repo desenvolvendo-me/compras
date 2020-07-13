@@ -8,6 +8,7 @@
     <title>icompras</title>
 
     <%= stylesheet_link_tag 'report', :media => :all %>
+    <%= stylesheet_link_tag 'compras/commom', :media => :all %>
     <%= stylesheet_link_tag 'compras/report', :media => :all %>
     <%= stylesheet_link_tag 'compras/table_size', :media => :all %>
     <%= stylesheet_link_tag 'buttons', :media => :all  if (@report.approv rescue '') === 'true'%>
@@ -26,6 +27,11 @@
           <h3 class="text-center">E-mail: <%= current_prefecture.email %> | Telefone: <%= current_prefecture.phone %> | Fax: <%= current_prefecture.fax %></h3>
         </div>
       <% end %>
+      <div class="print_link">
+        <p class="right">
+          <%= print_link %>
+        </p>
+      </div>
 
       <div id="content">
         <%= yield %>
