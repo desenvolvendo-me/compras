@@ -20,5 +20,8 @@
   <% end %>
   </tbody>
 </table>
+<div class="text-center">
+  <%= page_entries_info @contracts, entry_name: 'contrato'  %>
+</div>
 
 <%= paginate @contracts, :params => { :controller => 'dashboard/secretaries', :action => 'contracts'}, remote: true %>
