@@ -57,20 +57,20 @@
 <br>
 <br>
 <p>
-<h2><b> ITENS DA PEDIDO DE FORNECIMENTO </b></h2>
+<h2><b> ITEM(NS) DO PEDIDO DE FORNECIMENTO </b></h2>
 <div>
   <table class="records">
     <thead>
     <tr>
-      <th>ITEM</th>
-      <th>QUANTIDADE</th>
+      <th class="text-center">ITENS</th>
+      <th class="text-center">QUANTIDADE</th>
     </tr>
     </thead>
     <tbody>
     <% resource.supply_request.items.each do |item| %>
       <tr>
         <td><%= item.material %></td>
-        <td><%= item.quantity %></td>
+        <td class="text-center"><%= item.quantity %></td>
       </tr>
     <% end %>
     </tbody>
@@ -87,10 +87,16 @@
   </span>
 </div>
 <br><br><br><br><br><br>
-<div class="signature" style="text-align: center">
-  <p>
-  <hr>
-  FUNCIONÁRIO <br><br><br><br><br><br>
+<div class="signature d-flex justify-content-center">
+
+  <span class="text-center w-50">
+    <hr>
+    SOLICITANTE <br><br><br><br><br><br>
+  </span>
+  <span class="text-center w-50">
+    <hr>
+    SECRETÁRIO(A) <br><br><br><br><br><br>
+  </span>
 </div>
 
 <%if @report.approv === 'true' %>
@@ -123,4 +129,9 @@
   };
   <% end %>
 </script>
+<style>
+  .signature hr {
+    max-width: 300px !important;
+  }
+</style>
 
