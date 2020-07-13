@@ -42,8 +42,19 @@ module ContractsHelper
   end
 
   def material_vl_unitary licitation_process, material
-    result = LicitationProcessRatificationItem.by_licitation_process_and_material(licitation_process.id, material.id)
-    result&.last&.price || 0
+    if licitation_process.type_of_purchase == 'licitation'
+      result = LicitationProcessRatificationItem.by_licitation_process_and_material(licitation_process.id, material.id)
+      result&.last&.price || 0
+    else
+      result = LicitationProcessRatificationItem
+                   .joins(:licitation_process_ratification).joins(purchase_process_item:[:material])
+                   .where(compras_licitation_process_ratifications:{licitation_process_id: licitation_process.id})
+                   .where(unico_materials:{id: material.id})
+
+      result&.last&.unit_price || 0
+    end
+
+
   end
 
   def qtd_requested p_solicitation_id, material, licitation_process
