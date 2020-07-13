@@ -1,10 +1,15 @@
 class CreditorMaterialReport < Report
 
-  attr_accessor :supply_request_id, :creditor
+  attr_accessor :licitation_process_id, :contract_id, :creditor_id
 
   def materials
-    supply_request = SupplyRequest.find(supply_request_id)
-    Material.material_of_supply_request([supply_request.licitation_process_id, supply_request.contract_id]).order(:description)
+    if licitation_process_id && contract_id && creditor_id
+      Material.material_of_supply_request([licitation_process_id, contract_id, creditor_id]).order(:description)
+    end
+  end
+
+  def creditor
+    Creditor.find(creditor_id)
   end
 
 end
