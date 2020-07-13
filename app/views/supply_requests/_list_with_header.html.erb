@@ -22,7 +22,7 @@
           </td>
         <% end %>
         <td>
-          <%= link_to 'imprimir', new_report_supply_request_per_secretary_path(supply_request_per_secretary_report:{secretary_id: resource&.department&.secretary_id, secretary: resource&.department&.secretary&.to_s,  contract_id: resource&.contract_id, contract: resource&.contract&.to_s}), title: 'Imprimir Pedido de Fornecimento' %>
+          <%= link_to 'imprimir', report_supply_requests_path(resource.id, supply_request_per_secretary_report:{secretary_id: resource&.department&.secretary_id, secretary: resource&.department&.secretary&.to_s,  contract_id: resource&.contract_id, contract: resource&.contract&.to_s}), title: 'Imprimir Pedido de Fornecimento' %>
         </td>
       </tr>
     <% end %>
