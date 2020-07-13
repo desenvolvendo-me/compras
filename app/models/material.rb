@@ -1,4 +1,4 @@
-class Material < Compras::Model
+class Material < Unico::Model
   include BelongsToResource
 
   default_scope where(origin_source: "compras")

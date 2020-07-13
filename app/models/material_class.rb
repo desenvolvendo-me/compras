@@ -1,4 +1,4 @@
-class MaterialClass < Compras::Model
+class MaterialClass < Unico::Model
   attr_accessible :description, :details, :parent_class_number, :number,
                   :parent_number, :mask, :masked_number, :imported, :tce_code
 
