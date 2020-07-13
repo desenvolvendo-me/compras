@@ -12,8 +12,8 @@ gem 'activerecord-connections', '0.0.3'
 gem 'activerecord-postgres-hstore', "~> 0.7.6"
 
 source 'http://foo:BringMeSomeBeerNow@devops.nobesistemas.com.br:9292/' do
-  gem 'unico', '6.4.8'
-  gem 'unico-assets', '1.5.1'
+  gem 'unico', '6.5.1'
+  gem 'unico-assets', '1.5.4'
   gem 'unico-api', '1.6.0'
   gem 'quaestio', '0.1.1'
   gem 'active_relatus', '0.2.1'
