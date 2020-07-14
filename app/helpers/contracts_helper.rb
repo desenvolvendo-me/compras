@@ -22,17 +22,6 @@ module ContractsHelper
     value
   end
 
-  # def get_balance(contract, material_id)
-  #   supply_orders = SupplyOrder.joins(:contract, :items)
-  #   supply_orders = supply_orders.where("compras_supply_order_items.material_id = ?", material_id)
-  #   supply_orders = supply_orders.where(contract_id: contract.id)
-  #
-  #   total_provided = 0
-  #   total_provided = supply_orders.sum(:quantity) if supply_orders.any?
-  #   total_bid = contract.licitation_process.items.where(material_id: material_id).sum(:quantity)
-  #
-  #   total_bid.to_i - total_provided.to_i
-  # end
 
   def get_quantity_item_supply_order(contract, material_id, p_solicitation=nil)
     quantity_provided = contract.supply_orders.joins(:items)
@@ -55,5 +44,9 @@ module ContractsHelper
               .where { lot.in(lots) }&.last&.quantity
 
     qtd || 0
+  end
+
+  def ordered_purchasses purchase_solicitations
+    PurchaseSolicitationItem.includes(:material).where(id: purchase_solicitations.map { |p| p.id}).order("unico_materials.description")
   end
 end

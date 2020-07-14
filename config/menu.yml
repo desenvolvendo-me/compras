@@ -68,9 +68,6 @@ menu:
     - demands
     - price_collections
 
-
-
-
   - licitations:
     - licitation_processes
     - licitation_notices
@@ -81,15 +78,15 @@ menu:
     - process_responsibles
 
   - contracts:
-    - supply_request_managements
+
     - contracts
-    - balance_adjustments
     - additive_solicitations
+    - supply_requests
+    - generator_generator_supply_orders
+    - supply_orders
+    - supply_request_managements
     - pledge_requests
-    - "Fornecimento":
-      - supply_requests
-      - generator_generator_supply_orders
-      - supply_orders
+    - balance_adjustments
     - reserve_fund_requests
 
   - "Prestação de Contas":

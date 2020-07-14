@@ -1,9 +1,4 @@
-<div>
-  <h1> ESPELHO DE CONTRATO </h1>
-</div>
-
 <div style="text-align: left">
-  <h2>CAPA DO CONTRATO</h2>
   <p>
     <strong>Ano do Contrato: </strong>
     <%= @contract.year %>
@@ -29,12 +24,52 @@
     <%= @contract.contract_type %>
   </p>
   <p>
+    <strong>Data da Publicação: </strong>
+    <%= @contract.publication_date %>
+  </p>
+  <p>
+    <strong>Local da Publicação: </strong>
+    <%= @contract.dissemination_source %>
+  </p>
+  <p>
     <strong>Valor do Contrato: </strong>
     <%= number_to_currency @contract.contract_value %>
   </p>
   <p>
     <strong>Multa Inadimplemento: </strong>
     <%= number_to_percentage @contract.default_fine %>
+  </p>
+  <p>
+    <strong>Garantias do Contrato: </strong>
+    <%= @contract.contract_guarantees_humanize %>
+  </p>
+  <p>
+    <strong>Valor da Garantia: </strong>
+    <%= @contract.guarantee_value %>
+  </p>
+  <p>
+    <strong>Validade do Contrato: </strong>
+    <%= @contract.contract_validity %>
+  </p>
+  <p>
+    <strong>Data de Assinatura: </strong>
+    <%= @contract.signature_date %>
+  </p>
+  <p>
+    <strong>Inicio da Vigência: </strong>
+    <%= @contract.start_date %>
+  </p>
+  <p>
+    <strong>Fim da Vigência: </strong>
+    <%= @contract.end_date %>
+  </p>
+  <p>
+    <strong>Forma de Execução: </strong>
+    <%= @contract.execution_type %>
+  </p>
+  <p>
+    <strong>Unidade de Compra Responsável: </strong>
+    <%= @contract.purchasing_unit %>
   </p>
   <p>
     <strong>Multa Rescisória: </strong>
@@ -57,14 +92,16 @@
     <%= @contract.description %>
   </p>
 </div>
-<br>
+
+<div class="page-break"></div>
+
 <div>
   <h2>DADOS FINANCEIROS</h2>
   <table class="records">
     <thead>
     <tr>
-      <th>Secretário</th>
-      <th>Projeto Atividade (Código)</th>
+      <th>Secretaria</th>
+      <th width="40%">Projeto Atividade (Código)</th>
       <th>Natureza</th>
       <th>Fonte</th>
       <th>Valor</th>
@@ -81,12 +118,16 @@
       </tr>
     <% end %>
     <tr>
-      <td colspan="4">TOTAL</td>
+      <td colspan="3"></td>
+      <td>TOTAL</td>
       <td><%= number_to_currency @contract.financials.sum(:value) %></td>
     </tr>
     </tbody>
   </table>
 </div>
+
+<div class="page-break"></div>
+
 
 <div>
   <h2>ITENS DO OBJETO</h2>
@@ -97,7 +138,7 @@
       <h2>LOTE <%= lot %></h2>
       <thead>
       <tr>
-        <th>Código</th>
+        <th class="text-center">Código</th>
         <th>Descrição</th>
         <th>Unidade</th>
         <th>Quantidade</th>
@@ -109,22 +150,26 @@
       <% ratifications_items.each do |ratifications_item| %>
         <% total += ratifications_item.total_price %>
         <tr>
-          <td width="5%"><%= ratifications_item.material.code %></td>
+          <td class="text-center" width="5%"><%= ratifications_item.material.code %></td>
           <td><%= ratifications_item.material.description %></td>
-          <td><%= ratifications_item.material.reference_unit.acronym %></td>
-          <td><%= ratifications_item.quantity %></td>
+          <td class="text-center"><%= ratifications_item.material.reference_unit.acronym %></td>
+          <td class="text-right"><%= ratifications_item.quantity %></td>
           <td width="10%"><%= number_to_currency ratifications_item.unit_price %></td>
           <td width="10%"><%= number_to_currency ratifications_item.total_price %></td>
         </tr>
       <% end %>
       <tr>
-        <td colspan="5">TOTAL</td>
+        <td colspan="4"></td>
+        <td>TOTAL</td>
         <td><%= number_to_currency total %></td>
       </tr>
   <% end %>
   </tbody>
   </table>
 </div>
+
+<div class="page-break"></div>
+
 <div>
   <h2>SALDO POR UNIDADE DE COMPRA / SECRETARIA</h2>
   <% contract_id = @contract.id %>
@@ -133,7 +178,7 @@
          .joins { purchase_solicitation.department }
          .joins { purchase_solicitation.list_purchase_solicitations.licitation_process.contracts }
          .where { purchase_solicitation.list_purchase_solicitations.licitation_process.contracts.id.eq(contract_id) }
-         .select("compras_purchase_solicitation_items.id as id, compras_departments.description as department").group_by(&:department).sort.each do |department, purchase_solicitation_items| %>
+         .select("compras_purchase_solicitation_items.id as id, compras_departments.description as department").group_by(&:department).each do |department, purchase_solicitation_items| %>
     <table class="records">
       <h2>DEPARTAMENTO: <%= department %></h2>
       <thead>
@@ -148,31 +193,31 @@
       </thead>
       <tbody>
       <% total = 0 %>
-      <% purchase_solicitation_items.each do |purchase_solicitation_item| %>
+      <% ordered_purchasses(purchase_solicitation_items).each do |purchase_solicitation_item| %>
         <% licitation_process_id = @contract.licitation_process.id %>
         <% creditor_id = @contract.creditor.id %>
-        <% item = PurchaseSolicitationItem.find(purchase_solicitation_item.id) %>
         <% ratifications_item = LicitationProcessRatificationItem.joins { purchase_process_item.material }
                                                                   .joins { licitation_process_ratification.licitation_process }
                                                                   .joins { licitation_process_ratification.creditor }
                                                                   .where { licitation_process_ratification.creditor.id.eq(creditor_id) }
                                                                   .where { licitation_process_ratification.licitation_process.id.eq(licitation_process_id) }
-                                                                  .where { purchase_process_item.material.id.eq(item.material.id) }.last %>
+                                                                  .where { purchase_process_item.material.id.eq(purchase_solicitation_item&.material&.id) }.last %>
 
         <% if ratifications_item %>
           <tr>
-            <td width="5%"><%= item.try(:material).try(:code) %></td>
-            <td><%= item.try(:material).try(:description) %></td>
-            <td><%= item.try(:material).try(:reference_unit).try(:acronym) %></td>
-            <td><%= item.quantity %></td>
+            <td class="text-center" width="5%"><%= purchase_solicitation_item&.material&.code %></td>
+            <td><%= purchase_solicitation_item&.material&.description %></td>
+            <td class="text-center"><%= purchase_solicitation_item&.material&.reference_unit&.acronym %></td>
+            <td class="text-right"><%= purchase_solicitation_item.quantity.to_i %></td>
             <td width="10%"><%= number_to_currency ratifications_item.try(:unit_price) %></td>
-            <td width="10%"><%= number_to_currency item_total = (item.quantity.to_f*ratifications_item.try(:unit_price).to_f).round(2) %></td>
+            <td width="10%"><%= number_to_currency item_total = (purchase_solicitation_item.quantity.to_f*ratifications_item.try(:unit_price).to_f).round(2) %></td>
             <% total += item_total %>
           </tr>
         <% end %>
       <% end %>
       <tr>
-        <td colspan="5">TOTAL</td>
+        <td colspan="4"></td>
+        <td>TOTAL</td>
         <td><%= number_to_currency total %></td>
       </tr>
       </tbody>

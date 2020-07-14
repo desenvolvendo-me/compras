@@ -21,3 +21,10 @@
 .justify-content-end{
     justify-content: flex-end;
 }
+
+.btn-small{
+    padding: .25rem .5rem;
+    font-size: .875rem;
+    line-height: 1.5;
+    border-radius: .2rem;
+}

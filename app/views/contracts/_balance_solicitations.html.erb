@@ -1,3 +1,8 @@
+<% if f.object.solicitations.present? %>
+  <div class="text-end">
+    <%= link_to "Imprimir Extrato", new_report_extract_consumption_per_process_path(extract_consumption_per_process_report:{licitation_process_id: f.object.licitation_process_id, licitation_process: f.object.licitation_process.to_s,  contract_id: f.object.id, contract: f.object.to_s}), :class => 'button primary' if resource.id %>
+  </div>
+<% end %>
 <% f.object.solicitations.try(:each) do |solicitation| %>
   <%= purchaseSolicitation = PurchaseSolicitation.find(solicitation[0]) %>
   <h1><%= "Solicitação #{purchaseSolicitation.to_s} - #{purchaseSolicitation.department}" %></h1>
@@ -49,11 +54,12 @@
     </tr>
     </tbody>
   </table>
+<% end %>
+<% if f.object.solicitations.present? %>
   <div class="text-end">
-  <%= link_to "Imprimir Extrato", new_report_extract_consumption_per_process_path(extract_consumption_per_process_report:{licitation_process_id: f.object.licitation_process_id, licitation_process: f.object.licitation_process.to_s,  contract_id: f.object.id, contract: f.object.to_s}), :class => 'button primary' if resource.id %>
+    <%= link_to "Imprimir Extrato", new_report_extract_consumption_per_process_path(extract_consumption_per_process_report:{licitation_process_id: f.object.licitation_process_id, licitation_process: f.object.licitation_process.to_s,  contract_id: f.object.id, contract: f.object.to_s}), :class => 'button primary' if resource.id %>
   </div>
 <% end %>
-
 <style>
   table.records th:not(.description){
     text-align: center !important;
