@@ -116,4 +116,5 @@ menu:
     - report_licitation_processes
     - report_department_requests
     - report_pledge_requests
+    - report_expenses
 
