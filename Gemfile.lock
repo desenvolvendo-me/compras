@@ -586,6 +586,7 @@ DEPENDENCIES
   minitest (>= 2.12)
   minitest-reporters (= 0.14.24)
   newrelic_rpm
+  paper_trail
   pg (= 0.19.0)
   postgres-copy (~> 1.0)
   protected_attributes (= 1.0.9)

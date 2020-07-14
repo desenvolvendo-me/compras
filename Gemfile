@@ -55,6 +55,7 @@ gem 'decore', github: 'matiasleidemer/decore'
 
 # gem 'strong_parameters', '0.2.3' # quebra
 gem 'rubocop', '0.80.1'
+gem 'paper_trail'
 
 gem 'sass-rails'
 gem 'uglifier'
