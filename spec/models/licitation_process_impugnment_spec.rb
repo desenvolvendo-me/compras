@@ -55,6 +55,7 @@ describe LicitationProcessImpugnment do
 
   context 'validating impugnment_date' do
     before(:each) do
+      licitation_process.stub(:marked_for_destruction?).and_return(false)
       subject.stub(:licitation_process).and_return(licitation_process)
     end
 

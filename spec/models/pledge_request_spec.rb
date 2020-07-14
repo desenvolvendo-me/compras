@@ -33,6 +33,8 @@ describe PledgeRequest do
 
       context 'when purchase_process does not have reserve_funds_available' do
         it 'should not validate reserve_fund' do
+          purchase_process.stub(:marked_for_destruction?).and_return(false)
+
           subject.stub(purchase_process: purchase_process)
 
           purchase_process.stub(:reserve_funds_available).and_return([])
@@ -46,6 +48,8 @@ describe PledgeRequest do
       context 'when purchase_process have reserve_funds_available' do
         context 'when reserve_fund_id id different from purchase_process' do
           it 'should validate reserve_fund presence' do
+            purchase_process.stub(:marked_for_destruction?).and_return(false)
+
             subject.reserve_fund_id = 15
 
             reserve_fund = double(:reserve_fund, id: 10)
@@ -63,6 +67,8 @@ describe PledgeRequest do
 
         context 'when reserve_fund_id id equal to purchase_process' do
           it 'should validate reserve_fund presence' do
+            purchase_process.stub(:marked_for_destruction?).and_return(false)
+
             subject.reserve_fund_id = 10
 
             reserve_fund = double(:reserve_fund, id: 10)
