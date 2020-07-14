@@ -8,7 +8,7 @@ feature "Prefecture" do
   scenario 'create a new prefecture, update and destroy an existing' do
     Street.make!(:bento_goncalves)
 
-    navigate 'Geral > Parâmetros > Organização'
+    navigate 'Configurações > Parâmetros > Organização'
 
     fill_in 'Nome', :with => 'Prefeitura Municipal de Porto Alegre'
     fill_in 'CNPJ', :with => '39.067.716/0001-41'

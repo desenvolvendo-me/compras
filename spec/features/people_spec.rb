@@ -8,7 +8,7 @@ feature "People" do
   scenario 'create a new person as individual, update and destroy an existing' do
     Street.make!(:amazonas)
 
-    navigate 'Comum > Pessoas > Pessoas'
+    navigate 'Cadastro > Pessoas > Pessoas'
 
     click_link 'Criar Pessoa'
 
@@ -136,7 +136,7 @@ feature "People" do
     Person.make!(:wenderson)
     Person.make!(:sobrinho)
 
-    navigate 'Comum > Pessoas > Pessoas'
+    navigate 'Cadastro > Pessoas > Pessoas'
 
     click_link 'Criar Pessoa'
 
@@ -282,7 +282,7 @@ feature "People" do
     Street.make!(:amazonas)
     Street.make!(:cristiano_machado)
 
-    navigate 'Comum > Pessoas > Pessoas'
+    navigate 'Cadastro > Pessoas > Pessoas'
 
     click_link 'Criar Pessoa'
 
@@ -310,7 +310,7 @@ feature "People" do
   scenario 'should validate at least one partner' do
     Person.make!(:wenderson)
 
-    navigate 'Comum > Pessoas > Pessoas'
+    navigate 'Cadastro > Pessoas > Pessoas'
 
     click_link 'Criar Pessoa'
 
@@ -335,7 +335,7 @@ feature "People" do
   end
 
   scenario "should show only one partner after select 2 times type company at personable" do
-    navigate 'Comum > Pessoas > Pessoas'
+    navigate 'Cadastro > Pessoas > Pessoas'
 
     click_link 'Criar Pessoa'
 
@@ -353,7 +353,7 @@ feature "People" do
   scenario 'index with columns at the index' do
     Person.make!(:pedro_dos_santos)
 
-    navigate 'Comum > Pessoas > Pessoas'
+    navigate 'Cadastro > Pessoas > Pessoas'
 
     within_records do
       expect(page).to have_content 'Nome'

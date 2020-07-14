@@ -16,7 +16,7 @@ feature "RegulatoryActs" do
       :communication_source => CommunicationSource.make!(:jornal_estadual)
     )
 
-    navigate 'Comum > Legislação > Atos Regulamentadores'
+    navigate 'Cadastro > Legislação > Atos Regulamentadores'
 
     click_link 'Criar Ato Regulamentador'
 
@@ -114,7 +114,7 @@ feature "RegulatoryActs" do
 
     DisseminationSource.make!(:jornal_municipal)
 
-    navigate 'Comum > Legislação > Atos Regulamentadores'
+    navigate 'Cadastro > Legislação > Atos Regulamentadores'
 
     click_link 'LDO'
 
@@ -172,7 +172,7 @@ feature "RegulatoryActs" do
       :parent => RegulatoryAct.make!(:emenda)
     )
 
-    navigate 'Comum > Legislação > Atos Regulamentadores'
+    navigate 'Cadastro > Legislação > Atos Regulamentadores'
 
     click_link 'Alteração Orçamentária'
 
@@ -229,7 +229,7 @@ feature "RegulatoryActs" do
       :parent => RegulatoryAct.make!(:emenda)
     )
 
-    navigate 'Comum > Legislação > Atos Regulamentadores'
+    navigate 'Cadastro > Legislação > Atos Regulamentadores'
 
     click_link 'Alteração Orçamentária'
 
@@ -280,7 +280,7 @@ feature "RegulatoryActs" do
       :additional_percent => 0.5
     )
 
-    navigate 'Comum > Legislação > Atos Regulamentadores'
+    navigate 'Cadastro > Legislação > Atos Regulamentadores'
 
     click_link 'Alteração Orçamentária'
 
@@ -335,7 +335,7 @@ feature "RegulatoryActs" do
   scenario 'destroy an existent regulatory_act' do
     RegulatoryAct.make!(:emenda, :regulatory_act_type => RegulatoryActType::PPA)
 
-    navigate 'Comum > Legislação > Atos Regulamentadores'
+    navigate 'Cadastro > Legislação > Atos Regulamentadores'
 
     click_link 'PPA'
 

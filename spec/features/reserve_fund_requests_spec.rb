@@ -8,14 +8,14 @@ feature "ReserveFundRequests" do
   scenario 'create a reserve fund request' do
     LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Instrumentos Contratuais > Reserva de Dotações'
+    navigate 'Contratos > Reserva de Dotações'
 
     pending 'Teste incompleto'
 
     expect(page).to have_title 'Reserva de Dotação dos Processos de Compras'
     expect(page).to have_link 'Filtrar Reserva de Dotação'
 
-    click_link "Limpar Filtro"
+    
 
 
     within_records do

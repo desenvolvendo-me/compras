@@ -9,7 +9,7 @@ feature "LicitationProcessAppeals" do
     LicitationProcess.make!(:processo_licitatorio)
     Person.make!(:sobrinho)
 
-    navigate 'Processos de Compra > Interposição de Recursos de Processos de Compras'
+    navigate 'Licitações > Interposição de Recursos de Processos de Compras'
 
     click_link 'Criar Interposição de Recurso do Processo de Compra'
 

@@ -19,7 +19,7 @@ class PurchaseProcessCreditorProposal < Compras::Model
     to: :item, prefix: true, allow_nil: true
   delegate :name, :cnpj, :benefited, :identity_document,
     to: :creditor, allow_nil: true, prefix: true
-  delegate :execution_unit_responsible, :year, :process, :trading?,
+  delegate :year, :process, :trading?,
     to: :licitation_process, allow_nil: true, prefix: true
 
   validates :creditor, :licitation_process, :unit_price, presence: true

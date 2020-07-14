@@ -8,9 +8,9 @@ feature 'Report::MinutePurchaseProcessTradings', vcr: { cassette_name: :minute_p
   scenario 'should minute purchase process' do
     make_dependencies!
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
-    click_link 'Limpar Filtro'
+
     click_link '1/2012'
 
     click_link 'Imprimir ATA'

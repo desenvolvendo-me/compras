@@ -6,7 +6,7 @@ feature "BankAccounts" do
   end
 
   scenario 'create, update and destroy a new bank_account' do
-    navigate 'Comum > Cadastrais > Bancos > Contas Bancárias'
+    navigate 'Cadastro > Cadastrais > Bancos > Contas Bancárias'
 
     click_link 'Criar Conta Bancária'
 
@@ -79,7 +79,7 @@ feature "BankAccounts" do
 
   scenario 'when fill/clear agency should fill/clear related fields' do
 
-    navigate 'Comum > Cadastrais > Bancos > Contas Bancárias'
+    navigate 'Cadastro > Cadastrais > Bancos > Contas Bancárias'
 
     click_link 'Criar Conta Bancária'
 
@@ -100,7 +100,7 @@ feature "BankAccounts" do
 
   scenario 'when clear bank should clear agency too' do
 
-    navigate 'Comum > Cadastrais > Bancos > Contas Bancárias'
+    navigate 'Cadastro > Cadastrais > Bancos > Contas Bancárias'
 
     click_link 'Criar Conta Bancária'
 
@@ -119,7 +119,7 @@ feature "BankAccounts" do
 
   scenario 'when select agency before bank, bank should fill bank' do
 
-    navigate 'Comum > Cadastrais > Bancos > Contas Bancárias'
+    navigate 'Cadastro > Cadastrais > Bancos > Contas Bancárias'
 
     click_link 'Criar Conta Bancária'
 
@@ -132,7 +132,7 @@ feature "BankAccounts" do
 
   scenario 'when fill bank and submit form with errors should return with bank' do
 
-    navigate 'Comum > Cadastrais > Bancos > Contas Bancárias'
+    navigate 'Cadastro > Cadastrais > Bancos > Contas Bancárias'
 
     click_link 'Criar Conta Bancária'
 
@@ -150,7 +150,7 @@ feature "BankAccounts" do
   scenario 'index with columns at the index' do
     BankAccount.make!(:itau_tributos)
 
-    navigate 'Comum > Cadastrais > Bancos > Contas Bancárias'
+    navigate 'Cadastro > Cadastrais > Bancos > Contas Bancárias'
 
     within_records do
       expect(page).to have_content 'Número da conta corrente'

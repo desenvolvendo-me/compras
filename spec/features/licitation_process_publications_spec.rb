@@ -11,9 +11,9 @@ feature "LicitationProcessPublications", vcr: { cassette_name: :licitation_proce
   scenario 'index should have link to back to licitation_process and create a new publication' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2012'
@@ -29,9 +29,9 @@ feature "LicitationProcessPublications", vcr: { cassette_name: :licitation_proce
   scenario 'create, update and destroy a publication' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2012'
@@ -89,9 +89,9 @@ feature "LicitationProcessPublications", vcr: { cassette_name: :licitation_proce
   scenario 'show columns at the index' do
     LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2012'
@@ -115,9 +115,9 @@ feature "LicitationProcessPublications", vcr: { cassette_name: :licitation_proce
       items: [PurchaseProcessItem.make!(:item, creditor: Creditor.make!(:sobrinho))] )
 
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '2/2013'
@@ -145,9 +145,9 @@ feature "LicitationProcessPublications", vcr: { cassette_name: :licitation_proce
   scenario 'does not have edital when direct_purchase' do
     licitation_process = LicitationProcess.make!(:compra_direta, publications: [])
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '2/2013'
@@ -168,9 +168,9 @@ feature "LicitationProcessPublications", vcr: { cassette_name: :licitation_proce
       publications: [],
       proposal_envelope_opening_date: nil)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2012'
@@ -206,7 +206,7 @@ feature "LicitationProcessPublications", vcr: { cassette_name: :licitation_proce
 
     click_link 'Voltar'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2012'

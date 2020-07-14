@@ -11,6 +11,8 @@ require 'active_support/core_ext/string/access'
 # load action view helpers
 require 'action_view/helpers/capture_helper'
 require 'action_view/helpers/number_helper'
+require 'action_view/helpers/output_safety_helper'
+require 'action_view/helpers/tag_helper'
 require 'action_view/helpers/url_helper'
 require 'action_view/helpers/translation_helper'
 

@@ -181,16 +181,16 @@ describe Creditor do
       expect(subject.errors.messages[:representatives]).to include "não pode haver um representante igual ao credor"
     end
 
-    # it "should be valid when has not a representative equal a person" do
-    #   person.stub(:id).and_return(4)
-    #   person.stub(:company?).and_return(true)
-    #   subject.stub(:person).and_return(person)
-    #   subject.stub(:representative_person_ids).and_return( [1, 2, 3] )
-    #
-    #   subject.valid?
-    #
-    #   expect(subject.errors.messages[:representatives]).to be_nil
-    # end
+    it "should be valid when has not a representative equal a person" do
+      person.stub(:id).and_return(4)
+      person.stub(:company?).and_return(true)
+      subject.stub(:person).and_return(person)
+      subject.stub(:representative_person_ids).and_return( [1, 2, 3] )
+
+      subject.valid?
+
+      expect(subject.errors.messages[:representatives]).to be_nil
+    end
   end
 
   describe '#proposal_by_item' do

@@ -7,7 +7,6 @@ module TceExport::MG
             tipo_registro: 10,
             cod_contrato: contract.id,
             cod_orgao: monthly_monitoring.organ_code,
-            cod_unidade_orcamentaria: budget_structure_code(contract.licitation_process_execution_unit_responsible),
             nro_contrato: contract.contract_number,
             dt_assinatura: contract.signature_date,
             nome_contratado_ou_parceiro_publico: nome_contratado(contract),
@@ -36,8 +35,6 @@ module TceExport::MG
             contract_item_detail: generate_contract_item_detail(contract),
             contract_pledge_item: generate_contract_pledge_item(monthly_monitoring, contract),
             creditor_item: generate_creditor_item(contract),
-            #additive_item: generate_additive_item(monthly_monitoring, contract),
-            #additive_item_detail: generate_additive_item_detail(monthly_monitoring.entity, contract),
             termination_item: generate_termination_item(monthly_monitoring, contract)
           }
         end
@@ -204,7 +201,6 @@ module TceExport::MG
             tipo_registro: 12,
             cod_contrato: contract.id,
             cod_orgao: monthly_monitoring.organ_code,
-            cod_unidade_orcamentaria: budget_structure_code(contract.licitation_process_execution_unit_responsible),
             cod_funcao: pledge.function_code,
             cod_subfuncao: pledge.subfunction_code,
             cod_programa: pledge.government_program_code,
@@ -225,8 +221,6 @@ module TceExport::MG
       end
 
       def item_expenditure(expense_nature)
-        # pledge -> belongs_to :expense_nature
-        # pledge -> delegate :expense_nature, to: :budget_allocation
         expense_nature.split(".")[0..3].join # ???
       end
     end
@@ -273,7 +267,6 @@ module TceExport::MG
             tipo_registro: 20,
             cod_aditivo: additive.id,
             cod_orgao: monthly_monitoring.organ_code,
-            cod_unidade_orcamentaria: budget_structure_code(contract.licitation_process_execution_unit_responsible),
             nro_contrato: contract.contract_number,
             dt_assinatura_contrato_original: contract.signature_date,
             tipo_termo_aditivo: additive_type(additive),
@@ -298,8 +291,6 @@ module TceExport::MG
       end
 
       def item_expenditure(expense_nature)
-        # pledge -> belongs_to :expense_nature
-        # pledge -> delegate :expense_nature, to: :budget_allocation
         expense_nature.split(".")[0..3].join # ???
       end
     end
@@ -337,11 +328,7 @@ module TceExport::MG
         contract.additives.map do |additive|
           {
             tipo_registro: 21,
-            cod_aditivo: additive.id,
-            #descricao_item: nil,
-            #quantidade_item: nil,
-            #unidade: nil,
-            #vl_unitario_item: nil
+            cod_aditivo: additive.id
           }
         end
       end
@@ -365,7 +352,6 @@ module TceExport::MG
         {
           tipo_registro: 40,
           cod_orgao: monthly_monitoring.organ_code,
-          cod_unidade_orcamentaria: budget_structure_code(contract.licitation_process_execution_unit_responsible),
           nro_contrato: contract.contract_number,
           dt_assinatura_contrato_original: contract.signature_date,
           dt_rescisao: termination.termination_date,

@@ -15,16 +15,10 @@ describe PledgeRequest do
   it { should belong_to :contract }
   it { should belong_to :creditor }
 
-  it { should have_many :items }
+  # it { should have_many :items }
 
   describe 'validations' do
-    it { should validate_presence_of :descriptor_id }
-    it { should validate_presence_of :budget_allocation_id }
-    it { should validate_presence_of :accounting_account_id }
     it { should validate_presence_of :purchase_process }
-    it { should validate_presence_of :creditor }
-    it { should validate_presence_of :amount }
-    it { should validate_presence_of :emission_date }
 
     describe 'reserve_fund' do
       let(:purchase_process) { double(:purchase_process) }
@@ -62,6 +56,7 @@ describe PledgeRequest do
 
             subject.valid?
 
+            #TODO: depende de PO
             expect(subject.errors[:reserve_fund_id]).to include('não pode ficar em branco')
           end
         end
@@ -86,9 +81,7 @@ describe PledgeRequest do
   end
 
   describe 'delegations' do
-    it { should delegate(:expense_nature).to(:budget_allocation).allowing_nil(true).prefix(true) }
-    it { should delegate(:balance).to(:budget_allocation).allowing_nil(true).prefix(true) }
-    it { should delegate(:descriptor_id).to(:budget_allocation).allowing_nil(true).prefix(true) }
+    it { should delegate(:budget_allocations_ids).to(:purchase_process).allowing_nil(true).prefix(true) }
     it { should delegate(:amount).to(:reserve_fund).allowing_nil(true).prefix(true) }
   end
 
@@ -96,7 +89,7 @@ describe PledgeRequest do
     it 'should return the representation' do
       subject.stub creditor: 'Credor', purchase_process: 'Processo de compra'
 
-      expect(subject.to_s).to eq 'Credor - Processo de compra'
+      expect(subject.to_s).to eq ' - Processo de compra'
     end
   end
 end

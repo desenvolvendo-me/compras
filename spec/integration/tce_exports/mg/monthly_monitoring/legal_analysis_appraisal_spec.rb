@@ -80,7 +80,7 @@ describe TceExport::MG::MonthlyMonitoring::LegalAnalysisAppraisalGenerator, vcr:
 
       csv = File.read('tmp/PARELIC.csv', encoding: 'ISO-8859-1')
 
-      expect(csv).to eq "98;98009001;2013;2;13052013;1;00315198737;Gabriel Sobrinho;Girassol;São Francisco;1;PR;33400500;3333333333;gabriel.sobrinho@gmail.com"
+      expect(csv).to eq "98;;2013;2;13052013;1;00315198737;Gabriel Sobrinho;Girassol;São Francisco;1;PR;33400500;3333333333;gabriel.sobrinho@gmail.com"
     end
   end
 end

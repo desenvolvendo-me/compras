@@ -6,7 +6,7 @@ feature "StreetTypes" do
   end
 
   scenario 'create a new street type, update and destroy an existing' do
-    navigate 'Geral > Parâmetros > Endereços > Tipos de Logradouros'
+    navigate 'Configurações > Parâmetros > Endereços > Tipos de Logradouros'
 
     click_link 'Criar Tipo de Logradouro'
 
@@ -42,7 +42,7 @@ feature "StreetTypes" do
   end
 
   scenario 'index with columns at the index' do
-    navigate 'Geral > Parâmetros > Endereços > Tipos de Logradouros'
+    navigate 'Configurações > Parâmetros > Endereços > Tipos de Logradouros'
 
     within_records do
       expect(page).to have_content 'Nome'

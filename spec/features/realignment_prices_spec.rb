@@ -33,9 +33,9 @@ feature "RealignmentPrices", vcr: { cassette_name: :realignment_prices } do
     PurchaseProcessCreditorProposal.make!(:proposta_global_ibm, creditor: creditor_ibm,
       licitation_process: purchase_process, lot: 50, unit_price: 200.00)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
-    click_link 'Limpar Filtro'
+
     click_link '1/2012'
 
     click_link 'Realinhamento de preço'
@@ -200,9 +200,9 @@ feature "RealignmentPrices", vcr: { cassette_name: :realignment_prices } do
     PurchaseProcessCreditorProposal.make!(:proposta_global_nohup, creditor: creditor_ibm,
       licitation_process: purchase_process, unit_price: 500.00)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
-    click_link 'Limpar Filtro'
+
     click_link '1/2012'
 
     click_link 'Realinhamento de preço'
@@ -359,9 +359,9 @@ feature "RealignmentPrices", vcr: { cassette_name: :realignment_prices } do
     trading_item_lot_1010.close!
     trading_item_lot_50.close!
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
-    click_link 'Limpar Filtro'
+
     click_link '1/2012'
 
     click_link 'Realinhamento de preço'

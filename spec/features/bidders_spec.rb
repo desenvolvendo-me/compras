@@ -14,7 +14,7 @@ feature "Bidders", vcr: { cassette_name: :bidders } do
   scenario 'accessing the bidders and return to licitation process edit page' do
     LicitationProcess.make!(:processo_licitatorio_computador)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     within_records do
       click_link '2/2013'
@@ -39,7 +39,7 @@ feature "Bidders", vcr: { cassette_name: :bidders } do
     Person.make!(:joao_da_silva)
     DocumentType.make!(:oficial)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     within_records do
       click_link '2/2013'
@@ -56,7 +56,7 @@ feature "Bidders", vcr: { cassette_name: :bidders } do
     expect(page).to have_field 'Processo de compra', :with => '2/2013 - Convite 1', disabled: true
     expect(page).to have_field 'Data do processo de compra', :with => '20/03/2013', disabled: true
 
-    fill_modal 'Fornecedor', :with => 'Gabriel Sobrinho'
+    fill_with_autocomplete 'Fornecedor', :with => 'Gabriel Sobrinho'
 
     check 'Convidado'
     fill_in 'Protocolo', :with => '123456'
@@ -122,7 +122,7 @@ feature "Bidders", vcr: { cassette_name: :bidders } do
     expect(page).to have_field 'Processo de compra', :with => '2/2013 - Convite 1', disabled: true
     expect(page).to have_field 'Data do processo de compra', :with => '20/03/2013', disabled: true
 
-    fill_modal 'Fornecedor', :with => 'Gabriel Sobrinho'
+    fill_with_autocomplete 'Fornecedor', :with => 'Gabriel Sobrinho'
 
     check 'Convidado'
     fill_in 'Protocolo', :with => '111111'
@@ -191,7 +191,7 @@ feature "Bidders", vcr: { cassette_name: :bidders } do
       :modality => Modality::INVITATION,
       :judgment_form => JudgmentForm.make!(:global_com_menor_preco))
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     within_records do
       click_link '2/2013'
@@ -235,7 +235,7 @@ feature "Bidders", vcr: { cassette_name: :bidders } do
   scenario 'showing some items without lot on proposals' do
     LicitationProcess.make!(:processo_licitatorio_canetas_sem_lote)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     within_records do
       click_link '2/2013'
@@ -265,7 +265,7 @@ feature "Bidders", vcr: { cassette_name: :bidders } do
     LicitationProcess.make!(:processo_licitatorio_computador)
     Creditor.make!(:sobrinho_sa)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     within_records do
       click_link '2/2013'
@@ -281,7 +281,7 @@ feature "Bidders", vcr: { cassette_name: :bidders } do
   scenario "index should have title Habilitaçãos do Processo de Compra 1/2013" do
     LicitationProcess.make!(:processo_licitatorio_computador)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     within_records do
       click_link '2/2013'
@@ -295,7 +295,7 @@ feature "Bidders", vcr: { cassette_name: :bidders } do
   scenario "edit should have title Editar Habilitação do Processo de Compra 2/2013" do
     LicitationProcess.make!(:processo_licitatorio_computador)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     within_records do
       click_link '2/2013'
@@ -313,7 +313,7 @@ feature "Bidders", vcr: { cassette_name: :bidders } do
   scenario "new should have title Nova Habilitação do Processo de Compra 2/2013" do
     LicitationProcess.make!(:processo_licitatorio_computador)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     within_records do
       click_link '2/2013'
@@ -329,9 +329,9 @@ feature "Bidders", vcr: { cassette_name: :bidders } do
  scenario 'should have field technical_score when licitation kind is technical_and_price' do
     LicitationProcess.make!(:apuracao_melhor_tecnica_e_preco)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2012'
@@ -349,9 +349,9 @@ feature "Bidders", vcr: { cassette_name: :bidders } do
   scenario 'should have field technical_score when licitation kind is best_technique' do
     LicitationProcess.make!(:apuracao_global, :judgment_form => JudgmentForm.make!(:por_item_com_melhor_tecnica))
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2012'
@@ -369,9 +369,9 @@ feature "Bidders", vcr: { cassette_name: :bidders } do
   scenario 'should not have field technical_score when licitation kind is not(best_technique, technical_and_price)' do
     LicitationProcess.make!(:processo_licitatorio_fornecedores, :proposal_envelope_opening_date => I18n.l(Date.current))
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2012'
@@ -393,7 +393,7 @@ feature "Bidders", vcr: { cassette_name: :bidders } do
     LicitationProcessRatification.make!(:processo_licitatorio_computador,
       :licitation_process => licitation_process)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     within_records do
       click_link '2/2013'
@@ -426,7 +426,7 @@ feature "Bidders", vcr: { cassette_name: :bidders } do
     LicitationProcess.make!(:processo_licitatorio_computador,
       status: PurchaseProcessStatus::WAITING_FOR_OPEN)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     within_records do
       click_link '2/2013'

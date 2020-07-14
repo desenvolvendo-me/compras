@@ -6,7 +6,7 @@ feature "PaymentMethods" do
   end
 
   scenario 'create a new payment_method, update and destroy an existing' do
-    navigate 'Comum > Formas de Pagamento'
+    navigate 'Cadastro > Formas de Pagamento'
 
     click_link 'Criar Forma de Pagamento'
 
@@ -40,7 +40,7 @@ feature "PaymentMethods" do
   scenario 'index with columns at the index' do
     PaymentMethod.make!(:dinheiro)
 
-    navigate 'Comum > Formas de Pagamento'
+    navigate 'Cadastro > Formas de Pagamento'
 
     within_records do
       expect(page).to have_content 'Descrição'

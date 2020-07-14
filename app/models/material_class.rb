@@ -7,7 +7,6 @@ class MaterialClass < Unico::Model
   attr_modal :class_number, :description
 
   has_many :materials, :dependent => :restrict
-  # has_many :purchase_process_fractionations, dependent: :restrict
 
   validates :mask,format: { with:  /^[9.]{1,45}$/i }
 

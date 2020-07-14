@@ -6,7 +6,7 @@ feature "Positions" do
   end
 
   scenario 'create a new position, update and destroy an existing' do
-    navigate 'Geral > Usuários > Cargos'
+    navigate 'Configurações > Usuários > Cargos'
 
     click_link 'Criar Cargo'
 
@@ -37,7 +37,7 @@ feature "Positions" do
   end
 
   scenario 'index with columns at the index' do
-    navigate 'Geral > Usuários > Cargos'
+    navigate 'Configurações > Usuários > Cargos'
 
     within_records do
       expect(page).to have_content 'Nome'

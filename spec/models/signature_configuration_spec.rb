@@ -1,7 +1,7 @@
 require 'model_helper'
 require 'app/models/signature_configuration'
 require 'app/models/signature_configuration_item'
-require 'app/models/signature'
+# require 'app/models/signature'
 
 describe SignatureConfiguration do
   it 'should return report_humanize as to_s' do

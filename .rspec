@@ -1,2 +1,4 @@
 --colour
---format documentation
+--format html
+--out rspec_results.html
+--require spec_helper

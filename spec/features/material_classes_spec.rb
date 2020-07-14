@@ -6,7 +6,7 @@ feature "MaterialClasses" do
   end
 
   scenario 'create, update and destroy an materials_class' do
-    navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
+    navigate 'Cadastro > Cadastrais > Materiais > Classes de Materiais'
 
     click_link 'Criar Classe de Materiais'
 
@@ -65,7 +65,7 @@ feature "MaterialClasses" do
   end
 
   scenario 'index with columns at the index' do
-    navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
+    navigate 'Cadastro > Cadastrais > Materiais > Classes de Materiais'
 
     within_records do
       expect(page).to have_content 'Descrição'
@@ -79,7 +79,7 @@ feature "MaterialClasses" do
   end
 
   scenario 'use the autocomplete to fill parent class by description or class_number' do
-    navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
+    navigate 'Cadastro > Cadastrais > Materiais > Classes de Materiais'
 
     click_link 'Criar Classe de Materiais'
 
@@ -119,7 +119,7 @@ feature "MaterialClasses" do
   scenario 'cannot edit when material class is imported' do
     FactoryGirl.create(:material_class, :masked_number => '01.32.15.000.000', :class_number => '013215000000', :imported => true)
 
-    navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
+    navigate 'Cadastro > Cadastrais > Materiais > Classes de Materiais'
 
     click_link 'Software'
 
@@ -137,7 +137,7 @@ feature "MaterialClasses" do
   end
 
   scenario 'filter and modal can search class_number with dot' do
-    navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
+    navigate 'Cadastro > Cadastrais > Materiais > Classes de Materiais'
 
     click_link 'Filtrar Classes de Materiais'
 
@@ -154,7 +154,7 @@ feature "MaterialClasses" do
   scenario 'update an existent materials_class when at first level' do
     FactoryGirl.create(:material_class, :description => 'Segurança', :masked_number => '01.00.00.000.000')
 
-    navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
+    navigate 'Cadastro > Cadastrais > Materiais > Classes de Materiais'
     click_link 'Segurança'
 
     expect(page).to have_field 'Classe superior', :with => ''
@@ -162,7 +162,7 @@ feature "MaterialClasses" do
   end
 
   scenario 'should has mask when has not a parent class number' do
-    navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
+    navigate 'Cadastro > Cadastrais > Materiais > Classes de Materiais'
 
     click_link 'Criar Classe de Materiais'
 
@@ -173,7 +173,7 @@ feature "MaterialClasses" do
   end
 
   scenario 'should keep data when form has errors' do
-    navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
+    navigate 'Cadastro > Cadastrais > Materiais > Classes de Materiais'
 
     click_link 'Criar Classe de Materiais'
 
@@ -219,7 +219,7 @@ feature "MaterialClasses" do
   end
 
   scenario 'modal form at filter should have an autocomplete for class_number' do
-    navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
+    navigate 'Cadastro > Cadastrais > Materiais > Classes de Materiais'
 
     within_records do
       expect(page).to have_content 'Software'

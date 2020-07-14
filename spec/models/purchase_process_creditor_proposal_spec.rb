@@ -75,7 +75,6 @@ describe PurchaseProcessCreditorProposal do
   it { should delegate(:benefited).to(:creditor).allowing_nil(true).prefix(true) }
   it { should delegate(:identity_document).to(:creditor).allowing_nil(true).prefix(true) }
 
-  it { should delegate(:execution_unit_responsible).to(:licitation_process).allowing_nil(true).prefix(true) }
   it { should delegate(:year).to(:licitation_process).allowing_nil(true).prefix(true) }
   it { should delegate(:process).to(:licitation_process).allowing_nil(true).prefix(true) }
 

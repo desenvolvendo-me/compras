@@ -16,7 +16,6 @@ class LegalAnalysisAppraisal < Compras::Model
   validates :licitation_process, :appraisal_type, :reference,
             :appraisal_expedition_date, :responsible, :presence => true
 
-  delegate :execution_unit_responsible, to: :licitation_process, allow_nil: true
   delegate :year, :process, :modality, :description,
     :to => :licitation_process, :allow_nil => true
   delegate :cpf, :name, :street_name, :neighborhood_name, :city_tce_mg_code,

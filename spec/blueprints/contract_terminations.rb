@@ -1,6 +1,6 @@
 ContractTermination.blueprint(:contrato_rescindido) do
   contract { Contract.make!(:primeiro_contrato) }
-  year     { 2012 }
+  year     { Date.today.year }
   number   { 1 }
   reason   { "Foo Bar" }
   expiry_date      { Date.current }

@@ -6,7 +6,6 @@ LicitationProcess.blueprint(:processo_licitatorio) do
   modality { Modality::CONCURRENCE }
   judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
   description { 'Licitação para compra de carteiras' }
-  purchase_process_budget_allocations { [PurchaseProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   items { [PurchaseProcessItem.make!(:item)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
@@ -27,7 +26,8 @@ LicitationProcess.blueprint(:processo_licitatorio) do
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   notice_availability_date { I18n.l(Date.tomorrow) }
-  execution_unit_responsible_id { 1 }
+  purchasing_unit { PurchasingUnit.make!(:principal) }
+  purchase_solicitations { [ListPurchaseSolicitation.make!(:principal)] }
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_computador) do
@@ -38,7 +38,6 @@ LicitationProcess.blueprint(:processo_licitatorio_computador) do
   modality { Modality::CONCURRENCE }
   judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
   description { 'Licitação para compra de carteiras' }
-  purchase_process_budget_allocations { [PurchaseProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   items { [PurchaseProcessItem.make!(:item)] }
   year { 2013 }
   process_date { Date.new(2013, 3, 20) }
@@ -60,8 +59,9 @@ LicitationProcess.blueprint(:processo_licitatorio_computador) do
   type_of_purchase { PurchaseProcessTypeOfPurchase::LICITATION }
   contract_guarantees { ContractGuarantees::BANK }
   notice_availability_date { I18n.l(Date.tomorrow) }
-  execution_unit_responsible_id { 1 }
   judgment_commission_advice { JudgmentCommissionAdvice.make!(:parecer, licitation_process: object) }
+  purchasing_unit { PurchasingUnit.make!(:principal) }
+  purchase_solicitations { [ListPurchaseSolicitation.make!(:principal)] }
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_fornecedores) do
@@ -72,7 +72,6 @@ LicitationProcess.blueprint(:processo_licitatorio_fornecedores) do
   modality { Modality::INVITATION }
   judgment_form { JudgmentForm.make!(:global_com_menor_preco) }
   description { 'Licitação para compra de carteiras' }
-  purchase_process_budget_allocations { [PurchaseProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   items { [PurchaseProcessItem.make!(:item)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
@@ -93,7 +92,8 @@ LicitationProcess.blueprint(:processo_licitatorio_fornecedores) do
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   notice_availability_date { I18n.l(Date.tomorrow) }
-  execution_unit_responsible_id { 1 }
+  purchasing_unit { PurchasingUnit.make!(:principal) }
+  purchase_solicitations { [ListPurchaseSolicitation.make!(:principal)] }
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_publicacao_cancelada) do
@@ -104,7 +104,6 @@ LicitationProcess.blueprint(:processo_licitatorio_publicacao_cancelada) do
   modality { Modality::INVITATION }
   judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
   description { 'Licitação para compra de carteiras' }
-  purchase_process_budget_allocations { [PurchaseProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   items { [PurchaseProcessItem.make!(:item)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
@@ -124,7 +123,8 @@ LicitationProcess.blueprint(:processo_licitatorio_publicacao_cancelada) do
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   notice_availability_date { I18n.l(Date.tomorrow) }
-  execution_unit_responsible_id { 1 }
+  purchasing_unit { PurchasingUnit.make!(:principal) }
+  purchase_solicitations { [ListPurchaseSolicitation.make!(:principal)] }
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_canetas) do
@@ -135,7 +135,6 @@ LicitationProcess.blueprint(:processo_licitatorio_canetas) do
   modality { Modality::INVITATION }
   judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
   description { 'Licitação para compra de carteiras' }
-  purchase_process_budget_allocations { [PurchaseProcessBudgetAllocation.make!(:alocacao_com_2_itens)] }
   items { [PurchaseProcessItem.make!(:item),
            PurchaseProcessItem.make!(:item_arame)] }
   year { 2013 }
@@ -158,7 +157,8 @@ LicitationProcess.blueprint(:processo_licitatorio_canetas) do
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   notice_availability_date { I18n.l(Date.tomorrow) }
-  execution_unit_responsible_id { 1 }
+  purchasing_unit { PurchasingUnit.make!(:principal) }
+  purchase_solicitations { [ListPurchaseSolicitation.make!(:principal)] }
 end
 
 LicitationProcess.blueprint(:apuracao_por_itens) do
@@ -169,7 +169,6 @@ LicitationProcess.blueprint(:apuracao_por_itens) do
   modality { Modality::INVITATION }
   judgment_form { JudgmentForm.make!(:por_item_com_menor_preco) }
   description { 'Licitação para compra de carteiras' }
-  purchase_process_budget_allocations { [PurchaseProcessBudgetAllocation.make!(:alocacao_com_2_itens)] }
   items { [PurchaseProcessItem.make!(:item),
            PurchaseProcessItem.make!(:item_arame)] }
   year { 2012 }
@@ -192,7 +191,8 @@ LicitationProcess.blueprint(:apuracao_por_itens) do
              Bidder.make!(:licitante_com_proposta_2)] }
   contract_guarantees { ContractGuarantees::BANK }
   notice_availability_date { I18n.l(Date.tomorrow) }
-  execution_unit_responsible_id { 1 }
+  purchasing_unit { PurchasingUnit.make!(:principal) }
+  purchase_solicitations { [ListPurchaseSolicitation.make!(:principal)] }
 end
 
 LicitationProcess.blueprint(:apuracao_por_lote) do
@@ -203,7 +203,6 @@ LicitationProcess.blueprint(:apuracao_por_lote) do
   modality { Modality::INVITATION }
   judgment_form { JudgmentForm.make!(:por_lote_com_menor_preco) }
   description { 'Licitação para compra de carteiras' }
-  purchase_process_budget_allocations { [PurchaseProcessBudgetAllocation.make!(:alocacao_com_2_itens)] }
   items { [PurchaseProcessItem.make!(:item),
            PurchaseProcessItem.make!(:item_arame)] }
   year { 2012 }
@@ -226,7 +225,8 @@ LicitationProcess.blueprint(:apuracao_por_lote) do
              Bidder.make!(:licitante_com_proposta_2)] }
   contract_guarantees { ContractGuarantees::BANK }
   notice_availability_date { I18n.l(Date.tomorrow) }
-  execution_unit_responsible_id { 1 }
+  purchasing_unit { PurchasingUnit.make!(:principal) }
+  purchase_solicitations { [ListPurchaseSolicitation.make!(:principal)] }
 end
 
 LicitationProcess.blueprint(:valor_maximo_ultrapassado) do
@@ -237,7 +237,6 @@ LicitationProcess.blueprint(:valor_maximo_ultrapassado) do
   modality { Modality::INVITATION }
   judgment_form { JudgmentForm.make!(:por_lote_com_menor_preco) }
   description { 'Licitação para compra de carteiras' }
-  purchase_process_budget_allocations { [PurchaseProcessBudgetAllocation.make!(:alocacao_com_2_itens)] }
   items { [PurchaseProcessItem.make!(:item),
            PurchaseProcessItem.make!(:item_arame)] }
   year { 2012 }
@@ -260,7 +259,8 @@ LicitationProcess.blueprint(:valor_maximo_ultrapassado) do
   bidders { [Bidder.make!(:licitante_com_proposta_3),
              Bidder.make!(:licitante_com_proposta_7)] }
   notice_availability_date { I18n.l(Date.tomorrow) }
-  execution_unit_responsible_id { 1 }
+  purchasing_unit { PurchasingUnit.make!(:principal) }
+  purchase_solicitations { [ListPurchaseSolicitation.make!(:principal)] }
 end
 
 LicitationProcess.blueprint(:apuracao_global) do
@@ -271,7 +271,6 @@ LicitationProcess.blueprint(:apuracao_global) do
   modality { Modality::INVITATION }
   judgment_form { JudgmentForm.make!(:global_com_menor_preco) }
   description { 'Licitação para compra de carteiras' }
-  purchase_process_budget_allocations { [PurchaseProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   items { [PurchaseProcessItem.make!(:item)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
@@ -293,7 +292,8 @@ LicitationProcess.blueprint(:apuracao_global) do
   bidders { [Bidder.make!(:licitante_com_proposta_1),
              Bidder.make!(:licitante_com_proposta_2)] }
   notice_availability_date { I18n.l(Date.tomorrow) }
-  execution_unit_responsible_id { 1 }
+  purchasing_unit { PurchasingUnit.make!(:principal) }
+  purchase_solicitations { [ListPurchaseSolicitation.make!(:principal)] }
 end
 
 LicitationProcess.blueprint(:apuracao_global_empatou) do
@@ -304,7 +304,6 @@ LicitationProcess.blueprint(:apuracao_global_empatou) do
   modality { Modality::INVITATION }
   judgment_form { JudgmentForm.make!(:global_com_menor_preco) }
   description { 'Licitação para compra de carteiras' }
-  purchase_process_budget_allocations { [PurchaseProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   items { [PurchaseProcessItem.make!(:item)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
@@ -326,7 +325,8 @@ LicitationProcess.blueprint(:apuracao_global_empatou) do
   bidders { [Bidder.make!(:licitante_com_proposta_5),
              Bidder.make!(:licitante_com_proposta_6)] }
   notice_availability_date { I18n.l(Date.tomorrow) }
-  execution_unit_responsible_id { 1 }
+  purchasing_unit { PurchasingUnit.make!(:principal) }
+  purchase_solicitations { [ListPurchaseSolicitation.make!(:principal)] }
 end
 
 LicitationProcess.blueprint(:apuracao_global_sem_documentos) do
@@ -337,7 +337,6 @@ LicitationProcess.blueprint(:apuracao_global_sem_documentos) do
   modality { Modality::INVITATION }
   judgment_form { JudgmentForm.make!(:global_com_menor_preco) }
   description { 'Licitação para compra de carteiras' }
-  purchase_process_budget_allocations { [PurchaseProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   items { [PurchaseProcessItem.make!(:item)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
@@ -359,7 +358,8 @@ LicitationProcess.blueprint(:apuracao_global_sem_documentos) do
   bidders { [Bidder.make!(:licitante_com_proposta_6, documents: []),
              Bidder.make!(:licitante_com_proposta_4, documents: [])] }
   notice_availability_date { I18n.l(Date.tomorrow) }
-  execution_unit_responsible_id { 1 }
+  purchasing_unit { PurchasingUnit.make!(:principal) }
+  purchase_solicitations { [ListPurchaseSolicitation.make!(:principal)] }
 end
 
 LicitationProcess.blueprint(:apuracao_global_small_company) do
@@ -370,7 +370,6 @@ LicitationProcess.blueprint(:apuracao_global_small_company) do
   modality { Modality::INVITATION }
   judgment_form { JudgmentForm.make!(:global_com_menor_preco) }
   description { 'Licitação para compra de carteiras' }
-  purchase_process_budget_allocations { [PurchaseProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   items { [PurchaseProcessItem.make!(:item)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
@@ -392,7 +391,8 @@ LicitationProcess.blueprint(:apuracao_global_small_company) do
   bidders { [Bidder.make!(:licitante_com_proposta_3),
              Bidder.make!(:licitante_com_proposta_4)] }
   notice_availability_date { I18n.l(Date.tomorrow) }
-  execution_unit_responsible_id { 1 }
+  purchasing_unit { PurchasingUnit.make!(:principal) }
+  purchase_solicitations { [ListPurchaseSolicitation.make!(:principal)] }
 end
 
 LicitationProcess.blueprint(:apuracao_global_small_company_2) do
@@ -403,7 +403,6 @@ LicitationProcess.blueprint(:apuracao_global_small_company_2) do
   modality { Modality::INVITATION }
   judgment_form { JudgmentForm.make!(:global_com_menor_preco) }
   description { 'Licitação para compra de carteiras' }
-  purchase_process_budget_allocations { [PurchaseProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   items { [PurchaseProcessItem.make!(:item)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
@@ -425,7 +424,8 @@ LicitationProcess.blueprint(:apuracao_global_small_company_2) do
   bidders { [Bidder.make!(:licitante_com_proposta_8),
              Bidder.make!(:licitante_com_proposta_9)] }
   notice_availability_date { I18n.l(Date.tomorrow) }
-  execution_unit_responsible_id { 1 }
+  purchasing_unit { PurchasingUnit.make!(:principal) }
+  purchase_solicitations { [ListPurchaseSolicitation.make!(:principal)] }
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_nao_atualizavel) do
@@ -436,7 +436,6 @@ LicitationProcess.blueprint(:processo_licitatorio_nao_atualizavel) do
   modality { Modality::INVITATION }
   judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
   description { 'Licitação para compra de carteiras' }
-  purchase_process_budget_allocations { [PurchaseProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   items { [PurchaseProcessItem.make!(:item)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
@@ -456,7 +455,8 @@ LicitationProcess.blueprint(:processo_licitatorio_nao_atualizavel) do
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   notice_availability_date { I18n.l(Date.tomorrow) }
-  execution_unit_responsible_id { 1 }
+  purchasing_unit { PurchasingUnit.make!(:principal) }
+  purchase_solicitations { [ListPurchaseSolicitation.make!(:principal)] }
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_canetas_sem_lote) do
@@ -467,7 +467,6 @@ LicitationProcess.blueprint(:processo_licitatorio_canetas_sem_lote) do
   modality { Modality::INVITATION }
   judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
   description { 'Licitação para compra de carteiras' }
-  purchase_process_budget_allocations { [PurchaseProcessBudgetAllocation.make!(:alocacao_com_2_itens)] }
   items { [PurchaseProcessItem.make!(:item),
            PurchaseProcessItem.make!(:item_arame)] }
   year { 2013 }
@@ -489,7 +488,8 @@ LicitationProcess.blueprint(:processo_licitatorio_canetas_sem_lote) do
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   notice_availability_date { I18n.l(Date.tomorrow) }
-  execution_unit_responsible_id { 1 }
+  purchasing_unit { PurchasingUnit.make!(:principal) }
+  purchase_solicitations { [ListPurchaseSolicitation.make!(:principal)] }
 end
 
 LicitationProcess.blueprint(:apuracao_melhor_tecnica_e_preco) do
@@ -500,7 +500,6 @@ LicitationProcess.blueprint(:apuracao_melhor_tecnica_e_preco) do
   modality { Modality::INVITATION }
   judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
   description { 'Licitação para compra de carteiras' }
-  purchase_process_budget_allocations { [PurchaseProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   items { [PurchaseProcessItem.make!(:item)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
@@ -522,7 +521,8 @@ LicitationProcess.blueprint(:apuracao_melhor_tecnica_e_preco) do
   bidders { [Bidder.make!(:licitante_com_proposta_1),
              Bidder.make!(:licitante_com_proposta_2)] }
   notice_availability_date { I18n.l(Date.tomorrow) }
-  execution_unit_responsible_id { 1 }
+  purchasing_unit { PurchasingUnit.make!(:principal) }
+  purchase_solicitations { [ListPurchaseSolicitation.make!(:principal)] }
 end
 
 LicitationProcess.blueprint(:pregao_presencial) do
@@ -533,7 +533,6 @@ LicitationProcess.blueprint(:pregao_presencial) do
   modality { Modality::TRADING }
   judgment_form { JudgmentForm.make!(:por_item_com_menor_preco) }
   description { 'Licitação para compra de carteiras' }
-  purchase_process_budget_allocations { [PurchaseProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   items { [PurchaseProcessItem.make!(:item)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
@@ -554,7 +553,8 @@ LicitationProcess.blueprint(:pregao_presencial) do
   publications { [LicitationProcessPublication.make!(:publicacao, licitation_process: object)] }
   bidders { [Bidder.make!(:licitante_sobrinho), Bidder.make!(:licitante), Bidder.make!(:me_pregao)] }
   notice_availability_date { I18n.l(Date.tomorrow) }
-  execution_unit_responsible_id { 1 }
+  purchasing_unit { PurchasingUnit.make!(:principal) }
+  purchase_solicitations { [ListPurchaseSolicitation.make!(:principal)] }
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_concurso) do
@@ -565,7 +565,6 @@ LicitationProcess.blueprint(:processo_licitatorio_concurso) do
   modality { Modality::COMPETITION }
   judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
   description { 'Licitação para contrução de prédio' }
-  purchase_process_budget_allocations { [PurchaseProcessBudgetAllocation.make!(:alocacao)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
   expiration { 10 }
@@ -584,7 +583,8 @@ LicitationProcess.blueprint(:processo_licitatorio_concurso) do
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   notice_availability_date { I18n.l(Date.tomorrow) }
-  execution_unit_responsible_id { 1 }
+  purchasing_unit { PurchasingUnit.make!(:principal) }
+  purchase_solicitations { [ListPurchaseSolicitation.make!(:principal)] }
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_concorrencia) do
@@ -594,7 +594,6 @@ LicitationProcess.blueprint(:processo_licitatorio_concorrencia) do
   object_type { PurchaseProcessObjectType::PURCHASE_AND_SERVICES }
   modality { Modality::CONCURRENCE }
   description { 'Licitação para compra de computadores' }
-  purchase_process_budget_allocations { [PurchaseProcessBudgetAllocation.make!(:alocacao)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
   expiration { 10 }
@@ -612,9 +611,10 @@ LicitationProcess.blueprint(:processo_licitatorio_concorrencia) do
   publications { [LicitationProcessPublication.make!(:publicacao)] }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
-  judgment_form { JudgmentForm.make!(:global_com_menor_preco)}
+  judgment_form { JudgmentForm.make!(:global_com_menor_preco) }
   notice_availability_date { I18n.l(Date.tomorrow) }
-  execution_unit_responsible_id { 1 }
+  purchasing_unit { PurchasingUnit.make!(:principal) }
+  purchase_solicitations { [ListPurchaseSolicitation.make!(:principal)] }
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_tomada_preco) do
@@ -624,7 +624,6 @@ LicitationProcess.blueprint(:processo_licitatorio_tomada_preco) do
   object_type { PurchaseProcessObjectType::CONSTRUCTION_AND_ENGINEERING_SERVICES }
   modality { Modality::TAKEN_PRICE }
   description { 'Licitação para contrução de prédio' }
-  purchase_process_budget_allocations { [PurchaseProcessBudgetAllocation.make!(:alocacao)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
   expiration { 10 }
@@ -642,9 +641,10 @@ LicitationProcess.blueprint(:processo_licitatorio_tomada_preco) do
   publications { [LicitationProcessPublication.make!(:publicacao)] }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
-  judgment_form { JudgmentForm.make!(:global_com_menor_preco)}
+  judgment_form { JudgmentForm.make!(:global_com_menor_preco) }
   notice_availability_date { I18n.l(Date.tomorrow) }
-  execution_unit_responsible_id { 1 }
+  purchasing_unit { PurchasingUnit.make!(:principal) }
+  purchase_solicitations { [ListPurchaseSolicitation.make!(:principal)] }
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_leilao) do
@@ -655,7 +655,6 @@ LicitationProcess.blueprint(:processo_licitatorio_leilao) do
   modality { Modality::AUCTION }
   judgment_form { JudgmentForm.make!(:global_com_melhor_lance_ou_oferta) }
   description { 'Licitação para compra de carteiras' }
-  purchase_process_budget_allocations { [PurchaseProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   items { [PurchaseProcessItem.make!(:item)] }
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
@@ -675,7 +674,8 @@ LicitationProcess.blueprint(:processo_licitatorio_leilao) do
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   notice_availability_date { I18n.l(Date.tomorrow) }
-  execution_unit_responsible_id { 1 }
+  purchasing_unit { PurchasingUnit.make!(:principal) }
+  purchase_solicitations { [ListPurchaseSolicitation.make!(:principal)] }
 end
 
 
@@ -686,7 +686,6 @@ LicitationProcess.blueprint(:compra_direta) do
   object_type { PurchaseProcessObjectType::PURCHASE_AND_SERVICES }
   judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
   description { 'Licitação para compra de carteiras' }
-  purchase_process_budget_allocations { [PurchaseProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   items { [PurchaseProcessItem.make!(:item, creditor: Creditor.make!(:wenderson_sa))] }
   justification_and_legal { 'Justificativa legal' }
   justification { 'Justificativa' }
@@ -711,5 +710,6 @@ LicitationProcess.blueprint(:compra_direta) do
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
   notice_availability_date { I18n.l(Date.tomorrow) }
-  execution_unit_responsible_id { 1 }
+  purchasing_unit { PurchasingUnit.make!(:principal) }
+  purchase_solicitations { [ListPurchaseSolicitation.make!(:principal)] }
 end
