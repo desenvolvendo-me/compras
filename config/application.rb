@@ -2,18 +2,9 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 
-if defined?(Bundler)
-  # If you precompile assets before deploying to production, use this line
-  Bundler.require(*Rails.groups(:assets => %w(development test)))
-  # If you want your assets lazily compiled in production, use this line
-  # Bundler.require(:default, :assets, Rails.env)
-end
-
-module Rails
-  def self.production_way?
-    env.production? || env.staging? || env.training?
-  end
-end
+# Require the gems listed in Gemfile, including any gems
+# you've limited to :test, :development, or :production.
+Bundler.require(*Rails.groups)
 
 module Compras
   class Application < Rails::Application
@@ -23,44 +14,21 @@ module Compras
 
     # Custom directories with classes and modules you want to be autoloadable.
     config.autoload_paths += %W(
-      #{config.root}/lib
-      #{config.root}/app/business
-      #{config.root}/app/decorators
-      #{config.root}/app/enumerations
-      #{config.root}/app/importers
-      #{config.root}/app/observers
-      #{config.root}/app/reports
-      #{config.root}/app/reports/concerns
-      #{config.root}/app/validators
-      #{config.root}/app/tce_exports
-      #{config.root}/app/workers
-      #{config.root}/app/providers
-      #{config.root}/app/models/concerns
+    #{config.root}/lib
     )
-
-    # Custom route files you want to be loaded.
-    config.paths['config/routes'] += Dir["#{config.root}/config/routes/*.rb"]
-
-    # Only load the plugins named here, in the order given (default is alphabetical).
-    # :all can be used as a placeholder for all plugins not explicitly named.
-    # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
-
-    # Activate observers that should always be running.
-    config.active_record.observers = :purchase_process_document_observer
-
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     config.time_zone = 'Brasilia'
 
-    # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
-    config.i18n.load_path += Dir["#{config.root}/config/locales/*.yml"]
+    config.i18n.enforce_available_locales = false
+    config.i18n.available_locales = ['pt-BR']
     config.i18n.default_locale = 'pt-BR'
+    config.i18n.locale = 'pt-BR'
 
-    # Configure the default encoding used in templates for Ruby 1.9.
+    config.i18n.load_path += Dir["#{config.root}/config/locales/**/*.yml"]
+
     config.encoding = "utf-8"
 
-    # Configure sensitive parameters which will be filtered from the log file.
-    config.filter_parameters += [:password]
 
     # Use SQL instead of Active Record's schema dumper when creating the database.
     # This is necessary if your schema can't be completely dumped by the schema dumper,
@@ -73,55 +41,59 @@ module Compras
     # parameters by using an attr_accessible or attr_protected declaration.
     # config.active_record.whitelist_attributes = true
 
-    # Enable the asset pipeline
-    config.assets.enabled = true
-
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
+    config.assets.precompile += [
+        # stylesheet files
+        'devise.css',
+        'report.css',
+        'compras/report.css',
+        'compras/table_size.css',
+
+        # javascript files
+        'bidders.js',
+        'bidding_schedules.js',
+        'contracts.js',
+        'creditor_proposal_benefited_tieds.js',
+        'employees.js',
+        'licitation_processes.js',
+        'pledge_requests.js',
+        'price_collections.js',
+        'purchase_process_accreditations.js',
+        'purchase_process_creditor_disqualifications.js',
+        'purchase_process_proposals.js',
+        'purchase_process_tradings.js',
+        'purchase_process_tradings_negotiations.js',
+        'purchase_solicitations.js',
+        'reserve_fund_requests.js',
+        'supply_orders.js',
+        'supply_requests.js',
+        'additive_solicitations.js',
+        'expenses.js',
+        'balance_adjustments.js',
+        'modal_filter.js',
+        'reports/balance_per_creditor',
+        "select2/select2.min",
+        "select2/select2_locale_pt-BR"
+    ]
     # Include helpers from current controller only
     config.action_controller.include_all_helpers = false
 
-    # Include way to get a PDF view of any page on your site by appending .pdf to the URL.
-    # config.middleware.use 'PDFKit::Middleware', :print_media_type => true
+    config.active_record.disable_implicit_join_references = false
 
-    # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-    config.assets.precompile += [
-      # stylesheet files
-      'devise.css',
-      'report.css',
-      'compras/report.css',
-      'compras/table_size.css',
+    config.active_record.whitelist_attributes = false
 
-      # javascript files
-      'bidders.js',
-      'bidding_schedules.js',
-      'contracts.js',
-      'creditor_proposal_benefited_tieds.js',
-      'employees.js',
-      'licitation_processes.js',
-      'pledge_requests.js',
-      'price_collections.js',
-      'purchase_process_accreditations.js',
-      'purchase_process_creditor_disqualifications.js',
-      'purchase_process_proposals.js',
-      'purchase_process_tradings.js',
-      'purchase_process_tradings_negotiations.js',
-      'purchase_solicitations.js',
-      'reserve_fund_requests.js',
-      'supply_orders.js',
-      'supply_requests.js',
-      'additive_solicitations.js',
-      'expenses.js',
-      'balance_adjustments.js',
-      'modal_filter.js',
-      'reports/balance_per_creditor',
-      "select2/select2.min",
-      "select2/select2_locale_pt-BR"
-    ]
+    def self.production_way?
+      Rails.env.production? || Rails.env.staging? || Rails.env.training?
+    end
 
-    config.generators do |g|
-      g.fixture_replacement :factory_girl
+    def self.redis_configuration
+      if production_way?
+        uri = URI.parse(ENV["REDISTOGO_URL"])
+      else
+        uri = URI.parse("redis://localhost:6379")
+      end
     end
   end
 end
