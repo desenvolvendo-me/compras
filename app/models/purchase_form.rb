@@ -6,8 +6,8 @@ class PurchaseForm < Compras::Model
   orderize
   filterize
 
-  has_many :purchase_solicitations, :class_name => 'PurchaseSolicitationPurchaseForm', :dependent => :restrict,
-           :inverse_of => :purchase_solicitation, :order => :id
+  has_many :purchase_solicitations, -> { order(:id) }, :class_name => 'PurchaseSolicitationPurchaseForm', :dependent => :restrict,
+           :inverse_of => :purchase_solicitation
 
   validates :name, presence: true
 

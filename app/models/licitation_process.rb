@@ -58,42 +58,38 @@ class LicitationProcess < Compras::Model
   belongs_to :index_update_rate, :class_name => 'Indexer'
 
   has_and_belongs_to_many :document_types, :join_table => :compras_licitation_processes_unico_document_types
-  has_many :purchase_solicitations, class_name: 'ListPurchaseSolicitation', dependent: :destroy, order: :id
-
-  # has_and_belongs_to_many :purchase_solicitations, :join_table => :compras_licitation_processes_purchase_solicitations,
-  #                         :before_add => :update_purchase_solicitation_to_purchase_process,
-  #                         :before_remove => :update_purchase_solicitation_to_liberated
+  has_many :purchase_solicitations, -> { order(:id) }, class_name: 'ListPurchaseSolicitation', dependent: :destroy
 
   accepts_nested_attributes_for :purchase_solicitations,
                                 :allow_destroy => true
 
-  has_many :publications, class_name: 'LicitationProcessPublication', dependent: :destroy, order: :id
-  has_many :bidders, :dependent => :destroy, :order => :id
-  has_many :licitation_process_impugnments, :dependent => :restrict, :order => :id
+  has_many :publications, -> { order(:id) }, class_name: 'LicitationProcessPublication', dependent: :destroy
+  has_many :bidders, -> { order(:id) }, :dependent => :destroy
+  has_many :licitation_process_impugnments, -> { order(:id) }, :dependent => :restrict
   has_many :licitation_process_appeals, :dependent => :restrict
   has_many :licitation_notices, :dependent => :destroy
-  has_many :licitation_process_ratifications, :dependent => :restrict, :order => :id
-  has_many :ratifications_items, through: :licitation_process_ratifications, source: :licitation_process_ratification_items, order: :id
-  has_many :licitation_process_ratification_creditors, through: :licitation_process_ratifications, source: :creditor, order: :id
+  has_many :licitation_process_ratifications, -> { order(:id) }, :dependent => :restrict
+  has_many :ratifications_items, -> { order(:id) }, through: :licitation_process_ratifications, source: :licitation_process_ratification_items
+  has_many :licitation_process_ratification_creditors, -> { order(:id) }, through: :licitation_process_ratifications, source: :creditor
   has_many :classifications, :through => :bidders, :class_name => 'LicitationProcessClassification',
            :source => :licitation_process_classifications
-  has_many :purchase_process_budget_allocations, :dependent => :destroy, :order => :id
-  has_many :items, :class_name => 'PurchaseProcessItem', :dependent => :restrict,
-           :order => :id, :inverse_of => :licitation_process
+  has_many :purchase_process_budget_allocations, -> { order(:id) }, :dependent => :destroy
+  has_many :items, -> { order(:id) }, :class_name => 'PurchaseProcessItem', :dependent => :restrict,
+           :inverse_of => :licitation_process
   has_many :materials, :through => :items
   has_many :legal_analysis_appraisals, :dependent => :restrict
-  has_many :license_creditors, :through => :bidders, :dependent => :restrict, :source => :creditor, order: :id
-  has_many :accreditation_creditors, :through => :purchase_process_accreditation, :source => :creditors, order: :id
-  has_many :creditor_proposals, class_name: 'PurchaseProcessCreditorProposal', order: :id
+  has_many :license_creditors, -> { order(:id) }, :through => :bidders, :dependent => :restrict, :source => :creditor
+  has_many :accreditation_creditors, -> { order(:id) }, :through => :purchase_process_accreditation, :source => :creditors
+  has_many :creditor_proposals, -> { order(:id) }, class_name: 'PurchaseProcessCreditorProposal'
   has_many :realignment_prices, dependent: :restrict, foreign_key: :purchase_process_id
-  has_many :tied_creditor_proposals, class_name: 'PurchaseProcessCreditorProposal',
-           conditions: {tied: true}, order: 'ranking, creditor_id, purchase_process_item_id, lot'
-  has_many :items_creditors, through: :items, source: :creditor, order: :id
+  has_many :tied_creditor_proposals, -> { order("ranking, creditor_id, purchase_process_item_id, lot") }, class_name: 'PurchaseProcessCreditorProposal',
+           conditions: {tied: true}
+  has_many :items_creditors, -> { order(:id) }, through: :items, source: :creditor
   has_many :creditor_disqualifications, class_name: 'PurchaseProcessCreditorDisqualification', dependent: :restrict
   has_many :process_responsibles, :dependent => :restrict
-  has_many :trading_items, through: :trading, source: :items, order: :id
-  has_many :trading_item_bids, through: :trading_items, source: :bids, order: :id
-  has_many :trading_item_negotiations, through: :trading_items, source: :negotiation, order: :id
+  has_many :trading_items, -> { order(:id) }, through: :trading, source: :items
+  has_many :trading_item_bids, -> { order(:id) }, through: :trading_items, source: :bids
+  has_many :trading_item_negotiations, -> { order(:id) }, through: :trading_items, source: :negotiation
   has_many :contracts, dependent: :restrict
   has_many :supply_requests, dependent: :restrict
   has_many :supply_orders, dependent: :restrict

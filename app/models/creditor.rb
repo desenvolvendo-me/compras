@@ -7,15 +7,15 @@ class Creditor < Persona::Creditor
   has_many :creditor_materials, :dependent => :destroy, :inverse_of => :creditor
   has_many :bidders, :dependent => :restrict
   has_many :licitation_processes, :through => :bidders, :dependent => :restrict
-  has_many :materials, :through => :creditor_materials, :order => :id
+  has_many :materials, -> { order(:id) }, :through => :creditor_materials
   has_many :material_classes, :through => :materials
   has_many :precatories, :dependent => :restrict
-  has_many :price_collection_proposals, :dependent => :restrict, :order => :id
+  has_many :price_collection_proposals, -> { order(:id) }, :dependent => :restrict
   has_many :price_collections, :through => :price_collection_proposals
   has_many :registration_cadastral_certificates, :dependent => :destroy
   has_many :regularization_or_administrative_sanctions, :inverse_of => :creditor, :dependent => :destroy
   has_many :representative_people, :through => :representatives, :source => :representative_person
-  has_many :representatives, :class_name => 'CreditorRepresentative', :dependent => :destroy, :order => :id
+  has_many :representatives, -> { order(:id) }, :class_name => 'CreditorRepresentative', :dependent => :destroy
   has_many :purchase_process_accreditation_creditors, :dependent => :restrict
   has_many :purchase_process_items, :dependent => :restrict
   has_many :purchase_process_creditor_proposals, dependent: :restrict

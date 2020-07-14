@@ -10,9 +10,9 @@ class Bidder < Compras::Model
   belongs_to :licitation_process
   belongs_to :creditor
 
-  has_many :documents, :class_name => :BidderDocument, :dependent => :destroy, :order => :id
+  has_many :documents, -> { order(:id) }, :class_name => :BidderDocument, :dependent => :destroy
   has_many :document_types, :through => :documents
-  has_many :proposals, :class_name => :BidderProposal, :dependent => :destroy, :order => :id
+  has_many :proposals, -> { order(:id) }, :class_name => :BidderProposal, :dependent => :destroy
   has_many :accredited_representatives, :dependent => :destroy
   has_many :people, :through => :accredited_representatives
   has_many :licitation_process_classifications, :dependent => :destroy
