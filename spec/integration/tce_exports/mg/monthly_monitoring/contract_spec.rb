@@ -85,13 +85,13 @@ describe TceExport::MG::MonthlyMonitoring::ContractGenerator, vcr: { cassette_na
 
         csv = File.read('tmp/CONTRATO.csv', encoding: 'ISO-8859-1')
 
-        reg_10   =  "10;#{contract.id};98;98009001;001;#{signature_date_format}; ; ; ; ; ;1;2012;2;Objeto;1;09012012;30052013;100000;Empreitada integral; ; ;"
+        reg_10   =  "10;#{contract.id};98;;001;#{signature_date_format}; ; ; ; ; ;1;2012;2;Objeto;1;09012012;30052013;100000;Empreitada integral; ; ;"
         reg_10   << "Multa rescisória;Multa inadimplemento;4;Wenderson Malheiros;00314951334;10012012;Jornal Oficial do Município"
         reg_11   =  "11;#{contract.id};Arame comum;1,0000;UN;2,9900"
-        reg_12   =  "12;#{contract.id};98;98009001;04;001;0001;0001; ;319000;001"
+        reg_12   =  "12;#{contract.id};98;;04;001;0001;0001; ;319000;001"
         reg_13_1 =  "13;#{contract.id};1;00314951334;Wenderson Malheiros"
         reg_13_2 =  "13;#{contract.id};1;00315198737;Gabriel Sobrinho"
-        reg_40   =  "40;98;98009001;001;15052013;#{current_date};150000"
+        reg_40   =  "40;98;;001;15052013;#{current_date};150000"
 
         expect(csv).to eq [reg_10, reg_11, reg_12, reg_13_1, reg_13_2, reg_40].join("\n")
       end
@@ -120,11 +120,11 @@ describe TceExport::MG::MonthlyMonitoring::ContractGenerator, vcr: { cassette_na
 
         csv = File.read('tmp/CONTRATO.csv', encoding: 'ISO-8859-1')
 
-        reg_10   =  "10;#{contract.id};98;98009001;001;#{signature_date_format};Gabriel Sobrinho;1;00315198737;Gabriel Sobrinho; ;1;2012;2;Objeto;1;09012012;30052013;100000;Empreitada integral; ; ;"
+        reg_10   =  "10;#{contract.id};98;;001;#{signature_date_format};Gabriel Sobrinho;1;00315198737;Gabriel Sobrinho; ;1;2012;2;Objeto;1;09012012;30052013;100000;Empreitada integral; ; ;"
         reg_10   << "Multa rescisória;Multa inadimplemento;4;Wenderson Malheiros;00314951334;10012012;Jornal Oficial do Município"
         reg_11   =  "11;#{contract.id};Arame comum;1,0000;UN;2,9900"
-        reg_12   =  "12;#{contract.id};98;98009001;04;001;0001;0001; ;319000;001"
-        reg_40   =  "40;98;98009001;001;15052013;#{current_date};150000"
+        reg_12   =  "12;#{contract.id};98;;04;001;0001;0001; ;319000;001"
+        reg_40   =  "40;98;001;15052013;#{current_date};150000"
 
         expect(csv).to eq [reg_10, reg_11, reg_12, reg_40].join("\n")
       end

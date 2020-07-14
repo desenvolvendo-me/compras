@@ -6,7 +6,7 @@ feature "Streets" do
   end
 
   scenario 'create a new street, update and destroy an existing' do
-    navigate 'Geral > Parâmetros > Endereços > Logradouros'
+    navigate 'Configurações > Parâmetros > Endereços > Logradouros'
 
     click_link 'Criar Logradouro'
 
@@ -52,7 +52,7 @@ feature "Streets" do
   end
 
   scenario 'should not allow more than one time neighborhood' do
-    navigate 'Geral > Parâmetros > Endereços > Logradouros'
+    navigate 'Configurações > Parâmetros > Endereços > Logradouros'
 
     click_link 'Criar Logradouro'
 
@@ -69,7 +69,7 @@ feature "Streets" do
   scenario 'index with columns at the index' do
     Street.make!(:girassol)
 
-    navigate 'Geral > Parâmetros > Endereços > Logradouros'
+    navigate 'Configurações > Parâmetros > Endereços > Logradouros'
 
     within_records do
       expect(page).to have_content 'Nome do logradouro'

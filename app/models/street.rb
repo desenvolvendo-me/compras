@@ -8,7 +8,7 @@ class Street < InscriptioCursualis::Street
 
   has_many :addresses, dependent: :restrict
 
-  validates :zip_code, mask: '99999-999', allow_blank: true
+  # validates :zip_code, mask: '99999-999', allow_blank: true
 
   accepts_nested_attributes_for :neighborhoods
 

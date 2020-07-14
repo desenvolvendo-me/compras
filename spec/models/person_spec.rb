@@ -6,7 +6,7 @@ require 'app/models/licitation_process_impugnment'
 require 'app/models/licitation_process_appeal'
 require 'app/models/persona/partner'
 require 'app/models/partner'
-require 'app/models/creditor'
+# require 'app/models/creditor'
 require 'app/models/bidder'
 require 'app/models/accredited_representative'
 require 'app/models/inscriptio_cursualis/address'
@@ -22,8 +22,6 @@ describe Person do
   it { should have_one(:creditor).dependent(:restrict) }
   it { should have_one(:street).through(:address) }
   it { should have_one(:neighborhood).through(:address) }
-
-  it { should validate_presence_of(:address) }
 
   it { should delegate(:city).to(:address).allowing_nil(true) }
   it { should delegate(:state).to(:address).allowing_nil(true) }

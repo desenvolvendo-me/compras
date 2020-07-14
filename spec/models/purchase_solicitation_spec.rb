@@ -21,7 +21,7 @@ describe PurchaseSolicitation do
     subject.stub(:responsible => "CARLOS DORNELES")
     subject.code = 2
 
-    expect(subject.to_s).to eq "2/2012 01.01.001 - SECRETARIA DA EDUCAÇÃO - RESP: CARLOS DORNELES"
+    expect(subject.to_s).to eq "2/2012"
   end
 
   it { should have_and_belong_to_many(:licitation_processes) }
@@ -37,46 +37,6 @@ describe PurchaseSolicitation do
   it { should belong_to :liberator }
 
   it { should auto_increment(:code).by(:accounting_year) }
-
-  context "validations" do
-    it { should validate_presence_of :accounting_year }
-    it { should validate_numericality_of :accounting_year }
-    it { should validate_presence_of :request_date }
-    it { should validate_presence_of :delivery_location }
-    it { should validate_presence_of :responsible }
-    it { should validate_presence_of :kind }
-    it { should validate_duplication_of(:budget_allocation_id).on(:purchase_solicitation_budget_allocations) }
-
-    it { should_not allow_value('a2012').for(:accounting_year) }
-    it { should allow_value('2012').for(:accounting_year) }
-
-    describe 'validate_liberated_status' do
-      it 'should validate_liberated_status be false when have a liberation' do
-        subject.stub(:active_purchase_solicitation_liberation_liberated?).and_return(false)
-        subject.stub(:liberated?).and_return(true)
-
-        subject.valid?
-
-        expect(subject.errors[:service_status]).to include('ainda não foi liberada')
-      end
-
-      it 'should validate_liberated_status be true when have a liberation' do
-        subject.stub(:active_purchase_solicitation_liberation_liberated?).and_return(true)
-
-        subject.valid?
-
-        expect(subject.errors[:service_status]).not_to include 'ainda não foi liberada"'
-      end
-    end
-
-    it 'should have at least one item' do
-      expect(subject.items).to be_empty
-
-      subject.valid?
-
-      expect(subject.errors[:items]).to include 'é necessário cadastrar pelo menos um item'
-    end
-  end
 
   describe "updating columns" do
     describe '#annul!' do
@@ -209,8 +169,7 @@ describe PurchaseSolicitation do
 
     describe 'active_purchase_solicitation_liberation_liberated' do
       before do
-        purchase_solicitation_liberations.should_receive(:last).
-                                          at_least(1).times.and_return(active)
+        purchase_solicitation_liberations.should_receive(:last).at_least(1).times.and_return(active)
       end
 
       let(:active) { double(:active) }
@@ -225,24 +184,6 @@ describe PurchaseSolicitation do
         active.stub(:liberated?).and_return(true)
 
         expect(subject.active_purchase_solicitation_liberation_liberated?).to be_true
-      end
-
-      describe '#validate_liberated_status' do
-        before do
-          active.stub(:liberated?).and_return(false)
-        end
-
-        it 'should to be error on service status when service status is liberated' do
-          subject.stub(:service_status => 'liberated')
-          subject.valid?
-          expect(subject.errors[:service_status]).to include 'ainda não foi liberada'
-        end
-
-        it 'should not to be error on service status when service status is pending' do
-          subject.stub(:service_status => 'pending')
-          subject.valid?
-          expect(subject.errors[:service_status]).not_to include 'ainda não foi liberada'
-        end
       end
     end
   end

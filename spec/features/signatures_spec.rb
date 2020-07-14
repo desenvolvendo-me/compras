@@ -8,7 +8,7 @@ feature "Signatures" do
   scenario 'create a new signature, update and destroy an existing' do
     Person.make!(:sobrinho)
 
-    navigate 'Geral > Parâmetros > Assinaturas > Assinaturas'
+    navigate 'Configurações > Parâmetros > Assinaturas > Assinaturas'
 
     click_link 'Criar Assinatura'
 
@@ -57,7 +57,7 @@ feature "Signatures" do
   scenario 'show error when already from other date range' do
     Signature.make!(:gerente_sobrinho)
 
-    navigate 'Geral > Parâmetros > Assinaturas > Assinaturas'
+    navigate 'Configurações > Parâmetros > Assinaturas > Assinaturas'
 
     click_link 'Criar Assinatura'
 
@@ -74,7 +74,7 @@ feature "Signatures" do
   scenario 'index with columns at the index' do
     Signature.make!(:gerente_sobrinho)
 
-    navigate 'Geral > Parâmetros > Assinaturas > Assinaturas'
+    navigate 'Configurações > Parâmetros > Assinaturas > Assinaturas'
 
     within_records do
       expect(page).to have_content 'Pessoa'

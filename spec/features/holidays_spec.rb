@@ -6,7 +6,7 @@ feature "Holidays" do
   end
 
   scenario 'create, update and destroy a new holiday' do
-    navigate 'Comum > Cadastrais > Feriados'
+    navigate 'Cadastro > Cadastrais > Feriados'
 
     click_link 'Criar Feriado'
 

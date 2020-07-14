@@ -8,6 +8,7 @@ Material.blueprint(:antivirus) do
   combustible { false }
   material_type { MaterialType::CONSUMPTION }
   expense_nature_id { 1 }
+  material_classification {MaterialClassification::CONSUMPTION}
 end
 
 Material.blueprint(:office) do
@@ -20,6 +21,7 @@ Material.blueprint(:office) do
   combustible { false }
   material_type { MaterialType::CONSUMPTION }
   expense_nature_id { 1 }
+  material_classification {MaterialClassification::CONSUMPTION}
 end
 
 Material.blueprint(:arame_farpado) do
@@ -32,6 +34,7 @@ Material.blueprint(:arame_farpado) do
   combustible { false }
   material_type { MaterialType::CONSUMPTION }
   expense_nature_id { 1 }
+  material_classification {MaterialClassification::CONSUMPTION}
 end
 
 Material.blueprint(:arame_comum) do
@@ -43,6 +46,7 @@ Material.blueprint(:arame_comum) do
   combustible { false }
   material_type { MaterialType::CONSUMPTION }
   expense_nature_id { 1 }
+  material_classification {MaterialClassification::CONSUMPTION}
 end
 
 Material.blueprint(:manutencao) do
@@ -53,4 +57,5 @@ Material.blueprint(:manutencao) do
   reference_unit { ::FactoryGirl::Preload.factories['ReferenceUnit'][:unidade] }
   material_type { MaterialType::SERVICE }
   expense_nature_id { 1 }
+  material_classification {MaterialClassification::CONSUMPTION}
 end

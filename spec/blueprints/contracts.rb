@@ -1,6 +1,6 @@
 Contract.blueprint(:primeiro_contrato) do
   sequential_number { 1 }
-  year { 2012 }
+  year { Date.today.year }
   contract_number { "001" }
   signature_date { Date.new(2012, 2, 23) }
   end_date { Date.new(2012, 2, 24) }
@@ -25,7 +25,7 @@ end
 
 Contract.blueprint(:contrato_detran) do
   sequential_number { 3 }
-  year { 2012 }
+  year { Date.today.year }
   contract_number { "101" }
   signature_date { Date.new(2012, 2, 23) }
   end_date { Date.new(2013, 2, 23) }

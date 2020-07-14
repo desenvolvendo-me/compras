@@ -119,8 +119,11 @@ class CrudController < ApplicationController
   end
 
   def authorize_resource!
-    unless request.headers["HTTP_ACCEPT"].include? "application/json"
-      authorize! action_name, main_controller_name
+    http_accept = request.headers["HTTP_ACCEPT"]
+    if http_accept
+      unless http_accept.include? "application/json"
+        authorize! action_name, main_controller_name
+      end
     end
   end
 end

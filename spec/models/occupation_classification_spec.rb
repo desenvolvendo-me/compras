@@ -1,7 +1,7 @@
 require 'model_helper'
 require 'app/models/unico/occupation_classification'
 require 'app/models/occupation_classification'
-require 'app/models/creditor'
+# require 'app/models/creditor'
 
 describe OccupationClassification do
   it "return code and description when call to_s" do

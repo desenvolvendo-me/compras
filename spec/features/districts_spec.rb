@@ -6,7 +6,7 @@ feature "Districts" do
   end
 
   scenario 'create, update and destroy a new district' do
-    navigate 'Geral > Parâmetros > Endereços > Distritos'
+    navigate 'Configurações > Parâmetros > Endereços > Distritos'
 
     click_link 'Criar Distrito'
 
@@ -40,7 +40,7 @@ feature "Districts" do
   end
 
   scenario 'index with columns at the index' do
-    navigate 'Geral > Parâmetros > Endereços > Distritos'
+    navigate 'Configurações > Parâmetros > Endereços > Distritos'
 
     within_records do
       expect(page).to have_content 'Nome'

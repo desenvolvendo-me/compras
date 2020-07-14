@@ -31,7 +31,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
     Material.make!(:arame_farpado)
     Indexer.make!(:xpto)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -507,7 +507,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
     JudgmentForm.make!(:por_lote_com_melhor_tecnica)
     JudgmentForm.make!(:por_item_com_menor_preco)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -534,9 +534,9 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
     Material.make!(:arame_farpado)
     Indexer.make!(:selic)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2012'
@@ -572,7 +572,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
   end
 
   scenario 'calculating items values via javascript' do
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -598,9 +598,9 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
     LicitationProcess.make!(:processo_licitatorio_computador)
     DocumentType.make!(:oficial)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
-    click_link 'Limpar Filtro'
+
 
     within_records do
       click_link '2/2013'
@@ -645,9 +645,9 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
   scenario "count link should not be available when envelope opening date is not the current date" do
     LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2012'
@@ -660,9 +660,9 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_publicacao_cancelada)
     LicitationProcessPublication.make!(:publicacao_de_cancelamento, licitation_process: licitation_process)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2012'
@@ -681,7 +681,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
   end
 
   scenario "should not have link to lots when creating a new licitation process" do
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -691,9 +691,9 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
   scenario 'budget allocation with quantity empty and total item value should have 0 as unit value' do
     LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2012'
@@ -716,7 +716,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
     Material.make!(:antivirus)
     Indexer.make!(:xpto)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -756,9 +756,9 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
     LicitationProcess.make!(:processo_licitatorio)
     LicitationProcess.make!(:processo_licitatorio_computador, :process => 2)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       expect(page).to have_css 'a', :count => 2
@@ -779,9 +779,9 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
     LicitationProcess.make!(:processo_licitatorio,
                             :publications => [])
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link "1/2012"
@@ -815,9 +815,9 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
   scenario "allowing changes to licitation process after ratification", :reset_ids do
     LicitationProcessRatification.make!(:processo_licitatorio_computador)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link "2/2013"
@@ -872,9 +872,9 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
   scenario 'index with columns at the index' do
     LicitationProcess.make!(:processo_licitatorio, :status => PurchaseProcessStatus::IN_PROGRESS)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       expect(page).to have_content 'Processo/Ano'
@@ -896,9 +896,9 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
   scenario "button Back to Listings should take user to licitation_process#index" do
     licitation_process = LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2012'
@@ -906,7 +906,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
 
     click_link 'Voltar'
 
-    click_link "Limpar Filtro"
+    
 
     expect(page).to have_link '1/2012'
 
@@ -921,7 +921,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
     JudgmentForm.make!(:por_item_com_menor_preco) # LOWEST_PRICE   Por Item com Menor Preço
     JudgmentForm.make!(:por_lote_com_tecnica_e_preco) # TECHNICAL_AND_PRICE   Por Lote com Técnica e Preço
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -975,7 +975,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
     JudgmentForm.make!(:global_com_melhor_lance_ou_oferta) # BEST_AUCTION_OR_OFFER
     JudgmentForm.make!(:por_item_com_menor_preco) # LOWEST_PRICE
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -993,7 +993,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
   end
 
   scenario "filtering modalities based on seleted object type" do
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -1032,7 +1032,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
     Material.make!(:antivirus)
     Indexer.make!(:xpto)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -1185,9 +1185,9 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
       end
     end
 
-    navigate 'Processos de Compra > Solicitações de Compra'
+    navigate 'Licitações > Solicitações de Compra'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2013'
@@ -1199,7 +1199,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
   end
 
   scenario 'assert javascript over object type' do
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -1245,7 +1245,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
   end
 
   scenario 'assert javascript over type of purchase' do
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -1337,7 +1337,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
   end
 
   scenario 'assert javascript over modality' do
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -1357,7 +1357,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
   end
 
   scenario 'assert javascript direct_purchase show input justification and tab justification_and_legal' do
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -1399,7 +1399,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
 
   scenario 'assert javascript over modality' do
     pending 'this test is not working, but in browser is all ok' do
-      navigate 'Processos de Compra > Processos de Compras'
+      navigate 'Licitações > Processos de Compras'
 
       click_link 'Criar Processo de Compra'
 
@@ -1441,7 +1441,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
     Indexer.make!(:xpto)
     Creditor.make!(:sobrinho)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -1589,7 +1589,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
     Indexer.make!(:xpto)
     Creditor.make!(:sobrinho)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -1690,7 +1690,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
                                :responsible => Employee.make!(:wenderson),
                                :budget_structure_id => 2)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -1756,9 +1756,9 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
     LicitationProcess.make!(:processo_licitatorio, modality: 'trading',
       purchase_process_accreditation: PurchaseProcessAccreditation.make(:general_accreditation) )
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2012'
@@ -1782,9 +1782,9 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
     LicitationProcess.make!(:pregao_presencial, process: 2)
     JudgmentForm.make!(:por_item_com_menor_preco)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     click_link '1/2012'
 
@@ -1792,7 +1792,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
 
     click_link 'Voltar'
 
-    click_link "Limpar Filtro"
+    
 
     click_link '2/2012'
 
@@ -1803,9 +1803,9 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
     LicitationProcess.make!(:pregao_presencial, :items => [],
       purchase_process_accreditation: PurchaseProcessAccreditation.make(:general_accreditation))
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
     click_link '1/2012'
 
     expect(page).to have_disabled_element "Propostas", :reason => "deve possuir credores e itens"
@@ -1850,7 +1850,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
     Material.make!(:antivirus)
     Indexer.make!(:xpto)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -1900,7 +1900,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
 
     expect(page).to have_no_notice 'Processo de Compra 1/2012 criado com sucesso.'
 
-    navigate 'Processos de Compra > Solicitações de Compra'
+    navigate 'Licitações > Solicitações de Compra'
 
     within_records do
       within 'tbody tr:nth-child(1)' do
@@ -1908,7 +1908,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
       end
     end
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -2013,7 +2013,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
 
     expect(page).to have_notice 'Processo de Compra 1/2012 criado com sucesso.'
 
-    navigate 'Processos de Compra > Solicitações de Compra'
+    navigate 'Licitações > Solicitações de Compra'
 
     within_records do
       within 'tbody tr:nth-child(1)' do
@@ -2021,9 +2021,9 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
       end
     end
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
-    click_link 'Limpar Filtro'
+
 
     within_records do
       click_link '1/2012'
@@ -2049,7 +2049,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
       end
     end
 
-    navigate 'Processos de Compra > Solicitações de Compra'
+    navigate 'Licitações > Solicitações de Compra'
 
     within_records do
       within 'tbody tr:nth-child(1)' do
@@ -2057,9 +2057,9 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
       end
     end
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
-    click_link 'Limpar Filtro'
+
 
     within_records do
       click_link '1/2012'
@@ -2081,7 +2081,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
       end
     end
 
-    navigate 'Processos de Compra > Solicitações de Compra'
+    navigate 'Licitações > Solicitações de Compra'
 
     within_records do
       within 'tbody tr:nth-child(1)' do
@@ -2095,9 +2095,9 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
                             publications: [],
                             bidders: [])
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link "1/2012"
@@ -2133,7 +2133,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
     Creditor.make!(:wenderson_sa)
     Material.make!(:antivirus)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -2205,7 +2205,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
     Timecop.travel(Date.new(2012, 10, 10))
     LicitationProcess.make!(:pregao_presencial)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -2278,7 +2278,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
     Material.make!(:arame_farpado)
     Indexer.make!(:xpto)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -2379,7 +2379,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
     Material.make!(:arame_farpado)
     Indexer.make!(:xpto)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -2475,9 +2475,9 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
   scenario 'should filter auto_complete in budget_allocation by budget_allocation_year' do
     LicitationProcess.make!(:processo_licitatorio, purchase_process_budget_allocations: [])
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
-    click_link 'Limpar Filtro'
+
 
     within_records do
       click_link '1/2012'
@@ -2513,9 +2513,9 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
       purchase_process_budget_allocations: [PurchaseProcessBudgetAllocation.make!(:alocacao, budget_allocation_id: 6)],
       bidders: [bidder])
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
-    click_link 'Limpar Filtro'
+
 
     within_records do
       click_link '102/2013'
@@ -2543,9 +2543,9 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
       purchase_process_budget_allocations: [PurchaseProcessBudgetAllocation.make!(:alocacao, budget_allocation_id: 7)],
       bidders: [bidder])
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
-    click_link 'Limpar Filtro'
+
 
     within_records do
       click_link '102/2013'
@@ -2573,9 +2573,9 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
       purchase_process_budget_allocations: [PurchaseProcessBudgetAllocation.make!(:alocacao, budget_allocation_id: 6)],
       bidders: [bidder])
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
-    click_link 'Limpar Filtro'
+
 
     within_records do
       click_link '102/2013'
@@ -2610,9 +2610,9 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
       purchase_process_budget_allocations: [PurchaseProcessBudgetAllocation.make!(:alocacao, budget_allocation_id: 7)],
       bidders: [bidder])
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
-    click_link 'Limpar Filtro'
+
 
     within_records do
       click_link '102/2013'
@@ -2637,7 +2637,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
   end
 
   scenario 'should enable budget_allocation when budget_allocation_year is change' do
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -2671,7 +2671,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
 
     PurchaseProcessFractionationCreator.create!(ratification.licitation_process)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -2799,7 +2799,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
       price_collection_item: price_collection.items.first,
       unit_price: 0)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -2835,7 +2835,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
     price_collection = PriceCollection.make!(:coleta_de_precos_com_2_lotes, type_of_calculation: PriceCollectionTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM)
     PurchaseSolicitation.make!(:reparo_liberado, :accounting_year => Date.current.year, price_collections: [price_collection])
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -2884,7 +2884,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
                                       :price_collection_item => price_collection.items.first,
                                       :unit_price => 13.50)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 
@@ -2921,7 +2921,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
     price_collection = PriceCollection.make!(:coleta_de_precos_com_2_lotes, type_of_calculation: PriceCollectionTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM)
     PurchaseSolicitation.make!(:reparo_liberado, :accounting_year => Date.current.year, price_collections: [price_collection])
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     click_link 'Criar Processo de Compra'
 

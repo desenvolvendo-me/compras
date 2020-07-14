@@ -1,0 +1,82 @@
+version: v1.0
+name: Test Business
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+blocks:
+  - name: test unit
+    dependencies: []
+    task:
+      jobs:
+        - name: spec/primary
+          commands:
+            - bundle exec rspec spec/business --format progress
+            - bundle exec rspec spec/models --format progress
+            - bundle exec rspec spec/controllers --format progress
+        - name: spec/secondary
+          commands:
+            - bundle exec rspec spec/workers --format progress
+            - bundle exec rspec spec/reports --format progress
+            - bundle exec rspec spec/decorators --format progress
+            - bundle exec rspec spec/helpers --format progress
+            - bundle exec rspec spec/integration --format progress
+      env_vars:
+        - name: RAILS_ENV
+          value: test
+        - name: DATABASE_URL
+          value: 'postgresql://compras:compras@0.0.0.0:5432/compras_test'
+      prologue:
+        commands:
+          - checkout
+          - cache restore
+          - sem-version ruby 2.3.8
+          - sudo apt-get install -y g++ qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
+          - bundle install --deployment --path vendor/bundle
+          - sem-service start postgres 11
+          - chmod 777 install.sh
+          - sh install.sh
+          - psql -U postgres -h localhost -c "CREATE USER compras WITH PASSWORD 'compras';"
+          - psql -U postgres -h localhost -c "ALTER USER compras WITH SUPERUSER;"
+          - cp config/database.sample.yml config/database.yml
+          - 'bundle exec rake db:create'
+          - 'bundle exec rake db:migrate'
+          - cache store
+  - name: test feature
+    dependencies: []
+    task:
+      jobs:
+        - name: 'spec/features/[a-i]'
+          commands:
+            - 'bundle exec rspec spec/features/[a-c]* --format progress'
+            - 'bundle exec rspec spec/features/[d-f]* --format progress'
+            - 'bundle exec rspec spec/features/[g-i]* --format progress'
+        - name: 'spec/features/[j-z]'
+          commands:
+            - 'bundle exec rspec spec/features/[j-m]* --format progress'
+            - 'bundle exec rspec spec/features/[n-p]* --format progress'
+            - 'bundle exec rspec spec/features/[q-s]* --format progress'
+            - 'bundle exec rspec spec/features/[t-z]* --format progress'
+      env_vars:
+        - name: RAILS_ENV
+          value: test
+        - name: DATABASE_URL
+          value: 'postgresql://compras:compras@0.0.0.0:5432/compras_test'
+      prologue:
+        commands:
+          - checkout
+          - cache restore
+          - sem-version ruby 2.3.8
+          - sudo apt-get install -y g++ qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
+          - bundle install --deployment --path vendor/bundle
+          - sem-service start postgres 11
+          - chmod 777 install.sh
+          - sh install.sh
+          - psql -U postgres -h localhost -c "CREATE USER compras WITH PASSWORD 'compras';"
+          - psql -U postgres -h localhost -c "ALTER USER compras WITH SUPERUSER;"
+          - cp config/database.sample.yml config/database.yml
+          - 'bundle exec rake db:create'
+          - 'bundle exec rake db:migrate'
+          - cache store
+execution_time_limit:
+  minutes: 15

@@ -25,11 +25,6 @@ describe PurchaseSolicitationsController do
       expect(assigns(:purchase_solicitation).request_date).to eq Date.current
     end
 
-    it 'uses current employee as default value for employee' do
-      get :new
-
-      expect(assigns(:purchase_solicitation).responsible).to eq controller.current_user.authenticable
-    end
   end
 
   context 'POST #create' do

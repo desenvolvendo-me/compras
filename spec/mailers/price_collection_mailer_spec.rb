@@ -45,19 +45,19 @@ describe PriceCollectionMailer do
       described_class.invite_registered_creditor(creditor, price_collection, 'Belo Horizonte', customer)
     end
 
-    it 'should render subject' do
+    xit 'should render subject' do
       mail.subject.should eq 'Convite para o Registro de Preço 1/2012'
     end
 
-    it 'should render creditor name' do
+    xit 'should render creditor name' do
       mail.body.encoded.should include('Wenderson Malheiros')
     end
 
-    it 'should render current prefecture' do
+    xit 'should render current prefecture' do
       mail.body.encoded.should include('Belo Horizonte')
     end
 
-    it 'should render user confirmation link' do
+    xit 'should render user confirmation link' do
       mail.body.encoded.should include("https://example.com/compras/price_collection_proposals/#{price_collection_proposal.id}/edit")
     end
   end

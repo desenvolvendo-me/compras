@@ -1,8 +1,8 @@
-require 'simplecov'
-SimpleCov.start if ENV["SIMPLECOV"]
-
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV["RAILS_ENV"] ||= 'test'
+
+require_relative './support/simplecov.rb'
+
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
@@ -64,6 +64,7 @@ RSpec.configure do |config|
     # Forces all threads to share the same connection. This works on
     # Capybara because it starts the web server in a thread.
     ActiveRecord::Base.shared_connection = ActiveRecord::Base.connection
+    Customer.create!(:name => "Test", :domain => "test.host", :database => Customer.connection_config)
   end
 
   config.before(:each, type: :feature) do

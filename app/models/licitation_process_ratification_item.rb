@@ -18,7 +18,7 @@ class LicitationProcessRatificationItem < Compras::Model
   delegate :identity_document, to: :creditor, allow_nil: true, prefix: true
   delegate :unit_price, :total_price,
     to: :purchase_process_creditor_proposal, allow_nil: true
-  delegate :execution_unit_responsible, :year, :process,
+  delegate :year, :process,
     to: :licitation_process, allow_nil: true, prefix: true
   delegate :material, :quantity, :lot, to: :item, allow_nil: true
   delegate :control_amount?, to: :material, allow_nil: true

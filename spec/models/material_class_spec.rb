@@ -6,7 +6,6 @@ require 'app/models/purchase_process_fractionation'
 
 describe MaterialClass do
   it { should have_many(:materials).dependent(:restrict) }
-  it { should have_many(:purchase_process_fractionations).dependent(:restrict) }
 
   it { should validate_presence_of :masked_number }
   it { should validate_presence_of :description }

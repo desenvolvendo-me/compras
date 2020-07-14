@@ -8,7 +8,7 @@ feature "DeliveryLocations" do
   scenario 'create, update and destroy a new delivery_location' do
     Address.make!(:general)
 
-    navigate 'Comum > Locais de Entrega'
+    navigate 'Cadastro > Locais de Entrega'
 
     click_link 'Criar Local de Entrega'
 
@@ -93,7 +93,7 @@ feature "DeliveryLocations" do
   scenario 'index with columns at the index' do
     DeliveryLocation.make!(:education)
 
-    navigate 'Comum > Locais de Entrega'
+    navigate 'Cadastro > Locais de Entrega'
 
     within_records do
       expect(page).to have_content 'Descrição'

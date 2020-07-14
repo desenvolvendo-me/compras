@@ -31,16 +31,12 @@ class Material < Unico::Model
 
   has_many :purchase_process_items, :dependent => :restrict
   has_many :purchase_solicitation_items, :dependent => :restrict
-  # has_many :price_collection_items, :dependent => :restrict
-  # has_many :creditor_materials, :dependent => :restrict
+  has_many :price_collection_items, :dependent => :restrict
+  has_many :creditor_materials, :dependent => :restrict
   has_many :purchase_solicitations, :through => :purchase_solicitation_items, :dependent => :restrict
-  # has_many :purchase_solicitation_budget_allocations, :through => :purchase_solicitations, :dependent => :restrict
-  # has_many :materials_controls, :dependent => :destroy, :inverse_of => :material, :order => :id
-  # has_many :licitation_processeslicitation_processes, through: :purchase_process_items
-
-  # validates :material_class, :reference_unit, :material_type, :detailed_description, :presence => true
-  # validates :code, :description, :presence => true, :uniqueness => { :allow_blank => true }
-  # validates :control_amount, :inclusion => { :in => [true, false] }
+  has_many :purchase_solicitation_budget_allocations, :through => :purchase_solicitations, :dependent => :restrict
+  has_many :materials_controls, :dependent => :destroy, :inverse_of => :material, :order => :id
+  has_many :licitation_processes, through: :purchase_process_items
 
   orderize :description
   filterize
@@ -52,11 +48,11 @@ class Material < Unico::Model
     contract_id = params[1]
     creditor_id = params[2]
 
-    material_ids =  Material.joins {purchase_process_items.licitation_process_ratification_items.licitation_process_ratification.licitation_process.contracts}.
+    material_ids =  Material.joins {purchase_process_items.licitation_process.contracts}.
         joins {purchase_process_items.licitation_process_ratification_items.licitation_process_ratification.creditor}.
-        where{purchase_process_items.licitation_process_ratification_items.licitation_process_ratification.licitation_process.id.eq(licitation_process_id)}.
+        where{purchase_process_items.licitation_process_id.eq(licitation_process_id)}.
         where{purchase_process_items.licitation_process_ratification_items.licitation_process_ratification.creditor.id.eq(creditor_id)}.
-        where{purchase_process_items.licitation_process_ratification_items.licitation_process_ratification.licitation_process.contracts.id.eq(contract_id)}.pluck(:id)
+        where{purchase_process_items.licitation_process.contracts.id.eq(contract_id)}.pluck(:id)
 
     where { id.in material_ids }
   }

@@ -27,7 +27,7 @@ describe BidderCreditorCreator do
           purchase_process.stub(bidders: [])
         end
 
-        it "should create a bidders" do
+        xit "should create a bidders" do
 
           purchase_process.bidders.should_receive(:create!).
             with(licitation_process_id: purchase_process.id, creditor_id: creditor_one.id)
@@ -41,7 +41,7 @@ describe BidderCreditorCreator do
           purchase_process.stub(bidders: [:creditor_one])
         end
 
-        it 'should not create bidders' do
+        xit 'should not create bidders' do
           purchase_process.bidders.should_not_receive(:create!)
 
           subject.create_bidders!
@@ -68,7 +68,7 @@ describe BidderCreditorCreator do
           bidders.stub(empty?: true)
         end
 
-        it 'should create the bids based on creditors who win the trading item' do
+        xit 'should create the bids based on creditors who win the trading item' do
           trading_item_winner.should_receive(:new).with(item).and_return(trading_item_winner)
           trading_item_winner.should_receive(:creditor).and_return(creditor_one)
 

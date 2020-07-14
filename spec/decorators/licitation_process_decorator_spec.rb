@@ -263,14 +263,14 @@ describe LicitationProcessDecorator do
   end
 
   describe "#budget_allocations" do
-    let(:budget1) { double(:budget_allocation, :budget_allocation => "Estrutura Orçamentária 1") }
-    let(:budget2) { double(:budget_allocation, :budget_allocation => "Estrutura Orçamentária 2") }
+    let(:budget1) { double(:purchase_process_budget_allocations, :budget_allocation => "Estrutura Orçamentária 1") }
+    let(:budget2) { double(:purchase_process_budget_allocations, :budget_allocation => "Estrutura Orçamentária 2") }
 
     it 'should return budget_allocations' do
       budgets = [budget1, budget2]
 
-      component.stub(:budget_allocations).and_return(budgets)
-      expect(subject.budget_allocations).to eql "#{budget1}, #{budget2}"
+      component.stub(:purchase_process_budget_allocations).and_return(budgets)
+      expect(subject.purchase_process_budget_allocations).to eql budgets
     end
   end
 

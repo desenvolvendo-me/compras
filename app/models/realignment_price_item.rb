@@ -16,7 +16,7 @@ class RealignmentPriceItem < Compras::Model
 
   delegate :judgment_form_lot?,
     to: :purchase_process, allow_nil: true
-  delegate :year, :execution_unit_responsible, :process,
+  delegate :year, :process,
     to: :purchase_process, allow_nil: true, prefix: true
   delegate :identity_document,
     to: :creditor, allow_nil: true, prefix: true

@@ -1,7 +1,6 @@
 FactoryGirl.preload do
-  factory(:customer)                { create(:customer) }
-  factory(:customer)                { create(:customer, :domain => 'test.host', :name => 'Semaphore') }
-
+  # factory(:customer)                { create(:customer) }
+  # factory(:customer)                { create(:customer, :domain => 'test.host', :name => 'Semaphore') }
   factory(:brazil)                  { create(:country) }
   factory(:mg)                      { create(:state, country: countries(:brazil)) }
   factory(:rs)                      { create(:state, acronym: 'RS', name: 'Rio Grande do Sul', country: countries(:brazil)) }

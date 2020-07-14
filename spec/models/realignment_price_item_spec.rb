@@ -16,7 +16,6 @@ describe RealignmentPriceItem do
   describe 'delegates' do
     it { should delegate(:judgment_form_lot?).to(:purchase_process).allowing_nil(true) }
     it { should delegate(:year).to(:purchase_process).allowing_nil(true).prefix(true) }
-    it { should delegate(:execution_unit_responsible).to(:purchase_process).allowing_nil(true).prefix(true) }
     it { should delegate(:process).to(:purchase_process).allowing_nil(true).prefix(true) }
     it { should delegate(:identity_document).to(:creditor).allowing_nil(true).prefix(true) }
     it { should delegate(:reference_unit).to(:material).allowing_nil(true).prefix(true) }

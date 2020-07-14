@@ -18,7 +18,7 @@ feature "LicitationProcessRatifications", vcr: { cassette_name: :licitation_proc
     FactoryGirl.create(:process_responsible, licitation_process: licitation,
       stage_process: StageProcess.make(:emissao_edital))
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     within_records do
       click_link '2/2013'
@@ -152,9 +152,9 @@ feature "LicitationProcessRatifications", vcr: { cassette_name: :licitation_proc
     FactoryGirl.create(:process_responsible, licitation_process: purchase_process,
       stage_process: StageProcess.make(:emissao_edital))
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
-    click_link 'Limpar Filtro'
+
 
     within_records do
       click_link '1/2012'
@@ -298,9 +298,9 @@ feature "LicitationProcessRatifications", vcr: { cassette_name: :licitation_proc
     FactoryGirl.create(:process_responsible, licitation_process: purchase_process,
       stage_process: StageProcess.make(:emissao_edital))
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
-    click_link 'Limpar Filtro'
+
 
     within_records do
       click_link '1/2012'
@@ -466,9 +466,9 @@ feature "LicitationProcessRatifications", vcr: { cassette_name: :licitation_proc
     FactoryGirl.create(:process_responsible, licitation_process: licitation,
       stage_process: StageProcess.make(:emissao_edital))
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
-    click_link 'Limpar Filtro'
+
 
     within_records do
       click_link '1/2012'
@@ -654,9 +654,9 @@ feature "LicitationProcessRatifications", vcr: { cassette_name: :licitation_proc
     realignment_50.items << realignment_item_arame
     realignment_50.save!
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
-    click_link 'Limpar Filtro'
+
 
     within_records do
       click_link '1/2012'
@@ -776,7 +776,7 @@ feature "LicitationProcessRatifications", vcr: { cassette_name: :licitation_proc
     FactoryGirl.create(:process_responsible, licitation_process: licitation,
       stage_process: StageProcess.make(:emissao_edital))
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     within_records do
       click_link '2/2013'
@@ -889,7 +889,7 @@ feature "LicitationProcessRatifications", vcr: { cassette_name: :licitation_proc
     PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado, licitation_process: licitation, ranking: 1)
     PurchaseProcessCreditorProposal.make!(:proposta_arame, licitation_process: licitation, ranking: 1)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     within_records do
       click_link '2/2013'
@@ -925,7 +925,7 @@ feature "LicitationProcessRatifications", vcr: { cassette_name: :licitation_proc
     PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado, licitation_process: licitation, ranking: 1)
     SignatureConfiguration.make!(:homologacao_e_adjudicao_do_processo_licitatorio)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     within_records do
       click_link '2/2013'
@@ -960,7 +960,7 @@ feature "LicitationProcessRatifications", vcr: { cassette_name: :licitation_proc
   scenario "Bidder's modal should not have button new", intermittent: true do
     LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     within_records do
       click_link '2/2013'
@@ -989,7 +989,7 @@ feature "LicitationProcessRatifications", vcr: { cassette_name: :licitation_proc
     PurchaseProcessCreditorProposal.make!(:proposta_arame_farpado, licitation_process: licitation, ranking: 1)
     PurchaseProcessCreditorProposal.make!(:proposta_arame, licitation_process: licitation, ranking: 1)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
     within_records do
       click_link '2/2013'
@@ -1097,9 +1097,9 @@ feature "LicitationProcessRatifications", vcr: { cassette_name: :licitation_proc
     FactoryGirl.create(:process_responsible, licitation_process: licitation,
       stage_process: StageProcess.make(:emissao_edital))
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
-    click_link 'Limpar Filtro'
+
 
     within_records do
       click_link '1/2012'

@@ -9,7 +9,7 @@ feature "LicitationProcessImpugnments" do
     LicitationProcess.make!(:processo_licitatorio)
     Person.make!(:sobrinho)
 
-    navigate 'Processos de Compra > Impugnações dos Processos de Compras'
+    navigate 'Licitações > Impugnações dos Processos de Compras'
 
     click_link 'Criar Impugnação do Processo de Compra'
 
@@ -75,7 +75,7 @@ feature "LicitationProcessImpugnments" do
   scenario 'should have fields disabled when situation is not pending' do
     LicitationProcessImpugnment.make!(:proibido_cadeiras_deferida)
 
-    navigate 'Processos de Compra > Impugnações dos Processos de Compras'
+    navigate 'Licitações > Impugnações dos Processos de Compras'
 
     within_records do
       click_link '1/2012 - Concorrência 1 - 01/04/2012'
@@ -99,7 +99,7 @@ feature "LicitationProcessImpugnments" do
   scenario 'should not be able to destroy an existent licitation_process_impugnment' do
     LicitationProcessImpugnment.make!(:proibido_cadeiras)
 
-    navigate 'Processos de Compra > Impugnações dos Processos de Compras'
+    navigate 'Licitações > Impugnações dos Processos de Compras'
 
     within_records do
       click_link '1/2012 - Concorrência 1 - 01/04/2012'
@@ -111,7 +111,7 @@ feature "LicitationProcessImpugnments" do
   scenario 'envelope dates should be filled when licitation process selected' do
     LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Processos de Compra > Impugnações dos Processos de Compras'
+    navigate 'Licitações > Impugnações dos Processos de Compras'
 
     click_link 'Criar Impugnação do Processo de Compra'
 
@@ -126,7 +126,7 @@ feature "LicitationProcessImpugnments" do
   scenario 'envelope dates should be empty when clear licitaion process' do
     LicitationProcessImpugnment.make!(:proibido_cadeiras)
 
-    navigate 'Processos de Compra > Impugnações dos Processos de Compras'
+    navigate 'Licitações > Impugnações dos Processos de Compras'
 
     within_records do
       click_link '1/2012 - Concorrência 1 - 01/04/2012'

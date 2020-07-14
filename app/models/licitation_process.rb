@@ -411,12 +411,6 @@ class LicitationProcess < Compras::Model
     fractionations.destroy_all
   end
 
-  protected
-
-  def available_for_licitation_process_classification?
-    Modality.available_for_licitation_process_classification.include?(modality)
-  end
-
   def calculate_total_value_of_items
     return unless items
 
@@ -427,6 +421,12 @@ class LicitationProcess < Compras::Model
     return unless purchase_process_budget_allocations.any?
 
     self.budget_allocations_total_value = purchase_process_budget_allocations.reject(&:marked_for_destruction?).sum(&:value)
+  end
+
+  protected
+
+  def available_for_licitation_process_classification?
+    Modality.available_for_licitation_process_classification.include?(modality)
   end
 
   def validate_total_items

@@ -8,7 +8,7 @@ feature "Contracts", vcr: { cassette_name: :contracts } do
   scenario 'picking a licitation process' do
     LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Instrumentos Contratuais > Contratos'
+    navigate 'Contratos > Contratos'
 
     click_link 'Criar Contrato'
 
@@ -33,7 +33,7 @@ feature "Contracts", vcr: { cassette_name: :contracts } do
     Employee.make!(:wenderson)
     ContractType.make!(:trainees)
 
-    navigate 'Instrumentos Contratuais > Contratos'
+    navigate 'Contratos > Contratos'
 
     click_link 'Criar Contrato'
 
@@ -86,7 +86,7 @@ feature "Contracts", vcr: { cassette_name: :contracts } do
 
     expect(page).to have_notice 'Contrato criado com sucesso.'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       page.find('a').click
@@ -159,9 +159,9 @@ feature "Contracts", vcr: { cassette_name: :contracts } do
 
   scenario 'show pledges', :reset_ids do
     Contract.make!(:primeiro_contrato)
-    navigate 'Instrumentos Contratuais > Contratos'
+    navigate 'Contratos > Contratos'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '001'
@@ -177,9 +177,9 @@ feature "Contracts", vcr: { cassette_name: :contracts } do
   scenario 'add contract additives' do
     Contract.make!(:primeiro_contrato)
 
-    navigate 'Instrumentos Contratuais > Contratos'
+    navigate 'Contratos > Contratos'
 
-    click_link 'Limpar Filtro'
+
 
     within_records do
       page.find('a').click
@@ -249,9 +249,9 @@ feature "Contracts", vcr: { cassette_name: :contracts } do
   scenario 'add delivery schedule' do
     DeliverySchedule.make!(:primeira_entrega)
 
-    navigate 'Instrumentos Contratuais > Contratos'
+    navigate 'Contratos > Contratos'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       page.find('a').click
@@ -277,7 +277,7 @@ feature "Contracts", vcr: { cassette_name: :contracts } do
 
     expect(page).to have_notice 'Contrato editado com sucesso.'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       page.find('a').click
@@ -297,9 +297,9 @@ feature "Contracts", vcr: { cassette_name: :contracts } do
   scenario 'remove delivery schedule' do
     DeliverySchedule.make!(:primeira_entrega)
 
-    navigate 'Instrumentos Contratuais > Contratos'
+    navigate 'Contratos > Contratos'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       page.find('a').click
@@ -313,7 +313,7 @@ feature "Contracts", vcr: { cassette_name: :contracts } do
 
     expect(page).to have_notice 'Contrato editado com sucesso.'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       page.find('a').click
@@ -330,9 +330,9 @@ feature "Contracts", vcr: { cassette_name: :contracts } do
   scenario 'index with columns at the index' do
     Contract.make!(:primeiro_contrato)
 
-    navigate 'Instrumentos Contratuais > Contratos'
+    navigate 'Contratos > Contratos'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       expect(page).to have_content 'Número do contrato'
@@ -365,7 +365,7 @@ feature "Contracts", vcr: { cassette_name: :contracts } do
     LicitationProcessRatification.make!(:processo_licitatorio_computador, licitation_process: purchase_process_one,
       creditor: creditor_sobrinho, ratification_date: "2013-01-31".to_date, adjudication_date: "2013-01-31".to_date)
 
-    navigate 'Instrumentos Contratuais > Contratos'
+    navigate 'Contratos > Contratos'
 
     click_link 'Criar Contrato'
 
@@ -395,9 +395,9 @@ feature "Contracts", vcr: { cassette_name: :contracts } do
     Creditor.make!(:nohup)
     Contract.make!(:primeiro_contrato)
 
-    navigate 'Instrumentos Contratuais > Contratos'
+    navigate 'Contratos > Contratos'
 
-    click_link 'Limpar Filtro'
+
 
     click_link '001'
 
@@ -413,7 +413,7 @@ feature "Contracts", vcr: { cassette_name: :contracts } do
 
     expect(page).to have_notice 'Contrato editado com sucesso.'
 
-    click_link 'Limpar Filtro'
+
     click_link '001'
 
     within 'tbody.contract_creditor_records' do

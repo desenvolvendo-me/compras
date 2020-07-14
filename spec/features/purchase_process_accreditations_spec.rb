@@ -19,9 +19,9 @@ feature "PurchaseProcessAccreditation", vcr: { cassette_name: :purchase_process_
       accounts: [])
 
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2012'
@@ -215,9 +215,9 @@ feature "PurchaseProcessAccreditation", vcr: { cassette_name: :purchase_process_
       :representative_person => Person.make!(:wenderson),
       :creditor => nohup)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2012'
@@ -278,9 +278,9 @@ feature "PurchaseProcessAccreditation", vcr: { cassette_name: :purchase_process_
       :representative_person => Person.make!(:wenderson),
       :creditor => nohup)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2012'
@@ -328,9 +328,9 @@ feature "PurchaseProcessAccreditation", vcr: { cassette_name: :purchase_process_
       :kind => PurchaseProcessAccreditationCreditorKind::COMMERCIAL,
       :purchase_process_accreditation_id => accreditation.id)
 
-    navigate 'Processos de Compra > Processos de Compras'
+    navigate 'Licitações > Processos de Compras'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       click_link '1/2012'

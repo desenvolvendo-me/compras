@@ -16,9 +16,6 @@ class SupplyOrderItem < Compras::Model
            to: :pledge_item, allow_nil: true, prefix: true
   delegate :service_without_quantity?, :reference_unit, to: :material, allow_nil: true
 
-  #validates :authorization_value, numericality: {greater_than: 0}, unless: :authorization_quantity
-  #validates :authorization_quantity, numericality: {greater_than: 0}, unless: :authorization_value
-
   validate :authorization_quantity_should_be_lower_than_quantity
   validate :authorization_value_should_be_lower_than_value, if: :authorization_value_changed?
 

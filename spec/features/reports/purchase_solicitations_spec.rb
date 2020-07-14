@@ -8,7 +8,7 @@ feature 'Report::PurchaseSolicitations', vcr: {cassette_name: 'report_purchase_s
   scenario 'should display all purchase solicitation filtered by between date in analytical report' do
     make_dependencies!
 
-    navigate 'Relatórios > Solicitações emitidas'
+    navigate 'Relatórios > Solicitações Emitidas'
 
     fill_in 'Data inicial', with: '01/01/2011'
     fill_in 'Data final', with: I18n.l(Date.current)
@@ -63,7 +63,7 @@ feature 'Report::PurchaseSolicitations', vcr: {cassette_name: 'report_purchase_s
   scenario 'should display all purchase solicitation filtered by between date in synthetic report' do
     make_dependencies!
 
-    navigate 'Relatórios > Solicitações emitidas'
+    navigate 'Relatórios > Solicitações Emitidas'
 
     fill_in 'Data inicial', with: '01/01/2011'
     fill_in 'Data final', with: I18n.l(Date.current)
@@ -106,7 +106,7 @@ feature 'Report::PurchaseSolicitations', vcr: {cassette_name: 'report_purchase_s
   scenario 'should display all purchase solicitation filtered by budget_structure in synthetic report' do
     make_dependencies!
 
-    navigate 'Relatórios > Solicitações emitidas'
+    navigate 'Relatórios > Solicitações Emitidas'
 
     fill_with_autocomplete 'Solicitante', with: 'Detran'
     fill_in 'Data inicial', with: '01/01/2011'
@@ -131,7 +131,7 @@ feature 'Report::PurchaseSolicitations', vcr: {cassette_name: 'report_purchase_s
   scenario 'should display all purchase solicitation filtered by budget_structure in analytical report' do
     make_dependencies!
 
-    navigate 'Relatórios > Solicitações emitidas'
+    navigate 'Relatórios > Solicitações Emitidas'
 
     fill_with_autocomplete 'Solicitante', with: 'Detran'
     fill_in 'Data inicial', with: '01/01/2011'
@@ -165,7 +165,7 @@ feature 'Report::PurchaseSolicitations', vcr: {cassette_name: 'report_purchase_s
   scenario 'should display all purchase solicitation filtered by product in analytical report' do
     make_dependencies!
 
-    navigate 'Relatórios > Solicitações emitidas'
+    navigate 'Relatórios > Solicitações Emitidas'
 
     fill_modal 'Produto', with: 'Antivirus', field: 'Descrição'
     fill_in 'Data inicial', with: '01/01/2011'
@@ -208,7 +208,7 @@ feature 'Report::PurchaseSolicitations', vcr: {cassette_name: 'report_purchase_s
   scenario 'should display all purchase solicitation filtered by product in synthetic report' do
     make_dependencies!
 
-    navigate 'Relatórios > Solicitações emitidas'
+    navigate 'Relatórios > Solicitações Emitidas'
 
     fill_modal 'Produto', with: 'Antivirus', field: 'Descrição'
     fill_in 'Data inicial', with: '01/01/2011'
@@ -241,7 +241,7 @@ feature 'Report::PurchaseSolicitations', vcr: {cassette_name: 'report_purchase_s
   scenario 'should display all purchase solicitation filtered by status in synthetic report' do
     make_dependencies!
 
-    navigate 'Relatórios > Solicitações emitidas'
+    navigate 'Relatórios > Solicitações Emitidas'
 
     fill_in 'Data inicial', with: '01/01/2011'
     fill_in 'Data final', with: I18n.l(Date.current)
@@ -264,7 +264,7 @@ feature 'Report::PurchaseSolicitations', vcr: {cassette_name: 'report_purchase_s
   scenario 'should display all purchase solicitation filtered by status in analytical report' do
     make_dependencies!
 
-    navigate 'Relatórios > Solicitações emitidas'
+    navigate 'Relatórios > Solicitações Emitidas'
 
     fill_in 'Data inicial', with: '01/01/2011'
     fill_in 'Data final', with: I18n.l(Date.current)
@@ -289,7 +289,7 @@ feature 'Report::PurchaseSolicitations', vcr: {cassette_name: 'report_purchase_s
     scenario 'should display all purchase solicitation filtered by between date in analytical report' do
       make_dependencies!
 
-      navigate 'Relatórios > Solicitações emitidas'
+      navigate 'Relatórios > Solicitações Emitidas'
 
       fill_in 'Data inicial', with: '01/01/2011'
       fill_in 'Data final', with: I18n.l(Date.current)
@@ -388,7 +388,7 @@ feature 'Report::PurchaseSolicitations', vcr: {cassette_name: 'report_purchase_s
     scenario 'should display all purchase solicitation filtered by between date in synthetic report' do
       make_dependencies!
 
-      navigate 'Relatórios > Solicitações emitidas'
+      navigate 'Relatórios > Solicitações Emitidas'
 
       fill_in 'Data inicial', with: '01/01/2011'
       fill_in 'Data final', with: I18n.l(Date.current)

@@ -13,7 +13,7 @@ feature "PriceCollections", vcr: { cassette_name: :price_collections } do
     Material.make!(:antivirus)
     Creditor.make!(:sobrinho_sa_without_email)
 
-    navigate 'Processos de Compra > Coletas de Preços'
+    navigate 'Licitações > Coletas de Preços'
 
     click_link 'Criar Coleta de Preços'
 
@@ -69,7 +69,7 @@ feature "PriceCollections", vcr: { cassette_name: :price_collections } do
 
     PurchaseSolicitation.make!(:reparo_liberado, accounting_year: Date.current.year, budget_structure_id: 2)
 
-    navigate 'Processos de Compra > Coletas de Preços'
+    navigate 'Licitações > Coletas de Preços'
 
     click_link 'Criar Coleta de Preços'
 
@@ -248,9 +248,9 @@ feature "PriceCollections", vcr: { cassette_name: :price_collections } do
     Material.make!(:arame_farpado)
 
 
-    navigate 'Processos de Compra > Coletas de Preços'
+    navigate 'Licitações > Coletas de Preços'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       page.find('a').click
@@ -344,9 +344,9 @@ feature "PriceCollections", vcr: { cassette_name: :price_collections } do
   scenario 'should not have destroy button' do
     PriceCollection.make!(:coleta_de_precos)
 
-    navigate 'Processos de Compra > Coletas de Preços'
+    navigate 'Licitações > Coletas de Preços'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       page.find('a').click
@@ -363,7 +363,7 @@ feature "PriceCollections", vcr: { cassette_name: :price_collections } do
     Creditor.make!(:mateus)
     Creditor.make!(:ibm)
 
-    navigate 'Processos de Compra > Coletas de Preços'
+    navigate 'Licitações > Coletas de Preços'
 
     click_link 'Criar Coleta de Preços'
 
@@ -409,9 +409,9 @@ feature "PriceCollections", vcr: { cassette_name: :price_collections } do
   scenario 'trying to remove all the items to see the error message' do
     price_collection = PriceCollection.make!(:coleta_de_precos)
 
-    navigate 'Processos de Compra > Coletas de Preços'
+    navigate 'Licitações > Coletas de Preços'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       page.find('a').click
@@ -434,9 +434,9 @@ feature "PriceCollections", vcr: { cassette_name: :price_collections } do
     PriceCollection.make!(:coleta_de_precos)
     Material.make!(:arame_farpado)
 
-    navigate 'Processos de Compra > Coletas de Preços'
+    navigate 'Licitações > Coletas de Preços'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       page.find('a').click
@@ -483,9 +483,9 @@ feature "PriceCollections", vcr: { cassette_name: :price_collections } do
 
     make_proposals_dependencies!(price_collection)
 
-    navigate 'Processos de Compra > Coletas de Preços'
+    navigate 'Licitações > Coletas de Preços'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       page.find('a').click
@@ -546,9 +546,9 @@ feature "PriceCollections", vcr: { cassette_name: :price_collections } do
                                       :price_collection_item => price_collection.items.second,
                                       :unit_price => 2)
 
-    navigate 'Processos de Compra > Coletas de Preços'
+    navigate 'Licitações > Coletas de Preços'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       page.find('a').click
@@ -581,9 +581,9 @@ feature "PriceCollections", vcr: { cassette_name: :price_collections } do
 
     update_proposal_items!
 
-    navigate 'Processos de Compra > Coletas de Preços'
+    navigate 'Licitações > Coletas de Preços'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       page.find('a').click
@@ -682,9 +682,9 @@ feature "PriceCollections", vcr: { cassette_name: :price_collections } do
 
     make_proposals_dependencies!(price_collection)
 
-    navigate 'Processos de Compra > Coletas de Preços'
+    navigate 'Licitações > Coletas de Preços'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       page.find('a').click
@@ -737,9 +737,9 @@ feature "PriceCollections", vcr: { cassette_name: :price_collections } do
                                       :price_collection_item => price_collection.items.second,
                                       :unit_price => 10)
 
-    navigate 'Processos de Compra > Coletas de Preços'
+    navigate 'Licitações > Coletas de Preços'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       page.find('a').click
@@ -771,7 +771,7 @@ feature "PriceCollections", vcr: { cassette_name: :price_collections } do
   scenario 'disable email when the creditor has a related user' do
     Creditor.make!(:wenderson_sa_with_user)
 
-    navigate 'Processos de Compra > Coletas de Preços'
+    navigate 'Licitações > Coletas de Preços'
 
     click_link 'Criar Coleta de Preços'
 
@@ -793,9 +793,9 @@ feature "PriceCollections", vcr: { cassette_name: :price_collections } do
                                         accounts: [ CreditorBankAccount.make(:conta_2, number: '000104') ]))
                                   ])
 
-    navigate 'Processos de Compra > Coletas de Preços'
+    navigate 'Licitações > Coletas de Preços'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       expect(page).to have_css('a', :count => 2)
@@ -815,9 +815,9 @@ feature "PriceCollections", vcr: { cassette_name: :price_collections } do
   scenario 'index with columns at the index' do
     PriceCollection.make!(:coleta_de_precos)
 
-    navigate 'Processos de Compra > Coletas de Preços'
+    navigate 'Licitações > Coletas de Preços'
 
-    click_link "Limpar Filtro"
+    
 
     within_records do
       expect(page).to have_content 'Código/Ano'
@@ -840,7 +840,7 @@ feature "PriceCollections", vcr: { cassette_name: :price_collections } do
     Creditor.make!(:sobrinho_sa_without_email)
     User.make!(:geraldi)
 
-    navigate 'Processos de Compra > Coletas de Preços'
+    navigate 'Licitações > Coletas de Preços'
 
     click_link 'Criar Coleta de Preços'
 
@@ -912,7 +912,7 @@ feature "PriceCollections", vcr: { cassette_name: :price_collections } do
     PurchaseSolicitation.make!(:reparo, accounting_year: 2013, price_collections: [price_collection], responsible: Employee.make!(:wenderson,
       individual: Person.make!(:joao_da_silva).personable, registration: "12345678"))
 
-    navigate 'Processos de Compra > Coletas de Preços'
+    navigate 'Licitações > Coletas de Preços'
 
     click_link 'Criar Coleta de Preços'
 
@@ -935,7 +935,7 @@ feature "PriceCollections", vcr: { cassette_name: :price_collections } do
                                :responsible => Employee.make!(:wenderson),
                                :budget_structure_id => 2)
 
-    navigate 'Processos de Compra > Coletas de Preços'
+    navigate 'Licitações > Coletas de Preços'
 
     click_link 'Criar Coleta de Preços'
 

@@ -16,10 +16,6 @@ class Partner < Compras::Model
     person.to_s
   end
 
-  # has_one :extended_partner, inverse_of: :partner, dependent: :destroy
-
-  # accepts_nested_attributes_for :extended_partner, allow_destroy: true
-
   validates :person_id, uniqueness: { scope: [:company_id] }
 
   delegate :cpf, to: :person, allow_nil: true

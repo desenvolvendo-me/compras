@@ -111,9 +111,9 @@ $:.append Unico::Engine.config.root
 # uploaders
 require 'app/uploaders/uploader'
 require 'app/uploaders/unico_uploader'
-require 'app/uploaders/prefecture_logo_uploader'
 require 'app/uploaders/compras_uploader'
 require 'app/uploaders/image_uploader'
+require 'app/uploaders/prefecture_logo_uploader'
 require 'app/uploaders/attachment_uploader'
 require 'app/uploaders/individual_image_uploader'
 

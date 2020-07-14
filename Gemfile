@@ -12,8 +12,8 @@ gem 'activerecord-connections', '0.0.3'
 gem 'activerecord-postgres-hstore', "~> 0.7.6"
 
 source 'http://foo:BringMeSomeBeerNow@devops.nobesistemas.com.br:9292/' do
-  gem 'unico', '6.4.8rmagick'
-  gem 'unico-assets', '1.5.1'
+  gem 'unico', '6.5.1'
+  gem 'unico-assets', '1.5.4'
   gem 'unico-api', '1.6.0'
   gem 'quaestio', '0.1.1'
   gem 'active_relatus', '0.2.1'
@@ -33,6 +33,7 @@ gem 'awesome_nested_set', '2.1.6'
 gem 'cnpj_validator', '0.3.1'
 gem 'cpf_validator', '0.2.0'
 gem 'mask_validator', '0.2.1'
+gem 'mail_validator', '0.2.0'
 gem 'validates_timeliness', '3.0.14'
 gem 'typecaster', '0.0.2', :git => 'git://github.com/ricardohsd/typecaster'
 gem 'rubyzip', '0.9.9'
@@ -68,18 +69,19 @@ group :development, :test do
   gem 'postgres-copy', '= 0.5.5'
   gem 'pry'
   gem 'pry-remote'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '= 2.14.2'
   gem "better_errors"
   gem "binding_of_caller"
   gem 'minitest'
   gem 'minitest-reporters'
   gem 'test-unit'
   gem 'rack-mini-profiler', '0.9.3'
+  gem 'syntax', '~> 1.2'
 end
 
 group :test do
-  gem 'capybara', '2.1.0'
-  gem 'capybara-webkit'
+  gem 'capybara', '2.6.2'
+  gem 'capybara-webkit', '~> 1.8.0'
   gem 'machinist', '2.0'
   gem 'machinist-caching', '0.0.1'
   gem 'selenium-webdriver', '~> 2.33.0'

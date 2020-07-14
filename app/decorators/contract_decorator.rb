@@ -8,6 +8,7 @@ class ContractDecorator
               :purchasing_unit, :year,:link => [:contract_number, :creditor]
 
 
+
   def all_pledges_total_value
     return number_to_currency super if component.persisted? && super
     number_to_currency 0.0

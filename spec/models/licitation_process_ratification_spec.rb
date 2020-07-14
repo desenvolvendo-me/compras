@@ -26,7 +26,6 @@ describe LicitationProcessRatification do
   it { should delegate(:process).to(:licitation_process).allowing_nil(true).prefix(true) }
   it { should delegate(:modality_humanize).to(:licitation_process).allowing_nil(true).prefix(true) }
   it { should delegate(:description).to(:licitation_process).allowing_nil(true).prefix(true) }
-  it { should delegate(:execution_unit_responsible).to(:licitation_process).allowing_nil(true).prefix(true) }
   it { should delegate(:licitation?).to(:licitation_process).allowing_nil(true).prefix(true) }
   it { should delegate(:trading?).to(:licitation_process).allowing_nil(true).prefix(true) }
   it { should delegate(:process_responsibles).to(:licitation_process).allowing_nil(true) }

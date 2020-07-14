@@ -23,9 +23,11 @@ describe PurchaseSolicitationDecorator do
 
     it 'should have budget_structure, creditor and status' do
       expect(described_class.header_attributes).to include :code_and_year
-      expect(described_class.header_attributes).to include :budget_structure
-      expect(described_class.header_attributes).to include :responsible
+      expect(described_class.header_attributes).to include :request_date
+      expect(described_class.header_attributes).to include :department
+      expect(described_class.header_attributes).to include :user
       expect(described_class.header_attributes).to include :service_status
+      expect(described_class.header_attributes).to include :purchase_form
     end
   end
 

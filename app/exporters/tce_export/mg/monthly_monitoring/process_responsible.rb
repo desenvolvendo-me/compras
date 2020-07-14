@@ -11,7 +11,6 @@ module TceExport::MG
           {
             tipo_registro: 20,
             cod_orgao: monthly_monitoring.organ_code,
-            cod_unidade_sub: budget_structure_code(responsible.execution_unit_responsible),
             exercicio_licitacao: responsible.licitation_process_year,
             nro_processo_licitatorio: responsible.licitation_process_process,
             cod_tipo_comissao: commission_type_number(member),
@@ -106,7 +105,6 @@ module TceExport::MG
           {
             tipo_registro: 10,
             cod_orgao: monthly_monitoring.organ_code,
-            cod_unidade_sub: budget_structure_code(responsible.execution_unit_responsible),
             exercicio_licitacao: responsible.licitation_process_year,
             nro_processo_licitatorio: responsible.licitation_process_process,
             tipo_resp: responsible_kind(responsible),

@@ -42,7 +42,6 @@ describe Bidder do
     it { should delegate(:process).to(:licitation_process).allowing_nil(true).prefix(true) }
 
     it { should delegate(:envelope_opening?).to(:licitation_process).allowing_nil(true) }
-    it { should delegate(:execution_unit_responsible).to(:licitation_process).allowing_nil(true) }
 
     it { should delegate(:benefited).to(:creditor).allowing_nil(true) }
     it { should delegate(:company?).to(:creditor).allowing_nil(true) }

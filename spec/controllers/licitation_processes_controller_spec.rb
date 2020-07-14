@@ -58,7 +58,7 @@ describe LicitationProcessesController, vcr: { cassette_name: 'controllers/licit
   describe 'PUT #update' do
     context "with licitation_process" do
       let :purchase_solicitation do
-        PurchaseSolicitation.make!(:reparo)
+        ListPurchaseSolicitation.make!(:principal)
       end
 
       let :licitation_process do

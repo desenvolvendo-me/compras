@@ -14,7 +14,6 @@ module TceExport::MG
           {
             tipo_registro: 13,
             cod_orgao_resp: monthly_monitoring.organ_code,
-            cod_unidade_sub_resp: execution_unit_responsible_code(purchase.execution_unit_responsible),
             exercicio_licitacao: purchase.year,
             nro_processo_licitatorio: purchase.process,
             cod_orgao: monthly_monitoring.organ_code,
@@ -67,7 +66,6 @@ module TceExport::MG
           {
             tipo_registro: 11,
             cod_orgao_resp: monthly_monitoring.organ_code,
-            cod_unidade_sub_resp: execution_unit_responsible_code(purchase.execution_unit_responsible),
             exercicio_licitacao: purchase.year,
             nro_processo_licitatorio: purchase.process,
             nro_lote: item.lot,
@@ -109,7 +107,6 @@ module TceExport::MG
           {
             tipo_registro: 10,
             cod_orgao_resp: monthly_monitoring.organ_code,
-            cod_unidade_sub_resp: execution_unit_responsible_code(purchase.execution_unit_responsible),
             exercicio_licitacao: purchase.year,
             nro_processo_licitatorio: purchase.process,
             cod_modalidade_licitacao: modality(purchase),

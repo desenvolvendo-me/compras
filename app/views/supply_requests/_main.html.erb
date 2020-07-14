@@ -50,7 +50,8 @@
   <div class="yui3-u-1-2">
     <div>
       <label class="print_list"> Fornecedor
-          <%= link_to 'Imprimir lista de materiais', report_creditor_materials_path(f.object.id) if f.object.id %>
+          <%= link_to 'Imprimir lista de materiais', report_creditor_materials_path(creditor_material_report:{licitation_process_id: f.object.licitation_process_id,
+                                                                                    contract_id: f.object.contract_id, creditor_id: f.object.creditor&.id}), id:'print_list_materials' %>
       </label>
       <input class="string" disabled id="supply_request_creditor"
              value="<%= f.object.decorator.creditor %>" size="30" type="text">
@@ -121,8 +122,32 @@
     $(function () {
         $("#supply_request_user").prop('readonly', <%= !f.object.id.nil? %>);
         $("#supply_request_user_id").prop('readonly', <%= !f.object.id.nil? %>);
+        if(<%= !f.object.persisted? %>) {
+          $("#print_list_materials").hide();
+        }
     });
     $("#supply_request_authorization_date").prop('readonly', false);
+
+    $("#supply_request_creditor_id").change(function(){
+      var licitation_process_id = $("#supply_request_licitation_process_id").val(),
+          contract_id = $("#supply_request_contract_id").val(),
+          creditor_id = $("#supply_request_creditor_id").val();
+
+      if(licitation_process_id && contract_id && creditor_id){
+        var url = Routes.report_creditor_materials;
+        var params = {
+          creditor_material_report:{licitation_process_id: licitation_process_id,
+                                    contract_id:contract_id, creditor_id:creditor_id}
+        };
+
+        url += "?" + $.param(params);
+
+        $("#print_list_materials").attr('href', url).show();
+
+      }else{
+        $("#print_list_materials").hide();
+      }
+    })
 
 </script>
 

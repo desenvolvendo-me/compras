@@ -4,6 +4,7 @@
       <% resource_class.decorator.header_attributes.each do |field| %>
         <th><%= resource_class.human_attribute_name field %></th>
       <% end %>
+      <th></th>
     </tr>
   </thead>
 
@@ -20,6 +21,9 @@
             <% end %>
           </td>
         <% end %>
+        <td>
+          <%= link_to 'imprimir', report_supply_requests_path(resource.id, supply_request_per_secretary_report:{secretary_id: resource&.department&.secretary_id, secretary: resource&.department&.secretary&.to_s,  contract_id: resource&.contract_id, contract: resource&.contract&.to_s}), title: 'Imprimir Pedido de Fornecimento' %>
+        </td>
       </tr>
     <% end %>
   </tbody>
