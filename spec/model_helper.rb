@@ -128,8 +128,4 @@ require 'app/models/prefecture'
 
 require 'activerecord-postgres-hstore'
 
-require 'lib/active_resource/parser'
-require 'lib/active_resource/reflection'
-require 'lib/active_resource/associations'
 require 'lib/belongs_to_resource'
-require 'lib/consumer'
