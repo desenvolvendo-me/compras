@@ -51,7 +51,7 @@
     <div>
       <label class="print_list"> Fornecedor
           <%= link_to 'Imprimir lista de materiais', report_creditor_materials_path(creditor_material_report:{licitation_process_id: f.object.licitation_process_id,
-                                                                                    contract_id: f.object.contract_id, creditor_id: f.object.creditor&.id}), id:'print_list_materials' %>
+                                                                                    contract_id: f.object.contract_id, creditor_id: f.object.creditor&.id}), id:'print_list_materials', target:'_blank' %>
       </label>
       <input class="string" disabled id="supply_request_creditor"
              value="<%= f.object.decorator.creditor %>" size="30" type="text">
