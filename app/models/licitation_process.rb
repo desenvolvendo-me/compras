@@ -82,8 +82,7 @@ class LicitationProcess < Compras::Model
   has_many :accreditation_creditors, -> { order(:id) }, :through => :purchase_process_accreditation, :source => :creditors
   has_many :creditor_proposals, -> { order(:id) }, class_name: 'PurchaseProcessCreditorProposal'
   has_many :realignment_prices, dependent: :restrict, foreign_key: :purchase_process_id
-  has_many :tied_creditor_proposals, -> { order("ranking, creditor_id, purchase_process_item_id, lot") }, class_name: 'PurchaseProcessCreditorProposal',
-           conditions: {tied: true}
+  has_many :tied_creditor_proposals, -> { where(tied: true).order('ranking, creditor_id, purchase_process_item_id, lot') }, class_name: 'PurchaseProcessCreditorProposal'
   has_many :items_creditors, -> { order(:id) }, through: :items, source: :creditor
   has_many :creditor_disqualifications, class_name: 'PurchaseProcessCreditorDisqualification', dependent: :restrict
   has_many :process_responsibles, :dependent => :restrict
