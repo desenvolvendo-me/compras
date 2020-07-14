@@ -16,6 +16,8 @@ source 'http://foo:BringMeSomeBeerNow@devops.nobesistemas.com.br:9292/' do
   gem 'unico-api', '2.2.3'
 end
 
+gem 'protected_attributes', '1.0.9'
+
 ##Não suporta a rails 4
 # gem 'quaestio', '0.1.1'
 gem 'active_relatus', '0.2.1'

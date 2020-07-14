@@ -6,6 +6,12 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+module Rails
+  def self.production_way?
+    env.production? || env.staging? || env.training?
+  end
+end
+
 module Compras
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
@@ -84,12 +90,10 @@ module Compras
 
     config.active_record.whitelist_attributes = false
 
-    def self.production_way?
-      Rails.env.production? || Rails.env.staging? || Rails.env.training?
-    end
+
 
     def self.redis_configuration
-      if production_way?
+      if Rails.production_way?
         uri = URI.parse(ENV["REDISTOGO_URL"])
       else
         uri = URI.parse("redis://localhost:6379")
