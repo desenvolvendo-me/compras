@@ -48,9 +48,7 @@
 </div>
 
 <% unless f.object.persisted? %>
-  <!--  <div class="yui3-u-1-4" style="margin-top: 4%" >-->
   <%= f.input :model_request %>
-  <!--  </div>-->
 <% end %>
 <%= f.input :justification, :disabled => f.object.annulled? %>
 
@@ -92,8 +90,9 @@
   });
 
 $(function(){
-    $("#add-button").append($(".add-nested-record"));
-    $(".add-nested-record").last().remove();
+  debugger
+    $("#add-button").append($("[data-template$='purchase_solicitation_items_template']"));
+  
   })
 
 </script>
