@@ -26,9 +26,10 @@ module MaterialBalance
         response["message"] = ("#{material.description} (#{quantity_autorized - quantity_delivered})")
       end
 
-      balance_unit = ((quantity_autorized - quantity_delivered).to_f * material.quantity_unit.to_f) - quantity.to_i
-      balance = balance_unit.to_f / material.quantity_unit.to_f
-      value_unit = get_unit_price(object, material) / material.quantity_unit.to_f
+      qtd_material_unit = material.quantity_unit.to_f || 0
+      balance_unit = ((quantity_autorized - quantity_delivered).to_f * qtd_material_unit) - quantity.to_i
+      balance = qtd_material_unit.eql?(0.0) ? 0 : balance_unit.to_f / qtd_material_unit
+      value_unit = qtd_material_unit.eql?(0.0) ? 0 : get_unit_price(object, material) / qtd_material_unit
 
       response["total"] = quantity_autorized
       response["value_unit"] = value_unit

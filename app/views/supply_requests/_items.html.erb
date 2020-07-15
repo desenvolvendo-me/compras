@@ -137,9 +137,11 @@
         var created_user = '<%= f.object.user.try(:login) %>';
 
         if (current_user !== created_user) {
+            $('.add-nested-record').attr('data-disabled','Você não possui permissões para alterar este pedido!');
             $('.add-nested-record').removeClass('add-nested-record');
             $('.remove-nested-record').removeAttr('href');
             $('.remove-nested-record').removeClass('remove-nested-record');
+
         }
 
         $('.edit-nested-record').on("click", function () {
