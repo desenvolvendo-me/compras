@@ -1,2 +1,2 @@
-module TceExport::MG
+module TceExport::Mg
 end

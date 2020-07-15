@@ -1,4 +1,4 @@
-module TceExport::MG
+module TceExport::Mg
   module MonthlyMonitoring
     class LegalAnalysisAppraisalDataGenerator < DataGeneratorBase
       def generate_data
