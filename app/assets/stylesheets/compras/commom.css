@@ -22,6 +22,9 @@
     justify-content: flex-end;
 }
 
+.w-50{
+    width: 50%;
+}
 .btn-small{
     padding: .25rem .5rem;
     font-size: .875rem;

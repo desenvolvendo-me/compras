@@ -24,7 +24,7 @@ class SupplyRequestReport < Report
 
   def department_person
     sp = SupplyRequest.find(self.supply_request_id.to_i)
-    sp.user.to_s.mb_chars.upcase unless sp.user.nil?
+    sp.user.authenticable.to_s.mb_chars.upcase unless sp.user.nil?
   end
 
   def creditor
