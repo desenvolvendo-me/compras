@@ -3,5 +3,5 @@ pt-BR:
     attributes:
       expense_report:
         organ: "Orgão"
-        purchasing_unit: "Unidade de Compra"
+        unity: "Unidade"
 
