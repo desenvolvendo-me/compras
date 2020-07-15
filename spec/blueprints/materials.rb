@@ -6,8 +6,8 @@ Material.blueprint(:antivirus) do
   reference_unit { ::FactoryGirl::Preload.factories['ReferenceUnit'][:unidade] }
   manufacturer { "Plantador" }
   combustible { false }
-  material_type { MaterialType::CONSUMPTION }
-  expense_nature_id { 1 }
+  # material_type { MaterialType::CONSUMPTION }
+  # expense_nature_id { 1 }
   material_classification {MaterialClassification::CONSUMPTION}
 end
 
@@ -19,8 +19,8 @@ Material.blueprint(:office) do
   reference_unit { ::FactoryGirl::Preload.factories['ReferenceUnit'][:unidade] }
   manufacturer { "MS" }
   combustible { false }
-  material_type { MaterialType::CONSUMPTION }
-  expense_nature_id { 1 }
+  # material_type { MaterialType::CONSUMPTION }
+  # expense_nature_id { 1 }
   material_classification {MaterialClassification::CONSUMPTION}
 end
 
@@ -32,8 +32,8 @@ Material.blueprint(:arame_farpado) do
   reference_unit { ::FactoryGirl::Preload.factories['ReferenceUnit'][:unidade] }
   manufacturer { "Moveis" }
   combustible { false }
-  material_type { MaterialType::CONSUMPTION }
-  expense_nature_id { 1 }
+  # material_type { MaterialType::CONSUMPTION }
+  # expense_nature_id { 1 }
   material_classification {MaterialClassification::CONSUMPTION}
 end
 
@@ -44,8 +44,8 @@ Material.blueprint(:arame_comum) do
   detailed_description { "Arame comum" }
   reference_unit { ::FactoryGirl::Preload.factories['ReferenceUnit'][:unidade] }
   combustible { false }
-  material_type { MaterialType::CONSUMPTION }
-  expense_nature_id { 1 }
+  # material_type { MaterialType::CONSUMPTION }
+  # expense_nature_id { 1 }
   material_classification {MaterialClassification::CONSUMPTION}
 end
 
@@ -56,6 +56,6 @@ Material.blueprint(:manutencao) do
   detailed_description { "Manutenção de Computadores" }
   reference_unit { ::FactoryGirl::Preload.factories['ReferenceUnit'][:unidade] }
   material_type { MaterialType::SERVICE }
-  expense_nature_id { 1 }
+  # expense_nature_id { 1 }
   material_classification {MaterialClassification::CONSUMPTION}
 end
