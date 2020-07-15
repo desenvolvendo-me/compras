@@ -60,7 +60,7 @@ gem 'paper_trail'
 gem 'sass-rails'
 gem 'uglifier'
 
-gem 'rake', '< 11.0'
+gem 'zip-zip'
 
 group :production, :training, :staging do
   gem 'dalli', '2.6.4'
