@@ -1,7 +1,7 @@
 class Creditor < Persona::Creditor
   reload_custom_data
 
-  attr_accessible :material_ids, :representatives_attributes
+  attr_accessible :person_id, :occupation_classification_id, :municipal_public_administration, :autonomous, :organ_responsible_for_registration, :main_cnae_id, :cnae_ids, :material_ids, :representatives_attributes
   attr_accessor :representative_person
 
   has_many :creditor_materials, :dependent => :destroy, :inverse_of => :creditor

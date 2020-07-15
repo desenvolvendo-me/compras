@@ -62,7 +62,7 @@ class Person < Persona::Person
 
   def personable_attributes=(personable_attributes, options = {})
     self.personable ||= personable_type.constantize.new
-    personable.localized.assign_attributes(personable_attributes, options)
+    personable.localized.assign_attributes(personable_attributes)
   end
 
   def identity_document
