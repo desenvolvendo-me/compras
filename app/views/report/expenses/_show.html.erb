@@ -8,7 +8,7 @@
 
     <% resource.records.where(project_activity_id: project_activity).each do |expense| %>
       <div class="text-15">
-        <span><%= "#{expense.nature_expense&.nature} Fonte de Recurso: #{expense.resource_source}" %></span>
+        <span><%= "#{expense.nature_expense&.nature} - #{expense.nature_expense.description} - Fonte de Recurso: #{expense.resource_source}" %></span>
       </div>
     <% end %>
     <br>
