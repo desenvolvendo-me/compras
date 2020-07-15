@@ -168,6 +168,15 @@ pt-BR:
       update: "Salvar"
       submit: "Salvar"
 
+    page_entries_info:
+      one_page:
+        display_entries:
+          zero: "Nenhum registro encontrado"
+          one: "Visualizando <b>1</b> %{entry_name}"
+          other: "Visualizando <b>%{count}</b> %{entry_name}"
+      more_pages:
+        display_entries: "Visualizando %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> de <b>%{total}</b> no total"
+
   errors:
     format: "%{attribute} %{message}"
 
