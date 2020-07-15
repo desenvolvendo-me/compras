@@ -7,7 +7,8 @@ class ExpenseSearcher
     where { organ_id.eq(param) }
   end
 
-  def purchasing_unit_id(param)
-    where { purchase_unit_id.eq(param) }
+  def unity_id(param)
+    where { unity_id.eq(param) }
   end
+
 end
