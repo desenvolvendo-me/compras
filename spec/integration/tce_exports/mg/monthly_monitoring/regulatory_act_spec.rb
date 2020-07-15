@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe TceExport::MG::MonthlyMonitoring::RegulatoryActGenerator do
+describe "TceExport::MG::MonthlyMonitoring::RegulatoryActGenerator" do
   describe "#generate_file" do
     before do
       FileUtils.rm_f('tmp/REGLIC.csv')

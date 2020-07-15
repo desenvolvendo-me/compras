@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'zip/zip'
 
-describe TceExport::MG::MonthlyMonitoring do
+describe "TceExport::MG::MonthlyMonitoring" do
   describe "#generate_zip_file" do
     before do
       FileUtils.rm_f("tmp/AM_51234_66_10_2013.zip")
