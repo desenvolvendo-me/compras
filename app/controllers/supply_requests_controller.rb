@@ -13,7 +13,6 @@ class SupplyRequestsController < CrudController
   end
 
   def edit
-    raise Exceptions::Unauthorized if resource.user != current_user
     @hidden_field = supply_hidden_field?
   end
 
