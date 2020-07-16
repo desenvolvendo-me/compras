@@ -22,6 +22,9 @@ FactoryGirl.preload do
   factory(:gerente)    { create :position }
   factory(:supervisor) { create :position, name: 'Supervisor' }
 
+  factory(:itau)      { create :bank }
+  factory(:santander) { create :bank, name: 'Santander', code: 33, acronym: 'ST' }
+
   factory(:tambuata)          { create :condominium }
   factory(:parque_das_flores) { create :condominium, name: 'Parque das Flores', condominium_type: CondominiumType::HORIZONTAL }
 
