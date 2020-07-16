@@ -1,5 +1,5 @@
 class PurchaseSolicitationReport < Report
-  include StartEndDatesRange
+  include Concerns::StartEndDatesRange
 
   attr_accessor :kind, :status, :material, :material_id, :start_date, :end_date, :report_type, :user, :user_id
 
