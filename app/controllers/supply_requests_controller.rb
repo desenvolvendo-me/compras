@@ -13,6 +13,7 @@ class SupplyRequestsController < CrudController
   end
 
   def edit
+    raise Exceptions::Unauthorized if resource.user != current_user
     @hidden_field = supply_hidden_field?
   end
 
@@ -50,6 +51,12 @@ class SupplyRequestsController < CrudController
     use_pur_uni = UserPurchasingUnit.where(user_id: current_user.id).pluck(:purchasing_unit_id)
     departments = Department.where("compras_departments.purchasing_unit_id in (?)", use_pur_uni).pluck(:id)
     PurchaseSolicitation.where("department_id in (?)", departments).pluck(:id)
+  end
+
+  def end_of_association_chain
+    user_ids = UserPurchasingUnit.where(purchasing_unit_id:  current_user.purchasing_units.pluck(:id)).pluck(:user_id).uniq
+    user_ids += [current_user.id]
+    SupplyRequest.where(user_id: user_ids)
   end
 
 end
