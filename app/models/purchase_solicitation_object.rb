@@ -7,6 +7,6 @@ class PurchaseSolicitationObject < Compras::Model
   orderize "id DESC"
   filterize
 
-  validates :purchase_solicitation_id, :management_object_id, presence: true
+  validates :purchase_solicitation_id,  presence: true
 
 end
