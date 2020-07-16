@@ -1,6 +1,7 @@
-<% if f.object.updatabled && f.object.persisted? && @hidden_field%>
+<% if f.object.updatabled.eql?(nil) && f.object.persisted? && @hidden_field%>
   <button type='button' class="button primary" id="gen-suplly-order" style="float: right; margin-bottom: 1rem">Gerar Ordem de Fornecimento</button>
 <% end %>
+
 <table class="records">
   <thead>
   <tr>
