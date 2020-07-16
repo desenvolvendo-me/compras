@@ -1,3 +1,9 @@
+# Capybara
+
+## Ver a página
+
+- page.save_screenshot 'screenshot.png'
+
 # Problemas
 
 ## Model Street

@@ -17,7 +17,7 @@ feature "PurchaseSolicitations", vcr: { cassette_name: :purchase_solicitations }
     Material.make!(:antivirus, :material_type => MaterialType::ASSET)
     Material.make!(:office, :material_type => MaterialType::ASSET)
 
-    navigate 'Licitações > Solicitações de Compra'
+    navigate 'Compras > Solicitações de Compra'
 
     
 
@@ -184,7 +184,7 @@ feature "PurchaseSolicitations", vcr: { cassette_name: :purchase_solicitations }
     DeliveryLocation.make!(:health)
     Material.make!(:arame_farpado)
 
-    navigate 'Licitações > Solicitações de Compra'
+    navigate 'Compras > Solicitações de Compra'
 
     
 
@@ -320,7 +320,7 @@ feature "PurchaseSolicitations", vcr: { cassette_name: :purchase_solicitations }
   scenario 'should validate presence of items when editing' do
     PurchaseSolicitation.make!(:reparo)
 
-    navigate 'Licitações > Solicitações de Compra'
+    navigate 'Compras > Solicitações de Compra'
 
     
 
@@ -349,7 +349,7 @@ feature "PurchaseSolicitations", vcr: { cassette_name: :purchase_solicitations }
     Material.make!(:antivirus, :material_type => MaterialType::CONSUMPTION)
     Material.make!(:arame_farpado, :material_type => MaterialType::CONSUMPTION)
 
-    navigate 'Licitações > Solicitações de Compra'
+    navigate 'Compras > Solicitações de Compra'
 
     click_link 'Criar Solicitação de Compra'
 
@@ -396,7 +396,7 @@ feature "PurchaseSolicitations", vcr: { cassette_name: :purchase_solicitations }
     DeliveryLocation.make!(:education)
     Material.make!(:office, :material_type => MaterialType::ASSET)
 
-    navigate 'Licitações > Solicitações de Compra'
+    navigate 'Compras > Solicitações de Compra'
 
     click_link 'Criar Solicitação de Compra'
 
@@ -467,7 +467,7 @@ feature "PurchaseSolicitations", vcr: { cassette_name: :purchase_solicitations }
   scenario 'should not show edit button when is not editable' do
     PurchaseSolicitation.make!(:reparo_liberado)
 
-    navigate 'Licitações > Solicitações de Compra'
+    navigate 'Compras > Solicitações de Compra'
 
     
 
@@ -483,7 +483,7 @@ feature "PurchaseSolicitations", vcr: { cassette_name: :purchase_solicitations }
     PurchaseSolicitation.make!(:reparo,
                                :service_status => PurchaseSolicitationServiceStatus::RETURNED)
 
-    navigate 'Licitações > Solicitações de Compra'
+    navigate 'Compras > Solicitações de Compra'
 
     
 
@@ -503,7 +503,7 @@ feature "PurchaseSolicitations", vcr: { cassette_name: :purchase_solicitations }
     Employee.make!(:sobrinho)
     DeliveryLocation.make!(:education)
 
-    navigate 'Licitações > Solicitações de Compra'
+    navigate 'Compras > Solicitações de Compra'
 
     click_link 'Criar Solicitação de Compra'
 
@@ -547,7 +547,7 @@ feature "PurchaseSolicitations", vcr: { cassette_name: :purchase_solicitations }
                                                        :service_status => PurchaseSolicitationServiceStatus::PENDING,
                                                        :kind => PurchaseSolicitationKind::PRODUCTS)
 
-    navigate 'Licitações > Solicitações de Compra'
+    navigate 'Compras > Solicitações de Compra'
 
     
 
@@ -581,7 +581,7 @@ feature "PurchaseSolicitations", vcr: { cassette_name: :purchase_solicitations }
   scenario 'provide purchase solicitation search by code and responsible' do
     PurchaseSolicitation.make!(:reparo)
 
-    navigate 'Licitações > Solicitações de Compra'
+    navigate 'Compras > Solicitações de Compra'
 
     click_link 'Filtrar Solicitações de Compra'
 
@@ -609,7 +609,7 @@ feature "PurchaseSolicitations", vcr: { cassette_name: :purchase_solicitations }
   scenario 'index with columns at the index' do
     PurchaseSolicitation.make!(:reparo)
 
-    navigate 'Licitações > Solicitações de Compra'
+    navigate 'Compras > Solicitações de Compra'
 
     
 
@@ -637,7 +637,7 @@ feature "PurchaseSolicitations", vcr: { cassette_name: :purchase_solicitations }
     Material.make!(:antivirus)
     Material.make!(:office, :material_type => MaterialType::SERVICE)
 
-    navigate 'Licitações > Solicitações de Compra'
+    navigate 'Compras > Solicitações de Compra'
 
     click_link "Criar Solicitação de Compra"
 
@@ -674,7 +674,7 @@ feature "PurchaseSolicitations", vcr: { cassette_name: :purchase_solicitations }
   scenario 'should not allow duplicated materials' do
     Material.make!(:antivirus)
 
-    navigate 'Licitações > Solicitações de Compra'
+    navigate 'Compras > Solicitações de Compra'
 
     click_link 'Criar Solicitação de Compra'
 
@@ -716,7 +716,7 @@ feature "PurchaseSolicitations", vcr: { cassette_name: :purchase_solicitations }
 
   scenario 'fill automatically budget structure from budget allocation' do
     pending 'quando rodo o teste sozinho ele passa e se rodo tudo falha' do
-      navigate 'Licitações > Solicitações de Compra'
+      navigate 'Compras > Solicitações de Compra'
 
       click_link 'Criar Solicitação de Compra'
 
@@ -745,7 +745,7 @@ feature "PurchaseSolicitations", vcr: { cassette_name: :purchase_solicitations }
   scenario 'testing javascript when select kind is empty' do
     Material.make!(:antivirus, :material_type => MaterialType::ASSET)
 
-    navigate 'Licitações > Solicitações de Compra'
+    navigate 'Compras > Solicitações de Compra'
 
     click_link 'Criar Solicitação de Compra'
 

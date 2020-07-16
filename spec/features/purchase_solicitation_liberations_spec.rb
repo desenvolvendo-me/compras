@@ -12,7 +12,7 @@ feature "PurchaseSolicitationLiberations", vcr: { cassette_name: :purchase_solic
     PurchaseSolicitation.make!(:reparo)
     Employee.make!(:wenderson)
 
-    navigate 'Licitações > Solicitações de Compra'
+    navigate 'Compras > Solicitações de Compra'
 
     
 
