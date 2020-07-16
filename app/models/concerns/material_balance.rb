@@ -28,8 +28,14 @@ module MaterialBalance
 
       qtd_material_unit = material.quantity_unit.to_f || 0
       balance_unit = ((quantity_autorized - quantity_delivered).to_f * qtd_material_unit) - quantity.to_i
-      balance = qtd_material_unit.eql?(0.0) ? 0 : balance_unit.to_f / qtd_material_unit
-      value_unit = qtd_material_unit.eql?(0.0) ? 0 : get_unit_price(object, material) / qtd_material_unit
+      if qtd_material_unit.eql?(0.0)
+        balance =  0
+        value_unit = 0
+      else
+        balance = balance_unit.to_f / qtd_material_unit
+        value_unit = get_unit_price(object, material, licitation_process, contract) / qtd_material_unit
+      end
+
 
       response["total"] = quantity_autorized
       response["value_unit"] = value_unit
@@ -56,14 +62,16 @@ module MaterialBalance
       end
     end
 
-    def self.get_unit_price(object, material)
+    def self.get_unit_price(object, material, licitation_process, contract)
       unit_value = nil
-      unit_value = SupplyRequestItem.get_material_unit_value(object.id, object.creditor_id, material.id) if object.try(:id)
-      if unit_value
-        return unit_value
+      if object
+        unit_value = SupplyRequestItem.get_material_unit_value(object.id, object.creditor_id, material.id)
       else
-        return 0.0
+        p = PurchaseProcessItem.where(creditor_id: contract.creditor.id, material_id: material.id, licitation_process_id: licitation_process.id).last
+        unit_value = p&.ratification_item&.unit_price
       end
+
+      unit_value.eql?(nil) ? 0.0 : unit_value
     end
 
   end
