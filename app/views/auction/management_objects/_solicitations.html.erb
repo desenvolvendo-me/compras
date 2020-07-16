@@ -39,7 +39,7 @@
     <%= f.association :purchase_solicitation_objects, :collection => localized(f.object.purchase_solicitation_objects) do |p| %>
       <%= render 'purchase_solicitation_objects/nested_grid_row',
                  id: p.object.id,
-                 purchase_solicitation: p.object.purchase_solicitation.code,
+                 purchase_solicitation: p.object.purchase_solicitation.to_s,
                  department: p.object.purchase_solicitation.department,
                  object_id: f.object.id,
                  purchase_solicitation_id: p.object.purchase_solicitation_id,
