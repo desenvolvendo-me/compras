@@ -10,3 +10,5 @@ pt-BR:
         description: "Titulo do Objeto"
         status: "Status"
         object: "Objeto"
+        purchase_solicitation: "Solicitação de Compra"
+        department: "Departamento"
