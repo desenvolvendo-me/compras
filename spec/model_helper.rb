@@ -16,17 +16,17 @@ require 'spec/support/validate_duplication_of_matcher'
 require 'spec/support/delegate_matcher'
 
 # ActiveRecord::Filter
-require 'lib/active_record/filters/base'
-require 'lib/active_record/filters/filter'
-require 'lib/active_record/filter'
-require 'lib/active_record/block'
+# require 'lib/active_record/filters/base'
+# require 'lib/active_record/filters/filter'
+# require 'lib/active_record/filter'
+# require 'lib/active_record/block'
 
 class ActiveRecord::Base
   include ActiveRecord::Filter
 end
 
 # ActiveRecord::Modal
-require 'lib/active_record/modal'
+# require 'lib/active_record/modal'
 
 class ActiveRecord::Base
   include ActiveRecord::Modal
