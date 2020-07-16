@@ -1,0 +1,14 @@
+<tr class="record nested-record item-record" id="purchase-solicitation-object-id-<%= id %>">
+  <td><%= code %></td>
+  <td><%= department %></td>
+  <td>
+    <%= link_to 'Editar', '#', class: 'edit-nested-record' %>
+  </td>
+
+  <td>
+    <%= f.input :purchase_solicitation_id, as: :hidden, input_html: { value: purchase_solicitation_id, class: 'material-id' } %>
+    <%= f.input :management_object_id, as: :hidden, input_html: { value: object_id } %>
+
+    <%= link_to 'Remover', '#', class: 'remove-nested-record' %>
+  </td>
+</tr>
