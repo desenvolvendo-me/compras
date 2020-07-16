@@ -1,5 +1,5 @@
 Bank.blueprint(:itau) do
-  name { 'Santander' }
-  code { 33 }
-  acronym { 'ST' }
+  name { 'Banco Itaú' }
+  code { 11 }
+  acronym { 'IT' }
 end
