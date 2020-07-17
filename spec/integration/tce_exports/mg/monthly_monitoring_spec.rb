@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'zip/zip'
 
-describe "TceExport::MG::MonthlyMonitoring" do
+describe TceExport::Mg::MonthlyMonitoring do
   describe "#generate_zip_file" do
     before do
       FileUtils.rm_f("tmp/AM_51234_66_10_2013.zip")
@@ -35,7 +35,7 @@ describe "TceExport::MG::MonthlyMonitoring" do
         prefecture: prefecture,
         city_code: "51234")
 
-      TceExport::MG::MonthlyMonitoring.generate_zip_file(monthly_monitoring)
+      TceExport::Mg::MonthlyMonitoring.generate_zip_file(monthly_monitoring)
       entries = Zip::ZipFile.open("tmp/AM_51234_66_10_2013.zip").entries.map(&:to_s)
       expect(entries.sort).to eq [
         'ABERLIC.csv',
@@ -59,7 +59,7 @@ describe "TceExport::MG::MonthlyMonitoring" do
       })
 
       expect do
-        TceExport::MG::MonthlyMonitoring.generate_zip_file(monthly_monitoring)
+        TceExport::Mg::MonthlyMonitoring.generate_zip_file(monthly_monitoring)
       end.to raise_error(RuntimeError, 'Invalid csv files: insecure_class, another_insecure_class')
     end
 
@@ -74,7 +74,7 @@ describe "TceExport::MG::MonthlyMonitoring" do
         city_code: "51234",
         only_files: ['contract', 'direct_purchase', 'regulatory_act'])
 
-      TceExport::MG::MonthlyMonitoring.generate_zip_file(monthly_monitoring)
+      TceExport::Mg::MonthlyMonitoring.generate_zip_file(monthly_monitoring)
       entries = Zip::ZipFile.open("tmp/AM_51234_66_10_2013.zip").entries.map(&:to_s)
       expect(entries.sort).to eq [
         'CONTRATO.csv',

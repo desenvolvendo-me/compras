@@ -206,8 +206,7 @@ module TceExport::Mg
         ].join("\n")
       end
     end
-
-
+    
     class BiddingAuthorizationGenerator < GeneratorBase
       acronym 'HABLIC'
 
