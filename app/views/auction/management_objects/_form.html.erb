@@ -1,9 +1,19 @@
-<div class="yui3-g">
-  <div class="yui3-u-1-2">
-    <%= f.input :description %>
+<div class="tabs">
+  <ul>
+    <li>
+      <a href="#main">Objeto</a>
+    </li>
+
+    <li>
+      <a href="#solicitations">Solicitações</a>
+    </li>
+  </ul>
+
+  <div id="main">
+    <%= render 'main', :f => f %>
   </div>
-  <div class="yui3-u-1-2">
-    <%= f.input :status %>
+
+  <div id="solicitations">
+    <%= render 'solicitations', :f => f %>
   </div>
 </div>
-<%= f.input :object %>

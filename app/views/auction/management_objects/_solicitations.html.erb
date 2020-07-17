@@ -1,0 +1,80 @@
+<div id="purchase_solicitation_objects">
+
+  <div class="nested-fields add-margin-bottom">
+    <%= hidden_field_tag :management_object_id, f.object.id, :name => 'management_object[object_id]' %>
+
+    <div class="yui3-g">
+      <div class="yui3-u-2-5">
+        <%= f.input :purchase_solicitation, :as => :auto_complete, :fake => true,
+                    'data-hidden-field-class' => 'unique',
+                    :source_path => purchase_solicitations_path,
+                    :required => true%>
+      </div>
+      <div class="yui3-u-2-5">
+        <%= f.input :department, :as => :fake, :required => true, readonly: true %>
+      </div>
+      <div class="yui3-u-1-5">
+        <%= button_tag 'Adicionar', type: :button,
+                       :class => 'button add-nested-record field-without-label',
+                       'data-template' => 'purchase_solicitation_objects_template',
+                       'data-records' => 'items-records'%>
+      </div>
+    </div>
+
+
+  </div>
+
+  <%= f.error :purchase_solicitation_objects %>
+
+  <table id="items-records" class="records">
+    <thead>
+    <tr>
+      <th><%= PurchaseSolicitation.human_attribute_name :code %></th>
+      <th><%= PurchaseSolicitation.human_attribute_name :department %></th>
+      <th></th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <%= f.association :purchase_solicitation_objects, :collection => localized(f.object.purchase_solicitation_objects) do |p| %>
+      <%= render 'purchase_solicitation_objects/nested_grid_row',
+                 id: p.object.id,
+                 purchase_solicitation: p.object.purchase_solicitation.to_s,
+                 department: p.object.purchase_solicitation.department,
+                 object_id: f.object.id,
+                 purchase_solicitation_id: p.object.purchase_solicitation_id,
+                 f: p %>
+    <% end %>
+    </tbody>
+  </table>
+
+  <%= mustache "purchase_solicitation_objects_template" do %>
+    <%= f.association :purchase_solicitation_objects_attributes, :collection => f.object.purchase_solicitation_objects.build, :index => '{{uuid}}' do |p| %>
+      <%= render 'purchase_solicitation_objects/nested_grid_row',
+                 id: '{{id}}',
+                 purchase_solicitation: '{{purchase_solicitation}}',
+                 department: '{{department}}',
+                 object_id: '{{object_id}}',
+                 purchase_solicitation_id: "{{purchase_solicitation_id}}",
+                 f: p %>
+    <% end %>
+  <% end %>
+</div>
+
+<script>
+  $("#management_object_purchase_solicitation_id").change(function(){
+    var id = $(this).val();
+    if(id){
+      $.ajax({
+        url: Routes.purchase_solicitation_department,
+        data: {purchase_solicitation_id: id},
+        dataType: 'json',
+        type: 'GET',
+        success: function (data) {
+          debugger
+          $('#management_object_department').val(data["description"]);
+        }
+      });
+    }
+  })
+</script>

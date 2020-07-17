@@ -5,7 +5,7 @@ class PurchaseSolicitation < Compras::Model
 
   attr_accessible :accounting_year, :request_date, :responsible_id, :kind,
                   :delivery_location_id, :general_observations, :justification,
-                  :purchase_solicitation_budget_allocations_attributes,
+                  :purchase_solicitation_budget_allocations_attributes, :management_object_id,
                   :items_attributes, :budget_structure_id, :purchasing_unit_id,
                   :user_id, :department_id, :attendant_status, :secretaries_attributes,
                   :model_request, :demand_id, :purchase_forms_attributes, :service_status
@@ -28,6 +28,7 @@ class PurchaseSolicitation < Compras::Model
   belongs_to :liberator, :class_name => 'Employee', :foreign_key => 'liberator_id'
   belongs_to :demand
   belongs_to :purchasing_unit
+  belongs_to :management_object
 
   belongs_to_resource :budget_structure
 
@@ -45,6 +46,8 @@ class PurchaseSolicitation < Compras::Model
   has_many :price_collection_proposal_items, through: :price_collection_items
   has_many :list_purchase_solicitations, :dependent => :destroy
   has_many :secretaries, :class_name => 'PurchaseSolicitationSecretary', :dependent => :destroy
+  has_many :purchase_solicitation_objects
+  has_many :management_objects, through: :purchase_solicitation_objects
 
   has_one :annul, :class_name => 'ResourceAnnul', :as => :annullable, :dependent => :destroy
 
