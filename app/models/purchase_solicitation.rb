@@ -147,6 +147,10 @@ class PurchaseSolicitation < Compras::Model
     }
   }
 
+  scope :by_kind, lambda {|q|
+    where {kind.eq(q)}
+  }
+
   scope :with_materials_per_licitation, ->(licitation_process_id, material_ids) do
     joins { list_purchase_solicitations.licitation_process }
         .joins { items.material }
