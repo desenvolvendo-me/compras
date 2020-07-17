@@ -1,13 +1,33 @@
 <fieldset class="pd-2">
-    <div class="yui3-g">
-      <div class="yui3-u-1-2">
-        <%= f.input :purchase_solicitation, :as => :modal, 'data-hidden-field-class' => 'unique', :fake => true, :required => true %>
-      </div>
-      <div class="yui3-u-1-2">
-        <%= select_tag :kind, options_for_select(PurchaseSolicitationKind.to_a),
-                       include_blank: true, as: :fake, :required => true,
-                       class: 'required kind select'%>
-      </div>
+  <div class="yui3-g">
+    <div class="yui3-u-1-2">
+      <%= f.input :purchase_solicitation, :as => :modal, 'data-hidden-field-class' => 'unique', :fake => true, :required => true %>
     </div>
+    <div class="yui3-u-1-2">
+      <%= select_tag :kind, options_for_select(PurchaseSolicitationKind.to_a),
+                     include_blank: true, as: :fake, :required => true,
+                     class: 'required kind select'%>
+    </div>
+  </div>
+
+  <%= f.input :material, as: :auto_complete, 'data-hidden-field-class' => 'unique', :fake => true, :required => true %>
+  <div class="yui3-g">
+    <div class="yui3-u-1-2">
+      <%= f.input :lot, faker: true, :required => true %>
+    </div>
+    <div class="yui3-u-1-2">
+      <%= f.input :material, :fake => true, :required => true %>
+    </div>
+  </div>
+  <%= f.input :material_class, faker: true, disabled: true%>
+  <%= f.input :description, faker: true, disabled: true%>
+  <div class="yui3-g">
+    <div class="yui3-u-1-2">
+      <%= f.input :value, faker: true, :required => true %>
+    </div>
+    <div class="yui3-u-1-2">
+      <%= f.input :max_value, :fake => true, :required => true %>
+    </div>
+  </div>
 
 </fieldset>
