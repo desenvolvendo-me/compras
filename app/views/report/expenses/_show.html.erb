@@ -1,0 +1,53 @@
+<div>
+  <table class="records">
+    <thead>
+    <tr  style="text-align: center;">
+      <td> RELATÓRIO DE QUADRO DE DESPESAS </td>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+</div>
+
+<div style="text-align: justify">
+
+</div>
+
+<br>
+
+<div>
+  <% resource.group_unity.each do |unity| %>
+    <div class="text-15" style="margin-bottom: 6px"><b> UNIDADE: <%= unity.to_s %></b></div>
+    <% resource.group_project_activity(unity.expenses).each do |project_activity| %>
+      <div class="text-15"><b> PROJETO / ATIVIDADE: <%= project_activity.to_s %> </b></div>
+      <table class="records">
+        <thead>
+        <tr>
+          <th>NATUREZA DA DESPESA</th>
+          <th>DESCRIÇÃO</th>
+          <th>FONTE DE RECURSO</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% resource.records.where(project_activity_id: project_activity).each do |expense| %>
+          <tr>
+            <td><%= expense.nature_expense&.nature %></td>
+            <td><%= expense.nature_expense.description %></td>
+            <td><%= expense.resource_source %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <br>
+    <% end %>
+  <% end %>
+</div>
+
+
+
+<style>
+  .text-15{
+    font-size: 15px;
+  }
+</style>

@@ -1,0 +1,8 @@
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :organ, as: :modal, hidden_field: 'organ_id' %>
+  </div>
+  <div class="yui3-u-1-2">
+    <%= f.input :unity, as: :modal, modal_url: modal_organs_path, hidden_field: 'unity_id' %>
+  </div>
+</div>

@@ -1037,6 +1037,7 @@ Compras::Application.routes.draw do
       resources :extract_consumption_per_processes
       resources :contract_per_resource_sources
       resources :supply_request_per_secretaries
+      resources :expenses
     end
 
     match 'map_of_bids/:licitation_process_id' => 'map_of_bids#show', as: :map_of_bids

@@ -4,6 +4,8 @@ class Organ < Compras::Model
   has_enumeration_for :category, :with => OrganCategory, :create_helpers => true
   has_enumeration_for :organ_type, :with => OrganType, :create_helpers => true
 
+  has_many :expenses, foreign_key: 'unity_id'
+
   validates :name, :code, presence: true, uniqueness: true
   validates :category, presence: true
   validates :year, :mask => "9999", :allow_blank => true
@@ -26,7 +28,7 @@ class Organ < Compras::Model
   end
 
   def to_s
-    "#{code}"
+    "#{code} - #{name}"
   end
 
 end

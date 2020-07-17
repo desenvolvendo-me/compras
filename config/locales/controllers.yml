@@ -96,6 +96,7 @@ pt-BR:
     report_supplier_balance_per_service_orders: "Saldo de Fornecedor por Ordem de Serviço"
     report_supply_request_per_secretaries: "Pedido de Fornecimento"
     report_supply_requests: "Relatório de Pedido de Fornecimento"
+    report_expenses: "Despesas"
     resource_sources: "Fonte de Recursos"
     secretary_settings: "Configurações da Secretaria"
     signature_configurations: "Configurações de Assinatura"

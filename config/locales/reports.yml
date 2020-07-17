@@ -109,3 +109,8 @@ pt-BR:
       one: 'Relatório de Contrato por Fonte de Recurso'
       other: 'Relatório de Contrato por Fonte de Recurso'
 
+  expense_reports:
+    expense_report:
+      one: 'Relatório de Despesa'
+      other: 'Relatório de Despesa'
+
