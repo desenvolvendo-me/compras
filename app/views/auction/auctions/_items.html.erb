@@ -13,6 +13,7 @@
           <%= f.input :purchase_solicitation, :as => :modal, 'data-hidden-field-class' => 'unique', :fake => true, :required => true %>
         </div>
         <div class="yui3-u-1-2">
+          <label class="fake" for="benefit_type">Tipo</label>
           <%= select_tag :kind, options_for_select(PurchaseSolicitationKind.to_a),
                          include_blank: true, as: :fake, :required => true,
                          class: 'required kind select', id:'purchase_solicitation_kind'%>
@@ -25,27 +26,31 @@
           <%= f.input :lot, as: :fake, :required => true %>
         </div>
         <div class="yui3-u-1-2">
-          <%= f.input :reference_unit, as: :auto_complete, :fake => true, :required => true %>
+          <%= f.input :reference_unit, as: :fake, disabled: true %>
         </div>
       </div>
 
-      <%= f.input :material_class, as: :auto_complete, :fake => true, :required => true%>
-      <%= f.input :detailed_description, as: :fake, disabled: true, type: 'text'%>
+      <%= f.input :material_class, as: :fake, disabled: true%>
 
+      <%= f.input :detailed_description, as: :fake, disabled: true%>
 
       <div class="yui3-g">
-        <div class="yui3-u-1-2">
-          <%= f.input :value, as: :fake, :required => true %>
+        <div class="yui3-u-1-5">
+          <%= f.input :estimated_value, as: :fake, :required => true %>
         </div>
-        <div class="yui3-u-1-2">
+        <div class="yui3-u-1-5">
           <%= f.input :max_value, as: :fake, :required => true %>
         </div>
+        <div class="yui3-u-3-5">
+          <div class="input fake benefit_type">
+            <label class="fake" for="benefit_type">Tipo de Benefício</label>
+            <%= select_tag :benefit_type, options_for_select(BenefitType.to_a),
+                           include_blank: true, as: :fake, :required => true,
+                           class: 'required society_kind select',
+                           name: "auction[benefit_type]" %>
+          </div>
+        </div>
       </div>
-
-      <%= select_tag :benefit_type, options_for_select(BenefitType.to_a),
-                     include_blank: true, as: :fake, :required => true,
-                     class: 'required society_kind select',
-                     name: "auction[benefit_type]" %>
 
       <div class="yui3-u-1-6">
         <%= button_tag 'Adicionar', type: :button,
@@ -83,7 +88,6 @@
                    material_class: p.object.material.material_class,
                    material_class_id: p.object.material.material_class_id,
                    reference_unit: p.object.reference_unit,
-                   reference_unit_id: p.object.reference_unit_id,
                    quantity: p.object.purchase_solicitation.quantity_by_material(p.object.material_id),
                    estimated_value: p.object.estimated_value,
                    max_value: p.object.max_value,
@@ -107,7 +111,6 @@
                    material_class: "{{material_class}}",
                    material_class_id: "{{material_class_id}}",
                    reference_unit: "{{reference_unit}}",
-                   reference_unit_id: "{{reference_unit_id}}",
                    quantity: "{{quantity}}",
                    estimated_value: "{{estimated_value}}",
                    max_value: "{{max_value}}",
@@ -121,49 +124,3 @@
   </div>
 
 </fieldset>
-
-<script>
-  function setMaterials(){
-
-    var purchase_id = $("#auction_purchase_solicitation_id").val(),
-        purchase_kind = $("#purchase_solicitation_kind").val();
-
-    if(purchase_id && purchase_kind){
-      $.ajax({
-        url: Routes.purchase_solicitations_api_show,
-        data: {purchase_solicitation_id: purchase_id, by_kind: purchase_kind},
-        dataType: 'json',
-        type: 'GET',
-        success: function (data) {
-          var data_mustache = {
-            uuid: _.uniqueId('fresh-')
-          };
-          var auction_id = $("#auction_id").val();
-         $.each(data.items, function( index, el ){
-            data_mustache['code'] =  el.material.code;
-            data_mustache['material'] =  el.material.description;
-            data_mustache['material_id'] =  el.material.id;
-            data_mustache['detailed_description'] =  el.material.detailed_description;
-            data_mustache['material_class'] =  el.material.material_class ? el.material.material_class.description : '';
-            data_mustache['material_class_id'] =  el.material.material_class_id;
-            data_mustache['reference_unit'] =  el.material.reference_unit ? el.material.reference_unit.acronym : '';
-            data_mustache['reference_unit_id'] =  el.material.reference_unit_id;
-            data_mustache['quantity'] =  el.quantity;
-            data_mustache['lot'] =  el.lot;
-            data_mustache['purchase_solicitation_id'] =  el.purchase_solicitation_id;
-            data_mustache['estimated_value'] =  '';
-            data_mustache['max_value'] =  '';
-            data_mustache['auction_id'] =  auction_id;
-
-           $('#items-records tbody')
-             .append($('#auction_items_template').mustache(data_mustache))
-             .find('tr.total_summary').remove();
-         });
-        }
-      });
-    }
-  }
-
-    $("#auction_purchase_solicitation_id").change(setMaterials)
-    $("#purchase_solicitation_kind").change(setMaterials)
-</script>
