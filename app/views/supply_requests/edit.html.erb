@@ -1,7 +1,7 @@
 <h2 id="title">
   <span><%= "PEDIDO DE FORNECIMENTO - NÚMERO: #{resource.number} / CERTAME: #{resource.licitation_process.process}/#{resource.licitation_process.year} " %></span>
   <span class="subtitle"><%= " #{resource.licitation_process.modality_or_type_of_removal_humanized} #{resource.licitation_process.modality_number} / PROCESSO #{resource.licitation_process.process}/#{resource.licitation_process.year}".upcase.tr('ã','Ã')%></span>
-  <span class="subtitle"><%= "DEPARTAMENTO: #{resource.department.secretary}"%></span>
+  <span class="subtitle"><%= "DEPARTAMENTO: #{resource&.department&.secretary}"%></span>
   <span class="subtitle"><%= "SOLICITANTE: #{resource.user} / LOCAL SOLICITANTE: #{resource.department}"%></span>
   <span class="subtitle"><%= "NOME DO PEDIDO: #{resource.order_name} "%></span>
 </h2>

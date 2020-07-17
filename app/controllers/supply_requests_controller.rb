@@ -52,4 +52,14 @@ class SupplyRequestsController < CrudController
     PurchaseSolicitation.where("department_id in (?)", departments).pluck(:id)
   end
 
+  def end_of_association_chain
+    if current_user.administrator
+      apply_scopes(SupplyRequest)
+    else
+      user_ids = UserPurchasingUnit.where(purchasing_unit_id:  current_user.purchasing_units.pluck(:id)).pluck(:user_id).uniq
+      user_ids += [current_user.id]
+      apply_scopes(SupplyRequest.where(user_id: user_ids))
+    end
+  end
+
 end
