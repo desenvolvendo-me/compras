@@ -1,33 +1,169 @@
 <fieldset class="pd-2">
-  <div class="yui3-g">
-    <div class="yui3-u-1-2">
-      <%= f.input :purchase_solicitation, :as => :modal, 'data-hidden-field-class' => 'unique', :fake => true, :required => true %>
-    </div>
-    <div class="yui3-u-1-2">
-      <%= select_tag :kind, options_for_select(PurchaseSolicitationKind.to_a),
-                     include_blank: true, as: :fake, :required => true,
-                     class: 'required kind select'%>
-    </div>
-  </div>
 
-  <%= f.input :material, as: :auto_complete, 'data-hidden-field-class' => 'unique', :fake => true, :required => true %>
-  <div class="yui3-g">
-    <div class="yui3-u-1-2">
-      <%= f.input :lot, faker: true, :required => true %>
+  <div id="auction_items">
+
+    <div class="nested-fields add-margin-bottom">
+      <%= hidden_field_tag :item_id, nil, :name => 'auction_item[id]' %>
+      <%= hidden_field_tag :code, nil, :name => 'auction_item[code]' %>
+      <%= hidden_field_tag :quantity, nil, :name => 'auction_item[quantity]' %>
+
+
+      <div class="yui3-g">
+        <div class="yui3-u-1-2">
+          <%= f.input :purchase_solicitation, :as => :modal, 'data-hidden-field-class' => 'unique', :fake => true, :required => true %>
+        </div>
+        <div class="yui3-u-1-2">
+          <%= select_tag :kind, options_for_select(PurchaseSolicitationKind.to_a),
+                         include_blank: true, as: :fake, :required => true,
+                         class: 'required kind select', id:'purchase_solicitation_kind'%>
+        </div>
+      </div>
+
+      <%= f.input :material, as: :auto_complete, 'data-hidden-field-class' => 'unique', :fake => true, :required => true %>
+      <div class="yui3-g">
+        <div class="yui3-u-1-2">
+          <%= f.input :lot, as: :fake, :required => true %>
+        </div>
+        <div class="yui3-u-1-2">
+          <%= f.input :reference_unit, as: :auto_complete, :fake => true, :required => true %>
+        </div>
+      </div>
+
+      <%= f.input :material_class, as: :auto_complete, :fake => true, :required => true%>
+      <%= f.input :detailed_description, as: :fake, disabled: true, type: 'text'%>
+
+
+      <div class="yui3-g">
+        <div class="yui3-u-1-2">
+          <%= f.input :value, as: :fake, :required => true %>
+        </div>
+        <div class="yui3-u-1-2">
+          <%= f.input :max_value, as: :fake, :required => true %>
+        </div>
+      </div>
+
+      <%= select_tag :benefit_type, options_for_select(BenefitType.to_a),
+                     include_blank: true, as: :fake, :required => true,
+                     class: 'required society_kind select',
+                     name: "auction[benefit_type]" %>
+
+      <div class="yui3-u-1-6">
+        <%= button_tag 'Adicionar', type: :button,
+                       :class => 'button add-nested-record field-without-label',
+                       'data-template' => 'auction_items_template',
+                       'data-records' => 'items-records',
+                       'data-disabled' => not_updateable_message %>
+      </div>
     </div>
-    <div class="yui3-u-1-2">
-      <%= f.input :material, :fake => true, :required => true %>
-    </div>
-  </div>
-  <%= f.input :material_class, faker: true, disabled: true%>
-  <%= f.input :description, faker: true, disabled: true%>
-  <div class="yui3-g">
-    <div class="yui3-u-1-2">
-      <%= f.input :value, faker: true, :required => true %>
-    </div>
-    <div class="yui3-u-1-2">
-      <%= f.input :max_value, :fake => true, :required => true %>
-    </div>
+
+    <%= f.error :items %>
+
+    <table id="items-records" class="records">
+      <thead>
+      <tr>
+        <th><%= "Número" %></th>
+        <th><%= "Item" %></th>
+        <th><%= "Unidade" %></th>
+        <th><%= "Qunatidade" %></th>
+        <th><%= "Valor" %></th>
+        <th><%= "Valor Máximo" %></th>
+        <th><%= "Grupo" %></th>
+        <th></th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <%= f.association :items, :collection => localized(f.object.items) do |p| %>
+        <%= render 'auction/auction_items/form',
+                   id: p.object.id,
+                   code: p.object.material.code,
+                   material: p.object.material,
+                   material_id: p.object.material_id,
+                   detailed_description: p.object.material.detailed_description,
+                   material_class: p.object.material.material_class,
+                   material_class_id: p.object.material.material_class_id,
+                   reference_unit: p.object.reference_unit,
+                   reference_unit_id: p.object.reference_unit_id,
+                   quantity: p.object.purchase_solicitation.quantity_by_material(p.object.material_id),
+                   estimated_value: p.object.estimated_value,
+                   max_value: p.object.max_value,
+                   benefit_type: p.object.benefit_type,
+                   lot: p.object.lot,
+                   purchase_solicitation_id: p.object.purchase_solicitation_id,
+                   auction_id: p.object.auction_id,
+                   f: p %>
+      <% end %>
+      </tbody>
+    </table>
+
+    <%= mustache "auction_items_template" do %>
+      <%= f.association :items_attributes, :collection => f.object.items.build, :index => '{{uuid}}' do |p| %>
+        <%= render 'auction/auction_items/form',
+                   id: "{{id}}",
+                   code: "{{code}}",
+                   material: "{{material}}",
+                   material_id: "{{material_id}}",
+                   detailed_description: "{{detailed_description}}",
+                   material_class: "{{material_class}}",
+                   material_class_id: "{{material_class_id}}",
+                   reference_unit: "{{reference_unit}}",
+                   reference_unit_id: "{{reference_unit_id}}",
+                   quantity: "{{quantity}}",
+                   estimated_value: "{{estimated_value}}",
+                   max_value: "{{max_value}}",
+                   benefit_type: "{{benefit_type}}",
+                   lot: '{{lot}}',
+                   purchase_solicitation_id: "{{purchase_solicitation_id}}",
+                   auction_id: "{{auction_id}}",
+                   f: p %>
+      <% end %>
+    <% end %>
   </div>
 
 </fieldset>
+
+<script>
+  function setMaterials(){
+
+    var purchase_id = $("#auction_purchase_solicitation_id").val(),
+        purchase_kind = $("#purchase_solicitation_kind").val();
+
+    if(purchase_id && purchase_kind){
+      $.ajax({
+        url: Routes.purchase_solicitations_api_show,
+        data: {purchase_solicitation_id: purchase_id, by_kind: purchase_kind},
+        dataType: 'json',
+        type: 'GET',
+        success: function (data) {
+          var data_mustache = {
+            uuid: _.uniqueId('fresh-')
+          };
+          var auction_id = $("#auction_id").val();
+         $.each(data.items, function( index, el ){
+            data_mustache['code'] =  el.material.code;
+            data_mustache['material'] =  el.material.description;
+            data_mustache['material_id'] =  el.material.id;
+            data_mustache['detailed_description'] =  el.material.detailed_description;
+            data_mustache['material_class'] =  el.material.material_class ? el.material.material_class.description : '';
+            data_mustache['material_class_id'] =  el.material.material_class_id;
+            data_mustache['reference_unit'] =  el.material.reference_unit ? el.material.reference_unit.acronym : '';
+            data_mustache['reference_unit_id'] =  el.material.reference_unit_id;
+            data_mustache['quantity'] =  el.quantity;
+            data_mustache['lot'] =  el.lot;
+            data_mustache['purchase_solicitation_id'] =  el.purchase_solicitation_id;
+            data_mustache['estimated_value'] =  '';
+            data_mustache['max_value'] =  '';
+            data_mustache['auction_id'] =  auction_id;
+
+           $('#items-records tbody')
+             .append($('#auction_items_template').mustache(data_mustache))
+             .find('tr.total_summary').remove();
+         });
+        }
+      });
+    }
+  }
+
+    $("#auction_purchase_solicitation_id").change(setMaterials)
+    $("#purchase_solicitation_kind").change(setMaterials)
+</script>
