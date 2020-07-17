@@ -20,8 +20,13 @@
         </div>
       </div>
 
-      <%= f.input :material, as: :auto_complete, 'data-hidden-field-class' => 'unique', :fake => true, :required => true %>
       <div class="yui3-g">
+        <div class="yui3-u-1">
+          <%= f.input :material, as: :auto_complete, 'data-hidden-field-class' => 'unique', :fake => true, :required => true %>
+        </div>
+      </div>
+
+      <div class="yui3-g" style="margin-top: 16px">
         <div class="yui3-u-1-2">
           <%= f.input :lot, as: :fake, :required => true %>
         </div>
