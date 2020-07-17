@@ -55,7 +55,7 @@ Material.blueprint(:manutencao) do
   description { "Manutenção de Computadores" }
   detailed_description { "Manutenção de Computadores" }
   reference_unit { ::FactoryGirl::Preload.factories['ReferenceUnit'][:unidade] }
-  material_type { MaterialType::SERVICE }
+  # material_type { MaterialType::SERVICE }
   # expense_nature_id { 1 }
   material_classification {MaterialClassification::CONSUMPTION}
 end
