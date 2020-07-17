@@ -15,9 +15,12 @@
     },
 
     setup: function () {
-      debugger
       this.$purchase_id   = this.$("input[id$='purchase_solicitation_id']");
       this.$purchase_kind = this.$("select[id$='purchase_solicitation_kind']");
+      this.$material_id = this.$(".auction_material");
+
+      this.$material_id
+        .append("<a id='add_new_material' style='float:right' target='_blank' href='"+Routes.new_material+"'>Cadastrar Material</a>");
     },
 
     setMaterials: function () {
@@ -53,8 +56,7 @@
             });
           }
         });
-      }
-      },
+      }},
 
   })
 })();
