@@ -56,9 +56,9 @@ class SupplyRequestsController < CrudController
     if current_user.administrator
       apply_scopes(SupplyRequest)
     else
-      user_ids = UserPurchasingUnit.where(purchasing_unit_id:  current_user.purchasing_units.pluck(:id)).pluck(:user_id).uniq
-      user_ids += [current_user.id]
-      apply_scopes(SupplyRequest.where(user_id: user_ids))
+      id  = current_user.id
+      ids = current_user.purchasing_unit_ids
+      apply_scopes(SupplyRequest.joins(:department).where("user_id = ? OR compras_departments.purchasing_unit_id in (?)", id, ids))
     end
   end
 
