@@ -2,7 +2,10 @@
 
 ## Ver a página
 
+### Gerar uma imagem
 - page.save_screenshot 'screenshot.png'
+### Gerar um html
+- page.save_page
 
 # Problemas
 

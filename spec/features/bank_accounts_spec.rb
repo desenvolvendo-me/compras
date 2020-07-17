@@ -64,7 +64,6 @@ feature "BankAccounts" do
     click_link '1111114'
 
     within_tab 'Principal' do
-      expect(page).to have_select 'Status', :selected => 'Inativo'
       expect(page).to have_select 'Tipo', :selected => 'Movimento'
       expect(page).to have_field 'Descrição', :with => 'IPTU'
       expect(page).to have_field 'Número da conta corrente', :with => '1111114'
@@ -141,10 +140,6 @@ feature "BankAccounts" do
     end
 
     click_button 'Salvar'
-
-    within_tab 'Principal' do
-      expect(page).to have_field 'Banco', :with => 'Itaú'
-    end
   end
 
   scenario 'index with columns at the index' do

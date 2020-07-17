@@ -25,6 +25,9 @@ FactoryGirl.preload do
   factory(:itau)      { create :bank }
   factory(:santander) { create :bank, name: 'Santander', code: 33, acronym: 'ST' }
 
+  factory(:itau)      { create(:agency, bank: banks(:itau)) }
+  factory(:santander) { create(:agency, digit:'5', email: 'agency_email@santander.com.br', fax:'(11) 9090-7070', name: 'Agência Santander', number: '10099', phone: '(11) 7070-7070', bank: banks(:santander)) }
+
   factory(:tambuata)          { create :condominium }
   factory(:parque_das_flores) { create :condominium, name: 'Parque das Flores', condominium_type: CondominiumType::HORIZONTAL }
 
