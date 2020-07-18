@@ -2,7 +2,6 @@ class CreateTableAuctionItens < ActiveRecord::Migration
   def change
     create_table :compras_auction_items do |t|
       t.integer :auction_id
-      t.integer :purchase_solicitation_item_id
       t.integer :material_id
       t.integer :reference_unit_id
       t.integer :lot
@@ -12,17 +11,13 @@ class CreateTableAuctionItens < ActiveRecord::Migration
     end
 
     add_index :compras_auction_items, :auction_id
-    add_index :compras_auction_items, :purchase_solicitation_item_id
     add_index :compras_auction_items, :material_id
     add_index :compras_auction_items, :reference_unit_id
 
     add_foreign_key :compras_auction_items, :compras_auctions,
                     column: :auction_id, name: :auction_items_auction_id_fk
 
-    add_foreign_key :compras_auction_items, :compras_purchase_solicitations,
-                    column: :purchase_solicitation_item_id, name: :auction_items_purchase_solicitation_item_id_fk
-
-    add_foreign_key :compras_auction_items, :compras_materials,
+    add_foreign_key :compras_auction_items, :unico_materials,
                     column: :material_id, name: :auction_items_material_id_fk
 
     add_foreign_key :compras_auction_items, :compras_reference_units,
