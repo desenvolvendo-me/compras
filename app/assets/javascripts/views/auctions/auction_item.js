@@ -49,6 +49,8 @@
               data_mustache['estimated_value'] =  '';
               data_mustache['max_value'] =  '';
               data_mustache['auction_id'] =  auction_id;
+              data_mustache['id'] =  '';
+              data_mustache['benefit_type'] =  '';
 
               $('#items-records tbody')
                 .append($('#auction_items_template').mustache(data_mustache))
