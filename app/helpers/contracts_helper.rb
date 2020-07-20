@@ -42,8 +42,6 @@ module ContractsHelper
 
       result&.last&.unit_price || 0
     end
-
-
   end
 
   def qtd_requested p_solicitation_id, material, licitation_process
