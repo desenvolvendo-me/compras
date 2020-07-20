@@ -25,4 +25,11 @@ pt-BR:
         material_class: "Classe do Material"
         detailed_description: "Descrição Detalhada"
         estimated_value: "Valor Estimado"
-        max_value: "Valor Máximo"
+        max_value: "Valor Máximo Aceitável"
+        purchase_type: "Forma de COmpra"
+        group_form: "Grupo"
+        quantity: "Quantidade de Itens"
+        total_value: "Valor total Grupo"
+
+
+
