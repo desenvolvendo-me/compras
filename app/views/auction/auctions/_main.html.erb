@@ -1,4 +1,5 @@
 <fieldset class="pd-2">
+  <%= f.input :id, as: :hidden %>
   <%= f.input :auction_type, :as => :radio_buttons, :collection => AuctionType.to_a, label_html:{class:'auction_type'} %>
   <div class="yui3-g">
     <div class="yui3-u-1-3">

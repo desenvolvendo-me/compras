@@ -46,7 +46,6 @@
               data_mustache['reference_unit'] =  el.material.reference_unit ? el.material.reference_unit.acronym : '';
               data_mustache['quantity'] =  el.quantity;
               data_mustache['lot'] =  el.lot;
-              data_mustache['purchase_solicitation_id'] =  el.purchase_solicitation_id;
               data_mustache['estimated_value'] =  '';
               data_mustache['max_value'] =  '';
               data_mustache['auction_id'] =  auction_id;
@@ -54,7 +53,7 @@
               data_mustache['benefit_type'] =  '';
               data_mustache['group_lot'] =  '';
 
-              $('#items-records tbody')
+              $('#auction_items #items-records tbody')
                 .append($('#auction_items_template').mustache(data_mustache))
                 .find('tr.total_summary').remove();
             });

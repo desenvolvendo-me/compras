@@ -60,7 +60,7 @@
           <%= button_tag 'Adicionar', type: :button,
                          :class => 'button add-nested-record field-without-label',
                          'data-template' => 'auction_group_items_template',
-                         'data-records' => 'items-records',
+                         'data-records' => 'group-items-records',
                          'data-disabled' => not_updateable_message %>
         </div>
       </div>
@@ -70,7 +70,7 @@
 
     <%= f.error :items %>
 
-    <table id="items-records" class="records">
+    <table id="group-items-records" class="records">
       <thead>
       <tr>
         <th><%= "Número" %></th>
@@ -122,3 +122,43 @@
   </div>
 
 </fieldset>
+
+<script>
+  $("#purchase_type").change(function(){
+    var purchase_type = $(this).children("option:selected").val(),
+        url = '';
+    if(purchase_type === 'group') url = Routes.auction_group_lot_items;
+    if(purchase_type === 'item') url = Routes.auction_items;
+
+    if(url){
+      $.ajax({
+        url: url,
+        dataType: 'json',
+        type: 'GET',
+        success: function (data) {
+          var data_mustache = {
+            uuid: _.uniqueId('fresh-')
+          };
+          var auction_id = $("#auction_id").val();
+
+          $.each(data, function( index, el ){
+            data_mustache['quantity'] =   el.quantity ? el.quantity : '1';
+            data_mustache['auction_id'] =  auction_id;
+            data_mustache['group'] =  el.group_lot;
+            data_mustache['estimated_value'] =  '';
+            data_mustache['max_value'] =  '';
+            data_mustache['id'] =  '';
+            data_mustache['benefit_type'] =  '';
+            data_mustache['group_lot'] =  '';
+            data_mustache['judment_form_text'] =  '';
+
+            $('#auction_group_items #items-records tbody')
+              .append($('#auction_group_items_template').mustache(data_mustache))
+              .find('tr.total_summary').remove();
+          });
+
+        }
+      });
+    }
+  })
+</script>
