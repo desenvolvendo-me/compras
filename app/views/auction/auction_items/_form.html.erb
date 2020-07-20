@@ -18,6 +18,7 @@
     <%= f.input :max_value, as: :hidden, input_html: { value: max_value } %>
     <%= f.input :benefit_type, as: :hidden, input_html: { value: benefit_type } %>
     <%= f.input :lot, as: :hidden, input_html: { value: lot } %>
+    <%= f.input :quantity, as: :hidden, input_html: { value: lot } %>
     <%= f.input :id, as: :hidden, input_html: { value: id } %>
     <%= f.input :_destroy, as: :hidden, input_html: { class: 'destroy' } %>
 
@@ -25,7 +26,6 @@
     <input class="string fake optional" id="auction_items_attributes_detailed_description" name="auction_items_attributes[detailed_description]" type="hidden" value="<%= detailed_description %>">
     <input class="string fake optional" id="auction_items_attributes_reference_unit_id" name="auction_items_attributes[reference_unit]" type="hidden" value="<%= reference_unit %>">
     <input class="string fake optional" id="auction_items_attributes_material_class_id" name="auction_items_attributes[material_class]" type="hidden" value="<%= material_class %>">
-    <input class="string fake optional" id="auction_items_attributes_material_class_id" name="auction_items_attributes[quantity]" type="hidden" value="<%= quantity %>">
     <input class="string fake optional" id="auction_items_attributes_material_class_id" name="auction_items_attributes[code]" type="hidden" value="<%= code %>">
 
     <%= link_to 'Remover', '#', class: 'remove-nested-record' %>

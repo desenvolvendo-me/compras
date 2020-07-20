@@ -74,7 +74,7 @@
         <th><%= "Número" %></th>
         <th><%= "Item" %></th>
         <th><%= "Unidade" %></th>
-        <th><%= "Qunatidade" %></th>
+        <th><%= "Quantidade" %></th>
         <th><%= "Valor" %></th>
         <th><%= "Valor Máximo" %></th>
         <th><%= "Grupo" %></th>
@@ -90,9 +90,9 @@
                    material: p.object.material,
                    material_id: p.object.material_id,
                    detailed_description: p.object.material.detailed_description,
-                   material_class: p.object.material.material_class,
-                   material_class_id: p.object.material.material_class_id,
-                   reference_unit: p.object.reference_unit,
+                   material_class: p.object&.material_class,
+                   material_class_id: p.object&.material_class&.id,
+                   reference_unit: p.object&.reference_unit&.acronym,
                    quantity: p.object.quantity,
                    estimated_value: p.object.estimated_value,
                    max_value: p.object.max_value,
