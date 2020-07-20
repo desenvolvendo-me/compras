@@ -3,9 +3,8 @@ class CreateTableAuctionItens < ActiveRecord::Migration
     create_table :compras_auction_items do |t|
       t.integer :auction_id
       t.integer :material_id
-      t.integer :reference_unit_id
-      t.integer :lot
-      t.integer :quantity
+      t.string  :group_lot
+      t.decimal :quantity
       t.decimal :estimated_value, precision: 16, scale: 2
       t.decimal :max_value, precision: 16, scale: 2
       t.string  :benefit_type

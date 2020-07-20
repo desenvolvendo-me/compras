@@ -1,5 +1,5 @@
 class AuctionItem < Compras::Model
-  attr_accessible :material_id, :reference_unit_id, :description, :lot, :quantity,
+  attr_accessible :material_id, :reference_unit_id, :description, :group_lot, :quantity,
                   :detailed_description, :estimated_value, :max_value , :benefit_type, :auction_id
 
   belongs_to :auction

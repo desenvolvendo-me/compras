@@ -5,7 +5,7 @@
   <td><%= quantity %></td>
   <td><%= estimated_value %></td>
   <td><%= max_value %></td>
-  <td><%= '' %></td>
+  <td><%= group_lot %></td>
   <td>
     <%= link_to 'Editar', '#', class: 'edit-nested-record' %>
   </td>
@@ -17,8 +17,8 @@
     <%= f.input :estimated_value, as: :hidden, input_html: { value: estimated_value } %>
     <%= f.input :max_value, as: :hidden, input_html: { value: max_value } %>
     <%= f.input :benefit_type, as: :hidden, input_html: { value: benefit_type } %>
-    <%= f.input :lot, as: :hidden, input_html: { value: lot } %>
-    <%= f.input :quantity, as: :hidden, input_html: { value: lot } %>
+    <%= f.input :group_lot, as: :hidden, input_html: { value: group_lot } %>
+    <%= f.input :quantity, as: :hidden, input_html: { value: quantity } %>
     <%= f.input :id, as: :hidden, input_html: { value: id } %>
     <%= f.input :_destroy, as: :hidden, input_html: { class: 'destroy' } %>
 

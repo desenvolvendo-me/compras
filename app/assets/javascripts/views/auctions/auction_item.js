@@ -52,6 +52,7 @@
               data_mustache['auction_id'] =  auction_id;
               data_mustache['id'] =  '';
               data_mustache['benefit_type'] =  '';
+              data_mustache['group_lot'] =  '';
 
               $('#items-records tbody')
                 .append($('#auction_items_template').mustache(data_mustache))
