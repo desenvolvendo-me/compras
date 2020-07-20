@@ -1,10 +1,12 @@
 class AuctionItem < Compras::Model
-  attr_accessible :material_id, :reference_unit_id, :description, :lot,
+  attr_accessible :material_id, :reference_unit_id, :description, :lot, :quantity,
                   :detailed_description, :estimated_value, :max_value , :benefit_type, :auction_id
 
   belongs_to :auction
   belongs_to :material
-  belongs_to :reference_unit
+
+  has_one :reference_unit, through: :material
+  has_one :material_class, through: :material
 
   has_enumeration_for :benefit_type, :with => BenefitType
 
