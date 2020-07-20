@@ -598,6 +598,7 @@ Compras::Application.routes.draw do
       get :modal
     end
   end
+  match 'api/materials/show' => 'materials#api_show', as: :material_api_show
 
   resources :material_classes do
     collection do
