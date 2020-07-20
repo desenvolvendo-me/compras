@@ -10,7 +10,7 @@
 
       <div class="yui3-g">
         <div class="yui3-u-1-2">
-          <%= f.input :purchase_solicitation, :as => :modal, 'data-hidden-field-class' => 'unique', :fake => true, :required => true %>
+          <%= f.input :purchase_solicitation, :as => :modal, 'data-hidden-field-class' => 'unique', :fake => true %>
         </div>
         <div class="yui3-u-1-2">
           <label class="fake" for="benefit_type">Tipo</label>
@@ -93,7 +93,7 @@
                    material_class: p.object.material.material_class,
                    material_class_id: p.object.material.material_class_id,
                    reference_unit: p.object.reference_unit,
-                   quantity: p.object.purchase_solicitation.quantity_by_material(p.object.material_id),
+                   quantity: p.object.quantity,
                    estimated_value: p.object.estimated_value,
                    max_value: p.object.max_value,
                    benefit_type: p.object.benefit_type,
@@ -127,3 +127,7 @@
   </div>
 
 </fieldset>
+
+<script>
+  // #fazer javascript para se mudar o material trazer classe e unidade de fornecimento
+</script>

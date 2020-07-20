@@ -5,6 +5,7 @@ class CreateTableAuctionItens < ActiveRecord::Migration
       t.integer :material_id
       t.integer :reference_unit_id
       t.integer :lot
+      t.integer :quantity
       t.decimal :estimated_value, precision: 16, scale: 2
       t.decimal :max_value, precision: 16, scale: 2
       t.string  :benefit_type
