@@ -92,7 +92,7 @@
                    max_value: p.object.max_value,
                    benefit_type: p.object.benefit_type,
                    judment_form: p.object.judment_form,
-                   judment_form_text: p.object.judment_form,
+                   judment_form_text: p.object.judment_form_humanize,
                    purchase_type: p.object.purchase_type,
                    quantity: p.object.quantity,
                    group_form: p.object.group_form,
@@ -145,14 +145,15 @@
             data_mustache['quantity'] =   el.quantity ? el.quantity : '1';
             data_mustache['auction_id'] =  auction_id;
             data_mustache['group'] =  el.group_lot;
-            data_mustache['estimated_value'] =  '';
+            data_mustache['purchase_type'] =  purchase_type;
+            data_mustache['total_value'] =  '';
             data_mustache['max_value'] =  '';
             data_mustache['id'] =  '';
             data_mustache['benefit_type'] =  '';
             data_mustache['group_lot'] =  '';
             data_mustache['judment_form_text'] =  '';
 
-            $('#auction_group_items #items-records tbody')
+            $('#group-items-records tbody')
               .append($('#auction_group_items_template').mustache(data_mustache))
               .find('tr.total_summary').remove();
           });
