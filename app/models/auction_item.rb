@@ -12,4 +12,8 @@ class AuctionItem < Compras::Model
 
   orderize :id
   filterize
+
+  scope :by_group_lot, lambda{
+    select('COUNT(*) as quantity, group_lot').group(:group_lot)
+  }
 end
