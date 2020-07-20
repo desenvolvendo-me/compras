@@ -4,7 +4,7 @@
 <div class="dots text-center">
   <span class="step"></span>
   <span class="step"></span>
-  <!--  <span class="step"></span>-->
+  <span class="step"></span>
   <!--  <span class="step"></span>-->
 </div>
 
@@ -15,6 +15,10 @@
 
   <div class="tab justify-center" style="width: 79.5rem">
     <%= render 'items', f: f %>
+  </div>
+
+  <div class="tab justify-center" style="width: 79.5rem">
+    <%= render 'group_items', f: f %>
   </div>
     <div>
       <button type="button" id="prevBtn" class="button primary" onclick="nextPrev(-1)">Voltar</button>
