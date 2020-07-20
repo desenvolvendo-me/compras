@@ -1,0 +1,6 @@
+pt-BR:
+  enumerations:
+    auction_purchase_type:
+      item: "Item"
+      group: "Grupo"
+
