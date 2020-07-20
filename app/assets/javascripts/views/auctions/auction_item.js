@@ -5,7 +5,7 @@
     events: {
       "change input[id$='purchase_solicitation_id']"  : "setMaterials",
       "change select[id$='purchase_solicitation_kind']" : "setMaterials",
-
+      "change input[id$='auction_material_id']"  : "setUnidadeAndClass",
     },
 
     initialize: function () {
@@ -17,9 +17,10 @@
     setup: function () {
       this.$purchase_id   = this.$("input[id$='purchase_solicitation_id']");
       this.$purchase_kind = this.$("select[id$='purchase_solicitation_kind']");
-      this.$material_id = this.$(".auction_material");
+      this.$material = this.$(".auction_material");
+      this.$material_id = this.$("#auction_material_id");
 
-      this.$material_id
+      this.$material
         .append("<a id='add_new_material' style='float:right' target='_blank' href='"+Routes.new_material+"'>Cadastrar Material</a>");
     },
 
@@ -59,6 +60,25 @@
           }
         });
       }},
+
+    setUnidadeAndClass: function(){
+      var material_id = this.$material_id.val();
+      if (material_id) {
+        $.ajax({
+          url: Routes.material_api_show,
+          data: {id: material_id},
+          dataType: 'json',
+          type: 'GET',
+          success: function (data) {
+            var reference_unit = data.reference_unit ? data.reference_unit.acronym : '',
+              material_class = data.material_class ? data.material_class.description : '';
+
+            $('#auction_reference_unit').val(reference_unit);
+            $('#auction_material_class').val(material_class);
+          }
+        });
+      }
+    }
 
   })
 })();
