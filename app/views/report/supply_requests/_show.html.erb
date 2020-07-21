@@ -71,8 +71,8 @@
     <% resource.supply_request.items.each do |item| %>
       <tr>
         <td><%= item.material %></td>
-        <td class="text-center"><%= item.quantity %></td>
         <td class="text-center"><%= item.requested_quantity %></td>
+        <td class="text-center"><%= item.quantity %></td>
       </tr>
     <% end %>
     </tbody>
