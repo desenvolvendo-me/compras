@@ -1,14 +1,14 @@
 <tr class="record nested-record item-record" id="material-id-<%= material_id %>">
   <% if @hidden_field %>
-    <td><%= check_box_tag("balance_contract", "t", balance_contract) %></td>
+    <td class="text-center"><%= check_box_tag("balance_contract", "t", balance_contract) %></td>
   <% end %>
   <td><%= material %></td>
-  <td id="answer-requested_quantity"><%= requested_quantity %></td>
-  <td id="answer-quantity"><%= quantity %></td>
+  <td id="answer-requested_quantity" class="text-center"><%= requested_quantity %></td>
+  <td id="answer-quantity" class="text-center"><%= quantity %></td>
   <% if @hidden_field %>
-    <td><%= unit_value %></td>
+    <td class="text-center"><%= unit_value %></td>
   <% end %>
-    <td><%= total_value %></td>
+    <td class="text-center"><%= total_value %></td>
   <td>
     <%= link_to 'Editar', '#', class: 'edit-nested-record' %>
   </td>

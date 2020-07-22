@@ -102,14 +102,10 @@
       <% sum_total_value += p.object.get_unit_price.to_f * p.object.quantity.to_f%>
     <% end %>
     <tr class="total_summary">
-      <td>TOTAL</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td style="font-weight: bolder"><%= number_with_precision sum_total_value.round(2) %></td>
-      <td></td>
-      <td></td>
+      <td class="text-center"><b>TOTAL</b></td>
+      <td colspan="4"></td>
+      <td class="text-center text-bold"><%= number_with_precision sum_total_value.round(2) %></td>
+      <td colspan="2"></td>
     </tr>
     </tbody>
   </table>

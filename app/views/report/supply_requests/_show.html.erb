@@ -63,7 +63,8 @@
     <thead>
     <tr>
       <th class="text-center">ITEM(NS)</th>
-      <th class="text-center">QUANTIDADE</th>
+      <th class="text-center">QUANTIDADE SOLICITADA</th>
+      <th class="text-center">QUANTIDADE ATENDIDA</th>
     </tr>
     </thead>
     <tbody>
@@ -71,6 +72,7 @@
       <tr>
         <td><%= item.material %></td>
         <td class="text-center"><%= item.requested_quantity %></td>
+        <td class="text-center"><%= item.quantity %></td>
       </tr>
     <% end %>
     </tbody>

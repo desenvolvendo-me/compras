@@ -6,6 +6,10 @@
     text-align: right;
 }
 
+.text-bold{
+    font-weight: bolder;
+}
+
 .float-right{
     float: right;
 }

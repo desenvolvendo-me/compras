@@ -1,7 +1,7 @@
 <div class="buttons">
 
   <% if @hidden_field %>
-    <% if f.object.persisted? && can?(:destroy, main_controller_name) && !f.object.updatabled %>
+    <% if can_destroy?(f.object) %>
       <%= f.button :destroy, style: 'float:none;' %>
     <% else %>
       <%= f.button :destroy, style: 'float:none;', 'data-disabled' => "Desabilitado" %>
