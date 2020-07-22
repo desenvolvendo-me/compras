@@ -1,5 +1,5 @@
 builder resource, json do
   json.signature_date resource.signature_date
-  json.creditor resource.creditors.blank? || resource.creditors.first.person.nil? ? '' : resource.creditors.first.person.name
-  json.creditor_id resource.creditors.blank? || resource.creditors.first.person.nil? ? '' : resource.creditors.first.id
+  json.creditor resource.creditor.blank? || resource.creditor.person.nil? ? '' : resource.creditor.person.name
+  json.creditor_id resource.creditor.blank? || resource.creditor.person.nil? ? '' : resource.creditor.id
 end

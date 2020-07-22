@@ -45,14 +45,16 @@
   </span>
 </label>
 <%= f.input :content, label: false %>
+
 <div class="yui3-g">
   <div class='yui3-u-1-2'>
     <%= f.input :licitation_process %>
   </div>
   <div class='yui3-u-1-2'>
-    <%= f.input :creditor, as: :auto_complete, data_source: creditors_path, hidden_field:"creditor_ids" %>
+    <%= f.input :creditor, as: :auto_complete, data_source: creditors_path %>
   </div>
 </div>
+
 <div class="yui3-g">
   <div class='yui3-u-1-2'>
     <%= f.input :contract_type %>
@@ -177,11 +179,6 @@
     $.getJSON('<%= next_sequential_contracts_path %>?year=' + $('#contract_year').val() + '&entity_id=' + $('#contract_entity_id').val(), function (data) {
       $('#contract_sequential_number').val(data.sequential);
     });
-  });
-
-  $(function(){
-    var name = $("#contract_creditor_ids").attr('name');
-    $("#contract_creditor_ids").attr('name', name+'[]').val('')
   });
 
 </script>
