@@ -1,0 +1,29 @@
+<tr class="record nested-record item-record" id="group-item-id-<%= id %>">
+  <td><%=  %></td>
+  <td><%= group %></td>
+  <td><%= quantity %></td>
+  <td><%= total_value %></td>
+  <td><%= max_value %></td>
+  <td><%= judment_form_text %></td>
+  <td>
+    <%= link_to 'Editar', '#', class: 'edit-nested-record' %>
+  </td>
+
+  <td>
+    <%= f.input :auction_id, as: :hidden, input_html: { value: auction_id } %>
+    <%= f.input :total_value, as: :hidden, input_html: { value: total_value } %>
+    <%= f.input :max_value, as: :hidden, input_html: { value: max_value } %>
+    <%= f.input :benefit_type, as: :hidden, input_html: { value: benefit_type } %>
+    <%= f.input :judment_form, as: :hidden, input_html: { value: judment_form } %>
+    <%= f.input :purchase_type, as: :hidden, input_html: { value: purchase_type } %>
+    <%= f.input :quantity, as: :hidden, input_html: { value: quantity } %>
+    <%= f.input :group, as: :hidden, input_html: { value: group } %>
+    <%= f.input :group_form, as: :hidden, input_html: { value: group_form } %>
+    <%= f.input :id, as: :hidden, input_html: { value: id } %>
+    <%= f.input :_destroy, as: :hidden, input_html: { class: 'destroy' } %>
+
+
+    <%= link_to 'Remover', '#', class: 'remove-nested-record' %>
+  </td>
+</tr>
+

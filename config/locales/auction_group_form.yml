@@ -1,0 +1,6 @@
+pt-BR:
+  enumerations:
+    auction_group_form:
+      maximum_value_acceptable: "Valor Máximo Aceitável"
+      estimated_value_group: "Valor Estimado Grupo"
+

@@ -1,0 +1,7 @@
+pt-BR:
+  enumerations:
+    benefit_type:
+      exclusive: "Tipo I - Exclusivo ME-EPP-Cooperativa"
+      subcontracting_requeriment: "Tipo II- Exigência de Subcontratação ME-EPP-Cooperativa"
+      quote_exclusive_participation: "Tipo III- Cota para Participação Exclusiva ME-EPP-Cooperativa"
+      no_benefit: "sem Benefício"

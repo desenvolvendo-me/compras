@@ -598,6 +598,7 @@ Compras::Application.routes.draw do
       get :modal
     end
   end
+  match 'api/materials/show' => 'materials#api_show', as: :material_api_show
 
   resources :material_classes do
     collection do
@@ -992,6 +993,8 @@ Compras::Application.routes.draw do
       end
       get 'modal_info', on: :member
     end
+
+
     resources :employees do
       collection do
         get :filter
@@ -1006,7 +1009,8 @@ Compras::Application.routes.draw do
     end
 
     resources :auctions
-
+    resources :auction_items, only:[:index]
+    get '/auction_items/group_lot' => 'auction_items#group_lot', as: :group_lot_items
 
     resources :management_objects do
       collection do

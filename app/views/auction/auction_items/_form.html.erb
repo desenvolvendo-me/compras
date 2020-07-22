@@ -1,0 +1,34 @@
+<tr class="record nested-record item-record" id="material-id-<%= material_id %>">
+  <td><%= code %></td>
+  <td><%= material %></td>
+  <td><%= reference_unit %></td>
+  <td><%= quantity %></td>
+  <td><%= estimated_value %></td>
+  <td><%= max_value %></td>
+  <td><%= group_lot %></td>
+  <td>
+    <%= link_to 'Editar', '#', class: 'edit-nested-record' %>
+  </td>
+
+  <td>
+    <%= f.input :auction_id, as: :hidden, input_html: { value: auction_id } %>
+    <%= f.input :material_id, as: :hidden, input_html: { value: material_id } %>
+    <%= f.input :material, as: :hidden, input_html: { value: material } %>
+    <%= f.input :estimated_value, as: :hidden, input_html: { value: estimated_value } %>
+    <%= f.input :max_value, as: :hidden, input_html: { value: max_value } %>
+    <%= f.input :benefit_type, as: :hidden, input_html: { value: benefit_type } %>
+    <%= f.input :group_lot, as: :hidden, input_html: { value: group_lot } %>
+    <%= f.input :quantity, as: :hidden, input_html: { value: quantity } %>
+    <%= f.input :id, as: :hidden, input_html: { value: id } %>
+    <%= f.input :_destroy, as: :hidden, input_html: { class: 'destroy' } %>
+
+
+    <input class="string fake optional" id="auction_items_attributes_detailed_description" name="auction_items_attributes[detailed_description]" type="hidden" value="<%= detailed_description %>">
+    <input class="string fake optional" id="auction_items_attributes_reference_unit_id" name="auction_items_attributes[reference_unit]" type="hidden" value="<%= reference_unit %>">
+    <input class="string fake optional" id="auction_items_attributes_material_class_id" name="auction_items_attributes[material_class]" type="hidden" value="<%= material_class %>">
+    <input class="string fake optional" id="auction_items_attributes_material_class_id" name="auction_items_attributes[code]" type="hidden" value="<%= code %>">
+
+    <%= link_to 'Remover', '#', class: 'remove-nested-record' %>
+  </td>
+</tr>
+

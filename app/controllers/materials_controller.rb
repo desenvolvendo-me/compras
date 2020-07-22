@@ -11,7 +11,11 @@ class MaterialsController < CrudController
   #
   #   super
   # end
+  def api_show
+    material = Material.find(params[:id])
 
+    render :json => material.to_json(include:[:reference_unit,:material_class])
+  end
   protected
 
   # def update_resource(object, attributes)

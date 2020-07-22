@@ -1,0 +1,130 @@
+<fieldset class="pd-2">
+
+  <div id="auction_items">
+
+    <div class="nested-fields add-margin-bottom">
+      <%= hidden_field_tag :item_id, nil, :name => 'auction_item[id]' %>
+      <%= hidden_field_tag :code, nil, :name => 'auction_item[code]' %>
+      <%= hidden_field_tag :quantity, nil, :name => 'auction_item[quantity]' %>
+
+
+      <div class="yui3-g">
+        <div class="yui3-u-1-2">
+          <%= f.input :purchase_solicitation, :as => :modal, 'data-hidden-field-class' => 'unique', :fake => true %>
+        </div>
+        <div class="yui3-u-1-2">
+          <label class="fake" for="benefit_type">Tipo</label>
+          <%= select_tag :kind, options_for_select(PurchaseSolicitationKind.to_a),
+                         include_blank: true, as: :fake, :required => true,
+                         class: 'required kind select', id:'purchase_solicitation_kind'%>
+        </div>
+      </div>
+
+      <div class="yui3-g">
+        <div class="yui3-u-1">
+          <%= f.input :material, as: :auto_complete, 'data-hidden-field-class' => 'unique', :fake => true, :required => true %>
+        </div>
+      </div>
+
+      <div class="yui3-g" style="margin-top: 16px">
+        <div class="yui3-u-1-2">
+          <%= f.input :group_lot, as: :fake, :required => true %>
+        </div>
+        <div class="yui3-u-1-2">
+          <%= f.input :reference_unit, as: :fake, disabled: true %>
+        </div>
+      </div>
+
+      <%= f.input :material_class, as: :fake, disabled: true%>
+
+      <%= f.input :detailed_description, as: :fake, disabled: true%>
+
+      <div class="yui3-g">
+        <div class="yui3-u-1-5">
+          <%= f.input :estimated_value, as: :fake, :required => true %>
+        </div>
+        <div class="yui3-u-1-5">
+          <%= f.input :max_value, as: :fake, :required => true %>
+        </div>
+        <div class="yui3-u-11-24" style="width: 52% !important;">
+          <div class="input fake benefit_type">
+            <label class="fake" for="benefit_type">Tipo de Benefício</label>
+            <%= select_tag :benefit_type, options_for_select(BenefitType.to_a),
+                           include_blank: true, as: :fake, :required => true,
+                           class: 'required society_kind select',
+                           name: "auction[benefit_type]" %>
+          </div>
+        </div>
+        <div class="yui3-u-1-12">
+          <%= button_tag 'Adicionar', type: :button,
+                         :class => 'button add-nested-record field-without-label',
+                         'data-template' => 'auction_items_template',
+                         'data-records' => 'items-records',
+                         'data-disabled' => not_updateable_message %>
+        </div>
+      </div>
+
+
+    </div>
+
+    <%= f.error :items %>
+
+    <table id="items-records" class="records">
+      <thead>
+      <tr>
+        <th><%= "Número" %></th>
+        <th><%= "Item" %></th>
+        <th><%= "Unidade" %></th>
+        <th><%= "Quantidade" %></th>
+        <th><%= "Valor" %></th>
+        <th><%= "Valor Máximo" %></th>
+        <th><%= "Grupo" %></th>
+        <th></th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <%= f.association :items, :collection => localized(f.object.items) do |p| %>
+        <%= render 'auction/auction_items/form',
+                   id: p.object.id,
+                   code: p.object.material.code,
+                   material: p.object.material,
+                   material_id: p.object.material_id,
+                   detailed_description: p.object.material.detailed_description,
+                   material_class: p.object&.material_class,
+                   material_class_id: p.object&.material_class&.id,
+                   reference_unit: p.object&.reference_unit&.acronym,
+                   quantity: p.object.quantity,
+                   estimated_value: p.object.estimated_value,
+                   max_value: p.object.max_value,
+                   benefit_type: p.object.benefit_type,
+                   group_lot: p.object.group_lot,
+                   auction_id: p.object.auction_id,
+                   f: p %>
+      <% end %>
+      </tbody>
+    </table>
+
+    <%= mustache "auction_items_template" do %>
+      <%= f.association :items_attributes, :collection => f.object.items.build, :index => '{{uuid}}' do |p| %>
+        <%= render 'auction/auction_items/form',
+                   id: "{{id}}",
+                   code: "{{code}}",
+                   material: "{{material}}",
+                   material_id: "{{material_id}}",
+                   detailed_description: "{{detailed_description}}",
+                   material_class: "{{material_class}}",
+                   material_class_id: "{{material_class_id}}",
+                   reference_unit: "{{reference_unit}}",
+                   quantity: "{{quantity}}",
+                   estimated_value: "{{estimated_value}}",
+                   max_value: "{{max_value}}",
+                   benefit_type: "{{benefit_type}}",
+                   group_lot: '{{group_lot}}',
+                   auction_id: "{{auction_id}}",
+                   f: p %>
+      <% end %>
+    <% end %>
+  </div>
+
+</fieldset>

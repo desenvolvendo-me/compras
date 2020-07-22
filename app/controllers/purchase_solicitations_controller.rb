@@ -9,6 +9,7 @@ class PurchaseSolicitationsController < CrudController
   has_scope :by_model_request
   has_scope :by_deparment_permited
   has_scope :by_department_user_access_and_licitation_process
+  has_scope :by_kind
   has_scope :not_demand, type: :boolean, default: true, only: [:index]
   has_scope :by_secretaries_permited
   has_scope :by_deparment, type: :boolean, default: true, only: [:index] do |controller, scope|
@@ -60,7 +61,7 @@ class PurchaseSolicitationsController < CrudController
   def api_show
     purchase_solicitation = PurchaseSolicitation.find(params["purchase_solicitation_id"])
 
-    render :json => purchase_solicitation.to_json(include: {items: {include: :material}})
+    render :json => purchase_solicitation.to_json(include: {items: {include: {material: {include: [:reference_unit, :material_class]}}}})
   end
 
   protected
