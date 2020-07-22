@@ -1,0 +1,6 @@
+pt-BR:
+  enumerations:
+    auction_variation_type:
+      percentage: 'Percentual'
+      monetary: 'Monetário'
+

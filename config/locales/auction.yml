@@ -30,6 +30,19 @@ pt-BR:
         group_form: "Grupo"
         quantity: "Quantidade de Itens"
         total_value: "Valor total Grupo"
-
-
-
+        sensitive_value: "Valor Sigiloso"
+        variation_type: "Tipo Variação"
+        document_edict: "Tranferir Edital"
+        internet_address: "Endereço Eletrônico"
+        minimum_interval: "Valor ou Percentual do Intervalo Mínimo para os Lances"
+        decree_treatment: "Utilizar Decreto Nº 7174/2010"
+        disclosure_date: "Data de Divulgação"
+        responsible_dissemination: "Responsável pela Divulgação"
+        notice_availability: "Disponibilidade do Edital a Partir de"
+        proposal_delivery: "Entrega da Proposta"
+        bid_opening: "Abertura da Licitação"
+        city: "Município"
+        neighborhood: "Bairro"
+        street: "Logradouro"
+        telephone: "Telefone"
+        cell_phone: "Celular"

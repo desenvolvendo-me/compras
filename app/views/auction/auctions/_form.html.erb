@@ -5,7 +5,7 @@
   <span class="step"></span>
   <span class="step"></span>
   <span class="step"></span>
-  <!--  <span class="step"></span>-->
+  <span class="step"></span>
 </div>
 
 <div class="d-flex align-center flex-column">
@@ -20,21 +20,14 @@
   <div class="tab justify-center" style="width: 79.5rem">
     <%= render 'group_items', f: f %>
   </div>
-    <div>
-      <button type="button" id="prevBtn" class="button primary" onclick="nextPrev(-1)">Voltar</button>
-      <button type="button" id="nextBtn" class="button primary" onclick="nextPrev(1)">Próximo</button>
-    </div>
+  <div class="tab justify-center" style="width: 79.5rem">
+    <%= render 'step_four', f: f %>
+  </div>
+  <div>
+    <button type="button" id="prevBtn" class="button primary" onclick="nextPrev(-1)">Voltar</button>
+    <button type="button" id="nextBtn" class="button primary" onclick="nextPrev(1)">Próximo</button>
+  </div>
 </div>
-<!--<div class="tab">-->
-
-<!--</div>-->
-
-<!--<div class="tab">-->
-
-<!--</div>-->
-
-
-
 
 
 <style>
@@ -114,13 +107,13 @@
     margin-right: 23%;
   }
 
+
 </style>
 
 <script>
   var currentTab = 0;
-  var currentTabTitle = ['Etapa 1 - Dados Principal','Etapa 2 - Dados dos Itens','Etapa 3 - Dados dos Grupos'];
+  var currentTabTitle = ['Etapa 1 - Dados Principal','Etapa 2 - Dados dos Itens','Etapa 3 - Dados dos Grupos', 'Etapa 4 - Parâmentos Finais e Edital'];
   showTab(currentTab);
-
 
   function showTab(n) {
     var tabs = $(".tab");
@@ -183,4 +176,5 @@
     //... and adds the "active" class to the current step:
     steps.eq(n).addClass('active')
   }
+
 </script>
