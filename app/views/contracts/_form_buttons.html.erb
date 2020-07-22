@@ -1,5 +1,5 @@
 <div class="buttons">
-  <% if f.object.persisted? && can?(:destroy, main_controller_name) %>
+  <% if f.object.persisted? && can?(:destroy, main_controller_name) && !(f.object.supply_requests.present? || f.object.supply_orders.present?) %>
     <%= f.button :destroy, style: 'margin-top: 1%;', class:'btn-small' %>
   <% end %>
   <%= link_to 'Rescisão', contract_termination_path, :class => 'button primary btn-small' if f.object.persisted? %>

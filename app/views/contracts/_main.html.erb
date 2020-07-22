@@ -181,10 +181,14 @@
     });
   });
 
+  $(function(){
+    <%if f.object.supply_requests.present? || f.object.supply_orders.present?  %>
+    $("#contract_creditor").prop('disabled', 'disabled');
+    <% end %>
+  })
 </script>
 
 <style>
-
   .label_link{
     display: flex !important;
     justify-content: space-between;
