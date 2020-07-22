@@ -31,7 +31,7 @@ class ContractsController < CrudController
 
     balance = contract.contract_value - plegde_request_total
 
-    render :json => {creditor: contract.creditors.first.person.name, balance: balance, value: contract.contract_value}
+    render :json => {creditor: contract.creditor.person.name, balance: balance, value: contract.contract_value}
   end
 
   def conference
