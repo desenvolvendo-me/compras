@@ -12,7 +12,6 @@ class CreateTableAuctionItens < ActiveRecord::Migration
 
     add_index :compras_auction_items, :auction_id
     add_index :compras_auction_items, :material_id
-    add_index :compras_auction_items, :reference_unit_id
 
     add_foreign_key :compras_auction_items, :compras_auctions,
                     column: :auction_id, name: :auction_items_auction_id_fk
@@ -20,7 +19,5 @@ class CreateTableAuctionItens < ActiveRecord::Migration
     add_foreign_key :compras_auction_items, :unico_materials,
                     column: :material_id, name: :auction_items_material_id_fk
 
-    add_foreign_key :compras_auction_items, :compras_reference_units,
-                    column: :reference_unit_id, name: :auction_reference_unit_id_fk
   end
 end
