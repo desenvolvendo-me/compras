@@ -94,6 +94,39 @@
             </tbody>
           </table>
         </div>
+
+        <div style="text-align: justify; margin-left: 30px; margin-top:-16px">
+          <span>
+            <p>
+              <b> NOTAS FISCAIS: </b>
+            </p>
+          </span>
+        </div>
+        <p>
+        <div>
+          <table class="records" style="margin-left: 30px; width: 97%">
+            <thead>
+            <tr>
+              <th  width="50%" class="text-center">NÚMERO DA NOTA</th>
+              <th>DATA DA NOTA</th>
+              <th>VALOR</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% if supply_order.invoices.blank? %>
+              <tr><td class="text-center" colspan="3"><b>Não foram encontradas notas cadastradas para o pedido de fornecimento: <%= supply_order.to_s %></b></td></tr>
+            <% end %>
+            <% supply_order&.invoices&.each do |invoice| %>
+              <tr>
+                <td class="text-center"><%= invoice.number %></td>
+                <td><%= date_mask(invoice.date) %></td>
+                <td><%= number_to_currency invoice.value %></td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+
         </p>
       <% end %>
 
