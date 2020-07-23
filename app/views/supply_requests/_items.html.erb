@@ -129,18 +129,6 @@
 
 <script>
     (function disabledNotUserCreated() {
-        var current_user = '<%= current_user.login %>';
-        var created_user = '<%= f.object.user.try(:login) %>';
-        var is_administrator = <%= current_user.administrator %>;
-
-        if (current_user !== created_user && !is_administrator) {
-            $('.add-nested-record').attr('data-disabled','Você não possui permissões para alterar este pedido!');
-            $('.add-nested-record').removeClass('add-nested-record');
-            $('.remove-nested-record').removeAttr('href');
-            $('.remove-nested-record').removeClass('remove-nested-record');
-
-        }
-
         $('.edit-nested-record').on("click", function () {
             setTimeout(function () {
                 $("#supply_request_quantity").focus();
