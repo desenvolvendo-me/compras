@@ -2,6 +2,9 @@ class SupplyRequestsController < CrudController
   has_scope :by_purchase_solicitation
   has_scope :by_creditor
   has_scope :by_ids
+  has_scope :filter_by_user, type: :boolean, default: true, only: [:index, :edit] do |controller, scope|
+    scope.filter_by_user(controller.current_user)
+  end
 
   def new
     object = build_resource
@@ -50,16 +53,6 @@ class SupplyRequestsController < CrudController
     use_pur_uni = UserPurchasingUnit.where(user_id: current_user.id).pluck(:purchasing_unit_id)
     departments = Department.where("compras_departments.purchasing_unit_id in (?)", use_pur_uni).pluck(:id)
     PurchaseSolicitation.where("department_id in (?)", departments).pluck(:id)
-  end
-
-  def end_of_association_chain
-    if current_user.administrator
-      apply_scopes(SupplyRequest)
-    else
-      id  = current_user.id
-      ids = current_user.user_purchasing_units.pluck(:purchasing_unit_id)
-      apply_scopes(SupplyRequest.joins(:department).where("user_id = ? OR compras_departments.purchasing_unit_id in (?)", id, ids))
-    end
   end
 
 end
