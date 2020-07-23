@@ -1,5 +1,5 @@
 <%= f.fields_for :contract_additive,ContractAdditive.new do |r|  %>
-  <%= r.input :contract_id, as: 'hidden', input_html:{name:'contract_additive[additive_kind]'} %>
+  <%= r.input :contract_id, as: 'hidden', input_html:{name:'contract_additive[contract_id]'} %>
   <%= r.input :id, as: 'hidden', input_html:{name:'contract_additive[id]'} %>
 
   <div class="yui3-g">
