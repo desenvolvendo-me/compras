@@ -1,0 +1,61 @@
+<%= f.fields_for :contract_additive,ContractAdditive.new do |r|  %>
+  <%= r.input :contract_id, as: 'hidden', input_html:{name:'contract_additive[additive_kind]'} %>
+  <%= r.input :id, as: 'hidden', input_html:{name:'contract_additive[id]'} %>
+
+  <div class="yui3-g">
+
+    <div class="yui3-u-1-5">
+      <%= r.input :additive_kind,  input_html:{name:'contract_additive[additive_kind]'}%>
+    </div>
+
+    <div class="yui3-u-1-5">
+      <%= r.input :number, input_html:{name:'contract_additive[number]'} %>
+    </div>
+
+    <div class="yui3-u-1-5">
+      <%= r.input :additive_type, input_html: { class: 'additive_type', name:'contract_additive[additive_type]' } %>
+    </div>
+    <div class="yui3-u-1-5">
+      <%= r.input :signature_date, input_html:{name:'contract_additive[signature_date]'} %>
+    </div>
+
+    <div class="yui3-u-1-5">
+      <%= r.input :publication_date, input_html:{name:'contract_additive[publication_date]'} %>
+    </div>
+
+
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <%= r.input :dissemination_source, input_html:{name:'contract_additive[dissemination_source]'} %>
+    </div>
+
+    <div class="col" style="padding-left: 0;">
+      <%= r.input :observation, input_html:{name:'contract_additive[observation]'}  %>
+    </div>
+
+    <div class="col" style="display: none;">
+      <%= r.input :end_date, input_html:{name:'contract_additive[end_date]'}  %>
+    </div>
+
+    <div class="col-2">
+      <%= r.input :value, input_html:{name:'contract_additive[value]'}  %>
+    </div>
+  </div>
+
+  <div class="yui3-g">
+    <div class="yui3-u-7-8">
+      <%= r.input :description, input_html:{name:'contract_additive[description]'}  %>
+    </div>
+
+    <div class="yui3-u-1-8">
+      <%= button_tag 'Adicionar', type: :button, style: 'margin-top: 38px',
+                     class: 'button add-nested-record field-without-label add-margin-bottom',
+                     'data-template' => "contract_additives_template",
+                     'data-records' => "contract_additives_records",
+                     id: "contract_additives_button" %>
+    </div>
+  </div>
+
+<% end %>
