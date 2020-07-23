@@ -1,5 +1,5 @@
 <div class="nested-grid">
-  <div class="nested-fields">
+  <div class="nested-fields nested-additives">
     <%= hidden_field_tag :id, nil, name: "contract_additive_nested_grid_[id]" %>
 
     <%= render "contract_additives/nested_fields", f: f %>
@@ -44,3 +44,26 @@
     <% end %>
   <% end %>
 </div>
+<script>
+  (function hideFieldsWhenTypeIsChanged() {
+    var optionsToHideFieldValue = ['<%= ContractAdditiveType::OTHERS %>',
+      '<%= ContractAdditiveType::EXTENSION_TERM %>'];
+    var optionsToShowFieldEndDate = ['<%= ContractAdditiveType::EXTENSION_TERM %>'];
+
+    $('.nested-additives').on('change', '.additive_type', function() {
+      
+      var option = $(this).val();
+      if(jQuery.inArray(option, optionsToHideFieldValue) != -1) {
+        $(this).closest('.nested-additives').find('.value').hide();
+      } else {
+        $(this).closest('.nested-additives').find('.value').show();
+      }
+
+      if(jQuery.inArray(option, optionsToShowFieldEndDate) != -1) {
+        $(this).closest('.nested-additives').find('.end_date').show();
+      } else {
+        $(this).closest('.nested-additives').find('.end_date').hide();
+      }
+    });
+  })();
+</script>
