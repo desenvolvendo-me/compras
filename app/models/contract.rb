@@ -3,10 +3,10 @@ class Contract < Compras::Model
 
   attr_accessible :year, :contract_number, :sequential_number, :publication_date,
                   :lawyer_code, :contract_file, :signature_date, :end_date,
-                  :description, :content, :contract_value,
+                  :description, :content, :contract_value, :creditor_id,
                   :guarantee_value, :contract_validity, :subcontracting,
                   :cancellation_date, :cancellation_reason, :delivery_schedules_attributes,
-                  :dissemination_source_id, :creditor_ids, :contract_type_id,
+                  :dissemination_source_id, :contract_type_id,
                   :licitation_process_id, :start_date, :budget_structure_responsible_id,
                   :lawyer_id, :parent_id, :additives_attributes, :penalty_fine,
                   :default_fine, :execution_type, :contract_guarantees,
@@ -15,8 +15,6 @@ class Contract < Compras::Model
 
   attr_modal :year, :contract_number, :sequential_number,
              :signature_date, :creditor
-
-  attr_accessor :creditor
 
   acts_as_nested_set
   mount_uploader :contract_file, UnicoUploader
@@ -33,6 +31,7 @@ class Contract < Compras::Model
   belongs_to :dissemination_source
   belongs_to :lawyer, :class_name => 'Employee'
   belongs_to :licitation_process
+  belongs_to :creditor
 
   belongs_to_resource :budget_structure
 
@@ -49,9 +48,9 @@ class Contract < Compras::Model
   has_many :financials, :class_name => 'ContractFinancial', :dependent => :restrict,
            :inverse_of => :contract, :order => :id
 
-  has_and_belongs_to_many :creditors, join_table: :compras_contracts_unico_creditors, order: :id
-
+  has_many :creditors, class_name: 'ContractsUnicoCreditor'
   has_one :contract_termination, :dependent => :restrict
+
 
   accepts_nested_attributes_for :additives, :allow_destroy => true
   accepts_nested_attributes_for :delivery_schedules, :allow_destroy => true
@@ -65,7 +64,7 @@ class Contract < Compras::Model
 
   validates :year, :mask => "9999", :allow_blank => true
   validates :year, :contract_number, :publication_date, :creditor,
-            :dissemination_source, :content, :creditor_ids, :contract_type,
+            :dissemination_source, :content, :contract_type,
             :contract_value, :contract_validity, :signature_date, :start_date,
             :end_date, :budget_structure_responsible,
             :default_fine, :penalty_fine, :presence => true
@@ -75,8 +74,8 @@ class Contract < Compras::Model
       :after_message => :end_date_should_be_after_signature_date
   }, :allow_blank => true
 
-  validate :presence_of_at_least_one_creditor
-  validate :must_not_be_greater_than_one_creditor, unless: :consortium_agreement?
+  #TODO remover isso após, corrigir todas as referências a creditors
+  after_save :set_contract_creditor
 
   filterize
 
@@ -112,20 +111,16 @@ class Contract < Compras::Model
   end
 
   def self.ordered
-    order("ABS(end_date - '#{Date.today}'), unico_people.name ASC, contract_number DESC, year DESC, publication_date DESC ").joins(creditors:[:person])
+    order("ABS(end_date - '#{Date.today}'), unico_people.name ASC, contract_number DESC, year DESC, publication_date DESC ").joins(creditor:[:person])
   end
 
   def winning_items
     licitation_process_id = self.try(:licitation_process).try(:id)
-    creditor_ids = self.creditor_ids
+    creditor_id = self.creditor_id
     LicitationProcessRatificationItem.
         joins { licitation_process_ratification.licitation_process }.
         where { licitation_process_ratification.licitation_process.id.eq(licitation_process_id) }.
-        where { licitation_process_ratification.creditor_id.in(creditor_ids) }
-  end
-
-  def creditor
-    self.creditors.last
+        where { licitation_process_ratification.creditor_id.in(creditor_id) }
   end
 
   def to_s
@@ -150,7 +145,7 @@ class Contract < Compras::Model
 
   def solicitations
     licitation_process_id = self.try(:licitation_process).try(:id)
-    creditor_id = self.creditor_ids.compact
+    creditor_id = self.creditor_id
 
     material_ids = Material.by_ratification(licitation_process_id, creditor_id).pluck(:id).uniq
 
@@ -224,13 +219,15 @@ class Contract < Compras::Model
     solicitation
   end
 
-  def presence_of_at_least_one_creditor
-    errors.add(:creditor, :blank) if creditors.empty?
+  def set_contract_creditor
+    resul = creditors.last
+    if resul.blank?
+      ContractsUnicoCreditor.create(contract_id: id, creditor_id: creditor_id)
+    else
+      cc = creditors.last
+      cc.creditor_id = creditor_id
+      cc.save
+    end
   end
-
-  def must_not_be_greater_than_one_creditor
-    errors.add(:creditor, :must_not_be_greater_than_one_creditor) if creditor_ids.count > 1
-  end
-
 
 end

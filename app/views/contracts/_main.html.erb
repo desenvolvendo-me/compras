@@ -45,14 +45,16 @@
   </span>
 </label>
 <%= f.input :content, label: false %>
+
 <div class="yui3-g">
   <div class='yui3-u-1-2'>
     <%= f.input :licitation_process %>
   </div>
   <div class='yui3-u-1-2'>
-    <%= f.input :creditor, as: :auto_complete, data_source: creditors_path, hidden_field:"creditor_ids" %>
+    <%= f.input :creditor, as: :auto_complete, data_source: creditors_path %>
   </div>
 </div>
+
 <div class="yui3-g">
   <div class='yui3-u-1-2'>
     <%= f.input :contract_type %>
@@ -180,14 +182,13 @@
   });
 
   $(function(){
-    var name = $("#contract_creditor_ids").attr('name');
-    $("#contract_creditor_ids").attr('name', name+'[]').val('')
-  });
-
+    <%if f.object.supply_requests.present? || f.object.supply_orders.present?  %>
+    $("#contract_creditor").prop('disabled', 'disabled');
+    <% end %>
+  })
 </script>
 
 <style>
-
   .label_link{
     display: flex !important;
     justify-content: space-between;
