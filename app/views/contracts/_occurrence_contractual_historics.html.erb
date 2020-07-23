@@ -1,0 +1,44 @@
+<div class="nested-grid">
+  <div class="nested-fields nested-additives">
+    <%= render "occurrence_contractual_historics/nested_fields", f: f %>
+
+  </div>
+
+  <%column_names = OccurrenceContractualHistoricDecorator.header_attributes.to_a
+    extra_data   = OccurrenceContractualHistoric.attribute_names.map(&:to_sym) - column_names %>
+
+  <table id="<%= "occurrence_contractual_historics_records" %>" class="records">
+    <thead>
+    <tr>
+      <% column_names.each do |column_name| %>
+        <th class="<%= column_name %>"><%= OccurrenceContractualHistoric.human_attribute_name column_name %></th>
+      <% end %>
+      <th></th>
+      <th></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <%= f.association :occurrence_contractual_historics, collection: localized(f.object.occurrence_contractual_historics) do |a| %>
+      <% (column_names + extra_data).each do |column_name| %>
+        <%= a.full_error column_name %>
+      <% end %>
+
+      <%= render "occurrence_contractual_historics/nested_grid_row",
+                 column_names: column_names,
+                 all_hidden_fields: column_names + extra_data,
+                 f: a %>
+    <% end %>
+    </tbody>
+  </table>
+
+  <%= mustache "occurrence_contractual_historics_template" do %>
+    <%= f.association "occurrence_contractual_historics_attributes".to_sym, collection: f.object.occurrence_contractual_historics.build.localized, :index => '{{uuid}}' do |a| %>
+      <%= render "occurrence_contractual_historics/nested_grid_row",
+                 column_names: column_names,
+                 is_mustache: true,
+                 all_hidden_fields: column_names + extra_data,
+                 f: a %>
+    <% end %>
+  <% end %>
+</div>
