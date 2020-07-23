@@ -3,7 +3,6 @@
     <%= f.button :destroy, style: 'margin-top: 1%;', class:'btn-small' %>
   <% end %>
   <%= link_to 'Rescisão', contract_termination_path, :class => 'button primary btn-small' if f.object.persisted? %>
-  <%= link_to 'Aditivo/Apostilamento', contract_additives_path(contract_id: f.object.id), :class => 'button primary btn-small' if f.object.persisted? %>
   <%= link_to 'Ocorrências Contratuais', occurrence_contractual_historics_path(:contract_id => f.object.id), :class => 'button primary btn-small' if f.object.persisted? %>
   <%= link_to 'Liberação e Validação', contract_validations_path(:contract_id => resource.id),  :class => 'button primary btn-small', style: 'margin-top: 1%;' %>
   <%= link_to 'Imprimir Contrato', contract_conference_path(:contract_id => resource.id),  :class => 'button primary btn-small', style: 'margin-top: 1%;' if f.object.persisted? %>
