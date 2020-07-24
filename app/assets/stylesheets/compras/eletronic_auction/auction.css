@@ -1,0 +1,75 @@
+.auction_auction_type{
+    display: grid;
+    grid-template-columns: 2.5fr 2fr 1fr 3fr;
+}
+
+.auction_type{
+    color: #426f9f;
+    font-weight: bold;
+}
+
+.simple_form .input {
+    margin-bottom: 1em !important;
+}
+
+/* Hide all steps by default: */
+.tab {
+    display: none;
+}
+
+/* Make circles that indicate the steps of the form: */
+.step {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbbbbb;
+    border: none;
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 0.5;
+}
+
+/* Mark the active step: */
+.step.active {
+    opacity: 1;
+}
+
+/* Mark the steps that are finished and valid: */
+.step.finish {
+    background-color: #4CAF50;
+}
+
+fieldset {
+    border: 1px solid #D4DFF0;
+    padding: 5px 15px 5px 15px;
+    border-radius: 5px;
+    margin-top: 30px;
+    width: 80%;
+}
+
+.align-center{
+    align-items: center;
+}
+.justify-center{
+    justify-content: center;
+}
+.flex-column{
+    flex-direction: column;
+}
+
+.pd-2{
+    padding: 2rem;
+}
+
+.blue{
+    color:#4c7baa;
+}
+
+#title{
+    color: #3f6e9d !important;
+    margin-left: 22%;
+}
+
+#auction_back{
+    margin-right: 23%;
+}
