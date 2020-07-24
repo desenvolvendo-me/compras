@@ -101,8 +101,13 @@
 
   $("#nextBtn").click(function(){
     $("form.auction").submit();
-    nextPrev(1)
   });
 
+  $("form.auction").on('auction:afterSave', function(){
+    if($("#nextBtn").hasClass('submit')){
+      window.location.replace(Routes.auction_auctions)
+    }
+    nextPrev(1)
+  });
 
 </script>

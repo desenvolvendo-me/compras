@@ -20,7 +20,7 @@
     },
 
     onSuccess: function(event, data) {
-      alert('salvo')
+      $("form.auction").trigger('auction:afterSave');
     },
 
     onComplete: function () {
