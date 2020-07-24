@@ -1,0 +1,75 @@
+<%= f.fields_for :contract_terminations, ContractTermination.new do |r|  %>
+  <%= r.input :contract_id, as: 'hidden', input_html:{name:'contract_terminations[contract_id]'} %>
+  <%= r.input :id, as: 'hidden', input_html:{name:'contract_terminations[id]'} %>
+
+
+  <div class="row">
+    <div class="col-2">
+      <%= r.input :number, :disabled => true , input_html:{name:'contract_terminations[number]'}%>
+    </div>
+
+    <div class="col-1">
+      <%= r.input :year, :disabled => true , input_html:{name:'contract_terminations[year]'}%>
+    </div>
+
+    <div class="col-2">
+      <%= r.input :status, :disabled => true , input_html:{name:'contract_terminations[status]'}%>
+    </div>
+
+    <div class="col-2">
+      <%= r.input :publication_date, :disabled => r.object.annulled? , input_html:{name:'contract_terminations[publication_date]'}%>
+    </div>
+
+    <div class="col">
+      <%= r.input :dissemination_source, :disabled => r.object.annulled? , input_html:{name:'contract_terminations[dissemination_source]'}%>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <%= r.input :expiry_date, :disabled => r.object.annulled? , input_html:{name:'contract_terminations[expiry_date]'}%>
+    </div>
+
+    <div class="col">
+      <%= r.input :termination_date, :disabled => r.object.annulled? , input_html:{name:'contract_terminations[termination_date]'}%>
+    </div>
+
+    <div class="col">
+      <%= r.input :termination_value, :disabled => r.object.annulled? , input_html:{name:'contract_terminations[termination_value]'}%>
+    </div>
+
+    <div class="col">
+      <%= r.input :fine_value, :disabled => r.object.annulled? , input_html:{name:'contract_terminations[fine_value]'}%>
+    </div>
+
+    <div class="col">
+      <%= r.input :compensation_value, :disabled => r.object.annulled? , input_html:{name:'contract_terminations[compensation_value]'}%>
+    </div>
+
+  </div>
+
+<!--  <div class="yui3-g">-->
+<!--    <div class="yui3-u-1-4">-->
+      <%#= r.input :term_termination_file, :disabled => r.object.annulled? , input_html:{name:'contract_terminations[term_termination_file]'}%>
+<!--    </div>-->
+
+<!--    <div class="yui3-u-1-4">-->
+      <%#= link_to r.object.term_termination_file_identifier, r.object.term_termination_file_url if r.object.term_termination_file? %>
+<!--    </div>-->
+<!--  </div>-->
+
+  <div class="yui3-g">
+    <div class="yui3-u-7-8">
+      <%= r.input :reason, :disabled => r.object.annulled? , input_html:{name:'contract_terminations[reason]'}%>
+    </div>
+
+    <div class="yui3-u-1-8">
+      <%= button_tag 'Adicionar', type: :button, style: 'margin-top: 38px',
+                     class: 'button add-nested-record field-without-label add-margin-bottom',
+                     'data-template' => "contract_terminations_template",
+                     'data-records' => "contract_terminations_records",
+                     id: "contract_terminations_button" %>
+    </div>
+  </div>
+
+<% end %>
