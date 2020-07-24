@@ -20,95 +20,15 @@
   <div class="tab justify-center" style="width: 79.5rem">
     <%= render 'group_items', f: f %>
   </div>
-  <div class="tab justify-center" style="width: 79.5rem">
+  <div class="tab align-center flex-column" style="width: 79.5rem">
     <%= render 'step_four', f: f %>
   </div>
   <div>
-    <button type="button" id="prevBtn" class="button primary" onclick="nextPrev(-1)">Voltar</button>
-    <button type="button" id="nextBtn" class="button primary" onclick="nextPrev(1)">Próximo</button>
+    <button type="button" id="prevBtn" class="button primary">Voltar</button>
+    <button type="button" id="nextBtn" class="button primary">Próximo</button>
   </div>
 </div>
-
-
-<style>
-  .auction_auction_type{
-    display: grid;
-    grid-template-columns: 2.5fr 2fr 1fr 3fr;
-  }
-
-  .auction_type{
-    color: #426f9f;
-    font-weight: bold;
-  }
-
-  .simple_form .input {
-    margin-bottom: 1em !important;
-  }
-
-  /* Hide all steps by default: */
-  .tab {
-    display: none;
-  }
-
-  /* Make circles that indicate the steps of the form: */
-  .step {
-    height: 15px;
-    width: 15px;
-    margin: 0 2px;
-    background-color: #bbbbbb;
-    border: none;
-    border-radius: 50%;
-    display: inline-block;
-    opacity: 0.5;
-  }
-
-  /* Mark the active step: */
-  .step.active {
-    opacity: 1;
-  }
-
-  /* Mark the steps that are finished and valid: */
-  .step.finish {
-    background-color: #4CAF50;
-  }
-
-  fieldset {
-    border: 1px solid #D4DFF0;
-    padding: 5px 15px 5px 15px;
-    border-radius: 5px;
-    margin-top: 30px;
-    width: 80%;
-  }
-
-  .align-center{
-    align-items: center;
-  }
-  .justify-center{
-    justify-content: center;
-  }
-  .flex-column{
-    flex-direction: column;
-  }
-
-  .pd-2{
-    padding: 2rem;
-  }
-
-  .blue{
-    color:#4c7baa;
-  }
-
-  #title{
-    color: #3f6e9d !important;
-    margin-left: 22%;
-  }
-
-  #auction_back{
-    margin-right: 23%;
-  }
-
-
-</style>
+<%= stylesheet_link_tag 'compras/eletronic_auction/auction'%>
 
 <script>
   var currentTab = 0;
@@ -125,12 +45,10 @@
     } else {
       $("#prevBtn").css('display', "inline")
     }
+    
     if (n === (tabs.length - 1)) {
       $("#nextBtn").html("Salvar");
       $("#nextBtn").addClass("submit");
-      $("#nextBtn").bind("click", function(){
-        $("form.auction").submit();
-      })
     } else {
       $("#nextBtn").html("Próximo");
       $("#nextBtn").removeClass("submit");
@@ -176,5 +94,15 @@
     //... and adds the "active" class to the current step:
     steps.eq(n).addClass('active')
   }
+
+  $("#prevBtn").click(function(){
+    nextPrev(-1)
+  });
+
+  $("#nextBtn").click(function(){
+    $("form.auction").submit();
+    nextPrev(1)
+  });
+
 
 </script>
