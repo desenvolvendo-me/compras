@@ -140,3 +140,10 @@ h3.divider {
     color: white !important;
 }
 
+.login-box {
+  width: 75% !important;
+}
+
+.sidebar-box {
+  width: 24% !important;
+}
