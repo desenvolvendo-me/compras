@@ -1,27 +1,26 @@
 <%= f.fields_for :contract_validations, ContractValidation.new do |r|  %>
-  <%= r.input :contract_id, as: 'hidden', input_html:{name:'contract_validations[contract_id]'} %>
-  <%= r.input :id, as: 'hidden', input_html:{name:'contract_validations[id]'} %>
-
-  <%= r.input :contract_id, :as => :hidden %>
+  <%= r.input :contract_id, as: 'hidden', input_html:{name:'contract_validation[contract_id]'} %>
+  <%= r.input :id, as: 'hidden', input_html:{name:'contract_validation[id]'} %>
 
   <div class="row">
     <div class="col">
 
-      <%= r.input :blocked, collection: [["Liberado", false], ["Bloqueado", true]], input_html:{name:'contract_validations[blocked]'} %>
+      <%= r.input :blocked, collection: [["Liberado", false], ["Bloqueado", true]], input_html:{name:'contract_validation[blocked]'} %>
     </div>
 
     <div class="col-2">
-      <%= r.input :date, :disabled => r.object.persisted?, input_html:{name:'contract_validations[date]'} %>
+      <%= r.input :date, :disabled => r.object.persisted?, input_html:{name:'contract_validation[date]'} %>
     </div>
 
     <div class="col-7">
-      <%= r.input :responsible, :disabled => r.object.persisted?, input_html:{name:'contract_validations[responsible]'} %>
+      <%= r.input :responsible, :disabled => r.object.persisted?, input_html:{name:'contract_validation[responsible]'},
+                  hidden_field: 'responsible_id', fake: true%>
     </div>
   </div>
 
   <div class="yui3-g">
     <div class="yui3-u-7-8">
-      <%= r.input :observation, :disabled => r.object.persisted?, input_html:{name:'contract_validations[observation]'} %>
+      <%= r.input :observation, :disabled => r.object.persisted?, input_html:{name:'contract_validation[observation]'} %>
     </div>
 
     <div class="yui3-u-1-8">

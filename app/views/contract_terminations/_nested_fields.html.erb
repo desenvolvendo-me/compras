@@ -21,7 +21,8 @@
     </div>
 
     <div class="col">
-      <%= r.input :dissemination_source, :disabled => r.object.annulled? , input_html:{name:'contract_terminations[dissemination_source]'}%>
+      <%= r.input :dissemination_source, :disabled => r.object.annulled? , fake: true,
+                  input_html:{name:'contract_terminations[dissemination_source]'}, hidden_field: 'dissemination_source_id'%>
     </div>
   </div>
 
