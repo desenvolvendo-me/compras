@@ -12,11 +12,11 @@ class SupplyRequestDecorator
   end
 
   def creditor
-    self.contract.nil? || self.contract.creditor.blank? || self.contract.creditor.person.nil? ? '' : self.contract.creditor.person.name
+    self.contract&.creditor&.person&.name
   end
 
   def creditor_id
-    self.contract.nil? || self.contract.creditor.blank? || self.contract.creditor.person.nil? ? '' : self.contract.creditor.id
+    self.contract&.creditor&.person&.nil? ? '' : self.contract.creditor.id
   end
 
   def value
