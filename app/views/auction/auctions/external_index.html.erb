@@ -17,11 +17,11 @@
         <div class="yui3-g section-gray">
           <div class="yui3-u-1-2 ">
             <p>Objeto: <%= resource.object %></p>
-            <p>Edital disponível a partir de: <%= l resource.notice_availability %></p>
+            <p>Edital disponível a partir de: <%= l(resource.notice_availability) if resource.notice_availability %></p>
             <p>Endereço: <%= address(resource) %> </p>
             <p>Telefone: <%= contact(resource) %> </p>
-            <p>Entrega da proposta: <%= l resource.proposal_delivery %></p>
-            <p>Abertura da proposta: <%= l resource.bid_opening %></p>
+            <p>Entrega da proposta: <%= l(resource.proposal_delivery) if resource.proposal_delivery%></p>
+            <p>Abertura da proposta: <%= l(resource.bid_opening) if resource.bid_opening %></p>
           </div>
 
           <div class="yui3-u-1-2 actions">
