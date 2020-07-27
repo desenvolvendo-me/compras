@@ -83,7 +83,11 @@ $(function(){
 
   $("textarea.text").each(function(){
     var height = $(this).prop('scrollHeight');
-    $(this).css('height', height+10 + 'px')
+    if( height < 10){
+      $(this).css('height', height+53 + 'px')
+    }else{
+      $(this).css('height', height+10 + 'px')
+    }
   })
 
 });

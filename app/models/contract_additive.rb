@@ -6,7 +6,7 @@ class ContractAdditive < Compras::Model
   has_enumeration_for :additive_type, with: UnicoAPI::Resources::Compras::Enumerations::ContractAdditiveType
   has_enumeration_for :additive_kind
 
-  validates :number, :additive_type, :signature_date, :publication_date,
+  validates :number, :additive_type, :additive_kind, :signature_date, :publication_date,
             :dissemination_source, presence: true
 
   validate :end_date_is_to_be_mandatory

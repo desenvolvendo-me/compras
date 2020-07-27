@@ -1,0 +1,37 @@
+<%= f.fields_for :occurrence_contractual_historics, OccurrenceContractualHistoric.new do |r|  %>
+  <%= r.input :contract_id, as: 'hidden', input_html:{name:'occurrence_contractual_historics[contract_id]', value: f.object.id} %>
+  <%= r.input :id, as: 'hidden', input_html:{name:'occurrence_contractual_historics[id]'} %>
+
+  <div class="yui3-g">
+    <div class="yui3-u-1-8">
+      <%= r.input :sequence, :disabled => true, input_html:{name:'occurrence_contractual_historics[sequence]'} %>
+    </div>
+
+    <div class="yui3-u-1-5">
+      <%= r.input :occurrence_contractual_historic_type, input_html:{name:'occurrence_contractual_historics[occurrence_contractual_historic_type]'} %>
+    </div>
+
+    <div class="yui3-u-1-6">
+      <%= r.input :occurrence_contractual_historic_change, input_html:{name:'occurrence_contractual_historics[occurrence_contractual_historic_change]'} %>
+    </div>
+
+    <div class="yui3-u-1-6">
+      <%= r.input :occurrence_date, input_html:{name:'occurrence_contractual_historics[occurrence_date]'} %>
+    </div>
+  </div>
+
+  <div class="yui3-g">
+    <div class="yui3-u-7-8">
+      <%= r.input :observations, input_html:{name:'occurrence_contractual_historics[observations]'} %>
+    </div>
+
+    <div class="yui3-u-1-8">
+      <%= button_tag 'Adicionar', type: :button, style: 'margin-top: 38px',
+                     class: 'button add-nested-record field-without-label add-margin-bottom',
+                     'data-template' => "occurrence_contractual_historics_template",
+                     'data-records' => "occurrence_contractual_historics_records",
+                     id: "occurrence_contractual_historics_button" %>
+    </div>
+  </div>
+
+<% end %>

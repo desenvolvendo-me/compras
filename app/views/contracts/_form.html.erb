@@ -24,6 +24,18 @@
     <li>
       <a href="#balance_solicitations">Solicitações Saldo</a>
     </li>
+    <li>
+      <a href="#contract_additives">Aditivo / Apostilamento</a>
+    </li>
+    <li>
+      <a href="#occurrence_contractual_historics">Ocorrências Contratuais</a>
+    </li>
+    <li>
+      <a href="#contract_validations">Liberação / Validação</a>
+    </li>
+    <li>
+      <a href="#contract_termination">Rescisão</a>
+    </li>
   </ul>
 
   <div id="main">
@@ -58,6 +70,19 @@
     <%= render 'balance_solicitations', :f => f %>
   </div>
 
+  <div id="contract_additives">
+    <%= render 'contract_additives', :f => f %>
+  </div>
+
+  <div id="occurrence_contractual_historics">
+    <%= render 'occurrence_contractual_historics', :f => f %>
+  </div>
+  <div id="contract_validations">
+    <%= render 'contract_validations', :f => f %>
+  </div>
+  <div id="contract_termination">
+    <%= render 'contract_termination', :f => f %>
+  </div>
 </div>
 
 <script>

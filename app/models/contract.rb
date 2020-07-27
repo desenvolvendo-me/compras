@@ -6,12 +6,12 @@ class Contract < Compras::Model
                   :description, :content, :contract_value, :creditor_id,
                   :guarantee_value, :contract_validity, :subcontracting,
                   :cancellation_date, :cancellation_reason, :delivery_schedules_attributes,
-                  :dissemination_source_id, :contract_type_id,
+                  :dissemination_source_id, :contract_type_id, :contract_additives_attributes,
                   :licitation_process_id, :start_date, :budget_structure_responsible_id,
-                  :lawyer_id, :parent_id, :additives_attributes, :penalty_fine,
-                  :default_fine, :execution_type, :contract_guarantees,
+                  :lawyer_id, :parent_id, :additives_attributes, :penalty_fine, :contract_validations_attributes,
+                  :default_fine, :execution_type, :contract_guarantees, :occurrence_contractual_historics_attributes,
                   :consortium_agreement, :department_id, :balance_control_type, :authorized_areas_attributes,
-                  :purchasing_unit_id, :financials_attributes, :balance
+                  :purchasing_unit_id, :financials_attributes, :balance, :contract_termination_attributes
 
   attr_modal :year, :contract_number, :sequential_number,
              :signature_date, :creditor
@@ -47,8 +47,8 @@ class Contract < Compras::Model
   has_many :supply_requests
   has_many :financials, :class_name => 'ContractFinancial', :dependent => :restrict,
            :inverse_of => :contract, :order => :id
-
   has_many :creditors, class_name: 'ContractsUnicoCreditor'
+  has_many :contract_additives
   has_one :contract_termination, :dependent => :restrict
 
 
@@ -56,6 +56,10 @@ class Contract < Compras::Model
   accepts_nested_attributes_for :delivery_schedules, :allow_destroy => true
   accepts_nested_attributes_for :authorized_areas, allow_destroy: true
   accepts_nested_attributes_for :financials, allow_destroy: true
+  accepts_nested_attributes_for :contract_additives, allow_destroy: true
+  accepts_nested_attributes_for :occurrence_contractual_historics, allow_destroy: true
+  accepts_nested_attributes_for :contract_validations, allow_destroy: true
+  accepts_nested_attributes_for :contract_termination, allow_destroy: true
 
   delegate :execution_type_humanize, :contract_guarantees_humanize, :contract_guarantees,
            :to => :licitation_process, :allow_nil => true
