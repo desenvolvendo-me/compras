@@ -18,8 +18,7 @@ class Report::BalancePerCreditorsController < Report::BaseController
   def get_balance_per_creditor
     @creditor = balance_per_creditor_report_params["creditor_id"]
     @licitation_process = balance_per_creditor_report_params["licitation_process_id"]
-    @contracts = Contract.joins(:creditors).
-        where(compras_contracts_unico_creditors:{creditor_id:@creditor})
+    @contracts = Contract.where(creditor_id:@creditor)
     @contracts = @contracts.where(licitation_process_id:@licitation_process) unless @licitation_process.empty?
   end
 
