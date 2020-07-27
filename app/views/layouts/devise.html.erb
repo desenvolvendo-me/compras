@@ -35,7 +35,7 @@
         <%= render 'layouts/flash' %>
       </div>
 
-      <div id="content" class="devise">
+      <div id="content" class="devise login-box">
         <div class="banner">
           <%= prefecture_image %>
         </div>
@@ -45,6 +45,10 @@
         </h2>
 
         <%= yield %>
+      </div>
+
+      <div id="sidebar" class="sidebar-box">
+        <%= render 'layouts/sidebar' %>
       </div>
     </div>
   </body>

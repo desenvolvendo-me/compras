@@ -49,7 +49,6 @@ class Contract < Compras::Model
            :inverse_of => :contract, :order => :id
   has_many :creditors, class_name: 'ContractsUnicoCreditor'
   has_many :contract_additives
-
   has_one :contract_termination, :dependent => :restrict
 
 

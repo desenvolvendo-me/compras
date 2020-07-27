@@ -20,7 +20,7 @@
     },
 
     onSuccess: function(event, data) {
-      window.location.replace(Routes.auction_auctions)
+      $("form.auction").trigger('auction:afterSave');
     },
 
     onComplete: function () {

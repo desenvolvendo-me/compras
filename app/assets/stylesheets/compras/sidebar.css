@@ -1,3 +1,28 @@
 #sidebar {
-  display: none;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  display: inline-block;
+  vertical-align: top;
+  padding-left: 1em;
+}
+
+#sidebar .inner {
+  background: #d3ecf3;
+  padding: 1em;
+}
+
+#sidebar h4 {
+  background: url('sidebar-arrow.gif') left bottom no-repeat;
+  color: #427EB1;
+  display: block;
+  font-weight: normal;
+  margin: 0;
+  padding-bottom: 10px;
+  width: 100%;
+  font-size: 17px;
+}
+
+#sidebar p:last-child {
+  margin-bottom: 0;
 }
