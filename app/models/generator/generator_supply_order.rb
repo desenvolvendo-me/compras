@@ -47,14 +47,14 @@ class Generator::GeneratorSupplyOrder < Compras::Model
         errors.push("Pedido de Fornecimento #{generate_supply_request.supply_request.to_s} já contem Ordem de Fornecimento")
       else
         generate_supply_request.supply_request.licitation_process.licitation_process_ratifications.each do |creditor_winner|
-          contract = Contract.joins(:creditors).
+          contract = Contract.
               where(licitation_process_id: generate_supply_request.supply_request.licitation_process_id).
-              where("compras_contracts_unico_creditors.creditor_id = ?", creditor_winner.creditor.id).
+              where(creditor_id: creditor_winner.creditor.id).
               last
           if contract
             create_supple_order(contract, generate_supply_request, creditor_winner)
           else
-            errors.push("Fornecerdor #{creditor_winner.creditor.name} sem contrato")
+            errors.push("Fornecedor #{creditor_winner.creditor.name} sem contrato")
           end
         end
       end
