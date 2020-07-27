@@ -8,7 +8,7 @@ Contract.blueprint(:primeiro_contrato) do
   licitation_process { LicitationProcess.make!(:processo_licitatorio) }
   contract_type { ContractType.make!(:management) }
   dissemination_source { DisseminationSource.make!(:jornal_municipal) }
-  creditors { [Creditor.make!(:sobrinho)] }
+  creditor { [Creditor.make!(:sobrinho)] }
   contract_value { 1000 }
   contract_validity { 12 }
   subcontracting { true }
@@ -31,7 +31,7 @@ Contract.blueprint(:contrato_detran) do
   end_date { Date.new(2013, 2, 23) }
   description { "Contrato" }
   contract_type { ContractType.make!(:founded) }
-  creditors { [Creditor.make!(:sobrinho)] }
+  creditor { Creditor.make!(:sobrinho) }
   contract_value { 1000 }
   contract_validity { 12 }
   dissemination_source { DisseminationSource.make!(:jornal_municipal) }
