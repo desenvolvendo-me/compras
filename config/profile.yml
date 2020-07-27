@@ -112,6 +112,7 @@ profile:
     - report_supply_request_per_secretaries
     - report_supply_requests
     - report_expenses
+    - report_creditor_materials
   - "PREGÃO ELETRÔNICO":
     - physical_peoples
     - legal_peoples

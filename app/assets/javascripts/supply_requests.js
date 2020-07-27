@@ -325,6 +325,7 @@ $(document).ready(function () {
 
   $(".supply_request_submit_close").click(function () {
     $("#supply_request_updatabled").prop('checked', true);
+    $("#supply_request_updatabled").val('true');
   });
 
   $("#supply_request_number_nf").on("change", function () {
