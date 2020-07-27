@@ -23,8 +23,7 @@ class Creditor < Persona::Creditor
   has_many :proposal_disqualifications, class_name: 'PurchaseProcessCreditorDisqualification', dependent: :restrict
   has_many :licitation_process_ratifications, dependent: :restrict
   has_many :licitation_process_ratification_items, through: :licitation_process_ratifications
-
-  has_and_belongs_to_many :contracts, join_table: :compras_contracts_unico_creditors
+  has_many :contracts
 
   validates :contract_start_date, :social_identification_number, :presence => true, :if => :autonomous?
   validates :main_cnae, :presence => true, :if => :company?
@@ -40,7 +39,7 @@ class Creditor < Persona::Creditor
     department_ids = DepartmentPerson.where(user_id: q).pluck(:department_id)
     purchasing_unit_ids = Department.where(id: department_ids).pluck(:purchasing_unit_id)
     licitation_process_ids = LicitationProcess.where(purchasing_unit_id: purchasing_unit_ids).pluck(:id)
-    creditor_ids = Contract.joins(:creditors).where(licitation_process_id: licitation_process_ids).pluck("compras_contracts_unico_creditors.creditor_id").uniq
+    creditor_ids = Contract.where(licitation_process_id: licitation_process_ids).pluck(:creditor_id).uniq
 
     where(id: creditor_ids)
   }
@@ -56,7 +55,7 @@ class Creditor < Persona::Creditor
 
   scope :by_contract, lambda {|contract_id|
     joins {contracts}.
-        where {compras_contracts_unico_creditors.contract_id.eq(contract_id)}
+        where {contracts.id.eq(contract_id)}
   }
 
   scope :accreditation_purchase_process_id, ->(purchase_process_id) do
