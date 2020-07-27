@@ -7,6 +7,7 @@ pt-BR:
 
     attributes:
       contract_additive:
+        additive_kind: "Aditivo/Apostilamento"
         additive_type: "Tipo"
         dissemination_source: "Meio de divulgação"
         end_date: "Data de término"

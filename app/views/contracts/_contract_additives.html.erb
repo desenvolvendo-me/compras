@@ -1,1 +1,69 @@
-<%= f.input :additives, append: true %>
+<div class="nested-grid">
+  <div class="nested-fields nested-additives">
+    <%= hidden_field_tag :id, nil, name: "contract_additive_nested_grid_[id]" %>
+
+    <%= render "contract_additives/nested_fields", f: f %>
+
+  </div>
+
+  <%column_names = [:number, :additive_kind, :additive_type, :signature_date]
+      extra_data   = [:publication_date, :dissemination_source, :observation, :end_date, :value, :description] %>
+
+  <table id="<%= "contract_additives_records" %>" class="records">
+    <thead>
+    <tr>
+      <% column_names.each do |column_name| %>
+        <th><%= ContractAdditive.human_attribute_name column_name %></th>
+      <% end %>
+      <th></th>
+      <th></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <%= f.association :contract_additives, collection: localized(f.object.contract_additives) do |a| %>
+      <% (column_names + extra_data).each do |column_name| %>
+        <%= a.full_error column_name %>
+      <% end %>
+
+      <%= render "contract_additives/nested_grid_row",
+                 column_names: column_names,
+                 all_hidden_fields: column_names + extra_data,
+                 f: a %>
+    <% end %>
+    </tbody>
+  </table>
+
+  <%= mustache "contract_additives_template" do %>
+    <%= f.association "contract_additives_attributes".to_sym, collection: f.object.contract_additives.build.localized, :index => '{{uuid}}' do |a| %>
+      <%= render "contract_additives/nested_grid_row",
+                 column_names: column_names,
+                 is_mustache: true,
+                 all_hidden_fields: column_names + extra_data,
+                 f: a %>
+    <% end %>
+  <% end %>
+</div>
+<script>
+  (function hideFieldsWhenTypeIsChanged() {
+    var optionsToHideFieldValue = ['<%= ContractAdditiveType::OTHERS %>',
+      '<%= ContractAdditiveType::EXTENSION_TERM %>'];
+    var optionsToShowFieldEndDate = ['<%= ContractAdditiveType::EXTENSION_TERM %>'];
+
+    $('.nested-additives').on('change', '.additive_type', function() {
+      
+      var option = $(this).val();
+      if(jQuery.inArray(option, optionsToHideFieldValue) != -1) {
+        $(this).closest('.nested-additives').find('.value').hide();
+      } else {
+        $(this).closest('.nested-additives').find('.value').show();
+      }
+
+      if(jQuery.inArray(option, optionsToShowFieldEndDate) != -1) {
+        $(this).closest('.nested-additives').find('.end_date').show();
+      } else {
+        $(this).closest('.nested-additives').find('.end_date').hide();
+      }
+    });
+  })();
+</script>
