@@ -37,7 +37,7 @@
   <span>
     <p>
       <b> CONTRATO: </b> <%= contract.to_s %>
-      <b> FORNECEDOR: </b> <%= contract.creditors.first.to_s %>
+      <b> FORNECEDOR: </b> <%= contract.creditor.to_s %>
       <b> PRAZO DE VALIDADE: </b> <%= l(contract.end_date, format: :long) %>
     </p>
   </span>
