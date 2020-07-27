@@ -78,9 +78,6 @@ class Contract < Compras::Model
       :after_message => :end_date_should_be_after_signature_date
   }, :allow_blank => true
 
-  #TODO remover isso após, corrigir todas as referências a creditors
-  after_save :set_contract_creditor
-
   filterize
 
   scope :founded, joins { contract_type }.where { contract_type.service_goal.eq(ServiceGoal::FOUNDED) }
@@ -222,16 +219,4 @@ class Contract < Compras::Model
     end
     solicitation
   end
-
-  def set_contract_creditor
-    resul = creditors.last
-    if resul.blank?
-      ContractsUnicoCreditor.create(contract_id: id, creditor_id: creditor_id)
-    else
-      cc = creditors.last
-      cc.creditor_id = creditor_id
-      cc.save
-    end
-  end
-
 end
