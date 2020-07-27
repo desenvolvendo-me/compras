@@ -132,7 +132,7 @@
 <div>
   <h2>ITENS DO OBJETO</h2>
   <% total = 0 %>
-  <% items = @contract.ratifications_items.joins(creditor:[:contracts]).where(compras_contracts_unico_creditors:{contract_id:@contract.id, creditor_id: @contract.creditor}).group_by(&:lot).sort %>
+  <% items = @contract.ratifications_items.joins(creditor:[:contracts]).where(compras_contracts:{id:@contract.id}).where(unico_creditors:{id:@contract.creditor}).group_by(&:lot).sort %>
   <% items.each do |lot, ratifications_items| %>
     <table class="records">
       <h2>LOTE <%= lot %></h2>
