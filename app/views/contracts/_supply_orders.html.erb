@@ -1,3 +1,4 @@
+<h1>Ordens de Fornecimento</h1>
 <div id="record">
   <table class="records">
     <thead>
@@ -48,6 +49,34 @@
         <td>
           <%= link_to "Editar", edit_supply_order_path(supply_order), target: '_blank' %>
         </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+<h1>Notas Fiscais</h1>
+<div>
+  <table class="records">
+    <thead>
+    <tr>
+      <th>Odem de Fornecimento Nº</th>
+      <th  width="50%" class="text-center">Numero da Nota</th>
+      <th>Data da Nota</th>
+      <th>Valor</th>
+    </tr>
+    </thead>
+    <tbody>
+    <%invoices = get_supply_order_invoices(f.object.supply_orders) %>
+    <% if invoices.blank? %>
+      <tr><td class="text-center" colspan="3"><b>Não foram encontradas notas cadastradas para o pedido de fornecimento: <%= supply_order.to_s %></b></td></tr>
+    <% end %>
+    <% invoices.each do |invoice| %>
+      <tr>
+        <td style="text-align: center !important;"><%=invoice.supply_order.number %></td>
+        <td style="text-align: center !important;"><%= invoice.number %></td>
+        <td><%= l invoice.date if invoice.date %></td>
+        <td><%= number_to_currency invoice.value %></td>
       </tr>
     <% end %>
     </tbody>
