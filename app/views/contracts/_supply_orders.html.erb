@@ -69,7 +69,7 @@
     <tbody>
     <%invoices = get_supply_order_invoices(f.object.supply_orders) %>
     <% if invoices.blank? %>
-      <tr><td class="text-center" colspan="3"><b>Não foram encontradas notas cadastradas para o pedido de fornecimento: <%= supply_order.to_s %></b></td></tr>
+      <tr><td style="text-align: center !important;" colspan="3"><b>Não foram encontradas notas cadastradas para as ordens de fornecimento</b></td></tr>
     <% end %>
     <% invoices.each do |invoice| %>
       <tr>
