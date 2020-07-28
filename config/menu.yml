@@ -13,19 +13,18 @@ menu:
       - signatures:
         - signature_configurations
         - signatures
-
-    - secretaries
-    - department:
+    - department_secretary:
       - departments
+      - secretaries
 
     - users:
       - positions
       - employees
       - profiles
       - users
-    - project_activities
-    - expenses
     - expense_setting:
+      - expenses
+      - project_activities
       - purchasing_units
       - organs
       - resource_sources
