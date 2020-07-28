@@ -4,7 +4,7 @@ class Contract < Compras::Model
   attr_accessible :year, :contract_number, :sequential_number, :publication_date,
                   :lawyer_code, :contract_file, :signature_date, :end_date,
                   :description, :content, :contract_value, :creditor_id,
-                  :guarantee_value, :contract_validity, :subcontracting,
+                  :guarantee_value, :contract_validity, :subcontracting, :management_object_id,
                   :cancellation_date, :cancellation_reason, :delivery_schedules_attributes,
                   :dissemination_source_id, :contract_type_id, :contract_additives_attributes,
                   :licitation_process_id, :start_date, :budget_structure_responsible_id,
@@ -32,6 +32,7 @@ class Contract < Compras::Model
   belongs_to :lawyer, :class_name => 'Employee'
   belongs_to :licitation_process
   belongs_to :creditor
+  belongs_to :management_object
 
   belongs_to_resource :budget_structure
 
