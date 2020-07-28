@@ -40,7 +40,7 @@
         <% total[:total] += result %>
         <% total[:total_qtd_attended] += qtd_attended  %>
         <% total[:total_attended] += total_attended  %>
-        <% total[:balance] += balance *  price %>
+        <% total[:balance] += balance *  price.to_f %>
       </tr>
     <% end %>
     <tr>
