@@ -128,7 +128,7 @@ class Contract < Compras::Model
   end
 
   def to_s
-    contract_number
+    "#{contract_number} - #{creditor}"
   end
 
   def modality_humanize
