@@ -11,9 +11,9 @@
     <tr>
       <th width="30%" class="description">Material</th>
       <th>Valor Unitário</th>
-      <th>Qtd Solicitada</th>
-      <th>Total</th>
-      <th>Qtd Atendida</th>
+      <th width="5%">Qtd Solicitada</th>
+      <th width="10%">Total</th>
+      <th width="5%">Qtd Atendida</th>
       <th>Valor Atendido</th>
       <th>Saldo</th>
     </tr>
@@ -40,7 +40,7 @@
         <% total[:total] += result %>
         <% total[:total_qtd_attended] += qtd_attended  %>
         <% total[:total_attended] += total_attended  %>
-        <% total[:balance] += balance  %>
+        <% total[:balance] += balance *  price.to_f %>
       </tr>
     <% end %>
     <tr>
@@ -50,7 +50,7 @@
       <td style="text-align: end;"><b><%= number_to_currency total[:total] %></b></td>
       <td><%= total[:total_qtd_attended]  %></td>
       <td><b><%= number_to_currency total[:total_attended] %></b></td>
-      <td><%= total[:balance] %></td>
+      <td><b><%= number_to_currency total[:balance] %></b></td>
     </tr>
     </tbody>
   </table>

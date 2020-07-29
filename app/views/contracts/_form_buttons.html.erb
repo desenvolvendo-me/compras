@@ -2,7 +2,6 @@
   <% if f.object.persisted? && can?(:destroy, main_controller_name) && !(f.object.supply_requests.present? || f.object.supply_orders.present?) %>
     <%= f.button :destroy, style: 'margin-top: 1%;', class:'btn-small' %>
   <% end %>
-  <%= link_to 'Rescisão', contract_termination_path, :class => 'button primary btn-small' if f.object.persisted? %>
   <%= link_to 'Imprimir Contrato', contract_conference_path(:contract_id => resource.id),  :class => 'button primary btn-small', style: 'margin-top: 1%;' if f.object.persisted? %>
 
   <%= f.button :submit, class:'btn-small' if can?(:modify, main_controller_name) %>

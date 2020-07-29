@@ -58,4 +58,8 @@ module ContractsHelper
   def ordered_purchasses purchase_solicitations
     PurchaseSolicitationItem.includes(:material).where(id: purchase_solicitations.map { |p| p.id}).order("unico_materials.description")
   end
+
+  def get_supply_order_invoices supply_orders
+    Invoice.where(supply_order_id: supply_orders.pluck(:id)).order('number, date, value DESC')
+  end
 end
