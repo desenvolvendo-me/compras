@@ -2,12 +2,11 @@ require 'spec_helper'
 
 describe ContractProvider do
   let(:sobrinho) { Creditor.make!(:sobrinho) }
-  let(:wenderson) { Creditor.make!(:wenderson_sa) }
 
   let(:contract) do
     Contract.make!(:primeiro_contrato,
       consortium_agreement: true,
-      creditors: [sobrinho, wenderson],
+      creditor: sobrinho,
       licitation_process: licitation_process)
   end
 
@@ -23,7 +22,7 @@ describe ContractProvider do
     it { should provide :id }
     it { should provide :to_s }
     it { should provide :budget_allocations }
-    it { should provide :creditors }
+    it { should provide :creditor }
     it { should provide :licitation_process_id }
     it { should provide :licitation_process_year }
     it { should provide :contract_number }
@@ -37,9 +36,9 @@ describe ContractProvider do
     end
   end
 
-  describe '#creditors' do
-    it "should return the ids of related creditors" do
-      expect(subject.creditors).to eq [sobrinho.id, wenderson.id]
+  describe '#creditor' do
+    it "should return the id of related creditor" do
+      expect(subject.creditor).to eq sobrinho.id
     end
   end
 

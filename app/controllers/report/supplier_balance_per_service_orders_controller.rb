@@ -26,9 +26,9 @@ class Report::SupplierBalancePerServiceOrdersController < Report::BaseController
 
   def get_contracts(creditor)
     if creditor.nil?
-      Contract.joins(:creditors).where(compras_contracts_unico_creditors:{creditor_id:creditor})
+      Contract.joins(:creditor).where(unico_creditors:{id:creditor})
     else
-      Contract.joins(:creditors)
+      Contract.joins(:creditor)
     end
   end
 

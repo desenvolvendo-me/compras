@@ -32,7 +32,7 @@ class PledgeRequest < Compras::Model
   end
 
   def to_s
-    "#{self.contract.creditors.first unless self.contract.nil? || self.contract.creditors.blank? } - #{purchase_process}"
+    "#{self.contract.creditor unless self.contract.nil? || self.contract.creditor.blank? } - #{purchase_process}"
   end
 
 end

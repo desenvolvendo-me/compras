@@ -30,11 +30,11 @@ class Report::ExtractConsumptionPerProcessesController < Report::BaseController
     @contract = extract_consumption_per_process_report_params["contract_id"]
     @creditor = extract_consumption_per_process_report_params["creditor_id"]
 
-    @licitation_processes = LicitationProcess.joins(contracts: [:creditors]).joins(:purchase_solicitations)
+    @licitation_processes = LicitationProcess.joins(contracts: [:creditor]).joins(:purchase_solicitations)
     @licitation_processes = @licitation_processes.where('compras_list_purchase_solicitation.purchase_solicitation_id = ?', @purchase_solicitation) if @purchase_solicitation.present?
     @licitation_processes = @licitation_processes.where(id: @licitation_process) if @licitation_process.present?
     @licitation_processes = @licitation_processes.where("compras_contracts.id = #{@contract}") if @contract.present?
-    @licitation_processes = @licitation_processes.where("compras_contracts_unico_creditors.creditor_id = #{@creditor}") if @creditor.present?
+    @licitation_processes = @licitation_processes.where("compras_contracts.creditor_id = #{@creditor}") if @creditor.present?
     @licitation_processes
   end
 

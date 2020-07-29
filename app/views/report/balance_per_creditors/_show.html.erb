@@ -26,7 +26,7 @@
   <div style="text-align: justify">
   <span>
     <p>
-      <b> FORNECEDOR: </b> <%= contract.creditors.first %>
+      <b> FORNECEDOR: </b> <%= contract.creditor %>
     </p>
   </span>
   </div>
@@ -56,7 +56,7 @@
         <tbody>
 <% total_i_l = 0 %>
 <% total_i_f = 0 %>
-<% Report::BalanceHelper.get_licitation_processes_ratifications(contract.licitation_process_id, contract.creditors.first).each do |item| %>
+<% Report::BalanceHelper.get_licitation_processes_ratifications(contract.licitation_process_id, contract.creditor).each do |item| %>
 <% total = Report::BalanceHelper.get_quantity_item_supply_order(contract, item.material) %>
 <% balance = Report::BalanceHelper.get_balance(contract, item) %>
 <% total_i_l += item.quantity %>

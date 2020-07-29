@@ -46,8 +46,8 @@
     <% @licitation_processes.each do |licitation_process| %>
       <% @total += licitation_process.get_items_amount %>
       <tr>
-        <td><%= licitation_process.creditors.first %></td>
-        <td><%= licitation_process.creditors.first.nil? ? '':licitation_process.creditors.first.person.cpf_cnpj %></td>
+        <td><%= licitation_process.creditor %></td>
+        <td><%= licitation_process.creditor.nil? ? '':licitation_process.creditor.person.cpf_cnpj %></td>
         <td><%= "#{licitation_process.process}/#{licitation_process.year}" %></td>
         <td><%= licitation_process.modality == '' || licitation_process.modality.nil? ? '' : LicitationProcess.human_attribute_name(licitation_process.modality) %></td>
         <td><%= licitation_process.description %></td>

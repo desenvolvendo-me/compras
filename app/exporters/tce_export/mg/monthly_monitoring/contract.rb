@@ -65,6 +65,8 @@ module TceExport::MG
       end
 
       def generate_creditor_item(contract)
+        #TODO verificar este método e mudar creeditors para creditor
+        return
         return if contract.creditors.size < 2
 
         ContractCreditorItemDataGenerator.new(contract).generate_data
@@ -87,21 +89,21 @@ module TceExport::MG
       end
 
       def nome_contratado(contract)
-        return nil unless contract.creditors.size == 1
+        return nil if contract.creditor.blank?
 
-        contract.creditors.first.name
+        contract.creditor.name
       end
 
       def tp_documento(contract)
-        return nil unless contract.creditors.size == 1
+        return nil if contract.creditor.blank?
 
-        contract.creditors.first.company? ? 2 : 1
+        contract.creditor.company? ? 2 : 1
       end
 
       def nro_documento(contract)
-        return nil unless contract.creditors.size == 1
+        return nil if contract.creditor.blank?
 
-        only_numbers(contract.creditors.first.identity_document)
+        only_numbers(contract.creditor.identity_document)
       end
 
       def representante_legal_contratado(creditor)
@@ -113,15 +115,15 @@ module TceExport::MG
       end
 
       def nome_representante_legal_contratado(contract)
-        return nil unless contract.creditors.size == 1
+        return nil if contract.creditor.blank?
 
-        representante_legal_contratado(contract.creditors.first).try :name
+        representante_legal_contratado(contract.creditor).try :name
       end
 
       def cpf_representante_legal(contract)
-        return nil unless contract.creditors.size == 1
+        return nil if contract.creditor.blank?
 
-        representante_legal_contratado(contract.creditors.first).try :cpf
+        representante_legal_contratado(contract.creditor).try :cpf
       end
 
       def forma_fornecimento(contract)
