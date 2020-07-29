@@ -5,6 +5,8 @@ class Auction < Compras::Model
                   :decree_treatment, :document_edict, :disclosure_date, :responsible_dissemination_id, :notice_availability,
                   :proposal_delivery, :bid_opening, :internet_address, :city, :neighborhood, :street, :telephone, :cell_phone
 
+  attr_modal :process_number, :proposal_delivery, :bid_opening
+
 
   belongs_to :employee
   belongs_to :responsible_dissemination, class_name: "Employee"

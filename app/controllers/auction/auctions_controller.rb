@@ -12,6 +12,7 @@ class Auction::AuctionsController < Auction::BaseController
       failure.js { render :form_errors, content_type: 'text/json', status: :unprocessable_entity }
     end
   end
+
   def update
     update! do |success, failure|
       success.html { redirect_to collection_path }
