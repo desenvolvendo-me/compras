@@ -1026,6 +1026,16 @@ Compras::Application.routes.draw do
       end
     end
 
+    get '/providers/register' => 'providers#register_external', as: :providers_register_external
+    post '/providers/check_register' => 'providers#check_register_external', as: :providers_check_register_external
+
+    resources :providers do
+      collection do
+        get :filter
+        get :modal
+      end
+    end
+
   end
 
   namespace :report do
