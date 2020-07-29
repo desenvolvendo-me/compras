@@ -34,7 +34,7 @@
       </ul>
     </div>
 
-    <% unless action_name.include? "external" %>
+    <% unless action_name.include?("external") || controller_name.include?("providers") %>
       <div id="menu">
         <ul>
           <% cache menu_key do %>
