@@ -973,6 +973,8 @@ Compras::Application.routes.draw do
     end
   end
 
+  get '/zendesk' => 'zendesk#index'
+
   namespace :tce_export do
     resources :monthly_monitorings, except: :destroy do
       member do

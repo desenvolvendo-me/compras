@@ -11,6 +11,7 @@
 
     <%= stylesheet_link_tag 'application', :media => "all" %>
     <%= javascript_include_tag 'application' %>
+    <%= render 'layouts/zopim', name: current_user.name, email: current_user.email unless Rails.env.test? %>
 
     <% if content_for?(:sidebar) %>
       <style type="text/css">
@@ -50,6 +51,10 @@
                 <span><%= current_prefecture %></span>
               </li>
             <% end %>
+
+            <li>
+              <%= link_to 'Suporte', zendesk_path, target: "_blank", class: 'pull-left text-overflow border' %>
+            </li>
 
             <li>
               <%= link_to t('logout'), destroy_user_session_path, :method => :delete %>

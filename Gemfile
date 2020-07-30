@@ -50,6 +50,7 @@ gem 'enumerate_it', '1.2.1'
 gem 'decore', :git => 'git://github.com/sobrinho/decore.git'
 
 gem 'strong_parameters', '0.2.1'
+gem 'jwt'
 gem 'rubocop'
 
 group :assets do
