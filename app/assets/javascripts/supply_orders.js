@@ -108,20 +108,18 @@ function setBilling(){
   }
 }
 
-function setMaterialTotalAndBalance() {
-    var licitation_process_id = $('#supply_order_licitation_process_id').val()
-    var purchase_solicitation_id = $('#supply_order_purchase_solicitation_id').val()
-    var contract_id = $('#supply_order_contract_id').val()
-    var supply_order_id = $(window.location.href.split("/")).get(-2)
-    var material_id = $('#supply_order_material_id').val()
-    var quantity = $('#supply_order_quantity').val()
+function setMaterialTotalAndBalance(quantity, material, $scope) {
+    var licitation_process_id = $('#supply_order_licitation_process_id').val();
+    var purchase_solicitation_id = $('#supply_order_purchase_solicitation_id').val();
+    var contract_id = $('#supply_order_contract_id').val();
+    var supply_order_id = $(window.location.href.split("/")).get(-2);
 
-    if (licitation_process_id && purchase_solicitation_id && contract_id && supply_order_id && material_id && quantity) {
+    if (licitation_process_id && purchase_solicitation_id && contract_id && supply_order_id && material && quantity) {
         $.ajax({
             url: Routes.licitation_process_material_total_balance,
             data: {
                 licitation_process_id: licitation_process_id,
-                material_id: material_id,
+                material_id: material,
                 purchase_solicitation_id: purchase_solicitation_id,
                 supply_order_id: supply_order_id,
                 contract_id: contract_id,
@@ -130,7 +128,7 @@ function setMaterialTotalAndBalance() {
             dataType: 'json',
             type: 'POST',
             success: function (data) {
-                $('#supply_order_balance').val(data["balance"]);
+              $scope.find('.supply_order_balance').val(data["balance"]);
             }
         });
     }
@@ -154,7 +152,6 @@ function mergeItem(item) {
 
     record.find("td.quantity").text(totalQuantity);
     record.find('input.quantity').val(totalQuantity);
-
 }
 
 function renderItem(item) {
@@ -165,7 +162,6 @@ function renderItem(item) {
         material: item.material.code + " - " + item.material.description,
         quantity: item.quantity,
         lot: item.lot
-
     };
 
     var data = $('#supply_order_items_template').mustache(itemBinds);
@@ -232,13 +228,14 @@ $(document).ready(function () {
         setModalUrlToPurchaseForm();
     });
 
-    $('form.supply_order').on('change', '#supply_order_quantity', function () {
-        setMaterialTotalAndBalance();
+    $('form.supply_order').on('change', '.supply_order_quantity', function () {
+        var quantity = $(this).val(),
+            $scope = $(this).closest("tr"),
+            material = $scope.data('material');
+
+        setMaterialTotalAndBalance(quantity, material, $scope);
     });
 
-    $('form.supply_order').on('change', '#supply_order_material_id', function () {
-        setMaterialTotalAndBalance();
-    });
 
     $('form.supply_order').on('change', '#supply_order_licitation_process_id', function () {
         setModalUrlToCreditor();
