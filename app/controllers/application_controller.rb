@@ -6,7 +6,6 @@ class ApplicationController < ActionController::Base
   around_filter :handle_customer
   before_filter :handle_action_mailer
   before_filter :authenticate_user!
-  before_filter :check_concurrent_session
   before_filter :set_customer_to_api_resources
 
   rescue_from CanCan::Unauthorized, :with => :unauthorized
@@ -49,14 +48,6 @@ class ApplicationController < ActionController::Base
       render :nothing => true, :status => :unauthorized
     else
       render :file => Rails.root.join('public/401.html'), :layout => nil, :status => 401
-    end
-  end
-
-  def check_concurrent_session
-    if user_already_logged_in?
-      sign_out(current_user)
-
-      redirect_to new_user_session_path, :alert => I18n.t('devise.failure.shared_account')
     end
   end
 
