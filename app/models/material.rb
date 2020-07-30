@@ -37,11 +37,12 @@ class Material < Unico::Model
   has_many :purchase_solicitation_budget_allocations, :through => :purchase_solicitations, :dependent => :restrict
   has_many :materials_controls, :dependent => :destroy, :inverse_of => :material, :order => :id
   has_many :licitation_processes, through: :purchase_process_items
+  has_many :items, class_name: 'PurchaseProcessItem'
 
   orderize :description
   filterize
 
-  has_many :items, class_name: 'PurchaseProcessItem'
+
 
   scope :material_of_supply_request, lambda {|params|
     licitation_process_id = params[0]
@@ -127,5 +128,9 @@ class Material < Unico::Model
 
   def origin_source_default
     self.origin_source = MaterialOriginSource::COMPRAS
+  end
+
+  def purchase_quantity licitation_process_id
+    items.where("licitation_process_id = ?", licitation_process_id).last.quantity
   end
 end
