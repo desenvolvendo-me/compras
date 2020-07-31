@@ -1,0 +1,13 @@
+<%= form_tag(auction_providers_check_register_external_path, class: "simple_form") do |f| %>
+  <div class="yui3-g">
+    <div class="yui3-u-1-2">
+      <div class="input string optional user_login field_with_hint">
+        <label class="string optional" for="cnpj">CNPJ</label>
+        <input class="string optional" id="cnpj" name="cnpj" size="50" type="text">
+      </div>
+    </div>
+  </div>
+  <div class="buttons">
+    <input class="button primary" id="user_submit" name="commit" type="submit" value="Consultar">
+  </div>
+<% end %>

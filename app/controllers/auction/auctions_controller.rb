@@ -1,7 +1,7 @@
 class Auction::AuctionsController < Auction::BaseController
   skip_before_filter :authenticate_user!, :only => :external_index
   skip_before_filter :authorize_resource!, :only => :external_index
-  layout "auction"
+  layout "electronic_auction"
 
   def create
     create! do |success, failure|
@@ -12,6 +12,7 @@ class Auction::AuctionsController < Auction::BaseController
       failure.js { render :form_errors, content_type: 'text/json', status: :unprocessable_entity }
     end
   end
+
   def update
     update! do |success, failure|
       success.html { redirect_to collection_path }
