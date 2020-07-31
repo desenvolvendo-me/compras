@@ -13,6 +13,8 @@
 //= require compras/nested_grid
 //= require compras/index_json
 //= require compras/errors
+//= require compras/eletronic_auction/jquery-3.5.1.min
+//= require compras/eletronic_auction/bootstrap.bundle.min
 //= require reports/balance_per_creditor
 //= require reports/balance_per_process_and_contract
 //= require select2/select2.min

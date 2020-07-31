@@ -1,5 +1,6 @@
 /*
  *= require unico-assets
+ *= require compras/eletronic_auction/bootstrap.min
  *= require compras/content
  *= require compras/commom
  *= require compras/sidebar
@@ -13,6 +14,7 @@
  *= require simple_form.auto_complete_input
  *= require bootstrap_prepend
  *= require select2/select2
+
  */
 
 #container {
