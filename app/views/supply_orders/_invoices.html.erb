@@ -36,7 +36,8 @@
           <th><%= Material.human_attribute_name :code %></th>
           <th><%= SupplyOrderItem.human_attribute_name :material %></th>
           <th width="10%"><%= 'Quantidade Pedida' %></th>
-          <th width="10%">Quantidade Fornecida</th>
+          <th width="10%">Quantidade Consumida</th>
+          <th width="10%">Quantidade Nota</th>
           <th width="10%">Valor</th>
         </tr>
         </thead>
@@ -201,12 +202,20 @@
     }
 
     $(".quantity_supplied").change(function(){
-      var $tr = $(this).closest('tr');
-      var unit_price = parseFloat($tr.find('.balance').data('price'));
-      var quantity = parseFloat($(this).val());
-      if(quantity){
+      var $tr = $(this).closest('tr'),
+          unit_price = parseFloat($tr.find('.balance').data('price')),
+          qtd_requested = parseInt($tr.find('.balance').data('requested')),
+          qtd_supplied = parseInt($tr.find('.balance').data('supplied')),
+          quantity = parseInt($(this).val());
+
+      if(quantity && qtd_supplied){
+        if(qtd_requested - (qtd_supplied + quantity) >= 0){
         $tr.find('.balance :input').val((unit_price * quantity).toFixed(2));
         update_total_value()
+        }else{
+          alert('Você não pode solicitar um valor maior do que a Quantidade Pedida.');
+          $(this).val(0);
+        }
       }
     })
   });

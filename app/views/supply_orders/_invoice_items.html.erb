@@ -1,7 +1,8 @@
 <tr data-material="<%= item&.material&.id %>">
   <td class="number"><%= item&.material&.code %></td>
   <td class="date"><%= item&.material&.to_s %></td>
-  <td class="release_date"><%= item.quantity %></td>
+  <td><%= item.quantity || 0 %></td>
+  <td><%= qtd_supplied = item.supplied_invoices.sum(:quantity_supplied) %></td>
   </td>
   <td>
     <% qtd = resource.invoices.present? ? 0 : item.quantity %>
@@ -11,7 +12,8 @@
   </td>
 
   <% unit_price = item.material.purchase_price(item.supply_order.licitation_process_id) %>
-  <td class="balance" data-price="<%= unit_price %>">
+
+  <td class="balance" data-price="<%= unit_price %>" data-supplied="<%= qtd_supplied %>" data-requested="<%= item.quantity %>">
     <%= f.input :total_items_value,  input_html:{ value: unit_price * (qtd || 0), disabled: true}, label: false %>
   </td>
 </tr>
