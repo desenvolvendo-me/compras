@@ -1,74 +1,66 @@
 <div id="supply_order_invoices">
 
   <div class="nested-fields add-margin-bottom">
-    <%= hidden_field_tag :invoice_id, nil, :name => 'invoice[id]' %>
+    <%= simple_fields_for :invoices_attributes, :collection => Invoice.new do |p| %>
+      <% p.object_name = "invoice" %>
+      <%= p.input :id, as: :hidden %>
 
-    <div class="yui3-g">
-      <div class="yui3-u-1-4">
-        <%= f.input :number, :as => :fake, :required => true  %>
+      <div class="yui3-g">
+        <div class="yui3-u-1-4">
+          <%= p.input :number  %>
+        </div>
+        <div class="yui3-u-1-4">
+          <%= p.input :date %>
+        </div>
+        <div class="yui3-u-1-4">
+          <%= p.input :release_date %>
+        </div>
+        <div class="yui3-u-1-4">
+          <%= p.input :value, :input_html =>{ disabled: true, id:"total-invoice-value" } %>
+        </div>
       </div>
-      <div class="yui3-u-1-4">
-        <%= f.input :date, :as => :fake,:input_html => { :class => 'date_pt ' } %>
-      </div>
-      <div class="yui3-u-1-4">
-        <%= f.input :release_date, :as => :fake,:input_html => { :class => 'date_pt ' } %>
-      </div>
-      <div class="yui3-u-1-4">
-        <%= f.input :value, :as => :fake, :input_html =>{ 'data-decimal' => true, :value => '0,00','data-precision' => 2, :maxlength => 15, :class => 'numeric' } %>
-      </div>
-    </div>
 
-    <div class="yui3-g">
-      <div class="yui3-u-1-3">
-        <%= f.input :material, :as => :auto_complete, :fake => true,
-                    'data-hidden-field-class' => 'unique',
-                    :hidden_field => 'invoice_material_id',
-                    :source_path => materials_path,
-                    :required => true, :disabled => f.object.updatabled %>
-      </div>
-      <div class="yui3-u-1-3">
-        <div class="input fake required supply_order_invoice_quantity">
-          <label class="fake required" for="supply_order_invoice_quantity">Quantidade <abbr title="obrigatório">*</abbr></label>
-          <input class="string fake required" id="supply_order_invoice_quantity" name="supply_order[invoice_quantity]" type="text" >
+      <div class="d-flex" style="justify-content: space-between">
+        <div>
+          <h3>Selecione os Itens da Nota </h3>
+        </div>
+        <div style="margin-top: 18px">
+          (*O Sistema permite modificar Quantidade Fornecida para menor se necessário)
         </div>
       </div>
-      <div class="yui3-u-1-3">
-        <div class="input fake required supply_order_invoice_attended_quantity">
-          <label class="fake required" for="supply_order_invoice_attended_quantity">Quantidade Atendida <abbr title="obrigatório">*</abbr></label>
-          <input class="string fake required" id="supply_order_invoice_attended_quantity" name="supply_order[invoice_attended_quantity]" type="text" >
-        </div>
-      </div>
-    </div>
-    <div class="yui3-g">
-      <div class="yui3-u-1-3">
-        <div class="input fake required supply_order_invoice_balance">
-          <label class="fake required" for="supply_order_invoice_balance">Saldo</label>
-          <input class="string fake required" id="supply_order_invoice_balance" name="supply_order[invoice_balance]" type="text" readonly>
-        </div>
-      </div>
-      <div class="yui3-u-1-3">
-        <div class="input fake required supply_order_invoice_unitary_value">
-          <label class="fake required" for="supply_order_invoice_unitary_value">Valor Unitário <abbr title="obrigatório">*</abbr></label>
-          <input class="string fake required" id="supply_order_invoice_unitary_value" name="supply_order[invoice_unitary_value]" type="text" >
-        </div>
-      </div>
-      <div class="yui3-u-1-3">
-        <div class="input fake required supply_order_total_value_value">
-          <label class="fake required" for="supply_order_total_value_value">Valor Total <abbr title="obrigatório">*</abbr></label>
-          <input class="string fake required" id="supply_order_total_value_value" name="supply_order[invoice_unitary_value]" type="text" >
-        </div>
-      </div>
-    </div>
 
 
-    <div class="yui3-u-1-6">
-      <%= button_tag 'Adicionar', type: :button,
-                     'data-template' => 'supply_order_invoices_template',
-                     'data-records' => 'invoices-records',
-                     'data-disabled' => not_updateable_message,
-                     :id => "supply_order_invoices_adicionar",
-                     :class => 'button add-nested-record field-without-label' %>
-    </div>
+      <table id="invoice-items-records" class="records ignore-data">
+        <thead>
+        <tr>
+          <th><%= Material.human_attribute_name :code %></th>
+          <th><%= SupplyOrderItem.human_attribute_name :material %></th>
+          <th width="10%"><%= 'Quantidade Pedida' %></th>
+          <th width="10%">Quantidade Fornecida</th>
+          <th width="10%">Valor</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% f.object.items.each do |item| %>
+          <%= simple_fields_for :supply_order_item_invoices, :collection => SupplyOrderItemInvoice.new do |r| %>
+            <% r.object_name = "invoice_items" %>
+            <%= render 'invoice_items', f: r, item: item %>
+          <% end %>
+        <% end %>
+        </tbody>
+      </table>
+
+      <div class="yui3-u-1-6">
+        <%= button_tag 'Adicionar', type: :button,
+                       'data-template' => 'supply_order_invoices_template',
+                       'data-records' => 'invoices-records',
+                       'data-disabled' => not_updateable_message,
+                       'data-ignored' => '.ignore-data',
+                       :id => "supply_order_invoices_adicionar",
+                       :class => 'button add-nested-record field-without-label' %>
+      </div>
+
+    <% end %>
   </div>
 
   <%= f.error :invoices %>
@@ -92,11 +84,11 @@
                  date: p.object.date,
                  release_date: p.object.release_date,
                  value: p.object.value,
+                 items: p.object.supply_order_item_invoices,
                  f: p %>
     <% end %>
     </tbody>
   </table>
-
   <%= mustache "supply_order_invoices_template" do %>
     <%= f.association :invoices_attributes, :collection => f.object.invoices.build, :index => '{{uuid}}' do |p| %>
       <%= render 'supply_order_invoices/form',
@@ -105,6 +97,7 @@
                  date: '{{date}}',
                  release_date: '{{release_date}}',
                  value: '{{value}}',
+                 items: nil,
                  f: p %>
     <% end %>
   <% end %>
@@ -112,21 +105,112 @@
 
 <script>
   $(function() {
-      $('.date_pt').mask('99/99/9999');
+    update_total_value();
+    supply_order_id = $(window.location.href.split("/")).get(-2);
+    $number = $("#supply_order_number");
+    $date_invoice = $("#supply_order_date");
+    $release_date = $("#supply_order_release_date");
 
-      $(".date_pt").blur(function(){
-        var regex = /^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((19|[2-9]\d)\d{2}))|(29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$/g;
-        if($(this).val() =='' || regex.test($(this).val()) ){
-          $("."+ $(this).attr('id') +" p").remove();
-        }else{
-          $("."+ $(this).attr('id') +" p").remove();
-          $("."+ $(this).attr('id')).append('<p class="error date-error">data inválida</p>');
+    $("#supply_order_invoices_adicionar").click(function(){
+      $(".supply_order_date p").remove();
+      $(".supply_order_release_date p").remove();
+    });
+
+
+    $("#invoices-records").on('nestedGrid:afterAdd', function(){
+      var $last_tr = $("#invoices-records").find("tbody tr").last();
+
+      var i = $last_tr.data('index');
+
+      $("#invoice-items-records tbody>tr").each(function( index ){
+        var j = Date.now(),
+            inputs = '';
+
+        $(this).find(':input').each(function(index){
+          var name = $(this).attr('name'),
+              matches = name.match(/\[(\w+)\]$/),
+              value = $(this).val();
+          inputs += "<input  name='supply_order[invoices_attributes]["+i+"][supply_order_item_invoices_attributes]["+j+"]["+matches[1]+"]' value='"+value+"' type='hidden'>"
+        });
+
+        $last_tr.find('.supply_order_item_invoices').append("<div class='append-item-"+index+"'></div>");
+        $last_tr.find('.supply_order_item_invoices .append-item-'+index).append(inputs);
+      });
+    });
+
+
+    $(document).on('click', '.nested-record .edit-nested-invoice', function(event) {
+      event.preventDefault();
+
+      editNestedGridRecord( $(this).closest('.nested-record') );
+    });
+
+    function editNestedGridRecord(row) {
+      var nestedFields = row.closest('table.records').siblings('.nested-fields:visible'),
+        name, matches, input, material, $tr;
+
+      row.find(':input').not(".item-invoice").each(function() {
+        matches = $(this).attr('name').match(/\[(\w+)\]$/);
+
+        if (matches) {
+          name = matches[1];
+          input = nestedFields.find(':input[name*="[' + name + ']"]').not('#invoice_items_id');
+
+          if ( input.is(':checkbox') ) {
+            if ( $(this).val() == 'true' || $(this).val() == '1' ) {
+              input.attr('checked', true);
+            } else {
+              input.attr('checked', false);
+            }
+          } else {
+            input.val( $(this).val() );
+          }
         }
       });
 
-      $("#supply_order_invoices_adicionar").click(function(){
-          $(".supply_order_date p").remove();
-          $(".supply_order_release_date p").remove();
+      row.find('.supply_order_item_invoices :input').each(function(){
+        matches = $(this).attr('name').match(/\[(\w+)\]$/);
+
+        if (matches) {
+          name = matches[1];
+          material = $(this).closest('.item-invoice-record').data('material');
+          $tr = nestedFields.find("#invoice-items-records tr[data-material="+material+"]");
+          input = $tr.find(':input[name*="[' + name + ']"]');
+
+          if ( input.is(':checkbox') ) {
+            if ( $(this).val() == 'true' || $(this).val() == '1' ) {
+              input.attr('checked', true);
+            } else {
+              input.attr('checked', false);
+            }
+          } else {
+            input.val( $(this).val() );
+          }
+        }
       });
+
+      row.remove();
+    }
+
+    function update_total_value(){
+      var total = 0.0;
+      $("#invoice-items-records tbody>tr .balance").each(function( index ){
+        total += parseFloat($(this).find(':input').val());
+      });
+      $("#total-invoice-value").val(total.toFixed(2))
+    }
+
+    $(".quantity_supplied").change(function(){
+      var $tr = $(this).closest('tr');
+      var unit_price = parseFloat($tr.find('.balance').data('price'));
+      var quantity = parseFloat($(this).val());
+      if(quantity){
+        $tr.find('.balance :input').val((unit_price * quantity).toFixed(2));
+        update_total_value()
+      }
+    })
   });
+
+
 </script>
+
