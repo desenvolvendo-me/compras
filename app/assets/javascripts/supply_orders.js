@@ -128,7 +128,12 @@ function setMaterialTotalAndBalance(quantity, material, $scope) {
             dataType: 'json',
             type: 'POST',
             success: function (data) {
-              $scope.find('.supply_order_balance').val(data["balance"]);
+              if(data['balance'] < 0){
+                alert('Saldo de material insuficiente!');
+                $scope.find('.supply_order_quantity').val(0);
+              }else{
+                $scope.find('.supply_order_balance').val(data["balance"]);
+              }
             }
         });
     }
