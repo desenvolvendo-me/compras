@@ -130,6 +130,10 @@ class Material < Unico::Model
     self.origin_source = MaterialOriginSource::COMPRAS
   end
 
+  def purchase_price licitation_process_id
+    items.where("licitation_process_id = ?", licitation_process_id).last.unit_price
+  end
+
   def purchase_quantity licitation_process_id
     items.where("licitation_process_id = ?", licitation_process_id).last.quantity
   end
