@@ -226,6 +226,7 @@ $(document).ready(function () {
     setModalUrlToMaterial();
     disableWhenSelected("#supply_order_licitation_process_id", "#supply_order_contract");
     disableWhenSelected("#supply_order_licitation_process_id", "#supply_order_purchase_solicitation");
+    update_total_value();
 
     $('form.supply_order').on('change', '#supply_order_purchase_solicitation_id', function () {
       setBilling();
@@ -335,5 +336,119 @@ $(document).ready(function () {
 
     $input_complete.attr('data-source', Routes.secretaries+'?by_contract_expense%5Bcontract%5D='+contract_id+'&by_contract_expense%5Bexpanse%5D='+expense_id);
   });
+
+
+
+  supply_order_id = $(window.location.href.split("/")).get(-2);
+  $number = $("#supply_order_number");
+  $date_invoice = $("#supply_order_date");
+  $release_date = $("#supply_order_release_date");
+
+  $("#supply_order_invoices_adicionar").click(function(){
+    $(".supply_order_date p").remove();
+    $(".supply_order_release_date p").remove();
+  });
+
+
+  $("#invoices-records").on('nestedGrid:afterAdd', function(){
+    var $last_tr = $("#invoices-records").find("tbody tr").last();
+
+    var i = $last_tr.data('index');
+
+    $("#invoice-items-records tbody>tr").each(function( index ){
+      var j = Date.now(),
+        inputs = '';
+
+      $(this).find(':input').each(function(index){
+        var name = $(this).attr('name'),
+          matches = name.match(/\[(\w+)\]$/),
+          value = $(this).val();
+        inputs += "<input  name='supply_order[invoices_attributes]["+i+"][supply_order_item_invoices_attributes]["+j+"]["+matches[1]+"]' value='"+value+"' type='hidden'>"
+      });
+
+      $last_tr.find('.supply_order_item_invoices').append("<div class='append-item-"+index+"'></div>");
+      $last_tr.find('.supply_order_item_invoices .append-item-'+index).append(inputs);
+    });
+  });
+
+
+  $(document).on('click', '.nested-record .edit-nested-invoice', function(event) {
+    event.preventDefault();
+
+    editNestedGridRecord( $(this).closest('.nested-record') );
+  });
+
+  function editNestedGridRecord(row) {
+    var nestedFields = row.closest('table.records').siblings('.nested-fields:visible'),
+      name, matches, input, material, $tr;
+
+    row.find(':input').not(".item-invoice").each(function() {
+      matches = $(this).attr('name').match(/\[(\w+)\]$/);
+
+      if (matches) {
+        name = matches[1];
+        input = nestedFields.find(':input[name*="[' + name + ']"]').not('#invoice_items_id');
+
+        if ( input.is(':checkbox') ) {
+          if ( $(this).val() == 'true' || $(this).val() == '1' ) {
+            input.attr('checked', true);
+          } else {
+            input.attr('checked', false);
+          }
+        } else {
+          input.val( $(this).val() );
+        }
+      }
+    });
+
+    row.find('.supply_order_item_invoices :input').each(function(){
+      matches = $(this).attr('name').match(/\[(\w+)\]$/);
+
+      if (matches) {
+        name = matches[1];
+        material = $(this).closest('.item-invoice-record').data('material');
+        $tr = nestedFields.find("#invoice-items-records tr[data-material="+material+"]");
+        input = $tr.find(':input[name*="[' + name + ']"]');
+
+        if ( input.is(':checkbox') ) {
+          if ( $(this).val() == 'true' || $(this).val() == '1' ) {
+            input.attr('checked', true);
+          } else {
+            input.attr('checked', false);
+          }
+        } else {
+          input.val( $(this).val() );
+        }
+      }
+    });
+
+    row.remove();
+  }
+
+  function update_total_value(){
+    var total = 0.0;
+    $("#invoice-items-records tbody>tr .balance").each(function( index ){
+      total += parseFloat($(this).find(':input').val());
+    });
+    $("#total-invoice-value").val(total.toFixed(2))
+  }
+
+  $(".quantity_supplied").change(function(){
+    var $tr = $(this).closest('tr'),
+      unit_price = parseFloat($tr.find('.balance').data('price')),
+      qtd_requested = parseInt($tr.find('.balance').data('requested')),
+      qtd_supplied = parseInt($tr.find('.balance').data('supplied')),
+      quantity = parseInt($(this).val());
+
+    if(quantity && qtd_supplied){
+      if(qtd_requested - (qtd_supplied + quantity) >= 0){
+        $tr.find('.balance :input').val((unit_price * quantity).toFixed(2));
+        update_total_value()
+      }else{
+        alert('Você não pode solicitar um valor maior do que a Quantidade Pedida.');
+        $(this).val(0);
+      }
+    }
+  })
 
 });
