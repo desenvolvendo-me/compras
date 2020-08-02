@@ -22,18 +22,18 @@
 
 
 
-$(".clear").live('click', function() {
+$(".clear").delegate('click', function() {
   $(this).closest(".modal-finder").find("input.modal").val("");
 });
 
-$(".modal-finder-remove").live("click", function () {
+$(".modal-finder-remove").delegate("click", function () {
   if (!$(this).data('disabled')) {
     $(this).closest("tr").remove();
   }
   return false;
 });
 
-$(".modal-finder .modal input.modal").live("change", function(event, record) {
+$(".modal-finder .modal input.modal").delegate("change", function(event, record) {
   var id = $(this).attr("id");
   var template = "#" + id + "_template";
   var defaults = {
