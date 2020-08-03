@@ -3,7 +3,6 @@
  *= require compras/eletronic_auction/bootstrap.min
  *= require compras/eletronic_auction/compras_auction
  *= require compras/content
- *= require compras/commom
  *= require compras/sidebar
  *= require compras/records
  *= require compras/radio_button
@@ -110,7 +109,7 @@ div.inline_buttons {
     border: solid 1px #C7C7C7;
     background-color: #FFFFFF;
     padding: 10px 5px;
-    height: 41px;
+    height: 49px;
 }
 
 #content .banner {
