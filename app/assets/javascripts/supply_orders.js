@@ -129,7 +129,7 @@ function setMaterialTotalAndBalance(quantity, material, $scope) {
             type: 'POST',
             success: function (data) {
               if(data['balance'] < 0){
-                alert('Saldo de material insuficiente!');
+                custom_alert( 'Saldo de material insuficiente!', 'Atenção');
                 $scope.find('.supply_order_quantity').val(0);
               }else{
                 $scope.find('.supply_order_balance').val(data["balance"]);
@@ -432,7 +432,7 @@ $(document).ready(function () {
     $("#total-invoice-value").val(total.toFixed(2))
   }
 
-  $(".quantity_supplied").on('change keyup',function(){
+  $(".quantity_supplied").on('keyup',function(){
 
     var $tr = $(this).closest('tr'),
       unit_price = parseFloat($tr.find('.balance').data('price')),
@@ -445,14 +445,29 @@ $(document).ready(function () {
         $tr.find('.balance :input').val((unit_price * quantity).toFixed(2));
         update_total_value()
       }else{
-        alert('Você não pode solicitar um valor maior do que a Quantidade Pedida.');
+        custom_alert( 'Você não pode solicitar um valor maior do que a Quantidade Solicitada.', 'Atenção' );
         $(this).val(0);
       }
     }
   });
 
   $("#invoices-records").on('nestedGrid:afterAdd', function(e){
-    $('form.supply_order').submit();
-  })
+    // $('form.supply_order').submit();
+  });
+
+  $("#competence_month_select").change(function(){
+    $("#invoice_competence_month").val($(this).val())
+  });
+
+  function setCompetenceMonth(){
+    var date = $("#invoice_competence_month").val();
+    $("#competence_month_select option[value='"+date+"']").prop('selected', 'selected');
+  }
+
+  $("#invoice_competence_month").change(function () {
+    setCompetenceMonth();
+  });
+
+  setCompetenceMonth();
 
 });
