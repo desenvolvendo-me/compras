@@ -432,22 +432,24 @@ $(document).ready(function () {
     $("#total-invoice-value").val(total.toFixed(2))
   }
 
-  $(".quantity_supplied").change(function(){
+  $(".quantity_supplied").on('change keyup',function(){
+
     var $tr = $(this).closest('tr'),
       unit_price = parseFloat($tr.find('.balance').data('price')),
       qtd_requested = parseInt($tr.find('.balance').data('requested')),
       qtd_supplied = parseInt($tr.find('.balance').data('supplied')),
       quantity = parseInt($(this).val());
 
-
-    if(qtd_requested - (qtd_supplied + quantity) >= 0){
-      $tr.find('.balance :input').val((unit_price * quantity).toFixed(2));
-      update_total_value()
-    }else{
-      alert('Você não pode solicitar um valor maior do que a Quantidade Pedida.');
-      $(this).val(0);
+    if(quantity){
+      if(qtd_requested - (qtd_supplied + quantity) >= 0){
+        $tr.find('.balance :input').val((unit_price * quantity).toFixed(2));
+        update_total_value()
+      }else{
+        alert('Você não pode solicitar um valor maior do que a Quantidade Pedida.');
+        $(this).val(0);
+      }
     }
-  })
+  });
 
   $("#invoices-records").on('nestedGrid:afterAdd', function(e){
     $('form.supply_order').submit();
