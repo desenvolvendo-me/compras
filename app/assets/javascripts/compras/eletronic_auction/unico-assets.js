@@ -1,0 +1,26 @@
+//= require underscore
+//= require moment
+//= require moment-pt-br
+//= require jquery
+//= require jquery.ui
+//= require jquery.mustache
+//= require jquery.price_format
+//= require compras/unico/simple_form.datepicker_input
+//= require simple_form.decimal_input
+//= require simple_form.modal_input
+//= require simple_form.nested_form
+//= require simple_form.load_nested_forms
+//= require link.modal
+//= require nobe
+//= require compras/unico/menu
+//= require filter
+//= require currency_manipulation
+//= require date
+//= require modal_info_link
+//= require select_check_boxes
+//= require radio_options
+//= require string
+//= require disabled_element
+//= require date_field_validation
+//= require content_blocker
+

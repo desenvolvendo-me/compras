@@ -1,37 +1,40 @@
-//= require unico-assets
+//= require compras/eletronic_auction/unico-assets
 //= require bignumber
-//= require backbone
-//= require compras/init_backbone
-//= require compras/simple_form.toogle_required_input
-//= require compras/simple_form.numeric_input
 //= require compras/currency_manipulation
 //= require compras/modal_info_link_disabler
 //= require compras/session_timeout
-//= require simple_form.auto_complete_input.js
-//= require compras/moment.min
 //= require compras/autocomplete_form
-//= require compras/nested_grid
 //= require compras/index_json
 //= require compras/errors
-//= require reports/balance_per_creditor
-//= require reports/balance_per_process_and_contract
+//= require compras/eletronic_auction/jquery-3.5.1.min
+//= require compras/eletronic_auction/bootstrap.bundle.min
 //= require select2/select2.min
 //= require select2/select2_locale_pt-BR
+//= require moment.min
+//= require jquery.maskedinput.min
+//= require jquery.mask.min
+//= require jquery.smartWizard.min
+//= require compras/unico/jquery.singlemask
+//= require compras/unico/simple_form.auto_complete_input
+//= require compras/unico/simple_form.masked_input
+//= require compras/unico/simple_form.numeric_input
+//= require compras/unico/simple_form.toogle_required_input
+//= require backbone
+//= require compras/init_backbone
+//= require rails
 
-
-
-$(".clear").live('click', function() {
+$(document).on(".clear",'click', function() {
   $(this).closest(".modal-finder").find("input.modal").val("");
 });
 
-$(".modal-finder-remove").live("click", function () {
+$(document).on(".modal-finder-remove", "click", function () {
   if (!$(this).data('disabled')) {
     $(this).closest("tr").remove();
   }
   return false;
 });
 
-$(".modal-finder .modal input.modal").live("change", function(event, record) {
+$(document).on(".modal-finder .modal input.modal", "change", function(event, record) {
   var id = $(this).attr("id");
   var template = "#" + id + "_template";
   var defaults = {
@@ -87,3 +90,4 @@ $(function(){
   })
 
 });
+

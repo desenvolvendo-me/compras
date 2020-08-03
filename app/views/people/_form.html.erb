@@ -3,46 +3,10 @@
 </div>
 
 <div id="personable">
+  <% if f.object.personable_type == PersonableType::INDIVIDUAL  %>
+    <%= render 'individuals/form', :f => f %>
+  <%elsif f.object.personable_type == PersonableType::COMPANY  %>
+    <%= render 'companies/form', :f => f %>
+  <% end %>
 </div>
 
-<%= mustache 'individual-template' do %>
-  <%= render 'individuals/form', :f => f %>
-<% end %>
-
-<%= mustache 'company-template' do %>
-  <%= render 'companies/form', :f => f %>
-<% end %>
-
-<script>
-  var partnerNestedForm = {
-    set: function(){
-      $("#partners-template").nestedForm({
-        add: '.add-partner',
-        remove: '.remove-partner',
-        target: '#partners',
-        uuid: 'uuid_partner',
-        fieldsWrapper: '.partner',
-        appendItem: false
-      });
-
-      this.set = function() {}
-    }
-  };
-
-  var showTemplate = function(selector) {
-    $("#personable").html($(selector).mustache());
-    loadTabs();
-  };
-
-  $(function(){
-    <% if f.object.personable_type == PersonableType::INDIVIDUAL  %>
-      showTemplate("#individual-template");
-    <% end %>
-
-    <% if f.object.personable_type == PersonableType::COMPANY  %>
-      showTemplate("#company-template");
-      partnerNestedForm.set();
-    <% end %>
-  });
-
-</script>

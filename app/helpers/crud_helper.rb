@@ -69,10 +69,11 @@ module CrudHelper
     can?(:create, main_controller_name) && respond_to?("new_#{main_controller_name.singularize}_path")
   end
 
-  def create_link(optional_params = {})
+  def create_link(optional_params = {}, optional_class = 'button primary')
+    return unless optional_class.is_a?(String)
     link_to 'Cadastrar',
             new_resource_path(optional_params||{}),
-            class: "button primary",
+            class: optional_class,
             title: t("#{controller_name}.new", resource: singular, cascade: true)
   end
 
@@ -80,10 +81,11 @@ module CrudHelper
     respond_to?("filter_#{controller_name}_path")
   end
 
-  def filter_link
+  def filter_link optional_class = 'button primary'
+    return unless optional_class.is_a?(String)
     link_to 'Busca avançada',
             filter_resources_path(current_scopes),
-            class: 'button primary filter',
+            class: "#{optional_class} filter",
             title: t("#{controller_name}.filter", resource: plural, cascade: true)
 
   end

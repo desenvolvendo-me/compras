@@ -13,7 +13,6 @@
     setup: function () {
       if ($('form.auction').length > 0) {
         this.$submit = this.$("input[id$='auction_submit']");
-        this._fixMozillaScroll();
       }
       this.$auction_item = new Views.AuctionItem();
       this.$auction_item.setup();

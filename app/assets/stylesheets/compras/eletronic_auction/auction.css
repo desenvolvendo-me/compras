@@ -44,32 +44,12 @@ fieldset {
     padding: 5px 15px 5px 15px;
     border-radius: 5px;
     margin-top: 30px;
-    width: 80%;
 }
 
-.align-center{
-    align-items: center;
-}
-.justify-center{
-    justify-content: center;
-}
-.flex-column{
-    flex-direction: column;
-}
-
-.pd-2{
-    padding: 2rem;
-}
-
-.blue{
-    color:#4c7baa;
+.wrapper-form{
+    margin: 0 8rem  0;
 }
 
 #title{
-    color: #3f6e9d !important;
-    margin-left: 22%;
-}
-
-#auction_back{
-    margin-right: 23%;
+    display: none;
 }
