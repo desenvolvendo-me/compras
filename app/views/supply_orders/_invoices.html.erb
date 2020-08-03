@@ -33,11 +33,11 @@
       <table id="invoice-items-records" class="records ignore-data">
         <thead>
         <tr>
-          <th><%= Material.human_attribute_name :code %></th>
           <th><%= SupplyOrderItem.human_attribute_name :material %></th>
           <th width="10%"><%= 'Quantidade Pedida' %></th>
-          <th width="10%">Quantidade Consumida</th>
-          <th width="10%">Quantidade Nota</th>
+          <th width="10%">Saldo do Pedido</th>
+          <th width="10%">Quantidade NF</th>
+          <th width="10%">Valor Unitário</th>
           <th width="10%">Valor</th>
         </tr>
         </thead>
@@ -104,3 +104,8 @@
   <% end %>
 </div>
 
+<style>
+  table.records .input{
+    margin-bottom: unset !important;
+  }
+</style>

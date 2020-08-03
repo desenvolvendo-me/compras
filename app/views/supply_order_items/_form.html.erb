@@ -2,13 +2,14 @@
   <td><%= material.code %></td>
   <td><%= material %></td>
   <td><%= material.purchase_quantity(licitation_process) %></td>
-  <td class="quantity">
-    <%= f.input :quantity, input_html:{class: 'supply_order_quantity'}, label: false%>
-  </td>
   <td>
     <div class="input fake required supply_order_balance">
       <input class="string fake required supply_order_balance" type="text" value="<%= balance %>" readonly>
     </div>
+  </td>
+  <td class="quantity">
+    <%= f.input :quantity, input_html:{class: 'supply_order_quantity'}, label: false%>
+
     <%= f.input :material_id, as: :hidden, input_html: { value: material.id, class: 'material-id' } %>
     <%= f.input :id, as: :hidden, input_html: { value: f.object.id } %>
     <%= f.input :_destroy, as: :hidden, input_html: { class: 'destroy' } %>
