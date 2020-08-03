@@ -155,4 +155,14 @@ module CrudHelper
       I18n.t("activerecord.errors.messages.cant_be_destroyed")
     end
   end
+
+  def month_years
+    date = []
+    (I18n.t('date.month_names')[1..12] * 2).each_with_index do |month, index|
+      index += 1
+      year = index <= 12 ? Date.today.year : Date.today.year + 1
+      date.push(["#{month}/#{year}","01/#{index > 12 ? "#{index - 12}".rjust(2,'0') : "#{index}".rjust(2,'0')}/#{year}"])
+    end
+    date
+  end
 end
