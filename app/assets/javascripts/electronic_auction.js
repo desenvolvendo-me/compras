@@ -13,6 +13,7 @@
 //= require moment.min
 //= require jquery.maskedinput.min
 //= require jquery.mask.min
+//= require jquery.smartWizard.min
 //= require compras/unico/jquery.singlemask
 //= require compras/unico/simple_form.auto_complete_input
 //= require compras/unico/simple_form.masked_input
