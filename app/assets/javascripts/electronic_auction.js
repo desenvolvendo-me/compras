@@ -20,7 +20,7 @@
 //= require compras/unico/simple_form.toogle_required_input
 //= require backbone
 //= require compras/init_backbone
-
+//= require rails
 
 $(document).on(".clear",'click', function() {
   $(this).closest(".modal-finder").find("input.modal").val("");
@@ -89,3 +89,4 @@ $(function(){
   })
 
 });
+

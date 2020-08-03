@@ -2,7 +2,7 @@
 //= require moment
 //= require moment-pt-br
 //= require jquery
-//= require jquery-ui.min
+//= require jquery.ui
 //= require jquery.mustache
 //= require jquery.price_format
 //= require compras/unico/simple_form.datepicker_input
@@ -23,4 +23,4 @@
 //= require disabled_element
 //= require date_field_validation
 //= require content_blocker
-//= require rails
+
