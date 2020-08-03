@@ -6,16 +6,19 @@
       <%= p.input :id, as: :hidden %>
 
       <div class="yui3-g">
-        <div class="yui3-u-1-4">
+        <div class="yui3-u-1-5">
           <%= p.input :number  %>
         </div>
-        <div class="yui3-u-1-4">
+        <div class="yui3-u-1-5">
           <%= p.input :date %>
         </div>
-        <div class="yui3-u-1-4">
+        <div class="yui3-u-1-5">
+          <%= p.input :competence_month, as: :select, :collection => month_years, label_method: :first, value_method: :last %>
+        </div>
+        <div class="yui3-u-1-5">
           <%= p.input :release_date %>
         </div>
-        <div class="yui3-u-1-4">
+        <div class="yui3-u-1-5">
           <%= p.input :value, :input_html =>{ disabled: true, id:"total-invoice-value" } %>
         </div>
       </div>
@@ -34,7 +37,7 @@
         <thead>
         <tr>
           <th><%= SupplyOrderItem.human_attribute_name :material %></th>
-          <th width="10%"><%= 'Quantidade Pedida' %></th>
+          <th width="10%">Quantidade Solicitada</th>
           <th width="10%">Saldo do Pedido</th>
           <th width="10%">Quantidade NF</th>
           <th width="10%">Valor Unitário</th>
@@ -70,6 +73,7 @@
     <thead>
     <tr>
       <th><%= Invoice.human_attribute_name :number %></th>
+      <th><%= Invoice.human_attribute_name :competence_month %></th>
       <th><%= Invoice.human_attribute_name :date %></th>
       <th><%= Invoice.human_attribute_name :release_date %></th>
       <th><%= Invoice.human_attribute_name :value %></th>
@@ -79,12 +83,15 @@
     </thead>
     <tbody>
     <%= f.association :invoices, :collection => localized(f.object.invoices) do |p| %>
+    <% competence_date = l(p.object.competence_month&.to_date, format: '%B/%Y') unless p.object.competence_month.blank? %>
       <%= render 'supply_order_invoices/form',
                  id: p.object.id,
                  number: p.object.number,
                  date: p.object.date,
                  release_date: p.object.release_date,
                  value: p.object.value,
+                 competence_month: p.object.competence_month,
+                 competence_month_text: competence_date,
                  items: p.object.supply_order_item_invoices,
                  f: p %>
     <% end %>
@@ -98,6 +105,8 @@
                  date: '{{date}}',
                  release_date: '{{release_date}}',
                  value: '{{value}}',
+                 competence_month: '{{competence_month}}',
+                 competence_month_text: '{{competence_month_text}}',
                  items: nil,
                  f: p %>
     <% end %>

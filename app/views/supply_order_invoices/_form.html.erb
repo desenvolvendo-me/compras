@@ -1,5 +1,6 @@
 <tr class="record nested-record invoice-record" id="number-id-<%= number %>" data-index="{{uuid}}">
   <td class="number"><%= number %></td>
+  <td class="number"><%= competence_month_text %></td>
   <td class="date"><%= date %></td>
   <td class="release_date"><%= release_date %></td>
   <td class="value"><%= value %></td>
@@ -12,6 +13,7 @@
     <%= f.input :date, as: :hidden, input_html: { value: date, class: 'decimal' } %>
     <%= f.input :release_date, as: :hidden, input_html: { value: release_date, class: 'decimal' } %>
     <%= f.input :value, as: :hidden, input_html: { value: value, class: 'decimal' } %>
+    <%= f.input :competence_month,as: :hidden, input_html: { value: competence_month, class: 'competence_month' } %>
     <%= f.input :id, as: :hidden, input_html: { value: id, class:'invoice_id' } %>
     <%= f.input :_destroy, as: :hidden, input_html: { class: 'destroy' } %>
     <%= link_to 'Remover', '#', class: 'remove-nested-record' %>
@@ -21,7 +23,6 @@
         <div class="item-invoice-record" data-material="<%= r.object.supply_order_item.material_id %>">
         <%= r.input :quantity_supplied, as: :hidden, input_html:{ class: 'item-invoice' },label: false %>
         <%= r.input :supply_order_item_id, as: :hidden, input_html:{ class: 'item-invoice'} %>
-        <%#= r.input :invoice_id, as: :hidden, input_html:{ class: 'item-invoice'} %>
         <%= r.input :id, as: :hidden, input_html:{ class: 'item-invoice'} %>
         </div>
       <% end %>
