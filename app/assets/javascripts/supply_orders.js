@@ -452,7 +452,7 @@ $(document).ready(function () {
   });
 
   $("#invoices-records").on('nestedGrid:afterAdd', function(e){
-    // $('form.supply_order').submit();
+    $('form.supply_order').submit();
   });
 
   $("#competence_month_select").change(function(){
