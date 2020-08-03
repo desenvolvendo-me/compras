@@ -1082,6 +1082,9 @@ Compras::Application.routes.draw do
     resources :purchase_processes, only: %i[index show]
     resources :contracts, only: %i[index show]
     resources :pledge_requests, only: %i[index show update]
+    namespace :auction do
+      resources :purchase_process_proposals
+    end
   end
 
   namespace :dashboard do
