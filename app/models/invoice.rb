@@ -2,7 +2,7 @@ class Invoice < Compras::Model
   attr_accessible :number, :release_date, :date, :value, :supply_order_item_invoices_attributes
 
   belongs_to :supply_order
-  has_many :supply_order_item_invoices
+  has_many :supply_order_item_invoices, dependent: :destroy
 
   validates :number, presence: true
 
