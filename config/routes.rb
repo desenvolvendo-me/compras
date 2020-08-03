@@ -1084,6 +1084,7 @@ Compras::Application.routes.draw do
     resources :pledge_requests, only: %i[index show update]
     namespace :auction do
       resources :purchase_process_proposals
+      resources :licitation_processes
     end
   end
 
