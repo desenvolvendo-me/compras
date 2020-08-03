@@ -1,6 +1,7 @@
 /*
  *= require unico-assets
  *= require compras/eletronic_auction/bootstrap.min
+ *= require compras/eletronic_auction/nav_tab
  *= require compras/content
  *= require compras/commom
  *= require compras/sidebar
@@ -110,22 +111,7 @@ div.inline_buttons {
     height: 41px;
 }
 
-form.simple_form .ui-tabs ul {
-    background: #4a83c0;
-    background: -moz-linear-gradient(#4a83c0, #598ec5);
-    background: -webkit-linear-gradient(#4a83c0, #598ec5);
-    background: linear-gradient(#4a83c0, #598ec5);
-    margin-bottom: 0.5em;
+#content .banner {
+    float: right;
+    margin-bottom: 0;
 }
-
-form.simple_form .ui-tabs .ui-tabs-nav a {
-    color: #FFF;
-    display: block !important;
-    text-decoration: none;
-    text-transform: capitalize;
-}
-
-form.simple_form .ui-tabs li.ui-tabs-active a {
-    background: rgb(114, 146, 179);
-}
-
