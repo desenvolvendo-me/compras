@@ -356,14 +356,13 @@ $(document).ready(function () {
     var i = $last_tr.data('index');
 
     $("#invoice-items-records tbody>tr").each(function( index ){
-      var j = Date.now(),
-        inputs = '';
+      var inputs = '';
 
-      $(this).find(':input').each(function(index){
+      $(this).find(':input').each(function(){
         var name = $(this).attr('name'),
           matches = name.match(/\[(\w+)\]$/),
           value = $(this).val();
-        inputs += "<input  name='supply_order[invoices_attributes]["+i+"][supply_order_item_invoices_attributes]["+j+"]["+matches[1]+"]' value='"+value+"' type='hidden'>"
+        inputs += "<input  name='supply_order[invoices_attributes]["+i+"][supply_order_item_invoices_attributes]["+index+"]["+matches[1]+"]' value='"+value+"' type='hidden'>"
       });
 
       $last_tr.find('.supply_order_item_invoices').append("<div class='append-item-"+index+"'></div>");
@@ -440,15 +439,18 @@ $(document).ready(function () {
       qtd_supplied = parseInt($tr.find('.balance').data('supplied')),
       quantity = parseInt($(this).val());
 
-    if(quantity && qtd_supplied){
-      if(qtd_requested - (qtd_supplied + quantity) >= 0){
-        $tr.find('.balance :input').val((unit_price * quantity).toFixed(2));
-        update_total_value()
-      }else{
-        alert('Você não pode solicitar um valor maior do que a Quantidade Pedida.');
-        $(this).val(0);
-      }
+
+    if(qtd_requested - (qtd_supplied + quantity) >= 0){
+      $tr.find('.balance :input').val((unit_price * quantity).toFixed(2));
+      update_total_value()
+    }else{
+      alert('Você não pode solicitar um valor maior do que a Quantidade Pedida.');
+      $(this).val(0);
     }
+  })
+
+  $("#invoices-records").on('nestedGrid:afterAdd', function(e){
+    $('form.supply_order').submit();
   })
 
 });
