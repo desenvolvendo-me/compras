@@ -1,12 +1,16 @@
-//= require compras/eletronic_auction/unico-assets
+/** Unico Assets **/
+//= require jquery
+/** Unico Assets **/
+
+//= require compras/eletronic_auction/jquery-2.2.4.min
 //= require bignumber
 //= require compras/currency_manipulation
 //= require compras/modal_info_link_disabler
 //= require compras/session_timeout
 //= require compras/autocomplete_form
+//= require compras/nested_grid
 //= require compras/index_json
 //= require compras/errors
-//= require compras/eletronic_auction/jquery-3.5.1.min
 //= require compras/eletronic_auction/bootstrap.bundle.min
 //= require select2/select2.min
 //= require select2/select2_locale_pt-BR
@@ -19,9 +23,38 @@
 //= require compras/unico/simple_form.masked_input
 //= require compras/unico/simple_form.numeric_input
 //= require compras/unico/simple_form.toogle_required_input
+//= require compras/unico/nobe
+//= require compras/unico/menu
+//= require compras/unico/modal_info_link
+
+/** Unico Assets **/
+//= require underscore
+//= require moment
+//= require moment-pt-br
+//= require jquery.ui
+//= require jquery.mustache
+//= require jquery.price_format
+//= require compras/unico/simple_form.datepicker_input
+//= require simple_form.decimal_input
+//= require simple_form.modal_input
+//= require simple_form.load_nested_forms
+//= require simple_form.nested_form
+//= require link.modal
+//= require filter
+//= require currency_manipulation
+//= require date
+//= require select_check_boxes
+//= require radio_options
+//= require string
+//= require disabled_element
+//= require date_field_validation
+//= require content_blocker
+//= require rails
+/** Unico Assets **/
+
 //= require backbone
 //= require compras/init_backbone
-//= require rails
+
 
 $(document).on(".clear",'click', function() {
   $(this).closest(".modal-finder").find("input.modal").val("");
