@@ -1,9 +1,10 @@
 <%= f.error :items %>
-
+<button type="button" class="button primary edit-order-items" style="float: right; margin-bottom: 10px;">Editar</button>
 <table id="items-records" class="records">
   <thead>
   <tr>
     <th><%= Material.human_attribute_name :code %></th>
+    <th>Data do Pedido</th>
     <th><%= SupplyOrderItem.human_attribute_name :material %></th>
     <th>Qtd. Licitada</th>
     <th width="10%">Qtd. Atd. Anteriormente</th>
@@ -22,4 +23,12 @@
   </tbody>
 </table>
 
+<script>
+  <%if f.object.items.present? %>
+    $(".supply_order_quantity").prop('readonly', true);
+  <% end %>
 
+  $(".edit-order-items").click(function(){
+    $(".supply_order_quantity").prop('readonly', !$(".supply_order_quantity").prop('readonly'));
+  })
+</script>
