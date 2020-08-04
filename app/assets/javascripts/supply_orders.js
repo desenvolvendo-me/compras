@@ -338,7 +338,7 @@ $(document).ready(function () {
   });
 
 
-
+  /** tab Nota Fiscal **/
   supply_order_id = $(window.location.href.split("/")).get(-2);
   $number = $("#supply_order_number");
   $date_invoice = $("#supply_order_date");
@@ -427,9 +427,10 @@ $(document).ready(function () {
   function update_total_value(){
     var total = 0.0;
     $("#invoice-items-records tbody>tr .balance").each(function( index ){
-      total += parseFloat($(this).find(':input').val());
+      total += parsePtBrFloat($(this).find(':input').val());
     });
-    $("#total-invoice-value").val(total.toFixed(2))
+
+    $("#total-invoice-value").val(floatToPtBrString(total))
   }
 
   $(".quantity_supplied").on('keyup',function(){
@@ -442,7 +443,7 @@ $(document).ready(function () {
 
     if(quantity){
       if(qtd_requested - (qtd_supplied + quantity) >= 0){
-        $tr.find('.balance :input').val((unit_price * quantity).toFixed(2));
+        $tr.find('.balance :input').val(floatToPtBrString(unit_price * quantity));
         update_total_value()
       }else{
         custom_alert( 'Você não pode solicitar um valor maior do que a Quantidade Solicitada.', 'Atenção' );
