@@ -469,12 +469,17 @@ $(document).ready(function () {
   });
 
   setCompetenceMonth();
+  /** tab Nota Fiscal **/
+
 
   $(function(){
     $(".tabs").tabs({
       active: sessionStorage.getItem("currentTabIndexSupplyOrder"),
       activate: function(event, ui) {
-        sessionStorage.setItem("currentTabIndexSupplyOrder", $(".tabs").tabs('option', 'active'));
+        var tabIndex = $(".tabs").tabs('option', 'active');
+        sessionStorage.setItem("currentTabIndexSupplyOrder", tabIndex);
+        if(tabIndex == 3) $("#supply_order_submit").hide();
+        if(tabIndex != 3) $("#supply_order_submit").show();
       }
     });
   })
