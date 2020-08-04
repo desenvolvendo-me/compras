@@ -25,7 +25,11 @@
 
 <script>
   <%if f.object.items.present? %>
-    $(".supply_order_quantity").prop('readonly', true);
+  $(".supply_order_quantity").prop('readonly', true);
+  <% end %>
+
+  <%unless f.object.persisted? %>
+  $('.edit-order-items').hide();
   <% end %>
 
   $(".edit-order-items").click(function(){
