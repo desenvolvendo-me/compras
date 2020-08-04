@@ -470,4 +470,13 @@ $(document).ready(function () {
 
   setCompetenceMonth();
 
+  $(function(){
+    $(".tabs").tabs({
+      active: sessionStorage.getItem("currentTabIndexSupplyOrder"),
+      activate: function(event, ui) {
+        sessionStorage.setItem("currentTabIndexSupplyOrder", $(".tabs").tabs('option', 'active'));
+      }
+    });
+  })
+
 });
