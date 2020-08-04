@@ -15,8 +15,8 @@
       <div class="yui3-u-1-2">
         <label class="fake" for="benefit_type">Tipo</label>
         <%= select_tag :kind, options_for_select(PurchaseSolicitationKind.to_a),
-                       include_blank: true, as: :fake, :required => true,
-                       class: 'required kind select', id:'purchase_solicitation_kind'%>
+                       include_blank: true, as: :fake,
+                       class: ' kind select', id:'purchase_solicitation_kind'%>
       </div>
     </div>
 
