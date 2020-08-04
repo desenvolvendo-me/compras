@@ -1,0 +1,42 @@
+(function ($) {
+  // Handle HTTP errors from ajax requests
+  $(document).ajaxError(function (event, request) {
+    var status = request.status.toString();
+
+    if (!status.match(/401|404|500/)) {
+      return;
+    }
+
+    if (environment.match(/staging|training|production/)) {
+      window.location = "<%= ENV['RAILS_RELATIVE_URL_ROOT'] %>/" + status + '.html';
+    }
+  });
+
+  // Remove main scrolling before dialog open
+  $('body').on('dialogopen', function () {
+    $(this).css('overflow', 'hidden');
+    $.ui.dialog.overlay.resize();
+  });
+
+  // Restore main scrolling before dialog close
+  $('body').on('dialogbeforeclose', function () {
+    // skip if we have more than one modal open
+    if ($('.ui-widget-overlay').length > 1) {
+      return;
+    }
+
+    $(this).css('overflow', 'auto');
+  });
+
+  // will_paginate do not support link attributes yet.
+  // See: https://github.com/mislav/will_paginate/pull/100
+  $('.ui-modal .pagination a').on('click', function () {
+    $.rails.handleRemote($(this));
+    return false;
+  });
+
+  // Focus first focusable input
+  $(document).ready(function () {
+    $(":input:focusable:first").not(".modal").focus().trigger("focus").trigger("focus.mask");
+  });
+})(jQuery);
