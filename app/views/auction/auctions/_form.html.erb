@@ -1,113 +1,77 @@
-<h1 class="text-center blue"><span id="step-title"></span></h1>
 
-<!-- Circles which indicates the steps of the form: -->
-<div class="dots text-center">
-  <span class="step"></span>
-  <span class="step"></span>
-  <span class="step"></span>
-  <span class="step"></span>
-</div>
-
-<div class="d-flex align-center flex-column">
-  <div class="tab d-flex justify-center">
-    <%= render 'main', f: f %>
-  </div>
-
-  <div class="tab justify-center" style="width: 79.5rem">
-    <%= render 'items', f: f %>
-  </div>
-
-  <div class="tab justify-center" style="width: 79.5rem">
-    <%= render 'group_items', f: f %>
-  </div>
-  <div class="tab align-center flex-column" style="width: 79.5rem">
-    <%= render 'step_four', f: f %>
-  </div>
-  <div>
-    <button type="button" id="prevBtn" class="button primary">Voltar</button>
-    <button type="button" id="nextBtn" class="button primary">Próximo</button>
-  </div>
-</div>
 <%= stylesheet_link_tag 'compras/eletronic_auction/auction'%>
 
+<fieldset>
+  <div id="smartwizard">
+    <ul class="nav">
+      <li>
+        <a class="nav-link" href="#step-1">
+          Etapa 1 - Dados Principal
+        </a>
+      </li>
+      <li>
+        <a class="nav-link" href="#step-2">
+          Etapa 2 - Dados dos Itens
+        </a>
+      </li>
+      <li>
+        <a class="nav-link" href="#step-3">
+          Etapa 3 - Dados dos Grupos
+        </a>
+      </li>
+      <li>
+        <a class="nav-link" href="#step-4">
+          Etapa 4 - Parâmentos Finais e Edital
+        </a>
+      </li>
+    </ul>
+
+    <div class="tab-content">
+      <div id="step-1" class="tab-pane" role="tabpanel">
+        <%= render 'main', f: f %>
+      </div>
+      <div id="step-2" class="tab-pane" role="tabpanel">
+        <%= render 'items', f: f %>
+      </div>
+      <div id="step-3" class="tab-pane" role="tabpanel">
+        <%= render 'group_items', f: f %>
+      </div>
+      <div id="step-4" class="tab-pane" role="tabpanel">
+        <%= render 'step_four', f: f %>
+      </div>
+    </div>
+  </div>
+
+</fieldset>
+
 <script>
-  var currentTab = 0;
-  var currentTabTitle = ['Etapa 1 - Dados Principal','Etapa 2 - Dados dos Itens','Etapa 3 - Dados dos Grupos', 'Etapa 4 - Parâmentos Finais e Edital'];
-  showTab(currentTab);
-
-  function showTab(n) {
-    var tabs = $(".tab");
-    tabs.eq(currentTab).css('display', 'flex');
-    $("#step-title").html(currentTabTitle[n]);
-    // ... and fix the Previous/Next buttons:
-    if (n === 0) {
-      $("#prevBtn").css('display', "none")
-    } else {
-      $("#prevBtn").css('display', "inline")
-    }
-    
-    if (n === (tabs.length - 1)) {
-      $("#nextBtn").html("Salvar");
-      $("#nextBtn").addClass("submit");
-    } else {
-      $("#nextBtn").html("Próximo");
-      $("#nextBtn").removeClass("submit");
-    }
-
-    fixStepIndicator(n)
-  }
-
-  function nextPrev(n) {
-    // This function will figure out which tab to display
-    var tabs = $(".tab");
-
-    if (n == 1 && !validateForm()) return false;
-    tabs.eq(currentTab).css('display', 'none');
-    // Increase or decrease the current tab by 1:
-    currentTab = currentTab + n;
-    // if you have reached the end of the form... :
-    // if (currentTab >= tabs.length) {
-    //
-    //   document.getElementById("regForm").submit();
-    //   return false;
-    // }
-    showTab(currentTab);
-  }
-
-  function validateForm() {
-    // This function deals with validation of the form fields
-    var valid = true,
-      tabs = $("tab");
-
-    //enviar via ajax o form aqui
-
-    if (valid) {
-      $(".step").eq(currentTab).addClass("finish");
-    }
-    return valid;
-  }
-
-  function fixStepIndicator(n) {
-    // This function removes the "active" class of all steps...
-    var i, steps = $(".step");
-    steps.removeClass('active');
-    //... and adds the "active" class to the current step:
-    steps.eq(n).addClass('active')
-  }
-
-  $("#prevBtn").click(function(){
-    nextPrev(-1)
+  $('#smartwizard').smartWizard({
+    selected: 0, // Initial selected step, 0 = first step
+    theme: 'dots', // theme for the wizard, related css need to include for other than default theme
+    justified: true, // Nav menu justification. true/false
+    darkMode:false, // Enable/disable Dark Mode if the theme supports. true/false
+    autoAdjustHeight: true, // Automatically adjust content height
+    cycleSteps: false, // Allows to cycle the navigation of steps
+    enableURLhash: true, // Enable selection of the step based on url hash
+    transition: {
+      animation: 'fade', // Effect on navigation, none/fade/slide-horizontal/slide-vertical/slide-swing
+      speed: '400', // Transion animation speed
+      easing:'' // Transition animation easing. Not supported without a jQuery easing plugin
+    },
+    lang: { // Language variables for button
+      next: 'Proximo',
+      previous: 'Voltar'
+    },
   });
 
   $("#nextBtn").click(function(){
     $("form.auction").submit();
   });
-
+  
   $("form.auction").on('auction:afterSave', function(){
     if($("#nextBtn").hasClass('submit')){
       window.location.replace(Routes.auction_auctions)
     }
-    nextPrev(1)
   });
 
 </script>

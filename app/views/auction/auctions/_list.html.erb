@@ -1,4 +1,4 @@
-<table class="records">
+<table class="table table-borderless">
   <tbody>
   <% collection.each do |resource| %>
     <tr id="<%= dom_id resource %>">
@@ -7,7 +7,7 @@
         <div class="yui3-g section-blue">
           <div class="yui3-u-1">
             <div class="ellipsis">
-            <p><b>Pregão:</b> <spam class="white"><%= "#{resource.licitation_number}/#{resource.year}" %> - <%= resource.object %></spam></p>
+              <p><b>Pregão:</b> <spam class="white"><%= "#{resource.licitation_number}/#{resource.year}" %> - <%= resource.object %></spam></p>
             </div>
           </div>
         </div>
@@ -19,8 +19,8 @@
           </div>
 
           <div class="yui3-u-1-2 actions">
-            <%= link_to "Visualizar", edit_resource_path(resource), class: 'button primary' %>
-            <button type="button" class="button primary">Entrar Disputa</button>
+            <%= link_to "Visualizar", edit_resource_path(resource), class: 'btn btn-primary' %>
+            <button type="button" class="btn btn-primary">Entrar Disputa</button>
           </div>
         </div>
       </td>
@@ -36,29 +36,31 @@
     font-size: 22px;
     padding: 10px;
   }
-  table.records{
-    color: black;
+
+  .table td, .table th {
+    padding: .75rem 0 .75rem 0;
   }
-    .section-gray{
-      background-color: #e6e5e5bf;
-      padding: 10px;
-    }
 
-    .section-gray p{
-      font-size: 22px;
-    }
+  .section-gray{
+    background-color: #e6e5e5bf;
+    padding: 10px;
+  }
 
-    .section-gray a, button{
-      font-size: 18px;
-      border-radius: 11px !important;
-    }
-    .white{
-      color:white;
-    }
-    .actions{
-      text-align: end;
-      padding-top: 7px;
-    }
+  .section-gray p{
+    font-size: 22px;
+  }
+
+  .section-gray a, button{
+    font-size: 18px !important;
+    border-radius: 11px !important;
+  }
+  .white{
+    color:white;
+  }
+  .actions{
+    text-align: end;
+    padding-top: 7px;
+  }
   .ellipsis{
     white-space: word;
     overflow:hidden;

@@ -2,13 +2,13 @@
   <ul>
     <% if create? %>
       <li>
-        <%= create_link %>
+        <%= create_link({}, 'btn btn-primary') %>
       </li>
     <% end %>
 
     <% if auction_filter? %>
       <li>
-        <%= filter_link %>
+        <%= filter_link 'btn btn-primary' %>
       </li>
     <% end %>
   </ul>

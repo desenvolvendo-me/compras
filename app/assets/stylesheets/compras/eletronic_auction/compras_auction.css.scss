@@ -1,0 +1,67 @@
+.btn-primary {
+  background-color: #3284B6;
+  border-color: #3284B6;
+  color: #FFF;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
+  color: #fff;
+  background-color: #416f9e;
+  border-color: #285e8e; /*set the color you want here*/
+}
+
+//Nav Bar
+.nav-tabs {
+  position: relative;
+  z-index: 1;
+  padding: .7rem;
+  margin-right: 0;
+  margin-bottom: -20px;
+  margin-left: 0;
+  background-color: #4a83c0;
+  border: 0;
+  border-radius: .25rem;
+  -webkit-box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15);
+  box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15);
+
+  .nav-link {
+    color: #fff;
+    border: 0;
+    -webkit-transition: all .4s;
+    transition: all .4s;
+  }
+
+  .nav-link.active, .nav-tabs .nav-item.open .nav-link {
+    color: #fff;
+    background-color: rgba(0,0,0,0.2);
+    border-radius: .25rem;
+    -webkit-transition: all 1s;
+    transition: all 1s;
+  }
+
+  .nav-item+.nav-item {
+    margin-left: 0;
+  }
+}
+
+ul.nav-tabs{
+  margin-bottom: 3rem!important;
+}
+
+ul{
+  li{
+    list-style-type: none !important;
+  }
+}
+
+.modal {
+  position: unset;
+  left: unset;
+  z-index: 1;
+  display: block;
+}
+
+.row>.col, .row>[class*=col-] {
+  padding-right: 5px;
+  padding-left: 5px;
+}
