@@ -16,4 +16,16 @@
     <%= f.input :id, as: :hidden, input_html: { value: f.object.id } %>
     <%= f.input :_destroy, as: :hidden, input_html: { class: 'destroy' } %>
   </td>
+  <td>
+    <% qtd_solicited = f.object.quantity || 0 %>
+    <% qtd_supplied = qtd_solicited - f.object.supplied_invoices.sum(:quantity_supplied) %>
+
+    <% if qtd_supplied == 0 && qtd_solicited != 0%>
+      <div class="blue_status">Atendido</div>
+    <% elsif qtd_supplied > 0  %>
+      <div class="red_status">Atendido Parcialmente</div>
+    <% else %>
+      <div class="red_status">Em Aberto</div>
+    <% end %>
+  </td>
 </tr>

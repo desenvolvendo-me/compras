@@ -14,11 +14,12 @@
 <table id="items-records" class="records">
   <thead>
   <tr>
-    <th><%= SupplyOrderItem.human_attribute_name :material %></th>
+    <th>Material</th>
     <th>Qtd. Licitada</th>
-    <th width="10%">Qtd. Fornecida</th>
+    <th width="5%">Qtd. Fornecida</th>
     <th width="10%">Saldo</th>
-    <th width="10%">Qtd/Pedido</th>
+    <th width="10%">Qtd. Pedido</th>
+    <th >Status</th>
   </tr>
   </thead>
   <tbody>
@@ -31,6 +32,15 @@
   <% end %>
   </tbody>
 </table>
+
+<style>
+  .blue_status{
+    color: blue
+  }
+  .red_status{
+    color: red;
+  }
+</style>
 
 <script>
   <%if f.object.items.present? %>
