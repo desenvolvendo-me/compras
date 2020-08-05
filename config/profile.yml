@@ -121,5 +121,6 @@ profile:
     - auction_positions
     - auction_auctions
     - auction_management_objects
+    - auction_auction_creditor_proposals
 
 

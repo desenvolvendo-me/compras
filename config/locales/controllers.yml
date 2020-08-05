@@ -115,6 +115,7 @@ pt-BR:
     auction_positions: "Cargos"
     auction_auctions: "Pregão Eletrônico"
     auction_management_objects: "Objeto"
+    auction_auction_creditor_proposals: "Propostas de Credores"
 
   menu:
     <<: *controllers

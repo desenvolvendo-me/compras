@@ -12,6 +12,7 @@ class Auction < Compras::Model
   belongs_to :responsible_dissemination, class_name: "Employee"
   has_many :items, class_name: 'AuctionItem'
   has_many :group_items, class_name: 'AuctionGroupItem'
+  has_many :creditor_proposals, class_name: 'AuctionCreditorProposal'
 
   mount_uploader :document_edict, UnicoUploader
 
