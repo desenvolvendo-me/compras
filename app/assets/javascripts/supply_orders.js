@@ -437,16 +437,15 @@ $(document).ready(function () {
 
     var $tr = $(this).closest('tr'),
       unit_price = parseFloat($tr.find('.balance').data('price')),
-      qtd_requested = parseInt($tr.find('.balance').data('requested')),
-      qtd_supplied = parseInt($tr.find('.balance').data('supplied')),
+      qtd_balance = parseInt($tr.find('.balance').data('balance')),
       quantity = parseInt($(this).val());
 
     if(quantity){
-      if(qtd_requested - (qtd_supplied + quantity) >= 0){
+      if( qtd_balance - quantity >= 0){
         $tr.find('.balance :input').val(floatToPtBrString(unit_price * quantity));
         update_total_value()
       }else{
-        custom_alert( 'Você não pode solicitar um valor maior do que a Quantidade Solicitada.', 'Atenção' );
+        custom_alert( 'Você não pode solicitar um valor maior do que o saldo disponível.', 'Atenção' );
         $(this).val(0);
       }
     }
