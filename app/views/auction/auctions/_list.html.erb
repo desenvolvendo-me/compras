@@ -19,9 +19,18 @@
           </div>
 
           <div class="yui3-u-1-2 actions">
-            <%= link_to "Visualizar", edit_resource_path(resource), class: 'btn btn-primary' %>
-            <%= link_to "Entrar Disputa", new_auction_creditor_proposals_path(auction_id: resource), class: 'btn btn-primary' %>
-<!--            <button type="button" class="btn btn-primary">Entrar Disputa</button>-->
+            <div class="yui3-g">
+              <div class="yui3-u-1">
+                <%= link_to "Visualizar", edit_resource_path(resource), class: 'btn btn-primary' %>
+                <%= proposal_link(resource)%>
+              </div>
+            </div>
+            <div class="yui3-g">
+              <div class="yui3-u-1">
+                <button type="button" class="btn btn-primary">Entrar Disputa</button>
+              </div>
+            </div>
+
           </div>
         </div>
       </td>
