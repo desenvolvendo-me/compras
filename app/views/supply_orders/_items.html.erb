@@ -3,7 +3,6 @@
 <table id="items-records" class="records">
   <thead>
   <tr>
-    <th><%= Material.human_attribute_name :code %></th>
     <th>Data do Pedido</th>
     <th><%= SupplyOrderItem.human_attribute_name :material %></th>
     <th>Qtd. Licitada</th>
@@ -15,9 +14,11 @@
   <tbody>
   <% Material.by_licitation_process(f.object.licitation_process_id).each do |material| %>
     <%= f.association :items, :collection => init_object(f.object, material) do |p| %>
-      <% response = SupplyOrder.total_balance(f.object.licitation_process, f.object.purchase_solicitation, material, p.object.quantity, f.object, f.object.contract) %>
+      <%objects = SupplyOrder.where(licitation_process_id: f.object.licitation_process_id, purchase_solicitation_id: f.object.purchase_solicitation_id)
+        quantity_delivered = objects.joins(:items).where("compras_supply_order_items.material_id = ?", material.id).sum(:quantity).to_f || 0
+      %>
 
-      <%= render 'supply_order_items/form', f: p, material: material, licitation_process: f.object.licitation_process_id, balance: response['balance'] %>
+      <%= render 'supply_order_items/form', f: p, parent: f, material: material, licitation_process: f.object.licitation_process_id, balance: quantity_delivered.to_i %>
     <% end %>
   <% end %>
   </tbody>

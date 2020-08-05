@@ -1,14 +1,13 @@
 <tr class="record item-record" data-material="<%= material.id %>">
-  <td><%= material.code %></td>
   <td><%= f.object.persisted? ? l(f.object.created_at, format: "%d/%m/%Y") : '' %></td>
   <td><%= material %></td>
-  <td><%= material.purchase_quantity(licitation_process) %></td>
+  <td><%= qtd_licitaded = material.purchase_quantity(licitation_process) %></td>
   <td>
-    0
+    <%= balance %>
   </td>
   <td>
     <div class="input fake required supply_order_balance">
-      <input class="string fake required supply_order_balance" type="text" value="<%= balance %>" readonly>
+      <input class="string fake required supply_order_balance" type="text" value="<%= (qtd_licitaded - balance).to_i %>" readonly>
     </div>
   </td>
   <td class="quantity">
