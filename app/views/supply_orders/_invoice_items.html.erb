@@ -4,7 +4,7 @@
   <td><%= qtd_supplied = item.supplied_invoices.sum(:quantity_supplied) %></td>
   <td>
     <% qtd = resource.invoices.present? ? 0 : item.quantity %>
-    <%= f.input :quantity_supplied, input_html:{ value: (qtd), class: 'quantity_supplied', type:'number' },label: false %>
+    <%= f.input :quantity_supplied, input_html:{ value: (qtd), class: 'quantity_supplied' },label: false %>
     <%= f.input :supply_order_item_id, as: :hidden, input_html:{ value: item.id} %>
     <%= f.input :id, as: :hidden %>
   </td>
