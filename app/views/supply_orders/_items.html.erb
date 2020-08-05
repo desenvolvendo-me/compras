@@ -1,9 +1,16 @@
 <%= f.error :items %>
-<button type="button" class="button primary edit-order-items" style="float: right; margin-bottom: 10px;">Editar</button>
+
+<div class="d-flex justify-content-between">
+  <%supply_date = f.object.items.blank? ? '' : l(f.object.items[0].created_at, format: "%d/%m/%Y") %>
+  <%= f.input :supply_date, as: :fake, input_html:{ value: supply_date, disabled: true }, label:"Data  do Pedido" %>
+  <div style="padding-top: 2rem">
+    <button type="button" class="button primary edit-order-items" style="float: right; margin-bottom: 10px;">Editar</button>
+  </div>
+</div>
+
 <table id="items-records" class="records">
   <thead>
   <tr>
-    <th>Data do Pedido</th>
     <th><%= SupplyOrderItem.human_attribute_name :material %></th>
     <th>Qtd. Licitada</th>
     <th width="10%">Qtd. Fornecida</th>
@@ -16,7 +23,7 @@
     <%= f.association :items, :collection => init_object(f.object, material) do |p| %>
       <% response = SupplyOrder.total_balance(f.object.licitation_process, f.object.purchase_solicitation, material, p.object.quantity, f.object, f.object.contract) %>
 
-      <%= render 'supply_order_items/form', f: p, parent: f, material: material, licitation_process: f.object.licitation_process_id, balance: response['balance'].to_i %>
+      <%= render 'supply_order_items/form', f: p, material: material, licitation_process: f.object.licitation_process_id, balance: response['balance'].to_i %>
     <% end %>
   <% end %>
   </tbody>

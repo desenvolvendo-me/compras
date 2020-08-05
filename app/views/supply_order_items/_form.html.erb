@@ -1,5 +1,4 @@
 <tr class="record item-record" data-material="<%= material.id %>">
-  <td><%= f.object.persisted? ? l(f.object.created_at, format: "%d/%m/%Y") : '' %></td>
   <td><%= material %></td>
   <td><%= qtd_licitaded = material.purchase_quantity(licitation_process) %></td>
   <td>
