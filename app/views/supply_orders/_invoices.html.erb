@@ -48,7 +48,9 @@
         <% f.object.items.each do |item| %>
           <%= simple_fields_for :supply_order_item_invoices, :collection => SupplyOrderItemInvoice.new do |r| %>
             <% r.object_name = "invoice_items" %>
-            <%= render 'invoice_items', f: r, item: item %>
+            <% qtd_solicited = item.quantity || 0 %>
+            <% qtd_supplied = qtd_solicited - item.supplied_invoices.sum(:quantity_supplied) %>
+            <%= render 'invoice_items', f: r, item: item, qtd_solicited: qtd_solicited, qtd_supplied: qtd_supplied  %>
           <% end %>
         <% end %>
         </tbody>
@@ -83,7 +85,7 @@
     </thead>
     <tbody>
     <%= f.association :invoices, :collection => localized(f.object.invoices) do |p| %>
-    <% competence_date = l(p.object.competence_month&.to_date, format: '%B/%Y') unless p.object.competence_month.blank? %>
+      <% competence_date = l(p.object.competence_month&.to_date, format: '%B/%Y') unless p.object.competence_month.blank? %>
       <%= render 'supply_order_invoices/form',
                  id: p.object.id,
                  number: p.object.number,
@@ -116,5 +118,8 @@
 <style>
   table.records .input{
     margin-bottom: unset !important;
+  }
+  .hide{
+    display: none;
   }
 </style>

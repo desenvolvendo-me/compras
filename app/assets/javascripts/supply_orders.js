@@ -409,19 +409,22 @@ $(document).ready(function () {
         $tr = nestedFields.find("#invoice-items-records tr[data-material="+material+"]");
         input = $tr.find(':input[name*="[' + name + ']"]');
 
-        if ( input.is(':checkbox') ) {
-          if ( $(this).val() == 'true' || $(this).val() == '1' ) {
-            input.attr('checked', true);
-          } else {
-            input.attr('checked', false);
-          }
-        } else {
-          input.val( $(this).val() );
-        }
+        input.val( $(this).val() );
       }
+      setBalanceOnEdit($tr);
+
     });
 
     row.remove();
+  }
+
+  function setBalanceOnEdit($tr){
+    $tr.find('.balance').data('balance', $tr.find('.quantity_supplied').val());
+    $tr.find('.quantity_supplied').trigger('keyup');
+
+    if(parseInt($tr.find('.quantity_supplied').val()) > 0){
+      $tr.show();
+    }
   }
 
   function update_total_value(){
@@ -440,7 +443,7 @@ $(document).ready(function () {
       qtd_balance = parseInt($tr.find('.balance').data('balance')),
       quantity = parseInt($(this).val());
 
-    if(quantity){
+    if($.isNumeric( quantity)){
       if( qtd_balance - quantity >= 0){
         $tr.find('.balance :input').val(floatToPtBrString(unit_price * quantity));
         update_total_value()
