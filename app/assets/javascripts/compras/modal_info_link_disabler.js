@@ -1,5 +1,5 @@
 jQuery(document).ready(function($){
-  $("input.modal").live('change', function (event, record) {
+  $("input.modal").on('change', function (event, record) {
     if (record) {
       $(this).parent().find(".modal_info a").removeAttr("data-disabled");
     } else {

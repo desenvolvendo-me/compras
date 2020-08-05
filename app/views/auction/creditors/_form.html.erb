@@ -1,69 +1,80 @@
-<div id="creditor-tabs" class="tabs">
-  <ul>
-    <li id="tab-creditor-main">
-      <a href="#creditor-main">Principal</a>
+<div id="creditor-tabs" >
+  <ul class="nav nav-tabs" role="tablist">
+    <li id="tab-creditor-main" class="nav-item">
+      <a class="nav-link active show" id="creditor-main-tab" data-toggle="tab" href="#creditor-main" role="tab" aria-controls="creditor-main"
+         aria-selected="true">Principal</a>
     </li>
 
-    <li id="tab-creditor-cnaes" class="company-field">
-      <a href="#creditor-cnaes">CNAEs</a>
+    <li id="tab-creditor-cnaes" class="nav-item company-field">
+      <a class="nav-link" id="creditor-cnaes-tab" data-toggle="tab" href="#creditor-cnaes" role="tab" aria-controls="creditor-cnaes"
+         aria-selected="true">CNAEs</a>
     </li>
 
-    <li id="tab-creditor-documents" class="company-field">
-      <a href="#creditor-documents">Documentos</a>
+    <li id="tab-creditor-documents" class="nav-item company-field">
+      <a class="nav-link" id="creditor-documents-tab" data-toggle="tab" href="#creditor-documents" role="tab" aria-controls="creditor-documents"
+         aria-selected="true">Documentos</a>
     </li>
 
-    <li id="tab-creditor-materials">
-      <a href="#creditor-materials">Materiais</a>
+    <li id="tab-creditor-materials" class="nav-item">
+      <a class="nav-link" id="creditor-materials-tab" data-toggle="tab" href="#creditor-materials" role="tab" aria-controls="creditor-materials"
+         aria-selected="true">Materiais</a>
     </li>
 
-    <li id="tab-creditor-representatives" class="company-field">
-      <a href="#creditor-representatives">Representantes</a>
+    <li id="tab-creditor-representatives" class="nav-item company-field">
+      <a class="nav-link" id="creditor-representatives-tab" data-toggle="tab" href="#creditor-representatives" role="tab" aria-controls="creditor-representatives"
+         aria-selected="true">Representantes</a>
     </li>
 
-    <li id="tab-creditor-accounts">
-      <a href="#creditor-accounts">Contas Bancárias</a>
+    <li id="tab-creditor-accounts" class="nav-item">
+      <a class="nav-link" id="creditor-accounts-tab" data-toggle="tab" href="#creditor-accounts" role="tab" aria-controls="creditor-accounts"
+         aria-selected="true">Representantes</a>
     </li>
 
-    <li id="tab-creditor-balance">
-      <a href="#creditor-balance">Balanço</a>
+    <li id="tab-creditor-balance" class="nav-item">
+      <a class="nav-link" id="creditor-balance-tab" data-toggle="tab" href="#creditor-balance" role="tab" aria-controls="creditor-balance"
+         aria-selected="true">Balanço</a>
     </li>
 
-    <li id="tab-creditor-regularization-or-administrative-sanctions">
-      <a href="#creditor-regularization-or-administrative-sanctions">Sanções Administrativas / Regularizações</a>
+    <li id="tab-creditor-regularization-or-administrative-sanctions" class="nav-item">
+      <a class="nav-link" id="creditor-regularization-or-administrative-sanction-tab" data-toggle="tab"
+         href="#creditor-regularization-or-administrative-sanctions" role="tab" aria-controls="creditor-regularization-or-administrative-sanctions"
+         aria-selected="true">Balanço</a>
     </li>
   </ul>
 
-  <div id="creditor-main">
+  <div class="tab-content">
+    <div class="tab-pane fade active show" id="creditor-main" role="tabpanel" aria-labelledby="creditor-main-tab">
     <%= render 'creditors/main', :f => f %>
   </div>
 
-  <div id="creditor-cnaes">
+  <div class="tab-pane fade" id="reditor-cnaes" role="tabpanel" aria-labelledby="reditor-cnaes-tab">
     <%= render 'creditors/cnaes', :f => f %>
   </div>
 
-  <div id="creditor-documents">
+  <div class="tab-pane fade" id="creditor-documents" role="tabpanel" aria-labelledby="creditor-documents-tab">
     <%= render 'creditors/documents', :f => f %>
   </div>
 
-  <div id="creditor-materials">
+  <div  class="tab-pane fade" id="creditor-materials" role="tabpanel" aria-labelledby="creditor-materials-tab">
     <%= render 'creditors/materials', :f => f %>
   </div>
 
-  <div id="creditor-representatives">
+  <div class="tab-pane fade" id="creditor-representatives" role="tabpanel" aria-labelledby="creditor-representatives-tab">
     <%= render 'creditors/representatives', :f => f %>
   </div>
 
-  <div id="creditor-accounts">
+  <div class="tab-pane fade" id="creditor-accounts" role="tabpanel" aria-labelledby="creditor-accounts-tab">
     <%= render 'creditors/accounts', :f => f %>
   </div>
 
-  <div id="creditor-balance">
+  <div class="tab-pane fade" id="creditor-balance" role="tabpanel" aria-labelledby="creditor-balance-tab">
     <%= render 'creditors/balance', :f => f %>
   </div>
 
-  <div id="creditor-regularization-or-administrative-sanctions">
+  <div class="tab-pane fade" id="creditor-regularization-or-administrative-sanctions" role="tabpanel" aria-labelledby="creditor-regularization-or-administrative-sanctions-tab">
     <%= render 'creditors/regularization_or_administrative_sanctions', :f => f %>
   </div>
+    </div>
 </div>
 
 <script>
