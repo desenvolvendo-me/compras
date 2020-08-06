@@ -10,7 +10,7 @@
     </div>
   </td>
   <td class="quantity">
-    <%= f.input :quantity, input_html:{class: 'supply_order_quantity'}, label: false%>
+    <%= f.input :quantity, input_html:{class: 'supply_order_quantity', placeholder:'0'}, label: false%>
 
     <%= f.input :material_id, as: :hidden, input_html: { value: material.id, class: 'material-id' } %>
     <%= f.input :id, as: :hidden, input_html: { value: f.object.id } %>
@@ -22,6 +22,8 @@
 
     <% if qtd_supplied == 0 && qtd_solicited != 0%>
       <div class="blue_status">Atendido</div>
+    <% elsif qtd_supplied > 0 && qtd_solicited == qtd_supplied %>
+      <div class="blue_status">Nenhum Solicitado</div>
     <% elsif qtd_supplied > 0  %>
       <div class="red_status">Atendido Parcialmente</div>
     <% else %>
