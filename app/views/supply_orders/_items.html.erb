@@ -1,8 +1,7 @@
 <%= f.error :items %>
 
 <div class="d-flex justify-content-between">
-  <%supply_date = f.object.items.blank? ? '' : l(f.object.items[0].created_at, format: "%d/%m/%Y") %>
-  <%= f.input :supply_date, as: :fake, input_html:{ value: supply_date, disabled: true }, label:"Data  do Pedido" %>
+  <%= f.input :supply_date, as: :fake, input_html:{ value: f.object&.items[0]&.created_at&.strftime('%d%m%Y'), disabled: true }, label:"Data  do Pedido" %>
 
   <% unless f.object.updatabled %>
     <div style="padding-top: 2rem">
@@ -23,7 +22,8 @@
   </tr>
   </thead>
   <tbody>
-  <% Material.by_licitation_process(f.object.licitation_process_id).each do |material| %>
+  <% f.object.try(:contract).try(:winning_items).each do |ratification_item| %>
+    <% material = ratification_item.purchase_process_item.material %>
     <%= f.association :items, :collection => init_object(f.object, material) do |p| %>
       <% response = SupplyOrder.total_balance(f.object.licitation_process, f.object.purchase_solicitation, material, p.object.quantity, f.object, f.object.contract) %>
 
