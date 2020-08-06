@@ -3,9 +3,11 @@ $(function () {
     event.preventDefault();
 
     var template = $(this).data('template'),
+        ignoredFields = $(this).data('ignored') || '',
         clearFieldsAfterAdd = true,
         recordsTableId = $(this).data('records'),
-        nestedFields = $(this).closest('.nested-fields');
+        nestedFields = $(this).closest('.nested-fields'),
+        inputs = nestedFields.find(':input').not($(ignoredFields).find(':input'))
 
     if ( nestedRequiredFields(nestedFields) && nestedUniqueFields(nestedFields, recordsTableId) ) {
       if ( !_.isUndefined($(this).data('clear-after-add')) ) {
@@ -13,9 +15,8 @@ $(function () {
       }
 
 
-
       $('#' + recordsTableId + ' tbody')
-        .append($('#' + template).mustache(getNestedMustacheData(nestedFields)))
+        .append($('#' + template).mustache(getNestedMustacheData(inputs)))
         .find('tr.total_summary').remove();
       
       $('#' + recordsTableId).trigger('nestedGrid:afterAdd');
@@ -135,12 +136,12 @@ $(function () {
       é o próprio nome do field e conterá o id do option selecionado e o segundo
       é o field_text que conterá o texto do option selecionado.
   */
-  function getNestedMustacheData(nestedFields) {
+  function getNestedMustacheData(inputs) {
     var data = {
       uuid: _.uniqueId('fresh-')
     };
 
-    nestedFields.find(':input').each(function() {
+    inputs.each(function() {
       var name = $(this).attr('name'),
           matches = name.match(/\[(\w+)\]$/);
 

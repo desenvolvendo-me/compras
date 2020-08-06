@@ -108,7 +108,7 @@ form.simple_form .ui-tabs ul {
     background: #4a83c0;
     background: -moz-linear-gradient(#4a83c0, #598ec5);
     background: -webkit-linear-gradient(#4a83c0, #598ec5);
-    background: linear-gradient(#4a83c0, #598ec5);
+    background: linear-gradient(#3f6e9d, #598ec5);
     margin-bottom: 0.5em;
 }
 form.simple_form .ui-tabs .ui-tabs-nav a {
@@ -146,4 +146,9 @@ h3.divider {
 
 .sidebar-box {
   width: 24% !important;
+}
+
+.alert-dialog{
+    color: #3f6e9d;
+    font-size: 17px;
 }

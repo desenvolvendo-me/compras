@@ -1,0 +1,15 @@
+<tr data-material="<%= item&.material&.id %>" class="<%= 'hide' if qtd_supplied == 0 %>">
+  <td class="date"><%= item&.material&.to_s %></td>
+  <td><%= qtd_solicited %></td>
+  <td><%= qtd_supplied %></td>
+  <td>
+    <% qtd = resource.invoices.present? ? 0 : item.quantity %>
+    <%= f.input :quantity_supplied, input_html:{ value: (qtd), class: 'quantity_supplied' },label: false %>
+    <%= f.input :supply_order_item_id, as: :hidden, input_html:{ value: item.id} %>
+    <%= f.input :id, as: :hidden %>
+  </td>
+  <td><%= unit_price = item.material&.purchase_price(item.supply_order&.licitation_process_id) || 0 %></td>
+  <td class="balance" data-price="<%= unit_price %>" data-balance="<%= qtd_supplied %>" data-requested="<%= item.quantity %>">
+    <%= f.input :total_items_value,  input_html:{ value: number_with_delimiter(unit_price * (qtd || 0)), disabled: true}, label: false %>
+  </td>
+</tr>

@@ -1,0 +1,16 @@
+<h2 id="title">
+  <span><%= "Ordem de Fornecimento: #{resource.number }/#{resource.year}" %></span>
+  <span class="subtitle"><%= "Fornecedor: #{resource.creditor}" %></span>
+  <span class="subtitle"><%= "Processo de Compra: #{resource.licitation_process.to_s}" %></span>
+</h2>
+
+<%= render 'form_wrapper' %>
+
+<style>
+  h2 span{
+    display: block;
+  }
+  h2 span.subtitle{
+    font-size: 12px;
+  }
+</style>

@@ -14,7 +14,7 @@ class SupplyOrderDecorator
   end
 
   def creditor_id
-    self.contract&.creditor&.person&.nil? ? '' : self.contract.creditor.id
+    self.contract&.creditor&.person.nil? ? '' : self.contract.creditor.id
   end
 
   def modality_or_type_of_removal
