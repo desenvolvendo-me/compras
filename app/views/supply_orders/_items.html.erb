@@ -22,7 +22,7 @@
   </tr>
   </thead>
   <tbody>
-  <% f.object.try(:contract).try(:winning_items).each do |ratification_item| %>
+  <% f.object.try(:contract).try(:winning_items).try(:each) do |ratification_item| %>
     <% material = ratification_item.purchase_process_item.material %>
     <%= f.association :items, :collection => init_object(f.object, material) do |p| %>
       <% response = SupplyOrder.total_balance(f.object.licitation_process, f.object.purchase_solicitation, material, p.object.quantity, f.object, f.object.contract) %>
