@@ -47,7 +47,7 @@
   $(".supply_order_quantity").prop('readonly', true);
   <% end %>
 
-  <%unless f.object.persisted? %>
+  <%if f.object.items.blank? %>
   $('.edit-order-items').hide();
   <% end %>
 
