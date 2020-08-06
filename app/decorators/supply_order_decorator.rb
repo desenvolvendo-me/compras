@@ -3,7 +3,7 @@ class SupplyOrderDecorator
   include Decore::Proxy
   include Decore::Header
 
-  attr_header :number_year, :creditor, :authorization_date, :licitation_process, :order_status
+  attr_header :number_year, :creditor, :authorization_date, :licitation_process, :status
 
   def number_year
     "#{self.number}/#{self.year}"
@@ -21,7 +21,23 @@ class SupplyOrderDecorator
     "#{component.modality_number} - #{component.modality_humanize || component.type_of_removal_humanize}"
   end
 
-  def order_status
-    SupplyOrderStatus.t(component.order_status)
+  def status
+    status = ''
+    component.items.each do |item|
+      qtd_solicited = item.quantity || 0
+      qtd_supplied = qtd_solicited - item.supplied_invoices.sum(:quantity_supplied)
+      if qtd_supplied == 0 && qtd_solicited != 0
+        status = "Atendido"
+      elsif qtd_supplied > 0 && qtd_solicited == qtd_supplied
+        status= "Nenhum Solicitado"
+      elsif qtd_supplied > 0
+        status = "Atendido Parcialmente"
+        break
+      else
+        status = "Em Aberto"
+      end
+    end
+
+    status
   end
 end

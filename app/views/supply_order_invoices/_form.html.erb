@@ -17,7 +17,7 @@
     <%= f.input :id, as: :hidden, input_html: { value: id, class:'invoice_id' } %>
     <%= f.input :_destroy, as: :hidden, input_html: { class: 'destroy' } %>
     <span class="remove-invoice" style="color: #519AE4;text-decoration: underline; cursor: pointer;">Remover</span>
-    <button type="button" class="remove-nested-record" style="display: none"></button>
+    <a href="#" class="remove-nested-record" style="display: none"></a>
 
     <div class="supply_order_item_invoices">
       <%= f.association :supply_order_item_invoices, :collection => items do |r| %>
