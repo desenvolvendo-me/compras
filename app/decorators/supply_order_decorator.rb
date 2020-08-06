@@ -28,13 +28,13 @@ class SupplyOrderDecorator
       qtd_supplied = qtd_solicited - item.supplied_invoices.sum(:quantity_supplied)
       if qtd_supplied == 0 && qtd_solicited != 0
         status = "Atendido"
-      elsif qtd_supplied > 0 && qtd_solicited == qtd_supplied
-        status= "Nenhum Solicitado"
+      elsif qtd_supplied > 0 && qtd_solicited == 0
+        status= "Em Aberto"
       elsif qtd_supplied > 0
         status = "Atendido Parcialmente"
         break
       else
-        status = "Em Aberto"
+        status = "Nenhum Solicitado"
       end
     end
 
