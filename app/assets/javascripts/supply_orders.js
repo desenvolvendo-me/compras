@@ -485,6 +485,20 @@ $(document).ready(function () {
         if(tabIndex != 3) $("#supply_order_submit").show();
       }
     });
-  })
+  });
 
+  $('#invoices-records').on('nestedGrid:afterRemove', function(){
+    $('form.supply_order').submit();
+  });
+
+  $(".remove-invoice").click(function(){
+    var $el = $(this);
+    var btn = {"Apagar": function() {
+                $el.closest('td').find('.remove-nested-record').click();
+              },
+              Cancelar: function() {
+                $( this ).dialog( "close" );
+              }};
+    custom_alert("Você tem certeza que deseja apagar o registro?", "Remover Registro", btn)
+  })
 });

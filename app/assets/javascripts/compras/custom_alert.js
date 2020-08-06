@@ -1,4 +1,4 @@
-function custom_alert( message, title ) {
+function custom_alert( message, title, buttons = {} ) {
   if ( !title )
     title = 'Alerta';
 
@@ -9,5 +9,6 @@ function custom_alert( message, title ) {
     title: title,
     resizable: false,
     modal: true,
+    buttons: buttons
   });
 }
