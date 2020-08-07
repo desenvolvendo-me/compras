@@ -1,0 +1,33 @@
+pt-BR:
+  activerecord:
+    models:
+      auction_creditor_proposal:
+        one: "Proposta do Fornecedor"
+        other: "Proposta do Fornecedor"
+
+    attributes:
+      auction_creditor_proposal:
+        term: "Declaro que estou ciente e concordo com as condições contidas no edital e seus anexos, bem como de que cumpro
+               plenamente os requisitos de habilitação definidos no edital."
+        impediment: " Declaro sob as penas da lei, que até a
+                      presente data inexistem fatos impeditivos
+                      para a minha habilitação no presente processo
+                      licitatório, ciente da obrigatoriedade de declarar
+                      ocorrências posteriores."
+        proposal_independent: " Declaro que a proposta apresentada para essa licitação
+                                foi elaborada de maneira independente, de acordo com o
+                                que é estabelecido na Instrução Normativa Nº 2 de 16 de
+                                setembro de 2009 da SLTI/MP."
+        art_5: " Declaro que não possuo, em minha cadeia produtiva, empregados
+                 executando trabalho degradante ou forçado, observando o disposto
+                 nos incisos III e IV do art.1º e no inciso III do art.5º da
+                 Constituição Federal."
+        art_93_pcd: " Declaro que, conforme disposto no art. 93 da Lei nº 8.213,
+                      de 24 de julho de 1991, estou ciente do cumprimento da reserva
+                      de cargos prevista em lei para pessoa com deficiência ou para
+                      reabilitado da Previdência Social e que, se aplicado ao número
+                      de funcionários da minha empresa, atendo às regras de acessibilidade
+                      previstas na legislação."
+        art_529_clt: " Declaro sob as penas da Lei, que cumpro a cota de aprendizagem nos termos estabelecidos no art. 429 da CLT."
+        proposal_doc: "Incluir Documentos Anexos da Proposta"
+        proposal_qualification_doc: "Incluir Documentos Anexos da Habilitação"

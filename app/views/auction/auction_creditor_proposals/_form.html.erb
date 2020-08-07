@@ -1,0 +1,142 @@
+<%= f.input :auction_id, as: :hidden %>
+<div class="form-row">
+  <div class="col-2">
+    <%= label_tag "Proposta" %>
+    <%= select_tag(:proposal, options_for_select([["Cadastrar", 'save'], ["Excluir", 'remove']]), {class: "form-control"}) %>
+  </div>
+</div>
+<div class="form-row">
+  <div class="col-2">
+    <%= label_tag "Numero do Pregão" %>
+    <%= text_field_tag :process_number, "", class: 'form-control', disabled: true %>
+  </div>
+  <div class="col-2">
+    <%= label_tag "Numero do Processo" %>
+    <%= text_field_tag :process_number, "", value: f.object.auction.process_number, class: 'form-control', disabled: true %>
+  </div>
+</div>
+
+
+<div class="mh-400 my-2">
+  <h4>Itens</h4>
+  <% if f.object&.auction&.items.blank? %>
+    <div class="alert alert-warning"><strong>Não foram cadastrados itens para esse pregão.</strong></div>
+  <% end %>
+  <% f.object&.auction&.items&.each do |auction_item| %>
+    <%= f.simple_fields_for :auction_creditor_proposal_items, init_item(f.object, auction_item) do |p| %>
+      <%= p.input :id, as: :hidden  %>
+      <%= p.input :auction_item_id, as: :hidden  %>
+      <div class="card my-3">
+        <div class="card-body">
+          <div class="form-row">
+            <div class="col-4">
+              <%= label_tag "Material" %>
+              <%= text_field_tag :material,"", class: 'form-control', value: auction_item.material.to_s, disabled: true %>
+            </div>
+            <div class="col-4">
+              <%= p.input :manufacturer, input_html:{class: 'form-control'}%>
+            </div>
+            <div class="col-4">
+              <%= p.input :model_version, input_html:{class: 'form-control'}%>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="col-4">
+              <%= p.input :unit_price, input_html:{class: 'form-control' }%>
+            </div>
+            <div class="col-4">
+              <%= p.input :quantity, input_html:{class: 'form-control', type: 'number'}%>
+            </div>
+            <div class="col-4">
+              <%= p.input :global_price, input_html:{class: 'form-control'}%>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="col">
+              <%= p.input :description, input_html:{class: 'form-control', rows: 2}%>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+<div id="terms">
+  <div class="form-row">
+    <div class="col-9">
+      <div class="form-check">
+        <%= f.input :term %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="col-9">
+      <div class="form-check">
+        <%= f.input :impediment %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="col-9">
+      <div class="form-check">
+        <%= f.input :proposal_independent %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="col-9">
+      <div class="form-check">
+        <%= f.input :art_5 %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="col-9">
+      <div class="form-check">
+        <%= f.input :art_93_pcd %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="col-9">
+      <div class="form-check">
+        <%= f.input :art_529_clt %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="form-row mt-4">
+  <div class="col-3">
+    <div class="form-group">
+      <%= f.input :proposal_doc %>
+    </div>
+  </div>
+  <div class="col-4">
+    <div class="form-group">
+      <%= f.input :proposal_qualification_doc %>
+    </div>
+  </div>
+</div>
+
+<style>
+  .mh-400{
+    max-height: 650px;
+    overflow:auto
+  }
+  #terms .form-row{
+    margin: 1rem 0 1rem 0;
+  }
+  #terms{
+    text-align: justify;
+  }
+  input[type=text],input[type=password],textarea{width:100%;}
+</style>
