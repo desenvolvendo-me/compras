@@ -76,8 +76,7 @@ menu:
     - licitation_process_appeals
     - process_responsibles
 
-  - contracts:
-
+  - "Contratos":
     - contracts
     - additive_solicitations
     - supply_requests
