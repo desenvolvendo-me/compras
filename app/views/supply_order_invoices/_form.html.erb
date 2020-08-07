@@ -4,8 +4,8 @@
   <td class="date"><%= date %></td>
   <td class="release_date"><%= release_date %></td>
   <td class="value"><%= value %></td>
-  <td class="settling_date"><%= f.input :settling_date, input_html:{ disabled: true, class:'editable'}, label: false  %></td>
-  <td class="settling_number"><%= f.input :settling_number, input_html:{ disabled: true, class:'editable', type: 'number'}, label: false %></td>
+  <td class="settling_date"><%= f.input :settling_date, input_html:{  class:'editable'}, label: false  %></td>
+  <td class="settling_number"><%= f.input :settling_number, input_html:{ class:'editable', type: 'number'}, label: false %></td>
   <td>
     <%= link_to 'Editar', '#', class: 'edit-nested-invoice' %>
   </td>
