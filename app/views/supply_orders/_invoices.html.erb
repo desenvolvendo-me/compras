@@ -74,11 +74,13 @@
   <table id="invoices-records" class="records">
     <thead>
     <tr>
-      <th><%= Invoice.human_attribute_name :number %></th>
+      <th>Numero da Nota Fiscal</th>
       <th><%= Invoice.human_attribute_name :competence_month %></th>
-      <th><%= Invoice.human_attribute_name :date %></th>
+      <th width="11%">Data da Nota Fiscal</th>
       <th><%= Invoice.human_attribute_name :release_date %></th>
-      <th><%= Invoice.human_attribute_name :value %></th>
+      <th width="11%">Valor da Nota Fiscal</th>
+      <th width="11%"><%= Invoice.human_attribute_name :settling_date %></th>
+      <th width="11%"><%= Invoice.human_attribute_name :settling_number %></th>
       <th></th>
       <th></th>
     </tr>
