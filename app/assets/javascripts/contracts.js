@@ -67,4 +67,77 @@ $(document).ready(function () {
 
     $("#contract_expense").attr('data-source', url);
   });
+
+  $('#creditor-dialog').on('click', '.creditor-choosed', function(){
+    var creditor_id = $(this).data('creditor');
+    var creditor_name = $(this).find('td').html();
+    fillCreditorField(creditor_name, creditor_id);
+    $('#creditor-dialog').dialog('close');
+  });
+
+  $('form').on('change', '#contract_licitation_process_id', function (event, licitationProcess) {
+    if (licitationProcess) {
+      $('#contract_content').val(licitationProcess.description);
+      $('#contract_modality_humanize').val(licitationProcess.modality_humanize);
+      $('#contract_execution_type').val(licitationProcess.execution_type);
+      $('#contract_contract_guarantees').val(licitationProcess.contract_guarantees);
+
+      if(licitationProcess.creditors){
+        if(licitationProcess.creditors.length > 1){
+          setUrlToCreditor(licitationProcess.id);
+          showToChooseCreditor(licitationProcess.creditors);
+        }else{
+          setUrlToCreditor(licitationProcess.id);
+          fillCreditorField(licitationProcess.creditors[0].name, licitationProcess.creditors[0].id);
+        }
+      }
+
+    } else {
+      clearModalityExecutionType();
+      var url = Routes.creditors + "?";
+
+      $('#contract_creditor').data("source", url);
+    }
+  });
+
+  function showToChooseCreditor(creditors){
+    var body = '';
+    $.each(creditors, function(index, creditor){
+      body += "<tr class='creditor-choosed' data-creditor='"+ creditor.id +"' > <td> "+creditor.name+" </td> </tr>";
+    });
+
+    $("#choose-creditor tbody").html(body);
+    $("#creditor-dialog").dialog("open");
+  }
+
+
+  function fillCreditorField(name, id){
+    $('#contract_creditor')
+      .val(name)
+      .trigger("change");
+
+    $('#contract_creditor_id').val(id).trigger("change");
+  }
+
+  function setUrlToCreditor(licitation_process_id){
+    var url = Routes.creditors + "?",
+      params = {by_ratification_and_licitation_process_id: licitation_process_id};
+    url += jQuery.param(params);
+
+    $('#contract_creditor').data("source", url);
+  }
+
+  $( "#creditor-dialog" ).dialog({
+    autoOpen: false,
+    height: 400,
+    width: 500,
+    modal: true,
+  });
+
+  $("#contract_contract_number").focus(function(){
+    if($("#contract_type option:selected").val() === 'minute'){
+      if($(this).val() === '')
+        $(this).val('ATA - ')
+    }
+  })
 });
