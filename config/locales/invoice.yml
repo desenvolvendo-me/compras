@@ -7,8 +7,10 @@ pt-BR:
 
     attributes:
       invoice:
-        number: "NF Número"
+        number: "Número da NF"
         release_date: "Data de Lançamento"
         date: "Data da NF"
         value: "Valor da NF"
         competence_month: "Mês de Competência"
+        settling_date: "Data de Liquidação"
+        settling_number: "Numero da Liquidação"
