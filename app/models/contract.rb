@@ -3,7 +3,7 @@ class Contract < Compras::Model
 
   attr_accessible :year, :contract_number, :sequential_number, :publication_date,
                   :lawyer_code, :contract_file, :signature_date, :end_date,
-                  :description, :content, :contract_value, :creditor_id,
+                  :description, :content, :contract_value, :creditor_id, :type,
                   :guarantee_value, :contract_validity, :subcontracting, :management_object_id,
                   :cancellation_date, :cancellation_reason, :delivery_schedules_attributes,
                   :dissemination_source_id, :contract_type_id, :contract_additives_attributes,
@@ -20,6 +20,7 @@ class Contract < Compras::Model
   mount_uploader :contract_file, UnicoUploader
 
   has_enumeration_for :contract_guarantees, :with => UnicoAPI::Resources::Compras::Enumerations::ContractGuarantees
+  has_enumeration_for :type, :with => ContractMinute
   has_enumeration_for :execution_type, :create_helpers => true
   has_enumeration_for :balance_control_type,
                       :with => ContractBalanceControlType, :create_helpers => true
