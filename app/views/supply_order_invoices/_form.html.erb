@@ -21,7 +21,7 @@
 
     <div class="supply_order_item_invoices">
       <%= f.association :supply_order_item_invoices, :collection => items do |r| %>
-        <div class="item-invoice-record" data-material="<%= r.object.supply_order_item.material_id %>">
+        <div class="item-invoice-record" data-material="<%= r.object.try(:supply_order_item).try(:material_id) %>">
         <%= r.input :quantity_supplied, as: :hidden, input_html:{ class: 'item-invoice' },label: false %>
         <%= r.input :supply_order_item_id, as: :hidden, input_html:{ class: 'item-invoice'} %>
         <%= r.input :id, as: :hidden, input_html:{ class: 'item-invoice'} %>

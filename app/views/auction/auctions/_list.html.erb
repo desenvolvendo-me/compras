@@ -7,9 +7,9 @@
         <div class="yui3-g section-blue">
           <div class="yui3-u-1">
             <div class="ellipsis">
-              <p><b>Pregão:</b>
-                <spam class="white"><%= "#{resource.licitation_number}/#{resource.year}" %></spam>
-              </p>
+
+              <p><b>Pregão:</b> <spam class="white"><%= "#{resource.licitation_number}/#{resource.year}" %> - <%= resource.object %></spam></p>
+
             </div>
           </div>
         </div>
@@ -25,7 +25,19 @@
           </div>
 
           <div class="yui3-u-1-2 actions">
-            <%= render 'list_actions', resource: resource %>
+            <div class="yui3-g">
+              <div class="yui3-u-1">
+                <%= link_to "Visualizar", edit_resource_path(resource), class: 'btn btn-primary' %>
+                <%= proposal_link(resource)%>
+              </div>
+            </div>
+            <div class="yui3-g">
+              <div class="yui3-u-1">
+                <button type="button" class="btn btn-primary">Entrar Disputa</button>
+              </div>
+            </div>
+
+
           </div>
         </div>
       </td>

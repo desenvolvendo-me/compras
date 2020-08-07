@@ -23,7 +23,8 @@
   </tr>
   </thead>
   <tbody>
-  <% Material.by_licitation_process(f.object.licitation_process_id).each do |material| %>
+  <% f.object.try(:contract).try(:winning_items).try(:each) do |ratification_item| %>
+    <% material = ratification_item.purchase_process_item.material %>
     <%= f.association :items, :collection => init_object(f.object, material) do |p| %>
       <% response = SupplyOrder.total_balance(f.object.licitation_process, f.object.purchase_solicitation, material, p.object.quantity, f.object, f.object.contract) %>
 
@@ -47,7 +48,7 @@
   $(".supply_order_quantity").prop('readonly', true);
   <% end %>
 
-  <%unless f.object.persisted? %>
+  <%if f.object.items.blank? %>
   $('.edit-order-items').hide();
   <% end %>
 

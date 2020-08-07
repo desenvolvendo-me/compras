@@ -369,7 +369,7 @@ $(document).ready(function () {
         .append($('<input type="hidden" name="supply_order[contract_id]">').val(contract))
         .append($('<input type="hidden" name="supply_order[purchase_solicitation_id]">').val(purchase_solicitation))
         .append(input_items)
-        .appendTo($(document.body)) //it has to be added somewhere into the <body>
+        .appendTo($(document.body))
         .submit();
   });
 
