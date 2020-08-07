@@ -22,12 +22,12 @@
 
     <% if qtd_supplied == 0 && qtd_solicited != 0%>
       <div class="blue_status">Atendido</div>
-    <% elsif qtd_supplied > 0 && qtd_solicited == qtd_supplied %>
-      <div class="blue_status">Nenhum Solicitado</div>
+    <% elsif qtd_supplied > 0 && qtd_solicited == 0 %>
+      <div class="red_status">Em Aberto</div>
     <% elsif qtd_supplied > 0  %>
       <div class="red_status">Atendido Parcialmente</div>
     <% else %>
-      <div class="red_status">Em Aberto</div>
+      <div class="blue_status">Nenhum Solicitado</div>
     <% end %>
   </td>
 </tr>
