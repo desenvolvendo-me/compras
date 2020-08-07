@@ -14,4 +14,8 @@ class SupplyOrdersController < CrudController
       super
     end
   end
+
+  def update
+    update! { edit_supply_order_path }
+  end
 end

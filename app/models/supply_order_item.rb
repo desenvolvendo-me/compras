@@ -11,6 +11,8 @@ class SupplyOrderItem < Compras::Model
 
   belongs_to :pledge_item
 
+  has_many :supplied_invoices, class_name: 'SupplyOrderItemInvoice'
+
   delegate :unit_price, to: :pledge_item, allow_nil: true
   delegate :quantity, :balance, :estimated_total_price,
            to: :pledge_item, allow_nil: true, prefix: true

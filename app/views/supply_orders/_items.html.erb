@@ -1,66 +1,57 @@
-<div id="supply_order_items">
+<%= f.error :items %>
 
-  <div class="nested-fields add-margin-bottom">
-    <%= hidden_field_tag :item_id, nil, :name => 'supply_order_item[id]' %>
+<div class="d-flex justify-content-between">
+  <%supply_date = f.object.items.blank? ? '' : l(f.object.items[0].created_at, format: "%d/%m/%Y") %>
+  <span style="margin-top: 3rem"><strong>Data do Pedido: <%= supply_date %></strong></span>
 
-    <div class="yui3-g">
-      <div class="yui3-u-1-3">
-        <%= f.input :material, :as => :auto_complete, :fake => true,
-                    'data-hidden-field-class' => 'unique',
-                    :source_path => materials_path,
-                    :required => true, :disabled => f.object.updatabled %>
-      </div>
-      <div class="yui3-u-1-3">
-        <%= f.input :quantity, :as => :fake, :required => true, :disabled => f.object.updatabled %>
-      </div>
-      <div class="yui3-u-1-3">
-        <div class="input fake required supply_order_balance">
-          <label class="fake required" for="supply_order_balance">Saldo</label>
-          <input class="string fake required" id="supply_order_balance" name="supply_order[balance]" type="text" readonly>
-        </div>
-      </div>
+  <% unless f.object.updatabled %>
+    <div style="padding-top: 2rem">
+      <button type="button" class="button primary edit-order-items" style="float: right; margin-bottom: 10px;">Editar</button>
     </div>
-
-    <div class="yui3-u-1-6">
-      <%= button_tag 'Adicionar', type: :button,
-                     :class => 'button add-nested-record field-without-label',
-                     'data-template' => 'supply_order_items_template',
-                     'data-records' => 'items-records',
-                     'data-disabled' => not_updateable_message %>
-    </div>
-  </div>
-
-  <%= f.error :items %>
-
-  <table id="items-records" class="records">
-    <thead>
-    <tr>
-      <th><%= SupplyOrderItem.human_attribute_name :material %></th>
-      <th><%= SupplyOrderItem.human_attribute_name :quantity %></th>
-      <th></th>
-      <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    <%= f.association :items, :collection => localized(f.object.items) do |p| %>
-      <%= render 'supply_order_items/form',
-                 id: p.object.id,
-                 material: p.object.material,
-                 material_id: p.object.material_id,
-                 quantity: p.object.quantity,
-                 f: p %>
-    <% end %>
-    </tbody>
-  </table>
-
-  <%= mustache "supply_order_items_template" do %>
-    <%= f.association :items_attributes, :collection => f.object.items.build, :index => '{{uuid}}' do |p| %>
-      <%= render 'supply_order_items/form',
-                 id: '{{id}}',
-                 material: '{{material}}',
-                 material_id: '{{material_id}}',
-                 quantity: '{{quantity}}',
-                 f: p %>
-    <% end %>
   <% end %>
 </div>
+
+<table id="items-records" class="records">
+  <thead>
+  <tr>
+    <th>Material</th>
+    <th>Qtd. Licitada</th>
+    <th width="5%">Qtd. Fornecida</th>
+    <th width="10%">Saldo</th>
+    <th width="10%">Qtd. Pedido</th>
+    <th >Status</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% Material.by_licitation_process(f.object.licitation_process_id).each do |material| %>
+    <%= f.association :items, :collection => init_object(f.object, material) do |p| %>
+      <% response = SupplyOrder.total_balance(f.object.licitation_process, f.object.purchase_solicitation, material, p.object.quantity, f.object, f.object.contract) %>
+
+      <%= render 'supply_order_items/form', f: p, material: material, licitation_process: f.object.licitation_process_id, balance: response['balance'].to_i %>
+    <% end %>
+  <% end %>
+  </tbody>
+</table>
+
+<style>
+  .blue_status{
+    color: blue
+  }
+  .red_status{
+    color: red;
+  }
+</style>
+
+<script>
+  <%if f.object.items.present? %>
+  $(".supply_order_quantity").prop('readonly', true);
+  <% end %>
+
+  <%unless f.object.persisted? %>
+  $('.edit-order-items').hide();
+  <% end %>
+
+  $(".edit-order-items").click(function(){
+    $(".supply_order_quantity").prop('readonly', !$(".supply_order_quantity").prop('readonly'));
+  })
+</script>
