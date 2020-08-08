@@ -1,5 +1,5 @@
 <div class="buttons">
-  <%= annul_link(:data_disabled => f.object.decorator.not_annullable_message) %>
+  <%= annul_link(:data_disabled => f.object.decorator.not_annullable_message, label_for_new: 'Não Tenho Necessidade') %>
 
   <% if can?(:modify, main_controller_name) %>
     <%= f.button :submit, 'data-disabled' => f.object.decorator.not_editable_message %>
