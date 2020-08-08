@@ -324,6 +324,7 @@ GEM
       activesupport (>= 3.0.0)
       multi_json (>= 1.2)
     json (2.3.1)
+    jwt (2.2.1)
     kaminari (0.15.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -580,6 +581,7 @@ DEPENDENCIES
   i18n_alchemy (= 0.2.1)
   inherited_resources (~> 1.5.1)
   jbuilder
+  jwt
   kaminari (~> 0.15.1)
   machinist (= 2.0)
   machinist-caching (= 0.0.1)

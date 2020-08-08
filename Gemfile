@@ -59,7 +59,7 @@ gem 'paper_trail'
 
 gem 'sass-rails'
 gem 'uglifier'
-
+gem 'jwt'
 gem 'zip-zip'
 
 group :production, :training, :staging do
