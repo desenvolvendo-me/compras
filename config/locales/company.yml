@@ -2,8 +2,8 @@ pt-BR:
   activerecord:
     models:
       company:
-        one: "Empresa"
-        other: "Empresas"
+        one: "Fornecedor"
+        other: "Fornecedores"
 
     attributes:
       company:

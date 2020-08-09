@@ -1,10 +1,10 @@
 module PeopleHelper
   def society_kind_name(form_builder, mustache)
-    partial_society_kind_name(form_builder, mustache) + '[extended_partner_attributes][society_kind]'
+    partial_society_kind_name(form_builder, mustache) + "[extended_partner_attributes][society_kind]"
   end
 
   def society_kind_id(form_builder, mustache)
-    partial_society_kind_id(form_builder, mustache) + '_extended_partner_attributes_society_kind'
+    partial_society_kind_id(form_builder, mustache) + "_extended_partner_attributes_society_kind"
   end
 
   private
@@ -13,7 +13,7 @@ module PeopleHelper
     name = object_name(form_builder)
 
     if mustache
-      name += '[{{uuid_partner}}]'
+      name += "[{{uuid_partner}}]"
     end
 
     name
@@ -23,7 +23,7 @@ module PeopleHelper
     new_id = sanitized_object_name(form_builder)
 
     if mustache
-      new_id += '_{{uuid_partner}}'
+      new_id += "_{{uuid_partner}}"
     end
 
     new_id
@@ -39,7 +39,7 @@ module PeopleHelper
 
   def page_title_plural
     if company?
-      "Empresas"
+      "Fornecedores"
     elsif individual?
       "Pessoas"
     end
@@ -47,25 +47,26 @@ module PeopleHelper
 
   def page_title_singular
     if company?
-      "Empresa"
+      "Fornecedor"
     elsif individual?
       "Pessoa"
     end
   end
+
   def create_link(optional_params = {})
-    new_path = new_legal_people_path(optional_params||{}) if company?
-    new_path = new_physical_people_path(optional_params||{}) if individual?
-    link_to 'Cadastrar',
+    new_path = new_legal_people_path(optional_params || {}) if company?
+    new_path = new_physical_people_path(optional_params || {}) if individual?
+    link_to "Cadastrar",
             new_path,
             class: "button primary",
             title: t("#{controller_name}.new", resource: singular, cascade: true)
   end
 
-  def edit_link resource
+  def edit_link(resource)
     if company?
-      edit_resource_path(resource, company: true )
+      edit_resource_path(resource, company: true)
     elsif individual?
-      edit_resource_path(resource, people: true )
+      edit_resource_path(resource, people: true)
     end
   end
 
@@ -80,11 +81,10 @@ module PeopleHelper
   def filter_link
     current_scopes[:personable_type] = PersonableType::COMPANY if company?
     current_scopes[:personable_type] = PersonableType::INDIVIDUAL if individual?
-    link_to 'Busca avançada',
+    link_to "Busca avançada",
             filter_resources_path(current_scopes),
-            class: 'button primary filter',
+            class: "button primary filter",
             title: t("#{controller_name}.filter", resource: plural, cascade: true)
-
   end
 
   def company?
