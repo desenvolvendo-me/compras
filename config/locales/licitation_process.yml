@@ -89,6 +89,7 @@ pt-BR:
         auction:     'Leilão'
         trading:     'Pregão'
         demand:     'Demanda'
+        phone_email:  'Email/Telefone'
 
   licitation_process:
     messages:
