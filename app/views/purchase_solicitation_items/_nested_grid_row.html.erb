@@ -1,0 +1,40 @@
+<tr class="nested-record record">
+  <% column_names.each do |column_name| %>
+    <td class="<%= column_name %>">
+      <% exists =  f.object.decorator.respond_to?(column_name.to_s+'_grid_mustache') %>
+
+      <% if exists  %>
+        <%= f.object.decorator.send(column_name.to_s+'_grid_mustache') %>
+      <% else %>
+        <% qtd = defined?(is_mustache) ? "{{quantity}}" : f.object.quantity %>
+        <%= f.input column_name, input_html:{value: number_with_precision(qtd), class:'items_quantity'}, label: false %>
+      <% end %>
+    </td>
+  <% end %>
+
+  <td>
+    <%= link_to 'Editar', '#', class: 'edit-nested-record' %>
+  </td>
+
+  <td>
+    <%= link_to 'Remover', '#', class: 'remove-nested-record' %>
+
+    <%= f.input :id, as: :hidden, input_html: { value: f.object.id, class: "id" } %>
+    <%= f.input :_destroy, as: :hidden, input_html: { class: 'destroy' } %>
+
+    <% all_hidden_fields.each do |column_name| %>
+      <% next if  f.object.decorator.respond_to?(column_name.to_s+'_input_mustache') %>
+
+      <% if f.object.class.reflect_on_association(column_name) %>
+        <% value = f.object.decorator.send("#{column_name}_id") %>
+        <% value = "{{#{column_name}_id}}" if defined?(is_mustache) && is_mustache %>
+        <%= f.input "#{column_name}_id", as: :hidden, input_html: { value: value, class: "#{column_name}_id" } %>
+      <% end %>
+
+      <% value = f.object.decorator.send(column_name) %>
+      <% value = "{{#{column_name}}}" if defined?(is_mustache) && is_mustache %>
+      <%= f.input column_name, as: :hidden, input_html: { value: value, class: "#{column_name}" } %>
+    <% end %>
+  </td>
+</tr>
+
