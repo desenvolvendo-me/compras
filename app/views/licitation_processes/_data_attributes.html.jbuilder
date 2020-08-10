@@ -24,4 +24,9 @@ builder resource, json do
     json.unit_price           item.decorator.unit_price
     json.detailed_description item.material ? item.material.detailed_description : nil
   end
+
+  json.creditors resource.licitation_process_ratification_creditors do |creditor|
+    json.id                   creditor.id
+    json.name             creditor.to_s
+  end
 end

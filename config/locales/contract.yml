@@ -2,26 +2,26 @@ pt-BR:
   activerecord:
     models:
       contract:
-        one: "Contrato"
-        other: "Contratos"
+        one: "Contrato e Ata de registro de Preço"
+        other: "Contratos e Atas de registro de Preço"
 
     attributes:
       contract:
         department: 'Departamento'
         purchasing_unit: 'Unidade Responsável'
         budget_structure: 'Unidade Responsável'
-        budget_structure_responsible: 'Servidor Responsável pelo Contrato'
+        budget_structure_responsible: 'Servidor Responsável pelo Contrato/Ata'
         cancellation_date: 'Data de Cancelamento'
         cancellation_reason: 'Motivo do Cancelamento'
         consortium_agreement: "Consórcio/Convênio"
-        balance: "Saldo Contrato"
-        content: 'Objeto do Contrato'
-        contract_file: 'Contrato'
-        contract_guarantees: 'Garantias do Contrato'
-        contract_number: "Número do Contrato"
-        contract_type: 'Tipo de Contrato'
-        contract_validity: 'Validade do Contrato'
-        contract_value: 'Valor do Contrato'
+        balance: "Saldo Contrato/Ata"
+        content: 'Objeto do Contrato/Ata'
+        contract_file: 'Contrato/Ata'
+        contract_guarantees: 'Garantias do Contrato/Ata'
+        contract_number: "Número do Contrato/Ata"
+        contract_type: 'Tipo de Contrato/Ata'
+        contract_validity: 'Validade do Contrato/Ata'
+        contract_value: 'Valor do Contrato/Ata'
         creditors: 'Fornecedores'
         creditor: 'Fornecedor'
         default_fine: "Multa Inadimplemento"
@@ -31,18 +31,18 @@ pt-BR:
         end_date: "Fim da Vigência"
         execution_type: "Forma de Execução"
         guarantee_value: 'Valor da Garantia'
-        lawyer: 'Advogado Responsável pela Gestão do Contrato'
+        lawyer: 'Advogado Responsável pela Gestão do Contrato/Ata'
         lawyer_code: 'O.A.B. do Advogado Responsável'
         licitation_process: 'Processo de Compra'
         modality_humanize: 'Modalidade'
-        parent: 'Contrato Principal'
+        parent: 'Contrato/Ata Principal'
         penalty_fine: "Multa Rescisória"
         publication_date: 'Data de Publicação'
         sequential_number: 'Número Sequencial'
         signature_date: "Data da Assinatura"
         subcontracting: 'Subcontratação'
         start_date: "Início da Vigência"
-        year: "Ano do Contrato"
+        year: "Ano do Contrato/Ata"
         balance_control_type: "Controle de Saldo"
         expense: "Despesa"
         secretary: "Secretaria"
@@ -51,3 +51,4 @@ pt-BR:
         nature_expense: "Natureza"
         resource_source: "Fonte"
         management_object: "Objeto"
+        type: "Tipo"
