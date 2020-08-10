@@ -7,9 +7,14 @@
     <%= f.input :notice_availability_date %>
   </div>
 
-  <div class="yui3-u-1-2">
-    <%= f.input :contact %>
+  <div class="yui3-u-1-4">
+    <%= f.input :period %>
   </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :period_unit %>
+  </div>
+
 </div>
 
 <div class="yui3-g envelope_delivery_date">
@@ -61,21 +66,21 @@
   </div>
 </div>
 
-<div class="yui3-g">
-  <div class="yui3-u-1-5 expiration">
+<div class="row">
+  <div class="col-2 expiration">
     <%= f.input :expiration %>
   </div>
 
-  <div class="yui3-u-1-3 expiration">
+  <div class="col-2 expiration">
     <%= f.input :expiration_unit %>
   </div>
 
-  <div class="yui3-u-1-6">
-    <%= f.input :period %>
+  <div class="col-3">
+    <%= f.input :phone_email %>
   </div>
 
-  <div class="yui3-u-1-4">
-    <%= f.input :period_unit %>
+  <div class="col">
+    <%= f.input :contact %>
   </div>
 </div>
 
