@@ -11,7 +11,7 @@ class Material < Unico::Model
 
   attr_writer :autocomplete_material_class
 
-  attr_modal :description, :material_classification
+  attr_modal :code, :description, :material_classification
   has_enumeration_for :material_classification, :with => MaterialClassification, :create_helpers => true
   has_enumeration_for :origin_source, :with => MaterialOriginSource, :create_helpers => true
 
