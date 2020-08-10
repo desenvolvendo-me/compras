@@ -19,7 +19,7 @@ class PeopleController < CrudController
         success.html { redirect_to legal_peoples_path }
         @person_type = PersonableType::COMPANY
       end
-      failure.html { render 'new' }
+      failure.html { render "new" }
     end
   end
 
@@ -32,8 +32,13 @@ class PeopleController < CrudController
         success.html { redirect_to legal_peoples_path }
         @person_type = PersonableType::COMPANY
       end
-      failure.html { render 'edit' }
+      failure.html { render "edit" }
     end
+  end
+
+  def update_resource(object, attributes)
+    object.personable.main_cnae_id = params[:person][:personable_attributes][:main_cnae_id] if object.company?
+    super
   end
 
   def new
@@ -49,9 +54,8 @@ class PeopleController < CrudController
     if params[:filter] && params[:filter][:personable_type] == PersonableType::INDIVIDUAL || params[:by_physical_people] || params[:people]
       @person_type = PersonableType::INDIVIDUAL
     end
-    if params[:filter] && params[:filter][:personable_type] == PersonableType::COMPANY ||  params[:by_legal_people] || params[:company]
+    if params[:filter] && params[:filter][:personable_type] == PersonableType::COMPANY || params[:by_legal_people] || params[:company]
       @person_type = PersonableType::COMPANY
     end
   end
-
 end
