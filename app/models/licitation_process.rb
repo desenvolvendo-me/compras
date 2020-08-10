@@ -175,7 +175,7 @@ class LicitationProcess < Compras::Model
                              }
   end
 
-  orderize "id DESC"
+  orderize "created_at DESC"
   filterize
 
   scope :term, lambda {|q|
