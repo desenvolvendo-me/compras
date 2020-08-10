@@ -21,7 +21,7 @@ class LicitationProcess < Compras::Model
                   :closing_of_accreditation_time,
                   :budget_allocations_total_value, :total_value_of_items,
                   :creditor_proposals_attributes, :tied_creditor_proposals_attributes,
-                  :process_responsibles_attributes,
+                  :process_responsibles_attributes, :phone_email,
                   :justification, :justification_and_legal, :process,
                   :purchase_solicitation_import_option,
                   :purchase_solicitations_attributes, :purchasing_unit_id

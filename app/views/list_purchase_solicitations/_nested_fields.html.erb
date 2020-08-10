@@ -1,5 +1,13 @@
-<%= f.input :purchase_solicitation,:required => true, :as => :auto_complete, :fake => true,
-            'data-hidden-field-class' => 'unique',:input_html => {} %>
+<div class="row">
+  <div class="col">
+    <%= f.input :demand, :as => :auto_complete, :fake => true %>
+  </div>
+  <div class="col">
+    <%= f.input :purchase_solicitation,:required => true, :as => :auto_complete, :fake => true,
+                'data-hidden-field-class' => 'unique',:input_html => {} %>
+  </div>
+</div>
+
 
 <div class="yui3-g">
   <div class="yui3-u-1-3">
