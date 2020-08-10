@@ -39,18 +39,18 @@ class Person < Persona::Person
   end
 
   def address_required
-    errors.add(:base, 'Endereço é obrigatório') unless address.present?
+    errors.add(:base, "Endereço é obrigatório") unless address.present?
   end
 
   scope :term, lambda { |q|
     where { name.like("%#{q}%") }
   }
 
-  scope :by_legal_people, lambda{
+  scope :by_legal_people, lambda {
     where { personable_type.eq(PersonableType::COMPANY) }
   }
 
-  scope :by_physical_people, lambda{
+  scope :by_physical_people, lambda {
     where { personable_type.eq(PersonableType::INDIVIDUAL) }
   }
 
@@ -66,7 +66,7 @@ class Person < Persona::Person
   end
 
   def identity_document
-    cpf || cnpj || ''
+    cpf || cnpj || ""
   end
 
   def correspondence_address?
