@@ -1,25 +1,31 @@
 class PurchaseSolicitationItemDecorator
   include Decore
   include Decore::Proxy
-  include ActionView::Helpers::NumberHelper
+  include Decore::Header
 
-  def estimated_total_price
-    number_with_precision super if super
+  attr_header :material, :lot, :reference_unit, :brand, :quantity, :unit_price, :estimated_total_price
+
+  def material_grid_mustache
+    material || "{{material}}"
   end
 
-  def quantity
-    number_with_precision super if super
+  def lot_grid_mustache
+    lot || "{{lot}}"
   end
 
-  def unit_price
-    number_with_precision super if super
+  def reference_unit_grid_mustache
+    reference_unit || "{{reference_unit}}"
   end
 
-  def material_label
-    services? ? "Serviço" : "Material"
+  def brand_grid_mustache
+    brand || "{{brand}}"
   end
 
-  def material_type_filter
-    services? ? ::MaterialType::SERVICE : nil
+  def unit_price_grid_mustache
+    unit_price || "{{unit_price}}"
+  end
+
+  def estimated_total_price_grid_mustache
+    estimated_total_price || "{{estimated_total_price}}"
   end
 end
