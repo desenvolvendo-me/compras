@@ -4,6 +4,7 @@
   <div class="nested-grid">
     <div class="nested-fields">
       <%= hidden_field_tag :id, nil, name: "#{f.sanitized_object_name}_nested_grid_[id]" %>
+      <%= hidden_field_tag :id, f.object.id, name: "#{f.sanitized_object_name}_nested_grid_[purchase_solicitation_id]" %>
 
       <%= render "purchase_solicitation_items/nested_fields", f: f %>
 
@@ -18,7 +19,7 @@
     </div>
 
     <%column_names = [:material, :lot, :reference_unit, :brand, :quantity, :unit_price, :estimated_total_price]
-      extra_data   = PurchaseSolicitationItem.attribute_names.map(&:to_sym) - column_names %>
+      extra_data   = PurchaseSolicitationItem.attribute_names.map(&:to_sym) %>
 
     <table id="purchase_solicitation_items_records" class="records">
       <thead>
@@ -39,7 +40,7 @@
 
         <%= render "purchase_solicitation_items/nested_grid_row",
                    column_names: column_names,
-                   all_hidden_fields: column_names + extra_data,
+                   all_hidden_fields: column_names,
                    table_input: [:quantity],
                    f: a %>
       <% end %>
@@ -51,7 +52,7 @@
         <%= render "purchase_solicitation_items/nested_grid_row",
                    column_names: column_names,
                    is_mustache: true,
-                   all_hidden_fields: column_names + extra_data,
+                   all_hidden_fields: column_names ,
                    table_input: [:quantity],
                    f: a %>
       <% end %>
@@ -86,6 +87,11 @@
   $(".btn_control").click(function(){
     $(".items_fields").show();
     $(this).hide();
+  });
+
+  $(".edit-nested-record").click(function(){
+    $(".items_fields").show();
+    $(".btn_control").hide();
   })
 </script>
 
