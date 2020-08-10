@@ -1,38 +1,62 @@
-<div class="yui3-g">
-  <div class="yui3-u-4-5">
-    <%= f.input :material, :as => :auto_complete, :fake => true, :required => true,
-                :input_html => {"data-disabled" => f.object.decorator.disabled_materials, :readonly => f.object.kind.blank?} %>
+<div class="items_fields">
+  <div class="yui3-g">
+    <div class="yui3-u-4-5">
+      <%= f.input :material, :as => :auto_complete, :fake => true, :required => true,
+                  :input_html => {"data-disabled" => f.object.decorator.disabled_materials, :readonly => f.object.kind.blank?} %>
+    </div>
+    <div class="yui3-u-1-5">
+      <%= f.input :reference_unit, :as => :fake, :disabled => true %>
+    </div>
   </div>
-  <div class="yui3-u-1-5">
-    <%= f.input :reference_unit, :as => :fake, :disabled => true %>
+
+  <div class="yui3-g">
+    <div class="yui3-u-1-8">
+      <%= f.input :lot, :as => :fake, :required => true %>
+    </div>
+
+    <div class="yui3-u-1-6">
+      <%= f.input :quantity, :as => :fake, :required => true,
+                  :input_html => {'data-decimal' => true, :value => '0,00', 'data-precision' => 2, :maxlength => 15, :class => 'numeric'} %>
+    </div>
+
+    <div class="yui3-u-1-6">
+      <%= f.input :unit_price, :as => :fake,
+                  :input_html => {'data-decimal' => true, :value => '0,00', 'data-precision' => 2, :maxlength => 15, :class => 'numeric'} %>
+    </div>
+
+    <div class="yui3-u-1-4">
+      <%= f.input :brand, :as => :fake %>
+    </div>
+
+    <div class="yui3-u-1-6">
+      <%= f.input :estimated_total_price, :as => :fake, :disabled => true,
+                  :input_html => {'data-decimal' => true, :value => '0,00', 'data-precision' => 2, :maxlength => 15, :class => 'numeric'} %>
+    </div>
+
+    <div class="yui3-u-1-8 text-center" id="add-button">
+
+    </div>
   </div>
 </div>
 
-<div class="yui3-g">
-  <div class="yui3-u-1-8">
-    <%= f.input :lot, :as => :fake, :required => true %>
-  </div>
 
-  <div class="yui3-u-1-6">
-    <%= f.input :quantity, :as => :fake, :required => true,
-                :input_html => {'data-decimal' => true, :value => '0,00', 'data-precision' => 2, :maxlength => 15, :class => 'numeric'} %>
-  </div>
+<style>
+  <% if f.object.items.any? %>
+  .items_fields{
+    display: none;
+  }
+  .btn_control{
+    display: block;
+  }
+  <% else %>
+  .btn_control{
+    display: none;
+  }
+  <% end %>
 
-  <div class="yui3-u-1-6">
-    <%= f.input :unit_price, :as => :fake,
-                :input_html => {'data-decimal' => true, :value => '0,00', 'data-precision' => 2, :maxlength => 15, :class => 'numeric'} %>
-  </div>
-
-  <div class="yui3-u-1-4">
-    <%= f.input :brand, :as => :fake %>
-  </div>
-
-  <div class="yui3-u-1-6">
-    <%= f.input :estimated_total_price, :as => :fake, :disabled => true,
-                :input_html => {'data-decimal' => true, :value => '0,00', 'data-precision' => 2, :maxlength => 15, :class => 'numeric'} %>
-  </div>
-
-  <div class="yui3-u-1-8 text-center" id="add-button">
-
-  </div>
-</div>
+  .btn_control{
+    float: right;
+    background-color: #53c3c3 !important;
+    color: white !important
+  }
+</style>
