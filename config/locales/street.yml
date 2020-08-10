@@ -2,13 +2,13 @@ pt-BR:
   activerecord:
     models:
       street:
-        one: "Logradouro"
-        other: "Logradouros"
+        one: "Endereço"
+        other: "Endereços"
 
     attributes:
       street:
-        name: "Nome do logradouro"
-        street_type: "Tipo do logradouro"
+        name: "Nome do Endereço"
+        street_type: "Tipo de Endereço"
         tax_zone: "Zona fiscal"
         neighborhood: "Bairro"
         city: "Cidade"
