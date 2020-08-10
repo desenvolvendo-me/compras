@@ -493,8 +493,6 @@ $(document).ready(function () {
       activate: function(event, ui) {
         var tabIndex = $(".tabs").tabs('option', 'active');
         sessionStorage.setItem("currentTabIndexSupplyOrder", tabIndex);
-        if(tabIndex == 3) $("#supply_order_submit").hide();
-        if(tabIndex != 3) $("#supply_order_submit").show();
       }
     });
   });

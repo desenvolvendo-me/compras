@@ -57,10 +57,10 @@
       </table>
 
       <div class="text-right">
-        <%= button_tag 'Salvar', type: :button,
+        <%= button_tag 'Adicionar e Salvar', type: :button,
                        'data-template' => 'supply_order_invoices_template',
                        'data-records' => 'invoices-records',
-                       'data-disabled' => not_updateable_message,
+                       'data-disabled' => f.object.updatabled ? 'Desabilitado': nil,
                        'data-ignored' => '.ignore-data',
                        :id => "supply_order_invoices_adicionar",
                        :class => 'button add-nested-record field-without-label' %>
