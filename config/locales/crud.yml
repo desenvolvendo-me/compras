@@ -3,7 +3,7 @@ pt-BR:
   modal: "Pesquisar %{resource}"
   search: "Pesquisar"
   index: "Listar %{resource}"
-  new: "Criar %{resource}"
+  new: "Cadastrar %{resource}"
   edit: "Editar %{resource}"
   destroy: "Apagar"
   are_you_sure: "Você tem certeza?"
