@@ -135,7 +135,7 @@ $(document).ready(function () {
   });
 
   $("#contract_contract_number").focus(function(){
-    if($("#contract_type option:selected").val() === 'minute'){
+    if($("#contract_type_contract option:selected").val() === 'minute'){
       if($(this).val() === '')
         $(this).val('ATA - ')
     }
