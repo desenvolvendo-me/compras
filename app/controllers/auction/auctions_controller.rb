@@ -3,6 +3,13 @@ class Auction::AuctionsController < Auction::BaseController
   skip_before_filter :authorize_resource!, :only => :external_index
   layout "electronic_auction"
 
+  def new
+    object = build_resource
+    object.year = Time.now.year
+
+    super
+  end
+
   def create
     create! do |success, failure|
       success.html { redirect_to collection_path }
