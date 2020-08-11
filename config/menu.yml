@@ -40,10 +40,6 @@ menu:
       - dissemination_sources
       - communication_sources
       - regulatory_acts
-    - banks:
-      - agencies
-      - banks
-      - bank_accounts
     - document_types
     - indexers
     - currencies
@@ -76,8 +72,7 @@ menu:
     - licitation_process_appeals
     - process_responsibles
 
-  - contracts:
-
+  - "Contratos":
     - contracts
     - additive_solicitations
     - supply_requests

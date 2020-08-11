@@ -1,6 +1,6 @@
 class Invoice < Compras::Model
   attr_accessible :number, :release_date, :date, :value, :supply_order_item_invoices_attributes,
-                  :competence_month
+                  :competence_month, :settling_date, :settling_number
 
   belongs_to :supply_order
   has_many :supply_order_item_invoices, dependent: :destroy
