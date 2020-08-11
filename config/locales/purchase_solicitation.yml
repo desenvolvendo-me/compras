@@ -17,7 +17,7 @@ pt-BR:
         delivery_location: "Local para Entrega"
         kind: "Tipo de Solicitação"
         general_observations: "Observações Gerais"
-        service_status: "Status de Atendimento"
+        service_status: "Status do Serviço"
         liberation_date: "Liberação"
         liberator: "Por"
         service_observations: "Observações do Atendimento"

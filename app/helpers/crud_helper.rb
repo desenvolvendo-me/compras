@@ -108,12 +108,14 @@ module CrudHelper
     annul_object = options[:annul_object] || "annul"
     button_class = options[:button_class] || "negative"
     object = options[:resource] || resource
+    label_new_annul = options[:label_for_new] || 'Anular'
+    label_edit_annul = options[:label_for_edit] || 'Anulação'
 
     if object.persisted? && !object.send(annulled_method) && can?(:modify, main_controller_name)
-      link_to 'Anular', { :controller => annul_controller_name, :action => :new, param_name => object },
+      link_to label_new_annul, { :controller => annul_controller_name, :action => :new, param_name => object },
                         :class => "button #{button_class}", 'data-disabled' => options[:data_disabled]
     elsif object.send(annulled_method) && can?(:show, main_controller_name)
-      link_to 'Anulação', { :controller => annul_controller_name, :action => :edit, :id => object.annul },
+      link_to label_edit_annul, { :controller => annul_controller_name, :action => :edit, :id => object.annul },
                         :class => "button #{button_class}", 'data-disabled' => options[:data_disabled]
     end
   end

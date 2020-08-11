@@ -1,4 +1,6 @@
 pt-BR:
   enumerations:
     purchase_solicitation_attendant_status:
-      pending_completion: "Pendente de Preenchimento"
+      pending_completion: "Pendente de Atendimento"
+      released: "Liberado"
+      annuled: "Não tenho necessidade"
