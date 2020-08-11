@@ -43,6 +43,6 @@ pt-BR:
         bid_opening: "Abertura da Licitação"
         city: "Município"
         neighborhood: "Bairro"
-        street: "Logradouro"
+        street: "Endereço"
         telephone: "Telefone"
         cell_phone: "Celular"

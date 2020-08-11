@@ -7,7 +7,7 @@ pt-BR:
 
     attributes:
       section_urban_service:
-        value_section_street: "Valor da seção do logradouro"
+        value_section_street: "Valor da seção do endereço"
         urban_service: "Equipamento urbano"
         reference_unit: "Unidade"
         value: "Valor"

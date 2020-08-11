@@ -9,5 +9,5 @@ pt-BR:
       delivery_location:
         description: "Descrição"
         address: "Endereço"
-        street: "Logradouro"
+        street: "Endereço"
         number: "Número"
