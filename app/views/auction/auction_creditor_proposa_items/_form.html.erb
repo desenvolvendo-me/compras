@@ -1,0 +1,24 @@
+<tr class="record nested-record item-record" id="material-id-<%= material_id %>">
+  <td><%= material %></td>
+  <td><%= p.input :manufacturer, input_html:{class: 'form-control'}%></td>
+  <td><%= p.input :model_version, input_html:{class: 'form-control'}%></td>
+  <td><%= p.input :quantity, input_html:{class: 'form-control', type: 'number'}%></td>
+  <td><%= p.input :unit_price, input_html:{class: 'form-control' }%></td>
+  <td><%= p.input :global_price, input_html:{class: 'form-control'}%></td>
+
+  <td>
+    <%= f.input :description, as: :hidden%>
+    <%= f.input :auction_item_id, as: :hidden  %>
+    <%= f.input :id, as: :hidden  %>
+    <%= f.input :_destroy, as: :hidden, input_html: { class: 'destroy' } %>
+
+
+    <input class="string fake optional" id="auction_items_attributes_detailed_description" name="auction_items_attributes[detailed_description]" type="hidden" value="<%= detailed_description %>">
+    <input class="string fake optional" id="auction_items_attributes_reference_unit_id" name="auction_items_attributes[reference_unit]" type="hidden" value="<%= reference_unit %>">
+    <input class="string fake optional" id="auction_items_attributes_material_class_id" name="auction_items_attributes[material_class]" type="hidden" value="<%= material_class %>">
+    <input class="string fake optional" id="auction_items_attributes_material_class_id" name="auction_items_attributes[code]" type="hidden" value="<%= code %>">
+
+    <%= link_to 'Remover', '#', class: 'remove-nested-record' %>
+  </td>
+</tr>
+
