@@ -354,24 +354,42 @@ $(document).ready(function () {
   setBalanceContract();
 
   $("#gen-suplly-order").click(function(){
+    var id = $('#supply_request_id').val(),
+        $el = $(this);
+    if(confirm("Deseja encerrar este atendimento?")){
+    $.ajax({
+      url: Routes.supply_request.replace(":id", id),
+      data: {supply_request: {updatabled: true }},
+      dataType: 'json',
+      type: 'PUT',
+      success: function (data) {
+       generateSupplyOrder($el)
+      }
+    })
+    }else{
+      generateSupplyOrder($el)
+    }
+  });
+
+  function generateSupplyOrder($el){
     var licitation_process = $('#supply_request_licitation_process_id').val(),
-        contract = $("#supply_request_contract_id").val(),
-        purchase_solicitation = $("#supply_request_purchase_solicitation_id").val(),
-        items = $(".material-id").map(function(){ return $(this).val() }).toArray(),
-        input_items='';
+      contract = $("#supply_request_contract_id").val(),
+      purchase_solicitation = $("#supply_request_purchase_solicitation_id").val(),
+      items = $(".material-id").map(function(){ return $el.val() }).toArray(),
+      input_items='';
 
     $.each(items, function(index, el){
       input_items += "<input type='hidden' name='supply_order[item_ids]["+ index +"]'  value="+el+">"
     });
-    
+
     $("<form action="+ Routes.new_supply_order +" method='GET'/>")
-        .append($('<input type="hidden" name="supply_order[licitation_process_id]">').val(licitation_process))
-        .append($('<input type="hidden" name="supply_order[contract_id]">').val(contract))
-        .append($('<input type="hidden" name="supply_order[purchase_solicitation_id]">').val(purchase_solicitation))
-        .append(input_items)
-        .appendTo($(document.body))
-        .submit();
-  });
+      .append($('<input type="hidden" name="supply_order[licitation_process_id]">').val(licitation_process))
+      .append($('<input type="hidden" name="supply_order[contract_id]">').val(contract))
+      .append($('<input type="hidden" name="supply_order[purchase_solicitation_id]">').val(purchase_solicitation))
+      .append(input_items)
+      .appendTo($(document.body))
+      .submit();
+  }
 
   $("#supply_request_department_id").change(function() {
     if($(this).val() === ''){
