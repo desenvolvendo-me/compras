@@ -13,15 +13,12 @@
   <table id="items-records" class="records">
     <thead>
     <tr>
-      <th><%= "Número" %></th>
-      <th><%= "Item" %></th>
-      <th><%= "Unidade" %></th>
-      <th><%= "Quantidade" %></th>
-      <th><%= "Valor" %></th>
-      <th><%= "Valor Máximo" %></th>
-      <th><%= "Grupo" %></th>
-      <th></th>
-      <th></th>
+      <th width="21%">Material</th>
+      <th><%= AuctionCreditorProposalItem.human_attribute_name :manufacturer %></th>
+      <th><%= AuctionCreditorProposalItem.human_attribute_name :model_version %></th>
+      <th width="8%"><%= AuctionCreditorProposalItem.human_attribute_name :quantity %></th>
+      <th width="11%"><%= AuctionCreditorProposalItem.human_attribute_name :unit_price %></th>
+      <th width="11%"><%= AuctionCreditorProposalItem.human_attribute_name :global_price %></th>
     </tr>
     </thead>
     <tbody>
@@ -30,9 +27,8 @@
     <% end %>
     <% f.object&.auction&.items&.each do |auction_item| %>
       <%= f.simple_fields_for :auction_creditor_proposal_items, init_item(f.object, auction_item) do |p| %>
-        <%= render 'auction/auction_items/form',
-                   material: p.object.material,
-
+        <%= render 'auction/auction_creditor_proposa_items/form',
+                   material: auction_item.material.to_s,
                    f: p %>
       <% end %>
     <% end %>
@@ -99,17 +95,29 @@
     </div>
   </div>
 
-  <% unless f.object.proposal_send_date.blank? %>
-    <div class="col-4">
-      Enviada em: <%= f.object.proposal_send_date.strftime("%d/%m/%Y") %>
-    </div>
-  <% end %>
+
 
   <div class="col-4">
     <div class="form-group">
       <%= f.input :proposal_qualification_doc, input_html: {accept: ('application/pdf')} %>
     </div>
   </div>
+</div>
+
+<div class="form-row" style="margin-top: -11px">
+  <% unless f.object.proposal_send_date.blank? %>
+    <div class="col-4" >
+      Enviada em: <%= f.object.proposal_send_date %>
+      <%= link_to f.object.proposal_doc_identifier, f.object.proposal_doc_url, :target => '_blank' if f.object.proposal_doc? %>
+    </div>
+  <% end %>
+
+  <% unless f.object.qualification_send_date.blank? %>
+    <div class="col-4">
+      Enviada em: <%= f.object.qualification_send_date %>
+      <%= link_to f.object.proposal_qualification_doc_identifier, f.object.proposal_qualification_doc_url, :target => '_blank' if f.object.proposal_qualification_doc? %>
+    </div>
+  <% end %>
 </div>
 
 <style>
@@ -139,5 +147,24 @@
     color: #3f6e9d;
   }
 
+  .simple_form .input {
+    margin-bottom: 0 !important;
+  }
+
   input[type=text],input[type=password],textarea{width:100%;}
 </style>
+
+<script>
+  <% if f.object.persisted? %>
+  $(function(){
+    $(":input").prop('disabled', true);
+    $("#auction_creditor_proposal_submit").hide();
+
+    $("#edit_proposal").click(function(){
+      $(":input").prop('disabled', false);
+      $("#auction_creditor_proposal_submit").show();
+      $(this).hide();
+    });
+  });
+  <% end %>
+</script>
