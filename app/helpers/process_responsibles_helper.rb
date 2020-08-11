@@ -1,9 +1,9 @@
 module ProcessResponsiblesHelper
   def link_create_or_edit(purchase_process)
     if purchase_process.process_responsibles.empty?
-      "Criar responsável"
+      "Cadastrar responsável"
     else
-      "Editar responsável"
+      purchase_process.process_responsibles.map{|x| x.name.try(:downcase)}.uniq.join(', ')
     end
   end
 
