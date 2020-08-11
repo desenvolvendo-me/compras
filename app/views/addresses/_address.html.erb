@@ -17,16 +17,15 @@
 
 <div class="yui3-g">
   <div class="yui3-u-1-3">
+    <%= a.input :neighborhood, as: :auto_complete %>
+  </div>
+  <div class="yui3-u-1-3">
     <%= a.input :city, :disabled => true %>
   </div>
 
   <div class="yui3-u-1-6">
     <%= a.input :state, :disabled => true %>
   </div>
-  <div class="yui3-u-1-3">
-    <%= a.input :neighborhood, as: :auto_complete %>
-  </div>
-
   <div class="yui3-u-1-6">
     <%= a.input :zip_code %>
   </div>
