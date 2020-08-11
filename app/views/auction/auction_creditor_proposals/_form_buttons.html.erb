@@ -3,9 +3,18 @@
     <%= f.button :submit, 'data-disabled' => not_updateable_message  %>
   <% end %>
 
-  <%= f.button :back %>
+  <% if f.object.persisted? && can?(:modify, main_controller_name) %>
+    <%= link_to 'Alterar', "#", id:'edit_proposal', class:'button primary' %>
+  <% end  %>
 
   <% if f.object.persisted? && can?(:destroy, main_controller_name) %>
     <%= f.button :destroy, 'Excluir', 'data-disabled' => not_destroyable_message %>
   <% end %>
+
+  <%= f.button :back %>
 </div>
+<style>
+  .button.negative{
+    float: unset !important;
+  }
+</style>
