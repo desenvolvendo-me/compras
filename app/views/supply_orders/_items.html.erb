@@ -1,7 +1,7 @@
 <%= f.error :items %>
 
 <div class="d-flex justify-content-between">
-  <%supply_date = f.object.items.blank? ? '' : l(f.object.items[0].created_at, format: "%d/%m/%Y") %>
+  <%supply_date = f.object&.items[0]&.created_at.blank? ? '' : l(f.object.items[0].created_at, format: "%d/%m/%Y") %>
   <span style="margin-top: 3rem"><strong>Data do Pedido: <%= supply_date %></strong></span>
 
   <% unless f.object.updatabled %>
