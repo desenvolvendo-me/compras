@@ -6,6 +6,7 @@
     <%= hidden_field_tag :item_id, nil, :name => 'auction_item[id]' %>
     <%= hidden_field_tag :code, nil, :name => 'auction_item[code]' %>
     <%= hidden_field_tag :quantity, nil, :name => 'auction_item[quantity]' %>
+    <%= hidden_field_tag :auction_id, nil, :name => 'auction_item[auction_id]' %>
 
 
     <div class="yui3-g">
@@ -41,10 +42,12 @@
 
     <div class="row">
       <div class="col-2">
-        <%= f.input :estimated_value, as: :fake, :required => true %>
+        <%= f.input :estimated_value, as: :fake, :required => true,
+                    :input_html => {'data-decimal' => true, :value => '0,00', 'data-precision' => 2, :maxlength => 15, :class => 'numeric'}%>
       </div>
       <div class="col-3">
-        <%= f.input :max_value, as: :fake, :required => true %>
+        <%= f.input :max_value, as: :fake, :required => true,
+                    :input_html => {'data-decimal' => true, :value => '0,00', 'data-precision' => 2, :maxlength => 15, :class => 'numeric'}%>
       </div>
       <div class="col-5" >
         <div class="input fake benefit_type">
