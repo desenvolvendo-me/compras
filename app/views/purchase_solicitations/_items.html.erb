@@ -1,9 +1,65 @@
 <%= f.input :demand_id, as: :hidden %>
 
 <div id="item-tab">
+  <div class="nested-grid">
+    <div class="nested-fields">
+      <%= hidden_field_tag :id, nil, name: "#{f.sanitized_object_name}_nested_grid_[id]" %>
+      <%= hidden_field_tag :id, f.object.id, name: "#{f.sanitized_object_name}_nested_grid_[purchase_solicitation_id]" %>
 
-  <%= f.input :items, as: :nested_grid, data_disabled: (f.object.decorator.is_annulled_message or f.object.decorator.licitation_process_started),
-              columns: [:material, :lot, :reference_unit, :brand, :quantity, :unit_price, :estimated_total_price] %>
+      <%= render "purchase_solicitation_items/nested_fields", f: f %>
+
+      <%= button_tag 'Adicionar Itens', type: :button, class:"btn_control button" %>
+
+      <%= button_tag 'Adicionar', type: :button,
+                     class: 'button add-nested-record field-without-label add-margin-bottom',
+                     'data-template' => "purchase_solicitation_items_template",
+                     'data-records' => "purchase_solicitation_items_records",
+                     'data-disabled' => (f.object.decorator.is_annulled_message or f.object.decorator.licitation_process_started),
+                     id: "purchase_solicitation_items_button" %>
+    </div>
+
+    <%column_names = [:material, :lot, :reference_unit, :brand, :quantity, :unit_price, :estimated_total_price]
+      extra_data   = PurchaseSolicitationItem.attribute_names.map(&:to_sym) %>
+
+    <table id="purchase_solicitation_items_records" class="records">
+      <thead>
+      <tr>
+        <% column_names.each do |column_name| %>
+          <th class="<%= column_name %>"><%= PurchaseSolicitationItem.human_attribute_name column_name %></th>
+        <% end %>
+        <th></th>
+        <th></th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <%= f.association :items, collection: localized(f.object.items) do |a| %>
+        <% (column_names + extra_data).each do |column_name| %>
+          <%= a.full_error column_name %>
+        <% end %>
+
+        <%= render "purchase_solicitation_items/nested_grid_row",
+                   column_names: column_names,
+                   all_hidden_fields: column_names,
+                   table_input: [:quantity],
+                   f: a %>
+      <% end %>
+      </tbody>
+    </table>
+
+    <%= mustache "purchase_solicitation_items_template" do %>
+      <%= f.association "items_attributes".to_sym, collection: f.object.items.build, :index => '{{uuid}}' do |a| %>
+        <%= render "purchase_solicitation_items/nested_grid_row",
+                   column_names: column_names,
+                   is_mustache: true,
+                   all_hidden_fields: column_names ,
+                   table_input: [:quantity],
+                   f: a %>
+      <% end %>
+    <% end %>
+  </div>
+
+
 
   <div class="d-flex justify-content-end">
     <%= f.input :total_items_value, :disabled => true, wrapper_html:{ style: 'margin-bottom: 0 !important;'},
@@ -12,3 +68,35 @@
   </div>
 
 </div>
+<script>
+  $("#purchase_solicitation_items_records").on('keyup', '.items_quantity', function(){
+    var unit_price = parseFloat($(this).closest('tr').find('td.unit_price').html()) || 0,
+      quantity = parseFloat(parsePtBrFloat($(this).val())),
+      $estimated_total_price = $(this).closest('tr').find('td.estimated_total_price'),
+      total_value = 0.0;
+
+    $estimated_total_price.html((unit_price * quantity).toFixed(2))
+
+    $.each($("#purchase_solicitation_items_records td.estimated_total_price"), function(index, el){
+      total_value += parseFloat($(this).html())
+    });
+
+    $("#purchase_solicitation_total_items_value").val(numberWithDelimiter(total_value));
+  });
+
+  $(".btn_control").click(function(){
+    $(".items_fields").show();
+    $(this).hide();
+  });
+
+  $(".edit-nested-record").click(function(){
+    $(".items_fields").show();
+    $(".btn_control").hide();
+  })
+</script>
+
+<style>
+  .purchase_solicitation_items_quantity{
+    margin-bottom: 0 !important;
+  }
+</style>
