@@ -1,5 +1,9 @@
-<% if f.object.updatabled.eql?(nil) && f.object.persisted? && @hidden_field%>
-  <button type='button' class="button primary" id="gen-suplly-order" style="float: right; margin-bottom: 1rem">Gerar Ordem de Fornecimento</button>
+<% if f.object.persisted? && @hidden_field%>
+  <%= button_tag 'Gerar Ordem de Fornecimento', type: :button,
+                 :class => 'button primary',
+                 :style => 'float: right; margin-bottom: 1rem',
+                 :id => "gen-suplly-order",
+                 'data-disabled' =>  f.object.updatabled ? 'Desabilitado': nil %>
 <% end %>
 
 <table class="records">
