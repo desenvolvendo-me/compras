@@ -160,6 +160,26 @@
 
 
 <script>
+var contractValidity = $('#contract_contract_validity'),
+    startDate = $('#contract_start_date'),
+    endDate = $('#contract_end_date');
+
+    startDate.on('change', function(event){
+      var date = startDate.datepicker('getDate'),
+      soma = 0;
+      if (contractValidity != 'undefined'){
+        soma = date.getMonth() + parseInt(contractValidity.val(),10);
+      }
+      if(soma != 0 ){
+        date.setMonth(soma.toString());
+        endDate.datepicker('setDate', date);
+      }else{
+        endDate.datepicker('setDate', startDate.datepicker('getDate'));
+      }
+      
+      });
+
+
   var clearModalityExecutionType = function () {
     $('#contract_modality_humanize').val('');
     $('#contract_execution_type').val('');
