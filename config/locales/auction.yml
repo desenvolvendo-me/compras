@@ -46,3 +46,4 @@ pt-BR:
         street: "Endereço"
         telephone: "Telefone"
         cell_phone: "Celular"
+        zip_code:  "CEP"
