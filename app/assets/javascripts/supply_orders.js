@@ -471,6 +471,18 @@ $(document).ready(function () {
     setCompetenceMonth();
   });
 
+  $(".remove-invoice").click(function(){
+    var $el = $(this);
+    var btn = {"Apagar": function() {
+        $el.closest('td').find('.remove-nested-record').click();
+        $( this ).dialog( "close" );
+      },
+      Cancelar: function() {
+        $( this ).dialog( "close" );
+      }};
+    custom_alert("Você tem certeza que deseja apagar o registro?", "Remover Registro", btn)
+  });
+
   setCompetenceMonth();
   /** tab Nota Fiscal **/
 
@@ -481,8 +493,6 @@ $(document).ready(function () {
       activate: function(event, ui) {
         var tabIndex = $(".tabs").tabs('option', 'active');
         sessionStorage.setItem("currentTabIndexSupplyOrder", tabIndex);
-        if(tabIndex == 3) $("#supply_order_submit").hide();
-        if(tabIndex != 3) $("#supply_order_submit").show();
       }
     });
   });
@@ -491,14 +501,4 @@ $(document).ready(function () {
     $('form.supply_order').submit();
   });
 
-  $(".remove-invoice").click(function(){
-    var $el = $(this);
-    var btn = {"Apagar": function() {
-                $el.closest('td').find('.remove-nested-record').click();
-              },
-              Cancelar: function() {
-                $( this ).dialog( "close" );
-              }};
-    custom_alert("Você tem certeza que deseja apagar o registro?", "Remover Registro", btn)
-  })
 });
