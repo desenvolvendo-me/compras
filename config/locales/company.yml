@@ -20,3 +20,7 @@ pt-BR:
         responsible_role: "CPF/ RG do Responsável"
         responsible_name: "Responsável Pela Empresa"
         main_cnae: "CNAE principal"
+        bank_info: "Banco"
+        account_info: "Conta"
+        agencie_info: "Agência"
+        account_type: "Tipo de Conta"
