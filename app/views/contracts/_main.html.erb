@@ -165,18 +165,20 @@ var contractValidity = $('#contract_contract_validity'),
     endDate = $('#contract_end_date');
 
     startDate.on('change', function(event){
+      
       var date = startDate.datepicker('getDate'),
       soma = 0;
       if (contractValidity != 'undefined'){
-        soma = date.getMonth() + parseInt(contractValidity.val(),10);
+        soma = parseInt(date.getMonth(),10) + parseInt(contractValidity.val(),10);
       }
       if(soma != 0 ){
         date.setMonth(soma.toString());
-        endDate.datepicker('setDate', date);
+        endDate.val(getFormattedDate(date));
+        
       }else{
-        endDate.datepicker('setDate', startDate.datepicker('getDate'));
+        endDate.val(getFormattedDate(startDate.datepicker('getDate')));
       }
-      
+
       });
 
 
@@ -187,6 +189,16 @@ var contractValidity = $('#contract_contract_validity'),
     $('#contract_contract_guarantees').val('');
     $('#contract_contract_guarantees_humanize').val('');
   };
+  function getFormattedDate(date) {
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    var year = date.getFullYear();
+
+    if(month.toString().length == 1){
+      month = "0" + month.toString(); 
+    }
+    return day + "/" + month + "/" + year;
+}
 
   $('form').on('change', '#contract_year, #contract_entity_id', function (event) {
     $.getJSON('<%= next_sequential_contracts_path %>?year=' + $('#contract_year').val() + '&entity_id=' + $('#contract_entity_id').val(), function (data) {
