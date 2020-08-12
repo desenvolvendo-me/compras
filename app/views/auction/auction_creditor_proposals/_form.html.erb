@@ -1,24 +1,24 @@
 <%= f.input :auction_id, as: :hidden %>
-<div class="form-row">
-  <div class="col-2">
-    <%= label_tag "Numero do Pregão" %>
-    <%= text_field_tag :process_number, "", class: 'form-control', disabled: true %>
-  </div>
-</div>
 
+<h5><%= "Empresa: #{current_user.authenticable.name}" %></h5>
+<h5><%= "Endereço: #{f.object.auction.street},   #{f.object.auction.neighborhood},  #{f.object.auction.city}" %></h5>
+<h5><%= "CNPJ: #{current_user.authenticable.person.try(:cnpj)}" %></h5>
+
+<h5 class="mt-4" style="color:#3f6e9d;">Vem Apresentar Proposta:</h5>
 
 <div class="mh-400 my-2">
+  <div>
   <h4>Itens</h4>
 
   <table id="items-records" class="records">
     <thead>
     <tr>
-      <th width="21%">Material</th>
-      <th><%= AuctionCreditorProposalItem.human_attribute_name :manufacturer %></th>
-      <th><%= AuctionCreditorProposalItem.human_attribute_name :model_version %></th>
+      <th>Material</th>
+      <th width="15%"><%= AuctionCreditorProposalItem.human_attribute_name :manufacturer %></th>
+      <th width="15%"><%= AuctionCreditorProposalItem.human_attribute_name :model_version %></th>
       <th width="8%"><%= AuctionCreditorProposalItem.human_attribute_name :quantity %></th>
-      <th width="11%"><%= AuctionCreditorProposalItem.human_attribute_name :unit_price %></th>
-      <th width="11%"><%= AuctionCreditorProposalItem.human_attribute_name :global_price %></th>
+      <th width="9%"><%= AuctionCreditorProposalItem.human_attribute_name :unit_price %></th>
+      <th width="9%"><%= AuctionCreditorProposalItem.human_attribute_name :global_price %></th>
     </tr>
     </thead>
     <tbody>
@@ -34,6 +34,7 @@
     <% end %>
     </tbody>
   </table>
+  </div>
 </div>
 
 <h4>Declarações</h4>
@@ -89,15 +90,13 @@
 </div>
 
 <div class="form-row mt-4">
-  <div class="col-4">
+  <div class="col">
     <div class="form-group">
       <%= f.input :proposal_doc, input_html: {accept: ('application/pdf')} %>
     </div>
   </div>
 
-
-
-  <div class="col-4">
+  <div class="col">
     <div class="form-group">
       <%= f.input :proposal_qualification_doc, input_html: {accept: ('application/pdf')} %>
     </div>
@@ -106,16 +105,14 @@
 
 <div class="form-row" style="margin-top: -11px">
   <% unless f.object.proposal_send_date.blank? %>
-    <div class="col-4" >
-      Enviada em: <%= f.object.proposal_send_date %>
-      <%= link_to f.object.proposal_doc_identifier, f.object.proposal_doc_url, :target => '_blank' if f.object.proposal_doc? %>
+    <div class="col" >
+      <%= link_to f.object.proposal_doc_identifier, f.object.proposal_doc_url, :target => '_blank' if f.object.proposal_doc? %> anexado em: <%= f.object.proposal_send_date %>
     </div>
   <% end %>
 
   <% unless f.object.qualification_send_date.blank? %>
-    <div class="col-4">
-      Enviada em: <%= f.object.qualification_send_date %>
-      <%= link_to f.object.proposal_qualification_doc_identifier, f.object.proposal_qualification_doc_url, :target => '_blank' if f.object.proposal_qualification_doc? %>
+    <div class="col">
+      <%= link_to f.object.proposal_qualification_doc_identifier, f.object.proposal_qualification_doc_url, :target => '_blank' if f.object.proposal_qualification_doc? %> anexado em: <%= f.object.qualification_send_date %>
     </div>
   <% end %>
 </div>
@@ -135,6 +132,13 @@
     color: #3f6e9d;
   }
 
+  h5 span{
+    display: block;
+  }
+  h5 span.subtitle{
+    font-size: 23px;
+  }
+
   #terms .input{
     margin-bottom: 0 !important;
   }
@@ -152,6 +156,12 @@
   }
 
   input[type=text],input[type=password],textarea{width:100%;}
+
+  body {
+    font: 15px/1.231 arial,helvetica,clean,sans-serif;
+    *font-size: small;
+    *font: x-small;
+  }
 </style>
 
 <script>
