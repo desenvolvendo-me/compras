@@ -73,7 +73,7 @@ $(document).ready(function () {
             $('label[for="licitation_process_modality_number"]').html('Nº da modalidade');
             $('label[for="licitation_process_unit_price"]').html('Valor unitário máximo');
             $('a[href="#tab-items"]').html("Itens");
-            $('#legal_reasons_tab').addClass('hidden');
+            $('#legal_reasons_tab').hide();
             $('.envelope_delivery_date').removeClass('hidden');
             $('#licitation_process_envelope_delivery_date').requiredField(true);
             $('#licitation_process_envelope_delivery_time').requiredField(true);
@@ -95,7 +95,7 @@ $(document).ready(function () {
             $('label[for="licitation_process_unit_price"]').html('Valor unitário');
             $('a[href="#tab-items"]').html("Itens / Justificativa");
             $('#licitation_process_modality').val('');
-            $('#legal_reasons_tab').removeClass('hidden');
+            $('#legal_reasons_tab').show();
             $('.envelope_delivery_date').addClass('hidden');
             $('#licitation_process_envelope_delivery_date').requiredField(false);
             $('#licitation_process_envelope_delivery_time').requiredField(false);
