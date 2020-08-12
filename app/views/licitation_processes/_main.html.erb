@@ -104,18 +104,20 @@
   <% end %>
 </div>
 
-<table id="items-records" class="records">
-  <thead>
-  <tr>
-    <th><%= LicitationProcessRatification.human_attribute_name :creditor %></th>
-  </tr>
-  </thead>
-
-  <tbody>
-  <% f.object.licitation_process_ratifications.each do  |winner| %>
-    <tr class="record " >
-      <td><%= winner.creditor %></td>
+<% if f.object.licitation_process_ratifications.present? %>
+  <table id="items-records" class="records">
+    <thead>
+    <tr>
+      <th><%= LicitationProcessRatification.human_attribute_name :creditor %></th>
     </tr>
-  <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+    <% f.object.licitation_process_ratifications.each do  |winner| %>
+      <tr class="record " >
+        <td><%= winner.creditor %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% end %>
