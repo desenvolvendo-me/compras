@@ -97,7 +97,7 @@
     </div>
   <% end %>
 
-  <% if f.object.homologation_date.present? %>
+  <% if f.object.status == PurchaseProcessStatus::APPROVED  %>
     <div class="col-3">
       <%= f.input :homologation_date %>
     </div>
