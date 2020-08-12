@@ -49,7 +49,6 @@ menu:
   - register:
     - physical_peoples
     - legal_peoples
-    - creditors
     - company_sizes
     - materials
     - delivery_locations

@@ -10,7 +10,7 @@ pt-BR:
         neighborhood: "Bairro"
         city: "Cidade"
         state: "Estado"
-        street: "Logradouro"
+        street: "Endereço"
         land_subdivision: "Loteamento"
         condominium: "Condomínio"
         complement: "Complemento"
