@@ -1,6 +1,22 @@
 <fieldset>
   <h5>Configurações</h5>
   <div class="yui3-g">
+    <div class="yui3-g">
+      <div class="yui3-u-1-2">
+        <%= f.input :notice_availability, as: :date %>
+      </div>
+      <div class="yui3-u-1-2">
+        <%= f.input :internet_address %>
+      </div>
+    </div>
+    <div class="yui3-g">
+      <div class="yui3-u-1-2">
+        <%= f.input :proposal_delivery %>
+      </div>
+      <div class="yui3-u-1-2">
+        <%= f.input :bid_opening, as: :date %>
+      </div>
+    </div>
     <div class="yui3-u-1-3">
       <%= f.input :sensitive_value, as: :select %>
     </div>
@@ -28,29 +44,13 @@
       <%= f.input :responsible_dissemination, as: :auto_complete, source_path: employees_path %>
     </div>
   </div>
-  <div class="yui3-g">
-    <div class="yui3-u-1-2">
-      <%= f.input :notice_availability, as: :date %>
-    </div>
-    <div class="yui3-u-1-2">
-      <%= f.input :internet_address %>
-    </div>
-  </div>
-  <div class="yui3-g">
-    <div class="yui3-u-1-2">
-      <%= f.input :proposal_delivery %>
-    </div>
-    <div class="yui3-u-1-2">
-      <%= f.input :bid_opening, as: :date %>
-    </div>
-  </div>
 </fieldset>
 
 <fieldset>
   <h5>Endereço e Contato Processo</h5>
   <div class="yui3-g">
     <div class="yui3-u-1-2">
-      <%= f.input :city %>
+      <%= f.input :street %>
     </div>
     <div class="yui3-u-1-2">
       <%= f.input :neighborhood %>
@@ -58,7 +58,7 @@
   </div>
   <div class="yui3-g">
     <div class="yui3-u-4-5">
-      <%= f.input :street %>
+      <%= f.input :city %>
     </div>
     <div class="yui3-u-1-5">
       <%= f.input :zip_code %>
