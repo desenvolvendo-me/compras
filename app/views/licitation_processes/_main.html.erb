@@ -78,15 +78,44 @@
 <%= f.input :description %>
 
 <div class="yui3-g">
-  <div class="yui3-u-1-3">
+  <div class="yui3-u-4-5">
     <%= f.input :judgment_form,:required => true %>
   </div>
-</div>
-
-<%= f.input :status, :disabled => true %>
-
-<div class="yui3-g">
   <div class="yui3-u-1-5">
     <%= f.input :caution_value %>
   </div>
 </div>
+
+<div class="row">
+  <div class="col">
+    <%= f.input :status, :disabled => true %>
+  </div>
+
+  <% if f.object.status == PurchaseProcessStatus::WAITING_FOR_OPEN %>
+    <div class="col-3">
+      <%= f.input :open_date %>
+    </div>
+  <% end %>
+
+  <% if f.object.homologation_date.present? %>
+    <div class="col-3">
+      <%= f.input :homologation_date %>
+    </div>
+  <% end %>
+</div>
+
+<table id="items-records" class="records">
+  <thead>
+  <tr>
+    <th><%= LicitationProcessRatification.human_attribute_name :creditor %></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% f.object.licitation_process_ratifications.each do  |winner| %>
+    <tr class="record " >
+      <td><%= winner.creditor %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
