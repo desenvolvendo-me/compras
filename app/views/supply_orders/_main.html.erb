@@ -72,10 +72,26 @@
 
 <script type="text/javascript" charset="utf-8">
   $(function(){
+    <% if f.object.try(:contract).try(:type_contract) ==  ContractMinute::MINUTE  %>
+    setPledgeRequired({type_contract: '<%= ContractMinute::MINUTE %>'});
+    <% end %>
+
     <% unless f.object.invoices.blank? %>
     $('#supply_order_licitation_process, #supply_order_contract, #supply_order_purchase_solicitation')
             .prop('readonly', true).attr('data-disabled', 'Não é permitido alterar o dado, pois está ordem já possui notas fiscais.');
     <% end %>
+
+    $("#supply_order_contract_id").change(function(event, data){
+      setPledgeRequired(data);
+    });
+
+    function setPledgeRequired(data){
+      if(data.type_contract === '<%= ContractMinute::MINUTE %>'){
+        $(".supply_order_pledge label").append('<abbr title="obrigatório">*</abbr>')
+      }else{
+        $(".supply_order_pledge label abbr").remove()
+      }
+    }
   })
 
 </script>
