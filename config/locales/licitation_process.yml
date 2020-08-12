@@ -90,6 +90,8 @@ pt-BR:
         trading:     'Pregão'
         demand:     'Demanda'
         phone_email:  'Email/Telefone'
+        homologation_date:  'Data de Homologação'
+        open_date:  'Data de Abertura'
 
   licitation_process:
     messages:
