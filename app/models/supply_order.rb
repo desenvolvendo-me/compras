@@ -4,7 +4,7 @@ class SupplyOrder < Compras::Model
 
   attr_accessible :licitation_process_id, :creditor_id, :authorization_date, :year, :observation, :updatabled,
                   :items_attributes, :invoices_attributes, :supply_requests_attributes, :supply_budgetaries_attributes,
-                  :pledge_id, :purchase_solicitation_id, :contract_id
+                  :pledge, :purchase_solicitation_id, :contract_id
 
   has_enumeration_for :order_status, :with => SupplyOrderStatus,
                       :create_helpers => true, :create_scopes => true
@@ -14,6 +14,7 @@ class SupplyOrder < Compras::Model
   belongs_to :licitation_process
   belongs_to :creditor
   belongs_to :purchase_form
+
 
   has_many :items, class_name: 'SupplyOrderItem', dependent: :destroy
   has_many :invoices, class_name: 'Invoice', dependent: :destroy
@@ -31,7 +32,8 @@ class SupplyOrder < Compras::Model
            to: :licitation_process, allow_nil: true
 
   validates :authorization_date, :contract, :purchase_solicitation, :licitation_process, presence: true
-  # validate :items_quantity_permitted
+  validates :pledge, presence: true, if: :is_contract_minute?
+  # validates :items_quantity_permitted
 
   orderize "id DESC"
   filterize
@@ -40,6 +42,7 @@ class SupplyOrder < Compras::Model
   after_create :set_contract_item_balance
   before_update :change_status_in_service
   before_save :set_creditor
+
 
 
   scope :by_purchasing_unit, lambda {|current_user|
@@ -65,10 +68,6 @@ class SupplyOrder < Compras::Model
     errors.add(:items, "Quantidade solicitada indisponível. Quantidades disponíveis: #{message}") if message.present?
   end
 
-  def pledge
-    @pledge ||= Pledge.find(pledge_id) if pledge_id
-  end
-
   def to_s
     "#{number}"
   end
@@ -81,6 +80,10 @@ class SupplyOrder < Compras::Model
 
   def set_status_defaut
     update_column("order_status", SupplyOrderStatus::SENT)
+  end
+
+  def is_contract_minute?
+    contract.type_contract == ContractMinute::MINUTE
   end
 
   def change_status_in_service
