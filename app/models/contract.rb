@@ -3,7 +3,7 @@ class Contract < Compras::Model
 
   attr_accessible :year, :contract_number, :sequential_number, :publication_date,
                   :lawyer_code, :contract_file, :signature_date, :end_date,
-                  :description, :content, :contract_value, :creditor_id, :type,
+                  :description, :content, :contract_value, :creditor_id, :type_contract,
                   :guarantee_value, :contract_validity, :subcontracting, :management_object_id,
                   :cancellation_date, :cancellation_reason, :delivery_schedules_attributes,
                   :dissemination_source_id, :contract_type_id, :contract_additives_attributes,
@@ -20,39 +20,38 @@ class Contract < Compras::Model
   mount_uploader :contract_file, UnicoUploader
 
   has_enumeration_for :contract_guarantees, :with => UnicoAPI::Resources::Compras::Enumerations::ContractGuarantees
-  has_enumeration_for :type, :with => ContractMinute
+  has_enumeration_for :type_contract, :with => ContractMinute
   has_enumeration_for :execution_type, :create_helpers => true
   has_enumeration_for :balance_control_type,
                       :with => ContractBalanceControlType, :create_helpers => true
 
   belongs_to :department
   belongs_to :purchasing_unit
-  belongs_to :budget_structure_responsible, :class_name => 'Employee'
+  belongs_to :budget_structure_responsible, :class_name => "Employee"
   belongs_to :contract_type
   belongs_to :dissemination_source
-  belongs_to :lawyer, :class_name => 'Employee'
+  belongs_to :lawyer, :class_name => "Employee"
   belongs_to :licitation_process
   belongs_to :creditor
   belongs_to :management_object
 
   belongs_to_resource :budget_structure
 
-  has_many :additives, class_name: 'ContractAdditive', dependent: :restrict
+  has_many :additives, class_name: "ContractAdditive", dependent: :restrict
   has_many :delivery_schedules, :dependent => :destroy, :order => :sequence
   has_many :occurrence_contractual_historics, :dependent => :restrict
   has_many :ratifications, through: :licitation_process, source: :licitation_process_ratifications
   has_many :ratifications_items, through: :ratifications, source: :licitation_process_ratification_items
   has_many :supply_orders
-  has_many :authorized_areas, :class_name => 'ContractDepartment', :dependent => :restrict,
-           :inverse_of => :contract, :order => :id
+  has_many :authorized_areas, :class_name => "ContractDepartment", :dependent => :restrict,
+                              :inverse_of => :contract, :order => :id
   has_many :contract_validations, :dependent => :destroy, :inverse_of => :contract
   has_many :supply_requests
-  has_many :financials, :class_name => 'ContractFinancial', :dependent => :restrict,
-           :inverse_of => :contract, :order => :id
-  has_many :creditors, class_name: 'ContractsUnicoCreditor'
+  has_many :financials, :class_name => "ContractFinancial", :dependent => :restrict,
+                        :inverse_of => :contract, :order => :id
+  has_many :creditors, class_name: "ContractsUnicoCreditor"
   has_many :contract_additives
   has_one :contract_termination, :dependent => :restrict
-
 
   accepts_nested_attributes_for :additives, :allow_destroy => true
   accepts_nested_attributes_for :delivery_schedules, :allow_destroy => true
@@ -75,10 +74,10 @@ class Contract < Compras::Model
             :end_date, :budget_structure_responsible,
             :default_fine, :penalty_fine, :presence => true
   validates :end_date, :timeliness => {
-      :after => :signature_date,
-      :type => :date,
-      :after_message => :end_date_should_be_after_signature_date
-  }, :allow_blank => true
+                         :after => :signature_date,
+                         :type => :date,
+                         :after_message => :end_date_should_be_after_signature_date,
+                       }, :allow_blank => true
 
   filterize
 
@@ -88,11 +87,11 @@ class Contract < Compras::Model
     where { signature_date.in(date_range) }
   }
 
-  scope :by_days_finish, lambda{ |days = 30|
-    where {end_date.lteq(Date.today + days.to_i)}
+  scope :by_days_finish, lambda { |days = 30|
+    where { end_date.lteq(Date.today + days.to_i) }
   }
 
-  scope :between_days_finish, lambda{ |start_at, end_at|
+  scope :between_days_finish, lambda { |start_at, end_at|
     where { end_date.gteq(Date.today + start_at.to_i) & end_date.lteq(Date.today + end_at.to_i) }
   }
 
@@ -100,30 +99,31 @@ class Contract < Compras::Model
     where { signature_date.gteq(started_at) & signature_date.lteq(ended_at) }
   }
   # TODO ver porque tá chamdno o scope msm vazio
-  scope :purchase_process_id, ->(purchase_process_id) do
-    if purchase_process_id != ''
-      where { |query| query.licitation_process_id.eq(purchase_process_id) }
-    end
-  end
+  scope :purchase_process_id, -> (purchase_process_id) do
+          if purchase_process_id != ""
+            where { |query| query.licitation_process_id.eq(purchase_process_id) }
+          end
+        end
 
-  scope :except_type_of_removal, ->(type_of_removal) do
-    joins { licitation_process }.
-        where { licitation_process.type_of_removal.not_eq(type_of_removal) |
-            licitation_process.type_of_removal.eq(nil)
-        }
-  end
+  scope :except_type_of_removal, -> (type_of_removal) do
+          joins { licitation_process }.
+            where {
+            licitation_process.type_of_removal.not_eq(type_of_removal) |
+              licitation_process.type_of_removal.eq(nil)
+          }
+        end
 
   def self.ordered
-    order("ABS(end_date - '#{Date.today}'), unico_people.name ASC, contract_number DESC, year DESC, publication_date DESC ").joins(creditor:[:person])
+    order("ABS(end_date - '#{Date.today}'), unico_people.name ASC, contract_number DESC, year DESC, publication_date DESC ").joins(creditor: [:person])
   end
 
   def winning_items
     licitation_process_id = self.try(:licitation_process).try(:id)
     creditor_id = self.creditor_id
     LicitationProcessRatificationItem.
-        joins { licitation_process_ratification.licitation_process }.
-        where { licitation_process_ratification.licitation_process.id.eq(licitation_process_id) }.
-        where { licitation_process_ratification.creditor_id.in(creditor_id) }
+      joins { licitation_process_ratification.licitation_process }.
+      where { licitation_process_ratification.licitation_process.id.eq(licitation_process_id) }.
+      where { licitation_process_ratification.creditor_id.in(creditor_id) }
   end
 
   def to_s
@@ -143,7 +143,7 @@ class Contract < Compras::Model
   end
 
   def pledges
-    Pledge.all(params: {by_contract_id: id})
+    Pledge.all(params: { by_contract_id: id })
   end
 
   def solicitations
@@ -158,15 +158,15 @@ class Contract < Compras::Model
   end
 
   def self.count_contracts_finishing
-    {'between_121_150': Contract.between_days_finish(121, 150).count,
+    { 'between_121_150': Contract.between_days_finish(121, 150).count,
      'between_91_120': Contract.between_days_finish(91, 120).count,
      'between_61_90': Contract.between_days_finish(61, 90).count,
      'between_31_60': Contract.between_days_finish(61, 90).count,
-     'until_30': Contract.by_days_finish(30).count}
+     'until_30': Contract.by_days_finish(30).count }
   end
 
   def founded_debt_pledges
-    Pledge.all(params: {by_founded_debt_contract_id: id})
+    Pledge.all(params: { by_founded_debt_contract_id: id })
   end
 
   def all_pledges
@@ -211,7 +211,7 @@ class Contract < Compras::Model
   def group_purchase_solicitation_with_materials(material_ids, purchase_solicitation_ids)
     solicitation = {}
     purchase_solicitation_ids.each do |solic|
-      hash = {solic => []}
+      hash = { solic => [] }
       material_ids.each do |material|
         if PurchaseSolicitation.find(solic).items.pluck(:material_id).include? material
           hash[solic].push(material)
