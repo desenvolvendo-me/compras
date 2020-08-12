@@ -1,72 +1,46 @@
 <%= f.input :auction_id, as: :hidden %>
 <div class="form-row">
   <div class="col-2">
-    <%= label_tag "Proposta" %>
-    <%= select_tag(:proposal, options_for_select([["Cadastrar", 'save'], ["Excluir", 'remove']]), {class: "form-control"}) %>
-  </div>
-</div>
-<div class="form-row">
-  <div class="col-2">
     <%= label_tag "Numero do Pregão" %>
     <%= text_field_tag :process_number, "", class: 'form-control', disabled: true %>
-  </div>
-  <div class="col-2">
-    <%= label_tag "Numero do Processo" %>
-    <%= text_field_tag :process_number, "", value: f.object.auction.process_number, class: 'form-control', disabled: true %>
   </div>
 </div>
 
 
 <div class="mh-400 my-2">
   <h4>Itens</h4>
-  <% if f.object&.auction&.items.blank? %>
-    <div class="alert alert-warning"><strong>Não foram cadastrados itens para esse pregão.</strong></div>
-  <% end %>
-  <% f.object&.auction&.items&.each do |auction_item| %>
-    <%= f.simple_fields_for :auction_creditor_proposal_items, init_item(f.object, auction_item) do |p| %>
-      <%= p.input :id, as: :hidden  %>
-      <%= p.input :auction_item_id, as: :hidden  %>
-      <div class="card my-3">
-        <div class="card-body">
-          <div class="form-row">
-            <div class="col-4">
-              <%= label_tag "Material" %>
-              <%= text_field_tag :material,"", class: 'form-control', value: auction_item.material.to_s, disabled: true %>
-            </div>
-            <div class="col-4">
-              <%= p.input :manufacturer, input_html:{class: 'form-control'}%>
-            </div>
-            <div class="col-4">
-              <%= p.input :model_version, input_html:{class: 'form-control'}%>
-            </div>
-          </div>
 
-          <div class="form-row">
-            <div class="col-4">
-              <%= p.input :unit_price, input_html:{class: 'form-control' }%>
-            </div>
-            <div class="col-4">
-              <%= p.input :quantity, input_html:{class: 'form-control', type: 'number'}%>
-            </div>
-            <div class="col-4">
-              <%= p.input :global_price, input_html:{class: 'form-control'}%>
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="col">
-              <%= p.input :description, input_html:{class: 'form-control', rows: 2}%>
-            </div>
-          </div>
-        </div>
-      </div>
+  <table id="items-records" class="records">
+    <thead>
+    <tr>
+      <th width="21%">Material</th>
+      <th><%= AuctionCreditorProposalItem.human_attribute_name :manufacturer %></th>
+      <th><%= AuctionCreditorProposalItem.human_attribute_name :model_version %></th>
+      <th width="8%"><%= AuctionCreditorProposalItem.human_attribute_name :quantity %></th>
+      <th width="11%"><%= AuctionCreditorProposalItem.human_attribute_name :unit_price %></th>
+      <th width="11%"><%= AuctionCreditorProposalItem.human_attribute_name :global_price %></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% if f.object&.auction&.items.blank? %>
+      <tr><td colspan="7"><div class="alert alert-warning"><strong>Não foram cadastrados itens para esse pregão.</strong></div></tr></td>
     <% end %>
-  <% end %>
+    <% f.object&.auction&.items&.each do |auction_item| %>
+      <%= f.simple_fields_for :auction_creditor_proposal_items, init_item(f.object, auction_item) do |p| %>
+        <%= render 'auction/auction_creditor_proposa_items/form',
+                   material: auction_item.material.to_s,
+                   f: p %>
+      <% end %>
+    <% end %>
+    </tbody>
+  </table>
 </div>
 
+<h4>Declarações</h4>
+<h6>* Estas Declarações substitui o envio das mesmas</h6>
 <div id="terms">
   <div class="form-row">
-    <div class="col-9">
+    <div class="col">
       <div class="form-check">
         <%= f.input :term %>
       </div>
@@ -74,7 +48,7 @@
   </div>
 
   <div class="form-row">
-    <div class="col-9">
+    <div class="col">
       <div class="form-check">
         <%= f.input :impediment %>
       </div>
@@ -82,7 +56,7 @@
   </div>
 
   <div class="form-row">
-    <div class="col-9">
+    <div class="col">
       <div class="form-check">
         <%= f.input :proposal_independent %>
       </div>
@@ -90,7 +64,7 @@
   </div>
 
   <div class="form-row">
-    <div class="col-9">
+    <div class="col">
       <div class="form-check">
         <%= f.input :art_5 %>
       </div>
@@ -98,7 +72,7 @@
   </div>
 
   <div class="form-row">
-    <div class="col-9">
+    <div class="col">
       <div class="form-check">
         <%= f.input :art_93_pcd %>
       </div>
@@ -106,7 +80,7 @@
   </div>
 
   <div class="form-row">
-    <div class="col-9">
+    <div class="col">
       <div class="form-check">
         <%= f.input :art_529_clt %>
       </div>
@@ -115,16 +89,35 @@
 </div>
 
 <div class="form-row mt-4">
-  <div class="col-3">
-    <div class="form-group">
-      <%= f.input :proposal_doc %>
-    </div>
-  </div>
   <div class="col-4">
     <div class="form-group">
-      <%= f.input :proposal_qualification_doc %>
+      <%= f.input :proposal_doc, input_html: {accept: ('application/pdf')} %>
     </div>
   </div>
+
+
+
+  <div class="col-4">
+    <div class="form-group">
+      <%= f.input :proposal_qualification_doc, input_html: {accept: ('application/pdf')} %>
+    </div>
+  </div>
+</div>
+
+<div class="form-row" style="margin-top: -11px">
+  <% unless f.object.proposal_send_date.blank? %>
+    <div class="col-4" >
+      Enviada em: <%= f.object.proposal_send_date %>
+      <%= link_to f.object.proposal_doc_identifier, f.object.proposal_doc_url, :target => '_blank' if f.object.proposal_doc? %>
+    </div>
+  <% end %>
+
+  <% unless f.object.qualification_send_date.blank? %>
+    <div class="col-4">
+      Enviada em: <%= f.object.qualification_send_date %>
+      <%= link_to f.object.proposal_qualification_doc_identifier, f.object.proposal_qualification_doc_url, :target => '_blank' if f.object.proposal_qualification_doc? %>
+    </div>
+  <% end %>
 </div>
 
 <style>
@@ -138,5 +131,40 @@
   #terms{
     text-align: justify;
   }
+  h4, h6{
+    color: #3f6e9d;
+  }
+
+  #terms .input{
+    margin-bottom: 0 !important;
+  }
+
+  .auction_creditor_proposal_proposal_doc label{
+    color: #3f6e9d;
+  }
+
+  .auction_creditor_proposal_proposal_qualification_doc label{
+    color: #3f6e9d;
+  }
+
+  .simple_form .input {
+    margin-bottom: 0 !important;
+  }
+
   input[type=text],input[type=password],textarea{width:100%;}
 </style>
+
+<script>
+  <% if f.object.persisted? %>
+  $(function(){
+    $(":input").prop('disabled', true);
+    $("#auction_creditor_proposal_submit").hide();
+
+    $("#edit_proposal").click(function(){
+      $(":input").prop('disabled', false);
+      $("#auction_creditor_proposal_submit").show();
+      $(this).hide();
+    });
+  });
+  <% end %>
+</script>

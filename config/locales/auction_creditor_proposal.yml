@@ -2,8 +2,8 @@ pt-BR:
   activerecord:
     models:
       auction_creditor_proposal:
-        one: "Proposta do Fornecedor"
-        other: "Proposta do Fornecedor"
+        one: "Proposta de Registro de Preço"
+        other: "Proposta de Registro de Preço"
 
     attributes:
       auction_creditor_proposal:
@@ -29,5 +29,6 @@ pt-BR:
                       de funcionários da minha empresa, atendo às regras de acessibilidade
                       previstas na legislação."
         art_529_clt: " Declaro sob as penas da Lei, que cumpro a cota de aprendizagem nos termos estabelecidos no art. 429 da CLT."
-        proposal_doc: "Incluir Documentos Anexos da Proposta"
-        proposal_qualification_doc: "Incluir Documentos Anexos da Habilitação"
+        proposal_doc: "Incluir Documentos Anexos da Proposta (EM PDF)"
+        proposal_qualification_doc: "Incluir Documentos Anexos da Habilitação (EM PDF)"
+        proposal_send_date: "Enviada Em"
