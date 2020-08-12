@@ -92,6 +92,7 @@ pt-BR:
         phone_email:  'Email/Telefone'
         homologation_date:  'Data de Homologação'
         open_date:  'Data de Abertura'
+        winning_creditors: 'Fornecedor Vencedor'
 
   licitation_process:
     messages:

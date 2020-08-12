@@ -6,7 +6,7 @@ class LicitationProcessDecorator
   include ActionView::Helpers::TranslationHelper
 
   attr_header :code_and_year, :modality_or_type_of_removal, :object_type, :proposal_envelope_opening_date,
-              :status
+              :status, :winning_creditors
 
   def judgment_forms_available(judgment_form_repository = JudgmentForm)
     if judgment_form
@@ -125,6 +125,10 @@ class LicitationProcessDecorator
     elsif judgment_form.lowest_price? && judgment_form.lot?
       "lowest_price_by_lot"
     end
+  end
+
+  def winning_creditors
+    licitation_process_ratification_creditors.map {|x| x.name}.join(', ')
   end
 
   def proposals_total_price(creditor)
