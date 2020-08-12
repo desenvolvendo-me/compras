@@ -46,6 +46,8 @@
 
 <script>
   $(function(){
+  var enableNavigation = <%= f.object.persisted? %>;
+
   var btnFinish = $('<button></button>').text('Salvar')
     .addClass('btn btn-info btn-finish')
     .on('click', function(){
@@ -70,6 +72,8 @@
       easing:'' // Transition animation easing. Not supported without a jQuery easing plugin
     },
     anchorSettings: {
+      anchorClickable: true, // Enable/Disable anchor navigation
+      enableAllAnchors: enableNavigation, // Activates all anchors clickable all times
       markDoneStep: true, // add done css
       markAllPreviousStepsAsDone: true, // When a step selected by url hash, all previous steps are marked done
       removeDoneStepOnNavigateBack: true, // While navigate back done step after active step will be cleared
