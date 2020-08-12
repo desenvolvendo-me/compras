@@ -6,7 +6,8 @@
     <li><a href="#tab-items" id="items_tab_header">Itens / Justificativa</a></li>
     <li class='income'><a href="#tab-income">Receita</a></li>
     <li><a href="#tab-documents">Documentos</a></li>
-    <li><a href="#tab-leagal-reasons" id="legal_reasons_tab">Fundamentação Legal Dispensa/Inexigibilidade</a></li>
+    <li id="legal_reasons_tab" ><a href="#tab-leagal-reasons">Fundamentação Legal Dispensa/Inexigibilidade</a></li>
+    <li><a href="#tab-legal-analysis-appraisals" id="legal_analysis_appraisals_tab">Laudo de Análise Jurídica</a></li>
   </ul>
 
   <div id="tab-main"><%= render 'main', :f => f %></div>
@@ -16,6 +17,7 @@
   <div id="tab-income"><%= render 'income', :f => f %></div>
   <div id="tab-documents"><%= render 'documents', :f => f %></div>
   <div id="tab-leagal-reasons"><%= render 'legal_reasons', :f => f %></div>
+  <div id="tab-legal-analysis-appraisals"><%= render 'legal_analisys_appraisals', :f => f %></div>
 </div>
 
 <script>
