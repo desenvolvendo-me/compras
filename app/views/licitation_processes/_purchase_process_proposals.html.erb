@@ -12,3 +12,24 @@
   <%= render partial: 'purchase_process_proposals/creditors_rows', collection: resource.creditors_enabled.includes(:purchase_process_creditor_proposals), as: :creditor %>
   </tbody>
 </table>
+
+<script>
+
+  $(".delete-proposal").click(function(){
+    var url = Routes.purchase_process_creditor_proposal,
+      params = {
+        licitation_process_id: $("#licitation_process_id").val(), creditor_id: $(this).data('creditor')
+      };
+
+    url += "?" + $.param(params);
+
+    $.ajax({
+      url: url,
+      type: 'DELETE',
+      dataType: 'JSON',
+      success: function(result) {
+        window.location.reload();
+      }
+    });
+  })
+</script>
