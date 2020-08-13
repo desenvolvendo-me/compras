@@ -3,6 +3,15 @@
   <div class="yui3-g">
     <div class="yui3-g">
       <div class="yui3-u-1-2">
+        <%= f.input :disclosure_date, as: :date %>
+      </div>
+      <div class="yui3-u-1-2">
+        <%= f.input :responsible_dissemination, as: :auto_complete, source_path: employees_path %>
+      </div>
+    </div>
+    
+    <div class="yui3-g">
+      <div class="yui3-u-1-2">
         <%= f.input :notice_availability, as: :date %>
       </div>
       <div class="yui3-u-1-2">
@@ -34,14 +43,6 @@
     </div>
     <div class="yui3-u-1-3">
       <%= f.input :decree_treatment, as: :select %>
-    </div>
-  </div>
-  <div class="yui3-g">
-    <div class="yui3-u-1-2">
-      <%= f.input :disclosure_date, as: :date %>
-    </div>
-    <div class="yui3-u-1-2">
-      <%= f.input :responsible_dissemination, as: :auto_complete, source_path: employees_path %>
     </div>
   </div>
 </fieldset>
