@@ -30,9 +30,11 @@
 
   <tbody>
     <% if @purchase_process.trading? %>
-      <%= render partial: 'creditors_row_trading', collection: @creditors, as: :creditor %>
+      <%= render partial: 'creditors_row_trading', collection: @creditors, as: :creditor,
+                 locals:{licitation_process: @purchase_process} %>
     <% else %>
-      <%= render partial: "creditors_row_#{@purchase_process.judgment_form_kind}", collection: @creditors, as: :creditor %>
+      <%= render partial: "creditors_row_#{@purchase_process.judgment_form_kind}", collection: @creditors,
+                 locals:{licitation_process: @purchase_process} %>
     <% end %>
   </tbody>
 </table>
