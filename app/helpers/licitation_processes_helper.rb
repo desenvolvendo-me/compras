@@ -50,4 +50,12 @@ module LicitationProcessesHelper
       t('licitation_process.messages.has_already_a_ratification')
     end
   end
+
+  def publication_of_collection(licitation_process)
+    if licitation_process.direct_purchase?
+      PublicationOf.allowed_for_direct_purchase
+    else
+      PublicationOf.to_a.sort { |a,b| a[0] <=> b[0] }
+    end
+  end
 end
