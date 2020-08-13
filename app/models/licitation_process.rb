@@ -25,7 +25,7 @@ class LicitationProcess < Compras::Model
                   :justification, :justification_and_legal, :process,
                   :purchase_solicitation_import_option, :homologation_date,
                   :purchase_solicitations_attributes, :purchasing_unit_id
-                  :legal_analysis_appraisals_attributes
+                  :legal_analysis_appraisals_attributes, :publications_attributes
 
   auto_increment :process, :by => :year
   auto_increment :modality_number, :by => [:year, :modality, :type_of_removal]
@@ -103,7 +103,8 @@ class LicitationProcess < Compras::Model
           foreign_key: :purchase_process_id
 
   accepts_nested_attributes_for :purchase_process_budget_allocations, :items, :creditor_proposals,
-                                :process_responsibles, :tied_creditor_proposals, :legal_analysis_appraisals, allow_destroy: true
+                                :process_responsibles, :tied_creditor_proposals, :legal_analysis_appraisals,
+                                :publications, allow_destroy: true
 
   delegate :allow_negotiation?, to: :trading, allow_nil: true, prefix: true
   delegate :issuance_date, to: :judgment_commission_advice, allow_nil: true, prefix: true
