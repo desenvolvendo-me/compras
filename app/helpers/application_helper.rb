@@ -10,6 +10,10 @@ module ApplicationHelper
     super(object, *(args << options), &block)
   end
 
+  def menu_link_to(location)
+    link_to(t("controllers.#{location}"), send("#{location}_path"))
+  end
+
   def find_input_for(value, setting, options = {})
     Compras::Inputs::FindInput.new(value, setting, options).find
   end
@@ -21,11 +25,11 @@ module ApplicationHelper
   def smart_report_path(report)
     action = report.render_list? ? :new : :show
 
-    url_for :controller => controller_name, :action => action, :id => 'report', :only_path => true
+    url_for :controller => controller_name, :action => action, :id => "report", :only_path => true
   end
 
   def custom_fields(form)
-    inputs = ''
+    inputs = ""
 
     options = {}
     options[:lookup_chain] = form.object_name
@@ -60,7 +64,7 @@ module ApplicationHelper
   end
 
   def mustache(name, &block)
-    content_tag(:script, :id => name, :type => 'text/x-mustache') do
+    content_tag(:script, :id => name, :type => "text/x-mustache") do
       content = capture(&block)
       content = content.gsub("</script>", "<\\/script>")
       content.html_safe
@@ -71,16 +75,16 @@ module ApplicationHelper
     if current_prefecture && current_prefecture.image?
       image_tag current_prefecture.image.url
     else
-      image_tag 'prefecture.jpg'
+      image_tag "prefecture.jpg"
     end
   end
 
   def back_link
-    link_to 'voltar', :back
+    link_to "voltar", :back
   end
 
   def print_link
-    link_to 'imprimir', 'javascript:window.print()'
+    link_to "imprimir", "javascript:window.print()"
   end
 
   def message_about_environment?
@@ -95,7 +99,7 @@ module ApplicationHelper
 
   def signatures_grouped(options = {})
     signed_object = options.fetch(:signed_object) { resource }
-    grouped_by    = options.fetch(:grouped_by) { 4 }
+    grouped_by = options.fetch(:grouped_by) { 4 }
 
     signed_object.signatures.in_groups_of(grouped_by, false)
   end
@@ -103,13 +107,13 @@ module ApplicationHelper
   def data_disabled_attribute(data_disabled = nil)
     return unless data_disabled
 
-    " data-disabled=\"#{ data_disabled }\"".html_safe
+    " data-disabled=\"#{data_disabled}\"".html_safe
   end
 
   def full_path(relative_path, options = {})
-    domain  = options.fetch(:domain) { current_customer.domain }
-    sub_path = options.fetch(:sub_path, 'compras')
-    protocol  = options.fetch(:protocol, 'https')
+    domain = options.fetch(:domain) { current_customer.domain }
+    sub_path = options.fetch(:sub_path, "compras")
+    protocol = options.fetch(:protocol, "https")
 
     "#{protocol}://#{domain}/#{sub_path}#{relative_path}"
   end
@@ -133,10 +137,10 @@ module ApplicationHelper
   end
 
   def current_subpath
-    Rails.env.development? ? ENV['RAILS_RELATIVE_URL_ROOT'].to_s : nil
+    Rails.env.development? ? ENV["RAILS_RELATIVE_URL_ROOT"].to_s : nil
   end
 
-  def relative_link_to(body, url, html_options={})
+  def relative_link_to(body, url, html_options = {})
     link_to body, current_subpath.to_s + url, html_options
   end
 end
