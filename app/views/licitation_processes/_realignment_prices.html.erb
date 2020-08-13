@@ -1,0 +1,25 @@
+
+<table class="records">
+  <thead>
+  <tr>
+    <th><%= LicitationProcess.human_attribute_name :creditor %></th>
+    <th><%= LicitationProcess.human_attribute_name :creditor_email %></th>
+
+    <% if f.object.judgment_form_lot? %>
+      <th>Lote</th>
+    <% end %>
+
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% if f.object.trading? %>
+    <%= render partial: 'realignment_prices/creditors_row_trading', collection: Creditor.winners(f.object), as: :creditor,
+               locals:{licitation_process: f.object} %>
+  <% else %>
+    <%= render partial: "realignment_prices/creditors_row_#{f.object.judgment_form_kind}", collection: Creditor.winners(f.object), as: :creditor,
+               locals:{licitation_process: f.object}%>
+  <% end %>
+  </tbody>
+</table>
