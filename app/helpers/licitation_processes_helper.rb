@@ -86,4 +86,16 @@ module LicitationProcessesHelper
   def disqualification_status(creditor)
     PurchaseProcessCreditorDisqualification.disqualification_status(resource.id, creditor.id)
   end
+
+  def disqualify_creditor_proposal_path(creditor)
+    object = PurchaseProcessCreditorDisqualification.by_licitation_process_and_creditor(resource.id, creditor.id).first
+
+    if object.nil?
+      new_purchase_process_creditor_disqualification_path({
+                                                              licitation_process_id: resource.id, creditor_id: creditor.id
+                                                          })
+    else
+      edit_purchase_process_creditor_disqualification_path object
+    end
+  end
 end
