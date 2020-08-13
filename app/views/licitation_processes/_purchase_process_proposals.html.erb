@@ -1,0 +1,14 @@
+<table class="records" id="administrative-process-budget-allocation-records">
+  <thead>
+  <th><%= LicitationProcess.human_attribute_name :creditor %></th>
+  <th><%= LicitationProcess.human_attribute_name :creditor_email %></th>
+  <th>Propostas</th>
+  <th>Desclassificar</th>
+  <th>Deletar?</th>
+  <th>Desclassificada?</th>
+  </thead>
+
+  <tbody>
+  <%= render partial: 'purchase_process_proposals/creditors_rows', collection: resource.creditors_enabled.includes(:purchase_process_creditor_proposals), as: :creditor %>
+  </tbody>
+</table>
