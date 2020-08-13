@@ -1,11 +1,9 @@
-<%= mustache 'bidders-template' do %>
-  <%= f.association :bidders_attributes, :collection => f.object.bidders.build, :index => '{{uuid_bidder}}' do |p| %>
-    <%= render 'bidders/form', :f => p %>
-  <% end %>
-<% end %>
 
 <%= button_tag 'Adicionar Habilitação', type: :button,
              class: "button", id: "add-bidder" %>
+
+<%= button_tag 'Cancelar', type: :button,
+               class: "button", id: "cancel-bidder" %>
 
 <div id="bidder-fields"></div>
 
@@ -42,6 +40,13 @@
   </tbody>
 </table>
 
+<%= mustache 'bidders-template' do %>
+  <%= f.association :bidders_attributes, :collection => f.object.bidders.build, :index => '{{uuid_bidder}}' do |p| %>
+    <%= render 'bidders/form', :f => p %>
+  <% end %>
+<% end %>
+
+
 <script type="text/javascript" charset="utf-8">
 
   function initMustache(){
@@ -55,7 +60,15 @@
     });
 
     $(".tabs").tabs();
+    $("#bidders-records, #add-bidder").hide();
+    $("#cancel-bidder").show();
   }
+
+  $("#cancel-bidder").click(function(){
+    $("#bidders-records, #add-bidder").show();
+    $("#cancel-bidder").hide();
+    $("#bidder-fields").html('');
+  });
 
   $(function(){
 
@@ -65,15 +78,28 @@
 
     $("#add-bidder").click(function() {
       $('#bidder-fields').append($('#bidders-template').mustache({uuid_bidder: _.uniqueId('fresh-')}));
-      $("#bidders-records").hide();
       initMustache();
     });
 
     $(".edit-bidder").click(function() {
-      var bid_id = $(this).data('id');
-      $.get(Routes.bidder.replace(':id', bid_id) + '.json', function (data) {
-        debugger
+      var url = Routes.add_bidders_licitation_processes,
+          params = {
+            id: <%= f.object.id %>, bidder_id: $(this).data('id')
+          };
+
+      url += "?" + $.param(params);
+
+      $.get(url, function (data) {
+        $("#bidder-fields").html($(data).html());
+        initMustache();
       })
     })
   })
 </script>
+
+<style>
+  #cancel-bidder{
+    display: none;
+    float: right;
+  }
+</style>
