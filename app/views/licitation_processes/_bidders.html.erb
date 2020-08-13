@@ -1,27 +1,79 @@
-<div id="bidders-content">
-  <p>
-    <input type="button" class="button affirmative add-bidder" value="Adicionar Habilitação">
-  </p>
-
-  <div id="bidders">
-    <%= f.association :bidders, :collection => localized(f.object.bidders) do |p| %>
-      <%= render 'bidders/form', :f => p %>
-    <% end %>
-  </div>
-</div>
-
 <%= mustache 'bidders-template' do %>
   <%= f.association :bidders_attributes, :collection => f.object.bidders.build, :index => '{{uuid_bidder}}' do |p| %>
     <%= render 'bidders/form', :f => p %>
   <% end %>
 <% end %>
 
-<script>
-  $("#bidders-template").nestedForm({
-    add: '.add-bidder',
-    remove: '.remove-bidder',
-    target: '#bidders',
-    uuid: 'uuid_bidder',
-    appendItem: false
-  });
+<%= button_tag 'Adicionar Habilitação', type: :button,
+             class: "button", id: "add-bidder" %>
+
+<div id="bidder-fields"></div>
+
+<% column_names = BidderDecorator.header_attributes.to_a %>
+
+<table id='bidders-records' class="records">
+  <thead>
+  <tr>
+    <% column_names.each do |column_name| %>
+      <th class="<%= column_name %>"><%= ContractValidation.human_attribute_name column_name %></th>
+    <% end %>
+    <th></th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody class="<%= f.sanitized_object_name %>_document_types_records">
+  <% f.object.bidders.each do |bidder| %>
+    <tr>
+      <% column_names.each do |column_name| %>
+        <td>
+          <%=  bidder.decorator.send(column_name) %>
+        </td>
+      <% end %>
+      <td>
+        <%= link_to 'Editar', '#', 'data-id': bidder.id,  class: 'edit-bidder' %>
+      </td>
+      <td>
+        <%= link_to 'Remover', '#', 'data-id': bidder.id, class: 'remove-bidder' %>
+      </td>
+    </tr>
+  <% end %>
+
+  </tbody>
+</table>
+
+<script type="text/javascript" charset="utf-8">
+
+  function initMustache(){
+    $("#bidder_documents_template").nestedForm({
+      add: '.add_bidder_document',
+      remove: '.remove_bidder_document',
+      fieldsWrapper: '.bidder_document',
+      target: '#bidder_documents',
+      uuid: 'uuid_documents',
+      appendItem: true
+    });
+
+    $(".tabs").tabs();
+  }
+
+  $(function(){
+
+    $(document).on('click', 'button.remove_bidder_document, button.add_bidder_document', function(event) {
+      event.preventDefault()
+    });
+
+    $("#add-bidder").click(function() {
+      $('#bidder-fields').append($('#bidders-template').mustache({uuid_bidder: _.uniqueId('fresh-')}));
+      $("#bidders-records").hide();
+      initMustache();
+    });
+
+    $(".edit-bidder").click(function() {
+      var bid_id = $(this).data('id');
+      $.get(Routes.bidder.replace(':id', bid_id) + '.json', function (data) {
+        debugger
+      })
+    })
+  })
 </script>
