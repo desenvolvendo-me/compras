@@ -1,0 +1,5 @@
+<%= simple_form_for @resource, :authenticity_token => false do |f| %>
+  <%= f.association :bidders, :collection => @bidders do |p| %>
+    <%= render 'bidders/form', :f => p %>
+  <% end %>
+<% end %>

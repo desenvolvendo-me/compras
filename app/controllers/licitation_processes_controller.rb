@@ -51,6 +51,13 @@ class LicitationProcessesController < CrudController
     render :json => {total: response["total"], value_unit: response["value_unit"].to_f.round(2), balance: response["balance"].to_f.round(2), balance_unit: response["balance_unit"]}
   end
 
+  def add_bidders
+    @resource = LicitationProcess.find(params[:id])
+    @bidders = @resource.bidders.where(id: params[:bidder_id])
+
+    render 'add_bidders', layout: false
+  end
+
 
   protected
 
