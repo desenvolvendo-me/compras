@@ -18,12 +18,12 @@ class LicitationProcess < Compras::Model
                   :concession_period_unit, :goal, :licensor_rights_and_liabilities,
                   :licensee_rights_and_liabilities, :authorization_envelope_opening_date,
                   :authorization_envelope_opening_time, :closing_of_accreditation_date,
-                  :closing_of_accreditation_time,
+                  :closing_of_accreditation_time, :open_date,
                   :budget_allocations_total_value, :total_value_of_items,
                   :creditor_proposals_attributes, :tied_creditor_proposals_attributes,
                   :process_responsibles_attributes, :phone_email,
                   :justification, :justification_and_legal, :process,
-                  :purchase_solicitation_import_option,
+                  :purchase_solicitation_import_option, :homologation_date,
                   :purchase_solicitations_attributes, :purchasing_unit_id
 
   auto_increment :process, :by => :year
@@ -139,6 +139,8 @@ class LicitationProcess < Compras::Model
   validate :validate_the_year_to_processe_date_are_the_same, :on => :update
   validate :validate_total_items
   validate :purchase_solicitations_blank?
+
+  before_save :set_homologation_date
 
   with_options :allow_blank => true do |allowing_blank|
     allowing_blank.validates :year, :mask => "9999"
@@ -424,6 +426,12 @@ class LicitationProcess < Compras::Model
   end
 
   protected
+
+  def set_homologation_date
+    if self.status_changed? && self.status == PurchaseProcessStatus::APPROVED
+      self.homologation_date = Date.today
+    end
+  end
 
   def available_for_licitation_process_classification?
     Modality.available_for_licitation_process_classification.include?(modality)

@@ -35,7 +35,7 @@ pt-BR:
         licensor_rights_and_liabilities: "Direitos e obrigações do concedente"
         minimum_bid_to_disposal: "Valor da oferta mínima para alienações"
         modality: "Modalidade"
-        modality_or_type_of_removal: "Modalidade / Tipo do afastamento"
+        modality_or_type_of_removal: "Modalidade"
         modality_number: "Nº da modalidade"
         notice_availability_date: "Data da disponibilidade"
         object_type: "Tipo de objeto"
@@ -90,6 +90,9 @@ pt-BR:
         trading:     'Pregão'
         demand:     'Demanda'
         phone_email:  'Email/Telefone'
+        homologation_date:  'Data de Homologação'
+        open_date:  'Data de Abertura'
+        winning_creditors: 'Fornecedor Vencedor'
 
   licitation_process:
     messages:
