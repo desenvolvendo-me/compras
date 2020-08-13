@@ -132,6 +132,10 @@
      calculateProposalTotalValue($(this));
    });
 
+  $("#bidder_documents").on('nestedForm:afterAdd', function(){
+    $("[name$='[emission_date]']").datepicker({ maxDate: 0 });
+  });
+
   removeDuplicateRequiredLabels();
   toggleEnabledDisabledFields();
   toggleRequiredFields();
