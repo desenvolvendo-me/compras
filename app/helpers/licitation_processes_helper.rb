@@ -58,4 +58,32 @@ module LicitationProcessesHelper
       PublicationOf.to_a.sort { |a,b| a[0] <=> b[0] }
     end
   end
+
+  def view_or_edit_creditor_proposal(creditor)
+    if resource.proposals_of_creditor(creditor).empty?
+      link_to 'Cadastrar propostas',
+              new_purchase_process_proposal_path(licitation_process_id: resource.id, creditor_id: creditor.id)
+    else
+      link_to 'Editar propostas',
+              edit_purchase_process_proposal_path(resource, creditor_id: creditor.id)
+    end
+  end
+
+  def link_to_disqualify_creditor_proposal(creditor)
+    if resource.proposals_of_creditor(creditor).any?
+      link_to "Desclassificar propostas", disqualify_creditor_proposal_path(creditor)
+    else
+      'Nenhuma proposta cadastrada'
+    end
+  end
+
+  def disqualification_status_message(creditor)
+    I18n.t("other.compras.messages.#{disqualification_status(creditor)}")
+  end
+
+  private
+
+  def disqualification_status(creditor)
+    PurchaseProcessCreditorDisqualification.disqualification_status(resource.id, creditor.id)
+  end
 end
