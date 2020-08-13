@@ -6,7 +6,12 @@ class SupplyOrderDecorator
   attr_header :number_year, :creditor, :authorization_date, :licitation_process, :status
 
   def number_year
-    "#{self.number}/#{self.year}"
+    index = contract&.supply_orders&.order('compras_supply_orders.id')&.find_index {|supply| supply.id == id }
+    if index
+      "Contrato #{self.number}/#{self.year} - ordem #{index}"
+    else
+      ""
+    end
   end
 
   def creditor

@@ -2,8 +2,10 @@ class SupplyOrdersController < CrudController
   has_scope :by_purchasing_unit
 
   def new
+    object = build_resource
+    object.year = Time.now.year
+
     if params[:supply_order].present?
-      object = build_resource
       object.licitation_process_id = params[:supply_order][:licitation_process_id]
       object.contract_id = params[:supply_order][:contract_id]
       object.purchase_solicitation_id = params[:supply_order][:purchase_solicitation_id]
