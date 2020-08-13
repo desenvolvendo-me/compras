@@ -1,10 +1,10 @@
-<%= render 'list'  %>
+<%= render 'list' %>
 
         <div class="yui3-g section-blue">
           <div class="yui3-u-1">
             <div class="ellipsis">
               <p><b>Pregão:</b>
-                <spam class="white"><%= "#{resource.licitation_number}/#{resource.year}" %></spam>
+                <span class="white"><%= "#{resource.licitation_number}/#{resource.year}" %></span>
               </p>
             </div>
           </div>
@@ -27,7 +27,7 @@
         </div>
       </td>
     </tr>
-  <% end %>
+
   </tbody>
 </table>
 
@@ -105,8 +105,8 @@
 
 <script>
     $(".teste").click(function(){
-      $('#exampleModal').modal('show')
-    })
+      $('#exampleModal').modal('show');
+    });
 
 </script>
 
