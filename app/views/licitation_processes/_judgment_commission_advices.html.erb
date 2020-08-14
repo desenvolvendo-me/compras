@@ -1,0 +1,4 @@
+<%= f.simple_fields_for :judgment_commission_advice, (f.object.judgment_commission_advice || JudgmentCommissionAdvice.new(licitation_process_id: f.object.id) )  do |p| %>
+  <%= p.input :id, as: :hidden %>
+  <%= render 'judgment_commission_advices/form', f: p %>
+<% end %>
