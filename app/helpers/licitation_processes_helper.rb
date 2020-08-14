@@ -1,5 +1,6 @@
 module LicitationProcessesHelper
   include RealignmentPricesHelper
+  include LicitationProcessRatificationsHelper
 
   def classification_link
     return unless resource.persisted?
