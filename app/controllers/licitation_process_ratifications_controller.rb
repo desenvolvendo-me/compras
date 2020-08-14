@@ -9,11 +9,11 @@ class LicitationProcessRatificationsController < CrudController
   end
 
   def create
-    create! { licitation_process_ratifications_path(:licitation_process_id => resource.licitation_process_id) }
+    create! { edit_licitation_process_path(resource.licitation_process_id) }
   end
 
   def update
-    update! { licitation_process_ratifications_path(:licitation_process_id => resource.licitation_process_id) }
+    update! { edit_licitation_process_path(resource.licitation_process_id) }
   end
 
   def show
@@ -21,7 +21,7 @@ class LicitationProcessRatificationsController < CrudController
   end
 
   def destroy
-    destroy! { licitation_process_ratifications_path(:licitation_process_id => resource.licitation_process_id) }
+    destroy! { edit_licitation_process_path(resource.licitation_process_id) }
   end
 
   protected
