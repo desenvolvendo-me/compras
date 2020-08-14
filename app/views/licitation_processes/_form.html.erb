@@ -27,6 +27,8 @@
           <li><a href="#tab-realignment-prices" id="realignment_prices">Realinhamento de Preços</a></li>
         <% end %>
       <% end %>
+
+      <li><a href="#tab-trading-negotiation" id="trading_negotiation">Negociação</a></li>
     <% end %>
   </ul>
 
@@ -58,6 +60,8 @@
         <div id="tab-realignment-prices"><%= render 'realignment_prices', :f => f %></div>
       <% end %>
     <% end %>
+
+    <div id="tab-trading-negotiation"><%= render 'purchase_process_trading_negotiation', :f => f %></div>
   <% end %>
 </div>
 <%# raise %>
