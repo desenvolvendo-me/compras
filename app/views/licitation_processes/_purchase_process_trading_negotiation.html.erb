@@ -6,7 +6,7 @@
 
 <table id='negotiation-records' class="records">
   <tbody>
-    <% resource.trading.creditors_with_lowest_proposal.each do |creditor| %>
+    <% resource.trading&.creditors_with_lowest_proposal&.each do |creditor| %>
       <tr id="<%= dom_id creditor %>">
         <td>
           <%= creditor %>
