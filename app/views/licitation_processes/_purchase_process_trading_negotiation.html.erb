@@ -1,0 +1,61 @@
+<%= button_tag 'Cancelar', type: :button,
+               class: "button", id: "cancel-negotiation" %>
+
+<div id="negotiation-fields"></div>
+
+
+<table id='negotiation-records' class="records">
+  <tbody>
+    <% resource.trading.creditors_with_lowest_proposal.each do |creditor| %>
+      <tr id="<%= dom_id creditor %>">
+        <td>
+          <%= creditor %>
+        </td>
+
+        <td>
+          <%= link_to 'Negociar', '#', 'data-creditor': creditor.id, class: 'edit-negotiation button primary' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+
+<script type="text/javascript" charset="utf-8">
+
+  function handleBunttons(){
+    $("#negotiation-records").hide();
+    $("#cancel-negotiation").show();
+  }
+
+  $("#cancel-negotiation").click(function(){
+    $("#negotiation-records").show();
+    $("#negotiation-fields").html('');
+    $(this).hide();
+  });
+
+  $(function(){
+
+    $(".edit-negotiation").click(function() {
+      var url = Routes.add_trading_negotiation_licitation_processes,
+        params = {
+          id: <%= f.object.id %>, accreditation_creditor_id: $(this).data('creditor')
+        };
+
+      url += "?" + $.param(params);
+
+      $.get(url, function (data) {
+        $("#negotiation-fields").html($(data).html());
+        handleBunttons();
+      })
+    })
+  })
+</script>
+
+<style>
+  #cancel-negotiation{
+    display: none;
+    float: right;
+  }
+</style>
