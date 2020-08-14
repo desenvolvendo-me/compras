@@ -532,6 +532,7 @@ Compras::Application.routes.draw do
       get :filter
       get :modal
       get :add_bidders
+      get :add_trading_negotiation
     end
   end
 
