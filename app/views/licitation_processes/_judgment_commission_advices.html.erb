@@ -1,4 +1,22 @@
+<div class="text-right">
+  <%= button_tag 'Editar', type: :button,
+                 class: "button", "data-status": false,  id: "edit-judment-commission" %>
+</div>
+
 <%= f.simple_fields_for :judgment_commission_advice, (f.object.judgment_commission_advice || JudgmentCommissionAdvice.new(licitation_process_id: f.object.id) )  do |p| %>
   <%= p.input :id, as: :hidden %>
   <%= render 'judgment_commission_advices/form', f: p %>
 <% end %>
+
+<script>
+  $(function(){
+    $("#judment_commission_advices :input").prop('disabled', true);
+    $("#edit-judment-commission").click(function(){
+      $("#judment_commission_advices :input").prop('disabled', $(this).data('status'));
+
+      $(this).html() === 'Editar' ? $(this).html('Cancelar') : $(this).html('Editar');
+
+      $(this).data('status', !$(this).data('status'))
+    })
+  });
+</script>
