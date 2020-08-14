@@ -34,7 +34,7 @@
         <%= link_to 'Editar', '#', 'data-id': process_ratification.id,  class: 'edit-process_ratification' %>
       </td>
       <td>
-        <%= link_to 'Remover', '#', 'data-id': process_ratification.id, class: 'remove-process_ratification' %>
+        <%= link_to 'Deletar', licitation_process_ratification_path(process_ratification.id), method: :delete, class: 'remove-process_ratification' %>
       </td>
     </tr>
   <% end %>
