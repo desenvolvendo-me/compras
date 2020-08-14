@@ -1,5 +1,5 @@
 <div class="tabs" id="licitation_process">
-  <ul>
+  <ul id="main-ul">
     <li><a href="#tab-main">Principal</a></li>
     <li><a href="#tab-requestor">Solicitantes</a></li>
     <li><a href="#tab-periods">Prazos</a></li>
@@ -28,7 +28,9 @@
         <% end %>
       <% end %>
 
-      <li><a href="#tab-trading-negotiation" id="trading_negotiation">Negociação</a></li>
+      <% if f.object.trading?  && f.object.trading.present?%>
+        <li><a href="#tab-trading-negotiation" id="trading_negotiation">Negociação</a></li>
+      <% end %>
 
       <li><a href="#tab-judgment-commission" id="judgment_commission">Parecer da Comissão Julgadora</a></li>
 
@@ -65,14 +67,18 @@
       <% end %>
     <% end %>
 
-    <div id="tab-trading-negotiation"><%= render 'purchase_process_trading_negotiation', :f => f %></div>
+    <% unless f.object.decorator.disabled_negotiation_message %>
+      <div id="tab-trading-negotiation"><%= render 'purchase_process_trading_negotiation', :f => f %></div>
+    <% end %>
 
     <div id="tab-judgment-commission"><%= render 'judgment_commission_advices', :f => f %></div>
 
-    <div id="tab-ratifications"><%= render 'licitation_process_ratifications', :f => f %></div>
+    <% unless f.object.decorator.disabled_negotiation_message %>
+      <div id="tab-ratifications"><%= render 'licitation_process_ratifications', :f => f %></div>
+    <% end %>
   <% end %>
 </div>
-<%# raise %>
+
 <script>
   function filterJudgmentForm() {
     var judgmentFormGroups    = <%= JudgmentFormFilter.new.by_modality.to_json.html_safe %>,
@@ -205,4 +211,76 @@
     $('#licitation_process_expense_nature_id').removeAttr('disabled');
   });
   <% end %>
+
+
+
+  $(function(){
+    var disabled = '',
+        $main_tab = $("#licitation_process");
+
+    <% if f.object.persisted? %>
+      <% if f.object.trading? %>
+        disabled = '<%= f.object.decorator.must_have_published_edital %>';
+        if (disabled !== ''){
+          $("#purchase_process_accreditations").attr('data-disabled', disabled);
+          $main_tab.tabs( "disable", $("#purchase_process_accreditations").parent().index());
+        }
+
+        disabled = '<%= f.object.decorator.must_have_published_edital_or_direct_purchase_or_disabled_negotiation_message%>';
+        if (disabled !== ''){
+          $("#bidder").attr('data-disabled', disabled);
+          $main_tab.tabs( "disable", $("#bidder").parent().index());
+        }
+
+        disabled = '<%= f.object.decorator.disabled_negotiation_message%>';
+        if (disabled !== ''){
+          $("#ratifications").attr('data-disabled', disabled);
+          $main_tab.tabs( "disable", $("#ratifications").parent().index());
+        }
+
+
+
+        <% if f.object.decorator.enabled_realignment_price? %>
+          disabled = '<%= f.object.decorator.must_have_creditors_and_items%>';
+          if (disabled !== ''){
+            $("#realignment_prices").attr('data-disabled', disabled);
+            $main_tab.tabs( "disable", $("#realignment_prices").parent().index());
+          }
+        <% end %>
+      <% end %>
+
+      <% unless f.object.trading? %>
+        disabled = '<%= f.object.decorator.must_have_published_edital_or_direct_purchase %>';
+        if (disabled !== ''){
+          $("#bidder").attr('data-disabled', disabled);
+          $main_tab.tabs( "disable", $("#bidder").parent().index());
+        }
+
+        <% if f.object.decorator.enabled_realignment_price? %>
+          disabled = '<%= f.object.decorator.must_have_creditors_and_items%>';
+          if (disabled !== ''){
+            $("#realignment_prices").attr( 'data-disabled', disabled);
+            $main_tab.tabs( "disable", $("#realignment_prices").parent().index());
+          }
+        <% end %>
+
+        <% if f.object.trading.present? %>
+          disabled = '<%= f.object.decorator.disabled_negotiation_message%>';
+          if (disabled !== ''){
+            $("#trading_negotiation").attr('data-disabled', disabled);
+            $main_tab.tabs( "disable", $("#trading_negotiation").parent().index());
+          }
+        <% end %>
+      <% end %>
+
+      <% if f.object.licitation? %>
+        disabled = '<%= f.object.decorator.must_have_creditors_and_items%>';
+        if (disabled !== ''){
+          $("#proposals").attr('data-disabled', disabled);
+          $main_tab.tabs( "disable", $("#proposals").parent().index());
+        }
+      <% end %>
+    <% end %>
+
+  })
 </script>
