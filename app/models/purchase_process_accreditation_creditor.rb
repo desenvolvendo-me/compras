@@ -23,7 +23,7 @@ class PurchaseProcessAccreditationCreditor < Compras::Model
 
   validates :kind, :presence => true, :if => :creditor_representative_present?
   validates :creditor, :purchase_process_accreditation, :presence => true
-  validates :company_size, presence: true, if: :creditor_company?
+  validates :company_size_id, presence: true, if: :creditor_company?
 
   scope :selected_creditors, lambda {
     joins { creditor.person }.
