@@ -1,8 +1,8 @@
 <%= f.input :auction_id, as: :hidden %>
 
-<h5><%= "Empresa: #{current_user.authenticable.name}" %></h5>
+<h5><%= "Empresa: #{current_user.try(:authenticable).try(:name)}" %></h5>
 <h5><%= "Endereço: #{f.object.auction.street},   #{f.object.auction.neighborhood},  #{f.object.auction.city}" %></h5>
-<h5><%= "CNPJ: #{current_user.authenticable.person.try(:cnpj)}" %></h5>
+<h5><%= "CNPJ: #{current_user.try(:authenticable).try(:person).try(:cnpj)}" %></h5>
 
 <h5 class="mt-4" style="color:#3f6e9d;">Vem Apresentar Proposta:</h5>
 
@@ -160,7 +160,6 @@
   body {
     font: 15px/1.231 arial,helvetica,clean,sans-serif;
     *font-size: small;
-    *font: x-small;
   }
 </style>
 
