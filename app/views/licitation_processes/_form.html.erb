@@ -29,6 +29,8 @@
       <% end %>
 
       <li><a href="#tab-trading-negotiation" id="trading_negotiation">Negociação</a></li>
+
+      <li><a href="#tab-judgment-commission" id="judgment_commission">Parecer da Comissão Julgadora</a></li>
     <% end %>
   </ul>
 
@@ -62,6 +64,8 @@
     <% end %>
 
     <div id="tab-trading-negotiation"><%= render 'purchase_process_trading_negotiation', :f => f %></div>
+
+    <div id="tab-judgment-commission"><%= render 'judgment_commission_advices', :f => f %></div>
   <% end %>
 </div>
 <%# raise %>
