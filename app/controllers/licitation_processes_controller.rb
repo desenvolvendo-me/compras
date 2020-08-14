@@ -13,7 +13,7 @@ class LicitationProcessesController < CrudController
   has_scope :term, :allow_blank => true
   has_scope :by_status, :allow_blank => true
 
-  before_filter :set_licitation_process, only: [:add_bidders, :add_trading_negotiation]
+  before_filter :set_licitation_process, only: [:add_bidders, :add_trading_negotiation, :add_ratifications]
 
   def new
     object = build_resource
@@ -64,6 +64,12 @@ class LicitationProcessesController < CrudController
     @accreditation_creditor = PurchaseProcessAccreditationCreditor.find params[:accreditation_creditor_id]
 
     render 'add_purchase_process_negotiation_tradings', layout: false
+  end
+
+  def add_ratifications
+    @ratification = @resource.licitation_process_ratifications.where(id: params[:ratification_id])
+
+    render 'add_ratifications', layout: false
   end
 
   protected
