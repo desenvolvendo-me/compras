@@ -101,4 +101,9 @@ module LicitationProcessesHelper
       edit_purchase_process_creditor_disqualification_path object
     end
   end
+
+  def edit_title
+    I18n.t("activerecord.models.licitation_process.one")
+  end
+
 end
