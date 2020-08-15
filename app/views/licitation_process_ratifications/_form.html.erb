@@ -1,34 +1,31 @@
-<div class="yui3-g">
-  <% if f.object.licitation_process.trading %>
-    <%= f.input :trading_id, as: :hidden, fake: true,
-        input_html: { value: f.object.licitation_process.trading.id} %>
-  <% end %>
+<div id="licitation-process-fields">
+  <%= f.input :licitation_process_id, as: :hidden %>
 
-  <div class="yui3-u-1-8">
-    <%= f.input :sequence, :disabled => true %>
+  <div class="yui3-g">
+    <% if f.object.licitation_process.trading %>
+      <%= f.input :trading_id, as: :hidden, fake: true,
+                  input_html: { value: f.object.licitation_process.trading.id} %>
+    <% end %>
+
+    <div class="yui3-u-1-8">
+      <%= f.input :sequence, :disabled => true %>
+    </div>
+
+    <div class="yui3-u-3-8">
+      <%= f.input :creditor, :disabled => true %>
+    </div>
+
+    <div class="yui3-u-1-4">
+      <%= f.input :ratification_date %>
+    </div>
+
+    <div class="yui3-u-1-4">
+      <%= f.input :adjudication_date %>
+    </div>
   </div>
 
-  <div class="yui3-u-1-3">
-    <%= f.input :licitation_process %>
-  </div>
-
-  <div class="yui3-u-1-3">
-    <%= f.input :creditor, :disabled => true %>
-  </div>
-</div>
-
-<div class="yui3-g">
-  <div class="yui3-u-1-5">
-    <%= f.input :ratification_date %>
-  </div>
-
-  <div class="yui3-u-1-5">
-    <%= f.input :adjudication_date %>
-  </div>
-</div>
-
-<table class="records">
-  <thead>
+  <table id="ratification-items-records" class="records">
+    <thead>
     <tr>
       <th class="center"><input type="checkbox" id="checkAll"/></th>
       <th class="right"><%= Material.human_attribute_name :code %></th>
@@ -38,34 +35,34 @@
       <th class="right"><%= BidderProposal.human_attribute_name :unit_price %></th>
       <th class="right"><%= BidderProposal.human_attribute_name :total_price %></th>
     </tr>
-  </thead>
+    </thead>
 
-  <tbody id="ratification_items">
-  <% total = 0 %>
+    <tbody id="ratification_items">
+    <% total = 0 %>
     <%= f.association :licitation_process_ratification_items, :collection => localized(f.object.licitation_process_ratification_items) do |i| %>
-      <%= render 'licitation_process_ratification_items/licitation_process_ratification_item', :f => i %>
+      <%= render 'licitation_process_ratification_items/licitation_process_ratification_item', :f => i, resource: f.object %>
       <%= total += i.object.total_price || 0 %>
     <% end %>
-  <tr><td colspan="100" style="text-align: end; font-weight: bolder"><%= number_to_currency total %></td></tr>
-  </tbody>
-</table>
+    <tr><td colspan="100" style="text-align: end; font-weight: bolder"><%= number_to_currency total %></td></tr>
+    </tbody>
+  </table>
 
-<%= mustache 'item-template' do %>
-  <%= f.association :licitation_process_ratification_items_attributes, :collection => f.object.licitation_process_ratification_items.build, :index => '{{uuid_item}}' do |i| %>
-    <%= render 'licitation_process_ratification_items/licitation_process_ratification_item', :f => i %>
+  <%= mustache 'ratification-item-template' do %>
+    <%= f.association :licitation_process_ratification_items_attributes, :collection => f.object.licitation_process_ratification_items.build, :index => '{{uuid_item}}' do |i| %>
+      <%= render 'licitation_process_ratification_items/licitation_process_ratification_item', :f => i, resource: f.object %>
+    <% end %>
   <% end %>
-<% end %>
-
+</div>
 
 <script>
-  $("#item-template").nestedForm({
+  $("#ratification-item-template").nestedForm({
     target: '#ratification_items',
     append_item: false,
     uuid: 'uuid_item'
   });
 
-  $('#checkAll').change( function() {
-    $('table.records input:checkbox').attr('checked', this.checked);
+  $('#licitation-process-fields #checkAll').change( function() {
+    $('table#ratification-items-records input:checkbox').attr('checked', this.checked);
   });
 
   function clearExistingItems() {
@@ -77,16 +74,16 @@
   }
 
   function getProposals(creditorId, purchaseProcessId) {
-    var proposalsUrl = "<%= creditor_proposals_helper_path(resource) %>",
-        params = {
-          creditor_id: creditorId,
-          licitation_process_id: purchaseProcessId,
-          trading_id: $("#licitation_process_ratification_trading_id").val()
-        }, item;
+    var proposalsUrl = "<%= creditor_proposals_helper_path(f.object) %>",
+      params = {
+        creditor_id: creditorId,
+        licitation_process_id: purchaseProcessId,
+        trading_id: $("#licitation-process-fields [name$='[trading_id]']").val()
+      }, item;
 
     $.getIndex(proposalsUrl, params, function (proposals) {
       $.each(proposals, function() {
-        item = $('#item-template').mustache({
+        item = $('#ratification-item-template').mustache({
           uuid_item: _.uniqueId('fresh-'),
           purchase_process_item_id:               this.purchase_process_item_id,
           purchase_process_trading_item_id:       this.trading_item_id,
@@ -97,10 +94,10 @@
           reference_unit:                         this.reference_unit,
           total_price:                            this.total_price,
 
-          <% if resource.has_realignment_price? %>
-            realignment_price_item_id: this.id,
+          <% if f.object.has_realignment_price? %>
+          realignment_price_item_id: this.id,
           <% else %>
-            purchase_process_creditor_proposal_id:  this.id
+          purchase_process_creditor_proposal_id:  this.id
           <% end %>
         });
 
@@ -109,8 +106,8 @@
     });
   }
 
-  $('#licitation_process_ratification_creditor_id').change(function (event, creditor) {
-    var licitationProcessId = $('#licitation_process_ratification_licitation_process_id').val();
+  $("#licitation-process-fields [name$='[creditor_id]']").change(function (event, creditor) {
+    var licitationProcessId = $("#licitation_process_id").val();
 
     clearExistingItems();
 
@@ -121,27 +118,27 @@
 
   $(function() {
     var urlModal = "<%= modal_creditors_path %>?",
-        licitationProcessId = $('#licitation_process_ratification_licitation_process_id').val(),
-        params = {
-            enabled_by_licitation: licitationProcessId,
-          <% if resource.licitation_process_licitation? %>
-            <% if resource.licitation_process_trading? %>
-              won_calculation_for_trading: licitationProcessId,
-            <% else %>
-              won_calculation: licitationProcessId,
-            <% end %>
-            without_licitation_ratification: licitationProcessId,
-          <% else %>
-            without_direct_purchase_ratification: licitationProcessId
-          <% end %>
-        };
+      licitationProcessId = $("#licitation_process_id").val(),
+      params = {
+        enabled_by_licitation: licitationProcessId,
+        <% if f.object.licitation_process_licitation? %>
+        <% if f.object.licitation_process_trading? %>
+        won_calculation_for_trading: licitationProcessId,
+        <% else %>
+        won_calculation: licitationProcessId,
+        <% end %>
+        without_licitation_ratification: licitationProcessId,
+        <% else %>
+        without_direct_purchase_ratification: licitationProcessId
+        <% end %>
+      };
 
 
     urlModal += jQuery.param(params);
 
-    $("#licitation_process_ratification_creditor").data("modal-url", urlModal).
-                                                 attr("disabled", false);
+    $("[name$='[creditor]']").data("modal-url", urlModal).
+    attr("disabled", false);
 
-    $('#licitation_process_ratification_licitation_process').attr('disabled', true);
+    $("[name$='[licitation_process]']").attr('disabled', true);
   });
 </script>

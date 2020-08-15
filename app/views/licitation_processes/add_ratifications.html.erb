@@ -1,0 +1,5 @@
+<%= simple_form_for @resource, :authenticity_token => false do |f| %>
+  <%= f.association :licitation_process_ratifications, :collection => @ratification do |p| %>
+    <%= render 'licitation_process_ratifications/form', :f => p, resource: @ratification %>
+  <% end %>
+<% end %>

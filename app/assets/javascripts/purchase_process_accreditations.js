@@ -1,30 +1,34 @@
 $(document).ready(function() {
+  var $company_size_id = $("[name$='[company_size_id]']"),
+      $representative = $("[name$='[creditor_representative_id]']");
 
-    $("#purchase_process_accreditation_has_power_of_attorney").prop( "checked", true );
-    $("#purchase_process_accreditation_has_power_of_attorney").prop("disabled", true);
+    $("[name$='[has_power_of_attorney]']")
+      .prop( "checked", true )
+      .prop("disabled", true);
 
     function fillCreditorRepresentative(representatives) {
 
-    $('#creditor_representative_id').empty();
+    $representative.empty();
 
-    $('#creditor_representative_id').append(function() {
+      $representative.append(function() {
       return $("<option>").text('').val('');
     });
 
     _.each(representatives, function(representative) {
-      $('#creditor_representative_id').append(function() {
+      $representative.append(function() {
         return $("<option>").text(representative.name).val(representative.id);
       });
     });
   }
 
   function kindRequired(isRequired) {
+      var $kind = $("[name$='[kind]']");
     if ( isRequired ){
-      $("#kind").requiredField(true);
-      $("#kind").addClass('required');
+      $kind.requiredField(true);
+      $kind.addClass('required');
     } else {
-      $("#kind").requiredField(false);
-      $("#kind").removeClass('required');
+      $kind.requiredField(false);
+      $kind.removeClass('required');
     }
   }
 
@@ -37,31 +41,31 @@ $(document).ready(function() {
       success: function(creditors) {
         var creditor = creditors[0];
         fillCreditorRepresentative(creditor.representatives);
-        $('#purchase_process_accreditation_personable_type').val(creditor.personable_type);
-        $('#creditor_representative_id').val(representativeId);
+        $("[name$='[personable_type]']").val(creditor.personable_type);
+        $("[name$='[creditor_representative_id]']").val(representativeId);
       }
     });
   }
 
-  $("#purchase_process_accreditation_creditor_id").on('change', function(event, creditor) {
+  $("#accreditation_creditors [name$='[creditor_id]']").on('change', function(event, creditor) {
     if (!creditor) {
       creditor = {};
     }
 
-    $("#company_size_id").requiredField(creditor.is_company);
-    $('#creditor_representative_id').val('');
-    $('#creditor_representative_id').empty();
-    $('#purchase_process_accreditation_personable_type').val(creditor.personable_type);
-    $('#company_size_id').val(creditor.company_size_id)
+    $company_size_id.requiredField(creditor.is_company);
+    $representative.val('');
+    $representative.empty();
+    $("[name$='[personable_type]']").val(creditor.personable_type);
+    $company_size_id.val(creditor.company_size_id)
                          .trigger('change');
     fillCreditorRepresentative(creditor.representatives);
 
     kindRequired(false);
-    $('#creditor_representative_id').requiredField(true);
-    $('#creditor_representative_id').addClass('required');
+    $company_size_id.requiredField(true);
+    $representative.addClass('required');
   });
 
-  $("#creditor_representative_id").on("change", function() {
+  $representative.on("change", function() {
     kindRequired( !_.isEmpty($(this).val()) );
   });
 
@@ -69,13 +73,13 @@ $(document).ready(function() {
     kindRequired(true);
   });
 
-  $('#company_size_id').on('change', function() {
+  $company_size_id.on('change', function() {
     var company_size = $(this).find('option:selected').text();
 
     $('#company_size').val(company_size);
   });
 
-  $('#creditor_representative_id').on('change', function() {
+  $representative.on('change', function() {
     var representative = $(this).find('option:selected').text();
 
     if ( _.isEmpty(representative) ) {

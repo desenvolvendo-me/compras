@@ -170,6 +170,12 @@ class Bidder < Compras::Model
     !filled_documents? || expired_documents?
   end
 
+  def validate_technical_score?
+    return unless judgment_form.present?
+
+    judgment_form.best_technique? || judgment_form.technical_and_price?
+  end
+
   protected
 
   def update_proposal_ranking
@@ -202,11 +208,5 @@ class Bidder < Compras::Model
       proposal.classification = nil
       proposal.unit_price = 0 unless proposal.unit_price
     end
-  end
-
-  def validate_technical_score?
-    return unless judgment_form.present?
-
-    judgment_form.best_technique? || judgment_form.technical_and_price?
   end
 end

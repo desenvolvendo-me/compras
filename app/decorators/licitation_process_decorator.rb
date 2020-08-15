@@ -95,7 +95,7 @@ class LicitationProcessDecorator
     if trading?
       return false if trading.blank? || !trading.allow_negotiation?
     else
-      bidders.each do |bidder|
+      bidders.select(&:persisted?).each do |bidder|
         if proposals_of_creditor(bidder.creditor).empty?
           return false
         end

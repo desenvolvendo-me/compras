@@ -14,15 +14,15 @@
   </ul>
 
   <div id="main">
-    <%= render 'main', :f => f %>
+    <%= render 'judgment_commission_advices/main', :f => f %>
   </div>
 
   <div id="members">
-    <%= render 'members', :f => f %>
+    <%= render 'judgment_commission_advices/members', :f => f %>
   </div>
 
   <div id="advice">
-    <%= render 'advice', :f => f %>
+    <%= render 'judgment_commission_advices/advice', :f => f %>
   </div>
 </div>
 
@@ -53,17 +53,18 @@
     });
   }
 
-  $('#judgment_commission_advice_licitation_commission_id').change(function (event, adviceLicitationCommission) {
+  $("[name$='[licitation_commission_id]']").change(function (event, adviceLicitationCommission) {
+    debugger
     if (adviceLicitationCommission){
-      $('#judgment_commission_advice_licitation_commission_president_name').val(adviceLicitationCommission.president_name);
+      $("[name$='[licitation_commission_president_name]']").val(adviceLicitationCommission.president_name);
       createMembersFromLicitationCommission(adviceLicitationCommission.members);
     } else {
-      $('#judgment_commission_advice_licitation_commission_president_name').val('');
+      $("[name$='[licitation_commission_president_name]']").val('');
       cleanExistingMembers();
     }
   });
 
-  $(".judgment_commission_advice").on('change', '.individual', function (event, individual) {
+  $("#judment_commission_advices").on('change', '.individual', function (event, individual) {
     if (individual){
       $(this).closest('.nested').find('.cpf').val(individual.cpf);
     } else {
@@ -74,14 +75,13 @@
     $('.advice').addClass('hidden');
   <% else %>
     $('.advice').removeClass('hidden');
-    $('#judgment_commission_advice_judgment_start_date').requiredField(true);
-    $('#judgment_commission_advice_judgment_start_time').requiredField(true);
-    $('#judgment_commission_advice_judgment_end_date').requiredField(true);
-    $('#judgment_commission_advice_judgment_end_time').requiredField(true);
-    $('#judgment_commission_advice_judgment_start_time').requiredField(true);
-    $('#judgment_commission_advice_companies_minutes').requiredField(true);
-    $('#judgment_commission_advice_companies_documentation_minutes').requiredField(true);
-    $('#judgment_commission_advice_justification_minutes').requiredField(true);
-    $('#judgment_commission_advice_judgment_minutes').requiredField(true);
+    $("[name$='[judgment_start_date]']").requiredField(true);
+    $("[name$='[judgment_start_time]']").requiredField(true);
+    $("[name$='[judgment_end_date]']").requiredField(true);
+    $("[name$='[judgment_end_time]']").requiredField(true);
+    $("[name$='[companies_minutes]']").requiredField(true);
+    $("[name$='[companies_documentation_minutes]']").requiredField(true);
+    $("[name$='[justification_minutes]']").requiredField(true);
+    $("[name$='[judgment_minutes]']").requiredField(true);
   <% end %>
 </script>

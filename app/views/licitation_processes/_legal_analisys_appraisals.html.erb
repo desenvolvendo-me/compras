@@ -1,0 +1,53 @@
+<div class="nested-grid">
+  <div class="nested-fields nested-additives">
+    <%= f.simple_fields_for :legal_analisys_appraisals, LegalAnalysisAppraisal.new do |p|%>
+      <% p.object_name = 'legal_analisys_appraisals' %>
+      <%= p.input :id, as: :hidden %>
+      <%= render "legal_analysis_appraisals/form", f: p %>
+    <% end %>
+
+    <%= button_tag 'Adicionar', type: :button,
+                   class: 'button add-nested-record field-without-label add-margin-bottom',
+                   'data-template' => "legal_analysis_appraisals_template",
+                   'data-records' => "legal_analysis_appraisals_records",
+                   id: "legal_analysis_appraisals_button" %>
+  </div>
+
+  <%column_names = LegalAnalysisAppraisalDecorator.header_attributes.to_a
+    extra_data   = LegalAnalysisAppraisal.attribute_names.map(&:to_sym) - column_names %>
+
+  <table id="<%= "legal_analysis_appraisals_records" %>" class="records">
+    <thead>
+    <tr>
+      <% column_names.each do |column_name| %>
+        <th class="<%= column_name %>"><%= LegalAnalysisAppraisal.human_attribute_name column_name %></th>
+      <% end %>
+      <th></th>
+      <th></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <%= f.association :legal_analysis_appraisals, collection: localized(f.object.legal_analysis_appraisals) do |a| %>
+      <% (column_names + extra_data).each do |column_name| %>
+        <%= a.full_error column_name %>
+      <% end %>
+
+      <%= render "legal_analysis_appraisals/nested_grid_row",
+                 column_names: column_names,
+                 all_hidden_fields: column_names + extra_data,
+                 f: a %>
+    <% end %>
+    </tbody>
+  </table>
+
+  <%= mustache "legal_analysis_appraisals_template" do %>
+    <%= f.association "legal_analysis_appraisals_attributes".to_sym, collection: f.object.legal_analysis_appraisals.build.localized, :index => '{{uuid}}' do |a| %>
+      <%= render "legal_analysis_appraisals/nested_grid_row",
+                 column_names: column_names,
+                 is_mustache: true,
+                 all_hidden_fields: column_names + extra_data,
+                 f: a %>
+    <% end %>
+  <% end %>
+</div>
