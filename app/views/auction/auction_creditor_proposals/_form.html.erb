@@ -17,8 +17,8 @@
       <th width="15%"><%= AuctionCreditorProposalItem.human_attribute_name :manufacturer %></th>
       <th width="15%"><%= AuctionCreditorProposalItem.human_attribute_name :model_version %></th>
       <th width="8%"><%= AuctionCreditorProposalItem.human_attribute_name :quantity %></th>
-      <th width="9%"><%= AuctionCreditorProposalItem.human_attribute_name :unit_price %></th>
-      <th width="9%"><%= AuctionCreditorProposalItem.human_attribute_name :global_price %></th>
+      <th width="11%"><%= AuctionCreditorProposalItem.human_attribute_name :unit_price %></th>
+      <th width="11%"><%= AuctionCreditorProposalItem.human_attribute_name :global_price %></th>
     </tr>
     </thead>
     <tbody>
@@ -120,7 +120,6 @@
 <style>
   .mh-400{
     max-height: 650px;
-    overflow:auto
   }
   #terms .form-row{
     margin: 1rem 0 1rem 0;
@@ -128,7 +127,7 @@
   #terms{
     text-align: justify;
   }
-  h4, h6{
+  h4, h6, h5{
     color: #3f6e9d;
   }
 
@@ -176,4 +175,15 @@
     });
   });
   <% end %>
+
+    $("[name$='[unit_price]'], [name$='[quantity]']").change( function(){
+      var $tr = $(this).closest('tr');
+
+      var qtd = parseFloat($tr.find("[name$='[quantity]']").val()),
+          unit_price = parsePtBrFloat($tr.find("[name$='[unit_price]']").val());
+
+      $($tr.find("[name$='[global_price]']").val(numberWithDelimiter(qtd * unit_price)))
+
+    })
+
 </script>
