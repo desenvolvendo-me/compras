@@ -110,7 +110,7 @@ class LicitationProcessDecorator
   end
 
   def subtitle
-    "#{code_and_year} </br> Object: #{description} </br> Tipo Processo: #{type_of_purchase_humanize}"
+    "#{code_and_year} </br> Objeto: #{description} </br> Tipo Processo: #{type_of_purchase_humanize}"
 
   end
 
