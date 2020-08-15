@@ -7,4 +7,14 @@ module Auction::AuctionCreditorProposalsHelper
 
     object
   end
+
+  def new_title
+    base = I18n.t("#{controller_name}.new", :resource => singular, :cascade => true)
+
+    base + " - Pregão #{resource.auction.licitation_number}/#{resource.auction.year}"
+  end
+
+  def edit_title
+    "Proposta de Registro de Preço - Pregão #{resource.auction.licitation_number}/#{resource.auction.year}"
+  end
 end
