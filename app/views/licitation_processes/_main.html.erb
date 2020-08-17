@@ -1,4 +1,5 @@
 <%= hidden_field_tag :licitation_process_year, f.object.year || Date.current.year %>
+<%= f.input :id, as: :hidden %>
 
 <%= f.input :type_of_purchase, :as => :radio_buttons, :label => '',
   :label_html => {:class => 'inline' }, :item_wrapper_class => 'inline',
@@ -91,17 +92,14 @@
     <%= f.input :status, :disabled => true %>
   </div>
 
-  <% if f.object.status == PurchaseProcessStatus::WAITING_FOR_OPEN %>
-    <div class="col-3">
-      <%= f.input :open_date %>
-    </div>
-  <% end %>
+  <div class="col-3">
+    <%= f.input :open_date, input_html:{ disabled: f.object.status != PurchaseProcessStatus::WAITING_FOR_OPEN } %>
+  </div>
 
-  <% if f.object.status == PurchaseProcessStatus::APPROVED  %>
-    <div class="col-3">
-      <%= f.input :homologation_date %>
-    </div>
-  <% end %>
+  <div class="col-3">
+    <%= f.input :homologation_date, input_html:{ disabled: true} %>
+  </div>
+
 </div>
 
 <% if f.object.licitation_process_ratifications.present? %>

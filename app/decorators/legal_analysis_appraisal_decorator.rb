@@ -3,5 +3,5 @@ class LegalAnalysisAppraisalDecorator
   include Decore::Proxy
   include Decore::Header
 
-  attr_header :process_and_year, :appraisal_type, :reference, :appraisal_expedition_date
+  attr_header :appraisal_type, :appraisal_expedition_date, :reference, :responsible
 end

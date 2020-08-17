@@ -95,7 +95,7 @@ class LicitationProcessDecorator
     if trading?
       return false if trading.blank? || !trading.allow_negotiation?
     else
-      bidders.each do |bidder|
+      bidders.select(&:persisted?).each do |bidder|
         if proposals_of_creditor(bidder.creditor).empty?
           return false
         end
@@ -110,7 +110,8 @@ class LicitationProcessDecorator
   end
 
   def subtitle
-    code_and_year
+    "#{code_and_year} </br> Objeto: #{description} </br> Tipo Processo: #{type_of_purchase_humanize}"
+
   end
 
   def budget_allocations

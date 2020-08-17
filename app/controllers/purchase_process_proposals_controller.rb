@@ -18,7 +18,7 @@ class PurchaseProcessProposalsController < CrudController
 
   def update
     update! do |success, failure|
-      success.html { redirect_to purchase_process_proposals_path(licitation_process_id: resource.id) }
+      success.html { redirect_to edit_licitation_process_path(resource.id) }
     end
   end
 

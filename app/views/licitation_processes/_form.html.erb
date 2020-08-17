@@ -1,12 +1,41 @@
 <div class="tabs" id="licitation_process">
-  <ul>
-    <li><a href="#tab-main">Principal</a></li>
+  <ul id="main-ul">
+    <li><a href="#tab-main">Dados do Processo</a></li>
     <li><a href="#tab-requestor">Solicitantes</a></li>
     <li><a href="#tab-periods">Prazos</a></li>
     <li><a href="#tab-items" id="items_tab_header">Itens / Justificativa</a></li>
     <li class='income'><a href="#tab-income">Receita</a></li>
     <li><a href="#tab-documents">Documentos</a></li>
-    <li><a href="#tab-leagal-reasons" id="legal_reasons_tab">Fundamentação Legal Dispensa/Inexigibilidade</a></li>
+    <% if f.object.persisted? %>
+      <li id="legal_reasons_tab" ><a href="#tab-leagal-reasons">Fundamentação Legal Dispensa/Inexigibilidade</a></li>
+      <li><a href="#tab-legal-analysis-appraisals" id="legal_analysis_appraisals_tab">Laudo de Análise Jurídica</a></li>
+      <li><a href="#tab-licitation-process-publications" id="licitation_process_publications_tab">Publicações</a></li>
+      <% if f.object.trading? %>
+        <li><a href="#tab-licitation-purchase-process-accreditations" id="purchase_process_accreditations">Credenciamentos</a></li>
+      <% end %>
+
+      <% unless f.object.trading? %>
+        <li><a href="#tab-bidders" id="bidder">Habilitação</a></li>
+      <% end %>
+
+      <% if f.object.licitation? %>
+        <li><a href="#tab-proposals" id="proposals">Propostas</a></li>
+      <% end %>
+
+      <% unless f.object.trading? %>
+        <% if f.object.decorator.enabled_realignment_price? %>
+          <li><a href="#tab-realignment-prices" id="realignment_prices">Realinhamento de Preços</a></li>
+        <% end %>
+      <% end %>
+
+      <% if f.object.trading?  && f.object.trading.present?%>
+        <li><a href="#tab-trading-negotiation" id="trading_negotiation">Negociação</a></li>
+      <% end %>
+
+      <li><a href="#tab-judgment-commission" id="judgment_commission">Parecer da Comissão Julgadora</a></li>
+
+      <li><a href="#tab-ratifications" id="ratifications">Adjudicação/Homologação</a></li>
+    <% end %>
   </ul>
 
   <div id="tab-main"><%= render 'main', :f => f %></div>
@@ -15,16 +44,48 @@
   <div id="tab-items"><%= render 'items', :f => f %></div>
   <div id="tab-income"><%= render 'income', :f => f %></div>
   <div id="tab-documents"><%= render 'documents', :f => f %></div>
-  <div id="tab-leagal-reasons"><%= render 'legal_reasons', :f => f %></div>
+  <% if f.object.persisted? %>
+    <div id="tab-leagal-reasons"><%= render 'legal_reasons', :f => f %></div>
+    <div id="tab-legal-analysis-appraisals"><%= render 'legal_analisys_appraisals', :f => f %></div>
+    <div id="tab-licitation-process-publications"><%= render 'licitation_process_publications', :f => f %></div>
+
+    <% if f.object.trading? %>
+      <div id="tab-licitation-purchase-process-accreditations"><%= render 'purchase_process_accreditations', :f => f %></div>
+    <% end %>
+
+    <% unless f.object.trading? %>
+      <div id="tab-bidders"><%= render 'bidders', :f => f %></div>
+    <% end %>
+
+    <% if f.object.licitation? %>
+      <div id="tab-proposals"><%= render 'purchase_process_proposals', :f => f %></div>
+    <% end %>
+
+    <% unless f.object.trading? %>
+      <% if f.object.decorator.enabled_realignment_price? %>
+        <div id="tab-realignment-prices"><%= render 'realignment_prices', :f => f %></div>
+      <% end %>
+    <% end %>
+
+    <% unless f.object.decorator.disabled_negotiation_message %>
+      <div id="tab-trading-negotiation"><%= render 'purchase_process_trading_negotiation', :f => f %></div>
+    <% end %>
+
+    <div id="tab-judgment-commission"><%= render 'judgment_commission_advices', :f => f %></div>
+
+    <% unless f.object.decorator.disabled_negotiation_message %>
+      <div id="tab-ratifications"><%= render 'licitation_process_ratifications', :f => f %></div>
+    <% end %>
+  <% end %>
 </div>
 
 <script>
   function filterJudgmentForm() {
     var judgmentFormGroups    = <%= JudgmentFormFilter.new.by_modality.to_json.html_safe %>,
-        modality              = $('#licitation_process_modality').val(),
-        priceRegistration     = $('#licitation_process_price_registration').is(':checked'),
-        currentJudgmentFormId = $('#current_judgment_form_id').val(),
-        judgmentForms;
+      modality              = $('#licitation_process_modality').val(),
+      priceRegistration     = $('#licitation_process_price_registration').is(':checked'),
+      currentJudgmentFormId = $('#current_judgment_form_id').val(),
+      judgmentForms;
 
     $("#licitation_process_judgment_form_id").append(function() {
       return $("<option>").text('').val('');
@@ -40,8 +101,8 @@
       _(judgmentForms).each(function(judgmentForm) {
         $("#licitation_process_judgment_form_id").append(function() {
           return $("<option>").text(judgmentForm.description)
-                              .val(judgmentForm.id)
-                              .data('kind', judgmentForm.kind);
+            .val(judgmentForm.id)
+            .data('kind', judgmentForm.kind);
         });
       });
     }
@@ -57,8 +118,8 @@
 
   function filterModalities(objectType) {
     var modalitiesByObjectType = <%= Modality.by_object_type.to_json.html_safe %>,
-        validGroup             = _(modalitiesByObjectType[objectType]),
-        currentModality        = $("#current_modality_id").val();
+      validGroup             = _(modalitiesByObjectType[objectType]),
+      currentModality        = $("#current_modality_id").val();
 
     $("#licitation_process_modality").empty();
 
@@ -131,23 +192,95 @@
   });
 
   <% unless resource.updateable? && resource.licitation_process_ratifications.empty? %>
-    $(function(){
-      $('form.licitation_process [data-disabled]').on('click', function(event){
-        event.stopImmediatePropagation();
-        return false;
-      });
-      $('form.licitation_process :input').not('[data-disabled]').attr('disabled', true);
-      $('#licitation_process_budget_allocation').removeAttr('disabled');
-      $('#licitation_process_purchase_process_budget_allocation_value').removeAttr('disabled');
-      $('#licitation_process_budget_allocation_year').removeAttr('disabled');
-      $('#purchase_process_budget_allocations_button').removeAttr('disabled');
-      $('#licitation_process_submit').removeAttr('disabled');
-      $('form input[type="hidden"]').removeAttr('disabled');
-      $('form input[name="authenticity_token"]').removeAttr('disabled');
-      $('form input[name="_method"]').removeAttr('disabled');
-      $('form input[name="licitation_process_nested_grid_[id]"]').removeAttr('disabled');
-      $('#licitation_process_expense_nature').removeAttr('disabled');
-      $('#licitation_process_expense_nature_id').removeAttr('disabled');
+  $(function(){
+    $('form.licitation_process [data-disabled]').on('click', function(event){
+      event.stopImmediatePropagation();
+      return false;
     });
+    $('form.licitation_process :input').not('[data-disabled]').attr('disabled', true);
+    $('#licitation_process_budget_allocation').removeAttr('disabled');
+    $('#licitation_process_purchase_process_budget_allocation_value').removeAttr('disabled');
+    $('#licitation_process_budget_allocation_year').removeAttr('disabled');
+    $('#purchase_process_budget_allocations_button').removeAttr('disabled');
+    $('#licitation_process_submit').removeAttr('disabled');
+    $('form input[type="hidden"]').removeAttr('disabled');
+    $('form input[name="authenticity_token"]').removeAttr('disabled');
+    $('form input[name="_method"]').removeAttr('disabled');
+    $('form input[name="licitation_process_nested_grid_[id]"]').removeAttr('disabled');
+    $('#licitation_process_expense_nature').removeAttr('disabled');
+    $('#licitation_process_expense_nature_id').removeAttr('disabled');
+  });
   <% end %>
+
+
+
+  $(function(){
+    var disabled = '',
+        $main_tab = $("#licitation_process");
+
+    <% if f.object.persisted? %>
+      <% if f.object.trading? %>
+        disabled = '<%= f.object.decorator.must_have_published_edital %>';
+        if (disabled !== ''){
+          $("#purchase_process_accreditations").attr('data-disabled', disabled);
+          $main_tab.tabs( "disable", $("#purchase_process_accreditations").parent().index());
+        }
+
+        disabled = '<%= f.object.decorator.must_have_published_edital_or_direct_purchase_or_disabled_negotiation_message%>';
+        if (disabled !== ''){
+          $("#bidder").attr('data-disabled', disabled);
+          $main_tab.tabs( "disable", $("#bidder").parent().index());
+        }
+
+        disabled = '<%= f.object.decorator.disabled_negotiation_message%>';
+        if (disabled !== ''){
+          $("#ratifications").attr('data-disabled', disabled);
+          $main_tab.tabs( "disable", $("#ratifications").parent().index());
+        }
+
+
+
+        <% if f.object.decorator.enabled_realignment_price? %>
+          disabled = '<%= f.object.decorator.must_have_creditors_and_items%>';
+          if (disabled !== ''){
+            $("#realignment_prices").attr('data-disabled', disabled);
+            $main_tab.tabs( "disable", $("#realignment_prices").parent().index());
+          }
+        <% end %>
+      <% end %>
+
+      <% unless f.object.trading? %>
+        disabled = '<%= f.object.decorator.must_have_published_edital_or_direct_purchase %>';
+        if (disabled !== ''){
+          $("#bidder").attr('data-disabled', disabled);
+          $main_tab.tabs( "disable", $("#bidder").parent().index());
+        }
+
+        <% if f.object.decorator.enabled_realignment_price? %>
+          disabled = '<%= f.object.decorator.must_have_creditors_and_items%>';
+          if (disabled !== ''){
+            $("#realignment_prices").attr( 'data-disabled', disabled);
+            $main_tab.tabs( "disable", $("#realignment_prices").parent().index());
+          }
+        <% end %>
+
+        <% if f.object.trading.present? %>
+          disabled = '<%= f.object.decorator.disabled_negotiation_message%>';
+          if (disabled !== ''){
+            $("#trading_negotiation").attr('data-disabled', disabled);
+            $main_tab.tabs( "disable", $("#trading_negotiation").parent().index());
+          }
+        <% end %>
+      <% end %>
+
+      <% if f.object.licitation? %>
+        disabled = '<%= f.object.decorator.must_have_creditors_and_items%>';
+        if (disabled !== ''){
+          $("#proposals").attr('data-disabled', disabled);
+          $main_tab.tabs( "disable", $("#proposals").parent().index());
+        }
+      <% end %>
+    <% end %>
+
+  })
 </script>

@@ -24,7 +24,11 @@ class LicitationProcess < Compras::Model
                   :process_responsibles_attributes, :phone_email,
                   :justification, :justification_and_legal, :process,
                   :purchase_solicitation_import_option, :homologation_date,
-                  :purchase_solicitations_attributes, :purchasing_unit_id
+                  :purchase_solicitations_attributes, :purchasing_unit_id,
+                  :legal_analysis_appraisals_attributes, :publications_attributes,
+                  :purchase_process_accreditation_attributes, :trading_attributes,
+                  :judgment_commission_advice_attributes, :bidders_attributes,
+                  :licitation_process_ratifications_attributes
 
   auto_increment :process, :by => :year
   auto_increment :modality_number, :by => [:year, :modality, :type_of_removal]
@@ -102,7 +106,9 @@ class LicitationProcess < Compras::Model
           foreign_key: :purchase_process_id
 
   accepts_nested_attributes_for :purchase_process_budget_allocations, :items, :creditor_proposals,
-                                :process_responsibles, :tied_creditor_proposals, allow_destroy: true
+                                :process_responsibles, :tied_creditor_proposals, :legal_analysis_appraisals,
+                                :publications, :bidders, :purchase_process_accreditation, :trading,
+                                :judgment_commission_advice, :licitation_process_ratifications, allow_destroy: true
 
   delegate :allow_negotiation?, to: :trading, allow_nil: true, prefix: true
   delegate :issuance_date, to: :judgment_commission_advice, allow_nil: true, prefix: true
@@ -112,9 +118,8 @@ class LicitationProcess < Compras::Model
            :to => :judgment_form, :allow_nil => true, :prefix => true
 
   validates :process_date, :period, :contract_guarantees, :type_of_purchase, :purchasing_unit,
-            :period_unit, :payment_method,
-            :year, :execution_type, :object_type, :description, :notice_availability_date,
-            :presence => true
+            :period_unit, :payment_method, :year, :execution_type, :object_type, :description,
+            :notice_availability_date, :presence => true
   validates :envelope_delivery_date, :envelope_delivery_time, :expiration, :expiration_unit,
             :modality, :judgment_form_id, :presence => true, :if => :licitation?
   validates :goal, :licensor_rights_and_liabilities, :licensee_rights_and_liabilities,

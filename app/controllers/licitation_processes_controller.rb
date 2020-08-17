@@ -13,6 +13,8 @@ class LicitationProcessesController < CrudController
   has_scope :term, :allow_blank => true
   has_scope :by_status, :allow_blank => true
 
+  before_filter :set_licitation_process, only: [:add_bidders, :add_trading_negotiation, :add_ratifications]
+
   def new
     object = build_resource
     object.process_date = Date.current
@@ -51,6 +53,24 @@ class LicitationProcessesController < CrudController
     render :json => {total: response["total"], value_unit: response["value_unit"].to_f.round(2), balance: response["balance"].to_f.round(2), balance_unit: response["balance_unit"]}
   end
 
+  def add_bidders
+    @bidders = @resource.bidders.where(id: params[:bidder_id])
+
+    render 'add_bidders', layout: false
+  end
+
+  def add_trading_negotiation
+    @trading = @resource.trading
+    @accreditation_creditor = PurchaseProcessAccreditationCreditor.find params[:accreditation_creditor_id]
+
+    render 'add_purchase_process_negotiation_tradings', layout: false
+  end
+
+  def add_ratifications
+    @ratification = @resource.licitation_process_ratifications.where(id: params[:ratification_id])
+
+    render 'add_ratifications', layout: false
+  end
 
   protected
 
@@ -103,6 +123,10 @@ class LicitationProcessesController < CrudController
   end
 
   private
+
+  def set_licitation_process
+    @resource = LicitationProcess.find(params[:id])
+  end
 
   def with_access
     @licitation_processes = filter_by_purchasing_unit(collection)

@@ -17,13 +17,13 @@ class RealignmentPricesController < CrudController
 
   def create
     create! do |success, failure|
-      success.html { redirect_to realignment_prices_path(purchase_process_id: resource.purchase_process_id) }
+      success.html { redirect_to edit_licitation_process_path(resource.purchase_process_id) }
     end
   end
 
   def update
     update! do |success, failure|
-      success.html { redirect_to realignment_prices_path(purchase_process_id: resource.purchase_process_id) }
+      success.html { redirect_to edit_licitation_process_path(resource.purchase_process_id) }
     end
   end
 end

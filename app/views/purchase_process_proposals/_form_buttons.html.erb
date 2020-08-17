@@ -3,5 +3,5 @@
     <%= f.button :submit, 'data-disabled' => not_updateable_message %>
   <% end %>
 
-  <%= f.button :back, href:  purchase_process_proposals_path(licitation_process_id: resource.id) %>
+  <%= f.button :back, href:  edit_licitation_process_path(resource.id) %>
 </div>
