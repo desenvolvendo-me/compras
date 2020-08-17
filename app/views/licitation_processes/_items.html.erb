@@ -110,3 +110,17 @@
     <% end %>
   <% end %>
 </div>
+
+<script>
+  <% if f.object.persisted? %>
+    $(function(){
+      $("#items .nested-fields").hide();
+    });
+
+    $("#show-items-fields").click(function () {
+      $("#items .nested-fields").show();
+      $(".justification").hide();
+      $(this).hide();
+    });
+  <% end %>
+</script>
