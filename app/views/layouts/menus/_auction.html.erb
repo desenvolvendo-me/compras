@@ -25,14 +25,31 @@
             </i>Funcionários
           <% end %>
   
-    <li class="nav-item"><%= link_to "", '/auction/employees' %></li>
-    <li class="nav-item"><%= link_to "Gestão de objetos ", :management_objects %></li>
-    <li class="nav-item"><%= link_to "Cargos", :positions %></li>
+      <%= link_to :management_objects do  %>
+            <i role="presentation">
+              <%= image_tag("icon_library_books.png") %>
+            </i>Gestão de Objetos
+          <% end %>
 
+           <%= link_to :positions do  %>
+            <i role="presentation">
+              <%= image_tag("icon_library_books.png") %>
+            </i>Cargos
+          <% end %>
+  
+     <span class='subtitle-menu'>Pregoeiro</span>
 
-      <a class="nav-link" href="#">Pregoeiro</a>
-    <li class="nav-item"><%= link_to "Pregão", :legal_peoples %></li>
-    <li class="nav-item"><%= link_to "Fornecedores", :legal_peoples %></li>
-   
+       <%= link_to :bookmark do  %>
+            <i role="presentation">
+              <%= image_tag("icon_library_books.png") %>
+            </i>Pregão
+          <% end %>
+            <%= link_to :bookmark do  %>
+            <i role="presentation">
+              <%= image_tag("icon_library_books.png") %>
+            </i>Fornecedores
+          <% end %>
+    
+
   
 </li>
