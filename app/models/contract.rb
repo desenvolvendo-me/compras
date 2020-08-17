@@ -72,7 +72,7 @@ class Contract < Compras::Model
             :dissemination_source, :content, :contract_type,
             :contract_value, :contract_validity, :signature_date, :start_date,
             :end_date, :budget_structure_responsible,
-            :default_fine, :penalty_fine, :presence => true
+            :default_fine, :penalty_fine, :type_contract, :presence => true
   validates :end_date, :timeliness => {
                          :after => :signature_date,
                          :type => :date,
