@@ -10,7 +10,7 @@
               <%= image_tag("icon_library_books.png") %>
             </i>Cadastro
           <% end %>
-          <%= link_to '/auction/auctions' do  %>
+          <%= link_to [:auction, :auctions] do  %>
             <i role="presentation">
               <%= image_tag("icon_library_books.png") %>
             </i>Pregões e Editais
@@ -19,7 +19,7 @@
 
  <span class='subtitle-menu'>Cadastro</span>
 
-  <%= link_to '/auction/employees' do  %>
+  <%= link_to [:auction, :employees] do  %>
             <i role="presentation">
               <%= image_tag("icon_library_books.png") %>
             </i>Funcionários
