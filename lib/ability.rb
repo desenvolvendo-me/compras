@@ -16,6 +16,7 @@ class Ability
     elsif user.creditor?
       can [:read, :update], :price_collection_proposals
     else
+      can :access, [:auction, :people]
       user.roles.each do |role|
         controller_permission(role)
         authorize_dependencies(role.controller.to_sym)

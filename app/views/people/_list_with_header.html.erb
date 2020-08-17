@@ -9,7 +9,6 @@
   </thead>
 
   <tbody>
-  <% byebug %>
     <% collection.each do |resource| %>
       <tr id="<%= dom_id resource %>">
         <% resource_class.decorator.header_attributes.each do |field| %>
