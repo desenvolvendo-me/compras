@@ -178,6 +178,8 @@ GEM
     mask_validator (0.2.1)
       activemodel (>= 3.0)
       activerecord (>= 3.0)
+    material_icons (2.2.1)
+      railties (>= 3.2)
     method_source (0.8.2)
     mime-types (1.25.1)
     minitest (5.14.1)
@@ -426,6 +428,7 @@ DEPENDENCIES
   machinist-caching (= 0.0.1)
   mail_validator (= 0.2.0)
   mask_validator (= 0.2.1)
+  material_icons
   minitest
   minitest-reporters
   newrelic_rpm
