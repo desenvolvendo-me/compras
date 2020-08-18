@@ -16,6 +16,10 @@
  *= require select2/select2
  */
 
+#container {
+    width: 1200px;
+}
+
 #container #header img {
   margin: 15px 0 0 15px;
 }
