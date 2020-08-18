@@ -2,7 +2,7 @@
   <td><%= material %></td>
   <td><%= f.input :manufacturer, input_html:{class: 'form-control form-control-sm'}, label: false%></td>
   <td><%= f.input :model_version, input_html:{class: 'form-control form-control-sm'}, label: false%></td>
-  <td><%= f.input :quantity, input_html:{'data-bid': item.quantity, class: 'form-control form-control-sm'}, label: false%></td>
+  <td><%= f.input :quantity, input_html:{'data-bid': item.quantity, class: 'form-control form-control-sm', readonly: true}, label: false%></td>
   <td><%= f.input :unit_price, input_html:{value: number_with_delimiter(f.object.unit_price), class: 'form-control form-control-sm' }, label: false%></td>
   <td>
     <%= f.input :global_price, input_html:{value: number_with_delimiter(f.object.global_price), class: 'form-control form-control-sm', readonly: true}, label: false%>
