@@ -5,13 +5,8 @@ feature "CompanySizes" do
     sign_in
   end
 
-<<<<<<< HEAD
-  scenario "create, update and destroy a new company_size" do
-    navigate "Cadastro > Pessoas > Auxiliar > Portes das Fornecedores"
-=======
   scenario 'create, update and destroy a new company_size' do
     navigate 'Cadastro > Portes das Empresas'
->>>>>>> test(feature): menu
 
     click_link "Criar Porte da Empresa"
 
