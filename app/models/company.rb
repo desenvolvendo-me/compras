@@ -1,17 +1,14 @@
 # frozen_string_literal: true
 
 class Company < Persona::Company
-<<<<<<< HEAD
   attr_accessible :responsible_name, :bank_info, :account_info,
-                  :account_type, :agencie_info
+                  :account_type, :agencie_info,
+                  :cnpj, :state_registration, :uf_state_registration, :commercial_registration_number, :commercial_registration_date, :legal_nature_id, :person_id, :responsible_role, :company_size_id, :partners_attributes
 
   attr_accessor :cnae_ids
-=======
-  attr_accessible :cnpj, :state_registration, :uf_state_registration, :commercial_registration_number, :commercial_registration_date, :legal_nature_id, :person_id, :responsible_role, :company_size_id, :partners_attributes
->>>>>>> build(unico): corrigido menu configurações e compras
 
   delegate :city, :zip_code, to: :address, allow_nil: true
-  has_many :partners, class_name: '::Partner', inverse_of: :company, dependent: :destroy
+  has_many :partners, class_name: "::Partner", inverse_of: :company, dependent: :destroy
 
   #validate :at_least_one_partner
   validate :cnpj, uniqueness: true
