@@ -2,8 +2,7 @@
 
 class Company < Persona::Company
   attr_accessible :responsible_name, :bank_info, :account_info,
-                  :account_type, :agencie_info,
-                  :cnpj, :state_registration, :uf_state_registration, :commercial_registration_number, :commercial_registration_date, :legal_nature_id, :person_id, :responsible_role, :company_size_id, :partners_attributes
+                  :account_type, :agencie_info
 
   attr_accessor :cnae_ids
 
