@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   around_filter :handle_customer
   before_filter :handle_action_mailer
   before_filter :authenticate_user!
-  before_filter :check_concurrent_session
+  #before_filter :check_concurrent_session
   before_filter :set_customer_to_api_resources
 
   rescue_from CanCan::Unauthorized, :with => :unauthorized
@@ -35,9 +35,9 @@ class ApplicationController < ActionController::Base
   end
 
   def handle_customer(&block)
-    customer = current_customer
-    customer.using_connection(&block)
-    Uploader.set_current_domain(customer.domain)
+    Uploader.set_current_domain(current_customer.domain)
+
+    current_customer.using_connection(&block)
   end
 
   def handle_action_mailer
