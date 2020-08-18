@@ -13,7 +13,7 @@ gem 'activerecord-connections', '0.0.3'
 gem 'activerecord-postgres-hstore', '~> 0.7.6'
 
 source 'http://foo:BringMeSomeBeerNow@devops.nobesistemas.com.br:9292/' do
-  gem 'unico', '~> 7.7.4'
+  gem 'unico', '7.6.11'
   gem 'unico-api', '2.2.3'
   gem 'unico-assets', '2.0.7'
 end
