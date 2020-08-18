@@ -8,7 +8,9 @@ module Auction::AuctionsHelper
   end
 
   def proposal_link(resource)
-    proposal = resource.creditor_proposals.where(user_id: current_user.try(:id)).last
+    if current_user
+      proposal = resource.creditor_proposals.where(user_id: current_user.id).last
+    end
     if proposal
       route = edit_auction_auction_creditor_proposal_path(proposal.id)
     else
