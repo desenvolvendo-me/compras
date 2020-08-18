@@ -1,0 +1,102 @@
+<% if f.object.solicitations.present? %>
+  <div class="text-end ">
+    <%= link_to "Imprimir Extrato", report_extract_consumption_per_process_path(extract_consumption_per_process_report:{licitation_process_id: f.object.licitation_process_id, licitation_process: f.object.licitation_process.to_s,  contract_id: f.object.id, contract: f.object.to_s}), :class => 'button primary btn-small' if resource.id %>
+  </div>
+<% end %>
+<% f.object.solicitations.try(:each) do |solicitation| %>
+  <%= purchaseSolicitation = PurchaseSolicitation.find(solicitation[0]) %>
+  <div class="consumption-items">
+    <div class="d-flex justify-content-between">
+      <h1><%= "Solicitação #{purchaseSolicitation.to_s} - #{purchaseSolicitation.department}" %></h1>
+      <button class="edit-solicitation button primary" type="button">Editar</button>
+    </div>
+    <table class="records">
+      <thead>
+      <tr>
+        <th width="30%" class="description">Material</th>
+        <th>Valor Unitário</th>
+        <th width="5%">Qtd Solicitada</th>
+        <th width="5%">Qtd Contrato</th>
+        <th width="10%">Total</th>
+        <th width="5%">Qtd Atendida</th>
+        <th>Valor Atendido</th>
+        <th>Consumo Contrato</th>
+        <th>Saldo</th>
+      </tr>
+      </thead>
+      <tbody id="ratification_items">
+      <% total = {'total': 0, 'total_qtd_soli': 0, 'total_qtd_attended': 0, 'total_attended': 0, 'balance': 0} %>
+      <% solicitation[1].each do |materialID| %>
+        <%= f.simple_fields_for :consumption_minutes, find_or_init_consumption(purchaseSolicitation, f.object, materialID) do |p| %>
+          <% material = p.object.item.material %>
+          <% qtd = qtd_requested(solicitation[0], material, f.object.licitation_process) %>
+          <% qtd_attended = get_quantity_item_supply_order(f.object.licitation_process, material.id, purchaseSolicitation) %>
+          <% consumption_contract = (p.object.contract_quantity || 0) - qtd_attended %>
+          <% consumption_contract = consumption_contract < 0 ? 0 : consumption_contract %>
+          <% price = material_vl_unitary(f.object.licitation_process, material) %>
+          <% balance = qtd - qtd_attended %>
+          <%= p.input :contract_id, as: :hidden %>
+          <%= p.input :purchase_solicitation_item_id, as: :hidden %>
+
+          <tr class="ratification_item inherited nested">
+            <td class="description"><%= material.description %></td>
+            <td><%= number_to_currency price %></td>
+            <td><%= qtd  %></td>
+            <td><%= p.input :contract_quantity, label: false, input_html:{disabled: true, class:'contract_quanity'} %></td>
+            <td><%= number_with_precision result = (price.to_f*qtd.to_f) %></td>
+            <td class="qtd_attended" data-attended="<%= qtd_attended %>"><%= qtd_attended %></td>
+            <td><%= number_with_precision total_attended = qtd_attended * price.to_f %></td>
+            <td>
+              <%= p.input :contract_consumption, input_html:{value: consumption_contract, readonly: true, class:'consumption'}, label: false %>
+            </td>
+            <td><%= balance %></td>
+
+            <% total[:total_qtd_soli] += qtd %>
+            <% total[:total] += result %>
+            <% total[:total_qtd_attended] += qtd_attended  %>
+            <% total[:total_attended] += total_attended  %>
+            <% total[:balance] += balance *  price.to_f %>
+          </tr>
+        <% end %>
+      <% end %>
+      <tr>
+        <td></td>
+        <td></td>
+        <td><%= total[:total_qtd_soli]%></td>
+        <td></td>
+        <td style="text-align: end;"><b><%= number_to_currency total[:total] %></b></td>
+        <td><%= total[:total_qtd_attended]  %></td>
+        <td><b><%= number_to_currency total[:total_attended] %></b></td>
+        <td></td>
+        <td><b><%= number_to_currency total[:balance] %></b></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+<% end %>
+<% if f.object.solicitations.present? %>
+  <div class="text-end">
+    <%= link_to "Imprimir Extrato", report_extract_consumption_per_process_path(extract_consumption_per_process_report:{licitation_process_id: f.object.licitation_process_id, licitation_process: f.object.licitation_process.to_s,  contract_id: f.object.id, contract: f.object.to_s}), :class => 'button primary btn-small' if resource.id %>
+  </div>
+<% end %>
+
+
+<style>
+  table.records th:not(.description){
+    text-align: center !important;
+  }
+  table.records td:not(.description){
+    text-align: right !important;
+  }
+  .text-end{
+    text-align: end;
+  }
+  .edit-solicitation{
+    height: 30px;
+    margin-top: 27px;
+  }
+  .consumption-items .input{
+    margin-bottom: 0;
+  }
+</style>
+
