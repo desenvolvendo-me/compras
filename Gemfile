@@ -13,8 +13,8 @@ gem 'activerecord-connections', '0.0.3'
 gem 'activerecord-postgres-hstore', '~> 0.7.6'
 
 source 'http://foo:BringMeSomeBeerNow@devops.nobesistemas.com.br:9292/' do
-  gem 'unico', '7.6.10'
-  gem 'unico-api', '2.2.4'
+  gem 'unico', '~> 7.7.4'
+  gem 'unico-api', '2.2.3'
   gem 'unico-assets', '2.0.7'
 end
 
@@ -25,7 +25,7 @@ gem 'protected_attributes', '1.0.9'
 gem 'active_relatus', '0.2.1'
 
 gem 'cancan', git: 'git://github.com/ryanb/cancan.git', branch: '2.0'
-gem 'devise', '3.1.1'
+gem 'devise', '3.4.1'
 
 gem 'kaminari', '~> 0.15.1'
 gem 'simple_form', '~> 3.3'
