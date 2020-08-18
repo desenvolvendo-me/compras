@@ -1,6 +1,3 @@
-<h4><%= Customer.where("domain like 'portoseguro-ba.nobe-treino.com.br'").last %></h4>
-<h4><%= "#{current_customer.database}" %></h4>
-
 <%= simple_form_for resource, :as => resource_name, :url => session_path(resource_name) do |f| %>
   <%= f.input :login, :required => false, :hint => false %>
   <%= f.input :password, :required => false, :hint => false %>
