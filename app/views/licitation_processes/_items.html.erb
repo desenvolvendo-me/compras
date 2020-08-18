@@ -39,8 +39,9 @@
       </div>
     </div>
 
+
     <div class="text-right">
-        <%= button_tag 'Adicionar', type: :button,
+        <%= button_tag 'Adicionar Itens', type: :button,
                        :id => 'btn_new_role_unique',
                        :class => 'add-nested-record  button field-without-label',
                        'data-template' => 'licitation_process_items_template',
@@ -51,7 +52,7 @@
   </div>
 
   <div class="text-right">
-    <%= button_tag 'Adicionar Items', type: :button, class:'button', :id => 'show-items-fields' %>
+    <%= button_tag 'Adicionar Itens', type: :button, class:'button primary', :id => 'show-items-fields' %>
   </div>
 
   <%= f.error :items %>
