@@ -73,6 +73,7 @@ end
 group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'byebug'
   gem 'factory_girl-preload', git: 'git://github.com/MarceloCajueiro/factory_girl-preload.git'
   gem 'factory_girl_rails', '~> 4.2.1'
   gem 'minitest', '>= 2.12'
