@@ -31,11 +31,11 @@
 
 <div class="yui3-g">
   <div class="yui3-u-1-4">
-    <%= f.input :department %>
+    <%= f.input :department, as: :modal, modal_url: modal_departments_path(by_user: current_user.id), hidden_field: :department_id %>
   </div>
 
   <div class="yui3-u-1-4">
-    <%= f.input :purchasing_unit %>
+    <%= f.input :purchasing_unit, input_html:{readonly: true} %>
   </div>
 
   <div class="yui3-u-1-4">
@@ -86,6 +86,13 @@
       $('#purchase_solicitation_material').attr('readonly', false).removeAttr('data-disabled');
     }else{
       $('#purchase_solicitation_material').val('').attr('readonly', true).attr('data-disabled', '<%= f.object.decorator.disabled_materials %>');
+    }
+  });
+
+  $("#purchase_solicitation_department_id").change(function(event, data){
+    if(data){
+      $("#purchase_solicitation_purchasing_unit").val(data.purchasing_unit);
+      $("#purchase_solicitation_purchasing_unit_id").val(data.purchasing_unit_id);
     }
   });
 
