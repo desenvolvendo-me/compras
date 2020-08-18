@@ -25,4 +25,12 @@ class ContractDecorator
       "Contrato"
     end
   end
+
+  def contract_or_minute_report
+    if type_contract == ContractMinute::MINUTE
+      "da ata"
+    else
+      "do Contrato"
+    end
+  end
 end
