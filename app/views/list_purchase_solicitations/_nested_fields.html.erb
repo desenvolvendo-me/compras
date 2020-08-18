@@ -9,23 +9,6 @@
 </div>
 
 
-<div class="yui3-g">
-  <div class="yui3-u-1-3">
-    <%= f.input :consumed_value, :as => :fake,
-                :input_html => { 'data-decimal' => true, :value => '0,00', 'data-precision' => 2, :maxlength => 15, :class => 'numeric' } %>
-  </div>
-
-  <div class="yui3-u-1-3">
-    <%= f.input :expected_value, :as => :fake,
-                :input_html => { 'data-decimal' => true, :value => '0,00', 'data-precision' => 2, :maxlength => 15, :class => 'numeric' } %>
-  </div>
-
-  <div class="yui3-u-1-3">
-    <%= f.input :resource_source, :as => :fake %>
-  </div>
-
-</div>
-
 <script>
 
     // esse js ta resolvendo um bug que deu na aplicação,
