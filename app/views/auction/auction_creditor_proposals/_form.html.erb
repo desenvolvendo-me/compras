@@ -29,6 +29,7 @@
       <%= f.simple_fields_for :auction_creditor_proposal_items, init_item(f.object, auction_item) do |p| %>
         <%= render 'auction/auction_creditor_proposa_items/form',
                    material: auction_item.material.to_s,
+                   item: auction_item,
                    f: p %>
       <% end %>
     <% end %>
@@ -176,14 +177,32 @@
   });
   <% end %>
 
-    $("[name$='[unit_price]'], [name$='[quantity]']").change( function(){
-      var $tr = $(this).closest('tr');
+  $(function(){
+    var value;
+    $.each($("[name$='[quantity]']"), function(){
+      value = floatToPtBrString(parseFloat($(this).val()));
+      $(this).val(value);
+    })
+  });
 
-      var qtd = parseFloat($tr.find("[name$='[quantity]']").val()),
+    $("[name$='[unit_price]'], [name$='[quantity]']").change( function(){
+      const $tr = $(this).closest('tr');
+
+      const qtd = parsePtBrFloat($tr.find("[name$='[quantity]']").val()),
           unit_price = parsePtBrFloat($tr.find("[name$='[unit_price]']").val());
 
-      $($tr.find("[name$='[global_price]']").val(numberWithDelimiter(qtd * unit_price)))
+      const global_price = qtd * unit_price;
 
-    })
+      if(!isNaN(global_price))
+        $($tr.find("[name$='[global_price]']").val(floatToPtBrString(global_price)))
+    });
 
+  $(".nested-record [name$='[quantity]']").change(function(){
+    const total_bid = parseFloat($(this).data('bid'));
+    const quantity = parsePtBrFloat($(this).val());
+    if(quantity > total_bid){
+      custom_alert( 'Você não pode fornecer uma quantidade superior a solicitada pelo pregão!', 'Atenção');
+      $(this).val(total_bid)
+    }
+  })
 </script>
