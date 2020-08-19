@@ -41,7 +41,27 @@
   <div class="yui3-u-1-2">
     <%= f.input :object_management, input_html:{rows: 2} %>
   </div>
+</div>
+
+<h4>
+  Equipe Pregão:
+</h4>
+
+<div class="yui3-g">
   <div class="yui3-u-1-2">
-    <%= f.input :employee, as: :auto_complete %>
+    <%= f.input :employee, as: :auto_complete, source_path: auction_employees_path %>
+  </div>
+  <div class="yui3-u-1-4">
+    <%= f.input :position, as: :fake, input_html:{disabled: true} %>
+  </div>
+  <div class="yui3-u-1-4">
+    <%= f.input :registration, as: :fake, input_html:{disabled: true} %>
   </div>
 </div>
+
+<script>
+  $("#auction_employee_id").change(function (event, data) {
+    $("#auction_position").val(data.position);
+    $("#auction_registration").val(data.registration);
+  })
+</script>

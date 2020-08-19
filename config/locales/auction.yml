@@ -47,3 +47,5 @@ pt-BR:
         telephone: "Telefone"
         cell_phone: "Celular"
         zip_code:  "CEP"
+        position: "Cargo"
+        registration: "Matrícula"
