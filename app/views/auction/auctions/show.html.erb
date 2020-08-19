@@ -1,3 +1,4 @@
+<div class="border-round">
 <div id="record">
   <table class="records">
     <tbody>
@@ -10,19 +11,29 @@
         <td>
         <p>
           <b>Endereço:</b>  <%= address(resource) %> 
-          <p>
-          <p>
+         </br>
             <b>Telefone: </b><%= resource.telephone %>
           </p>
         </td>
       </tr>
-
+  </tbody>
+  </table>
+  <table class="records">
+   <tbody>
         <tr>
         <td>
          <b>Edital disponível a partir de: </b> <%= l(resource.notice_availability) if resource.notice_availability %>
         </td>
          <td>
          <b>Tipo de Processo: </b> <%= resource.auction_type_humanize%>
+        </td>
+      </tr>
+      <tr>
+        <td>
+         <b>Entrega da Proposta: </b> <%= l(resource.proposal_delivery) if resource.proposal_delivery %>
+        </td>
+         <td>
+         <b>Abertura da Proposta: </b> <%= resource.bid_opening%>
         </td>
       </tr>
 
@@ -35,86 +46,40 @@
     <thead>
       <tr>
         <th>
-          <%= Person.human_attribute_name :email %>
+          Código
         </th>
         <th>
-          <%= Person.human_attribute_name :phone %>
+         Descrição
         </th>
         <th>
-          <%= Person.human_attribute_name :fax %>
+        Unidade de Compra
+        </th>
+         <th>
+       Quantidade
         </th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>
-          <%= resource.id %>
+    <tr>
+    <% resource.items.each do |item| %>
+      
+        <td style="text-align:center;">
+          <%= item.material.code %>
         </td>
         <td>
-          <%= resource.id %>
+          <%= item.material.description %>
         </td>
-        <td>
-          <%= resource.id %>
+        <td style="text-align:center;"> 
+          <%= item.material.reference_unit.acronym %>
+        </td>
+         <td style="text-align:center;">
+          <%= number_with_precision item.quantity %>
         </td>
       </tr>
+      <% end %>
     </tbody>
   </table>
 
-  <table class="records">
-    <thead>
-      <tr>
-        <th>
-          <%= Address.human_attribute_name :neighborhood %>
-        </th>
-        <th>
-          <%= Person.human_attribute_name :address %>
-        </th>
-        <th>
-          <%= Address.human_attribute_name :zip_code %>
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>
-          <%= resource.id %>
-        </td>
-        <td>
-          <%= resource.id %>
-        </td>
-        <td>
-          <%= resource.id %>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-  <table class="records">
-    <thead>
-      <tr>
-        <th>
-          <%= Address.human_attribute_name :city %>
-        </th>
-        <th>
-          <%= Address.human_attribute_name :state %>
-        </th>
-        <th>
-          <%= Address.human_attribute_name :country %>
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>
-          <%= resource.id %>
-        </td>
-        <td>
-          <%= resource.id %>
-        </td>
-        <td>
-          <%= resource.id %>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+ 
 </div>
+<div>

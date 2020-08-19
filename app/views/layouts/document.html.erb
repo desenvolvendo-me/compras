@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="robots" content="noindex,nofollow">
+    <meta charset="utf-8">
+    <%= csrf_meta_tag %>
+
+    <title>icompras</title>
+
+    <%= stylesheet_link_tag 'report', :media => :all %>
+    <%= stylesheet_link_tag 'compras/commom', :media => :all %>
+    <%= stylesheet_link_tag 'compras/report', :media => :all %>
+    <%= stylesheet_link_tag 'compras/document', :media => :all %>
+    <%= stylesheet_link_tag 'compras/table_size', :media => :all %>
+    <%= stylesheet_link_tag 'buttons', :media => :all  if (@report.approv rescue '') === 'true'%>
+    <%= javascript_include_tag "application"  if  (@report.approv rescue '') === 'true'%>
+
+    <link rel="shortcut icon" type="image/png" href="<%= image_path 'favicon.png' %>" />
+  </head>
+
+  <body>
+    <div id="container">
+      <% if current_prefecture %>
+        <div id="header">
+          <p style="position: absolute"><%= prefecture_image %></p>
+
+          <h2 class="text-center"><%= current_prefecture.name %> | CNPJ: <%= current_prefecture.cnpj %></h2>
+          
+           <h3 class="text-center"> Nota de Emprenho</h3>
+        </div>
+      <% end %>
+      
+      <div id="content">
+        <%= yield %>
+      </div>
+
+      <div id="footer" style="padding-top:30px">
+        <p class="right">
+        <%= print_link_btn %>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
