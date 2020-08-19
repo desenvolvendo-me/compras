@@ -12,7 +12,7 @@
                    <i class="material-icons">print</i>
                <% end %>
                 </span>
-                <h5>Pregão:<%= "#{resource.licitation_number}/#{resource.year}" %> - <%= resource.object %></h5>
+                <h5>Pregão:<%= "#{resource.licitation_number}/#{resource.year}" %> - Objeto: <%= resource.object %></h5>
                 
               </div>
             </div>
@@ -73,6 +73,9 @@
               <div class="yui3-u-1 actions">
                 <div class="yui3-g">
                   <div class="yui3-u-1">
+                  <% if resource.user == current_user %>
+                     <%= link_to "Editar", edit_resource_path(resource), class: 'btn btn-primary' %>
+                  <% end %>
                     <%= link_to "Visualizar", resource_path(resource), class: 'btn btn-primary' %>
                     <%= proposal_link(resource)%>
                   </div>
