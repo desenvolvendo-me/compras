@@ -83,7 +83,7 @@ class PurchaseSolicitation < Compras::Model
     use_pur_uni = UserPurchasingUnit.where(user_id:current_user).pluck(:purchasing_unit_id)
     departments = Department.where("compras_departments.purchasing_unit_id in (?)",use_pur_uni).pluck(:id)
 
-    where { self.department_id.in departments }
+    where("department_id in (?) or user_id = ?", departments,current_user)
   }
 
   scope :by_licitation_process, lambda {|purchase_process_id|
