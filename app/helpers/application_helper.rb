@@ -87,6 +87,10 @@ module ApplicationHelper
     link_to "imprimir", "javascript:window.print()"
   end
 
+  def print_link_btn
+    link_to "Imprimir", "javascript:window.print()", :class => "btn btn-primary"
+  end
+
   def message_about_environment?
     Rails.env.test? || Rails.env.development? || Rails.env.staging? || Rails.env.training?
   end
