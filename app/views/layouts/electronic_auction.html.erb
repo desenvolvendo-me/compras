@@ -56,8 +56,8 @@
         text-align: right;
       }
       .banner{
-        float: right;
-        padding: 10px;
+        position: absolute;
+        left: 93%;
       }
     #sidebarMenu{
   float: left;
@@ -170,13 +170,9 @@
             </div>
           </nav>
           <main role="main" id="main-body" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-            <div class="row">
-              <div class="col-sm-11">
-              </div>
-              <div class="col-sm-11">
-                <div class="banner">
-                  <%= prefecture_image %>
-                </div>
+            <div class="row mt-4">
+              <div class="banner">
+                <%= prefecture_image %>
               </div>
               <% unless controller_name.eql? "bookmarks" %>
                 <%= yield %>
@@ -184,5 +180,9 @@
                 <%= render 'layouts/dashboard' %>
               <% end %>
             </div>
-          </body>
-  </html>
+          </main>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
