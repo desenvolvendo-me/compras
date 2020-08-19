@@ -1,0 +1,120 @@
+<div id="record">
+  <table class="records">
+    <tbody>
+      <tr>
+        <td>
+          <b>PROCESSO:</b > <%= "#{resource.licitation_number}/#{resource.year}" %> - <%= resource.object %>
+        </td>
+      </tr>    
+      <tr>
+        <td>
+        <p>
+          <b>Endereço:</b>  <%= address(resource) %> 
+          <p>
+          <p>
+            <b>Telefone: </b><%= resource.telephone %>
+          </p>
+        </td>
+      </tr>
+
+        <tr>
+        <td>
+         <b>Edital disponível a partir de: </b> <%= l(resource.notice_availability) if resource.notice_availability %>
+        </td>
+         <td>
+         <b>Tipo de Processo: </b> <%= resource.auction_type_humanize%>
+        </td>
+      </tr>
+
+   
+    
+    </tbody>
+  </table>
+
+  <table class="records">
+    <thead>
+      <tr>
+        <th>
+          <%= Person.human_attribute_name :email %>
+        </th>
+        <th>
+          <%= Person.human_attribute_name :phone %>
+        </th>
+        <th>
+          <%= Person.human_attribute_name :fax %>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <%= resource.id %>
+        </td>
+        <td>
+          <%= resource.id %>
+        </td>
+        <td>
+          <%= resource.id %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="records">
+    <thead>
+      <tr>
+        <th>
+          <%= Address.human_attribute_name :neighborhood %>
+        </th>
+        <th>
+          <%= Person.human_attribute_name :address %>
+        </th>
+        <th>
+          <%= Address.human_attribute_name :zip_code %>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <%= resource.id %>
+        </td>
+        <td>
+          <%= resource.id %>
+        </td>
+        <td>
+          <%= resource.id %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="records">
+    <thead>
+      <tr>
+        <th>
+          <%= Address.human_attribute_name :city %>
+        </th>
+        <th>
+          <%= Address.human_attribute_name :state %>
+        </th>
+        <th>
+          <%= Address.human_attribute_name :country %>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <%= resource.id %>
+        </td>
+        <td>
+          <%= resource.id %>
+        </td>
+        <td>
+          <%= resource.id %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
