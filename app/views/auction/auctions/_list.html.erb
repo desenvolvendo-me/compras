@@ -17,18 +17,6 @@
               </div>
             </div>
           </div>
-<<<<<<< HEAD
-        </div>
-
-        <div class="yui3-g section-gray">
-          <div class="yui3-u-1-2 ">
-            <p>Objeto: <%= resource.object %></p>
-            <p>Edital disponível a partir de: <%= l(resource.notice_availability, format: "%A, %d de %B de %Y") if resource.notice_availability %></p>
-            <p>Endereço: <%= address(resource) %> </p>
-            <p>Telefone: <%= contact(resource) %> </p>
-            <p>Entrega da proposta: <%= l(resource.proposal_delivery, format: :long) if resource.proposal_delivery%></p>
-            <p>Abertura da proposta: <%= l(resource.bid_opening, format: :long) if resource.bid_opening %></p>
-=======
           <div class="border-round">
             <div class="yui3-g section-gray">
               <div class="yui3-u-1-3">
@@ -55,16 +43,15 @@
               </div>
               <div class="yui3-u-1-3">
                 <div>
-                  <h5> <%= l(resource.proposal_delivery) if resource.proposal_delivery%> </h5>
+                  <p> <%= l(resource.proposal_delivery) if resource.proposal_delivery%> </p>
                 </div>
               </div>
               <div class="yui3-u-1-3">
                 <div  >
-                  <h5> <%= l(resource.bid_opening) if resource.bid_opening %> </h5>
+                  <p> <%= l(resource.bid_opening) if resource.bid_opening %> <p>
                 </div>
               </div>
             </div>
->>>>>>> mudanças tela pregao
           </div>
           <div class="border-round">
             <div class="yui3-g section-gray">
@@ -81,26 +68,6 @@
                 </div>
               </div>
             </div>
-            <table class="records">
-              <thead>
-                <tr>
-                  <th><%= "Código" %></th>
-                  <th><%= "Descrição" %></th>
-                  <th><%= "Unidade de Compra" %></th>
-                  <th><%= "Quantidade" %></th>
-                </tr>
-              </thead>
-              <tbody>
-                <% resource.items.each do |item| %>
-                  <tr>
-                    <td><%= item.material.code%> </td>
-                    <td><%= item.material.description%> </td>
-                    <td><%= item&.reference_unit&.acronym%> </td>
-                    <td><%= item.quantity%> </td>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
             <div class="yui3-g section-gray">
             
               <div class="yui3-u-1 actions">
@@ -119,6 +86,12 @@
       </tbody>
     </table>
     <style>
+    .button-cad{
+      width:100%;
+      float:right;
+      text-align:right;
+      margin-top: -30px;
+    }
       .section-blue{
         height: 43px;
         background-color: #7e99b5;
@@ -138,7 +111,7 @@
       }
       
       .section-gray p{
-        font-size: 22px;
+        font-size: 100%;
       }
       
       .section-gray a, button{
