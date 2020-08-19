@@ -1,3 +1,4 @@
+<div id="tradings-fields">
 <h3 align="center" style="color: red">Para encerrar os lances é necessário colocar lances zerados para declinar.</h3>
 <%= render "purchase_process_tradings/by_#{trading.kind}", trading: trading %>
 
@@ -21,4 +22,5 @@
     <%= link_to 'Voltar', edit_licitation_process_path(trading.purchase_process),
                 class: 'button' %>
   </div>
+</div>
 </div>
