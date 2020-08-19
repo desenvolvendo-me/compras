@@ -38,12 +38,12 @@
             <div class="yui3-g section-gray">
               <div class="yui3-u-1-3">
                 <div>
-                  <p><%= l(resource.notice_availability) if resource.notice_availability %> </p>
+                  <p><%= resource.notice_availability.strftime('%d/%m/%Y') if resource.notice_availability %> </p>
                 </div>
               </div>
               <div class="yui3-u-1-3">
                 <div>
-                  <p> <%= l(resource.proposal_delivery) if resource.proposal_delivery%> </p>
+                  <p> <%= resource.proposal_delivery.strftime('%d/%m/%Y') if resource.proposal_delivery%> </p>
                 </div>
               </div>
               <div class="yui3-u-1-3">
