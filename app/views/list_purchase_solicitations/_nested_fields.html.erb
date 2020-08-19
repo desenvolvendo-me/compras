@@ -6,6 +6,7 @@
     <%= f.input :purchase_solicitation,:required => true, :as => :auto_complete, :fake => true,
                 'data-hidden-field-class' => 'unique',:input_html => {} %>
   </div>
+  <%= f.input :department, as: :fake, input_html:{style:'display: none', name:'solicitation[department]'}, label: false %>
 </div>
 
 
@@ -38,6 +39,11 @@
                 $('#licitation_process_consumed_value').val(convert(consumed_value));
                 $('#licitation_process_expected_value').val(convert(expected_value));
             }, 100);
+        });
+
+
+        $("#licitation_process_purchase_solicitation_id").change(function(event, data){
+          $("#licitation_process_department").val(data.department);
         });
     });
 
