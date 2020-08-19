@@ -174,11 +174,13 @@
               <div class="banner">
                 <%= prefecture_image %>
               </div>
-              <% unless controller_name.eql? "bookmarks" %>
-                <%= yield %>
-              <% else %>
-                <%= render 'layouts/dashboard' %>
-              <% end %>
+              <div class="main-content w-100">
+                <% unless controller_name.eql? "bookmarks" %>
+                  <%= yield %>
+                <% else %>
+                  <%= render 'layouts/dashboard' %>
+                <% end %>
+              </div>
             </div>
           </main>
         </div>
