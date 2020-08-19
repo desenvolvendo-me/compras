@@ -1,0 +1,11 @@
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :employee, as: :auto_complete, source_path: auction_employees_path  %>
+  </div>
+  <div class="yui3-u-1-4">
+    <%= f.input :position, as: :fake, input_html:{value: f.object.employee.try(:position), disabled: true} %>
+  </div>
+  <div class="yui3-u-1-4">
+    <%= f.input :registration, as: :fake, input_html:{value: f.object.employee.try(:registration), disabled: true} %>
+  </div>
+</div>
