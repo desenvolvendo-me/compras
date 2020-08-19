@@ -8,7 +8,7 @@
             <div class="yui3-u-1">
               <div class="ellipsis">
               <span style="float:right;">
-                <%= link_to edit_resource_path(resource) do  %>
+                <%= link_to resource_path(resource) do  %>
                    <i class="material-icons">print</i>
                <% end %>
                 </span>
@@ -56,14 +56,14 @@
           <div class="border-round">
             <div class="yui3-g section-gray">
               <div class="yui3-u-1">
-                <div class="ellipsis-sub">
-                  <h5>Endereço: </h5>
-                </div>
+                
+                 <p><b style="font-size:125%;">Endereço:</b> <%= address(resource) %> </p>
+               
               </div>
               <div class="yui3-g section-gray">
                 <div class="yui3-u-1">
                   <div>
-                    <p> <%= address(resource) %> </p>
+                   
                   </div>
                 </div>
               </div>
@@ -73,7 +73,7 @@
               <div class="yui3-u-1 actions">
                 <div class="yui3-g">
                   <div class="yui3-u-1">
-                    <%= link_to "Visualizar", edit_resource_path(resource), class: 'btn btn-primary' %>
+                    <%= link_to "Visualizar", resource_path(resource), class: 'btn btn-primary' %>
                     <%= proposal_link(resource)%>
                   </div>
                 </div>
