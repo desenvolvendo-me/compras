@@ -1,5 +1,5 @@
 class Auction < Compras::Model
-  attr_accessible :auction_type,:licitation_number,:process_number,:year,:dispute_type,
+  attr_accessible :auction_type,:licitation_number,:process_number,:year,:dispute_type,:zip_code,
                   :judment_form,:covid_law,:purchase_value,:items_quantity, :group_items_attributes,
                   :object,:object_management,:employee_id, :items_attributes, :sensitive_value, :variation_type, :minimum_interval,
                   :decree_treatment, :document_edict, :disclosure_date, :responsible_dissemination_id, :notice_availability,
@@ -26,6 +26,9 @@ class Auction < Compras::Model
 
   validates :year, :mask => "9999", presence: true
   validates :licitation_number, presence: true
+  validates :zip_code, mask: '99999-999', allow_blank: true
+  validates :cell_phone, mask: '(99) 99999-9999', :allow_blank => true
+  validates :telephone, mask: '(99) 9999-9999', :allow_blank => true
 
   orderize :id
   filterize

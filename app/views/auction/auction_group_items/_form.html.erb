@@ -1,6 +1,6 @@
 <tr class="record nested-record item-record" id="group-item-id-<%= id %>">
   <td><%=  %></td>
-  <td><%= group %></td>
+  <td><%= group_i %></td>
   <td><%= quantity %></td>
   <td><%= total_value %></td>
   <td><%= max_value %></td>
@@ -17,7 +17,7 @@
     <%= f.input :judment_form, as: :hidden, input_html: { value: judment_form } %>
     <%= f.input :purchase_type, as: :hidden, input_html: { value: purchase_type } %>
     <%= f.input :quantity, as: :hidden, input_html: { value: quantity } %>
-    <%= f.input :group, as: :hidden, input_html: { value: group } %>
+    <%= f.input :group, as: :hidden, input_html: { value: group_i } %>
     <%= f.input :group_form, as: :hidden, input_html: { value: group_form } %>
     <%= f.input :id, as: :hidden, input_html: { value: id } %>
     <%= f.input :_destroy, as: :hidden, input_html: { class: 'destroy' } %>

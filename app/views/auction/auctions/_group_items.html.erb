@@ -39,10 +39,12 @@
 
     <div class="yui3-g" style="margin-top: 16px">
       <div class="yui3-u-1-2">
-        <%= f.input :total_value, as: :fake, :required => true %>
+        <%= f.input :total_value, as: :fake, :required => true,
+                    :input_html => {'data-decimal' => true, :value => '0,00', 'data-precision' => 2, :maxlength => 15, :class => 'numeric'}%>
       </div>
       <div class="yui3-u-1-2">
-        <%= f.input :max_value, as: :fake, :required => true %>
+        <%= f.input :max_value, as: :fake, :required => true,
+                    :input_html => {'data-decimal' => true, :value => '0,00', 'data-precision' => 2, :maxlength => 15, :class => 'numeric'}%>
       </div>
     </div>
 
@@ -56,7 +58,7 @@
                          name: "auction_group_item[group_benefit_type]" %>
         </div>
       </div>
-      <div class="yui3-u-1-8">
+      <div class="yui3-u-1-8 pt-2">
         <%= button_tag 'Adicionar', type: :button,
                        :class => 'button add-nested-record field-without-label',
                        'data-template' => 'auction_group_items_template',
@@ -96,7 +98,7 @@
                  purchase_type: p.object.purchase_type,
                  quantity: p.object.quantity,
                  group_form: p.object.group_form,
-                 group: p.object.group,
+                 group_i: p.object.group,
                  f: p %>
     <% end %>
     </tbody>
@@ -115,7 +117,7 @@
                  purchase_type: "{{purchase_type}}",
                  quantity: "{{quantity}}",
                  group_form: "{{group_form}}",
-                 group: "{{group}}",
+                 group_i: "{{group}}",
                  f: p %>
     <% end %>
   <% end %>
