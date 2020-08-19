@@ -11,8 +11,8 @@
   </thead>
 
   <tbody>
-    <% resource.items.each_with_index do |item, index| %>
-      <%= render 'items', item: item, index: index %>
+    <% trading.items.each_with_index do |item, index| %>
+      <%= render 'purchase_process_tradings/items', item: item, index: index %>
     <% end %>
   </tbody>
 </table>
