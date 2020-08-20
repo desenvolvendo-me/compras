@@ -73,7 +73,7 @@
 
     <div id="tab-judgment-commission"><%= render 'judgment_commission_advices', :f => f %></div>
 
-    <% unless f.object.decorator.disabled_negotiation_message %>
+    <% unless f.object.decorator.disabled_negotiation_message && f.object.trading? %>
       <div id="tab-ratifications"><%= render 'licitation_process_ratifications', :f => f %></div>
     <% end %>
   <% end %>
