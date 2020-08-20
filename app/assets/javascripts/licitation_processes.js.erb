@@ -194,10 +194,9 @@ $(document).ready(function () {
             itemtotalValue = money_pt(numberWithDelimiter(itemUnitPrice * totalQuantity));
         itemUnitPrice = money_pt(itemUnitPrice);
 
-        record.find("td.item-quantity").text(totalQuantity);
+
         record.find('input.item-quantity').val(totalQuantity);
 
-        record.find("td.item-unit-price").text(itemUnitPrice);
         record.find('input.item-unit-price').val(itemUnitPrice);
 
         record.find("td.item-total-value").text(itemtotalValue);
@@ -252,7 +251,6 @@ $(document).ready(function () {
     });
 
     $("#licitation_process_purchase_solicitation_id").on("change", function (event, purchaseSolicitation) {
-
         if (!purchaseSolicitation) {
             purchaseSolicitation = {};
         }
