@@ -33,7 +33,7 @@
       </thead>
 
       <tbody>
-      <%= f.association :items, collection: localized(f.object.items) do |a| %>
+      <%= f.association :items, collection: localized(f.object.items.ordered_by_lot_material) do |a| %>
         <% (column_names + extra_data).each do |column_name| %>
           <%= a.full_error column_name %>
         <% end %>
