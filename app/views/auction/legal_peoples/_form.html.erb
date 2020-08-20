@@ -1,0 +1,12 @@
+<div id="personable-type">
+  <%= f.input :personable_type, as: :hidden, input_html:{ value: f.object.personable_type }%>
+</div>
+
+<div id="personable">
+  <% if f.object.personable_type == PersonableType::INDIVIDUAL  %>
+    <%= render 'individuals/form', :f => f %>
+  <%elsif f.object.personable_type == PersonableType::COMPANY  %>
+    <%= render 'companies/form', :f => f %>
+  <% end %>
+</div>
+
