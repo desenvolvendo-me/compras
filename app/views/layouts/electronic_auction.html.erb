@@ -58,6 +58,7 @@
       .banner{
         position: absolute;
         left: 93%;
+        top: 0.5%
       }
     #sidebarMenu{
   float: left;
@@ -174,7 +175,7 @@
               <div class="banner">
                 <%= prefecture_image %>
               </div>
-              <div class="main-content w-100">
+              <div class="main-content w-100 pt-5">
                 <% unless controller_name.eql? "bookmarks" %>
                   <%= yield %>
                 <% else %>
