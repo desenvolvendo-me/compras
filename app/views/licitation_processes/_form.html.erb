@@ -191,7 +191,7 @@
     }
   });
 
-  <% unless resource.updateable? && resource.licitation_process_ratifications.empty? %>
+  <% unless resource.updateable? && resource.licitation_process_ratifications.reject(&:new_record?).empty? %>
   $(function(){
     $('form.licitation_process [data-disabled]').on('click', function(event){
       event.stopImmediatePropagation();
