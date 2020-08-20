@@ -69,20 +69,30 @@
 
 </div>
 <script>
-  $("#purchase_solicitation_items_records").on('keyup', '.items_quantity', function(){
-    var unit_price = parseFloat($(this).closest('tr').find('td.unit_price').html()) || 0,
-      quantity = parseFloat(parsePtBrFloat($(this).val())),
-      $estimated_total_price = $(this).closest('tr').find('td.estimated_total_price'),
-      total_value = 0.0;
+  $("#purchase_solicitation_items_records")
+    .on('keyup', '.items_quantity', function(){
+      var unit_price = parseFloat($(this).closest('tr').find('td.unit_price').html()) || 0,
+        quantity = parseFloat(parsePtBrFloat($(this).val())),
+        $estimated_total_price = $(this).closest('tr').find('td.estimated_total_price'),
+        total_value = 0.0;
 
-    $estimated_total_price.html((unit_price * quantity).toFixed(2))
+      $estimated_total_price.html((unit_price * quantity).toFixed(2))
 
-    $.each($("#purchase_solicitation_items_records td.estimated_total_price"), function(index, el){
-      total_value += parseFloat($(this).html())
+      $.each($("#purchase_solicitation_items_records td.estimated_total_price"), function(index, el){
+        total_value += parseFloat($(this).html())
+      });
+
+      $("#purchase_solicitation_total_items_value").val(numberWithDelimiter(total_value));
+    })
+    .on("nestedGrid:uniqueError", function(event, name, value){
+      const $uniqItem = $(this).find("[name$='["+name+"]'][value='"+value+"']");
+      const $item = $uniqItem.closest('tr').find('.items_quantity').eq(0);
+      $('html, body').animate({
+        scrollTop: $item.offset().top + 'px'
+      }, 'fast', function(){
+        $item.focus();
+      });
     });
-
-    $("#purchase_solicitation_total_items_value").val(numberWithDelimiter(total_value));
-  });
 
   $(".btn_control").click(function(){
     $(".items_fields").show();
@@ -93,6 +103,8 @@
     $(".items_fields").show();
     $(".btn_control").hide();
   })
+
+
 </script>
 
 <style>
