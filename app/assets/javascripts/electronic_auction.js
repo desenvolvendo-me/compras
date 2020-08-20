@@ -26,6 +26,7 @@
 //= require compras/unico/nobe
 //= require compras/unico/menu
 //= require compras/unico/modal_info_link
+//= require compras/custom_alert
 
 /** Unico Assets **/
 //= require underscore

@@ -4,6 +4,7 @@
 
   <div class="nested-fields add-margin-bottom">
     <%= hidden_field_tag :item_id, nil, :name => 'auction_item[id]' %>
+    <%= hidden_field_tag :auction_id, nil, :name => 'auction_item[auction_id]' %>
     <%= hidden_field_tag :code, nil, :name => 'auction_item[code]' %>
     <%= hidden_field_tag :quantity, nil, :name => 'auction_item[quantity]' %>
     <%= hidden_field_tag :auction_id, nil, :name => 'auction_item[auction_id]' %>
@@ -28,10 +29,13 @@
     </div>
 
     <div class="yui3-g mt-4">
-      <div class="yui3-u-1-2">
+      <div class="yui3-u-1-3">
         <%= f.input :group_lot, as: :fake, :required => true %>
       </div>
-      <div class="yui3-u-1-2">
+      <div class="yui3-u-1-3">
+        <%= f.input :quantity, as: :fake, required: true %>
+      </div>
+      <div class="yui3-u-1-3">
         <%= f.input :reference_unit, as: :fake, disabled: true %>
       </div>
     </div>
