@@ -11,7 +11,7 @@
     <%= f.button :destroy, 'Excluir', 'data-disabled' => not_destroyable_message %>
   <% end %>
 
-  <%= f.button :back %>
+  <%= link_to 'Voltar', auction_auctions_path, class:'button' %>
 </div>
 <style>
   .button.negative{

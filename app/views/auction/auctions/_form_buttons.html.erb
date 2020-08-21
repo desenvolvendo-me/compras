@@ -1,5 +1,7 @@
 <div class="buttons">
-  <%= f.button :back %>
+   <%= link_to "Visualizar", resource_path(resource), class: 'btn btn-primary' %>
+   <%= link_to "Voltar", auction_auctions_path, class: 'btn btn-secundary' %>
+  
 
   <% if f.object.persisted? && can?(:destroy, main_controller_name) %>
     <%= f.button :destroy, 'data-disabled' => not_destroyable_message %>
