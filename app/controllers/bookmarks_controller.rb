@@ -15,7 +15,7 @@ class BookmarksController < CrudController
     # keep flash messages because bookmarks#show is the root route
     # and we can receive some flash here like from sign in page.
     flash.keep
-
+    byebug
     redirect_to empty_bookmark_path
   end
 
