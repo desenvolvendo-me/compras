@@ -11,7 +11,7 @@
     <% collection.each do |resource| %>
       <tr id="<%= dom_id resource %>">
         <% resource_class.decorator.header_attributes.each do |field| %>
-          <td>
+          <td class="td-<%= field %>">
             <% if resource_class.decorator.link?(field) %>
               <%= link_to(formatted_attribute(resource.decorator, field), edit_resource_path(resource)) %>
             <% else %>
@@ -27,5 +27,9 @@
 <style>
   .status{
     width: 10%;
+  }
+
+  .td-status{
+    color: #2a7cce;
   }
 </style>
