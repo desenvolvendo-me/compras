@@ -1,15 +1,16 @@
-<div class="actions">
-  <ul>
+<div class="button-cad">
+
+  
     <% if create? %>
-      <li>
-        <%= create_link({}, 'btn btn-primary') %>
-      </li>
+     
+        <%= create_link({}, 'btn btn-primary pull-right') %>
+      
     <% end %>
 
     <% if auction_filter? %>
-      <li>
-        <%= filter_link 'btn btn-primary' %>
-      </li>
+     
+        <%= filter_link 'btn btn-primary pull-right' %>
+    
     <% end %>
-  </ul>
+
 </div>
