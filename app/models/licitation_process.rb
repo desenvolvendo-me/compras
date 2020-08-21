@@ -112,6 +112,7 @@ class LicitationProcess < Compras::Model
 
   accepts_nested_attributes_for :judgment_commission_advice, allow_destroy: true, reject_if: proc { |att| att['year'].blank?}
 
+
   delegate :allow_negotiation?, to: :trading, allow_nil: true, prefix: true
   delegate :issuance_date, to: :judgment_commission_advice, allow_nil: true, prefix: true
   delegate :licitation_kind, :kind, :best_technique?, :technical_and_price?,
