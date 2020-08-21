@@ -3,7 +3,8 @@ class Auction < Compras::Model
                   :judment_form,:covid_law,:purchase_value,:items_quantity, :group_items_attributes,
                   :object,:object_management,:employee_id, :items_attributes, :sensitive_value, :variation_type, :minimum_interval,
                   :decree_treatment, :document_edict, :disclosure_date, :responsible_dissemination_id, :notice_availability,
-                  :proposal_delivery, :bid_opening, :internet_address, :city, :neighborhood, :street, :telephone, :cell_phone
+                  :proposal_delivery, :bid_opening, :internet_address, :city, :neighborhood, :street, :telephone, :cell_phone,
+                  :auction_support_teams_attributes
 
   attr_modal :process_number, :proposal_delivery, :bid_opening
 
@@ -13,6 +14,7 @@ class Auction < Compras::Model
   has_many :items, class_name: 'AuctionItem'
   has_many :group_items, class_name: 'AuctionGroupItem'
   has_many :creditor_proposals, class_name: 'AuctionCreditorProposal'
+  has_many :auction_support_teams
 
   mount_uploader :document_edict, UnicoUploader
 
@@ -23,6 +25,7 @@ class Auction < Compras::Model
 
   accepts_nested_attributes_for :items, :allow_destroy => true
   accepts_nested_attributes_for :group_items, :allow_destroy => true
+  accepts_nested_attributes_for :auction_support_teams, :allow_destroy => true
 
   validates :year, :mask => "9999", presence: true
   validates :licitation_number, presence: true
