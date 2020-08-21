@@ -8,17 +8,17 @@
   </td>
 
   <td class="lot"><%= item.lot %></td>
-  <td class="bid_creditor"><%= item.decorator.lowest_bid_creditor %></td>
-  <td class="bid_amount"><%= item.decorator.lowest_bid_amount %></td>
-  <td><%= item.decorator.lowest_proposal_creditor %></td>
   <td><%= item.decorator.lowest_proposal_amount %></td>
+  <td><%= item.decorator.lowest_proposal_creditor %></td>
+  <td class="bid_amount"><%= item.decorator.lowest_bid_amount %></td>
+  <td class="bid_creditor"><%= item.decorator.lowest_bid_creditor %></td>
   <td><%= text_field_tag :reduction_rate_value, item.decorator.reduction_rate_value, class: 'string decimal', 'data-decimal' => true %></td>
   <td><%= text_field_tag :reduction_rate_percent, item.decorator.reduction_rate_percent, class: 'string decimal', 'data-decimal' => true %></td>
-  <td><%= button_tag 'Gravar decréscimo', type: :button, class: 'button primary reduction_button' %></td>
-  <td>
-    <%= link_to 'Desempate ficto', new_purchase_process_trading_item_bid_benefited_path(item_id: item),
-                'data-url' => new_purchase_process_trading_item_bid_benefited_path,
-                id: 'benefited_bid', class: 'button primary', 'data-disabled' => item.decorator.benefited_bid_message %>
-  </td>
   <td class="status"><%= item.status_humanize %></td>
+  <td><%= button_tag 'Gravar Decréscimo', type: :button, class: 'button primary reduction_button small-button' %></td>
+  <td>
+    <%= link_to 'Desempate Fictício', new_purchase_process_trading_item_bid_benefited_path(item_id: item),
+                'data-url' => new_purchase_process_trading_item_bid_benefited_path,
+                id: 'benefited_bid', class: 'button primary small-button', 'data-disabled' => item.decorator.benefited_bid_message %>
+  </td>
 </tr>
