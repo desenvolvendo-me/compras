@@ -3,29 +3,18 @@ class Auction < Compras::Model
                   :judment_form, :covid_law, :purchase_value, :items_quantity, :group_items_attributes,
                   :object, :object_management, :employee_id, :items_attributes, :sensitive_value, :variation_type, :minimum_interval,
                   :decree_treatment, :document_edict, :disclosure_date, :responsible_dissemination_id, :notice_availability,
-<<<<<<< HEAD
-                  :proposal_delivery, :bid_opening, :internet_address, :city, :neighborhood, :street, :telephone, :cell_phone,
-                  :auction_support_teams_attributes
-=======
                   :proposal_delivery, :bid_opening, :internet_address, :city,
                   :neighborhood, :street, :telephone, :cell_phone, :user_id
->>>>>>> adicionando user no pregao
 
   attr_modal :process_number, :proposal_delivery, :bid_opening
 
   belongs_to :employee
   belongs_to :user
   belongs_to :responsible_dissemination, class_name: "Employee"
-<<<<<<< HEAD
-  has_many :items, class_name: 'AuctionItem'
-  has_many :group_items, class_name: 'AuctionGroupItem'
-  has_many :creditor_proposals, class_name: 'AuctionCreditorProposal'
-  has_many :auction_support_teams
-=======
   has_many :items, class_name: "AuctionItem"
   has_many :group_items, class_name: "AuctionGroupItem"
   has_many :creditor_proposals, class_name: "AuctionCreditorProposal"
->>>>>>> adicionando user no pregao
+  has_many :auction_support_teams
 
   mount_uploader :document_edict, UnicoUploader
 
