@@ -65,7 +65,7 @@ pt-BR:
         lot: "Lote"
         quantity: "Quantidade"
         reference_unit: "Unidade"
-        unit_price: "Valor unitário máximo"
+        unit_price: "Valor unitário"
         additional_information: "Informações complementares"
         estimated_total_price: "Valor total"
         material: "Material"

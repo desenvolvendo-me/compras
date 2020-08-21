@@ -15,8 +15,8 @@ class Auction::AuctionsController < Auction::BaseController
       success.html { redirect_to collection_path }
       failure.html { render :new }
 
-      success.js { render content_type: 'text/json' }
-      failure.js { render :form_errors, content_type: 'text/json', status: :unprocessable_entity }
+      success.js { render content_type: "text/json" }
+      failure.js { render :form_errors, content_type: "text/json", status: :unprocessable_entity }
     end
   end
 
@@ -25,13 +25,15 @@ class Auction::AuctionsController < Auction::BaseController
       success.html { redirect_to collection_path }
       failure.html { render :edit }
 
-      success.js { render content_type: 'text/json' }
-      failure.js { render :form_errors, content_type: 'text/json', status: :unprocessable_entity }
+      success.js { render content_type: "text/json" }
+      failure.js { render :form_errors, content_type: "text/json", status: :unprocessable_entity }
     end
   end
 
   def external_index
-
   end
 
+  def show
+    render layout: "document"
+  end
 end
