@@ -72,7 +72,6 @@ $(document).ready(function() {
   }
 
   function fillLowestBid(lowest_bid) {
-    debugger
     var bidAmount = $trading.find('input.item_chooser:checked').closest('tr').find('td.bid_amount'),
       bidCreditor = $trading.find('input.item_chooser:checked').closest('tr').find('td.bid_creditor');
 
@@ -183,7 +182,6 @@ $(document).ready(function() {
   }
 
   function fillCreditors(creditors) {
-    debugger
     var target = $trading.find('table#accreditation_creditors tbody'),
       template = $trading.find('#accreditation_creditors_template');
 
