@@ -11,9 +11,7 @@
   <%= hidden_field_tag :persist_item_url, purchase_process_trading_item_path('') %>
   <%= hidden_field_tag :trading_id, resource.id %>
 
-  <%= render 'purchase_process_tradings/reductions', item: item %>
-
-  <%= render 'purchase_process_tradings/creditors', item: item, creditors: creditors, trading: trading %>
+  <%= render 'purchase_process_tradings/creditors', item: item, creditors: creditors, trading: trading, historic: historic %>
 
   <%= render 'purchase_process_tradings/bid_form',  item: item, next_bid: next_bid, historic: historic, creditors: creditors %>
 
