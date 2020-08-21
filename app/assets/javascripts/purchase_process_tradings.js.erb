@@ -6,10 +6,13 @@ $(document).ready(function() {
   function allowNewBid(allowed) {
     if (allowed) {
       $('button#make_bid').removeAttr('data-disabled');
+      $('button#finish_dispute').removeAttr('data-disabled');
       $('#amount').attr('disabled', false);
     } else {
       $('button#make_bid').attr('data-disabled', '');
       $('button#make_bid').data('disabled', "<%= I18n.t 'purchase_process_trading.messages.make_bid_disabled_message' %>");
+      $('button#finish_dispute').attr('data-disabled', '');
+      $('button#finish_dispute').data('disabled', "<%= I18n.t 'purchase_process_trading.messages.make_bid_disabled_message' %>");
       $('#amount').attr('disabled', true);
     }
   }
@@ -154,13 +157,16 @@ $(document).ready(function() {
     });
   }
 
-  function persistBid(bidId) {
+  function persistBid(bidId, amount) {
+    if(amount === undefined)
+      amount = $trading.find('#amount').val();
+
     var url = $('#persist_bid_url').val(),
       currentBid = {
         id: bidId,
         _method: 'put',
         purchase_process_trading_item_bid: {
-          amount: $trading.find('#amount').val()
+          amount: amount
         }
       };
 
@@ -273,6 +279,17 @@ $(document).ready(function() {
 
     if ( dataDisabled.isEmpty() && bidId) {
       persistBid(bidId);
+    }
+  });
+
+  $('button#finish_dispute').on('click', function(event) {
+    event.preventDefault();
+
+    var bidId = $('#bid_id').val(),
+      dataDisabled = _($(this).attr('data-disabled'));
+
+    if ( dataDisabled.isEmpty() && bidId) {
+      persistBid(bidId, '0,00');
     }
   });
 
