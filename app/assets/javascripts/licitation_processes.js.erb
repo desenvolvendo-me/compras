@@ -72,7 +72,6 @@ $(document).ready(function () {
             $('div.type-of-removal').addClass('hidden');
             $('li.income').removeClass('hidden');
             $('label[for="licitation_process_modality_number"]').html('Nº da modalidade');
-            $('label[for="licitation_process_unit_price"]').html('Valor unitário máximo');
             $('a[href="#tab-items"]').html("Itens");
             $('#legal_reasons_tab').hide();
             $('.envelope_delivery_date').removeClass('hidden');
@@ -267,31 +266,16 @@ $(document).ready(function () {
 
     });
 
+  $("#items-records").on('nestedGrid:afterAdd', function(){
+    const nestedFields = $("#items .nested-fields");
 
-  $("#btn_add_item").on("click", function (e) {
-
-    material_id = $("#licitation_process_material_id").val();
-    lot = $("#licitation_process_lot").val();
-    material_array = new Array;
-    lot_array = new Array;
-
-    $("table#items-records input.material-id").each(function (index) {
-      material_array.push($(this).val());
+    nestedFields.find(':input').not($(".justification :input")).each(function() {
+      if ($(this).hasClass('numeric')) {
+        $(this).val('0,00');
+      } else {
+        $(this).val('');
+      }
     });
-
-    $("table#items-records input.lot").each(function (index) {
-      lot_array.push($(this).val());
-    });
-
-    material_id = material_array.indexOf(material_id);
-    lot = lot_array.indexOf(lot);
-
-    if(material_id==lot && material_id != -1 && lot!= -1){
-      alert("<%= I18n.t('errors.messages.record_already_exists') %>");
-    }else{
-        $("#btn_new_role_unique").trigger('click');
-    }
-
   });
 
 });
