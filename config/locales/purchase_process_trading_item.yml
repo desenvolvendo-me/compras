@@ -10,8 +10,8 @@ pt-BR:
         item: "Item"
         lot: "Lote"
         lowest_bid_or_proposal_amount: 'Menor proposta'
-        reduction_rate_value: "Valor mínimo entre lances"
-        reduction_rate_percent: "Percentual Minímo entre lances"
+        reduction_rate_value: "Val. Mínimo Entre Lances"
+        reduction_rate_percent: "% Minímo Entre Lances"
         trading: "Pregão"
 
   purchase_process_trading_item:
