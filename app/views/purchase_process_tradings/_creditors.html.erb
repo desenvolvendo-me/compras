@@ -10,7 +10,7 @@
     <th>Habilitado</th>
     <th>Status</th>
   </thead>
-<%raise %>
+
   <tbody>
     <% creditors.each_with_index do |accreditation_creditor, index| %>
       <%= render 'purchase_process_tradings/creditors_row',
@@ -21,7 +21,7 @@
         percent: '-',
         selected: accreditation_creditor.decorator.selected?(trading.purchase_process_id, item.item_or_lot),
         not_selected_class: accreditation_creditor.decorator.not_selected_class(trading.purchase_process_id, item.item_or_lot),
-        status: historic.where(purchase_process_accreditation_creditor_id: accreditation_creditor).try(:first).try(:status_humanize) %>
+        status: get_creditor_status(item, accreditation_creditor, historic) %>
     <% end %>
   </tbody>
 </table>

@@ -12,4 +12,10 @@ module PurchaseProcessTradingsHelper
 
     next_bid.decorator.amount_with_reduction
   end
+
+  def get_creditor_status item, accreditation_creditor, historic
+    winner = item.creditor_winner
+    return 'Vencedor' if winner.id == accreditation_creditor.creditor_id
+    historic.where(purchase_process_accreditation_creditor_id: accreditation_creditor).try(:first).try(:status_humanize)
+  end
 end
