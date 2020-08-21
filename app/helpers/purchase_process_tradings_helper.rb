@@ -15,7 +15,7 @@ module PurchaseProcessTradingsHelper
 
   def get_creditor_status item, accreditation_creditor, historic
     winner = item.creditor_winner
-    return 'Vencedor' if winner.id == accreditation_creditor.creditor_id
+    return 'Vencedor' if winner.try(:id) == accreditation_creditor.creditor_id
     historic.where(purchase_process_accreditation_creditor_id: accreditation_creditor).try(:first).try(:status_humanize)
   end
 end
