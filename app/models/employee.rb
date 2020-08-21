@@ -7,6 +7,7 @@ class Employee < Compras::Model
   belongs_to :position
 
   has_one :user, as: :authenticable
+  has_one :person, through: :individual
 
   has_many :purchase_solicitations_with_liberator, class_name: 'PurchaseSolicitation', foreign_key: :liberator_id, dependent: :restrict
   has_many :purchase_solicitations_with_responsible, class_name: 'PurchaseSolicitation', foreign_key: :responsible_id, dependent: :restrict

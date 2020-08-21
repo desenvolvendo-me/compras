@@ -1,0 +1,38 @@
+/*
+ *= require compras/report/layout
+ *= require compras/report/header
+ *= require compras/report/records
+ *= require compras/report/signature
+ */
+ table.records tr:nth-child(even) td, table.records tr.zebra td, h2.section{
+     background-color: #fff;
+ }
+ table{
+     font-size: 125%!important;
+ }
+ .btn-primary{
+    background-color: #3284B6;
+    border-color: #3284B6;
+    color: #FFF;
+ }
+ .btn{
+     padding: 10px;
+     text-decoration: none;
+     font-weight:500;
+     border-radius: 5px;
+ }
+ .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+    color: #fff;
+    background-color: #416f9e;
+    border-color: #285e8e;
+    /*set the color you want here*/
+  }
+  h1,h2,h3{
+      font-weight: bold;
+      font-size: 125%;
+  }
+  
+table.records {
+    width: 100%;
+    margin-bottom: 0px;
+}

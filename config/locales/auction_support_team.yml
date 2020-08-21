@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      auction_support_team:
+        one: "Equipe de Apoio"
+        other: "Equipes de Apoio"
+
+    attributes:
+      auction_support_team:
+        employee: "Funcionário"
+        position: "Cargo"
+        registration: "Matrícula"
