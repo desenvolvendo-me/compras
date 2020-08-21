@@ -1,0 +1,26 @@
+<div id="tradings-fields">
+<h3 align="center" style="color: red">Para encerrar os lances é necessário colocar lances zerados para declinar.</h3>
+<%= render "purchase_process_tradings/by_#{trading.kind}", trading: trading %>
+
+<div class="simple_form">
+  <%= hidden_field_tag :next_bid_url, next_bid_purchase_process_trading_item_path(item) %>
+  <%= hidden_field_tag :creditor_list, creditor_list_purchase_process_trading_item_path(item) %>
+  <%= hidden_field_tag :persist_bid_url, purchase_process_trading_item_bid_path('') %>
+  <%= hidden_field_tag :undo_last_bid_url, undo_last_bid_purchase_process_trading_item_path(item) %>
+  <%= hidden_field_tag :persist_item_url, purchase_process_trading_item_path('') %>
+  <%= hidden_field_tag :trading_id, resource.id %>
+
+  <%= render 'purchase_process_tradings/reductions', item: item %>
+
+  <%= render 'purchase_process_tradings/creditors', item: item, creditors: creditors, trading: trading %>
+
+  <%= render 'purchase_process_tradings/bid_form',  item: item, next_bid: next_bid, historic: historic, creditors: creditors %>
+
+  <%= render 'purchase_process_tradings/historic', historic: historic, trading: trading %>
+
+  <div class="buttons">
+    <%= link_to 'Voltar', edit_licitation_process_path(trading.purchase_process),
+                class: 'button' %>
+  </div>
+</div>
+</div>

@@ -22,6 +22,10 @@
         <li><a href="#tab-proposals" id="proposals">Propostas</a></li>
       <% end %>
 
+      <% if f.object.trading? %>
+        <li><a href="#tab-tradings" id="tradings">Lances</a></li>
+      <% end %>
+
       <% unless f.object.trading? %>
         <% if f.object.decorator.enabled_realignment_price? %>
           <li><a href="#tab-realignment-prices" id="realignment_prices">Realinhamento de Preços</a></li>
@@ -59,6 +63,10 @@
 
     <% if f.object.licitation? %>
       <div id="tab-proposals"><%= render 'purchase_process_proposals', :f => f %></div>
+    <% end %>
+
+    <% if f.object.trading? && f.object.decorator.disabled_trading_message.blank? %>
+      <div id="tab-tradings"><%= render 'purchase_process_tradings', :f => f %></div>
     <% end %>
 
     <% unless f.object.trading? %>
@@ -278,6 +286,14 @@
         if (disabled !== ''){
           $("#proposals").attr('data-disabled', disabled);
           $main_tab.tabs( "disable", $("#proposals").parent().index());
+        }
+      <% end %>
+
+      <% if f.object.licitation? %>
+        disabled = '<%= f.object.decorator.disabled_trading_message%>';
+        if (disabled !== ''){
+          $("#tradings").attr('data-disabled', disabled);
+          $main_tab.tabs( "disable", $("#tradings").parent().index());
         }
       <% end %>
     <% end %>

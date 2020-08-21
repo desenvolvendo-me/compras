@@ -4,7 +4,7 @@
     <th><%= PurchaseProcessTradingItemBid.human_attribute_name :number %></th>
     <th><%= PurchaseProcessTradingItemBid.human_attribute_name :item_lot %></th>
 
-    <% if resource.item? %>
+    <% if trading.item? %>
         <th><%= PurchaseProcessTradingItemBid.human_attribute_name :item %></th>
     <% end %>
 
@@ -16,8 +16,8 @@
   </thead>
 
   <tbody>
-    <% @historic.each do |bid| %>
-      <%= render 'historic_row',
+    <% historic.each do |bid| %>
+      <%= render 'purchase_process_tradings/historic_row',
         number:                 bid.number,
         round:                  bid.round,
         lot:                    bid.decorator.lot,
@@ -26,13 +26,14 @@
         creditor_company_size:  bid.accreditation_creditor.company_size,
         status:                 bid.status_humanize,
         amount:                 number_with_precision(bid.amount),
-        percent:                bid.decorator.percent %>
+        percent:                bid.decorator.percent,
+        trading:                trading%>
     <% end %>
   </tbody>
 </table>
 
 <%= mustache 'historic_template' do %>
-  <%= render 'historic_row',
+  <%= render 'purchase_process_tradings/historic_row',
     number:                 '{{number}}',
     round:                  '{{round}}',
     lot:                    '{{lot}}',
@@ -41,5 +42,6 @@
     creditor_company_size:  '{{creditor_company_size}}',
     status:                 '{{status}}',
     amount:                 '{{amount}}',
-    percent:                '{{percent}}' %>
+    percent:                '{{percent}}',
+    trading:                trading%>
 <% end %>

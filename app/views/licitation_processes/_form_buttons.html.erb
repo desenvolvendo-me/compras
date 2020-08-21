@@ -7,10 +7,6 @@
     </p>
 
     <% if f.object.trading? %>
-      <%= link_to('Lances', trading_path_helper,
-                  class: "button primary #{f.object.decorator.has_records_class([f.object.trading])}",
-                  'data-disabled' => f.object.decorator.disabled_trading_message) %>
-
       <% if f.object.trading %>
         <% if f.object.accreditation_creditors.pluck(:id).uniq.length == 1 && f.object.trading.items.all? { |item| item.status == PurchaseProcessTradingItemStatus::CLOSED }%>
           <%= link_to('Mapa de lances', report_map_of_bids_path(resource.id), class: "button primary",

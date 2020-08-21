@@ -1,6 +1,7 @@
 module LicitationProcessesHelper
   include RealignmentPricesHelper
   include LicitationProcessRatificationsHelper
+  include PurchaseProcessTradingsHelper
 
   def classification_link
     return unless resource.persisted?
@@ -84,6 +85,12 @@ module LicitationProcessesHelper
     I18n.t("other.compras.messages.#{disqualification_status(creditor)}")
   end
 
+  def initialize_trading purchase_process
+    trading = TradingCreator.create!(purchase_process)
+
+    trading.present? ? trading : purchase_process.trading
+  end
+
   private
 
   def disqualification_status(creditor)
@@ -105,5 +112,4 @@ module LicitationProcessesHelper
   def edit_title
     I18n.t("activerecord.models.licitation_process.one")
   end
-
 end
