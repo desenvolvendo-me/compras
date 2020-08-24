@@ -64,7 +64,7 @@ module LicitationProcessesHelper
   end
 
   def qualified_creditor licitation_process
-    if licitation_process.licitation?
+    if licitation_process.try(:licitation?)
       creditors_path
     else
       creditors_path(by_bidders: licitation_process.id)

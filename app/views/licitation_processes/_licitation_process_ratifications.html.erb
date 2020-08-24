@@ -23,7 +23,7 @@
   </thead>
 
   <tbody class="<%= f.sanitized_object_name %>_document_types_records">
-  <% f.object.licitation_process_ratifications.each do |process_ratification| %>
+  <% f.object.licitation_process_ratifications.reject(&:new_record?).each do |process_ratification| %>
     <tr>
       <% column_names.each do |column_name| %>
         <td>
