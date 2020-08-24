@@ -55,6 +55,8 @@ class Bidder < Compras::Model
 
   before_save :clear_invited_data, :set_default_values
   after_save :update_proposal_ranking, if: :enabled_changed?
+  after_save :set_status_licitation
+  before_save :block_changes_when_have_ratifications
 
   orderize "id DESC"
   filterize
@@ -209,4 +211,15 @@ class Bidder < Compras::Model
       proposal.unit_price = 0 unless proposal.unit_price
     end
   end
+
+  def set_status_licitation
+    PurchaseProcessStatusChanger.new(licitation_process).in_progress!
+  end
+
+  def block_changes_when_have_ratifications
+    return unless licitation_process.ratification?
+
+    raise ActiveRecord::RecordNotFound
+  end
+
 end
