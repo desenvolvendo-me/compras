@@ -149,6 +149,7 @@ class LicitationProcess < Compras::Model
   validate :purchase_solicitations_blank?
 
   before_save :set_homologation_date
+  after_save  :set_approved_status
 
   with_options :allow_blank => true do |allowing_blank|
     allowing_blank.validates :year, :mask => "9999"
@@ -438,6 +439,12 @@ class LicitationProcess < Compras::Model
   def set_homologation_date
     if self.status_changed? && self.status == PurchaseProcessStatus::APPROVED
       self.homologation_date = Date.today
+    end
+  end
+
+  def set_approved_status
+    if licitation_process_ratifications.any?
+      update_status(PurchaseProcessStatus::APPROVED)
     end
   end
 
