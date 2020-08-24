@@ -62,4 +62,15 @@ module ContractsHelper
   def get_supply_order_invoices supply_orders
     Invoice.where(supply_order_id: supply_orders.pluck(:id)).order('number, date, value DESC')
   end
+
+  def find_or_init_consumption purchase_solicitation, parent, materialID
+    item = purchase_solicitation.items.where(material_id: materialID).last
+    consumption = parent.consumption_minutes.where(purchase_solicitation_item_id: item.id)
+
+    return consumption unless consumption.blank?
+
+
+    ContractConsumptionMinute.new({purchase_solicitation_item_id: item.id, contract_id: parent.id})
+
+  end
 end

@@ -17,4 +17,20 @@ class ContractDecorator
   def contract_value
     number_with_precision super if super
   end
+
+  def contract_or_minute
+    if type_contract == ContractMinute::MINUTE
+      "ATA"
+    else
+      "Contrato"
+    end
+  end
+
+  def contract_or_minute_report
+    if type_contract == ContractMinute::MINUTE
+      "da ata"
+    else
+      "do Contrato"
+    end
+  end
 end
