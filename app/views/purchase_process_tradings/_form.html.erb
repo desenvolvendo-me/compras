@@ -1,5 +1,6 @@
 <div id="tradings-fields">
-<h3 align="center" style="color: red">Para encerrar os lances é necessário colocar lances zerados para declinar.</h3>
+<div class="title-section">Lotes do Pregão:</div>
+<div>*Selecione o Lote Desejado</div>
 <%= render "purchase_process_tradings/by_#{trading.kind}", trading: trading %>
 
 <div class="simple_form">
@@ -10,9 +11,7 @@
   <%= hidden_field_tag :persist_item_url, purchase_process_trading_item_path('') %>
   <%= hidden_field_tag :trading_id, resource.id %>
 
-  <%= render 'purchase_process_tradings/reductions', item: item %>
-
-  <%= render 'purchase_process_tradings/creditors', item: item, creditors: creditors, trading: trading %>
+  <%= render 'purchase_process_tradings/creditors', item: item, creditors: creditors, trading: trading, historic: historic %>
 
   <%= render 'purchase_process_tradings/bid_form',  item: item, next_bid: next_bid, historic: historic, creditors: creditors %>
 
@@ -24,3 +23,27 @@
   </div>
 </div>
 </div>
+
+<style>
+.title-section{
+  color: #3f6e9d;
+  font-size: 186%;
+  font-weight: bolder;
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.small-button{
+  font-size: 95.1% !important;
+}
+.creditor-status{
+  color: #3f6e9d !important;
+}
+
+.button#finish_dispute{
+  background-color: black;
+  border-color: #000000cc;
+  color: #FFF;
+  float: left;
+}
+</style>
