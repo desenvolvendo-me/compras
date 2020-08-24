@@ -8,7 +8,7 @@ class SessionsController < Devise::SessionsController
   end
 
   def new
-    flash[:alert] = params[:notice] if params[:notice].present?
+    flash[:notice] = params[:notice] if params[:notice].present?
     super
   end
 

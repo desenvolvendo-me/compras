@@ -158,3 +158,9 @@ h3.divider {
     color: #3f6e9d;
     font-size: 17px;
 }
+
+
+#flash .notice {
+  background: #E8FFEA url(/assets/notice.gif) center left no-repeat;
+  border: solid 1px #E8EAEE;
+}
