@@ -8,7 +8,7 @@ class ListPurchaseSolicitationDecorator
               :purchase_solicitation_id, :department
 
   def department
-    purchase_solicitation.department
+    purchase_solicitation.try(:department)
   end
 
 end
