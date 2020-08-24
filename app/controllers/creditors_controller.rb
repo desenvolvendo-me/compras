@@ -10,5 +10,6 @@ class CreditorsController < CrudController
   has_scope :by_ratification_and_licitation_process_id, allow_blank: true
   has_scope :by_purchasing_unit, :allow_blank => true
   has_scope :by_contract, :allow_blank => true
+  has_scope :by_bidders, :allow_blank => true
 
 end
