@@ -156,12 +156,10 @@ $(document).ready(function () {
         toogleVisibilityFieldsToTradingAndConcurrence($(this));
     });
 
-
     organizesModalities();
-    toogleVisibilityFieldsToTrading($("#licitation_process_type_of_removal"));
-    toogleVisibilityFieldsToTrading($('#licitation_process_modality'));
-    toogleVisibilityFieldsToTradingAndConcurrence($("#licitation_process_type_of_removal"));
-    toogleVisibilityFieldsToTradingAndConcurrence($('#licitation_process_modality'));
+    var $ele = $('#licitation_process_modality:visible, #licitation_process_type_of_removal:visible');
+    toogleVisibilityFieldsToTrading($ele);
+    toogleVisibilityFieldsToTradingAndConcurrence($ele);
     setBudgetAllocationSource();
 
 //   *************** inicio  ***************
