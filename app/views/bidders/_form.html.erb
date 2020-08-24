@@ -1,4 +1,4 @@
-<div class="yui3-g">
+<div class="yui3-g" style="margin-top: 3rem">
   <div class="yui3-u-1-3">
     <%= f.input :licitation_process, :disabled => true %>
   </div>
@@ -6,14 +6,30 @@
   <div class="yui3-u-1-3">
     <%= f.input :licitation_process_process_date, :disabled => true, :input_html => { :value => f.object.decorator.process_date } %>
   </div>
+
+  <div class="yui3-u-1-3">
+    <%= f.input :habilitation_date %>
+  </div>
 </div>
 
 <div class="yui3-g">
-  <div class="yui3-u-1">
+  <div class="yui3-u-2-5">
       <%= f.input :creditor, as: :auto_complete, required: true,
-                  hidden_field: :creditor_id,
-                  source_path: creditors_path(by_licitation_process: f.object.decorator.by_licitation_process ) %>
+                  hidden_field: :creditor_id%>
   </div>
+
+  <div class="yui3-u-1-6 checkbox">
+    <%= f.input :renounce_resource  %>
+  </div>
+
+  <div class="yui3-u-1-4 checkbox">
+    <%= f.input :recording_attendance %>
+  </div>
+
+  <div class="yui3-u-1-8 checkbox">
+    <%= f.input :enabled %>
+  </div>
+
 </div>
 
 <div class="yui3-g">
@@ -43,24 +59,6 @@
   </div>
 <% end %>
 
-<div class="yui3-g">
-
-  <div class="yui3-u-1-4">
-    <%= f.input :renounce_resource  %>
-  </div>
-
-  <div class="yui3-u-1-4">
-    <%= f.input :recording_attendance %>
-  </div>
-
-  <div class="yui3-u-1-4">
-    <%= f.input :enabled %>
-  </div>
-
-  <div class="yui3-u-1-4">
-    <%= f.input :habilitation_date %>
-  </div>
-</div>
 
 <div class="tabs">
   <ul>
@@ -157,3 +155,9 @@
     }
   });
 </script>
+
+<style>
+  .checkbox{
+    margin-top: 38px
+  }
+</style>
