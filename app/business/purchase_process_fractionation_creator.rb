@@ -5,7 +5,7 @@ class PurchaseProcessFractionationCreator
 
   def initialize(purchase_process, options = {})
     @purchase_process = purchase_process
-    @repository       = options.fetch(:repository) { PurchaseProcessFractionation }
+    @repository = options.fetch(:repository) { PurchaseProcessFractionation }
   end
 
   def create!
@@ -23,13 +23,13 @@ class PurchaseProcessFractionationCreator
   attr_reader :purchase_process, :repository
 
   def fill_fractionation(item)
-    fractionation = make_fractionation(item.material)
+    fractionation = make_fractionation(item.material_class)
 
     if fractionation.new_record?
-      fractionation.object_type     = purchase_process.object_type
-      fractionation.modality        = purchase_process.modality
+      fractionation.object_type = purchase_process.object_type
+      fractionation.modality = purchase_process.modality
       fractionation.type_of_removal = purchase_process.type_of_removal
-      fractionation.value           = 0.0
+      fractionation.value = 0.0
     end
 
     fractionation
