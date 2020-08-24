@@ -4,7 +4,8 @@
   <td class="item-material"><%= material %></td>
 
   <td class="item-creditor">
-    <%= f.input :creditor, as: :auto_complete, input_html:{value: creditor}, label: false %>
+    <%= f.input :creditor, as: :auto_complete, input_html:{value: creditor}, label: false,
+                source_path: qualified_creditor(f.object.try(:licitation_process)) %>
   </td>
 
   <td class="item-reference-unit text-center"><%= reference_unit %></td>
