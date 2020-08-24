@@ -3,10 +3,23 @@
 </div>
 
 <div id="personable">
-  <% if f.object.personable_type == PersonableType::INDIVIDUAL  %>
-    <%= render 'individuals/form', :f => f %>
-  <%elsif f.object.personable_type == PersonableType::COMPANY  %>
     <%= render 'companies/form', :f => f %>
-  <% end %>
 </div>
+
+<script>
+var cnpj = $('#person_personable_attributes_cnpj');
+  cnpj.on('change', function(data){
+  
+  console.log(data);
+  console.log();
+   $.get("<%= auction_check_auction_legal_people_path()%>"+"?cnpj="+cnpj.val(), function(data) {
+        console.log("deu");
+        console.log(data);
+        if(data== null){
+          window.location = "<%= root_url+new_user_session_path(notice: 'teste') %>" 
+        }
+      }, 'json');
+
+  });
+</script>
 

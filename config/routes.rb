@@ -997,6 +997,7 @@ Compras::Application.routes.draw do
 
     get "legal_peoples", to: "people#index", as: "auction_legal_peoples", by_legal_people: true
     get "legal_peoples/new", to: "people#new", as: "new_auction_legal_people", by_legal_people: true
+    get "legal_peoples/check", to: "people#check", as: "check_auction_legal_people"
 
     resource :bids do
       collection do
