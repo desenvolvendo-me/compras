@@ -372,10 +372,10 @@ $(document).ready(function () {
   });
 
   function generateSupplyOrder($el){
-    debugger
     var licitation_process = $('#supply_request_licitation_process_id').val(),
       contract = $("#supply_request_contract_id").val(),
       purchase_solicitation = $("#supply_request_purchase_solicitation_id").val(),
+      id = $("#supply_request_id").val(),
       items = [],
       input_items='';
 
@@ -392,6 +392,7 @@ $(document).ready(function () {
       .append($('<input type="hidden" name="supply_order[licitation_process_id]">').val(licitation_process))
       .append($('<input type="hidden" name="supply_order[contract_id]">').val(contract))
       .append($('<input type="hidden" name="supply_order[purchase_solicitation_id]">').val(purchase_solicitation))
+      .append($('<input type="hidden" name="supply_order[supply_request_id]">').val(id))
       .append(input_items)
       .appendTo($(document.body))
       .submit();
