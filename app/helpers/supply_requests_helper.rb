@@ -12,7 +12,7 @@ module SupplyRequestsHelper
    resul = resul && can?(:destroy, main_controller_name)
    resul = resul && !obj.updatabled
    resul = resul && !obj.supply_request_attendances.any?
-   resul = resul && obj.user == current_user
+   resul = resul && (obj.try(:purchase_solicitation).try(:purchasing_unit_id).in?(current_user.purchasing_unit_ids) || obj.user == current_user)
 
    resul
  end
