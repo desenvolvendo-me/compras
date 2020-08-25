@@ -372,14 +372,20 @@ $(document).ready(function () {
   });
 
   function generateSupplyOrder($el){
+    debugger
     var licitation_process = $('#supply_request_licitation_process_id').val(),
       contract = $("#supply_request_contract_id").val(),
       purchase_solicitation = $("#supply_request_purchase_solicitation_id").val(),
-      items = $(".material-id").map(function(){ return $el.val() }).toArray(),
+      items = [],
       input_items='';
 
+    $.each($("#items-records tbody tr.record"), function(){
+      items.push([$(this).find('.material-id').val(), $(this).find('.requested_quantity').val()])
+    });
+
     $.each(items, function(index, el){
-      input_items += "<input type='hidden' name='supply_order[item_ids]["+ index +"]'  value="+el+">"
+      input_items += "<input type='hidden' name='supply_order[item]["+ index +"][id]'  value="+el[0]+">";
+      input_items += "<input type='hidden' name='supply_order[item]["+ index +"][quantity]'  value="+el[1]+">"
     });
 
     $("<form action="+ Routes.new_supply_order +" method='GET'/>")
