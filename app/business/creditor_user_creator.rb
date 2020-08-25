@@ -1,9 +1,9 @@
 class CreditorUserCreator
   def initialize(price_collection, context, options = {})
     @price_collection = price_collection
-    @context          = context
-    @user_repository  = options.fetch(:user_repository) { User }
-    @mailer           = options.fetch(:mailer) { PriceCollectionMailer }
+    @context = context
+    @user_repository = options.fetch(:user_repository) { User }
+    @mailer = options.fetch(:mailer) { PriceCollectionMailer }
   end
 
   def generate
@@ -12,14 +12,14 @@ class CreditorUserCreator
         mailer.invite_registered_creditor(proposal.creditor,
                                           price_collection,
                                           context.current_prefecture,
-                                          context.current_customer).deliver
+                                          context.current_customer).deliver if Rails.env.production?
       else
         user = create_user(proposal.creditor)
 
         if user.persisted?
-          mailer.invite_new_creditor(user, price_collection).deliver
+          mailer.invite_new_creditor(user, price_collection).deliver if Rails.env.production?
         else
-          price_collection.errors.add(:email, user.errors.to_a.join(', '))
+          price_collection.errors.add(:email, user.errors.to_a.join(", "))
 
           return false
         end
