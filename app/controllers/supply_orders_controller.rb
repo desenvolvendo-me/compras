@@ -9,8 +9,8 @@ class SupplyOrdersController < CrudController
       object.licitation_process_id = params[:supply_order][:licitation_process_id]
       object.contract_id = params[:supply_order][:contract_id]
       object.purchase_solicitation_id = params[:supply_order][:purchase_solicitation_id]
-      params[:supply_order][:item_ids]&.each_pair do |index, item|
-        object.items.new(material_id: item)
+      params[:supply_order][:item]&.each_pair do |index, item|
+        object.items.new(material_id: item[:id], quantity: item[:quantity])
       end
     else
       super
