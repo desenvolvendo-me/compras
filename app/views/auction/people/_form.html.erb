@@ -1,10 +1,12 @@
 <div id="personable-type">
   <%= f.input :personable_type, as: :hidden, input_html:{ value: f.object.personable_type }%>
 </div>
+<div id="content">
+<h2> Cadastro de Fornecedor</h2>
 <div id="personable">
     <%= render 'companies/form', :f => f %>
 </div>
-
+</div>
 <script>
 var cnpj = $('#person_personable_attributes_cnpj');
   cnpj.on('change', function(data){
