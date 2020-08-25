@@ -6,13 +6,15 @@ class Company < Persona::Company
 
   attr_accessor :cnae_ids
 
-  delegate :city, :zip_code, to: :address, allow_nil: true
-
-  #validate :at_least_one_partner
-  validate :cnpj, uniqueness: true
   belongs_to :main_cnae, class_name: "::Cnae"
 
+  delegate :city, :zip_code, to: :address, allow_nil: true
   delegate :code, to: :main_cnae, prefix: true, allow_nil: true
+
+  #validate :at_least_one_partner
+  validates :cnpj, uniqueness: true
+  validates :main_cnae, presence: true
+
 
   orderize
   filterize
