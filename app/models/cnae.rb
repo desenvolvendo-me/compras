@@ -11,6 +11,10 @@ class Cnae < Unico::Cnae
 
   scope :cnaes_remainder, lambda { |ids| where { id.not_in ids } }
 
+  scope :term, lambda { |q|
+    where { name.like("%#{q}%") }
+  }
+
   def to_s
     name
   end

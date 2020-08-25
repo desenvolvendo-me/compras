@@ -1,6 +1,6 @@
 class Auction::AuctionsController < Auction::BaseController
-  skip_before_filter :authenticate_user!, :only => [:external_index, :new, :show, :index]
-  skip_before_filter :authorize_resource!, :only => [:external_index, :new, :show, :index]
+  skip_before_filter :authenticate_user!, :except => [:create, :destroy]
+  skip_before_filter :authorize_resource!, :except => [:create, :destroy]
   layout "electronic_auction"
 
   def new
