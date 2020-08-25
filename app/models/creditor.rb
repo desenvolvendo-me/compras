@@ -30,7 +30,7 @@ class Creditor < Persona::Creditor
   validates :documents, :no_duplication => :document_type_id
   validate :person_in_representatives
   validate :secondary_cnae_in_main_cnae
-  validate :representatives?
+  # validate :representatives?
   validate :licitation_processes?
 
   before_save :clean_fields_when_is_no_autonomous
@@ -153,15 +153,15 @@ class Creditor < Persona::Creditor
     query.order(:id)
   end
 
-  def representatives?
-    if self.representatives.blank?
-      errors.add(:representative_person, :blank)
-    end
-  end
+  # def representatives?
+  #   if self.representatives.blank?
+  #     errors.add(:representative_person, :blank)
+  #   end
+  # end
 
   def licitation_processes?
     if self.licitation_processes.where(status: ["in_progress", "waiting_for_open"]).any?
-      errors.add(:representatives, "Não poder ser alterado, pois existem licitações com o status Em Andamento ou Aguardando Abertura com o credor")
+      errors.add(:representatives, "Não poder ser alterado, pois existem licitações com o status Em Andamento ou Aguardando Abertura com o fornecedor")
     end
   end
 
