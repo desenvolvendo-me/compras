@@ -8,4 +8,12 @@ class Auction::PeopleController < Auction::BaseController
 
     render json: company
   end
+
+  def new
+    if current_user
+      company = Company.where(user_id: current_user.id).last
+      redirect_to edit_company_path(company.id) if company
+    end
+    super
+  end
 end
