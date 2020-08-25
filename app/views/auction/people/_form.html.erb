@@ -8,6 +8,7 @@
 </div>
 </div>
 <script>
+<% unless current_user %>
 var cnpj = $('#person_personable_attributes_cnpj');
   cnpj.on('change', function(data){
   
@@ -24,5 +25,6 @@ var cnpj = $('#person_personable_attributes_cnpj');
       }, 'json');
 
   });
+  <% end %>
 </script>
 
