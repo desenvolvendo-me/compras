@@ -122,11 +122,11 @@
       params = {
         enabled_by_licitation: licitationProcessId,
         <% if f.object.licitation_process_licitation? %>
-        <% if f.object.licitation_process_trading? %>
-        won_calculation_for_trading: licitationProcessId,
-        <% else %>
-        won_calculation: licitationProcessId,
-        <% end %>
+          <% if f.object.licitation_process_trading? %>
+          won_calculation_for_trading: licitationProcessId,
+          <% else %>
+          won_calculation: licitationProcessId,
+          <% end %>
         without_licitation_ratification: licitationProcessId,
         <% else %>
         without_direct_purchase_ratification: licitationProcessId
@@ -136,9 +136,9 @@
 
     urlModal += jQuery.param(params);
 
-    $("[name$='[creditor]']").data("modal-url", urlModal).
+    $("#licitation-process-fields [name$='[creditor]']").data("modal-url", urlModal).
     attr("disabled", false);
 
-    $("[name$='[licitation_process]']").attr('disabled', true);
+    $("#licitation-process-fields [name$='[licitation_process]']").attr('disabled', true);
   });
 </script>

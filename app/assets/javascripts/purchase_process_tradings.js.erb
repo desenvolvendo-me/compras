@@ -1,16 +1,18 @@
 $(document).ready(function() {
   const $trading = $("#tradings-fields");
-  const $itemChecked = $trading.find('input.item_chooser:checked')
 
   $trading.find('input.item_chooser:first').attr('checked', true).trigger('change');
 
   function allowNewBid(allowed) {
     if (allowed) {
       $('button#make_bid').removeAttr('data-disabled');
+      $('button#finish_dispute').removeAttr('data-disabled');
       $('#amount').attr('disabled', false);
     } else {
       $('button#make_bid').attr('data-disabled', '');
       $('button#make_bid').data('disabled', "<%= I18n.t 'purchase_process_trading.messages.make_bid_disabled_message' %>");
+      $('button#finish_dispute').attr('data-disabled', '');
+      $('button#finish_dispute').data('disabled', "<%= I18n.t 'purchase_process_trading.messages.make_bid_disabled_message' %>");
       $('#amount').attr('disabled', true);
     }
   }
@@ -73,8 +75,8 @@ $(document).ready(function() {
   }
 
   function fillLowestBid(lowest_bid) {
-    var bidAmount = $itemChecked.closest('tr').find('td.bid_amount'),
-        bidCreditor = $itemChecked.closest('tr').find('td.bid_creditor');
+    var bidAmount = $trading.find('input.item_chooser:checked').closest('tr').find('td.bid_amount'),
+      bidCreditor = $trading.find('input.item_chooser:checked').closest('tr').find('td.bid_creditor');
 
     if ( _.isEmpty(lowest_bid) ) {
       lowest_bid.amount = '-';
@@ -86,20 +88,20 @@ $(document).ready(function() {
   }
 
   function fillItem(item) {
-    var status = $itemChecked.closest('tr').find('td.status');
+    var status = $trading.find('input.item_chooser:checked').closest('tr').find('td.status');
 
     fillLowestBid(item.lowest_bid);
 
     status.text(item.status);
 
-    $trading.find('#reduction_rate_value').val(item.reduction_rate_value);
-    $trading.find('#reduction_rate_percent').val(item.reduction_rate_percent);
+//    $trading.find('#reduction_rate_value').val(item.reduction_rate_value);
+//    $trading.find('#reduction_rate_percent').val(item.reduction_rate_percent);
   }
 
   function getNextBidFromServer() {
     var itemId = $trading.find('#item_id').val(),
-        oldUrl = $trading.find('#next_bid_url').val(),
-        newUrl = oldUrl.replace(/\/\d+\//, '/' + itemId + '/');
+      oldUrl = $trading.find('#next_bid_url').val(),
+      newUrl = oldUrl.replace(/\/\d+\//, '/' + itemId + '/');
 
     $.ajax({
       url: newUrl,
@@ -116,8 +118,8 @@ $(document).ready(function() {
 
   function processPersistErrors(errors) {
     var template     = $trading.find('#error_template'),
-        error_dialog = $trading.find('#errors_dialog'),
-        target       = error_dialog.find('#errors_content');
+      error_dialog = $trading.find('#errors_dialog'),
+      target       = error_dialog.find('#errors_content');
 
     target.empty();
 
@@ -131,8 +133,8 @@ $(document).ready(function() {
 
   function addBidToHistoric(bid, append) {
     var target   = $('table#historic tbody'),
-        template = $('#historic_template'),
-        content  = template.mustache(bid);
+      template = $('#historic_template'),
+      content  = template.mustache(bid);
 
     if (append) {
       target.append( content );
@@ -155,15 +157,18 @@ $(document).ready(function() {
     });
   }
 
-  function persistBid(bidId) {
+  function persistBid(bidId, amount) {
+    if(amount === undefined)
+      amount = $trading.find('#amount').val();
+
     var url = $('#persist_bid_url').val(),
-        currentBid = {
-          id: bidId,
-          _method: 'put',
-          purchase_process_trading_item_bid: {
-            amount: $trading.find('#amount').val()
-          }
-        };
+      currentBid = {
+        id: bidId,
+        _method: 'put',
+        purchase_process_trading_item_bid: {
+          amount: amount
+        }
+      };
 
     $.ajax({
       url: url + bidId,
@@ -184,7 +189,7 @@ $(document).ready(function() {
 
   function fillCreditors(creditors) {
     var target = $trading.find('table#accreditation_creditors tbody'),
-        template = $trading.find('#accreditation_creditors_template');
+      template = $trading.find('#accreditation_creditors_template');
 
     target.empty();
 
@@ -195,7 +200,7 @@ $(document).ready(function() {
 
   function getCreditors(itemId) {
     var oldUrl = $('#creditor_list').val(),
-        newUrl = oldUrl.replace(/\/\d+\//, '/' + itemId + '/');
+      newUrl = oldUrl.replace(/\/\d+\//, '/' + itemId + '/');
 
     $.ajax({
       url: newUrl,
@@ -210,7 +215,7 @@ $(document).ready(function() {
 
   function undoLastBid(itemId) {
     var oldUrl = $('#undo_last_bid_url').val(),
-        newUrl = oldUrl.replace(/\/\d+\//, '/' + itemId + '/');
+      newUrl = oldUrl.replace(/\/\d+\//, '/' + itemId + '/');
 
     $.ajax({
       url: newUrl,
@@ -227,16 +232,16 @@ $(document).ready(function() {
     });
   }
 
-  function submitReductions(itemId) {
+  function submitReductions(itemId, $button) {
     var url = $trading.find('#persist_item_url').val(),
-        percentData = {
-          id: itemId,
-          _method: 'put',
-          purchase_process_trading_item: {
-            reduction_rate_value: $trading.find('#reduction_rate_value').val(),
-            reduction_rate_percent: $trading.find('#reduction_rate_percent').val()
-          }
-        };
+      percentData = {
+        id: itemId,
+        _method: 'put',
+        purchase_process_trading_item: {
+          reduction_rate_value: $button.closest('tr').find('#reduction_rate_value').val(),
+          reduction_rate_percent: $button.closest('tr').find('#reduction_rate_percent').val()
+        }
+      };
 
     $.ajax({
       url: url + itemId,
@@ -251,46 +256,57 @@ $(document).ready(function() {
         var errors = $.parseJSON(xhr.responseText).errors;
 
         $trading.find('#reduction_rate_value').val('0,00'),
-        $trading.find('#reduction_rate_percent').val('0,00')
+          $trading.find('#reduction_rate_percent').val('0,00')
 
         processPersistErrors(errors);
       }
     });
   }
 
-  $('button#reduction_button').on('click', function(event) {
+  $('button.reduction_button').on('click', function(event) {
     event.preventDefault();
 
-    var itemId = $trading.find('#item_id').val();
+    var itemId = $(this).closest('tr').find('td.item').data('id');
 
-    submitReductions(itemId);
+    submitReductions(itemId, $(this));
   });
 
   $('button#make_bid').on('click', function(event) {
     event.preventDefault();
-debugger
+
     var bidId = $('#bid_id').val(),
-        dataDisabled = _($(this).attr('data-disabled'));
+      dataDisabled = _($(this).attr('data-disabled'));
 
     if ( dataDisabled.isEmpty() && bidId) {
       persistBid(bidId);
     }
   });
 
+  $('button#finish_dispute').on('click', function(event) {
+    event.preventDefault();
+
+    var bidId = $('#bid_id').val(),
+      dataDisabled = _($(this).attr('data-disabled'));
+
+    if ( dataDisabled.isEmpty() && bidId) {
+      persistBid(bidId, '0,00');
+    }
+  });
+
   $("button#finish_bid").on('click', function(event) {
     event.preventDefault();
-    var itemId = $itemChecked.parent().attr('data-id');
+    var itemId = $trading.find('input.item_chooser:checked').parent().attr('data-id');
 
     var url = $trading.find('#persist_item_url').val(),
-        percentData = {
-          id: itemId,
-          _method: 'put',
-          purchase_process_trading_item: {
-            reduction_rate_value: "0,00",
-            reduction_rate_percent: "0,00",
-            status:"closed"
-          }
-        };
+      percentData = {
+        id: itemId,
+        _method: 'put',
+        purchase_process_trading_item: {
+          reduction_rate_value: "0,00",
+          reduction_rate_percent: "0,00",
+          status:"closed"
+        }
+      };
 
     $.ajax({
       url: url + itemId,
@@ -317,7 +333,7 @@ debugger
     event.preventDefault();
 
     var itemId = $trading.find('#item_id').val(),
-        dataDisabled = _($(this).attr('data-disabled'));
+      dataDisabled = _($(this).attr('data-disabled'));
 
     if ( dataDisabled.isEmpty() && itemId) {
       undoLastBid(itemId);
@@ -326,7 +342,6 @@ debugger
 
   $trading.find('.item_chooser').on('change', function() {
     var itemId = $(this).closest('td').data('id');
-    debugger
 
     $trading.find('#item_id').val(itemId);
 

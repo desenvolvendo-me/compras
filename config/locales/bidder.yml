@@ -9,19 +9,19 @@ pt-BR:
       bidder:
         creditor: "Fornecedor"
         protocol: "Protocolo"
-        protocol_date: "Data do protocolo"
-        receipt_date: "Data do recebimento"
+        protocol_date: "Data do Protocolo"
+        receipt_date: "Data do Recebimento"
         invited: "Convidado"
-        technical_score: "Pontuação técnica"
-        licitation_process: "Processo de compra"
-        licitation_process_process_date: "Data do processo de compra"
-        proposal_total_value: "Preço total dos itens"
+        technical_score: "Pontuação Técnica"
+        licitation_process: "Processo de Compra"
+        licitation_process_process_date: "Data do Processo de Compra"
+        proposal_total_value: "Preço Total dos Itens"
         proposal_total_value_by_lot: "Preço total dos itens"
         people: "Representantes"
         enabled: "Habilitado"
-        renounce_resource: "Renúncia a recurso"
-        recording_attendance: "Registro de presença em ata"
-        habilitation_date: 'Data da habilitação'
+        renounce_resource: "Renúncia a Recurso"
+        recording_attendance: "Registro de Presença em Ata"
+        habilitation_date: 'Data da Habilitação'
 
   bidder:
     messages:

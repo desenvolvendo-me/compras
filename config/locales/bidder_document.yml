@@ -1,3 +1,4 @@
+
 pt-BR:
   activerecord:
     models:
@@ -10,5 +11,5 @@ pt-BR:
         document_type: "Documento"
         description: "Documento"
         document_number: "Número/certidão"
-        emission_date: "Data de emissão"
+        emission_date: "Data de Emissão"
         validity: "Validade"

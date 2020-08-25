@@ -6,7 +6,7 @@
         <%= f.input :justification, as: :string %>
       </div>
       <div class="col">
-        <%= f.input :creditor, as: :auto_complete, fake: true %>
+        <%= f.input :creditor, as: :auto_complete, source_path: qualified_creditor(f.object),fake: true, hint: f.object.licitation? ? '' : 'Somente fornecedores habilitados'  %>
       </div>
     </div>
 
