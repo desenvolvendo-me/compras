@@ -7,7 +7,8 @@ class PurchaseSolicitation < Compras::Model
                   :purchase_solicitation_budget_allocations_attributes, :management_object_id,
                   :items_attributes, :budget_structure_id, :purchasing_unit_id,
                   :user_id, :department_id, :attendant_status, :secretaries_attributes,
-                  :model_request, :demand_id, :purchase_forms_attributes, :service_status
+                  :model_request, :demand_id, :purchase_forms_attributes, :service_status,
+                  :delivery_location_field
 
   attr_readonly :code
 
