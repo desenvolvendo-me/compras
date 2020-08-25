@@ -98,6 +98,7 @@ pt-BR:
     report_supply_request_per_secretaries: "Pedido de Fornecimento"
     report_supply_requests: "Relatório de Pedido de Fornecimento"
     report_expenses: "Despesas"
+    report_purchase_solicitation_items: "Itens da Solicitação de Compra"
     resource_sources: "Fonte de Recursos"
     secretary_settings: "Configurações da Secretaria"
     signature_configurations: "Configurações de Assinatura"

@@ -1,0 +1,97 @@
+<div>
+  <table style="border: none;" class="records">
+    <thead>
+    <tr style="text-align: center;border: none;">
+      <td><h1><b> SOLICITAÇÃO DE COMPRA - NÚMERO <%= resource.purchase_solicitation.decorator.code_and_year %> </b></h1></td>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+</div>
+
+<div style="text-align: justify">
+  <span>
+    <p>
+      <b> DEPARTAMENTO: </b> <%= resource.purchase_solicitation.department %>
+    </p>
+  </span>
+</div>
+<div style="text-align: justify">
+  <span>
+    <p>
+      <b> JUSTIFICATIVA: </b> <%= resource.purchase_solicitation.justification %>
+    </p>
+  </span>
+</div>
+
+
+<br>
+<br>
+<br>
+<p>
+<h2><b> ITENS DA SOLICITAÇÃO DE COMPRA </b></h2>
+<div>
+  <table class="records">
+    <thead>
+    <tr>
+      <th width="20%">ITEM</th>
+      <th>DESCRIÇÃO</th>
+      <th>VALOR UNITÁRIO</th>
+      <th>QUANTIDADE</th>
+      <th>TOTAL</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% total = 0 %>
+    <% resource.items.each do |item| %>
+      <tr>
+        <td ><%= item.material %></td>
+        <td><%= item.material.detailed_description %></td>
+        <td><%= number_with_precision item.unit_price %></td>
+        <td><%= item.quantity %></td>
+        <td><%= number_with_precision item.unit_price * item.quantity %></td>
+        <% total += item.unit_price * item.quantity %>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+</p>
+<div >
+  <span>
+    <p style="text-align: right">
+      <b> <%= number_with_precision total %> &nbsp; </b>
+    </p>
+  </span>
+</div>
+
+<div style="text-align: justify">
+  <span>
+    <p>
+      <b> LOCAL DE ENTREGA: </b> <%= resource.purchase_solicitation.delivery_location %>
+    </p>
+  </span>
+</div>
+
+<div style="text-align: justify">
+  <span>
+    <p>
+      <b> OBSERVAÇÃO: </b> <%= resource.purchase_solicitation.general_observations %>
+    </p>
+  </span>
+</div>
+
+<br>
+<br>
+<br>
+<p>
+
+<br><br><br><br><br><br>
+<div style="text-align: justify">
+  <span>
+    <p>
+      <b> <h2> <%= resource.prefecture.titleize() %>, <%= l(Date.today, format: :long) %> </h2></b>
+    </p>
+  </span>
+</div>

@@ -120,6 +120,7 @@ $(function () {
 
     if (!unique) {
       alert("<%= I18n.t('errors.messages.record_already_exists') %>");
+      $('#' + recordTableId).trigger('nestedGrid:uniqueError', [name, value]);
     }
 
     return unique;
