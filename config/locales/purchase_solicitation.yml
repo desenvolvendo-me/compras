@@ -46,6 +46,7 @@ pt-BR:
         attendant_status: "Status de Atendimento"
         lot: "Lote"
         secretary: "Secretaria"
+        delivery_location_field: "Local para Entrega"
 
   purchase_solicitation:
     messages:
