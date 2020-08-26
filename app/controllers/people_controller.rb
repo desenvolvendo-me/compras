@@ -42,8 +42,8 @@ class PeopleController < CrudController
   end
 
   def new
-    person_type = Individual.new if params[:by_physical_people]
-    person_type = Company.new if params[:by_legal_people]
+    person_type = Individual.new if params[:people]
+    person_type = Company.new if params[:company]
     object = build_resource
     object.personable = person_type
 

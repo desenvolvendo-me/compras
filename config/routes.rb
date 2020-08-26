@@ -1002,7 +1002,12 @@ Compras::Application.routes.draw do
     get "legal_peoples/check", to: "people#check", as: "check_auction_legal_people"
     post "legal_peoples", to: "people#create", as: "create_auction_legal_people"
 
-    resources :people
+    resources :people do
+      collection do
+        get :filter
+        get :modal
+      end
+    end
 
     resource :bids do
       collection do

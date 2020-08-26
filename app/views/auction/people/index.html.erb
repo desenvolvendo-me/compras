@@ -1,8 +1,24 @@
 <h2 id="title">
-  <%= page_title_plural %>
+  Fornecedores
 </h2>
+<div class="actions">
+  <ul>
+    <% if create? %>
+      <li>
+        <%= create_link people_type %>
+      </li>
+    <% end %>
 
-
+    <% if filter? %>
+      <li>
+         <%= create_link people_type %>
+      </li>
+       <li>
+        <%= filter_link %>
+      </li>
+    <% end %>
+  </ul>
+</div>
 
 <%= render index_list_partial %>
 
