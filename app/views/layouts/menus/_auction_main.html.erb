@@ -5,12 +5,11 @@
       <%= image_tag("icon_home.png") %>
     </i>Tela Inicial
   <% end %>
-  <% if current_user %>  
+ 
   <%= link_to auction_new_auction_legal_people_path(company: true) do  %>
     <i role="presentation">
       <%= image_tag("icon_library_books.png") %>
     </i>Cadastro
-  <% end %>
   <%end %>
   <%= link_to [:auction, :auctions] do  %>
     <i role="presentation">
