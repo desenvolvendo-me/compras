@@ -643,7 +643,6 @@ Compras::Application.routes.draw do
   end
   get "/legal_peoples", to: "people#index", as: "legal_peoples", by_legal_people: true
   get "/legal_peoples/new", to: "people#new", as: "new_legal_people", by_legal_people: true
-  post "/legal_peoples", to: "people#create", as: "legal_people", by_legal_people: true
 
   get "/physical_peoples", to: "people#index", as: "physical_peoples", by_physical_people: true
   get "/physical_peoples/new", to: "people#new", as: "new_physical_people", by_physical_people: true
@@ -999,7 +998,11 @@ Compras::Application.routes.draw do
 
     get "legal_peoples", to: "people#index", as: "auction_legal_peoples", by_legal_people: true
     get "legal_peoples/new", to: "people#new", as: "new_auction_legal_people", by_legal_people: true
+    post "legal_peoples/edit", to: "people#edit", as: "edit_auction_legal_people", by_legal_people: true
     get "legal_peoples/check", to: "people#check", as: "check_auction_legal_people"
+    post "legal_peoples", to: "people#create", as: "create_auction_legal_people"
+
+    resources :people
 
     resource :bids do
       collection do

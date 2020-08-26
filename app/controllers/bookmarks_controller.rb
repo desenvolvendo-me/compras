@@ -14,10 +14,10 @@ class BookmarksController < CrudController
 
     # keep flash messages because bookmarks#show is the root route
     # and we can receive some flash here like from sign in page.
-    
+
     company = Company.where(user_id: current_user.id).try(:last)
     if company
-      redirect_to auction_auction_legal_people_path(company.id)
+      redirect_to edit_auction_person_path(company.person.id)
     else
       flash.keep
       redirect_to empty_bookmark_path

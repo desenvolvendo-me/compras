@@ -9,11 +9,32 @@ class Auction::PeopleController < Auction::BaseController
     render json: company
   end
 
+  def index
+    company = Company.where(user_id: current_user.id).last
+    if company
+      redirect_to edit_auction_person_path(company.person.id)
+    else
+      super
+    end
+  end
+
   def new
     if current_user
       company = Company.where(user_id: current_user.id).last
-      redirect_to edit_company_path(company.id) if company
+      redirect_to edit_auction_person_path(company.person.id) if company
+    else
+      person_type = Individual.new if params[:by_physical_people]
+      person_type = Company.new if params[:by_legal_people]
+      object = build_resource
+      object.personable = person_type
+
+      super
     end
-    super
+  end
+
+  def create_resource(object)
+    object.transaction do
+      object.user_id = current_user.id
+    end
   end
 end
