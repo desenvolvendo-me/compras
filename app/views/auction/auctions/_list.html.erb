@@ -79,7 +79,7 @@
                     <% end %>
                     <%= link_to "Visualizar", resource_path(resource), class: 'btn btn-primary' %>
                     <%= proposal_link(resource)%>
-                    <%= link_to 'Disputa', new_auction_bids(auction_id: resource) %>
+                    <%= link_to 'Disputa', new_auction_bids_path(auction_id: resource), class: 'btn btn-primary' %>
                   </div>
                 </div>
 
@@ -91,6 +91,7 @@
   <% end %>
   </tbody>
 </table>
+
 <style>
   .button-cad{
     width:100%;
