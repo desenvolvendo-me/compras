@@ -1,0 +1,23 @@
+<tr class="record nested-record item-record" id="expense-id-<%= expense_id %>">
+  <td><%= expense %></td>
+  <td><%= secretary %></td>
+  <td><%= project_activity %></td>
+  <td><%= nature_expense %></td>
+  <td><%= resource_source %></td>
+  <td><%= number_to_currency value %></td>
+  <td>
+    <%= link_to 'Editar', '#', class: 'edit-nested-record' %>
+  </td>
+
+  <td>
+    <%= f.input :expense_id, as: :hidden, input_html: { value: expense_id, class: 'expense-id' } %>
+    <%= f.input :expense, as: :hidden, input_html: { value: expense } %>
+    <%= f.input :secretary_id, as: :hidden, input_html: { value: secretary_id, class: 'secretary-id' } %>
+    <%= f.input :secretary, as: :hidden, input_html: { value: secretary } %>
+    <%= f.input :value, as: :hidden, input_html: { value: value } %>
+    <%= f.input :id, as: :hidden, input_html: { value: id } %>
+    <%= f.input :_destroy, as: :hidden, input_html: { class: 'destroy' } %>
+
+    <%= link_to 'Remover', '#', class: 'remove-nested-record' %>
+  </td>
+</tr>

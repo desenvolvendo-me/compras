@@ -1,0 +1,15 @@
+pt-BR:
+  activerecord:
+    models:
+      purchase_solicitation_budgetary:
+        one: "Dado Orçamentario da Solicitação de COmpra"
+        other: "Dados Orçamentarios da Solicitação de Compra"
+
+    attributes:
+      purchase_solicitation_budgetary:
+        expense: "Despesa"
+        secretary: "Secretaria"
+        value: "Valor"
+        project_activity: "Projeto Atividade (Código)"
+        nature_expense: "Natureza"
+        resource_source: "Fonte"

@@ -1,5 +1,5 @@
 <div class="nested-fields add-margin-bottom">
-  <%= f.simple_fields_for :budgetary, LicitationProcessBudgetary.new do |p| %>
+  <%= f.simple_fields_for :budgetary, PurchaseSolicitationBudgetary.new do |p| %>
     <% p.object_name = 'budgetary' %>
     <%= p.input :id, as: :hidden %>
     <div class="yui3-g">
@@ -38,12 +38,12 @@
 <table id="financials-records" class="records">
   <thead>
   <tr>
-    <th><%= LicitationProcessBudgetary.human_attribute_name :expense %></th>
-    <th><%= LicitationProcessBudgetary.human_attribute_name :secretary %></th>
-    <th><%= LicitationProcessBudgetary.human_attribute_name :project_activity %></th>
-    <th><%= LicitationProcessBudgetary.human_attribute_name :nature_expense %></th>
-    <th><%= LicitationProcessBudgetary.human_attribute_name :resource_source %></th>
-    <th><%= LicitationProcessBudgetary.human_attribute_name :value %></th>
+    <th><%= PurchaseSolicitationBudgetary.human_attribute_name :expense %></th>
+    <th><%= PurchaseSolicitationBudgetary.human_attribute_name :secretary %></th>
+    <th><%= PurchaseSolicitationBudgetary.human_attribute_name :project_activity %></th>
+    <th><%= PurchaseSolicitationBudgetary.human_attribute_name :nature_expense %></th>
+    <th><%= PurchaseSolicitationBudgetary.human_attribute_name :resource_source %></th>
+    <th><%= PurchaseSolicitationBudgetary.human_attribute_name :value %></th>
     <th></th>
     <th></th>
   </tr>
@@ -51,7 +51,7 @@
   <tbody>
   <%= f.association :budgetaries, :collection => localized(f.object.budgetaries) do |p| %>
     <%unless p.object.blank? %>
-      <%= render 'licitation_process_budgetaries/form_row',
+      <%= render 'purchase_solicitation_budgetaries/form_row',
                  id: p.object.id,
                  expense: p.object.expense,
                  expense_id: p.object.expense_id,
@@ -70,7 +70,7 @@
 
 <%= mustache "contract_financials_template" do %>
   <%= f.association :budgetaries_attributes, :collection => f.object.budgetaries.build, :index => '{{uuid}}' do |p| %>
-    <%= render 'licitation_process_budgetaries/form_row',
+    <%= render 'purchase_solicitation_budgetaries/form_row',
                id: '{{id}}',
                expense: '{{expense}}',
                expense_id: '{{expense_id}}',
