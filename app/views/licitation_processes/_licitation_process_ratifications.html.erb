@@ -1,10 +1,8 @@
 <div class="yui3-g button-tabs">
   <div class="yui3-u-1">
-  <%= button_tag 'Adicionar Adjudicação/Homologação', type: :button,
-                 class: "button", id: "add-process-ratification" %>
+  <%= link_to 'Adicionar Adjudicação/Homologação', "#", class: "button", id: "add-process-ratification" %>
 
-  <%= button_tag 'Cancelar', type: :button,
-                 class: "button cancel", id: "cancel-process_ratification" %>
+  <%= link_to 'Cancelar', "#", class: "button cancel", id: "cancel-process_ratification" %>
   </div>
 </div>
 <div id="process-ratification-fields"></div>
@@ -58,7 +56,7 @@
 
   $("#cancel-process_ratification").click(function(){
     $(this).hide();
-    $("#process_ratifications-records, #add-process_ratification").show();
+    $("#process_ratifications-records, #add-process-ratification").show();
     $("#process-ratification-fields").html('');
   });
 
