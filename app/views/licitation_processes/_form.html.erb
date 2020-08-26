@@ -9,7 +9,6 @@
     <li id="legal_reasons_tab" ><a href="#tab-leagal-reasons">Fundamentação Legal Dispensa/Inexigibilidade</a></li>
     <% if f.object.persisted? %>
       <li><a href="#tab-legal-analysis-appraisals" id="legal_analysis_appraisals_tab">Laudo de Análise Jurídica</a></li>
-      <li><a href="#tab-budgetaries" id="budgetary_tab">Dados Orçamentarios</a></li>
       <li><a href="#tab-licitation-process-publications" id="licitation_process_publications_tab">Publicações</a></li>
       <% if f.object.trading? %>
         <li><a href="#tab-licitation-purchase-process-accreditations" id="purchase_process_accreditations">Credenciamentos</a></li>
@@ -52,7 +51,6 @@
   <div id="tab-leagal-reasons"><%= render 'legal_reasons', :f => f %></div>
   <% if f.object.persisted? %>
     <div id="tab-legal-analysis-appraisals"><%= render 'legal_analisys_appraisals', :f => f %></div>
-    <div id="tab-budgetaries"><%= render 'budgetary', :f => f %></div>
     <div id="tab-licitation-process-publications"><%= render 'licitation_process_publications', :f => f %></div>
 
     <% if f.object.trading? %>

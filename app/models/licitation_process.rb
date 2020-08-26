@@ -28,7 +28,7 @@ class LicitationProcess < Compras::Model
                   :legal_analysis_appraisals_attributes, :publications_attributes,
                   :purchase_process_accreditation_attributes, :trading_attributes,
                   :judgment_commission_advice_attributes, :bidders_attributes,
-                  :licitation_process_ratifications_attributes, :budgetaries_attributes
+                  :licitation_process_ratifications_attributes
 
   auto_increment :process, :by => :year
   auto_increment :modality_number, :by => [:year, :modality, :type_of_removal]
@@ -99,7 +99,7 @@ class LicitationProcess < Compras::Model
   has_many :supply_orders, dependent: :restrict
   has_many :fractionations, class_name: 'PurchaseProcessFractionation', dependent: :destroy,
            foreign_key: :purchase_process_id
-  has_many :budgetaries, class_name: 'LicitationProcessBudgetary', dependent: :destroy
+
 
   has_one :judgment_commission_advice, :dependent => :restrict
   has_one :purchase_process_accreditation, :dependent => :restrict
@@ -109,7 +109,7 @@ class LicitationProcess < Compras::Model
   accepts_nested_attributes_for :purchase_process_budget_allocations, :items, :creditor_proposals,
                                 :process_responsibles, :tied_creditor_proposals, :legal_analysis_appraisals,
                                 :publications, :bidders, :purchase_process_accreditation, :trading,
-                                :licitation_process_ratifications, :budgetaries, allow_destroy: true
+                                :licitation_process_ratifications, allow_destroy: true
 
   accepts_nested_attributes_for :judgment_commission_advice, allow_destroy: true, reject_if: proc { |att| att['year'].blank?}
 
