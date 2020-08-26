@@ -2,7 +2,6 @@ class CreateTableAuctionBids < ActiveRecord::Migration
   def change
     create_table :compras_auction_bids do |t|
       t.integer :auction_id
-      t.integer :creditor_id
       t.integer :lot
     end
 
