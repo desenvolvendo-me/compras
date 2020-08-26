@@ -9,7 +9,7 @@
     <b>PREGOIERO: </b><%= "#{@auction.try(:user).try(:authenticable).try(:name)}" %>
   </h5>
   <h5>
-    <b><%= "Data da Licitação: #{@auction.notice_availability.strftime('%d/%m/%Y - %H h')}" %></b>
+    <b><%= "Data da Licitação: #{(@auction.notice_availability.strftime('%d/%m/%Y - %H h') rescue 'não informado')}" %></b>
     <b><%= "Data Atual: #{Time.now.strftime('%d/%m/%Y - %H h')}" %></b>
   </h5>
 </div>
