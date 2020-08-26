@@ -6,11 +6,20 @@ class Auction::ProvidersController < Auction::BaseController
   defaults resource_class: User
 
   def create
-    create!{ new_user_session_path }
+    create! { new_user_session_path }
+  end
+
+  def new
+    if params[:cnpj].present?
+      company = Company.find_by_cnpj(params[:cnpj]) if params[:cnpj].present?
+
+      render json: company
+    else
+      super
+    end
   end
 
   def register_external
-
   end
 
   def check_register_external
@@ -34,5 +43,4 @@ class Auction::ProvidersController < Auction::BaseController
 
     super
   end
-
 end
