@@ -212,4 +212,17 @@ $(document).ready(function () {
 
         }
     });
+
+  $("#budgetary_expense_id").change(function(event, data){
+    debugger
+    if(data.project_activity){
+      $("#budgetary_project_activity").val(data.project_activity.name + " (" + data.project_activity.code + ")")
+    }
+    if(data.nature_expense){
+      $("#budgetary_nature_expense").val(data.nature_expense.description)
+    }
+    if(data.resource_source){
+      $("#budgetary_resource_source").val(data.resource_source.code)
+    }
+  })
 });
