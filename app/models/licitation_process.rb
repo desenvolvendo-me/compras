@@ -110,7 +110,7 @@ class LicitationProcess < Compras::Model
                                 :publications, :bidders, :purchase_process_accreditation, :trading,
                                 :licitation_process_ratifications, allow_destroy: true
 
-  accepts_nested_attributes_for :judgment_commission_advice, allow_destroy: true, reject_if: proc { |att| att['year'].blank?}
+  accepts_nested_attributes_for :judgment_commission_advice, :reject_if => :all_blank
 
 
   delegate :allow_negotiation?, to: :trading, allow_nil: true, prefix: true
