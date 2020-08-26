@@ -21,7 +21,11 @@ class Auction::PeopleController < Auction::BaseController
   def new
     if current_user
       company = Company.where(user_id: current_user.id).last
-      redirect_to edit_auction_person_path(company.person.id) if company
+      if company
+        redirect_to edit_auction_person_path(company.person.id)
+      else
+        super
+      end
     else
       person_type = Individual.new if params[:by_physical_people]
       person_type = Company.new if params[:by_legal_people]
