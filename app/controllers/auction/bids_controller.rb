@@ -1,4 +1,5 @@
 class Auction::BidsController < Auction::BaseController
+  default resource_class: AuctionBid
 
   before_filter :set_auction
 
