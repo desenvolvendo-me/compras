@@ -13,7 +13,11 @@ builder resource, json do
   json.proposal_envelope_opening_time  resource.decorator.proposal_envelope_opening_time
   json.budget_allocations_ids          resource.budget_allocations_ids
 
-
+  if resource.price_registration
+    json.value   resource.to_s + " / Processo de Registro de Preço"
+  else
+    json.value   resource.to_s
+  end
   json.items resource.items do |item|
     json.id                   item.id
     json.material_id          item.material_id
