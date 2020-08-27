@@ -9,7 +9,7 @@
     <tr>
       <td>
         <p><%= link_to edit_contract_path(resource) do%>
-            Contrato <%= resource.contract_number %> - Data fim <%= resource.end_date %> - Fornecedor <%= resource.creditor.person.name %>
+            Contrato <%= resource.contract_number %> - Data fim <%= l(resource.end_date) if resource.end_date %> - Fornecedor <%= resource.creditor.person.name %>
           <%end %>
             </p>
         <% if resource.decorated? && resource.decorator.respond_to?(:summary) %>
