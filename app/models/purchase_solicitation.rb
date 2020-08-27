@@ -2,13 +2,13 @@ class PurchaseSolicitation < Compras::Model
   include BelongsToResource
   include MaterialBalance
 
-
   attr_accessible :accounting_year, :request_date, :responsible_id, :kind,
                   :delivery_location_id, :general_observations, :justification,
                   :purchase_solicitation_budget_allocations_attributes, :management_object_id,
                   :items_attributes, :budget_structure_id, :purchasing_unit_id,
                   :user_id, :department_id, :attendant_status, :secretaries_attributes,
-                  :model_request, :demand_id, :purchase_forms_attributes, :service_status
+                  :model_request, :demand_id, :purchase_forms_attributes, :service_status,
+                  :delivery_location_field
 
   attr_readonly :code
 
@@ -19,18 +19,19 @@ class PurchaseSolicitation < Compras::Model
   has_enumeration_for :attendant_status, :with => PurchaseSolicitationAttendantStatus, :create_helpers => true
   has_enumeration_for :kind, :with => PurchaseSolicitationKind, :create_helpers => true
   has_enumeration_for :service_status, :with => PurchaseSolicitationServiceStatus,
-                      :create_helpers => true, :create_scopes => true
+                                       :create_helpers => true, :create_scopes => true
 
-  belongs_to :user, :class_name => 'User', :foreign_key => 'user_id'
-  belongs_to :department, :class_name => 'Department', :foreign_key => 'department_id'
-  belongs_to :responsible, :class_name => 'Employee', :foreign_key => 'responsible_id'
+  belongs_to :user, :class_name => "User", :foreign_key => "user_id"
+  belongs_to :department, :class_name => "Department", :foreign_key => "department_id"
+  belongs_to :responsible, :class_name => "Employee", :foreign_key => "responsible_id"
   belongs_to :delivery_location
-  belongs_to :liberator, :class_name => 'Employee', :foreign_key => 'liberator_id'
+  belongs_to :liberator, :class_name => "Employee", :foreign_key => "liberator_id"
   belongs_to :demand
   belongs_to :purchasing_unit
   belongs_to :management_object
 
   belongs_to_resource :budget_structure
+
 
   has_many :items, -> { order(:id) }, :class_name => 'PurchaseSolicitationItem', :dependent => :restrict,
            :inverse_of => :purchase_solicitation
@@ -42,14 +43,15 @@ class PurchaseSolicitation < Compras::Model
   has_many :purchase_solicitation_budget_allocations, -> { order(:id) }, :dependent => :destroy,
            :inverse_of => :purchase_solicitation
   has_many :purchase_solicitation_liberations, -> { order(:sequence) }, :dependent => :destroy, :inverse_of => :purchase_solicitation
+
   has_many :price_collection_items, through: :price_collections, source: :items
   has_many :price_collection_proposal_items, through: :price_collection_items
   has_many :list_purchase_solicitations, :dependent => :destroy
-  has_many :secretaries, :class_name => 'PurchaseSolicitationSecretary', :dependent => :destroy
+  has_many :secretaries, :class_name => "PurchaseSolicitationSecretary", :dependent => :destroy
   has_many :purchase_solicitation_objects
   has_many :management_objects, through: :purchase_solicitation_objects
 
-  has_one :annul, :class_name => 'ResourceAnnul', :as => :annullable, :dependent => :destroy
+  has_one :annul, :class_name => "ResourceAnnul", :as => :annullable, :dependent => :destroy
 
   has_and_belongs_to_many :price_collections, join_table: :compras_price_collections_purchase_solicitations
 
@@ -63,100 +65,99 @@ class PurchaseSolicitation < Compras::Model
   orderize "id DESC"
   filterize
 
-  scope :by_department_user_access_and_licitation_process, lambda {|params|
-
+  scope :by_department_user_access_and_licitation_process, lambda { |params|
     if params.split(",").size == 2
       user = params.split(",")[1]
-      use_pur_uni = UserPurchasingUnit.where(user_id:user).pluck(:purchasing_unit_id)
+      use_pur_uni = UserPurchasingUnit.where(user_id: user).pluck(:purchasing_unit_id)
 
-      departments = Department.where("compras_departments.purchasing_unit_id in (?)",use_pur_uni).pluck(:id)
+      departments = Department.where("compras_departments.purchasing_unit_id in (?)", use_pur_uni).pluck(:id)
 
-      purchase_process_id =  params.split(",")[0]
+      purchase_process_id = params.split(",")[0]
       where("compras_purchase_solicitations.department_id in (?)", departments).
-      joins(list_purchase_solicitations: [:licitation_process]).
-          where("compras_licitation_processes.id = ?", purchase_process_id)
-
+        joins(list_purchase_solicitations: [:licitation_process]).
+        where("compras_licitation_processes.id = ?", purchase_process_id)
     end
   }
 
-  scope :by_deparment, lambda {|current_user|
-    use_pur_uni = UserPurchasingUnit.where(user_id:current_user).pluck(:purchasing_unit_id)
-    departments = Department.where("compras_departments.purchasing_unit_id in (?)",use_pur_uni).pluck(:id)
+  scope :by_deparment, lambda { |current_user|
+    use_pur_uni = UserPurchasingUnit.where(user_id: current_user).pluck(:purchasing_unit_id)
+    departments = Department.where("compras_departments.purchasing_unit_id in (?)", use_pur_uni).pluck(:id)
 
-    where { self.department_id.in departments }
+    where("compras_purchase_solicitations.department_id in (?) or user_id = ?", departments, current_user)
   }
 
-  scope :by_licitation_process, lambda {|purchase_process_id|
+  scope :by_licitation_process, lambda { |purchase_process_id|
     joins(list_purchase_solicitations: [:licitation_process]).
-        where("compras_licitation_processes.id = ?", purchase_process_id)
+      where("compras_licitation_processes.id = ?", purchase_process_id)
   }
 
-  scope :by_deparment_permited, lambda {|current_user|
+  scope :by_deparment_permited, lambda { |current_user|
     departments = DepartmentPerson.where(user_id: current_user).pluck(:department_id)
     where("compras_purchase_solicitations.department_id in (?)", departments)
   }
 
-  scope :by_secretaries_permited, lambda{|current_user|
-    joins{ secretaries.secretary.departments.department_people }
-        .where{ secretaries.secretary.departments.department_people.user_id.eq(current_user)}
+  scope :by_secretaries_permited, lambda { |current_user|
+    joins { secretaries.secretary.departments.department_people }
+      .where { secretaries.secretary.departments.department_people.user_id.eq(current_user) }
   }
 
-  scope :by_model_request, lambda {|type|
-    where {model_request.eq(type)}
+  scope :by_model_request, lambda { |type|
+    where { model_request.eq(type) }
   }
 
-  scope :by_material_id, lambda {|material_id|
-    joins {items}.where {items.material_id.eq(material_id)}
+  scope :by_material_id, lambda { |material_id|
+    joins { items }.where { items.material_id.eq(material_id) }
   }
 
-  scope :by_material, lambda {|material_ids|
-    joins {items}.
-        where {|purchase| purchase.items.material_id.in(material_ids)}
+  scope :by_material, lambda { |material_ids|
+    joins { items }.
+      where { |purchase| purchase.items.material_id.in(material_ids) }
   }
 
-  scope :except_ids, lambda {|ids| where {id.not_in(ids)}}
+  scope :except_ids, lambda { |ids| where { id.not_in(ids) } }
 
-  scope :not_demand, lambda {where {demand_id.eq(nil)}}
+  scope :not_demand, lambda { where { demand_id.eq(nil) } }
 
   scope :can_be_grouped, lambda {
-    where {service_status.in [
-                                 PurchaseSolicitationServiceStatus::LIBERATED,
-                                 PurchaseSolicitationServiceStatus::PARTIALLY_FULFILLED]
+    where {
+      service_status.in [
+                          PurchaseSolicitationServiceStatus::LIBERATED,
+                          PurchaseSolicitationServiceStatus::PARTIALLY_FULFILLED,
+                        ]
     }.uniq
   }
 
-  scope :only_user_access, lambda {|user_id|
-    joins {department.department_people.outer}.
-        where {compras_department_people.user_id.eq(user_id)}
+  scope :only_user_access, lambda { |user_id|
+    joins { department.department_people.outer }.
+      where { compras_department_people.user_id.eq(user_id) }
   }
 
   scope :without_price_collection, lambda {
-    joins {price_collections.outer}.
-        where {compras_price_collections_purchase_solicitations.price_collection_id.eq(nil)}
+    joins { price_collections.outer }.
+      where { compras_price_collections_purchase_solicitations.price_collection_id.eq(nil) }
   }
 
   scope :without_purchase_process, lambda {
-    joins {licitation_processes.outer}.
-        where {licitation_processes.id.eq(nil)}
+    joins { licitation_processes.outer }.
+      where { licitation_processes.id.eq(nil) }
   }
 
-  scope :term, lambda {|q|
+  scope :term, lambda { |q|
     where {
-      ((code.eq(q) & code.not_eq(0)) | budget_structure_description.like("#{q}%")
-      )
+      ((code.eq(q) & code.not_eq(0)) | budget_structure_description.like("#{q}%"))
     }
   }
 
-  scope :by_kind, lambda {|q|
-    where {kind.eq(q)}
+  scope :by_kind, lambda { |q|
+    where { kind.eq(q) }
   }
 
-  scope :with_materials_per_licitation, ->(licitation_process_id, material_ids) do
-    joins { list_purchase_solicitations.licitation_process }
-        .joins { items.material }
-        .where { list_purchase_solicitations.licitation_process.id.eq(licitation_process_id) }
-        .where { items.material.id.in(material_ids) }
-  end
+  scope :with_materials_per_licitation, -> (licitation_process_id, material_ids) do
+          joins { list_purchase_solicitations.licitation_process }
+            .joins { items.material }
+            .where { list_purchase_solicitations.licitation_process.id.eq(licitation_process_id) }
+            .where { items.material.id.in(material_ids) }
+        end
 
   def to_s
     "#{code}/#{accounting_year}"
@@ -175,9 +176,11 @@ class PurchaseSolicitation < Compras::Model
   end
 
   def quantity_by_material(material_id)
-    PurchaseSolicitation.joins {items}.
-        where {|purchase| purchase.items.material_id.eq(material_id) &
-            purchase.id.eq(self.id)}.sum(:quantity)
+    PurchaseSolicitation.joins { items }.
+      where { |purchase|
+      purchase.items.material_id.eq(material_id) &
+        purchase.id.eq(self.id)
+    }.sum(:quantity)
   end
 
   def editable?
@@ -235,7 +238,7 @@ class PurchaseSolicitation < Compras::Model
   end
 
   def set_budget_structure_description
-    self.budget_structure_description = budget_structure.present? ? budget_structure.description : ''
+    self.budget_structure_description = budget_structure.present? ? budget_structure.description : ""
   end
 
   def must_have_at_least_one_item
@@ -265,5 +268,4 @@ class PurchaseSolicitation < Compras::Model
       end
     end
   end
-
 end

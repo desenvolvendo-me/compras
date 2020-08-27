@@ -24,7 +24,9 @@
         .append("<a id='add_new_material' style='float:right' target='_blank' href='"+Routes.new_material+"'>Cadastrar Material</a>");
     },
 
-    setMaterials: function () {
+    setMaterials: function (event, data) {
+      this.$purchase_kind.find('option[value='+data.kind+']').prop('selected', true);
+
       if(this.$purchase_id.val() && this.$purchase_kind.val()){
         $.ajax({
           url: Routes.purchase_solicitations_api_show,

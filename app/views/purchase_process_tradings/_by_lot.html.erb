@@ -2,16 +2,20 @@
   <thead>
     <th></th>
     <th>Lote</th>
-    <th>Melhor Lance</th>
-    <th>Fornecedor Lance</th>
     <th>Melhor Proposta</th>
     <th>Fornecedor Proposta</th>
+    <th>Melhor Lance</th>
+    <th>Fornecedor Lance</th>
+    <th width="11%"><%= PurchaseProcessTradingItem.human_attribute_name(:reduction_rate_value) %></th>
+    <th width="11%"><%= PurchaseProcessTradingItem.human_attribute_name(:reduction_rate_percent) %></th>
     <th>Status</th>
+    <th></th>
+    <th></th>
   </thead>
 
    <tbody>
-    <% resource.items.each_with_index do |item, index| %>
-      <%= render 'lots', item: item, index: index %>
+    <% trading.items.each_with_index do |item, index| %>
+      <%= render 'purchase_process_tradings/lots', item: item, index: index %>
     <% end %>
   </tbody>
 </table>

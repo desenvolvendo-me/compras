@@ -1,7 +1,7 @@
 module SupplyOrdersHelper
   def init_object object, material
     aux = object
-    object = object.items.where(material_id: material.id).last
+    object = object.items.select{|x| x.material_id == material.id}
     object = SupplyOrderItem.new(supply_order_id: aux.id) if object.blank?
 
     object

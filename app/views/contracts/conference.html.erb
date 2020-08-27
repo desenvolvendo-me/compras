@@ -1,10 +1,10 @@
 <div style="text-align: left">
   <p>
-    <strong>Ano do Contrato: </strong>
+    <strong>Ano <%= @contract.decorator.contract_or_minute_report%>: </strong>
     <%= @contract.year %>
   </p>
   <p>
-    <strong>Número do Contrato: </strong>
+    <strong>Número <%= @contract.decorator.contract_or_minute_report%>: </strong>
     <%= @contract.contract_number %>
   </p>
   <p>
@@ -20,7 +20,7 @@
     <%= @contract.creditor %>
   </p>
   <p>
-    <strong>Tipo do Contrato: </strong>
+    <strong>Tipo <%= @contract.decorator.contract_or_minute_report%>: </strong>
     <%= @contract.contract_type %>
   </p>
   <p>
@@ -32,7 +32,7 @@
     <%= @contract.dissemination_source %>
   </p>
   <p>
-    <strong>Valor do Contrato: </strong>
+    <strong>Valor <%= @contract.decorator.contract_or_minute_report%>: </strong>
     <%= number_to_currency @contract.contract_value %>
   </p>
   <p>
@@ -40,7 +40,7 @@
     <%= number_to_percentage @contract.default_fine %>
   </p>
   <p>
-    <strong>Garantias do Contrato: </strong>
+    <strong>Garantias <%= @contract.decorator.contract_or_minute_report%>: </strong>
     <%= @contract.contract_guarantees_humanize %>
   </p>
   <p>
@@ -48,7 +48,7 @@
     <%= @contract.guarantee_value %>
   </p>
   <p>
-    <strong>Validade do Contrato: </strong>
+    <strong>Validade <%= @contract.decorator.contract_or_minute_report%>: </strong>
     <%= @contract.contract_validity %>
   </p>
   <p>
@@ -84,7 +84,7 @@
     <%= @contract.purchasing_unit %>
   </p>
   <p>
-    <strong>Servidor Responsavel pelo Contrato na Unidade de Compras: </strong>
+    <strong>Servidor Responsavel pelo <%= @contract.decorator.contract_or_minute_report%> na Unidade de Compras: </strong>
     <%= @contract.budget_structure_responsible %>
   </p>
   <p>

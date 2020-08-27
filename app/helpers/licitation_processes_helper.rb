@@ -1,6 +1,7 @@
 module LicitationProcessesHelper
   include RealignmentPricesHelper
   include LicitationProcessRatificationsHelper
+  include PurchaseProcessTradingsHelper
 
   def classification_link
     return unless resource.persisted?
@@ -62,6 +63,14 @@ module LicitationProcessesHelper
     end
   end
 
+  def qualified_creditor licitation_process
+    if licitation_process.try(:licitation?)
+      creditors_path
+    else
+      creditors_path(by_bidders: licitation_process.id)
+    end
+  end
+
   def view_or_edit_creditor_proposal(creditor)
     if resource.proposals_of_creditor(creditor).empty?
       link_to 'Cadastrar propostas',
@@ -82,6 +91,15 @@ module LicitationProcessesHelper
 
   def disqualification_status_message(creditor)
     I18n.t("other.compras.messages.#{disqualification_status(creditor)}")
+  end
+
+  def initialize_trading purchase_process
+    trading = TradingCreator.create!(purchase_process)
+    trading = trading.present? ? trading : purchase_process.trading
+
+    TradingBidCreator.create_items_bids!(trading)
+
+    trading
   end
 
   private
@@ -105,5 +123,4 @@ module LicitationProcessesHelper
   def edit_title
     I18n.t("activerecord.models.licitation_process.one")
   end
-
 end

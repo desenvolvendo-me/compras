@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 Compras::Application.routes.draw do
-  root to: 'bookmarks#show'
+  root to: "bookmarks#show"
 
-  get 'agreements/modal', as: :modal_agreements
+  get "agreements/modal", as: :modal_agreements
 
-  get 'agreement_kinds/modal', as: :modal_agreement_kinds
+  get "agreement_kinds/modal", as: :modal_agreement_kinds
 
   resources :contract_terminations, except: %i[show destroy index]
 
@@ -14,7 +14,7 @@ Compras::Application.routes.draw do
       get :filter
       get :modal
     end
-    get 'modal_info', on: :member
+    get "modal_info", on: :member
   end
 
   resources :creditor_representatives, only: :index
@@ -41,10 +41,10 @@ Compras::Application.routes.draw do
   end
 
   # Keep routes sorted alphabetically
-  devise_for :users, controllers: { confirmations: 'confirmations', sessions: 'sessions' }
+  devise_for :users, controllers: { confirmations: "confirmations", sessions: "sessions" }
 
   devise_scope :user do
-    put '/confirm' => 'confirmations#confirm'
+    put "/confirm" => "confirmations#confirm"
   end
 
   resource :account, only: %w[edit update]
@@ -56,7 +56,7 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :management_objects, controller: 'auction/management_objects' do
+  resources :management_objects, controller: "auction/management_objects" do
     collection do
       get :filter
       get :modal
@@ -89,7 +89,7 @@ Compras::Application.routes.draw do
       get :filter
       get :modal
     end
-    get 'modal_info', on: :member
+    get "modal_info", on: :member
   end
 
   resources :purchase_process_items do
@@ -171,7 +171,9 @@ Compras::Application.routes.draw do
     end
   end
 
+
   get 'api/supply_requests/show' => 'supply_requests#api_show', as: :supply_requests_api_show
+
 
   resources :supply_request_managements, only: %i[index new] do
     collection do
@@ -199,7 +201,7 @@ Compras::Application.routes.draw do
       get :filter
       get :modal
     end
-    get 'modal_info', on: :member
+    get "modal_info", on: :member
   end
 
   resources :branch_activities do
@@ -227,7 +229,7 @@ Compras::Application.routes.draw do
       get :filter
       get :modal
     end
-    get 'modal_info', on: :member
+    get "modal_info", on: :member
   end
 
   resources :budget_revenues do
@@ -251,14 +253,14 @@ Compras::Application.routes.draw do
     end
   end
 
-  get 'budget_structure_levels/modal', as: :modal_budget_structure_levels
+  get "budget_structure_levels/modal", as: :modal_budget_structure_levels
 
   resources :capabilities, except: %i[new edit update destroy] do
     collection do
       get :filter
       get :modal
     end
-    get 'modal_info', on: :member
+    get "modal_info", on: :member
   end
 
   resources :capability_allocation_details do
@@ -303,7 +305,7 @@ Compras::Application.routes.draw do
     end
   end
 
-  post 'additive_solicitation/margin' => 'additive_solicitations#margin', as: :additive_solicitation_material_margin
+  post "additive_solicitation/margin" => "additive_solicitations#margin", as: :additive_solicitation_material_margin
 
   resources :contracts do
     resources :delivery_schedules
@@ -322,13 +324,13 @@ Compras::Application.routes.draw do
     end
   end
 
-  post 'contract/plegde_request' => 'contracts#plegde_request', as: :contracts_plegde_request
+  post "contract/plegde_request" => "contracts#plegde_request", as: :contracts_plegde_request
 
   resources :contract_termination_annuls, only: %i[new create edit update]
 
   resources :balance_adjustments
 
-  get 'demands/modal', as: :modal_demands
+  get "demands/modal", as: :modal_demands
   resources :demands do
     collection do
       get :filter
@@ -337,6 +339,7 @@ Compras::Application.routes.draw do
   end
 
   get 'api/demands/show' => 'demands#api_show', as: :demands_api_show
+
 
   resources :contract_types do
     collection do
@@ -359,7 +362,7 @@ Compras::Application.routes.draw do
     end
   end
 
-  get 'cnaes/modal', as: :modal_cnaes
+  get "cnaes/modal", as: :modal_cnaes
 
   resources :communication_sources do
     collection do
@@ -375,7 +378,7 @@ Compras::Application.routes.draw do
     end
   end
 
-  get 'countries/modal', as: :modal_coutries
+  get "countries/modal", as: :modal_coutries
 
   resources :currencies do
     collection do
@@ -429,10 +432,10 @@ Compras::Application.routes.draw do
     end
   end
 
-  get 'expense_categories/modal', as: :modal_expense_categories
-  get 'expense_groups/modal', as: :modal_expense_groups
-  get 'expense_modalities/modal', as: :modal_expense_modalities
-  get 'expense_elements/modal', as: :modal_expense_elements
+  get "expense_categories/modal", as: :modal_expense_categories
+  get "expense_groups/modal", as: :modal_expense_groups
+  get "expense_modalities/modal", as: :modal_expense_modalities
+  get "expense_elements/modal", as: :modal_expense_elements
 
   resources :expense_natures, only: %i[modal index] do
     collection do
@@ -447,13 +450,13 @@ Compras::Application.routes.draw do
     end
   end
 
-  get 'functions/modal', as: :modal_functions
+  get "functions/modal", as: :modal_functions
 
-  get 'government_programs/modal', as: :modal_government_programs
+  get "government_programs/modal", as: :modal_government_programs
 
-  get 'individuals/modal', as: :modal_individuals
+  get "individuals/modal", as: :modal_individuals
 
-  get 'judgment_forms/modal', as: :modal_judgment_forms
+  get "judgment_forms/modal", as: :modal_judgment_forms
   resources :judgment_forms do
     collection do
       get :filter
@@ -482,7 +485,7 @@ Compras::Application.routes.draw do
     end
   end
 
-  get 'legal_natures/modal', as: :modal_legal_natures
+  get "legal_natures/modal", as: :modal_legal_natures
 
   resources :legal_references do
     collection do
@@ -538,7 +541,7 @@ Compras::Application.routes.draw do
     end
   end
 
-  post 'licitation_process/material_total_balance' => 'licitation_processes#material_total_balance', as: :licitation_process_material_total_balance
+  post "licitation_process/material_total_balance" => "licitation_processes#material_total_balance", as: :licitation_process_material_total_balance
 
   resources :secretaries do
     collection do
@@ -594,7 +597,7 @@ Compras::Application.routes.draw do
     end
   end
 
-  get 'management_units/modal', as: :modal_management_units
+  get "management_units/modal", as: :modal_management_units
 
   resources :materials do
     collection do
@@ -603,6 +606,7 @@ Compras::Application.routes.draw do
     end
   end
   get 'api/materials/show' => 'materials#api_show', as: :material_api_show
+
 
   resources :material_classes do
     collection do
@@ -619,7 +623,7 @@ Compras::Application.routes.draw do
     end
   end
 
-  get 'occupation_classifications/modal', as: :modal_occupation_classifications
+  get "occupation_classifications/modal", as: :modal_occupation_classifications
 
   resources :payment_methods do
     collection do
@@ -639,16 +643,16 @@ Compras::Application.routes.draw do
       get :modal
       get :filter
     end
-    get 'modal_info', on: :member
+    get "modal_info", on: :member
   end
-  get '/legal_peoples', to: 'people#index', as:"legal_peoples", by_legal_people: true
-  get '/legal_peoples/new', to: 'people#new', as:"new_legal_people", by_legal_people: true
+  get "/legal_peoples", to: "people#index", as: "legal_peoples", by_legal_people: true
+  get "/legal_peoples/new", to: "people#new", as: "new_legal_people", by_legal_people: true
 
-  get '/physical_peoples', to: 'people#index', as:"physical_peoples", by_physical_people: true
-  get '/physical_peoples/new', to: 'people#new', as:"new_physical_people", by_physical_people: true
+  get "/physical_peoples", to: "people#index", as: "physical_peoples", by_physical_people: true
+  get "/physical_peoples/new", to: "people#new", as: "new_physical_people", by_physical_people: true
 
-  get 'representative_people', to: 'people#index', as: 'representative_people'
-  get 'responsibles', to: 'people#index', as: 'responsibles'
+  get "representative_people", to: "people#index", as: "representative_people"
+  get "responsibles", to: "people#index", as: "responsibles"
 
   resources :pledge_requests do
     collection do
@@ -664,17 +668,17 @@ Compras::Application.routes.draw do
     end
   end
 
-  get '/ping' => 'ping#ping'
+  get "/ping" => "ping#ping"
 
-  get 'modal/pledge_categories', as: 'modal_pledge_categories'
+  get "modal/pledge_categories", as: "modal_pledge_categories"
 
-  get 'modal/pledge_historics', as: 'modal_pledge_historics'
+  get "modal/pledge_historics", as: "modal_pledge_historics"
 
-  get 'modal/pledge_cancellations', as: 'modal_pledge_cancellations'
+  get "modal/pledge_cancellations", as: "modal_pledge_cancellations"
 
   resources :pledge_liquidation_annuls, except: %i[destroy update]
 
-  get 'pledge_liquidations/modal', as: 'modal_pledge_liquidations'
+  get "pledge_liquidations/modal", as: "modal_pledge_liquidations"
 
   resources :pledges, only: %i[modal index] do
     collection do
@@ -691,7 +695,7 @@ Compras::Application.routes.draw do
     end
   end
 
-  get 'departments/modal', as: :modal_departments
+  get "departments/modal", as: :modal_departments
   resources :departments do
     collection do
       get :filter
@@ -712,7 +716,7 @@ Compras::Application.routes.draw do
     end
   end
 
-  get 'price_collections/:price_collection_id/price_collection_proposals' => 'price_collection_proposals#index', :as => :price_collection_price_collection_proposals
+  get "price_collections/:price_collection_id/price_collection_proposals" => "price_collection_proposals#index", :as => :price_collection_price_collection_proposals
 
   resources :price_collection_proposals, only: %i[index edit update] do
     collection do
@@ -735,19 +739,20 @@ Compras::Application.routes.draw do
 
   resources :purchase_process_accreditations, only: %i[new create edit update show]
 
-  get 'purchase_solicitations/modal', as: :modal_purchase_solicitations
+  get "purchase_solicitations/modal", as: :modal_purchase_solicitations
   resources :purchase_solicitations, except: :destroy do
     collection do
       get :filter
       get :modal
     end
-    get 'modal_info', on: :member
+    get "modal_info", on: :member
   end
 
   get 'api/purchase_solicitations/show' => 'purchase_solicitations#api_show', as: :purchase_solicitations_api_show
 
-  get 'purchase_solicitation/department' => 'purchase_solicitations#department', as: :purchase_solicitation_department
-  get 'purchase_solicitation/balance' => 'purchase_solicitations#balance', as: :purchase_solicitation_balance
+
+  get "purchase_solicitation/department" => "purchase_solicitations#department", as: :purchase_solicitation_department
+  get "purchase_solicitation/balance" => "purchase_solicitations#balance", as: :purchase_solicitation_balance
 
   resources :purchase_solicitation_annuls, only: %i[new create edit update]
 
@@ -812,10 +817,10 @@ Compras::Application.routes.draw do
     end
   end
 
-  get 'revenue_rubrics/modal', as: :modal_revenue_rubrics
-  get 'revenue_sources/modal', as: :modal_revenue_sources
-  get 'revenue_subcategories/modal', as: :modal_revenue_subcategories
-  get 'revenue_categories/modal', as: :modal_revenue_categories
+  get "revenue_rubrics/modal", as: :modal_revenue_rubrics
+  get "revenue_sources/modal", as: :modal_revenue_sources
+  get "revenue_subcategories/modal", as: :modal_revenue_subcategories
+  get "revenue_categories/modal", as: :modal_revenue_categories
 
   resources :side_streets do
     collection do
@@ -844,8 +849,8 @@ Compras::Application.routes.draw do
     end
   end
 
-  get 'stage_processes/modal', as: :modal_stage_processes
-  get 'states/modal', as: :modal_states
+  get "stage_processes/modal", as: :modal_stage_processes
+  get "states/modal", as: :modal_states
 
   resources :street_types do
     collection do
@@ -861,7 +866,7 @@ Compras::Application.routes.draw do
     end
   end
 
-  get 'subfunctions/modal', as: :modal_subfunctions
+  get "subfunctions/modal", as: :modal_subfunctions
 
   resources :tce_specification_capabilities do
     collection do
@@ -890,7 +895,7 @@ Compras::Application.routes.draw do
     end
   end
 
-  get 'nature_expenses/modal', as: :modal_nature_expenses
+  get "nature_expenses/modal", as: :modal_nature_expenses
   resources :nature_expenses do
     collection do
       get :filter
@@ -977,7 +982,7 @@ Compras::Application.routes.draw do
     end
   end
 
-  get '/zendesk' => 'zendesk#index'
+  get "/zendesk" => "zendesk#index"
 
   namespace :tce_export do
     resources :monthly_monitorings, except: :destroy do
@@ -990,18 +995,20 @@ Compras::Application.routes.draw do
       end
     end
   end
-
   namespace :auction do
-    get '/external' => 'auctions#external_index', as: :auctions_external_index
+    get "/external" => "auctions#external_index", as: :auctions_external_index
 
     resources :auction_creditor_proposals
+
+    get "legal_peoples", to: "people#index", as: "auction_legal_peoples", by_legal_people: true
+    get "legal_peoples/new", to: "people#new", as: "new_auction_legal_people", by_legal_people: true
 
     resources :creditors do
       collection do
         get :filter
         get :modal
       end
-      get 'modal_info', on: :member
+      get "modal_info", on: :member
     end
 
     resources :employees do
@@ -1024,8 +1031,8 @@ Compras::Application.routes.draw do
       end
     end
 
-    resources :auction_items, only:[:index]
-    get '/auction_items/group_lot' => 'auction_items#group_lot', as: :group_lot_items
+    resources :auction_items, only: [:index]
+    get "/auction_items/group_lot" => "auction_items#group_lot", as: :group_lot_items
 
     resources :management_objects do
       collection do
@@ -1034,8 +1041,8 @@ Compras::Application.routes.draw do
       end
     end
 
-    get '/providers/register' => 'providers#register_external', as: :providers_register_external
-    post '/providers/check_register' => 'providers#check_register_external', as: :providers_check_register_external
+    get "/providers/register" => "providers#register_external", as: :providers_register_external
+    post "/providers/check_register" => "providers#check_register_external", as: :providers_check_register_external
 
     resources :providers do
       collection do
@@ -1043,7 +1050,6 @@ Compras::Application.routes.draw do
         get :modal
       end
     end
-
   end
 
   namespace :report do
@@ -1067,7 +1073,9 @@ Compras::Application.routes.draw do
       resources :contract_per_resource_sources
       resources :supply_request_per_secretaries
       resources :expenses
+      resources :purchase_solicitation_items
     end
+
 
     get 'map_of_bids/:licitation_process_id' => 'map_of_bids#show', as: :map_of_bids
 
@@ -1080,6 +1088,7 @@ Compras::Application.routes.draw do
     get 'supply_orders/:supply_order_id' => 'supply_orders#show', as: :supply_orders
     get 'supply_requests/:supply_request_id' => 'supply_requests#show', as: :supply_requests
     get 'creditor_materials' => 'creditor_materials#show', as: :creditor_materials
+
   end
 
   namespace :api do
@@ -1097,8 +1106,8 @@ Compras::Application.routes.draw do
   namespace :dashboard do
     resources :secretaries, only: :index do
       collection do
-        get '/contracts', to:'secretaries#contracts', as: :contracts
-        get '/approval_requests', to:'secretaries#approval_requests', as: :approval_requests
+        get "/contracts", to: "secretaries#contracts", as: :contracts
+        get "/approval_requests", to: "secretaries#approval_requests", as: :approval_requests
       end
     end
   end

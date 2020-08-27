@@ -20,7 +20,8 @@ class PurchaseProcessTradingItemsController < CrudController
   end
 
   def creditor_list
-    @creditors = resource.creditors_ordered_outer
+    winner = resource.creditor_winner
+    @creditors = resource.creditors_ordered_outer.sort_by{|x| x.creditor_id == winner.try(:id) ? 0 : 1}
   end
 
   def undo_last_bid

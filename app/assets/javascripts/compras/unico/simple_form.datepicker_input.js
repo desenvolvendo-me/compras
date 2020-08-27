@@ -19,7 +19,7 @@
 
   $.datepicker.setDefaults($.datepicker.regional['pt-BR']);
 
-  $(document).on('input[data-datepicker=true]', 'focus', function () {
+  $(document).on('focus','input[data-datepicker=true]', function () {
     var element = $(this);
 
     if (environment !== "test" && _.isEmpty($(this).data('disabled'))) {

@@ -1,21 +1,19 @@
 <%= f.input :auction_id, as: :hidden %>
-<div class="form-row">
-  <div class="col-2">
-    <%= label_tag "Numero do Pregão" %>
-    <%= text_field_tag :process_number, "", class: 'form-control', disabled: true %>
-  </div>
-</div>
 
+<h5><%= "Empresa: #{current_user.try(:authenticable).try(:name)}" %></h5>
+<h5><%= "Endereço: #{f.object.auction.street},   #{f.object.auction.neighborhood},  #{f.object.auction.city}" %></h5>
+<h5><%= "CNPJ: #{current_user.try(:authenticable).try(:person).try(:cnpj)}" %></h5>
+
+<h5 class="mt-4" style="color:#3f6e9d;">Vem Apresentar Proposta:</h5>
 
 <div class="mh-400 my-2">
-  <h4>Itens</h4>
-
+  <div>
   <table id="items-records" class="records">
     <thead>
     <tr>
-      <th width="21%">Material</th>
-      <th><%= AuctionCreditorProposalItem.human_attribute_name :manufacturer %></th>
-      <th><%= AuctionCreditorProposalItem.human_attribute_name :model_version %></th>
+      <th>Material</th>
+      <th width="15%"><%= AuctionCreditorProposalItem.human_attribute_name :manufacturer %></th>
+      <th width="15%"><%= AuctionCreditorProposalItem.human_attribute_name :model_version %></th>
       <th width="8%"><%= AuctionCreditorProposalItem.human_attribute_name :quantity %></th>
       <th width="11%"><%= AuctionCreditorProposalItem.human_attribute_name :unit_price %></th>
       <th width="11%"><%= AuctionCreditorProposalItem.human_attribute_name :global_price %></th>
@@ -29,11 +27,13 @@
       <%= f.simple_fields_for :auction_creditor_proposal_items, init_item(f.object, auction_item) do |p| %>
         <%= render 'auction/auction_creditor_proposa_items/form',
                    material: auction_item.material.to_s,
+                   item: auction_item,
                    f: p %>
       <% end %>
     <% end %>
     </tbody>
   </table>
+  </div>
 </div>
 
 <h4>Declarações</h4>
@@ -89,15 +89,13 @@
 </div>
 
 <div class="form-row mt-4">
-  <div class="col-4">
+  <div class="col">
     <div class="form-group">
       <%= f.input :proposal_doc, input_html: {accept: ('application/pdf')} %>
     </div>
   </div>
 
-
-
-  <div class="col-4">
+  <div class="col">
     <div class="form-group">
       <%= f.input :proposal_qualification_doc, input_html: {accept: ('application/pdf')} %>
     </div>
@@ -106,16 +104,14 @@
 
 <div class="form-row" style="margin-top: -11px">
   <% unless f.object.proposal_send_date.blank? %>
-    <div class="col-4" >
-      Enviada em: <%= f.object.proposal_send_date %>
-      <%= link_to f.object.proposal_doc_identifier, f.object.proposal_doc_url, :target => '_blank' if f.object.proposal_doc? %>
+    <div class="col" >
+      <%= link_to f.object.proposal_doc_identifier, f.object.proposal_doc_url, :target => '_blank' if f.object.proposal_doc? %> anexado em: <%= f.object.proposal_send_date %>
     </div>
   <% end %>
 
   <% unless f.object.qualification_send_date.blank? %>
-    <div class="col-4">
-      Enviada em: <%= f.object.qualification_send_date %>
-      <%= link_to f.object.proposal_qualification_doc_identifier, f.object.proposal_qualification_doc_url, :target => '_blank' if f.object.proposal_qualification_doc? %>
+    <div class="col">
+      <%= link_to f.object.proposal_qualification_doc_identifier, f.object.proposal_qualification_doc_url, :target => '_blank' if f.object.proposal_qualification_doc? %> anexado em: <%= f.object.qualification_send_date %>
     </div>
   <% end %>
 </div>
@@ -123,7 +119,6 @@
 <style>
   .mh-400{
     max-height: 650px;
-    overflow:auto
   }
   #terms .form-row{
     margin: 1rem 0 1rem 0;
@@ -131,8 +126,15 @@
   #terms{
     text-align: justify;
   }
-  h4, h6{
+  h4, h6, h5{
     color: #3f6e9d;
+  }
+
+  h5 span{
+    display: block;
+  }
+  h5 span.subtitle{
+    font-size: 23px;
   }
 
   #terms .input{
@@ -152,6 +154,11 @@
   }
 
   input[type=text],input[type=password],textarea{width:100%;}
+
+  body {
+    font: 15px/1.231 arial,helvetica,clean,sans-serif;
+    *font-size: small;
+  }
 </style>
 
 <script>
@@ -167,4 +174,33 @@
     });
   });
   <% end %>
+
+  $(function(){
+    var value;
+    $.each($("[name$='[quantity]']"), function(){
+      value = floatToPtBrString(parseFloat($(this).val()));
+      $(this).val(value);
+    })
+  });
+
+    $("[name$='[unit_price]'], [name$='[quantity]']").change( function(){
+      const $tr = $(this).closest('tr');
+
+      const qtd = parsePtBrFloat($tr.find("[name$='[quantity]']").val()),
+          unit_price = parsePtBrFloat($tr.find("[name$='[unit_price]']").val());
+
+      const global_price = qtd * unit_price;
+
+      if(!isNaN(global_price))
+        $($tr.find("[name$='[global_price]']").val(floatToPtBrString(global_price)))
+    });
+
+  $(".nested-record [name$='[quantity]']").change(function(){
+    const total_bid = parseFloat($(this).data('bid'));
+    const quantity = parsePtBrFloat($(this).val());
+    if(quantity > total_bid){
+      custom_alert( 'Você não pode fornecer uma quantidade superior a solicitada pelo pregão!', 'Atenção');
+      $(this).val(total_bid)
+    }
+  })
 </script>

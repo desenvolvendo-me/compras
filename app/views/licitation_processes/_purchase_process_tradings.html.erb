@@ -1,0 +1,5 @@
+<% trading = initialize_trading f.object %>
+<% item = trading.items.first %>
+<%= render 'purchase_process_tradings/form', item: item,
+           historic: item.bids_historic, creditors:  item.creditors_ordered_outer,
+           next_bid: NextBidCalculator.next_bid(item), trading: trading %>

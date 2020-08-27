@@ -6,7 +6,7 @@
     <ul class="nav">
       <li>
         <a class="nav-link" href="#step-1">
-          Etapa 1 - Dados Principal
+          Etapa 1 - Equipe Pregão
         </a>
       </li>
       <li>
@@ -21,7 +21,7 @@
       </li>
       <li>
         <a class="nav-link" href="#step-4">
-          Etapa 4 - Parâmentos Finais e Edital
+          Etapa 4 - Configurações Finais e Edital
         </a>
       </li>
     </ul>
@@ -46,6 +46,8 @@
 
 <script>
   $(function(){
+  var enableNavigation = <%= f.object.persisted? %>;
+
   var btnFinish = $('<button></button>').text('Salvar')
     .addClass('btn btn-info btn-finish')
     .on('click', function(){
@@ -58,7 +60,7 @@
     theme: 'dots', // theme for the wizard, related css need to include for other than default theme
     justified: true, // Nav menu justification. true/false
     darkMode:false, // Enable/disable Dark Mode if the theme supports. true/false
-    autoAdjustHeight: true, // Automatically adjust content height
+    autoAdjustHeight: false, // Automatically adjust content height
     cycleSteps: false, // Allows to cycle the navigation of steps
     enableURLhash: true, // Enable selection of the step based on url hash
     toolbarSettings: {toolbarPosition: 'bottom',
@@ -70,6 +72,8 @@
       easing:'' // Transition animation easing. Not supported without a jQuery easing plugin
     },
     anchorSettings: {
+      anchorClickable: true, // Enable/Disable anchor navigation
+      enableAllAnchors: enableNavigation, // Activates all anchors clickable all times
       markDoneStep: true, // add done css
       markAllPreviousStepsAsDone: true, // When a step selected by url hash, all previous steps are marked done
       removeDoneStepOnNavigateBack: true, // While navigate back done step after active step will be cleared
@@ -110,7 +114,20 @@
 </script>
 
 <style>
-  .btn-finish{
+  .btn-finish {
     display: none;
+  }
+  .smartwizard .tab-pane{
+    overflow-y: hidden
+  }
+  #auction_support_teams{
+    padding: 13px;
+  }
+  .tab-content{
+    height: unset !important;
+  }
+
+  h4{
+    color: #3f6e9d;
   }
 </style>

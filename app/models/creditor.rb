@@ -133,6 +133,10 @@ class Creditor < Persona::Creditor
     scoped.where("unico_creditors.id in (?)", creditor_ids)
   }
 
+  scope :by_bidders, lambda{|licitation_process|
+    joins(:bidders).where(compras_bidders:{licitation_process_id: licitation_process})
+  }
+
   scope :winners, ->(purchase_process) do
     query = scoped.enabled_by_licitation(purchase_process.id)
 

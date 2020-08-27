@@ -2,8 +2,8 @@ pt-BR:
   activerecord:
     models:
       street_type:
-        one: "Tipo de Logradouro"
-        other: "Tipos de Logradouros"
+        one: "Tipo de Endereço"
+        other: "Tipos de Endereços"
 
     attributes:
       street_type:

@@ -47,9 +47,6 @@ fieldset {
 }
 
 .wrapper-form{
-    margin: 0 8rem  0;
-}
-
-#title{
-    display: none;
+    margin-left: 2rem;
+    width: 100%;
 }

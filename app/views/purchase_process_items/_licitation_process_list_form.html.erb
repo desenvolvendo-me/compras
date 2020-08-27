@@ -3,13 +3,20 @@
 
   <td class="item-material"><%= material %></td>
 
-  <td class="item-creditor"><%= creditor %></td>
+  <td class="item-creditor">
+    <%= f.input :creditor, as: :auto_complete, input_html:{value: creditor}, label: false,
+                source_path: qualified_creditor(f.object.try(:licitation_process)) %>
+  </td>
 
-  <td class="item-reference-unit"><%= reference_unit %></td>
+  <td class="item-reference-unit text-center"><%= reference_unit %></td>
 
-  <td class="item-quantity"><%= quantity %></td>
+  <td class="item-quantity">
+    <%= f.input :quantity, input_html:{value: quantity, class: 'item-quantity' }, label: false%>
+  </td>
 
-  <td class='item-unit-price'><%= unit_price %></td>
+  <td class='item-unit-price'>
+    <%= f.input :unit_price, input_html:{value: unit_price, class: 'item-unit-price' }, label: false %>
+  </td>
 
   <td class="item-total-value"><%= estimated_total_price %></td>
 
@@ -21,10 +28,6 @@
     <%= f.input :lot, as: :hidden, input_html: { value: lot, class: 'lot' } %>
     <%= f.input :material_id, as: :hidden, input_html: { value: material_id, class: 'material-id' } %>
     <%= f.input :material, as: :hidden, input_html: { value: material } %>
-    <%= f.input :creditor_id, as: :hidden, input_html: { value: creditor_id, class: 'creditor-id' } %>
-    <%= f.input :creditor, as: :hidden, input_html: { value: creditor } %>
-    <%= f.input :quantity, as: :hidden, input_html: { value: quantity, class: 'item-quantity' } %>
-    <%= f.input :unit_price, as: :hidden, input_html: { value: unit_price, class: 'item-unit-price' } %>
     <%= f.input :additional_information, as: :hidden, input_html: { value: additional_information } %>
     <%= f.input :estimated_total_price, as: :hidden, input_html: { value: estimated_total_price, class: 'item-total-value' } %>
     <%= f.input :id, as: :hidden, input_html: { value: id } %>

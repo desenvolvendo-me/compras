@@ -22,7 +22,7 @@
       <a href="#supply_orders">Ordens de Fornecimento</a>
     </li>
     <li>
-      <a href="#balance_solicitations">Solicitações Saldo</a>
+      <a href="#balance_solicitations">Saldo das Solicitações</a>
     </li>
     <li>
       <a href="#contract_additives">Aditivo / Apostilamento</a>
@@ -67,7 +67,11 @@
   </div>
 
   <div id="balance_solicitations">
-    <%= render 'balance_solicitations', :f => f %>
+    <% if f.object.type_contract == ContractMinute::MINUTE %>
+      <%= render 'balance_solicitation_minutes', :f => f %>
+    <% else %>
+      <%= render 'balance_solicitations', :f => f  %>
+    <% end %>
   </div>
 
   <div id="contract_additives">

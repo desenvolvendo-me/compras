@@ -1,26 +1,25 @@
-<div id="reductions" class="yui3-g">
-  <div class="yui3-u-1-4 input">
+<div id="reductions" class="row">
+  <div class="col-3 input">
     <%= label_tag :reduction_rate_value, PurchaseProcessTradingItem.human_attribute_name(:reduction_rate_value) %>
 
-    <%= text_field_tag :reduction_rate_value, @item.decorator.reduction_rate_value, class: 'string decimal',
+    <%= text_field_tag :reduction_rate_value, item.decorator.reduction_rate_value, class: 'string decimal',
       'data-decimal' => true %>
   </div>
 
-  <div class="yui3-u-1-4">
+  <div class="col-4">
     <%= label_tag :reduction_rate_percent, PurchaseProcessTradingItem.human_attribute_name(:reduction_rate_percent) %>
 
-    <%= text_field_tag :reduction_rate_percent, @item.decorator.reduction_rate_percent, class: 'string decimal',
+    <%= text_field_tag :reduction_rate_percent, item.decorator.reduction_rate_percent, class: 'string decimal',
       'data-decimal' => true %>
   </div>
 
-  <div class="yui3-u-1-5 field-without-label">
-    <%= button_tag 'Gravar decréscimo', type: :button, class: 'button primary',
-      id: 'reduction_button' %>
+  <div class="col-2 field-without-label">
+    <%= button_tag 'Gravar decréscimo', type: :button, class: 'button primary reduction_button' %>
   </div>
 
-  <div class="yui3-u-1-6 field-without-label">
+  <div class="col-2 field-without-label">
     <%= link_to 'Desempate ficto', new_purchase_process_trading_item_bid_benefited_path(item_id: @item),
       'data-url' => new_purchase_process_trading_item_bid_benefited_path,
-      id: 'benefited_bid', class: 'button primary', 'data-disabled' => @item.decorator.benefited_bid_message %>
+      id: 'benefited_bid', class: 'button primary', 'data-disabled' => item.decorator.benefited_bid_message %>
   </div>
 </div>

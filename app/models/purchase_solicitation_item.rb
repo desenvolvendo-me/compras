@@ -28,6 +28,10 @@ class PurchaseSolicitationItem < Compras::Model
     where { |item| item.material_id.in material_ids }
   }
 
+  scope :ordered_by_lot_material, lambda{
+    joins(:material).order("lot, unico_materials.description")
+  }
+
   def estimated_total_price
     (quantity || BigDecimal(0)) * (unit_price || BigDecimal(0))
   end

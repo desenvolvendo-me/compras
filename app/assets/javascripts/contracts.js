@@ -139,5 +139,20 @@ $(document).ready(function () {
       if($(this).val() === '')
         $(this).val('ATA - ')
     }
-  })
+  });
+
+  $(".edit-solicitation").click(function(){
+    $(this).closest('.consumption-items').find(':input').prop('disabled', false);
+  });
+
+  $(".contract_quanity").change(function(){
+    var item = $(this).closest(".ratification_item"),
+      qtd_contract = parseInt($(this).val()),
+      qtd_attended = parseInt(item.find(".qtd_attended").data('attended')),
+      result = qtd_contract - qtd_attended;
+
+    if(result < 0) result = 0;
+
+    item.find('.consumption').val(result)
+  });
 });

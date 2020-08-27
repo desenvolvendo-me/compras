@@ -9,7 +9,7 @@ class AuctionCreditorProposal < Compras::Model
   belongs_to :auction
   belongs_to :user
 
-  has_many :auction_creditor_proposal_items
+  has_many :auction_creditor_proposal_items, dependent: :destroy
 
   accepts_nested_attributes_for :auction_creditor_proposal_items, :allow_destroy => true
 

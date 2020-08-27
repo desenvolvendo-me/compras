@@ -1,90 +1,157 @@
-<table class="table table-borderless">
+<table class="table table-borderless  ">
   <tbody>
-  <% collection.each do |resource| %>
-    <tr id="<%= dom_id resource %>">
-      <td>
-
-        <div class="yui3-g section-blue">
-          <div class="yui3-u-1">
-            <div class="ellipsis">
-
-              <p><b>Pregão:</b> <spam class="white"><%= "#{resource.licitation_number}/#{resource.year}" %> - <%= resource.object %></spam></p>
-
-            </div>
-          </div>
-        </div>
-
-        <div class="yui3-g section-gray">
-          <div class="yui3-u-1-2 ">
-            <p>Objeto: <%= resource.object %></p>
-            <p>Edital disponível a partir de: <%= l(resource.notice_availability) if resource.notice_availability %></p>
-            <p>Endereço: <%= address(resource) %> </p>
-            <p>Telefone: <%= contact(resource) %> </p>
-            <p>Entrega da proposta: <%= l(resource.proposal_delivery) if resource.proposal_delivery%></p>
-            <p>Abertura da proposta: <%= l(resource.bid_opening) if resource.bid_opening %></p>
-          </div>
-
-          <div class="yui3-u-1-2 actions">
-            <div class="yui3-g">
-              <div class="yui3-u-1">
-                <%= link_to "Visualizar", edit_resource_path(resource), class: 'btn btn-primary' %>
-                <%= proposal_link(resource)%>
+    <% collection.each do |resource| %>
+      <tr clas="tr-white" id="<%= dom_id resource %>">
+        <td>
+        <div class="border-round">
+          <div class="yui3-g section-gray">
+            <div class="yui3-u-1">
+              <div class="ellipsis">
+              <span style="float:right;">
+                <%= link_to resource_path(resource) do  %>
+                   <i class="material-icons">print</i>
+               <% end %>
+                </span>
+                <h5>Pregão:<%= "#{resource.licitation_number}/#{resource.year}" %> - Objeto: <%= resource.object %></h5>
+                
               </div>
             </div>
-            <div class="yui3-g">
-              <div class="yui3-u-1">
-                <button type="button" class="btn btn-primary">Entrar Disputa</button>
+          </div>
+          <div class="border-round">
+            <div class="yui3-g section-gray">
+              <div class="yui3-u-1-3">
+                <div class="ellipsis-sub">
+                  <h5>Edital disponível a partir de: </h5>
+                </div>
+              </div>
+              <div class="yui3-u-1-3">
+                <div class="ellipsis-sub">
+                  <h5>Entrega da proposta: </h5>
+                </div>
+              </div>
+              <div class="yui3-u-1-3">
+                <div class="ellipsis-sub">
+                  <h5>Abertura da proposta: </h5>
+                </div>
+              </div>
+            </div>
+            <div class="yui3-g section-gray">
+              <div class="yui3-u-1-3">
+                <div>
+                  <p><%= resource.notice_availability.strftime('%d/%m/%Y') if resource.notice_availability %> </p>
+                </div>
+              </div>
+              <div class="yui3-u-1-3">
+                <div>
+                  <p> <%= resource.proposal_delivery.strftime('%d/%m/%Y') if resource.proposal_delivery%> </p>
+                </div>
+              </div>
+              <div class="yui3-u-1-3">
+                <div  >
+                  <p> <%= l(resource.bid_opening) if resource.bid_opening %> <p>
+                </div>
               </div>
             </div>
 
-
           </div>
-        </div>
-      </td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
-
-<style>
-  .section-blue{
-    height: 43px;
-    background-color: #7e99b5;
-    font-size: 22px;
-    padding: 10px;
-  }
-
-  .table td, .table th {
-    padding: .75rem 0 .75rem 0;
-  }
-
-  .section-gray{
-    background-color: #e6e5e5bf;
-    padding: 10px;
-  }
-
-  .section-gray p{
-    font-size: 22px;
-  }
-
-  .section-gray a, button{
-    font-size: 18px !important;
-    border-radius: 11px !important;
-  }
-  .white{
-    color:white;
-  }
-  .actions{
-    text-align: end;
-    padding-top: 7px;
-  }
-  .ellipsis{
-    white-space: word;
-    overflow:hidden;
-    height: 49px;
-  }
-
-  .ellipsis:after{
-    content:'...';
-  }
-</style>
+          <div class="border-round">
+            <div class="yui3-g section-gray">
+              <div class="yui3-u-1">
+                
+                 <p><b style="font-size:125%;">Endereço:</b> <%= address(resource) %> </p>
+               
+              </div>
+              <div class="yui3-g section-gray">
+                <div class="yui3-u-1">
+                  <div>
+                   
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="yui3-g section-gray">
+            
+              <div class="yui3-u-1 actions">
+                <div class="yui3-g">
+                  <div class="yui3-u-1">
+                  <% if resource.user == current_user %>
+                     <%= link_to "Editar", edit_resource_path(resource), class: 'btn btn-primary' %>
+                  <% end %>
+                    <%= link_to "Visualizar", resource_path(resource), class: 'btn btn-primary' %>
+                    <%= proposal_link(resource)%>
+                  </div>
+                </div>
+               
+              </div>
+            </div>
+            </div>
+          </td>
+        <% end %>
+      </tbody>
+    </table>
+    <style>
+    .button-cad{
+      width:100%;
+      float:right;
+      text-align:right;
+      margin-top: -30px;
+      padding-right:15px;
+    }
+      .section-blue{
+        height: 43px;
+        background-color: #7e99b5;
+        font-size: 22px;
+        padding: 10px;
+      }
+      
+      .table td, .table th {
+        padding: .75rem 0 .75rem 0;
+      }
+      html{
+        font-size: 85%;
+      }
+      
+      .section-gray{
+        padding: 10px;
+      }
+      
+      .section-gray p{
+        font-size: 100%;
+      }
+      
+      .section-gray a, button{
+        font-size: 18px !important;
+        border-radius: 11px !important;
+      }
+      .white{
+        color:white;
+      }
+      .actions{
+        text-align: end;
+        padding-top: 7px;
+      }
+      .ellipsis{
+        white-space: word;
+        overflow:hidden;
+        height: 49px;
+        background-color: #b3cce6;
+        padding: 10px;
+        color: #53464d;
+      }
+      .ellipsis-sub{
+        white-space: word;
+        overflow:hidden;
+        height: 49px;
+        background-color: #ecf2f9;
+        padding: 10px;
+        color: #53464d;
+      }
+      
+      .ellipsis:after{
+        content:'...';
+      }
+      .border-round{
+        margin: 10px;
+        border: 1px solid #ccc;
+      }
+    </style>

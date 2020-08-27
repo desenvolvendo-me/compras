@@ -1,4 +1,4 @@
-<h3><%= "Fornecedores" %></h3>
+<div class="title-section">Empresas Credenciadas:</div>
 
 <table id="accreditation_creditors" class="records">
   <thead>
@@ -6,31 +6,34 @@
     <th>Fornecedor</th>
     <th>Porte</th>
     <th>Valor da Proposta</th>
-    <th>% da Diferença da Proposta Vencedora</th>
+    <th>% Proposta Vencedora</th>
     <th>Habilitado</th>
+    <th>Status</th>
   </thead>
 
   <tbody>
-    <% @creditors.each_with_index do |accreditation_creditor, index| %>
-      <%= render 'creditors_row',
+    <% order_creditor(creditors, item).each_with_index do |accreditation_creditor, index| %>
+      <%= render 'purchase_process_tradings/creditors_row',
         order: index + 1,
         creditor: accreditation_creditor,
-        company_size: accreditation_creditor.company_size,
-        amount: accreditation_creditor.decorator.unit_price_of_proposal(resource.purchase_process_id, @item.item_or_lot),
+        company_size: accreditation_creditor.company_size.try(:acronym),
+        amount: accreditation_creditor.decorator.unit_price_of_proposal(trading.purchase_process_id, item.item_or_lot),
         percent: '-',
-        selected: accreditation_creditor.decorator.selected?(resource.purchase_process_id, @item.item_or_lot),
-        not_selected_class: accreditation_creditor.decorator.not_selected_class(resource.purchase_process_id, @item.item_or_lot) %>
+        selected: accreditation_creditor.decorator.selected?(trading.purchase_process_id, item.item_or_lot),
+        not_selected_class: accreditation_creditor.decorator.not_selected_class(trading.purchase_process_id, item.item_or_lot),
+        status: get_creditor_status(item, accreditation_creditor, historic) %>
     <% end %>
   </tbody>
 </table>
 
 <%= mustache 'accreditation_creditors_template' do %>
-  <%= render 'creditors_row',
+  <%= render 'purchase_process_tradings/creditors_row',
     order: '{{order}}',
     creditor: '{{creditor}}',
     company_size: '{{company_size}}',
     amount: '{{amount}}',
     percent: '{{percent}}',
     selected: '{{selected}}',
-    not_selected_class: '{{not_selected_class}}' %>
+    not_selected_class: '{{not_selected_class}}',
+    status: '{{status}}'%>
 <% end %>

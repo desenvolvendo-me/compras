@@ -375,17 +375,24 @@ $(document).ready(function () {
     var licitation_process = $('#supply_request_licitation_process_id').val(),
       contract = $("#supply_request_contract_id").val(),
       purchase_solicitation = $("#supply_request_purchase_solicitation_id").val(),
-      items = $(".material-id").map(function(){ return $el.val() }).toArray(),
+      id = $("#supply_request_id").val(),
+      items = [],
       input_items='';
 
+    $.each($("#items-records tbody tr.record"), function(){
+      items.push([$(this).find('.material-id').val(), $(this).find('.requested_quantity').val()])
+    });
+
     $.each(items, function(index, el){
-      input_items += "<input type='hidden' name='supply_order[item_ids]["+ index +"]'  value="+el+">"
+      input_items += "<input type='hidden' name='supply_order[item]["+ index +"][id]'  value="+el[0]+">";
+      input_items += "<input type='hidden' name='supply_order[item]["+ index +"][quantity]'  value="+el[1]+">"
     });
 
     $("<form action="+ Routes.new_supply_order +" method='GET'/>")
       .append($('<input type="hidden" name="supply_order[licitation_process_id]">').val(licitation_process))
       .append($('<input type="hidden" name="supply_order[contract_id]">').val(contract))
       .append($('<input type="hidden" name="supply_order[purchase_solicitation_id]">').val(purchase_solicitation))
+      .append($('<input type="hidden" name="supply_order[supply_request_id]">').val(id))
       .append(input_items)
       .appendTo($(document.body))
       .submit();

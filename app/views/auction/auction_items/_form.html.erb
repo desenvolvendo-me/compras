@@ -3,8 +3,8 @@
   <td><%= material %></td>
   <td><%= reference_unit %></td>
   <td><%= quantity %></td>
-  <td><%= estimated_value %></td>
-  <td><%= max_value %></td>
+  <td><%= number_with_precision estimated_value %></td>
+  <td><%= number_with_precision max_value %></td>
   <td><%= group_lot %></td>
   <td>
     <%= link_to 'Editar', '#', class: 'edit-nested-record' %>

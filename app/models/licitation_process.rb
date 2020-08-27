@@ -103,7 +103,10 @@ class LicitationProcess < Compras::Model
   accepts_nested_attributes_for :purchase_process_budget_allocations, :items, :creditor_proposals,
                                 :process_responsibles, :tied_creditor_proposals, :legal_analysis_appraisals,
                                 :publications, :bidders, :purchase_process_accreditation, :trading,
-                                :judgment_commission_advice, :licitation_process_ratifications, allow_destroy: true
+                                :licitation_process_ratifications, allow_destroy: true
+
+  accepts_nested_attributes_for :judgment_commission_advice, :reject_if => :all_blank
+
 
   delegate :allow_negotiation?, to: :trading, allow_nil: true, prefix: true
   delegate :issuance_date, to: :judgment_commission_advice, allow_nil: true, prefix: true
@@ -142,6 +145,7 @@ class LicitationProcess < Compras::Model
   validate :purchase_solicitations_blank?
 
   before_save :set_homologation_date
+  after_save  :set_approved_status
 
   with_options :allow_blank => true do |allowing_blank|
     allowing_blank.validates :year, :mask => "9999"
@@ -431,6 +435,12 @@ class LicitationProcess < Compras::Model
   def set_homologation_date
     if self.status_changed? && self.status == PurchaseProcessStatus::APPROVED
       self.homologation_date = Date.today
+    end
+  end
+
+  def set_approved_status
+    if licitation_process_ratifications.any?
+      update_status(PurchaseProcessStatus::APPROVED)
     end
   end
 

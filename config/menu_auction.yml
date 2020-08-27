@@ -7,4 +7,4 @@ menu:
       - "Gestão de Objeto":
             - auction_management_objects
       - auction_positions
-      - auction_auctions
+  - auction_auctions

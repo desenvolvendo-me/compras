@@ -14,7 +14,12 @@
  *= require simple_form.auto_complete_input
  *= require bootstrap_prepend
  *= require select2/select2
+ *= require material_icons
  */
+
+#container {
+    width: 1200px;
+}
 
 #container #header img {
   margin: 15px 0 0 15px;
@@ -136,7 +141,8 @@ h3.divider {
 }
 
 .add-nested-record{
-    background-color: #53c3c3 !important;
+    background-color: #3284B6 !important;
+    border-color: #3284B6 !important;
     color: white !important;
 }
 

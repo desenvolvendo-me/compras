@@ -33,12 +33,14 @@ gem 'wkhtmltopdf-binary', '0.9.9.1'
 
 gem 'awesome_nested_set', '~> 3.0'
 gem 'carrierwave', '~> 0.11'
+
 gem 'squeel'
 
 gem 'cnpj_validator', '0.3.1'
 gem 'cpf_validator', '0.2.0'
 gem 'mail_validator', '0.2.0'
 gem 'mask_validator', '0.2.1'
+
 gem 'rubyzip', '1.2.0'
 gem 'typecaster', github: 'ricardohsd/typecaster'
 gem 'validates_timeliness'
@@ -54,6 +56,7 @@ gem 'foreigner', '~> 1.7'
 
 gem 'decore', github: 'matiasleidemer/decore'
 gem 'enumerate_it', '~> 1.2'
+
 
 # gem 'strong_parameters', '0.2.3' # quebra
 gem 'paper_trail'
@@ -79,6 +82,7 @@ group :development, :test do
   gem 'minitest', '>= 2.12'
   gem 'minitest-reporters', '0.14.24'
   gem 'postgres-copy', '~> 1.0'
+
   gem 'pry'
   gem 'pry-remote'
   gem 'rack-mini-profiler', '0.9.3'

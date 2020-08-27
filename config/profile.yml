@@ -113,6 +113,7 @@ profile:
     - report_supply_requests
     - report_expenses
     - report_creditor_materials
+    - report_purchase_solicitation_items
   - "PREGÃO ELETRÔNICO":
     - physical_peoples
     - legal_peoples

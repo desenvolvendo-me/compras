@@ -1,0 +1,14 @@
+<div class="wrapper-form">
+  <h2 id="title">
+    <span><%= "Pregão: #{resource.licitation_number} / #{resource.year}" %></span>
+    <span class="subtitle"><%= resource.object %></span>
+    <span class="subtitle"><%= "Entrega da Proposta: #{resource.proposal_delivery}" %></span>
+    <span class="subtitle"><%= "Abertura da Licitação: #{resource.bid_opening.strftime('%d/%m/%Y')}" %></span>
+    <span class="subtitle"><%= "Pregoiero: #{resource.employee&.name}" %></span>
+  </h2>
+
+
+<%= render 'subtitle' %>
+
+<%= render 'form_wrapper' %>
+</div>
