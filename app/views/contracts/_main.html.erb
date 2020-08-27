@@ -5,7 +5,7 @@
     <%= f.input :licitation_process %>
   </div>
   <div class='yui3-u-1-2'>
-    <%= f.input :creditor, as: :auto_complete, data_source: creditors_path %>
+    <%= f.input :creditor, as: :auto_complete, source_path: creditors_path(by_ratification_and_licitation_process_id: f.object.licitation_process_id) %>
   </div>
 </div>
 
@@ -41,7 +41,9 @@
 
 <div class="yui3-g">
   <div class="yui3-u-2-5">
-    <%= f.input :parent %>
+    <%= f.input :parent, as: :modal,
+                modal_url: modal_contracts_path(by_licitation_process: f.object.licitation_process_id, by_creditor_principal_contracts: f.object.creditor_id),
+                hidden_field: :parent_id %>
   </div>
   <div class="yui3-u-1-5">
     <%= f.input :publication_date %>
