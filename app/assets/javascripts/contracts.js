@@ -86,12 +86,12 @@ $(document).ready(function () {
   }
 
   $('form').on('change', '#contract_licitation_process_id', function (event, licitationProcess) {
+
     if (licitationProcess) {
       $('#contract_content').val(licitationProcess.description);
       $('#contract_modality_humanize').val(licitationProcess.modality_humanize);
       $('#contract_execution_type').val(licitationProcess.execution_type);
       $('#contract_contract_guarantees').val(licitationProcess.contract_guarantees);
-
       if(licitationProcess.creditors){
         if(licitationProcess.creditors.length > 1){
           setUrlToCreditor(licitationProcess.id);
@@ -124,7 +124,6 @@ $(document).ready(function () {
     $('#contract_creditor')
       .val(name)
       .trigger("change");
-
     $('#contract_creditor_id').val(id).trigger("change");
   }
 
@@ -134,17 +133,8 @@ $(document).ready(function () {
   });
 
   function lookForParentContract(creditor_id){
-    const licitation_id = $("#contract_licitation_process_id").val();
-    const params = {
-      by_licitation_process: licitation_id,
-      by_creditor_principal_contracts: creditor_id
-      };
-    var url = Routes.contract + "?";
-
-    url += jQuery.param(params);
-
     $.ajax({
-        url: url,
+        url: setUrlForParent(creditor_id),
         dataType: 'json',
         type: 'GET',
         success: function (data) {
@@ -152,6 +142,21 @@ $(document).ready(function () {
             fillParentField(data[0])
         }
       });
+  }
+
+  function setUrlForParent(creditor_id){
+    const licitation_id = $("#contract_licitation_process_id").val();
+    const params = {
+      by_licitation_process: licitation_id,
+      by_creditor_principal_contracts: creditor_id
+    };
+    var url = Routes.modal_contracts + "?";
+
+    url += jQuery.param(params);
+
+    $("#contract_parent").data('modal-url', url);
+
+    return url
   }
 
   function fillParentField(data){
@@ -198,4 +203,5 @@ $(document).ready(function () {
 
     item.find('.consumption').val(result)
   });
+
 });
