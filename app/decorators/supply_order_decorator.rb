@@ -8,7 +8,7 @@ class SupplyOrderDecorator
   def number_year
     index = contract&.supply_orders&.order('compras_supply_orders.id')&.find_index {|supply| supply.id == id }
     if index
-      "Contrato #{self.number}/#{self.year} - ordem #{index}"
+      "contrato #{contract.contract_number} - ordem #{index}"
     else
       ""
     end
