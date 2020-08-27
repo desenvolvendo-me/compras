@@ -116,7 +116,15 @@ class Contract < Compras::Model
             licitation_process.type_of_removal.not_eq(type_of_removal) |
               licitation_process.type_of_removal.eq(nil)
           }
-        end
+  end
+
+  scope :by_creditor_principal_contracts, lambda{|creditor_id|
+    where(creditor_id: creditor_id, principal_contract: true)
+  }
+
+  scope :by_licitation_process, lambda{|licitation_id|
+    where(licitation_process_id: licitation_id)
+  }
 
   def self.ordered
     order("ABS(end_date - '#{Date.today}'), unico_people.name ASC, contract_number DESC, year DESC, publication_date DESC ").joins(creditor: [:person])

@@ -4,6 +4,8 @@ class ContractsController < CrudController
   has_scope :purchase_process_id, allow_blank: true
   has_scope :between_days_finish, using: %i[started_at ended_at], :type => :hash
   has_scope :by_days_finish, allow_blank: true
+  has_scope :by_licitation_process, allow_blank: true
+  has_scope :by_creditor_principal_contracts, allow_blank: true
 
   layout "report", only: [:conference]
 
