@@ -57,12 +57,12 @@ gem 'foreigner', '~> 1.7'
 gem 'decore', github: 'matiasleidemer/decore'
 gem 'enumerate_it', '~> 1.2'
 
-
 # gem 'strong_parameters', '0.2.3' # quebra
 gem 'paper_trail'
 gem 'rubocop', '0.80.1'
 
 gem 'jwt'
+gem 'material_icons'
 gem 'sass-rails'
 gem 'uglifier'
 gem 'zip-zip'
