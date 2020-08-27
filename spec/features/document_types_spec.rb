@@ -6,7 +6,7 @@ feature "DocumentTypes" do
   end
 
   scenario 'create, update and destroy a new document_type' do
-    navigate 'Cadastro > Tipos de Documento'
+    navigate 'Configurações > Tipos de Documento'
 
     click_link 'Criar Tipo de Documento'
 
@@ -49,7 +49,7 @@ feature "DocumentTypes" do
   scenario 'cannot destroy an existent document_type with licitation_process relationship' do
     LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Cadastro > Tipos de Documento'
+    navigate 'Configurações > Tipos de Documento'
 
     click_link 'Fiscal'
 
@@ -59,7 +59,7 @@ feature "DocumentTypes" do
   scenario 'index with columns at the index' do
     DocumentType.make!(:fiscal)
 
-    navigate 'Cadastro > Tipos de Documento'
+    navigate 'Configurações > Tipos de Documento'
 
     within_records do
       expect(page).to have_content 'Descrição'

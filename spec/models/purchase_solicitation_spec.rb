@@ -26,9 +26,9 @@ describe PurchaseSolicitation do
 
   it { should have_and_belong_to_many(:licitation_processes) }
   it { should have_and_belong_to_many(:price_collections) }
-  it { should have_many(:purchase_solicitation_budget_allocations).dependent(:destroy).order(:id) }
+  it { should have_many(:purchase_solicitation_budget_allocations).dependent(:destroy) }
   it { should have_many(:items).dependent(:restrict)}
-  it { should have_many(:purchase_solicitation_liberations).dependent(:destroy).order(:sequence) }
+  it { should have_many(:purchase_solicitation_liberations).dependent(:destroy) }
   it { should have_many(:price_collection_items).through(:price_collections) }
   it { should have_many(:price_collection_proposal_items).through(:price_collection_items) }
   it { should have_one(:annul).dependent(:destroy) }

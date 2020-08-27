@@ -1,4 +1,6 @@
 class Neighborhood < InscriptioCursualis::Neighborhood
+  attr_accessible :name, :city_id, :district_id
+
   has_many :addresses, :dependent => :restrict
 
   scope :street_id, lambda { |street_id| joins(:streets).where { streets.id.eq(street_id) } }

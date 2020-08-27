@@ -1,4 +1,4 @@
-module TceExport::MG
+module TceExport::Mg
   module MonthlyMonitoring
     class ContractDataGenerator < DataGeneratorBase # Registro 10
       def generate_data

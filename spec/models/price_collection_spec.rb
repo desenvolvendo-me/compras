@@ -15,7 +15,7 @@ describe PriceCollection do
     it { should have_one :annul }
 
     it { should have_many :items }
-    it { should have_many(:price_collection_proposals).dependent(:destroy).order(:id) }
+    it { should have_many(:price_collection_proposals).dependent(:destroy) }
     it { should have_many(:creditors).through(:price_collection_proposals) }
     it { should have_many(:price_collection_classifications).dependent(:destroy) }
     it { should have_and_belong_to_many(:purchase_solicitations) }

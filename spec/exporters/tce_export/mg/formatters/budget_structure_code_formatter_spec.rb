@@ -1,7 +1,7 @@
 require 'exporter_helper'
 require 'app/exporters/tce_export/mg/formatters/budget_structure_code_formatter'
 
-describe TceExport::MG::Formatters::BudgetStructureCodeFormatter do
+describe TceExport::Mg::Formatters::BudgetStructureCodeFormatter do
   let(:budget_structure) { double('BudgetStructure', :to_s => '999') }
 
   it "returns the formatted code" do
@@ -30,7 +30,7 @@ describe TceExport::MG::Formatters::BudgetStructureCodeFormatter do
 
     expect {
       described_class.new("01", budget_structure).to_s
-    }.to raise_error(TceExport::MG::Exceptions::InvalidData, 'Estrutura orçamentária "999" inválida. Deve ter 2 (99.999) ou 3 níveis (99.999.999)')
+    }.to raise_error(TceExport::Mg::Exceptions::InvalidData, 'Estrutura orçamentária "999" inválida. Deve ter 2 (99.999) ou 3 níveis (99.999.999)')
   end
 
   it "returns the formatted code if budget structure sequence is empty" do
@@ -38,7 +38,7 @@ describe TceExport::MG::Formatters::BudgetStructureCodeFormatter do
 
     expect {
       described_class.new("01", budget_structure).to_s
-    }.to raise_error(TceExport::MG::Exceptions::InvalidData, 'Estrutura orçamentária "999" inválida. Deve ter 2 (99.999) ou 3 níveis (99.999.999)')
+    }.to raise_error(TceExport::Mg::Exceptions::InvalidData, 'Estrutura orçamentária "999" inválida. Deve ter 2 (99.999) ou 3 níveis (99.999.999)')
   end
 
   context 'when budget_structure is nil' do

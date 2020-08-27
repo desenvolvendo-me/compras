@@ -3,8 +3,8 @@ class NatureExpense < Compras::Model
 
   attr_modal :description, :nature
   
-  has_many :split_expenses, class_name: 'SplitExpense',
-           :order => :id,dependent: :destroy
+  has_many :split_expenses, -> { order(:id) }, class_name: 'SplitExpense',
+           dependent: :destroy
   accepts_nested_attributes_for :split_expenses, allow_destroy: true
 
   validates :description, :nature, presence: true, uniqueness: true

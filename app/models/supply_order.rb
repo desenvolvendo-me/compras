@@ -19,8 +19,8 @@ class SupplyOrder < Compras::Model
   has_many :items, class_name: 'SupplyOrderItem', dependent: :destroy
   has_many :invoices, class_name: 'Invoice', dependent: :destroy
   has_many :supply_requests, class_name: "SupplyOrderRequests", dependent: :destroy
-  has_many :supply_budgetaries, class_name: "SupplyOrderBudgetary", :dependent => :restrict,
-           :inverse_of => :supply_order, :order => :id
+  has_many :supply_budgetaries, -> { order(:id) }, class_name: "SupplyOrderBudgetary", :dependent => :restrict,
+           :inverse_of => :supply_order
 
   accepts_nested_attributes_for :items, allow_destroy: true, reject_if: proc { |att| att['quantity'].blank?}
   accepts_nested_attributes_for :invoices, allow_destroy: true,  reject_if: proc { |att| att['number'].blank?}

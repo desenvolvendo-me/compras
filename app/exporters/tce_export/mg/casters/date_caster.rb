@@ -1,4 +1,4 @@
-module TceExport::MG::Casters
+module TceExport::Mg::Casters
   module DateCaster
     extend Validators
 

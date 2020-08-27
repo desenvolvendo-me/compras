@@ -9,7 +9,7 @@ describe SignatureConfiguration do
     expect(subject.to_s).to eq 'Autorizações de Fornecimento'
   end
 
-  it { should have_many(:signature_configuration_items).dependent(:destroy).order(:order) }
+  it { should have_many(:signature_configuration_items).dependent(:destroy) }
 
   it { should validate_presence_of :report }
 

@@ -7,7 +7,7 @@ class ProcessResponsible < Compras::Model
   belongs_to :employee
 
   has_many :judgment_commission_advices, through: :licitation_process
-  has_many :licitation_commission_members, through: :judgment_commission_advices, order: :id
+  has_many :licitation_commission_members, -> { order(:id) }, through: :judgment_commission_advices
 
   has_one :street, through: :employee
   has_one :neighborhood, through: :employee

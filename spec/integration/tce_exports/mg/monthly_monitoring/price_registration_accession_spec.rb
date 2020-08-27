@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe TceExport::MG::MonthlyMonitoring::PriceRegistrationAccessionGenerator do
+describe "TceExport::Mg::MonthlyMonitoring::PriceRegistrationAccessionGenerator" do
   describe "#generate_file" do
     before do
       FileUtils.rm_f('tmp/REGADESAO.csv')

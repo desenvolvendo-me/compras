@@ -8,7 +8,7 @@ feature "Indexers" do
   scenario 'create, update and destroy a new indexer' do
     Currency.make!(:real)
 
-    navigate 'Cadastro > Cadastrais > Indexadores'
+    navigate 'Configurações > Indexadores'
 
     click_link 'Criar Indexador'
 
@@ -55,7 +55,7 @@ feature "Indexers" do
   scenario 'index with columns at the index' do
     Indexer.make!(:selic)
 
-    navigate 'Cadastro > Cadastrais > Indexadores'
+    navigate 'Configurações > Indexadores'
 
     within_records do
       expect(page).to have_content 'Nome'

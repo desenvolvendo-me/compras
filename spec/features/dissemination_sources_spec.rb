@@ -8,7 +8,7 @@ feature "DisseminationSources" do
   scenario 'create, update and destroy a new dissemination_source' do
     CommunicationSource.make!(:jornal_municipal)
 
-    navigate 'Cadastro > Legislação > Meios de Divulgação'
+    navigate 'Configurações > Legislação > Meios de Divulgação'
 
     click_link 'Criar Meio de Divulgação'
 
@@ -47,7 +47,7 @@ feature "DisseminationSources" do
   scenario 'cannot destroy an existent dissemination_source with regulatory_act relationship' do
     RegulatoryAct.make!(:sopa)
 
-    navigate 'Cadastro > Legislação > Meios de Divulgação'
+    navigate 'Configurações > Legislação > Meios de Divulgação'
 
     click_link 'Jornal Oficial do Bairro'
 
@@ -57,7 +57,7 @@ feature "DisseminationSources" do
   scenario 'index with columns at the index' do
     DisseminationSource.make!(:jornal_municipal)
 
-    navigate 'Cadastro > Legislação > Meios de Divulgação'
+    navigate 'Configurações > Legislação > Meios de Divulgação'
 
     within_records do
       expect(page).to have_content 'Descrição'

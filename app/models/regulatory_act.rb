@@ -1,6 +1,12 @@
 class RegulatoryAct < Unico::RegulatoryAct
+  attr_accessible :act_number, :parent_id, :regulatory_act_type, :authorized_value, :additional_percent, :classification,
+                  :budget_change_decree_type, :budget_change_law_type, :origin, :creation_date, :signature_date,
+                  :publication_date, :vigor_date, :end_date, :content, :article_number, :article_description,
+                  :dissemination_source_ids
+
   attr_modal :act_number, :regulatory_act_type
 
+  has_enumeration_for :classification, :with => RegulatoryActClassification, :create_helpers => { :prefix => true }
   has_enumeration_for :classification, :with => RegulatoryActClassification, :create_helpers => { :prefix => true }
   has_enumeration_for :budget_change_decree_type, :create_helpers => { :prefix => true }
   has_enumeration_for :origin
