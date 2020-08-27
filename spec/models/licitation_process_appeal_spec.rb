@@ -29,12 +29,13 @@ describe LicitationProcessAppeal do
   it { should delegate(:process_date).to(:licitation_process).allowing_nil(true).prefix(true) }
 
   context 'validating appeal_date' do
-    before(:each) do
-      subject.stub(:licitation_process).and_return(licitation_process)
-    end
-
     let :licitation_process do
       double('licitation_process', :process_date => Date.new(2012, 12, 13))
+    end
+
+    before(:each) do
+      licitation_process.stub(:marked_for_destruction?).and_return(false)
+      subject.stub(:licitation_process).and_return(licitation_process)
     end
 
     it 'be valid when appeal_date is after process_date' do

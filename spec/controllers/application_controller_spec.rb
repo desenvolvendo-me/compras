@@ -12,10 +12,10 @@ describe ApplicationController do
   it 'should handle customer connection' do
     customer.should_receive(:using_connection)
 
-    request.env['X-Customer'] = 'ipatinga-mg'
+    request.env['X-Customer'] = 'test.host'
 
     Customer.should_receive(:find_by_domain!).
-      with('ipatinga-mg').
+      with('test.host').
       and_return(customer)
 
     get :index

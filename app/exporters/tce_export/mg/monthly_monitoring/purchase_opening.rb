@@ -1,4 +1,4 @@
-module TceExport::MG
+module TceExport::Mg
   module MonthlyMonitoring
     class ResourceDetailDataGenerator < DataGeneratorBase
       def initialize(monthly_monitoring, purchase)

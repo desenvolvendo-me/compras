@@ -1,4 +1,4 @@
-module TceExport::MG
+module TceExport::Mg
   module MonthlyMonitoring
     class ContractedCreditorDataGenerator < DataGeneratorBase
       def initialize(monthly_monitoring, process)

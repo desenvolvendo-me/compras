@@ -1,5 +1,5 @@
 class CompanySize < Persona::CompanySize
-  attr_accessible :extended_company_size_attributes
+  attr_accessible :name, :acronym, :number, :extended_company_size_attributes
 
   attr_modal :name, :acronym, :number
 

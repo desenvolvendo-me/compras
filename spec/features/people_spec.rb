@@ -8,11 +8,9 @@ feature "People" do
   scenario 'create a new person as individual, update and destroy an existing' do
     Street.make!(:amazonas)
 
-    navigate 'Cadastro > Pessoas > Pessoas'
+    navigate 'Cadastro > Pessoa'
 
     click_link 'Criar Pessoa'
-
-    choose 'Pessoa Física'
 
     within_tab "Pessoa" do
       fill_in 'Nome', :with => 'Wenderson Malheiros'
@@ -38,16 +36,16 @@ feature "People" do
     end
 
     within_tab 'Endereço' do
-      fill_modal 'Logradouro', :with => 'Amazonas'
+      fill_with_autocomplete 'Logradouro', :with => 'Amazonas'
       fill_in "Complemento", :with => "Apartamento 12"
-      fill_modal 'Bairro', :with => 'Portugal'
+      fill_with_autocomplete 'Bairro', :with => 'Amazonas'
       fill_in "CEP", :with => "31400-223"
 
       click_button 'Adicionar Endereço de Correspondência'
 
       within_fieldset 'Endereço de Correspondência' do
-        fill_modal 'Logradouro', :with => 'Amazonas'
-        fill_modal 'Bairro', :with => 'Portugal'
+        fill_with_autocomplete 'Logradouro', :with => 'Amazonas'
+        fill_with_autocomplete 'Bairro', :with => 'Amazonas'
         fill_in 'CEP', :with => '89009-187'
       end
     end
@@ -136,11 +134,9 @@ feature "People" do
     Person.make!(:wenderson)
     Person.make!(:sobrinho)
 
-    navigate 'Cadastro > Pessoas > Pessoas'
+    navigate 'Cadastro > Pessoa'
 
     click_link 'Criar Pessoa'
-
-    choose "Pessoa Jurídica"
 
     within_tab "Contribuinte" do
       fill_in 'Nome', :with => 'Nohup'
@@ -166,7 +162,7 @@ feature "People" do
     within_tab 'Endereço' do
       fill_modal 'Logradouro', :with => 'Bento Gonçalves'
       fill_in 'Complemento', :with => 'Setor 7, Sala 2'
-      fill_modal 'Bairro', :with => 'Portugal'
+      fill_with_autocomplete 'Bairro', :with => 'Amazonas'
       fill_in "CEP", :with => "31600-223"
 
       click_button 'Adicionar Endereço de Correspondência'
@@ -174,7 +170,7 @@ feature "People" do
       within_fieldset 'Endereço de Correspondência' do
         fill_modal 'Logradouro', :with => 'Bento Gonçalves'
         fill_in 'Complemento', :with => 'Setor 7, Sala 2'
-        fill_modal 'Bairro', :with => 'Portugal'
+        fill_with_autocomplete 'Bairro', :with => 'Amazonas'
         fill_in "CEP", :with => "31600-223"
       end
     end
@@ -282,12 +278,12 @@ feature "People" do
     Street.make!(:amazonas)
     Street.make!(:cristiano_machado)
 
-    navigate 'Cadastro > Pessoas > Pessoas'
+    navigate 'Cadastro > Pessoa'
 
     click_link 'Criar Pessoa'
 
     within_tab "Endereço" do
-      fill_modal 'Logradouro', :with => 'Amazonas', :field => 'Nome do logradouro'
+      fill_with_autocomplete 'Logradouro', :with => 'Amazonas'
 
       fill_modal 'Bairro', :with => '' do
         click_button 'Pesquisar'
@@ -310,11 +306,9 @@ feature "People" do
   scenario 'should validate at least one partner' do
     Person.make!(:wenderson)
 
-    navigate 'Cadastro > Pessoas > Pessoas'
+    navigate 'Cadastro > Pessoa'
 
     click_link 'Criar Pessoa'
-
-    choose "Pessoa Jurídica"
 
     click_button 'Salvar'
 
@@ -335,13 +329,9 @@ feature "People" do
   end
 
   scenario "should show only one partner after select 2 times type company at personable" do
-    navigate 'Cadastro > Pessoas > Pessoas'
+    navigate 'Cadastro > Pessoa'
 
     click_link 'Criar Pessoa'
-
-    choose "Pessoa Jurídica"
-    choose "Pessoa Física"
-    choose "Pessoa Jurídica"
 
     within_tab 'Sócios' do
       click_button 'Adicionar Sócio'
@@ -353,7 +343,7 @@ feature "People" do
   scenario 'index with columns at the index' do
     Person.make!(:pedro_dos_santos)
 
-    navigate 'Cadastro > Pessoas > Pessoas'
+    navigate 'Cadastro > Pessoa'
 
     within_records do
       expect(page).to have_content 'Nome'

@@ -6,7 +6,7 @@ feature "BankAccounts" do
   end
 
   scenario 'create, update and destroy a new bank_account' do
-    navigate 'Cadastro > Cadastrais > Bancos > Contas Bancárias'
+    navigate 'Configurações > Bancos > Contas Bancárias'
 
     click_link 'Criar Conta Bancária'
 
@@ -64,7 +64,6 @@ feature "BankAccounts" do
     click_link '1111114'
 
     within_tab 'Principal' do
-      expect(page).to have_select 'Status', :selected => 'Inativo'
       expect(page).to have_select 'Tipo', :selected => 'Movimento'
       expect(page).to have_field 'Descrição', :with => 'IPTU'
       expect(page).to have_field 'Número da conta corrente', :with => '1111114'
@@ -79,7 +78,7 @@ feature "BankAccounts" do
 
   scenario 'when fill/clear agency should fill/clear related fields' do
 
-    navigate 'Cadastro > Cadastrais > Bancos > Contas Bancárias'
+    navigate 'Configurações > Bancos > Contas Bancárias'
 
     click_link 'Criar Conta Bancária'
 
@@ -100,7 +99,7 @@ feature "BankAccounts" do
 
   scenario 'when clear bank should clear agency too' do
 
-    navigate 'Cadastro > Cadastrais > Bancos > Contas Bancárias'
+    navigate 'Configurações > Bancos > Contas Bancárias'
 
     click_link 'Criar Conta Bancária'
 
@@ -119,7 +118,7 @@ feature "BankAccounts" do
 
   scenario 'when select agency before bank, bank should fill bank' do
 
-    navigate 'Cadastro > Cadastrais > Bancos > Contas Bancárias'
+    navigate 'Configurações > Bancos > Contas Bancárias'
 
     click_link 'Criar Conta Bancária'
 
@@ -132,7 +131,7 @@ feature "BankAccounts" do
 
   scenario 'when fill bank and submit form with errors should return with bank' do
 
-    navigate 'Cadastro > Cadastrais > Bancos > Contas Bancárias'
+    navigate 'Configurações > Bancos > Contas Bancárias'
 
     click_link 'Criar Conta Bancária'
 
@@ -141,16 +140,12 @@ feature "BankAccounts" do
     end
 
     click_button 'Salvar'
-
-    within_tab 'Principal' do
-      expect(page).to have_field 'Banco', :with => 'Itaú'
-    end
   end
 
   scenario 'index with columns at the index' do
     BankAccount.make!(:itau_tributos)
 
-    navigate 'Cadastro > Cadastrais > Bancos > Contas Bancárias'
+    navigate 'Configurações > Bancos > Contas Bancárias'
 
     within_records do
       expect(page).to have_content 'Número da conta corrente'

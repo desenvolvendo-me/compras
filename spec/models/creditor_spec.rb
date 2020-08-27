@@ -173,6 +173,7 @@ describe Creditor do
     it "should be invalid when has a representative equal a person" do
       person.stub(:id).and_return(1)
       person.stub(:company?).and_return(true)
+      person.stub(:marked_for_destruction?).and_return(false)
       subject.stub(:person).and_return(person)
       subject.stub(:representative_person_ids).and_return( [1, 2, 3] )
 
@@ -184,6 +185,7 @@ describe Creditor do
     it "should be valid when has not a representative equal a person" do
       person.stub(:id).and_return(4)
       person.stub(:company?).and_return(true)
+      person.stub(:marked_for_destruction?).and_return(false)
       subject.stub(:person).and_return(person)
       subject.stub(:representative_person_ids).and_return( [1, 2, 3] )
 

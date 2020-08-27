@@ -7,6 +7,7 @@ class Company < Persona::Company
   attr_accessor :cnae_ids
 
   delegate :city, :zip_code, to: :address, allow_nil: true
+  has_many :partners, class_name: "::Partner", inverse_of: :company, dependent: :destroy
 
   #validate :at_least_one_partner
   validate :cnpj, uniqueness: true

@@ -6,7 +6,7 @@ feature "ReferenceUnits" do
   end
 
   scenario 'create a new reference_unit, update and destroy an existing' do
-    navigate 'Cadastro > Cadastrais > Materiais > Unidades de Medida'
+    navigate 'Configurações > Materiais > Unidades de Medida'
 
     click_link 'Criar Unidade de Medida'
 
@@ -42,7 +42,7 @@ feature "ReferenceUnits" do
   end
 
   scenario 'index with columns at the index' do
-    navigate 'Cadastro > Cadastrais > Materiais > Unidades de Medida'
+    navigate 'Configurações > Materiais > Unidades de Medida'
 
     within_records do
       expect(page).to have_content 'Descrição'

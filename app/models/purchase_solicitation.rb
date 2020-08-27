@@ -32,16 +32,18 @@ class PurchaseSolicitation < Compras::Model
 
   belongs_to_resource :budget_structure
 
-  has_many :items, :class_name => "PurchaseSolicitationItem", :dependent => :restrict,
-                   :inverse_of => :purchase_solicitation, :order => :id
-  has_many :purchase_forms, :class_name => "PurchaseSolicitationPurchaseForm", :dependent => :restrict,
-                            :inverse_of => :purchase_solicitation, :order => :id
+
+  has_many :items, -> { order(:id) }, :class_name => 'PurchaseSolicitationItem', :dependent => :restrict,
+           :inverse_of => :purchase_solicitation
+  has_many :purchase_forms, -> { order(:id) }, :class_name => 'PurchaseSolicitationPurchaseForm', :dependent => :restrict,
+           :inverse_of => :purchase_solicitation
 
   has_and_belongs_to_many :licitation_processes, :join_table => :compras_licitation_processes_purchase_solicitations
 
-  has_many :purchase_solicitation_budget_allocations, :dependent => :destroy,
-                                                      :inverse_of => :purchase_solicitation, :order => :id
-  has_many :purchase_solicitation_liberations, :dependent => :destroy, :order => :sequence, :inverse_of => :purchase_solicitation
+  has_many :purchase_solicitation_budget_allocations, -> { order(:id) }, :dependent => :destroy,
+           :inverse_of => :purchase_solicitation
+  has_many :purchase_solicitation_liberations, -> { order(:sequence) }, :dependent => :destroy, :inverse_of => :purchase_solicitation
+
   has_many :price_collection_items, through: :price_collections, source: :items
   has_many :price_collection_proposal_items, through: :price_collection_items
   has_many :list_purchase_solicitations, :dependent => :destroy

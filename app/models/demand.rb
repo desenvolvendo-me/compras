@@ -8,7 +8,7 @@ class Demand < Compras::Model
   belongs_to :purchasing_unit, :dependent => :destroy
 
   has_many :demand_departments, :dependent => :destroy
-  has_many :departments, :through => :demand_departments, :order => :id
+  has_many :departments, -> { order(:id) }, :through => :demand_departments
   has_many :purchase_solicitations
 
   has_enumeration_for :status, :with => DemandStatus, :create_helpers => true

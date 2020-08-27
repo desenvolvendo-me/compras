@@ -5,7 +5,7 @@ class SignatureConfiguration < Compras::Model
 
   has_enumeration_for :report, :with => SignatureReport
 
-  has_many :signature_configuration_items, :dependent => :destroy, :order => :order
+  has_many :signature_configuration_items, -> { order(:order) }, :dependent => :destroy
 
   accepts_nested_attributes_for :signature_configuration_items, :allow_destroy => true
 
