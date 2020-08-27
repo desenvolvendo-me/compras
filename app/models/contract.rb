@@ -35,6 +35,7 @@ class Contract < Compras::Model
   belongs_to :licitation_process
   belongs_to :creditor
   belongs_to :management_object
+  belongs_to :parent, class_name: 'Contract'
 
   belongs_to_resource :budget_structure
 
