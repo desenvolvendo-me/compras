@@ -5,7 +5,7 @@ class Indexer < Compras::Model
 
   belongs_to :currency
 
-  has_many :indexer_values, -> { order(:date) }, :dependent => :destroy
+  has_many :indexer_values, :dependent => :destroy, :order => :date
   has_many :licitation_processes, :dependent => :restrict, :foreign_key => :readjustment_index_id
 
   accepts_nested_attributes_for :indexer_values

@@ -11,7 +11,7 @@ require 'app/exporters/tce_export/mg/casters/date_caster'
 require 'app/exporters/tce_export/mg/monthly_monitoring'
 require 'app/exporters/tce_export/mg/monthly_monitoring/process_responsible'
 
-describe TceExport::Mg::MonthlyMonitoring::ProcessResponsibleGenerator do
+describe TceExport::MG::MonthlyMonitoring::ProcessResponsibleGenerator do
   let(:generator) { double(:generator) }
   let(:responsible_formatter) { double(:responsible_formatter) }
   let(:member_formatter) { double(:member_formatter) }

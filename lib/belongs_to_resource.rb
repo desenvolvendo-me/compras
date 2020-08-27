@@ -55,7 +55,7 @@ module BelongsToResource
       resource_class = options.fetch(:resource_class) { resource_name.to_s.camelize.constantize }
       resource_id    = options.fetch(:resource_id, "#{resource_name}_id")
 
-      create_reflection :belongs_to, resource_name, nil, { foreign_key: resource_id }, self
+      create_reflection :belongs_to, resource_name, { foreign_key: resource_id }, self
 
       self.send(:class_eval, <<-eoruby, __FILE__, __LINE__ + 1)
         def #{resource_name}(use_cache = true)

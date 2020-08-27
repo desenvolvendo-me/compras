@@ -1,5 +1,5 @@
 class MaterialReport < Report
-  include Concerns::StartEndDatesRange
+  include StartEndDatesRange
 
   attr_accessor :combustible,:material_classification,
                 :material_class,:active,:medicine,:combustible,:description,:material_class_id

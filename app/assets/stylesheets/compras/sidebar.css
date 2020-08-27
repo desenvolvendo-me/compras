@@ -13,7 +13,7 @@
 }
 
 #sidebar h4 {
-  background: url(<%= asset_path 'sidebar-arrow.gif' %>) left bottom no-repeat;
+  background: url('sidebar-arrow.gif') left bottom no-repeat;
   color: #427EB1;
   display: block;
   font-weight: normal;

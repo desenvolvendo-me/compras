@@ -2,7 +2,7 @@ require 'unico-api'
 require 'exporter_helper'
 require 'app/exporters/tce_export/mg/casters/date_caster'
 
-describe TceExport::Mg::Casters::DateCaster do
+describe TceExport::MG::Casters::DateCaster do
   let(:generator) { double(:generator) }
   let(:formatter) { double(:formatter) }
 

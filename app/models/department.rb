@@ -19,7 +19,7 @@ class Department < Compras::Model
     where {description.like("#{q}%")}
   }
 
-  # scope :limit, lambda {|q| limit(q)}
+  scope :limit, lambda {|q| limit(q)}
 
   scope :by_secretary, ->(secretary) do
       where { secretary_id.eq secretary }

@@ -1,5 +1,5 @@
 class PurchasedItemPriceReport < Report
-  include Concerns::StartEndDatesRange
+  include StartEndDatesRange
 
   attr_accessor :type_of_purchase, :modality, :creditor_id, :creditor,
     :licitation_process_id, :licitation_process, :material_id, :material,

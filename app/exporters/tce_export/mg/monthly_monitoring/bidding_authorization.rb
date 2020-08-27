@@ -1,4 +1,4 @@
-module TceExport::Mg
+module TceExport::MG
   module MonthlyMonitoring
     class PartnerDataGenerator < DataGeneratorBase
       def initialize(monthly_monitoring, bidder)
@@ -206,7 +206,8 @@ module TceExport::Mg
         ].join("\n")
       end
     end
-    
+
+
     class BiddingAuthorizationGenerator < GeneratorBase
       acronym 'HABLIC'
 

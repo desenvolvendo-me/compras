@@ -1,4 +1,4 @@
-module TceExport::Mg
+module TceExport::MG
   module MonthlyMonitoring
     class ProcessResponsibleMemberDataGenerator < DataGeneratorBase
       def initialize(monthly_monitoring, responsible)

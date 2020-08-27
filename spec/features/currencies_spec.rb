@@ -6,7 +6,7 @@ feature "Currencies" do
   end
 
   scenario 'create,update and destroy a new currency' do
-    navigate 'Configurações > Moedas'
+    navigate 'Cadastro > Cadastrais > Moedas'
 
     click_link 'Criar Moeda'
 
@@ -44,7 +44,7 @@ feature "Currencies" do
   scenario 'index with columns at the index' do
     Currency.make!(:real)
 
-    navigate 'Configurações > Moedas'
+    navigate 'Cadastro > Cadastrais > Moedas'
 
     within_records do
       expect(page).to have_content 'Nome'

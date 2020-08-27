@@ -35,7 +35,7 @@ describe ContractTerminationsController, vcr: { cassette_name: 'controllers/cont
 
   describe "GET 'new'" do
     let :contract do
-      Contract.make!(:primeiro_contrato, contract_termination: ContractTermination.make!(:contrato_rescindido))
+      Contract.make!(:primeiro_contrato)
     end
 
     before do

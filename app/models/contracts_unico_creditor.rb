@@ -3,7 +3,7 @@ class ContractsUnicoCreditor < Compras::Model
 
   attr_accessor :person, :person_id
 
-  self.primary_key= 'contract_id'
+  set_primary_key :contract_id
 
   belongs_to :creditor
   belongs_to :contract
