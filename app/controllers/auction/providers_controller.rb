@@ -35,7 +35,7 @@ class Auction::ProvidersController < Auction::BaseController
   protected
 
   def create_resource(object)
-    object.profile_id = Profile.where(name: "Pregão").last.id
+    object.profile_id = Profile.where(auction_profile: true).last.id
     object.activated = true
     object.electronic_auction = true
     object.authenticable_type = "Provider"
