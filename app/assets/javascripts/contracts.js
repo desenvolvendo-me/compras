@@ -88,7 +88,8 @@ $(document).ready(function () {
           showToChooseCreditor(licitationProcess.creditors);
         }else{
           setUrlToCreditor(licitationProcess.id);
-          fillCreditorField(licitationProcess.creditors[0].name, licitationProcess.creditors[0].id);
+          if(licitationProcess.creditors[0])
+            fillCreditorField(licitationProcess.creditors[0].name, licitationProcess.creditors[0].id);
         }
       }
 
