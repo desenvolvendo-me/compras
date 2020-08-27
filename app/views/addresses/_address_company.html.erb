@@ -2,42 +2,43 @@
 <%= a.input :addressable_type, :as => :hidden %>
 
 <div class="yui3-g">
+<div class="yui3-u-1-6">
+    <%= a.input :zip_code %>
+  </div>
   <div class="yui3-u-1-2">
     
     <%= a.input :street, as: :auto_complete %>
   </div>
-  <div class="yui3-u-1-6">
+  <div class="yui3-u-1-8">
     <%= a.input :number %>
   </div>
-   <div class="yui3-u-1-3">
+   <div class="yui3-u-1-5">
     <%= a.input :complement %>
+  </div>
+</div>
+
+<div class="yui3-g">
+
+  
+  <div class="yui3-u-1-2">
+    <%= a.input :neighborhood, as: :auto_complete %>
+  </div>
+  <div class="yui3-u-1-3">
+    <%= a.input :city, :disabled => true %>
+  </div>
+
+  <div class="yui3-u-1-6">
+    <%= a.input :state, :disabled => true %>
   </div>
   
 </div>
 
-<div class="yui3-g">
-  <div class="yui3-u-1-3">
-    <%= a.input :neighborhood, as: :auto_complete %>
-  </div>
-  <div class="yui3-u-1-3">
-    <%= a.input :city, disabled: true  %>
-  </div>
-
-  <div class="yui3-u-1-6">
-    <%= a.input :state , disabled: true %>
-  </div>
-  <div class="yui3-u-1-6">
-    <%= a.input :zip_code %>
-  </div>
-</div>
-
 
 <script>
-console.log("iniciou")
     $("#<%= a.sanitized_object_name %>_street").on('change', function (event) {
        var street_id = $("#<%= a.sanitized_object_name %>_street_id").val();
         var street_url = "<%= streets_path%>"
-        console.log("pesquisou endereco")
+
         $.get(street_url+'/'+street_id+'.json', function(event){
           var street = event;
             if (street) {
