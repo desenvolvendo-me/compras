@@ -1,5 +1,14 @@
 <%= f.input :sequential_number, as: :hidden %>
 <div class="yui3-g">
+  <div class='yui3-u-1-2'>
+    <%= f.input :licitation_process %>
+  </div>
+  <div class='yui3-u-1-2'>
+    <%= f.input :creditor, as: :auto_complete, data_source: creditors_path %>
+  </div>
+</div>
+
+<div class="yui3-g">
   <div class='yui3-u-1-4'>
     <%= f.input :type_contract %>
   </div>
@@ -25,15 +34,6 @@
   </div>
 </div>
 
-
-<div class="yui3-g">
-  <div class='yui3-u-1-2'>
-    <%= f.input :licitation_process %>
-  </div>
-  <div class='yui3-u-1-2'>
-    <%= f.input :creditor, as: :auto_complete, data_source: creditors_path %>
-  </div>
-</div>
 
 <div class="yui3-g">
   <div class="yui3-u-2-5">
@@ -164,22 +164,25 @@ var contractValidity = $('#contract_contract_validity'),
     startDate = $('#contract_start_date'),
     endDate = $('#contract_end_date');
 
-    startDate.on('change', function(event){
-      
-      var date = startDate.datepicker('getDate'),
-      soma = 0;
-      if (contractValidity != 'undefined'){
-        soma = parseInt(date.getMonth(),10) + parseInt(contractValidity.val(),10);
-      }
-      if(soma != 0 ){
-        date.setMonth(soma.toString());
-        endDate.val(getFormattedDate(date));
-        
-      }else{
-        endDate.val(getFormattedDate(startDate.datepicker('getDate')));
-      }
+    startDate.datepicker({
+      onSelect: function(d,i){
+        if(d !== i.lastVal){
+          var date = $(this).datepicker('getDate'),
+            soma = 0;
 
-      });
+          if (contractValidity.val() !== ''){
+            soma = parseInt(date.getMonth(),10) + parseInt(contractValidity.val(),10);
+          }
+          if(soma !== 0 ){
+            date.setMonth(soma.toString());
+            endDate.val(getFormattedDate(date));
+
+          }else{
+            endDate.val(getFormattedDate($(this).datepicker('getDate')));
+          }
+        }
+      }
+    });
 
 
   var clearModalityExecutionType = function () {
