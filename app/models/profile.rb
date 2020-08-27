@@ -1,5 +1,5 @@
 class Profile < Compras::Model
-  attr_accessible :name, :roles_attributes
+  attr_accessible :name, :roles_attributes, :auction_profile
 
   attr_modal :name
 
@@ -19,7 +19,7 @@ class Profile < Compras::Model
   end
 
   def set_profile_admin
-      Profile.create(name:'Administrador') if self.name != 'Administrador'
+    Profile.create(name: "Administrador") if self.name != "Administrador"
   end
 
   def build_role(attributes)

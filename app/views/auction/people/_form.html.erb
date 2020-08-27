@@ -20,7 +20,7 @@ var cnpj = $('#person_personable_attributes_cnpj');
         console.log("deu");
         console.log(data);
         if(data== null){
-          window.location = "<%= new_user_session_path(notice: 'CNPJ já cadastrado. Clique aqui para Entrar') %>" 
+          window.location = "<%= new_auction_provider_path(notice: 'CNPJ já cadastrado. Clique aqui para Entrar') %>" 
         }
       }, 'json');
 
