@@ -236,7 +236,7 @@ class Contract < Compras::Model
   end
 
   def principal_contract_per_creditor
-    contracts = Contract.by_licitation_process(licitation_process_id).by_creditor_principal_contracts(creditor_id)
-    errors.add(:principal_contract, :already_exist_principal_contract_for_creditor) if contracts.present?
+    contracts = Contract.by_licitation_process(licitation_process_id).by_creditor_principal_contracts(creditor_id).last
+    errors.add(:principal_contract, :already_exist_principal_contract_for_creditor) if contracts != self
   end
 end
