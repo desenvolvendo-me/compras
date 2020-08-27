@@ -25,11 +25,9 @@ class PriceCollection < Compras::Model
   belongs_to :payment_method
 
   has_many :creditors, :through => :price_collection_proposals
-
-  has_many :items, -> { order(:id) }, class_name: 'PriceCollectionItem'
-
+  has_many :items, class_name: "PriceCollectionItem", :order => :id
   has_many :price_collection_classifications, :as => :classifiable, :dependent => :destroy
-  has_many :price_collection_proposals, -> { order(:id) }, :dependent => :destroy
+  has_many :price_collection_proposals, :dependent => :destroy, :order => :id
 
   has_one :annul, :class_name => "PriceCollectionAnnul"
 

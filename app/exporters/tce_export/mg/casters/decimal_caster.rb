@@ -1,4 +1,4 @@
-module TceExport::Mg::Casters
+module TceExport::MG::Casters
   module DecimalCaster
     extend Validators
 

@@ -1,4 +1,9 @@
 class BankAccount < Unico::BankAccount
-  attr_accessible  :kind, :bank_id, :agency_id, :account_number, :digit, :description
+  def bank
+    agency.try(:bank) || @bank
+  end
 
+  def bank_id
+    agency.try(:bank_id) || @bank_id
+  end
 end

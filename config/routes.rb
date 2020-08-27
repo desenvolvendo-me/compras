@@ -170,10 +170,7 @@ Compras::Application.routes.draw do
       get :filter
     end
   end
-
-
-  get 'api/supply_requests/show' => 'supply_requests#api_show', as: :supply_requests_api_show
-
+  match "api/supply_requests/show" => "supply_requests#api_show", as: :supply_requests_api_show
 
   resources :supply_request_managements, only: %i[index new] do
     collection do
@@ -338,8 +335,7 @@ Compras::Application.routes.draw do
     end
   end
 
-  get 'api/demands/show' => 'demands#api_show', as: :demands_api_show
-
+  match "api/demands/show" => "demands#api_show", as: :demands_api_show
 
   resources :contract_types do
     collection do
@@ -569,7 +565,7 @@ Compras::Application.routes.draw do
   resources :purchase_process_proposals
 
   resources :purchase_process_creditor_proposals, except: :destroy
-  # delete "/purchase_process_creditor_proposals/", to: "purchase_process_creditor_proposals#destroy", as: :purchase_process_creditor_proposal
+  delete "/purchase_process_creditor_proposals/", to: "purchase_process_creditor_proposals#destroy", as: :purchase_process_creditor_proposal
 
   resources :creditor_proposal_benefited_tieds, only: %i[edit update]
 
@@ -605,8 +601,7 @@ Compras::Application.routes.draw do
       get :modal
     end
   end
-  get 'api/materials/show' => 'materials#api_show', as: :material_api_show
-
+  match "api/materials/show" => "materials#api_show", as: :material_api_show
 
   resources :material_classes do
     collection do
@@ -748,8 +743,7 @@ Compras::Application.routes.draw do
     get "modal_info", on: :member
   end
 
-  get 'api/purchase_solicitations/show' => 'purchase_solicitations#api_show', as: :purchase_solicitations_api_show
-
+  match "api/purchase_solicitations/show" => "purchase_solicitations#api_show", as: :purchase_solicitations_api_show
 
   get "purchase_solicitation/department" => "purchase_solicitations#department", as: :purchase_solicitation_department
   get "purchase_solicitation/balance" => "purchase_solicitations#balance", as: :purchase_solicitation_balance
@@ -1076,19 +1070,17 @@ Compras::Application.routes.draw do
       resources :purchase_solicitation_items
     end
 
+    match "map_of_bids/:licitation_process_id" => "map_of_bids#show", as: :map_of_bids
 
-    get 'map_of_bids/:licitation_process_id' => 'map_of_bids#show', as: :map_of_bids
+    match "map_of_prices/:id" => "map_of_prices#show", as: :map_of_prices
 
-    get 'map_of_prices/:id' => 'map_of_prices#show', as: :map_of_prices
-
-    get 'minute_purchase_processes/:licitation_process_id' => 'minute_purchase_processes#show', as: :minute_purchase_processes
-    get 'minute_purchase_process_tradings/:licitation_process_id' => 'minute_purchase_process_tradings#show',
+    match "minute_purchase_processes/:licitation_process_id" => "minute_purchase_processes#show", as: :minute_purchase_processes
+    match "minute_purchase_process_tradings/:licitation_process_id" => "minute_purchase_process_tradings#show",
           as: :minute_purchase_process_tradings
 
-    get 'supply_orders/:supply_order_id' => 'supply_orders#show', as: :supply_orders
-    get 'supply_requests/:supply_request_id' => 'supply_requests#show', as: :supply_requests
-    get 'creditor_materials' => 'creditor_materials#show', as: :creditor_materials
-
+    match "supply_orders/:supply_order_id" => "supply_orders#show", as: :supply_orders
+    match "supply_requests/:supply_request_id" => "supply_requests#show", as: :supply_requests
+    match "creditor_materials" => "creditor_materials#show", as: :creditor_materials
   end
 
   namespace :api do

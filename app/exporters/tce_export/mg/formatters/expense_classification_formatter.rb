@@ -1,4 +1,4 @@
-module TceExport::Mg
+module TceExport::MG
   module Formatters
     class ExpenseClassificationFormatter
       def initialize(entity_code, budget_allocation, expense_nature)
@@ -31,7 +31,7 @@ module TceExport::Mg
         unit = budget_allocation.budget_structure_structure_sequence[1]
 
         if unit.nil?
-          raise TceExport::Mg::Exceptions::InvalidData, "Código da estrutura orçamentária inválido"
+          raise TceExport::MG::Exceptions::InvalidData, "Código da estrutura orçamentária inválido"
         end
 
         [entity_code.to_s.rjust(2, "0"), unit.code.to_s.rjust(3, "0")].join

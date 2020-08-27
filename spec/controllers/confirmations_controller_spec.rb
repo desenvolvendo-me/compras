@@ -26,7 +26,7 @@ describe ConfirmationsController do
 
         user.should_receive(:confirmed?).at_least(:once).and_return true
         get :show
-        expect(response).to redirect_to(user_session_path)
+        expect(response).to redirect_to(root_path)
       end
     end
 

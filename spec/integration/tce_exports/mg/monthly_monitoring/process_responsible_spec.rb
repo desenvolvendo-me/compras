@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "TceExport::Mg::MonthlyMonitoring::ProcessResponsibleGenerator", vcr: { cassette_name: 'integration/process_responsible' } do
+describe TceExport::MG::MonthlyMonitoring::ProcessResponsibleGenerator, vcr: { cassette_name: 'integration/process_responsible' } do
   let(:customer) { double(:customer, domain: 'compras.dev', secret_token: '1234') }
 
   before do

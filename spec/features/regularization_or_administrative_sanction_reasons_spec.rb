@@ -6,7 +6,7 @@ feature "RegularizationOrAdministrativeSanctionReasons" do
   end
 
   scenario 'create a new regularization_or_administrative_sanction_reason, update and destroy an existing' do
-    navigate 'Configurações > Motivos de Sanções Administrativas ou Regularizações'
+    navigate 'Cadastro > Pessoas > Auxiliar > Motivos de Sanções Administrativas ou Regularizações'
 
     click_link 'Criar Motivo de Sanção Administrativa ou Regularização'
 
@@ -44,7 +44,7 @@ feature "RegularizationOrAdministrativeSanctionReasons" do
   scenario 'index with columns at the index' do
     RegularizationOrAdministrativeSanctionReason.make!(:sancao_administrativa)
 
-    navigate 'Configurações > Motivos de Sanções Administrativas ou Regularizações'
+    navigate 'Cadastro > Pessoas > Auxiliar > Motivos de Sanções Administrativas ou Regularizações'
 
     within_records do
       expect(page).to have_content 'Descrição'

@@ -16,7 +16,7 @@ feature 'Report::MapOfPrices' do
       proposal_item.save!
     end
 
-    navigate 'Compras > Coletas de Preços'
+    navigate 'Licitações > Coletas de Preços'
 
 
 

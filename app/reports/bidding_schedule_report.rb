@@ -1,5 +1,5 @@
 class BiddingScheduleReport < Report
-  include Concerns::StartEndDatesRange
+  include StartEndDatesRange
 
   attr_accessor :object_type, :modality,  :licitation_commission_id,
     :licitation_commission

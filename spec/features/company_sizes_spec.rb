@@ -5,8 +5,8 @@ feature "CompanySizes" do
     sign_in
   end
 
-  scenario 'create, update and destroy a new company_size' do
-    navigate 'Cadastro > Portes das Empresas'
+  scenario "create, update and destroy a new company_size" do
+    navigate "Cadastro > Pessoas > Auxiliar > Portes das Fornecedores"
 
     click_link "Criar Porte da Empresa"
 
@@ -50,11 +50,7 @@ feature "CompanySizes" do
   scenario "index with columns at the index" do
     CompanySize.make!(:empresa_de_grande_porte)
 
-<<<<<<< HEAD
     navigate "Cadastro > Pessoas > Auxiliar > Portes das Fornecedores"
-=======
-    navigate 'Cadastro > Portes das Empresas'
->>>>>>> test(feature): menu
 
     within_records do
       expect(page).to have_content "Nome"

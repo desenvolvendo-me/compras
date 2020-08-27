@@ -26,11 +26,11 @@ describe Contract do
   it { should belong_to :licitation_process }
   it { should belong_to :budget_structure_responsible }
   it { should belong_to :lawyer }
-  it { should have_many(:delivery_schedules).dependent(:destroy) }
+  it { should have_many(:delivery_schedules).dependent(:destroy).order(:sequence) }
   it { should have_many(:occurrence_contractual_historics).dependent(:restrict) }
   it { should have_many(:additives).dependent(:restrict) }
   it { should have_one(:contract_termination).dependent(:restrict) }
-  it { should have_and_belong_to_many(:creditors) }
+  it { should have_one(:creditor) }
 
   it 'should return contract_number as to_s method' do
     subject.contract_number = '001'
@@ -46,7 +46,7 @@ describe Contract do
   it { should validate_presence_of :publication_date }
   it { should validate_presence_of :dissemination_source }
   it { should validate_presence_of :content }
-  it { should validate_presence_of :creditor_ids }
+  it { should validate_presence_of :creditor_id }
   it { should validate_presence_of :contract_value }
   it { should validate_presence_of :contract_validity }
   it { should validate_presence_of :signature_date }
