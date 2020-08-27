@@ -94,6 +94,7 @@ $(function () {
 
     if (!allowed) {
       alert("<%= I18n.t('errors.messages.all_required_fields_should_be_filled') %>");
+      nestedFields.trigger('nestedGrid:requiredError');
     }
 
     return allowed;
