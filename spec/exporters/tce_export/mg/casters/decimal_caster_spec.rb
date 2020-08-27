@@ -2,12 +2,12 @@ require 'unico-api'
 require 'exporter_helper'
 require 'app/exporters/tce_export/mg/casters/decimal_caster'
 
-describe TceExport::MG::Casters::DecimalCaster do
+describe TceExport::Mg::Casters::DecimalCaster do
   let(:generator) { double(:generator) }
   let(:formatter) { double(:formatter) }
 
   it "returns the value in the string format" do
-    result = TceExport::MG::Casters::DecimalCaster.call(10.0, {})
+    result = TceExport::Mg::Casters::DecimalCaster.call(10.0, {})
     expect(result).to eq "1000"
   end
 
@@ -18,7 +18,7 @@ describe TceExport::MG::Casters::DecimalCaster do
     generator.should_receive(:add_error).with "#{options[:attribute]} muito longo."
     generator.should_receive(:add_error_description)
 
-    TceExport::MG::Casters::DecimalCaster.call(100.0, options)
+    TceExport::Mg::Casters::DecimalCaster.call(100.0, options)
   end
 
   it "validates presence of required attributes" do
@@ -27,16 +27,16 @@ describe TceExport::MG::Casters::DecimalCaster do
     formatter.should_receive(:error_description).with('bar', :required)
     generator.should_receive(:add_error).with "#{options[:attribute]} não pode ficar em branco."
     generator.should_receive(:add_error_description)
-    TceExport::MG::Casters::DecimalCaster.call(nil, options)
+    TceExport::Mg::Casters::DecimalCaster.call(nil, options)
 
     formatter.should_receive(:error_description).with('bar', :required)
     generator.should_receive(:add_error).with "#{options[:attribute]} não pode ficar em branco."
     generator.should_receive(:add_error_description)
-    TceExport::MG::Casters::DecimalCaster.call(' ', options)
+    TceExport::Mg::Casters::DecimalCaster.call(' ', options)
   end
 
   it "returns a single space if value is nil" do
-    result = TceExport::MG::Casters::DecimalCaster.call(nil, {})
+    result = TceExport::Mg::Casters::DecimalCaster.call(nil, {})
     expect(result).to eq " "
   end
 end

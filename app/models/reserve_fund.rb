@@ -7,7 +7,7 @@ class ReserveFund < UnicoAPI::Resources::Contabilidade::ReserveFund
 
   belongs_to :creditor
 
-  belongs_to_resource :budget_allocation
+  # belongs_to_resource :budget_allocation
 
   schema do
     date :date

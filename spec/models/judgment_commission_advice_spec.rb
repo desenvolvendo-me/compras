@@ -8,7 +8,7 @@ describe JudgmentCommissionAdvice do
   it { should belong_to :licitation_process }
   it { should belong_to :licitation_commission }
 
-  it { should have_many(:judgment_commission_advice_members).dependent(:destroy).order(:id) }
+  it { should have_many(:judgment_commission_advice_members).dependent(:destroy) }
 
   it { should validate_presence_of :licitation_process }
   it { should validate_presence_of :licitation_commission }

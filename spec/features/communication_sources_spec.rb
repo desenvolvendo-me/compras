@@ -6,7 +6,7 @@ feature "CommunicationSources" do
   end
 
   scenario 'create, update a new communication_source' do
-    navigate 'Cadastro > Legislação > Tipos do Meio de Divulgação'
+    navigate 'Configurações > Legislação > Tipos do Meio de Divulgação'
 
     click_link 'Criar Tipo do Meio de Divulgação'
 
@@ -40,7 +40,7 @@ feature "CommunicationSources" do
   scenario 'index with columns at the index' do
     CommunicationSource.make!(:jornal_municipal)
 
-    navigate 'Cadastro > Legislação > Tipos do Meio de Divulgação'
+    navigate 'Configurações > Legislação > Tipos do Meio de Divulgação'
 
     within_records do
       expect(page).to have_content 'Descrição'

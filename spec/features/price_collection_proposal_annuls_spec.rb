@@ -8,7 +8,7 @@ feature 'PriceCollectionProposalAnnul' do
   scenario 'accessing the form' do
     PriceCollection.make!(:coleta_de_precos)
 
-    navigate 'Licitações > Coletas de Preços'
+    navigate 'Compras > Coletas de Preços'
 
     
 
@@ -33,7 +33,7 @@ feature 'PriceCollectionProposalAnnul' do
     PriceCollection.make!(:coleta_de_precos)
     Employee.make!(:wenderson)
 
-    navigate 'Licitações > Coletas de Preços'
+    navigate 'Compras > Coletas de Preços'
 
     
 

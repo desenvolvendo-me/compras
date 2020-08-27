@@ -1,4 +1,5 @@
 class DepartmentRequestReport < Report
-  include StartEndDatesRange
+  include Concerns::StartEndDatesRange
+
   attr_accessor :department
 end

@@ -2,14 +2,14 @@ require 'spec_helper'
 
 class HeaderDecorator
   include Decore
-  include Proxy
-  include Header
+  include Decore::Proxy
+  include Decore::Header
 end
 
 class HeaderWithoutOptionsDecorator
   include Decore
-  include Proxy
-  include Header
+  include Decore::Proxy
+  include Decore::Header
 
   attr_header :name, :year, :height
 end

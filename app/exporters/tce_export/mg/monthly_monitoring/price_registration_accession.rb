@@ -1,4 +1,4 @@
-module TceExport::MG
+module TceExport::Mg
   module MonthlyMonitoring
     class PriceRegistrationAccessionDataGenerator < DataGeneratorBase
       def generate_data

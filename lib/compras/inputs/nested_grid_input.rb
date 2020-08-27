@@ -25,7 +25,7 @@ module Compras
       end
 
       def template_folder
-        association_name.tableize
+        association_name.plural
       end
 
       def association_class

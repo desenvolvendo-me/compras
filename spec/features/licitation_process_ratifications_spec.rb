@@ -29,10 +29,7 @@ feature "LicitationProcessRatifications", vcr: { cassette_name: :licitation_proc
 
     expect(page).to have_field 'Processo de compra', disabled: true
 
-    within_modal 'Participante vencedor' do
-      click_button 'Pesquisar'
-      click_record 'Gabriel Sobrinho'
-    end
+    fill_modal 'Participante vencedor', :field => 'Nome', :with => 'Gabriel Sobrinho'
 
     expect(page).to have_content 'Arame comum'
     expect(page).to have_content 'Arame farpado'
@@ -165,10 +162,7 @@ feature "LicitationProcessRatifications", vcr: { cassette_name: :licitation_proc
 
     expect(page).to have_field 'Processo de compra', disabled: true
 
-    within_modal 'Participante vencedor' do
-      click_button 'Pesquisar'
-      click_record 'Nohup'
-    end
+    fill_modal 'Participante vencedor', :field => 'Nome', :with => 'Nohup'
 
     within_records do
       expect(page).to have_css('tbody tr', count: 1)
@@ -311,10 +305,7 @@ feature "LicitationProcessRatifications", vcr: { cassette_name: :licitation_proc
 
     expect(page).to have_field 'Processo de compra', disabled: true
 
-    within_modal 'Participante vencedor' do
-      click_button 'Pesquisar'
-      click_record 'IBM'
-    end
+    fill_modal 'Participante vencedor', :field => 'Nome', :with => 'IBM'
 
     within_records do
       within 'tbody tr:nth-child(1)' do
@@ -490,10 +481,7 @@ feature "LicitationProcessRatifications", vcr: { cassette_name: :licitation_proc
       click_link 'Voltar'
     end
 
-    within_modal 'Participante vencedor' do
-      click_button 'Pesquisar'
-      click_record 'Gabriel Sobrinho'
-    end
+    fill_modal 'Participante vencedor', :field => 'Nome', :with => 'Gabriel Sobrinho'
 
     expect(page).to have_content '02.02.00001'
     expect(page).to have_content 'Arame farpado'
@@ -694,10 +682,7 @@ feature "LicitationProcessRatifications", vcr: { cassette_name: :licitation_proc
       end
     end
 
-    within_modal 'Participante vencedor' do
-      click_button 'Pesquisar'
-      click_record 'Gabriel Sobrinho'
-    end
+    fill_modal 'Participante vencedor', :field => 'Nome', :with => 'Gabriel Sobrinho'
 
     within_records do
       within 'tbody tr:nth-child(1)' do
@@ -787,10 +772,7 @@ feature "LicitationProcessRatifications", vcr: { cassette_name: :licitation_proc
 
     expect(page).to have_field 'Processo de compra', disabled: true
 
-    within_modal 'Participante vencedor' do
-      click_button 'Pesquisar'
-      click_record 'Gabriel Sobrinho'
-    end
+    fill_modal 'Participante vencedor', :field => 'Nome', :with => 'Gabriel Sobrinho'
 
     expect(page).to have_content 'Arame comum'
     expect(page).to have_content 'Arame farpado'
@@ -901,10 +883,7 @@ feature "LicitationProcessRatifications", vcr: { cassette_name: :licitation_proc
 
     expect(page).to have_field 'Processo de compra', with: '2/2013 - Concorrência 1', disabled: true
 
-    within_modal 'Participante vencedor' do
-      click_button 'Pesquisar'
-      click_record 'Gabriel Sobrinho'
-    end
+    fill_modal 'Participante vencedor', :field => 'Nome', :with => 'Gabriel Sobrinho'
 
     expect(page).to have_content 'Arame comum'
     expect(page).to have_content 'Arame farpado'

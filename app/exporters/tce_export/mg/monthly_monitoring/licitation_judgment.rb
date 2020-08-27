@@ -1,4 +1,4 @@
-module TceExport::MG
+module TceExport::Mg
   module MonthlyMonitoring
     class LicitationJudgmentDataGenerator < DataGeneratorBase
       def initialize(monthly_monitoring)

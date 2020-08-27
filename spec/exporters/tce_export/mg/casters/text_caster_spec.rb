@@ -2,17 +2,17 @@ require 'unico-api'
 require 'exporter_helper'
 require 'app/exporters/tce_export/mg/casters/text_caster'
 
-describe TceExport::MG::Casters::TextCaster do
+describe TceExport::Mg::Casters::TextCaster do
   let(:generator) { double(:generator) }
   let(:formatter) { double(:formatter) }
 
   it "returns the value in the string format" do
-    result = TceExport::MG::Casters::TextCaster.call("foo", {})
+    result = TceExport::Mg::Casters::TextCaster.call("foo", {})
     expect(result).to eq "foo"
   end
 
   it "returns the value with all semicolon replaced by comma" do
-    result = TceExport::MG::Casters::TextCaster.call(";foo;bar; zoo; ;", {})
+    result = TceExport::Mg::Casters::TextCaster.call(";foo;bar; zoo; ;", {})
     expect(result).to eq ",foo,bar, zoo, ,"
   end
 
@@ -22,7 +22,7 @@ describe TceExport::MG::Casters::TextCaster do
     formatter.should_receive(:error_description).with('bar', :size)
     generator.should_receive(:add_error_description)
     generator.should_receive(:add_error).with "#{options[:attribute]} muito longo."
-    TceExport::MG::Casters::TextCaster.call("foo", options)
+    TceExport::Mg::Casters::TextCaster.call("foo", options)
   end
 
   it "validates presence of required attributes" do
@@ -31,21 +31,21 @@ describe TceExport::MG::Casters::TextCaster do
     formatter.should_receive(:error_description).with('bar', :required)
     generator.should_receive(:add_error_description)
     generator.should_receive(:add_error).with "#{options[:attribute]} não pode ficar em branco."
-    TceExport::MG::Casters::TextCaster.call(nil, options)
+    TceExport::Mg::Casters::TextCaster.call(nil, options)
 
     formatter.should_receive(:error_description).with('bar', :required)
     generator.should_receive(:add_error_description)
     generator.should_receive(:add_error).with "#{options[:attribute]} não pode ficar em branco."
-    TceExport::MG::Casters::TextCaster.call(' ', options)
+    TceExport::Mg::Casters::TextCaster.call(' ', options)
   end
 
   it "returns a single space if nil" do
-    result = TceExport::MG::Casters::TextCaster.call(nil, {})
+    result = TceExport::Mg::Casters::TextCaster.call(nil, {})
     expect(result).to eq " "
   end
 
   it "returns a single space if empty" do
-    result = TceExport::MG::Casters::TextCaster.call(" ", {})
+    result = TceExport::Mg::Casters::TextCaster.call(" ", {})
     expect(result).to eq " "
   end
 end
