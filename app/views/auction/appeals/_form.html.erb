@@ -16,19 +16,21 @@
   </div>
 
 </div>
-
-<%= f.input :person %>
-<%= f.input :auction_description, :disabled => true, :as => 'text', input_html:{value: f.object.auction.try(:object)}%>
-
 <div class="yui3-g">
-  <div class="yui3-u-1-3">
+  <div class="yui3-u-1-2">
+    <%= f.input :person %>
+  </div>
+  <div class="yui3-u-1-4">
     <%= f.input :new_envelope_opening_date %>
   </div>
 
-  <div class="yui3-u-1-3">
+  <div class="yui3-u-1-4">
     <%= f.input :new_envelope_opening_time %>
   </div>
 </div>
+
+<%= f.input :auction_description,  as: :fake, :disabled => true, input_html:{value: f.object.auction.try(:object)}%>
+
 
 <%= f.input :valid_reason %>
 <%= f.input :auction_committee_opinion %>
