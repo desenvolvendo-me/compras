@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "TceExport::Mg::MonthlyMonitoring::ContractGenerator", vcr: { cassette_name: 'integration/contract' } do
+describe TceExport::MG::MonthlyMonitoring::ContractGenerator, vcr: { cassette_name: 'integration/contract' } do
   let(:customer) { double(:customer, domain: 'compras.dev', secret_token: '1234') }
 
   before do

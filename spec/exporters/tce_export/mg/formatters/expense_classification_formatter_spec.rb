@@ -1,7 +1,7 @@
 require 'exporter_helper'
 require 'app/exporters/tce_export/mg/formatters/expense_classification_formatter'
 
-describe TceExport::Mg::Formatters::ExpenseClassificationFormatter do
+describe TceExport::MG::Formatters::ExpenseClassificationFormatter do
 
   let(:budget_allocation) { double('BudgetAllocation') }
   let(:expense_nature) { double('ExpenseNature', :expense_nature => "3.0.00.00.00") }
@@ -29,7 +29,7 @@ describe TceExport::Mg::Formatters::ExpenseClassificationFormatter do
 
     expect {
       described_class.new("01", budget_allocation, expense_nature).to_s
-    }.to raise_error(TceExport::Mg::Exceptions::InvalidData, "Código da estrutura orçamentária inválido")
+    }.to raise_error(TceExport::MG::Exceptions::InvalidData, "Código da estrutura orçamentária inválido")
   end
 
   it "raises an error if budget structure sequence is empty" do
@@ -37,6 +37,6 @@ describe TceExport::Mg::Formatters::ExpenseClassificationFormatter do
 
     expect {
       described_class.new("01", budget_allocation, expense_nature).to_s
-    }.to raise_error(TceExport::Mg::Exceptions::InvalidData, "Código da estrutura orçamentária inválido")
+    }.to raise_error(TceExport::MG::Exceptions::InvalidData, "Código da estrutura orçamentária inválido")
   end
 end

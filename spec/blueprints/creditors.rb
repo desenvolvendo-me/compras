@@ -59,6 +59,7 @@ Creditor.blueprint(:wenderson_sa_with_user) do
   person { Person.make!(:wenderson) }
   regularization_or_administrative_sanctions { [RegularizationOrAdministrativeSanction.make!(:sancao_administrativa, :creditor => object)] }
   social_identification_number { "123456789" }
+  user { User.make!(:wenderson) }
   representatives { [CreditorRepresentative.make!(:representante_sobrinho)] }
   representative_people { [Person.make!(:sobrinho)] }
 end
@@ -114,5 +115,3 @@ Creditor.blueprint(:mateus) do
   representatives { [CreditorRepresentative.make!(:representante_sobrinho)] }
   representative_people { [Person.make!(:sobrinho)] }
 end
-
-{"person_id"=>"55014", "personable_type"=>"", "occupation_classification"=>"", "occupation_classification_id"=>"", "municipal_public_administration"=>"0", "autonomous"=>"0", "organ_responsible_for_registration"=>"", "main_cnae"=>"AGRICULTURA PECUÁRIA E SERVIÇOS RELACIONADOS", "main_cnae_id"=>"4777", "cnaes"=>"", "cnae_ids"=>["", "4780"], "materials"=>"", "material_ids"=>["", "10508"], "representative_person"=>"", "representative_person_id"=>"", "representatives_attributes"=>{"0"=>{"representative_person_id"=>"55005", "representative_person"=>"04 VENTOS EMPREENDIMENTOS IMOBILIARIOS LTDA-ME", "id"=>"34", "_destroy"=>"false"}}}

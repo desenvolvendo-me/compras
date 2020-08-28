@@ -1,4 +1,4 @@
-module TceExport::Mg::Casters
+module TceExport::MG::Casters
   module Validators
     def validate_blank(value, options)
       if value.blank? && options[:required]

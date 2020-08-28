@@ -10,7 +10,7 @@ feature 'PurchaseSolicitationAnnul', vcr: { cassette_name: :purchase_solicitatio
   end
 
   scenario 'should not have a annul link when was creating a new solicitation' do
-    navigate 'Compras > Solicitações de Compra'
+    navigate 'Licitações > Solicitações de Compra'
 
     click_link 'Criar Solicitação de Compra'
 
@@ -21,7 +21,7 @@ feature 'PurchaseSolicitationAnnul', vcr: { cassette_name: :purchase_solicitatio
   scenario 'should see the default values on the screen' do
     solicitation = PurchaseSolicitation.make!(:reparo)
 
-    navigate 'Compras > Solicitações de Compra'
+    navigate 'Licitações > Solicitações de Compra'
 
     
 
@@ -42,7 +42,7 @@ feature 'PurchaseSolicitationAnnul', vcr: { cassette_name: :purchase_solicitatio
     purchase_solicitation = PurchaseSolicitation.make!(:reparo_liberado)
     LicitationProcess.make!(:processo_licitatorio, purchase_solicitations: [purchase_solicitation])
 
-    navigate 'Compras > Solicitações de Compra'
+    navigate 'Licitações > Solicitações de Compra'
 
     
 
@@ -55,7 +55,7 @@ feature 'PurchaseSolicitationAnnul', vcr: { cassette_name: :purchase_solicitatio
   scenario 'annuling a purchase solicitation' do
     solicitation = PurchaseSolicitation.make!(:reparo)
 
-    navigate 'Compras > Solicitações de Compra'
+    navigate 'Licitações > Solicitações de Compra'
 
     
 

@@ -4,8 +4,8 @@ class RealignmentPrice < Compras::Model
   belongs_to :purchase_process, class_name: 'LicitationProcess'
   belongs_to :creditor
 
-  has_many :items, -> { order(:id) }, class_name: 'RealignmentPriceItem', dependent: :destroy,
-           inverse_of: :realignment_price
+  has_many :items, class_name: 'RealignmentPriceItem', dependent: :destroy,
+           inverse_of: :realignment_price, order: :id
 
   accepts_nested_attributes_for :items, allow_destroy: true
 

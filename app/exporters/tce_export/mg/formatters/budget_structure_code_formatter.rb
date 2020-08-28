@@ -1,4 +1,4 @@
-module TceExport::Mg
+module TceExport::MG
   module Formatters
     class BudgetStructureCodeFormatter
       UNIT_AND_SUBUNIT_CODE_SIZE = 3
@@ -31,7 +31,7 @@ module TceExport::Mg
 
       def check_unit_presence
         unless has_unit?
-          raise TceExport::Mg::Exceptions::InvalidData, "Estrutura orçamentária \"#{budget_structure.to_s}\" inválida. Deve ter 2 (99.999) ou 3 níveis (99.999.999)"
+          raise TceExport::MG::Exceptions::InvalidData, "Estrutura orçamentária \"#{budget_structure.to_s}\" inválida. Deve ter 2 (99.999) ou 3 níveis (99.999.999)"
         end
       end
 

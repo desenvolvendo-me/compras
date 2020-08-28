@@ -1185,7 +1185,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
       end
     end
 
-    navigate 'Compras > Solicitações de Compra'
+    navigate 'Licitações > Solicitações de Compra'
 
     
 
@@ -1900,7 +1900,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
 
     expect(page).to have_no_notice 'Processo de Compra 1/2012 criado com sucesso.'
 
-    navigate 'Compras > Solicitações de Compra'
+    navigate 'Licitações > Solicitações de Compra'
 
     within_records do
       within 'tbody tr:nth-child(1)' do
@@ -2013,7 +2013,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
 
     expect(page).to have_notice 'Processo de Compra 1/2012 criado com sucesso.'
 
-    navigate 'Compras > Solicitações de Compra'
+    navigate 'Licitações > Solicitações de Compra'
 
     within_records do
       within 'tbody tr:nth-child(1)' do
@@ -2049,7 +2049,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
       end
     end
 
-    navigate 'Compras > Solicitações de Compra'
+    navigate 'Licitações > Solicitações de Compra'
 
     within_records do
       within 'tbody tr:nth-child(1)' do
@@ -2081,7 +2081,7 @@ feature "LicitationProcesses", vcr: { cassette_name: 'licitation_process' } do
       end
     end
 
-    navigate 'Compras > Solicitações de Compra'
+    navigate 'Licitações > Solicitações de Compra'
 
     within_records do
       within 'tbody tr:nth-child(1)' do

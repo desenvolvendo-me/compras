@@ -1,5 +1,9 @@
 class RemoveCnaes < ActiveRecord::Migration
   def change
+    unless Cnae.any?
+      Cnae.pg_copy_from Unico::Engine.root.join('lib/import/files/cnaes.csv').to_s
+    end
+
     if ActiveRecord::Base.connection.table_exists? :compras_cnaes
 
       execute <<-SQL
