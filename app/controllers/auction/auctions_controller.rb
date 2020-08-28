@@ -3,6 +3,8 @@ class Auction::AuctionsController < Auction::BaseController
   skip_before_filter :authorize_resource!, :only => :external_index
   layout "electronic_auction"
 
+  has_scope :term
+
   def new
     object = build_resource
     object.year = Time.now.year

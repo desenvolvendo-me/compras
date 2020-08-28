@@ -40,6 +40,11 @@ class Auction < Compras::Model
 
   filterize
 
+
+  scope :term, lambda {|q|
+    where("licitation_number LIKE ?", "%#{q}%")
+  }
+
   def to_s
     "#{licitation_number}/#{year}"
   end
