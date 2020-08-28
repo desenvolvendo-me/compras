@@ -8,7 +8,7 @@ pt-BR:
     attributes:
       price_collection_item:
         brand: "Marca"
-        lot: "Lote"
+        lot: "Item/Grupo"
         lot_number: "Número do item"
         quantity: "Quantidade"
         reference_unit: "Unidade"

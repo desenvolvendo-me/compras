@@ -8,7 +8,7 @@ pt-BR:
     attributes:
       purchase_process_trading_item:
         item: "Item"
-        lot: "Lote"
+        lot: "Item/Grupo"
         lowest_bid_or_proposal_amount: 'Menor proposta'
         reduction_rate_value: "Vr. Mínimo Entre Lances"
         reduction_rate_percent: "% Minímo Entre Lances"

@@ -8,7 +8,7 @@ pt-BR:
     attributes:
       realignment_price:
         creditor: "Fornecedor"
-        lot: "Lote"
+        lot: "Item/Grupo"
         purchase_process: "Processo de compra"
         total_value: 'Valor total da proposta/lance'
         difference_price: 'Diferença'

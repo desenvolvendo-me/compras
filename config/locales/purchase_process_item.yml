@@ -9,7 +9,7 @@ pt-BR:
       purchase_process_item:
         additional_information: "Informações complementares"
         estimated_total_price: "Valor total"
-        lot: "Lote"
+        lot: "Item/Grupo"
         order: "Item"
         quantity: "Quantidade"
         reference_unit: "Unidade"

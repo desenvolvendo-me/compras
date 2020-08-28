@@ -7,5 +7,5 @@ pt-BR:
 
     attributes:
       purchase_process_trading_item_negotiation:
-        item: "Item/Lote"
+        item: "Item/Grupo"
         amount: "Valor"
