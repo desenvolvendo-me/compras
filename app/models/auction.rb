@@ -15,6 +15,7 @@ class Auction < Compras::Model
   has_many :group_items, class_name: "AuctionGroupItem"
   has_many :creditor_proposals, class_name: "AuctionCreditorProposal"
   has_many :auction_support_teams
+  has_many :bids, class_name: 'AuctionBid'
 
   mount_uploader :document_edict, UnicoUploader
 
