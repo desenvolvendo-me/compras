@@ -10,6 +10,7 @@ class CreateTableComprasAuctionAppeals < ActiveRecord::Migration
       t.string  :situation
       t.date    :new_envelope_opening_date
       t.time    :new_envelope_opening_time
+      t.boolean :viewed
       t.datetime :created_at,                   :null => false
       t.datetime :updated_at,                   :null => false
     end

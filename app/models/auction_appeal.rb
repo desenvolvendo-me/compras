@@ -1,7 +1,7 @@
 class AuctionAppeal < Compras::Model
   attr_accessible :auction_id, :appeal_date, :related, :person_id, :valid_reason,
                   :new_envelope_opening_date, :new_envelope_opening_time,
-                  :auction_committee_opinion, :situation
+                  :auction_committee_opinion, :situation, :viewed
 
   has_enumeration_for :related, :with => PurchaseProcessAppealRelated
   has_enumeration_for :situation
@@ -9,10 +9,10 @@ class AuctionAppeal < Compras::Model
   belongs_to :auction
   belongs_to :person
 
-  delegate :description, :process_date,
+  delegate :object, :process_date,
            :to => :auction, :allow_nil => true, :prefix => true
 
-  validates :auction, :creditor, :presence => true
+  validates :auction, :person, :presence => true
 
   # validates :appeal_date, :timeliness => {
   #     :on_or_after => :auction_date,
