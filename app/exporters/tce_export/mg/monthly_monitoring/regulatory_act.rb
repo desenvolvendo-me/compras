@@ -1,4 +1,4 @@
-module TceExport::Mg
+module TceExport::MG
   module MonthlyMonitoring
     class RegulatoryActDataGenerator < DataGeneratorBase
       def generate_data

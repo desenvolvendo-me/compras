@@ -9,8 +9,8 @@ class PurchaseProcessTradingItem < Compras::Model
   belongs_to :trading, class_name: 'PurchaseProcessTrading'
   belongs_to :item, class_name: 'PurchaseProcessItem'
 
-  has_many :bids, -> { order(:number) }, class_name: 'PurchaseProcessTradingItemBid',
-    foreign_key: :item_id, dependent: :destroy
+  has_many :bids, class_name: 'PurchaseProcessTradingItemBid',
+    foreign_key: :item_id, dependent: :destroy, order: 'number DESC'
   has_many :ratification_items, class_name: 'LicitationProcessRatificationItem'
   has_many :accreditation_creditors, through: :trading
 

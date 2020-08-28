@@ -8,6 +8,10 @@ class CustomerFinder
     new(*params).current_customer
   end
 
+  def current_customer
+    customer_repository.find_by_domain!(request.headers['X-Customer'] || request.host)
+  end
+
   private
 
   attr_reader :request, :customer_repository

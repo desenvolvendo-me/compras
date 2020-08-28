@@ -35,7 +35,7 @@ class Material < Unico::Model
   has_many :creditor_materials, :dependent => :restrict
   has_many :purchase_solicitations, :through => :purchase_solicitation_items, :dependent => :restrict
   has_many :purchase_solicitation_budget_allocations, :through => :purchase_solicitations, :dependent => :restrict
-  has_many :materials_controls, -> { order(:id) }, :dependent => :destroy, :inverse_of => :material
+  has_many :materials_controls, :dependent => :destroy, :inverse_of => :material, :order => :id
   has_many :licitation_processes, through: :purchase_process_items
   has_many :items, class_name: 'PurchaseProcessItem'
 

@@ -6,7 +6,7 @@ feature "Banks" do
   end
 
   scenario 'create, update and destroy a new bank' do
-    navigate 'Configurações > Bancos > Bancos'
+    navigate 'Cadastro > Cadastrais > Bancos > Bancos'
 
     click_link 'Criar Banco'
 
@@ -46,7 +46,7 @@ feature "Banks" do
   end
 
   scenario 'index with columns at the index' do
-    navigate 'Configurações > Bancos > Bancos'
+    navigate 'Cadastro > Cadastrais > Bancos > Bancos'
 
     within_records do
       expect(page).to have_content 'Nome'

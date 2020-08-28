@@ -1,6 +1,6 @@
 <%
   association_name = f.object.class.reflect_on_association(association).klass.model_name
-  template_folder = association_name.plural
+  template_folder = association_name.tableize
 %>
 
 <div class="nested-container">

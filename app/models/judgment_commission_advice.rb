@@ -8,7 +8,7 @@ class JudgmentCommissionAdvice < Compras::Model
   belongs_to :licitation_process
   belongs_to :licitation_commission
 
-  has_many :judgment_commission_advice_members, -> { order(:id) }, :dependent => :destroy
+  has_many :judgment_commission_advice_members, :dependent => :destroy, :order => :id
   has_many :licitation_commission_members, :through => :licitation_commission
 
   accepts_nested_attributes_for :judgment_commission_advice_members, :allow_destroy => true

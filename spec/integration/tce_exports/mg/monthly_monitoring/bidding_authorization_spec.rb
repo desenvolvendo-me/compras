@@ -1,7 +1,6 @@
 require 'spec_helper'
-require 'exporter_helper'
 
-describe "TceExport::Mg::MonthlyMonitoring::BiddingAuthorizationGenerator", vcr: { cassette_name: 'integration/bidding_authorization' } do
+describe TceExport::MG::MonthlyMonitoring::BiddingAuthorizationGenerator, vcr: { cassette_name: 'integration/bidding_authorization' } do
   describe "#generate_file" do
     before do
       UnicoAPI::Consumer.set_customer customer

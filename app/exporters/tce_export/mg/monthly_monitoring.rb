@@ -1,6 +1,6 @@
 require 'zip/zip'
 
-module TceExport::Mg
+module TceExport::MG
   module MonthlyMonitoring
     def self.generate_zip_file(monthly_monitoring)
       ZipFileGenerator.new(monthly_monitoring).generate_zip_file

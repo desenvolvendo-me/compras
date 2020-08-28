@@ -22,7 +22,7 @@ describe Bidder do
   it { should belong_to :licitation_process }
   it { should belong_to :creditor }
 
-  it { should have_many(:documents).dependent(:destroy) }
+  it { should have_many(:documents).dependent(:destroy).order(:id) }
   it { should have_many(:document_types).through(:documents) }
   it { should have_many(:accredited_representatives).dependent(:destroy) }
   it { should have_many(:people).through(:accredited_representatives) }
