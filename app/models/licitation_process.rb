@@ -100,6 +100,7 @@ class LicitationProcess < Compras::Model
   has_many :fractionations, class_name: 'PurchaseProcessFractionation', dependent: :destroy,
            foreign_key: :purchase_process_id
 
+
   has_one :judgment_commission_advice, :dependent => :restrict
   has_one :purchase_process_accreditation, :dependent => :restrict
   has_one :trading, class_name: 'PurchaseProcessTrading', :dependent => :restrict,

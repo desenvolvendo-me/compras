@@ -8,7 +8,7 @@ class PurchaseSolicitation < Compras::Model
                   :items_attributes, :budget_structure_id, :purchasing_unit_id,
                   :user_id, :department_id, :attendant_status, :secretaries_attributes,
                   :model_request, :demand_id, :purchase_forms_attributes, :service_status,
-                  :delivery_location_field
+                  :delivery_location_field, :budgetaries_attributes
 
   attr_readonly :code
 
@@ -48,6 +48,7 @@ class PurchaseSolicitation < Compras::Model
   has_many :secretaries, :class_name => "PurchaseSolicitationSecretary", :dependent => :destroy
   has_many :purchase_solicitation_objects
   has_many :management_objects, through: :purchase_solicitation_objects
+  has_many :budgetaries, class_name: 'PurchaseSolicitationBudgetary', dependent: :destroy
 
   has_one :annul, :class_name => "ResourceAnnul", :as => :annullable, :dependent => :destroy
 
@@ -57,6 +58,7 @@ class PurchaseSolicitation < Compras::Model
   accepts_nested_attributes_for :items, :allow_destroy => true
   accepts_nested_attributes_for :purchase_forms, :allow_destroy => true
   accepts_nested_attributes_for :secretaries, :allow_destroy => true
+  accepts_nested_attributes_for :budgetaries, :allow_destroy => true
 
   delegate :authorized?, :to => :direct_purchase, :prefix => true, :allow_nil => true
 

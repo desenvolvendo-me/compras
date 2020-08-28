@@ -1,0 +1,15 @@
+pt-BR:
+  activerecord:
+    models:
+      licitation_process_budgetary:
+        one: "Dado Orçamentario do Processo de Compra"
+        other: "Dados Orçamentarios do Processo de Compra"
+
+    attributes:
+      licitation_process_budgetary:
+        expense: "Despesa"
+        secretary: "Secretaria"
+        value: "Valor"
+        project_activity: "Projeto Atividade (Código)"
+        nature_expense: "Natureza"
+        resource_source: "Fonte"
