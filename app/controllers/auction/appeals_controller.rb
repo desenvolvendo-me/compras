@@ -22,4 +22,12 @@ class Auction::AppealsController <  Auction::BaseController
       failure.html { render :edit }
     end
   end
+
+  def mark_viewed
+    @appeal = AuctionAppeal.find(params[:auction_appeal_id])
+    @appeal.mark_as_viewed
+
+    redirect_to edit_auction_appeal_path(@appeal)
+
+  end
 end

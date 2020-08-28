@@ -27,4 +27,9 @@ class AuctionAppeal < Compras::Model
   def to_s
     "#{auction} - #{I18n.l(appeal_date)}"
   end
+
+  def mark_as_viewed
+    self.viewed = true
+    self.save
+  end
 end
