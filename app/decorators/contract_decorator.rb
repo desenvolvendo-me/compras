@@ -4,8 +4,8 @@ class ContractDecorator
   include Decore::Header
   include ActionView::Helpers::NumberHelper
 
-  attr_header :contract_number, :creditor,:start_date, :end_date, :contract_type,
-              :purchasing_unit, :year,:link => [:contract_number, :creditor]
+  attr_header :contract_number, :creditor, :type_contract,:year, :start_date, :end_date, :contract_type,
+              :purchasing_unit, :status, :link => [:contract_number, :creditor]
 
 
 
@@ -32,5 +32,9 @@ class ContractDecorator
     else
       "do Contrato"
     end
+  end
+
+  def status
+    Date.today > end_date ? 'Finalizado' : 'Vigente'
   end
 end
