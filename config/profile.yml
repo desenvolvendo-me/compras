@@ -111,6 +111,7 @@ profile:
     - report_supplier_balance_per_service_orders
     - report_supply_request_per_secretaries
     - report_supply_requests
+    - report_supply_orders
     - report_expenses
     - report_creditor_materials
     - report_purchase_solicitation_items
