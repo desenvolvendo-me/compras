@@ -17,63 +17,76 @@
 
 </div>
 
-<div class="yui3-g envelope_delivery_date">
-  <div class="yui3-u-1-3">
+<div class="row envelope_delivery_date ">
+  <div class="col-4">
     <%= f.input :envelope_delivery_date %>
   </div>
 
-  <div class="yui3-u-1-5">
+  <div class="col">
     <%= f.input :envelope_delivery_time %>
   </div>
-</div>
 
-<div class="yui3-g proposal_envelope_opening_date">
-  <div class="yui3-u-1-3">
+  <div class="col">
     <%= f.input :proposal_envelope_opening_date,
-      :input_html => { "data-disabled" => f.object.decorator.disabled_envelope_message,
-      :readonly => f.object.decorator.disabled_envelope_message } %>
+                :input_html => { "data-disabled" => f.object.decorator.disabled_envelope_message,
+                                 :readonly => f.object.decorator.disabled_envelope_message } %>
   </div>
 
-  <div class="yui3-u-1-5">
+  <div class="col">
     <%= f.input :proposal_envelope_opening_time, :input_html => { "data-disabled" => f.object.decorator.disabled_envelope_message,
-      :readonly => f.object.decorator.disabled_envelope_message } %>
+                                                                  :readonly => f.object.decorator.disabled_envelope_message } %>
   </div>
 </div>
+
 
 <div class="yui3-g authorization_envelope_opening_date">
-  <div class="yui3-u-1-3">
+
+  <div class="yui3-u-1-4">
     <%= f.input :authorization_envelope_opening_date,
-      :input_html => { "data-disabled" => f.object.decorator.must_be_published_on_edital } %>
+                :input_html => { "data-disabled" => f.object.decorator.must_be_published_on_edital } %>
   </div>
 
-  <div class="yui3-u-1-5">
+  <div class="yui3-u-1-4">
     <%= f.input :authorization_envelope_opening_time,
-      :input_html => { "data-disabled" => f.object.decorator.must_be_published_on_edital } %>
+                :input_html => { "data-disabled" => f.object.decorator.must_be_published_on_edital } %>
   </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :closing_of_accreditation_date,
+                :input_html => { "data-disabled" => f.object.decorator.must_be_published_on_edital } %>
+  </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :closing_of_accreditation_time,
+                :input_html => { "data-disabled" => f.object.decorator.must_be_published_on_edital } %>
+  </div>
+
 </div>
 
-<div class="fields-to-trading closing_of_accreditation_date">
-  <div class="yui3-g">
-    <div class="yui3-u-1-3">
-      <%= f.input :closing_of_accreditation_date,
-        :input_html => { "data-disabled" => f.object.decorator.must_be_published_on_edital } %>
-    </div>
-
-    <div class="yui3-u-1-5">
-      <%= f.input :closing_of_accreditation_time,
-        :input_html => { "data-disabled" => f.object.decorator.must_be_published_on_edital } %>
-    </div>
-  </div>
-</div>
 
 <div class="row">
   <div class="col-2 expiration">
     <%= f.input :expiration %>
   </div>
 
-  <div class="col-2 expiration">
+  <div class="col-3 expiration">
     <%= f.input :expiration_unit %>
   </div>
+
+  <div class="col">
+    <%= f.input :stage_of_bids_date,
+                :input_html => { "data-disabled" => f.object.decorator.must_be_published_on_edital } %>
+  </div>
+
+  <div class="col">
+    <%= f.input :stage_of_bids_time,
+                :input_html => { "data-disabled" => f.object.decorator.must_be_published_on_edital } %>
+  </div>
+
+
+</div>
+
+<div class="row fields-to-trading stage_of_bids_date">
 
   <div class="col">
     <%= f.input :contact %>
@@ -81,17 +94,5 @@
 
   <div class="col-5">
     <%= f.input :phone_email %>
-  </div>
-</div>
-
-<div class="yui3-g fields-to-trading stage_of_bids_date">
-  <div class="yui3-u-1-3">
-    <%= f.input :stage_of_bids_date,
-      :input_html => { "data-disabled" => f.object.decorator.must_be_published_on_edital } %>
-  </div>
-
-  <div class="yui3-u-1-5">
-    <%= f.input :stage_of_bids_time,
-      :input_html => { "data-disabled" => f.object.decorator.must_be_published_on_edital } %>
   </div>
 </div>

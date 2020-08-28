@@ -13,7 +13,7 @@ class LicitationProcess < Compras::Model
                   :purchase_process_budget_allocations_attributes,
                   :contract_guarantees, :extension_clause, :index_update_rate_id,
                   :type_of_removal, :eletronic_trading, :notice_availability_date,
-                  :contact_id, :stage_of_bids_date, :stage_of_bids_time,
+                  :contact, :stage_of_bids_date, :stage_of_bids_time,
                   :items_attributes, :minimum_bid_to_disposal, :concession_period,
                   :concession_period_unit, :goal, :licensor_rights_and_liabilities,
                   :licensee_rights_and_liabilities, :authorization_envelope_opening_date,
@@ -51,7 +51,6 @@ class LicitationProcess < Compras::Model
   has_enumeration_for :purchase_solicitation_import_option
 
   belongs_to :purchasing_unit
-  belongs_to :contact, :class_name => 'Employee'
   belongs_to :judgment_form
   belongs_to :payment_method
   belongs_to :readjustment_index, :class_name => 'Indexer'
