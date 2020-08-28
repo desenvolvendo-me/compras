@@ -23,4 +23,13 @@ module PurchaseProcessTradingsHelper
     winner = item.creditor_winner
     accreditation_creditor.sort_by{|x| x.creditor_id == winner.try(:id) ? 0 : 1}
   end
+
+  def link_to_lot trading, item
+    purchase_item = trading.purchase_process.purchase_solicitations.map{|x| x.purchase_solicitation.items.where(lot: item.lot).first }[0] rescue nil
+    purchase_solicitation_id = purchase_item.try(:purchase_solicitation_id)
+
+    if purchase_solicitation_id
+      link_to 'Visualizar', edit_purchase_solicitation_path(purchase_solicitation_id), style: 'font-size: 12px'
+    end
+  end
 end

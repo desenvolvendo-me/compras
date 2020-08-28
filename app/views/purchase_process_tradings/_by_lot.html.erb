@@ -14,8 +14,8 @@
   </thead>
 
    <tbody>
-    <% trading.items.each_with_index do |item, index| %>
-      <%= render 'purchase_process_tradings/lots', item: item, index: index %>
+    <% trading.items.sort_by!(&:lot).each_with_index do |item, index| %>
+      <%= render 'purchase_process_tradings/lots', item: item, index: index, trading: trading %>
     <% end %>
   </tbody>
 </table>
