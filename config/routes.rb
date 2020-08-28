@@ -1006,6 +1006,7 @@ Compras::Application.routes.draw do
       collection do
         get :filter
         get :modal
+        get :mark_viewed
       end
     end
 
