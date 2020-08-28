@@ -1,5 +1,5 @@
 <h2 id="title">
-  <span><%= "Ordem de Fornecimento: #{resource.number }/#{resource.year}" %></span>
+  <span><%= "Ordem de Fornecimento: #{resource.decorator.number_year}" %></span>
   <span class="subtitle"><%= "Fornecedor: #{resource.creditor}" %></span>
   <span class="subtitle"><%= "Processo de Compra: #{resource.licitation_process.to_s}" %></span>
 </h2>
