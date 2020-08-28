@@ -1002,6 +1002,13 @@ Compras::Application.routes.draw do
     get "legal_peoples", to: "people#index", as: "auction_legal_peoples", by_legal_people: true
     get "legal_peoples/new", to: "people#new", as: "new_auction_legal_people", by_legal_people: true
 
+    resources :appeals do
+      collection do
+        get :filter
+        get :modal
+      end
+    end
+
     resource :bids do
       collection do
         get :filter
