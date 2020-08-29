@@ -31,9 +31,7 @@ function renderPurchaseSolicitation(purchase_solicitation) {
         id: '',
         purchase_solicitation_id: purchase_solicitation.id,
         purchase_solicitation: purchase_solicitation.code + "/" + purchase_solicitation.accounting_year,
-        consumed_value: "0,00",
-        expected_value: "0,00",
-        resource_source: ""
+        department: _.isUndefined(purchase_solicitation.department) ? '' : purchase_solicitation.department.description
     };
 
     var data = $('#list_purchase_solicitations_template').mustache(purchaseSolicitationBinds);
@@ -45,7 +43,7 @@ function renderPurchaseSolicitation(purchase_solicitation) {
 $(document).ready(function () {
 
     $("#licitation_process_demand_id").on("change", function (event, Demand) {
-
+      if(Demand){
         $.ajax({
             url: Routes.demands_api_show,
             data: {demand_id: Demand.id},
@@ -61,7 +59,7 @@ $(document).ready(function () {
                 });
             }
         });
-
+      }
     });
 
     function organizesModalities() {
