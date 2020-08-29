@@ -27,10 +27,7 @@ class Demand < Compras::Model
   filterize
 
   scope :term, lambda {|q|
-    where {
-      ((name.like("%#{q}%"))
-      )
-    }
+    where {name.like("%#{q}%")}
   }
 
   def create_purchase_solicitations
