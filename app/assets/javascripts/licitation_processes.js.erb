@@ -2,266 +2,255 @@
 //= require purchase_process_accreditations
 //= require purchase_process_tradings
 
-function hasPurchaseSolicitationAlreadyAdded(purchase_solicitation) {
+/** Variables **/
+var dataDemands = {};
+var DataPurchaseSolicitation = {};
+/** Variables **/
+
+$(document).ready(function () {
+  function organizesModalities() {
+    if ($('#licitation_process_type_of_purchase_licitation').is(':checked')) {
+      $('div.modality').removeClass('hidden');
+      $('div.licitation_process_judgment_form_id').removeClass('hidden');
+      $('#licitation_process_judgment_form_id').requiredField(true);
+      $('#licitation_process_justification_and_legal').requiredField(false);
+      $('div.type-of-removal').addClass('hidden');
+      $('li.income').removeClass('hidden');
+      $('label[for="licitation_process_modality_number"]').html('Nº da modalidade');
+      $('a[href="#tab-items"]').html("Itens");
+      $('#legal_reasons_tab').hide();
+      $('.envelope_delivery_date').removeClass('hidden');
+      $('#licitation_process_envelope_delivery_date').requiredField(true);
+      $('#licitation_process_envelope_delivery_time').requiredField(true);
+      $('.proposal_envelope_opening_date').removeClass('hidden');
+      $('.closing_of_accreditation_date').removeClass('hidden');
+      $('.stage_of_bids_date').removeClass('hidden');
+      $('.authorization_envelope_opening_date').removeClass('hidden');
+      $('.expiration').removeClass('hidden');
+      $('#licitation_process_expiration').requiredField(true);
+      $('#licitation_process_expiration_unit').requiredField(true);
+    } else {
+      $('div.modality').addClass('hidden');
+      $('div.licitation_process_judgment_form_id').addClass('hidden');
+      $('#licitation_process_judgment_form_id').requiredField(false);
+      $('#licitation_process_justification_and_legal').requiredField(true);
+      $('div.type-of-removal').removeClass('hidden');
+      $('li.income').addClass('hidden');
+      $('label[for="licitation_process_modality_number"]').html('Nº Modalidade');
+      $('label[for="licitation_process_unit_price"]').html('Valor unitário');
+      $('a[href="#tab-items"]').html("Itens / Justificativa");
+      $('#licitation_process_modality').val('');
+      $('#legal_reasons_tab').show();
+      $('.envelope_delivery_date').addClass('hidden');
+      $('#licitation_process_envelope_delivery_date').requiredField(false);
+      $('#licitation_process_envelope_delivery_time').requiredField(false);
+      $('.proposal_envelope_opening_date').addClass('hidden');
+      $('.closing_of_accreditation_date').addClass('hidden');
+      $('.stage_of_bids_date').addClass('hidden');
+      $('.authorization_envelope_opening_date').addClass('hidden');
+      $('.expiration').addClass('hidden');
+      $('#licitation_process_expiration').requiredField(false);
+      $('#licitation_process_expiration_unit').requiredField(false);
+    }
+  };
+
+  function toogleVisibilityFieldsToTradingAndConcurrence($el) {
+    if (($el.val() == '<%= Modality::TRADING %>') || ($el.val() == '<%= Modality::CONCURRENCE %>')) {
+      $('.fields-to-trading-and-concurrence').removeClass('hidden');
+    } else {
+      $('.fields-to-trading-and-concurrence').addClass('hidden');
+    }
+  };
+
+  function setBudgetAllocationSource() {
+    var url = Routes.budget_allocations,
+      year = $("#licitation_process_budget_allocation_year").val(),
+      params = {by_year: year};
+
+    if (year) {
+      url += "?" + jQuery.param(params);
+    }
+
+    $("#licitation_process_budget_allocation").data('source', url);
+  }
+
+  function toogleVisibilityFieldsToTrading($el) {
+    if (($el.val() == '<%= Modality::TRADING %>')) {
+      $('.field-to-trading').removeClass('hidden');
+      $('.not-fields-to-trading').addClass('hidden');
+    } else {
+      $('.field-to-trading').addClass('hidden');
+      $('.not-fields-to-trading').removeClass('hidden');
+    }
+  };
+
+  $('form.licitation_process').on('change', '#licitation_process_budget_allocation_year', function () {
+    setBudgetAllocationSource();
+  });
+
+  $('input[name="licitation_process[type_of_purchase]"]').change(function () {
+    organizesModalities();
+    var $el = $('#licitation_process_modality:visible, #licitation_process_type_of_removal:visible');
+    toogleVisibilityFieldsToTrading($el);
+    toogleVisibilityFieldsToTradingAndConcurrence($el);
+  });
+
+  $('#licitation_process_modality, #licitation_process_type_of_removal').on('change', function () {
+    toogleVisibilityFieldsToTrading($(this));
+    toogleVisibilityFieldsToTradingAndConcurrence($(this));
+  });
+
+  organizesModalities();
+  var $ele = $('#licitation_process_modality:visible, #licitation_process_type_of_removal:visible');
+  toogleVisibilityFieldsToTrading($ele);
+  toogleVisibilityFieldsToTradingAndConcurrence($ele);
+  setBudgetAllocationSource();
+
+
+  /**  *************** SOLICITATION **************** **/
+
+  function hasPurchaseSolicitationAlreadyAdded(purchase_solicitation) {
     var added = false;
     $("table#list_purchase_solicitations_records input.purchase_solicitation_id").each(function () {
-        if ($(this).val() == purchase_solicitation.id) {
-            added = true;
-            return added;
-        }
+      if ($(this).val() == purchase_solicitation.id) {
+        added = true;
+        return added;
+      }
     });
     return added;
-}
+  }
 
-function mergePurchaseSolicitation(purchase_solicitation) {
+  function mergePurchaseSolicitation(purchase_solicitation) {
 
     var record = $('tr#purchase_solicitation-id-' + purchase_solicitation.id);
 
-    record.find("td.consumed_value").text("0,00");
-    record.find('input.consumed_value').val("0,00");
+    record.find("td.department").text(purchase_solicitation.department);
+    record.find('input.department').val(purchase_solicitation.department);
+  }
 
-    record.find("td.expected_value").text("0,00");
-    record.find('input.expected_value').val("0,00");
-
-}
-
-function renderPurchaseSolicitation(purchase_solicitation) {
+  function renderPurchaseSolicitation(purchase_solicitation) {
     var purchaseSolicitationBinds = {
-        uuid: _.uniqueId('fresh-'),
-        id: '',
-        purchase_solicitation_id: purchase_solicitation.id,
-        purchase_solicitation: purchase_solicitation.code + "/" + purchase_solicitation.accounting_year,
-        department: _.isUndefined(purchase_solicitation.department) ? '' : purchase_solicitation.department.description
+      uuid: _.uniqueId('fresh-'),
+      id: '',
+      purchase_solicitation_id: purchase_solicitation.id,
+      purchase_solicitation: purchase_solicitation.code_and_year,
+      department: purchase_solicitation.department
     };
 
     var data = $('#list_purchase_solicitations_template').mustache(purchaseSolicitationBinds);
 
-    $('#list_purchase_solicitations_records tbody').append(data).trigger("nestedGrid:afterAdd");
+    $('#list_purchase_solicitations_records tbody').append(data);
 
-}
+  }
 
-$(document).ready(function () {
+  $("#licitation_process_demand_id").on("change", function (event, Demand) {
+    dataDemands = Demand;
+  })
 
-    $("#licitation_process_demand_id").on("change", function (event, Demand) {
-      if(Demand){
-        $.ajax({
-            url: Routes.demands_api_show,
-            data: {demand_id: Demand.id},
-            dataType: 'json',
-            type: 'POST',
-            success: function (data) {
-                $.each(data.purchase_solicitations, function (i, purchase_solicitation) {
-                    if (hasPurchaseSolicitationAlreadyAdded(purchase_solicitation)) {
-                        mergePurchaseSolicitation(purchase_solicitation);
-                    } else {
-                        renderPurchaseSolicitation(purchase_solicitation);
-                    }
-                });
-            }
-        });
-      }
-    });
+  $("#licitation_process_purchase_solicitation_id").on("change", function (event, purchaseSolicitation) {
+    DataPurchaseSolicitation = purchaseSolicitation;
+  });
 
-    function organizesModalities() {
-        if ($('#licitation_process_type_of_purchase_licitation').is(':checked')) {
-            $('div.modality').removeClass('hidden');
-            $('div.licitation_process_judgment_form_id').removeClass('hidden');
-            $('#licitation_process_judgment_form_id').requiredField(true);
-            $('#licitation_process_justification_and_legal').requiredField(false);
-            $('div.type-of-removal').addClass('hidden');
-            $('li.income').removeClass('hidden');
-            $('label[for="licitation_process_modality_number"]').html('Nº da modalidade');
-            $('a[href="#tab-items"]').html("Itens");
-            $('#legal_reasons_tab').hide();
-            $('.envelope_delivery_date').removeClass('hidden');
-            $('#licitation_process_envelope_delivery_date').requiredField(true);
-            $('#licitation_process_envelope_delivery_time').requiredField(true);
-            $('.proposal_envelope_opening_date').removeClass('hidden');
-            $('.closing_of_accreditation_date').removeClass('hidden');
-            $('.stage_of_bids_date').removeClass('hidden');
-            $('.authorization_envelope_opening_date').removeClass('hidden');
-            $('.expiration').removeClass('hidden');
-            $('#licitation_process_expiration').requiredField(true);
-            $('#licitation_process_expiration_unit').requiredField(true);
+  $("#list_purchase_solicitations_button").click(function(event){
+    event.preventDefault()
+    event.stopPropagation()
+    if(dataDemands.purchaseSolicitations){
+      $.each(dataDemands.purchaseSolicitations, function (i, purchase_solicitation) {
+        if (hasPurchaseSolicitationAlreadyAdded(purchase_solicitation)) {
+          mergePurchaseSolicitation(purchase_solicitation);
         } else {
-            $('div.modality').addClass('hidden');
-            $('div.licitation_process_judgment_form_id').addClass('hidden');
-            $('#licitation_process_judgment_form_id').requiredField(false);
-            $('#licitation_process_justification_and_legal').requiredField(true);
-            $('div.type-of-removal').removeClass('hidden');
-            $('li.income').addClass('hidden');
-            $('label[for="licitation_process_modality_number"]').html('Nº Modalidade');
-            $('label[for="licitation_process_unit_price"]').html('Valor unitário');
-            $('a[href="#tab-items"]').html("Itens / Justificativa");
-            $('#licitation_process_modality').val('');
-            $('#legal_reasons_tab').show();
-            $('.envelope_delivery_date').addClass('hidden');
-            $('#licitation_process_envelope_delivery_date').requiredField(false);
-            $('#licitation_process_envelope_delivery_time').requiredField(false);
-            $('.proposal_envelope_opening_date').addClass('hidden');
-            $('.closing_of_accreditation_date').addClass('hidden');
-            $('.stage_of_bids_date').addClass('hidden');
-            $('.authorization_envelope_opening_date').addClass('hidden');
-            $('.expiration').addClass('hidden');
-            $('#licitation_process_expiration').requiredField(false);
-            $('#licitation_process_expiration_unit').requiredField(false);
-        }
-    };
-
-    function toogleVisibilityFieldsToTradingAndConcurrence($el) {
-        if (($el.val() == '<%= Modality::TRADING %>') || ($el.val() == '<%= Modality::CONCURRENCE %>')) {
-            $('.fields-to-trading-and-concurrence').removeClass('hidden');
-        } else {
-            $('.fields-to-trading-and-concurrence').addClass('hidden');
-        }
-    };
-
-    function setBudgetAllocationSource() {
-        var url = Routes.budget_allocations,
-            year = $("#licitation_process_budget_allocation_year").val(),
-            params = {by_year: year};
-
-        if (year) {
-            url += "?" + jQuery.param(params);
+          renderPurchaseSolicitation(purchase_solicitation);
         }
 
-        $("#licitation_process_budget_allocation").data('source', url);
+        fillItems(purchase_solicitation.items)
+      });
+
+      dataDemands = {};
     }
 
-    function toogleVisibilityFieldsToTrading($el) {
-      if (($el.val() == '<%= Modality::TRADING %>')) {
-        $('.field-to-trading').removeClass('hidden');
-        $('.not-fields-to-trading').addClass('hidden');
-      } else {
-        $('.field-to-trading').addClass('hidden');
-        $('.not-fields-to-trading').removeClass('hidden');
-      }
-    };
+    if(DataPurchaseSolicitation){
+      fillItems(DataPurchaseSolicitation.items)
 
-    $('form.licitation_process').on('change', '#licitation_process_budget_allocation_year', function () {
-        setBudgetAllocationSource();
-    });
+      DataPurchaseSolicitation= {};
+    }
+  });
 
-    $('input[name="licitation_process[type_of_purchase]"]').change(function () {
-        organizesModalities();
-        var $el = $('#licitation_process_modality:visible, #licitation_process_type_of_removal:visible');
-        toogleVisibilityFieldsToTrading($el);
-        toogleVisibilityFieldsToTradingAndConcurrence($el);
-    });
-
-    $('#licitation_process_modality, #licitation_process_type_of_removal').on('change', function () {
-        toogleVisibilityFieldsToTrading($(this));
-        toogleVisibilityFieldsToTradingAndConcurrence($(this));
-    });
-
-    organizesModalities();
-    var $ele = $('#licitation_process_modality:visible, #licitation_process_type_of_removal:visible');
-    toogleVisibilityFieldsToTrading($ele);
-    toogleVisibilityFieldsToTradingAndConcurrence($ele);
-    setBudgetAllocationSource();
 
 //   *************** inicio  ***************
 
 //    adiciona os itens de acordo com a solicitação de compra adicionada
 //    (aba solicitante)
 
-    function money_en(value) {
-        return parseFloat(value.replace('.', '').replace(',', '.').toLocaleString('en', {minimumFractionDigits: 2}))
-    }
+  function money_en(value) {
+    return parseFloat(value.replace('.', '').replace(',', '.').toLocaleString('en', {minimumFractionDigits: 2}))
+  }
 
-    function money_pt(value) {
-        return value.toLocaleString('pt-BR', {minimumFractionDigits: 2});
-    }
+  function money_pt(value) {
+    return value.toLocaleString('pt-BR', {minimumFractionDigits: 2});
+  }
 
-    function hasItemAlreadyAdded(item) {
-        var added = false;
-        $("table#items-records input.material-id").each(function () {
-            if ($(this).val() == item.material_id) {
-                added = true;
-                return added;
-            }
-        });
+  function hasItemAlreadyAdded(item) {
+    var added = false;
+    $("table#items-records input.material-id").each(function () {
+      if ($(this).val() == item.material_id) {
+        added = true;
         return added;
-    }
-
-    function mergeItem(item) {
-
-        var record = $('tr#material-id-' + item.material_id),
-            totalQuantity = parsePtBrFloat(record.find('input.item-quantity').val()) + item.quantity,
-            itemUnitPrice = (money_en(record.find('input.item-unit-price').val()) + item.unit_price) / 2,
-            itemtotalValue = money_pt(numberWithDelimiter(itemUnitPrice * totalQuantity));
-        itemUnitPrice = money_pt(itemUnitPrice);
-
-
-        record.find('input.item-quantity').val(totalQuantity);
-
-        record.find('input.item-unit-price').val(itemUnitPrice);
-
-        record.find("td.item-total-value").text(itemtotalValue);
-        record.find('input.item-total-value').val(itemtotalValue);
-
-    }
-
-    function renderItem(item) {
-        console.log(item)
-        var itemBinds = {
-            uuid: _.uniqueId('fresh-'),
-            id: '',
-            material_id: item.material_id,
-            material: item.material_description,
-            creditor_id: '',
-            creditor: '',
-            reference_unit: item.reference_unit,
-            brand: item.brand,
-            quantity: item.quantity,
-            lot: item.lot,
-            estimated_total_price:
-                money_pt(item.quantity * item.unit_price),
-            unit_price: money_pt(item.unit_price)
-        };
-
-        var data = $('#licitation_process_items_template').mustache(itemBinds);
-
-        $('#items-records tbody').append(data).trigger("nestedGrid:afterAdd");
-    }
-
-    $("#licitation_process_demand_id").on("change", function (event, demand) {
-
-        if (!demand) {
-            demand = {};
-        }
-
-        $.each(demand.purchaseSolicitations, function (i, purchaseSolicitation) {
-
-            if (!purchaseSolicitation) {
-                purchaseSolicitation = {};
-            }
-
-            $.each(purchaseSolicitation.items, function (i, item) {
-                if (hasItemAlreadyAdded(item)) {
-                    mergeItem(item);
-                } else {
-                    renderItem(item);
-                }
-            });
-        });
-
+      }
     });
+    return added;
+  }
 
-    $("#licitation_process_purchase_solicitation_id").on("change", function (event, purchaseSolicitation) {
-        if (!purchaseSolicitation) {
-            purchaseSolicitation = {};
-        }
+  function mergeItem(item) {
 
-        $.each(purchaseSolicitation.items, function (i, item) {
-            if (hasItemAlreadyAdded(item)) {
-                mergeItem(item);
-            } else {
-                renderItem(item);
-            }
-        });
+    var record = $('tr#material-id-' + item.material_id),
+      totalQuantity = parsePtBrFloat(record.find('input.item-quantity').val()) + item.quantity,
+      itemUnitPrice = (money_en(record.find('input.item-unit-price').val()) + item.unit_price) / 2,
+      itemtotalValue = money_pt(numberWithDelimiter(itemUnitPrice * totalQuantity));
+    itemUnitPrice = money_pt(itemUnitPrice);
 
+
+    record.find('input.item-quantity').val(totalQuantity);
+
+    record.find('input.item-unit-price').val(itemUnitPrice);
+
+    record.find("td.item-total-value").text(itemtotalValue);
+    record.find('input.item-total-value').val(itemtotalValue);
+
+  }
+
+  function renderItem(item) {
+    console.log(item)
+    var itemBinds = {
+      uuid: _.uniqueId('fresh-'),
+      id: '',
+      material_id: item.material_id,
+      material: item.material_description,
+      creditor_id: '',
+      creditor: '',
+      reference_unit: item.reference_unit,
+      brand: item.brand,
+      quantity: item.quantity,
+      lot: item.lot,
+      estimated_total_price:
+        money_pt(item.quantity * item.unit_price),
+      unit_price: money_pt(item.unit_price)
+    };
+
+    var data = $('#licitation_process_items_template').mustache(itemBinds);
+
+    $('#items-records tbody').append(data);
+  }
+
+  function fillItems(items){
+
+    $.each(items, function (i, item) {
+      if (hasItemAlreadyAdded(item)) {
+        mergeItem(item);
+      } else {
+        renderItem(item);
+      }
     });
+  }
 
   $("#items-records").on('nestedGrid:afterAdd', function(){
     const nestedFields = $("#items .nested-fields");
@@ -274,6 +263,4 @@ $(document).ready(function () {
       }
     });
   });
-
-
 });
