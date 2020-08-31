@@ -15,7 +15,14 @@
   </div>
 </div>
 
-<%= f.input :creditor, as: :auto_complete %>
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :creditor, as: :auto_complete %>
+  </div>
+  <div class="yui3-u-1-2">
+    <%= f.input :email %>
+  </div>
+</div>
 
 <div id="lot" class="tabs">
   <ul>
@@ -35,7 +42,7 @@
         </div>
       </div>
 
-      <%= f.association :items, :collection => f.object.items_by_lot(lot) do |p| %>
+      <%= f.simple_fields_for :items, f.object.items_by_lot(lot) do |p| %>
         <%= render 'price_collection_proposal_items/form', :f => p, parent: f %>
       <% end %>
     </div>
