@@ -92,22 +92,15 @@ $(document).ready(function () {
         }
     });
 
-    $('#price_collection_creditor_id').on('change', function (event, creditor) {
+    $("#price_collection_proposals").on('change',"[name$='[creditor_id]']", function (event, creditor) {
         if (creditor) {
-            $('#price_collection_email').val(creditor.email || creditor.person_email);
+          var $email = $("#price_collection_proposals [name$='[email]']");
 
-            if ($('#price_collection_email').val() == "") {
-                $('#price_collection_email').removeAttr('disabled');
-            }
-        }
-    });
+          $email.val(creditor.email || creditor.person_email);
 
-    $('#price_collection_creditor_id').on('change', function (event, creditor) {
-        var emailInput = $('.nested-fields').find('input[name="price_collection[email]"]');
-        emailInput.val(creditor.email || creditor.person_email);
-
-        if (creditor.email) {
-            emailInput.attr('disabled', true);
+          if (creditor.email) {
+            $email.attr('readonly', true);
+          }
         }
     });
 
