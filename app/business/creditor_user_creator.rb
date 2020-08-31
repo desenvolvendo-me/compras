@@ -9,20 +9,20 @@ class CreditorUserCreator
   def generate
     proposals_not_invited.each do |proposal|
       if proposal.creditor.user?
-        mailer.invite_registered_creditor(proposal.creditor,
-                                          price_collection,
-                                          context.current_prefecture,
-                                          context.current_customer).deliver if Rails.env.production?
+        # mailer.invite_registered_creditor(proposal.creditor,
+        #                                   price_collection,
+        #                                   context.current_prefecture,
+        #                                   context.current_customer).deliver if Rails.env.production?
       else
-        user = create_user(proposal.creditor, proposal)
+        create_user(proposal.creditor, proposal)
 
-        if user.persisted?
-          mailer.invite_new_creditor(user, price_collection).deliver if Rails.env.production?
-        else
-          price_collection.errors.add(:email, user.errors.to_a.join(", "))
-
-          return false
-        end
+        # if user.persisted?
+        #   mailer.invite_new_creditor(user, price_collection).deliver if Rails.env.production?
+        # else
+        #   price_collection.errors.add(:email, user.errors.to_a.join(", "))
+        #
+        #   return false
+        # end
       end
 
       proposal.update_column :email_invitation, true
