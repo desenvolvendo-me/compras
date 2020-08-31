@@ -30,4 +30,6 @@
       <%= f.input :total_price, :disabled => true, :input_html => { :class => 'item-total-price', 'data-decimal' => true, :value => f.object.decorator.total_price } %>
     </div>
   </div>
+
+  <%= f.input :price_collection_item_id, as: :hidden %>
 </div>
