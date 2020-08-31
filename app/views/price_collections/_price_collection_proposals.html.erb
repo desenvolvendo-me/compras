@@ -1,8 +1,12 @@
-<%= button_tag 'Adicionar Habilitação', type: :button,
-               class: "button", id: "add-proposal" %>
+<div class="row">
+  <div class="col">
+    <%= button_tag 'Adicionar Habilitação', type: :button,
+                   class: "button", id: "add-proposal" %>
 
-<%= button_tag 'Cancelar', type: :button,
-               class: "button", id: "cancel-proposal" %>
+    <%= button_tag 'Cancelar', type: :button,
+                   class: "button", id: "cancel-proposal" %>
+  </div>
+</div>
 
 <div id="proposal-fields"></div>
 
@@ -43,8 +47,6 @@
 
 
 <script type="text/javascript" charset="utf-8">
-
-
   $("#cancel-proposal").click(function(){
     $("#proposals-records, #add-proposal").show();
     $(this).hide();
