@@ -36,7 +36,7 @@
       </div>
 
       <%= f.association :items, :collection => f.object.items_by_lot(lot) do |p| %>
-        <%= render 'price_collection_proposal_items/form', :f => p %>
+        <%= render 'price_collection_proposal_items/form', :f => p, parent: f %>
       <% end %>
     </div>
   <% end %>
