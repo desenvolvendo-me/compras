@@ -39,7 +39,7 @@
 
 
 <%= mustache 'proposals-template' do %>
-  <%= f.association :price_collection_proposals_attributes, :collection => f.object.price_collection_proposals.build, :index => '{{uuid_proposal}}' do |p| %>
+  <%= f.association :price_collection_proposals_attributes, :collection => generate_proposal_items(f.object), :index => '{{uuid_proposal}}' do |p| %>
     <%= render 'price_collection_proposals/form', :f => p %>
   <% end %>
 <% end %>
