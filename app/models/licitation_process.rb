@@ -63,9 +63,6 @@ class LicitationProcess < Compras::Model
   #                         :before_add => :update_purchase_solicitation_to_purchase_process,
   #                         :before_remove => :update_purchase_solicitation_to_liberated
 
-  accepts_nested_attributes_for :purchase_solicitations,
-                                :allow_destroy => true
-
   has_many :publications, class_name: 'LicitationProcessPublication', dependent: :destroy, order: :id
   has_many :bidders, :dependent => :destroy, :order => :id
   has_many :licitation_process_impugnments, :dependent => :restrict, :order => :id
@@ -111,6 +108,8 @@ class LicitationProcess < Compras::Model
                                 :licitation_process_ratifications, allow_destroy: true
 
   accepts_nested_attributes_for :judgment_commission_advice, :reject_if => :all_blank
+  accepts_nested_attributes_for :purchase_solicitations, :reject_if => :all_blank,
+                                :allow_destroy => true
 
 
   delegate :allow_negotiation?, to: :trading, allow_nil: true, prefix: true
