@@ -154,6 +154,7 @@ $(document).ready(function () {
   $("#list_purchase_solicitations_button").click(function(event){
     event.preventDefault()
     event.stopPropagation()
+
     if(dataDemands.purchaseSolicitations){
       $.each(dataDemands.purchaseSolicitations, function (i, purchase_solicitation) {
         if (hasPurchaseSolicitationAlreadyAdded(purchase_solicitation)) {
@@ -168,7 +169,7 @@ $(document).ready(function () {
       dataDemands = {};
     }
 
-    if(DataPurchaseSolicitation){
+    if(DataPurchaseSolicitation.items){
       fillItems(DataPurchaseSolicitation.items)
 
       DataPurchaseSolicitation= {};
