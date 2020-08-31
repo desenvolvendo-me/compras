@@ -1,0 +1,78 @@
+<%= button_tag 'Adicionar Habilitação', type: :button,
+               class: "button", id: "add-proposal" %>
+
+<%= button_tag 'Cancelar', type: :button,
+               class: "button", id: "cancel-proposal" %>
+
+<div id="proposal-fields"></div>
+
+
+<table id="proposals-records" class="records">
+  <thead>
+  <tr>
+    <% PriceCollectionProposal.decorator.header_attributes.each do |field| %>
+      <th><%= PriceCollectionProposal.human_attribute_name field %></th>
+    <% end %>
+    <th></th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% f.object.price_collection_proposals.each do |resource| %>
+    <tr id="<%= dom_id resource %>">
+      <% PriceCollectionProposal.decorator.header_attributes.each do |field| %>
+        <td>
+            <%= formatted_attribute(resource.decorator, field) %>
+        </td>
+      <% end %>
+      <td><%= link_to 'Visualizar', '#', class: 'edit-proposal', 'data-url': edit_price_collection_proposal_path(resource) %></td>
+      <td><%= link_to 'Remover', '#'%></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+
+<%= mustache 'proposals-template' do %>
+  <%= f.association :price_collection_proposals_attributes, :collection => f.object.price_collection_proposals.build, :index => '{{uuid_proposal}}' do |p| %>
+    <%= render 'price_collection_proposals/form', :f => p %>
+  <% end %>
+<% end %>
+
+
+
+<script type="text/javascript" charset="utf-8">
+
+
+  $("#cancel-proposal").click(function(){
+    $("#proposals-records, #add-proposal").show();
+    $(this).hide();
+    $("#proposal-fields").html('');
+  });
+
+  $(function(){
+    $("#add-proposal").click(function() {
+      $('#proposal-fields').append($('#proposals-template').mustache({uuid_proposal: _.uniqueId('fresh-')}));
+      $(".tabs").tabs();
+      $("#proposals-records, #add-proposal").hide();
+      $("#cancel-proposal").show();
+    });
+
+    // $(".edit-proposal").click(function() {
+    //   var url = $(this).data('url');
+    //
+    //   $.get(url, function (data) {
+    //     $("#proposal-fields").html($(data).html());
+    //     initMustache();
+    //   })
+    // })
+  })
+</script>
+
+<style>
+  #cancel-proposal{
+    display: none;
+    float: right;
+  }
+</style>
