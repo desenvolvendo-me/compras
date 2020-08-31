@@ -23,8 +23,9 @@
     </thead>
 
     <tbody>
+
     <%= render resource.type_of_calculation, resource: resource, proposal: proposal,
-               classifications: classifications %>
+               classifications: classifications, all_proposal: true %>
     </tbody>
   </table>
 <% end %>
@@ -58,7 +59,7 @@
 
       <tbody>
       <%= render resource.type_of_calculation, resource: resource, proposal: proposal,
-                 classifications: classifications %>
+                 classifications: classifications, all_proposal: false%>
       </tbody>
     </table>
   <% end %>
