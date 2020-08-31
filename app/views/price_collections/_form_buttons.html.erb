@@ -2,12 +2,14 @@
 
   <% if f.object.persisted? %>
     <%= link_to('Mapa de preços', report_map_of_prices_path(resource.id), class: "button primary",
-      'data-disabled' => f.object.decorator.must_have_proposals) %>
+                'data-disabled' => f.object.decorator.must_have_proposals) %>
   <% end %>
 
   <% if can?(:modify, main_controller_name) %>
-    <%= link_to 'Melhor Proposta', classification_price_collection_path(resource),
-      method: :post, class: 'button primary' if f.object.persisted? %>
+    <% if f.object.items.reject(&:new_record?).present? %>
+      <%= link_to 'Melhor Proposta', classification_price_collection_path(resource),
+                  method: :post, class: 'button primary' if f.object.persisted? %>
+    <% end %>
     <%= f.button :submit, 'data-disabled' => f.object.decorator.is_annulled_message %>
   <% end %>
 
