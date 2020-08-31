@@ -75,20 +75,32 @@ $(document).ready(function () {
     $('#creditor-dialog').dialog('close');
   });
 
+  function showToChooseCreditor(creditors){
+    var body = '';
+    $.each(creditors, function(index, creditor){
+      body += "<tr class='creditor-choosed' data-creditor='"+ creditor.id +"' > <td> "+creditor.name+" </td> </tr>";
+    });
+
+    $("#choose-creditor tbody").html(body);
+    $("#creditor-dialog").dialog("open");
+  }
+
   $('form').on('change', '#contract_licitation_process_id', function (event, licitationProcess) {
+
     if (licitationProcess) {
       $('#contract_content').val(licitationProcess.description);
       $('#contract_modality_humanize').val(licitationProcess.modality_humanize);
       $('#contract_execution_type').val(licitationProcess.execution_type);
       $('#contract_contract_guarantees').val(licitationProcess.contract_guarantees);
-
       if(licitationProcess.creditors){
         if(licitationProcess.creditors.length > 1){
           setUrlToCreditor(licitationProcess.id);
           showToChooseCreditor(licitationProcess.creditors);
         }else{
           setUrlToCreditor(licitationProcess.id);
-          fillCreditorField(licitationProcess.creditors[0].name, licitationProcess.creditors[0].id);
+          if(licitationProcess.creditors[0]){
+            fillCreditorField(licitationProcess.creditors[0].name, licitationProcess.creditors[0].id);
+          }
         }
       }
 
@@ -100,31 +112,67 @@ $(document).ready(function () {
     }
   });
 
-  function showToChooseCreditor(creditors){
-    var body = '';
-    $.each(creditors, function(index, creditor){
-      body += "<tr class='creditor-choosed' data-creditor='"+ creditor.id +"' > <td> "+creditor.name+" </td> </tr>";
-    });
-
-    $("#choose-creditor tbody").html(body);
-    $("#creditor-dialog").dialog("open");
-  }
-
-
-  function fillCreditorField(name, id){
-    $('#contract_creditor')
-      .val(name)
-      .trigger("change");
-
-    $('#contract_creditor_id').val(id).trigger("change");
-  }
-
   function setUrlToCreditor(licitation_process_id){
     var url = Routes.creditors + "?",
       params = {by_ratification_and_licitation_process_id: licitation_process_id};
     url += jQuery.param(params);
 
     $('#contract_creditor').data("source", url);
+  }
+
+  function fillCreditorField(name, id){
+    $('#contract_creditor')
+      .val(name)
+      .trigger("change");
+    $('#contract_creditor_id').val(id).trigger("change");
+  }
+
+  $("#contract_creditor_id").change(function(){
+    const id = $(this).val();
+    lookForParentContract(id);
+  });
+
+  function lookForParentContract(creditor_id){
+    $.ajax({
+        url: setUrlForParent(creditor_id),
+        dataType: 'json',
+        type: 'GET',
+        success: function (data) {
+          if(data)
+            fillParentField(data[0])
+        }
+      });
+  }
+
+  function setUrlForParent(creditor_id){
+    const licitation_id = $("#contract_licitation_process_id").val();
+    const params = {
+      by_licitation_process: licitation_id,
+      by_creditor_principal_contracts: creditor_id
+    };
+    var url = Routes.modal_contracts + "?";
+
+    url += jQuery.param(params);
+
+    $("#contract_parent").data('modal-url', url);
+
+    return url
+  }
+
+  function fillParentField(data){
+    BlockPrincipalContractBox(data.id);
+    $("#contract_parent_id").val(data.id);
+    $("#contract_parent").val(data.value).prop('disabled', true);
+  }
+
+  function BlockPrincipalContractBox(id){
+    const contract_id = parseInt($("#contract_id").val()),
+          $principal_contract = $("#contract_principal_contract");
+
+    if(contract_id !== id)
+      return $principal_contract.attr('data-disabled', 'Fornecedor já possui contrato marcado como principal.');
+
+    $principal_contract.removeAttr('data-disabled');
   }
 
   $( "#creditor-dialog" ).dialog({
@@ -155,4 +203,5 @@ $(document).ready(function () {
 
     item.find('.consumption').val(result)
   });
+
 });

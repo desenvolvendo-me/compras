@@ -12,7 +12,7 @@ class Contract < Compras::Model
                   :default_fine, :execution_type, :contract_guarantees, :occurrence_contractual_historics_attributes,
                   :consortium_agreement, :department_id, :balance_control_type, :authorized_areas_attributes,
                   :purchasing_unit_id, :financials_attributes, :balance, :contract_termination_attributes,
-                  :consumption_minutes_attributes
+                  :consumption_minutes_attributes, :principal_contract
 
   attr_modal :year, :contract_number, :sequential_number,
              :signature_date, :creditor
@@ -35,6 +35,7 @@ class Contract < Compras::Model
   belongs_to :licitation_process
   belongs_to :creditor
   belongs_to :management_object
+  belongs_to :parent, class_name: 'Contract'
 
   belongs_to_resource :budget_structure
 
@@ -82,6 +83,7 @@ class Contract < Compras::Model
                          :type => :date,
                          :after_message => :end_date_should_be_after_signature_date,
                        }, :allow_blank => true
+  validate :principal_contract_per_creditor, if: :principal_contract?
 
   filterize
 
@@ -115,7 +117,15 @@ class Contract < Compras::Model
             licitation_process.type_of_removal.not_eq(type_of_removal) |
               licitation_process.type_of_removal.eq(nil)
           }
-        end
+  end
+
+  scope :by_creditor_principal_contracts, lambda{|creditor_id|
+    where(creditor_id: creditor_id, principal_contract: true)
+  }
+
+  scope :by_licitation_process, lambda{|licitation_id|
+    where(licitation_process_id: licitation_id)
+  }
 
   def self.ordered
     order("ABS(end_date - '#{Date.today}'), unico_people.name ASC, contract_number DESC, year DESC, publication_date DESC ").joins(creditor: [:person])
@@ -224,5 +234,10 @@ class Contract < Compras::Model
       solicitation.merge! hash
     end
     solicitation
+  end
+
+  def principal_contract_per_creditor
+    contracts = Contract.by_licitation_process(licitation_process_id).by_creditor_principal_contracts(creditor_id).last
+    errors.add(:principal_contract, :already_exist_principal_contract_for_creditor) if contracts != self
   end
 end

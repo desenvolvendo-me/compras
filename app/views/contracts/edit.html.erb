@@ -1,7 +1,7 @@
 <h2 id="title">
   <span><%= "#{resource.decorator.contract_or_minute}: #{resource.contract_number} / #{resource.year}" %></span>
   <span class="subtitle"><%= resource.contract_type %></span>
-  <span class="subtitle"><%= "Início da Vigência: #{resource.start_date} - Término da Vigência: #{resource.end_date}" %></span>
+  <span class="subtitle"><%= "Início da Vigência: #{l resource.start_date if resource.start_date} - Término da Vigência: #{l resource.end_date if resource.end_date}" %></span>
   <span class="subtitle"><%= "Fornecedor: #{resource.creditor}" %></span>
 </h2>
 
