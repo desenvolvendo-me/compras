@@ -1,0 +1,5 @@
+<%= simple_form_for resource, :authenticity_token => false do |f| %>
+  <%= f.association :price_collection_proposals, :collection => @proposal do |p| %>
+    <%= render 'price_collection_proposals/form', :f => p %>
+  <% end %>
+<% end %>

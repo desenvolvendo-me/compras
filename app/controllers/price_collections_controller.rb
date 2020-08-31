@@ -37,6 +37,12 @@ class PriceCollectionsController < CrudController
     redirect_to price_collection_path(resource)
   end
 
+  def edit_proposal
+    @proposal = resource.price_collection_proposals.where(id: params[:price_collection_proposal_id])
+
+    render 'edit_price_collection_proposals', layout: false
+  end
+
   protected
 
   def default_filters
