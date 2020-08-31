@@ -62,7 +62,7 @@ pt-BR:
         budget_allocation_expense_nature: "Natureza da Despesa"
         budget_allocation_balance: "Saldo da Dotação"
         purchase_process_budget_allocation_value: "Valor Previsto"
-        lot: "Lote"
+        lot: "Item/Grupo"
         quantity: "Quantidade"
         reference_unit: "Unidade"
         unit_price: "Valor Unitário"

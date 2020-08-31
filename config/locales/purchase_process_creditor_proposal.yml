@@ -10,7 +10,7 @@ pt-BR:
         brand: "Marca"
         creditor: "Credor"
         delivery_date: "Prazo de entrega"
-        item_lot: "Lote"
+        item_lot: "Item/Grupo"
         lot: "Lote"
         purchase_process_item: "Item"
         quantity: "Quantidade"
