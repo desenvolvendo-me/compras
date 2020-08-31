@@ -51,8 +51,8 @@
 
   function calculateLotTotalItems(itemDiv) {
     var lotDiv = itemDiv.closest('.licitation-process-lot'),
-        itemPrices = lotDiv.find('.item-total-price'),
-        totalValue = 0;
+      itemPrices = lotDiv.find('.item-total-price'),
+      totalValue = 0;
 
     itemPrices.each(function() {
       totalValue += parsePtBrFloat(this.value);
@@ -63,9 +63,9 @@
 
   $('form.price_collection_proposal').on('keyup', '.item-unit-price', function() {
     var itemDiv = $(this).closest('.item'),
-        itemQuantity = new BigNumber(parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0')),
-        itemUnitPrice = (parsePtBrFloat(itemDiv.find('.item-unit-price').val() || '0')),
-        total = numberWithDelimiter(parseFloat(itemQuantity.multiply(itemUnitPrice)));
+      itemQuantity = new BigNumber(parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0')),
+      itemUnitPrice = (parsePtBrFloat(itemDiv.find('.item-unit-price').val() || '0')),
+      total = numberWithDelimiter(parseFloat(itemQuantity.multiply(itemUnitPrice)));
 
     itemDiv.find('.item-total-price').val(total);
     calculateLotTotalItems(itemDiv);
@@ -73,9 +73,9 @@
 
   $('form.price_collection_proposal').on('keyup', '.item-total-price', function() {
     var itemDiv = $(this).closest('.item'),
-        itemQuantity = new BigNumber(parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0')),
-        itemTotalPrice = new BigNumber(parsePtBrFloat(itemDiv.find('.item-total-price').val() || '0')),
-        unitPrice = numberWithDelimiter(parseFloat(itemTotalPrice.divide(itemQuantity)));
+      itemQuantity = new BigNumber(parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0')),
+      itemTotalPrice = new BigNumber(parsePtBrFloat(itemDiv.find('.item-total-price').val() || '0')),
+      unitPrice = numberWithDelimiter(parseFloat(itemTotalPrice.divide(itemQuantity)));
 
     itemDiv.find('.item-unit-price').val(unitPrice);
     calculateLotTotalItems(itemDiv);
