@@ -1,6 +1,5 @@
 class PriceCollectionProposal < Compras::Model
-  attr_accessible :creditor_id, :items_attributes, :status, :email_invitation,
-    :user_attributes
+  attr_accessible :creditor_id, :items_attributes, :status, :email_invitation, :user_attributes
 
   belongs_to :price_collection
   belongs_to :creditor
