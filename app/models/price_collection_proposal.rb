@@ -1,5 +1,5 @@
 class PriceCollectionProposal < Compras::Model
-  attr_accessible :creditor_id, :items_attributes, :status, :email_invitation, :user_attributes
+  attr_accessible :creditor_id, :items_attributes, :status, :email_invitation, :user_attributes, :email
 
   belongs_to :price_collection
   belongs_to :creditor
@@ -12,11 +12,12 @@ class PriceCollectionProposal < Compras::Model
   has_enumeration_for :status, :with => PriceCollectionStatus, :create_helpers => true
 
   delegate :date, :full_period, :code, :year, :lots, :to => :price_collection, :allow_nil => true, :prefix => true
-  delegate :name, :email, :login, :user_attributes, :user_attributes=, :user, :to => :creditor, :allow_nil => true
+  delegate :name, :login, :user_attributes, :user_attributes=, :user, :to => :creditor, :allow_nil => true
 
   accepts_nested_attributes_for :items, :allow_destroy => true
 
-  validates :creditor, :presence => true
+  validates :creditor, :email, :presence => true
+  validates :email,  mail: true, :presence => true
   validate :must_have_a_valid_creditor_user, if: :user
 
   orderize "id DESC"
