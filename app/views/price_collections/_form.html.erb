@@ -12,10 +12,13 @@
       <a href="#items">Itens</a>
     </li>
 
-    <li>
-      <a href="#price_collection_proposals">Propostas</a>
-    </li>
+    <%if f.object.persisted? %>
+      <li>
+        <a href="#price_collection_proposals">Propostas</a>
+      </li>
+    <% end %>
   </ul>
+  
 
   <div id="main">
     <%= render 'main', f: f %>
@@ -28,8 +31,9 @@
   <div id="items">
     <%= render 'items', f: f %>
   </div>
-
-  <div id="price_collection_proposals">
-    <%= render 'price_collection_proposals', f: f %>
-  </div>
+  <%if f.object.persisted? %>
+    <div id="price_collection_proposals">
+      <%= render 'price_collection_proposals', f: f %>
+    </div>
+  <% end %>
 </div>

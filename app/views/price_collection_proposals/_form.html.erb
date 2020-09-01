@@ -26,14 +26,14 @@
 
 <div id="lot" class="tabs">
   <ul>
-    <% f.object.price_collection_lots.each_with_index do |lot, index| %>
+    <% f.object.price_collection_lots.try(:each_with_index) do |lot, index| %>
       <li>
         <%= link_to "Lote #{index.succ}", "#lot#{lot}" %>
       </li>
     <% end %>
   </ul>
 
-  <% f.object.price_collection_lots.each do |lot| %>
+  <% f.object.price_collection_lots.try(:each) do |lot| %>
     <div id="lot<%= lot %>" class="licitation-process-lot container">
       <%= f.simple_fields_for :items, f.object.items_by_lot(lot) do |p| %>
         <%= render 'price_collection_proposal_items/form', :f => p, parent: f %>
