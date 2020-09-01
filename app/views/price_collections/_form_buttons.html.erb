@@ -1,15 +1,12 @@
 <div class="buttons">
   <%= count_link %>
   <% if f.object.persisted? %>
-    <%= link_to('Propostas', price_collection_price_collection_proposals_path(resource),
-      class: "button primary") %>
-
     <%= link_to('Mapa de preços', report_map_of_prices_path(resource.id), class: "button primary",
       'data-disabled' => f.object.decorator.must_have_proposals) %>
   <% end %>
 
   <% if can?(:modify, main_controller_name) %>
-    <%= link_to 'Apurar', classification_price_collection_path(resource),
+    <%= link_to 'Melhor Proposta', classification_price_collection_path(resource),
       method: :post, class: 'button primary' if f.object.persisted? %>
     <%= f.button :submit, 'data-disabled' => f.object.decorator.is_annulled_message %>
   <% end %>
