@@ -65,7 +65,8 @@ class PriceCollectionProposal < Compras::Model
   end
 
   def classification_by_lot(lot)
-    items_with_creditor = PriceCollectionProposalItem.by_lot_item_order_by_unit_price(lot).reload
+    proposals_ids = price_collection.price_collection_proposals.pluck(:id)
+    items_with_creditor = PriceCollectionProposalItem.by_lot_item_order_by_unit_price(lot, proposals_ids).reload
 
     return unless items_with_creditor.any?
 
@@ -75,7 +76,8 @@ class PriceCollectionProposal < Compras::Model
   end
 
   def classification_by_item(proposal_item)
-    proposal_items = PriceCollectionProposalItem.by_item_order_by_unit_price(proposal_item.price_collection_item)
+    proposals_ids = price_collection.price_collection_proposals.pluck(:id)
+    proposal_items = PriceCollectionProposalItem.by_item_order_by_unit_price(proposal_item.price_collection_item, proposals_ids)
 
     return if proposal_items.empty?
 
