@@ -39,7 +39,7 @@ class PriceCollection < Compras::Model
   accepts_nested_attributes_for :items, :allow_destroy => true
   accepts_nested_attributes_for :price_collection_proposals, :allow_destroy => true
 
-  after_save :generate_proposal_items
+  # after_save :generate_proposal_items
 
   orderize "id DESC"
   filterize
@@ -73,8 +73,8 @@ class PriceCollection < Compras::Model
   def proposals_count
     self.price_collection_proposals.reject(&:marked_for_destruction?).count
   end
-
-  def generate_proposal_items
-    PriceCollectionProposalUpdater.new(self).update!
-  end
+  #
+  # def generate_proposal_items
+  #   PriceCollectionProposalUpdater.new(self).update!
+  # end
 end

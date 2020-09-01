@@ -703,6 +703,7 @@ Compras::Application.routes.draw do
   resources :price_collections, except: :destroy do
     member do
       post :classification
+      get :edit_proposal
     end
 
     collection do

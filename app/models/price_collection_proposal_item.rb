@@ -32,24 +32,24 @@ class PriceCollectionProposalItem < Compras::Model
             price_collection_item_id.eq(params.fetch(:item_id)) }
   end
 
-  def self.by_item_order_by_unit_price(item_id)
+  def self.by_item_order_by_unit_price(item_id, proposals_ids)
     joins { price_collection_proposal }.
     where { price_collection_item_id.eq(item_id) &
-            price_collection_proposal.status.not_eq(PriceCollectionStatus::ANNULLED) &
             unit_price.not_eq(nil)}.
+    where("compras_price_collection_proposals.status IS DISTINCT FROM (?)", PriceCollectionStatus::ANNULLED).
     order { unit_price }
   end
 
-  def self.by_lot_item_order_by_unit_price(lot)
+  def self.by_lot_item_order_by_unit_price(lot, proposals_ids)
     select { price_collection_proposal.creditor_id }.
     select { sum(unit_price).as(total_value) }.
 
     joins { price_collection_proposal }.
     joins { price_collection_item }.
 
-    where { price_collection_item.lot.eq(lot) &
-            price_collection_proposal.status.not_eq(PriceCollectionStatus::ANNULLED) }.
-
+    where { price_collection_item.lot.eq(lot)}.
+    where("compras_price_collection_proposals.status IS DISTINCT FROM (?)", PriceCollectionStatus::ANNULLED).
+    where("compras_price_collection_proposals.id IN (?)", proposals_ids).
     group { price_collection_proposal.creditor_id }.
     group { price_collection_item.lot }.
 

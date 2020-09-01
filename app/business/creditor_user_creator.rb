@@ -14,7 +14,7 @@ class CreditorUserCreator
                                           context.current_prefecture,
                                           context.current_customer).deliver if Rails.env.production?
       else
-        user = create_user(proposal.creditor)
+        user = create_user(proposal.creditor, proposal)
 
         if user.persisted?
           mailer.invite_new_creditor(user, price_collection).deliver if Rails.env.production?
@@ -39,9 +39,9 @@ class CreditorUserCreator
     price_collection.price_collection_proposals.not_invited
   end
 
-  def create_user(creditor)
+  def create_user(creditor, proposal)
     user_repository.create(:name => creditor.name,
-                           :email => creditor_user_email(creditor),
+                           :email => proposal.email,
                            :login => creditor.login,
                            :authenticable_id => creditor.id,
                            :authenticable_type => AuthenticableType::CREDITOR)
@@ -60,8 +60,8 @@ class CreditorUserCreator
       if value[:creditor_id] == creditor.id.to_s
         return value[:email]
       end
-    end
 
+    end
     nil
   end
 end

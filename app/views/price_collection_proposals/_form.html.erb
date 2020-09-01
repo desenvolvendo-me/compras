@@ -15,7 +15,14 @@
   </div>
 </div>
 
-<%= f.input :creditor, :disabled => true %>
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :creditor, as: :auto_complete %>
+  </div>
+  <div class="yui3-u-1-2">
+    <%= f.input :email %>
+  </div>
+</div>
 
 <div id="lot" class="tabs">
   <ul>
@@ -28,16 +35,16 @@
 
   <% f.object.price_collection_lots.each do |lot| %>
     <div id="lot<%= lot %>" class="licitation-process-lot container">
+      <%= f.simple_fields_for :items, f.object.items_by_lot(lot) do |p| %>
+        <%= render 'price_collection_proposal_items/form', :f => p, parent: f %>
+      <% end %>
 
       <div class="yui3-g">
-        <div class="yui3-u-1-2">
+        <div class="yui3-u-2-3"></div>
+        <div class="yui3-u-1-3">
           <%= f.input :item_total_value_by_lot, :input_html => { :class => 'item-total-value-by-lot', :value => f.object.decorator.item_total_value_by_lot(lot), :disabled => true } %>
         </div>
       </div>
-
-      <%= f.association :items, :collection => f.object.items_by_lot(lot) do |p| %>
-        <%= render 'price_collection_proposal_items/form', :f => p %>
-      <% end %>
     </div>
   <% end %>
 </div>
@@ -51,8 +58,8 @@
 
   function calculateLotTotalItems(itemDiv) {
     var lotDiv = itemDiv.closest('.licitation-process-lot'),
-        itemPrices = lotDiv.find('.item-total-price'),
-        totalValue = 0;
+      itemPrices = lotDiv.find('.item-total-price'),
+      totalValue = 0;
 
     itemPrices.each(function() {
       totalValue += parsePtBrFloat(this.value);
@@ -63,9 +70,9 @@
 
   $('form.price_collection_proposal').on('keyup', '.item-unit-price', function() {
     var itemDiv = $(this).closest('.item'),
-        itemQuantity = new BigNumber(parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0')),
-        itemUnitPrice = (parsePtBrFloat(itemDiv.find('.item-unit-price').val() || '0')),
-        total = numberWithDelimiter(parseFloat(itemQuantity.multiply(itemUnitPrice)));
+      itemQuantity = new BigNumber(parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0')),
+      itemUnitPrice = (parsePtBrFloat(itemDiv.find('.item-unit-price').val() || '0')),
+      total = numberWithDelimiter(parseFloat(itemQuantity.multiply(itemUnitPrice)));
 
     itemDiv.find('.item-total-price').val(total);
     calculateLotTotalItems(itemDiv);
@@ -73,9 +80,9 @@
 
   $('form.price_collection_proposal').on('keyup', '.item-total-price', function() {
     var itemDiv = $(this).closest('.item'),
-        itemQuantity = new BigNumber(parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0')),
-        itemTotalPrice = new BigNumber(parsePtBrFloat(itemDiv.find('.item-total-price').val() || '0')),
-        unitPrice = numberWithDelimiter(parseFloat(itemTotalPrice.divide(itemQuantity)));
+      itemQuantity = new BigNumber(parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0')),
+      itemTotalPrice = new BigNumber(parsePtBrFloat(itemDiv.find('.item-total-price').val() || '0')),
+      unitPrice = numberWithDelimiter(parseFloat(itemTotalPrice.divide(itemQuantity)));
 
     itemDiv.find('.item-unit-price').val(unitPrice);
     calculateLotTotalItems(itemDiv);

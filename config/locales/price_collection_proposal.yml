@@ -13,6 +13,7 @@ pt-BR:
         price_collection_full_period: "Prazo de entrega"
         item_total_value_by_lot: "Valor total do lote"
         code_and_year: "Código e ano"
+        total_lot_value: "Valor Total do Lote"
 
   price_collection_proposal:
     messages:

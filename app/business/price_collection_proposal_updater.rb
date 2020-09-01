@@ -1,3 +1,5 @@
+##**************** PROCEDIMENTOS DESCONTINUADOS **********************##
+
 class PriceCollectionProposalUpdater
   def initialize(price_collection, proposal_item_repository=PriceCollectionProposalItem)
     @price_collection = price_collection

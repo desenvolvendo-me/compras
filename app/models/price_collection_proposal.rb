@@ -1,6 +1,5 @@
 class PriceCollectionProposal < Compras::Model
-  attr_accessible :creditor_id, :items_attributes, :status, :email_invitation,
-    :user_attributes
+  attr_accessible :creditor_id, :items_attributes, :status, :email_invitation, :user_attributes, :email
 
   belongs_to :price_collection
   belongs_to :creditor
@@ -13,17 +12,21 @@ class PriceCollectionProposal < Compras::Model
   has_enumeration_for :status, :with => PriceCollectionStatus, :create_helpers => true
 
   delegate :date, :full_period, :code, :year, :lots, :to => :price_collection, :allow_nil => true, :prefix => true
-  delegate :name, :email, :login, :user_attributes, :user_attributes=, :user, :to => :creditor, :allow_nil => true
+  delegate :name, :login, :user_attributes, :user_attributes=, :user, :to => :creditor, :allow_nil => true
 
   accepts_nested_attributes_for :items, :allow_destroy => true
 
   validates :creditor, :presence => true
+  validates :email, mail: true, presence: true, uniqueness: true
   validate :must_have_a_valid_creditor_user, if: :user
+
 
   orderize "id DESC"
   filterize
 
+
   scope :not_invited, lambda { where { email_invitation.eq(false) } }
+  scope :not_anull, lambda {where("compras_price_collection_proposals.status IS DISTINCT FROM (?)", PriceCollectionStatus::ANNULLED)}
 
   def self.destroy_all_classifications
     classifications.destroy_all
@@ -33,6 +36,8 @@ class PriceCollectionProposal < Compras::Model
     PriceCollectionClassification.where do |classification|
       classification.price_collection_proposal_id.in(pluck(:id))
     end
+
+
   end
 
   def build_user
@@ -60,7 +65,8 @@ class PriceCollectionProposal < Compras::Model
   end
 
   def classification_by_lot(lot)
-    items_with_creditor = PriceCollectionProposalItem.by_lot_item_order_by_unit_price(lot).reload
+    proposals_ids = price_collection.price_collection_proposals.pluck(:id)
+    items_with_creditor = PriceCollectionProposalItem.by_lot_item_order_by_unit_price(lot, proposals_ids).reload
 
     return unless items_with_creditor.any?
 
@@ -70,7 +76,8 @@ class PriceCollectionProposal < Compras::Model
   end
 
   def classification_by_item(proposal_item)
-    proposal_items = PriceCollectionProposalItem.by_item_order_by_unit_price(proposal_item.price_collection_item)
+    proposals_ids = price_collection.price_collection_proposals.pluck(:id)
+    proposal_items = PriceCollectionProposalItem.by_item_order_by_unit_price(proposal_item.price_collection_item, proposals_ids)
 
     return if proposal_items.empty?
 
