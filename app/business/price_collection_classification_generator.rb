@@ -11,7 +11,7 @@ class PriceCollectionClassificationGenerator
   def generate!
     price_collection.destroy_all_price_collection_classifications
 
-    price_collection_proposals.each do |proposal|
+    price_collection_proposals.not_anull.each do |proposal|
       send(type_of_calculation, proposal)
     end
 

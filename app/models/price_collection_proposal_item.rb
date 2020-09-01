@@ -36,7 +36,7 @@ class PriceCollectionProposalItem < Compras::Model
     joins { price_collection_proposal }.
     where { price_collection_item_id.eq(item_id) &
             unit_price.not_eq(nil)}.
-    where("compras_price_collection_proposals.status IS DISTINCT FROM ?", PriceCollectionStatus::ANNULLED).
+    where("compras_price_collection_proposals.status IS DISTINCT FROM (?)", PriceCollectionStatus::ANNULLED).
     order { unit_price }
   end
 
@@ -48,7 +48,7 @@ class PriceCollectionProposalItem < Compras::Model
     joins { price_collection_item }.
 
     where { price_collection_item.lot.eq(lot)}.
-    where("compras_price_collection_proposals.status IS DISTINCT FROM ?", PriceCollectionStatus::ANNULLED).
+    where("compras_price_collection_proposals.status IS DISTINCT FROM (?)", PriceCollectionStatus::ANNULLED).
     group { price_collection_proposal.creditor_id }.
     group { price_collection_item.lot }.
 

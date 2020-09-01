@@ -26,6 +26,7 @@ class PriceCollectionProposal < Compras::Model
 
 
   scope :not_invited, lambda { where { email_invitation.eq(false) } }
+  scope :not_anull, lambda {where("compras_price_collection_proposals.status IS DISTINCT FROM (?)", PriceCollectionStatus::ANNULLED)}
 
   def self.destroy_all_classifications
     classifications.destroy_all
@@ -35,6 +36,8 @@ class PriceCollectionProposal < Compras::Model
     PriceCollectionClassification.where do |classification|
       classification.price_collection_proposal_id.in(pluck(:id))
     end
+
+
   end
 
   def build_user
