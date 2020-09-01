@@ -29,15 +29,16 @@ class MinutePurchaseProcessReport < Report
   end
 
   def licitation_commission_members
-    return if licitation_commission.licitation_commission_members.empty?
+    
+    return if !licitation_commission.nil? && licitation_commission.licitation_commission_members.empty?
 
-    licitation_commission.licitation_commission_members.map(&:individual).join(', ').upcase
+    licitation_commission.licitation_commission_members.map(&:individual).join(', ').upcase if licitation_commission
   end
 
   def member
-    return if licitation_commission.licitation_commission_members.empty?
+    return if !licitation_commission.nil? && licitation_commission.licitation_commission_members.empty?
 
-    licitation_commission.licitation_commission_members.last
+    licitation_commission.licitation_commission_members.last if licitation_commission
   end
 
   def president
