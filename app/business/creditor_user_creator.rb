@@ -19,7 +19,6 @@ class CreditorUserCreator
         if user.persisted?
           mailer.invite_new_creditor(user, price_collection).deliver if Rails.env.production?
         else
-          raise
           price_collection.errors.add(:email, user.errors.to_a.join(", "))
 
           return false
