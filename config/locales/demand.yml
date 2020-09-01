@@ -2,8 +2,8 @@ pt-BR:
   activerecord:
     models:
       demand:
-        one: "Demanda"
-        other: "Demandas"
+        one: "Gestão de Solicitação de Compra"
+        other: "Gestão de Solicitação de Compra"
 
     attributes:
       demand:
@@ -13,5 +13,6 @@ pt-BR:
         initial_date: "Data Inicial"
         final_date: "Data Final"
         purchasing_unit: "Unidade de Compra"
-        purchase_solicitation: "Solicitação de Compra"
+        purchase_solicitation: "Escolha uma Solicitação de Compra como modelo"
         departments: "Departameto"
+        number: 'Número'
