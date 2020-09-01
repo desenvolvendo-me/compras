@@ -6,5 +6,5 @@ pt-BR:
         year: 'Ano'
         process: "Processo"
         process_date_start: 'Data da expedição Inicial'
-        process_date_final: 'Data da expedição Final'
+        process_date_end: 'Data da expedição Final'
         creditor: "Fornecedor"
