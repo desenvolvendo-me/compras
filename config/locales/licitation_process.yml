@@ -88,7 +88,7 @@ pt-BR:
         competition: 'Concurso'
         auction:     'Leilão'
         trading:     'Pregão'
-        demand:     'Demanda'
+        demand:     'Gestão de Solicitação de Compra'
         phone_email:  'Email/Telefone'
         homologation_date:  'Data de Homologação'
         open_date:  'Data de Abertura'

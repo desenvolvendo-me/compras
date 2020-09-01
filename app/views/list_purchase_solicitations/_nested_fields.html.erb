@@ -3,7 +3,7 @@
     <%= f.input :demand, :as => :auto_complete, :fake => true %>
   </div>
   <div class="col">
-    <%= f.input :purchase_solicitation,:required => true, :as => :auto_complete, :fake => true,
+    <%= f.input :purchase_solicitation, :as => :auto_complete, :fake => true,
                 'data-hidden-field-class' => 'unique',:input_html => {} %>
   </div>
   <%= f.input :department, as: :fake, input_html:{style:'display: none', name:'solicitation[department]'}, label: false %>
