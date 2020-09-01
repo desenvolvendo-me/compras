@@ -162,4 +162,29 @@ $(document).ready(function () {
 
     });
 
+  $("#cancel-proposal").click(function(){
+    $("#proposals-records, #add-proposal").show();
+    $(this).hide();
+    $("#proposal-fields").html('');
+  });
+
+  $("#add-proposal").click(function() {
+    $('#proposal-fields').append($('#proposals-template').mustache());
+    showProprosal();
+  });
+
+  $(".edit-proposal").click(function() {
+    var url = $(this).data('url');
+
+    $.get(url, function (data) {
+      $("#proposal-fields").html($(data).html());
+      showProprosal();
+    })
+  });
 });
+
+function showProprosal(){
+  $(".tabs").tabs();
+  $("#proposals-records, #add-proposal").hide();
+  $("#cancel-proposal").show();
+}
