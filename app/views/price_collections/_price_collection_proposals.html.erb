@@ -43,8 +43,8 @@
         </td>
       <% end %>
       <td><%= resource.decorator.won_lots f.object, resource%></td>
-      <td><%= link_to 'Visualizar', '#', class: 'edit-proposal', 'data-url': edit_proposal_price_collection_path(f.object.id, price_collection_proposal_id: resource.id) %></td>
-      <td><%= link_to 'Remover', '#'%></td>
+      <td><%= link_to 'Visualizar', '#', class: 'button edit-proposal', 'data-url': edit_proposal_price_collection_path(f.object.id, price_collection_proposal_id: resource.id) %></td>
+      <td><%= annul_link(:resource => resource, :annul_controller_name => 'price_collection_proposal_annuls') %></td>
     </tr>
   <% end %>
   </tbody>
