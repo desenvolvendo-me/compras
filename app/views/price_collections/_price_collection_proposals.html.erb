@@ -17,11 +17,11 @@
     <% PriceCollectionProposal.decorator.header_attributes.each do |field| %>
       <th><%= PriceCollectionProposal.human_attribute_name field %></th>
     <% end %>
+    <th>Status</th>
     <th></th>
     <th></th>
   </tr>
   </thead>
-
   <tbody>
   <% f.object.price_collection_proposals.each do |resource| %>
     <tr id="<%= dom_id resource %>">
@@ -30,6 +30,7 @@
             <%= formatted_attribute(resource.decorator, field) %>
         </td>
       <% end %>
+      <td><%= resource.decorator.won_lots f.object, resource%></td>
       <td><%= link_to 'Visualizar', '#', class: 'edit-proposal', 'data-url': edit_proposal_price_collection_path(f.object.id, price_collection_proposal_id: resource.id) %></td>
       <td><%= link_to 'Remover', '#'%></td>
     </tr>
