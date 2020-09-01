@@ -8,7 +8,19 @@
   </div>
 </div>
 
-<div id="proposal-fields"></div>
+<div id="proposal-fields">
+
+<% if f.object.price_collection_proposals.any?{|x| x.errors.messages.present?}  %>
+  <script>
+    $(function(){
+      showProprosal()
+    })
+  </script>
+  <%= f.simple_fields_for :price_collection_proposals,  f.object.price_collection_proposals.select{|x| x.errors.messages.present?} do |r| %>
+    <%= render 'price_collection_proposals/form', :f => r %>
+  <% end %>
+<% end %>
+</div>
 
 
 <table id="proposals-records" class="records">
@@ -27,7 +39,7 @@
     <tr id="<%= dom_id resource %>">
       <% PriceCollectionProposal.decorator.header_attributes.each do |field| %>
         <td>
-            <%= formatted_attribute(resource.decorator, field) %>
+          <%= formatted_attribute(resource.decorator, field) %>
         </td>
       <% end %>
       <td><%= resource.decorator.won_lots f.object, resource%></td>
