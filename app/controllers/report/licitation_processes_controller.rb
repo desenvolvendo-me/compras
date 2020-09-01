@@ -2,8 +2,8 @@ class Report::LicitationProcessesController < Report::BaseController
   report_class LicitationProcessReport, :repository => LicitationProcessSearcher
 
   def show
-    @licitation_processes = get_licitation_processes()
     @report = report_instance
+    @report.licitation_processes = get_licitation_processes()
 
     if @report.valid?
       render layout: 'report'
@@ -17,7 +17,7 @@ class Report::LicitationProcessesController < Report::BaseController
   def get_date
     @process_date=[]
     @process_date[0] = licitation_processes_report_params[:process_date_start]
-    @process_date[1] = licitation_processes_report_params[:process_date_final]
+    @process_date[1] = licitation_processes_report_params[:process_date_end]
 
     @process_date[0] = "01/01/#{Time.now.year-1}" if @process_date[0].nil?
     @process_date[1] = "01/01/#{Time.now.year+1}"  if @process_date[1].nil?
@@ -28,17 +28,18 @@ class Report::LicitationProcessesController < Report::BaseController
     @process_date = get_date()
     @process_date_start =  @process_date[0]
     @process_date_end = @process_date[1]
-
+    
     if licitation_processes_report_params[:creditor_id].nil?
       @licitation_processes = LicitationProcess.
-          where(licitation_processes_report_params.except!(:creditor_id,:process_date_inicial,:process_date_final)).
+          where(licitation_processes_report_params.except!(:creditor_id,:process_date_start,:process_date_end)).
             where(:process_date => @process_date_start..@process_date_end)
+      
     else
       @licitation_processes = []
       get_includes.each do |table_include|
         @licitation_processes += LicitationProcess.
             includes(table_include).order('year desc').
-                where(licitation_processes_report_params.except!(:creditor_id,:process_date_inicial,:process_date_final)).
+                where(licitation_processes_report_params.except!(:creditor_id,:process_date_start,:process_date_end)).
                 where("unico_creditors.id = ?",licitation_processes_report_params[:creditor_id]).
                 where(:process_date => @process_date_start..@process_date_end)
       end
@@ -53,7 +54,7 @@ class Report::LicitationProcessesController < Report::BaseController
   def licitation_processes_report_params
     @params = params.require(:licitation_process_report).permit(
         :modality,:year,:process,:process_date,:process_date_start,
-        :process_date_final,:creditor_id)
+        :process_date_end,:creditor_id)
     normalize_attributes(@params)
   end
 
@@ -65,7 +66,7 @@ class Report::LicitationProcessesController < Report::BaseController
     params.delete(:notice_availability_date) if params[:notice_availability_date].blank?
     params.delete(:creditor_id) if params[:creditor_id].blank?
     params.delete(:process_date_start) if params[:process_date_start].blank?
-    params.delete(:process_date_final) if params[:process_date_final].blank?
+    params.delete(:process_date_end) if params[:process_date_end].blank?
     params
   end
 
