@@ -32,12 +32,12 @@ class PriceCollectionProposalItem < Compras::Model
             price_collection_item_id.eq(params.fetch(:item_id)) }
   end
 
-  def self.by_item_order_by_unit_price(item_id, proposals_ids)
+  def self.by_item_order_by_unit_price(item_id)
     joins { price_collection_proposal }.
     where { price_collection_item_id.eq(item_id) &
             unit_price.not_eq(nil)}.
     where("compras_price_collection_proposals.status IS DISTINCT FROM (?)", PriceCollectionStatus::ANNULLED).
-    order { unit_price }
+    order{ unit_price }
   end
 
   def self.by_lot_item_order_by_unit_price(lot, proposals_ids)

@@ -1,9 +1,11 @@
 <% resource.lots.each_with_index do |lot, index| %>
   <% PriceCollectionClassification.by_lot(lot).by_price_collection_proposal(proposal.id).each_with_index do |classification, i| %>
-   <tr class="<%= "classification-#{classification.classification}-#{index}-#{i}" %>">
-     <td><%= lot %></td>
-     <td align="right"><%= classification.decorator.total_value %></td>
-     <td><%= classification.decorator.classification %></td>
-   </tr>
+    <% if classification.classification == 1 || all_proposal %>
+     <tr class="<%= "classification-#{classification.classification}-#{index}-#{i}" %>">
+       <td><%= lot %></td>
+       <td align="right"><%= classification.decorator.total_value %></td>
+       <td><%= classification.decorator.classification %></td>
+     </tr>
+    <% end %>
   <% end %>
 <% end %>

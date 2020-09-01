@@ -36,8 +36,6 @@ class PriceCollectionProposal < Compras::Model
     PriceCollectionClassification.where do |classification|
       classification.price_collection_proposal_id.in(pluck(:id))
     end
-
-
   end
 
   def build_user
@@ -76,8 +74,7 @@ class PriceCollectionProposal < Compras::Model
   end
 
   def classification_by_item(proposal_item)
-    proposals_ids = price_collection.price_collection_proposals.pluck(:id)
-    proposal_items = PriceCollectionProposalItem.by_item_order_by_unit_price(proposal_item.price_collection_item, proposals_ids)
+    proposal_items = PriceCollectionProposalItem.by_item_order_by_unit_price(proposal_item.price_collection_item)
 
     return if proposal_items.empty?
 
