@@ -140,10 +140,12 @@
   <span>
     DURANTE A SESSÃO PÚBLICA, PODE SE REGISTRAR AS SEGUINTES OCORRÊNCIAS:
     <br>
-    <%= resource.judgment_commission_advice.companies_minutes %><br><br>
-    <%= resource.judgment_commission_advice.companies_documentation_minutes %><br><br>
-    <%= resource.judgment_commission_advice.justification_minutes%><br><br>
-    <%= resource.judgment_commission_advice.judgment_minutes %><br><br>
+    <% if resource.judgment_commission_advice %>
+      <%= resource.judgment_commission_advice.companies_minutes %><br><br>
+      <%= resource.judgment_commission_advice.companies_documentation_minutes %><br><br>
+      <%= resource.judgment_commission_advice.justification_minutes%><br><br>
+      <%= resource.judgment_commission_advice.judgment_minutes %><br><br>
+    <% end %>
 
     CONCLUÍDOS OS PROCEDIMENTOS RELATIVOS A  <%= resource.licitation_process.modality_or_type_of_removal_humanized.upcase %> SOB O Nº <%= resource.licitation_process.modality_number %>,  E CONSIDERANDO QUE: 1) AS PROPOSTAS DAS EMPRESAS VENCEDORAS SATISFAZEM ÀS EXIGÊNCIAS DO EDITAL; 2) AS EMPRESAS VENCEDORAS ENCONTRAM-SE DEVIDAMENTE HABILITADAS QUANTO À DOCUMENTAÇÃO EXIGIDA; 3) OS PREÇOS VITORIOSOS ESTÃO DENTRO DO LIMITE ESTABELECIDO PELA ENTIDADE; POR CONSEGUINTE O(A) PREGOEIRO(A)  ADJUDICA  O  OBJETO  DO  CERTAME  À(S)  EMPRESA(S):
   </span>
