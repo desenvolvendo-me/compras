@@ -9,10 +9,18 @@
   <%= f.input :department, as: :fake, input_html:{style:'display: none', name:'solicitation[department]'}, label: false %>
 </div>
 
-<h4 style="color: #4272a2">
-  * Escolha uma Gestão de Solicitação de Compra anterior ou uma Solicitação de Compra anterior para servir de modelo
-</h4>
 
+<div class="d-flex" style="align-items: baseline;">
+  <%= button_tag 'Adicionar', type: :button,
+                 class: 'button add-nested-record field-without-label add-margin-bottom',
+                 'data-template' => "list_purchase_solicitations_template",
+                 'data-records' => "list_purchase_solicitations_records",
+                 id: "list_purchase_solicitations_button" %>
+
+  <h4 class="hint-text" style="margin-left: 10px">
+    * Os itens da solicitação adicionada serão incluídos no processo ( aba itens)
+  </h4>
+</div>
 
 <script>
 
@@ -29,6 +37,7 @@
     }
 
     $(function() {
+        $("#tab-requestor .add-nested-record").last().remove();
 
         $("#list_purchase_solicitations_records tbody tr td").each(function() {
             if ( $(this).attr('class') == "consumed_value" || $(this).attr('class') == "expected_value"){
