@@ -1,0 +1,21 @@
+<div class="d-flex justify-content-between" style="align-items: baseline;">
+  <h4 class="hint-text">
+    * A finidade desta função é cadastrar os departamentos e os servidores que podem fazer solicitação para o departamento cadastrado.
+  </h4>
+
+  <div class="actions">
+    <ul>
+      <% if create? %>
+        <li>
+          <%= create_link %>
+        </li>
+      <% end %>
+
+      <% if filter? %>
+        <li>
+          <%= filter_link %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
