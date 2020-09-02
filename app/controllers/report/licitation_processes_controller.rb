@@ -16,11 +16,12 @@ class Report::LicitationProcessesController < Report::BaseController
 
   def get_date
     @process_date=[]
-    @process_date[0] = licitation_processes_report_params[:process_date_start]
-    @process_date[1] = licitation_processes_report_params[:process_date_end]
+    
+    @process_date[0] = create_date licitation_processes_report_params[:process_date_start]
+    @process_date[1] = create_date licitation_processes_report_params[:process_date_end]
 
-    @process_date[0] = "01/01/#{Time.now.year-1}" if @process_date[0].nil?
-    @process_date[1] = "01/01/#{Time.now.year+1}"  if @process_date[1].nil?
+    @process_date[0] = create_date "01/01/#{Time.now.year-1}" if @process_date[0].nil?
+    @process_date[1] = create_date "01/01/#{Time.now.year+1}"  if @process_date[1].nil?
     @process_date
   end
 
@@ -28,7 +29,7 @@ class Report::LicitationProcessesController < Report::BaseController
     @process_date = get_date()
     @process_date_start =  @process_date[0]
     @process_date_end = @process_date[1]
-    
+
     if licitation_processes_report_params[:creditor_id].nil?
       @licitation_processes = LicitationProcess.
           where(licitation_processes_report_params.except!(:creditor_id,:process_date_start,:process_date_end)).
@@ -44,6 +45,15 @@ class Report::LicitationProcessesController < Report::BaseController
                 where(:process_date => @process_date_start..@process_date_end)
       end
       @licitation_processes
+    end
+  end
+
+  def create_date(date)
+    if date
+      Date.new(
+        date.split('/')[2].to_i,
+        date.split('/')[1].to_i,
+        date.split('/')[0].to_i)
     end
   end
 
