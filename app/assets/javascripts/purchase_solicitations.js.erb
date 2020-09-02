@@ -230,4 +230,14 @@ $(document).ready(function () {
       $(this).requiredField(true);
     });
   })
+
+  $("#budgetary_secretary_id").change(function(event, data){
+    var url = Routes.expenses + "?";
+    var params ={
+      by_secretary: data.id
+    };
+
+    url += $.param(params);
+    $("#budgetary_expense").data('source', url)
+  })
 });
