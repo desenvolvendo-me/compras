@@ -57,7 +57,7 @@ class PurchaseProcessFractionationCreator
 
   def make_fractionation(material_class)
     repository.
-      where(year: year, purchase_process_id: purchase_process.id, material_class_id: material_class.id).
+      where(year: year, purchase_process_id: purchase_process.id, material_class_id: material_class.try(:id)).
       first_or_initialize
   end
 end
