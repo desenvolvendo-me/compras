@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col">
-    <%= f.input :demand, :as => :auto_complete, :fake => true %>
+    <%= f.input :demand, :as => :auto_complete, :fake => true%>
   </div>
   <div class="col">
     <%= f.input :purchase_solicitation, :as => :auto_complete, :fake => true,
@@ -8,6 +8,10 @@
   </div>
   <%= f.input :department, as: :fake, input_html:{style:'display: none', name:'solicitation[department]'}, label: false %>
 </div>
+
+<h4 style="color: #4272a2">
+  * Escolha uma Gestão de Solicitação de Compra anterior ou uma Solicitação de Compra anterior para servir de modelo
+</h4>
 
 
 <script>

@@ -88,7 +88,7 @@ pt-BR:
         competition: 'Concurso'
         auction:     'Leilão'
         trading:     'Pregão'
-        demand:     'Gestão de Solicitação de Compra'
+        demand:     'Informe o Nome de uma Gestão de Solicitação de Compra'
         phone_email:  'Email/Telefone'
         homologation_date:  'Data de Homologação'
         open_date:  'Data de Abertura'
@@ -106,3 +106,4 @@ pt-BR:
       disabled_negotiation_message: "todos os itens do pregão devem ter um vencedor"
       disabled_trading_message: "deve ter ao menos uma proposta"
       must_have_trading: "deve ter lances"
+
