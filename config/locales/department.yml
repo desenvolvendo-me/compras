@@ -9,5 +9,5 @@ pt-BR:
       department:
         description: "Descrição"
         purchasing_unit: "Unidade de Compra"
-        user: "Usuário"
+        user: "Servidor que pode fazer solicitação pelo departamento"
         secretary: "Secretaria"
