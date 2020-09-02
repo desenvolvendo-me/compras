@@ -39,7 +39,7 @@ class Expense < Compras::Model
   }
 
   scope :by_secretary, lambda{|q|
-    purchasing_unit_ids = Department.joins{ purchasing_unit }.where { secretary_id.eq(q) }.pluck(:purchasing_unit_id)
+    purchasing_unit_ids = Department.joins{ purchasing_unit }.where { secretary_id.eq(q) }.pluck(:purchasing_unit_id).uniq
 
     joins{ purchasing_unit }.where { purchasing_unit_id.in(purchasing_unit_ids) }&.uniq(:id)
   }
