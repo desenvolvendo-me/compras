@@ -93,6 +93,6 @@ class PurchaseProcessAccreditationCreditor < Compras::Model
   private
 
   def creditor_representative_present?
-    creditor_representative.present?
+    creditor.try(:creditor_representative).present?
   end
 end
