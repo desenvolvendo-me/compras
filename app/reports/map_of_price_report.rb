@@ -4,11 +4,11 @@ class MapOfPriceReport < Report
   attr_accessor :price_collection_id
 
   def item_proposals_grouped_by_lot
-    records.group_by { |item| lot_group(item) }
+    records.group_by { |item| lot_group(item) } if records
   end
 
   def price_collection
-    records.first.price_collection
+    records.first.try(:price_collection)
   end
 
   protected
