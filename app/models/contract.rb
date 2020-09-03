@@ -12,7 +12,7 @@ class Contract < Compras::Model
                   :default_fine, :execution_type, :contract_guarantees, :occurrence_contractual_historics_attributes,
                   :consortium_agreement, :department_id, :balance_control_type, :authorized_areas_attributes,
                   :purchasing_unit_id, :financials_attributes, :balance, :contract_termination_attributes,
-                  :consumption_minutes_attributes, :principal_contract
+                  :consumption_minutes_attributes, :principal_contract, :linked_contracts_attributes
 
   attr_modal :year, :contract_number, :sequential_number,
              :signature_date, :creditor
@@ -54,6 +54,7 @@ class Contract < Compras::Model
   has_many :creditors, class_name: "ContractsUnicoCreditor"
   has_many :contract_additives
   has_many :consumption_minutes, :class_name => "ContractConsumptionMinute"
+  has_many :linked_contracts
 
   has_one :contract_termination, :dependent => :restrict
 
@@ -66,6 +67,7 @@ class Contract < Compras::Model
   accepts_nested_attributes_for :contract_validations, allow_destroy: true
   accepts_nested_attributes_for :contract_termination, allow_destroy: true
   accepts_nested_attributes_for :consumption_minutes, allow_destroy: true
+  accepts_nested_attributes_for :linked_contracts, allow_destroy: true
 
   delegate :execution_type_humanize, :contract_guarantees_humanize, :contract_guarantees,
            :to => :licitation_process, :allow_nil => true

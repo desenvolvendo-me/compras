@@ -233,6 +233,10 @@ class LicitationProcess < Compras::Model
     joins {contracts.authorized_areas.department}.where { contracts.authorized_areas.department.id.in department_id.delete("[]").split(",") }.uniq
   }
 
+  scope :not_in_contracts, lambda{
+    joins{ contracts.outer }.where{ contracts.licitation_process_id.eq nil }
+  }
+
   scope :not_removal_by_limit, -> do
     where {type_of_removal.not_eq TypeOfRemoval::REMOVAL_BY_LIMIT}
   end
