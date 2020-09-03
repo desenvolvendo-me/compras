@@ -6,7 +6,8 @@ module PriceCollectionsHelper
   end
 
   def generate_proposal_items(price_collection)
-    proposal = price_collection.price_collection_proposals.build
+    proposal = PriceCollectionProposal.new
+    proposal.price_collection_id = price_collection.id
     price_collection_items = price_collection.items.reject(&:new_record?)
 
     price_collection_items.each do |item|
