@@ -43,13 +43,13 @@
     </thead>
     <tbody>
     <% @total = 0 %>
-    <% @licitation_processes.each do |licitation_process| %>
+    <% @report.licitation_processes.each do |licitation_process| %>
       <% @total += licitation_process.get_items_amount %>
       <tr>
-        <td><%= licitation_process.creditor %></td>
-        <td><%= licitation_process.creditor.nil? ? '':licitation_process.creditor.person.cpf_cnpj %></td>
+        <td><%= licitation_process.creditors.first %></td>
+        <td><%= licitation_process.creditors.first.nil? ? '':licitation_process.creditors.first.person.cpf_cnpj %></td>
         <td><%= "#{licitation_process.process}/#{licitation_process.year}" %></td>
-        <td><%= licitation_process.modality == '' || licitation_process.modality.nil? ? '' : LicitationProcess.human_attribute_name(licitation_process.modality) %></td>
+        <td><%= licitation_process.modality_or_type_of_removal_humanized %></td>
         <td><%= licitation_process.description %></td>
         <td><%= date_mask(licitation_process.process_date) %></td>
         <td><%= date_mask(licitation_process.notice_availability_date) %></td>

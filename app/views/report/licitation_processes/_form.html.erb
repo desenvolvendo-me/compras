@@ -24,18 +24,22 @@
   </div>
 
   <div class="yui3-u-1-3">
-    <%= f.input :process_date_final,as: :date %>
+    <%= f.input :process_date_end,as: :date %>
   </div>
 
 </div>
 
+
+
 <script>
     $(function () {
+    
         $('#new_licitation_process_report')[0].reset();
 
         $("#licitation_process_report_year").attr('maxlength','4');
         $('#licitation_process_report_year').on('input', function (event) {
             this.value = this.value.replace(/[^0-9]/g, '');
         });
+
     });
 </script>
