@@ -26,11 +26,7 @@
       <label for="creditor_representative_id">
         <%= PurchaseProcessAccreditationCreditor.human_attribute_name :creditor_representative_id %>
       </label>
-
-      <%= select_tag :creditor_representative_id, options_for_select([]),
-                     :include_blank => true, :name => 'purchase_process_accreditation[creditor_representative_id]', class: 'select' %>
-
-      <%= hidden_field_tag :creditor_representative, nil, name: 'purchase_process_accreditation[creditor_representative]' %>
+      <%= f.input :creditor_representative, as: :fake, label: false, disabled: true %>
     </div>
 
     <div class="yui3-u-1-3">
