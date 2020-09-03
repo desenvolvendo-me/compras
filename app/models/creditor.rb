@@ -14,8 +14,6 @@ class Creditor < Persona::Creditor
   has_many :price_collections, :through => :price_collection_proposals
   has_many :registration_cadastral_certificates, :dependent => :destroy
   has_many :regularization_or_administrative_sanctions, :inverse_of => :creditor, :dependent => :destroy
-  has_many :representative_people, :through => :representatives, :source => :representative_person
-  has_many :representatives, :class_name => 'CreditorRepresentative', :dependent => :destroy, :order => :id
   has_many :purchase_process_accreditation_creditors, :dependent => :restrict
   has_many :purchase_process_items, :dependent => :restrict
   has_many :purchase_process_creditor_proposals, dependent: :restrict
@@ -24,6 +22,10 @@ class Creditor < Persona::Creditor
   has_many :licitation_process_ratifications, dependent: :restrict
   has_many :licitation_process_ratification_items, through: :licitation_process_ratifications
   has_many :contracts
+
+  #Todo remover isso apos verificar dependencias
+  has_many :representative_people, :through => :representatives, :source => :representative_person
+  has_many :representatives, :class_name => 'CreditorRepresentative', :dependent => :destroy, :order => :id
 
   validates :contract_start_date, :social_identification_number, :presence => true, :if => :autonomous?
   validates :main_cnae, :presence => true, :if => :company?
@@ -188,6 +190,10 @@ class Creditor < Persona::Creditor
   rescue ActiveRecord::DeleteRestrictionError
     errors.add(:base, :cant_be_destroyed)
     false
+  end
+
+  def creditor_representative
+    person.personable.try(:responsible_name)
   end
 
   protected
