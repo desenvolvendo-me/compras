@@ -127,7 +127,7 @@ class Creditor < Persona::Creditor
 
   scope :won_calculation_for_trading, lambda {|licitation_process_id|
     creditor_ids = LicitationProcess.find(licitation_process_id).trading_items.map {|item|
-      TradingItemWinner.new(item).creditor.id
+      TradingItemWinner.new(item).creditor.try(:id)
     }
 
     scoped.where("unico_creditors.id in (?)", creditor_ids)
