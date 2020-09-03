@@ -12,7 +12,7 @@
   </div>
 </div>
 
-<h4  style="color: #4272a2">
+<h4  class="hint-text">
   * caso seja necessário criar uma solicitação de compra que inexiste <%= link_to 'clique_aqui', new_purchase_solicitation_path %>
 </h4>
 
@@ -21,12 +21,8 @@
 <table class="records">
   <thead>
   <tr>
-    <th>
-      <%= Department.human_attribute_name :description %>
-    </th>
-
-    <th>
-    </th>
+    <th><%= Department.human_attribute_name :description %></th>
+    <th></th>
   </tr>
   </thead>
 
