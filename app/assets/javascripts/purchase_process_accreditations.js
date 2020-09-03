@@ -1,25 +1,11 @@
 $(document).ready(function() {
   var $company_size_id = $("[name$='[company_size_id]']"),
-      $representative = $("[name$='[creditor_representative_id]']");
+      $representative = $("[name$='[creditor_representative]']");
 
-    $("[name$='[has_power_of_attorney]']")
-      .prop( "checked", true )
-      .prop("disabled", true);
+  $("[name$='[has_power_of_attorney]']")
+    .prop( "checked", true )
+    .prop("disabled", true);
 
-    function fillCreditorRepresentative(representatives) {
-
-    $representative.empty();
-
-      $representative.append(function() {
-      return $("<option>").text('').val('');
-    });
-
-    _.each(representatives, function(representative) {
-      $representative.append(function() {
-        return $("<option>").text(representative.name).val(representative.id);
-      });
-    });
-  }
 
   function kindRequired(isRequired) {
       var $kind = $("[name$='[kind]']");
@@ -40,7 +26,7 @@ $(document).ready(function() {
       dataType: 'json',
       success: function(creditors) {
         var creditor = creditors[0];
-        fillCreditorRepresentative(creditor.representatives);
+        $representative.val(creditor.creditor_representative);
         $("[name$='[personable_type]']").val(creditor.personable_type);
         $("[name$='[creditor_representative_id]']").val(representativeId);
       }
@@ -58,7 +44,8 @@ $(document).ready(function() {
     $("[name$='[personable_type]']").val(creditor.personable_type);
     $company_size_id.val(creditor.company_size_id)
                          .trigger('change');
-    fillCreditorRepresentative(creditor.representatives);
+    debugger
+    $representative.val(creditor.creditor_representative);
 
     kindRequired(false);
     $company_size_id.requiredField(true);
