@@ -48,6 +48,6 @@ class LicitationProcessPublication < Compras::Model
   end
 
   def direct_purchase_and_edital?
-    licitation_process.direct_purchase? && edital?
+    licitation_process.simplified_processes? && edital?
   end
 end

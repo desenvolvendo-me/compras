@@ -147,7 +147,7 @@ class Contract < Compras::Model
   end
 
   def modality_humanize
-    if licitation_process && licitation_process.direct_purchase?
+    if licitation_process.try(:simplified_processes?)
       licitation_process_type_of_removal_humanize
     else
       licitation_process_modality_humanize

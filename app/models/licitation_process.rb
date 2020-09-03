@@ -126,7 +126,7 @@ class LicitationProcess < Compras::Model
             :modality, :judgment_form_id, :presence => true, :if => :licitation?
   validates :goal, :licensor_rights_and_liabilities, :licensee_rights_and_liabilities,
             :presence => true, :if => :concessions_or_permits?
-  validates :type_of_removal, :justification, :justification_and_legal, :presence => true, :if => :direct_purchase?
+  validates :type_of_removal, :justification, :justification_and_legal, :presence => true, :if => :simplified_processes?
   validates :process, uniqueness: {scope: :year}
   validates :budget_allocation_year, numericality: {greater_than_or_equal_to: :year}, allow_blank: true
   validates :tied_creditor_proposals, no_duplication: {
@@ -278,7 +278,7 @@ class LicitationProcess < Compras::Model
   end
 
   def creditors
-    if direct_purchase?
+    if simplified_processes?
       items_creditors
     elsif trading?
       accreditation_creditors
@@ -437,6 +437,10 @@ class LicitationProcess < Compras::Model
     self.budget_allocations_total_value = purchase_process_budget_allocations.reject(&:marked_for_destruction?).sum(&:value)
   end
 
+  def simplified_processes?
+    direct_purchase? || licitation_simplified?
+  end
+
   protected
 
   def set_homologation_date
@@ -464,7 +468,7 @@ class LicitationProcess < Compras::Model
           message = :licitation_process_material_class_reach_to_the_limit
           modality_type = modality_humanize
 
-          if direct_purchase?
+          if simplified_processes?
             message = :direct_purchase_material_class_reach_to_the_limit
             modality_type = type_of_removal_humanize
           end

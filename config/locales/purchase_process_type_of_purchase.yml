@@ -1,5 +1,6 @@
 pt-BR:
   enumerations:
     purchase_process_type_of_purchase:
-      licitation: "Processo licitatório"
-      direct_purchase: "Compra direta / Digitação Simplificada"
+      licitation: "Processo Licitatório e todas as suas fases"
+      direct_purchase: "Compra Direta"
+      licitation_simplified: "Processo Licitatório com digitação simplificada"

@@ -13,7 +13,7 @@ class JudgmentCommissionAdvice < Compras::Model
 
   accepts_nested_attributes_for :judgment_commission_advice_members, :allow_destroy => true
 
-  delegate :modality_humanize, :licitation?, :direct_purchase?, :to => :licitation_process, :allow_nil => true, :prefix => true
+  delegate :modality_humanize, :licitation?, :simplified_processes?, :to => :licitation_process, :allow_nil => true, :prefix => true
   delegate :president_name, :to => :licitation_commission, :allow_nil => true, :prefix => true
   delegate :licitation_commission_members, :to => :licitation_commission, :allow_nil => true
 

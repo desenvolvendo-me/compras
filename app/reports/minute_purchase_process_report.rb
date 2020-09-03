@@ -47,7 +47,7 @@ class MinutePurchaseProcessReport < Report
   end
 
   def proposals
-    if licitation_process.direct_purchase?
+    if licitation_process.simplified_processes?
       licitation_process.items
     else
       licitation_process.creditor_proposals
@@ -76,7 +76,7 @@ class MinutePurchaseProcessReport < Report
   end
 
   def creditor_winner
-    if licitation_process.direct_purchase?
+    if licitation_process.simplified_processes?
       licitation_process.items
     else
       licitation_process.creditor_proposals.winning_proposals

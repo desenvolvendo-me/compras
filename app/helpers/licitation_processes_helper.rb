@@ -56,7 +56,7 @@ module LicitationProcessesHelper
   end
 
   def publication_of_collection(licitation_process)
-    if licitation_process.direct_purchase?
+    if licitation_process.simplified_processes?
       PublicationOf.allowed_for_direct_purchase
     else
       PublicationOf.to_a.sort { |a,b| a[0] <=> b[0] }
