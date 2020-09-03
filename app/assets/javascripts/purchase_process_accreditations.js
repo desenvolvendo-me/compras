@@ -1,6 +1,6 @@
 $(document).ready(function() {
-  var $company_size_id = $("[name$='[company_size_id]']"),
-      $representative = $("[name$='[creditor_representative]']");
+  var $company_size_id = $("#accreditation_creditors  [name$='[company_size_id]']"),
+      $representative = $("#accreditation_creditors [name$='[creditor_representative]']");
 
   $("[name$='[has_power_of_attorney]']")
     .prop( "checked", true )
@@ -8,7 +8,7 @@ $(document).ready(function() {
 
 
   function kindRequired(isRequired) {
-      var $kind = $("[name$='[kind]']");
+    var $kind = $("#accreditation_creditors [name$='[kind]']");
     if ( isRequired ){
       $kind.requiredField(true);
       $kind.addClass('required');
@@ -18,7 +18,7 @@ $(document).ready(function() {
     }
   }
 
-  function getCreditorData(creditorId, representativeId) {
+  function getCreditorData(creditorId) {
     var route = Routes.creditors;
 
     $.ajax({
@@ -28,7 +28,6 @@ $(document).ready(function() {
         var creditor = creditors[0];
         $representative.val(creditor.creditor_representative);
         $("[name$='[personable_type]']").val(creditor.personable_type);
-        $("[name$='[creditor_representative_id]']").val(representativeId);
       }
     });
   }
@@ -44,12 +43,15 @@ $(document).ready(function() {
     $("[name$='[personable_type]']").val(creditor.personable_type);
     $company_size_id.val(creditor.company_size_id)
                          .trigger('change');
-    debugger
-    $representative.val(creditor.creditor_representative);
 
-    kindRequired(false);
+    if(creditor.creditor_representative){
+      $representative.val(creditor.creditor_representative).trigger('change');
+    }else{
+      $representative.val('Não possui representante');
+    }
+
+
     $company_size_id.requiredField(true);
-    $representative.addClass('required');
   });
 
   $representative.on("change", function() {
@@ -66,20 +68,10 @@ $(document).ready(function() {
     $('#company_size').val(company_size);
   });
 
-  $representative.on('change', function() {
-    var representative = $(this).find('option:selected').text();
-
-    if ( _.isEmpty(representative) ) {
-      representative = 'Não possui representante';
-    }
-
-    $('#creditor_representative').val(representative);
-  });
 
   $('.edit-nested-record').on('click', function() {
-    var creditorId = $(this).closest('tr').find('.creditor_id').val(),
-    representativeId = $(this).closest('tr').find('.creditor_representative_id').val();
+    var creditorId = $(this).closest('tr').find('.creditor_id').val();
 
-    getCreditorData(creditorId, representativeId);
+    getCreditorData(creditorId);
   });
 });
