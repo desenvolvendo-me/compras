@@ -17,7 +17,7 @@ class PriceCollectionProposal < Compras::Model
   accepts_nested_attributes_for :items, :allow_destroy => true
 
   validates :creditor, :presence => true
-  validates :email, mail: true, presence: true, uniqueness: true
+  validates :email, mail: true, allow_blank: true, uniqueness: true
   validate :must_have_a_valid_creditor_user, if: :user
 
 
