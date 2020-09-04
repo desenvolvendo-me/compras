@@ -30,12 +30,12 @@
 
       <tr class="ratification_item inherited nested">
         <td class="description"><%= material.description %></td>
-        <td><%= number_to_currency price %></td>
-        <td><%= qtd  %></td>
-        <td><%= number_with_precision result = (price.to_f*qtd.to_f) %></td>
-        <td><%= qtd_attended %></td>
-        <td><%= number_with_precision total_attended = qtd_attended * price.to_f %></td>
-        <td><%= balance %></td>
+        <td class="tar" ><%= number_to_currency price %></td>
+        <td class="tar" ><%= qtd  %></td>
+        <td class="tar" ><%= number_with_precision result = (price.to_f*qtd.to_f) %></td>
+        <td class="tar" ><%= qtd_attended %></td>
+        <td class="tar" ><%= number_with_precision total_attended = qtd_attended * price.to_f %></td>
+        <td class="tar" ><%= balance %></td>
         <% total[:total_qtd_soli] += qtd %>
         <% total[:total] += result %>
         <% total[:total_qtd_attended] += qtd_attended  %>
@@ -61,14 +61,10 @@
   </div>
 <% end %>
 <style>
-  table.records th:not(.description){
-    text-align: center !important;
-  }
-  table.records td:not(.description){
+
+  .tar{
     text-align: right !important;
   }
-  .text-end{
-    text-align: end;
-  }
+
 </style>
 
