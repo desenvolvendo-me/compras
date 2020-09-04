@@ -74,9 +74,9 @@
             <div class="yui3-u-1 actions">
               <div class="yui3-g">
                 <div class="yui3-u-1">
-                  <%# if resource.user == current_user %>
+                  <% if resource.user == current_user %>
                     <%= link_to "Editar", edit_resource_path(resource), class: 'btn btn-primary' %>
-                  <%# end %>
+                  <% end %>
                   <%= link_to "Gestão do Pregão", dashboard_auction_auction_path(resource), class: 'btn btn-primary' %>
                   <%= link_to "Visualizar", resource_path(resource), class: 'btn btn-primary' %>
                   <%= link_to "Proposta", proposal_path(resource) , class: 'btn btn-primary' %>
