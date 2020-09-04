@@ -87,13 +87,12 @@ class SupplyRequest < Compras::Model
   scope :by_ids, lambda{|ids| where{ id.in(ids.split(',')) } }
 
   scope :filter_by_user, lambda{|current_user|
-    unless current_user.administrator
-      id  = current_user.id
-      ids = current_user.user_purchasing_units.pluck(:purchasing_unit_id)
-      joins(:department).where("user_id = ? OR compras_departments.purchasing_unit_id in (?)", id, ids)
+    unless current_user.administrator      
+      purchasing_unit_ids = current_user.user_purchasing_units.pluck(:purchasing_unit_id)
+      user_ids = UserPurchasingUnit.where(purchasing_unit_id:purchasing_unit_ids).pluck(:user_id)
+      where(user_id: user_ids)
     end
   }
-
 
   def to_s
     "#{contract} - #{licitation_process}"
