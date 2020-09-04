@@ -1,0 +1,13 @@
+<h2 id="title">
+  Pregão:  <%= "#{resource.to_s}" %>
+</h2>
+<div id="subtitle" style="margin-top: -2rem !important;">
+  Numero do Pregão: <%= resource.process_number %> <br>
+  Pregoeiro Responsável: <%= resource.employee %> <br>
+  Equipe do Pregão: <%= resource.auction_support_teams.map {|x| x.employee}.join(', ') %> <br>
+  Entrega da Proposta: <%= resource.proposal_delivery.strftime('%d/%m/%Y') if resource.proposal_delivery%> <br>
+  Entrega da Licitação: <%= resource.bid_opening.strftime('%d/%m/%Y') if resource.bid_opening %> <br>
+  Horário: <%= resource.notice_availability.strftime('%H:%M') if resource.notice_availability %>
+</div>
+
+<%= render 'layouts/dashboard' %>
