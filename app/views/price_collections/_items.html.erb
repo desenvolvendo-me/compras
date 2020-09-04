@@ -1,4 +1,76 @@
 <div id="item-tab">
-  <%= f.input :items, as: :nested_grid,
-    columns: [:material, :reference_unit, :brand, :quantity, :lot] %>
+
+  <div class="nested-grid">
+    <div class="nested-fields">
+      <%= hidden_field_tag :id, nil, name: "#{f.sanitized_object_name}_nested_grid_[id]" %>
+
+      <%= render "price_collection_items/nested_fields", f: f %>
+
+      <div class="d-flex" style="align-items: baseline">
+        <%= button_tag 'Adicionar', type: :button,
+                       class: 'button add-nested-record field-without-label add-margin-bottom',
+                       'data-template' => "price_collection_items_template",
+                       'data-records' => "price_collection_items_records",
+                       id: "price_collection_items_button" %>
+
+        <div class="d-flex" style="align-items: baseline">
+          <%= button_tag 'Adicionar', type: :button,
+                         class: 'button add-nested-record field-without-label add-margin-bottom',
+                         'data-template' => "price_collection_items_template",
+                         'data-records' => "price_collection_items_records",
+                         id: "price_collection_items_button" %>
+          <h4 class="hint-text" style="margin-left: 10px">
+            * itens das Solicitações de Compras listadas na aba anterior
+          </h4>
+        </div>
+      </div>
+
+    </div>
+
+    <table id="<%= "price_collection_items_records" %>" class="records">
+      <thead>
+      <tr>
+        <% [:material, :reference_unit, :brand, :quantity, :lot].each do |column_name| %>
+          <th><%= PriceCollectionItem.human_attribute_name column_name %></th>
+        <% end %>
+        <th></th>
+        <th></th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <%= f.association :items, collection: localized(f.object.items) do |a| %>
+        <% a.object.class.attribute_names.each do |column_name| %>
+          <%= a.full_error column_name %>
+        <% end %>
+
+        <%= render "price_collection_items/nested_grid_row",
+                   material: a.object.material,
+                   material_id: a.object.material_id,
+                   reference_unit: a.object.reference_unit,
+                   brand: a.object.brand,
+                   quantity: a.object.quantity,
+                   lot: a.object.lot,
+                   f: a %>
+      <% end %>
+      </tbody>
+    </table>
+
+    <%= mustache "price_collection_items_template" do %>
+      <%= f.association "items_attributes".to_sym, collection: f.object.items.build.localized, :index => '{{uuid}}' do |a| %>
+        <%= render "price_collection_items/nested_grid_row",
+                   material: "{{material}}",
+                   material_id: "{{material_id}}",
+                   reference_unit: "{{reference_unit}}",
+                   brand: "{{brand}}",
+                   quantity: "{{quantity}}",
+                   lot: "{{lot}}",
+                   f: a %>
+      <% end %>
+    <% end %>
+  </div>
+
+
 </div>
+
+

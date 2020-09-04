@@ -1,166 +1,174 @@
 $(document).ready(function () {
 
-    function hasPurchaseSolicitationAlreadyAdded(purchase_solicitation) {
-        var added = false;
-        $("table#list_purchase_solicitations_records input.purchase_solicitation_id").each(function () {
-            if ($(this).val() == purchase_solicitation.id) {
-                added = true;
-                return added;
-            }
-        });
+  /** Variables **/
+  var dataDemands = {};
+  var DataPurchaseSolicitation = {};
+  /** Variables **/
+
+  /**  *************** SOLICITATION **************** **/
+
+  function hasPurchaseSolicitationAlreadyAdded(purchase_solicitation) {
+    var added = false;
+    debugger
+    $("table#price_collection_purchase_solicitations_records :input.purchase-solicitation-id").each(function () {
+      if ($(this).val() == purchase_solicitation.id) {
+        added = true;
         return added;
-    }
+      }
+    });
+    return added;
+  }
 
-    function mergePurchaseSolicitation(purchase_solicitation) {
+  function mergePurchaseSolicitation(purchase_solicitation) {
 
-        var record = $('tr#purchase_solicitation-id-' + purchase_solicitation.id);
+    var record = $('tr#purchase_solicitation-id-' + purchase_solicitation.id);
 
-        record.find("td.code_and_year").text("0,00");
-        record.find('input.code_and_year').val("0,00");
+    record.find("td.department").text(purchase_solicitation.department);
+    record.find("td.responsible").text(purchase_solicitation.user);
+    record.find("td.code_and_year").text(purchase_solicitation.code_and_year);
+  }
 
-        record.find("td.budget_structure").text("0,00");
-        record.find('input.budget_structure').val("0,00");
+  function renderPurchaseSolicitation(purchase_solicitation) {
+    var purchaseSolicitationBinds = {
+      uuid: _.uniqueId('fresh-'),
+      id: purchase_solicitation.id,
+      code_and_year: purchase_solicitation.code_and_year,
+      department: purchase_solicitation.department,
+      user: purchase_solicitation.user
+    };
 
-    }
+    var data = $('#price_collection_purchase_solicitations_template').mustache(purchaseSolicitationBinds);
 
-    function renderPurchaseSolicitation(purchase_solicitation) {
-        var purchaseSolicitationBinds = {
-            uuid: _.uniqueId('fresh-'),
-            id: '',
-            code_and_year: purchase_solicitation.code + "/" + purchase_solicitation.accounting_year,
-            department: purchase_solicitation.department.description,
-            user: purchase_solicitation.user.name
-        };
+    $('#price_collection_purchase_solicitations_records tbody').append(data).trigger("nestedGrid:afterAdd");
 
-        var data = $('#price_collection_purchase_solicitations_template').mustache(purchaseSolicitationBinds);
+  }
 
-        $('#table_price_collection_purchase_solicitations_records tbody').append(data).trigger("nestedGrid:afterAdd");
+  function hasItemAlreadyAdded(item) {
+    var added = false;
 
-    }
-
-    function hasItemAlreadyAdded(item) {
-        var added = false;
-
-        $("#price_collection_items_records input.material_id").each(function () {
-            if ($(this).val() == item.material_id) {
-                added = true;
-                return added;
-            }
-        });
-
+    $("#price_collection_items_records input.material_id").each(function () {
+      if ($(this).val() == item.material_id) {
+        added = true;
         return added;
+      }
+    });
+
+    return added;
+  }
+
+  function renderItem(item) {
+    var itemBinds = {
+      uuid: _.uniqueId('fresh-'),
+      id: '',
+      material_id: item.material_id,
+      material: item.material_description,
+      reference_unit: item.reference_unit,
+      brand: item.brand,
+      quantity: numberWithDelimiter(item.quantity),
+      lot: item.lot
+    };
+
+    var data = $('#price_collection_items_template').mustache(itemBinds);
+
+    $('#price_collection_items_records tbody').append(data).trigger("nestedGrid:afterAdd");
+  }
+
+  function mergeItem(item) {
+    var material = $('#price_collection_items_records input.material_id[value="' + item.material_id + '"]'),
+      record = material.closest('.nested-record'),
+      itemQuantity = parseInt(record.find('input.quantity').val()),
+      totalQuantity = item.quantity + itemQuantity;
+
+
+    record.find('input.quantity').val(totalQuantity);
+    record.find('input.brand').val(item.brand);
+
+  }
+
+
+  $("#price_collection_demand_id").on("change", function (event, Demand) {
+    dataDemands = Demand;
+  })
+
+  $("#price_collection_purchase_solicitations_id").on("change", function (event, purchaseSolicitation) {
+    DataPurchaseSolicitation = purchaseSolicitation;
+  });
+
+  $("#list_purchase_solicitations_button").click(function(event){
+    event.preventDefault()
+    event.stopPropagation()
+
+
+    if(dataDemands.purchaseSolicitations){
+      $.each(dataDemands.purchaseSolicitations, function (i, purchase_solicitation) {
+        if (hasPurchaseSolicitationAlreadyAdded(purchase_solicitation)) {
+          mergePurchaseSolicitation(purchase_solicitation);
+        } else {
+          renderPurchaseSolicitation(purchase_solicitation);
+        }
+
+        fillItems(purchase_solicitation.items)
+      });
+
+      dataDemands = {};
     }
 
-    function renderItem(item) {
-        var itemBinds = {
-            uuid: _.uniqueId('fresh-'),
-            id: '',
-            material_id: item.material_id,
-            material: item.material_description,
-            reference_unit: item.reference_unit,
-            brand: item.brand,
-            quantity: numberWithDelimiter(item.quantity),
-            lot: item.lot
-        };
+    if(DataPurchaseSolicitation.items){
+      if (hasPurchaseSolicitationAlreadyAdded(DataPurchaseSolicitation)) {
+        mergePurchaseSolicitation(DataPurchaseSolicitation);
+      } else {
+        renderPurchaseSolicitation(DataPurchaseSolicitation);
+      }
 
-        var data = $('#price_collection_items_template').mustache(itemBinds);
+      fillItems(DataPurchaseSolicitation.items)
 
-        $('#price_collection_items_records tbody').append(data).trigger("nestedGrid:afterAdd");
+      DataPurchaseSolicitation= {};
     }
 
-    function mergeItem(item) {
-        var material = $('#price_collection_items_records input.material_id[value="' + item.material_id + '"]'),
-            record = material.closest('.nested-record'),
-            itemQuantity = new BigNumber(parsePtBrFloat(record.find('input.quantity').val())),
-            totalQuantity = numberWithDelimiter(parseFloat(itemQuantity.add(item.quantity)));
+    $(this).closest(".nested-fields").find(':input').val('');
+  });
 
-        record.find('input.quantity').val(totalQuantity);
-        record.find('td.quantity').text(totalQuantity);
+
+  function fillItems(items){
+
+    $.each(items, function (i, item) {
+      if (hasItemAlreadyAdded(item)) {
+        mergeItem(item);
+      } else {
+        renderItem(item);
+      }
+    });
+  }
+
+
+  /** *********************** ITEMS *********************** **/
+  $('form.price_collection').on('change', '.material', function (event, material) {
+    if (material) {
+      $(this).closest('.item').find('.reference-unit').val(material.reference_unit);
     }
+  });
 
-    $('form.price_collection').on('change', '.material', function (event, material) {
-        if (material) {
-            $(this).closest('.item').find('.reference-unit').val(material.reference_unit);
-        }
-    });
+  $('#price_collection_material_id').on('change', function (event, material) {
+    $('#price_collection_reference_unit').val('');
 
-    $('#price_collection_material_id').on('change', function (event, material) {
-        $('#price_collection_reference_unit').val('');
+    if (material) {
+      $('#price_collection_reference_unit').val(material.reference_unit);
+    }
+  });
 
-        if (material) {
-            $('#price_collection_reference_unit').val(material.reference_unit);
-        }
-    });
 
-    $("#price_collection_proposals").on('change',"[name$='[creditor_id]']", function (event, creditor) {
-        if (creditor) {
-          var $email = $("#price_collection_proposals [name$='[email]']");
+  /** *********************** PROPOSALS *********************** **/
+  $("#price_collection_proposals").on('change',"[name$='[creditor_id]']", function (event, creditor) {
+    if (creditor) {
+      var $email = $("#price_collection_proposals [name$='[email]']");
 
-          $email.val(creditor.email || creditor.person_email);
+      $email.val(creditor.email || creditor.person_email);
 
-          if (creditor.email) {
-            $email.attr('readonly', true);
-          }
-        }
-    });
-
-    $("#price_collection_purchase_solicitations_id").on("change", function (event, purchaseSolicitation) {
-
-        if (!purchaseSolicitation) {
-            purchaseSolicitation = {};
-        }
-
-        $.each(purchaseSolicitation.items, function (i, item) {
-            if (hasItemAlreadyAdded(item)) {
-                mergeItem(item);
-            } else {
-                renderItem(item);
-            }
-        });
-    });
-
-    $("#price_collection_demand_id").on("change", function (event, demand) {
-
-        if (!demand) {
-            demand = {};
-        }
-
-        $.each(demand.purchaseSolicitations, function (i, purchaseSolicitation) {
-
-            if (!purchaseSolicitation) {
-                purchaseSolicitation = {};
-            }
-
-            $.each(purchaseSolicitation.items, function (i, item) {
-                if (hasItemAlreadyAdded(item)) {
-                    mergeItem(item);
-                } else {
-                    renderItem(item);
-                }
-            });
-        });
-
-    });
-
-    $("#price_collection_demand_id").on("change", function (event, Demand) {
-
-        $.ajax({
-            url: Routes.demands_api_show,
-            data: {demand_id: Demand.id},
-            dataType: 'json',
-            type: 'POST',
-            success: function (data) {
-                $.each(data.purchase_solicitations, function (i, purchase_solicitation) {
-                    if (hasPurchaseSolicitationAlreadyAdded(purchase_solicitation)) {
-                        mergePurchaseSolicitation(purchase_solicitation);
-                    } else {
-                        renderPurchaseSolicitation(purchase_solicitation);
-                    }
-                });
-            }
-        });
-
-    });
+      if (creditor.email) {
+        $email.attr('readonly', true);
+      }
+    }
+  });
 
   $("#cancel-proposal").click(function(){
     $("#proposals-records, #add-proposal").show();

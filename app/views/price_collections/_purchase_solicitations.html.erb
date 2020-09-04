@@ -1,17 +1,32 @@
-<div class="yui3-g">
-  <div class="yui3-u-1-2">
-    <%= f.input :demand, :as => :auto_complete, :fake => true %>
+<div class="nested-fields">
+  <div class="yui3-g">
+    <div class="yui3-u-1-2">
+      <%= f.input :demand, :as => :auto_complete, :fake => true %>
+    </div>
+    <div class="yui3-u-1-2">
+      <%= f.input :purchase_solicitations, as: :auto_complete, clear_input: true,
+                  fake: true, 'data-hidden-field-class' => 'autocomplete-form-input',
+                  source_path: purchase_solicitations_path(without_price_collection: true, without_purchase_process: true) %>
+    </div>
   </div>
-  <div class="yui3-u-1-2">
-    <%= f.input :purchase_solicitations, as: :auto_complete, clear_input: true,
-                fake: true, 'data-hidden-field-class' => 'autocomplete-form-input',
-                source_path: purchase_solicitations_path(without_price_collection: true, without_purchase_process: true) %>
+
+  <input type="hidden" name="<%= f.sanitized_object_name %>[purchase_solicitation_ids][]"/>
+
+  <div class="d-flex" style="align-items: baseline;">
+    <%= button_tag 'Adicionar', type: :button,
+                   class: 'button add-nested-record field-without-label add-margin-bottom',
+                   'data-template' => "price_collection_purchase_solicitations_template",
+                   'data-records' => "table_price_collection_purchase_solicitations_records",
+                   id: "list_purchase_solicitations_button" %>
+
+    <h4 class="hint-text" style="margin-left: 10px">
+      * Os itens da solicitação adicionada serão incluídos no processo ( aba itens)
+    </h4>
   </div>
 </div>
 
-<input type="hidden" name="<%= f.sanitized_object_name %>[purchase_solicitation_ids][]"/>
 
-<table class="records" id="table_price_collection_purchase_solicitations_records">
+<table class="records" id="price_collection_purchase_solicitations_records">
   <thead>
   <tr>
     <th><%= PurchaseSolicitation.human_attribute_name :code %></th>
@@ -26,7 +41,7 @@
     <%= render 'purchase_solicitations/price_collections_list_form',
                id: purchase_solicitation.id,
                code_and_year: purchase_solicitation.decorator.code_and_year,
-               budget_structure: purchase_solicitation.department,
+               department: purchase_solicitation.department,
                responsible: purchase_solicitation.user,
                description: purchase_solicitation.to_s,
                f: f %>
@@ -39,7 +54,7 @@
     <%= render 'purchase_solicitations/price_collections_list_form',
                id: '{{id}}',
                code_and_year: '{{code_and_year}}',
-               budget_structure: '{{department}}',
+               department: '{{department}}',
                responsible: '{{user}}',
                f: f %>
   <% end %>

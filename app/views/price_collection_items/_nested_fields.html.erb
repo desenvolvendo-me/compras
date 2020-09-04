@@ -22,21 +22,3 @@
   </div>
 </div>
 
-
-<div class="d-flex" style="align-items: baseline">
-  <%= button_tag 'Adicionar', type: :button,
-                 class: 'button add-nested-record field-without-label add-margin-bottom',
-                 'data-template' => "price_collection_items_template",
-                 'data-records' => "price_collection_items_records",
-                 id: "price_collection_items_button" %>
-  <h4 style='color: #4272a2; margin-left: 10px'>
-   Itens das Solicitação de Compra n.  ( buscar a informação da tela Solicitação de compra)
-  </h4>
-</div>
-
-
-<script>
-  $(function(){
-    $("#item-tab .add-nested-record").last().remove();
-  })
-</script>
