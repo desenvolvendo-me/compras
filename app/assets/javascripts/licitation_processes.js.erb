@@ -16,7 +16,6 @@ $(document).ready(function () {
       $('#licitation_process_justification_and_legal').requiredField(false);
       $('div.type-of-removal').addClass('hidden');
       $('li.income').removeClass('hidden');
-      $('label[for="licitation_process_modality_number"]').html('Nº da modalidade');
       $('a[href="#tab-items"]').html("Itens");
       $('#legal_reasons_tab').hide();
       $('.envelope_delivery_date').removeClass('hidden');
@@ -30,13 +29,17 @@ $(document).ready(function () {
       $('#licitation_process_expiration').requiredField(true);
       $('#licitation_process_expiration_unit').requiredField(true);
     } else {
-      $('div.modality').addClass('hidden');
+      if($("#licitation_process_type_of_purchase_licitation_simplified").is(':checked')){
+        $('div.modality').removeClass('hidden');
+        $('div.type-of-removal').addClass('hidden');
+      }else{
+        $('div.modality').addClass('hidden');
+        $('div.type-of-removal').removeClass('hidden');
+      }
       $('div.licitation_process_judgment_form_id').addClass('hidden');
       $('#licitation_process_judgment_form_id').requiredField(false);
       $('#licitation_process_justification_and_legal').requiredField(true);
-      $('div.type-of-removal').removeClass('hidden');
       $('li.income').addClass('hidden');
-      $('label[for="licitation_process_modality_number"]').html('Nº Modalidade');
       $('label[for="licitation_process_unit_price"]').html('Valor unitário');
       $('a[href="#tab-items"]').html("Itens / Justificativa");
       $('#licitation_process_modality').val('');
