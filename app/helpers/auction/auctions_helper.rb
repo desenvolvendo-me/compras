@@ -8,7 +8,7 @@ module Auction::AuctionsHelper
     "#{auction.telephone} / #{auction.cell_phone}"
   end
 
-  def proposal_link resource
+  def proposal_path resource
     proposal = resource.creditor_proposals.where(user_id: current_user&.id).last
     if proposal
       route = edit_auction_auction_creditor_proposal_path(proposal.id)
@@ -18,7 +18,7 @@ module Auction::AuctionsHelper
       route = auction_providers_register_external_path
     end
 
-    link_to "Proposta", route , class: 'btn btn-primary'
+    route
   end
 
 
