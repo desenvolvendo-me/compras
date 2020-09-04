@@ -3,7 +3,13 @@
   <p>Coleta de Preço <%= resource.price_collection %></p>
 </h1>
 
-<% resource.item_proposals_grouped_by_lot.each do |lot, proposal_items| %>
+<% if resource.item_proposals_grouped_by_lot.blank? %>
+  <div class="text-center">
+    <h2>Não há dados para serem exibidos. Volte para o cadastro de Coleta de Preço e cadastre as propostas dos fornecedores.</h2>
+  </div>
+<% end %>
+
+<% resource.item_proposals_grouped_by_lot.try(:each) do |lot, proposal_items| %>
 
   <h2><%= resource.decorator.lot_header(lot, proposal_items) %></h2>
 
