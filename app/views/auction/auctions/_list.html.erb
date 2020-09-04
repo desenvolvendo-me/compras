@@ -54,38 +54,39 @@
             </div>
 
           </div>
-          <div class="border-round">
-            <div class="yui3-g section-gray">
-              <div class="yui3-u-1">
 
-                <p><b style="font-size:125%;">Endereço:</b> <%= address(resource) %> </p>
+          <div class="yui3-g section-gray">
+            <div class="yui3-u-1">
 
-              </div>
-              <div class="yui3-g section-gray">
-                <div class="yui3-u-1">
-                  <div>
+              <p><b style="font-size:125%;">Endereço:</b> <%= address(resource) %> </p>
 
-                  </div>
-                </div>
-              </div>
             </div>
             <div class="yui3-g section-gray">
+              <div class="yui3-u-1">
+                <div>
 
-              <div class="yui3-u-1 actions">
-                <div class="yui3-g">
-                  <div class="yui3-u-1">
-                    <% if resource.user == current_user %>
-                      <%= link_to "Editar", edit_resource_path(resource), class: 'btn btn-primary' %>
-                    <% end %>
-                    <%= link_to "Visualizar", resource_path(resource), class: 'btn btn-primary' %>
-                    <%= proposal_link(resource)%>
-                    <%= link_to 'Disputa', new_auction_bids_path(auction_id: resource), class: 'btn btn-primary' %>
-                  </div>
                 </div>
-
               </div>
             </div>
           </div>
+          <div class="yui3-g section-gray">
+
+            <div class="yui3-u-1 actions">
+              <div class="yui3-g">
+                <div class="yui3-u-1">
+                  <%# if resource.user == current_user %>
+                    <%= link_to "Editar", edit_resource_path(resource), class: 'btn btn-primary' %>
+                  <%# end %>
+                  <%= link_to "Gestão do Pregão", dashboard_auction_auction_path(resource), class: 'btn btn-primary' %>
+                  <%= link_to "Visualizar", resource_path(resource), class: 'btn btn-primary' %>
+                  <%= proposal_link(resource)%>
+                  <%= link_to 'Disputa', new_auction_bids_path(auction_id: resource), class: 'btn btn-primary' %>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
         </div>
       </td>
   <% end %>
@@ -124,7 +125,6 @@
 
   .section-gray a, button{
     font-size: 18px !important;
-    border-radius: 11px !important;
   }
   .white{
     color:white;
@@ -153,8 +153,5 @@
   .ellipsis:after{
     content:'...';
   }
-  .border-round{
-    margin: 10px;
-    border: 1px solid #ccc;
-  }
+
 </style>
