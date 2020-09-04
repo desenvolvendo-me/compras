@@ -2,13 +2,11 @@ class TypeOfRemoval < EnumerateIt::Base
   associate_values :removal_by_limit,
                    :removal_justified,
                    :removal_by_ineligibility,
+                   :other_removal,
                    :unenforceability_accreditation,
                    :dispensation_justified_accreditation,
-                   :call,
-                   :concurrence,
-                   :trading,
-                   :outlet_price,
-                   :invitation
+                   :call
+
 
   def self.allow_duplicated_items
     [
