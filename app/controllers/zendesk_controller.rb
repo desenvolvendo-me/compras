@@ -22,7 +22,7 @@ class ZendeskController < ApplicationController
       name: current_user.name,
       email: current_user.email,
       external_id: external_id,
-      organization: 'icompras',
+      organization: 'ialmoxarifado',
       ticket_restriction: 'organization',
       user_fields: { customer: current_customer.domain }
     }, ZENDESK_SHARED_SECRET)
