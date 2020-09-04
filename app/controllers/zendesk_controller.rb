@@ -1,6 +1,7 @@
 class ZendeskController < ApplicationController
   ZENDESK_SHARED_SECRET = ENV["ZENDESK_SHARED_SECRET"]
   ZENDESK_SUBDOMAIN = ENV["ZENDESK_SUBDOMAIN"]
+  ZENDESK_EMAIL = ENV["ZENDESK_EMAIL"]
 
   def index
     sign_into_zendesk
@@ -20,9 +21,9 @@ class ZendeskController < ApplicationController
       iat: iat,
       jti: jti,
       name: current_user.name,
-      email: current_user.email,
+      email: ZENDESK_EMAIL,
       external_id: external_id,
-      organization: 'ialmoxarifado',
+      organization: 'icompras',
       ticket_restriction: 'organization',
       user_fields: { customer: current_customer.domain }
     }, ZENDESK_SHARED_SECRET)
