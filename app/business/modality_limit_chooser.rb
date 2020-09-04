@@ -23,7 +23,7 @@ class ModalityLimitChooser
   end
 
   def direct_purchase_limit
-    return unless purchase_process.direct_purchase?
+    return unless purchase_process.simplified_processes?
 
     if purchase_process.type_of_removal_removal_by_limit?
       if purchase_process.purchase_and_services?

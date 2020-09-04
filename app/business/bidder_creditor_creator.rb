@@ -28,7 +28,7 @@ class BidderCreditorCreator
   end
 
   def create_bidders_for_direct_purchase
-    return unless purchase_process.direct_purchase?
+    return unless purchase_process.simplified_processes?
 
     creditor_ids.each  do |creditor_id|
       bidders.create(licitation_process_id: purchase_process.id, creditor_id: creditor_id)

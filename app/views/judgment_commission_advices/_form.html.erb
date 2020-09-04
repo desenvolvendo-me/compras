@@ -71,7 +71,7 @@
       $(this).closest('.nested').find('.cpf').val('');
     }
   });
-  <% if f.object.licitation_process.direct_purchase? %>
+  <% if f.object.licitation_process.simplified_processes? %>
     $('.advice').addClass('hidden');
   <% else %>
     $('.advice').removeClass('hidden');
