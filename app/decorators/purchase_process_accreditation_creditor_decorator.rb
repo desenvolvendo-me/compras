@@ -4,7 +4,7 @@ class PurchaseProcessAccreditationCreditorDecorator
   include ActionView::Helpers::NumberHelper
 
   def creditor_representative
-    super || 'Não possui representante'
+    creditor.try(:creditor_representative) || 'Não possui representante'
   end
 
   def unit_price_of_proposal(purchase_process_id, item_or_lot)

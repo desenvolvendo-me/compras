@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Person < Persona::Person
+  attr_accessible :creditor_attributes
+
   attr_modal :name, :cpf, :cnpj
 
   has_many :licitation_process_impugnments, dependent: :restrict
@@ -12,6 +14,8 @@ class Person < Persona::Person
   has_one :creditor, dependent: :restrict
   has_one :street, through: :address
   has_one :neighborhood, through: :address
+
+  accepts_nested_attributes_for :creditor
 
   delegate :city, :zip_code, :state, to: :address, allow_nil: true
   delegate :benefited, to: :company_size, allow_nil: true
