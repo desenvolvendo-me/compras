@@ -22,11 +22,11 @@ class ZendeskController < ApplicationController
       name: current_user.name,
       email: current_user.email,
       external_id: external_id,
-      organization: 'ieducacao',
+      organization: 'icompras',
       ticket_restriction: 'organization',
       user_fields: { customer: current_customer.domain }
     }, ZENDESK_SHARED_SECRET)
-
+    
     redirect_to zendesk_sso_url(payload)
   end
 
