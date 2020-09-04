@@ -40,16 +40,16 @@
 
           <tr class="ratification_item inherited nested">
             <td class="description"><%= material.description %></td>
-            <td><%= number_to_currency price %></td>
-            <td><%= qtd  %></td>
-            <td><%= p.input :contract_quantity, label: false, input_html:{disabled: true, class:'contract_quanity'} %></td>
-            <td><%= number_with_precision result = (price.to_f*qtd.to_f) %></td>
-            <td class="qtd_attended" data-attended="<%= qtd_attended %>"><%= qtd_attended %></td>
-            <td><%= number_with_precision total_attended = qtd_attended * price.to_f %></td>
-            <td>
+            <td class="tar"><%= number_to_currency price %></td>
+            <td class="tar"><%= qtd  %></td>
+            <td class="tar"><%= p.input :contract_quantity, label: false, input_html:{disabled: true, class:'contract_quanity'} %></td>
+            <td class="tar"><%= number_with_precision result = (price.to_f*qtd.to_f) %></td>
+            <td class="qtd_attended tar" data-attended="<%= qtd_attended %>"><%= qtd_attended %></td>
+            <td  class="tar"><%= number_with_precision total_attended = qtd_attended * price.to_f %></td>
+            <td  class="tar">
               <%= p.input :contract_consumption, input_html:{value: consumption_contract, readonly: true, class:'consumption'}, label: false %>
             </td>
-            <td><%= balance %></td>
+            <td  class="tar"><%= balance %></td>
 
             <% total[:total_qtd_soli] += qtd %>
             <% total[:total] += result %>
@@ -82,10 +82,8 @@
 
 
 <style>
-  table.records th:not(.description){
-    text-align: center !important;
-  }
-  table.records td:not(.description){
+
+  .tar{
     text-align: right !important;
   }
   .text-end{
