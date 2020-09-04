@@ -5,7 +5,7 @@
         <h5 class="card-title">Propostas e Declarações</h5>
         <p class="card-text">Apresentar ou consultar proposta e declarações.</p>
       </div>
-      <a href="#" class="card-link">
+      <a href="<%= proposal_path(resource) %>" class="card-link">
         <div class="card-footer text-muted">
           Clique Aqui
         </div>
@@ -18,7 +18,7 @@
         <h5 class="card-title">Lances</h5>
         <p class="card-text">Apresentar lance.</p>
       </div>
-      <a href="#" class="card-link">
+      <a href="<%=new_auction_bids_path(auction_id: resource) %>" class="card-link">
         <div class="card-footer text-muted">
           Clique Aqui
         </div>
