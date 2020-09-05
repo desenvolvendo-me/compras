@@ -9,7 +9,7 @@ class LinkedContract < Compras::Model
   }
   
   scope :by_days_finish, lambda { |days = 30|
-    where { end_date_contract.lteq(Date.today + days.to_i) }
+    where { end_date_contract.gteq(Date.today) & end_date_contract.lteq(Date.today + days.to_i) }
   }
 
 end
