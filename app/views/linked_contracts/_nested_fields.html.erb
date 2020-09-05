@@ -1,22 +1,17 @@
 <%= f.simple_fields_for :linked_contracts, LinkedContract.new do |p| %>
   <% p.object_name = 'linked_contract' %>
   <div class="yui3-g">
-    <div class="yui3-u-1-4 tal" >
+    <div class="yui3-u-1-4" >
       <%= p.input :contract_number %>
     </div>
-    <div class="yui3-u-1-4 tal">
+    <div class="yui3-u-1-4">
       <%= p.input :start_date_contract %>
     </div>
-    <div class="yui3-u-1-4 tal">
+    <div class="yui3-u-1-4">
       <%= p.input :end_date_contract %>
     </div>
-    <div class="yui3-u-1-4 tal">
+    <div class="yui3-u-1-4">
       <%= p.input :contract_value %>
     </div>
   </div>
 <% end %>
-<style>
-  .tal{
-    text-align: left !important;
-  }
-</style>
