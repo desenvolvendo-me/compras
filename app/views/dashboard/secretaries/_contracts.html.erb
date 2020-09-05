@@ -31,28 +31,63 @@
   </div>
 </div>
 
+<div class="mt-1">
+  <span class="title-table-linked-contract">Contratos Vinculados com 30 dias para vencer</span>
+
+  <div id="linked_contract_records">
+    <%= render 'linked_contract_list' %>
+  </div>
+</div>
 
 <script>
+
   $('.by_121_150').click(function(){
     $('.title-table').html('Contratos com 150 dias para vencer');
+    $('.title-table-linked-contract').html('Contratos Vinculados com 150 dias para vencer');
     getContracts(121, 150)
+    getLinkedContracts(121, 150)
   });
   $('.by_91_120').click(function(){
     $('.title-table').html('Contratos com 120 dias para vencer');
+    $('.title-table-linked-contract').html('Contratos Vinculados com 120 dias para vencer');
     getContracts(91, 120)
+    getLinkedContracts(91, 120)
   });
   $('.by_61_90').click(function(){
     $('.title-table').html('Contratos com 90 dias para vencer');
+    $('.title-table-linked-contract').html('Contratos Vinculados com 90 dias para vencer');
     getContracts(61, 90)
+    getLinkedContracts(61, 90)
   });
   $('.by_31_60').click(function(){
     $('.title-table').html('Contratos com 60 dias para vencer');
+    $('.title-table-linked-contract').html('Contratos Vinculados com 60 dias para vencer');
     getContracts(31, 60)
+    getLinkedContracts(31, 60)
   });
   $('.until_30').click(function(){
     $('.title-table').html('Contratos com 30 dias para vencer');
+    $('.title-table-linked-contract').html('Contratos Vinculados com 30 dias para vencer');
     getContracts(30)
+    getLinkedContracts(30)
   });
+
+  function getLinkedContracts(date1, date2){
+    var param = (date1 && date2) ? [date1, date2] : date1;
+
+    var url = Routes.linked_contracts_dashboard_secretaries,
+        params = $.isArray(param) ? {between_days_finish: {started_at: param[0], ended_at: param[1]}} : {by_days_finish: param};
+
+    url += "?" + $.param(params);
+
+    $.ajax({
+      url: url,
+      dataType: 'script',
+      type: 'GET',
+      success: function (data) {
+      }
+    });
+  }
 
   function getContracts(date1, date2){
     var param = (date1 && date2) ? [date1, date2] : date1;

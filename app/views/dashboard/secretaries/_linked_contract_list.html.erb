@@ -1,0 +1,27 @@
+<table class="records mt-1">
+  <tbody id="records">
+  <% if @linked_contracts.blank? %>
+    <tr>
+      <td>Não foram encontrados contratos vinculados para esse periodo</td>
+    </tr>
+  <% end %>
+  <% @linked_contracts.each do |resource| %>
+    <tr>
+      <td>
+        <p><%= link_to edit_contract_path(resource.contract_id) do %>
+            Contrato Vinculado <%= resource.contract_number %> - Data fim <%= l(resource.end_date_contract) if resource.end_date_contract %> - Fornecedor <%= Contract.find(resource.contract_id).creditor.person.name %>
+          <%end %>
+            </p>
+        <% if resource.decorated? && resource.decorator.respond_to?(:summary) %>
+          <p><%= resource.decorator.summary %></p>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<div class="text-center">
+  <%= page_entries_info @linked_contracts, entry_name: 'Contratos Vinculados'  %>
+</div>
+
+<%= paginate @linked_contracts, :params => { :controller => 'dashboard/secretaries', :action => 'linked_contracts'}, remote: true %>

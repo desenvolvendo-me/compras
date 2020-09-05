@@ -1,0 +1,7 @@
+(function () {
+  var records = $('#linked_contract_records'),
+      content = records.closest('.ui-dialog-content');
+
+  records.html('<%= escape_javascript render('linked_contract_list') %>');
+
+})();

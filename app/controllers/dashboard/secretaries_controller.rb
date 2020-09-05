@@ -7,12 +7,17 @@ class Dashboard::SecretariesController < CrudController
     @contracts = Contract.by_days_finish(30).page(params[:page]).per(5)
     @contracts_periods = Contract.count_contracts_finishing
     @approval_requests = SupplyRequest.to_secretary_approv(current_user.authenticable.id).page(params[:page_approval]).per(5)
+    @linked_contracts = apply_scopes(LinkedContract).page(params[:page]).per(1)
   end
 
   def contracts
     @contracts = apply_scopes(Contract).page(params[:page]).per(5)
   end
-
+  
+  def linked_contracts
+    @linked_contracts = apply_scopes(LinkedContract).page(params[:page]).per(1)
+  end
+  
   def approval_requests
     @approval_requests = SupplyRequest.to_secretary_approv(current_user.authenticable.id).page(params[:page_approval]).per(5)
   end
