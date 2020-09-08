@@ -1,0 +1,30 @@
+<%= render "reports/header", :report_name => "Proposta Comercial #{resource}" %>
+
+<h2>Processo de Compra: <%= resource.to_s %></h2>
+<h3>Fornecedor: <%= @creditor %></h3>
+
+
+<table class="records">
+  <thead>
+  <th><%= LicitationProcessClassification.human_attribute_name :item_lot %></th>
+  <th><%= LicitationProcessClassification.human_attribute_name :unit_price %></th>
+  </thead>
+
+  <tbody>
+  <% resource.proposals_of_creditor(@creditor).each do |proposal|  %>
+    <tr>
+      <td>
+        <%= resource.judgment_form.try(:lot?) ? proposal.item_lot : proposal.item %>
+      </td>
+      <td>
+        <%= proposal.unit_price %>
+      </td>
+    </tr>
+  <% end %>
+  <tr>
+    <td></td>
+    <td> Preço Total: <%= number_with_delimiter resource.proposals_of_creditor(@creditor).sum(:unit_price) %></td>
+  </tr>
+  </tbody>
+</table>
+
