@@ -56,7 +56,7 @@
                  secretary: p.object.secretary,
                  secretary_id: p.object.secretary_id,
                  value: p.object.value,
-                 project_activity: "#{p.object.expense.project_activity.name} (#{p.object.expense.project_activity})",
+                 project_activity: "#{p.object.expense.try(:project_activity).try(:name)} (#{p.object.expense.try(:project_activity)})",
                  nature_expense: p.object.expense.nature_expense,
                  resource_source: p.object.expense.resource_source,
 
