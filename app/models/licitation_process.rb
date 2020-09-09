@@ -146,6 +146,7 @@ class LicitationProcess < Compras::Model
   validate :validate_the_year_to_processe_date_are_the_same, :on => :update
   validate :validate_total_items
   validate :purchase_solicitations_blank?
+  validate :judgment_form_can_update?, on: :update
 
   before_save :set_homologation_date
   after_save  :set_approved_status
@@ -552,5 +553,15 @@ class LicitationProcess < Compras::Model
 
   def update_purchase_solicitation_to_liberated(purchase_solicitation)
     purchase_solicitation.liberate! if valid?
+  end
+
+
+  def judgment_form_can_update?
+    unless items.blank?
+      judgment_form_was = JudgmentForm.find_by_id(judgment_form_id_was)
+      if judgment_form_was.try(:kind) != judgment_form.kind
+        errors.add(:judgment_form, :should_be_same_judgment_form_kind, :kind => judgment_form_was.kind_humanize)
+      end
+    end
   end
 end
