@@ -193,7 +193,7 @@ class Creditor < Persona::Creditor
   end
 
   def creditor_representative
-    person.personable.try(:responsible_name)
+    person.personable.try(:responsible_name) if person.company?
   end
 
   protected
