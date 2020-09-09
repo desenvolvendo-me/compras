@@ -26,7 +26,9 @@
 //= require compras/unico/nobe
 //= require compras/unico/menu
 //= require compras/unico/modal_info_link
+//= require compras/unico/filter
 //= require compras/custom_alert
+
 
 /** Unico Assets **/
 //= require underscore
@@ -41,7 +43,6 @@
 //= require simple_form.load_nested_forms
 //= require simple_form.nested_form
 //= require link.modal
-//= require filter
 //= require currency_manipulation
 //= require date
 //= require select_check_boxes
@@ -102,21 +103,19 @@ $(document).on('click', ':submit', function(event) {
 
 /* Aumenta os campos text area conforme texto inserido */
 $(function(){
-  $(function() {
-    $("textarea").on('keyup paste', function() {
-      var $el = $(this),
-        offset = $el.innerHeight() - $el.height();
+  $("textarea").on('keyup paste', function() {
+    var $el = $(this),
+      offset = $el.innerHeight() - $el.height();
 
-      if ($el.innerHeight() < this.scrollHeight && this.scrollHeight < 400) {
-        $el.height(this.scrollHeight - offset);
-      } else if(this.scrollHeight > 400) {
-        $el.height(1);
-        this.scrollHeight < 400 ? $el.height(this.scrollHeight) : $el.height(400)
-      }else{
-        $el.height(1);
-        $el.height(this.scrollHeight - offset);
-      }
-    });
+    if ($el.innerHeight() < this.scrollHeight && this.scrollHeight < 400) {
+      $el.height(this.scrollHeight - offset);
+    } else if(this.scrollHeight > 400) {
+      $el.height(1);
+      this.scrollHeight < 400 ? $el.height(this.scrollHeight) : $el.height(400)
+    }else{
+      $el.height(1);
+      $el.height(this.scrollHeight - offset);
+    }
   });
 
   $("textarea.text").each(function(){
@@ -127,6 +126,5 @@ $(function(){
       $(this).css('height', height+10 + 'px')
     }
   })
-
 });
 

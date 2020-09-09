@@ -6,7 +6,7 @@ class Auction < Compras::Model
                   :proposal_delivery, :bid_opening, :internet_address, :city,
                   :neighborhood, :street, :telephone, :cell_phone, :user_id
 
-  attr_modal :process_number, :proposal_delivery, :bid_opening
+  attr_modal :licitation_number, :process_number, :proposal_delivery, :bid_opening, :object
 
   belongs_to :employee
   belongs_to :user
@@ -34,6 +34,9 @@ class Auction < Compras::Model
   validates :cell_phone, mask: "(99) 99999-9999", :allow_blank => true
   validates :telephone, mask: "(99) 9999-9999", :allow_blank => true
 
-  orderize :id
+  def self.ordered
+    order("notice_availability >= '#{Date.today}', notice_availability ASC, proposal_delivery >= '#{Date.today}', notice_availability ASC")
+  end
+
   filterize
 end
