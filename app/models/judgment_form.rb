@@ -12,6 +12,8 @@ class JudgmentForm < Compras::Model
 
   scope :enabled, lambda { where { enabled.eq(true) } }
 
+  scope :by_kind, lambda{|_kind| where { kind.eq _kind } }
+
   orderize :description
   filterize
 
