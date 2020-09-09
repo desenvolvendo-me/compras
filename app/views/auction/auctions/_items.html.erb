@@ -15,7 +15,7 @@
         <%= f.input :purchase_solicitation, :as => :modal, 'data-hidden-field-class' => 'unique', :fake => true %>
       </div>
       <div class="yui3-u-1-2">
-        <label class="fake" for="benefit_type">Tipo</label>
+        <label class="fake" for="benefit_type">Tipo da Solicitação de Compra</label>
         <%= select_tag :kind, options_for_select(PurchaseSolicitationKind.to_a),
                        include_blank: true, as: :fake, disabled: true,
                        class: ' kind select', id:'purchase_solicitation_kind'%>
