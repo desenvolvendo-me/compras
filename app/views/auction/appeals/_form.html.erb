@@ -35,6 +35,17 @@
 <%= f.input :valid_reason %>
 <%= f.input :auction_committee_opinion %>
 
+<div class="yui3-g">
+  <div class="yui3-u-1-4">
+    <%= f.input :appeal_file, input_html:{style:'margin-bottom: 0;'} %>
+  </div>
+  <div class="yui3-u-1-4 pt-4" style="font-size: 18px">
+    <%if f.object.appeal_file?  %>
+      Recurso: <%= link_to f.object.appeal_file_identifier, f.object.appeal_file_url, :target => '_blank', class: 'ml-1' %>
+    <% end %>
+  </div>
+</div>
+
 <script>
   $('#auction_appeal_auction_id').change(function (event, Auction) {
     if (Auction) {
