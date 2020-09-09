@@ -1,10 +1,12 @@
 class AuctionAppeal < Compras::Model
   attr_accessible :auction_id, :appeal_date, :related, :person_id, :valid_reason,
                   :new_envelope_opening_date, :new_envelope_opening_time,
-                  :auction_committee_opinion, :situation, :viewed
+                  :auction_committee_opinion, :situation, :viewed, :appeal_file
 
   has_enumeration_for :related, :with => PurchaseProcessAppealRelated
   has_enumeration_for :situation
+
+  mount_uploader :appeal_file, UnicoUploader
 
   belongs_to :auction
   belongs_to :person
