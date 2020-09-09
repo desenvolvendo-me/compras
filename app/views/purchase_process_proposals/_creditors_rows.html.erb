@@ -1,8 +1,8 @@
 <tr>
   <td><%= creditor.to_s %></td>
-  <td><%= creditor.person_email %></td>
   <td><%= view_or_edit_creditor_proposal creditor %></td>
+  <td><%= number_to_currency resource.proposals_of_creditor(creditor).sum(:unit_price) %></td>
   <td><%= link_to_disqualify_creditor_proposal creditor %></td>
-  <td><%= link_to "Deletar", "#", 'data-creditor': creditor.id, class:'delete-proposal' %></td>
   <td><%= disqualification_status_message creditor %></td>
+  <td><%= link_to 'Imprimir', purchase_process_proposal_path(licitation_process_id: resource.id, creditor_id: creditor.id) %></td>
 </tr>

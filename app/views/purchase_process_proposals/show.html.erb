@@ -1,0 +1,35 @@
+<h1><b>Proposta Comercial</b></h1>
+
+<h2>Processo de Compra: <%= resource.to_s %></h2>
+<h2>Fornecedor: <%= @creditor %></h2>
+
+
+<table class="records text-center">
+  <thead>
+  <th><%= resource.judgment_form.try(:lot?) ? 'Lote' : 'Item' %></th>
+  <th><%= LicitationProcessClassification.human_attribute_name :unit_price %></th>
+  </thead>
+
+  <tbody>
+  <% resource.proposals_of_creditor(@creditor).each do |proposal|  %>
+    <tr>
+      <td>
+        <%= resource.judgment_form.try(:lot?) ? proposal.lot : proposal.item %>
+      </td>
+      <td>
+        <%= number_with_delimiter proposal.unit_price %>
+      </td>
+    </tr>
+  <% end %>
+  <tr>
+    <td></td>
+    <td><b><%= number_to_currency resource.proposals_of_creditor(@creditor).sum(:unit_price) %></b></td>
+  </tr>
+  </tbody>
+</table>
+
+<style>
+  th{
+    text-align: center !important;
+  }
+</style>

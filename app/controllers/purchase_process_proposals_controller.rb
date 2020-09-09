@@ -12,6 +12,10 @@ class PurchaseProcessProposalsController < CrudController
     @proposals = PurchaseProcessCreditorProposalBuilder.build_proposals(resource, @creditor)
   end
 
+  def show
+    render :layout => 'report'
+  end
+
   def edit
     @proposals = resource.proposals_of_creditor(@creditor)
   end

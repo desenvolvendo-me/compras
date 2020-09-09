@@ -7,7 +7,7 @@ pt-BR:
 
     attributes:
       licitation_process_classification:
-        unit_price: "Preço unitário"
+        unit_price: "Preço Unitário"
         bidder: "Habilitação"
         total_value: "Valor Total"
         classification: "Classificação"
