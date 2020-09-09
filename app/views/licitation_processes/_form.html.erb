@@ -14,9 +14,7 @@
         <li><a href="#tab-licitation-purchase-process-accreditations" id="purchase_process_accreditations">Credenciamentos</a></li>
       <% end %>
 
-      <% unless f.object.trading? %>
-        <li><a href="#tab-bidders" id="bidder">Habilitação</a></li>
-      <% end %>
+      <li><a href="#tab-bidders" id="bidder">Habilitação</a></li>
 
       <% if f.object.licitation? %>
         <li><a href="#tab-proposals" id="proposals">Propostas</a></li>
@@ -55,7 +53,7 @@
       <div id="tab-licitation-purchase-process-accreditations"><%= render 'purchase_process_accreditations', :f => f %></div>
     <% end %>
 
-    <% unless f.object.trading? %>
+    <% unless f.object.decorator.enabled_bidders? %>
       <div id="tab-bidders"><%= render 'bidders', :f => f %></div>
     <% end %>
 
