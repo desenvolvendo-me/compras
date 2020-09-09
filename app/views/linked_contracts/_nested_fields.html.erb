@@ -1,7 +1,7 @@
 <%= f.simple_fields_for :linked_contracts, LinkedContract.new do |p| %>
   <% p.object_name = 'linked_contract' %>
   <div class="yui3-g">
-    <div class="yui3-u-1-4">
+    <div class="yui3-u-1-4" >
       <%= p.input :contract_number %>
     </div>
     <div class="yui3-u-1-4">
