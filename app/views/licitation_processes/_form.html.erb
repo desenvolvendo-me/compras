@@ -30,7 +30,7 @@
         <li><a href="#tab-realignment-prices" id="realignment_prices">Realinhamento de Preços</a></li>
       <% end %>
 
-      <% if f.object.trading?  && f.object.trading.present?%>
+      <% if f.object.trading?%>
         <li><a href="#tab-trading-negotiation" id="trading_negotiation">Negociação</a></li>
       <% end %>
 
@@ -240,6 +240,12 @@
         if (disabled !== ''){
           $("#ratifications").attr('data-disabled', disabled);
           $main_tab.tabs( "disable", $("#ratifications").parent().index());
+        }
+
+        disabled = '<%= f.object.decorator.disabled_negotiation_message%>';
+        if (disabled !== ''){
+          $("#trading_negotiation").attr('data-disabled', disabled);
+          $main_tab.tabs( "disable", $("#trading_negotiation").parent().index());
         }
 
 
