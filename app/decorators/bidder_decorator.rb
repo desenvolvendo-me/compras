@@ -5,7 +5,7 @@ class BidderDecorator
   include ActionView::Helpers::NumberHelper
   include ActionView::Helpers::TranslationHelper
 
-  attr_header :creditor, :enabled
+  attr_header :creditor, :_enabled
 
   def by_licitation_process
     # na modalidade pregão só pode ser adicionado os credores credenciados
@@ -28,6 +28,10 @@ class BidderDecorator
     if licitation_process_ratification?
       t('bidder.messages.cant_be_changed_when_licitation_process_has_a_ratification')
     end
+  end
+
+  def _enabled
+    t enabled
   end
 
   def benefited
