@@ -90,7 +90,7 @@
 
 <div class="yui3-g">
   <div class="yui3-u-4-5">
-    <%= f.input :judgment_form,:required => true %>
+    <%= f.input :judgment_form, modal_url: modal_judgment_forms_path(by_kind: f.object.judgment_form.try(:kind)), :required => true  %>
   </div>
   <div class="yui3-u-1-5">
     <%= f.input :caution_value %>
