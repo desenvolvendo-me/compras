@@ -4,6 +4,9 @@ class BookmarksController < CrudController
   defaults :singleton => true
 
   def empty
+    if current_user.try(:electronic_auction?)
+      redirect_to auction_auctions_path
+    end
   end
 
   def show

@@ -33,6 +33,10 @@ class Auction::AuctionsController < Auction::BaseController
   def external_index
   end
 
+  def dashboard
+
+  end
+
   def show
     render layout: "document"
   end

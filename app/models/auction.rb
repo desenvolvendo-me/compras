@@ -39,4 +39,8 @@ class Auction < Compras::Model
   end
 
   filterize
+
+  def to_s
+    "#{licitation_number}/#{year}"
+  end
 end

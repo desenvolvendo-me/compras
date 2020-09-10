@@ -1027,6 +1027,10 @@ Compras::Application.routes.draw do
     end
 
     resources :auctions do
+      member do
+        get :dashboard
+      end
+
       collection do
         get :filter
         get :modal

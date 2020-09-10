@@ -9,7 +9,7 @@ pt-BR:
       auction:
         auction_type: "Característica do Pegrão Eletrônico"
         licitation_number: "Número da Licitação"
-        process_number: "Número do Processo"
+        process_number: "Número do Processo de Compra"
         year: "Ano"
         dispute_type: "Modo da Disputa"
         judment_form: "Critério de Julgamento"
