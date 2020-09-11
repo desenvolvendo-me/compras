@@ -9,7 +9,7 @@ module Auction::AuctionsHelper
   end
 
   def proposal_path resource
-    if current_user.authenticable_type == 'Employee'
+    if current_user.try(:authenticable_type) == 'Employee'
       return auctioneer_view_auction_auction_creditor_proposals_path(auction_id: resource.id)
     end
 
