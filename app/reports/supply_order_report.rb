@@ -26,7 +26,7 @@ class SupplyOrderReport < Report
   end
 
   def billing
-    supply_order.licitation_process.purchasing_unit.billing
+    supply_order.purchase_solicitation.try(:department).try(:purchasing_unit).try(:billing)
   end
 
   def get_delivery_location
