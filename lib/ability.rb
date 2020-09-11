@@ -13,7 +13,7 @@ class Ability
 
     if user.administrator?
       can :access, :all
-    elsif user.creditor?
+    elsif user.creditor? && !user.electronic_auction
       can [:read, :update], :price_collection_proposals
     else
       can :access, [:auction, :people]
