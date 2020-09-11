@@ -36,6 +36,17 @@ class Creditor < Persona::Creditor
   validate :licitation_processes?
 
   before_save :clean_fields_when_is_no_autonomous
+  before_validation :clear
+
+
+  def clear
+
+    _validators.reject! { |k| k == :person }
+    _validate_callbacks.each do |callback|
+      callback.raw_filter.attributes.delete :person if callback.raw_filter.is_a?(ActiveModel::Validations::PresenceValidator)
+    end
+
+  end
 
   scope :by_purchasing_unit, lambda {|q|
     department_ids = DepartmentPerson.where(user_id: q).pluck(:department_id)
