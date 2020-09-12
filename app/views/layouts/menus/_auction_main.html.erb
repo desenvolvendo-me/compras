@@ -6,7 +6,7 @@
     </i>Tela Inicial
   <% end %>
  
-  <%= link_to auction_new_auction_legal_people_path(company: true) do  %>
+  <%= link_to auction_providers_register_external_path do  %>
     <i role="presentation">
       <%= image_tag("icon_library_books.png") %>
     </i>Cadastro
@@ -15,32 +15,5 @@
     <i role="presentation">
       <%= image_tag("icon_library_books.png") %>
     </i>Pregões e Editais
-  <% end %>
-  <span class='subtitle-menu'>Cadastro</span>
-  <%= link_to [:auction, :employees] do  %>
-    <i role="presentation">
-      <%= image_tag("icon_library_books.png") %>
-    </i>Funcionários
-  <% end %>
-  <%= link_to [:auction, :management_objects] do  %>
-    <i role="presentation">
-      <%= image_tag("icon_library_books.png") %>
-    </i>Gestão de Objetos
-  <% end %>
-  <%= link_to [:auction, :positions] do  %>
-    <i role="presentation">
-      <%= image_tag("icon_library_books.png") %>
-    </i>Cargos
-  <% end %>
-  <span class='subtitle-menu'>Pregoeiro</span>
-  <%= link_to :bookmark do  %>
-    <i role="presentation">
-      <%= image_tag("icon_library_books.png") %>
-    </i>Pregão
-  <% end %>
-  <%= link_to auction_new_auction_legal_people_path(company: true) do  %>
-    <i role="presentation">
-      <%= image_tag("icon_library_books.png") %>
-    </i>Fornecedores
   <% end %>
 </li>
