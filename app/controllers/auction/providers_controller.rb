@@ -1,6 +1,7 @@
 class Auction::ProvidersController < Auction::BaseController
   skip_before_filter :authenticate_user!, :only => [:register_external, :check_register_external, :new, :create]
   skip_before_filter :authorize_resource!, :only => [:register_external, :check_register_external, :new, :create]
+  before_filter :set_company
   layout "electronic_auction"
 
   defaults resource_class: User
@@ -10,13 +11,9 @@ class Auction::ProvidersController < Auction::BaseController
   end
 
   def new
-    if params[:cnpj].present?
-      company = Company.find_by_cnpj(params[:cnpj]) if params[:cnpj].present?
-
-      render json: company
-    else
-      super
-    end
+    redirect_to auctions_external_index_path, :alert => 'Houve um erro contate suporte.' unless @company
+    object = build_resource
+    object.authenticable = @company.person.creditor
   end
 
   def register_external
@@ -34,6 +31,10 @@ class Auction::ProvidersController < Auction::BaseController
 
   protected
 
+  def set_company
+    @company = Company.find_by_cnpj(params[:cnpj]) if params[:cnpj].present?
+    @company = Company.find(params[:company_id]) if params[:company_id]
+  end
   def create_resource(object)
     object.profile_id = Profile.where(auction_profile: true).last.id
     object.activated = true
