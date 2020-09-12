@@ -16,14 +16,17 @@ class Auction::CreditorsController < Auction::BaseController
 
   defaults resource_class: Person
 
+  layout "electronic_auction"
+
   def  new
     object = build_resource
     object.personable = Company.new
+    object.personable.cnpj = params[:cnpj]
   end
 
   def create
     create! do |success, failure|
-      success.html { update_user(resource) }
+      success.html { redirect_to new_auction_provider_path(cnpj: resource.personable.cnpj) }
       failure.html{ render :new}
     end
   end
