@@ -20,12 +20,14 @@ class Auction::ProvidersController < Auction::BaseController
   end
 
   def check_register_external
-    company = Company.find_by_cnpj(params[:cnpj]) if params[:cnpj].present?
+    user = User.where(authenticable_id: @company&.person&.creditor&.id, authenticable_type: AuthenticableType::CREDITOR).first
 
-    if company
+    if user
       redirect_to new_user_session_path, :notice => "Sua empresa já está cadastrada. Agora faça o login."
+    elsif @company.blank?
+      redirect_to new_auction_creditor_path(cnpj: params[:cnpj]), :alert => "Sua empresa não está cadastrada. Faça o cadastro."
     else
-      redirect_to new_auction_provider_path, :alert => "Sua empresa não está cadastrada. Faça o cadastro."
+      redirect_to new_auction_provider_path(creditor_id: @company.person.creditor.id), :alert => "Sua empresa já esta cadastra. Finalize o cadastro do login."
     end
   end
 
