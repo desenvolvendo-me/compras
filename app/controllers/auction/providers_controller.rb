@@ -37,11 +37,11 @@ class Auction::ProvidersController < Auction::BaseController
     @company = Company.find_by_cnpj(params[:cnpj]) if params[:cnpj].present?
     @company = Company.find(params[:company_id]) if params[:company_id]
   end
+
   def create_resource(object)
-    object.profile_id = Profile.where(auction_profile: true).last.id
+    object.profile_id = Profile.where(name: 'Pregão').last.id
     object.activated = true
     object.electronic_auction = true
-    object.authenticable_type = "Provider"
     object.skip_confirmation!
 
     super
