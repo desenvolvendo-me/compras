@@ -1,4 +1,7 @@
 class Auction::CreditorsController < Auction::BaseController
+  skip_before_filter :authenticate_user!, :only => [:new, :create]
+  skip_before_filter :authorize_resource!, :only => [:new, :create]
+
   has_scope :by_licitation_process, :allow_blank => true
   has_scope :term, :allow_blank => true
   has_scope :by_id, allow_blank: true
