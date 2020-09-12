@@ -30,14 +30,4 @@ class Auction::CreditorsController < Auction::BaseController
       failure.html{ render :new}
     end
   end
-
-
-  private
-
-  def update_user resource
-    if current_user.provider?
-      current_user.update_attributes(authenticable_id: resource.creditor.id, authenticable_type: AuthenticableType::CREDITOR)
-    end
-    redirect_to root_path
-  end
 end
