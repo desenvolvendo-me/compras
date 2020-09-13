@@ -1,5 +1,5 @@
 class PurchaseProcessTrading < Compras::Model
-  attr_accessible :purchase_process_id, :items_attributes
+  attr_accessible :purchase_process_id, :items_attributes, :observation
 
   belongs_to :purchase_process, class_name: 'LicitationProcess'
 

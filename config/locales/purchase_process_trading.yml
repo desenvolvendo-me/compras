@@ -5,6 +5,10 @@ pt-BR:
         one: "Pregão Presencial"
         other: "Pregões Presenciais"
 
+    attributes:
+      purchase_process_trading:
+        observation: "Observação"
+
   purchase_process_trading:
     messages:
       make_bid_disabled_message: "todos os lances já foram efetuados"

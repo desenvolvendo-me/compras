@@ -3,3 +3,7 @@
 <%= render 'purchase_process_tradings/form', item: item,
            historic: item.bids_historic, creditors:  item.creditors_ordered_outer,
            next_bid: NextBidCalculator.next_bid(item), trading: trading %>
+
+<%= f.simple_fields_for :trading do |p| %>
+  <%= p.input :observation %>
+<% end %>
