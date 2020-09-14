@@ -39,8 +39,27 @@
       </div>
     </div>
 
+    <div class="row  items-actions">
+      <div class="col d-flex creditor_for_all_input">
+        <%= f.input :creditor_for_all_items, as: :auto_complete, fake: true,
+                    wrapper_class: 'w-75',
+                    source_path: qualified_creditor(f.object) %>
 
-    <div class="text-right">
+        <%= button_tag 'OK', type: :button,
+                       :id => 'btn_set_creditor_for_all_items',
+                     :class => 'button field-without-label' %>
+        <%= button_tag 'X', type: :button,
+                       :id => 'btn_cancel_creditor_for_all',
+                       :class => 'button negative field-without-label' %>
+      </div>
+
+      <div class="col d-flex justify-content-end">
+        <% if f.object.simplified_processes? %>
+          <%= button_tag 'Atribuir Fornecedor para Todos  os Itens', type: :button,
+                         :id => 'btn_creditor_for_all_items',
+                         :class => 'button field-without-label' %>
+        <% end %>
+
         <%= button_tag 'Adicionar Itens', type: :button,
                        :id => 'btn_new_role_unique',
                        :class => 'add-nested-record  button field-without-label',
@@ -48,6 +67,7 @@
                        'data-records' => 'items-records',
                        'data-clear-after-add' => false,
                        'data-disabled' => not_updateable_message %>
+      </div>
     </div>
   </div>
 
@@ -111,6 +131,22 @@
     <% end %>
   <% end %>
 </div>
+
+ <style>
+   .items-actions .input{
+     margin-bottom: 0;
+   }
+   .creditor_for_all_input{
+     display: none;
+   }
+
+   .items-actions input,button{
+     margin-left:5px;
+   }
+   .items-actions input,button:first-child{
+     margin-left:0;
+   }
+ </style>
 
 <script>
   <% if f.object.persisted? %>
