@@ -273,4 +273,25 @@ $(document).ready(function () {
       }
     });
   });
+
+
+  // controla o botão e ações de adicionar
+  // um fornecedor a todos os itens
+  $("#btn_creditor_for_all_items").click(function(){
+    $(".creditor_for_all_input").css('display', 'flex');
+  });
+
+  $("#btn_cancel_creditor_for_all").click(function(){
+    $(".creditor_for_all_input").hide();
+  })
+
+  $("#btn_set_creditor_for_all_items").click(function(){
+    var $creditor_for_all = $("[name$='[creditor_for_all_items]']"),
+      $creditor_for_all_id = $("[name$='[creditor_for_all_items_id]']");
+
+    if($creditor_for_all && $creditor_for_all_id){
+      $("#items-records tbody [name$='[creditor]']").val($creditor_for_all.val());
+      $("#items-records tbody [name$='[creditor_id]']").val($creditor_for_all_id.val());
+    }
+  })
 });
