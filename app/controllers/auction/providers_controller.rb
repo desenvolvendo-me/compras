@@ -27,7 +27,7 @@ class Auction::ProvidersController < Auction::BaseController
     elsif @company.blank?
       redirect_to new_auction_creditor_path(cnpj: params[:cnpj]), :alert => "Sua empresa não está cadastrada. Faça o cadastro."
     else
-      redirect_to new_auction_provider_path(creditor_id: @company.person.creditor.id), :alert => "Sua empresa já esta cadastra. Finalize o cadastro do login."
+      redirect_to new_auction_provider_path(company_id: @company.id), :alert => "Sua empresa já esta cadastra. Finalize o cadastro do login."
     end
   end
 
