@@ -29,13 +29,15 @@ class LicitationProcess < Compras::Model
                   :purchase_process_accreditation_attributes, :trading_attributes,
                   :judgment_commission_advice_attributes, :bidders_attributes,
                   :licitation_process_ratifications_attributes
+  
+  attr_accessor :purchase_solicitation_id,:purchase_solicitation
 
   auto_increment :process, :by => :year
   auto_increment :modality_number, :by => [:year, :modality, :type_of_removal]
 
   attr_readonly :year, :modality_number
 
-  attr_modal :process, :year, :process_date, :status, :description
+  attr_modal :process, :purchase_solicitation, :year, :process_date, :status, :description
 
   has_enumeration_for :concession_period_unit, :with => PeriodUnit
   has_enumeration_for :contract_guarantees, :with => UnicoAPI::Resources::Compras::Enumerations::ContractGuarantees
@@ -224,6 +226,12 @@ class LicitationProcess < Compras::Model
     }.uniq
   }
 
+  scope :by_purchase_solicitation, lambda {|purchase_solicitation_id|
+    joins {purchase_solicitations}.where {
+      purchase_solicitations.purchase_solicitation_id.eq purchase_solicitation_id
+    }
+  }
+
   scope :by_contract, lambda {|contract_id|
     joins {contracts}.where {
       contracts.id.eq contract_id
@@ -249,6 +257,12 @@ class LicitationProcess < Compras::Model
   scope :ratified, lambda {
     joins {licitation_process_ratifications}.uniq
   }
+
+  def self.filter(params)
+    query = scoped
+    query = query.by_purchase_solicitation(params[:purchase_solicitation_id]) if params[:purchase_solicitation_id].present?
+    query
+  end
 
   def get_items_amount
     val = 0
