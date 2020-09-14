@@ -2,6 +2,10 @@
   <div class="yui3-u-1">
     <%= f.input :process %>
   </div>
+  
+  <div class="yui3-u-1">
+    <%= f.input :purchase_solicitation,hidden_field: :purchase_solicitation_id, as: :modal %>
+  </div>
 
   <div class="yui3-u-1">
     <%= f.input :year, required: false %>
