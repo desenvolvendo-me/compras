@@ -67,5 +67,12 @@
         </div>
       </div>
     </div>
+    <script>
+      var environment = "<%= Rails.env %>";
+
+      if (environment === "test") {
+        $.fx.off = true;
+      }
+    </script>
   </body>
 </html>
