@@ -993,7 +993,11 @@ Compras::Application.routes.draw do
   namespace :auction do
     get "/external" => "auctions#external_index", as: :auctions_external_index
 
-    resources :auction_creditor_proposals
+    resources :auction_creditor_proposals do
+      collection do
+        get :auctioneer_view
+      end
+    end
 
     get "legal_peoples", to: "people#index", as: "auction_legal_peoples", by_legal_people: true
     get "legal_peoples/new", to: "people#new", as: "new_auction_legal_people", by_legal_people: true

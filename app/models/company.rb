@@ -2,7 +2,7 @@
 
 class Company < Persona::Company
   attr_accessible :responsible_name, :bank_info, :account_info,
-                  :account_type, :agencie_info
+                  :account_type, :agencie_info, :main_cnae_id
 
   attr_accessor :cnae_ids
 
@@ -14,7 +14,6 @@ class Company < Persona::Company
   #validate :at_least_one_partner
   validates :cnpj, uniqueness: true
   validates :main_cnae, presence: true
-
 
   orderize
   filterize

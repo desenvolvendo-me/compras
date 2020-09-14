@@ -1,4 +1,5 @@
-<%= f.association :personable, :collection => f.object.personable.is_a?(Company) ? f.object.personable.localized : Company.new do |c| %>
+<%=  f.input :personable_type, as: :hidden %>
+<%= f.fields_for :personable, f.object.personable.is_a?(Company) ? f.object.personable.localized : Company.new do |c| %>
   <div id="company">
     <div class="yui3-g">
       <div class="yui3-u-3-5">
@@ -52,7 +53,7 @@
   </div>
 
   <div id="company_address">
-    <%= f.association :address, :collection => f.object.address || Address.new do |a| %>
+    <%= f.fields_for :address, f.object.address || Address.new do |a| %>
       <%= render "addresses/address", :a => a %>
     <% end %>
   </div>
@@ -70,9 +71,10 @@
   </div>
 
   <div id="company_creditor">
-  <%= f.simple_fields_for :creditor, :collection => f.object.creditor || f.object.build_creditor do |p| %>
-    <%= p.input :main_cnae_id, as: :hidden %>
-  <% end %>
+    <%= f.fields_for :creditor, f.object.creditor || f.object.build_creditor do |p| %>
+      <%= p.input :person_id, as: :hidden %>
+      <%= p.input :main_cnae_id, as: :hidden %>
+    <% end %>
   </div>
 <% end %>
 

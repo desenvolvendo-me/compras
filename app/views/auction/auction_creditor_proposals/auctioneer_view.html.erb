@@ -1,0 +1,54 @@
+<% if @auction.decorator.bids_finished? %>
+  <h4><%= l Time.now %></h4>
+  <table id="items-records" class="records">
+    <thead>
+    <tr>
+      <th>Fornecedor</th>
+      <th>Valor Total da Proposta</th>
+      <th>Vencedor</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @auction.creditor_proposals.each_with_index do |index, proposal| %>
+      <tr>
+        <td>
+          <%= index %>
+        </td>
+        <td>
+          <%= number_to_currency proposal.auction_creditor_proposal_items.sum(:global_price) %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% elsif @auction.decorator.licitation_opened? && @auction.creditor_proposals.present? %>
+  <h4><%= l Time.now %></h4>
+  <table id="items-records" class="records">
+    <thead>
+    <tr>
+      <th>Proposta</th>
+      <th>Valor Total da Proposta</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @auction.creditor_proposals.each_with_index do |index, proposal| %>
+      <tr>
+        <td>
+          <%= index %>
+        </td>
+        <td>
+          <%= number_to_currency proposal.auction_creditor_proposal_items.sum(:global_price) %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% elsif @auction.creditor_proposals.present? %>
+  <h4>Data e Hora da Abertura das Propostas: <%= l @auction.bid_opening if @auction.bid_opening%> às às <%= @auction.bid_opening.strftime('%H:%M') %></h4>
+  <h5><%= l Time.now %></h5><br>
+  <h2>Possui Propostas</h2>
+<% else %>
+  <h4>Data e Hora da Abertura das Propostas: <%= l @auction.bid_opening if  @auction.bid_opening%> às <%= @auction.bid_opening.strftime('%H:%M') %></h4>
+  <h5><%= l Time.now %></h5><br>
+  <h2>Não Possui Propostas Cadastradas</h2>
+<% end %>

@@ -25,6 +25,10 @@ class Auction::AuctionCreditorProposalsController <  Auction::BaseController
     end
   end
 
+  def auctioneer_view
+    @auction = Auction.find(params[:auction_id])
+  end
+
   protected
 
   def create_resource(object)
