@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class CitiesController < CrudController
+  skip_before_filter :authenticate_user!, :only => [:index, :show]
   skip_before_filter :authorize_resource!, only: [:index, :show]
   actions :modal
 
