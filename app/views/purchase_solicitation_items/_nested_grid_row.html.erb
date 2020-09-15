@@ -4,7 +4,7 @@
 
       <% if column_name.to_sym.in?(table_input)  %>
         <% qtd = defined?(is_mustache) ? "{{quantity}}" : f.object.quantity %>
-        <%= f.input column_name, input_html:{value: number_with_precision(qtd), class:'items_quantity'}, label: false %>
+        <%= f.input column_name, input_html:{value: qtd, class:'items_quantity'}, label: false %>
       <% else %>
         <%= defined?(is_mustache) ? "{{#{column_name}}}" : f.object.decorator.send(column_name.to_s) %>
       <% end %>
