@@ -7,6 +7,11 @@ class SessionsController < Devise::SessionsController
     set_login_token
   end
 
+  def new
+    flash[:notice] = params[:notice] if params[:notice].present?
+    super
+  end
+
   private
 
   def set_login_token

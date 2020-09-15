@@ -1,0 +1,30 @@
+<div id="personable-type">
+  <%= f.input :personable_type, as: :hidden, input_html:{ value: f.object.personable_type }%>
+</div>
+<div id="content">
+<h2> Cadastro de Fornecedor</h2>
+<div id="personable">
+    <%= render 'companies/form', :f => f %>
+</div>
+</div>
+<script>
+<% unless current_user %>
+var cnpj = $('#person_personable_attributes_cnpj');
+  cnpj.on('change', function(data){
+  
+  console.log(data);
+  console.log("<%= current_prefecture %>");
+   $.get("<%= auction_check_auction_legal_people_path()%>"+"?cnpj="+cnpj.val(), function(data) {
+        
+        
+        console.log("deu");
+        console.log(data);
+        if(data== null){
+          window.location = "<%= new_auction_provider_path(notice: 'CNPJ já cadastrado. Clique aqui para Entrar') %>" 
+        }
+      }, 'json');
+
+  });
+  <% end %>
+</script>
+

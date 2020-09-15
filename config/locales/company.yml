@@ -7,7 +7,7 @@ pt-BR:
 
     attributes:
       company:
-        name: "Nome"
+        name: "Empresa"
         cnpj: "CNPJ"
         legal_nature: "Natureza jurídica"
         responsible: "Pessoa responsável pela empresa"

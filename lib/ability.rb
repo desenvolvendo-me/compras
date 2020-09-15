@@ -10,13 +10,12 @@ class Ability
 
     can :access, :accounts
     can :access, :bookmarks
-
+    can :access, [:auction, :people]
     if user.administrator?
       can :access, :all
     elsif user.creditor? && !user.electronic_auction
       can [:read, :update], :price_collection_proposals
     else
-      can :access, [:auction, :people]
       user.roles.each do |role|
         controller_permission(role)
         authorize_dependencies(role.controller.to_sym)

@@ -24,6 +24,7 @@ class PeopleController < CrudController
   end
 
   def update
+    resource.personable.main_cnae_id = params[:person][:personable_attributes][:main_cnae_id]
     update! do |success, failure|
       if resource.personable_type == PersonableType::INDIVIDUAL
         success.html { redirect_to physical_peoples_path }
@@ -42,8 +43,8 @@ class PeopleController < CrudController
   end
 
   def new
-    person_type = Individual.new if params[:by_physical_people]
-    person_type = Company.new if params[:by_legal_people]
+    person_type = Individual.new if params[:people]
+    person_type = Company.new if params[:company]
     object = build_resource
     object.personable = person_type
 

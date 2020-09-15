@@ -1,4 +1,7 @@
 class Auction::CreditorsController < Auction::BaseController
+  skip_before_filter :authenticate_user!, :only => [:new, :create]
+  skip_before_filter :authorize_resource!, :only => [:new, :create]
+
   has_scope :by_licitation_process, :allow_blank => true
   has_scope :term, :allow_blank => true
   has_scope :by_id, allow_blank: true
@@ -13,25 +16,18 @@ class Auction::CreditorsController < Auction::BaseController
 
   defaults resource_class: Person
 
+  layout "electronic_auction"
+
   def  new
     object = build_resource
     object.personable = Company.new
+    object.personable.cnpj = params[:cnpj]
   end
 
   def create
     create! do |success, failure|
-      success.html { update_user(resource) }
+      success.html { redirect_to new_auction_provider_path(cnpj: resource.personable.cnpj) }
       failure.html{ render :new}
     end
-  end
-
-
-  private
-
-  def update_user resource
-    if current_user.provider?
-      current_user.update_attributes(authenticable_id: resource.creditor.id, authenticable_type: AuthenticableType::CREDITOR)
-    end
-    redirect_to root_path
   end
 end

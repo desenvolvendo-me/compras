@@ -1,5 +1,4 @@
-class Auction::AuctionCreditorProposalsController <  Auction::BaseController
-
+class Auction::AuctionCreditorProposalsController < Auction::BaseController
   def index
     redirect_to auction_auctions_path
   end
@@ -27,6 +26,10 @@ class Auction::AuctionCreditorProposalsController <  Auction::BaseController
 
   def auctioneer_view
     @auction = Auction.find(params[:auction_id])
+  end
+
+  def show
+    render layout: "document"
   end
 
   protected

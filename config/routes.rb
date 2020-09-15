@@ -359,6 +359,7 @@ Compras::Application.routes.draw do
   end
 
   get "cnaes/modal", as: :modal_cnaes
+  resources :cnaes
 
   resources :communication_sources do
     collection do
@@ -1001,6 +1002,16 @@ Compras::Application.routes.draw do
 
     get "legal_peoples", to: "people#index", as: "auction_legal_peoples", by_legal_people: true
     get "legal_peoples/new", to: "people#new", as: "new_auction_legal_people", by_legal_people: true
+    post "legal_peoples/edit", to: "people#edit", as: "edit_auction_legal_people", by_legal_people: true
+    get "legal_peoples/check", to: "people#check", as: "check_auction_legal_people"
+    post "legal_peoples", to: "people#create", as: "create_auction_legal_people"
+
+    resources :people do
+      collection do
+        get :filter
+        get :modal
+      end
+    end
 
     resource :bids do
       collection do

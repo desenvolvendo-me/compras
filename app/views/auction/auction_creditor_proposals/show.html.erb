@@ -1,0 +1,118 @@
+<h1> Proposta de Registro de Preço - Pregão <%=resource.auction.id %>/<%=resource.auction.year%> </h1>
+<div class="border-round">
+<div id="record">
+  <table class="records">
+    <tbody>
+      <tr>
+        <td>
+          <h5><b>Empresa:</b> <%= "#{current_user.try(:authenticable).try(:name)}" %></h5>
+        </td>
+      </tr>    
+      <tr>
+        <td>
+        <p>
+          <h5><b>Endereço:</b> <%= "#{resource.auction.street},   #{resource.auction.neighborhood},  #{resource.auction.city}" %></h5>
+         </br>
+            <b>Cnpj: </b> <%= current_user.try(:authenticable).try(:person).try(:cnpj) %>
+          </p>
+        </td>
+      </tr>
+  </tbody>
+  </table>
+  <div class="mh-400 my-2">
+  <div>
+  <table id="items-records" class="records">
+    <thead>
+    <tr>
+      <th>Material</th>
+      <th width="15%"><%= AuctionCreditorProposalItem.human_attribute_name :manufacturer %></th>
+     <th width="15%"><%= AuctionCreditorProposalItem.human_attribute_name :model_version %></th>
+     
+      <th width="8%"><%= AuctionCreditorProposalItem.human_attribute_name :quantity %></th>
+      <th width="11%"><%= AuctionCreditorProposalItem.human_attribute_name :unit_price %></th>
+      <th width="11%"><%= AuctionCreditorProposalItem.human_attribute_name :global_price %></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% if resource&.auction_creditor_proposal_items.blank? %>
+      <tr><td colspan="7"><div class="alert alert-warning"><strong>Não foram cadastrados itens para esse pregão.</strong></div></tr></td>
+    <% end %>
+    <% resource&.auction_creditor_proposal_items&.each do |auction_item| %>
+      <tr>
+      <td><%= auction_item.auction_item.material.description %></td>
+        <td><%= auction_item.manufacturer %></td>
+         <td><%= auction_item.model_version %></td>
+        <td><%= auction_item.auction_item.quantity.try(:to_i) %></td>
+        <td><%= number_with_precision auction_item.auction_item.estimated_value%></td>
+        <td><%= number_with_precision auction_item.try(:global_price) %></td>
+      </tr>
+       <% end %>
+    </tbody>
+  </table>
+  </div>
+  <table class="records">
+    <tbody>
+      <tr>
+        <td>
+          <h4><b>Declarações</b></h4>
+           </td>
+      </tr>
+        <tr>
+        <td>
+          <h6>* Estas Declarações substitui o envio das mesmas</h6>
+           </td>
+      </tr>
+        <tr>
+        <td>
+          <p>Declaro que estou ciente e concordo com as condições contidas no edital e seus anexos, bem como de que cumpro
+               plenamente os requisitos de habilitação definidos no edital.
+     </p>
+           </td>
+      </tr>
+      <tr>
+        <td>
+          <p>Declaro sob as penas da lei, que até a
+                      presente data inexistem fatos impeditivos
+                      para a minha habilitação no presente processo
+                      licitatório, ciente da obrigatoriedade de declarar
+                      ocorrências posteriores. </p>
+           </td>
+      </tr>
+      <tr>
+        <td>
+          <p>Declaro que a proposta apresentada para essa licitação foi elaborada de maneira independente, de acordo com o que é estabelecido na Instrução Normativa Nº 2 de 16 de setembro de 2009 da SLTI/MP.</p>
+           </td>
+      </tr>
+      <tr>
+        <td>
+          <p>Declaro que não possuo, em minha cadeia produtiva, empregados executando trabalho degradante ou forçado, observando o disposto nos incisos III e IV do art.1º e no inciso III do art.5º da Constituição Federal.</p>
+           </td>
+      </tr>
+       <tr>
+        <td>
+          <p>Declaro que, conforme disposto no art. 93 da Lei nº 8.213, de 24 de julho de 1991, estou ciente do cumprimento da reserva de cargos prevista em lei para pessoa com deficiência ou para reabilitado da Previdência Social e que, se aplicado ao número de funcionários da minha empresa, atendo às regras de acessibilidade previstas na legislação.</p>
+           </td>
+      </tr>
+      <tr>
+        <td>
+          <p>Declaro sob as penas da Lei, que cumpro a cota de aprendizagem nos termos estabelecidos no art. 429 da CLT.</p>
+           </td>
+      </tr>
+      </tbody>   
+      </table>
+  
+
+<div id="terms">
+  <div class="form-row">
+    <div class="col">
+      <div class="form-check">
+         </div>
+    </div>
+  </div>
+ <div style="text-align:right;">
+ <br/><br/>
+  <p><b> Proposta enviada em <%= l(resource.proposal_send_date) %> por <%= resource.user.name %><b></p>
+ </div>
+ 
+</div>
+<div>

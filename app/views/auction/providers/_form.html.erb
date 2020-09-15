@@ -1,8 +1,10 @@
 <div class="tabs" id="licitation_process">
-
-  <ul>
-    <li><a href="#tab-main">Principal</a></li>
-  </ul>
+<% if params[:notice] %>
+  <div class="notice">
+    <h3 style="color:blue;font-size:120%;"><%= params[:notice] %></h3>
+  </div>
+<% end %>
+  
 
   <div id="tab-main"><%= render 'main', :f => f %></div>
 
