@@ -1,6 +1,11 @@
 $(document).ready(function() {
+  showHideCreditor();
+  showHideCollapseFields();
+
   function isDirectPurchase() {
-    return $('#licitation_process_type_of_purchase_direct_purchase').is(':checked');
+    var direct_purchase = $('#licitation_process_type_of_purchase_direct_purchase').is(':checked'),
+        simplified_licitation = $("#licitation_process_type_of_purchase_licitation_simplified").is(':checked');
+    return direct_purchase || simplified_licitation;
   }
 
   function importPurchaseSolicitationAveragePrice() {
@@ -108,7 +113,7 @@ $(document).ready(function() {
   function showHideCreditor() {
     if ( isDirectPurchase() ) {
       $('.item-creditor').removeClass('hidden');
-      $('.justification').removeClass('hidden');
+      $('.justification').show();
       $('#licitation_process_justification').addClass('required');
       $('#licitation_process_justification').requiredField(true);
       $('#licitation_process_creditor').requiredField(true);
@@ -116,7 +121,7 @@ $(document).ready(function() {
       $('input.creditor-id').attr('disabled', false);
     } else {
       $('.item-creditor').addClass('hidden');
-      $('.justification').addClass('hidden');
+      $('.justification').hide();
       $('#licitation_process_creditor').requiredField(false);
       $('#licitation_process_creditor').removeClass('required');
       $('input.creditor-id').attr('disabled', true);
@@ -189,4 +194,24 @@ $(document).ready(function() {
     $inputs.attr("disabled", true);
     $modals.attr("disabled", true);
   }
+
+
+  //show or hide items fields
+  function showHideCollapseFields(){
+    var $fields_with_errors = $("#items .nested-fields .field_with_errors");
+
+    if($fields_with_errors.length === 0){
+      $("#items .nested-fields .hidden-fields").hide();
+      $("#items .add-nested-record ").hide();
+    }else{
+      $("#show-items-fields").hide();
+    }
+  }
+
+  $("#show-items-fields").click(function () {
+    $("#items .nested-fields .hidden-fields").show();
+    $("#items .add-nested-record ").show();
+    showHideCreditor()
+    $(this).hide();
+  });
 });
