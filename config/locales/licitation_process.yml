@@ -80,7 +80,7 @@ pt-BR:
         expected_value: "Valor Previsto"
         resource_source: "Fonte do Recurso"
         licitation_process: "Processo de Licitação"
-        purchase_solicitation: "Solicitação de Compra"
+        purchase_solicitation: "Número da Solicitação de Compra"
         value: "Valor previsto"
         concurrence: 'Concorrência'
         taken_price: 'Tomada de Preço'
@@ -93,6 +93,7 @@ pt-BR:
         homologation_date:  'Data de Homologação'
         open_date:  'Data de Abertura'
         winning_creditors: 'Fornecedor Vencedor'
+        creditor_for_all_items: 'Busque o Fornecedor dos Itens'
 
   licitation_process:
     messages:

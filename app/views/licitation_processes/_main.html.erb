@@ -9,14 +9,6 @@
 </div>
 
 <div class="row">
-  <div class="col-2">
-    <%= f.input :open_date, input_html:{ disabled: f.object.status != PurchaseProcessStatus::WAITING_FOR_OPEN } %>
-  </div>
-
-  <div class="col">
-    <%= f.input :status, :disabled => true %>
-  </div>
-
   <div class="col">
     <%= f.input :process %>
   </div>
@@ -25,9 +17,17 @@
     <%= f.input :protocol %>
   </div>
 
+  <div class="col-2">
+    <%= f.input :open_date, input_html:{ disabled: f.object.status != PurchaseProcessStatus::WAITING_FOR_OPEN ,tabindex:"-1"} %>
+  </div>
+
   <div class="col-4">
     <%= f.input :purchasing_unit, :as => :modal,:hidden_field => :purchasing_unit_id,
-       :modal_url => modal_purchasing_units_path(:by_situation => 'active')%>
+  :modal_url => modal_purchasing_units_path(:by_situation => 'active')%>
+  </div>
+
+  <div class="col">
+    <%= f.input :status, :disabled => true %>
   </div>
 </div>
 
@@ -123,3 +123,10 @@
     </tbody>
   </table>
 <% end %>
+
+<script>
+  $(function(){
+    $("#licitation_process_open_date").blur()
+  })
+
+</script>

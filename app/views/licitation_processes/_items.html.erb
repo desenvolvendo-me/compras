@@ -1,16 +1,17 @@
  <div id="items">
   <div class="nested-fields add-margin-bottom">
-    <%= hidden_field_tag :item_id, nil, :name => 'licitation_process_item[id]' %>
-    <div class="row">
-      <div class="col justification">
-        <%= f.input :justification, as: :string %>
+    <div class="hidden-fields">
+      <%= hidden_field_tag :item_id, nil, :name => 'licitation_process_item[id]' %>
+      <div class="row">
+        <div class="col justification">
+          <%= f.input :justification, as: :string %>
+        </div>
+        <div class="col">
+          <%= f.input :creditor, as: :auto_complete, source_path: qualified_creditor(f.object),fake: true, hint: f.object.licitation? ? '' : 'Somente fornecedores habilitados'  %>
+        </div>
       </div>
-      <div class="col">
-        <%= f.input :creditor, as: :auto_complete, source_path: qualified_creditor(f.object),fake: true, hint: f.object.licitation? ? '' : 'Somente fornecedores habilitados'  %>
-      </div>
-    </div>
 
-    <div class="yui3-g">
+      <div class="yui3-g">
       <div class="yui3-u-3-8">
         <%= f.input :material, :as => :auto_complete, :fake => true, :required => true, 'data-hidden-field-class' => 'unique' %>
       </div>
@@ -38,9 +39,27 @@
                     :input_html => {'data-decimal' => true, :value => '0,00', 'data-precision' => 2, :maxlength => 15, :class => 'numeric'} %>
       </div>
     </div>
+    </div>
+    <div class="row  items-actions">
+      <div class="col d-flex creditor_for_all_input">
+        <%= f.input :creditor_for_all_items, as: :auto_complete, fake: true,
+                    wrapper_class: 'w-75',
+                    source_path: qualified_creditor(f.object) %>
 
+        <%= button_tag 'OK', type: :button,
+                       :id => 'btn_set_creditor_for_all_items',
+                     :class => 'button field-without-label' %>
+        <%= button_tag 'X', type: :button,
+                       :id => 'btn_cancel_creditor_for_all',
+                       :class => 'button negative field-without-label' %>
+      </div>
 
-    <div class="text-right">
+      <div class="col d-flex justify-content-end">
+        <% if f.object.simplified_processes? %>
+          <%= button_tag 'Atribuir Fornecedor para Todos  os Itens', type: :button,
+                         :class => 'button field-without-label btn_creditor_for_all_items' %>
+        <% end %>
+
         <%= button_tag 'Adicionar Itens', type: :button,
                        :id => 'btn_new_role_unique',
                        :class => 'add-nested-record  button field-without-label',
@@ -48,11 +67,10 @@
                        'data-records' => 'items-records',
                        'data-clear-after-add' => false,
                        'data-disabled' => not_updateable_message %>
-    </div>
-  </div>
 
-  <div class="text-right">
-    <%= button_tag 'Adicionar Itens', type: :button, class:'button primary', :id => 'show-items-fields' %>
+        <%= button_tag 'Adicionar Itens', type: :button, class:'button primary field-without-label', :id => 'show-items-fields' %>
+      </div>
+    </div>
   </div>
 
   <%= f.error :items %>
@@ -112,14 +130,32 @@
   <% end %>
 </div>
 
+ <style>
+   .items-actions .input{
+     margin-bottom: 0;
+   }
+   .creditor_for_all_input{
+     display: none;
+   }
+
+   .items-actions input,button{
+     margin-left:5px;
+   }
+   .items-actions input,button:first-child{
+     margin-left:0;
+   }
+ </style>
+
 <script>
   <% if f.object.persisted? %>
     $(function(){
-      $("#items .nested-fields").hide();
+      $("#items .nested-fields .hidden-fields").hide();
+      $("#items .add-nested-record ").hide();
     });
 
     $("#show-items-fields").click(function () {
-      $("#items .nested-fields").show();
+      $("#items .nested-fields .hidden-fields").show();
+      $("#items .add-nested-record ").show();
       $(".justification").hide();
       $(this).hide();
     });
