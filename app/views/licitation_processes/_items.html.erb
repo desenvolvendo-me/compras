@@ -147,24 +147,5 @@
  </style>
 
 <script>
-  <% if f.object.persisted? %>
-    $(function(){
-      $("#items .nested-fields .hidden-fields").hide();
-      $("#items .add-nested-record ").hide();
-    });
 
-    $("#show-items-fields").click(function () {
-      $("#items .nested-fields .hidden-fields").show();
-      $("#items .add-nested-record ").show();
-      $(".justification").hide();
-      $(this).hide();
-    });
-
-  <% else %>
-
-  $(function(){
-    $("#items #show-items-fields").hide();
-  });
-
-  <% end %>
 </script>
