@@ -61,7 +61,7 @@
       <tr>
         <td><%= item.material %></td>
         <td><%= item.material.detailed_description %></td>
-        <td><%= number_with_precision @unit_price = PurchaseProcessItem.where(licitation_process_id:resource.supply_order.licitation_process_id,material_id:item.material_id)[0].unit_price %></td>
+        <td><%= number_with_precision @unit_price = PurchaseProcessItem.where(licitation_process_id:resource.supply_order.licitation_process_id,material_id:item.material_id)[0]&.unit_price %></td>
         <td><%= item.quantity %></td>
         <td><%= number_with_precision @unit_price * item.quantity %></td>
         <% @total += @unit_price * item.quantity %>
