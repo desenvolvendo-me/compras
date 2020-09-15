@@ -108,7 +108,7 @@ $(document).ready(function() {
   function showHideCreditor() {
     if ( isDirectPurchase() ) {
       $('.item-creditor').removeClass('hidden');
-      $('.justification').removeClass('hidden');
+      $('.justification').show();
       $('#licitation_process_justification').addClass('required');
       $('#licitation_process_justification').requiredField(true);
       $('#licitation_process_creditor').requiredField(true);
