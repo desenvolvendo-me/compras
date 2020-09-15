@@ -3,6 +3,10 @@ class Auction::AuctionsController < Auction::BaseController
   skip_before_filter :authorize_resource!, :except => [:create, :destroy]
   layout "electronic_auction"
 
+  before_filter :get_appeals, only:[:index]
+
+  has_scope :term
+
   def new
     object = build_resource
     object.year = Time.now.year
@@ -39,5 +43,11 @@ class Auction::AuctionsController < Auction::BaseController
 
   def show
     render layout: "document"
+  end
+
+  private
+
+  def get_appeals
+    @appeals = AuctionAppeal.where{ viewed.eq(nil) | viewed.eq(false) }
   end
 end

@@ -1,10 +1,37 @@
+<% if @appeals %>
+  <div id="alerts-appeals">
+    <% @appeals.each do |appeal| %>
+      <div class="alert alert-warning">
+        <span class='alert-o'>Alerta: </span>
+        <span class="alert-b">Pregão: <%= appeal.auction %> possui Interposição de Recurso </span>
+        <%= link_to 'Visualizar', mark_viewed_auction_appeals_path(auction_appeal_id: appeal.id) %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
 <div style="padding-left: 15px;" >
-<h2 id="title">
-  <%= plural %>
-</h2>
+  <h2 id="title">
+    <%= plural %>
+  </h2>
 </div>
 <%= render 'actions' %>
 
 <%= render index_list_partial %>
 
 <%= paginate %>
+
+<style>
+  #alerts-appeals{
+    width: 94%;
+    margin-top: -52px;
+  }
+  .alert-o{
+    color: #ff7f68;
+    font-weight: bolder
+  }
+  .alert-b{
+    color: #3f48cc;
+    font-weight: bolder
+  }
+</style>

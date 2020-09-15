@@ -1013,6 +1013,14 @@ Compras::Application.routes.draw do
       end
     end
 
+    resources :appeals do
+      collection do
+        get :filter
+        get :modal
+        get :mark_viewed
+      end
+    end
+
     resource :bids do
       collection do
         get :filter

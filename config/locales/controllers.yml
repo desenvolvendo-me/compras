@@ -119,6 +119,7 @@ pt-BR:
     auction_management_objects: "Objeto"
     auction_auction_creditor_proposals: "Propostas de Credores"
     auction_bids: "Disputa"
+    auction_appeals: "Intenção de Recurso"
 
   menu:
     <<: *controllers

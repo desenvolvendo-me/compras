@@ -1,0 +1,21 @@
+pt-BR:
+  activerecord:
+    models:
+      auction_appeal:
+        one: "Interposição de Recurso"
+        other: "Interposição de Recursos"
+
+    attributes:
+      auction_appeal:
+        auction: "Pregão"
+        appeal_date: "Data do recurso"
+        related: "Referente ao"
+        person: "Autor"
+        valid_reason: "Motivo fundamentado do recurso"
+        licitation_committee_opinion: "Parecer da comissão de licitação"
+        situation: "Situação"
+        auction_description: "Objeto do Processo"
+        new_envelope_opening_date: "Nova Data da Abertura dos Envelopes"
+        new_envelope_opening_time: "Nova Hora da Abertura dos Envelopes"
+        auction_committee_opinion: "Parecer da Comissão de Licitação"
+        appeal_file: "Anexar Recurso"
