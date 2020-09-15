@@ -121,7 +121,7 @@ $(document).ready(function() {
       $('input.creditor-id').attr('disabled', false);
     } else {
       $('.item-creditor').addClass('hidden');
-      $('.justification').addClass('hidden');
+      $('.justification').hide();
       $('#licitation_process_creditor').requiredField(false);
       $('#licitation_process_creditor').removeClass('required');
       $('input.creditor-id').attr('disabled', true);
