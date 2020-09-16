@@ -26,7 +26,7 @@ pt-BR:
         budget_allocations_total_value: "Soma dos Valores das Dotações"
         budget_allocation_id: "Id"
         total_items_value: "Valor Total dos Itens"
-        code: "Código"
+        code: "Número"
         quantity_by_material: 'Quantidade'
         purchase_solicitation: 'Solicitação de Compra'
         purchase_form: 'Ficha de Compra'
