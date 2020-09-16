@@ -17,6 +17,7 @@ class Street < InscriptioCursualis::Street
 
   scope :neighborhood, lambda { |neighborhood| joins(:neighborhoods).where('neighborhoods.id = ?', neighborhood) }
   scope :by_zip_code, lambda { |param| where {zip_code.like("%#{param}%")} }
+  scope :by_city, lambda {|param| where {city_id.eq param} }
 
   scope :term, lambda {|q|
     where {name.like("%#{q}%")}
