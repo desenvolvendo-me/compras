@@ -4,6 +4,7 @@ class NeighborhoodsController < CrudController
   skip_before_filter :authenticate_user!, :only => [:index]
   skip_before_filter :authorize_resource!, :only => [:index]
   has_scope :street_id
+  has_scope :by_city
   has_scope :term
 
   def by_name_and_city
