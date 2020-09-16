@@ -2,7 +2,7 @@
 <%= a.input :addressable_type, :as => :hidden %>
 
 <div class="yui3-g">
-<div class="yui3-u-1-6">
+  <div class="yui3-u-1-6">
     <%= a.input :zip_code %>
   </div>
   <div class="yui3-u-1-2">
@@ -31,47 +31,201 @@
 
 
 <script>
+  $("[name$='[zip_code]']").change(function (event) {
+    var zip_code = this.value.replace('-', ''),
+      url = 'https://viacep.com.br/ws/' + zip_code + '/json/',
+      $city = $("[name$='[city]']"),
+      $state = $("[name$='[state]']");
 
+    if (zip_code.length < 8) {
+      alert('O formato do cnpj esta incorreto');
+      return;
+    }
 
-    $("#<%= a.sanitized_object_name %>_street_id").on('change', function (event, data) {
-       fillAdress(data);
-    });
+    $.ajax({
+      url: url,
+      success: function (response) {
 
-    // $("#<%#= a.sanitized_object_name %>_zip_code").on('change', function (event) {
-    //  var zip_code = $(this).val(),
-    //      url = '<%#= streets_path %>' + '?',
-    //      params = {by_zip_code: zip_code};
+        if (response.logradouro === '') {
+          alert('Não foram encontrados endereços associados ao CEP digitado');
+          return;
+        }
 
-    //   $.getIndex(url, params, function (streets) {
-    //     debugger
-    //     if(streets.length === 1)
-    //       fillAdress(streets[0])
-    //   });
-    // });
-
-    function fillAdress(data){
-      var city         = data.city,
-          state        = data.state,
-          neighborhoods = data.neighborhoods;
-
-      $("#<%= a.sanitized_object_name %>_zip_code").val(data.zip_code);
-      if(city){
-        $("#<%= a.sanitized_object_name %>_city").val(city.name);
-        $("#<%= a.sanitized_object_name %>_city_id").val(city.id);
-      }
-      if(state){
-        $("#<%= a.sanitized_object_name %>_state_id").val(state.id);
-        $("#<%= a.sanitized_object_name %>_state").val(state.acronym);
-      }
-      if(neighborhoods.length === 1){
-        $("#<%= a.sanitized_object_name %>_neighborhood_id").val(neighborhoods[0].id);
-        $("#<%= a.sanitized_object_name %>_neighborhood").val(neighborhoods[0].name);
-      }else{
-        var url = '<%= neighborhoods_path %>' + '?',
-          params = {street_id: data.id};
+        var url = Routes.by_name_and_state_cities + "?",
+          params = {uf: response.uf, local: response.localidade};
 
         url += $.param(params);
-        $("#<%= a.sanitized_object_name %>_neighborhood").data('source', url);
+
+        // pesquisa por cidade no banco
+        $.ajax({
+          url: url,
+          async: false,
+          type: 'GET',
+          dataType:'JSON',
+          success: function (data) {
+            var city = data[0],
+              cityName = city.name;
+
+            if (city.id) {
+              $city.val(cityName);
+              $state.val(response.uf);
+              fetchNeighborhood(response, city);
+            }
+          }
+        });
       }
+    });
+
+  });
+
+  /** busca pelo bairro com base na cidade e nome do bairro **/
+  function fetchNeighborhood(response, city){
+    var neighborhood_path         = Routes.neighborhoods + "?",
+        neighborhood_by_city_path = neighborhood_path + $.param({by_city: city.id});
+
+    // set url autocomplete de bairro
+    $("[name$='[neighborhood]']").val("").data('source', neighborhood_by_city_path);
+
+    // Busca por bairro cadastrado
+    var params = {by_city: city.id, term: response.bairro};
+
+    var neighborhood_by_city_by_term = neighborhood_path + $.param(params);
+
+    $.ajax({
+      url: neighborhood_by_city_by_term,
+      async: false,
+      type: 'GET',
+      dataType: 'JSON',
+      success: function (data) {
+        fillOrCreateNeighborhood(data[0], response, city)
+      }
+    });
+
+
+  }
+
+  /** preenche os dados de bairro no campo ou se não tiver cadastrado cria um novo **/
+  function fillOrCreateNeighborhood(neighborhood, response,  city){
+    var $neighborhood    = $("[name$='[neighborhood]']"),
+        $neighborhood_id = $("[name$='[neighborhood_id]']");
+
+    if(neighborhood === undefined){
+      $.when( createNeighborhood(response, city) ).done(function ( data, textStatus, jqXHR ) {
+        if(textStatus === 'success'){
+          $neighborhood.val(data.name);
+          $neighborhood_id.val(data.id);
+          fetchStreet(response, data, city);
+        }else{
+          alert('Houve um erro interno por favor contato o administrator do sistema.')
+        }
+      });
+
+    }else{
+      $neighborhood.val(neighborhood.value);
+      $neighborhood_id.val(neighborhood.id);
+
+      fetchStreet(response, neighborhood, city);
     }
+  }
+
+  /** Busca por rua cadastrada **/
+  function fetchStreet(response, neighborhood, city){
+    var street_path = Routes.streets + "?",
+        params      = {by_city: city.id, by_neighborhood: neighborhood.id},
+        logradouro  = response.logradouro.split(' ').slice(1).join(' ');
+
+    $("[name$='[street]']").data('source', street_path);
+
+    params['term'] = logradouro;
+    street_path += $.param(params);
+
+    $.ajax({
+      url: street_path,
+      async: false,
+      type: 'GET',
+      dataType: 'JSON',
+      success: function (data) {
+        fillOrCreateStreet(data[0], response, neighborhood, city);
+      }
+    });
+  }
+
+  /** preenche os dados de rua no campo ou se não tiver cadastrado cria um novo **/
+  function fillOrCreateStreet(street, response, neighborhood,  city){
+    var $street    = $("[name$='[street]']"),
+        $street_id = $("[name$='[street_id]']");
+
+    if(street === undefined){
+      $.when( createStreet(response, neighborhood,  city) ).done(function ( data, textStatus, jqXHR ) {
+        if(textStatus === 'success') {
+          $street.val(data.name);
+          $street_id.val(data.id);
+        }else{
+          alert('Houve um erro interno por favor contato o administrator do sistema.')
+        }
+      });
+
+    }else{
+      $street.val(street.value);
+      $street_id.val(street.id);
+    }
+  }
+
+  function createNeighborhood(response, city){
+    var data = {neighborhood:{name: response.bairro, city_id: city.id}};
+    return $.ajax({
+      url: Routes.neighborhoods,
+      data: data,
+      dataType: 'json',
+      type: 'Post',
+      beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $("[name='authenticity_token']").val())},
+    });
+  }
+
+  function createStreet(response, neighborhood, city){
+    var data = {street:{neighborhood_ids: [neighborhood.id],
+                        city_id: city.id,
+                        street_type_id: 102,
+                        name: response.logradouro}};
+    return $.ajax({
+      url: Routes.streets,
+      data: data,
+      async: false,
+      dataType: 'json',
+      type: 'Post',
+      beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $("[name='authenticity_token']").val())},
+    });
+  }
+
+
+  /** Preenche Endereço com base na escolha da rua **/
+  $("#<%= a.sanitized_object_name %>_street_id").on('change', function (event, data) {
+    fillAdress(data);
+  });
+
+  function fillAdress(data){
+    var city         = data.city,
+      state        = data.state,
+      neighborhoods = data.neighborhoods;
+
+    $("#<%= a.sanitized_object_name %>_zip_code").val(data.zip_code);
+    if(city){
+      $("#<%= a.sanitized_object_name %>_city").val(city.name);
+      $("#<%= a.sanitized_object_name %>_city_id").val(city.id);
+    }
+    if(state){
+      $("#<%= a.sanitized_object_name %>_state_id").val(state.id);
+      $("#<%= a.sanitized_object_name %>_state").val(state.acronym);
+    }
+    if(neighborhoods.length === 1){
+      $("#<%= a.sanitized_object_name %>_neighborhood_id").val(neighborhoods[0].id);
+      $("#<%= a.sanitized_object_name %>_neighborhood").val(neighborhoods[0].name);
+    }else{
+      var url = '<%= neighborhoods_path %>' + '?',
+        params = {street_id: data.id};
+
+      url += $.param(params);
+      $("#<%= a.sanitized_object_name %>_neighborhood").data('source', url);
+    }
+  }
 </script>
