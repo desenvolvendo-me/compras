@@ -13,6 +13,10 @@ class Neighborhood < InscriptioCursualis::Neighborhood
     where {name.like("%#{q}%")}
   }
 
+  scope :by_city, lambda{|q|
+    where {city_id.eq q}
+  }
+
   protected
 
   def validate_street_relationship
