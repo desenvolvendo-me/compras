@@ -1,35 +1,40 @@
-<table class="records" id="administrative-process-budget-allocation-records">
-  <thead>
-  <th><%= LicitationProcess.human_attribute_name :creditor %></th>
-  <th>Propostas</th>
-  <th>Valor da Proposta</th>
-  <th>Desclassificar</th>
-  <th>Desclassificada?</th>
-  <th></th>
-  </thead>
+<%if  f.object.decorator.must_have_creditors_and_items.blank? %>
+  <table class="records" id="administrative-process-budget-allocation-records">
+    <thead>
+    <th><%= LicitationProcess.human_attribute_name :creditor %></th>
+    <th>Propostas</th>
+    <th>Valor da Proposta</th>
+    <th>Desclassificar</th>
+    <th>Desclassificada?</th>
+    <th></th>
+    </thead>
 
-  <tbody>
-  <%= render partial: 'purchase_process_proposals/creditors_rows', collection: resource.creditors_enabled.includes(:purchase_process_creditor_proposals), as: :creditor %>
-  </tbody>
-</table>
+    <tbody>
+    <%= render partial: 'purchase_process_proposals/creditors_rows', collection: resource.creditors_enabled.includes(:purchase_process_creditor_proposals), as: :creditor %>
+    </tbody>
+  </table>
 
-<script>
+  <script>
 
-  $(".delete-proposal").click(function(){
-    var url = Routes.purchase_process_creditor_proposal,
-      params = {
-        licitation_process_id: $("#licitation_process_id").val(), creditor_id: $(this).data('creditor')
-      };
+    $(".delete-proposal").click(function(){
+      var url = Routes.purchase_process_creditor_proposal,
+        params = {
+          licitation_process_id: $("#licitation_process_id").val(), creditor_id: $(this).data('creditor')
+        };
 
-    url += "?" + $.param(params);
+      url += "?" + $.param(params);
 
-    $.ajax({
-      url: url,
-      type: 'DELETE',
-      dataType: 'JSON',
-      success: function(result) {
-        window.location.reload();
-      }
-    });
-  })
-</script>
+      $.ajax({
+        url: url,
+        type: 'DELETE',
+        dataType: 'JSON',
+        success: function(result) {
+          window.location.reload();
+        }
+      });
+    })
+  </script>
+
+<% else %>
+  <%= f.object.decorator.must_have_creditors_and_items %>
+<% end %>
