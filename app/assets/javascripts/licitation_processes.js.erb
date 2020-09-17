@@ -72,7 +72,31 @@ $(document).ready(function () {
       $('.field-to-trading').addClass('hidden');
       $('.not-fields-to-trading').removeClass('hidden');
     }
-  };
+  }
+
+  //filtra o campo "Publicação do(a)" com base no tipo do processo de compra
+  function filterPublicationOf(){
+    var publication_of_simplified_process = <%= PublicationOf.allowed_for_direct_purchase %>,
+        publication_of_licitation         = <%= PublicationOf.to_a.sort { |a,b| a[0] <=> b[0] } %>,
+        $publicationOf                    = $("[name$='[publication_of]']"),
+        licitation_checked                = $('#licitation_process_type_of_purchase_licitation').is(':checked'),
+        options;
+
+    $publicationOf.html('');
+
+    if(licitation_checked)
+      options = publication_of_licitation;
+
+    if(!licitation_checked)
+      options = publication_of_simplified_process;
+
+    _(options).each(function(plublicationOf) {
+      $publicationOf.append(function() {
+        return $("<option>").text(plublicationOf[0])
+          .val(plublicationOf[1]);
+      });
+    });
+  }
 
   $('form.licitation_process').on('change', '#licitation_process_budget_allocation_year', function () {
     setBudgetAllocationSource();
@@ -83,6 +107,7 @@ $(document).ready(function () {
     var $el = $('#licitation_process_modality:visible, #licitation_process_type_of_removal:visible');
     toogleVisibilityFieldsToTrading($el);
     toogleVisibilityFieldsToTradingAndConcurrence($el);
+    filterPublicationOf();
   });
 
   $('#licitation_process_modality, #licitation_process_type_of_removal').on('change', function () {
