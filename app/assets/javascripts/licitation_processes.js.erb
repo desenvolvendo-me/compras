@@ -24,6 +24,7 @@ $(document).ready(function () {
       $('.stage_of_bids_date').removeClass('hidden');
       $('.authorization_envelope_opening_date').removeClass('hidden');
       $('.expiration').removeClass('hidden');
+      $("#proposals").show();
     } else {
       $('div.modality').addClass('hidden');
       $('div.licitation_process_judgment_form_id').addClass('hidden');
@@ -33,7 +34,7 @@ $(document).ready(function () {
       $('label[for="licitation_process_modality_number"]').html('Nº Modalidade');
       $('label[for="licitation_process_unit_price"]').html('Valor unitário');
       $('a[href="#tab-items"]').html("Itens / Justificativa");
-      $('#licitation_process_modality').val('');
+      $('#licitation_process_modality').val('').trigger('change');
       $('#legal_reasons_tab').show();
       $('.envelope_delivery_date').addClass('hidden');
       $('.proposal_envelope_opening_date').addClass('hidden');
@@ -41,8 +42,9 @@ $(document).ready(function () {
       $('.stage_of_bids_date').addClass('hidden');
       $('.authorization_envelope_opening_date').addClass('hidden');
       $('.expiration').addClass('hidden');
+      $("#proposals").hide();
     }
-  };
+  }
 
   function toogleVisibilityFieldsToTradingAndConcurrence($el) {
     if (($el.val() == '<%= Modality::TRADING %>') || ($el.val() == '<%= Modality::CONCURRENCE %>')) {
@@ -50,7 +52,7 @@ $(document).ready(function () {
     } else {
       $('.fields-to-trading-and-concurrence').addClass('hidden');
     }
-  };
+  }
 
   function setBudgetAllocationSource() {
     var url = Routes.budget_allocations,
@@ -98,6 +100,33 @@ $(document).ready(function () {
     });
   }
 
+  // mostra e esconde as tabs dependendo do tipoda modalidade
+  function toogleVisiblityTabs($el){
+    if ($el.val() == '<%= Modality::TRADING %>'){
+      $("#purchase_process_accreditations").closest('li').show();
+      $("#tradings").closest('li').show();
+      $("#realignment_prices").closest('li').show();
+      $("#trading_negotiation").closest('li').show();
+    }else{
+      $("#purchase_process_accreditations").closest('li').hide();
+      $("#tradings").closest('li').hide();
+      $("#realignment_prices").closest('li').hide();
+      $("#trading_negotiation").closest('li').hide();
+    }
+  }
+
+
+  $("#licitation_process_modality").change(function(){
+    toogleVisibilityFieldsToTrading($(this));
+    toogleVisibilityFieldsToTradingAndConcurrence($(this));
+    toogleVisiblityTabs($(this));
+  })
+
+  $("#licitation_process_type_of_removal").change(function(){
+    toogleVisibilityFieldsToTrading($(this));
+    toogleVisibilityFieldsToTradingAndConcurrence($(this));
+  })
+
   $('form.licitation_process').on('change', '#licitation_process_budget_allocation_year', function () {
     setBudgetAllocationSource();
   });
@@ -108,11 +137,6 @@ $(document).ready(function () {
     toogleVisibilityFieldsToTrading($el);
     toogleVisibilityFieldsToTradingAndConcurrence($el);
     filterPublicationOf();
-  });
-
-  $('#licitation_process_modality, #licitation_process_type_of_removal').on('change', function () {
-    toogleVisibilityFieldsToTrading($(this));
-    toogleVisibilityFieldsToTradingAndConcurrence($(this));
   });
 
   organizesModalities();
