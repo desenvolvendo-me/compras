@@ -9,7 +9,8 @@ class MaterialClass < Unico::Model
   has_many :materials, :dependent => :restrict
 
   validates :mask,format: { with:  /^[9.]{1,45}$/i }
-
+  
+  validates :parent_class_number, :presence => true
   validates :description, :masked_number, :presence => true
   validates :class_number, :uniqueness => { :allow_blank => true }
   validates :number, :numericality => { :allow_blank => true }
