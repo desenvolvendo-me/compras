@@ -80,6 +80,7 @@
     <% end %>
   <% end %>
 </div>
+<%= f.object.errors.full_messages %>
 
 <script>
   function filterJudgmentForm() {
@@ -193,7 +194,7 @@
     }
   });
 
-  <% if resource.updateable? && resource.approved? %>
+  <% if resource.approved? %>
     $(function(){
       $('form.licitation_process [data-disabled]').on('click', function(event){
         event.stopImmediatePropagation();
