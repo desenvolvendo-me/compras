@@ -131,7 +131,7 @@ class LicitationProcess < Compras::Model
   validates :goal, :licensor_rights_and_liabilities, :licensee_rights_and_liabilities,
             :presence => true, :if => :concessions_or_permits?
 
-  validates :type_of_removal, :justification, :justification_and_legal, :presence => true, :if => :simplified_processes?
+  validates :type_of_removal, :justification, :presence => true, :if => :simplified_processes?
   validates :process, uniqueness: {scope: :year}
   validates :budget_allocation_year, numericality: {greater_than_or_equal_to: :year}, allow_blank: true
   validates :tied_creditor_proposals, no_duplication: {
