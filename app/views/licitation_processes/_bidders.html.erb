@@ -1,105 +1,110 @@
+<% unless f.object.decorator.enabled_bidders? || !f.object.new_record? %>
 
-<%= button_tag 'Adicionar Habilitação', type: :button,
-             class: "button", id: "add-bidder" %>
+  <%= button_tag 'Adicionar Habilitação', type: :button,
+                 class: "button", id: "add-bidder" %>
 
-<%= button_tag 'Cancelar', type: :button,
-               class: "button", id: "cancel-bidder" %>
+  <%= button_tag 'Cancelar', type: :button,
+                 class: "button", id: "cancel-bidder" %>
 
-<div id="bidder-fields"></div>
+  <div id="bidder-fields"></div>
 
-<% column_names = BidderDecorator.header_attributes.to_a %>
+  <% column_names = BidderDecorator.header_attributes.to_a %>
 
-<table id='bidders-records' class="records">
-  <thead>
-  <tr>
-    <% column_names.each do |column_name| %>
-      <th class="<%= column_name %>"><%= Bidder.human_attribute_name column_name %></th>
-    <% end %>
-    <th></th>
-    <th></th>
-  </tr>
-  </thead>
-
-  <tbody class="<%= f.sanitized_object_name %>_document_types_records">
-  <% f.object.bidders.each do |bidder| %>
+  <table id='bidders-records' class="records">
+    <thead>
     <tr>
       <% column_names.each do |column_name| %>
-        <td>
-          <%=  bidder.decorator.send(column_name) %>
-        </td>
+        <th class="<%= column_name %>"><%= Bidder.human_attribute_name column_name %></th>
       <% end %>
-      <td>
-        <%= link_to 'Editar', '#', 'data-id': bidder.id,  class: 'edit-bidder' %>
-      </td>
-      <td>
-        <%= link_to 'Remover', '#', 'data-id': bidder.id, class: 'remove-bidder' %>
-      </td>
+      <th></th>
+      <th></th>
     </tr>
+    </thead>
+
+    <tbody class="<%= f.sanitized_object_name %>_document_types_records">
+    <% f.object.bidders.each do |bidder| %>
+      <tr>
+        <% column_names.each do |column_name| %>
+          <td>
+            <%=  bidder.decorator.send(column_name) %>
+          </td>
+        <% end %>
+        <td>
+          <%= link_to 'Editar', '#', 'data-id': bidder.id,  class: 'edit-bidder' %>
+        </td>
+        <td>
+          <%= link_to 'Remover', '#', 'data-id': bidder.id, class: 'remove-bidder' %>
+        </td>
+      </tr>
+    <% end %>
+
+    </tbody>
+  </table>
+
+  <%= mustache 'bidders-template' do %>
+    <%= f.association :bidders_attributes, :collection => f.object.bidders.build, :index => '{{uuid_bidder}}' do |p| %>
+      <%= render 'bidders/form', :f => p %>
+    <% end %>
   <% end %>
 
-  </tbody>
-</table>
 
-<%= mustache 'bidders-template' do %>
-  <%= f.association :bidders_attributes, :collection => f.object.bidders.build, :index => '{{uuid_bidder}}' do |p| %>
-    <%= render 'bidders/form', :f => p %>
-  <% end %>
-<% end %>
+  <script type="text/javascript" charset="utf-8">
 
+    function initMustache(){
+      $("#bidder_documents_template").nestedForm({
+        add: '.add_bidder_document',
+        remove: '.remove_bidder_document',
+        fieldsWrapper: '.bidder_document',
+        target: '#bidder_documents',
+        uuid: 'uuid_documents',
+        appendItem: true
+      });
 
-<script type="text/javascript" charset="utf-8">
+      $(".tabs").tabs();
+      $("#bidders-records, #add-bidder").hide();
+      $("#cancel-bidder").show();
+    }
 
-  function initMustache(){
-    $("#bidder_documents_template").nestedForm({
-      add: '.add_bidder_document',
-      remove: '.remove_bidder_document',
-      fieldsWrapper: '.bidder_document',
-      target: '#bidder_documents',
-      uuid: 'uuid_documents',
-      appendItem: true
+    $("#cancel-bidder").click(function(){
+      $("#bidders-records, #add-bidder").show();
+      $(this).hide();
+      $("#bidder-fields").html('');
     });
 
-    $(".tabs").tabs();
-    $("#bidders-records, #add-bidder").hide();
-    $("#cancel-bidder").show();
-  }
+    $(function(){
 
-  $("#cancel-bidder").click(function(){
-    $("#bidders-records, #add-bidder").show();
-    $(this).hide();
-    $("#bidder-fields").html('');
-  });
+      $(document).on('click', 'button.remove_bidder_document, button.add_bidder_document', function(event) {
+        event.preventDefault()
+      });
 
-  $(function(){
+      $("#add-bidder").click(function() {
+        $('#bidder-fields').append($('#bidders-template').mustache({uuid_bidder: _.uniqueId('fresh-')}));
+        initMustache();
+      });
 
-    $(document).on('click', 'button.remove_bidder_document, button.add_bidder_document', function(event) {
-      event.preventDefault()
-    });
-
-    $("#add-bidder").click(function() {
-      $('#bidder-fields').append($('#bidders-template').mustache({uuid_bidder: _.uniqueId('fresh-')}));
-      initMustache();
-    });
-
-    $(".edit-bidder").click(function() {
-      var url = Routes.add_bidders_licitation_processes,
+      $(".edit-bidder").click(function() {
+        var url = Routes.add_bidders_licitation_processes,
           params = {
             id: <%= f.object.id %>, bidder_id: $(this).data('id')
           };
 
-      url += "?" + $.param(params);
+        url += "?" + $.param(params);
 
-      $.get(url, function (data) {
-        $("#bidder-fields").html($(data).html());
-        initMustache();
+        $.get(url, function (data) {
+          $("#bidder-fields").html($(data).html());
+          initMustache();
+        })
       })
     })
-  })
-</script>
+  </script>
 
-<style>
-  #cancel-bidder{
-    display: none;
-    float: right;
-  }
-</style>
+  <style>
+    #cancel-bidder{
+      display: none;
+      float: right;
+    }
+  </style>
+
+<% else %>
+  <%=  f.object.decorator.enabled_bidders? %>
+<% end %>
