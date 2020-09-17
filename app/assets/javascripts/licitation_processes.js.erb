@@ -309,4 +309,115 @@ $(document).ready(function () {
       $("#items-records tbody [name$='[creditor_id]']").val($creditor_for_all_id.val());
     }
   })
+
+
+
+
+
+
+  /******************* *****************/
+  function filterJudgmentForm() {
+    var judgmentFormGroups    = <%= JudgmentFormFilter.new.by_modality.to_json.html_safe %>,
+      modality              = $('#licitation_process_modality').val(),
+      priceRegistration     = $('#licitation_process_price_registration').is(':checked'),
+      currentJudgmentFormId = $('#current_judgment_form_id').val(),
+      judgmentForms;
+
+    $("#licitation_process_judgment_form_id").append(function() {
+      return $("<option>").text('').val('');
+    });
+
+    if (modality) {
+      if (priceRegistration) {
+        judgmentForms = judgmentFormGroups.with_price_registration[modality];
+      } else {
+        judgmentForms = judgmentFormGroups.without_price_registration[modality];
+      }
+
+      _(judgmentForms).each(function(judgmentForm) {
+        $("#licitation_process_judgment_form_id").append(function() {
+          return $("<option>").text(judgmentForm.description)
+            .val(judgmentForm.id)
+            .data('kind', judgmentForm.kind);
+        });
+      });
+    }
+
+    if (currentJudgmentFormId) {
+      $("#licitation_process_judgment_form_id option").each(function() {
+        if ( $(this).val() == currentJudgmentFormId ){
+          $("#licitation_process_judgment_form_id").val(currentJudgmentFormId);
+        }
+      });
+    }
+  }
+
+  function filterModalities(objectType) {
+    var modalitiesByObjectType = <%= Modality.by_object_type.to_json.html_safe %>,
+      validGroup             = _(modalitiesByObjectType[objectType]),
+      currentModality        = $("#current_modality_id").val();
+
+    $("#licitation_process_modality").empty();
+
+    $("#licitation_process_modality").append(function() {
+      return $("<option>").text('').val('');
+    });
+
+    if (!validGroup.isUndefined() && !validGroup.isEmpty()){
+      validGroup.each(function(modality) {
+        $("#licitation_process_modality").append(function() {
+          if (modality[1] == currentModality) {
+            return $("<option>").text(modality[0]).val(modality[1]).attr('selected', 'selected');
+          } else {
+            return $("<option>").text(modality[0]).val(modality[1]);
+          }
+        });
+      });
+    }
+  }
+
+  function disableModalities() {
+    $('#licitation_process_modality').attr("disabled", "disabled");
+  }
+
+  function enableModalities() {
+    $('#licitation_process_modality').removeAttr("disabled");
+  }
+
+  $('form.licitation_process').on('change', '.object-type-select', function() {
+    $('#licitation_process_modality').html('');
+
+    var objectType = $(this).val();
+    if (objectType) {
+      filterModalities(objectType);
+      enableModalities();
+    } else {
+      disableModalities();
+    }
+  });
+
+  if ( $(".object-type-select").val() ) {
+    filterModalities( $(".object-type-select").val() );
+  } else {
+    disableModalities();
+  }
+
+  filterJudgmentForm();
+  if ($('#licitation_process_budget_allocation_year').val() == ''){
+    disableBudgetAllocation();
+  }
+
+  $('#licitation_process_modality, #licitation_process_price_registration').on('change', function() {
+    filterJudgmentForm();
+  });
+
+  $('form.licitation_process').on('change', '#licitation_process_budget_allocation_year', function(){
+    if ($('#licitation_process_budget_allocation_year').val() == ''){
+      disableBudgetAllocation();
+    }else{
+      enableBudgetAllocation();
+    }
+  });
+
+
 });
