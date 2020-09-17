@@ -143,7 +143,6 @@ class LicitationProcess < Compras::Model
       message: :material_cannot_be_duplicated_by_creditor
   }
   validate :validate_bidders_before_edital_publication
-  validate :validate_updates, :unless => :updateable?
   validate :validate_proposal_envelope_opening_date, :on => :update, :if => :licitation?
   validate :validate_the_year_to_processe_date_are_the_same, :on => :update
   validate :validate_total_items
@@ -315,10 +314,6 @@ class LicitationProcess < Compras::Model
   def envelope_opening?
     return unless proposal_envelope_opening_date
     proposal_envelope_opening_date == Date.current
-  end
-
-  def updateable?
-    new_record? || publications.current_updateable?
   end
 
   def all_licitation_process_classifications
@@ -531,12 +526,6 @@ class LicitationProcess < Compras::Model
 
   def proposal_envelope_opening_date_limit
     PurchaseProcessProposalEnvelopeOpeningDateCalculator.calculate(self)
-  end
-
-  def validate_updates
-    if changed_attributes.any?
-      errors.add(:base, :cannot_be_edited)
-    end
   end
 
   def first_ratification
