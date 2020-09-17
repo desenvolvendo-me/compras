@@ -1,4 +1,4 @@
- <div id="items">
+<div id="items">
   <div class="nested-fields add-margin-bottom">
     <div class="hidden-fields">
       <%= hidden_field_tag :item_id, nil, :name => 'licitation_process_item[id]' %>
@@ -12,33 +12,33 @@
       </div>
 
       <div class="yui3-g">
-      <div class="yui3-u-3-8">
-        <%= f.input :material, :as => :auto_complete, :fake => true, :required => true, 'data-hidden-field-class' => 'unique' %>
-      </div>
+        <div class="yui3-u-3-8">
+          <%= f.input :material, :as => :auto_complete, :fake => true, :required => true, 'data-hidden-field-class' => 'unique' %>
+        </div>
 
-      <div class="yui3-u-1-8">
-        <%= f.input :lot, :as => :fake, :required => true %>
-      </div>
+        <div class="yui3-u-1-8">
+          <%= f.input :lot, :as => :fake, :required => true %>
+        </div>
 
-      <div class="yui3-u-1-8">
-        <%= f.input :reference_unit, :as => :fake, :disabled => true %>
-      </div>
+        <div class="yui3-u-1-8">
+          <%= f.input :reference_unit, :as => :fake, :disabled => true %>
+        </div>
 
-      <div class="yui3-u-1-8">
-        <%= f.input :quantity, :as => :fake, :required => true,
-                    :input_html => {'data-numeric' => true, :maxlength => 15, :class => 'numeric integer'} %>
-      </div>
+        <div class="yui3-u-1-8">
+          <%= f.input :quantity, :as => :fake, :required => true,
+                      :input_html => {'data-numeric' => true, :maxlength => 15, :class => 'numeric integer'} %>
+        </div>
 
-      <div class="yui3-u-1-8">
-        <%= f.input :unit_price, :as => :fake,
-                    :input_html => {'data-decimal' => true, :value => '0,00', 'data-precision' => 2, :maxlength => 15, :class => 'numeric'} %>
-      </div>
+        <div class="yui3-u-1-8">
+          <%= f.input :unit_price, :as => :fake,
+                      :input_html => {'data-decimal' => true, :value => '0,00', 'data-precision' => 2, :maxlength => 15, :class => 'numeric'} %>
+        </div>
 
-      <div class="yui3-u-1-8">
-        <%= f.input :estimated_total_price, :as => :fake,
-                    :input_html => {'data-decimal' => true, :value => '0,00', 'data-precision' => 2, :maxlength => 15, :class => 'numeric'} %>
+        <div class="yui3-u-1-8">
+          <%= f.input :estimated_total_price, :as => :fake,
+                      :input_html => {'data-decimal' => true, :value => '0,00', 'data-precision' => 2, :maxlength => 15, :class => 'numeric'} %>
+        </div>
       </div>
-    </div>
     </div>
     <div class="row  items-actions">
       <div class="col d-flex creditor_for_all_input">
@@ -48,7 +48,7 @@
 
         <%= button_tag 'OK', type: :button,
                        :id => 'btn_set_creditor_for_all_items',
-                     :class => 'button field-without-label' %>
+                       :class => 'button field-without-label' %>
         <%= button_tag 'X', type: :button,
                        :id => 'btn_cancel_creditor_for_all',
                        :class => 'button negative field-without-label' %>
@@ -110,6 +110,30 @@
     </tbody>
   </table>
 
+
+  <% if f.object.persisted? %>
+    <table class="records">
+      <thead>
+      <th colspan="2" class="text-center"> Valor Total dos Lotes</th>
+      </thead>
+      <tbody>
+      <% f.object.items.pluck(:lot).uniq.try(:each) do |lot|%>
+        <tr style="font-size: 16px">
+          <td class="text-bold">Valor Total do item/grupo <%= lot %></td>
+          <td><%= number_to_currency f.object.items.where(lot: lot).sum(&:estimated_total_price) %></td>
+        </tr>
+      <% end %>
+
+      <% if f.object.items.present? %>
+        <tr class="text-bold" style="font-size: 16px">
+          <td></td>
+          <td style="color: black"><%= number_to_currency f.object.items.sum(&:estimated_total_price) %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  <% end %>
+
   <%= mustache "licitation_process_items_template" do %>
     <%= f.association :items_attributes, :collection => f.object.items.build, :index => '{{uuid}}' do |p| %>
       <%= render 'purchase_process_items/licitation_process_list_form',
@@ -130,21 +154,21 @@
   <% end %>
 </div>
 
- <style>
-   .items-actions .input{
-     margin-bottom: 0;
-   }
-   .creditor_for_all_input{
-     display: none;
-   }
+<style>
+  .items-actions .input{
+    margin-bottom: 0;
+  }
+  .creditor_for_all_input{
+    display: none;
+  }
 
-   .items-actions input,button{
-     margin-left:5px;
-   }
-   .items-actions input,button:first-child{
-     margin-left:0;
-   }
- </style>
+  .items-actions input,button{
+    margin-left:5px;
+  }
+  .items-actions input,button:first-child{
+    margin-left:0;
+  }
+</style>
 
 <script>
 
