@@ -16,6 +16,8 @@ class AuctionAppeal < Compras::Model
 
   validates :auction, :person, :presence => true
 
+  before_save :set_situation, if: :envelope_open?
+
   # validates :appeal_date, :timeliness => {
   #     :on_or_after => :auction_date,
   #     :on_or_after_message => :must_be_greater_or_equal_to_auction_date,
@@ -33,5 +35,15 @@ class AuctionAppeal < Compras::Model
   def mark_as_viewed
     self.viewed = true
     self.save
+  end
+
+
+  private
+  def envelope_open?
+    new_envelope_opening_date && new_envelope_opening_time
+  end
+
+  def set_situation
+    self.situation = Situation::DEFERRED
   end
 end
