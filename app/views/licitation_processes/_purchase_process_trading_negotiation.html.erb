@@ -61,5 +61,7 @@
     }
   </style>
 <% else %>
-  <%= f.object.decorator.disabled_negotiation_message %>
+  <div class="alert alert-warning">
+    <strong><%= f.object.decorator.disabled_negotiation_message %></strong>
+  </div>
 <% end %>

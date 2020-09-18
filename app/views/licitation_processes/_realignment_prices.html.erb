@@ -24,5 +24,7 @@
   </tbody>
 </table>
 <% else %>
-  <%= f.object.decorator.must_have_creditors_and_items%>
+  <div class="alert alert-warning">
+    <strong><%= f.object.decorator.must_have_creditors_and_items%></strong>
+  </div>
 <% end %>

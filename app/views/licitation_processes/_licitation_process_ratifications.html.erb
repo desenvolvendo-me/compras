@@ -57,5 +57,7 @@
   </style>
 
 <% else %>
-  <%= f.object.decorator.disabled_negotiation_message %>
+  <div class="alert alert-warning">
+    <strong>* Necessário preencher as abas Habilitação e itens e Justificativa</strong>
+  </div>
 <% end %>

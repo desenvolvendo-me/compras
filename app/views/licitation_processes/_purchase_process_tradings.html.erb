@@ -9,5 +9,7 @@
     <%= p.input :observation %>
   <% end %>
 <% else %>
-  <%= f.object.decorator.disabled_trading_message %>
+  <div class="alert alert-warning">
+    <strong><%= f.object.decorator.disabled_trading_message %></strong>
+  </div>
 <% end %>
