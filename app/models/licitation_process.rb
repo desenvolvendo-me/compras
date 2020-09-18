@@ -145,7 +145,7 @@ class LicitationProcess < Compras::Model
       scope: [:creditor_id],
       message: :material_cannot_be_duplicated_by_creditor
   }
-  validate :validate_bidders_before_edital_publication
+  # validate :validate_bidders_before_edital_publication
   validate :validate_proposal_envelope_opening_date, :on => :update, :if => :licitation?
   validate :validate_the_year_to_processe_date_are_the_same, :on => :update
   validate :validate_total_items
@@ -498,11 +498,11 @@ class LicitationProcess < Compras::Model
     errors.add(:process_date, :cannot_change_the_year_from_the_date_of_dispatch) unless process_date_year == year
   end
 
-  def validate_bidders_before_edital_publication
-    if bidders.any? && !edital_published? && licitation?
-      errors.add(:base, :inclusion_of_bidders_before_edital_publication)
-    end
-  end
+  # def validate_bidders_before_edital_publication
+  #   if bidders.any? && !edital_published? && licitation?
+  #     errors.add(:base, :inclusion_of_bidders_before_edital_publication)
+  #   end
+  # end
 
   def validate_budget_allocations_destruction
     error = false
