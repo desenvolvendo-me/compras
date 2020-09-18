@@ -1,4 +1,4 @@
-<% unless f.object.decorator.disabled_negotiation_message %>
+<% if !f.object.decorator.disabled_negotiation_message %>
   <%= button_tag 'Cancelar', type: :button,
                  class: "button", id: "cancel-negotiation" %>
 
@@ -61,7 +61,13 @@
     }
   </style>
 <% else %>
-  <div class="alert alert-warning">
+  <% unless f.object.trading? %>
+    <div class="alert alert-warning alert-trading-options">
+      <strong> Disponivel somente para Processo Licitatório e todas as suas fases na modalidade Pregão</strong>
+    </div>
+  <% end %>
+
+  <div id='negotiation-alert' class="alert alert-warning">
     <strong><%= f.object.decorator.disabled_negotiation_message %></strong>
   </div>
 <% end %>

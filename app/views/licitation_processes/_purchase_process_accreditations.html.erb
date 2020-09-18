@@ -1,6 +1,14 @@
 <% if f.object.trading? || f.object.new_record? %>
-  <%= f.simple_fields_for :purchase_process_accreditation, (f.object.purchase_process_accreditation || PurchaseProcessAccreditation.new(licitation_process_id: f.object.id) )  do |p| %>
-    <%= p.input :id, as: :hidden %>
-    <%= render 'purchase_process_accreditations/form', f: p %>
+  <%unless f.object.trading? %>
+    <div class="alert alert-warning alert-trading-options">
+      <strong> Disponivel somente para Processo Licitatório e todas as suas fases na modalidade Pregão</strong>
+    </div>
   <% end %>
+  
+  <div id="accreditation-fields">
+    <%= f.simple_fields_for :purchase_process_accreditation, (f.object.purchase_process_accreditation || PurchaseProcessAccreditation.new(licitation_process_id: f.object.id) )  do |p| %>
+      <%= p.input :id, as: :hidden %>
+      <%= render 'purchase_process_accreditations/form', f: p %>
+    <% end %>
+  </div>
 <% end %>
