@@ -100,9 +100,6 @@ module LicitationProcessesHelper
     trading
   end
 
-  def trading_or_new?
-    resource.trading? || resource.new_record?
-  end
 
   private
 
