@@ -1,6 +1,6 @@
 <% unless !f.object.decorator.disabled_negotiation_message && f.object.trading? %>
   <div class="alert alert-warning">
-    <strong>É necessário preencher as abas Habilitação; <%= f.object.licitation? ? 'Itens' : 'itens / Justificativa' %></strong>
+    <strong> <%= f.object.decorator.must_finish_all_tabs_to_homologation %></strong>
   </div>
   <script>
     $(function(){

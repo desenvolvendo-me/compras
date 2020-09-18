@@ -173,6 +173,14 @@ class LicitationProcessDecorator
     number_with_precision super if super
   end
 
+  def must_finish_all_tabs_to_homologation
+    if licitation?
+      'É necessário preencher as abas Itens; Habilitação; Lances'
+    else
+      'É necessário preencher as abas Itens/Justificativa; Habilitação'
+    end
+  end
+
   private
 
   def current_publication_of
