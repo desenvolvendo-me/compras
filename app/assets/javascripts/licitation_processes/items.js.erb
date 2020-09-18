@@ -214,4 +214,17 @@ $(document).ready(function() {
     showHideCreditor()
     $(this).hide();
   });
+
+  $("#items").on('change', '.item-unit-price, .item-quantity', function(){
+    var $tr = $(this).closest('tr'),
+        itemQuantity = new BigNumber(parsePtBrFloat( $tr.find('input.item-unit-price').val() || '0')),
+        itemPrice    = new BigNumber(parsePtBrFloat( $tr.find('input.item-quantity').val() || '0')),
+        totalPrice   = numberWithDelimiter(0);
+
+    totalPrice = itemPrice.multiply(itemQuantity);
+    totalPrice = numberWithDelimiter(parseFloat(totalPrice));
+
+    $tr.find('.item-total-value').html(totalPrice);
+  })
+
 });
