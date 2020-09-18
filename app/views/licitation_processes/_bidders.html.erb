@@ -1,59 +1,53 @@
-<% unless f.object.decorator.enabled_bidders? || !f.object.new_record? %>
+<%= button_tag 'Adicionar Habilitação', type: :button,
+               class: "button", id: "add-bidder" %>
 
-  <%= button_tag 'Adicionar Habilitação', type: :button,
-                 class: "button", id: "add-bidder" %>
+<%= button_tag 'Cancelar', type: :button,
+               class: "button", id: "cancel-bidder" %>
 
-  <%= button_tag 'Cancelar', type: :button,
-                 class: "button", id: "cancel-bidder" %>
+<div id="bidder-fields"></div>
 
-  <div id="bidder-fields"></div>
+<% column_names = BidderDecorator.header_attributes.to_a %>
 
-  <% column_names = BidderDecorator.header_attributes.to_a %>
+<table id='bidders-records' class="records">
+  <thead>
+  <tr>
+    <% column_names.each do |column_name| %>
+      <th class="<%= column_name %>"><%= Bidder.human_attribute_name column_name %></th>
+    <% end %>
+    <th></th>
+    <th></th>
+  </tr>
+  </thead>
 
-  <table id='bidders-records' class="records">
-    <thead>
+  <tbody class="<%= f.sanitized_object_name %>_document_types_records">
+  <% f.object.bidders.each do |bidder| %>
     <tr>
       <% column_names.each do |column_name| %>
-        <th class="<%= column_name %>"><%= Bidder.human_attribute_name column_name %></th>
+        <td>
+          <%=  bidder.decorator.send(column_name) %>
+        </td>
       <% end %>
-      <th></th>
-      <th></th>
+      <td>
+        <%= link_to 'Editar', '#', 'data-id': bidder.id,  class: 'edit-bidder' %>
+      </td>
+      <td>
+        <%= link_to 'Remover', '#', 'data-id': bidder.id, class: 'remove-bidder' %>
+      </td>
     </tr>
-    </thead>
-
-    <tbody class="<%= f.sanitized_object_name %>_document_types_records">
-    <% f.object.bidders.each do |bidder| %>
-      <tr>
-        <% column_names.each do |column_name| %>
-          <td>
-            <%=  bidder.decorator.send(column_name) %>
-          </td>
-        <% end %>
-        <td>
-          <%= link_to 'Editar', '#', 'data-id': bidder.id,  class: 'edit-bidder' %>
-        </td>
-        <td>
-          <%= link_to 'Remover', '#', 'data-id': bidder.id, class: 'remove-bidder' %>
-        </td>
-      </tr>
-    <% end %>
-
-    </tbody>
-  </table>
-
-  <%= mustache 'bidders-template' do %>
-    <%= f.association :bidders_attributes, :collection => f.object.bidders.build, :index => '{{uuid_bidder}}' do |p| %>
-      <%= render 'bidders/form', :f => p %>
-    <% end %>
   <% end %>
 
-  <style>
-    #cancel-bidder{
-      display: none;
-      float: right;
-    }
-  </style>
+  </tbody>
+</table>
 
-<% else %>
-  <%=  f.object.decorator.enabled_bidders? %>
+<%= mustache 'bidders-template' do %>
+  <%= f.association :bidders_attributes, :collection => f.object.bidders.build, :index => '{{uuid_bidder}}' do |p| %>
+    <%= render 'bidders/form', :f => p %>
+  <% end %>
 <% end %>
+
+<style>
+  #cancel-bidder{
+    display: none;
+    float: right;
+  }
+</style>
