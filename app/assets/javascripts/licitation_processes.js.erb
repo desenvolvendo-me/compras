@@ -10,6 +10,7 @@ var DataPurchaseSolicitation = {};
 $(document).ready(function () {
   showHideCollapseFields($("#items"));
   showHideCollapseFields($("#legal_analisys_appraisals"));
+  showHideCollapseFields($("#publications"));
 
   function organizesModalities() {
     if ($('#licitation_process_type_of_purchase_licitation').is(':checked')) {
@@ -275,6 +276,17 @@ $(document).ready(function () {
     }
   }
 
+  $("#legal_analisys_appraisals .show-fields").click(function () {
+    $("#legal_analisys_appraisals .nested-fields .hidden-fields").show();
+    $("#legal_analisys_appraisals .add-nested-record ").show();
+    $(this).hide();
+  });
+
+  $("#publications .show-fields").click(function () {
+    $("#publications .nested-fields .hidden-fields").show();
+    $("#publications .add-nested-record ").show();
+    $(this).hide();
+  });
 
 //  if ($('#licitation_process_budget_allocation_year').val() == ''){
 //    disableBudgetAllocation();
