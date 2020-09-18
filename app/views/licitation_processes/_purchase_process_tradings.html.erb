@@ -1,9 +1,13 @@
-<% trading = initialize_trading f.object %>
-<% item = trading.items.first %>
-<%= render 'purchase_process_tradings/form', item: item,
-           historic: item.bids_historic, creditors:  item.creditors_ordered_outer,
-           next_bid: NextBidCalculator.next_bid(item), trading: trading %>
+<% if f.object.trading? && f.object.decorator.disabled_trading_message.blank? %>
+  <% trading = initialize_trading f.object %>
+  <% item = trading.items.first %>
+  <%= render 'purchase_process_tradings/form', item: item,
+             historic: item.bids_historic, creditors:  item.creditors_ordered_outer,
+             next_bid: NextBidCalculator.next_bid(item), trading: trading %>
 
-<%= f.simple_fields_for :trading do |p| %>
-  <%= p.input :observation %>
+  <%= f.simple_fields_for :trading do |p| %>
+    <%= p.input :observation %>
+  <% end %>
+<% else %>
+  <%= f.object.decorator.disabled_trading_message %>
 <% end %>
