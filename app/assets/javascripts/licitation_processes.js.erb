@@ -239,6 +239,27 @@ $(document).ready(function () {
     filterJudgmentForm();
   });
 
+
+  // init tooltip ajuda
+  $(document).tooltip({
+    items: "#tooltip",
+    content: function() {
+      return $(this).data("message");
+    },
+    position: {
+      my: "center bottom-20",
+      at: "center top",
+      using: function (position, feedback) {
+        $(this).css(position);
+        $("<div>")
+          .addClass("arrow")
+          .addClass(feedback.vertical)
+          .addClass(feedback.horizontal)
+          .appendTo(this);
+      }
+    }
+  });
+
 //  if ($('#licitation_process_budget_allocation_year').val() == ''){
 //    disableBudgetAllocation();
 //  }
