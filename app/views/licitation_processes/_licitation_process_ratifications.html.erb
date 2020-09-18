@@ -58,6 +58,6 @@
 
 <% else %>
   <div class="alert alert-warning">
-    <strong>* Necessário preencher as abas Habilitação e itens e Justificativa</strong>
+    <strong>É necessário preencher as abas Habilitação; <%= f.object.licitation? ? 'Itens' : 'itens / Justificativa' %></strong>
   </div>
 <% end %>
