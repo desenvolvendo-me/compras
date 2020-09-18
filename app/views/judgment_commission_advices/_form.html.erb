@@ -71,7 +71,16 @@
       $(this).closest('.nested').find('.cpf').val('');
     }
   });
-  <% if f.object.licitation_process.simplified_processes? %>
+
+  $('input[name="licitation_process[type_of_purchase]"]').change(function () {
+    if ($('#licitation_process_type_of_purchase_licitation').is(':checked')) {
+      $('.advice').removeClass('hidden');
+    }else{
+      $('.advice').addClass('hidden');
+    }
+  });
+
+  <% if f.object&.licitation_process&.simplified_processes? %>
     $('.advice').addClass('hidden');
   <% else %>
     $('.advice').removeClass('hidden');
