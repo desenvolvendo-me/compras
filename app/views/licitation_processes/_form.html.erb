@@ -2,40 +2,39 @@
   <ul id="main-ul">
     <li><a href="#tab-main">Dados do Processo</a></li>
     <li><a href="#tab-requestor">Solicitantes</a></li>
-    <li><a href="#tab-periods">Prazos</a></li>
     <li><a href="#tab-items" id="items_tab_header">Itens / Justificativa</a></li>
+    <li><a href="#tab-periods">Prazos</a></li>
     <li class='income'><a href="#tab-income">Receita</a></li>
     <li><a href="#tab-documents">Documentos</a></li>
     <li id="legal_reasons_tab" ><a href="#tab-leagal-reasons">Fundamentação Legal Dispensa/Inexigibilidade</a></li>
-    <% if f.object.persisted? %>
     <li><a href="#tab-legal-analysis-appraisals" id="legal_analysis_appraisals_tab">Laudo de Análise Jurídica</a></li>
     <li><a href="#tab-licitation-process-publications" id="licitation_process_publications_tab">Publicações</a></li>
-      <% if f.object.trading? %>
-        <li><a href="#tab-licitation-purchase-process-accreditations" id="purchase_process_accreditations">Credenciamentos</a></li>
-      <% end %>
 
-      <li><a href="#tab-bidders" id="bidder">Habilitação</a></li>
-
-      <% if f.object.licitation? %>
-        <li><a href="#tab-proposals" id="proposals">Propostas</a></li>
-      <% end %>
-
-      <% if f.object.trading? %>
-        <li><a href="#tab-tradings" id="tradings">Lances</a></li>
-      <% end %>
-
-      <% if  f.object.trading? && f.object.decorator.enabled_realignment_price? %>
-        <li><a href="#tab-realignment-prices" id="realignment_prices">Realinhamento de Preços</a></li>
-      <% end %>
-
-      <% if f.object.trading?%>
-        <li><a href="#tab-trading-negotiation" id="trading_negotiation">Negociação</a></li>
-      <% end %>
-
-      <li><a href="#tab-judgment-commission" id="judgment_commission">Parecer da Comissão Julgadora</a></li>
-
-      <li><a href="#tab-ratifications" id="ratifications">Adjudicação/Homologação</a></li>
+    <%= content_tag :li, class:('hided' unless resource.trading?) do%>
+      <a href="#tab-licitation-purchase-process-accreditations" id="purchase_process_accreditations">Credenciamentos</a>
     <% end %>
+
+    <li><a href="#tab-bidders" id="bidder">Habilitação</a></li>
+
+    <%= content_tag :li, class:('hided' unless resource.licitation? || resource.new_record? ) do%>
+      <a href="#tab-proposals" id="proposals">Propostas</a>
+    <% end %>
+
+    <%= content_tag :li, class:('hided' unless resource.trading?) do%>
+      <a href="#tab-tradings" id="tradings">Lances</a>
+    <% end %>
+
+    <%= content_tag :li, class:('hided' unless resource.trading?) do%>
+      <li><a href="#tab-realignment-prices" id="realignment_prices">Realinhamento de Preços</a></li>
+    <% end %>
+
+    <%= content_tag :li, class:('hided' unless resource.trading?) do%>
+      <a href="#tab-trading-negotiation" id="trading_negotiation">Negociação</a>
+    <% end %>
+
+    <li><a href="#tab-judgment-commission" id="judgment_commission">Parecer da Comissão Julgadora</a></li>
+
+    <li><a href="#tab-ratifications" id="ratifications">Adjudicação/Homologação</a></li>
   </ul>
 
   <div id="tab-main"><%= render 'main', :f => f %></div>
@@ -45,153 +44,31 @@
   <div id="tab-income"><%= render 'income', :f => f %></div>
   <div id="tab-documents"><%= render 'documents', :f => f %></div>
   <div id="tab-leagal-reasons"><%= render 'legal_reasons', :f => f %></div>
-  <% if f.object.persisted? %>
-    <div id="tab-legal-analysis-appraisals"><%= render 'legal_analisys_appraisals', :f => f %></div>
-    <div id="tab-licitation-process-publications"><%= render 'licitation_process_publications', :f => f %></div>
+  <div id="tab-legal-analysis-appraisals"><%= render 'legal_analisys_appraisals', :f => f %></div>
 
-    <% if f.object.trading? %>
-      <div id="tab-licitation-purchase-process-accreditations"><%= render 'purchase_process_accreditations', :f => f %></div>
-    <% end %>
+  <div id="tab-licitation-process-publications"><%= render 'licitation_process_publications', :f => f %></div>
+  <div id="tab-licitation-purchase-process-accreditations"><%= render 'purchase_process_accreditations', :f => f %></div>
+  <div id="tab-bidders"><%= render 'bidders', :f => f %></div>
+  <div id="tab-proposals"><%= render 'purchase_process_proposals', :f => f %></div>
+  <div id="tab-tradings"><%= render 'purchase_process_tradings', :f => f %></div>
+  <div id="tab-realignment-prices"><%= render 'realignment_prices', :f => f %></div>
+  <div id="tab-trading-negotiation"><%= render 'purchase_process_trading_negotiation', :f => f %></div>
+  <div id="tab-judgment-commission"><%= render 'judgment_commission_advices', :f => f %></div>
+  <div id="tab-ratifications"><%= render 'licitation_process_ratifications', :f => f %></div>
 
-    <% unless f.object.decorator.enabled_bidders? %>
-      <div id="tab-bidders"><%= render 'bidders', :f => f %></div>
-    <% end %>
 
-    <% if f.object.licitation? %>
-      <div id="tab-proposals"><%= render 'purchase_process_proposals', :f => f %></div>
-    <% end %>
-
-    <% if f.object.trading? && f.object.decorator.disabled_trading_message.blank? %>
-      <div id="tab-tradings"><%= render 'purchase_process_tradings', :f => f %></div>
-    <% end %>
-
-    <% if f.object.trading? && f.object.decorator.enabled_realignment_price? %>
-      <div id="tab-realignment-prices"><%= render 'realignment_prices', :f => f %></div>
-    <% end %>
-
-    <% unless f.object.decorator.disabled_negotiation_message %>
-      <div id="tab-trading-negotiation"><%= render 'purchase_process_trading_negotiation', :f => f %></div>
-    <% end %>
-
-    <div id="tab-judgment-commission"><%= render 'judgment_commission_advices', :f => f %></div>
-
-    <% unless f.object.decorator.disabled_negotiation_message && f.object.trading? %>
-      <div id="tab-ratifications"><%= render 'licitation_process_ratifications', :f => f %></div>
-    <% end %>
-  <% end %>
 </div>
 
+<%= f.object.errors.full_messages %>
+
+<style>
+  .hided{
+    display: none;
+  }
+</style>
+
 <script>
-  function filterJudgmentForm() {
-    var judgmentFormGroups    = <%= JudgmentFormFilter.new.by_modality.to_json.html_safe %>,
-      modality              = $('#licitation_process_modality').val(),
-      priceRegistration     = $('#licitation_process_price_registration').is(':checked'),
-      currentJudgmentFormId = $('#current_judgment_form_id').val(),
-      judgmentForms;
 
-    $("#licitation_process_judgment_form_id").append(function() {
-      return $("<option>").text('').val('');
-    });
-
-    if (modality) {
-      if (priceRegistration) {
-        judgmentForms = judgmentFormGroups.with_price_registration[modality];
-      } else {
-        judgmentForms = judgmentFormGroups.without_price_registration[modality];
-      }
-
-      _(judgmentForms).each(function(judgmentForm) {
-        $("#licitation_process_judgment_form_id").append(function() {
-          return $("<option>").text(judgmentForm.description)
-            .val(judgmentForm.id)
-            .data('kind', judgmentForm.kind);
-        });
-      });
-    }
-
-    if (currentJudgmentFormId) {
-      $("#licitation_process_judgment_form_id option").each(function() {
-        if ( $(this).val() == currentJudgmentFormId ){
-          $("#licitation_process_judgment_form_id").val(currentJudgmentFormId);
-        }
-      });
-    }
-  }
-
-  function filterModalities(objectType) {
-    var modalitiesByObjectType = <%= Modality.by_object_type.to_json.html_safe %>,
-      validGroup             = _(modalitiesByObjectType[objectType]),
-      currentModality        = $("#current_modality_id").val();
-
-    $("#licitation_process_modality").empty();
-
-    $("#licitation_process_modality").append(function() {
-      return $("<option>").text('').val('');
-    });
-
-    if (!validGroup.isUndefined() && !validGroup.isEmpty()){
-      validGroup.each(function(modality) {
-        $("#licitation_process_modality").append(function() {
-          if (modality[1] == currentModality) {
-            return $("<option>").text(modality[0]).val(modality[1]).attr('selected', 'selected');
-          } else {
-            return $("<option>").text(modality[0]).val(modality[1]);
-          }
-        });
-      });
-    }
-  }
-
-  function disableModalities() {
-    $('#licitation_process_modality').attr("disabled", "disabled");
-  }
-
-  function enableModalities() {
-    $('#licitation_process_modality').removeAttr("disabled");
-  }
-
-  function disableBudgetAllocation(){
-    // $('#licitation_process_budget_allocation').attr('disabled', 'disabled');
-  }
-
-  function enableBudgetAllocation(){
-    $('#licitation_process_budget_allocation').removeAttr('disabled');
-  }
-
-  $('#licitation_process_modality, #licitation_process_price_registration').on('change', function() {
-    filterJudgmentForm();
-  });
-
-  $('form.licitation_process').on('change', '.object-type-select', function() {
-    $('#licitation_process_modality').html('');
-
-    var objectType = $(this).val();
-    if (objectType) {
-      filterModalities(objectType);
-      enableModalities();
-    } else {
-      disableModalities();
-    }
-  });
-
-  if ( $(".object-type-select").val() ) {
-    filterModalities( $(".object-type-select").val() );
-  } else {
-    disableModalities();
-  }
-
-  filterJudgmentForm();
-  if ($('#licitation_process_budget_allocation_year').val() == ''){
-    disableBudgetAllocation();
-  }
-
-  $('form.licitation_process').on('change', '#licitation_process_budget_allocation_year', function(){
-    if ($('#licitation_process_budget_allocation_year').val() == ''){
-      disableBudgetAllocation();
-    }else{
-      enableBudgetAllocation();
-    }
-  });
 
   <% if resource.approved? %>
     $(function(){
