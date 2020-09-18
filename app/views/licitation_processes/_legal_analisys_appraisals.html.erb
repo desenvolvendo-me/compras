@@ -1,16 +1,21 @@
-<div class="nested-grid">
+<div id="legal_analisys_appraisals" class="nested-grid">
   <div class="nested-fields nested-additives">
-    <%= f.simple_fields_for :legal_analisys_appraisals, LegalAnalysisAppraisal.new do |p|%>
-      <% p.object_name = 'legal_analisys_appraisals' %>
-      <%= p.input :id, as: :hidden %>
-      <%= render "legal_analysis_appraisals/form", f: p %>
-    <% end %>
+    <div class="hidden-fields">
+      <%= f.simple_fields_for :legal_analisys_appraisals, LegalAnalysisAppraisal.new do |p|%>
+        <% p.object_name = 'legal_analisys_appraisals' %>
+        <%= p.input :id, as: :hidden %>
+        <%= render "legal_analysis_appraisals/form", f: p %>
+      <% end %>
+    </div>
+    <div class="text-right">
+      <%= button_tag 'Adicionar', type: :button,
+                     class: 'button add-nested-record field-without-label add-margin-bottom',
+                     'data-template' => "legal_analysis_appraisals_template",
+                     'data-records' => "legal_analysis_appraisals_records",
+                     id: "legal_analysis_appraisals_button" %>
 
-    <%= button_tag 'Adicionar', type: :button,
-                   class: 'button add-nested-record field-without-label add-margin-bottom',
-                   'data-template' => "legal_analysis_appraisals_template",
-                   'data-records' => "legal_analysis_appraisals_records",
-                   id: "legal_analysis_appraisals_button" %>
+      <%= button_tag 'Adicionar', type: :button, class:'button primary field-without-label show-fields' %>
+    </div>
   </div>
 
   <%column_names = LegalAnalysisAppraisalDecorator.header_attributes.to_a
@@ -51,3 +56,11 @@
     <% end %>
   <% end %>
 </div>
+
+<script>
+  $("#legal_analisys_appraisals .show-fields").click(function () {
+    $("#legal_analisys_appraisals .nested-fields .hidden-fields").show();
+    $("#legal_analisys_appraisals .add-nested-record ").show();
+    $(this).hide();
+  });
+</script>
