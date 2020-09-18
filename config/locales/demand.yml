@@ -9,6 +9,7 @@ pt-BR:
       demand:
         year: "Ano"
         name: "Nome"
+        name_id: "Nome da Gestãode Solicitação de Compra"
         observation: "Observação"
         initial_date: "Data Inicial"
         final_date: "Data Final"
