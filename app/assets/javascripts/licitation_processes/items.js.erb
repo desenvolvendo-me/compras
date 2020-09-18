@@ -1,6 +1,5 @@
 $(document).ready(function() {
   showHideCreditor();
-  showHideCollapseFields();
 
   function isDirectPurchase() {
     var direct_purchase = $('#licitation_process_type_of_purchase_direct_purchase').is(':checked'),
@@ -195,20 +194,7 @@ $(document).ready(function() {
     $modals.attr("disabled", true);
   }
 
-
-  //show or hide items fields
-  function showHideCollapseFields(){
-    var $fields_with_errors = $("#items .nested-fields .field_with_errors");
-
-    if($fields_with_errors.length === 0){
-      $("#items .nested-fields .hidden-fields").hide();
-      $("#items .add-nested-record ").hide();
-    }else{
-      $("#show-items-fields").hide();
-    }
-  }
-
-  $("#show-items-fields").click(function () {
+  $("#items .show-fields").click(function () {
     $("#items .nested-fields .hidden-fields").show();
     $("#items .add-nested-record ").show();
     showHideCreditor()
