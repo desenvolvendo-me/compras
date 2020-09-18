@@ -147,7 +147,7 @@ class LicitationProcessDecorator
   def must_have_creditors_and_items
     if component.creditors.blank? || materials.blank?
       t("licitation_process.messages.must_have_creditors_and_items")
-    elsif !trading.allow_negotiation?
+    elsif !trading.try(:allow_negotiation?)
       t('licitation_process.messages.disabled_negotiation_message')
     end
   end
