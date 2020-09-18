@@ -1,11 +1,10 @@
 <table class="records">
   <thead>
     <tr>
-      <% resource_class.decorator.header_attributes.each do |field| %>
-        <th><%= resource_class.human_attribute_name field %></th>
-      <% end %>
+      <th><%= "Número da #{I18n.t('activerecord.models.price_collection.one')}" %></th>
       <th><%= "Número da #{I18n.t('activerecord.models.purchase_solicitation.one')}" %></th>
       <th><%= "#{I18n.t('activerecord.models.department.one')} da #{I18n.t('activerecord.models.purchase_solicitation.one')}" %></th>
+      <th><%= resource_class.human_attribute_name :status %></th>
     </tr>
   </thead>
 
@@ -21,8 +20,6 @@
             <% end %>
           </td>
         <% end %>
-        <td><%= resource.purchase_solicitations.last %></td>
-        <td><%= resource.purchase_solicitations.last.department if resource.purchase_solicitations.last%></td>
       </tr>
     <% end %>
   </tbody>
