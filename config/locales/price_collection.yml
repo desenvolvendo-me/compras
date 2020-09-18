@@ -2,7 +2,7 @@ pt-BR:
   activerecord:
     models:
       price_collection:
-        one: "Coleta de Preços"
+        one: "Coleta de Preço"
         other: "Coletas de Preços"
 
     attributes:
