@@ -11,6 +11,7 @@ $(document).ready(function () {
   showHideCollapseFields($("#items"));
   showHideCollapseFields($("#legal_analisys_appraisals"));
   showHideCollapseFields($("#publications"));
+  showHideCollapseFields($("#tab-requestor"));
 
   if ( $(".object-type-select").val() ) {
     filterModalities( $(".object-type-select").val() );
@@ -277,6 +278,12 @@ $(document).ready(function () {
   $("#publications .show-fields").click(function () {
     $("#publications .nested-fields .hidden-fields").show();
     $("#publications .add-nested-record ").show();
+    $(this).hide();
+  });
+
+  $("#tab-requestor .show-fields").click(function () {
+    $("#tab-requestor .hidden-fields").show();
+    $("#tab-requestor .add-nested-record ").show();
     $(this).hide();
   });
 
