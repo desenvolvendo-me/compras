@@ -12,6 +12,13 @@ $(document).ready(function () {
   showHideCollapseFields($("#legal_analisys_appraisals"));
   showHideCollapseFields($("#publications"));
 
+  if ( $(".object-type-select").val() ) {
+    filterModalities( $(".object-type-select").val() );
+  } else {
+    disableModalities();
+  }
+
+
   function organizesModalities() {
     if ($('#licitation_process_type_of_purchase_licitation').is(':checked')) {
       $('div.modality').removeClass('hidden');
@@ -71,6 +78,7 @@ $(document).ready(function () {
   }
 
   function toogleVisibilityFieldsToTrading($el) {
+    debugger
     if (($el.val() == '<%= Modality::TRADING %>')) {
       $('.field-to-trading').removeClass('hidden');
       $('.not-fields-to-trading').addClass('hidden');
@@ -178,6 +186,7 @@ $(document).ready(function () {
   }
 
   function filterModalities(objectType) {
+    debugger
     var modalitiesByObjectType = <%= Modality.by_object_type.to_json.html_safe %>,
       validGroup             = _(modalitiesByObjectType[objectType]),
       currentModality        = $("#current_modality_id").val();
@@ -220,12 +229,6 @@ $(document).ready(function () {
       disableModalities();
     }
   });
-
-  if ( $(".object-type-select").val() ) {
-    filterModalities( $(".object-type-select").val() );
-  } else {
-    disableModalities();
-  }
 
   filterJudgmentForm();
   $('#licitation_process_modality, #licitation_process_price_registration').on('change', function() {
