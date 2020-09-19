@@ -79,7 +79,6 @@ $(document).ready(function () {
   }
 
   function toogleVisibilityFieldsToTrading($el) {
-    debugger
     if (($el.val() == '<%= Modality::TRADING %>')) {
       $('.field-to-trading').removeClass('hidden');
       $('.not-fields-to-trading').addClass('hidden');
@@ -187,7 +186,6 @@ $(document).ready(function () {
   }
 
   function filterModalities(objectType) {
-    debugger
     var modalitiesByObjectType = <%= Modality.by_object_type.to_json.html_safe %>,
       validGroup             = _(modalitiesByObjectType[objectType]),
       currentModality        = $("#current_modality_id").val();
