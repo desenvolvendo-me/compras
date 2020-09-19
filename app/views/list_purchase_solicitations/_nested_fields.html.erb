@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row hidden-fields">
   <div class="col">
     <%= f.input :demand, :as => :auto_complete, :fake => true%>
   </div>
@@ -10,16 +10,20 @@
 </div>
 
 
-<div class="d-flex" style="align-items: baseline;">
+<div class="d-flex justify-content-between" style="align-items: baseline;">
+
+
+  <h4 class="hint-text" style="margin-left: 10px">
+    * Os itens da solicitação adicionada serão incluídos no processo ( aba itens)
+  </h4>
+
   <%= button_tag 'Adicionar', type: :button,
                  class: 'button add-nested-record field-without-label add-margin-bottom',
                  'data-template' => "list_purchase_solicitations_template",
                  'data-records' => "list_purchase_solicitations_records",
                  id: "list_purchase_solicitations_button" %>
 
-  <h4 class="hint-text" style="margin-left: 10px">
-    * Os itens da solicitação adicionada serão incluídos no processo ( aba itens)
-  </h4>
+  <%= button_tag 'Adicionar Itens', type: :button, class:'button primary field-without-label show-fields' %>
 </div>
 
 <script>
