@@ -41,15 +41,16 @@
     <%= f.input :execution_type %>
   </div>
 
-    <div class="yui3-u-1-6">
-      <%= f.input :modality_number, :disabled => true %>
-    </div>
+  <div class="yui3-u-1-6">
+    <%= f.input :modality_number, :disabled => true %>
+  </div>
 
-    <div class="yui3-u-1-4">
-      <%= f.input :modality, :collection => [], :wrapper_class => 'modality', disabled: f.object.persisted? %>
-      <%= hidden_field_tag :current_modality_id, f.object.modality, disabled: f.object.persisted? %>
-      <%= f.input :type_of_removal, :wrapper_class => 'type-of-removal' %>
-    </div>
+  <div class="yui3-u-1-4">
+    <%= f.input :modality, :collection => [], :wrapper_class => 'modality',
+                hint: 'Pro favor selecione o Tipo de Objeto antes.',  disabled: f.object.persisted?  %>
+    <%= hidden_field_tag :current_modality_id, f.object.modality, disabled: f.object.persisted? %>
+    <%= f.input :type_of_removal, :wrapper_class => 'type-of-removal' %>
+  </div>
 </div>
 
 <div class="yui3-g fields-to-trading-and-concurrence">

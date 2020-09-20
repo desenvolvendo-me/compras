@@ -4,11 +4,8 @@ class TypeOfRemoval < EnumerateIt::Base
                    :removal_by_ineligibility,
                    :unenforceability_accreditation,
                    :dispensation_justified_accreditation,
-                   :call,
-                   :concurrence,
-                   :trading,
-                   :outlet_price,
-                   :invitation
+                   :call
+
 
   def self.allow_duplicated_items
     [
