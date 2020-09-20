@@ -1,3 +1,8 @@
+
+<div class="subtitle">
+  * O Sistema permite cadastrar Proposta item por item ou por valor do lote
+</div>
+
 <%= f.input :creditor_id, as: :hidden, fake: true,
   input_html: { name: :creditor_id, value: @creditor.id } %>
 
@@ -15,3 +20,11 @@
       input_html: { value: '0,00', 'data-decimal' => true, class: :numeric } %>
   </div>
 </div>
+
+<style>
+  .subtitle{
+    color: #448DD6;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+</style>
