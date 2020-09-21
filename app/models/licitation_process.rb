@@ -453,12 +453,14 @@ class LicitationProcess < Compras::Model
   protected
 
   def set_homologation_date
+    # raise
     if self.status_changed? && self.status == PurchaseProcessStatus::APPROVED
       self.homologation_date = Date.today
     end
   end
 
   def set_approved_status
+    # raise
     if licitation_process_ratifications.any?
       update_status(PurchaseProcessStatus::APPROVED)
     end
