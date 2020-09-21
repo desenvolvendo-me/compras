@@ -27,15 +27,11 @@
   </div>
 
   <div class="col">
-    <%= f.input :proposal_envelope_opening_date,
-                :input_html => { "data-disabled" => f.object.decorator.disabled_envelope_message,
-                                 :readonly => f.object.decorator.disabled_envelope_message,
-                                 'data-datepicker': !f.object.decorator.disabled_envelope_message} %>
+    <%= f.input :proposal_envelope_opening_date %>
   </div>
 
   <div class="col">
-    <%= f.input :proposal_envelope_opening_time, :input_html => { "data-disabled" => f.object.decorator.disabled_envelope_message,
-                                                                  :readonly => f.object.decorator.disabled_envelope_message } %>
+    <%= f.input :proposal_envelope_opening_time%>
   </div>
 </div>
 
@@ -43,29 +39,19 @@
 <div class="yui3-g authorization_envelope_opening_date">
 
   <div class="yui3-u-1-4">
-    <%= f.input :authorization_envelope_opening_date,
-                :input_html => { "data-disabled" => f.object.decorator.must_be_published_on_edital ,
-                :readonly => f.object.decorator.disabled_envelope_message,
-                'data-datepicker': !f.object.decorator.disabled_envelope_message}%>
+    <%= f.input :authorization_envelope_opening_date%>
   </div>
 
   <div class="yui3-u-1-4">
-    <%= f.input :authorization_envelope_opening_time,
-                :input_html => { "data-disabled" => f.object.decorator.must_be_published_on_edital,
-                :readonly => f.object.decorator.disabled_envelope_message}%>
+    <%= f.input :authorization_envelope_opening_time%>
   </div>
 
   <div class="yui3-u-1-4">
-    <%= f.input :closing_of_accreditation_date,
-                :input_html => { "data-disabled" => f.object.decorator.must_be_published_on_edital,
-                :readonly => f.object.decorator.disabled_envelope_message,
-                'data-datepicker': !f.object.decorator.disabled_envelope_message}%>
+    <%= f.input :closing_of_accreditation_date%>
   </div>
 
   <div class="yui3-u-1-4">
-    <%= f.input :closing_of_accreditation_time,
-                :input_html => { "data-disabled" => f.object.decorator.must_be_published_on_edital,
-                :readonly => f.object.decorator.disabled_envelope_message}%>
+    <%= f.input :closing_of_accreditation_time%>
   </div>
 
 </div>
@@ -81,16 +67,11 @@
   </div>
 
   <div class="col">
-    <%= f.input :stage_of_bids_date,
-                :input_html => { "data-disabled" => f.object.decorator.must_be_published_on_edital,
-                                 :readonly => f.object.decorator.disabled_envelope_message,
-                                 'data-datepicker': !f.object.decorator.disabled_envelope_message}%>
+    <%= f.input :stage_of_bids_date%>
   </div>
 
   <div class="col">
-    <%= f.input :stage_of_bids_time,
-                :input_html => { "data-disabled" => f.object.decorator.must_be_published_on_edital,
-                                 :readonly => f.object.decorator.disabled_envelope_message}%>
+    <%= f.input :stage_of_bids_time%>
   </div>
 
 
