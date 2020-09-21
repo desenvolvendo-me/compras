@@ -3,7 +3,7 @@ function handleButtonsRatifications(){
   $("#cancel-process_ratification").show();
 }
 
-$("#cancel-process_ratification").click(function(){
+$(document).on('click','#cancel-process_ratification',function(){
   $(this).hide();
   $("#process_ratifications-records, #add-process-ratification").show();
   $("#process-ratification-fields").html('');
