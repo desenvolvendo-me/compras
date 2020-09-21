@@ -36,7 +36,10 @@ $(document).ready(function () {
       $('.stage_of_bids_date').removeClass('hidden');
       $('.authorization_envelope_opening_date').removeClass('hidden');
       $('.expiration').removeClass('hidden');
-      $("#proposals").show();
+      $('.field-to-trading').removeClass('hidden');
+      $('.not-fields-to-trading').addClass('hidden');
+      $(".alert-trading-options").hide();
+      $(".hided").show();
     } else {
       $('div.modality').addClass('hidden');
       $('div.licitation_process_judgment_form_id').addClass('hidden');
@@ -54,7 +57,10 @@ $(document).ready(function () {
       $('.stage_of_bids_date').addClass('hidden');
       $('.authorization_envelope_opening_date').addClass('hidden');
       $('.expiration').addClass('hidden');
-      $("#proposals").hide();
+      $('.field-to-trading').addClass('hidden');
+      $('.not-fields-to-trading').removeClass('hidden');
+      $(".alert-trading-options").show();
+      $(".hided").hide();
     }
   }
 
@@ -76,22 +82,6 @@ $(document).ready(function () {
     }
 
     $("#licitation_process_budget_allocation").data('source', url);
-  }
-
-  function toogleVisibilityFieldsToTrading($el) {
-    if (($el.val() == '<%= Modality::TRADING %>')) {
-      $('.field-to-trading').removeClass('hidden');
-      $('.not-fields-to-trading').addClass('hidden');
-      $(".alert-trading-options").hide();
-      $("#accreditation-fields").show();
-      $("#negotiation-alert").show();
-    } else {
-      $('.field-to-trading').addClass('hidden');
-      $('.not-fields-to-trading').removeClass('hidden');
-      $(".alert-trading-options").show();
-      $("#accreditation-fields").hide();
-      $("#negotiation-alert").hide();
-    }
   }
 
   //filtra o campo "Publicação do(a)" com base no tipo do processo de compra
@@ -119,12 +109,10 @@ $(document).ready(function () {
   }
 
   $("#licitation_process_modality").change(function(){
-    toogleVisibilityFieldsToTrading($(this));
     toogleVisibilityFieldsToTradingAndConcurrence($(this));
   })
 
   $("#licitation_process_type_of_removal").change(function(){
-    toogleVisibilityFieldsToTrading($(this));
     toogleVisibilityFieldsToTradingAndConcurrence($(this));
   })
 
@@ -135,14 +123,12 @@ $(document).ready(function () {
   $('input[name="licitation_process[type_of_purchase]"]').change(function () {
     organizesModalities();
     var $el = $('#licitation_process_modality:visible, #licitation_process_type_of_removal:visible');
-    toogleVisibilityFieldsToTrading($el);
     toogleVisibilityFieldsToTradingAndConcurrence($el);
     filterPublicationOf();
   });
 
   organizesModalities();
   var $ele = $('#licitation_process_modality:visible, #licitation_process_type_of_removal:visible');
-  toogleVisibilityFieldsToTrading($ele);
   toogleVisibilityFieldsToTradingAndConcurrence($ele);
   setBudgetAllocationSource();
 
