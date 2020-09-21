@@ -148,7 +148,6 @@ class LicitationProcess < Compras::Model
   validate :purchase_solicitations_blank?
   validate :judgment_form_can_update?, on: :update
 
-  before_save :set_homologation_date
   after_save  :set_approved_status
 
   with_options :allow_blank => true do |allowing_blank|
@@ -452,17 +451,16 @@ class LicitationProcess < Compras::Model
 
   protected
 
-  def set_homologation_date
-    # raise
-    if self.status_changed? && self.status == PurchaseProcessStatus::APPROVED
-      self.homologation_date = Date.today
+  def update_homologation_date
+    if status == PurchaseProcessStatus::APPROVED
+      update_column :homologation_date, Date.today
     end
   end
 
   def set_approved_status
-    # raise
     if licitation_process_ratifications.any?
       update_status(PurchaseProcessStatus::APPROVED)
+      update_homologation_date if licitation_process_ratifications.any?{|x| x.changed?}
     end
   end
 
