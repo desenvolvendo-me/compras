@@ -8,10 +8,6 @@
   <%= f.simple_fields_for :trading do |p| %>
     <%= p.input :observation %>
   <% end %>
-<% elsif !f.object.trading? %>
-  <div id='alert-accreditation' class="alert alert-warning">
-    <strong> Disponivel somente para Processo Licitatório e todas as suas fases na modalidade Pregão</strong>
-  </div>
 <% else %>
   <div class="alert alert-warning">
     <strong><%= f.object.decorator.disabled_trading_message %></strong>
