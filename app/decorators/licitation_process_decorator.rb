@@ -66,17 +66,6 @@ class LicitationProcessDecorator
     end
   end
 
-  # def must_have_published_edital_or_direct_purchase_or_disabled_negotiation_message
-  #   must_have_published_edital_or_direct_purchase
-  #   disabled_negotiation_message
-  # end
-
-  # def must_have_published_edital_or_direct_purchase
-  #   unless edital_published? || simplified_processes?
-  #     t("licitation_process.messages.must_be_included_after_edital_publication")
-  #   end
-  # end
-
   def must_have_trading
     return unless component.trading.nil?
 
