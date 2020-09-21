@@ -1,4 +1,8 @@
-
+<%unless f.object.trading? &&  f.object.decorator.enabled_realignment_price? %>
+  <div class="alert alert-warning">
+    <strong><%= f.object.decorator.must_have_creditors_and_items_and_tradings%></strong>
+  </div>
+<% end %>
 <table class="records">
   <thead>
   <tr>
@@ -16,10 +20,10 @@
   <tbody>
   <% if f.object.trading? %>
     <%= render partial: 'realignment_prices/creditors_row_trading', collection: Creditor.winners(f.object), as: :creditor,
-               locals:{licitation_process: f.object} %>
+               locals:{licitation_process: f.object} if f.object.persisted? %>
   <% else %>
     <%= render partial: "realignment_prices/creditors_row_#{f.object.judgment_form_kind}", collection: Creditor.winners(f.object), as: :creditor,
-               locals:{licitation_process: f.object}%>
+               locals:{licitation_process: f.object} if f.object.persisted? %>
   <% end %>
   </tbody>
 </table>

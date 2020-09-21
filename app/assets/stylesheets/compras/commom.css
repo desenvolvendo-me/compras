@@ -43,6 +43,20 @@
 .w-100{
     width: 100%;
 }
+
+.alert-warning {
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+}
+.alert {
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+}
+
 .btn-small{
     padding: .25rem .5rem;
     font-size: .875rem;

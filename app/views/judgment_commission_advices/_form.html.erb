@@ -71,17 +71,18 @@
       $(this).closest('.nested').find('.cpf').val('');
     }
   });
-  <% if f.object.licitation_process.simplified_processes? %>
+
+  $('input[name="licitation_process[type_of_purchase]"]').change(function () {
+    if ($('#licitation_process_type_of_purchase_licitation').is(':checked')) {
+      $('.advice').removeClass('hidden');
+    }else{
+      $('.advice').addClass('hidden');
+    }
+  });
+
+  <% if f.object&.licitation_process&.simplified_processes? %>
     $('.advice').addClass('hidden');
   <% else %>
     $('.advice').removeClass('hidden');
-    $("[name$='[judgment_start_date]']").requiredField(true);
-    $("[name$='[judgment_start_time]']").requiredField(true);
-    $("[name$='[judgment_end_date]']").requiredField(true);
-    $("[name$='[judgment_end_time]']").requiredField(true);
-    $("[name$='[companies_minutes]']").requiredField(true);
-    $("[name$='[companies_documentation_minutes]']").requiredField(true);
-    $("[name$='[justification_minutes]']").requiredField(true);
-    $("[name$='[judgment_minutes]']").requiredField(true);
   <% end %>
 </script>
