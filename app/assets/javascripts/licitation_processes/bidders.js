@@ -13,7 +13,7 @@ function initMustache(){
   $("#cancel-bidder").show();
 }
 
-$("#cancel-bidder").click(function(){
+$(document).on('click','#cancel-bidder', function(){
   $("#bidders-records, #add-bidder").show();
   $(this).hide();
   $("#bidder-fields").html('');
