@@ -1,4 +1,6 @@
 pt-BR:
+  minute_purchase_processes_reports:
+    one: Relatório do Contrato/ATA
   activemodel:
     attributes:
       minute_purchase_process_report:
