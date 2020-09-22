@@ -20,12 +20,12 @@
 
     <% all_hidden_fields.each do |column_name| %>
       <% if f.object.class.reflect_on_association(column_name) %>
-        <% value = f.object.decorator.send("#{column_name}_id") %>
+        <% value = f.object.send("#{column_name}_id") %>
         <% value = "{{#{column_name}_id}}" if defined?(is_mustache) && is_mustache %>
         <%= f.input "#{column_name}_id", as: :hidden, input_html: { value: value, class: "#{column_name}_id" } %>
       <% end %>
 
-      <% value = f.object.decorator.send(column_name) %>
+      <% value = f.object.send(column_name) %>
       <% value = "{{#{column_name}}}" if defined?(is_mustache) && is_mustache %>
       <%= f.input column_name, as: :hidden, input_html: { value: value, class: "#{column_name}" } %>
     <% end %>

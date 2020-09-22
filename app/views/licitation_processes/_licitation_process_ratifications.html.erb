@@ -16,7 +16,14 @@
       <%= link_to 'Cancelar', "#", class: "button cancel", id: "cancel-process_ratification" %>
     </div>
   </div>
-  <div id="process-ratification-fields"></div>
+
+  <div id="process-ratification-fields">
+    <%if f.object.licitation_process_ratifications.any?{|x| x.errors.present? } %>
+      <%= f.simple_fields_for :licitation_process_ratifications, f.object.licitation_process_ratifications.select{|x| x.errors.present?} do |p| %>
+        <%= render 'licitation_process_ratifications/form', :f => p %>
+      <% end %>
+    <% end %>
+  </div>
 
   <% column_names = LicitationProcessRatificationDecorator.header_attributes.to_a %>
 
@@ -67,3 +74,12 @@
     display: none;
   }
 </style>
+
+<%if  f.object.licitation_process_ratifications.any?{|x| x.errors.present? }  %>
+<script>
+  $(function(){
+    $("#add-process-ratification").hide();
+    $("#cancel-process_ratification").show();
+  })
+</script>
+<% end %>

@@ -141,13 +141,12 @@ class LicitationProcess < Compras::Model
       scope: [:creditor_id],
       message: :material_cannot_be_duplicated_by_creditor
   }
-  # validate :validate_bidders_before_edital_publication
+
   validate :validate_proposal_envelope_opening_date, :on => :update, :if => :licitation?
   validate :validate_the_year_to_processe_date_are_the_same, :on => :update
   validate :validate_total_items
   validate :judgment_form_can_update?, on: :update
 
-  before_save :set_homologation_date
   after_save  :set_approved_status
 
   with_options :allow_blank => true do |allowing_blank|
@@ -447,15 +446,16 @@ class LicitationProcess < Compras::Model
 
   protected
 
-  def set_homologation_date
-    if self.status_changed? && self.status == PurchaseProcessStatus::APPROVED
-      self.homologation_date = Date.today
+  def update_homologation_date
+    if status == PurchaseProcessStatus::APPROVED
+      update_column :homologation_date, Date.today
     end
   end
 
   def set_approved_status
     if licitation_process_ratifications.any?
       update_status(PurchaseProcessStatus::APPROVED)
+      update_homologation_date if licitation_process_ratifications.any?{|x| x.changed?}
     end
   end
 
@@ -488,12 +488,6 @@ class LicitationProcess < Compras::Model
   def validate_the_year_to_processe_date_are_the_same
     errors.add(:process_date, :cannot_change_the_year_from_the_date_of_dispatch) unless process_date_year == year
   end
-
-  # def validate_bidders_before_edital_publication
-  #   if bidders.any? && !edital_published? && licitation?
-  #     errors.add(:base, :inclusion_of_bidders_before_edital_publication)
-  #   end
-  # end
 
   def validate_budget_allocations_destruction
     error = false
