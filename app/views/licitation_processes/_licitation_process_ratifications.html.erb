@@ -1,4 +1,4 @@
-<% unless !f.object.decorator.disabled_negotiation_message && f.object.trading? %>
+<% unless f.object.decorator.can_homologate?  %>
   <div class="alert alert-warning">
     <strong> <%= f.object.decorator.must_finish_all_tabs_to_homologation %></strong>
   </div>
@@ -51,7 +51,7 @@
     </tbody>
   </table>
 
-<% if !f.object.decorator.disabled_negotiation_message && f.object.trading? %>
+<% if f.object.decorator.can_homologate? %>
   <%= mustache 'process_ratifications-template' do %>
     <%= f.association :licitation_process_ratifications_attributes, :collection => f.object.licitation_process_ratifications.build, :index => '{{uuid_process_ratification}}' do |p| %>
       <%= render 'licitation_process_ratifications/form', :f => p %>
