@@ -99,6 +99,18 @@ class LicitationProcessDecorator
     end
   end
 
+  def has_all_ratifications?
+    if licitation?
+      if trading?
+        Creditor.without_licitation_ratification(id).won_calculation_for_trading(id).present?
+      else
+        Creditor.without_licitation_ratification(id).won_calculation(id).present?
+      end
+    else
+      Creditor.without_direct_purchase_ratification(id).present?
+    end
+  end
+
   def enabled_realignment_price?
     return false unless licitation?
 
