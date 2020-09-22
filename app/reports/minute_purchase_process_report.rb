@@ -87,6 +87,14 @@ class MinutePurchaseProcessReport < Report
     licitation_process.ratifications_items.by_ratificated
   end
 
+  def modality
+    if licitation_process.licitation?
+      licitation_process.modality_humanize
+    else
+      licitation_process.type_of_removal_humanize
+    end
+  end
+
   protected
 
   def normalize_attributes
