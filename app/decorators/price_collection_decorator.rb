@@ -5,10 +5,18 @@ class PriceCollectionDecorator
   include ActionView::Helpers::NumberHelper
   include ActionView::Helpers::TranslationHelper
 
-  attr_header :code_and_year, :status
+  attr_header :code_and_year,:purchase_solicitation,:department,:status
+
+  def purchase_solicitation
+    self.purchase_solicitations.last
+  end
+
+  def department
+    self.purchase_solicitations.last.department if self.purchase_solicitations.last
+  end
 
   def all_price_collection_classifications_groupped
-    all_price_collection_classifications.group_by(&:price_collection_proposal)
+      all_price_collection_classifications.group_by(&:price_collection_proposal)
   end
 
   def proposal_for_creditor(creditor)
