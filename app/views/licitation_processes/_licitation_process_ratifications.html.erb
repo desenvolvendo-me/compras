@@ -11,7 +11,9 @@
 
   <div class="yui3-g button-tabs">
     <div class="yui3-u-1">
-      <%= link_to 'Adicionar Adjudicação/Homologação', "#", class: "button", id: "add-process-ratification" %>
+      <% if f.object.decorator.has_all_ratifications? %>
+        <%= link_to 'Adicionar Adjudicação/Homologação', "#", class: "button", id: "add-process-ratification" %>
+      <% end %>
 
       <%= link_to 'Cancelar', "#", class: "button cancel", id: "cancel-process_ratification" %>
     </div>
