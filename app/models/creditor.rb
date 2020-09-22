@@ -99,7 +99,10 @@ class Creditor < Persona::Creditor
         }.uniq
   end
 
+  # Quando o processo de compra for por compra direta, faz o filtro de todos
+  # os fornecedores vencedores de algum  item.
   scope :without_direct_purchase_ratification, lambda {|licitation_process_id|
+    #filtra os que já tem ratificações cadastradas
     creditor_ids = LicitationProcess.find(licitation_process_id).licitation_process_ratification_creditor_ids
 
     scoped.select {'unico_creditors.*, unico_people.name'}.
