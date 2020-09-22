@@ -89,13 +89,15 @@ class LicitationProcessDecorator
     t('licitation_process.messages.disabled_negotiation_message')
   end
 
-  # def enabled_bidders?
-  #   if trading?
-  #     must_have_published_edital_or_direct_purchase_or_disabled_negotiation_message
-  #   else
-  #     must_have_published_edital_or_direct_purchase
-  #   end
-  # end
+  def can_homologate?
+    return if new_record? || (items.reject(&:new_record?) && bidders.reject(&:new_record?))
+
+    if licitation? && trading?
+      items && bidders && allow_negotiation?
+    else
+      items && bidders
+    end
+  end
 
   def enabled_realignment_price?
     return false unless licitation?

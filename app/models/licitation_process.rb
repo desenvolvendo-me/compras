@@ -145,7 +145,6 @@ class LicitationProcess < Compras::Model
   validate :validate_proposal_envelope_opening_date, :on => :update, :if => :licitation?
   validate :validate_the_year_to_processe_date_are_the_same, :on => :update
   validate :validate_total_items
-  validate :purchase_solicitations_blank?
   validate :judgment_form_can_update?, on: :update
 
   before_save :set_homologation_date
@@ -276,10 +275,6 @@ class LicitationProcess < Compras::Model
 
   def to_s
     "#{process}/#{year} - #{modality_or_type_of_removal_humanized} #{modality_number}"
-  end
-
-  def purchase_solicitations_blank?
-    errors.add(:purchase_solicitations, :blank) if purchase_solicitations.blank?
   end
 
   def modality_or_type_of_removal
