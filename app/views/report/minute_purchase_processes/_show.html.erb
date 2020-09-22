@@ -163,10 +163,10 @@
       </tr>
     </thead>
     <tbody>
-      <% resource.creditor_winner.each do |item| %>
+      <% resource.creditor_ratified.each do |creditor| %>
       <tr>
-        <td><%= item.creditor %></td>
-        <td><%= number_to_currency item.total_price %></td>
+        <td><%= creditor[0] %></td>
+        <td><%=  number_to_currency creditor[1]%></td>
       </tr>
       <% end %>
     </tbody>
