@@ -1,97 +1,128 @@
-<div style="text-align: left">
-  <p>
+
+<div class="row">
+  <div class="col">
     <strong>Ano <%= @contract.decorator.contract_or_minute_report%>: </strong>
-    <%= @contract.year %>
-  </p>
-  <p>
-    <strong>Número <%= @contract.decorator.contract_or_minute_report%>: </strong>
-    <%= @contract.contract_number %>
-  </p>
-  <p>
-    <strong>Objeto: </strong>
-    <%= @contract.content %>
-  </p>
-  <p>
-    <strong>Processo de Compra: </strong>
-    <%= @contract.licitation_process %>
-  </p>
-  <p>
-    <strong>Fornecedor: </strong>
-    <%= @contract.creditor %>
-  </p>
-  <p>
-    <strong>Tipo <%= @contract.decorator.contract_or_minute_report%>: </strong>
-    <%= @contract.contract_type %>
-  </p>
-  <p>
-    <strong>Data da Publicação: </strong>
-    <%= @contract.publication_date %>
-  </p>
-  <p>
-    <strong>Local da Publicação: </strong>
-    <%= @contract.dissemination_source %>
-  </p>
-  <p>
-    <strong>Valor <%= @contract.decorator.contract_or_minute_report%>: </strong>
-    <%= number_to_currency @contract.contract_value %>
-  </p>
-  <p>
-    <strong>Multa Inadimplemento: </strong>
-    <%= number_to_percentage @contract.default_fine %>
-  </p>
-  <p>
-    <strong>Garantias <%= @contract.decorator.contract_or_minute_report%>: </strong>
-    <%= @contract.contract_guarantees_humanize %>
-  </p>
-  <p>
-    <strong>Valor da Garantia: </strong>
-    <%= @contract.guarantee_value %>
-  </p>
-  <p>
+    <p><%= @contract.year %></p>
+  </div>
+
+  <div class="col">
     <strong>Validade <%= @contract.decorator.contract_or_minute_report%>: </strong>
-    <%= @contract.contract_validity %>
-  </p>
-  <p>
-    <strong>Data de Assinatura: </strong>
-    <%= @contract.signature_date %>
-  </p>
-  <p>
-    <strong>Inicio da Vigência: </strong>
-    <%= @contract.start_date %>
-  </p>
-  <p>
-    <strong>Fim da Vigência: </strong>
-    <%= @contract.end_date %>
-  </p>
-  <p>
-    <strong>Forma de Execução: </strong>
-    <%= @contract.execution_type %>
-  </p>
-  <p>
-    <strong>Unidade de Compra Responsável: </strong>
-    <%= @contract.purchasing_unit %>
-  </p>
-  <p>
-    <strong>Multa Rescisória: </strong>
-    <%= number_to_percentage @contract.penalty_fine %>
-  </p>
-  <p>
-    <strong>Modalidade: </strong>
-    <%= @contract.modality_humanize %>
-  </p>
-  <p>
-    <strong>Unidade de Compra Responsável: </strong>
-    <%= @contract.purchasing_unit %>
-  </p>
-  <p>
-    <strong>Servidor Responsavel pelo <%= @contract.decorator.contract_or_minute_report%> na Unidade de Compras: </strong>
-    <%= @contract.budget_structure_responsible %>
-  </p>
-  <p>
-    <strong>Observações: </strong>
-    <%= @contract.description %>
-  </p>
+    <p><%= @contract.contract_validity %></p>
+  </div>
+
+  <div class="col">
+    <strong>Número <%= @contract.decorator.contract_or_minute_report%>: </strong>
+    <p><%= @contract.contract_number %></p>
+  </div>
+
+  <div class="col">
+    <strong>Tipo <%= @contract.decorator.contract_or_minute_report%>: </strong>
+    <p><%= @contract.contract_type %></p>
+  </div>
 </div>
+
+<div class="row">
+  <div class="col">
+    <strong>Processo de Compra: </strong>
+    <p><%= @contract.licitation_process %></p>
+  </div>
+
+  <div class="col">
+    <strong>Fornecedor: </strong>
+    <p><%= @contract.creditor %></p>
+  </div>
+
+  <div class="col">
+    <strong>Unidade de Compra Responsável: </strong>
+    <p><%= @contract.purchasing_unit %></p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <strong>Objeto: </strong>
+    <p><%= @contract.content %></p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <strong>Data da Publicação: </strong>
+    <p><%= date_mask @contract.publication_date %></p>
+  </div>
+
+  <div class="col">
+    <strong>Local da Publicação: </strong>
+    <p><%= @contract.dissemination_source %></p>
+  </div>
+
+  <div class="col">
+    <strong>Valor <%= @contract.decorator.contract_or_minute_report%>: </strong>
+    <p><%= number_to_currency @contract.contract_value %></p>
+  </div>
+
+  <div class="col">
+    <strong>Multa Inadimplemento: </strong>
+    <p><%= number_to_percentage @contract.default_fine %></p>
+  </div>
+
+  <div class="col">
+    <strong>Garantias <%= @contract.decorator.contract_or_minute_report%>: </strong>
+    <p><%= @contract.contract_guarantees_humanize %></p>
+  </div>
+
+  <div class="col">
+    <strong>Valor da Garantia: </strong>
+    <p><%= @contract.guarantee_value %></p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <strong>Data de Assinatura: </strong>
+    <p><%= date_mask @contract.signature_date %></p>
+  </div>
+
+  <div class="col">
+    <strong>Inicio da Vigência: </strong>
+    <p><%= date_mask @contract.start_date %></p>
+  </div>
+
+  <div class="col">
+    <strong>Fim da Vigência: </strong>
+    <p><%= date_mask @contract.end_date %></p>
+  </div>
+
+  <div class="col">
+    <strong>Forma de Execução: </strong>
+    <p><%= @contract.execution_type_humanize %></p>
+  </div>
+
+  <div class="col">
+    <strong>Multa Rescisória: </strong>
+    <p><%= number_to_percentage @contract.penalty_fine %></p>
+  </div>
+
+  <div class="col">
+    <strong>Modalidade: </strong>
+    <p><%= @contract.modality_humanize %></p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <strong>Servidor Responsavel pelo <%= @contract.decorator.contract_or_minute_report%> na Unidade de Compras: </strong>
+    <p><%= @contract.budget_structure_responsible %></p>
+  </div>
+
+  <div class="col">
+    <strong>Observações: </strong>
+    <p><%= @contract.description %></p>
+  </div>
+</div>
+
+
+
 
 <div class="page-break"></div>
 
@@ -224,3 +255,11 @@
     </table>
   <% end %>
 </div>
+
+<style>
+  .row > div {
+    flex: 1;
+    background: #fafafa9c;
+    border: 1px solid grey;
+  }
+</style>
