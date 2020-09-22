@@ -16,11 +16,11 @@
     </div>
 
     <div class="yui3-u-1-4">
-      <%= f.input :ratification_date %>
+      <%= f.input :ratification_date, input_html:{value: (l f.object.ratification_date rescue nil)} %>
     </div>
 
     <div class="yui3-u-1-4">
-      <%= f.input :adjudication_date %>
+      <%= f.input :adjudication_date, input_html:{value: (l f.object.adjudication_date rescue nil)} %>
     </div>
   </div>
 
