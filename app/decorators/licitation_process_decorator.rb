@@ -66,16 +66,16 @@ class LicitationProcessDecorator
     end
   end
 
-  def must_have_published_edital_or_direct_purchase_or_disabled_negotiation_message
-    must_have_published_edital_or_direct_purchase
-    disabled_negotiation_message
-  end
+  # def must_have_published_edital_or_direct_purchase_or_disabled_negotiation_message
+  #   must_have_published_edital_or_direct_purchase
+  #   disabled_negotiation_message
+  # end
 
-  def must_have_published_edital_or_direct_purchase
-    unless edital_published? || simplified_processes?
-      t("licitation_process.messages.must_be_included_after_edital_publication")
-    end
-  end
+  # def must_have_published_edital_or_direct_purchase
+  #   unless edital_published? || simplified_processes?
+  #     t("licitation_process.messages.must_be_included_after_edital_publication")
+  #   end
+  # end
 
   def must_have_trading
     return unless component.trading.nil?
@@ -89,13 +89,13 @@ class LicitationProcessDecorator
     t('licitation_process.messages.disabled_negotiation_message')
   end
 
-  def enabled_bidders?
-    if trading?
-      must_have_published_edital_or_direct_purchase_or_disabled_negotiation_message
-    else
-      must_have_published_edital_or_direct_purchase
-    end
-  end
+  # def enabled_bidders?
+  #   if trading?
+  #     must_have_published_edital_or_direct_purchase_or_disabled_negotiation_message
+  #   else
+  #     must_have_published_edital_or_direct_purchase
+  #   end
+  # end
 
   def enabled_realignment_price?
     return false unless licitation?
@@ -150,6 +150,14 @@ class LicitationProcessDecorator
     end
   end
 
+  def must_have_creditors_and_items_and_tradings
+    if component.creditors.blank? || materials.blank?
+      t("licitation_process.messages.must_have_creditors_and_items")
+    elsif !trading.try(:allow_negotiation?)
+      t('licitation_process.messages.disabled_negotiation_message')
+    end
+  end
+
   def material_unique_class
     return '' if simplified_processes? && (type_of_removal_dispensation_justified_accreditation? ||
         type_of_removal_unenforceability_accreditation?)
@@ -163,6 +171,14 @@ class LicitationProcessDecorator
 
   def get_items_amount
     number_with_precision super if super
+  end
+
+  def must_finish_all_tabs_to_homologation
+    if licitation?
+      'É necessário preencher as abas Itens; Habilitação; Lances'
+    else
+      'É necessário preencher as abas Itens/Justificativa; Habilitação'
+    end
   end
 
   private

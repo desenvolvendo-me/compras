@@ -121,14 +121,13 @@ class LicitationProcess < Compras::Model
            :lowest_price?, :higher_discount_on_lot?, :higher_discount_on_item?,
            :to => :judgment_form, :allow_nil => true, :prefix => true
 
-  validates :process_date, :period, :contract_guarantees, :type_of_purchase, :purchasing_unit,
-            :period_unit, :payment_method, :year, :execution_type, :object_type, :description,
-            :notice_availability_date, :presence => true
-  validates :envelope_delivery_date, :envelope_delivery_time, :expiration, :expiration_unit,
-            :modality, :judgment_form_id, :presence => true, :if => :licitation?
-  validates :goal, :licensor_rights_and_liabilities, :licensee_rights_and_liabilities,
-            :presence => true, :if => :concessions_or_permits?
-  validates :type_of_removal, :justification, :justification_and_legal, :presence => true, :if => :simplified_processes?
+  validates :contract_guarantees, :type_of_purchase, :purchasing_unit,
+            :payment_method, :year, :execution_type, :object_type,
+            :description, :presence => true
+
+  validates :modality, :judgment_form_id, :presence => true, :if => :licitation?
+
+  validates :type_of_removal, :justification, :presence => true, :if => :simplified_processes?
   validates :process, uniqueness: {scope: :year}
   validates :budget_allocation_year, numericality: {greater_than_or_equal_to: :year}, allow_blank: true
   validates :tied_creditor_proposals, no_duplication: {
@@ -142,7 +141,7 @@ class LicitationProcess < Compras::Model
       scope: [:creditor_id],
       message: :material_cannot_be_duplicated_by_creditor
   }
-  validate :validate_bidders_before_edital_publication
+  # validate :validate_bidders_before_edital_publication
   validate :validate_proposal_envelope_opening_date, :on => :update, :if => :licitation?
   validate :validate_the_year_to_processe_date_are_the_same, :on => :update
   validate :validate_total_items
@@ -495,11 +494,11 @@ class LicitationProcess < Compras::Model
     errors.add(:process_date, :cannot_change_the_year_from_the_date_of_dispatch) unless process_date_year == year
   end
 
-  def validate_bidders_before_edital_publication
-    if bidders.any? && !edital_published? && licitation?
-      errors.add(:base, :inclusion_of_bidders_before_edital_publication)
-    end
-  end
+  # def validate_bidders_before_edital_publication
+  #   if bidders.any? && !edital_published? && licitation?
+  #     errors.add(:base, :inclusion_of_bidders_before_edital_publication)
+  #   end
+  # end
 
   def validate_budget_allocations_destruction
     error = false

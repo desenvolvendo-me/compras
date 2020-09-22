@@ -100,6 +100,7 @@ module LicitationProcessesHelper
     trading
   end
 
+
   private
 
   def disqualification_status(creditor)

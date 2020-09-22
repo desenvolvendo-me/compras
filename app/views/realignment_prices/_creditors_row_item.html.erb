@@ -1,0 +1,12 @@
+<% proposals(licitation_process, creditor).each do |proposal| %>
+  <tr>
+    <td><%= creditor.to_s %></td>
+    <td><%= creditor.person_email %></td>
+    <td><%= proposal.item %></td>
+
+    <td>
+      <%= link_to realignment_link_title(licitation_process.id, creditor.id, proposal.lot),
+                  realignment_path_helper(licitation_process.id, creditor.id, proposal.lot) %>
+    </td>
+  </tr>
+<% end %>

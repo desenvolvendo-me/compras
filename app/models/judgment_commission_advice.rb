@@ -17,11 +17,8 @@ class JudgmentCommissionAdvice < Compras::Model
   delegate :president_name, :to => :licitation_commission, :allow_nil => true, :prefix => true
   delegate :licitation_commission_members, :to => :licitation_commission, :allow_nil => true
 
-  validates :licitation_process, :licitation_commission, :year, :minutes_number, :presence => true
+  validates :licitation_process, :presence => true
   validates :year, :mask => "9999"
-  validates :judgment_start_date, :judgment_start_time, :judgment_end_date,
-            :judgment_end_time, :companies_minutes, :companies_documentation_minutes,
-            :justification_minutes, :judgment_minutes, :presence => true, if: :licitation_process_licitation?
   validates :judgment_commission_advice_members, :no_duplication => :individual_id
 
   validate :start_date_time_should_not_be_greater_than_end_date_time

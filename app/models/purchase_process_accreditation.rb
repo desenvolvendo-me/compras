@@ -12,6 +12,4 @@ class PurchaseProcessAccreditation < Compras::Model
                                 :allow_destroy => true
 
   delegate :judgment_form_item?, to: :licitation_process, allow_nil: true
-
-  validates :licitation_process, :presence => true
 end
