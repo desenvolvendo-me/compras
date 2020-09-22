@@ -10,7 +10,7 @@
   </div>
 
   <div class="yui3-u-1-2">
-    <%= f.input :publication_of, collection: publication_of_collection(f.object.licitation_process) %>
+    <%= f.input :publication_of, collection: (publication_of_collection(f.object.licitation_process) if f.object.try(:licitation_process)) %>
   </div>
 
   <div class="yui3-u-1-2">

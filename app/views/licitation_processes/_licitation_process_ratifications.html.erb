@@ -1,91 +1,63 @@
-<div class="yui3-g button-tabs">
-  <div class="yui3-u-1">
-  <%= link_to 'Adicionar Adjudicação/Homologação', "#", class: "button", id: "add-process-ratification" %>
-
-  <%= link_to 'Cancelar', "#", class: "button cancel", id: "cancel-process_ratification" %>
+<% unless !f.object.decorator.disabled_negotiation_message && f.object.trading? %>
+  <div class="alert alert-warning">
+    <strong> <%= f.object.decorator.must_finish_all_tabs_to_homologation %></strong>
   </div>
-</div>
-<div id="process-ratification-fields"></div>
-
-<% column_names = LicitationProcessRatificationDecorator.header_attributes.to_a %>
-
-<table id='process_ratifications-records' class="records">
-  <thead>
-  <tr>
-    <% column_names.each do |column_name| %>
-      <th class="<%= column_name %>"><%= LicitationProcessRatification.human_attribute_name column_name %></th>
-    <% end %>
-    <th></th>
-    <th></th>
-  </tr>
-  </thead>
-
-  <tbody class="<%= f.sanitized_object_name %>_document_types_records">
-  <% f.object.licitation_process_ratifications.reject(&:new_record?).each do |process_ratification| %>
-    <tr>
-      <% column_names.each do |column_name| %>
-        <td>
-          <%=  process_ratification.decorator.send(column_name) %>
-        </td>
-      <% end %>
-      <td>
-        <%= link_to 'Editar', '#', 'data-id': process_ratification.id,  class: 'edit-process_ratification' %>
-      </td>
-      <td>
-        <%= link_to 'Deletar', licitation_process_ratification_path(process_ratification.id), method: :delete, class: 'remove-process_ratification' %>
-      </td>
-    </tr>
-  <% end %>
-
-  </tbody>
-</table>
-
-<%= mustache 'process_ratifications-template' do %>
-  <%= f.association :licitation_process_ratifications_attributes, :collection => f.object.licitation_process_ratifications.build, :index => '{{uuid_process_ratification}}' do |p| %>
-    <%= render 'licitation_process_ratifications/form', :f => p %>
-  <% end %>
+  <script>
+    $(function(){
+      $("#add-process-ratification").attr('href', '#');
+    })
+  </script>
 <% end %>
 
+  <div class="yui3-g button-tabs">
+    <div class="yui3-u-1">
+      <%= link_to 'Adicionar Adjudicação/Homologação', "#", class: "button", id: "add-process-ratification" %>
 
-<script type="text/javascript" charset="utf-8">
+      <%= link_to 'Cancelar', "#", class: "button cancel", id: "cancel-process_ratification" %>
+    </div>
+  </div>
+  <div id="process-ratification-fields"></div>
 
-  function handleButtonsRatifications(){
-    $("#process_ratifications-records, #add-process-ratification").hide();
-    $("#cancel-process_ratification").show();
-  }
+  <% column_names = LicitationProcessRatificationDecorator.header_attributes.to_a %>
 
-  $("#cancel-process_ratification").click(function(){
-    $(this).hide();
-    $("#process_ratifications-records, #add-process-ratification").show();
-    $("#process-ratification-fields").html('');
-  });
+  <table id='process_ratifications-records' class="records">
+    <thead>
+    <tr>
+      <% column_names.each do |column_name| %>
+        <th class="<%= column_name %>"><%= LicitationProcessRatification.human_attribute_name column_name %></th>
+      <% end %>
+      <th></th>
+      <th></th>
+    </tr>
+    </thead>
 
-  $(function(){
+    <tbody class="<%= f.sanitized_object_name %>_document_types_records">
+    <% f.object.licitation_process_ratifications.reject(&:new_record?).each do |process_ratification| %>
+      <tr>
+        <% column_names.each do |column_name| %>
+          <td>
+            <%=  process_ratification.decorator.send(column_name) %>
+          </td>
+        <% end %>
+        <td>
+          <%= link_to 'Editar', '#', 'data-id': process_ratification.id,  class: 'edit-process_ratification' %>
+        </td>
+        <td>
+          <%= link_to 'Deletar', licitation_process_ratification_path(process_ratification.id), method: :delete, class: 'remove-process_ratification' %>
+        </td>
+      </tr>
+    <% end %>
 
-    $(document).on('click', 'button.remove_process_ratification_document, button.add_process_ratification_document', function(event) {
-      event.preventDefault()
-    });
+    </tbody>
+  </table>
 
-    $("#add-process-ratification").click(function() {
-      $('#process-ratification-fields').append($('#process_ratifications-template').mustache({uuid_process_ratification: _.uniqueId('fresh-')}));
-      handleButtonsRatifications();
-    });
-
-    $(".edit-process_ratification").click(function() {
-      var url = Routes.add_ratifications_licitation_processes,
-        params = {
-          id: <%= f.object.id %>, ratification_id: $(this).data('id')
-        };
-
-      url += "?" + $.param(params);
-
-      $.get(url, function (data) {
-        $("#process-ratification-fields").html($(data).html());
-        handleButtonsRatifications();
-      })
-    })
-  })
-</script>
+<% if !f.object.decorator.disabled_negotiation_message && f.object.trading? %>
+  <%= mustache 'process_ratifications-template' do %>
+    <%= f.association :licitation_process_ratifications_attributes, :collection => f.object.licitation_process_ratifications.build, :index => '{{uuid_process_ratification}}' do |p| %>
+      <%= render 'licitation_process_ratifications/form', :f => p %>
+    <% end %>
+  <% end %>
+<% end %>
 
 <style>
   .button-tabs{

@@ -22,6 +22,7 @@ class LicitationProcessesController < CrudController
     object.open_date = Date.current
     object.status = PurchaseProcessStatus::WAITING_FOR_OPEN
     object.purchase_solicitation_import_option = PurchaseSolicitationImportOption::AVERAGE_PRICE
+    object.type_of_purchase = PurchaseProcessTypeOfPurchase::DIRECT_PURCHASE
 
     super
   end

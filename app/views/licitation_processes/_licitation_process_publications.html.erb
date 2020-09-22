@@ -1,18 +1,24 @@
-<div class="nested-grid">
+<div id='publications' class="nested-grid">
   <div class="nested-fields nested-additives">
-    <%= f.simple_fields_for :publications, LicitationProcessPublication.new do |p|%>
-      <% p.object_name = 'publications'
-          p.object.licitation_process_id = f.object.id
-      %>
-      <%= p.input :id, as: :hidden %>
-      <%= render "licitation_process_publications/form", f: p %>
-    <% end %>
+    <div class="hidden-fields">
+      <%= f.simple_fields_for :publications, LicitationProcessPublication.new do |p|%>
+        <% p.object_name = 'publications'
+            p.object.licitation_process_id = f.object.id
+        %>
+        <%= p.input :id, as: :hidden %>
+        <%= render "licitation_process_publications/form", f: p %>
+      <% end %>
+    </div>
 
-    <%= button_tag 'Adicionar', type: :button,
-                   class: 'button add-nested-record field-without-label add-margin-bottom',
-                   'data-template' => "publications_template",
-                   'data-records' => "publications_records",
-                   id: "publications_button" %>
+    <div class="text-right">
+      <%= button_tag 'Adicionar', type: :button,
+                     class: 'button add-nested-record field-without-label add-margin-bottom',
+                     'data-template' => "publications_template",
+                     'data-records' => "publications_records",
+                     id: "publications_button" %>
+
+      <%= button_tag 'Adicionar', type: :button, class:'button primary field-without-label show-fields' %>
+    </div>
   </div>
 
   <%column_names = LicitationProcessPublicationDecorator.header_attributes.to_a
