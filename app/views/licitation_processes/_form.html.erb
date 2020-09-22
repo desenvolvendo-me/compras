@@ -214,7 +214,12 @@
     });
   <% end %>
 
-
+  $(function(){
+    $("#tab-documents :input").prop('disabled', false);
+    $("#tab-legal-analysis-appraisals :input").prop('disabled', false);
+    $("#tab-licitation-process-publications :input").prop('disabled', false);
+    $("#tab-judgment-commission :input").prop('disabled', false);
+  });
 
   $(function(){
     var disabled = '',
