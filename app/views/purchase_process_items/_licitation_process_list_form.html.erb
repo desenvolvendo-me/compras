@@ -1,5 +1,7 @@
 <tr class="record nested-record item-record" id="material-id-<%= material_id %>">
-  <td class="item-lot"><%= lot %></td>
+  <td class="item-lot">
+    <%= f.input :lot, input_html:{value: lot, class: 'lot' }, label: false%>
+  </td>
 
   <td class="item-material"><%= material %></td>
 
@@ -21,11 +23,6 @@
   <td class="item-total-value"><%= estimated_total_price %></td>
 
   <td>
-    <%= link_to 'Editar', '#', class: 'edit-nested-record', 'data-disabled' => data_disabled %>
-  </td>
-
-  <td>
-    <%= f.input :lot, as: :hidden, input_html: { value: lot, class: 'lot' } %>
     <%= f.input :material_id, as: :hidden, input_html: { value: material_id, class: 'material-id' } %>
     <%= f.input :material, as: :hidden, input_html: { value: material } %>
     <%= f.input :additional_information, as: :hidden, input_html: { value: additional_information } %>
