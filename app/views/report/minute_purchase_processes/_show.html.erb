@@ -2,20 +2,30 @@
   <table class="records">
     <thead>
       <tr>
-        <td colspan=2>ATA DE SESSÃO PÚBLICA DO CREDENCIAMENTO, ANÁLISE DE PROPOSTAS, HABILITAÇÃO E, ADJUDICAÇÃO DO OBJETO.</td>
+        <td colspan='3'>ATA DE SESSÃO PÚBLICA DO CREDENCIAMENTO, ANÁLISE DE PROPOSTAS, HABILITAÇÃO E, ADJUDICAÇÃO DO OBJETO.</td>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td colspan=2>CIRCUNSTANCIADA EM <%= resource.issuance_date %></td>
+        <td colspan='3'>CIRCUNSTANCIADA EM <%= resource.issuance_date %></td>
       </tr>
       <tr>
-        <td width="20%"><%= resource.licitation_process.modality_humanize %></td>
-        <td width="80%"><%= resource.licitation_process.modality_number %></td>
+        <td><b>Data da Abertura da Licitação:</b> <%= date_mask(resource.licitation_process.proposal_envelope_opening_date) %></td>
+        <td><b>Hora da Abertura da Licitação:</b> <%= date_mask(resource.licitation_process.proposal_envelope_opening_date) %></td>
+        <td><b>Nº do Processo de Compra:</b> <%= resource.licitation_process.decorator.code_and_year %></td>
+      </tr>
+      <tr>
+        <td><b>Unidade de Compra:</b> <%= resource.licitation_process.purchasing_unit %></td>
+        <td><b>Modalidade:</b> <%= resource.licitation_process.licitation? ? resource.licitation_process.modality_humanize : resource.licitation_process.type_of_removal_humanize  %></td>
+        <td><b>Situação:</b> <%= resource.licitation_process.status_humanize  %></td>
+      </tr>
+      <tr>
+        <td colspan="3"><b>Objeto do Processo de Compra:</b> <%= resource.licitation_process.description %></td>
       </tr>
     </tbody>
   </table>
 </div>
+
 
 <div style="text-align: justify">
   <span>
@@ -147,7 +157,7 @@
       <%= resource.judgment_commission_advice.judgment_minutes %><br><br>
     <% end %>
 
-    CONCLUÍDOS OS PROCEDIMENTOS RELATIVOS A  <%= resource.licitation_process.modality_or_type_of_removal_humanized.upcase %> SOB O Nº <%= resource.licitation_process.modality_number %>,  E CONSIDERANDO QUE: 1) AS PROPOSTAS DAS EMPRESAS VENCEDORAS SATISFAZEM ÀS EXIGÊNCIAS DO EDITAL; 2) AS EMPRESAS VENCEDORAS ENCONTRAM-SE DEVIDAMENTE HABILITADAS QUANTO À DOCUMENTAÇÃO EXIGIDA; 3) OS PREÇOS VITORIOSOS ESTÃO DENTRO DO LIMITE ESTABELECIDO PELA ENTIDADE; POR CONSEGUINTE O(A) PREGOEIRO(A)  ADJUDICA  O  OBJETO  DO  CERTAME  À(S)  EMPRESA(S):
+    CONCLUÍDOS OS PROCEDIMENTOS RELATIVOS A  <%= resource.licitation_process.modality_or_type_of_removal_humanized&.upcase %> SOB O Nº <%= resource.licitation_process.modality_number %>,  E CONSIDERANDO QUE: 1) AS PROPOSTAS DAS EMPRESAS VENCEDORAS SATISFAZEM ÀS EXIGÊNCIAS DO EDITAL; 2) AS EMPRESAS VENCEDORAS ENCONTRAM-SE DEVIDAMENTE HABILITADAS QUANTO À DOCUMENTAÇÃO EXIGIDA; 3) OS PREÇOS VITORIOSOS ESTÃO DENTRO DO LIMITE ESTABELECIDO PELA ENTIDADE; POR CONSEGUINTE O(A) PREGOEIRO(A)  ADJUDICA  O  OBJETO  DO  CERTAME  À(S)  EMPRESA(S):
   </span>
 </div>
 
@@ -188,8 +198,6 @@
     <hr>
     <%= resource.representative %><br>
     REPRESENTANTE <br><br><br>
-    <hr>
-    <%= resource.representative %><br>
-    REPRESENTANTE <br><br><br>
+
   </p>
 </div>
