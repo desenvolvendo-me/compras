@@ -1,8 +1,4 @@
-
-  json.id     resource.id
-  json.value  resource.to_s
-  json.label  resource.to_s
-  json.to_s   resource.to_s
+builder resource, json do
   json.contract_guarantees             resource.contract_guarantees
   json.contract_guarantees_humanize    resource.contract_guarantees_humanize
   json.description                     resource.description
@@ -17,8 +13,30 @@
   json.proposal_envelope_opening_time  resource.decorator.proposal_envelope_opening_time
   json.budget_allocations_ids          resource.budget_allocations_ids
 
+  if resource.price_registration
+    json.value   resource.to_s + " / Processo de Registro de Preço"
+  else
+    json.value   resource.to_s
+  end
+  json.items resource.items do |item|
+    json.id                   item.id
+    json.material_id          item.material_id
+    json.material_description item.material.to_s
+    json.lot                  item.lot
+    json.reference_unit       item.reference_unit
+    json.quantity             item.decorator.quantity
+    json.unit_price           item.decorator.unit_price
+    json.detailed_description item.material ? item.material.detailed_description : nil
+  end
+
   json.creditors resource.licitation_process_ratification_creditors do |creditor|
-    json.id               creditor.id
+    json.id                   creditor.id
     json.name             creditor.to_s
   end
 
+  json.creditors_without_contract resource.licitation_process_ratification_creditors do |creditor|
+    next if resource.contracts.any?{|x| x.creditor_id == creditor.id}
+    json.id               creditor.id
+    json.name             creditor.to_s
+  end.delete_if(&:empty?)
+end
