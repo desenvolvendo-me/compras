@@ -94,16 +94,23 @@ $(document).ready(function () {
         $('#contract_modality_humanize').val(licitationProcess.modality_humanize);
         $('#contract_execution_type').val(licitationProcess.execution_type);
         $('#contract_contract_guarantees').val(licitationProcess.contract_guarantees);
-        if (licitationProcess.creditors) {
-          if (licitationProcess.creditors.length > 1) {
+        var creditor = licitationProcess.creditors_without_contract;
+        if (creditor.length > 0) {
+          if (creditor.length > 1) {
             setUrlToCreditor(licitationProcess.id);
             showToChooseCreditor(licitationProcess.creditors);
           } else {
             setUrlToCreditor(licitationProcess.id);
-            if (licitationProcess.creditors[0]) {
-              fillCreditorField(licitationProcess.creditors[0].name, licitationProcess.creditors[0].id);
+            if (creditor[0]) {
+              fillCreditorField(creditor[0].name, creditor[0].id);
             }
           }
+        }else{
+          alert('O Processo de Compras selecionado não possui fornecedores vencedores.')
+          clearModalityExecutionType();
+          var url = Routes.creditors + "?";
+
+          $('#contract_creditor').data("source", url);
         }
 
       } else {
