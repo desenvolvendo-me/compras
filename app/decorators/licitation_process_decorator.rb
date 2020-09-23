@@ -79,16 +79,18 @@ class LicitationProcessDecorator
   end
 
   def can_homologate?
-    return unless new_record? || (items.reject(&:new_record?) && bidders.reject(&:new_record?) && trading)
+    return unless new_record? || (items.reject(&:new_record?) && bidders.reject(&:new_record?))
 
     if licitation? && trading?
-      items && bidders && trading.allow_negotiation?
+      items && bidders && trading&.allow_negotiation?
     else
       items && bidders
     end
   end
 
   def has_all_ratifications?
+    return if new_record?
+
     if licitation?
       if trading?
         Creditor.without_licitation_ratification(id).won_calculation_for_trading(id).present?
