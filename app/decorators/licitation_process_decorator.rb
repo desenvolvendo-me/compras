@@ -89,6 +89,8 @@ class LicitationProcessDecorator
   end
 
   def has_all_ratifications?
+    return if new_record?
+
     if licitation?
       if trading?
         Creditor.without_licitation_ratification(id).won_calculation_for_trading(id).present?
