@@ -142,7 +142,6 @@ class LicitationProcess < Compras::Model
       message: :material_cannot_be_duplicated_by_creditor
   }
 
-  validate :validate_proposal_envelope_opening_date, :on => :update, :if => :licitation?
   validate :validate_the_year_to_processe_date_are_the_same, :on => :update
   validate :validate_total_items
   validate :judgment_form_can_update?, on: :update
@@ -501,15 +500,6 @@ class LicitationProcess < Compras::Model
     end
 
     purchase_process_budget_allocations.reload if error # Limpa os marked_for_destruction
-  end
-
-  def validate_proposal_envelope_opening_date
-    return unless proposal_envelope_opening_date
-
-    unless last_publication_date
-      errors.add :proposal_envelope_opening_date, :absence
-      return false
-    end
   end
 
   def proposal_envelope_opening_date_limit
