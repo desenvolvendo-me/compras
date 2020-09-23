@@ -7,7 +7,7 @@
 
   <div class="col">
     <strong>Validade <%= @contract.decorator.contract_or_minute_report%>: </strong>
-    <p><%= @contract.contract_validity %></p>
+    <p><%= @contract.contract_validity %> meses</p>
   </div>
 
   <div class="col">
@@ -169,24 +169,24 @@
       <h2>LOTE <%= lot %></h2>
       <thead>
       <tr>
-        <th class="text-center">Código</th>
+        <th class="text-center"  width="5%">Código</th>
         <th>Descrição</th>
         <th>Unidade</th>
         <th>Quantidade</th>
-        <th>Preço Unitário</th>
-        <th>Preço Total</th>
+        <th width="10%">Preço Unitário</th>
+        <th width="10%">Preço Total</th>
       </tr>
       </thead>
       <tbody>
       <% ratifications_items.each do |ratifications_item| %>
         <% total += ratifications_item.total_price %>
         <tr>
-          <td class="text-center" width="5%"><%= ratifications_item.material.code %></td>
+          <td><%= ratifications_item.material.code %></td>
           <td><%= ratifications_item.material.description %></td>
-          <td class="text-center"><%= ratifications_item.material.reference_unit.acronym %></td>
-          <td class="text-right"><%= ratifications_item.quantity %></td>
-          <td width="10%"><%= number_to_currency ratifications_item.unit_price %></td>
-          <td width="10%"><%= number_to_currency ratifications_item.total_price %></td>
+          <td><%= ratifications_item.material.reference_unit.acronym %></td>
+          <td><%= ratifications_item.quantity %></td>
+          <td><%= number_to_currency ratifications_item.unit_price %></td>
+          <td><%= number_to_currency ratifications_item.total_price %></td>
         </tr>
       <% end %>
       <tr>
@@ -214,12 +214,12 @@
       <h2>DEPARTAMENTO: <%= department %></h2>
       <thead>
       <tr>
-        <th>Código</th>
+        <th class="text-center" width="5%">Código</th>
         <th>Descrição</th>
         <th>Unidade</th>
         <th>Quantidade</th>
-        <th>Preço Unitário</th>
-        <th>Preço Total</th>
+        <th width="10%">Preço Unitário</th>
+        <th width="10%">Preço Total</th>
       </tr>
       </thead>
       <tbody>
@@ -236,12 +236,12 @@
 
         <% if ratifications_item %>
           <tr>
-            <td class="text-center" width="5%"><%= purchase_solicitation_item&.material&.code %></td>
+            <td><%= purchase_solicitation_item&.material&.code %></td>
             <td><%= purchase_solicitation_item&.material&.description %></td>
-            <td class="text-center"><%= purchase_solicitation_item&.material&.reference_unit&.acronym %></td>
-            <td class="text-right"><%= purchase_solicitation_item.quantity.to_i %></td>
-            <td width="10%"><%= number_to_currency ratifications_item.try(:unit_price) %></td>
-            <td width="10%"><%= number_to_currency item_total = (purchase_solicitation_item.quantity.to_f*ratifications_item.try(:unit_price).to_f).round(2) %></td>
+            <td><%= purchase_solicitation_item&.material&.reference_unit&.acronym %></td>
+            <td><%= purchase_solicitation_item.quantity.to_i %></td>
+            <td><%= number_to_currency ratifications_item.try(:unit_price) %></td>
+            <td><%= number_to_currency item_total = (purchase_solicitation_item.quantity.to_f*ratifications_item.try(:unit_price).to_f).round(2) %></td>
             <% total += item_total %>
           </tr>
         <% end %>
