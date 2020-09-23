@@ -8,7 +8,7 @@ class Contract < Compras::Model
                   :cancellation_date, :cancellation_reason, :delivery_schedules_attributes,
                   :dissemination_source_id, :contract_type_id, :contract_additives_attributes,
                   :licitation_process_id, :start_date, :budget_structure_responsible_id,
-                  :lawyer_id, :parent_id, :additives_attributes, :penalty_fine, :contract_validations_attributes,
+                  :lawyer_name, :parent_id, :additives_attributes, :penalty_fine, :contract_validations_attributes,
                   :default_fine, :execution_type, :contract_guarantees, :occurrence_contractual_historics_attributes,
                   :consortium_agreement, :department_id, :balance_control_type, :authorized_areas_attributes,
                   :purchasing_unit_id, :financials_attributes, :balance, :contract_termination_attributes,
@@ -31,7 +31,6 @@ class Contract < Compras::Model
   belongs_to :budget_structure_responsible, :class_name => "Employee"
   belongs_to :contract_type
   belongs_to :dissemination_source
-  belongs_to :lawyer, :class_name => "Employee"
   belongs_to :licitation_process
   belongs_to :creditor
   belongs_to :management_object
@@ -129,9 +128,7 @@ class Contract < Compras::Model
     where(licitation_process_id: licitation_id)
   }
 
-  def self.ordered
-    order("ABS(end_date - '#{Date.today}'), unico_people.name ASC, contract_number DESC, year DESC, publication_date DESC ").joins(creditor: [:person])
-  end
+  orderize "id DESC"
 
   def winning_items
     licitation_process_id = self.try(:licitation_process).try(:id)

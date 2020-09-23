@@ -11,6 +11,11 @@ class ContractType < Compras::Model
   filterize
   orderize :description
 
+  scope :term, lambda{|q|
+    where{ description.like("#{q}%") }
+  }
+
+
   def to_s
     description
   end

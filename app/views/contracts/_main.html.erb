@@ -2,7 +2,7 @@
 <%= f.input :id, as: :hidden %>
 <div class="yui3-g">
   <div class='yui3-u-1-2'>
-    <%= f.input :licitation_process, modal_url: modal_licitation_processes_path(not_in_contracts: true) %>
+    <%= f.input :licitation_process, as: :auto_complete, source_path: licitation_processes_path(not_in_contracts: true) %>
   </div>
   <div class='yui3-u-1-2'>
     <%= f.input :creditor, as: :auto_complete, source_path: creditors_path(by_ratification_and_licitation_process_id: f.object.licitation_process_id) %>
@@ -65,7 +65,7 @@
 
 <div class="yui3-g">
   <div class='yui3-u-1-2'>
-    <%= f.input :contract_type %>
+    <%= f.input :contract_type, as: :auto_complete %>
   </div>
   <div class='yui3-u-1-2'>
     <%= f.input :subcontracting, :as => :select %>
@@ -105,18 +105,6 @@
   </div>
 </div>
 
-
-<div class='yui3-g'>
-  <div class='yui3-u-1-4'>
-    <%= f.input :cancellation_date %>
-  </div>
-
-  <div class='yui3-u-3-4'>
-    <%= f.input :cancellation_reason %>
-  </div>
-</div>
-
-
 <div class='yui3-g'>
   <div class='yui3-u-1-3'>
     <%= f.input :execution_type %>
@@ -133,17 +121,17 @@
 
 <div class='yui3-g'>
   <div class='yui3-u-1-2'>
-    <%= f.input :purchasing_unit %>
+    <%= f.input :purchasing_unit, as: :auto_complete %>
   </div>
 
   <div class='yui3-u-1-2'>
-    <%= f.input :budget_structure_responsible %>
+    <%= f.input :budget_structure_responsible, as: :auto_complete, source_path: employees_path %>
   </div>
 </div>
 
 <div class='yui3-g'>
   <div class='yui3-u-1-2'>
-    <%= f.input :lawyer %>
+    <%= f.input :lawyer_name %>
   </div>
 
   <div class='yui3-u-1-2'>
@@ -153,6 +141,15 @@
 
 <%= f.input :description %>
 
+<div class='yui3-g'>
+  <div class='yui3-u-1-4'>
+    <%= f.input :cancellation_date %>
+  </div>
+
+  <div class='yui3-u-3-4'>
+    <%= f.input :cancellation_reason %>
+  </div>
+</div>
 
 <div id="creditor-dialog" title="Selecione o Fornecedor">
   <table id='choose-creditor' class="records">

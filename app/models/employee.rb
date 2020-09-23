@@ -37,6 +37,10 @@ class Employee < Compras::Model
 
   scope :ordered, joins { individual }.order { individual.id }
 
+  scope :term, lambda { |q|
+    joins(:person).where { person.name.like("%#{q}%") }
+  }
+
   def self.filter(params)
     query = scoped.joins { individual.person }
     query = query.where { email.eq(params[:email]) } if params[:email].present?
