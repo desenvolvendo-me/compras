@@ -18,7 +18,8 @@ json.array!(collection) do |obj|
   json.budget_allocations_ids          obj.budget_allocations_ids
 
   json.creditors obj.licitation_process_ratification_creditors do |creditor|
+    next if obj.contracts.any?{|x| x.creditor_id == creditor.id}
     json.id               creditor.id
     json.name             creditor.to_s
-  end
+  end.delete_if(&:empty?)
 end
