@@ -31,7 +31,7 @@ pt-BR:
         end_date: "Fim da Vigência"
         execution_type: "Forma de Execução"
         guarantee_value: 'Valor da Garantia'
-        lawyer: 'Advogado Responsável pela Gestão do Contrato/Ata'
+        lawyer_name: 'Advogado Responsável pela Gestão do Contrato/Ata'
         lawyer_code: 'O.A.B. do Advogado Responsável'
         licitation_process: 'Processo de Compra'
         modality_humanize: 'Modalidade'
