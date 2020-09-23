@@ -16,11 +16,11 @@
     </div>
 
     <div class="yui3-u-1-4">
-      <%= f.input :ratification_date %>
+      <%= f.input :ratification_date, input_html:{value: (l f.object.ratification_date rescue nil)} %>
     </div>
 
     <div class="yui3-u-1-4">
-      <%= f.input :adjudication_date %>
+      <%= f.input :adjudication_date, input_html:{value: (l f.object.adjudication_date rescue nil)} %>
     </div>
   </div>
 
@@ -41,7 +41,7 @@
     <% total = 0 %>
     <%= f.association :licitation_process_ratification_items, :collection => localized(f.object.licitation_process_ratification_items) do |i| %>
       <%= render 'licitation_process_ratification_items/licitation_process_ratification_item', :f => i, resource: f.object %>
-      <%= total += i.object.total_price || 0 %>
+      <% total += i.object.total_price || 0 %>
     <% end %>
     <tr><td colspan="100" style="text-align: end; font-weight: bolder"><%= number_to_currency total %></td></tr>
     </tbody>
@@ -82,6 +82,8 @@
       }, item;
 
     $.getIndex(proposalsUrl, params, function (proposals) {
+      var sum = 0;
+      $('#ratification_items').html('');
       $.each(proposals, function() {
         item = $('#ratification-item-template').mustache({
           uuid_item: _.uniqueId('fresh-'),
@@ -101,8 +103,12 @@
           <% end %>
         });
 
+        sum += this.quantity * parseFloat(this.unit_price);
+
         $('#ratification_items').prepend(item);
       });
+
+      $('#ratification_items').append("<tr><td colspan='100' style='text-align: end; font-weight: bolder'>R$ "+numberWithDelimiter(sum)+"</td></tr>");
     });
   }
 
