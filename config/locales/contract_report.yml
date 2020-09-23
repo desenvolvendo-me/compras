@@ -1,4 +1,6 @@
 pt-BR:
+  contracts_reports:
+    one: Relatório de Contrato/ATA
   activemodel:
     attributes:
       contract_report:

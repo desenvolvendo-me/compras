@@ -2,24 +2,40 @@
   <table class="records">
     <thead>
       <tr>
-        <td colspan=2>ATA DE SESSÃO PÚBLICA DO CREDENCIAMENTO, ANÁLISE DE PROPOSTAS, HABILITAÇÃO E, ADJUDICAÇÃO DO OBJETO.</td>
+        <td colspan='3'><b>ATA DE SESSÃO PÚBLICA DO CREDENCIAMENTO, ANÁLISE DE PROPOSTAS, HABILITAÇÃO E, ADJUDICAÇÃO DO OBJETO.</b></td>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td colspan=2>CIRCUNSTANCIADA EM <%= resource.issuance_date %></td>
+        <td colspan='3'>CIRCUNSTANCIADA EM <%= resource.issuance_date %></td>
       </tr>
       <tr>
-        <td width="20%"><%= resource.licitation_process.modality_humanize %></td>
-        <td width="80%"><%= resource.licitation_process.modality_number %></td>
+        <td><b>Data da Abertura da Licitação:</b> <%= date_mask(resource.licitation_process.proposal_envelope_opening_date) %></td>
+        <td><b>Hora da Abertura da Licitação:</b> <%= date_mask(resource.licitation_process.proposal_envelope_opening_date) %></td>
+        <td><b>Nº do Processo de Compra:</b> <%= resource.licitation_process.decorator.code_and_year %></td>
+      </tr>
+      <tr>
+        <td><b>Unidade de Compra:</b> <%= resource.licitation_process.purchasing_unit %></td>
+        <td><b>Modalidade:</b> <%= resource.modality %></td>
+        <td><b>Situação:</b> <%= resource.licitation_process.status_humanize  %></td>
+      </tr>
+      <tr>
+        <td colspan="3"><b>Objeto do Processo de Compra:</b> <%= resource.licitation_process.description %></td>
       </tr>
     </tbody>
   </table>
 </div>
 
+
 <div style="text-align: justify">
   <span>
-    EM <%= resource.proposal_envelope_opening_date %>, REUNIRAM-SE NAS DEPENDÊNCIAS DA <%= current_prefecture %>, A PARTIR DAS <%= resource.proposal_envelope_opening_time %> <b>HORAS</b>, O(A) PREGOEIRO(A), SENHOR(A) <%= resource.president %>, E <%= resource.licitation_commission_members %>, SERVINDO COMO MEMBROS DA EQUIPE DE APOIO, NO FINAL ASSINADOS, DESIGNADOS PELA PORTARIA N˚ (NUMERO DA PORTARIA DE DESIGNAÇÃO), PARA PROCEDER ÀS ATIVIDADES PERTINENTES AO PROCEDIMENTO LICITATÓRIO MODALIDADE <%= resource.licitation_process.modality_humanize %> SOB O N˚ <%= resource.licitation_process.modality_number %>, QUE TEM COMO OBEJTO <%= resource.licitation_process.description %>. A SESSÃO PÚBLICA INICIOU-SE COM O RECEBIMENTO DOS ELEMENTO NECESSÁRIOS À <b>HABILITAÇÃO</b> (ENVELOPES DE DOCUMENTAÇÃO PROTOCOLIZADOS E A DECLARAÇÃO) E DE <b>IDENTIFICAÇÃO/CREDENCIAMENTO</b> DE REPRESENTANTE LEGAL, TENDO SIDO RECEBIDOS OS ELEMENTOS DAS EMPRESAS, A SABER:
+    EM <%= resource.proposal_envelope_opening_date %>, REUNIRAM-SE NAS DEPENDÊNCIAS DA <%= current_prefecture %>,
+    A PARTIR DAS <%= resource.proposal_envelope_opening_time %> <b>HORAS</b>,O(A) PREGOEIRO(A), SENHOR(A) <%= resource.president %>,
+    E <%= resource.licitation_commission_members %>, SERVINDO COMO MEMBROS DA EQUIPE DE APOIO, NO FINAL ASSINADOS,
+    DESIGNADOS PELA PORTARIA N˚ (NUMERO DA PORTARIA DE DESIGNAÇÃO), PARA PROCEDER ÀS ATIVIDADES PERTINENTES AO PROCEDIMENTO
+    LICITATÓRIO MODALIDADE <%= resource.modality %>,QUE TEM COMO OBEJTO <%= resource.licitation_process.description %>.
+    A SESSÃO PÚBLICA INICIOU-SE COM O RECEBIMENTO DOS ELEMENTO NECESSÁRIOSÀ <b>HABILITAÇÃO</b> (ENVELOPES DE DOCUMENTAÇÃO PROTOCOLIZADOS
+    E A DECLARAÇÃO) E DE <b>IDENTIFICAÇÃO/CREDENCIAMENTO</b> DE REPRESENTANTE LEGAL, TENDO SIDO RECEBIDOS OS ELEMENTOS DAS EMPRESAS, A SABER:
   </span>
 </div>
 
@@ -77,20 +93,27 @@
 
 <div style="text-align: justify">
   <span>
-    NA SEQUÊNCIA FOI EFETIVADA A ABERTURA DOS ENVELOPES DE PREÇOS. O <%= resource.president %> INFORMOU OS REPRESENTANTES PRESENTES OS PROCEDIMENTOS A SEREM ADOTADOS DURANTE A SESSÃO PUBLICA E, RESSALTOU QUE A AUSÊNCIA DE QUALQUER DELES QUANDO DA LAVRATURA DA ATA, AO FINAL DA SESSÃO PÚBLICA, IMPLICARÁ NA PRECLUSÃO DO DIREITO A RECURSO E NA SUBMISSÃO AO DISPOSTO NA ATA. SEQUENCIALMENTE OCORREU A ANÁLISE DAS PROPOSTAS DE PREÇOS APRESENTADAS PELAS LICITANTES, TENDO COMO APOIO DE AVALIAÇÃO AS DETERMINAÇÕES CONSTADAS NO EDITAL, LOGRANDO CLASSIFICADAS AS EMPRESAS.
+    NA SEQUÊNCIA FOI EFETIVADA A ABERTURA DOS ENVELOPES DE PREÇOS. FOI
+    INFORMADO AOS REPRESENTANTES PRESENTES OS PROCEDIMENTOS A SEREM ADOTADOS DURANTE A SESSÃO PUBLICA E,
+    RESSALTOU QUE A AUSÊNCIA DE QUALQUER DELES QUANDO DA LAVRATURA DA ATA, AO FINAL DA SESSÃO PÚBLICA,
+    IMPLICARÁ NA PRECLUSÃO DO DIREITO A RECURSO E NA SUBMISSÃO AO DISPOSTO NA ATA. SEQUENCIALMENTE OCORREU A
+    ANÁLISE DAS PROPOSTAS DE PREÇOS APRESENTADAS PELAS LICITANTES, TENDO COMO APOIO DE AVALIAÇÃO AS DETERMINAÇÕES
+    CONSTADAS NO EDITAL, LOGRANDO CLASSIFICADAS AS EMPRESAS.
   </span>
 </div>
 
 <div>
   <br><br>
-  <span>PROPOSTAS VÁLIDAS</span>
+  <h2><b>PROPOSTAS VÁLIDAS</b></h2>
 
   <table class="records">
     <thead>
       <tr>
         <th>LOTE</th>
         <th>ITEM</th>
+        <th>QUANTIDADE</th>
         <th>VALOR UNITÁRIO</th>
+        <th>VALOR TOTAL</th>
         <th>FORNECEDOR</th>
       </tr>
     </thead>
@@ -99,7 +122,9 @@
       <tr>
         <td><%= proposal.lot %></td>
         <td><%= proposal.material %></td>
+        <td><%= proposal.quantity %></td>
         <td><%= number_to_currency proposal.unit_price %></td>
+        <td><%= number_to_currency(proposal.unit_price * proposal.quantity, precision: 2) %></td>
         <td><%= proposal.creditor %></td>
       </tr>
       <% end %>
@@ -113,28 +138,6 @@
   </span>
 </div>
 
-<div>
-  <table class="records">
-    <thead>
-      <tr>
-        <th>LOTE</th>
-        <th>ITEM</th>
-        <th>VALOR UNITÁRIO</th>
-        <th>FORNECEDOR</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% resource.creditor_winner.each do |proposal| %>
-      <tr>
-        <td><%= proposal.lot %></td>
-        <td><%= proposal.material %></td>
-        <td><%= number_to_currency proposal.unit_price %></td>
-        <td><%= proposal.creditor %></td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
 
 <div style="text-align: justify">
   <span>
@@ -147,7 +150,7 @@
       <%= resource.judgment_commission_advice.judgment_minutes %><br><br>
     <% end %>
 
-    CONCLUÍDOS OS PROCEDIMENTOS RELATIVOS A  <%= resource.licitation_process.modality_or_type_of_removal_humanized.upcase %> SOB O Nº <%= resource.licitation_process.modality_number %>,  E CONSIDERANDO QUE: 1) AS PROPOSTAS DAS EMPRESAS VENCEDORAS SATISFAZEM ÀS EXIGÊNCIAS DO EDITAL; 2) AS EMPRESAS VENCEDORAS ENCONTRAM-SE DEVIDAMENTE HABILITADAS QUANTO À DOCUMENTAÇÃO EXIGIDA; 3) OS PREÇOS VITORIOSOS ESTÃO DENTRO DO LIMITE ESTABELECIDO PELA ENTIDADE; POR CONSEGUINTE O(A) PREGOEIRO(A)  ADJUDICA  O  OBJETO  DO  CERTAME  À(S)  EMPRESA(S):
+    CONCLUÍDOS OS PROCEDIMENTOS RELATIVOS A  <%= resource.licitation_process.modality_or_type_of_removal_humanized&.upcase %> SOB O Nº <%= resource.licitation_process.modality_number %>,  E CONSIDERANDO QUE: 1) AS PROPOSTAS DAS EMPRESAS VENCEDORAS SATISFAZEM ÀS EXIGÊNCIAS DO EDITAL; 2) AS EMPRESAS VENCEDORAS ENCONTRAM-SE DEVIDAMENTE HABILITADAS QUANTO À DOCUMENTAÇÃO EXIGIDA; 3) OS PREÇOS VITORIOSOS ESTÃO DENTRO DO LIMITE ESTABELECIDO PELA ENTIDADE; POR CONSEGUINTE O(A) PREGOEIRO(A)  ADJUDICA  O  OBJETO  DO  CERTAME  À(S)  EMPRESA(S):
   </span>
 </div>
 
@@ -160,10 +163,10 @@
       </tr>
     </thead>
     <tbody>
-      <% resource.ratifications_items.each do |item| %>
+      <% resource.creditor_ratified.each do |creditor| %>
       <tr>
-        <td><%= item.creditor %></td>
-        <td><%= number_to_currency item.total_price %></td>
+        <td><%= creditor[0] %></td>
+        <td><%=  number_to_currency creditor[1]%></td>
       </tr>
       <% end %>
     </tbody>
@@ -188,8 +191,6 @@
     <hr>
     <%= resource.representative %><br>
     REPRESENTANTE <br><br><br>
-    <hr>
-    <%= resource.representative %><br>
-    REPRESENTANTE <br><br><br>
+
   </p>
 </div>

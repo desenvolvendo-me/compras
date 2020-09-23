@@ -148,4 +148,8 @@ module ApplicationHelper
   def relative_link_to(body, url, html_options = {})
     link_to body, current_subpath.to_s + url, html_options
   end
+
+  def date_mask(d)
+    return d.strftime("%d/%m/%Y") unless d.nil?
+  end
 end

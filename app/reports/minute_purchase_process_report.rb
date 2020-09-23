@@ -83,8 +83,28 @@ class MinutePurchaseProcessReport < Report
     end
   end
 
-  def ratifications_items
-    licitation_process.ratifications_items.by_ratificated
+  #retorna os fornecedores vencedores e o valor total das propostas
+  def creditor_ratified
+    ratified_items = licitation_process.ratifications_items.includes(:licitation_process_ratification)
+    creditors = ratified_items.map{|x| [x.licitation_process_ratification.creditor, x.licitation_process_ratification_id]}.uniq
+    result = []
+
+    creditors.each do |creditor|
+      sum = 0
+      ratified_items.each do |ratified_item|
+        if ratified_item&.licitation_process_ratification_id == creditor[1]
+          item = ratified_item.purchase_process_item
+          sum += (item&.quantity || 0) * (item&.unit_price || 0)
+        end
+      end
+      result.push([creditor[0], sum])
+    end
+
+    result
+  end
+
+  def modality
+    licitation_process.type_of_removal_humanize
   end
 
   protected
