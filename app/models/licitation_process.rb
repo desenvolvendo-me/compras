@@ -446,16 +446,9 @@ class LicitationProcess < Compras::Model
 
   protected
 
-  def update_homologation_date
-    if status == PurchaseProcessStatus::APPROVED
-      update_column :homologation_date, Date.today
-    end
-  end
-
   def set_approved_status
     if licitation_process_ratifications.any?
       update_status(PurchaseProcessStatus::APPROVED)
-      update_homologation_date if licitation_process_ratifications.any?{|x| x.changed?}
     end
   end
 
