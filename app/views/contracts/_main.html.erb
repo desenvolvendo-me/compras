@@ -65,7 +65,7 @@
 
 <div class="yui3-g">
   <div class='yui3-u-1-2'>
-    <%= f.input :contract_type, as: :auto_complete %>
+    <%= f.input :contract_type, as: :select, :collection => ContractType.all %>
   </div>
   <div class='yui3-u-1-2'>
     <%= f.input :subcontracting, :as => :select %>
