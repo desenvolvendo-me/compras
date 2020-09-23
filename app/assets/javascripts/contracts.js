@@ -86,30 +86,33 @@ $(document).ready(function () {
   }
 
   $('form').on('change', '#contract_licitation_process_id', function (event, licitationProcess) {
+    var url = Routes.licitation_process_show.replace(":id", this.value);
 
-    if (licitationProcess) {
-      $('#contract_content').val(licitationProcess.description);
-      $('#contract_modality_humanize').val(licitationProcess.modality_humanize);
-      $('#contract_execution_type').val(licitationProcess.execution_type);
-      $('#contract_contract_guarantees').val(licitationProcess.contract_guarantees);
-      if(licitationProcess.creditors){
-        if(licitationProcess.creditors.length > 1){
-          setUrlToCreditor(licitationProcess.id);
-          showToChooseCreditor(licitationProcess.creditors);
-        }else{
-          setUrlToCreditor(licitationProcess.id);
-          if(licitationProcess.creditors[0]){
-            fillCreditorField(licitationProcess.creditors[0].name, licitationProcess.creditors[0].id);
+    $.getIndex(url, {}, function (licitationProcess) {
+      if (licitationProcess) {
+        $('#contract_content').val(licitationProcess.description);
+        $('#contract_modality_humanize').val(licitationProcess.modality_humanize);
+        $('#contract_execution_type').val(licitationProcess.execution_type);
+        $('#contract_contract_guarantees').val(licitationProcess.contract_guarantees);
+        if (licitationProcess.creditors) {
+          if (licitationProcess.creditors.length > 1) {
+            setUrlToCreditor(licitationProcess.id);
+            showToChooseCreditor(licitationProcess.creditors);
+          } else {
+            setUrlToCreditor(licitationProcess.id);
+            if (licitationProcess.creditors[0]) {
+              fillCreditorField(licitationProcess.creditors[0].name, licitationProcess.creditors[0].id);
+            }
           }
         }
+
+      } else {
+        clearModalityExecutionType();
+        var url = Routes.creditors + "?";
+
+        $('#contract_creditor').data("source", url);
       }
-
-    } else {
-      clearModalityExecutionType();
-      var url = Routes.creditors + "?";
-
-      $('#contract_creditor').data("source", url);
-    }
+    });
   });
 
   function setUrlToCreditor(licitation_process_id){
