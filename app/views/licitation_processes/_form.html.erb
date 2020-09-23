@@ -14,25 +14,25 @@
     <li><a href="#tab-legal-analysis-appraisals" id="legal_analysis_appraisals_tab">Laudo de Análise Jurídica</a></li>
     <li><a href="#tab-licitation-process-publications" id="licitation_process_publications_tab">Publicações</a></li>
 
-    <%= content_tag :li, class:('hided' unless resource.trading?  ) do%>
+    <%= content_tag :li, class:('tabs-to-trading' unless resource.trading?  ) do%>
       <a href="#tab-licitation-purchase-process-accreditations" id="purchase_process_accreditations">Credenciamentos</a>
     <% end %>
 
     <li><a href="#tab-bidders" id="bidder">Habilitação</a></li>
 
-    <%= content_tag :li, class:('hided' unless resource.licitation?  ) do%>
+    <%= content_tag :li, class:('tabs-to-trading' unless resource.licitation?  ) do%>
       <a href="#tab-proposals" id="proposals">Propostas</a>
     <% end %>
 
-    <%= content_tag :li, class:('hided' unless resource.trading? ) do%>
+    <%= content_tag :li, class:('tabs-to-trading' unless resource.trading? ) do%>
       <a href="#tab-tradings" id="tradings">Lances</a>
     <% end %>
 
-    <%= content_tag :li, class:('hided' unless resource.trading? ) do%>
+    <%= content_tag :li, class:('tabs-to-trading' unless resource.trading? ) do%>
       <a href="#tab-realignment-prices" id="realignment_prices">Realinhamento de Preços</a>
     <% end %>
 
-    <%= content_tag :li, class:('hided' unless resource.trading? ) do%>
+    <%= content_tag :li, class:('tabs-to-trading' unless resource.trading? ) do%>
       <a href="#tab-trading-negotiation" id="trading_negotiation">Negociação</a>
     <% end %>
 
