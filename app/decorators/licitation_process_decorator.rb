@@ -84,7 +84,7 @@ class LicitationProcessDecorator
     if licitation? && trading?
       items && bidders && trading&.allow_negotiation?
     else
-      items && bidders
+      items && bidders && creditor_proposals.present?
     end
   end
 
@@ -187,10 +187,12 @@ class LicitationProcessDecorator
   end
 
   def must_finish_all_tabs_to_homologation
-    if licitation?
-      'É necessário preencher as abas Itens; Habilitação; Lances'
+    if licitation? && trading?
+      'É necessário preencher as abas Itens; Habilitação; Propostas; Lances'
+    elsif licitation?
+      'É necessário preencher as abas Itens; Habilitação; Propostas'
     else
-      'É necessário preencher as abas Itens/Justificativa; Habilitação'
+      'É necessário preencher as abas Itens/Justificativa; Habilitação; Propostas'
     end
   end
 
