@@ -90,10 +90,10 @@ class LicitationProcessDecorator
   end
 
   def can_homologate?
-    return unless new_record? || (items.reject(&:new_record?) && bidders.reject(&:new_record?) && trading)
+    return unless new_record? || (items.reject(&:new_record?) && bidders.reject(&:new_record?))
 
     if licitation? && trading?
-      items && bidders && trading.allow_negotiation?
+      items && bidders && trading&.allow_negotiation?
     else
       items && bidders
     end

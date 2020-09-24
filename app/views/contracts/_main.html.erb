@@ -65,7 +65,7 @@
 
 <div class="yui3-g">
   <div class='yui3-u-1-2'>
-    <%= f.input :contract_type, as: :auto_complete %>
+    <%= f.input :contract_type_id, as: :select, :collection => ContractType.all, required: true %>
   </div>
   <div class='yui3-u-1-2'>
     <%= f.input :subcontracting, :as => :select %>
@@ -159,8 +159,6 @@
   </table>
 
 </div>
-
-
 
 <script>
 var contractValidity = $('#contract_contract_validity'),

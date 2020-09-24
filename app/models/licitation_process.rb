@@ -239,7 +239,15 @@ class LicitationProcess < Compras::Model
   }
 
   scope :not_in_contracts, lambda{
-    joins{ contracts.outer }.where{ contracts.licitation_process_id.eq nil }
+    # look for if all creditor already in contract
+    licitation_ids = LicitationProcessRatification
+                         .select(:licitation_process_id)
+                         .joins(" left join compras_contracts as cc
+                                    on compras_licitation_process_ratifications.licitation_process_id = cc.licitation_process_id
+                                     and compras_licitation_process_ratifications.creditor_id = cc.creditor_id")
+                          .where("cc.creditor_id is null")
+
+    where(id: licitation_ids.pluck(:licitation_process_id))
   }
 
   scope :not_removal_by_limit, -> do
@@ -446,16 +454,9 @@ class LicitationProcess < Compras::Model
 
   protected
 
-  def update_homologation_date
-    if status == PurchaseProcessStatus::APPROVED
-      update_column :homologation_date, Date.today
-    end
-  end
-
   def set_approved_status
     if licitation_process_ratifications.any?
       update_status(PurchaseProcessStatus::APPROVED)
-      update_homologation_date if licitation_process_ratifications.any?{|x| x.changed?}
     end
   end
 
