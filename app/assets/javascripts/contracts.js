@@ -89,7 +89,7 @@ $(document).ready(function () {
 
     if (licitationProcess) {
       $('#contract_content').val(licitationProcess.description);
-      $('#contract_modality_humanize').val(licitationProcess.modality_humanize);
+      $('#contract_modality_humanize').val(licitationProcess.modality_or_type_of_removal);
       $('#contract_execution_type').val(licitationProcess.execution_type);
       $('#contract_contract_guarantees').val(licitationProcess.contract_guarantees);
       if(licitationProcess.creditors){

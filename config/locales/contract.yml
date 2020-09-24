@@ -20,6 +20,7 @@ pt-BR:
         contract_guarantees: 'Garantias do Contrato/Ata'
         contract_number: "Número do Contrato/Ata"
         contract_type: 'Tipo de Contrato/Ata'
+        contract_type_id: 'Tipo de Contrato/Ata'
         contract_validity: 'Validade do Contrato/Ata'
         contract_value: 'Valor do Contrato/Ata'
         creditors: 'Fornecedores'
@@ -31,7 +32,7 @@ pt-BR:
         end_date: "Fim da Vigência"
         execution_type: "Forma de Execução"
         guarantee_value: 'Valor da Garantia'
-        lawyer: 'Advogado Responsável pela Gestão do Contrato/Ata'
+        lawyer_name: 'Advogado Responsável pela Gestão do Contrato/Ata'
         lawyer_code: 'O.A.B. do Advogado Responsável'
         licitation_process: 'Processo de Compra'
         modality_humanize: 'Modalidade'
