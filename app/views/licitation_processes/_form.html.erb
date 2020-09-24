@@ -20,9 +20,9 @@
 
     <li><a href="#tab-bidders" id="bidder">Habilitação</a></li>
 
-    <%= content_tag :li, class:('tabs-to-trading' unless resource.licitation?  ) do%>
-      <a href="#tab-proposals" id="proposals">Propostas</a>
-    <% end %>
+
+    <li><a href="#tab-proposals" id="proposals">Propostas</a></li>
+
 
     <%= content_tag :li, class:('tabs-to-trading' unless resource.trading? ) do%>
       <a href="#tab-tradings" id="tradings">Lances</a>
