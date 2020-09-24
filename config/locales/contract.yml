@@ -35,6 +35,7 @@ pt-BR:
         lawyer_name: 'Advogado Responsável pela Gestão do Contrato/Ata'
         lawyer_code: 'O.A.B. do Advogado Responsável'
         licitation_process: 'Processo de Compra'
+        licitation_process_id: 'Processo de Compra'
         modality_humanize: 'Modalidade'
         parent: 'Contrato/Ata Principal'
         penalty_fine: "Multa Rescisória"

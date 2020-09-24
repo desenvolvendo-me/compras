@@ -86,30 +86,40 @@ $(document).ready(function () {
   }
 
   $('form').on('change', '#contract_licitation_process_id', function (event, licitationProcess) {
+    var url = Routes.licitation_process_show.replace(":id", this.value);
 
-    if (licitationProcess) {
-      $('#contract_content').val(licitationProcess.description);
-      $('#contract_modality_humanize').val(licitationProcess.modality_or_type_of_removal);
-      $('#contract_execution_type').val(licitationProcess.execution_type);
-      $('#contract_contract_guarantees').val(licitationProcess.contract_guarantees);
-      if(licitationProcess.creditors){
-        if(licitationProcess.creditors.length > 1){
-          setUrlToCreditor(licitationProcess.id);
-          showToChooseCreditor(licitationProcess.creditors);
-        }else{
-          setUrlToCreditor(licitationProcess.id);
-          if(licitationProcess.creditors[0]){
-            fillCreditorField(licitationProcess.creditors[0].name, licitationProcess.creditors[0].id);
+    $.getIndex(url, {}, function (licitationProcess) {
+      if (licitationProcess) {
+        $('#contract_content').val(licitationProcess.description);
+        $('#contract_modality_humanize').val(licitationProcess.modality_humanize);
+        $('#contract_execution_type').val(licitationProcess.execution_type);
+        $('#contract_contract_guarantees').val(licitationProcess.contract_guarantees);
+        var creditor = licitationProcess.creditors_without_contract;
+        if (creditor.length > 0) {
+          if (creditor.length > 1) {
+            setUrlToCreditor(licitationProcess.id);
+            showToChooseCreditor(licitationProcess.creditors);
+          } else {
+            setUrlToCreditor(licitationProcess.id);
+            if (creditor[0]) {
+              fillCreditorField(creditor[0].name, creditor[0].id);
+            }
           }
+        }else{
+          alert('O Processo de Compras selecionado não possui fornecedores vencedores.')
+          clearModalityExecutionType();
+          var url = Routes.creditors + "?";
+
+          $('#contract_creditor').data("source", url);
         }
+
+      } else {
+        clearModalityExecutionType();
+        var url = Routes.creditors + "?";
+
+        $('#contract_creditor').data("source", url);
       }
-
-    } else {
-      clearModalityExecutionType();
-      var url = Routes.creditors + "?";
-
-      $('#contract_creditor').data("source", url);
-    }
+    });
   });
 
   function setUrlToCreditor(licitation_process_id){

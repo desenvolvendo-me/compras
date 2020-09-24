@@ -2,7 +2,7 @@
 <%= f.input :id, as: :hidden %>
 <div class="yui3-g">
   <div class='yui3-u-1-2'>
-    <%= f.input :licitation_process, as: :auto_complete, source_path: licitation_processes_path(not_in_contracts: true) %>
+    <%= f.input :licitation_process_id, as: :select, collection: LicitationProcess.not_in_contracts %>
   </div>
   <div class='yui3-u-1-2'>
     <%= f.input :creditor, as: :auto_complete, source_path: creditors_path(by_ratification_and_licitation_process_id: f.object.licitation_process_id) %>
