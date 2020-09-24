@@ -1,5 +1,4 @@
-
-<%if  (f.object.licitation? || f.object.new_record?) && f.object.decorator.must_have_creditors_and_items.blank? %>
+<%if  f.object.new_record? || f.object.decorator.must_have_creditors_and_items.blank? %>
   <% if resource.creditors_enabled.empty? %>
     <div class="alert alert-warning">
       <strong><%= f.object.decorator.must_have_creditors_enabled %></strong>
