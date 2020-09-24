@@ -103,7 +103,7 @@ class Creditor < Persona::Creditor
   # os fornecedores vencedores de algum  item.
   scope :without_direct_purchase_ratification, lambda {|licitation_process_id|
     #filtra os que já tem ratificações cadastradas
-    creditor_ids = LicitationProcess.find(licitation_process_id).licitation_process_ratification_creditor_ids
+    creditor_ids = LicitationProcess.find(licitation_process_id)&.licitation_process_ratification_creditor_ids
 
     scoped.select {'unico_creditors.*, unico_people.name'}.
         joins {purchase_process_items.licitation_process.licitation_process_ratifications.outer}.

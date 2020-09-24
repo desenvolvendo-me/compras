@@ -103,6 +103,7 @@ pt-BR:
       must_be_included_after_edital_publication: "Habilitações só podem ser incluídos após publicação do edital"
       trading_must_have_creditors_and_items: "Necessário preencher as abas Credenciamento, Habilitação e Itens"
       must_have_creditors_and_items: "Necessário preencher as abas Habilitação e Itens"
+      must_have_creditors_enabled: "É necessario que ao menos um fornecedor esteja marcado como habilitado na aba Habilitação"
       must_finish_trading: "Deve terminar a fase de lances"
       no_one_publication_with_valid_type: "a última publicação é do tipo (%{publication_of}). Não pode ser alterado"
       disabled_trading_message: "todas as propostas devem ser preenchidas"

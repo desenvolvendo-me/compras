@@ -15,7 +15,7 @@ pt-BR:
         purchase_process_item: "Item"
         quantity: "Quantidade"
         reference_unit: "Unidade"
-        total_price: "Preço total"
+        total_price: "Valor total"
         unit_price: "Preço unitário"
         ranking: "Posição"
         material_fake: "Material"

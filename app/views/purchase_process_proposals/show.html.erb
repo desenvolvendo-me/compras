@@ -7,6 +7,7 @@
 <table class="records text-center">
   <thead>
   <th><%= resource.judgment_form.try(:lot?) ? 'Lote' : 'Item' %></th>
+  <%= '<th>Quantidade</th>'.html_safe if resource.judgment_form.try(:item?) %>
   <th><%= LicitationProcessClassification.human_attribute_name :unit_price %></th>
   </thead>
 
@@ -16,14 +17,23 @@
       <td>
         <%= resource.judgment_form.try(:lot?) ? proposal.lot : proposal.item %>
       </td>
+      <%= "<td>#{proposal.item.quantity}</td>".html_safe if resource.judgment_form.try(:item?) %>
       <td>
         <%= number_with_delimiter proposal.unit_price %>
       </td>
     </tr>
   <% end %>
   <tr>
-    <td></td>
-    <td><b><%= number_to_currency resource.proposals_of_creditor(@creditor).sum(:unit_price) %></b></td>
+    <td colspan="<%= resource.judgment_form.try(:lot?) ? '1' : '2' %>"></td>
+    <td>
+      <b>
+      <%if resource.judgment_form.try(:lot?) %>
+        <%= number_to_currency resource.proposals_of_creditor(@creditor).sum(:unit_price) %>
+      <% else %>
+        <%= number_to_currency resource.proposals_of_creditor(@creditor).sum("compras_purchase_process_creditor_proposals.unit_price * quantity") %>
+      <% end %>
+      </b>
+    </td>
   </tr>
   </tbody>
 </table>
