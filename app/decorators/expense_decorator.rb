@@ -7,6 +7,6 @@ class ExpenseDecorator
               :expense_sub_function, :project_activity, :nature_expense_nature, :resource_source
 
   def nature_expense_nature
-    nature_expense.nature
+    nature_expense&.nature
   end
 end
