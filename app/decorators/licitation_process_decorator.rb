@@ -159,6 +159,10 @@ class LicitationProcessDecorator
     end
   end
 
+  def must_have_creditors_enabled
+    t("licitation_process.messages.must_have_creditors_enabled")
+  end
+
   def must_have_creditors_and_items_and_tradings
     if component.creditors.blank? || materials.blank?
       t("licitation_process.messages.must_have_creditors_and_items")
