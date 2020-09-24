@@ -16,7 +16,13 @@
     </thead>
 
     <tbody>
-    <%= render partial: 'purchase_process_proposals/creditors_rows', collection: resource.creditors_enabled.includes(:purchase_process_creditor_proposals), as: :creditor %>
+    <% if resource.creditors_enabled.empty? %>
+      <tr>
+        <td>Não foram encontrados fornecedores habilitados.</td>
+      </tr>
+    <% else %>
+      <%= render partial: 'purchase_process_proposals/creditors_rows', collection: resource.creditors_enabled.includes(:purchase_process_creditor_proposals), as: :creditor %>
+    <% end %>
     </tbody>
   </table>
 
