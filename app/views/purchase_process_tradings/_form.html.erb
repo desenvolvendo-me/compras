@@ -13,6 +13,7 @@
 
   <%= render 'purchase_process_tradings/creditors', item: item, creditors: creditors, trading: trading, historic: historic %>
 
+  <div class="title-section">Lances por Fornecedor</div>
   <%= render 'purchase_process_tradings/bid_form',  item: item, next_bid: next_bid, historic: historic, creditors: creditors %>
 
   <%= render 'purchase_process_tradings/historic', historic: historic, trading: trading %>
