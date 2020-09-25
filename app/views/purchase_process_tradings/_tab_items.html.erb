@@ -1,0 +1,10 @@
+<div class="tabs" id="licitation_process">
+  <ul id="main-ul">
+    <% trading.items.sort_by!(&:lot).each_with_index do |trading_item, index| %>
+      <li><a href="#tab-<%= trading_item.item_or_lot %>"><%= trading_item.decorator.item_or_lot %></a></li>
+    <% end %>
+  </ul>
+  <% trading.items.sort_by!(&:lot).each_with_index do |trading_item, index| %>
+    <div id="tab-<%= trading_item.item_or_lot %>"></div>
+  <% end %>
+</div>
