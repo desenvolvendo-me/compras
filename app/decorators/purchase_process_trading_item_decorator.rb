@@ -60,4 +60,12 @@ class PurchaseProcessTradingItemDecorator
       I18n.t 'purchase_process_trading_item.messages.lowest_proposal_already_benefited'
     end
   end
+
+  def item_or_lot
+    if lot?
+      'Lote ' + lot.to_s
+    else
+      item
+    end
+  end
 end
