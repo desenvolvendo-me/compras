@@ -5,6 +5,8 @@
     <% end %>
   </ul>
   <% trading.items.sort_by!(&:lot).each_with_index do |trading_item, index| %>
-    <div id="tab-<%= trading_item.item_or_lot %>"></div>
+    <div id="tab-<%= trading_item.item_or_lot %>">
+      <%= render 'purchase_process_tradings/bid_form', f: f, item_or_lot: trading_item.item_or_lot %>
+    </div>
   <% end %>
 </div>
