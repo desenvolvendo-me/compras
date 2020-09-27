@@ -41,7 +41,7 @@ class PurchaseProcessTradingItem < Compras::Model
   end
 
   scope :by_item_or_lot, -> (item_or_lot) do
-    where{lot.eq(item_or_lot) | item_id.eq(item_or_lot)}
+    where("lot = ? or item_id = ?", item_or_lot, item_or_lot)
   end
 
   scope :purchase_process_id, ->(purchase_process_id) do
