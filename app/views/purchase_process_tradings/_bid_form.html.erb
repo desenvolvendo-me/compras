@@ -15,22 +15,20 @@
 <!--</div>-->
 
 
-<%= f.simple_fields_for :trading do |trading| %>
-  <%= trading.simple_fields_for :items, trading.object.items.by_item_or_lot(item_or_lot) do |item| %> <%#PRESTAR TENÇÃO AQUI QUANDO FOR POR ITENS %>
-    <div id="bids">
+<%= hidden_field_tag :trading_item, trading_item %>
 
-      <%= item.simple_fields_for :bids do |bid| %>
-        <%= render 'purchase_process_trading_item_bids/form', f: bid%>
-      <% end %>
+<div class="yui3-g">
+  <div class="yui3-u-1">
+    <%= f.input :accreditation_creditor, as: :fake_select, collection: accreditation_creditors,
+                input_html:{class:'select', 'data-trading-item': trading_item} %>
+  </div>
+</div>
 
-      <div class="links">
-        <%= link_to_add_association item, :bids, partial: 'purchase_process_trading_item_bids/form',
-            class: 'button primary' do %>Adicionar<% end %>
-      </div>
-    </div>
+<div class="trading-fields">
+  <%= f.simple_fields_for :trading do |trading| %>
+    <%= render 'purchase_process_trading_items/nested_fields', f: trading, trading_item: trading_item, accreditation_creditor: accreditation_creditors.first %>
   <% end %>
-<% end %>
-
+</div>
 
 <style>
   .nested_form{
