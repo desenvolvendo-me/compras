@@ -1,0 +1,14 @@
+<%= f.simple_fields_for :items, trading_item do |item| %> <%#PRESTAR TENÇÃO AQUI QUANDO FOR POR ITENS %>
+  <div id="bids">
+
+    <%= item.simple_fields_for :bids, item.object.bids.where(purchase_process_accreditation_creditor_id: accreditation_creditor&.id)  do |bid| %>
+      <%= render 'purchase_process_trading_item_bids/form', f: bid%>
+    <% end %>
+
+    <div class="links">
+      <%= link_to_add_association item, :bids,
+                                  partial: 'purchase_process_trading_item_bids/form',
+                                  class: 'button primary' do %>Adicionar<% end %>
+    </div>
+  </div>
+<% end %>

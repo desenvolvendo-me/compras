@@ -1,0 +1,5 @@
+<%= simple_form_for @purchase_process, :authenticity_token => false do |f| %>
+  <%= f.simple_fields_for :trading do |trading| %>
+    <%= render 'purchase_process_trading_items/nested_fields', f: trading, trading_item: @trading_item, accreditation_creditor: @accreditation_creditor %>
+  <% end %>
+<% end %>
