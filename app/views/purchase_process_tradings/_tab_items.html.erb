@@ -1,4 +1,4 @@
-<div class="tabs" id="licitation_process">
+<div class="tabs" id="bids-tab">
   <ul id="main-ul">
     <% trading.items.sort_by!(&:lot).each_with_index do |trading_item, index| %>
       <li><a href="#tab-<%= trading_item.item_or_lot %>"><%= trading_item.decorator.item_or_lot %></a></li>
@@ -6,7 +6,28 @@
   </ul>
   <% trading.items.sort_by!(&:lot).each_with_index do |trading_item, index| %>
     <div id="tab-<%= trading_item.item_or_lot %>">
-      <%= render 'purchase_process_tradings/bid_form', f: f, item_or_lot: trading_item.item_or_lot %>
+      <%= render 'purchase_process_tradings/bid_form', f: f,
+                 trading_item: trading_item,
+                 accreditation_creditors:  trading_item.creditors_ordered_outer %>
     </div>
   <% end %>
 </div>
+<script>
+  $("#bids-tab [name$='[accreditation_creditor]']").change(function () {
+    var $tab =  $(this).closest('div.ui-tabs-panel '),
+        url = Routes.bid_form_purchase_process_trading + "?",
+        params={ accreditation_creditor_id: this.value, trading_item_id: $(this).data('trading-item'),
+          purchase_process_id: $("#licitation_process_id").val() };
+
+    url += $.param(params);
+    debugger
+    $.ajax({
+      url: url,
+      dataType: 'HTML',
+      type: 'GET',
+      success: function (data) {
+        $tab.find('.trading-fields').html(data);
+      }
+    });
+  })
+</script>
