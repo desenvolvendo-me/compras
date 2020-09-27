@@ -98,7 +98,11 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :purchase_process_tradings, only: %i[bids new] do
+  resources :purchase_process_tradings, only: %i[bid_form bids new] do
+    collection do
+      get :bid_form
+    end
+
     member do
       get :bids
     end
