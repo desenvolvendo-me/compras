@@ -1,24 +1,21 @@
-<%#= f.input :accreditation_creditor,  %>
 <div class="nested_form">
   <div class="yui3-g">
-    <div class="yui3-u-1-6">
+    <div class="yui3-u-1-5">
       <%= f.input :round %>
     </div>
-    <div class="yui3-u-1-6">
+    <div class="yui3-u-1-5">
       <%= f.input :number %>
     </div>
-    <div class="yui3-u-1-6">
+    <div class="yui3-u-1-5">
       <%= f.input :amount %>
     </div>
-    <div class="yui3-u-1-6">
+    <div class="yui3-u-1-5">
       <%= f.input :status %>
     </div>
-    <div class="yui3-u-1-6">
-      <%= f.input :status %>
-    </div>
-    <div class="yui3-u-1-6">
+    <div class="yui3-u-1-5 ">
       <%= f.input :benefited %>
     </div>
   </div>
-  <%= f.input :item, as: :hidden, faker: true %>
+  <%= f.input :item_id, as: :hidden %>
+  <%= f.input :purchase_process_accreditation_creditor_id, as: :hidden %>
 </div>
