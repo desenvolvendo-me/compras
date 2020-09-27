@@ -41,6 +41,10 @@ class PurchaseProcessTradingItemBid < Compras::Model
     joins { accreditation_creditor }.where { accreditation_creditor.creditor_id.in(creditor_ids) }
   }
 
+  scope :by_licitation_process, lambda{|licitation_process_id|
+    joins{ trading }.where{ trading.licitation_process_id.eq licitation_process_id}
+  }
+
   def percent
     return unless amount > BigDecimal("0")
 
