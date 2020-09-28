@@ -185,12 +185,47 @@ $(document).ready(function() {
 
   //buscar os historicos de lances
   $("#bids-tab .ui-tabs-anchor").click(function(){
-    var $panel = $("#bids-tab .ui-tabs-panel:visible"),
-        itemId = $panel.find("#trading_item").val();
+    $currentPanel = $("#bids-tab .ui-tabs-panel:visible");
+    var itemId = $currentPanel.find("#trading_item").val();
 
     getNextBidFromServer(itemId);
   })
 
+  // reduz o valor do lance automaticamente quando inserido um novo form
+  $(".trading-fields").on('cocoon:before-insert', function(e, bid_to_be_inserted, originalEvent) {
+    //atualiza o valor do menor lance
+    var hasNewAmount = $currentPanel.find("[name$='[amount]'].newRecord");
+
+    if(hasNewAmount.length > 0){
+      $currentPanel.find("[name$='[lowest_bid]']").val(hasNewAmount.last().val());
+    }
+
+    var reduction_value   = parsePtBrFloat($currentPanel.find("[name$='[reduction_rate_value]']").val()),
+        reduction_percent = parsePtBrFloat($currentPanel.find("[name$='[reduction_rate_percent]']").val()),
+        lowest_bid        = parsePtBrFloat($currentPanel.find("[name$='[lowest_bid]']").val()),
+        bid_reduction     = 0.0;
+
+    // calcula redução por valor ou porcentagem
+    if(reduction_value){
+      bid_reduction = lowest_bid - reduction_value;
+    }else if(reduction_percent){
+      bid_reduction = lowest_bid - (lowest_bid * reduction_percent) / 100;
+    }
+
+    $(bid_to_be_inserted).find("[name$='[amount]']")
+      .val(floatToPtBrString(bid_reduction))
+      .addClass('newRecord');
+  });
+
+  // informar o usuario que o lance atual não pode ser maior que o melhor lance
+  $("#bids-tab").on('change', "[name$='[amount]'].newRecord", function(){
+    var lowest_bid = $currentPanel.find("[name$='[lowest_bid]']").val(),
+        bid        = parsePtBrFloat(this.value);
+
+    if(bid > parsePtBrFloat(lowest_bid)){
+      custom_alert('O valor do lance digitado tem que ser menor que o Melhor Lance no valor de R$ '+ lowest_bid + '.', 'Atenção');
+    }
+  });
 
 
   function undoLastBid(itemId) {
