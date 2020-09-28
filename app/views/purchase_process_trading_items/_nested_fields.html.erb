@@ -5,7 +5,7 @@
       <%= render 'purchase_process_trading_item_bids/form', f: bid, accreditation_creditor: accreditation_creditor%>
     <% end %>
 
-    <div class="links">
+    <div class="links text-center">
       <%= link_to_add_association item, :bids,
                                   partial: 'purchase_process_trading_item_bids/form',
                                   render_options: {locals: {accreditation_creditor: accreditation_creditor}},
