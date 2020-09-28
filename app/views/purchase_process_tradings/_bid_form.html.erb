@@ -13,9 +13,19 @@
     <%#= button_tag 'Ok', type: :button, id: 'close_error_dialog', class: 'button' %>
 <!--  </div>-->
 <!--</div>-->
+<!--<div class="yui3-u-1-8 field-without-label">-->
+  <%#= button_tag 'Gravar lance', type: :button, class: 'button primary', id: 'make_bid', 'data-disabled' => make_bid_disabled_message(next_bid) %>
+<!--</div>-->
 
 
-<%= hidden_field_tag :trading_item, trading_item %>
+
+<!--<div class="yui3-u-1-12 field-without-label">-->
+  <%#= button_tag 'Desfazer', type: :button, class: 'button negative', id: 'undo_bid', 'data-disabled' => undo_bid_disabled_message(historic) %>
+<!--</div>-->
+
+
+
+<%= hidden_field_tag :trading_item, trading_item.id %>
 
 <div class="yui3-g">
   <div class="yui3-u-1">
