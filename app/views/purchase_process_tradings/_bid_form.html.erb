@@ -30,31 +30,18 @@
 <div class="yui3-g">
   <div class="yui3-u-1">
     <%= f.input :accreditation_creditor, as: :fake_select, collection: accreditation_creditors,
-                include_blank: false, input_html:{class:'select', 'data-trading-item': trading_item} %>
+                include_blank: false, input_html:{class:'select', 'data-trading-item': trading_item.id} %>
   </div>
 </div>
 
 <div class="trading-fields">
   <%= f.simple_fields_for :trading do |trading| %>
-    <%= render 'purchase_process_trading_items/nested_fields', f: trading, trading_item: trading_item, accreditation_creditor: accreditation_creditors.first %>
+    <%= render 'purchase_process_trading_items/nested_fields', f: trading, trading_item: trading_item,
+               accreditation_creditor: accreditation_creditors.first,  accreditation_creditor_total: accreditation_creditors.count %>
   <% end %>
 </div>
 
-<div class="text-center">
-  <% if accreditation_creditors&.count == 1 %>
-    <div class="yui3-u-1-7 field-without-label">
-      <%= button_tag 'Encerrar', type: :button, class: 'button primary',
-                     'data-item': trading_item.id,
-                     id: 'finish_bid'%>
-    </div>
-  <% else %>
-    <div class="yui3-u-1-7 field-without-label">
-      <%= button_tag 'Sair da Disputa', type: :button, class: 'button primary ',
-                     'data-item': trading_item.id,
-                     id: 'finish_dispute'%>
-    </div>
-  <% end %>
-</div>
+
 <%= f.object.errors.full_messages %>
 
 <style>
