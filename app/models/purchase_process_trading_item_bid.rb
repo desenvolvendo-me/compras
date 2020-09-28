@@ -74,7 +74,7 @@ class PurchaseProcessTradingItemBid < Compras::Model
   def validate_minimum_amount
     return unless lowest_bid_or_proposal_amount.present?
 
-    if amount >= lowest_bid_or_proposal_amount
+    if amount >= lowest_bid_or_proposal_amount && self.new_record?
       errors.add(:amount, :less_than, :count => I18n::Alchemy::NumericParser.localize(lowest_bid_or_proposal_amount))
     end
   end
