@@ -6,7 +6,6 @@
     <th>Fornecedor</th>
     <th>Lote</th>
     <th>Valor do Lote</th>
-    <th>Valor da Proposta</th>
     <th>% Proposta Vencedora</th>
     <th>Habilitado</th>
     <th>Status</th>
@@ -21,12 +20,20 @@
           creditor: accreditation_creditor,
           lot_or_item: proposal.item || proposal.lot,
           unit_price: number_to_currency(proposal.unit_price),
-          amount: number_to_currency(accreditation_creditor.decorator.unit_price_of_proposal(trading.purchase_process_id, item.item_or_lot)),
           percent: '-',
           selected: accreditation_creditor.decorator.selected?(trading.purchase_process_id, item.item_or_lot),
           not_selected_class: accreditation_creditor.decorator.not_selected_class(trading.purchase_process_id, item.item_or_lot),
           status: get_creditor_status(item, accreditation_creditor, historic) %>
-      <% end %>
+    <% end %>
+    <tr>
+      <td colspan="5"></td>
+      <td>
+        <b>Valor Total da Proposta: </b>
+      </td>
+      <td>
+        <b><%= number_to_currency(accreditation_creditor.decorator.unit_price_of_proposal(trading.purchase_process_id, item.item_or_lot)) %></b>
+      </td>
+    </tr>
     <% end %>
   </tbody>
 </table>
