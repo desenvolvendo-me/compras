@@ -120,7 +120,7 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :purchase_process_trading_item_bids, only: %i[update show]
+  resources :purchase_process_trading_item_bids, only: %i[create update show]
 
   resources :purchase_process_trading_negotiations, only: %i[edit update list] do
     member do
