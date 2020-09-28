@@ -13,26 +13,44 @@
     <%#= button_tag 'Ok', type: :button, id: 'close_error_dialog', class: 'button' %>
 <!--  </div>-->
 <!--</div>-->
-<!--<div class="yui3-u-1-8 field-without-label">-->
-  <%#= button_tag 'Gravar lance', type: :button, class: 'button primary', id: 'make_bid', 'data-disabled' => make_bid_disabled_message(next_bid) %>
-<!--</div>-->
-
-
-
-<!--<div class="yui3-u-1-12 field-without-label">-->
-  <%#= button_tag 'Desfazer', type: :button, class: 'button negative', id: 'undo_bid', 'data-disabled' => undo_bid_disabled_message(historic) %>
-<!--</div>-->
-
-
 
 <%= hidden_field_tag :trading_item, trading_item.id %>
 
-<div class="yui3-g">
-  <div class="yui3-u-1">
-    <%= f.input :accreditation_creditor, as: :fake_select, collection: accreditation_creditors,
-                include_blank: false, input_html:{class:'select', 'data-trading-item': trading_item.id} %>
+<%= f.simple_fields_for :trading do |tr| %>
+  <% tr.object_name = 'explanation_form' %>
+  <div class="yui3-g">
+    <div class="yui3-u-1-8">
+      <%= tr.input :lowest_bid, as: :fake, input_html:{value: trading_item.decorator.lowest_bid_amount } %>
+    </div>
+    <div class="yui3-u-1-4" style="width: 30%">
+      <%= tr.input :lowest_bid_creditor, as: :fake, input_html:{value: trading_item.decorator.lowest_bid_creditor } %>
+    </div>
+    <div class="yui3-u-1-5">
+      <%= tr.input :reduction_rate_value, as: :fake,input_html:{value: trading_item.decorator.reduction_rate_value, class: 'string decimal', 'data-decimal' => true } %>
+    </div>
+    <div class="yui3-u-1-5">
+      <%= tr.input :reduction_rate_percent, as: :fake,input_html:{value: trading_item.decorator.reduction_rate_percent, class: 'string decimal', 'data-decimal' => true } %>
+    </div>
+
+    <div class="yui3-u-1-12 field-without-label">
+      <%= button_tag 'Gravar Decréscimo', type: :button, class: 'button primary reduction_button small-button' %>
+    </div>
+
+    <div class="yui3-u-1-12 field-without-label">
+      <%= link_to 'Desempate Fictício', new_purchase_process_trading_item_bid_benefited_path(item_id: trading_item.id),
+                  'data-url' => new_purchase_process_trading_item_bid_benefited_path,
+                  id: 'benefited_bid', class: 'button primary small-button', 'data-disabled' => trading_item.decorator.benefited_bid_message %>
+    </div>
   </div>
-</div>
+
+  <div class="yui3-g">
+    <div class="yui3-u-1">
+      <%= tr.input :accreditation_creditor, as: :fake_select, collection: accreditation_creditors,
+                  include_blank: false, input_html:{class:'select', 'data-trading-item': trading_item.id} %>
+    </div>
+  </div>
+<% end %>
+
 
 <div class="trading-fields">
   <%= f.simple_fields_for :trading do |trading| %>
