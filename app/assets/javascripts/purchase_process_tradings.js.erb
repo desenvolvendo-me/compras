@@ -217,8 +217,8 @@ $(document).ready(function() {
         id: itemId,
         _method: 'put',
         purchase_process_trading_item: {
-          reduction_rate_value: $button.closest('tr').find('#reduction_rate_value').val(),
-          reduction_rate_percent: $button.closest('tr').find('#reduction_rate_percent').val()
+          reduction_rate_value: $button.closest('.ui-tabs-panel').find("[name$='[reduction_rate_value]']").val(),
+          reduction_rate_percent: $button.closest('.ui-tabs-panel').find("[name$='[reduction_rate_percent]']").val()
         }
       };
 
@@ -228,14 +228,14 @@ $(document).ready(function() {
       type: 'POST',
       dataType: 'json',
       success: function(data) {
-        fillForm(data.next_bid);
+
       },
 
       error: function(xhr) {
         var errors = $.parseJSON(xhr.responseText).errors;
 
-        $trading.find('#reduction_rate_value').val('0,00'),
-          $trading.find('#reduction_rate_percent').val('0,00')
+        $trading.find('#reduction_rate_value').val('0,00')
+        $trading.find('#reduction_rate_percent').val('0,00')
 
         processPersistErrors(errors);
       }
@@ -245,7 +245,7 @@ $(document).ready(function() {
   $('button.reduction_button').on('click', function(event) {
     event.preventDefault();
 
-    var itemId = $(this).closest('tr').find('td.item').data('id');
+    var itemId = $(this).data('item');
 
     submitReductions(itemId, $(this));
   });
@@ -259,7 +259,6 @@ $(document).ready(function() {
                     purchase_process_id: $("#licitation_process_id").val() };
 
     url += $.param(params);
-    debugger
     $.ajax({
       url: url,
       dataType: 'HTML',
