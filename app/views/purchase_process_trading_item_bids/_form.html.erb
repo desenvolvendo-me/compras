@@ -23,5 +23,5 @@
     </div>
   </div>
   <%= f.input :item_id, as: :hidden %>
-  <%= f.input :purchase_process_accreditation_creditor_id, as: :hidden %>
+  <%= f.input :purchase_process_accreditation_creditor_id, as: :hidden, input_html:{value:accreditation_creditor.try(:id)} %>
 </div>
