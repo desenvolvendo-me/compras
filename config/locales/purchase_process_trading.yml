@@ -8,6 +8,11 @@ pt-BR:
     attributes:
       purchase_process_trading:
         observation: "Observação"
+        reduction_rate_value: "Vr. Mínimo Entre Lances"
+        reduction_rate_percent: "% Minímo Entre Lances"
+        lowest_bid: "Melhor Lance"
+        lowest_bid_creditor: "Melhor Lance Fornecedor"
+        accreditation_creditor: "Busque os Lances Por Forncedor"
 
   purchase_process_trading:
     messages:
