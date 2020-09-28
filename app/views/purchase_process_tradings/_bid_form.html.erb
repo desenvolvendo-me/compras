@@ -20,7 +20,7 @@
 <div class="yui3-g">
   <div class="yui3-u-1">
     <%= f.input :accreditation_creditor, as: :fake_select, collection: accreditation_creditors,
-                input_html:{class:'select', 'data-trading-item': trading_item} %>
+                include_blank: false, input_html:{class:'select', 'data-trading-item': trading_item} %>
   </div>
 </div>
 
@@ -30,9 +30,26 @@
   <% end %>
 </div>
 
+<div class="text-center">
+  <% if accreditation_creditors&.count == 1 %>
+    <div class="yui3-u-1-7 field-without-label">
+      <%= button_tag 'Encerrar', type: :button, class: 'button primary',
+                     'data-item': trading_item.id,
+                     id: 'finish_bid'%>
+    </div>
+  <% else %>
+    <div class="yui3-u-1-7 field-without-label">
+      <%= button_tag 'Sair da Disputa', type: :button, class: 'button primary ',
+                     'data-item': trading_item.id,
+                     id: 'finish_dispute'%>
+    </div>
+  <% end %>
+</div>
+<%= f.object.errors.full_messages %>
+
 <style>
   .nested-fields{
-    background-color: #d3d3d373;
+    background-color: #908f8f0f;
     padding: 10px;
     box-shadow: 6px 7px 9px -7px black;
     margin-bottom: 10px;
