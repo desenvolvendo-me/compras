@@ -1,19 +1,25 @@
-<div class="nested_form">
+<div class="nested-fields">
   <div class="yui3-g">
-    <div class="yui3-u-1-5">
+    <div class="yui3-u-1-6">
       <%= f.input :round %>
     </div>
-    <div class="yui3-u-1-5">
+    <div class="yui3-u-1-6">
       <%= f.input :number %>
     </div>
-    <div class="yui3-u-1-5">
+    <div class="yui3-u-1-6">
       <%= f.input :amount %>
     </div>
-    <div class="yui3-u-1-5">
+    <div class="yui3-u-1-6">
       <%= f.input :status %>
     </div>
-    <div class="yui3-u-1-5 ">
+    <div class="yui3-u-1-6 checkbox">
       <%= f.input :benefited %>
+    </div>
+    <div class="yui3-u-1-6 " style="margin-top: 27px">
+      <%= link_to_remove_association f, class: 'button danger',
+                                     title: 'Remover Lance' do %>
+        <i class="mi">delete</i>
+      <% end %>
     </div>
   </div>
   <%= f.input :item_id, as: :hidden %>
