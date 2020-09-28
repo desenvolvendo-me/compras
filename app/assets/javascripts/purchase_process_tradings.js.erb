@@ -156,36 +156,6 @@ $(document).ready(function() {
     });
   }
 
-//  function persistBid(bidId, amount) {
-//    if(amount === undefined)
-//      amount = $trading.find('#amount').val();
-
-//    var url = $('#persist_bid_url').val(),
-//      currentBid = {
-//        id: bidId,
-//        _method: 'put',
-//        purchase_process_trading_item_bid: {
-//          amount: amount
-//        }
-//      };
-
-//    $.ajax({
-//      url: url + bidId,
-//      data: currentBid,
-//      dataType: 'json',
-//      type: 'POST',
-//      success: function() {
-//        getNextBidFromServer();
-//        allowUndoBid(true);
-//      },
-//      error: function(xhr) {
-//        var errors = $.parseJSON(xhr.responseText).errors;
-
-//        processPersistErrors(errors);
-//      }
-//    });
-//  }
-
   function fillCreditors(creditors) {
     var target = $trading.find('table#accreditation_creditors tbody'),
       template = $trading.find('#accreditation_creditors_template');
@@ -212,6 +182,16 @@ $(document).ready(function() {
     });
   }
 
+  //buscar os historicos de lances
+  $("#bids-tab .ui-tabs-anchor").click(function(){
+    var $panel = $("#bids-tab .ui-tabs-panel:visible"),
+        itemId = $panel.find("#trading_item").val();
+
+    getNextBidFromServer(itemId);
+  })
+
+
+
   function undoLastBid(itemId) {
     var oldUrl = $('#undo_last_bid_url').val(),
       newUrl = oldUrl.replace(/\/\d+\//, '/' + itemId + '/');
@@ -221,7 +201,7 @@ $(document).ready(function() {
       dataType: 'json',
       type: 'POST',
       success: function(data) {
-        fillForm(data.next_bid);
+//        fillForm(data.next_bid);
         fillHistoric(data.historic);
         fillLowestBid(data.lowest_bid);
 
