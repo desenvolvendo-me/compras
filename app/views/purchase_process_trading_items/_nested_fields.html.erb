@@ -20,15 +20,13 @@
 
 
       <% if accreditation_creditor_total == 1 %>
-          <%= button_tag 'Encerrar', type: :button, class: 'button primary',
+          <%= button_tag 'Encerrar', type: :button, class: 'button primary finish_bid',
                          'data-item': trading_item.id,
-                         'data-disabled': make_bid_disabled_message(trading_item.bids),
-                         id: 'finish_bid'%>
+                         'data-disabled': make_bid_disabled_message(trading_item.bids) %>
       <% else %>
-          <%= button_tag 'Sair da Disputa', type: :button, class: 'button primary ',
+          <%= button_tag 'Sair da Disputa', type: :button, class: 'button primary finish_dispute',
                          'data-item': trading_item.id,
-                         'data-disabled' => make_bid_disabled_message(trading_item.bids),
-                         id: 'finish_dispute'%>
+                         'data-disabled' => make_bid_disabled_message(trading_item.bids)%>
       <% end %>
     </div>
   </div>
