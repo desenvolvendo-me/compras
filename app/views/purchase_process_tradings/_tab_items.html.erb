@@ -12,22 +12,3 @@
     </div>
   <% end %>
 </div>
-<script>
-  $("#bids-tab [name$='[accreditation_creditor]']").change(function () {
-    var $tab =  $(this).closest('div.ui-tabs-panel '),
-        url = Routes.bid_form_purchase_process_trading + "?",
-        params={ accreditation_creditor_id: this.value, trading_item_id: $(this).data('trading-item'),
-          purchase_process_id: $("#licitation_process_id").val() };
-
-    url += $.param(params);
-    debugger
-    $.ajax({
-      url: url,
-      dataType: 'HTML',
-      type: 'GET',
-      success: function (data) {
-        $tab.find('.trading-fields').html(data);
-      }
-    });
-  })
-</script>
