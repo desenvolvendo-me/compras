@@ -12,8 +12,8 @@ class PurchaseProcessTradingsController < CrudController
   end
 
   def bid_form
-    @bids_by_creditor = PurchaseProcessTradingItemBid.creditor_ids([params[:creditor_id]]).by_licitation_process(params[:purchase_process_id])
-    @trading_item = purchase_process.trading.items.by_item_or_lot(params[:trading_item_id])
+    @bids_by_creditor       = PurchaseProcessTradingItemBid.creditor_ids([params[:creditor_id]]).by_licitation_process(params[:purchase_process_id])
+    @trading_item           = purchase_process.trading.items.by_item_or_lot(params[:trading_item_id])
     @accreditation_creditor = PurchaseProcessAccreditationCreditor.find(params[:accreditation_creditor_id])
 
     render 'bid_form', layout: false
