@@ -1,12 +1,4 @@
 <tr>
-  <td class="item" data-id="<%= item.id %>">
-    <% if index == 0 %>
-      <input class="item_chooser" type="radio" value="true" name="item_chooser" checked="checked">
-    <% else %>
-      <input class="item_chooser" type="radio" value="true" name="item_chooser">
-    <% end %>
-  </td>
-
   <td class="lot"><%= item.item_lot %></td>
   <td><%= item %></td>
   <td><%= item.decorator.lowest_proposal_amount %></td>
