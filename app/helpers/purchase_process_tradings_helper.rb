@@ -1,6 +1,6 @@
 module PurchaseProcessTradingsHelper
-  def make_bid_disabled_message(next_bid)
-    t('purchase_process_trading.messages.make_bid_disabled_message') if next_bid.blank?
+  def make_bid_disabled_message(bids)
+    t('purchase_process_trading.messages.make_bid_disabled_message') if bids.any?(&:declined?)
   end
 
   def undo_bid_disabled_message(historic)
