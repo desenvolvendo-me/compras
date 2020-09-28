@@ -1,5 +1,6 @@
 $(document).ready(function() {
-  const $trading = $("#tradings-fields");
+  const $trading  = $("#tradings-fields");
+  var $currentPanel = $("#bids-tab .ui-tabs-panel").eq($("#bids-tab").tabs('option', 'active'));
 
   $trading.find('input.item_chooser:first').attr('checked', true).trigger('change');
 
@@ -217,8 +218,8 @@ $(document).ready(function() {
         id: itemId,
         _method: 'put',
         purchase_process_trading_item: {
-          reduction_rate_value: $button.closest('.ui-tabs-panel').find("[name$='[reduction_rate_value]']").val(),
-          reduction_rate_percent: $button.closest('.ui-tabs-panel').find("[name$='[reduction_rate_percent]']").val()
+          reduction_rate_value: $currentPanel.find("[name$='[reduction_rate_value]']").val(),
+          reduction_rate_percent: $currentPanel.find("[name$='[reduction_rate_percent]']").val()
         }
       };
 
@@ -252,8 +253,7 @@ $(document).ready(function() {
 
   //load creditor's bids
   $("#bids-tab [name$='[accreditation_creditor]']").change(function () {
-    var $tab   =  $(this).closest('div.ui-tabs-panel '),
-        url    = Routes.bid_form_purchase_process_trading + "?",
+    var url    = Routes.bid_form_purchase_process_trading + "?",
         params = { accreditation_creditor_id: this.value,
                    trading_item_id: $(this).data('trading-item'),
                     purchase_process_id: $("#licitation_process_id").val() };
@@ -264,19 +264,18 @@ $(document).ready(function() {
       dataType: 'HTML',
       type: 'GET',
       success: function (data) {
-        $tab.find('.trading-fields').html(data);
+        $currentPanel.find('.trading-fields').html(data);
       }
     });
   });
 
   $('button#finish_dispute').on('click', function(event) {
-    var $tab        = $(this).closest('div.ui-tabs-panel'),
-    dataDisabled    = _($(this).attr('data-disabled')),
-    itemID          = $(this).data('item'),
-    acc_creditor_id = $tab.find("[name$='[accreditation_creditor]']").val(),
-    amount          = '0.0',
-    status          = '<%= TradingItemBidStatus::DECLINED %>',
-    round           = parseInt($tab.find("[name$='[round]']").last());
+    var dataDisabled    = _($(this).attr('data-disabled')),
+        itemID          = $(this).data('item'),
+        acc_creditor_id = $currentPanel.find("[name$='[accreditation_creditor]']").val(),
+        amount          = '0.0',
+        status          = '<%= TradingItemBidStatus::DECLINED %>',
+        round           = parseInt($currentPanel.find("[name$='[round]']").last());
 
     if ( dataDisabled.isEmpty() ) {
       var url = $('#persist_bid_url').val(),
@@ -298,7 +297,7 @@ $(document).ready(function() {
         success: function() {
           getNextBidFromServer(itemID);
           allowUndoBid(true);
-          $tab.find("[name$='[accreditation_creditor]']").trigger('change')
+          $currentPanel.find("[name$='[accreditation_creditor]']").trigger('change')
         },
         error: function(xhr) {
           var errors = $.parseJSON(xhr.responseText).errors;
