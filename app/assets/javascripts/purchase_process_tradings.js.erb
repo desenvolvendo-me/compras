@@ -304,7 +304,8 @@ $(document).ready(function() {
     });
   });
 
-  $('button#finish_dispute').on('click', function(event) {
+  $('#bids-tab').on('click', '.finish_dispute', function(event) {
+    debugger
     var dataDisabled    = _($(this).attr('data-disabled')),
         itemID          = $(this).data('item'),
         acc_creditor_id = $currentPanel.find("[name$='[accreditation_creditor]']").val(),
@@ -343,7 +344,7 @@ $(document).ready(function() {
     }
   });
 
-  $("button#finish_bid").on('click', function(event) {
+  $("#bids-tab").on('click', 'finish_bid', function(event) {
     event.preventDefault();
     var itemId = $trading.find('input.item_chooser:checked').parent().attr('data-id');
 
