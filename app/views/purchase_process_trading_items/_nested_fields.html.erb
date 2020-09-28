@@ -22,7 +22,7 @@
       <% if accreditation_creditor_total == 1 %>
           <%= button_tag 'Encerrar', type: :button, class: 'button primary',
                          'data-item': trading_item.id,
-                         'data-disabled' => make_bid_disabled_message(trading_item.bids),
+                         'data-disabled': make_bid_disabled_message(trading_item.bids),
                          id: 'finish_bid'%>
       <% else %>
           <%= button_tag 'Sair da Disputa', type: :button, class: 'button primary ',
