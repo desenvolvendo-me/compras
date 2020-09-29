@@ -20,10 +20,10 @@
   <% tr.object_name = 'explanation_form' %>
   <div class="yui3-g ">
     <div class="yui3-u-1-8">
-      <%= tr.input :lowest_bid, as: :fake, input_html:{value: trading_item.decorator.lowest_bid_amount, disabled: true } %>
+      <%= tr.input :lowest_bid, as: :fake, input_html:{value: trading_item.decorator.lowest_bid_or_proposal_amount, disabled: true } %>
     </div>
     <div class="yui3-u-1-4" style="width: 30%">
-      <%= tr.input :lowest_bid_creditor, as: :fake, input_html:{value: trading_item.decorator.lowest_bid_creditor, disabled: true } %>
+      <%= tr.input :lowest_bid_creditor, as: :fake, input_html:{value: trading_item.lowest_bid_or_proposal_accreditation_creditor, disabled: true } %>
     </div>
     <div class="yui3-u-1-5">
       <%= tr.input :reduction_rate_value, as: :fake,input_html:{value: trading_item.decorator.reduction_rate_value, class: 'string decimal', 'data-decimal' => true } %>
