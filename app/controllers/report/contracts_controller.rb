@@ -5,8 +5,8 @@ class Report::ContractsController < Report::BaseController
   def index
     @report = report_instance
 
-    if params[:between_days_finish]
-      @contract = apply_scopes(Contract)
+    if params[:between_days_finish] || params[:all]
+      @contract = params[:all] ? (Contract.all):(apply_scopes(Contract))
       respond_to do |format|
         format.html { render :show,layout: 'report' }
       end
