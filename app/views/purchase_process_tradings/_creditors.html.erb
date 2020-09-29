@@ -14,7 +14,7 @@
   <tbody>
 
   <% order_creditor(creditors, item).each_with_index do |accreditation_creditor, index| %>
-    <% resource.creditor_proposals.proposal_by_creditor(accreditation_creditor.creditor_id).each do |proposal| %>
+    <% resource.proposals_of_creditor(accreditation_creditor.creditor).each do |proposal| %>
       <%= render 'purchase_process_tradings/creditors_row',
           order: index + 1,
           creditor: accreditation_creditor,
@@ -31,7 +31,9 @@
         <b>Valor Total da Proposta: </b>
       </td>
       <td>
-        <b><%= number_to_currency(accreditation_creditor.decorator.unit_price_of_proposal(trading.purchase_process_id, item.item_or_lot)) %></b>
+        <b>
+          <%= number_to_currency resource.proposals_total_price(accreditation_creditor.creditor)%>
+        </b>
       </td>
     </tr>
     <% end %>
