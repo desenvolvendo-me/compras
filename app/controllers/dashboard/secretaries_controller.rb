@@ -4,14 +4,14 @@ class Dashboard::SecretariesController < CrudController
 
 
   def index
-    @contracts = Contract.between_days_finish(0,30).page(params[:page]).per(3)
+    @contracts = Contract.between_days_finish(0,30).page(params[:page]).per(20)
     @contracts_periods = Contract.count_contracts_finishing
     @approval_requests = SupplyRequest.to_secretary_approv(current_user.authenticable.id).page(params[:page_approval]).per(5)
     @linked_contracts = LinkedContract.by_days_finish.page(params[:page]).per(2)
   end
 
   def contracts
-    @contracts = apply_scopes(Contract).page(params[:page]).per(3)
+    @contracts = apply_scopes(Contract).page(params[:page]).per(20)
   end
   
   def linked_contracts
