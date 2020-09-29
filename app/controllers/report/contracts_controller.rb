@@ -1,9 +1,23 @@
 class Report::ContractsController < Report::BaseController
   report_class ContractReport, :repository => ContractSearcher
+  has_scope :between_days_finish, using: %i[started_at ended_at], :type => :hash
+
+  def index
+    @report = report_instance
+
+    if params[:between_days_finish]
+      @contract = apply_scopes(Contract)
+      respond_to do |format|
+        format.html { render :show,layout: 'report' }
+      end
+    else
+      redirect_to controller: controller_name, action: :new
+    end
+  end
 
   def show
     @contract = get_contract()
-
+    
     @report = report_instance
 
     if @report.valid?
@@ -14,7 +28,11 @@ class Report::ContractsController < Report::BaseController
   end
 
   private
+  
+  def show_report
 
+  end
+  
   def get_contract
 
     if contract_report_params[:creditor_id].nil?
@@ -50,6 +68,7 @@ class Report::ContractsController < Report::BaseController
     params.delete(:contract_value) if params[:contract_value]=='0.00'
     params.delete(:start_date) if params[:start_date].blank?
     params.delete(:end_date) if params[:end_date].blank?
+    params.delete(:contract_ids) if params[:contract_ids].blank?
     params
   end
 
