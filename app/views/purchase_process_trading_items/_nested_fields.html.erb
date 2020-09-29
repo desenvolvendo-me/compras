@@ -1,6 +1,6 @@
 <% if trading_item.bids.by_accreditation_creditor(accreditation_creditor&.id).any?(&:declined?) %>
   <div class="alert alert-warning alert-trading-options">
-    <strong> Fornecedor declinou </strong>
+    <strong> <%= t "purchase_process_trading_item.messages.creditor_declined" %> </strong>
   </div>
 <% end %>
 
@@ -26,7 +26,7 @@
       <% else %>
           <%= button_tag 'Sair da Disputa', type: :button, class: 'button primary finish_dispute',
                          'data-item': trading_item.id,
-                         'data-disabled' => make_bid_disabled_message(trading_item.bids)%>
+                         'data-disabled' => make_bid_disabled_message(trading_item.bids) %>
       <% end %>
     </div>
   </div>
