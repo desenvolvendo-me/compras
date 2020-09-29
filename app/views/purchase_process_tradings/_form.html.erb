@@ -1,6 +1,5 @@
 <div id="tradings-fields">
   <div class="title-section">Itens / Grupo de Itens do Pregão:</div>
-  <div>*Selecione o Item/Grupo Desejado</div>
   <%= render "purchase_process_tradings/by_#{trading.kind}", trading: trading %>
 
   <div class="simple_form">
@@ -14,8 +13,7 @@
     <%= render 'purchase_process_tradings/creditors', item: item, creditors: creditors, trading: trading, historic: historic %>
 
 
-    <div class="title-section">Lances por Fornecedor</div>
-
+    <div class="title-section">Lances do Pregão</div>
     <%= render 'purchase_process_tradings/tab_items', trading: trading, f: f %>
 
     <div class="title-section">Historico de Lances</div>
