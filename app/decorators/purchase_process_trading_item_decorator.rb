@@ -27,6 +27,10 @@ class PurchaseProcessTradingItemDecorator
     lowest_proposal.creditor
   end
 
+  def lowest_bid_or_proposal_amount
+    number_with_delimiter super
+  end
+
   def total_price
     return '-' unless lowest_proposal
 
