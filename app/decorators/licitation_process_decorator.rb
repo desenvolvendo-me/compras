@@ -66,17 +66,6 @@ class LicitationProcessDecorator
     end
   end
 
-  # def must_have_published_edital_or_direct_purchase_or_disabled_negotiation_message
-  #   must_have_published_edital_or_direct_purchase
-  #   disabled_negotiation_message
-  # end
-
-  # def must_have_published_edital_or_direct_purchase
-  #   unless edital_published? || simplified_processes?
-  #     t("licitation_process.messages.must_be_included_after_edital_publication")
-  #   end
-  # end
-
   def must_have_trading
     return unless component.trading.nil?
 
@@ -95,11 +84,13 @@ class LicitationProcessDecorator
     if licitation? && trading?
       items && bidders && trading&.allow_negotiation?
     else
-      items && bidders
+      items && bidders && creditor_proposals.present?
     end
   end
 
   def has_all_ratifications?
+    return if new_record?
+
     if licitation?
       if trading?
         Creditor.without_licitation_ratification(id).won_calculation_for_trading(id).present?
@@ -164,6 +155,10 @@ class LicitationProcessDecorator
     end
   end
 
+  def must_have_creditors_enabled
+    t("licitation_process.messages.must_have_creditors_enabled")
+  end
+
   def must_have_creditors_and_items_and_tradings
     if component.creditors.blank? || materials.blank?
       t("licitation_process.messages.must_have_creditors_and_items")
@@ -188,10 +183,12 @@ class LicitationProcessDecorator
   end
 
   def must_finish_all_tabs_to_homologation
-    if licitation?
-      'É necessário preencher as abas Itens; Habilitação; Lances'
+    if licitation? && trading?
+      'É necessário preencher as abas Itens; Habilitação; Propostas; Lances'
+    elsif licitation?
+      'É necessário preencher as abas Itens; Habilitação; Propostas'
     else
-      'É necessário preencher as abas Itens/Justificativa; Habilitação'
+      'É necessário preencher as abas Itens/Justificativa; Habilitação; Propostas'
     end
   end
 
