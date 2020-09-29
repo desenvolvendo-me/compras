@@ -216,7 +216,7 @@ $(document).ready(function() {
       var reduction_value   = parsePtBrFloat($currentPanel.find("[name$='[reduction_rate_value]']").val()),
           reduction_percent = parsePtBrFloat($currentPanel.find("[name$='[reduction_rate_percent]']").val()),
           lowest_bid        = parsePtBrFloat($currentPanel.find("[name$='[lowest_bid]']").val()),
-          last_round        = parseInt($currentPanel.find("[name$='[round]']").last().val()),
+          last_round        = parseInt($currentPanel.find("[name$='[round]']").last().val()) || 0,
           bid_reduction     = 0.0;
 
       // calcula redução por valor ou porcentagem
