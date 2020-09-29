@@ -12,4 +12,4 @@ pt-BR:
         contract_value: 'Valor do contrato'
         modality_humanize: 'Modalidade'
         start_date: "Início da vigência"
-        end_date: "Data de validade"
+        end_date: "Fim da Vigência"
