@@ -205,32 +205,43 @@ $(document).ready(function() {
   })
 
   // reduz o valor do lance automaticamente quando inserido um novo form
-  $(".trading-fields").on('cocoon:before-insert', function(e, bid_to_be_inserted, originalEvent) {
-    //atualiza o valor do menor lance
-    var hasNewAmount = $currentPanel.find("[name$='[amount]'].newRecord");
+  $(".trading-fields").on('cocoon:before-insert', function(e, bid_to_be_inserted) {
+      //atualiza o valor do menor lance
+      var hasNewAmount = $currentPanel.find("[name$='[amount]'].newRecord");
 
-    if(hasNewAmount.length > 0){
-      $currentPanel.find("[name$='[lowest_bid]']").val(hasNewAmount.last().val());
-    }
+      if(hasNewAmount.length > 0){
+        $currentPanel.find("[name$='[lowest_bid]']").val(hasNewAmount.last().val());
+      }
 
-    var reduction_value   = parsePtBrFloat($currentPanel.find("[name$='[reduction_rate_value]']").val()),
-        reduction_percent = parsePtBrFloat($currentPanel.find("[name$='[reduction_rate_percent]']").val()),
-        lowest_bid        = parsePtBrFloat($currentPanel.find("[name$='[lowest_bid]']").val()),
-        last_round        = parseInt($currentPanel.find("[name$='[round]']").last().val()),
-        bid_reduction     = 0.0;
+      var reduction_value   = parsePtBrFloat($currentPanel.find("[name$='[reduction_rate_value]']").val()),
+          reduction_percent = parsePtBrFloat($currentPanel.find("[name$='[reduction_rate_percent]']").val()),
+          lowest_bid        = parsePtBrFloat($currentPanel.find("[name$='[lowest_bid]']").val()),
+          last_round        = parseInt($currentPanel.find("[name$='[round]']").last().val()),
+          bid_reduction     = 0.0;
 
-    // calcula redução por valor ou porcentagem
-    if(reduction_value){
-      bid_reduction = lowest_bid - reduction_value;
-    }else if(reduction_percent){
-      bid_reduction = lowest_bid - (lowest_bid * reduction_percent) / 100;
-    }
+      // calcula redução por valor ou porcentagem
+      if(reduction_value){
+        bid_reduction = lowest_bid - reduction_value;
+      }else if(reduction_percent){
+        bid_reduction = lowest_bid - (lowest_bid * reduction_percent) / 100;
+      }
 
-    $(bid_to_be_inserted).find("[name$='[amount]']")
-      .val(floatToPtBrString(bid_reduction))
-      .addClass('newRecord');
+      $(bid_to_be_inserted).find("[name$='[amount]']")
+        .val(floatToPtBrString(bid_reduction))
+        .addClass('newRecord');
 
-    $(bid_to_be_inserted).find("[name$='[round]']").val(last_round + 1);
+      $(bid_to_be_inserted).find("[name$='[round]']").val(last_round + 1);
+
+      $currentPanel.find('.finish_dispute').attr('data-disabled', 'Salve todos os registros antes de sair da disputa.');
+  });
+
+  //habilita o botão de sair da disputa somente se os todos estiver salvos
+  $(".trading-fields").on('cocoon:after-remove', function(e, bid_to_be_removed){
+      var hasNewAmount = $currentPanel.find("[name$='[amount]'].newRecord");
+
+      if(hasNewAmount.length === 0){
+        $currentPanel.find('.finish_dispute').removeAttr('data-disabled');
+      }
   });
 
   // informar o usuario que o lance atual não pode ser maior que o melhor lance
