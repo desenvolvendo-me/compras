@@ -1,0 +1,5 @@
+pt-BR:
+  enumerations:
+    contract_status:
+      finished: "Finalizado"
+      current: "Vigente"
