@@ -30,15 +30,6 @@ $(document).ready(function() {
     }
   }
 
-  function allowUndoBid(allowed) {
-    if (allowed) {
-      $('button#undo_bid').removeAttr('data-disabled');
-    } else {
-      $('button#undo_bid').attr('data-disabled', '');
-      $('button#undo_bid').data('disabled', "<%= I18n.t 'purchase_process_trading.messages.undo_bid_disabled_message' %>");
-    }
-  }
-
   function updateBenefitedBidLink(itemId) {
     var url = $('a#benefited_bid').data('url');
 
@@ -63,29 +54,6 @@ $(document).ready(function() {
       $('a#benefited_bid').removeAttr('data-disabled');
     }
   }
-
-//  function fillForm(bid) {
-//    $trading.find('#amount').val('0,00');
-
-//    if (_.isEmpty(bid)) {
-//      $trading.find('#bid_id').val('');
-//      $trading.find('#accreditation_creditor').val('');
-//      $trading.find('#accreditation_creditor_id').val('');
-//      $trading.find('#lot').val('');
-//      $trading.find('#round').val('');
-
-//      allowNewBid(false);
-//    } else {
-//      $trading.find('#bid_id').val(bid.id);
-//      $trading.find('#accreditation_creditor').val(bid.accreditation_creditor);
-//      $trading.find('#accreditation_creditor_id').val(bid.accreditation_creditor_id);
-//      $trading.find('#lot').val(bid.lot);
-//      $trading.find('#round').val(bid.round);
-//      $trading.find('#amount').val(bid.amount_with_reduction);
-
-//      allowNewBid(true);
-//    }
-//  }
 
   function fillLowestBid(item) {
     var bidAmount = $trading.find('table#items tr#item-'+item.id).find('td.bid_amount'),
@@ -121,7 +89,6 @@ $(document).ready(function() {
       cache: false,
       dataType: 'json',
       success: function(item) {
-//        fillForm(item.next_bid);
         fillHistoric(item.historic);
         fillItem(item)
         allowBenefitedBid(item.historic, item.lowest_bid, item.next_bid);
@@ -158,12 +125,6 @@ $(document).ready(function() {
 
   function fillHistoric(historic) {
     $('table#historic tbody').empty();
-
-    if ( _.isEmpty(historic) ) {
-      allowUndoBid(false);
-    } else {
-      allowUndoBid(true);
-    }
 
     _.each(historic, function(bid) {
       addBidToHistoric(bid, true);
@@ -256,25 +217,6 @@ $(document).ready(function() {
   });
 
 
-  function undoLastBid(itemId) {
-    var oldUrl = $('#undo_last_bid_url').val(),
-      newUrl = oldUrl.replace(/\/\d+\//, '/' + itemId + '/');
-
-    $.ajax({
-      url: newUrl,
-      dataType: 'json',
-      type: 'POST',
-      success: function(data) {
-//        fillForm(data.next_bid);
-        fillHistoric(data.historic);
-        fillLowestBid(data.lowest_bid);
-
-        allowNewBid(!_.isEmpty(data.next_bid));
-        allowBenefitedBid(data.historic, data.lowest_bid, data.next_bid);
-      }
-    });
-  }
-
   function submitReductions(itemId, $button) {
     var url = $trading.find('#persist_item_url').val(),
       percentData = {
@@ -360,7 +302,6 @@ $(document).ready(function() {
         type: 'POST',
         success: function() {
           getNextBidFromServer(itemID);
-          allowUndoBid(true);
           $currentPanel.find("[name$='[accreditation_creditor]']").trigger('change')
         },
         error: function(xhr) {
@@ -405,17 +346,6 @@ $(document).ready(function() {
         processPersistErrors(errors);
       }
     });
-  });
-
-  $('button#undo_bid').on('click', function(event) {
-    event.preventDefault();
-
-    var itemId = $trading.find('#item_id').val(),
-      dataDisabled = _($(this).attr('data-disabled'));
-
-    if ( dataDisabled.isEmpty() && itemId) {
-      undoLastBid(itemId);
-    }
   });
 
   $trading.find('.item_chooser').on('change', function() {
