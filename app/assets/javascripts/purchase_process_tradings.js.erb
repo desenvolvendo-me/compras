@@ -203,6 +203,7 @@ $(document).ready(function() {
     var reduction_value   = parsePtBrFloat($currentPanel.find("[name$='[reduction_rate_value]']").val()),
         reduction_percent = parsePtBrFloat($currentPanel.find("[name$='[reduction_rate_percent]']").val()),
         lowest_bid        = parsePtBrFloat($currentPanel.find("[name$='[lowest_bid]']").val()),
+        last_round        = parseInt($currentPanel.find("[name$='[round]']").last().val()),
         bid_reduction     = 0.0;
 
     // calcula redução por valor ou porcentagem
@@ -215,6 +216,8 @@ $(document).ready(function() {
     $(bid_to_be_inserted).find("[name$='[amount]']")
       .val(floatToPtBrString(bid_reduction))
       .addClass('newRecord');
+
+    $(bid_to_be_inserted).find("[name$='[round]']").val(last_round + 1);
   });
 
   // informar o usuario que o lance atual não pode ser maior que o melhor lance
