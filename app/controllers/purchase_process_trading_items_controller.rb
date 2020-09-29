@@ -30,6 +30,7 @@ class PurchaseProcessTradingItemsController < CrudController
     resource.transaction do
       if success = TradingBidRemover.undo(resource)
         TradingItemStatusChanger.change(resource)
+        TradingBidCreator.create!(resource)
       end
     end
 

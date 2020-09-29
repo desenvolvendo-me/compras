@@ -31,7 +31,7 @@ class BidderDecorator
   end
 
   def enabled
-    t(super.to_s)
+    t super
   end
 
   def benefited

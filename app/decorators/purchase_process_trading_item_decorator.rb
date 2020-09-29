@@ -27,10 +27,6 @@ class PurchaseProcessTradingItemDecorator
     lowest_proposal.creditor
   end
 
-  def lowest_bid_or_proposal_amount
-    number_with_delimiter super
-  end
-
   def total_price
     return '-' unless lowest_proposal
 
@@ -62,14 +58,6 @@ class PurchaseProcessTradingItemDecorator
       I18n.t 'purchase_process_trading_item.messages.trading_item_not_finished'
     elsif closed? && !benefited_tie?
       I18n.t 'purchase_process_trading_item.messages.lowest_proposal_already_benefited'
-    end
-  end
-
-  def item_or_lot
-    if lot?
-      'Lote ' + lot.to_s
-    else
-      item
     end
   end
 end

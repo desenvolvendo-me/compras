@@ -58,11 +58,10 @@ class PurchaseProcessAccreditationCreditor < Compras::Model
   }
 
   scope :by_lowest_proposal_outer_on_lot, lambda { |licitation_process_id, lot|
+    joins { creditor.purchase_process_creditor_proposals.outer }.
     joins { purchase_process_accreditation }.
-    joins { creditor.purchase_process_creditor_proposals }.
     where {
-          purchase_process_accreditation.licitation_process_id.eq(licitation_process_id) &
-      creditor.purchase_process_creditor_proposals.licitation_process_id.eq(licitation_process_id) &
+      purchase_process_accreditation.licitation_process_id.eq(licitation_process_id) &
       (creditor.purchase_process_creditor_proposals.lot.eq(lot) &
        creditor.purchase_process_creditor_proposals.disqualified.eq(false) &
        creditor.purchase_process_creditor_proposals.licitation_process_id.eq(licitation_process_id)

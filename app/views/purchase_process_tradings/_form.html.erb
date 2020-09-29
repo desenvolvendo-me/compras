@@ -1,48 +1,45 @@
 <div id="tradings-fields">
-  <div class="title-section">Itens / Grupo de Itens do Pregão:</div>
-  <div>*Selecione o Item/Grupo Desejado</div>
-  <%= render "purchase_process_tradings/by_#{trading.kind}", trading: trading %>
+<div class="title-section">Itens / Grupo de Itens do Pregão:</div>
+<div>*Selecione o Item/Grupo Desejado</div>
+<%= render "purchase_process_tradings/by_#{trading.kind}", trading: trading %>
 
-  <div class="simple_form">
-    <%= hidden_field_tag :next_bid_url, next_bid_purchase_process_trading_item_path(item) %>
-    <%= hidden_field_tag :creditor_list, creditor_list_purchase_process_trading_item_path(item) %>
-    <%= hidden_field_tag :persist_bid_url, purchase_process_trading_item_bids_path %>
-    <%= hidden_field_tag :undo_last_bid_url, undo_last_bid_purchase_process_trading_item_path(item) %>
-    <%= hidden_field_tag :persist_item_url, purchase_process_trading_item_path('') %>
-    <%= hidden_field_tag :trading_id, resource.id %>
+<div class="simple_form">
+  <%= hidden_field_tag :next_bid_url, next_bid_purchase_process_trading_item_path(item) %>
+  <%= hidden_field_tag :creditor_list, creditor_list_purchase_process_trading_item_path(item) %>
+  <%= hidden_field_tag :persist_bid_url, purchase_process_trading_item_bid_path('') %>
+  <%= hidden_field_tag :undo_last_bid_url, undo_last_bid_purchase_process_trading_item_path(item) %>
+  <%= hidden_field_tag :persist_item_url, purchase_process_trading_item_path('') %>
+  <%= hidden_field_tag :trading_id, resource.id %>
 
-    <%= render 'purchase_process_tradings/creditors', item: item, creditors: creditors, trading: trading, historic: historic %>
+  <%= render 'purchase_process_tradings/creditors', item: item, creditors: creditors, trading: trading, historic: historic %>
 
+  <%= render 'purchase_process_tradings/bid_form',  item: item, next_bid: next_bid, historic: historic, creditors: creditors %>
 
-    <div class="title-section">Lances por Fornecedor</div>
+  <%= render 'purchase_process_tradings/historic', historic: historic, trading: trading %>
 
-    <%= render 'purchase_process_tradings/tab_items', trading: trading, f: f %>
-
-    <div class="title-section">Historico de Lances</div>
-    <%= render 'purchase_process_tradings/historic', historic: historic, trading: trading %>
-
-  </div>
+</div>
 </div>
 
 <style>
-  .title-section{
-    color: #3f6e9d;
-    font-size: 186%;
-    font-weight: bolder;
-    text-align: center;
-    margin-bottom: 18px;
-  }
+.title-section{
+  color: #3f6e9d;
+  font-size: 186%;
+  font-weight: bolder;
+  text-align: center;
+  margin-bottom: 18px;
+}
 
-  .small-button{
-    font-size: 95.1% !important;
-  }
-  .creditor-status{
-    color: #3f6e9d !important;
-  }
+.small-button{
+  font-size: 95.1% !important;
+}
+.creditor-status{
+  color: #3f6e9d !important;
+}
 
-  .finish_dispute, .finish_bid{
-    background-color: black !important;
-    border-color: #000000cc !important;
-    color: #FFF !important;
-  }
+.button#finish_dispute{
+  background-color: black;
+  border-color: #000000cc;
+  color: #FFF;
+  float: left;
+}
 </style>

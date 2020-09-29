@@ -1,16 +1,4 @@
-
-<% unless !f.object.decorator.disabled_negotiation_message %>
-  <% unless f.object.trading? %>
-    <div class="alert alert-warning alert-trading-options">
-      <strong> Disponivel somente para Processo Licitatório e todas as suas fases na modalidade Pregão</strong>
-    </div>
-  <% end %>
-
-  <div id='negotiation-alert' class="alert alert-warning">
-    <strong><%= f.object.decorator.disabled_negotiation_message %></strong>
-  </div>
-<% end %>
-
+<% if !f.object.decorator.disabled_negotiation_message %>
   <%= button_tag 'Cancelar', type: :button,
                  class: "button", id: "cancel-negotiation" %>
 
@@ -18,17 +6,7 @@
 
 
   <table id='negotiation-records' class="records">
-    <tr>
-      <th>Fornecedor</th>
-      <th></th>
-    </tr>
     <tbody>
-    <% if resource.trading&.creditors_with_lowest_proposal.nil? %>
-      <tr>
-        <td>Não há items/lotes cadastrados para negociação.</td>
-      </tr>
-    <% end %>
-
     <% resource.trading&.creditors_with_lowest_proposal&.each do |creditor| %>
       <tr id="<%= dom_id creditor %>">
         <td>
@@ -82,4 +60,14 @@
       float: right;
     }
   </style>
+<% else %>
+  <% unless f.object.trading? %>
+    <div class="alert alert-warning alert-trading-options">
+      <strong> Disponivel somente para Processo Licitatório e todas as suas fases na modalidade Pregão</strong>
+    </div>
+  <% end %>
 
+  <div id='negotiation-alert' class="alert alert-warning">
+    <strong><%= f.object.decorator.disabled_negotiation_message %></strong>
+  </div>
+<% end %>

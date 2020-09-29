@@ -18,20 +18,12 @@
   </thead>
 
   <tbody>
-  <%if Creditor.winners(f.object).empty? %>
-    <tr>
-      <td colspan="2">
-          <strong>Não foram encontrados fornecedores vencedores para os lances.</strong>
-      </td>
-    </tr>
+  <% if f.object.trading? %>
+    <%= render partial: 'realignment_prices/creditors_row_trading', collection: Creditor.winners(f.object), as: :creditor,
+               locals:{licitation_process: f.object} if f.object.persisted? %>
   <% else %>
-    <% if f.object.trading? %>
-      <%= render partial: 'realignment_prices/creditors_row_trading', collection: Creditor.winners(f.object), as: :creditor,
-                 locals:{licitation_process: f.object} if f.object.persisted? %>
-    <% else %>
-      <%= render partial: "realignment_prices/creditors_row_#{f.object.judgment_form_kind}", collection: Creditor.winners(f.object), as: :creditor,
-                 locals:{licitation_process: f.object} if f.object.persisted? %>
-    <% end %>
+    <%= render partial: "realignment_prices/creditors_row_#{f.object.judgment_form_kind}", collection: Creditor.winners(f.object), as: :creditor,
+               locals:{licitation_process: f.object} if f.object.persisted? %>
   <% end %>
   </tbody>
 </table>
