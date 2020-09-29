@@ -46,7 +46,7 @@ class PurchaseProcessTradingItemBid < Compras::Model
   }
 
   scope :by_licitation_process, lambda{|licitation_process_id|
-    joins{ trading }.where{ trading.licitation_process_id.eq licitation_process_id}
+    joins{ trading }.where{ trading.purchase_process_id.eq licitation_process_id}
   }
 
   scope :by_accreditation_creditor, lambda{ |accreditation_creditor_id|
