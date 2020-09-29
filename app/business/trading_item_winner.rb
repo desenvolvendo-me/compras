@@ -20,8 +20,18 @@ class TradingItemWinner
 
   attr_reader :item, :next_bid_calculator
 
+  # determina se os lances para o item foram finalizados
+  # se possui somente um lance dentre todos com o status with_proposal
   def trading_for_item_finished?(item)
-    next_bid_calculator.next_bid(item).nil?
+    bids = item.bids.reload.reorder{id.desc}
+    return if bids.blank?
+
+    lastBids = []
+    item.creditors_ordered.each do |creditor|
+      lastBids << bids.detect{|i| i.purchase_process_accreditation_creditor_id == creditor.id}
+    end
+
+    lastBids.reject(&:nil?).one?(&:with_proposal?)
   end
 
   def lowest_creditor
