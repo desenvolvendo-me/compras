@@ -25,8 +25,9 @@ class PurchaseProcessTradingItemBid < Compras::Model
   validates :amount, numericality: { greater_than: 0, if: :with_proposal? }
   validate  :validate_minimum_amount, if: :with_proposal?
 
-  before_save :set_status_and_number
-  after_save  :change_status_item
+  after_destroy :change_status_item
+  before_save   :set_status_and_number
+  after_save    :change_status_item
 
   scope :by_item_id, lambda { |item_id|
     where { |bid| bid.item_id.eq(item_id) }
@@ -73,7 +74,6 @@ class PurchaseProcessTradingItemBid < Compras::Model
   end
 
   def change_status_item
-    TradingBidCleaner.clean(self.item)
     TradingItemStatusChanger.change(self.item)
   end
 
