@@ -95,8 +95,6 @@ module LicitationProcessesHelper
     trading = TradingCreator.create!(purchase_process)
     trading = trading.present? ? trading : purchase_process.trading
 
-    TradingBidCreator.create_items_bids!(trading)
-
     trading
   end
 
