@@ -10,10 +10,11 @@ pt-BR:
         item: "Item"
         lot: "Item/Grupo"
         lowest_bid_or_proposal_amount: 'Menor proposta'
+        reduction_rate_value: "Vr. Mínimo Entre Lances"
+        reduction_rate_percent: "% Minímo Entre Lances"
         trading: "Pregão"
 
   purchase_process_trading_item:
     messages:
       trading_item_not_finished: "o item do pregão ainda não chegou ao final dos lances"
       lowest_proposal_already_benefited: "o fornecedor do menor lance já é beneficiado pela lei"
-      creditor_declined: "Fornecedor declinou"

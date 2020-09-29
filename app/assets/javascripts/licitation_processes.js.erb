@@ -286,13 +286,16 @@ $(document).ready(function () {
     $(this).hide();
   });
 
-  $(function(){
-    $(".tabs").tabs({
-      active: sessionStorage.getItem("currentTabIndexLicitationProcess"),
-      activate: function(event, ui) {
-        var tabIndex = $(".tabs").tabs('option', 'active');
-        sessionStorage.setItem("currentTabIndexLicitationProcess", tabIndex);
-      }
-    });
-  });
+//  if ($('#licitation_process_budget_allocation_year').val() == ''){
+//    disableBudgetAllocation();
+//  }
+
+//  $('form.licitation_process').on('change', '#licitation_process_budget_allocation_year', function(){
+//    if ($('#licitation_process_budget_allocation_year').val() == ''){
+//      disableBudgetAllocation();
+//    }else{
+//      enableBudgetAllocation();
+//    }
+//  });
+
 });

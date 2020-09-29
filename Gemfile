@@ -39,7 +39,6 @@ gem 'mask_validator', '0.2.1'
 gem 'rubyzip', '0.9.9'
 gem 'typecaster', '0.0.2', git: 'git://github.com/ricardohsd/typecaster'
 gem 'validates_timeliness', '3.0.14'
-gem 'cocoon'
 
 gem 'has_scope', '0.5.1'
 gem 'inherited_resources', '1.4.0'

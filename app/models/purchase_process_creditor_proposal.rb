@@ -103,10 +103,6 @@ class PurchaseProcessCreditorProposal < Compras::Model
     where { judgment_form.kind.in([JudgmentFormKind::LOT, JudgmentFormKind::GLOBAL]) }
   }
 
-  scope :proposal_by_creditor, lambda{|creditorId|
-    where{disqualified.eq(false) & creditor_id.eq(creditorId)}
-  }
-
   def self.best_proposal_for(creditor_proposal)
     if creditor_proposal.licitation_process.trading?
       find_brothers_for_ranking(creditor_proposal).first

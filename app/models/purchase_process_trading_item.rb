@@ -40,10 +40,6 @@ class PurchaseProcessTradingItem < Compras::Model
     where { |query| query.item_id.eq(item_id) }
   end
 
-  scope :by_item_or_lot, -> (item_or_lot) do
-    where("lot = ? or item_id = ?", item_or_lot, item_or_lot)
-  end
-
   scope :purchase_process_id, ->(purchase_process_id) do
     joins { trading }.
     where { trading.purchase_process_id.eq(purchase_process_id) }

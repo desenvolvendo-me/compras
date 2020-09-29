@@ -151,11 +151,7 @@ class LicitationProcessDecorator
 
   def must_have_creditors_and_items
     if component.creditors.blank? || materials.blank?
-      if trading?
-        t("licitation_process.messages.trading_must_have_creditors_and_items")
-      else
-        t("licitation_process.messages.must_have_creditors_and_items")
-      end
+      t("licitation_process.messages.must_have_creditors_and_items")
     end
   end
 
