@@ -4,7 +4,6 @@ $(document).ready(function() {
 
   decimalInput()
 
-
   function decimalInput(){
     var input = $("input[data-decimal]");
 
@@ -14,20 +13,6 @@ $(document).ready(function() {
       centsSeparator: ",",
       centsLimit: input.data("precision")
     });
-  }
-
-  function allowNewBid(allowed) {
-    if (allowed) {
-      $('button#make_bid').removeAttr('data-disabled');
-      $('button#finish_dispute').removeAttr('data-disabled');
-      $('#amount').attr('disabled', false);
-    } else {
-      $('button#make_bid').attr('data-disabled', '');
-      $('button#make_bid').data('disabled', "<%= I18n.t 'purchase_process_trading.messages.make_bid_disabled_message' %>");
-      $('button#finish_dispute').attr('data-disabled', '');
-      $('button#finish_dispute').data('disabled', "<%= I18n.t 'purchase_process_trading.messages.make_bid_disabled_message' %>");
-      $('#amount').attr('disabled', true);
-    }
   }
 
   function updateBenefitedBidLink(itemId) {
@@ -367,5 +352,16 @@ $(document).ready(function() {
 
   $trading.find('#close_error_dialog').on('click', function() {
     $('#errors_dialog').dialog('close');
+  });
+
+});
+
+$(window).on('load', function() {
+  $("#bids-tab").tabs({
+    active: sessionStorage.getItem("currentTabIndexBid"),
+    activate: function(event, ui) {
+      var tabIndex = $("#bids-tab").tabs('option', 'active');
+      sessionStorage.setItem("currentTabIndexBid", tabIndex);
+    }
   });
 });
