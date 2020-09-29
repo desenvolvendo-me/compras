@@ -2,7 +2,19 @@ $(document).ready(function() {
   const $trading  = $("#tradings-fields");
   var $currentPanel = $("#bids-tab .ui-tabs-panel").eq($("#bids-tab").tabs('option', 'active'));
 
-  $trading.find('input.item_chooser:first').attr('checked', true).trigger('change');
+  decimalInput()
+
+
+  function decimalInput(){
+    var input = $("input[data-decimal]");
+
+    input.priceFormat({
+      prefix: false,
+      thousandsSeparator: ".",
+      centsSeparator: ",",
+      centsLimit: input.data("precision")
+    });
+  }
 
   function allowNewBid(allowed) {
     if (allowed) {
@@ -75,9 +87,10 @@ $(document).ready(function() {
 //    }
 //  }
 
-  function fillLowestBid(lowest_bid) {
-    var bidAmount = $trading.find('input.item_chooser:checked').closest('tr').find('td.bid_amount'),
-      bidCreditor = $trading.find('input.item_chooser:checked').closest('tr').find('td.bid_creditor');
+  function fillLowestBid(item) {
+    var bidAmount = $trading.find('table#items tr#item-'+item.id).find('td.bid_amount'),
+      bidCreditor = $trading.find('table#items tr#item-'+item.id).find('td.bid_creditor'),
+      lowest_bid  = item.lowest_bid;
 
     if ( _.isEmpty(lowest_bid) ) {
       lowest_bid.amount = '-';
@@ -89,9 +102,9 @@ $(document).ready(function() {
   }
 
   function fillItem(item) {
-    var status = $trading.find('input.item_chooser:checked').closest('tr').find('td.status');
+    var status = $trading.find('table#items tr#item-'+item.id).find('td.status');
 
-    fillLowestBid(item.lowest_bid);
+    fillLowestBid(item);
 
     status.text(item.status);
 
@@ -304,12 +317,12 @@ $(document).ready(function() {
       type: 'GET',
       success: function (data) {
         $currentPanel.find('.trading-fields').html(data);
+        decimalInput();
       }
     });
   });
 
   $('#bids-tab').on('click', '.finish_dispute', function(event) {
-    debugger
     var dataDisabled    = _($(this).attr('data-disabled')),
         itemID          = $(this).data('item'),
         acc_creditor_id = $currentPanel.find("[name$='[accreditation_creditor]']").val(),
