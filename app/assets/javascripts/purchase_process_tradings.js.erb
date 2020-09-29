@@ -224,6 +224,7 @@ $(document).ready(function() {
 
     if(bid > parsePtBrFloat(lowest_bid)){
       custom_alert('O valor do lance digitado tem que ser menor que o Melhor Lance no valor de R$ '+ lowest_bid + '.', 'Atenção');
+      this.value = '0,00';
     }
   });
 
