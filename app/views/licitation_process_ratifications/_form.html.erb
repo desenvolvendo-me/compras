@@ -13,7 +13,7 @@
 
     <div class="yui3-u-3-8">
       <%= f.input :creditor, as: :auto_complete, input_html:{value: (creditor_name rescue f.object.creditor)},
-                  hidden_field_value: (creditor_id rescue f.object.creditor_id), disabled: true  %>
+                  hidden_field_value: (creditor_id rescue f.object.creditor_id), readonly: true  %>
     </div>
 
     <div class="yui3-u-1-4">
