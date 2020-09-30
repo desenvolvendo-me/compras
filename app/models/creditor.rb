@@ -199,6 +199,11 @@ class Creditor < Persona::Creditor
     representative_people.joins {personable(Individual)}.first
   end
 
+  def ratification_by_licitation purchase_process_id
+    licitation_process_ratifications
+        .licitation_process_id(purchase_process_id).first
+  end
+
   def destroy
 #    super
   rescue ActiveRecord::DeleteRestrictionError
