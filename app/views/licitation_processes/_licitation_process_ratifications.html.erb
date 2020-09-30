@@ -9,58 +9,59 @@
   </script>
 <% end %>
 
-  <div class="yui3-g button-tabs">
-    <div class="yui3-u-1">
-      <%= link_to 'Cancelar', "#", class: "button cancel", id: "cancel-process_ratification" %>
-    </div>
+<div class="yui3-g button-tabs">
+  <div class="yui3-u-1">
+    <%= link_to 'Cancelar', "#", class: "button cancel", id: "cancel-process_ratification" %>
   </div>
+</div>
 
-  <div id="process-ratification-fields">
-    <%if f.object.licitation_process_ratifications.any?{|x| x.errors.present? } %>
-      <%= f.simple_fields_for :licitation_process_ratifications, f.object.licitation_process_ratifications.select{|x| x.errors.present?} do |p| %>
-        <%= render 'licitation_process_ratifications/form', :f => p %>
-      <% end %>
-    <% end %>
-  </div>
-
-  <table id='process_ratifications-records' class="records">
-    <thead>
-    <tr>
-      <th><%= LicitationProcessRatification.human_attribute_name :creditor %></th>
-      <th><%= LicitationProcessRatification.human_attribute_name :ratification_date %></th>
-      <th></th>
-      <th></th>
-    </tr>
-    </thead>
-
-    <tbody class="<%= f.sanitized_object_name %>_document_types_records">
-    <% Creditor.winners(f.object).each do |creditor_winner| %>
-      <tr>
-        <td><%= creditor_winner %></td>
-        <td><%= creditor_winner.ratification_by_licitation(f.object.id).try(:decorator).try(:ratification_date) %></td>
-
-        <td>
-          <%if creditor_winner.ratification_by_licitation(f.object.id) %>
-            <%= link_to 'Editar', '#', 'data-id': process_ratification.id,  class: 'edit-process_ratification' %>
-            <%= link_to 'Deletar', licitation_process_ratification_path(process_ratification.id), method: :delete, class: 'remove-process_ratification' %>
-          <% else %>
-            <%= link_to 'Criar', "#", class: "button add-process-ratification", 'data-creditor-id': creditor_winner.id,  'data-creditor-name': creditor_winner.to_s  %>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-
-    </tbody>
-  </table>
-
-
-  <%= mustache 'process_ratifications-template' do %>
-    <%= f.association :licitation_process_ratifications_attributes, :collection => f.object.licitation_process_ratifications.build, :index => '{{uuid_process_ratification}}' do |p| %>
-      <%= render 'licitation_process_ratifications/form', :f => p,
-                 creditor_name: "{{creditor_name}}",
-                 creditor_id: '{{creditor_id}}' %>
+<div id="process-ratification-fields">
+  <%if f.object.licitation_process_ratifications.any?{|x| x.errors.present? } %>
+    <%= f.simple_fields_for :licitation_process_ratifications, f.object.licitation_process_ratifications.select{|x| x.errors.present?} do |p| %>
+      <%= render 'licitation_process_ratifications/form', :f => p %>
     <% end %>
   <% end %>
+</div>
+
+<table id='process_ratifications-records' class="records">
+  <thead>
+  <tr>
+    <th><%= LicitationProcessRatification.human_attribute_name :creditor %></th>
+    <th><%= LicitationProcessRatification.human_attribute_name :ratification_date %></th>
+    <th></th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody class="<%= f.sanitized_object_name %>_document_types_records">
+  <% Creditor.winners(f.object).each do |creditor_winner| %>
+    <% break unless f.object.decorator.can_homologate? %>
+    <tr>
+      <td><%= creditor_winner %></td>
+      <td><%= creditor_winner.ratification_by_licitation(f.object.id).try(:decorator).try(:ratification_date) %></td>
+
+      <td>
+        <%if creditor_winner.ratification_by_licitation(f.object.id) %>
+          <%= link_to 'Editar', '#', 'data-id': process_ratification.id,  class: 'edit-process_ratification' %>
+          <%= link_to 'Deletar', licitation_process_ratification_path(process_ratification.id), method: :delete, class: 'remove-process_ratification' %>
+        <% else %>
+          <%= link_to 'Criar', "#", class: "button add-process-ratification", 'data-creditor-id': creditor_winner.id,  'data-creditor-name': creditor_winner.to_s  %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+
+  </tbody>
+</table>
+
+
+<%= mustache 'process_ratifications-template' do %>
+  <%= f.association :licitation_process_ratifications_attributes, :collection => f.object.licitation_process_ratifications.build, :index => '{{uuid_process_ratification}}' do |p| %>
+    <%= render 'licitation_process_ratifications/form', :f => p,
+               creditor_name: "{{creditor_name}}",
+               creditor_id: '{{creditor_id}}' %>
+  <% end %>
+<% end %>
 
 
 <style>
@@ -73,10 +74,10 @@
 </style>
 
 <%if  f.object.licitation_process_ratifications.any?{|x| x.errors.present? }  %>
-<script>
-  $(function(){
-    $("#add-process-ratification").hide();
-    $("#cancel-process_ratification").show();
-  })
-</script>
+  <script>
+    $(function(){
+      $("#add-process-ratification").hide();
+      $("#cancel-process_ratification").show();
+    })
+  </script>
 <% end %>
