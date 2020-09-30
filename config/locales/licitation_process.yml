@@ -110,4 +110,7 @@ pt-BR:
       disabled_negotiation_message: "todos os itens do pregão devem ter um vencedor. Finalize a fase de lances!"
       disabled_trading_message: "deve ter ao menos uma proposta"
       must_have_trading: "deve ter lances"
+      must_have_items_bidders_proposals_trading_realignment_price: 'É necessário preencher as abas Itens; Habilitação; Propostas; Lances; Realinhamento de Preço'
+      must_have_items_bidders_proposals: 'É necessário preencher as abas Itens; Habilitação; Propostas'
+      must_have_items_justifications_bidders_proposals: 'É necessário preencher as abas Itens/Justificativa; Habilitação; Propostas'
 

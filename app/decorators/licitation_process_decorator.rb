@@ -188,11 +188,11 @@ class LicitationProcessDecorator
 
   def must_finish_all_tabs_to_homologation
     if licitation? && trading?
-      'É necessário preencher as abas Itens; Habilitação; Propostas; Lances'
+      t "licitation_process.messages.must_have_items_bidders_proposals_trading_realignment_price"
     elsif licitation?
-      'É necessário preencher as abas Itens; Habilitação; Propostas'
+      t "licitation_process.messages.must_have_items_bidders_proposals"
     else
-      'É necessário preencher as abas Itens/Justificativa; Habilitação; Propostas'
+      t "licitation_process.messages.must_have_items_justifications_bidders_proposals"
     end
   end
 
