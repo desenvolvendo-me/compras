@@ -34,7 +34,4 @@ class ContractDecorator
     end
   end
 
-  def status
-    Date.today > end_date ? 'Finalizado' : 'Vigente'
-  end
 end

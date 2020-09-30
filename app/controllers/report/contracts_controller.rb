@@ -1,9 +1,23 @@
 class Report::ContractsController < Report::BaseController
   report_class ContractReport, :repository => ContractSearcher
+  has_scope :between_days_finish, using: %i[started_at ended_at], :type => :hash
+
+  def index
+    @report = report_instance
+
+    if params[:between_days_finish] || params[:all]
+      @contract = params[:all] ? (Contract.all):(apply_scopes(Contract))
+      respond_to do |format|
+        format.html { render :show,layout: 'report' }
+      end
+    else
+      redirect_to controller: controller_name, action: :new
+    end
+  end
 
   def show
     @contract = get_contract()
-
+    
     @report = report_instance
 
     if @report.valid?
@@ -14,30 +28,29 @@ class Report::ContractsController < Report::BaseController
   end
 
   private
+  
+  def show_report
 
+  end
+  
   def get_contract
 
-    if contract_report_params[:creditor_id].nil?
-      @contract = Contract.includes(:creditor).order('year desc').order(:contract_number).
-          where(contract_report_params.except!(:contract_number,:content,:creditor_id)).
-          where('LOWER( content ) LIKE ?', "%#{contract_report_params[:content].downcase}%").
-          where('contract_number LIKE ?', "%#{contract_report_params[:contract_number]}%")
+    @contract = Contract.includes(:creditor).order('year desc').order(:contract_number).
+      where(contract_report_params.except!(:contract_number,:content,:creditor_id,:status)).
+      where('LOWER( content ) LIKE ?', "%#{contract_report_params[:content].downcase}%").
+      where('contract_number LIKE ?', "%#{contract_report_params[:contract_number]}%")
+    
+    @contract = @contract.where("unico_creditors.id = ?",contract_report_params[:creditor_id]) if contract_report_params[:creditor_id]
+    @contract = @contract.by_status(contract_report_params[:status]) if contract_report_params[:status]
 
-    else
-      @contract = Contract.includes(:creditor).order('year desc').order(:contract_number).
-          where(contract_report_params.except!(:contract_number,:content,:creditor_id)).
-          where('LOWER( content ) LIKE ?', "%#{contract_report_params[:content].downcase}%").
-          where('contract_number LIKE ?', "%#{contract_report_params[:contract_number]}%").
-          where("unico_creditors.id = ?",contract_report_params[:creditor_id])
-
-    end
+    @contract
   end
 
   def contract_report_params
     @params = params.require(:contract_report).permit(
         :contract_number,:content,:year,:creditor_id,
         :publication_date,:contract_value,:start_date,
-        :end_date
+        :end_date,:status
     )
     @params[:contract_value] = @params[:contract_value].tr_s('.','').tr_s(',','.')
     normalize_attributes(@params)
@@ -50,6 +63,7 @@ class Report::ContractsController < Report::BaseController
     params.delete(:contract_value) if params[:contract_value]=='0.00'
     params.delete(:start_date) if params[:start_date].blank?
     params.delete(:end_date) if params[:end_date].blank?
+    params.delete(:status) if params[:status].blank?
     params
   end
 

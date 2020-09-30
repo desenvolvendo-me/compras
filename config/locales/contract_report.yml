@@ -4,12 +4,16 @@ pt-BR:
   activemodel:
     attributes:
       contract_report:
-        contract_number: "Número do contrato"
-        year: "Ano do contrato"
+        contract_number: "Número"
+        year: "Ano"
         creditor: 'Fornecedor'
-        publication_date: 'Data de publicação'
+        publication_date: 'Data da Publicação'
         content: 'Objeto do contrato'
         contract_value: 'Valor do contrato'
         modality_humanize: 'Modalidade'
         start_date: "Início da vigência"
-        end_date: "Data de validade"
+        end_date: "Fim da Vigência"
+        contract_validity: "Data da Validade"
+        content: "Objeto"
+        modality: "Modalidade"
+        status: "Status"

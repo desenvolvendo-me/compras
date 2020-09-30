@@ -11,6 +11,9 @@
 
 
   <div class="yui3-u-1-2">
+    <div>
+      <%= link_to 'Imprimir Todos os Contratos', report_contracts_path(:all => true), :taget=> '_blank', :class => 'button primary btn-small', style: 'margin-bottom:1%;'  %>
+    </div>
     <div id="approval_requests" class="card">
       <%= render 'approval_request_list' %>
     </div>

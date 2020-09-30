@@ -127,6 +127,14 @@ class Contract < Compras::Model
   scope :by_licitation_process, lambda{|licitation_id|
     where(licitation_process_id: licitation_id)
   }
+  
+  scope :by_status, lambda{|type|
+    if type == "finished"
+      where("'#{Date.today}' > end_date")
+    else
+      where("'#{Date.today}' <= end_date")
+    end
+  }
 
   orderize "id DESC"
 
@@ -141,6 +149,10 @@ class Contract < Compras::Model
 
   def to_s
     "#{contract_number} - #{creditor}"
+  end
+
+  def status
+    Date.today > end_date ? 'Finalizado' : 'Vigente'
   end
 
   def modality_humanize
