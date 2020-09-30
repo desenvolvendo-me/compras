@@ -29,7 +29,6 @@
     <th><%= LicitationProcessRatification.human_attribute_name :creditor %></th>
     <th><%= LicitationProcessRatification.human_attribute_name :ratification_date %></th>
     <th></th>
-    <th></th>
   </tr>
   </thead>
 
@@ -42,8 +41,9 @@
 
       <td>
         <%if creditor_winner.ratification_by_licitation(f.object.id) %>
-          <%= link_to 'Editar', '#', 'data-id': process_ratification.id,  class: 'edit-process_ratification' %>
-          <%= link_to 'Deletar', licitation_process_ratification_path(process_ratification.id), method: :delete, class: 'remove-process_ratification' %>
+          <%= link_to 'Editar', '#', 'data-id': creditor_winner.ratification_by_licitation(f.object.id).id,  class: 'edit-process_ratification' %>
+          |
+          <%= link_to 'Deletar', licitation_process_ratification_path(creditor_winner.ratification_by_licitation(f.object.id).id), method: :delete, class: 'remove-process_ratification' %>
         <% else %>
           <%= link_to 'Criar', "#", class: "button add-process-ratification", 'data-creditor-id': creditor_winner.id,  'data-creditor-name': creditor_winner.to_s  %>
         <% end %>
