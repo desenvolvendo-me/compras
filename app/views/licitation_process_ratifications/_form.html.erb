@@ -12,7 +12,8 @@
     </div>
 
     <div class="yui3-u-3-8">
-      <%= f.input :creditor, :disabled => true %>
+      <%= f.input :creditor, as: :auto_complete, input_html:{value: (creditor_name rescue f.object.creditor)},
+                  hidden_field_value: (creditor_id rescue f.object.creditor_id), disabled: true  %>
     </div>
 
     <div class="yui3-u-1-4">
@@ -119,6 +120,8 @@
 
     if (creditor) {
       getProposals(creditor.id, licitationProcessId);
+    }else if(this.value){
+      getProposals(this.value, licitationProcessId);
     }
   });
 
@@ -141,10 +144,7 @@
 
 
     urlModal += jQuery.param(params);
-
-    $("#licitation-process-fields [name$='[creditor]']").data("modal-url", urlModal).
-    attr("disabled", false);
-
-    $("#licitation-process-fields [name$='[licitation_process]']").attr('disabled', true);
+    $("#licitation-process-fields [name$='[creditor_id]']").trigger('change');
+    $("#licitation-process-fields [name$='[licitation_process]']").attr('readonly', true);
   });
 </script>
