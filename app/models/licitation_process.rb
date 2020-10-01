@@ -28,7 +28,8 @@ class LicitationProcess < Compras::Model
                   :legal_analysis_appraisals_attributes, :publications_attributes,
                   :purchase_process_accreditation_attributes, :trading_attributes,
                   :judgment_commission_advice_attributes, :bidders_attributes,
-                  :licitation_process_ratifications_attributes
+                  :licitation_process_ratifications_attributes, :disqualify_proposal_above,
+                  :disqualify_proposal_below
   
   attr_accessor :purchase_solicitation_id,:purchase_solicitation
 
@@ -366,6 +367,11 @@ class LicitationProcess < Compras::Model
 
   def proposals_total_price(creditor)
     proposals_of_creditor(creditor).sum(&:total_price)
+  end
+
+  def items_total_price
+    return unless items
+    items.sum(&:estimated_total_price)
   end
 
   def allow_trading_auto_creation?
