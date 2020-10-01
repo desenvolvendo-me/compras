@@ -64,6 +64,11 @@
     border-radius: .2rem;
 }
 
+h2.page{
+    min-height: unset !important;
+    margin-top: unset !important;
+}
+
 .row{
     display: -webkit-box;
     display: -ms-flexbox;
