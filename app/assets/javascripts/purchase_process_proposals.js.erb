@@ -41,4 +41,33 @@ $(document).ready(function() {
   $("div.global div.total_price").on('keyup', function() {
     calculateTotalValue();
   });
+
+  $('form.simple_form').submit(function(e){
+    e.preventDefault();
+    var takenPriceInput  = $("div#price_taken").find('input'),
+        takenPrice       = parsePtBrFloat(takenPriceInput.val()),
+        disqualify_below = parseFloat(takenPriceInput.data('disqualify-below')),
+        disqualify_above = parseFloat(takenPriceInput.data('disqualify-above')),
+        totalValue       = parsePtBrFloat($("div#total_value").find('input').val()),
+        $el = $(this);
+
+    var btn = {"OK": function() {
+        $el.unbind('submit').submit();
+        $( this ).dialog( "close" );
+      },
+      Cancelar: function() {
+        $(":submit").prop('disabled', false);
+        $( this ).dialog( "close" );
+      }};
+
+    if(disqualify_below){
+      if(takenPrice - (takenPrice * disqualify_below/100) > totalValue)
+        custom_alert('A proposta será automaticamente desclassificada por motivo de valor inexequivel, estando abaixo de %'+ disqualify_below +' do preço estimado.', 'Atenção', btn)
+    }
+
+    if(disqualify_above){
+      if(takenPrice + (takenPrice * disqualify_above/100) < totalValue )
+        custom_alert('A proposta será automaticamente desclassificada por motivo de valor superior em %'+ disqualify_below +' ao preço estimado.', 'Atenção', btn)
+    }
+  })
 });
