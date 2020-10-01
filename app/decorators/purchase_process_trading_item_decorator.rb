@@ -72,4 +72,12 @@ class PurchaseProcessTradingItemDecorator
       item
     end
   end
+
+  def item_code_or_lot
+    if lot?
+      lot
+    else
+      item.try(:code)
+    end
+  end
 end

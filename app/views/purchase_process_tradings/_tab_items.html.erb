@@ -1,11 +1,11 @@
 <div class="tabs" id="bids-tab">
   <ul id="main-ul">
     <% trading.items.sort_by!(&:lot).each_with_index do |trading_item, index| %>
-      <li><a href="#tab-<%= trading_item.item_or_lot %>"><%= trading_item.decorator.item_or_lot %></a></li>
+      <li><a href="#tab-<%= trading_item.decorator.item_code_or_lot %>"><%= trading_item.decorator.item_or_lot %></a></li>
     <% end %>
   </ul>
   <% trading.items.sort_by!(&:lot).each_with_index do |trading_item, index| %>
-    <div id="tab-<%= trading_item.item_or_lot %>" class="tab-item-bids">
+    <div id="tab-<%= trading_item.decorator.item_code_or_lot %>" class="tab-item-bids">
       <%= render 'purchase_process_tradings/bid_form', f: f,
                  trading_item: trading_item,
                  accreditation_creditors:  trading_item.creditors_ordered_outer %>
