@@ -110,6 +110,7 @@ GEM
       ffi (~> 1.0, >= 1.0.11)
     cnpj_validator (0.3.1)
       activemodel (>= 3.0)
+    cocoon (1.2.14)
     coderay (1.0.9)
     connection_pool (1.1.0)
     cpf_validator (0.2.0)
@@ -409,6 +410,7 @@ DEPENDENCIES
   capybara-webkit (~> 1.8.0)
   carrierwave (= 0.9.0)
   cnpj_validator (= 0.3.1)
+  cocoon (= 1.2.14)
   cpf_validator (= 0.2.0)
   dalli (= 2.6.4)
   decore!

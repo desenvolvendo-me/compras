@@ -98,7 +98,11 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :purchase_process_tradings, only: %i[bids new] do
+  resources :purchase_process_tradings, only: %i[bid_form bids new] do
+    collection do
+      get :bid_form
+    end
+
     member do
       get :bids
     end
@@ -116,7 +120,7 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :purchase_process_trading_item_bids, only: %i[update show]
+  resources :purchase_process_trading_item_bids, only: %i[create update show]
 
   resources :purchase_process_trading_negotiations, only: %i[edit update list] do
     member do

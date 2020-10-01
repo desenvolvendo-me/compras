@@ -34,6 +34,16 @@
     color: #4272a2
 }
 
+.checkbox{
+    margin-top: 38px;
+}
+
+.danger{
+    background-color: #CB2429;
+    border-color: #CB2429;
+    color: #FFF;
+}
+
 .w-50{
     width: 50%;
 }
