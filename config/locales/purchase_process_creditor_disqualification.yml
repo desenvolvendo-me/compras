@@ -13,3 +13,8 @@ pt-BR:
         reason: "Motivo"
         kind: "Tipo de desclassificação"
         proposal_total_value: "Valor total da proposta"
+
+  purchase_process_creditor_disqualification:
+    messages:
+      disqualificated_by_minimum_value: "Desclassificada pelo critério de desclassificação Proposta inferior a %{disqualify_below}% da tomada de preço "
+      disqualificated_by_maximum_value: "Desclassificada pelo critério de desclassificação Proposta superior a %{disqualify_above}% da tomada de preço "
