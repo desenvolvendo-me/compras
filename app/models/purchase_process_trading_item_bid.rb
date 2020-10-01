@@ -25,6 +25,10 @@ class PurchaseProcessTradingItemBid < Compras::Model
   validates :amount, numericality: { greater_than: 0, if: :with_proposal? }
   validate  :validate_minimum_amount, if: :with_proposal?
 
+  after_destroy :change_status_item
+  before_save   :set_status_and_number
+  after_save    :change_status_item
+
   scope :by_item_id, lambda { |item_id|
     where { |bid| bid.item_id.eq(item_id) }
   }
@@ -39,6 +43,14 @@ class PurchaseProcessTradingItemBid < Compras::Model
 
   scope :creditor_ids, lambda { |creditor_ids|
     joins { accreditation_creditor }.where { accreditation_creditor.creditor_id.in(creditor_ids) }
+  }
+
+  scope :by_licitation_process, lambda{|licitation_process_id|
+    joins{ trading }.where{ trading.purchase_process_id.eq licitation_process_id}
+  }
+
+  scope :by_accreditation_creditor, lambda{ |accreditation_creditor_id|
+    joins { accreditation_creditor }.where { accreditation_creditor.id.eq accreditation_creditor_id }
   }
 
   def percent
@@ -56,6 +68,14 @@ class PurchaseProcessTradingItemBid < Compras::Model
   end
 
   private
+  def set_status_and_number
+    self.status = TradingBidStatusChooser.new(self).choose unless status
+    self.number = TradingBidNumberCalculator.calculate(self.item) unless number
+  end
+
+  def change_status_item
+    TradingItemStatusChanger.change(self.item)
+  end
 
   def reduction_value
     if reduction_rate_value > 0
@@ -70,7 +90,7 @@ class PurchaseProcessTradingItemBid < Compras::Model
   def validate_minimum_amount
     return unless lowest_bid_or_proposal_amount.present?
 
-    if amount >= lowest_bid_or_proposal_amount
+    if amount >= lowest_bid_or_proposal_amount && self.new_record?
       errors.add(:amount, :less_than, :count => I18n::Alchemy::NumericParser.localize(lowest_bid_or_proposal_amount))
     end
   end

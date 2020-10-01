@@ -24,7 +24,7 @@ class TradingCreator
   attr_reader :purchase_process, :trading_repository, :trading_item_repository
 
   def purchase_process_items
-    purchase_process.items
+    purchase_process.items.reload
   end
 
   def allow_create_trading?

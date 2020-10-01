@@ -303,6 +303,11 @@ class LicitationProcess < Compras::Model
     end
   end
 
+  # se processo de compra for do tipo pregão
+  #  - Busca os fornecedores na tabela de purchase_process_items caso compra direta
+  #  - Busca os fornecedores na tabela de purchase_process_accreditation_creditors caso processo licitatorio
+  # se processo de compra for diferente de pregão:
+  #  - Busca os fornecedores habilitados na tabela bidders
   def creditors_enabled
     return creditors if trading?
 
@@ -363,7 +368,11 @@ class LicitationProcess < Compras::Model
   end
 
   def proposals_of_creditor(creditor)
-    creditor_proposals.joins(:item).creditor_id(creditor.id).order(:id).readonly(false)
+    if judgment_form_lot?
+      creditor_proposals.creditor_id(creditor.id).order(:id).readonly(false)
+    else
+      creditor_proposals.joins(:item).creditor_id(creditor.id).order(:id).readonly(false)
+    end
   end
 
   def proposals_total_price(creditor)
