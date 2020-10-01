@@ -62,12 +62,14 @@ $(document).ready(function() {
 
     if(disqualify_below){
       if(takenPrice - (takenPrice * disqualify_below/100) > totalValue)
-        custom_alert('A proposta será automaticamente desclassificada por motivo de valor inexequivel, estando abaixo de %'+ disqualify_below +' do preço estimado.', 'Atenção', btn)
+        return custom_alert('A proposta será automaticamente desclassificada por motivo de valor inexequivel, estando abaixo de %'+ disqualify_below +' do preço estimado.', 'Atenção', btn)
     }
 
     if(disqualify_above){
       if(takenPrice + (takenPrice * disqualify_above/100) < totalValue )
-        custom_alert('A proposta será automaticamente desclassificada por motivo de valor superior em %'+ disqualify_below +' ao preço estimado.', 'Atenção', btn)
+        return custom_alert('A proposta será automaticamente desclassificada por motivo de valor superior em %'+ disqualify_below +' ao preço estimado.', 'Atenção', btn)
     }
+
+    $el.unbind('submit').submit();
   })
 });
