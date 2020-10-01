@@ -32,12 +32,20 @@ class PurchaseProcessCreditorDisqualificationGenerator
     purchase_process.items_total_price
   end
 
+  def disqualify_proposal_below
+    purchase_process.disqualify_proposal_below || 0.0
+  end
+
+  def disqualify_proposal_above
+    purchase_process.disqualify_proposal_above || 0.0
+  end
+
   def minimum_price
-    taken_price - (taken_price * purchase_process.disqualify_proposal_below/100)
+    taken_price - (taken_price * disqualify_proposal_below/100)
   end
 
   def max_price
-    taken_price + (taken_price * purchase_process.disqualify_proposal_above/100)
+    taken_price + (taken_price * disqualify_proposal_above/100)
   end
 
   def proposals_total_price(creditor)
