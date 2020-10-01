@@ -3,6 +3,18 @@
     <div class="alert alert-warning">
       <strong><%= f.object.decorator.must_have_creditors_enabled %></strong>
     </div>
+  <% else %>
+    <span class="text-center">
+      <h2 class="page"> Critério de Classificação</h2>
+    </span>
+    <div class="yui3-g">
+      <div class="yui3-u-1-3">
+        <%= f.input :disqualify_proposal_below %>
+      </div>
+      <div class="yui3-u-1-3">
+        <%= f.input :disqualify_proposal_above %>
+      </div>
+    </div>
   <% end %>
 
   <table class="records" id="administrative-process-budget-allocation-records">
