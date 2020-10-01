@@ -148,6 +148,7 @@ class LicitationProcess < Compras::Model
   validate :judgment_form_can_update?, on: :update
 
   after_save  :set_approved_status
+  after_save  :proposal_disqualified?
 
   with_options :allow_blank => true do |allowing_blank|
     allowing_blank.validates :year, :mask => "9999"
@@ -362,7 +363,7 @@ class LicitationProcess < Compras::Model
   end
 
   def proposals_of_creditor(creditor)
-    creditor_proposals.joins(:item).creditor_id(creditor.id).order(:id)
+    creditor_proposals.joins(:item).creditor_id(creditor.id).order(:id).readonly(false)
   end
 
   def proposals_total_price(creditor)
@@ -550,6 +551,12 @@ class LicitationProcess < Compras::Model
       if judgment_form_was.try(:kind) != judgment_form.kind
         errors.add(:judgment_form, :should_be_same_judgment_form_kind, :kind => judgment_form_was.kind_humanize)
       end
+    end
+  end
+
+  def proposal_disqualified?
+    if creditor_proposals.any?(&:changed?)
+      PurchaseProcessCreditorDisqualificationGenerator.create!(self)
     end
   end
 end
