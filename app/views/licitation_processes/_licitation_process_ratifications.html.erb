@@ -39,11 +39,15 @@
           |
           <%= link_to 'Deletar', licitation_process_ratification_path(creditor_winner.ratification_by_licitation(f.object.id).id), method: :delete, class: 'remove-process_ratification' %>
         <% else %>
-          <%= link_to 'Criar', "#", class: "button add-process-ratification", 'data-creditor-id': creditor_winner.id,  'data-creditor-name': creditor_winner.to_s  %>
+          <%= link_to 'Criar', "#", class: "add-process-ratification",
+                      'data-creditor-id': creditor_winner.id,
+                      'data-creditor-name': creditor_winner.to_s,
+                      'data-disabled': f.object.decorator.must_have_realignment_price(creditor_winner) %>
         <% end %>
       </td>
     </tr>
   <% end %>
+
 
   </tbody>
 </table>
