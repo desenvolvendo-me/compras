@@ -1,6 +1,6 @@
 $(document).ready(function() {
   const $trading  = $("#tradings-fields");
-  var $currentPanel = $("#bids-tab .ui-tabs-panel").eq(sessionStorage.getItem("currentTabIndexBid"));
+  var $currentPanel = $("#bids-tab .ui-tabs-panel").eq(sessionStorage.getItem("currentTabIndexBid") - 1);
 
   decimalInput()
 
