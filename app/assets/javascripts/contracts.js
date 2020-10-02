@@ -283,7 +283,7 @@ $(document).ready(function () {
       if( additions_or_suppressions.includes( $('#contract_contract_additive_additive_type').val() )){
         addition = (addition).toString().replace('.','').replace(',','.');
         additive_value = additive_value + (additive_value * (addition_validity_percent/100) );
-        value = additive_value - (additive_value * (suppression_validity_percent/100) );
+        valor = additive_value - (additive_value * (suppression_validity_percent/100) );
       }else{
         valor = parseFloat(additive_value) * (suppression_validity_percent/100);
       }
