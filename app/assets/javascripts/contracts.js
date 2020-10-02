@@ -214,4 +214,82 @@ $(document).ready(function () {
     item.find('.consumption').val(result)
   });
 
+   
+  contract_value = $("#contract_contract_value").val();
+  $("#contract_contract_additive_value").val(contract_value);
+  
+  $('#contract_contract_additive_addition_validity_percent,#contract_contract_additive_suppression_validity_percent').on('mouseup keyup', function () {
+      $(this).val(Math.min(100, Math.max(0, $(this).val())));
+  });
+
+  $('#contract_contract_additive_addition_validity_percent').blur(function() {
+    additive_value = $("#contract_contract_additive_value").val();
+    addition_validity_percent = $('#contract_contract_additive_addition_validity_percent').val();
+    if(addition_validity_percent != '0'){
+      $("#contract_contract_additive_addition").val(parseFloat(additive_value) * (addition_validity_percent/100));
+    }
+  });
+
+  additions_or_suppressions = ['deadline_article_57_1_addition_suppression','deadline_article_57_2_addition_suppression','deadline_article_57_4_addition_suppression','deadline_article_57_symbol_1_addition_suppression'];
+  $("#contract_contract_additive_additive_type").change(function(e){
+    e.preventDefault();
+    additions = ['deadline_article_57_1_addition','deadline_article_57_2_addition','deadline_article_57_4_addition','deadline_article_57_symbol_1_addition']
+    suppressions = ['deadline_article_57_1_suppression','deadline_article_57_2_suppression','deadline_article_57_4_suppression','deadline_article_57_symbol_1_suppression']
+    
+    if(additions.includes( $(this).val() )){
+      $(".contract_contract_additive_addition_validity_percent,.contract_contract_additive_addition").parent().show();
+      $("#contract_contract_additive_suppression_validity_percent,#contract_contract_additive_suppression").val(0);
+      $(".contract_contract_additive_suppression_validity_percent,.contract_contract_additive_suppression").parent().hide();
+    }else if(suppressions.includes( $(this).val() )){
+      $(".contract_contract_additive_suppression_validity_percent,.contract_contract_additive_suppression").parent().show();
+      $("#contract_contract_additive_addition_validity_percent,#contract_contract_additive_addition").val(0);
+      $(".contract_contract_additive_addition_validity_percent,.contract_contract_additive_addition").parent().hide();
+    }else if(additions_or_suppressions.includes( $(this).val() )){
+      $("#contract_contract_additive_suppression_validity_percent,#contract_contract_additive_suppression").val(0);
+      $("#contract_contract_additive_addition_validity_percent,#contract_contract_additive_addition").val(0);
+      $(".contract_contract_additive_addition_validity_percent,.contract_contract_additive_addition").parent().show();
+      $(".contract_contract_additive_suppression_validity_percent,.contract_contract_additive_suppression").parent().show();
+    }
+    
+  });
+
+  $('#contract_contract_additive_addition_validity_percent').blur(function(e) {
+    e.preventDefault(); 
+    additive_value = $("#contract_contract_additive_value").val();
+    addition_validity_percent = $('#contract_contract_additive_addition_validity_percent').val();
+
+    if(addition_validity_percent == '0'){
+      $("#contract_contract_additive_addition").val('0');
+    }else{
+      additive_value = (additive_value).toString().replace('.','').replace(',','.');
+      valor = parseFloat(additive_value) * (addition_validity_percent/100);
+      $("#contract_contract_additive_addition").val((valor).toFixed(2));
+    }
+    $("#contract_contract_additive_addition").focus();
+  });
+
+  $('#contract_contract_additive_suppression_validity_percent').blur(function(e) {
+    e.preventDefault(); 
+    additive_value = $("#contract_contract_additive_value").val();
+    additive_value = parseFloat((additive_value).toString().replace('.','').replace(',','.'));
+
+    addition = $("#contract_contract_additive_addition").val();
+    suppression_validity_percent = $('#contract_contract_additive_suppression_validity_percent').val();
+    addition_validity_percent = $('#contract_contract_additive_addition_validity_percent').val();
+
+    if(suppression_validity_percent == '0'){
+      $("#contract_contract_additive_suppression").val('0');
+    }else{
+      if( additions_or_suppressions.includes( $('#contract_contract_additive_additive_type').val() )){
+        addition = (addition).toString().replace('.','').replace(',','.');
+        additive_value = additive_value + (additive_value * (addition_validity_percent/100) );
+        value = additive_value - (additive_value * (suppression_validity_percent/100) );
+      }else{
+        valor = parseFloat(additive_value) * (suppression_validity_percent/100);
+      }
+      $("#contract_contract_additive_suppression").val((valor).toFixed(2));
+    }
+    $("#contract_contract_additive_suppression").focus();
+  });
+  
 });
