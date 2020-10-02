@@ -1,9 +1,12 @@
 class ContractAdditive < Compras::Model
   attr_accessible :number, :additive_type, :signature_date, :end_date,
                   :publication_date, :dissemination_source_id, :value,
-                  :observation, :contract_id, :additive_kind, :description
+                  :observation, :contract_id, :additive_kind, :description,
+                  :addition,:suppression,:start_validity,:end_validity
+  
+  attr_accessor :addition_validity_percent, :suppression_validity_percent
 
-  has_enumeration_for :additive_type, with: UnicoAPI::Resources::Compras::Enumerations::ContractAdditiveType
+  has_enumeration_for :additive_type, with: ContractAdditiveType
   has_enumeration_for :additive_kind
 
   validates :number, :additive_type, :additive_kind, :signature_date, :publication_date,
