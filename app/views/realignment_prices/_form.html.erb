@@ -25,24 +25,26 @@
       <%= r.input :id, as: :hidden %>
 
       <div class="yui3-g">
-        <div class="yui3-u-1-3">
+        <div class="yui3-u-1-4">
           <%= r.input :item, disabled: true %>
         </div>
 
-        <div class="yui3-u-1-3">
+        <div class="yui3-u-1-4">
           <%= r.input :brand %>
         </div>
 
-        <div class="yui3-u-1-6">
+        <div class="yui3-u-1-8">
           <%= r.input :quantity, disabled: true, input_html: { class: 'quantity numeric' } %>
         </div>
 
-        <div class="yui3-u-1-6 ">
+        <div class="yui3-u-1-8 ">
           <%= r.input :price, input_html: { value: number_with_precision(r.object.price), class: 'price' } %>
         </div>
-      </div>
 
-      <div class="yui3-g">
+        <div class="yui3-u-1-8 ">
+          <%= r.input :total_price, as: :fake, disabled: true, input_html: { value: number_with_precision(r.object.price * r.object.quantity), class: 'total_price' } %>
+        </div>
+
         <div class="yui3-u-1-8">
           <%= r.input :delivery_date, input_html: { value: r.object.localized.delivery_date } %>
         </div>
@@ -58,9 +60,11 @@
         value      = 0;
 
     $(".price").each(function() {
-      quantity = new BigNumber($(this).closest('.nested-realignment_price_items').find('.quantity').val());
-      value    = new BigNumber(parsePtBrFloat($(this).val() || '0,00'));
+      var $total_price = $(this).closest('.nested-realignment_price_items').find('.total_price'),
+          quantity     = new BigNumber($(this).closest('.nested-realignment_price_items').find('.quantity').val());
+          value        = new BigNumber(parsePtBrFloat($(this).val() || '0,00'));
 
+      $total_price.val(numberWithDelimiter(value * quantity));
       totalValue -= value * quantity;
     });
 
