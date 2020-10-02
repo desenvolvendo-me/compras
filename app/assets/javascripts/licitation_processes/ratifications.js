@@ -16,6 +16,8 @@ $(function(){
   });
 
   $(".add-process-ratification").click(function() {
+    if($(this).data('disabled') !== undefined) return false;
+
     var creditor_winner_id = $(this).data('creditor-id');
     var creditor_winner_name = $(this).data('creditor-name');
     
