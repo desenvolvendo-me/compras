@@ -16,3 +16,4 @@ pt-BR:
   licitation_process_ratification:
     messages:
       cant_save_without_responsibles: "Primeiro crie responsáveis do processo"
+      must_have_realignment_price: "Por favor cadastre o realinhamento de preço."
