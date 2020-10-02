@@ -2,11 +2,6 @@
   <div class="alert alert-warning">
     <strong> <%= f.object.decorator.must_finish_all_tabs_to_homologation %></strong>
   </div>
-  <script>
-    $(function(){
-      $("#add-process-ratification").attr('href', '#');
-    })
-  </script>
 <% end %>
 
 <div class="yui3-g button-tabs">
@@ -34,8 +29,7 @@
 
   <tbody class="<%= f.sanitized_object_name %>_document_types_records">
   <% Creditor.winners(f.object).each do |creditor_winner| %>
-    <% break unless f.object.decorator.can_homologate? %>
-    <tr>
+        <tr>
       <td><%= creditor_winner %></td>
       <td><%= creditor_winner.ratification_by_licitation(f.object.id).try(:decorator).try(:ratification_date) %></td>
 
