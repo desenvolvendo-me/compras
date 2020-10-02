@@ -196,6 +196,12 @@ class LicitationProcessDecorator
     end
   end
 
+  def must_have_realignment_price creditor_winner
+    if creditor_winner.licitation_realignment_price(self).blank?
+      t 'licitation_process_ratification.messages.must_have_realignment_price'
+    end
+  end
+
   private
 
   def current_publication_of
