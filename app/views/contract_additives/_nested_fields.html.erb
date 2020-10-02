@@ -31,16 +31,46 @@
       <%= r.input :dissemination_source, input_html:{name:'contract_additive[dissemination_source]'} %>
     </div>
 
-    <div class="col" style="padding-left: 0;">
-      <%= r.input :observation, input_html:{name:'contract_additive[observation]'}  %>
-    </div>
-
     <div class="col end_date" style="display: none;">
       <%= r.input :end_date, input_html:{name:'contract_additive[end_date]'}  %>
     </div>
 
+    <div class="col">
+      <%= r.input :start_validity, input_html:{name:'contract_additive[start_validity]'} %>
+    </div>
+    
+    <div class="col">
+      <%= r.input :end_validity, input_html:{name:'contract_additive[end_validity]'} %>
+    </div>
+
+  </div>
+
+  <div class="row">
     <div class="col-2 value">
       <%= r.input :value, input_html:{name:'contract_additive[value]'}  %>
+    </div>
+    
+    <div class="col">
+      <%= r.input :addition, input_html:{name:'contract_additive[addition]'} %>
+    </div>
+            
+    <div class="col">
+      <%= r.input :addition_validity_percent, input_html:{name:'contract_additive[addition_validity_percent]'} %>
+    </div>
+
+    <div class="col">
+      <%= r.input :suppression, input_html:{name:'contract_additive[suppression]'} %>
+    </div>
+            
+    <div class="col">
+      <%= r.input :suppression_validity_percent, input_html:{name:'contract_additive[suppression_validity_percent]'} %>
+    </div>
+    
+  </div>
+
+  <div class="yui3-g">
+    <div class="yui3-u-1">
+      <%= r.input :observation, input_html:{name:'contract_additive[observation]'}  %>
     </div>
   </div>
 
