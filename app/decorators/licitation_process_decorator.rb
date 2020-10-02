@@ -197,6 +197,8 @@ class LicitationProcessDecorator
   end
 
   def must_have_realignment_price creditor_winner
+    return unless trading?
+
     if creditor_winner.licitation_realignment_price(self).blank?
       t 'licitation_process_ratification.messages.must_have_realignment_price'
     end
