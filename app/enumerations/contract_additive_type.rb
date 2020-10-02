@@ -1,2 +1,23 @@
-class ContractAdditiveType < UnicoAPI::Resources::Compras::Enumerations::ContractAdditiveType
+class ContractAdditiveType < EnumerateIt::Base
+    associate_values :extension_term,:value_additions,
+                    :value_decrease,
+                    :readjustment,
+                    :recomposition,
+                    :others,
+                    :deadline_article_57_1,
+                    :deadline_article_57_1_suppression,
+                    :deadline_article_57_1_addition,
+                    :deadline_article_57_1_addition_suppression,
+                    :deadline_article_57_2,
+                    :deadline_article_57_2_suppression,
+                    :deadline_article_57_2_addition,
+                    :deadline_article_57_2_addition_suppression,
+                    :deadline_article_57_4,
+                    :deadline_article_57_4_suppression,
+                    :deadline_article_57_4_addition,
+                    :deadline_article_57_4_addition_suppression,
+                    :deadline_article_57_symbol_1,
+                    :deadline_article_57_symbol_1_suppression,
+                    :deadline_article_57_symbol_1_addition,
+                    :deadline_article_57_symbol_1_addition_suppression
 end
