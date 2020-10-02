@@ -7,15 +7,32 @@
 <%= f.simple_fields_for :items, trading_item, :child_index => rand(1...1000) do |item| %> <%#PRESTAR TENÇÃO AQUI QUANDO FOR POR ITENS %>
   <div id="bids">
 
-    <%= item.simple_fields_for :bids, item.object.bids.by_accreditation_creditor(accreditation_creditor&.id).reorder(:id) do |bid| %>
-      <%= render 'purchase_process_trading_item_bids/form', f: bid, accreditation_creditor: accreditation_creditor%>
-    <% end %>
+
+    <table id="items-records" class="records">
+      <thead>
+      <tr>
+        <th><%= PurchaseProcessTradingItemBid.human_attribute_name :round %></th>
+        <th><%= PurchaseProcessTradingItemBid.human_attribute_name :number %></th>
+        <th><%= PurchaseProcessTradingItemBid.human_attribute_name :amount %></th>
+        <th><%= PurchaseProcessTradingItemBid.human_attribute_name :status %></th>
+        <th></th>
+      </tr>
+      </thead>
+
+      <tbody class="bids-forms">
+        <%= item.simple_fields_for :bids, item.object.bids.by_accreditation_creditor(accreditation_creditor&.id).reorder(:id) do |bid| %>
+          <%= render 'purchase_process_trading_item_bids/form', f: bid, accreditation_creditor: accreditation_creditor%>
+        <% end %>
+      </tbody>
+    </table>
 
     <div class="links d-flex justify-content-center">
       <%= link_to_add_association item, :bids,
                                   partial: 'purchase_process_trading_item_bids/form',
                                   render_options: {locals: {accreditation_creditor: accreditation_creditor}},
-                                  'data-disabled' => make_bid_disabled_message(trading_item.bids),
+                                  'data-disabled': make_bid_disabled_message(trading_item.bids),
+                                  'data-association-insertion-method': 'append',
+                                  'data-association-insertion-node': '.bids-forms',
                                   class: 'button primary' do %>Adicionar<% end %>
 
 
