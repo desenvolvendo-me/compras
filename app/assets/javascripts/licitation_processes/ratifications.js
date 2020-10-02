@@ -33,9 +33,7 @@ $(function(){
 
   $(".edit-process_ratification").click(function() {
     var url = Routes.add_ratifications_licitation_processes,
-      params = {
-        id: $("#licitation_process_id").val() , ratification_id: $(this).data('id')
-  };
+      params = {id: $("#licitation_process_id").val() , ratification_id: $(this).data('id')};
 
     url += "?" + $.param(params);
 
@@ -44,4 +42,4 @@ $(function(){
       handleButtonsRatifications();
     })
   })
-})
+});
