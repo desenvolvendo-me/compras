@@ -82,7 +82,7 @@ class LicitationProcessDecorator
     return unless new_record? || (items.reject(&:new_record?) && bidders.reject(&:new_record?))
 
     if licitation? && trading?
-      items && bidders && trading&.allow_negotiation?
+      items && bidders && Creditor.winners(self).any?
     else
       items && bidders && creditor_proposals.present?
     end
