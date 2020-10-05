@@ -68,20 +68,20 @@
   })();
 
   $('.td_start_validity').each(function(index, element) {    
-    date = $(this).eq(index).text().trim();
+    date = $('.td_start_validity').eq(index).text().trim();
     if (date !="") {
       date = new Date(date).toLocaleDateString('pt-BR');
-      $(this).eq(index).text(date);
-    } 
-
+      $('.td_start_validity').eq(index).text(date);
+    }
   });
   
   $('.td_end_validity').each(function(index, element) {
-    date = $(this).eq(index).text().trim();
+    date = $('.td_end_validity').eq(index).text().trim();
+    console.log('index'+index+'-date:'+date);
     if (date !="") {
       date = new Date(date).toLocaleDateString('pt-BR');
-      $(this).eq(index).text(date);   
+      $('.td_end_validity').eq(index).text(date);   
     } 
   });
-    
+
 </script>

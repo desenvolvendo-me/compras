@@ -231,11 +231,11 @@ $(document).ready(function () {
   });
 
   additions_or_suppressions = ['deadline_article_57_1_addition_suppression','deadline_article_57_2_addition_suppression','deadline_article_57_4_addition_suppression','deadline_article_57_symbol_1_addition_suppression'];
+  additions = ['value_additions','deadline_article_57_1_addition','deadline_article_57_2_addition','deadline_article_57_4_addition','deadline_article_57_symbol_1_addition']
+  suppressions = ['value_decrease','deadline_article_57_1_suppression','deadline_article_57_2_suppression','deadline_article_57_4_suppression','deadline_article_57_symbol_1_suppression']
+  
   $("#contract_contract_additive_additive_type").change(function(e){
     e.preventDefault();
-    additions = ['deadline_article_57_1_addition','deadline_article_57_2_addition','deadline_article_57_4_addition','deadline_article_57_symbol_1_addition']
-    suppressions = ['deadline_article_57_1_suppression','deadline_article_57_2_suppression','deadline_article_57_4_suppression','deadline_article_57_symbol_1_suppression']
-    
     if(additions.includes( $(this).val() )){
       $(".contract_contract_additive_addition_validity_percent,.contract_contract_additive_addition").parent().show();
       $("#contract_contract_additive_suppression_validity_percent,#contract_contract_additive_suppression").val(0);
@@ -249,8 +249,7 @@ $(document).ready(function () {
       $("#contract_contract_additive_addition_validity_percent,#contract_contract_additive_addition").val(0);
       $(".contract_contract_additive_addition_validity_percent,.contract_contract_additive_addition").parent().show();
       $(".contract_contract_additive_suppression_validity_percent,.contract_contract_additive_suppression").parent().show();
-    }
-    
+    }    
   });
 
   $('#contract_contract_additive_addition_validity_percent').blur(function(e) {
@@ -264,8 +263,10 @@ $(document).ready(function () {
       additive_value = (additive_value).toString().replace('.','').replace(',','.');
       valor = parseFloat(additive_value) * (addition_validity_percent/100);
       $("#contract_contract_additive_addition").val((valor).toFixed(2));
+      $("#contract_contract_additive_additive_kind_value").val((valor).toFixed(2));
     }
     $("#contract_contract_additive_addition").focus();
+    $("#contract_contract_additive_additive_kind_value").focus();
   });
 
   $('#contract_contract_additive_suppression_validity_percent').blur(function(e) {
@@ -288,8 +289,10 @@ $(document).ready(function () {
         valor = parseFloat(additive_value) * (suppression_validity_percent/100);
       }
       $("#contract_contract_additive_suppression").val((valor).toFixed(2));
+      $("#contract_contract_additive_additive_kind_value").val((valor).toFixed(2));
     }
     $("#contract_contract_additive_suppression").focus();
+    $("#contract_contract_additive_additive_kind_value").focus();
   });
-  
+
 });
