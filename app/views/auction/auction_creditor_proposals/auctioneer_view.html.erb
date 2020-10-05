@@ -31,7 +31,7 @@
     </tr>
     </thead>
     <tbody>
-    <% @auction.creditor_proposals.each_with_index do |index, proposal| %>
+    <% @auction.creditor_proposals.each_with_index do |proposal, index| %>
       <tr>
         <td>
           <%= index %>
@@ -44,11 +44,11 @@
     </tbody>
   </table>
 <% elsif @auction.creditor_proposals.present? %>
-  <h4>Data e Hora da Abertura das Propostas: <%= l @auction.bid_opening if @auction.bid_opening%> às às <%= @auction.bid_opening.strftime('%H:%M') %></h4>
+  <h4>Data e Hora da Abertura das Propostas: <%= date_mask(@auction.bid_opening) %> às <%= time_mask(@auction.bid_opening) %></h4>
   <h5><%= l Time.now %></h5><br>
   <h2>Possui Propostas</h2>
 <% else %>
-  <h4>Data e Hora da Abertura das Propostas: <%= l @auction.bid_opening if  @auction.bid_opening%> às <%= @auction.bid_opening.strftime('%H:%M') %></h4>
+  <h4>Data e Hora da Abertura das Propostas: <%= date_mask(@auction.bid_opening) %> às <%= time_mask(@auction.bid_opening) %></h4>
   <h5><%= l Time.now %></h5><br>
   <h2>Não Possui Propostas Cadastradas</h2>
 <% end %>

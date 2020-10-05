@@ -171,6 +171,10 @@ module CrudHelper
   end
 
   def date_mask(d)
-    return d.strftime("%d/%m/%Y") unless d.nil?
+    d.strftime("%d/%m/%Y") unless d.nil?
+  end
+
+  def time_mask(t)
+    t.strftime("%H:%M") unless t.nil?
   end
 end
