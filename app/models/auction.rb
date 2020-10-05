@@ -28,6 +28,7 @@ class Auction < Compras::Model
   accepts_nested_attributes_for :group_items, :allow_destroy => true
   accepts_nested_attributes_for :auction_support_teams, :allow_destroy => true
 
+  validates :bid_opening, :bid_opening_time, presence: true
   validates :year, :mask => "9999", presence: true
   validates :licitation_number, presence: true
   validates :zip_code, mask: "99999-999", allow_blank: true
