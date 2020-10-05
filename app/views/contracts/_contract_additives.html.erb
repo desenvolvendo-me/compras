@@ -7,7 +7,7 @@
   </div>
 
   <%column_names = [:number, :additive_kind, :additive_type, :start_validity, :end_validity]
-      extra_data   = [:publication_date, :dissemination_source, :observation, :end_date, :value, :description,:addition,:suppression,:start_validity,:end_validity,:addition_validity_percent,:suppression_validity_percent] %>
+      extra_data   = [:publication_date,:additive_kind_value, :dissemination_source, :observation, :end_date, :value, :description,:addition,:suppression,:start_validity,:end_validity,:addition_validity_percent,:suppression_validity_percent] %>
 
   <table id="<%= "contract_additives_records" %>" class="records">
     <thead>
@@ -66,4 +66,22 @@
       }
     });
   })();
+
+  $('.td_start_validity').each(function(index, element) {    
+    date = $(this).eq(index).text().trim();
+    if (date !="") {
+      date = new Date(date).toLocaleDateString('pt-BR');
+      $(this).eq(index).text(date);
+    } 
+
+  });
+  
+  $('.td_end_validity').each(function(index, element) {
+    date = $(this).eq(index).text().trim();
+    if (date !="") {
+      date = new Date(date).toLocaleDateString('pt-BR');
+      $(this).eq(index).text(date);   
+    } 
+  });
+    
 </script>

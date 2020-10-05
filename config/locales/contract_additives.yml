@@ -8,6 +8,7 @@ pt-BR:
     attributes:
       contract_additive:
         additive_kind: "Aditivo/Apostilamento"
+        additive_kind_value: "Valor do Aditivo/Apostilamento"
         additive_type: "Tipo"
         dissemination_source: "Meio de divulgação"
         end_date: "Data de término"
@@ -15,7 +16,7 @@ pt-BR:
         observation: "Observações"
         publication_date: "Data de publicação"
         signature_date: "Data da assinatura"
-        value: "Valor"
+        value: "Valor do Contrato Principal"
         description: "Descrição"
         addition: "Acréscimo"
         suppression: "Supressão"
