@@ -50,6 +50,7 @@
 
   var btnFinish = $('<button></button>').text('Salvar')
     .addClass('btn btn-info btn-finish')
+    .attr('id', 'auction_submit')
     .on('click', function(){
       $("form.auction").submit();
     });
