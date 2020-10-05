@@ -41,4 +41,8 @@ class SupplyOrderReport < Report
     supply_order.licitation_process
   end
 
+  def contract
+    supply_order.contract
+  end
+
 end
