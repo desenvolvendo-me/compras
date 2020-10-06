@@ -23,4 +23,8 @@ class SupplyOrderItemDecorator
   def value_balance
     number_with_precision(component.value_balance) if component.value_balance
   end
+
+  def quantity
+    component.quantity || 0
+  end
 end
