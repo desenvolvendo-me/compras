@@ -14,7 +14,7 @@ class Company < Persona::Company
 
   #validate :at_least_one_partner
   validates :cnpj, uniqueness: true
-  validates :main_cnae, presence: true
+  
 
   orderize
   filterize
