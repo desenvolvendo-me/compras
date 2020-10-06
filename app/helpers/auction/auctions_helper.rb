@@ -33,5 +33,17 @@ module Auction::AuctionsHelper
     link_to "Entrar Disputa", route, class: 'button primary'
   end
 
-
+  def link_to_appeals(&block)
+   if resource.appeal.present?
+     link_to edit_auction_appeal_path(resource.appeal), class:'card-link' do
+       content = capture(&block)
+       content.html_safe
+     end
+   else
+     link_to new_auction_appeal_path(auction_id: resource.id), class:'card-link', 'data-confirm': 'Deseja cadastrar uma Intenção de Recurso?' do
+       content = capture(&block)
+       content.html_safe
+     end
+   end
+  end
 end

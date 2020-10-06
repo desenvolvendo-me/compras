@@ -17,6 +17,8 @@ class Auction < Compras::Model
   has_many :auction_support_teams
   has_many :bids, class_name: 'AuctionBid'
 
+  has_one :appeal, class_name: 'AuctionAppeal'
+
   mount_uploader :document_edict, UnicoUploader
 
   has_enumeration_for :auction_type, :with => AuctionType
