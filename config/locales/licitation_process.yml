@@ -94,6 +94,9 @@ pt-BR:
         open_date:  'Data de Abertura'
         winning_creditors: 'Fornecedor Vencedor'
         creditor_for_all_items: 'Busque o Fornecedor dos Itens'
+        disqualify_proposal_below: 'Desclassificar Proposta Inferior a (%)'
+        disqualify_proposal_above: 'Desclassificar Proposta Superior a (%)'
+
 
   licitation_process:
     messages:
@@ -101,7 +104,8 @@ pt-BR:
       has_already_a_publications: "já possui publicações. Não pode ser alterado"
       has_already_a_ratification: "já foi homologado. Não pode ser alterado"
       must_be_included_after_edital_publication: "Habilitações só podem ser incluídos após publicação do edital"
-      must_have_creditors_and_items: "deve possuir credores e itens"
+      trading_must_have_creditors_and_items: "Necessário preencher as abas Credenciamento, Habilitação e Itens"
+      must_have_creditors_and_items: "Necessário preencher as abas Habilitação e Itens"
       must_have_creditors_enabled: "É necessario que ao menos um fornecedor esteja marcado como habilitado na aba Habilitação"
       must_finish_trading: "Deve terminar a fase de lances"
       no_one_publication_with_valid_type: "a última publicação é do tipo (%{publication_of}). Não pode ser alterado"
@@ -109,4 +113,7 @@ pt-BR:
       disabled_negotiation_message: "todos os itens do pregão devem ter um vencedor. Finalize a fase de lances!"
       disabled_trading_message: "deve ter ao menos uma proposta"
       must_have_trading: "deve ter lances"
+      must_have_items_bidders_proposals_trading_realignment_price: 'É necessário preencher as abas Itens; Habilitação; Propostas; Lances; Realinhamento de Preço'
+      must_have_items_bidders_proposals: 'É necessário preencher as abas Itens; Habilitação; Propostas'
+      must_have_items_justifications_bidders_proposals: 'É necessário preencher as abas Itens/Justificativa; Habilitação; Propostas'
 

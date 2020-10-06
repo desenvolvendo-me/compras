@@ -12,6 +12,7 @@ function custom_alert( message, title, buttons ) {
     title: title,
     resizable: false,
     modal: true,
+    dialogClass: 'custom-alert-dialog',
     buttons: buttons
   });
 }

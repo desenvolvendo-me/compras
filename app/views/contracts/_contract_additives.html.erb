@@ -8,6 +8,11 @@
 
   <%column_names = [:number, :additive_kind, :additive_type, :start_validity, :end_validity]
       extra_data   = [:publication_date,:additive_kind_value, :dissemination_source, :observation, :end_date, :value, :description,:addition,:suppression,:start_validity,:end_validity,:addition_validity_percent,:suppression_validity_percent] %>
+  
+  <span style="color:#3284B6;font-size:99.5%">
+    * O sistema permite cadastrar um Processo de Compras apenas um vez. Caso o Processo de Compras tenha <br>
+      <span style="margin-left: 9px">mais de um contrato/ata vinculado o gerenciamento é feito nas Abas Contratos Vinculados e Aditivo/Apostilamento</span>
+  </span>
 
   <table id="<%= "contract_additives_records" %>" class="records">
     <thead>

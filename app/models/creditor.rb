@@ -144,7 +144,7 @@ class Creditor < Persona::Creditor
   scope :won_calculation_for_trading, lambda {|licitation_process_id|
     creditor_ids = LicitationProcess.find(licitation_process_id).trading_items.map {|item|
       TradingItemWinner.new(item).creditor.try(:id)
-    }
+    }.reject(&:nil?)
 
     scoped.where("unico_creditors.id in (?)", creditor_ids)
   }
@@ -199,6 +199,11 @@ class Creditor < Persona::Creditor
     representative_people.joins {personable(Individual)}.first
   end
 
+  def ratification_by_licitation purchase_process_id
+    licitation_process_ratifications
+        .licitation_process_id(purchase_process_id).first
+  end
+
   def destroy
 #    super
   rescue ActiveRecord::DeleteRestrictionError
@@ -208,6 +213,10 @@ class Creditor < Persona::Creditor
 
   def creditor_representative
     person.personable.try(:responsible_name) if person.company?
+  end
+
+  def licitation_realignment_price licitation_process
+    realignment_prices.map{|x| x if x.purchase_process_id == licitation_process.id}.reject(&:nil?)
   end
 
   protected

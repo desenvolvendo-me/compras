@@ -1,12 +1,22 @@
 class PurchaseProcessTradingItemBidsController < CrudController
   respond_to :json
 
-  actions :update, :show
+  actions :create, :update, :show
+
+  def create
+    object = build_resource
+
+    if save_resource(object, resource_params)
+      render json: {}
+    else
+      render json: { errors: object.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
 
   def update
     object = resource
 
-    if update_resource(object, resource_params)
+    if save_resource(object, resource_params)
       render json: {}
     else
       render json: { errors: object.errors.full_messages }, status: :unprocessable_entity
@@ -15,7 +25,7 @@ class PurchaseProcessTradingItemBidsController < CrudController
 
   private
 
-  def update_resource(object, attributes)
+  def save_resource(object, attributes)
     object.transaction do
       object.localized.assign_attributes(*attributes, as: :trading_user)
 
@@ -23,7 +33,6 @@ class PurchaseProcessTradingItemBidsController < CrudController
       object.number = TradingBidNumberCalculator.calculate(object.item)
 
       if object.save
-        TradingBidCreator.create!(object.item)
         TradingBidCleaner.clean(object.item)
         TradingItemStatusChanger.change(object.item)
 

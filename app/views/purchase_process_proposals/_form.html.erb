@@ -19,6 +19,15 @@
     <%= f.input :creditor_proposal_total_value, fake: true, required: false, disabled: true,
       input_html: { value: '0,00', 'data-decimal' => true, class: :numeric } %>
   </div>
+  <div class="yui3-u-1-4" id="price_taken">
+    <%= f.input :taken_price, fake: true, required: false, disabled: true,
+                input_html: {
+                    value: number_with_delimiter(f.object.items_total_price),
+                    'data-decimal' => true,
+                    class: :numeric,
+                    'data-disqualify-above': resource.disqualify_proposal_above,
+                    'data-disqualify-below': resource.disqualify_proposal_below} %>
+  </div>
 </div>
 
 <style>

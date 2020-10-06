@@ -8,7 +8,7 @@ pt-BR:
     attributes:
       licitation_process_ratification:
         licitation_process: "Processo de compra"
-        creditor: "Participante Vencedor"
+        creditor: "Empresa Vencedora"
         ratification_date: "Data de homologação"
         adjudication_date: "Data de adjudicação"
         sequence: "Sequência"
@@ -16,3 +16,4 @@ pt-BR:
   licitation_process_ratification:
     messages:
       cant_save_without_responsibles: "Primeiro crie responsáveis do processo"
+      must_have_realignment_price: "Por favor cadastre o realinhamento de preço."

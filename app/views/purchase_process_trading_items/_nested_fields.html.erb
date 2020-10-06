@@ -1,0 +1,50 @@
+<% if trading_item.bids.by_accreditation_creditor(accreditation_creditor&.id).any?(&:declined?) %>
+  <div class="alert alert-warning alert-trading-options">
+    <strong> <%= t "purchase_process_trading_item.messages.creditor_declined" %> </strong>
+  </div>
+<% end %>
+
+<%= f.simple_fields_for :items, trading_item, :child_index => rand(1...1000) do |item| %> <%#PRESTAR TENÇÃO AQUI QUANDO FOR POR ITENS %>
+  <div id="bids">
+
+
+    <table id="items-records" class="records">
+      <thead>
+      <tr>
+        <th><%= PurchaseProcessTradingItemBid.human_attribute_name :round %></th>
+        <th><%= PurchaseProcessTradingItemBid.human_attribute_name :number %></th>
+        <th><%= PurchaseProcessTradingItemBid.human_attribute_name :amount %></th>
+        <th><%= PurchaseProcessTradingItemBid.human_attribute_name :status %></th>
+        <th></th>
+      </tr>
+      </thead>
+
+      <tbody class="bids-forms">
+        <%= item.simple_fields_for :bids, item.object.bids.by_accreditation_creditor(accreditation_creditor&.id).reorder(:id) do |bid| %>
+          <%= render 'purchase_process_trading_item_bids/form', f: bid, accreditation_creditor: accreditation_creditor%>
+        <% end %>
+      </tbody>
+    </table>
+
+    <div class="links d-flex justify-content-center">
+      <%= link_to_add_association item, :bids,
+                                  partial: 'purchase_process_trading_item_bids/form',
+                                  render_options: {locals: {accreditation_creditor: accreditation_creditor}},
+                                  'data-disabled': make_bid_disabled_message(trading_item.bids),
+                                  'data-association-insertion-method': 'append',
+                                  'data-association-insertion-node': '.bids-forms',
+                                  class: 'button primary' do %>Adicionar<% end %>
+
+
+      <% if accreditation_creditor_total == 1 %>
+          <%= button_tag 'Encerrar', type: :button, class: 'button primary finish_bid',
+                         'data-item': trading_item.id,
+                         'data-disabled': make_bid_disabled_message(trading_item.bids) %>
+      <% else %>
+          <%= button_tag 'Sair da Disputa', type: :button, class: 'button primary finish_dispute',
+                         'data-item': trading_item.id,
+                         'data-disabled' => make_bid_disabled_message(trading_item.bids) %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

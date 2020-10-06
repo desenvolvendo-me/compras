@@ -1,29 +1,18 @@
 $(document).ready(function() {
-  const $trading = $("#tradings-fields");
+  const $trading  = $("#tradings-fields");
+  var $currentPanel = $("#bids-tab .ui-tabs-panel").eq(sessionStorage.getItem("currentTabIndexBid") - 1);
 
-  $trading.find('input.item_chooser:first').attr('checked', true).trigger('change');
+  decimalInput()
 
-  function allowNewBid(allowed) {
-    if (allowed) {
-      $('button#make_bid').removeAttr('data-disabled');
-      $('button#finish_dispute').removeAttr('data-disabled');
-      $('#amount').attr('disabled', false);
-    } else {
-      $('button#make_bid').attr('data-disabled', '');
-      $('button#make_bid').data('disabled', "<%= I18n.t 'purchase_process_trading.messages.make_bid_disabled_message' %>");
-      $('button#finish_dispute').attr('data-disabled', '');
-      $('button#finish_dispute').data('disabled', "<%= I18n.t 'purchase_process_trading.messages.make_bid_disabled_message' %>");
-      $('#amount').attr('disabled', true);
-    }
-  }
+  function decimalInput(){
+    var input = $("input[data-decimal]");
 
-  function allowUndoBid(allowed) {
-    if (allowed) {
-      $('button#undo_bid').removeAttr('data-disabled');
-    } else {
-      $('button#undo_bid').attr('data-disabled', '');
-      $('button#undo_bid').data('disabled', "<%= I18n.t 'purchase_process_trading.messages.undo_bid_disabled_message' %>");
-    }
+    input.priceFormat({
+      prefix: false,
+      thousandsSeparator: ".",
+      centsSeparator: ",",
+      centsLimit: input.data("precision")
+    });
   }
 
   function updateBenefitedBidLink(itemId) {
@@ -51,32 +40,10 @@ $(document).ready(function() {
     }
   }
 
-  function fillForm(bid) {
-    $trading.find('#amount').val('0,00');
-
-    if (_.isEmpty(bid)) {
-      $trading.find('#bid_id').val('');
-      $trading.find('#accreditation_creditor').val('');
-      $trading.find('#accreditation_creditor_id').val('');
-      $trading.find('#lot').val('');
-      $trading.find('#round').val('');
-
-      allowNewBid(false);
-    } else {
-      $trading.find('#bid_id').val(bid.id);
-      $trading.find('#accreditation_creditor').val(bid.accreditation_creditor);
-      $trading.find('#accreditation_creditor_id').val(bid.accreditation_creditor_id);
-      $trading.find('#lot').val(bid.lot);
-      $trading.find('#round').val(bid.round);
-      $trading.find('#amount').val(bid.amount_with_reduction);
-
-      allowNewBid(true);
-    }
-  }
-
-  function fillLowestBid(lowest_bid) {
-    var bidAmount = $trading.find('input.item_chooser:checked').closest('tr').find('td.bid_amount'),
-      bidCreditor = $trading.find('input.item_chooser:checked').closest('tr').find('td.bid_creditor');
+  function fillLowestBid(item) {
+    var bidAmount = $trading.find('table#items tr#item-'+item.id).find('td.bid_amount'),
+      bidCreditor = $trading.find('table#items tr#item-'+item.id).find('td.bid_creditor'),
+      lowest_bid  = item.lowest_bid;
 
     if ( _.isEmpty(lowest_bid) ) {
       lowest_bid.amount = '-';
@@ -88,9 +55,9 @@ $(document).ready(function() {
   }
 
   function fillItem(item) {
-    var status = $trading.find('input.item_chooser:checked').closest('tr').find('td.status');
+    var status = $trading.find('table#items tr#item-'+item.id).find('td.status');
 
-    fillLowestBid(item.lowest_bid);
+    fillLowestBid(item);
 
     status.text(item.status);
 
@@ -98,17 +65,15 @@ $(document).ready(function() {
 //    $trading.find('#reduction_rate_percent').val(item.reduction_rate_percent);
   }
 
-  function getNextBidFromServer() {
-    var itemId = $trading.find('#item_id').val(),
-      oldUrl = $trading.find('#next_bid_url').val(),
-      newUrl = oldUrl.replace(/\/\d+\//, '/' + itemId + '/');
+  function getNextBidFromServer(itemId) {
+    var oldUrl = $trading.find('#next_bid_url').val(),
+        newUrl = oldUrl.replace(/\/\d+\//, '/' + itemId + '/');
 
     $.ajax({
       url: newUrl,
       cache: false,
       dataType: 'json',
       success: function(item) {
-        fillForm(item.next_bid);
         fillHistoric(item.historic);
         fillItem(item)
         allowBenefitedBid(item.historic, item.lowest_bid, item.next_bid);
@@ -118,8 +83,8 @@ $(document).ready(function() {
 
   function processPersistErrors(errors) {
     var template     = $trading.find('#error_template'),
-      error_dialog = $trading.find('#errors_dialog'),
-      target       = error_dialog.find('#errors_content');
+        error_dialog = $trading.find('#errors_dialog'),
+        target       = error_dialog.find('#errors_content');
 
     target.empty();
 
@@ -146,44 +111,8 @@ $(document).ready(function() {
   function fillHistoric(historic) {
     $('table#historic tbody').empty();
 
-    if ( _.isEmpty(historic) ) {
-      allowUndoBid(false);
-    } else {
-      allowUndoBid(true);
-    }
-
     _.each(historic, function(bid) {
       addBidToHistoric(bid, true);
-    });
-  }
-
-  function persistBid(bidId, amount) {
-    if(amount === undefined)
-      amount = $trading.find('#amount').val();
-
-    var url = $('#persist_bid_url').val(),
-      currentBid = {
-        id: bidId,
-        _method: 'put',
-        purchase_process_trading_item_bid: {
-          amount: amount
-        }
-      };
-
-    $.ajax({
-      url: url + bidId,
-      data: currentBid,
-      dataType: 'json',
-      type: 'POST',
-      success: function() {
-        getNextBidFromServer();
-        allowUndoBid(true);
-      },
-      error: function(xhr) {
-        var errors = $.parseJSON(xhr.responseText).errors;
-
-        processPersistErrors(errors);
-      }
     });
   }
 
@@ -213,24 +142,65 @@ $(document).ready(function() {
     });
   }
 
-  function undoLastBid(itemId) {
-    var oldUrl = $('#undo_last_bid_url').val(),
-      newUrl = oldUrl.replace(/\/\d+\//, '/' + itemId + '/');
+  //buscar os historicos de lances
+  $("#bids-tab .ui-tabs-anchor").click(function(){
+    $currentPanel = $("#bids-tab .ui-tabs-panel:visible");
+    var itemId = $currentPanel.find("#trading_item").val();
 
-    $.ajax({
-      url: newUrl,
-      dataType: 'json',
-      type: 'POST',
-      success: function(data) {
-        fillForm(data.next_bid);
-        fillHistoric(data.historic);
-        fillLowestBid(data.lowest_bid);
+    getNextBidFromServer(itemId);
+  })
 
-        allowNewBid(!_.isEmpty(data.next_bid));
-        allowBenefitedBid(data.historic, data.lowest_bid, data.next_bid);
+  // reduz o valor do lance automaticamente quando inserido um novo form
+  $(".trading-fields").on('cocoon:before-insert', function(e, bid_to_be_inserted) {
+      //atualiza o valor do menor lance
+      var hasNewAmount = $currentPanel.find("[name$='[amount]'].newRecord");
+
+      if(hasNewAmount.length > 0){
+        $currentPanel.find("[name$='[lowest_bid]']").val(hasNewAmount.last().val());
       }
-    });
-  }
+
+      var reduction_value   = parsePtBrFloat($currentPanel.find("[name$='[reduction_rate_value]']").val()),
+          reduction_percent = parsePtBrFloat($currentPanel.find("[name$='[reduction_rate_percent]']").val()),
+          lowest_bid        = parsePtBrFloat($currentPanel.find("[name$='[lowest_bid]']").val()),
+          last_round        = parseInt($currentPanel.find("[name$='[round]']").last().val()) || 0,
+          bid_reduction     = 0.0;
+
+      // calcula redução por valor ou porcentagem
+      if(reduction_value){
+        bid_reduction = lowest_bid - reduction_value;
+      }else if(reduction_percent){
+        bid_reduction = lowest_bid - (lowest_bid * reduction_percent) / 100;
+      }
+
+      $(bid_to_be_inserted).find("[name$='[amount]']")
+        .val(floatToPtBrString(bid_reduction))
+        .addClass('newRecord');
+
+      $(bid_to_be_inserted).find("[name$='[round]']").val(last_round + 1);
+
+      $currentPanel.find('.finish_dispute').attr('data-disabled', 'Salve todos os registros antes de sair da disputa.');
+  });
+
+  //habilita o botão de sair da disputa somente se os todos estiver salvos
+  $(".trading-fields").on('cocoon:after-remove', function(e, bid_to_be_removed){
+      var hasNewAmount = $currentPanel.find("[name$='[amount]'].newRecord");
+
+      if(hasNewAmount.length === 0){
+        $currentPanel.find('.finish_dispute').removeAttr('data-disabled');
+      }
+  });
+
+  // informar o usuario que o lance atual não pode ser maior que o melhor lance
+  $("#bids-tab").on('change', "[name$='[amount]'].newRecord", function(){
+    var lowest_bid = $currentPanel.find("[name$='[lowest_bid]']").val(),
+        bid        = parsePtBrFloat(this.value);
+
+    if(bid > parsePtBrFloat(lowest_bid)){
+      custom_alert('O valor do lance digitado tem que ser menor que o Melhor Lance no valor de R$ '+ lowest_bid + '.', 'Atenção');
+      this.value = '0,00';
+    }
+  });
+
 
   function submitReductions(itemId, $button) {
     var url = $trading.find('#persist_item_url').val(),
@@ -238,8 +208,8 @@ $(document).ready(function() {
         id: itemId,
         _method: 'put',
         purchase_process_trading_item: {
-          reduction_rate_value: $button.closest('tr').find('#reduction_rate_value').val(),
-          reduction_rate_percent: $button.closest('tr').find('#reduction_rate_percent').val()
+          reduction_rate_value: $currentPanel.find("[name$='[reduction_rate_value]']").val(),
+          reduction_rate_percent: $currentPanel.find("[name$='[reduction_rate_percent]']").val()
         }
       };
 
@@ -249,14 +219,14 @@ $(document).ready(function() {
       type: 'POST',
       dataType: 'json',
       success: function(data) {
-        fillForm(data.next_bid);
+        custom_alert('O registro foi salvo com sucesso!', 'Salvo com Sucesso');
       },
 
       error: function(xhr) {
         var errors = $.parseJSON(xhr.responseText).errors;
 
-        $trading.find('#reduction_rate_value').val('0,00'),
-          $trading.find('#reduction_rate_percent').val('0,00')
+        $trading.find('#reduction_rate_value').val('0,00')
+        $trading.find('#reduction_rate_percent').val('0,00')
 
         processPersistErrors(errors);
       }
@@ -266,34 +236,69 @@ $(document).ready(function() {
   $('button.reduction_button').on('click', function(event) {
     event.preventDefault();
 
-    var itemId = $(this).closest('tr').find('td.item').data('id');
+    var itemId = $(this).data('item');
 
     submitReductions(itemId, $(this));
   });
 
-  $('button#make_bid').on('click', function(event) {
-    event.preventDefault();
+  //load creditor's bids
+  $("#bids-tab [name$='[accreditation_creditor]']").change(function () {
+    var url    = Routes.bid_form_purchase_process_trading + "?",
+        params = { accreditation_creditor_id: this.value,
+                   trading_item_id: $(this).data('trading-item'),
+                    purchase_process_id: $("#licitation_process_id").val() };
 
-    var bidId = $('#bid_id').val(),
-      dataDisabled = _($(this).attr('data-disabled'));
+    url += $.param(params);
+    $.ajax({
+      url: url,
+      dataType: 'HTML',
+      type: 'GET',
+      success: function (data) {
+        $currentPanel.find('.trading-fields').html(data);
+        decimalInput();
+      }
+    });
+  });
 
-    if ( dataDisabled.isEmpty() && bidId) {
-      persistBid(bidId);
+  $('#bids-tab').on('click', '.finish_dispute', function(event) {
+    var dataDisabled    = _($(this).attr('data-disabled')),
+        itemID          = $(this).data('item'),
+        acc_creditor_id = $currentPanel.find("[name$='[accreditation_creditor]']").val(),
+        amount          = '0.0',
+        status          = '<%= TradingItemBidStatus::DECLINED %>',
+        round           = parseInt($currentPanel.find("[name$='[round]']").last());
+
+    if ( dataDisabled.isEmpty() ) {
+      var url = $('#persist_bid_url').val(),
+        currentBid = {
+          purchase_process_trading_item_bid: {
+            amount: amount,
+            purchase_process_accreditation_creditor_id: acc_creditor_id,
+            status: status,
+            round: round + 1,
+            item_id: itemID
+          }
+        };
+
+      $.ajax({
+        url: url,
+        data: currentBid,
+        dataType: 'json',
+        type: 'POST',
+        success: function() {
+          getNextBidFromServer(itemID);
+          $currentPanel.find("[name$='[accreditation_creditor]']").trigger('change')
+        },
+        error: function(xhr) {
+          var errors = $.parseJSON(xhr.responseText).errors;
+
+          processPersistErrors(errors);
+        }
+      });
     }
   });
 
-  $('button#finish_dispute').on('click', function(event) {
-    event.preventDefault();
-
-    var bidId = $('#bid_id').val(),
-      dataDisabled = _($(this).attr('data-disabled'));
-
-    if ( dataDisabled.isEmpty() && bidId) {
-      persistBid(bidId, '0,00');
-    }
-  });
-
-  $("button#finish_bid").on('click', function(event) {
+  $("#bids-tab").on('click', 'finish_bid', function(event) {
     event.preventDefault();
     var itemId = $trading.find('input.item_chooser:checked').parent().attr('data-id');
 
@@ -326,18 +331,6 @@ $(document).ready(function() {
         processPersistErrors(errors);
       }
     });
-
-  });
-
-  $('button#undo_bid').on('click', function(event) {
-    event.preventDefault();
-
-    var itemId = $trading.find('#item_id').val(),
-      dataDisabled = _($(this).attr('data-disabled'));
-
-    if ( dataDisabled.isEmpty() && itemId) {
-      undoLastBid(itemId);
-    }
   });
 
   $trading.find('.item_chooser').on('change', function() {
@@ -345,9 +338,9 @@ $(document).ready(function() {
 
     $trading.find('#item_id').val(itemId);
 
-    getNextBidFromServer();
+
     getCreditors(itemId);
-    updateBenefitedBidLink(itemId);
+    updateBenefitedBidLink(itemId); /** VERIFICAR AQUI DEPOIS E VER A REGRA DE DESEMPATE **/
   });
 
   $trading.find('#errors_dialog').dialog({
@@ -359,5 +352,16 @@ $(document).ready(function() {
 
   $trading.find('#close_error_dialog').on('click', function() {
     $('#errors_dialog').dialog('close');
+  });
+
+});
+
+$(window).on('load', function() {
+  $("#bids-tab").tabs({
+    active: sessionStorage.getItem("currentTabIndexBid"),
+    activate: function(event, ui) {
+      var tabIndex = $("#bids-tab").tabs('option', 'active');
+      sessionStorage.setItem("currentTabIndexBid", tabIndex);
+    }
   });
 });

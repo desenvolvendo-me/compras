@@ -12,6 +12,7 @@ module Compras
     map_type :nested_form,              to: Compras::Inputs::NestedFormInput
     map_type :auto_complete,            to: Compras::Inputs::AutoCompleteInput
     map_type :fake,                     to: Compras::Inputs::FakeInput
+    map_type :fake_select,              to: Compras::Inputs::FakeSelectInput
     map_type :nested_grid,              to: Compras::Inputs::NestedGridInput
     map_type :select2,                  to: Compras::Inputs::Select2Input
 

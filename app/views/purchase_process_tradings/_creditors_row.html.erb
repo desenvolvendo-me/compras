@@ -1,8 +1,7 @@
-<tr class="<%= not_selected_class %>">
-  <td><%= order %></td>
+<tr class="<%= not_selected_class %> <%= status.eql?('Vencedor') ? 'winner' : '' %>">
   <td><%= creditor %></td>
-  <td><%= company_size %></td>
-  <td><%= amount %></td>
+  <td><%= lot_or_item %></td>
+  <td><%= unit_price %></td>
   <td><%= percent %></td>
   <td><%= selected %></td>
   <td class="creditor-status"><%= status %></td>

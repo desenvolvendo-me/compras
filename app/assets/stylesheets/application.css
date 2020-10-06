@@ -15,10 +15,11 @@
  *= require bootstrap_prepend
  *= require select2/select2
  *= require material_icons
+ *= require compras/custom_dialog
  */
 
 #container {
-    width: 1200px;
+    width: 1280px;
 }
 
 #container #header img {
