@@ -30,9 +30,9 @@
       <div class="card-body">
         <h5 class="card-title">Intenção de Recurso</h5>
         <p class="card-text">Registrar, decidir e acompanhar recurso.</p>
-        <p style="color: darkorange; font-weight: bolder">* Pregão com Intenção de Recurso</p>
+        <%= "<p style='color: darkorange; font-weight: bolder'>* Pregão com Intenção de Recurso</p>".html_safe if resource.appeal %>
       </div>
-      <%= link_to auction_appeals_path, class:'card-link' do%>
+      <%= link_to_appeals  do%>
         <div class="card-footer text-muted">
           Clique Aqui
         </div>
