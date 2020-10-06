@@ -19,6 +19,8 @@ class ContractAdditive < Compras::Model
   belongs_to :contract
   belongs_to :dissemination_source
 
+  after_create :create_linked_contract
+
   # after_create :set_contract_item_balance, if: :additive_kind?
   # before_update :get_contract_item_balance
 
@@ -53,6 +55,17 @@ class ContractAdditive < Compras::Model
   #     set_contract_item_balance
   #   end
   # end
+  #
+
+  def create_linked_contract
+    linked_contract = LinkedContract.new
+    linked_contract.contract_id = contract_id
+    linked_contract.start_date_contract = start_validity
+    linked_contract.end_date_contract = end_validity
+    linked_contract.contract_value = additive_kind_value
+    linked_contract.contract_number = number
+    linked_contract.save
+  end
 
   def fill_contract_balance contract_balance
     contract_balance.movable = self
