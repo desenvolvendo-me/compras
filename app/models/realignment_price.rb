@@ -74,7 +74,7 @@ class RealignmentPrice < Compras::Model
   end
 
   def total_value_validation
-    if total_value != items.to_a.sum(&:total_price)
+    if (total_value - discount) != items.to_a.sum(&:total_price)
       errors.add(:base, :the_sum_of_item_prices_should_be_equal_to_proposal)
     end
   end
