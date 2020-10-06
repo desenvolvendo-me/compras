@@ -94,6 +94,9 @@ pt-BR:
         open_date:  'Data de Abertura'
         winning_creditors: 'Fornecedor Vencedor'
         creditor_for_all_items: 'Busque o Fornecedor dos Itens'
+        disqualify_proposal_below: 'Desclassificar Proposta Inferior a (%)'
+        disqualify_proposal_above: 'Desclassificar Proposta Superior a (%)'
+
 
   licitation_process:
     messages:

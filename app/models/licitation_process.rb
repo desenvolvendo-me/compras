@@ -28,7 +28,8 @@ class LicitationProcess < Compras::Model
                   :legal_analysis_appraisals_attributes, :publications_attributes,
                   :purchase_process_accreditation_attributes, :trading_attributes,
                   :judgment_commission_advice_attributes, :bidders_attributes,
-                  :licitation_process_ratifications_attributes
+                  :licitation_process_ratifications_attributes, :disqualify_proposal_above,
+                  :disqualify_proposal_below
   
   attr_accessor :purchase_solicitation_id,:purchase_solicitation
 
@@ -147,6 +148,7 @@ class LicitationProcess < Compras::Model
   validate :judgment_form_can_update?, on: :update
 
   after_save  :set_approved_status
+  after_save  :proposal_disqualified?
 
   with_options :allow_blank => true do |allowing_blank|
     allowing_blank.validates :year, :mask => "9999"
@@ -367,14 +369,19 @@ class LicitationProcess < Compras::Model
 
   def proposals_of_creditor(creditor)
     if judgment_form_lot?
-      creditor_proposals.creditor_id(creditor.id).order(:id)
+      creditor_proposals.creditor_id(creditor.id).order(:id).readonly(false)
     else
-      creditor_proposals.joins(:item).creditor_id(creditor.id).order(:id)
+      creditor_proposals.joins(:item).creditor_id(creditor.id).order(:id).readonly(false)
     end
   end
 
   def proposals_total_price(creditor)
     proposals_of_creditor(creditor).sum(&:total_price)
+  end
+
+  def items_total_price
+    return unless items
+    items.sum(&:estimated_total_price)
   end
 
   def allow_trading_auto_creation?
@@ -553,6 +560,12 @@ class LicitationProcess < Compras::Model
       if judgment_form_was.try(:kind) != judgment_form.kind
         errors.add(:judgment_form, :should_be_same_judgment_form_kind, :kind => judgment_form_was.kind_humanize)
       end
+    end
+  end
+
+  def proposal_disqualified?
+    if creditor_proposals.any?(&:changed?)
+      PurchaseProcessCreditorDisqualificationGenerator.create!(self)
     end
   end
 end

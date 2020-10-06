@@ -110,29 +110,7 @@
     </tbody>
   </table>
 
-
-  <% if f.object.persisted? %>
-    <table class="records">
-      <thead>
-      <th colspan="2" class="text-center"> Valor Total dos Lotes</th>
-      </thead>
-      <tbody>
-      <% f.object.items.pluck(:lot).uniq.try(:each) do |lot|%>
-        <tr style="font-size: 16px">
-          <td class="text-bold">Valor Total do item/grupo <%= lot %></td>
-          <td><%= number_to_currency f.object.items.where(lot: lot).sum(&:estimated_total_price) %></td>
-        </tr>
-      <% end %>
-
-      <% if f.object.items.present? %>
-        <tr class="text-bold" style="font-size: 16px">
-          <td></td>
-          <td style="color: black"><%= number_to_currency f.object.items.sum(&:estimated_total_price) %></td>
-        </tr>
-      <% end %>
-      </tbody>
-    </table>
-  <% end %>
+  <%= render 'total_items', f: f %>
 
   <%= mustache "licitation_process_items_template" do %>
     <%= f.association :items_attributes, :collection => f.object.items.build, :index => '{{uuid}}' do |p| %>
