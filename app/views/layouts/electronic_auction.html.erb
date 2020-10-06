@@ -67,6 +67,7 @@
         </div>
       </div>
     </div>
+    <%= javascript_include_tag controller_name if controller_asset? %>
     <script>
       var environment = "<%= Rails.env %>";
 
