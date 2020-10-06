@@ -1,0 +1,28 @@
+<div class="yui3-g">
+  <div class="yui3-u-3-4">
+    <span style="color:#3284B6;font-size:99.5%">
+    * O sistema permite cadastrar um Processo de Compras apenas um vez. Caso o Processo de Compras tenha <br>
+      <span style="margin-left: 9px">mais de um contrato/ata vinculado o gerenciamento é feito nas Abas Contratos Vinculados e Aditivo/Apostilamento</span>
+    </span>
+  </div>
+  <div class="yui3-u-1-4">
+    <div class="actions">
+      <ul>
+        <% if create? %>
+          <li>
+            <%= create_link %>
+          </li>
+        <% end %>
+
+        <% if filter? %>
+          <li>
+            <%= filter_link %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+
