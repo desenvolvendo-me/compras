@@ -45,8 +45,7 @@
     $.ajax({
       url: url,
       success: function (response) {
-
-        if (response.logradouro === '') {
+        if (response.logradouro === undefined) {
           alert('Não foram encontrados endereços associados ao CEP digitado');
           return;
         }
