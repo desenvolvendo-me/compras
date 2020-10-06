@@ -175,6 +175,6 @@ module CrudHelper
   end
 
   def time_mask(t)
-    t.strftime("%H:%M") unless t.nil?
+    t.strftime("%H:%M h") unless t.nil?
   end
 end

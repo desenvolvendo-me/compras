@@ -1,3 +1,9 @@
+<span class="text-center">
+  <h2>Propostas e Declarações </h2>
+<h2> Pregão: <%= @auction.to_s%></h2>
+</span>
+<br>
+
 <% if @auction.decorator.bids_finished? %>
   <h4><%= l Time.now %></h4>
   <table id="items-records" class="records">
@@ -43,12 +49,32 @@
     <% end %>
     </tbody>
   </table>
-<% elsif @auction.creditor_proposals.present? %>
-  <h4>Data e Hora da Abertura das Propostas: <%= date_mask(@auction.bid_opening) %> às <%= time_mask(@auction.bid_opening) %></h4>
-  <h5><%= l Time.now %></h5><br>
-  <h2>Possui Propostas</h2>
 <% else %>
-  <h4>Data e Hora da Abertura das Propostas: <%= date_mask(@auction.bid_opening) %> às <%= time_mask(@auction.bid_opening) %></h4>
-  <h5><%= l Time.now %></h5><br>
-  <h2>Não Possui Propostas Cadastradas</h2>
+  <div class="text-center">
+    <h4>Data da Abertura da Licitação: <%= date_mask(@auction.bid_opening) %> às <%= time_mask(@auction.bid_opening) %></h4>
+    <h5><%= l Time.now %></h5><br>
+    <div class="alert-warning p-2">
+      <h2>
+        <span class="text-unico">
+          <%if @auction.creditor_proposals.present?  %>
+            Pregão com Proposta e Declarações Cadastradas
+          <% else %>
+            Pregão não Possui Propostas Cadastradas
+          <% end %>
+        </span>
+      </h2>
+    </div>
+  </div>
 <% end %>
+
+<div id="fixedbutton" class="pr-4">
+  <%= link_to 'Pregão Deserto', "#", class:'button primary' %>
+</div>
+
+<style>
+  #fixedbutton {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+</style>

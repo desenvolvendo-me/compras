@@ -47,7 +47,7 @@
             </div>
           </nav>
           <main role="main" id="main-body" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-            <div class="row mt-4">
+            <div class="h-100 mt-4">
               <div id="flash">
                 <%= render 'layouts/flash' %>
               </div>
@@ -55,7 +55,7 @@
               <div class="banner">
                 <%= prefecture_image %>
               </div>
-              <div class="main-content w-100 pt-5">
+              <div class="main-content h-100 w-100 pt-5">
                 <% unless controller_name.eql? "bookmarks" %>
                   <%= yield %>
                 <% else %>
