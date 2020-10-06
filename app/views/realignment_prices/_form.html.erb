@@ -8,10 +8,13 @@
       <%= f.input :lot, disabled: true %>
     </div>
   <% end %>
+  <div class="yui3-u-1-4">
+    <%= f.input :discount %>
+  </div>
 
   <div class="yui3-u-1-4">
     <%= f.input :total_value, disabled: true,
-      input_html: { value: number_with_precision(f.object.total_value), class: 'numeric' } %>
+      input_html: { value: number_with_precision(f.object.total_value), class: 'numeric', 'data-price': f.object.total_value } %>
   </div>
 
   <div class="yui3-u-1-4">
@@ -75,7 +78,16 @@
     $('#realignment_price_difference_price').val(numberWithDelimiter(sumPrices()));
   }
 
+  function calculateDiscount(){
+    var $price_total   = $("#realignment_price_total_value"),
+        price_total    = parseFloat($price_total.data('price')),
+        discount       = parsePtBrFloat(this.value);
+
+    $price_total.val(numberWithDelimiter(price_total - discount));
+  }
+
   $('.price').on('change', calculated_difference_price);
+  $("#realignment_price_discount").on('change', calculateDiscount);
 
   calculated_difference_price();
 </script>
