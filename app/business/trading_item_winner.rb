@@ -27,7 +27,7 @@ class TradingItemWinner
     return if bids.blank?
 
     lastBids = []
-    item.creditors_ordered.each do |creditor|
+    item.creditors_ordered.to_a.uniq(&:id).each do |creditor|
       lastBids << bids.detect{|i| i.purchase_process_accreditation_creditor_id == creditor.id}
     end
 
