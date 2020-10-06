@@ -1,5 +1,5 @@
 class RealignmentPrice < Compras::Model
-  attr_accessible :purchase_process_id, :creditor_id, :lot, :items_attributes
+  attr_accessible :purchase_process_id, :creditor_id, :lot, :items_attributes, :discount
 
   belongs_to :purchase_process, class_name: 'LicitationProcess'
   belongs_to :creditor
