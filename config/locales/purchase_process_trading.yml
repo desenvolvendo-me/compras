@@ -18,3 +18,5 @@ pt-BR:
     messages:
       make_bid_disabled_message: "todos os lances já foram efetuados"
       undo_bid_disabled_message: "não há lance para ser desfeito"
+      no_creditor_registered_or_disqualifeid: "Não foram cadastradas Empresas Credencia ou suas propostas foram desclassificadas"
+

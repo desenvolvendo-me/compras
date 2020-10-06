@@ -1,0 +1,10 @@
+<% Creditor.winners(f.object).includes(:realignment_prices).each do |bid_winner|%>
+  <% unless bid_winner.licitation_realignment_price(f.object).any? %>
+    <div class="alert alert-warning">
+      <strong>
+        O fornecedor <%= bid_winner %> foi vencedor de um item/lot por favor cadastre o relinhamento de preço
+        <a href="#" onclick="$('#realignment_prices').click()">clique aqui</a>
+      </strong>
+    </div>
+  <% end %>
+<% end %>

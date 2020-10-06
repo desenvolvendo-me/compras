@@ -286,13 +286,19 @@ $(document).ready(function () {
     $(this).hide();
   });
 
-  $(function(){
-    $(".tabs").tabs({
-      active: sessionStorage.getItem("currentTabIndexLicitationProcess"),
-      activate: function(event, ui) {
-        var tabIndex = $(".tabs").tabs('option', 'active');
-        sessionStorage.setItem("currentTabIndexLicitationProcess", tabIndex);
-      }
-    });
+  $(".tabs").tabs({
+    active: sessionStorage.getItem("currentTabIndexLicitationProcess"),
+    activate: function(event, ui) {
+      var tabIndex = $(".tabs").tabs('option', 'active');
+      sessionStorage.setItem("currentTabIndexLicitationProcess", tabIndex);
+    }
+  });
+
+  $(document).tooltip({
+    items: "a[data-disabled], input[data-disabled], button[data-disabled]",
+    content: function() {
+      return $(this).data("disabled");
+    },
+    position: { my: "center top+15" }
   });
 });

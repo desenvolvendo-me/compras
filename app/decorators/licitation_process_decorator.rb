@@ -82,7 +82,7 @@ class LicitationProcessDecorator
     return unless new_record? || (items.reject(&:new_record?) && bidders.reject(&:new_record?))
 
     if licitation? && trading?
-      items && bidders && trading&.allow_negotiation?
+      items && bidders && Creditor.winners(self).any?
     else
       items && bidders && creditor_proposals.present?
     end
@@ -106,7 +106,7 @@ class LicitationProcessDecorator
     return false unless licitation?
 
     if trading?
-      return false if trading.blank? || !trading.allow_negotiation?
+      return false if trading.blank? || trading.creditors_winners.blank?
     else
       bidders.select(&:persisted?).each do |bidder|
         if proposals_of_creditor(bidder.creditor).empty?
@@ -188,11 +188,19 @@ class LicitationProcessDecorator
 
   def must_finish_all_tabs_to_homologation
     if licitation? && trading?
-      'É necessário preencher as abas Itens; Habilitação; Propostas; Lances'
+      t "licitation_process.messages.must_have_items_bidders_proposals_trading_realignment_price"
     elsif licitation?
-      'É necessário preencher as abas Itens; Habilitação; Propostas'
+      t "licitation_process.messages.must_have_items_bidders_proposals"
     else
-      'É necessário preencher as abas Itens/Justificativa; Habilitação; Propostas'
+      t "licitation_process.messages.must_have_items_justifications_bidders_proposals"
+    end
+  end
+
+  def must_have_realignment_price creditor_winner
+    return unless trading?
+
+    if creditor_winner.licitation_realignment_price(self).blank?
+      t 'licitation_process_ratification.messages.must_have_realignment_price'
     end
   end
 

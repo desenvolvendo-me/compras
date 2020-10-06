@@ -28,7 +28,8 @@
     </div>
   </div>
 
-  <div class="yui3-g">
+  <hr>
+  <div class="yui3-g" style="margin-top: 12px;">
     <div class="yui3-u-1">
       <%= tr.input :accreditation_creditor, as: :fake_select, collection: accreditation_creditors,
                   include_blank: false, input_html:{class:'select', 'data-trading-item': trading_item.id} %>
@@ -36,26 +37,28 @@
   </div>
 <% end %>
 
-<div style="font-size: 15px; margin-bottom: 15px;">
-  <b>*Para encerrar a fase de lances do Item/Lote é necessario que todos os outros fornecedores saim da disputa.</b>
-</div>
+<%if accreditation_creditors.any? %>
+  <div style="font-size: 15px; margin-bottom: 15px;">
+    <b>*Para encerrar a fase de lances do Item/Lote é necessario que todos os outros fornecedores saim da disputa.</b>
+  </div>
 
-<div class="trading-fields">
-  <%= f.simple_fields_for :trading do |trading| %>
-    <%= render 'purchase_process_trading_items/nested_fields', f: trading, trading_item: trading_item,
-               accreditation_creditor: accreditation_creditors.first,  accreditation_creditor_total: accreditation_creditors.count %>
-  <% end %>
-</div>
+  <div class="trading-fields">
+    <%= f.simple_fields_for :trading do |trading| %>
+      <%= render 'purchase_process_trading_items/nested_fields', f: trading, trading_item: trading_item,
+                 accreditation_creditor: accreditation_creditors.first,  accreditation_creditor_total: accreditation_creditors.count %>
+    <% end %>
+  </div>
+<% end %>
 
 <style>
-  .nested-fields{
+  .nested-bids{
     background-color: #908f8f0f;
     padding: 10px;
     box-shadow: 6px 7px 9px -7px black;
     margin-bottom: 10px;
   }
 
-  .nested-fields .input{
+  .nested-bids .input{
     margin-bottom: 0 !important;
   }
 </style>
