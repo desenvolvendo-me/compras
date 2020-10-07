@@ -9,7 +9,7 @@ class PurchaseSolicitation < Compras::Model
                   :user_id, :department_id, :attendant_status, :secretaries_attributes,
                   :model_request, :demand_id, :purchase_forms_attributes, :service_status,
                   :delivery_location_field, :budgetaries_attributes
-
+  
   attr_readonly :code
 
   auto_increment :code, :by => :accounting_year
