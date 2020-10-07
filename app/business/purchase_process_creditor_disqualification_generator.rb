@@ -11,7 +11,7 @@ class PurchaseProcessCreditorDisqualificationGenerator
   end
 
   def create_desqualification!
-    return if purchase_process.disqualify_proposal_below.zero? && purchase_process.disqualify_proposal_above.zero?
+    return if disqualify_proposal_below.zero? && disqualify_proposal_above.zero?
 
     creditors_with_proposals.each do |creditor|
       if disqualified_by_minimum(creditor) or disqualified_by_maximum(creditor)
@@ -73,10 +73,10 @@ class PurchaseProcessCreditorDisqualificationGenerator
 
     if disqualified_by_minimum(creditor)
       creditor_disqualification.reason = I18n.t('purchase_process_creditor_disqualification.messages.disqualificated_by_minimum_value',
-                                           disqualify_below: purchase_process.disqualify_proposal_below)
+                                           disqualify_below: disqualify_proposal_below)
     else
       creditor_disqualification.reason = I18n.t('purchase_process_creditor_disqualification.messages.disqualificated_by_maximum_value',
-                                          disqualify_above: purchase_process.disqualify_proposal_above)
+                                          disqualify_above: disqualify_proposal_above)
     end
 
     creditor_disqualification
