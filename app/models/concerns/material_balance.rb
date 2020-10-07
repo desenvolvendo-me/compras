@@ -19,7 +19,9 @@ module MaterialBalance
       response = {}
       klass = self.name
 
+      # retorna a quantidade autorizada pelo processo de compra ou solicitação de compra
       quantity_autorized = quantity_autorized(licitation_process, purchase_solicitation, material, contract)
+      # retorna a quantidade items consumida excluindo o 'object' atual
       quantity_delivered = quantity_delivered(klass, licitation_process, material, object, purchase_solicitation)
 
       if (quantity_autorized - (quantity_delivered + quantity.to_i)) < 0

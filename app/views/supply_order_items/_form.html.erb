@@ -6,7 +6,7 @@
   </td>
   <td>
     <div class="input fake required supply_order_balance">
-      <input class="string fake required supply_order_balance" type="text" value="<%= (qtd_licitaded - balance).to_i %>" readonly>
+      <input class="string fake required supply_order_balance" type="text" value="<%= (qtd_licitaded - balance - f.object.decorator.quantity).to_i %>" readonly>
     </div>
   </td>
   <td class="quantity">
@@ -17,7 +17,7 @@
     <%= f.input :_destroy, as: :hidden, input_html: { class: 'destroy' } %>
   </td>
   <td>
-    <% qtd_solicited = f.object.quantity || 0 %>
+    <% qtd_solicited = f.object.decorator.quantity %>
     <% qtd_supplied = qtd_solicited - f.object.supplied_invoices.sum(:quantity_supplied) %>
 
     <% if qtd_supplied == 0 && qtd_solicited != 0%>
