@@ -128,7 +128,7 @@ class LicitationProcess < Compras::Model
 
   validates :modality, :judgment_form_id, :presence => true, :if => :licitation?
 
-  validates :type_of_removal, :justification, :presence => true, :if => :simplified_processes?
+  validates :type_of_removal, :presence => true, :if => :simplified_processes?
   validates :process, uniqueness: {scope: :year}
   validates :budget_allocation_year, numericality: {greater_than_or_equal_to: :year}, allow_blank: true
   validates :tied_creditor_proposals, no_duplication: {
