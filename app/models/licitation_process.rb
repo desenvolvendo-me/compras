@@ -239,16 +239,18 @@ class LicitationProcess < Compras::Model
     joins {contracts.authorized_areas.department}.where { contracts.authorized_areas.department.id.in department_id.delete("[]").split(",") }.uniq
   }
 
-  scope :not_in_contracts, lambda{
+  scope :not_in_contracts, lambda{|licitation_process_id|
     # look for if all creditor already in contract
     licitation_ids = LicitationProcessRatification
                          .select(:licitation_process_id)
                          .joins(" left join compras_contracts as cc
                                     on compras_licitation_process_ratifications.licitation_process_id = cc.licitation_process_id
                                      and compras_licitation_process_ratifications.creditor_id = cc.creditor_id")
-                          .where("cc.creditor_id is null")
+                          .where("cc.creditor_id is null ")
 
-    where(id: licitation_ids.pluck(:licitation_process_id))
+    licitation_ids = licitation_ids.pluck(:licitation_process_id)
+    licitation_ids << licitation_process_id if licitation_process_id
+    where(id: licitation_ids)
   }
 
   scope :not_removal_by_limit, -> do
