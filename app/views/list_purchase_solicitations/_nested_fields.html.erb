@@ -60,7 +60,8 @@
 
 
         $("#licitation_process_purchase_solicitation_id").change(function(event, data){
-          $("#licitation_process_department").val(data.department);
+          if(data)
+            $("#licitation_process_department").val(data.department);
         });
     });
 
