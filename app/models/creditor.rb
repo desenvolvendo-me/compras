@@ -28,7 +28,6 @@ class Creditor < Persona::Creditor
   has_many :representatives, :class_name => 'CreditorRepresentative', :dependent => :destroy, :order => :id
 
   validates :contract_start_date, :social_identification_number, :presence => true, :if => :autonomous?
-  validates :main_cnae, :presence => true, :if => :company?
   validates :documents, :no_duplication => :document_type_id
   validate :person_in_representatives
   validate :secondary_cnae_in_main_cnae
