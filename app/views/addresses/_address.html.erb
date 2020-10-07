@@ -37,7 +37,9 @@
     var zip_code = this.value.replace('-', ''),
       url = 'https://viacep.com.br/ws/' + zip_code + '/json/',
       $city = $("[name$='[city]']"),
-      $state = $("[name$='[state]']");
+      $cityId = $("[name$='[city_id]']"),
+      $state = $("[name$='[state]']"),
+      $stateId = $("[name$='[state_id]']");
 
     if (zip_code.length < 8) {
       alert('O formato do cnpj esta incorreto');
@@ -69,7 +71,9 @@
 
             if (city.id) {
               $city.val(cityName);
+              $cityId.val(city.id);
               $state.val(response.uf);
+              $stateId.val(city.state_id);
               fetchNeighborhood(response, city);
             }
           }
@@ -201,13 +205,14 @@
 
   /** Preenche Endereço com base na escolha da rua **/
   $("#<%= a.sanitized_object_name %>_street_id").on('change', function (event, data) {
-    fillAdress(data);
+    if(data)
+      fillAdress(data);
   });
 
   function fillAdress(data){
     var city         = data.city,
-      state        = data.state,
-      neighborhoods = data.neighborhoods;
+        state        = data.state,
+        neighborhoods = data.neighborhoods;
 
     $("#<%= a.sanitized_object_name %>_zip_code").val(data.zip_code);
     if(city){
