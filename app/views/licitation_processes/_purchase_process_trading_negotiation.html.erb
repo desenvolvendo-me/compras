@@ -63,7 +63,8 @@
       $(".edit-negotiation").click(function() {
         var url = Routes.add_trading_negotiation_licitation_processes,
           params = {
-            id: <%= f.object.id %>, accreditation_creditor_id: $(this).data('creditor')
+            id: <%= f.object.id || '' %>,
+            accreditation_creditor_id: $(this).data('creditor')
           };
 
         url += "?" + $.param(params);
