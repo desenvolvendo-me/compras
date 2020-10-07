@@ -58,7 +58,7 @@ class Creditor < Persona::Creditor
 
   scope :term, lambda {|q|
     joins {person}.
-        where {person.name.like("#{q}%")}
+        where {person.name.like("%#{q}%")}
   }
 
   scope :by_id, lambda {|id|
