@@ -45,7 +45,7 @@
       <div class="col d-flex creditor_for_all_input">
         <%= f.input :creditor_for_all_items, as: :auto_complete, fake: true,
                     wrapper_class: 'w-75',
-                    source_path: qualified_creditor(f.object) %>
+                    source_path: creditors_path %>
 
         <%= button_tag 'OK', type: :button,
                        :id => 'btn_set_creditor_for_all_items',
