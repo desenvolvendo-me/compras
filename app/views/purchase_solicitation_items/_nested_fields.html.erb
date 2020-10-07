@@ -60,3 +60,14 @@
     color: white !important
   }
 </style>
+
+<script>
+  $(function(){
+    $('.unit_price,.estimated_total_price').each(function(){
+      $(this).text(numberFormartPt($(this).text()));    
+    }); 
+    $('.purchase_solicitation_items_unit_price').each(function(index,element){
+      $(this).children(0).val(numberFormartPt($(this).children(0).val()));    
+    });
+  });
+</script>
