@@ -22,10 +22,12 @@
   </div>
   <div class="yui3-u-1-3">
     <%= a.input :city, :disabled => true %>
+    <%= hidden_field_tag :city_id, a.object.neighborhood.try(:city).try(:id), name:'person[address_attributes][city_id]' %>
   </div>
 
   <div class="yui3-u-1-6">
     <%= a.input :state, :disabled => true %>
+    <%= hidden_field_tag :state_id, a.object.neighborhood.try(:city).try(:state_id),  name:'person[address_attributes][state_id]' %>
   </div>
 </div>
 
