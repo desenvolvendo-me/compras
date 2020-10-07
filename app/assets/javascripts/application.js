@@ -16,6 +16,7 @@
 //= require compras/index_json
 //= require compras/init_backbone
 //= require compras/custom_alert
+//= require compras/libs
 //= require reports/balance_per_creditor
 //= require reports/balance_per_process_and_contract
 //= require select2/select2.min
