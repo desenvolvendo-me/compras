@@ -35,6 +35,11 @@ class LicitationProcessRatificationItem < Compras::Model
     where { licitation_process_ratification.licitation_process_id.eq(licitation_process_id) }
   end
 
+  scope :purchase_process_item_material_id, ->(material_id) do
+    joins { purchase_process_item.material }
+         .where { purchase_process_item.material.id.eq(material_id) }
+  end
+
   scope :by_ratificated, -> { where { ratificated.eq(true) } }
 
   scope :type_of_purchase_licitation, -> { joins { licitation_process }.
@@ -77,6 +82,7 @@ class LicitationProcessRatificationItem < Compras::Model
     .joins(:licitation_process_ratification)
     .where(mat: {licitation_process_id: licitation_process_id})
   }
+
 
   orderize "id DESC"
   filterize
