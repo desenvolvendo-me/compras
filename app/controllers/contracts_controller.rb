@@ -38,6 +38,14 @@ class ContractsController < CrudController
 
   def conference
     @contract = Contract.find(params[:contract_id])
+
+    respond_to do |format|
+      format.html
+      format.xlsx do
+        path = ConferenceXlsxGenerator.new(@contract).generate!
+        send_file path, type: "application/xlsx", :filename => "contrato.xlsx"
+      end
+    end
   end
 
   protected
