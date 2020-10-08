@@ -46,9 +46,9 @@ class ConferenceXlsxGenerator
     ws.add_row ['Secretaria','Projeto Atividade (Código)','Natureza','Fonte','Valor']
 
     contract.financials.each do |financial|
-      ws.add_row [ financial.secretary, financial.project_activity_name, financial.nature_expense, financial.resource_source, financial.value]
+      ws.add_row [ financial.secretary, financial.project_activity_name, financial.nature_expense, financial.resource_source.to_s, financial.value]
     end
-    f_count = contract.financials.count + 3
+    f_count = contract.financials.count + 2
     ws.add_row ['TOTAL','','','',"=SUM(E3:E#{f_count})"]
     ws.rows.last.cells[0].b = true
     ws.rows.last.cells[4].b = true
