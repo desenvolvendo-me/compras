@@ -32,6 +32,13 @@ class PurchaseSolicitationItem < Compras::Model
     joins(:material).order("lot, unico_materials.description")
   }
 
+  def self.balance_by_purchasing_unit contract_id
+    joins { purchase_solicitation.department }
+   .joins { purchase_solicitation.list_purchase_solicitations.licitation_process.contracts }
+   .where { purchase_solicitation.list_purchase_solicitations.licitation_process.contracts.id.eq(contract_id) }
+   .select("compras_purchase_solicitation_items.id as id, compras_departments.description as department").group_by(&:department)
+  end
+
   def estimated_total_price
     (quantity || BigDecimal(0)) * (unit_price || BigDecimal(0))
   end
