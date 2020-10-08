@@ -5,7 +5,8 @@ class PurchaseProcessFractionation < Compras::Model
   belongs_to :material_class
   belongs_to :purchase_process, class_name: 'LicitationProcess'
 
-  validates :year, :material_class_id, :purchase_process, :value, :object_type,
+  # TODO material class foi removido por deu erro em produção ao atualziar a processo de compra, analisar e ver pq material_class não ta sendo nil
+  validates :year, :purchase_process, :value, :object_type,#, :material_class_id
     presence: true
   validates :type_of_removal, presence: true, unless: :modality
   validates :modality, presence: true, unless: :type_of_removal
