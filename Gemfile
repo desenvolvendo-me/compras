@@ -27,6 +27,7 @@ gem 'devise', '2.2.4'
 gem 'kaminari', '0.14.1'
 gem 'simple_form', '2.1.0'
 gem 'wkhtmltopdf-binary', '0.9.9.1'
+gem "acts_as_xlsx"
 
 gem 'awesome_nested_set', '2.1.6'
 gem 'carrierwave', '0.9.0'
