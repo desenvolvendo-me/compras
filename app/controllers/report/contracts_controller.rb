@@ -6,9 +6,13 @@ class Report::ContractsController < Report::BaseController
     @report = report_instance
 
     if params[:between_days_finish] || params[:all]
-      @contract = params[:all] ? (Contract.all):(apply_scopes(Contract))
+      @contracts = params[:all] ? (Contract.all):(apply_scopes(Contract))
       respond_to do |format|
-        format.html { render :show,layout: 'report' }
+        format.html { render :show, layout: 'report' }
+        format.xlsx do
+          path = ContractsExporter.new(@contracts).generate!
+          send_file path, type: "application/xlsx", :filename => "contrato.xlsx"
+        end
       end
     else
       redirect_to controller: controller_name, action: :new

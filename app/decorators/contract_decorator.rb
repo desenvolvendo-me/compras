@@ -34,4 +34,16 @@ class ContractDecorator
     end
   end
 
+  def publication_date
+    I18n.l super if super
+  end
+
+  def start_date
+    I18n.l super if super
+  end
+
+  def end_date
+    I18n.l super if super
+  end
+
 end
