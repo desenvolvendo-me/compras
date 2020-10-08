@@ -3,6 +3,7 @@
     <%= f.button :destroy, style: 'margin-top: 1%;', class:'btn-small' %>
   <% end %>
   <%= link_to 'Imprimir Contrato', contract_conference_path(:contract_id => resource.id),  :class => 'button primary btn-small', style: 'margin-top: 1%;' if f.object.persisted? %>
+  <%= link_to 'Gerar Planilha', contract_conference_path(:contract_id => resource.id, format: :xlsx),  :class => 'button primary btn-small', style: 'margin-top: 1%;' if f.object.persisted? %>
 
   <%= f.button :submit, class:'btn-small' if can?(:modify, main_controller_name) %>
   <%= f.button :back, class:'btn-small' %>
