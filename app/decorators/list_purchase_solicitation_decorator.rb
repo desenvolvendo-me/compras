@@ -11,4 +11,8 @@ class ListPurchaseSolicitationDecorator
     purchase_solicitation.try(:department)
   end
 
+  def purchase_solicitation_decorator
+    "<a href='/purchase_solicitations/#{purchase_solicitation.id}/edit'>#{purchase_solicitation}</a>".html_safe
+  end
+
 end
