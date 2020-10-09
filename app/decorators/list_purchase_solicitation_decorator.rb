@@ -12,7 +12,8 @@ class ListPurchaseSolicitationDecorator
   end
 
   def purchase_solicitation_decorator
-    "<a href='/purchase_solicitations/#{purchase_solicitation.id}/edit'>#{purchase_solicitation}</a>".html_safe
+    edit_purchase_solicitation_path = "#{Rails.application.routes.url_helpers.edit_purchase_solicitation_path(purchase_solicitation)}"
+    "<a href=#{edit_purchase_solicitation_path}>#{purchase_solicitation}</a>".html_safe
   end
 
 end
