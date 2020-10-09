@@ -9,7 +9,8 @@
     <%= f.input :amount, label: false %>
   </td>
   <td>
-    <%= f.input :status, label: false %>
+    <%= f.input :status, include_blank: false, label: false %>
+
   </td>
   <td style="margin-top: 27px">
     <%= link_to_remove_association f, class: 'button danger',
