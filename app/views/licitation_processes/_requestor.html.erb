@@ -1,2 +1,24 @@
 <%= f.input :purchase_solicitations, as: :nested_grid,
             columns: [:purchase_solicitation_decorator, :department] %>
+            
+<script>
+    $(function(){
+        console.log('edit_purchase_solicitation_path');
+        $( ".edit_purchase_solicitation_path" ).each(function( index ) {
+            /*  #TODO
+                os hrefs são inseridos pelo decorator, mas por algum motivo em 
+                produção não ta adicionando p path /compras na url, por questão
+                de tempo e pressão fui pra solução mais rápida
+                
+                verificar se tem o compras no path
+            */
+            var url = '<%= purchase_solicitation_path() %>';
+            if(url.split('/').length == 4){
+              href = $(this).attr('href');
+              url = url.split('/')
+              url.pop();
+              $(this).attr('href','/'+url[1]+'/'+url[2]+'/'+ href.split('/')[2] +'/edit');
+            }           
+        });
+    });
+</script>
