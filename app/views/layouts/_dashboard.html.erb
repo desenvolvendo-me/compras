@@ -74,13 +74,15 @@
       <div class="card-body">
         <h5 class="card-title">Suspender Pregão</h5>
         <br/>
-        <p class="card-text">Suspender pregão.</p>
+        <span style="color: red">
+          <%= resource.decorator.auction_suspension_message %>
+        </span>
       </div>
-      <a href="#" class="card-link">
+      <%= link_to_suspension  do%>
         <div class="card-footer text-muted">
           Clique Aqui
         </div>
-      </a>
+      <% end %>
     </div>
   </div>
 </div>
