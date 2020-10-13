@@ -1,0 +1,32 @@
+<%= f.input :auction_id, as: :hidden %>
+
+<div class="row">
+  <div class="col-12">
+    <%= f.input :suspension_reason %>
+  </div>
+  <div class="col-6">
+    <%= f.input :suspension_date %>
+  </div>
+  <div class="col-6">
+    <%= f.input :responsible_suspension,as: :string, disabled: true%>
+    <%= f.input :responsible_suspension_id,as: :hidden %>
+  </div>
+</div>
+
+<%if resource.persisted? %>
+  <div class="yui3-g">
+    <h3 class="divider">Reativação do Pregão</h3>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <%= f.input :reactivation_reason %>
+    </div>
+    <div class="col-6">
+      <%= f.input :reactivation_date %>
+    </div>
+    <div class="col-6">
+      <%= f.input :responsible_reactivation,as: :string, disabled: true %>
+      <%= f.input :responsible_reactivation_id,as: :hidden %>
+    </div>
+  </div>
+<% end %>
