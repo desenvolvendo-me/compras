@@ -77,8 +77,7 @@ class LicitationProcess < Compras::Model
   has_many :classifications, :through => :bidders, :class_name => 'LicitationProcessClassification',
            :source => :licitation_process_classifications
   has_many :purchase_process_budget_allocations, :dependent => :destroy, :order => :id
-  has_many :items, :class_name => 'PurchaseProcessItem', :dependent => :restrict,
-           :order => :id, :inverse_of => :licitation_process
+  has_many :items, :class_name => 'PurchaseProcessItem',:dependent => :restrict,:inverse_of => :licitation_process
   has_many :materials, :through => :items
   has_many :legal_analysis_appraisals, :dependent => :restrict
   has_many :license_creditors, :through => :bidders, :dependent => :restrict, :source => :creditor, order: :id

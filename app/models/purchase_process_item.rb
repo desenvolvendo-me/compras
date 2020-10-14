@@ -34,6 +34,8 @@ class PurchaseProcessItem < Compras::Model
   orderize "id DESC"
   filterize
 
+  scope :orderize_by_material_description, joins { material }.order { material.description }
+
   scope :licitation_process_id, lambda { |licitation_process_id|
     where { |item| item.licitation_process_id.eq(licitation_process_id) }
   }
