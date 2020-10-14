@@ -3,9 +3,9 @@
     <strong> <%= t "purchase_process_trading_item.messages.creditor_declined" %> </strong>
   </div>
 <% end %>
-
+<div id="bids">
 <%= f.simple_fields_for :items, trading_item, :child_index => rand(1...1000) do |item| %> <%#PRESTAR TENÇÃO AQUI QUANDO FOR POR ITENS %>
-  <div id="bids">
+
 
 
     <table id="items-records" class="records">
@@ -19,7 +19,7 @@
       </tr>
       </thead>
 
-      <tbody class="bids-forms">
+      <tbody class="bids-forms-<%= item.object_id %>">
         <%= item.simple_fields_for :bids, item.object.bids.by_accreditation_creditor(accreditation_creditor&.id).reorder(:id) do |bid| %>
           <%= render 'purchase_process_trading_item_bids/form', f: bid, accreditation_creditor: accreditation_creditor%>
         <% end %>
@@ -32,7 +32,7 @@
                                   render_options: {locals: {accreditation_creditor: accreditation_creditor}},
                                   'data-disabled': make_bid_disabled_message(trading_item.bids),
                                   'data-association-insertion-method': 'append',
-                                  'data-association-insertion-node': '.bids-forms',
+                                  'data-association-insertion-node': ".bids-forms-#{item.object_id}",
                                   class: 'button primary' do %>Adicionar<% end %>
 
 
@@ -46,5 +46,6 @@
                          'data-disabled' => make_bid_disabled_message(trading_item.bids) %>
       <% end %>
     </div>
-  </div>
+
 <% end %>
+</div>

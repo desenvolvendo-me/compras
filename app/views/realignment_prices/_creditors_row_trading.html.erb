@@ -2,7 +2,12 @@
   <tr>
     <td><%= creditor.to_s %></td>
     <td><%= creditor.person_email %></td>
-    <td><%= item.lot %></td>
+
+    <%if licitation_process.judgment_form_lot? %>
+      <td><%= item.lot %></td>
+    <%else %>
+      <td><%= item.item %></td>
+    <%end %>
 
     <td>
       <%= link_to realignment_link_title(licitation_process.id, creditor.id, item.lot),
