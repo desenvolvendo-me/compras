@@ -1,60 +1,34 @@
 <%#= f.input :purchase_solicitations, as: :nested_grid,columns: [:purchase_solicitation_decorator, :department] %>
 
 <div id="purchase_solicitations">
-  <span class="text-center"><h2 id="title-purchase_solicitations">Tomada de Preço / Valor Itens</h2></span>
+
   <div class="nested-fields add-margin-bottom">
-    <div class="hidden-fields">
-      <%= hidden_field_tag :purchase_solicitation_id, nil, :name => 'licitation_process_purchase_solicitation[id]' %>
-      <div class="row">
-        <div class="col justification">
-          <%#= f.input :justification, as: :string %>
-        </div>
-        <div class="col">
-          <%#= f.input :creditor, as: :auto_complete, source_path: qualified_creditor(f.object),fake: true, hint: f.object.licitation? ? '' : 'Somente fornecedores habilitados'  %>
-        </div>
-      </div>
-
-      <div class="yui3-g">
-        <div class="yui3-u-3-8">
-          <%= f.input :purchase_solicitation, :fake => true, :required => true, 'data-hidden-field-class' => 'unique' %>
-        </div>
-
-        <div class="yui3-u-1-8">
-          <%= f.input :department, :as => :fake, :required => true %>
-        </div>    
+    <div class="row purchase-solicitation-fileds" style="display: none;">
+      <div class="col">
+        <%= f.input :demand, :as => :auto_complete, :fake => true%>
+      </div>  
+      <div class="col">
+          <%= hidden_field_tag :purchase_solicitation_id, nil, :name => 'purchase_solicitation[id]' %>
+          <%= f.input :purchase_solicitation, :as => :auto_complete, :fake => true, :required => true %>
+          <%= f.input :department, as: :fake, input_html:{style:'display: none', name:'licitation_process[department]'}, label: false %>
       </div>
     </div>
-    <div class="row  purchase_solicitations-actions">
-      <div class="col d-flex creditor_for_all_input">
-        <%= f.input :creditor_for_all_purchase_solicitations, as: :auto_complete, fake: true,
-                    wrapper_class: 'w-75',
-                    source_path: creditors_path %>
 
-        <%= button_tag 'OK', type: :button,
-                       :id => 'btn_set_creditor_for_all_purchase_solicitations',
-                       :class => 'button field-without-label' %>
-        <%= button_tag 'X', type: :button,
-                       :id => 'btn_cancel_creditor_for_all',
-                       :class => 'button negative field-without-label' %>
+    <div class="yui3-u-1-6">
+      <div class="hidden" >
+        <%= button_tag 'Adicionar', type: :button,
+          :class => 'button add-nested-record field-without-label btn-add',
+          'data-template' => 'purchase_solicitations_template',
+          'data-records' => 'purchase_solicitations-records',
+          'data-disabled' => not_updateable_message,
+            id: "button_add_purchase_solicitations" %>             
       </div>
-
-      <div class="col d-flex justify-content-end">
-        <% if f.object.simplified_processes? %>
-          <%= button_tag 'Atribuir Fornecedor para Todos  os Itens', type: :button,
-                         :class => 'button field-without-label btn_creditor_for_all_purchase_solicitations' %>
-        <% end %>
-
-        <%= button_tag 'Adicionar Itens', type: :button,
-                       :id => 'btn_new_role_unique',
-                       :class => 'add-nested-record  button field-without-label',
-                       'data-template' => 'licitation_process_purchase_solicitations_template',
-                       'data-records' => 'purchase_solicitations-records',
-                       'data-clear-after-add' => false,
-                       'data-disabled' => not_updateable_message %>
-
-        <%= button_tag 'Adicionar Itens', type: :button, class:'button primary field-without-label show-fields' %>
+      <div>
+        <%= button_tag 'Adicionar', type: :button,
+          :class => 'button button primary  btn-add',id: "button_show_purchase_solicitations" %> 
       </div>
     </div>
+             
   </div>
 
   <%= f.error :purchase_solicitations %>
@@ -62,34 +36,26 @@
   <table id="purchase_solicitations-records" class="records">
     <thead>
     <tr>
-      <th width="8%"> lot1 </th>
-      <th> material </th>
-      <th class="purchase_solicitation-creditor hidden" width="25%"> creditor </th>
-      <th> reference_unit </th>
-      <th width="11%"> quantity </th>
-      <th>Valor unitário</th>
-      <th> estimated_total_price </th>
+      <th><%= "Representante" %></th>
+      <th><%= "department" %></th>
+      <th></th>
       <th></th>
     </tr>
     </thead>
-
     <tbody>
     <%= f.association :purchase_solicitations, :collection => localized(f.object.purchase_solicitations) do |p| %>
       <%= render 'list_purchase_solicitations/licitation_process_list_form',
                  id: p.object.id,
                  purchase_solicitation: p.object.purchase_solicitation,
                  purchase_solicitation_id: p.object.purchase_solicitation_id,
-                 department: p.object.department,
-                 department_id: p.object.department_id,                 
-                 data_disabled: nil,
+                 department: p.object.purchase_solicitation.department,
+                 department_id: p.object.purchase_solicitation.department_id,
                  f: p %>
     <% end %>
     </tbody>
   </table>
 
-  <%#= render 'total_purchase_solicitations', f: f %>
-
-  <%= mustache "licitation_process_purchase_solicitations_template" do %>
+  <%= mustache "purchase_solicitations_template" do %>
     <%= f.association :purchase_solicitations_attributes, :collection => f.object.purchase_solicitations.build, :index => '{{uuid}}' do |p| %>
       <%= render 'list_purchase_solicitations/licitation_process_list_form',
                  id: '{{id}}',
@@ -97,29 +63,48 @@
                  purchase_solicitation_id: '{{purchase_solicitation_id}}',
                  department: '{{department}}',
                  department_id: '{{department_id}}',
-                 data_disabled: nil,
                  f: p %>
     <% end %>
   <% end %>
 </div>
 
 <style>
-  .purchase_solicitations-actions .input{
-    margin-bottom: 0;
-  }
-  .creditor_for_all_input{
-    display: none;
-  }
-
-  .purchase_solicitations-actions input,button{
-    margin-left:5px;
-  }
-  .purchase_solicitations-actions input,button:first-child{
-    margin-left:0;
-  }
-  #title-purchase_solicitations{
-   min-height: unset !important;
-   margin-top: unset !important;
-   margin-bottom: 0;
+  .btn-add{
+    display: unset !important;
   }
 </style>
+
+<script>
+  $(function () {    
+    $('#button_show_purchase_solicitations').on('click', function(){
+      $('.purchase-solicitation-fileds').show();
+      var klass = $('#button_show_purchase_solicitations').attr('class');
+      $('#button_show_purchase_solicitations').attr('class',klass + ' hidden');
+      $('#button_add_purchase_solicitations').parent().removeClass("hidden");      
+    });
+
+    $("#licitation_process_purchase_solicitation").on("change", function () {
+      purchase_solicitation_id = $("#licitation_process_purchase_solicitation_id").val();
+      
+      var street_path = Routes.streets + "?",
+        params      = {by_city: city.id, by_neighborhood: neighborhood.id},
+        logradouro  = response.logradouro.split(' ').slice(1).join(' ');
+
+      $("[name$='[street]']").data('source', street_path);
+
+      params['term'] = logradouro;
+      street_path += $.param(params);
+
+      $.ajax({
+        url: street_path,
+        async: false,
+        type: 'GET',
+        dataType: 'JSON',
+        success: function (data) {
+          fillOrCreateStreet(data[0], response, neighborhood, city);
+        }
+      });
+    });
+    
+  });
+</script>
