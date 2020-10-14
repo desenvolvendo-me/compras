@@ -48,12 +48,9 @@
   $(function(){
   var enableNavigation = <%= f.object.persisted? %>;
 
-  var btnFinish = $('<button></button>').text('Salvar')
+  var btnFinish = $("<input type='submit'>").text('Salvar')
     .addClass('btn btn-info btn-finish')
     .attr('id', 'auction_submit')
-    .on('click', function(){
-      $("form.auction").submit();
-    });
 
 
   $('#smartwizard').smartWizard({
