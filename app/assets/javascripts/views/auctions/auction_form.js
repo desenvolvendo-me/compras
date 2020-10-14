@@ -31,8 +31,12 @@
       var errors = $.parseJSON(data.responseText).errors;
 
       this.clearErrors();
-
       this.addErrors(errors);
+    },
+
+    addErrors: function (errors) {
+      addErrorsToFields(errors, this.$el);
+      this.addGenericErrors(errors);
     },
   });
 })();
