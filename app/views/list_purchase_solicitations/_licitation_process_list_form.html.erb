@@ -1,42 +1,22 @@
-<tr class="record nested-record purchase_solicitation-record" id="material-id-<%= purchase_solicitation_id %>">
-  <td class="purchase_solicitation-lot">
-    <%= f.input :purchase_solicitation, input_html:{value: purchase_solicitation, class: 'purchase_solicitation' }, label: false%>
-    <%#= f.input :lot, input_html:{value: lot, class: 'lot' }, label: false%>
+<tr class="record nested-record purchase_solicitation-record" id="purchase_solicitation-id-<%= purchase_solicitation_id %>">
+  <td>
+  <%= link_to "#{purchase_solicitation}", edit_purchase_solicitation_path(purchase_solicitation) %>
   </td>
-
-  <td class="purchase_solicitation-material"><%#= material %></td>
-
-  <td class="purchase_solicitation-creditor">
-    <%= f.input :department, input_html:{value: department, class: 'department' }, label: false%>
-
-    <%#= f.input :creditor, as: :auto_complete, input_html:{value: creditor}, label: false,
-                source_path: qualified_creditor(f.object.try(:licitation_process)) %>
+  <td>
+  <%= department %>
   </td>
-
-  <td class="purchase_solicitation-reference-unit text-center"><%#= reference_unit %></td>
-
-  <td class="purchase_solicitation-quantity">
-    <%#= f.input :quantity, input_html:{value: quantity, class: 'purchase_solicitation-quantity' }, label: false%>
+  <td>
+    <%= link_to 'Editar', '#', class: 'edit-nested-record' %>
   </td>
-
-  <td class='purchase_solicitation-unit-price'>
-    <%#= f.input :unit_price, input_html:{value: unit_price, class: 'purchase_solicitation-unit-price' }, label: false %>
-  </td>
-
-  <td class="purchase_solicitation-total-value"><%#= estimated_total_price %></td>
 
   <td>
-    <%= f.input :purchase_solicitation_id, as: :hidden, input_html: { value: purchase_solicitation_id, class: 'purchase-solicitation-id' } %>
+    <%= f.input :purchase_solicitation_id, as: :hidden, input_html: { value: purchase_solicitation_id, class: 'purchase_solicitation-id' } %>
     <%= f.input :purchase_solicitation, as: :hidden, input_html: { value: purchase_solicitation } %>
     <%= f.input :department_id, as: :hidden, input_html: { value: department_id, class: 'department-id' } %>
     <%= f.input :department, as: :hidden, input_html: { value: department } %>
-    <%#= f.input :additional_information, as: :hidden, input_html: { value: additional_information } %>
-    <%#= f.input :estimated_total_price, as: :hidden, input_html: { value: estimated_total_price, class: 'purchase_solicitation-total-value' } %>
     <%= f.input :id, as: :hidden, input_html: { value: id } %>
     <%= f.input :_destroy, as: :hidden, input_html: { class: 'destroy' } %>
 
-    <%#= f.input :reference_unit, as: :hidden, input_html: { value: reference_unit } %>
-
-    <%= link_to 'Remover', '#', class: 'remove-nested-record', 'data-disabled' => data_disabled %>
+    <%= link_to 'Remover', '#', class: 'remove-nested-record' %>
   </td>
 </tr>
