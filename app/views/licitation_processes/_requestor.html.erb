@@ -83,28 +83,6 @@
       $('#button_add_purchase_solicitations').parent().removeClass("hidden");      
     });
 
-    $("#licitation_process_purchase_solicitation").on("change", function () {
-      purchase_solicitation_id = $("#licitation_process_purchase_solicitation_id").val();
-      
-      var street_path = Routes.streets + "?",
-        params      = {by_city: city.id, by_neighborhood: neighborhood.id},
-        logradouro  = response.logradouro.split(' ').slice(1).join(' ');
-
-      $("[name$='[street]']").data('source', street_path);
-
-      params['term'] = logradouro;
-      street_path += $.param(params);
-
-      $.ajax({
-        url: street_path,
-        async: false,
-        type: 'GET',
-        dataType: 'JSON',
-        success: function (data) {
-          fillOrCreateStreet(data[0], response, neighborhood, city);
-        }
-      });
-    });
     
   });
 </script>
