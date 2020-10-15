@@ -48,8 +48,8 @@
                  id: p.object.id,
                  purchase_solicitation: p.object.purchase_solicitation,
                  purchase_solicitation_id: p.object.purchase_solicitation_id,
-                 department: p.object.purchase_solicitation.department,
-                 department_id: p.object.purchase_solicitation.department_id,
+                 department: p.object.try(:purchase_solicitation).try(:department),
+                 department_id: p.object.try(:purchase_solicitation).try(:department_id),
                  f: p %>
     <% end %>
     </tbody>
