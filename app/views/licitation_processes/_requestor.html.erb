@@ -36,8 +36,8 @@
   <table id="purchase_solicitations-records" class="records">
     <thead>
     <tr>
-      <th><%= "Representante" %></th>
-      <th><%= "department" %></th>
+      <th> <%= I18n.t('activerecord.models.purchase_solicitation.one') %> </th>
+      <th> <%= I18n.t('activerecord.models.department.one') %> </th>
       <th></th>
       <th></th>
     </tr>
@@ -83,6 +83,23 @@
       $('#button_add_purchase_solicitations').parent().removeClass("hidden");      
     });
 
-    
+    $("#licitation_process_purchase_solicitation").on("change", function () {
+      purchase_solicitation_id = $("#licitation_process_purchase_solicitation_id").val();
+     
+      if (purchase_solicitation_id) {
+        $.ajax({
+          url: Routes.purchase_solicitations,
+          data: {by_id: purchase_solicitation_id},
+          async: false,
+          type: 'GET',
+          dataType:'JSON',
+          success: function (data) {
+            if(data.length){
+              $("#licitation_process_department").val(data[0]['department']);
+            }
+          }
+        });
+      }  
+    });
   });
 </script>
