@@ -4,4 +4,9 @@ class AuctionDisputItemBid < Compras::Model
   belongs_to :auction_disput_item
   belongs_to :creditor
 
+  delegate :status_humanize, to: :auction_disput_item, allow_nil: true
+
+  scope :bids_ordered_by_item, lambda{|item_id|
+    where(auction_disput_item_id: item_id).order(:amount)
+  }
 end
