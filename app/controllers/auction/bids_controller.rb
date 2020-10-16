@@ -5,7 +5,7 @@ class Auction::BidsController < Auction::BaseController
 
   def new
     if @auction.bids.empty?
-      @auction.items.by_group_lot.each do |item|
+      @auction.items.by_lot.each do |item|
         AuctionBid.create(lot: item.group_lot, auction_id: @auction.id)
       end
     end
