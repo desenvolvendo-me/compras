@@ -6,7 +6,7 @@ class AuctionCreditorProposalItem < Compras::Model
 
   has_one :creditor, through: :auction_creditor_proposal
 
-  scope :lowest_proposal_by_item, lambda{|item_id|
+  scope :proposals_ordered_by_item, lambda{|item_id|
     where(auction_item_id: item_id).order(:global_price).limit(1)
   }
 end
