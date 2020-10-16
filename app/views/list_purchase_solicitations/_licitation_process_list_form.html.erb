@@ -1,12 +1,12 @@
 <tr class="record nested-record purchase_solicitation-record" id="purchase_solicitation-id-<%= purchase_solicitation_id %>">
   <td>
-  <%= link_to "#{purchase_solicitation} - Visualizar", edit_purchase_solicitation_path(purchase_solicitation) if purchase_solicitation %>
+    <%= purchase_solicitation %>
   </td>
   <td>
-  <%= department %>
+    <%= department %>
   </td>
   <td>
-    <%= link_to 'Editar', '#', class: 'edit-nested-record' %>
+    <%= link_to "Visualizar", edit_purchase_solicitation_path(purchase_solicitation) if purchase_solicitation %>
   </td>
 
   <td>
