@@ -1,0 +1,22 @@
+<tr class="record nested-record purchase_solicitation-record" id="purchase_solicitation-id-<%= purchase_solicitation_id %>">
+  <td>
+    <%= purchase_solicitation %>
+  </td>
+  <td>
+    <%= department %>
+  </td>
+  <td>
+    <%= link_to "Visualizar", edit_purchase_solicitation_path(purchase_solicitation) if purchase_solicitation %>
+  </td>
+
+  <td>
+    <%= f.input :purchase_solicitation_id, as: :hidden, input_html: { value: purchase_solicitation_id, class: 'purchase_solicitation-id' } %>
+    <%= f.input :purchase_solicitation, as: :hidden, input_html: { value: purchase_solicitation } %>
+    <%= f.input :department_id, as: :hidden, input_html: { value: department_id, class: 'department-id' } %>
+    <%= f.input :department, as: :hidden, input_html: { value: department } %>
+    <%= f.input :id, as: :hidden, input_html: { value: id } %>
+    <%= f.input :_destroy, as: :hidden, input_html: { class: 'destroy' } %>
+
+    <%= link_to 'Remover', '#', class: 'remove-nested-record' %>
+  </td>
+</tr>
