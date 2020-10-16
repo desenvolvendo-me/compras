@@ -6,4 +6,8 @@ class AuctionDisputItem < Compras::Model
 
   has_enumeration_for :status, with: AuctionDisputItemStatus,
                       create_helpers: true, create_scopes: true
+
+  def lowest_item_proposal_amount
+    auction.auction_creditor_proposal_items.lowest_proposal_by_item(id).first
+  end
 end
