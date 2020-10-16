@@ -8,9 +8,11 @@
   <h5>
     <b>PREGOIERO: </b><%= "#{@auction.try(:user).try(:authenticable).try(:name)}" %>
   </h5>
-  <h5>
+  <h5 style="display: grid;">
     <b><%= "Data da Licitação: #{(@auction.notice_availability.strftime('%d/%m/%Y - %H h') rescue 'não informado')}" %></b>
     <b><%= "Data Atual: #{Time.now.strftime('%d/%m/%Y - %H h')}" %></b>
+    <b><%= "Valor Minimo para os Lances: #{number_to_currency @auction.variation_type}" unless @auction.variation_type.blank? %></b>
+    <b><%= "Percentual Minimo para os Lances: %#{number_with_delimiter @auction.minimum_interval}" unless @auction.minimum_interval.blank? %></b>
   </h5>
 </div>
 
