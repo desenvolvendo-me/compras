@@ -54,13 +54,10 @@
                     :input_html => {'data-decimal' => true, :value => '0,00', 'data-precision' => 2, :maxlength => 15, :class => 'numeric'}%>
       </div>
       <div class="col-5" >
-        <div class="input fake benefit_type">
-          <label class="fake" for="benefit_type">Tipo de Benefício</label>
-          <%= select_tag :benefit_type, options_for_select(BenefitType.to_a),
-                         include_blank: true, as: :fake, :required => true,
-                         class: 'required society_kind select',
-                         name: "auction[benefit_type]" %>
-        </div>
+
+          <%= f.input :benefit_type, as: :fake_select, collection: BenefitType.to_a, required: true,
+                       include_blank: true, input_html:{class:'select society_kind',  name: "auction[benefit_type]"} %>
+
       </div>
       <div class="col-2 text-center pt-2">
         <%= button_tag 'Adicionar', type: :button,

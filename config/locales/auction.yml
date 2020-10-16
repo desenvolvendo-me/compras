@@ -50,3 +50,4 @@ pt-BR:
         position: "Cargo"
         registration: "Matrícula"
         bid_opening_time: "Hora da Abertura da Licitação"
+        benefit_type: 'Tipo do Benefício'
