@@ -3,7 +3,7 @@ pt-BR:
     models:
       auction_appeal:
         one: "Intenção de Recurso"
-        other: "Intenção de Recursos"
+        other: "Intenções de Recursos"
 
     attributes:
       auction_appeal:
