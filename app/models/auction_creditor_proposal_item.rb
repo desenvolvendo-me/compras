@@ -3,4 +3,10 @@ class AuctionCreditorProposalItem < Compras::Model
 
   belongs_to :auction_creditor_proposal
   belongs_to :auction_item
+
+  has_one :creditor, through: :auction_creditor_proposal
+
+  scope :lowest_proposal_by_item, lambda{|item_id|
+    where(auction_item_id: item_id).order(:global_price).limit(1)
+  }
 end
