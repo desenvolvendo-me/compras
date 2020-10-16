@@ -1,0 +1,23 @@
+<table id="items" class="records">
+  <thead>
+  <th>Item</th>
+  <th>Melhor Proposta</th>
+  <th>Fornecedor Proposta</th>
+  <th>Melhor Lance</th>
+  <th>Fornecedor Lance</th>
+  <th>Status</th>
+  </thead>
+
+  <tbody>
+  <% @auction.disput_items.each do |item| %>
+    <tr id="item-<%= item.id %>">
+      <td class="text-center"><%= item.material %></td>
+      <td><%= item.decorator.lowest_proposal_amount %></td>
+      <td><%= item.decorator.lowest_proposal_creditor %></td>
+      <td class="bid_amount"><%= item.decorator.lowest_bid_amount %></td>
+      <td class="bid_creditor"><%= item.decorator.lowest_bid_creditor %></td>
+      <td class="status"><%= item.status_humanize %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
