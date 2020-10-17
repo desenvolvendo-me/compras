@@ -10,6 +10,8 @@ class AuctionItem < Compras::Model
 
   has_enumeration_for :benefit_type, :with => BenefitType
 
+  after_create :create_disput_item
+
   orderize :id
   filterize
 
@@ -17,8 +19,17 @@ class AuctionItem < Compras::Model
     select('COUNT(*) as quantity, lot').group(:lot)
   }
 
-
   def to_s
     material
+  end
+
+  private
+
+  def create_disput_item
+    disput_item = AuctionDisputItem.new
+    disput_item.auction_item = self
+    disput_item.auction      = self.auction
+    disput_item.status       = AuctionDisputItemStatus::CLOSED
+    disput_item.save
   end
 end
