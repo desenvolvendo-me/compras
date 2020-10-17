@@ -16,4 +16,9 @@ class AuctionItem < Compras::Model
   scope :by_lot, lambda{
     select('COUNT(*) as quantity, lot').group(:lot)
   }
+
+
+  def to_s
+    material
+  end
 end
