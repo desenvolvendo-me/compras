@@ -12,7 +12,7 @@
   <tbody>
   <% @auction.disput_items.each do |item| %>
     <tr id="item-<%= item.id %>">
-      <td class="text-center"><%= item.material %></td>
+      <td><%= item.material %></td>
       <td><%= item.decorator.lowest_proposal_amount %></td>
       <td><%= item.decorator.lowest_proposal_creditor %></td>
       <td class="bid_amount"><%= item.decorator.lowest_bid_amount %></td>
