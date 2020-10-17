@@ -35,7 +35,7 @@ class Auction::AuctionCreditorProposalsController < Auction::BaseController
   protected
 
   def create_resource(object)
-    object.user_id = current_user.id
+    object.creditor = current_user.authenticable
 
     super
   end
