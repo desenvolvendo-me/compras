@@ -7,6 +7,13 @@ class AuctionCreditorProposalItem < Compras::Model
   has_one :creditor, through: :auction_creditor_proposal
 
   scope :proposals_ordered_by_item, lambda{|item_id|
-    where(auction_item_id: item_id).order(:global_price).limit(1)
+    where(auction_item_id: item_id).order(:global_price)
   }
+
+
+  def proposal_status
+    lowest_proposal_item = AuctionCreditorProposalItem.proposals_ordered_by_item(auction_item).first
+
+    lowest_proposal_item.equal?(self) ? 'Vencendo' : 'Com Proposta' #TODO  refatorar depois
+  end
 end
