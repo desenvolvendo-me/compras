@@ -19,6 +19,11 @@ class AuctionCreditorProposal < Compras::Model
   before_save :set_proposal_send_date
   before_save :set_qualification_send_date
 
+
+  def proposals_total_price
+    auction_creditor_proposal_items.sum(&:global_price)
+  end
+
   private
 
   def set_proposal_send_date
