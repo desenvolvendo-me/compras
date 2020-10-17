@@ -7,6 +7,7 @@ class AuctionItem < Compras::Model
 
   has_one :reference_unit, through: :material
   has_one :material_class, through: :material
+  has_many :disput_items, class_name: 'AuctionDisputItem', :dependent => :destroy
 
   has_enumeration_for :benefit_type, :with => BenefitType
 
