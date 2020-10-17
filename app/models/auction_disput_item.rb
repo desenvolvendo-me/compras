@@ -8,7 +8,7 @@ class AuctionDisputItem < Compras::Model
 
   has_many :bids, class_name: 'AuctionDisputItemBid', dependent: :restrict
 
-  has_enumeration_for :status, with: AuctionDisputItemStatus,
+  has_enumeration_for :status, with: AuctionDisputeItemStatus,
                       create_helpers: true, create_scopes: true
 
   def lowest_item_proposal

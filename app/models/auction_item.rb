@@ -30,7 +30,7 @@ class AuctionItem < Compras::Model
     disput_item = AuctionDisputItem.new
     disput_item.auction_item = self
     disput_item.auction      = self.auction
-    disput_item.status       = AuctionDisputItemStatus::CLOSED
+    disput_item.status       = AuctionDisputeItemStatus::CLOSED
     disput_item.save
   end
 end
