@@ -6,7 +6,7 @@ class AuctionDisputItem < Compras::Model
 
   has_one :material, :through => :auction_item
 
-  has_many :bids, class_name: 'AuctionDisputItemBid'
+  has_many :bids, class_name: 'AuctionDisputItemBid', dependent: :restrict
 
   has_enumeration_for :status, with: AuctionDisputItemStatus,
                       create_helpers: true, create_scopes: true
