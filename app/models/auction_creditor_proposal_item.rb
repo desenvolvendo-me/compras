@@ -14,6 +14,6 @@ class AuctionCreditorProposalItem < Compras::Model
   def proposal_status
     lowest_proposal_item = AuctionCreditorProposalItem.proposals_ordered_by_item(auction_item).first
 
-    lowest_proposal_item.equal?(self) ? 'Vencendo' : 'Com Proposta' #TODO  refatorar depois
+    lowest_proposal_item.eql?(self) ? 'Vencendo' : 'Com Proposta' #TODO  refatorar depois
   end
 end
