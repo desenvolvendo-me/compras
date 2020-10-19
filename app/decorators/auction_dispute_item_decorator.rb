@@ -1,4 +1,4 @@
-class AuctionDisputItemDecorator
+class AuctionDisputeItemDecorator
   include Decore
   include Decore::Proxy
   include Decore::Header

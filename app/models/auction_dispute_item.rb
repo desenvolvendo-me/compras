@@ -1,4 +1,4 @@
-class AuctionDisputItem < Compras::Model
+class AuctionDisputeItem < Compras::Model
   attr_accessible :auction_id, :auction_item_id, :status
 
   belongs_to :auction
@@ -6,7 +6,7 @@ class AuctionDisputItem < Compras::Model
 
   has_one :material, :through => :auction_item
 
-  has_many :bids, class_name: 'AuctionDisputItemBid', dependent: :restrict
+  has_many :bids, class_name: 'AuctionDisputeItemBid', dependent: :restrict
 
   has_enumeration_for :status, with: AuctionDisputeItemStatus,
                       create_helpers: true, create_scopes: true
