@@ -1025,13 +1025,6 @@ Compras::Application.routes.draw do
       end
     end
 
-    resource :bids do
-      collection do
-        get :filter
-        get :modal
-      end
-    end
-
     resources :creditors do
       collection do
         get :filter
@@ -1062,6 +1055,10 @@ Compras::Application.routes.draw do
         get :filter
         get :modal
       end
+    end
+
+    scope 'auction/:auction_id' do
+      resources :dispute_items
     end
 
     resources :auction_items, only: [:index]

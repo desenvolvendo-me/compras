@@ -40,11 +40,7 @@
 
 
 <div id="content">
-  <%if current_user.employee? %>
-    <%= render 'auctioneer', f: f %>
-  <%else %>
-    <%= render 'creditor', f: f %>
-  <%end %>
+  <%= render 'opened', f: f %>
 </div>
 
 <style>
