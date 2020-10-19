@@ -37,7 +37,7 @@
     </ul>
   </div>
 </nav>
-
+<div id="clock" class="text-sm-right"></div>
 
 <div id="content">
   <%= render 'opened', f: f %>
@@ -72,10 +72,22 @@
 </style>
 
 <script>
-  function setNavLinkActive(){
-    $('#navbarTradingContent li').removeClass('active');
-    $(this).closest('li').addClass('active')
-  }
+  $(function(){
 
-  $('.nav-link').click(setNavLinkActive);
+    function setNavLinkActive(){
+      $('#navbarTradingContent li').removeClass('active');
+      $(this).closest('li').addClass('active')
+    }
+
+    function myTimer() {
+      $("#clock").html("Data e Hora atual: " + (new Date).toLocaleString().substr(0, 16));
+    }
+
+    $('.nav-link').click(setNavLinkActive);
+
+
+    setInterval(myTimer ,1000);
+    myTimer();
+  })
+
 </script>
