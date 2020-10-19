@@ -1,5 +1,5 @@
 class Auction::DisputeItemsController < Auction::BaseController
-  defaults resource_class: AuctionDisputItem
+  defaults resource_class: AuctionDisputeItem
 
   before_filter :set_auction
 
