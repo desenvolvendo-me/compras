@@ -2,19 +2,16 @@
   <thead>
   <th>Status</th>
   <th>Descrição</th>
-  <th>Proposta</th>
-  <th>Melhor Proposta</th>
+  <th>Seu Último Lançe</th>
   <th>Melhor Lance</th>
-  <th width="11%">Horário</th>
-  <th width="11%">Dê um lance:</th>
-  <th width="11%">Horário:</th>
+  <th>Dê um lance:</th>
   <th width="4%"></th>
   <th width="5%"></th>
   </thead>
 
   <tbody>
-  <% @auction.dispute_items.each_with_index do |item, index| %>
-    <%= render 'creditor_bids_row', item: item, index: index %>
+  <% @auction.dispute_items.includes(:bids).each_with_index do |dispute_item, index| %>
+    <%= render 'creditor_bids_row', dispute_item: dispute_item, index: index, f: f %>
   <% end %>
   </tbody>
 </table>
