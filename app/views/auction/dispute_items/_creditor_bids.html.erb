@@ -14,7 +14,18 @@
 
   <tbody>
   <% @auction.dispute_items.each_with_index do |item, index| %>
-    <%= render 'lot_row', item: item, index: index %>
+    <%= render 'creditor_bids_row', item: item, index: index %>
   <% end %>
   </tbody>
 </table>
+
+<style>
+  h2#title{
+    display: none;
+  }
+
+  div#title h5{
+    font-size: 15px;
+    color: #4c7baa;
+  }
+</style>
