@@ -1,7 +1,7 @@
 <%if current_user.employee? %>
   <%= render 'auctioneer', f: f %>
 <%else %>
-  <%= render 'creditor', f: f %>
+  <%= render 'creditor_bids', f: f %>
 <%end %>
 
 <div class="row">
