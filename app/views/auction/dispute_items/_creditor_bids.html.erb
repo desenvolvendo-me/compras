@@ -10,8 +10,10 @@
   </thead>
 
   <tbody>
-  <% @auction.dispute_items.includes(:bids).each_with_index do |dispute_item, index| %>
-    <%= render 'creditor_bids_row', dispute_item: dispute_item, index: index, f: f %>
+  <% @auction.dispute_items.opened.each do |dispute_item| %>
+    <%= render 'creditor_bids_row', dispute_item: dispute_item, f: f %>
+  <% end.empty? and begin %>
+    <tr><td class="text-sm-center" colspan="7">Nenhum item foi liberado para lançes ainda</td></tr>
   <% end %>
   </tbody>
 </table>
