@@ -1,0 +1,71 @@
+<div class="title-section">Itens / Grupo de Itens do Pregão:</div>
+<table id="items" class="records">
+  <thead>
+  <th>Item</th>
+  <th>Melhor Proposta</th>
+  <th>Fornecedor Proposta</th>
+  <th>Melhor Lance</th>
+  <th>Fornecedor Lance</th>
+  <th>Status</th>
+  </thead>
+
+  <tbody>
+  <% @auction.disput_items.each do |item| %>
+    <tr id="item-<%= item.id %>">
+      <td><%= item.material %></td>
+      <td><%= item.decorator.lowest_proposal_amount %></td>
+      <td><%= item.decorator.lowest_proposal_creditor %></td>
+      <td class="bid_amount"><%= item.decorator.lowest_bid_amount %></td>
+      <td class="bid_creditor"><%= item.decorator.lowest_bid_creditor %></td>
+      <td class="status"><%= item.status_humanize %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+
+<div class="title-section">Empresas Credenciadas:</div>
+<table id="accreditation_creditors" class="records">
+  <thead>
+  <th>Fornecedor</th>
+  <th>Lote</th>
+  <th>Valor do Lote</th>
+  <th>Status da Proposta</th>
+  </thead>
+
+  <tbody>
+
+
+  <% @auction.creditor_proposals.each do |creditor_proposal| %>
+    <% creditor_proposal.auction_creditor_proposal_items.each do |proposal| %>
+      <tr>
+        <td><%= creditor_proposal.creditor %></td>
+        <td><%= proposal.auction_item %></td>
+        <td><%= proposal.unit_price %></td>
+        <td class="creditor-status"><%= proposal.proposal_status %></td>
+      </tr>
+    <% end %>
+    <tr>
+      <td colspan="2"></td>
+      <td>
+        <b>Valor Total da Proposta: </b>
+      </td>
+      <td>
+        <b>
+          <%= number_to_currency creditor_proposal.proposals_total_price %>
+        </b>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<style>
+  .title-section{
+    color: #3f6e9d;
+    font-size: 186%;
+    font-weight: bolder;
+    text-align: center;
+    margin-bottom: 18px;
+  }
+</style>
