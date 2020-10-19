@@ -7,11 +7,11 @@ class AuctionItem < Compras::Model
 
   has_one :reference_unit, through: :material
   has_one :material_class, through: :material
-  has_many :disput_items, class_name: 'AuctionDisputeItem', :dependent => :destroy
+  has_many :dispute_items, class_name: 'AuctionDisputeItem', :dependent => :destroy
 
   has_enumeration_for :benefit_type, :with => BenefitType
 
-  after_create :create_disput_item
+  after_save :create_dispute_item
 
   orderize :id
   filterize
@@ -26,7 +26,7 @@ class AuctionItem < Compras::Model
 
   private
 
-  def create_disput_item
+  def create_dispute_item
     disput_item = AuctionDisputeItem.new
     disput_item.auction_item = self
     disput_item.auction      = self.auction
