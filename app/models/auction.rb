@@ -17,7 +17,7 @@ class Auction < Compras::Model
   has_many :auction_creditor_proposal_items, through: :creditor_proposals
   has_many :auction_support_teams
   has_many :bids, class_name: 'AuctionBid'
-  has_many :disput_items, class_name: 'AuctionDisputItem'
+  has_many :disput_items, class_name: 'AuctionDisputeItem'
 
   has_one :appeal, class_name: 'AuctionAppeal'
 
