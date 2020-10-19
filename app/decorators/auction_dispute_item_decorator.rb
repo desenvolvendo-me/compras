@@ -29,6 +29,6 @@ class AuctionDisputeItemDecorator
   end
 
   def bids_finished?
-    bids.all? {|x| x.closed? } if bids.present?
+    bids.all?(:closed?) if bids.present?
   end
 end
