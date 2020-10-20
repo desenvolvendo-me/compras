@@ -11,7 +11,15 @@
 
   <tbody>
   <% @auction.dispute_items.opened.each do |dispute_item| %>
-    <%= render 'creditor_bids_row', dispute_item: dispute_item, f: f %>
+    <tr>
+      <td><%= check_status_my_bids dispute_item %></td>
+      <td><%= dispute_item.auction_item %></td>
+      <td><%= dispute_item.status_humanize %></td>
+      <td><%= dispute_item.decorator.lowest_proposal_amount %></td>
+      <td><%= f.input :bid_amount, as: :fake, input_html:{'data-decimal': true}, label: false %></td>
+      <td><%= button_tag 'Salvar', type: :button, class: 'button primary small-button' %></td>
+      <td><%= button_tag 'Desistir', type: :button, class: 'button primary small-button' %></td>
+    </tr>
   <% end.empty? and begin %>
     <tr><td class="text-sm-center" colspan="7">Nenhum item foi liberado para lançes ainda</td></tr>
   <% end %>
