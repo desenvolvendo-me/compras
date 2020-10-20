@@ -1,0 +1,14 @@
+<%if current_user.employee? %>
+  <%= render 'auctioneer_closed_items', f: f %>
+<%else %>
+  <%= render 'creditor_closed_items', f: f %>
+<%end %>
+
+<div class="row">
+  <div class="col">
+    <%= render 'chat' %>
+  </div>
+  <div class="col">
+    <%= render 'all_bids' %>
+  </div>
+</div>
