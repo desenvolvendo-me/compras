@@ -51,10 +51,10 @@
                 <%= render 'layouts/flash' %>
               </div>
 
-              <div class="banner">
+              <div class="text-sm-right">
                 <%= prefecture_image %>
               </div>
-              <div class="main-content h-100 w-100 pt-5">
+              <div class="main-content h-100 w-100">
                 <% unless controller_name.eql? "bookmarks" %>
                   <%= yield %>
                 <% else %>
