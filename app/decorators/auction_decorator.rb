@@ -28,7 +28,7 @@ class AuctionDecorator
   end
 
   def notice_availability
-    I18n.l super if super
+    super.strftime('%d/%m/%Y às %H:%Mh') if super
   end
 
   def proposal_delivery
