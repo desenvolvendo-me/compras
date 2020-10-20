@@ -59,4 +59,7 @@ class Auction < Compras::Model
     creditor_proposals.includes(:auction_creditor_proposal_items).find_by_creditor_id(creditor_id)
   end
 
+  def minimum_proposal_item item_id
+    auction_creditor_proposal_items.where(auction_item_id: item_id).minimum(:global_price)
+  end
 end
