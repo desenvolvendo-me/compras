@@ -18,6 +18,7 @@ class Auction < Compras::Model
   has_many :bids, class_name: 'AuctionBid'
 
   has_one :appeal, class_name: 'AuctionAppeal'
+  has_one :suspension, class_name: 'AuctionSuspension'
 
   mount_uploader :document_edict, UnicoUploader
 

@@ -9,6 +9,16 @@ class AuctionDecorator
   end
 
   def bids_finished?
-    bids.all? {|x| x.closed? } if bids.present?
+    bids.all?(&:closed?) if bids.present?
+  end
+
+  def auction_suspension_message
+    return unless suspension.present?
+
+    if suspension.reactivation_date.blank?
+      'Pregão suspendido em ' + I18n.l(suspension.suspension_date)
+    else
+      'Pregão reativado em ' + I18n.l(suspension.reactivation_date)
+    end
   end
 end
