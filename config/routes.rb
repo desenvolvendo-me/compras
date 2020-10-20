@@ -1058,7 +1058,11 @@ Compras::Application.routes.draw do
     end
 
     scope 'auction/:auction_id' do
-      resources :dispute_items
+      resources :dispute_items do
+        collection do
+          get :closed_items
+        end
+      end
     end
 
     resources :auction_items, only: [:index]
