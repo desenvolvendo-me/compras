@@ -11,4 +11,8 @@ class AuctionDecorator
   def bids_finished?
     bids.all? {|x| x.closed? } if bids.present?
   end
+
+  def minimum_proposal_item item_id
+    number_to_currency super(item_id)
+  end
 end
