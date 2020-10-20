@@ -2,8 +2,8 @@ pt-BR:
   activerecord:
     models:
       auction_appeal:
-        one: "Interposição de Recurso"
-        other: "Interposição de Recursos"
+        one: "Intenção de Recurso"
+        other: "Intenções de Recursos"
 
     attributes:
       auction_appeal:
