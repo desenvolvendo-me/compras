@@ -19,3 +19,7 @@ pt-BR:
         new_envelope_opening_time: "Nova Hora da Abertura dos Envelopes"
         auction_committee_opinion: "Parecer da Comissão de Licitação"
         appeal_file: "Anexar Recurso"
+        opening_date: "Data de Abertura da Intenção de Recurso"
+        opening_time: "Hora de Abertura da Intenção de Recurso"
+        closure_date: "Data de Fechamento da Intenção de Recurso"
+        closure_time: "Hora de Fechamento da Intenção de Recurso"
