@@ -53,4 +53,10 @@ class Auction < Compras::Model
   def to_s
     "#{licitation_number}/#{year}"
   end
+
+
+  def creditor_proposal (creditor_id)
+    creditor_proposals.includes(:auction_creditor_proposal_items).find_by_creditor_id(creditor_id)
+  end
+
 end
