@@ -21,4 +21,21 @@ class AuctionDecorator
       'Pregão reativado em ' + I18n.l(suspension.reactivation_date)
     end
   end
+
+  def bid_opening_time
+    return super.strftime("%H:%Mh") if super
+    '-'
+  end
+
+  def notice_availability
+    I18n.l super if super
+  end
+
+  def proposal_delivery
+    I18n.l super if super
+  end
+
+  def bid_opening
+    I18n.l super if super
+  end
 end
