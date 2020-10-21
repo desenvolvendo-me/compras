@@ -8,6 +8,7 @@
     <% end %>
 
     <% if f.object.updatabled %>
+      <%= f.button :submit, class: 'supply_request_submit_reopen' if can?(:modify, main_controller_name)  %>
       <%= f.button :submit, 'data-disabled' => "Desabilitado", class: 'supply_request_submit_close' if can?(:modify, main_controller_name) %>
       <%= link_to I18n.t("enumerations.supply_request_service_status.order_in_analysis"), supply_request_attendances_path(''), :class => 'button primary', 'data-disabled' => "Desabilitado"%>
       <%= link_to I18n.t("enumerations.supply_request_service_status.order_in_financial_analysis"), supply_request_attendances_path(''), :class => 'button primary', 'data-disabled' => "Desabilitado"%>
@@ -38,6 +39,7 @@
 
 <script>
     $(function () {
-        $(".supply_request_submit_close").val("Encerrar Atendimento");
+        $(".supply_request_submit_close").val("Finalizar Atendimento");
+        $(".supply_request_submit_reopen").val("Reabrir Atendimento");
     });
 </script>
