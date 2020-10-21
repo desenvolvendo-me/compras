@@ -7,7 +7,9 @@ class SupplyRequestServiceStatus < EnumerateIt::Base
                    :partially_answered,
                    :fully_serviced,
                    :doubts,
-                   :adjusted
+                   :adjusted,
+                   :finished,
+                   :reopen
 
   def self.non_buyer_user
     to_a.select do |item|
