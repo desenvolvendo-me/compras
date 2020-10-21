@@ -19,6 +19,8 @@
       <td class="bid_creditor"><%= item.decorator.lowest_bid_creditor %></td>
       <td class="status"><%= item.status_humanize %></td>
     </tr>
+  <% end.empty? and begin %>
+    <tr><td colspan="6">Não há items cadastrados para as propostas dos fornecedores.</td></tr>
   <% end %>
   </tbody>
 </table>
@@ -34,8 +36,6 @@
   </thead>
 
   <tbody>
-
-
   <% @auction.creditor_proposals.each do |creditor_proposal| %>
     <% creditor_proposal.auction_creditor_proposal_items.each do |proposal| %>
       <tr>
@@ -44,18 +44,19 @@
         <td><%= proposal.unit_price %></td>
         <td class="creditor-status"><%= proposal.proposal_status %></td>
       </tr>
+    <% end.present? and begin %>
+      <tr>
+        <td colspan="2"></td>
+        <td>
+          <b>Valor Total da Proposta: </b>
+        </td>
+        <td>
+          <b>
+            <%= number_to_currency creditor_proposal.proposals_total_price %>
+          </b>
+        </td>
+      </tr>
     <% end %>
-    <tr>
-      <td colspan="2"></td>
-      <td>
-        <b>Valor Total da Proposta: </b>
-      </td>
-      <td>
-        <b>
-          <%= number_to_currency creditor_proposal.proposals_total_price %>
-        </b>
-      </td>
-    </tr>
   <% end %>
   </tbody>
 </table>
