@@ -21,8 +21,7 @@ class AuctionCreditorProposal < Compras::Model
 
 
   def proposals_total_price
-    return if auction_creditor_proposal_items.blank?
-    auction_creditor_proposal_items.sum(&:global_price)
+    auction_creditor_proposal_items.sum{|x| x.global_price || 0}
   end
 
   private
