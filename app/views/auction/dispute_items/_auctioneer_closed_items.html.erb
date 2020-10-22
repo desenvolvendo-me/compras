@@ -10,7 +10,7 @@
   </thead>
 
   <tbody>
-  <% @auction.dispute_items.each do |item| %>
+  <% @auction.dispute_items.closed.each do |item| %>
     <tr id="item-<%= item.id %>">
       <td><%= item.material %></td>
       <td><%= item.decorator.lowest_proposal_amount %></td>
