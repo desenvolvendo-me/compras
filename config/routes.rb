@@ -1062,7 +1062,11 @@ Compras::Application.routes.draw do
         get :filter
         get :modal
       end
+
+      resources :suspensions
     end
+
+
 
     resources :auction_items, only: [:index]
     get "/auction_items/group_lot" => "auction_items#group_lot", as: :group_lot_items

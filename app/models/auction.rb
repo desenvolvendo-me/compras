@@ -20,6 +20,7 @@ class Auction < Compras::Model
   has_many :dispute_items, class_name: 'AuctionDisputeItem'
 
   has_one :appeal, class_name: 'AuctionAppeal'
+  has_one :suspension, class_name: 'AuctionSuspension'
 
   mount_uploader :document_edict, UnicoUploader
 

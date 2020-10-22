@@ -17,39 +17,42 @@
 
 <br>
 
-
-<div>
-  <table class="records">
-    <thead>
-    <tr>
-      <% ContractReportDecorator.header_attributes.each do | header| %>
-        <th><%= header.mb_chars.upcase %></th>
-      <% end %>
-    </tr>
-    </thead>
-    <tbody>
-
-    <%
-      def date_mask(d)
-        return d.strftime("%d/%m/%Y") unless d.nil?
-      end
-    %>
-    <% @contracts.each do |contract| %>
+<% if @contracts %>
+  <div>
+    <table class="records">
+      <thead>
       <tr>
-        <td><%= contract.contract_number %></td>
-        <td><%= contract.year %></td>
-        <td><%= contract.creditor %></td>
-        <td><%= date_mask(contract.publication_date) %></td>
-        <td><%= contract.contract_validity %></td>
-        <td><%= contract.content %></td>
-        <td><%= contract.decorator.contract_value %></td>
-        <td><%= contract.modality_humanize %></td>
-        <td><%= date_mask(contract.start_date) %></td>
-        <td><%= date_mask(contract.end_date) %></td>
-        <td><%= contract.status %></td>
+        <% ContractReportDecorator.header_attributes.each do | header| %>
+          <th><%= header.mb_chars.upcase %></th>
+        <% end %>
       </tr>
-    <% end %>
-    </tbody>
-  </table>
-</div>
+      </thead>
+      <tbody>
 
+      <%
+        def date_mask(d)
+          return d.strftime("%d/%m/%Y") unless d.nil?
+        end
+      %>
+      <% @contracts.each do |contract| %>
+        <tr>
+          <td><%= contract.contract_number %></td>
+          <td><%= contract.year %></td>
+          <td><%= contract.creditor %></td>
+          <td><%= date_mask(contract.publication_date) %></td>
+          <td><%= contract.contract_validity %></td>
+          <td><%= contract.content %></td>
+          <td><%= contract.decorator.contract_value %></td>
+          <td><%= contract.modality_humanize %></td>
+          <td><%= date_mask(contract.start_date) %></td>
+          <td><%= date_mask(contract.end_date) %></td>
+          <td><%= contract.status %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+
+<% else %>
+  <h2 style="text-align: center" > <b> Não existe contratos para estes filtros ! </b> </h2>  
+<% end %>

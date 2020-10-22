@@ -328,6 +328,12 @@ $(document).ready(function () {
     $("#supply_request_updatabled").val('true');
   });
 
+  $(".supply_request_submit_reopen").click(function () {
+    $("#supply_request_updatabled").prop('checked', false);
+    $("#supply_request_updatabled").val('false');
+  });
+
+
   $("#supply_request_number_nf").on("change", function () {
     if ($("#supply_request_number_nf").val() == "") {
       $(".supply_request_submit_close").attr('data-disabled', "Desabilitado");

@@ -100,7 +100,11 @@ class PurchaseSolicitation < Compras::Model
     joins { secretaries.secretary.departments.department_people }
       .where { secretaries.secretary.departments.department_people.user_id.eq(current_user) }
   }
-
+  
+  scope :by_id, lambda { |purchase_solicitation_id|
+    where { id.eq(purchase_solicitation_id) }
+  }
+  
   scope :by_model_request, lambda { |type|
     where { model_request.eq(type) }
   }

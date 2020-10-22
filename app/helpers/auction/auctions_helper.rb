@@ -46,4 +46,18 @@ module Auction::AuctionsHelper
      end
    end
   end
+
+  def link_to_suspension(&block)
+    if resource.suspension.present?
+      link_to edit_auction_auction_suspension_path(resource.id, resource.suspension), class:'card-link' do
+        content = capture(&block)
+        content.html_safe
+      end
+    else
+      link_to new_auction_auction_suspension_path(resource.id), class:'card-link' do
+        content = capture(&block)
+        content.html_safe
+      end
+    end
+  end
 end

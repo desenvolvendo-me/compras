@@ -16,6 +16,27 @@
   </div>
 
 </div>
+
+<%if current_user.employee? %>
+  <div class="yui3-g">
+    <div class="yui3-u-1-4">
+      <%= f.input :opening_date %>
+    </div>
+    <div class="yui3-u-1-4">
+      <%= f.input :opening_time %>
+    </div>
+    <div class="yui3-u-1-4">
+      <%= f.input :closure_date %>
+    </div>
+    <div class="yui3-u-1-4">
+      <%= f.input :closure_time %>
+    </div>
+  </div>
+<%elsif has_opening_and_closure?%>
+  <h3>Abertura da Intenção de Recurso: <%= l resource.opening_date %> às <%= l opening_time %></h3>
+  <h3>Fechamento da Intenção de Recurso:  <%= l resource.closure_date %> às <%= l closure_time %> </h3>
+<%end%>
+
 <div class="yui3-g">
   <div class="yui3-u-5-12">
     <%= f.input :person %>

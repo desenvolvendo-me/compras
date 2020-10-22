@@ -1,0 +1,15 @@
+pt-BR:
+  activerecord:
+    models:
+      auction_suspension:
+        one: "Suspensão do Pregão"
+        other: "Suspensão do Pregão"
+
+    attributes:
+      auction_suspension:
+        suspension_date: 'Data da Supensão'
+        responsible_suspension: 'Responsável pela Suspensão'
+        reactivation_date: 'Data da Reativação'
+        responsible_reactivation: 'Responsável pela Reativação'
+        suspension_reason: 'Motivo da Supensão'
+        reactivation_reason: 'Motivo da Reativação'

@@ -1,2 +1,105 @@
-<%= f.input :purchase_solicitations, as: :nested_grid,
-            columns: [:purchase_solicitation, :department] %>
+<%#= f.input :purchase_solicitations, as: :nested_grid,columns: [:purchase_solicitation_decorator, :department] %>
+
+<div id="purchase_solicitations">
+
+  <div class="nested-fields add-margin-bottom">
+    <div class="row purchase-solicitation-fileds" style="display: none;">
+      <div class="col">
+        <%= f.input :demand, :as => :auto_complete, :fake => true%>
+      </div>  
+      <div class="col">
+          <%= hidden_field_tag :purchase_solicitation_id, nil, :name => 'purchase_solicitation[id]' %>
+          <%= f.input :purchase_solicitation, :as => :auto_complete, :fake => true, :required => true %>
+          <%= f.input :department, as: :fake, input_html:{style:'display: none', name:'licitation_process[department]'}, label: false %>
+      </div>
+    </div>
+
+    <div class="yui3-u-1-6">
+      <div class="hidden" >
+        <%= button_tag 'Adicionar', type: :button,
+          :class => 'button add-nested-record field-without-label btn-add',
+          'data-template' => 'purchase_solicitations_template',
+          'data-records' => 'purchase_solicitations-records',
+          'data-disabled' => not_updateable_message,
+            id: "button_add_purchase_solicitations" %>             
+      </div>
+      <div>
+        <%= button_tag 'Adicionar', type: :button,
+          :class => 'button button primary  btn-add',id: "button_show_purchase_solicitations" %> 
+      </div>
+    </div>
+             
+  </div>
+
+  <%= f.error :purchase_solicitations %>
+
+  <table id="purchase_solicitations-records" class="records">
+    <thead>
+    <tr>
+      <th> <%= I18n.t('activerecord.models.purchase_solicitation.one') %> </th>
+      <th> <%= I18n.t('activerecord.models.department.one') %> </th>
+      <th></th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <%= f.association :purchase_solicitations, :collection => localized(f.object.purchase_solicitations) do |p| %>
+      <%= render 'list_purchase_solicitations/licitation_process_list_form',
+                 id: p.object.id,
+                 purchase_solicitation: p.object.purchase_solicitation,
+                 purchase_solicitation_id: p.object.purchase_solicitation_id,
+                 department: p.object.try(:purchase_solicitation).try(:department),
+                 department_id: p.object.try(:purchase_solicitation).try(:department_id),
+                 f: p %>
+    <% end %>
+    </tbody>
+  </table>
+
+  <%= mustache "purchase_solicitations_template" do %>
+    <%= f.association :purchase_solicitations_attributes, :collection => f.object.purchase_solicitations.build, :index => '{{uuid}}' do |p| %>
+      <%= render 'list_purchase_solicitations/licitation_process_list_form',
+                 id: '{{id}}',
+                 purchase_solicitation: '{{purchase_solicitation}}',
+                 purchase_solicitation_id: '{{purchase_solicitation_id}}',
+                 department: '{{department}}',
+                 department_id: '{{department_id}}',
+                 f: p %>
+    <% end %>
+  <% end %>
+</div>
+
+<style>
+  .btn-add{
+    display: unset !important;
+  }
+</style>
+
+<script>
+  $(function () {    
+    $('#button_show_purchase_solicitations').on('click', function(){
+      $('.purchase-solicitation-fileds').show();
+      var klass = $('#button_show_purchase_solicitations').attr('class');
+      $('#button_show_purchase_solicitations').attr('class',klass + ' hidden');
+      $('#button_add_purchase_solicitations').parent().removeClass("hidden");      
+    });
+
+    $("#licitation_process_purchase_solicitation").on("change", function () {
+      purchase_solicitation_id = $("#licitation_process_purchase_solicitation_id").val();
+     
+      if (purchase_solicitation_id) {
+        $.ajax({
+          url: Routes.purchase_solicitations,
+          data: {by_id: purchase_solicitation_id},
+          async: false,
+          type: 'GET',
+          dataType:'JSON',
+          success: function (data) {
+            if(data.length){
+              $("#licitation_process_department").val(data[0]['department']);
+            }
+          }
+        });
+      }  
+    });
+  });
+</script>
