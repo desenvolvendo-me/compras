@@ -51,3 +51,7 @@ pt-BR:
         registration: "Matrícula"
         bid_opening_time: "Hora da Abertura da Licitação"
         benefit_type: 'Tipo do Benefício'
+
+    auction:
+      messages:
+        must_have_registered_proposal: 'Por favor cadastre uma proposta para visualizar os lances!'
