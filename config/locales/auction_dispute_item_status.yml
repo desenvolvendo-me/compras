@@ -1,0 +1,8 @@
+pt-BR:
+  enumerations:
+    auction_dispute_item_status:
+      open: 'Aberto'
+      closed: 'Fechado'
+      suspended: 'Suspendido'
+      finished: 'Finalizado'
+

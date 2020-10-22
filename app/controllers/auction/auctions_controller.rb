@@ -38,7 +38,6 @@ class Auction::AuctionsController < Auction::BaseController
   end
 
   def dashboard
-
   end
 
   def show
@@ -46,6 +45,12 @@ class Auction::AuctionsController < Auction::BaseController
   end
 
   private
+
+  def create_resource(object)
+    object.user = current_user
+
+    super
+  end
 
   def get_appeals
     @appeals = AuctionAppeal.where{ viewed.eq(nil) | viewed.eq(false) }
