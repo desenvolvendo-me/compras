@@ -49,6 +49,17 @@ class SupplyRequestsController < CrudController
 
   private
 
+  def update_resource(object, attributes)
+    object.transaction do
+      updatabled = object.updatabled
+      if super
+        if object.updatabled != updatabled
+          SupplyRequestAttendanceCreator.create!(object, current_user)
+        end
+      end
+    end
+  end
+
   def get_purchase_solicitation_by_purchase_unit
     use_pur_uni = UserPurchasingUnit.where(user_id: current_user.id).pluck(:purchasing_unit_id)
     departments = Department.where("compras_departments.purchasing_unit_id in (?)", use_pur_uni).pluck(:id)

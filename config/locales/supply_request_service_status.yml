@@ -10,3 +10,5 @@ pt-BR:
       fully_serviced: "Atendido Totalmente"
       doubts: "Dúvida"
       adjusted: "Ajustado"
+      finished: 'Finalizado'
+      reopen: 'Reaberto'
