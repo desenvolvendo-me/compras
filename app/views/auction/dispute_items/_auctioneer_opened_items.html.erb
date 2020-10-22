@@ -18,6 +18,8 @@
       <td class="bid_creditor"><%= item.decorator.lowest_bid_creditor %></td>
       <td class="status"><%= item.status_humanize %></td>
     </tr>
+  <% end.empty? and begin %>
+    <tr><td class="text-sm-center" colspan="7">Nenhum item foi liberado para lançes ainda</td></tr>
   <% end %>
   </tbody>
 </table>
