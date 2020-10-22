@@ -13,7 +13,7 @@ module Auction::AuctionsHelper
       return auctioneer_view_auction_auction_creditor_proposals_path(auction_id: resource.id)
     end
 
-    proposal = resource.creditor_proposals.where(creditor_id: current_user.authenticable&.id).last
+    proposal = resource.creditor_proposals.where(creditor_id: current_user&.authenticable&.id).last
     if proposal
       route = edit_auction_auction_creditor_proposal_path(proposal.id)
     elsif current_user.present?
