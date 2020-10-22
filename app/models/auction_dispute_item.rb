@@ -12,7 +12,7 @@ class AuctionDisputeItem < Compras::Model
                       create_helpers: true, create_scopes: true
 
   scope :opened, -> { where(status: AuctionDisputeItemStatus::OPEN).includes(:bids)}
-  scope :close, -> { where(status: AuctionDisputeItemStatus::CLOSED).includes(:bids)}
+  scope :closed, -> { where(status: AuctionDisputeItemStatus::CLOSED).includes(:bids)}
 
   def lowest_item_proposal
     auction.auction_creditor_proposal_items.proposals_ordered_by_item(id).first
