@@ -21,17 +21,35 @@
             <div class="yui3-g section-gray">
               <div class="yui3-u-1-3">
                 <div class="ellipsis-sub">
-                  <h5>Edital disponível a partir de: <%= resource.notice_availability.strftime('%d/%m/%Y') if resource.notice_availability %> </h5>
+                  <h5>Edital disponível a partir de: </h5>
                 </div>
               </div>
               <div class="yui3-u-1-3">
                 <div class="ellipsis-sub">
-                  <h5>Entrega da proposta: <%= resource.proposal_delivery.strftime('%d/%m/%Y') if resource.proposal_delivery%></h5>
+                  <h5>Data da Entrega da proposta:</h5>
                 </div>
               </div>
               <div class="yui3-u-1-3">
                 <div class="ellipsis-sub">
-                  <h5>Abertura da Licitação: <%= l(resource.bid_opening) if resource.bid_opening %></h5>
+                  <h5>Data da Abertura da Licitação:</h5>
+                </div>
+              </div>
+            </div>
+
+            <div class="yui3-g section-gray">
+              <div class="yui3-u-1-3">
+                <div>
+                  <p><%= resource.decorator.notice_availability %> </p>
+                </div>
+              </div>
+              <div class="yui3-u-1-3">
+                <div>
+                  <p> <%= resource.decorator.proposal_delivery %> </p>
+                </div>
+              </div>
+              <div class="yui3-u-1-3">
+                <div>
+                  <p> <%= resource.decorator.bid_opening %> às <%= resource.decorator.bid_opening_time %> <p>
                 </div>
               </div>
             </div>

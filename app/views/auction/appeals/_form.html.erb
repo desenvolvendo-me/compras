@@ -33,8 +33,10 @@
     </div>
   </div>
 <%elsif has_opening_and_closure?%>
-  <h3>Abertura da Intenção de Recurso: <%= l resource.opening_date %> às <%= l opening_time %></h3>
-  <h3>Fechamento da Intenção de Recurso:  <%= l resource.closure_date %> às <%= l closure_time %> </h3>
+  <div class="alert alert-warning">
+    <h4>Abertura da Intenção de Recurso: <%= resource.decorator.opening_date %> às <%= resource.decorator.opening_time %></h4>
+    <h4>Fechamento da Intenção de Recurso: <%= resource.decorator.closure_date %> às <%= resource.decorator.closure_time %> </h4>
+  </div>
 <%end%>
 
 <div class="yui3-g">
