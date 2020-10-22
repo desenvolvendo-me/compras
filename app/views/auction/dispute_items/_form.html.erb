@@ -18,12 +18,12 @@
   <div class="collapse navbar-collapse" id="navbarTradingContent">
     <ul class="navbar-nav mr-auto mx-auto">
       <li class="nav-item active">
-        <a class="nav-link waves-effect waves-light btn-nav" href="#">Abertos/Suspensos
-          <span class="sr-only">(current)</span>
-        </a>
+        <%= link_to 'Abertos/Suspensos', new_auction_dispute_item_path(@auction),
+                    class: "nav-link waves-effect waves-light btn-nav" %>
       </li>
       <li class="nav-item">
-        <a class="nav-link waves-effect waves-light btn-nav" href="#">Fechados</a>
+        <%= link_to 'Fechados', closed_items_auction_dispute_items_path(@auction),
+                    class: "nav-link waves-effect waves-light btn-nav", remote: true %>
       </li>
       <li class="nav-item">
         <a class="nav-link waves-effect waves-light btn-nav" href="#">Encerrados</a>
@@ -39,7 +39,7 @@
 </nav>
 <div id="clock" class="text-sm-right"></div>
 
-<div id="content">
+<div id="content-body">
   <%= render 'opened', f: f %>
 </div>
 
