@@ -7,8 +7,8 @@
   </thead>
 
   <tbody>
-  <% proposal.auction_creditor_proposal_items.each do |proposal_item| %>
-    <tr><%raise %>
+  <% proposal.creditor_proposal_items_closed.each do |proposal_item| %>
+    <tr>
       <td><%= proposal_item.proposal_status %></td>
       <td><%= proposal_item.description %></td>
       <td><%= number_to_currency proposal_item.global_price %></td>
