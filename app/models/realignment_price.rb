@@ -49,6 +49,10 @@ class RealignmentPrice < Compras::Model
     end
   end
 
+  def total_realignment_price
+    items.sum(&:total_price)
+  end
+
   private
 
   def total_value_lot_trading
