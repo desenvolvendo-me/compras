@@ -9,11 +9,8 @@ class SupplyRequestManagementsController < ApplicationController
   private
 
   def get_supply_request
-    @quantity = {"new"=>0,"order_in_analysis"=>0,"order_in_financial_analysis"=>0,"returned_for_adjustment"=>0,"rejected"=>0,
-                   "partially_answered"=>0,"fully_serviced"=>0,"doubts"=>0,"adjusted"=>0}
-    @suplly_requests = {"new"=>[],"order_in_analysis"=>[],"order_in_financial_analysis"=>[],"returned_for_adjustment"=>[],
-                        "rejected"=>[],"partially_answered"=>[],"fully_serviced"=>[],
-                        "doubts"=>[],"adjusted"=>[]}
+    @quantity = SupplyRequestServiceStatus.list.map{|x| {"#{x}" => 0}}.reduce(&:merge!)
+    @suplly_requests = SupplyRequestServiceStatus.list.map{|x| {"#{x}" => []}}.reduce(&:merge!)
 
     sr = SupplyRequest.
         where("purchase_solicitation_id in (?) or user_id = ? ",
