@@ -4,7 +4,8 @@ class Auction < Compras::Model
                   :object, :object_management, :employee_id, :items_attributes, :sensitive_value, :variation_type, :minimum_interval,
                   :decree_treatment, :document_edict, :disclosure_date, :responsible_dissemination_id, :notice_availability,
                   :proposal_delivery, :bid_opening, :internet_address, :city,
-                  :neighborhood, :street, :telephone, :cell_phone, :user_id, :bid_opening_time
+                  :neighborhood, :street, :telephone, :cell_phone, :user_id, :bid_opening_time,
+                  :end_dispute_date, :end_dispute_time, :restart_dispute_date, :restart_dispute_time
 
   attr_modal :licitation_number, :process_number, :proposal_delivery, :bid_opening, :object
 
