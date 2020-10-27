@@ -51,3 +51,7 @@ pt-BR:
         registration: "Matrícula"
         bid_opening_time: "Hora da Abertura da Licitação"
         benefit_type: 'Tipo do Benefício'
+        end_dispute_date: 'Data de Encerramento'
+        end_dispute_time: 'Hora de Encerramento'
+        restart_dispute_date: 'Data de Reabertura'
+        restart_dispute_time: 'Hora de Reabertura'
