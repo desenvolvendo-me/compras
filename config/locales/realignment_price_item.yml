@@ -13,3 +13,4 @@ pt-BR:
         brand: "Marca"
         quantity: "Quantidade"
         delivery_date: "Data de entrega"
+        total_price: 'Valor Total'

@@ -10,5 +10,10 @@ pt-BR:
         creditor: "Fornecedor"
         lot: "Item/Grupo"
         purchase_process: "Processo de compra"
-        total_value: 'Valor total da proposta/lance'
+        total_value: 'Valor Total da Proposta/Lance'
         difference_price: 'Diferença'
+        discount: "Desconto"
+        total_price: 'Valor Total'
+        total_realignment_value: 'Valor Total do Realinhamento de Preço'
+        final_value: 'Valor Final da Proposta/Lance'
+

@@ -1,5 +1,5 @@
 class RealignmentPrice < Compras::Model
-  attr_accessible :purchase_process_id, :creditor_id, :lot, :items_attributes
+  attr_accessible :purchase_process_id, :creditor_id, :lot, :items_attributes, :discount
 
   belongs_to :purchase_process, class_name: 'LicitationProcess'
   belongs_to :creditor
@@ -49,6 +49,10 @@ class RealignmentPrice < Compras::Model
     end
   end
 
+  def total_realignment_price
+    items.sum(&:total_price)
+  end
+
   private
 
   def total_value_lot_trading
@@ -74,7 +78,7 @@ class RealignmentPrice < Compras::Model
   end
 
   def total_value_validation
-    if total_value != items.to_a.sum(&:total_price)
+    if (total_value - discount) != items.to_a.sum(&:total_price)
       errors.add(:base, :the_sum_of_item_prices_should_be_equal_to_proposal)
     end
   end
