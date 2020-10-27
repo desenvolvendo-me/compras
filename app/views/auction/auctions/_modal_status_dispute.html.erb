@@ -1,0 +1,19 @@
+<%= simple_form_for Auction.new, :url => auction_auctions_path, :remote => true, :method => 'get' do |f| %>
+  <div class="row">
+    <div class="col">
+      <%= f.input :end_dispute_date %>
+    </div>
+    <div class="col">
+      <%= f.input :end_dispute_time %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <%= f.input :restart_dispute_date %>
+    </div>
+    <div class="col">
+      <%= f.input :restart_dispute_time %>
+    </div>
+  </div>
+<% end %>
