@@ -158,36 +158,7 @@
       )
   }
 
-  function updateDisputeStatus( params ){
-    $.ajax({
-      url: Routes.auction_auction.replace(':id', '<%= resource.id %>'),
-      data: params,
-      dataType: 'json',
-      type: 'PUT',
-      success: function (data) {
-        loadModal();
-      },
-      error: function(XMLHttpRequest, textStatus, errorThrown) {
-        debugger
-        alert('Erro ao Encerrar Sessão. Por favor Contate Suporte!')
-      }
-    });
-  }
-
-  function askConfirmation(){
-    var result = confirm('Você tem certeza que deseja encerrar a sessão?');
-
-    if(result){
-      var today = new Date(),
-          params = {auction: {
-                        end_dispute_date: $.datepicker.formatDate('yy/mm/dd', today),
-                        end_dispute_time: today.getHours() + ":" + today.getMinutes()
-                      }};
-      updateDisputeStatus(params);
-    }
-  }
-
-  $("#end-restart-dispute").click(askConfirmation)
+  $("#end-restart-dispute").click(loadModal);
 </script>
 
 <%end %>
