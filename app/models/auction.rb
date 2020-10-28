@@ -41,6 +41,8 @@ class Auction < Compras::Model
   validates :cell_phone, mask: "(99) 99999-9999", :allow_blank => true
   validates :telephone, mask: "(99) 9999-9999", :allow_blank => true
 
+  before_save :clear_session_status
+
   def self.ordered
     order("notice_availability >= '#{Date.today}', notice_availability ASC, proposal_delivery >= '#{Date.today}', notice_availability ASC")
   end
@@ -54,5 +56,21 @@ class Auction < Compras::Model
 
   def to_s
     "#{licitation_number}/#{year}"
+  end
+
+  def session_ended?
+    end_dispute_date.present? && end_dispute_time.present?
+  end
+
+  def session_restarted?
+    restart_dispute_date.present? && restart_dispute_time.present?
+  end
+
+  private
+  def clear_session_status
+    if end_dispute_date_changed? and end_dispute_time_changed?
+      self.restart_dispute_date = nil
+      self.restart_dispute_time = nil
+    end
   end
 end
