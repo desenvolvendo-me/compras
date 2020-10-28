@@ -44,6 +44,14 @@ class AuctionDecorator
   end
 
   def end_dispute_time
-    super || Time.now.strftime('%H:%M')
+    (super || Time.now).strftime('%H:%M')
+  end
+
+  def restart_dispute_date
+    I18n.l(super || Date.today)
+  end
+
+  def restart_dispute_time
+    (super || Time.now).strftime('%H:%M')
   end
 end
