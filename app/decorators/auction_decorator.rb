@@ -38,4 +38,12 @@ class AuctionDecorator
   def bid_opening
     I18n.l super if super
   end
+
+  def end_dispute_date
+    I18n.l(super || Date.today)
+  end
+
+  def end_dispute_time
+    super || Time.now.strftime('%H:%M')
+  end
 end
