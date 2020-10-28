@@ -57,10 +57,10 @@
   <div class="col-sm-4">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Encerrar Seção / Reiniciar Seção</h5>
+        <h5 class="card-title">Encerrar Sessão / Reiniciar Sessão</h5>
         <br/>
         
-        <p class="card-text">Encerrar seção / Reiniciar Seção</p>
+        <p class="card-text">Encerrar seção / Reiniciar Sessão</p>
       </div>
       <a href="#" class="card-link" id="end-restart-dispute">
         <div class="card-footer text-muted">
@@ -148,15 +148,46 @@
   function loadModal(){
     $('<div class="ui-modal"></div>')
       .html('<%= escape_javascript render('auction/auctions/modal_status_dispute') %>')
-      .dialog({modal: true, width: 700, height: 450})
-      .on('dialogclose', function () {
-        $(this).remove();
-      });
+      .on('dialogclose', function () { $(this).remove(); })
+      .dialog(
+        {
+          modal: true,
+          width: 700,
+          height: 450
+        }
+      )
   }
 
+  function updateDisputeStatus( params ){
+    $.ajax({
+      url: Routes.auction_auction.replace(':id', '<%= resource.id %>'),
+      data: params,
+      dataType: 'json',
+      type: 'PUT',
+      success: function (data) {
+        loadModal();
+      },
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
+        debugger
+        alert('Erro ao Encerrar Sessão. Por favor Contate Suporte!')
+      }
+    });
+  }
 
+  function askConfirmation(){
+    var result = confirm('Você tem certeza que deseja encerrar a sessão?');
 
-  $("#end-restart-dispute").click(loadModal)
+    if(result){
+      var today = new Date(),
+          params = {auction: {
+                        end_dispute_date: $.datepicker.formatDate('yy/mm/dd', today),
+                        end_dispute_time: today.getHours() + ":" + today.getMinutes()
+                      }};
+      updateDisputeStatus(params);
+    }
+  }
+
+  $("#end-restart-dispute").click(askConfirmation)
 </script>
 
 <%end %>
