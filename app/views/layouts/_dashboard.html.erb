@@ -146,7 +146,7 @@
 <%if current_user %>
 <script>
   function loadModal(){
-    $('<div class="ui-modal"></div>')
+    $('<div class="ui-modal" title="Encerrar/Reiniciar Sessão"></div>')
       .html('<%= escape_javascript render('auction/auctions/modal_status_dispute') %>')
       .on('dialogclose', function () { $(this).remove(); })
       .dialog(
