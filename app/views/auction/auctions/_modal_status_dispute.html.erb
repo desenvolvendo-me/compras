@@ -33,7 +33,7 @@
   <%if !resource.session_ended? || (resource.session_ended? && !resource.session_restarted?) %>
     <div class="row buttons">
       <div class="col text-right">
-        <button type="button" id="cancel" class="button btn-danger">Cancelar</button>
+        <button type="button" id="closeModal" class="button btn-danger">Cancelar</button>
         <%= f.button :submit, class:'button btn-primary', confirm:'Você tem certeza que deseja Encerrar/Reiniciar a sessão?' %>
       </div>
     </div>

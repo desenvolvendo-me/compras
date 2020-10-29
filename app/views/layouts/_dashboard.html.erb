@@ -157,6 +157,9 @@
         }
       )
   }
+  $(document).on('click','#closeModal', function () {
+    $("body .ui-modal").dialog('close')
+  });
 
   $("#end-restart-dispute").click(loadModal);
 </script>
