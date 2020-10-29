@@ -36,10 +36,6 @@ class LicitationProcessesController < CrudController
   def update
     update! do |success, failure|
       success.html {redirect_to edit_licitation_process_path(resource)}
-      failure.html do
-        resource.errors.add(:base, :cant_be_updated_generic)
-        render :edit 
-      end
     end
   end
 
