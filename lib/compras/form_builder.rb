@@ -116,5 +116,15 @@ module Compras
 
       template.link_to value, options.delete(:href), options
     end
+
+    def errors(association)
+      # self.object.errors.select{ |key, value| key if key.to_s.include? "#{association}."}.transform_keys{ |key| key.to_s.sub("#{association}.",'') }      
+      # keys = self.object.errors.if_keep{ |key, value| key if key.to_s.include? "#{association}."}      
+      # keys.transform_keys{ |key| key.to_s.sub("#{association}.",'') }
+
+      keys = self.object.errors.keys.select{ |key| key if key.to_s.include? "#{association}."}
+      self.object.errors.to_hash.slice(*keys)
+    end
+
   end
 end
