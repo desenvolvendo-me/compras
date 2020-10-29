@@ -59,8 +59,9 @@
       <div class="card-body">
         <h5 class="card-title">Encerrar Sessão / Reiniciar Sessão</h5>
         <br/>
-        
-        <p class="card-text">Encerrar seção / Reiniciar Sessão</p>
+        <p class="card-text" style="color: red">
+          <%= resource.decorator.session_suspension_message %>
+        </p>
       </div>
       <a href="#" class="card-link" id="end-restart-dispute">
         <div class="card-footer text-muted">
