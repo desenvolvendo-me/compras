@@ -58,6 +58,7 @@ pt-BR:
 
   auction:
     messages:
+      must_have_registered_proposal: 'Por favor cadastre uma proposta para visualizar os lances!'
       end_session: "Sessão será encerrada em %{end_date} às %{end_time}h "
       ended_session: "Sessão encerrada em %{end_date} às %{end_time}h "
       restarded_session: "Sessão reiniciada em %{restart_date} às %{restart_time}h "

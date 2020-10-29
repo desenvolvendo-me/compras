@@ -118,7 +118,7 @@ pt-BR:
     auction_auctions: "Pregão Eletrônico"
     auction_management_objects: "Objeto"
     auction_auction_creditor_proposals: "Propostas de Credores"
-    auction_bids: "Disputa"
+    auction_dispute_items: "Lançes"
     auction_appeals: "Intenção de Recurso"
     auction_suspensions: "Suspensão de Pregão"
 

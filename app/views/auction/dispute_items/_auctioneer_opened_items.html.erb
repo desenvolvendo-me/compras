@@ -1,0 +1,44 @@
+<table id="items" class="records">
+  <thead>
+  <th>Item</th>
+  <th>Melhor Proposta</th>
+  <th>Fornecedor Proposta</th>
+  <th>Melhor Lance</th>
+  <th>Fornecedor Lance</th>
+  <th>Status</th>
+  </thead>
+
+  <tbody>
+  <% @auction.dispute_items.opened.each do |item| %>
+    <tr id="item-<%= item.id %>">
+      <td><%= item.material %></td>
+      <td><%= item.decorator.lowest_proposal_amount %></td>
+      <td><%= item.decorator.lowest_proposal_creditor %></td>
+      <td class="bid_amount"><%= item.decorator.lowest_bid_amount %></td>
+      <td class="bid_creditor"><%= item.decorator.lowest_bid_creditor %></td>
+      <td class="status"><%= item.status_humanize %></td>
+    </tr>
+  <% end.empty? and begin %>
+    <tr><td class="text-sm-center" colspan="7">Nenhum item foi liberado para lançes ainda</td></tr>
+  <% end %>
+  </tbody>
+</table>
+
+<div class="row">
+  <div class="col">
+    <%= render 'chat' %>
+  </div>
+  <div class="col">
+    <%= render 'all_bids' %>
+  </div>
+</div>
+
+<style>
+  .title-section{
+    color: #3f6e9d;
+    font-size: 186%;
+    font-weight: bolder;
+    text-align: center;
+    margin-bottom: 18px;
+  }
+</style>

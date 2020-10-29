@@ -3,6 +3,7 @@ class AuctionDecorator
   include Decore::Proxy
   include Decore::Header
   include ActionView::Helpers::TranslationHelper
+  include ActionView::Helpers::NumberHelper
 
   def licitation_opened?
     component.bid_opening <= Date.today && component.bid_opening_time.try(:seconds_since_midnight) <= Time.now.try(:seconds_since_midnight)
@@ -53,5 +54,9 @@ class AuctionDecorator
 
   def restart_dispute_time
     (super || Time.now).strftime('%H:%M')
+  end
+
+  def minimum_proposal_item item_id
+    number_to_currency super(item_id)
   end
 end

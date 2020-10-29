@@ -1,0 +1,44 @@
+<table id="items" class="records">
+  <thead>
+  <th>Status</th>
+  <th>Descrição</th>
+  <th>Seu Último Lançe</th>
+  <th>Melhor Lance</th>
+  <th>Dê um lance:</th>
+  <th width="4%"></th>
+  <th width="5%"></th>
+  </thead>
+
+  <tbody>
+  <% @auction.dispute_items.opened.each do |dispute_item| %>
+    <tr>
+      <td><%= check_status_my_bids dispute_item %></td>
+      <td><%= dispute_item.auction_item %></td>
+      <td><%= dispute_item.status_humanize %></td>
+      <td><%= dispute_item.decorator.lowest_proposal_amount %></td>
+      <td><%= text_field_tag :bid_amount, 'data-decimal': true, class: 'creditor-bid' %></td>
+      <td><%= button_tag 'Salvar', type: :button, class: 'button primary small-button' %></td>
+      <td><%= button_tag 'Desistir', type: :button, class: 'button primary small-button' %></td>
+    </tr>
+  <% end.empty? and begin %>
+    <tr><td class="text-sm-center" colspan="7">Nenhum item foi liberado para lançes ainda</td></tr>
+  <% end %>
+  </tbody>
+</table>
+
+<div class="row">
+  <div class="col">
+    <%= render 'chat' %>
+  </div>
+</div>
+
+<style>
+  h2#title{
+    display: none;
+  }
+
+  div#title h5{
+    font-size: 15px;
+    color: #4c7baa;
+  }
+</style>
