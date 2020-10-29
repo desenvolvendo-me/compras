@@ -25,7 +25,9 @@
           </div>
         </div>
       <% else  %>
-        <h3 style="text-align: center"><b>Sessão reiniciada em <%= resource.decorator.restart_dispute_date %> às <%= resource.decorator.restart_dispute_time %>h </b></h3>
+        <h3 style="text-align: center"><b><%= t("auction.messages.restarded_session",
+                                                restart_date: resource.decorator.restart_dispute_date,
+                                                restart_time: resource.decorator.restart_dispute_time) %></b></h3>
       <% end %>
     <% end %>
   </div>
