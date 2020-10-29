@@ -23,6 +23,22 @@ class AuctionDecorator
     end
   end
 
+  def session_suspension_message
+    str = ''
+    if component.session_ended?
+      str << I18n.t("auction.messages.ended_session",
+             end_date: end_dispute_date,
+             end_time: end_dispute_time)
+      if component.session_restarted?
+        str << "</br>" + I18n.t("auction.messages.restarded_session",
+          restart_date: restart_dispute_date,
+          restart_time: restart_dispute_time)
+      end
+    end
+
+    str.html_safe
+  end
+
   def bid_opening_time
     return super.strftime("%H:%Mh") if super
     '-'
