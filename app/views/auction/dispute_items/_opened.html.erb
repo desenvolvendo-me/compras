@@ -1,0 +1,6 @@
+<%if current_user.employee? %>
+  <%= render 'auctioneer_opened_items' %>
+<%else %>
+  <%= render 'creditor_open_items' %>
+<%end %>
+

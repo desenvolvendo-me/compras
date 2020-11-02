@@ -1025,13 +1025,6 @@ Compras::Application.routes.draw do
       end
     end
 
-    resource :bids do
-      collection do
-        get :filter
-        get :modal
-      end
-    end
-
     resources :creditors do
       collection do
         get :filter
@@ -1066,7 +1059,13 @@ Compras::Application.routes.draw do
       resources :suspensions
     end
 
-
+    scope 'auction/:auction_id' do
+      resources :dispute_items do
+        collection do
+          get :closed_items
+        end
+      end
+    end
 
     resources :auction_items, only: [:index]
     get "/auction_items/group_lot" => "auction_items#group_lot", as: :group_lot_items

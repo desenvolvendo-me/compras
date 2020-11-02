@@ -1,0 +1,32 @@
+<table id="items" class="records">
+  <thead>
+  <th>Status</th>
+  <th>Descrição</th>
+  <th>Sua Proposta</th>
+  <th>Melhor Proposta</th>
+  </thead>
+
+  <tbody>
+  <% proposal.creditor_proposal_items_closed.each do |proposal_item| %>
+    <tr>
+      <td><%= proposal_item.proposal_status %></td>
+      <td><%= proposal_item.description %></td>
+      <td><%= number_to_currency proposal_item.global_price %></td>
+      <td><%= @auction.decorator.minimum_proposal_item(proposal_item.auction_item_id) %></td>
+    </tr>
+  <% end.empty? and begin %>
+    <tr><td class="text-sm-center" colspan="7">Voçe não tem nehum item proposta cadastrada para esse pregão.</td></tr>
+  <% end %>
+  </tbody>
+</table>
+
+<style>
+  h2#title{
+    display: none;
+  }
+
+  div#title h5{
+    font-size: 15px;
+    color: #4c7baa;
+  }
+</style>
