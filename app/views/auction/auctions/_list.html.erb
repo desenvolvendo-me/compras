@@ -7,13 +7,14 @@
           <div class="yui3-g section-gray">
             <div class="yui3-u-1">
               <div class="ellipsis">
-                <span style="float:right;">
-                 <%= link_to resource_path(resource) do  %>
-                     <i class="material-icons">print</i>
-                 <% end %>
-                </span>
-                <h5>Pregão:<%= "#{resource.licitation_number}/#{resource.year}" %> - Objeto: <%= resource.object %></h5>
+                <%= link_to resource_path(resource), class:'float-right pt-1' do  %>
+                  <i class="material-icons">print</i>
+                <% end %>
 
+                <span class="mr-2 float-right text-dark" style="font-size: 18px; font-weight: bolder"><%= resource.decorator.status %></span>
+
+
+                <h5>Pregão:<%= "#{resource.licitation_number}/#{resource.year}" %> - Objeto: <%= resource.object %></h5>
               </div>
             </div>
           </div>
