@@ -75,6 +75,14 @@ class Auction < Compras::Model
     restart_dispute_date.present? && restart_dispute_time.present?
   end
 
+  def suspended?
+    suspension.present? && suspension.reactivation?
+  end
+
+  def reactivated?
+    suspension.present? && !suspension.reactivation?
+  end
+
   private
   def clear_session_status
     if end_dispute_date_changed? and end_dispute_time_changed?
