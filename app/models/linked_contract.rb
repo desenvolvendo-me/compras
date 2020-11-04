@@ -3,6 +3,8 @@ class LinkedContract < Compras::Model
 
   orderize "id DESC"
   filterize
+  
+  belongs_to :contract
 
   scope :between_days_finish, lambda { |start_at, end_at|
     where { end_date_contract.gteq(Date.today + start_at.to_i) & end_date_contract.lteq(Date.today + end_at.to_i) }
