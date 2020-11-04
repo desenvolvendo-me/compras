@@ -105,7 +105,7 @@ class ContractAdditive < Compras::Model
   scope :between_days_finish, ->(start_at = Date.today, end_at) do
     start_at = Date.today + start_at.to_i unless start_at.is_a?(Date)
     end_at = Date.today + end_at.to_i unless end_at.is_a?(Date)
-    where(end_validity:start_at..end_at )
+    where(end_validity:start_at..end_at)
   end
 
 end
