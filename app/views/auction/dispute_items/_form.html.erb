@@ -1,0 +1,93 @@
+<div id="title">
+  <h5><%= "FORNECEDOR: #{current_user.try(:authenticable).try(:name)}" %></h5>
+  <h5>
+    <b>PROCESSO DE COMPRA: </b><%= "#{@auction.process_number}/#{@auction.year} " %>
+    <b>PREGÃO: </b><%= "#{@auction.licitation_number}/#{@auction.year} " %>
+    <b>OBJETO: </b><%= "#{@auction.object}" %>
+  </h5>
+  <h5>
+    <b>PREGOIERO: </b><%= "#{@auction.try(:user).try(:authenticable).try(:name)}" %>
+  </h5>
+  <h5>
+    <b><%= "Data da Licitação: #{(@auction.notice_availability.strftime('%d/%m/%Y - %H h') rescue 'não informado')}" %></b>
+    <b><%= "Data Atual: #{Time.now.strftime('%d/%m/%Y - %H h')}" %></b>
+  </h5>
+</div>
+
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <div class="collapse navbar-collapse" id="navbarTradingContent">
+    <ul class="navbar-nav mr-auto mx-auto">
+      <li class="nav-item active">
+        <%= link_to 'Abertos/Suspensos', new_auction_dispute_item_path(@auction),
+                    class: "nav-link waves-effect waves-light btn-nav" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to 'Fechados', closed_items_auction_dispute_items_path(@auction),
+                    class: "nav-link waves-effect waves-light btn-nav", remote: true %>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-effect waves-light btn-nav" href="#">Encerrados</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-effect waves-light btn-nav" href="#">Desempate ME/EPP/7174</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-effect waves-light btn-nav" href="#">Cancelados</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div id="clock" class="text-sm-right"></div>
+
+<div id="content-body">
+  <%= render 'opened', f: f %>
+</div>
+
+<style>
+  .light-blue{
+    background-color: #336497!important;
+  }
+
+  .btn-nav {
+    background: #007bff!important;
+    border-radius: 5px;
+    color: #7C7F81;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 123.1%;
+    padding: 0.5em;
+    text-decoration: none;
+  }
+  #navbarTradingContent li:last-child{
+    margin-left: 5px;
+  }
+  #navbarTradingContent li{
+    margin-left: 5px;
+  }
+
+  table.records {
+    color: #313131;
+    width: 100%;
+  }
+</style>
+
+<script>
+  $(function(){
+
+    function setNavLinkActive(){
+      $('#navbarTradingContent li').removeClass('active');
+      $(this).closest('li').addClass('active')
+    }
+
+    function myTimer() {
+      $("#clock").html("Data e Hora atual: " + (new Date).toLocaleString().substr(0, 16));
+    }
+
+    $('.nav-link').click(setNavLinkActive);
+
+
+    setInterval(myTimer ,1000);
+    myTimer();
+  })
+
+</script>

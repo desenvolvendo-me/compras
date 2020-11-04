@@ -1,0 +1,24 @@
+<div class="buttons">
+  <%= link_to 'Voltar', auction_auctions_path, class:'button' %>
+  <%= button_tag 'Encerrar/Reiniciar Sessão', type: 'button', class:'button btn-primary', id:'end-restart-dispute' %>
+</div>
+
+<script>
+  function loadModal(){
+    $('<div class="ui-modal" title="Encerrar/Reiniciar Sessão"></div>')
+      .html('<%= escape_javascript render'auction/auctions/modal_status_dispute', resource: @auction %>')
+      .on('dialogclose', function () { $(this).remove(); })
+      .dialog(
+        {
+          modal: true,
+          width: 700,
+          height: 450
+        }
+      )
+  }
+  $(document).on('click','#closeModal', function () {
+    $("body .ui-modal").dialog('close')
+  });
+
+  $("#end-restart-dispute").click(loadModal);
+</script>

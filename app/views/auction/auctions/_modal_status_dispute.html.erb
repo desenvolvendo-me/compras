@@ -1,0 +1,56 @@
+<%= simple_form_for resource.localized, :url => auction_auction_path(resource), class:'h-100' do |f| %>
+  <div class="d-flex flex-column justify-content-center" style="height: 80%">
+    <%if !resource.session_ended? %>
+      <h3 style="text-align: center"><b><%= t("auction.messages.end_session",
+                                              end_date: resource.decorator.end_dispute_date,
+                                              end_time: resource.decorator.end_dispute_time) %></b></h3>
+
+      <%= f.input :end_dispute_date, as: :hidden, input_html:{value: resource.decorator.end_dispute_date} %>
+      <%= f.input :end_dispute_time, as: :hidden, input_html:{value: resource.decorator.end_dispute_time} %>
+
+    <% else%>
+      <h3 style="text-align: center"><b><%= t("auction.messages.ended_session",
+                                              end_date: resource.decorator.end_dispute_date,
+                                              end_time: resource.decorator.end_dispute_time) %></b></h3>
+
+      <% if resource.session_ended? && !resource.session_restarted? %>
+        <hr>
+        <h4 style="text-align: center">Digite a data e hora da Reabertura</h4>
+        <div class="row">
+          <div class="col">
+            <%= f.input :restart_dispute_date %>
+          </div>
+          <div class="col">
+            <%= f.input :restart_dispute_time %>
+          </div>
+        </div>
+      <% else  %>
+        <h3 style="text-align: center"><b><%= t("auction.messages.restarded_session",
+                                                restart_date: resource.decorator.restart_dispute_date,
+                                                restart_time: resource.decorator.restart_dispute_time) %></b></h3>
+      <% end %>
+    <% end %>
+  </div>
+
+  <%if !resource.session_ended? || (resource.session_ended? && !resource.session_restarted?) %>
+    <div class="row buttons">
+      <div class="col text-right">
+        <button type="button" id="closeModal" class="button btn-danger">Cancelar</button>
+        <%= f.button :submit, class:'button btn-primary', confirm:'Você tem certeza que deseja Encerrar/Reiniciar a sessão?' %>
+      </div>
+    </div>
+  <% end %>
+
+<% end %>
+
+<style>
+  .simple_form{
+    height: 100%;
+    position: relative;
+  }
+  .buttons{
+    position: absolute;
+    right:    0;
+    bottom:   0;
+  }
+</style>
