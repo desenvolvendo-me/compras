@@ -18,6 +18,7 @@ class ContractsExporter
       style1 = ws.styles.add_style(:bg_color => "3B6A9B", :fg_color => "FFFFFF", b:true, sz: 14)
       style2 = ws.styles.add_style(b: true)
       style3 = ws.styles.add_style(:alignment => {:wrap_text => true})
+      style4 = ws.styles.add_style(:alignment => {:horizontal=> :left})
 
       ws.add_row ['RELATÓRIO DE CONTRATOS'], style: style1
       ws.merge_cells("A1:K1")
@@ -27,7 +28,7 @@ class ContractsExporter
         ws.add_row [contract.contract_number, contract.year, contract.creditor,
                           contract.decorator.publication_date, contract.contract_validity, contract.content,
                           contract.decorator.contract_value, contract.modality_humanize, contract.decorator.start_date,
-                          contract.decorator.end_date, contract.status], style: style3
+                          contract.decorator.end_date, contract.status], style: style4
       end
 
       ws.column_widths 20,10,50,25,20,80,25,20,20,20,20
@@ -44,7 +45,7 @@ class ContractsExporter
             (I18n.l(linked_contract.start_date_contract) if linked_contract.start_date_contract),
             (I18n.l(linked_contract.end_date_contract) if linked_contract.end_date_contract),
             linked_contract.contract.try(:creditor).person.try(:name)
-          ], style: style3
+          ], style: style4
         end
       end
 
@@ -61,7 +62,7 @@ class ContractsExporter
             contract_additive.additive_type_humanize,
             ( I18n.l(contract_additive.start_validity) if contract_additive.start_validity ),
             ( I18n.l(contract_additive.end_validity) if contract_additive.end_validity )
-          ], style: style3
+          ], style: style4
         end
       end
       
