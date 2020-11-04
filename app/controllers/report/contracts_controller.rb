@@ -6,8 +6,7 @@ class Report::ContractsController < Report::BaseController
     @report = report_instance
 
     if params[:between_days_finish] || params[:all]
-# raise
-# erro no filtro 30 a 60, n era pra trazer nd
+
       @contracts = params[:all] ? (Contract.all):(apply_scopes(Contract))
       @linked_contracts = LinkedContract.includes(:contract).between_days_finish(params[:linked_contract][:started_at],params[:linked_contract][:ended_at]) if params[:linked_contract]
       @contract_additives = ContractAdditive.between_days_finish(params[:contract_additive][:started_at],params[:contract_additive][:ended_at]) if params[:contract_additive]
