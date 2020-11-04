@@ -1,0 +1,27 @@
+<table class="records mt-1">
+  <tbody id="records">
+  <% if @contract_additives.blank? %>
+    <tr>
+      <td>Não foram encontrados Aditivos/Apostilamentos para esse periodo</td>
+    </tr>
+  <% end %>
+  <% @contract_additives.each do |resource| %>
+    <tr>
+      <td>
+        <p><%= link_to edit_contract_path(resource.contract_id) do %>
+          <%= I18n.t("enumerations.additive_kind.#{resource.additive_kind}") %> - <%= I18n.t("activerecord.attributes.contract_additive.number") %>: <%= resource.number %> - <%= I18n.t("activerecord.attributes.contract_additive.additive_type") %>: <%= I18n.t("enumerations.contract_additive_type.#{resource.additive_type}") %> - Data fim <%= l(resource.end_validity) if resource.end_validity %> 
+          <%end %>
+        </p>
+        <% if resource.decorated? && resource.decorator.respond_to?(:summary) %>
+          <p><%= resource.decorator.summary %></p>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<div class="text-center">
+  <%= page_entries_info @contract_additives, entry_name: 'Aditivos/Apostilamentos'  %>
+</div>
+
+<%= paginate @contract_additives, :params => { :controller => 'dashboard/secretaries', :action => 'contract_additives'}, :param_name => "page_contract_additive", remote: true %>
