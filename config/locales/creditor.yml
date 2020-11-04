@@ -2,8 +2,8 @@ pt-BR:
   activerecord:
     models:
       creditor:
-        one: "Credor"
-        other: "Credores"
+        one: "Fornecedor"
+        other: "Fornecedores"
 
     attributes:
       creditor:
