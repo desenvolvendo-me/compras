@@ -78,7 +78,7 @@ class AuctionDecorator
 
   def status
     priority_list = Hash.new
-    priority_list[1] = 'Pregão Aberto' unless component.proposal_delivery.future?
+    priority_list[1] = 'Pregão Aberto' unless component.proposal_delivery&.future?
     priority_list[2] = 'Pregão Suspenso' if suspended?
     priority_list[3] = 'Pregão Reativado' if reactivated?
     priority_list[4] = 'Pregão realizado no dia' if component.bid_opening.today?
