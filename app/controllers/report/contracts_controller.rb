@@ -7,6 +7,9 @@ class Report::ContractsController < Report::BaseController
 
     if params[:between_days_finish] || params[:all]
       @contracts = params[:all] ? (Contract.all):(apply_scopes(Contract))
+      @linked_contracts = LinkedContract.includes(:contract).between_days_finish(params[:linked_contract][:start_at],params[:linked_contract][:ended_at]) if params[:linked_contract]
+      @contract_additives = ContractAdditive.between_days_finish(params[:contract_additive][:start_at],params[:contract_additive][:ended_at]) if params[:contract_additive]
+
       respond_to do |format|
         format.html { render :show, layout: 'report' }
         format.xlsx do
