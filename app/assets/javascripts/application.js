@@ -22,6 +22,7 @@
 //= require select2/select2.min
 //= require select2/select2_locale_pt-BR
 //= require cocoon
+//= require private_pub
 
 $(".clear").live('click', function() {
   $(this).closest(".modal-finder").find("input.modal").val("");
