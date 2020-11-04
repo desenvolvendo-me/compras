@@ -1,0 +1,7 @@
+(function () {
+  var records = $('#contract_additive_records'),
+      content = records.closest('.ui-dialog-content');
+
+  records.html('<%= escape_javascript render('contract_additive_list') %>');
+
+})();
