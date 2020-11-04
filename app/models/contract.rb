@@ -183,11 +183,11 @@ class Contract < Compras::Model
   end
 
   def self.count_contracts_finishing
-    { 'between_121_150': Contract.between_days_finish(121, 150).count + LinkedContract.where(end_date_contract:Date.today+121..Date.today+150).count,
-     'between_91_120': Contract.between_days_finish(91, 120).count + LinkedContract.where(end_date_contract:Date.today+91..Date.today+120).count,
-     'between_61_90': Contract.between_days_finish(61, 90).count + LinkedContract.where(end_date_contract:Date.today+61..Date.today+90).count,
-     'between_31_60': Contract.between_days_finish(31, 60).count  + LinkedContract.where(end_date_contract:Date.today+31..Date.today+60).count,
-     'until_30': Contract.between_days_finish(0,30).count  + LinkedContract.where(end_date_contract:Date.today..Date.today+30).count }
+    { 'between_121_150': Contract.between_days_finish(121, 150).count + LinkedContract.where(end_date_contract:Date.today+121..Date.today+150).count + ContractAdditive.between_days_finish('121','150').count,
+     'between_91_120': Contract.between_days_finish(91, 120).count + LinkedContract.where(end_date_contract:Date.today+91..Date.today+120).count + ContractAdditive.between_days_finish('91','120').count,
+     'between_61_90': Contract.between_days_finish(61, 90).count + LinkedContract.where(end_date_contract:Date.today+61..Date.today+90).count + ContractAdditive.between_days_finish('61','90').count,
+     'between_31_60': Contract.between_days_finish(31, 60).count  + LinkedContract.where(end_date_contract:Date.today+31..Date.today+60).count + ContractAdditive.between_days_finish('31','60').count,
+     'until_30': Contract.between_days_finish(0,30).count  + LinkedContract.where(end_date_contract:Date.today..Date.today+30).count + ContractAdditive.between_days_finish('0','30').count }
   end
 
   def founded_debt_pledges
