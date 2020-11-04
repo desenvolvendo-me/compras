@@ -79,7 +79,7 @@
         <td><%= linked_contract.contract_number %></td>
         <td><%= I18n.l(linked_contract.start_date_contract) if linked_contract.start_date_contract %></td>
         <td><%= I18n.l(linked_contract.end_date_contract) if linked_contract.end_date_contract %></td>
-        <td><%= linked_contract.contract.creditor.person.name %></td>
+        <td><%= linked_contract.contract.try(:creditor).person.try(:name) %></td>
         </tr>
       <% end %>
       </tbody>
