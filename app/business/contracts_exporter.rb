@@ -1,6 +1,11 @@
 class ContractsExporter
-  def initialize(object)
-    @contracts  = object
+  def initialize(contracts,linked_contracts,contract_additives)
+    @contracts  = contracts
+    @count_contracts  = contracts ? (contracts.length):0
+    @linked_contracts  = linked_contracts
+    @count_linked_contracts  = linked_contracts ? (linked_contracts.length):0
+    @contract_additives  = contract_additives
+    @count_contract_additives  = contract_additives ? (contract_additives.length):0
   end
 
   def self.create!(*args)
@@ -26,6 +31,40 @@ class ContractsExporter
       end
 
       ws.column_widths 20,10,50,25,20,80,25,20,20,20,20
+
+      ws.add_row [""], style: style3
+      ws.add_row ["RELATÓRIO DE CONTRATOS VÍNCULADOS"], style: style1
+      ws.merge_cells("A#{@count_contracts+4}:K#{@count_contracts+4}")
+      ws.add_row LinkedContractReportDecorator.header_attributes.map{|x| x.mb_chars.upcase}, style: style2
+      
+      if @linked_contracts
+        @linked_contracts.each do |linked_contract|
+          ws.add_row [
+            linked_contract.contract_number,
+            (I18n.l(linked_contract.start_date_contract) if linked_contract.start_date_contract),
+            (I18n.l(linked_contract.end_date_contract) if linked_contract.end_date_contract),
+            linked_contract.contract.try(:creditor).person.try(:name)
+          ], style: style3
+        end
+      end
+
+      ws.add_row [""], style: style3
+      ws.add_row ["RELATÓRIO DE ADITIVOS/APOSTILAMENTO"], style: style1
+      ws.merge_cells("A#{@count_contracts+4+@count_linked_contracts+3}:K#{@count_contracts+4+@count_linked_contracts+3}")
+      ws.add_row ContractAdditiveReportDecorator.header_attributes.map{|x| x.mb_chars.upcase}, style: style2
+      
+      if @contract_additives
+        @contract_additives.each do |contract_additive|
+          ws.add_row [
+            contract_additive.number,
+            contract_additive.additive_kind_humanize,
+            contract_additive.additive_type_humanize,
+            ( I18n.l(contract_additive.start_validity) if contract_additive.start_validity ),
+            ( I18n.l(contract_additive.end_validity) if contract_additive.end_validity )
+          ], style: style3
+        end
+      end
+      
     end
     filename = "/tmp/contracts_#{Time.now.strftime("%Y%m%d%H%M%S")}.xlsx"
     wb.serialize(filename)
