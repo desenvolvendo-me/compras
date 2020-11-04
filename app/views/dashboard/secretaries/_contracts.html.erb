@@ -27,7 +27,7 @@
   <div>
     <span class="title-table">Contratos com 30 dias para vencer</span>
     <% @days = {started_at:0,ended_at:30} %>
-      <%= link_to 'Imprimir Contratos', report_contracts_path(:between_days_finish => @days), :taget=> '_blank', :class => 'button primary btn-small print-contracts' %>
+      <%= link_to 'Imprimir Contratos', report_contracts_path(:between_days_finish => @days, :linked_contract => {started_at:0,ended_at:30}, :contract_additive => {started_at:0,ended_at:30} ), :taget=> '_blank', :class => 'button primary btn-small print-contracts' %>
       <%= link_to 'Gerar Planilha dos Contratos', report_contracts_path(:between_days_finish => @days, format: :xlsx), :taget=> '_blank', :class => 'button primary btn-small download-contracts' %>
   </div>
   <div id="contract_records">
@@ -99,9 +99,8 @@
     $('.title-table-contract-additive').html('Aditivos/Apostilamentos com 30 dias para vencer');
     getContracts(0,30);
     getLinkedContracts(30);
-    console.log('0,30');
     getContractAdditive('0','30');
-    $('.print-contracts').attr('href', "<%= report_contracts_path(:between_days_finish => {started_at:0,ended_at:30}) %>" )
+    $('.print-contracts').attr('href', "<%= report_contracts_path(:between_days_finish => {started_at:0,ended_at:30}, linked_contract: {started_at:0,ended_at:30}, contract_additive: {started_at:0,ended_at:30}) %>" )
     $('.download-contracts').attr('href', "<%= report_contracts_path(:between_days_finish => {started_at:0,ended_at:30}, format: :xlsx) %>" )
   });
 
