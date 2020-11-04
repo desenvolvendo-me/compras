@@ -17,7 +17,7 @@
 
 <br>
 
-<% if @contracts %>
+<% unless @contracts.empty? %>
   <div>
     <table class="records">
       <thead>
@@ -28,24 +28,18 @@
       </tr>
       </thead>
       <tbody>
-
-      <%
-        def date_mask(d)
-          return d.strftime("%d/%m/%Y") unless d.nil?
-        end
-      %>
       <% @contracts.each do |contract| %>
         <tr>
           <td><%= contract.contract_number %></td>
           <td><%= contract.year %></td>
           <td><%= contract.creditor %></td>
-          <td><%= date_mask(contract.publication_date) %></td>
+          <td><%= I18n.l(contract.publication_date) if contract.publication_date %></td>
           <td><%= contract.contract_validity %></td>
           <td><%= contract.content %></td>
           <td><%= contract.decorator.contract_value %></td>
           <td><%= contract.modality_humanize %></td>
-          <td><%= date_mask(contract.start_date) %></td>
-          <td><%= date_mask(contract.end_date) %></td>
+          <td><%= I18n.l(contract.start_date) if contract.start_date %></td>
+          <td><%= I18n.l(contract.end_date) if contract.end_date %></td>
           <td><%= contract.status %></td>
         </tr>
       <% end %>
@@ -54,5 +48,85 @@
   </div>
 
 <% else %>
+  <h2 style="text-align: center" > <b> Não existe contratos para estes filtros ! </b> </h2>  
+<% end %>
+
+<% if @linked_contracts && !@linked_contracts.empty? %>
+  <div>
+    <table class="records">
+      <thead>
+      <tr  style="text-align: center;">
+        <td width="60%"> RELATÓRIO DE CONTRATOS VÍNCULADOS </td>
+        <td width="20%"> <%= Time.new.strftime("%d/%m/%Y") %> </td>
+      </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <table class="records">
+      <thead>
+      <tr>
+        <% LinkedContractReportDecorator.header_attributes.each do | header| %>
+          <th><%= header.mb_chars.upcase %></th>
+        <% end %>
+      </tr>
+      </thead>
+      <tbody>
+      <% @linked_contracts.each do |linked_contract| %>
+        <tr>
+        <td><%= linked_contract.contract_number %></td>
+        <td><%= I18n.l(linked_contract.start_date_contract) if linked_contract.start_date_contract %></td>
+        <td><%= I18n.l(linked_contract.end_date_contract) if linked_contract.end_date_contract %></td>
+        <td><%= linked_contract.contract.creditor.person.name %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+
+<% elsif @contract_additives %>
+  <h2 style="text-align: center" > <b> Não existe contratos para estes filtros ! </b> </h2>  
+<% end %>
+
+
+<% if @contract_additives && !@contract_additives.empty? %>
+  <div>
+    <table class="records">
+      <thead>
+      <tr  style="text-align: center;">
+        <td width="60%"> RELATÓRIO DE ADITIVOS/APOSTILAMENTO </td>
+        <td width="20%"> <%= Time.new.strftime("%d/%m/%Y") %> </td>
+      </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <table class="records">
+      <thead>
+      <tr>
+        <% ContractAdditiveReportDecorator.header_attributes.each do | header| %>
+          <th><%= header.mb_chars.upcase %></th>
+        <% end %>
+      </tr>
+      </thead>
+      <tbody>
+      <% @contract_additives.each do |contract_additive| %>
+        <tr>
+        <td><%= contract_additive.number %></td>
+        <td><%= contract_additive.additive_kind_humanize %></td>
+        <td><%= contract_additive.additive_type_humanize %></td>
+        <td><%= I18n.l(contract_additive.start_validity) if contract_additive.start_validity %></td>
+        <td><%= I18n.l(contract_additive.end_validity) if contract_additive.end_validity %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+
+<% elsif  @contract_additives && @contract_additives.empty?  %>
   <h2 style="text-align: center" > <b> Não existe contratos para estes filtros ! </b> </h2>  
 <% end %>
