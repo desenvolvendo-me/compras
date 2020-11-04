@@ -13,6 +13,9 @@ gem 'pg'
 gem 'activerecord-connections', '0.0.3'
 gem 'activerecord-postgres-hstore', '~> 0.7.6'
 
+gem "private_pub"
+gem "thin"
+
 source 'http://foo:BringMeSomeBeerNow@devops.nobesistemas.com.br:9292/' do
   gem 'active_relatus', '0.2.1'
   gem 'quaestio', '0.1.1'
