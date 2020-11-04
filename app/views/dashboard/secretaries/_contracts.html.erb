@@ -28,7 +28,7 @@
     <span class="title-table">Contratos com 30 dias para vencer</span>
     <% @days = {started_at:0,ended_at:30} %>
       <%= link_to 'Imprimir Contratos', report_contracts_path(:between_days_finish => @days, :linked_contract => {started_at:0,ended_at:30}, :contract_additive => {started_at:0,ended_at:30} ), :taget=> '_blank', :class => 'button primary btn-small print-contracts' %>
-      <%= link_to 'Gerar Planilha dos Contratos', report_contracts_path(:between_days_finish => @days, format: :xlsx), :taget=> '_blank', :class => 'button primary btn-small download-contracts' %>
+      <%= link_to 'Gerar Planilha dos Contratos', report_contracts_path(:between_days_finish => @days, :linked_contract => @days, :contract_additive => @days , format: :xlsx), :taget=> '_blank', :class => 'button primary btn-small download-contracts' %>
   </div>
   <div id="contract_records">
     <%= render 'contract_list' %>
@@ -60,8 +60,8 @@
     getContracts(121, 150);
     getLinkedContracts(121, 150);
     getContractAdditive(121, 150);    
-    $('.print-contracts').attr('href', "<%= report_contracts_path(:between_days_finish => {started_at:121,ended_at:150}) %>" )
-    $('.download-contracts').attr('href', "<%= report_contracts_path(:between_days_finish => {started_at:121,ended_at:150}, format: :xlsx) %>" )
+    $('.print-contracts').attr('href', "<%= report_contracts_path(:between_days_finish => {started_at:121,ended_at:150}, :linked_contract => {started_at:121,ended_at:150}, :contract_additive => {started_at:121,ended_at:150}) %>" )
+    $('.download-contracts').attr('href', "<%= report_contracts_path(:between_days_finish => {started_at:121,ended_at:150, :linked_contract => {started_at:121,ended_at:150}, :contract_additive => {started_at:121,ended_at:150}}, format: :xlsx) %>" )
   });
   $('.by_91_120').click(function(){
     $('.title-table').html('Contratos com 120 dias para vencer');
@@ -70,8 +70,8 @@
     getContracts(91, 120);
     getLinkedContracts(91, 120);
     getContractAdditive(91, 120);
-    $('.print-contracts').attr('href', "<%= report_contracts_path(:between_days_finish => {started_at:91,ended_at:120}) %>" )
-    $('.download-contracts').attr('href', "<%= report_contracts_path(:between_days_finish => {started_at:91,ended_at:120}, format: :xlsx) %>" )
+    $('.print-contracts').attr('href', "<%= report_contracts_path(:between_days_finish => {started_at:91,ended_at:120}, :linked_contract => {started_at:91,ended_at:120}, :contract_additive => {started_at:91,ended_at:120}) %>" )
+    $('.download-contracts').attr('href', "<%= report_contracts_path(:between_days_finish => {started_at:91,ended_at:120}, :linked_contract => {started_at:91,ended_at:120}, :contract_additive => {started_at:91,ended_at:120}, format: :xlsx) %>" )
   });
   $('.by_61_90').click(function(){
     $('.title-table').html('Contratos com 90 dias para vencer');
@@ -80,8 +80,8 @@
     getContracts(61, 90);
     getLinkedContracts(61, 90);
     getContractAdditive(61, 90);
-    $('.print-contracts').attr('href', "<%= report_contracts_path(:between_days_finish => {started_at:61,ended_at:90}) %>" )
-    $('.download-contracts').attr('href', "<%= report_contracts_path(:between_days_finish => {started_at:61,ended_at:90}, format: :xlsx) %>" )
+    $('.print-contracts').attr('href', "<%= report_contracts_path(:between_days_finish => {started_at:61,ended_at:90}, :linked_contract => {started_at:61,ended_at:90}, :contract_additive => {started_at:61,ended_at:90}) %>" )
+    $('.download-contracts').attr('href', "<%= report_contracts_path(:between_days_finish => {started_at:61,ended_at:90}, :linked_contract => {started_at:61,ended_at:90}, :contract_additive => {started_at:61,ended_at:90}, format: :xlsx) %>" )
   });
   $('.by_31_60').click(function(){
     $('.title-table').html('Contratos com 60 dias para vencer');
@@ -90,8 +90,8 @@
     getContracts(31, 60);
     getLinkedContracts(31, 60);
     getContractAdditive(31, 60);
-    $('.print-contracts').attr('href', "<%= report_contracts_path(:between_days_finish => {started_at:31,ended_at:60}) %>" )
-    $('.download-contracts').attr('href', "<%= report_contracts_path(:between_days_finish => {started_at:31,ended_at:60}, format: :xlsx) %>" )
+    $('.print-contracts').attr('href', "<%= report_contracts_path(:between_days_finish => {started_at:31,ended_at:60}, :linked_contract => {started_at:31,ended_at:60}, :contract_additive => {started_at:31,ended_at:60}) %>" )
+    $('.download-contracts').attr('href', "<%= report_contracts_path(:between_days_finish => {started_at:31,ended_at:60}, :linked_contract => {started_at:31,ended_at:60}, :contract_additive => {started_at:31,ended_at:60}, format: :xlsx) %>" )
   });
   $('.until_30').click(function(){
     $('.title-table').html('Contratos com 30 dias para vencer');
@@ -101,7 +101,7 @@
     getLinkedContracts(30);
     getContractAdditive('0','30');
     $('.print-contracts').attr('href', "<%= report_contracts_path(:between_days_finish => {started_at:0,ended_at:30}, linked_contract: {started_at:0,ended_at:30}, contract_additive: {started_at:0,ended_at:30}) %>" )
-    $('.download-contracts').attr('href', "<%= report_contracts_path(:between_days_finish => {started_at:0,ended_at:30}, format: :xlsx) %>" )
+    $('.download-contracts').attr('href', "<%= report_contracts_path(:between_days_finish => {started_at:0,ended_at:30}, :linked_contract => {started_at:0,ended_at:30}, :contract_additive => {started_at:0,ended_at:30}, format: :xlsx) %>" )
   });
 
   function getLinkedContracts(date1, date2){
