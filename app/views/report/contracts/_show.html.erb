@@ -51,20 +51,24 @@
   <h2 style="text-align: center" > <b> Não existe contratos para estes filtros ! </b> </h2>  
 <% end %>
 
+<% if @linked_contracts %>
+<div>
+<table class="records">
+  <thead>
+  <tr  style="text-align: center;">
+    <td width="60%"> RELATÓRIO DE CONTRATOS VÍNCULADOS </td>
+    <td width="20%"> <%= Time.new.strftime("%d/%m/%Y") %> </td>
+  </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+</div>
+<div>
+<% end %>
+
 <% if @linked_contracts && !@linked_contracts.empty? %>
-  <div>
-    <table class="records">
-      <thead>
-      <tr  style="text-align: center;">
-        <td width="60%"> RELATÓRIO DE CONTRATOS VÍNCULADOS </td>
-        <td width="20%"> <%= Time.new.strftime("%d/%m/%Y") %> </td>
-      </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
-  </div>
-  <div>
+
     <table class="records">
       <thead>
       <tr>
@@ -87,24 +91,26 @@
   </div>
 
 <% elsif @contract_additives %>
-  <h2 style="text-align: center" > <b> Não existe contratos para estes filtros ! </b> </h2>  
+  <h2 style="text-align: center" > <b> Não existe contratos vínculados para estes filtros ! </b> </h2>  
 <% end %>
 
-
-<% if @contract_additives && !@contract_additives.empty? %>
+<% if @contract_additives %>
   <div>
-    <table class="records">
-      <thead>
-      <tr  style="text-align: center;">
-        <td width="60%"> RELATÓRIO DE ADITIVOS/APOSTILAMENTO </td>
-        <td width="20%"> <%= Time.new.strftime("%d/%m/%Y") %> </td>
-      </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
+  <table class="records">
+    <thead>
+    <tr  style="text-align: center;">
+      <td width="60%"> RELATÓRIO DE ADITIVOS/APOSTILAMENTO </td>
+      <td width="20%"> <%= Time.new.strftime("%d/%m/%Y") %> </td>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
   </div>
   <div>
+<% end %>
+
+<% if @contract_additives && !@contract_additives.empty? %>
     <table class="records">
       <thead>
       <tr>
@@ -128,5 +134,5 @@
   </div>
 
 <% elsif  @contract_additives && @contract_additives.empty?  %>
-  <h2 style="text-align: center" > <b> Não existe contratos para estes filtros ! </b> </h2>  
+  <h2 style="text-align: center" > <b> Não existe aditivos/apostilamentos para estes filtros ! </b> </h2>  
 <% end %>
