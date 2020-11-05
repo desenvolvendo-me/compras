@@ -18,7 +18,7 @@
         <h5 class="card-title">Lances</h5>
         <p class="card-text">Apresentar lance.</p>
       </div>
-      <a href="<%=new_auction_bids_path(auction_id: resource) %>" class="card-link">
+      <a href="<%=new_auction_dispute_item_path(auction_id: resource) %>" class="card-link">
         <div class="card-footer text-muted">
           Clique Aqui
         </div>
@@ -57,12 +57,13 @@
   <div class="col-sm-4">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Encerrar Seção</h5>
+        <h5 class="card-title">Encerrar Sessão / Reiniciar Sessão</h5>
         <br/>
-        
-        <p class="card-text">Encerrar seção.</p>
+        <p class="card-text" style="color: red">
+          <%= resource.decorator.session_suspension_message %>
+        </p>
       </div>
-      <a href="#" class="card-link">
+      <a href="#" class="card-link" id="end-restart-dispute">
         <div class="card-footer text-muted">
           Clique Aqui
         </div>
@@ -133,10 +134,35 @@
 </main>
 </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<%unless current_user %>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script>
+    window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')
+  </script><script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+  <script src="dashboard.js"></script>
+<% end %>
+
+<%if current_user %>
 <script>
-  window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')
-</script><script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
-<script src="dashboard.js"></script>
+  function loadModal(){
+    $('<div class="ui-modal" title="Encerrar/Reiniciar Sessão"></div>')
+      .html('<%= escape_javascript render('auction/auctions/modal_status_dispute') %>')
+      .on('dialogclose', function () { $(this).remove(); })
+      .dialog(
+        {
+          modal: true,
+          width: 700,
+          height: 450
+        }
+      )
+  }
+  $(document).on('click','#closeModal', function () {
+    $("body .ui-modal").dialog('close')
+  });
+
+  $("#end-restart-dispute").click(loadModal);
+</script>
+
+<%end %>

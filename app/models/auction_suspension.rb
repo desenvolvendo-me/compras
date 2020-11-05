@@ -11,8 +11,6 @@ class AuctionSuspension < Compras::Model
   validates :reactivation_date, :reactivation_reason, :responsible_reactivation_id, presence: true, unless: :reactivation?
 
 
-  private
-
   def reactivation?
     reactivation_reason.blank? and reactivation_date.blank?
   end

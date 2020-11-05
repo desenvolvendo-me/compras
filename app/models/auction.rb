@@ -4,7 +4,8 @@ class Auction < Compras::Model
                   :object, :object_management, :employee_id, :items_attributes, :sensitive_value, :variation_type, :minimum_interval,
                   :decree_treatment, :document_edict, :disclosure_date, :responsible_dissemination_id, :notice_availability,
                   :proposal_delivery, :bid_opening, :internet_address, :city,
-                  :neighborhood, :street, :telephone, :cell_phone, :user_id, :bid_opening_time
+                  :neighborhood, :street, :telephone, :cell_phone, :user_id, :bid_opening_time,
+                  :end_dispute_date, :end_dispute_time, :restart_dispute_date, :restart_dispute_time
 
   attr_modal :licitation_number, :process_number, :proposal_delivery, :bid_opening, :object
 
@@ -40,6 +41,8 @@ class Auction < Compras::Model
   validates :cell_phone, mask: "(99) 99999-9999", :allow_blank => true
   validates :telephone, mask: "(99) 9999-9999", :allow_blank => true
 
+  before_save :clear_session_status
+
   def self.ordered
     order("notice_availability >= '#{Date.today}', notice_availability ASC, proposal_delivery >= '#{Date.today}', notice_availability ASC")
   end
@@ -53,5 +56,38 @@ class Auction < Compras::Model
 
   def to_s
     "#{licitation_number}/#{year}"
+  end
+
+
+  def creditor_proposal (creditor_id)
+    creditor_proposals.includes(:auction_creditor_proposal_items).find_by_creditor_id(creditor_id)
+  end
+
+  def minimum_proposal_item item_id
+    auction_creditor_proposal_items.where(auction_item_id: item_id).minimum(:global_price)
+  end
+
+  def session_ended?
+    end_dispute_date.present? && end_dispute_time.present?
+  end
+
+  def session_restarted?
+    restart_dispute_date.present? && restart_dispute_time.present?
+  end
+
+  def suspended?
+    suspension.present? && suspension.reactivation?
+  end
+
+  def reactivated?
+    suspension.present? && !suspension.reactivation?
+  end
+
+  private
+  def clear_session_status
+    if end_dispute_date_changed? and end_dispute_time_changed?
+      self.restart_dispute_date = nil
+      self.restart_dispute_time = nil
+    end
   end
 end

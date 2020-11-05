@@ -24,6 +24,12 @@ class AuctionCreditorProposal < Compras::Model
     auction_creditor_proposal_items.sum{|x| x.global_price || 0}
   end
 
+  def creditor_proposal_items_closed
+    item_ids = auction.dispute_items.closed.pluck(:auction_item_id)
+
+    auction_creditor_proposal_items.where(auction_item_id: item_ids)
+  end
+
   private
 
   def set_proposal_send_date

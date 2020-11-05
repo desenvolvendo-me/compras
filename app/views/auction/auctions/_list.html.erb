@@ -7,13 +7,14 @@
           <div class="yui3-g section-gray">
             <div class="yui3-u-1">
               <div class="ellipsis">
-              <span style="float:right;">
-                <%= link_to resource_path(resource) do  %>
-                   <i class="material-icons">print</i>
-               <% end %>
-                </span>
-                <h5>Pregão:<%= "#{resource.licitation_number}/#{resource.year}" %> - Objeto: <%= resource.object %></h5>
+                <%= link_to resource_path(resource), class:'float-right pt-1' do  %>
+                  <i class="material-icons">print</i>
+                <% end %>
 
+                <span class="mr-2 float-right text-dark" style="font-size: 18px; font-weight: bolder"><%= resource.decorator.status %></span>
+
+
+                <h5>Pregão:<%= "#{resource.licitation_number}/#{resource.year}" %> - Objeto: <%= resource.object %></h5>
               </div>
             </div>
           </div>
@@ -81,7 +82,7 @@
                   <%= link_to "Gestão do Pregão", dashboard_auction_auction_path(resource), class: 'btn btn-primary' %>
                   <%= link_to "Visualizar", resource_path(resource), class: 'btn btn-primary' %>
                   <%= link_to "Proposta", proposal_path(resource) , class: 'btn btn-primary' %>
-                  <%= link_to 'Disputa', new_auction_bids_path(auction_id: resource), class: 'btn btn-primary' %>
+                  <%= link_to 'Disputa', new_auction_dispute_item_path(resource), class: 'btn btn-primary' %>
                 </div>
               </div>
 
