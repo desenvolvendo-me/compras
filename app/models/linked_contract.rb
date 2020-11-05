@@ -1,4 +1,6 @@
 class LinkedContract < Compras::Model
+  include HelperModule
+
   attr_accessible :contract_id,:contract_number,:start_date_contract,:end_date_contract,:contract_value
 
   orderize "id DESC"
