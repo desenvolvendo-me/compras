@@ -231,6 +231,11 @@ class Contract < Compras::Model
     service_status_all - answered
   end
 
+  def contract_value_currency
+    self.contract_value = '' unless self.contract_value
+    ActionController::Base.helpers.number_to_currency(self.contract_value).sub!('R$ ','')
+  end
+
   private
 
   def group_purchase_solicitation_with_materials(material_ids, purchase_solicitation_ids)
