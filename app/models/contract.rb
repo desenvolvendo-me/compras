@@ -1,4 +1,5 @@
 class Contract < Compras::Model
+  include HelperModule
   include BelongsToResource
 
   attr_accessible :year, :contract_number, :sequential_number, :publication_date,
@@ -229,11 +230,6 @@ class Contract < Compras::Model
       service_status_all += service_status.last
     end
     service_status_all - answered
-  end
-
-  def contract_value_currency
-    self.contract_value = '' unless self.contract_value
-    ActionController::Base.helpers.number_to_currency(self.contract_value).sub!('R$ ','')
   end
 
   private
