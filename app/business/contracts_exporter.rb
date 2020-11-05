@@ -55,7 +55,7 @@ class ContractsExporter
             (I18n.l(linked_contract.start_date_contract) if linked_contract.start_date_contract),
             (I18n.l(linked_contract.end_date_contract) if linked_contract.end_date_contract),
             linked_contract.contract.contract_value_currency,
-            linked_contract.end_date_contract < Date.today ? "FINALIZADO":"VIGENTE"
+            (linked_contract.end_date_contract < Date.today ? "FINALIZADO":"VIGENTE" if linked_contract.end_date_contract)
           ], style: style4
         end
       end
@@ -75,7 +75,7 @@ class ContractsExporter
             ( I18n.l(contract_additive.start_validity) if contract_additive.start_validity ),
             ( I18n.l(contract_additive.end_validity) if contract_additive.end_validity ),
             contract_additive.contract.contract_value_currency,
-            contract_additive.end_validity < Date.today ? "FINALIZADO":"VIGENTE"
+            (contract_additive.end_validity < Date.today ? "FINALIZADO":"VIGENTE"  if contract_additive.end_validity)
           ], style: style4
         end
       end
