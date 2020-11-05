@@ -31,10 +31,7 @@
       <% @contracts.each do |contract| %>
         <tr>
           <td><%= contract.contract_number %></td>
-          <td><%= contract.year %></td>
           <td><%= contract.creditor %></td>
-          <td><%= I18n.l(contract.publication_date) if contract.publication_date %></td>
-          <td><%= contract.contract_validity %></td>
           <td><%= contract.content %></td>
           <td><%= contract.decorator.contract_value %></td>
           <td><%= contract.modality_humanize %></td>
@@ -80,10 +77,14 @@
       <tbody>
       <% @linked_contracts.each do |linked_contract| %>
         <tr>
-        <td><%= linked_contract.contract_number %></td>
-        <td><%= I18n.l(linked_contract.start_date_contract) if linked_contract.start_date_contract %></td>
-        <td><%= I18n.l(linked_contract.end_date_contract) if linked_contract.end_date_contract %></td>
-        <td><%= linked_contract.contract.try(:creditor).person.try(:name) %></td>
+          <td><%= linked_contract.contract_number %></td>
+          <td><%= linked_contract.contract.contract_number if linked_contract.contract %></td>
+          <td><%= linked_contract.contract.content if linked_contract.contract %></td>
+          <td><%= number_to_currency(linked_contract.contract_value, :unit => "") %></td>
+          <td><%= linked_contract.contract.modality_humanize if linked_contract.contract %></td>
+          <td><%= I18n.l(linked_contract.start_date_contract) if linked_contract.start_date_contract %></td>
+          <td><%= I18n.l(linked_contract.end_date_contract) if linked_contract.end_date_contract %></td>
+          <td><%= (linked_contract.end_date_contract < Date.today ? "FINALIZADO":"VIGENTE" if linked_contract.end_date_contract) %></td>
         </tr>
       <% end %>
       </tbody>
@@ -122,13 +123,17 @@
       <tbody>
       <% @contract_additives.each do |contract_additive| %>
         <tr>
-        <td><%= contract_additive.number %></td>
-        <td><%= contract_additive.additive_kind_humanize %></td>
-        <td><%= contract_additive.additive_type_humanize %></td>
-        <td><%= I18n.l(contract_additive.start_validity) if contract_additive.start_validity %></td>
-        <td><%= I18n.l(contract_additive.end_validity) if contract_additive.end_validity %></td>
+          <td><%= contract_additive.number %></td>
+          <td><%= contract_additive.contract.creditor if contract_additive.contract %></td>
+          <td><%= contract_additive.contract.content if contract_additive.contract %></td>
+          <td><%= number_to_currency(contract_additive.additive_kind_value, :unit => "") %></td>
+          <td><%= contract_additive.contract.modality_humanize if contract_additive.contract %></td>
+          <td><%= I18n.l(contract_additive.start_validity) if contract_additive.start_validity %></td>
+          <td><%= I18n.l(contract_additive.end_validity) if contract_additive.end_validity %></td>
+          <td><%= (contract_additive.end_validity < Date.today ? "FINALIZADO":"VIGENTE" if contract_additive.end_validity) %></td>
         </tr>
       <% end %>
+      # falta colocar os valores pra Real e mudar as observações p excel tbm
       </tbody>
     </table>
   </div>
