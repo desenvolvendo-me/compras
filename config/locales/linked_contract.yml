@@ -8,7 +8,7 @@ pt-BR:
     attributes:
       linked_contract:
         contract_number: "Numero do Contrato"
-        start_date_contract: "Data de Inicio do Contrato"
-        end_date_contract: "Data de Fim do Contrato"
+        start_date_contract: "Data de Inicio"
+        end_date_contract: "Data de Fim"
         contract_value: "Valor do Contrato"
 
