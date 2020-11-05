@@ -61,7 +61,7 @@
     getLinkedContracts(121, 150);
     getContractAdditive(121, 150);    
     $('.print-contracts').attr('href', "<%= report_contracts_path(:between_days_finish => {started_at:121,ended_at:150}, :linked_contract => {started_at:121,ended_at:150}, :contract_additive => {started_at:121,ended_at:150}) %>" )
-    $('.download-contracts').attr('href', "<%= report_contracts_path(:between_days_finish => {started_at:121,ended_at:150, :linked_contract => {started_at:121,ended_at:150}, :contract_additive => {started_at:121,ended_at:150}}, format: :xlsx) %>" )
+    $('.download-contracts').attr('href', "<%= report_contracts_path(:between_days_finish => {started_at:121,ended_at:150}, :linked_contract => {started_at:121,ended_at:150}, :contract_additive => {started_at:121,ended_at:150}, format: :xlsx) %>" )
   });
   $('.by_91_120').click(function(){
     $('.title-table').html('Contratos com 120 dias para vencer');
