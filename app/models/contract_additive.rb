@@ -1,4 +1,6 @@
 class ContractAdditive < Compras::Model
+  include HelperModule
+
   attr_accessible :number, :additive_type, :signature_date, :end_date,
                   :publication_date, :dissemination_source_id, :value,
                   :observation, :contract_id, :additive_kind, :description,
