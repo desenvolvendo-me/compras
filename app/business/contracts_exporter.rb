@@ -36,7 +36,7 @@ class ContractsExporter
           contract.content,
           contract.start_date ? "#{I18n.l(contract.start_date)}":"",
           contract.end_date ? "#{I18n.l(contract.end_date)}":"",
-          contract.contract_value_currency,
+          contract.to_number_to_currency(contract.contract_value),
           contract.end_date < Date.today ? "FINALIZADO":"VIGENTE"], style: style4
       end
       ws.column_widths 60,20,30,40,30,30,30,20
@@ -54,7 +54,7 @@ class ContractsExporter
             linked_contract.contract.content,
             (I18n.l(linked_contract.start_date_contract) if linked_contract.start_date_contract),
             (I18n.l(linked_contract.end_date_contract) if linked_contract.end_date_contract),
-            linked_contract.contract.contract_value_currency,
+            linked_contract.to_number_to_currency(linked_contract.contract_value),
             (linked_contract.end_date_contract < Date.today ? "FINALIZADO":"VIGENTE" if linked_contract.end_date_contract)
           ], style: style4
         end
@@ -74,7 +74,7 @@ class ContractsExporter
             contract_additive.contract.content,
             ( I18n.l(contract_additive.start_validity) if contract_additive.start_validity ),
             ( I18n.l(contract_additive.end_validity) if contract_additive.end_validity ),
-            contract_additive.contract.contract_value_currency,
+            contract_additive.to_number_to_currency(contract_additive.additive_kind_value),
             (contract_additive.end_validity < Date.today ? "FINALIZADO":"VIGENTE"  if contract_additive.end_validity)
           ], style: style4
         end
