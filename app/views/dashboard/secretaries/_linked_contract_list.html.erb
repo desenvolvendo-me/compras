@@ -9,7 +9,9 @@
     <tr>
       <td>
         <p><%= link_to edit_contract_path(resource.contract_id) do %>
-            Contrato Vinculado <%= resource.contract_number %> - Data fim <%= l(resource.end_date_contract) if resource.end_date_contract %> - Fornecedor <%= Contract.find(resource.contract_id).creditor.person.name %>
+            <%= (LinkedContract.model_name.human).mb_chars.upcase %> <%= resource.contract_number %> - 
+            <%= (LinkedContract.human_attribute_name :end_date_contract).mb_chars.upcase %> <%= l(resource.end_date_contract) if resource.end_date_contract %> - 
+            <%= (Contract.human_attribute_name :creditor).mb_chars.upcase %> <%= Contract.find(resource.contract_id).creditor.person.name %>
           <%end %>
             </p>
         <% if resource.decorated? && resource.decorator.respond_to?(:summary) %>
