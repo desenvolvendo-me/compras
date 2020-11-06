@@ -18,11 +18,11 @@ pt-BR:
         content: 'Objeto do Contrato/Ata'
         contract_file: 'Contrato/Ata'
         contract_guarantees: 'Garantias do Contrato/Ata'
-        contract_number: "Número do Contrato/Ata"
+        contract_number: "Número"
         contract_type: 'Tipo de Contrato/Ata'
         contract_type_id: 'Tipo de Contrato/Ata'
         contract_validity: 'Validade do Contrato/Ata'
-        contract_value: 'Valor do Contrato/Ata'
+        contract_value: 'Valor do Contrato'
         creditors: 'Fornecedores'
         creditor: 'Fornecedor'
         default_fine: "Multa Inadimplemento"
@@ -55,3 +55,4 @@ pt-BR:
         management_object: "Objeto"
         type_contract: "Tipo de Execução de Processo"
         principal_contract: "Contrato Principal do Fornecedor"
+        status: "Status"

@@ -1,4 +1,5 @@
 class Contract < Compras::Model
+  include HelperModule
   include BelongsToResource
 
   attr_accessible :year, :contract_number, :sequential_number, :publication_date,

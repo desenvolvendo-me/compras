@@ -9,7 +9,11 @@
     <tr>
       <td>
         <p><%= link_to edit_contract_path(resource.contract_id) do %>
-          <%= I18n.t("enumerations.additive_kind.#{resource.additive_kind}") %> - <%= I18n.t("activerecord.attributes.contract_additive.number") %>: <%= resource.number %> - <%= I18n.t("activerecord.attributes.contract_additive.additive_type") %>: <%= I18n.t("enumerations.contract_additive_type.#{resource.additive_type}") %> - Data fim <%= l(resource.end_validity) if resource.end_validity %> 
+          <%= 
+            I18n.t("enumerations.additive_kind.#{resource.additive_kind}").mb_chars.upcase %> - 
+            <%= I18n.t("activerecord.attributes.contract_additive.number").mb_chars.upcase %>: <%= resource.number %> - 
+            <%= (Contract.human_attribute_name :creditor).mb_chars.upcase %>: <%= resource.contract.creditor if resource.contract %> - 
+            DATA FIM: <%= l(resource.end_validity) if resource.end_validity %> 
           <%end %>
         </p>
         <% if resource.decorated? && resource.decorator.respond_to?(:summary) %>
