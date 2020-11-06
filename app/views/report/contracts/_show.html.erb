@@ -78,7 +78,7 @@
       <% @linked_contracts.each do |linked_contract| %>
         <tr>
           <td><%= linked_contract.contract_number %></td>
-          <td><%= linked_contract.contract.contract_number if linked_contract.contract %></td>
+          <td><%= linked_contract.contract.creditor if linked_contract.contract %></td>
           <td><%= linked_contract.contract.content if linked_contract.contract %></td>
           <td><%= number_to_currency(linked_contract.contract_value, :unit => "") %></td>
           <td><%= linked_contract.contract.modality_humanize if linked_contract.contract %></td>
