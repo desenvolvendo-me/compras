@@ -1,0 +1,25 @@
+<div class="chatboxcontent">
+  <% if @messages.any? %>
+    <%= render 'auction/messages/messages' %>
+  <% end %>
+</div>
+
+<div class="chatboxinput">
+  <%= form_for([@conversation, @message], url: auction_conversation_messages_path(@conversation, @message), :remote => true, :html => {id: "conversation_form_#{@conversation.id}"}) do |f| %>
+    <%= f.text_area :body, class:"chatboxtextarea", "data-cid" => @conversation.id %>
+    <div class="chat-form-btns">
+      <%= f.submit "send", class: "btn btn-primary btn-sm btn-submit"%>
+      <%= f.submit "New Title!", class: "btn btn-success btn-sm btn-new-title"%>
+    </div>
+  <% end %>
+</div>
+
+
+<%= subscribe_to auction_conversation_path(@conversation) %>
+
+<script>
+  $('.btn-submit').click(function(){
+    $(this).prop('disabled', false)
+    $(this).off('click')
+  })
+</script>
