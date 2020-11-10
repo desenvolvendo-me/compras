@@ -5,7 +5,7 @@ class TypeOfRemoval < EnumerateIt::Base
                    :unenforceability_accreditation,
                    :dispensation_justified_accreditation,
                    :call,
-                   :trading_simplified
+                   :trading
 
 
   def self.allow_duplicated_items
