@@ -1,25 +1,51 @@
-<div class="chatboxcontent">
-  <% if @messages.any? %>
-    <%= render 'auction/messages/messages' %>
-  <% end %>
-</div>
 
-<div class="chatboxinput">
-  <%= form_for([@conversation, @message], url: auction_conversation_messages_path(@conversation, @message), :remote => true, :html => {id: "conversation_form_#{@conversation.id}"}) do |f| %>
-    <%= f.text_area :body, class:"chatboxtextarea", "data-cid" => @conversation.id %>
-    <div class="chat-form-btns">
-      <%= f.submit "send", class: "btn btn-primary btn-sm btn-submit"%>
-      <%= f.submit "New Title!", class: "btn btn-success btn-sm btn-new-title"%>
+
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+<div class="container">
+  <div class="row">
+    <div class="col text-center">
+      <h5>CHAT DE CONVERSA</h5>
     </div>
-  <% end %>
+  </div>
+  <div class="row">
+    <div class="message-wrap col">
+      <div class="msg-wrap">
+        <% @messages.each do |message| %>
+          <%= render 'auction/messages/messages', message: message %>
+        <% end %>
+
+<!--        <div class="alert alert-info msg-date">-->
+<!--          <strong>Today</strong>-->
+<!--        </div>-->
+      </div>
+
+      <div class="send-wrap ">
+        <%= form_for([@conversation, @message], url: auction_conversation_messages_path(@conversation, @message), :remote => true, :html => {id: "conversation_form"}) do |f| %>
+          <%= f.text_area :body,
+                          class:"chatboxtextarea form-control send-message",
+                          rows: 3,
+                          placeholder: "Escreva uma mensagem", "
+                          data-cid" => @conversation.id %>
+        <% end %>
+
+      </div>
+      <div class="btn-panel">
+<!--        <a href="" class="btn send-message-btn pull-left" type="button"><i class="fa fa-cloud-upload"></i> Enviar Arquivo</a>-->
+        <button class="btn send-message-btn pull-right submit-message-btn" type="button">
+          <i class="fa fa-plus"></i> Enviar Mensagem
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
 
+<script>
+  $(".submit-message-btn").click(function(){
+    $("#conversation_form").submit();
+    $(".chatboxtextarea").val('')
+  })
+</script>
 
 <%= subscribe_to auction_conversation_path(@conversation) %>
 
-<script>
-  $('.btn-submit').click(function(){
-    $(this).prop('disabled', false)
-    $(this).off('click')
-  })
-</script>
