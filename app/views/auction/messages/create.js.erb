@@ -1,0 +1,10 @@
+<%= publish_to @path do %>
+    var id = "<%= @conversation.id %>";
+    var chatbox = $(".chatboxcontent");
+    var sender_id = "<%= @message.sender_id %>";
+
+    chatbox.append("<%= j render( partial: 'auction/messages/messages' ) %>");
+    debugger
+
+    //VER PORQUE NÂO TA VOLTANDO A MENSAGEM QUANDO SALVA E NEM O SERVIDOR THIN NÂO REPONDENDO NADA
+<% end %>
