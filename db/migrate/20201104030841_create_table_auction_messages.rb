@@ -3,7 +3,7 @@ class CreateTableAuctionMessages < ActiveRecord::Migration
     create_table :compras_auction_messages do |t|
       t.integer :auction_conversation_id
       t.integer :sender_id
-      t.text :message
+      t.text :body
       t.timestamps
     end
 
