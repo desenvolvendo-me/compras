@@ -22,6 +22,7 @@ class Auction < Compras::Model
 
   has_one :appeal, class_name: 'AuctionAppeal'
   has_one :suspension, class_name: 'AuctionSuspension'
+  has_one :conversation, class_name: 'AuctionConversation'
 
   mount_uploader :document_edict, UnicoUploader
 
