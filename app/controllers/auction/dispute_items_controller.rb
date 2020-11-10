@@ -5,6 +5,14 @@ class Auction::DisputeItemsController < Auction::BaseController
   before_filter :set_auction_eager_load, only: :closed_items
   before_filter :check_proposal, if: proc{ current_user.creditor? }
 
+  def new
+    @conversation = @auction.conversation
+    @messages = @conversation.messages
+    @message = AuctionMessage.new
+
+    super
+  end
+
   def closed_items
     @creditor_proposal = @auction.creditor_proposal(current_user.authenticable.id)
   end

@@ -1,6 +1,8 @@
 class Auction::ConversationsController <  Auction::BaseController
   defaults resource_class: AuctionConversations
 
+  layout false
+
   def create
     if AuctionConversation.find_by_auction_id(params[:auction]).present?
       @conversation = AuctionConversation.find_by_auction_id(params[:auction])
