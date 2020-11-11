@@ -1,5 +1,5 @@
 class Auction::ConversationsController <  Auction::BaseController
-  defaults resource_class: AuctionConversations
+  defaults resource_class: AuctionConversation
 
   layout false
 
