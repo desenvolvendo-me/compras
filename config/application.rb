@@ -123,5 +123,13 @@ module Compras
     config.generators do |g|
       g.fixture_replacement :factory_girl
     end
+
+    if defined?(Rails::Server)
+      config.after_initialize do
+        Thread.new do
+          system("bundle exec rackup private_pub.ru -s thin -E production")
+        end
+      end
+    end
   end
 end
