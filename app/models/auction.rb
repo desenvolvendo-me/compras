@@ -43,6 +43,7 @@ class Auction < Compras::Model
   validates :telephone, mask: "(99) 9999-9999", :allow_blank => true
 
   before_save :clear_session_status
+  after_create :create_conversation
 
   def self.ordered
     order("notice_availability >= '#{Date.today}', notice_availability ASC, proposal_delivery >= '#{Date.today}', notice_availability ASC")
@@ -90,5 +91,11 @@ class Auction < Compras::Model
       self.restart_dispute_date = nil
       self.restart_dispute_time = nil
     end
+  end
+
+  def create_conversation
+    self.build_conversation
+    self.conversation.is_enabled = true
+    self.save
   end
 end
