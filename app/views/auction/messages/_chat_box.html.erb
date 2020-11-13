@@ -13,25 +13,27 @@
       <div class="msg-wrap">
         <% @messages.each do |message| %>
           <%= render 'auction/messages/messages', message: message %>
+        <% end.empty? and begin %>
+          <div class="alert alert-info msg-date">
+            <strong>Nenhuma Conversa Disponivel</strong>
+          </div>
         <% end %>
 
-<!--        <div class="alert alert-info msg-date">-->
-<!--          <strong>Today</strong>-->
-<!--        </div>-->
+
       </div>
 
       <div class="send-wrap ">
-        <%= form_for([@conversation, @message], url: auction_conversation_messages_path(@conversation, @message), :remote => true, :html => {id: "conversation_form"}) do |f| %>
-          <%= f.text_area :body,
-                          class:"chatboxtextarea form-control send-message",
-                          rows: 3,
-                          placeholder: "Escreva uma mensagem", "
+        <%if @current_user.employee? %>
+          <%= form_for([@conversation, @message], url: auction_conversation_messages_path(@conversation, @message), :remote => true, :html => {id: "conversation_form"}) do |f| %>
+            <%= f.text_area :body,
+                            class:"chatboxtextarea form-control send-message",
+                            rows: 3,
+                            placeholder: "Escreva uma mensagem", "
                           data-cid" => @conversation.id %>
+          <% end %>
         <% end %>
-
       </div>
       <div class="btn-panel">
-<!--        <a href="" class="btn send-message-btn pull-left" type="button"><i class="fa fa-cloud-upload"></i> Enviar Arquivo</a>-->
         <button class="btn send-message-btn pull-right submit-message-btn" type="button">
           <i class="fa fa-plus"></i> Enviar Mensagem
         </button>
