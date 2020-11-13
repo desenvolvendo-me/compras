@@ -3,15 +3,8 @@ class Auction::DisputeItemsController < Auction::BaseController
 
   before_filter :set_auction, except: :closed_items
   before_filter :set_auction_eager_load, only: :closed_items
+  before_filter :generate_conversation, except: :closed_items
   before_filter :check_proposal, if: proc{ current_user.creditor? }
-
-  def new
-    @conversation = @auction.conversation
-    @messages = @conversation.messages
-    @message = AuctionMessage.new
-
-    super
-  end
 
   def closed_items
     @creditor_proposal = @auction.creditor_proposal(current_user.authenticable.id)
@@ -25,6 +18,13 @@ class Auction::DisputeItemsController < Auction::BaseController
 
   def set_auction
     @auction = Auction.find(params[:auction_id])
+  end
+
+  def generate_conversation
+    AuctionConversation.where(:auction_id => @auction.id).first_or_create(:is_enabled => true)
+    @conversation = @auction.reload.conversation
+        @messages = @conversation.messages
+         @message = AuctionMessage.new
   end
 
   def check_proposal
