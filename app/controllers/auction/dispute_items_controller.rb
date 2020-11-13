@@ -29,7 +29,7 @@ class Auction::DisputeItemsController < Auction::BaseController
 
   def check_proposal
     unless @auction.creditor_proposal(current_user.authenticable_id)
-      redirect_to auction_auctions_path, :alert => I18n.t('activerecord.auction.messages.must_have_registered_proposal')
+      redirect_to auction_auctions_path, :alert => I18n.t('auction.messages.must_have_registered_proposal')
     end
   end
 end
