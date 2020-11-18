@@ -5,10 +5,10 @@ test:
   server: "http://localhost:9292/faye"
   secret_token: "secret"
 training:
-  server: "http://portoseguro-ba.nobe-treino.com.br/compras/faye"
+  server: "https://portoseguro-ba.nobe-treino.com.br/compras/faye"
   secret_token: "69579e1bb2aeb9197466dbf212d61dcc8f7d5635e1dc5dc8dd913c03a958a221"
   signature_expiration: 3600 # one hour
 production:
-  server: "http://portoseguro-ba.nobe-treino.com.br/compras/faye"
+  server: "https://portoseguro-ba.nobe-treino.com.br/compras/faye"
   secret_token: "69579e1bb2aeb9197466dbf212d61dcc8f7d5635e1dc5dc8dd913c03a958a221"
   signature_expiration: 3600 # one hour
