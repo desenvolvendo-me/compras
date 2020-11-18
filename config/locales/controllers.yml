@@ -121,7 +121,7 @@ pt-BR:
     auction_dispute_items: "Lançes"
     auction_appeals: "Intenção de Recurso"
     auction_suspensions: "Suspensão de Pregão"
-    auction_conversation_messages: "Enviar Mensagens no Chat"
+    auction_messages: "Enviar Mensagens no Chat"
     auction_conversations: "Visualizar Mensagens no Chat"
 
   menu:

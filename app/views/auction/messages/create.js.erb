@@ -4,7 +4,4 @@
     var sender_id = "<%= @message.sender_id %>";
 
     chatbox.append("<%= j render( partial: 'auction/messages/messages', locals:{ message: @message } ) %>");
-    debugger
-
-    //VER PORQUE NÂO TA VOLTANDO A MENSAGEM QUANDO SALVA E NEM O SERVIDOR THIN NÂO REPONDENDO NADA
 <% end %>
