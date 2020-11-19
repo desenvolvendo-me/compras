@@ -58,6 +58,8 @@ gem 'material_icons'
 gem 'rubocop'
 gem 'strong_parameters', '0.2.1'
 
+gem 'pusher'
+
 group :assets do
   gem 'sass-rails'
   gem 'uglifier'
@@ -83,6 +85,7 @@ group :development, :test do
   gem 'rspec-rails', '= 2.14.2'
   gem 'syntax', '~> 1.2'
   gem 'test-unit'
+  gem 'dotenv-rails'
 end
 
 group :test do
