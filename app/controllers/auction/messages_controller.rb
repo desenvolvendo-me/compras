@@ -9,7 +9,5 @@ class Auction::MessagesController <  Auction::BaseController
     @message.body = params[:auction_message][:body]
     @message.sender = current_user
     @message.save!
-
-    @path = auction_conversation_path(@conversation)
   end
 end

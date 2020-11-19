@@ -24,7 +24,7 @@
 
       <div class="send-wrap ">
         <%if @current_user.employee? %>
-          <%= form_for([@conversation, @message], url: auction_conversation_messages_path(@conversation, @message), :remote => true, :html => {id: "conversation_form"}) do |f| %>
+          <%= form_for([@conversation, @message], url: auction_conversation_messages_path(@conversation, @message), :remote => true, format: :json, :html => {id: "conversation_form"}) do |f| %>
             <%= f.text_area :body,
                             class:"chatboxtextarea form-control send-message",
                             rows: 3,
@@ -46,8 +46,29 @@
   $(".submit-message-btn").click(function(){
     $("#conversation_form").submit();
     $(".chatboxtextarea").val('')
-  })
+  });
+
+  var chatbox = $(".msg-wrap");
+
+  var template = ("<%= j render( partial: 'auction/messages/messages', locals:{ message: nil } ) %>");
+
+
+  var channel, pusher;
+
+  pusher = new Pusher('<%=ENV['PUSHER_KEY'] %>', {
+    cluster: '<%=ENV['PUSHER_CLUSTER'] %>',
+    encrypted: true
+  });
+
+  channel = pusher.subscribe('chat');
+
+  channel.bind('new-chat', function(data) {
+    debugger
+    chatbox.append(mustache(template, data))
+  });
+
+
 </script>
 
-<%= subscribe_to auction_conversation_path(@conversation) %>
+
 
