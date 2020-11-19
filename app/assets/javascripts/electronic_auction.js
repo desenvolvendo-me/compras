@@ -28,7 +28,6 @@
 //= require compras/unico/modal_info_link
 //= require compras/unico/filter
 //= require compras/custom_alert
-//= require private_pub
 
 
 /** Unico Assets **/
