@@ -55,15 +55,14 @@
 
   var channel, pusher;
 
-  pusher = new Pusher('<%=ENV['PUSHER_KEY'] %>', {
-    cluster: '<%=ENV['PUSHER_CLUSTER'] %>',
+  pusher = new Pusher(<%=ENV['PUSHER_KEY'] || '71f4bfd7cbf022661e17' %>, {
+    cluster: '<%=ENV['PUSHER_CLUSTER'] || 'us2'%>',
     encrypted: true
   });
 
   channel = pusher.subscribe('chat');
 
   channel.bind('new-chat', function(data) {
-    debugger
     chatbox.append(mustache(template, data))
   });
 

@@ -85,7 +85,6 @@ group :development, :test do
   gem 'rspec-rails', '= 2.14.2'
   gem 'syntax', '~> 1.2'
   gem 'test-unit'
-  gem 'dotenv-rails'
 end
 
 group :test do
