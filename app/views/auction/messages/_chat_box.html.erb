@@ -55,7 +55,7 @@
 
   var channel, pusher;
 
-  pusher = new Pusher(<%=ENV['PUSHER_KEY'] || '71f4bfd7cbf022661e17' %>, {
+  pusher = new Pusher('<%=ENV['PUSHER_KEY'] || '71f4bfd7cbf022661e17' %>', {
     cluster: '<%=ENV['PUSHER_CLUSTER'] || 'us2'%>',
     encrypted: true
   });
@@ -64,9 +64,8 @@
 
   channel.bind('new-chat', function(data) {
     chatbox.append(mustache(template, data))
+    chatbox.scrollTop(chatbox.prop("scrollHeight"));
   });
-
-
 </script>
 
 
