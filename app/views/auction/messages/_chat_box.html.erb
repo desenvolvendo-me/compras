@@ -9,7 +9,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="message-wrap col">
+    <div class="message-wrap col mb-4">
       <div class="msg-wrap">
         <% @messages.each do |message| %>
           <%= render 'auction/messages/messages', message: message %>
@@ -18,12 +18,10 @@
             <strong>Nenhuma Conversa Disponivel</strong>
           </div>
         <% end %>
-
-
       </div>
 
-      <div class="send-wrap ">
-        <%if @current_user.employee? %>
+      <%if @current_user.employee? %>
+        <div class="send-wrap ">
           <%= form_for([@conversation, @message], url: auction_conversation_messages_path(@conversation, @message), :remote => true, format: :json, :html => {id: "conversation_form"}) do |f| %>
             <%= f.text_area :body,
                             class:"chatboxtextarea form-control send-message",
@@ -31,13 +29,13 @@
                             placeholder: "Escreva uma mensagem", "
                           data-cid" => @conversation.id %>
           <% end %>
-        <% end %>
-      </div>
-      <div class="btn-panel">
-        <button class="btn send-message-btn pull-right submit-message-btn" type="button">
-          <i class="fa fa-plus"></i> Enviar Mensagem
-        </button>
-      </div>
+        </div>
+        <div class="btn-panel">
+          <button class="btn send-message-btn pull-right submit-message-btn" type="button">
+            <i class="fa fa-plus"></i> Enviar Mensagem
+          </button>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
@@ -63,7 +61,7 @@
   channel = pusher.subscribe('chat');
 
   channel.bind('new-chat', function(data) {
-    chatbox.append(mustache(template, data))
+    chatbox.append(mustache(template, data));
     chatbox.scrollTop(chatbox.prop("scrollHeight"));
   });
 </script>
