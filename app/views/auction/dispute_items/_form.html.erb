@@ -12,6 +12,21 @@
     <b><%= "Data da Licitação: #{(@auction.notice_availability.strftime('%d/%m/%Y - %H h') rescue 'não informado')}" %></b>
     <b><%= "Data Atual: #{Time.now.strftime('%d/%m/%Y - %H h')}" %></b>
   </h5>
+
+  <%if @current_user.employee? %>
+    <h5>STATUS:</h5>
+    <div class="d-flex w-25">
+      <%= select_tag :auction_status, options_for_select(AuctionStatus.to_a, @auction.status),
+                     include_blank: true, as: :fake,
+                     class: 'select mr-2' %>
+      <button type="button" id="update-status" class="btn btn-small btn-success">
+        <span class="material-icons">done</span>
+      </button>
+    </div>
+  <%else %>
+    <h5>STATUS: <%= @auction.status_humanize %></h5>
+  <% end %>
+
 </div>
 
 <nav class="navbar navbar-expand-lg navbar-dark">
@@ -73,7 +88,6 @@
 
 <script>
   $(function(){
-
     function setNavLinkActive(){
       $('#navbarTradingContent li').removeClass('active');
       $(this).closest('li').addClass('active')
@@ -88,6 +102,20 @@
 
     setInterval(myTimer ,1000);
     myTimer();
+  });
+
+  $("#update-status").click(function(){
+    var data = { auction:{ status: $("#auction_status").val() }};
+    return $.ajax({
+      url: Routes.auction_auction.replace(':id', <%= @auction.id %>),
+      data: data,
+      dataType: 'json',
+      type: 'PUT',
+      beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $("[name='authenticity_token']").val())},
+      success: function(){
+        alert('Atualizado com sucesso!')
+      }
+    });
   })
 
 </script>
