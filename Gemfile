@@ -58,6 +58,8 @@ gem 'material_icons'
 gem 'rubocop'
 gem 'strong_parameters', '0.2.1'
 
+gem 'pusher'
+
 group :assets do
   gem 'sass-rails'
   gem 'uglifier'

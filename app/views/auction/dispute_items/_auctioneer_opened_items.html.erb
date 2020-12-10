@@ -24,14 +24,39 @@
   </tbody>
 </table>
 
-<div class="row">
+<div class="row mt-5">
   <div class="col">
-    <%= render 'chat' %>
+    <% if @auction.chat_activated %>
+      <%= render 'chat' %>
+    <%else %>
+      <div class="text-center">
+        <h2>O chat está desabilitado!</h2>
+        <button type="button" class="btn btn-success btn-lg" onclick="activeChat()">Habilitar Chat</button>
+      </div>
+    <% end %>
   </div>
+
   <div class="col">
     <%= render 'all_bids' %>
   </div>
 </div>
+
+<script>
+  function activeChat(){
+    var data = {auction:{chat_activated: true}};
+    $.ajax({
+      url: Routes.auction_auction.replace(':id', <%=@auction.id%>),
+      data: data,
+      dataType: 'json',
+      type: 'PUT',
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader('X-CSRF-Token', $("[name='csrf-token']").attr('content'))
+      },
+      success: function() { window.location.reload() },
+      error: function() { alert('Houve um erro contate suporte!') }
+    });
+  }
+</script>
 
 <style>
   .title-section{

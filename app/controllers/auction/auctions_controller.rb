@@ -7,6 +7,10 @@ class Auction::AuctionsController < Auction::BaseController
 
   has_scope :term
 
+  def show
+    render layout: "document"
+  end
+
   def new
     object = build_resource
     object.year = Time.now.year
@@ -38,10 +42,6 @@ class Auction::AuctionsController < Auction::BaseController
   end
 
   def dashboard
-  end
-
-  def show
-    render layout: "document"
   end
 
   private

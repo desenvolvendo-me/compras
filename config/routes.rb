@@ -1033,6 +1033,10 @@ Compras::Application.routes.draw do
       get "modal_info", on: :member
     end
 
+    resources :conversations do
+      resources :messages
+    end
+
     resources :employees do
       collection do
         get :filter
