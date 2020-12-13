@@ -3,7 +3,7 @@ class Auction < Compras::Model
                   :judment_form, :covid_law, :purchase_value, :items_quantity, :group_items_attributes,
                   :object, :object_management, :employee_id, :items_attributes, :sensitive_value, :variation_type, :minimum_interval,
                   :decree_treatment, :document_edict, :disclosure_date, :responsible_dissemination_id, :notice_availability,
-                  :proposal_delivery, :bid_opening, :internet_address, :city,
+                  :proposal_delivery, :bid_opening, :internet_address, :city, :chat_activated,
                   :neighborhood, :street, :telephone, :cell_phone, :user_id, :bid_opening_time,
                   :end_dispute_date, :end_dispute_time, :restart_dispute_date, :restart_dispute_time
 
@@ -22,6 +22,7 @@ class Auction < Compras::Model
 
   has_one :appeal, class_name: 'AuctionAppeal'
   has_one :suspension, class_name: 'AuctionSuspension'
+  has_one :conversation, class_name: 'AuctionConversation'
 
   mount_uploader :document_edict, UnicoUploader
 
@@ -42,6 +43,7 @@ class Auction < Compras::Model
   validates :telephone, mask: "(99) 9999-9999", :allow_blank => true
 
   before_save :clear_session_status
+  after_create :create_conversation
 
   def self.ordered
     order("notice_availability >= '#{Date.today}', notice_availability ASC, proposal_delivery >= '#{Date.today}', notice_availability ASC")
@@ -75,11 +77,25 @@ class Auction < Compras::Model
     restart_dispute_date.present? && restart_dispute_time.present?
   end
 
+  def suspended?
+    suspension.present? && suspension.reactivation?
+  end
+
+  def reactivated?
+    suspension.present? && !suspension.reactivation?
+  end
+
   private
   def clear_session_status
     if end_dispute_date_changed? and end_dispute_time_changed?
       self.restart_dispute_date = nil
       self.restart_dispute_time = nil
     end
+  end
+
+  def create_conversation
+    self.build_conversation
+    self.conversation.is_enabled = true
+    self.save
   end
 end
