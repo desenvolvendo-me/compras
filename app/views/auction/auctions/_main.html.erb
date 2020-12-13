@@ -1,85 +1,81 @@
 
-<%= f.input :id, as: :hidden %>
-<%= f.input :auction_type, :as => :radio_buttons, :collection => AuctionType.to_a, label_html:{class:'auction_type'} %>
-<div class="yui3-g">
-  <div class="yui3-u-1-3">
-    <%= f.input :licitation_number %>
-  </div>
-  <div class="yui3-u-1-3">
-    <%= f.input :year %>
-  </div>
-  <div class="yui3-u-1-3">
-    <%= f.input :process_number %>
-  </div>
-</div>
+<%= simple_form_for resource.localized, :url => resource.persisted? ? resource_path : collection_path, remote: true do |f| %>
+  <%= f.input :id, as: :hidden %>
+  <%= f.input :auction_type, :as => :radio_buttons, :collection => AuctionType.to_a, label_html:{class:'auction_type'} %>
 
-<div class="yui3-g">
-  <div class="yui3-u-1-2">
-    <%= f.input :dispute_type %>
+  <div class="yui3-g">
+    <div class="yui3-u-1-3">
+      <%= f.input :licitation_process %>
+    </div>
+    <div class="yui3-u-1-3">
+      <%= f.input :dispute_type %>
+    </div>
+    <div class="yui3-u-1-3">
+      <%= f.input :judgment_form, disabled: true %>
+    </div>
   </div>
-  <div class="yui3-u-1-2">
-    <%= f.input :judment_form %>
-  </div>
-</div>
 
-<div class="yui3-g">
-  <div class="yui3-u-1-2">
-    <%= f.input :covid_law, :as => :select, :collection =>[['Sim', 'true'],['Não','false']] %>
+  <div class="yui3-g">
+    <div class="yui3-u-1-2">
+      <%= f.input :covid_law, :as => :select, :collection =>[['Sim', 'true'],['Não','false']] %>
+    </div>
+    <div class="yui3-u-1-2">
+      <%= f.input :purchase_value %>
+    </div>
   </div>
-  <div class="yui3-u-1-2">
-    <%= f.input :purchase_value %>
+
+  <div class="yui3-g">
+    <div class="yui3-u-1">
+      <%= f.input :description, disabled: true %>
+    </div>
   </div>
-</div>
 
-<div class="yui3-g">
-  <div class="yui3-u-1">
-    <%= f.input :object %>
+  <div class="yui3-g">
+    <div class="yui3-u-1">
+      <%= f.input :object_management, input_html:{rows: 2} %>
+    </div>
   </div>
-</div>
 
-<div class="yui3-g">
-  <div class="yui3-u-1">
-    <%= f.input :object_management, input_html:{rows: 2} %>
+  <h4>
+    Equipe Pregão:
+  </h4>
+
+  <div class="yui3-g">
+    <div class="yui3-u-1-2">
+      <%= f.input :employee, as: :auto_complete, source_path: auction_employees_path %>
+    </div>
+    <div class="yui3-u-1-4">
+      <%= f.input :position, as: :fake, input_html:{value: f.object.employee.try(:position), disabled: true} %>
+    </div>
+    <div class="yui3-u-1-4">
+      <%= f.input :registration, as: :fake, input_html:{value: f.object.employee.try(:registration), disabled: true} %>
+    </div>
   </div>
-</div>
 
-<h4>
-  Equipe Pregão:
-</h4>
+  <h4>
+    Equipe de Apoio:
+  </h4>
 
-<div class="yui3-g">
-  <div class="yui3-u-1-2">
-    <%= f.input :employee, as: :auto_complete, source_path: auction_employees_path %>
-  </div>
-  <div class="yui3-u-1-4">
-    <%= f.input :position, as: :fake, input_html:{value: f.object.employee.try(:position), disabled: true} %>
-  </div>
-  <div class="yui3-u-1-4">
-    <%= f.input :registration, as: :fake, input_html:{value: f.object.employee.try(:registration), disabled: true} %>
-  </div>
-</div>
+  <div class="nested-container">
+    <p class='add-link-container'>
+      <%= link_to "Adicionar Equipe", "#", :class => "add-auction_support_teams" %>
+    </p>
 
-<h4>
-  Equipe de Apoio:
-</h4>
+    <div id="auction_support_teams" class='fields' data-nested-form="auction_support_teams" data-append-item="false" data-inline="false">
+      <%= f.association :auction_support_teams, :collection => localized(f.object.auction_support_teams) do |a| %>
+        <%= render "auction/auction_support_teams/form", :f => a %>
+      <% end %>
+    </div>
 
-<div class="nested-container">
-  <p class='add-link-container'>
-    <%= link_to "Adicionar Equipe", "#", :class => "add-auction_support_teams" %>
-  </p>
-
-  <div id="auction_support_teams" class='fields' data-nested-form="auction_support_teams" data-append-item="false" data-inline="false">
-    <%= f.association :auction_support_teams, :collection => localized(f.object.auction_support_teams) do |a| %>
-      <%= render "auction/auction_support_teams/form", :f => a %>
+    <%= mustache "auction_support_teams-template" do %>
+      <%= f.association :"auction_support_teams_attributes", :collection => f.object.auction_support_teams.build.localized, :index => "{{uuid-auction_support_teams}}" do |a| %>
+        <%= render "auction/auction_support_teams/form", :f => a %>
+      <% end %>
     <% end %>
   </div>
+  <%= f.button :submit if can?(:modify, main_controller_name) %>
+<% end %>
 
-  <%= mustache "auction_support_teams-template" do %>
-    <%= f.association :"auction_support_teams_attributes", :collection => f.object.auction_support_teams.build.localized, :index => "{{uuid-auction_support_teams}}" do |a| %>
-      <%= render "auction/auction_support_teams/form", :f => a %>
-    <% end %>
-  <% end %>
-</div>
 
 <script>
   $("#step-1").on('change', "[name$='[employee_id]']", function (event, data) {
