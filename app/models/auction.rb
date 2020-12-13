@@ -1,14 +1,15 @@
 class Auction < Compras::Model
-  attr_accessible :auction_type, :licitation_number, :process_number, :year, :dispute_type, :zip_code,
+  attr_accessible :auction_type, :process_number, :year, :dispute_type, :zip_code,
                   :judment_form, :covid_law, :purchase_value, :items_quantity, :group_items_attributes,
-                  :object, :object_management, :employee_id, :items_attributes, :sensitive_value, :variation_type, :minimum_interval,
+                  :object_management, :employee_id, :items_attributes, :sensitive_value,
                   :decree_treatment, :document_edict, :disclosure_date, :responsible_dissemination_id, :notice_availability,
                   :proposal_delivery, :bid_opening, :internet_address, :city, :chat_activated, :status,
                   :neighborhood, :street, :telephone, :cell_phone, :user_id, :bid_opening_time,
                   :end_dispute_date, :end_dispute_time, :restart_dispute_date, :restart_dispute_time
 
-  attr_modal :licitation_number, :process_number, :proposal_delivery, :bid_opening, :object
+  attr_modal :process, :process_number, :proposal_delivery, :bid_opening, :object
 
+  belongs_to :licitation_process
   belongs_to :employee
   belongs_to :user
   belongs_to :responsible_dissemination, class_name: "Employee"
@@ -24,6 +25,8 @@ class Auction < Compras::Model
   has_one :suspension, class_name: 'AuctionSuspension'
   has_one :conversation, class_name: 'AuctionConversation'
 
+  delegate :year, :process, to: :licitation_process
+
   mount_uploader :document_edict, UnicoUploader
 
   has_enumeration_for :auction_type, :with => AuctionType
@@ -37,8 +40,6 @@ class Auction < Compras::Model
   accepts_nested_attributes_for :auction_support_teams, :allow_destroy => true
 
   validates :bid_opening, :bid_opening_time, presence: true
-  validates :year, :mask => "9999", presence: true
-  validates :licitation_number, presence: true
   validates :zip_code, mask: "99999-999", allow_blank: true
   validates :cell_phone, mask: "(99) 99999-9999", :allow_blank => true
   validates :telephone, mask: "(99) 9999-9999", :allow_blank => true
@@ -54,11 +55,11 @@ class Auction < Compras::Model
 
 
   scope :term, lambda {|q|
-    where("licitation_number LIKE ?", "%#{q}%")
+    join{ licitation_process }.where{ licitation_process.process.matches "%#{q}%" }
   }
 
   def to_s
-    "#{licitation_number}/#{year}"
+    "#{process}/#{year}"
   end
 
 
