@@ -1,4 +1,4 @@
-<%= simple_form_for resource.localized, :url => resource.persisted? ? resource_path : collection_path do |f| %>
+<%= simple_form_for resource.localized, :url => resource.persisted? ? resource_path : collection_path, remote: true do |f| %>
   <%= f.input :id, as: :hidden %>
   <%= f.input :auction_type, :as => :radio_buttons, :collection => AuctionType.to_a, label_html:{class:'auction_type'} %>
 

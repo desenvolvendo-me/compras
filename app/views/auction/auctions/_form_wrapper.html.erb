@@ -30,13 +30,13 @@
         <%= render 'main' %>
       </div>
       <div id="step-2" class="tab-pane" role="tabpanel">
-        <%= render 'items' %>
+        <%= render 'items' if resource.persisted? %>
       </div>
       <div id="step-3" class="tab-pane" role="tabpanel">
-        <%= render 'group_items' %>
+        <%= render 'group_items' if resource.persisted? %>
       </div>
       <div id="step-4" class="tab-pane" role="tabpanel">
-        <%= render 'step_four' %>
+        <%= render 'step_four' if resource.persisted? %>
       </div>
     </div>
   </div>

@@ -85,6 +85,7 @@ group :development, :test do
   gem 'rspec-rails', '= 2.14.2'
   gem 'syntax', '~> 1.2'
   gem 'test-unit'
+  gem 'byebug'
 end
 
 group :test do

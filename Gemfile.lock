@@ -98,6 +98,7 @@ GEM
     binding_of_caller (0.8.0)
       debug_inspector (>= 0.0.1)
     builder (3.0.4)
+    byebug (11.0.1)
     capybara (2.6.2)
       addressable
       mime-types (>= 1.16)
@@ -421,6 +422,7 @@ DEPENDENCIES
   awesome_nested_set (= 2.1.6)
   better_errors
   binding_of_caller
+  byebug
   cancan!
   capybara (= 2.6.2)
   capybara-webkit (~> 1.8.0)
