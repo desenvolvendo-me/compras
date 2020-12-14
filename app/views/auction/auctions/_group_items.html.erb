@@ -1,128 +1,129 @@
+<%= simple_form_for resource.localized, :url => resource.persisted? ? resource_path : collection_path do |f| %>
+  <div id="auction_group_items">
 
+    <div class="nested-fields add-margin-bottom">
+      <%= hidden_field_tag :group_item_id, nil, :name => 'auction_group_item[id]' %>
+      <%= hidden_field_tag :group, nil, :name => 'auction_group_item[group]' %>
 
-<div id="auction_group_items">
-
-  <div class="nested-fields add-margin-bottom">
-    <%= hidden_field_tag :group_item_id, nil, :name => 'auction_group_item[id]' %>
-    <%= hidden_field_tag :group, nil, :name => 'auction_group_item[group]' %>
-
-    <div class="yui3-g">
-      <div class="yui3-u-1-2">
-        <div class="input fake benefit_type">
-          <label class="fake" for="benefit_type">Forma de Compra</label>
-          <%= select_tag :purchase_type, options_for_select(AuctionPurchaseType.to_a),
+      <div class="yui3-g">
+        <div class="yui3-u-1-2">
+          <div class="input fake benefit_type">
+            <label class="fake" for="benefit_type">Forma de Compra</label>
+            <%= select_tag :purchase_type, options_for_select(AuctionPurchaseType.to_a),
+                           include_blank: true, as: :fake, :required => true,
+                           class: 'required select',
+                           name: "auction_group_item[purchase_type]" %>
+          </div>
+        </div>
+        <div class="yui3-u-1-2">
+          <label class="fake" for="benefit_type">Grupo</label>
+          <%= select_tag :group_form, options_for_select(AuctionGroupForm.to_a),
                          include_blank: true, as: :fake, :required => true,
-                         class: 'required select',
-                         name: "auction_group_item[purchase_type]" %>
+                         class: 'required select', name: "auction_group_item[group_form]"%>
         </div>
       </div>
-      <div class="yui3-u-1-2">
-        <label class="fake" for="benefit_type">Grupo</label>
-        <%= select_tag :group_form, options_for_select(AuctionGroupForm.to_a),
-                       include_blank: true, as: :fake, :required => true,
-                       class: 'required select', name: "auction_group_item[group_form]"%>
-      </div>
-    </div>
 
-    <div class="yui3-g">
-      <div class="yui3-u-1-2">
-        <%= f.input :quantity, as: :fake, disabled: true%>
-      </div>
+      <div class="yui3-g">
+        <div class="yui3-u-1-2">
+          <%= f.input :quantity, as: :fake, disabled: true%>
+        </div>
 
-      <div class="yui3-u-1-2">
-        <label class="fake" for="benefit_type">Critério de Julgamento</label>
-        <%= select_tag :judment_form, options_for_select(AuctionJudmentForm.to_a),
-                       include_blank: true, as: :fake, :required => true,
-                       class: 'required select',  name: "auction_group_item[judment_form]"%>
-      </div>
-    </div>
-
-    <div class="yui3-g" style="margin-top: 16px">
-      <div class="yui3-u-1-2">
-        <%= f.input :total_value, as: :fake, :required => true,
-                    :input_html => {'data-decimal' => true, :value => '0,00', 'data-precision' => 2, :maxlength => 15, :class => 'numeric'}%>
-      </div>
-      <div class="yui3-u-1-2">
-        <%= f.input :max_value, as: :fake, :required => true,
-                    :input_html => {'data-decimal' => true, :value => '0,00', 'data-precision' => 2, :maxlength => 15, :class => 'numeric'}%>
-      </div>
-    </div>
-
-    <div class="yui3-g">
-      <div class="yui3-u-7-8">
-        <div class="input fake benefit_type">
-          <label class="fake" for="benefit_type">Tipo de Benefício</label>
-          <%= select_tag :benefit_type, options_for_select(BenefitType.to_a),
+        <div class="yui3-u-1-2">
+          <label class="fake" for="benefit_type">Critério de Julgamento</label>
+          <%= select_tag :judment_form, options_for_select(AuctionJudmentForm.to_a),
                          include_blank: true, as: :fake, :required => true,
-                         class: 'required society_kind select',
-                         name: "auction_group_item[group_benefit_type]" %>
+                         class: 'required select',  name: "auction_group_item[judment_form]"%>
         </div>
       </div>
-      <div class="yui3-u-1-8 pt-2">
-        <%= button_tag 'Adicionar', type: :button,
-                       :class => 'button add-nested-record field-without-label',
-                       'data-template' => 'auction_group_items_template',
-                       'data-records' => 'group-items-records',
-                       'data-disabled' => not_updateable_message %>
+
+      <div class="yui3-g" style="margin-top: 16px">
+        <div class="yui3-u-1-2">
+          <%= f.input :total_value, as: :fake, :required => true,
+                      :input_html => {'data-decimal' => true, :value => '0,00', 'data-precision' => 2, :maxlength => 15, :class => 'numeric'}%>
+        </div>
+        <div class="yui3-u-1-2">
+          <%= f.input :max_value, as: :fake, :required => true,
+                      :input_html => {'data-decimal' => true, :value => '0,00', 'data-precision' => 2, :maxlength => 15, :class => 'numeric'}%>
+        </div>
       </div>
+
+      <div class="yui3-g">
+        <div class="yui3-u-7-8">
+          <div class="input fake benefit_type">
+            <label class="fake" for="benefit_type">Tipo de Benefício</label>
+            <%= select_tag :benefit_type, options_for_select(BenefitType.to_a),
+                           include_blank: true, as: :fake, :required => true,
+                           class: 'required society_kind select',
+                           name: "auction_group_item[group_benefit_type]" %>
+          </div>
+        </div>
+        <div class="yui3-u-1-8 pt-2">
+          <%= button_tag 'Adicionar', type: :button,
+                         :class => 'button add-nested-record field-without-label',
+                         'data-template' => 'auction_group_items_template',
+                         'data-records' => 'group-items-records',
+                         'data-disabled' => not_updateable_message %>
+        </div>
+      </div>
+
+
     </div>
 
+    <%= f.error :items %>
 
+    <table id="group-items-records" class="records">
+      <thead>
+      <tr>
+        <th><%= "Número" %></th>
+        <th><%= "Grupo" %></th>
+        <th><%= "Quantidade de Itens" %></th>
+        <th><%= "Valor" %></th>
+        <th><%= "Valor Máximo" %></th>
+        <th><%= "Critério" %></th>
+        <th></th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <%= f.association :group_items, :collection => localized(f.object.group_items) do |p| %>
+        <%= render 'auction/auction_group_items/form',
+                   id: p.object.id,
+                   auction_id: p.object.auction_id,
+                   total_value: p.object.total_value,
+                   max_value: p.object.max_value,
+                   benefit_type: p.object.benefit_type,
+                   judment_form: p.object.judment_form,
+                   judment_form_text: p.object.judment_form_humanize,
+                   purchase_type: p.object.purchase_type,
+                   quantity: p.object.quantity,
+                   group_form: p.object.group_form,
+                   group_i: p.object.group,
+                   f: p %>
+      <% end %>
+      </tbody>
+    </table>
+
+    <%= mustache "auction_group_items_template" do %>
+      <%= f.association :group_items_attributes, :collection => f.object.group_items.build, :index => '{{uuid}}' do |p| %>
+        <%= render 'auction/auction_group_items/form',
+                   id: "{{id}}",
+                   auction_id: "{{auction_id}}",
+                   total_value: "{{total_value}}",
+                   max_value: "{{max_value}}",
+                   benefit_type: "{{group_benefit_type}}",
+                   judment_form: "{{judment_form}}",
+                   judment_form_text: "{{judment_form_text}}",
+                   purchase_type: "{{purchase_type}}",
+                   quantity: "{{quantity}}",
+                   group_form: "{{group_form}}",
+                   group_i: "{{group}}",
+                   f: p %>
+      <% end %>
+    <% end %>
   </div>
 
-  <%= f.error :items %>
-
-  <table id="group-items-records" class="records">
-    <thead>
-    <tr>
-      <th><%= "Número" %></th>
-      <th><%= "Grupo" %></th>
-      <th><%= "Quantidade de Itens" %></th>
-      <th><%= "Valor" %></th>
-      <th><%= "Valor Máximo" %></th>
-      <th><%= "Critério" %></th>
-      <th></th>
-      <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    <%= f.association :group_items, :collection => localized(f.object.group_items) do |p| %>
-      <%= render 'auction/auction_group_items/form',
-                 id: p.object.id,
-                 auction_id: p.object.auction_id,
-                 total_value: p.object.total_value,
-                 max_value: p.object.max_value,
-                 benefit_type: p.object.benefit_type,
-                 judment_form: p.object.judment_form,
-                 judment_form_text: p.object.judment_form_humanize,
-                 purchase_type: p.object.purchase_type,
-                 quantity: p.object.quantity,
-                 group_form: p.object.group_form,
-                 group_i: p.object.group,
-                 f: p %>
-    <% end %>
-    </tbody>
-  </table>
-
-  <%= mustache "auction_group_items_template" do %>
-    <%= f.association :group_items_attributes, :collection => f.object.group_items.build, :index => '{{uuid}}' do |p| %>
-      <%= render 'auction/auction_group_items/form',
-                 id: "{{id}}",
-                 auction_id: "{{auction_id}}",
-                 total_value: "{{total_value}}",
-                 max_value: "{{max_value}}",
-                 benefit_type: "{{group_benefit_type}}",
-                 judment_form: "{{judment_form}}",
-                 judment_form_text: "{{judment_form_text}}",
-                 purchase_type: "{{purchase_type}}",
-                 quantity: "{{quantity}}",
-                 group_form: "{{group_form}}",
-                 group_i: "{{group}}",
-                 f: p %>
-    <% end %>
-  <% end %>
-</div>
-
+  <%= f.button :submit if can?(:modify, main_controller_name) %>
+<% end %>
 
 <script>
   $("#purchase_type").change(function(){
