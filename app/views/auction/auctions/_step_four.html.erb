@@ -1,81 +1,79 @@
-<fieldset>
-  <h5>Configurações</h5>
-  <div class="yui3-g">
-    <div class="yui3-u-1-2">
-      <%= f.input :disclosure_date, as: :date %>
+<%= simple_form_for resource.localized, :url => resource.persisted? ? resource_path : collection_path do |f| %>
+  <fieldset>
+    <h5>Configurações</h5>
+    <div class="row">
+      <div class="col">
+        <%= f.input :disclosure_date, as: :date %>
+      </div>
+      <div class="col">
+        <%= f.input :responsible_dissemination, as: :auto_complete, source_path: employees_path %>
+      </div>
     </div>
-    <div class="yui3-u-1-2">
-      <%= f.input :responsible_dissemination, as: :auto_complete, source_path: employees_path %>
-    </div>
-  </div>
 
-  <div class="yui3-g">
-    <div class="yui3-u-1-2">
-      <%= f.input :notice_availability, as: :date %>
+    <div class="row">
+      <div class="col-3">
+        <%= f.input :notice_availability, as: :date %>
+      </div>
+      <div class="col-3">
+        <%= f.input :proposal_delivery %>
+      </div>
+      <div class="col">
+        <%= f.input :internet_address %>
+      </div>
     </div>
-    <div class="yui3-u-1-2">
-      <%= f.input :internet_address %>
-    </div>
-  </div>
-  <div class="yui3-g">
-    <div class="yui3-u-1-2">
-      <%= f.input :proposal_delivery %>
-    </div>
-    <div class="yui3-u-1-4">
-      <%= f.input :bid_opening, as: :date %>
-    </div>
-    <div class="yui3-u-1-4">
-      <%= f.input :bid_opening_time %>
-    </div>
-  </div>
+    <div class="row">
+      <div class="col">
+        <%= f.input :bid_opening, as: :date %>
+      </div>
 
-  <div class="yui3-g">
-    <div class="yui3-u-1-4">
-      <%= f.input :sensitive_value, as: :select %>
-    </div>
-    <div class="yui3-u-1-4">
-      <%= f.input :variation_type %>
-    </div>
-    <div class="yui3-u-1-4">
-      <%= f.input :minimum_interval %>
-    </div>
-    <div class="yui3-u-1-4">
-      <%= f.input :decree_treatment, as: :select %>
-    </div>
-  </div>
+      <div class="col">
+        <%= f.input :bid_opening_time %>
+      </div>
 
-  <div class="yui3-g">
-    <div class="yui3-u-1-4">
-      <%= f.input :document_edict %>
-      <%= link_to f.object.document_edict_identifier, f.object.document_edict_url, :target => '_blank', class: 'ml-1' if f.object.document_edict? %>
-    </div>
-  </div>
-</fieldset>
+      <div class="col">
+        <%= f.input :sensitive_value, as: :select %>
+      </div>
 
-<fieldset>
-  <h5>Endereço e Contato Processo</h5>
-  <div class="yui3-g">
-    <div class="yui3-u-1-2">
-      <%= f.input :street %>
+      <div class="col">
+        <%= f.input :decree_treatment, as: :select %>
+      </div>
     </div>
-    <div class="yui3-u-1-2">
-      <%= f.input :neighborhood %>
+
+    <div class="row">
+      <div class="yui3-u-1-4">
+        <%= f.input :document_edict %>
+        <%= link_to f.object.document_edict_identifier, f.object.document_edict_url, :target => '_blank', class: 'ml-1' if f.object.document_edict? %>
+      </div>
     </div>
-  </div>
-  <div class="yui3-g">
-    <div class="yui3-u-4-5">
-      <%= f.input :city %>
+  </fieldset>
+
+  <fieldset>
+    <h5>Endereço e Contato Processo</h5>
+    <div class="row">
+      <div class="yui3-u-1-2">
+        <%= f.input :street %>
+      </div>
+      <div class="yui3-u-1-2">
+        <%= f.input :neighborhood %>
+      </div>
     </div>
-    <div class="yui3-u-1-5">
-      <%= f.input :zip_code %>
+    <div class="row">
+      <div class="yui3-u-4-5">
+        <%= f.input :city %>
+      </div>
+      <div class="yui3-u-1-5">
+        <%= f.input :zip_code %>
+      </div>
     </div>
-  </div>
-  <div class="yui3-g">
-    <div class="yui3-u-1-2">
-      <%= f.input :telephone %>
+    <div class="row">
+      <div class="yui3-u-1-2">
+        <%= f.input :telephone %>
+      </div>
+      <div class="yui3-u-1-2">
+        <%= f.input :cell_phone %>
+      </div>
     </div>
-    <div class="yui3-u-1-2">
-      <%= f.input :cell_phone %>
-    </div>
-  </div>
-</fieldset>
+  </fieldset>
+
+  <%= f.button :submit if can?(:modify, main_controller_name) %>
+<% end %>
