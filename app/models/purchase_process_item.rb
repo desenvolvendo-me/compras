@@ -1,6 +1,7 @@
 class PurchaseProcessItem < Compras::Model
   attr_accessible :material_id, :quantity, :unit_price, :lot, :additional_information,
-                  :creditor_id, :creditor_proposals_attributes
+                  :creditor_id, :creditor_proposals_attributes, :estimated_value, :max_value,
+                  :benefit_type
 
   attr_accessor :order
 

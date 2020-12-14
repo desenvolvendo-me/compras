@@ -1,0 +1,32 @@
+<tr class="record nested-record item-record" id="material-id-<%= material_id %>">
+  <td class="item-lot">
+    <%= f.input :lot, input_html:{value: lot, class: 'lot' }, label: false%>
+  </td>
+
+  <td class="item-material"><%= material %></td>
+
+  <td class="item-reference-unit text-center"><%= reference_unit %></td>
+
+  <td class="item-quantity">
+    <%= f.input :quantity, input_html:{value: quantity, class: 'item-quantity' }, label: false%>
+  </td>
+
+  <td class='item-unit-price'>
+    <%= f.input :unit_price, input_html:{value: unit_price, class: 'item-unit-price' }, label: false %>
+  </td>
+
+  <td class="item-total-value"><%= estimated_total_price %></td>
+
+  <td>
+    <%= f.input :material_id, as: :hidden, input_html: { value: material_id, class: 'material-id' } %>
+    <%= f.input :material, as: :hidden, input_html: { value: material } %>
+    <%= f.input :additional_information, as: :hidden, input_html: { value: additional_information } %>
+    <%= f.input :estimated_total_price, as: :hidden, input_html: { value: estimated_total_price, class: 'item-total-value' } %>
+    <%= f.input :id, as: :hidden, input_html: { value: id } %>
+    <%= f.input :_destroy, as: :hidden, input_html: { class: 'destroy' } %>
+
+    <%= f.input :reference_unit, as: :hidden, input_html: { value: reference_unit } %>
+
+    <%= link_to 'Remover', '#', class: 'remove-nested-record', 'data-disabled' => data_disabled %>
+  </td>
+</tr>
