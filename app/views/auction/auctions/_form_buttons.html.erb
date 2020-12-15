@@ -1,9 +1,9 @@
-<div class="buttons">
+<div class="d-flex justify-content-end mt-5">
    <%= link_to "Visualizar", resource_path(resource), class: 'btn btn-primary' if resource.persisted? %>
-   <%= link_to "Voltar", auction_auctions_path, class: 'btn btn-secundary' %>
+   <%= link_to "Voltar", auction_auctions_path, class: 'btn', style: 'background-color: #dae0e5' %>
   
 
-  <% if f.object.persisted? && can?(:destroy, main_controller_name) %>
-    <%= f.button :destroy, 'data-disabled' => not_destroyable_message %>
-  <% end %>
+  <%# if f.object.persisted? && can?(:destroy, main_controller_name) %>
+    <%#= f.button :destroy, 'data-disabled' => not_destroyable_message %>
+  <%# end %>
 </div>
