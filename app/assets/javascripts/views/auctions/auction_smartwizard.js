@@ -1,9 +1,12 @@
 var $smartwizard = $("#auction_smartwizard");
 
 function leaveStep(e, anchorObject, currentStepIndex, nextStep, stepDirection){
+  if(!$("form:visible").data('changed')) return true;
+
   if(stepDirection === 'forward'){
     $smartwizard.smartWizard("loader", "show");
     $(".simple_form:visible").submit();
+    $("form:visible").data('changed', false);
     return false
   }
 }
@@ -32,6 +35,10 @@ $(document).on('ajax:complete', '.licitation_process', function(event, data, sta
 $(document).on('click', '.btn-finish', function(){
   $(".simple_form:visible").submit();
   $(this).prop('disabled', false);
+});
+
+$(document).on('change', 'form:visible :input',function() {
+  $(this).closest('form').data('changed', true);
 });
 
 $(function(){
