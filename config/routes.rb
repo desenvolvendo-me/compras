@@ -540,6 +540,8 @@ Compras::Application.routes.draw do
       get :add_trading_negotiation
       get :add_ratifications
     end
+
+    put :auction_update
   end
 
   post "licitation_process/material_total_balance" => "licitation_processes#material_total_balance", as: :licitation_process_material_total_balance

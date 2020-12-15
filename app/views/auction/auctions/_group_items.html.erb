@@ -1,4 +1,4 @@
-<%= simple_form_for resource.localized, :url => resource.persisted? ? resource_path : collection_path do |f| %>
+<%= simple_form_for resource.localized, :url => resource_path, remote: true do |f| %>
   <div id="auction_group_items">
 
     <div class="nested-fields add-margin-bottom">

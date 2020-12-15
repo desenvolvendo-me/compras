@@ -1,7 +1,6 @@
 var $smartwizard = $("#auction_smartwizard");
 
 function leaveStep(e, anchorObject, currentStepIndex, nextStep, stepDirection){
-  debugger
   if(stepDirection === 'forward'){
     $smartwizard.smartWizard("loader", "show");
     $(".simple_form:visible").submit();
@@ -9,6 +8,25 @@ function leaveStep(e, anchorObject, currentStepIndex, nextStep, stepDirection){
   }
 }
 
+function nextStep(){
+  $smartwizard.smartWizard("loader", "hide");
+  $smartwizard.off('leaveStep');
+  $smartwizard.smartWizard("next");
+  $smartwizard.on('leaveStep', leaveStep)
+}
+
+function errorSave(){
+  $smartwizard.smartWizard("loader", "hide");
+  alert('Houve um erro contate suporte');
+}
+
+$(document).on('ajax:complete', '.licitation_process', function(event, data, status, xhr) {
+  if(status === 'success'){
+    nextStep();
+  }else{
+    errorSave()
+  }
+});
 
 $(function(){
   var enableNavigation = $('form.auction').attr('id').includes('edit');

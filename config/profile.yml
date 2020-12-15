@@ -129,5 +129,6 @@ profile:
     - auction_suspensions
     - auction_messages
     - auction_conversations
+    - licitation_processes
 
 

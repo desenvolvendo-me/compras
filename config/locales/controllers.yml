@@ -123,6 +123,7 @@ pt-BR:
     auction_suspensions: "Suspensão de Pregão"
     auction_messages: "Enviar Mensagens no Chat"
     auction_conversations: "Visualizar Mensagens no Chat"
+    api_auction_licitation_processes: "Api Processo de Compras"
 
   menu:
     <<: *controllers

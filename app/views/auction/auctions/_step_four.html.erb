@@ -1,4 +1,4 @@
-<%= simple_form_for resource.localized, :url => resource.persisted? ? resource_path : collection_path do |f| %>
+<%= simple_form_for resource.localized, :url => resource_path, remote: true do |f| %>
   <fieldset>
     <h5>Configurações</h5>
     <div class="row">

@@ -39,6 +39,16 @@ class LicitationProcessesController < CrudController
     end
   end
 
+  def auction_update
+    licitation_process = LicitationProcess.find(params[:licitation_process_id])
+
+    if licitation_process.update_attributes(params[:licitation_process])
+      render :json => licitation_process, status: :ok
+    else
+      render :json => {:errors => licitation_process.errors}, :status => :unprocessable_entity
+    end
+  end
+
   def show
     render :layout => 'report'
   end

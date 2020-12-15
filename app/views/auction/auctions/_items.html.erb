@@ -1,4 +1,5 @@
-<%= simple_form_for resource.licitation_process.localized, :url => licitation_process_path(resource.licitation_process.id) do |f| %>
+<%= simple_form_for resource.licitation_process.localized,
+                    :url => licitation_process_auction_update_path(resource.licitation_process.id), remote: true do |f| %>
   <div id="auction_items">
     <span class="text-center"><h2 id="title-items">Tomada de Preço / Valor Itens</h2></span>
     <div class="nested-fields add-margin-bottom">
