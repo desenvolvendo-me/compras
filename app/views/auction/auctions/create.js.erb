@@ -1,5 +1,4 @@
 (function () {
-  debugger
   var $smartwizard = $("#auction_smartwizard")
   if($smartwizard.smartWizard("getStepIndex") === 0){
     $("#step-2").html('<%= escape_javascript render partial: 'auction/auctions/items', locals: {resource: resource} %>');
