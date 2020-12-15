@@ -5,5 +5,10 @@
     $("#step-3").html('<%= escape_javascript render partial: 'auction/auctions/group_items', locals: {resource: resource} %>');
     $("#step-4").html('<%= escape_javascript render partial: 'auction/auctions/step_four', locals: {resource: resource} %>');
   }
+
+  if($smartwizard.smartWizard("getStepIndex") === 3){
+    alert('Pregão salvo com sucesso!')
+  }
+
   nextStep();
 })();

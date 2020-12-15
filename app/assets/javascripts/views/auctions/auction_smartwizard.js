@@ -15,17 +15,27 @@ function nextStep(){
   $smartwizard.on('leaveStep', leaveStep)
 }
 
-function errorSave(){
+function errorOnSave(){
   $smartwizard.smartWizard("loader", "hide");
   alert('Houve um erro contate suporte');
 }
 
+//** Handle submit return of tab Dados dos Itens**//
 $(document).on('ajax:complete', '.licitation_process', function(event, data, status, xhr) {
   if(status === 'success'){
     nextStep();
   }else{
-    errorSave()
+    errorOnSave()
   }
+});
+
+$(document).on('ajax:error', 'form', function(event, data, status, xhr) {
+debugger
+});
+
+$(document).on('click', '.btn-finish', function(){
+  $(".simple_form:visible").submit();
+  $(this).prop('disabled', false);
 });
 
 $(function(){
@@ -71,8 +81,10 @@ $(function(){
   $smartwizard.on("showStep", function(e, anchorObject, stepNumber, stepDirection) {
     if(stepNumber === 3){
       $('.btn-finish').show();
+      $('.sw-btn-next').hide();
     }else{
       $('.btn-finish').hide();
+      $('.sw-btn-next').show();
     }
   });
 });
