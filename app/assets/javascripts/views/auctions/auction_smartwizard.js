@@ -29,10 +29,6 @@ $(document).on('ajax:complete', '.licitation_process', function(event, data, sta
   }
 });
 
-$(document).on('ajax:error', 'form', function(event, data, status, xhr) {
-debugger
-});
-
 $(document).on('click', '.btn-finish', function(){
   $(".simple_form:visible").submit();
   $(this).prop('disabled', false);

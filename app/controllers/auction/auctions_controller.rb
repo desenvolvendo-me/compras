@@ -17,7 +17,7 @@ class Auction::AuctionsController < Auction::BaseController
       # failure.html { render :new }
 
       success.js
-      failure.js { render json: :form_errors, content_type: "text/json", status: :unprocessable_entity }
+      failure.js { render :json => { :errors => resource.errors }, content_type: "text/json", status: :unprocessable_entity }
     end
   end
 
@@ -27,7 +27,7 @@ class Auction::AuctionsController < Auction::BaseController
       # failure.html { render :edit }
 
       success.js
-      failure.js { render json: :form_errors, content_type: "text/json", status: :unprocessable_entity }
+      failure.js { render :json => { :errors => resource.errors }, content_type: "text/json", status: :unprocessable_entity }
     end
   end
 
