@@ -1,0 +1,227 @@
+<div id="subtitle">
+  <%= "Empresa: #{current_user.try(:authenticable).try(:name)}" %> <br>
+  <%= "Endereço: #{f.object.auction.street},   #{f.object.auction.neighborhood},  #{f.object.auction.city}" %> <br>
+  <%= "CNPJ: #{current_user.try(:authenticable).try(:person).try(:cnpj)}" %>
+</div>
+
+<h5 class="mt-4" style="color:#3f6e9d;">Vem Apresentar Proposta:</h5>
+
+<div class="mh-400 my-2">
+  <div>
+    <table id="items-records" class="records">
+      <thead>
+      <tr>
+        <th>Material</th>
+        <th width="15%">Fabricante</th>
+        <th width="15%">Modelo</th>
+        <th width="8%">Quantidade</th>
+        <th width="11%">Preço Unitário</th>
+        <th width="11%">Preço Global</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% if resource.auction&.items.blank? %>
+        <tr><td colspan="7"><div class="alert alert-warning"><strong>Não foram cadastrados itens para esse pregão.</strong></div></tr></td>
+      <% end %>
+
+      <%= f.simple_fields_for :creditor_proposals, creditor_proposals_collection do |p| %>
+        <%= render form_partial, :f => p %>
+      <% end %>
+
+      <tr class="text-right" style="font-weight: bolder; color: black;">
+        <td colspan="4"></td>
+        <td colspan="2">
+          Valor Total da Proposta:
+          <span id="total-value"> <%= number_to_currency resource&.creditor_proposals&.sum(&:total_price) %></span>
+        </td>
+      </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<%= f.simple_fields_for :creditor_proposal_term, resource.creditor_proposal_term do |p| %>
+  <%= p.input :creditor_id, as: :hidden %>
+
+  <h4>Declarações</h4>
+  <h6>* Estas Declarações substitui o envio das mesmas</h6>
+  <div id="terms">
+    <div class="form-row">
+      <div class="col">
+        <div class="form-check">
+          <%= p.input :term %>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col">
+        <div class="form-check">
+          <%= p.input :impediment %>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col">
+        <div class="form-check">
+          <%= p.input :proposal_independent %>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col">
+        <div class="form-check">
+          <%= p.input :art_5 %>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col">
+        <div class="form-check">
+          <%= p.input :art_93_pcd %>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col">
+        <div class="form-check">
+          <%= p.input :art_529_clt %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row mt-4">
+    <div class="col">
+      <div class="form-group">
+        <%= p.input :proposal_doc, input_html: {accept: ('application/pdf')} %>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="form-group">
+        <%= p.input :proposal_qualification_doc, input_html: {accept: ('application/pdf')} %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row" style="margin-top: -11px">
+    <% unless p.object.proposal_send_date.blank? %>
+      <div class="col" >
+        <%= link_to p.object.proposal_doc_identifier, p.object.proposal_doc_url, :target => '_blank' if p.object.proposal_doc? %> anexado em: <%= p.object.proposal_send_date %>
+      </div>
+    <% end %>
+
+    <% unless p.object.qualification_send_date.blank? %>
+      <div class="col">
+        <%= link_to p.object.proposal_qualification_doc_identifier, p.object.proposal_qualification_doc_url, :target => '_blank' if p.object.proposal_qualification_doc? %> anexado em: <%= p.object.qualification_send_date %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<style>
+  .mh-400{
+    max-height: 650px;
+  }
+  #terms .form-row{
+    margin: 1rem 0 1rem 0;
+  }
+  #terms{
+    text-align: justify;
+  }
+  h4, h6, h5{
+    color: #3f6e9d;
+  }
+
+  h5 span{
+    display: block;
+  }
+  h5 span.subtitle{
+    font-size: 23px;
+  }
+
+  #terms .input{
+    margin-bottom: 0 !important;
+  }
+
+  .auction_creditor_proposal_proposal_doc label{
+    color: #3f6e9d;
+  }
+
+  .auction_creditor_proposal_proposal_qualification_doc label{
+    color: #3f6e9d;
+  }
+
+  .simple_form .input {
+    margin-bottom: 0 !important;
+  }
+
+  input[type=text],input[type=password],textarea{width:100%;}
+
+  body {
+    font: 15px/1.231 arial,helvetica,clean,sans-serif;
+    *font-size: small;
+  }
+</style>
+
+<script>
+  <% if f.object.persisted? %>
+  $(function(){
+    $(":input").prop('disabled', true);
+    $("#auction_creditor_proposal_submit").hide();
+
+    $("#edit_proposal").click(function(){
+      $(":input").prop('disabled', false);
+      $("#auction_creditor_proposal_submit").show();
+      $(this).hide();
+    });
+  });
+  <% end %>
+
+  $(function(){
+    var value;
+    $.each($("[name$='[quantity]']"), function(){
+      value = floatToPtBrString(parseFloat($(this).val()));
+      $(this).val(value);
+    })
+  });
+
+  function setTotalValue(){
+    var value = 0.0;
+    $.each($("[name$='[global_price]']"), function(){
+      if($(this).val())
+        value += parsePtBrFloat($(this).val());
+    });
+
+    $("#items-records #total-value").text('R$ '+floatToPtBrString(value));
+  }
+
+  $("[name$='[unit_price]'], [name$='[quantity]']").change( function(){
+    const $tr = $(this).closest('tr');
+
+    const qtd = parsePtBrFloat($tr.find("[name$='[quantity]']").val()),
+      unit_price = parsePtBrFloat($tr.find("[name$='[unit_price]']").val());
+
+    const global_price = qtd * unit_price;
+
+    if(!isNaN(global_price)){
+      $($tr.find("[name$='[global_price]']").val(floatToPtBrString(global_price)));
+      setTotalValue();
+    }
+  });
+
+  $(".nested-record [name$='[quantity]']").change(function(){
+    const total_bid = parseFloat($(this).data('bid'));
+    const quantity = parsePtBrFloat($(this).val());
+    if(quantity > total_bid){
+      custom_alert( 'Você não pode fornecer uma quantidade superior a solicitada pelo pregão!', 'Atenção');
+      $(this).val(total_bid)
+    }
+  })
+</script>

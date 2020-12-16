@@ -1,7 +1,7 @@
 class PurchaseProcessCreditorProposal < Compras::Model
   attr_accessible :creditor_id, :brand, :unit_price, :old_unit_price,
     :item_id, :delivery_date, :licitation_process_id, :lot, :ranking,
-    :purchase_process_item_id
+    :purchase_process_item_id, :model_version
 
   belongs_to :creditor
   belongs_to :licitation_process

@@ -1,0 +1,5 @@
+<%= simple_form_for resource.localized, :url =>  auction_proposal_path(resource), :remote => request.xhr? do |f| %>
+  <%= render 'crud/form_base_erros', :f => f %>
+  <%= render 'form', :f => f %>
+  <%= render 'form_buttons', :f => f %>
+<% end %>

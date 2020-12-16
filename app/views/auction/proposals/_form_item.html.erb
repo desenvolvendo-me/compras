@@ -1,0 +1,17 @@
+<tr class="record nested-record item-record">
+  <td><%= f.object.material.to_s %></td>
+  <td><%= f.input :brand, input_html:{class: 'form-control form-control-sm'}, label: false%></td>
+  <td><%= f.input :model_version, input_html:{class: 'form-control form-control-sm'}, label: false%></td>
+  <td><%= f.input :quantity, as: :fake, input_html:{value: f.object.item.quantity, 'data-bid': f.object.item.quantity, class: 'form-control form-control-sm', readonly: true}, label: false%></td>
+  <td><%= f.input :unit_price, input_html:{value: number_with_delimiter(f.object.unit_price), class: 'form-control form-control-sm' }, label: false%></td>
+  <td>
+    <%= f.input :global_price, as: :fake, input_html:{value: number_with_delimiter(f.object.total_price), class: 'form-control form-control-sm', readonly: true}, label: false%>
+    <%= f.input :purchase_process_item_id, as: :hidden%>
+    <%= f.input :licitation_process_id, as: :hidden%>
+    <%= f.input :creditor_id, as: :hidden%>
+  </td>
+</tr>
+
+
+
+

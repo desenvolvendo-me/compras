@@ -123,12 +123,12 @@ profile:
     - auction_positions
     - auction_auctions
     - auction_management_objects
-    - auction_auction_creditor_proposals
     - auction_dispute_items
     - auction_appeals
     - auction_suspensions
     - auction_messages
     - auction_conversations
     - licitation_processes
+    - auction_proposals
 
 

@@ -1000,7 +1000,7 @@ Compras::Application.routes.draw do
   namespace :auction do
     get "/external" => "auctions#external_index", as: :auctions_external_index
 
-    resources :auction_creditor_proposals do
+    resources :proposals do
       collection do
         get :auctioneer_view
       end

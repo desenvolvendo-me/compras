@@ -29,7 +29,7 @@ class LicitationProcess < Compras::Model
                   :purchase_process_accreditation_attributes, :trading_attributes,
                   :judgment_commission_advice_attributes, :bidders_attributes,
                   :licitation_process_ratifications_attributes, :disqualify_proposal_above,
-                  :disqualify_proposal_below
+                  :disqualify_proposal_below, :creditor_proposal_term_attributes
   
   attr_accessor :purchase_solicitation_id,:purchase_solicitation
 
@@ -98,7 +98,8 @@ class LicitationProcess < Compras::Model
   has_many :fractionations, class_name: 'PurchaseProcessFractionation', dependent: :destroy,
            foreign_key: :purchase_process_id
 
-
+  has_one :auction, :dependent => :destroy
+  has_one :creditor_proposal_term, :dependent => :restrict
   has_one :judgment_commission_advice, :dependent => :restrict
   has_one :purchase_process_accreditation, :dependent => :restrict
   has_one :trading, class_name: 'PurchaseProcessTrading', :dependent => :restrict,
@@ -107,7 +108,7 @@ class LicitationProcess < Compras::Model
   accepts_nested_attributes_for :purchase_process_budget_allocations, :items, :creditor_proposals,
                                 :process_responsibles, :tied_creditor_proposals, :legal_analysis_appraisals,
                                 :publications, :bidders, :purchase_process_accreditation, :trading,
-                                :licitation_process_ratifications, allow_destroy: true
+                                :licitation_process_ratifications, :creditor_proposal_term, allow_destroy: true
 
   accepts_nested_attributes_for :judgment_commission_advice, :reject_if => :all_blank
   accepts_nested_attributes_for :purchase_solicitations, :reject_if => :all_blank,
@@ -370,9 +371,9 @@ class LicitationProcess < Compras::Model
 
   def proposals_of_creditor(creditor)
     if judgment_form_lot?
-      creditor_proposals.creditor_id(creditor.id).order(:id).readonly(false)
+      creditor_proposals.creditor_id(creditor.id).order(:id)
     else
-      creditor_proposals.joins(:item).creditor_id(creditor.id).order(:id).readonly(false)
+      creditor_proposals.joins(:item).creditor_id(creditor.id).order(:id)
     end
   end
 
