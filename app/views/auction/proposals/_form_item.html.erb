@@ -1,17 +1,44 @@
-<tr class="record nested-record item-record">
-  <td><%= f.object.material.to_s %></td>
-  <td><%= f.input :brand, input_html:{class: 'form-control form-control-sm'}, label: false%></td>
-  <td><%= f.input :model_version, input_html:{class: 'form-control form-control-sm'}, label: false%></td>
-  <td><%= f.input :quantity, as: :fake, input_html:{value: f.object.item.quantity, 'data-bid': f.object.item.quantity, class: 'form-control form-control-sm', readonly: true}, label: false%></td>
-  <td><%= f.input :unit_price, input_html:{value: number_with_delimiter(f.object.unit_price), class: 'form-control form-control-sm' }, label: false%></td>
-  <td>
-    <%= f.input :global_price, as: :fake, input_html:{value: number_with_delimiter(f.object.total_price), class: 'form-control form-control-sm', readonly: true}, label: false%>
-    <%= f.input :purchase_process_item_id, as: :hidden%>
-    <%= f.input :licitation_process_id, as: :hidden%>
-    <%= f.input :creditor_id, as: :hidden%>
-  </td>
-</tr>
+<div>
+  <table id="items-records" class="records">
+    <thead>
+    <tr>
+      <th>Material</th>
+      <th width="15%">Fabricante</th>
+      <th width="15%">Modelo</th>
+      <th width="8%">Quantidade</th>
+      <th width="11%">Preço Unitário</th>
+      <th width="11%">Preço Global</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% if resource.auction&.items.blank? %>
+      <tr><td colspan="7"><div class="alert alert-warning"><strong>Não foram cadastrados itens para esse pregão.</strong></div></tr></td>
+    <% end %>
 
+    <%= f.simple_fields_for :creditor_proposals, creditor_proposals_collection do |p| %>
+      <tr class="record nested-record item-record">
+        <td><%= p.object.material.to_s %></td>
+        <td><%= p.input :brand, input_html:{class: 'form-control form-control-sm'}, label: false%></td>
+        <td><%= p.input :model_version, input_html:{class: 'form-control form-control-sm'}, label: false%></td>
+        <td><%= p.input :quantity, as: :fake, input_html:{value: p.object.item.quantity, 'data-bid': p.object.item.quantity, class: 'form-control form-control-sm', readonly: true}, label: false%></td>
+        <td><%= p.input :unit_price, input_html:{value: number_with_delimiter(p.object.unit_price), class: 'form-control form-control-sm' }, label: false%></td>
+        <td>
+          <%= p.input :global_price, as: :fake, input_html:{value: number_with_delimiter(p.object.total_price), class: 'form-control form-control-sm', readonly: true}, label: false%>
+          <%= p.input :purchase_process_item_id, as: :hidden%>
+          <%= p.input :licitation_process_id, as: :hidden%>
+          <%= p.input :creditor_id, as: :hidden%>
+        </td>
+      </tr>
+    <% end %>
 
+    <tr class="text-right" style="font-weight: bolder; color: black;">
+      <td colspan="4"></td>
+      <td colspan="2">
+        Valor Total da Proposta:
+        <span id="total-value"> <%= number_to_currency resource&.creditor_proposals&.sum(&:total_price) %></span>
+      </td>
+    </tr>
 
-
+    </tbody>
+  </table>
+</div>

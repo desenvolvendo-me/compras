@@ -3,11 +3,11 @@
     <%= f.button :submit, 'data-disabled' => not_updateable_message  %>
   <% end %>
 
-  <% if f.object.persisted? && can?(:modify, main_controller_name) %>
+  <% if f.object.creditor_proposal_term.persisted? && can?(:modify, main_controller_name) %>
     <%= link_to 'Alterar', "#", id:'edit_proposal', class:'button primary' %>
   <% end  %>
 
-  <% if f.object.persisted? && can?(:destroy, main_controller_name) %>
+  <% if f.object.creditor_proposal_term.persisted? && can?(:destroy, main_controller_name) %>
     <%= f.button :destroy, 'Excluir', 'data-disabled' => not_destroyable_message %>
      <%= link_to 'Imprimir', resource_path(resource), class:'button primary' %>
   <% end %>

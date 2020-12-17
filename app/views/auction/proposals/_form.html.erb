@@ -8,36 +8,7 @@
 
 <div class="mh-400 my-2">
   <div>
-    <table id="items-records" class="records">
-      <thead>
-      <tr>
-        <th>Material</th>
-        <th width="15%">Fabricante</th>
-        <th width="15%">Modelo</th>
-        <th width="8%">Quantidade</th>
-        <th width="11%">Preço Unitário</th>
-        <th width="11%">Preço Global</th>
-      </tr>
-      </thead>
-      <tbody>
-      <% if resource.auction&.items.blank? %>
-        <tr><td colspan="7"><div class="alert alert-warning"><strong>Não foram cadastrados itens para esse pregão.</strong></div></tr></td>
-      <% end %>
-
-      <%= f.simple_fields_for :creditor_proposals, creditor_proposals_collection do |p| %>
-        <%= render form_partial, :f => p %>
-      <% end %>
-
-      <tr class="text-right" style="font-weight: bolder; color: black;">
-        <td colspan="4"></td>
-        <td colspan="2">
-          Valor Total da Proposta:
-          <span id="total-value"> <%= number_to_currency resource&.creditor_proposals&.sum(&:total_price) %></span>
-        </td>
-      </tr>
-
-      </tbody>
-    </table>
+    <%= render form_partial, :f => f %>
   </div>
 </div>
 
@@ -171,7 +142,7 @@
 </style>
 
 <script>
-  <% if f.object.persisted? %>
+  <% if f.object.creditor_proposal_term.persisted? %>
   $(function(){
     $(":input").prop('disabled', true);
     $("#auction_creditor_proposal_submit").hide();
