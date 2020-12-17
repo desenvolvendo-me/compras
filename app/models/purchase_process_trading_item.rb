@@ -32,6 +32,14 @@ class PurchaseProcessTradingItem < Compras::Model
     where { |query| query.trading_id.eq(trading_id) }
   end
 
+  scope :status_pending, ->() do
+    where(status: PurchaseProcessTradingItemStatus::PENDING)
+  end
+
+  scope :status_closed, ->() do
+    where(status: PurchaseProcessTradingItemStatus::CLOSED)
+  end
+
   scope :lot, ->(lot) do
     where { |query| query.lot.eq(lot) }
   end

@@ -10,7 +10,7 @@
   </thead>
 
   <tbody>
-  <% @auction.dispute_items.closed.each do |item| %>
+  <%  @auction.licitation_process.trading_items.status_closed.each do |item| %>
     <tr id="item-<%= item.id %>">
       <td><%= item.material %></td>
       <td><%= item.decorator.lowest_proposal_amount %></td>
@@ -26,40 +26,40 @@
 </table>
 
 
-<div class="title-section">Empresas Credenciadas:</div>
-<table id="accreditation_creditors" class="records">
-  <thead>
-  <th>Fornecedor</th>
-  <th>Lote</th>
-  <th>Valor do Lote</th>
-  <th>Status da Proposta</th>
-  </thead>
+<!--<div class="title-section">Empresas Credenciadas:</div>-->
+<!--<table id="accreditation_creditors" class="records">-->
+<!--  <thead>-->
+<!--  <th>Fornecedor</th>-->
+<!--  <th>Lote</th>-->
+<!--  <th>Valor do Lote</th>-->
+<!--  <th>Status da Proposta</th>-->
+<!--  </thead>-->
 
-  <tbody>
-  <% @auction.creditor_proposals.each do |creditor_proposal| %>
-    <% creditor_proposal.auction_creditor_proposal_items.each do |proposal| %>
-      <tr>
-        <td><%= creditor_proposal.creditor %></td>
-        <td><%= proposal.auction_item %></td>
-        <td><%= proposal.unit_price %></td>
-        <td class="creditor-status"><%= proposal.proposal_status %></td>
-      </tr>
-    <% end.present? and begin %>
-      <tr>
-        <td colspan="2"></td>
-        <td>
-          <b>Valor Total da Proposta: </b>
-        </td>
-        <td>
-          <b>
-            <%= number_to_currency creditor_proposal.proposals_total_price %>
-          </b>
-        </td>
-      </tr>
-    <% end %>
-  <% end %>
-  </tbody>
-</table>
+<!--  <tbody>-->
+  <%# @auction.licitation_process.creditor_proposals.each do |creditor_proposal| %>
+    <%# creditor_proposal.auction_creditor_proposal_items.each do |proposal| %>
+<!--      <tr>-->
+<!--        <td><%#= creditor_proposal.creditor %></td>-->
+<!--        <td><%#= proposal.auction_item %></td>-->
+<!--        <td><%#= proposal.unit_price %></td>-->
+<!--        <td class="creditor-status"><%#= proposal.proposal_status %></td>-->
+<!--      </tr>-->
+    <%# end.present? and begin %>
+<!--      <tr>-->
+<!--        <td colspan="2"></td>-->
+<!--        <td>-->
+<!--          <b>Valor Total da Proposta: </b>-->
+<!--        </td>-->
+<!--        <td>-->
+<!--          <b>-->
+            <%#= number_to_currency creditor_proposal.proposals_total_price %>
+<!--          </b>-->
+<!--        </td>-->
+<!--      </tr>-->
+    <%# end %>
+  <%# end %>
+<!--  </tbody>-->
+<!--</table>-->
 
 <style>
   .title-section{
