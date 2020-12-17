@@ -31,7 +31,7 @@ class Auction::ProposalsController < Auction::BaseController
   end
 
   def auctioneer_view
-    @auction = Auction.find(params[:auction_id])
+    @auction = Auction.includes(licitation_process: [creditor_proposals: [:creditor]]).find(params[:auction_id])
   end
 
   def show
