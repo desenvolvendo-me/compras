@@ -1,6 +1,7 @@
 (function () {
   var $smartwizard = $("#auction_smartwizard")
   if($smartwizard.smartWizard("getStepIndex") === 0){
+    $("#auction_id").val(<%= resource.id %>);
     $("#step-2").html('<%= escape_javascript render partial: 'auction/auctions/items', locals: {resource: resource} %>');
     $("#step-3").html('<%= escape_javascript render partial: 'auction/auctions/group_items', locals: {resource: resource} %>');
     $("#step-4").html('<%= escape_javascript render partial: 'auction/auctions/step_four', locals: {resource: resource} %>');

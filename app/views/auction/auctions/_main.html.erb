@@ -80,4 +80,9 @@
     $(this).closest(".yui3-g").find("[name$='[position]']").val(data.position);
     $(this).closest(".yui3-g").find("[name$='[registration]']").val(data.registration);
   });
+
+  $("#auction_licitation_process_id").change(function(event, data){
+      $('#auction_judgment_form').val(data.judgment_form_humanize);
+      $('#auction_description').val(data.description);
+  })
 </script>
