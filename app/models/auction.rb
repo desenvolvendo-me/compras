@@ -16,6 +16,7 @@ class Auction < Compras::Model
 
   has_many :group_items, class_name: "AuctionGroupItem"
   has_many :items, through: :licitation_process
+  has_many :trading_items, through: :licitation_process
   has_many :auction_support_teams
   has_many :bids, class_name: 'AuctionBid'
   has_many :creditor_proposal_terms

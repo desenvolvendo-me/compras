@@ -27,7 +27,7 @@ class Auction::DisputeItemsController < Auction::BaseController
   end
 
   def check_proposal
-    unless @auction.licitation_process.proposals_of_creditor(current_user.authenticable_id)
+    unless @auction.licitation_process.proposals_of_creditor(current_user.authenticable)
       redirect_to auction_auctions_path, :alert => I18n.t('auction.messages.must_have_registered_proposal')
     end
   end
