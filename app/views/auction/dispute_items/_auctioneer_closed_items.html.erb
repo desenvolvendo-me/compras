@@ -4,20 +4,16 @@
   <th>Item</th>
   <th>Melhor Proposta</th>
   <th>Fornecedor Proposta</th>
-  <th>Melhor Lance</th>
-  <th>Fornecedor Lance</th>
   <th>Status</th>
   </thead>
 
   <tbody>
-  <%  @auction.licitation_process.trading_items.status_closed.each do |item| %>
-    <tr id="item-<%= item.id %>">
-      <td><%= item.material %></td>
-      <td><%= item.decorator.lowest_proposal_amount %></td>
-      <td><%= item.decorator.lowest_proposal_creditor %></td>
-      <td class="bid_amount"><%= item.decorator.lowest_bid_amount %></td>
-      <td class="bid_creditor"><%= item.decorator.lowest_bid_creditor %></td>
-      <td class="status"><%= item.status_humanize %></td>
+  <%  @auction.trading_items.status_closed.each do |trading_item| %>
+    <tr id="item-<%= trading_item.id %>">
+      <td><%= trading_item.to_s %></td>
+      <td><%= trading_item.decorator.lowest_bid_or_proposal_amount %></td>
+      <td><%= trading_item.lowest_bid_or_proposal_accreditation_creditor %></td>
+      <td class="status"><%= trading_item.status_humanize %></td>
     </tr>
   <% end.empty? and begin %>
     <tr><td colspan="6">Não há items cadastrados para as propostas dos fornecedores.</td></tr>
