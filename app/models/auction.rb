@@ -63,15 +63,6 @@ class Auction < Compras::Model
     "#{process}/#{year}"
   end
 
-
-  def creditor_proposal (creditor_id)
-    creditor_proposal_terms.find_by_creditor_id(creditor_id)
-  end
-
-  def minimum_proposal_item item_id
-    auction_creditor_proposal_items.where(auction_item_id: item_id).minimum(:global_price)
-  end
-
   def session_ended?
     end_dispute_date.present? && end_dispute_time.present?
   end
