@@ -6,11 +6,15 @@ class Report::ContractsController < Report::BaseController
     @report = report_instance
 
     if params[:between_days_finish] || params[:all]
+
       @contracts = params[:all] ? (Contract.all):(apply_scopes(Contract))
+      @linked_contracts =  params[:linked_contract] ? LinkedContract.includes(:contract).between_days_finish(params[:linked_contract][:started_at],params[:linked_contract][:ended_at]):LinkedContract.all
+      @contract_additives = params[:contract_additive] ? ContractAdditive.between_days_finish(params[:contract_additive][:started_at],params[:contract_additive][:ended_at]):ContractAdditive.all
+
       respond_to do |format|
         format.html { render :show, layout: 'report' }
         format.xlsx do
-          path = ContractsExporter.new(@contracts).generate!
+          path = ContractsExporter.new(@contracts,@linked_contracts,@contract_additives).generate!
           send_file path, type: "application/xlsx", :filename => "contrato.xlsx"
         end
       end

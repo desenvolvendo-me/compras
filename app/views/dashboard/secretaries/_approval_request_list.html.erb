@@ -1,13 +1,20 @@
-<span class="text-15 blue">Contratos a Serem Assinados Via Certificado Digital</span>
+<div class="row">
+  <div class="col-12" style="margin-left: auto;">
+    <%= link_to 'Imprimir Todos os Contratos', report_contracts_path(:all => true), :taget=> '_blank',
+                :class => 'button primary btn-small'%>
+    <%= link_to 'Gerar Planilha de Todos os Contratos', report_contracts_path(:all => true, format: :xlsx), :taget=> '_blank',
+                :class => 'button primary btn-small'%>
+  </div>
+  <div class="col-12" style="margin-top: 5px;">
+    <span class="text-15 blue">Contratos a Serem Assinados Via Certificado Digital</span>
+  </div>
+</div>
+
+
 
 <table class="records mt-1">
   <tbody id="records">
-  <% if @approval_requests.blank? %>
-    <tr>
-      <td>Não foram encontrados contratos para esse periodo</td>
-    </tr>
-  <% end %>
-  <% @approval_requests.each do |resource| %>
+  <% @approval_requests&.each do |resource| %>
     <tr>
       <td>
         <p><%= link_to report_supply_requests_path(resource, approv: true, secretary_id: resource.purchase_solicitation&.department.secretary.id) do%>
@@ -15,6 +22,10 @@
           <%end %>
         </p>
       </td>
+    </tr>
+  <% end.blank? and begin %>
+    <tr>
+      <td>Não foram encontrados contratos para esse periodo</td>
     </tr>
   <% end %>
   </tbody>

@@ -9,8 +9,10 @@
     <tr>
       <td>
         <p><%= link_to edit_contract_path(resource) do%>
-            Contrato <%= resource.contract_number %> - Data fim <%= l(resource.end_date) if resource.end_date %> - Fornecedor <%= resource.creditor.person.name %>
-          <%end %>
+            <%= "CONTRATO" if resource.type_contract != 'minute' %> <%= resource.contract_number %> - 
+            DATA FIM <%= l(resource.end_date) if resource.end_date %> -
+            <%= (Contract.human_attribute_name :creditor).mb_chars.upcase %> <%= resource.creditor.person.name %>
+          <% end %>
             </p>
         <% if resource.decorated? && resource.decorator.respond_to?(:summary) %>
           <p><%= resource.decorator.summary %></p>

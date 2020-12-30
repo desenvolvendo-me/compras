@@ -74,8 +74,23 @@
     </div>
   </div>
 
-  <%= f.error :items %>
-
+  <style>
+  .display-grid {
+    display:inline-grid
+  }
+  </style>
+  
+  <% klass =  f.object.items.first.class.to_s.constantize %>  
+  <div>
+    <ul style="background:white" class="display-grid" >
+      <% f.errors('items').each do |key,value| %>
+        <li class="display-grid simple_form error">
+          <%= klass.human_attribute_name key.to_s.sub('items.','') %> <%= value.first %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+   
   <table id="items-records" class="records">
     <thead>
     <tr>

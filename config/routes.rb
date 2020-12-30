@@ -1033,6 +1033,10 @@ Compras::Application.routes.draw do
       get "modal_info", on: :member
     end
 
+    resources :conversations do
+      resources :messages
+    end
+
     resources :employees do
       collection do
         get :filter
@@ -1143,6 +1147,7 @@ Compras::Application.routes.draw do
         get "/contracts", to: "secretaries#contracts", as: :contracts
         get "/linked_contracts", to: "secretaries#linked_contracts", as: :linked_contracts
         get "/approval_requests", to: "secretaries#approval_requests", as: :approval_requests
+        get "/contract_additives", to: "secretaries#contract_additives", as: :contract_additives
       end
     end
   end

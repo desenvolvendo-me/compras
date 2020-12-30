@@ -1,4 +1,6 @@
 class ContractAdditive < Compras::Model
+  include HelperModule
+
   attr_accessible :number, :additive_type, :signature_date, :end_date,
                   :publication_date, :dissemination_source_id, :value,
                   :observation, :contract_id, :additive_kind, :description,
@@ -101,4 +103,11 @@ class ContractAdditive < Compras::Model
   def additive_type_equals_extension_term
     additive_type.eql? ContractAdditiveType::EXTENSION_TERM
   end
+
+  scope :between_days_finish, ->(start_at = Date.today, end_at) do
+    start_at = Date.today + start_at.to_i unless start_at.is_a?(Date)
+    end_at = Date.today + end_at.to_i unless end_at.is_a?(Date)
+    where(end_validity:start_at..end_at)
+  end
+
 end

@@ -2,23 +2,6 @@
 <%= f.input :creditor_id, as: :hidden %>
 <%= f.input :lot, as: :hidden %>
 
-<div class="yui3-g">
-  <% if f.object.judgment_form_lot? %>
-    <div class="yui3-u-1-6">
-      <%= f.input :lot, disabled: true %>
-    </div>
-  <% end %>
-
-  <div class="yui3-u-1-4">
-    <%= f.input :total_value, disabled: true,
-      input_html: { value: number_with_precision(f.object.total_value), class: 'numeric' } %>
-  </div>
-
-  <div class="yui3-u-1-4">
-    <%= f.input :difference_price, disabled: true, input_html: { value: "0,00", class: :numeric } %>
-  </div>
-</div>
-
 <div id="items">
   <%= f.association :items, collection: items_or_build(f.object) do |r| %>
     <div class="nested-realignment_price_items">
@@ -42,7 +25,7 @@
         </div>
 
         <div class="yui3-u-1-8 ">
-          <%= r.input :total_price, as: :fake, disabled: true, input_html: { value: number_with_precision(r.object.price * r.object.quantity), class: 'total_price' } %>
+          <%= r.input :total_price, as: :fake, disabled: true, input_html: { value: number_with_precision(r.object.total_price), class: 'total_price' } %>
         </div>
 
         <div class="yui3-u-1-8">
@@ -53,11 +36,42 @@
   <% end %>
 </div>
 
+
+<div class="yui3-g">
+  <% if f.object.judgment_form_lot? %>
+    <div class="yui3-u-1-6">
+      <%= f.input :lot, disabled: true %>
+    </div>
+  <% end %>
+  <div class="yui3-u-1-5">
+    <%= f.input :total_value, disabled: true,
+                input_html: { value: number_with_precision(f.object.total_value), class: 'numeric', 'data-price': f.object.total_value } %>
+  </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :total_realignment_value, as: :fake, disabled: true,
+                input_html: { value: number_with_precision(f.object.total_realignment_price), class: 'numeric', id:'total-realignment' } %>
+  </div>
+
+  <div class="yui3-u-1-6">
+    <%= f.input :difference_price, disabled: true, input_html: { value: "0,00", class: :numeric } %>
+  </div>
+
+  <div class="yui3-u-1-6">
+    <%= f.input :discount %>
+  </div>
+
+  <div class="yui3-u-1-5">
+    <%= f.input :final_value, as: :fake, disabled: true,
+                input_html: { value: number_with_precision(f.object.total_realignment_price), class: 'numeric'} %>
+  </div>
+</div>
+
 <script>
   function sumPrices() {
-    var totalValue = parsePtBrFloat($('#realignment_price_total_value').val()),
-        quantity   = 0,
-        value      = 0;
+    var totalValue         = parsePtBrFloat($('#realignment_price_total_value').val()),
+        totalRealignment   = 0,
+        value              = 0;
 
     $(".price").each(function() {
       var $total_price = $(this).closest('.nested-realignment_price_items').find('.total_price'),
@@ -65,8 +79,11 @@
           value        = new BigNumber(parsePtBrFloat($(this).val() || '0,00'));
 
       $total_price.val(numberWithDelimiter(value * quantity));
+      totalRealignment += value * quantity;
       totalValue -= value * quantity;
     });
+
+    $('#total-realignment').val(numberWithDelimiter(totalRealignment));
 
     return totalValue;
   }
@@ -75,7 +92,16 @@
     $('#realignment_price_difference_price').val(numberWithDelimiter(sumPrices()));
   }
 
+  function calculateDiscount(){
+    var $price_total   = $("#realignment_price_final_value"),
+        price_total    = parseFloat($("#realignment_price_total_value").data('price')),
+        discount       = parsePtBrFloat(this.value);
+
+    $price_total.val(numberWithDelimiter(price_total - discount));
+  }
+
   $('.price').on('change', calculated_difference_price);
+  $("#realignment_price_discount").on('change', calculateDiscount);
 
   calculated_difference_price();
 </script>

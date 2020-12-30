@@ -27,9 +27,9 @@ $(function(){
       department: purchase_solicitation.department
     };
 
-    var data = $('#list_purchase_solicitations_template').mustache(purchaseSolicitationBinds);
+    var data = $('#purchase_solicitations_template').mustache(purchaseSolicitationBinds);
 
-    $('#list_purchase_solicitations_records tbody').append(data);
+    $('#purchase_solicitations-records tbody').append(data);
 
   }
 
@@ -40,8 +40,10 @@ $(function(){
   $("#licitation_process_purchase_solicitation_id").on("change", function (event, purchaseSolicitation) {
     DataPurchaseSolicitation = purchaseSolicitation;
   });
-
-  $("#list_purchase_solicitations_button").click(function(event){
+  
+  $("#button_add_purchase_solicitations").click(function(event){
+  // $("#list_purchase_solicitations_button").click(function(event){
+    console.log("list_purchase_solicitations_button");
     event.preventDefault();
     event.stopPropagation();
 

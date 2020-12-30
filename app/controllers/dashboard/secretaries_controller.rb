@@ -8,6 +8,7 @@ class Dashboard::SecretariesController < CrudController
     @contracts_periods = Contract.count_contracts_finishing
     @approval_requests = SupplyRequest.to_secretary_approv(current_user.authenticable.id).page(params[:page_approval]).per(5)
     @linked_contracts = LinkedContract.by_days_finish.page(params[:page]).per(2)
+    @contract_additives = ContractAdditive.between_days_finish(Date.today,Date.today+30).page(params[:page]).per(2)
   end
 
   def contracts
@@ -22,9 +23,14 @@ class Dashboard::SecretariesController < CrudController
     @approval_requests = SupplyRequest.to_secretary_approv(current_user.authenticable.id).page(params[:page_approval]).per(5)
   end
 
+  def contract_additives
+    @contract_additives = apply_scopes(ContractAdditive).page(params[:page_contract_additive]).per(2)
+  end
+
   private
 
   def collection
    []
   end
+
 end

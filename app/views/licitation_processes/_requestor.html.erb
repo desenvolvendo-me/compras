@@ -9,7 +9,7 @@
       </div>  
       <div class="col">
           <%= hidden_field_tag :purchase_solicitation_id, nil, :name => 'purchase_solicitation[id]' %>
-          <%= f.input :purchase_solicitation, :as => :auto_complete, :fake => true, :required => true %>
+          <%= f.input :purchase_solicitation, :as => :auto_complete, :fake => true, :required => false %>
           <%= f.input :department, as: :fake, input_html:{style:'display: none', name:'licitation_process[department]'}, label: false %>
       </div>
     </div>
