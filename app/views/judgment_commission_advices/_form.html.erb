@@ -54,7 +54,6 @@
   }
 
   $("[name$='[licitation_commission_id]']").change(function (event, adviceLicitationCommission) {
-    debugger
     if (adviceLicitationCommission){
       $("[name$='[licitation_commission_president_name]']").val(adviceLicitationCommission.president_name);
       createMembersFromLicitationCommission(adviceLicitationCommission.members);

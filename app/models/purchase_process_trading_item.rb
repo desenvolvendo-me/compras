@@ -1,10 +1,8 @@
 class PurchaseProcessTradingItem < Compras::Model
   attr_accessible :reduction_rate_value, :reduction_rate_percent, :status, as: :trading_user
-  attr_accessible :trading_id, :item_id, :lot, :bids_attributes, :negotiation_attributes,
-    :status
+  attr_accessible :trading_id, :item_id, :lot, :bids_attributes, :negotiation_attributes, :status
 
-  has_enumeration_for :status, with: PurchaseProcessTradingItemStatus,
-    create_helpers: true, create_scopes: true
+  has_enumeration_for :status, with: PurchaseProcessTradingItemStatus, create_helpers: true, create_scopes: true
 
   belongs_to :trading, class_name: 'PurchaseProcessTrading'
   belongs_to :item, class_name: 'PurchaseProcessItem'
@@ -30,6 +28,18 @@ class PurchaseProcessTradingItem < Compras::Model
 
   scope :trading_id, ->(trading_id) do
     where { |query| query.trading_id.eq(trading_id) }
+  end
+
+  scope :status_pending, ->() do
+    where(status: PurchaseProcessTradingItemStatus::PENDING)
+  end
+
+  scope :status_closed, ->() do
+    where(status: PurchaseProcessTradingItemStatus::CLOSED)
+  end
+
+  scope :status_opened, ->() do
+    where(status: PurchaseProcessTradingItemStatus::OPENED)
   end
 
   scope :lot, ->(lot) do
@@ -58,9 +68,7 @@ class PurchaseProcessTradingItem < Compras::Model
   end
 
   def to_s
-    return lot.to_s if lot
-
-    item.to_s
+    lot ? lot.to_s : item.to_s
   end
 
   def creditors_ordered(purchase_process_accreditation_creditor_repository = PurchaseProcessAccreditationCreditor)
@@ -105,6 +113,10 @@ class PurchaseProcessTradingItem < Compras::Model
     bids.with_proposal.first
   end
 
+  def lowest_creditor_bid creditor
+    bids.joins{accreditation_creditor}.where{accreditation_creditor.creditor_id.eq(creditor.id)}.with_proposal.first
+  end
+
   def last_bid
     bids.not_without_proposal.reorder(:id).last
   end
@@ -125,6 +137,17 @@ class PurchaseProcessTradingItem < Compras::Model
     lowest_bid.try(:accreditation_creditor) || creditor_with_lowest_proposal
   end
 
+  def bid_or_proposal_creditor creditor
+    lowest_creditor_bid(creditor) || if item?
+                                       PurchaseProcessCreditorProposal.where(purchase_process_item_id: item_id,
+                                                                             creditor_id: creditor.id).first&.unit_price
+                                     else
+                                       PurchaseProcessCreditorProposal.where(licitation_process_id: purchase_process_id,
+                                                                             lot: lot,
+                                                                             creditor_id: creditor.id).first&.unit_price
+                                     end
+  end
+
   def quantity
     #TODO essa quantidade irá mudar quando a contagem for por lote de itens
     item.quantity
@@ -136,6 +159,10 @@ class PurchaseProcessTradingItem < Compras::Model
 
   def pending!
     update_column :status, PurchaseProcessTradingItemStatus::PENDING
+  end
+
+  def open!
+    update_column :status, PurchaseProcessTradingItemStatus::OPENED
   end
 
   def benefited_tie?

@@ -1,0 +1,35 @@
+<div>
+  <table id="items-records" class="records">
+    <thead>
+    <tr>
+      <th>Lote</th>
+      <th width="11%">Preço Total</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% if resource.auction&.items.blank? %>
+      <tr><td colspan="7"><div class="alert alert-warning"><strong>Não foram cadastrados itens para esse pregão.</strong></div></tr></td>
+    <% end %>
+
+    <%= f.simple_fields_for :creditor_proposals, creditor_proposals_collection do |p| %>
+      <tr class="record nested-record item-record">
+        <td><%= p.input :lot, input_html:{class: 'form-control form-control-sm'}, label: false, readonly: true%></td>
+        <td>
+          <%= p.input :unit_price, input_html:{value: number_with_delimiter(p.object.unit_price), class: 'form-control form-control-sm' }, label: false%>
+          <%= p.input :purchase_process_item_id, as: :hidden%>
+          <%= p.input :licitation_process_id, as: :hidden%>
+          <%= p.input :creditor_id, as: :hidden%>
+        </td>
+      </tr>
+    <% end %>
+
+    <tr class="text-right" style="font-weight: bolder; color: black;">
+      <td colspan="2">
+        Valor Total da Proposta:
+        <span id="total-value"> <%= number_to_currency resource.proposals_of_creditor(@current_user.authenticable)&.sum(&:total_price) %></span>
+      </td>
+    </tr>
+
+    </tbody>
+  </table>
+</div>

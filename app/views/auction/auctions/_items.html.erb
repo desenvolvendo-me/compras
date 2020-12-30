@@ -1,132 +1,162 @@
+<%= simple_form_for resource.licitation_process.localized,
+                    :url => licitation_process_auction_update_path(resource.licitation_process.id), remote: true do |f| %>
+  <div id="auction_items">
+    <span class="text-center"><h2 id="title-items">Tomada de Preço / Valor Itens</h2></span>
+    <div class="nested-fields add-margin-bottom">
+      <div class="hidden-fields">
+        <%= hidden_field_tag :item_id, nil, :name => 'licitation_process_item[id]' %>
 
+        <div class="yui3-g">
+          <div class="yui3-u-3-8">
+            <%= f.input :material, :as => :auto_complete, :fake => true, :required => true, 'data-hidden-field-class' => 'unique' %>
+          </div>
 
-<div id="auction_items">
+          <div class="yui3-u-1-8">
+            <%= f.input :lot, :as => :fake, :required => true %>
+          </div>
 
-  <div class="nested-fields add-margin-bottom">
-    <%= hidden_field_tag :item_id, nil, :name => 'auction_item[id]' %>
-    <%= hidden_field_tag :auction_id, nil, :name => 'auction_item[auction_id]' %>
-    <%= hidden_field_tag :code, nil, :name => 'auction_item[code]' %>
-    <%= hidden_field_tag :quantity, nil, :name => 'auction_item[quantity]' %>
-    <%= hidden_field_tag :auction_id, nil, :name => 'auction_item[auction_id]' %>
+          <div class="yui3-u-1-8">
+            <%= f.input :reference_unit, :as => :fake, :disabled => true %>
+          </div>
 
+          <div class="yui3-u-1-8">
+            <%= f.input :quantity, :as => :fake, :required => true,
+                        :input_html => {'data-numeric' => true, :maxlength => 15, :class => 'numeric integer'} %>
+          </div>
 
-    <div class="yui3-g">
-      <div class="yui3-u-1-2">
-        <%= f.input :purchase_solicitation, :as => :modal, 'data-hidden-field-class' => 'unique', :fake => true %>
+          <div class="yui3-u-1-8">
+            <%= f.input :unit_price, :as => :fake,
+                        :input_html => {'data-decimal' => true, :value => '0,00', 'data-precision' => 2, :maxlength => 15, :class => 'numeric'} %>
+          </div>
+
+          <div class="yui3-u-1-8">
+            <%= f.input :estimated_total_price, :as => :fake,
+                        :input_html => {'data-decimal' => true, :value => '0,00', 'data-precision' => 2, :maxlength => 15, :class => 'numeric'} %>
+          </div>
+        </div>
+
+        <%= f.input :material_class, as: :fake, disabled: true%>
+
+        <%= f.input :detailed_description, as: :fake, disabled: true%>
+
+        <div class="row">
+          <div class="col">
+            <%= f.input :estimated_value, as: :fake, :required => true,
+                        :input_html => {'data-decimal' => true, :value => '0,00', 'data-precision' => 2, :maxlength => 15, :class => 'numeric'}%>
+          </div>
+          <div class="col">
+            <%= f.input :max_value, as: :fake, :required => true,
+                        :input_html => {'data-decimal' => true, :value => '0,00', 'data-precision' => 2, :maxlength => 15, :class => 'numeric'}%>
+          </div>
+          <div class="col" >
+
+            <%= f.input :benefit_type, as: :fake_select, collection: BenefitType.to_a, required: true,
+                        include_blank: true, input_html:{class:'select society_kind',  name: "auction[benefit_type]"} %>
+
+          </div>
+        </div>
       </div>
-      <div class="yui3-u-1-2">
-        <label class="fake" for="benefit_type">Tipo da Solicitação de Compra</label>
-        <%= select_tag :kind, options_for_select(PurchaseSolicitationKind.to_a),
-                       include_blank: true, as: :fake, disabled: true,
-                       class: ' kind select', id:'purchase_solicitation_kind'%>
-      </div>
-    </div>
-
-    <div class="yui3-g">
-      <div class="yui3-u-1">
-        <%= f.input :material, as: :auto_complete, 'data-hidden-field-class' => 'unique', :fake => true, :required => true %>
-      </div>
-    </div>
-
-    <div class="yui3-g mt-4">
-      <div class="yui3-u-1-3">
-        <%= f.input :lot, as: :fake, :required => true %>
-      </div>
-      <div class="yui3-u-1-3">
-        <%= f.input :quantity, as: :fake, required: true %>
-      </div>
-      <div class="yui3-u-1-3">
-        <%= f.input :reference_unit, as: :fake, disabled: true %>
-      </div>
-    </div>
-
-    <%= f.input :material_class, as: :fake, disabled: true%>
-
-    <%= f.input :detailed_description, as: :fake, disabled: true%>
-
-    <div class="row">
-      <div class="col-2">
-        <%= f.input :estimated_value, as: :fake, :required => true,
-                    :input_html => {'data-decimal' => true, :value => '0,00', 'data-precision' => 2, :maxlength => 15, :class => 'numeric'}%>
-      </div>
-      <div class="col-3">
-        <%= f.input :max_value, as: :fake, :required => true,
-                    :input_html => {'data-decimal' => true, :value => '0,00', 'data-precision' => 2, :maxlength => 15, :class => 'numeric'}%>
-      </div>
-      <div class="col-5" >
-
-          <%= f.input :benefit_type, as: :fake_select, collection: BenefitType.to_a, required: true,
-                       include_blank: true, input_html:{class:'select society_kind',  name: "auction[benefit_type]"} %>
-
-      </div>
-      <div class="col-2 text-center pt-2">
-        <%= button_tag 'Adicionar', type: :button,
-                       :class => 'button add-nested-record field-without-label',
-                       'data-template' => 'auction_items_template',
+      <div class=" d-flex justify-content-end">
+        <%= button_tag 'Adicionar Itens', type: :button,
+                       :id => 'btn_new_role_unique',
+                       :class => 'add-nested-record  button primary field-without-label',
+                       'data-template' => 'licitation_process_items_template',
                        'data-records' => 'items-records',
+                       'data-clear-after-add' => false,
                        'data-disabled' => not_updateable_message %>
       </div>
     </div>
 
+    <% klass =  f.object.items.first.class.to_s.constantize %>
+    <div>
+      <ul style="background:white" class="display-grid" >
+        <% f.errors('items').each do |key,value| %>
+          <li class="display-grid simple_form error">
+            <%= klass.human_attribute_name key.to_s.sub('items.','') %> <%= value.first %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
 
+    <table id="items-records" class="records">
+      <thead>
+      <tr>
+        <th width="8%"><%= PurchaseProcessItem.human_attribute_name :lot %></th>
+        <th><%= PurchaseProcessItem.human_attribute_name :material %></th>
+        <th><%= PurchaseProcessItem.human_attribute_name :reference_unit %></th>
+        <th width="11%"><%= PurchaseProcessItem.human_attribute_name :quantity %></th>
+        <th>Valor unitário</th>
+        <th><%= PurchaseProcessItem.human_attribute_name :estimated_total_price %></th>
+        <th></th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <%= f.association :items, :collection => localized(f.object.items.orderize_by_material_description) do |p| %>
+        <%= render 'purchase_process_items/auction_items_form',
+                   id: p.object.id,
+                   lot: p.object.lot,
+                   material: p.object.material,
+                   material_id: p.object.material_id,
+                   reference_unit: p.object.reference_unit,
+                   quantity: number_with_precision(p.object.quantity),
+                   unit_price: number_with_precision(p.object.unit_price),
+                   estimated_total_price: number_with_precision(p.object.estimated_total_price),
+                   additional_information: p.object.additional_information,
+                   data_disabled: not_updateable_message,
+                   f: p %>
+      <% end %>
+      </tbody>
+    </table>
+
+    <%= mustache "licitation_process_items_template" do %>
+      <%= f.association :items_attributes, :collection => f.object.items.build, :index => '{{uuid}}' do |p| %>
+        <%= render 'purchase_process_items/auction_items_form',
+                   id: '{{id}}',
+                   lot: '{{lot}}',
+                   material: '{{material}}',
+                   material_id: '{{material_id}}',
+                   reference_unit: '{{reference_unit}}',
+                   quantity: '{{quantity}}',
+                   unit_price: '{{unit_price}}',
+                   estimated_total_price: '{{estimated_total_price}}',
+                   additional_information: '{{additional_information}}',
+                   data_disabled: nil,
+                   f: p %>
+      <% end %>
+    <% end %>
   </div>
+<% end %>
 
-  <%= f.error :items %>
+<script>
+  $('#licitation_process_material_id').on('change', function(event, material) {
+    if (material){
+      $('#licitation_process_reference_unit').val(material.reference_unit);
+      $('#licitation_process_material_class').val(material.material_class);
+      $('#licitation_process_detailed_description').val(material.detailed_description);
+    }
+  });
+</script>
 
-  <table id="items-records" class="records">
-    <thead>
-    <tr>
-      <th><%= "Número" %></th>
-      <th><%= "Item" %></th>
-      <th><%= "Unidade" %></th>
-      <th><%= "Quantidade" %></th>
-      <th><%= "Valor" %></th>
-      <th><%= "Valor Máximo" %></th>
-      <th><%= "Grupo" %></th>
-      <th></th>
-      <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    <%= f.association :items, :collection => localized(f.object.items) do |p| %>
-      <%= render 'auction/auction_items/form',
-                 id: p.object.id,
-                 code: p.object.material.code,
-                 material: p.object.material,
-                 material_id: p.object.material_id,
-                 detailed_description: p.object.material.detailed_description,
-                 material_class: p.object&.material_class,
-                 material_class_id: p.object&.material_class&.id,
-                 reference_unit: p.object&.reference_unit&.acronym,
-                 quantity: p.object.quantity,
-                 estimated_value: p.object.estimated_value,
-                 max_value: p.object.max_value,
-                 benefit_type: p.object.benefit_type,
-                 lot: p.object.lot,
-                 auction_id: p.object.auction_id,
-                 f: p %>
-    <% end %>
-    </tbody>
-  </table>
+<style>
 
-  <%= mustache "auction_items_template" do %>
-    <%= f.association :items_attributes, :collection => f.object.items.build, :index => '{{uuid}}' do |p| %>
-      <%= render 'auction/auction_items/form',
-                 id: "{{id}}",
-                 code: "{{code}}",
-                 material: "{{material}}",
-                 material_id: "{{material_id}}",
-                 detailed_description: "{{detailed_description}}",
-                 material_class: "{{material_class}}",
-                 material_class_id: "{{material_class_id}}",
-                 reference_unit: "{{reference_unit}}",
-                 quantity: "{{quantity}}",
-                 estimated_value: "{{estimated_value}}",
-                 max_value: "{{max_value}}",
-                 benefit_type: "{{benefit_type}}",
-                 lot: '{{lot}}',
-                 auction_id: "{{auction_id}}",
-                 f: p %>
-    <% end %>
-  <% end %>
-</div>
+  .display-grid {
+    display:inline-grid
+  }
+
+  .items-actions .input{
+    margin-bottom: 0;
+  }
+
+  .items-actions input,button{
+    margin-left:5px;
+  }
+  .items-actions input,button:first-child{
+    margin-left:0;
+  }
+  #title-items{
+    min-height: unset !important;
+    margin-top: unset !important;
+    margin-bottom: 0;
+  }
+</style>

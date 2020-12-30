@@ -117,12 +117,13 @@ pt-BR:
     auction_positions: "Cargos"
     auction_auctions: "Pregão Eletrônico"
     auction_management_objects: "Objeto"
-    auction_auction_creditor_proposals: "Propostas de Credores"
+    auction_proposals: "Propostas de Credores"
     auction_dispute_items: "Lançes"
     auction_appeals: "Intenção de Recurso"
     auction_suspensions: "Suspensão de Pregão"
     auction_messages: "Enviar Mensagens no Chat"
     auction_conversations: "Visualizar Mensagens no Chat"
+    api_auction_licitation_processes: "Api Processo de Compras"
 
   menu:
     <<: *controllers

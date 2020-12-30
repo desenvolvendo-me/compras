@@ -9,7 +9,7 @@ $(document).ready(function () {
 
   function hasPurchaseSolicitationAlreadyAdded(purchase_solicitation) {
     var added = false;
-    debugger
+
     $("table#price_collection_purchase_solicitations_records :input.purchase-solicitation-id").each(function () {
       if ($(this).val() == purchase_solicitation.id) {
         added = true;

@@ -9,7 +9,7 @@
   </thead>
 
   <tbody>
-  <% @auction.dispute_items.opened.each do |item| %>
+  <% @auction.licitation_process.trading_items.status_pending.each do |item| %>
     <tr id="item-<%= item.id %>">
       <td><%= item.material %></td>
       <td><%= item.decorator.lowest_proposal_amount %></td>

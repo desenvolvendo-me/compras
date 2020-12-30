@@ -1,12 +1,12 @@
 pt-BR:
   activerecord:
     models:
-      auction_creditor_proposal:
+      creditor_proposal_term:
         one: "Proposta de Registro de Preço"
         other: "Proposta de Registro de Preço"
 
     attributes:
-      auction_creditor_proposal:
+      creditor_proposal_term:
         term: "Declaro que estou ciente e concordo com as condições contidas no edital e seus anexos, bem como de que cumpro
                plenamente os requisitos de habilitação definidos no edital."
         impediment: " Declaro sob as penas da lei, que até a

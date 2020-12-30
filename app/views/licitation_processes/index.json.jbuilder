@@ -10,6 +10,9 @@ json.array!(collection) do |obj|
   json.envelope_delivery_time          obj.decorator.envelope_delivery_time
   json.execution_type                  obj.execution_type
   json.execution_type_humanize         obj.execution_type_humanize
+  json.description                     obj.description
+  json.judgment_form                   obj.judgment_form_kind
+  json.judgment_form_humanize          obj.judgment_form.kind_humanize
   json.modality_humanize               obj.modality_humanize.to_s
   json.modality_or_type_of_removal     obj.modality_or_type_of_removal
   json.process_date                    obj.process_date

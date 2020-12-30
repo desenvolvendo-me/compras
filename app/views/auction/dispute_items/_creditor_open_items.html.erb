@@ -3,20 +3,22 @@
   <th>Status</th>
   <th>Descrição</th>
   <th>Seu Último Lançe</th>
-  <th>Melhor Lance</th>
+  <th>Melhor Lance/Proposta</th>
+  <th>Fornecedor Lance/Proposta</th>
   <th>Dê um lance:</th>
   <th width="4%"></th>
   <th width="5%"></th>
   </thead>
 
   <tbody>
-  <% @auction.dispute_items.opened.each do |dispute_item| %>
+  <% @auction.trading_items.status_opened.each do |trading_item| %>
     <tr>
-      <td><%= check_status_my_bids dispute_item %></td>
-      <td><%= dispute_item.auction_item %></td>
-      <td><%= dispute_item.status_humanize %></td>
-      <td><%= dispute_item.decorator.lowest_proposal_amount %></td>
-      <td><%= text_field_tag :bid_amount, 'data-decimal': true, class: 'creditor-bid' %></td>
+      <td><%= check_status_my_bids trading_item %></td>
+      <td><%= trading_item.to_s %></td>
+      <td><%= trading_item.bid_or_proposal_creditor(@current_user.authenticable) %></td>
+      <td><%= trading_item.decorator.lowest_bid_or_proposal_amount %></td>
+      <td><%= trading_item.lowest_bid_or_proposal_accreditation_creditor %></td>
+      <td><%= text_field_tag :bid_amount, "", 'data-decimal': true, class: 'creditor-bid' %></td>
       <td><%= button_tag 'Salvar', type: :button, class: 'button primary small-button' %></td>
       <td><%= button_tag 'Desistir', type: :button, class: 'button primary small-button' %></td>
     </tr>

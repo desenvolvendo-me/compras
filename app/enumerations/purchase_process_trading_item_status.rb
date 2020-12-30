@@ -1,5 +1,5 @@
 class PurchaseProcessTradingItemStatus < EnumerateIt::Base
-  associate_values :closed, :failed, :pending
+  associate_values :closed, :finished, :failed, :opened, :pending
 
   def self.allowed_for_negotiation
     allowed = [CLOSED, FAILED]

@@ -1,7 +1,7 @@
 <div class="wrapper-form">
   <h2 id="title">
-    <span class="subtitle"><%= "Pregão: #{resource.licitation_number} / #{resource.year}" %></span>
-    <span class="subtitle"><%= resource.object %></span>
+    <span class="subtitle"><%= "Pregão: #{resource.to_s}" %></span>
+    <span class="subtitle"><%= resource.description %></span>
     <span class="subtitle"><%= "Entrega da Proposta: #{resource.proposal_delivery}" %></span>
     <span class="subtitle"><%= "Abertura da Licitação: #{resource.bid_opening.strftime('%d/%m/%Y')}" if resource.bid_opening %></span>
     <span class="subtitle"><%= "Pregoiero: #{resource.employee&.name}" %></span>

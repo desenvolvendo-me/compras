@@ -1,6 +1,8 @@
 pt-BR:
   enumerations:
     purchase_process_trading_item_status:
-      closed: "Encerrado"
+      finished: "Encerrado"
+      closed: "Fechado"
       failed: "Frustrado"
       pending: "Pendente"
+      opened: "Aberto"

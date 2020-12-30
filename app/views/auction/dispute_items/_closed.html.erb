@@ -1,6 +1,6 @@
 <%if current_user.employee? %>
   <%= render 'auctioneer_closed_items' %>
 <%else %>
-  <%= render 'creditor_closed_items', proposal: @auction.creditor_proposal(current_user.authenticable_id) %>
+  <%= render 'creditor_closed_items' %>
 <%end %>
 

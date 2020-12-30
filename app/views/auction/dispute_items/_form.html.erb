@@ -1,12 +1,11 @@
 <div id="title">
   <h5><%= "FORNECEDOR: #{current_user.try(:authenticable).try(:name)}" %></h5>
   <h5>
-    <b>PROCESSO DE COMPRA: </b><%= "#{@auction.process_number}/#{@auction.year} " %>
-    <b>PREGÃO: </b><%= "#{@auction.licitation_number}/#{@auction.year} " %>
-    <b>OBJETO: </b><%= "#{@auction.object}" %>
+    <b>PROCESSO DE COMPRA: </b><%= "#{@auction.to_s} " %>
+    <b>OBJETO: </b><%= "#{@auction.description}" %>
   </h5>
   <h5>
-    <b>PREGOIERO: </b><%= "#{@auction.try(:user).try(:authenticable).try(:name)}" %>
+    <b>PREGOIERO: </b><%= "#{@auction.user&.authenticable.name}" %>
   </h5>
   <h5>
     <b><%= "Data da Licitação: #{(@auction.notice_availability.strftime('%d/%m/%Y - %H h') rescue 'não informado')}" %></b>

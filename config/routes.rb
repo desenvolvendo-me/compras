@@ -540,6 +540,8 @@ Compras::Application.routes.draw do
       get :add_trading_negotiation
       get :add_ratifications
     end
+
+    put :auction_update
   end
 
   post "licitation_process/material_total_balance" => "licitation_processes#material_total_balance", as: :licitation_process_material_total_balance
@@ -998,7 +1000,7 @@ Compras::Application.routes.draw do
   namespace :auction do
     get "/external" => "auctions#external_index", as: :auctions_external_index
 
-    resources :auction_creditor_proposals do
+    resources :proposals do
       collection do
         get :auctioneer_view
       end

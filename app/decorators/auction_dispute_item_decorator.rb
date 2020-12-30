@@ -28,6 +28,10 @@ class AuctionDisputeItemDecorator
     lowest_bid.creditor
   end
 
+  def lowest_bid_or_proposal_amount
+    number_with_precision super
+  end
+
   def bids_finished?
     bids.all?(:closed?) if bids.present?
   end

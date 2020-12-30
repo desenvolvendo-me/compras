@@ -15,13 +15,14 @@
     </tr>
     </thead>
     <tbody>
-    <% @auction.creditor_proposals.each_with_index do |index, proposal| %>
+    <% @auction.licitation_process.creditor_proposals.map(&:creditor).each_with_index do |creditor, index| %>
       <tr>
+        <td><%= creditor.name %></td>
         <td>
           <%= index %>
         </td>
         <td>
-          <%= number_to_currency proposal.auction_creditor_proposal_items.sum(:global_price) %>
+          <%= number_to_currency @auction.licitation_process.creditor_proposals.sum{|x| x.total_price if x.creditor_id == creditor.id}%>
         </td>
       </tr>
     <% end %>
@@ -37,13 +38,13 @@
     </tr>
     </thead>
     <tbody>
-    <% @auction.creditor_proposals.each_with_index do |proposal, index| %>
+    <% @auction.licitation_process.creditor_proposals.map(&:creditor).each_with_index do |creditor, index| %>
       <tr>
         <td>
           <%= index %>
         </td>
         <td>
-          <%= number_to_currency proposal.auction_creditor_proposal_items.sum(:global_price) %>
+          <%= number_to_currency @auction.licitation_process.creditor_proposals.sum{|x| x.total_price if x.creditor_id == creditor.id}%>
         </td>
       </tr>
     <% end %>
@@ -56,7 +57,7 @@
     <div class="alert-warning p-2">
       <h2>
         <span class="text-unico">
-          <%if @auction.creditor_proposals.present?  %>
+          <%if @auction.licitation_process.creditor_proposals.present?  %>
             Pregão com Proposta e Declarações Cadastradas
           <% else %>
             Pregão não Possui Propostas Cadastradas
