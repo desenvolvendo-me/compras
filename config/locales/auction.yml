@@ -8,11 +8,10 @@ pt-BR:
     attributes:
       auction:
         auction_type: "Característica do Pegrão Eletrônico"
-        licitation_number: "Número da Licitação"
-        process_number: "Número do Processo de Compra"
+        licitation_process: "Processo de Compra"
         year: "Ano"
         dispute_type: "Modo da Disputa"
-        judment_form: "Critério de Julgamento"
+        judgment_form: "Critério de Julgamento"
         covid_law: "Utiliza Lei 13.979/2020 Art. 4º COVD19"
         purchase_value: "Valor da Compra"
         items_quantity: "Quantidade de Itens"
@@ -55,6 +54,7 @@ pt-BR:
         end_dispute_time: 'Hora de Encerramento'
         restart_dispute_date: 'Data de Reabertura'
         restart_dispute_time: 'Hora de Reabertura'
+        description: 'Descrição'
 
   auction:
     messages:

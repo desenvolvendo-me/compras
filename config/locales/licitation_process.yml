@@ -96,6 +96,8 @@ pt-BR:
         creditor_for_all_items: 'Busque o Fornecedor dos Itens'
         disqualify_proposal_below: 'Desclassificar Proposta Inferior a (%)'
         disqualify_proposal_above: 'Desclassificar Proposta Superior a (%)'
+        material_class: 'Classe do Material'
+        detailed_description: 'Descrição Detalhada'
 
 
   licitation_process:
