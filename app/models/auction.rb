@@ -3,7 +3,7 @@ class Auction < Compras::Model
                   :judment_form, :covid_law, :purchase_value, :items_quantity, :group_items_attributes,
                   :object, :object_management, :employee_id, :items_attributes, :sensitive_value, :variation_type, :minimum_interval,
                   :decree_treatment, :document_edict, :disclosure_date, :responsible_dissemination_id, :notice_availability,
-                  :proposal_delivery, :bid_opening, :internet_address, :city, :chat_activated,
+                  :proposal_delivery, :bid_opening, :internet_address, :city, :status,:chat_activated,
                   :neighborhood, :street, :telephone, :cell_phone, :user_id, :bid_opening_time,
                   :end_dispute_date, :end_dispute_time, :restart_dispute_date, :restart_dispute_time
 
@@ -29,6 +29,7 @@ class Auction < Compras::Model
   has_enumeration_for :auction_type, :with => AuctionType
   has_enumeration_for :dispute_type, :with => AuctionDisputeType
   has_enumeration_for :judment_form, :with => AuctionJudmentForm
+  has_enumeration_for :status, :with => AuctionStatus
 
 
   accepts_nested_attributes_for :items, :allow_destroy => true

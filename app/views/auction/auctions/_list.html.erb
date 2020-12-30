@@ -11,7 +11,7 @@
                   <i class="material-icons">print</i>
                 <% end %>
 
-                <span class="mr-2 float-right text-dark" style="font-size: 18px; font-weight: bolder"><%= resource.decorator.status %></span>
+                <span class="mr-2 float-right text-dark" style="font-size: 18px; font-weight: bolder"><%=  resource.status_humanize %></span>
 
 
                 <h5>Pregão:<%= "#{resource.licitation_number}/#{resource.year}" %> - Objeto: <%= resource.object %></h5>

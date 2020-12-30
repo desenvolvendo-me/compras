@@ -1,0 +1,12 @@
+pt-BR:
+  enumerations:
+    auction_status:
+      revoked: 'Pregão revogado'
+      canceled_session: 'Pregão anulado'
+      abandoned: 'Pregão abandonado'
+      suspended: 'Pregão Suspenso'
+      reactivated: 'Pregão reativado'
+      performed_on_day: 'Pregão realizado no dia'
+      closed: 'Pregão encerrado'
+      waiting_decision: 'Aguardando Decisão do Pregoeiro'
+      open: 'Pregão Aberto'
