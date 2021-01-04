@@ -11,6 +11,7 @@ pt-BR:
       not_found_in_database: 'Email ou senha inválido.'
       timeout: "Sua sessão expirou. Por favor, efetue seu login novamente."
       shared_account: "Sua conta de usuário foi acessada em outro local. Em caso de dúvida, entre em contato com o administrador."
+      disabled_user: "Usuário Desativado."
 
     sessions:
       signed_in: "Login efetuado com sucesso."
