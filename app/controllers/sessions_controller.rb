@@ -2,7 +2,7 @@ class SessionsController < Devise::SessionsController
   skip_before_filter :check_concurrent_session
 
   def create
-    if current_user.activated?
+    if current_user && current_user.activated?
       super
       set_login_token  
     else
