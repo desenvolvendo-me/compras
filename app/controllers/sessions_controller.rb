@@ -2,13 +2,8 @@ class SessionsController < Devise::SessionsController
   skip_before_filter :check_concurrent_session
 
   def create
-    if current_user && current_user.activated?
-      super
-      set_login_token  
-    else
-      sign_out(current_user)
-      redirect_to new_user_session_path, :alert => I18n.t('devise.failure.disabled_user')
-    end
+    super
+    set_login_token  
   end
 
   def new
@@ -17,6 +12,8 @@ class SessionsController < Devise::SessionsController
   end
 
   private
+  
+
 
   def set_login_token
     token = Devise.friendly_token
