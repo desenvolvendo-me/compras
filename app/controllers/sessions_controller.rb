@@ -3,8 +3,7 @@ class SessionsController < Devise::SessionsController
 
   def create
     super
-
-    set_login_token
+    set_login_token  
   end
 
   def new
@@ -13,6 +12,8 @@ class SessionsController < Devise::SessionsController
   end
 
   private
+  
+
 
   def set_login_token
     token = Devise.friendly_token
