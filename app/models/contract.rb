@@ -90,6 +90,14 @@ class Contract < Compras::Model
   filterize
 
   scope :founded, joins { contract_type }.where { contract_type.service_goal.eq(ServiceGoal::FOUNDED) }
+  
+  scope :by_years, lambda {
+    current_year = Date.current.year
+    last_year = current_year - 1
+
+    where(year:[last_year,current_year])
+  }
+
   scope :management, joins { contract_type }.where { contract_type.service_goal.eq(ServiceGoal::CONTRACT_MANAGEMENT) }
   scope :by_signature_date, lambda { |date_range|
     where { signature_date.in(date_range) }
@@ -153,7 +161,7 @@ class Contract < Compras::Model
   end
 
   def status
-    Date.today > end_date ? 'Finalizado' : 'Vigente'
+    end_date && Date.today > end_date ? 'Finalizado' : 'Vigente'
   end
 
   def modality_humanize

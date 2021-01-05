@@ -13,6 +13,7 @@ class LicitationProcessesController < CrudController
   has_scope :term, :allow_blank => true
   has_scope :by_status, :allow_blank => true
   has_scope :not_in_contracts, type: :boolean
+  has_scope :by_years, type: :boolean, default: true, only: [:index]
 
   before_filter :set_licitation_process, only: [:add_bidders, :add_trading_negotiation, :add_ratifications]
 

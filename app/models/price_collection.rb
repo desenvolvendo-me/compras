@@ -47,6 +47,13 @@ class PriceCollection < Compras::Model
   orderize "id DESC"
   filterize
 
+  scope :by_years, lambda {
+    current_year = Date.current.year
+    last_year = current_year - 1
+
+    where(year:[last_year,current_year])
+  }
+
   def to_s
     "#{code}/#{year}"
   end
