@@ -1,6 +1,7 @@
 class PriceCollectionsController < CrudController
   actions :all, :except => :destroy
   before_filter :should_not_be_annuled!, :only => [:update, :classification]
+  has_scope :by_years, type: :boolean, default: true, only: [:index]
 
   def create
     create! do |success, failure|
@@ -44,10 +45,6 @@ class PriceCollectionsController < CrudController
   end
 
   protected
-
-  def default_filters
-    { :year => lambda { Date.current.year } }
-  end
 
   def interpolation_options
     { :resource_name => "#{resource_class.model_name.human} #{resource.code}/#{resource.year}" }
