@@ -161,7 +161,14 @@ class PurchaseSolicitation < Compras::Model
             .joins { items.material }
             .where { list_purchase_solicitations.licitation_process.id.eq(licitation_process_id) }
             .where { items.material.id.in(material_ids) }
-        end
+  end
+ 
+  scope :by_years, lambda {
+    current_year = Date.current.year
+    last_year = current_year - 1
+
+    where(accounting_year:[last_year,current_year])
+  }
 
   def to_s
     "#{code}/#{accounting_year}"

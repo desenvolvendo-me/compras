@@ -16,6 +16,7 @@ class PurchaseSolicitationsController < CrudController
   has_scope :by_deparment, type: :boolean, default: true, only: [:index] do |controller, scope|
     scope.by_deparment(controller.current_user.id)
   end
+  has_scope :by_years, type: :boolean, default: true, only: [:index]
 
   def new
     object = build_resource
@@ -66,10 +67,6 @@ class PurchaseSolicitationsController < CrudController
   end
 
   protected
-
-  def default_filters
-    {:accounting_year => lambda {Date.current.year}}
-  end
 
   def interpolation_options
     {:resource_name => "#{resource_class.model_name.human} #{resource.code}/#{resource.accounting_year}"}
