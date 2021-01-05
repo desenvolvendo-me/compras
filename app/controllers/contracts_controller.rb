@@ -6,6 +6,7 @@ class ContractsController < CrudController
   has_scope :by_days_finish, allow_blank: true
   has_scope :by_licitation_process, allow_blank: true
   has_scope :by_creditor_principal_contracts, allow_blank: true
+  has_scope :by_years, type: :boolean, default: true, only: [:index]
 
   layout "report", only: [:conference]
 
@@ -49,10 +50,6 @@ class ContractsController < CrudController
   end
 
   protected
-
-  def default_filters
-    {:year => lambda {Date.current.year}}
-  end
 
   def create_resource(object)
     object.sequential_number = Contract.next_sequential(object.year)
