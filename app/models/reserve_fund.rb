@@ -1,5 +1,4 @@
-# class ReserveFund < UnicoAPI::Resources::Contabilidade::ReserveFund
-class ReserveFund < Accounting::Model
+class ReserveFund < UnicoAPI::Resources::Contabilidade::ReserveFund
   include ActiveResource::Associations
   include BelongsToResource
   include I18n::Alchemy
@@ -17,7 +16,6 @@ class ReserveFund < Accounting::Model
 
   def self.by_purchase_process_id(id)
     #TODO resolver problema na api do contabilidade
-    self.where(purchase_process_id:id)
     # all(params: {
     #   by_purchase_process_id: id,
     #   methods: :balance,
