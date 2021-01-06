@@ -434,7 +434,7 @@ class LicitationProcess < Compras::Model
   def reserve_funds(repository = ReserveFund)
     #TODO resolver problema na api do contabilidade
     # repository.all(params: {by_purchase_process_id: id})
-    repository.where(purchase_process_id)
+    repository.where(purchase_process_id:id)
   end
 
   def budget_allocation_capabilities
