@@ -4,7 +4,7 @@ module ReserveFundRequestsHelper
   end
 
   def reserve_fund_action(resource)
-    resource.reserve_funds.empty? ? 'Criar' : 'Editar'
+    resource && resource.reserve_funds.empty? ? 'Criar' : 'Editar'
   end
 
   def budget_allocation_for_select(resource)
