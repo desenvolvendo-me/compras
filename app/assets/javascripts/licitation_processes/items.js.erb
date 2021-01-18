@@ -130,8 +130,8 @@ $(document).ready(function() {
   $('form.licitation_process').on('keyup', '#licitation_process_unit_price, #licitation_process_quantity', function() {
     var itemQuantity  = new BigNumber(parsePtBrFloat( $('#licitation_process_quantity').val() || '0')),
         itemUnitPrice = new BigNumber(parsePtBrFloat( $('#licitation_process_unit_price').val() || '0')),
-        total         = numberWithDelimiter(parseFloat(itemQuantity.multiply(itemUnitPrice)));
-
+        total         = numberWithDelimiter(parseFloat(itemQuantity.multiply(itemUnitPrice)),'.',',',3);
+    
     $('#licitation_process_estimated_total_price').val(total);
   });
 
