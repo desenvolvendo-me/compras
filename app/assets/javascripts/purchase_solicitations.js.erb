@@ -37,7 +37,7 @@ $(document).ready(function () {
     }
 
     function refreshItemsTotalValue(itemsTotalValue) {
-        $('#purchase_solicitation_total_items_value').val(numberWithDelimiter(parseFloat(itemsTotalValue)));
+        $('#purchase_solicitation_total_items_value').val(numberWithDelimiter(parseFloat(itemsTotalValue),'.',',',3));
     }
 
     function materialType() {
@@ -136,12 +136,24 @@ $(document).ready(function () {
         setBudgetAllocationSource();
     });
 
+    function set_estimated_total_price(){
+        var itemQuantity = new BigNumber(parsePtBrFloat($('#purchase_solicitation_quantity').val() || '0')),
+        itemUnitPrice = new BigNumber(parsePtBrFloat($('#purchase_solicitation_unit_price').val() || '0')),
+        total = itemUnitPrice.multiply(itemQuantity);
+
+        $('#purchase_solicitation_estimated_total_price').val(numberWithDelimiter(parseFloat(total),'.',',',3));
+    }
+
+    $(".edit-nested-record").click(function() {
+        setTimeout(set_estimated_total_price, 100);
+    });
+
     $('form.purchase_solicitation').on('keyup', '#purchase_solicitation_quantity, #purchase_solicitation_unit_price', function () {
         var itemQuantity = new BigNumber(parsePtBrFloat($('#purchase_solicitation_quantity').val() || '0')),
             itemUnitPrice = new BigNumber(parsePtBrFloat($('#purchase_solicitation_unit_price').val() || '0')),
             total = itemUnitPrice.multiply(itemQuantity);
 
-        $('#purchase_solicitation_estimated_total_price').val(numberWithDelimiter(parseFloat(total)));
+        $('#purchase_solicitation_estimated_total_price').val(numberWithDelimiter(parseFloat(total),'.',',',3));
 
         total = total.add(calculateItemsTotalValue());
 
