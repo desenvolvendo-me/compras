@@ -1,0 +1,43 @@
+<%if resource.licitation_process_id.present?%>
+  <%if resource.licitation_process.licitation_process_impugnments.size >0%>    
+    <%= link_to edit_licitation_process_impugnment_path(resource.licitation_process.licitation_process_impugnments.first.id), class: "card-link", :target => :_blank  do %>
+      <div class="card-footer text-muted">
+        Impugnações Clique Aqui
+      </div>
+    <% end %>
+  <%else%>
+    <%= link_to new_licitation_process_impugnment_path, class: "card-link", :target => :_blank  do %>
+      <div class="card-footer text-muted">
+        Impugnações Clique Aqui
+      </div>
+    <% end %>      
+  <% end %>    
+<%else%>  
+    <%= link_to new_licitation_process_impugnment_path, class: "card-link", :target => :_blank  do %>
+      <div class="card-footer text-muted">
+        Impugnações Clique Aqui
+      </div>
+    <% end %>  
+<% end %>
+
+<%if resource.licitation_process_id.present?%>
+  <%if resource.licitation_process.licitation_notices.size >0%>    
+    <%= link_to edit_licitation_notice_path(resource.licitation_process.licitation_notices.first.id), class: "card-link", :target => :_blank  do %>
+      <div class="card-footer text-muted">
+        Esclarecimentos e Avisos Clique Aqui
+      </div>
+    <% end %>
+  <%else%>
+    <%= link_to new_licitation_notice_path, class: "card-link", :target => :_blank  do %>
+      <div class="card-footer text-muted">
+        Esclarecimentos e Avisos Clique Aqui
+      </div>
+    <% end %>      
+  <% end %>    
+<%else%>  
+    <%= link_to new_licitation_notice_path, class: "card-link", :target => :_blank  do %>
+      <div class="card-footer text-muted">
+        Esclarecimentos e Avisos Clique Aqui
+      </div>
+    <% end %>  
+<% end %>
