@@ -116,8 +116,8 @@
                  creditor_id: p.object.creditor_id,
                  reference_unit: p.object.reference_unit,
                  quantity: number_with_precision(p.object.quantity),
-                 unit_price: number_with_precision(p.object.unit_price),
-                 estimated_total_price: number_with_precision(p.object.estimated_total_price),
+                 unit_price: p.object.unit_price_round,
+                 estimated_total_price: number_with_precision(p.object.estimated_total_price, precision:3),
                  additional_information: p.object.additional_information,
                  data_disabled: not_updateable_message,
                  f: p %>
