@@ -7,16 +7,25 @@
     <% f.object.items.pluck(:lot).uniq.try(:each) do |lot|%>
       <tr style="font-size: 16px">
         <td class="text-bold">Valor Total do item/grupo <%= lot %></td>
-        <td><%= number_to_currency f.object.items.where(lot: lot).sum(&:estimated_total_price) %></td>
+        <td><%= number_with_precision(f.object.items.where(lot: lot).sum(&:estimated_total_price), precision:3) %></td>
       </tr>
     <% end %>
 
     <% if f.object.items.present? %>
       <tr class="text-bold" style="font-size: 16px">
         <td></td>
-        <td style="color: black"><%= number_to_currency f.object.items.sum(&:estimated_total_price) %></td>
+        <td style="color: black"><%= number_with_precision(f.object.items.sum(&:estimated_total_price), precision:3) %></td>
       </tr>
     <% end %>
     </tbody>
   </table>
 <% end %>
+
+
+<script>
+  $(function(){
+    $( ".item-unit-price" ).each(function() {
+      $(this).focus();
+    });
+  })
+</script>
