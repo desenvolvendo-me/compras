@@ -126,6 +126,13 @@
 
 
 <script>
+  <% if params[:source].present? and params[:tab].present? %>
+    window.addEventListener("load", () => {
+      var tab = '<%= params[:tab] %>'
+      $('#'+tab).click();
+    });
+  <%end%>
+
   <% if resource.approved? %>
     $(function(){
       $('form.licitation_process [data-disabled]').on('click', function(event){

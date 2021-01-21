@@ -1,0 +1,21 @@
+<%if resource.licitation_process_id.present?%>
+  <%if resource.licitation_process.contracts.size >0%>    
+    <%= link_to edit_contract_path(resource.licitation_process.contracts.first.id), class: "card-link", :target => :_blank  do %>
+      <div class="card-footer text-muted">
+        Clique Aqui
+      </div>
+    <% end %>
+  <%else%>
+    <%= link_to new_contract_path, class: "card-link", :target => :_blank  do %>
+      <div class="card-footer text-muted">
+        Clique Aqui
+      </div>
+    <% end %>      
+  <% end %>    
+<%else%>  
+    <%= link_to new_contract_path, class: "card-link", :target => :_blank  do %>
+      <div class="card-footer text-muted">
+        Clique Aqui
+      </div>
+    <% end %>  
+<% end %>

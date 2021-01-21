@@ -1,0 +1,13 @@
+<%if resource.licitation_process_id.present?%>
+<%= link_to edit_licitation_process_path(resource.licitation_process_id,:source => 'auction',:tab => tab), class: "card-link", :target => :_blank  do %>
+  <div class="card-footer text-muted">
+    Clique Aqui
+  </div>
+<% end %>
+<% else %>
+<a href="#" class="card-link">
+  <div class="card-footer text-muted">
+    Clique Aqui
+  </div>
+</a>      
+<% end %>

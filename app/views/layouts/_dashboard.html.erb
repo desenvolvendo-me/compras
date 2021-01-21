@@ -47,11 +47,7 @@
         <h5 class="card-title">Julgar Proposta / Juízo de Admissibilidade</h5>
         <p class="card-text">Julgar proposta ou juízo de admissibilidade.</p>
       </div>
-      <a href="#" class="card-link">
-        <div class="card-footer text-muted">
-          Clique Aqui
-        </div>
-      </a>
+        <%= render 'layouts/dashboard_to_judgment_forms_click'%>  
     </div>
   </div>
   <div class="col-sm-4">
@@ -95,25 +91,17 @@
         <h5 class="card-title">Adjudicar</h5>
         <br/>
         <p class="card-text">Adjudicar.</p>
-      </div>
-      <a href="#" class="card-link">
-        <div class="card-footer text-muted">
-          Clique Aqui
-        </div>
-      </a>
+      </div>      
+      <%= render 'layouts/dashboard_to_licitation_process_click', :tab => 'ratifications' %>
     </div>
   </div>
   <div class="col-sm-4">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Impugnações / Esclarecimentos / Avisos</h5>
+        <h5 class="card-title">Impugnações / Esclarecimentos e Avisos</h5>
         <p class="card-text">Visualizar impugnações, esclarecimentos e avisos.</p>
       </div>
-      <a href="#" class="card-link">
-        <div class="card-footer text-muted">
-          Clique Aqui
-        </div>
-      </a>
+        <%= render 'layouts/dashboard_to_licitation_impugnments_or_notices_click'%>   
     </div>
   </div>
   <div class="col-sm-4">
@@ -123,11 +111,7 @@
         <br/>
         <p class="card-text">Registrar e visualizar atas.</p>
       </div>
-      <a href="#" class="card-link">
-        <div class="card-footer text-muted">
-          Clique Aqui
-        </div>
-      </a>
+      <%= render 'layouts/dashboard_to_contracts_click' %>      
     </div>
   </div>
 </div>
