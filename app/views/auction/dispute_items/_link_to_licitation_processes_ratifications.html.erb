@@ -1,0 +1,13 @@
+<%if @auction.licitation_process_id.present? and status == 'opened'%>
+  <%= link_to edit_licitation_process_path(@auction.licitation_process_id,:source => 'auction',:tab => tab), :target => :_blank  do %>
+    <div>
+      Adjudicar
+    </div>
+  <% end %>
+<% else %>
+  <a href="#">
+    <div>
+      Adjudicar
+    </div>
+  </a>
+<% end %>
