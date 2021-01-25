@@ -5,6 +5,7 @@
   <th>Melhor Proposta</th>
   <th>Fornecedor Proposta</th>
   <th>Status</th>
+  <th>Adjudicar Proposta</th>
   </thead>
 
   <tbody>
@@ -14,6 +15,7 @@
       <td><%= trading_item.decorator.lowest_bid_or_proposal_amount %></td>
       <td><%= trading_item.lowest_bid_or_proposal_accreditation_creditor %></td>
       <td class="status"><%= trading_item.status_humanize %></td>
+      <td class="status"><%= render 'link_to_licitation_processes_ratifications', :tab => 'ratifications', :status => 'closed' %></td>
     </tr>
   <% end.empty? and begin %>
     <tr><td colspan="6">Não há items cadastrados para as propostas dos fornecedores.</td></tr>
