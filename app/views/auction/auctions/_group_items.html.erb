@@ -129,8 +129,8 @@
   $("#purchase_type").change(function(){
     var purchase_type = $(this).children("option:selected").val(),
       url = '';
-    if(purchase_type === 'group') url = Routes.auction_group_lot_items;
-    if(purchase_type === 'item') url = Routes.auction_items;
+    // if(purchase_type === 'group') url = Routes.auction_group_lot_items;
+    // if(purchase_type === 'item') url = Routes.auction_items;
 
     if(url){
       $.ajax({
