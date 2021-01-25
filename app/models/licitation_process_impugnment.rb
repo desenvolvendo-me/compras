@@ -35,4 +35,12 @@ class LicitationProcessImpugnment < Compras::Model
   def to_s
     "#{licitation_process} - #{I18n.l(impugnment_date)}"
   end
+
+  def self.by_licitation_process(params = {})
+    if params[:licitation_process_id].present?
+      where { licitation_process_id.eq(params.fetch(:licitation_process_id)) }
+    else
+      all
+    end
+  end
 end
