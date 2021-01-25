@@ -17,7 +17,7 @@
   </td>
 
   <td class='item-unit-price'>
-    <%= f.input :unit_price, input_html:{value: unit_price, class: 'item-unit-price' }, label: false %>
+    <%= f.input :unit_price, input_html:{value: unit_price, class: 'item-unit-price numeric' }, label: false %>
   </td>
 
   <td class="item-total-value"><%= estimated_total_price %></td>
@@ -27,6 +27,7 @@
     <%= f.input :material, as: :hidden, input_html: { value: material } %>
     <%= f.input :additional_information, as: :hidden, input_html: { value: additional_information } %>
     <%= f.input :estimated_total_price, as: :hidden, input_html: { value: estimated_total_price, class: 'item-total-value' } %>
+    <%= f.input :unit_price, as: :hidden, input_html: { value: unit_price, class: 'item-unit-price' } %>
     <%= f.input :id, as: :hidden, input_html: { value: id } %>
     <%= f.input :_destroy, as: :hidden, input_html: { class: 'destroy' } %>
 

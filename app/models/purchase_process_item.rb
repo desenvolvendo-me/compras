@@ -62,6 +62,10 @@ class PurchaseProcessItem < Compras::Model
     material.to_s
   end
 
+  def unit_price_round
+    (unit_price).round(3)
+  end
+
   def estimated_total_price
     (quantity || BigDecimal(0)) * (unit_price || BigDecimal(0))
   end

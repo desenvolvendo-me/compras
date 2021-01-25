@@ -63,7 +63,7 @@
 
   <div class="d-flex justify-content-end">
     <%= f.input :total_items_value, :disabled => true, wrapper_html:{ style: 'margin-bottom: 0 !important;'},
-                :input_html => {:value => number_with_precision(f.object.total_items_value), style:'width: 10em'} %>
+                :input_html => {:value => number_with_precision(f.object.total_items_value, precision:3), style:'width: 10em'} %>
 
   </div>
 

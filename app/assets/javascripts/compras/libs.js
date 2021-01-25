@@ -7,4 +7,19 @@ function numberFormartPt(value){
        return value; 
     }
 }
+
+
+function numberWithDelimiter (number, delimiter, separator, fixed) {
+    try {
+      delimiter = delimiter || ".";
+      separator = separator || ",";
+      fixed = fixed || 2;
   
+      var parts = number.toFixed(fixed).split('.');
+      parts[0] = parts[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1" + delimiter);
+  
+      return parts.join(separator);
+    } catch (e) {
+      return number;
+    }
+  }
