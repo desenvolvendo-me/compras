@@ -5,7 +5,4 @@ class ProfileDecorator
 
   attr_header :name
 
-  def creditor_name
-    "Fornecedor"
-  end
 end
