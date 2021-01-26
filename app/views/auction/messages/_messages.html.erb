@@ -4,7 +4,12 @@
   </a>
   <div class="media-body">
     <small class="pull-right time"><i class="fa fa-clock-o"></i><%= message&.created_at&.strftime("%I:%M %p") || "{{created_at}}" %></small>
-    <div class="media-heading"><%= message&.sender&.authenticable&.name || "{{sender_name}}" %></div>
+    <%if message&.sender&.authenticable_type == 'Creditor' %>
+      <div class="media-heading"><%= message&.sender&.authenticable&.name.to_s + " / "+ message&.sender&.profile&.decorator&.creditor_name || "{{sender_name}}"  %></div>
+    <%else %>
+      <div class="media-heading"><%= message&.sender&.authenticable&.name.to_s + " / "+ message&.sender&.profile&.get_profile_last_name.to_s || "{{sender_name}}"  %></div>
+    <% end %>
+
     <small class="col-lg-10 message-body"><%= message&.body || "{{body}}"%></small>
   </div>
 </div>
