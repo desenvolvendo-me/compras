@@ -29,4 +29,8 @@ class Profile < Compras::Model
   def delete_role(role)
     roles.delete(role)
   end
+
+  def get_profile_last_name
+    name.split(" ").last
+  end
 end
