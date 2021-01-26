@@ -24,6 +24,10 @@
   </tbody>
 </table>
 
+<% if @auction.chat_activated %>
+  <button type="button" class="btn btn-success btn-lg" onclick="switchStatusChat(false)">Desabilitar Chat</button>
+<%end %>
+
 <div class="row mt-5">
   <div class="col">
     <% if @auction.chat_activated %>
@@ -56,6 +60,23 @@
       error: function() { alert('Houve um erro contate suporte!') }
     });
   }
+</script>
+
+<script>
+    function switchStatusChat(val){
+        var data = {auction:{chat_activated: val}};
+        $.ajax({
+            url: Routes.auction_auction.replace(':id', <%=@auction.id%>),
+            data: data,
+            dataType: 'json',
+            type: 'PUT',
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader('X-CSRF-Token', $("[name='csrf-token']").attr('content'))
+            },
+            success: function() { window.location.reload() },
+            error: function() { alert('Houve um erro contate suporte!') }
+        });
+    }
 </script>
 
 <style>
