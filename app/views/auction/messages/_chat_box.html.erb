@@ -20,7 +20,7 @@
         <% end %>
       </div>
 
-      <%if @current_user.employee? %>
+      <% if @auction.chat_activated == true %>
         <div class="send-wrap ">
           <%= form_for([@conversation, @message], url: auction_conversation_messages_path(@conversation, @message), :remote => true, format: :json, :html => {id: "conversation_form"}) do |f| %>
             <%= f.text_area :body,
@@ -28,13 +28,14 @@
                             rows: 3,
                             placeholder: "Escreva uma mensagem", "
                           data-cid" => @conversation.id %>
+
+            </div>
           <% end %>
-        </div>
-        <div class="btn-panel">
-          <button class="btn send-message-btn pull-right submit-message-btn" type="button">
-            <i class="fa fa-plus"></i> Enviar Mensagem
-          </button>
-        </div>
+          <div class="btn-panel">
+            <button class="btn send-message-btn pull-right submit-message-btn" type="button">
+              <i class="fa fa-plus"></i> Enviar Mensagem
+            </button>
+          </div>
       <% end %>
     </div>
   </div>
