@@ -22,7 +22,7 @@ class AuctionMessage < Compras::Model
     {
         id:             self.id,
         body:           self.body,
-        sender_name:    self.sender.authenticable.name,
+        sender_name:    self.sender.authenticable.user.name_and_profile,
         created_at:     self.created_at.strftime("%I:%M %p"),
     }
   end
