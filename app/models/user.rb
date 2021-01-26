@@ -60,6 +60,20 @@ class User < Compras::Model
     administrator? || creditor? || provider?
   end
 
+  def name_and_profile
+    case authenticable_type
+      when 'Employee'
+        name.to_s+' / Pregoeiro'
+      when 'Creditor'
+        name.to_s+' / Fornecedor'
+      when 'Provider'
+        name.to_s+' / Fornecedor'
+      else
+        name.to_s+''
+      end
+  end
+
+
   scope :term, lambda { |q|
     where { login.like("%#{q}%") }
   }
