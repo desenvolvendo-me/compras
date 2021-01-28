@@ -6,6 +6,7 @@
   <th>Melhor Lance</th>
   <th>Fornecedor Lance</th>
   <th>Status</th>
+  <th>Adjudicar Proposta</th>
   </thead>
 
   <tbody>
@@ -17,6 +18,7 @@
       <td class="bid_amount"><%= item.decorator.lowest_bid_amount %></td>
       <td class="bid_creditor"><%= item.decorator.lowest_bid_creditor %></td>
       <td class="status"><%= item.status_humanize %></td>
+      <td class="status"><%= render 'link_to_licitation_processes_ratifications', :tab => 'ratifications', :status => 'opened' %></td>
     </tr>
   <% end.empty? and begin %>
     <tr><td class="text-sm-center" colspan="7">Nenhum item foi liberado para lançes ainda</td></tr>
