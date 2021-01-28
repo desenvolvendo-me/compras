@@ -4,4 +4,5 @@ class ProfileDecorator
   include Decore::Header
 
   attr_header :name
+
 end

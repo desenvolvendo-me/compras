@@ -4,7 +4,7 @@
   </a>
   <div class="media-body">
     <small class="pull-right time"><i class="fa fa-clock-o"></i><%= message&.created_at&.strftime("%I:%M %p") || "{{created_at}}" %></small>
-    <div class="media-heading"><%= message&.sender&.authenticable&.name || "{{sender_name}}" %></div>
+    <div class="media-heading"><%= message&.sender&.authenticable&.user&.name_and_profile || "{{sender_name}}"  %></div>
     <small class="col-lg-10 message-body"><%= message&.body || "{{body}}"%></small>
   </div>
 </div>
