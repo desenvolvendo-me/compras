@@ -16,7 +16,8 @@ class PriceCollectionProposalDecorator
   end
 
   def item_total_value_by_lot(lot)
-    number_with_precision super if super
+    number_with_precision(super, :precision => 3) if super
+
   end
 
   def only_creditor_is_authorized_message(user)
@@ -26,7 +27,7 @@ class PriceCollectionProposalDecorator
   def total_lot_value
     str = []
     price_collection_lots.each do |lot|
-      str << 'lote '+ (lot.to_s) +': '+ number_to_currency(item_total_value_by_lot(lot))
+      str << 'lote '+ (lot.to_s) +': '+ number_to_currency(item_total_value_by_lot(lot), precision: 3)
     end
 
     str.join('/ ')
