@@ -94,7 +94,7 @@ class PriceCollectionProposal < Compras::Model
   def item_total_value_by_lot(lot = nil)
     return BigDecimal(0) unless lot
 
-    items_by_lot(lot).sum(&:total_price)
+    items_by_lot(lot).sum(&:total_price).round(3)
   end
 
   def editable_by?(user)
