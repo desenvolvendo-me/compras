@@ -24,7 +24,7 @@ class PriceCollectionProposalItem < Compras::Model
   }
 
   def total_price
-    unit_price * (quantity || BigDecimal(0))
+    (unit_price * (quantity || BigDecimal(0))).round(3)
   end
 
   def self.by_proposal_and_item(params = {})
