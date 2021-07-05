@@ -34,7 +34,7 @@ psql -U postgres -h localhost -c "CREATE ROLE ggw_all WITH INHERIT NOREPLICATION
 ### Pontos Importantes
 >![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) Usando o pg_restore
 ```
-pg_restore -d arenapolis-mt DIRECTORY_NAME/portoseguro_development.dump
+pg_restore -d portoseguro_development DIRECTORY_NAME/portoseguro_development.dump
 ```
 
 > ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) Alterando unico_customers
