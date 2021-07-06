@@ -40,5 +40,5 @@ pg_restore -d portoseguro_development DIRECTORY_NAME/portoseguro_development.dum
 > ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) Alterando unico_customers
 
 ```
-psql -U postgres -h localhost -c "DELETE FROM unico_customers;"
-psql -U postgres -h localhost -c "INSERT INTO unico_customers VALUES (1, 'desenvolvimento local', 'localhost', E'--- postgres://postgres:postgres@localhost:5432/portoseguro_development \n...');"
+psql -U postgres -h localhost -p 5432 -d portoseguro_development -c "DELETE FROM unico_customers;"
+psql -U postgres -h localhost -p 5432 -d portoseguro_development -c "INSERT INTO unico_customers VALUES (1, 'desenvolvimento local', 'localhost', E'--- postgres://postgres:postgres@localhost:5432/portoseguro_development \n...');"
