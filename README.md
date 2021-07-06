@@ -16,25 +16,25 @@
 
 ## Restaurando
 ```
-psql -U postgres -h localhost -c "DROP DATABASE IF EXISTS portoseguro_development;"
-psql -U postgres -h localhost -c "CREATE DATABASE portoseguro_development;"
-psql -U postgres -h localhost -c "COMMIT;"
+psql -U postgres -h localhost -p 5432 -c "DROP DATABASE IF EXISTS portoseguro_development;"
+psql -U postgres -h localhost -p 5432 -c "CREATE DATABASE portoseguro_development;"
+psql -U postgres -h localhost -p 5432 -c "COMMIT;"
 
 ```
 > Criando a role
 ```
-psql -U postgres -h localhost -c "CREATE ROLE unico LOGIN PASSWORD '123456';"
-psql -U postgres -h localhost -c "CREATE ROLE integra_treino LOGIN PASSWORD '123456';"
-psql -U postgres -h localhost -c "ALTER USER unico WITH SUPERUSER;"
-psql -U postgres -h localhost -c "ALTER USER integra_treino WITH SUPERUSER;"
-psql -U postgres -h localhost -c "CREATE ROLE ggr_all WITH INHERIT NOREPLICATION CONNECTION LIMIT -1;"
-psql -U postgres -h localhost -c "CREATE ROLE ggw_all WITH INHERIT NOREPLICATION CONNECTION LIMIT -1;"
+psql -U postgres -h localhost -p 5432 -c "CREATE ROLE unico LOGIN PASSWORD '123456';"
+psql -U postgres -h localhost -p 5432 -c "CREATE ROLE integra_treino LOGIN PASSWORD '123456';"
+psql -U postgres -h localhost -p 5432 -c "ALTER USER unico WITH SUPERUSER;"
+psql -U postgres -h localhost -p 5432 -c "ALTER USER integra_treino WITH SUPERUSER;"
+psql -U postgres -h localhost -p 5432 -c "CREATE ROLE ggr_all WITH INHERIT NOREPLICATION CONNECTION LIMIT -1;"
+psql -U postgres -h localhost -p 5432 -c "CREATE ROLE ggw_all WITH INHERIT NOREPLICATION CONNECTION LIMIT -1;"
 ```
 
 ### Pontos Importantes
 >![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) Usando o pg_restore
 ```
-pg_restore -d portoseguro_development DIRECTORY_NAME/portoseguro_development.dump
+pg_restore -U postgres -h localhost -p 5432 -d portoseguro_development  dump-portoseguro_development.sql -v
 ```
 
 > ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) Alterando unico_customers
