@@ -42,3 +42,18 @@ pg_restore -d portoseguro_development DIRECTORY_NAME/portoseguro_development.dum
 ```
 psql -U postgres -h localhost -p 5432 -d portoseguro_development -c "DELETE FROM unico_customers;"
 psql -U postgres -h localhost -p 5432 -d portoseguro_development -c "INSERT INTO unico_customers VALUES (1, 'desenvolvimento local', 'localhost', E'--- postgres://postgres:postgres@localhost:5432/portoseguro_development \n...');"
+```
+
+> ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) Alterando compras_users
+
+```
+ rails c
+ User.where(login: 'desenvolvedor').first.update_attributes!(password: 123456, password_confirmation: 123456)
+```
+### Problemas
+
+> Active Record 4.2.1 connection adapters - error: PG::InvalidParameterValue: ERROR: invalid value for parameter "client_min_messages": "panic" HINT: Available values: debug5, debug4, debug3, debug2, debug1, log, notice, warning, error. : SET client_min_messages TO 'panic'
+```
+https://gist.github.com/franzejr/11a136389c772f8452109dd5a92dfb9c
+```
+
