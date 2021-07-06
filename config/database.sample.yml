@@ -2,6 +2,8 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: 5
+  host: localhost
+  port: 5432
 
 production: &production
   <<: *default
@@ -19,14 +21,14 @@ training:
 
 development:
   <<: *default
-  database: compras_development
+  database: portoseguro_development
   min_messages: warning
-  username: compras
-  password: compras
+  username: postgres
+  password: postgres
 
 test:
   <<: *default
-  database: compras_test
+  database: portoseguro_test
   min_messages: warning
-  username: compras
-  password: compras
+  username: postgres
+  password: postgres
