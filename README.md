@@ -48,7 +48,6 @@ psql -U postgres -h localhost -p 5432 -d portoseguro_development -c "INSERT INTO
 
 ```
  rails c
- User.where(login: 'desenvolvedor').first.update_attributes!(password: 123456, password_confirmation: 123456, activated: true)
 ```
 ### Problemas
 
