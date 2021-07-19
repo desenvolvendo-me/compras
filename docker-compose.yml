@@ -1,14 +1,20 @@
 # Switch to 'postgresql' in config/database.yml before running 'docker-compose up'
 version: '3'
+
+networks:
+  prodnetwork:
+    driver: bridge
+
 services:
   db:
-    image: "desenvolvendome/portoseguro-treino"
-    volumes:
-      - ./tmp/db:/var/lib/postgresql/data
+    image: "desenvolvendome/portoseguro-treino:1.1"
     environment:
       POSTGRES_HOST_AUTH_METHOD: trust
+      PGDATA: postgres
     ports:
       - "54333:5432"
+    networks:
+      - prodnetwork
   web:
     build: .
     command: tail -f /dev/null
@@ -20,5 +26,7 @@ services:
       # Ports required for debugging
       - "1234:1234"
       - "26166:26168"
+    networks:
+      - prodnetwork
     depends_on:
       - db
