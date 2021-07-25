@@ -7,7 +7,7 @@ networks:
 
 services:
   db:
-    image: "desenvolvendome/portoseguro-treino:1.1"
+    image: "desenvolvendome/portoseguro-treino:1.2"
     environment:
       POSTGRES_HOST_AUTH_METHOD: trust
       PGDATA: postgres
