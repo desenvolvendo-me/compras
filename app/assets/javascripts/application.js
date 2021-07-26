@@ -90,20 +90,5 @@ $(function(){
       $(this).css('height', height+10 + 'px')
     }
   })
+
 });
-
-/* Esconde o campo Combustível caso o campo Medicamento esteja selecionado */
-$(function(){
-    var checkbox    = document.getElementById('material_medicine');
-    var details_div = document.getElementById('material_combustible_div');
-
-    checkbox.onchange = function() {
-        if(this.checked) {
-            details_div.style['display'] = 'none';
-        } else {
-            details_div.style['display'] = 'inline-block';
-        }
-    }
-})
-
-

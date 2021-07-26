@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Company < Persona::Company
-  attr_accessible :responsible_name, :bank_info, :account_info, :departament,
+  attr_accessible :responsible_name, :bank_info, :account_info, :department,
                   :account_type, :agencie_info, :main_cnae_id, :user_id
 
   attr_accessor :cnae_ids

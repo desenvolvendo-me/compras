@@ -19,7 +19,7 @@ class Person < Persona::Person
 
   delegate :city, :zip_code, :state, to: :address, allow_nil: true
   delegate :benefited, to: :company_size, allow_nil: true
-  
+
   validate :address_required
 
   orderize
