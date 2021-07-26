@@ -92,3 +92,16 @@ $(function(){
   })
 
 });
+
+$(function(){
+    var active = document.getElementById('material_active');
+    var code = document.getElementById('material_code');
+
+    active.onchange = function() {
+        if(this.checked) {
+            code.disabled = false;
+        } else {
+            code.disabled = true;
+        }
+    }
+})
