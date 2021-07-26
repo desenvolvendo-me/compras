@@ -2,8 +2,11 @@
 <%= f.fields_for :personable, f.object.personable.is_a?(Company) ? f.object.personable.localized : Company.new do |c| %>
   <div id="company">
     <div class="yui3-g">
-      <div class="yui3-u-3-5">
+      <div class="yui3-u-2-5">
         <%= f.input :name %>
+      </div>
+      <div class="yui3-u-1-5">
+        <%= c.input :department %>
       </div>
       <div class="yui3-u-1-5">
         <%= c.input :cnpj %>

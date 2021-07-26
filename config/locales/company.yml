@@ -9,6 +9,7 @@ pt-BR:
       company:
         name: "Empresa"
         cnpj: "CNPJ"
+        department: "Departamento"
         legal_nature: "Natureza jurídica"
         responsible: "Pessoa responsável pela empresa"
         state_registration: "Inscrição estadual"
