@@ -11,3 +11,4 @@ pt-BR:
         purchasing_unit: "Unidade de Compra"
         user: "Servidor que pode fazer solicitação pelo departamento"
         secretary: "Secretaria"
+        department_number: "Número"
