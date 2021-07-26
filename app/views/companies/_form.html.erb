@@ -9,7 +9,7 @@
         <%= c.input :cnpj %>
       </div>
       <div class="yui3-u-1-5">
-        <%= c.input :choose_simple, :as => :select,:collection => [["Sim","true"],["Não","false"]]  %>
+        <%= c.input :choose_simple, :as => :select,:collection => [%w[SIM true], %w[NÃO false]]  %>
       </div>
     </div>
 
