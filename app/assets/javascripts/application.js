@@ -106,4 +106,18 @@ $(function(){
     }
 })
 
+/* Desativa o campo Código caso Ativo não esteja selecionado */
+$(function(){
+    var checkbox = document.getElementById('material_active');
+    var input = document.getElementById('material_code');
+
+    checkbox.onchange = function() {
+        if(this.checked) {
+            input.disabled = false;
+        } else {
+            input.disabled = true;
+        }
+    }
+})
+
 
