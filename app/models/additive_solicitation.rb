@@ -22,6 +22,7 @@ class AdditiveSolicitation < Compras::Model
   validate :items_margen_permitted
 
   before_validation :set_current_year
+  validate :check_if_proccess_is_closed
 
   def items_margen_permitted
     self.items.each do |item|
@@ -64,6 +65,14 @@ class AdditiveSolicitation < Compras::Model
   def set_current_year
     if year.blank?
       self.year = Date.current.year
+    end
+  end
+
+  def check_if_proccess_is_closed
+    if licitation_process.present?
+      if licitation_process.status == "approved"
+        errors.add(:licitation_process, :approved)
+      end
     end
   end
 end
