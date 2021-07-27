@@ -106,7 +106,7 @@ $(function(){
     }
 })
 
-/* Desativa o campo Código caso Ativo não esteja selecionado */
+/* Desabilita campo Código se Ativo não estiver selecionado */
 $(function(){
     var checkbox = document.getElementById('material_active');
     var input = document.getElementById('material_code');
@@ -119,5 +119,17 @@ $(function(){
         }
     }
 })
+
+/* Muda para Liberado se Serviços e Recusado se Bens */
+$(document).change(function() {
+    solicitationKind = document.querySelector("#purchase_solicitation_kind")
+    solicitationStatus = document.querySelector("#purchase_solicitation_attendant_status")
+
+    if (solicitationKind.value == "services") {
+        solicitationStatus.value = "released"
+    } else if (solicitationKind.value == "goods") {
+        solicitationStatus.value = "refused"
+    }
+});
 
 
