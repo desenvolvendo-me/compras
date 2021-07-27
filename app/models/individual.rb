@@ -9,7 +9,7 @@ class Individual < Persona::Individual
   has_one :street, through: :person
   has_one :neighborhood, through: :person
 
-  validates :cpf, presence: true
+  validates :cpf, :mother, :father, presence: true
 
   delegate :to_s, :name, :city, :state, :zip_code, :phone, :email,
     to: :person, allow_nil: true
