@@ -5,6 +5,7 @@ describe PurchaseSolicitationServiceStatus do
   it 'should return availables for liberation' do
     expect(described_class.liberation_availables).to eq [["Devolvido para alteração", "returned"],
                                                      ["Liberada", "liberated"],
-                                                     ["Não liberada", "not_liberated"]]
+                                                     ["Não liberada", "not_liberated"],
+                                                     ["Recusada", "refused"]]
   end
 end

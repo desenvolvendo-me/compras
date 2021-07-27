@@ -72,6 +72,8 @@ group :production, :training, :staging do
 end
 
 group :development, :test do
+  gem 'debase', "0.2.3"
+  gem 'ruby-debug-ide', "0.7.2"
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'factory_girl-preload', git: 'git://github.com/MarceloCajueiro/factory_girl-preload.git'

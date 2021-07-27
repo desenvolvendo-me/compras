@@ -125,6 +125,9 @@ GEM
     cpf_validator (0.2.0)
       activemodel (>= 3.0)
     dalli (2.6.4)
+    debase (0.2.3)
+      debase-ruby_core_source (>= 0.10.2)
+    debase-ruby_core_source (0.10.12)
     debug_inspector (0.0.3)
     devise (2.2.4)
       bcrypt-ruby (~> 3.0)
@@ -307,6 +310,8 @@ GEM
       rexml
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 2.0)
+    ruby-debug-ide (0.7.2)
+      rake (>= 0.8.1)
     ruby-hmac (0.4.0)
     ruby-progressbar (1.10.1)
     rubyzip (0.9.9)
@@ -431,6 +436,7 @@ DEPENDENCIES
   cocoon (= 1.2.14)
   cpf_validator (= 0.2.0)
   dalli (= 2.6.4)
+  debase (= 0.2.3)
   decore!
   devise (= 2.2.4)
   enumerate_it (= 1.2.1)
@@ -463,6 +469,7 @@ DEPENDENCIES
   responders (= 0.9.3)
   rspec-rails (= 2.14.2)
   rubocop
+  ruby-debug-ide (= 0.7.2)
   rubyzip (= 0.9.9)
   sass-rails
   selenium-webdriver (~> 2.33.0)
