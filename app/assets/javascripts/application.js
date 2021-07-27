@@ -96,19 +96,19 @@ $(function(){
 /*  Esconde combustivel quando medicamento é selecionado */
 $(function(){
   const box = document.getElementById('material_medicine');
-  const div = document.getElementById('material_combustible');
+  const div = document.querySelector('.material_combustible');
   
     if(box.checked) {
-      div.style['display'] = 'none';
+      div.style.display = "none";
     } else {
-      div.style['display'] = 'inline-block';
+      div.style.display = "inline-block";
     }
 
     box.onchange = function() {
         if(box.checked){
-        div.style['display'] = 'none';
+        div.style.display = "none";
       } else {
-        div.style['display'] = 'inline-block';
+        div.style.display = "inline-block";
       }
     }
 });
