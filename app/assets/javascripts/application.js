@@ -97,8 +97,14 @@ $(function(){
     var checkbox    = document.getElementById('material_medicine');
     var details_div = document.getElementById('material_combustible_div');
 
+    if(checkbox.checked) {
+        details_div.style['display'] = 'none';
+    } else {
+        details_div.style['display'] = 'inline-block';
+    }
+
     checkbox.onchange = function() {
-        if(this.checked) {
+        if (this.checked) {
             details_div.style['display'] = 'none';
         } else {
             details_div.style['display'] = 'inline-block';
