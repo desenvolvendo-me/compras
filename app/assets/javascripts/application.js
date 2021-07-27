@@ -92,3 +92,16 @@ $(function(){
   })
 
 });
+
+/* Desativa o codigo do material quando o campo Ativo não estiver selecionado */
+$(function(){
+  var active = document.getElementById('material_active')
+  var check = document.getElementById('material_code')
+
+  active.onchange = function(){
+    if(this.checked)
+    {check.disabled = false;}
+    else
+    {check.disabled = true;}
+  }
+});
