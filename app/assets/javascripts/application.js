@@ -94,11 +94,20 @@ $(function(){
 });
 
 $(function () {
-    $("#material_medicine").change(function () {
-        if ($(this).is(":checked")) {
-            $(".material_combustible").hide();
-        } else {
-            $(".material_combustible").show();
-        }
-    });
+    var checkMedicine = document.getElementById("material_medicine")
+    var checkCombustible = document.querySelector('.material_combustible')
+
+    if (checkMedicine.checked == true) {
+        checkCombustible.style.display = "none";
+    } else {
+        checkCombustible.style.display = "inline-block";
+    }
+
+    checkMedicine.onchange = function() {
+      if (checkMedicine.checked == true) {
+          checkCombustible.style.display = "none";
+      } else {
+          checkCombustible.style.display = "inline-block";
+      }
+    }
 });
