@@ -92,3 +92,15 @@ $(function(){
   })
 
 });
+
+/* Selecionando "serviços" anexa "liberado" e "bens" anexa "recusado" */
+$(document).change(function(){
+  divRequest = document.querySelector("#purchase_solicitation_kind")
+  divStatus = document.querySelector("#purchase_solicitation_attendant_status")
+
+  if(divRequest.value == "services"){
+    divStatus.value = "released"
+  }else if (divRequest.value == "goods"){
+    divStatus.value = "refused"
+  }
+});
