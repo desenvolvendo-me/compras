@@ -111,6 +111,13 @@ $(function(){
     var checkbox = document.getElementById('material_active');
     var input = document.getElementById('material_code');
 
+
+    if(checkbox.checked) {
+        input.disabled = false;
+    } else {
+        input.disabled = true;
+    }
+
     checkbox.onchange = function() {
         if(this.checked) {
             input.disabled = false;
