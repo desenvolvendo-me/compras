@@ -21,6 +21,8 @@ class AdditiveSolicitation < Compras::Model
 
   validate :items_margen_permitted
 
+  after_initialize :set_current_year
+
   def items_margen_permitted
     self.items.each do |item|
       response = AdditiveSolicitation.calc_items_margin(self.licitation_process.id, item.material.id, item.quantity, item.value)
@@ -57,5 +59,9 @@ class AdditiveSolicitation < Compras::Model
   def self.sum_additive_solicitation_items(licitation_process_id, material_id)
     sum = AdditiveSolicitationItem.joins(:additive_solicitation).where("compras_additive_solicitations.licitation_process_id = #{licitation_process_id}").where("compras_additive_solicitation_items.material_id = #{material_id}").group("compras_additive_solicitation_items.material_id").select("SUM(compras_additive_solicitation_items.quantity * compras_additive_solicitation_items.value) AS total").first
     sum ? sum.total.to_i : 0
+  end
+
+  def set_current_year
+    self.year ||= Date.current.year
   end
 end
