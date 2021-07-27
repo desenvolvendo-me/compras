@@ -6,7 +6,7 @@
         <%= f.input :name %>
       </div>
       <div class="yui3-u-1-5">
-        <%= c.input :department %>
+        <%= c.input :department, as: :modal, modal_url: modal_departments_path, hidden_field: :department_id %>
       </div>
       <div class="yui3-u-1-5">
         <%= c.input :cnpj %>
