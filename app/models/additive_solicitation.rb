@@ -21,7 +21,7 @@ class AdditiveSolicitation < Compras::Model
 
   validate :items_margen_permitted
 
-  after_initialize :set_current_year
+  before_validation :set_current_year
 
   def items_margen_permitted
     self.items.each do |item|
@@ -62,6 +62,8 @@ class AdditiveSolicitation < Compras::Model
   end
 
   def set_current_year
-    self.year ||= Date.current.year
+    if year.blank?
+      self.year = Date.current.year
+    end
   end
 end
