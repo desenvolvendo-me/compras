@@ -92,3 +92,13 @@ $(function(){
   })
 
 });
+
+$(function () {
+    $("#material_medicine").change(function () {
+        if ($(this).is(":checked")) {
+            $(".material_combustible").hide();
+        } else {
+            $(".material_combustible").show();
+        }
+    });
+});
