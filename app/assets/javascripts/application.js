@@ -97,6 +97,12 @@ $(function(){
     var active = document.getElementById('material_active');
     var code = document.getElementById('material_code');
 
+    if(active.checked) {
+        code.disabled = false;
+    } else {
+        code.disabled = true;
+    }
+
     active.onchange = function() {
         if(this.checked) {
             code.disabled = false;
