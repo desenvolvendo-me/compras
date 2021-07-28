@@ -4,7 +4,12 @@ pt-BR:
       additive_solicitation:
         one: "Solicitação de Aditivo"
         other: "Solicitações de Aditivos"
-
+  errors:
+    models:
+      additive_solicitatio:
+        attributes:
+          licitation_process:      
+            approved: "Operação não permitida, compra já aprovada" 
     attributes:
       additive_solicitation:
         number: "Número"

@@ -20,6 +20,7 @@ class AdditiveSolicitation < Compras::Model
   filterize
 
   validate :items_margen_permitted
+  validate :check_process_is_finished
 
   def items_margen_permitted
     self.items.each do |item|
@@ -57,5 +58,13 @@ class AdditiveSolicitation < Compras::Model
   def self.sum_additive_solicitation_items(licitation_process_id, material_id)
     sum = AdditiveSolicitationItem.joins(:additive_solicitation).where("compras_additive_solicitations.licitation_process_id = #{licitation_process_id}").where("compras_additive_solicitation_items.material_id = #{material_id}").group("compras_additive_solicitation_items.material_id").select("SUM(compras_additive_solicitation_items.quantity * compras_additive_solicitation_items.value) AS total").first
     sum ? sum.total.to_i : 0
+  end
+
+  def check_process_is_finished
+    if licitation_process.present?
+      if licitation_process.status == "approved"
+        errors.add(:licitation_process, :approved)
+      end
+    end
   end
 end
