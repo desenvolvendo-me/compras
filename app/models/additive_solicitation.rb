@@ -1,4 +1,5 @@
 class AdditiveSolicitation < Compras::Model
+  before_validation :current_year
   include NumberSupply
 
   attr_accessible :year, :licitation_process_id, :creditor_id, :department_id, :items_attributes
@@ -45,6 +46,9 @@ class AdditiveSolicitation < Compras::Model
   end
 
   private
+  def current_year
+    self.year = Time.now.year if year.blank?
+  end
 
   def self.calculator_margin(additived_margen, item, limit_marge, quantity, value)
     solicited_margen = quantity * value
