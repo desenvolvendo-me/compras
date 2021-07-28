@@ -20,6 +20,13 @@ class AdditiveSolicitation < Compras::Model
   filterize
 
   validate :items_margen_permitted
+  validate :process_licitation_is_finished
+
+  def process_licitation_is_finished
+    if licitation_process.present? && licitation_process.status == "approved"
+      errors.add(:licitation_process, :finished)
+    end
+  end
 
   def items_margen_permitted
     self.items.each do |item|
