@@ -92,3 +92,26 @@ $(function(){
   })
 
 });
+
+$(function() {
+    let purchaseSolicitationKind = document.getElementById("purchase_solicitation_kind")
+    let purchaseSolicitationAttendantStatus = document.getElementById("purchase_solicitation_attendant_status")
+
+    if (purchaseSolicitationKind.value === "services") {
+        purchaseSolicitationAttendantStatus.value = "released"
+    } else if (purchaseSolicitationKind.value === "goods") {
+        purchaseSolicitationAttendantStatus.value = "refused"
+    } else if (purchaseSolicitationKind.value === "products") {
+        purchaseSolicitationAttendantStatus.value = ""
+    }
+
+    purchaseSolicitationKind.onchange = function () {
+        if (purchaseSolicitationKind.value === "services") {
+            purchaseSolicitationAttendantStatus.value = "released"
+        } else if (purchaseSolicitationKind.value === "goods") {
+            purchaseSolicitationAttendantStatus.value = "refused"
+        } else if (purchaseSolicitationKind.value === "products") {
+            purchaseSolicitationAttendantStatus.value = ""
+        }
+    }
+})
