@@ -1,6 +1,8 @@
 class AdditiveSolicitation < Compras::Model
   include NumberSupply
 
+  before_validation :current_year
+
   attr_accessible :year, :licitation_process_id, :creditor_id, :department_id, :items_attributes
 
   belongs_to :creditor
@@ -20,6 +22,10 @@ class AdditiveSolicitation < Compras::Model
   filterize
 
   validate :items_margen_permitted
+
+  def current_year
+    self.year = Time.now.year if year.blank?
+  end
 
   def items_margen_permitted
     self.items.each do |item|

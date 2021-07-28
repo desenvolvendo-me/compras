@@ -92,12 +92,3 @@ $(function(){
   })
 
 });
-
-$(function() {
-    let additive_solicitation_year = document.getElementById("additive_solicitation_year")
-    let year = new Date().getFullYear()
-    if (additive_solicitation_year.value === "") {
-        additive_solicitation_year.value = year
-    }
-
-})
