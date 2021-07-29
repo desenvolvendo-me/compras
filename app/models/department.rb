@@ -1,6 +1,10 @@
 class Department < Compras::Model
-  attr_accessible :description, :purchasing_unit_id,
-                  :department_people_attributes,:secretary_id
+  attr_accessible :description,
+                  :purchasing_unit_id,
+                  :department_people_attributes,
+                  :secretary_id,
+                  :department_number
+
   attr_modal :description, :secretary_id, :purchasing_unit_id
 
   belongs_to :purchasing_unit
