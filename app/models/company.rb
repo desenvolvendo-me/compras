@@ -7,6 +7,7 @@ class Company < Persona::Company
   attr_accessor :cnae_ids
 
   belongs_to :main_cnae, class_name: "::Cnae"
+  belongs_to :department, :class_name => "Department", :foreign_key => "department_id"
   has_many :compras_departments
   belongs_to :user
 
