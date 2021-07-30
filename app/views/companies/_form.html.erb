@@ -12,7 +12,7 @@
         <%= c.input :choose_simple, :as => :select,:collection => [["Sim","true"],["Não","false"]]  %>
       </div>
       <div class="yui3-u-1-5">
-        <%= c.input :department %>
+        <%= c.input :department_id, as: :modal, modal_url: modal_departments_path, hidden_field: :department_id %>
       </div>
     </div>
 
