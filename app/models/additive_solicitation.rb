@@ -19,7 +19,7 @@ class AdditiveSolicitation < Compras::Model
   orderize "id DESC"
   filterize
 
-  validate :items_margen_permitted
+  validate :items_margen_permitted, :finished_status?
 
   before_validation :set_current_year
 
@@ -63,5 +63,9 @@ class AdditiveSolicitation < Compras::Model
 
   def set_current_year
     self.year = year.blank? ? Date.today.year : year
+  end
+
+  def finished_status?
+    errors.add(:licitation_process, :unable_to_save) if licitation_process.status == "approved"
   end
 end
