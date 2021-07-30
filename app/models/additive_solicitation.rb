@@ -19,7 +19,7 @@ class AdditiveSolicitation < Compras::Model
   orderize "id DESC"
   filterize
 
-  validate :items_margen_permitted
+  validate :items_margen_permitted, :licitation_process_finished!
 
   def items_margen_permitted
     self.items.each do |item|
@@ -45,6 +45,12 @@ class AdditiveSolicitation < Compras::Model
   end
 
   private
+
+  def licitation_process_finished!
+    if licitation_process.present?
+      errors.add(:licitation_process, :approved) if licitation_process.status == "approved"
+    end 
+  end
 
   def self.calculator_margin(additived_margen, item, limit_marge, quantity, value)
     solicited_margen = quantity * value

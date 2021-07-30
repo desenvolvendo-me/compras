@@ -15,3 +15,10 @@ pt-BR:
         year: "Ano"
         quantity: "Quantidade"
         value: "Valor"
+
+    errors:
+      models:
+        additive_solicitation:
+          attributes:
+            licitation_process:
+              approved: "Processo de compra já finalizado"
