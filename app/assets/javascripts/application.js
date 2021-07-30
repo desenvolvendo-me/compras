@@ -92,3 +92,21 @@ $(function(){
   })
 
 });
+
+document.addEventListener('change', ()=>{
+    solicitationKind = document.querySelector("#purchase_solicitation_kind")
+    solicitationStatus = document.querySelector("#purchase_solicitation_attendant_status")
+    verifyKind(solicitationKind, solicitationStatus)
+})
+
+
+function verifyKind(solicitationKind, solicitationStatus){
+  switch (solicitationKind.value) {
+    case "services":
+      solicitationStatus.value = "released"
+      break;
+    case "goods":
+      solicitationStatus.value = "refused"
+      break;
+  }
+}
