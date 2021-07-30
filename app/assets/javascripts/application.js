@@ -23,7 +23,7 @@
 //= require select2/select2_locale_pt-BR
 //= require cocoon
 
-$(".clear").live('click', function() {
+$(".clear").live('click', function () {
   $(this).closest(".modal-finder").find("input.modal").val("");
 });
 
@@ -34,7 +34,7 @@ $(".modal-finder-remove").live("click", function () {
   return false;
 });
 
-$(".modal-finder .modal input.modal").live("change", function(event, record) {
+$(".modal-finder .modal input.modal").live("change", function (event, record) {
   var id = $(this).attr("id");
   var template = "#" + id + "_template";
   var defaults = {
@@ -44,7 +44,7 @@ $(".modal-finder .modal input.modal").live("change", function(event, record) {
 
   var options = $.extend({}, defaults, record);
 
-  if ($("#" + id + "_record_" + record.id + '_id').length == 0 ) {
+  if ($("#" + id + "_record_" + record.id + '_id').length == 0) {
     $("." + id + "_records").append($(template).mustache(options));
   }
 
@@ -55,7 +55,7 @@ $(".modal-finder .modal input.modal").live("change", function(event, record) {
  * Previne que sejam feitos mais de um request ao clicar mais de uma vez enquanto
  * a pagina ainda não redirecionou.
 */
-$(document).on('click', ':submit', function(event) {
+$(document).on('click', ':submit', function (event) {
   event.preventDefault();
 
   $(this).attr('disabled', true);
@@ -66,41 +66,41 @@ $(document).on('click', ':submit', function(event) {
 });
 
 /* Aumenta os campos text area conforme texto inserido */
-$(function(){
-  $("textarea").on('keyup paste', function() {
+$(function () {
+  $("textarea").on('keyup paste', function () {
     var $el = $(this),
       offset = $el.innerHeight() - $el.height();
 
     if ($el.innerHeight() < this.scrollHeight && this.scrollHeight < 400) {
       $el.height(this.scrollHeight - offset);
-    } else if(this.scrollHeight > 400) {
+    } else if (this.scrollHeight > 400) {
       $el.height(1);
       this.scrollHeight < 400 ? $el.height(this.scrollHeight) : $el.height(400)
-    }else{
+    } else {
       $el.height(1);
       $el.height(this.scrollHeight - offset);
     }
   });
 
-  $("textarea.text").each(function(){
+  $("textarea.text").each(function () {
     var height = $(this).prop('scrollHeight');
-    if( height < 10){
-      $(this).css('height', height+53 + 'px')
-    }else{
-      $(this).css('height', height+10 + 'px')
+    if (height < 10) {
+      $(this).css('height', height + 53 + 'px')
+    } else {
+      $(this).css('height', height + 10 + 'px')
     }
   })
 
 });
 
-document.addEventListener('change', ()=>{
-    solicitationKind = document.querySelector("#purchase_solicitation_kind")
-    solicitationStatus = document.querySelector("#purchase_solicitation_attendant_status")
-    verifyKind(solicitationKind, solicitationStatus)
+document.addEventListener('change', () => {
+  solicitationKind = document.querySelector("#purchase_solicitation_kind")
+  solicitationStatus = document.querySelector("#purchase_solicitation_attendant_status")
+  verifyKind(solicitationKind, solicitationStatus)
 })
 
 
-function verifyKind(solicitationKind, solicitationStatus){
+function verifyKind(solicitationKind, solicitationStatus) {
   switch (solicitationKind.value) {
     case "services":
       solicitationStatus.value = "released"
