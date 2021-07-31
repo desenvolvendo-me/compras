@@ -2,12 +2,14 @@
 
 class Company < Persona::Company
   attr_accessible :responsible_name, :bank_info, :account_info,
-                  :account_type, :agencie_info, :main_cnae_id, :user_id
+                  :account_type, :agencie_info, :main_cnae_id, :user_id,
+                  :department
 
   attr_accessor :cnae_ids
 
   belongs_to :main_cnae, class_name: "::Cnae"
   belongs_to :user
+  
 
   delegate :city, :zip_code, to: :address, allow_nil: true
   delegate :code, to: :main_cnae, prefix: true, allow_nil: true

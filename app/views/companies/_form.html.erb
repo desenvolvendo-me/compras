@@ -2,15 +2,19 @@
 <%= f.fields_for :personable, f.object.personable.is_a?(Company) ? f.object.personable.localized : Company.new do |c| %>
   <div id="company">
     <div class="yui3-g">
-      <div class="yui3-u-3-5">
+      <div class="yui3-u-1-4">
         <%= f.input :name %>
       </div>
-      <div class="yui3-u-1-5">
+      <div class="yui3-u-1-4">
         <%= c.input :cnpj %>
       </div>
-      <div class="yui3-u-1-5">
+      <div class="yui3-u-1-4">
         <%= c.input :choose_simple, :as => :select,:collection => [["Sim","true"],["Não","false"]]  %>
       </div>
+      <div class="yui3-u-1-4">
+        <%= c.input :department, as: :modal, modal_url: modal_departments_path, hidden_field: :department_id %>
+      </div>
+
     </div>
 
     <div class="yui3-g">
