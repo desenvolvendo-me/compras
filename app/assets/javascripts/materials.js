@@ -1,10 +1,11 @@
 $(document).ready(function (){
     whenMedicineDisableFuel();
+    disableMaterialIdWhenInactive();
 
     function whenMedicineDisableFuel(){
-        var medicineCheckbox = document.getElementById('material_medicine');
-        var fuelCheckbox = document.querySelector('.material_combustible');
-        var fuelCheckboxValue = document.getElementById('material_combustible');
+        let medicineCheckbox = document.getElementById('material_medicine');
+        let fuelCheckbox = document.querySelector('.material_combustible');
+        let fuelCheckboxValue = document.getElementById('material_combustible');
 
         $(medicineCheckbox).change(function(){
             if(medicineCheckbox.checked){
@@ -12,5 +13,28 @@ $(document).ready(function (){
             }
             $(fuelCheckbox).toggle();
         });
+    }
+
+    function disableMaterialIdWhenInactive(){
+        let materialCheckbox = document.getElementById('material_active');
+        let materialCode = document.getElementById('material_code');
+
+        if (isValueEmpty(materialCode)){
+            console.log('here')
+            materialCheckbox.checked = false;
+        };
+
+        $(materialCheckbox).change(function() {
+            if (!materialCheckbox.checked){
+                $(materialCode).prop('disabled', true)
+            } else {
+                $(materialCode).prop('disabled', false)
+            };
+        })
+
+        function isValueEmpty(input){
+            let result = input.value.trim() === '';
+            return result;
+        };
     }
 });
