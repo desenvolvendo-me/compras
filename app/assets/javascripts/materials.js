@@ -20,8 +20,9 @@ $(document).ready(function (){
         let materialCode = document.getElementById('material_code');
 
         if (isValueEmpty(materialCode)){
-            console.log('here')
             materialCheckbox.checked = false;
+        } else if (!isValueEmpty(materialCode) &&  materialCheckbox.checked) {
+            $(materialCode).prop('disabled', false)
         };
 
         $(materialCheckbox).change(function() {
