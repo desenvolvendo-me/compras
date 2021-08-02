@@ -2,15 +2,23 @@ $(document).ready(function (){
     whenMedicineDisableFuel();
 
     function whenMedicineDisableFuel(){
-        var medicineCheckbox = document.getElementById('material_medicine');
-        var fuelCheckbox = document.querySelector('.material_combustible');
-        var fuelCheckboxValue = document.getElementById('material_combustible');
+        const medicineCheckbox = document.getElementById('material_medicine');
+        const fuelCheckbox = document.querySelector('.material_combustible');
+        const fuelCheckboxValue = document.getElementById('material_combustible');
 
         $(medicineCheckbox).change(function(){
+            verifyMedicineAndFuelCheckbox();
+        });
+
+        verifyMedicineAndFuelCheckbox();
+
+        function verifyMedicineAndFuelCheckbox(){
             if(medicineCheckbox.checked){
                 fuelCheckboxValue.checked = false;
+                $(fuelCheckbox).hide();
+            } else {
+                $(fuelCheckbox).show();
             }
-            $(fuelCheckbox).toggle();
-        });
+        };
     }
 });
